@@ -1,3 +1,20 @@
-export function uniqBy() {
-  throw new Error('Not implemented');
+import { uniq } from "./uniq";
+
+/**
+ * The `uniqBy` function takes an array as its first argument and a 'converter' function as the second. It maps the array elements using the converter function, then removes any duplicates.
+ *
+ * It filters out elements with the same value, meaning it does not check for duplicates in data types like Objects.
+ *
+ * @example
+ * ```ts
+ * uniqBy([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19], Math.floor);
+ * // [1, 2, 3, 5, 7]
+ * ```
+ */
+export function uniqBy<T, U>(arr: T[], converter: (item: T) => U): T[] {
+  return arr.reduce((result, current) => {
+    const isUniq =
+      result.find((v) => converter(v) === converter(current)) == null;
+    return isUniq ? [...result, current] : result;
+  }, [] as T[]);
 }
