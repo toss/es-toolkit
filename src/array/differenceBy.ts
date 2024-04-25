@@ -6,9 +6,9 @@
  * @param mapper The function to map the elements when calculating the difference
  */
 export function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[] {
-  const secondArrItems = secondArr.map(item => mapper(item));
+  const mappedSecondArr = secondArr.map(item => mapper(item));
   
   return firstArr.filter(item => {
-    return !secondArrItems.includes(mapper(item));
+    return !mappedSecondArr.includes(mapper(item));
   });
 }

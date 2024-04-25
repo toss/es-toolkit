@@ -3,13 +3,13 @@ import { isNotNil } from "./isNotNil"
 
 describe('isNotNil', () => {
   it('returns false if the value is null or undefined', () => {
-    expect(isNotNil(null)).toBe(true);
-    expect(isNotNil(undefined)).toBe(true);
+    expect(isNotNil(null)).toBe(false);
+    expect(isNotNil(undefined)).toBe(false);
   });
 
   it('returns true if the value is not null nor undefined', () => {
-    expect(isNotNil('')).toBe(false);
-    expect(isNotNil(123)).toBe(false);
+    expect(isNotNil('')).toBe(true);
+    expect(isNotNil(123)).toBe(true);
   })
 
   it('can be used with TypeScript as a type predicate', () => {
