@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - "*"
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+      deployments: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          cache: "yarn"
+          cache-dependency-path: "yarn.lock"
+          node-version-file: ".nvmrc"
+      - if: github.ref_type == 'branch'
+        run: |
+          jq \
+            --arg build "$GITHUB_RUN_NUMBER" \
+            --arg commit "${GITHUB_SHA::8}" \
+            '.version = .version + "-dev." + $build + "+" + $commit' \
+            package.json > package.json.tmp
+          mv package.json.tmp package.json
+      - run: yarn install
+      - run: 'mkdir -p out && yarn pack --out out/%s-%v.tgz'
+      - id: extract-changelog
+        uses: dahlia/submark@5a5ff0a58382fb812616a5801402f5aef00f90ce
+        with:
+          input-file: CHANGELOG.md
+          heading-level: 2
+          heading-title-text: version ${{ github.ref_name }}
+          ignore-case: true
+          omit-heading: true
+      - run: "cat ${{ steps.extract-changelog.outputs.output-file }}"
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: ${{ steps.extract-changelog.outputs.output-file }}
+          repository: toss/es-toolkit
+          generate_release_notes: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: out/*.tgz
+      - if: |
+          github.event_name == 'push' &&
+          (github.ref_type == 'tag' || github.ref == 'refs/heads/main')
+        run: |
+          set -ex
+          npm config set //registry.npmjs.org/:_authToken "$NPM_AUTH_TOKEN"
+          npm whoami
+          if [[ "$GITHUB_REF_TYPE" = "tag" ]]; then
+            npm publish --access public *.tgz
+          else
+            npm publish --access public --tag dev *.tgz
+          fi
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        working-directory: ${{ github.workspace }}/out/

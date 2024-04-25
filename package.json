@@ -1,0 +1,87 @@
+{
+  "name": "es-toolkit",
+  "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
+  "version": "1.0.0",
+  "workspaces": [
+    "docs"
+  ],
+  "packageManager": "yarn@4.2.2",
+  "exports": {
+    ".": "./src/index.ts",
+    "./array": "./src/array/index.ts",
+    "./function": "./src/function/index.ts",
+    "./math": "./src/math/index.ts",
+    "./object": "./src/object/index.ts",
+    "./predicate": "./src/predicate/index.ts",
+    "./promise": "./src/promise/index.ts",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*",
+    "esm/**/*"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./esm/index.mjs",
+        "require": "./dist/index.js"
+      },
+      "./array": {
+        "import": "./esm/array/index.mjs",
+        "require": "./dist/array/index.js"
+      },
+      "./function": {
+        "import": "./esm/function/index.mjs",
+        "require": "./dist/function/index.js"
+      },
+      "./math": {
+        "import": "./esm/math/index.mjs",
+        "require": "./dist/math/index.js"
+      },
+      "./object": {
+        "import": "./esm/object/index.mjs",
+        "require": "./dist/object/index.js"
+      },
+      "./predicate": {
+        "import": "./esm/predicate/index.mjs",
+        "require": "./dist/predicate/index.js"
+      },
+      "./promise": {
+        "import": "./esm/promise/index.mjs",
+        "require": "./dist/promise/index.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-typescript": "^7.24.1",
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
+    "@toss/rollup-config": "0.2.0-canary.0",
+    "@types/babel__core": "^7",
+    "@types/babel__preset-env": "^7",
+    "@types/broken-link-checker": "^0",
+    "@types/lodash": "^4",
+    "@types/node": "^20.12.11",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vitest/coverage-istanbul": "^1.5.2",
+    "broken-link-checker": "^0.7.8",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^8.5.0",
+    "lodash": "^4.17.21",
+    "prettier": "^3.2.5",
+    "rollup": "^2.78.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.5.2"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "prepack": "yarn build",
+    "build": "rm -rf dist esm && tsc -p tsconfig.json --declaration --emitDeclarationOnly --declarationDir dist && rollup -c rollup.config.js",
+    "test": "vitest run --coverage --typecheck"
+  }
+}
