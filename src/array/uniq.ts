@@ -1,3 +1,6 @@
+import { identify } from "../_internal/identify";
+import { uniqBy } from "./uniqBy";
+
 /**
  * @name uniq
  * @description
@@ -12,5 +15,5 @@
  * ```
  */
 export function uniq<T>(arr: T[]): T[] {
-  return Array.from(new Set<T>(arr));
+  return uniqBy(arr, identify);
 }

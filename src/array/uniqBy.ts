@@ -1,4 +1,5 @@
 import { uniq } from "./uniq";
+import { uniqWith } from "./uniqWith";
 
 /**
  * The `uniqBy` function takes an array as its first argument and a 'converter' function as the second. It maps the array elements using the converter function, then removes any duplicates.
@@ -12,9 +13,5 @@ import { uniq } from "./uniq";
  * ```
  */
 export function uniqBy<T, U>(arr: T[], converter: (item: T) => U): T[] {
-  return arr.reduce((result, current) => {
-    const isUniq =
-      result.find((v) => converter(v) === converter(current)) == null;
-    return isUniq ? [...result, current] : result;
-  }, [] as T[]);
+  return uniqWith(arr, (item1, item2) => converter(item1) === converter(item2));
 }

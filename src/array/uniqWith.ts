@@ -15,8 +15,14 @@ export function uniqWith<T>(
   arr: T[],
   comparator: (item1: T, item2: T) => boolean
 ): T[] {
-  return arr.reduce((result, current) => {
-    const isUniq = result.find((v) => comparator(v, current)) == null;
-    return isUniq ? [...result, current] : result;
-  }, [] as T[]);
+  const result: T[] = [];
+
+  for (const element of arr) {
+    const isUniq = result.find((v) => comparator(v, element)) == null;
+    if (isUniq) {
+      result.push(element);
+    }
+  }
+
+  return result;
 }
