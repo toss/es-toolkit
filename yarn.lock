@@ -737,6 +737,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^20.12.11":
+  version: 20.12.11
+  resolution: "@types/node@npm:20.12.11::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Fnode%2F-%2Fnode-20.12.11.tgz"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10c0/efaa7b08c50ba6e6982ac7d531ba08d5935539ba76e954807df1ff9382a319ead7e003ccaca5ad7cf33ecf53f212507f7c1f2794bd2ff52df6365fef21f6e1fb
+  languageName: node
+  linkType: hard
+
 "@types/semver@npm:^7.5.8":
   version: 7.5.8
   resolution: "@types/semver@npm:7.5.8"
@@ -2161,6 +2170,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "js-utils@workspace:."
   dependencies:
+    "@types/node": "npm:^20.12.11"
     "@typescript-eslint/eslint-plugin": "npm:^7.7.1"
     "@typescript-eslint/parser": "npm:^7.7.1"
     "@vitest/coverage-istanbul": "npm:^1.5.2"
@@ -3262,6 +3272,13 @@ __metadata:
   version: 1.5.3
   resolution: "ufo@npm:1.5.3"
   checksum: 10c0/1df10702582aa74f4deac4486ecdfd660e74be057355f1afb6adfa14243476cf3d3acff734ccc3d0b74e9bfdefe91d578f3edbbb0a5b2430fe93cd672370e024
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fundici-types%2F-%2Fundici-types-5.26.5.tgz"
+  checksum: 10c0/bb673d7876c2d411b6eb6c560e0c571eef4a01c1c19925175d16e3a30c4c428181fb8d7ae802a261f283e4166a0ac435e2f505743aa9e45d893f9a3df017b501
   languageName: node
   linkType: hard
 
