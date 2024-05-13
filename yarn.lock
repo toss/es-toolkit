@@ -739,7 +739,7 @@ __metadata:
 
 "@types/node@npm:^20.12.11":
   version: 20.12.11
-  resolution: "@types/node@npm:20.12.11::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Fnode%2F-%2Fnode-20.12.11.tgz"
+  resolution: "@types/node@npm:20.12.11"
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10c0/efaa7b08c50ba6e6982ac7d531ba08d5935539ba76e954807df1ff9382a319ead7e003ccaca5ad7cf33ecf53f212507f7c1f2794bd2ff52df6365fef21f6e1fb
