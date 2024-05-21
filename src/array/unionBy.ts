@@ -1,6 +1,5 @@
 import { separateArgs } from "../_internal/arguments";
 import { unionWith } from "./unionWith";
-import { uniq } from "./uniq";
 
 /**
  * `unionBy` function maps the elements of each array passed as arguments using a 'converter' function, and then returns the union of these arrays.
