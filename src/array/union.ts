@@ -1,5 +1,4 @@
-import { identify } from "../_internal/identify";
-import { unionBy } from "./unionBy";
+import { uniq } from "./uniq";
 
 /**
  * `union` function returns the union of the arrays passed as arguments.
@@ -11,5 +10,5 @@ import { unionBy } from "./unionBy";
  * ```
  */
 export function union<T>(...args: T[][]): T[] {
-  return unionBy(...args, identify);
+  return uniq(args.flat());
 }

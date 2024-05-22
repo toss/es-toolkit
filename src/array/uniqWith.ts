@@ -13,14 +13,15 @@ import { uniq } from "./uniq";
  */
 export function uniqWith<T>(
   arr: T[],
-  comparator: (item1: T, item2: T) => boolean
+  areItemsEqual: (item1: T, item2: T) => boolean
 ): T[] {
   const result: T[] = [];
 
-  for (const element of arr) {
-    const isUniq = result.find((v) => comparator(v, element)) == null;
+  for (const item of arr) {
+    const isUniq = result.every((v) => !areItemsEqual(v, item));
+
     if (isUniq) {
-      result.push(element);
+      result.push(item);
     }
   }
 

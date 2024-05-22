@@ -1,4 +1,4 @@
-import { separateArgs } from "../_internal/arguments";
+import { uniqWith } from "./uniqWith";
 
 /**
  * `unionWith` function returns the union of multiple arrays passed as arguments. During this process, it removes any duplicated elements.
@@ -13,20 +13,6 @@ import { separateArgs } from "../_internal/arguments";
  * // [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
  * ```
  */
-export function unionWith<T>(
-  ...args: [...arrays: T[][], comparator: (item1: T, item2: T) => boolean]
-): T[] {
-  const { args: arrays, last: comparator } = separateArgs(args);
-  const flatten = [...arrays.flat()];
-
-  const result: T[] = [];
-
-  for (const element of flatten) {
-    const isUniq = result.find((v) => comparator(v, element)) == null;
-    if (isUniq) {
-      result.push(element);
-    }
-  }
-
-  return result;
+export function unionWith<T>(arr1: T[], arr2: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[] {
+  return uniqWith([...arr1, ...arr2], areItemsEqual);
 }

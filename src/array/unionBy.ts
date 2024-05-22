@@ -1,21 +1,35 @@
-import { separateArgs } from "../_internal/arguments";
-import { unionWith } from "./unionWith";
-
 /**
- * `unionBy` function maps the elements of each array passed as arguments using a 'converter' function, and then returns the union of these arrays.
+ * Creates an array of unique values, in order, from all given arrays using a provided mapping function to determine equality.
  *
+ * @template T - Type of elements in the input arrays.
+ * @template U - Type of the values returned by the mapping function.
+ * 
+ * @param {T[]} arr1 - The first array.
+ * @param {T[]} arr2 - The second array.
+ * @param {function(item: T): U} mapper - The function to map array elements to comparison values.
+ * @returns {T[]} A new array containing the union of unique elements from `arr1` and `arr2`, based on the values returned by the mapping function.
+ * 
  * @example
- * ```ts
- * unionBy([2.1], [1.2, 2.3], Math.floor);
- * // [2.1, 1.2]
- * ```
+ * // Custom mapping function for numbers (modulo comparison)
+ * const moduloMapper = (x) => x % 3;
+ * unionBy([1, 2, 3], [4, 5, 6], moduloMapper);
+ * // Returns [1, 2, 3]
+ * 
+ * @example
+ * // Custom mapping function for objects with an 'id' property
+ * const idMapper = (obj) => obj.id;
+ * unionBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idMapper);
+ * // Returns [{ id: 1 }, { id: 2 }, { id: 3 }]
  */
-export function unionBy<T, U>(
-  ...args: [...arrays: T[][], converter: (v: T) => U]
-): T[] {
-  const { args: arrays, last: converter } = separateArgs(args);
+export function unionBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[] {
+  const map = new Map<U, T>();
 
-  return unionWith(...arrays, (a, b) => {
-    return converter(a) === converter(b);
-  });
+  for (const item of [...arr1, ...arr2]) {
+    const key = mapper(item);
+    if (!map.has(key)) {
+      map.set(key, item);
+    }
+  }
+
+  return [...map.values()];
 }
