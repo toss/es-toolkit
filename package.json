@@ -54,7 +54,7 @@
     "@babel/core": "^7.24.5",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-typescript": "^7.24.1",
-    "@toss/rollup-config": "^0.2.0",
+    "@toss/rollup-config": "0.2.0-canary.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/node": "^20.12.11",

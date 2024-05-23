@@ -2316,9 +2316,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toss/rollup-config@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "@toss/rollup-config@npm:0.2.0"
+"@toss/rollup-config@npm:0.2.0-canary.0":
+  version: 0.2.0-canary.0
+  resolution: "@toss/rollup-config@npm:0.2.0-canary.0"
   dependencies:
     "@babel/core": "npm:^7.19.3"
     "@rollup/plugin-babel": "npm:^5.3.1"
@@ -2328,7 +2328,7 @@ __metadata:
     builtin-modules: "npm:^3.3.0"
   peerDependencies:
     rollup: ^2
-  checksum: 10c0/e5173f1707087816b33c61b3280f80d0fa274e2b4398e7d0fb7bf7b727c7a87a329205ae17c00e9d83f5e0e1915ccbc45507e9ab2c1bb25f6eca31e582ba9f06
+  checksum: 10c0/ac99a68421878b675d28f67c74af2d144afdd6b0e1a8772313a4100b7a246ba89c04af8a98a9ca197c024374bc8c14ab9bca4f452bb891f403fdabb7d9905507
   languageName: node
   linkType: hard
 
@@ -3453,7 +3453,7 @@ __metadata:
     "@babel/core": "npm:^7.24.5"
     "@babel/preset-env": "npm:^7.24.5"
     "@babel/preset-typescript": "npm:^7.24.1"
-    "@toss/rollup-config": "npm:^0.2.0"
+    "@toss/rollup-config": "npm:0.2.0-canary.0"
     "@types/babel__core": "npm:^7"
     "@types/babel__preset-env": "npm:^7"
     "@types/node": "npm:^20.12.11"
@@ -5615,7 +5615,7 @@ __metadata:
 
 "undici-types@npm:~5.26.4":
   version: 5.26.5
-  resolution: "undici-types@npm:5.26.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fundici-types%2F-%2Fundici-types-5.26.5.tgz"
+  resolution: "undici-types@npm:5.26.5"
   checksum: 10c0/bb673d7876c2d411b6eb6c560e0c571eef4a01c1c19925175d16e3a30c4c428181fb8d7ae802a261f283e4166a0ac435e2f505743aa9e45d893f9a3df017b501
   languageName: node
   linkType: hard
