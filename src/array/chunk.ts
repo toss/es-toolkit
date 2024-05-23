@@ -26,14 +26,14 @@ export function chunk<T>(arr: T[], size: number): T[][] {
     throw new Error('Size must be an integer greater than zero.');
   }
 
-  const result: T[][] = [];
+  const chunkLength = Math.ceil(arr.length / size);
+  const result: T[][] = Array(chunkLength);
 
-  for (const [index, item] of arr.entries()) {
-    if (index % size === 0) {
-      result.push([]);
-    }
-
-    result[result.length - 1].push(item);
+  for (let index = 0; index < chunkLength; index++) {
+    const start = index * size;
+    const end = start + size;
+    
+    result[index] = arr.slice( start, end);
   }
 
   return result;

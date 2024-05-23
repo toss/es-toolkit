@@ -2408,6 +2408,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4":
+  version: 4.17.4
+  resolution: "@types/lodash@npm:4.17.4"
+  checksum: 10c0/0124c64cb9fe7a0f78b6777955abd05ef0d97844d49118652eae45f8fa57bfb7f5a7a9bccc0b5a84c0a6dc09631042e4590cb665acb9d58dfd5e6543c75341ec
+  languageName: node
+  linkType: hard
+
 "@types/markdown-it@npm:^14.1.1":
   version: 14.1.1
   resolution: "@types/markdown-it@npm:14.1.1"
@@ -3456,11 +3463,13 @@ __metadata:
     "@toss/rollup-config": "npm:0.2.0-canary.0"
     "@types/babel__core": "npm:^7"
     "@types/babel__preset-env": "npm:^7"
+    "@types/lodash": "npm:^4"
     "@types/node": "npm:^20.12.11"
     "@typescript-eslint/eslint-plugin": "npm:^7.7.1"
     "@typescript-eslint/parser": "npm:^7.7.1"
     "@vitest/coverage-istanbul": "npm:^1.5.2"
     eslint: "npm:^8.56.0"
+    lodash: "npm:^4.17.21"
     prettier: "npm:^3.2.5"
     rollup: "npm:^2.78.0"
     typescript: "npm:^5.4.5"
@@ -4426,6 +4435,13 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: 10c0/402fa16a1edd7538de5b5903a90228aa48eb5533986ba7fa26606a49db2572bf414ff73a2c9f5d5fd36b31c46a5d5c7e1527749c07cbcf965ccff5fbdf32c506
+  languageName: node
+  linkType: hard
+
+"lodash@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
   languageName: node
   linkType: hard
 
