@@ -33,6 +33,9 @@ export default defineConfig({
               { text: 'difference', link: '/reference/array/difference' },
               { text: 'differenceBy', link: '/reference/array/differenceBy' },
               { text: 'differenceWith', link: '/reference/array/differenceWith' },
+              { text: 'drop', link: '/reference/array/drop' },
+              { text: 'dropRight', link: '/reference/array/dropRight' },
+              { text: 'dropWhile', link: '/reference/array/dropWhile' },
             ]
           },
           {
