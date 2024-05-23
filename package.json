@@ -1,5 +1,5 @@
 {
-  "name": "es-lib",
+  "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library featuring robust type annotations and straightforward implementations.",
   "version": "0.0.1",
   "packageManager": "yarn@4.2.2",
@@ -14,6 +14,7 @@
     "./package.json": "./package.json"
   },
   "publishConfig": {
+    "access": "public",
     "exports": {
       ".": {
         "import": "./esm/index.mjs",

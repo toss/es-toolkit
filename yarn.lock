@@ -2898,9 +2898,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-lib@workspace:.":
+"es-toolkit@workspace:.":
   version: 0.0.0-use.local
-  resolution: "es-lib@workspace:."
+  resolution: "es-toolkit@workspace:."
   dependencies:
     "@babel/core": "npm:^7.24.5"
     "@babel/preset-env": "npm:^7.24.5"
