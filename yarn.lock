@@ -2898,6 +2898,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es-lib@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "es-lib@workspace:."
+  dependencies:
+    "@babel/core": "npm:^7.24.5"
+    "@babel/preset-env": "npm:^7.24.5"
+    "@babel/preset-typescript": "npm:^7.24.1"
+    "@toss/rollup-config": "npm:^0.2.0"
+    "@types/babel__core": "npm:^7"
+    "@types/babel__preset-env": "npm:^7"
+    "@types/node": "npm:^20.12.11"
+    "@typescript-eslint/eslint-plugin": "npm:^7.7.1"
+    "@typescript-eslint/parser": "npm:^7.7.1"
+    "@vitest/coverage-istanbul": "npm:^1.5.2"
+    eslint: "npm:^8.56.0"
+    prettier: "npm:^3.2.5"
+    rollup: "npm:^2.78.0"
+    typescript: "npm:^5.4.5"
+    vitest: "npm:^1.5.2"
+  languageName: unknown
+  linkType: soft
+
 "esbuild@npm:^0.20.1":
   version: 0.20.2
   resolution: "esbuild@npm:0.20.2"
@@ -3724,28 +3746,6 @@ __metadata:
   checksum: 10c0/4ad1c12f47b8c8b2a3a99e29ef338c1385c7b7442198a425f3463f3537384dab6032012791bfc2f056ea5ecdb06b1ed4f70e11a3ab3f388d3dcebfe16a52b27d
   languageName: node
   linkType: hard
-
-"js-utils@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "js-utils@workspace:."
-  dependencies:
-    "@babel/core": "npm:^7.24.5"
-    "@babel/preset-env": "npm:^7.24.5"
-    "@babel/preset-typescript": "npm:^7.24.1"
-    "@toss/rollup-config": "npm:^0.2.0"
-    "@types/babel__core": "npm:^7"
-    "@types/babel__preset-env": "npm:^7"
-    "@types/node": "npm:^20.12.11"
-    "@typescript-eslint/eslint-plugin": "npm:^7.7.1"
-    "@typescript-eslint/parser": "npm:^7.7.1"
-    "@vitest/coverage-istanbul": "npm:^1.5.2"
-    eslint: "npm:^8.56.0"
-    prettier: "npm:^3.2.5"
-    rollup: "npm:^2.78.0"
-    typescript: "npm:^5.4.5"
-    vitest: "npm:^1.5.2"
-  languageName: unknown
-  linkType: soft
 
 "js-yaml@npm:^4.1.0":
   version: 4.1.0
