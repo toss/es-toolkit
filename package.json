@@ -2,6 +2,9 @@
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library featuring robust type annotations and straightforward implementations.",
   "version": "0.0.1",
+  "workspaces": [
+    "docs"
+  ],
   "packageManager": "yarn@4.2.2",
   "exports": {
     ".": "./src/index.ts",

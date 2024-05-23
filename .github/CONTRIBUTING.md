@@ -1,4 +1,4 @@
-# Contributing to es-toolktit
+# Contributing to es-toolkit
 
 We welcome contribution from everyone in the community. <br/>
 All communications in this repo will be by English.
