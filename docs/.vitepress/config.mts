@@ -1,4 +1,8 @@
 import { defineConfig } from 'vitepress'
+import { createRequire } from 'module';
+import path from 'path';
+
+const require = createRequire(import.meta.url);
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -44,5 +48,17 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/toss/es-toolkit' }
     ]
+  },
+  vite: {
+    resolve: {
+      alias: {
+        'vue': path.dirname(require.resolve('vue/package.json', {
+          paths: [require.resolve('vitepress')],
+        })),
+        'vue/server-renderer': path.dirname(require.resolve('vue/server-renderer', {
+          paths: [require.resolve('vitepress')],
+        })),
+      }
+    }
   }
 })
