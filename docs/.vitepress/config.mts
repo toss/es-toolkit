@@ -5,7 +5,6 @@ export default defineConfig({
   title: "es-toolkit",
   description: "A state-of-the-art, high-performance JavaScript utility library featuring robust type annotations and straightforward implementations.",
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Introduction', link: '/intro' }
@@ -23,9 +22,18 @@ export default defineConfig({
         text: 'Reference',
         items: [
           {
-            text: 'Array',
+            text: 'Array Utilities',
             items: [
-              { text: 'chunk', link: '/reference/array/chunk' }
+              { text: 'chunk', link: '/reference/array/chunk' },
+              { text: 'difference', link: '/reference/array/difference' },
+              { text: 'differenceBy', link: '/reference/array/differenceBy' },
+              { text: 'differenceWith', link: '/reference/array/differenceWith' },
+            ]
+          },
+          {
+            text: 'Predicates',
+            items: [
+              { text: 'isNil', link: '/reference/predicate/isNil' },
             ]
           }
         ]

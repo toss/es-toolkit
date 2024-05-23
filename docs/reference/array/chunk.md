@@ -16,6 +16,8 @@ function chunk<T>(arr: T[], size: number): T[][];
 ## Examples
 
 ```typescript
+import { chunk } from 'es-toolkit/array';
+
 // Splits an array of numbers into sub-arrays of length 2
 chunk([1, 2, 3, 4, 5], 2);
 // Returns: [[1, 2], [3, 4], [5]]
