@@ -7,7 +7,8 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Introduction', link: '/intro' }
+      { text: 'Introduction', link: '/intro' },
+      { text: 'Reference', link: '/reference/array/chunk' },
     ],
 
     sidebar: [
@@ -41,7 +42,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/toss/es-toolkit' }
     ]
   }
 })
