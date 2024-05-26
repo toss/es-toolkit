@@ -49,6 +49,13 @@ export default defineConfig({
             ]
           },
           {
+            text: 'Function Utilities',
+            items: [
+              { text: 'debounce', link: '/reference/function/debounce' },
+              { text: 'throttle', link: '/reference/function/throttle' },
+            ]
+          },
+          {
             text: 'Math Utilities',
             items: [
               { text: 'clamp', link: '/reference/math/clamp' },
