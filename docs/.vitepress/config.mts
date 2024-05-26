@@ -47,6 +47,12 @@ export default defineConfig({
             ]
           },
           {
+            text: 'Object Utilities',
+            items: [
+              { text: 'omit', link: '/reference/object/omit' },
+            ]
+          },
+          {
             text: 'Predicates',
             items: [
               { text: 'isNil', link: '/reference/predicate/isNil' },
