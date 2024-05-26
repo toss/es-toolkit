@@ -1,4 +1,3 @@
-===
 # isNull
 
 Checks if the given value is null.

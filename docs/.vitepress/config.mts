@@ -52,6 +52,7 @@ export default defineConfig({
               { text: 'isNil', link: '/reference/predicate/isNil' },
               { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
               { text: 'isNull', link: '/reference/predicate/isNull' },
+              { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
             ]
           },
           {
