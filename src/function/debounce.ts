@@ -18,7 +18,7 @@
  * // Will not log anything as the previous call is canceled
  * debouncedFunction.cancel();
  */
-export function debounce(func: () => void, waitMs: number) {
+export function debounce(func: () => void, waitMs: number): { (): void; cancel: () => void } {
   let timeoutId: number | NodeJS.Timeout | null = null;
 
   const debounced = function () {
