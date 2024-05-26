@@ -1,13 +1,22 @@
 /**
- * @name intersectionBy
- * @description
- * Returns the intersection of two arrays. The identity of two elements is calculated after the elements are mapped with `mapper`.
- * @param firstArr The first array to get the intersection
- * @param secondArr The second array to get the intersection
- * @param mapper The function to map the elements when calculating the intersection
+ * Returns the intersection of two arrays based on a mapping function.
+ * 
+ * This function takes two arrays and a mapping function. It returns a new array containing 
+ * the elements from the first array that, when mapped using the provided function, have matching 
+ * mapped elements in the second array. It effectively filters out any elements from the first array 
+ * that do not have corresponding mapped values in the second array.
+ *
+ * @param {T[]} firstArr - The first array to compare.
+ * @param {T[]} secondArr - The second array to compare.
+ * @param {(item: T) => U} mapper - A function to map the elements of both arrays for comparison.
+ * @returns {T[]} A new array containing the elements from the first array that have corresponding mapped values in the second array.
+ *
  * @example
- * intersectionBy([1.2, 2.1], [1.4, 3.1], Math.floor) === [1.2]
- * intersectionBy([{ foo: 1 }, { foo: 2 }], [{ foo: 1 }, { foo: 3 }], x => x.foo) === [{ foo: 1 }]
+ * const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+ * const array2 = [{ id: 2 }, { id: 4 }];
+ * const mapper = item => item.id;
+ * const result = intersectionBy(array1, array2, mapper);
+ * // result will be [{ id: 2 }] since only this element has a matching id in both arrays.
  */
 export function intersectionBy<T, U>(firstArr: T[], secondArr: T[], mapper: (item: T) => U): T[] {
   const mappedSecondArr = secondArr.map(x => mapper(x));
