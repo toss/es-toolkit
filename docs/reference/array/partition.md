@@ -1,4 +1,3 @@
-===
 # partition
 
 Splits an array into two groups based on a predicate function.

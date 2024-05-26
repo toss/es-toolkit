@@ -41,6 +41,7 @@ export default defineConfig({
               { text: 'intersectionBy', link: '/reference/array/intersectionBy' },
               { text: 'intersectionWith', link: '/reference/array/intersectionWith' },
               { text: 'partition', link: '/reference/array/partition' },
+              { text: 'sample', link: '/reference/array/sample' },
             ]
           },
           {
