@@ -53,6 +53,7 @@ export default defineConfig({
               { text: 'omit', link: '/reference/object/omit' },
               { text: 'omitBy', link: '/reference/object/omitBy' },
               { text: 'pick', link: '/reference/object/pick' },
+              { text: 'pickBy', link: '/reference/object/pickBy' },
             ]
           },
           {
