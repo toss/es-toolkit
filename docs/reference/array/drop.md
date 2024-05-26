@@ -11,6 +11,15 @@ of elements removed from the start.
 function drop<T>(arr: T[], itemsCount: number): T[];
 ```
 
+### Parameters
+
+- `arr` (`T[]`): The array from which to drop elements.
+- `itemsCount` (`number`): The number of elements to drop from the beginning of the array.
+
+### Returns
+
+(`T[]`) A new array with the specified number of elements removed from the start.
+
 ## Examples
 
 ```typescript
