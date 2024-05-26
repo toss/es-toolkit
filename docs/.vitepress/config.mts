@@ -50,6 +50,7 @@ export default defineConfig({
             text: 'Object Utilities',
             items: [
               { text: 'omit', link: '/reference/object/omit' },
+              { text: 'pick', link: '/reference/object/pick' },
             ]
           },
           {
