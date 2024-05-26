@@ -51,6 +51,7 @@ export default defineConfig({
             items: [
               { text: 'isNil', link: '/reference/predicate/isNil' },
               { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
+              { text: 'isNull', link: '/reference/predicate/isNull' },
             ]
           },
           {
