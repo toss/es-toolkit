@@ -7,11 +7,6 @@ describe("sum function", () => {
     expect(result).toBe(10);
   });
 
-  it("calculates the sum of an multiple array of numbers", () => {
-    const result = sum([1, 2]);
-    expect(result).toBe(10);
-  });
-
   it("returns 0 for an empty array", () => {
     const result = sum([]);
     expect(result).toBe(0);
