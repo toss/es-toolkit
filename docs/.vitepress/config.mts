@@ -39,6 +39,8 @@ export default defineConfig({
               { text: 'groupBy', link: '/reference/array/groupBy' },
               { text: 'intersection', link: '/reference/array/intersection' },
               { text: 'intersectionBy', link: '/reference/array/intersectionBy' },
+              { text: 'intersectionWith', link: '/reference/array/intersectionWith' },
+              { text: 'partition', link: '/reference/array/partition' },
             ]
           },
           {
