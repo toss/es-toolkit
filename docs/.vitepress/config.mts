@@ -22,6 +22,7 @@ export default defineConfig({
           { text: 'Introduction', link: '/intro' },
           { text: 'Installation', link: '/installation' },
           { text: 'Impact on Bundle Size', link: '/bundle-size' },
+          { text: 'Performance', link: '/performance' },
         ]
       },
       {
