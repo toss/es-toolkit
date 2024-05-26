@@ -45,6 +45,7 @@ export default defineConfig({
               { text: 'sample', link: '/reference/array/sample' },
               { text: 'shuffle', link: '/reference/array/shuffle' },
               { text: 'take', link: '/reference/array/take' },
+              { text: 'zip', link: '/reference/array/zip' },
             ]
           },
           {
