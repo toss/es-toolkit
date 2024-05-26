@@ -48,6 +48,12 @@ export default defineConfig({
             ]
           },
           {
+            text: 'Math Utilities',
+            items: [
+              { text: 'sum', link: '/reference/math/sum' },
+            ]
+          },
+          {
             text: 'Object Utilities',
             items: [
               { text: 'omit', link: '/reference/object/omit' },
