@@ -1,15 +1,17 @@
 /**
- * @name uniq
- * @description
- * `uniq` removes duplicated elements from the array given as an argument.
+ * Creates a duplicate-free version of an array.
+ * 
+ * This function takes an array and returns a new array containing only the unique values 
+ * from the original array, preserving the order of first occurrence.
  *
- * It filters out elements with the same value, so duplicates of data types like Objects are not checked.
+ * @param {T[]} arr - The array to process.
+ * @returns {T[]} A new array with only unique values from the original array.
  *
  * @example
- * ```ts
- * uniq([1, 1, 2, 3, 5, 5, 7, 'foo', 'bar', 'bar']);
- * // [1, 2, 3, 5, 7, 'foo', 'bar']
- * ```
+ * // Example usage:
+ * const array = [1, 2, 2, 3, 4, 4, 5];
+ * const result = uniq(array);
+ * // result will be [1, 2, 3, 4, 5]
  */
 export function uniq<T>(arr: T[]): T[] {
   return Array.from(new Set(arr));
