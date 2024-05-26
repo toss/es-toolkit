@@ -11,7 +11,7 @@ function takeRightWhile<T>(arr: T[], shouldContinueTaking: (item: T) => boolean)
 ### Parameters 
 
 - `arr` (`T[]`): The array to take elements from.
-- `shouldContinueTaking` (`(item: T) => boolean`) The function invoked per element.
+- `shouldContinueTaking` (`(item: T) => boolean`): The predicate function that is called with each element. Elements are included in the result as long as this function returns true.
 
 ### Returns
 
