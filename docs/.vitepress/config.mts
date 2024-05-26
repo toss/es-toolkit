@@ -60,6 +60,7 @@ export default defineConfig({
             text: 'Math Utilities',
             items: [
               { text: 'clamp', link: '/reference/math/clamp' },
+              { text: 'round', link: '/reference/math/round' },
               { text: 'sum', link: '/reference/math/sum' },
             ]
           },
