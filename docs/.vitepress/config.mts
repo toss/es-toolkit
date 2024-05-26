@@ -42,6 +42,7 @@ export default defineConfig({
               { text: 'intersectionWith', link: '/reference/array/intersectionWith' },
               { text: 'partition', link: '/reference/array/partition' },
               { text: 'sample', link: '/reference/array/sample' },
+              { text: 'shuffle', link: '/reference/array/shuffle' },
             ]
           },
           {
