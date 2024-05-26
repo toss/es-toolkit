@@ -20,7 +20,8 @@ export default defineConfig({
         text: 'Guide',
         items: [
           { text: 'Introduction', link: '/intro' },
-          { text: 'Installation', link: '/installation' }
+          { text: 'Installation', link: '/installation' },
+          { text: 'Impact on Bundle Size', link: '/bundle-size' },
         ]
       },
       {
