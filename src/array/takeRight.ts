@@ -1,8 +1,6 @@
 /**
  * Returns a new array containing the last `count` elements from the input array `arr`.
  * If `count` is greater than the length of `arr`, the entire array is returned.
- *
- * @template T - Type of elements in the input array.
  * 
  * @param {T[]} arr - The array to take elements from.
  * @param {number} count - The number of elements to take.
@@ -20,7 +18,7 @@
  * // Returns [1, 2, 3]
  * takeRight([1, 2, 3], 5);
  */
-export function takeRight<T>(arr: T[], count: number) {
+export function takeRight<T>(arr: T[], count: number): T[] {
   if (count === 0) {
     return [];
   }
