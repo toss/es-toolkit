@@ -1,12 +1,19 @@
 /**
- * @name intersection
- * @description
  * Returns the intersection of two arrays.
- * @param firstArr The first array to get the intersection
- * @param secondArr The second array to get the intersection
+ * 
+ * This function takes two arrays and returns a new array containing the elements that are 
+ * present in both arrays. It effectively filters out any elements from the first array that 
+ * are not found in the second array.
+ *
+ * @param {T[]} firstArr - The first array to compare.
+ * @param {T[]} secondArr - The second array to compare.
+ * @returns {T[]} A new array containing the elements that are present in both arrays.
+ *
  * @example
- * intersection([1, 2], [1, 3]) === [1]
- * intersection([1, 2, 3], [2, 3, 4]) === [2, 3]
+ * const array1 = [1, 2, 3, 4, 5];
+ * const array2 = [3, 4, 5, 6, 7];
+ * const result = intersection(array1, array2);
+ * // result will be [3, 4, 5] since these elements are in both arrays.
  */
 export function intersection<T>(firstArr: T[], secondArr: T[]): T[] {
   return firstArr.filter(item => {
