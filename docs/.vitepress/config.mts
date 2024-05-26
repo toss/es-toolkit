@@ -43,6 +43,7 @@ export default defineConfig({
               { text: 'partition', link: '/reference/array/partition' },
               { text: 'sample', link: '/reference/array/sample' },
               { text: 'shuffle', link: '/reference/array/shuffle' },
+              { text: 'take', link: '/reference/array/take' },
             ]
           },
           {
