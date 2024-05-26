@@ -12,6 +12,16 @@ if elements are equal is made using the provided custom function.
 function differenceWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[]
 ```
 
+### Parameters
+
+- `firstArr` (`T[]`): The array from which to get the difference.
+- `secondArr` (`T[]`) :The array containing elements to exclude from the first array. 
+- `areItemsEqual` (`(x: T, y: T) => boolean`): A function to determine if two items are equal.
+
+### Returns
+(`T[]`) A new array containing the elements from the first array that do not match any elements in the second array according to the custom equality function.
+
+
 ## Examples
 
 ```typescript

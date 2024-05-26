@@ -13,6 +13,19 @@ the final sub-array will contain the remaining elements.
 function chunk<T>(arr: T[], size: number): T[][];
 ```
 
+### Parameters
+
+- `arr` (`T[]`): The array to be chunked into smaller arrays.
+- `size` (`number`): The size of each smaller array. Must be a positive integer.
+
+### Returns
+
+(`T[][]`) A two-dimensional array where each sub-array has a maximum length of `size`.
+
+### Throws
+
+Throws an error if `size` is not a positive integer.
+
 ## Examples
 
 ```typescript

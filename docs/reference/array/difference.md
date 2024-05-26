@@ -13,6 +13,17 @@ filters out any elements from the first array that also appear in the second arr
 function difference<T>(firstArr: T[], secondArr: T[]): T[];
 ```
 
+### Parameters
+
+- `firstArr` (`T[]`): The array from which to derive the difference. This is the primary array from which elements will be compared and filtered.
+- `secondArr` (`T[]`): The array containing elements to be excluded from the first array. Each element in this array will be checked against the first array, and if a match is found, that element will be excluded from the result.
+
+
+### Returns
+
+(`T[]`) A new array containing the elements that are present in the first array but not 
+in the second array.
+
 ## Examples
 
 ```typescript

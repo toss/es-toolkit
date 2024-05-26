@@ -14,6 +14,16 @@ mapped, match an element in the mapped version of the second array.
 function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[]
 ```
 
+### Parameters
+
+- `firstArr` (`T[]`): The primary array from which to derive the difference. 
+- `secondArr` (`T[]`): The array containing elements to be excluded from the first array.
+- `mapper` (`(value: T) => U`): The function to map the elements of both arrays. This function is applied to each element in both arrays, and the comparison is made based on the mapped values.
+
+### Returns
+
+(`T[]`) A new array containing the elements from the first array that do not have a corresponding mapped identity in the second array.
+
 ## Examples
 
 ```typescript
