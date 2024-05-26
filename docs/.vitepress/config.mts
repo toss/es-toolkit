@@ -51,6 +51,12 @@ export default defineConfig({
             items: [
               { text: 'isNil', link: '/reference/predicate/isNil' },
             ]
+          },
+          {
+            text: 'Promise Utilities',
+            items: [
+              { text: 'delay', link: '/reference/promise/delay' },
+            ]
           }
         ]
       }
