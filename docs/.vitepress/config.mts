@@ -36,6 +36,8 @@ export default defineConfig({
               { text: 'drop', link: '/reference/array/drop' },
               { text: 'dropRight', link: '/reference/array/dropRight' },
               { text: 'dropWhile', link: '/reference/array/dropWhile' },
+              { text: 'groupBy', link: '/reference/array/groupBy' },
+              { text: 'intersection', link: '/reference/array/intersection' },
             ]
           },
           {
