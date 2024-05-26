@@ -53,6 +53,7 @@ export default defineConfig({
             items: [
               { text: 'debounce', link: '/reference/function/debounce' },
               { text: 'throttle', link: '/reference/function/throttle' },
+              { text: 'once', link: '/reference/function/once' },
             ]
           },
           {
