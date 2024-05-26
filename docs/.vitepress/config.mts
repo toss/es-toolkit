@@ -49,6 +49,7 @@ export default defineConfig({
               { text: 'takeRight', link: '/reference/array/takeRight' },
               { text: 'takeRightWhile', link: '/reference/array/takeRightWhile' },
               { text: 'union', link: '/reference/array/union' },
+              { text: 'unionBy', link: '/reference/array/unionBy' },
               { text: 'zip', link: '/reference/array/zip' },
             ]
           },
