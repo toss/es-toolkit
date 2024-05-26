@@ -16,7 +16,7 @@ hero:
 
 features:
   - title: Best performance
-    details: es-toolkit delivers 2-3x better performance in modern JavaScript runtimes compared to other libraries.
+    details: es-toolkit delivers 2-3× better performance in modern JavaScript runtimes compared to other libraries.
   - title: Small bundle footprint
     details: es-toolkit ships up to 95% less JavaScript code compared to other alternative libraries.
   - title: Modern implementation
