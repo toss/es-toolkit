@@ -10,14 +10,19 @@ es-toolkit is a cutting-edge JavaScript utility library that offers a collection
 
 es-toolkit comes with built-in TypeScript types and has been rigorously tested, ensuring 100% test coverage for maximum reliability.
 
+
+## Features
+
 Here are some of the features es-toolkit offers:
 
-- **Array**: Utilities for array manipulation, such as [uniq](./reference/array/uniq.md) and [difference](./reference/array/difference.md)
-- **Function**: Tools for controlling function execution, including [debounce](./reference/function/debounce.md) and [throttle](./reference/function/throttle.md)
-- **Math**: Numerical utilities like [sum](./reference/math/sum.md) and [round](./reference/math/round.md)
-- **Object**: Tools for manipulating JavaScript objects, such as [pick](./reference/object/pick.md) and [omit](./reference/object/omit.md)
-- **Predicate**: Type guard functions like [isNotNil](./reference/predicate/isNotNil.md)
-- **Promise**: Asynchronous utilities like [delay](./reference/promise/delay.md)
+- **Array**: Utilities for array manipulation, such as [uniq](./reference/array/uniq.md) and [difference](./reference/array/difference.md).
+- **Function**: Tools for controlling function execution, including [debounce](./reference/function/debounce.md) and [throttle](./reference/function/throttle.md).
+- **Math**: Numerical utilities like [sum](./reference/math/sum.md) and [round](./reference/math/round.md).
+- **Object**: Tools for manipulating JavaScript objects, such as [pick](./reference/object/pick.md) and [omit](./reference/object/omit.md).
+- **Predicate**: Type guard functions like [isNotNil](./reference/predicate/isNotNil.md).
+- **Promise**: Asynchronous utilities like [delay](./reference/promise/delay.md).
+
+## Links
 
 Please refer to the following links for more information about this project.
 

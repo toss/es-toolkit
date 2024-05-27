@@ -1,11 +1,11 @@
 ---
 description: How to install es-toolkit
 prev:
-  text: Introduction to es
+  text: Introduction to es-toolkit
   link: ./intro.md
 next:
-  text: Tutorial
-  link: ./tutorial.md
+  text: Impact on Bundle Size
+  link: ./bundle-size
 ---
 Installation
 ============
