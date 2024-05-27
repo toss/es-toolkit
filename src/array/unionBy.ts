@@ -1,8 +1,5 @@
 /**
  * Creates an array of unique values, in order, from all given arrays using a provided mapping function to determine equality.
- *
- * @template T - Type of elements in the input arrays.
- * @template U - Type of the values returned by the mapping function.
  * 
  * @param {T[]} arr1 - The first array.
  * @param {T[]} arr2 - The second array.
