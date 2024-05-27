@@ -8,11 +8,11 @@ hero:
   # tagline: 
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: About es-toolkit
+      link: /intro
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Reference
+      link: /reference/array/chunk
 
 features:
   - title: Best performance
