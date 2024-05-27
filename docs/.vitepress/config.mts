@@ -8,7 +8,32 @@ const require = createRequire(import.meta.url);
 export default defineConfig({
   title: "es-toolkit",
   description: "A state-of-the-art, high-performance JavaScript utility library featuring robust type annotations and straightforward implementations.",
+  head: [
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "100x100",
+        href: "/favicon-100x100.png",
+      },
+    ],
+    [
+      "meta",
+      {
+        property: "og:image",
+        content: "/og.png",
+      },
+    ],
+  ],
   themeConfig: {
+    logo: {
+      dark: '/logo_white.png',
+      light: '/logo_black.png',
+    },
+
+    siteTitle: false,
+
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Introduction', link: '/intro' },
