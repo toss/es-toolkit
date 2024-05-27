@@ -2,7 +2,7 @@
 
 English | [한국어](./README-ko_kr.md)
 
-es-toolkit is a state-of-the-art, high-performance JavaScript utility library featuring robust type annotations and straightforward implementations.
+es-toolkit is a state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.
 
 
 ## Contributing

@@ -7,7 +7,7 @@ const require = createRequire(import.meta.url);
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "es-toolkit",
-  description: "A state-of-the-art, high-performance JavaScript utility library featuring robust type annotations and straightforward implementations.",
+  description: "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   head: [
     [
       "link",
