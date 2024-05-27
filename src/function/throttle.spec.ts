@@ -16,16 +16,16 @@ describe('throttle', () => {
 
   it('should execute the function immediately if not called within the wait time', async () => {
     const func = vi.fn();
-    const waitMs = 50;
-    const throttledFunc = throttle(func, waitMs);
+    const debounceMs = 50;
+    const throttledFunc = throttle(func, debounceMs);
 
     throttledFunc();
-    await delay(waitMs / 2);
+    await delay(debounceMs / 2);
     throttledFunc();
 
     expect(func).toHaveBeenCalledTimes(1);
 
-    await delay(waitMs / 2 + 1);
+    await delay(debounceMs / 2 + 1);
     throttledFunc();
     expect(func).toHaveBeenCalledTimes(2);
   });

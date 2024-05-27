@@ -1,19 +1,19 @@
 # debounce
 
-Creates a debounced function that delays invoking the provided function until after `waitMs` milliseconds
+Creates a debounced function that delays invoking the provided function until after `debounceMs` milliseconds
 have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
 method to cancel any pending execution.
 
 ## Signature
 
 ```typescript
-function debounce(func: () => void, waitMs: number): { (): void; cancel: () => void };
+function debounce(func: () => void, debounceMs: number): { (): void; cancel: () => void };
 ```
 
 ### Parameters 
 
 - `func` (`() => void`): The function to debounce.
-- `waitMs`(`number`): The number of milliseconds to delay.
+- `debounceMs`(`number`): The number of milliseconds to delay.
 
 ### Returns
 

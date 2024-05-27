@@ -1,10 +1,10 @@
 /**
- * Creates a debounced function that delays invoking the provided function until after `waitMs` milliseconds
+ * Creates a debounced function that delays invoking the provided function until after `debounceMs` milliseconds
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
  * method to cancel any pending execution.
  *
  * @param {() => void} func - The function to debounce.
- * @param {number} waitMs - The number of milliseconds to delay.
+ * @param {number} debounceMs - The number of milliseconds to delay.
  * @returns {{ (): void; cancel: () => void }} A new debounced function with a `cancel` method.
  *
  * @example
@@ -18,7 +18,7 @@
  * // Will not log anything as the previous call is canceled
  * debouncedFunction.cancel();
  */
-export function debounce(func: () => void, waitMs: number): { (): void; cancel: () => void } {
+export function debounce(func: () => void, debounceMs: number): { (): void; cancel: () => void } {
   let timeoutId: number | NodeJS.Timeout | null = null;
 
   const debounced = function () {
@@ -29,7 +29,7 @@ export function debounce(func: () => void, waitMs: number): { (): void; cancel: 
     
     timeoutId = setTimeout(() => {
       func();
-    }, waitMs);
+    }, debounceMs);
   };
 
   debounced.cancel = function () {
