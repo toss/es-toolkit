@@ -8,14 +8,15 @@ If only one bound is provided, it returns the minimum of the value and the bound
 ## Signature
 
 ```typescript
-function clamp(value: number, bound1: number, bound2?: number): number;
+function clamp(value: number, maximum: number): number;
+function clamp(value: number, minimum: number, maximum: number): number;
 ```
 
 ### Parameters 
 
 - `value` (`number`): The number to clamp.
-- `bound1` (`number`): One of the bounds to clamp the number.
-- `bound2` (`number`, optional): The other bound to clamp the number. If not provided, `bound1` is used as the only bound.
+- `minimum` (`number`): The minimum bound to clamp the number.
+- `maximum` (`number`): The maximum bound to clamp the number.
 
 ### Returns
 
