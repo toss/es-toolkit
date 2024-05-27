@@ -4,7 +4,7 @@ description: The performance difference between es-toolkit and alternative libra
 Performance
 ============
 
-![Graph showing the difference in performance between es-toolkit and lodash. Using es-toolkit results in a performance gain of up to 11 times.](./assets/performance.png)
+![Graph showing the difference in performance between es-toolkit and lodash. Using es-toolkit results in a performance gain of up to 11 times.](./public/assets/performance.png)
 
 Designed with performance in mind, es-toolkit provides an average of 2× performance improvement compared to alternative libraries like lodash. Some functions achieve up to an 11× performance gain by fully utilizing modern JavaScript APIs.
 
