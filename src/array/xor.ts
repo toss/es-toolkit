@@ -5,8 +5,6 @@ import { union } from "./union";
 /**
  * Computes the symmetric difference between two arrays. The symmetric difference is the set of elements
  * which are in either of the arrays, but not in their intersection.
- *
- * @template T - Type of elements in the input arrays.
  * 
  * @param {T[]} arr1 - The first array.
  * @param {T[]} arr2 - The second array.
