@@ -80,6 +80,7 @@ export default defineConfig({
               { text: 'uniq', link: '/reference/array/uniq' },
               { text: 'xor', link: '/reference/array/xor' },
               { text: 'xorBy', link: '/reference/array/xorBy' },
+              { text: 'xorWith', link: '/reference/array/xorWith' },
               { text: 'zip', link: '/reference/array/zip' },
             ]
           },
