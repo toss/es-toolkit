@@ -82,6 +82,7 @@ export default defineConfig({
               { text: 'xorBy', link: '/reference/array/xorBy' },
               { text: 'xorWith', link: '/reference/array/xorWith' },
               { text: 'zip', link: '/reference/array/zip' },
+              { text: 'zipWith', link: '/reference/array/zipWith' },
             ]
           },
           {
