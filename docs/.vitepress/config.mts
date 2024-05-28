@@ -144,5 +144,16 @@ export default defineConfig({
         })),
       }
     }
+  },
+
+  locales: {
+    root: {
+      label: 'English',
+      lang: 'en'
+    },
+    ko: {
+      label: '한국어',
+      lang: 'ko',
+    }
   }
 })
