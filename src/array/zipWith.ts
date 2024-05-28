@@ -1,7 +1,4 @@
 /**
- * Combines multiple arrays element-wise using a provided combining function. 
- * Returns an array where each element is the result of applying the combining function 
- * to the corresponding elements from the input arrays.
  */
 export function zipWith<T, R>(arr1: T[], combine: (item: T) => R): R[];
 export function zipWith<T, U, R>(arr1: T[], arr2: U[], combine: (item1: T, item2: U) => R): R[];
