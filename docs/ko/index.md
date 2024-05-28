@@ -18,7 +18,7 @@ features:
   - title: 빠른 성능
     details: 같은 기능을 제공하는 다른 라이브러리와 비교했을 때, 평균 2-3배 빠른 런타임 성능을 제공합니다.
   - title: 작은 번들 사이즈
-    details: 같은 기능의 함수들을 기준으로, 최대 95% 작은 JavaScript 크기를 가집니다.
+    details: 같은 기능의 함수들을 기준으로, 최대 97% 작은 JavaScript 크기를 가집니다.
   - title: 현대적인 구현
     details: 최신 JavaScript API를 사용하여, 구현이 간단하고 오류가 없습니다.
   - title: 견고한 타입

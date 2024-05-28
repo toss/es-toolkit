@@ -34,6 +34,10 @@ export default defineConfig({
 
     siteTitle: false,
 
+    search: {
+      provider: 'local'
+    },
+
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Introduction', link: '/intro' },
