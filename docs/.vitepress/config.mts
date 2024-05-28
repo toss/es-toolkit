@@ -79,6 +79,7 @@ export default defineConfig({
               { text: 'unionWith', link: '/reference/array/unionWith' },
               { text: 'uniq', link: '/reference/array/uniq' },
               { text: 'xor', link: '/reference/array/xor' },
+              { text: 'xorBy', link: '/reference/array/xorBy' },
               { text: 'zip', link: '/reference/array/zip' },
             ]
           },
