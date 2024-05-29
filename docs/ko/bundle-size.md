@@ -12,7 +12,7 @@ es-toolkit은 현대적인 구현을 가지고 있기 때문에, 다른 라이�
 
 ## 번들 사이즈 비교
 
-|                                               | es-toolkit@0.0.1 | lodash-es@4.17.21 | Difference |
+|                                               | es-toolkit@0.0.1 | lodash-es@4.17.21 | 차이         |
 |-----------------------------------------------|------------------|--------------------|------------|
 | [sample](./reference/array/sample.md)         |	88 bytes         |	2000 bytes        |	-95.6%    |
 | [difference](./reference/array/difference.md) |	91 bytes         |	3190 bytes        |	-97.2%    |
