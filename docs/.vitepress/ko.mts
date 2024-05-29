@@ -34,10 +34,10 @@ function sidebar(): DefaultTheme.Sidebar {
     {
       text: '가이드',
       items: [
-        { text: '소개', link: '/intro' },
-        { text: '설치', link: '/installation' },
-        { text: '번들 사이즈', link: '/bundle-size' },
-        { text: '성능', link: '/performance' },
+        { text: '소개', link: '/ko/intro' },
+        { text: '설치', link: '/ko/installation' },
+        { text: '번들 사이즈', link: '/ko/bundle-size' },
+        { text: '성능', link: '/ko/performance' },
       ]
     },
     {
@@ -46,73 +46,73 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '배열',
           items: [
-            { text: 'chunk', link: '/reference/array/chunk' },
-            { text: 'difference', link: '/reference/array/difference' },
-            { text: 'differenceBy', link: '/reference/array/differenceBy' },
-            { text: 'differenceWith', link: '/reference/array/differenceWith' },
-            { text: 'drop', link: '/reference/array/drop' },
-            { text: 'dropRight', link: '/reference/array/dropRight' },
-            { text: 'dropWhile', link: '/reference/array/dropWhile' },
-            { text: 'groupBy', link: '/reference/array/groupBy' },
-            { text: 'intersection', link: '/reference/array/intersection' },
-            { text: 'intersectionBy', link: '/reference/array/intersectionBy' },
-            { text: 'intersectionWith', link: '/reference/array/intersectionWith' },
-            { text: 'partition', link: '/reference/array/partition' },
-            { text: 'sample', link: '/reference/array/sample' },
-            { text: 'shuffle', link: '/reference/array/shuffle' },
-            { text: 'take', link: '/reference/array/take' },
-            { text: 'takeWhile', link: '/reference/array/takeWhile' },
-            { text: 'takeRight', link: '/reference/array/takeRight' },
-            { text: 'takeRightWhile', link: '/reference/array/takeRightWhile' },
-            { text: 'union', link: '/reference/array/union' },
-            { text: 'unionBy', link: '/reference/array/unionBy' },
-            { text: 'unionWith', link: '/reference/array/unionWith' },
-            { text: 'uniq', link: '/reference/array/uniq' },
-            { text: 'xor', link: '/reference/array/xor' },
-            { text: 'xorBy', link: '/reference/array/xorBy' },
-            { text: 'xorWith', link: '/reference/array/xorWith' },
-            { text: 'zip', link: '/reference/array/zip' },
-            { text: 'zipWith', link: '/reference/array/zipWith' },
+            { text: 'chunk', link: '/ko/reference/array/chunk' },
+            { text: 'difference', link: '/ko/reference/array/difference' },
+            { text: 'differenceBy', link: '/ko/reference/array/differenceBy' },
+            { text: 'differenceWith', link: '/ko/reference/array/differenceWith' },
+            { text: 'drop', link: '/ko/reference/array/drop' },
+            { text: 'dropRight', link: '/ko/reference/array/dropRight' },
+            { text: 'dropWhile', link: '/ko/reference/array/dropWhile' },
+            { text: 'groupBy', link: '/ko/reference/array/groupBy' },
+            { text: 'intersection', link: '/ko/reference/array/intersection' },
+            { text: 'intersectionBy', link: '/ko/reference/array/intersectionBy' },
+            { text: 'intersectionWith', link: '/ko/reference/array/intersectionWith' },
+            { text: 'partition', link: '/ko/reference/array/partition' },
+            { text: 'sample', link: '/ko/reference/array/sample' },
+            { text: 'shuffle', link: '/ko/reference/array/shuffle' },
+            { text: 'take', link: '/ko/reference/array/take' },
+            { text: 'takeWhile', link: '/ko/reference/array/takeWhile' },
+            { text: 'takeRight', link: '/ko/reference/array/takeRight' },
+            { text: 'takeRightWhile', link: '/ko/reference/array/takeRightWhile' },
+            { text: 'union', link: '/ko/reference/array/union' },
+            { text: 'unionBy', link: '/ko/reference/array/unionBy' },
+            { text: 'unionWith', link: '/ko/reference/array/unionWith' },
+            { text: 'uniq', link: '/ko/reference/array/uniq' },
+            { text: 'xor', link: '/ko/reference/array/xor' },
+            { text: 'xorBy', link: '/ko/reference/array/xorBy' },
+            { text: 'xorWith', link: '/ko/reference/array/xorWith' },
+            { text: 'zip', link: '/ko/reference/array/zip' },
+            { text: 'zipWith', link: '/ko/reference/array/zipWith' },
           ]
         },
         {
           text: '함수',
           items: [
-            { text: 'debounce', link: '/reference/function/debounce' },
-            { text: 'throttle', link: '/reference/function/throttle' },
-            { text: 'once', link: '/reference/function/once' },
+            { text: 'debounce', link: '/ko/reference/function/debounce' },
+            { text: 'throttle', link: '/ko/reference/function/throttle' },
+            { text: 'once', link: '/ko/reference/function/once' },
           ]
         },
         {
           text: '숫자',
           items: [
-            { text: 'clamp', link: '/reference/math/clamp' },
-            { text: 'round', link: '/reference/math/round' },
-            { text: 'sum', link: '/reference/math/sum' },
+            { text: 'clamp', link: '/ko/reference/math/clamp' },
+            { text: 'round', link: '/ko/reference/math/round' },
+            { text: 'sum', link: '/ko/reference/math/sum' },
           ]
         },
         {
           text: '객체',
           items: [
-            { text: 'omit', link: '/reference/object/omit' },
-            { text: 'omitBy', link: '/reference/object/omitBy' },
-            { text: 'pick', link: '/reference/object/pick' },
-            { text: 'pickBy', link: '/reference/object/pickBy' },
+            { text: 'omit', link: '/ko/reference/object/omit' },
+            { text: 'omitBy', link: '/ko/reference/object/omitBy' },
+            { text: 'pick', link: '/ko/reference/object/pick' },
+            { text: 'pickBy', link: '/ko/reference/object/pickBy' },
           ]
         },
         {
           text: '타입 가드',
           items: [
-            { text: 'isNil', link: '/reference/predicate/isNil' },
-            { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
-            { text: 'isNull', link: '/reference/predicate/isNull' },
-            { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
+            { text: 'isNil', link: '/ko/reference/predicate/isNil' },
+            { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
+            { text: 'isNull', link: '/ko/reference/predicate/isNull' },
+            { text: 'isUndefined', link: '/ko/reference/predicate/isUndefined' },
           ]
         },
         {
           text: 'Promise',
           items: [
-            { text: 'delay', link: '/reference/promise/delay' },
+            { text: 'delay', link: '/ko/reference/promise/delay' },
           ]
         }
       ]
