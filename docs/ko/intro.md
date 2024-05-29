@@ -4,7 +4,7 @@ es-toolkit 소개
 es-toolkit은 일상적인 개발에서 사용하는 다양한 함수들을 모은 현대적인 JavaScript 유틸리티 라이브러리예요.
 
 [lodash](https://lodash.com/)와 같은 다른 라이브러리와 비교했을 때, es-toolkit은 [같은 함수 기준 최대 97% 작은 번들 사이즈](./bundle-size.md)
-를 제공하며, [2~3배 빠른 속도로](./performance.md) 동작합니다. 최신 JavaScript API를 충분히 활용해서 현대적으로 구현한 덕분이죠.
+를 제공하며, [2~3배 빠른 속도로](./performance.md) 동작합니다. 최신 JavaScript API를 활용해서 현대적으로 구현한 덕분이죠.
 
 es-toolkit은 견고한 TypeScript 타입을 내장하여 제공하며, 신뢰성을 높일 수 있도록 100% 테스트 커버리지를 목표로 하고 있습니다.
 
