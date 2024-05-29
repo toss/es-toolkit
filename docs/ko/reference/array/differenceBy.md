@@ -1,30 +1,26 @@
 # differenceBy
 
-Computes the difference between two arrays after mapping their elements through a provided function.
+제공된 함수로 요소들을 매핑한 후 두 배열의 차이를 계산해요.
 
-This function takes two arrays and a mapper function. It returns a new array containing the elements 
-that are present in the first array but not in the second array, based on the identity calculated 
-by the mapper function. Essentially, it filters out any elements from the first array that, when 
-mapped, match an element in the mapped version of the second array.
+이 함수는 두 배열과 매퍼 함수를 받아, 매퍼 함수로 계산된 결과를 기준으로 첫 번째 배열에 있지만 두 번째 배열에는 없는 요소들을 포함한 새로운 배열을 반환해요. 즉, 매핑된 값이 두 번째 배열의 매핑된 값과 일치하는 첫 번째 배열의 요소들을 제외한 나머지 요소들로 구성된 배열을 만들어줘요.
 
-
-## Signature
+## 인터페이스
 
 ```typescript
 function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[]
 ```
 
-### Parameters
+### 파라미터
 
-- `firstArr` (`T[]`): The primary array from which to derive the difference. 
-- `secondArr` (`T[]`): The array containing elements to be excluded from the first array.
-- `mapper` (`(value: T) => U`): The function to map the elements of both arrays. This function is applied to each element in both arrays, and the comparison is made based on the mapped values.
+- `firstArr` (`T[]`): 차이를 계산할 배열이에요. 이 배열이 주 배열이고, 이 배열의 요소들이 비교되고 필터링돼요.
+- `secondArr` (`T[]`): 첫 번째 배열에서 제외할 요소들을 포함한 배열이에요.
+- `mapper` (`(value: T) => U`): 두 배열의 요소들을 매핑할 함수에요. 이 함수는 두 배열의 각 요소에 적용되며, 매핑된 값들을 기준으로 비교를 해요.
 
-### Returns
+### 반환 값
 
-(`T[]`) A new array containing the elements from the first array that do not have a corresponding mapped identity in the second array.
+(`T[]`): 첫 번째 배열에는 있지만 매핑된 값이 두 번째 배열의 매핑된 값과 일치하지 않는 요소들이 담긴 새로운 배열이에요.
 
-## Examples
+## 예시
 
 ```typescript
 import { differenceBy } from 'es-toolkit/array';
@@ -33,5 +29,5 @@ const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
 const array2 = [{ id: 2 }, { id: 4 }];
 const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
-// result will be [{ id: 1 }, { id: 3 }, { id: 5 }] since the elements with id 2 are in both arrays and are excluded from the result.
+// result는 [{ id: 1 }, { id: 3 }, { id: 5 }]가 돼요. id가 2인 요소들은 두 배열 모두에 있어서 결과에서 제외돼요.
 ```
