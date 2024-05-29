@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: es-toolkit 알아보기
-      link: /intro
+      link: /ko/intro
     - theme: alt
       text: 레퍼런스
-      link: /reference/array/chunk
+      link: /ko/reference/array/chunk
 
 features:
   - title: 빠른 성능
