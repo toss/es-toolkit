@@ -1,41 +1,40 @@
 # chunk
 
-Splits an array into smaller arrays of a specified length.
+배열을 정해진 길이에 맞게 더 작은 배열로 나눕니다.
 
-This function takes an input array and divides it into multiple smaller arrays,
-each of a specified length. If the input array cannot be evenly divided,
-the final sub-array will contain the remaining elements.
+입력값으로 배열을 받아서, 정해진 길이를 따르는 더 작은 배열 여러 개로 나눕니다. 
+입력 배열이 똑같은 길이로 나눠질 수 없다면, 나눠진 마지막 배열이 남은 요소들을 포함하게 됩니다.
 
 
-## Signature
+## 인터페이스
 
 ```typescript
 function chunk<T>(arr: T[], size: number): T[][];
 ```
 
-### Parameters
+### 파라미터
 
-- `arr` (`T[]`): The array to be chunked into smaller arrays.
-- `size` (`number`): The size of each smaller array. Must be a positive integer.
+- `arr` (`T[]`): 작은 배열들로 나눌 배열
+- `size` (`number`): 작은 배열들의 길이. 양의 정수여야 합니다.
 
-### Returns
+### 반환 값
 
-(`T[][]`) A two-dimensional array where each sub-array has a maximum length of `size`.
+(`T[][]`): 최대 길이 `size`를 가지는 작은 배열들로 구성된 2차원 배열.
 
-### Throws
+### 에러
 
-Throws an error if `size` is not a positive integer.
+`size`가 양의 정수가 아니면 에러를 던집니다.
 
-## Examples
+## 예시
 
 ```typescript
 import { chunk } from 'es-toolkit/array';
 
-// Splits an array of numbers into sub-arrays of length 2
+// 숫자의 배열을 최대 2의 길이를 가지는 더 작은 배열들로 쪼갭니다.
 chunk([1, 2, 3, 4, 5], 2);
 // Returns: [[1, 2], [3, 4], [5]]
 
-// Splits an array of strings into sub-arrays of length 3
+// 문자열의 배열을 최대 3의 길이를 가지는 더 작은 배열들로 쪼갭니다.
 chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
 // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
 ```
