@@ -1,35 +1,32 @@
 # debounce
 
-Creates a debounced function that delays invoking the provided function until after `debounceMs` milliseconds
-have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
-method to cancel any pending execution.
+디바운스 함수가 마지막으로 호출된 후 밀리초`debounceMs`가 경과할 때까지 주어진 함수의 호출을 지연시키는 디바운스 함수를 생성해요. 디바운스 함수에는 실행 대기 중인 작업을 취소하는 `cancel` 메서드도 제공하고 있어요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function debounce(func: () => void, debounceMs: number): { (): void; cancel: () => void };
 ```
 
-### Parameters 
+### 파라미터
 
-- `func` (`() => void`): The function to debounce.
-- `debounceMs`(`number`): The number of milliseconds to delay.
+- `func` (`() => void`): 디바운스할 함수예요.
+- `debounceMs`(`number`): 지연시킬 밀리초(ms)예요.
 
-### Returns
+### 반환 값
 
-(`{ (): void; cancel: () => void }`): A new debounced function with a `cancel` method.
+(`{ (): void; cancel: () => void }`): `cancel` 메서드를 가진 새로운 디바운스 함수예요.
 
-
-## Examples
+## 예시
 
 ```typescript
 const debouncedFunction = debounce(() => {
   console.log('Function executed');
 }, 1000);
 
-// Will log 'Function executed' after 1 second if not called again in that time
+// 1초 안에 다시 호출되지 않으면 'Function executed'를 로그로 출력해요.
 debouncedFunction();
 
-// Will not log anything as the previous call is canceled
+// 이전 호출이 취소되어 아무것도 로그로 출력되지 않아요.
 debouncedFunction.cancel();
 ```
