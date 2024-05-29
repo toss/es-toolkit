@@ -9,7 +9,6 @@ export const shared = defineConfig({
   title: 'es-toolkit',
 
   lastUpdated: true,
-  cleanUrls: true,
   metaChunk: true,
 
   /* prettier-ignore */
