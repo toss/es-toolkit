@@ -1,15 +1,8 @@
 # difference
 
-Computes the difference between two arrays.
-
-This function takes two arrays and returns a new array containing the elements 
-that are present in the first array but not in the second array. It effectively 
-filters out any elements from the first array that also appear in the second array.
-
 두 배열의 차이를 계산해요.
 
 이 함수는 두 배열을 받아서 첫 번째 배열에 있지만 두 번째 배열에는 없는 요소들을 포함한 새로운 배열을 반환해요. 즉, 첫 번째 배열에서 두 번째 배열에 있는 요소들을 제외한 나머지 요소들로 구성된 배열을 만들어줘요.
-
 
 ## 인터페이스
 
@@ -21,8 +14,6 @@ function difference<T>(firstArr: T[], secondArr: T[]): T[];
 
 - `firstArr` (`T[]`): 차이를 계산할 배열이에요. 이 배열이 주 배열이고, 이 배열의 요소들이 비교되고 필터링돼요.
 - `secondArr` (`T[]`): 첫 번째 배열에서 제외할 요소들을 포함한 배열이에요. 이 배열의 각 요소는 첫 번째 배열과 비교되며, 일치하는 요소가 있으면 결과에서 제외돼요.
-
-
 
 ### 반환 값
 
