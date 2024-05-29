@@ -10,17 +10,17 @@ function once<F extends () => any>(func: F): F;
 
 ### 파라미터
 
-- `func` (`F extends () => any`): 제한할 함수예요.
+- `func` (`F extends () => any`): 반복 호출을 제한할 함수예요.
 
 ### 반환 값
 
-(`F`): `func`를 한 번만 호출하고 결과를 캐시하는 새로운 함수예요.
+(`F`): `func`를 한 번만 호출하고 결과를 캐싱하는 새로운 함수예요.
 
 ## 예시
 
 ```typescript
 const initialize = once(() => {
-  console.log('Initialized!');
+  console.log("Initialized!");
   return true;
 });
 
