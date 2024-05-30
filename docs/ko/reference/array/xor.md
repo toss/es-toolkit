@@ -1,31 +1,28 @@
-===
 # xor
 
-Computes the symmetric difference between two arrays. The symmetric difference is the set of elements
-which are in either of the arrays, but not in their intersection.
+두 배열 간의 대칭 차집합을 계산해요. 대칭 차집합은 두 배열 중 하나에는 있지만 교집합에는 없는 요소들의 집합이에요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function xor<T>(arr1: T[], arr2: T[]): T[];
 ```
 
+### 파라미터
 
-### Parameters 
+- `arr1` (`T[]`): 첫 번째 배열이에요.
+- `arr2` (`T[]`): 두 번째 배열이에요.
 
-- `arr1` (`T[]`): The first array.
-- `arr2` (`T[]`): The second array.
+### 반환 값
 
-### Returns
+(`T[]`): `arr1` 또는 `arr2`의 요소들 중 두 배열의 교집합엔 없는 요소들을 포함하는 배열이에요. (대칭 차집합)
 
-(`T[]`): An array containing the elements that are present in either `arr1` or `arr2` but not in both.
-
-## Examples
+## 예시
 
 ```typescript
-// Returns [1, 2, 5, 6]
+// [1, 2, 5, 6]을 반환해요.
 xor([1, 2, 3, 4], [3, 4, 5, 6]);
 
-// Returns ['a', 'c']
+// ['a', 'c']을 반환해요.
 xor(['a', 'b'], ['b', 'c']);
 ```

@@ -1,4 +1,3 @@
-===
 # xor
 
 Computes the symmetric difference between two arrays. The symmetric difference is the set of elements
@@ -10,8 +9,7 @@ which are in either of the arrays, but not in their intersection.
 function xor<T>(arr1: T[], arr2: T[]): T[];
 ```
 
-
-### Parameters 
+### Parameters
 
 - `arr1` (`T[]`): The first array.
 - `arr2` (`T[]`): The second array.
