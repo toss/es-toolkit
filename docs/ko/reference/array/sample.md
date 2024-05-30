@@ -1,27 +1,25 @@
 # sample
 
-Returns a random element from an array.
+배열을 받아서 그 배열에서 무작위로 선택된 단일 요소를 반환해요.
 
-This function takes an array and returns a single element selected randomly from the array.
-
-## Signature
+## 인터페이스
 
 ```typescript
 function sample<T>(arr: T[]): T;
 ```
 
-### Parameters 
+### 파라미터 
 
-- `arr` (`T[]`): The array to sample from.
+- `arr` (`T[]`): 샘플링할 배열이에요.
 
-### Returns
+### 반환 값
 
-(`T`): A random element from the array.
+(`T`): 배열에서 무작위로 선택된 요소에요.
 
-## Examples
+## 예시
 
 ```typescript
 const array = [1, 2, 3, 4, 5];
 const randomElement = sample(array);
-// randomElement will be one of the elements from the array, selected randomly.
+// randomElement는 배열에서 무작위로 선택된 요소 중 하나가 될 거예요.
 ```

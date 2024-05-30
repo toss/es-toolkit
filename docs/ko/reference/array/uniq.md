@@ -1,28 +1,27 @@
 ===
 # uniq
 
-Creates a duplicate-free version of an array.
+배열 내 요소들의 중복을 제거해요.
 
-This function takes an array and returns a new array containing only the unique values 
-from the original array, preserving the order of first occurrence.
+이 함수는 배열을 받아서 원래 배열에서 고유한 값들만 포함된 새로운 배열을 반환해요. 새로운 배열 내 요소들의 순서는 원본 배열에서 첫 번째로 등장하는 순서를 유지해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function uniq<T>(arr: T[]): T[];
 ```
 
-### Parameters 
+### 파라미터 
 
-- `arr` (`T[]`): The array to process.
+- `arr` (`T[]`): 요소들의 중복을 제거할 배열이에요.
 
-### Returns
+### 반환 값
 
-(`T[]`): A new array with only unique values from the original array.
+(`T[]`): 원래 배열에서 고유한 요소들만 포함된 새로운 배열이에요.
 
-## Examples
+## 예시
 
 ```typescript
 const array = [1, 2, 2, 3, 4, 4, 5];
 const result = uniq(array);
-// result will be [1, 2, 3, 4, 5]
+// result는 [1, 2, 3, 4, 5]가 될 거예요.
