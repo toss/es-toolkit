@@ -1,30 +1,29 @@
 # pickBy
 
-Creates a new object composed of the properties that satisfy the predicate function.
+조건 함수에 맞는 속성들로 구성된 새로운 객체를 생성해요.
 
-This function takes an object and a predicate function, and returns a new object that 
-includes only the properties for which the predicate function returns true.
+이 함수는 객체와 조건 함수를 받아, 조건 함수가 true를 반환하는 속성들만 포함하는 새로운 객체를 반환해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function pickBy<T extends Record<string, any>>(obj: T, shouldPick: (value: T[keyof T], key: string) => boolean): Partial<T>;
 ```
 
-### Parameters 
+### 파라미터 
 
-- `obj` (`T`): The object to pick properties from.
-- `shouldPick` (`(value: T[keyof T], key: string) => boolean`): A predicate function that determines whether a property should be picked. It takes the property's key and value as arguments and returns `true` if the property should be picked, and `false` otherwise.
+- `obj` (`T`): 속성을 선택할 객체예요.
+- `shouldPick` (`(value: T[keyof T], key: string) => boolean`): 속성을 선택할지를 결정하는 조건 함수예요. 이 함수는 속성의 키와 값을 인수로 받아, 속성을 선택해야 하면 true, 그렇지 않으면 false를 반환해요.
 
-### Returns
+### 반환 값
 
-(`Partial<T>`): A new object with the properties that satisfy the predicate function.
+(`Partial<T>`): 조건 함수에 맞는 속성들로 구성된 새로운 객체예요.
 
-## Examples
+## 예시
 
 ```typescript
 const obj = { a: 1, b: 'pick', c: 3 };
 const shouldPick = (value, key) => typeof value === 'string';
 const result = pickBy(obj, shouldPick);
-// result will be { b: 'pick' }
+// 결과는 다음과 같아요 { b: 'pick' }
 ```

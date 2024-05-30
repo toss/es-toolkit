@@ -1,32 +1,29 @@
 # omitBy
 
-Creates a new object composed of the properties that do not satisfy the predicate function.
+조건 함수에 맞지 않는 속성들로 구성된 새로운 객체를 생성해요.
 
-This function takes an object and a predicate function, and returns a new object that 
-includes only the properties for which the predicate function returns false.
+이 함수는 객체와 조건 함수를 받아, 조건 함수가 false를 반환하는 속성들만 포함하는 새로운 객체를 반환해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function omitBy<T extends Record<string, any>>(obj: T, shouldOmit: (value: any, key: string) => boolean): Partial<T>;
 ```
 
-### Parameters 
+### 파라미터
 
-- `obj` (`T`): The object to omit properties from.
-- `shouldOmit` (`(value: any, key: string) => boolean`): A predicate function that determines 
-whether a property should be omitted. It takes the property's key and value as arguments and returns `true` 
-if the property should be omitted, and `false` otherwise.
+- `obj` (`T`): 속성을 생략할 객체예요.
+- `shouldOmit` (`(value: any, key: string) => boolean`): 속성을 생략할지를 결정하는 조건 함수예요. 이 함수는 속성의 키와 값을 인자로 받아, 속성을 생략해야 하면 true, 그렇지 않으면 false를 반환해요.
 
-### Returns
+### 반환 값
 
-(`Partial<T>`): A new object with the properties that do not satisfy the predicate function.
+(`Partial<T>`): 조건 함수에 맞지 않는 속성들로 구성된 새로운 객체예요.
 
-## Examples
+## 예시
 
 ```typescript
 const obj = { a: 1, b: 'omit', c: 3 };
 const shouldOmit = (value, key) => typeof value === 'string';
 const result = omitBy(obj, shouldOmit);
-// result will be { a: 1, c: 3 }
+// 결과는 다음과 같아요 { a: 1, c: 3 }
 ```
