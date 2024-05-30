@@ -25,6 +25,6 @@ function dropWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[]
 
 ```typescript
 const array = [1, 2, 3, 4, 5];
-const result = drop(array, 2);
-// result will be [3, 4, 5] since the first two elements are dropped.
+const result = dropWhile(array, x => x < 3);
+// result will be [3, 4, 5] since elements less than 3 are dropped.
 ```

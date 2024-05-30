@@ -1,9 +1,9 @@
 # dropWhile
 
-Removes elements from the beginning of an array until the predicate returns false.
+배열의 처음부터 시작해서, 조건 함수가 `false`를 반환할 때까지 요소들을 제거해요.
 
-This function iterates over an array and drops elements from the start until the provided 
-predicate function returns false. It then returns a new array with the remaining elements.
+이 함수는 각 배열의 요소를 순회하면서, 배열의 시작부터 조건 함수가 `false`를 반환할 때까지 요소를 제거해요. 
+남은 요소들로 구성된 새로운 배열을 반환해요.
 
 
 ## 인터페이스
@@ -14,17 +14,17 @@ function dropWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[]
 
 ### 파라미터 
 
-- `arr` (`T[]`): The array from which to drop elements.
-- `canContinueDropping` (`(item: T) => boolean`): A predicate function that determines whether to continue dropping elements. The function is called with each element, and dropping continues as long as it returns true.
+- `arr` (`T[]`): 요소를 제거할 배열.
+- `canContinueDropping` (`(item: T) => boolean`): 요소를 제거하는 것을 계속할지 반환하는 조건 함수예요. 각 요소에 대해서 호출되면서, `true`를 반환하는 동안 요소를 제거해요.
 
 ### 반환 값
 
-(`T[]`) A new array with the elements remaining after the predicate returns false.
+(`T[]`): 조건 함수가 `false`를 반환할 때까지 남은 요소들로 이루어진 새로운 배열.
 
 ## 예시
 
 ```typescript
-const array = [1, 2, 3, 4, 5];
-const result = drop(array, 2);
-// result will be [3, 4, 5] since the first two elements are dropped.
+const array = [1, 2, 3, 2, 4, 5];
+const result = dropWhile(array, x => x < 3);
+// 3보다 작은 요소를 발견할 때까지 요소를 제거하므로, 결괏값은 [3, 2, 4, 5]이 되어요.
 ```

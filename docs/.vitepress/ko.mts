@@ -53,6 +53,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'drop', link: '/ko/reference/array/drop' },
             { text: 'dropRight', link: '/ko/reference/array/dropRight' },
             { text: 'dropWhile', link: '/ko/reference/array/dropWhile' },
+            { text: 'dropRightWhile', link: '/ko/reference/array/dropRightWhile' },
             { text: 'groupBy', link: '/ko/reference/array/groupBy' },
             { text: 'intersection', link: '/ko/reference/array/intersection' },
             { text: 'intersectionBy', link: '/ko/reference/array/intersectionBy' },
