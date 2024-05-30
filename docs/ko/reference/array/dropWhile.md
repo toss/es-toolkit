@@ -6,7 +6,7 @@ This function iterates over an array and drops elements from the start until the
 predicate function returns false. It then returns a new array with the remaining elements.
 
 
-## Signature
+## 인터페이스
 
 ```typescript
 function dropWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[]

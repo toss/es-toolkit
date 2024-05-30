@@ -5,7 +5,7 @@ Rounds a number to a specified precision.
 This function takes a number and an optional precision value, and returns the number rounded 
 to the specified number of decimal places.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function round(value: number, precision?: number): number;

@@ -4,7 +4,7 @@ Calculates the sum of an array of numbers.
 
 This function takes an array of numbers and returns the sum of all the elements in the array.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function sum(nums: number[]): number;
