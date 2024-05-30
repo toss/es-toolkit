@@ -1,29 +1,28 @@
 # pick
 
-Creates a new object composed of the picked object properties.
+선택한 객체 속성들로 구성된 새로운 객체를 생성해요.
 
-This function takes an object and an array of keys, and returns a new object that 
-includes only the properties corresponding to the specified keys.
+이 함수는 객체와 키 배열을 받아, 지정된 키에 해당하는 속성들만 포함하는 새로운 객체를 반환해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function pick<T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
 ```
 
-### Parameters 
+### 파라미터 
 
-- `obj` (`T`): The object to pick keys from.
-- `keys` (`K[]`): An array of keys to be picked from the object.
+- `obj` (`T`): 키를 선택할 객체예요.
+- `keys` (`K[]`): 객체에서 선택할 키들의 배열이에요.
 
-### Returns
+### 반환 값
 
-(`Pick<T, K>`): A new object with the specified keys picked.
+(`Pick<T, K>`): 지정된 키들이 선택된 새로운 객체예요.
 
-## Examples
+## 예시
 
 ```typescript
 const obj = { a: 1, b: 2, c: 3 };
 const result = pick(obj, ['a', 'c']);
-// result will be { a: 1, c: 3 }
+// 결과는 다음과 같아요 { a: 1, c: 3 }
 ```

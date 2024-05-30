@@ -1,29 +1,28 @@
 # omit
 
-Creates a new object with specified keys omitted.
+특정 키를 생략한 새로운 객체를 생성해요.
 
-This function takes an object and an array of keys, and returns a new object that 
-excludes the properties corresponding to the specified keys.
+이 함수는 객체와 키 배열을 받아, 지정된 키에 해당하는 속성을 제외한 새로운 객체를 반환해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function omit<T, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
 ```
 
-### Parameters 
+### 파라미터 
 
-- `obj` (`T`): The object to omit keys from.
-- `keys` (`K[]`): An array of keys to be omitted from the object.
+- `obj` (`T`): 키를 생략할 객체예요.
+- `keys` (`K[]`): 객체에서 생략할 키들의 배열이에요.
 
-### Returns
+### 반환 값
 
-(`Omit<T, K>`): A new object with the specified keys omitted.
+(`Omit<T, K>`): 지정된 키들이 생략된 새로운 객체예요.
 
-## Examples
+## 예시
 
 ```typescript
 const obj = { a: 1, b: 2, c: 3 };
 const result = omit(obj, ['b', 'c']);
-// result will be { a: 1 }
+// 결과는 다음과 같아요 { a: 1 }
 ```
