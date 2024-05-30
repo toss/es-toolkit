@@ -1,25 +1,25 @@
 # isUndefined
 
-Checks if the given value is undefined.
+주어진 값이 undefined인지 확인해요.
 
-This function tests whether the provided value is strictly equal to `undefined`. 
-It returns `true` if the value is `undefined`, and `false` otherwise.
+이 함수는 주어진 값이 `undefined` 인지 엄격 일치 (===) 기준으로 확인합니다.
+값이 `undefined` 이면 `true`, 아니면 `false` 를 반환해요.
 
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `undefined`.
+TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 `undefined`인 타입으로 좁힐 수 있어요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function isUndefined(x: unknown): x is undefined;
 ```
 
-### Parameters 
+### 파라미터 
 
-- `x` (`unknown`): The value to test if it is undefined.
+- `x` (`unknown`): undefined인지 확인할 값
 
-### Returns
+### 반환 값
 
-(`x is undefined`): True if the value is undefined, false otherwise.
+(`x is undefined`): 값이 undefined이면 true, 아니면 false.
 
 ## Examples
 
