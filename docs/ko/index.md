@@ -13,6 +13,9 @@ hero:
     - theme: alt
       text: 레퍼런스
       link: /ko/reference/array/chunk
+    - theme: alt
+      text: 설치
+      link: /ko/installation
 
 features:
   - title: 빠른 성능

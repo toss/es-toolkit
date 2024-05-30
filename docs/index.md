@@ -13,6 +13,9 @@ hero:
     - theme: alt
       text: Reference
       link: /reference/array/chunk
+    - theme: alt
+      text: Installation
+      link: /installation
 
 features:
   - title: Best performance
