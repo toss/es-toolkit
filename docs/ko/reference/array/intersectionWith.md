@@ -1,35 +1,34 @@
 # intersectionWith
 
-Returns the intersection of two arrays based on a custom equality function.
+두 요소가 일치하는지 여부를 판단하는 커스텀 함수를 기준으로, 두 배열의 교집합을 반환해요.
 
-This function takes two arrays and a custom equality function. It returns a new array containing 
-the elements from the first array that have matching elements in the second array, as determined 
-by the custom equality function. It effectively filters out any elements from the first array that 
-do not have corresponding matches in the second array according to the equality function.
+이 함수는 파라미터로 두 개의 배열과 커스텀 일치 함수를 받아요.
+이 함수는 커스텀 일치 함수의 반환 값을 기준으로, 두 배열에 모두 포함된 요소들을 새로운 배열로 반환해요.
+실제 구현을 살펴보면, 첫 번째 배열의 요소들 중에서 두 번째 배열의 어떤 요소와도 일치 함수를 기준으로 같지 않은 요소들을 제외한 새로운 배열을 반환해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[];
 ```
 
-### Parameters 
+### 파라미터 
 
-- `firstArr` (`T[]`): The first array to compare.
-- `secondArr` (`T[]`): The second array to compare.
-- `areItemsEqual` (`(x: T, y: T) => boolean`): A custom function to determine if two elements are equal. This function takes two arguments, one from each array, and returns true if the elements are considered equal, and false otherwise.
+- `firstArr` (`T[]`): 비교할 첫 번째 배열.
+- `secondArr` (`T[]`): 비교할 두 번째 배열.
+- `areItemsEqual` (`(x: T, y: T) => boolean`): 두 요소가 일치하는지 판단하는 일치 함수예요. 두 요소가 일치한다면 `true`를, 일치하지 않는다면 `false`를 반환하게 해주세요.
 
 ### Returns
 
-(`T[]`) A new array containing the elements from the first array that have corresponding matches in the second array according to the custom equality function.
+(`T[]`): 커스텀 일치 함수의 반환 값을 기준으로, 두 배열에 모두 포함된 요소들을 포함하는 새로운 배열.
 
 
-## Examples
+## 예시
 
 ```typescript
 const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
 const array2 = [{ id: 2 }, { id: 4 }];
 const areItemsEqual = (a, b) => a.id === b.id;
 const result = intersectionWith(array1, array2, areItemsEqual);
-// result will be [{ id: 2 }] since this element has a matching id in both arrays.
+// `areItemsEqual` 기준으로 array1과 array2에 모두 포함되어 있는 요소들로 이루어진 [{ id: 2 }] 이 반환돼요.
 ```
