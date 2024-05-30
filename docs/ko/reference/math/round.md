@@ -1,9 +1,8 @@
 # round
 
-Rounds a number to a specified precision.
+숫자를 지정된 자릿수로 반올림하는 함수에요.
 
-This function takes a number and an optional precision value, and returns the number rounded 
-to the specified number of decimal places.
+이 함수는 숫자와 선택적으로 자릿수 값을 받아서, 지정된 소수점 자릿수로 반올림된 숫자를 반환해요.
 
 ## 인터페이스
 
@@ -13,16 +12,17 @@ function round(value: number, precision?: number): number;
 
 ### 파라미터 
 
-- `value` (`number`): The number to round.
-- `precision` (`number`, optional): The number of decimal places to round to. Defaults to 0.
+- `value` (`number`): 반올림할 숫자에요.
+- `precision` (`number`, optional): 반올림할 소수점 자릿수에요. 기본값은 0이에요.
 
 ### 반환 값
 
-(`number`): The rounded number.
+(`number`): 반올림된 숫자를 반환해요.
 
 ## 예시
 
 ```typescript
-const result1 = round(1.2345); // result1 will be 1
-const result2 = round(1.2345, 2); // result2 will be 1.23
-const result3 = round(1.2345, 3); // result3 will be 1.235
+const result1 = round(1.2345); // result1은 1이 되어요.
+const result2 = round(1.2345, 2); // result2는 1.23이 되어요.
+const result3 = round(1.2345, 3); // result3는 1.235가 되어요.
+```
