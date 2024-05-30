@@ -2,7 +2,7 @@
 
 Creates an array of unique values from all given arrays.
 
-This function takes two arrays, merges them into a single array, and returns a new array 
+This function takes two arrays, merges them into a single array, and returns a new array
 containing only the unique values from the merged array.
 
 ## Signature
@@ -11,7 +11,7 @@ containing only the unique values from the merged array.
 function union<T>(arr1: T[], arr2: T[]): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `arr1` (`T[]`): The first array to merge and filter for unique values.
 - `arr2` (`T[]`): The second array to merge and filter for unique values.

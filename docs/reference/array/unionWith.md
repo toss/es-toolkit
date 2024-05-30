@@ -2,7 +2,7 @@
 
 Creates an array of unique values from two given arrays based on a custom equality function.
 
-This function takes two arrays and a custom equality function, merges the arrays, and returns 
+This function takes two arrays and a custom equality function, merges the arrays, and returns
 a new array containing only the unique values as determined by the custom equality function.
 
 ## Signature
@@ -11,7 +11,7 @@ a new array containing only the unique values as determined by the custom equali
 function unionWith<T>(arr1: T[], arr2: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `arr1` (`T[]`): The first array to merge and filter for unique values.
 - `arr2` (`T[]`): The second array to merge and filter for unique values.

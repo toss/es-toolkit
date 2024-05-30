@@ -1,32 +1,31 @@
 # unionWith
 
-Creates an array of unique values from two given arrays based on a custom equality function.
+사용자 정의 동등성 함수를 기반으로 두 배열에서 고유한 값의 배열을 생성합니다.
 
-This function takes two arrays and a custom equality function, merges the arrays, and returns 
-a new array containing only the unique values as determined by the custom equality function.
+이 함수는 두 배열과 사용자 정의 동등성 함수를 받아 배열을 병합하고 사용자 정의 동등성 함수에 의해 고유한 값만 포함하는 새 배열을 반환합니다.
 
-## Signature
+## 시그니처
 
 ```typescript
 function unionWith<T>(arr1: T[], arr2: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[];
 ```
 
-### Parameters 
+### 매개변수
 
-- `arr1` (`T[]`): The first array to merge and filter for unique values.
-- `arr2` (`T[]`): The second array to merge and filter for unique values.
-- `areItemsEqual` (`(item1: T, item2: T) => boolean`): A custom function to determine if two elements are equal. It takes two arguments and returns `true` if the elements are considered equal, and `false` otherwise.
+- `arr1` (`T[]`): 병합하고 고유 값을 필터링할 첫 번째 배열.
+- `arr2` (`T[]`): 병합하고 고유 값을 필터링할 두 번째 배열.
+- `areItemsEqual` (`(item1: T, item2: T) => boolean`): 두 요소가 동일한지 여부를 결정하는 사용자 정의 함수. 이 함수는 두 개의 인수를 받고, 요소가 동일하다고 간주되면 `true`, 그렇지 않으면 `false`를 반환합니다.
 
-### Returns
+### 반환값
 
-(`T[]`): A new array of unique values based on the custom equality function.
+(`T[]`): 사용자 정의 동등성 함수에 따라 고유한 값의 새 배열.
 
-## Examples
+## 예제
 
 ```typescript
 const array1 = [{ id: 1 }, { id: 2 }];
 const array2 = [{ id: 2 }, { id: 3 }];
 const areItemsEqual = (a, b) => a.id === b.id;
 const result = unionWith(array1, array2, areItemsEqual);
-// result will be [{ id: 1 }, { id: 2 }, { id: 3 }] since { id: 2 } is considered equal in both arrays
+// 결과는 [{ id: 1 }, { id: 2 }, { id: 3 }]가 됩니다. { id: 2 }는 두 배열에서 동일한 것으로 간주됩니다.
 ```

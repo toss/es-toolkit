@@ -1,16 +1,5 @@
 # unionBy
 
-
- * 
- * 
- * @returns {T[]} 
- * 
- * @example
- * 
- * 
- * @example
- * 
-
 Creates an array of unique values, in order, from all given arrays using a provided mapping function to determine equality.
 
 ## Signature
