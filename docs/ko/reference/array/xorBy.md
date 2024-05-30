@@ -1,28 +1,26 @@
 # xorBy
 
-Computes the symmetric difference between two arrays using a custom mapping function. 
-The symmetric difference is the set of elements which are in either of the arrays, 
-but not in their intersection, determined by the result of the mapping function.
+사용자 정의 매핑 함수를 사용하여 두 배열 간의 대칭 차집합을 계산해요. 대칭 차집합은 매핑 함수의 결과에 따라 두 배열 중 하나에는 있지만 교집합에는 없는 요소들의 집합이에요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function xorBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[];
 ```
 
-### Parameters 
+### 파라미터
 
-- `arr1` (`T[]`): The first array.
-- `arr2` (`T[]`): The second array.
-- `mapper` (`(item: T) => U`): The function to map array elements to comparison values.
+- `arr1` (`T[]`): 첫 번째 배열이에요.
+- `arr2` (`T[]`): 두 번째 배열이에요.
+- `mapper` (`(item: T) => U`): 두 배열의 요소를 비교하는 사용자 정의 매핑 함수예요.
 
-### Returns
+### 반환 값
 
-(`T[]`): An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the values returned by the mapping function.
+(`T[]`): 매핑 함수가 반환한 값에 따라 `arr1` 또는 `arr2`에 있지만 둘 다에는 없는 요소들을 포함하는 배열이에요.
 
-## Examples
+## **예시**
 
 ```typescript
-// Returns [{ id: 1 }, { id: 3 }]
+// [{ id: 1 }, { id: 3 }]를 반환해요.
 xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], x => x.id);
 ```
