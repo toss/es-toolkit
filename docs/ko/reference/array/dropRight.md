@@ -1,30 +1,28 @@
 # dropRight
 
-Removes a specified number of elements from the end of an array and returns the rest.
+배열의 마지막부터 몇 개의 요소를 제거한 새로운 배열을 반환해요.
 
-This function takes an array and a number, and returns a new array with the specified number 
-of elements removed from the end.
+이 함수는 파라미터로 배열과 숫자를 받아요. 배열의 마지막부터 숫자만큼의 요소를 제외한 새로운 배열을 반환해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function dropRight<T>(arr: T[], itemsCount: number): T[];
 ```
 
-### Parameters
+### 파라미터
 
-- `arr` (`T[]`): The array from which to drop elements.
-- `itemsCount` (`number`): The number of elements to drop from the end of the array.
+- `arr` (`T[]`): 요소를 제거할 배열.
+- `itemsCount` (`number`): 배열의 지막부터 제거할 요소의 숫자.
 
-### Returns
+### 반환 값
 
-(`T[]`) A new array with the specified number of elements removed from the end.
+(`T[]`): 배열의 마지막부터 숫자만큼의 요소를 제외한 새로운 배열을 반환해요.
 
-
-## Examples
+## 예시
 
 ```typescript
 const array = [1, 2, 3, 4, 5];
 const result = dropRight(array, 2);
-// result will be [1, 2, 3] since the last two elements are dropped.
+// 마지막 두 개 요소가 반환되므로, 결괏값은 [1, 2, 3]이 돼요.
 ```
