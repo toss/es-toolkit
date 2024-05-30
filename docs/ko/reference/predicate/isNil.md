@@ -1,20 +1,19 @@
 # isNil 
 
-Checks if a given value is null or undefined.
+주어진 값이 null이나 undefined인지 확인해요.
 
-This function tests whether the provided value is either `null` or `undefined`. 
-It returns `true` if the value is `null` or `undefined`, and `false` otherwise.
+값이 `null` 이나 `undefined` 이면 `true` 를 반환하고, 아니면 `false` 를 반환해요.
 
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `null` or `undefined`.
+TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 `null` 이나 `undefined` 타입으로 좁힐 수 있어요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function isNil(x: unknown): x is null | undefined
 ```
 
 
-## Examples
+## 예시
 
 ```typescript
 import { isNil } from 'es-toolkit/predicate';
