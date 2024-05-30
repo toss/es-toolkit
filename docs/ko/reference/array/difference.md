@@ -1,14 +1,9 @@
 # difference
 
-Computes the difference between two arrays.
-
-This function takes two arrays and returns a new array containing the elements 
-that are present in the first array but not in the second array. It effectively 
-filters out any elements from the first array that also appear in the second array.
-
 두 배열의 차이를 계산해요.
 
-이 함수는 두 배열을 받아서 첫 번째 배열에 있지만 두 번째 배열에는 없는 요소들을 포함한 새로운 배열을 반환해요. 즉, 첫 번째 배열에서 두 번째 배열에 있는 요소들을 제외한 나머지 요소들로 구성된 배열을 만들어줘요.
+이 함수는 파라미터로 두 배열을 받아서, 첫 번째 배열에 있지만 두 번째 배열에는 없는 요소들을 포함한 새로운 배열을 반환해요. 
+즉, 첫 번째 배열에서 두 번째 배열에 있는 요소들을 제외한 나머지 요소들로 구성된 배열을 만들어줘요.
 
 
 ## 인터페이스
