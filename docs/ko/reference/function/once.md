@@ -1,32 +1,30 @@
 # once
 
-Creates a function that is restricted to invoking the provided function `func` once.
-Repeated calls to the function will return the value from the first invocation.
+제공된 함수 `func`를 한 번만 호출하도록 제한하는 함수를 생성해요.
+함수를 반복해서 호출하면 첫 번째 호출의 값을 반환해요.
 
 
-## Signature
+## 인터페이스
 
-```typescript
 function once<F extends () => any>(func: F): F;
-```
 
-### Parameters 
+### 파라미터 
 
-- `func` (`F extends () => any`): The function to restrict.
+- `func` (`F extends () => any`): 한 번만 호출하도록 제한할 함수예요.
 
-### Returns
+### 결과 값
 
-(`F`): A new function that invokes `func` once and caches the result.
+(`F`): `func`가 한 번 호출되면 결과를 캐시하고 반환할 새로운 함수예요.
 
 
-## Examples
+## 예시
 
 ```typescript
 const initialize = once(() => {
-  console.log('Initialized!');
+  console.log('초기화');
   return true;
 });
 
-initialize(); // Logs: 'Initialized!' and returns true
-initialize(); // Returns true without logging
+initialize(); // '초기화'를 로깅하고, true를 반환해요
+initialize(); // 로깅 없이 true를 반환해요
 ```
