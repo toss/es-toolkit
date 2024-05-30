@@ -1,41 +1,40 @@
 # throttle
 
-Creates a throttled function that only invokes the provided function at most once
-per every `throttleMs` milliseconds. Subsequent calls to the throttled function
-within the wait time will not trigger the execution of the original function.
+제공된 함수를 매 `throttleMs` 밀리초마다 최대 한 번만 호출하는 throttle된 함수를 생성해요. 시간 안에 throttle된 함수를 다시 호출해도 원래 함수를 실행하지 않아요.
 
 
-## Signature
+## 인터페이스
 
 ```typescript
 function throttle(func: () => void, throttleMs: number): () => void;
 ```
 
-### Parameters 
 
-- `func` (`() => void`): The function to throttle.
-- `throttleMs`(`number`): The number of milliseconds to throttle executions to.
+### 파라미터
 
-### Returns
+- `func` (`() => void`): throttle할 함수.
+- `throttleMs`(`number`): 실행을 throttle할 밀리초.
 
-(`() => void`): A new throttled function.
+### 반환 값
+
+(`() => void`): 새로운 throttle된 함수.
 
 
-## Examples
+## 예시
 
 ```typescript
 const throttledFunction = throttle(() => {
-  console.log('Function executed');
+  console.log('호출');
 }, 1000);
 
-// Will log 'Function executed' immediately
+// 즉시 '호출'를 로깅해요
 throttledFunction();
 
-// Will not log anything as it is within the throttle time
+// throttle 시간 내에 있으므로 아무 것도 로깅하지 않아요
 throttledFunction();
 
-// After 1 second
+// 1초 후
 setTimeout(() => {
-  throttledFunction(); // Will log 'Function executed'
+  throttledFunction(); // '호출'를 로깅해요
 }, 1000);
 ```
