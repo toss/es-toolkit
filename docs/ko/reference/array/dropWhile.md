@@ -12,16 +12,16 @@ predicate function returns false. It then returns a new array with the remaining
 function dropWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[]
 ```
 
-### Parameters 
+### 파라미터 
 
 - `arr` (`T[]`): The array from which to drop elements.
 - `canContinueDropping` (`(item: T) => boolean`): A predicate function that determines whether to continue dropping elements. The function is called with each element, and dropping continues as long as it returns true.
 
-### Returns
+### 반환 값
 
 (`T[]`) A new array with the elements remaining after the predicate returns false.
 
-## Examples
+## 예시
 
 ```typescript
 const array = [1, 2, 3, 4, 5];

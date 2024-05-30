@@ -21,7 +21,7 @@ function isUndefined(x: unknown): x is undefined;
 
 (`x is undefined`): 값이 undefined이면 true, 아니면 false.
 
-## Examples
+## 예시
 
 ```typescript
 const value1 = undefined;

@@ -11,16 +11,16 @@ to the specified number of decimal places.
 function round(value: number, precision?: number): number;
 ```
 
-### Parameters 
+### 파라미터 
 
 - `value` (`number`): The number to round.
 - `precision` (`number`, optional): The number of decimal places to round to. Defaults to 0.
 
-### Returns
+### 반환 값
 
 (`number`): The rounded number.
 
-## Examples
+## 예시
 
 ```typescript
 const result1 = round(1.2345); // result1 will be 1

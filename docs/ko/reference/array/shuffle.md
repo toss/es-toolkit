@@ -8,15 +8,15 @@
 function shuffle<T>(arr: T[]): T[];
 ```
 
-### Parameters 
+### 파라미터 
 
 - `arr` (`T[]`): 요소를 뒤섞을 배열이에요.
 
-### Returns
+### 반환 값
 
 (`T[]`): 요소들이 무작위로 섞인 새로운 배열이에요.
 
-## Examples
+## 예시
 
 ```typescript
 const array = [1, 2, 3, 4, 5];

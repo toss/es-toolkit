@@ -12,17 +12,17 @@ function clamp(value: number, maximum: number): number;
 function clamp(value: number, minimum: number, maximum: number): number;
 ```
 
-### Parameters 
+### 파라미터 
 
 - `value` (`number`): The number to clamp.
 - `minimum` (`number`): The minimum bound to clamp the number.
 - `maximum` (`number`): The maximum bound to clamp the number.
 
-### Returns
+### 반환 값
 
 (`number`): The clamped number within the specified bounds.
 
-## Examples
+## 예시
 
 ```typescript
 const result1 = clamp(10, 5); // result1 will be 5, as 10 is clamped to the bound 5

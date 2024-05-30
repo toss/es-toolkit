@@ -18,7 +18,7 @@ function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T
 - `secondArr` (`T[]`): 비교할 두 번째 배열.
 - `areItemsEqual` (`(x: T, y: T) => boolean`): 두 요소가 일치하는지 판단하는 일치 함수예요. 두 요소가 일치한다면 `true`를, 일치하지 않는다면 `false`를 반환하게 해주세요.
 
-### Returns
+### 반환 값
 
 (`T[]`): 커스텀 일치 함수의 반환 값을 기준으로, 두 배열에 모두 포함된 요소들을 포함하는 새로운 배열.
 
