@@ -1,29 +1,26 @@
 # groupBy
 
-Groups the elements of an array based on a provided key-generating function.
+주어진 키 생성 함수에 따라서 배열의 요소를 분류해요.
 
-This function takes an array and a function that generates a key from each element. It returns 
-an object where the keys are the generated keys and the values are arrays of elements that share 
-the same key.
+이 함수는 파라미터로 배열과 각 요소에서 키를 생성하는 함수를 받아요.
+키는 함수에서 생성된 키이고, 값은 그 키를 공유하는 요소끼리 묶은 배열인 객체를 반환해요.
 
-
-## Signature
+## 인터페이스
 
 ```typescript
 function groupBy<T, K extends string>(arr: T[], getKeyFromItem: (item: T) => K): Record<K, T[]>;
 ```
 
-### Parameters 
+### 파라미터 
 
-- `arr` (`T[]`): The array to group.
-- `getKeyFromItem` (`(item: T) => K`): A function that generates a key from an element.
+- `arr` (`T[]`): 요소를 분류할 배열.
+- `getKeyFromItem` (`(item: T) => K`): 요소에서 키를 생성하는 함수.
 
-### Returns
+### 반환 값
 
-(`Record<K, T[]>`) An object where each key is associated with an array of elements that 
-share that key.
+(`Record<K, T[]>`): 키에 따라 요소가 분류된 객체를 반환해요.
 
-## Examples
+## 예시
 
 ```typescript
 const array = [
@@ -32,7 +29,7 @@ const array = [
   { category: 'vegetable', name: 'carrot' }
 ];
 const result = groupBy(array, item => item.category);
-// result will be:
+// 결괏값:
 // {
 //   fruit: [
 //     { category: 'fruit', name: 'apple' },
