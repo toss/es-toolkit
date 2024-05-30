@@ -1,35 +1,35 @@
 # takeRight
 
-Returns a new array containing the last `count` elements from the input array `arr`.
+입력 배열 `arr`에서 마지막 `count`개의 요소를 포함하는 새로운 배열을 반환해요.
 
-If `count` is greater than the length of `arr`, the entire array is returned.
+만약 `count`가 `arr`의 길이보다 크면, 전체 배열을 반환해요.
 
 
-## Signature
+## 인터페이스
 
 ```typescript
 function takeRight<T>(arr: T[], count: number): T[];
 ```
 
-### Parameters 
+### 파라미터 
 
-- `arr` (`T[]`): The array to take elements from. 
-- `count` (`number`): The number of elements to take.
+- `arr` (`T[]`): 요소를 가져올 배열이에요.
+- `count` (`number`): 가져올 요소의 개수예요.
 
-### Returns
+### 반환 값
 
-(`T[]`) A new array containing the last `count` elements from `arr`.
+(`T[]`)  `arr` 에서 마지막 `count` 개의 요소를 포함하는 새로운 배열이에요.
 
 
-## Examples
+## 예시
 
 ```typescript
-// Returns [4, 5]
+// [4, 5]
 takeRight([1, 2, 3, 4, 5], 2);
 
-// Returns ['b', 'c']
+// ['b', 'c']
 takeRight(['a', 'b', 'c'], 2);
 
-// Returns [1, 2, 3]
+// [1, 2, 3]
 takeRight([1, 2, 3], 5);
 ```

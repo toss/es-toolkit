@@ -1,27 +1,26 @@
 # takeWhile
 
-Returns a new array containing the leading elements of the provided array
-that satisfy the provided predicate function. It stops taking elements as soon
-as an element does not satisfy the predicate.
+주어진 조건 함수가 true를 반환하는 선행 요소들을 포함하는 새로운 배열을 반환해요. 
+조건을 만족하지 않는 요소가 나오면 멈춰요.
 
 
-## Signature
+## 인터페이스
 
 ```typescript
 function takeWhile<T>(arr: T[], shouldContinueTaking: (element: T) => boolean): T[];
 ```
 
-### Parameters 
+### 파라미터 
 
-- `arr` (`T[]`): The array to take elements from.
-- `shouldContinueTaking` (`(item: T) => boolean`) The predicate function that is called with each element. Elements are included in the result as long as this function returns true.
+- `arr` (`T[]`): 요소를 가져올 배열이에요.
+- `shouldContinueTaking` (`(item: T) => boolean`) 각 요소와 함께 호출되는 조건 함수예요. 이 함수가 `true`를 반환하는 동안 요소들이 결과에 포함돼요.
 
-### Returns
+### 반환 값
 
-(`T[]`) A new array containing the elements taken from the beginning while the predicate returns `true`.
+(`T[]`) 조건 함수가 `true`를 반환하는 동안 처음부터 가져온 요소들을 포함하는 새로운 배열이에요.
 
 
-## Examples
+## 예시
 
 ```typescript
 // Returns [1, 2]
