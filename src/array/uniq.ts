@@ -8,8 +8,7 @@
  * @returns {T[]} A new array with only unique values from the original array.
  *
  * @example
- * // Example usage:
- * const array = [1, 2, 2, 3, 4, 4, 5];
+ *  * const array = [1, 2, 2, 3, 4, 4, 5];
  * const result = uniq(array);
  * // result will be [1, 2, 3, 4, 5]
  */

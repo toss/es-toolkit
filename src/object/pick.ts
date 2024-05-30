@@ -9,8 +9,7 @@
  * @returns {Pick<T, K>} A new object with the specified keys picked.
  *
  * @example
- * // Example usage:
- * const obj = { a: 1, b: 2, c: 3 };
+ *  * const obj = { a: 1, b: 2, c: 3 };
  * const result = pick(obj, ['a', 'c']);
  * // result will be { a: 1, c: 3 }
  */

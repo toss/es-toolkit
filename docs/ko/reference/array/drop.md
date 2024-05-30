@@ -1,30 +1,28 @@
 # drop
 
-Removes a specified number of elements from the beginning of an array and returns the rest.
+배열의 시작부터 몇 개의 요소를 제거한 새로운 배열을 반환해요.
 
-This function takes an array and a number, and returns a new array with the specified number 
-of elements removed from the start.
+이 함수는 파라미터로 배열과 숫자를 받아요. 배열의 시작부터 숫자만큼의 요소를 제외한 새로운 배열을 반환해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function drop<T>(arr: T[], itemsCount: number): T[];
 ```
 
-### Parameters
+### 파라미터
 
-- `arr` (`T[]`): The array from which to drop elements.
-- `itemsCount` (`number`): The number of elements to drop from the beginning of the array.
+- `arr` (`T[]`): 요소를 제거할 배열.
+- `itemsCount` (`number`): 배열의 시작부터 제거할 요소의 숫자.
 
-### Returns
+### 반환 값
 
-(`T[]`) A new array with the specified number of elements removed from the start.
+(`T[]`): 배열의 시작부터 숫자만큼의 요소를 제외한 새로운 배열을 반환해요.
 
-## Examples
+## 예시
 
 ```typescript
-// Example usage:
 const array = [1, 2, 3, 4, 5];
 const result = drop(array, 2);
-// result will be [3, 4, 5] since the first two elements are dropped.
+// 첫 두 개 요소가 제거되므로, 결과는 [3, 4, 5]이에요.
 ```

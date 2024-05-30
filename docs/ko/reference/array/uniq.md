@@ -23,7 +23,6 @@ function uniq<T>(arr: T[]): T[];
 ## Examples
 
 ```typescript
-// Example usage:
 const array = [1, 2, 2, 3, 4, 4, 5];
 const result = uniq(array);
 // result will be [1, 2, 3, 4, 5]

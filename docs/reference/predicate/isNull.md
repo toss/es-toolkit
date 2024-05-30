@@ -24,7 +24,6 @@ function isNull(x: unknown): x is null;
 ## Examples
 
 ```typescript
-// Example usage:
 const value1 = null;
 const value2 = undefined;
 const value3 = 42;

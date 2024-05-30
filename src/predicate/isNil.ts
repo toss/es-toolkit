@@ -10,8 +10,7 @@
  * @returns {boolean} `true` if the value is null or undefined, `false` otherwise.
  *
  * @example
- * // Example usage:
- * const value1 = null;
+ *  * const value1 = null;
  * const value2 = undefined;
  * const value3 = 42;
  * const result1 = isNil(value1); // true

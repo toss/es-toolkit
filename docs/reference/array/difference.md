@@ -29,7 +29,6 @@ in the second array.
 ```typescript
 import { difference } from 'es-toolkit/array';
 
-// Example usage:
 const array1 = [1, 2, 3, 4, 5];
 const array2 = [2, 4];
 const result = difference(array1, array2);

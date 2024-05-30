@@ -17,8 +17,7 @@
  * mapped identity in the second array.
  *
  * @example
- * // Example usage:
- * const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+ *  * const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
  * const array2 = [{ id: 2 }, { id: 4 }];
  * const mapper = item => item.id;
  * const result = differenceBy(array1, array2, mapper);

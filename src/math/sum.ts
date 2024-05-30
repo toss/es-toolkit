@@ -7,8 +7,7 @@
  * @returns {number} The sum of all the numbers in the array.
  *
  * @example
- * // Example usage:
- * const numbers = [1, 2, 3, 4, 5];
+ *  * const numbers = [1, 2, 3, 4, 5];
  * const result = sum(numbers);
  * // result will be 15
  */

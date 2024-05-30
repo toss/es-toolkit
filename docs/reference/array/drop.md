@@ -23,7 +23,6 @@ function drop<T>(arr: T[], itemsCount: number): T[];
 ## Examples
 
 ```typescript
-// Example usage:
 const array = [1, 2, 3, 4, 5];
 const result = drop(array, 2);
 // result will be [3, 4, 5] since the first two elements are dropped.
