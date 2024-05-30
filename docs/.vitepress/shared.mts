@@ -23,6 +23,13 @@ export const shared = defineConfig({
       },
     ],
     [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://static.toss.im/tps/main.css"
+      }
+    ],
+    [
       "meta",
       {
         property: "og:image",
