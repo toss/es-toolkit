@@ -1,13 +1,10 @@
 # zip
 
-Combines multiple arrays into a single array of tuples.
+여러 배열을 튜플의 단일 배열로 결합해요.
 
-This function takes multiple arrays and returns a new array where each element is a tuple 
-containing the corresponding elements from the input arrays. If the input arrays are of 
-different lengths, the resulting array will have the length of the longest input array, 
-with undefined values for missing elements.
+이 함수는 여러 배열을 입력받아 각 요소가 입력 배열의 해당 요소들을 포함하는 튜플인 새 배열을 반환해요. 입력 배열의 길이가 다를 경우, 결과 배열의 길이는 가장 긴 입력 배열의 길이를 가지며, 누락된 요소는 `undefined`로 채워져요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function zip<T>(arr1: T[]): [T][];
@@ -17,23 +14,23 @@ function zip<T, U, V, W>(arr1: T[], arr2: U[], arr3: V[], arr4: W[]): [T, U, V, 
 function zip<T>(...arrs: T[][]): T[][];
 ```
 
-### Parameters 
+### 파라미터
 
-- `...arrs` (`T[][]`): The arrays to zip together.
+- `...arrs` (`T[][]`): 함께 결합할 배열들이에요.
 
-### Returns
+### 반환 값
 
-(`T[][]`): A new array of tuples containing the corresponding elements from the input arrays.
+(`T[][]`): 입력 배열의 요소들을 포함하는 튜플로 이루어진 새로운 배열이에요.
 
-## Examples
+## 예시
 
 ```typescript
 const arr1 = [1, 2, 3];
 const arr2 = ['a', 'b', 'c'];
 const result = zip(arr1, arr2);
-// result will be [[1, 'a'], [2, 'b'], [3, 'c']]
+// result는 [[1, 'a'], [2, 'b'], [3, 'c']]가 돼요.
 
 const arr3 = [true, false];
 const result2 = zip(arr1, arr2, arr3);
-// result2 will be [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
+// result2는 [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]가 돼요.
 ```

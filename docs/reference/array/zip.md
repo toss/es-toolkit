@@ -2,10 +2,10 @@
 
 Combines multiple arrays into a single array of tuples.
 
-This function takes multiple arrays and returns a new array where each element is a tuple 
-containing the corresponding elements from the input arrays. If the input arrays are of 
-different lengths, the resulting array will have the length of the longest input array, 
-with undefined values for missing elements.
+This function takes multiple arrays and returns a new array where each element is a tuple
+containing the corresponding elements from the input arrays. If the input arrays are of
+different lengths, the resulting array will have the length of the longest input array,
+with `undefined` values for missing elements.
 
 ## Signature
 
@@ -17,7 +17,7 @@ function zip<T, U, V, W>(arr1: T[], arr2: U[], arr3: V[], arr4: W[]): [T, U, V, 
 function zip<T>(...arrs: T[][]): T[][];
 ```
 
-### Parameters 
+### Parameters
 
 - `...arrs` (`T[][]`): The arrays to zip together.
 
