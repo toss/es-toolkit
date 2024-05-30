@@ -21,5 +21,5 @@ function shuffle<T>(arr: T[]): T[];
 ```typescript
 const array = [1, 2, 3, 4, 5];
 const shuffledArray = shuffle(array);
-// shuffledArray는 배열의 요소들이 무작위로 섞인 새로운 배열이 될 거예요, 예: [3, 1, 4, 5, 2]
+// shuffledArray는 배열의 요소들이 무작위로 섞인 새로운 배열인 [3, 1, 4, 5, 2]이 되어요.
 ```
