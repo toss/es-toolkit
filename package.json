@@ -7,13 +7,34 @@
   ],
   "packageManager": "yarn@4.2.2",
   "exports": {
-    ".": "./src/index.ts",
-    "./array": "./src/array/index.ts",
-    "./function": "./src/function/index.ts",
-    "./math": "./src/math/index.ts",
-    "./object": "./src/object/index.ts",
-    "./predicate": "./src/predicate/index.ts",
-    "./promise": "./src/promise/index.ts",
+    ".": {
+      "import": "./esm/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./array": {
+      "import": "./esm/array/index.mjs",
+      "require": "./dist/array/index.js"
+    },
+    "./function": {
+      "import": "./esm/function/index.mjs",
+      "require": "./dist/function/index.js"
+    },
+    "./math": {
+      "import": "./esm/math/index.mjs",
+      "require": "./dist/math/index.js"
+    },
+    "./object": {
+      "import": "./esm/object/index.mjs",
+      "require": "./dist/object/index.js"
+    },
+    "./predicate": {
+      "import": "./esm/predicate/index.mjs",
+      "require": "./dist/predicate/index.js"
+    },
+    "./promise": {
+      "import": "./esm/promise/index.mjs",
+      "require": "./dist/promise/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -21,38 +42,7 @@
     "esm/**/*"
   ],
   "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "import": "./esm/index.mjs",
-        "require": "./dist/index.js"
-      },
-      "./array": {
-        "import": "./esm/array/index.mjs",
-        "require": "./dist/array/index.js"
-      },
-      "./function": {
-        "import": "./esm/function/index.mjs",
-        "require": "./dist/function/index.js"
-      },
-      "./math": {
-        "import": "./esm/math/index.mjs",
-        "require": "./dist/math/index.js"
-      },
-      "./object": {
-        "import": "./esm/object/index.mjs",
-        "require": "./dist/object/index.js"
-      },
-      "./predicate": {
-        "import": "./esm/predicate/index.mjs",
-        "require": "./dist/predicate/index.js"
-      },
-      "./promise": {
-        "import": "./esm/promise/index.mjs",
-        "require": "./dist/promise/index.js"
-      },
-      "./package.json": "./package.json"
-    }
+    "access": "public"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",
