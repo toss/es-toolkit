@@ -25,31 +25,38 @@
     "exports": {
       ".": {
         "import": "./esm/index.mjs",
-        "require": "./dist/index.js"
+        "require": "./dist/index.js",
+        "types": "./dist/index.d.ts"
       },
       "./array": {
         "import": "./esm/array/index.mjs",
-        "require": "./dist/array/index.js"
+        "require": "./dist/array/index.js",
+        "types": "./dist/array/index.d.ts"
       },
       "./function": {
         "import": "./esm/function/index.mjs",
-        "require": "./dist/function/index.js"
+        "require": "./dist/function/index.js",
+        "types": "./dist/function/index.d.ts"
       },
       "./math": {
         "import": "./esm/math/index.mjs",
-        "require": "./dist/math/index.js"
+        "require": "./dist/math/index.js",
+        "types": "./dist/math/index.d.ts"
       },
       "./object": {
         "import": "./esm/object/index.mjs",
-        "require": "./dist/object/index.js"
+        "require": "./dist/object/index.js",
+        "types": "./dist/object/index.d.ts"
       },
       "./predicate": {
         "import": "./esm/predicate/index.mjs",
-        "require": "./dist/predicate/index.js"
+        "require": "./dist/predicate/index.js",
+        "types": "./dist/predicate/index.d.ts"
       },
       "./promise": {
         "import": "./esm/promise/index.mjs",
-        "require": "./dist/promise/index.js"
+        "require": "./dist/promise/index.js",
+        "types": "./dist/promise/index.d.ts"
       },
       "./package.json": "./package.json"
     }
