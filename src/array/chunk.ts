@@ -33,7 +33,7 @@ export function chunk<T>(arr: T[], size: number): T[][] {
     const start = index * size;
     const end = start + size;
     
-    result[index] = arr.slice( start, end);
+    result[index] = arr.slice(start, end);
   }
 
   return result;
