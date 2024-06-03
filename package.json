@@ -18,45 +18,39 @@
   },
   "files": [
     "dist/**/*",
-    "esm/**/*"
+    "esm/**/*",
+    "*.d.ts"
   ],
   "publishConfig": {
     "access": "public",
     "exports": {
       ".": {
-        "import": "./esm/index.mjs",
-        "require": "./dist/index.js",
-        "types": "./dist/index.d.ts"
+        "import": "./esm/index.js",
+        "require": "./dist/index.js"
       },
       "./array": {
-        "import": "./esm/array/index.mjs",
-        "require": "./dist/array/index.js",
-        "types": "./dist/array/index.d.ts"
+        "import": "./esm/array/index.js",
+        "require": "./dist/array/index.js"
       },
       "./function": {
-        "import": "./esm/function/index.mjs",
-        "require": "./dist/function/index.js",
-        "types": "./dist/function/index.d.ts"
+        "import": "./esm/function/index.js",
+        "require": "./dist/function/index.js"
       },
       "./math": {
-        "import": "./esm/math/index.mjs",
-        "require": "./dist/math/index.js",
-        "types": "./dist/math/index.d.ts"
+        "import": "./esm/math/index.js",
+        "require": "./dist/math/index.js"
       },
       "./object": {
-        "import": "./esm/object/index.mjs",
-        "require": "./dist/object/index.js",
-        "types": "./dist/object/index.d.ts"
+        "import": "./esm/object/index.js",
+        "require": "./dist/object/index.js"
       },
       "./predicate": {
-        "import": "./esm/predicate/index.mjs",
-        "require": "./dist/predicate/index.js",
-        "types": "./dist/predicate/index.d.ts"
+        "import": "./esm/predicate/index.js",
+        "require": "./dist/predicate/index.js"
       },
       "./promise": {
-        "import": "./esm/promise/index.mjs",
-        "require": "./dist/promise/index.js",
-        "types": "./dist/promise/index.d.ts"
+        "import": "./esm/promise/index.js",
+        "require": "./dist/promise/index.js"
       },
       "./package.json": "./package.json"
     }
@@ -88,7 +82,7 @@
   "sideEffects": false,
   "scripts": {
     "prepack": "yarn build",
-    "build": "rm -rf dist esm && tsc -p tsconfig.json --declaration --emitDeclarationOnly --declarationDir dist && rollup -c rollup.config.js",
+    "build": "rm -rf dist esm && tsc -p tsconfig.json --declaration --emitDeclarationOnly --declarationDir dist && tsc -p tsconfig.json --declaration --emitDeclarationOnly --declarationDir esm && rollup -c rollup.config.js && ./.scripts/postbuild.sh",
     "test": "vitest run --coverage --typecheck"
   }
 }

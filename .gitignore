@@ -16,3 +16,5 @@ dist
 esm
 .junit
 out
+*.d.ts
+*.tgz

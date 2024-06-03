@@ -1842,7 +1842,7 @@ __metadata:
     tty-table: "npm:^4.1.5"
   bin:
     changeset: bin.js
-  checksum: 10c0/0fca2a81b41dd07a955a60dfa6c9ec9e8b336dc564f39f3e570185ad946dff317de79249808a0f60fa5226990a498fcebc0b09cfe14d17ccfb17259c8e684caf
+  checksum: 10c0/d7a6bc37831a77458a315dc1ba5d471793f55f74c21542776abffab006b934dfed64212dcc8b58267af62726d5641820cc52b66fc0eaa8baa09aef666bfd0c11
   languageName: node
   linkType: hard
 
