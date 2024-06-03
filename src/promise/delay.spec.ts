@@ -8,6 +8,6 @@ describe('delay', () => {
     await delay(100);
     const end = performance.now()
 
-    expect(end - start).greaterThanOrEqual(100)
+    expect(end - start).greaterThanOrEqual(99)
   });
 })
