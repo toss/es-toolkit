@@ -18,36 +18,46 @@
   },
   "files": [
     "dist/**/*",
-    "esm/**/*"
+    "esm/**/*",
+    "*.d.ts"
   ],
   "publishConfig": {
     "access": "public",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
       ".": {
+        "types": "./dist/index.d.ts",
         "import": "./esm/index.mjs",
         "require": "./dist/index.js"
       },
       "./array": {
+        "types": "./dist/array/index.d.ts",
         "import": "./esm/array/index.mjs",
         "require": "./dist/array/index.js"
       },
       "./function": {
+        "types": "./dist/function/index.d.ts",
         "import": "./esm/function/index.mjs",
         "require": "./dist/function/index.js"
       },
       "./math": {
+        "types": "./dist/math/index.d.ts",
         "import": "./esm/math/index.mjs",
         "require": "./dist/math/index.js"
       },
       "./object": {
+        "types": "./dist/object/index.d.ts",
         "import": "./esm/object/index.mjs",
         "require": "./dist/object/index.js"
       },
       "./predicate": {
+        "types": "./dist/predicate/index.d.ts",
         "import": "./esm/predicate/index.mjs",
         "require": "./dist/predicate/index.js"
       },
       "./promise": {
+        "types": "./dist/promise/index.d.ts",
         "import": "./esm/promise/index.mjs",
         "require": "./dist/promise/index.js"
       },
@@ -81,7 +91,7 @@
   "sideEffects": false,
   "scripts": {
     "prepack": "yarn build",
-    "build": "rm -rf dist esm && tsc -p tsconfig.json --declaration --emitDeclarationOnly --declarationDir dist && rollup -c rollup.config.js",
+    "build": "rm -rf dist esm && tsc -p tsconfig.json --declaration --emitDeclarationOnly --declarationDir dist && rollup -c rollup.config.js && ./.scripts/postbuild.sh",
     "test": "vitest run --coverage --typecheck"
   }
 }
