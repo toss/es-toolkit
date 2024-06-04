@@ -81,4 +81,17 @@ describe('debounce', () => {
 
     expect(() => debouncedFunc.cancel()).not.toThrow();
   });
+
+  it('should call the function with correct arguments', async () => {
+    const func = vi.fn();
+    const debounceMs = 50;
+    const debouncedFunc = debounce(func, debounceMs);
+
+    debouncedFunc('test', 123);
+
+    await delay(debounceMs * 2);
+
+    expect(func).toHaveBeenCalledTimes(1);
+    expect(func).toHaveBeenCalledWith('test', 123);
+  });
 });

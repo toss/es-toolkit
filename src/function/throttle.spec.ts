@@ -16,17 +16,28 @@ describe('throttle', () => {
 
   it('should execute the function immediately if not called within the wait time', async () => {
     const func = vi.fn();
-    const debounceMs = 50;
-    const throttledFunc = throttle(func, debounceMs);
+    const throttleMs = 50;
+    const throttledFunc = throttle(func, throttleMs);
 
     throttledFunc();
-    await delay(debounceMs / 2);
+    await delay(throttleMs / 2);
     throttledFunc();
 
     expect(func).toHaveBeenCalledTimes(1);
 
-    await delay(debounceMs / 2 + 1);
+    await delay(throttleMs / 2 + 1);
     throttledFunc();
     expect(func).toHaveBeenCalledTimes(2);
+  });
+
+  it('should call the function with correct arguments', async () => {
+    const func = vi.fn();
+    const throttleMs = 50;
+    const throttledFunc = throttle(func, throttleMs);
+
+    throttledFunc('test', 123);
+
+    expect(func).toHaveBeenCalledTimes(1);
+    expect(func).toHaveBeenCalledWith('test', 123);
   });
 });
