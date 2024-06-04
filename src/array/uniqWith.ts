@@ -1,5 +1,3 @@
-import { uniq } from "./uniq";
-
 /**
  * The `uniqWith` function takes an array as its first argument and a 'comparator' function as the second.
  *
