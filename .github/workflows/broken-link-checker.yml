@@ -14,8 +14,8 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          cache: "yarn"
-          cache-dependency-path: "yarn.lock"
-          node-version-file: ".nvmrc"
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+          node-version-file: '.nvmrc'
       - run: yarn install
       - run: yarn blc ${{ github.event.inputs.url }} --ro

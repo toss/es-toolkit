@@ -1,9 +1,9 @@
 /**
  * Combines multiple arrays into a single array of tuples.
- * 
- * This function takes multiple arrays and returns a new array where each element is a tuple 
- * containing the corresponding elements from the input arrays. If the input arrays are of 
- * different lengths, the resulting array will have the length of the longest input array, 
+ *
+ * This function takes multiple arrays and returns a new array where each element is a tuple
+ * containing the corresponding elements from the input arrays. If the input arrays are of
+ * different lengths, the resulting array will have the length of the longest input array,
  * with undefined values for missing elements.
  *
  * @param {...T[][]} arrs - The arrays to zip together.

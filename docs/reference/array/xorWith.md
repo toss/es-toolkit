@@ -1,7 +1,7 @@
 # xorWith
 
-Computes the symmetric difference between two arrays using a custom equality function. 
-The symmetric difference is the set of elements which are in either of the arrays, 
+Computes the symmetric difference between two arrays using a custom equality function.
+The symmetric difference is the set of elements which are in either of the arrays,
 but not in their intersection.
 
 ## Signature
@@ -10,7 +10,7 @@ but not in their intersection.
 function xorWith<T>(arr1: T[], arr2: T[], areElementsEqual: (item1: T, item2: T) => boolean): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `arr1` (`T[]`): The first array.
 - `arr2` (`T[]`): The second array.

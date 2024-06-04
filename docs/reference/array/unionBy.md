@@ -5,10 +5,10 @@ Creates an array of unique values, in order, from all given arrays using a provi
 ## Signature
 
 ```typescript
-function unionBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[]
+function unionBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `arr1` (`T[]`): The first array.
 - `arr2` (`U[]`): The second array.

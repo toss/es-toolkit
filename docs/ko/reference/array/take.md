@@ -4,14 +4,13 @@
 
 만약 count가 arr의 길이보다 크면, 전체 배열을 반환해요.
 
-
 ## 인터페이스
 
 ```typescript
 function take<T>(arr: T[], count: number): T[];
 ```
 
-### 파라미터 
+### 파라미터
 
 - `arr` (`T[]`): 요소를 가져올 배열이에요.
 - `count` (`number`): 가져올 요소의 개수예요.

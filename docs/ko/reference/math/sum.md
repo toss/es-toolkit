@@ -10,7 +10,7 @@
 function sum(nums: number[]): number;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `nums` (`number[]`): 합계를 계산할 숫자 배열이에요.
 

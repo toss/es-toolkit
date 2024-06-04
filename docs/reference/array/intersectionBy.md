@@ -2,11 +2,10 @@
 
 Returns the intersection of two arrays based on a mapping function.
 
-This function takes two arrays and a mapping function. It returns a new array containing 
-the elements from the first array that, when mapped using the provided function, have matching 
-mapped elements in the second array. It effectively filters out any elements from the first array 
+This function takes two arrays and a mapping function. It returns a new array containing
+the elements from the first array that, when mapped using the provided function, have matching
+mapped elements in the second array. It effectively filters out any elements from the first array
 that do not have corresponding mapped values in the second array.
-
 
 ## Signature
 
@@ -14,7 +13,7 @@ that do not have corresponding mapped values in the second array.
 function intersectionBy<T, U>(firstArr: T[], secondArr: T[], mapper: (item: T) => U): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `firstArr` (`T[]`): The first array to compare.
 - `secondArr` (`T[]`): The second array to compare.
@@ -23,7 +22,6 @@ function intersectionBy<T, U>(firstArr: T[], secondArr: T[], mapper: (item: T) =
 ### Returns
 
 (`T[]`) A new array containing the elements from the first array that have corresponding mapped values in the second array.
-
 
 ## Examples
 

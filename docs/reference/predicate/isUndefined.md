@@ -2,7 +2,7 @@
 
 Checks if the given value is undefined.
 
-This function tests whether the provided value is strictly equal to `undefined`. 
+This function tests whether the provided value is strictly equal to `undefined`.
 It returns `true` if the value is `undefined`, and `false` otherwise.
 
 This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `undefined`.
@@ -13,7 +13,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 function isUndefined(x: unknown): x is undefined;
 ```
 
-### Parameters 
+### Parameters
 
 - `x` (`unknown`): The value to test if it is undefined.
 

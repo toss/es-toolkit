@@ -2,14 +2,13 @@
 
 `mapper` 함수가 반환하는 값을 기준으로, 두 배열의 합집합을 반환해요.
 
-이 함수는 파라미터로 두 개의 배열과 `mapper` 함수를 받아요. 
+이 함수는 파라미터로 두 개의 배열과 `mapper` 함수를 받아요.
 `mapper` 함수로 두 배열의 요소들을 변환했을 때, 두 배열에 모두 포함되는 요소는 제거돼요.
-
 
 ## 인터페이스
 
 ```typescript
-function unionBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[]
+function unionBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[];
 ```
 
 ### 파라미터

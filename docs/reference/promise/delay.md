@@ -2,7 +2,7 @@
 
 Delays the execution of code for a specified number of milliseconds.
 
-This function returns a Promise that resolves after the specified delay, allowing you to use it 
+This function returns a Promise that resolves after the specified delay, allowing you to use it
 with async/await to pause execution.
 
 ## Signature
@@ -11,7 +11,7 @@ with async/await to pause execution.
 function delay(ms: number): Promise<void>;
 ```
 
-### Parameters 
+### Parameters
 
 - `ms` (`number`): The number of milliseconds to delay.
 

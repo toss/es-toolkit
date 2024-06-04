@@ -2,7 +2,7 @@
 
 Removes a specified number of elements from the beginning of an array and returns the rest.
 
-This function takes an array and a number, and returns a new array with the specified number 
+This function takes an array and a number, and returns a new array with the specified number
 of elements removed from the start.
 
 ## Signature

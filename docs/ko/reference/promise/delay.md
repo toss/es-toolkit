@@ -10,7 +10,7 @@
 function delay(ms: number): Promise<void>;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `ms` (`number`): 코드 실행을 지연시킬 밀리세컨드.
 

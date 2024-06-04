@@ -1,4 +1,4 @@
-import { uniqWith } from "./uniqWith";
+import { uniqWith } from './uniqWith';
 
 /**
  * The `uniqBy` function takes an array as its first argument and a 'converter' function as the second. It maps the array elements using the converter function, then removes any duplicates.

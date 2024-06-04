@@ -1,8 +1,8 @@
-import { describe, expect, it } from "vitest";
-import { unionWith } from "./unionWith";
+import { describe, expect, it } from 'vitest';
+import { unionWith } from './unionWith';
 
-describe("unionWith", () => {
-  it("should work with a `comparator`", () => {
+describe('unionWith', () => {
+  it('should work with a `comparator`', () => {
     expect(
       unionWith(
         [

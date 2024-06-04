@@ -2,17 +2,16 @@
 
 Removes elements from the beginning of an array until the predicate returns false.
 
-This function iterates over an array and drops elements from the start until the provided 
+This function iterates over an array and drops elements from the start until the provided
 predicate function returns false. It then returns a new array with the remaining elements.
-
 
 ## Signature
 
 ```typescript
-function dropWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[]
+function dropWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `arr` (`T[]`): The array from which to drop elements.
 - `canContinueDropping` (`(item: T) => boolean`): A predicate function that determines whether to continue dropping elements. The function is called with each element, and dropping continues as long as it returns true.

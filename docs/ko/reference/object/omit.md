@@ -10,7 +10,7 @@
 function omit<T, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `obj` (`T`): 키를 생략할 객체예요.
 - `keys` (`K[]`): 객체에서 생략할 키들의 배열이에요.

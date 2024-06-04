@@ -12,7 +12,6 @@ es-toolkit은 높은 성능과 작은 번들 사이즈, 강력한 타입을 자�
 - es-toolkit은 TypeScript 타입이 내장되어 있고, 직관적이고 정확한 타입을 추구해요. [isNotNil](https://es-toolkit.slash.page/ko/reference/predicate/isNotNil.html) 같은 사용하기 편리한 유틸리티 함수도 제공해요.
 - es-toolkit은 100% 테스트 커버리지를 유지하면서, 높은 안정성을 자랑해요.
 
-
 ## 기여하기
 
 커뮤니티에 있는 모든 분들에게 기여를 환영해요. 아래에 작성되어 있는 기여 가이드를 확인하세요.

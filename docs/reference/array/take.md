@@ -4,14 +4,13 @@ Returns a new array containing the first `count` elements from the input array `
 
 If `count` is greater than the length of `arr`, the entire array is returned.
 
-
 ## Signature
 
 ```typescript
 function take<T>(arr: T[], count: number): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `arr` (`T[]`): The array to take elements from.
 - `count` (`number`): The number of elements to take.

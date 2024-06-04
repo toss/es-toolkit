@@ -14,10 +14,10 @@
  *
  * // Will log 'Function executed' immediately
  * throttledFunction();
- * 
+ *
  * // Will not log anything as it is within the throttle time
  * throttledFunction();
- * 
+ *
  * // After 1 second
  * setTimeout(() => {
  *   throttledFunction(); // Will log 'Function executed'
@@ -33,7 +33,7 @@ export function throttle(func: () => void, throttleMs: number) {
       lastCallTime = now;
       func();
     }
-  }
+  };
 
   return throttledFunction;
 }

@@ -14,7 +14,7 @@
  *
  * // Will log 'Function executed' after 1 second if not called again in that time
  * debouncedFunction();
- * 
+ *
  * // Will not log anything as the previous call is canceled
  * debouncedFunction.cancel();
  */
@@ -25,8 +25,7 @@ export function debounce(func: () => void, debounceMs: number): { (): void; canc
     if (timeoutId != null) {
       clearTimeout(timeoutId);
     }
-    
-    
+
     timeoutId = setTimeout(() => {
       func();
     }, debounceMs);
@@ -36,7 +35,7 @@ export function debounce(func: () => void, debounceMs: number): { (): void; canc
     if (timeoutId != null) {
       clearTimeout(timeoutId);
     }
-  }  
+  };
 
   return debounced;
 }

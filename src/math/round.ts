@@ -1,7 +1,7 @@
 /**
  * Rounds a number to a specified precision.
- * 
- * This function takes a number and an optional precision value, and returns the number rounded 
+ *
+ * This function takes a number and an optional precision value, and returns the number rounded
  * to the specified number of decimal places.
  *
  * @param {number} value - The number to round.

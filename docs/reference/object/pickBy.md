@@ -2,16 +2,19 @@
 
 Creates a new object composed of the properties that satisfy the predicate function.
 
-This function takes an object and a predicate function, and returns a new object that 
+This function takes an object and a predicate function, and returns a new object that
 includes only the properties for which the predicate function returns true.
 
 ## Signature
 
 ```typescript
-function pickBy<T extends Record<string, any>>(obj: T, shouldPick: (value: T[keyof T], key: string) => boolean): Partial<T>;
+function pickBy<T extends Record<string, any>>(
+  obj: T,
+  shouldPick: (value: T[keyof T], key: string) => boolean
+): Partial<T>;
 ```
 
-### Parameters 
+### Parameters
 
 - `obj` (`T`): The object to pick properties from.
 - `shouldPick` (`(value: T[keyof T], key: string) => boolean`): A predicate function that determines whether a property should be picked. It takes the property's key and value as arguments and returns `true` if the property should be picked, and `false` otherwise.

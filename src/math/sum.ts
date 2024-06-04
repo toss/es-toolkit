@@ -1,6 +1,6 @@
 /**
  * Calculates the sum of an array of numbers.
- * 
+ *
  * This function takes an array of numbers and returns the sum of all the elements in the array.
  *
  * @param {number[]} nums - An array of numbers to be summed.

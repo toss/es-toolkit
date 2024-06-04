@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { takeRightWhile } from "./takeRightWhile"
+import { describe, expect, it } from 'vitest';
+import { takeRightWhile } from './takeRightWhile';
 
 describe('takeRightWhile', () => {
   it('returns elements from the end while the predicate returns true', () => {

@@ -3,9 +3,9 @@ name: Release
 on:
   push:
     branches:
-      - "*"
+      - '*'
     tags:
-      - "v*.*.*"
+      - 'v*.*.*'
 
 jobs:
   release:
@@ -20,9 +20,9 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          cache: "yarn"
-          cache-dependency-path: "yarn.lock"
-          node-version-file: ".nvmrc"
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+          node-version-file: '.nvmrc'
       - if: github.ref_type == 'branch'
         run: |
           jq \
@@ -41,7 +41,7 @@ jobs:
           heading-title-text: version ${{ github.ref_name }}
           ignore-case: true
           omit-heading: true
-      - run: "cat ${{ steps.extract-changelog.outputs.output-file }}"
+      - run: 'cat ${{ steps.extract-changelog.outputs.output-file }}'
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')

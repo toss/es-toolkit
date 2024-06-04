@@ -2,7 +2,7 @@
 
 Creates a new object with specified keys omitted.
 
-This function takes an object and an array of keys, and returns a new object that 
+This function takes an object and an array of keys, and returns a new object that
 excludes the properties corresponding to the specified keys.
 
 ## Signature
@@ -11,7 +11,7 @@ excludes the properties corresponding to the specified keys.
 function omit<T, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
 ```
 
-### Parameters 
+### Parameters
 
 - `obj` (`T`): The object to omit keys from.
 - `keys` (`K[]`): An array of keys to be omitted from the object.

@@ -10,7 +10,7 @@ Note that we value performance, simplicity of implementation, and detailed docum
 
 ### 1.1 Performance
 
-All functions es-toolkit provides should be more performant than or similar with that of alternative libraries provide. 
+All functions es-toolkit provides should be more performant than or similar with that of alternative libraries provide.
 
 We measure the performance of our library every time our code is edited. We are using [vitest's benchmark feature](https://vitest.dev/api/#bench). For our benchmark code, please refer to our [benchmark directory](https://github.com/toss/es-toolkit/tree/main/benchmarks).
 
@@ -18,13 +18,13 @@ When a new functionality is added, a benchmark code should be added. Please add 
 
 ### 1.2 Simplicity
 
-We value implementation and interface simplicity over a variety of features for performance, code readability, and easy maintenance. Our functions will not provide complex options to suit every usecase. 
+We value implementation and interface simplicity over a variety of features for performance, code readability, and easy maintenance. Our functions will not provide complex options to suit every usecase.
 
 In this manner, instead of having complex options of making full use of overloading, etc, to support edge cases, we aim to provide the most simplest interface and implementation for the most common 85% usecases.
 
 ### 1.3 Documentation
 
-All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features. 
+All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
 
 We use English as our primary language, but we aim to support Korean documents in our best effort. If you have difficulties writing Korean documents, please let our contributors know so that we can provide the corresponding Korean documents for you.
 
