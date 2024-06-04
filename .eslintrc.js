@@ -28,6 +28,7 @@ module.exports = {
     curly: ['error', 'all'],
     eqeqeq: ['error', 'always', { null: 'ignore' }],
 
+    '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

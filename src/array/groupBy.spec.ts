@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { groupBy } from './groupBy';
 
 describe('groupBy', () => {
@@ -27,7 +27,7 @@ describe('groupBy', () => {
   });
 
   it('should handle an empty array', () => {
-    const array: { category: string; name: string }[] = [];
+    const array: Array<{ category: string; name: string }> = [];
 
     const result = groupBy(array, item => item.category);
 

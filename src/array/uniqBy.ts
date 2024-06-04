@@ -1,4 +1,3 @@
-import { uniq } from './uniq';
 import { uniqWith } from './uniqWith';
 
 /**

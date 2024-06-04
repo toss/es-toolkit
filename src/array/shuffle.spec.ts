@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { sample } from './sample';
 import { shuffle } from './shuffle';
 
 describe('shuffle', () => {

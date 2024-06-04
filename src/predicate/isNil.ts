@@ -18,5 +18,5 @@
  * const result3 = isNil(value3); // false
  */
 export function isNil(x: unknown): x is null | undefined {
-  return x == null || x == undefined;
+  return x === null || x === undefined;
 }
