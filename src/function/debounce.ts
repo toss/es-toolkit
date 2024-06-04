@@ -3,7 +3,7 @@
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
  * method to cancel any pending execution.
  *
- * @param {T} func - The function to debounce. T extends (...args: any[]) => void.
+ * @param {F extends (...args: any[]) => void} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
  * @returns {{ (): void; cancel: () => void }} A new debounced function with a `cancel` method.
  *
