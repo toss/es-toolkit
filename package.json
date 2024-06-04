@@ -17,7 +17,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "*.d.ts"
   ],
   "publishConfig": {
     "access": "public",
@@ -124,7 +125,7 @@
   "sideEffects": false,
   "scripts": {
     "prepack": "yarn build",
-    "build": "tsup",
+    "build": "tsup && ./.scripts/postbuild.sh",
     "test": "vitest run --coverage --typecheck"
   }
 }
