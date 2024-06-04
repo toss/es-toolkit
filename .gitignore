@@ -13,7 +13,6 @@
 node_modules
 coverage
 dist
-esm
 .junit
 out
 *.d.ts
