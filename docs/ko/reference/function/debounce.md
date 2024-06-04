@@ -7,17 +7,17 @@ debounce된 함수는 또한 대기 중인 실행을 취소하는 `cancel` 메�
 ## 인터페이스
 
 ```typescript
-function debounce(func: () => void, debounceMs: number): { (): void; cancel: () => void };
+function debounce<F extends (...args: any[]) => void>(func: F, debounceMs: number): F & { cancel: () => void };
 ```
 
 ### 파라미터
 
-- `func` (`() => void`): debounce된 함수를 만들 함수.
+- `func` (`F`): debounce된 함수를 만들 함수.
 - `debounceMs`(`number`): debounce로 지연시킬 밀리초.
 
 ### 결괏값
 
-(`{ (): void; cancel: () => void }`): `cancel` 메서드를 가지고 있는 debounce된 함수.
+(`F & { cancel: () => void }`): `cancel` 메서드를 가지고 있는 debounce된 함수.
 
 ## 예시
 

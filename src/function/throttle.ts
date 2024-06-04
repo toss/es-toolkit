@@ -3,9 +3,9 @@
  * per every `throttleMs` milliseconds. Subsequent calls to the throttled function
  * within the wait time will not trigger the execution of the original function.
  *
- * @param {() => void} func - The function to throttle.
+ * @param {F} func - The function to throttle.
  * @param {number} throttleMs - The number of milliseconds to throttle executions to.
- * @returns {() => void} A new throttled function.
+ * @returns {F} A new throttled function that accepts the same parameters as the original function.
  *
  * @example
  * const throttledFunction = throttle(() => {
@@ -23,17 +23,17 @@
  *   throttledFunction(); // Will log 'Function executed'
  * }, 1000);
  */
-export function throttle(func: () => void, throttleMs: number) {
+export function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number) {
   let lastCallTime: number | null;
 
-  const throttledFunction = function () {
+  const throttledFunction = function (...args: Parameters<F>) {
     const now = Date.now();
 
     if (lastCallTime == null || now - lastCallTime >= throttleMs) {
       lastCallTime = now;
-      func();
+      func(...args);
     }
-  };
+  } as F;
 
   return throttledFunction;
 }

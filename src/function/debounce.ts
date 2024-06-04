@@ -3,9 +3,9 @@
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
  * method to cancel any pending execution.
  *
- * @param {() => void} func - The function to debounce.
+ * @param {F} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
- * @returns {{ (): void; cancel: () => void }} A new debounced function with a `cancel` method.
+ * @returns {F & { cancel: () => void }} A new debounced function with a `cancel` method.
  *
  * @example
  * const debouncedFunction = debounce(() => {
@@ -18,18 +18,18 @@
  * // Will not log anything as the previous call is canceled
  * debouncedFunction.cancel();
  */
-export function debounce(func: () => void, debounceMs: number): { (): void; cancel: () => void } {
+export function debounce<F extends (...args: any[]) => void>(func: F, debounceMs: number): F & { cancel: () => void } {
   let timeoutId: number | NodeJS.Timeout | null = null;
 
-  const debounced = function () {
+  const debounced = function (...args: Parameters<F>) {
     if (timeoutId != null) {
       clearTimeout(timeoutId);
     }
 
     timeoutId = setTimeout(() => {
-      func();
+      func(...args);
     }, debounceMs);
-  };
+  } as F & { cancel: () => void };
 
   debounced.cancel = function () {
     if (timeoutId != null) {
