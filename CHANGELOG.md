@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.1.0
+
+Released on June 5th, 2024.
+
+- Support passing arguments to throttled and debounced functions. (https://github.com/toss/es-toolkit/pull/26)
+
 ## Version v1.0.4
 
 Released on June 4th, 2024.
