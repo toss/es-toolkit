@@ -7,10 +7,13 @@
 ## 인터페이스
 
 ```typescript
-function pickBy<T extends Record<string, any>>(obj: T, shouldPick: (value: T[keyof T], key: string) => boolean): Partial<T>;
+function pickBy<T extends Record<string, any>>(
+  obj: T,
+  shouldPick: (value: T[keyof T], key: string) => boolean
+): Partial<T>;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `obj` (`T`): 프로퍼티를 선택할 객체예요.
 - `shouldPick` (`(value: T[keyof T], key: string) => boolean`): 프로퍼티를 선택할지를 결정하는 조건 함수예요. 이 함수는 프로퍼티의 키와 값을 인수로 받아, 프로퍼티를 선택해야 하면 true, 그렇지 않으면 false를 반환해요.

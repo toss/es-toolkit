@@ -1,13 +1,13 @@
 /**
  * Groups the elements of an array based on a provided key-generating function.
- * 
- * This function takes an array and a function that generates a key from each element. It returns 
- * an object where the keys are the generated keys and the values are arrays of elements that share 
+ *
+ * This function takes an array and a function that generates a key from each element. It returns
+ * an object where the keys are the generated keys and the values are arrays of elements that share
  * the same key.
  *
  * @param {T[]} arr - The array to group.
  * @param {(item: T) => K} getKeyFromItem - A function that generates a key from an element.
- * @returns {Record<K, T[]>} An object where each key is associated with an array of elements that 
+ * @returns {Record<K, T[]>} An object where each key is associated with an array of elements that
  * share that key.
  *
  * @example

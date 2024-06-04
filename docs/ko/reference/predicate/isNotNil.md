@@ -12,7 +12,7 @@ TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어
 function isNotNil<T>(x: T | null | undefined): x is T;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `x` (`T | null | undefined`): 값null이나 undefined가 아님을 확인할 값.
 

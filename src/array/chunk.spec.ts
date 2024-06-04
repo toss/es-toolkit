@@ -7,10 +7,18 @@ describe('chunk', () => {
   });
 
   it('should throw if the size is not an integer of is less than 1', () => {
-    expect(() => chunk([1, 2, 3], 0)).toThrowErrorMatchingInlineSnapshot(`[Error: Size must be an integer greater than zero.]`);
-    expect(() => chunk([1, 2, 3], -1)).toThrowErrorMatchingInlineSnapshot(`[Error: Size must be an integer greater than zero.]`)
-    expect(() => chunk([1, 2, 3], 0.5)).toThrowErrorMatchingInlineSnapshot(`[Error: Size must be an integer greater than zero.]`)
-    expect(() => chunk([1, 2, 3], Math.PI)).toThrowErrorMatchingInlineSnapshot(`[Error: Size must be an integer greater than zero.]`)
+    expect(() => chunk([1, 2, 3], 0)).toThrowErrorMatchingInlineSnapshot(
+      `[Error: Size must be an integer greater than zero.]`
+    );
+    expect(() => chunk([1, 2, 3], -1)).toThrowErrorMatchingInlineSnapshot(
+      `[Error: Size must be an integer greater than zero.]`
+    );
+    expect(() => chunk([1, 2, 3], 0.5)).toThrowErrorMatchingInlineSnapshot(
+      `[Error: Size must be an integer greater than zero.]`
+    );
+    expect(() => chunk([1, 2, 3], Math.PI)).toThrowErrorMatchingInlineSnapshot(
+      `[Error: Size must be an integer greater than zero.]`
+    );
   });
 
   it('should evenly divide all elements into chunks of the specified size when the total length is a multiple of the size', () => {

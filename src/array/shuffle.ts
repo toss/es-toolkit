@@ -1,6 +1,6 @@
 /**
  * Randomizes the order of elements in an array using the Fisher-Yates algorithm.
- * 
+ *
  * This function takes an array and returns a new array with its elements shuffled in a random order.
  *
  * @param {T[]} arr - The array to shuffle.
@@ -17,7 +17,7 @@ export function shuffle<T>(arr: T[]): T[] {
    */
   for (let i = arr.length - 1; i >= 1; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    
+
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 

@@ -1,12 +1,10 @@
-About es-toolkit
-===============
+# About es-toolkit
 
-es-toolkit is a modern JavaScript utility library that offers a collection of powerful functions for everyday use. 
+es-toolkit is a modern JavaScript utility library that offers a collection of powerful functions for everyday use.
 
 Compared to alternatives like lodash, es-toolkit provides a [significantly smaller bundle size](./bundle-size.md) (up to 97% less) and [2-3 times faster runtime performance](./performance.md). This is achieved through a modern implementation that leverages the latest JavaScript features.
 
 es-toolkit comes with built-in TypeScript types and has been rigorously tested, ensuring 100% test coverage for maximum reliability.
-
 
 ## Features
 
@@ -23,4 +21,4 @@ Here are some of the features es-toolkit offers:
 
 Please refer to the following links for more information about this project.
 
- -  [GitHub](https://github.com/toss/es-toolkit)
+- [GitHub](https://github.com/toss/es-toolkit)

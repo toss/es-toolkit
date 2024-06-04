@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { xorBy } from "./xorBy"
+import { describe, expect, it } from 'vitest';
+import { xorBy } from './xorBy';
 
 describe('xorBy', () => {
   it('computes the symmetric difference between two arrays using a custom mapping function', () => {

@@ -23,7 +23,7 @@ function debounce<F extends (...args: any[]) => void>(func: F, debounceMs: numbe
 
 ```typescript
 const debouncedFunction = debounce(() => {
-  console.log("실행됨");
+  console.log('실행됨');
 }, 1000);
 
 // 1초 안에 다시 호출되지 않으면, '실행됨'을 로깅해요

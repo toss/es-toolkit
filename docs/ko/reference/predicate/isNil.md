@@ -1,4 +1,4 @@
-# isNil 
+# isNil
 
 주어진 값이 null이나 undefined인지 확인해요.
 
@@ -9,9 +9,8 @@ TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어
 ## 인터페이스
 
 ```typescript
-function isNil(x: unknown): x is null | undefined
+function isNil(x: unknown): x is null | undefined;
 ```
-
 
 ## 예시
 

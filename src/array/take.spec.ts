@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { take } from "./take"
+import { describe, expect, it } from 'vitest';
+import { take } from './take';
 
 describe('take', () => {
   it('returns the first n elements from the array', () => {

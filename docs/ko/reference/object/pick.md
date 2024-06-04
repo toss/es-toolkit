@@ -10,7 +10,7 @@
 function pick<T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `obj` (`T`): 키를 선택할 객체예요.
 - `keys` (`K[]`): 객체에서 선택할 키들의 배열이에요.

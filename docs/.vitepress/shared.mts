@@ -3,7 +3,7 @@ import path from 'path';
 import { defineConfig } from 'vitepress';
 import { search as koSearch } from './ko.mts';
 
-const require = createRequire(import.meta.url)
+const require = createRequire(import.meta.url);
 
 export const shared = defineConfig({
   title: 'es-toolkit',
@@ -58,25 +58,27 @@ export const shared = defineConfig({
       options: {
         locales: {
           ...koSearch,
-        }
-      }
+        },
+      },
     },
 
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/toss/es-toolkit' }
-    ],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/toss/es-toolkit' }],
   },
 
   vite: {
     resolve: {
       alias: {
-        'vue': path.dirname(require.resolve('vue/package.json', {
-          paths: [require.resolve('vitepress')],
-        })),
-        'vue/server-renderer': path.dirname(require.resolve('vue/server-renderer', {
-          paths: [require.resolve('vitepress')],
-        })),
-      }
-    }
+        vue: path.dirname(
+          require.resolve('vue/package.json', {
+            paths: [require.resolve('vitepress')],
+          })
+        ),
+        'vue/server-renderer': path.dirname(
+          require.resolve('vue/server-renderer', {
+            paths: [require.resolve('vitepress')],
+          })
+        ),
+      },
+    },
   },
-})
+});

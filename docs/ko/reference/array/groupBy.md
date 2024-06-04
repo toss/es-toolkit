@@ -11,7 +11,7 @@
 function groupBy<T, K extends string>(arr: T[], getKeyFromItem: (item: T) => K): Record<K, T[]>;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `arr` (`T[]`): 요소를 분류할 배열.
 - `getKeyFromItem` (`(item: T) => K`): 요소에서 키를 생성하는 함수.
@@ -26,7 +26,7 @@ function groupBy<T, K extends string>(arr: T[], getKeyFromItem: (item: T) => K):
 const array = [
   { category: 'fruit', name: 'apple' },
   { category: 'fruit', name: 'banana' },
-  { category: 'vegetable', name: 'carrot' }
+  { category: 'vegetable', name: 'carrot' },
 ];
 const result = groupBy(array, item => item.category);
 // 결괏값:

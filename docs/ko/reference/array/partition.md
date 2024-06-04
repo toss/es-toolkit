@@ -12,7 +12,7 @@
 function partition<T>(arr: T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]];
 ```
 
-### 파라미터 
+### 파라미터
 
 - `arr` (`T[]`): 2개로 나눌 배열.
 - `isInTruthy` (`(value: T) => boolean`): 배열의 요소가 첫 번째 배열에 포함될지, 두 번째 배열에 포함될지 결정하는 함수. `true`를 반환하면 첫 번째 배열에, `false`를 반환하면 두 번째 배열에 포함돼요.

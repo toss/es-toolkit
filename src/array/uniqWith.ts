@@ -9,14 +9,11 @@
  * // [1, 2, 3, 5, 7]
  * ```
  */
-export function uniqWith<T>(
-  arr: T[],
-  areItemsEqual: (item1: T, item2: T) => boolean
-): T[] {
+export function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[] {
   const result: T[] = [];
 
   for (const item of arr) {
-    const isUniq = result.every((v) => !areItemsEqual(v, item));
+    const isUniq = result.every(v => !areItemsEqual(v, item));
 
     if (isUniq) {
       result.push(item);

@@ -9,11 +9,11 @@ describe('groupBy', () => {
       { category: 'fruit', name: 'banana' },
       { category: 'vegetable', name: 'carrot' },
       { category: 'fruit', name: 'pear' },
-      { category: 'vegetable', name: 'broccoli' }
+      { category: 'vegetable', name: 'broccoli' },
     ];
-    
+
     groupByToolkit(array, item => item.category);
-  })
+  });
 
   bench('lodash', () => {
     const array = [
@@ -21,9 +21,9 @@ describe('groupBy', () => {
       { category: 'fruit', name: 'banana' },
       { category: 'vegetable', name: 'carrot' },
       { category: 'fruit', name: 'pear' },
-      { category: 'vegetable', name: 'broccoli' }
+      { category: 'vegetable', name: 'broccoli' },
     ];
-    
+
     groupByLodash(array, item => item.category);
-  })
+  });
 });

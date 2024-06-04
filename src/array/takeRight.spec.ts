@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { takeRight } from "./takeRight"
+import { describe, expect, it } from 'vitest';
+import { takeRight } from './takeRight';
 
 describe('takeRight', () => {
   it('returns the last n elements from the array', () => {

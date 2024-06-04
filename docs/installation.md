@@ -7,14 +7,13 @@ next:
   text: Impact on Bundle Size
   link: ./bundle-size
 ---
-Installation
-============
+
+# Installation
 
 es-toolkit is available on [npm](https://npmjs.com/package/es-toolkit) for Node.js, Deno, and Bun.
 
+## Node.js
 
-Node.js
----
 es-toolkit supports Node.js 18 or later. Install es-toolkit with the following command:
 
 ```sh
@@ -23,9 +22,7 @@ yarn add es-toolkit
 pnpm install es-toolkit
 ```
 
-
-Deno
-----
+## Deno
 
 es-toolkit is also available on npm for Deno. Use es-toolkit with the `npm:` specifier:
 
@@ -33,9 +30,7 @@ es-toolkit is also available on npm for Deno. Use es-toolkit with the `npm:` spe
 import { chunk } from 'npm:es-toolkit@1.0.0';
 ```
 
-
-Bun
----
+## Bun
 
 es-toolkit is also available on Bun. You can install it via the following command:
 

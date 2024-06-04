@@ -1,4 +1,4 @@
-import { defineConfig, type DefaultTheme } from 'vitepress'
+import { defineConfig, type DefaultTheme } from 'vitepress';
 
 export const ko = defineConfig({
   lang: 'ko',
@@ -11,22 +11,22 @@ export const ko = defineConfig({
 
     editLink: {
       pattern: 'https://github.com/toss/es-toolkit/edit/main/docs/:path',
-      text: 'GitHub에서 수정하기'
+      text: 'GitHub에서 수정하기',
     },
 
     footer: {
       message: 'MIT 라이선스에 따라 배포됩니다.',
-      copyright: `Copyright © ${new Date().getFullYear()} Viva Republica, Inc.`
-    }
-  }
-})
+      copyright: `Copyright © ${new Date().getFullYear()} Viva Republica, Inc.`,
+    },
+  },
+});
 
 function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '홈', link: '/ko' },
     { text: '소개', link: '/ko/intro' },
     { text: '레퍼런스', link: '/ko/reference/array/chunk' },
-  ]
+  ];
 }
 
 function sidebar(): DefaultTheme.Sidebar {
@@ -38,7 +38,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: '설치', link: '/ko/installation' },
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
-      ]
+      ],
     },
     {
       text: '레퍼런스',
@@ -74,7 +74,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorWith', link: '/ko/reference/array/xorWith' },
             { text: 'zip', link: '/ko/reference/array/zip' },
             { text: 'zipWith', link: '/ko/reference/array/zipWith' },
-          ]
+          ],
         },
         {
           text: '함수',
@@ -82,7 +82,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'debounce', link: '/ko/reference/function/debounce' },
             { text: 'throttle', link: '/ko/reference/function/throttle' },
             { text: 'once', link: '/ko/reference/function/once' },
-          ]
+          ],
         },
         {
           text: '숫자',
@@ -90,7 +90,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'clamp', link: '/ko/reference/math/clamp' },
             { text: 'round', link: '/ko/reference/math/round' },
             { text: 'sum', link: '/ko/reference/math/sum' },
-          ]
+          ],
         },
         {
           text: '객체',
@@ -99,7 +99,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
-          ]
+          ],
         },
         {
           text: '타입 가드',
@@ -108,21 +108,18 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
             { text: 'isUndefined', link: '/ko/reference/predicate/isUndefined' },
-          ]
+          ],
         },
         {
           text: 'Promise',
-          items: [
-            { text: 'delay', link: '/ko/reference/promise/delay' },
-          ]
-        }
-      ]
-    }
-  ]
+          items: [{ text: 'delay', link: '/ko/reference/promise/delay' }],
+        },
+      ],
+    },
+  ];
 }
 
-
-export const search: DefaultTheme.LocalSearchOptions["locales"] = {
+export const search: DefaultTheme.LocalSearchOptions['locales'] = {
   ko: {
     translations: {
       button: {
@@ -143,7 +140,7 @@ export const search: DefaultTheme.LocalSearchOptions["locales"] = {
         },
         noResultsText: '검색 결과를 찾지 못했어요.',
         resetButtonTitle: '모두 지우기',
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};

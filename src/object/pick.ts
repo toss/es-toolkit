@@ -1,7 +1,7 @@
 /**
  * Creates a new object composed of the picked object properties.
  *
- * This function takes an object and an array of keys, and returns a new object that 
+ * This function takes an object and an array of keys, and returns a new object that
  * includes only the properties corresponding to the specified keys.
  *
  * @param {T} obj - The object to pick keys from.

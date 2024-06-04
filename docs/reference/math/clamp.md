@@ -12,7 +12,7 @@ function clamp(value: number, maximum: number): number;
 function clamp(value: number, minimum: number, maximum: number): number;
 ```
 
-### Parameters 
+### Parameters
 
 - `value` (`number`): The number to clamp.
 - `minimum` (`number`): The minimum bound to clamp the number.

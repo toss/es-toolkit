@@ -1,12 +1,12 @@
 /**
  * Creates a new object composed of the properties that satisfy the predicate function.
  *
- * This function takes an object and a predicate function, and returns a new object that 
+ * This function takes an object and a predicate function, and returns a new object that
  * includes only the properties for which the predicate function returns true.
  *
  * @param {T} obj - The object to pick properties from.
- * @param {(value: T[keyof T], key: string) => boolean} shouldPick - A predicate function that determines 
- * whether a property should be picked. It takes the property's key and value as arguments and returns `true` 
+ * @param {(value: T[keyof T], key: string) => boolean} shouldPick - A predicate function that determines
+ * whether a property should be picked. It takes the property's key and value as arguments and returns `true`
  * if the property should be picked, and `false` otherwise.
  * @returns {Partial<T>} A new object with the properties that satisfy the predicate function.
  *
@@ -16,7 +16,10 @@
  * const result = pickBy(obj, shouldPick);
  * // result will be { b: 'pick' }
  */
-export function pickBy<T extends Record<string, any>>(obj: T, shouldPick: (value: T[keyof T], key: string) => boolean): Partial<T> {
+export function pickBy<T extends Record<string, any>>(
+  obj: T,
+  shouldPick: (value: T[keyof T], key: string) => boolean
+): Partial<T> {
   const result: Partial<T> = {};
 
   for (const [key, value] of Object.entries(obj)) {

@@ -10,7 +10,7 @@
 function uniq<T>(arr: T[]): T[];
 ```
 
-### 파라미터 
+### 파라미터
 
 - `arr` (`T[]`): 요소들의 중복을 제거할 배열이에요.
 
@@ -24,3 +24,4 @@ function uniq<T>(arr: T[]): T[];
 const array = [1, 2, 2, 3, 4, 4, 5];
 const result = uniq(array);
 // result는 [1, 2, 3, 4, 5]가 될 거예요.
+```

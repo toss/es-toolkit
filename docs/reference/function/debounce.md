@@ -10,7 +10,7 @@ method to cancel any pending execution.
 function debounce<F extends (...args: any[]) => void>(func: F, debounceMs: number): F & { cancel: () => void };
 ```
 
-### Parameters 
+### Parameters
 
 - `func` (`F`): The function to debounce.
 - `debounceMs`(`number`): The number of milliseconds to delay.
@@ -18,7 +18,6 @@ function debounce<F extends (...args: any[]) => void>(func: F, debounceMs: numbe
 ### Returns
 
 (`F & { cancel: () => void }`): A new debounced function with a `cancel` method.
-
 
 ## Examples
 

@@ -2,10 +2,9 @@
 
 Returns the intersection of two arrays.
 
-This function takes two arrays and returns a new array containing the elements that are 
-present in both arrays. It effectively filters out any elements from the first array that 
+This function takes two arrays and returns a new array containing the elements that are
+present in both arrays. It effectively filters out any elements from the first array that
 are not found in the second array.
-
 
 ## Signature
 
@@ -13,7 +12,7 @@ are not found in the second array.
 function intersection<T>(firstArr: T[], secondArr: T[]): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `firstArr` (`T[]`): The first array to compare.
 - `secondArr` (`T[]`): The second array to compare.
@@ -21,7 +20,6 @@ function intersection<T>(firstArr: T[], secondArr: T[]): T[];
 ### Returns
 
 (`T[]`) A new array containing the elements that are present in both arrays.
-
 
 ## Examples
 
