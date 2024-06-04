@@ -33,7 +33,7 @@ export function throttle<F extends (...args: any[]) => void>(func: F, throttleMs
       lastCallTime = now;
       func(...args);
     }
-  }
+  } as F;
 
   return throttledFunction;
 }
