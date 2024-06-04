@@ -30,7 +30,7 @@ export function debounce<F extends (...args: any[]) => void>(func: F, debounceMs
     timeoutId = setTimeout(() => {
       func(...args);
     }, debounceMs);
-  };
+  } as F & { cancel: () => void };
 
   debounced.cancel = function () {
     if (timeoutId != null) {
