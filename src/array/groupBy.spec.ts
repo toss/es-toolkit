@@ -27,7 +27,7 @@ describe('groupBy', () => {
   });
 
   it('should handle an empty array', () => {
-    const array: { category: string, name: string }[] = [];
+    const array: Array<{ category: string, name: string }> = [];
     
     const result = groupBy(array, item => item.category);
     

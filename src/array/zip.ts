@@ -19,10 +19,10 @@
  * const result2 = zip(arr1, arr2, arr3);
  * // result2 will be [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
  */
-export function zip<T>(arr1: T[]): [T][];
-export function zip<T, U>(arr1: T[], arr2: U[]): [T, U][];
-export function zip<T, U, V>(arr1: T[], arr2: U[], arr3: V[]): [T, U, V][];
-export function zip<T, U, V, W>(arr1: T[], arr2: U[], arr3: V[], arr4: W[]): [T, U, V, W][];
+export function zip<T>(arr1: T[]): Array<[T]>;
+export function zip<T, U>(arr1: T[], arr2: U[]): Array<[T, U]>;
+export function zip<T, U, V>(arr1: T[], arr2: U[], arr3: V[]): Array<[T, U, V]>;
+export function zip<T, U, V, W>(arr1: T[], arr2: U[], arr3: V[], arr4: W[]): Array<[T, U, V, W]>;
 export function zip<T>(...arrs: T[][]): T[][] {
   const result: T[][] = [];
 
