@@ -6,18 +6,18 @@
 ## 인터페이스
 
 ```typescript
-function throttle(func: () => void, throttleMs: number): () => void;
+function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): F;
 ```
 
 
 ### 파라미터
 
-- `func` (`() => void`): throttle할 함수.
+- `func` (`F`): throttle할 함수.
 - `throttleMs`(`number`): 실행을 throttle할 밀리초.
 
 ### 반환 값
 
-(`() => void`): 새로운 throttle된 함수.
+(`F`): 새로운 throttle된 함수.
 
 
 ## 예시
