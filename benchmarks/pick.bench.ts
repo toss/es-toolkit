@@ -4,10 +4,10 @@ import { pick as pickLodash } from 'lodash';
 
 describe('pick', () => {
   bench('es-toolkit', () => {
-    pickToolkit({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar'])
-  })
+    pickToolkit({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']);
+  });
 
   bench('lodash', () => {
-    pickLodash({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar'])
-  })
+    pickLodash({ foo: 1, bar: 2, baz: 3 }, ['foo', 'bar']);
+  });
 });

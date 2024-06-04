@@ -1,8 +1,8 @@
-import { describe, expect, it } from "vitest";
-import { uniqWith } from "./uniqWith";
+import { describe, expect, it } from 'vitest';
+import { uniqWith } from './uniqWith';
 
-describe("uniqWith", () => {
-  it("should work with a `comparator`", () => {
+describe('uniqWith', () => {
+  it('should work with a `comparator`', () => {
     expect(
       uniqWith(
         [

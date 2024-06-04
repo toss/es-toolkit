@@ -92,6 +92,7 @@
   "scripts": {
     "prepack": "yarn build",
     "build": "rm -rf dist esm && tsc -p tsconfig.json --declaration --emitDeclarationOnly --declarationDir dist && rollup -c rollup.config.js && ./.scripts/postbuild.sh",
-    "test": "vitest run --coverage --typecheck"
+    "test": "vitest run --coverage --typecheck",
+    "format": "prettier --write ."
   }
 }

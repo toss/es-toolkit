@@ -6,7 +6,6 @@ This function takes an input array and divides it into multiple smaller arrays,
 each of a specified length. If the input array cannot be evenly divided,
 the final sub-array will contain the remaining elements.
 
-
 ## Signature
 
 ```typescript

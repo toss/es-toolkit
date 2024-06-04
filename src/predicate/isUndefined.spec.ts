@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { isUndefined } from "./isUndefined"
+import { describe, expect, it } from 'vitest';
+import { isUndefined } from './isUndefined';
 
 describe('isUndefined', () => {
   it('returns true if the value is undefined', () => {
@@ -10,7 +10,7 @@ describe('isUndefined', () => {
     expect(isUndefined(null)).toBe(false);
     expect(isUndefined('')).toBe(false);
     expect(isUndefined(123)).toBe(false);
-  })
+  });
 
   it('can be used with TypeScript as a type predicate', () => {
     const arr = [1, 2, null, 4, undefined];
@@ -19,5 +19,5 @@ describe('isUndefined', () => {
 
     // Here the type of result should be `null[]`.
     expect(result).toStrictEqual([undefined]);
-  })
-})
+  });
+});

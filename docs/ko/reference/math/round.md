@@ -10,7 +10,7 @@
 function round(value: number, precision?: number): number;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `value` (`number`): 반올림할 숫자에요.
 - `precision` (`number`, optional): 반올림할 소수점 자릿수에요. 기본값은 0이에요.

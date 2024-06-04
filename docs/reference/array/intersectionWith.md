@@ -2,9 +2,9 @@
 
 Returns the intersection of two arrays based on a custom equality function.
 
-This function takes two arrays and a custom equality function. It returns a new array containing 
-the elements from the first array that have matching elements in the second array, as determined 
-by the custom equality function. It effectively filters out any elements from the first array that 
+This function takes two arrays and a custom equality function. It returns a new array containing
+the elements from the first array that have matching elements in the second array, as determined
+by the custom equality function. It effectively filters out any elements from the first array that
 do not have corresponding matches in the second array according to the equality function.
 
 ## Signature
@@ -13,7 +13,7 @@ do not have corresponding matches in the second array according to the equality 
 function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `firstArr` (`T[]`): The first array to compare.
 - `secondArr` (`T[]`): The second array to compare.
@@ -22,7 +22,6 @@ function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T
 ### Returns
 
 (`T[]`) A new array containing the elements from the first array that have corresponding matches in the second array according to the custom equality function.
-
 
 ## Examples
 

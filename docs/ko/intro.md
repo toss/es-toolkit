@@ -1,5 +1,4 @@
-es-toolkit 소개
-===============
+# es-toolkit 소개
 
 es-toolkit은 일상적인 개발에서 사용하는 다양한 함수들을 모은 현대적인 JavaScript 유틸리티 라이브러리예요.
 
@@ -7,7 +6,6 @@ es-toolkit은 일상적인 개발에서 사용하는 다양한 함수들을 모�
 를 제공하며, [2~3배 빠른 속도로](./performance.md) 동작합니다. 최신 JavaScript API를 활용해서 현대적으로 구현한 덕분이죠.
 
 es-toolkit은 견고한 TypeScript 타입을 내장하여 제공하며, 신뢰성을 높일 수 있도록 100% 테스트 커버리지를 목표로 하고 있습니다.
-
 
 ## 제공하는 기능
 
@@ -24,4 +22,4 @@ es-toolkit이 제공하는 기능 목록은 다음과 같습니다.
 
 이 프로젝트에 대해서 더 많은 정보를 얻기 위해서는 아래 링크를 참고하세요.
 
- -  [GitHub](https://github.com/toss/es-toolkit)
+- [GitHub](https://github.com/toss/es-toolkit)

@@ -10,7 +10,7 @@
  *   console.log('Initialized!');
  *   return true;
  * });
- * 
+ *
  * initialize(); // Logs: 'Initialized!' and returns true
  * initialize(); // Returns true without logging
  */

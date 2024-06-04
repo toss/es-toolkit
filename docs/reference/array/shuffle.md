@@ -10,7 +10,7 @@ This function takes an array and returns a new array with its elements shuffled 
 function shuffle<T>(arr: T[]): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `arr` (`T[]`): The array to shuffle.
 

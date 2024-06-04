@@ -12,7 +12,7 @@
 function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[];
 ```
 
-### 파라미터 
+### 파라미터
 
 - `firstArr` (`T[]`): 비교할 첫 번째 배열.
 - `secondArr` (`T[]`): 비교할 두 번째 배열.
@@ -21,7 +21,6 @@ function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T
 ### 반환 값
 
 (`T[]`): 커스텀 일치 함수의 반환 값을 기준으로, 두 배열에 모두 포함된 요소들을 포함하는 새로운 배열.
-
 
 ## 예시
 

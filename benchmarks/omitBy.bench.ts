@@ -7,11 +7,11 @@ describe('omitBy', () => {
     const obj = { a: 1, b: 'omit', c: 3 };
     const shouldOmit = (value: number | string, key: string) => typeof value === 'string';
     omitByToolkit(obj, shouldOmit);
-  })
+  });
 
   bench('lodash', () => {
     const obj = { a: 1, b: 'omit', c: 3 };
     const shouldOmit = (value: number | string, key: string) => typeof value === 'string';
     omitByLodash(obj, shouldOmit);
-  })
+  });
 });

@@ -1,7 +1,7 @@
 # xorBy
 
-Computes the symmetric difference between two arrays using a custom mapping function. 
-The symmetric difference is the set of elements which are in either of the arrays, 
+Computes the symmetric difference between two arrays using a custom mapping function.
+The symmetric difference is the set of elements which are in either of the arrays,
 but not in their intersection, determined by the result of the mapping function.
 
 ## Signature
@@ -10,7 +10,7 @@ but not in their intersection, determined by the result of the mapping function.
 function xorBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[];
 ```
 
-### Parameters 
+### Parameters
 
 - `arr1` (`T[]`): The first array.
 - `arr2` (`T[]`): The second array.

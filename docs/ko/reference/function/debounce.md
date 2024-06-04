@@ -1,7 +1,7 @@
 # debounce
 
-제공된 함수를 호출하는 것을 지연시키는 debounce된 함수를 생성해요. 
-debounce된 함수는 마지막으로 호출된 후, `debounceMs` 밀리초가 경과해야 호출돼요. 
+제공된 함수를 호출하는 것을 지연시키는 debounce된 함수를 생성해요.
+debounce된 함수는 마지막으로 호출된 후, `debounceMs` 밀리초가 경과해야 호출돼요.
 debounce된 함수는 또한 대기 중인 실행을 취소하는 `cancel` 메서드를 가지고 있어요.
 
 ## 인터페이스
@@ -10,7 +10,7 @@ debounce된 함수는 또한 대기 중인 실행을 취소하는 `cancel` 메�
 function debounce(func: () => void, debounceMs: number): { (): void; cancel: () => void };
 ```
 
-### 파라미터 
+### 파라미터
 
 - `func` (`() => void`): debounce된 함수를 만들 함수.
 - `debounceMs`(`number`): debounce로 지연시킬 밀리초.
@@ -18,7 +18,6 @@ function debounce(func: () => void, debounceMs: number): { (): void; cancel: () 
 ### 결괏값
 
 (`{ (): void; cancel: () => void }`): `cancel` 메서드를 가지고 있는 debounce된 함수.
-
 
 ## 예시
 

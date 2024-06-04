@@ -2,13 +2,11 @@
 
 제공된 함수를 매 `throttleMs` 밀리초마다 최대 한 번만 호출하는 throttle된 함수를 생성해요. 시간 안에 throttle된 함수를 다시 호출해도 원래 함수를 실행하지 않아요.
 
-
 ## 인터페이스
 
 ```typescript
 function throttle(func: () => void, throttleMs: number): () => void;
 ```
-
 
 ### 파라미터
 
@@ -18,7 +16,6 @@ function throttle(func: () => void, throttleMs: number): () => void;
 ### 반환 값
 
 (`() => void`): 새로운 throttle된 함수.
-
 
 ## 예시
 

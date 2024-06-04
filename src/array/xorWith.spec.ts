@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { xorWith } from "./xorWith"
+import { describe, expect, it } from 'vitest';
+import { xorWith } from './xorWith';
 
 describe('xorWith', () => {
   it('computes the symmetric difference between two arrays using a custom equality function', () => {
@@ -12,5 +12,5 @@ describe('xorWith', () => {
     expect(xorWith([1, 2, 3], [1, 2, 3], areNumbersEqual)).toEqual([]);
     expect(xorWith([], [1, 2, 3], areNumbersEqual)).toEqual([1, 2, 3]);
     expect(xorWith([1, 2, 3], [], areNumbersEqual)).toEqual([1, 2, 3]);
-  })
-})
+  });
+});

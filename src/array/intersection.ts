@@ -1,8 +1,8 @@
 /**
  * Returns the intersection of two arrays.
- * 
- * This function takes two arrays and returns a new array containing the elements that are 
- * present in both arrays. It effectively filters out any elements from the first array that 
+ *
+ * This function takes two arrays and returns a new array containing the elements that are
+ * present in both arrays. It effectively filters out any elements from the first array that
  * are not found in the second array.
  *
  * @param {T[]} firstArr - The first array to compare.

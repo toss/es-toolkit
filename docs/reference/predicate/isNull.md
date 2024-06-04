@@ -2,7 +2,7 @@
 
 Checks if the given value is null.
 
-This function tests whether the provided value is strictly equal to `null`. 
+This function tests whether the provided value is strictly equal to `null`.
 It returns `true` if the value is `null`, and `false` otherwise.
 
 This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `null`.
@@ -13,7 +13,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 function isNull(x: unknown): x is null;
 ```
 
-### Parameters 
+### Parameters
 
 - `x` (`unknown`): The value to test if it is null.
 

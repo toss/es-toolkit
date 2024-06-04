@@ -13,7 +13,7 @@ TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어
 function isUndefined(x: unknown): x is undefined;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `x` (`unknown`): undefined인지 확인할 값
 

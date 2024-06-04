@@ -1,7 +1,7 @@
 /**
  * Creates a duplicate-free version of an array.
- * 
- * This function takes an array and returns a new array containing only the unique values 
+ *
+ * This function takes an array and returns a new array containing only the unique values
  * from the original array, preserving the order of first occurrence.
  *
  * @param {T[]} arr - The array to process.

@@ -21,7 +21,9 @@ describe('once', () => {
   });
 
   it('should handle functions with no return value', () => {
-    const func = vi.fn(() => { console.log('Side effect'); });
+    const func = vi.fn(() => {
+      console.log('Side effect');
+    });
     const onceFunc = once(func);
 
     onceFunc();

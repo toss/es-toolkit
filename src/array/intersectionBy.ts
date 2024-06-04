@@ -1,9 +1,9 @@
 /**
  * Returns the intersection of two arrays based on a mapping function.
- * 
- * This function takes two arrays and a mapping function. It returns a new array containing 
- * the elements from the first array that, when mapped using the provided function, have matching 
- * mapped elements in the second array. It effectively filters out any elements from the first array 
+ *
+ * This function takes two arrays and a mapping function. It returns a new array containing
+ * the elements from the first array that, when mapped using the provided function, have matching
+ * mapped elements in the second array. It effectively filters out any elements from the first array
  * that do not have corresponding mapped values in the second array.
  *
  * @param {T[]} firstArr - The first array to compare.
@@ -20,8 +20,8 @@
  */
 export function intersectionBy<T, U>(firstArr: T[], secondArr: T[], mapper: (item: T) => U): T[] {
   const mappedSecondArr = secondArr.map(x => mapper(x));
-  
+
   return firstArr.filter(item => {
     return mappedSecondArr.includes(mapper(item));
-  })
+  });
 }

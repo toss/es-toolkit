@@ -7,11 +7,11 @@ describe('union', () => {
     const array1 = [1, 2, 3];
     const array2 = [3, 4, 5];
     const result = unionToolkit(array1, array2);
-  })
+  });
 
   bench('lodash', () => {
     const array1 = [1, 2, 3];
     const array2 = [3, 4, 5];
     const result = unionLodash(array1, array2);
-  })
+  });
 });
