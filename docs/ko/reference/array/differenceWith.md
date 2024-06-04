@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function differenceWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[]
+function differenceWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[];
 ```
 
 ### 파라미터
@@ -17,8 +17,8 @@ function differenceWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, 
 - `areItemsEqual` (`(x: T, y: T) => boolean`): 두 요소가 동일한지 결정할 함수에요.
 
 ### 반환 값
-(`T[]`) 비교 함수에 따라 첫 번째 배열에는 있지만 두 번째 배열에는 존재하지 않는다고 결정된 요소들이 담긴 새로운 배열이에요.
 
+(`T[]`) 비교 함수에 따라 첫 번째 배열에는 있지만 두 번째 배열에는 존재하지 않는다고 결정된 요소들이 담긴 새로운 배열이에요.
 
 ## 예시
 

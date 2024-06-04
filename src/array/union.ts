@@ -1,9 +1,9 @@
-import { uniq } from "./uniq";
+import { uniq } from './uniq';
 
 /**
  * Creates an array of unique values from all given arrays.
- * 
- * This function takes two arrays, merges them into a single array, and returns a new array 
+ *
+ * This function takes two arrays, merges them into a single array, and returns a new array
  * containing only the unique values from the merged array.
  *
  * @param {T[]} arr1 - The first array to merge and filter for unique values.

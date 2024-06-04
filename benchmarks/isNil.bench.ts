@@ -8,12 +8,12 @@ describe('isNil', () => {
     isNilToolkit(undefined);
     isNilToolkit(123);
     isNilToolkit([1, 2, 3]);
-  })
+  });
 
   bench('lodash', () => {
     isNilLodash(null);
     isNilLodash(undefined);
     isNilLodash(123);
     isNilLodash([1, 2, 3]);
-  })
+  });
 });

@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "es-toolkit"
-  text: "현대적인 JavaScript 유틸리티 라이브러리"
-  # tagline: 
+  name: 'es-toolkit'
+  text: '현대적인 JavaScript 유틸리티 라이브러리'
+  # tagline:
   actions:
     - theme: brand
       text: es-toolkit 알아보기
@@ -29,4 +29,3 @@ features:
   - title: 테스트 커버리지 100%
     details: 모든 함수와 분기에 대해서 꼼꼼하게 테스트가 작성되어 있어요.
 ---
-

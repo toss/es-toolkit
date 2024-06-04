@@ -4,14 +4,13 @@ Creates a throttled function that only invokes the provided function at most onc
 per every `throttleMs` milliseconds. Subsequent calls to the throttled function
 within the wait time will not trigger the execution of the original function.
 
-
 ## Signature
 
 ```typescript
 function throttle(func: () => void, throttleMs: number): () => void;
 ```
 
-### Parameters 
+### Parameters
 
 - `func` (`() => void`): The function to throttle.
 - `throttleMs`(`number`): The number of milliseconds to throttle executions to.
@@ -19,7 +18,6 @@ function throttle(func: () => void, throttleMs: number): () => void;
 ### Returns
 
 (`() => void`): A new throttled function.
-
 
 ## Examples
 

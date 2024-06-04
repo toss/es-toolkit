@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[]
+function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[];
 ```
 
 ### 파라미터

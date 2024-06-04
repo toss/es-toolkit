@@ -12,7 +12,7 @@ describe('debounce', () => {
     debouncedFunc();
     debouncedFunc();
 
-    await delay(debounceMs * 2)
+    await delay(debounceMs * 2);
 
     expect(func).toHaveBeenCalledTimes(1);
   });

@@ -1,7 +1,7 @@
 /**
  * Creates a new object with specified keys omitted.
  *
- * This function takes an object and an array of keys, and returns a new object that 
+ * This function takes an object and an array of keys, and returns a new object that
  * excludes the properties corresponding to the specified keys.
  *
  * @param {T} obj - The object to omit keys from.

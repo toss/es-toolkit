@@ -12,7 +12,6 @@ es-toolkit is a state-of-the-art, high-performance JavaScript utility library wi
 - es-toolkit includes built-in TypeScript support, with straightforward yet robust types. It also provides useful type guards such as [isNotNil](https://es-toolkit.slash.page/reference/predicate/isNotNil.html).
 - es-toolkit is battle-tested with 100% test coverage, ensuring reliability and robustness.
 
-
 ## Contributing
 
 We welcome contribution from everyone in the community. Read below for detailed contribution guide.

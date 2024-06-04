@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "es-toolkit"
-  text: "State-of-the-art JavaScript utility library"
-  # tagline: 
+  name: 'es-toolkit'
+  text: 'State-of-the-art JavaScript utility library'
+  # tagline:
   actions:
     - theme: brand
       text: About es-toolkit
@@ -29,4 +29,3 @@ features:
   - title: Battle-tested
     details: es-toolkit has 100% test coverage, ensuring maximum robustness.
 ---
-

@@ -7,7 +7,6 @@ export default defineConfig({
   ...shared,
   locales: {
     root: { label: 'English', ...en },
-    ko: { label: '한국어', ...ko }
+    ko: { label: '한국어', ...ko },
   },
-})
-
+});

@@ -8,4 +8,4 @@ describe('intersection', () => {
     expect(intersection([1, 2], [3, 4])).toEqual([]);
     expect(intersection([], [1, 2])).toEqual([]);
   });
-})
+});

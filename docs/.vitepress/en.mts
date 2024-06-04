@@ -1,8 +1,9 @@
-import { defineConfig, type DefaultTheme } from 'vitepress'
+import { defineConfig, type DefaultTheme } from 'vitepress';
 
 export const en = defineConfig({
   lang: 'en',
-  description: 'A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.',
+  description:
+    'A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.',
 
   themeConfig: {
     nav: nav(),
@@ -11,22 +12,22 @@ export const en = defineConfig({
 
     editLink: {
       pattern: 'https://github.com/toss/es-toolkit/edit/main/docs/:path',
-      text: 'Edit this page on GitHub'
+      text: 'Edit this page on GitHub',
     },
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: `Copyright © ${new Date().getFullYear()} Viva Republica, Inc.`
-    }
-  }
-})
+      copyright: `Copyright © ${new Date().getFullYear()} Viva Republica, Inc.`,
+    },
+  },
+});
 
 function nav(): DefaultTheme.NavItem[] {
   return [
     { text: 'Home', link: '/' },
     { text: 'Introduction', link: '/intro' },
     { text: 'Reference', link: '/reference/array/chunk' },
-  ]
+  ];
 }
 
 function sidebar(): DefaultTheme.Sidebar {
@@ -38,7 +39,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'Installation', link: '/installation' },
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
-      ]
+      ],
     },
     {
       text: 'Reference',
@@ -74,7 +75,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorWith', link: '/reference/array/xorWith' },
             { text: 'zip', link: '/reference/array/zip' },
             { text: 'zipWith', link: '/reference/array/zipWith' },
-          ]
+          ],
         },
         {
           text: 'Function Utilities',
@@ -82,7 +83,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'debounce', link: '/reference/function/debounce' },
             { text: 'throttle', link: '/reference/function/throttle' },
             { text: 'once', link: '/reference/function/once' },
-          ]
+          ],
         },
         {
           text: 'Math Utilities',
@@ -90,7 +91,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'clamp', link: '/reference/math/clamp' },
             { text: 'round', link: '/reference/math/round' },
             { text: 'sum', link: '/reference/math/sum' },
-          ]
+          ],
         },
         {
           text: 'Object Utilities',
@@ -99,7 +100,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
             { text: 'pickBy', link: '/reference/object/pickBy' },
-          ]
+          ],
         },
         {
           text: 'Predicates',
@@ -108,15 +109,13 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },
             { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
-          ]
+          ],
         },
         {
           text: 'Promise Utilities',
-          items: [
-            { text: 'delay', link: '/reference/promise/delay' },
-          ]
-        }
-      ]
-    }
-  ]
+          items: [{ text: 'delay', link: '/reference/promise/delay' }],
+        },
+      ],
+    },
+  ];
 }

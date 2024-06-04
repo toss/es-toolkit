@@ -12,7 +12,7 @@ function clamp(value: number, maximum: number): number;
 function clamp(value: number, minimum: number, maximum: number): number;
 ```
 
-### 파라미터 
+### 파라미터
 
 - `value` (`number`): 고정할 숫자에요.
 - `minimum` (`number`): 숫자를 고정할 최솟값이에요.
@@ -20,7 +20,7 @@ function clamp(value: number, minimum: number, maximum: number): number;
 
 ### 반환 값
 
-(`number`): 지정된 범위  내에서 고정된 숫자를 반환해요.
+(`number`): 지정된 범위 내에서 고정된 숫자를 반환해요.
 
 ## 예시
 

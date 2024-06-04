@@ -2,10 +2,9 @@
 
 Computes the difference between two arrays.
 
-This function takes two arrays and returns a new array containing the elements 
-that are present in the first array but not in the second array. It effectively 
+This function takes two arrays and returns a new array containing the elements
+that are present in the first array but not in the second array. It effectively
 filters out any elements from the first array that also appear in the second array.
-
 
 ## Signature
 
@@ -18,10 +17,9 @@ function difference<T>(firstArr: T[], secondArr: T[]): T[];
 - `firstArr` (`T[]`): The array from which to derive the difference. This is the primary array from which elements will be compared and filtered.
 - `secondArr` (`T[]`): The array containing elements to be excluded from the first array. Each element in this array will be checked against the first array, and if a match is found, that element will be excluded from the result.
 
-
 ### Returns
 
-(`T[]`) A new array containing the elements that are present in the first array but not 
+(`T[]`) A new array containing the elements that are present in the first array but not
 in the second array.
 
 ## Examples

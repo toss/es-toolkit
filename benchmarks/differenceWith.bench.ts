@@ -5,9 +5,9 @@ import { differenceWith as differenceWithLodash } from 'lodash';
 describe('differenceWith', () => {
   bench('es-toolkit', () => {
     differenceWithToolkit([1.2, 2.3, 3.4], [1.2], (x, y) => Math.floor(x) === Math.floor(y));
-  })
+  });
 
   bench('lodash', () => {
     differenceWithLodash([1.2, 2.3, 3.4], [1.2], (x, y) => Math.floor(x) === Math.floor(y));
-  })
+  });
 });

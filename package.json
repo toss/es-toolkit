@@ -127,6 +127,7 @@
     "prepack": "yarn build",
     "build": "tsup && ./.scripts/postbuild.sh",
     "test": "vitest run --coverage --typecheck",
-    "lint": "eslint ./src --ext .ts"
+    "lint": "eslint ./src --ext .ts",
+    "format": "prettier --write ."
   }
 }

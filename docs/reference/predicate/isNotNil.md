@@ -10,7 +10,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 function isNotNil<T>(x: T | null | undefined): x is T;
 ```
 
-### Parameters 
+### Parameters
 
 - `x` (`T | null | undefined`): The value to test if it is not null nor undefined.
 

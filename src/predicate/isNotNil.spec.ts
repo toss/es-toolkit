@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { isNotNil } from "./isNotNil"
+import { describe, expect, it } from 'vitest';
+import { isNotNil } from './isNotNil';
 
 describe('isNotNil', () => {
   it('returns false if the value is null or undefined', () => {
@@ -10,7 +10,7 @@ describe('isNotNil', () => {
   it('returns true if the value is not null nor undefined', () => {
     expect(isNotNil('')).toBe(true);
     expect(isNotNil(123)).toBe(true);
-  })
+  });
 
   it('can be used with TypeScript as a type predicate', () => {
     const arr1 = [1, 2, null, 4, undefined];
@@ -25,5 +25,5 @@ describe('isNotNil', () => {
     expect(result1).toStrictEqual([1, 2, 4]);
     expect(result2).toStrictEqual([1, 2]);
     expect(result3).toStrictEqual([1, 2, 4]);
-  })
-})
+  });
+});

@@ -2,25 +2,25 @@
 
 Computes the difference between two arrays based on a custom equality function.
 
-This function takes two arrays and a custom comparison function. It returns a new array containing 
-the elements that are present in the first array but not in the second array. The comparison to determine 
+This function takes two arrays and a custom comparison function. It returns a new array containing
+the elements that are present in the first array but not in the second array. The comparison to determine
 if elements are equal is made using the provided custom function.
 
 ## Signature
 
 ```typescript
-function differenceWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[]
+function differenceWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[];
 ```
 
 ### Parameters
 
 - `firstArr` (`T[]`): The array from which to get the difference.
-- `secondArr` (`T[]`) :The array containing elements to exclude from the first array. 
+- `secondArr` (`T[]`) :The array containing elements to exclude from the first array.
 - `areItemsEqual` (`(x: T, y: T) => boolean`): A function to determine if two items are equal.
 
 ### Returns
-(`T[]`) A new array containing the elements from the first array that do not match any elements in the second array according to the custom equality function.
 
+(`T[]`) A new array containing the elements from the first array that do not match any elements in the second array according to the custom equality function.
 
 ## Examples
 

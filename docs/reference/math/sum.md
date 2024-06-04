@@ -10,7 +10,7 @@ This function takes an array of numbers and returns the sum of all the elements 
 function sum(nums: number[]): number;
 ```
 
-### Parameters 
+### Parameters
 
 - `nums` (`number[]`): An array of numbers to be summed.
 

@@ -1,6 +1,6 @@
 /**
  * Returns a random element from an array.
- * 
+ *
  * This function takes an array and returns a single element selected randomly from the array.
  *
  * @param {T[]} arr - The array to sample from.

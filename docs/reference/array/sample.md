@@ -10,7 +10,7 @@ This function takes an array and returns a single element selected randomly from
 function sample<T>(arr: T[]): T;
 ```
 
-### Parameters 
+### Parameters
 
 - `arr` (`T[]`): The array to sample from.
 
