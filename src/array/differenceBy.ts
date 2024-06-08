@@ -24,7 +24,7 @@
  * // result will be [{ id: 1 }, { id: 3 }] since the elements with id 2 are in both arrays and are excluded from the result.
  */
 export function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[] {
-  const mappedSecondSet = new Set(secondArr.map(mapper));
+  const mappedSecondSet = new Set(secondArr.map(item => mapper(item)));
 
   return firstArr.filter(item => {
     return !mappedSecondSet.has(mapper(item));
