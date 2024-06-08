@@ -15,13 +15,13 @@
  * in the second array.
  *
  * @example
- *  * const array1 = [1, 2, 3, 4, 5];
+ * const array1 = [1, 2, 3, 4, 5];
  * const array2 = [2, 4];
  * const result = difference(array1, array2);
  * // result will be [1, 3, 5] since 2 and 4 are in both arrays and are excluded from the result.
  */
 export function difference<T>(firstArr: T[], secondArr: T[]): T[] {
-  return firstArr.filter(item => {
-    return !secondArr.includes(item);
-  });
+  const secondSet = new Set(secondArr);
+
+  return firstArr.filter(item => !secondSet.has(item));
 }
