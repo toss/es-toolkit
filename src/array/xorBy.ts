@@ -12,7 +12,7 @@ import { unionBy } from './unionBy';
  *
  * @param {T[]} arr1 - The first array.
  * @param {T[]} arr2 - The second array.
- * @param {function(item: T): U} mapper - The function to map array elements to comparison values.
+ * @param {(item: T) => U} mapper - The function to map array elements to comparison values.
  * @returns {T[]} An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the values returned by the mapping function.
  *
  * @example

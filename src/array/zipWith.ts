@@ -8,7 +8,7 @@
  * @param {U[]} [arr2] - The second array to zip (optional).
  * @param {V[]} [arr3] - The third array to zip (optional).
  * @param {W[]} [arr4] - The fourth array to zip (optional).
- * @param {function} combine - The combiner function that takes corresponding elements from each array and returns a single value.
+ * @param {(...items: T[]) => R} combine - The combiner function that takes corresponding elements from each array and returns a single value.
  * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  *
  * @example

@@ -3,6 +3,10 @@
  *
  * It evaluates the elements of the array using the comparator function, and if true is returned, it considers those elements as duplicates and removes them.
  *
+ * @param {T[]} arr - The array to process.
+ * @param {(item1: T, item2: T) => boolean} areItemsEqual - The function used to compare the array elements.
+ * @returns {T[]} A new array containing only the unique elements from the original array, based on the values returned by the comparator function.
+ * 
  * @example
  * ```ts
  * uniqWith([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19], (a, b) => Math.abs(a - b) < 1);

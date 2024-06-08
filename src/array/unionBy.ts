@@ -3,7 +3,7 @@
  *
  * @param {T[]} arr1 - The first array.
  * @param {T[]} arr2 - The second array.
- * @param {function(item: T): U} mapper - The function to map array elements to comparison values.
+ * @param {(item: T) => U} mapper - The function to map array elements to comparison values.
  * @returns {T[]} A new array containing the union of unique elements from `arr1` and `arr2`, based on the values returned by the mapping function.
  *
  * @example
