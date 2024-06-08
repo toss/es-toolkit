@@ -7,4 +7,12 @@ describe('shuffle', () => {
 
     expect(shuffle(arr).slice().sort()).toEqual(arr.slice().sort());
   });
+
+  it('does not modify the original array', () => {
+    const arr = [1, 2, 3, 4, 5];
+    const copiedArr = arr.slice();
+
+    shuffle(arr);
+    expect(arr).toEqual(copiedArr);
+  });
 });
