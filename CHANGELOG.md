@@ -1,5 +1,21 @@
 # es-toolkit Changelog
 
+## Version v1.2.0
+
+Released on June 8th, 2024.
+
+### Features
+
+- Added the `noop` function. (https://github.com/toss/es-toolkit/commit/678028dd3d60509b99dfec47aed7f1088140d19d)
+
+### Performance Improvements
+
+- Optimized the `difference` and `differenceBy` functions for better performance with large arrays. (https://github.com/toss/es-toolkit/pull/27, https://github.com/toss/es-toolkit/pull/28)
+
+### Bug fixes
+
+- Fixed `shuffle` to ensure it does not modify the original array. (https://github.com/toss/es-toolkit/pull/29)
+
 ## Version v1.1.0
 
 Released on June 5th, 2024.
