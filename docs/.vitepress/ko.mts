@@ -82,6 +82,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'debounce', link: '/ko/reference/function/debounce' },
             { text: 'throttle', link: '/ko/reference/function/throttle' },
             { text: 'once', link: '/ko/reference/function/once' },
+            { text: 'noop', link: '/ko/reference/function/noop' },
           ],
         },
         {
