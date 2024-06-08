@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { noop } from './path/to/your/noop';
+import { noop } from './noop';
 
 describe('noop', () => {
   it('should be a function', () => {
