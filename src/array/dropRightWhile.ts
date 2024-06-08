@@ -17,7 +17,7 @@ import { dropWhile } from './dropWhile';
  * const result = dropRightWhile(array, x => x > 3);
  * // result will be [1, 2, 3] since elements greater than 3 are dropped from the end.
  */
-export function dropRightWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean) {
+export function dropRightWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[] {
   const reversed = arr.slice().reverse();
   const dropped = dropWhile(reversed, canContinueDropping);
   return dropped.slice().reverse();
