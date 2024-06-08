@@ -9,7 +9,7 @@
  * @returns {T[]} A new array with the specified number of elements removed from the end.
  *
  * @example
- *  * const array = [1, 2, 3, 4, 5];
+ * const array = [1, 2, 3, 4, 5];
  * const result = dropRight(array, 2);
  * // result will be [1, 2, 3] since the last two elements are dropped.
  */

@@ -9,7 +9,7 @@
  * @returns {number} The rounded number.
  *
  * @example
- *  * const result1 = round(1.2345); // result1 will be 1
+ * const result1 = round(1.2345); // result1 will be 1
  * const result2 = round(1.2345, 2); // result2 will be 1.23
  * const result3 = round(1.2345, 3); // result3 will be 1.235
  */

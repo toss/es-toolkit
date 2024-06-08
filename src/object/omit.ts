@@ -9,7 +9,7 @@
  * @returns {Omit<T, K>} A new object with the specified keys omitted.
  *
  * @example
- *  * const obj = { a: 1, b: 2, c: 3 };
+ * const obj = { a: 1, b: 2, c: 3 };
  * const result = omit(obj, ['b', 'c']);
  * // result will be { a: 1 }
  */
