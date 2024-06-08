@@ -17,16 +17,16 @@
  * mapped identity in the second array.
  *
  * @example
- *  * const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+ * const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
  * const array2 = [{ id: 2 }, { id: 4 }];
  * const mapper = item => item.id;
  * const result = differenceBy(array1, array2, mapper);
  * // result will be [{ id: 1 }, { id: 3 }] since the elements with id 2 are in both arrays and are excluded from the result.
  */
 export function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[] {
-  const mappedSecondArr = secondArr.map(item => mapper(item));
+  const mappedSecondSet = new Set(secondArr.map(item => mapper(item)));
 
   return firstArr.filter(item => {
-    return !mappedSecondArr.includes(mapper(item));
+    return !mappedSecondSet.has(mapper(item));
   });
 }
