@@ -10,7 +10,7 @@
  * @returns {x is undefined} true if the value is undefined, false otherwise.
  *
  * @example
- *  * const value1 = undefined;
+ * const value1 = undefined;
  * const value2 = null;
  * const value3 = 42;
  *

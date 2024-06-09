@@ -10,7 +10,7 @@
  * @returns {x is null} True if the value is null, false otherwise.
  *
  * @example
- *  * const value1 = null;
+ * const value1 = null;
  * const value2 = undefined;
  * const value3 = 42;
  *

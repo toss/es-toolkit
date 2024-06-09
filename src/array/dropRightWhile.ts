@@ -7,7 +7,7 @@ import { dropWhile } from './dropWhile';
  * predicate function returns false. It then returns a new array with the remaining elements.
  *
  * @param {T[]} arr - The array from which to drop elements.
- * @param {function(item: T): boolean} canContinueDropping - A predicate function that determines
+ * @param {(item: T) => boolean} canContinueDropping - A predicate function that determines
  * whether to continue dropping elements. The function is called with each element from the end,
  * and dropping continues as long as it returns true.
  * @returns {T[]} A new array with the elements remaining after the predicate returns false.
@@ -17,7 +17,7 @@ import { dropWhile } from './dropWhile';
  * const result = dropRightWhile(array, x => x > 3);
  * // result will be [1, 2, 3] since elements greater than 3 are dropped from the end.
  */
-export function dropRightWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean) {
+export function dropRightWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[] {
   const reversed = arr.slice().reverse();
   const dropped = dropWhile(reversed, canContinueDropping);
   return dropped.slice().reverse();
