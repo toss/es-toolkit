@@ -30,4 +30,13 @@ describe('once', () => {
     onceFunc();
     expect(func).toHaveBeenCalledTimes(1);
   });
+
+  it('should handle functions with arguments', () => {
+    const func = vi.fn((a: number, b: number) => a + b);
+    const onceFunc = once(func);
+
+    expect(onceFunc(1, 2)).toBe(3);
+    expect(onceFunc(1, 2)).toBe(3);
+    expect(func).toHaveBeenCalledTimes(1);
+  });
 });
