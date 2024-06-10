@@ -14,16 +14,16 @@
  * initialize(); // Logs: 'Initialized!' and returns true
  * initialize(); // Returns true without logging
  */
-export function once<F extends () => any>(func: F): F {
+export function once<F extends (...args: any[]) => any>(func: F): F {
   let called = false;
   let cache: ReturnType<F> | undefined;
 
-  return function () {
+  return function (...args: Parameters<F>): ReturnType<F> {
     if (called) {
-      return cache;
+      return cache as ReturnType<F>;
     }
 
-    const result = func();
+    const result = func(...args);
 
     called = true;
     cache = result;
