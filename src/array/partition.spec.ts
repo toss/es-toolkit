@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
 import { partition } from './partition';
 
 describe('partition', () => {
@@ -24,5 +24,16 @@ describe('partition', () => {
         { id: 3, enabled: false },
       ],
     ]);
+  });
+
+  it('should correctly infer the type of a narrow array', () => {
+    const arr = [1, 2, 3, 4, 5] as const;
+    const [evens, odds] = partition(arr, num => num % 2 === 0);
+
+    expect(evens).toEqual([2, 4]);
+    expect(odds).toEqual([1, 3, 5]);
+
+    expectTypeOf(evens).toEqualTypeOf<Array<1 | 2 | 3 | 4 | 5>>();
+    expectTypeOf(odds).toEqualTypeOf<Array<1 | 2 | 3 | 4 | 5>>();
   });
 });
