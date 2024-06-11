@@ -1,0 +1,13 @@
+coverage:
+  status:
+    patch: off
+    project:
+      default:
+        target: 100%
+        threshold: 10%
+
+comment:
+  layout: 'header, reach, diff, flags, components'
+
+ignore:
+  - '**/*.test-d.*'
