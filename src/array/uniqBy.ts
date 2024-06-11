@@ -8,7 +8,7 @@ import { uniqWith } from './uniqWith';
  * @param {T[]} arr - The array to process.
  * @param {(item: T) => U} converter - The function used to convert the array elements.
  * @returns {T[]} A new array containing only the unique elements from the original array, based on the values returned by the converter function.
- * 
+ *
  * @example
  * ```ts
  * uniqBy([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19], Math.floor);
