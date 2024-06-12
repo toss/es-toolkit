@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function pick<T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
+function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
 ```
 
 ### 파라미터
