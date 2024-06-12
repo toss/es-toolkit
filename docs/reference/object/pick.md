@@ -8,7 +8,7 @@ includes only the properties corresponding to the specified keys.
 ## Signature
 
 ```typescript
-function pick<T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
+function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
 ```
 
 ### Parameters
