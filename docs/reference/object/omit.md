@@ -8,7 +8,7 @@ excludes the properties corresponding to the specified keys.
 ## Signature
 
 ```typescript
-function omit<T, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
+function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
 ```
 
 ### Parameters
