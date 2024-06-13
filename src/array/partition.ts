@@ -19,7 +19,7 @@
  * const [even, odd] = partition(array, isEven);
  * // even will be [2, 4], and odd will be [1, 3, 5]
  */
-export function partition<T>(arr: T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]] {
+export function partition<T>(arr: readonly T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]] {
   const truthy: T[] = [];
   const falsy: T[] = [];
 
