@@ -37,7 +37,7 @@ export function debounce<F extends (...args: any[]) => void>(
   let timeoutId: number | NodeJS.Timeout | null = null;
 
   const debounced = function (...args: Parameters<F>) {
-    if (timeoutId != null) {
+    if (timeoutId !== null) {
       clearTimeout(timeoutId);
     }
 
@@ -47,6 +47,7 @@ export function debounce<F extends (...args: any[]) => void>(
 
     timeoutId = setTimeout(() => {
       func(...args);
+      timeoutId = null;
     }, debounceMs);
   } as F & { cancel: () => void };
 
@@ -55,8 +56,9 @@ export function debounce<F extends (...args: any[]) => void>(
   };
 
   debounced.cancel = function () {
-    if (timeoutId != null) {
+    if (timeoutId !== null) {
       clearTimeout(timeoutId);
+      timeoutId = null;
     }
 
     if (abortSignal) {
