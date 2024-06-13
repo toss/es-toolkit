@@ -5,7 +5,7 @@
  * the first array contains elements for which the predicate function returns true, and
  * the second array contains elements for which the predicate function returns false.
  *
- * @param {T[] | readonly T[]} arr - The array to partition.
+ * @param {T[]} arr - The array to partition.
  * @param {(value: T) => boolean} isInTruthy - A predicate function that determines
  * whether an element should be placed in the truthy array. The function is called with each
  * element of the array.
@@ -19,7 +19,7 @@
  * const [even, odd] = partition(array, isEven);
  * // even will be [2, 4], and odd will be [1, 3, 5]
  */
-export function partition<T>(arr: T[] | readonly T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]] {
+export function partition<T>(arr: readonly T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]] {
   const truthy: T[] = [];
   const falsy: T[] = [];
 
