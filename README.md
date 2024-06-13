@@ -2,7 +2,7 @@
 
 # es-toolkit &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/toss/slash/blob/main/LICENSE)
 
-English | [한국어](./README-ko_kr.md)
+English | [한국어](https://github.com/toss/es-toolkit/blob/main/README-ko_kr.md)
 
 es-toolkit is a state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.
 
@@ -16,7 +16,7 @@ es-toolkit is a state-of-the-art, high-performance JavaScript utility library wi
 
 We welcome contribution from everyone in the community. Read below for detailed contribution guide.
 
-[CONTRIBUTING](./.github/CONTRIBUTING.md)
+[CONTRIBUTING](https://github.com/toss/es-toolkit/blob/main/.github/CONTRIBUTING.md)
 
 ## License
 
