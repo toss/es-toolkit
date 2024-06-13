@@ -1,7 +1,6 @@
 /**
- * The `uniqWith` function takes an array as its first argument and a 'comparator' function as the second.
- *
- * It evaluates the elements of the array using the comparator function, and if true is returned, it considers those elements as duplicates and removes them.
+ * Returns a new array containing only the unique elements from the original array,
+ * based on the values returned by the comparator function.
  *
  * @param {T[]} arr - The array to process.
  * @param {(item1: T, item2: T) => boolean} areItemsEqual - The function used to compare the array elements.

@@ -70,6 +70,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'unionBy', link: '/reference/array/unionBy' },
             { text: 'unionWith', link: '/reference/array/unionWith' },
             { text: 'uniq', link: '/reference/array/uniq' },
+            { text: 'uniqBy', link: '/reference/array/uniqBy' },
+            { text: 'uniqWith', link: '/reference/array/uniqWith' },
             { text: 'xor', link: '/reference/array/xor' },
             { text: 'xorBy', link: '/reference/array/xorBy' },
             { text: 'xorWith', link: '/reference/array/xorWith' },
