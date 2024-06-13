@@ -16,7 +16,7 @@
  * // Returns []
  * takeWhile([1, 2, 3, 4], x => x > 3);
  */
-export function takeWhile<T>(arr: T[], shouldContinueTaking: (element: T) => boolean): T[] {
+export function takeWhile<T>(arr: readonly T[], shouldContinueTaking: (element: T) => boolean): T[] {
   const result: T[] = [];
 
   for (const item of arr) {

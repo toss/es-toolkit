@@ -12,6 +12,6 @@
  * const result = uniq(array);
  * // result will be [1, 2, 3, 4, 5]
  */
-export function uniq<T>(arr: T[]): T[] {
+export function uniq<T>(arr: readonly T[]): T[] {
   return Array.from(new Set(arr));
 }

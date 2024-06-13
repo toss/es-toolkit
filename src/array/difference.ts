@@ -20,7 +20,7 @@
  * const result = difference(array1, array2);
  * // result will be [1, 3, 5] since 2 and 4 are in both arrays and are excluded from the result.
  */
-export function difference<T>(firstArr: T[], secondArr: T[]): T[] {
+export function difference<T>(firstArr: readonly T[], secondArr: T[]): T[] {
   const secondSet = new Set(secondArr);
 
   return firstArr.filter(item => !secondSet.has(item));

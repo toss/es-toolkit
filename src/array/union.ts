@@ -16,6 +16,6 @@ import { uniq } from './uniq';
  * const result = union(array1, array2);
  * // result will be [1, 2, 3, 4, 5]
  */
-export function union<T>(arr1: T[], arr2: T[]): T[] {
+export function union<T>(arr1: readonly T[], arr2: readonly T[]): T[] {
   return uniq(arr1.concat(arr2));
 }

@@ -18,6 +18,6 @@ import { union } from './union';
  * // Returns ['a', 'c']
  * xor(['a', 'b'], ['b', 'c']);
  */
-export function xor<T>(arr1: T[], arr2: T[]): T[] {
+export function xor<T>(arr1: readonly T[], arr2: readonly T[]): T[] {
   return difference(union(arr1, arr2), intersection(arr1, arr2));
 }

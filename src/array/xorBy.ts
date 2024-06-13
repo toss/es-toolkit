@@ -21,7 +21,7 @@ import { unionBy } from './unionBy';
  * xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idMapper);
  * // Returns [{ id: 1 }, { id: 3 }]
  */
-export function xorBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[] {
+export function xorBy<T, U>(arr1: readonly T[], arr2: readonly T[], mapper: (item: T) => U): T[] {
   const union = unionBy(arr1, arr2, mapper);
   const intersection = intersectionBy(arr1, arr2, mapper);
 

@@ -11,7 +11,7 @@
  * const shuffledArray = shuffle(array);
  * // shuffledArray will be a new array with elements of array in random order, e.g., [3, 1, 4, 5, 2]
  */
-export function shuffle<T>(arr: T[]): T[] {
+export function shuffle<T>(arr: readonly T[]): T[] {
   const result = arr.slice();
 
   /**
