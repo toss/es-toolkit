@@ -61,14 +61,10 @@ export function debounce<F extends (...args: any[]) => void>(
       timeoutId = null;
     }
 
-    if (abortSignal) {
-      abortSignal.removeEventListener('abort', onAbort);
-    }
+    abortSignal?.removeEventListener('abort', onAbort);
   };
 
-  if (abortSignal) {
-    abortSignal.addEventListener('abort', onAbort);
-  }
+  abortSignal?.addEventListener('abort', onAbort);
 
   return debounced;
 }
