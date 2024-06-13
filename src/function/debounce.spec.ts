@@ -98,11 +98,12 @@ describe('debounce', () => {
   it('should cancel the debounced function call if aborted via AbortSignal', async () => {
     const func = vi.fn();
     const debounceMs = 50;
-    const abortController = new AbortController();
-    const debouncedFunc = debounce(func, debounceMs, abortController.signal);
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const debouncedFunc = debounce(func, debounceMs, { signal });
 
     debouncedFunc();
-    abortController.abort();
+    controller.abort();
 
     await delay(debounceMs);
 
@@ -112,10 +113,11 @@ describe('debounce', () => {
   it('should not add multiple abort event listeners', async () => {
     const func = vi.fn();
     const debounceMs = 100;
-    const abortController = new AbortController();
-    const addEventListenerSpy = vi.spyOn(abortController.signal, 'addEventListener');
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const addEventListenerSpy = vi.spyOn(signal, 'addEventListener');
 
-    const debouncedFunc = debounce(func, debounceMs, abortController.signal);
+    const debouncedFunc = debounce(func, debounceMs, { signal });
 
     debouncedFunc();
     debouncedFunc();
