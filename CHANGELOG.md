@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.2.1
+
+Released on June 13th, 2024.
+
+- Ensure that the `omit` and `pick` functions only accept plain JavaScript objects as arguments. (https://github.com/toss/es-toolkit/pull/35)
+
 ## Version v1.2.0
 
 Released on June 8th, 2024.
