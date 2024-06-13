@@ -10,7 +10,7 @@
  * @example
  * ```ts
  * uniqWith([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19], (a, b) => Math.abs(a - b) < 1);
- * // [1, 2, 3, 5, 7]
+ * // [1.2, 3.2, 5.7, 7.19]
  * ```
  */
 export function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[] {
