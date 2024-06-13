@@ -13,8 +13,6 @@ describe('uniqWith', () => {
       )
     ).toEqual([{ x: 1, y: 2 }]);
   });
-
-  it('should remove numbers that are within 1 unit of each other', () => {
     expect(uniqWith([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19], (a, b) => Math.abs(a - b) < 1)).toEqual([
       1.2, 3.2, 5.7, 7.19,
     ]);
