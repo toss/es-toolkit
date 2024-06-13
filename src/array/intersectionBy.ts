@@ -19,9 +19,6 @@
  * // result will be [{ id: 2 }] since only this element has a matching id in both arrays.
  */
 export function intersectionBy<T, U>(firstArr: T[], secondArr: T[], mapper: (item: T) => U): T[] {
-  const mappedSecondArr = secondArr.map(x => mapper(x));
-
-  return firstArr.filter(item => {
-    return mappedSecondArr.includes(mapper(item));
-  });
+  const mappedSecondSet = new Set(secondArr.map(mapper));
+  return firstArr.filter(item => mappedSecondSet.has(mapper(item)));
 }
