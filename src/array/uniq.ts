@@ -13,15 +13,5 @@
  * // result will be [1, 2, 3, 4, 5]
  */
 export function uniq<T>(arr: T[]): T[] {
-  const result: T[] = [];
-
-  for (const item of arr) {
-    if (result.includes(item)) {
-      continue;
-    }
-
-    result.push(item);
-  }
-
-  return result;
+  return Array.from(new Set(arr));
 }
