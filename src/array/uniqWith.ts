@@ -13,7 +13,7 @@
  * // [1.2, 3.2, 5.7, 7.19]
  * ```
  */
-export function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[] {
+export function uniqWith<T>(arr: readonly T[], areItemsEqual: (item1: T, item2: T) => boolean): T[] {
   const result: T[] = [];
 
   for (const item of arr) {

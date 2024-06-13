@@ -15,6 +15,6 @@ import { uniqWith } from './uniqWith';
  * // [1.2, 2.1, 3.3, 5.7, 7.19]
  * ```
  */
-export function uniqBy<T, U>(arr: T[], converter: (item: T) => U): T[] {
+export function uniqBy<T, U>(arr: readonly T[], converter: (item: T) => U): T[] {
   return uniqWith(arr, (item1, item2) => converter(item1) === converter(item2));
 }

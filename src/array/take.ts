@@ -20,6 +20,6 @@
  * // Returns [1, 2, 3]
  * take([1, 2, 3], 5);
  */
-export function take<T>(arr: T[], count: number): T[] {
+export function take<T>(arr: readonly T[], count: number): T[] {
   return arr.slice(0, count);
 }

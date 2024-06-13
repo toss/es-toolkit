@@ -13,6 +13,6 @@
  * const result = drop(array, 2);
  * // result will be [3, 4, 5] since the first two elements are dropped.
  */
-export function drop<T>(arr: T[], itemsCount: number): T[] {
+export function drop<T>(arr: readonly T[], itemsCount: number): T[] {
   return arr.slice(itemsCount);
 }
