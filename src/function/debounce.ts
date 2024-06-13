@@ -5,6 +5,7 @@
  *
  * @param {F} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
+ * @param {AbortSignal} abortSignal - An optional AbortSignal to cancel the debounced function.
  * @returns {F & { cancel: () => void }} A new debounced function with a `cancel` method.
  *
  * @example
@@ -17,8 +18,22 @@
  *
  * // Will not log anything as the previous call is canceled
  * debouncedFunction.cancel();
+ *
+ * // With AbortSignal
+ * const controller = new AbortController();
+ * const signal = controller.signal;
+ * const debouncedWithSignal = debounce(() => {
+ *  console.log('Function executed');
+ * }, 1000, signal);
+ *
+ * // Will cancel the debounced function call
+ * controller.abort();
  */
-export function debounce<F extends (...args: any[]) => void>(func: F, debounceMs: number): F & { cancel: () => void } {
+export function debounce<F extends (...args: any[]) => void>(
+  func: F,
+  debounceMs: number,
+  abortSignal?: AbortSignal
+): F & { cancel: () => void } {
   let timeoutId: number | NodeJS.Timeout | null = null;
 
   const debounced = function (...args: Parameters<F>) {
@@ -26,16 +41,32 @@ export function debounce<F extends (...args: any[]) => void>(func: F, debounceMs
       clearTimeout(timeoutId);
     }
 
+    if (abortSignal?.aborted) {
+      return;
+    }
+
     timeoutId = setTimeout(() => {
       func(...args);
     }, debounceMs);
   } as F & { cancel: () => void };
 
+  const onAbort = function () {
+    debounced.cancel();
+  };
+
   debounced.cancel = function () {
     if (timeoutId != null) {
       clearTimeout(timeoutId);
     }
+
+    if (abortSignal) {
+      abortSignal.removeEventListener('abort', onAbort);
+    }
   };
+
+  if (abortSignal) {
+    abortSignal.addEventListener('abort', onAbort);
+  }
 
   return debounced;
 }
