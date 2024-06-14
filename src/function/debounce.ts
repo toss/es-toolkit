@@ -67,11 +67,9 @@ export function debounce<F extends (...args: any[]) => void>(
       clearTimeout(timeoutId);
       timeoutId = null;
     }
-
-    signal?.removeEventListener('abort', onAbort);
   };
 
-  signal?.addEventListener('abort', onAbort);
+  signal?.addEventListener('abort', onAbort, { once: true });
 
   return debounced;
 }
