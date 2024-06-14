@@ -110,6 +110,24 @@ describe('debounce', () => {
     expect(func).not.toHaveBeenCalled();
   });
 
+  it('should not call the debounced function if it is already aborted by AbortSignal', async () => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    controller.abort();
+
+    const func = vi.fn();
+
+    const debounceMs = 50;
+    const debouncedFunc = debounce(func, debounceMs, { signal });
+
+    debouncedFunc();
+
+    await delay(debounceMs);
+
+    expect(func).not.toHaveBeenCalled();
+  })
+
   it('should not add multiple abort event listeners', async () => {
     const func = vi.fn();
     const debounceMs = 100;
