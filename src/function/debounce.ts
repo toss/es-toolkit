@@ -2,6 +2,8 @@ interface DebounceOptions {
   signal?: AbortSignal;
 }
 
+type Cancel = () => void;
+
 /**
  * Creates a debounced function that delays invoking the provided function until after `debounceMs` milliseconds
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
@@ -40,7 +42,7 @@ export function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   { signal }: DebounceOptions = {}
-): F & { cancel: () => void } {
+): F & { cancel: Cancel } {
   let timeoutId: number | NodeJS.Timeout | null = null;
 
   const debounced = function (...args: Parameters<F>) {
@@ -56,7 +58,7 @@ export function debounce<F extends (...args: any[]) => void>(
       func(...args);
       timeoutId = null;
     }, debounceMs);
-  } as F & { cancel: () => void };
+  } as F & { cancel: Cancel };
 
   const onAbort = function () {
     debounced.cancel();
@@ -69,7 +71,7 @@ export function debounce<F extends (...args: any[]) => void>(
     }
 
     signal?.removeEventListener('abort', onAbort);
-  };
+  } as Cancel;
 
   signal?.addEventListener('abort', onAbort);
 
