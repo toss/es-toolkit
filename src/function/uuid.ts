@@ -5,4 +5,3 @@ export const generateUUID = (): string => {
       return v.toString(16);
     });
   };
-  
