@@ -12,8 +12,8 @@ function random(minimum: number, maximum: number): number;
 
 ### 파라미터
 
-- `minimum` (`number`): 무작위 숫자를 생성할 최솟값(포함) 이에요.
-- `maximum` (`number`): 무작위 숫자를 생성할 최댓값(미포함) 이에요.
+- `minimum` (`number`): 무작위 숫자를 생성할 최솟값(포함)이에요.
+- `maximum` (`number`): 무작위 숫자를 생성할 최댓값(미포함)이에요.
 
 ### 반환 값
 
