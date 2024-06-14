@@ -1,5 +1,17 @@
 # es-toolkit Changelog
 
+## Version v1.3.0
+
+Released on June 14th, 2024.
+
+### Features
+
+- Add support for using AbortSignals to cancel `debounce`d functions. (https://github.com/toss/es-toolkit/pull/45)
+
+### Performance Optimizations
+
+- Optimize the time complexity of `intersection`. (https://github.com/toss/es-toolkit/pull/47)
+
 ## Version v1.2.2
 
 Released on June 13th, 2024.
