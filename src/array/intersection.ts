@@ -16,7 +16,9 @@
  * // result will be [3, 4, 5] since these elements are in both arrays.
  */
 export function intersection<T>(firstArr: readonly T[], secondArr: readonly T[]): T[] {
+  const secondSet = new Set(secondArr);
+
   return firstArr.filter(item => {
-    return secondArr.includes(item);
+    return secondSet.has(item);
   });
 }
