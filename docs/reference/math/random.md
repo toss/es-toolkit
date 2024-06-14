@@ -19,7 +19,7 @@ function random(minimum: number, maximum: number): number;
 
 - (`number`): A random floating-point number within the specified range.
 
-## 예시
+## Examples
 
 ```typescript
 const result1 = random(0, 5); // Returns a random floating-point number between 0 and 5.
