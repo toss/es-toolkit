@@ -18,7 +18,7 @@
  * unionBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idMapper);
  * // Returns [{ id: 1 }, { id: 2 }, { id: 3 }]
  */
-export function unionBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[] {
+export function unionBy<T, U>(arr1: readonly T[], arr2: readonly T[], mapper: (item: T) => U): T[] {
   const map = new Map<U, T>();
 
   for (const item of [...arr1, ...arr2]) {

@@ -18,7 +18,7 @@
  * // Returns [1, 2, 3]
  * takeRight([1, 2, 3], 5);
  */
-export function takeRight<T>(arr: T[], count: number): T[] {
+export function takeRight<T>(arr: readonly T[], count: number): T[] {
   if (count === 0) {
     return [];
   }

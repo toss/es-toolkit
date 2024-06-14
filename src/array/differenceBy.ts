@@ -23,7 +23,7 @@
  * const result = differenceBy(array1, array2, mapper);
  * // result will be [{ id: 1 }, { id: 3 }] since the elements with id 2 are in both arrays and are excluded from the result.
  */
-export function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[] {
+export function differenceBy<T, U>(firstArr: readonly T[], secondArr: readonly T[], mapper: (value: T) => U): T[] {
   const mappedSecondSet = new Set(secondArr.map(item => mapper(item)));
 
   return firstArr.filter(item => {

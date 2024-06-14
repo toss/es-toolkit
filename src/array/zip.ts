@@ -19,11 +19,11 @@
  * const result2 = zip(arr1, arr2, arr3);
  * // result2 will be [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
  */
-export function zip<T>(arr1: T[]): Array<[T]>;
-export function zip<T, U>(arr1: T[], arr2: U[]): Array<[T, U]>;
-export function zip<T, U, V>(arr1: T[], arr2: U[], arr3: V[]): Array<[T, U, V]>;
-export function zip<T, U, V, W>(arr1: T[], arr2: U[], arr3: V[], arr4: W[]): Array<[T, U, V, W]>;
-export function zip<T>(...arrs: T[][]): T[][] {
+export function zip<T>(arr1: readonly T[]): Array<[T]>;
+export function zip<T, U>(arr1: readonly T[], arr2: readonly U[]): Array<[T, U]>;
+export function zip<T, U, V>(arr1: readonly T[], arr2: readonly U[], arr3: readonly V[]): Array<[T, U, V]>;
+export function zip<T, U, V, W>(arr1: readonly T[], arr2: readonly U[], arr3: readonly V[], arr4: readonly W[]): Array<[T, U, V, W]>;
+export function zip<T>(...arrs: Array<readonly T[]>): T[][] {
   const result: T[][] = [];
 
   const maxIndex = Math.max(...arrs.map(x => x.length));

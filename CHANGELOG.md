@@ -1,5 +1,13 @@
 # es-toolkit Changelog
 
+## Version v1.2.2
+
+Released on June 13th, 2024.
+
+- Add support for `readonly` arrays in array utilities. (https://github.com/toss/es-toolkit/pull/32, [e595e5e](https://github.com/toss/es-toolkit/commit/e595e5e017e1f2cb138b1ad3d708635efc5e289e))
+- Optimize the time complexity of `uniq`. (https://github.com/toss/es-toolkit/pull/40)
+- Optimize the time complexity of `intersectionBy`. (https://github.com/toss/es-toolkit/pull/44)
+
 ## Version v1.2.1
 
 Released on June 13th, 2024.

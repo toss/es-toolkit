@@ -13,6 +13,6 @@
  * const result = dropRight(array, 2);
  * // result will be [1, 2, 3] since the last two elements are dropped.
  */
-export function dropRight<T>(arr: T[], itemsCount: number): T[] {
+export function dropRight<T>(arr: readonly T[], itemsCount: number): T[] {
   return arr.slice(0, -itemsCount);
 }
