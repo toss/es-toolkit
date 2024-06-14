@@ -4,7 +4,7 @@ Generates a random floating-point number within a given range.
 
 This function takes a minimum and maximum value, and returns a random floating-point number within that range.
 
-# Interface
+## Signature
 
 ```typescript
 function random(minimum: number, maximum: number): number;
