@@ -4,7 +4,7 @@
 
 이 함수는 최솟값과 최댓값을 받아서, 해당 범위 내에서 무작위 부동 소수점 숫자를 반환해요.
 
-# 인터페이스
+## 인터페이스
 
 ```typescript
 function random(minimum: number, maximum: number): number;
