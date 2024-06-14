@@ -17,5 +17,5 @@
  */
 export function dropWhile<T>(arr: readonly T[], canContinueDropping: (item: T) => boolean): T[] {
   const dropEndIndex = arr.findIndex(item => !canContinueDropping(item));
-  return arr.slice(dropEndIndex);
+  return dropEndIndex === -1 ? [] : arr.slice(dropEndIndex);
 }
