@@ -17,7 +17,7 @@ describe('delay', () => {
 
     setTimeout(() => controller.abort(), 50);
 
-    await expect(delay(100, { signal })).rejects.toThrow('AbortError');
+    await expect(delay(100, { signal })).rejects.toThrow('The operation was aborted');
   });
 
   it('should not call the delay if it is already aborted by AbortSignal', async () => {
@@ -27,7 +27,7 @@ describe('delay', () => {
 
     controller.abort();
 
-    await expect(delay(100, { signal })).rejects.toThrow('AbortError');
+    await expect(delay(100, { signal })).rejects.toThrow('The operation was aborted');
 
     expect(spy).not.toHaveBeenCalled();
     spy.mockRestore();
@@ -41,7 +41,7 @@ describe('delay', () => {
 
     controller.abort();
 
-    await expect(promise).rejects.toThrow('AbortError');
+    await expect(promise).rejects.toThrow('The operation was aborted');
 
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();

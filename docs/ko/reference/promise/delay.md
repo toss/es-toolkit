@@ -45,7 +45,7 @@ async function foo() {
   try {
     await delay(1000, { signal });
   } catch (error) {
-    console.log(error); // 'AbortError' 로깅
+    console.log(error); // 'The operation was aborted' 로깅
   }
 }
 ```

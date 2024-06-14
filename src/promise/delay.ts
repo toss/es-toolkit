@@ -37,7 +37,7 @@ interface DelayOptions {
 export function delay(ms: number, { signal }: DelayOptions = {}): Promise<void> {
   return new Promise((resolve, reject) => {
     const abortError = () => {
-      reject(new Error('AbortError'));
+      reject(new Error('The operation was aborted'));
     };
 
     const abortHandler = () => {
