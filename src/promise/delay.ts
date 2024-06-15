@@ -1,3 +1,5 @@
+import { AbortError } from '../error/AbortError';
+
 interface DelayOptions {
   signal?: AbortSignal;
 }
@@ -37,7 +39,7 @@ interface DelayOptions {
 export function delay(ms: number, { signal }: DelayOptions = {}): Promise<void> {
   return new Promise((resolve, reject) => {
     const abortError = () => {
-      reject(new Error('The operation was aborted'));
+      reject(new AbortError());
     };
 
     const abortHandler = () => {
