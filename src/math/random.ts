@@ -8,11 +8,12 @@
  *
  * @example
  * const result = random(0, 5); // result will be a random floating-point number between 0 (inclusive) and 5 (exclusive)
- * const result2 = random(5, 0); // result2 will also be a random floating-point number between 0 (inclusive) and 5 (exclusive)
+ * const result2 = random(5, 0); // This will throw an error
  */
 export function random(minimum: number, maximum: number): number {
-  if (minimum > maximum) {
-    [minimum, maximum] = [maximum, minimum];
+  if (minimum >= maximum) {
+    throw new Error('Invalid input: The maximum value must be greater than the minimum value.');
   }
+
   return Math.random() * (maximum - minimum) + minimum;
 }
