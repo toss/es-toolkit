@@ -23,8 +23,7 @@ export function maxBy<T>(elements: T[], selector: (element: T) => number): T | u
   let maxElement = elements[0];
   let max = selector(maxElement);
 
-  for (let i = 1; i < elements.length; i++) {
-    const element = elements[i];
+  for (const element of elements) {
     const value = selector(element);
 
     if (value > max) {
