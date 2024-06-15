@@ -126,7 +126,7 @@ describe('debounce', () => {
     await delay(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
-  })
+  });
 
   it('should not add multiple abort event listeners', async () => {
     const func = vi.fn();
