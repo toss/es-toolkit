@@ -62,8 +62,8 @@ export class FastMap<T, U> implements IFastMap<T, U> {
   }
 
   clear(): void {
-    this._keyableMapForOthers = new HashMap();
-    this._keyableMapForStr = new HashMap();
+    this._keyableMapForOthers.clear();
+    this._keyableMapForStr.clear();
     this._nonKeyableMap.clear();
   }
 
@@ -118,13 +118,5 @@ class HashMap<T extends ObjectKeyType, U> implements IFastMap<T, U> {
 
   get size() {
     return Object.keys(this._table).length;
-  }
-
-  keys() {
-    return Object.keys(this._table);
-  }
-
-  values() {
-    return Object.values(this._table);
   }
 }
