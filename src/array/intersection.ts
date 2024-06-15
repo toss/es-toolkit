@@ -21,17 +21,17 @@ export function intersection<T>(firstArr: readonly T[], secondArr: readonly T[])
   const [largerArr, smallerArr] = distinguishLargerOrSmallerArray(firstArr, secondArr);
 
   if (largerArr.length < 120) {
-    return intersectionSmallArrays(largerArr, smallerArr);
+    return intersectionSmallArrays(smallerArr, largerArr);
   }
 
   return intersectionLargeArrays(smallerArr, largerArr);
 }
 
-function intersectionSmallArrays<T>(firstArr: readonly T[], secondArr: readonly T[]): T[] {
-  const secondSet = new Set(secondArr);
+function intersectionSmallArrays<T>(smallerArr: readonly T[], largerArr: readonly T[]): T[] {
+  const set = new Set(smallerArr);
 
-  return firstArr.filter(item => {
-    return secondSet.has(item);
+  return largerArr.filter(item => {
+    return set.has(item);
   });
 }
 
