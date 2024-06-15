@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.3.1
+
+Released on June 15th, 2024.
+
+- Fixed a bug in `dropWhile` where it incorrectly returned the entire array when no elements matched the predicate. (https://github.com/toss/es-toolkit/pull/49)
+
 ## Version v1.3.0
 
 Released on June 14th, 2024.
