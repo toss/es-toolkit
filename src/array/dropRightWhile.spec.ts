@@ -21,5 +21,7 @@ describe('dropRightWhile', () => {
         enabled: true,
       },
     ]);
+
+    expect(dropRightWhile([1, 2, 3], x => x < 4)).toEqual([]);
   });
 });
