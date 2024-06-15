@@ -91,6 +91,8 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '숫자',
           items: [
             { text: 'clamp', link: '/ko/reference/math/clamp' },
+            { text: 'random', link: '/ko/reference/math/random' },
+            { text: 'randomInt', link: '/ko/reference/math/randomInt' },
             { text: 'round', link: '/ko/reference/math/round' },
             { text: 'sum', link: '/ko/reference/math/sum' },
           ],

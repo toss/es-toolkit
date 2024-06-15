@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { random } from './random';
 
-describe('random function', () => {
+describe('random', () => {
   it('generates a random floating-point number between min (inclusive) and max (exclusive)', () => {
     const min = 0;
     const max = 5;
