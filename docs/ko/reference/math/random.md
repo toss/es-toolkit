@@ -23,5 +23,6 @@ function random(minimum: number, maximum: number): number;
 
 ```typescript
 const result1 = random(0, 5); // 0과 5사이의 무작위 부동 소수점 숫자를 반환해요.
-const result2 = random(5, 0); // 0과 5사이의 무작위 부동 소수점 숫자를 반환해요.
+const result2 = random(5, 0); // 최솟값이 최댓값보다 크면 오류가 발생해요.
+const result3 = random(5, 5); // 최솟값이 최댓값과 같으면 오류가 발생해요.
 ```
