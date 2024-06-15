@@ -10,14 +10,14 @@ includes only the properties for which the predicate function returns true.
 ```typescript
 function pickBy<T extends Record<string, any>>(
   obj: T,
-  shouldPick: (value: T[keyof T], key: string) => boolean
+  shouldPick: (value: T[keyof T], key: keyof T) => boolean
 ): Partial<T>;
 ```
 
 ### Parameters
 
 - `obj` (`T`): The object to pick properties from.
-- `shouldPick` (`(value: T[keyof T], key: string) => boolean`): A predicate function that determines whether a property should be picked. It takes the property's key and value as arguments and returns `true` if the property should be picked, and `false` otherwise.
+- `shouldPick` (`(value: T[keyof T], key: keyof T) => boolean`): A predicate function that determines whether a property should be picked. It takes the property's key and value as arguments and returns `true` if the property should be picked, and `false` otherwise.
 
 ### Returns
 
