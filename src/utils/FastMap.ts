@@ -48,14 +48,6 @@ export class FastMap<T, U> implements IFastMap<T, U> {
   private _keyableMapForStr = new HashMap<ObjectKeyType, U>();
   private _nonKeyableMap: Map<T, U> = new Map();
 
-  constructor(entries?: ReadonlyArray<readonly [T, U]> | null) {
-    if (entries) {
-      for (const [key, value] of entries) {
-        this.set(key, value);
-      }
-    }
-  }
-
   set(key: T, value: U): this {
     this._getMap(key).set(key as any, value);
     return this;
