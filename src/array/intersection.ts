@@ -18,11 +18,13 @@ import { FastMap } from '../utils/FastMap';
  * // result will be [3, 4, 5] since these elements are in both arrays.
  */
 export function intersection<T>(firstArr: readonly T[], secondArr: readonly T[]): T[] {
-  if (firstArr.length < 120) {
-    return intersectionSmallArrays(firstArr, secondArr);
+  const [largerArr, smallerArr] = distinguishLargerOrSmallerArray(firstArr, secondArr);
+
+  if (largerArr.length < 120) {
+    return intersectionSmallArrays(largerArr, smallerArr);
   }
 
-  return intersectionLargeArrays(firstArr, secondArr);
+  return intersectionLargeArrays(smallerArr, largerArr);
 }
 
 function intersectionSmallArrays<T>(firstArr: readonly T[], secondArr: readonly T[]): T[] {
@@ -48,4 +50,11 @@ function intersectionLargeArrays<T>(firstArr: readonly T[], secondArr: readonly 
     }
   }
   return result;
+}
+
+function distinguishLargerOrSmallerArray<T>(
+  firstArr: readonly T[],
+  secondArr: readonly T[]
+): [readonly T[], readonly T[]] {
+  return firstArr.length > secondArr.length ? [firstArr, secondArr] : [secondArr, firstArr];
 }
