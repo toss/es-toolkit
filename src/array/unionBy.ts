@@ -23,10 +23,11 @@ export function unionBy<T, U>(arr1: readonly T[], arr2: readonly T[], mapper: (i
 
   for (const item of [...arr1, ...arr2]) {
     const key = mapper(item);
+
     if (!map.has(key)) {
       map.set(key, item);
     }
   }
 
-  return [...map.values()];
+  return Array.from(map.values());
 }
