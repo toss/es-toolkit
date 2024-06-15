@@ -12,21 +12,16 @@ describe('random function', () => {
     }
   });
 
-  it('swaps min and max if min is greater than max', () => {
+  it('throws an error if min is greater than max', () => {
     const min = 5;
     const max = 0;
-    for (let i = 0; i < 100; i++) {
-      const result = random(min, max);
-      expect(result).toBeGreaterThanOrEqual(max);
-      expect(result).toBeLessThan(min);
-    }
+    expect(() => random(min, max)).toThrow('Invalid input: The maximum value must be greater than the minimum value.');
   });
 
   it('handles edge cases where min and max are the same', () => {
     const min = 5;
     const max = 5;
-    const result = random(min, max);
-    expect(result).toBe(min);
+    expect(() => random(min, max)).toThrow('Invalid input: The maximum value must be greater than the minimum value.');
   });
 
   it('works with negative ranges', () => {
