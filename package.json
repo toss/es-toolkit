@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "workspaces": [
     "docs"
   ],
