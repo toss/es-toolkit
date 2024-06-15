@@ -1,3 +1,35 @@
+interface IFastMap<T, U> {
+  /**
+   * Removes all key-value pairs from the Map object.
+   */
+  clear(): void;
+
+  /**
+   * Returns the value associated to the key, or undefined if there is none.
+   */
+  get(key: T): U | undefined;
+
+  /**
+   * Returns a boolean asserting whether a value has been associated to the key in the Map object or not.
+   */
+  has(key: T): boolean;
+
+  /**
+   * Sets the value for the key in the Map object. Returns the Map object.
+   */
+  set(key: T, value: U): this;
+
+  /**
+   * Returns the number of key/value pairs in the Map object.
+   */
+  readonly size: number;
+
+  /**
+   * Removes any value associated to the key and returns true if there was one, or false if there was not.
+   */
+  delete(key: T): boolean;
+}
+
 type ObjectKeyType = string | number | symbol;
 
 /**
@@ -11,10 +43,9 @@ type ObjectKeyType = string | number | symbol;
  * map.set('key', 'value');
  * map.get('key'); // 'value'
  */
-export class FastMap<T, U> implements Map<T, U> {
-  [Symbol.toStringTag] = '__FastMap_es_toolkit__';
-
-  private _keyableMap: Record<ObjectKeyType, U> = Object.create(null);
+export class FastMap<T, U> implements IFastMap<T, U> {
+  private _keyableMapForOthers = new HashMap<ObjectKeyType, U>();
+  private _keyableMapForStr = new HashMap<ObjectKeyType, U>();
   private _nonKeyableMap: Map<T, U> = new Map();
 
   constructor(entries?: ReadonlyArray<readonly [T, U]> | null) {
@@ -26,77 +57,82 @@ export class FastMap<T, U> implements Map<T, U> {
   }
 
   set(key: T, value: U): this {
-    if (this._isKeyable(key)) {
-      this._keyableMap[key] = value;
-    } else {
-      this._nonKeyableMap.set(key, value);
-    }
+    this._getMap(key).set(key as any, value);
     return this;
   }
 
   get(key: T): U | undefined {
-    if (this._isKeyable(key)) {
-      return this._keyableMap[key];
-    } else {
-      return this._nonKeyableMap.get(key);
-    }
+    return this._getMap(key).get(key as any);
   }
 
   has(key: T): boolean {
-    if (this._isKeyable(key)) {
-      return key in this._keyableMap;
-    } else {
-      return this._nonKeyableMap.has(key);
-    }
+    return this._getMap(key).has(key as any);
   }
 
   clear(): void {
-    this._keyableMap = Object.create(null);
+    this._keyableMapForOthers = new HashMap();
+    this._keyableMapForStr = new HashMap();
     this._nonKeyableMap.clear();
   }
 
   delete(key: T): boolean {
-    if (this._isKeyable(key)) {
-      return delete this._keyableMap[key];
-    } else {
-      return this._nonKeyableMap.delete(key);
-    }
+    return this._getMap(key).delete(key as any);
   }
 
   get size(): number {
-    return Object.keys(this._nonKeyableMap).length + this._nonKeyableMap.size;
-  }
-
-  [Symbol.iterator](): IterableIterator<[T, U]> {
-    return this.entries();
-  }
-
-  entries(): IterableIterator<[T, U]> {
-    const keyableEntries = Object.entries(this._keyableMap) as Array<[T, U]>;
-    const nonKeyableEntries = Array.from(this._nonKeyableMap.entries());
-    return keyableEntries.concat(nonKeyableEntries)[Symbol.iterator]();
-  }
-
-  keys(): IterableIterator<T> {
-    const keyableKeys = Object.keys(this._keyableMap) as T[];
-    const nonKeyableKeys = Array.from(this._nonKeyableMap.keys());
-    return keyableKeys.concat(nonKeyableKeys)[Symbol.iterator]();
-  }
-
-  values(): IterableIterator<U> {
-    const keyableValues = Object.values(this._keyableMap) as U[];
-    const nonKeyableValues = Array.from(this._nonKeyableMap.values());
-    return keyableValues.concat(nonKeyableValues)[Symbol.iterator]();
-  }
-
-  forEach(callbackfn: (value: U, key: T, map: Map<T, U>) => void, thisArg?: any): void {
-    for (const [key, value] of this) {
-      callbackfn.call(thisArg, value, key, this);
-    }
+    return this._keyableMapForStr.size + this._keyableMapForOthers.size + this._nonKeyableMap.size;
   }
 
   private _isKeyable(key: unknown): key is ObjectKeyType {
     const type = typeof key;
     return type === 'string' || type === 'number' || type === 'symbol';
+  }
+
+  private _getMap(key: T) {
+    if (this._isKeyable(key)) {
+      if (typeof key === 'string') {
+        return this._keyableMapForStr;
+      }
+      return this._keyableMapForOthers;
+    }
+
+    return this._nonKeyableMap;
+  }
+}
+
+class HashMap<T extends ObjectKeyType, U> implements IFastMap<T, U> {
+  private _table = Object.create(null);
+
+  set(key: T, value: U) {
+    this._table[key] = value;
+    return this;
+  }
+
+  get(key: T) {
+    return this._table[key];
+  }
+
+  has(key: T) {
+    return key in this._table;
+  }
+
+  delete(key: T) {
+    return delete this._table[key];
+  }
+
+  clear() {
+    this._table = Object.create(null);
+  }
+
+  get size() {
+    return Object.keys(this._table).length;
+  }
+
+  keys() {
+    return Object.keys(this._table);
+  }
+
+  values() {
+    return Object.values(this._table);
   }
 }
