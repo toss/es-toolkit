@@ -6,9 +6,6 @@ describe('take', () => {
     expect(take([1, 2, 3, 4, 5], 3)).toEqual([1, 2, 3]);
     expect(take(['a', 'b', 'c', 'd'], 2)).toEqual(['a', 'b']);
     expect(take([true, false, true], 1)).toEqual([true]);
-    expect(take([1, 2, 3], 5)).toEqual([1, 2, 3]);
-    expect(take([1, 2, 3], 0)).toEqual([]);
-    expect(take([], 3)).toEqual([]);
   });
 
   it('handles cases where count is greater than array length', () => {
