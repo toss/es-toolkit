@@ -1,6 +1,6 @@
 # isUndefined
 
-Checks if the given value is undefined.
+Checks if the given value is `undefined`.
 
 This function tests whether the provided value is strictly equal to `undefined`.
 It returns `true` if the value is `undefined`, and `false` otherwise.
@@ -15,11 +15,11 @@ function isUndefined(x: unknown): x is undefined;
 
 ### Parameters
 
-- `x` (`unknown`): The value to test if it is undefined.
+- `x` (`unknown`): The value to test if it is `undefined`.
 
 ### Returns
 
-(`x is undefined`): True if the value is undefined, false otherwise.
+(`x is undefined`): `true` if the value is `undefined`, `false` otherwise.
 
 ## Examples
 
