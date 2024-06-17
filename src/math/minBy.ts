@@ -8,10 +8,7 @@
  * @param elements An array of elements.
  * @param selector A function that selects a number from an element.
  */
-export function minBy<T>(elements: T[], selector: (element: T) => number): T | undefined {
-  if (elements.length === 0) {
-    return undefined;
-  }
+export function minBy<T>(elements: T[], selector: (element: T) => number): T {
 
   let minElement = elements[0];
   let min = Infinity;
