@@ -20,12 +20,11 @@ export function maxBy<T>(elements: T[], selector: (element: T) => number): T | u
   if (elements.length === 0) {
     return undefined;
   }
-  let maxElement = elements[0];
-  let max = selector(maxElement);
 
+  let maxElement = elements[0];
+  let max = -Infinity;
   for (const element of elements) {
     const value = selector(element);
-
     if (value > max) {
       max = value;
       maxElement = element;
