@@ -4,11 +4,11 @@ import { uniqBy as uniqByLodash } from 'lodash';
 import { randomInt } from 'crypto';
 
 describe('uniqBy, small arrays', () => {
-  bench('es-toolkit', () => {
+  bench('es-toolkit/uniqBy', () => {
     uniqByToolkit([2.1, 1.2, 2.3], Math.floor);
   });
 
-  bench('lodash', () => {
+  bench('lodash/uniqBy', () => {
     uniqByLodash([2.1, 1.2, 2.3], Math.floor);
   });
 });
@@ -16,11 +16,11 @@ describe('uniqBy, small arrays', () => {
 describe('uniqBy, large arrays', () => {
   const array = Array.from({ length: 10000 }).map(() => randomInt(0, 10000));
 
-  bench('es-toolkit', () => {
+  bench('es-toolkit/uniqBy', () => {
     uniqByToolkit(array, Math.floor);
   });
 
-  bench('lodash', () => {
+  bench('lodash/uniqBy', () => {
     uniqByLodash(array, Math.floor);
   });
 });

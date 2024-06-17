@@ -3,7 +3,7 @@ import { groupBy as groupByToolkit } from 'es-toolkit';
 import { groupBy as groupByLodash } from 'lodash';
 
 describe('groupBy', () => {
-  bench('es-toolkit', () => {
+  bench('es-toolkit/groupBy', () => {
     const array = [
       { category: 'fruit', name: 'apple' },
       { category: 'fruit', name: 'banana' },
@@ -15,7 +15,7 @@ describe('groupBy', () => {
     groupByToolkit(array, item => item.category);
   });
 
-  bench('lodash', () => {
+  bench('lodash/groupBy', () => {
     const array = [
       { category: 'fruit', name: 'apple' },
       { category: 'fruit', name: 'banana' },

@@ -3,14 +3,14 @@ import { isNil as isNilToolkit } from 'es-toolkit';
 import { isNil as isNilLodash } from 'lodash';
 
 describe('isNil', () => {
-  bench('es-toolkit', () => {
+  bench('es-toolkit/isNil', () => {
     isNilToolkit(null);
     isNilToolkit(undefined);
     isNilToolkit(123);
     isNilToolkit([1, 2, 3]);
   });
 
-  bench('lodash', () => {
+  bench('lodash/isNil', () => {
     isNilLodash(null);
     isNilLodash(undefined);
     isNilLodash(123);
