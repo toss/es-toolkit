@@ -13,7 +13,7 @@
  * const result2 = round(1.2345, 2); // result2 will be 1.23
  * const result3 = round(1.2345, 3); // result3 will be 1.235
  */
-export function round(value: number, precision: number = 0): number {
+export function round(value: number, precision = 0): number {
   const multiplier = Math.pow(10, precision);
   return Math.round(value * multiplier) / multiplier;
 }
