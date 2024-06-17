@@ -11,12 +11,16 @@ jobs:
   benchmarks:
     runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v3"
-      - uses: "actions/setup-node@v3"
-      - name: Install dependencies
-        run: yarn install
+      - uses: actions/checkout@v3
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: 'yarn'
+        name: Install dependencies
+      - run: yarn install
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v2
         with:
-          run: yarn exec vitest bench
+          run: yarn vitest bench
           token: ${{ secrets.CODSPEED_TOKEN }}
