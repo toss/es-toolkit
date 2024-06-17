@@ -113,6 +113,7 @@
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
     "@vitest/coverage-istanbul": "^1.5.2",
+    "@vitest/ui": "^1.6.0",
     "broken-link-checker": "^0.7.8",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
@@ -127,6 +128,7 @@
     "prepack": "yarn build",
     "build": "tsup && ./.scripts/postbuild.sh",
     "test": "vitest run --coverage --typecheck",
+    "test:ui": "vitest --ui --coverage --typecheck",
     "lint": "eslint ./src --ext .ts",
     "format": "prettier --write ."
   }
