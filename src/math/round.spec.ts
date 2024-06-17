@@ -43,6 +43,7 @@ describe('round function', () => {
     // The round function in JavaScript does not work as 'Round half to Even'
     expect(round(-1.35, 1)).toBe(-1.3);
   });
+
   it('works with zero', () => {
     expect(round(0)).toBe(0);
   });
