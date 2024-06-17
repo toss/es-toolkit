@@ -19,6 +19,7 @@
 export function maxBy<T>(elements: T[], selector: (element: T) => number): T {
   let maxElement = elements[0];
   let max = -Infinity;
+
   for (const element of elements) {
     const value = selector(element);
     if (value > max) {
