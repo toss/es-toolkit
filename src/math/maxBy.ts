@@ -16,7 +16,7 @@
  *  const result = maxBy(people, person => person.age);
  *  // result will be { name: 'Nunu', age: 30 }
  */
-export function maxBy<T>(elements: T[], selector: (element: T) => number): T | undefined {
+export function maxBy<T>(elements: T[], selector: (element: T) => number): T {
   if (elements.length === 0) {
     return undefined;
   }
