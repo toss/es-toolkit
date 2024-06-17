@@ -14,7 +14,8 @@ export function minBy<T>(elements: T[], selector: (element: T) => number): T | u
   }
 
   let minElement = elements[0];
-  let min = -Infinity;
+  let min = Infinity;
+
   for (const element of elements) {
     const value = selector(element);
     if (value < min) {
