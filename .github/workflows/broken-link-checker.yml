@@ -18,4 +18,4 @@ jobs:
           cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
       - run: yarn install
-      - run: yarn blc ${{ github.event.inputs.url }} --ro
+      - run: yarn blc ${{ github.event.inputs.url || 'https://es-toolkit.slash.page' }} --ro
