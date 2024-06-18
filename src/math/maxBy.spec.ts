@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from 'vitest';
 import { maxBy } from './maxBy';
 
 describe('maxBy', () => {
@@ -23,15 +23,13 @@ describe('maxBy', () => {
   });
 
   it('if array is single-element, return unique element of array', () => {
-    const people = [
-      { name: 'Mark', age: 25 },
-    ];
+    const people = [{ name: 'Mark', age: 25 }];
     const result = maxBy(people, person => person.age);
     expect(result).toEqual({ name: 'Mark', age: 25 });
   });
 
   it('if array is empty, return undefined', () => {
-    type Person = { name: string, age: number };
+    type Person = { name: string; age: number };
     const people: Person[] = [];
     const result = maxBy(people, person => person.age);
     expect(result).toBeUndefined();

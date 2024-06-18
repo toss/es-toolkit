@@ -19,7 +19,11 @@
  * const result = differenceWith(array1, array2, areItemsEqual);
  * // result will be [{ id: 1 }, { id: 3 }] since the elements with id 2 are considered equal and are excluded from the result.
  */
-export function differenceWith<T>(firstArr: readonly T[], secondArr: readonly T[], areItemsEqual: (x: T, y: T) => boolean): T[] {
+export function differenceWith<T>(
+  firstArr: readonly T[],
+  secondArr: readonly T[],
+  areItemsEqual: (x: T, y: T) => boolean
+): T[] {
   return firstArr.filter(firstItem => {
     return secondArr.every(secondItem => {
       return !areItemsEqual(firstItem, secondItem);

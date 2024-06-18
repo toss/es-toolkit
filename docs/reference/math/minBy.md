@@ -7,7 +7,7 @@ If the list is empty, returns `undefined`.
 ## Signature
 
 ```typescript
-function minBy<T>(elements: T[], selector: (element: T) => number): T
+function minBy<T>(elements: T[], selector: (element: T) => number): T;
 ```
 
 ### Parameters
@@ -22,6 +22,6 @@ The first element of the list that has the minimum value of the function. If the
 ### Example
 
 ```typescript
-minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a) // Returns: { a: 1 }
-minBy([], x => x.a) // Returns: undefined
+minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
+minBy([], x => x.a); // Returns: undefined
 ```

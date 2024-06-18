@@ -9,7 +9,6 @@
  * @param selector A function that selects a number from an element.
  */
 export function minBy<T>(elements: T[], selector: (element: T) => number): T {
-
   let minElement = elements[0];
   let min = Infinity;
 

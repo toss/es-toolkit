@@ -5,7 +5,7 @@
 ## 인터페이스
 
 ```typescript
-function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[]
+function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[];
 ```
 
 ### 파라미터

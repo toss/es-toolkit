@@ -28,7 +28,12 @@
  */
 export function zipWith<T, R>(arr1: readonly T[], combine: (item: T) => R): R[];
 export function zipWith<T, U, R>(arr1: readonly T[], arr2: readonly U[], combine: (item1: T, item2: U) => R): R[];
-export function zipWith<T, U, V, R>(arr1: readonly T[], arr2: readonly U[], arr3: readonly V[], combine: (item1: T, item2: U, item3: V) => R): R[];
+export function zipWith<T, U, V, R>(
+  arr1: readonly T[],
+  arr2: readonly U[],
+  arr3: readonly V[],
+  combine: (item1: T, item2: U, item3: V) => R
+): R[];
 export function zipWith<T, U, V, W, R>(
   arr1: readonly T[],
   arr2: readonly U[],

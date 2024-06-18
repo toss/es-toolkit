@@ -5,7 +5,7 @@ Returns a new array containing only the unique elements from the original array,
 ## Signature
 
 ```typescript
-function uniqBy<T, U>(arr: T[], mapper: (item: T) => U): T[]
+function uniqBy<T, U>(arr: T[], mapper: (item: T) => U): T[];
 ```
 
 ### Parameters

@@ -22,7 +22,12 @@
 export function zip<T>(arr1: readonly T[]): Array<[T]>;
 export function zip<T, U>(arr1: readonly T[], arr2: readonly U[]): Array<[T, U]>;
 export function zip<T, U, V>(arr1: readonly T[], arr2: readonly U[], arr3: readonly V[]): Array<[T, U, V]>;
-export function zip<T, U, V, W>(arr1: readonly T[], arr2: readonly U[], arr3: readonly V[], arr4: readonly W[]): Array<[T, U, V, W]>;
+export function zip<T, U, V, W>(
+  arr1: readonly T[],
+  arr2: readonly U[],
+  arr3: readonly V[],
+  arr4: readonly W[]
+): Array<[T, U, V, W]>;
 export function zip<T>(...arrs: Array<readonly T[]>): T[][] {
   const result: T[][] = [];
 

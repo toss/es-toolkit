@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function minBy<T>(elements: T[], selector: (element: T) => number): T
+function minBy<T>(elements: T[], selector: (element: T) => number): T;
 ```
 
 ### 파라미터
@@ -22,6 +22,6 @@ function minBy<T>(elements: T[], selector: (element: T) => number): T
 ### 예시
 
 ```typescript
-maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a) // 결과: { a: 3 }
-maxBy([], x => x.a) // 결과: undefined
+maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 결과: { a: 3 }
+maxBy([], x => x.a); // 결과: undefined
 ```

@@ -7,7 +7,10 @@
 ## 인터페이스
 
 ```typescript
-function omitBy<T extends Record<string, any>>(obj: T, shouldOmit: (value: T[keyof T], key: keyof T) => boolean): Partial<T>;
+function omitBy<T extends Record<string, any>>(
+  obj: T,
+  shouldOmit: (value: T[keyof T], key: keyof T) => boolean
+): Partial<T>;
 ```
 
 ### 파라미터
