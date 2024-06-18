@@ -11,6 +11,7 @@ export { intersection } from './intersection';
 export { intersectionBy } from './intersectionBy';
 export { intersectionWith } from './intersectionWith';
 export { partition } from './partition';
+export { range } from './range';
 export { sample } from './sample';
 export { shuffle } from './shuffle';
 export { take } from './take';
