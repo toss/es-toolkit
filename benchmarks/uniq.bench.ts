@@ -3,11 +3,11 @@ import { uniq as uniqToolkit } from 'es-toolkit';
 import { uniq as uniqLodash } from 'lodash';
 
 describe('uniq', () => {
-  bench('es-toolkit', () => {
+  bench('es-toolkit/uniq', () => {
     uniqToolkit([11, 2, 3, 44, 11, 2, 3]);
   });
 
-  bench('lodash', () => {
+  bench('lodash/uniq', () => {
     uniqLodash([11, 2, 3, 44, 11, 2, 3]);
   });
 });

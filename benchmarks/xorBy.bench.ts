@@ -3,12 +3,12 @@ import { xorBy as xorByToolkit } from 'es-toolkit';
 import { xorBy as xorByLodash } from 'lodash';
 
 describe('xorBy', () => {
-  bench('es-toolkit', () => {
+  bench('es-toolkit/xorBy', () => {
     const idMapper = obj => obj.id;
     xorByToolkit([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idMapper);
   });
 
-  bench('lodash', () => {
+  bench('lodash/xorBy', () => {
     const idMapper = obj => obj.id;
     xorByLodash([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idMapper);
   });

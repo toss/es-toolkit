@@ -3,7 +3,7 @@ import { minBy as minByToolkit } from 'es-toolkit';
 import { minBy as minByLodash } from 'lodash';
 
 describe('minBy', () => {
-  bench('es-toolkit', () => {
+  bench('es-toolkit/minBy', () => {
     const people = [
       { name: 'Mark', age: 30 },
       { name: 'Nunu', age: 20 },
@@ -12,7 +12,7 @@ describe('minBy', () => {
     minByToolkit(people, person => person.age);
   });
 
-  bench('lodash', () => {
+  bench('lodash/minBy', () => {
     const people = [
       { name: 'Mark', age: 30 },
       { name: 'Nunu', age: 20 },

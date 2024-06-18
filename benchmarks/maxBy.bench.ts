@@ -3,7 +3,7 @@ import { maxBy as maxByToolkit } from 'es-toolkit';
 import { maxBy as maxByLodash } from 'lodash';
 
 describe('maxBy', () => {
-  bench('es-toolkit', () => {
+  bench('es-toolkit/maxBy', () => {
     const people = [
       { name: 'Mark', age: 25 },
       { name: 'Nunu', age: 30 },
@@ -12,7 +12,7 @@ describe('maxBy', () => {
     maxByToolkit(people, person => person.age);
   });
 
-  bench('lodash', () => {
+  bench('lodash/maxBy', () => {
     const people = [
       { name: 'Mark', age: 25 },
       { name: 'Nunu', age: 30 },

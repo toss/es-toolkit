@@ -105,6 +105,7 @@
     "@babel/preset-typescript": "^7.24.1",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
+    "@codspeed/vitest-plugin": "^3.1.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/broken-link-checker": "^0",
@@ -127,6 +128,7 @@
     "prepack": "yarn build",
     "build": "tsup && ./.scripts/postbuild.sh",
     "test": "vitest run --coverage --typecheck",
+    "bench": "vitest bench",
     "lint": "eslint ./src --ext .ts",
     "format": "prettier --write ."
   }
