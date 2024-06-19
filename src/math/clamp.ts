@@ -18,7 +18,7 @@
 export function clamp(value: number, maximum: number): number;
 export function clamp(value: number, minimum: number, maximum: number): number;
 export function clamp(value: number, bound1: number, bound2?: number): number {
-  if (bound2 == null) {
+  if (typeof bound2 === 'undefined') {
     return Math.min(value, bound1);
   }
 
