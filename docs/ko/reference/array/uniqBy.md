@@ -5,7 +5,7 @@
 ## 인터페이스
 
 ```typescript
-function uniqBy<T, U>(arr: T[], mapper: (item: T) => U): T[]
+function uniqBy<T, U>(arr: T[], mapper: (item: T) => U): T[];
 ```
 
 ### 파라미터

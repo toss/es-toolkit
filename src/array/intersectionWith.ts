@@ -19,7 +19,11 @@
  * const result = intersectionWith(array1, array2, areItemsEqual);
  * // result will be [{ id: 2 }] since this element has a matching id in both arrays.
  */
-export function intersectionWith<T>(firstArr: readonly T[], secondArr: readonly T[], areItemsEqual: (x: T, y: T) => boolean): T[] {
+export function intersectionWith<T>(
+  firstArr: readonly T[],
+  secondArr: readonly T[],
+  areItemsEqual: (x: T, y: T) => boolean
+): T[] {
   return firstArr.filter(firstItem => {
     return secondArr.some(secondItem => {
       return areItemsEqual(firstItem, secondItem);

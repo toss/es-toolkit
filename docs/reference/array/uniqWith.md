@@ -5,7 +5,7 @@ Returns a new array containing only the unique elements from the original array,
 ## Signature
 
 ```typescript
-function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[]
+function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[];
 ```
 
 ### Parameters

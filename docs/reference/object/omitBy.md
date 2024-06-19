@@ -8,7 +8,10 @@ includes only the properties for which the predicate function returns false.
 ## Signature
 
 ```typescript
-function omitBy<T extends Record<string, any>>(obj: T, shouldOmit: (value: T[keyof T], key: keyof T) => boolean): Partial<T>;
+function omitBy<T extends Record<string, any>>(
+  obj: T,
+  shouldOmit: (value: T[keyof T], key: keyof T) => boolean
+): Partial<T>;
 ```
 
 ### Parameters

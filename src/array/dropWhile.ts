@@ -20,6 +20,6 @@ export function dropWhile<T>(arr: readonly T[], canContinueDropping: (item: T) =
   if (dropEndIndex === -1) {
     return [];
   }
-  
+
   return arr.slice(dropEndIndex);
 }

@@ -20,7 +20,11 @@ import { unionWith } from './unionWith';
  * xorWith([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], areObjectsEqual);
  * // Returns [{ id: 1 }, { id: 3 }]
  */
-export function xorWith<T>(arr1: readonly T[], arr2: readonly T[], areElementsEqual: (item1: T, item2: T) => boolean): T[] {
+export function xorWith<T>(
+  arr1: readonly T[],
+  arr2: readonly T[],
+  areElementsEqual: (item1: T, item2: T) => boolean
+): T[] {
   const union = unionWith(arr1, arr2, areElementsEqual);
   const intersection = intersectionWith(arr1, arr2, areElementsEqual);
 
