@@ -17,7 +17,7 @@ describe('isUndefined', () => {
 
     const result = arr.filter(isUndefined);
 
-    // Here the type of result should be `null[]`.
+    // Here the type of result should be `undefined[]`.
     expect(result).toStrictEqual([undefined]);
   });
 });

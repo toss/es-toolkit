@@ -1,3 +1,7 @@
+interface DebounceOptions {
+  signal?: AbortSignal;
+}
+
 /**
  * Creates a debounced function that delays invoking the provided function until after `debounceMs` milliseconds
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
@@ -5,6 +9,8 @@
  *
  * @param {F} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
+ * @param {DebounceOptions} options - The options object.
+ * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
  * @returns {F & { cancel: () => void }} A new debounced function with a `cancel` method.
  *
  * @example
@@ -17,25 +23,53 @@
  *
  * // Will not log anything as the previous call is canceled
  * debouncedFunction.cancel();
+ *
+ * // With AbortSignal
+ * const controller = new AbortController();
+ * const signal = controller.signal;
+ * const debouncedWithSignal = debounce(() => {
+ *  console.log('Function executed');
+ * }, 1000, { signal });
+ *
+ * debouncedWithSignal();
+ *
+ * // Will cancel the debounced function call
+ * controller.abort();
  */
-export function debounce<F extends (...args: any[]) => void>(func: F, debounceMs: number): F & { cancel: () => void } {
+export function debounce<F extends (...args: any[]) => void>(
+  func: F,
+  debounceMs: number,
+  { signal }: DebounceOptions = {}
+): F & { cancel: () => void } {
   let timeoutId: number | NodeJS.Timeout | null = null;
 
   const debounced = function (...args: Parameters<F>) {
-    if (timeoutId != null) {
+    if (timeoutId !== null) {
       clearTimeout(timeoutId);
+    }
+
+    if (signal?.aborted) {
+      return;
     }
 
     timeoutId = setTimeout(() => {
       func(...args);
+      timeoutId = null;
     }, debounceMs);
   } as F & { cancel: () => void };
 
+  const onAbort = function () {
+    debounced.cancel();
+  };
+
   debounced.cancel = function () {
-    if (timeoutId != null) {
+    if (timeoutId !== null) {
       clearTimeout(timeoutId);
+      timeoutId = null;
     }
   };
+
+  signal?.addEventListener('abort', onAbort, { once: true });
 
   return debounced;
 }

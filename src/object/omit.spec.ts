@@ -4,8 +4,8 @@ import { omit } from './omit';
 describe('omit', () => {
   it('should omit properties from an object', () => {
     const object = { foo: 1, bar: 2, baz: 3 };
-
-    expect(omit(object, ['foo', 'bar'])).toEqual({ baz: 3 });
+    const result = omit(object, ['foo', 'bar']);
+    expect(result).toEqual({ baz: 3 });
   });
 
   it('should return an empty object if all keys are omitted', () => {

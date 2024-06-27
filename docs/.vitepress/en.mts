@@ -70,6 +70,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'unionBy', link: '/reference/array/unionBy' },
             { text: 'unionWith', link: '/reference/array/unionWith' },
             { text: 'uniq', link: '/reference/array/uniq' },
+            { text: 'uniqBy', link: '/reference/array/uniqBy' },
+            { text: 'uniqWith', link: '/reference/array/uniqWith' },
             { text: 'xor', link: '/reference/array/xor' },
             { text: 'xorBy', link: '/reference/array/xorBy' },
             { text: 'xorWith', link: '/reference/array/xorWith' },
@@ -90,6 +92,8 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Math Utilities',
           items: [
             { text: 'clamp', link: '/reference/math/clamp' },
+            { text: 'random', link: '/reference/math/random' },
+            { text: 'randomInt', link: '/reference/math/randomInt' },
             { text: 'round', link: '/reference/math/round' },
             { text: 'sum', link: '/reference/math/sum' },
           ],

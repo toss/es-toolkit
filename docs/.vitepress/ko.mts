@@ -69,6 +69,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'unionBy', link: '/ko/reference/array/unionBy' },
             { text: 'unionWith', link: '/ko/reference/array/unionWith' },
             { text: 'uniq', link: '/ko/reference/array/uniq' },
+            { text: 'uniqBy', link: '/ko/reference/array/uniqBy' },
+            { text: 'uniqWith', link: '/ko/reference/array/uniqWith' },
             { text: 'xor', link: '/ko/reference/array/xor' },
             { text: 'xorBy', link: '/ko/reference/array/xorBy' },
             { text: 'xorWith', link: '/ko/reference/array/xorWith' },
@@ -89,6 +91,8 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '숫자',
           items: [
             { text: 'clamp', link: '/ko/reference/math/clamp' },
+            { text: 'random', link: '/ko/reference/math/random' },
+            { text: 'randomInt', link: '/ko/reference/math/randomInt' },
             { text: 'round', link: '/ko/reference/math/round' },
             { text: 'sum', link: '/ko/reference/math/sum' },
           ],

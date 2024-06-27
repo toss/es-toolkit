@@ -25,4 +25,5 @@ function round(value: number, precision?: number): number;
 const result1 = round(1.2345); // result1은 1이 되어요.
 const result2 = round(1.2345, 2); // result2는 1.23이 되어요.
 const result3 = round(1.2345, 3); // result3는 1.235가 되어요.
+const result4 = round(1.2345, 3.1); // precision이 integer가 아니면 오류를 반환해요.
 ```

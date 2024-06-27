@@ -19,6 +19,10 @@ import { uniqWith } from './uniqWith';
  * const result = unionWith(array1, array2, areItemsEqual);
  * // result will be [{ id: 1 }, { id: 2 }, { id: 3 }] since { id: 2 } is considered equal in both arrays
  */
-export function unionWith<T>(arr1: T[], arr2: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[] {
+export function unionWith<T>(
+  arr1: readonly T[],
+  arr2: readonly T[],
+  areItemsEqual: (item1: T, item2: T) => boolean
+): T[] {
   return uniqWith(arr1.concat(arr2), areItemsEqual);
 }

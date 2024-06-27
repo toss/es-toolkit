@@ -7,13 +7,16 @@
 ## 인터페이스
 
 ```typescript
-function omitBy<T extends Record<string, any>>(obj: T, shouldOmit: (value: any, key: string) => boolean): Partial<T>;
+function omitBy<T extends Record<string, any>>(
+  obj: T,
+  shouldOmit: (value: T[keyof T], key: keyof T) => boolean
+): Partial<T>;
 ```
 
 ### 파라미터
 
 - `obj` (`T`): 프로퍼티를 생략할 객체예요.
-- `shouldOmit` (`(value: any, key: string) => boolean`): 프로퍼티를 생략할지 결정하는 조건 함수예요. 이 함수는 프로퍼티의 키와 값을 인자로 받아, 프로퍼티를 생략해야 하면 true, 그렇지 않으면 false를 반환해요.
+- `shouldOmit` (`(value: T[keyof T], key: keyof T) => boolean`): 프로퍼티를 생략할지 결정하는 조건 함수예요. 이 함수는 프로퍼티의 키와 값을 인자로 받아, 프로퍼티를 생략해야 하면 true, 그렇지 않으면 false를 반환해요.
 
 ### 반환 값
 

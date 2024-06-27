@@ -21,7 +21,7 @@
  * chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
  * // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
  */
-export function chunk<T>(arr: T[], size: number): T[][] {
+export function chunk<T>(arr: readonly T[], size: number): T[][] {
   if (!Number.isInteger(size) || size <= 0) {
     throw new Error('Size must be an integer greater than zero.');
   }

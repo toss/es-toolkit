@@ -15,7 +15,7 @@
  * // Returns []
  * takeRightWhile([1, 2, 3], n => n > 3);
  */
-export function takeRightWhile<T>(arr: T[], shouldContinueTaking: (item: T) => boolean): T[] {
+export function takeRightWhile<T>(arr: readonly T[], shouldContinueTaking: (item: T) => boolean): T[] {
   for (let i = arr.length - 1; i >= 0; i--) {
     if (!shouldContinueTaking(arr[i])) {
       return arr.slice(i + 1);

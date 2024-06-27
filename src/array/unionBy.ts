@@ -18,15 +18,16 @@
  * unionBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idMapper);
  * // Returns [{ id: 1 }, { id: 2 }, { id: 3 }]
  */
-export function unionBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[] {
+export function unionBy<T, U>(arr1: readonly T[], arr2: readonly T[], mapper: (item: T) => U): T[] {
   const map = new Map<U, T>();
 
   for (const item of [...arr1, ...arr2]) {
     const key = mapper(item);
+
     if (!map.has(key)) {
       map.set(key, item);
     }
   }
 
-  return [...map.values()];
+  return Array.from(map.values());
 }

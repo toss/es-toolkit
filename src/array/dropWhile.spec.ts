@@ -18,5 +18,7 @@ describe('dropWhile', () => {
       },
       { id: 3, enabled: false },
     ]);
+
+    expect(dropWhile([1, 2, 3], x => x < 4)).toEqual([]);
   });
 });

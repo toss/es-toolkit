@@ -43,11 +43,20 @@ describe('round function', () => {
     // The round function in JavaScript does not work as 'Round half to Even'
     expect(round(-1.35, 1)).toBe(-1.3);
   });
+
   it('works with zero', () => {
     expect(round(0)).toBe(0);
   });
 
   it('works with precision leading to no rounding', () => {
     expect(round(8.88888, 5)).toBe(8.88888);
+  });
+
+  it('handles edge cases where precision is not integer', () => {
+    const value = 1.2345;
+    const precision = 3.1;
+    expect(() => round(value, precision)).toThrow(
+      'Precision must be an integer.'
+    );
   });
 });

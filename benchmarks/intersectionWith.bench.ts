@@ -3,14 +3,14 @@ import { intersectionWith as intersectionWithToolkit } from 'es-toolkit';
 import { intersectionWith as intersectionWithLodash } from 'lodash';
 
 describe('intersectionWith', () => {
-  bench('es-toolkit', () => {
+  bench('es-toolkit/intersectionWith', () => {
     const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
     const array2 = [{ id: 2 }, { id: 4 }];
     const areItemsEqual = (a, b) => a.id === b.id;
     intersectionWithToolkit(array1, array2, areItemsEqual);
   });
 
-  bench('lodash', () => {
+  bench('lodash/intersectionWith', () => {
     const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
     const array2 = [{ id: 2 }, { id: 4 }];
     const areItemsEqual = (a, b) => a.id === b.id;

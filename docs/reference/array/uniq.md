@@ -1,5 +1,3 @@
-===
-
 # uniq
 
 Creates a duplicate-free version of an array.
