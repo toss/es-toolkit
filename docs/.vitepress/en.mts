@@ -48,6 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Array Utilities',
           items: [
             { text: 'chunk', link: '/reference/array/chunk' },
+            { text: 'compact', link: '/reference/array/compact' },
             { text: 'difference', link: '/reference/array/difference' },
             { text: 'differenceBy', link: '/reference/array/differenceBy' },
             { text: 'differenceWith', link: '/reference/array/differenceWith' },

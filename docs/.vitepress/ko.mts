@@ -47,6 +47,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '배열',
           items: [
             { text: 'chunk', link: '/ko/reference/array/chunk' },
+            { text: 'compact', link: '/ko/reference/array/compact' },
             { text: 'difference', link: '/ko/reference/array/difference' },
             { text: 'differenceBy', link: '/ko/reference/array/differenceBy' },
             { text: 'differenceWith', link: '/ko/reference/array/differenceWith' },
