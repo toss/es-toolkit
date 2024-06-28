@@ -1,27 +1,20 @@
 /**
- * Returns the element of the specified array that has the maximum value, according to the specified selector.
+ * Finds the element in an array that has the maximum value when applying
+ * the `getValue` function to each element.
  *
- * This function takes an array of elements and a selector function, and returns the element with the maximum value according to the selector.
- *
- * @param {T[]} elements - An array of elements to be compared.
- * @param {(element: T) => number} selector - A function that takes an element and returns a number.
- * @returns {T} The element with the maximum value according to the selector.
- *
+ * @param {T[]} items The array of elements to search.
+ * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
+ * @returns {T} The element with the maximum value as determined by the `getValue` function.
  * @example
- * const people = [
- *  { name: 'Mark', age: 25 },
- *  { name: 'Nunu', age: 30 },
- *  { name: 'Overmars', age: 20 }
- *  ];
- *  const result = maxBy(people, person => person.age);
- *  // result will be { name: 'Nunu', age: 30 }
+ * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
+ * maxBy([], x => x.a); // Returns: undefined
  */
-export function maxBy<T>(elements: T[], selector: (element: T) => number): T {
-  let maxElement = elements[0];
+export function maxBy<T>(items: T[], getValue: (element: T) => number): T {
+  let maxElement = items[0];
   let max = -Infinity;
 
-  for (const element of elements) {
-    const value = selector(element);
+  for (const element of items) {
+    const value = getValue(element);
     if (value > max) {
       max = value;
       maxElement = element;

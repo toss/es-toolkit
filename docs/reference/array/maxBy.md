@@ -1,23 +1,23 @@
 # maxBy
 
-Selects the first element of a list that has the maximum value of a function.
+Finds the element in an array that has the maximum value when applying the `getValue` function to each element.
 
 If the list is empty, returns `undefined`.
 
 ## Signature
 
 ```typescript
-function maxBy<T>(elements: T[], selector: (element: T) => number): T;
+function maxBy<T>(items: T[], getValue: (item: T) => number): T;
 ```
 
 ### Parameters
 
-- `elements`: an array of elements to search through.
-- `selector`: a function that takes an element and returns a number that the property of the object.
+- `items` (`T[]`): The array of elements to search.
+- `getValue` (`(item: T) => number`): A function that selects a numeric value from each element.
 
 ### Returns
 
-The first element of the list that has the maximum value of the function. If the list is empty, returns `undefined`.
+The element with the maximum value as determined by the `getValue` function.
 
 ### Example
 

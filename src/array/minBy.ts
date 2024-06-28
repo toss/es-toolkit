@@ -1,19 +1,20 @@
 /**
- * Returns the minimum value in an array of numbers.
+ * Finds the element in an array that has the minimum value when applying
+ * the `getValue` function to each element.
  *
- * This function takes an array of elements and a selector function, and returns the element with the minimum value according to the selector.
- *
- * If the array is empty, the function returns `undefined`.
- *
- * @param elements An array of elements.
- * @param selector A function that selects a number from an element.
+ * @param {T[]} items The array of elements to search.
+ * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
+ * @returns {T} The element with the minimum value as determined by the `getValue` function.
+ * @example
+ * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
+ * minBy([], x => x.a); // Returns: undefined
  */
-export function minBy<T>(elements: T[], selector: (element: T) => number): T {
-  let minElement = elements[0];
+export function minBy<T>(items: T[], getValue: (element: T) => number): T {
+  let minElement = items[0];
   let min = Infinity;
 
-  for (const element of elements) {
-    const value = selector(element);
+  for (const element of items) {
+    const value = getValue(element);
     if (value < min) {
       min = value;
       minElement = element;
