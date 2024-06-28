@@ -11,11 +11,11 @@ type NotFalsey<T> = Exclude<T, false | null | 0 | '' | undefined>;
  * Returns: [1, 2, 3, 4, 5]
  */
 export function compact<T>(arr: readonly T[]): Array<NotFalsey<T>> {
-  const result: Array<NotFalsey<T>> = new Array(arr.length);
+  const result: Array<NotFalsey<T>> = [];
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      result[i] = arr[i] as NotFalsey<T>;
+  for (const item of arr) {
+    if (item) {
+      result.push(item as NotFalsey<T>);
     }
   }
 
