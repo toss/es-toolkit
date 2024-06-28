@@ -10,6 +10,8 @@ export { groupBy } from './groupBy';
 export { intersection } from './intersection';
 export { intersectionBy } from './intersectionBy';
 export { intersectionWith } from './intersectionWith';
+export { maxBy } from './maxBy';
+export { minBy } from './minBy';
 export { partition } from './partition';
 export { sample } from './sample';
 export { shuffle } from './shuffle';

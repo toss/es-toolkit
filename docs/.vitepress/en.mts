@@ -59,6 +59,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'intersection', link: '/reference/array/intersection' },
             { text: 'intersectionBy', link: '/reference/array/intersectionBy' },
             { text: 'intersectionWith', link: '/reference/array/intersectionWith' },
+            { text: 'minBy', link: '/reference/array/minBy' },
+            { text: 'maxBy', link: '/reference/array/maxBy' },
             { text: 'partition', link: '/reference/array/partition' },
             { text: 'sample', link: '/reference/array/sample' },
             { text: 'shuffle', link: '/reference/array/shuffle' },
