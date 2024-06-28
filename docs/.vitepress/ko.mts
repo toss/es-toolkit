@@ -94,6 +94,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'random', link: '/ko/reference/math/random' },
             { text: 'randomInt', link: '/ko/reference/math/randomInt' },
             { text: 'round', link: '/ko/reference/math/round' },
+            { text: 'range', link: '/ko/reference/math/range' },
             { text: 'sum', link: '/ko/reference/math/sum' },
           ],
         },

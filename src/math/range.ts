@@ -1,8 +1,7 @@
 /**
- * Returns an array of numbers from `start` to `end` with the specified `step` value.
+ * Returns an array of numbers from `start` to `end`, incrementing by `step`.
  *
- * This function generates a range of numbers, starting from `start`, ending before `end`,
- * and incrementing by `step`. If `step` is not provided, it defaults to `1` for an
+ * If `step` is not provided, it defaults to `1` for an
  * ascending range and `-1` for a descending range.
  *
  * @param {number} start - The starting number of the range.
@@ -19,22 +18,28 @@
  * range(0, 20, 5);
  *
  * @example
- * // Returns [0, -1, -2, -3]
+ * // Returns []
  * range(0, -4, -1);
  *
  * @example
- * // Returns [1, 1, 1]
+ * // Throws an error: The step value must be a non-zero integer.
  * range(1, 4, 0);
  */
-
+export function range(end: number): number[];
+export function range(start: number, end: number): number[];
+export function range(start: number, end: number, step: number): number[];
 export function range(start: number, end?: number, step?: number): number[] {
-  if (end === undefined) {
+  if (end == null) {
     end = start;
     start = 0;
   }
 
-  if (step === undefined) {
-    step = start <= end ? 1 : -1;
+  if (step == null) {
+    step = 1;
+  }
+
+  if (!Number.isInteger(step) || step === 0) {
+    throw new Error(`The step value must be a non-zero integer.`);
   }
 
   const length = Math.max(Math.ceil((end - start) / (step || 1)), 0);

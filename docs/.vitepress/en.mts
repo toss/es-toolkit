@@ -94,6 +94,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'clamp', link: '/reference/math/clamp' },
             { text: 'random', link: '/reference/math/random' },
             { text: 'randomInt', link: '/reference/math/randomInt' },
+            { text: 'range', link: '/reference/math/range' },
             { text: 'round', link: '/reference/math/round' },
             { text: 'sum', link: '/reference/math/sum' },
           ],
