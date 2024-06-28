@@ -14,7 +14,7 @@ function compact<T>(arr: T[]): Array<Exclude<T, false | null | 0 | '' | undefine
 
 ### Returns
 
-(`T[]`) A new array with all falsey values removed.
+(`Array<Exclude<T, false | null | 0 | '' | undefined>>`) A new array with all falsey values removed.
 
 ## Examples
 
