@@ -31,3 +31,4 @@ export { xorBy } from './xorBy';
 export { xorWith } from './xorWith';
 export { zip } from './zip';
 export { zipWith } from './zipWith';
+export { zipObject } from './zipObject';
