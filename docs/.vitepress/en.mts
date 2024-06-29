@@ -48,6 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Array Utilities',
           items: [
             { text: 'chunk', link: '/reference/array/chunk' },
+            { text: 'compact', link: '/reference/array/compact' },
             { text: 'difference', link: '/reference/array/difference' },
             { text: 'differenceBy', link: '/reference/array/differenceBy' },
             { text: 'differenceWith', link: '/reference/array/differenceWith' },
@@ -59,6 +60,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'intersection', link: '/reference/array/intersection' },
             { text: 'intersectionBy', link: '/reference/array/intersectionBy' },
             { text: 'intersectionWith', link: '/reference/array/intersectionWith' },
+            { text: 'minBy', link: '/reference/array/minBy' },
+            { text: 'maxBy', link: '/reference/array/maxBy' },
             { text: 'partition', link: '/reference/array/partition' },
             { text: 'sample', link: '/reference/array/sample' },
             { text: 'shuffle', link: '/reference/array/shuffle' },
@@ -92,8 +95,10 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Math Utilities',
           items: [
             { text: 'clamp', link: '/reference/math/clamp' },
+            { text: 'mean', link: '/reference/math/mean' },
             { text: 'random', link: '/reference/math/random' },
             { text: 'randomInt', link: '/reference/math/randomInt' },
+            { text: 'range', link: '/reference/math/range' },
             { text: 'round', link: '/reference/math/round' },
             { text: 'sum', link: '/reference/math/sum' },
           ],

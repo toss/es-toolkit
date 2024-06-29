@@ -1,4 +1,5 @@
 export { chunk } from './chunk';
+export { compact } from './compact';
 export { difference } from './difference';
 export { differenceBy } from './differenceBy';
 export { differenceWith } from './differenceWith';
@@ -10,6 +11,8 @@ export { groupBy } from './groupBy';
 export { intersection } from './intersection';
 export { intersectionBy } from './intersectionBy';
 export { intersectionWith } from './intersectionWith';
+export { maxBy } from './maxBy';
+export { minBy } from './minBy';
 export { partition } from './partition';
 export { sample } from './sample';
 export { shuffle } from './shuffle';
