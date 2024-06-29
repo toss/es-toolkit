@@ -59,6 +59,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'intersection', link: '/ko/reference/array/intersection' },
             { text: 'intersectionBy', link: '/ko/reference/array/intersectionBy' },
             { text: 'intersectionWith', link: '/ko/reference/array/intersectionWith' },
+            { text: 'keyBy', link: '/ko/reference/array/keyBy' },
             { text: 'minBy', link: '/ko/reference/array/minBy' },
             { text: 'maxBy', link: '/ko/reference/array/maxBy' },
             { text: 'partition', link: '/ko/reference/array/partition' },
