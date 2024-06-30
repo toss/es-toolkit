@@ -23,7 +23,7 @@
  * //   vegetable: { category: 'vegetable', name: 'carrot' }
  * // }
  */
-export function keyBy<T, K extends string>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T> {
+export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T> {
   const result = {} as Record<K, T>;
 
   for (const item of arr) {
