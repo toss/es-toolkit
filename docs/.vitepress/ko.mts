@@ -79,6 +79,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorBy', link: '/ko/reference/array/xorBy' },
             { text: 'xorWith', link: '/ko/reference/array/xorWith' },
             { text: 'zip', link: '/ko/reference/array/zip' },
+            { text: 'zipObject', link: '/ko/reference/array/zipObject' },
             { text: 'zipWith', link: '/ko/reference/array/zipWith' },
           ],
         },

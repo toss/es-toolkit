@@ -80,6 +80,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorBy', link: '/reference/array/xorBy' },
             { text: 'xorWith', link: '/reference/array/xorWith' },
             { text: 'zip', link: '/reference/array/zip' },
+            { text: 'zipObject', link: '/reference/array/zipObject' },
             { text: 'zipWith', link: '/reference/array/zipWith' },
           ],
         },
