@@ -72,7 +72,7 @@ jobs:
           else
             npm publish --access public --tag dev *.tgz
           fi
-          deno task publish --allow-dirty
+          deno publish --allow-dirty
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         working-directory: ${{ github.workspace }}/out/
