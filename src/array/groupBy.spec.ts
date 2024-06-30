@@ -51,7 +51,7 @@ describe('groupBy', () => {
       { score: 1, name: 'Joe' },
     ];
 
-    const result = groupBy(array, item => item.score.toString());
+    const result = groupBy(array, item => item.score);
 
     expect(result).toEqual({
       '1': [
@@ -59,6 +59,26 @@ describe('groupBy', () => {
         { score: 1, name: 'Joe' },
       ],
       '2': [{ score: 2, name: 'Jane' }],
+    });
+  });
+
+  it('should group elements by a symbol key', () => {
+    const TYPE_A = Symbol();
+    const TYPE_B = Symbol();
+    const array = [
+      { type: TYPE_A, score: 1, name: 'John' },
+      { type: TYPE_A, score: 2, name: 'Jane' },
+      { type: TYPE_B, score: 1, name: 'Joe' },
+    ];
+
+    const result = groupBy(array, item => item.type);
+
+    expect(result).toEqual({
+      [TYPE_A]: [
+        { type: TYPE_A, score: 1, name: 'John' },
+        { type: TYPE_A, score: 2, name: 'Jane' },
+      ],
+      [TYPE_B]: [{ type: TYPE_B, score: 1, name: 'Joe' }],
     });
   });
 
