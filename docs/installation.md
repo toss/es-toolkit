@@ -30,7 +30,7 @@ es-toolkit is also accessible via [JSR](https://jsr.io/@es-toolkit/es-toolkit) f
 deno add @es-toolkit/es-toolkit
 ```
 
-lease be aware that the package name includes an additional scope, distinct from npm, as per JSR restrictions.
+Note that the package name includes an additional scope, distinct from npm, as per JSR restrictions.
 
 ```typescript
 import { sum } from '@es-toolkit/es-toolkit';
