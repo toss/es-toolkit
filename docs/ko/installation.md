@@ -16,11 +16,21 @@ Node.js나 Bun을 사용하는 경우, [npm](https://npmjs.com/package/es-toolki
 
 es-toolkit은 Node.js 18 또는 이후 버전을 지원해요. es-toolkit을 설치하기 위해서는 아래 명령어를 사용해주세요.
 
-```sh
+::: code-group
+
+```sh [npm]
 npm install es-toolkit
-yarn add es-toolkit
+```
+
+```sh [pnpm]
 pnpm install es-toolkit
 ```
+
+```sh [yarn]
+yarn add es-toolkit
+```
+
+:::
 
 ## Deno
 
