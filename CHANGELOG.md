@@ -1,5 +1,16 @@
 # es-toolkit Changelog
 
+## Version v1.6.0
+
+Released on June 30th, 2024.
+
+### Features
+
+- Add support for [keyBy](https://es-toolkit.slash.page/reference/array/keyBy.html). (https://github.com/toss/es-toolkit/pull/93).
+- Add support for [zipObject](https://es-toolkit.slash.page/reference/array/zipObject.html). (https://github.com/toss/es-toolkit/pull/92).
+- Add support for [compact](https://es-toolkit.slash.page/reference/array/compact.html). ([60ae59b](https://github.com/toss/es-toolkit/commit/60ae59bcfee69992e5447322e1da9cb7631c5745))
+- Add support for [mean](https://es-toolkit.slash.page/reference/math/mean.html). ([715bc60](https://github.com/toss/es-toolkit/commit/715bc60b26bb24ad490b8befe16204050699f0c0))
+
 ## Version v1.5.0
 
 Released on June 28th, 2024.
