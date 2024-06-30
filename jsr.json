@@ -1,0 +1,10 @@
+{
+  "name": "@es-toolkit/es-toolkit",
+  "version": "1.6.0",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "include": [
+    "./src/**/*.ts"
+  ]
+}
