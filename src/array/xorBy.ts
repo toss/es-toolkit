@@ -1,6 +1,6 @@
-import { differenceBy } from './differenceBy';
-import { intersectionBy } from './intersectionBy';
-import { unionBy } from './unionBy';
+import { differenceBy } from './differenceBy.ts';
+import { intersectionBy } from './intersectionBy.ts';
+import { unionBy } from './unionBy.ts';
 
 /**
  * Computes the symmetric difference between two arrays using a custom mapping function.

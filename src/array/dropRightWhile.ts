@@ -1,4 +1,4 @@
-import { dropWhile } from './dropWhile';
+import { dropWhile } from './dropWhile.ts';
 
 /**
  * Removes elements from the end of an array until the predicate returns false.

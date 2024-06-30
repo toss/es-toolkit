@@ -1,4 +1,4 @@
-import { uniqWith } from './uniqWith';
+import { uniqWith } from './uniqWith.ts';
 
 /**
  * Creates an array of unique values from two given arrays based on a custom equality function.

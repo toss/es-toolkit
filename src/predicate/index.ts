@@ -1,4 +1,4 @@
-export { isNil } from './isNil';
-export { isNotNil } from './isNotNil';
-export { isNull } from './isNull';
-export { isUndefined } from './isUndefined';
+export { isNil } from './isNil.ts';
+export { isNotNil } from './isNotNil.ts';
+export { isNull } from './isNull.ts';
+export { isUndefined } from './isUndefined.ts';

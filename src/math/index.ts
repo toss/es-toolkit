@@ -1,7 +1,7 @@
-export { clamp } from './clamp';
-export { mean } from './mean';
-export { random } from './random';
-export { randomInt } from './randomInt';
-export { round } from './round';
-export { sum } from './sum';
-export { range } from './range';
+export { clamp } from './clamp.ts';
+export { mean } from './mean.ts';
+export { random } from './random.ts';
+export { randomInt } from './randomInt.ts';
+export { round } from './round.ts';
+export { sum } from './sum.ts';
+export { range } from './range.ts';

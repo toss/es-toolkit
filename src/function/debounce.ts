@@ -41,7 +41,7 @@ export function debounce<F extends (...args: any[]) => void>(
   debounceMs: number,
   { signal }: DebounceOptions = {}
 ): F & { cancel: () => void } {
-  let timeoutId: number | NodeJS.Timeout | null = null;
+  let timeoutId: number | null = null;
 
   const debounced = function (...args: Parameters<F>) {
     if (timeoutId !== null) {
@@ -55,7 +55,7 @@ export function debounce<F extends (...args: any[]) => void>(
     timeoutId = setTimeout(() => {
       func(...args);
       timeoutId = null;
-    }, debounceMs);
+    }, debounceMs) as any;
   } as F & { cancel: () => void };
 
   const onAbort = function () {

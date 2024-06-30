@@ -1,6 +1,6 @@
-import { difference } from './difference';
-import { intersection } from './intersection';
-import { union } from './union';
+import { difference } from './difference.ts';
+import { intersection } from './intersection.ts';
+import { union } from './union.ts';
 
 /**
  * Computes the symmetric difference between two arrays. The symmetric difference is the set of elements

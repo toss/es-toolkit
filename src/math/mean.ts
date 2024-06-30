@@ -1,4 +1,4 @@
-import { sum } from './sum';
+import { sum } from './sum.ts';
 
 /**
  * Calculates the average of an array of numbers.

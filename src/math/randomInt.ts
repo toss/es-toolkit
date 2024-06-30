@@ -1,4 +1,4 @@
-import { random } from './random';
+import { random } from './random.ts';
 
 /**
  * Generates a random integer between minimum (inclusive) and maximum (exclusive).

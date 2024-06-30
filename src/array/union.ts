@@ -1,4 +1,4 @@
-import { uniq } from './uniq';
+import { uniq } from './uniq.ts';
 
 /**
  * Creates an array of unique values from all given arrays.

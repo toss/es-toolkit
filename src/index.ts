@@ -21,10 +21,10 @@
  *
  * @module
  */
-export * from './array';
-export * from './error';
-export * from './function';
-export * from './math';
-export * from './object';
-export * from './predicate';
-export * from './promise';
+export * from './array/index.ts';
+export * from './error/index.ts';
+export * from './function/index.ts';
+export * from './math/index.ts';
+export * from './object/index.ts';
+export * from './predicate/index.ts';
+export * from './promise/index.ts';
