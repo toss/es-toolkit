@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.6.1
+
+Released on June 30th, 2024.
+
+- Publish package on [JSR](https://jsr.io/@es-toolkit/es-toolkit).
+
 ## Version v1.6.0
 
 Released on June 30th, 2024.
