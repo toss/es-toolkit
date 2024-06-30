@@ -10,7 +10,7 @@ next:
 
 # Installation
 
-es-toolkit is available on [npm](https://npmjs.com/package/es-toolkit) for Node.js, Deno, and Bun.
+es-toolkit is available via [npm](https://npmjs.com/package/es-toolkit) for Node.js and Bun, and through [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno.
 
 ## Node.js
 
@@ -24,7 +24,7 @@ pnpm install es-toolkit
 
 ## Deno
 
-es-toolkit is also accessible via [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno. To install es-toolkit, use the following command:
+es-toolkit is also available via [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno. To install es-toolkit, use the following command:
 
 ```sh
 deno add @es-toolkit/es-toolkit
