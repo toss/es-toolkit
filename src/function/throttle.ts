@@ -23,7 +23,7 @@
  *   throttledFunction(); // Will log 'Function executed'
  * }, 1000);
  */
-export function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number) {
+export function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): F {
   let lastCallTime: number | null;
 
   const throttledFunction = function (...args: Parameters<F>) {
