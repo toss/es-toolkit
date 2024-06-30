@@ -24,10 +24,18 @@ pnpm install es-toolkit
 
 ## Deno
 
-es-toolkit is also available on npm for Deno. Use es-toolkit with the `npm:` specifier:
+es-toolkit is also accessible via [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno. To install es-toolkit, use the following command:
+
+```sh
+deno add @es-toolkit/es-toolkit
+```
+
+lease be aware that the package name includes an additional scope, distinct from npm, as per JSR restrictions.
 
 ```typescript
-import { chunk } from 'npm:es-toolkit@1.0.0';
+import { sum } from '@es-toolkit/es-toolkit';
+
+sum([1, 2, 3]);
 ```
 
 ## Bun
