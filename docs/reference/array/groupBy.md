@@ -9,7 +9,7 @@ the same key.
 ## Signature
 
 ```typescript
-function groupBy<T, K extends string>(arr: T[], getKeyFromItem: (item: T) => K): Record<K, T[]>;
+function groupBy<T, K extends PropertyKey>(arr: T[], getKeyFromItem: (item: T) => K): Record<K, T[]>;
 ```
 
 ### Parameters

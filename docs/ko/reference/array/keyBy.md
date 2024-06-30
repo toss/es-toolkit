@@ -9,7 +9,7 @@
 ## 인터페이스
 
 ```typescript
-function keyBy<T, K extends string>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T>;
+function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T>;
 ```
 
 ### 파라미터
