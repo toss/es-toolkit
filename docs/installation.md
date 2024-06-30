@@ -16,11 +16,21 @@ es-toolkit is available via [npm](https://npmjs.com/package/es-toolkit) for Node
 
 es-toolkit supports Node.js 18 or later. Install es-toolkit with the following command:
 
-```sh
+::: code-group
+
+```sh [npm]
 npm install es-toolkit
-yarn add es-toolkit
+```
+
+```sh [pnpm]
 pnpm install es-toolkit
 ```
+
+```sh [yarn]
+yarn add es-toolkit
+```
+
+:::
 
 ## Deno
 
