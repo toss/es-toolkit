@@ -4,7 +4,9 @@
   "exports": {
     ".": "./src/index.ts"
   },
-  "include": [
-    "./src/**/*.ts"
-  ]
+  "publish": {
+    "include": [
+      "./src/**/*.ts"
+    ]
+  }
 }

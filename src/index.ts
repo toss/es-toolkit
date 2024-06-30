@@ -1,8 +1,16 @@
 /**
- * es-toolkit: A modern JavaScript utility library that's 2-3 times faster and up to 97% smaller—a major upgrade to lodash.
+ * es-toolkit
  * ====================================
+ * A modern JavaScript utility library that's 2-3 times faster and up to 97% smaller—a major upgrade to lodash.
+ *
  * es-toolkit is a state-of-the-art, high-performance JavaScript utility library
  * with a small bundle size and strong type annotations.
+ *
+ * - es-toolkit offers a variety of everyday utility functions with modern implementations, such as [debounce](https://es-toolkit.slash.page/reference/function/debounce.html), [delay](https://es-toolkit.slash.page/reference/promise/delay.html), [chunk](https://es-toolkit.slash.page/reference/array/chunk.html), [sum](https://es-toolkit.slash.page/reference/math/sum.html), and [pick](https://es-toolkit.slash.page/reference/object/pick.html).
+ * - Designed with performance in mind, es-toolkit achieves [2-3× better performance](https://es-toolkit.slash.page/performance.html) in modern JavaScript environments.
+ * - es-toolkit supports tree shaking out of the box, and [reduces JavaScript code by up to 97%](https://es-toolkit.slash.page/bundle-size.html) compared to other libraries.
+ * - es-toolkit includes built-in TypeScript support, with straightforward yet robust types. It also provides useful type guards such as [isNotNil](https://es-toolkit.slash.page/reference/predicate/isNotNil.html).
+ * - es-toolkit is battle-tested with 100% test coverage, ensuring reliability and robustness.
  *
  * Here are some of the features es-toolkit offers:
  *
