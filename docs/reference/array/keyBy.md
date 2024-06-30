@@ -9,7 +9,7 @@ If there are multiple elements generating the same key, the last element among t
 ## Signature
 
 ```typescript
-function keyBy<T, K extends string>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T>;
+function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T>;
 ```
 
 ### Parameters
