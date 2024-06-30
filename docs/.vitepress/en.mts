@@ -65,6 +65,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'maxBy', link: '/reference/array/maxBy' },
             { text: 'partition', link: '/reference/array/partition' },
             { text: 'sample', link: '/reference/array/sample' },
+            { text: 'sampleSize', link: '/reference/array/sampleSize' },
             { text: 'shuffle', link: '/reference/array/shuffle' },
             { text: 'take', link: '/reference/array/take' },
             { text: 'takeWhile', link: '/reference/array/takeWhile' },

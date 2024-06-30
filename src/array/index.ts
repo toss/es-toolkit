@@ -16,6 +16,7 @@ export { maxBy } from './maxBy.ts';
 export { minBy } from './minBy.ts';
 export { partition } from './partition.ts';
 export { sample } from './sample.ts';
+export { sampleSize } from './sampleSize.ts';
 export { shuffle } from './shuffle.ts';
 export { take } from './take.ts';
 export { takeRight } from './takeRight.ts';
