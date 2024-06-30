@@ -23,6 +23,9 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
       - if: github.ref_type == 'branch'
         run: |
           jq \
