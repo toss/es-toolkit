@@ -24,8 +24,6 @@ pnpm install es-toolkit
 
 ## Deno
 
-## Deno
-
 es-toolkit을 Deno에서도 사용할 수 있어요. [JSR](https://jsr.io/@es-toolkit/es-toolkit)에서 아래 명령어로 설치하세요.
 
 ```sh
