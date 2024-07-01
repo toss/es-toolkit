@@ -99,6 +99,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'clamp', link: '/reference/math/clamp' },
             { text: 'mean', link: '/reference/math/mean' },
+            { text: 'meanBy', link: '/reference/math/meanBy' },
             { text: 'random', link: '/reference/math/random' },
             { text: 'randomInt', link: '/reference/math/randomInt' },
             { text: 'range', link: '/reference/math/range' },

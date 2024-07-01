@@ -1,5 +1,6 @@
 export { clamp } from './clamp.ts';
 export { mean } from './mean.ts';
+export { meanBy } from './meanBy.ts';
 export { random } from './random.ts';
 export { randomInt } from './randomInt.ts';
 export { round } from './round.ts';
