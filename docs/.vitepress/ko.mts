@@ -97,6 +97,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'clamp', link: '/ko/reference/math/clamp' },
             { text: 'mean', link: '/ko/reference/math/mean' },
+            { text: 'meanBy', link: '/ko/reference/math/meanBy' },
             { text: 'random', link: '/ko/reference/math/random' },
             { text: 'randomInt', link: '/ko/reference/math/randomInt' },
             { text: 'round', link: '/ko/reference/math/round' },
