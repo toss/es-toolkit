@@ -23,18 +23,14 @@
  * // => [4, '*', '*', 10]
  */
 
-export function fill<T>(array: any[], value: T): T[];
-export function fill<T, P>(array: Array<T | P>, value: P, start?: number, end?: number): Array<T | P>;
-export function fill<T, P>(array: Array<T | P>, value: P, start = 0, end?: number): Array<T | P> {
-  const length = array.length;
-  if (!length) {
-    return array;
-  }
+export function fill<T>(array: unknown[], value: T): T[];
+export function fill<T, P>(array: T[], value: P, start: number): Array<T | P>;
+export function fill<T, P>(array: T[], value: P, start: number, end: number): Array<T | P>;
+export function fill<T, P>(array: T[], value: P, start = 0, end = array.length): Array<T | P> {
+  start = Math.max(start, 0);
+  end = Math.min(end, array.length);
 
-  const startIdx = start < 0 ? Math.max(length + start, 0) : Math.min(start, length);
-  const endIdx = end === undefined ? length : end < 0 ? Math.max(length + end, 0) : Math.min(end, length);
-
-  for (let i = startIdx; i < endIdx; i++) {
+  for (let i = start; i < end; i++) {
     array[i] = value;
   }
 
