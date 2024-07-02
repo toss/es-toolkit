@@ -11,8 +11,7 @@
  * @template T - The type of the items in the input array.
  *
  * @param {T[]} arr - The input array to count occurrences.
- * @param {(item: T) => string} transformer - The transformation function that converts each item
- * in the input array to a string.
+ * @param {(item: T) => string} transformer - The transformation function that maps each item to a string key.
  * @returns {Record<string, number>} An object containing the transformed items as keys and the
  * counts as values.
  */
