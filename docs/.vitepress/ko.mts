@@ -73,6 +73,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'union', link: '/ko/reference/array/union' },
             { text: 'unionBy', link: '/ko/reference/array/unionBy' },
             { text: 'unionWith', link: '/ko/reference/array/unionWith' },
+            { text: 'unzipWith', link: '/reference/array/unzipWith' },
             { text: 'uniq', link: '/ko/reference/array/uniq' },
             { text: 'uniqBy', link: '/ko/reference/array/uniqBy' },
             { text: 'uniqWith', link: '/ko/reference/array/uniqWith' },
