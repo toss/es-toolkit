@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/toss/es-toolkit.git"
   },
+  "license": "MIT",
   "workspaces": [
     "docs"
   ],
