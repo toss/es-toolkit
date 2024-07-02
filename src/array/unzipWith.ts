@@ -34,11 +34,14 @@ export function unzipWith<T, R>(
   }
 
   const maxLength = Math.max(...target.map(innerArray => innerArray.length));
-
-  const result = Array.from({ length: maxLength }) as R[] | T[][];
+  const result: R[] | T[][] = new Array(maxLength);
 
   for (let i = 0; i < maxLength; i++) {
-    const group = target.map(innerArray => innerArray[i]);
+    const group = new Array(target.length);
+
+    for (let j = 0; j < target.length; j++) {
+      group[j] = target[j][i];
+    }
 
     result[i] = iteratee ? iteratee(...group) : group;
   }
