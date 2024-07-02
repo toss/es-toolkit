@@ -34,3 +34,4 @@ export { xorWith } from './xorWith.ts';
 export { zip } from './zip.ts';
 export { zipWith } from './zipWith.ts';
 export { zipObject } from './zipObject.ts';
+export { fill } from './fill.ts';
