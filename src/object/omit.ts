@@ -4,6 +4,8 @@
  * This function takes an object and an array of keys, and returns a new object that
  * excludes the properties corresponding to the specified keys.
  *
+ * @template T - The type of object.
+ * @template K - The type of keys in object.
  * @param {T} obj - The object to omit keys from.
  * @param {K[]} keys - An array of keys to be omitted from the object.
  * @returns {Omit<T, K>} A new object with the specified keys omitted.
