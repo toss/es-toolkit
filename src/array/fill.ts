@@ -23,16 +23,16 @@
  * // => [4, '*', '*', 10]
  */
 
-export function fill<T>(array: unknown[], value: T): T[];
-export function fill<T, P>(array: T[], value: P, start: number): Array<T | P>;
-export function fill<T, P>(array: T[], value: P, start: number, end: number): Array<T | P>;
-export function fill<T, P>(array: T[], value: P, start = 0, end = array.length): Array<T | P> {
+export function fill<T>(arr: unknown[], value: T): T[];
+export function fill<T, P>(arr: T[], value: P, start: number): Array<T | P>;
+export function fill<T, P>(arr: T[], value: P, start: number, end: number): Array<T | P>;
+export function fill<T, P>(arr: T[], value: P, start = 0, end = arr.length): Array<T | P> {
   start = Math.max(start, 0);
-  end = Math.min(end, array.length);
+  end = Math.min(end, arr.length);
 
   for (let i = start; i < end; i++) {
-    array[i] = value;
+    arr[i] = value;
   }
 
-  return array;
+  return arr;
 }
