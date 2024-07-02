@@ -16,7 +16,7 @@ describe('throttle', () => {
 
   it('should execute the function immediately if not called within the wait time', async () => {
     const func = vi.fn();
-    const throttleMs = 50;
+    const throttleMs = 500;
     const throttledFunc = throttle(func, throttleMs);
 
     throttledFunc();
