@@ -2,7 +2,7 @@ import { unzipWith as unzipWithToolkit } from 'es-toolkit';
 import { unzipWith as unzipWithLodash } from 'lodash';
 import { bench, describe } from 'vitest';
 
-describe('zip', () => {
+describe('unzip', () => {
   bench('es-toolkit/unzipWith', () => {
     unzipWithToolkit(
       [
