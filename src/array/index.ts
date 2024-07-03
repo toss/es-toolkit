@@ -9,7 +9,7 @@ export { dropRight } from './dropRight.ts';
 export { dropRightWhile } from './dropRightWhile.ts';
 export { dropWhile } from './dropWhile.ts';
 export { fill } from './fill.ts';
-export { forEachRight } from './forEachRight.ts'
+export { forEachRight } from './forEachRight.ts';
 export { groupBy } from './groupBy.ts';
 export { intersection } from './intersection.ts';
 export { intersectionBy } from './intersectionBy.ts';
@@ -17,6 +17,7 @@ export { intersectionWith } from './intersectionWith.ts';
 export { keyBy } from './keyBy.ts';
 export { maxBy } from './maxBy.ts';
 export { minBy } from './minBy.ts';
+export { orderBy } from './orderBy.ts';
 export { partition } from './partition.ts';
 export { sample } from './sample.ts';
 export { sampleSize } from './sampleSize.ts';
