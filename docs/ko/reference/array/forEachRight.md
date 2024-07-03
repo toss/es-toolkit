@@ -29,9 +29,9 @@ const array = [1, 2, 3];
 const result: number[] = [];
 
 // forEachRight 함수를 사용하여 배열을 순회하며 각 요소를 결과 배열에 추가해요.
-forEachRight(array,  (value) => {
-    result.push(value);
-})
+forEachRight(array, (value) => {
+  result.push(value);
+});
 
 console.log(result) // Output: [3, 2, 1];
 ```
