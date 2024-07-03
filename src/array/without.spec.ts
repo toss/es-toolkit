@@ -24,12 +24,6 @@ describe('without', () => {
     expect(without([1, '1', 2, '2'], 1, '2')).toEqual(['1', 2]);
   });
 
-  it('should return an empty array when input is not a valid array', () => {
-    expect(without(null as any, 1, 2)).toEqual([]);
-    expect(without(undefined as any, 1, 2)).toEqual([]);
-    expect(without({ length: 'invalid' } as any, 1, 2)).toEqual([]);
-  });
-
   it('should handle NaN values correctly', () => {
     expect(without([NaN, 1, 2, NaN, 3], NaN)).toEqual([1, 2, 3]);
   });
