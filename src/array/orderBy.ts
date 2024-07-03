@@ -42,10 +42,12 @@ export function orderBy<T>(collection: T[], keys: Array<keyof T>, orders: Order[
     return 0;
   };
 
+  const effectiveOrders = keys.map((_, index) => orders[index] || orders[orders.length - 1]);
+
   return collection.sort((a, b) => {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
-      const order = orders[i];
+      const order = effectiveOrders[i];
       const result = compareValues(a[key], b[key], order);
       if (result !== 0) {
         return result;

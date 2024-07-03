@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { orderBy } from 'lodash';
+import { orderBy } from './orderBy';
 
-describe('Lodash orderBy', () => {
+describe('orderBy', () => {
   it('should order objects by a single property in ascending order', () => {
     const users = [
       { user: 'fred', age: 48 },
