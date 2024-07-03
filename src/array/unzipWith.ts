@@ -1,5 +1,3 @@
-import { isNil } from '../predicate';
-
 /**
  * Unzips an array of arrays, applying an `iteratee` function to regrouped elements.
  *
