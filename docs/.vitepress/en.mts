@@ -103,6 +103,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Math Utilities',
           items: [
             { text: 'clamp', link: '/reference/math/clamp' },
+            { text: 'inRange', link: '/reference/math/inRange' },
             { text: 'mean', link: '/reference/math/mean' },
             { text: 'meanBy', link: '/reference/math/meanBy' },
             { text: 'random', link: '/reference/math/random' },
