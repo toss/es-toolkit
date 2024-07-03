@@ -14,7 +14,7 @@ import { isNil } from '../predicate';
  * const result = unzipWith(nestedArray, (item, item2, item3) => item + item2 + item3);
  * // result will be [9, 12]
  */
-export function unzipWith<T, R>(target: readonly T[][], iteratee: (...args: T[]) => R): R[];
+export function unzipWith<T, R>(target: readonly T[][], iteratee: (...args: T[]) => R): R[] {
   const maxLength = Math.max(...target.map(innerArray => innerArray.length));
   const result: R[] = new Array(maxLength);
 
