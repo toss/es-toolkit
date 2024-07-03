@@ -1,4 +1,4 @@
-import { mean } from './mean';
+import { mean } from './mean.ts';
 
 /**
  * Calculates the average of an array of numbers when applying

@@ -1,4 +1,4 @@
-import { randomInt } from '../math';
+import { randomInt } from '../math/randomInt.ts';
 
 /**
  * Returns a sample element array of a specified `size`.
