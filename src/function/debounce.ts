@@ -7,6 +7,7 @@ interface DebounceOptions {
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
  * method to cancel any pending execution.
  *
+ * @template F - The type of function.
  * @param {F} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
  * @param {DebounceOptions} options - The options object.

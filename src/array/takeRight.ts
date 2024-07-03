@@ -2,6 +2,7 @@
  * Returns a new array containing the last `count` elements from the input array `arr`.
  * If `count` is greater than the length of `arr`, the entire array is returned.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} arr - The array to take elements from.
  * @param {number} count - The number of elements to take.
  * @returns {T[]} A new array containing the last `count` elements from `arr`.

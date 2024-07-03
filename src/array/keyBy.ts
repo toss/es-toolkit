@@ -6,6 +6,8 @@
  * If there are multiple elements generating the same key, the last element among them is used
  * as the value.
  *
+ * @template T - The type of elements in the array.
+ * @template K - The type of keys.
  * @param {T[]} arr - The array of elements to be mapped.
  * @param {(item: T) => K} getKeyFromItem - A function that generates a key from an element.
  * @returns {Record<K, T>} An object where keys are mapped to each element of an array.

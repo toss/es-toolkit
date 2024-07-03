@@ -6,6 +6,7 @@ import { uniqWith } from './uniqWith.ts';
  * This function takes two arrays and a custom equality function, merges the arrays, and returns
  * a new array containing only the unique values as determined by the custom equality function.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} arr1 - The first array to merge and filter for unique values.
  * @param {T[]} arr2 - The second array to merge and filter for unique values.
  * @param {(item1: T, item2: T) => boolean} areItemsEqual - A custom function to determine if two elements are equal.

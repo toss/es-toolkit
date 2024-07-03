@@ -3,6 +3,7 @@
  *
  * This function takes an array and returns a new array with its elements shuffled in a random order.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} arr - The array to shuffle.
  * @returns {T[]} A new array with its elements shuffled in random order.
  *

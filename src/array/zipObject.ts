@@ -6,6 +6,8 @@
  * from the second array are values. If the `keys` array is longer than the `values` array, the remaining keys will
  * have `undefined` as their values.
  *
+ * @template P - The type of elements in the array.
+ * @template V - The type of elements in the array.
  * @param {P[]} keys - An array of property names.
  * @param {V[]} values - An array of values corresponding to the property names.
  * @returns {{ [K in P]: V }} A new object composed of the given property names and values.

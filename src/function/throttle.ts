@@ -3,6 +3,7 @@
  * per every `throttleMs` milliseconds. Subsequent calls to the throttled function
  * within the wait time will not trigger the execution of the original function.
  *
+ * @template F - The type of function.
  * @param {F} func - The function to throttle.
  * @param {number} throttleMs - The number of milliseconds to throttle executions to.
  * @returns {F} A new throttled function that accepts the same parameters as the original function.
