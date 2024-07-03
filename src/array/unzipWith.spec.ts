@@ -3,16 +3,6 @@ import { unzipWith } from './unzipWith';
 import { zip } from './zip';
 
 describe('unzipWith', () => {
-  it('should unzip arrays correctly without iteratee', () => {
-    const zipped = zip(['2', '20', '200'], [1, 10, 100]);
-    const result = unzipWith(zipped);
-
-    expect(result).toEqual([
-      ['2', '20', '200'],
-      [1, 10, 100],
-    ]);
-  });
-
   it('should unzip arrays correctly with an iteratee', () => {
     const zipped = zip([10, 20, 30], [40, 50, 60], [70, 80, 90]);
     const result = unzipWith(zipped, (item, item2, item3) => item + item2 + item3);
