@@ -124,6 +124,7 @@
     "broken-link-checker": "^0.7.8",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsdoc": "^48.5.0",
     "lodash": "^4.17.21",
     "prettier": "^3.2.5",
     "tsup": "^8.1.0",

@@ -6,6 +6,7 @@ import { dropWhile } from './dropWhile.ts';
  * This function iterates over an array from the end and drops elements until the provided
  * predicate function returns false. It then returns a new array with the remaining elements.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} arr - The array from which to drop elements.
  * @param {(item: T) => boolean} canContinueDropping - A predicate function that determines
  * whether to continue dropping elements. The function is called with each element from the end,

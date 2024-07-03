@@ -7,6 +7,7 @@ import { randomInt } from '../math';
  *
  * {@link https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html Floyd's algoritm}
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} array - The array to sample from.
  * @param {number} size - The size of sample.
  * @returns {T[]} A new array with sample size applied.

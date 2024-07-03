@@ -6,6 +6,7 @@
  * by the custom equality function. It effectively filters out any elements from the first array that
  * do not have corresponding matches in the second array according to the equality function.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} firstArr - The first array to compare.
  * @param {T[]} secondArr - The second array to compare.
  * @param {(x: T, y: T) => boolean} areItemsEqual - A custom function to determine if two elements are equal.

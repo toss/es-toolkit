@@ -1,6 +1,6 @@
 /**
  * An error class representing an aborted operation.
- * @extends Error
+ * @augments Error
  */
 export class AbortError extends Error {
   constructor(message = 'The operation was aborted') {
