@@ -1,8 +1,8 @@
 # without
 
-SameValueZero 동등성 비교를 사용하여 주어진 값들을 제외한 배열을 생성합니다.
+배열에서 주어진 값을 제거한 새로운 배열을 만들어요. 
 
-이 함수는 입력 배열을 받아 추가 인수로 지정된 모든 값을 제외한 새 배열을 반환합니다. SameValueZero 동등성 비교를 사용하여 -0과 +0을 동일하게 간주하지만 NaN은 자기 자신과 다르게 간주합니다.
+값이 같은지는 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 기준으로 비교하기 때문에, `NaN`과도 사용할 수 있어요.
 
 ## 인터페이스
 
