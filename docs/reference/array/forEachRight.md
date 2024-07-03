@@ -31,8 +31,8 @@ const result: number[] = [];
 
 // Use the forEachRight function to iterate through the array and add each element to the result array.
 forEachRight(array,  (value) => {
-    result.push(value);
-})
+  result.push(value);
+});
 
 console.log(result) // Output: [3, 2, 1];
 ```
