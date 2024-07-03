@@ -48,6 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Array Utilities',
           items: [
             { text: 'chunk', link: '/reference/array/chunk' },
+            { text: 'countBy', link: '/reference/array/countBy' },
             { text: 'compact', link: '/reference/array/compact' },
             { text: 'difference', link: '/reference/array/difference' },
             { text: 'differenceBy', link: '/reference/array/differenceBy' },
@@ -79,6 +80,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'uniqBy', link: '/reference/array/uniqBy' },
             { text: 'uniqWith', link: '/reference/array/uniqWith' },
             { text: 'unzipWith', link: '/reference/array/unzipWith' },
+            { text: 'without', link: '/reference/array/without' },
             { text: 'xor', link: '/reference/array/xor' },
             { text: 'xorBy', link: '/reference/array/xorBy' },
             { text: 'xorWith', link: '/reference/array/xorWith' },

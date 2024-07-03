@@ -47,6 +47,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '배열',
           items: [
             { text: 'chunk', link: '/ko/reference/array/chunk' },
+            { text: 'countBy', link: '/ko/reference/array/countBy' },
             { text: 'compact', link: '/ko/reference/array/compact' },
             { text: 'difference', link: '/ko/reference/array/difference' },
             { text: 'differenceBy', link: '/ko/reference/array/differenceBy' },
@@ -78,6 +79,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'uniq', link: '/ko/reference/array/uniq' },
             { text: 'uniqBy', link: '/ko/reference/array/uniqBy' },
             { text: 'uniqWith', link: '/ko/reference/array/uniqWith' },
+            { text: 'without', link: '/ko/reference/array/without' },
             { text: 'xor', link: '/ko/reference/array/xor' },
             { text: 'xorBy', link: '/ko/reference/array/xorBy' },
             { text: 'xorWith', link: '/ko/reference/array/xorWith' },
