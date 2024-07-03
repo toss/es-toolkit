@@ -1,6 +1,6 @@
 # es-toolkit Changelog
 
-## Version v1.7.0
+## Version v1.7.1
 
 Released on July 3rd, 2024.
 
