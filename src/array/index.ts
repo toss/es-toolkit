@@ -8,6 +8,7 @@ export { drop } from './drop.ts';
 export { dropRight } from './dropRight.ts';
 export { dropRightWhile } from './dropRightWhile.ts';
 export { dropWhile } from './dropWhile.ts';
+export { forEachRight } from './forEachRight.ts'
 export { groupBy } from './groupBy.ts';
 export { intersection } from './intersection.ts';
 export { intersectionBy } from './intersectionBy.ts';
