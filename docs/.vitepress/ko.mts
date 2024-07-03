@@ -65,6 +65,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'keyBy', link: '/ko/reference/array/keyBy' },
             { text: 'minBy', link: '/ko/reference/array/minBy' },
             { text: 'maxBy', link: '/ko/reference/array/maxBy' },
+            { text: 'orderBy', link: '/ko/reference/array/orderBy' },
             { text: 'partition', link: '/ko/reference/array/partition' },
             { text: 'sample', link: '/ko/reference/array/sample' },
             { text: 'sampleSize', link: '/ko/reference/array/sampleSize' },
