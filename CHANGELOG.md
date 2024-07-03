@@ -1,5 +1,18 @@
 # es-toolkit Changelog
 
+## Version v1.7.0
+
+Released on July 3rd, 2024.
+
+- Add support for [unzipWith](https://es-toolkit.slash.page/reference/array/unzipWith.html). (https://github.com/toss/es-toolkit/pull/113)
+- Add support for [forEachRight](https://es-toolkit.slash.page/reference/array/forEachRight.html). (https://github.com/toss/es-toolkit/pull/119)
+- Add support for [countBy](https://es-toolkit.slash.page/reference/array/countBy.html). (https://github.com/toss/es-toolkit/pull/117)
+- Add support for [without](https://es-toolkit.slash.page/reference/array/without.html). (https://github.com/toss/es-toolkit/pull/115)
+- Add support for [fill](https://es-toolkit.slash.page/reference/array/fill.html). (https://github.com/toss/es-toolkit/pull/109)
+- Add support for [sampleSize](https://es-toolkit.slash.page/reference/array/sampleSize.html). (https://github.com/toss/es-toolkit/pull/101)
+- Add support for [meanBy](https://es-toolkit.slash.page/reference/math/meanBy.html). (https://github.com/toss/es-toolkit/pull/104)
+- Accept number and symbol keys in [keyBy](https://es-toolkit.slash.page/reference/array/keyBy.html) and [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html) (https://github.com/toss/es-toolkit/pull/98, https://github.com/toss/es-toolkit/pull/99)
+
 ## Version v1.6.1
 
 Released on June 30th, 2024.
