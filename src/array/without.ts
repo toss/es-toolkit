@@ -20,5 +20,5 @@
  */
 export function without<T>(array: readonly T[], ...values: T[]): T[] {
   const valuesSet = new Set(values);
-  return Array.prototype.filter.call(array, item => !valuesSet.has(item));
+  return array.filter(item => !valuesSet.has(item));
 }
