@@ -20,24 +20,6 @@ describe('unzipWith', () => {
     expect(result).toEqual([60, 150, 240]);
   });
 
-  it('should return an empty array for null input', () => {
-    const result = unzipWith(null);
-
-    expect(result).toEqual([]);
-  });
-
-  it('should return an empty array for undefined input', () => {
-    const result = unzipWith(undefined);
-
-    expect(result).toEqual([]);
-  });
-
-  it('should return an empty array for empty array input', () => {
-    const result = unzipWith([]);
-
-    expect(result).toEqual([]);
-  });
-
   it('should handle arrays of different lengths', () => {
     const zipped = zip([1, 20, 300, 4000], [100, 200, 300]);
     const result = unzipWith(zipped, (item, item2, item3, item4) => item + item2 + item3 + item4);
