@@ -1,29 +1,23 @@
 # without
 
-Creates an array excluding all given values using SameValueZero for equality comparisons.
+Creates an array that excludes all specified values.
 
-This function takes an input array and returns a new array that excludes all values
-specified in the additional arguments. It uses SameValueZero for equality comparisons,
-meaning that it considers -0 and +0 as equal but treats NaN as unequal to itself.
+It correctly excludes `NaN`, as it compares values using [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero).
 
 ## Signature
 
 ```typescript
-function without<T>(array: ArrayLike<T>, ...values: T[]): T[];
+function without<T>(array: T[], ...values: T[]): T[];
 ```
 
 ### Parameters
 
-- `array` (`ArrayLike<T>`): The array to filter.
+- `array` (`T[]`): The array to exclude values.
 - `values` (`...T[]`): The values to exclude.
 
 ### Returns
 
 (`T[]`) A new array without the specified values.
-
-### Throws
-
-Does not throw explicitly but returns an empty array if the input is not a valid array or has invalid array length.
 
 ## Examples
 

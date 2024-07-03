@@ -1,12 +1,10 @@
 /**
- * Creates an array excluding all given values using SameValueZero for equality comparisons.
+ * Creates an array that excludes all specified values.
  *
- * This function takes an input array and returns a new array that excludes all values
- * specified in the second argument. It uses SameValueZero for equality comparisons,
- * meaning that it considers -0 and +0 as equal but treats NaN as unequal to itself.
+ * It correctly excludes `NaN`, as it compares values using [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero).
  *
  * @template T The type of elements in the array.
- * @param {ArrayLike<T>} array - The array to filter.
+ * @param {T[]} array - The array to filter.
  * @param {...T[]} values - The values to exclude.
  * @returns {T[]} A new array without the specified values.
  *
@@ -20,10 +18,7 @@
  * without(['a', 'b', 'c', 'a'], 'a');
  * // Returns: ['b', 'c']
  */
-export function without<T>(array: ArrayLike<T>, ...values: T[]): T[] {
-  if (!array || typeof array.length !== 'number') {
-    return [];
-  }
+export function without<T>(array: readonly T[], ...values: T[]): T[] {
   const valuesSet = new Set(values);
   return Array.prototype.filter.call(array, item => !valuesSet.has(item));
 }
