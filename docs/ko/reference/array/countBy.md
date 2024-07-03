@@ -5,22 +5,22 @@
 ## 인터페이스
 
 ```typescript
-function countBy<T>(arr: T[], transformer: (item: T) => string): Record<string, number>
+function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number>
 ```
 
 ### 파라미터
 
-- `arr` (`T[]`): 각 요소의 갯수를 세고자 하는 배열
-- `transformer` (`(item: T) => string`): 각 요소를 key로 변환하는 함수
+- `arr` (`T[]`): 요소의 갯수를 세고자 하는 배열
+- `mapper` (`(item: T) => string`): 요소를 분류할 기준이 되는 값을 반환하는 함수
 
 ### 반환 값
 
-(`Record<string, number>`) 각 요소와 그 갯수를 key-value로 가지는 객체
+(`Record<string, number>`) 각 요소가 분류별로 몇 개 있는지를 계산한 객체
 
 ## 예시
 
 ```javascript
-import {countBy} from 'es-toolkit/array';
+import { countBy } from 'es-toolkit/array';
 
 const array = [1, 2, 3, 4, 5, 6];
 const result = countBy(array, x => x % 2 === 0 ? 'even' : 'odd');

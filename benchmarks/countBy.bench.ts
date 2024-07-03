@@ -11,7 +11,7 @@ describe('countBy', () => {
 
   bench('lodash/countBy', () => {
     countByLodash([1.2, 2.4, 3.6, 2.2, 3.4, 3.6], (item: number) => {
-      return Math.floor(item).toString()
+      return Math.floor(item).toString();
     });
   });
 });
