@@ -2,6 +2,13 @@
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "version": "1.6.1",
+  "homepage": "https://es-toolkit.slash.page",
+  "bugs": "https://github.com/toss/es-toolkit/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toss/es-toolkit.git"
+  },
+  "license": "MIT",
   "workspaces": [
     "docs"
   ],
