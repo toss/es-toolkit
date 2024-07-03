@@ -28,6 +28,7 @@ export { unionWith } from './unionWith.ts';
 export { uniq } from './uniq.ts';
 export { uniqBy } from './uniqBy.ts';
 export { uniqWith } from './uniqWith.ts';
+export { without } from './without.ts';
 export { xor } from './xor.ts';
 export { xorBy } from './xorBy.ts';
 export { xorWith } from './xorWith.ts';
