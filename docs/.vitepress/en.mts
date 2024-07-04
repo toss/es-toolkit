@@ -114,6 +114,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
             { text: 'pickBy', link: '/reference/object/pickBy' },
+            { text: 'invert', link: '/ko/reference/object/invert' },
           ],
         },
         {

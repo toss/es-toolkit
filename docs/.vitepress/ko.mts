@@ -113,6 +113,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
+            { text: 'invert', link: '/ko/reference/object/invert' },
           ],
         },
         {
