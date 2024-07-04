@@ -17,9 +17,9 @@
  * invert({ a: Symbol('sym1'), b: Symbol('sym2') }); // { [Symbol('sym1')]: 'a', [Symbol('sym2')]: 'b' }
  */
 
-export function invert<K extends string | number | symbol, V extends string | number | symbol>(
-  obj: Record<K, V>
-): { [key in V]: K } {
+type PropertyKey = string | number | symbol;
+
+export function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record<K, V>): { [key in V]: K } {
   const result = {} as { [key in V]: K };
 
   for (const key of Object.keys(obj) as K[]) {
