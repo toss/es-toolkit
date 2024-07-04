@@ -8,11 +8,11 @@ for (let i = 0; i < 10000; i++) {
 }
 
 describe('invert function benchmark', () => {
-  bench('Lodash invert', () => {
-    invertByLodash(object);
+  bench('es-toolkit/invert', () => {
+    invertByToolkit(object);
   });
 
-  bench('Custom invert', () => {
-    invertByToolkit(object);
+  bench('lodash/invert', () => {
+    invertByLodash(object);
   });
 });
