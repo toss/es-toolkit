@@ -1,5 +1,13 @@
 # es-toolkit Changelog
 
+## Version v1.8.0
+
+Released on July 5th, 2024.
+
+- Add support for [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html). (https://github.com/toss/es-toolkit/pull/123)
+- Add support for [invert](https://es-toolkit.slash.page/reference/array/invert.html). (https://github.com/toss/es-toolkit/pull/125)
+- Add support for [inRange](https://es-toolkit.slash.page/reference/array/inRange.html). (https://github.com/toss/es-toolkit/pull/124)
+
 ## Version v1.7.1
 
 Released on July 3rd, 2024.
