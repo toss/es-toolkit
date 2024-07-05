@@ -22,7 +22,7 @@ type PropertyKey = string | number | symbol;
 export function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record<K, V>): { [key in V]: K } {
   const result = {} as { [key in V]: K };
 
-  for (const key of Object.keys(obj) as K[]) {
+  for (const key in obj) {
     const value = obj[key as K] as V;
     result[value] = key;
   }
