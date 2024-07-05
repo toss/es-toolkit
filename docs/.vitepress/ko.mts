@@ -102,6 +102,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '숫자',
           items: [
             { text: 'clamp', link: '/ko/reference/math/clamp' },
+            { text: 'inRange', link: '/ko/reference/math/inRange' },
             { text: 'mean', link: '/ko/reference/math/mean' },
             { text: 'meanBy', link: '/ko/reference/math/meanBy' },
             { text: 'random', link: '/ko/reference/math/random' },
