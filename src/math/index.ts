@@ -1,4 +1,5 @@
 export { clamp } from './clamp.ts';
+export { inRange } from './inRange.ts';
 export { mean } from './mean.ts';
 export { meanBy } from './meanBy.ts';
 export { random } from './random.ts';

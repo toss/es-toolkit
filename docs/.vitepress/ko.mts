@@ -103,6 +103,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '숫자',
           items: [
             { text: 'clamp', link: '/ko/reference/math/clamp' },
+            { text: 'inRange', link: '/ko/reference/math/inRange' },
             { text: 'mean', link: '/ko/reference/math/mean' },
             { text: 'meanBy', link: '/ko/reference/math/meanBy' },
             { text: 'random', link: '/ko/reference/math/random' },
@@ -119,6 +120,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
+            { text: 'invert', link: '/ko/reference/object/invert' },
           ],
         },
         {
