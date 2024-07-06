@@ -134,7 +134,7 @@
   "sideEffects": false,
   "scripts": {
     "prepack": "yarn build",
-    "build": "tsup && ./.scripts/postbuild.sh",
+    "build": "tsup && sh ./.scripts/postbuild.sh",
     "test": "vitest run --coverage --typecheck",
     "bench": "vitest bench",
     "lint": "eslint ./src --ext .ts",
