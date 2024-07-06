@@ -68,9 +68,9 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken "$NPM_AUTH_TOKEN"
           npm whoami
           if [[ "$GITHUB_REF_TYPE" = "tag" ]]; then
-            npm publish --access public *.tgz
+            npm publish --provenance --access public *.tgz
           else
-            npm publish --access public --tag dev *.tgz
+            npm publish --provenance --access public --tag dev *.tgz
           fi
           deno publish --allow-dirty
         env:
