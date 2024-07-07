@@ -11,7 +11,7 @@
  * const result = sum(numbers);
  * // result will be 15
  */
-export function sum(nums: number[]): number {
+export function sum(nums: readonly number[]): number {
   let result = 0;
 
   for (const num of nums) {

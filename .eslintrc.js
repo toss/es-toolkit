@@ -14,8 +14,8 @@ module.exports = {
     ecmaFeatures: { jsx: true },
   },
 
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
-  plugins: ['@typescript-eslint'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier', 'plugin:jsdoc/recommended'],
+  plugins: ['@typescript-eslint', 'jsdoc'],
   rules: {
     'no-implicit-coercion': 'error',
     'no-warning-comments': [
@@ -62,5 +62,7 @@ module.exports = {
         ],
       },
     ],
+    'jsdoc/tag-lines': 'off',
+    'jsdoc/no-defaults': 'off',
   },
 };

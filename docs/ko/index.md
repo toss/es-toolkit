@@ -28,4 +28,6 @@ features:
     details: 모든 함수에 대해서 간단하지만 견고한 타입을 제공해요.
   - title: 테스트 커버리지 100%
     details: 모든 함수와 분기에 대해서 꼼꼼하게 테스트가 작성되어 있어요.
+  - title: 모든 환경에서 사용 가능
+    details: Node.js, Deno, Bun, 그리고 브라우저까지 넓은 JavaScript 환경을 지원해요.
 ---

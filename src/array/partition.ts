@@ -5,6 +5,7 @@
  * the first array contains elements for which the predicate function returns true, and
  * the second array contains elements for which the predicate function returns false.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} arr - The array to partition.
  * @param {(value: T) => boolean} isInTruthy - A predicate function that determines
  * whether an element should be placed in the truthy array. The function is called with each

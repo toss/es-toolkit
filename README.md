@@ -1,6 +1,6 @@
 ![](./docs/public/og.png)
 
-# es-toolkit &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/toss/slash/blob/main/LICENSE) [![codecov](https://codecov.io/gh/toss/es-toolkit/graph/badge.svg?token=8N5S3AR3C7)](https://codecov.io/gh/toss/es-toolkit)
+# es-toolkit &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/toss/slash/blob/main/LICENSE) [![codecov](https://codecov.io/gh/toss/es-toolkit/graph/badge.svg?token=8N5S3AR3C7)](https://codecov.io/gh/toss/es-toolkit) [![NPM badge](https://img.shields.io/npm/v/es-toolkit?logo=npm)](https://www.npmjs.com/package/es-toolkit) [![JSR badge](https://jsr.io/badges/@es-toolkit/es-toolkit)](https://jsr.io/@es-toolkit/es-toolkit)
 
 English | [한국어](https://github.com/toss/es-toolkit/blob/main/README-ko_kr.md)
 
@@ -11,6 +11,26 @@ es-toolkit is a state-of-the-art, high-performance JavaScript utility library wi
 - es-toolkit supports tree shaking out of the box, and [reduces JavaScript code by up to 97%](https://es-toolkit.slash.page/bundle-size.html) compared to other libraries.
 - es-toolkit includes built-in TypeScript support, with straightforward yet robust types. It also provides useful type guards such as [isNotNil](https://es-toolkit.slash.page/reference/predicate/isNotNil.html).
 - es-toolkit is battle-tested with 100% test coverage, ensuring reliability and robustness.
+
+## Examples
+
+```tsx
+// import from '@es-toolkit/es-toolkit' in jsr.
+import { debounce, chunk } from 'es-toolkit';
+
+const debouncedLog = debounce(message => {
+  console.log(message);
+}, 300);
+
+// This call will be debounced
+debouncedLog('Hello, world!');
+
+const array = [1, 2, 3, 4, 5, 6];
+const chunkedArray = chunk(array, 2);
+
+console.log(chunkedArray);
+// Output: [[1, 2], [3, 4], [5, 6]]
+```
 
 ## Contributing
 

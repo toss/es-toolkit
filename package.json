@@ -1,7 +1,14 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.4.0",
+  "version": "1.8.0",
+  "homepage": "https://es-toolkit.slash.page",
+  "bugs": "https://github.com/toss/es-toolkit/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toss/es-toolkit.git"
+  },
+  "license": "MIT",
   "workspaces": [
     "docs"
   ],
@@ -117,6 +124,7 @@
     "broken-link-checker": "^0.7.8",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsdoc": "^48.5.0",
     "lodash": "^4.17.21",
     "prettier": "^3.2.5",
     "tsup": "^8.1.0",

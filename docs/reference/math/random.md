@@ -2,9 +2,12 @@
 
 Generate a random number within the given range. The number can be an integer or a decimal.
 
+If only one argument is provided, a number between `0` and the given number is returned.
+
 ## Signature
 
 ```typescript
+function random(maximum: number): number;
 function random(minimum: number, maximum: number): number;
 ```
 

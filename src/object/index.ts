@@ -1,4 +1,5 @@
-export { omit } from './omit';
-export { omitBy } from './omitBy';
-export { pick } from './pick';
-export { pickBy } from './pickBy';
+export { omit } from './omit.ts';
+export { omitBy } from './omitBy.ts';
+export { pick } from './pick.ts';
+export { pickBy } from './pickBy.ts';
+export { invert } from './invert.ts';

@@ -1,6 +1,8 @@
 /**
  * Creates an array of unique values, in order, from all given arrays using a provided mapping function to determine equality.
  *
+ * @template T - The type of elements in the array.
+ * @template U - The type of mapped elements.
  * @param {T[]} arr1 - The first array.
  * @param {T[]} arr2 - The second array.
  * @param {(item: T) => U} mapper - The function to map array elements to comparison values.

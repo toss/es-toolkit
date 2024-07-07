@@ -10,24 +10,42 @@ next:
 
 # Installation
 
-es-toolkit is available on [npm](https://npmjs.com/package/es-toolkit) for Node.js, Deno, and Bun.
+es-toolkit is available via [npm](https://npmjs.com/package/es-toolkit) for Node.js and Bun, and through [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno.
 
 ## Node.js
 
 es-toolkit supports Node.js 18 or later. Install es-toolkit with the following command:
 
-```sh
+::: code-group
+
+```sh [npm]
 npm install es-toolkit
-yarn add es-toolkit
+```
+
+```sh [pnpm]
 pnpm install es-toolkit
 ```
 
+```sh [yarn]
+yarn add es-toolkit
+```
+
+:::
+
 ## Deno
 
-es-toolkit is also available on npm for Deno. Use es-toolkit with the `npm:` specifier:
+es-toolkit is also available via [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno. To install es-toolkit, use the following command:
+
+```sh
+deno add @es-toolkit/es-toolkit
+```
+
+Note that the package name includes an additional scope, distinct from npm, as per JSR restrictions.
 
 ```typescript
-import { chunk } from 'npm:es-toolkit@1.0.0';
+import { sum } from '@es-toolkit/es-toolkit';
+
+sum([1, 2, 3]);
 ```
 
 ## Bun

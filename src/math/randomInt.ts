@@ -1,7 +1,9 @@
-import { random } from './random';
+import { random } from './random.ts';
 
 /**
  * Generates a random integer between minimum (inclusive) and maximum (exclusive).
+ *
+ * If only one argument is provided, a number between `0` and the given number is returned.
  *
  * @param {number} minimum - The lower bound (inclusive).
  * @param {number} maximum - The upper bound (exclusive).
@@ -12,6 +14,8 @@ import { random } from './random';
  * const result = randomInt(0, 5); // result will be a random integer between 0 (inclusive) and 5 (exclusive)
  * const result2 = randomInt(5, 0); // This will throw an error
  */
-export function randomInt(minimum: number, maximum: number): number {
-  return Math.floor(random(minimum, maximum));
+export function randomInt(maximum: number): number;
+export function randomInt(minimum: number, maximum: number): number;
+export function randomInt(minimum: number, maximum?: number): number {
+  return Math.floor(random(minimum, maximum!));
 }
