@@ -40,3 +40,4 @@ export { zip } from './zip.ts';
 export { zipObject } from './zipObject.ts';
 export { zipWith } from './zipWith.ts';
 export { without } from './without.ts';
+export { head } from './head.ts';
