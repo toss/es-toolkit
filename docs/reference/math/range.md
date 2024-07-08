@@ -34,7 +34,7 @@ range(0, 20, 5);
 // Returns [0, 5, 10, 15, 20]
 range(0, 21, 5);
 
-// Returns []
+// Returns [0, -1, -2, -3]
 range(0, -4, -1);
 
 // Throws an error: The step value must be a non-zero integer.

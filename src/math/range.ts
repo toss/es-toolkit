@@ -18,7 +18,7 @@
  * range(0, 20, 5);
  *
  * @example
- * // Returns []
+ * // Returns [0, -1, -2, -3]
  * range(0, -4, -1);
  *
  * @example
