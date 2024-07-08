@@ -1,5 +1,6 @@
 /**
- * Unzips a nested array of elements.
+ * Gathers elements in the same position in an internal array 
+ * from a grouped array of elements and returns them as a new array.
  *
  * @param zipped - The nested array to unzip.
  * @returns A new array of unzipped elements.
