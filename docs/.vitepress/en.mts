@@ -81,6 +81,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'uniq', link: '/reference/array/uniq' },
             { text: 'uniqBy', link: '/reference/array/uniqBy' },
             { text: 'uniqWith', link: '/reference/array/uniqWith' },
+            { text: 'unzip', link: '/reference/array/unzip' },
             { text: 'unzipWith', link: '/reference/array/unzipWith' },
             { text: 'without', link: '/reference/array/without' },
             { text: 'xor', link: '/reference/array/xor' },
