@@ -1,3 +1,4 @@
+#!/bin/sh
 echo "export * from './dist/array';" > array.d.ts
 echo "export * from './dist/function';" > function.d.ts
 echo "export * from './dist/math';" > math.d.ts
