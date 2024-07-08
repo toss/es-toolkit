@@ -10,6 +10,8 @@
  * // result will be [['a', 'b'], [true, false], [1, 2]]
  */
 export function unzip<T extends unknown[]>(zipped: Array<[...T]>): Unzip<T> {
+  // For performance reasons, use this implementation instead of
+  // const maxLen = Math.max(...zipped.map(arr => arr.length));
   let maxLen = 0;
 
   for (let i = 0; i < zipped.length; i++) {
