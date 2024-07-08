@@ -89,6 +89,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'zip', link: '/reference/array/zip' },
             { text: 'zipObject', link: '/reference/array/zipObject' },
             { text: 'zipWith', link: '/reference/array/zipWith' },
+            { text: 'head', link: '/reference/array/head' },
           ],
         },
         {
