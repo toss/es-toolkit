@@ -23,5 +23,8 @@
 export function last<T>(arr: readonly [...T[], T]): T;
 export function last<T>(arr: readonly T[]): T | undefined;
 export function last<T>(arr: readonly T[]): T | undefined {
+  if (!Array.isArray(arr)) {
+    throw new Error('not an array');
+  }
   return arr[arr.length - 1];
 }
