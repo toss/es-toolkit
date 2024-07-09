@@ -1,5 +1,3 @@
-type PropertyKey = string | number | symbol;
-
 /**
  * Inverts the keys and values of an object. The keys of the input object become the values of the output object and vice versa.
  *
