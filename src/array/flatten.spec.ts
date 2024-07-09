@@ -23,6 +23,9 @@ describe('flatten', () => {
     const expectedArr3 = [1, 2, 3, 4];
     expect(flatten(originArr, 3)).toEqual(expectedArr3);
     expect(originArr.flat(3)).toEqual(expectedArr3);
+
+    expect(flatten(originArr, Infinity)).toEqual(expectedArr3);
+    expect(originArr.flat(Infinity)).toEqual(expectedArr3);
   });
 
   it('should return the same array if depth is 0 or NaN or negative', () => {
@@ -40,15 +43,19 @@ describe('flatten', () => {
 
   it('should flatten arrays to the specified depth considering floating point values', () => {
     const expectedArr1 = [1, 2, [3, [4]]];
-    expect(flatten(originArr, 1.5)).toEqual(expectedArr1);
+    expect(flatten(originArr, 1.3)).toEqual(expectedArr1);
     expect(originArr.flat(1.3)).toEqual(expectedArr1);
 
     const expectedArr2 = [1, 2, 3, [4]];
     expect(flatten(originArr, 2.5)).toEqual(expectedArr2);
     expect(originArr.flat(2.5)).toEqual(expectedArr2);
+
+    const expectedArr3 = [1, 2, 3, 4];
+    expect(flatten(originArr, 3.9)).toEqual(expectedArr3);
+    expect(originArr.flat(3.9)).toEqual(expectedArr3);
   });
 
-  it('should handle empty arrays', () => {
+  it('should handle empty array', () => {
     const originArr: number[] = [];
 
     expect(flatten(originArr, 2)).toEqual([]);
