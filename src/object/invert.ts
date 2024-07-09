@@ -1,3 +1,5 @@
+type PropertyKey = string | number | symbol;
+
 /**
  * Inverts the keys and values of an object. The keys of the input object become the values of the output object and vice versa.
  *
@@ -16,9 +18,6 @@
  * invert({ a: 1, 2: 'b', c: 3, 4: 'd' }); // { 1: 'a', b: '2', 3: 'c', d: '4' }
  * invert({ a: Symbol('sym1'), b: Symbol('sym2') }); // { [Symbol('sym1')]: 'a', [Symbol('sym2')]: 'b' }
  */
-
-type PropertyKey = string | number | symbol;
-
 export function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record<K, V>): { [key in V]: K } {
   const result = {} as { [key in V]: K };
 
