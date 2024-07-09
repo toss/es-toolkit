@@ -25,7 +25,7 @@ describe('flatten', () => {
     expect(originArr.flat(3)).toEqual(expectedArr3);
   });
 
-  it('should return the same array if depth is 0 or NaN or negative or -Infinity', () => {
+  it('should return the same array if depth is 0 or NaN or negative', () => {
     const expectedArr = [1, [2, [3, [4]]]];
 
     expect(flatten(originArr, 0)).toEqual(expectedArr);
