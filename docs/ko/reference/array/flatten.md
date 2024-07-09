@@ -2,12 +2,12 @@
 
 인자로 넣은 중첩 배열을 원하는 깊이까지 평탄화해요.
 
-JS에서 기본적으로 제공하는 [Array.prototype.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)와 동일한 동작과 타입을 반환해요.
+JavaScript에서 기본적으로 제공하는 [Array.prototype.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)과 동일한 동작과 반환 타입을 가져요. 하지만 성능은 더 우수합니다.
 
 ## 인터페이스
 
 ```typescript
-function flatten<T, D extends number = 1>(arr: T[], depth?: D): FlatArray<T[], D>[];
+function flatten<T, D extends number = 1>(arr: T[], depth?: D): Array<FlatArray<T[], D>>;
 ```
 
 ### 파라미터
@@ -17,7 +17,7 @@ function flatten<T, D extends number = 1>(arr: T[], depth?: D): FlatArray<T[], D
 
 ### 반환 값
 
-(`FlatArray<T[], D>[]`) 원하는 깊이로 평탄화 된 새로운 배열이에요.
+(`Array<FlatArray<T[], D>>`) 원하는 깊이로 평탄화 된 새로운 배열이에요.
 
 ## 예시
 
