@@ -64,5 +64,6 @@ module.exports = {
     ],
     'jsdoc/tag-lines': 'off',
     'jsdoc/no-defaults': 'off',
+    'jsdoc/require-jsdoc': 'off',
   },
 };
