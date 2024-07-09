@@ -22,6 +22,6 @@ The element with the minimum value as determined by the `getValue` function.
 ### Example
 
 ```typescript
-minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
+minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
 minBy([], x => x.a); // Returns: undefined
 ```
