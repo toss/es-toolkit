@@ -12,7 +12,7 @@ function flatten<T, D extends number = 1>(arr: T[], depth?: D): Array<FlatArray<
 
 ### Parameters
 
-- `arr` (`T[]`):The array to flatten.
+- `arr` (`T[]`): The array to flatten.
 - `depth` (`D`): The depth to flatten, which defaults to 1.
 
 ### Returns
