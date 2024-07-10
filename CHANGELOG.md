@@ -1,5 +1,14 @@
 # es-toolkit Changelog
 
+## Version v1.9.0
+
+Released on July 10th, 2024.
+
+- Add support for [head](https://es-toolkit.slash.page/reference/array/head.html) and [tail](https://es-toolkit.slash.page/reference/array/tail.html). (https://github.com/toss/es-toolkit/pull/131, https://github.com/toss/es-toolkit/pull/143).
+- Add support for [unzip](https://es-toolkit.slash.page/reference/array/unzip.html). (https://github.com/toss/es-toolkit/pull/130)
+- Add support for [flatten](https://es-toolkit.slash.page/reference/array/flatten.html), which is six times faster than `Array#flat`. (https://github.com/toss/es-toolkit/pull/147)
+
+
 ## Version v1.8.0
 
 Released on July 5th, 2024.
