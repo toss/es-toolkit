@@ -3,8 +3,7 @@ import { CASE_SPLIT_PATTERN } from '../constants';
 /**
  * Converts a string to snake case.
  *
- * Snake case is the naming convention in which each space is replaced with 
- * an underscore(_) character and words are written in lowercase.
+ * Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (_) character.
  *
  * @param {string} str - The string that is to be changed to snake case.
  * @returns {string} - The converted string to snake case.

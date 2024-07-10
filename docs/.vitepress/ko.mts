@@ -140,6 +140,10 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Promise',
           items: [{ text: 'delay', link: '/ko/reference/promise/delay' }],
         },
+        {
+          text: '문자열',
+          items: [{ text: 'snakeCase', link: '/ko/reference/string/snakeCase' }],
+        },
       ],
     },
   ];
