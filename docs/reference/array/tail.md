@@ -7,10 +7,10 @@ This function takes an array and returns a new array containing all the elements
 ## Signature
 
 ```typescript
-function tail<T>(arr: readonly [T]): [];
-function tail(arr: readonly []): [];
-function tail<T, U>(arr: readonly [T, ...U[]]): U[];
-function tail<T>(arr: readonly T[]): T[];
+function tail<T>(arr: [T]): [];
+function tail(arr: []): [];
+function tail<T, U>(arr: [T, ...U[]]): U[];
+function tail<T>(arr: T[]): T[];
 ```
 
 ### Parameters
