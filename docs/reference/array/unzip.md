@@ -15,7 +15,7 @@ function unzip<T extends unknown[]>(zipped: Array<[...T]>): Unzip<T>;
 
 ### Returns
 
-(`Unzip<T>`): An new array created by collecting elements at the same position in an internal array.
+(`Unzip<T>`): A new array created by collecting elements at the same position in an internal array.
 
 ## Example
 
