@@ -58,6 +58,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'dropRight', link: '/reference/array/dropRight' },
             { text: 'dropRightWhile', link: '/reference/array/dropRightWhile' },
             { text: 'fill', link: '/reference/array/fill' },
+            { text: 'toFilled', link: '/reference/array/toFilled' },
             { text: 'flatten', link: '/reference/array/flatten' },
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
             { text: 'groupBy', link: '/reference/array/groupBy' },

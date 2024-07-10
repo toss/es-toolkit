@@ -57,6 +57,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'dropRight', link: '/ko/reference/array/dropRight' },
             { text: 'dropRightWhile', link: '/ko/reference/array/dropRightWhile' },
             { text: 'fill', link: '/ko/reference/array/fill' },
+            { text: 'toFilled', link: '/ko/reference/array/toFilled' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
             { text: 'groupBy', link: '/ko/reference/array/groupBy' },
