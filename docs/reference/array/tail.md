@@ -15,7 +15,7 @@ function tail<T>(arr: T[]): T[];
 
 ### Parameters
 
-- `arr` (`readonly T[]`): The array to get the tail of.
+- `arr` (`T[]`): The array to get the tail of.
 
 ### Returns
 
