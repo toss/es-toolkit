@@ -12,8 +12,8 @@ function flatten<T, D extends number = 1>(arr: T[], depth?: D): Array<FlatArray<
 
 ### 파라미터
 
-- `arr` (`T[]`): 평탄화 할 배열이에요.
-- `depth` (`D`): 평탄화 할 깊이에요. 기본 값은 1이에요.
+- `arr` (`T[]`): 평탄화할 중첩 배열이에요.
+- `depth` (`D`): 평탄화할 깊이에요. 기본값은 1이에요.
 
 ### 반환 값
 
