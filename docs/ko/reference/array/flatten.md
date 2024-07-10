@@ -17,7 +17,7 @@ function flatten<T, D extends number = 1>(arr: T[], depth?: D): Array<FlatArray<
 
 ### 반환 값
 
-(`Array<FlatArray<T[], D>>`) 원하는 깊이로 평탄화 된 새로운 배열이에요.
+(`Array<FlatArray<T[], D>>`): 원하는 깊이까지 평탄해진 새로운 배열이에요.
 
 ## 예시
 
