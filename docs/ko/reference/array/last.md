@@ -38,7 +38,7 @@ const largeArray = Array(1000)
   .fill(0)
   .map((_, i) => i);
 const result = last(largeArray);
-// result는 99에요.
+// result는 999에요.
 
 const nestedArray = [
   [3, 1],
