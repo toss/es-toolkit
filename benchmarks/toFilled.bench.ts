@@ -3,7 +3,7 @@ import { fill as fillLodash } from 'lodash';
 import { fill as toFilled } from 'es-toolkit';
 
 describe('fill function performance comparison', () => {
-  bench('toFilled', () => {
+  bench('es-toolkit/toFilled', () => {
     toFilled([1, 2, 3, 4, 5], '*');
   });
 
@@ -13,7 +13,7 @@ describe('fill function performance comparison', () => {
 });
 
 describe('fill function performance with custom start and end', () => {
-  bench('toFilled', () => {
+  bench('es-toolkit/toFilled', () => {
     toFilled([1, 2, 3, 4, 5], '*', 1, 3);
   });
 
