@@ -1,8 +1,8 @@
 # flatten
 
-인자로 넣은 중첩 배열을 원하는 깊이까지 평탄화해요.
+중첩된 배열을 원하는 깊이까지 풀어서 평탄화해요.
 
-JavaScript에서 기본적으로 제공하는 [Array.prototype.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)과 동일한 동작과 반환 타입을 가져요. 하지만 성능은 더 우수합니다.
+JavaScript 언어에 포함된 [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)과 동일하게 동작하지만, 더 빨라요.
 
 ## 인터페이스
 
