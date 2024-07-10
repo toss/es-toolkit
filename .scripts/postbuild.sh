@@ -5,3 +5,4 @@ echo "export * from './dist/math';" > math.d.ts
 echo "export * from './dist/object';" > object.d.ts
 echo "export * from './dist/predicate';" > predicate.d.ts
 echo "export * from './dist/promise';" > promise.d.ts
+echo "export * from './dist/string';" > string.d.ts
