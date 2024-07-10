@@ -1,1 +1,1 @@
-export * from './caseSplitPattern';
+export { CASE_SPLIT_PATTERN } from './caseSplitPattern';
