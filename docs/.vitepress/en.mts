@@ -93,6 +93,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'zipWith', link: '/reference/array/zipWith' },
             { text: 'head', link: '/reference/array/head' },
             { text: 'tail', link: '/reference/array/tail' },
+            { text: 'last', link: '/reference/array/last' },
           ],
         },
         {
