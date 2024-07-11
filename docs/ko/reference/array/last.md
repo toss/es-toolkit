@@ -7,8 +7,8 @@
 ## 인터페이스
 
 ```typescript
-export function last<T>(arr: readonly [...T[], T]): T;
-export function last<T>(arr: readonly T[]): T | undefined;
+function last<T>(arr: [...T[], T]): T;
+function last<T>(arr: T[]): T | undefined;
 ```
 
 ### 파라미터
