@@ -94,6 +94,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'zipWith', link: '/reference/array/zipWith' },
             { text: 'head', link: '/reference/array/head' },
             { text: 'tail', link: '/reference/array/tail' },
+            { text: 'last', link: '/reference/array/last' },
           ],
         },
         {
@@ -141,6 +142,10 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Promise Utilities',
           items: [{ text: 'delay', link: '/reference/promise/delay' }],
+        },
+        {
+          text: 'String Utilities',
+          items: [{ text: 'snakeCase', link: '/reference/string/snakeCase' }],
         },
       ],
     },

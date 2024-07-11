@@ -93,6 +93,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'zipWith', link: '/ko/reference/array/zipWith' },
             { text: 'head', link: '/ko/reference/array/head' },
             { text: 'tail', link: '/ko/reference/array/tail' },
+            { text: 'last', link: '/ko/reference/array/last' },
           ],
         },
         {
@@ -140,6 +141,10 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Promise',
           items: [{ text: 'delay', link: '/ko/reference/promise/delay' }],
+        },
+        {
+          text: '문자열',
+          items: [{ text: 'snakeCase', link: '/ko/reference/string/snakeCase' }],
         },
       ],
     },
