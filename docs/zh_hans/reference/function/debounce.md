@@ -27,7 +27,7 @@ function debounce<F extends (...args: any[]) => void>(
 
 ## 示例
 
-### Basic Usage
+### 基本用法
 
 ```typescript
 const debouncedFunction = debounce(() => {
@@ -41,7 +41,7 @@ debouncedFunction();
 debouncedFunction.cancel();
 ```
 
-### Using with an AbortSignal
+### 使用 AbortSignal
 
 ```typescript
 const controller = new AbortController();
