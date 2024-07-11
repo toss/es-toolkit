@@ -1,5 +1,8 @@
 .DS_Store
 
+.idea/
+.vscode/
+
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
