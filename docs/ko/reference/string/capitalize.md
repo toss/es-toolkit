@@ -5,16 +5,16 @@
 ## 인터페이스
 
 ```typescript
-function capitalize(str: string): string;
+function capitalize<T extends string>(str: T): Capitalize<T>;
 ```
 
 ### 파라미터
 
-- `str` (`string`): 대문자로 변환할 문자열.
+`str` (`T`): 대문자로 변환할 문자열.
 
 ### 반환 값
 
-(`string`) 대문자로 변환된 문자열.
+(`Capitalize<string>`): 대문자로 변환된 문자열.
 
 ## 예시
 
