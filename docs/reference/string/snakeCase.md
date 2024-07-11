@@ -2,7 +2,7 @@
 
 Converts a string to snake case.
 
-Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (\_) character.
+Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (\_) character. For example, `snake_case`.
 
 ## Signature
 
