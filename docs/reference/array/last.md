@@ -7,8 +7,8 @@ This function takes an array and returns the last element of the array. If the a
 ## Signature
 
 ```typescript
-export function last<T>(arr: readonly [...T[], T]): T;
-export function last<T>(arr: readonly T[]): T | undefined;
+function last<T>(arr: [...T[], T]): T;
+function last<T>(arr: T[]): T | undefined;
 ```
 
 ### Parameters
