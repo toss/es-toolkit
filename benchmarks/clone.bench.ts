@@ -3,7 +3,7 @@ import { clone } from 'es-toolkit';
 import { clone as lodashClone } from 'lodash';
 
 const obj = {
-  number: 42,
+  number: 29,
   string: 'es-toolkit',
   boolean: true,
   array: [1, 2, 3],
