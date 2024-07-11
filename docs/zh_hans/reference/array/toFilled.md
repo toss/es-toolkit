@@ -6,7 +6,7 @@
 
 还可以使用负索引，此时索引从数组末尾开始计数。
 
-## Interface
+## 签名
 
 ```typescript
 function toFilled<T, U>(arr: T[], value: U): Array<T | U>;
