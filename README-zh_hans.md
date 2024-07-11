@@ -12,7 +12,7 @@ es-toolkit 是一个先进的、高性能的 JavaScript 实用工具库，具有
 - es-toolkit 包含内置的 TypeScript 支持，提供直观且强大的类型。它还提供诸如 [isNotNil](https://es-toolkit.slash.page/reference/predicate/isNotNil.html) 等有用的类型保护。
 - es-toolkit 经过了百分之百的测试覆盖率的实战检验，确保其可靠性和稳健性。
 
-## Examples
+## 示例
 
 ```tsx
 // import from '@es-toolkit/es-toolkit' in jsr.
@@ -32,13 +32,13 @@ console.log(chunkedArray);
 // 输出: [[1, 2], [3, 4], [5, 6]]
 ```
 
-## Contributing
+## 贡献
 
 我们欢迎社区中的每个人贡献。请阅读下面的详细贡献指南。
 
 [CONTRIBUTING](https://github.com/toss/es-toolkit/blob/main/.github/CONTRIBUTING.md)
 
-## License
+## 许可证
 
 MIT © Viva Republica, Inc. 详细信息请参阅 [LICENSE](./LICENSE)。
 
