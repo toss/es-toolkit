@@ -1,30 +1,25 @@
 # toFilled
 
-배열의 특정 요소를 지정된 값으로 채운 새로운 배열을 생성해요.
-이 함수는 원본 배열을 변경하지 않아요.
-
-주어진 배열을 기반으로 새로운 배열을 생성하고, 시작 위치부터 끝 위치까지의 요소를 지정된 값으로 채워요. 시작 위치 또는 끝 위치를 제공하지 않으면 배열 전체를 채워요.
-
-음수 인덱스를 사용할 수도 있으며, 이 경우 배열의 끝에서부터 인덱스를 계산해요.
+배열의 요소를 지정된 값으로 채워요. 시작 위치부터 끝 위치까지의 요소들을 제공된 값으로 대체한 새로운 배열을 반환해요. 시작 또는 끝 인덱스를 제공하지 않으면 배열 전체를 채워요.
 
 ## 인터페이스
 
 ```typescript
-export function toFilled<T, U>(arr: T[], value: U): Array<T | U>;
-export function toFilled<T, U>(arr: T[], value: U, start: number): Array<T | U>;
-export function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U, start: number): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T | U>;
 ```
 
 ### 파라미터
 
-- `arr` (`Array<T>`): 새 배열의 기반이 되는 배열입니다.
-- `value` (`U`): 새 배열을 채울 값입니다.
-- `start` (`number, 기본값 = 0`): 시작 위치입니다. 기본값은 0입니다.
-- `end` (`number, 기본값 = array.length`): 끝 위치입니다. 기본값은 배열의 길이입니다.
+- `arr` (`Array<T>`): 채울 배얼이에요.
+- `value` (`U`): 배열을 채울 값이에요.
+- `start` (`number, 기본값 = 0`): 시작 위치예요. 기본값은 0이에요.
+- `end` (`number, 기본값 = array.length`): 끝 위치예요. 기본값은 배열의 길이예요.
 
 ### 반환 값
 
-(`Array<T | U>`): 지정된 값으로 채워진 새로운 배열입니다.
+(`Array<T | U>`): 지정된 값으로 채워진 새로운 배열이에요.
 
 ### 예시
 

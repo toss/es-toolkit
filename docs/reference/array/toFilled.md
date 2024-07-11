@@ -1,17 +1,15 @@
 # toFilled
 
-Creates a new array filled with the specified value at specified positions. This function does not mutate the original array.
+Creates a new array filled with a specified value from the start position up to, but not including, the end position.
 
-This function generates a new array based on the given array and fills the elements from the start position to the end position with the specified value. If the start or end positions are not provided, the entire array is filled.
-
-Negative indices can also be used, in which case they are counted from the end of the array.
+If the start or end indices are not provided, it defaults to filling the entire array.
 
 ## Interface
 
 ```typescript
-export function toFilled<T, U>(arr: T[], value: U): Array<T | U>;
-export function toFilled<T, U>(arr: T[], value: U, start: number): Array<T | U>;
-export function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U, start: number): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T | U>;
 ```
 
 ### Parameters
