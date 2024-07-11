@@ -16,6 +16,7 @@ Here are some of the features es-toolkit offers:
 - **Object**: Tools for manipulating JavaScript objects, such as [pick](./reference/object/pick.md) and [omit](./reference/object/omit.md).
 - **Predicate**: Type guard functions like [isNotNil](./reference/predicate/isNotNil.md).
 - **Promise**: Asynchronous utilities like [delay](./reference/promise/delay.md).
+- **String**: Utilties for string manipulation, such as [snakeCase](./reference/string/snakeCase.md)
 
 ## Links
 

@@ -20,6 +20,7 @@
  * - **Object**: Tools for manipulating JavaScript objects, such as [pick](https://es-toolkit.slash.page/reference/object/pick.html) and [omit](https://es-toolkit.slash.page/reference/object/omit.html).
  * - **Predicate**: Type guard functions like [isNotNil](https://es-toolkit.slash.page/reference/predicate/isNotNil.html).
  * - **Promise**: Asynchronous utilities like [delay](https://es-toolkit.slash.page/reference/promise/delay.html).
+ * - **String**: Utilities for string manipulation, such as [snakeCase](https://es-toolkit.slash.page/reference/string/snakeCase.html)
  *
  * If you want to know more about the project, please take a look at the
  * following resources:
@@ -36,3 +37,4 @@ export * from './math/index.ts';
 export * from './object/index.ts';
 export * from './predicate/index.ts';
 export * from './promise/index.ts';
+export * from './string/index.ts'

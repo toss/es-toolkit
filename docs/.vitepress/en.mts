@@ -142,6 +142,10 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Promise Utilities',
           items: [{ text: 'delay', link: '/reference/promise/delay' }],
         },
+        {
+          text: 'String Utilities',
+          items: [{ text: 'snakeCase', link: '/reference/string/snakeCase' }],
+        },
       ],
     },
   ];

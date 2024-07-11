@@ -21,6 +21,7 @@
     "./object": "./src/object/index.ts",
     "./predicate": "./src/predicate/index.ts",
     "./promise": "./src/promise/index.ts",
+    "./string": "./src/string/index.ts",
     "./package.json": "./package.json"
   },
   "files": [
@@ -101,6 +102,16 @@
         "require": {
           "types": "./dist/promise/index.d.ts",
           "default": "./dist/promise/index.js"
+        }
+      },
+      "./string": {
+        "import": {
+          "types": "./dist/string/index.d.mts",
+          "default": "./dist/string/index.mjs"
+        },
+        "require": {
+          "types": "./dist/string/index.d.ts",
+          "default": "./dist/string/index.js"
         }
       },
       "./package.json": "./package.json"
