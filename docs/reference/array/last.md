@@ -19,10 +19,6 @@ export function last<T>(arr: readonly T[]): T | undefined;
 
 (`T | undefined`): The last element of the array, or `undefined` if the array is empty.
 
-### Throws
-
-Throws an error if `arr` is not an array.
-
 ## Example
 
 ```typescript
