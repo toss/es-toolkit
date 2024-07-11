@@ -4,6 +4,8 @@ Creates a new array filled with a specified value from the start position up to,
 
 If the start or end indices are not provided, it defaults to filling the entire array.
 
+Negative indices can also be used, in which case they are counted from the end of the array.
+
 ## Interface
 
 ```typescript
