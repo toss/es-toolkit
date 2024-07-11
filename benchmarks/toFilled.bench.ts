@@ -4,7 +4,7 @@ import { toFilled as toFilledToolkit } from 'es-toolkit';
 
 describe('fill function performance comparison', () => {
   bench('es-toolkit/toFilled', () => {
-    toFilled([1, 2, 3, 4, 5], '*');
+    toFilledToolkit([1, 2, 3, 4, 5], '*');
   });
 
   bench('lodash/fill', () => {
@@ -14,7 +14,7 @@ describe('fill function performance comparison', () => {
 
 describe('fill function performance with custom start and end', () => {
   bench('es-toolkit/toFilled', () => {
-    toFilled([1, 2, 3, 4, 5], '*', 1, 3);
+    toFilledToolkit([1, 2, 3, 4, 5], '*', 1, 3);
   });
 
   bench('lodash/fill', () => {
