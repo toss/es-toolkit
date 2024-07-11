@@ -1,30 +1,30 @@
-# snakeCase
+# kebabCase
 
-Converts a string to snake case.
+Converts a string to kebab case.
 
-Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (\_) character. For example, `snake_case`.
+Snake case is the naming convention in which each word is written in lowercase and separated by an dash (\-) character. For example, `kebab_case`.
 
 ## Signature
 
 ```typescript
-function snakeCase(str: string): string;
+function kebabCase(str: string): string;
 ```
 
 ### Parameters
 
-- `str` (`string`): The string that is to be changed to snake case.
+- `str` (`string`): The string that is to be changed to kebab case.
 
 ### Returns
 
-(`string`) The converted string to snake case.
+(`string`) The converted string to kebab case.
 
 ## Examples
 
 ```typescript
-import { snakeCase } from 'es-toolkit/string';
+import { kebabCase } from 'es-toolkit/string';
 
-snakeCase('camelCase'); // returns 'camel_case'
-snakeCase('some whitespace'); // returns 'some_whitespace'
-snakeCase('hyphen-text'); // returns 'hyphen_text'
-snakeCase('HTTPRequest'); // returns 'http_request'
+kebabCase('camelCase'); // returns 'camel-case'
+kebabCase('some whitespace'); // returns 'some-whitespace'
+kebabCase('hyphen-text'); // returns 'hyphen-text'
+kebabCase('HTTPRequest'); // returns 'http-request'
 ```
