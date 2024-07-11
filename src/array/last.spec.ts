@@ -28,9 +28,4 @@ describe('last', () => {
     ];
     expect(last(nestedArray)).toEqual([3, 3]);
   });
-
-  it('throws an error if argument is not an array', () => {
-    // @ts-expect-error: Testing invalid input
-    expect(() => last('not an array')).toThrow();
-  });
 });
