@@ -1,15 +1,16 @@
 /**
- * Creates a shallow clone of the given value.
+ * Creates a shallow clone of the given object.
  *
- * @template T - The type of the value.
- * @param {T} value - The value to clone.
- * @returns {T} - A shallow clone of the value.
+ * @template T - The type of the object.
+ * @param {T} obj - The object to clone.
+ * @returns {T} - A shallow clone of the given object.
  *
  * @example
  * // Clone a primitive values
  * const num = 29;
  * const clonedNum = clone(num);
  * console.log(clonedNum); // 29
+ * console.log(clonedNum === num) ; // true
  *
  * @example
  * // Clone an array
@@ -20,28 +21,28 @@
  *
  * @example
  * // Clone an object
- * const obj = { a: 1, b: 'es-toolkit' };
+ * const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3] };
  * const clonedObj = clone(obj);
- * console.log(clonedObj); // { a: 1, b: 'es-toolkit' }
+ * console.log(clonedObj); // { a: 1, b: 'es-toolkit', c: [1, 2, 3] }
  * console.log(clonedObj === obj); // false
  */
-export function clone<T>(value: T): T {
-  if (isPrimitive(value)) {
-    return value;
+export function clone<T>(obj: T): T {
+  if (isPrimitive(obj)) {
+    return obj;
   }
-  if (Array.isArray(value)) {
-    return value.slice() as T;
+  if (Array.isArray(obj)) {
+    return obj.slice() as T;
   }
-  if (value instanceof Date) {
-    return new Date(value.getTime()) as T;
+  if (obj instanceof Date) {
+    return new Date(obj.getTime()) as T;
   }
-  if (value instanceof RegExp) {
-    return new RegExp(value.source, value.flags) as T;
+  if (obj instanceof RegExp) {
+    return new RegExp(obj.source, obj.flags) as T;
   }
-  if (typeof value === 'object') {
-    return Object.assign({}, value) as T;
+  if (typeof obj === 'object') {
+    return Object.assign({}, obj) as T;
   }
-  return value;
+  return obj;
 }
 
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
