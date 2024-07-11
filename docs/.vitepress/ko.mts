@@ -144,7 +144,10 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '문자열',
-          items: [{ text: 'snakeCase', link: '/ko/reference/string/snakeCase' }],
+          items: [
+            { text: 'snakeCase', link: '/ko/reference/string/snakeCase' },
+            { text: 'lowerCase', link: '/ko/reference/string/lowerCase' }
+          ],
         },
       ],
     },

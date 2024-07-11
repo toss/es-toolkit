@@ -145,7 +145,10 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'String Utilities',
-          items: [{ text: 'snakeCase', link: '/reference/string/snakeCase' }],
+          items: [
+            { text: 'snakeCase', link: '/reference/string/snakeCase' },
+            { text: 'lowerCase', link: '/reference/string/lowerCase' }
+          ],
         },
       ],
     },
