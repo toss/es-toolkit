@@ -4,7 +4,7 @@ import { snakeCase as snakeCaseLodash } from 'lodash';
 
 describe('snakeCase', () => {
   bench('es-toolkit/snakeCase', () => {
-    const str = 'camleCase';
+    const str = 'camelCase';
     snakeCaseToolkit(str);
   });
 
