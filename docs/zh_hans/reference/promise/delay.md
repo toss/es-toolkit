@@ -24,7 +24,7 @@ function delay(ms: number, options?: DelayOptions): Promise<void>;
 
 ## 示例
 
-### Basic Usage
+### 基本用法
 
 ```typescript
 async function foo() {
@@ -36,7 +36,7 @@ async function foo() {
 foo();
 ```
 
-### Using with an AbortSignal
+### 使用 AbortSignal
 
 ```typescript
 async function foo() {
