@@ -2,7 +2,7 @@
 
 Converts a string to lower case.
 
-Snake case is the naming convention in which each word is written in lowercase and separated by an space ( ) character. For example, `lower_case`.
+Lower case is the naming convention in which each word is written in lowercase and separated by an space ( ) character. For example, `lower case`.
 
 ## Signature
 
