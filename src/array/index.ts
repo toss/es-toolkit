@@ -47,3 +47,4 @@ export { head } from './head.ts';
 export { tail } from './tail.ts';
 export { toFilled } from './toFilled.ts';
 export { last } from './last.ts';
+export { initial } from './initial.ts';
