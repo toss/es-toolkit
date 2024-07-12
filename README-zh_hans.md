@@ -7,9 +7,9 @@
 es-toolkit 是一个先进的、高性能的 JavaScript 实用工具库，具有小的捆绑包大小和强大的类型注解。
 
 - es-toolkit 提供多种现代实现的日常实用函数，如 [debounce](https://es-toolkit.slash.page/reference/function/debounce.html)、[delay](https://es-toolkit.slash.page/reference/promise/delay.html)、[chunk](https://es-toolkit.slash.page/reference/array/chunk.html)、[sum](https://es-toolkit.slash.page/reference/math/sum.html) 和 [pick](https://es-toolkit.slash.page/reference/object/pick.html)。
-- 设计时考虑了性能，es-toolkit 在现代 JavaScript 环境中实现了 [2-3 倍的性能提升](https://es-toolkit.slash.page/performance.html)。
-- es-toolkit 支持开箱即用，并且与其他库相比，可以将 JavaScript 代码减少高达 [97%](https://es-toolkit.slash.page/bundle-size.html)。
-- es-toolkit 包含内置的 TypeScript 支持，提供直观且强大的类型。它还提供诸如 [isNotNil](https://es-toolkit.slash.page/reference/predicate/isNotNil.html) 等有用的类型保护。
+- 设计时考虑了性能，es-toolkit 在现代 JavaScript 环境中实现了 [2-3 倍的性能提升](https://es-toolkit.slash.page/zh_hans/performance.html)。
+- es-toolkit 支持开箱即用，并且与其他库相比，可以将 JavaScript 代码减少高达 [97%](https://es-toolkit.slash.page/zh_hans/bundle-size.html)。
+- es-toolkit 包含内置的 TypeScript 支持，提供直观且强大的类型。它还提供诸如 [isNotNil](https://es-toolkit.slash.page/zh_hans/reference/predicate/isNotNil.html) 等有用的类型保护。
 - es-toolkit 经过了百分之百的测试覆盖率的实战检验，确保其可靠性和稳健性。
 
 ## 示例
