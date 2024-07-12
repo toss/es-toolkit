@@ -1,3 +1,8 @@
+interface FlattenStack<T> {
+  array: readonly T[];
+  currentDepth: number;
+}
+
 /**
  * Flattens an array up to the specified depth.
  *
@@ -16,18 +21,20 @@
  */
 export function flatten<T, D extends number = 1>(arr: readonly T[], depth = 1 as D): Array<FlatArray<T[], D>> {
   const result: Array<FlatArray<T[], D>> = [];
+  const stack: Array<FlattenStack<T>> = [{ array: arr, currentDepth: 0 }];
   const flooredDepth = Math.floor(depth);
 
-  const recursive = (arr: readonly T[], currentDepth: number) => {
-    for (const item of arr) {
+  while (stack.length > 0) {
+    const { array, currentDepth } = stack.pop()!;
+
+    for (const item of array) {
       if (Array.isArray(item) && currentDepth < flooredDepth) {
-        recursive(item, currentDepth + 1);
+        stack.push({ array: item, currentDepth: currentDepth + 1 });
       } else {
         result.push(item as FlatArray<T[], D>);
       }
     }
-  };
+  }
 
-  recursive(arr, 0);
   return result;
 }
