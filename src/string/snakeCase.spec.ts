@@ -18,7 +18,7 @@ describe('snakeCase', () => {
     expect(snakeCase('HTTPRequest')).toEqual('http_request');
   });
 
-  it('should handle leading and trailing whitepspace', async () => {
+  it('should handle leading and trailing whitespace', async () => {
     expect(snakeCase('    leading and trailing whitespace')).toEqual('leading_and_trailing_whitespace');
   });
 
@@ -32,5 +32,9 @@ describe('snakeCase', () => {
 
   it('should work with an empty string', async () => {
     expect(snakeCase('')).toEqual('');
+  });
+
+  it('should work with screaming snake case', async () => {
+    expect(snakeCase('FOO_BAR')).toEqual('foo_bar');
   });
 });

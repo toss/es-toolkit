@@ -148,6 +148,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'String Utilities',
           items: [
             { text: 'snakeCase', link: '/reference/string/snakeCase' },
+            { text: 'kebabCase', link: '/reference/string/kebabCase' },
             { text: 'capitalize', link: '/reference/string/capitalize' },
           ],
         },

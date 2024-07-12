@@ -147,6 +147,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '문자열',
           items: [
             { text: 'snakeCase', link: '/ko/reference/string/snakeCase' },
+            { text: 'kebabCase', link: '/ko/reference/string/kebabCase' },
             { text: 'capitalize', link: '/ko/reference/string/capitalize' },
           ],
         },
