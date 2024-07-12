@@ -17,7 +17,7 @@ export const zh_hans = defineConfig({
 
     footer: {
       message: '采用 MIT 许可证发布。',
-      copyright: `版权所有 © ${new Date().getFullYear()} Viva Republica, Inc.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Viva Republica, Inc.`,
     },
   },
 });
