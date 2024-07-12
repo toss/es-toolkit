@@ -1,30 +1,30 @@
- # snakeCase
+# snakeCase
 
- Converts a string to snake case.
+Converts a string to snake case.
 
- Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (\_) character. For example, `snake_case`.
+Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (\_) character. For example, `snake_case`.
 
- ## Signature
+## Signature
 
- ```typescript
- function snakeCase(str: string): string;
- ```
+```typescript
+function snakeCase(str: string): string;
+```
 
- ### Parameters
+### Parameters
 
- - `str` (`string`): The string that is to be changed to snake case.
+- `str` (`string`): The string that is to be changed to snake case.
 
- ### Returns
+### Returns
 
- (`string`) The converted string to snake case.
+(`string`) The converted string to snake case.
 
- ## Examples
+## Examples
 
- ```typescript
- import { snakeCase } from 'es-toolkit/string';
+```typescript
+import { snakeCase } from 'es-toolkit/string';
 
- snakeCase('camelCase'); // returns 'camel_case'
- snakeCase('some whitespace'); // returns 'some_whitespace'
- snakeCase('hyphen-text'); // returns 'hyphen_text'
- snakeCase('HTTPRequest'); // returns 'http_request'
- ```
+snakeCase('camelCase'); // returns 'camel_case'
+snakeCase('some whitespace'); // returns 'some_whitespace'
+snakeCase('hyphen-text'); // returns 'hyphen_text'
+snakeCase('HTTPRequest'); // returns 'http_request'
+```
