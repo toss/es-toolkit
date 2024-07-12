@@ -148,6 +148,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'snakeCase', link: '/ko/reference/string/snakeCase' },
             { text: 'kebabCase', link: '/ko/reference/string/kebabCase' },
+            { text: 'lowerCase', link: '/ko/reference/string/lowerCase' },
             { text: 'capitalize', link: '/ko/reference/string/capitalize' },
           ],
         },
