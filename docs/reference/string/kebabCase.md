@@ -2,7 +2,7 @@
 
  Converts a string to kebab case.
 
- Snake case is the naming convention in which each word is written in lowercase and separated by an dash (\-) character. For example, `kebab_case`.
+ Kebab case is the naming convention in which each word is written in lowercase and separated by an dash (\-) character. For example, `kebab_case`.
 
  ## Signature
 
