@@ -12,11 +12,11 @@ function lowerCase(str: string): string;
 
 ### 파라미터
 
-- `str` (`string`): 소문자로 변환할 문자열입니다.
+- `str` (`string`): 소문자로 변환할 문자열이에요.
 
 ### 반환 값
 
-(`string`) 소문자로 변환된 문자열입니다.
+(`string`) 소문자로 변환된 문자열이에요.
 
 ## 예시
 
