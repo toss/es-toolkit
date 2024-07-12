@@ -14,8 +14,8 @@
 export function sum(nums: readonly number[]): number {
   let result = 0;
 
-  for (const num of nums) {
-    result += num;
+  for (let i = 0; i < nums.length; i++) {
+    result += nums[i];
   }
 
   return result;
