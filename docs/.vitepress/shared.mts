@@ -2,7 +2,7 @@ import { createRequire } from 'module';
 import path from 'path';
 import { defineConfig } from 'vitepress';
 import { search as koSearch } from './ko.mts';
-import { search as zh_hansSearch } from './zh_hans.mjs';
+import { search as zh_hansSearch } from './zh_hans.mts';
 
 const require = createRequire(import.meta.url);
 
