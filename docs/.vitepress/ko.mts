@@ -59,6 +59,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'fill', link: '/ko/reference/array/fill' },
             { text: 'toFilled', link: '/ko/reference/array/toFilled' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
+            { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
             { text: 'groupBy', link: '/ko/reference/array/groupBy' },
             { text: 'intersection', link: '/ko/reference/array/intersection' },
@@ -146,7 +147,9 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '문자열',
           items: [
             { text: 'snakeCase', link: '/ko/reference/string/snakeCase' },
-            { text: 'lowerCase', link: '/ko/reference/string/lowerCase' }
+            { text: 'kebabCase', link: '/ko/reference/string/kebabCase' },
+            { text: 'lowerCase', link: '/ko/reference/string/lowerCase' },
+            { text: 'capitalize', link: '/ko/reference/string/capitalize' },
           ],
         },
       ],
