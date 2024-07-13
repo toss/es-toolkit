@@ -26,15 +26,15 @@ export function isEqual(a: unknown, b: unknown): boolean {
   }
 
   if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null) {
-    const keysX = Object.keys(a as object);
-    const keysY = Object.keys(b as object);
+    const aKeys = Object.keys(a as object);
+    const bKeys = Object.keys(b as object);
 
-    if (keysX.length !== keysY.length) return false;
+    if (aKeys.length !== bKeys.length) return false;
 
     // check if all keys in both arrays match
-    if (union(keysX, keysY).length !== keysX.length) return false;
+    if (union(aKeys, bKeys).length !== aKeys.length) return false;
 
-    for (let i = 0; i < keysX.length; i++) {
+    for (let i = 0; i < aKeys.length; i++) {
       const aa = (a as any)[i];
       const bb = (b as any)[i];
       if (!isEqual(aa, bb)) return false;
