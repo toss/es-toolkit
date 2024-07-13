@@ -16,7 +16,11 @@ import { mean } from './mean.ts';
  * meanBy([], x => x.a); // Returns: NaN
  */
 export function meanBy<T>(items: readonly T[], getValue: (element: T) => number): number {
-  const nums = items.map(x => getValue(x));
+  const nums = new Array(items.length);
+
+  for (let i = 0; i < items.length; i++) {
+    nums[i] = getValue(items[i]);
+  }
 
   return mean(nums);
 }
