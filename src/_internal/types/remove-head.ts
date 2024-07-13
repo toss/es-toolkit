@@ -1,2 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export type RemoveHead<T> = T extends [infer _, ...infer Rest] ? Rest : T;
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OptionalToNullable } from './optional-to-nullable';
+
+export type RemoveHead<T extends any[]> = OptionalToNullable<T> extends [infer Head, ...infer Rest] ? Rest : never;

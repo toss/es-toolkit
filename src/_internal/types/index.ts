@@ -3,6 +3,7 @@ export type { LinearSubArray } from './linear-sub-array';
 export type { LiteralToPrimitive } from './literal-to-primitive';
 export type { Minus } from './minus';
 export type { OptionalSince } from './optional-since';
+export type { OptionalToNullable } from './optional-to-nullable';
 export type { RemoveHead } from './remove-head';
 export type { RemoveHeads } from './remove-heads';
 export type { RemoveRest } from './remove-rest';
