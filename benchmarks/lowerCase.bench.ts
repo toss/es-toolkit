@@ -16,7 +16,7 @@ describe('lowerCase', () => {
   });
 
   describe('long string', () => {
-    const LONG_STR = 'camelCase'.repeat(100);
+    const LONG_STR = 'camelCaseLongString'.repeat(1000);
     bench('es-toolkit/lowerCase', () => {
       lowerCaseToolkit(LONG_STR);
     });
