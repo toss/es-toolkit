@@ -37,4 +37,12 @@ describe('snakeCase', () => {
   it('should work with screaming snake case', async () => {
     expect(snakeCase('FOO_BAR')).toEqual('foo_bar');
   });
+
+  it('should work with hyphens ', () => {
+    expect(snakeCase('--FOO-BAR--')).toEqual('foo_bar');
+  });
+
+  it('should work with numbers', () => {
+    expect(snakeCase('foo2bar')).toEqual('foo_2_bar');
+  });
 });
