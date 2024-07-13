@@ -17,5 +17,15 @@ import { CASE_SPLIT_PATTERN } from '../constants';
 
 export const snakeCase = (str: string): string => {
   const splitWords = str.match(CASE_SPLIT_PATTERN) || [];
-  return splitWords.map(word => word.toLowerCase()).join('_');
+
+  if (splitWords.length === 0) {
+    return '';
+  }
+
+  let result = splitWords[0]!.toLowerCase();
+  for (let i = 1; i < splitWords.length; i++) {
+    result += '_' + splitWords[i].toLowerCase();
+  }
+
+  return result;
 };
