@@ -1,4 +1,4 @@
-import { LiteralToPrimitive } from './litral-to-primitive';
+import { LiteralToPrimitive } from './literal-to-primitive';
 import { RemoveHead } from './remove-head';
 
 export type RemoveHeads<T, H extends any[]> = T extends [

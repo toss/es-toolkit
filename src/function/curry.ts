@@ -1,17 +1,14 @@
-import { LinearSubArray } from '../_internal/types/linear-sub-array';
-import { RemoveHeads } from '../_internal/types/remove-heads';
-import { RemoveRest } from '../_internal/types/remove-rest';
-import { RequiredArray } from '../_internal/types/required-array';
+import type { LinearSubArray, RemoveHeads, RemoveRest, RequiredArray } from '../_internal/types';
 
 type CurriedFunction<F extends (...args: any) => any> = <S extends LinearSubArray<Parameters<F>>>(
   ...args: S
-) => RequiredArray<RemoveRest<S>>['length'] extends RequiredArray<RemoveRest<Parameters<F>>>['length']
+) => RemoveRest<RequiredArray<S>>['length'] extends RemoveRest<RequiredArray<Parameters<F>>>['length']
   ? ReturnType<F>
   : CurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>>;
 
-type CurriedFunctionResult<F extends (...args: any) => any, S extends LinearSubArray<Parameters<F>>> = RequiredArray<
-  RemoveRest<S>
->['length'] extends RequiredArray<RemoveRest<Parameters<F>>>['length']
+type CurriedFunctionResult<F extends (...args: any) => any, S extends LinearSubArray<Parameters<F>>> = RemoveRest<
+  RequiredArray<S>
+>['length'] extends RemoveRest<RequiredArray<Parameters<F>>>['length']
   ? ReturnType<F>
   : CurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>>;
 
