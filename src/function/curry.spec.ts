@@ -15,7 +15,7 @@ describe('curry', () => {
   });
 
   it('should curry based on the number of arguments given', () => {
-    const fn = (a: number, b: number, c: number, d?: number) => [a, b, c, d];
+    const fn = (a: number, b: number, c: number, d: number) => [a, b, c, d];
     const curried = flexibleCurry(fn);
     const expected = [1, 2, 3, 4];
 
