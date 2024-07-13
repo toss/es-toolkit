@@ -60,6 +60,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'fill', link: '/reference/array/fill' },
             { text: 'toFilled', link: '/reference/array/toFilled' },
             { text: 'flatten', link: '/reference/array/flatten' },
+            { text: 'flattenDeep', link: '/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
             { text: 'groupBy', link: '/reference/array/groupBy' },
             { text: 'intersection', link: '/reference/array/intersection' },
@@ -145,7 +146,12 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'String Utilities',
-          items: [{ text: 'snakeCase', link: '/reference/string/snakeCase' }],
+          items: [
+            { text: 'snakeCase', link: '/reference/string/snakeCase' },
+            { text: 'kebabCase', link: '/reference/string/kebabCase' },
+            { text: 'lowerCase', link: '/reference/string/lowerCase' },
+            { text: 'capitalize', link: '/reference/string/capitalize' },
+          ],
         },
       ],
     },

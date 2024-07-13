@@ -22,14 +22,14 @@ function flatten<T, D extends number = 1>(arr: T[], depth?: D): Array<FlatArray<
 ## Examples
 
 ```typescript
-const originArr = [1, [2, 3], [4, [5, 6]]];
+const array = [1, [2, 3], [4, [5, 6]]];
 
-const array1 = flatten(originArr);
+const result1 = flatten(array);
 // Return [1, 2, 3, 4, [5, 6]]
 
-const array2 = flatten(originArr, 1);
+const result2 = flatten(array, 1);
 // Return [1, 2, 3, 4, [5, 6]]
 
-const array3 = flatten(originArr, 2);
+const result3 = flatten(array, 2);
 // Return [1, 2, 3, 4, 5, 6]
 ```
