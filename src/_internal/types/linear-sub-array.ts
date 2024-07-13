@@ -1,8 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { Last } from './last';
+import { OptionalSince } from './optional-since';
 import { RequiredArray } from './required-array';
 
-export type LinearSubArray<A extends any[], Result extends any[] = []> =
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  RequiredArray<A> extends [infer _, ...infer Rest extends any[]]
-    ? LinearSubArray<Rest, [...Result, [...(Result['length'] extends 0 ? [] : Last<Result>), A[0]]]>
-    : Result[number];
+export type LinearSubArray<
+  A extends any[],
+  Origin extends any[] = A,
+  OptionalStart extends number = -1,
+  Result extends any[] = [],
+> =
+  RequiredArray<A> extends [infer _Head, ...infer Rest]
+    ? LinearSubArray<
+        Rest,
+        Origin,
+        OptionalStart extends -1 ? (undefined extends Origin[Result['length']] ? Result['length'] : -1) : OptionalStart,
+        [...Result, [...(Result['length'] extends 0 ? [] : Last<Result>), A[0]]]
+      >
+    : OptionalSince<Result[number], OptionalStart>;

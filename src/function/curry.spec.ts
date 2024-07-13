@@ -43,19 +43,23 @@ describe('curry', () => {
   });
 
   it('should inference type correctly when optional parameters exist', () => {
-    const fn = (a: number, b: string, c?: boolean) => ({ a, b, c });
+    const fn = (a: number, b?: string, c?: boolean) => ({ a, b, c });
     const curried = flexibleCurry(fn);
 
-    expectTypeOf(curried).parameters.toEqualTypeOf<[number] | [number, string] | [number, string, boolean]>();
-    expectTypeOf(curried(1)).parameters.toEqualTypeOf<[string] | [string, boolean]>();
+    expectTypeOf(curried).parameters.toEqualTypeOf<
+      [number] | [number, string | undefined] | [number, string | undefined, boolean | undefined]
+    >();
+    expectTypeOf(curried(1)).parameters.toEqualTypeOf<
+      [string | undefined] | [string | undefined, boolean | undefined]
+    >();
     expectTypeOf(curried(1)).not.toEqualTypeOf<{ a: number; b: string; c: boolean }>();
-    expectTypeOf(curried(1, 'a')).parameters.toEqualTypeOf<[boolean]>();
-    expectTypeOf(curried(1, 'a')).not.toEqualTypeOf<{ a: number; b: string; c: boolean }>();
-    expectTypeOf(curried(1)('a')).parameters.toEqualTypeOf<[boolean]>();
-    expectTypeOf(curried(1)('a')).not.toEqualTypeOf<{ a: number; b: string; c: boolean }>();
-    expectTypeOf(curried(1)('a')(true)).toEqualTypeOf<{ a: number; b: string; c: boolean }>();
-    expectTypeOf(curried(1, 'a')(true)).toEqualTypeOf<{ a: number; b: string; c: boolean }>();
-    expectTypeOf(curried(1)('a', true)).toEqualTypeOf<{ a: number; b: string; c: boolean }>();
-    expectTypeOf(curried(1, 'a', true)).toEqualTypeOf<{ a: number; b: string; c: boolean }>();
+    expectTypeOf(curried(1, 'a')).parameters.toEqualTypeOf<[boolean | undefined]>();
+    expectTypeOf(curried(1, 'a')).not.toEqualTypeOf<{ a: number; b: string | undefined; c: boolean | undefined }>();
+    expectTypeOf(curried(1)('a')).parameters.toEqualTypeOf<[boolean | undefined]>();
+    expectTypeOf(curried(1)('a')).not.toEqualTypeOf<{ a: number; b: string | undefined; c: boolean | undefined }>();
+    expectTypeOf(curried(1)('a')(true)).toEqualTypeOf<{ a: number; b: string | undefined; c: boolean | undefined }>();
+    expectTypeOf(curried(1, 'a')(true)).toEqualTypeOf<{ a: number; b: string | undefined; c: boolean | undefined }>();
+    expectTypeOf(curried(1)('a', true)).toEqualTypeOf<{ a: number; b: string | undefined; c: boolean | undefined }>();
+    expectTypeOf(curried(1, 'a', true)).toEqualTypeOf<{ a: number; b: string | undefined; c: boolean | undefined }>();
   });
 });
