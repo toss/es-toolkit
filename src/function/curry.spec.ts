@@ -25,6 +25,15 @@ describe('curry', () => {
     expect(curried(1, 2, 3, 4)).toEqual(expected);
   });
 
+  it('should run the function immediately when `run` method called', () => {
+    const fn = (a: number, b?: number, c?: number) => [a, b, c];
+    const curried = flexibleCurry(fn);
+
+    expect(curried(1).run()).toEqual([1, undefined, undefined]);
+    expect(curried(1)(2).run()).toEqual([1, 2, undefined]);
+    expect(curried(1, 2).run()).toEqual([1, 2, undefined]);
+  });
+
   it('should inference type correctly', () => {
     const fn = (a: number, b: string, c: boolean) => ({ a, b, c });
     const curried = flexibleCurry(fn);

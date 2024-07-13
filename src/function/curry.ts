@@ -4,13 +4,13 @@ type CurriedFunction<F extends (...args: any) => any> = <S extends LinearSubArra
   ...args: S
 ) => RemoveRest<RequiredArray<S>>['length'] extends RemoveRest<RequiredArray<Parameters<F>>>['length']
   ? ReturnType<F>
-  : CurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>>;
+  : CurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>> & { run: () => ReturnType<F> };
 
 type CurriedFunctionResult<F extends (...args: any) => any, S extends LinearSubArray<Parameters<F>>> = RemoveRest<
   RequiredArray<S>
 >['length'] extends RemoveRest<RequiredArray<Parameters<F>>>['length']
   ? ReturnType<F>
-  : CurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>>;
+  : CurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>> & { run: () => ReturnType<F> };
 
 /**
  * Translate a function that takes multiple arguments into a sequence of families of functions.
@@ -55,8 +55,14 @@ function makeflexibleCurry<F extends (...args: any) => any, S extends LinearSubA
   if (args.length === requireArgumentsCount) {
     return origin(...memoizedArgs, ...args);
   } else {
-    return function (...newArgs: RemoveHeads<Parameters<F>, S>) {
+    const next = function (...newArgs: RemoveHeads<Parameters<F>, S>) {
       return makeflexibleCurry(origin, requireArgumentsCount - args.length, [...memoizedArgs, ...args], newArgs as any);
     } as any;
+
+    next.run = () => {
+      return origin(...memoizedArgs, ...args);
+    };
+
+    return next;
   }
 }
