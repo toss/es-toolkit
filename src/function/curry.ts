@@ -1,16 +1,17 @@
 import { LinearSubArray } from '../_internal/types/linear-sub-array';
 import { RemoveHeads } from '../_internal/types/remove-heads';
+import { RequiredArray } from '../_internal/types/required-array';
 
 type CurriedFunction<F extends (...args: any) => any> = <S extends LinearSubArray<Parameters<F>>>(
   ...args: S
-) => S['length'] extends Parameters<F>['length']
+) => RequiredArray<S>['length'] extends RequiredArray<Parameters<F>>['length']
   ? ReturnType<F>
   : CurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>>;
 
 type CurriedFunctionResult<
   F extends (...args: any) => any,
   S extends LinearSubArray<Parameters<F>>,
-> = S['length'] extends Parameters<F>['length']
+> = RequiredArray<S>['length'] extends RequiredArray<Parameters<F>>['length']
   ? ReturnType<F>
   : CurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>>;
 
@@ -36,17 +37,19 @@ type CurriedFunctionResult<
  * // The argument `e` should be given the value `2`, `f` the value `5`. The function 'sum' has received all its arguments and will now return a value.
  * const result = sum32(2, 5);
  */
-export function curry<F extends (...args: any) => any>(func: F) {
+export function curry() {}
+
+export function flexibleCurry<F extends (...args: any) => any>(func: F) {
   if (func.length === 0) {
     throw new Error('`func` must have at least one argument that is not a rest parameter.');
   }
 
   return function <S extends LinearSubArray<Parameters<F>>>(...args: S): CurriedFunctionResult<F, S> {
-    return makeCurry(func, func.length, [], args);
+    return makeflexibleCurry(func, func.length, [], args);
   };
 }
 
-function makeCurry<F extends (...args: any) => any, S extends LinearSubArray<Parameters<F>>>(
+function makeflexibleCurry<F extends (...args: any) => any, S extends LinearSubArray<Parameters<F>>>(
   origin: F,
   requireArgumentsCount: number,
   memoizedArgs: any[],
@@ -56,7 +59,7 @@ function makeCurry<F extends (...args: any) => any, S extends LinearSubArray<Par
     return origin(...memoizedArgs, ...args);
   } else {
     return function (...newArgs: RemoveHeads<Parameters<F>, S>) {
-      return makeCurry(origin, requireArgumentsCount - args.length, [...memoizedArgs, ...args], newArgs as any);
+      return makeflexibleCurry(origin, requireArgumentsCount - args.length, [...memoizedArgs, ...args], newArgs as any);
     } as any;
   }
 }
