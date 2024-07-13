@@ -11,5 +11,6 @@
  */
 
 export const capitalize = <T extends string>(str: T): Capitalize<T> => {
-  return (str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()) as Capitalize<T>;
+  const lowered = str.toLowerCase();
+  return (lowered.charAt(0).toUpperCase() + lowered.slice(1)) as Capitalize<T>;
 };
