@@ -10,15 +10,19 @@
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
  */
-export function minBy<T>(items: T[], getValue: (element: T) => number): T {
+export function minBy<T>(items: T[], getValue: (element: T) => number): T | undefined {
+  if (items.length === 0) {
+    return undefined;
+  }
   let minElement = items[0];
-  let min = Infinity;
+  let min = getValue(minElement);
 
-  for (const element of items) {
-    const value = getValue(element);
+  for (let i = 1; i < items.length; i++) {
+    const item = items[i];
+    const value = getValue(item);
     if (value < min) {
       min = value;
-      minElement = element;
+      minElement = item;
     }
   }
 
