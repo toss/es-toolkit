@@ -25,20 +25,23 @@ export function isEqual(a: unknown, b: unknown): boolean {
     return a.source === b.source && a.flags === b.flags;
   }
 
-  if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null) {
-    const aKeys = Object.keys(a as object);
-    const bKeys = Object.keys(b as object);
+  if (typeof a !== 'object' || typeof b !== 'object' || a === null || b === null) {
+    return false;
+  }
 
-    if (aKeys.length !== bKeys.length) return false;
+  const aKeys = Object.keys(a as object);
+  const bKeys = Object.keys(b as object);
 
-    // check if all keys in both arrays match
-    if (union(aKeys, bKeys).length !== aKeys.length) return false;
+  if (aKeys.length !== bKeys.length) return false;
 
-    for (let i = 0; i < aKeys.length; i++) {
-      const aa = (a as any)[i];
-      const bb = (b as any)[i];
-      if (!isEqual(aa, bb)) return false;
-    }
+  // check if all keys in both arrays match
+  if (union(aKeys, bKeys).length !== aKeys.length) return false;
+
+  for (let i = 0; i < aKeys.length; i++) {
+    const propKey = aKeys[i];
+    const aProp = (a as any)[propKey];
+    const bProp = (b as any)[propKey];
+    if (!isEqual(aProp, bProp)) return false;
   }
 
   return true;
