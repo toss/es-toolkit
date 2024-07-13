@@ -8,7 +8,7 @@ export type RemoveHeads<
   T extends any[],
   H extends any[],
   Origin extends any[] = T,
-  StartOfOptional extends number = -1,
+  OptionalStartIdx extends number = -1,
   Deleted extends any[] = [],
 > =
   RequiredArray<T> extends [
@@ -20,15 +20,15 @@ export type RemoveHeads<
         undefined extends T[0] ? Rest : RemoveHead<T>,
         RemoveHead<H>,
         Origin,
-        StartOfOptional extends -1
+        OptionalStartIdx extends -1
           ? undefined extends Origin[Deleted['length']]
             ? Deleted['length']
             : -1
-          : StartOfOptional,
+          : OptionalStartIdx,
         [...Deleted, H[0]]
       >
-    : StartOfOptional extends -1
+    : OptionalStartIdx extends -1
       ? T
-      : Minus<StartOfOptional, Deleted['length']> extends never
+      : Minus<OptionalStartIdx, Deleted['length']> extends never
         ? OptionalSince<T, 0>
-        : OptionalSince<T, Minus<StartOfOptional, Deleted['length']>>;
+        : OptionalSince<T, Minus<OptionalStartIdx, Deleted['length']>>;

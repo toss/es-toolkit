@@ -1,10 +1,10 @@
-export type OptionalSince<T, OptionalStart extends number, Result extends any[] = []> = T extends [
+export type OptionalSince<T, OptionalStartIdx extends number, Result extends any[] = []> = T extends [
   infer Head,
   ...infer Rest extends any[],
 ]
-  ? Result['length'] extends OptionalStart
+  ? Result['length'] extends OptionalStartIdx
     ? OptionalSince<Rest, -2, [...Result, Head | undefined]>
-    : OptionalStart extends -2
+    : OptionalStartIdx extends -2
       ? OptionalSince<Rest, -2, [...Result, Head | undefined]>
-      : OptionalSince<Rest, OptionalStart, [...Result, Head]>
+      : OptionalSince<Rest, OptionalStartIdx, [...Result, Head]>
   : Result;
