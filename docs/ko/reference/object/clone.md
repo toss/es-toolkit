@@ -31,6 +31,6 @@ console.log(clonedArr === arr); // false
 
 const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3] };
 const clonedObj = clone(obj);
-console.log(clonedObj); // { a: 1, b: 'es-toolkit' }
+console.log(clonedObj); // { a: 1, b: 'es-toolkit', c: [1, 2, 3] }
 console.log(clonedObj === obj); // false
 ```
