@@ -23,6 +23,4 @@ import { negate } from 'es-toolkit/function';
 
 negate(() => true)(); // returns 'false'
 negate(() => false)(); // returns 'false'
-negate(() => 1); // returns 'false'
-negate(() => 0); // returns 'true'
 ```
