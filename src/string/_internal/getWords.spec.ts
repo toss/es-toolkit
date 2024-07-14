@@ -55,4 +55,12 @@ describe('caseSplitPattern', () => {
     const matches = getWords(str);
     expect(matches).toEqual(['a', 'B']);
   });
+
+  it('should work with hyphens ', () => {
+    expect(getWords('--FOO-BAR--')).toEqual(['FOO', 'BAR']);
+  });
+
+  it('should work with numbers', () => {
+    expect(getWords('foo2bar')).toEqual(['foo', '2', 'bar']);
+  });
 });
