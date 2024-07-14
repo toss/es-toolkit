@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-export function sampleSize<T>(array: readonly T[], size: number): T[];
+export function sampleSize<T>(array: T[], size: number): T[];
 ```
 
 ### 파리미터

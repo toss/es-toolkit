@@ -96,6 +96,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'head', link: '/reference/array/head' },
             { text: 'tail', link: '/reference/array/tail' },
             { text: 'last', link: '/reference/array/last' },
+            { text: 'initial', link: '/reference/array/initial' },
           ],
         },
         {
@@ -124,6 +125,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Object Utilities',
           items: [
+            { text: 'clone', link: '/reference/object/clone' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },

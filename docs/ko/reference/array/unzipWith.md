@@ -5,7 +5,7 @@
 ## 인터페이스
 
 ```typescript
-function unzipWith<T, R>(target: readonly T[][], iteratee: (...args: T[]) => R): R[];
+function unzipWith<T, R>(target: T[][], iteratee: (...args: T[]) => R): R[];
 ```
 
 ### 파라미터

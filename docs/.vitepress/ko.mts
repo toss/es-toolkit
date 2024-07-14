@@ -95,6 +95,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'head', link: '/ko/reference/array/head' },
             { text: 'tail', link: '/ko/reference/array/tail' },
             { text: 'last', link: '/ko/reference/array/last' },
+            { text: 'initial', link: '/ko/reference/array/initial' },
           ],
         },
         {
@@ -123,6 +124,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '객체',
           items: [
+            { text: 'clone', link: '/ko/reference/object/clone' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },

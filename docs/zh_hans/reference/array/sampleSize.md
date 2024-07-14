@@ -7,7 +7,7 @@
 ## 签名
 
 ```typescript
-export function sampleSize<T>(array: readonly T[], size: number): T[];
+export function sampleSize<T>(array: T[], size: number): T[];
 ```
 
 ### 参数
