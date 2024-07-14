@@ -62,18 +62,22 @@ function makeCurry<F extends (...args: any) => any>(
   }
 }
 
-type FlexibleCurriedFunction<F extends (...args: any) => any> = <S extends LinearSubArray<Parameters<F>>>(
-  ...args: S
-) => RemoveRest<OptionalToNullable<S>>['length'] extends RemoveRest<OptionalToNullable<Parameters<F>>>['length']
+type MatchCurriedFunctionResult<F extends (...args: any) => any, S extends LinearSubArray<Parameters<F>>> = RemoveRest<
+  OptionalToNullable<S>
+>['length'] extends RemoveRest<OptionalToNullable<Parameters<F>>>['length']
   ? ReturnType<F>
   : FlexibleCurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>> & { run: () => ReturnType<F> };
 
+// FlexibleCurriedFunction 타입 선언에서 유틸리티 타입을 사용
+type FlexibleCurriedFunction<F extends (...args: any) => any> = <S extends LinearSubArray<Parameters<F>>>(
+  ...args: S
+) => MatchCurriedFunctionResult<F, S>;
+
+// FlexibleCurriedFunctionResult 타입 선언에서 같은 유틸리티 타입을 사용
 type FlexibleCurriedFunctionResult<
   F extends (...args: any) => any,
   S extends LinearSubArray<Parameters<F>>,
-> = RemoveRest<OptionalToNullable<S>>['length'] extends RemoveRest<OptionalToNullable<Parameters<F>>>['length']
-  ? ReturnType<F>
-  : FlexibleCurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>> & { run: () => ReturnType<F> };
+> = MatchCurriedFunctionResult<F, S>;
 
 /**
  * Translate a function that takes multiple arguments into a sequence of families of functions.
