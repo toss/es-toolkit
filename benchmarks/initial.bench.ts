@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
-import { initial as lodashInitial } from 'lodash';
-import { initial as esToolkitInitial } from 'es-toolkit'; // hypothetical library
+import { initial as initialLodash } from 'lodash';
+import { initial as initialToolkit } from 'es-toolkit';
 
 // Helper function to generate a large array
 function generateLargeArray(size) {
@@ -8,13 +8,13 @@ function generateLargeArray(size) {
 }
 
 describe('initial function performance', () => {
-  const largeArray = generateLargeArray(1000000); // 1 million elements
+  const largeArray = generateLargeArray(1000000);
 
   bench('es-toolkit/initial', () => {
-    esToolkitInitial(largeArray);
+    initialToolkit(largeArray);
   });
 
   bench('lodash/initial', () => {
-    lodashInitial(largeArray);
+    initialLodash(largeArray);
   });
 });
