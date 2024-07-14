@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { Last } from './last';
-import { OptionalToNullable } from './optional-to-nullable';
+import { Last } from './Last';
+import { OptionalToNullable } from './OptionalToNullable';
 
 export type LinearSubArray<A extends any[], Result extends any[] = []> =
   OptionalToNullable<A> extends [infer Head, ...infer Rest]

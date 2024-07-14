@@ -1,4 +1,4 @@
-import { RequiredArray } from './required-array';
+import { RequiredArray } from './RequiredArray';
 
 type OptionalToNullableTranslator<A extends any[], B extends any[], Result extends any[] = []> = B extends [
   infer Head,

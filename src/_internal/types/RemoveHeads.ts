@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { LiteralToPrimitive } from './literal-to-primitive';
-import { RemoveHead } from './remove-head';
-import { RequiredArray } from './required-array';
+import { LiteralToPrimitive } from './LiteralToPrimitive';
+import { RemoveHead } from './RemoveHead';
+import { RequiredArray } from './RequiredArray';
 
 export type RemoveHeads<T extends any[], H extends any[]> =
   RequiredArray<T> extends [infer Head extends LiteralToPrimitive<H[0]>, ...infer Rest extends any[]]
