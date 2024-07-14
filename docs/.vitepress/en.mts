@@ -96,6 +96,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'head', link: '/reference/array/head' },
             { text: 'tail', link: '/reference/array/tail' },
             { text: 'last', link: '/reference/array/last' },
+            { text: 'initial', link: '/reference/array/initial' },
           ],
         },
         {

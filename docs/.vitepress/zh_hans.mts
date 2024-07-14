@@ -2,8 +2,7 @@ import { defineConfig, type DefaultTheme } from 'vitepress';
 
 export const zh_hans = defineConfig({
   lang: 'zh_hans',
-  description:
-    '一款先进的高性能 JavaScript 实用库，具有小巧的包体积和强大的类型注解。',
+  description: '一款先进的高性能 JavaScript 实用库，具有小巧的包体积和强大的类型注解。',
 
   themeConfig: {
     nav: nav(),
@@ -95,6 +94,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'head', link: '/zh_hans/reference/array/head' },
             { text: 'tail', link: '/zh_hans/reference/array/tail' },
             { text: 'last', link: '/zh_hans/reference/array/last' },
+            { text: 'initial', link: '/zh_hans/reference/array/initial' },
           ],
         },
         {
