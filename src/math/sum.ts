@@ -1,3 +1,4 @@
+const defaultNumber = 0;
 /**
  * Calculates the sum of an array of numbers.
  *
@@ -12,11 +13,5 @@
  * // result will be 15
  */
 export function sum(nums: number[]): number {
-  let result = 0;
-
-  for (const num of nums) {
-    result += num;
-  }
-
-  return result;
+  return nums.reduce((prev, current) => prev + current, defaultNumber);
 }
