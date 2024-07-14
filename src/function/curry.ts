@@ -16,7 +16,7 @@ type CurriedFunctionResult<F extends (...args: any) => any> = RemoveRest<
  * Translate a function that takes multiple arguments into a sequence of families of functions, each taking a single argument.
  *
  * @param {F} func - The function to curry.
- * @returns {(...args: Parameters<F>[0]) => CurriedFunctionResult<F>} A curried function that could be called in sequence of families of functions.
+ * @returns {(arg: Parameters<F>[0]) => CurriedFunctionResult<F>} A curried function that could be called in sequence of families of functions.
  *
  * @example
  * const sum = function(a, b, c) {
@@ -25,13 +25,13 @@ type CurriedFunctionResult<F extends (...args: any) => any> = RemoveRest<
  *
  * const curriedSum = curry(sum);
  *
- * // The argument `a` should be given the value `10`.
+ * // The parameter `a` should be given the value `10`.
  * const sum10 = curriedSum(10);
  *
- * // The argument `b` should be given the value `15`.
+ * // The parameter `b` should be given the value `15`.
  * const sum25 = sum10(15);
  *
- * // The argument `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
+ * // The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
  * const result = sum25(5);
  */
 export function curry<F extends (...args: any) => any>(func: F) {
@@ -89,13 +89,13 @@ type FlexibleCurriedFunctionResult<
  *
  * const curriedSum = curry(sum);
  *
- * // The argument `a` should be given the value `10`.
+ * // The parameter `a` should be given the value `10`.
  * const sum10 = curriedSum(10);
  *
- * // The argument `b` should be given the value `15`, `c` the value `7`, and `d` the value `1`.
+ * // The parameter `b` should be given the value `15`, `c` the value `7`, and `d` the value `1`.
  * const sum33 = sum10(15, 7, 1);
  *
- * // The argument `e` should be given the value `2`, `f` the value `5`. The function 'sum' has received all its arguments and will now return a value.
+ * // The parameter `e` should be given the value `2`, `f` the value `5`. The function 'sum' has received all its arguments and will now return a value.
  * const result = sum32(2, 5);
  */
 function flexibleCurry<F extends (...args: any) => any>(func: F) {
