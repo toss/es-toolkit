@@ -7,8 +7,8 @@ This function takes an array and returns the first element of the array. If the 
 ## Signature
 
 ```typescript
-export function head<T>(arr: readonly [T, ...T[]]): T;
-export function head<T>(arr: readonly T[]): T | undefined;
+export function head<T>(arr: [T, ...T[]]): T;
+export function head<T>(arr: T[]): T | undefined;
 ```
 
 ### Parameters
