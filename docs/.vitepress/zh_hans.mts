@@ -144,6 +144,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: "range", link: "/zh_hans/reference/math/range" },
             { text: "round", link: "/zh_hans/reference/math/round" },
             { text: "sum", link: "/zh_hans/reference/math/sum" },
+            { text: "sumBy", link: "/zh_hans/reference/math/sumBy" },
           ],
         },
         {
