@@ -30,16 +30,36 @@ export function clone<T>(obj: T): T {
   if (isPrimitive(obj)) {
     return obj;
   }
+
   if (Array.isArray(obj)) {
     return obj.slice() as T;
   }
+
   if (obj instanceof Date) {
     return new Date(obj.getTime()) as T;
   }
+
   if (obj instanceof RegExp) {
     return new RegExp(obj.source, obj.flags) as T;
   }
-  if (typeof obj === 'object') {
+
+  if (obj instanceof Map) {
+    const result = new Map();
+    for (const [key, value] of obj) {
+      result.set(key, value);
+    }
+    return result as T;
+  }
+
+  if (obj instanceof Set) {
+    const result = new Set();
+    for (const value of obj) {
+      result.add(value);
+    }
+    return result as T;
+  }
+
+  if (typeof obj === "object") {
     return Object.assign({}, obj) as T;
   }
   return obj;
@@ -48,5 +68,6 @@ export function clone<T>(obj: T): T {
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
 
 function isPrimitive(value: unknown): value is Primitive {
-  return value == null || (typeof value !== 'object' && typeof value !== 'function');
+  return value == null ||
+    (typeof value !== "object" && typeof value !== "function");
 }
