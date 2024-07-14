@@ -1,16 +1,22 @@
 import type { LinearSubArray, RemoveHead, RemoveHeads, RemoveRest, OptionalToNullable } from '../_internal/types';
 
+type NextCurriedFunction<F extends (...args: any) => any> = CurriedFunction<
+  (...args: RemoveHead<Parameters<F>>) => ReturnType<F>
+> & {
+  run: () => undefined extends Parameters<F>[1]
+    ? ReturnType<F>
+    : 'Cannot call `run` method now because current argument to be received is not optional';
+};
+
 type CurriedFunction<F extends (...args: any) => any> = (
   arg: Parameters<F>[0]
-) => RemoveRest<OptionalToNullable<Parameters<F>>>['length'] extends 1
-  ? ReturnType<F>
-  : CurriedFunction<(...args: RemoveHead<Parameters<F>>) => ReturnType<F>> & { run: () => ReturnType<F> };
+) => RemoveRest<OptionalToNullable<Parameters<F>>>['length'] extends 1 ? ReturnType<F> : NextCurriedFunction<F>;
 
 type CurriedFunctionResult<F extends (...args: any) => any> = RemoveRest<
   OptionalToNullable<Parameters<F>>
 >['length'] extends 1
   ? ReturnType<F>
-  : CurriedFunction<(...args: RemoveHead<Parameters<F>>) => ReturnType<F>> & { run: () => ReturnType<F> };
+  : NextCurriedFunction<F>;
 
 /**
  * Translate a function that takes multiple arguments into a sequence of families of functions, each taking a single argument.

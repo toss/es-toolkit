@@ -72,6 +72,15 @@ describe('curry', () => {
   });
 });
 
+it('should correctly infer the errored type when the run method is called while the argument to be received is not optional', () => {
+  const fn = (a: number, b: number, c?: number) => [a, b, c];
+  const curried = curry(fn);
+
+  expectTypeOf(
+    curried(1).run()
+  ).toEqualTypeOf<'Cannot call `run` method now because current argument to be received is not optional'>();
+});
+
 describe('curry.flexible', () => {
   it('should throw an error when a function that has no parameters is received', () => {
     const fn = () => 'test';
