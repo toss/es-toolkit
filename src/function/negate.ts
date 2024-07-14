@@ -1,4 +1,4 @@
 
-export function negate<Parameters extends unknown[]>(func: (...args: Parameters) => unknown) {
-    return (...args: Parameters) => !func(...args)
+export function negate<F extends (...args: unknown[]) => boolean>(func: F): F {
+    return ((...args: any[]) => !func(...args)) as F;
 }
