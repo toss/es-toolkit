@@ -14,8 +14,17 @@ import { CASE_SPLIT_PATTERN } from '../constants';
  * const convertedStr3 = lowerCase('hyphen-text') // returns 'hyphen text'
  * const convertedStr4 = lowerCase('HTTPRequest') // returns 'http request'
  */
-
 export const lowerCase = (str: string): string => {
   const splitWords = str.match(CASE_SPLIT_PATTERN) || [];
-  return splitWords.map(word => word.toLowerCase()).join(' ');
+
+  if (splitWords.length === 0) {
+    return '';
+  }
+
+  let result = splitWords[0]!.toLowerCase();
+  for (let i = 1; i < splitWords.length; i++) {
+    result += ' ' + splitWords[i]!.toLowerCase();
+  }
+
+  return result;
 };
