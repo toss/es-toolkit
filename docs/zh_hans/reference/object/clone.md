@@ -1,22 +1,22 @@
 # clone
 
-Creates a shallow clone of the given objects.
+创建给定对象的浅拷贝。
 
-## Signature
+## 签名
 
 ```typescript
 function clone<T>(value: T): T;
 ```
 
-### Parameters
+### 参数
 
-- `obj` (`T`): The object to clone.
+- `obj` (`T`): 要克隆的对象。
 
-### Returns
+### 返回
 
-(`T`): A shallow clone of the given object
+(`T`): 给定对象的浅拷贝
 
-## Examples
+## 示例
 
 ```typescript
 const num = 29;

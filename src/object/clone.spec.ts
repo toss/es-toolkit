@@ -22,7 +22,7 @@ describe("clone", () => {
   });
 
   it("should clone objects", () => {
-    const obj = { a: 1, b: "es-toolkit" };
+    const obj = { a: 1, b: "es-toolkit", c: [1, 2, 3] };
     const clonedObj = clone(obj);
 
     expect(clonedObj).toEqual(obj);
