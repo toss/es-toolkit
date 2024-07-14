@@ -131,6 +131,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: "Object Utilities",
           items: [
             { text: "clone", link: "/reference/object/clone" },
+            { text: "cloneDeep", link: "/reference/object/cloneDeep" },
             { text: "omit", link: "/reference/object/omit" },
             { text: "omitBy", link: "/reference/object/omitBy" },
             { text: "pick", link: "/reference/object/pick" },
