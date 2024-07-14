@@ -1,5 +1,13 @@
 # Compatibility with Lodash
 
+```tsx
+// es-toolkit/compat aims to provide 100% feature parity with lodash
+import { chunk } from 'es-toolkit/compat';
+
+chunk([1, 2, 3, 4], 0);
+// Returns [], which is identical to lodash
+```
+
 ::: warning
 The `es-toolkit/compat` project is currently in beta and under active development, with design principles subject to change.
 :::

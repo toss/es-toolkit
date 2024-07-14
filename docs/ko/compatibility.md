@@ -1,5 +1,14 @@
 # Lodash와의 호환성
 
+```tsx
+// es-toolkit/compat은 lodash와 100% 동일한 동작을 제공하도록 목표하고 있어요
+import { chunk } from 'es-toolkit/compat';
+
+// es-toolkit은 원래 chunk의 size로 0을 지원하지 않았어요
+chunk([1, 2, 3, 4], 0);
+// es-toolkit/compat은 lodash와 같은 []을 반환해요
+```
+
 ::: warning
 `es-toolkit/compat` 프로젝트는 현재 베타 단계에 있으며, 현재 개발 중이에요. 방향성이 변경될 수 있어요.
 :::

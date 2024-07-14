@@ -1,6 +1,14 @@
 /**
  * es-toolkit compatibility layer with lodash (WIP)
  * ====================================
+ * ```tsx
+ * // es-toolkit/compat aims to provide 100% feature parity with lodash
+ * import { chunk } from 'es-toolkit/compat';
+ *
+ * chunk([1, 2, 3, 4], 0);
+ * // Returns [], which is identical to lodash
+ * ```
+ *
  * `es-toolkit/compat` will offer complete compatibility with lodash, ensuring a seamless transition.
  *
  * To guarantee identical behavior, `es-toolkit/compat` will be thoroughly tested using actual lodash test cases.
@@ -14,6 +22,6 @@
  *
  * @module
  */
-export * from "../index.ts";
+export * from '../index.ts';
 
-export { chunk } from "./array/chunk.ts";
+export { chunk } from './array/chunk.ts';
