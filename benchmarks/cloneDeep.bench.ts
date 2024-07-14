@@ -13,8 +13,8 @@ const obj = {
   nested: { a: [1, 2, 3], b: { c: 'es-toolkit' }, d: new Date() },
 };
 
-describe('clone', () => {
-  bench('es-toolkit/clone', () => {
+describe('cloneDeep', () => {
+  bench('es-toolkit/cloneDeep', () => {
     cloneDeep(obj);
   });
   bench('lodash/cloneDeep', () => {
