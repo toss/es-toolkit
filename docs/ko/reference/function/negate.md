@@ -5,18 +5,16 @@
 ## 인터페이스
 
 ```typescript
-function negate<Parameters extends unknown[]>(
-    func: (...args: Parameters): unknown
-): (...args: Parameters): boolean;
+function negate<F extends (...args: unknown[]) => boolean>(func: F): F;
 ```
 
 ### 파라미터
 
-- `func` (`(args: ...Parameters) => unknown`): 변환 할 함수예요.
+- `func` (`F extends (args: ...Parameters) => unknown`): 반환 값을 반대로 바꿀 함수.
 
 ### 반환 값
 
-- (`(args: ...Parameters) => boolean`): 참/거짓 으로 변환하여 반환될 함수.
+- (`F`): 반환 값이 반대로 바뀐 함수.
 
 ## 예시
 
