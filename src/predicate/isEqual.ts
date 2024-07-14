@@ -1,4 +1,4 @@
-import { union } from "../array";
+import { union } from "../array.ts";
 
 /**
  * Checks if two values are equal, including support for `Date`, `RegExp`, and deep object comparison.
@@ -15,7 +15,9 @@ import { union } from "../array";
  * isEqual([1, 2, 3], [1, 2, 3]); // true
  */
 export function isEqual(a: unknown, b: unknown): boolean {
-  if (Object.is(a, b)) return true;
+  if (Object.is(a, b)) {
+    return true;
+  }
 
   if (a instanceof Date && b instanceof Date) {
     return a.getTime() === b.getTime();
@@ -32,16 +34,23 @@ export function isEqual(a: unknown, b: unknown): boolean {
   const aKeys = Object.keys(a as object);
   const bKeys = Object.keys(b as object);
 
-  if (aKeys.length !== bKeys.length) return false;
+  if (aKeys.length !== bKeys.length) {
+    return false;
+  }
 
   // check if all keys in both arrays match
-  if (union(aKeys, bKeys).length !== aKeys.length) return false;
+  if (union(aKeys, bKeys).length !== aKeys.length) {
+    return false;
+  }
 
   for (let i = 0; i < aKeys.length; i++) {
     const propKey = aKeys[i];
     const aProp = (a as any)[propKey];
     const bProp = (b as any)[propKey];
-    if (!isEqual(aProp, bProp)) return false;
+    
+    if (!isEqual(aProp, bProp)) {
+      return false;
+    }
   }
 
   return true;
