@@ -77,7 +77,7 @@ export function cloneDeep<T>(obj: T): T {
   }
 
   if (typeof obj === 'object') {
-    const result = obj ? new (obj.constructor as any)() : {};
+    const result = obj ? new (obj.constructor as unknown as new () => Record<string, unknown>)() : {};
     for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
       result[key] = cloneDeep(value);
     }
