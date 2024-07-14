@@ -1,4 +1,4 @@
-import { union } from "../array.ts";
+import { union } from "../array/union.ts";
 
 /**
  * Checks if two values are equal, including support for `Date`, `RegExp`, and deep object comparison.
