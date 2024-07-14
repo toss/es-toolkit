@@ -25,7 +25,7 @@ type CurriedFunctionResult<F extends (...args: any) => any> = RemoveRest<
  * @returns {(arg: Parameters<F>[0]) => CurriedFunctionResult<F>} A curried function that could be called in sequence of families of functions.
  *
  * @example
- * const sum = function(a, b, c) {
+ * function sum(a: number, b: number, c: number) {
  *   return a + b + c;
  * }
  *
@@ -95,20 +95,18 @@ type FlexibleCurriedFunctionResult<
  * @returns {<S extends LinearSubArray<Parameters<F>>>(...args: S) => FlexibleCurriedFunctionResult<F, S>} A curried function that could be called in sequence of families of functions.
  *
  * @example
- * const sum = function(a, b, c, d, e, f) {
- *   return a + b + c + d + e + f;
+ * function sum(a: number, b: number, c: number) {
+ *   return a + b + c;
  * }
  *
- * const curriedSum = curry(sum);
+ * // Flexible curry allows multiple arguments to be received at once
+ * const curriedSum = curry.flexible(sum);
  *
- * // The parameter `a` should be given the value `10`.
- * const sum10 = curriedSum(10);
+ * // The parameter `a` should be given the value `10`, `b` the value `15`
+ * const sum20 = curriedSum(10, 15);
  *
- * // The parameter `b` should be given the value `15`, `c` the value `7`, and `d` the value `1`.
- * const sum33 = sum10(15, 7, 1);
- *
- * // The parameter `e` should be given the value `2`, `f` the value `5`. The function 'sum' has received all its arguments and will now return a value.
- * const result = sum32(2, 5);
+ * // The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value
+ * const result = sum20(5);
  */
 function flexibleCurry<F extends (...args: any) => any>(func: F) {
   if (func.length === 0) {

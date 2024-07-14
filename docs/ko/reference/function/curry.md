@@ -1,62 +1,70 @@
 # curry
 
 제공된 함수의 인자를 여러번에 걸쳐 입력받을 수 있도록 함수를 커링 함수로 변환해요.
-커링 함수는 원본 함수의 인자를 모두 입력받을 때까지 다음 인자들을 입력받을 수 있는 함수를 반환하고, 인자를 모두 전달 받으면 .
-debounce된 함수는 또한 대기 중인 실행을 취소하는 `cancel` 메서드를 가지고 있어요.
+커링 함수는 원본 함수의 인자를 모두 입력받을 때까지 다음 인자들을 한번에 하나씩 입력받는 형태의 함수에요.
+커링 함수를 사용하면 함수를 지연 실행 시키거나, 함수의 재사용성을 높일 수 있어요.
 
 ## 인터페이스
 
 ```typescript
-function debounce<F extends (...args: any[]) => void>(
-  func: F,
-  debounceMs: number,
-  options?: DebounceOptions
-): F & { cancel: () => void };
+function curry<F extends (...args: any) => any>(func: F): (arg: Parameters<F>[0]) => CurriedFunctionResult<F>;
 ```
 
-### 파라미터
+## 파라미터
 
-- `func` (`F`): debounce된 함수를 만들 함수.
-- `debounceMs`(`number`): debounce로 지연시킬 밀리초.
-- `options` (`DebounceOptions`, optional): 옵션 객체.
-  - `signal` (`AbortSignal`, optional): debounce된 함수를 취소하기 위한 선택적 `AbortSignal`.
+- `func` (`F`): 커링 함수를 만들 함수.
 
-### 결괏값
+## 결괏값
 
-(`F & { cancel: () => void }`): `cancel` 메서드를 가지고 있는 debounce된 함수.
+(`(arg: Parameters<F>[0]) => CurriedFunctionResult<F>`): 원본 함수의 인자를 하나씩 입력 받아, 모든 인자가 입력되었을 때 함수를 호출시키는 함수
 
 ## 예시
 
 ### 기본 사용법
 
 ```typescript
-const debouncedFunction = debounce(() => {
-  console.log('실행됨');
-}, 1000);
+const sum = (a: number, b: number, c: number) => a + b + c;
 
-// 1초 안에 다시 호출되지 않으면, '실행됨'을 로깅해요
-debouncedFunction();
+const curriedSum = curry(sum);
 
-// 이전 호출이 취소되었으므로, 아무것도 로깅하지 않아요
-debouncedFunction.cancel();
+// `a` 매개변수에 값 `10`을 입력해요
+const sum10 = curriedSum(10);
+
+// `b` 매개변수에 값 `15`를 입력해요
+const sum25 = sum10(15);
+
+// `c` 매개변수에 값 `5`를 입력해요. 원본 함수(`sum`)에 모든 인자가 입력되었으므로, 결과값을 반환해요
+const result = sum25(5);
 ```
 
-### AbortSignal 사용법
+### 모든 인자를 입력받지 않고 즉시 실행 (ex. optional parameter가 존재하는 경우)
 
 ```typescript
-const controller = new AbortController();
-const signal = controller.signal;
-const debouncedWithSignalFunction = debounce(
-  () => {
-    console.log('Function executed');
-  },
-  1000,
-  { signal }
-);
+const sum = (a: number, b: number, c = 5) => a + b + c;
 
-// 1초 안에 다시 호출되지 않으면, '실행됨'을 로깅해요
-debouncedWithSignalFunction();
+const curriedSum = curry(sum);
 
-// debounce 함수 호출을 취소해요
-controller.abort();
+// `a` 매개변수에 값 `10`을 입력해요
+const sum10 = curriedSum(10);
+
+// `b` 매개변수에 값 `15`를 입력해요
+const sum25 = sum10(15);
+
+// `a`와 `b` 매개변수를 입력받은 상태에서, `sum` 함수를 즉시 실행해요
+const result = sum25.run();
+```
+
+### 유연한 방식의 커링 사용법
+
+```typescript
+const sum = (a: number, b: number, c = 5) => a + b + c;
+
+// 유연한 방식의 커링은 한 번에 여러개의 인자값을 입력받을 수 있어요
+const curriedSum = curry.flexible(sum);
+
+// `a` 매개변수에 값 `10`을, `b`에 `15`를 입력해요
+const sum20 = curriedSum(10, 15);
+
+// `c` 매개변수에 값 `5`를 입력해요. 원본 함수(`sum`)에 모든 인자가 입력되었으므로, 결과값을 반환해요
+const result = sum25(5);
 ```

@@ -88,6 +88,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'throttle', link: '/reference/function/throttle' },
             { text: 'once', link: '/reference/function/once' },
             { text: 'noop', link: '/reference/function/noop' },
+            { text: 'curry', link: '/reference/function/curry' },
           ],
         },
         {
