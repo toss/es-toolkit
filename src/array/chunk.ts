@@ -1,4 +1,34 @@
 /**
+ * Type that returns true if it is a tuple type with a fixed length.
+ */
+type IsTuple<T extends any[] | { length: number }> = [T] extends [never]
+  ? false
+  : T extends any[]
+    ? number extends T['length']
+      ? false
+      : true
+    : false;
+
+/**
+ * Type to infer the element type of an array or tuple
+ */
+type ElementOf<T extends readonly any[] | any[]> = T extends Array<infer E> ? E : never;
+
+/**
+ * {@link chunk}'s Return Type.
+ */
+type Chunk<T extends readonly any[] | any[], N extends number, R extends any[] = []> =
+  IsTuple<T> extends true
+    ? R['length'] extends N
+      ? [R, ...Chunk<T, N>]
+      : T extends [infer First, ...infer Rest]
+        ? Chunk<Rest, N, [...R, First]>
+        : R extends []
+          ? []
+          : [R]
+    : Array<Array<ElementOf<T>>>;
+
+/**
  * Splits an array into smaller arrays of a specified length.
  *
  * This function takes an input array and divides it into multiple smaller arrays,
@@ -21,7 +51,7 @@
  * chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
  * // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
  */
-export function chunk<T>(arr: readonly T[], size: number): T[][] {
+export function chunk<T extends readonly any[], Size extends number>(arr: T, size: Size): Chunk<T, Size> {
   if (!Number.isInteger(size) || size <= 0) {
     throw new Error('Size must be an integer greater than zero.');
   }
@@ -36,5 +66,5 @@ export function chunk<T>(arr: readonly T[], size: number): T[][] {
     result[index] = arr.slice(start, end);
   }
 
-  return result;
+  return result as Chunk<T, Size>;
 }

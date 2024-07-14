@@ -2,6 +2,65 @@ import { describe, expect, it } from 'vitest';
 import { chunk } from './chunk';
 
 describe('chunk', () => {
+  it('if tuple with size 1, it should be divided according to the size.', () => {
+    type Response = ReturnType<typeof chunk<[1, 2, 3, 4, 5, 6], 1>>;
+    const response: Response = [[1], [2], [3], [4], [5], [6]];
+
+    expect(response).toBeDefined();
+  });
+
+  it('if tuple with size 2, it should be divided according to the size.', () => {
+    type Response = ReturnType<typeof chunk<[1, 2, 3, 4, 5, 6], 2>>;
+    const response: Response = [
+      [1, 2],
+      [3, 4],
+      [5, 6],
+    ];
+
+    expect(response).toBeDefined();
+  });
+
+  it('if tuple with size 3, it should be divided according to the size.', () => {
+    type Response = ReturnType<typeof chunk<[1, 2, 3, 4, 5, 6], 3>>;
+    const response: Response = [
+      [1, 2, 3],
+      [4, 5, 6],
+    ];
+
+    expect(response).toBeDefined();
+  });
+
+  it('if tuple with size 4, it should be divided according to the size.', () => {
+    type Response = ReturnType<typeof chunk<[1, 2, 3, 4, 5, 6], 4>>;
+    const response: Response = [
+      [1, 2, 3, 4],
+      [5, 6],
+    ];
+
+    expect(response).toBeDefined();
+  });
+
+  it('if tuple with size 5, it should be divided according to the size.', () => {
+    type Response = ReturnType<typeof chunk<[1, 2, 3, 4, 5, 6], 5>>;
+    const response: Response = [[1, 2, 3, 4, 5], [6]];
+
+    expect(response).toBeDefined();
+  });
+
+  it('if tuple with size 6, it should be divided according to the size.', () => {
+    type Response = ReturnType<typeof chunk<[1, 2, 3, 4, 5, 6], 6>>;
+    const response: Response = [[1, 2, 3, 4, 5, 6]];
+
+    expect(response).toBeDefined();
+  });
+
+  it("if tuple with size more than tuple' length, it will be same as devided according to the tuple's length", () => {
+    type Response = ReturnType<typeof chunk<[1, 2, 3, 4, 5, 6], 7>>;
+    const response: Response = [[1, 2, 3, 4, 5, 6]];
+
+    expect(response).toBeDefined();
+  });
+
   it('should return an empty array when the input array is empty', () => {
     expect(chunk([], 3)).toEqual([]);
   });
