@@ -1,24 +1,22 @@
 # negate
 
-Creates a function that negates the result of the predicate func.
+Creates a function that negates the result of the predicate function.
 
-## 인터페이스
+## Signature
 
 ```typescript
-function negate<Parameters extends unknown[]>(
-    func: (...args: Parameters): unknown
-): (...args: Parameters): boolean;
+function negate<F extends (...args: unknown[]) => boolean>(func: F): F;
 ```
 
-### 파라미터
+### Parameters
 
-- `func` (`(args: ...Parameters) => unknown`): The function to negate.
+- `func` (`F extends (args: ...Parameters) => unknown`): The function to negate.
 
-### 반환 값
+### Returns
 
-- (`(args: ...Parameters) => boolean`): Returns the new negated function.
+- (`F`): Returns the new negated function.
 
-## 예시
+## Examples
 
 ```typescript
 import { negate } from 'es-toolkit/function';
