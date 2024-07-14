@@ -137,6 +137,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: "round", link: "/ko/reference/math/round" },
             { text: "range", link: "/ko/reference/math/range" },
             { text: "sum", link: "/ko/reference/math/sum" },
+            { text: "sumBy", link: "/ko/reference/math/sumBy" },
           ],
         },
         {
