@@ -39,7 +39,9 @@ export function curry<F extends (...args: any) => any>(func: F) {
     throw new Error('`func` must have at least one argument that is not a rest parameter.');
   }
 
-  return (arg: Parameters<F>[0]) => makeCurry(func, func.length, [arg]);
+  return function (arg: Parameters<F>[0]) {
+    return makeCurry(func, func.length, [arg]);
+  };
 }
 
 function makeCurry<F extends (...args: any) => any>(
