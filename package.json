@@ -16,6 +16,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
+    "./compat": "./src/compat/index.ts",
     "./function": "./src/function/index.ts",
     "./math": "./src/math/index.ts",
     "./object": "./src/object/index.ts",
