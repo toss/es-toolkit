@@ -111,6 +111,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: "negate", link: "/reference/function/negate" },
             { text: "once", link: "/reference/function/once" },
             { text: "noop", link: "/reference/function/noop" },
+            { text: "memoize", link: "/reference/function/memoize" },
           ],
         },
         {
