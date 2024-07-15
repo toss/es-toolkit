@@ -2,7 +2,7 @@
 
 중첩된 배열의 각 요소를 주어진 iteratee 함수로 매핑 후, 원하는 깊이까지 풀어서 평탄화해요.
 
-JavaScript 언어에 포함된 [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)을 [Array#map](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map)과 함께 `map().flat(depth)`로 호출했을 때와 동일하게 동작하지만, 더 빨라요.
+JavaScript 언어에 포함된 [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)을 [Array#map](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map)과 함께 `map(iteratee).flat(depth)`으로 호출했을 때와 동일하게 동작하지만, 더 빨라요.
 
 ## 인터페이스
 

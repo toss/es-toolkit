@@ -2,7 +2,7 @@
 
 Map each element of a nested array to a given iteratee function, then flatten it to the desired depth.
 
-It works the same as if you called [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) with [Array#map](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map) as `map().flat(depth)'` in the JavaScript language, but it's faster.
+It works the same as if you called [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) with [Array#map](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map) as `map(iteratee).flat(depth)` in the JavaScript language, but it's faster.
 
 ## Signature
 
