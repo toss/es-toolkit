@@ -37,4 +37,4 @@ export * from './math/index.ts';
 export * from './object/index.ts';
 export * from './predicate/index.ts';
 export * from './promise/index.ts';
-export * from './string/index.ts'
+export * from './string/index.ts';
