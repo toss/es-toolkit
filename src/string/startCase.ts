@@ -17,8 +17,9 @@ export function startCase(str: string): string {
   const words = getWords(str.trim());
   let result = '';
   for (const word of words) {
-    if (result) result += ' ';
-
+    if (result) {
+      result += ' ';
+    }
     if (word === word.toUpperCase()) {
       result += word;
     } else {
