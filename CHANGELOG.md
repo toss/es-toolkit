@@ -1,5 +1,32 @@
 # es-toolkit Changelog
 
+## Version v1.10.1
+
+Released on July 15th, 2024.
+
+- Fixed [camelCase](https://es-toolkit.slash.page/reference/string/camelCase.html) using `capitalize` from incorrect import. ([8dda135](https://github.com/toss/es-toolkit/commit/8dda135fa339ae4953908a74b2e6eeca9f163a20))
+
+## Version v1.10.0
+
+Released on July 14th, 2024.
+
+### Features
+
+- Add support for [capitalize](https://es-toolkit.slash.page/reference/string/capitalize.html), [snakeCase](https://es-toolkit.slash.page/reference/string/snakeCase.html), [kebabCase](https://es-toolkit.slash.page/reference/string/kebabCase.html), [camelCase](https://es-toolkit.slash.page/reference/string/camelCase.html) and [lowerCase](https://es-toolkit.slash.page/reference/string/lowerCase.html). (https://github.com/toss/es-toolkit/pull/152, https://github.com/toss/es-toolkit/pull/161, https://github.com/toss/es-toolkit/pull/162, https://github.com/toss/es-toolkit/pull/166, [21d6530](https://github.com/toss/es-toolkit/commit/21d6530e16471d596410d57d59fd3ced8fc5569f)).
+- Add support for [negate](https://es-toolkit.slash.page/reference/function/negate.html). (https://github.com/toss/es-toolkit/pull/177)
+- Add support for [isEqual](https://es-toolkit.slash.page/reference/predicate/isEqual.html). (https://github.com/toss/es-toolkit/pull/174)
+- Add support for [clone](https://es-toolkit.slash.page/reference/object/clone.html). (https://github.com/toss/es-toolkit/pull/155)
+- Add support for [toFilled](https://es-toolkit.slash.page/reference/array/toFilled.html). (https://github.com/toss/es-toolkit/pull/154)
+- Add support for [initial](https://es-toolkit.slash.page/reference/array/initial.html) and [last](https://es-toolkit.slash.page/reference/array/last.html). (https://github.com/toss/es-toolkit/pull/188, https://github.com/toss/es-toolkit/pull/149)
+- Add support for [flattenDeep](https://es-toolkit.slash.page/reference/array/flattenDeep.html). (https://github.com/toss/es-toolkit/pull/160)
+
+### Performance Improvements
+
+- Optimize the performance of [isNil](https://es-toolkit.slash.page/reference/predicate/isNil.html) by simplifying its check. ([489ac76](https://github.com/toss/es-toolkit/commit/489ac76fc62f97cbfa3ca9eec2e0a4c03c4f5b1c))
+- Optimize the performance of [sum](https://es-toolkit.slash.page/reference/array/sum.html). (https://github.com/toss/es-toolkit/pull/155)
+
+
+
 ## Version v1.9.0
 
 Released on July 10th, 2024.
@@ -7,7 +34,6 @@ Released on July 10th, 2024.
 - Add support for [head](https://es-toolkit.slash.page/reference/array/head.html) and [tail](https://es-toolkit.slash.page/reference/array/tail.html). (https://github.com/toss/es-toolkit/pull/131, https://github.com/toss/es-toolkit/pull/143).
 - Add support for [unzip](https://es-toolkit.slash.page/reference/array/unzip.html). (https://github.com/toss/es-toolkit/pull/130)
 - Add support for [flatten](https://es-toolkit.slash.page/reference/array/flatten.html), which is six times faster than `Array#flat`. (https://github.com/toss/es-toolkit/pull/147)
-
 
 ## Version v1.8.0
 

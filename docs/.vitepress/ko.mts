@@ -1,4 +1,4 @@
-import { defineConfig, type DefaultTheme } from 'vitepress';
+import { type DefaultTheme, defineConfig } from 'vitepress';
 
 export const ko = defineConfig({
   lang: 'ko',
@@ -38,6 +38,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: '설치', link: '/ko/installation' },
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
+        { text: 'Lodash와 호환성', link: '/ko/compatibility' },
       ],
     },
     {
@@ -51,11 +52,17 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'compact', link: '/ko/reference/array/compact' },
             { text: 'difference', link: '/ko/reference/array/difference' },
             { text: 'differenceBy', link: '/ko/reference/array/differenceBy' },
-            { text: 'differenceWith', link: '/ko/reference/array/differenceWith' },
+            {
+              text: 'differenceWith',
+              link: '/ko/reference/array/differenceWith',
+            },
             { text: 'drop', link: '/ko/reference/array/drop' },
             { text: 'dropWhile', link: '/ko/reference/array/dropWhile' },
             { text: 'dropRight', link: '/ko/reference/array/dropRight' },
-            { text: 'dropRightWhile', link: '/ko/reference/array/dropRightWhile' },
+            {
+              text: 'dropRightWhile',
+              link: '/ko/reference/array/dropRightWhile',
+            },
             { text: 'fill', link: '/ko/reference/array/fill' },
             { text: 'toFilled', link: '/ko/reference/array/toFilled' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
@@ -63,8 +70,14 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
             { text: 'groupBy', link: '/ko/reference/array/groupBy' },
             { text: 'intersection', link: '/ko/reference/array/intersection' },
-            { text: 'intersectionBy', link: '/ko/reference/array/intersectionBy' },
-            { text: 'intersectionWith', link: '/ko/reference/array/intersectionWith' },
+            {
+              text: 'intersectionBy',
+              link: '/ko/reference/array/intersectionBy',
+            },
+            {
+              text: 'intersectionWith',
+              link: '/ko/reference/array/intersectionWith',
+            },
             { text: 'keyBy', link: '/ko/reference/array/keyBy' },
             { text: 'minBy', link: '/ko/reference/array/minBy' },
             { text: 'maxBy', link: '/ko/reference/array/maxBy' },
@@ -76,7 +89,10 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'take', link: '/ko/reference/array/take' },
             { text: 'takeWhile', link: '/ko/reference/array/takeWhile' },
             { text: 'takeRight', link: '/ko/reference/array/takeRight' },
-            { text: 'takeRightWhile', link: '/ko/reference/array/takeRightWhile' },
+            {
+              text: 'takeRightWhile',
+              link: '/ko/reference/array/takeRightWhile',
+            },
             { text: 'union', link: '/ko/reference/array/union' },
             { text: 'unionBy', link: '/ko/reference/array/unionBy' },
             { text: 'unionWith', link: '/ko/reference/array/unionWith' },
@@ -95,6 +111,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'head', link: '/ko/reference/array/head' },
             { text: 'tail', link: '/ko/reference/array/tail' },
             { text: 'last', link: '/ko/reference/array/last' },
+            { text: 'initial', link: '/ko/reference/array/initial' },
           ],
         },
         {
@@ -102,6 +119,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'debounce', link: '/ko/reference/function/debounce' },
             { text: 'throttle', link: '/ko/reference/function/throttle' },
+            { text: 'negate', link: '/reference/function/negate' },
             { text: 'once', link: '/ko/reference/function/once' },
             { text: 'noop', link: '/ko/reference/function/noop' },
           ],
@@ -118,11 +136,13 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'round', link: '/ko/reference/math/round' },
             { text: 'range', link: '/ko/reference/math/range' },
             { text: 'sum', link: '/ko/reference/math/sum' },
+            { text: 'sumBy', link: '/ko/reference/math/sumBy' },
           ],
         },
         {
           text: '객체',
           items: [
+            { text: 'clone', link: '/ko/reference/object/clone' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
@@ -133,10 +153,14 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '타입 가드',
           items: [
+            { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
-            { text: 'isUndefined', link: '/ko/reference/predicate/isUndefined' },
+            {
+              text: 'isUndefined',
+              link: '/ko/reference/predicate/isUndefined',
+            },
           ],
         },
         {

@@ -37,3 +37,17 @@ chunk([1, 2, 3, 4, 5], 2);
 // 将一组字符串分割成长度为3的子数组
 chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
 // 返回: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
+```
+
+## Lodash兼容性
+
+从`es-toolkit/compat`中导入`chunk`以实现与lodash的完全兼容。
+
+- chunk 不抛出异常，当给定的`size`小于1时。
+- chunk 接受分数值，这些值将被向下舍入到最近的整数。
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+chunk([1, 2, 3], 0); // Returns []
+```

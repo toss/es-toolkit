@@ -9,7 +9,7 @@
 ## 签名
 
 ```typescript
-function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T>;
+function keyBy<T, K extends PropertyKey>(arr: T[], getKeyFromItem: (item: T) => K): Record<K, T>;
 ```
 
 ### 参数

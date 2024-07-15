@@ -4,3 +4,4 @@ export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
 export { invert } from './invert.ts';
 export { flattenObject } from './flattenObject.ts';
+export { clone } from './clone.ts';

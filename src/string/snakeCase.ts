@@ -1,4 +1,4 @@
-import { CASE_SPLIT_PATTERN } from '../constants';
+import { getWords } from './_internal/getWords.ts';
 
 /**
  * Converts a string to snake case.
@@ -16,6 +16,6 @@ import { CASE_SPLIT_PATTERN } from '../constants';
  */
 
 export const snakeCase = (str: string): string => {
-  const splitWords = str.match(CASE_SPLIT_PATTERN) || [];
-  return splitWords.map(word => word.toLowerCase()).join('_');
+  const words = getWords(str);
+  return words.map(word => word.toLowerCase()).join('_');
 };

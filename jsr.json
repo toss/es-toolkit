@@ -1,8 +1,9 @@
 {
   "name": "@es-toolkit/es-toolkit",
-  "version": "1.9.0",
+  "version": "1.10.1",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./compat": "./src/compat/index.ts"
   },
   "publish": {
     "include": [

@@ -37,3 +37,16 @@ chunk([1, 2, 3, 4, 5], 2);
 chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
 // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
 ```
+
+## Lodash 호환성
+
+`es-toolkit/compat`에서 `chunk`를 가져오면 lodash와 호환돼요.
+
+- `size`가 1보다 작으면 빈 배열을 반환해요.
+- `size`에 소수점이 있는 숫자를 제공하더라도, 정수로 내림해요.
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+chunk([1, 2, 3], 0); // Returns []
+```

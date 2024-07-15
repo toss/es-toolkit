@@ -1,4 +1,4 @@
-import { CASE_SPLIT_PATTERN } from '../constants';
+import { getWords } from './_internal/getWords.ts';
 
 /**
  * Converts a string to lower case.
@@ -14,8 +14,7 @@ import { CASE_SPLIT_PATTERN } from '../constants';
  * const convertedStr3 = lowerCase('hyphen-text') // returns 'hyphen text'
  * const convertedStr4 = lowerCase('HTTPRequest') // returns 'http request'
  */
-
 export const lowerCase = (str: string): string => {
-  const splitWords = str.match(CASE_SPLIT_PATTERN) || [];
-  return splitWords.map(word => word.toLowerCase()).join(' ');
+  const words = getWords(str);
+  return words.map(word => word.toLowerCase()).join(' ');
 };

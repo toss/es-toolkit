@@ -1,4 +1,4 @@
-import { defineConfig, type DefaultTheme } from 'vitepress';
+import { type DefaultTheme, defineConfig } from 'vitepress';
 
 export const en = defineConfig({
   lang: 'en',
@@ -39,6 +39,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'Installation', link: '/installation' },
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
+        { text: 'Compatibility with Lodash', link: '/compatibility' },
       ],
     },
     {
@@ -65,7 +66,10 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'groupBy', link: '/reference/array/groupBy' },
             { text: 'intersection', link: '/reference/array/intersection' },
             { text: 'intersectionBy', link: '/reference/array/intersectionBy' },
-            { text: 'intersectionWith', link: '/reference/array/intersectionWith' },
+            {
+              text: 'intersectionWith',
+              link: '/reference/array/intersectionWith',
+            },
             { text: 'keyBy', link: '/reference/array/keyBy' },
             { text: 'minBy', link: '/reference/array/minBy' },
             { text: 'maxBy', link: '/reference/array/maxBy' },
@@ -96,6 +100,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'head', link: '/reference/array/head' },
             { text: 'tail', link: '/reference/array/tail' },
             { text: 'last', link: '/reference/array/last' },
+            { text: 'initial', link: '/reference/array/initial' },
           ],
         },
         {
@@ -103,6 +108,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'debounce', link: '/reference/function/debounce' },
             { text: 'throttle', link: '/reference/function/throttle' },
+            { text: 'negate', link: '/reference/function/negate' },
             { text: 'once', link: '/reference/function/once' },
             { text: 'noop', link: '/reference/function/noop' },
           ],
@@ -119,11 +125,13 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'range', link: '/reference/math/range' },
             { text: 'round', link: '/reference/math/round' },
             { text: 'sum', link: '/reference/math/sum' },
+            { text: 'sumBy', link: '/reference/math/sumBy' },
           ],
         },
         {
           text: 'Object Utilities',
           items: [
+            { text: 'clone', link: '/reference/object/clone' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
@@ -135,6 +143,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Predicates',
           items: [
+            { text: 'isEqual', link: '/reference/predicate/isEqual' },
             { text: 'isNil', link: '/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },

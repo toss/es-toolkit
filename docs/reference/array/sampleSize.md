@@ -7,7 +7,7 @@ This function takes an array and a number, and returns an array containing the s
 ## Signature
 
 ```typescript
-export function sampleSize<T>(array: readonly T[], size: number): T[];
+export function sampleSize<T>(array: T[], size: number): T[];
 ```
 
 ### Parameters

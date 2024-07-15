@@ -38,3 +38,16 @@ chunk([1, 2, 3, 4, 5], 2);
 chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
 // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
 ```
+
+## Lodash Compatibility
+
+Import `chunk` from `es-toolkit/compat` for full compatibility with lodash.
+
+- `chunk` does not throw when `size` less than one is given.
+- `chunk` accepts fractional values, which are rounded down to the nearest integer.
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+chunk([1, 2, 3], 0); // Returns []
+```
