@@ -25,5 +25,5 @@ export function flatMap<T, U, D extends number>(
   iteratee: (item: T) => U,
   depth = 1 as D
 ): Array<FlatArray<U[], D>> {
-  return flatten(arr.map(iteratee), depth);
+  return flatten(arr.map(item => iteratee(item)), depth);
 }
