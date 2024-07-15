@@ -3,7 +3,7 @@
  *
  * This function mutates the original array and replaces its elements with the provided value, starting from the specified
  * start index up to the end index (non-inclusive). If the start or end indices are not provided, it defaults to filling the
- * entire array. Negative indices can be used to specify positions from the end of the array.
+ * entire array.
  *
  * @param {Array<T | P>} arr - The array to fill.
  * @param {P} value - The value to fill the array with.
