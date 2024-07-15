@@ -1,0 +1,12 @@
+{
+  "name": "benchmarks",
+  "private": true,
+  "dependencies": {
+    "es-toolkit": "workspace:^",
+    "lodash": "^4.17.21",
+    "vitest": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4"
+  }
+}
