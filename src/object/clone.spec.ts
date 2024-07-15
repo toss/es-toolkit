@@ -1,19 +1,19 @@
-import { describe, expect, it } from "vitest";
-import { clone } from "./clone";
+import { describe, expect, it } from 'vitest';
+import { clone, Shallowed } from './clone';
 
-describe("clone", () => {
-  it("should return primitive values as is", () => {
-    const symbol = Symbol("symbol");
+describe('clone', () => {
+  it('should return primitive values as is', () => {
+    const symbol = Symbol('symbol');
 
     expect(clone(42)).toBe(42);
-    expect(clone("es-toolkit")).toBe("es-toolkit");
+    expect(clone('es-toolkit')).toBe('es-toolkit');
     expect(clone(symbol)).toBe(symbol);
     expect(clone(true)).toBe(true);
     expect(clone(null)).toBe(null);
     expect(clone(undefined)).toBe(undefined);
   });
 
-  it("should clone arrays", () => {
+  it('should clone arrays', () => {
     const arr = [1, 2, 3];
     const clonedArr = clone(arr);
 
@@ -21,15 +21,15 @@ describe("clone", () => {
     expect(clonedArr).not.toBe(arr);
   });
 
-  it("should clone objects", () => {
-    const obj = { a: 1, b: "es-toolkit", c: [1, 2, 3] };
+  it('should clone objects', () => {
+    const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3] };
     const clonedObj = clone(obj);
 
     expect(clonedObj).toEqual(obj);
     expect(clonedObj).not.toBe(obj);
   });
 
-  it("should clone dates", () => {
+  it('should clone dates', () => {
     const date = new Date();
     const clonedDate = clone(date);
 
@@ -37,7 +37,7 @@ describe("clone", () => {
     expect(clonedDate).not.toBe(date);
   });
 
-  it("should clone regular expressions", () => {
+  it('should clone regular expressions', () => {
     const regex = /abc/g;
     const clonedRegex = clone(regex);
 
@@ -45,8 +45,8 @@ describe("clone", () => {
     expect(clonedRegex).not.toBe(regex);
   });
 
-  it("should shallow clone nested objects", () => {
-    const nestedObj = { a: [1, 2, 3], b: { c: "es-toolkit" }, d: new Date() };
+  it('should shallow clone nested objects', () => {
+    const nestedObj = { a: [1, 2, 3], b: { c: 'es-toolkit' }, d: new Date() };
     const clonedNestedObj = clone(nestedObj);
 
     expect(clonedNestedObj).toEqual(nestedObj);
@@ -55,14 +55,14 @@ describe("clone", () => {
     expect(clonedNestedObj.a[2]).toEqual(nestedObj.a[2]);
   });
 
-  it("should return functions as is", () => {
+  it('should return functions as is', () => {
     const func = () => {};
     const clonedFunc = clone(func);
 
     expect(clonedFunc).toBe(func);
   });
 
-  it("should clone sets", () => {
+  it('should clone sets', () => {
     const set = new Set([1, 2, 3]);
     const clonedSet = clone(set);
 
@@ -70,11 +70,33 @@ describe("clone", () => {
     expect(clonedSet).not.toBe(set);
   });
 
-  it("should clone maps", () => {
-    const map = new Map([[1, "a"], [2, "b"], [3, "c"]]);
+  it('should clone maps', () => {
+    const map = new Map([
+      [1, 'a'],
+      [2, 'b'],
+      [3, 'c'],
+    ]);
     const clonedMap = clone(map);
 
     expect(clonedMap).toEqual(map);
     expect(clonedMap).not.toBe(map);
   });
+
+  // check whether two types are equal only in the compiler level
+  let x: Shallowed<SomeClass> = null!;
+  let y: SomeInterface = null!;
+  x = y;
+  y = x;
 });
+
+declare class SomeClass {
+  public id: string;
+  public name: string;
+  public age: number;
+  public getName(): string;
+}
+interface SomeInterface {
+  id: string;
+  name: string;
+  age: number;
+}
