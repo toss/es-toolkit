@@ -8,7 +8,7 @@ It works the same as if you called [Array#flat](https://developer.mozilla.org/en
 
 ```typescript
 function flatMap<T, U, D extends number = 1>(
-  arr: readonly T[],
+  arr: T[],
   iteratee: (item: T) => U,
   depth?: D
 ): Array<FlatArray<U[], D>>;
