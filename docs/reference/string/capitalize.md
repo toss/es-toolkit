@@ -5,12 +5,12 @@ Converts the first character of string to upper case and the remaining to lower 
 ## Signature
 
 ```typescript
-function capitalize<T extends string>(str: T): Capitalize<T>;
+function capitalize(str: string): Capitalize<string>;
 ```
 
 ### Parameters
 
-`str` (`T`): The string to be converted to uppercase.
+`str` (`string`): The string to be converted to uppercase.
 
 ### Returns
 
