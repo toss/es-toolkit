@@ -8,7 +8,7 @@ JavaScript 언어에 포함된 [Array#flat](https://developer.mozilla.org/en-US/
 
 ```typescript
 function flatMap<T, U, D extends number = 1>(
-  arr: readonly T[],
+  arr: T[],
   iteratee: (item: T) => U,
   depth?: D
 ): Array<FlatArray<U[], D>>;

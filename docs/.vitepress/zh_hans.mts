@@ -69,6 +69,7 @@ function sidebar(): DefaultTheme.Sidebar {
             },
             { text: "fill", link: "/zh_hans/reference/array/fill" },
             { text: "toFilled", link: "/zh_hans/reference/array/toFilled" },
+            { text: "flatMap", link: "/reference/array/flatMap" },
             { text: "flatten", link: "/zh_hans/reference/array/flatten" },
             {
               text: "forEachRight",
