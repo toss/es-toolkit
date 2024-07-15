@@ -22,5 +22,5 @@ function negate<F extends (...args: unknown[]) => boolean>(func: F): F;
 import { negate } from 'es-toolkit/function';
 
 negate(() => true)(); // returns 'false'
-negate(() => false)(); // returns 'false'
+negate(() => false)(); // returns 'true'
 ```
