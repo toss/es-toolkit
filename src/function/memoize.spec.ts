@@ -79,7 +79,7 @@ describe('memoize', () => {
         return this.__data__.size;
       }
     }
-    const memoized = memoize(object => object.id, undefined, new CustomCache());
+    const memoized = memoize(object => object.id, new CustomCache());
 
     const cache = memoized.cache;
     const key1 = { id: 'a' };
@@ -119,7 +119,7 @@ describe('memoize', () => {
         return this.__data__.size;
       }
     }
-    const memoized = memoize((object: { id: string }) => object.id, undefined, new ImmutableCache());
+    const memoized = memoize((object: { id: string }) => object.id, new ImmutableCache());
     const key1 = { id: 'a' };
     const key2 = { id: 'b' };
 
