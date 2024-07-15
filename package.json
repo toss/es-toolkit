@@ -137,6 +137,7 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsdoc": "^48.5.0",
+    "fast-check": "^3.20.0",
     "lodash": "^4.17.21",
     "prettier": "^3.2.5",
     "tsup": "^8.1.0",

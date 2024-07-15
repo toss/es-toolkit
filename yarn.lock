@@ -4956,6 +4956,7 @@ __metadata:
     eslint: "npm:^8.56.0"
     eslint-config-prettier: "npm:^8.5.0"
     eslint-plugin-jsdoc: "npm:^48.5.0"
+    fast-check: "npm:^3.20.0"
     lodash: "npm:^4.17.21"
     prettier: "npm:^3.2.5"
     tsup: "npm:^8.1.0"
@@ -5394,6 +5395,15 @@ __metadata:
   version: 1.4.1
   resolution: "extsprintf@npm:1.4.1"
   checksum: 10c0/e10e2769985d0e9b6c7199b053a9957589d02e84de42832c295798cb422a025e6d4a92e0259c1fb4d07090f5bfde6b55fd9f880ac5855bd61d775f8ab75a7ab0
+  languageName: node
+  linkType: hard
+
+"fast-check@npm:^3.20.0":
+  version: 3.20.0
+  resolution: "fast-check@npm:3.20.0"
+  dependencies:
+    pure-rand: "npm:^6.1.0"
+  checksum: 10c0/860daef1337c96077ba7f2d0238391eb7de24aced5b0f43c699ad4ba683a1a61044dd8d17b86f914be728b97cbb5bbaf2625c2be4e1c0bf685f09432c29624c9
   languageName: node
   linkType: hard
 
@@ -7974,6 +7984,13 @@ __metadata:
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
   checksum: 10c0/14f76a8206bc3464f794fb2e3d3cc665ae416c01893ad7a02b23766eb07159144ee612ad67af5e84fa4479ccfe67678c4feb126b0485651b302babf66f04f9e9
+  languageName: node
+  linkType: hard
+
+"pure-rand@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "pure-rand@npm:6.1.0"
+  checksum: 10c0/1abe217897bf74dcb3a0c9aba3555fe975023147b48db540aa2faf507aee91c03bf54f6aef0eb2bf59cc259a16d06b28eca37f0dc426d94f4692aeff02fb0e65
   languageName: node
   linkType: hard
 

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { chunk } from './chunk';
+import fc from 'fast-check';
 
 describe('chunk', () => {
   it('should return an empty array when the input array is empty', () => {
@@ -31,5 +32,24 @@ describe('chunk', () => {
   it('should place the remaining elements in the last chunk when the total length is not a multiple of the size', () => {
     expect(chunk([1, 2, 3, 4], 6)).toEqual([[1, 2, 3, 4]]);
     expect(chunk([1, 2, 3, 4, 5, 6, 7], 2)).toEqual([[1, 2], [3, 4], [5, 6], [7]]);
+  });
+});
+
+describe('chunk property', () => {
+  it('should split an array into chunks of the specified size', () => {
+    fc.assert(
+      fc.property(
+        fc.integer({ min: 1, max: 100 }).chain(size => {
+          const evenlyChunked = fc.array(fc.array(fc.anything(), { minLength: size, maxLength: size }));
+          const tail = fc.array(fc.anything(), { minLength: 0, maxLength: size - 1 });
+          return fc.tuple(fc.constant(size), evenlyChunked, tail);
+        }),
+        ([size, chunked, tail]) => {
+          const input = chunked.flat().concat(tail);
+          const output = chunked.concat(tail.length ? [tail] : []);
+          expect(chunk(input, size)).toEqual(output);
+        }
+      )
+    );
   });
 });
