@@ -10,7 +10,8 @@
   },
   "license": "MIT",
   "workspaces": [
-    "docs"
+    "docs",
+    "benchmarks"
   ],
   "packageManager": "yarn@4.2.2",
   "exports": {
@@ -124,11 +125,9 @@
     "@babel/preset-typescript": "^7.24.1",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
-    "@codspeed/vitest-plugin": "^3.1.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/broken-link-checker": "^0",
-    "@types/lodash": "^4",
     "@types/node": "^20.12.11",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
@@ -137,7 +136,6 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsdoc": "^48.5.0",
-    "lodash": "^4.17.21",
     "prettier": "^3.2.5",
     "tsup": "^8.1.0",
     "typescript": "^5.4.5",
