@@ -17,10 +17,16 @@ describe('cloneDeep', () => {
   bench('es-toolkit/cloneDeep', () => {
     cloneDeep(obj);
   });
+
   bench('lodash/cloneDeep', () => {
     lodashCloneDeep(obj);
   });
-  bench('JSON.parse', () => {
+
+  bench('node/JSON.parse', () => {
     JSON.parse(JSON.stringify(obj));
+  });
+
+  bench('node/structuredClone', () => {
+    structuredClone(obj);
   });
 });
