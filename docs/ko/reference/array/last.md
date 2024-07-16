@@ -19,10 +19,6 @@ function last<T>(arr: T[]): T | undefined;
 
 (`T | undefined`): 배열의 마지막 요소, 빈 배열의 경우, `undefined`를 반환해요.
 
-### 에러
-
-`arr`이 배열이 아닌 경우 에러를 던져요.
-
 ## 예시
 
 ```typescript

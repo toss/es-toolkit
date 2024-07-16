@@ -1,4 +1,4 @@
-import { chunk } from 'lodash';
+import { chunk } from './chunk.ts';
 import { describe, expect, it } from 'vitest';
 
 /**
