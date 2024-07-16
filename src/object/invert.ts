@@ -19,9 +19,11 @@
 export function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record<K, V>): { [key in V]: K } {
   const result = {} as { [key in V]: K };
 
-  for (const key of Object.keys(obj)) {
-    const value = obj[key as K] as V;
-    result[value] = key as K;
+  const keys = Object.keys(obj) as K[];
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const value = obj[key];
+    result[value] = key;
   }
 
   return result;
