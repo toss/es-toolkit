@@ -16,7 +16,7 @@ describe('drop', () => {
     expect(drop([1.2, 2.3, 3.4], 1.5)).toEqual([2.3, 3.4]);
   });
 
-  it('should return empty array if n > arr.length', () => {
+  it('should return empty array if n >= arr.length', () => {
     expect(drop([1.2, 2.3, 3.4], 4)).toEqual([]);
   });
 });
