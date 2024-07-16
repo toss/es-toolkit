@@ -20,5 +20,5 @@ export function dropRight<T>(arr: readonly T[], itemsCount: number): T[] {
     return arr.slice();
   }
 
-  return arr.slice(0, Math.min(-itemsCount, 0));
+  return arr.slice(0, count);
 }
