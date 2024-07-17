@@ -84,7 +84,7 @@ describe('clone', () => {
 
   // check whether two types are equal only in the compiler level
   let x: Shallowed<SomeClass> = null!;
-  let y: SomeInterface = null!;
+  let y: Shallowed<SomeInterface> = null!;
   x = y;
   y = x;
 });

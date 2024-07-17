@@ -119,7 +119,7 @@ type ShallowMain<T> = T extends [never]
         }>
     : T;
 
-type Equal<X, Y> = X extends Y ? (Y extends X ? true : false) : false;
+type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
 type OmitNever<T extends object> = Omit<T, SpecialFields<T, never>>;
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
 type SpecialFields<Instance extends object, Target> = {
