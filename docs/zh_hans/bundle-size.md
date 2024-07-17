@@ -21,3 +21,16 @@ description: es-toolkit提供的最小包体积
 | [throttle](./reference/function/throttle)  | 110 bytes        | 1460 bytes        | -92.5%     |
 | [pick](./reference/object/pick)            | 657 bytes        | 3860 bytes        | -83.0%     |
 | [zip](./reference/array/zip)               | 797 bytes        | 1790 bytes        | -55.5%     |
+
+## 包体积测试方法
+
+我们的包体积是使用 [esbuild 0.23.0](https://esbuild.github.io) 测量的，通过分析如下代码的大小：
+
+```tsx
+import { chunk } from 'es-toolkit'; 
+// 或 import { chunk } from 'lodash-es';
+
+console.log(chunk);
+```
+
+有关详细信息，请参见我们的[包体积基准代码](https://github.com/toss/es-toolkit/tree/main/benchmarks/bundle-size)。
