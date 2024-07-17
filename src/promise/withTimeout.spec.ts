@@ -1,22 +1,23 @@
 import { describe, expect, it, vi } from 'vitest';
-import { timeout } from './timeout';
+import { withTimeout } from './withTimeout.ts';
 
 describe('timeout', () => {
   it('returns the result value if a response is received before the specified wait time', () => {
     expect(
-      timeout(
-        new Promise(resolve => {
-          setTimeout(() => {
-            resolve('foo');
-          }, 50);
-        }),
+      withTimeout(
+        () =>
+          new Promise<string>(resolve => {
+            setTimeout(() => {
+              resolve('foo');
+            }, 50);
+          }),
         100
       )
     ).resolves.toEqual('foo');
   });
 
   it('returns a reason if a response is received after the specified wait time', () => {
-    expect(timeout(new Promise(() => {}), 50)).rejects.toThrow('The operation was timed out');
+    expect(withTimeout(() => new Promise(() => {}), 50)).rejects.toThrow('The operation was timed out');
   });
 
   it('should cancel the timeout if aborted via AbortSignal', () => {
@@ -25,7 +26,7 @@ describe('timeout', () => {
 
     setTimeout(() => controller.abort(), 50);
 
-    expect(timeout(new Promise(() => {}), 100, { signal })).rejects.toThrow('The operation was aborted');
+    expect(withTimeout(() => new Promise(() => {}), 100, { signal })).rejects.toThrow('The operation was aborted');
   });
 
   it('should not call the timeout if it is already aborted by AbortSignal', async () => {
@@ -35,7 +36,9 @@ describe('timeout', () => {
 
     controller.abort();
 
-    await expect(timeout(new Promise(() => {}), 100, { signal })).rejects.toThrow('The operation was aborted');
+    await expect(withTimeout(() => new Promise(() => {}), 100, { signal })).rejects.toThrow(
+      'The operation was aborted'
+    );
 
     expect(spy).not.toHaveBeenCalled();
     spy.mockRestore();
@@ -45,7 +48,7 @@ describe('timeout', () => {
     const controller = new AbortController();
     const { signal } = controller;
     const spy = vi.spyOn(global, 'clearTimeout');
-    const promise = timeout(new Promise(() => {}), 100, { signal });
+    const promise = withTimeout(() => new Promise(() => {}), 100, { signal });
 
     controller.abort();
 

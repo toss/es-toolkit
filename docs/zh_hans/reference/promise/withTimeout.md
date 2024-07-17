@@ -1,4 +1,4 @@
-# timeout
+# withTimeout
 
 如果响应时间晚于指定时间， 则将其视为 `TimeoutError`错误。
 
@@ -9,19 +9,19 @@
 ## 签名
 
 ```typescript
-function timeout<T>(value: T, ms: number, options?: TimeoutOptions): Promise<Awaited<T>>;
+function withTimeout<T>(value: () => Promise<T>, ms: number, options?: WithTimeoutOptions): Promise<T>;
 ```
 
 ### 参数
 
-- `value` (`T`): 要执行的 Promise 值。
+- `value` (`() => Promise<T>`): 要执行的 Promise 值。
 - `ms` (`number`): 指定 Promise 的最大执行值的毫秒。
-- `options` (`TimeoutOptions`, optional): 一个选项对象。
+- `options` (`WithTimeoutOptions`, optional): 一个选项对象。
   - `signal` (`AbortSignal`, optional): 用于取消 timeout 的选择性 `AbortSignal`。
 
 ### 返回值
 
-(`Promise<Awaited<T>>`): 要执行的 Promise 返回值。
+(`Promise<T>`): 要执行的 Promise 返回值。
 
 ## 示例
 
@@ -29,7 +29,7 @@ function timeout<T>(value: T, ms: number, options?: TimeoutOptions): Promise<Awa
 
 ```typescript
 try {
-  await timeout(new Promise(() => {}), 1000); // 代码时间最长为 1秒
+  await withTimeout(() => new Promise(() => {}), 1000); // 代码时间最长为 1秒
 } catch (error) {
   console.error(error); // 将会输出 'The operation was timed out'
 }
@@ -43,11 +43,7 @@ const { signal } = controller;
 
 setTimeout(() => controller.abort(), 50); // 50ms 后取消 timeout
 try {
-  await timeout(
-    new Promise(() => {}),
-    1000,
-    { signal }
-  );
+  await withTimeout(() => new Promise(() => {}), 1000, { signal });
 } catch (error) {
   console.log(error); // 将会输出 'The operation was aborted'
 }

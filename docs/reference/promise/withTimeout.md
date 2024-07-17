@@ -1,4 +1,4 @@
-# timeout
+# withTimeout
 
 If it responds later than the specified time, it is treated as a `TimeoutError` error.
 
@@ -9,19 +9,19 @@ It also supports an optional AbortSignal to cancel the timeout.
 ## Signature
 
 ```typescript
-function timeout<T>(value: T, ms: number, options?: TimeoutOptions): Promise<Awaited<T>>;
+function withTimeout<T>(value: () => Promise<T>, ms: number, options?: WithTimeoutOptions): Promise<T>;
 ```
 
 ### Parameters
 
-- `value` (`T`): The type of promise value.
+- `value` (`() => Promise<T>`): The type of promise value.
 - `ms` (`number`): The number of milliseconds to timeout.
-- `options` (`TimeoutOptions`, optional): An options object.
+- `options` (`WithTimeoutOptions`, optional): An options object.
   - `signal` (`AbortSignal`, optional): An optional `AbortSignal` to cancel the timeout.
 
 ### Returns
 
-(`Promise<Awaited<T>>`): A Promise that resolves after the specified timeout.
+(`Promise<T>`): A Promise that resolves after the specified timeout.
 
 ## Examples
 
@@ -29,7 +29,7 @@ function timeout<T>(value: T, ms: number, options?: TimeoutOptions): Promise<Awa
 
 ```typescript
 try {
-  await timeout(new Promise(() => {}), 1000); // Timeout exception after 1 second
+  await withTimeout(() => new Promise(() => {}), 1000); // Timeout exception after 1 second
 } catch (error) {
   console.error(error); // Will log 'The operation was timed out'
 }
@@ -43,11 +43,7 @@ const { signal } = controller;
 
 setTimeout(() => controller.abort(), 50); // Will cancel the timeout after 50ms
 try {
-  await timeout(
-    new Promise(() => {}),
-    1000,
-    { signal }
-  );
+  await withTimeout(() => new Promise(() => {}), 1000, { signal });
 } catch (error) {
   console.log(error); // Will log 'The operation was aborted'
 }

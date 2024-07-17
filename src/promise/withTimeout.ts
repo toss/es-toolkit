@@ -1,6 +1,6 @@
 import { AbortError, TimeoutError } from '../error';
 
-interface TimeoutOptions {
+interface WithTimeoutOptions {
   signal?: AbortSignal;
 }
 
@@ -13,14 +13,14 @@ interface TimeoutOptions {
  * @template T The type of promise value.
  * @param {T} value - The type of promise value.
  * @param {number} ms - The number of milliseconds to timeout.
- * @param {TimeoutOptions} options - The options object.
+ * @param {WithTimeoutOptions} options - The options object.
  * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the timeout.
  * @returns {Promise<Awaited<T>>} A Promise that resolves after the specified timeout.
  *
  * @example
  * try {
- *  await timeout(
- *    new Promise(() => {}),
+ *  await withTimeout(
+ *    () => {},
  *    1000,
  *   ); // Timeout exception after 1 second
  * } catch (error) {
@@ -33,8 +33,8 @@ interface TimeoutOptions {
  *
  * setTimeout(() => controller.abort(), 50); // Will cancel the timeout after 50ms
  * try {
- *   await timeout(
- *    new Promise(() => {}),
+ *   await withTimeout(
+ *    () => {},
  *    1000,
  *    { signal }
  *   );
@@ -43,8 +43,12 @@ interface TimeoutOptions {
  *  }
  * }
  */
-export async function timeout<T>(value: T, ms: number, { signal }: TimeoutOptions = {}): Promise<Awaited<T>> {
-  return new Promise<Awaited<T>>((resolve, reject) => {
+export async function withTimeout<T>(
+  value: () => Promise<T>,
+  ms: number,
+  { signal }: WithTimeoutOptions = {}
+): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
     const abortError = () => {
       reject(new AbortError());
     };
@@ -63,7 +67,7 @@ export async function timeout<T>(value: T, ms: number, { signal }: TimeoutOption
     }, ms);
 
     (async () => {
-      const result = await value;
+      const result = await value();
 
       clearTimeout(timeoutId);
 

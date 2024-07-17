@@ -1,4 +1,4 @@
-# timeout
+# withTimeout
 
 지정한 시간보다 늦은 시간에 응답할 경우 `TimeoutError` 에러로 처리합니다.
 
@@ -7,19 +7,19 @@
 ## 인터페이스
 
 ```typescript
-function timeout<T>(value: T, ms: number, options?: TimeoutOptions): Promise<Awaited<T>>;
+function withTimeout<T>(value: () => Promise<T>, ms: number, options?: WithTimeoutOptions): Promise<T>;
 ```
 
 ### 파라미터
 
-- `value` (`T`): 실행할 Promise 값.
+- `value` (`() => Promise<T>`): 실행할 Promise 값.
 - `ms` (`number`): Promise의 최대 실행 값을 지정할 밀리세컨드.
-- `options` (`TimeoutOptions`, optional): 옵션 객체.
+- `options` (`WithTimeoutOptions`, optional): 옵션 객체.
   - `signal` (`AbortSignal`, optional): timeout을 취소하기 위한 선택적 `AbortSignal`.
 
 ### 반환 값
 
-(`Promise<Awaited<T>>`): 실행할 Promise의 반환 값.
+(`Promise<T>`): 실행할 Promise의 반환 값.
 
 ## 예시
 
@@ -27,7 +27,7 @@ function timeout<T>(value: T, ms: number, options?: TimeoutOptions): Promise<Awa
 
 ```typescript
 try {
-  await timeout(new Promise(() => {}), 1000); // 코드 최대 시간을 1초로 지정
+  await withTimeout(() => new Promise(() => {}), 1000); // 코드 최대 시간을 1초로 지정
 } catch (error) {
   console.error(error); // 'The operation was timed out' 로깅
 }
@@ -41,11 +41,7 @@ const { signal } = controller;
 
 setTimeout(() => controller.abort(), 50); // 50ms 후 timeout을 취소
 try {
-  await timeout(
-    new Promise(() => {}),
-    1000,
-    { signal }
-  );
+  await withTimeout(() => new Promise(() => {}), 1000, { signal });
 } catch (error) {
   console.log(error); // 'The operation was aborted' 로깅
 }
