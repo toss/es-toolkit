@@ -171,6 +171,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '문자열',
           items: [
+            { text: 'camelCase', link: '/ko/reference/string/camelCase' },
             { text: 'snakeCase', link: '/ko/reference/string/snakeCase' },
             { text: 'kebabCase', link: '/ko/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/ko/reference/string/lowerCase' },
