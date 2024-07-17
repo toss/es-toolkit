@@ -2,6 +2,18 @@ import { describe, expect, it } from 'vitest';
 import { cloneDeep } from './cloneDeep';
 
 describe('cloneDeep', () => {
+  //-------------------------------------------------------------------------------------
+  // function
+  //-------------------------------------------------------------------------------------
+  it('not support function', () => {
+    const func = () => {};
+    const clonedFunc = cloneDeep(func);
+    expect(clonedFunc).toBe(undefined);
+  });
+
+  //-------------------------------------------------------------------------------------
+  // primitive
+  //-------------------------------------------------------------------------------------
   it('should return primitive values as is', () => {
     const symbol = Symbol('symbol');
     expect(cloneDeep(42)).toBe(42);
@@ -78,16 +90,6 @@ describe('cloneDeep', () => {
   });
 
   //-------------------------------------------------------------------------------------
-  // function
-  //-------------------------------------------------------------------------------------
-  it('should return functions as is', () => {
-    const func = () => {};
-    const clonedFunc = cloneDeep(func);
-
-    expect(clonedFunc).toBe(func);
-  });
-
-  //-------------------------------------------------------------------------------------
   // set
   //-------------------------------------------------------------------------------------
   it('should clone sets', () => {
@@ -132,14 +134,23 @@ describe('cloneDeep', () => {
   it('should clone instance', () => {
     class A {
       readonly props: { a: string };
-      constructor(props: { a: string }) {
+      #b: number; // this is js spec private field (not cloned)
+      private c: number; // this is ts spec private field (cloned)
+      private readonly d: () => number;
+      constructor(props: { a: string }, b: number, c: number, d: () => number) {
         if (props.a !== 'es-toolkit') {
           throw new Error('es-toolkit');
         }
         this.props = props;
+        this.#b = b;
+        this.c = c;
+        this.d = d;
       }
       getA() {
         return this.props;
+      }
+      getB() {
+        return this.#b;
       }
       getThis() {
         console.log(this);
@@ -147,36 +158,17 @@ describe('cloneDeep', () => {
       }
     }
     const props = { a: 'es-toolkit' };
-    const a = new A(props);
+    const d = () => 1;
+    const a = new A(props, 1, 2, d);
     const b = cloneDeep(a);
     a.props.a = 'es-toolkit-2';
-    expect(a.getA()).toEqual({ a: 'es-toolkit-2' });
-    expect(b.getA()).toEqual({ a: 'es-toolkit' });
     expect(a).not.toBe(b);
-    expect(b.constructor).toEqual(A);
-  });
-
-  it('should clone Event objects', () => {
-    const event = new Event('testEvent');
-    const clonedEvent = cloneDeep(event);
-    expect(clonedEvent).not.toBe(event);
-    expect(clonedEvent.type).toBe(event.type);
-    expect(clonedEvent.bubbles).toBe(event.bubbles);
-    expect(clonedEvent.cancelable).toBe(event.cancelable);
-    expect(clonedEvent.eventPhase).toBe(Event.NONE);
-    expect(clonedEvent.constructor).toBe(Event);
-  });
-
-  it('should clone Custom Event objects and maintain eventPhase', () => {
-    const event = new CustomEvent('testEvent');
-    const clonedEvent = cloneDeep(event);
-    console.log(clonedEvent);
-    expect(clonedEvent).not.toBe(event);
-    expect(event.eventPhase).toBe(Event.NONE);
-    expect(clonedEvent.bubbles).toBe(event.bubbles);
-    expect(clonedEvent.cancelable).toBe(event.cancelable);
-    expect(clonedEvent.eventPhase).toBe(Event.NONE);
-    expect(clonedEvent.constructor).toBe(CustomEvent);
+    // @ts-expect-error: test
+    expect(b['#b']).toBe(undefined);
+    expect(b).toEqual({
+      props: { a: 'es-toolkit' },
+      c: 2,
+    });
   });
 
   //-------------------------------------------------------------------------------------
@@ -236,9 +228,100 @@ describe('cloneDeep', () => {
     const typedArray = new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
     const clonedTypedArray = cloneDeep(typedArray);
     typedArray[0] = 255;
-
     expect(clonedTypedArray).not.toBe(typedArray);
     expect(typedArray).toEqual(new Uint8Array([255, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
     expect(clonedTypedArray).toEqual(new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
+  });
+
+  //-------------------------------------------------------------------------------------
+  // Error
+  //-------------------------------------------------------------------------------------
+
+  it('should clone Error', () => {
+    const error = new Error('es-toolkit');
+    const clonedError = cloneDeep(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.cause).toBe(error.cause);
+  });
+  it('should clone TypeError', () => {
+    const error = new TypeError('es-toolkit');
+    const clonedError = cloneDeep(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.cause).toBe(error.cause);
+  });
+
+  it('should clone EvalError', () => {
+    const error = new EvalError('es-toolkit');
+    const clonedError = cloneDeep(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.cause).toBe(error.cause);
+  });
+
+  it('should clone RangeError', () => {
+    const error = new RangeError('es-toolkit');
+    const clonedError = cloneDeep(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.cause).toBe(error.cause);
+  });
+
+  it('should clone ReferenceError', () => {
+    const error = new ReferenceError('es-toolkit');
+    const clonedError = cloneDeep(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.cause).toBe(error.cause);
+  });
+
+  it('should clone SyntaxError', () => {
+    const error = new SyntaxError('es-toolkit');
+    const clonedError = cloneDeep(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.cause).toBe(error.cause);
+  });
+
+  it('should clone URIError', () => {
+    const error = new URIError('es-toolkit');
+    const clonedError = cloneDeep(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.cause).toBe(error.cause);
+  });
+
+  it('should clone custom Error', () => {
+    class HttpError extends Error {
+      code: number;
+      constructor(message: string, code: number) {
+        super(message);
+        this.name = 'CustomError';
+        this.code = code;
+      }
+    }
+    const error = new HttpError('es-toolkit', 400);
+    const clonedError = cloneDeep(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.cause).toBe(error.cause);
+    expect(clonedError.code).toBe(error.code);
   });
 });

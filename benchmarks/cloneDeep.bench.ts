@@ -11,6 +11,7 @@ const obj = {
   date: new Date(),
   regex: /abc/g,
   nested: { a: [1, 2, 3], b: { c: 'es-toolkit' }, d: new Date() },
+  nested2: { a: { b: { c: { d: { e: { f: { g: 'es-toolkit' } } } } } } },
 };
 
 describe('cloneDeep', () => {
