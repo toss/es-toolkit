@@ -74,8 +74,8 @@ export function clone<T>(obj: T): Shallowed<T> {
   if (obj instanceof ArrayBuffer) return obj.slice(0) as Shallowed<T>;
   if (obj instanceof SharedArrayBuffer) return obj.slice(0) as Shallowed<T>;
   if (obj instanceof DataView) return new DataView(obj.buffer.slice(0)) as Shallowed<T>;
-  if (obj instanceof Blob) return new Blob([obj], { type: obj.type }) as Shallowed<T>;
   if (obj instanceof File) return new File([obj], obj.name, { type: obj.type }) as Shallowed<T>;
+  if (obj instanceof Blob) return new Blob([obj], { type: obj.type }) as Shallowed<T>;
 
   if (typeof obj === 'object') {
     return Object.assign({}, obj) as Shallowed<T>;
