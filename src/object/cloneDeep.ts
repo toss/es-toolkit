@@ -118,8 +118,7 @@ export function cloneDeep<T>(obj: T): Resolved<T> {
   }
 
   if (typeof obj === 'object' && obj !== null) {
-    // const result = {};
-    const result = Object.create(Object.getPrototypeOf(obj));
+    const result = {};
     cloneDeepHelper(obj, result);
     return result as Resolved<T>;
   }
