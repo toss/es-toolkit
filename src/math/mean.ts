@@ -10,7 +10,7 @@ import { sum } from './sum.ts';
  *
  * @example
  * const numbers = [1, 2, 3, 4, 5];
- * const result = average(numbers);
+ * const result = mean(numbers);
  * // result will be 3
  */
 export function mean(nums: readonly number[]): number {
