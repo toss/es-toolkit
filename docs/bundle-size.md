@@ -21,3 +21,17 @@ This makes es-toolkit the most efficient in terms of bundle size, with some util
 | [throttle](./reference/function/throttle)  | 110 bytes        | 1460 bytes        | -92.5%     |
 | [pick](./reference/object/pick)            | 657 bytes        | 3860 bytes        | -83.0%     |
 | [zip](./reference/array/zip)               | 797 bytes        | 1790 bytes        | -55.5%     |
+
+## Bundle Size Test Method
+
+Our bundle size is measured using [esbuild 0.23.0](https://esbuild.github.io), by analyzing the size of code like the following:
+
+```tsx
+import { chunk } from 'es-toolkit'; 
+// or import { chunk } from 'lodash-es';
+
+console.log(chunk);
+```
+
+See our [bundle size benchmark code](https://github.com/toss/es-toolkit/tree/main/benchmarks/bundle-size) for details.
+

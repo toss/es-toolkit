@@ -1,6 +1,6 @@
 # isEqual
 
-The `isEqual` function checks if two values are equal, including support for `Date`, `RegExp`, and deep object comparison.
+`isEqual` 함수는 두 값이 동일한지 확인하며, `Date`, `RegExp`, 깊은 객체 비교도 지원해요.
 
 ## Signature
 
@@ -10,16 +10,16 @@ function isEqual(a: unknown, b: unknown): boolean;
 
 ## Parameters
 
-- **`a`**: `unknown` - The first value to compare.
-- **`b`**: `unknown` - The second value to compare.
+- **`a`**: `unknown` - 비교할 첫 번째 값.
+- **`b`**: `unknown` - 비교할 두 번째 값.
 
 ## Returns
 
-- **`boolean`** - Returns `true` if the values are equal, otherwise `false`.
+- **`boolean`** - 두 값이 동일하면 `true`, 그렇지 않으면 `false`를 반환해요.
 
 ## Examples
 
-### Example 1: Comparing Primitive Values
+### Example 1: 원시 타입 값 비교
 
 ```javascript
 isEqual(1, 1); // true
@@ -30,14 +30,14 @@ isEqual('hello', 'world'); // false
 isEqual(true, false); // false
 ```
 
-### Example 2: Comparing Special Cases
+### Example 2: 특수 경우 비교
 
 ```javascript
 isEqual(NaN, NaN); // true
 isEqual(+0, -0); // false
 ```
 
-### Example 3: Comparing Date Objects
+### Example 3: 날짜 객체 비교
 
 ```javascript
 const date1 = new Date('2020-01-01');
@@ -48,7 +48,7 @@ const date3 = new Date('2021-01-01');
 isEqual(date1, date3); // false
 ```
 
-### Example 4: Comparing RegExp Objects
+### Example 4: 정규 표현식 객체 비교
 
 ```javascript
 const regex1 = /hello/g;
@@ -59,7 +59,7 @@ const regex3 = /hello/i;
 isEqual(regex1, regex3); // false
 ```
 
-### Example 5: Comparing Objects
+### Example 5: 객체 비교
 
 ```javascript
 const obj1 = { a: 1, b: { c: 2 } };
@@ -74,7 +74,7 @@ const obj5 = { a: 1, c: 2 };
 isEqual(obj4, obj5); // false
 ```
 
-### Example 6: Comparing Arrays
+### Example 6: 배열 비교
 
 ```javascript
 const arr1 = [1, 2, 3];

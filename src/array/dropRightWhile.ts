@@ -1,5 +1,3 @@
-import { dropWhile } from './dropWhile.ts';
-
 /**
  * Removes elements from the end of an array until the predicate returns false.
  *
@@ -19,7 +17,11 @@ import { dropWhile } from './dropWhile.ts';
  * // result will be [1, 2, 3] since elements greater than 3 are dropped from the end.
  */
 export function dropRightWhile<T>(arr: readonly T[], canContinueDropping: (item: T) => boolean): T[] {
-  const reversed = arr.slice().reverse();
-  const dropped = dropWhile(reversed, canContinueDropping);
-  return dropped.slice().reverse();
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (!canContinueDropping(arr[i])) {
+      return arr.slice(0, i + 1);
+    }
+  }
+
+  return [];
 }

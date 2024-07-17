@@ -1,4 +1,4 @@
-import { capitalize } from "lodash";
+import { capitalize } from "./capitalize.ts";
 import { getWords } from "./_internal/getWords.ts";
 
 /**
@@ -25,7 +25,6 @@ export function camelCase(str: string): string {
 
   const [first, ...rest] = words;
 
-  return `${first.toLowerCase()}${
-    rest.map((word) => capitalize(word)).join("")
-  }`;
+  return `${first.toLowerCase()}${rest.map((word) => capitalize(word)).join("")
+    }`;
 }

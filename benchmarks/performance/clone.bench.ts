@@ -18,6 +18,9 @@ describe('clone', () => {
     clone(obj);
   });
   bench('lodash/clone', () => {
-    lodashClone(obj);
+    class Foo {
+      foo: () => void;
+    }
+    lodashClone(new Foo());
   });
 });
