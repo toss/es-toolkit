@@ -35,50 +35,53 @@ export function clone<T>(obj: T): Shallowed<T> {
     return obj.slice() as Shallowed<T>;
   }
 
-  if (obj instanceof Date) {
-    return new Date(obj.getTime()) as Shallowed<T>;
-  }
-
-  if (obj instanceof RegExp) {
-    return new RegExp(obj.source, obj.flags) as Shallowed<T>;
-  }
-
-  if (obj instanceof Map) {
-    const result = new Map();
-    for (const [key, value] of obj) {
-      result.set(key, value);
-    }
-    return result as Shallowed<T>;
-  }
-
-  if (obj instanceof Set) {
-    const result = new Set();
-    for (const value of obj) {
-      result.add(value);
-    }
-    return result as Shallowed<T>;
-  }
-
-  // BINARY DATA
-  if (obj instanceof Uint8Array) return new Uint8Array(obj) as Shallowed<T>;
-  if (obj instanceof Uint8ClampedArray) return new Uint8ClampedArray(obj) as Shallowed<T>;
-  if (obj instanceof Uint16Array) return new Uint16Array(obj) as Shallowed<T>;
-  if (obj instanceof Uint32Array) return new Uint32Array(obj) as Shallowed<T>;
-  if (obj instanceof BigUint64Array) return new BigUint64Array(obj) as Shallowed<T>;
-  if (obj instanceof Int8Array) return new Int8Array(obj) as Shallowed<T>;
-  if (obj instanceof Int16Array) return new Int16Array(obj) as Shallowed<T>;
-  if (obj instanceof Int32Array) return new Int32Array(obj) as Shallowed<T>;
-  if (obj instanceof BigInt64Array) return new BigInt64Array(obj) as Shallowed<T>;
-  if (obj instanceof Float32Array) return new Float32Array(obj) as Shallowed<T>;
-  if (obj instanceof Float64Array) return new Float64Array(obj) as Shallowed<T>;
-  if (obj instanceof ArrayBuffer) return obj.slice(0) as Shallowed<T>;
-  if (obj instanceof SharedArrayBuffer) return obj.slice(0) as Shallowed<T>;
-  if (obj instanceof DataView) return new DataView(obj.buffer.slice(0)) as Shallowed<T>;
-  if (obj instanceof File) return new File([obj], obj.name, { type: obj.type }) as Shallowed<T>;
-  if (obj instanceof Blob) return new Blob([obj], { type: obj.type }) as Shallowed<T>;
-
   if (typeof obj === 'object') {
-    return Object.assign({}, obj) as Shallowed<T>;
+    // NATIVE CLASSES
+    if (obj instanceof Date) {
+      return new Date(obj.getTime()) as Shallowed<T>;
+    }
+
+    if (obj instanceof RegExp) {
+      return new RegExp(obj.source, obj.flags) as Shallowed<T>;
+    }
+
+    if (obj instanceof Map) {
+      const result = new Map();
+      for (const [key, value] of obj) {
+        result.set(key, value);
+      }
+      return result as Shallowed<T>;
+    }
+
+    if (obj instanceof Set) {
+      const result = new Set();
+      for (const value of obj) {
+        result.add(value);
+      }
+      return result as Shallowed<T>;
+    }
+
+    // BINARY DATA
+    if (obj instanceof Uint8Array) return new Uint8Array(obj) as Shallowed<T>;
+    if (obj instanceof Uint8ClampedArray) return new Uint8ClampedArray(obj) as Shallowed<T>;
+    if (obj instanceof Uint16Array) return new Uint16Array(obj) as Shallowed<T>;
+    if (obj instanceof Uint32Array) return new Uint32Array(obj) as Shallowed<T>;
+    if (obj instanceof BigUint64Array) return new BigUint64Array(obj) as Shallowed<T>;
+    if (obj instanceof Int8Array) return new Int8Array(obj) as Shallowed<T>;
+    if (obj instanceof Int16Array) return new Int16Array(obj) as Shallowed<T>;
+    if (obj instanceof Int32Array) return new Int32Array(obj) as Shallowed<T>;
+    if (obj instanceof BigInt64Array) return new BigInt64Array(obj) as Shallowed<T>;
+    if (obj instanceof Float32Array) return new Float32Array(obj) as Shallowed<T>;
+    if (obj instanceof Float64Array) return new Float64Array(obj) as Shallowed<T>;
+    if (obj instanceof ArrayBuffer) return obj.slice(0) as Shallowed<T>;
+    if (obj instanceof SharedArrayBuffer) return obj.slice(0) as Shallowed<T>;
+    if (obj instanceof DataView) return new DataView(obj.buffer.slice(0)) as Shallowed<T>;
+    if (obj instanceof File) return new File([obj], obj.name, { type: obj.type }) as Shallowed<T>;
+    if (obj instanceof Blob) return new Blob([obj], { type: obj.type }) as Shallowed<T>;
+
+    return Object.fromEntries(
+      Object.entries(obj as any).filter(([_key, value]) => value !== undefined && typeof value !== 'function')
+    ) as Shallowed<T>;
   }
   return obj as Shallowed<T>;
 }
