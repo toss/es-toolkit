@@ -18,7 +18,7 @@
 
 export function get<O, T>(obj: O, path: string | string[], defaultValue?: T): O[keyof O] | T | undefined {
   if (!Array.isArray(path)) {
-    let pathArr = path.split('.');
+    const pathArr = path.split('.');
     path = []
     for (let i = 0; i < pathArr.length; i++) {
       if (/^.+\[[0-9]+\]$/.test(pathArr[i])) {
