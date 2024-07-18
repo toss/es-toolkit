@@ -1,5 +1,9 @@
 # set
 
+::: info
+This is available in our [compatibility library](../../compatibility.md), `es-toolkit/compat`.
+:::
+
 Sets the given value at the specified path of the object. If any part of the path does not exist, it will be created.
 
 ## Signature
@@ -21,6 +25,8 @@ function set<T>(obj: Settable, path: Path, value: any): T;
 ## Examples
 
 ```typescript
+import { set } from 'es-toolkit/compat';
+
 // Set a value in a nested object
 const obj = { a: { b: { c: 3 } } };
 set(obj, 'a.b.c', 4);

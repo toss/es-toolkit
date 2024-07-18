@@ -1,5 +1,9 @@
 # set
 
+::: info
+[lodash와 호환](../../compatibility.md)되는 `es-toolkit/compat` 라이브러리에서 쓸 수 있어요.
+:::
+
 지정된 경로에 주어진 값을 설정해요. 경로의 일부가 존재하지 않으면 생성됩니다.
 
 ## Signature
@@ -21,6 +25,8 @@ function set<T>(obj: Settable, path: Path, value: any): T;
 ## Examples
 
 ```typescript
+import { set } from 'es-toolkit/compat';
+
 // 중첩된 객체에 값 설정
 const obj = { a: { b: { c: 3 } } };
 set(obj, 'a.b.c', 4);
