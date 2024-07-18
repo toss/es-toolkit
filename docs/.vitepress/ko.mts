@@ -149,7 +149,6 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'pick', link: '/ko/reference/object/pick' },
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
             { text: 'invert', link: '/ko/reference/object/invert' },
-            { text: 'set', link: '/ko/reference/object/set' },
           ],
         },
         {
@@ -180,6 +179,12 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'capitalize', link: '/ko/reference/string/capitalize' },
           ],
         },
+        {
+          text: '호환성 라이브러리',
+          items: [
+            { text: 'set', link: '/reference/compat/object/set' },
+          ],
+        }
       ],
     },
   ];

@@ -138,7 +138,6 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'pick', link: '/reference/object/pick' },
             { text: 'pickBy', link: '/reference/object/pickBy' },
             { text: 'invert', link: '/reference/object/invert' },
-            { text: 'set', link: '/reference/object/set' },
           ],
         },
         {
@@ -166,6 +165,12 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'capitalize', link: '/reference/string/capitalize' },
           ],
         },
+        {
+          text: 'Compatibility Libraries',
+          items: [
+            { text: 'set', link: '/reference/compat/object/set' },
+          ],
+        }
       ],
     },
   ];
