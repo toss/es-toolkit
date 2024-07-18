@@ -1,23 +1,14 @@
-import { delay } from './delay';
-import { TimeoutError } from '../error';
+import { delay } from './delay.ts';
+import { TimeoutError } from '../error/TimeoutError.ts';
 
 /**
- * If it responds later than the specified time, it is treated as a `TimeoutError` error.
+ * Returns a promise that rejects with a `TimeoutError` after a specified delay.
  *
- * This function returns a Promise that resolves after the specified timeout, allowing you to use it
- * with async/await to timeout execution.
- *
- * @param {number} ms - The number of milliseconds to timeout.
- * @returns {Promise<void>} A Promise that resolves after the specified timeout.
- *
- * @example
- * try {
- *   await timeout(1000); // Timeout exception after 1 second
- * } catch (error) {
- *   console.error(error); // Will log 'TimeoutError'
- * }
+ * @param {number} ms - The delay duration in milliseconds.
+ * @returns {Promise<void>} A promise that rejects with a `TimeoutError` after the specified delay.
+ * @throws {TimeoutError} Throws a `TimeoutError` after the specified delay.
  */
-export async function timeout(ms: number): Promise<void> {
+export async function timeout(ms: number): Promise<never> {
   await delay(ms);
   throw new TimeoutError();
 }
