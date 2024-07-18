@@ -10,8 +10,8 @@ Negative indices can also be used, in which case they are calculated from the en
 
 ```typescript
 function fill<T>(array: unknown[], value: T): T[];
-function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
-function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
+function fill<T, U>(array: T[], value: T, start: number): Array<T | U>;
+function fill<T, U>(array: T[], value: T, start: number, end: number): Array<T | U>;
 ```
 
 ### Parameters
