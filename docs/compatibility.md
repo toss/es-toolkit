@@ -55,8 +55,8 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [difference](https://lodash.com/docs/4.17.15#difference)               | 📝                    |
 | [differenceBy](https://lodash.com/docs/4.17.15#differenceBy)           | 📝                    |
 | [differenceWith](https://lodash.com/docs/4.17.15#differenceWith)       | 📝                    |
-| [drop](https://lodash.com/docs/4.17.15#drop)                           | 📝                    |
-| [dropRight](https://lodash.com/docs/4.17.15#dropRight)                 | 📝                    |
+| [drop](https://lodash.com/docs/4.17.15#drop)                           | ✅                    |
+| [dropRight](https://lodash.com/docs/4.17.15#dropRight)                 | ✅                    |
 | [dropRightWhile](https://lodash.com/docs/4.17.15#dropRightWhile)       | 📝                    |
 | [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | 📝                    |
 | [fill](https://lodash.com/docs/4.17.15#fill)                           | 📝                    |
