@@ -1,5 +1,9 @@
 # max
 
+::: info
+This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+:::
+
 Finds the element in an array that has the maximum value.
 
 If the list is empty, returns `undefined`.
