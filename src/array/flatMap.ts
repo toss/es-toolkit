@@ -1,4 +1,4 @@
-import { flatten } from './flatten';
+import { flatten } from './flatten.ts';
 
 /**
  * Maps each element in the array using the iteratee function and flattens the result up to the specified depth.
