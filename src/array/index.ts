@@ -42,6 +42,7 @@ export { xorBy } from './xorBy.ts';
 export { xorWith } from './xorWith.ts';
 export { zip } from './zip.ts';
 export { zipObject } from './zipObject.ts';
+export { zipObjectDeep } from './zipObjectDeep.ts';
 export { zipWith } from './zipWith.ts';
 export { without } from './without.ts';
 export { head } from './head.ts';
