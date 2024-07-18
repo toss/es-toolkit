@@ -1,6 +1,6 @@
 # timeout
 
-지정한 시간 뒤에 `TimeoutError` 에러를 처리해요.
+지정한 시간 뒤에 `TimeoutError` 에러와 함께 reject되는 `Promise`를 반환해요.
 
 이 함수는 특정한 시간 이후에 TimeoutError로 reject되는 Promise를 반환해요. async/await 함수를 사용하는 경우에 함수의 최대 실행 시간을 정할 수 있어요.
 
