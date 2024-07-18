@@ -38,11 +38,11 @@ However, the following are out of scope for `es-toolkit/compat`:
 ::: info
 The following emojis indicate the status of each feature:
 
-- ✅: Completed
-- 📝: In Review
-- ❌: Not Implemented
+- ✅: Completed (The function is fully implemented and has passed all tests with lodash test code.)
+- 📝: In Review (The function is implemented but hasn't been tested with lodash test code yet.)
+- ❌: Not Implemented (The function hasn't been implemented.)
 
-It's worth noting that even if an implementation is labeled as "in review", it may already be under review to ensure 100% feature parity with lodash, and it's possible that it already offers identical functionality.
+Even if a feature is marked "in review," it might already be under review to ensure it matches lodash perfectly, and it could already offer the same functionality.
 :::
 
 ### "Array" method
