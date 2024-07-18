@@ -3,7 +3,7 @@ import { withTimeout } from './withTimeout.ts';
 import { delay } from './delay.ts';
 
 describe('withTimeout', () => {
-  it('returns the result value if a response is received before the specified wait time', () => {
+  it('returns the result value if a response is received before the specified wait time', async () => {
     const result = await withTimeout(async () => {
       await delay(50);
       return 'foo';
