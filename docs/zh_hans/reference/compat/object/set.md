@@ -1,28 +1,28 @@
 # set
 
 ::: info
-This is available in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+此功能在我们的[兼容性库](../../../compatibility.md)中可用，`es-toolkit/compat`。
 :::
 
-Sets the given value at the specified path of the object. If any part of the path does not exist, it will be created.
+在对象的指定路径设置给定值。如果路径的任何部分不存在，将会创建它。
 
-## Signature
+## 签名
 
 ```typescript
 function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: unknown): T
 ```
 
-### Parameters
+### 参数
 
-- `obj` (`T`): The object to modify.
-- `path` (`string | number | symbol | Array<string | number | symbol>`): The path of the property to set.
-- `value` (`unknown`): The value to set.
+- `obj` (`T`): 要修改的对象。
+- `path` (`string | number | symbol | Array<string | number | symbol>`): 要设置的属性路径。
+- `value` (`unknown`): 要设置的值。
 
-### Returns
+### 返回值
 
-(`T`): Returns the modified object. If T is not specified, it defaults to unknown.
+(`T`): 返回修改后的对象。如果未指定 T，默认值为 unknown。
 
-## Examples
+## 示例
 
 ```typescript
 import { set } from 'es-toolkit/compat';

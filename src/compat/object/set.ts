@@ -1,3 +1,6 @@
+import { isIndex } from "../_internal/isIndex";
+import { toPath } from "../_internal/toPath";
+
 /**
  * Sets the value at the specified path of the given object. If any part of the path does not exist, it will be created.
  *
@@ -25,33 +28,29 @@
  * set(obj, 'a.b.c', 4);
  * console.log(obj); // { a: { b: { c: 4 } } }
  */
-export function set<T>(obj: Settable, path: Path, value: any): T {
-  if (obj instanceof Map || obj instanceof Set) {
-    throw new TypeError('Set or Map is not supported');
-  }
-  //TODO: memoize
-  const keys = Array.isArray(path)
+export function set<T>(obj: object, path: PropertyKey | readonly PropertyKey[], value: unknown): T;
+export function set<T extends object>(obj: T, path: PropertyKey | readonly PropertyKey[], value: unknown): T {
+  const resolvedPath = Array.isArray(path)
     ? path
-    : String(path as string)
-        .replace(/\[|\]/g, match => {
-          return match === '[' ? '.' : '';
-        })
-        .split('.');
+    : typeof path === 'string'
+      ? toPath(path)
+      : [path];
 
-  let pointer: any = obj;
+  let current: any = obj;
 
-  for (let i = 0; i < keys.length - 1; i++) {
-    const key = keys[i];
-    const nextKey = keys[i + 1];
-    if (pointer[key] == null || typeof pointer[key] !== 'object') {
-      pointer[key] = /^\d+$/.test(nextKey as string) ? [] : {};
+  for (let i = 0; i < resolvedPath.length - 1; i++) {
+    const key = resolvedPath[i];
+    const nextKey = resolvedPath[i + 1];
+
+    if (current[key] == null) {
+      current[key] = isIndex(nextKey) ? [] : {};
     }
-    pointer = pointer[key];
+
+    current = current[key];
   }
 
-  pointer[keys[keys.length - 1]] = value;
-  return obj as T;
-}
+  const lastKey = resolvedPath[resolvedPath.length - 1];
+  current[lastKey] = value;
 
-type Settable = object | any[];
-type Path = string | number | Array<string | number>;
+  return obj;
+}
