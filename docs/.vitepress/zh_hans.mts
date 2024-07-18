@@ -160,6 +160,12 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'capitalize', link: '/zh_hans/reference/string/capitalize' },
           ],
         },
+        {
+          "text": "兼容性库",
+          "items": [
+            { "text": "set", "link": "/zh_hans/reference/compat/object/set" }
+          ]
+        }
       ],
     },
   ];
