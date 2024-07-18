@@ -1,23 +1,20 @@
 # timeout
 
-If it responds later than the specified time, it is treated as a `TimeoutError` error.
-
-This function returns a Promise that resolves after the specified timeout, allowing you to use it
-with async/await to timeout execution.
+Returns a `Promise` that rejects with a `TimeoutError` after the specified timeout.
 
 ## Signature
 
 ```typescript
-function timeout(ms: number): Promise<void>;
+function timeout(ms: number): Promise<never>;
 ```
 
 ### Parameters
 
-- `ms` (`number`): The number of milliseconds to timeout.
+- `ms` (`number`): The number of milliseconds for the promise to reject with `TimeoutError`.
 
 ### Returns
 
-(`Promise<void>`): A Promise that resolves after the specified timeout.
+(`Promise<never>`): A Promise that rejects after the specified timeout.
 
 ## 예시
 

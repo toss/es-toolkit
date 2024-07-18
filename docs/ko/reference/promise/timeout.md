@@ -5,16 +5,16 @@
 ## 인터페이스
 
 ```typescript
-function timeout(ms: number): Promise<void>;
+function timeout(ms: number): Promise<never>;
 ```
 
 ### 파라미터
 
-- `ms` (`number`): Promise의 최대 실행 값을 지정할 밀리세컨드.
+- `ms` (`number`): `TimeoutError` 에러와 함께 reject될 때까지 걸릴 밀리세컨드.
 
 ### 반환 값
 
-(`Promise<void>`): 실행할 Promise의 반환 값.
+(`Promise<never>`): `TimeoutError`로 reject될 Promise.
 
 ## 예시
 

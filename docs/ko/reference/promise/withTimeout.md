@@ -12,12 +12,12 @@ function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
 
 ### 파라미터
 
-- `run` (`() => Promise<T>`): 실행할 Promise 값.
+- `run` (`() => Promise<T>`): 실행할 비동기 함수.
 - `ms` (`number`): Promise의 최대 실행 값을 지정할 밀리세컨드.
 
 ### 반환 값
 
-(`Promise<T>`): 실행할 Promise의 반환 값.
+(`Promise<T>`): 주어진 비동기 함수가 반환하는 `Promise`.
 
 ## 예시
 
