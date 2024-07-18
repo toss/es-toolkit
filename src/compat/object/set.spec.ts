@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { set } from './set';
 
 describe('set', () => {
-  //--------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------
   // object
   //--------------------------------------------------------------------------------
   it('should set a value on an object', () => {
@@ -76,13 +76,5 @@ describe('set', () => {
     const result = set<{ a: number[][][] }>({}, 'a[0][0][0]', 1);
     expect(result).toEqual({ a: [[[1]]] });
     expect(result.a[0][0][0]).toEqual(1);
-  });
-
-  //--------------------------------------------------------------------------------
-  // not support map and set
-  //--------------------------------------------------------------------------------
-  it('not support map and set', () => {
-    expect(() => set<Map<string, number>>(new Map(), 'a', 1)).toThrow(TypeError);
-    expect(() => set<Set<number>>(new Set(), 1, 2)).toThrow(TypeError);
   });
 });

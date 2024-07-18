@@ -8,17 +8,17 @@ chunk([1, 2, 3, 4], 0);
 // Returns [], which is identical to lodash
 ```
 
-::: warning
-The `es-toolkit/compat` project is currently in beta and under active development, with design principles subject to change.
-:::
-
-To ensure a seamless transition from `es-toolkit` to `lodash`, we're developing `es-toolkit/compat`, a compatibility layer that bridges the gap between the two libraries.
+For maximum compatibility with `lodash`, use `es-toolkit/compat`, a compatibility layer that bridges the gap between the two libraries.
 
 This module is designed to provide an identical API to `lodash`, making it easier to switch between the two libraries.
 
 It's important to note that `es-toolkit/compat` may have a slight performance impact and a larger bundle size compared to the original `es-toolkit`. This module is designed to facilitate a smooth transition and should be replaced with the original `es-toolkit` for optimal performance once the migration is complete.
 
 ## Design Principles
+
+::: info
+The `es-toolkit/compat` project is currently in beta and under active development, with design principles subject to change.
+:::
 
 Our compatibility layer aims to achieve feature parity with 100% accuracy for:
 
