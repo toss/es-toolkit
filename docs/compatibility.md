@@ -51,7 +51,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | ---------------------------------------------------------------------- | --------------------- |
 | [chunk](https://lodash.com/docs/4.17.15#chunk)                         | ✅                    |
 | [compact](https://lodash.com/docs/4.17.15#compact)                     | ✅                    |
-| [concat](https://lodash.com/docs/4.17.15#concat)                       | ❌                    |
+| [concat](https://lodash.com/docs/4.17.15#concat)                       | ✅                    |
 | [difference](https://lodash.com/docs/4.17.15#difference)               | ✅                    |
 | [differenceBy](https://lodash.com/docs/4.17.15#differenceBy)           | 📝                    |
 | [differenceWith](https://lodash.com/docs/4.17.15#differenceWith)       | 📝                    |

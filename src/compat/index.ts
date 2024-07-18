@@ -25,6 +25,7 @@
 export * from '../index.ts';
 
 export { chunk } from './array/chunk.ts';
+export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 
