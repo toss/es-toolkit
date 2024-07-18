@@ -93,6 +93,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorWith', link: '/zh_hans/reference/array/xorWith' },
             { text: 'zip', link: '/zh_hans/reference/array/zip' },
             { text: 'zipObject', link: '/zh_hans/reference/array/zipObject' },
+            { text: 'zipObjectDeep (兼容性)', link: '/zh_hans/reference/compat/array/zipObjectDeep' },
             { text: 'zipWith', link: '/zh_hans/reference/array/zipWith' },
             { text: 'head', link: '/zh_hans/reference/array/head' },
             { text: 'tail', link: '/zh_hans/reference/array/tail' },
@@ -129,11 +130,12 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '对象工具',
           items: [
             { text: 'clone', link: '/zh_hans/reference/object/clone' },
+            { text: 'invert', link: '/zh_hans/reference/object/invert' },
             { text: 'omit', link: '/zh_hans/reference/object/omit' },
             { text: 'omitBy', link: '/zh_hans/reference/object/omitBy' },
             { text: 'pick', link: '/zh_hans/reference/object/pick' },
             { text: 'pickBy', link: '/zh_hans/reference/object/pickBy' },
-            { text: 'invert', link: '/zh_hans/reference/object/invert' },
+            { "text": "set (兼容性)", "link": "/zh_hans/reference/compat/object/set" }
           ],
         },
         {
@@ -159,12 +161,6 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'lowerCase', link: '/zh_hans/reference/string/lowerCase' },
             { text: 'capitalize', link: '/zh_hans/reference/string/capitalize' },
           ],
-        },
-        {
-          "text": "兼容性库",
-          "items": [
-            { "text": "set", "link": "/zh_hans/reference/compat/object/set" }
-          ]
         }
       ],
     },
