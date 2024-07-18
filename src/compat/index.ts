@@ -25,3 +25,5 @@
 export * from '../index.ts';
 
 export { chunk } from './array/chunk.ts';
+export { zipObjectDeep } from './array/zipObjectDeep.ts';
+export { set } from './object/set.ts';

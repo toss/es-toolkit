@@ -60,6 +60,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'dropRightWhile', link: '/reference/array/dropRightWhile' },
             { text: 'fill', link: '/reference/array/fill' },
             { text: 'toFilled', link: '/reference/array/toFilled' },
+            { text: 'flatMap', link: '/reference/array/flatMap' },
             { text: 'flatten', link: '/reference/array/flatten' },
             { text: 'flattenDeep', link: '/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
@@ -96,6 +97,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorWith', link: '/reference/array/xorWith' },
             { text: 'zip', link: '/reference/array/zip' },
             { text: 'zipObject', link: '/reference/array/zipObject' },
+            { text: 'zipObjectDeep (compat)', link: '/reference/compat/array/zipObjectDeep' },
             { text: 'zipWith', link: '/reference/array/zipWith' },
             { text: 'head', link: '/reference/array/head' },
             { text: 'tail', link: '/reference/array/tail' },
@@ -132,11 +134,12 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Object Utilities',
           items: [
             { text: 'clone', link: '/reference/object/clone' },
+            { text: 'invert', link: '/reference/object/invert' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
             { text: 'pickBy', link: '/reference/object/pickBy' },
-            { text: 'invert', link: '/reference/object/invert' },
+            { text: 'set (compat)', link: '/reference/compat/object/set' },
           ],
         },
         {
@@ -156,12 +159,20 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'String Utilities',
           items: [
+            { text: 'camelCase', link: '/reference/string/camelCase' },
             { text: 'snakeCase', link: '/reference/string/snakeCase' },
             { text: 'kebabCase', link: '/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/reference/string/lowerCase' },
+            { text: 'startCase', link: '/reference/string/startCase' },
             { text: 'capitalize', link: '/reference/string/capitalize' },
           ],
         },
+        {
+          text: 'Compatibility Libraries',
+          items: [
+
+          ],
+        }
       ],
     },
   ];

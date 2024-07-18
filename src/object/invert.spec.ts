@@ -27,4 +27,20 @@ describe('invert', () => {
   it('should handle objects with duplicate values by keeping the last key', () => {
     expect(invert({ a: 1, b: 1, c: 2 })).toEqual({ 1: 'b', 2: 'c' });
   });
+
+  it('should work with values that shadow keys on `Object.prototype`', () => {
+    const object = { a: 'hasOwnProperty', b: 'constructor' };
+    expect(invert(object)).toEqual({ hasOwnProperty: 'a', constructor: 'b' });
+  });
+
+  it('should work with an object that has a `length` property', () => {
+    const object = { 0: 'a', 1: 'b', length: 2 };
+    expect(invert(object)).toEqual({ a: '0', b: '1', 2: 'length' });
+  });
+
+  it('should not invert inherited properties', () => {
+    const object = Object.create({ a: 1 });
+    object.b = 2;
+    expect(invert(object)).toEqual({ 2: 'b' });
+  });
 });

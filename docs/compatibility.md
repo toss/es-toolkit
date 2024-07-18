@@ -8,17 +8,17 @@ chunk([1, 2, 3, 4], 0);
 // Returns [], which is identical to lodash
 ```
 
-::: warning
-The `es-toolkit/compat` project is currently in beta and under active development, with design principles subject to change.
-:::
-
-To ensure a seamless transition from `es-toolkit` to `lodash`, we're developing `es-toolkit/compat`, a compatibility layer that bridges the gap between the two libraries.
+For maximum compatibility with `lodash`, use `es-toolkit/compat`, a compatibility layer that bridges the gap between the two libraries.
 
 This module is designed to provide an identical API to `lodash`, making it easier to switch between the two libraries.
 
 It's important to note that `es-toolkit/compat` may have a slight performance impact and a larger bundle size compared to the original `es-toolkit`. This module is designed to facilitate a smooth transition and should be replaced with the original `es-toolkit` for optimal performance once the migration is complete.
 
 ## Design Principles
+
+::: info
+The `es-toolkit/compat` project is currently in beta and under active development, with design principles subject to change.
+:::
 
 Our compatibility layer aims to achieve feature parity with 100% accuracy for:
 
@@ -109,7 +109,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [xorWith](https://lodash.com/docs/4.17.15#xorWith)                     | 📝                    |
 | [zip](https://lodash.com/docs/4.17.15#zip)                             | 📝                    |
 | [zipObject](https://lodash.com/docs/4.17.15#zipObject)                 | 📝                    |
-| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ❌                    |
+| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ✅                    |
 | [zipWith](https://lodash.com/docs/4.17.15#zipWith)                     | 📝                    |
 
 ### "Collection" methods
@@ -304,7 +304,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝                    |
 | [pickBy](https://lodash.com/docs/4.17.15#pickBy)             | 📝                    |
 | [result](https://lodash.com/docs/4.17.15#result)             | ❌                    |
-| [set](https://lodash.com/docs/4.17.15#set)                   | ❌                    |
+| [set](https://lodash.com/docs/4.17.15#set)                   | ✅                    |
 | [setWith](https://lodash.com/docs/4.17.15#setWith)           | ❌                    |
 | [toPairs](https://lodash.com/docs/4.17.15#toPairs)           | ❌                    |
 | [toPairsIn](https://lodash.com/docs/4.17.15#toPairsIn)       | ❌                    |
