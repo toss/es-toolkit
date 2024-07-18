@@ -25,7 +25,7 @@ commands:
 jobs:
   lint:
     docker:
-      - image: cimg/node:18.20.4
+      - image: cimg/node:20.12
     steps:
       - checkout
       - setup
@@ -34,7 +34,7 @@ jobs:
           command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$|.tsx$)")
   typecheck:
     docker:
-      - image: cimg/node:18.20.4
+      - image: cimg/node:20.12
     steps:
       - checkout
       - setup
@@ -43,7 +43,7 @@ jobs:
           command: yarn tsc --noEmit
   pre-pack:
     docker:
-      - image: cimg/node:18.20.4
+      - image: cimg/node:20.12
     steps:
       - checkout
       - setup
@@ -52,7 +52,7 @@ jobs:
           command: yarn build
   check-peer:
     docker:
-      - image: cimg/node:18.20.4
+      - image: cimg/node:20.12
     steps:
       - checkout
       - setup
