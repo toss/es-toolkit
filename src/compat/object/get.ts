@@ -1,6 +1,6 @@
 import { isDeepKey } from "../_internal/isDeepKey.ts";
 import { toPath } from "../_internal/toPath.ts";
-import type { Get } from "./get.types";
+import type { Get } from "./get.types.ts";
 
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
