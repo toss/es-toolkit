@@ -1,22 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { withTimeout } from './withTimeout.ts';
+import { delay } from './delay.ts';
 
 describe('withTimeout', () => {
   it('returns the result value if a response is received before the specified wait time', () => {
-    expect(
-      withTimeout(
-        () =>
-          new Promise<string>(resolve => {
-            setTimeout(() => {
-              resolve('foo');
-            }, 50);
-          }),
-        100
-      )
-    ).resolves.toEqual('foo');
+    const result = await withTimeout(async () => {
+      await delay(50);
+      return 'foo';
+    }, 100);
+
+    expect(result).toEqual('foo');
   });
 
   it('returns a reason if a response is received after the specified wait time', () => {
-    expect(withTimeout(() => new Promise(() => {}), 50)).rejects.toThrow('The operation was timed out');
+    expect(withTimeout(() => delay(100), 50)).rejects.toThrow('The operation was timed out');
   });
 });
