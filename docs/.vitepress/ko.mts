@@ -149,6 +149,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'pick', link: '/ko/reference/object/pick' },
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
             { text: 'invert', link: '/ko/reference/object/invert' },
+            { text: 'set', link: '/ko/reference/object/set' },
           ],
         },
         {
