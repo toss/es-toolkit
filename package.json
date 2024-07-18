@@ -116,6 +116,16 @@
           "default": "./dist/string/index.js"
         }
       },
+      "./compat": {
+        "import": {
+          "types": "./dist/compat/index.d.mts",
+          "default": "./dist/compat/index.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/index.d.ts",
+          "default": "./dist/compat/index.js"
+        }
+      },
       "./package.json": "./package.json"
     }
   },
