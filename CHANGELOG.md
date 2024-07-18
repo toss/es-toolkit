@@ -1,5 +1,12 @@
 # es-toolkit Changelog
 
+## Version v1.12.0
+
+Released on July 19th, 2024.
+
+- Fixed a bug where `es-toolkit/compat` was not available in modern Node.js environments.
+- Added support for [max](https://es-toolkit.slash.page/reference/compat/math/max.html) and [min](https://es-toolkit.slash.page/reference/compat/math/min.html) in our compatibility layer `es-toolkit/compat`. ([e1e6e38](https://github.com/toss/es-toolkit/commit/e1e6e38206750fb90f5b99cace9196635288e21c))
+
 ## Version v1.11.0
 
 Released on July 18th, 2024.
