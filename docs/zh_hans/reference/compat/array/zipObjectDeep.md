@@ -1,7 +1,7 @@
 # zipObjectDeep
 
 ::: info
-这与我们的[兼容库](../../../compatibility.md)中的lodash完全兼容，`es-toolkit/compat`。
+此函数与 lodash 完全兼容。您可以在我们的[兼容性库](../../../compatibility.md)中找到它，`es-toolkit/compat`。
 :::
 
 给定路径和值的数组，创建一个深层嵌套的对象。

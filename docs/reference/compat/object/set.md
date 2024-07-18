@@ -1,7 +1,7 @@
 # set
 
 ::: info
-This is fully compatible with lodash in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
 :::
 
 Sets the given value at the specified path of the object. If any part of the path does not exist, it will be created.

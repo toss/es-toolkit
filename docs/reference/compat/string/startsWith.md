@@ -1,7 +1,7 @@
 # startsWith
 
 ::: info
-This is fully compatible with lodash in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
 :::
 
 Checks if a string contains another string at the beginning of the string.
