@@ -157,7 +157,11 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise Utilities',
-          items: [{ text: 'delay', link: '/reference/promise/delay' }],
+          items: [
+            { text: 'delay', link: '/reference/promise/delay' },
+            { text: 'timeout', link: '/reference/promise/timeout' },
+            { text: 'withTimeout', link: '/reference/promise/withTimeout' },
+          ],
         },
         {
           text: 'String Utilities',
@@ -172,12 +176,6 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'endsWith (compat)', link: '/reference/compat/string/endsWith' },
           ],
         },
-        {
-          text: 'Compatibility Libraries',
-          items: [
-
-          ],
-        }
       ],
     },
   ];

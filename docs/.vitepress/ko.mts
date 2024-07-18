@@ -171,7 +171,11 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise',
-          items: [{ text: 'delay', link: '/ko/reference/promise/delay' }],
+          items: [
+            { text: 'delay', link: '/ko/reference/promise/delay' },
+            { text: 'timeout', link: '/ko/reference/promise/timeout' },
+            { text: 'withTimeout', link: '/ko/reference/promise/withTimeout' },
+          ],
         },
         {
           text: '문자열',

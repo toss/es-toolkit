@@ -153,7 +153,11 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise 工具',
-          items: [{ text: 'delay', link: '/zh_hans/reference/promise/delay' }],
+          items: [
+            { text: 'delay', link: '/zh_hans/reference/promise/delay' },
+            { text: 'timeout', link: '/zh_hans/reference/promise/timeout' },
+            { text: 'withTimeout', link: '/zh_hans/reference/promise/withTimeout' },
+          ],
         },
         {
           text: '字符串工具',
