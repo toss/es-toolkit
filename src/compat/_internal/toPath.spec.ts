@@ -32,8 +32,18 @@ describe("toPath function", () => {
     expect(result).toEqual([]);
   });
 
+  it("handles complex paths correctly", () => {
+    const result = toPath('a[-1.23]["[\\"b\\"]"].c[\'[\\\'d\\\']\'][\ne\n][f].g');
+    expect(result).toEqual(['a', '-1.23', '["b"]', 'c', "['d']", '\ne\n', 'f', 'g']);
+  });
+
   it("handles complex input with leading dot correctly", () => {
     const result = toPath('.a[b].c.d[e]["f.g"].h');
     expect(result).toEqual(["", "a", "b", "c", "d", "e", "f.g", "h"]);
+  });
+
+  it("handles empty brackets correctly", () => {
+    const result = toPath("a[].b");
+    expect(result).toEqual(['a', '', 'b']);
   });
 });

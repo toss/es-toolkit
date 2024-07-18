@@ -26,6 +26,7 @@ export * from '../index.ts';
 
 export { chunk } from './array/chunk.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
+export { get } from './object/get.ts';
 export { set } from './object/set.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';

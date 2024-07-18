@@ -135,7 +135,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'omitBy', link: '/zh_hans/reference/object/omitBy' },
             { text: 'pick', link: '/zh_hans/reference/object/pick' },
             { text: 'pickBy', link: '/zh_hans/reference/object/pickBy' },
-            { "text": "set (兼容性)", "link": "/zh_hans/reference/compat/object/set" }
+            { text: 'get (兼容性)', link: '/zh_hans/reference/compat/object/get' },
+            { text: 'set (兼容性)', link: '/zh_hans/reference/compat/object/set' },
           ],
         },
         {

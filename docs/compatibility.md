@@ -288,7 +288,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [forOwnRight](https://lodash.com/docs/4.17.15#forOwnRight)   | ❌                    |
 | [functions](https://lodash.com/docs/4.17.15#functions)       | ❌                    |
 | [functionsIn](https://lodash.com/docs/4.17.15#functionsIn)   | ❌                    |
-| [get](https://lodash.com/docs/4.17.15#get)                   | ❌                    |
+| [get](https://lodash.com/docs/4.17.15#get)                   | ✅                    |
 | [has](https://lodash.com/docs/4.17.15#has)                   | ❌                    |
 | [hasIn](https://lodash.com/docs/4.17.15#hasIn)               | ❌                    |
 | [invert](https://lodash.com/docs/4.17.15#invert)             | 📝                    |
