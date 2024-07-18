@@ -92,7 +92,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [sortedLastIndexOf](https://lodash.com/docs/4.17.15#sortedLastIndexOf) | No support            |
 | [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)               | No support            |
 | [sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)           | No support            |
-| [tail](https://lodash.com/docs/4.17.15#tail)                           | 📝                    |
+| [tail](https://lodash.com/docs/4.17.15#tail)                           | ✅                    |
 | [take](https://lodash.com/docs/4.17.15#take)                           | 📝                    |
 | [takeRight](https://lodash.com/docs/4.17.15#takeRight)                 | 📝                    |
 | [takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)       | 📝                    |
