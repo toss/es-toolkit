@@ -109,7 +109,7 @@ chunk([1, 2, 3, 4], 0);
 | [xorWith](https://lodash.com/docs/4.17.15#xorWith)                     | 📝         |
 | [zip](https://lodash.com/docs/4.17.15#zip)                             | 📝         |
 | [zipObject](https://lodash.com/docs/4.17.15#zipObject)                 | 📝         |
-| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ❌         |
+| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ✅         |
 | [zipWith](https://lodash.com/docs/4.17.15#zipWith)                     | 📝         |
 
 ### "Collection" 工具
@@ -304,7 +304,7 @@ chunk([1, 2, 3, 4], 0);
 | [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝       |
 | [pickBy](https://lodash.com/docs/4.17.15#pickBy)             | 📝       |
 | [result](https://lodash.com/docs/4.17.15#result)             | ❌       |
-| [set](https://lodash.com/docs/4.17.15#set)                   | ❌       |
+| [set](https://lodash.com/docs/4.17.15#set)                   | ✅       |
 | [setWith](https://lodash.com/docs/4.17.15#setWith)           | ❌       |
 | [toPairs](https://lodash.com/docs/4.17.15#toPairs)           | ❌       |
 | [toPairsIn](https://lodash.com/docs/4.17.15#toPairsIn)       | ❌       |
