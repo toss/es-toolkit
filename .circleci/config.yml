@@ -61,7 +61,7 @@ jobs:
           command: ./.scripts/check-peer.sh || (echo "Peer Dependency 오류가 발생했습니다."; exit -1)
   test:
     docker:
-      - image: cimg/node:20.12
+      - image: cimg/node:18.20.4
     steps:
       - checkout
       - setup
