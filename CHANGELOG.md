@@ -1,5 +1,38 @@
 # es-toolkit Changelog
 
+## Version v1.11.0
+
+Released on July 18th, 2024.
+
+### Introducing `es-toolkit/compat`
+
+We're introducing `es-toolkit/compat`, a new module designed as a drop-in replacement for lodash. It replicates lodash's API, making it easier to switch between the two libraries.
+
+`es-toolkit/compat` is undergoing rigorous testing using real `lodash` test cases. Initial benchmarks suggest it's typically 5% slower and increases bundle size by 10% compared to the original `es-toolkit`.
+
+This module is intended to facilitate a smooth transition and should be replaced with the original `es-toolkit` for optimal performance once migration is complete.
+
+For more information, see our [compatibility documentation](https://es-toolkit.slash.page/compatibility.html).
+
+### Features 
+
+- Added support for [get](https://es-toolkit.slash.page/reference/compat/object/get.html) and [set](https://es-toolkit.slash.page/reference/compat/object/set.html) in our compatibility layer `es-toolkit/compat`. (https://github.com/toss/es-toolkit/pull/232, https://github.com/toss/es-toolkit/pull/223)
+- Added support for [zipObjectDeep](https://es-toolkit.slash.page/reference/compat/array/zipObjectDeep.html) in our compatibility layer `es-toolkit/compat`. (https://github.com/toss/es-toolkit/pull/150)
+- Added support for [flatMap](https://es-toolkit.slash.page/reference/compat/array/flatMap.html). (https://github.com/toss/es-toolkit/pull/209)
+- Added support for [startCase](https://es-toolkit.slash.page/reference/string/startCase.html), [startsWith](https://es-toolkit.slash.page/reference/string/startsWith.html), and [endsWith](https://es-toolkit.slash.page/reference/string/endsWith.html). (https://github.com/toss/es-toolkit/pull/224).
+- Added support for [withTimeout](https://es-toolkit.slash.page/reference/promise/withTimeout.html). (https://github.com/toss/es-toolkit/pull/210)
+
+### Bug fixes
+
+- Fixed `drop` and `dropRight` incorrectly accepting negative integers. (https://github.com/toss/es-toolkit/pull/218)
+- Fixed `invert` not to invert inherited properties. (https://github.com/toss/es-toolkit/pull/221)
+
+### Performance Improvements
+
+- Improved performance for `dropRightWhile`. (https://github.com/toss/es-toolkit/pull/220)
+
+
+
 ## Version v1.10.1
 
 Released on July 15th, 2024.
