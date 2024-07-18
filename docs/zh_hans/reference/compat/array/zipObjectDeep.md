@@ -47,7 +47,7 @@ const result = zipObjectDeep(paths, values);
 ## 性能对比
 
 
-|                   | [包大小](../../bundle-size.md) | [运行时性能](../../performance.md) |
+|                   | [包大小](../../../bundle-size.md) | [运行时性能](../../../performance.md) |
 | ----------------- | ------------------------------ | ---------------------------------- |
 | es-toolkit/compat | 938 字节 (小 88%)              | 1,102,767 次 (慢 25%)              |
 | lodash-es         | 7,338 字节                     | 1,476,660 次                       |
