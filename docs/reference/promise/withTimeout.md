@@ -1,9 +1,9 @@
 # withTimeout
 
-If it responds later than the specified time, it is treated as a `TimeoutError` error.
+Executes an async function and enforces a timeout. 
 
-This function returns a Promise that resolves after the specified timeout, allowing you to use it
-with async/await to timeout execution.
+If the promise does not resolve within the specified time,
+the timeout will trigger and the returned promise will be rejected.
 
 ## Signature
 
@@ -13,12 +13,12 @@ function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
 
 ### Parameters
 
-- `run` (`() => Promise<T>`): The type of promise value.
-- `ms` (`number`): The number of milliseconds to timeout.
+- `run` (`() => Promise<T>`): A function that returns a promise to be executed.
+- `ms` (`number`): The timeout duration in milliseconds.
 
 ### Returns
 
-(`Promise<T>`): A Promise that resolves after the specified timeout.
+(`Promise<T>`): A promise that resolves with the result of the `run` function or rejects if the timeout is reached.
 
 ## Examples
 
