@@ -1,1 +1,1 @@
-export const falsey = [, null, undefined, false, 0, NaN, ''];
+export const falsey: unknown[] = [, null, undefined, false, 0, NaN, ''];

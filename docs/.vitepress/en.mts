@@ -74,6 +74,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'keyBy', link: '/reference/array/keyBy' },
             { text: 'minBy', link: '/reference/array/minBy' },
             { text: 'maxBy', link: '/reference/array/maxBy' },
+            { text: 'min (compat)', link: '/reference/compat/array/min' },
+            { text: 'max (compat)', link: '/reference/compat/array/max' },
             { text: 'orderBy', link: '/reference/array/orderBy' },
             { text: 'partition', link: '/reference/array/partition' },
             { text: 'sample', link: '/reference/array/sample' },

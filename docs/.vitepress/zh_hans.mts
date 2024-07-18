@@ -70,6 +70,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'keyBy', link: '/zh_hans/reference/array/keyBy' },
             { text: 'minBy', link: '/zh_hans/reference/array/minBy' },
             { text: 'maxBy', link: '/zh_hans/reference/array/maxBy' },
+            { text: 'min (兼容性)', link: '/zh_hans/reference/compat/array/min' },
+            { text: 'max (兼容性)', link: '/zh_hans/reference/compat/array/max' },
             { text: 'orderBy', link: '/zh_hans/reference/array/orderBy' },
             { text: 'partition', link: '/zh_hans/reference/array/partition' },
             { text: 'sample', link: '/zh_hans/reference/array/sample' },

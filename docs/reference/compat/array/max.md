@@ -1,0 +1,26 @@
+# max
+
+Finds the element in an array that has the maximum value.
+
+If the list is empty, returns `undefined`.
+
+## Signature
+
+```typescript
+function max<T>(items: T[]): T;
+```
+
+### Parameters
+
+- `items` (`T[]`): The array of elements to search.
+
+### Returns
+
+(`T`): The element with the maximum value.
+
+### Example
+
+```typescript
+max([1, 2, 3]); // Returns: 3
+max(['a', 'b']); // Returns: 'b'
+```

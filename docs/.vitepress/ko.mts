@@ -82,6 +82,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'keyBy', link: '/ko/reference/array/keyBy' },
             { text: 'minBy', link: '/ko/reference/array/minBy' },
             { text: 'maxBy', link: '/ko/reference/array/maxBy' },
+            { text: 'min (호환성)', link: '/ko/reference/compat/array/min' },
+            { text: 'max (호환성)', link: '/ko/reference/compat/array/max' },
             { text: 'orderBy', link: '/ko/reference/array/orderBy' },
             { text: 'partition', link: '/ko/reference/array/partition' },
             { text: 'sample', link: '/ko/reference/array/sample' },

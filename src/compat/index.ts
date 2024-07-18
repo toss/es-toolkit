@@ -30,3 +30,5 @@ export { get } from './object/get.ts';
 export { set } from './object/set.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
+export { max } from './math/max.ts';
+export { min } from './math/min.ts';
