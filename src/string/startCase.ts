@@ -1,4 +1,4 @@
-import { getWords } from './_internal/getWords';
+import { getWords } from './_internal/getWords.ts';
 
 /**
  * Converts the first character of each word in a string to uppercase and the remaining characters to lowercase.

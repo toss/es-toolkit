@@ -45,3 +45,10 @@ const values = [1, 2];
 const result = zipObjectDeep(paths, values);
 // result will be { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }
 ```
+
+## Performance Comparison
+
+|                   | [Bundle Size](../../bundle-size.md) | [Performance](../../performance.md) |
+| ----------------- | ----------------------------------- | ----------------------------------- |
+| es-toolkit/compat | 938 bytes (88% smaller)             | 1,102,767 times (25% slower)        |
+| lodash-es         | 7,338 bytes                         | 1,476,660 times                     |
