@@ -152,8 +152,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
-            { text: 'get (호환성)', link: '/reference/compat/object/get' },
-            { text: 'set (호환성)', link: '/reference/compat/object/set' },
+            { text: 'get (호환성)', link: '/ko/reference/compat/object/get' },
+            { text: 'set (호환성)', link: '/ko/reference/compat/object/set' },
           ],
         },
         {
@@ -189,7 +189,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'startsWith (호환성)', link: '/ko/reference/compat/string/startsWith' },
             { text: 'endsWith (호환성)', link: '/ko/reference/compat/string/endsWith' },
           ],
-        }
+        },
       ],
     },
   ];
