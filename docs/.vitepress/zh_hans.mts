@@ -160,6 +160,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'kebabCase', link: '/zh_hans/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/zh_hans/reference/string/lowerCase' },
             { text: 'capitalize', link: '/zh_hans/reference/string/capitalize' },
+            { text: 'startsWith (兼容性)', link: '/zh_hans/reference/string/startsWith' },
+            { text: 'endsWith (兼容性)', link: '/zh_hans/reference/string/endsWith' },
           ],
         }
       ],
