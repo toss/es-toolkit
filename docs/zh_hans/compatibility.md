@@ -248,11 +248,11 @@ chunk([1, 2, 3, 4], 0);
 | [ceil](https://lodash.com/docs/4.17.15#ceil)         | ❌       |
 | [divide](https://lodash.com/docs/4.17.15#divide)     | ❌       |
 | [floor](https://lodash.com/docs/4.17.15#floor)       | ❌       |
-| [max](https://lodash.com/docs/4.17.15#max)           | ❌       |
+| [max](https://lodash.com/docs/4.17.15#max)           | ✅       |
 | [maxBy](https://lodash.com/docs/4.17.15#maxBy)       | 📝       |
 | [mean](https://lodash.com/docs/4.17.15#mean)         | 📝       |
 | [meanBy](https://lodash.com/docs/4.17.15#meanBy)     | 📝       |
-| [min](https://lodash.com/docs/4.17.15#min)           | 📝       |
+| [min](https://lodash.com/docs/4.17.15#min)           | ✅       |
 | [minBy](https://lodash.com/docs/4.17.15#minBy)       | 📝       |
 | [multiply](https://lodash.com/docs/4.17.15#multiply) | ❌       |
 | [round](https://lodash.com/docs/4.17.15#round)       | ❌       |
