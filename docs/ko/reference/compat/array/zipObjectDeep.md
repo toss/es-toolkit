@@ -46,7 +46,7 @@ const result = zipObjectDeep(paths, values);
 
 ## 성능 비교
 
-|                   | [번들 사이즈](../../bundle-size.md) | [성능](../../performance.md) |
+|                   | [번들 사이즈](../../../bundle-size.md) | [성능](../../../performance.md) |
 | ----------------- | ----------------------------------- | ---------------------------- |
 | es-toolkit/compat | 938 바이트 (88% 작음)               | 1,102,767 회 (25% 빠름)      |
 | lodash-es         | 7,338 바이트                        | 1,476,660 회                 |

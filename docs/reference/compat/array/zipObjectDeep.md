@@ -48,7 +48,7 @@ const result = zipObjectDeep(paths, values);
 
 ## Performance Comparison
 
-|                   | [Bundle Size](../../bundle-size.md) | [Performance](../../performance.md) |
+|                   | [Bundle Size](../../../bundle-size.md) | [Performance](../../../performance.md) |
 | ----------------- | ----------------------------------- | ----------------------------------- |
 | es-toolkit/compat | 938 bytes (88% smaller)             | 1,102,767 times (25% slower)        |
 | lodash-es         | 7,338 bytes                         | 1,476,660 times                     |
