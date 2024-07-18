@@ -1,15 +1,16 @@
-import { timeout } from './timeout';
+import { timeout } from './timeout.ts';
 
 /**
- * If it responds later than the specified time, it is treated as a `TimeoutError` error.
+ * Executes an async function and enforces a timeout. 
+ * 
+ * If the promise does not resolve within the specified time,
+ * the timeout will trigger and the returned promise will be rejected.
  *
- * This function returns a Promise that resolves after the specified timeout, allowing you to use it
- * with async/await to timeout execution.
  *
- * @template T The type of promise run.
- * @param {T} run - The type of promise run.
- * @param {number} ms - The number of milliseconds to timeout.
- * @returns {Promise<Awaited<T>>} A Promise that resolves after the specified timeout.
+ * @template T 
+ * @param {() => Promise<T>} run - A function that returns a promise to be executed.
+ * @param {number} ms - The timeout duration in milliseconds.
+ * @returns {Promise<T>} A promise that resolves with the result of the `run` function or rejects if the timeout is reached.
  *
  * @example
  * try {
