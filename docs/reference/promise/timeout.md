@@ -1,4 +1,4 @@
-# withTimeout
+# timeout
 
 If it responds later than the specified time, it is treated as a `TimeoutError` error.
 
@@ -8,25 +8,24 @@ with async/await to timeout execution.
 ## Signature
 
 ```typescript
-function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
+function timeout(ms: number): Promise<void>;
 ```
 
 ### Parameters
 
-- `run` (`() => Promise<T>`): The type of promise value.
 - `ms` (`number`): The number of milliseconds to timeout.
 
 ### Returns
 
-(`Promise<T>`): A Promise that resolves after the specified timeout.
+(`Promise<void>`): A Promise that resolves after the specified timeout.
 
-## Examples
+## 예시
 
-### Basic Usage
+### 기본 사용법
 
 ```typescript
 try {
-  await withTimeout(() => new Promise(() => {}), 1000); // Timeout exception after 1 second
+  await timeout(1000); // Timeout exception after 1 second
 } catch (error) {
   console.error(error); // Will log 'The operation was timed out'
 }

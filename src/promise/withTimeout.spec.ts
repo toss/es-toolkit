@@ -1,7 +1,7 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { withTimeout } from './withTimeout.ts';
 
-describe('timeout', () => {
+describe('withTimeout', () => {
   it('returns the result value if a response is received before the specified wait time', () => {
     expect(
       withTimeout(
@@ -18,43 +18,5 @@ describe('timeout', () => {
 
   it('returns a reason if a response is received after the specified wait time', () => {
     expect(withTimeout(() => new Promise(() => {}), 50)).rejects.toThrow('The operation was timed out');
-  });
-
-  it('should cancel the timeout if aborted via AbortSignal', () => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    setTimeout(() => controller.abort(), 50);
-
-    expect(withTimeout(() => new Promise(() => {}), 100, { signal })).rejects.toThrow('The operation was aborted');
-  });
-
-  it('should not call the timeout if it is already aborted by AbortSignal', async () => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    const spy = vi.spyOn(global, 'setTimeout');
-
-    controller.abort();
-
-    await expect(withTimeout(() => new Promise(() => {}), 100, { signal })).rejects.toThrow(
-      'The operation was aborted'
-    );
-
-    expect(spy).not.toHaveBeenCalled();
-    spy.mockRestore();
-  });
-
-  it('should clear timeout when aborted by AbortSignal', async () => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    const spy = vi.spyOn(global, 'clearTimeout');
-    const promise = withTimeout(() => new Promise(() => {}), 100, { signal });
-
-    controller.abort();
-
-    await expect(promise).rejects.toThrow('The operation was aborted');
-
-    expect(spy).toHaveBeenCalled();
-    spy.mockRestore();
   });
 });

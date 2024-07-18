@@ -1,4 +1,4 @@
-# withTimeout
+# timeout
 
 如果响应时间晚于指定时间， 则将其视为 `TimeoutError`错误。
 
@@ -7,12 +7,11 @@
 ## 签名
 
 ```typescript
-function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
+function timeout(ms: number): Promise<void>;
 ```
 
 ### 参数
 
-- `run` (`() => Promise<T>`): 要执行的 Promise 值。
 - `ms` (`number`): 指定 Promise 的最大执行值的毫秒。
 
 ### 返回值
@@ -25,7 +24,7 @@ function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
 
 ```typescript
 try {
-  await withTimeout(() => new Promise(() => {}), 1000); // 代码时间最长为 1秒
+  await timeout(1000); // 代码时间最长为 1秒
 } catch (error) {
   console.error(error); // 将会输出 'The operation was timed out'
 }
