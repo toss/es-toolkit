@@ -48,7 +48,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | Function Name                                                          | Implementation Status |
 | ---------------------------------------------------------------------- | --------------------- |
 | [chunk](https://lodash.com/docs/4.17.15#chunk)                         | ✅                    |
-| [compact](https://lodash.com/docs/4.17.15#compact)                     | 📝                    |
+| [compact](https://lodash.com/docs/4.17.15#compact)                     | ✅                    |
 | [concat](https://lodash.com/docs/4.17.15#concat)                       | ❌                    |
 | [difference](https://lodash.com/docs/4.17.15#difference)               | 📝                    |
 | [differenceBy](https://lodash.com/docs/4.17.15#differenceBy)           | 📝                    |

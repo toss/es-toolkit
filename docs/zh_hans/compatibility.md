@@ -48,7 +48,7 @@ chunk([1, 2, 3, 4], 0);
 | 函数名称                                                               | 实现状态   |
 | ---------------------------------------------------------------------- | ---------- |
 | [chunk](https://lodash.com/docs/4.17.15#chunk)                         | ✅         |
-| [compact](https://lodash.com/docs/4.17.15#compact)                     | 📝         |
+| [compact](https://lodash.com/docs/4.17.15#compact)                     | ✅         |
 | [concat](https://lodash.com/docs/4.17.15#concat)                       | ❌         |
 | [difference](https://lodash.com/docs/4.17.15#difference)               | 📝         |
 | [differenceBy](https://lodash.com/docs/4.17.15#differenceBy)           | 📝         |
