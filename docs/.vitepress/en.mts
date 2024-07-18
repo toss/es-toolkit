@@ -60,6 +60,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'dropRightWhile', link: '/reference/array/dropRightWhile' },
             { text: 'fill', link: '/reference/array/fill' },
             { text: 'toFilled', link: '/reference/array/toFilled' },
+            { text: 'flatMap', link: '/reference/array/flatMap' },
             { text: 'flatten', link: '/reference/array/flatten' },
             { text: 'flattenDeep', link: '/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
@@ -156,12 +157,20 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'String Utilities',
           items: [
+            { text: 'camelCase', link: '/reference/string/camelCase' },
             { text: 'snakeCase', link: '/reference/string/snakeCase' },
             { text: 'kebabCase', link: '/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/reference/string/lowerCase' },
+            { text: 'startCase', link: '/reference/string/startCase' },
             { text: 'capitalize', link: '/reference/string/capitalize' },
           ],
         },
+        {
+          text: 'Compatibility Libraries',
+          items: [
+            { text: 'set', link: '/reference/compat/object/set' },
+          ],
+        }
       ],
     },
   ];
