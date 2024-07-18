@@ -12,12 +12,14 @@ For maximum compatibility with `lodash`, use `es-toolkit/compat`, a compatibilit
 
 This module is designed to provide an identical API to `lodash`, making it easier to switch between the two libraries.
 
+`es-toolkit/compat` has been thoroughly tested with real test cases from `lodash`.
+
 It's important to note that `es-toolkit/compat` may have a slight performance impact and a larger bundle size compared to the original `es-toolkit`. This module is designed to facilitate a smooth transition and should be replaced with the original `es-toolkit` for optimal performance once the migration is complete.
 
 ## Design Principles
 
 ::: info
-The `es-toolkit/compat` project is currently in beta and under active development, with design principles subject to change.
+Design principles are subject to change.
 :::
 
 Our compatibility layer aims to achieve feature parity with 100% accuracy for:
