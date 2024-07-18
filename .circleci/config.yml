@@ -25,7 +25,7 @@ commands:
 jobs:
   lint:
     docker:
-      - image: cimg/node:20.12
+      - image: cimg/node:18.20.4
     steps:
       - checkout
       - setup
@@ -34,7 +34,7 @@ jobs:
           command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$|.tsx$)")
   typecheck:
     docker:
-      - image: cimg/node:20.12
+      - image: cimg/node:18.20.4
     steps:
       - checkout
       - setup
@@ -43,7 +43,7 @@ jobs:
           command: yarn tsc --noEmit
   pre-pack:
     docker:
-      - image: cimg/node:20.12
+      - image: cimg/node:18.20.4
     steps:
       - checkout
       - setup
@@ -52,7 +52,7 @@ jobs:
           command: yarn build
   check-peer:
     docker:
-      - image: cimg/node:20.12
+      - image: cimg/node:18.20.4
     steps:
       - checkout
       - setup
@@ -61,7 +61,7 @@ jobs:
           command: ./.scripts/check-peer.sh || (echo "Peer Dependency 오류가 발생했습니다."; exit -1)
   test:
     docker:
-      - image: cimg/node:20.12
+      - image: cimg/node:18.20.4
     steps:
       - checkout
       - setup
