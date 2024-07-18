@@ -5,7 +5,7 @@
  * start index up to the end index (non-inclusive). If the start or end indices are not provided, it defaults to filling the
  * entire array.
  *
- * @param {Array<T | U>} arr - The array to fill.
+ * @param {Array<T | U>} array - The array to fill.
  * @param {U} value - The value to fill the array with.
  * @param {number} [start=0] - The start position. Defaults to 0.
  * @param {number} [end=arr.length] - The end position. Defaults to the array's length.
@@ -25,17 +25,17 @@
  * const result = fill(array, '*', -2, -1);
  * // => [1, '*', 3]
  */
-export function fill<T, U>(arr: Array<T | U>, value: U): Array<T | U>;
-export function fill<T, U>(arr: Array<T | U>, value: U, start: number): Array<T | U>;
-export function fill<T, U>(arr: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
-export function fill<T, U>(arr: Array<T | U>, value: U, start = 0, end = arr.length): Array<T | U> {
-  const length = arr.length;
+export function fill<T>(array: unknown[], value: T): T[];
+export function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
+export function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
+export function fill<T, U>(array: Array<T | U>, value: U, start = 0, end = array.length): Array<T | U> {
+  const length = array.length;
   const finalStart = Math.max(start >= 0 ? start : length + start, 0);
   const finalEnd = Math.min(end >= 0 ? end : length + end, length);
 
   for (let i = finalStart; i < finalEnd; i++) {
-    arr[i] = value;
+    array[i] = value;
   }
 
-  return arr;
+  return array;
 }

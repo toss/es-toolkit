@@ -9,14 +9,14 @@ Negative indices can also be used, in which case they are calculated from the en
 ## Signature
 
 ```typescript
-function fill<T, U>(arr: Array<T | U>, value: U): Array<T | U>;
-function fill<T, U>(arr: Array<T | U>, value: U, start: number): Array<T | U>;
-function fill<T, U>(arr: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
+function fill<T>(array: unknown[], value: T): T[];
+function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
+function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
 ```
 
 ### Parameters
 
-- `arr` (`Array<T | U>`): The array to fill.
+- `array` (`Array<T | U>`): The array to fill.
 - `value` (`U`): The value to fill the array with.
 - `start` (`number`, default = 0): The start position. Defaults to 0.
 - `end` (`number`, default = array.length): The end position. Defaults to the array's length.
