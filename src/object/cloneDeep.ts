@@ -95,7 +95,8 @@ export function cloneDeep<T>(obj: T): Resolved<T> {
     return result as Resolved<T>;
   }
 
-  if (obj instanceof File) {
+  // For legacy NodeJS support
+  if (typeof File !== 'undefined' && obj instanceof File) {
     const result = new File([obj], obj.name, { type: obj.type });
     cloneDeepHelper(obj, result);
     return result as Resolved<T>;

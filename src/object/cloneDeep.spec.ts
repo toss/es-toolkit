@@ -175,13 +175,16 @@ describe('cloneDeep', () => {
   // File
   //-------------------------------------------------------------------------------------
   it('should clone File objects', () => {
-    const file = new File(['es-toolkit'], 'es-toolkit.txt', { type: 'text/plain' });
-    const clonedFile = cloneDeep(file);
-    expect(clonedFile).not.toBe(file);
-    expect(clonedFile.name).toBe(file.name);
-    expect(clonedFile.type).toBe(file.type);
-    expect(clonedFile.size).toBe(file.size);
-    expect(clonedFile.constructor).toBe(File);
+    // For legacy NodeJS support
+    if (typeof File !== 'undefined') {
+      const file = new File(['es-toolkit'], 'es-toolkit.txt', { type: 'text/plain' });
+      const clonedFile = cloneDeep(file);
+      expect(clonedFile).not.toBe(file);
+      expect(clonedFile.name).toBe(file.name);
+      expect(clonedFile.type).toBe(file.type);
+      expect(clonedFile.size).toBe(file.size);
+      expect(clonedFile.constructor).toBe(File);
+    }
   });
 
   //-------------------------------------------------------------------------------------
