@@ -8,17 +8,17 @@ chunk([1, 2, 3, 4], 0);
 // 返回 [], 与 lodash 完全相同
 ```
 
-::: warning
-`es-toolkit/compat` 项目目前处于测试版并处于积极开发中，设计原则可能会有所更改。
-:::
-
-为了确保从 `es-toolkit` 到 `lodash` 的平滑过渡，我们正在开发 `es-toolkit/compat`，这是一个兼容层，弥合了这两个库之间的差异。
+为了最大限度地兼容 `lodash`，请使用 `es-toolkit/compat`，这是一个弥合这两个库之间差距的兼容性层。
 
 该模块旨在提供与 `lodash` 相同的 API，使得在这两个库之间进行切换更加容易。
 
 需要注意的是，与原始 `es-toolkit` 相比，`es-toolkit/compat` 可能会对性能产生轻微影响，并且包大小可能会更大。该模块旨在促进平滑过渡，一旦迁移完成，应替换回原始的 `es-toolkit` 以获得最佳性能。
 
 ## 设计原则
+
+::: info
+`es-toolkit/compat` 项目目前处于测试版并处于积极开发中，设计原则可能会有所更改。
+:::
 
 我们的兼容层旨在实现以下功能百分之百的特性一致性：
 
@@ -109,7 +109,7 @@ chunk([1, 2, 3, 4], 0);
 | [xorWith](https://lodash.com/docs/4.17.15#xorWith)                     | 📝         |
 | [zip](https://lodash.com/docs/4.17.15#zip)                             | 📝         |
 | [zipObject](https://lodash.com/docs/4.17.15#zipObject)                 | 📝         |
-| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ❌         |
+| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ✅         |
 | [zipWith](https://lodash.com/docs/4.17.15#zipWith)                     | 📝         |
 
 ### "Collection" 工具
@@ -304,7 +304,7 @@ chunk([1, 2, 3, 4], 0);
 | [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝       |
 | [pickBy](https://lodash.com/docs/4.17.15#pickBy)             | 📝       |
 | [result](https://lodash.com/docs/4.17.15#result)             | ❌       |
-| [set](https://lodash.com/docs/4.17.15#set)                   | ❌       |
+| [set](https://lodash.com/docs/4.17.15#set)                   | ✅       |
 | [setWith](https://lodash.com/docs/4.17.15#setWith)           | ❌       |
 | [toPairs](https://lodash.com/docs/4.17.15#toPairs)           | ❌       |
 | [toPairsIn](https://lodash.com/docs/4.17.15#toPairsIn)       | ❌       |
