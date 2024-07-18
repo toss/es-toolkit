@@ -1,7 +1,7 @@
 # get
 
 ::: info
-This is available in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+This is fully compatible with lodash in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
 :::
 
 Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.

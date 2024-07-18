@@ -1,7 +1,7 @@
 # get
 
 ::: info
-此功能在我们的[兼容性库](../../../compatibility.md)中可用，`es-toolkit/compat`。
+这与我们的[兼容库](../../../compatibility.md)中的lodash完全兼容，`es-toolkit/compat`。
 :::
 
 从对象中获取给定路径的值。如果解析的值为 `undefined`，则返回 `defaultValue`。

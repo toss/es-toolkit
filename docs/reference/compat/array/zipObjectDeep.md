@@ -1,7 +1,7 @@
 # zipObjectDeep
 
 ::: info
-This is available in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+This is fully compatible with lodash in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
 :::
 
 Creates a deeply nested object given arrays of paths and values.

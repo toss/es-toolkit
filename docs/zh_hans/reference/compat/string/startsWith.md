@@ -1,7 +1,7 @@
 # startsWith
 
 ::: info
-此功能在我们的[兼容性库](../../../compatibility.md)中可用，`es-toolkit/compat`。
+这与我们的[兼容库](../../../compatibility.md)中的lodash完全兼容，`es-toolkit/compat`。
 :::
 
 检查字符串是否在其开头包含另一个字符串。

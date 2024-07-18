@@ -1,5 +1,9 @@
 # max
 
+::: info
+这与我们的[兼容库](../../../compatibility.md)中的lodash完全兼容，`es-toolkit/compat`。
+:::
+
 找到数组中具有最大值的元素。
 
 如果列表为空，则返回 `undefined`。

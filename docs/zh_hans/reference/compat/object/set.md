@@ -1,7 +1,7 @@
 # set
 
 ::: info
-此功能在我们的[兼容性库](../../../compatibility.md)中可用，`es-toolkit/compat`。
+这与我们的[兼容库](../../../compatibility.md)中的lodash完全兼容，`es-toolkit/compat`。
 :::
 
 在对象的指定路径设置给定值。如果路径的任何部分不存在，将会创建它。

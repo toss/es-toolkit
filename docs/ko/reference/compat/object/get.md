@@ -1,7 +1,7 @@
 # get
 
 ::: info
-[lodash와 호환](../../../compatibility.md)되는 `es-toolkit/compat` 라이브러리에서 쓸 수 있어요.
+`es-toolkit/compat` 라이브러리에서 [lodash와 완전히 호환](../../../compatibility.md)돼요.
 :::
 
 객체에서 주어진 경로에 있는 값을 가져와요. 그 값이 `undefined` 라면, 기본값을 반환해요.

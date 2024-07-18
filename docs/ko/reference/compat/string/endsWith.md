@@ -1,7 +1,7 @@
 # endsWith
 
 ::: info
-[lodash와 호환](../../../compatibility.md)되는 `es-toolkit/compat` 라이브러리에서 쓸 수 있어요.
+`es-toolkit/compat` 라이브러리에서 [lodash와 완전히 호환](../../../compatibility.md)돼요.
 :::
 
 문자열이 주어진 문자열로 끝나는지 확인해요. 검색을 마칠 인덱스를 지정할 수 있어요.
