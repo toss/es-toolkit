@@ -1,7 +1,7 @@
 # zipObjectDeep
 
 ::: info
-[lodash와 호환](../../compatibility.md)되는 `es-toolkit/compat` 라이브러리에서 쓸 수 있어요.
+[lodash와 호환](../../../compatibility.md)되는 `es-toolkit/compat` 라이브러리에서 쓸 수 있어요.
 :::
 
 두 배열을 하나의 객체로 결합해요. 첫 번째 배열은 프로퍼티 경로를 나타내고, 두 번째 배열은 값을 나타내요. [zipObject](../../array/zipObject.md)와 다르게, 프로퍼티로 `a.b` 와 같은 경로를 지정할 수 있어요. 

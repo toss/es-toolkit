@@ -1,7 +1,7 @@
 # set
 
 ::: info
-This is available in our [compatibility library](../../compatibility.md), `es-toolkit/compat`.
+This is available in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
 :::
 
 Sets the given value at the specified path of the object. If any part of the path does not exist, it will be created.
