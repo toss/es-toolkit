@@ -175,9 +175,16 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'snakeCase', link: '/ko/reference/string/snakeCase' },
             { text: 'kebabCase', link: '/ko/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/ko/reference/string/lowerCase' },
+            { text: 'startCase', link: '/ko/reference/string/startCase' },
             { text: 'capitalize', link: '/ko/reference/string/capitalize' },
           ],
         },
+        {
+          text: '호환성 라이브러리',
+          items: [
+            { text: 'set', link: '/reference/compat/object/set' },
+          ],
+        }
       ],
     },
   ];

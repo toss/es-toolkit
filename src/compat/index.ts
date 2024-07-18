@@ -25,3 +25,4 @@
 export * from '../index.ts';
 
 export { chunk } from './array/chunk.ts';
+export { set } from './object/set.ts';
