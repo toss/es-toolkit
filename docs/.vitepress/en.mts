@@ -97,7 +97,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorWith', link: '/reference/array/xorWith' },
             { text: 'zip', link: '/reference/array/zip' },
             { text: 'zipObject', link: '/reference/array/zipObject' },
-            { text: 'zipObjectDeep', link: '/reference/array/zipObjectDeep' },
+            { text: 'zipObjectDeep (compat)', link: '/reference/compat/array/zipObjectDeep' },
             { text: 'zipWith', link: '/reference/array/zipWith' },
             { text: 'head', link: '/reference/array/head' },
             { text: 'tail', link: '/reference/array/tail' },
@@ -134,11 +134,12 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Object Utilities',
           items: [
             { text: 'clone', link: '/reference/object/clone' },
+            { text: 'invert', link: '/reference/object/invert' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
             { text: 'pickBy', link: '/reference/object/pickBy' },
-            { text: 'invert', link: '/reference/object/invert' },
+            { text: 'set (compat)', link: '/reference/compat/object/set' },
           ],
         },
         {
@@ -169,7 +170,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Compatibility Libraries',
           items: [
-            { text: 'set', link: '/reference/compat/object/set' },
+
           ],
         }
       ],

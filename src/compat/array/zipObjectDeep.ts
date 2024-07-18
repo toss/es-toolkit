@@ -1,3 +1,6 @@
+import { zip } from "../../array/zip.ts";
+import { set } from "../object/set.ts";
+
 /**
  * Creates a deeply nested object given arrays of paths and values.
  *
@@ -31,61 +34,16 @@
  * // result will be { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }
  */
 export function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V } {
-  const result = {} as { [K in P]: V }
+  const result = {} as { [K in P]: V };
+  const zipped = zip(keys, values);
 
-  for (let pathIndex = 0; pathIndex < keys.length; pathIndex++) {
-    const path = keys[pathIndex]
-    if (typeof path === 'string') {
-      const pathArray = path.split('.')
+  for (let i = 0; i < zipped.length; i++) {
+    const [key, value] = zipped[i];
 
-      pathArray.reduce((acc, key, index) => {
-        if (key.includes('[')) {
-          const [k, v] = key.split('[')
-          const value = v.replace(']', '')
-          if (!acc[k]) {
-            acc[k] = []
-          }
-          if (index === pathArray.length - 1) {
-            acc[k][value] = values[pathIndex]
-          }
-          return acc[k]
-        }
-
-        if (Array.isArray(acc)) {
-          const parentKey = path.match(/\[(\d+)\]/)
-          if (parentKey === null) {
-            throw new Error('Invalid path')
-          }
-          const arrIndex = parseInt(String(parentKey[1]))
-
-          if (!acc[arrIndex]) {
-            acc[arrIndex] = {}
-          }
-          if (index === pathArray.length - 1) {
-            acc[arrIndex][key] = values[pathIndex]
-          }
-        } else {
-          if (!acc[key]) {
-            acc[key] = {}
-          }
-          if (index === pathArray.length - 1) {
-            acc[key] = values[pathIndex]
-          }
-        }
-
-        return acc[key]
-      }, result as any)
-    } else {
-      // path is number not NaN, Infinity, etc.
-      if (typeof path === 'number' && Number.isInteger(path)) {
-        result[path] = values[pathIndex]
-      }
-      // path is Symbol
-      if (typeof path === 'symbol') {
-        result[path] = values[pathIndex]
-      }
+    if (key != null) {
+      set(result, key, value);
     }
   }
 
-  return result
+  return result;
 }

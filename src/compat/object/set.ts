@@ -28,10 +28,8 @@ import { toPath } from "../_internal/toPath";
  * set(obj, 'a.b.c', 4);
  * console.log(obj); // { a: { b: { c: 4 } } }
  */
-
-export function set<T extends object>(obj: T, path: PropertyKey | readonly PropertyKey[], value: unknown): T;
 export function set<T>(obj: object, path: PropertyKey | readonly PropertyKey[], value: unknown): T;
-export function set<T>(obj: T, path: PropertyKey | readonly PropertyKey[], value: unknown): T {
+export function set<T extends object>(obj: T, path: PropertyKey | readonly PropertyKey[], value: unknown): T {
   const resolvedPath = Array.isArray(path)
     ? path
     : typeof path === 'string'

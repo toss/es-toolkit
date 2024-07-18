@@ -108,7 +108,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorWith', link: '/ko/reference/array/xorWith' },
             { text: 'zip', link: '/ko/reference/array/zip' },
             { text: 'zipObject', link: '/ko/reference/array/zipObject' },
-            { text: 'zipObjectDeep', link: '/ko/reference/array/zipObjectDeep' },
+            { text: 'zipObjectDeep (호환성)', link: '/ko/reference/compat/array/zipObjectDeep' },
             { text: 'zipWith', link: '/ko/reference/array/zipWith' },
             { text: 'head', link: '/ko/reference/array/head' },
             { text: 'tail', link: '/ko/reference/array/tail' },
@@ -145,11 +145,12 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '객체',
           items: [
             { text: 'clone', link: '/ko/reference/object/clone' },
+            { text: 'invert', link: '/ko/reference/object/invert' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
-            { text: 'invert', link: '/ko/reference/object/invert' },
+            { text: 'set (호환성)', link: '/reference/compat/object/set' },
           ],
         },
         {
@@ -178,12 +179,6 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'lowerCase', link: '/ko/reference/string/lowerCase' },
             { text: 'startCase', link: '/ko/reference/string/startCase' },
             { text: 'capitalize', link: '/ko/reference/string/capitalize' },
-          ],
-        },
-        {
-          text: '호환성 라이브러리',
-          items: [
-            { text: 'set', link: '/reference/compat/object/set' },
           ],
         }
       ],
