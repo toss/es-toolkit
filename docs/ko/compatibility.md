@@ -9,15 +9,17 @@ chunk([1, 2, 3, 4], 0);
 // es-toolkit/compat은 lodash와 같은 []을 반환해요
 ```
 
-::: warning
-`es-toolkit/compat` 프로젝트는 현재 베타 단계에 있으며, 현재 개발 중이에요. 방향성이 변경될 수 있어요.
-:::
+`lodash`와 최대 호환성을 위해서는 `es-toolkit/compat` 라이브러리를 사용하세요.
 
-`es-toolkit`에서 `lodash`로 매끄러운 마이그레이션을 보장하기 위해, 두 라이브러리 사이의 동작 차이가 없는 `es-toolkit/compat` 라이브러를 개발하고 있어요. `lodash`와 동일한 API와 기능을 제공하여, 수월하게 마이그레이션을 할 수 있도록 도와줄 예정이에요.
+`es-toolkit`은 매끄러운 마이그레이션을 보장하기 위해, 두 라이브러리 사이의 동작 차이가 없는 `es-toolkit/compat` 라이브러를 개발하고 있어요. `lodash`와 동일한 API와 기능을 제공하여, 수월하게 마이그레이션을 할 수 있도록 도와줄 예정이에요.
 
 `es-toolkit/compat`는 원래 `es-toolkit`에 비해 런타임 퍼포먼스나 번들 크기가 최적은 아닐 수 있어요. 마이그레이션 중에 사용하는 도구로 생각해 주시고, 새로운 기능은 `es-toolkit`로 개발해주세요.
 
 ## 설계 원칙
+
+::: info
+`es-toolkit/compat` 프로젝트는 현재 베타 단계에 있으며, 현재 개발 중이에요. 방향성이 변경될 수 있어요.
+:::
 
 `es-toolkit/compat`은 다음과 같은 기능들에 대해서 `lodash`와 100% 동일한 기능을 제공하는 것을 목표로 해요.
 
