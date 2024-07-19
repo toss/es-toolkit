@@ -27,6 +27,7 @@ describe('clone', () => {
 
     expect(clonedBuffer).toEqual(buffer);
     expect(clonedBuffer).not.toBe(buffer);
+    expect(clonedBuffer).toBeInstanceOf(ArrayBuffer);
   });
 
   it('should clone objects', () => {
@@ -43,6 +44,10 @@ describe('clone', () => {
         public a: number,
         public b: string
       ) {}
+
+      get c() {
+        return this.a + this.b.length;
+      }
     }
 
     const customObj = new CustomObject(1, 'es-toolkit');
@@ -50,6 +55,8 @@ describe('clone', () => {
 
     expect(clonedCustomObj).toEqual(customObj);
     expect(clonedCustomObj).not.toBe(customObj);
+    expect(clonedCustomObj.c).toBe(customObj.c);
+    expect(clonedCustomObj).toBeInstanceOf(CustomObject);
   });
 
   it('should clone dates', () => {
