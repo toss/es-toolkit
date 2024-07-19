@@ -1,0 +1,1 @@
+export const falsey: unknown[] = [, null, undefined, false, 0, NaN, ''];

@@ -25,3 +25,16 @@
 export * from '../index.ts';
 
 export { chunk } from './array/chunk.ts';
+export { concat } from './array/concat.ts';
+export { difference } from './array/difference.ts';
+export { zipObjectDeep } from './array/zipObjectDeep.ts';
+export { head as first } from '../index.ts';
+
+export { get } from './object/get.ts';
+export { set } from './object/set.ts';
+
+export { startsWith } from './string/startsWith.ts';
+export { endsWith } from './string/endsWith.ts';
+
+export { max } from './math/max.ts';
+export { min } from './math/min.ts';

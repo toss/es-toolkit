@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.10.1",
+  "version": "1.12.0",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -114,6 +114,16 @@
         "require": {
           "types": "./dist/string/index.d.ts",
           "default": "./dist/string/index.js"
+        }
+      },
+      "./compat": {
+        "import": {
+          "types": "./dist/compat/index.d.mts",
+          "default": "./dist/compat/index.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/index.d.ts",
+          "default": "./dist/compat/index.js"
         }
       },
       "./package.json": "./package.json"

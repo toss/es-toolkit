@@ -8,17 +8,19 @@ chunk([1, 2, 3, 4], 0);
 // Returns [], which is identical to lodash
 ```
 
-::: warning
-The `es-toolkit/compat` project is currently in beta and under active development, with design principles subject to change.
-:::
-
-To ensure a seamless transition from `es-toolkit` to `lodash`, we're developing `es-toolkit/compat`, a compatibility layer that bridges the gap between the two libraries.
+For maximum compatibility with `lodash`, use `es-toolkit/compat`, a compatibility layer that bridges the gap between the two libraries.
 
 This module is designed to provide an identical API to `lodash`, making it easier to switch between the two libraries.
+
+`es-toolkit/compat` has been thoroughly tested with real test cases from `lodash`.
 
 It's important to note that `es-toolkit/compat` may have a slight performance impact and a larger bundle size compared to the original `es-toolkit`. This module is designed to facilitate a smooth transition and should be replaced with the original `es-toolkit` for optimal performance once the migration is complete.
 
 ## Design Principles
+
+::: info
+Design principles are subject to change.
+:::
 
 Our compatibility layer aims to achieve feature parity with 100% accuracy for:
 
@@ -29,6 +31,7 @@ However, the following are out of scope for `es-toolkit/compat`:
 
 - Implicit type conversions, such as converting an empty string to zero or false.
 - Functions that have specialized implementations for specific types of arrays, like [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq).
+- Handling cases where internal object prototypes, like `Array.prototype`, have been modified.
 - Method chaining support through "Seq" methods.
 
 ## Implementation Status
@@ -36,11 +39,11 @@ However, the following are out of scope for `es-toolkit/compat`:
 ::: info
 The following emojis indicate the status of each feature:
 
-- ✅: Completed
-- 📝: In Review
-- ❌: Not Implemented
+- ✅: Completed (The function is fully implemented and has passed all tests with lodash test code.)
+- 📝: In Review (The function is implemented but hasn't been tested with lodash test code yet.)
+- ❌: Not Implemented (The function hasn't been implemented.)
 
-It's worth noting that even if an implementation is labeled as "in review", it may already be under review to ensure 100% feature parity with lodash, and it's possible that it already offers identical functionality.
+Even if a feature is marked "in review," it might already be under review to ensure it matches lodash perfectly, and it could already offer the same functionality.
 :::
 
 ### "Array" method
@@ -48,13 +51,13 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | Function Name                                                          | Implementation Status |
 | ---------------------------------------------------------------------- | --------------------- |
 | [chunk](https://lodash.com/docs/4.17.15#chunk)                         | ✅                    |
-| [compact](https://lodash.com/docs/4.17.15#compact)                     | 📝                    |
-| [concat](https://lodash.com/docs/4.17.15#concat)                       | ❌                    |
-| [difference](https://lodash.com/docs/4.17.15#difference)               | 📝                    |
+| [compact](https://lodash.com/docs/4.17.15#compact)                     | ✅                    |
+| [concat](https://lodash.com/docs/4.17.15#concat)                       | ✅                    |
+| [difference](https://lodash.com/docs/4.17.15#difference)               | ✅                    |
 | [differenceBy](https://lodash.com/docs/4.17.15#differenceBy)           | 📝                    |
 | [differenceWith](https://lodash.com/docs/4.17.15#differenceWith)       | 📝                    |
-| [drop](https://lodash.com/docs/4.17.15#drop)                           | 📝                    |
-| [dropRight](https://lodash.com/docs/4.17.15#dropRight)                 | 📝                    |
+| [drop](https://lodash.com/docs/4.17.15#drop)                           | ✅                    |
+| [dropRight](https://lodash.com/docs/4.17.15#dropRight)                 | ✅                    |
 | [dropRightWhile](https://lodash.com/docs/4.17.15#dropRightWhile)       | 📝                    |
 | [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | 📝                    |
 | [fill](https://lodash.com/docs/4.17.15#fill)                           | 📝                    |
@@ -64,7 +67,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | 📝                    |
 | [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | 📝                    |
 | [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌                    |
-| [head](https://lodash.com/docs/4.17.15#head)                           | 📝                    |
+| [head](https://lodash.com/docs/4.17.15#head)                           | ✅                    |
 | [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ❌                    |
 | [initial](https://lodash.com/docs/4.17.15#initial)                     | 📝                    |
 | [intersection](https://lodash.com/docs/4.17.15#intersection)           | 📝                    |
@@ -90,7 +93,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [sortedLastIndexOf](https://lodash.com/docs/4.17.15#sortedLastIndexOf) | No support            |
 | [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)               | No support            |
 | [sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)           | No support            |
-| [tail](https://lodash.com/docs/4.17.15#tail)                           | 📝                    |
+| [tail](https://lodash.com/docs/4.17.15#tail)                           | ✅                    |
 | [take](https://lodash.com/docs/4.17.15#take)                           | 📝                    |
 | [takeRight](https://lodash.com/docs/4.17.15#takeRight)                 | 📝                    |
 | [takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)       | 📝                    |
@@ -109,7 +112,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [xorWith](https://lodash.com/docs/4.17.15#xorWith)                     | 📝                    |
 | [zip](https://lodash.com/docs/4.17.15#zip)                             | 📝                    |
 | [zipObject](https://lodash.com/docs/4.17.15#zipObject)                 | 📝                    |
-| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ❌                    |
+| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ✅                    |
 | [zipWith](https://lodash.com/docs/4.17.15#zipWith)                     | 📝                    |
 
 ### "Collection" methods
@@ -246,11 +249,11 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [ceil](https://lodash.com/docs/4.17.15#ceil)         | ❌                    |
 | [divide](https://lodash.com/docs/4.17.15#divide)     | ❌                    |
 | [floor](https://lodash.com/docs/4.17.15#floor)       | ❌                    |
-| [max](https://lodash.com/docs/4.17.15#max)           | ❌                    |
+| [max](https://lodash.com/docs/4.17.15#max)           | ✅                    |
 | [maxBy](https://lodash.com/docs/4.17.15#maxBy)       | 📝                    |
 | [mean](https://lodash.com/docs/4.17.15#mean)         | 📝                    |
 | [meanBy](https://lodash.com/docs/4.17.15#meanBy)     | 📝                    |
-| [min](https://lodash.com/docs/4.17.15#min)           | 📝                    |
+| [min](https://lodash.com/docs/4.17.15#min)           | ✅                    |
 | [minBy](https://lodash.com/docs/4.17.15#minBy)       | 📝                    |
 | [multiply](https://lodash.com/docs/4.17.15#multiply) | ❌                    |
 | [round](https://lodash.com/docs/4.17.15#round)       | ❌                    |
@@ -286,7 +289,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [forOwnRight](https://lodash.com/docs/4.17.15#forOwnRight)   | ❌                    |
 | [functions](https://lodash.com/docs/4.17.15#functions)       | ❌                    |
 | [functionsIn](https://lodash.com/docs/4.17.15#functionsIn)   | ❌                    |
-| [get](https://lodash.com/docs/4.17.15#get)                   | ❌                    |
+| [get](https://lodash.com/docs/4.17.15#get)                   | ✅                    |
 | [has](https://lodash.com/docs/4.17.15#has)                   | ❌                    |
 | [hasIn](https://lodash.com/docs/4.17.15#hasIn)               | ❌                    |
 | [invert](https://lodash.com/docs/4.17.15#invert)             | 📝                    |
@@ -304,7 +307,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝                    |
 | [pickBy](https://lodash.com/docs/4.17.15#pickBy)             | 📝                    |
 | [result](https://lodash.com/docs/4.17.15#result)             | ❌                    |
-| [set](https://lodash.com/docs/4.17.15#set)                   | ❌                    |
+| [set](https://lodash.com/docs/4.17.15#set)                   | ✅                    |
 | [setWith](https://lodash.com/docs/4.17.15#setWith)           | ❌                    |
 | [toPairs](https://lodash.com/docs/4.17.15#toPairs)           | ❌                    |
 | [toPairsIn](https://lodash.com/docs/4.17.15#toPairsIn)       | ❌                    |
@@ -322,7 +325,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [camelCase](https://lodash.com/docs/4.17.15#camelCase)       | 📝                    |
 | [capitalize](https://lodash.com/docs/4.17.15#capitalize)     | 📝                    |
 | [deburr](https://lodash.com/docs/4.17.15#deburr)             | ❌                    |
-| [endsWith](https://lodash.com/docs/4.17.15#endsWith)         | ❌                    |
+| [endsWith](https://lodash.com/docs/4.17.15#endsWith)         | ✅                    |
 | [escape](https://lodash.com/docs/4.17.15#escape)             | ❌                    |
 | [escapeRegExp](https://lodash.com/docs/4.17.15#escapeRegExp) | ❌                    |
 | [kebabCase](https://lodash.com/docs/4.17.15#kebabCase)       | 📝                    |
@@ -337,7 +340,7 @@ It's worth noting that even if an implementation is labeled as "in review", it m
 | [snakeCase](https://lodash.com/docs/4.17.15#snakeCase)       | 📝                    |
 | [split](https://lodash.com/docs/4.17.15#split)               | ❌                    |
 | [startCase](https://lodash.com/docs/4.17.15#startCase)       | ❌                    |
-| [startsWith](https://lodash.com/docs/4.17.15#startsWith)     | ❌                    |
+| [startsWith](https://lodash.com/docs/4.17.15#startsWith)     | ✅                    |
 | [template](https://lodash.com/docs/4.17.15#template)         | ❌                    |
 | [toLower](https://lodash.com/docs/4.17.15#toLower)           | ❌                    |
 | [toUpper](https://lodash.com/docs/4.17.15#toUpper)           | ❌                    |
