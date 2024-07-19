@@ -32,14 +32,8 @@ jobs:
       - run:
           name: Lint
           command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
-  formatcheck:
-    docker:
-      - image: cimg/node:20.12
-    steps:
-      - checkout
-      - setup
       - run:
-          name: Format Check
+          name: Prettier
           command: yarn prettier -c $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
   typecheck:
     docker:
