@@ -38,25 +38,25 @@ describe('clone', () => {
     expect(clonedObj).not.toBe(obj);
   });
 
-  it('should clone custom objects', () => {
-    class CustomObject {
+  it('should clone custom classes', () => {
+    class Person {
       constructor(
-        public a: number,
-        public b: string
+        public name: string,
+        public age: number
       ) {}
 
-      get c() {
-        return this.a + this.b.length;
+      greet() {
+        return `Hello, my name is ${this.name}`;
       }
     }
 
-    const customObj = new CustomObject(1, 'es-toolkit');
-    const clonedCustomObj = clone(customObj);
+    const person = new Person('es-toolkit', 100);
+    const clonedPerson = clone(person);
 
-    expect(clonedCustomObj).toEqual(customObj);
-    expect(clonedCustomObj).not.toBe(customObj);
-    expect(clonedCustomObj.c).toBe(customObj.c);
-    expect(clonedCustomObj).toBeInstanceOf(CustomObject);
+    expect(clonedPerson).toEqual(person);
+    expect(clonedPerson).not.toBe(person);
+    expect(clonedPerson.greet).toBe(person.greet);
+    expect(clonedPerson).toBeInstanceOf(Person);
   });
 
   it('should clone dates', () => {
