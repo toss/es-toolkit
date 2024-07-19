@@ -42,3 +42,8 @@ const arr5: [number, string, boolean] = [1, 'a', true];
 const firstElement5 = head(arr5);
 // firstElement5 将是 1
 ```
+
+## 与 Lodash 的区别
+
+- Lodash 的 `head` 函数可以处理 `Array` 原型被修改的情况。
+  - 相反，es-toolkit 不支持这种行为，因为原型污染通常被认为是一个问题。

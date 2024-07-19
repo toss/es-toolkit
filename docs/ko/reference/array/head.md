@@ -42,3 +42,8 @@ const arr5: [number, string, boolean] = [1, 'a', true];
 const firstElement5 = head(arr5);
 // firstElement5는 1이에요.
 ```
+
+## Lodash와의 차이 
+
+- Lodash의 `head` 함수는 `Array`의 프로토타입이 바뀐 코드에도 대응해요. 
+  - 내장 객체의 프로토타입을 바꾸는 것은 권장되지 않으므로, es-toolkit은 대응하지 않아요.

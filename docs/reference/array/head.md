@@ -42,3 +42,8 @@ const arr5: [number, string, boolean] = [1, 'a', true];
 const firstElement5 = head(arr5);
 // firstElement5 will be 1
 ```
+
+## Differences with Lodash 
+
+- Lodash's `head` function handles cases where the Array prototype has been modified. 
+  - In contrast, es-toolkit doesn't support this behavior, as prototype pollution is generally considered problematic.
