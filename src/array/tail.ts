@@ -60,6 +60,8 @@ export function tail<T, U>(arr: readonly [T, ...U[]]): U[];
  * const result3 = tail(arr3);
  * // result3 will be []
  */
+export function tail<T>(arr: readonly T[]): T[];
+
 export function tail<T>(arr: readonly T[]): T[] {
   const len = arr.length;
   if (len <= 1) {
