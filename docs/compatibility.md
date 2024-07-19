@@ -209,7 +209,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isFinite](https://lodash.com/docs/4.17.15#isFinite)                   | ❌                    |
 | [isFunction](https://lodash.com/docs/4.17.15#isFunction)               | ❌                    |
 | [isInteger](https://lodash.com/docs/4.17.15#isInteger)                 | ❌                    |
-| [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ❌                    |
+| [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ✅                    |
 | [isMap](https://lodash.com/docs/4.17.15#isMap)                         | ❌                    |
 | [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ❌                    |
 | [isMatchWith](https://lodash.com/docs/4.17.15#isMatchWith)             | ❌                    |
