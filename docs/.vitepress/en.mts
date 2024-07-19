@@ -49,7 +49,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Array Utilities',
           items: [
             { text: 'chunk', link: '/reference/array/chunk' },
-            { text: 'concat (compat)', link: '/reference/array/concat' },
+            { text: 'concat (compat)', link: '/reference/compat/array/concat' },
             { text: 'countBy', link: '/reference/array/countBy' },
             { text: 'compact', link: '/reference/array/compact' },
             { text: 'difference', link: '/reference/array/difference' },

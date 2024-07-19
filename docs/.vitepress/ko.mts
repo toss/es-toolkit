@@ -48,7 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '배열',
           items: [
             { text: 'chunk', link: '/ko/reference/array/chunk' },
-            { text: 'concat (호환성)', link: '/ko/reference/array/concat' },
+            { text: 'concat (호환성)', link: '/ko/reference/compat/array/concat' },
             { text: 'countBy', link: '/ko/reference/array/countBy' },
             { text: 'compact', link: '/ko/reference/array/compact' },
             { text: 'difference', link: '/ko/reference/array/difference' },

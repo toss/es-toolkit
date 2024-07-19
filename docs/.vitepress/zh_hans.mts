@@ -48,7 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '数组工具',
           items: [
             { text: 'chunk', link: '/zh_hans/reference/array/chunk' },
-            { text: 'concat (兼容性)', link: '/zh_hans/reference/array/concat' },
+            { text: 'concat (兼容性)', link: '/zh_hans/reference/compat/array/concat' },
             { text: 'countBy', link: '/zh_hans/reference/array/countBy' },
             { text: 'compact', link: '/zh_hans/reference/array/compact' },
             { text: 'difference', link: '/zh_hans/reference/array/difference' },
