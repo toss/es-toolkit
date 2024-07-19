@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { toArgs } from '../_internal/toArgs';
 import { pick } from './pick';
 
-describe('pick', () => {
+describe('compat/pick', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };
   const nested = { a: 1, b: { c: 2, d: 3 } };
 
