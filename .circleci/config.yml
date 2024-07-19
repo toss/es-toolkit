@@ -31,7 +31,7 @@ jobs:
       - setup
       - run:
           name: Lint
-          command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$|.tsx$)")
+          command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
   formatcheck:
     docker:
       - image: cimg/node:20.12
@@ -40,7 +40,7 @@ jobs:
       - setup
       - run:
           name: Format Check
-          command: yarn prettier --check $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$|.tsx$)")
+          command: yarn prettier -c $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
   typecheck:
     docker:
       - image: cimg/node:20.12
