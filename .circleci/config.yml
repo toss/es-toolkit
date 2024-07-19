@@ -30,7 +30,7 @@ jobs:
       - checkout
       - setup
       - run:
-          name: Lint
+          name: ESLint
           command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
       - run:
           name: Prettier
