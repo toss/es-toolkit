@@ -4,22 +4,22 @@ import { get } from './get';
 import { isNil } from '../index';
 
 export function pick<T>(
-  object: T,
-  ...args: Array<
+  obj: T,
+  ...keys: Array<
     | keyof T
     | (NonNullable<unknown> & string)
     | Array<keyof T | (NonNullable<unknown> & string)>
     | Array<Array<NonNullable<unknown> & string>>
   >
 ): Partial<T> {
-  if (isNil(object)) {
+  if (isNil(obj)) {
     return {};
   }
 
-  const typedObject = object as Record<string | number, any>;
+  const typedObject = obj as Record<string | number, any>;
 
   const result = {};
-  const flattenArgs = flattenDeep(args.map(arg => (typeof arg === 'object' ? Array.from(arg as any) : arg))) as Array<
+  const flattenArgs = flattenDeep(keys.map(arg => (typeof arg === 'object' ? Array.from(arg as any) : arg))) as Array<
     keyof typeof typedObject
   >;
 
