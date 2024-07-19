@@ -34,8 +34,7 @@ jobs:
           command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
       - run:
           name: Prettier
-          command: yarn prettier -c $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
-  typecheck:
+          command: git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)" | xargs -r yarn prettier -c
     docker:
       - image: cimg/node:20.12
     steps:
