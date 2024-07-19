@@ -13,12 +13,6 @@ describe('head', () => {
     expect(head(array)).toBe(1);
   });
 
-  // it('should return `undefined` when querying empty arrays', () => {
-  //   arrayProto[0] = 1;
-  //   expect(head([])).toBe(undefined);
-  //   arrayProto.length = 0;
-  // });
-
   it('should work as an iteratee for methods like `map`', () => {
     const array = [
       [1, 2, 3],
