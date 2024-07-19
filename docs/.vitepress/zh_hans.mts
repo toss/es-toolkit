@@ -134,6 +134,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'clone', link: '/zh_hans/reference/object/clone' },
             { text: 'invert', link: '/zh_hans/reference/object/invert' },
+            { text: 'flattenObject', link: '/zh_hans/reference/object/flattenObject' },
             { text: 'omit', link: '/zh_hans/reference/object/omit' },
             { text: 'omitBy', link: '/zh_hans/reference/object/omitBy' },
             { text: 'pick', link: '/zh_hans/reference/object/pick' },

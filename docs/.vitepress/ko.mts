@@ -149,6 +149,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'clone', link: '/ko/reference/object/clone' },
             { text: 'invert', link: '/ko/reference/object/invert' },
+            { text: 'flattenObject', link: '/ko/reference/object/flattenObject' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
