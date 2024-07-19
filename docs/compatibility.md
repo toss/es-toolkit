@@ -31,6 +31,7 @@ However, the following are out of scope for `es-toolkit/compat`:
 
 - Implicit type conversions, such as converting an empty string to zero or false.
 - Functions that have specialized implementations for specific types of arrays, like [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq).
+- Handling cases where internal object prototypes, like `Array.prototype`, have been modified.
 - Method chaining support through "Seq" methods.
 
 ## Implementation Status
