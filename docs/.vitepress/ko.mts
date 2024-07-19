@@ -161,6 +161,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '타입 가드',
           items: [
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
+            { text: 'isLength', link: '/ko/reference/predicate/isLength' },
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },

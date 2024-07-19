@@ -150,6 +150,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Predicates',
           items: [
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
+            { text: 'isLength', link: '/reference/predicate/isLength' },
             { text: 'isNil', link: '/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },
