@@ -31,6 +31,7 @@ chunk([1, 2, 3, 4], 0);
 
 - 隐式类型转换，例如将空字符串转换为零或假。
 - 对特定类型数组有专门实现的函数，比如 [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)。
+- 处理内部对象原型（例如 `Array.prototype`）被修改的情况。
 - 通过 "Seq" 方法支持方法链。
 
 ## 实现状态

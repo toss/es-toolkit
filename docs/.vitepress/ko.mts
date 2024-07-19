@@ -48,7 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '배열',
           items: [
             { text: 'chunk', link: '/ko/reference/array/chunk' },
-            { text: 'concat (호환성)', link: '/ko/reference/array/concat' },
+            { text: 'concat (호환성)', link: '/ko/reference/compat/array/concat' },
             { text: 'countBy', link: '/ko/reference/array/countBy' },
             { text: 'compact', link: '/ko/reference/array/compact' },
             { text: 'difference', link: '/ko/reference/array/difference' },
@@ -149,6 +149,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'clone', link: '/ko/reference/object/clone' },
             { text: 'invert', link: '/ko/reference/object/invert' },
+            { text: 'flattenObject', link: '/ko/reference/object/flattenObject' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
@@ -161,6 +162,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '타입 가드',
           items: [
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
+            { text: 'isPlainObject', link: '/ko/reference/predicate/isPlainObject' },
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },

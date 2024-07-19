@@ -31,6 +31,7 @@ However, the following are out of scope for `es-toolkit/compat`:
 
 - Implicit type conversions, such as converting an empty string to zero or false.
 - Functions that have specialized implementations for specific types of arrays, like [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq).
+- Handling cases where internal object prototypes, like `Array.prototype`, have been modified.
 - Method chaining support through "Seq" methods.
 
 ## Implementation Status
@@ -66,7 +67,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | 📝                    |
 | [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | 📝                    |
 | [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌                    |
-| [head](https://lodash.com/docs/4.17.15#head)                           | 📝                    |
+| [head](https://lodash.com/docs/4.17.15#head)                           | ✅                    |
 | [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ❌                    |
 | [initial](https://lodash.com/docs/4.17.15#initial)                     | 📝                    |
 | [intersection](https://lodash.com/docs/4.17.15#intersection)           | 📝                    |
@@ -92,7 +93,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [sortedLastIndexOf](https://lodash.com/docs/4.17.15#sortedLastIndexOf) | No support            |
 | [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)               | No support            |
 | [sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)           | No support            |
-| [tail](https://lodash.com/docs/4.17.15#tail)                           | 📝                    |
+| [tail](https://lodash.com/docs/4.17.15#tail)                           | ✅                    |
 | [take](https://lodash.com/docs/4.17.15#take)                           | ✅                       |
 | [takeRight](https://lodash.com/docs/4.17.15#takeRight)                 | 📝                    |
 | [takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)       | 📝                    |
@@ -219,7 +220,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isNumber](https://lodash.com/docs/4.17.15#isNumber)                   | ❌                    |
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌                    |
 | [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ❌                    |
-| [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ❌                    |
+| [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ✅                    |
 | [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ❌                    |
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌                    |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌                    |

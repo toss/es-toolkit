@@ -49,7 +49,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Array Utilities',
           items: [
             { text: 'chunk', link: '/reference/array/chunk' },
-            { text: 'concat (compat)', link: '/reference/array/concat' },
+            { text: 'concat (compat)', link: '/reference/compat/array/concat' },
             { text: 'countBy', link: '/reference/array/countBy' },
             { text: 'compact', link: '/reference/array/compact' },
             { text: 'difference', link: '/reference/array/difference' },
@@ -138,6 +138,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'clone', link: '/reference/object/clone' },
             { text: 'invert', link: '/reference/object/invert' },
+            { text: 'flattenObject', link: '/reference/object/flattenObject' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
@@ -150,6 +151,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Predicates',
           items: [
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
+            { text: 'isPlainObject', link: '/reference/predicate/isPlainObject' },
             { text: 'isNil', link: '/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },
