@@ -43,7 +43,7 @@ export function pick<T>(
 
   const typedObject = obj as Record<string | number, any>;
 
-  const result = {};
+  const result: Record<string | number | symbol, any> = {};
   const flattenArgs = flattenDeep(keys.map(arg => (typeof arg === 'object' ? Array.from(arg as any) : arg))) as Array<
     keyof typeof typedObject
   >;
