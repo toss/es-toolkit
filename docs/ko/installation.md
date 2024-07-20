@@ -77,3 +77,23 @@ bun add es-toolkit
 ```
 
 :::
+
+현대적인 브라우저에서는 [esm.sh](https://esm.sh)도 쓸 수 있어요.
+
+::: code-group
+
+```html [esm.sh]
+<script type="importmap">
+  {
+    "imports": {
+      "es-toolkit": "https://esm.sh/es-toolkit"
+    }
+  }
+</script>
+<script type="module">
+  import { chunk } from 'es-toolkit';
+  chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+:::

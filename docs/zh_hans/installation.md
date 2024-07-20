@@ -77,3 +77,23 @@ bun add es-toolkit
 ```
 
 :::
+
+es-toolkit 也可在 [esm.sh](https://esm.sh) 上为现代浏览器提供。
+
+::: code-group
+
+```html [esm.sh]
+<script type="importmap">
+  {
+    "imports": {
+      "es-toolkit": "https://esm.sh/es-toolkit"
+    }
+  }
+</script>
+<script type="module">
+  import { chunk } from 'es-toolkit';
+  chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+:::
