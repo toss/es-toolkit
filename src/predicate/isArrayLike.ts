@@ -1,6 +1,4 @@
 import { isLength } from './isLength';
-import { isFunction } from './isFunction';
-import { isNotNil } from './isNotNil';
 
 /**
  * Checks if `value` is array-like.
@@ -17,5 +15,5 @@ import { isNotNil } from './isNotNil';
  * isArrayLike(undefined); // false
  */
 export function isArrayLike(value: unknown): value is ArrayLike<unknown> {
-  return isNotNil(value) && !isFunction(value) && isLength((value as { length: unknown }).length);
+  return value != null && typeof value !== 'function' && isLength((value as ArrayLike<unknown>).length);
 }

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isFunction } from './isFunction';
 import { falsey } from '../compat/_internal/falsey';
+import { args } from '../compat/_internal/args';
 
 describe('isFunction', () => {
   it('should return `true` for functions', () => {
@@ -52,7 +53,7 @@ describe('isFunction', () => {
 
     expect(actual).toEqual(expected);
 
-    // expect(isFunction(args)).toBe(false);
+    expect(isFunction(args)).toBe(false);
     expect(isFunction([1, 2, 3])).toBe(false);
     expect(isFunction(true)).toBe(false);
     expect(isFunction(new Date())).toBe(false);
