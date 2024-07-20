@@ -147,6 +147,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '谓词',
           items: [
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
+            { text: 'isLength', link: '/zh_hans/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/zh_hans/reference/predicate/isPlainObject' },
             { text: 'isNil', link: '/zh_hans/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/zh_hans/reference/predicate/isNotNil' },
@@ -173,7 +174,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'startsWith (兼容性)', link: '/zh_hans/reference/string/startsWith' },
             { text: 'endsWith (兼容性)', link: '/zh_hans/reference/string/endsWith' },
           ],
-        }
+        },
       ],
     },
   ];
