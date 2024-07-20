@@ -35,6 +35,7 @@
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
+    "browser": "./umd/browser.global.js",
     "exports": {
       ".": {
         "import": {

@@ -94,7 +94,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)               | No support            |
 | [sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)           | No support            |
 | [tail](https://lodash.com/docs/4.17.15#tail)                           | ✅                    |
-| [take](https://lodash.com/docs/4.17.15#take)                           | 📝                    |
+| [take](https://lodash.com/docs/4.17.15#take)                           | ✅                       |
 | [takeRight](https://lodash.com/docs/4.17.15#takeRight)                 | 📝                    |
 | [takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)       | 📝                    |
 | [takeWhile](https://lodash.com/docs/4.17.15#takeWhile)                 | 📝                    |
@@ -209,7 +209,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isFinite](https://lodash.com/docs/4.17.15#isFinite)                   | ❌                    |
 | [isFunction](https://lodash.com/docs/4.17.15#isFunction)               | ❌                    |
 | [isInteger](https://lodash.com/docs/4.17.15#isInteger)                 | ❌                    |
-| [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ❌                    |
+| [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ✅                    |
 | [isMap](https://lodash.com/docs/4.17.15#isMap)                         | ❌                    |
 | [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ❌                    |
 | [isMatchWith](https://lodash.com/docs/4.17.15#isMatchWith)             | ❌                    |
@@ -220,7 +220,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isNumber](https://lodash.com/docs/4.17.15#isNumber)                   | ❌                    |
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌                    |
 | [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ❌                    |
-| [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ❌                    |
+| [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ✅                    |
 | [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ❌                    |
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌                    |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌                    |

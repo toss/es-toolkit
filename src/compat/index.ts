@@ -34,6 +34,8 @@ export { get } from './object/get.ts';
 export { set } from './object/set.ts';
 export { pick } from './object/pick.ts';
 
+export { isPlainObject } from './predicate/isPlainObject.ts';
+
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 
