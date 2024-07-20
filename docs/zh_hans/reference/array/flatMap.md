@@ -2,7 +2,7 @@
 
 将嵌套数组的每个元素映射到给定的迭代函数，然后将其展平到所需的深度。
 
-其工作方式与在 JavaScript 语言中调用 [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 和 [Array#map](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 时相同，即 `map(iteratee).flat(depth)`，但速度更快。
+其工作方式与在 JavaScript 语言中调用 [Array#flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 和 [Array#map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 时相同，即 `map(iteratee).flat(depth)`，但速度更快。
 
 ## 签名
 

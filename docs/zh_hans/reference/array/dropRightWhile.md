@@ -1,8 +1,8 @@
 # dropRightWhile
 
-从数组末尾移除元素，直到谓词函数返回 false。
+从数组末尾移除元素，直到谓词函数返回 `false`。
 
-该函数迭代数组，并从开头开始移除元素，直到提供的谓词函数返回 false 为止。然后返回剩余元素组成的新数组。
+该函数迭代数组，并从末尾开始移除元素，直到提供的谓词函数返回 `false` 为止。然后返回剩余元素组成的新数组。
 
 ## 签名
 
@@ -13,7 +13,7 @@ function dropRightWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean):
 ### 参数
 
 - `arr` (`T[]`): 要从中移除元素的数组。
-- `canContinueDropping` (`(item: T) => boolean`): 一个谓词函数，用于确定是否继续移除元素。该函数将对数组中的每个元素调用，只要返回 true，移除操作就会继续。
+- `canContinueDropping` (`(item: T) => boolean`): 一个谓词函数，用于确定是否继续移除元素。该函数将对数组中的每个元素调用，只要返回 `true`，移除操作就会继续。
 
 ### 返回值
 
