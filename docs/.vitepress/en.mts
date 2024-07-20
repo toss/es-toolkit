@@ -111,6 +111,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Function Utilities',
           items: [
+            { text: 'before', link: '/reference/function/before' },
             { text: 'debounce', link: '/reference/function/debounce' },
             { text: 'throttle', link: '/reference/function/throttle' },
             { text: 'negate', link: '/reference/function/negate' },
