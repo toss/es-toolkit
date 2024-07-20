@@ -107,7 +107,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [uniqWith](https://lodash.com/docs/4.17.15#uniqWith)                   | 📝                    |
 | [unzip](https://lodash.com/docs/4.17.15#unzip)                         | 📝                    |
 | [unzipWith](https://lodash.com/docs/4.17.15#unzipWith)                 | 📝                    |
-| [without](https://lodash.com/docs/4.17.15#without)                     | 📝                    |
+| [without](https://lodash.com/docs/4.17.15#without)                     | ✅                    |
 | [xor](https://lodash.com/docs/4.17.15#xor)                             | 📝                    |
 | [xorBy](https://lodash.com/docs/4.17.15#xorBy)                         | 📝                    |
 | [xorWith](https://lodash.com/docs/4.17.15#xorWith)                     | 📝                    |
