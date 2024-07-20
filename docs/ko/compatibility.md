@@ -229,7 +229,7 @@ chunk([1, 2, 3, 4], 0);
 | [isString](https://lodash.com/docs/4.17.15#isString)                   | ❌        |
 | [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ❌        |
 | [isTypedArray](https://lodash.com/docs/4.17.15#isTypedArray)           | ❌        |
-| [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | 📝        |
+| [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | ✅        |
 | [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ❌        |
 | [isWeakSet](https://lodash.com/docs/4.17.15#isWeakSet)                 | ❌        |
 | [lt](https://lodash.com/docs/4.17.15#lt)                               | ❌        |
