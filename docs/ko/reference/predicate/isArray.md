@@ -10,7 +10,7 @@ TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어
 ## 인터페이스
 
 ```typescript
-function isArray<T>(value: T): value is Extract<T, unknown[] | Readonly<unknown[]>>;
+function isArray<T>(value: T): value is Extract<T, unknown[]>;
 ```
 
 ### 파라미터
@@ -19,7 +19,7 @@ function isArray<T>(value: T): value is Extract<T, unknown[] | Readonly<unknown[
 
 ### 반환 값
 
-(`value is Extract<T, unknown[] | Readonly<unknown[]>>`): 값이 배열이면 `true`, 아니면 `false`.
+(`value is Extract<T, unknown[]>`): 값이 배열이면 `true`, 아니면 `false`.
 
 ## 예시
 

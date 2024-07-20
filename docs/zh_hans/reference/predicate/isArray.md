@@ -11,7 +11,7 @@
 ## 签名
 
 ```typescript
-function isArray<T>(value: T): value is Extract<T, unknown[] | Readonly<unknown[]>>;
+function isArray<T>(value: T): value is Extract<T, unknown[]>;
 ```
 
 ### 参数
@@ -20,7 +20,7 @@ function isArray<T>(value: T): value is Extract<T, unknown[] | Readonly<unknown[
 
 ### 返回值
 
-(`value is Extract<T, unknown[] | Readonly<unknown[]>>`): 如果值为数组，则返回 `true`，否则返回 `false`。
+(`value is Extract<T, unknown[]>`): 如果值为数组，则返回 `true`，否则返回 `false`。
 
 ## 示例
 

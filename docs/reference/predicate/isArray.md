@@ -10,7 +10,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isArray<T>(value: T): value is Extract<T, unknown[] | Readonly<unknown[]>>;
+function isArray<T>(value: T): value is Extract<T, unknown[]>;
 ```
 
 ### Parameters
@@ -19,7 +19,7 @@ function isArray<T>(value: T): value is Extract<T, unknown[] | Readonly<unknown[
 
 ### Returns
 
-(`value is Extract<T, unknown[] | Readonly<unknown[]>>`): `true` if the value is an array, `false` otherwise.
+(`value is Extract<T, unknown[]>`): `true` if the value is an array, `false` otherwise.
 
 ## Examples
 
