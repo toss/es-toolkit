@@ -55,3 +55,25 @@ es-toolkit은 Bun에서도 사용할 수 있어요. 아래 명령어를 사용�
 ```sh
 bun add es-toolkit
 ```
+
+## 브라우저
+
+[jsdelivr](https://www.jsdelivr.com) 또는 [unpkg](https://unpkg.com) 같은 CDN에서 es-toolkit을 쓸 수 있어요. Lodash와 같이 `_` 변수에 모든 함수가 포함돼요.
+
+::: code-group
+
+```html [jsdelivr]
+<script src="https://cdn.jsdelivr.net/npm/es-toolkit"></script>
+<script>
+  var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+```html [unpkg]
+<script src="https://unpkg.com/es-toolkit"></script>
+<script>
+  var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+:::
