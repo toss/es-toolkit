@@ -1,12 +1,10 @@
-Sure, here's the markdown document without the code blocks wrapped in triple backticks:
-
 # isLength
 
-주어진 값이 유효한 길이인지 확인합니다.
+주어진 값이 유효한 길이인지 확인해요.
 
-이 함수는 주어진 값이 `number` 타입이고 0 이상의 정수이며, JavaScript에서 안전한 최대 정수 값(`Number.MAX_SAFE_INTEGER`) 이하인지 확인합니다. 값이 유효한 길이이면 `true`, 아니면 `false`를 반환해요.
+유효한 길이란, `0` 이상 `Number.MAX_SAFE_INTEGER` 미만의 정수를 말해요. 
 
-TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 유효한 길이 타입 (`number`)으로 좁힐 수 있어요.
+TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `number`로 좁혀요.
 
 ## Signature
 
