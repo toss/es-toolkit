@@ -149,6 +149,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'clone', link: '/ko/reference/object/clone' },
             { text: 'invert', link: '/ko/reference/object/invert' },
+            { text: 'flattenObject', link: '/ko/reference/object/flattenObject' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
@@ -162,6 +163,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
             { text: 'isLength', link: '/ko/reference/predicate/isLength' },
+            { text: 'isPlainObject', link: '/ko/reference/predicate/isPlainObject' },
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
