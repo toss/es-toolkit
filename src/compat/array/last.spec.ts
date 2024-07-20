@@ -18,7 +18,7 @@ describe('last', () => {
     expect(last([])).toBe(undefined);
   });
 
-  it('should work as an iteratee for methods like `_.map`', () => {
+  it('should work as an iteratee for methods like `map`', () => {
     const array = [
       [1, 2, 3],
       [4, 5, 6],
