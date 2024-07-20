@@ -60,7 +60,9 @@ export function clone<T>(obj: T): T {
   }
 
   if (typeof obj === 'object') {
-    return Object.assign(Object.create(Object.getPrototypeOf(obj)), obj);
+    const prototype = Object.getPrototypeOf(obj);
+    const result = Object.create(prototype)
+    return Object.assign(result, obj);
   }
   return obj;
 }
