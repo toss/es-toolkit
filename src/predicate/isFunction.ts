@@ -5,7 +5,7 @@
  * @returns {boolean} Returns `true` if `value` is a function, else `false`.
  *
  * @example
- * isFunction(Arrat.prototype.slice); // true
+ * isFunction(Array.prototype.slice); // true
  * isFunction(async function () {}); // true
  * isFunction(function* () {}); // true
  * isFunction(Proxy); // true
