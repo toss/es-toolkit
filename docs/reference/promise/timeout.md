@@ -16,9 +16,9 @@ function timeout(ms: number): Promise<never>;
 
 (`Promise<never>`): A Promise that rejects after the specified timeout.
 
-## 예시
+## Examples
 
-### 기본 사용법
+### Basic Usage
 
 ```typescript
 try {
