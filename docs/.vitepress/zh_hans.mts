@@ -146,6 +146,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '谓词',
           items: [
+            { text: 'isArray', link: '/zh_hans/reference/predicate/isArray' },
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
             { text: 'isLength', link: '/zh_hans/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/zh_hans/reference/predicate/isPlainObject' },
