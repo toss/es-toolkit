@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.13.1
+
+Released on July 20th, 2024.
+
+- Use the compatibility layer `es-toolkit/compat` in legacy CDN builds.
+
 ## Version v1.13.0
 
 Released on July 20th, 2024.
