@@ -13,7 +13,7 @@ describe('flattenObject', function () {
       'a.b': 'yay'
     })
 
-    const date= new Date();
+    const date = new Date();
 
     const result2 = flattenObject({
       a: {
