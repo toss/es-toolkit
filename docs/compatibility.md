@@ -197,7 +197,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isArguments](https://lodash.com/docs/4.17.15#isArguments)             | ❌                    |
 | [isArray](https://lodash.com/docs/4.17.15#isArray)                     | ❌                    |
 | [isArrayBuffer](https://lodash.com/docs/4.17.15#isArrayBuffer)         | ❌                    |
-| [isArrayLike](https://lodash.com/docs/4.17.15#isArrayLike)             | ❌                    |
+| [isArrayLike](https://lodash.com/docs/4.17.15#isArrayLike)             | ✅                    |
 | [isArrayLikeObject](https://lodash.com/docs/4.17.15#isArrayLikeObject) | ❌                    |
 | [isBoolean](https://lodash.com/docs/4.17.15#isBoolean)                 | ❌                    |
 | [isBuffer](https://lodash.com/docs/4.17.15#isBuffer)                   | ❌                    |
@@ -208,7 +208,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isEqualWith](https://lodash.com/docs/4.17.15#isEqualWith)             | ❌                    |
 | [isError](https://lodash.com/docs/4.17.15#isError)                     | ❌                    |
 | [isFinite](https://lodash.com/docs/4.17.15#isFinite)                   | ❌                    |
-| [isFunction](https://lodash.com/docs/4.17.15#isFunction)               | ❌                    |
+| [isFunction](https://lodash.com/docs/4.17.15#isFunction)               | ✅                    |
 | [isInteger](https://lodash.com/docs/4.17.15#isInteger)                 | ❌                    |
 | [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ✅                    |
 | [isMap](https://lodash.com/docs/4.17.15#isMap)                         | ❌                    |
