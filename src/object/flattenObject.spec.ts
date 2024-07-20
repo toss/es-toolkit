@@ -1,4 +1,4 @@
-import { describe, expect, it, test } from "vitest"
+import { describe, expect, it } from "vitest"
 import { flattenObject } from "./flattenObject";
 
 describe('flattenObject', function () {
@@ -13,6 +13,8 @@ describe('flattenObject', function () {
       'a.b': 'yay'
     })
 
+    const date = new Date();
+
     const result2 = flattenObject({
       a: {
         b: {
@@ -21,7 +23,7 @@ describe('flattenObject', function () {
           boolean: true,
           null: null,
           undefined: undefined,
-          date: new Date(),
+          date: date,
         }
       }
     })
@@ -32,11 +34,13 @@ describe('flattenObject', function () {
       'a.b.boolean': true,
       'a.b.null': null,
       'a.b.undefined': undefined,
-      'a.b.date': new Date(),
+      'a.b.date': date,
     })
   })
 
   it('flattens multiple keys', () => {
+    const date = new Date();
+
     const result = flattenObject({
       a: {
         b: {
@@ -45,7 +49,7 @@ describe('flattenObject', function () {
         d: {
           e: {
             f: {
-              g: new Date()
+              g: date
             }
           }
         }
@@ -57,7 +61,7 @@ describe('flattenObject', function () {
 
     expect(result).toEqual({
       'a.b.c': 1,
-      'a.d.e.f.g': new Date(),
+      'a.d.e.f.g': date,
       'h.i': 'hi'
     })
   })
