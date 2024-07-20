@@ -1,20 +1,22 @@
 /**
- * It creates a function that only executes after being called a specified number of times.
- * This is particularly useful for scenarios involving events or asynchoronous operations
- * where an action should occur after a certain number of invocations.
+ * Creates a function that only executes starting from the `n`-th call.
+ * The provided function will be invoked starting from the `n`-th call.
+ *
+ * This is particularly useful for scenarios involving events or asynchronous operations
+ * where an action should occur only after a certain number of invocations.
  *
  * @template F - The type of the function to be invoked.
- * @param {number} n - The number of calls required before `func` is invoked.
+ * @param {number} n - The number of calls required for `func` to execute.
  * @param {F} func - The function to be invoked.
  * @returns {F} - A new function that:
  * - Tracks the number of calls.
- * - Calls `func` only after being invoked `n` times.
- * - Returns `undefiend` if fewer than `n` calls have been made.
- * @throws {Error} - Throws an error if `n` is a negative integer.
+ * - Invokes `func` starting from the `n`-th call.
+ * - Returns `undefined` if fewer than `n` calls have been made.
+ * @throws {Error} - Throws an error if `n` is negative.
  * @example
  *
  * const afterFn = after(3, () => {
- *  console.log("happened.")
+ *  console.log("called")
  * });
  *
  * // Will not log anything.
@@ -22,7 +24,7 @@
  * // Will not log anything.
  * afterFn()
  * // Will log 'called'.
- * afterFn() // print "called"
+ * afterFn()
  */
 
 export const after = <F extends (...args: any[]) => any>(n: number, func: F): F => {
