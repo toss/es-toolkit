@@ -1,4 +1,4 @@
-import * as toolkit from './index';
+import * as toolkit from './compat/index.ts';
 
 interface Window {
   _: typeof toolkit;
