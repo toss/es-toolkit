@@ -75,7 +75,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [intersectionBy](https://lodash.com/docs/4.17.15#intersectionBy)       | 📝                    |
 | [intersectionWith](https://lodash.com/docs/4.17.15#intersectionWith)   | 📝                    |
 | [join](https://lodash.com/docs/4.17.15#join)                           | ❌                    |
-| [last](https://lodash.com/docs/4.17.15#last)                           | 📝                    |
+| [last](https://lodash.com/docs/4.17.15#last)                           | ✅                    |
 | [lastIndexOf](https://lodash.com/docs/4.17.15#lastIndexOf)             | ❌                    |
 | [nth](https://lodash.com/docs/4.17.15#nth)                             | ❌                    |
 | [pull](https://lodash.com/docs/4.17.15#pull)                           | ❌                    |
