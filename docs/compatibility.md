@@ -102,7 +102,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [union](https://lodash.com/docs/4.17.15#union)                         | 📝                    |
 | [unionBy](https://lodash.com/docs/4.17.15#unionBy)                     | 📝                    |
 | [unionWith](https://lodash.com/docs/4.17.15#unionWith)                 | 📝                    |
-| [uniq](https://lodash.com/docs/4.17.15#uniq)                           | 📝                    |
+| [uniq](https://lodash.com/docs/4.17.15#uniq)                           | ✅                    |
 | [uniqBy](https://lodash.com/docs/4.17.15#uniqBy)                       | 📝                    |
 | [uniqWith](https://lodash.com/docs/4.17.15#uniqWith)                   | 📝                    |
 | [unzip](https://lodash.com/docs/4.17.15#unzip)                         | 📝                    |
