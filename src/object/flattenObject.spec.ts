@@ -39,7 +39,7 @@ describe('flattenObject', function () {
   })
 
   it('flattens multiple keys', () => {
-    const date= new Date();
+    const date = new Date();
 
     const result = flattenObject({
       a: {
