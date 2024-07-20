@@ -2,25 +2,25 @@
 
 주어진 값이 유효한 길이인지 확인해요.
 
-유효한 길이란, `0` 이상 `Number.MAX_SAFE_INTEGER` 미만의 정수를 말해요. 
+유효한 길이란, `0` 이상 `Number.MAX_SAFE_INTEGER` 미만의 정수를 말해요.
 
 TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `number`로 좁혀요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function isLength(value: unknown): value is number;
 ```
 
-### Parameters
+### 파라미터
 
 - `value` (`unknown`): 유효한 길이인지 확인할 값
 
-### Returns
+### 반환 값
 
 (`value is number`): 값이 유효한 길이면 `true`, 아니면 `false`.
 
-## Examples
+## 예시
 
 ```typescript
 import { isLength } from 'es-toolkit/predicate';
