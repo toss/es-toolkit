@@ -1,5 +1,7 @@
 /**
- * Create a function that only executes after being called a specified number of times.
+ * It creates a function that only executes after being called a specified number of times.
+ * This is particularly useful for scenarios involving events or asynchoronous operations
+ * where an action should occur after a certain number of invocations.
  *
  * @template F - The type of the function to be invoked.
  * @param {number} n - The number of calls required before `func` is invoked.
@@ -19,8 +21,8 @@
  * afterFn()
  * // Will not log anything.
  * afterFn()
- * // Will log 'happend.'.
- * afterFn() // print "happend"
+ * // Will log 'called'.
+ * afterFn() // print "called"
  */
 
 export const after = <F extends (...args: any[]) => any>(n: number, func: F): F => {
