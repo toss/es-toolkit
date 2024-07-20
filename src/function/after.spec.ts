@@ -9,12 +9,12 @@ describe('after', () => {
     expect(() => after(NaN, mockFn)).toThrowErrorMatchingInlineSnapshot('[Error: n must be a non-negative integer.]');
   });
 
-  it('should create a function that invokes `func` after `n` calls.`', async () => {
+  it('should create a function that invokes `func` only after being called `n` calls.`', async () => {
     const mockFn = vi.fn();
     const n = 3;
 
     const afterFn = after(n, mockFn);
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < n - 1; i++) {
       expect(afterFn()).toBeUndefined();
     }
     expect(mockFn).toHaveBeenCalledTimes(0);

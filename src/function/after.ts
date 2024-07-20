@@ -32,7 +32,7 @@ export const after = <F extends (...args: any[]) => any>(n: number, func: F): F 
 
   let counter = 0;
   return ((...args: Parameters<F>) => {
-    if (++counter > n) {
+    if (++counter >= n) {
       return func(...args);
     }
     return undefined;
