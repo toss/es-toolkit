@@ -11,16 +11,13 @@ describe('isNull', () => {
   });
 
   it('should return `false` for non `null` values', () => {
-    function createArguments() {
-      return arguments;
-    }
-
     const expected = falsey.map(value => value === null);
     const actual = falsey.map((value, index) => (index ? isNull(value) : isNull(undefined)));
-    const args = createArguments(1, 2, 3);
 
+    (function () {
+      expect(isNull(arguments)).toBe(false);
+    })(1, 2, 3);
     expect(actual).toEqual(expected);
-    expect(isNull(args)).toBe(false);
     expect(isNull([1, 2, 3])).toBe(false);
     expect(isNull(true)).toBe(false);
     expect(isNull(new Date())).toBe(false);
