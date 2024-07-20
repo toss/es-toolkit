@@ -32,6 +32,7 @@ However, the following are out of scope for `es-toolkit/compat`:
 - Implicit type conversions, such as converting an empty string to zero or false.
 - Functions that have specialized implementations for specific types of arrays, like [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq).
 - Handling cases where internal object prototypes, like `Array.prototype`, have been modified.
+- Managing cases with JavaScript realms.
 - Method chaining support through "Seq" methods.
 
 ## Implementation Status
@@ -94,7 +95,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)               | No support            |
 | [sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)           | No support            |
 | [tail](https://lodash.com/docs/4.17.15#tail)                           | ✅                    |
-| [take](https://lodash.com/docs/4.17.15#take)                           | 📝                    |
+| [take](https://lodash.com/docs/4.17.15#take)                           | ✅                    |
 | [takeRight](https://lodash.com/docs/4.17.15#takeRight)                 | 📝                    |
 | [takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)       | 📝                    |
 | [takeWhile](https://lodash.com/docs/4.17.15#takeWhile)                 | 📝                    |
@@ -209,7 +210,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isFinite](https://lodash.com/docs/4.17.15#isFinite)                   | ❌                    |
 | [isFunction](https://lodash.com/docs/4.17.15#isFunction)               | ❌                    |
 | [isInteger](https://lodash.com/docs/4.17.15#isInteger)                 | ❌                    |
-| [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ❌                    |
+| [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ✅                    |
 | [isMap](https://lodash.com/docs/4.17.15#isMap)                         | ❌                    |
 | [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ❌                    |
 | [isMatchWith](https://lodash.com/docs/4.17.15#isMatchWith)             | ❌                    |
