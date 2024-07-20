@@ -33,6 +33,7 @@ chunk([1, 2, 3, 4], 0);
 - 암시적 타입 변환: 빈 문자열을 0 또는 false로 변환하는 것과 같은 동작
 - 어떤 경우에 특화된 구현: [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)와 같이 정렬된 배열만 받는 함수
 - JavaScript 내장 객체의 프로토타입이 바뀐 경우에 대응하는 코드
+- JavaScript Realm에 대응하는 코드
 - 메서드 체이닝: `_(arr).map(...).filter(...)`와 같은 메서드 체이닝
 
 ## 구현 상태
