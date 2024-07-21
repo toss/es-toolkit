@@ -16,6 +16,7 @@ describe('isNull', () => {
 
     // eslint-disable-next-line
     (function (..._args: any[]) {
+      // eslint-disable-next-line
       expect(isNull(arguments)).toBe(false);
     })(1, 2, 3);
     expect(actual).toEqual(expected);
