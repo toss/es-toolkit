@@ -1,4 +1,3 @@
-
 import { describe, expect, it } from 'vitest';
 import { concat } from './concat';
 
@@ -20,6 +19,7 @@ describe('concat', () => {
   });
 
   it('should cast non-array `array` values to arrays', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined, false, true, 1, NaN, 'a'];
 
     let expected: unknown[] = values.map((value, index) => (index ? [value] : []));
@@ -28,9 +28,9 @@ describe('concat', () => {
 
     expect(actual).toEqual(expected);
 
-    expected = values.map((value) => [value, 2, [3]]);
+    expected = values.map(value => [value, 2, [3]]);
 
-    actual = values.map((value) => concat<unknown>(value, [2], [[3]]));
+    actual = values.map(value => concat<unknown>(value, [2], [[3]]));
 
     expect(actual).toEqual(expected);
   });

@@ -4,5 +4,5 @@ interface Window {
   _: typeof toolkit;
 }
 
-declare var window: Window;
+declare let window: Window;
 window._ = toolkit;

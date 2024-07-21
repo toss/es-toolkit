@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
-import { isPlainObject } from "./isPlainObject";
-import { falsey } from "../_internal/falsey";
+import { describe, expect, it } from 'vitest';
+import { isPlainObject } from './isPlainObject';
+import { falsey } from '../_internal/falsey';
 
 describe('isPlainObject', () => {
   it('should detect plain objects', () => {
@@ -10,7 +10,7 @@ describe('isPlainObject', () => {
 
       constructor(b: number) {
         this.a = 1;
-        this.b = b
+        this.b = b;
       }
     }
 
@@ -36,6 +36,7 @@ describe('isPlainObject', () => {
   it('should return `true` for objects with a writable `Symbol.toStringTag` property', () => {
     if (Symbol && Symbol.toStringTag) {
       const object = {};
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       object[Symbol.toStringTag] = 'X';
 
@@ -49,6 +50,7 @@ describe('isPlainObject', () => {
   });
 
   it('should return `false` for non-Object objects', function () {
+    // eslint-disable-next-line prefer-rest-params
     expect(isPlainObject(arguments)).toBe(false);
     expect(isPlainObject(Error)).toBe(false);
     expect(isPlainObject(Math)).toBe(false);
@@ -57,9 +59,7 @@ describe('isPlainObject', () => {
   it('should return `false` for non-objects', () => {
     const expected = falsey.map(() => false);
 
-    const actual = falsey.map((value, index) =>
-      index ? isPlainObject(value) : isPlainObject(),
-    );
+    const actual = falsey.map((value, index) => (index ? isPlainObject(value) : isPlainObject()));
 
     expect(actual).toEqual(expected);
 
@@ -85,11 +85,13 @@ describe('isPlainObject', () => {
   it('should not mutate `value`', () => {
     if (Symbol && Symbol.toStringTag) {
       const proto = {};
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       proto[Symbol.toStringTag] = undefined;
       const object = Object.create(proto);
 
       expect(isPlainObject(object)).toBe(false);
+      // eslint-disable-next-line no-prototype-builtins
       expect(object.hasOwnProperty(Symbol.toStringTag)).toBe(false);
     }
   });
