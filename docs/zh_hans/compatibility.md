@@ -195,7 +195,7 @@ chunk([1, 2, 3, 4], 0);
 | [gt](https://lodash.com/docs/4.17.15#gt)                               | ❌       |
 | [gte](https://lodash.com/docs/4.17.15#gte)                             | ❌       |
 | [isArguments](https://lodash.com/docs/4.17.15#isArguments)             | ❌       |
-| [isArray](https://lodash.com/docs/4.17.15#isArray)                     | ❌       |
+| [isArray](https://lodash.com/docs/4.17.15#isArray)                     | ✅       |
 | [isArrayBuffer](https://lodash.com/docs/4.17.15#isArrayBuffer)         | ❌       |
 | [isArrayLike](https://lodash.com/docs/4.17.15#isArrayLike)             | ❌       |
 | [isArrayLikeObject](https://lodash.com/docs/4.17.15#isArrayLikeObject) | ❌       |

@@ -19,6 +19,6 @@
  * console.log(isArray(value2)); // false
  * console.log(isArray(value3)); // false
  */
-export function isArray<T>(value: T): value is Extract<T, readonly unknown[]> {
+export function isArray<T>(value?: T): value is Extract<T, readonly unknown[]> {
   return Array.isArray(value);
 }

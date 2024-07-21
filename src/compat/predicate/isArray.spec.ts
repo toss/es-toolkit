@@ -1,5 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { isArray } from '../compat/predicate/isArray';
+import { isArray } from './isArray';
+import { falsey } from '../_internal/falsey';
+import { args } from '../_internal/args';
 
 describe('isArray', function () {
   it('returns true if value is an array', () => {
@@ -21,5 +23,28 @@ describe('isArray', function () {
     const result2 = arr2.filter(isArray);
     expect(result2).toStrictEqual([[1, 2, 3]]);
     expectTypeOf(result2).toEqualTypeOf<Array<readonly [1, 2, 3]>>();
+  });
+
+  it('should return `true` for arrays', () => {
+    expect(isArray([1, 2, 3])).toBe(true);
+  });
+
+  it('should return `false` for non-arrays', () => {
+    const expected = falsey.map(() => false);
+
+    const actual = falsey.map((value, index) => (index ? isArray(value) : isArray()));
+
+    expect(actual).toEqual(expected);
+
+    expect(isArray(args)).toBe(false);
+    expect(isArray(true)).toBe(false);
+    expect(isArray(new Date())).toBe(false);
+    expect(isArray(new Error())).toBe(false);
+    expect(isArray(Array.prototype.slice)).toBe(false);
+    expect(isArray({ 0: 1, length: 1 })).toBe(false);
+    expect(isArray(1)).toBe(false);
+    expect(isArray(/x/)).toBe(false);
+    expect(isArray('a')).toBe(false);
+    expect(isArray(Symbol('a'))).toBe(false);
   });
 });
