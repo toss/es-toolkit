@@ -11,7 +11,9 @@
 ## 签名
 
 ```typescript
-function max<T>(items: T[]): T;
+function max<T>(items: readonly [T, ...T[]]): T;
+function max(): undefined;
+function max<T>(items?: T[]): T | undefined;
 ```
 
 ### 参数
