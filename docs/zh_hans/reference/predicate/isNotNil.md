@@ -1,8 +1,10 @@
 # isNotNil
 
-检查给定的值是否不为 null 或 undefined。
+检查给定的值是否不为 `null` 或 `undefined`。
 
-该函数在 TypeScript 中还可以作为类型谓词，确保参数的类型不可为 null。
+如果值不为 `null` 或 `undefined`，则返回 `true`；否则返回 `false`。
+
+该函数在 TypeScript 中还可以作为类型谓词，将参数类型缩小为非 `null` 和非 `undefined` 的类型。通过这种方式，可以在类型上保证该值不为 Nullable。
 
 ## 签名
 
@@ -12,11 +14,11 @@ function isNotNil<T>(x: T | null | undefined): x is T;
 
 ### 参数
 
-- `x` (`T | null | undefined`): 要测试的值，检查其是否不为 null 或 undefined。
+- `x` (`T | null | undefined`): 要测试的值，检查其是否不为 `null` 或 `undefined`。
 
 ### 返回值
 
-(`x is T`): 如果值不为 null 或 undefined，则返回 true；否则返回 false。
+(`x is T`): 如果值不为 `null` 或 `undefined`，则返回 `true`；否则返回 `false`。
 
 ## 示例
 

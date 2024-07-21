@@ -146,6 +146,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '谓词',
           items: [
+            { text: 'isArray (兼容性)', link: '/zh_hans/reference/compat/predicate/isArray' },
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
             { text: 'isLength', link: '/zh_hans/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/zh_hans/reference/predicate/isPlainObject' },
@@ -171,8 +172,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'kebabCase', link: '/zh_hans/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/zh_hans/reference/string/lowerCase' },
             { text: 'capitalize', link: '/zh_hans/reference/string/capitalize' },
-            { text: 'startsWith (兼容性)', link: '/zh_hans/reference/string/startsWith' },
-            { text: 'endsWith (兼容性)', link: '/zh_hans/reference/string/endsWith' },
+            { text: 'startsWith (兼容性)', link: '/zh_hans/reference/compat/string/startsWith' },
+            { text: 'endsWith (兼容性)', link: '/zh_hans/reference/compat/string/endsWith' },
           ],
         },
       ],
