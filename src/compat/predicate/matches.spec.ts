@@ -2,17 +2,26 @@ import { describe, expect, it } from 'vitest';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
 import { stubTrue } from '../_internal/stubTrue';
-import { isMatch } from './isMatch';
+import { matches } from './matches';
 
-describe('isMatch', () => {
+describe('matches', () => {
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {
     let object: any = { a: 1, b: 2, c: 3 };
 
-    expect(isMatch(object, { a: 1 })).toBe(true);
-    expect(isMatch(object, { b: 2 })).toBe(true);
-    expect(isMatch(object, { a: 1, c: 3 })).toBe(true);
-    expect(isMatch(object, { c: 3, d: 4 })).toBe(false);
-    expect(isMatch({ a: { b: { c: 1, d: 2 }, e: 3 }, f: 4 }, { a: { b: { c: 1 } } })).toBe(true);
+    const isMatch1 = matches({ a: 1 });
+    expect(isMatch1(object)).toBe(true);
+
+    const isMatch2 = matches({ b: 2 });
+    expect(isMatch2(object)).toBe(true);
+
+    const isMatch3 = matches({ a: 1, c: 3 });
+    expect(isMatch3(object)).toBe(true);
+
+    const isMatch4 = matches({ c: 3, d: 4 });
+    expect(isMatch4(object)).toBe(false);
+
+    const isMatch5 = matches({ a: { b: { c: 1 } } });
+    expect(isMatch5({ a: { b: { c: 1, d: 2 }, e: 3 }, f: 4 })).toBe(true);
   });
 
   it(`should match inherited string keyed \`object\` properties`, () => {
@@ -32,7 +41,9 @@ describe('isMatch', () => {
     Foo.prototype.b = 2;
 
     const object = { a: new Foo() };
-    expect(isMatch(object, { a: { b: 2 } })).toBe(true);
+    const isMatch = matches({ a: { b: 2 } });
+
+    expect(isMatch(object)).toBe(true);
   });
 
   it(`should not match by inherited \`source\` properties`, () => {
@@ -53,7 +64,7 @@ describe('isMatch', () => {
 
     const objects = [{ a: 1 }, { a: 1, b: 2 }];
     const source = new Foo();
-    const actual = objects.map(object => isMatch(object, source));
+    const actual = objects.map(matches(source));
     const expected = objects.map(stubTrue);
 
     expect(actual).toEqual(expected);
@@ -63,16 +74,21 @@ describe('isMatch', () => {
     const object1 = { a: false, b: true, c: '3', d: 4, e: [5], f: { g: 6 } };
     const object2 = { a: 0, b: 1, c: 3, d: '4', e: ['5'], f: { g: '6' } };
 
-    expect(isMatch(object1, object1)).toBe(true);
-    expect(isMatch(object2, object1)).toBe(false);
+    const isMatch = matches(object1);
+
+    expect(isMatch(object1)).toBe(true);
+    expect(isMatch(object2)).toBe(false);
   });
 
   it(`should match \`-0\` as \`0\``, () => {
     const object1 = { a: -0 };
     const object2 = { a: 0 };
 
-    expect(isMatch(object2, object1)).toBe(true);
-    expect(isMatch(object1, object2)).toBe(true);
+    const isMatch1 = matches(object1);
+    const isMatch2 = matches(object2);
+
+    expect(isMatch1(object2)).toBe(true);
+    expect(isMatch2(object1)).toBe(true);
   });
 
   it(`should compare functions by reference`, () => {
@@ -80,16 +96,20 @@ describe('isMatch', () => {
     const object2 = { a: () => {} };
     const object3 = { a: {} };
 
-    expect(isMatch(object1, object1)).toBe(true);
-    expect(isMatch(object2, object1)).toBe(false);
-    expect(isMatch(object3, object1)).toBe(false);
+    const isMatch = matches(object1);
+
+    expect(isMatch(object1)).toBe(true);
+    expect(isMatch(object2)).toBe(false);
+    expect(isMatch(object3)).toBe(false);
   });
 
   it(`should work with a function for \`object\``, () => {
     function Foo() {}
     Foo.a = { b: 2, c: 3 };
 
-    expect(isMatch(Foo, { a: { b: 2 } })).toBe(true);
+    const isMatch = matches({ a: { b: 2 } });
+
+    expect(isMatch(Foo)).toBe(true);
   });
 
   it(`should work with a function for \`source\``, () => {
@@ -99,7 +119,7 @@ describe('isMatch', () => {
     Foo.c = 3;
 
     const objects = [{ a: 1 }, { a: 1, b: Foo.b, c: 3 }];
-    const actual = objects.map(object => isMatch(object, Foo));
+    const actual = objects.map(matches(Foo));
 
     expect(actual).toEqual([false, true]);
   });
@@ -123,25 +143,27 @@ describe('isMatch', () => {
     // @ts-ignore
     const object = new Foo({ a: new Foo({ b: 2, c: 3 }) });
 
-    expect(isMatch(object, { a: { b: 2 } })).toBe(true);
+    const isMatch = matches({ a: { b: 2 } });
+
+    expect(isMatch(object)).toBe(true);
   });
 
   it(`should partial match arrays`, () => {
     const objects = [{ a: ['b'] }, { a: ['c', 'd'] }];
-    let actual = objects.filter(x => isMatch(x, { a: ['d'] }));
+    let actual = objects.filter(matches({ a: ['d'] }));
 
     expect(actual).toEqual([objects[1]]);
 
-    actual = objects.filter(x => isMatch(x, { a: ['b', 'd'] }));
+    actual = objects.filter(matches({ a: ['b', 'd'] }));
     expect(actual).toEqual([]);
 
-    actual = objects.filter(x => isMatch(x, { a: ['d', 'b'] }));
+    actual = objects.filter(matches({ a: ['d', 'b'] }));
     expect(actual).toEqual([]);
   });
 
   it(`should partial match arrays with duplicate values`, () => {
     const objects = [{ a: [1, 2] }, { a: [2, 2] }];
-    const actual = objects.filter(x => isMatch(x, { a: [2, 2] }));
+    const actual = objects.filter(matches({ a: [2, 2] }));
 
     expect(actual).toEqual([objects[1]]);
   });
@@ -162,7 +184,7 @@ describe('isMatch', () => {
       },
     ];
 
-    const actual = objects.filter(x => isMatch(x, { a: [{ b: 1 }, { b: 4, c: 5 }] }));
+    const actual = objects.filter(matches({ a: [{ b: 1 }, { b: 4, c: 5 }] }));
     expect(actual).toEqual([objects[0]]);
   });
 
@@ -174,17 +196,17 @@ describe('isMatch', () => {
 
     const map = new Map();
     map.set('b', 2);
-    let actual = objects.filter(x => isMatch(x, { a: map }));
+    let actual = objects.filter(matches({ a: map }));
 
     expect(actual).toEqual([objects[1]]);
 
     map.delete('b');
-    actual = objects.filter(x => isMatch(x, { a: map }));
+    actual = objects.filter(matches({ a: map }));
 
     expect(actual).toEqual(objects);
 
     map.set('c', 3);
-    actual = objects.filter(x => isMatch(x, { a: map }));
+    actual = objects.filter(matches({ a: map }));
 
     expect(actual).toEqual([]);
   });
@@ -197,36 +219,36 @@ describe('isMatch', () => {
 
     const set = new Set();
     set.add(2);
-    let actual = objects.filter(x => isMatch(x, { a: set }));
+    let actual = objects.filter(matches({ a: set }));
 
     expect(actual).toEqual([objects[1]]);
 
     set.delete(2);
-    actual = objects.filter(x => isMatch(x, { a: set }));
+    actual = objects.filter(matches({ a: set }));
 
     expect(actual).toEqual(objects);
 
     set.add(3);
-    actual = objects.filter(x => isMatch(x, { a: set }));
+    actual = objects.filter(matches({ a: set }));
 
     expect(actual).toEqual([]);
   });
 
   it(`should match \`undefined\` values`, () => {
     const objects1 = [{ a: 1 }, { a: 1, b: 1 }, { a: 1, b: undefined }];
-    const actual1 = objects1.map(x => isMatch(x, { b: undefined }));
+    const actual1 = objects1.map(matches({ b: undefined }));
     const expected1 = [false, false, true];
 
     expect(actual1).toEqual(expected1);
 
     const objects2 = [{ a: 1 }, { a: 1, b: 1 }, { a: 1, b: undefined }];
-    const actual2 = objects2.map(x => isMatch(x, { a: 1, b: undefined }));
+    const actual2 = objects2.map(matches({ a: 1, b: undefined }));
     const expected2 = [false, false, true];
 
     expect(actual2).toEqual(expected2);
 
     const objects3 = [{ a: { b: 2 } }, { a: { b: 2, c: 3 } }, { a: { b: 2, c: undefined } }];
-    const actual3 = objects3.map(x => isMatch(x, { a: { c: undefined } }));
+    const actual3 = objects3.map(matches({ a: { c: undefined } }));
     const expected3 = [false, false, true];
 
     expect(actual3).toEqual(expected3);
@@ -243,13 +265,15 @@ describe('isMatch', () => {
     numberProto.b = undefined;
 
     try {
-      expect(isMatch(1, { b: undefined })).toBe(true);
+      const isMatch = matches({ b: undefined });
+      expect(isMatch(1)).toBe(true);
     } catch (e: any) {
       expect(false, e.message);
     }
 
     try {
-      expect(isMatch(1, { a: 1, b: undefined })).toBe(true);
+      const isMatch = matches({ a: 1, b: undefined });
+      expect(isMatch(1)).toBe(true);
     } catch (e: any) {
       expect(false, e.message);
     }
@@ -258,7 +282,8 @@ describe('isMatch', () => {
     // @ts-ignore
     numberProto.a = { b: 1, c: undefined };
     try {
-      expect(isMatch(1, { a: { c: undefined } })).toBe(true);
+      const isMatch = matches({ a: { c: undefined } });
+      expect(isMatch(1)).toBe(true);
     } catch (e: any) {
       expect(false, e.message);
     }
@@ -275,9 +300,11 @@ describe('isMatch', () => {
     const values = [, null, undefined];
     const expected = values.map(() => false);
 
+    const isMatch = matches({ a: 1 });
+
     const actual = values.map((value, index) => {
       try {
-        return index ? isMatch(value, { a: 1 }) : isMatch(undefined, { a: 1 });
+        return index ? isMatch(value) : isMatch(undefined);
       } catch (e: any) {}
     });
 
@@ -289,7 +316,9 @@ describe('isMatch', () => {
     const expected = empties.map(stubTrue);
 
     const actual = empties.map(value => {
-      return isMatch(value, object);
+      const isMatch = matches(object);
+
+      return isMatch(object);
     });
 
     expect(actual).toEqual(expected);
@@ -299,9 +328,11 @@ describe('isMatch', () => {
     const values = [, null, undefined];
     const expected = values.map(stubTrue);
 
+    const isMatch = matches({});
+
     const actual = values.map((value, index) => {
       try {
-        return index ? isMatch(value, {}) : isMatch(undefined, {});
+        return index ? isMatch(value) : isMatch(undefined);
       } catch (e: any) {}
     });
 
@@ -313,8 +344,32 @@ describe('isMatch', () => {
       { a: [1], b: { c: 1 } },
       { a: [2, 3], b: { d: 2 } },
     ];
-    const actual = objects.filter(x => isMatch(x, { a: [], b: {} }));
+    const actual = objects.filter(matches({ a: [], b: {} }));
 
     expect(actual).toEqual(objects);
+  });
+
+  it('should not change behavior if `source` is modified', () => {
+    const sources = [{ a: { b: 2, c: 3 } }, { a: 1, b: 2 }, { a: 1 }];
+
+    sources.forEach((source: any, index) => {
+      const object = structuredClone(source);
+      const isMatch = matches(source);
+
+      expect(isMatch(object)).toBe(true);
+
+      if (index) {
+        source.a = 2;
+        source.b = 1;
+        source.c = 3;
+      } else {
+        source.a.b = 1;
+        source.a.c = 2;
+        source.a.d = 3;
+      }
+
+      expect(isMatch(object)).toBe(true);
+      expect(isMatch(source)).toBe(false);
+    });
   });
 });
