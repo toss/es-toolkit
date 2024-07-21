@@ -217,7 +217,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isNaN](https://lodash.com/docs/4.17.15#isNaN)                         | ❌                    |
 | [isNative](https://lodash.com/docs/4.17.15#isNative)                   | ❌                    |
 | [isNil](https://lodash.com/docs/4.17.15#isNil)                         | 📝                    |
-| [isNull](https://lodash.com/docs/4.17.15#isNull)                       | 📝                    |
+| [isNull](https://lodash.com/docs/4.17.15#isNull)                       | ✅                    |
 | [isNumber](https://lodash.com/docs/4.17.15#isNumber)                   | ❌                    |
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌                    |
 | [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ❌                    |
