@@ -19,6 +19,11 @@ describe('set', () => {
     expect(result).toEqual({ a: { b: 1 } });
   });
 
+  it('should set a value on an object with paths with arrays', () => {
+    const result = set<{ a: { b: number } }>({}, ['a', 'b'], 1);
+    expect(result).toEqual({ a: { b: 1 } });
+  });
+
   it('should set a value on an object with nested path', () => {
     const result = set<{ a: { b: { c: { d: number } } } }>({}, 'a.b.c.d', 1);
     expect(result).toEqual({ a: { b: { c: { d: 1 } } } });
