@@ -107,6 +107,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '函数工具',
           items: [
+            { text: 'after', link: '/ko/reference/function/after' },
             { text: 'debounce', link: '/zh_hans/reference/function/debounce' },
             { text: 'throttle', link: '/zh_hans/reference/function/throttle' },
             { text: 'negate', link: '/zh_hans/reference/function/negate' },
