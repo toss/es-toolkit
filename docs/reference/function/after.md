@@ -3,7 +3,7 @@
 Creates a function that only executes starting from the `n`-th call.
 The provided function will be invoked starting from the `n`-th call.
 
-The is particularly useful for scenarios involving events or asynchronous operations where an action should occur only after a certain number of invodations.
+The is particularly useful for scenarios involving events or asynchronous operations where an action should occur only after a certain number of invocations.
 
 ## Signature
 
