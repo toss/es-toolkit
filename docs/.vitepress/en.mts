@@ -161,6 +161,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNil', link: '/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },
+            { text: 'isTypedArray', link: '/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
           ],
         },
