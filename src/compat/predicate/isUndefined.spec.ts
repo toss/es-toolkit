@@ -12,7 +12,7 @@ describe('isUndefined', () => {
     const actual = falsey.map((value, index) => (index ? isUndefined(value) : isUndefined(undefined)));
     expect(actual).toEqual(expected);
 
-    (function () {
+    (function (..._: any[]) {
       // eslint-disable-next-line prefer-rest-params
       expect(isUndefined(arguments)).toBe(false);
     })(1, 2, 3);
