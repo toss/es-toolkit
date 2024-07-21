@@ -21,7 +21,7 @@ describe('difference', () => {
   it(`should treat \`-0\` as \`0\``, () => {
     const array = [-0, 0];
 
-    let actual = array.map((value) => difference(array, [value]));
+    const actual = array.map((value) => difference(array, [value]));
 
     expect(actual).toEqual([[], []]);
 
@@ -49,7 +49,7 @@ describe('difference', () => {
   it(`should work with large arrays of \`-0\` as \`0\``, () => {
     const array = [-0, 0];
 
-    let actual = array.map((value) => {
+    const actual = array.map((value) => {
       const largeArray = Array.from({ length: LARGE_ARRAY_SIZE }).map(() => value);
 
       return difference(array, largeArray);
