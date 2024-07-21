@@ -16,7 +16,7 @@ function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T
 
 - `firstArr` (`T[]`): 要比较的第一个数组。
 - `secondArr` (`T[]`): 要比较的第二个数组。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 一个自定义函数，用于确定两个元素是否相等。该函数接受两个参数，分别来自每个数组，如果这两个元素被认为相等，则返回 true，否则返回 false。
+- `areItemsEqual` (`(x: T, y: T) => boolean`): 一个自定义函数，用于确定两个元素是否相等。该函数接受两个参数，分别来自每个数组，如果这两个元素被认为相等，则返回 `true`，否则返回 `false`。
 
 ### 返回值
 
