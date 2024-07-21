@@ -13,6 +13,7 @@ describe('isUndefined', () => {
     expect(actual).toEqual(expected);
 
     (function () {
+      // eslint-disable-next-line prefer-rest-params
       expect(isUndefined(arguments)).toBe(false);
     })(1, 2, 3);
     expect(isUndefined([1, 2, 3])).toBe(false);
