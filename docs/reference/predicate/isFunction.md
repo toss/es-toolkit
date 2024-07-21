@@ -9,7 +9,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isFunction(value: unknown): value is (...args: unknown[]) => unknown;
+function isFunction(value: unknown): value is (...args: never[]) => unknown;
 ```
 
 ### Parameters
@@ -18,7 +18,7 @@ function isFunction(value: unknown): value is (...args: unknown[]) => unknown;
 
 ### Returns
 
-(`value is (...args: unknown[]) => unknown`): Returns `true` if the value is a function, otherwise `false`.
+(`value is (...args: never[]) => unknown`): Returns `true` if the value is a function, otherwise `false`.
 
 ## Examples
 
