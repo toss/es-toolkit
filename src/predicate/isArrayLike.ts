@@ -1,4 +1,4 @@
-import { isLength } from './isLength';
+import { isLength } from "./isLength.ts";
 
 /**
  * Checks if `value` is array-like.
@@ -15,5 +15,6 @@ import { isLength } from './isLength';
  * isArrayLike(undefined); // false
  */
 export function isArrayLike(value: unknown): value is ArrayLike<unknown> {
-  return value != null && typeof value !== 'function' && isLength((value as ArrayLike<unknown>).length);
+  return value != null && typeof value !== "function" &&
+    isLength((value as ArrayLike<unknown>).length);
 }
