@@ -19,37 +19,39 @@ export function toPath(deepKey: string): string[] {
   const ESCAPE_REGEXP = /\\(\\)?/g;
   const PROPERTY_REGEXP = RegExp(
     // Match anything that isn't a dot or bracket.
-    "[^.[\\]]+" +
-    "|" +
-    // Or match property names within brackets.
-    "\\[(?:" +
-    // Match a non-string expression.
-    "([^\"'][^[]*)" +
-    "|" +
-    // Or match strings (supports escaping characters).
-    "([\"'])((?:(?!\\2)[^\\\\]|\\\\.)*?)\\2" +
-    ")\\]" +
-    "|" +
-    // Or match "" as the space between consecutive dots or empty brackets.
-    "(?=(?:\\.|\\[\\])(?:\\.|\\[\\]|$))",
-    "g",
+    '[^.[\\]]+' +
+      '|' +
+      // Or match property names within brackets.
+      '\\[(?:' +
+      // Match a non-string expression.
+      '([^"\'][^[]*)' +
+      '|' +
+      // Or match strings (supports escaping characters).
+      '(["\'])((?:(?!\\2)[^\\\\]|\\\\.)*?)\\2' +
+      ')\\]' +
+      '|' +
+      // Or match "" as the space between consecutive dots or empty brackets.
+      '(?=(?:\\.|\\[\\])(?:\\.|\\[\\]|$))',
+    'g'
   );
 
   const result: string[] = [];
 
-  if (deepKey[0] === ".") {
-    result.push("");
+  if (deepKey[0] === '.') {
+    result.push('');
   }
 
   let match: RegExpExecArray | null;
   let lastIndex = 0;
-  let count = 0;
 
   while ((match = PROPERTY_REGEXP.exec(deepKey)) !== null) {
-    let [key, expr, quote, substr] = match;
+    let key = match[0];
+    const expr = match[1];
+    const quote = match[2];
+    const substr = match[3];
 
     if (quote) {
-      key = substr.replace(ESCAPE_REGEXP, "$1");
+      key = substr.replace(ESCAPE_REGEXP, '$1');
     } else if (expr) {
       key = expr;
     }

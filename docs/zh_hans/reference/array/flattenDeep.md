@@ -2,7 +2,7 @@
 
 展开嵌套数组的所有深度。
 
-此函数的工作方式与在 JavaScript 语言中调用 [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 时使用 `flat(Infinity)` 相同，但速度更快。
+此函数的工作方式与在 JavaScript 语言中调用 [Array#flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 时使用 `flat(Infinity)` 相同，但速度更快。
 
 ## 签名
 
