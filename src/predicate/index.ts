@@ -8,3 +8,4 @@ export { isPlainObject } from './isPlainObject.ts';
 export { isFunction } from './isFunction.ts';
 export { isArrayLike } from './isArrayLike.ts';
 export { isTypedArray } from './isTypedArray.ts';
+export { isPrimitive } from './isPrimitive.ts';

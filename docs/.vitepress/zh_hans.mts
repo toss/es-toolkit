@@ -153,6 +153,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isFunction', link: '/zh_hans/reference/predicate/isFunction' },
             { text: 'isLength', link: '/zh_hans/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/zh_hans/reference/predicate/isPlainObject' },
+            { text: 'isPrimitive', link: '/zh_hans/reference/predicate/isPrimitive' },
             { text: 'isNil', link: '/zh_hans/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/zh_hans/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/zh_hans/reference/predicate/isNull' },

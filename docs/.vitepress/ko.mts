@@ -169,6 +169,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isFunction', link: '/ko/reference/predicate/isFunction' },
             { text: 'isLength', link: '/ko/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/ko/reference/predicate/isPlainObject' },
+            { text: 'isPrimitive', link: '/ko/reference/predicate/isPrimitive' },
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
