@@ -162,8 +162,10 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '타입 가드',
           items: [
             { text: 'isArray (호환성)', link: '/ko/reference/compat/predicate/isArray' },
+            { text: 'isArrayLike', link: '/ko/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
             { text: 'isLength', link: '/ko/reference/predicate/isLength' },
+            { text: 'isFunction', link: '/ko/reference/predicate/isFunction' },
             { text: 'isPlainObject', link: '/ko/reference/predicate/isPlainObject' },
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
