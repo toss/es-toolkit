@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { isArray } from './isArray';
+import { isArray } from '../compat/predicate/isArray';
 
 describe('isArray', function () {
   it('returns true if value is an array', () => {
