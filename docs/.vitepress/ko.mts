@@ -149,6 +149,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '객체',
           items: [
             { text: 'clone', link: '/ko/reference/object/clone' },
+            { text: 'cloneDeep', link: '/ko/reference/object/cloneDeep' },
             { text: 'invert', link: '/ko/reference/object/invert' },
             { text: 'flattenObject', link: '/ko/reference/object/flattenObject' },
             { text: 'omit', link: '/ko/reference/object/omit' },

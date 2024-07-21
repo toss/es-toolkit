@@ -138,6 +138,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Object Utilities',
           items: [
             { text: 'clone', link: '/reference/object/clone' },
+            { text: 'cloneDeep', link: '/reference/object/cloneDeep' },
             { text: 'invert', link: '/reference/object/invert' },
             { text: 'flattenObject', link: '/reference/object/flattenObject' },
             { text: 'omit', link: '/reference/object/omit' },
