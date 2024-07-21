@@ -61,7 +61,7 @@ chunk([1, 2, 3, 4], 0);
 | [dropRight](https://lodash.com/docs/4.17.15#dropRight)                 | ✅         |
 | [dropRightWhile](https://lodash.com/docs/4.17.15#dropRightWhile)       | 📝         |
 | [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | 📝         |
-| [fill](https://lodash.com/docs/4.17.15#fill)                           | 📝         |
+| [fill](https://lodash.com/docs/4.17.15#fill)                           | ✅         |
 | [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ❌         |
 | [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌         |
 | [flatten](https://lodash.com/docs/4.17.15#flatten)                     | 📝         |
@@ -293,7 +293,7 @@ chunk([1, 2, 3, 4], 0);
 | [get](https://lodash.com/docs/4.17.15#get)                   | ✅       |
 | [has](https://lodash.com/docs/4.17.15#has)                   | ❌       |
 | [hasIn](https://lodash.com/docs/4.17.15#hasIn)               | ❌       |
-| [invert](https://lodash.com/docs/4.17.15#invert)             | 📝       |
+| [invert](https://lodash.com/docs/4.17.15#invert)             | ✅       |
 | [invertBy](https://lodash.com/docs/4.17.15#invertBy)         | ❌       |
 | [invoke](https://lodash.com/docs/4.17.15#invoke)             | ❌       |
 | [keys](https://lodash.com/docs/4.17.15#keys)                 | ❌       |
