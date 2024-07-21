@@ -1,12 +1,16 @@
 /**
- * Converts `array` to an `arguments` object.
+ * Converts an array to an `arguments` object.
  *
- * @private
- * @param {Array} array The array to convert.
- * @returns {Object} Returns the converted `arguments` object.
+ * @param {unknown[]} array - The array to convert.
+ * @returns {IArguments} - The `arguments` object.
+ *
+ * @example
+ * toArgs([1, 2, 3]); // { '0': 1, '1': 2, '2': 3 } as IArguments
  */
-export function toArgs(array: any[]) {
-  return function (..._: any[]) {
+export function toArgs(array: unknown[]): IArguments {
+  // eslint-disable-next-line prefer-spread, @typescript-eslint/no-unused-vars
+  return (function (..._: any[]) {
+    // eslint-disable-next-line prefer-rest-params
     return arguments;
-  }.apply(undefined, array);
+  })(...array);
 }
