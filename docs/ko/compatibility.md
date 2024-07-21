@@ -294,7 +294,7 @@ chunk([1, 2, 3, 4], 0);
 | [get](https://lodash.com/docs/4.17.15#get)                   | ✅        |
 | [has](https://lodash.com/docs/4.17.15#has)                   | ❌        |
 | [hasIn](https://lodash.com/docs/4.17.15#hasIn)               | ❌        |
-| [invert](https://lodash.com/docs/4.17.15#invert)             | 📝        |
+| [invert](https://lodash.com/docs/4.17.15#invert)             | ✅        |
 | [invertBy](https://lodash.com/docs/4.17.15#invertBy)         | ❌        |
 | [invoke](https://lodash.com/docs/4.17.15#invoke)             | ❌        |
 | [keys](https://lodash.com/docs/4.17.15#keys)                 | ❌        |
