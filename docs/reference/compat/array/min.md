@@ -11,7 +11,7 @@ If the list is empty, returns `undefined`.
 ## Signature
 
 ```typescript
-function min<T>(items: readonly [T, ...T[]]): T;
+function min<T>(items: [T, ...T[]]): T;
 function min(): undefined;
 function min<T>(items?: T[]): T | undefined;
 ```
