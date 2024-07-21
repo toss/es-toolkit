@@ -10,7 +10,7 @@ Released on July 20th, 2024.
 
 Released on July 20th, 2024.
 
-`es-toolkit` can now be used in various CDNs, like [unpkg](https://unpkg.com) and [jsdelivr](https://www.jsdelivr.com). See more in our [installation docs](https://es-toolkit.slash.page/installation.html)
+`es-toolkit` can now be used in various CDNs, like [unpkg](https://unpkg.com) and [jsdelivr](https://www.jsdelivr.com). See more in our [usage docs](https://es-toolkit.slash.page/usage.html)
 
 ### Features
 

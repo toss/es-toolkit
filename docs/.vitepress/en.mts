@@ -36,7 +36,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Guide',
       items: [
         { text: 'Introduction', link: '/intro' },
-        { text: 'Installation', link: '/installation' },
+        { text: 'Installation & Usage', link: '/usage' },
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
         { text: 'Compatibility with Lodash', link: '/compatibility' },

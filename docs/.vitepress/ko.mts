@@ -35,7 +35,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: '가이드',
       items: [
         { text: '소개', link: '/ko/intro' },
-        { text: '설치', link: '/ko/installation' },
+        { text: '설치 및 사용 방법', link: '/ko/usage' },
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
         { text: 'Lodash와 호환성', link: '/ko/compatibility' },

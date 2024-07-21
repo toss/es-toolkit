@@ -1,5 +1,5 @@
 ---
-description: 如何安装 es-toolkit
+description: 如何使用 es-toolkit
 prev:
   text: es-toolkit 简介
   link: ./intro.md
@@ -8,9 +8,11 @@ next:
   link: ./bundle-size
 ---
 
-# 安装
+# 使用方法
 
 es-toolkit 可通过 [npm](https://npmjs.com/package/es-toolkit) 安装，适用于 Node.js 和 Bun，也可以通过 [JSR](https://jsr.io/@es-toolkit/es-toolkit) 安装到 Deno。
+
+你也可以通过 [从 CDN 导入](#浏览器) 的方式在浏览器中使用 es-toolkit。
 
 ## Node.js
 

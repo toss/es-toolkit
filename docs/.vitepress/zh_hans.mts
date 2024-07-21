@@ -35,7 +35,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: '指南',
       items: [
         { text: '简介', link: '/zh_hans/intro' },
-        { text: '安装', link: '/zh_hans/installation' },
+        { text: '安装和使用', link: '/zh_hans/usage' },
         { text: '包体积影响', link: '/zh_hans/bundle-size' },
         { text: '性能', link: '/zh_hans/performance' },
         { text: '与 Lodash 兼容性', link: '/zh_hans/compatibility' },
