@@ -122,6 +122,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '함수',
           items: [
+            { text: 'after', link: '/ko/reference/function/after' },
             { text: 'debounce', link: '/ko/reference/function/debounce' },
             { text: 'throttle', link: '/ko/reference/function/throttle' },
             { text: 'negate', link: '/reference/function/negate' },
@@ -148,6 +149,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '객체',
           items: [
             { text: 'clone', link: '/ko/reference/object/clone' },
+            { text: 'cloneDeep', link: '/ko/reference/object/cloneDeep' },
             { text: 'invert', link: '/ko/reference/object/invert' },
             { text: 'flattenObject', link: '/ko/reference/object/flattenObject' },
             { text: 'omit', link: '/ko/reference/object/omit' },
