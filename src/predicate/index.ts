@@ -5,3 +5,4 @@ export { isNull } from './isNull.ts';
 export { isUndefined } from './isUndefined.ts';
 export { isLength } from './isLength.ts';
 export { isPlainObject } from './isPlainObject.ts';
+export { isArray } from './isArray.ts';
