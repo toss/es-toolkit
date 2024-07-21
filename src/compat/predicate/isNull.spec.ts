@@ -14,7 +14,8 @@ describe('isNull', () => {
     const expected = falsey.map(value => value === null);
     const actual = falsey.map((value, index) => (index ? isNull(value) : isNull(undefined)));
 
-    (function () {
+    // eslint-disable-next-line
+    (function (..._args: any[]) {
       expect(isNull(arguments)).toBe(false);
     })(1, 2, 3);
     expect(actual).toEqual(expected);
