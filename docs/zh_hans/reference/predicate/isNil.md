@@ -1,6 +1,6 @@
 # isNil
 
-检查给定的值是否为 null 或 undefined。
+检查给定的值是否为 `null` 或 `undefined`。
 
 该函数测试提供的值是否为 `null` 或 `undefined`。
 

@@ -21,10 +21,9 @@ describe('get', () => {
   });
 
   it('should return undefined if array index number is not provided', () => {
-    const obj = { a: [{ b: 1 }] }
+    const obj = { a: [{ b: 1 }] };
     expect(get(obj, 'a[].b')).toBe(undefined);
   });
-
 
   /**
    * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/get-and-result.spec.js#L1
@@ -40,7 +39,7 @@ describe('get', () => {
     const object = { '-0': 'a', 0: 'b' };
     const props = [-0, Object(-0), 0, Object(0)];
 
-    const actual = props.map((key) => get(object, key));
+    const actual = props.map(key => get(object, key));
 
     expect(actual).toEqual(['a', 'a', 'b', 'b']);
   });
@@ -100,17 +99,16 @@ describe('get', () => {
   });
 
   it(`should return \`undefined\` for deep paths when \`object\` is nullish`, () => {
-    const values = [null, undefined];
-
-    expect(get(null, 'constructor.prototype.valueOf')).toEqual(undefined)
-    expect(get(null, ['constructor', 'prototype', 'valueOf'])).toEqual(undefined)
+    expect(get(null, 'constructor.prototype.valueOf')).toEqual(undefined);
+    expect(get(null, ['constructor', 'prototype', 'valueOf'])).toEqual(undefined);
   });
 
   it(`should return \`undefined\` if parts of \`path\` are missing`, () => {
+    // eslint-disable-next-line no-sparse-arrays
     const object = { a: [, null] };
 
-    expect(get(object, 'a[1].b.c')).toEqual(undefined)
-    expect(get(object, ['a', '1', 'b', 'c'])).toEqual(undefined)
+    expect(get(object, 'a[1].b.c')).toEqual(undefined);
+    expect(get(object, ['a', '1', 'b', 'c'])).toEqual(undefined);
   });
 
   it(`should be able to return \`null\` values`, () => {
@@ -121,12 +119,14 @@ describe('get', () => {
   });
 
   it(`should follow \`path\` over non-plain objects`, () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     Number.prototype.a = { b: 2 };
 
     expect(get(0, 'a.b')).toEqual(2);
     expect(get(0, ['a', 'b'])).toEqual(2);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     delete Number.prototype.a;
   });
@@ -134,13 +134,10 @@ describe('get', () => {
   it(`should return the default value for \`undefined\` values`, () => {
     const object = { a: {} };
     const values = empties.concat(true, new Date(), 1, /x/, 'a');
-    const expected = values.map((value) => [value, value]);
+    const expected = values.map(value => [value, value]);
 
-    ['a.b', ['a', 'b']].forEach((path) => {
-      const actual = values.map((value) => [
-        get(object, path, value),
-        get(null, path, value),
-      ]);
+    ['a.b', ['a', 'b']].forEach(path => {
+      const actual = values.map(value => [get(object, path, value), get(null, path, value)]);
 
       expect(actual).toEqual(expected);
     });

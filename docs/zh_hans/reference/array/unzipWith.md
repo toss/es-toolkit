@@ -11,7 +11,7 @@ function unzipWith<T, R>(target: T[][], iteratee: (...args: T[]) => R): R[];
 ### 参数
 
 - `target` (`T[][]`): 要解压缩的嵌套数组。这是一个数组的数组，其中每个内部数组包含要解压缩的元素。
-- `iteratee` (`(...args: T[]) => R`): 用于转换解压缩后的元素的函
+- `iteratee` (`(...args: T[]) => R`): 用于转换解压缩后的元素的函数。
 
 ### 返回值
 

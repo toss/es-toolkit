@@ -23,7 +23,7 @@ import { chunk as chunkToolkit } from '../../array/chunk.ts';
  * chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
  * // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
  */
-export function chunk<T>(arr: readonly T[], size: number = 1): T[][] {
+export function chunk<T>(arr: readonly T[], size = 1): T[][] {
   size = Math.max(Math.floor(size), 0);
 
   if (size === 0) {
