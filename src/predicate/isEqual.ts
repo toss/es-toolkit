@@ -31,8 +31,8 @@ export function isEqual(a: unknown, b: unknown): boolean {
     return false;
   }
 
-  const aKeys = Object.keys(a as object);
-  const bKeys = Object.keys(b as object);
+  const aKeys = Object.keys(a);
+  const bKeys = Object.keys(b);
 
   if (aKeys.length !== bKeys.length) {
     return false;
