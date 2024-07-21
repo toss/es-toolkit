@@ -36,7 +36,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Guide',
       items: [
         { text: 'Introduction', link: '/intro' },
-        { text: 'Installation', link: '/installation' },
+        { text: 'Installation & Usage', link: '/usage' },
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
         { text: 'Compatibility with Lodash', link: '/compatibility' },
@@ -49,6 +49,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Array Utilities',
           items: [
             { text: 'chunk', link: '/reference/array/chunk' },
+            { text: 'concat (compat)', link: '/reference/compat/array/concat' },
             { text: 'countBy', link: '/reference/array/countBy' },
             { text: 'compact', link: '/reference/array/compact' },
             { text: 'difference', link: '/reference/array/difference' },
@@ -74,6 +75,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'keyBy', link: '/reference/array/keyBy' },
             { text: 'minBy', link: '/reference/array/minBy' },
             { text: 'maxBy', link: '/reference/array/maxBy' },
+            { text: 'min (compat)', link: '/reference/compat/array/min' },
+            { text: 'max (compat)', link: '/reference/compat/array/max' },
             { text: 'orderBy', link: '/reference/array/orderBy' },
             { text: 'partition', link: '/reference/array/partition' },
             { text: 'sample', link: '/reference/array/sample' },
@@ -97,6 +100,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorWith', link: '/reference/array/xorWith' },
             { text: 'zip', link: '/reference/array/zip' },
             { text: 'zipObject', link: '/reference/array/zipObject' },
+            { text: 'zipObjectDeep (compat)', link: '/reference/compat/array/zipObjectDeep' },
             { text: 'zipWith', link: '/reference/array/zipWith' },
             { text: 'head', link: '/reference/array/head' },
             { text: 'tail', link: '/reference/array/tail' },
@@ -107,6 +111,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Function Utilities',
           items: [
+            { text: 'after', link: '/reference/function/after' },
             { text: 'debounce', link: '/reference/function/debounce' },
             { text: 'throttle', link: '/reference/function/throttle' },
             { text: 'negate', link: '/reference/function/negate' },
@@ -134,17 +139,25 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'clone', link: '/reference/object/clone' },
             { text: 'cloneDeep', link: '/reference/object/cloneDeep' },
+            { text: 'invert', link: '/reference/object/invert' },
+            { text: 'flattenObject', link: '/reference/object/flattenObject' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
             { text: 'pickBy', link: '/reference/object/pickBy' },
-            { text: 'invert', link: '/reference/object/invert' },
+            { text: 'get (compat)', link: '/reference/compat/object/get' },
+            { text: 'set (compat)', link: '/reference/compat/object/set' },
           ],
         },
         {
           text: 'Predicates',
           items: [
+            { text: 'isArray (compat)', link: '/reference/compat/predicate/isArray' },
+            { text: 'isArrayLike', link: '/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
+            { text: 'isFunction', link: '/reference/predicate/isFunction' },
+            { text: 'isLength', link: '/reference/predicate/isLength' },
+            { text: 'isPlainObject', link: '/reference/predicate/isPlainObject' },
             { text: 'isNil', link: '/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },
@@ -153,7 +166,11 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise Utilities',
-          items: [{ text: 'delay', link: '/reference/promise/delay' }],
+          items: [
+            { text: 'delay', link: '/reference/promise/delay' },
+            { text: 'timeout', link: '/reference/promise/timeout' },
+            { text: 'withTimeout', link: '/reference/promise/withTimeout' },
+          ],
         },
         {
           text: 'String Utilities',
@@ -162,7 +179,10 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'snakeCase', link: '/reference/string/snakeCase' },
             { text: 'kebabCase', link: '/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/reference/string/lowerCase' },
+            { text: 'startCase', link: '/reference/string/startCase' },
             { text: 'capitalize', link: '/reference/string/capitalize' },
+            { text: 'startsWith (compat)', link: '/reference/compat/string/startsWith' },
+            { text: 'endsWith (compat)', link: '/reference/compat/string/endsWith' },
           ],
         },
       ],

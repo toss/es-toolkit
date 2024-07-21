@@ -59,8 +59,10 @@ export function clone<T>(obj: T): T {
     return result as T;
   }
 
-  if (typeof obj === "object") {
-    return Object.assign({}, obj) as T;
+  if (typeof obj === 'object') {
+    const prototype = Object.getPrototypeOf(obj);
+    const result = Object.create(prototype)
+    return Object.assign(result, obj);
   }
   return obj;
 }
@@ -68,6 +70,5 @@ export function clone<T>(obj: T): T {
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
 
 function isPrimitive(value: unknown): value is Primitive {
-  return value == null ||
-    (typeof value !== "object" && typeof value !== "function");
+  return value == null || (typeof value !== 'object' && typeof value !== 'function');
 }

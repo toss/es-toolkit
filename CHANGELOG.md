@@ -1,5 +1,64 @@
 # es-toolkit Changelog
 
+## Version v1.13.1
+
+Released on July 20th, 2024.
+
+- Use the compatibility layer `es-toolkit/compat` in legacy CDN builds.
+
+## Version v1.13.0
+
+Released on July 20th, 2024.
+
+`es-toolkit` can now be used in various CDNs, like [unpkg](https://unpkg.com) and [jsdelivr](https://www.jsdelivr.com). See more in our [usage docs](https://es-toolkit.slash.page/usage.html)
+
+### Features
+
+- Added support for [flattenObject](https://es-toolkit.slash.page/reference/object/flattenObject.html), [isPlainObject](https://es-toolkit.slash.page/reference/predicate/isPlainObject.html), [isLength](https://es-toolkit.slash.page/reference/predicate/isLength.html). ([3e60443](https://github.com/toss/es-toolkit/commit/3e60443a408d3296e4a18a1601a16f5953d414f9), [3764993](https://github.com/toss/es-toolkit/commit/376499351f347c269400ee0eeb5145ad041c7c06), [#245](https://github.com/toss/es-toolkit/pull/245))
+- Added support for [concat](https://es-toolkit.slash.page/reference/compat/array/concat.html) in our compatibility layer `es-toolkit/compat`. ([e09517f](https://github.com/toss/es-toolkit/commit/e09517f05c180b43e0f2b0b0fa44167f9c4832f3))
+
+### Lodash Compatibility
+
+- Ensured compatibility with [difference](https://es-toolkit.slash.page/reference/array/difference.html) and [take](https://es-toolkit.slash.page/reference/compat/array/take.html)
+
+## Version v1.12.0
+
+Released on July 19th, 2024.
+
+- Fixed a bug where `es-toolkit/compat` was not available in modern Node.js environments.
+- Added support for [max](https://es-toolkit.slash.page/reference/compat/math/max.html) and [min](https://es-toolkit.slash.page/reference/compat/math/min.html) in our compatibility layer `es-toolkit/compat`. ([e1e6e38](https://github.com/toss/es-toolkit/commit/e1e6e38206750fb90f5b99cace9196635288e21c))
+
+## Version v1.11.0
+
+Released on July 18th, 2024.
+
+### Introducing `es-toolkit/compat`
+
+We're introducing `es-toolkit/compat`, a new module designed as a drop-in replacement for lodash. It replicates lodash's API, making it easier to switch between the two libraries.
+
+`es-toolkit/compat` is undergoing rigorous testing using real `lodash` test cases. Initial benchmarks suggest it's typically 5% slower and increases bundle size by 10% compared to the original `es-toolkit`.
+
+This module is intended to facilitate a smooth transition and should be replaced with the original `es-toolkit` for optimal performance once migration is complete.
+
+For more information, see our [compatibility documentation](https://es-toolkit.slash.page/compatibility.html).
+
+### Features
+
+- Added support for [get](https://es-toolkit.slash.page/reference/compat/object/get.html) and [set](https://es-toolkit.slash.page/reference/compat/object/set.html) in our compatibility layer `es-toolkit/compat`. (https://github.com/toss/es-toolkit/pull/232, https://github.com/toss/es-toolkit/pull/223)
+- Added support for [zipObjectDeep](https://es-toolkit.slash.page/reference/compat/array/zipObjectDeep.html) in our compatibility layer `es-toolkit/compat`. (https://github.com/toss/es-toolkit/pull/150)
+- Added support for [flatMap](https://es-toolkit.slash.page/reference/compat/array/flatMap.html). (https://github.com/toss/es-toolkit/pull/209)
+- Added support for [startCase](https://es-toolkit.slash.page/reference/string/startCase.html), [startsWith](https://es-toolkit.slash.page/reference/string/startsWith.html), and [endsWith](https://es-toolkit.slash.page/reference/string/endsWith.html). (https://github.com/toss/es-toolkit/pull/224).
+- Added support for [withTimeout](https://es-toolkit.slash.page/reference/promise/withTimeout.html). (https://github.com/toss/es-toolkit/pull/210)
+
+### Bug fixes
+
+- Fixed `drop` and `dropRight` incorrectly accepting negative integers. (https://github.com/toss/es-toolkit/pull/218)
+- Fixed `invert` not to invert inherited properties. (https://github.com/toss/es-toolkit/pull/221)
+
+### Performance Improvements
+
+- Improved performance for `dropRightWhile`. (https://github.com/toss/es-toolkit/pull/220)
+
 ## Version v1.10.1
 
 Released on July 15th, 2024.
@@ -24,8 +83,6 @@ Released on July 14th, 2024.
 
 - Optimize the performance of [isNil](https://es-toolkit.slash.page/reference/predicate/isNil.html) by simplifying its check. ([489ac76](https://github.com/toss/es-toolkit/commit/489ac76fc62f97cbfa3ca9eec2e0a4c03c4f5b1c))
 - Optimize the performance of [sum](https://es-toolkit.slash.page/reference/array/sum.html). (https://github.com/toss/es-toolkit/pull/155)
-
-
 
 ## Version v1.9.0
 

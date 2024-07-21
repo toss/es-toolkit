@@ -15,5 +15,7 @@
  * // result will be [3, 4, 5] since the first two elements are dropped.
  */
 export function drop<T>(arr: readonly T[], itemsCount: number): T[] {
+  itemsCount = Math.max(itemsCount, 0);
+
   return arr.slice(itemsCount);
 }

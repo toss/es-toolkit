@@ -35,7 +35,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: '指南',
       items: [
         { text: '简介', link: '/zh_hans/intro' },
-        { text: '安装', link: '/zh_hans/installation' },
+        { text: '安装和使用', link: '/zh_hans/usage' },
         { text: '包体积影响', link: '/zh_hans/bundle-size' },
         { text: '性能', link: '/zh_hans/performance' },
         { text: '与 Lodash 兼容性', link: '/zh_hans/compatibility' },
@@ -48,6 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '数组工具',
           items: [
             { text: 'chunk', link: '/zh_hans/reference/array/chunk' },
+            { text: 'concat (兼容性)', link: '/zh_hans/reference/compat/array/concat' },
             { text: 'countBy', link: '/zh_hans/reference/array/countBy' },
             { text: 'compact', link: '/zh_hans/reference/array/compact' },
             { text: 'difference', link: '/zh_hans/reference/array/difference' },
@@ -70,6 +71,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'keyBy', link: '/zh_hans/reference/array/keyBy' },
             { text: 'minBy', link: '/zh_hans/reference/array/minBy' },
             { text: 'maxBy', link: '/zh_hans/reference/array/maxBy' },
+            { text: 'min (兼容性)', link: '/zh_hans/reference/compat/array/min' },
+            { text: 'max (兼容性)', link: '/zh_hans/reference/compat/array/max' },
             { text: 'orderBy', link: '/zh_hans/reference/array/orderBy' },
             { text: 'partition', link: '/zh_hans/reference/array/partition' },
             { text: 'sample', link: '/zh_hans/reference/array/sample' },
@@ -93,6 +96,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'xorWith', link: '/zh_hans/reference/array/xorWith' },
             { text: 'zip', link: '/zh_hans/reference/array/zip' },
             { text: 'zipObject', link: '/zh_hans/reference/array/zipObject' },
+            { text: 'zipObjectDeep (兼容性)', link: '/zh_hans/reference/compat/array/zipObjectDeep' },
             { text: 'zipWith', link: '/zh_hans/reference/array/zipWith' },
             { text: 'head', link: '/zh_hans/reference/array/head' },
             { text: 'tail', link: '/zh_hans/reference/array/tail' },
@@ -103,6 +107,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '函数工具',
           items: [
+            { text: 'after', link: '/zh_hans/reference/function/after' },
             { text: 'debounce', link: '/zh_hans/reference/function/debounce' },
             { text: 'throttle', link: '/zh_hans/reference/function/throttle' },
             { text: 'negate', link: '/zh_hans/reference/function/negate' },
@@ -129,17 +134,25 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '对象工具',
           items: [
             { text: 'clone', link: '/zh_hans/reference/object/clone' },
+            { text: 'invert', link: '/zh_hans/reference/object/invert' },
+            { text: 'flattenObject', link: '/zh_hans/reference/object/flattenObject' },
             { text: 'omit', link: '/zh_hans/reference/object/omit' },
             { text: 'omitBy', link: '/zh_hans/reference/object/omitBy' },
             { text: 'pick', link: '/zh_hans/reference/object/pick' },
             { text: 'pickBy', link: '/zh_hans/reference/object/pickBy' },
-            { text: 'invert', link: '/zh_hans/reference/object/invert' },
+            { text: 'get (兼容性)', link: '/zh_hans/reference/compat/object/get' },
+            { text: 'set (兼容性)', link: '/zh_hans/reference/compat/object/set' },
           ],
         },
         {
           text: '谓词',
           items: [
+            { text: 'isArray (兼容性)', link: '/zh_hans/reference/compat/predicate/isArray' },
+            { text: 'isArrayLike', link: '/zh_hans/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
+            { text: 'isLength', link: '/zh_hans/reference/predicate/isLength' },
+            { text: 'isFunction', link: '/zh_hans/reference/predicate/isFunction' },
+            { text: 'isPlainObject', link: '/zh_hans/reference/predicate/isPlainObject' },
             { text: 'isNil', link: '/zh_hans/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/zh_hans/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/zh_hans/reference/predicate/isNull' },
@@ -148,7 +161,11 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise 工具',
-          items: [{ text: 'delay', link: '/zh_hans/reference/promise/delay' }],
+          items: [
+            { text: 'delay', link: '/zh_hans/reference/promise/delay' },
+            { text: 'timeout', link: '/zh_hans/reference/promise/timeout' },
+            { text: 'withTimeout', link: '/zh_hans/reference/promise/withTimeout' },
+          ],
         },
         {
           text: '字符串工具',
@@ -158,6 +175,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'kebabCase', link: '/zh_hans/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/zh_hans/reference/string/lowerCase' },
             { text: 'capitalize', link: '/zh_hans/reference/string/capitalize' },
+            { text: 'startsWith (兼容性)', link: '/zh_hans/reference/compat/string/startsWith' },
+            { text: 'endsWith (兼容性)', link: '/zh_hans/reference/compat/string/endsWith' },
           ],
         },
       ],
