@@ -26,7 +26,7 @@ describe('after', () => {
     expect(mockFn).toHaveBeenCalledTimes(2);
   });
 
-  it('shoud not invoke func immediately when n is zero.', async () => {
+  it('should not invoke func immediately when n is zero.', async () => {
     const mockFn = vi.fn();
     const afterFn = after(0, mockFn);
     expect(mockFn).toHaveBeenCalledTimes(0);
@@ -35,7 +35,7 @@ describe('after', () => {
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  it('shoud handle arguments correctly.', async () => {
+  it('should handle arguments correctly.', async () => {
     const mockFn = vi.fn();
     mockFn.mockReturnValue(3);
 
