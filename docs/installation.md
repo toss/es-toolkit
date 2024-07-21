@@ -55,3 +55,45 @@ es-toolkit is also available on Bun. You can install it via the following comman
 ```sh
 bun add es-toolkit
 ```
+
+## Browsers
+
+You can find es-toolkit on CDNs such as [jsdelivr](https://www.jsdelivr.com), [unpkg](https://unpkg.com). We define `_` to include all functions, similar to Lodash.
+
+::: code-group
+
+```html [jsdelivr]
+<script src="https://cdn.jsdelivr.net/npm/es-toolkit@%5E1"></script>
+<script>
+  var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+```html [unpkg]
+<script src="https://unpkg.com/es-toolkit@%5E1"></script>
+<script>
+  var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+:::
+
+es-toolkit is also available on [esm.sh](https://esm.sh) for modern browsers.
+
+::: code-group
+
+```html [esm.sh]
+<script type="importmap">
+  {
+    "imports": {
+      "es-toolkit": "https://esm.sh/es-toolkit@%5E1"
+    }
+  }
+</script>
+<script type="module">
+  import { chunk } from 'es-toolkit';
+  chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+:::

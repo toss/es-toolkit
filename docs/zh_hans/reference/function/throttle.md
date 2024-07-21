@@ -17,7 +17,7 @@ function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: numbe
 
 ### 返回值
 
-(`F`): A new throttled function.
+(`F`): 一个新的节流函数。
 
 ## 示例
 

@@ -55,3 +55,45 @@ es-toolkit 也支持 Bun。您可以使用以下命令安装它：
 ```sh
 bun add es-toolkit
 ```
+
+## 浏览器
+
+你可以在诸如[jsdelivr](https://www.jsdelivr.com)或[unpkg](https://unpkg.com)等CDN上找到es-toolkit。我们将 `_` 定义为包含所有函数，类似于 Lodash。
+
+::: code-group
+
+```html [jsdelivr]
+<script src="https://cdn.jsdelivr.net/npm/es-toolkit"></script>
+<script>
+  var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+```html [unpkg]
+<script src="https://unpkg.com/es-toolkit"></script>
+<script>
+  var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+:::
+
+es-toolkit 也可在 [esm.sh](https://esm.sh) 上为现代浏览器提供。
+
+::: code-group
+
+```html [esm.sh]
+<script type="importmap">
+  {
+    "imports": {
+      "es-toolkit": "https://esm.sh/es-toolkit"
+    }
+  }
+</script>
+<script type="module">
+  import { chunk } from 'es-toolkit';
+  chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+:::

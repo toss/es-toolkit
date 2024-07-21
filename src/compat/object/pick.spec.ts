@@ -49,4 +49,14 @@ describe('compat/pick', () => {
     const args = toArgs(['a', 'c']);
     expect(pick(object, args)).toEqual({ a: 1, c: 3 });
   });
+
+  it('should work with stringified path with array', () => {
+    const array: number[] = [];
+    array[2] = 3;
+    expect(pick({ array: [1, 2, 3] }, 'array[2]')).toEqual({ array });
+
+    const array2: number[] = [];
+    array2[1] = 2;
+    expect(pick({ array: [1, 2, 3] }, 'array[1]')).toEqual({ array: array2 });
+  });
 });

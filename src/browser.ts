@@ -1,8 +1,8 @@
-import * as toolkit from './index';
+import * as toolkit from './compat/index.ts';
 
 interface Window {
   _: typeof toolkit;
 }
 
-declare var window: Window;
+declare let window: Window;
 window._ = toolkit;

@@ -1,7 +1,16 @@
-/* eslint-disable prefer-rest-params */
-/* eslint-disable prefer-spread */
-export function toArgs<T extends any[]>(array: T): T {
-  return function () {
+/**
+ * Converts an array to an `arguments` object.
+ *
+ * @param {unknown[]} array - The array to convert.
+ * @returns {IArguments} - The `arguments` object.
+ *
+ * @example
+ * toArgs([1, 2, 3]); // { '0': 1, '1': 2, '2': 3 } as IArguments
+ */
+export function toArgs(array: unknown[]): IArguments {
+  // eslint-disable-next-line prefer-spread, @typescript-eslint/no-unused-vars
+  return (function (..._: any[]) {
+    // eslint-disable-next-line prefer-rest-params
     return arguments;
-  }.apply(undefined, array);
+  })(...array);
 }

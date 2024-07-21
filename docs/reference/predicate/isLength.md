@@ -2,7 +2,7 @@
 
 Checks if a given value is a valid length.
 
-This function tests whether the provided value is of type `number`, is a non-negative integer, and is less than or equal to JavaScript's maximum safe integer (`Number.MAX_SAFE_INTEGER`). It returns `true` if the value is a valid length, and `false` otherwise.
+A valid length is of type `number`, is a non-negative integer, and is less than or equal to JavaScript's maximum safe integer (`Number.MAX_SAFE_INTEGER`). It returns `true` if the value is a valid length, and `false` otherwise.
 
 This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to a valid length (`number`).
 

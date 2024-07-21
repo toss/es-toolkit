@@ -17,7 +17,7 @@ function minBy<T>(items: T[], getValue: (item: T) => number): T;
 
 ### 返回值
 
-通过 `getValue` 函数确定的具有最小值的元素。
+(`T`) 由 `getValue` 函数确定的具有最小值的元素。如果数组为空，则返回 `undefined`。
 
 ### 示例
 

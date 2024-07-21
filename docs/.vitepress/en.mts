@@ -150,7 +150,10 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Predicates',
           items: [
+            { text: 'isArray (compat)', link: '/reference/compat/predicate/isArray' },
+            { text: 'isArrayLike', link: '/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
+            { text: 'isFunction', link: '/reference/predicate/isFunction' },
             { text: 'isLength', link: '/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/reference/predicate/isPlainObject' },
             { text: 'isNil', link: '/reference/predicate/isNil' },

@@ -33,8 +33,9 @@ export function pick<T>(
   ...keys: Array<
     | keyof T
     | (NonNullable<unknown> & string)
-    | Array<keyof T | (NonNullable<unknown> & string)>
-    | Array<Array<NonNullable<unknown> & string>>
+    | IArguments
+    | Array<keyof T | (NonNullable<unknown> & string) | IArguments>
+    | Array<Array<keyof T | (NonNullable<unknown> & string) | IArguments>>
   >
 ): Partial<T> {
   if (isNil(obj)) {
