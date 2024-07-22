@@ -30,7 +30,7 @@ export function throttle<F extends (...args: any[]) => void>(func: F, throttleMs
   const throttledFunction = function (...args: Parameters<F>) {
     const now = Date.now();
 
-    if (lastCallTime === null || now - lastCallTime >= throttleMs) {
+    if (lastCallTime == null || now - lastCallTime >= throttleMs) {
       lastCallTime = now;
       func(...args);
     }
