@@ -1,9 +1,10 @@
 /**
- * Gathers elements in the same position in an internal array 
+ * Gathers elements in the same position in an internal array
  * from a grouped array of elements and returns them as a new array.
  *
- * @param zipped - The nested array to unzip.
- * @returns A new array of unzipped elements.
+ * @template T - The type of elements in the nested array.
+ * @param {Array<[...T]>} zipped - The nested array to unzip.
+ * @returns {Unzip<T>} A new array of unzipped elements.
  *
  * @example
  * const zipped = [['a', true, 1],['b', false, 2]];

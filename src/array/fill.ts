@@ -5,6 +5,7 @@
  * start index up to the end index (non-inclusive). If the start or end indices are not provided, it defaults to filling the
  * entire array.
  *
+ * @template T, U
  * @param {Array<T | U>} array - The array to fill.
  * @param {U} value - The value to fill the array with.
  * @param {number} [start=0] - The start position. Defaults to 0.
