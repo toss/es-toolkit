@@ -11,7 +11,7 @@ function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): 
 ### 参数
 
 - `arr` (`T[]`): 要处理的数组。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 自定义函数，用于确定两个元素是否相等。此函数接受两个参数，分别来自每个数组，并在元素被认为相等时返回 true，否则返回 false。
+- `areItemsEqual` (`(x: T, y: T) => boolean`): 自定义函数，用于确定两个元素是否相等。此函数接受两个参数，分别来自每个数组，并在元素被认为相等时返回 `true`，否则返回 `false`。
 
 ### 返回值
 

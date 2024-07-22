@@ -23,6 +23,11 @@ describe('chunk', () => {
     ]);
   });
 
+  it('has default size of 1', () => {
+    const actual = chunk(array);
+    expect(actual).toEqual([[0], [1], [2], [3], [4], [5]]);
+  });
+
   it('should ensure the minimum `size` is `0`', () => {
     expect(chunk([1, 2, 3], -1)).toEqual([]);
     expect(chunk([1, 2, 3], -2)).toEqual([]);
