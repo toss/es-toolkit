@@ -8,7 +8,7 @@ import { isNil } from '../predicate';
  * For objects, it returns the number of enumerable properties.
  *
  * @template T - The type of the input value.
- * @param {T[] | object | Map<unknown, T> | Set<T> | null | undefined } target - The value whose size is to be determined. It can be an array, string, or object.
+ * @param {T[] | object | string | Map<unknown, T> | Set<T> | null | undefined } target - The value whose size is to be determined. It can be an array, string, or object.
  * @returns {number} The size of the input value.
  *
  * @example
