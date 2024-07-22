@@ -15,7 +15,7 @@ function isNull(x: unknown): x is null;
 
 ### 파라미터
 
-- `x` (`unknown`): null인지 확인할 값
+- `x` (`unknown`): null인지 확인할 값.
 
 ### 반환 값
 
