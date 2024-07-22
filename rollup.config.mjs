@@ -119,7 +119,7 @@ function umdBuildConfig({ inputFile, outFile }) {
     ],
     output: {
       plugins: [terserPlugin()],
-      format: 'umd',
+      format: 'iife',
       file: outFile,
       sourcemap: true,
       generatedCode: 'es2015',
