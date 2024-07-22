@@ -134,6 +134,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '对象工具',
           items: [
             { text: 'clone', link: '/zh_hans/reference/object/clone' },
+            { text: 'cloneDeep', link: '/zh_hans/reference/object/cloneDeep' },
             { text: 'invert', link: '/zh_hans/reference/object/invert' },
             { text: 'flattenObject', link: '/zh_hans/reference/object/flattenObject' },
             { text: 'omit', link: '/zh_hans/reference/object/omit' },
