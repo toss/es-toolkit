@@ -34,7 +34,7 @@ jobs:
           command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
       - run:
           name: Prettier
-          command: modifiedFiles=$(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)") && [ -n "$modifiedFiles" ] && yarn prettier -c $modifiedFiles || echo "No modified files."
+          command: git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)" | xargs -r yarn prettier -c
   typecheck:
     docker:
       - image: cimg/node:20.12
