@@ -1,12 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { size } from '../../index';
-import { falsey } from '../_internal/falsey';
-import { toArgs } from '../_internal/toArgs';
+import { size } from './index';
+import { falsey } from '../compat/_internal/falsey';
+import { toArgs } from '../compat/_internal/toArgs';
 
 const args = toArgs([1, 2, 3]);
-/**
- * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/size.spec.js#L1
- */
 describe('size', () => {
   const array = [1, 2, 3];
 
