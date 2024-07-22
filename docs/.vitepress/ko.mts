@@ -173,7 +173,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
-            { text: 'isTypedArray', link: '/ko/reference/predicate/isNull' },
+            { text: 'isTypedArray', link: '/ko/reference/predicate/isTypedArray' },
             {
               text: 'isUndefined',
               link: '/ko/reference/predicate/isUndefined',
