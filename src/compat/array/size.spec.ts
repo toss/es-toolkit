@@ -22,7 +22,7 @@ describe('size', () => {
     const expected = falsey.map(() => 0);
     const actual = falsey.map((object, index) => {
       try {
-        return index ? size(object) : size();
+        return index ? size(object as object) : size(undefined);
       } catch (e) {
         /* empty */
       }
