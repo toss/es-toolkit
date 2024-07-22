@@ -7,6 +7,7 @@
  * with undefined values for missing elements.
  *
  * @param {...T[][]} arrs - The arrays to zip together.
+ * @param arr1
  * @returns {T[][]} A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example

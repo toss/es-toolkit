@@ -4,6 +4,11 @@
  * This function takes multiple arrays and a combiner function, and returns a new array where each element
  * is the result of applying the combiner function to the corresponding elements of the input arrays.
  *
+ * @template T - The type of elements in the first array.
+ * @template U - The type of elements in the second array (optional).
+ * @template V - The type of elements in the third array (optional).
+ * @template W - The type of elements in the fourth array (optional).
+ * @template R - The type of elements in the resulting array.
  * @param {T[]} arr1 - The first array to zip.
  * @param {U[]} [arr2] - The second array to zip (optional).
  * @param {V[]} [arr3] - The third array to zip (optional).

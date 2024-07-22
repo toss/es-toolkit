@@ -20,7 +20,7 @@ function invert<K extends string | number | symbol, V extends string | number | 
 
 ### 返回值
 
-(`{ [key in V]: K }`): 一个新对象，其键和值被反转了。
+(`{ [key in V]: K }`): 一个键和值被反转的新对象。
 
 ## 示例
 

@@ -5,7 +5,7 @@
 ## 인터페이스
 
 ```typescript
-function negate<F extends (...args: unknown[]) => boolean>(func: F): F;
+function negate<F extends (...args: never[]) => boolean>(func: F): F;
 ```
 
 ### 파라미터
@@ -22,5 +22,5 @@ function negate<F extends (...args: unknown[]) => boolean>(func: F): F;
 import { negate } from 'es-toolkit/function';
 
 negate(() => true)(); // returns 'false'
-negate(() => false)(); // returns 'false'
+negate(() => false)(); // returns 'true'
 ```

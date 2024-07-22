@@ -1,4 +1,4 @@
-import { chunk } from 'lodash';
+import { chunk } from './chunk.ts';
 import { describe, expect, it } from 'vitest';
 
 /**
@@ -21,6 +21,11 @@ describe('chunk', () => {
       [0, 1, 2, 3],
       [4, 5],
     ]);
+  });
+
+  it('has default size of 1', () => {
+    const actual = chunk(array);
+    expect(actual).toEqual([[0], [1], [2], [3], [4], [5]]);
   });
 
   it('should ensure the minimum `size` is `0`', () => {

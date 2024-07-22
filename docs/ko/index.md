@@ -14,7 +14,7 @@ hero:
       text: 레퍼런스
       link: /ko/reference/array/chunk
     - theme: alt
-      text: 설치
+      text: 설치 및 사용
       link: /ko/installation
 
 features:

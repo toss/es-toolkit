@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.10.0",
+  "version": "1.13.1",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -10,7 +10,8 @@
   },
   "license": "MIT",
   "workspaces": [
-    "docs"
+    "docs",
+    "benchmarks"
   ],
   "packageManager": "yarn@4.2.2",
   "exports": {
@@ -34,6 +35,7 @@
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
+    "browser": "./umd/browser.global.js",
     "exports": {
       ".": {
         "import": {
@@ -115,6 +117,16 @@
           "default": "./dist/string/index.js"
         }
       },
+      "./compat": {
+        "import": {
+          "types": "./dist/compat/index.d.mts",
+          "default": "./dist/compat/index.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/index.d.ts",
+          "default": "./dist/compat/index.js"
+        }
+      },
       "./package.json": "./package.json"
     }
   },
@@ -124,11 +136,9 @@
     "@babel/preset-typescript": "^7.24.1",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
-    "@codspeed/vitest-plugin": "^3.1.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/broken-link-checker": "^0",
-    "@types/lodash": "^4",
     "@types/node": "^20.12.11",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
@@ -137,7 +147,6 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsdoc": "^48.5.0",
-    "lodash": "^4.17.21",
     "prettier": "^3.2.5",
     "tsup": "^8.1.0",
     "typescript": "^5.4.5",
