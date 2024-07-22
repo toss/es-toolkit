@@ -86,10 +86,11 @@ function libBuildOptions({ extension, format, inputFiles, outDir }) {
       format,
       dir: outDir,
       ...fileNames(extension),
-      // Using preserveModules virtually disables extracting common chunks,
-      // leading to a result that is a mirror of the TypeScript source.
+      // Using preserveModules disables bundling and the creation of chunks,
+      // leading to a result that is a mirror of the input modules.
+      // Warning: with this option, all modules that might get imported
+      // need to be present in the input, otherwise imports will be broken!
       preserveModules: isESM,
-      manualChunks: isESM ? undefined : manualChunks,
       sourcemap: true,
       generatedCode: 'es2015',
       // Hoisting transitive imports adds bare imports in modules,
@@ -170,14 +171,6 @@ function fileNames(extension = 'js') {
     entryFileNames: `[name].${extension}`,
     chunkFileNames: `_chunk/[name]-[hash:6].${extension}`,
   };
-}
-
-/** @type {import('rollup').GetManualChunk} */
-function manualChunks(id) {
-  const category = id.match(/\/src\/([\w-_]+)\//)?.[1];
-  if (category) {
-    return category;
-  }
 }
 
 /** @type {(dir: string) => void} */
