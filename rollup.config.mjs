@@ -50,7 +50,7 @@ function findLibFiles() {
 
   const allFiles = globSync('./src/**/*.ts', {
     cwd: import.meta.dirname,
-    ignore: [...testPatterns],
+    ignore: [...testPatterns, '**/src/browser.ts'],
   });
 
   return {
