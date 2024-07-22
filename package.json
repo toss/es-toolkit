@@ -28,6 +28,7 @@
   },
   "files": [
     "dist",
+    "umd",
     "*.d.ts"
   ],
   "publishConfig": {
