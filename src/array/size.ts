@@ -45,8 +45,9 @@ export function size<T>(target: T[] | object | string | Map<unknown, T> | Set<T>
     return target.length;
   }
 
-  if (target instanceof Map || target instanceof Set) {
-    return target.size;
+  const tag = Object.prototype.toString.call(target);
+  if (tag === '[object Map]' || tag === '[object Set]') {
+    return (target as Map<unknown, T> | Set<T>).size;
   }
   return Object.keys(target).length;
 }
