@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { isArguments } from '../../predicate/isArguments';
-import { args } from '../_internal/args';
-import { stubFalse } from '../_internal/stubFalse';
-import { falsey } from '../_internal/falsey';
-import { symbol } from '../_internal/symbol';
-import { slice } from '../_internal/slice';
-import { strictArgs } from '../_internal/strictArgs';
-import { noop } from '../../function';
+import { isArguments } from './isArguments';
+import { args } from '../compat/_internal/args';
+import { stubFalse } from '../compat/_internal/stubFalse';
+import { falsey } from '../compat/_internal/falsey';
+import { symbol } from '../compat/_internal/symbol';
+import { slice } from '../compat/_internal/slice';
+import { strictArgs } from '../compat/_internal/strictArgs';
+import { noop } from '../function';
 
 describe('isArguments', () => {
   it('should return `true` for `arguments` objects', () => {

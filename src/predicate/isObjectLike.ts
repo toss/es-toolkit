@@ -23,6 +23,6 @@
  * console.log(isObjectLike(value4)); // false
  */
 
-export function isObjectLike<T>(value?: T): value is Extract<T, object> {
+export function isObjectLike<T>(value: T): value is Extract<T, object> {
   return typeof value === 'object' && value !== null;
 }

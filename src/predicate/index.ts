@@ -9,3 +9,5 @@ export { isFunction } from './isFunction.ts';
 export { isArrayLike } from './isArrayLike.ts';
 export { isTypedArray } from './isTypedArray.ts';
 export { isPrimitive } from './isPrimitive.ts';
+export { isObjectLike } from './isObjectLike.ts';
+export { isArguments } from './isArguments.ts';

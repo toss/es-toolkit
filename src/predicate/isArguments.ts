@@ -1,4 +1,4 @@
-import { getTag } from '../_internal/getTag';
+import { getTag } from '../compat/_internal/getTag';
 
 /**
  * Checks if the given value is an array.
