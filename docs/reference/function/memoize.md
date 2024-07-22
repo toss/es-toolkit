@@ -5,20 +5,19 @@ Memoizes a given function by caching its result based on the arguments provided.
 ## Signature
 
 ```typescript
-function memoize<T extends (...args: any[]) => any, K>(
-  fn: T,
-  resolver?: (...args: Parameters<T>) => K,
-  cache?: Cache<K, ReturnType<T>>
-): T & { cache: Cache<K, ReturnType<T>> };
+function memoize<F extends (...args: any[]) => any, K = Parameters<F>[0]>(
+  fn: F,
+  options: MemoizeOptions<K, ReturnType<F>> = {}
+): F & { cache: Cache<K, ReturnType<F>> };
 
-function memoize<T extends (...args: any[]) => any, K>(
-  fn: T,
-  cache?: Cache<K, ReturnType<T>>
-): T & { cache: Cache<K, ReturnType<T>> };
+interface MemoizeOptions<K, V> {
+  cache?: Cache<K, V>;
+  resolver?: (...args: any[]) => K;
+}
 
-interface Cache<K, T> {
-  set: (key: K, value: T) => void;
-  get: (key: K) => T | undefined;
+interface Cache<K, V> {
+  set: (key: K, value: V) => void;
+  get: (key: K) => V | undefined;
   has: (key: K) => boolean;
   delete: (key: K) => boolean | void;
   clear: () => void;
@@ -26,33 +25,34 @@ interface Cache<K, T> {
 }
 ```
 
-# Parameters
+### Parameters
 
-• `fn (T)`: The function to memoize.
-• `resolver ((...args: Parameters<T>) => K, optional)`: A function to resolve the cache key. If not provided, the first argument of the memoized function will be used as the key.
-• `cache (Cache<K, ReturnType<T>>, optional)`: An optional cache object to store results. Defaults to a new Map instance.
+- `fn (T)`: The function to be memoized.
+- `options` (MemoizeOptions<K, ReturnType<F>>, optional): Includes a function to generate the cache key and an object to store the results.
+  - `resolver ((...args: any[]) => K, optional)`: A function to generate the cache key. If not provided, the first argument of the memoized function is used as the key.
+  - `cache (Cache<K, ReturnType<F>>, optional)`: The cache object to store the results. The default is a new Map instance.
 
-# Returns
+### Returns
 
-`(T & { cache: Cache<K, ReturnType> })`: The memoized function with a cache property.
+`(F & { cache: Cache<K, ReturnType<F>> })`: The memoized function with a cache property.
 
-# Examples
+## Examples
 
 ```typescript
-import { memoize } from './memoize';
+import { memoize } from 'es-toolkit/function';
 
 // Example using the default cache
 const add = (a: number, b: number) => a + b;
 const memoizedAdd = memoize(add);
 console.log(memoizedAdd(1, 2)); // 3
-console.log(memoizedAdd(1, 2)); // 3, retrieved from cache
+console.log(memoizedAdd(1, 2)); // 3, returns cached value
 console.log(memoizedAdd.cache.size); // 1
 
 // Example using a custom resolver
 const resolver = (a: number, b: number) => `${a}-${b}`;
-const memoizedAddWithResolver = memoize(add, resolver);
+const memoizedAddWithResolver = memoize(add, { resolver });
 console.log(memoizedAddWithResolver(1, 2)); // 3
-console.log(memoizedAddWithResolver(1, 2)); // 3, retrieved from cache
+console.log(memoizedAddWithResolver(1, 2)); // 3, returns cached value
 console.log(memoizedAddWithResolver.cache.size); // 1
 
 // Example using a custom cache implementation
@@ -78,16 +78,16 @@ class CustomCache<K, T> implements Cache<K, T> {
   }
 }
 const customCache = new CustomCache<string, number>();
-const memoizedAddWithCustomCache = memoize(add, customCache);
+const memoizedAddWithCustomCache = memoize(add, { cache: customCache });
 console.log(memoizedAddWithCustomCache(1, 2)); // 3
-console.log(memoizedAddWithCustomCache(1, 2)); // 3, retrieved from cache
+console.log(memoizedAddWithCustomCache(1, 2)); // 3, returns cached value
 console.log(memoizedAddWithCustomCache.cache.size); // 1
 
-// Example using both a custom resolver and custom cache
+// Example using both a custom resolver and cache
 const customResolver = (a: number, b: number) => `${a}-${b}`;
-const memoizedAddWithBoth = memoize(add, customResolver, customCache);
+const memoizedAddWithBoth = memoize(add, { resolver: customResolver, cache: customCache });
 console.log(memoizedAddWithBoth(1, 2)); // 3
-console.log(memoizedAddWithBoth(1, 2)); // 3, retrieved from cache
+console.log(memoizedAddWithBoth(1, 2)); // 3, returns cached value
 console.log(memoizedAddWithBoth.cache.size); // 1
 
 // Example using `this` binding
@@ -97,8 +97,10 @@ const obj = {
     function (a: number) {
       return a + this.b;
     },
-    function (a: number) {
-      return `${a}-${this.b}`;
+    {
+      resolver: function (a: number) {
+        return `${a}-${this.b}`;
+      },
     }
   ),
 };

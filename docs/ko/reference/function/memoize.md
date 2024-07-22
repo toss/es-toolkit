@@ -2,23 +2,22 @@
 
 주어진 함수의 결과를 인수에 기반하여 캐싱함으로써 메모이제이션해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
-function memoize<T extends (...args: any[]) => any, K>(
-  fn: T,
-  resolver?: (...args: Parameters<T>) => K,
-  cache?: Cache<K, ReturnType<T>>
-): T & { cache: Cache<K, ReturnType<T>> };
+export function memoize<F extends (...args: any[]) => any, K = Parameters<F>[0]>(
+  fn: F,
+  options: MemoizeOptions<K, ReturnType<F>> = {}
+): F & { cache: Cache<K, ReturnType<F>> };
 
-function memoize<T extends (...args: any[]) => any, K>(
-  fn: T,
-  cache?: Cache<K, ReturnType<T>>
-): T & { cache: Cache<K, ReturnType<T>> };
+export interface MemoizeOptions<K, V> {
+  cache?: Cache<K, V>;
+  resolver?: (...args: any[]) => K;
+}
 
-interface Cache<K, T> {
-  set: (key: K, value: T) => void;
-  get: (key: K) => T | undefined;
+export interface Cache<K, V> {
+  set: (key: K, value: V) => void;
+  get: (key: K) => V | undefined;
   has: (key: K) => boolean;
   delete: (key: K) => boolean | void;
   clear: () => void;
@@ -26,21 +25,21 @@ interface Cache<K, T> {
 }
 ```
 
-# Parameters
+### 파라미터
 
-• `fn (T)`: 메모이제이션할 함수예요.
-• `resolver ((...args: Parameters<T>) => K, optional)`: 캐시 키를 생성할 함수예요. 제공되지 않으면 메모이제이션된 함수의 첫 번째 인수를 키로 사용해요.
-• `cache (Cache<K, ReturnType<T>>, optional)`: 결과를 저장할 캐시 객체예요. 기본값은 새로운 Map 인스턴스예요.
+- `fn (T)`: 메모이제이션할 함수예요.
+- `options` (MemoizeOptions<K, ReturnType<F>>, optional): 캐시 키를 생성할 함수와 결과를 저장할 캐시 객체를 포함해요.
+  - `resolver ((...args: any[]) => K, optional)`: 캐시 키를 생성할 함수. 제공되지 않으면 메모이제이션된 함수의 첫 번째 인수를 키로 사용해요.
+  - `cache (Cache<K, ReturnType<F>>, optional)`: 결과를 저장할 캐시 객체. 기본값은 새로운 Map 인스턴스입니다.
 
-# Returns
+### 반환 값
 
-`(T & { cache: Cache<K, ReturnType> })`: 캐시 속성을 가진 메모이제이션된 함수예요.
+`(F & { cache: Cache<K, ReturnType<F>> })`: 캐시 속성을 가진 메모이제이션된 함수.
 
-# Examples
+## 예시
 
 ```typescript
-import { memoize } from './memoize';
-
+import { memoize } from 'es-toolkit/function';
 // 기본 캐시를 사용하는 예제
 const add = (a: number, b: number) => a + b;
 const memoizedAdd = memoize(add);
@@ -50,7 +49,7 @@ console.log(memoizedAdd.cache.size); // 1
 
 // 커스텀 리졸버를 사용하는 예제
 const resolver = (a: number, b: number) => `${a}-${b}`;
-const memoizedAddWithResolver = memoize(add, resolver);
+const memoizedAddWithResolver = memoize(add, { resolver });
 console.log(memoizedAddWithResolver(1, 2)); // 3
 console.log(memoizedAddWithResolver(1, 2)); // 3, 캐시된 값 반환
 console.log(memoizedAddWithResolver.cache.size); // 1
@@ -78,14 +77,14 @@ class CustomCache<K, T> implements Cache<K, T> {
   }
 }
 const customCache = new CustomCache<string, number>();
-const memoizedAddWithCustomCache = memoize(add, customCache);
+const memoizedAddWithCustomCache = memoize(add, { cache: customCache });
 console.log(memoizedAddWithCustomCache(1, 2)); // 3
 console.log(memoizedAddWithCustomCache(1, 2)); // 3, 캐시된 값 반환
 console.log(memoizedAddWithCustomCache.cache.size); // 1
 
 // 커스텀 리졸버와 캐시를 사용하는 예제
 const customResolver = (a: number, b: number) => `${a}-${b}`;
-const memoizedAddWithBoth = memoize(add, customResolver, customCache);
+const memoizedAddWithBoth = memoize(add, { resolver: customResolver, cache: customCache });
 console.log(memoizedAddWithBoth(1, 2)); // 3
 console.log(memoizedAddWithBoth(1, 2)); // 3, 캐시된 값 반환
 console.log(memoizedAddWithBoth.cache.size); // 1
@@ -97,8 +96,10 @@ const obj = {
     function (a: number) {
       return a + this.b;
     },
-    function (a: number) {
-      return `${a}-${this.b}`;
+    {
+      resolver: function (a: number) {
+        return `${a}-${this.b}`;
+      },
     }
   ),
 };

@@ -3,34 +3,34 @@ import { memoize } from './memoize';
 
 describe('memoize', () => {
   it('should memoize results based on the first argument', () => {
-    const memoized = memoize((a, b, c) => a + b + c);
-
-    expect(memoized(1, 2, 3)).toBe(6);
-    expect(memoized(1, 3, 5)).toBe(6);
+    const fn = (a: number, b: number, c: number) => a + b + c;
+    const memoized = memoize(fn);
+    expect(memoized(1, 2, 3)).toBe(6); // {1: 6}
+    expect(memoized(1, 3, 5)).toBe(6); // {1: 6}
   });
 
   it('should memoize results using a custom resolver function', () => {
     const fn = function (a: number, b: number, c: number) {
       return a + b + c;
     };
-    const memoized = memoize(fn, fn);
-    expect(memoized(1, 2, 3)).toBe(6);
-    expect(memoized(1, 3, 5)).toBe(9);
+    const resolver = (...args: number[]) => args.join('-');
+    const memoized = memoize(fn, { resolver });
+
+    expect(memoized(1, 2, 3)).toBe(6); // {1-2-3: 6}
+    expect(memoized(1, 3, 5)).toBe(9); // {1-2-3: 6, 1-3-5: 6}
   });
 
   it('should use `this` context for resolver function', () => {
     const fn = function (a: number) {
       // @ts-expect-error: this is not defined
-      return a + this.b + this.c;
+      return (a + this.b + this.c) as number;
     };
-    const memoized = memoize(fn, fn);
-
+    const memoized = memoize(fn);
     const object = { memoized: memoized, b: 2, c: 3 };
-    expect(object.memoized(1)).toBe(6);
-
+    expect(object.memoized(1)).toBe(6); // {1: 6}
     object.b = 3;
     object.c = 5;
-    expect(object.memoized(1)).toBe(9);
+    expect(object.memoized(1)).toBe(6); // {1: 6}
   });
 
   it('should check cache for built-in properties', () => {
@@ -43,9 +43,8 @@ describe('memoize', () => {
       'toString',
       'valueOf',
     ];
-
-    const memoized = memoize((value: string) => value);
-
+    const fn = (value: string) => value;
+    const memoized = memoize(fn);
     const actual = props.map(value => memoized(value));
     expect(actual).toEqual(props);
   });
@@ -53,7 +52,7 @@ describe('memoize', () => {
   it('should throw TypeError if resolver is not a function', () => {
     expect(() => {
       // @ts-expect-error: resolver is not a function
-      memoize(() => {}, true);
+      memoize(() => {}, { resolver: true });
     }).toThrowError(TypeError);
   });
 
@@ -79,7 +78,9 @@ describe('memoize', () => {
         return this.__data__.size;
       }
     }
-    const memoized = memoize(object => object.id, new CustomCache());
+
+    const fn = (object: { id: string }) => object.id;
+    const memoized = memoize(fn, { cache: new CustomCache() });
 
     const cache = memoized.cache;
     const key1 = { id: 'a' };
@@ -119,14 +120,15 @@ describe('memoize', () => {
         return this.__data__.size;
       }
     }
-    const memoized = memoize((object: { id: string }) => object.id, new ImmutableCache());
+    const fn = (object: { id: string }) => object.id;
+    const cache = new ImmutableCache<{ id: string }>();
+    const memoized = memoize(fn, { cache });
     const key1 = { id: 'a' };
     const key2 = { id: 'b' };
 
     memoized(key1);
     memoized(key2);
-    memoized.cache.has(key1);
-    expect(memoized.cache.has(key1)).toBe(true);
-    expect(memoized.cache.has(key2)).toBe(true);
+    expect(cache.has(key1)).toBe(true);
+    expect(cache.has(key2)).toBe(true);
   });
 });

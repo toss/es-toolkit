@@ -11,12 +11,16 @@ describe('memoize', () => {
   bench('es-toolkit/memoize', () => {
     const memoized = memoize(values);
     memoized(object);
+    memoized(object); // cached
     memoized(other);
+    memoized(other); // cached
   });
 
   bench('lodash/memoize', () => {
     const memoized = lodashMemoize(values);
     memoized(object);
+    memoized(object); // cached
     memoized(other);
+    memoized(other); // cached
   });
 });
