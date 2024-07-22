@@ -1,5 +1,5 @@
 /**
- * Checks if the given value is an Object-like.
+ * Checks if the given value is an object-like.
  *
  * This function tests whether the provided value is an object-like or not.
  * It returns `true` if the value is an object-like, and `false` otherwise.

@@ -1,0 +1,38 @@
+# isObjectLike
+
+주어진 값이 유사 객체인지 확인해요.
+
+만약 주어진 값이 유사 객체이면 `true`, 아니면 `false`를 반환해요.
+
+TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 유사 객체로 좁혀요.
+
+## 인터페이스
+
+```typescript
+export function isObjectLike<T>(value: T): value is Extract<T, object>;
+```
+
+### 파라미터
+
+- `value` (`T`): 유사 객체인지 확인할 값이에요.
+
+### 반환 값
+
+(`value is Extract<T, object>`): 주어진 값이 유사 객체이면 `true`, 아니면 `false`를 반환해요.
+
+## 예시
+
+```typescript
+import { isObjectLike } from 'es-toolkit/predicate';
+
+const value1 = { a: 1 };
+const value2 = [1, 2, 3];
+const value3 = 'abc';
+const value4 = () => {};
+const value5 = null;
+
+console.log(isObjectLike(value1)); // true
+console.log(isObjectLike(value2)); // true
+console.log(isObjectLike(value3)); // false
+console.log(isObjectLike(value4)); // false
+```

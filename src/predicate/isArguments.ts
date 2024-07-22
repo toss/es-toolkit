@@ -1,26 +1,25 @@
 import { getTag } from '../compat/_internal/getTag';
 
 /**
- * Checks if the given value is an array.
+ * Checks if the given value is an arguments object.
  *
- * This function tests whether the provided value is an array or not.
- * It returns `true` if the value is an array, and `false` otherwise.
+ * This function tests whether the provided value is an arguments object or not.
+ * It returns `true` if the value is an arguments object, and `false` otherwise.
  *
- * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an array.
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an arguments object.
  *
- * @template T - The type of value.
- * @param {T} value - The value to test if it is an array.
- * @returns {value is Extract<T, unknown[]>} `true` if the value is an array, `false` otherwise.
+ * @param {unknown} value - The value to test if it is an arguments object.
+ * @returns {value is IArguments} `true` if the value is an arguments, `false` otherwise.
  *
  * @example
- * const value1 = [1, 2, 3];
- * const value2 = 'abc';
- * const value3 = () => {};
+ * const args = (function() { return arguments; })();
+ * const strictArgs = (function() { 'use strict'; return arguments; })();
+ * const value = [1, 2, 3];
  *
- * console.log(isArray(value1)); // true
- * console.log(isArray(value2)); // false
- * console.log(isArray(value3)); // false
+ * console.log(isArguments(args)); // true
+ * console.log(isArguments(strictArgs)); // true
+ * console.log(isArguments(value)); // false
  */
-export function isArguments<T>(value?: T): value is Extract<T, readonly unknown[]> {
+export function isArguments(value?: unknown): value is IArguments {
   return value !== null && typeof value === 'object' && getTag(value) === '[object Arguments]';
 }
