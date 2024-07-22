@@ -194,7 +194,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [eq](https://lodash.com/docs/4.17.15#eq)                               | ❌                    |
 | [gt](https://lodash.com/docs/4.17.15#gt)                               | ❌                    |
 | [gte](https://lodash.com/docs/4.17.15#gte)                             | ❌                    |
-| [isArguments](https://lodash.com/docs/4.17.15#isArguments)             | ❌                    |
+| [isArguments](https://lodash.com/docs/4.17.15#isArguments)             | ✅                    |
 | [isArray](https://lodash.com/docs/4.17.15#isArray)                     | ✅                    |
 | [isArrayBuffer](https://lodash.com/docs/4.17.15#isArrayBuffer)         | ❌                    |
 | [isArrayLike](https://lodash.com/docs/4.17.15#isArrayLike)             | ✅                    |
@@ -220,7 +220,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isNull](https://lodash.com/docs/4.17.15#isNull)                       | ✅                    |
 | [isNumber](https://lodash.com/docs/4.17.15#isNumber)                   | ❌                    |
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌                    |
-| [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ❌                    |
+| [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ✅                    |
 | [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ✅                    |
 | [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ❌                    |
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌                    |
