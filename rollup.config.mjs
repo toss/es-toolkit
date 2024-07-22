@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { globSync } from 'glob';
+import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
 import dtsPlugin from 'rollup-plugin-dts';
 
@@ -36,9 +37,8 @@ export default () => {
       outDir: 'dist',
     }),
     umdBuildConfig({
-      input: './src/browser.ts',
-      outFile: 'browser.global.js',
-      outDir: 'umd',
+      inputFile: './src/browser.ts',
+      outFile: 'umd/browser.global.js',
     }),
   ];
 };
@@ -101,24 +101,27 @@ function libBuildOptions({ extension, format, inputFiles, outDir }) {
 }
 
 /**
- * @type {(options: {input: string; outFile: string; outDir: string}) => import('rollup').RollupOptions}
+ * @type {(options: {inputFile: string; outFile: string}) => import('rollup').RollupOptions}
  */
-function umdBuildConfig({ input, outFile, outDir }) {
+function umdBuildConfig({ inputFile, outFile }) {
   return {
-    input,
+    input: inputFile,
     plugins: [
       tsPlugin({
         exclude: [...testPatterns],
         compilerOptions: {
-          sourceMap: false,
+          sourceMap: true,
+          inlineSources: true,
+          removeComments: true,
           declaration: false,
         },
       }),
     ],
     output: {
+      plugins: [terserPlugin()],
       format: 'umd',
-      dir: outDir,
       file: outFile,
+      sourcemap: true,
       generatedCode: 'es2015',
     },
   };
