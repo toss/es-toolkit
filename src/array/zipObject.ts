@@ -28,7 +28,7 @@
  * const result2 = zipObject(keys2, values2);
  * // result2 will be { a: 1, b: 2 }
  */
-export function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V } {
+export function zipObject<P extends PropertyKey, V>(keys: P[], values: V[]): { [K in P]: V } {
   const result = {} as { [K in P]: V };
 
   for (let i = 0; i < keys.length; i++) {
