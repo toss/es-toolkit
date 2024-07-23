@@ -11,7 +11,7 @@ import { set } from "../object/set.ts";
  * If the `keys` array is longer than the `values` array, the remaining keys will have `undefined` as their values.
  *
  * @template V - The type of elements in the array.
- * @param {string[] | string[][]} keys - An array of property paths, each path can be a dot-separated string or an array of property names.
+ * @param {P[] | P[][]} keys - An array of property paths, each path can be a dot-separated string or an array of property names.
  * @param {V[]} values - An array of values corresponding to the property paths.
  * @returns {object} A new object composed of the given property paths and values.
  *
@@ -33,9 +33,9 @@ import { set } from "../object/set.ts";
  * const result = zipObjectDeep(paths, values);
  * // result will be { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }
  */
-export function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V } {
+export function zipObjectDeep<P extends PropertyKey, V>(keys: P[] | P[][], values: V[]): { [K in P]: V } {
   const result = {} as { [K in P]: V };
-  const zipped = zip(keys, values);
+  const zipped = zip<P | P[], V>(keys, values);
 
   for (let i = 0; i < zipped.length; i++) {
     const [key, value] = zipped[i];

@@ -31,10 +31,11 @@ jobs:
       - setup
       - run:
           name: ESLint
-          command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
+          shell: bash -e
+          command: git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)" | xargs -r yarn eslint -c .eslintrc.js
       - run:
           name: Prettier
-          command: modifiedFiles=$(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)") && [ -n "$modifiedFiles" ] && yarn prettier -c $modifiedFiles || echo "No modified files."
+          command: git diff --name-only --diff-filter=ACMRUXB origin/main | xargs -r yarn prettier -c --ignore-unknown
   typecheck:
     docker:
       - image: cimg/node:20.12
@@ -52,7 +53,13 @@ jobs:
       - setup
       - run:
           name: Build
-          command: yarn build
+          command: yarn pack --out package.tgz
+      - run:
+          name: Check Dist
+          command: node --test .scripts/check-dist.mjs
+      - run:
+          name: Check Package Types
+          command: yarn attw package.tgz
   check-peer:
     docker:
       - image: cimg/node:20.12
