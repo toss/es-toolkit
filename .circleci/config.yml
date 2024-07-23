@@ -54,7 +54,10 @@ jobs:
           name: Build
           command: yarn pack --out package.tgz
       - run:
-          name: Check Package Entrypoints
+          name: Check Dist
+          command: node --test .scripts/check-dist.mjs
+      - run:
+          name: Check Package Types
           command: yarn attw package.tgz
   check-peer:
     docker:
