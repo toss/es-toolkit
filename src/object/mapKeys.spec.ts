@@ -13,4 +13,13 @@ describe('mapKeys', () => {
   it('should pass the value corresponding to the current key into the iteratee', () => {
     expect(mapKeys({ a: 1, b: 2, c: 3 }, ({ value }) => value)).toEqual({ 1: 1, 2: 2, 3: 3 });
   });
+
+  it('should pass the cloned object into the iteratee', () => {
+    expect(
+      mapKeys({ a: 1, b: 2, c: 3 }, ({ key, object }) => {
+        object[`${key}${key}`] = 4;
+        return Object.keys(object).join('');
+      })
+    ).toEqual({ abcaa: 1, abcbb: 2, abccc: 3 });
+  });
 });

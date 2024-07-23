@@ -5,3 +5,5 @@ export { pickBy } from './pickBy.ts';
 export { invert } from './invert.ts';
 export { clone } from './clone.ts';
 export { flattenObject } from './flattenObject.ts';
+export { mapKeys } from './mapKeys.ts';
+export { mapValues } from './mapValues.ts';
