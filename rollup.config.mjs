@@ -8,6 +8,14 @@ import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
 import dtsPlugin from 'rollup-plugin-dts';
 
+/**
+ * @type {{
+ *   exports: Record<string, string>;
+ *   publishConfig: { browser: string };
+ * }}
+ */
+const packageJson = createRequire(import.meta.url)('./package.json');
+
 const testPatterns = ['**/*.bench.ts', '**/*.spec.ts', '**/*.test.ts'];
 
 export default () => {
@@ -37,20 +45,19 @@ export default () => {
       outDir: 'dist',
     }),
     umdBuildConfig({
-      inputFile: './src/browser.ts',
-      outFile: 'umd/browser.global.js',
+      inputFile: './src/compat/index.ts',
+      outFile: packageJson.publishConfig.browser,
+      name: '_',
     }),
   ];
 };
 
 function findLibFiles() {
-  /** @type {{ exports: Record<string, string>}} */
-  const packageJson = createRequire(import.meta.url)('./package.json');
   const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
 
   const allFiles = globSync('./src/**/*.ts', {
     cwd: import.meta.dirname,
-    ignore: [...testPatterns, '**/src/browser.ts'],
+    ignore: [...testPatterns],
   });
 
   return {
@@ -103,9 +110,9 @@ function libBuildOptions({ extension, format, inputFiles, outDir }) {
 }
 
 /**
- * @type {(options: {inputFile: string; outFile: string}) => import('rollup').RollupOptions}
+ * @type {(options: {inputFile: string; outFile: string; name: string}) => import('rollup').RollupOptions}
  */
-function umdBuildConfig({ inputFile, outFile }) {
+function umdBuildConfig({ inputFile, outFile, name }) {
   return {
     input: inputFile,
     plugins: [
@@ -122,6 +129,7 @@ function umdBuildConfig({ inputFile, outFile }) {
     output: {
       plugins: [terserPlugin()],
       format: 'iife',
+      name,
       file: outFile,
       sourcemap: true,
       generatedCode: 'es2015',
