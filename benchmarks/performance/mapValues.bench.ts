@@ -2,7 +2,7 @@ import { bench, describe } from 'vitest';
 import { mapValues as mapValuesToolkit } from 'es-toolkit';
 import { mapValues as mapValuesLodash } from 'lodash';
 
-describe('takeWhile', () => {
+describe('mapValues', () => {
   bench('es-toolkit/mapValues', () => {
     mapValuesToolkit({ a: 1, b: 2, c: 3 }, ({ value }) => `${value}a`);
   });
