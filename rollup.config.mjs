@@ -79,6 +79,7 @@ function libBuildOptions({ extension, format, inputFiles, outDir }) {
           sourceMap: true,
           inlineSources: true,
           declaration: false,
+          removeComments: true,
         },
       }),
     ],
