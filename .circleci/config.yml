@@ -52,7 +52,10 @@ jobs:
       - setup
       - run:
           name: Build
-          command: yarn build
+          command: yarn pack --out package.tgz
+      - run:
+          name: Check Package Entrypoints
+          command: yarn attw package.tgz
   check-peer:
     docker:
       - image: cimg/node:20.12
