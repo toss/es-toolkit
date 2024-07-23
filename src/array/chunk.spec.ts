@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
 import { chunk } from './chunk';
 
 describe('chunk', () => {
@@ -31,5 +31,12 @@ describe('chunk', () => {
   it('should place the remaining elements in the last chunk when the total length is not a multiple of the size', () => {
     expect(chunk([1, 2, 3, 4], 6)).toEqual([[1, 2, 3, 4]]);
     expect(chunk([1, 2, 3, 4, 5, 6, 7], 2)).toEqual([[1, 2], [3, 4], [5, 6], [7]]);
+  });
+
+  it('handles return type properly', () => {
+    expectTypeOf(chunk([], 3)).toEqualTypeOf<[]>();
+    expectTypeOf(chunk([1, 2, 3, 4, 5, 6], 3)).toEqualTypeOf<[[1, 2, 3], [4, 5, 6]]>();
+    expectTypeOf(chunk([1, 2, 3, 4], 6)).toEqualTypeOf<[[1, 2, 3, 4]]>();
+    expectTypeOf(chunk([1, 2, 3, 4, 5, 6, 7], 2)).toEqualTypeOf<[[1, 2], [3, 4], [5, 6], [7]]>();
   });
 });

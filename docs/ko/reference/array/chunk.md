@@ -8,7 +8,26 @@
 ## 인터페이스
 
 ```typescript
-function chunk<T>(arr: T[], size: number): T[][];
+type PositiveInteger<T extends number> = `${T}` extends `${bigint}`
+  ? `${T}` extends `-${any}`
+    ? false
+    : T extends 0
+      ? false
+      : true
+  : false;
+
+type Chunk<T extends unknown[], D extends number = 1, A extends unknown[] = []> =
+  PositiveInteger<D> extends true
+    ? T extends [infer F, ...infer R]
+      ? A['length'] extends D
+        ? [A, ...Chunk<R, D, [F]>]
+        : Chunk<R, D, [...A, F]>
+      : A extends []
+        ? []
+        : [A]
+    : never;
+
+function chunk<T extends any[], N extends number>(arr: T, size: N): Chunk<T, N>;
 ```
 
 ### 파라미터
@@ -58,4 +77,3 @@ chunk([1, 2, 3], 0); // Returns []
 | es-toolkit        | 238 바이트 (92.4% 작음)             | 9,338,821 회 (11% 느림)             |
 | es-toolkit/compat | 307 바이트 (90.2% 작음)             | 9,892,157 회 (5% 느림)              |
 | lodash-es         | 3,153 바이트                        | 10,523,270 회                       |
-

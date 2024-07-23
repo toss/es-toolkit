@@ -5,10 +5,11 @@
  * each of a specified length. If the input array cannot be evenly divided,
  * the final sub-array will contain the remaining elements.
  *
- * @template T The type of elements in the array.
- * @param {T[]} arr - The array to be chunked into smaller arrays.
- * @param {number} size - The size of each smaller array. Must be a positive integer.
- * @returns {T[][]} A two-dimensional array where each sub-array has a maximum length of `size`.
+ * @template T - The type of the input array.
+ * @template N - The type of the size of each sub-array.
+ * @param {T} arr - The array to be chunked into smaller arrays.
+ * @param {N} size - The size of each smaller array. Must be a positive integer.
+ * @returns {Chunk<T, N>} A two-dimensional array where each sub-array has a maximum length of `size`.
  * @throws {Error} Throws an error if `size` is not a positive integer.
  *
  * @example
@@ -21,13 +22,13 @@
  * chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
  * // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
  */
-export function chunk<T>(arr: readonly T[], size: number): T[][] {
+export function chunk<const T extends readonly any[], N extends number>(arr: T, size: N): Chunk<T, N> {
   if (!Number.isInteger(size) || size <= 0) {
     throw new Error('Size must be an integer greater than zero.');
   }
 
   const chunkLength = Math.ceil(arr.length / size);
-  const result: T[][] = Array(chunkLength);
+  const result = Array(chunkLength);
 
   for (let index = 0; index < chunkLength; index++) {
     const start = index * size;
@@ -36,5 +37,24 @@ export function chunk<T>(arr: readonly T[], size: number): T[][] {
     result[index] = arr.slice(start, end);
   }
 
-  return result;
+  return result as Chunk<T, N>;
 }
+
+type PositiveInteger<T extends number> = `${T}` extends `${bigint}`
+  ? `${T}` extends `-${any}`
+    ? false
+    : T extends 0
+      ? false
+      : true
+  : false;
+
+type Chunk<T extends readonly unknown[], D extends number = 1, A extends unknown[] = []> =
+  PositiveInteger<D> extends true
+    ? T extends readonly [infer F, ...infer R]
+      ? A['length'] extends D
+        ? [A, ...Chunk<R, D, [F]>]
+        : Chunk<R, D, [...A, F]>
+      : A extends []
+        ? []
+        : [A]
+    : never;

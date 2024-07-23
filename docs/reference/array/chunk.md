@@ -9,7 +9,26 @@ the final sub-array will contain the remaining elements.
 ## Signature
 
 ```typescript
-function chunk<T>(arr: T[], size: number): T[][];
+type PositiveInteger<T extends number> = `${T}` extends `${bigint}`
+  ? `${T}` extends `-${any}`
+    ? false
+    : T extends 0
+      ? false
+      : true
+  : false;
+
+type Chunk<T extends unknown[], D extends number = 1, A extends unknown[] = []> =
+  PositiveInteger<D> extends true
+    ? T extends [infer F, ...infer R]
+      ? A['length'] extends D
+        ? [A, ...Chunk<R, D, [F]>]
+        : Chunk<R, D, [...A, F]>
+      : A extends []
+        ? []
+        : [A]
+    : never;
+
+function chunk<T extends any[], N extends number>(arr: T, size: N): Chunk<T, N>;
 ```
 
 ### Parameters
