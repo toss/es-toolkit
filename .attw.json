@@ -1,0 +1,15 @@
+{
+  "format": "table-flipped",
+  "emoji": false,
+  "includeEntrypoints": [
+    "array",
+    "compat",
+    "function",
+    "math",
+    "object",
+    "predicate",
+    "promise",
+    "string",
+    "package.json"
+  ]
+}
