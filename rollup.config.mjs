@@ -44,7 +44,7 @@ export default () => {
       inputFiles: files.entrypoints,
       outDir: 'dist',
     }),
-    umdBuildConfig({
+    browserBuildConfig({
       inputFile: './src/compat/index.ts',
       outFile: packageJson.publishConfig.browser,
       name: '_',
@@ -112,7 +112,7 @@ function libBuildOptions({ extension, format, inputFiles, outDir }) {
 /**
  * @type {(options: {inputFile: string; outFile: string; name: string}) => import('rollup').RollupOptions}
  */
-function umdBuildConfig({ inputFile, outFile, name }) {
+function browserBuildConfig({ inputFile, outFile, name }) {
   return {
     input: inputFile,
     plugins: [
