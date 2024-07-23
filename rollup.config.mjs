@@ -3,7 +3,6 @@
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { globSync } from 'glob';
 import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
 import dtsPlugin from 'rollup-plugin-dts';
@@ -22,26 +21,23 @@ export default () => {
   clearDir('dist');
   clearDir('umd');
 
-  const files = findLibFiles();
+  const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
 
   return [
     libBuildOptions({
       format: 'esm',
       extension: 'mjs',
-      inputFiles: files.allFiles,
+      entrypoints,
       outDir: 'dist',
     }),
     libBuildOptions({
       format: 'cjs',
       extension: 'js',
-      // For CJS, only treat the package.json#exports paths as entrypoints,
-      // resulting in one bundle per category (array, object, etc.),
-      // plus one index requiring those bundles.
-      inputFiles: files.entrypoints,
+      entrypoints,
       outDir: 'dist',
     }),
     declarationOptions({
-      inputFiles: files.entrypoints,
+      entrypoints,
       outDir: 'dist',
     }),
     browserBuildConfig({
@@ -52,33 +48,19 @@ export default () => {
   ];
 };
 
-function findLibFiles() {
-  const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
-
-  const allFiles = globSync('./src/**/*.ts', {
-    cwd: import.meta.dirname,
-    ignore: [...testPatterns],
-  });
-
-  return {
-    entrypoints,
-    allFiles,
-  };
-}
-
 /**
  * @type {(options: {
+ *   entrypoints: string[];
  *   format: 'esm' | 'cjs';
  *   extension: 'js' | 'cjs' | 'mjs';
- *   inputFiles: string[];
  *   outDir: string;
  * }) => import('rollup').RollupOptions}
  */
-function libBuildOptions({ extension, format, inputFiles, outDir }) {
+function libBuildOptions({ entrypoints, extension, format, outDir }) {
   const isESM = format === 'esm';
 
   return {
-    input: mapInputs(inputFiles),
+    input: mapInputs(entrypoints),
     plugins: [
       tsPlugin({
         exclude: [...testPatterns],
@@ -95,9 +77,7 @@ function libBuildOptions({ extension, format, inputFiles, outDir }) {
       dir: outDir,
       ...fileNames(extension),
       // Using preserveModules disables bundling and the creation of chunks,
-      // leading to a result that is a mirror of the input modules.
-      // Warning: with this option, all modules that might get imported
-      // need to be present in the input, otherwise imports will be broken!
+      // leading to a result that is a mirror of the input module graph.
       preserveModules: isESM,
       sourcemap: true,
       generatedCode: 'es2015',
@@ -138,12 +118,12 @@ function browserBuildConfig({ inputFile, outFile, name }) {
 }
 
 /**
- * @type {(options: {inputFiles: string[]; outDir: string}) => import('rollup').RollupOptions}
+ * @type {(options: {entrypoints: string[]; outDir: string}) => import('rollup').RollupOptions}
  */
-function declarationOptions({ inputFiles, outDir }) {
+function declarationOptions({ entrypoints, outDir }) {
   return {
     plugins: [dtsPlugin()],
-    input: mapInputs(inputFiles),
+    input: mapInputs(entrypoints),
     output: [
       {
         format: 'esm',
