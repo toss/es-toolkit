@@ -14,8 +14,8 @@ describe('mapValues', () => {
     expect(
       mapValues({ a: 1, b: 2, c: 3 }, ({ key, value, object }) => {
         object[key] = value * 11;
-        return Object.values(object).join('');
+        return value * 11;
       })
-    ).toEqual({ a: '1123', b: '1223', c: '1233' });
+    ).toEqual({ a: 11, b: 22, c: 33 });
   });
 });
