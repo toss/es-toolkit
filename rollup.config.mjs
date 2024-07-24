@@ -3,9 +3,13 @@
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { dirname } from 'node:path';
 import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
 import dtsPlugin from 'rollup-plugin-dts';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * @type {{
@@ -150,7 +154,7 @@ function mapInputs(srcFiles) {
   return Object.fromEntries(
     srcFiles.map(file => [
       file.replace(/^(\.\/)?src\//, '').replace(/\.[cm]?(js|ts)$/, ''),
-      path.join(import.meta.dirname, file),
+      path.join(__dirname, file),
     ])
   );
 }
@@ -164,7 +168,7 @@ function fileNames(extension = 'js') {
 
 /** @type {(dir: string) => void} */
 function clearDir(dir) {
-  const dirPath = path.join(import.meta.dirname, dir);
+  const dirPath = path.join(__dirname, dir);
   if (dir && fs.existsSync(dirPath)) {
     fs.rmSync(dirPath, { recursive: true, force: true });
     console.log(`cleared: ${dir}`);
