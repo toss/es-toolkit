@@ -156,8 +156,8 @@
     "prettier": "^3.2.5",
     "rollup": "^4.19.0",
     "rollup-plugin-dts": "^6.1.1",
-    "tslib": "^2.6.3",
     "tar": "^6",
+    "tslib": "^2.6.3",
     "tsup": "^8.1.0",
     "typescript": "^5.4.5",
     "vitest": "^1.5.2"
