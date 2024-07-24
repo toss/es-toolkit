@@ -153,10 +153,7 @@ function declarationOptions({ entrypoints, outDir }) {
 /** @type {(srcFiles: string[]) => Record<string, string>} */
 function mapInputs(srcFiles) {
   return Object.fromEntries(
-    srcFiles.map(file => [
-      file.replace(/^(\.\/)?src\//, '').replace(/\.[cm]?(js|ts)$/, ''),
-      path.join(__dirname, file),
-    ])
+    srcFiles.map(file => [file.replace(/^(\.\/)?src\//, '').replace(/\.[cm]?(js|ts)$/, ''), path.join(__dirname, file)])
   );
 }
 
