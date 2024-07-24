@@ -1,5 +1,5 @@
 ---
-description: es-toolkit을 설치하는 방법
+description: es-toolkit을 사용하는 방법
 prev:
   text: es-toolkit 소개
   link: ./intro.md
@@ -8,9 +8,11 @@ next:
   link: ./bundle-size
 ---
 
-# 설치
+# 설치 및 사용하기
 
 Node.js나 Bun을 사용하는 경우, [npm](https://npmjs.com/package/es-toolkit)에서 설치할 수 있어요. Deno에서는 [JSR](https://jsr.io/es-toolkit)에서 설치할 수 있어요.
+
+브라우저에서 바로 쓰는 경우, [CDN에서 가져올 수](#브라우저)있어요.
 
 ## Node.js
 

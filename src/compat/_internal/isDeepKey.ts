@@ -6,7 +6,7 @@ const IS_DEEP = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
  *
  * A deep key is a string that contains a dot (.) or square brackets with a property accessor.
  *
- * @param key - The key to check.
+ * @param {PropertyKey} key - The key to check.
  * @returns {boolean} - Returns true if the key is a deep key, otherwise false.
  *
  * Examples:
@@ -20,11 +20,11 @@ const IS_DEEP = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
  */
 export function isDeepKey(key: PropertyKey): boolean {
   switch (typeof key) {
-    case "number":
-    case "symbol": {
+    case 'number':
+    case 'symbol': {
       return false;
     }
-    case "string": {
+    case 'string': {
       return !IS_PLAIN.test(key) && IS_DEEP.test(key);
     }
   }

@@ -7,6 +7,7 @@
  * Unlike some implementations, this function is optimized for performance
  * by directly accessing the last index of the array.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} arr - The array from which to get the last element.
  * @returns {T | undefined} The last element of the array, or `undefined` if the array is empty.
  *

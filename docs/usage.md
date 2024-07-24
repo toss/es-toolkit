@@ -1,5 +1,5 @@
 ---
-description: How to install es-toolkit
+description: How to use es-toolkit
 prev:
   text: Introduction to es-toolkit
   link: ./intro.md
@@ -8,9 +8,11 @@ next:
   link: ./bundle-size
 ---
 
-# Installation
+# Installation & Usage
 
 es-toolkit is available via [npm](https://npmjs.com/package/es-toolkit) for Node.js and Bun, and through [JSR](https://jsr.io/@es-toolkit/es-toolkit) for Deno.
+
+You can also use es-toolkit in browsers by [importing them in CDNs](#browsers).
 
 ## Node.js
 
