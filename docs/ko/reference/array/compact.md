@@ -10,11 +10,11 @@ function compact<T>(arr: T[]): Array<Exclude<T, false | null | 0 | '' | undefine
 
 ### 파라미터
 
-- `arr` (`T[]`): 거짓으로 평가될 수 있는 값을 제거할 배열
+- `arr` (`T[]`): 거짓으로 평가될 수 있는 값을 제거할 배열.
 
 ### 반환 값
 
-(`Array<Exclude<T, false | null | 0 | '' | undefined>>`): 거짓으로 평가될 수 있는 값을 모두 제거한 새로운 배열
+(`Array<Exclude<T, false | null | 0 | '' | undefined>>`): 거짓으로 평가될 수 있는 값을 모두 제거한 새로운 배열.
 
 ## 예시
 
