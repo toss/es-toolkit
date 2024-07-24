@@ -15,7 +15,7 @@ describe('mapKeys', () => {
   });
 
   it('should pass the cloned object into the iteratee', () => {
-    const object = { a: 1, b: 2, c: 3 };
+    const object: Record<string, number> = { a: 1, b: 2, c: 3 };
     expect(
       mapKeys(object, ({ key, object }) => {
         object[`${key}${key}`] = 4;
