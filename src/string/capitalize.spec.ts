@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, expectTypeOf } from 'vitest';
 import { capitalize } from './capitalize';
 
 describe('capitalize', () => {
@@ -28,5 +28,15 @@ describe('capitalize', () => {
 
   it('should work with an empty string', async () => {
     expect(capitalize('')).toEqual('');
+  });
+
+  it('handles return type properly', async () => {
+    expectTypeOf(capitalize('fred')).toEqualTypeOf<'Fred'>();
+    expectTypeOf(capitalize('FRED')).toEqualTypeOf<'Fred'>();
+    expectTypeOf(capitalize('special@characters!')).toEqualTypeOf<'Special@characters!'>();
+    expectTypeOf(capitalize('hyphen-text')).toEqualTypeOf<'Hyphen-text'>();
+    expectTypeOf(capitalize(' fred')).toEqualTypeOf<' fred'>();
+    expectTypeOf(capitalize('Fred')).toEqualTypeOf<'Fred'>();
+    expectTypeOf(capitalize('')).toEqualTypeOf<''>();
   });
 });

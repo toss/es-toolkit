@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, expectTypeOf } from 'vitest';
 import { startCase } from './startCase';
 
 describe('startCase', function () {
@@ -57,5 +57,18 @@ describe('startCase', function () {
   it('should handle whitespace characters', function () {
     expect(startCase('  foo  bar  ')).toBe('Foo Bar');
     expect(startCase('\tfoo\nbar')).toBe('Foo Bar');
+  });
+
+  it('handles return type properly', async () => {
+    expectTypeOf(startCase('camelCase')).toEqualTypeOf<'Camel Case'>();
+    expectTypeOf(startCase('some whitespace')).toEqualTypeOf<'Some Whitespace'>();
+    expectTypeOf(startCase('hyphen-text')).toEqualTypeOf<'Hyphen Text'>();
+    expectTypeOf(startCase('HTTPRequest')).toEqualTypeOf<'HTTP Request'>();
+    expectTypeOf(startCase('    leading and trailing whitespace')).toEqualTypeOf<'Leading And Trailing Whitespace'>();
+    expectTypeOf(startCase('special@characters!')).toEqualTypeOf<'Special Characters'>();
+    expectTypeOf(startCase('lower_case')).toEqualTypeOf<'Lower Case'>();
+    expectTypeOf(startCase('')).toEqualTypeOf<''>();
+    expectTypeOf(startCase('FOO_BAR')).toEqualTypeOf<'FOO BAR'>();
+    expectTypeOf(startCase('Foo Bar')).toEqualTypeOf<'Foo Bar'>();
   });
 });

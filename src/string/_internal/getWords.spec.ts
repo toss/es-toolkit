@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
 import { getWords } from './getWords';
 
 describe('caseSplitPattern', () => {
@@ -62,5 +62,23 @@ describe('caseSplitPattern', () => {
 
   it('should work with numbers', () => {
     expect(getWords('foo2bar')).toEqual(['foo', '2', 'bar']);
+  });
+
+  it('handles return type properly', async () => {
+    expectTypeOf(getWords('camelCase')).toEqualTypeOf<['camel', 'Case']>();
+    expectTypeOf(getWords('snake_case')).toEqualTypeOf<['snake', 'case']>();
+    expectTypeOf(getWords('kebab-case')).toEqualTypeOf<['kebab', 'case']>();
+    expectTypeOf(getWords('camelCase_snake_case-kebabCase')).toEqualTypeOf<
+      ['camel', 'Case', 'snake', 'case', 'kebab', 'Case']
+    >();
+    expectTypeOf(getWords('HTTPRequest')).toEqualTypeOf<['HTTP', 'Request']>();
+    expectTypeOf(getWords('special_characters@123')).toEqualTypeOf<['special', 'characters', '123']>();
+    expectTypeOf(getWords('  leading_and_trailing_whitespace  ')).toEqualTypeOf<
+      ['leading', 'and', 'trailing', 'whitespace']
+    >();
+    expectTypeOf(getWords('underscore_case_example')).toEqualTypeOf<['underscore', 'case', 'example']>();
+    expectTypeOf(getWords('aB')).toEqualTypeOf<['a', 'B']>();
+    expectTypeOf(getWords('--FOO-BAR--')).toEqualTypeOf<['FOO', 'BAR']>();
+    expectTypeOf(getWords('foo2bar')).toEqualTypeOf<['foo', '2', 'bar']>();
   });
 });
