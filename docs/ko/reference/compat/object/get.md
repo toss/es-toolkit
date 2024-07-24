@@ -52,13 +52,16 @@ function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaul
 ### 예시
 
 ```typescript
+import { get } from 'es-toolkit/compat';
+
 const obj = {
   a: {
     b: 4
   }
-}
-console.log(obj, 'a.b') // 4
-console.log(obj, ['a', 'b']) // 4
-console.log(obj, ['a', 'c']) // undefined
-console.log(obj, ['a', 'c'], null) // null
+};
+
+get(obj, 'a.b'); // 4
+get(obj, ['a', 'b']); // 4
+get(obj, ['a', 'c']); // undefined
+get(obj, ['a', 'c'], null); // null
 ```
