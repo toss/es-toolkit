@@ -9,6 +9,7 @@ import tsPlugin from '@rollup/plugin-typescript';
 import dtsPlugin from 'rollup-plugin-dts';
 import { fileURLToPath } from 'node:url';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**

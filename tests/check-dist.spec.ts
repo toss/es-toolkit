@@ -66,6 +66,7 @@ const exported = Object.entries(toolkit)
   .map(([k, v]) => [k, typeof v])
   .sort((x, y) => x[0].localeCompare(y[0]));
 
+console.log("${path.join("es-toolkit", entrypoint)}");
 console.log(exported);
       `.trim();
       const cjsScriptPath = path.join(tmpdir, 'script.cjs');
@@ -77,6 +78,7 @@ const exported = Object.entries(toolkit)
   .map(([k, v]) => [k, typeof v])
   .sort((x, y) => x[0].localeCompare(y[0]));
 
+console.log("${path.join("es-toolkit", entrypoint)}");
 console.log(exported);
       `.trim();
       const esmScriptPath = path.join(tmpdir, 'script.mjs');
