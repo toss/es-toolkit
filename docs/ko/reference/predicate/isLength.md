@@ -14,7 +14,7 @@ function isLength(value: unknown): value is number;
 
 ### 파라미터
 
-- `value` (`unknown`): 유효한 길이인지 확인할 값
+- `value` (`unknown`): 유효한 길이인지 확인할 값.
 
 ### 반환 값
 
