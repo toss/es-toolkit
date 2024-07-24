@@ -87,7 +87,7 @@ export function cloneDeep<T>(obj: T): Resolved<T> {
 
   if (
     obj instanceof ArrayBuffer ||
-    (typeof window.SharedArrayBuffer !== 'undefined' && obj instanceof SharedArrayBuffer)
+    (typeof SharedArrayBuffer !== 'undefined' && obj instanceof SharedArrayBuffer)
   ) {
     return obj.slice(0) as Resolved<T>;
   }
