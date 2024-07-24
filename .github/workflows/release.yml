@@ -42,6 +42,8 @@ jobs:
           mv jsr.json.tmp jsr.json
       - run: yarn install
       - run: 'mkdir -p out && yarn pack --out out/%s-%v.tgz'
+      - name: Check Package Entrypoints
+        run: 'yarn attw out/*.tgz'
       - id: extract-changelog
         uses: dahlia/submark@5a5ff0a58382fb812616a5801402f5aef00f90ce
         with:
