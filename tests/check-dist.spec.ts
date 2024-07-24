@@ -62,7 +62,9 @@ describe(`es-toolkit's package tarball`, () => {
       const cjsScript = `
 const toolkit = require("${path.join("es-toolkit", entrypoint)}");
 
-const exported = Object.entries(toolkit).map(([k, v]) => [k, typeof v]);
+const exported = Object.entries(toolkit)
+  .map(([k, v]) => [k, typeof v])
+  .sort((x, y) => x[0].localeCompare(y[0]));
 
 console.log(exported);
       `.trim();
@@ -71,7 +73,9 @@ console.log(exported);
       const esmScript = `
 const toolkit = await import("${path.join("es-toolkit", entrypoint)}");
 
-const exported = Object.entries(toolkit).map(([k, v]) => [k, typeof v]);
+const exported = Object.entries(toolkit)
+  .map(([k, v]) => [k, typeof v])
+  .sort((x, y) => x[0].localeCompare(y[0]));
 
 console.log(exported);
       `.trim();
