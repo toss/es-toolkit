@@ -74,8 +74,8 @@ function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) 
         compilerOptions: {
           sourceMap: sourcemap,
           inlineSources: sourcemap || undefined,
+          removeComments: !sourcemap,
           declaration: false,
-          removeComments: true,
         },
       }),
     ],
