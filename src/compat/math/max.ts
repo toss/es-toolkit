@@ -3,7 +3,7 @@
  *
  * @template T - The type of elements in the array.
  * @param {T[]} items The array of elements to search.
- * @returns {T} The element with the maximum value.
+ * @returns {T | undefined} The element with the maximum value.
  * @example
  * // Returns 9
  * max([3, 1, 4, 1, 5, 9])
@@ -12,7 +12,10 @@
  * // Returns 8
  * max([0, -3, 2, 8, 7])
  */
-export function max<T>(items: readonly T[] = []): T {
+export function max<T>(items: readonly [T, ...T[]]): T;
+export function max(): undefined;
+export function max<T>(items?: readonly T[]): T | undefined;
+export function max<T>(items: readonly T[] = []): T | undefined {
   let maxElement = items[0];
   let max = undefined;
 

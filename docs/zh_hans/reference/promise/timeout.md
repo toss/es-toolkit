@@ -1,8 +1,6 @@
 # timeout
 
-如果响应时间晚于指定时间， 则将其视为 `TimeoutError`错误。
-
-此函数返回一个 Promise，该 Promise 在指定超时后解析，允许您使用它 使用 async/await 来超时执行。
+返回一个在指定时间后以 `TimeoutError` 错误拒绝的 `Promise`。
 
 ## 签名
 

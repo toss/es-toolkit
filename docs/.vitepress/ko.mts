@@ -35,7 +35,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: '가이드',
       items: [
         { text: '소개', link: '/ko/intro' },
-        { text: '설치', link: '/ko/installation' },
+        { text: '설치 및 사용 방법', link: '/ko/usage' },
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
         { text: 'Lodash와 호환성', link: '/ko/compatibility' },
@@ -69,7 +69,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'flatMap', link: '/ko/reference/array/flatMap' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },
-            { text: 'forEachRight', link: '/reference/array/forEachRight' },
+            { text: 'forEachRight', link: '/ko/reference/array/forEachRight' },
             { text: 'groupBy', link: '/ko/reference/array/groupBy' },
             { text: 'intersection', link: '/ko/reference/array/intersection' },
             {
@@ -122,9 +122,10 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '함수',
           items: [
+            { text: 'after', link: '/ko/reference/function/after' },
             { text: 'debounce', link: '/ko/reference/function/debounce' },
             { text: 'throttle', link: '/ko/reference/function/throttle' },
-            { text: 'negate', link: '/reference/function/negate' },
+            { text: 'negate', link: '/ko/reference/function/negate' },
             { text: 'once', link: '/ko/reference/function/once' },
             { text: 'noop', link: '/ko/reference/function/noop' },
           ],
@@ -148,7 +149,9 @@ function sidebar(): DefaultTheme.Sidebar {
           text: '객체',
           items: [
             { text: 'clone', link: '/ko/reference/object/clone' },
+            { text: 'cloneDeep', link: '/ko/reference/object/cloneDeep' },
             { text: 'invert', link: '/ko/reference/object/invert' },
+            { text: 'flattenObject', link: '/ko/reference/object/flattenObject' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
@@ -160,10 +163,17 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '타입 가드',
           items: [
+            { text: 'isArray (호환성)', link: '/ko/reference/compat/predicate/isArray' },
+            { text: 'isArrayLike', link: '/ko/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
+            { text: 'isFunction', link: '/ko/reference/predicate/isFunction' },
+            { text: 'isLength', link: '/ko/reference/predicate/isLength' },
+            { text: 'isPlainObject', link: '/ko/reference/predicate/isPlainObject' },
+            { text: 'isPrimitive', link: '/ko/reference/predicate/isPrimitive' },
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
+            { text: 'isTypedArray', link: '/ko/reference/predicate/isTypedArray' },
             {
               text: 'isUndefined',
               link: '/ko/reference/predicate/isUndefined',
