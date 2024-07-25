@@ -69,7 +69,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'flatMap', link: '/ko/reference/array/flatMap' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },
-            { text: 'forEachRight', link: '/reference/array/forEachRight' },
+            { text: 'forEachRight', link: '/ko/reference/array/forEachRight' },
             { text: 'groupBy', link: '/ko/reference/array/groupBy' },
             { text: 'intersection', link: '/ko/reference/array/intersection' },
             {
