@@ -69,7 +69,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'flatMap', link: '/ko/reference/array/flatMap' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },
-            { text: 'forEachRight', link: '/reference/array/forEachRight' },
+            { text: 'forEachRight', link: '/ko/reference/array/forEachRight' },
             { text: 'groupBy', link: '/ko/reference/array/groupBy' },
             { text: 'intersection', link: '/ko/reference/array/intersection' },
             {
@@ -122,6 +122,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '함수',
           items: [
+            { text: 'before', link: '/ko/reference/function/before' },
             { text: 'after', link: '/ko/reference/function/after' },
             { text: 'debounce', link: '/ko/reference/function/debounce' },
             { text: 'throttle', link: '/ko/reference/function/throttle' },
@@ -152,17 +153,21 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'cloneDeep', link: '/ko/reference/object/cloneDeep' },
             { text: 'invert', link: '/ko/reference/object/invert' },
             { text: 'flattenObject', link: '/ko/reference/object/flattenObject' },
+            { text: 'mapKeys', link: '/ko/reference/object/mapKeys' },
+            { text: 'mapValues', link: '/ko/reference/object/mapValues' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
             { text: 'get (호환성)', link: '/ko/reference/compat/object/get' },
             { text: 'set (호환성)', link: '/ko/reference/compat/object/set' },
+            { text: 'property (호환성)', link: '/ko/reference/compat/object/property' },
           ],
         },
         {
           text: '타입 가드',
           items: [
+            { text: 'isArguments', link: '/ko/reference/predicate/isArguments' },
             { text: 'isArray (호환성)', link: '/ko/reference/compat/predicate/isArray' },
             { text: 'isArrayLike', link: '/ko/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
@@ -170,10 +175,13 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isLength', link: '/ko/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/ko/reference/predicate/isPlainObject' },
             { text: 'isPrimitive', link: '/ko/reference/predicate/isPrimitive' },
+            { text: 'isMatch (호환성)', link: '/ko/reference/compat/predicate/isMatch' },
+            { text: 'matches (호환성)', link: '/ko/reference/compat/predicate/matches' },
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
-            { text: 'isTypedArray', link: '/ko/reference/predicate/isTypedArray' },
+            { text: 'isObjectLike', link: '/ko/reference/predicate/isObjectLike' },
+            { text: 'isTypedArray', link: '/ko/reference/predicate/isNull' },
             {
               text: 'isUndefined',
               link: '/ko/reference/predicate/isUndefined',

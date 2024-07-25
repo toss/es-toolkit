@@ -195,7 +195,7 @@ chunk([1, 2, 3, 4], 0);
 | [eq](https://lodash.com/docs/4.17.15#eq)                               | ❌        |
 | [gt](https://lodash.com/docs/4.17.15#gt)                               | ❌        |
 | [gte](https://lodash.com/docs/4.17.15#gte)                             | ❌        |
-| [isArguments](https://lodash.com/docs/4.17.15#isArguments)             | ❌        |
+| [isArguments](https://lodash.com/docs/4.17.15#isArguments)             | ✅        |
 | [isArray](https://lodash.com/docs/4.17.15#isArray)                     | ✅        |
 | [isArrayBuffer](https://lodash.com/docs/4.17.15#isArrayBuffer)         | ❌        |
 | [isArrayLike](https://lodash.com/docs/4.17.15#isArrayLike)             | ✅        |
@@ -213,7 +213,7 @@ chunk([1, 2, 3, 4], 0);
 | [isInteger](https://lodash.com/docs/4.17.15#isInteger)                 | ❌        |
 | [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ✅        |
 | [isMap](https://lodash.com/docs/4.17.15#isMap)                         | ❌        |
-| [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ❌        |
+| [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ✅        |
 | [isMatchWith](https://lodash.com/docs/4.17.15#isMatchWith)             | ❌        |
 | [isNaN](https://lodash.com/docs/4.17.15#isNaN)                         | ❌        |
 | [isNative](https://lodash.com/docs/4.17.15#isNative)                   | ❌        |
@@ -221,7 +221,7 @@ chunk([1, 2, 3, 4], 0);
 | [isNull](https://lodash.com/docs/4.17.15#isNull)                       | ✅        |
 | [isNumber](https://lodash.com/docs/4.17.15#isNumber)                   | ❌        |
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌        |
-| [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ❌        |
+| [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ✅        |
 | [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ❌        |
 | [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ❌        |
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌        |
@@ -299,8 +299,7 @@ chunk([1, 2, 3, 4], 0);
 | [invoke](https://lodash.com/docs/4.17.15#invoke)             | ❌        |
 | [keys](https://lodash.com/docs/4.17.15#keys)                 | ❌        |
 | [keysIn](https://lodash.com/docs/4.17.15#keysIn)             | ❌        |
-| [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ❌        |
-| [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌        |
+| [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ✅        |
 | [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌        |
 | [merge](https://lodash.com/docs/4.17.15#merge)               | ❌        |
 | [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ❌        |
@@ -369,7 +368,7 @@ chunk([1, 2, 3, 4], 0);
 | [flowRight](https://lodash.com/docs/4.17.15#flowRight)             | ❌            |
 | [identity](https://lodash.com/docs/4.17.15#identity)               | 📝            |
 | [iteratee](https://lodash.com/docs/4.17.15#iteratee)               | ❌            |
-| [matches](https://lodash.com/docs/4.17.15#matches)                 | ❌            |
+| [matches](https://lodash.com/docs/4.17.15#matches)                 | ✅            |
 | [matchesProperty](https://lodash.com/docs/4.17.15#matchesProperty) | ❌            |
 | [method](https://lodash.com/docs/4.17.15#method)                   | ❌            |
 | [methodOf](https://lodash.com/docs/4.17.15#methodOf)               | ❌            |
@@ -380,7 +379,7 @@ chunk([1, 2, 3, 4], 0);
 | [over](https://lodash.com/docs/4.17.15#over)                       | ❌            |
 | [overEvery](https://lodash.com/docs/4.17.15#overEvery)             | ❌            |
 | [overSome](https://lodash.com/docs/4.17.15#overSome)               | ❌            |
-| [property](https://lodash.com/docs/4.17.15#property)               | ❌            |
+| [property](https://lodash.com/docs/4.17.15#property)               | ✅            |
 | [propertyOf](https://lodash.com/docs/4.17.15#propertyOf)           | ❌            |
 | [range](https://lodash.com/docs/4.17.15#range)                     | 📝            |
 | [rangeRight](https://lodash.com/docs/4.17.15#rangeRight)           | 📝            |

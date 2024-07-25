@@ -24,7 +24,6 @@ const testPatterns = ['**/*.bench.ts', '**/*.spec.ts', '**/*.test.ts'];
 
 export default () => {
   clearDir('dist');
-  clearDir('umd');
 
   const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
 
