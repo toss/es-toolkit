@@ -85,7 +85,7 @@ export function cloneDeep<T>(obj: T): Resolved<T> {
     return result as Resolved<T>;
   }
 
-  if (obj instanceof ArrayBuffer || obj instanceof SharedArrayBuffer) {
+  if (obj instanceof ArrayBuffer || (typeof SharedArrayBuffer !== 'undefined' && obj instanceof SharedArrayBuffer)) {
     return obj.slice(0) as Resolved<T>;
   }
 
@@ -109,7 +109,7 @@ export function cloneDeep<T>(obj: T): Resolved<T> {
   }
 
   if (obj instanceof Error) {
-    const result = new (obj.constructor as { new (): Error })();
+    const result = new (obj.constructor as { new(): Error })();
     result.message = obj.message;
     result.name = obj.name;
     result.stack = obj.stack;
@@ -124,10 +124,6 @@ export function cloneDeep<T>(obj: T): Resolved<T> {
     return result as Resolved<T>;
   }
 
-  if (typeof obj === 'function') {
-    return void 0 as Resolved<T>;
-  }
-
   return obj as Resolved<T>;
 }
 
@@ -138,12 +134,14 @@ function isPrimitive(value: unknown): value is Primitive {
 
 // eslint-disable-next-line
 function cloneDeepHelper(obj: any, clonedObj: any): void {
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      const descriptor = Object.getOwnPropertyDescriptor(obj, key);
-      if ((descriptor?.writable || descriptor?.set) && typeof descriptor?.value !== 'function') {
-        clonedObj[key] = cloneDeep(obj[key]);
-      }
+  const keys = Object.keys(obj);
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const descriptor = Object.getOwnPropertyDescriptor(obj, key);
+
+    if ((descriptor?.writable || descriptor?.set)) {
+      clonedObj[key] = cloneDeep(obj[key]);
     }
   }
 }
@@ -185,82 +183,82 @@ type Equal<X, Y> = X extends Y ? (Y extends X ? true : false) : false;
 type ResolvedMain<T> = T extends [never]
   ? never // (special trick for jsonable | null) type
   : ValueOf<T> extends boolean | number | bigint | string
-    ? ValueOf<T>
-    : T extends (...args: any[]) => any
-      ? never
-      : T extends object
-        ? ResolvedObject<T>
-        : ValueOf<T>;
+  ? ValueOf<T>
+  : T extends (...args: any[]) => any
+  ? never
+  : T extends object
+  ? ResolvedObject<T>
+  : ValueOf<T>;
 
 type ResolvedObject<T extends object> =
   T extends Array<infer U>
-    ? IsTuple<T> extends true
-      ? ResolvedTuple<T>
-      : Array<ResolvedMain<U>>
-    : T extends Set<infer U>
-      ? Set<ResolvedMain<U>>
-      : T extends Map<infer K, infer V>
-        ? Map<ResolvedMain<K>, ResolvedMain<V>>
-        : T extends WeakSet<any> | WeakMap<any, any>
-          ? never
-          : T extends
-                | Date
-                | Uint8Array
-                | Uint8ClampedArray
-                | Uint16Array
-                | Uint32Array
-                | BigUint64Array
-                | Int8Array
-                | Int16Array
-                | Int32Array
-                | BigInt64Array
-                | Float32Array
-                | Float64Array
-                | ArrayBuffer
-                | SharedArrayBuffer
-                | DataView
-                | Blob
-                | File
-            ? T
-            : {
-                [P in keyof T]: ResolvedMain<T[P]>;
-              };
+  ? IsTuple<T> extends true
+  ? ResolvedTuple<T>
+  : Array<ResolvedMain<U>>
+  : T extends Set<infer U>
+  ? Set<ResolvedMain<U>>
+  : T extends Map<infer K, infer V>
+  ? Map<ResolvedMain<K>, ResolvedMain<V>>
+  : T extends WeakSet<any> | WeakMap<any, any>
+  ? never
+  : T extends
+  | Date
+  | Uint8Array
+  | Uint8ClampedArray
+  | Uint16Array
+  | Uint32Array
+  | BigUint64Array
+  | Int8Array
+  | Int16Array
+  | Int32Array
+  | BigInt64Array
+  | Float32Array
+  | Float64Array
+  | ArrayBuffer
+  | SharedArrayBuffer
+  | DataView
+  | Blob
+  | File
+  ? T
+  : {
+    [P in keyof T]: ResolvedMain<T[P]>;
+  };
 
 type ResolvedTuple<T extends readonly any[]> = T extends []
   ? []
   : T extends [infer F]
-    ? [ResolvedMain<F>]
-    : T extends [infer F, ...infer Rest extends readonly any[]]
-      ? [ResolvedMain<F>, ...ResolvedTuple<Rest>]
-      : T extends [(infer F)?]
-        ? [ResolvedMain<F>?]
-        : T extends [(infer F)?, ...infer Rest extends readonly any[]]
-          ? [ResolvedMain<F>?, ...ResolvedTuple<Rest>]
-          : [];
+  ? [ResolvedMain<F>]
+  : T extends [infer F, ...infer Rest extends readonly any[]]
+  ? [ResolvedMain<F>, ...ResolvedTuple<Rest>]
+  : T extends [(infer F)?]
+  ? [ResolvedMain<F>?]
+  : T extends [(infer F)?, ...infer Rest extends readonly any[]]
+  ? [ResolvedMain<F>?, ...ResolvedTuple<Rest>]
+  : [];
 
 type IsTuple<T extends readonly any[] | { length: number }> = [T] extends [never]
   ? false
   : T extends readonly any[]
-    ? number extends T['length']
-      ? false
-      : true
-    : false;
+  ? number extends T['length']
+  ? false
+  : true
+  : false;
 
 type ValueOf<Instance> =
   IsValueOf<Instance, boolean> extends true
-    ? boolean
-    : IsValueOf<Instance, number> extends true
-      ? number
-      : IsValueOf<Instance, string> extends true
-        ? string
-        : Instance;
+  ? boolean
+  : IsValueOf<Instance, number> extends true
+  ? number
+  : IsValueOf<Instance, string> extends true
+  ? string
+  : Instance;
 
 type IsValueOf<Instance, O extends IValueOf<any>> = Instance extends O
   ? O extends IValueOf<infer Primitive>
-    ? Instance extends Primitive
-      ? false
-      : true // not Primitive, but Object
-    : false // cannot be
+  ? Instance extends Primitive
+  ? false
+  : true // not Primitive, but Object
+  : false // cannot be
   : false;
 
 interface IValueOf<T> {

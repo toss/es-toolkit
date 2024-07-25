@@ -33,7 +33,7 @@ function chunk<T extends any[], N extends number>(arr: T, size: N): Chunk<T, N>;
 
 ### 파라미터
 
-- `arr` (`T[]`): 작은 배열들로 나눌 배열
+- `arr` (`T[]`): 작은 배열들로 나눌 배열.
 - `size` (`number`): 작은 배열들의 길이. 양의 정수여야 해요.
 
 ### 반환 값
