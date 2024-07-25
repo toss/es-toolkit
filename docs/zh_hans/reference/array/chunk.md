@@ -9,7 +9,27 @@
 ## 签名
 
 ```typescript
-function chunk<T>(arr: T[], size: number): T[][];
+type PositiveInteger<T extends number> = `${T}` extends `${bigint}`
+  ? `${T}` extends `-${any}` | `0`
+    ? false
+    : true
+  : false;
+
+type Chunk<T extends readonly unknown[], D extends number = 1, A extends unknown[] = []> = any[] extends T
+  ? T[]
+  : number extends D
+    ? any[]
+    : PositiveInteger<D> extends true
+      ? T extends readonly [infer F, ...infer R]
+        ? A['length'] extends D
+          ? [A, ...Chunk<R, D, [F]>]
+          : Chunk<R, D, [...A, F]>
+        : A extends []
+          ? []
+          : [A]
+      : never;
+
+function chunk<T extends any[], N extends number>(arr: T, size: N): Chunk<T, N>;
 ```
 
 ### 参数
@@ -55,7 +75,7 @@ chunk([1, 2, 3], 0); // Returns []
 ## 性能对比
 
 |                   | [包大小](../../bundle-size.md) | [性能](../../performance.md) |
-| ----------------- | ------------------------------ | ----------------------------------- |
-| es-toolkit        | 238 字节 (小 92.4%)            | 9,338,821 次 (慢 11%)               |
-| es-toolkit/compat | 307 字节 (小 90.2%)            | 9,892,157 次 (慢 5%)                |
-| lodash-es         | 3,153 바이트                   | 10,523,270 次                       |
+| ----------------- | ------------------------------ | ---------------------------- |
+| es-toolkit        | 238 字节 (小 92.4%)            | 9,338,821 次 (慢 11%)        |
+| es-toolkit/compat | 307 字节 (小 90.2%)            | 9,892,157 次 (慢 5%)         |
+| lodash-es         | 3,153 바이트                   | 10,523,270 次                |
