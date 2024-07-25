@@ -122,6 +122,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '함수',
           items: [
+            { text: 'before', link: '/ko/reference/function/before' },
             { text: 'after', link: '/ko/reference/function/after' },
             { text: 'debounce', link: '/ko/reference/function/debounce' },
             { text: 'throttle', link: '/ko/reference/function/throttle' },
