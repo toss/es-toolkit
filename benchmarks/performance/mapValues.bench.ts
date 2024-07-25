@@ -4,7 +4,7 @@ import { mapValues as mapValuesLodash } from 'lodash';
 
 describe('mapValues', () => {
   bench('es-toolkit/mapValues', () => {
-    mapValuesToolkit({ a: 1, b: 2, c: 3 }, ({ value }) => `${value}a`);
+    mapValuesToolkit({ a: 1, b: 2, c: 3 }, value => `${value}a`);
   });
 
   bench('lodash/mapValues', () => {
