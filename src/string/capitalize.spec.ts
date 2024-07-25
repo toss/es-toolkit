@@ -38,5 +38,6 @@ describe('capitalize', () => {
     expectTypeOf(capitalize(' fred')).toEqualTypeOf<' fred'>();
     expectTypeOf(capitalize('Fred')).toEqualTypeOf<'Fred'>();
     expectTypeOf(capitalize('')).toEqualTypeOf<''>();
+    expectTypeOf(capitalize('FOO_BAR' as string)).toEqualTypeOf<string>();
   });
 });

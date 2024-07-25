@@ -16,7 +16,7 @@ import { Capitalize } from './capitalize.ts';
  * const result4 = startCase('hello_world');  // result will be 'Hello World'
  */
 export function startCase<T extends string>(str: T): StartCase<T> {
-  const words = getWords(str.trim()) as string[];
+  const words = getWords(str.trim());
   let result = '';
   for (const word of words) {
     if (result) {
@@ -32,15 +32,17 @@ export function startCase<T extends string>(str: T): StartCase<T> {
 }
 
 type StartCase<T extends string, S extends string = ''> =
-  CaseSplit<T> extends [infer F, ...infer R]
-    ? F extends string
-      ? R extends string[]
-        ? F extends Uppercase<F>
-          ? `${F}${StartCaseArray<R>}`
-          : `${Capitalize<F>}${StartCaseArray<R>}`
+  string[] extends CaseSplit<T>
+    ? string
+    : CaseSplit<T> extends [infer F, ...infer R]
+      ? F extends string
+        ? R extends string[]
+          ? F extends Uppercase<F>
+            ? `${F}${StartCaseArray<R>}`
+            : `${Capitalize<F>}${StartCaseArray<R>}`
+          : never
         : never
-      : never
-    : S;
+      : S;
 
 type StartCaseArray<T extends string[], S extends string = ''> = T extends [infer F, ...infer R]
   ? F extends string

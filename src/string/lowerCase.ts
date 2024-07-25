@@ -16,18 +16,20 @@ import { CaseSplit, getWords } from './_internal/getWords.ts';
  * const convertedStr4 = lowerCase('HTTPRequest') // returns 'http request'
  */
 export const lowerCase = <T extends string>(str: T): LowerCase<T> => {
-  const words = getWords(str) as string[];
+  const words = getWords(str);
   return words.map(word => word.toLowerCase()).join(' ') as LowerCase<T>;
 };
 
 type LowerCase<T extends string, S extends string = ''> =
-  CaseSplit<T> extends [infer F, ...infer R]
-    ? F extends string
-      ? R extends string[]
-        ? `${Lowercase<F>}${LowerCaseArray<R>}`
+  string[] extends CaseSplit<T>
+    ? string
+    : CaseSplit<T> extends [infer F, ...infer R]
+      ? F extends string
+        ? R extends string[]
+          ? `${Lowercase<F>}${LowerCaseArray<R>}`
+          : never
         : never
-      : never
-    : S;
+      : S;
 
 type LowerCaseArray<T extends string[], S extends string = ''> = T extends [infer F, ...infer R]
   ? F extends string

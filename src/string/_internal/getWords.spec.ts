@@ -80,5 +80,6 @@ describe('caseSplitPattern', () => {
     expectTypeOf(getWords('aB')).toEqualTypeOf<['a', 'B']>();
     expectTypeOf(getWords('--FOO-BAR--')).toEqualTypeOf<['FOO', 'BAR']>();
     expectTypeOf(getWords('foo2bar')).toEqualTypeOf<['foo', '2', 'bar']>();
+    expectTypeOf(getWords('foo2bar' as string)).toEqualTypeOf<string[]>();
   });
 });

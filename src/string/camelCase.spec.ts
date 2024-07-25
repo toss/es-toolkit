@@ -48,5 +48,6 @@ describe('camelCase', () => {
     expectTypeOf(camelCase('camel_case')).toEqualTypeOf<'camelCase'>();
     expectTypeOf(camelCase('')).toEqualTypeOf<''>();
     expectTypeOf(camelCase('FOO_BAR')).toEqualTypeOf<'fooBar'>();
+    expectTypeOf(camelCase('FOO_BAR' as string)).toEqualTypeOf<string>();
   });
 });

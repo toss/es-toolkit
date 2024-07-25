@@ -17,18 +17,20 @@ import { CaseSplit, getWords } from './_internal/getWords.ts';
  */
 
 export const kebabCase = <T extends string>(str: T): KebabCase<T> => {
-  const words = getWords(str) as string[];
+  const words = getWords(str);
   return words.map(word => word.toLowerCase()).join('-') as KebabCase<T>;
 };
 
 type KebabCase<T extends string, S extends string = ''> =
-  CaseSplit<T> extends [infer F, ...infer R]
-    ? F extends string
-      ? R extends string[]
-        ? `${Lowercase<F>}${LowerCaseArray<R>}`
+  string[] extends CaseSplit<T>
+    ? string
+    : CaseSplit<T> extends [infer F, ...infer R]
+      ? F extends string
+        ? R extends string[]
+          ? `${Lowercase<F>}${LowerCaseArray<R>}`
+          : never
         : never
-      : never
-    : S;
+      : S;
 
 type LowerCaseArray<T extends string[], S extends string = ''> = T extends [infer F, ...infer R]
   ? F extends string

@@ -19,7 +19,7 @@ import { Capitalize } from './capitalize.ts';
  */
 
 export function camelCase<T extends string>(str: T): CamelCase<T> {
-  const words = getWords(str) as string[];
+  const words = getWords(str);
 
   if (words.length === 0) {
     return '' as CamelCase<T>;
@@ -31,13 +31,15 @@ export function camelCase<T extends string>(str: T): CamelCase<T> {
 }
 
 type CamelCase<T extends string> =
-  CaseSplit<T> extends [infer F, ...infer R]
-    ? F extends string
-      ? R extends string[]
-        ? `${Lowercase<F>}${CapitalizeArray<R>}`
+  string[] extends CaseSplit<T>
+    ? string
+    : CaseSplit<T> extends [infer F, ...infer R]
+      ? F extends string
+        ? R extends string[]
+          ? `${Lowercase<F>}${CapitalizeArray<R>}`
+          : never
         : never
-      : never
-    : '';
+      : '';
 
 type CapitalizeArray<T extends string[], S extends string = ''> = T extends [infer F, ...infer R]
   ? F extends string

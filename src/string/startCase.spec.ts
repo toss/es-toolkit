@@ -70,5 +70,6 @@ describe('startCase', function () {
     expectTypeOf(startCase('')).toEqualTypeOf<''>();
     expectTypeOf(startCase('FOO_BAR')).toEqualTypeOf<'FOO BAR'>();
     expectTypeOf(startCase('Foo Bar')).toEqualTypeOf<'Foo Bar'>();
+    expectTypeOf(startCase('FOO_BAR' as string)).toEqualTypeOf<string>();
   });
 });

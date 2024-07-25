@@ -58,5 +58,6 @@ describe('kebabCase', () => {
     expectTypeOf(kebabCase('__foo_bar___')).toEqualTypeOf<'foo-bar'>();
     expectTypeOf(kebabCase('FOO_BAR')).toEqualTypeOf<'foo-bar'>();
     expectTypeOf(kebabCase('Foo Bar')).toEqualTypeOf<'foo-bar'>();
+    expectTypeOf(kebabCase('FOO_BAR' as string)).toEqualTypeOf<string>();
   });
 });
