@@ -1,18 +1,28 @@
-export function isArrayMatch<T>(target: readonly T[], source: readonly T[]) {
-  for (let i = 0; i <= target.length - source.length; i++) {
-    let match = true;
+import { isMatch } from '../predicate/isMatch.ts';
 
-    for (let j = 0; j < source.length; j++) {
-      if (target[i + j] !== source[j]) {
-        match = false;
-        break;
-      }
-    }
-
-    if (match) {
-      return true;
-    }
+export function isArrayMatch(target: unknown, source: readonly unknown[]) {
+  if (source.length === 0) {
+    return true;
   }
 
-  return false;
+  if (!Array.isArray(target)) {
+    return false;
+  }
+
+  const countedIndex = new Set<number>();
+
+  for (let i = 0; i < source.length; i++) {
+    const sourceItem = source[i];
+    const index = target.findIndex((targetItem, index) => {
+      return isMatch(targetItem, sourceItem) && !countedIndex.has(index);
+    });
+
+    if (index === -1) {
+      return false;
+    }
+
+    countedIndex.add(index);
+  }
+
+  return true;
 }
