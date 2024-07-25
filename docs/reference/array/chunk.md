@@ -10,23 +10,24 @@ the final sub-array will contain the remaining elements.
 
 ```typescript
 type PositiveInteger<T extends number> = `${T}` extends `${bigint}`
-  ? `${T}` extends `-${any}`
+  ? `${T}` extends `-${any}` | `0`
     ? false
-    : T extends 0
-      ? false
-      : true
+    : true
   : false;
 
-type Chunk<T extends unknown[], D extends number = 1, A extends unknown[] = []> =
-  PositiveInteger<D> extends true
-    ? T extends [infer F, ...infer R]
-      ? A['length'] extends D
-        ? [A, ...Chunk<R, D, [F]>]
-        : Chunk<R, D, [...A, F]>
-      : A extends []
-        ? []
-        : [A]
-    : never;
+type Chunk<T extends readonly unknown[], D extends number = 1, A extends unknown[] = []> = any[] extends T
+  ? T[]
+  : number extends D
+    ? any[]
+    : PositiveInteger<D> extends true
+      ? T extends readonly [infer F, ...infer R]
+        ? A['length'] extends D
+          ? [A, ...Chunk<R, D, [F]>]
+          : Chunk<R, D, [...A, F]>
+        : A extends []
+          ? []
+          : [A]
+      : never;
 
 function chunk<T extends any[], N extends number>(arr: T, size: N): Chunk<T, N>;
 ```

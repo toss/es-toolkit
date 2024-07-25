@@ -38,5 +38,7 @@ describe('chunk', () => {
     expectTypeOf(chunk([1, 2, 3, 4, 5, 6], 3)).toEqualTypeOf<[[1, 2, 3], [4, 5, 6]]>();
     expectTypeOf(chunk([1, 2, 3, 4], 6)).toEqualTypeOf<[[1, 2, 3, 4]]>();
     expectTypeOf(chunk([1, 2, 3, 4, 5, 6, 7], 2)).toEqualTypeOf<[[1, 2], [3, 4], [5, 6], [7]]>();
+    expectTypeOf(chunk([1, 2, 3, 4, 5, 6, 7] as number[], 2)).toEqualTypeOf<number[][]>();
+    expectTypeOf(chunk([1, 2, 3, 4, 5, 6, 7], 2 as number)).toEqualTypeOf<any[]>();
   });
 });
