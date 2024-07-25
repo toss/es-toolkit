@@ -48,5 +48,6 @@ describe('snakeCase', () => {
     expectTypeOf(snakeCase('snake_case')).toEqualTypeOf<'snake_case'>();
     expectTypeOf(snakeCase('')).toEqualTypeOf<''>();
     expectTypeOf(snakeCase('FOO_BAR')).toEqualTypeOf<'foo_bar'>();
+    expectTypeOf(snakeCase('FOO_BAR' as string)).toEqualTypeOf<string>();
   });
 });

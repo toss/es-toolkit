@@ -48,5 +48,6 @@ describe('lowerCase', () => {
     expectTypeOf(lowerCase('lower_case')).toEqualTypeOf<'lower case'>();
     expectTypeOf(lowerCase('')).toEqualTypeOf<''>();
     expectTypeOf(lowerCase('FOO_BAR')).toEqualTypeOf<'foo bar'>();
+    expectTypeOf(lowerCase('FOO_BAR' as string)).toEqualTypeOf<string>();
   });
 });
