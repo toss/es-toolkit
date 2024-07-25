@@ -305,7 +305,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ❌                    |
 | [omit](https://lodash.com/docs/4.17.15#omit)                 | 📝                    |
 | [omitBy](https://lodash.com/docs/4.17.15#omitBy)             | 📝                    |
-| [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝                    |
+| [pick](https://lodash.com/docs/4.17.15#pick)                 | ✅                    |
 | [pickBy](https://lodash.com/docs/4.17.15#pickBy)             | 📝                    |
 | [result](https://lodash.com/docs/4.17.15#result)             | ❌                    |
 | [set](https://lodash.com/docs/4.17.15#set)                   | ✅                    |
