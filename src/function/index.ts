@@ -1,4 +1,5 @@
 export { before } from './before.ts';
+export { after } from './after.ts';
 export { debounce } from './debounce.ts';
 export { noop } from './noop.ts';
 export { once } from './once.ts';

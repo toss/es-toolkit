@@ -20,7 +20,7 @@ function startsWith(str: string, target: string, position: number = 0): string;
 
 ### 반환 값
 
-(`boolean`): 문자열이 주어진 문자열로 시작하는지 여부
+(`boolean`): 문자열이 주어진 문자열로 시작하는지 여부.
 
 ## 예시
 

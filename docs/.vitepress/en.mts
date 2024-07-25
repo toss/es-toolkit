@@ -36,7 +36,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Guide',
       items: [
         { text: 'Introduction', link: '/intro' },
-        { text: 'Installation', link: '/installation' },
+        { text: 'Installation & Usage', link: '/usage' },
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
         { text: 'Compatibility with Lodash', link: '/compatibility' },
@@ -112,6 +112,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Function Utilities',
           items: [
             { text: 'before', link: '/reference/function/before' },
+            { text: 'after', link: '/reference/function/after' },
             { text: 'debounce', link: '/reference/function/debounce' },
             { text: 'throttle', link: '/reference/function/throttle' },
             { text: 'negate', link: '/reference/function/negate' },
@@ -138,6 +139,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Object Utilities',
           items: [
             { text: 'clone', link: '/reference/object/clone' },
+            { text: 'cloneDeep', link: '/reference/object/cloneDeep' },
             { text: 'invert', link: '/reference/object/invert' },
             { text: 'flattenObject', link: '/reference/object/flattenObject' },
             { text: 'omit', link: '/reference/object/omit' },
@@ -151,12 +153,17 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Predicates',
           items: [
+            { text: 'isArray (compat)', link: '/reference/compat/predicate/isArray' },
+            { text: 'isArrayLike', link: '/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
+            { text: 'isFunction', link: '/reference/predicate/isFunction' },
             { text: 'isLength', link: '/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/reference/predicate/isPlainObject' },
+            { text: 'isPrimitive', link: '/reference/predicate/isPrimitive' },
             { text: 'isNil', link: '/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },
+            { text: 'isTypedArray', link: '/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
           ],
         },

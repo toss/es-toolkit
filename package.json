@@ -35,7 +35,7 @@
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
-    "browser": "./umd/browser.global.js",
+    "browser": "./dist/browser.global.js",
     "exports": {
       ".": {
         "import": {
@@ -131,15 +131,19 @@
     }
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.3",
     "@babel/core": "^7.24.5",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-typescript": "^7.24.1",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/broken-link-checker": "^0",
     "@types/node": "^20.12.11",
+    "@types/tar": "^6.1.13",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
     "@vitest/coverage-istanbul": "^1.5.2",
@@ -147,7 +151,12 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsdoc": "^48.5.0",
+    "execa": "^9.3.0",
     "prettier": "^3.2.5",
+    "rollup": "^4.19.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "tar": "^6",
+    "tslib": "^2.6.3",
     "tsup": "^8.1.0",
     "typescript": "^5.4.5",
     "vitest": "^1.5.2"
@@ -155,7 +164,7 @@
   "sideEffects": false,
   "scripts": {
     "prepack": "yarn build",
-    "build": "tsup && ./.scripts/postbuild.sh",
+    "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
     "test": "vitest run --coverage --typecheck",
     "bench": "vitest bench",
     "lint": "eslint ./src --ext .ts",

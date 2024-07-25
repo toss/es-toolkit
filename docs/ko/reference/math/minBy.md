@@ -12,8 +12,8 @@ function minBy<T>(elements: T[], selector: (element: T) => number): T;
 
 ### 파라미터
 
-- `elements`: 검색할 요소들의 배열
-- `selector`: 요소를 받아서 객체의 속성을 반환하는 함수
+- `elements`: 검색할 요소들의 배열.
+- `selector`: 요소를 받아서 객체의 속성을 반환하는 함수.
 
 ### 반환값
 
