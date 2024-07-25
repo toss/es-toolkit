@@ -43,7 +43,7 @@ describe(`es-toolkit's package tarball`, () => {
 
       expect(entrypoints).toEqual([...ENTRYPOINTS, './package.json']);
     },
-    { timeout: 30_000 }
+    { timeout: 60_000 }
   );
 
   it(

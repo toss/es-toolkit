@@ -212,7 +212,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isInteger](https://lodash.com/docs/4.17.15#isInteger)                 | ❌                    |
 | [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ✅                    |
 | [isMap](https://lodash.com/docs/4.17.15#isMap)                         | ❌                    |
-| [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ❌                    |
+| [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ✅                    |
 | [isMatchWith](https://lodash.com/docs/4.17.15#isMatchWith)             | ❌                    |
 | [isNaN](https://lodash.com/docs/4.17.15#isNaN)                         | ❌                    |
 | [isNative](https://lodash.com/docs/4.17.15#isNative)                   | ❌                    |
@@ -298,8 +298,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [invoke](https://lodash.com/docs/4.17.15#invoke)             | ❌                    |
 | [keys](https://lodash.com/docs/4.17.15#keys)                 | ❌                    |
 | [keysIn](https://lodash.com/docs/4.17.15#keysIn)             | ❌                    |
-| [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ❌                    |
-| [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌                    |
+| [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ✅                    |
 | [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌                    |
 | [merge](https://lodash.com/docs/4.17.15#merge)               | ❌                    |
 | [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ❌                    |
@@ -368,7 +367,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [flowRight](https://lodash.com/docs/4.17.15#flowRight)             | ❌                    |
 | [identity](https://lodash.com/docs/4.17.15#identity)               | 📝                    |
 | [iteratee](https://lodash.com/docs/4.17.15#iteratee)               | ❌                    |
-| [matches](https://lodash.com/docs/4.17.15#matches)                 | ❌                    |
+| [matches](https://lodash.com/docs/4.17.15#matches)                 | ✅                    |
 | [matchesProperty](https://lodash.com/docs/4.17.15#matchesProperty) | ❌                    |
 | [method](https://lodash.com/docs/4.17.15#method)                   | ❌                    |
 | [methodOf](https://lodash.com/docs/4.17.15#methodOf)               | ❌                    |
@@ -379,7 +378,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [over](https://lodash.com/docs/4.17.15#over)                       | ❌                    |
 | [overEvery](https://lodash.com/docs/4.17.15#overEvery)             | ❌                    |
 | [overSome](https://lodash.com/docs/4.17.15#overSome)               | ❌                    |
-| [property](https://lodash.com/docs/4.17.15#property)               | ❌                    |
+| [property](https://lodash.com/docs/4.17.15#property)               | ✅                    |
 | [propertyOf](https://lodash.com/docs/4.17.15#propertyOf)           | ❌                    |
 | [range](https://lodash.com/docs/4.17.15#range)                     | 📝                    |
 | [rangeRight](https://lodash.com/docs/4.17.15#rangeRight)           | 📝                    |

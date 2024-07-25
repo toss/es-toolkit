@@ -111,6 +111,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Function Utilities',
           items: [
+            { text: 'before', link: '/reference/function/before' },
             { text: 'after', link: '/reference/function/after' },
             { text: 'debounce', link: '/reference/function/debounce' },
             { text: 'throttle', link: '/reference/function/throttle' },
@@ -141,12 +142,15 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'cloneDeep', link: '/reference/object/cloneDeep' },
             { text: 'invert', link: '/reference/object/invert' },
             { text: 'flattenObject', link: '/reference/object/flattenObject' },
+            { text: 'mapKeys', link: '/reference/object/mapKeys' },
+            { text: 'mapValues', link: '/reference/object/mapValues' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
             { text: 'pickBy', link: '/reference/object/pickBy' },
             { text: 'get (compat)', link: '/reference/compat/object/get' },
             { text: 'set (compat)', link: '/reference/compat/object/set' },
+            { text: 'property (compat)', link: '/reference/compat/object/property' },
           ],
         },
         {
@@ -160,6 +164,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isLength', link: '/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/reference/predicate/isPlainObject' },
             { text: 'isPrimitive', link: '/reference/predicate/isPrimitive' },
+            { text: 'isMatch (compat)', link: '/reference/compat/predicate/isMatch' },
+            { text: 'matches (compat)', link: '/reference/compat/predicate/matches' },
             { text: 'isNil', link: '/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },
