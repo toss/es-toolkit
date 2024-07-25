@@ -2,12 +2,11 @@
 
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
-import path from 'node:path';
-import { dirname } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
 import dtsPlugin from 'rollup-plugin-dts';
-import { fileURLToPath } from 'node:url';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -33,12 +32,14 @@ export default () => {
       extension: 'mjs',
       entrypoints,
       outDir: 'dist',
+      sourcemap: false,
     }),
     libBuildOptions({
       format: 'cjs',
       extension: 'js',
       entrypoints,
       outDir: 'dist',
+      sourcemap: false,
     }),
     declarationOptions({
       entrypoints,
@@ -48,6 +49,7 @@ export default () => {
       inputFile: './src/compat/index.ts',
       outFile: packageJson.publishConfig.browser,
       name: '_',
+      sourcemap: true,
     }),
   ];
 };
@@ -58,9 +60,10 @@ export default () => {
  *   format: 'esm' | 'cjs';
  *   extension: 'js' | 'cjs' | 'mjs';
  *   outDir: string;
+ *   sourcemap: boolean;
  * }) => import('rollup').RollupOptions}
  */
-function libBuildOptions({ entrypoints, extension, format, outDir }) {
+function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) {
   const isESM = format === 'esm';
 
   return {
@@ -69,8 +72,8 @@ function libBuildOptions({ entrypoints, extension, format, outDir }) {
       tsPlugin({
         exclude: [...testPatterns],
         compilerOptions: {
-          sourceMap: true,
-          inlineSources: true,
+          sourceMap: sourcemap,
+          inlineSources: sourcemap || undefined,
           declaration: false,
           removeComments: true,
         },
@@ -83,7 +86,7 @@ function libBuildOptions({ entrypoints, extension, format, outDir }) {
       // Using preserveModules disables bundling and the creation of chunks,
       // leading to a result that is a mirror of the input module graph.
       preserveModules: isESM,
-      sourcemap: true,
+      sourcemap,
       generatedCode: 'es2015',
       // Hoisting transitive imports adds bare imports in modules,
       // which can make imports by JS runtimes slightly faster,
@@ -94,17 +97,17 @@ function libBuildOptions({ entrypoints, extension, format, outDir }) {
 }
 
 /**
- * @type {(options: {inputFile: string; outFile: string; name: string}) => import('rollup').RollupOptions}
+ * @type {(options: {inputFile: string; outFile: string; name: string, sourcemap: boolean}) => import('rollup').RollupOptions}
  */
-function browserBuildConfig({ inputFile, outFile, name }) {
+function browserBuildConfig({ inputFile, outFile, name, sourcemap }) {
   return {
     input: inputFile,
     plugins: [
       tsPlugin({
         exclude: [...testPatterns],
         compilerOptions: {
-          sourceMap: true,
-          inlineSources: true,
+          sourceMap: sourcemap,
+          inlineSources: sourcemap || undefined,
           removeComments: true,
           declaration: false,
         },
@@ -115,7 +118,7 @@ function browserBuildConfig({ inputFile, outFile, name }) {
       format: 'iife',
       name,
       file: outFile,
-      sourcemap: true,
+      sourcemap,
       generatedCode: 'es2015',
     },
   };
@@ -152,7 +155,7 @@ function declarationOptions({ entrypoints, outDir }) {
 /** @type {(srcFiles: string[]) => Record<string, string>} */
 function mapInputs(srcFiles) {
   return Object.fromEntries(
-    srcFiles.map(file => [file.replace(/^(\.\/)?src\//, '').replace(/\.[cm]?(js|ts)$/, ''), path.join(__dirname, file)])
+    srcFiles.map(file => [file.replace(/^(\.\/)?src\//, '').replace(/\.[cm]?(js|ts)$/, ''), join(__dirname, file)])
   );
 }
 
@@ -165,7 +168,7 @@ function fileNames(extension = 'js') {
 
 /** @type {(dir: string) => void} */
 function clearDir(dir) {
-  const dirPath = path.join(__dirname, dir);
+  const dirPath = join(__dirname, dir);
   if (dir && fs.existsSync(dirPath)) {
     fs.rmSync(dirPath, { recursive: true, force: true });
     console.log(`cleared: ${dir}`);
