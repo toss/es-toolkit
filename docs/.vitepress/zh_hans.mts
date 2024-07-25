@@ -137,6 +137,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'cloneDeep', link: '/zh_hans/reference/object/cloneDeep' },
             { text: 'invert', link: '/zh_hans/reference/object/invert' },
             { text: 'flattenObject', link: '/zh_hans/reference/object/flattenObject' },
+            { text: 'mapKeys', link: '/zh_hans/reference/object/mapKeys' },
+            { text: 'mapValues', link: '/zh_hans/reference/object/mapValues' },
             { text: 'omit', link: '/zh_hans/reference/object/omit' },
             { text: 'omitBy', link: '/zh_hans/reference/object/omitBy' },
             { text: 'pick', link: '/zh_hans/reference/object/pick' },

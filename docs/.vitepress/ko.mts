@@ -153,6 +153,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'cloneDeep', link: '/ko/reference/object/cloneDeep' },
             { text: 'invert', link: '/ko/reference/object/invert' },
             { text: 'flattenObject', link: '/ko/reference/object/flattenObject' },
+            { text: 'mapKeys', link: '/ko/reference/object/mapKeys' },
+            { text: 'mapValues', link: '/ko/reference/object/mapValues' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
             { text: 'pick', link: '/ko/reference/object/pick' },
