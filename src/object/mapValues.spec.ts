@@ -3,7 +3,7 @@ import { mapValues } from './mapValues';
 
 describe('mapValues', () => {
   it('should iterate over and map the object using its own values', () => {
-    expect(mapValues({ a: 1, b: 2, c: 3 }, (value) => ++value)).toEqual({ a: 2, b: 3, c: 4 });
+    expect(mapValues({ a: 1, b: 2, c: 3 }, value => ++value)).toEqual({ a: 2, b: 3, c: 4 });
   });
 
   it('should pass the key corresponding to the current value into the iteratee', () => {

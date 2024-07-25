@@ -11,7 +11,7 @@ describe('mapKey', () => {
   });
 
   it('should pass the value corresponding to the current key into the iteratee', () => {
-    expect(mapKey({ a: 1, b: 2, c: 3 }, (value) => value)).toEqual({ 1: 1, 2: 2, 3: 3 });
+    expect(mapKey({ a: 1, b: 2, c: 3 }, value => value)).toEqual({ 1: 1, 2: 2, 3: 3 });
   });
 
   it('should pass the cloned object into the iteratee', () => {

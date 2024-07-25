@@ -16,11 +16,10 @@
  * const result = mapKeys(obj, (value, key) => key + value);
  * console.log(result); // { a1: 1, b2: 2 }
  */
-export function mapKeys<
-  T extends Record<PropertyKey, unknown>,
-  K1 extends keyof T,
-  K2 extends PropertyKey,
->(object: T, getNewKey: (value: T[K1], key: K1, object: T) => K2): Record<K2, T[K1]> {
+export function mapKeys<T extends Record<PropertyKey, unknown>, K1 extends keyof T, K2 extends PropertyKey>(
+  object: T,
+  getNewKey: (value: T[K1], key: K1, object: T) => K2
+): Record<K2, T[K1]> {
   const result = {} as Record<K2, T[K1]>;
   const keys = Object.keys(object);
 

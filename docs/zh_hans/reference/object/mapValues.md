@@ -24,5 +24,6 @@ function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>
 
 ```typescript
 const obj = { a: 1, b: 2 };
-const result = mapValues(obj, (value) => value * 2);
+const result = mapValues(obj, value => value * 2);
 console.log(result); // { a: 2, b: 4 }
+```

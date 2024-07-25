@@ -5,11 +5,10 @@
 ## 인터페이스
 
 ```typescript
-function mapKeys<
-  T extends Record<PropertyKey, unknown>,
-  K1 extends keyof T,
-  K2 extends PropertyKey,
->(object: T, getNewKey: (value: T[K1], key: K1, object: T) => N): Record<K2, T[K]>
+function mapKeys<T extends Record<PropertyKey, unknown>, K1 extends keyof T, K2 extends PropertyKey>(
+  object: T,
+  getNewKey: (value: T[K1], key: K1, object: T) => N
+): Record<K2, T[K]>;
 ```
 
 ### 파라미터
