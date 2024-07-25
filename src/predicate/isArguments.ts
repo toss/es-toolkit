@@ -1,4 +1,4 @@
-import { getTag } from '../compat/_internal/getTag';
+import { getTag } from '../compat/_internal/getTag.ts';
 
 /**
  * Checks if the given value is an arguments object.
