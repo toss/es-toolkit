@@ -1,3 +1,4 @@
+import { isPrimitive } from '../../predicate';
 import { isArrayMatch } from '../_internal/isArrayMatch';
 import { isMapMatch } from '../_internal/isMapMatch';
 import { isSetMatch } from '../_internal/isSetMatch';
@@ -40,7 +41,7 @@ export function isMatch(target: any, source: any) {
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
 
-        if (!Object.prototype.hasOwnProperty.call(target, key)) {
+        if (!isPrimitive(target) && !(key in target)) {
           return false;
         }
 

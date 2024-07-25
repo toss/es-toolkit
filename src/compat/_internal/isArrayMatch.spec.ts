@@ -15,9 +15,9 @@ describe('isArrayMatch', () => {
 
   it('returns true if source is empty', () => {
     expect(isArrayMatch([1, 2, 3], [])).toBe(true);
-    expect(isArrayMatch(1, [])).toBe(false);
-    expect(isArrayMatch(new Map(), [])).toBe(false);
-    expect(isArrayMatch(new Set(), [])).toBe(false);
+    expect(isArrayMatch(1, [])).toBe(true);
+    expect(isArrayMatch(new Map(), [])).toBe(true);
+    expect(isArrayMatch(new Set(), [])).toBe(true);
   });
 
   it('can match non-arrays', () => {
