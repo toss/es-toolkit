@@ -1,5 +1,9 @@
 # isArray
 
+::: info
+此函数与 lodash 完全兼容。您可以在我们的[兼容性库](../../../compatibility.md)中找到它，`es-toolkit/compat`。
+:::
+
 检查给定的值是否为数组。
 
 该函数测试提供的值是否为数组。

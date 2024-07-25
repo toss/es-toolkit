@@ -155,6 +155,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isLength', link: '/zh_hans/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/zh_hans/reference/predicate/isPlainObject' },
             { text: 'isPrimitive', link: '/zh_hans/reference/predicate/isPrimitive' },
+            { text: 'isMatch (兼容性)', link: '/zh_hans/reference/compat/predicate/isMatch' },
+            { text: 'matches (兼容性)', link: '/zh_hans/reference/compat/predicate/matches' },
             { text: 'isNil', link: '/zh_hans/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/zh_hans/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/zh_hans/reference/predicate/isNull' },

@@ -37,6 +37,8 @@ export { set } from './object/set.ts';
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
+export { isMatch } from './predicate/isMatch.ts';
+export { matches } from './predicate/matches.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
