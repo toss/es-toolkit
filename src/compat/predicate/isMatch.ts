@@ -1,7 +1,7 @@
-import { isPrimitive } from '../../predicate';
-import { isArrayMatch } from '../_internal/isArrayMatch';
-import { isMapMatch } from '../_internal/isMapMatch';
-import { isSetMatch } from '../_internal/isSetMatch';
+import { isPrimitive } from '../../predicate/isPrimitive.ts';
+import { isArrayMatch } from '../_internal/isArrayMatch.ts';
+import { isMapMatch } from '../_internal/isMapMatch.ts';
+import { isSetMatch } from '../_internal/isSetMatch.ts';
 
 /**
  * Checks if the target matches the source by comparing their structures and values.
@@ -31,8 +31,8 @@ import { isSetMatch } from '../_internal/isSetMatch';
  * const sourceSet = new Set([1, 2]);
  * isMatch(targetSet, sourceSet); // true
  */
-export function isMatch(target: unknown, source: unknown);
-export function isMatch(target: any, source: any) {
+export function isMatch(target: unknown, source: unknown): boolean;
+export function isMatch(target: any, source: any): boolean {
   if (source === target) {
     return true;
   }
