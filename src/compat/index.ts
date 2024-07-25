@@ -34,6 +34,7 @@ export { head as first } from '../index.ts';
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
 export { property } from './object/property.ts';
+export { mapKeys } from './object/mapKeys.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
