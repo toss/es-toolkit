@@ -36,9 +36,9 @@ type Without<Items extends any[], Exclude extends Items[number], Out extends any
         ? Items
         : Items extends [infer First, ...infer Rest]
           ? First extends Exclude
-            ? // Skip the value
+            ? // Skip the excluded value from the output
               Without<Rest, Exclude, Out>
-            : // Include the value
+            : // Include the current value in the output
               Without<Rest, Exclude, [...Out, First]>
           : // Handle cases like `Without<number[], 42>`
             Array<Items[number]>;
