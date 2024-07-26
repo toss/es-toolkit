@@ -43,7 +43,7 @@ describe('camelCase', () => {
     expectTypeOf(camelCase('some whitespace')).toEqualTypeOf<'someWhitespace'>();
     expectTypeOf(camelCase('hyphen-text')).toEqualTypeOf<'hyphenText'>();
     expectTypeOf(camelCase('HTTPRequest')).toEqualTypeOf<'httpRequest'>();
-    expectTypeOf(camelCase('    leading and trailing whitespace')).toEqualTypeOf<'leadingAndTrailingWhitespace'>();
+    expectTypeOf(camelCase('    leading and trailing whitespace    ')).toEqualTypeOf<'leadingAndTrailingWhitespace'>();
     expectTypeOf(camelCase('special@characters!')).toEqualTypeOf<'specialCharacters'>();
     expectTypeOf(camelCase('camel_case')).toEqualTypeOf<'camelCase'>();
     expectTypeOf(camelCase('')).toEqualTypeOf<''>();

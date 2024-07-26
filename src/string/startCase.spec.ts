@@ -64,7 +64,9 @@ describe('startCase', function () {
     expectTypeOf(startCase('some whitespace')).toEqualTypeOf<'Some Whitespace'>();
     expectTypeOf(startCase('hyphen-text')).toEqualTypeOf<'Hyphen Text'>();
     expectTypeOf(startCase('HTTPRequest')).toEqualTypeOf<'HTTP Request'>();
-    expectTypeOf(startCase('    leading and trailing whitespace')).toEqualTypeOf<'Leading And Trailing Whitespace'>();
+    expectTypeOf(
+      startCase('    leading and trailing whitespace    ')
+    ).toEqualTypeOf<'Leading And Trailing Whitespace'>();
     expectTypeOf(startCase('special@characters!')).toEqualTypeOf<'Special Characters'>();
     expectTypeOf(startCase('lower_case')).toEqualTypeOf<'Lower Case'>();
     expectTypeOf(startCase('')).toEqualTypeOf<''>();

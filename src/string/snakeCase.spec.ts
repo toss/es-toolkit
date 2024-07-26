@@ -43,7 +43,9 @@ describe('snakeCase', () => {
     expectTypeOf(snakeCase('some whitespace')).toEqualTypeOf<'some_whitespace'>();
     expectTypeOf(snakeCase('hyphen-text')).toEqualTypeOf<'hyphen_text'>();
     expectTypeOf(snakeCase('HTTPRequest')).toEqualTypeOf<'http_request'>();
-    expectTypeOf(snakeCase('    leading and trailing whitespace')).toEqualTypeOf<'leading_and_trailing_whitespace'>();
+    expectTypeOf(
+      snakeCase('    leading and trailing whitespace    ')
+    ).toEqualTypeOf<'leading_and_trailing_whitespace'>();
     expectTypeOf(snakeCase('special@characters!')).toEqualTypeOf<'special_characters'>();
     expectTypeOf(snakeCase('snake_case')).toEqualTypeOf<'snake_case'>();
     expectTypeOf(snakeCase('')).toEqualTypeOf<''>();

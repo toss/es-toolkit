@@ -43,7 +43,9 @@ describe('lowerCase', () => {
     expectTypeOf(lowerCase('some whitespace')).toEqualTypeOf<'some whitespace'>();
     expectTypeOf(lowerCase('hyphen-text')).toEqualTypeOf<'hyphen text'>();
     expectTypeOf(lowerCase('HTTPRequest')).toEqualTypeOf<'http request'>();
-    expectTypeOf(lowerCase('    leading and trailing whitespace')).toEqualTypeOf<'leading and trailing whitespace'>();
+    expectTypeOf(
+      lowerCase('    leading and trailing whitespace    ')
+    ).toEqualTypeOf<'leading and trailing whitespace'>();
     expectTypeOf(lowerCase('special@characters!')).toEqualTypeOf<'special characters'>();
     expectTypeOf(lowerCase('lower_case')).toEqualTypeOf<'lower case'>();
     expectTypeOf(lowerCase('')).toEqualTypeOf<''>();
