@@ -24,17 +24,24 @@ export function without<const T extends any[], const V extends T[number]>(array:
   return array.filter(item => !valuesSet.has(item as never)) as never;
 }
 
-type Without<Items extends any[], Exclude extends Items[number], Out extends any[] = []> = Items extends []
-  ? Out
-  : IsAny<Exclude> extends true
-    ? Items
-    : IsNever<Exclude> extends true
+type Without<Items extends any[], Exclude extends Items[number], Out extends any[] = []> =
+  // Last iteration - Exit condition
+  Items extends []
+    ? Out
+    : // Handle cases like `Without<[1, 2, 3], any>`
+      IsAny<Exclude> extends true
       ? Items
-      : Items extends [infer First, ...infer Rest]
-        ? First extends Exclude
-          ? Without<Rest, Exclude, Out>
-          : Without<Rest, Exclude, [...Out, First]>
-        : Array<Items[number]>;
+      : // Handle cases like `Without<[1, 2, 3], never>`
+        IsNever<Exclude> extends true
+        ? Items
+        : Items extends [infer First, ...infer Rest]
+          ? First extends Exclude
+            ? // Skip the value
+              Without<Rest, Exclude, Out>
+            : // Include the value
+              Without<Rest, Exclude, [...Out, First]>
+          : // Handle cases like `Without<number[], 42>`
+            Array<Items[number]>;
 
 /**
  * @see https://stackoverflow.com/questions/49927523/disallow-call-with-any/49928360#49928360
