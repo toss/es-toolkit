@@ -193,6 +193,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'capitalize', link: '/reference/string/capitalize' },
             { text: 'startsWith (compat)', link: '/reference/compat/string/startsWith' },
             { text: 'endsWith (compat)', link: '/reference/compat/string/endsWith' },
+            { text: 'padStart', link: '/reference/string/padStart' },
           ],
         },
       ],
