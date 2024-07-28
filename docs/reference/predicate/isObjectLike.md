@@ -1,6 +1,6 @@
 # isObjectLike
 
-Check if a value is an object-like array.
+Check if a value is an object-like.
 
 It returns `true` if the value is an object-like, and `false` otherwise.
 
@@ -35,4 +35,5 @@ console.log(isObjectLike(value1)); // true
 console.log(isObjectLike(value2)); // true
 console.log(isObjectLike(value3)); // false
 console.log(isObjectLike(value4)); // false
+console.log(isObjectLike(value5)); // false
 ```
