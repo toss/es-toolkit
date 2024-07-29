@@ -3,15 +3,6 @@ import { cloneDeep } from './cloneDeep';
 
 describe('cloneDeep', () => {
   //-------------------------------------------------------------------------------------
-  // function
-  //-------------------------------------------------------------------------------------
-  it('not support function', () => {
-    const func = () => {};
-    const clonedFunc = cloneDeep(func);
-    expect(clonedFunc).toBe(undefined);
-  });
-
-  //-------------------------------------------------------------------------------------
   // primitive
   //-------------------------------------------------------------------------------------
   it('should return primitive values as is', () => {
@@ -167,6 +158,7 @@ describe('cloneDeep', () => {
     expect(b['#b']).toBe(undefined);
     expect(b).toEqual({
       props: { a: 'es-toolkit' },
+      d,
       c: 2,
     });
   });

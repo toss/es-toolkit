@@ -6,7 +6,7 @@
 
 객체에서 주어진 경로에 있는 값을 가져와요. 그 값이 `undefined` 라면, 기본값을 반환해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function get<T extends object, K extends keyof T>(object: T, path: K | [K]): T[K];
