@@ -36,5 +36,5 @@ const value = [1, 2, 3];
 
 console.log(isArguments(args)); // true
 console.log(isArguments(strictArgs)); // true
-onsole.log(isArguments(value)); // false
+console.log(isArguments(value)); // false
 ```
