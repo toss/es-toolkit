@@ -13,9 +13,8 @@ export const ary = <F extends (...args: any[]) => any>(
   n: number = func.length,
   guard?: any
 ): ((...args: any[]) => ReturnType<F>) => {
-  n = guard ? func.length : n;
-  const length = Number.parseInt(n.toString());
-  if (Number.isNaN(length) || length < 0) {
+  n = guard ? func.length : Number.parseInt(n.toString());
+  if (Number.isNaN(n) || n < 0) {
     n = 0;
   }
   return function (this: any, ...args: Parameters<F>) {
