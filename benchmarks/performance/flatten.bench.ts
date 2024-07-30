@@ -1,5 +1,6 @@
 import { bench, describe } from 'vitest';
 import { flatten as flattenToolkit } from 'es-toolkit';
+import { flatten as flattenCompatToolkit } from 'es-toolkit/compat';
 import { flattenDepth as flattenDepthLodash } from 'lodash';
 
 const createNestedArray = (values: any[]) => {
@@ -15,6 +16,10 @@ describe('flatten', () => {
 
   bench('es-toolkit/flatten', () => {
     flattenToolkit(arr, 30);
+  });
+
+  bench('es-toolkit/flatten (compat)', () => {
+    flattenCompatToolkit(arr, 30);
   });
 
   bench('lodash/flattenDepth', () => {
