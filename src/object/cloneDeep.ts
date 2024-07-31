@@ -1,5 +1,5 @@
-import { isPrimitive } from "../predicate/isPrimitive.ts";
-import { isTypedArray } from "../predicate/isTypedArray.ts";
+import { isPrimitive } from '../predicate/isPrimitive.ts';
+import { isTypedArray } from '../predicate/isTypedArray.ts';
 
 /**
  * Creates a deep clone of the given object.
@@ -165,7 +165,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
   }
 
   if (obj instanceof Error) {
-    const result = new (obj.constructor as { new(): Error })();
+    const result = new (obj.constructor as { new (): Error })();
     stack.set(obj, result);
 
     result.message = obj.message;
@@ -198,7 +198,7 @@ export function copyProperties(target: any, source: any, stack?: Map<any, any>):
     const key = keys[i];
     const descriptor = Object.getOwnPropertyDescriptor(source, key);
 
-    if ((descriptor?.writable || descriptor?.set)) {
+    if (descriptor?.writable || descriptor?.set) {
       target[key] = cloneDeepImpl(source[key], stack);
     }
   }
