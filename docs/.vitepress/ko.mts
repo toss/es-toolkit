@@ -90,6 +90,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'sample', link: '/ko/reference/array/sample' },
             { text: 'sampleSize', link: '/ko/reference/array/sampleSize' },
             { text: 'shuffle', link: '/ko/reference/array/shuffle' },
+            { text: 'shuffle', link: '/ko/reference/array/size' },
             { text: 'take', link: '/ko/reference/array/take' },
             { text: 'takeWhile', link: '/ko/reference/array/takeWhile' },
             { text: 'takeRight', link: '/ko/reference/array/takeRight' },
