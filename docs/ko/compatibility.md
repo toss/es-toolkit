@@ -188,7 +188,7 @@ chunk([1, 2, 3, 4], 0);
 | ---------------------------------------------------------------------- | --------- |
 | [castArray](https://lodash.com/docs/4.17.15#castArray)                 | ❌        |
 | [clone](https://lodash.com/docs/4.17.15#clone)                         | 📝        |
-| [cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)                 | ❌        |
+| [cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)                 | ✅        |
 | [cloneDeepWith](https://lodash.com/docs/4.17.15#cloneDeepWith)         | ❌        |
 | [cloneWith](https://lodash.com/docs/4.17.15#cloneWith)                 | ❌        |
 | [conformsTo](https://lodash.com/docs/4.17.15#conformsTo)               | ❌        |
