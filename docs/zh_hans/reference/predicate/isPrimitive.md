@@ -7,16 +7,16 @@ JavaScript 的原始类型包括 null、undefined、字符串、数字、布尔�
 ## 签名
 
 ```typescript
-function isPrimitive(x: unknown): x is null | undefined | string | number | boolean | symbol | bigint;
+function isPrimitive(value: unknown): value is null | undefined | string | number | boolean | symbol | bigint;
 ```
 
 ### 参数
 
-- `x` (`unknown`): 要检查的值。
+- `value` (`unknown`): 要检查的值。
 
 ### 返回
 
-(`x is null | undefined | string | number | boolean | symbol | bigint`): 如果值是原始类型则返回 true，否则返回 false。
+(`value is null | undefined | string | number | boolean | symbol | bigint`): 如果值是原始类型则返回 true，否则返回 false。
 
 ## 示例
 

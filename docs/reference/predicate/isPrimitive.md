@@ -7,16 +7,16 @@ JavaScript primitives include null, undefined, strings, numbers, booleans, symbo
 ## Signature
 
 ```typescript
-function isPrimitive(x: unknown): x is null | undefined | string | number | boolean | symbol | bigint;
+function isPrimitive(value: unknown): value is null | undefined | string | number | boolean | symbol | bigint;
 ```
 
 ### Parameters
 
-- `x` (`unknown`): The value to check.
+- `value` (`unknown`): The value to check.
 
 ### Returns
 
-(`x is null | undefined | string | number | boolean | symbol | bigint`): True if the value is a primitive, otherwise false.
+(`value is null | undefined | string | number | boolean | symbol | bigint`): True if the value is a primitive, otherwise false.
 
 ## Examples
 

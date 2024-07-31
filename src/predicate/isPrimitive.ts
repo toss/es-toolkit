@@ -13,5 +13,5 @@
  *   | bigint} Returns true if `x` is a primitive, false otherwise.
  */
 export function isPrimitive(value: unknown): value is null | undefined | string | number | boolean | symbol | bigint {
-  return Object(value) !== value;
+  return value == null || (typeof value !== 'object' && typeof value !== 'function');
 }
