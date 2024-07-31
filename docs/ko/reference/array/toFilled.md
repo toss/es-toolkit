@@ -7,14 +7,14 @@
 ## 인터페이스
 
 ```typescript
-function toFilled<T, U>(arr: readonly T[], value: U): Array<T | U>;
-function toFilled<T, U>(arr: readonly T[], value: U, start: number): Array<T | U>;
-function toFilled<T, U>(arr: readonly T[], value: U, start: number, end: number): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U, start: number): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T | U>;
 ```
 
 ### 파라미터
 
-- `arr` (`readonly T[]`): 채울 배열이에요.
+- `arr` (`T[]`): 채울 배열이에요.
 - `value` (`U`): 배열을 채울 값이에요.
 - `start` (`number, 기본값 = 0`): 시작 위치예요. 기본값은 0이에요.
 - `end` (`number, 기본값 = array.length`): 끝 위치예요. 기본값은 배열의 길이예요.

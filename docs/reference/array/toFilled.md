@@ -9,14 +9,14 @@ Negative indices can also be used, in which case they are counted from the end o
 ## Interface
 
 ```typescript
-function toFilled<T, U>(arr: readonly T[], value: U): Array<T | U>;
-function toFilled<T, U>(arr: readonly T[], value: U, start: number): Array<T | U>;
-function toFilled<T, U>(arr: readonly T[], value: U, start: number, end: number): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U, start: number): Array<T | U>;
+function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T | U>;
 ```
 
 ### Parameters
 
-- `arr` (`readonly T[]`): The array to base the new array on.
+- `arr` (`T[]`): The array to base the new array on.
 - `value` (`U`): The value to fill the new array with.
 - `start` (`number, default = 0`): The start position. Defaults to 0.
 - `end` (`number, default = array.length`): The end position. Defaults to the array's length.
