@@ -65,8 +65,8 @@ chunk([1, 2, 3, 4], 0);
 | [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ❌         |
 | [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌         |
 | [flatten](https://lodash.com/docs/4.17.15#flatten)                     | ✅         |
-| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | 📝         |
-| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | 📝         |
+| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | ✅         |
+| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | ✅         |
 | [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌         |
 | [head](https://lodash.com/docs/4.17.15#head)                           | 📝         |
 | [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ❌         |
