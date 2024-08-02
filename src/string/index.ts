@@ -4,3 +4,4 @@ export { kebabCase } from './kebabCase.ts';
 export { lowerCase } from './lowerCase.ts';
 export { startCase } from './startCase.ts';
 export { capitalize } from './capitalize.ts';
+export { padStart } from './padStart.ts';

@@ -1,26 +1,26 @@
 # isObjectLike
 
-주어진 값이 유사 객체인지 확인해요.
+检查一个值是否是类对象。
 
-만약 주어진 값이 유사 객체이면 `true`, 아니면 `false`를 반환해요.
+如果该值是类对象，则返回 `true`，否则返回 `false`。
 
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 유사 객체로 좁혀요.
+这个函数也可以在 TypeScript 中作为类型断言使用，将参数的类型缩小为类对象。
 
-## 인터페이스
+## 签名
 
 ```typescript
 export function isObjectLike<T>(value: T): value is Extract<T, object>;
 ```
 
-### 파라미터
+### 参数
 
-- `value` (`T`): 유사 객체인지 확인할 값이에요.
+- `value` (`T`): 要检查是否为类对象的值。
 
-### 반환 값
+### 返回值
 
-(`value is Extract<T, object>`): 주어진 값이 유사 객체이면 `true`, 아니면 `false`를 반환해요.
+(`value is Extract<T, object>`): 如果该值是类对象，则返回 `true`，否则返回 `false`。
 
-## 예시
+## 示例
 
 ```typescript
 import { isObjectLike } from 'es-toolkit/predicate';

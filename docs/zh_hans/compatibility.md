@@ -64,9 +64,9 @@ chunk([1, 2, 3, 4], 0);
 | [fill](https://lodash.com/docs/4.17.15#fill)                           | ✅         |
 | [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ❌         |
 | [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌         |
-| [flatten](https://lodash.com/docs/4.17.15#flatten)                     | 📝         |
-| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | 📝         |
-| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | 📝         |
+| [flatten](https://lodash.com/docs/4.17.15#flatten)                     | ✅         |
+| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | ✅         |
+| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | ✅         |
 | [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌         |
 | [head](https://lodash.com/docs/4.17.15#head)                           | 📝         |
 | [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ❌         |
@@ -187,7 +187,7 @@ chunk([1, 2, 3, 4], 0);
 | ---------------------------------------------------------------------- | -------- |
 | [castArray](https://lodash.com/docs/4.17.15#castArray)                 | ❌       |
 | [clone](https://lodash.com/docs/4.17.15#clone)                         | 📝       |
-| [cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)                 | ❌       |
+| [cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)                 | ✅       |
 | [cloneDeepWith](https://lodash.com/docs/4.17.15#cloneDeepWith)         | ❌       |
 | [cloneWith](https://lodash.com/docs/4.17.15#cloneWith)                 | ❌       |
 | [conformsTo](https://lodash.com/docs/4.17.15#conformsTo)               | ❌       |

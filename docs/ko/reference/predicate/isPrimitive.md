@@ -7,16 +7,16 @@ JavaScript 원시 값은 null, undefined, string, number, symbol, bigint를 말�
 ## 인터페이스
 
 ```typescript
-function isPrimitive(x: unknown): x is null | undefined | string | number | boolean | symbol | bigint;
+function isPrimitive(value: unknown): value is null | undefined | string | number | boolean | symbol | bigint;
 ```
 
 ### 파라미터
 
-- `x` (`unknown`): 검사할 값.
+- `value` (`unknown`): 검사할 값.
 
 ### 반환 값
 
-(`x is null | undefined | string | number | boolean | symbol | bigint`): 값이 원시 값이면 `true`, 아니면 `false`.
+(`value is null | undefined | string | number | boolean | symbol | bigint`): 값이 원시 값이면 `true`, 아니면 `false`.
 
 ## 예시
 

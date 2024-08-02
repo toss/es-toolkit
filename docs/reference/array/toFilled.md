@@ -16,7 +16,7 @@ function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T
 
 ### Parameters
 
-- `arr` (`Array<T>`): The array to base the new array on.
+- `arr` (`T[]`): The array to base the new array on.
 - `value` (`U`): The value to fill the new array with.
 - `start` (`number, default = 0`): The start position. Defaults to 0.
 - `end` (`number, default = array.length`): The end position. Defaults to the array's length.

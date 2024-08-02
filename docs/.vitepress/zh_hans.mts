@@ -107,6 +107,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '函数工具',
           items: [
+            { text: 'before', link: '/zh_hans/reference/function/before' },
             { text: 'after', link: '/zh_hans/reference/function/after' },
             { text: 'debounce', link: '/zh_hans/reference/function/debounce' },
             { text: 'throttle', link: '/zh_hans/reference/function/throttle' },
@@ -153,6 +154,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '谓词',
           items: [
+            { text: 'isArguments', link: '/zh_hans/reference/predicate/isArguments' },
             { text: 'isArray (兼容性)', link: '/zh_hans/reference/compat/predicate/isArray' },
             { text: 'isArrayLike', link: '/zh_hans/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
@@ -165,6 +167,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNil', link: '/zh_hans/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/zh_hans/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/zh_hans/reference/predicate/isNull' },
+            { text: 'isObjectLike', link: '/zh_hans/reference/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/zh_hans/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/zh_hans/reference/predicate/isUndefined' },
           ],

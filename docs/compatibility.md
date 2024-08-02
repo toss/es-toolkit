@@ -64,9 +64,9 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [fill](https://lodash.com/docs/4.17.15#fill)                           | ✅                    |
 | [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ❌                    |
 | [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌                    |
-| [flatten](https://lodash.com/docs/4.17.15#flatten)                     | 📝                    |
-| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | 📝                    |
-| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | 📝                    |
+| [flatten](https://lodash.com/docs/4.17.15#flatten)                     | ✅                    |
+| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | ✅                    |
+| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | ✅                    |
 | [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌                    |
 | [head](https://lodash.com/docs/4.17.15#head)                           | ✅                    |
 | [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ❌                    |
@@ -143,7 +143,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [sample](https://lodash.com/docs/4.17.15#sample)             | 📝                    |
 | [sampleSize](https://lodash.com/docs/4.17.15#sampleSize)     | 📝                    |
 | [shuffle](https://lodash.com/docs/4.17.15#shuffle)           | 📝                    |
-| [size](https://lodash.com/docs/4.17.15#size)                 | ❌                    |
+| [size](https://lodash.com/docs/4.17.15#size)                 | ✅                    |
 | [some](https://lodash.com/docs/4.17.15#some)                 | ❌                    |
 | [sortBy](https://lodash.com/docs/4.17.15#sortBy)             | ❌                    |
 
@@ -187,7 +187,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | ---------------------------------------------------------------------- | --------------------- |
 | [castArray](https://lodash.com/docs/4.17.15#castArray)                 | ❌                    |
 | [clone](https://lodash.com/docs/4.17.15#clone)                         | 📝                    |
-| [cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)                 | ❌                    |
+| [cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)                 | ✅                    |
 | [cloneDeepWith](https://lodash.com/docs/4.17.15#cloneDeepWith)         | ❌                    |
 | [cloneWith](https://lodash.com/docs/4.17.15#cloneWith)                 | ❌                    |
 | [conformsTo](https://lodash.com/docs/4.17.15#conformsTo)               | ❌                    |
