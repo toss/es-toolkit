@@ -28,6 +28,9 @@ export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { fill } from './array/fill.ts';
+export { flatten } from './array/flatten.ts';
+export { flattenDeep } from './array/flattenDeep.ts';
+export { flattenDepth } from './array/flattenDepth.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../index.ts';
 
