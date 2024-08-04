@@ -204,7 +204,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isDate](https://lodash.com/docs/4.17.15#isDate)                       | ❌                    |
 | [isElement](https://lodash.com/docs/4.17.15#isElement)                 | ❌                    |
 | [isEmpty](https://lodash.com/docs/4.17.15#isEmpty)                     | ❌                    |
-| [isEqual](https://lodash.com/docs/4.17.15#isEqual)                     | ❌                    |
+| [isEqual](https://lodash.com/docs/4.17.15#isEqual)                     | ✅                    |
 | [isEqualWith](https://lodash.com/docs/4.17.15#isEqualWith)             | ❌                    |
 | [isError](https://lodash.com/docs/4.17.15#isError)                     | ❌                    |
 | [isFinite](https://lodash.com/docs/4.17.15#isFinite)                   | ❌                    |
