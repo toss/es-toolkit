@@ -116,6 +116,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'noop', link: '/zh_hans/reference/function/noop' },
             { text: 'ary', link: '/zh_hans/reference/function/ary' },
             { text: 'unary', link: '/zh_hans/reference/function/unary' },
+            { text: 'bind', link: '/zh_hans/reference/function/bind' },
           ],
         },
         {

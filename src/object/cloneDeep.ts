@@ -69,12 +69,12 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     }
 
     // For RegExpArrays
-    if (obj.hasOwnProperty('index')) {
+    if (Object.prototype.hasOwnProperty.call(obj, 'index')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.index = obj.index;
     }
-    if (obj.hasOwnProperty('input')) {
+    if (Object.prototype.hasOwnProperty.call(obj, 'input')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.input = obj.input;
@@ -117,7 +117,11 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     return result as T;
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   if (typeof Buffer !== 'undefined' && Buffer.isBuffer(obj)) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return obj.subarray() as T;
   }
 

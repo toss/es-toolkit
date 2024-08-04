@@ -45,6 +45,7 @@ export { zipObject } from './zipObject.ts';
 export { zipWith } from './zipWith.ts';
 export { without } from './without.ts';
 export { head } from './head.ts';
+export { isSubset } from './isSubset.ts';
 export { tail } from './tail.ts';
 export { toFilled } from './toFilled.ts';
 export { last } from './last.ts';

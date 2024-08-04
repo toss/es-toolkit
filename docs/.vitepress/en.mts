@@ -72,6 +72,7 @@ function sidebar(): DefaultTheme.Sidebar {
               text: 'intersectionWith',
               link: '/reference/array/intersectionWith',
             },
+            { text: 'isSubset', link: '/reference/array/isSubset' },
             { text: 'keyBy', link: '/reference/array/keyBy' },
             { text: 'minBy', link: '/reference/array/minBy' },
             { text: 'maxBy', link: '/reference/array/maxBy' },
@@ -121,6 +122,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'noop', link: '/reference/function/noop' },
             { text: 'ary', link: '/reference/function/ary' },
             { text: 'unary', link: '/reference/function/unary' },
+            { text: 'bind', link: '/reference/function/bind' },
           ],
         },
         {
