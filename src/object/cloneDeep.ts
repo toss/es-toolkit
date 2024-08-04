@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
