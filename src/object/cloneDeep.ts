@@ -1,4 +1,3 @@
-import { Buffer } from 'node:buffer';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
@@ -70,12 +69,12 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     }
 
     // For RegExpArrays
-    if (obj.hasOwnProperty('index')) {
+    if (Object.prototype.hasOwnProperty.call(obj, 'index')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.index = obj.index;
     }
-    if (obj.hasOwnProperty('input')) {
+    if (Object.prototype.hasOwnProperty.call(obj, 'input')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.input = obj.input;
