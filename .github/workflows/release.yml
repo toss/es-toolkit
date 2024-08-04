@@ -74,7 +74,7 @@ jobs:
           else
             npm publish --provenance --access public --tag dev *.tgz
           fi
-          deno publish --allow-dirty
+          deno publish --allow-dirty --unstable-sloppy-imports
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         working-directory: ${{ github.workspace }}/out/
