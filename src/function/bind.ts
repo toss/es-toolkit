@@ -45,4 +45,4 @@ export function bind(func: (...args: any[]) => any, thisArg?: any, ...partials: 
   return wrapper;
 }
 
-bind.placeholder = Symbol('bind.placeholder');
+bind.placeholder = Symbol('bind.placeholder') as symbol;
