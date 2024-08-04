@@ -1,4 +1,4 @@
-import { isNil } from '../predicate';
+import { isNil } from '../predicate/isNil.ts';
 
 /**
  * Returns the length of an array, string, or object.
