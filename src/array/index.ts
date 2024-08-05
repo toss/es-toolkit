@@ -1,5 +1,6 @@
 export { chunk } from './chunk.ts';
 export { compact } from './compact.ts';
+export { concat } from './concat.ts';
 export { countBy } from './countBy.ts';
 export { difference } from './difference.ts';
 export { differenceBy } from './differenceBy.ts';
