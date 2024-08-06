@@ -1,9 +1,9 @@
-import { describe, expect, it } from "vitest";
-import { cloneDeep } from "./cloneDeep";
-import { range } from "../../math/range";
-import { LARGE_ARRAY_SIZE } from "../_internal/LARGE_ARRAY_SIZE";
-import { args } from "../_internal/args";
-import { stubTrue } from "../_internal/stubTrue";
+import { describe, expect, it } from 'vitest';
+import { cloneDeep } from './cloneDeep';
+import { range } from '../../math/range';
+import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
+import { args } from '../_internal/args';
+import { stubTrue } from '../_internal/stubTrue';
 
 describe('cloneDeep', () => {
   it('should deep clone objects with circular references', () => {
@@ -25,7 +25,7 @@ describe('cloneDeep', () => {
   it('should deep clone objects with lots of circular references', () => {
     const cyclical: any = {};
 
-    range(LARGE_ARRAY_SIZE + 1).forEach((index) => {
+    range(LARGE_ARRAY_SIZE + 1).forEach(index => {
       cyclical[`v${index}`] = [index ? cyclical[`v${index - 1}`] : cyclical];
     });
 
@@ -36,44 +36,6 @@ describe('cloneDeep', () => {
     expect(actual).toBe(clone[`v${LARGE_ARRAY_SIZE - 1}`]);
     expect(actual).not.toBe(cyclical[`v${LARGE_ARRAY_SIZE - 1}`]);
   });
-
-
-  class Foo {
-    a = 1;
-  }
-
-  // eslint-disable-next-line
-  // @ts-ignore
-  Foo.prototype.b = 1;
-  // eslint-disable-next-line
-  // @ts-ignore
-  Foo.c = function () { };
-
-  var map = new Map();
-  map.set('a', 1);
-  map.set('b', 2);
-
-  var set = new Set();
-  set.add(1);
-  set.add(2);
-
-  const objects = {
-    booleans: false,
-    'boolean objects': Object(false),
-    'date objects': new Date(),
-    'Foo instances': new Foo(),
-    objects: { a: 0, b: 1, c: 2 },
-    'objects with object values': { a: /a/, b: ['B'], c: { C: 1 } },
-    maps: map,
-    'null values': null,
-    numbers: 0,
-    'number objects': Object(0),
-    regexes: /a/gim,
-    sets: set,
-    strings: 'a',
-    'string objects': Object('a'),
-    'undefined values': undefined,
-  };
 
   it(`should clone arguments objects`, () => {
     const actual = cloneDeep(args);
@@ -230,7 +192,6 @@ describe('cloneDeep', () => {
     expect(actual).toBe(object);
   });
 
-
   it(`should clone array buffers`, () => {
     const arrayBuffer = new ArrayBuffer(2);
     const actual = cloneDeep(arrayBuffer);
@@ -252,7 +213,6 @@ describe('cloneDeep', () => {
     expect(actual[0]).toBe(2);
   });
 
-
   it(`should clone \`index\` and \`input\` array properties`, () => {
     const array = /c/.exec('abcde');
     const actual = cloneDeep(array);
@@ -261,7 +221,6 @@ describe('cloneDeep', () => {
     expect(actual?.input).toBe('abcde');
   });
 
-
   it(`should clone \`lastIndex\` regexp property`, () => {
     const regexp = /c/g;
     regexp.exec('abcde');
@@ -269,9 +228,8 @@ describe('cloneDeep', () => {
     expect(cloneDeep(regexp).lastIndex).toBe(3);
   });
 
-
   it(`should clone expando properties`, () => {
-    const values = [false, true, 1, 'a'].map((value) => {
+    const values = [false, true, 1, 'a'].map(value => {
       const object = Object(value);
       object.a = 1;
       return object;
@@ -279,13 +237,10 @@ describe('cloneDeep', () => {
 
     const expected = values.map(stubTrue);
 
-    const actual = values.map((value) => {
-      return cloneDeep(value).a === 1
+    const actual = values.map(value => {
+      return cloneDeep(value).a === 1;
     });
 
     expect(actual).toEqual(expected);
   });
 });
-
-
-

@@ -2,7 +2,7 @@ import { Readable } from "node:stream";
 
 export async function streamToBuffer(stream: Readable) {
   return await new Promise<Buffer>((resolve, reject) => {
-    const chunks: Array<Buffer> = [];
+    const chunks: Buffer[] = [];
 
     stream.on(`error`, error => {
       reject(error);

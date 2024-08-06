@@ -1,4 +1,3 @@
-
 import { describe, expect, it } from 'vitest';
 import { mapKeys } from './mapKeys';
 
@@ -23,13 +22,14 @@ describe('mapKeys', () => {
 
   it('should use `_.identity` when `iteratee` is nullish', () => {
     const object = { a: 1, b: 2 };
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
-    const expected = values.map(() => ({ 1: 1, 2: 2 }))
+    const expected = values.map(() => ({ 1: 1, 2: 2 }));
 
     const actual = values.map((value, index) =>
-      // eslint-disable-next-line
-      // @ts-ignore
-      index ? mapKeys(object, value) : mapKeys(object),
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      index ? mapKeys(object, value) : mapKeys(object)
     );
 
     expect(actual).toEqual(expected);
