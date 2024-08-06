@@ -29,10 +29,25 @@ jobs:
       - run:
           name: ESLint
           shell: bash -e
-          command: git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)" | xargs -r yarn eslint -c .eslintrc.js
+          command: |
+            changed_files=$(git diff --name-only --diff-filter=ACMRUXB origin/main)
+
+            if echo "$changed_files" | grep -q "^.eslintrc.js$"; then
+              yarn eslint -c .eslintrc.js .
+            else
+              echo "$changed_files" | grep -E "(.js$|.ts$)" | xargs -r yarn eslint -c .eslintrc.js
+            fi
       - run:
           name: Prettier
-          command: git diff --name-only --diff-filter=ACMRUXB origin/main | xargs -r yarn prettier -c --ignore-unknown
+          command: |
+            changed_files=$(git diff --name-only --diff-filter=ACMRUXB origin/main)
+
+            if echo "$changed_files" | grep -q -E "^\.prettierrc$|^\.prettierignore$"; then
+              yarn prettier -c .
+            else
+
+              echo "$changed_files" | xargs -r yarn prettier -c --ignore-unknown
+            fi
   typecheck:
     docker:
       - image: cimg/node:20.12
