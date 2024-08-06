@@ -37,6 +37,21 @@ describe('cloneDeep', () => {
     expect(actual).not.toBe(cyclical[`v${LARGE_ARRAY_SIZE - 1}`]);
   });
 
+  class Foo {
+    a = 1;
+    b = 1;
+
+    static c = function () {};
+  }
+  Foo.prototype.b = 1;
+
+  const map = new Map([
+    ['a', 1],
+    ['b', 2],
+  ]);
+
+  const set = new Set([1, 2]);
+
   it(`should clone arguments objects`, () => {
     const actual = cloneDeep(args);
 
