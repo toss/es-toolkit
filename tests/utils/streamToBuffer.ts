@@ -1,4 +1,4 @@
-import { Readable } from "node:stream";
+import { Readable } from 'node:stream';
 
 export async function streamToBuffer(stream: Readable) {
   return await new Promise<Buffer>((resolve, reject) => {
