@@ -41,7 +41,10 @@ isMatch([1, 2, 3], [2, 2]); // false
 ### Matching maps
 
 ```typescript
-const targetMap = new Map([['key1', 'value1'], ['key2', 'value2']]);
+const targetMap = new Map([
+  ['key1', 'value1'],
+  ['key2', 'value2'],
+]);
 const sourceMap = new Map([['key1', 'value1']]);
 isMatch(targetMap, sourceMap); // true
 ```

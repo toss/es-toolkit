@@ -9,12 +9,12 @@
 ## 인터페이스
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any
+function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
 ```
 
 ### 파라미터
 
- - `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): 프로퍼티를 가져올 경로.
+- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): 프로퍼티를 가져올 경로.
 
 ### 반환 값
 

@@ -9,7 +9,7 @@
 ## 인터페이스
 
 ```typescript
-function concat<T>(...values: Array<T | T[]>): T[]
+function concat<T>(...values: Array<T | T[]>): T[];
 ```
 
 ### 파라미터
@@ -24,7 +24,7 @@ function concat<T>(...values: Array<T | T[]>): T[]
 
 ```typescript
 // 값을 연결
-concat(1, 2, 3); 
+concat(1, 2, 3);
 // 반환 값: [1, 2, 3]
 
 // 배열을 연결

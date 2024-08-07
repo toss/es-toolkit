@@ -9,7 +9,11 @@
 ## 签名
 
 ```typescript
-function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: unknown): T
+function set<T extends object>(
+  obj: T,
+  path: string | number | symbol | Array<string | number | symbol>,
+  value: unknown
+): T;
 ```
 
 ### 参数

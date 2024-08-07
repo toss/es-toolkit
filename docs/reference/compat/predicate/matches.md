@@ -22,7 +22,6 @@ function matches(source: unknown): (target: unknown) => boolean;
 
 - (`(target: unknown) => boolean`): Returns a function that takes a target object and returns `true` if the target matches the source, otherwise `false`.
 
-
 ## Examples
 
 ### Basic usage

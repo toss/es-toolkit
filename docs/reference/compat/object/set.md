@@ -9,7 +9,11 @@ Sets the given value at the specified path of the object. If any part of the pat
 ## Signature
 
 ```typescript
-function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: unknown): T
+function set<T extends object>(
+  obj: T,
+  path: string | number | symbol | Array<string | number | symbol>,
+  value: unknown
+): T;
 ```
 
 ### Parameters

@@ -29,8 +29,8 @@ function startsWith(str: string, target: string, position: number = 0): string;
 ```typescript
 import { startsWith } from 'es-toolkit/string';
 
-startsWith('fooBar', 'foo') // returns true
-startsWith('fooBar', 'Bar') // returns false
-startsWith('fooBar', 'abcdef') // returns false
-startsWith('fooBar', 'Bar', 3) // returns true
+startsWith('fooBar', 'foo'); // returns true
+startsWith('fooBar', 'Bar'); // returns false
+startsWith('fooBar', 'abcdef'); // returns false
+startsWith('fooBar', 'Bar', 3); // returns true
 ```

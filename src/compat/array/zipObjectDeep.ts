@@ -1,5 +1,5 @@
-import { zip } from "../../array/zip.ts";
-import { set } from "../object/set.ts";
+import { zip } from '../../array/zip.ts';
+import { set } from '../object/set.ts';
 
 /**
  * Creates a deeply nested object given arrays of paths and values.
@@ -7,7 +7,7 @@ import { set } from "../object/set.ts";
  * This function takes two arrays: one containing arrays of property paths, and the other containing corresponding values.
  * It returns a new object where paths from the first array are used as key paths to set values, with corresponding elements from the second array as values.
  * Paths can be dot-separated strings or arrays of property names.
- * 
+ *
  * If the `keys` array is longer than the `values` array, the remaining keys will have `undefined` as their values.
  *
  * @template V - The type of elements in the array.
@@ -26,7 +26,7 @@ import { set } from "../object/set.ts";
  * const values = [1, 2];
  * const result = zipObjectDeep(paths, values);
  * // result will be { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
- * 
+ *
  * @example
  * const paths = ['a.b[0].c', 'a.b[1].d'];
  * const values = [1, 2];

@@ -29,8 +29,8 @@ function endsWith(str: string, target: string, position: number = 0): string;
 ```typescript
 import { endsWith } from 'es-toolkit/string';
 
-endsWith('fooBar', 'foo') // returns false
-endsWith('fooBar', 'Bar') // returns true
-endsWith('fooBar', 'abcdef') // returns false
-endsWith('fooBar', 'foo', 3) // returns true
+endsWith('fooBar', 'foo'); // returns false
+endsWith('fooBar', 'Bar'); // returns true
+endsWith('fooBar', 'abcdef'); // returns false
+endsWith('fooBar', 'foo', 3); // returns true
 ```

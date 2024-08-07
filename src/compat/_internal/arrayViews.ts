@@ -1,6 +1,3 @@
-import { typedArrays } from "./typedArrays";
+import { typedArrays } from './typedArrays';
 
-export const arrayViews = [
-  ...typedArrays,
-  'DataView'
-];
+export const arrayViews = [...typedArrays, 'DataView'];

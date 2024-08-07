@@ -9,7 +9,7 @@ Concatenates multiple arrays and values into a single array.
 ## Signature
 
 ```typescript
-function concat<T>(...values: Array<T | T[]>): T[]
+function concat<T>(...values: Array<T | T[]>): T[];
 ```
 
 ### Parameters
@@ -24,7 +24,7 @@ function concat<T>(...values: Array<T | T[]>): T[]
 
 ```typescript
 // Concatenate individual values
-concat(1, 2, 3); 
+concat(1, 2, 3);
 // returns [1, 2, 3]
 
 // Concatenate arrays of values

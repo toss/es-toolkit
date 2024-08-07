@@ -11,7 +11,7 @@
 ## 签名
 
 ```typescript
-function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V }
+function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
 ```
 
 ### 参数
@@ -33,7 +33,10 @@ const values = [1, 2];
 const result = zipObjectDeep(paths, values);
 // 结果将是 { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
 
-const paths = [['a', 'b', 'c'], ['d', 'e', 'f']];
+const paths = [
+  ['a', 'b', 'c'],
+  ['d', 'e', 'f'],
+];
 const values = [1, 2];
 const result = zipObjectDeep(paths, values);
 // 结果将是 { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
@@ -46,8 +49,7 @@ const result = zipObjectDeep(paths, values);
 
 ## 性能对比
 
-
 |                   | [包大小](../../../bundle-size.md) | [运行时性能](../../../performance.md) |
-| ----------------- | ------------------------------ | ---------------------------------- |
-| es-toolkit/compat | 938 字节 (小 88%)              | 1,102,767 次 (慢 25%)              |
-| lodash-es         | 7,338 字节                     | 1,476,660 次                       |
+| ----------------- | --------------------------------- | ------------------------------------- |
+| es-toolkit/compat | 938 字节 (小 88%)                 | 1,102,767 次 (慢 25%)                 |
+| lodash-es         | 7,338 字节                        | 1,476,660 次                          |

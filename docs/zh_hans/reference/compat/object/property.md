@@ -9,7 +9,7 @@
 ## 签名
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any
+function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
 ```
 
 ### 参数

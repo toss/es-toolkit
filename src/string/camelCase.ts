@@ -1,5 +1,5 @@
-import { capitalize } from "./capitalize.ts";
-import { getWords } from "./_internal/getWords.ts";
+import { capitalize } from './capitalize.ts';
+import { getWords } from './_internal/getWords.ts';
 
 /**
  * Converts a string to camel case.
@@ -20,11 +20,10 @@ export function camelCase(str: string): string {
   const words = getWords(str);
 
   if (words.length === 0) {
-    return "";
+    return '';
   }
 
   const [first, ...rest] = words;
 
-  return `${first.toLowerCase()}${rest.map((word) => capitalize(word)).join("")
-    }`;
+  return `${first.toLowerCase()}${rest.map(word => capitalize(word)).join('')}`;
 }
