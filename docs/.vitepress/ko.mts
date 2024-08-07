@@ -131,6 +131,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'negate', link: '/ko/reference/function/negate' },
             { text: 'once', link: '/ko/reference/function/once' },
             { text: 'noop', link: '/ko/reference/function/noop' },
+            { text: 'ary', link: '/reference/function/ary' },
+            { text: 'unary', link: '/reference/function/unary' },
           ],
         },
         {
