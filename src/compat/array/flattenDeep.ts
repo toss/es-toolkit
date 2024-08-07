@@ -1,4 +1,4 @@
-import { flatten } from './flatten';
+import { flatten } from './flatten.ts';
 
 /**
  * Utility type for recursively unpacking nested array types to extract the type of the innermost element

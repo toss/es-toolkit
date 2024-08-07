@@ -4,6 +4,10 @@ import { getSymbols } from "../compat/_internal/getSymbols.ts";
 import { getTag } from "../compat/_internal/getTag.ts";
 import { isPlainObject } from "./isPlainObject.ts";
 
+declare var Buffer: {
+  isBuffer: (a: any) => boolean;
+} | undefined;
+
 /**
  * Checks if two values are equal, including support for `Date`, `RegExp`, and deep object comparison.
  *
@@ -154,7 +158,7 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
       case float32ArrayTag:
       case float64ArrayTag: {
         // Buffers are also treated as [object Uint8Array]s.
-        if (Buffer.isBuffer(a) !== Buffer.isBuffer(b)) {
+        if (typeof Buffer !== 'undefined' && Buffer.isBuffer(a) !== Buffer.isBuffer(b)) {
           return false;
         }
 

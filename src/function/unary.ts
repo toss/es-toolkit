@@ -1,4 +1,4 @@
-import { ary } from './ary';
+import { ary } from './ary.ts';
 
 /**
  * Creates a function that accepts up to one argument, ignoring any additional arguments.
