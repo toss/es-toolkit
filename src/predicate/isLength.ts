@@ -19,7 +19,6 @@
  * isLength(Number.MAX_SAFE_INTEGER); // true
  * isLength(Number.MAX_SAFE_INTEGER + 1); // false
  */
-
 export function isLength(value: unknown): value is number {
   return Number.isSafeInteger(value) && (value as number) >= 0;
 }
