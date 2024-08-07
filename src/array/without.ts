@@ -4,9 +4,10 @@
  * It correctly excludes `NaN`, as it compares values using [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero).
  *
  * @template T The type of elements in the array.
+ * @template V The type of values to exclude.
  * @param {T[]} array - The array to filter.
- * @param {...T[]} values - The values to exclude.
- * @returns {T[]} A new array without the specified values.
+ * @param {...V[]} values - The values to exclude.
+ * @returns {Without<T, V>} A new array without the specified values.
  *
  * @example
  * // Removes the specified values from the array
@@ -18,7 +19,33 @@
  * without(['a', 'b', 'c', 'a'], 'a');
  * // Returns: ['b', 'c']
  */
-export function without<T>(array: readonly T[], ...values: T[]): T[] {
+export function without<const T extends any[], const V extends T[number]>(array: T, ...values: V[]): Without<T, V> {
   const valuesSet = new Set(values);
-  return array.filter(item => !valuesSet.has(item));
+  return array.filter(item => !valuesSet.has(item as never)) as never;
 }
+
+type Without<Items extends any[], Exclude extends Items[number], Out extends any[] = []> =
+  // Last iteration - Exit condition
+  Items extends []
+    ? Out
+    : // Handle cases like `Without<[1, 2, 3], any>`
+      IsAny<Exclude> extends true
+      ? Items
+      : // Handle cases like `Without<[1, 2, 3], never>`
+        IsNever<Exclude> extends true
+        ? Items
+        : Items extends [infer First, ...infer Rest]
+          ? First extends Exclude
+            ? // Skip the excluded value from the output
+              Without<Rest, Exclude, Out>
+            : // Include the current value in the output
+              Without<Rest, Exclude, [...Out, First]>
+          : // Handle cases like `Without<number[], 42>`
+            Array<Items[number]>;
+
+/**
+ * @see https://stackoverflow.com/questions/49927523/disallow-call-with-any/49928360#49928360
+ */
+type IsAny<T> = 0 extends 1 & T ? true : false;
+
+type IsNever<T> = [T] extends [never] ? true : false;
