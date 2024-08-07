@@ -13,7 +13,7 @@ TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어
 function isBoolean(x: unknown): x is boolean;
 ```
 
-### 파라마ㅣ터
+### 파라미터
 
 - `x` (`unknown`): 불리언인지 테스트할 값.
 
