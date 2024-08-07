@@ -6,7 +6,7 @@ import { matches } from './matches';
 
 describe('matches', () => {
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {
-    let object: any = { a: 1, b: 2, c: 3 };
+    const object: any = { a: 1, b: 2, c: 3 };
 
     const isMatch1 = matches({ a: 1 });
     expect(isMatch1(object)).toBe(true);
@@ -297,6 +297,7 @@ describe('matches', () => {
   });
 
   it(`should return \`false\` when \`object\` is nullish`, () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = values.map(() => false);
 
@@ -305,7 +306,9 @@ describe('matches', () => {
     const actual = values.map((value, index) => {
       try {
         return index ? isMatch(value) : isMatch(undefined);
-      } catch (e: any) {}
+      } catch (e: unknown) {
+        /* empty */
+      }
     });
 
     expect(actual).toEqual(expected);
@@ -315,7 +318,7 @@ describe('matches', () => {
     const object = { a: 1 };
     const expected = empties.map(stubTrue);
 
-    const actual = empties.map(value => {
+    const actual = empties.map(() => {
       const isMatch = matches(object);
 
       return isMatch(object);
@@ -325,6 +328,7 @@ describe('matches', () => {
   });
 
   it(`should return \`true\` when comparing an empty \`source\` to a nullish \`object\``, () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = values.map(stubTrue);
 
@@ -333,7 +337,9 @@ describe('matches', () => {
     const actual = values.map((value, index) => {
       try {
         return index ? isMatch(value) : isMatch(undefined);
-      } catch (e: any) {}
+      } catch (e: unknown) {
+        /* empty */
+      }
     });
 
     expect(actual).toEqual(expected);

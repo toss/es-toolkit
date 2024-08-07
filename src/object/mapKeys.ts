@@ -16,7 +16,7 @@
  * const result = mapKeys(obj, (value, key) => key + value);
  * console.log(result); // { a1: 1, b2: 2 }
  */
-export function mapKeys<T extends {}, K1 extends keyof T, K2 extends PropertyKey>(
+export function mapKeys<T extends object, K1 extends keyof T, K2 extends PropertyKey>(
   object: T,
   getNewKey: (value: T[K1], key: K1, object: T) => K2
 ): Record<K2, T[K1]> {

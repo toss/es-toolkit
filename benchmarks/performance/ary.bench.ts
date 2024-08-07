@@ -4,10 +4,12 @@ import { ary as aryLodash } from 'lodash';
 
 describe('ary', () => {
   bench('es-toolkit/ary', () => {
-    aryToolkit((a, b, c) => undefined, 2);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    aryToolkit((_a, _b, _c) => undefined, 2);
   });
 
   bench('lodash/ary', () => {
-    aryLodash((a, b, c) => undefined, 2);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    aryLodash((_a, _b, _c) => undefined, 2);
   });
 });
