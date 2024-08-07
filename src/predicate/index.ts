@@ -11,3 +11,4 @@ export { isTypedArray } from './isTypedArray.ts';
 export { isPrimitive } from './isPrimitive.ts';
 export { isObjectLike } from './isObjectLike.ts';
 export { isArguments } from './isArguments.ts';
+export { isBoolean } from './isBoolean.ts';
