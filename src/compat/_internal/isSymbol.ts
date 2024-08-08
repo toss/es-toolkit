@@ -1,6 +1,19 @@
 import { getTag } from './getTag';
 
-export function isSymbol(value: unknown): value is symbol {
-  const type = typeof value;
-  return type === 'symbol' || (type === 'object' && value != null && getTag(value) === '[object Symbol]');
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @param {unknown} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ * isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * isSymbol('abc');
+ * // => false
+ */
+export function isSymbol(value?: unknown): value is symbol {
+  return (
+    typeof value === 'symbol' || (value != null && typeof value === 'object' && getTag(value) === '[object Symbol]')
+  );
 }
