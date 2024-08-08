@@ -18,6 +18,27 @@ describe('orderBy', () => {
     { id: '5', address: { zipCode: 4, streetName: 'Alpha' } },
   ];
 
+  it('should return an empty array when the collection is null or undefined', () => {
+    const actual = [null, undefined].map(value => orderBy(value));
+    const expected = [[], []];
+
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return a shallow copy of the collection when no keys are provided', () => {
+    const actual = orderBy(objects);
+    const expected = objects.slice();
+
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return ascending ordered collection when no orders are provided', () => {
+    const actual = orderBy(objects, ['a']);
+    const expected = orderBy(objects, ['a'], ['asc']);
+
+    expect(actual).toEqual(expected);
+  });
+
   it('should sort by a single property by a specified order', () => {
     const actual = orderBy(objects, 'a', 'desc');
     const expected = [objects[1], objects[3], objects[0], objects[2]];

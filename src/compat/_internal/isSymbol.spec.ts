@@ -15,7 +15,7 @@ describe('isSymbol', () => {
 
   it('should return `false` for non-symbols', () => {
     const expected = falsey.map(stubFalse);
-    const actual = falsey.map((value, index) => (index ? isSymbol(value) : isSymbol()));
+    const actual = falsey.map(isSymbol);
 
     expect(actual).toEqual(expected);
 

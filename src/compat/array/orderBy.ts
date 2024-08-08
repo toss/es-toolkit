@@ -1,5 +1,5 @@
-import { isKey } from '../_internal/isKey';
-import { toPath } from '../_internal/toPath';
+import { convertToPropertyName } from '../_internal/convertToPropertyName';
+
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
  *
@@ -10,7 +10,7 @@ import { toPath } from '../_internal/toPath';
  *
  * @template T - The type of elements in the array.
  * @param {T[]} collection - The array of objects to be sorted.
- * @param {string | Array<string | string[]>} keys - An array of keys (properties) by which to sort.
+ * @param {string | Array<string | string[]>} keys - An array of keys (property names or property paths) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
  * @returns {T[]} - The sorted array.
  *
@@ -32,7 +32,7 @@ import { toPath } from '../_internal/toPath';
  * // ]
  */
 export function orderBy<T>(
-  collection?: T[],
+  collection?: T[] | null,
   keys?: string | Array<string | string[]>,
   orders?: unknown | unknown[]
 ): T[] {
@@ -48,7 +48,7 @@ export function orderBy<T>(
     orders = orders == null ? [] : [orders];
   }
 
-  const compareValues = (a: T[keyof T], b: T[keyof T], order: string) => {
+  const compareValues = <V>(a: V, b: V, order: string) => {
     if (a < b) {
       return order === 'desc' ? 1 : -1; // Default is ascending order
     }
@@ -58,26 +58,6 @@ export function orderBy<T>(
     }
 
     return 0;
-  };
-
-  const convertToPath = (key: string | string[]) => {
-    if (Array.isArray(key)) {
-      const path = [];
-
-      for (let i = 0; i < key.length; i++) {
-        const k = key[i];
-
-        if (isKey(k, collection[0])) {
-          path.push(k);
-        } else {
-          path.push(...toPath(k));
-        }
-      }
-
-      return path;
-    }
-
-    return isKey(key, collection[0]) ? key : toPath(key);
   };
 
   const getValue = (key: string | string[], obj: any) => {
@@ -94,7 +74,7 @@ export function orderBy<T>(
     return obj[key];
   };
 
-  keys = keys.map(convertToPath);
+  keys = keys.map(convertToPropertyName);
 
   const shallowCopiedCollection = collection.slice();
   const orderedCollection = shallowCopiedCollection.sort((a, b) => {
