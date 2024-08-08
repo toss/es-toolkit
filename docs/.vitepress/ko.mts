@@ -131,6 +131,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'negate', link: '/ko/reference/function/negate' },
             { text: 'once', link: '/ko/reference/function/once' },
             { text: 'noop', link: '/ko/reference/function/noop' },
+            { text: 'ary', link: '/reference/function/ary' },
+            { text: 'unary', link: '/reference/function/unary' },
           ],
         },
         {
@@ -172,6 +174,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments', link: '/ko/reference/predicate/isArguments' },
             { text: 'isArray (호환성)', link: '/ko/reference/compat/predicate/isArray' },
             { text: 'isArrayLike', link: '/ko/reference/predicate/isArrayLike' },
+            { text: 'isBoolean', link: '/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/ko/reference/predicate/isFunction' },
             { text: 'isLength', link: '/ko/reference/predicate/isLength' },

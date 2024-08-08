@@ -1,8 +1,8 @@
 # ary
 
-Creates a function that invokes func, with up to n arguments, ignoring any additional arguments.
+인자를 최대 `n`개까지만 제한해서 받는 새로운 함수를 만들어요. 그 이상으로 주어진 인자는 무시해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function ary<F extends (...args: any[]) => any>(
@@ -11,16 +11,16 @@ function ary<F extends (...args: any[]) => any>(
 ): (...args: any[]) => ReturnType<F>;
 ```
 
-### Parameters
+### 파라미터
 
-- `func` (`F`): The function to cap arguments for.
-- `n` (`number`, optional): The arity cap, defaulting to the number of parameters of `func`. Negative numbers will be treated as `0`, and decimals will be rounded down.
+- `func` (`F`): 인자를 받는 것을 제한할 함수.
+- `n` (`number`, 선택): 최대로 받을 인자의 숫자.
 
-### Returns
+### 반환 값
 
-(`(...args: any[]) => ReturnType<F>`): Returns the new capped function.
+(`(...args: any[]) => ReturnType<F>`): 받을 수 있는 인자의 숫자가 제한된 함수.
 
-## Examples
+## 예시
 
 ```typescript
 import { ary } from 'es-toolkit/function';

@@ -19,9 +19,9 @@ import { property } from './property.ts';
  * const result = mapKeys(obj, (value, key) => key + value);
  * console.log(result); // { a1: 1, b2: 2 }
  */
-export function mapKeys<T extends {}>(
+export function mapKeys<T extends object>(
   object: T,
-  getNewKey?: PropertyKey | readonly PropertyKey[],
+  getNewKey?: PropertyKey | readonly PropertyKey[]
 ): Record<PropertyKey, T[keyof T]>;
 
 /**
@@ -42,16 +42,16 @@ export function mapKeys<T extends {}>(
  * const result = mapKeys(obj, (value, key) => key + value);
  * console.log(result); // { a1: 1, b2: 2 }
  */
-export function mapKeys<T extends {}, K1 extends keyof T, K2 extends PropertyKey>(
+export function mapKeys<T extends object, K1 extends keyof T, K2 extends PropertyKey>(
   object: T,
   getNewKey?: (value: T[K1], key: K1, object: T) => K2
 ): Record<K2, T[K1]>;
 
-export function mapKeys<T extends {}, K1 extends keyof T, K2 extends PropertyKey>(
+export function mapKeys<T extends object, K1 extends keyof T, K2 extends PropertyKey>(
   object: T,
   getNewKey?: PropertyKey | readonly PropertyKey[] | ((value: T[K1], key: K1, object: T) => K2)
 ): Record<K2, T[K1]> {
-  getNewKey = getNewKey ?? identity as (value: T[K1], key: K1, object: T) => K2;
+  getNewKey = getNewKey ?? (identity as (value: T[K1], key: K1, object: T) => K2);
 
   switch (typeof getNewKey) {
     case 'string':

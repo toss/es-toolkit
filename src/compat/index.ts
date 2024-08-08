@@ -32,7 +32,9 @@ export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
-export { head as first } from '../index.ts';
+export { head as first } from '../array/head.ts';
+
+export { ary } from './function/ary.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';

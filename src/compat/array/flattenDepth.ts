@@ -1,4 +1,4 @@
-import { flatten } from './flatten';
+import { flatten } from './flatten.ts';
 
 /**
  * Flattens an array up to the specified depth.

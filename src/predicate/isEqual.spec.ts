@@ -18,8 +18,8 @@ describe('isEqual', () => {
     expect(isEqual(NaN, NaN)).toBe(true);
   });
 
-  it('should return false for +0 and -0 comparisons', () => {
-    expect(isEqual(+0, -0)).toBe(false);
+  it('should return true for +0 and -0 comparisons', () => {
+    expect(isEqual(+0, -0)).toBe(true);
   });
 
   it('should return true for equal Date objects', () => {

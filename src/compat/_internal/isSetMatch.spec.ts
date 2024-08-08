@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { isMapMatch } from './isMapMatch';
 import { isSetMatch } from './isSetMatch';
 
 describe('isSetMatch', () => {

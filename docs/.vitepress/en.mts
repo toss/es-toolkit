@@ -164,6 +164,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments', link: '/reference/predicate/isArguments' },
             { text: 'isArray (compat)', link: '/reference/compat/predicate/isArray' },
             { text: 'isArrayLike', link: '/reference/predicate/isArrayLike' },
+            { text: 'isBoolean', link: '/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/reference/predicate/isFunction' },
             { text: 'isLength', link: '/reference/predicate/isLength' },

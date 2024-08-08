@@ -4,10 +4,12 @@ import { unary as unaryLodash } from 'lodash';
 
 describe('ary', () => {
   bench('es-toolkit/unary', () => {
-    unaryToolkit((a, b, c) => undefined);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    unaryToolkit((_a, _b, _c) => undefined);
   });
 
   bench('lodash/unary', () => {
-    unaryLodash((a, b, c) => undefined);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    unaryLodash((_a, _b, _c) => undefined);
   });
 });
