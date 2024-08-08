@@ -60,7 +60,7 @@ export function orderBy<T>(
     return 0;
   };
 
-  const keysToPaths = (key: string | string[]) => {
+  const convertToPath = (key: string | string[]) => {
     if (Array.isArray(key)) {
       const path = key.map(k => (isKey(k, collection[0]) ? k : toPath(k)));
       return flattenDeep(path);
@@ -71,11 +71,11 @@ export function orderBy<T>(
     return key;
   };
 
-  const parsedKeys = keys.map(keysToPaths);
+  const convertedKeys = keys.map(convertToPath);
 
   return collection.slice().sort((a, b) => {
-    for (let i = 0; i < parsedKeys.length; i++) {
-      const key = parsedKeys[i];
+    for (let i = 0; i < convertedKeys.length; i++) {
+      const key = convertedKeys[i];
 
       let valueA: any = a;
       let valueB: any = b;

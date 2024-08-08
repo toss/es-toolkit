@@ -36,7 +36,7 @@ describe('orderBy (nested)', () => {
   });
 });
 
-describe('orderBy (nested string path)', () => {
+describe('orderBy (string path)', () => {
   bench('es-toolkit/compat/orderBy', () => {
     orderByToolkitCompat(users, ['nested.user', 'age'], orders);
   });
