@@ -135,7 +135,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [invokeMap](https://lodash.com/docs/4.17.15#invokeMap)       | ❌                    |
 | [keyBy](https://lodash.com/docs/4.17.15#keyBy)               | 📝                    |
 | [map](https://lodash.com/docs/4.17.15#map)                   | ❌                    |
-| [orderBy](https://lodash.com/docs/4.17.15#orderBy)           | 📝                    |
+| [orderBy](https://lodash.com/docs/4.17.15#orderBy)           | ✅                    |
 | [partition](https://lodash.com/docs/4.17.15#partition)       | 📝                    |
 | [reduce](https://lodash.com/docs/4.17.15#reduce)             | ❌                    |
 | [reduceRight](https://lodash.com/docs/4.17.15#reduceRight)   | ❌                    |
