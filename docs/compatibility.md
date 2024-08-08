@@ -199,7 +199,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isArrayBuffer](https://lodash.com/docs/4.17.15#isArrayBuffer)         | ❌                    |
 | [isArrayLike](https://lodash.com/docs/4.17.15#isArrayLike)             | ✅                    |
 | [isArrayLikeObject](https://lodash.com/docs/4.17.15#isArrayLikeObject) | ❌                    |
-| [isBoolean](https://lodash.com/docs/4.17.15#isBoolean)                 | ❌                    |
+| [isBoolean](https://lodash.com/docs/4.17.15#isBoolean)                 | ✅                    |
 | [isBuffer](https://lodash.com/docs/4.17.15#isBuffer)                   | ❌                    |
 | [isDate](https://lodash.com/docs/4.17.15#isDate)                       | ❌                    |
 | [isElement](https://lodash.com/docs/4.17.15#isElement)                 | ❌                    |
