@@ -1,7 +1,6 @@
 import { isKey } from '../_internal/isKey';
 import { toPath } from '../_internal/toPath';
 import { flattenDeep } from './flattenDeep';
-
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
  *
@@ -71,29 +70,31 @@ export function orderBy<T>(
     return key;
   };
 
-  const convertedKeys = keys.map(convertToPath);
+  const getValue = (key: string | string[], obj: any) => {
+    if (Array.isArray(key)) {
+      let value = obj;
 
-  return collection.slice().sort((a, b) => {
-    for (let i = 0; i < convertedKeys.length; i++) {
-      const key = convertedKeys[i];
-
-      let valueA: any = a;
-      let valueB: any = b;
-
-      if (Array.isArray(key)) {
-        // if the key is an array, it means it's a nested key
-        for (let j = 0; j < key.length; j++) {
-          const subKey = key[j];
-
-          valueA = valueA[subKey];
-          valueB = valueB[subKey];
-        }
-      } else {
-        valueA = valueA[key];
-        valueB = valueB[key];
+      for (let i = 0; i < key.length; i++) {
+        value = value[key[i]];
       }
 
-      const result = compareValues(valueA, valueB, String((orders as unknown[])[i]));
+      return value;
+    }
+
+    return obj[key];
+  };
+
+  keys = keys.map(convertToPath);
+
+  return collection.slice().sort((a, b) => {
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+
+      const valueA = getValue(key, a);
+      const valueB = getValue(key, b);
+      const order = String((orders as unknown[])[i]);
+
+      const result = compareValues(valueA, valueB, order);
 
       if (result !== 0) {
         return result;
