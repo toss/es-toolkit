@@ -1,6 +1,5 @@
 import { isKey } from '../_internal/isKey';
 import { toPath } from '../_internal/toPath';
-import { flattenDeep } from './flattenDeep';
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
  *
@@ -51,23 +50,34 @@ export function orderBy<T>(
 
   const compareValues = (a: T[keyof T], b: T[keyof T], order: string) => {
     if (a < b) {
-      return order === 'desc' ? 1 : -1;
+      return order === 'desc' ? 1 : -1; // Default is ascending order
     }
+
     if (a > b) {
       return order === 'desc' ? -1 : 1;
     }
+
     return 0;
   };
 
   const convertToPath = (key: string | string[]) => {
     if (Array.isArray(key)) {
-      const path = key.map(k => (isKey(k, collection[0]) ? k : toPath(k)));
-      return flattenDeep(path);
-    } else if (!isKey(key, collection[0])) {
-      return toPath(key);
+      const path = [];
+
+      for (let i = 0; i < key.length; i++) {
+        const k = key[i];
+
+        if (isKey(k, collection[0])) {
+          path.push(k);
+        } else {
+          path.push(...toPath(k));
+        }
+      }
+
+      return path;
     }
 
-    return key;
+    return isKey(key, collection[0]) ? key : toPath(key);
   };
 
   const getValue = (key: string | string[], obj: any) => {
@@ -86,21 +96,24 @@ export function orderBy<T>(
 
   keys = keys.map(convertToPath);
 
-  return collection.slice().sort((a, b) => {
+  const shallowCopiedCollection = collection.slice();
+  const orderedCollection = shallowCopiedCollection.sort((a, b) => {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
       const valueA = getValue(key, a);
       const valueB = getValue(key, b);
-      const order = String((orders as unknown[])[i]);
+      const order = String((orders as unknown[])[i]); // For Object('desc') case
 
-      const result = compareValues(valueA, valueB, order);
+      const comparedResult = compareValues(valueA, valueB, order);
 
-      if (result !== 0) {
-        return result;
+      if (comparedResult !== 0) {
+        return comparedResult;
       }
     }
 
     return 0;
   });
+
+  return orderedCollection;
 }
