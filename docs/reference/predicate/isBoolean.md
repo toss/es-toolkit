@@ -1,9 +1,6 @@
 # isBoolean
 
-Checks if the given value is boolean.
-
-This function tests whether the provided value is strictly `boolean`.
-It returns `true` if the value is `boolean`, and `false` otherwise.
+Checks if the given value is a boolean.
 
 This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `boolean`.
 

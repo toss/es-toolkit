@@ -1,9 +1,6 @@
 # isBoolean
 
-주어진 값이 불리언(boolean)인지 확인합니다.
-
-이 함수는 주어진 값이 `boolean` 타입인지 엄격하게 확인합니다.
-값이 `boolean`이면 `true`를 반환하고, 아니면 `false`를 반환해요.
+주어진 값이 불리언(boolean)인지 확인해요.
 
 TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 `boolean`인 타입으로 좁힐 수 있어요.
 
