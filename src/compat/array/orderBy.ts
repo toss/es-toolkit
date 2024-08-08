@@ -31,7 +31,7 @@ import { convertToPropertyName } from '../_internal/convertToPropertyName';
  * //   { user: 'fred', age: 40 },
  * // ]
  */
-export function orderBy<T>(
+export function orderBy<T extends object>(
   collection?: T[] | null,
   keys?: string | Array<string | string[]>,
   orders?: unknown | unknown[]
@@ -60,18 +60,18 @@ export function orderBy<T>(
     return 0;
   };
 
-  const getValue = (key: string | string[], obj: any) => {
+  const getValueByPropertyName = (key: string | string[], obj: T) => {
     if (Array.isArray(key)) {
-      let value = obj;
+      let value: object = obj;
 
       for (let i = 0; i < key.length; i++) {
-        value = value[key[i]];
+        value = value[key[i] as keyof typeof value];
       }
 
       return value;
     }
 
-    return obj[key];
+    return obj[key as keyof typeof obj];
   };
 
   keys = keys.map(convertToPropertyName);
@@ -81,8 +81,8 @@ export function orderBy<T>(
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
-      const valueA = getValue(key, a);
-      const valueB = getValue(key, b);
+      const valueA = getValueByPropertyName(key, a);
+      const valueB = getValueByPropertyName(key, b);
       const order = String((orders as unknown[])[i]); // For Object('desc') case
 
       const comparedResult = compareValues(valueA, valueB, order);
