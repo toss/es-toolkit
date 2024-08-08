@@ -18,7 +18,7 @@ const regexIsPlainProp = /^\w*$/;
  * isKey('a.b', { a: { b: 2 } });
  * // => false
  */
-export function isKey(value?: PropertyKey | boolean | null, object?: unknown): boolean {
+export function isKey(value?: PropertyKey | boolean | null | unknown[], object?: unknown): boolean {
   if (Array.isArray(value)) {
     return false;
   }
@@ -27,9 +27,7 @@ export function isKey(value?: PropertyKey | boolean | null, object?: unknown): b
     return true;
   }
 
-  if (typeof value === 'string') {
-    return regexIsPlainProp.test(value) || !regexIsDeepProp.test(value);
-  }
-
-  return object != null && Object.hasOwn(object, value);
+  return (
+    regexIsPlainProp.test(value) || !regexIsDeepProp.test(value) || (object != null && Object.hasOwn(object, value))
+  );
 }
