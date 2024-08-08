@@ -6,11 +6,11 @@ describe("camelCase", () => {
     expect(camelCase("camelCase")).toEqual("camelCase");
   });
 
-  it("should change space to underscore", async () => {
+  it("should change space to camel case", async () => {
     expect(camelCase("some whitespace")).toEqual("someWhitespace");
   });
 
-  it("should change hyphen to underscore", async () => {
+  it("should change hyphen to camel case", async () => {
     expect(camelCase("hyphen-text")).toEqual("hyphenText");
   });
 
