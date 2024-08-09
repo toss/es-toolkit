@@ -5,7 +5,7 @@ type Order = 'asc' | 'desc';
  *
  * This function can handle the following cases:
  * - If types of `a` and `b` are the same
- * - If types of `a` and `b` are not the same, but can convert to numbers(not NaN)
+ * - If types of `a` and `b` are not the same, but can convert to numbers(result is not NaN)
  * - If types of `a` and `b` are not the same, but one of them is a string and the other is a number
  *
  * If none of the above cases are met, it returns 0.
