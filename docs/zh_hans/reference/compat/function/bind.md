@@ -1,5 +1,10 @@
 # bind
 
+::: info
+此函数与 lodash 完全兼容。您可以在我们的[兼容性库](../../../compatibility.md)中找到它，`es-toolkit/compat`。
+:::
+
+
 创建一个调用 `func` 的函数，`thisArg` 绑定 `func` 函数中的 `this`，并且 `func` 函数会接收 `partials` 附加参数。
 
 `bind.placeholder` 的值默认是一个 `symbol`，可以用作附加的部分参数的占位符。
@@ -28,7 +33,7 @@ namespace bind {
 ## 示例
 
 ```typescript
-import { bind } from 'es-toolkit/function';
+import { bind } from 'es-toolkit/compat';
 
 function greet(greeting, punctuation) {
   return greeting + ' ' + this.user + punctuation;

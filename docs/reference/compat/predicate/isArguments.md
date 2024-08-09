@@ -1,5 +1,9 @@
 # isArguments
 
+::: info
+This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+:::
+
 Check if a value is an arguments object.
 
 It returns `true` if the value is an arguments object, and `false` otherwise.
@@ -9,7 +13,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isArguments(value?: unknown): value is IArguments;
+function isArguments(value: unknown): value is IArguments;
 ```
 
 ### Parameters

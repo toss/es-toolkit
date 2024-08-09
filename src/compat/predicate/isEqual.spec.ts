@@ -5,7 +5,6 @@ import { isEqual } from "es-toolkit/compat";
 import { args } from "../_internal/args";
 import { arrayViews } from "../_internal/arrayViews";
 
-
 describe('isEqual', () => {
   const symbol1 = Symbol ? Symbol('a') : true;
   const symbol2 = Symbol ? Symbol('b') : false;

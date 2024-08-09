@@ -1,5 +1,9 @@
 # isArray
 
+::: info
+This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+:::
+
 Checks if the given value is an array.
 
 This function tests whether the provided value is an array or not.

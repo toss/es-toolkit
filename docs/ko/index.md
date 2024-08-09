@@ -15,7 +15,7 @@ hero:
       link: /ko/reference/array/chunk
     - theme: alt
       text: 설치 및 사용
-      link: /ko/installation
+      link: /ko/usage
 
 features:
   - title: 빠른 성능

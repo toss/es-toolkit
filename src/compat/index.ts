@@ -32,25 +32,33 @@ export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
 export { orderBy } from './array/orderBy.ts';
+export { size } from './array/size.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../array/head.ts';
 
 export { ary } from './function/ary.ts';
+export { bind } from './function/bind.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
 export { property } from './object/property.ts';
 export { mapKeys } from './object/mapKeys.ts';
+export { mapValues } from './object/mapValues.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
+export { isArguments } from './predicate/isArguments.ts';
+export { isArrayLike } from './predicate/isArrayLike.ts';
 export { isSymbol } from './predicate/isSymbol.ts';
+export { isObjectLike } from './predicate/isObjectLike.ts';
+export { isBoolean } from './predicate/isBoolean.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
 export { matches } from './predicate/matches.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
+export { padStart } from './string/padStart.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
