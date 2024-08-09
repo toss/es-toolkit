@@ -44,6 +44,7 @@ export { mapKeys } from './object/mapKeys.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
+export { isBoolean } from './predicate/isBoolean.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
 export { matches } from './predicate/matches.ts';
