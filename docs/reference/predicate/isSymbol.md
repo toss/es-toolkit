@@ -26,7 +26,6 @@ import { isSymbol } from 'es-toolkit/predicate';
 isSymbol(Symbol('a')); // true
 isSymbol(Symbol.for('a')); // true
 isSymbol(Symbol.iterator); // true
-isSymbol(Object(Symbol())); // true
 
 isSymbol(null); // false
 isSymbol(undefined); // false

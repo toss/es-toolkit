@@ -9,7 +9,6 @@ describe('isSymbol', () => {
     expect(isSymbol(Symbol('a'))).toBe(true);
     expect(isSymbol(Symbol.for('a'))).toBe(true);
     expect(isSymbol(Symbol.iterator)).toBe(true);
-    expect(isSymbol(Object(Symbol()))).toBe(true);
   });
 
   it('returns `false` for values that are not symbols', () => {

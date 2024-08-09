@@ -7,7 +7,6 @@ describe('isSymbol', () => {
     isSymbolToolkit(Symbol('a'));
     isSymbolToolkit(Symbol.for('a'));
     isSymbolToolkit(Symbol.iterator);
-    isSymbolToolkit(Object(Symbol('a')));
     isSymbolToolkit('');
     isSymbolToolkit({});
     isSymbolToolkit(123);
@@ -16,7 +15,6 @@ describe('isSymbol', () => {
     isSymbolLodash(Symbol('a'));
     isSymbolLodash(Symbol.for('a'));
     isSymbolLodash(Symbol.iterator);
-    isSymbolLodash(Object(Symbol('a')));
     isSymbolLodash('');
     isSymbolLodash({});
     isSymbolLodash(123);
