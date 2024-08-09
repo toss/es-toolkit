@@ -1,5 +1,3 @@
-import { getTag } from './getTag';
-
 /**
  * Checks if `value` is classified as a `Symbol` primitive or object.
  *
@@ -13,7 +11,5 @@ import { getTag } from './getTag';
  * // => false
  */
 export function isSymbol(value?: unknown): value is symbol {
-  return (
-    typeof value === 'symbol' || (value != null && typeof value === 'object' && getTag(value) === '[object Symbol]')
-  );
+  return typeof value === 'symbol' || (value != null && value instanceof Symbol);
 }
