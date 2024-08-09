@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isArguments } from '../../predicate/isArguments';
+import { isArguments } from './isArguments';
 import { args } from '../_internal/args';
 import { stubFalse } from '../_internal/stubFalse';
 import { falsey } from '../_internal/falsey';

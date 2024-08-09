@@ -42,9 +42,13 @@ export { get } from './object/get.ts';
 export { set } from './object/set.ts';
 export { property } from './object/property.ts';
 export { mapKeys } from './object/mapKeys.ts';
+export { mapValues } from './object/mapValues.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
+export { isArguments } from './predicate/isArguments.ts';
+export { isArrayLike } from './predicate/isArrayLike.ts';
+export { isObjectLike } from './predicate/isObjectLike.ts';
 export { isBoolean } from './predicate/isBoolean.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
@@ -52,6 +56,7 @@ export { matches } from './predicate/matches.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
+export { padStart } from './string/padStart.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';

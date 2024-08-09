@@ -1,10 +1,9 @@
 /**
- * Checks if the given value is an object-like.
+ * Checks if the given value is object-like.
+ * 
+ * A value is object-like if its type is object and it is not null.
  *
- * This function tests whether the provided value is an object-like or not.
- * It returns `true` if the value is an object-like, and `false` otherwise.
- *
- * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object-like.
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object-like value.
  *
  * @template T - The type of value.
  * @param {T} value - The value to test if it is an object-like.
@@ -23,6 +22,6 @@
  * console.log(isObjectLike(value4)); // false
  */
 
-export function isObjectLike<T>(value: T): value is Extract<T, object> {
+export function isObjectLike(value: unknown): value is object {
   return typeof value === 'object' && value !== null;
 }

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isObjectLike } from '../../predicate/isObjectLike';
+import { isObjectLike } from './isObjectLike';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { symbol } from '../_internal/symbol';
