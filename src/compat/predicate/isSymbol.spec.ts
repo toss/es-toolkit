@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { isSymbol } from './isSymbol';
-import { falsey } from './falsey';
-import { stubFalse } from './stubFalse';
-import { args } from './args';
-import { slice } from './slice';
+import { falsey } from '../_internal/falsey';
+import { stubFalse } from '../_internal/stubFalse';
+import { args } from '../_internal/args';
+import { slice } from '../_internal/slice';
 
 describe('isSymbol', () => {
   const symbol = Symbol('a');
