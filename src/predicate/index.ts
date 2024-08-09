@@ -9,3 +9,4 @@ export { isFunction } from './isFunction.ts';
 export { isTypedArray } from './isTypedArray.ts';
 export { isPrimitive } from './isPrimitive.ts';
 export { isBoolean } from './isBoolean.ts';
+export { isSymbol } from './isSymbol.ts';

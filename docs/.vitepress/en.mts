@@ -170,6 +170,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isLength', link: '/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/reference/predicate/isPlainObject' },
             { text: 'isPrimitive', link: '/reference/predicate/isPrimitive' },
+            { text: 'isSymbol', link: '/reference/predicate/isSymbol' },
             { text: 'isMatch (compat)', link: '/reference/compat/predicate/isMatch' },
             { text: 'matches (compat)', link: '/reference/compat/predicate/matches' },
             { text: 'isNil', link: '/reference/predicate/isNil' },
