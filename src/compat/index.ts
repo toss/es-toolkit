@@ -55,6 +55,7 @@ export { matches } from './predicate/matches.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
+export { padStart } from './string/padStart.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
