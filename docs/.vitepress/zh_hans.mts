@@ -68,6 +68,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'intersection', link: '/zh_hans/reference/array/intersection' },
             { text: 'intersectionBy', link: '/zh_hans/reference/array/intersectionBy' },
             { text: 'intersectionWith', link: '/zh_hans/reference/array/intersectionWith' },
+            { text: 'isSubset', link: '/zh_hans/reference/array/isSubset' },
             { text: 'keyBy', link: '/zh_hans/reference/array/keyBy' },
             { text: 'minBy', link: '/zh_hans/reference/array/minBy' },
             { text: 'maxBy', link: '/zh_hans/reference/array/maxBy' },
