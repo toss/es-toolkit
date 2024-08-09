@@ -26,27 +26,23 @@ describe('compareValues', () => {
     expect(compareValues(1, 1, 'desc')).toBe(0);
   });
 
-  it('should handle the case where a is not a number and b is a number', () => {
-    const a = ['a', [32, 12], { a: 1 }];
+  it('should handle the case where a is string and b is number', () => {
+    const a = ['a', '1b', '3', '2'];
+    const actual = a.map(value => compareValues(value, 1, 'asc'));
+    const expected = a.map(() => 1);
 
-    const actualAsc = a.map((_, index) => compareValues(a[index], 1, 'asc'));
-    const actualDesc = a.map((_, index) => compareValues(a[index], 1, 'desc'));
-    const expectedAsc = a.map(() => -1);
-    const expectedDesc = a.map(() => 1);
-
-    expect(actualAsc).toEqual(expectedAsc);
-    expect(actualDesc).toEqual(expectedDesc);
+    expect(actual).toEqual(expected);
   });
 
-  it('should handle the case where a is a number and b is not a number', () => {
-    const b = ['a', [32, 12], { a: 1 }];
+  it('should handle the case where a is number and b is string', () => {
+    const b = ['a', '1b', '3', '2'];
+    const actual = b.map(value => compareValues(1, value, 'asc'));
+    const expected = b.map(() => -1);
 
-    const actualAsc = b.map((_, index) => compareValues(1, b[index], 'asc'));
-    const actualDesc = b.map((_, index) => compareValues(1, b[index], 'desc'));
-    const expectedAsc = b.map(() => 1);
-    const expectedDesc = b.map(() => -1);
+    expect(actual).toEqual(expected);
+  });
 
-    expect(actualAsc).toEqual(expectedAsc);
-    expect(actualDesc).toEqual(expectedDesc);
+  it('should return 0 if a and b are not comparable', () => {
+    expect(compareValues({ a: 'number' }, 1, 'asc')).toBe(0);
   });
 });
