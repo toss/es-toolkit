@@ -135,7 +135,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [invokeMap](https://lodash.com/docs/4.17.15#invokeMap)       | ❌                    |
 | [keyBy](https://lodash.com/docs/4.17.15#keyBy)               | 📝                    |
 | [map](https://lodash.com/docs/4.17.15#map)                   | ❌                    |
-| [orderBy](https://lodash.com/docs/4.17.15#orderBy)           | 📝                    |
+| [orderBy](https://lodash.com/docs/4.17.15#orderBy)           | ✅                    |
 | [partition](https://lodash.com/docs/4.17.15#partition)       | 📝                    |
 | [reduce](https://lodash.com/docs/4.17.15#reduce)             | ❌                    |
 | [reduceRight](https://lodash.com/docs/4.17.15#reduceRight)   | ❌                    |
@@ -226,7 +226,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌                    |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌                    |
 | [isString](https://lodash.com/docs/4.17.15#isString)                   | ❌                    |
-| [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ❌                    |
+| [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ✅                    |
 | [isTypedArray](https://lodash.com/docs/4.17.15#isTypedArray)           | ✅                    |
 | [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | ✅                    |
 | [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ❌                    |
