@@ -83,7 +83,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'sample', link: '/reference/array/sample' },
             { text: 'sampleSize', link: '/reference/array/sampleSize' },
             { text: 'shuffle', link: '/reference/array/shuffle' },
-            { text: 'size', link: '/reference/array/size' },
+            { text: 'size (compat)', link: '/reference/compat/array/size' },
             { text: 'take', link: '/reference/array/take' },
             { text: 'takeWhile', link: '/reference/array/takeWhile' },
             { text: 'takeRight', link: '/reference/array/takeRight' },

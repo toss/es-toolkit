@@ -78,6 +78,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'sample', link: '/zh_hans/reference/array/sample' },
             { text: 'sampleSize', link: '/zh_hans/reference/array/sampleSize' },
             { text: 'shuffle', link: '/zh_hans/reference/array/shuffle' },
+            { text: 'size (兼容性)', link: '/zh_hans/reference/compat/array/size' },
             { text: 'take', link: '/zh_hans/reference/array/take' },
             { text: 'takeWhile', link: '/zh_hans/reference/array/takeWhile' },
             { text: 'takeRight', link: '/zh_hans/reference/array/takeRight' },
