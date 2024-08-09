@@ -226,7 +226,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌                    |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌                    |
 | [isString](https://lodash.com/docs/4.17.15#isString)                   | ❌                    |
-| [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ❌                    |
+| [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ✅                    |
 | [isTypedArray](https://lodash.com/docs/4.17.15#isTypedArray)           | ✅                    |
 | [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | ✅                    |
 | [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ❌                    |
