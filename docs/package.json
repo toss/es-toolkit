@@ -2,10 +2,7 @@
   "name": "docs",
   "private": true,
   "devDependencies": {
-    "markdown-it-container": "^4.0.0",
-    "vitepress": "^1.2.2",
-    "vitepress-plugin-sandpack": "^1.1.4",
-    "vue": "^3.4.34"
+    "vitepress": "^1.2.2"
   },
   "scripts": {
     "docs:dev": "vitepress dev",
