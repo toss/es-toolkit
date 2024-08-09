@@ -133,6 +133,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'noop', link: '/ko/reference/function/noop' },
             { text: 'ary', link: '/reference/function/ary' },
             { text: 'unary', link: '/reference/function/unary' },
+            { text: 'bind (호환성)', link: '/reference/compat/function/unary' },
           ],
         },
         {

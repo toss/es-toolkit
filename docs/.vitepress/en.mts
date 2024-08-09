@@ -122,7 +122,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'noop', link: '/reference/function/noop' },
             { text: 'ary', link: '/reference/function/ary' },
             { text: 'unary', link: '/reference/function/unary' },
-            { text: 'bind', link: '/reference/function/bind' },
+            { text: 'bind (compat)', link: '/reference/compat/function/bind' },
           ],
         },
         {

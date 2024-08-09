@@ -7,4 +7,3 @@ export { throttle } from './throttle.ts';
 export { negate } from './negate.ts';
 export { ary } from './ary.ts';
 export { unary } from './unary.ts';
-export { bind } from './bind.ts';

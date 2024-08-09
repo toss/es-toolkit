@@ -35,6 +35,7 @@ export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../array/head.ts';
 
 export { ary } from './function/ary.ts';
+export { bind } from './function/bind.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
