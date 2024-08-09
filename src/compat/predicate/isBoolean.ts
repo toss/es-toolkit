@@ -1,4 +1,4 @@
-import { getTag } from "../_internal/getTag";
+import { getTag } from "../_internal/getTag.ts";
 
 
 /**

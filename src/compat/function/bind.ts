@@ -57,4 +57,5 @@ export function bind<F extends Function>(func: F, thisObj?: unknown, ...partialA
   return binded as any as F;
 }
 
-bind.placeholder = Symbol('bind.placeholder');
+const bindPlaceholder: unique symbol = Symbol('bind.placeholder');
+bind.placeholder = bindPlaceholder;
