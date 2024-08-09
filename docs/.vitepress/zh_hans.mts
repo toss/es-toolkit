@@ -118,7 +118,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'noop', link: '/zh_hans/reference/function/noop' },
             { text: 'ary', link: '/zh_hans/reference/function/ary' },
             { text: 'unary', link: '/zh_hans/reference/function/unary' },
-            { text: 'bind (兼容性)', link: '/zh_hans/reference/function/bind' },
+            { text: 'bind (兼容性)', link: '/zh_hans/reference/compat/function/bind' },
           ],
         },
         {
