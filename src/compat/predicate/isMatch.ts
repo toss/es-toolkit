@@ -43,8 +43,6 @@ export function isMatch(target: any, source: any): boolean {
         return true;
       }
 
-      source = source ?? {};
-
       const keys = Object.keys(source as any);
 
       if (target == null) {

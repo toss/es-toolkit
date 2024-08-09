@@ -63,6 +63,11 @@ describe('isEqual', () => {
     const obj1 = { a: 1, b: { c: 2 } };
     const obj2 = { a: 1, b: { c: 3 } };
     expect(isEqual(obj1, obj2)).toBe(false);
+
+    const obj3 = null;
+    const obj4 = { a: 1, b: { c: 3 } };
+
+    expect(isEqual(obj3, obj4)).toBe(false);
   });
 
   it('should return false for objects with different keys', () => {

@@ -2,6 +2,10 @@ import { describe, it, expect } from 'vitest';
 import { padStart } from './padStart';
 
 describe('padStart', () => {
+  it('should return the original string if no length and char is provided', () => {
+    expect(padStart('abc')).toBe('abc');
+  });
+
   it('should pad a string on the left side if it is shorter than the length', () => {
     expect(padStart('abc', 6)).toBe('   abc');
   });

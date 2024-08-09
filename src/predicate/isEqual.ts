@@ -195,10 +195,6 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
       }
 
       case objectTag: {
-        if (a === null || b === null) {
-          return true;
-        }
-
         const areEqualInstances =
           areObjectsEqual(a.constructor, b.constructor, stack) ||
           (isPlainObject(a) && isPlainObject(b));
