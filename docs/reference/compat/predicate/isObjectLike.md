@@ -1,5 +1,9 @@
 # isObjectLike
 
+::: info
+This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+:::
+
 Check if a value is an object-like.
 
 A value is object-like if its type is object and it is not null.

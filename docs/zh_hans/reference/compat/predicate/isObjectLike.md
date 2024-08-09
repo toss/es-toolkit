@@ -1,5 +1,9 @@
 # isObjectLike
 
+::: info
+此函数与 lodash 完全兼容。您可以在我们的[兼容性库](../../../compatibility.md)中找到它，`es-toolkit/compat`。
+:::
+
 检查一个值是否类似对象。
 
 如果一个值的类型是对象并且它不为 `null`，那么它就是类似对象的。

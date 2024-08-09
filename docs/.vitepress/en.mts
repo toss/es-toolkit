@@ -161,9 +161,9 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Predicates',
           items: [
-            { text: 'isArguments', link: '/reference/predicate/isArguments' },
+            { text: 'isArguments (compat)', link: '/reference/compat/predicate/isArguments' },
             { text: 'isArray (compat)', link: '/reference/compat/predicate/isArray' },
-            { text: 'isArrayLike', link: '/reference/predicate/isArrayLike' },
+            { text: 'isArrayLike (compat)', link: '/reference/predicate/isArrayLike' },
             { text: 'isBoolean', link: '/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/reference/predicate/isFunction' },
@@ -175,7 +175,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNil', link: '/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/reference/predicate/isNull' },
-            { text: 'isObjectLike', link: '/reference/predicate/isObjectLike' },
+            { text: 'isObjectLike (compat)', link: '/reference/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
           ],

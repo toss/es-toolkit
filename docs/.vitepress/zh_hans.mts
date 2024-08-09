@@ -156,9 +156,9 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '谓词',
           items: [
-            { text: 'isArguments', link: '/zh_hans/reference/predicate/isArguments' },
+            { text: 'isArguments (兼容性)', link: '/zh_hans/reference/predicate/isArguments' },
             { text: 'isArray (兼容性)', link: '/zh_hans/reference/compat/predicate/isArray' },
-            { text: 'isArrayLike', link: '/zh_hans/reference/predicate/isArrayLike' },
+            { text: 'isArrayLike (兼容性)', link: '/zh_hans/reference/predicate/isArrayLike' },
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/zh_hans/reference/predicate/isFunction' },
             { text: 'isLength', link: '/zh_hans/reference/predicate/isLength' },
@@ -169,7 +169,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNil', link: '/zh_hans/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/zh_hans/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/zh_hans/reference/predicate/isNull' },
-            { text: 'isObjectLike', link: '/zh_hans/reference/predicate/isObjectLike' },
+            { text: 'isObjectLike (兼容性)', link: '/zh_hans/reference/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/zh_hans/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/zh_hans/reference/predicate/isUndefined' },
           ],
