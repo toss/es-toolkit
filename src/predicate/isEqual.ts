@@ -68,7 +68,6 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
   }
 
   switch (aTag) {
-    case regexpTag:
     case stringTag:
       return a.toString() === b.toString();
 
@@ -196,8 +195,8 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
       }
 
       case objectTag: {
-        if (a == null || b == null) {
-          return a === b;
+        if (a === null || b === null) {
+          return true;
         }
 
         const areEqualInstances =

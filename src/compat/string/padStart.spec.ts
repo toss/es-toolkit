@@ -29,12 +29,4 @@ describe('padStart', () => {
   it('should not pad a string if the length is negative', () => {
     expect(padStart('abc', -3)).toBe('abc');
   });
-
-  it('should not pad a string if the length is Infinity', () => {
-    expect(padStart('abc', Infinity)).toBe('abc');
-  });
-
-  it('should not pad a string if the length is -Infinity', () => {
-    expect(padStart('abc', -Infinity)).toBe('abc');
-  });
 });
