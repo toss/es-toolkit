@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isBoolean } from '../../predicate/isBoolean';
+import { isBoolean } from './isBoolean';
 import { falsey } from '../_internal/falsey';
 import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';

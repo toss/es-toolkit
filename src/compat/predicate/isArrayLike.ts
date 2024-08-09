@@ -1,4 +1,4 @@
-import { isLength } from "./isLength.ts";
+import { isLength } from "../../predicate/isLength.ts";
 
 /**
  * Checks if `value` is array-like.

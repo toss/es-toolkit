@@ -1,5 +1,9 @@
 # isArrayLike
 
+::: info
+This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+:::
+
 Check if a value is an array-like object.
 
 An array-like object is an object that is not `null` or `undefined` or a function, and has a `length` property that is a valid length.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isArrayLike } from '../../predicate/isArrayLike';
+import { isArrayLike } from './isArrayLike';
 import { falsey } from '../_internal/falsey';
 import { args } from '../_internal/args';
 
@@ -20,8 +20,8 @@ describe('isArrayLike', () => {
     expect(actual).toEqual(expected);
 
     const slice = Array.prototype.slice;
-    const asyncFunc = async function () {};
-    const genFunc = function* () {};
+    const asyncFunc = async function () { };
+    const genFunc = function* () { };
     const symbol = Symbol ? Symbol('a') : undefined;
 
     expect(isArrayLike(true)).toBe(false);

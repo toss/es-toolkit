@@ -1,20 +1,21 @@
 # padStart
 
 Pads the start of a string with a given character until it reaches the specified length.
+
 If the length is less than or equal to the original string's length, or if the padding character is an empty string,
 the original string is returned unchanged.
 
 ## Signature
 
 ```typescript
-function padStart<T extends string>(str: T, length = 0, chars = ' '): string;
+function padStart(str: string, length = 0, chars = ' '): string;
 ```
 
 ## Parameters
 
-- `str`: the string to pad
-- `length`: the length of the resulting string
-- `char`: the character to pad the string with
+- `str` (`string`): The string to pad.
+- `length` (`number`): The length of the resulting string. Defaults to `0`.
+- `char` (`string`): The character to pad the string with. Defaults to `' '`.
 
 ## Returns
 
