@@ -1,3 +1,5 @@
+import { compareValues } from './_internal/compareValues';
+
 type Order = 'asc' | 'desc';
 
 /**
@@ -32,16 +34,6 @@ type Order = 'asc' | 'desc';
  * // ]
  */
 export function orderBy<T>(collection: T[], keys: Array<keyof T>, orders: Order[]): T[] {
-  const compareValues = (a: T[keyof T], b: T[keyof T], order: Order) => {
-    if (a < b) {
-      return order === 'asc' ? -1 : 1;
-    }
-    if (a > b) {
-      return order === 'asc' ? 1 : -1;
-    }
-    return 0;
-  };
-
   const effectiveOrders = keys.map((_, index) => orders[index] || orders[orders.length - 1]);
 
   return collection.slice().sort((a, b) => {
@@ -49,6 +41,7 @@ export function orderBy<T>(collection: T[], keys: Array<keyof T>, orders: Order[
       const key = keys[i];
       const order = effectiveOrders[i];
       const result = compareValues(a[key], b[key], order);
+
       if (result !== 0) {
         return result;
       }
