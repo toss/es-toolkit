@@ -16,7 +16,7 @@
  * const result = mapValues(obj, (value) => value * 2);
  * console.log(result); // { a: 2, b: 4 }
  */
-export function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>(
+export function mapValues<T extends object, K extends keyof T, V>(
   object: T,
   getNewValue: (value: T[K], key: K, object: T) => V
 ): Record<K, V> {

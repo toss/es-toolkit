@@ -38,18 +38,6 @@ chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
 // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
 ```
 
-## 사용해보기
-
-::: sandpack
-
-```ts index.ts
-import { chunk } from 'es-toolkit/array';
-
-console.log(chunk([1, 2, 3, 4, 5], 2));
-```
-
-:::
-
 ## Lodash 호환성
 
 `es-toolkit/compat`에서 `chunk`를 가져오면 lodash와 호환돼요.

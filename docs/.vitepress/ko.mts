@@ -91,7 +91,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'sample', link: '/ko/reference/array/sample' },
             { text: 'sampleSize', link: '/ko/reference/array/sampleSize' },
             { text: 'shuffle', link: '/ko/reference/array/shuffle' },
-            { text: 'size', link: '/ko/reference/array/size' },
+            { text: 'size (호환성)', link: '/ko/reference/compat/array/size' },
             { text: 'take', link: '/ko/reference/array/take' },
             { text: 'takeWhile', link: '/ko/reference/array/takeWhile' },
             { text: 'takeRight', link: '/ko/reference/array/takeRight' },
@@ -133,6 +133,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'noop', link: '/ko/reference/function/noop' },
             { text: 'ary', link: '/reference/function/ary' },
             { text: 'unary', link: '/reference/function/unary' },
+            { text: 'bind (호환성)', link: '/reference/compat/function/unary' },
           ],
         },
         {
@@ -171,9 +172,9 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '타입 가드',
           items: [
-            { text: 'isArguments', link: '/ko/reference/predicate/isArguments' },
+            { text: 'isArguments (호환성)', link: '/ko/reference/compat/predicate/isArguments' },
             { text: 'isArray (호환성)', link: '/ko/reference/compat/predicate/isArray' },
-            { text: 'isArrayLike', link: '/ko/reference/predicate/isArrayLike' },
+            { text: 'isArrayLike (호환성)', link: '/ko/reference/compat/predicate/isArrayLike' },
             { text: 'isBoolean', link: '/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/ko/reference/predicate/isFunction' },
@@ -185,7 +186,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNil', link: '/ko/reference/predicate/isNil' },
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
-            { text: 'isObjectLike', link: '/ko/reference/predicate/isObjectLike' },
+            { text: 'isObjectLike (호환성)', link: '/ko/reference/compat/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/ko/reference/predicate/isNull' },
             {
               text: 'isUndefined',
@@ -212,6 +213,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'capitalize', link: '/ko/reference/string/capitalize' },
             { text: 'startsWith (호환성)', link: '/ko/reference/compat/string/startsWith' },
             { text: 'endsWith (호환성)', link: '/ko/reference/compat/string/endsWith' },
+            { text: 'padStart (호환성)', link: '/ko/reference/compat/string/padStart' },
           ],
         },
       ],

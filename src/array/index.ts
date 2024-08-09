@@ -50,4 +50,3 @@ export { tail } from './tail.ts';
 export { toFilled } from './toFilled.ts';
 export { last } from './last.ts';
 export { initial } from './initial.ts';
-export { size } from './size.ts';

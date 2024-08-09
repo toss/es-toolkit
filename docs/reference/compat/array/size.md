@@ -1,10 +1,14 @@
 # size
 
+::: info
+This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+:::
+
 Returns the size of an array, string, or object.
 
 This function takes an array, string, or object and returns its size. For arrays and strings, it returns the number of elements or characters, respectively. For objects, it returns the number of enumerable properties.
 
-## Interface
+## Signature
 
 ```typescript
 function size<T>(value: T[] | object | string | Map<unknown, T> | Set<T> | null | undefined): number;
@@ -14,13 +18,9 @@ function size<T>(value: T[] | object | string | Map<unknown, T> | Set<T> | null 
 
 - `value` (`T`): The array, string, or object whose size is to be determined.
 
-### Return Value
+### Returns
 
 (`number`): The size of the input value.
-
-### Exceptions
-
-Throws an error if the input value is not an array, string, or object.
 
 ## Examples
 

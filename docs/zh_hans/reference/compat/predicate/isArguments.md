@@ -1,5 +1,9 @@
 # isArguments
 
+::: info
+此函数与 lodash 完全兼容。您可以在我们的[兼容性库](../../../compatibility.md)中找到它，`es-toolkit/compat`。
+:::
+
 检查一个值是否是 `arguments` 对象。
 
 如果该值是 `arguments` 对象，则返回 `true`，否则返回 `false`。

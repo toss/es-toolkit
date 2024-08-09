@@ -1,5 +1,9 @@
 # isArrayLike
 
+::: info
+此函数与 lodash 完全兼容。您可以在我们的[兼容性库](../../../compatibility.md)中找到它，`es-toolkit/compat`。
+:::
+
 检查一个值是否是类似数组的对象。
 
 类似数组的对象是一个既不是 `null` 或 `undefined` 也不是函数，并且具有有效 `length` 属性的对象。
