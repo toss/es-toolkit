@@ -8,3 +8,4 @@ export { flattenObject } from './flattenObject.ts';
 export { mapKeys } from './mapKeys.ts';
 export { mapValues } from './mapValues.ts';
 export { cloneDeep } from './cloneDeep.ts';
+export { merge } from './merge.ts';
