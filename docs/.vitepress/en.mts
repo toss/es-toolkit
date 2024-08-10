@@ -149,6 +149,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'flattenObject', link: '/reference/object/flattenObject' },
             { text: 'mapKeys', link: '/reference/object/mapKeys' },
             { text: 'mapValues', link: '/reference/object/mapValues' },
+            { text: 'merge', link: '/reference/object/merge' },
+            { text: 'toMerged', link: '/reference/object/toMerged' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },
             { text: 'pick', link: '/reference/object/pick' },
