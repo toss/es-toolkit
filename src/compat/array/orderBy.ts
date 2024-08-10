@@ -9,7 +9,7 @@ import { getPath } from '../_internal/getPath';
  * it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} collection - The array of objects to be sorted.
+ * @param {T[] | null} collection - The array of objects to be sorted.
  * @param {string | Array<string | string[]>} keys - An array of keys (property names or property paths) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
  * @returns {T[]} - The sorted array.
@@ -74,7 +74,7 @@ export function orderBy<T extends object>(
     return obj[key as keyof typeof obj];
   };
 
-  keys = keys.map(getPath);
+  keys = keys.map(key => getPath(key, collection[0]));
 
   const shallowCopiedCollection = collection.slice();
   const orderedCollection = shallowCopiedCollection.sort((a, b) => {
