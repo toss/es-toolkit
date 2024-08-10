@@ -6,11 +6,9 @@ import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
 
 describe('isSymbol', () => {
-  const symbol = Symbol('a');
-
   it('should return `true` for symbols', () => {
-    expect(isSymbol(symbol)).toBe(true);
-    expect(isSymbol(Object(symbol))).toBe(true);
+    expect(isSymbol(Symbol('a'))).toBe(true);
+    expect(isSymbol(Object(Symbol('a')))).toBe(true);
   });
 
   it('should return `false` for non-symbols', () => {
