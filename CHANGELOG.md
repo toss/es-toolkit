@@ -1,5 +1,12 @@
 # es-toolkit Changelog
 
+## Version v1.15.0
+
+Released on August 10th, 2024.
+
+- Added support for [merge](https://es-toolkit.slash.page/reference/object/merge.html), [mergeWith](https://es-toolkit.slash.page/reference/object/mergeWith.html), [toMerged](https://es-toolkit.slash.page/reference/object/toMerged.html), [isSymbol](https://es-toolkit.slash.page/reference/predicate/isSymbol.html), [pascalCase](https://es-toolkit.slash.page/reference/string/pascalCase.html).
+- Added compatibility tests with lodash for [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html).
+
 ## Version v1.14.0
 
 Released on August 9th, 2024.
