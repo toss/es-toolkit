@@ -150,6 +150,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'mapKeys', link: '/reference/object/mapKeys' },
             { text: 'mapValues', link: '/reference/object/mapValues' },
             { text: 'merge', link: '/reference/object/merge' },
+            { text: 'mergeWith', link: '/reference/object/mergeWith' },
             { text: 'toMerged', link: '/reference/object/toMerged' },
             { text: 'omit', link: '/reference/object/omit' },
             { text: 'omitBy', link: '/reference/object/omitBy' },

@@ -300,8 +300,8 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [keysIn](https://lodash.com/docs/4.17.15#keysIn)             | ❌                    |
 | [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ✅                    |
 | [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ✅                    |
-| [merge](https://lodash.com/docs/4.17.15#merge)               | ❌                    |
-| [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ❌                    |
+| [merge](https://lodash.com/docs/4.17.15#merge)               | ✅                    |
+| [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ✅                    |
 | [omit](https://lodash.com/docs/4.17.15#omit)                 | 📝                    |
 | [omitBy](https://lodash.com/docs/4.17.15#omitBy)             | 📝                    |
 | [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝                    |

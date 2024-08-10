@@ -47,8 +47,6 @@ describe('merge', () => {
 
     const actual = merge(object, source);
 
-    console.log(actual);
-
     expect(actual.bar.b).not.toBe(actual.foo.b);
     expect(actual.foo.b.c.d).toBe(actual.foo.b.c.d.foo.b.c.d);
   });
@@ -144,7 +142,7 @@ describe('merge', () => {
     expected = { 0: 1, 1: 2, 2: 3 };
 
     actual = merge({}, object1);
-    console.log(expected, actual.value);
+
     expect(isArguments(actual.value)).toBe(false);
     expect(actual.value).toEqual(expected);
   });

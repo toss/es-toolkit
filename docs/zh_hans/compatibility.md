@@ -301,8 +301,8 @@ chunk([1, 2, 3, 4], 0);
 | [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ✅       |
 | [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ✅       |
 | [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌       |
-| [merge](https://lodash.com/docs/4.17.15#merge)               | ❌       |
-| [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ❌       |
+| [merge](https://lodash.com/docs/4.17.15#merge)               | ✅       |
+| [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ✅       |
 | [omit](https://lodash.com/docs/4.17.15#omit)                 | 📝       |
 | [omitBy](https://lodash.com/docs/4.17.15#omitBy)             | 📝       |
 | [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝       |

@@ -1,9 +1,5 @@
-import { clone } from '../../object/clone.ts';
-import { isArguments } from '../predicate/isArguments.ts';
-import { isObjectLike } from '../predicate/isObjectLike.ts';
-import { isPlainObject } from '../predicate/isPlainObject.ts';
-import { isTypedArray } from '../predicate/isTypedArray.ts';
-import { cloneDeep } from './cloneDeep.ts';
+import { noop } from '../../function/noop.ts';
+import { mergeWith } from './mergeWith.ts';
 
 declare var Buffer:
   | {
@@ -237,73 +233,5 @@ export function merge<O, S1, S2, S3, S4>(
 export function merge(object: any, ...sources: any[]): any;
 
 export function merge(object: any, ...sources: any[]): any {
-  let result = object;
-
-  for (let i = 0; i < sources.length; i++) {
-    const source = sources[i];
-
-    result = mergeDeep(object, source, new Map());
-  }
-
-  return result;
-}
-
-function mergeDeep(object: any, source: any, stack: Map<any, any>) {
-  if (source == null || typeof source !== 'object') {
-    return object;
-  }
-
-  if (stack.has(source)) {
-    return clone(stack.get(source));
-  }
-
-  stack.set(source, object);
-
-  if (Array.isArray(source)) {
-    source = source.slice();
-    for (let i = 0; i < source.length; i++) {
-      source[i] = source[i] ?? undefined;
-    }
-  }
-
-  const sourceKeys = Object.keys(source);
-
-  for (let i = 0; i < sourceKeys.length; i++) {
-    const key = sourceKeys[i];
-
-    let sourceValue = source[key];
-    let objectValue = object[key];
-
-    if (isArguments(sourceValue)) {
-      sourceValue = { ...sourceValue };
-    }
-
-    if (isArguments(objectValue)) {
-      objectValue = { ...objectValue };
-    }
-
-    if (typeof Buffer !== 'undefined' && Buffer.isBuffer(sourceValue)) {
-      sourceValue = cloneDeep(sourceValue);
-    }
-
-    if (Array.isArray(sourceValue)) {
-      objectValue = typeof objectValue === 'object' ? Array.from(objectValue ?? []) : [];
-    }
-
-    if (Array.isArray(sourceValue)) {
-      object[key] = mergeDeep(objectValue, sourceValue, stack);
-    } else if (isObjectLike(objectValue) && isObjectLike(sourceValue)) {
-      object[key] = mergeDeep(objectValue, sourceValue, stack);
-    } else if (objectValue == null && Array.isArray(sourceValue)) {
-      object[key] = mergeDeep([], sourceValue, stack);
-    } else if (objectValue == null && isPlainObject(sourceValue)) {
-      object[key] = mergeDeep({}, sourceValue, stack);
-    } else if (objectValue == null && isTypedArray(sourceValue)) {
-      object[key] = cloneDeep(sourceValue);
-    } else if (objectValue === undefined || sourceValue !== undefined) {
-      object[key] = sourceValue;
-    }
-  }
-
-  return object;
+  return mergeWith(object, ...sources, noop);
 }

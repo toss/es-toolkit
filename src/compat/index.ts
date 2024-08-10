@@ -44,6 +44,7 @@ export { property } from './object/property.ts';
 export { mapKeys } from './object/mapKeys.ts';
 export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
+export { mergeWith } from './object/mergeWith.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
