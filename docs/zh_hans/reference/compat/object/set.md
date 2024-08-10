@@ -1,7 +1,10 @@
 # set
 
 ::: info
-此函数与 lodash 完全兼容。您可以在我们的[兼容性库](../../../compatibility.md)中找到它，`es-toolkit/compat`。
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+
 :::
 
 在对象的指定路径设置给定值。如果路径的任何部分不存在，将会创建它。
@@ -9,7 +12,11 @@
 ## 签名
 
 ```typescript
-function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: unknown): T
+function set<T extends object>(
+  obj: T,
+  path: string | number | symbol | Array<string | number | symbol>,
+  value: unknown
+): T;
 ```
 
 ### 参数

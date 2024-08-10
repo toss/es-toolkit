@@ -1,7 +1,9 @@
 # zipObjectDeep
 
 ::: info
-This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
 Creates a deeply nested object given arrays of paths and values.
@@ -13,7 +15,7 @@ Paths can be dot-separated strings or arrays of property names. If the `keys` ar
 ## Signature
 
 ```typescript
-function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V }
+function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
 ```
 
 ### Parameters
@@ -35,7 +37,10 @@ const values = [1, 2];
 const result = zipObjectDeep(paths, values);
 // result will be { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
 
-const paths = [['a', 'b', 'c'], ['d', 'e', 'f']];
+const paths = [
+  ['a', 'b', 'c'],
+  ['d', 'e', 'f'],
+];
 const values = [1, 2];
 const result = zipObjectDeep(paths, values);
 // result will be { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
@@ -49,6 +54,6 @@ const result = zipObjectDeep(paths, values);
 ## Performance Comparison
 
 |                   | [Bundle Size](../../../bundle-size.md) | [Performance](../../../performance.md) |
-| ----------------- | ----------------------------------- | ----------------------------------- |
-| es-toolkit/compat | 938 bytes (88% smaller)             | 1,102,767 times (25% slower)        |
-| lodash-es         | 7,338 bytes                         | 1,476,660 times                     |
+| ----------------- | -------------------------------------- | -------------------------------------- |
+| es-toolkit/compat | 938 bytes (88% smaller)                | 1,102,767 times (25% slower)           |
+| lodash-es         | 7,338 bytes                            | 1,476,660 times                        |
