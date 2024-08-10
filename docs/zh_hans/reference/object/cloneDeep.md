@@ -43,3 +43,19 @@ console.log(clonedNestedObj.a === nestedObj.a); // false
 console.log(clonedNestedObj.d === nestedObj.d); // false
 console.log(clonedNestedObj.d[2] === nestedObj.d[2]); // false
 ```
+
+## 演示
+
+::: sandpack
+
+```ts index.ts
+import { cloneDeep } from 'es-toolkit/object';
+
+const original = { a: { b: { c: 'deep' } }, d: [1, 2, { e: 'nested' }] };
+const cloned = cloneDeep(original);
+
+console.log(cloned);
+console.log(original !== cloned);
+```
+
+:::
