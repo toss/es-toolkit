@@ -1,5 +1,5 @@
-import { getWords } from './_internal/getWords';
-import { capitalize } from './capitalize';
+import { getWords } from './_internal/getWords.ts';
+import { capitalize } from './capitalize.ts';
 
 /**
  * Converts a string to Pascal case.
