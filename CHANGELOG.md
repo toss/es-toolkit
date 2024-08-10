@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.15.1
+
+Released on August 10th, 2024.
+
+- Disabled implicit conversion of values in [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html) for performance and simplicity.
+
 ## Version v1.15.0
 
 Released on August 10th, 2024.
