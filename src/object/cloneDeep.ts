@@ -1,11 +1,32 @@
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
+interface CloneRule {
+  /**
+   * Check if obj needs a custom clone
+   * @param {any} obj The object to check.
+   * @returns {boolean} if the object needs a custom clone or not.
+   */
+  check: (obj: any) => boolean
+  /**
+   * The function to clone the object.
+   * @param obj The object to clone.
+   * @returns The cloned object.
+   */
+  clone: (obj:any) => any
+}
+
+interface Options {
+  customRules?: CloneRule[]
+}
+
 /**
  * Creates a deep clone of the given object.
  *
  * @template T - The type of the object.
  * @param {T} obj - The object to clone.
+ * @param {Options} [options] - The options object.
+ * @param {CloneRule[]} [options.customRules] - custom cloning rules for customizing cloning behavior.
  * @returns {T} - A deep clone of the given object.
  *
  * @example
@@ -47,11 +68,19 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
  * console.log(clonedObj); // { a: 1, b: { c: 1 } }
  * console.log(clonedObj === obj); // false
  */
-export function cloneDeep<T>(obj: T): T {
-  return cloneDeepImpl(obj);
+export function cloneDeep<T>(obj: T,options?:Options): T {
+  return cloneDeepImpl(obj,undefined,options);
 }
 
-function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
+function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>(),options?:Options): T {
+  if (options?.customRules?.length) {
+    for (const rule of options.customRules) {
+      if (rule.check(obj)) {
+        return rule.clone(obj)
+      }
+    }
+  }
+
   if (isPrimitive(obj)) {
     return obj as T;
   }
@@ -65,7 +94,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     stack.set(obj, result);
 
     for (let i = 0; i < obj.length; i++) {
-      result[i] = cloneDeepImpl(obj[i], stack);
+      result[i] = cloneDeepImpl(obj[i], stack,options);
     }
 
     // For RegExpArrays
@@ -100,7 +129,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     stack.set(obj, result);
 
     for (const [key, value] of obj.entries()) {
-      result.set(key, cloneDeepImpl(value, stack));
+      result.set(key, cloneDeepImpl(value, stack,options));
     }
 
     return result as T;
@@ -111,7 +140,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     stack.set(obj, result);
 
     for (const value of obj.values()) {
-      result.add(cloneDeepImpl(value, stack));
+      result.add(cloneDeepImpl(value, stack,options));
     }
 
     return result as T;
@@ -130,7 +159,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     stack.set(obj, result);
 
     for (let i = 0; i < obj.length; i++) {
-      result[i] = cloneDeepImpl(obj[i], stack);
+      result[i] = cloneDeepImpl(obj[i], stack,options);
     }
 
     return result as T;
@@ -144,7 +173,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     const result = new DataView(obj.buffer.slice(0));
     stack.set(obj, result);
 
-    copyProperties(result, obj, stack);
+    copyProperties(result, obj, stack,options);
 
     return result as T;
   }
@@ -154,7 +183,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     const result = new File([obj], obj.name, { type: obj.type });
     stack.set(obj, result);
 
-    copyProperties(result, obj, stack);
+    copyProperties(result, obj, stack,options);
 
     return result as T;
   }
@@ -163,7 +192,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     const result = new Blob([obj], { type: obj.type });
     stack.set(obj, result);
 
-    copyProperties(result, obj, stack);
+    copyProperties(result, obj, stack,options);
 
     return result as T;
   }
@@ -177,7 +206,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     result.stack = obj.stack;
     result.cause = obj.cause;
 
-    copyProperties(result, obj, stack);
+    copyProperties(result, obj, stack,options);
 
     return result as T;
   }
@@ -186,7 +215,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     const result = {};
     stack.set(obj, result);
 
-    copyProperties(result, obj, stack);
+    copyProperties(result, obj, stack,options);
 
     return result as T;
   }
@@ -195,7 +224,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
 }
 
 // eslint-disable-next-line
-export function copyProperties(target: any, source: any, stack?: Map<any, any>): void {
+export function copyProperties(target: any, source: any, stack?: Map<any, any>,options?:Options): void {
   const keys = Object.keys(source);
 
   for (let i = 0; i < keys.length; i++) {
@@ -203,7 +232,7 @@ export function copyProperties(target: any, source: any, stack?: Map<any, any>):
     const descriptor = Object.getOwnPropertyDescriptor(source, key);
 
     if (descriptor?.writable || descriptor?.set) {
-      target[key] = cloneDeepImpl(source[key], stack);
+      target[key] = cloneDeepImpl(source[key], stack,options);
     }
   }
 }

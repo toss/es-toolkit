@@ -347,4 +347,30 @@ describe('cloneDeep', () => {
     expect(cloned).not.toBe(buffer);
     expect(cloned).toEqual(buffer);
   })
+
+  //-------------------------------------------------------------------------------------
+  // Custom Rules
+  //-------------------------------------------------------------------------------------
+  it('should work with custom rules', () => {
+    class MyClass {
+      a: number;
+      constructor(a: number) {
+        this.a = a;
+      }
+      doubleA() {
+        return this.a * 2;
+      }
+    }
+    const obj1 = {class1: new MyClass(1), baseObj: {a: 1, b: 2}};
+    const obj2 = cloneDeep(obj1,{customRules:[{
+      check: (value) => value instanceof MyClass,
+      clone: (value) => new MyClass(value.a)
+    }]})
+
+    expect(obj2).not.toBe(obj1);
+    expect(obj2.class1).not.toBe(obj1.class1);
+    expect(obj2.class1.a).toBe(obj1.class1.a);
+    expect(obj2.class1.doubleA()).toBe(obj1.class1.doubleA());
+    expect(obj2.baseObj).toEqual(obj1.baseObj);
+  });
 });
