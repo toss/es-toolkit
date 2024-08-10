@@ -3,50 +3,48 @@ import { isKey } from './isKey';
 
 describe('isKey', () => {
   it('should return `true` for property names', () => {
-    const properties = ['a', false, 1, null, undefined, -1.1, Symbol.iterator];
-    const actual = properties.map(value => isKey(value));
-    const expected = properties.map(() => true);
-
-    expect(actual).toEqual(expected);
+    expect(isKey('a')).toBe(true);
+    expect(isKey(false)).toBe(true);
+    expect(isKey(1)).toBe(true);
+    expect(isKey(null)).toBe(true);
+    expect(isKey(undefined)).toBe(true);
+    expect(isKey(-1.1)).toBe(true);
+    expect(isKey(Symbol.iterator)).toBe(true);
   });
 
   it('should return `false` for property paths', () => {
-    const properties = ['a.b', 'a[0]', 'a["b"]', "a['b']", 'a[0].b', 'a[0]["b"]', "a[0]['b']"];
-    const actual = properties.map(value => isKey(value));
-    const expected = properties.map(() => false);
-
-    expect(actual).toEqual(expected);
+    expect(isKey('a.b')).toBe(false);
+    expect(isKey('a[0]')).toBe(false);
+    expect(isKey('a["b"]')).toBe(false);
+    expect(isKey("a['b']")).toBe(false);
+    expect(isKey('a[0].b')).toBe(false);
+    expect(isKey('a[0]["b"]')).toBe(false);
+    expect(isKey("a[0]['b']")).toBe(false);
   });
 
   it('should return `true` for property paths that are in the object', () => {
-    const object = { 'a.b': 1, 'a[0]': 2, "a['b']": 3, 'a[0].b': 4, "a[0]['b']": 5 };
-    const properties = Object.keys(object);
-    const actual = properties.map(value => isKey(value, object));
-    const expected = properties.map(() => true);
-
-    expect(actual).toEqual(expected);
+    expect(isKey('a', { a: 1 })).toBe(true);
+    expect(isKey('a.b', { 'a.b': 2 })).toBe(true);
+    expect(isKey('a[0]', { 'a[0]': 3 })).toBe(true);
+    expect(isKey('a["b"]', { 'a["b"]': 4 })).toBe(true);
+    expect(isKey('a[0].b', { 'a[0].b': 5 })).toBe(true);
+    expect(isKey("a[0]['b']", { "a[0]['b']": 6 })).toBe(true);
   });
 
   it('should return `false` for arrays', () => {
-    const properties = [[], [1], [1, 2], [1, 2, 3]];
-    const actual = properties.map(value => isKey(value));
-    const expected = properties.map(() => false);
-
-    expect(actual).toEqual(expected);
+    expect(isKey([])).toBe(false);
+    expect(isKey([1])).toBe(false);
+    expect(isKey([1, 2])).toBe(false);
+    expect(isKey([1, 2, 3])).toBe(false);
   });
 
   it('should return true for empty string', () => {
-    const actual = isKey('');
-    const expected = true;
-
-    expect(actual).toEqual(expected);
+    expect(isKey('')).toBe(true);
   });
 
   it('should return true for non-word characters', () => {
-    const properties = ['^', '!', '@'];
-    const actual = properties.map(value => isKey(value));
-    const expected = properties.map(() => true);
-
-    expect(actual).toEqual(expected);
+    expect(isKey('^')).toBe(true);
+    expect(isKey('!')).toBe(true);
+    expect(isKey('@')).toBe(true);
   });
 });
