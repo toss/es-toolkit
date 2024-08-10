@@ -10,6 +10,8 @@ import { merge } from './merge.ts';
  * - If a property in the source object is an array or object and the corresponding property in the target object is also an array or object, they will be merged.
  * - If a property in the source object is undefined, it will not overwrite a defined property in the target object.
  *
+ * Note that this function does not mutate the target object.
+ *
  * @param {T} target - The target object to be cloned and merged into. This object is not modified directly.
  * @param {S} source - The source object whose properties will be merged into the cloned target object.
  * @returns {T & S} A new object with properties from the source object merged into a deep clone of the target object.

@@ -161,6 +161,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'mapKeys', link: '/ko/reference/object/mapKeys' },
             { text: 'mapValues', link: '/ko/reference/object/mapValues' },
             { text: 'merge', link: '/ko/reference/object/merge' },
+            { text: 'mergeWith', link: '/ko/reference/object/mergeWith' },
             { text: 'toMerged', link: '/ko/reference/object/toMerged' },
             { text: 'omit', link: '/ko/reference/object/omit' },
             { text: 'omitBy', link: '/ko/reference/object/omitBy' },
