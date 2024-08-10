@@ -32,7 +32,7 @@ describe('cloneDeep', () => {
 
     expect(cloned).toEqual(arr);
     expect(cloned).not.toBe(arr);
-  })
+  });
 
   it('should clone arrays with nested objects', () => {
     const arr = [{ a: 1 }, { b: 2 }, { c: 3 }];
@@ -337,7 +337,7 @@ describe('cloneDeep', () => {
     expect(cloned).not.toBe(view);
     expect(cloned.getInt8(0)).toBe(view.getInt8(0));
     expect(cloned.getInt8(1)).toBe(view.getInt8(1));
-  })
+  });
 
   it('should clone buffers', () => {
     const buffer = Buffer.from([1, 2, 3]);
@@ -346,7 +346,7 @@ describe('cloneDeep', () => {
 
     expect(cloned).not.toBe(buffer);
     expect(cloned).toEqual(buffer);
-  })
+  });
 
   //-------------------------------------------------------------------------------------
   // Custom Rules
@@ -361,11 +361,15 @@ describe('cloneDeep', () => {
         return this.a * 2;
       }
     }
-    const obj1 = {class1: new MyClass(1), baseObj: {a: 1, b: 2}};
-    const obj2 = cloneDeep(obj1,{customRules:[{
-      check: (value) => value instanceof MyClass,
-      clone: (value) => new MyClass(value.a)
-    }]})
+    const obj1 = { class1: new MyClass(1), baseObj: { a: 1, b: 2 } };
+    const obj2 = cloneDeep(obj1, {
+      customRules: [
+        {
+          check: value => value instanceof MyClass,
+          clone: value => new MyClass(value.a),
+        },
+      ],
+    });
 
     expect(obj2).not.toBe(obj1);
     expect(obj2.class1).not.toBe(obj1.class1);
