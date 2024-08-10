@@ -68,6 +68,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'intersection', link: '/zh_hans/reference/array/intersection' },
             { text: 'intersectionBy', link: '/zh_hans/reference/array/intersectionBy' },
             { text: 'intersectionWith', link: '/zh_hans/reference/array/intersectionWith' },
+            { text: 'isSubset', link: '/zh_hans/reference/array/isSubset' },
             { text: 'keyBy', link: '/zh_hans/reference/array/keyBy' },
             { text: 'minBy', link: '/zh_hans/reference/array/minBy' },
             { text: 'maxBy', link: '/zh_hans/reference/array/maxBy' },
@@ -117,7 +118,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'noop', link: '/zh_hans/reference/function/noop' },
             { text: 'ary', link: '/zh_hans/reference/function/ary' },
             { text: 'unary', link: '/zh_hans/reference/function/unary' },
-            { text: 'bind (兼容性)', link: '/zh_hans/reference/function/bind' },
+            { text: 'bind (兼容性)', link: '/zh_hans/reference/compat/function/bind' },
           ],
         },
         {
