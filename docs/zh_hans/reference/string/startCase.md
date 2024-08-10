@@ -1,24 +1,24 @@
 # startCase
 
-문자열을 각 단어의 첫 글자를 대문자로 변환해요.
+将字符串转换为 Start 大小写。
 
-스타트 표기법은 여러 단어로 구성된 식별자의 각 단어의 첫 글자를 대문자로 쓰고, 나머지 글자는 소문자로 쓰며, 단어를 공백( )으로 연결하는 명명 규칙입니다. 예를 들어 `Start Case`처럼 써요.
+Start 大小写是一种命名约定，其中标识符中每个单词的首字母大写，其余字母小写，单词之间用空格分隔，例如 `Start Case`。
 
-## 인터페이스
+## 签名
 
 ```typescript
 function startCase(str: string): string;
 ```
 
-### 파라미터
+### 参数
 
-- `str` (`string`): 각 단어의 첫 글자를 대문자로 변환할 문자열이에요.
+- `str` (`string`): 需要转换为 Start 大小写的字符串。
 
-### 반환 값
+### 返回值
 
-(`string`) 각 단어의 첫 글자가 대문자로 변환된 문자열이에요.
+(`string`) The string converted to start case.
 
-## 예시
+## 示例
 
 ```typescript
 import { startCase } from 'es-toolkit/string';
@@ -33,7 +33,7 @@ startCase('_-_-_-_'); // returns ''
 startCase('12abc 12ABC'); // returns '12 Abc 12 ABC'
 ```
 
-## 데모
+## 演示
 
 ::: sandpack
 

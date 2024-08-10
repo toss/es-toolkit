@@ -1,22 +1,22 @@
 # cloneDeep
 
-주어진 객체의 깊은 복사본을 생성합니다.
+주어진 객체을 깊이 복사해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function cloneDeep<T>(obj: T): T;
 ```
 
-### Parameters
+### 파라미터
 
 - `obj` (`T`): 복사할 객체예요.
 
-### Returns
+### 반환 값
 
 (`T`): 주어진 객체의 깊은 복사본이에요.
 
-## Examples
+## 예시
 
 ```typescript
 const num = 29;
@@ -43,3 +43,19 @@ console.log(clonedNestedObj.a === nestedObj.a); // false
 console.log(clonedNestedObj.d === nestedObj.d); // false
 console.log(clonedNestedObj.d[2] === nestedObj.d[2]); // false
 ```
+
+## 데모
+
+::: sandpack
+
+```ts index.ts
+import { cloneDeep } from 'es-toolkit/object';
+
+const original = { a: { b: { c: 'deep' } }, d: [1, 2, { e: 'nested' }] };
+const cloned = cloneDeep(original);
+
+console.log(cloned);
+console.log(original !== cloned);
+```
+
+:::
