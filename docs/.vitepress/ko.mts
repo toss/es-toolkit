@@ -187,7 +187,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isNotNil', link: '/ko/reference/predicate/isNotNil' },
             { text: 'isNull', link: '/ko/reference/predicate/isNull' },
             { text: 'isObjectLike (호환성)', link: '/ko/reference/compat/predicate/isObjectLike' },
-            { text: 'isTypedArray', link: '/ko/reference/predicate/isNull' },
+            { text: 'isTypedArray', link: '/ko/reference/predicate/isTypedArray' },
             {
               text: 'isUndefined',
               link: '/ko/reference/predicate/isUndefined',
