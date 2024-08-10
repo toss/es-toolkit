@@ -145,6 +145,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'flattenObject', link: '/zh_hans/reference/object/flattenObject' },
             { text: 'mapKeys', link: '/zh_hans/reference/object/mapKeys' },
             { text: 'mapValues', link: '/zh_hans/reference/object/mapValues' },
+            { text: 'merge', link: '/zh_hans/reference/object/merge' },
+            { text: 'toMerged', link: '/zh_hans/reference/object/toMerged' },
             { text: 'omit', link: '/zh_hans/reference/object/omit' },
             { text: 'omitBy', link: '/zh_hans/reference/object/omitBy' },
             { text: 'pick', link: '/zh_hans/reference/object/pick' },

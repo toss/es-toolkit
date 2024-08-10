@@ -33,7 +33,7 @@ export function isPlainObject(object?: unknown): boolean {
     return true;
   }
 
-  if (object.toString() !== '[object Object]') {
+  if (Object.prototype.toString.call(object) !== '[object Object]') {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const tag = object[Symbol.toStringTag];
