@@ -75,29 +75,22 @@ describe('orderBy', () => {
   });
 
   it('should order object has mixed value that is string and number', () => {
-    const data1 = [
-      { id: 1, value: 'a' },
-      { id: 2, value: 2 },
-      { id: 12, value: 1 },
-      { id: 5, value: 'b' },
-      { id: 4, value: 2 },
-      { id: 43, value: 'c' },
-      { id: 24, value: 3 },
-      { id: 3, value: '3a' },
-      { id: 6, value: '2a' },
-      { id: 7, value: '1cs' },
-    ];
-    const data2 = [
-      { id: 1, value: 'apple' },
-      { id: 2, value: 'banana' },
-      { id: 3, value: 'cherry' },
-      { id: 4, value: 10 },
-      { id: 5, value: 5 },
-      { id: 6, value: 'banana' },
-      { id: 7, value: 20 },
-    ];
-
-    const actual1 = orderBy(data1, ['value', 'id'], ['asc', 'asc']);
+    const actual1 = orderBy(
+      [
+        { id: 1, value: 'a' },
+        { id: 2, value: 2 },
+        { id: 12, value: 1 },
+        { id: 5, value: 'b' },
+        { id: 4, value: 2 },
+        { id: 43, value: 'c' },
+        { id: 24, value: 3 },
+        { id: 3, value: '3a' },
+        { id: 6, value: '2a' },
+        { id: 7, value: '1cs' },
+      ],
+      ['value', 'id'],
+      ['asc', 'asc']
+    );
     const expected1 = [
       { id: 12, value: 1 },
       { id: 7, value: '1cs' },
@@ -110,7 +103,20 @@ describe('orderBy', () => {
       { id: 5, value: 'b' },
       { id: 43, value: 'c' },
     ];
-    const actual2 = orderBy(data2, ['value', 'id'], ['asc', 'asc']);
+
+    const actual2 = orderBy(
+      [
+        { id: 1, value: 'apple' },
+        { id: 2, value: 'banana' },
+        { id: 3, value: 'cherry' },
+        { id: 4, value: 10 },
+        { id: 5, value: 5 },
+        { id: 6, value: 'banana' },
+        { id: 7, value: 20 },
+      ],
+      ['value', 'id'],
+      ['asc', 'asc']
+    );
     const expected2 = [
       { id: 5, value: 5 },
       { id: 4, value: 10 },
