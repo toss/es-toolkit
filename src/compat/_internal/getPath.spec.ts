@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { convertToPropertyName } from './convertToPropertyName';
+import { getPath } from './getPath';
 
-describe('convertToPropertyName function', () => {
+describe('getPath function', () => {
   it('should return a property name from a string', () => {
     const key = 'a';
-    const actual = convertToPropertyName(key);
+    const actual = getPath(key);
     const expected = key;
 
     expect(actual).toBe(expected);
@@ -12,7 +12,7 @@ describe('convertToPropertyName function', () => {
 
   it('should return an array of property names from a string', () => {
     const key = 'a.b.c';
-    const actual = convertToPropertyName(key);
+    const actual = getPath(key);
     const expected = ['a', 'b', 'c'];
 
     expect(actual).toEqual(expected);
@@ -20,7 +20,7 @@ describe('convertToPropertyName function', () => {
 
   it('should return an array of property names from a string array', () => {
     const key = ['a', 'b', 'c'];
-    const actual = convertToPropertyName(key);
+    const actual = getPath(key);
     const expected = key;
 
     expect(actual).toEqual(expected);
@@ -28,7 +28,7 @@ describe('convertToPropertyName function', () => {
 
   it('should return an array of property names from a string array with a nested string', () => {
     const key = ['a', 'b.c', 'd'];
-    const actual = convertToPropertyName(key);
+    const actual = getPath(key);
     const expected = ['a', 'b', 'c', 'd'];
 
     expect(actual).toEqual(expected);

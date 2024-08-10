@@ -1,4 +1,4 @@
-import { convertToPropertyName } from '../_internal/convertToPropertyName';
+import { getPath } from '../_internal/getPath';
 
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
@@ -60,7 +60,7 @@ export function orderBy<T extends object>(
     return 0;
   };
 
-  const getValueByPropertyName = (key: string | string[], obj: T) => {
+  const getValueByPath = (key: string | string[], obj: T) => {
     if (Array.isArray(key)) {
       let value: object = obj;
 
@@ -74,15 +74,15 @@ export function orderBy<T extends object>(
     return obj[key as keyof typeof obj];
   };
 
-  keys = keys.map(convertToPropertyName);
+  keys = keys.map(getPath);
 
   const shallowCopiedCollection = collection.slice();
   const orderedCollection = shallowCopiedCollection.sort((a, b) => {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
-      const valueA = getValueByPropertyName(key, a);
-      const valueB = getValueByPropertyName(key, b);
+      const valueA = getValueByPath(key, a);
+      const valueB = getValueByPath(key, b);
       const order = String((orders as unknown[])[i]); // For Object('desc') case
 
       const comparedResult = compareValues(valueA, valueB, order);

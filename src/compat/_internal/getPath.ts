@@ -2,11 +2,12 @@ import { isKey } from './isKey';
 import { toPath } from './toPath';
 
 /**
- * If the key is a deep key (or property path), convert it to a property name.
+ * Get the `path` (property name) from the `key` (property name or property path).
+ *
  * @param {string | string[]} key - The `key` (property name or property path) to convert.
  * @returns {string | string[]} The converted key (only property name).
  */
-export const convertToPropertyName = (key: string | string[]): string | string[] => {
+export function getPath(key: string | string[]): string | string[] {
   if (Array.isArray(key)) {
     const path = [];
 
@@ -24,4 +25,4 @@ export const convertToPropertyName = (key: string | string[]): string | string[]
   }
 
   return isKey(key) ? key : toPath(key);
-};
+}
