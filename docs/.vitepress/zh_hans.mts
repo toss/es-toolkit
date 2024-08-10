@@ -191,6 +191,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'snakeCase', link: '/zh_hans/reference/string/snakeCase' },
             { text: 'kebabCase', link: '/zh_hans/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/zh_hans/reference/string/lowerCase' },
+            { text: 'startCase', link: '/zh_hans/reference/string/startCase' },
+            { text: 'pascalCase', link: '/zh_hans/reference/string/pascalCase' },
             { text: 'capitalize', link: '/zh_hans/reference/string/capitalize' },
             { text: 'startsWith (兼容性)', link: '/zh_hans/reference/compat/string/startsWith' },
             { text: 'endsWith (兼容性)', link: '/zh_hans/reference/compat/string/endsWith' },

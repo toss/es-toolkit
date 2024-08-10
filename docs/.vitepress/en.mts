@@ -197,6 +197,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'kebabCase', link: '/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/reference/string/lowerCase' },
             { text: 'startCase', link: '/reference/string/startCase' },
+            { text: 'pascalCase', link: '/reference/string/pascalCase' },
             { text: 'capitalize', link: '/reference/string/capitalize' },
             { text: 'startsWith (compat)', link: '/reference/compat/string/startsWith' },
             { text: 'endsWith (compat)', link: '/reference/compat/string/endsWith' },

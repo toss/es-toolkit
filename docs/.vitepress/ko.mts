@@ -210,6 +210,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'kebabCase', link: '/ko/reference/string/kebabCase' },
             { text: 'lowerCase', link: '/ko/reference/string/lowerCase' },
             { text: 'startCase', link: '/ko/reference/string/startCase' },
+            { text: 'pascalCase', link: '/ko/reference/string/pascalCase' },
             { text: 'capitalize', link: '/ko/reference/string/capitalize' },
             { text: 'startsWith (호환성)', link: '/ko/reference/compat/string/startsWith' },
             { text: 'endsWith (호환성)', link: '/ko/reference/compat/string/endsWith' },
