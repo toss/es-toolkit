@@ -32,3 +32,15 @@ startCase('__abc__123__def__'); // returns 'Abc 123 Def'
 startCase('_-_-_-_'); // returns ''
 startCase('12abc 12ABC'); // returns '12 Abc 12 ABC'
 ```
+
+## 데모
+
+::: sandpack
+
+```ts index.ts
+import { startCase } from 'es-toolkit/string';
+
+console.log(startCase('startCase'));
+```
+
+:::

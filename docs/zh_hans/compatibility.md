@@ -135,7 +135,7 @@ chunk([1, 2, 3, 4], 0);
 | [invokeMap](https://lodash.com/docs/4.17.15#invokeMap)       | ❌       |
 | [keyBy](https://lodash.com/docs/4.17.15#keyBy)               | 📝       |
 | [map](https://lodash.com/docs/4.17.15#map)                   | ❌       |
-| [orderBy](https://lodash.com/docs/4.17.15#orderBy)           | 📝       |
+| [orderBy](https://lodash.com/docs/4.17.15#orderBy)           | ✅       |
 | [partition](https://lodash.com/docs/4.17.15#partition)       | 📝       |
 | [reduce](https://lodash.com/docs/4.17.15#reduce)             | ❌       |
 | [reduceRight](https://lodash.com/docs/4.17.15#reduceRight)   | ❌       |
@@ -226,7 +226,7 @@ chunk([1, 2, 3, 4], 0);
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌       |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌       |
 | [isString](https://lodash.com/docs/4.17.15#isString)                   | ❌       |
-| [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ❌       |
+| [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ✅       |
 | [isTypedArray](https://lodash.com/docs/4.17.15#isTypedArray)           | ✅       |
 | [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | ✅       |
 | [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ❌       |
@@ -301,8 +301,8 @@ chunk([1, 2, 3, 4], 0);
 | [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ✅       |
 | [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ✅       |
 | [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌       |
-| [merge](https://lodash.com/docs/4.17.15#merge)               | ❌       |
-| [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ❌       |
+| [merge](https://lodash.com/docs/4.17.15#merge)               | ✅       |
+| [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ✅       |
 | [omit](https://lodash.com/docs/4.17.15#omit)                 | 📝       |
 | [omitBy](https://lodash.com/docs/4.17.15#omitBy)             | 📝       |
 | [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝       |
