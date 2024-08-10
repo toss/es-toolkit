@@ -25,3 +25,11 @@ console.log(isPlainObject(null)); // false
 console.log(isPlainObject(Object.create(null))); // true
 console.log(Buffer.from('hello, world')); // false
 ```
+
+## 성능 비교
+
+|                   | [번들 사이즈](../../bundle-size.md) | [런타임 성능](../../performance.md) |
+| ----------------- | ----------------------------------- | ----------------------------------- |
+| es-toolkit        | 279 바이트 (82.4% 작음)             | 1,505,684 회 (1.70× 빠름)           |
+| es-toolkit/compat | 435 바이트 (72.5% 작음)             | 2,013,760 회 (2.28× 빠름)           |
+| lodash-es         | 1,586 바이트                        | 882,669 회                          |

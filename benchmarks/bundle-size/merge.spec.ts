@@ -1,19 +1,19 @@
 import { describe, expect, it } from 'vitest';
 import { getBundleSize } from './utils/getBundleSize';
 
-describe('camelCase bundle size', () => {
+describe('merge bundle size', () => {
   it('lodash-es', async () => {
-    const bundleSize = await getBundleSize('lodash-es', 'camelCase');
-    expect(bundleSize).toMatchInlineSnapshot(`7293`);
+    const bundleSize = await getBundleSize('lodash-es', 'merge');
+    expect(bundleSize).toMatchInlineSnapshot(`12483`);
   });
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'merge');
-    expect(bundleSize).toMatchInlineSnapshot(`252`);
+    expect(bundleSize).toMatchInlineSnapshot(`271`);
   });
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'merge');
-    expect(bundleSize).toMatchInlineSnapshot(`4256`);
+    expect(bundleSize).toMatchInlineSnapshot(`4381`);
   });
 });
