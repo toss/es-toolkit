@@ -1,7 +1,9 @@
 # matches
 
 ::: info
-This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
 Creates a function that performs a deep comparison between a given target and the source object.
@@ -21,7 +23,6 @@ function matches(source: unknown): (target: unknown) => boolean;
 ## Returns
 
 - (`(target: unknown) => boolean`): Returns a function that takes a target object and returns `true` if the target matches the source, otherwise `false`.
-
 
 ## Examples
 

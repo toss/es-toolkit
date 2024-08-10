@@ -1,5 +1,11 @@
 # isArrayLike
 
+::: info
+이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+
+`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+:::
+
 주어진 값이 유사 배열인지 확인해요.
 
 유사 배열 객체는 `null`이나 `undefined`나 함수가 아니며, `length` 프로퍼티가 유효한 길이인 객체에요.

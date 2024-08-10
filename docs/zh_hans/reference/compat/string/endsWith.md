@@ -1,7 +1,10 @@
 # endsWith
 
 ::: info
-此函数与 lodash 完全兼容。您可以在我们的[兼容性库](../../../compatibility.md)中找到它，`es-toolkit/compat`。
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+
 :::
 
 检查字符串是否在其末尾包含另一个字符串。
@@ -29,8 +32,8 @@ function endsWith(str: string, target: string, position: number = 0): string;
 ```typescript
 import { endsWith } from 'es-toolkit/compat';
 
-endsWith('fooBar', 'foo') // 返回 true
-endsWith('fooBar', 'Bar') // 返回 false
-endsWith('fooBar', 'abcdef') // 返回 false
-endsWith('fooBar', 'Bar', 3) // 返回 true
+endsWith('fooBar', 'foo'); // 返回 true
+endsWith('fooBar', 'Bar'); // 返回 false
+endsWith('fooBar', 'abcdef'); // 返回 false
+endsWith('fooBar', 'Bar', 3); // 返回 true
 ```

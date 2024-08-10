@@ -1,13 +1,14 @@
 # size
 
 ::: info
-This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
 返回数组、字符串或对象的大小。
 
 此函数接收一个数组、字符串或对象并返回其大小。对于数组和字符串，它分别返回元素或字符的数量。对于对象，它返回可枚举属性的数量。
-
 
 ## 签名
 
