@@ -27,19 +27,19 @@ describe('compareValues', () => {
   });
 
   it('should handle the case where a is string and b is number', () => {
-    const a = ['a', '1b', '3', '2'];
-    const actual = a.map(value => compareValues(value, 1, 'asc'));
-    const expected = a.map(() => 1);
-
-    expect(actual).toEqual(expected);
+    expect(compareValues('0', 1, 'asc')).toBe(-1);
+    expect(compareValues('a', 1, 'asc')).toBe(1);
+    expect(compareValues('1b', 1, 'asc')).toBe(1);
+    expect(compareValues('3', 1, 'asc')).toBe(1);
+    expect(compareValues('2', 1, 'asc')).toBe(1);
   });
 
   it('should handle the case where a is number and b is string', () => {
-    const b = ['a', '1b', '3', '2'];
-    const actual = b.map(value => compareValues(1, value, 'asc'));
-    const expected = b.map(() => -1);
-
-    expect(actual).toEqual(expected);
+    expect(compareValues(1, '0', 'asc')).toBe(1);
+    expect(compareValues(1, 'a', 'asc')).toBe(-1);
+    expect(compareValues(1, '1b', 'asc')).toBe(-1);
+    expect(compareValues(1, '3', 'asc')).toBe(-1);
+    expect(compareValues(1, '2', 'asc')).toBe(-1);
   });
 
   it('should return 0 if a and b are not comparable', () => {
