@@ -79,7 +79,7 @@ describe('bind', () => {
 
   it('should create a function with a `length` of `0`', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const fn = function (_a: unknown, _b: unknown, _c: unknown) { };
+    const fn = function (_a: unknown, _b: unknown, _c: unknown) {};
     let bound = bind(fn, {});
 
     expect(bound.length).toBe(0);
@@ -107,7 +107,7 @@ describe('bind', () => {
       return this;
     }
 
-    function Bar() { }
+    function Bar() {}
 
     const thisArg = { a: 1 };
     const boundFoo = bind(Foo, thisArg) as any;
@@ -173,7 +173,7 @@ describe('bind', () => {
 
   it('should not error when calling bound class constructors with the `new` operator', () => {
     const createCtor: any = function () {
-      return class A { };
+      return class A {};
     };
 
     const bound = bind(createCtor()) as any;

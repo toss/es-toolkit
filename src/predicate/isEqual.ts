@@ -1,12 +1,40 @@
+import {
+  argumentsTag,
+  arrayBufferTag,
+  arrayTag,
+  bigInt64ArrayTag,
+  bigUint64ArrayTag,
+  booleanTag,
+  dataViewTag,
+  dateTag,
+  errorTag,
+  float32ArrayTag,
+  float64ArrayTag,
+  functionTag,
+  int16ArrayTag,
+  int32ArrayTag,
+  int8ArrayTag,
+  mapTag,
+  numberTag,
+  objectTag,
+  regexpTag,
+  setTag,
+  stringTag,
+  symbolTag,
+  uint16ArrayTag,
+  uint32ArrayTag,
+  uint8ArrayTag,
+  uint8ClampedArrayTag,
+} from '../compat/_internal/tags.ts';
+import { getSymbols } from '../compat/_internal/getSymbols.ts';
+import { getTag } from '../compat/_internal/getTag.ts';
+import { isPlainObject } from './isPlainObject.ts';
 
-import { argumentsTag, arrayBufferTag, arrayTag, bigInt64ArrayTag, bigUint64ArrayTag, booleanTag, dataViewTag, dateTag, errorTag, float32ArrayTag, float64ArrayTag, functionTag, int16ArrayTag, int32ArrayTag, int8ArrayTag, mapTag, numberTag, objectTag, regexpTag, setTag, stringTag, symbolTag, uint16ArrayTag, uint32ArrayTag, uint8ArrayTag, uint8ClampedArrayTag } from "../compat/_internal/tags.ts";
-import { getSymbols } from "../compat/_internal/getSymbols.ts";
-import { getTag } from "../compat/_internal/getTag.ts";
-import { isPlainObject } from "./isPlainObject.ts";
-
-declare var Buffer: {
-  isBuffer: (a: any) => boolean;
-} | undefined;
+declare var Buffer:
+  | {
+      isBuffer: (a: any) => boolean;
+    }
+  | undefined;
 
 /**
  * Checks if two values are equal, including support for `Date`, `RegExp`, and deep object comparison.
@@ -75,7 +103,7 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
       const x = a.valueOf();
       const y = b.valueOf();
 
-      return x === y || Number.isNaN(x) && Number.isNaN(y);
+      return x === y || (Number.isNaN(x) && Number.isNaN(y));
     }
 
     case booleanTag:
@@ -132,7 +160,7 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
           const aValue = aValues[i];
           const index = bValues.findIndex(bValue => {
             return areObjectsEqual(aValue, bValue, stack);
-          })
+          });
 
           if (index === -1) {
             return false;
@@ -196,8 +224,7 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
 
       case objectTag: {
         const areEqualInstances =
-          areObjectsEqual(a.constructor, b.constructor, stack) ||
-          (isPlainObject(a) && isPlainObject(b));
+          areObjectsEqual(a.constructor, b.constructor, stack) || (isPlainObject(a) && isPlainObject(b));
 
         if (!areEqualInstances) {
           return false;
@@ -236,4 +263,3 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
     stack.delete(b);
   }
 }
-

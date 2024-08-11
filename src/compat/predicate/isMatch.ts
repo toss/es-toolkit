@@ -6,7 +6,7 @@ import { isSetMatch } from '../_internal/isSetMatch.ts';
 /**
  * Checks if the target matches the source by comparing their structures and values.
  * This function supports deep comparison for objects, arrays, maps, and sets.
- * 
+ *
  * @param {unknown} target - The target value to match against.
  * @param {unknown} source - The source value to match with.
  * @returns {boolean} - Returns `true` if the target matches the source, otherwise `false`.

@@ -7,11 +7,7 @@
 ## 签名
 
 ```typescript
-function flatMap<T, U, D extends number = 1>(
-  arr: T[],
-  iteratee: (item: T) => U,
-  depth?: D
-): Array<FlatArray<U[], D>>;
+function flatMap<T, U, D extends number = 1>(arr: T[], iteratee: (item: T) => U, depth?: D): Array<FlatArray<U[], D>>;
 ```
 
 ### 参数

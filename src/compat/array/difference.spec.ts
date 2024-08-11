@@ -1,13 +1,12 @@
-import { describe, expect, it } from "vitest";
-import { difference } from "./difference";
-import { LARGE_ARRAY_SIZE } from "../_internal/LARGE_ARRAY_SIZE";
-import { range } from "../../math/range";
+import { describe, expect, it } from 'vitest';
+import { difference } from './difference';
+import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
+import { range } from '../../math/range';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/difference-methods.spec.js#L1
  */
 describe('difference', () => {
-
   it(`should return the difference of two arrays`, () => {
     const actual = difference([2, 1], [2, 3]);
     expect(actual).toEqual([1]);
@@ -21,7 +20,7 @@ describe('difference', () => {
   it(`should treat \`-0\` as \`0\``, () => {
     const array = [-0, 0];
 
-    const actual = array.map((value) => difference(array, [value]));
+    const actual = array.map(value => difference(array, [value]));
 
     expect(actual).toEqual([[], []]);
 
@@ -49,7 +48,7 @@ describe('difference', () => {
   it(`should work with large arrays of \`-0\` as \`0\``, () => {
     const array = [-0, 0];
 
-    const actual = array.map((value) => {
+    const actual = array.map(value => {
       const largeArray = Array.from({ length: LARGE_ARRAY_SIZE }).map(() => value);
 
       return difference(array, largeArray);

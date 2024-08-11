@@ -8,7 +8,11 @@ import { ary as aryToolkit } from '../../function/ary.ts';
  * @param {number} n - The arity cap.
  * @returns {(...args: any[]) => ReturnType<F>} Returns the new capped function.
  */
-export function ary<F extends (...args: any[]) => any>(func: F, n: number = func.length, guard?: unknown): ((...args: any[]) => ReturnType<F>) {
+export function ary<F extends (...args: any[]) => any>(
+  func: F,
+  n: number = func.length,
+  guard?: unknown
+): (...args: any[]) => ReturnType<F> {
   if (guard) {
     n = func.length;
   }
@@ -18,4 +22,4 @@ export function ary<F extends (...args: any[]) => any>(func: F, n: number = func
   }
 
   return aryToolkit(func, n);
-};
+}

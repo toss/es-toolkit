@@ -78,7 +78,6 @@ export function cloneDeep<T>(obj: T): T {
       return result as T;
     }
 
-
     default: {
       return cloneDeepToolkit(obj);
     }

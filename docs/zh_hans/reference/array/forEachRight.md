@@ -29,9 +29,9 @@ const array = [1, 2, 3];
 const result: number[] = [];
 
 // 使用 `forEachRight` 函数迭代数组，并将每个元素添加到结果数组中。
-forEachRight(array,  (value) => {
+forEachRight(array, value => {
   result.push(value);
 });
 
-console.log(result) // Output: [3, 2, 1];
+console.log(result); // Output: [3, 2, 1];
 ```

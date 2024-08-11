@@ -4,20 +4,20 @@ import { get as getLodash } from 'lodash';
 
 describe('get with string', () => {
   bench('es-toolkit/get', () => {
-    getToolkit({ a: { b: 3 } }, 'a.b')
-  })
+    getToolkit({ a: { b: 3 } }, 'a.b');
+  });
 
   bench('lodash/get', () => {
-    getLodash({ a: { b: 3 } }, 'a.b')
-  })
-})
+    getLodash({ a: { b: 3 } }, 'a.b');
+  });
+});
 
 describe('get with string array', () => {
   bench('es-toolkit/get', () => {
-    getToolkit({ a: { b: 3 } }, ['a', 'b'])
-  })
+    getToolkit({ a: { b: 3 } }, ['a', 'b']);
+  });
 
   bench('lodash/get', () => {
-    getLodash({ a: { b: 3 } }, ['a', 'b'])
-  })
-})
+    getLodash({ a: { b: 3 } }, ['a', 'b']);
+  });
+});

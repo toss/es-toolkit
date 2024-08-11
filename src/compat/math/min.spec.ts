@@ -1,6 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { min } from "./min";
-
+import { describe, expect, it } from 'vitest';
+import { min } from './min';
 
 describe('min', () => {
   it('should return the largest value from a collection', () => {

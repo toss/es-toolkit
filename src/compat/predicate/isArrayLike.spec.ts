@@ -20,8 +20,8 @@ describe('isArrayLike', () => {
     expect(actual).toEqual(expected);
 
     const slice = Array.prototype.slice;
-    const asyncFunc = async function () { };
-    const genFunc = function* () { };
+    const asyncFunc = async function () {};
+    const genFunc = function* () {};
     const symbol = Symbol ? Symbol('a') : undefined;
 
     expect(isArrayLike(true)).toBe(false);

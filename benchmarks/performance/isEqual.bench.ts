@@ -28,7 +28,6 @@ import { isEqual as isEqualLodash } from 'lodash';
 //   });
 // });
 
-
 // describe('isEqual dates', () => {
 //   bench('es-toolkit/isEqual', () => {
 //     isEqualToolkit(new Date('2020-01-01'), new Date('2020-01-01'));
@@ -65,7 +64,7 @@ describe('isEqual objects', () => {
     isEqualLodash({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 3 } });
     isEqualLodash({ a: 1, b: 2 }, { a: 1, b: 2 });
   });
-})
+});
 
 // describe('isEqual arrays', () => {
 //   bench('es-toolkit/isEqual', () => {
@@ -78,5 +77,3 @@ describe('isEqual objects', () => {
 //     isEqualLodash([1, 2, 3], [1, 2, 4]);
 //   });
 // })
-
-

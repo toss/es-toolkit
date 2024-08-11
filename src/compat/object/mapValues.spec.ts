@@ -1,4 +1,3 @@
-
 import { describe, expect, it } from 'vitest';
 import { mapValues } from './mapValues';
 import { isEqual } from '../../predicate/isEqual';
@@ -6,7 +5,6 @@ import { isEqual } from '../../predicate/isEqual';
 describe('mapValues', () => {
   const array = [1, 2];
   const object = { a: 1, b: 2 };
-
 
   it('should map values in `object` to a new object', () => {
     const actual = mapValues(object, String);

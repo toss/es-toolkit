@@ -5,10 +5,7 @@ Creates a function that invokes func, with up to n arguments, ignoring any addit
 ## Signature
 
 ```typescript
-function ary<F extends (...args: any[]) => any>(
-  func: F,
-  n: number
-): (...args: any[]) => ReturnType<F>;
+function ary<F extends (...args: any[]) => any>(func: F, n: number): (...args: any[]) => ReturnType<F>;
 ```
 
 ### Parameters

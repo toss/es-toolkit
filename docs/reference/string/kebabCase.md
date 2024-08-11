@@ -1,30 +1,30 @@
- # kebabCase
+# kebabCase
 
- Converts a string to kebab case.
+Converts a string to kebab case.
 
- Kebab case is the naming convention in which each word is written in lowercase and separated by an dash (\-) character. For example, `kebab-case`.
+Kebab case is the naming convention in which each word is written in lowercase and separated by an dash (\-) character. For example, `kebab-case`.
 
- ## Signature
+## Signature
 
- ```typescript
- function kebabCase(str: string): string;
- ```
+```typescript
+function kebabCase(str: string): string;
+```
 
- ### Parameters
+### Parameters
 
- - `str` (`string`): The string that is to be changed to kebab case.
+- `str` (`string`): The string that is to be changed to kebab case.
 
- ### Returns
+### Returns
 
- (`string`) The converted string to kebab case.
+(`string`) The converted string to kebab case.
 
- ## Examples
+## Examples
 
- ```typescript
- import { kebabCase } from 'es-toolkit/string';
+```typescript
+import { kebabCase } from 'es-toolkit/string';
 
- kebabCase('camelCase'); // returns 'camel-case'
- kebabCase('some whitespace'); // returns 'some-whitespace'
- kebabCase('hyphen-text'); // returns 'hyphen-text'
- kebabCase('HTTPRequest'); // returns 'http-request'
- ```
+kebabCase('camelCase'); // returns 'camel-case'
+kebabCase('some whitespace'); // returns 'some-whitespace'
+kebabCase('hyphen-text'); // returns 'hyphen-text'
+kebabCase('HTTPRequest'); // returns 'http-request'
+```

@@ -5,7 +5,7 @@ Count the occurrences of each item in an array based on a `mapper` function.
 ## Signature
 
 ```typescript
-function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number>
+function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number>;
 ```
 
 ### Parameters
@@ -23,9 +23,8 @@ function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, numbe
 import { countBy } from 'es-toolkit/array';
 
 const array = [1, 2, 3, 4, 5, 6];
-const result = countBy(array, x => x % 2 === 0 ? 'even' : 'odd');
+const result = countBy(array, x => (x % 2 === 0 ? 'even' : 'odd'));
 
 console.log(result);
 // Output: { 'odd': 3, 'even': 3 }
 ```
-
