@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { padStart as padStartToolkit } from 'es-toolkit';
+import { padStart as padStartToolkit } from 'es-toolkit/compat';
 import { padStart as padStartLodash } from 'lodash';
 
 describe('padStart', () => {

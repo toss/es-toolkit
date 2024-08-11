@@ -66,6 +66,7 @@ export { matchesProperty } from './predicate/matchesProperty.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
+export { padEnd } from './string/padEnd.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
