@@ -227,6 +227,13 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (호환성)', link: '/ko/reference/compat/string/padStart' },
           ],
         },
+        {
+          text: '에러',
+          items: [
+            { text: 'AbortError', link: '/ko/reference/error/AbortError' },
+            { text: 'TimeoutError', link: '/ko/reference/error/TimeoutError' },
+          ],
+        },
       ],
     },
   ];

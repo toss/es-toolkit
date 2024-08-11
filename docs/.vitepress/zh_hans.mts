@@ -209,6 +209,13 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (兼容性)', link: '/zh_hans/reference/compat/string/padStart' },
           ],
         },
+        {
+          text: '错误',
+          items: [
+            { text: 'AbortError', link: '/zh_hans/reference/error/AbortError' },
+            { text: 'TimeoutError', link: '/zh_hans/reference/error/TimeoutError' },
+          ],
+        },
       ],
     },
   ];

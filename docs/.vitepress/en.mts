@@ -214,6 +214,13 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (compat)', link: '/reference/compat/string/padStart' },
           ],
         },
+        {
+          text: 'Errors',
+          items: [
+            { text: 'AbortError', link: '/reference/error/AbortError' },
+            { text: 'TimeoutError', link: '/reference/error/TimeoutError' },
+          ],
+        },
       ],
     },
   ];
