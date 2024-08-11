@@ -69,7 +69,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | ✅                    |
 | [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌                    |
 | [head](https://lodash.com/docs/4.17.15#head)                           | ✅                    |
-| [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ❌                    |
+| [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ✅                    |
 | [initial](https://lodash.com/docs/4.17.15#initial)                     | ✅                    |
 | [intersection](https://lodash.com/docs/4.17.15#intersection)           | 📝                    |
 | [intersectionBy](https://lodash.com/docs/4.17.15#intersectionBy)       | 📝                    |
