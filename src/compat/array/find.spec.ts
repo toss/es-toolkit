@@ -4,8 +4,6 @@ import { find } from './find';
 import { slice } from '../_internal/slice';
 
 describe('find', () => {
-  const array = [1, 2, 3, 4];
-
   const objects = [
     { a: 0, b: 0 },
     { a: 1, b: 1 },
@@ -41,6 +39,7 @@ describe('find', () => {
         // eslint-disable-next-line
         // @ts-ignore
         return find(value, { a: 3 });
+        // eslint-disable-next-line
       } catch (e) {}
     });
 
@@ -52,6 +51,7 @@ describe('find', () => {
     const array = ['a'];
 
     find(array, function () {
+      // eslint-disable-next-line
       args || (args = slice.call(arguments));
     });
 
@@ -69,6 +69,7 @@ describe('find', () => {
     const object = { a: 1 };
 
     find(object, function () {
+      // eslint-disable-next-line
       args || (args = slice.call(arguments));
     });
 
