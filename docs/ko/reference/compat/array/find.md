@@ -18,7 +18,7 @@
 ## 인터페이스
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: readonly T[]) => unknown): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
 function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
 function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
 function find<T>(arr: T[], doesMatch: string): T | undefined;
@@ -40,7 +40,7 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: string): 
 
   - 배열의 경우:
 
-    - **검사 함수** (`(item: T, index: number, arr: readonly T[]) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
+    - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
     - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
     - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
     - **프로퍼티 이름** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.

@@ -18,7 +18,7 @@ You can specify the condition in several ways:
 ## Signature
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: readonly T[]) => unknown): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
 function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
 function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
 function find<T>(arr: T[], doesMatch: string): T | undefined;
@@ -40,7 +40,7 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: string): 
 
   - For the first `find` overload with arrays:
 
-    - **Predicate function** (`(item: T, index: number, arr: readonly T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
+    - **Predicate function** (`(item: T, index: number, arr: T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
     - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
     - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
     - **Property name** (`string`): The name of the property to check for a truthy value.

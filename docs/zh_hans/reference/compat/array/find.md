@@ -1,9 +1,10 @@
 # find
 
 ::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+
 :::
 
 查找数组或对象中第一个符合指定条件的项。
@@ -18,7 +19,7 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 ## 签名
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: readonly T[]) => unknown): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
 function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
 function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
 function find<T>(arr: T[], doesMatch: string): T | undefined;
@@ -40,7 +41,7 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: string): 
 
   - 对于数组的 `find` 重载：
 
-    - **谓词函数** (`(item: T, index: number, arr: readonly T[]) => unknown`): 一个函数，接受项、其索引和数组，如果项符合条件则返回真值。
+    - **谓词函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个函数，接受项、其索引和数组，如果项符合条件则返回真值。
     - **部分对象** (`Partial<T>`): 指定要匹配的属性的部分对象。
     - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
     - **属性名称** (`string`): 要检查其真值的属性名称。
