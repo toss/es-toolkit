@@ -1,6 +1,8 @@
 # partialRight
 
-This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+Creates a function that invokes `func` with `partialArgs` appended to the arguments it receives.
+
+This method is like [partial](./partial.md), except that partially applied arguments are appended to the arguments it receives.
 
 The `partialRight.placeholder` value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
 
