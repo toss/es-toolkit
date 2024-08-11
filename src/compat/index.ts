@@ -28,6 +28,7 @@ export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { fill } from './array/fill.ts';
+export { find } from './array/find.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';

@@ -99,6 +99,7 @@ describe('matchesProperty', () => {
   });
 
   it('should return `false` when `object` is nullish', () => {
+    // eslint-disable-next-line
     const values = [, null, undefined];
     const expected = values.map(stubFalse);
 
@@ -108,6 +109,7 @@ describe('matchesProperty', () => {
       const actual = values.map((value, index) => {
         try {
           return index ? matches(value) : matches();
+          // eslint-disable-next-line
         } catch (e) {}
       });
 
@@ -116,6 +118,7 @@ describe('matchesProperty', () => {
   });
 
   it('should return `false` for deep paths when `object` is nullish', () => {
+    // eslint-disable-next-line
     const values = [, null, undefined];
     const expected = values.map(stubFalse);
 
@@ -125,6 +128,7 @@ describe('matchesProperty', () => {
       const actual = values.map((value, index) => {
         try {
           return index ? matches(value) : matches();
+          // eslint-disable-next-line
         } catch (e) {}
       });
 
@@ -358,6 +362,7 @@ describe('matchesProperty', () => {
     numberProto.b = undefined;
 
     try {
+      // eslint-disable-next-line
       var matches = matchesProperty('b', undefined);
       expect(matches(1)).toBe(true);
     } catch (e: any) {

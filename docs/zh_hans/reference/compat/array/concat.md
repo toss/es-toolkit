@@ -23,7 +23,7 @@ function concat<T>(...values: Array<T | T[]>): T[];
 
 (`T[]`): 一个包含所有输入值的新的扁平化数组。
 
-### 示例
+## 示例
 
 ```typescript
 // 连接单个值
