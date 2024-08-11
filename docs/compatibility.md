@@ -62,7 +62,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [dropRightWhile](https://lodash.com/docs/4.17.15#dropRightWhile)       | 📝                    |
 | [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | 📝                    |
 | [fill](https://lodash.com/docs/4.17.15#fill)                           | ✅                    |
-| [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ❌                    |
+| [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ✅                    |
 | [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌                    |
 | [flatten](https://lodash.com/docs/4.17.15#flatten)                     | ✅                    |
 | [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | ✅                    |
