@@ -24,7 +24,7 @@
  * greetFred('hi');
  * // => 'hi fred'
  */
-export function partial<F extends Function>(func: F, ...partialArgs: any[]): F {
+export function partial<F extends (...args: any[]) => any>(func: F, ...partialArgs: any[]): F {
   return function (this: any, ...providedArgs: any[]) {
     const args: any[] = [];
 

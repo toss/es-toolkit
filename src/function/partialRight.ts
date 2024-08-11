@@ -24,7 +24,7 @@
  * sayHelloTo('fred');
  * // => 'hello fred'
  */
-export function partialRight<F extends Function>(func: F, ...partialArgs: any[]): F {
+export function partialRight<F extends (...args: any[]) => any>(func: F, ...partialArgs: any[]): F {
   return function (this: any, ...providedArgs: any[]) {
     const placeholderLength = partialArgs.filter(arg => arg === partialRightPlaceholder).length;
     const rangeLength = Math.max(providedArgs.length - placeholderLength, 0);
