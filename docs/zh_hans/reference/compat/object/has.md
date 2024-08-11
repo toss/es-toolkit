@@ -16,7 +16,9 @@
 
 ## 签名
 
+```typescript
 function has(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+```
 
 ### 参数
 

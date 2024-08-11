@@ -18,7 +18,9 @@ or arguments object, even if the array or arguments object is sparse
 
 ## Signature
 
+```typescript
 function has(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+```
 
 ### Parameters
 
