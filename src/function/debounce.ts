@@ -56,7 +56,7 @@ export function debounce<F extends (...args: any[]) => void>(
     timeoutId = setTimeout(() => {
       func(...args);
       timeoutId = null;
-    }, debounceMs) ;
+    }, debounceMs);
   } as F & { cancel: () => void };
 
   const onAbort = function () {

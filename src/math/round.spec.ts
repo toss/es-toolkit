@@ -55,8 +55,6 @@ describe('round function', () => {
   it('handles edge cases where precision is not integer', () => {
     const value = 1.2345;
     const precision = 3.1;
-    expect(() => round(value, precision)).toThrow(
-      'Precision must be an integer.'
-    );
+    expect(() => round(value, precision)).toThrow('Precision must be an integer.');
   });
 });

@@ -3,7 +3,7 @@ import { isMatch } from './isMatch.ts';
 
 /**
  * Creates a function that performs a deep comparison between a given target and the source object.
- * 
+ *
  * @param {unknown} source - The source object to create the matcher from.
  * @returns {(target: unknown) => boolean} - Returns a function that takes a target object and returns `true` if the target matches the source, otherwise `false`.
  *

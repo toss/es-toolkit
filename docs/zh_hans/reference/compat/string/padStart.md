@@ -1,5 +1,12 @@
 # padStart
 
+::: info
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+
+:::
+
 在字符串的开头使用给定的字符进行填充，直到它达到指定的长度。
 
 如果指定的长度小于或等于原字符串的长度，或者填充字符为空字符串，则返回原字符串不变。
@@ -26,3 +33,4 @@ function padStart(str: string, length = 0, chars = ' '): string;
 padStart('hello', 10, 'a'); // 'aaaaahello'
 padStart('hello', 3, 'a'); // 'hello'
 padStart('hello', 5, ''); // 'hello'
+```

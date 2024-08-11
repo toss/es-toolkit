@@ -1,7 +1,9 @@
 # startsWith
 
 ::: info
-This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
 Checks if a string contains another string at the beginning of the string.
@@ -29,8 +31,8 @@ function startsWith(str: string, target: string, position: number = 0): string;
 ```typescript
 import { startsWith } from 'es-toolkit/string';
 
-startsWith('fooBar', 'foo') // returns true
-startsWith('fooBar', 'Bar') // returns false
-startsWith('fooBar', 'abcdef') // returns false
-startsWith('fooBar', 'Bar', 3) // returns true
+startsWith('fooBar', 'foo'); // returns true
+startsWith('fooBar', 'Bar'); // returns false
+startsWith('fooBar', 'abcdef'); // returns false
+startsWith('fooBar', 'Bar', 3); // returns true
 ```

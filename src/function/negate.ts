@@ -6,5 +6,5 @@
  * @returns {F} The new negated function, which negates the boolean result of `func`.
  */
 export function negate<F extends (...args: unknown[]) => boolean>(func: F): F {
-    return ((...args: any[]) => !func(...args)) as F;
+  return ((...args: any[]) => !func(...args)) as F;
 }

@@ -1,13 +1,11 @@
 {
   "name": "@es-toolkit/es-toolkit",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "exports": {
     ".": "./src/index.ts",
     "./compat": "./src/compat/index.ts"
   },
   "publish": {
-    "include": [
-      "./src/**/*.ts"
-    ]
+    "include": ["./src/**/*.ts"]
   }
 }

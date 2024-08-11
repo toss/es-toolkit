@@ -22,7 +22,7 @@ describe('isMatch', () => {
     }
 
     interface FooConstructor {
-      new(): Foo;
+      new (): Foo;
     }
 
     const Foo = function Foo(this: Foo) {
@@ -42,7 +42,7 @@ describe('isMatch', () => {
     }
 
     interface FooConstructor {
-      new(): Foo;
+      new (): Foo;
     }
 
     const Foo = function Foo(this: Foo) {
@@ -77,7 +77,7 @@ describe('isMatch', () => {
 
   it(`should compare functions by reference`, () => {
     const object1 = { a: noop };
-    const object2 = { a: () => { } };
+    const object2 = { a: () => {} };
     const object3 = { a: {} };
 
     expect(isMatch(object1, object1)).toBe(true);
@@ -86,16 +86,16 @@ describe('isMatch', () => {
   });
 
   it(`should work with a function for \`object\``, () => {
-    function Foo() { }
+    function Foo() {}
     Foo.a = { b: 2, c: 3 };
 
     expect(isMatch(Foo, { a: { b: 2 } })).toBe(true);
   });
 
   it(`should work with a function for \`source\``, () => {
-    function Foo() { }
+    function Foo() {}
     Foo.a = 1;
-    Foo.b = function () { };
+    Foo.b = function () {};
     Foo.c = 3;
 
     const objects = [{ a: 1 }, { a: 1, b: Foo.b, c: 3 }];
@@ -112,7 +112,7 @@ describe('isMatch', () => {
     }
 
     interface FooConstructor {
-      new(arg: Partial<Foo>): Foo;
+      new (arg: Partial<Foo>): Foo;
     }
 
     const Foo = function Foo(this: Foo, object: Partial<Foo>) {

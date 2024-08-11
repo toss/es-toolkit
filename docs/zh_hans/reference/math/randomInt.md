@@ -18,7 +18,7 @@ function randomInt(minimum: number, maximum: number): number;
 
 ### 返回值
 
-- (`number`):  指定范围内的随机整数。
+- (`number`): 指定范围内的随机整数。
 
 ## 示例
 

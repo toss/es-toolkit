@@ -1,10 +1,12 @@
 # matches
 
 ::: info
-이 함수는 [lodash와 완전히 호환](../../../compatibility.md)돼요. `es-toolkit/compat` 라이브러리에서 쓸 수 있어요.
+이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+
+`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-`source`의 모양 및 값과 일치하는지 확인하는 함수를 만들어요. 
+`source`의 모양 및 값과 일치하는지 확인하는 함수를 만들어요.
 객체, 배열, `Map`, `Set`과의 깊은 비교를 지원해요.
 
 이 함수의 동작은 [isMatch](./isMatch.md)와 동일하고, 호출하는 방법만 달라요.
@@ -22,7 +24,6 @@ function matches(source: unknown): (target: unknown) => boolean;
 ## 반환 값
 
 - (`(target: unknown) => boolean`): `source`의 모양 및 값과 일치하는지 확인하는 함수. `target`이 `source`과 일치하면 `true`, 아니면 `false`를 반환해요.
-
 
 ## 예시
 

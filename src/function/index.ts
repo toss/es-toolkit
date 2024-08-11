@@ -7,4 +7,6 @@ export { throttle } from './throttle.ts';
 export { negate } from './negate.ts';
 export { ary } from './ary.ts';
 export { unary } from './unary.ts';
+export { partial } from './partial.ts';
+export { partialRight } from './partialRight.ts';
 export { rest } from './rest.ts';

@@ -1,6 +1,6 @@
 /**
  * Checks if the given value is object-like.
- * 
+ *
  * A value is object-like if its type is object and it is not null.
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object-like value.

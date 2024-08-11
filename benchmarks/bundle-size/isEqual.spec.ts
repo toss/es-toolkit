@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { getBundleSize } from "./utils/getBundleSize"
+import { describe, expect, it } from 'vitest';
+import { getBundleSize } from './utils/getBundleSize';
 
 describe('isEqual bundle size', () => {
   it('lodash-es', async () => {
@@ -10,5 +10,5 @@ describe('isEqual bundle size', () => {
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'isEqual');
     expect(bundleSize).toMatchInlineSnapshot(`2930`);
-  })
+  });
 });

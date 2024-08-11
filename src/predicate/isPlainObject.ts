@@ -1,9 +1,9 @@
 /**
  * Checks if a given value is a plain object.
- * 
+ *
  * @param {object} object - The value to check.
  * @returns {boolean} - True if the value is a plain object, otherwise false.
- * 
+ *
  * @example
  * console.log(isPlainObject({})); // true
  * console.log(isPlainObject([])); // false

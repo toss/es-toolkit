@@ -13,5 +13,5 @@ export async function createPackageTarball() {
 
   return {
     path: tarballPath,
-  }
+  };
 }

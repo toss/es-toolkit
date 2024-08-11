@@ -10,16 +10,16 @@ describe('isArray', function () {
 
   it('returns false if value is not an array', () => {
     expect(isArray('abc')).toBe(false);
-    expect(isArray(() => { })).toBe(false);
+    expect(isArray(() => {})).toBe(false);
   });
 
   it('can be used with TypeScript as a type predicate', () => {
-    const arr1 = ['abc', () => { }, [1, 2, 3]];
+    const arr1 = ['abc', () => {}, [1, 2, 3]];
     const result1 = arr1.filter(isArray);
     expect(result1).toStrictEqual([[1, 2, 3]]);
     expectTypeOf(result1).toEqualTypeOf<any[][]>();
 
-    const arr2 = ['abc', () => { }, [1, 2, 3] as const];
+    const arr2 = ['abc', () => {}, [1, 2, 3] as const];
     const result2 = arr2.filter(isArray);
     expect(result2).toStrictEqual([[1, 2, 3]]);
   });

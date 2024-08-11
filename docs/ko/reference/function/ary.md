@@ -5,10 +5,7 @@
 ## 인터페이스
 
 ```typescript
-function ary<F extends (...args: any[]) => any>(
-  func: F,
-  n: number
-): (...args: any[]) => ReturnType<F>;
+function ary<F extends (...args: any[]) => any>(func: F, n: number): (...args: any[]) => ReturnType<F>;
 ```
 
 ### 파라미터

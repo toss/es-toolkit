@@ -8,7 +8,7 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',
       include: ['src/**/*'],
-      exclude: ['src/compat/_internal/**/*']
+      exclude: ['src/compat/_internal/**/*'],
     },
   },
 });

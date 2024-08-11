@@ -17,12 +17,12 @@
  */
 export function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number> {
   const result: Record<string, number> = {};
-  
+
   for (const item of arr) {
     const key = mapper(item);
-    
+
     result[key] = (result[key] ?? 0) + 1;
   }
-  
+
   return result;
 }

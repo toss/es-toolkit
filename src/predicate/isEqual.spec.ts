@@ -99,7 +99,7 @@ describe('isEqual', () => {
     const buffer2 = new Uint8Array([1, 2, 3]).buffer;
 
     expect(isEqual(buffer1, buffer2)).toBe(true);
-  })
+  });
 
   it('should return false for different array buffers', () => {
     const buffer1 = new Uint8Array([1, 2, 3]).buffer;
@@ -111,5 +111,5 @@ describe('isEqual', () => {
     const buffer4 = new Uint8Array([1, 2, 4]).buffer;
 
     expect(isEqual(buffer3, buffer4)).toBe(false);
-  })
+  });
 });

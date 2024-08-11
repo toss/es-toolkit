@@ -25,14 +25,14 @@ function flattenObject(object: object): Record<string, any>;
 const nestedObject = {
   a: {
     b: {
-      c: 1
-    }
+      c: 1,
+    },
   },
-  d: [2, 3]
+  d: [2, 3],
 };
 
 const flattened = flattenObject(nestedObject);
-console.log(flattened); 
+console.log(flattened);
 // 输出:
 // {
 //   'a.b.c': 1,

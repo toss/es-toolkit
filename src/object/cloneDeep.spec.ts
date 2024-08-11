@@ -32,7 +32,7 @@ describe('cloneDeep', () => {
 
     expect(cloned).toEqual(arr);
     expect(cloned).not.toBe(arr);
-  })
+  });
 
   it('should clone arrays with nested objects', () => {
     const arr = [{ a: 1 }, { b: 2 }, { c: 3 }];
@@ -337,7 +337,7 @@ describe('cloneDeep', () => {
     expect(cloned).not.toBe(view);
     expect(cloned.getInt8(0)).toBe(view.getInt8(0));
     expect(cloned.getInt8(1)).toBe(view.getInt8(1));
-  })
+  });
 
   it('should clone buffers', () => {
     const buffer = Buffer.from([1, 2, 3]);
@@ -346,5 +346,5 @@ describe('cloneDeep', () => {
 
     expect(cloned).not.toBe(buffer);
     expect(cloned).toEqual(buffer);
-  })
+  });
 });

@@ -7,6 +7,6 @@ import { ary } from './ary.ts';
  * @param {F} func - The function to cap arguments for.
  * @returns {(...args: any[]) => ReturnType<F>} Returns the new capped function.
  */
-export function unary<F extends (...args: any[]) => any>(func: F): ((...args: any[]) => ReturnType<F>) {
+export function unary<F extends (...args: any[]) => any>(func: F): (...args: any[]) => ReturnType<F> {
   return ary(func, 1);
-};
+}

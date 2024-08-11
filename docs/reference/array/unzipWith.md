@@ -15,7 +15,7 @@ function unzipWith<T, R>(target: T[][], iteratee: (...args: T[]) => R): R[];
 
 ### Returns
 
-(`R[]`): A new array of unzipped and transformed elements. 
+(`R[]`): A new array of unzipped and transformed elements.
 
 ## Examples
 

@@ -1,9 +1,9 @@
-import { describe, expect, it } from "vitest";
-import { noop } from "../../function/noop";
-import { stubFalse } from "../_internal/stubFalse";
-import { isEqual } from "es-toolkit/compat";
-import { args } from "../_internal/args";
-import { arrayViews } from "../_internal/arrayViews";
+import { describe, expect, it } from 'vitest';
+import { noop } from '../../function/noop';
+import { stubFalse } from '../_internal/stubFalse';
+import { isEqual } from 'es-toolkit/compat';
+import { args } from '../_internal/args';
+import { arrayViews } from '../_internal/arrayViews';
 
 describe('isEqual', () => {
   const symbol1 = Symbol ? Symbol('a') : true;
@@ -55,9 +55,9 @@ describe('isEqual', () => {
       [undefined, '', false],
     ];
 
-    const expected = pairs.map((pair) => pair[2]);
+    const expected = pairs.map(pair => pair[2]);
 
-    const actual = pairs.map((pair) => isEqual(pair[0], pair[1]));
+    const actual = pairs.map(pair => isEqual(pair[0], pair[1]));
 
     expect(actual).toEqual(expected);
   });
@@ -82,24 +82,8 @@ describe('isEqual', () => {
 
     expect(isEqual(array1, array2)).toBe(true);
 
-    array1 = [
-      Object(1),
-      false,
-      Object('a'),
-      /x/,
-      new Date(2012, 4, 23),
-      ['a', 'b', [Object('c')]],
-      { a: 1 },
-    ];
-    array2 = [
-      1,
-      Object(false),
-      'a',
-      /x/,
-      new Date(2012, 4, 23),
-      ['a', Object('b'), ['c']],
-      { a: 1 },
-    ];
+    array1 = [Object(1), false, Object('a'), /x/, new Date(2012, 4, 23), ['a', 'b', [Object('c')]], { a: 1 }];
+    array2 = [1, Object(false), 'a', /x/, new Date(2012, 4, 23), ['a', Object('b'), ['c']], { a: 1 }];
 
     expect(isEqual(array1, array2)).toBe(true);
 
@@ -127,7 +111,7 @@ describe('isEqual', () => {
       array1.some =
       array1.reduce =
       array1.reduceRight =
-      null;
+        null;
 
     array2.concat =
       array2.join =
@@ -138,7 +122,7 @@ describe('isEqual', () => {
       array2.sort =
       array2.splice =
       array2.unshift =
-      null;
+        null;
 
     expect(isEqual(array1, array2)).toBe(true);
 
@@ -447,7 +431,7 @@ describe('isEqual', () => {
   it('should treat `arguments` objects like `Object` objects', () => {
     const object = { 0: 1, 1: 2, 2: 3 };
 
-    function Foo() { }
+    function Foo() {}
     Foo.prototype = object;
 
     expect(isEqual(args, object)).toBe(true);
@@ -502,21 +486,12 @@ describe('isEqual', () => {
       // @ts-ignore
       const bufferC = globalThis[otherType] ? new ArrayBuffer(16) : 16;
 
-      return [
-        new CtorA(bufferA),
-        new CtorA(bufferA),
-        new CtorB(bufferB),
-        new CtorB(bufferC),
-      ];
+      return [new CtorA(bufferA), new CtorA(bufferA), new CtorB(bufferB), new CtorB(bufferC)];
     });
 
     const expected = pairs.map(() => [true, false, false]);
 
-    const actual = pairs.map((pair) => [
-      isEqual(pair[0], pair[1]),
-      isEqual(pair[0], pair[2]),
-      isEqual(pair[2], pair[3]),
-    ]);
+    const actual = pairs.map(pair => [isEqual(pair[0], pair[1]), isEqual(pair[0], pair[2]), isEqual(pair[2], pair[3])]);
 
     expect(actual).toEqual(expected);
   });
@@ -539,33 +514,23 @@ describe('isEqual', () => {
   });
 
   it('should compare error objects', () => {
-    const pairs = [
-      'Error',
-      'EvalError',
-      'RangeError',
-      'ReferenceError',
-      'SyntaxError',
-      'TypeError',
-      'URIError',
-    ].map((type, index, errorTypes) => {
-      const otherType = errorTypes[++index % errorTypes.length];
-      // eslint-disable-next-line
-      // @ts-ignore
-      const CtorA = globalThis[type];
-      // eslint-disable-next-line
-      // @ts-ignore
-      const CtorB = globalThis[otherType];
+    const pairs = ['Error', 'EvalError', 'RangeError', 'ReferenceError', 'SyntaxError', 'TypeError', 'URIError'].map(
+      (type, index, errorTypes) => {
+        const otherType = errorTypes[++index % errorTypes.length];
+        // eslint-disable-next-line
+        // @ts-ignore
+        const CtorA = globalThis[type];
+        // eslint-disable-next-line
+        // @ts-ignore
+        const CtorB = globalThis[otherType];
 
-      return [new CtorA('a'), new CtorA('a'), new CtorB('a'), new CtorB('b')];
-    });
+        return [new CtorA('a'), new CtorA('a'), new CtorB('a'), new CtorB('b')];
+      }
+    );
 
     const expected = pairs.map(() => [true, false, false]);
 
-    const actual = pairs.map((pair) => [
-      isEqual(pair[0], pair[1]),
-      isEqual(pair[0], pair[2]),
-      isEqual(pair[2], pair[3]),
-    ]);
+    const actual = pairs.map(pair => [isEqual(pair[0], pair[1]), isEqual(pair[0], pair[2]), isEqual(pair[2], pair[3])]);
 
     expect(actual).toEqual(expected);
   });
@@ -583,9 +548,7 @@ describe('isEqual', () => {
   });
 
   it('should compare maps', () => {
-    [
-      [new Map(), new Map()],
-    ].forEach((maps) => {
+    [[new Map(), new Map()]].forEach(maps => {
       const map1 = maps[0];
       const map2 = maps[1];
 
@@ -623,16 +586,13 @@ describe('isEqual', () => {
   });
 
   it('should compare promises by reference', () => {
-    [
-      [Promise.resolve(1), Promise.resolve(1)],
-    ].forEach(
-      (promises) => {
-        const promise1 = promises[0];
-        const promise2 = promises[1];
+    [[Promise.resolve(1), Promise.resolve(1)]].forEach(promises => {
+      const promise1 = promises[0];
+      const promise2 = promises[1];
 
-        expect(isEqual(promise1, promise2)).toBe(false);
-        expect(isEqual(promise1, promise1)).toBe(true);
-      });
+      expect(isEqual(promise1, promise2)).toBe(false);
+      expect(isEqual(promise1, promise1)).toBe(true);
+    });
   });
 
   it('should compare regexes', () => {
@@ -641,15 +601,11 @@ describe('isEqual', () => {
     expect(isEqual(/x/gi, /x/g)).toBe(false);
     expect(isEqual(/x/, /y/)).toBe(false);
 
-    expect(
-      isEqual(/x/g, { global: true, ignoreCase: false, multiline: false, source: 'x' })
-    ).toBe(false);
+    expect(isEqual(/x/g, { global: true, ignoreCase: false, multiline: false, source: 'x' })).toBe(false);
   });
 
   it('should compare sets', () => {
-    [
-      [new Set(), new Set()],
-    ].forEach((sets) => {
+    [[new Set(), new Set()]].forEach(sets => {
       const set1 = sets[0];
       const set2 = sets[1];
 
@@ -714,7 +670,6 @@ describe('isEqual', () => {
     expect(isEqual(object1, object2)).toBe(false);
   });
 
-
   it('should return `false` for objects with custom `toString` methods', () => {
     let primitive: any;
     const object = {
@@ -725,7 +680,7 @@ describe('isEqual', () => {
     const values = [true, null, 1, 'a', undefined];
     const expected = values.map(stubFalse);
 
-    const actual = values.map((value) => {
+    const actual = values.map(value => {
       primitive = value;
       return isEqual(object, value);
     });

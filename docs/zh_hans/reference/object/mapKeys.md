@@ -27,3 +27,11 @@ const obj = { a: 1, b: 2 };
 const result = mapKeys(obj, (value, key) => key + value);
 console.log(result); // { a1: 1, b2: 2 }
 ```
+
+## 性能对比
+
+|                   | [包大小](../../bundle-size.md) | [性能](../../performance.md) |
+| ----------------- | ------------------------------ | ---------------------------- |
+| es-toolkit        | 138 字节 (小 99.1%)            | 2,844,013 次 (快 11%)        |
+| es-toolkit/compat | 1,124 字节 (小 93.2%)          | 2,899,524 次 (快 13%)        |
+| lodash-es         | 16,649 字节                    | 2,559,949 次                 |

@@ -1,17 +1,17 @@
-import { describe, expect, it } from "vitest"
-import { flattenObject } from "./flattenObject";
+import { describe, expect, it } from 'vitest';
+import { flattenObject } from './flattenObject';
 
 describe('flattenObject', function () {
   it('flattens primitive values correctly', () => {
     const result1 = flattenObject({
       a: {
-        b: 'yay'
-      }
+        b: 'yay',
+      },
     });
 
     expect(result1).toEqual({
-      'a.b': 'yay'
-    })
+      'a.b': 'yay',
+    });
 
     const date = new Date();
 
@@ -24,9 +24,9 @@ describe('flattenObject', function () {
           null: null,
           undefined: undefined,
           date: date,
-        }
-      }
-    })
+        },
+      },
+    });
 
     expect(result2).toEqual({
       'a.b.string': 'hello world',
@@ -35,8 +35,8 @@ describe('flattenObject', function () {
       'a.b.null': null,
       'a.b.undefined': undefined,
       'a.b.date': date,
-    })
-  })
+    });
+  });
 
   it('flattens multiple keys', () => {
     const date = new Date();
@@ -49,58 +49,58 @@ describe('flattenObject', function () {
         d: {
           e: {
             f: {
-              g: date
-            }
-          }
-        }
+              g: date,
+            },
+          },
+        },
       },
       h: {
-        i: 'hi'
-      }
+        i: 'hi',
+      },
     });
 
     expect(result).toEqual({
       'a.b.c': 1,
       'a.d.e.f.g': date,
-      'h.i': 'hi'
-    })
-  })
+      'h.i': 'hi',
+    });
+  });
 
   it('handles empty objects correctly', () => {
     const result = flattenObject({
       a: {
-        b: {}
-      }
+        b: {},
+      },
     });
 
     expect(result).toEqual({
       'a.b': {},
-    })
-  })
+    });
+  });
 
   it('handles `Buffer`s correctly', () => {
     const result = flattenObject({
       a: {
-        b: Buffer.from('test')
-      }
+        b: Buffer.from('test'),
+      },
     });
 
     expect(result).toEqual({
-      'a.b': Buffer.from('test')
+      'a.b': Buffer.from('test'),
     });
-  })
+  });
 
   it('handles `TypedArray`s correctly', () => {
     const result = flattenObject({
       a: {
-        b: new Uint8Array([1, 2, 3, 4])
-      }
+        b: new Uint8Array([1, 2, 3, 4]),
+      },
     });
 
     expect(result).toEqual({
-      'a.b': new Uint8Array([1, 2, 3, 4])
+      'a.b': new Uint8Array([1, 2, 3, 4]),
     });
-  })
+  });
 
   it('handles numeric keys', () => {
     const result = flattenObject({
@@ -108,31 +108,31 @@ describe('flattenObject', function () {
         '02': {
           '03': 1,
         },
-      }
+      },
     });
 
     expect(result).toEqual({
       '01.02.03': 1,
     });
-  })
+  });
 
   it('handles mixed keys', () => {
     const result = flattenObject({
-      'a1': {
-        'b2': {
-          'c3': 1,
+      a1: {
+        b2: {
+          c3: 1,
         },
-      }
+      },
     });
 
     expect(result).toEqual({
-      'a1.b2.c3': 1
+      'a1.b2.c3': 1,
     });
-  })
+  });
 
   it('handles arrays', () => {
     const result = flattenObject({
-      a: [1, 2, 3]
+      a: [1, 2, 3],
     });
 
     expect(result).toEqual({
@@ -140,5 +140,5 @@ describe('flattenObject', function () {
       'a.1': 2,
       'a.2': 3,
     });
-  })
-})
+  });
+});
