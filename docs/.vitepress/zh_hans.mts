@@ -61,6 +61,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'fill', link: '/zh_hans/reference/array/fill' },
             { text: 'toFilled', link: '/zh_hans/reference/array/toFilled' },
             { text: 'find (兼容性)', link: '/zh_hans/reference/compat/array/find' },
+            { text: 'findIndex (兼容性)', link: '/zh_hans/reference/compat/array/findIndex' },
             { text: 'flatMap', link: '/zh_hans/reference/array/flatMap' },
             { text: 'flatten', link: '/zh_hans/reference/array/flatten' },
             { text: 'flattenDeep', link: '/zh_hans/reference/array/flattenDeep' },

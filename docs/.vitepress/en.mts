@@ -62,6 +62,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'fill', link: '/reference/array/fill' },
             { text: 'toFilled', link: '/reference/array/toFilled' },
             { text: 'find (compat)', link: '/reference/compat/array/find' },
+            { text: 'findIndex (compat)', link: '/reference/compat/array/findIndex' },
             { text: 'flatMap', link: '/reference/array/flatMap' },
             { text: 'flatten', link: '/reference/array/flatten' },
             { text: 'flattenDeep', link: '/reference/array/flattenDeep' },
