@@ -66,6 +66,7 @@ function sidebar(): DefaultTheme.Sidebar {
             },
             { text: 'fill', link: '/ko/reference/array/fill' },
             { text: 'toFilled', link: '/ko/reference/array/toFilled' },
+            { text: 'find (호환성)', link: '/ko/reference/compat/array/find' },
             { text: 'flatMap', link: '/ko/reference/array/flatMap' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },

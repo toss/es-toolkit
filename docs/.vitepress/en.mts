@@ -61,6 +61,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'dropRightWhile', link: '/reference/array/dropRightWhile' },
             { text: 'fill', link: '/reference/array/fill' },
             { text: 'toFilled', link: '/reference/array/toFilled' },
+            { text: 'find (compat)', link: '/reference/compat/array/find' },
             { text: 'flatMap', link: '/reference/array/flatMap' },
             { text: 'flatten', link: '/reference/array/flatten' },
             { text: 'flattenDeep', link: '/reference/array/flattenDeep' },

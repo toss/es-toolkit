@@ -1,0 +1,119 @@
+# find
+
+::: info
+이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+
+`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+:::
+
+배열이나 객체에서 조건에 맞는 첫 번째 값을 찾아요.
+
+조건은 여러 방법들로 명시할 수 있어요.
+
+- **검사 함수**: 각각의 요소에 대해서 검사하는 함수를 실행해요. 처음으로 `true`를 반환하게 하는 값이 선택돼요.
+- **부분 객체**: 주어진 객체와 부분적으로 일치하는 첫 번째 요소가 선택돼요.
+- **프로퍼티-값 쌍**: 해당 프로퍼티에 대해서 값이 일치하는 첫 번째 요소가 선택돼요.
+- **프로퍼티 이름**: 해당 프로퍼티에 대해서 참으로 평가되는 값을 가지는 첫 번째 요소가 선택돼요.
+
+## 인터페이스
+
+```typescript
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: readonly T[]) => unknown): T | undefined;
+function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
+function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
+function find<T>(arr: T[], doesMatch: string): T | undefined;
+
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
+```
+
+### 파라미터
+
+- `arr` (`T[]`) or `object` (`T`): 검색할 배열이나 객체.
+
+- `doesMatch`:
+
+  - 배열의 경우:
+
+    - **검사 함수** (`(item: T, index: number, arr: readonly T[]) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
+    - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
+    - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
+    - **프로퍼티 이름** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+
+  - 객체의 경우:
+    - **검사 함수** (`(item: T[keyof T], index: number, object: T) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
+    - **Partial value** (`Partial<T[keyof T]>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
+    - **Property-value pair** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
+    - **Property name** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+
+### 반환 값
+
+(`T | undefined`): 주어진 조건을 만족하는 첫 번째 요소. 없으면 `undefined`.
+
+## 예시
+
+### 배열의 경우
+
+```typescript
+import { find } from 'es-toolkit/compat';
+
+// 검사 함수를 쓰는 경우
+const items = [1, 2, 3, 4, 5];
+const result = find(items, item => item > 3);
+console.log(result); // 4
+
+// 부분 객체를 쓰는 경우
+const items = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const result = find(items, { name: 'Bob' });
+console.log(result); // { id: 2, name: 'Bob' }
+
+// 프로퍼티-값 쌍을 쓰는 경우
+const items = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const result = find(items, ['name', 'Alice']);
+console.log(result); // { id: 1, name: 'Alice' }
+
+// 프로퍼티 이름을 쓰는 경우
+const items = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const result = find(items, 'name');
+console.log(result); // { id: 1, name: 'Alice' }
+```
+
+### 객체의 경우
+
+```typescript
+import { find } from 'es-toolkit/compat';
+
+// 검사 함수를 쓰는 경우
+const obj = { a: 1, b: 2, c: 3 };
+const result = find(obj, item => item > 2);
+console.log(result); // 3
+
+// 부분 객체를 쓰는 경우
+const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
+const result = find(obj, { name: 'Bob' });
+console.log(result); // { id: 2, name: 'Bob' }
+
+// 프로퍼티-값 쌍을 쓰는 경우
+const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
+const result = find(items, ['name', 'Alice']);
+console.log(result); // { id: 1, name: 'Alice' }
+
+// 프로퍼티 이름을 쓰는 경우
+const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
+const result = find(obj, 'name');
+console.log(result); // { id: 1, name: 'Alice' }
+```
