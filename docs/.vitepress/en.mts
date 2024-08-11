@@ -123,6 +123,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'ary', link: '/reference/function/ary' },
             { text: 'unary', link: '/reference/function/unary' },
             { text: 'bind (compat)', link: '/reference/compat/function/bind' },
+            { text: 'partial', link: '/reference/function/partial' },
+            { text: 'partialRight', link: '/reference/function/partialRight' },
           ],
         },
         {
