@@ -22,6 +22,7 @@ describe('mapValues', () => {
 
   it('should use `_.identity` when `iteratee` is nullish', () => {
     const object = { a: 1, b: 2 };
+    // eslint-disable-next-line
     const values = [, null, undefined];
     const expected = values.map(() => [true, false]);
 

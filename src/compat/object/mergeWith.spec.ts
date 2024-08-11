@@ -35,6 +35,7 @@ describe('mergeWith', () => {
     mergeWith({}, { a: { b: 2 } }, function () {
       // eslint-disable-next-line
       // @ts-ignore
+      // eslint-disable-next-line
       actual = last(arguments);
     });
 

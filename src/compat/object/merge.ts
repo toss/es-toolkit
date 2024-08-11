@@ -1,12 +1,6 @@
 import { noop } from '../../function/noop.ts';
 import { mergeWith } from './mergeWith.ts';
 
-declare var Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
-
 /**
  * Merges the properties of one or more source objects into the target object.
  *
@@ -203,6 +197,7 @@ export function merge<O, S1, S2, S3, S4>(
  * The function can handle multiple source objects and will merge them all into the target object.
  *
  * @param {any} any - The target object into which the source object properties will be merged. This object is modified in place.
+ * @param object
  * @param {any[]} sources - The source objects whose properties will be merged into the target object.
  * @returns {any} The updated target object with properties from the source object(s) merged in.
  *

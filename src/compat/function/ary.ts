@@ -5,6 +5,7 @@ import { ary as aryToolkit } from '../../function/ary.ts';
  *
  * @template F - The type of the function.
  * @param {F} func - The function to cap arguments for.
+ * @param guard
  * @param {number} n - The arity cap.
  * @returns {(...args: any[]) => ReturnType<F>} Returns the new capped function.
  */

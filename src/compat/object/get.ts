@@ -309,7 +309,7 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
   let index;
 
   for (index = 0; index < resolvedPath.length && current != null; index++) {
-    let key = toKey(resolvedPath[index]);
+    const key = toKey(resolvedPath[index]);
 
     current = current[key];
   }

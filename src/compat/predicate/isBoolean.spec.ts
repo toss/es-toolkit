@@ -16,7 +16,7 @@ describe('isBoolean', () => {
   it('should return `false` for non-booleans', () => {
     const expected = falsey.map(value => value === false);
 
-    const actual = falsey.map((value, index) => isBoolean(value));
+    const actual = falsey.map(value => isBoolean(value));
 
     expect(actual).toEqual(expected);
 

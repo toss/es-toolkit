@@ -176,6 +176,7 @@ describe('has', () => {
   });
 
   it(`should return \`false\` for nullish values of nested objects`, () => {
+    // eslint-disable-next-line
     const values = [, null, undefined];
     const expected = values.map(stubFalse);
 

@@ -5,7 +5,7 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 import { cloneDeep } from './cloneDeep.ts';
 
-declare var Buffer:
+declare let Buffer:
   | {
       isBuffer: (a: any) => boolean;
     }
@@ -33,6 +33,7 @@ declare var Buffer:
  *
  * @param {T} target - The target object into which the source object properties will be merged. This object is modified in place.
  * @param {S} source - The first source object whose properties will be merged into the target object.
+ * @param merge
  * @returns {T & S} The updated target object with properties from the source object(s) merged in.
  *
  * @template T - Type of the target object.
@@ -89,6 +90,7 @@ export function mergeWith<T, S>(
  * @param {O} object - The target object into which the source object properties will be merged. This object is modified in place.
  * @param {S1} source1 - The first source object to be merged into the target object.
  * @param {S2} source2 - The second source object to be merged into the target object.
+ * @param merge
  * @returns {O & S1 & S2} The updated target object with properties from the source objects merged in.
  *
  * @template O - Type of the target object.
@@ -148,6 +150,7 @@ export function mergeWith<O, S1, S2>(
  * @param {S1} source1 - The first source object whose properties will be merged into the target object.
  * @param {S2} source2 - The second source object whose properties will be merged into the target object.
  * @param {S3} source3 - The third source object whose properties will be merged into the target object.
+ * @param merge
  * @returns {O & S1 & S2 & S3} The updated target object with properties from the source object(s) merged in.
  *
  * @template O - Type of the target object.
@@ -210,6 +213,7 @@ export function mergeWith<O, S1, S2, S3>(
  * @param {S2} source2 - The second source object whose properties will be merged into the target object.
  * @param {S3} source3 - The third source object whose properties will be merged into the target object.
  * @param {S4} source4 - The fourth source object whose properties will be merged into the target object.
+ * @param merge
  * @returns {O & S1 & S2 & S3 & S4} The updated target object with properties from the source object(s) merged in.
  *
  * @template O - Type of the target object.
@@ -271,6 +275,8 @@ export function mergeWith<O, S1, S2, S3, S4>(
  *
  * @param {any} any - The target object into which the source object properties will be merged. This object is modified in place.
  * @param {any[]} sources - The source objects whose properties will be merged into the target object.
+ * @param object
+ * @param {...any} otherArgs
  * @returns {any} The updated target object with properties from the source object(s) merged in.
  *
  * @example
@@ -374,8 +380,6 @@ function mergeWithDeep(
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
     } else if (isObjectLike(targetValue) && isObjectLike(sourceValue)) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
-    } else if (targetValue == null && Array.isArray(sourceValue)) {
-      target[key] = mergeWithDeep([], sourceValue, merge, stack);
     } else if (targetValue == null && isPlainObject(sourceValue)) {
       target[key] = mergeWithDeep({}, sourceValue, merge, stack);
     } else if (targetValue == null && isTypedArray(sourceValue)) {

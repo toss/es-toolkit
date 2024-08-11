@@ -415,12 +415,16 @@ describe('isEqual', () => {
 
   it('should compare `arguments` objects', () => {
     const args1 = (function () {
+      // eslint-disable-next-line
       return arguments;
     })();
     const args2 = (function () {
+      // eslint-disable-next-line
       return arguments;
     })();
+    // eslint-disable-next-line
     const args3 = (function (..._: any[]) {
+      // eslint-disable-next-line
       return arguments;
     })(1, 2);
 
@@ -510,7 +514,7 @@ describe('isEqual', () => {
     expect(isEqual(date, new Date(2012, 4, 23))).toBe(true);
     expect(isEqual(new Date('a'), new Date('b'))).toBe(true);
     expect(isEqual(date, new Date(2013, 3, 25))).toBe(false);
-    expect(isEqual(date, { getTime: () => +date })).toBe(false);
+    expect(isEqual(date, { getTime: () => Number(date) })).toBe(false);
   });
 
   it('should compare error objects', () => {

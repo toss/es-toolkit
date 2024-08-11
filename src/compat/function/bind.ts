@@ -8,6 +8,8 @@
  * @param {(...args: any[]) => any} func  The function to bind.
  * @param {any} thisArg  The `this` binding of `func`.
  * @param {any[]} partials  The arguments to be partially applied.
+ * @param thisObj
+ * @param {...any} partialArgs
  * @returns {(...args: any[]) => any} Returns the new bound function.
  *
  * @example
@@ -23,7 +25,7 @@
  * bound('hi');
  * // => 'hi fred!'
  */
-export function bind<F extends Function>(func: F, thisObj?: unknown, ...partialArgs: any[]): F {
+export function bind<F extends (...args: any[]) => any>(func: F, thisObj?: unknown, ...partialArgs: any[]): F {
   const binded = function (this: any, ...providedArgs: any[]) {
     const args: any[] = [];
 

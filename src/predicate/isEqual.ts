@@ -30,7 +30,7 @@ import { getSymbols } from '../compat/_internal/getSymbols.ts';
 import { getTag } from '../compat/_internal/getTag.ts';
 import { isPlainObject } from './isPlainObject.ts';
 
-declare var Buffer:
+declare let Buffer:
   | {
       isBuffer: (a: any) => boolean;
     }
@@ -116,7 +116,7 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
     }
 
     case functionTag: {
-      return a == b;
+      return a === b;
     }
   }
 
@@ -241,7 +241,7 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
           const propKey = aKeys[i];
           const aProp = (a as any)[propKey];
 
-          if (!(b as any).hasOwnProperty(propKey)) {
+          if (!Object.prototype.hasOwnProperty.call(b, propKey)) {
             return false;
           }
 

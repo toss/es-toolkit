@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { bind } from './bind';
 import { isEqual } from '../../predicate/isEqual';
 
+// eslint-disable-next-line
 function fn(this: any, ..._: any[]) {
   const result = [this];
   // eslint-disable-next-line prefer-rest-params
