@@ -68,6 +68,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'flattenDeep', link: '/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
             { text: 'groupBy', link: '/reference/array/groupBy' },
+            { text: 'indexOf (compat)', link: '/reference/compat/array/indexOf' },
             { text: 'intersection', link: '/reference/array/intersection' },
             { text: 'intersectionBy', link: '/reference/array/intersectionBy' },
             {

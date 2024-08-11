@@ -73,6 +73,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/ko/reference/array/forEachRight' },
             { text: 'groupBy', link: '/ko/reference/array/groupBy' },
+            { text: 'indexOf (호환성)', link: '/ko/reference/compat/array/indexOf' },
             { text: 'intersection', link: '/ko/reference/array/intersection' },
             {
               text: 'intersectionBy',

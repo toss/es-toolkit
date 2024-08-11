@@ -67,6 +67,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'flattenDeep', link: '/zh_hans/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/zh_hans/reference/array/forEachRight' },
             { text: 'groupBy', link: '/zh_hans/reference/array/groupBy' },
+            { text: 'indexOf (兼容性)', link: '/zh_hans/reference/compat/array/indexOf' },
             { text: 'intersection', link: '/zh_hans/reference/array/intersection' },
             { text: 'intersectionBy', link: '/zh_hans/reference/array/intersectionBy' },
             { text: 'intersectionWith', link: '/zh_hans/reference/array/intersectionWith' },

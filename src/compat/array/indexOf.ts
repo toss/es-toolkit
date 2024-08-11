@@ -7,7 +7,7 @@
  * @template T - The type of elements in the array.
  * @template U - The type of the value to search for.
  * @param {T[] | null | undefined} array - The array to search.
- * @param {T | U} searchElement - The value to search for.
+ * @param {T} searchElement - The value to search for.
  * @param {number} [fromIndex] - The index to start the search at.
  * @returns {number} The index (zero-based) of the first occurrence of the value in the array, or `-1` if the value is not found.
  *
@@ -16,7 +16,7 @@
  * indexOf(array, 3); // => 2
  * indexOf(array, NaN); // => 3
  */
-export function indexOf<T, U>(array: T[] | null | undefined, searchElement: T | U, fromIndex?: number): number {
+export function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?: number): number {
   if (array == null) {
     return -1;
   }

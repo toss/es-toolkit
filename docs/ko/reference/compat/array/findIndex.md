@@ -18,10 +18,10 @@
 ## 인터페이스
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
-function findIndex<T>(arr: T[], doesMatch: string): T | undefined;
+function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): number;
+function findIndex<T>(arr: T[], doesMatch: Partial<T>): number;
+function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown]): number;
+function findIndex<T>(arr: T[], doesMatch: string): number;
 ```
 
 ### 파라미터

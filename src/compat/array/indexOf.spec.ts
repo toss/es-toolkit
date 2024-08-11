@@ -24,6 +24,8 @@ describe('indexOf', () => {
     const actual = values.map(fromIndex => [
       indexOf(array, undefined, fromIndex),
       indexOf(array, 1, fromIndex),
+      // eslint-disable-next-line
+      // @ts-ignore
       indexOf(array, '', fromIndex),
     ]);
 
