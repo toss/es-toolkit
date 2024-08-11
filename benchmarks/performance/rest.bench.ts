@@ -1,5 +1,6 @@
 import { bench, describe } from 'vitest';
 import { rest as restToolkit } from 'es-toolkit';
+import { rest as restCompat } from 'es-toolkit/compat';
 import { rest as restLodash } from 'lodash';
 
 describe('rest', () => {
@@ -10,10 +11,14 @@ describe('rest', () => {
   }
 
   bench('es-toolkit/rest', () => {
-    restToolkit(fn);
+    restToolkit(fn, 1);
+  });
+
+  bench('es-toolkit/compat/rest', () => {
+    restCompat(fn, 1);
   });
 
   bench('lodash/rest', () => {
-    restLodash(fn);
+    restLodash(fn, 1);
   });
 });
