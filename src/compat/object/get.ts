@@ -1,4 +1,5 @@
 import { isDeepKey } from '../_internal/isDeepKey.ts';
+import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../_internal/toPath.ts';
 import type { Get } from './get.types.ts';
 
@@ -308,11 +309,7 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
   let index;
 
   for (index = 0; index < resolvedPath.length && current != null; index++) {
-    let key = resolvedPath[index];
-
-    if (Object.is(key.valueOf(), -0)) {
-      key = '-0';
-    }
+    let key = toKey(resolvedPath[index]);
 
     current = current[key];
   }

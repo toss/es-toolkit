@@ -169,6 +169,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'pickBy', link: '/ko/reference/object/pickBy' },
             { text: 'get (호환성)', link: '/ko/reference/compat/object/get' },
             { text: 'set (호환성)', link: '/ko/reference/compat/object/set' },
+            { text: 'has (호환성)', link: '/ko/reference/compat/object/has' },
             { text: 'property (호환성)', link: '/ko/reference/compat/object/property' },
           ],
         },

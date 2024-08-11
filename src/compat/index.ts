@@ -41,6 +41,7 @@ export { bind } from './function/bind.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
+export { has } from './object/has.ts';
 export { property } from './object/property.ts';
 export { mapKeys } from './object/mapKeys.ts';
 export { mapValues } from './object/mapValues.ts';

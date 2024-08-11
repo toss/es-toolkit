@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { get as getToolkit } from 'es-toolkit';
+import { get as getToolkit } from 'es-toolkit/compat';
 import { get as getLodash } from 'lodash';
 
 describe('get with string', () => {
