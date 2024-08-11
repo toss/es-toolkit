@@ -1,6 +1,8 @@
 # partial
 
-创建一个函数，该函数会在调用时将 `partialArgs` 作为前置参数传递给 `func`。此方法类似于 `bind`，但不会改变 `this` 绑定。
+创建一个函数，该函数会在调用时将 `partialArgs` 作为前置参数传递给 `func`。
+
+此方法类似于 [bind](../compat/function/bind.md)，但不会改变 `this` 绑定。
 
 `partial.placeholder` 的值默认是一个 `symbol`，可以用作附加的部分参数的占位符。
 

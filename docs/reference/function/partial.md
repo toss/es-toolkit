@@ -1,6 +1,8 @@
 # partial
 
-Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives.
+
+This method is like [bind](../compat/function/bind.md) except it does not alter the `this` binding.
 
 The `partial.placeholder` value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
 
