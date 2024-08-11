@@ -9,4 +9,5 @@ export { mapKeys } from './mapKeys.ts';
 export { mapValues } from './mapValues.ts';
 export { cloneDeep } from './cloneDeep.ts';
 export { merge } from './merge.ts';
+export { toMerged } from './toMerged.ts';
 export { mergeWith } from './mergeWith.ts';
