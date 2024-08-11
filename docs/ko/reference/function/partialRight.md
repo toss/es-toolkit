@@ -2,7 +2,7 @@
 
 미리 인자를 뒤에서부터 제공한 함수를 만들어요.
 
-[partial](../compat/function/partial.md)와 동작이 비슷한데요, 인자를 뒤에서부터 제공한다는 차이가 있어요.
+[partial](./partial.md)와 동작이 비슷한데요, 인자를 뒤에서부터 제공한다는 차이가 있어요.
 
 Symbol 타입의 `partialRight.placeholder`를 쓰면, 미리 제공한 인자가 사용될 위치를 결정할 수 있어요.
 
