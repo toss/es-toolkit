@@ -58,6 +58,7 @@ export { isBoolean } from './predicate/isBoolean.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
 export { matches } from './predicate/matches.ts';
+export { matchesProperty } from './predicate/matchesProperty.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';

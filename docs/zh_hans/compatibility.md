@@ -291,7 +291,7 @@ chunk([1, 2, 3, 4], 0);
 | [functions](https://lodash.com/docs/4.17.15#functions)       | ❌       |
 | [functionsIn](https://lodash.com/docs/4.17.15#functionsIn)   | ❌       |
 | [get](https://lodash.com/docs/4.17.15#get)                   | ✅       |
-| [has](https://lodash.com/docs/4.17.15#has)                   | ❌       |
+| [has](https://lodash.com/docs/4.17.15#has)                   | ✅       |
 | [hasIn](https://lodash.com/docs/4.17.15#hasIn)               | ❌       |
 | [invert](https://lodash.com/docs/4.17.15#invert)             | ✅       |
 | [invertBy](https://lodash.com/docs/4.17.15#invertBy)         | ❌       |
@@ -369,7 +369,7 @@ chunk([1, 2, 3, 4], 0);
 | [identity](https://lodash.com/docs/4.17.15#identity)               | 📝         |
 | [iteratee](https://lodash.com/docs/4.17.15#iteratee)               | ❌         |
 | [matches](https://lodash.com/docs/4.17.15#matches)                 | ✅         |
-| [matchesProperty](https://lodash.com/docs/4.17.15#matchesProperty) | ❌         |
+| [matchesProperty](https://lodash.com/docs/4.17.15#matchesProperty) | ✅         |
 | [method](https://lodash.com/docs/4.17.15#method)                   | ❌         |
 | [methodOf](https://lodash.com/docs/4.17.15#methodOf)               | ❌         |
 | [mixin](https://lodash.com/docs/4.17.15#mixin)                     | No support |
