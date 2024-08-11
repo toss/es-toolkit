@@ -17,18 +17,20 @@ You can specify the condition in several ways:
 
 ## Signature
 
+```typescript
 function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: readonly T[]) => unknown): T | undefined;
 function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
 function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
 function find<T>(arr: T[], doesMatch: string): T | undefined;
 
 function find<T extends Record<string, unknown>>(
-object: T,
-doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  object: T,
+  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
+```
 
 ### Parameters
 
