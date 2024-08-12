@@ -3,14 +3,16 @@ type Iteratee<T> = (object: T) => T[keyof T];
 /**
  * Sorts an array of objects based on the given iteratees or keys in ascending order.
  *
- * This function takes an array of objects, an array of iteratees or keys to sort by.
- * It returns the sorted array, ordering by each key according to ascending order.
+ * This function takes an array of objects, an array of iteratees (or keys) to sort by.
+ * It returns the ascendingly sorted array of objects.
+ * If `iteratees` are keys of the object, it sorts based on the values of the keys.
+ * If `iteratees` are iteratee functions, it sorts based on the return values of the functions.
  * If values for a key are equal, it moves to the next key to determine the order.
  *
  * @template T - The type of the objects in the array.
  * @param {T[]} collection - The array of objects to be sorted.
  * @param {Array<Iteratee<T> | keyof T>} iteratees - The array of iteratees or keys to sort by.
- * @returns {T[]} - The ascendingly sorted array of objects.
+ * @returns {T[]} The ascendingly sorted array of objects.
  *
  * @example
  * const users = [
