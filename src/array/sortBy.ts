@@ -37,6 +37,7 @@ export function sortBy<T extends object>(collection: T[], iteratees: Array<Itera
     if (a < b) {
       return -1;
     }
+
     if (a > b) {
       return 1;
     }
