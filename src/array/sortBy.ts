@@ -7,7 +7,7 @@ type Iteratee<T> = (object: T) => T[keyof T];
  * It returns the sorted array, ordering by each key according to ascending order.
  * If values for a key are equal, it moves to the next key to determine the order.
  *
- * @template T - The type of elements in the array.
+ * @template T - The type of the objects in the array.
  * @param {T[]} collection - The array of objects to be sorted.
  * @param {Array<Iteratee<T>> | Array<keyof T>} iteratees - The array of iteratees or keys to sort by.
  * @returns {T[]} - The ascendingly sorted array of objects.
@@ -30,7 +30,7 @@ type Iteratee<T> = (object: T) => T[keyof T];
  * //   { user : 'foo', age: 24 },
  * // ]
  */
-export function sortBy<T>(collection: T[], iteratees: Array<Iteratee<T>> | Array<keyof T>): T[] {
+export function sortBy<T extends object>(collection: T[], iteratees: Array<Iteratee<T>> | Array<keyof T>): T[] {
   const compareValues = (a: T[keyof T], b: T[keyof T]) => {
     if (a < b) {
       return -1;
