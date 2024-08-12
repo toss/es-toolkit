@@ -22,6 +22,7 @@ export { maxBy } from './maxBy.ts';
 export { minBy } from './minBy.ts';
 export { orderBy } from './orderBy.ts';
 export { partition } from './partition.ts';
+export { sortBy } from './sortBy.ts';
 export { sample } from './sample.ts';
 export { sampleSize } from './sampleSize.ts';
 export { shuffle } from './shuffle.ts';
