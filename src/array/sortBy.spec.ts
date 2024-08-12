@@ -44,4 +44,13 @@ describe('sortBy', () => {
       { user: 'foo', age: 24 },
     ]);
   });
+
+  it('should stable sort objects by mixed iteratee function and key', () => {
+    expect(sortBy(users, ['user', user => user.age])).toEqual([
+      { user: 'bar', age: 7 },
+      { user: 'bar', age: 29 },
+      { user: 'foo', age: 8 },
+      { user: 'foo', age: 24 },
+    ]);
+  });
 });

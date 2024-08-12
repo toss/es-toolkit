@@ -9,7 +9,7 @@ type Iteratee<T> = (object: T) => T[keyof T];
  *
  * @template T - The type of the objects in the array.
  * @param {T[]} collection - The array of objects to be sorted.
- * @param {Array<Iteratee<T>> | Array<keyof T>} iteratees - The array of iteratees or keys to sort by.
+ * @param {Array<Iteratee<T> | keyof T>} iteratees - The array of iteratees or keys to sort by.
  * @returns {T[]} - The ascendingly sorted array of objects.
  *
  * @example
@@ -30,7 +30,7 @@ type Iteratee<T> = (object: T) => T[keyof T];
  * //   { user : 'foo', age: 24 },
  * // ]
  */
-export function sortBy<T extends object>(collection: T[], iteratees: Array<Iteratee<T>> | Array<keyof T>): T[] {
+export function sortBy<T extends object>(collection: T[], iteratees: Array<Iteratee<T> | keyof T>): T[] {
   const compareValues = (a: T[keyof T], b: T[keyof T]) => {
     if (a < b) {
       return -1;
@@ -46,9 +46,10 @@ export function sortBy<T extends object>(collection: T[], iteratees: Array<Itera
   const sortedCollection = shallowCopiedCollection.sort((a, b) => {
     for (let i = 0; i < iteratees.length; i++) {
       const iteratee = iteratees[i];
+      const iterateeIsFunction = typeof iteratee === 'function';
 
-      const valueA = typeof iteratee === 'function' ? iteratee(a) : a[iteratee];
-      const valueB = typeof iteratee === 'function' ? iteratee(b) : b[iteratee];
+      const valueA = iterateeIsFunction ? iteratee(a) : a[iteratee];
+      const valueB = iterateeIsFunction ? iteratee(b) : b[iteratee];
 
       const result = compareValues(valueA, valueB);
 
