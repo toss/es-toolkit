@@ -21,7 +21,7 @@ type Iteratee<T> = (object: T) => T[keyof T];
  * ];
  *
  * sortBy(users, ['user', 'age']);
- * sortBy(users, [obj => obj.user, obj => obj.age]);
+ * sortBy(users, [obj => obj.user, 'age']);
  * // results will be:
  * // [
  * //   { user : 'bar', age: 7 },
