@@ -11,7 +11,8 @@ import { compareValues } from '../_internal/compareValues';
  *
  * @template T - The type of the objects in the array.
  * @param {T[]} arr - The array of objects to be sorted.
- * @param {Array<(item: T) => unknown | keyof T>} criteria - The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
+ * @param {Array<((item: T) => unknown) | keyof T>} criteria - The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
+ * @returns {T[]} - The sorted array.
  *
  * @example
  * const users = [
@@ -31,7 +32,7 @@ import { compareValues } from '../_internal/compareValues';
  * //   { user : 'foo', age: 24 },
  * // ]
  */
-export function sortBy<T extends object>(arr: T[], criteria: Array<(item: T) => unknown | keyof T>): T[] {
+export function sortBy<T extends object>(arr: T[], criteria: Array<((item: T) => unknown) | keyof T>): T[] {
   return arr.slice().sort((a, b) => {
     for (let i = 0; i < criteria.length; i++) {
       const iteratee = criteria[i];
@@ -40,7 +41,7 @@ export function sortBy<T extends object>(arr: T[], criteria: Array<(item: T) => 
       const valueA = iterateeIsFunction ? iteratee(a) : a[iteratee];
       const valueB = iterateeIsFunction ? iteratee(b) : b[iteratee];
 
-      const result = compareValues(valueA, valueB);
+      const result = compareValues(valueA, valueB, 'asc');
 
       if (result !== 0) {
         return result;
