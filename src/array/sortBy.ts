@@ -40,7 +40,7 @@ export function sortBy<T extends object>(arr: T[], criteria: Array<(item: T) => 
       const valueA = iterateeIsFunction ? iteratee(a) : a[iteratee];
       const valueB = iterateeIsFunction ? iteratee(b) : b[iteratee];
 
-      const result = compareValues(valueA, valueB);
+      const result = compareValues(valueA, valueB, 'asc');
 
       if (result !== 0) {
         return result;
