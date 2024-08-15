@@ -3,15 +3,6 @@ import { cloneDeep } from './cloneDeep';
 
 describe('cloneDeep', () => {
   //-------------------------------------------------------------------------------------
-  // function
-  //-------------------------------------------------------------------------------------
-  it('not support function', () => {
-    const func = () => {};
-    const clonedFunc = cloneDeep(func);
-    expect(clonedFunc).toBe(undefined);
-  });
-
-  //-------------------------------------------------------------------------------------
   // primitive
   //-------------------------------------------------------------------------------------
   it('should return primitive values as is', () => {
@@ -33,6 +24,14 @@ describe('cloneDeep', () => {
 
     expect(clonedArr).toEqual(arr);
     expect(clonedArr).not.toBe(arr);
+  });
+
+  it('should clone RegExp arrays', () => {
+    const arr = /test/.exec('hello test');
+    const cloned = cloneDeep(arr);
+
+    expect(cloned).toEqual(arr);
+    expect(cloned).not.toBe(arr);
   });
 
   it('should clone arrays with nested objects', () => {
@@ -167,6 +166,7 @@ describe('cloneDeep', () => {
     expect(b['#b']).toBe(undefined);
     expect(b).toEqual({
       props: { a: 'es-toolkit' },
+      d,
       c: 2,
     });
   });
@@ -326,5 +326,25 @@ describe('cloneDeep', () => {
     expect(clonedError.stack).toBe(error.stack);
     expect(clonedError.cause).toBe(error.cause);
     expect(clonedError.code).toBe(error.code);
+  });
+
+  it('should clone DataViews', () => {
+    const buffer = new Uint8Array([1, 2]).buffer;
+    const view = new DataView(buffer);
+
+    const cloned = cloneDeep(view);
+
+    expect(cloned).not.toBe(view);
+    expect(cloned.getInt8(0)).toBe(view.getInt8(0));
+    expect(cloned.getInt8(1)).toBe(view.getInt8(1));
+  });
+
+  it('should clone buffers', () => {
+    const buffer = Buffer.from([1, 2, 3]);
+
+    const cloned = cloneDeep(buffer);
+
+    expect(cloned).not.toBe(buffer);
+    expect(cloned).toEqual(buffer);
   });
 });

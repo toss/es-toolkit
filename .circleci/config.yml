@@ -5,9 +5,6 @@ parameters:
     type: boolean
     default: false
 
-orbs:
-  slack: circleci/slack@4.5.0
-
 commands:
   setup:
     steps:
@@ -31,10 +28,26 @@ jobs:
       - setup
       - run:
           name: ESLint
-          command: yarn eslint -c .eslintrc.js $(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)")
+          shell: bash -e
+          command: |
+            changed_files=$(git diff --name-only --diff-filter=ACMRUXB origin/main)
+
+            if echo "$changed_files" | grep -q "^.eslintrc.js$"; then
+              yarn eslint -c .eslintrc.js .
+            else
+              echo "$changed_files" | grep -E "(.js$|.ts$)" | xargs -r yarn eslint -c .eslintrc.js
+            fi
       - run:
           name: Prettier
-          command: modifiedFiles=$(git diff --name-only --diff-filter=ACMRUXB origin/main | grep -E "(.js$|.ts$)") && [ -n "$modifiedFiles" ] && yarn prettier -c $modifiedFiles || echo "No modified files."
+          command: |
+            changed_files=$(git diff --name-only --diff-filter=ACMRUXB origin/main)
+
+            if echo "$changed_files" | grep -q -E "^\.prettierrc$|^\.prettierignore$"; then
+              yarn prettier -c .
+            else
+
+              echo "$changed_files" | xargs -r yarn prettier -c --ignore-unknown
+            fi
   typecheck:
     docker:
       - image: cimg/node:20.12
@@ -52,7 +65,13 @@ jobs:
       - setup
       - run:
           name: Build
-          command: yarn build
+          command: yarn pack --out package.tgz
+      - run:
+          name: Check Dist
+          command: node --test .scripts/check-dist.mjs
+      - run:
+          name: Check Package Types
+          command: yarn attw package.tgz
   check-peer:
     docker:
       - image: cimg/node:20.12

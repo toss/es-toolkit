@@ -29,10 +29,10 @@
  * console.log(array); // [1, 2, 3, 4, 5]
  */
 
-export function toFilled<T, U>(arr: T[], value: U): Array<T | U>;
-export function toFilled<T, U>(arr: T[], value: U, start: number): Array<T | U>;
-export function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T | U>;
-export function toFilled<T, U>(arr: T[], value: U, start = 0, end = arr.length): Array<T | U> {
+export function toFilled<T, U>(arr: readonly T[], value: U): Array<T | U>;
+export function toFilled<T, U>(arr: readonly T[], value: U, start: number): Array<T | U>;
+export function toFilled<T, U>(arr: readonly T[], value: U, start: number, end: number): Array<T | U>;
+export function toFilled<T, U>(arr: readonly T[], value: U, start = 0, end = arr.length): Array<T | U> {
   const length = arr.length;
   const finalStart = Math.max(start >= 0 ? start : length + start, 0);
   const finalEnd = Math.min(end >= 0 ? end : length + end, length);

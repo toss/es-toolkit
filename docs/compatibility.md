@@ -62,14 +62,14 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [dropRightWhile](https://lodash.com/docs/4.17.15#dropRightWhile)       | 📝                    |
 | [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | 📝                    |
 | [fill](https://lodash.com/docs/4.17.15#fill)                           | ✅                    |
-| [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ❌                    |
+| [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ✅                    |
 | [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌                    |
-| [flatten](https://lodash.com/docs/4.17.15#flatten)                     | 📝                    |
-| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | 📝                    |
-| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | 📝                    |
+| [flatten](https://lodash.com/docs/4.17.15#flatten)                     | ✅                    |
+| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | ✅                    |
+| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | ✅                    |
 | [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌                    |
 | [head](https://lodash.com/docs/4.17.15#head)                           | ✅                    |
-| [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ❌                    |
+| [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ✅                    |
 | [initial](https://lodash.com/docs/4.17.15#initial)                     | ✅                    |
 | [intersection](https://lodash.com/docs/4.17.15#intersection)           | 📝                    |
 | [intersectionBy](https://lodash.com/docs/4.17.15#intersectionBy)       | 📝                    |
@@ -135,7 +135,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [invokeMap](https://lodash.com/docs/4.17.15#invokeMap)       | ❌                    |
 | [keyBy](https://lodash.com/docs/4.17.15#keyBy)               | 📝                    |
 | [map](https://lodash.com/docs/4.17.15#map)                   | ❌                    |
-| [orderBy](https://lodash.com/docs/4.17.15#orderBy)           | 📝                    |
+| [orderBy](https://lodash.com/docs/4.17.15#orderBy)           | ✅                    |
 | [partition](https://lodash.com/docs/4.17.15#partition)       | 📝                    |
 | [reduce](https://lodash.com/docs/4.17.15#reduce)             | ❌                    |
 | [reduceRight](https://lodash.com/docs/4.17.15#reduceRight)   | ❌                    |
@@ -143,7 +143,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [sample](https://lodash.com/docs/4.17.15#sample)             | 📝                    |
 | [sampleSize](https://lodash.com/docs/4.17.15#sampleSize)     | 📝                    |
 | [shuffle](https://lodash.com/docs/4.17.15#shuffle)           | 📝                    |
-| [size](https://lodash.com/docs/4.17.15#size)                 | ❌                    |
+| [size](https://lodash.com/docs/4.17.15#size)                 | ✅                    |
 | [some](https://lodash.com/docs/4.17.15#some)                 | ❌                    |
 | [sortBy](https://lodash.com/docs/4.17.15#sortBy)             | ❌                    |
 
@@ -157,10 +157,10 @@ Even if a feature is marked "in review," it might already be under review to ens
 
 | Function Name                                                | Implementation Status |
 | ------------------------------------------------------------ | --------------------- |
-| [after](https://lodash.com/docs/4.17.15#after)               | ❌                    |
-| [ary](https://lodash.com/docs/4.17.15#ary)                   | ❌                    |
+| [after](https://lodash.com/docs/4.17.15#after)               | 📝                    |
+| [ary](https://lodash.com/docs/4.17.15#ary)                   | 📝                    |
 | [before](https://lodash.com/docs/4.17.15#before)             | ❌                    |
-| [bind](https://lodash.com/docs/4.17.15#bind)                 | ❌                    |
+| [bind](https://lodash.com/docs/4.17.15#bind)                 | ✅                    |
 | [bindKey](https://lodash.com/docs/4.17.15#bindKey)           | ❌                    |
 | [curry](https://lodash.com/docs/4.17.15#curry)               | ❌                    |
 | [curryRight](https://lodash.com/docs/4.17.15#curryRight)     | ❌                    |
@@ -172,13 +172,13 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [negate](https://lodash.com/docs/4.17.15#negate)             | 📝                    |
 | [once](https://lodash.com/docs/4.17.15#once)                 | 📝                    |
 | [overArgs](https://lodash.com/docs/4.17.15#overArgs)         | ❌                    |
-| [partial](https://lodash.com/docs/4.17.15#partial)           | ❌                    |
-| [partialRight](https://lodash.com/docs/4.17.15#partialRight) | ❌                    |
+| [partial](https://lodash.com/docs/4.17.15#partial)           | 📝                    |
+| [partialRight](https://lodash.com/docs/4.17.15#partialRight) | 📝                    |
 | [rearg](https://lodash.com/docs/4.17.15#rearg)               | ❌                    |
-| [rest](https://lodash.com/docs/4.17.15#rest)                 | ❌                    |
+| [rest](https://lodash.com/docs/4.17.15#rest)                 | ✅                    |
 | [spread](https://lodash.com/docs/4.17.15#spread)             | ❌                    |
 | [throttle](https://lodash.com/docs/4.17.15#throttle)         | 📝                    |
-| [unary](https://lodash.com/docs/4.17.15#unary)               | ❌                    |
+| [unary](https://lodash.com/docs/4.17.15#unary)               | 📝                    |
 | [wrap](https://lodash.com/docs/4.17.15#wrap)                 | ❌                    |
 
 ### "Lang" methods
@@ -187,24 +187,24 @@ Even if a feature is marked "in review," it might already be under review to ens
 | ---------------------------------------------------------------------- | --------------------- |
 | [castArray](https://lodash.com/docs/4.17.15#castArray)                 | ❌                    |
 | [clone](https://lodash.com/docs/4.17.15#clone)                         | 📝                    |
-| [cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)                 | ❌                    |
+| [cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)                 | ✅                    |
 | [cloneDeepWith](https://lodash.com/docs/4.17.15#cloneDeepWith)         | ❌                    |
 | [cloneWith](https://lodash.com/docs/4.17.15#cloneWith)                 | ❌                    |
 | [conformsTo](https://lodash.com/docs/4.17.15#conformsTo)               | ❌                    |
 | [eq](https://lodash.com/docs/4.17.15#eq)                               | ❌                    |
 | [gt](https://lodash.com/docs/4.17.15#gt)                               | ❌                    |
 | [gte](https://lodash.com/docs/4.17.15#gte)                             | ❌                    |
-| [isArguments](https://lodash.com/docs/4.17.15#isArguments)             | ❌                    |
+| [isArguments](https://lodash.com/docs/4.17.15#isArguments)             | ✅                    |
 | [isArray](https://lodash.com/docs/4.17.15#isArray)                     | ✅                    |
 | [isArrayBuffer](https://lodash.com/docs/4.17.15#isArrayBuffer)         | ❌                    |
 | [isArrayLike](https://lodash.com/docs/4.17.15#isArrayLike)             | ✅                    |
 | [isArrayLikeObject](https://lodash.com/docs/4.17.15#isArrayLikeObject) | ❌                    |
-| [isBoolean](https://lodash.com/docs/4.17.15#isBoolean)                 | ❌                    |
+| [isBoolean](https://lodash.com/docs/4.17.15#isBoolean)                 | ✅                    |
 | [isBuffer](https://lodash.com/docs/4.17.15#isBuffer)                   | ❌                    |
 | [isDate](https://lodash.com/docs/4.17.15#isDate)                       | ❌                    |
 | [isElement](https://lodash.com/docs/4.17.15#isElement)                 | ❌                    |
 | [isEmpty](https://lodash.com/docs/4.17.15#isEmpty)                     | ❌                    |
-| [isEqual](https://lodash.com/docs/4.17.15#isEqual)                     | ❌                    |
+| [isEqual](https://lodash.com/docs/4.17.15#isEqual)                     | ✅                    |
 | [isEqualWith](https://lodash.com/docs/4.17.15#isEqualWith)             | ❌                    |
 | [isError](https://lodash.com/docs/4.17.15#isError)                     | ❌                    |
 | [isFinite](https://lodash.com/docs/4.17.15#isFinite)                   | ❌                    |
@@ -212,7 +212,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isInteger](https://lodash.com/docs/4.17.15#isInteger)                 | ❌                    |
 | [isLength](https://lodash.com/docs/4.17.15#isLength)                   | ✅                    |
 | [isMap](https://lodash.com/docs/4.17.15#isMap)                         | ❌                    |
-| [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ❌                    |
+| [isMatch](https://lodash.com/docs/4.17.15#isMatch)                     | ✅                    |
 | [isMatchWith](https://lodash.com/docs/4.17.15#isMatchWith)             | ❌                    |
 | [isNaN](https://lodash.com/docs/4.17.15#isNaN)                         | ❌                    |
 | [isNative](https://lodash.com/docs/4.17.15#isNative)                   | ❌                    |
@@ -220,13 +220,13 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isNull](https://lodash.com/docs/4.17.15#isNull)                       | ✅                    |
 | [isNumber](https://lodash.com/docs/4.17.15#isNumber)                   | ❌                    |
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌                    |
-| [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ❌                    |
+| [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ✅                    |
 | [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ✅                    |
 | [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ❌                    |
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌                    |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌                    |
-| [isString](https://lodash.com/docs/4.17.15#isString)                   | ❌                    |
-| [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ❌                    |
+| [isString](https://lodash.com/docs/4.17.15#isString)                   | ✅                    |
+| [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ✅                    |
 | [isTypedArray](https://lodash.com/docs/4.17.15#isTypedArray)           | ✅                    |
 | [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | ✅                    |
 | [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ❌                    |
@@ -291,18 +291,17 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [functions](https://lodash.com/docs/4.17.15#functions)       | ❌                    |
 | [functionsIn](https://lodash.com/docs/4.17.15#functionsIn)   | ❌                    |
 | [get](https://lodash.com/docs/4.17.15#get)                   | ✅                    |
-| [has](https://lodash.com/docs/4.17.15#has)                   | ❌                    |
+| [has](https://lodash.com/docs/4.17.15#has)                   | ✅                    |
 | [hasIn](https://lodash.com/docs/4.17.15#hasIn)               | ❌                    |
 | [invert](https://lodash.com/docs/4.17.15#invert)             | ✅                    |
 | [invertBy](https://lodash.com/docs/4.17.15#invertBy)         | ❌                    |
 | [invoke](https://lodash.com/docs/4.17.15#invoke)             | ❌                    |
 | [keys](https://lodash.com/docs/4.17.15#keys)                 | ❌                    |
 | [keysIn](https://lodash.com/docs/4.17.15#keysIn)             | ❌                    |
-| [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ❌                    |
-| [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌                    |
-| [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌                    |
-| [merge](https://lodash.com/docs/4.17.15#merge)               | ❌                    |
-| [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ❌                    |
+| [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ✅                    |
+| [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ✅                    |
+| [merge](https://lodash.com/docs/4.17.15#merge)               | ✅                    |
+| [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ✅                    |
 | [omit](https://lodash.com/docs/4.17.15#omit)                 | 📝                    |
 | [omitBy](https://lodash.com/docs/4.17.15#omitBy)             | 📝                    |
 | [pick](https://lodash.com/docs/4.17.15#pick)                 | 📝                    |
@@ -368,8 +367,8 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [flowRight](https://lodash.com/docs/4.17.15#flowRight)             | ❌                    |
 | [identity](https://lodash.com/docs/4.17.15#identity)               | 📝                    |
 | [iteratee](https://lodash.com/docs/4.17.15#iteratee)               | ❌                    |
-| [matches](https://lodash.com/docs/4.17.15#matches)                 | ❌                    |
-| [matchesProperty](https://lodash.com/docs/4.17.15#matchesProperty) | ❌                    |
+| [matches](https://lodash.com/docs/4.17.15#matches)                 | ✅                    |
+| [matchesProperty](https://lodash.com/docs/4.17.15#matchesProperty) | ✅                    |
 | [method](https://lodash.com/docs/4.17.15#method)                   | ❌                    |
 | [methodOf](https://lodash.com/docs/4.17.15#methodOf)               | ❌                    |
 | [mixin](https://lodash.com/docs/4.17.15#mixin)                     | No support            |
@@ -379,7 +378,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [over](https://lodash.com/docs/4.17.15#over)                       | ❌                    |
 | [overEvery](https://lodash.com/docs/4.17.15#overEvery)             | ❌                    |
 | [overSome](https://lodash.com/docs/4.17.15#overSome)               | ❌                    |
-| [property](https://lodash.com/docs/4.17.15#property)               | ❌                    |
+| [property](https://lodash.com/docs/4.17.15#property)               | ✅                    |
 | [propertyOf](https://lodash.com/docs/4.17.15#propertyOf)           | ❌                    |
 | [range](https://lodash.com/docs/4.17.15#range)                     | 📝                    |
 | [rangeRight](https://lodash.com/docs/4.17.15#rangeRight)           | 📝                    |

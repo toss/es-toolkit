@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { isPlainObject } from "./isPlainObject";
+import { describe, expect, it } from 'vitest';
+import { isPlainObject } from './isPlainObject';
 
 describe('isPlainObject', () => {
   it('returns true for plain objects', () => {

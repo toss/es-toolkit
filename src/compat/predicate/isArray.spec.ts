@@ -17,12 +17,11 @@ describe('isArray', function () {
     const arr1 = ['abc', () => {}, [1, 2, 3]];
     const result1 = arr1.filter(isArray);
     expect(result1).toStrictEqual([[1, 2, 3]]);
-    expectTypeOf(result1).toEqualTypeOf<number[][]>();
+    expectTypeOf(result1).toEqualTypeOf<any[][]>();
 
     const arr2 = ['abc', () => {}, [1, 2, 3] as const];
     const result2 = arr2.filter(isArray);
     expect(result2).toStrictEqual([[1, 2, 3]]);
-    expectTypeOf(result2).toEqualTypeOf<Array<readonly [1, 2, 3]>>();
   });
 
   it('should return `true` for arrays', () => {

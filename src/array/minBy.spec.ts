@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { minBy } from './minBy';
 
 describe('minBy', () => {
-  it('minBy selects one max value in array', () => {
+  it('minBy selects one min value in array', () => {
     const people = [
       { name: 'Mark', age: 30 },
       { name: 'Nunu', age: 20 },
@@ -12,7 +12,7 @@ describe('minBy', () => {
     expect(result).toEqual({ name: 'Nunu', age: 20 });
   });
 
-  it('if there are two max values, first one is selected', () => {
+  it('if there are two min values, first one is selected', () => {
     const people = [
       { name: 'Mark', age: 30 },
       { name: 'Nunu', age: 20 },

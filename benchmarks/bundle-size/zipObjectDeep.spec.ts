@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { getBundleSize } from "./utils/getBundleSize"
+import { describe, expect, it } from 'vitest';
+import { getBundleSize } from './utils/getBundleSize';
 
 describe('zipObjectDeep bundle size', () => {
   it('lodash-es', async () => {
@@ -9,6 +9,6 @@ describe('zipObjectDeep bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'zipObjectDeep');
-    expect(bundleSize).toMatchInlineSnapshot(`938`);
-  })
+    expect(bundleSize).toMatchInlineSnapshot(`992`);
+  });
 });

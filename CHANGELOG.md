@@ -1,5 +1,26 @@
 # es-toolkit Changelog
 
+## Version v1.15.1
+
+Released on August 10th, 2024.
+
+- Disabled implicit conversion of values in [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html) for performance and simplicity.
+
+## Version v1.15.0
+
+Released on August 10th, 2024.
+
+- Added support for [merge](https://es-toolkit.slash.page/reference/object/merge.html), [mergeWith](https://es-toolkit.slash.page/reference/object/mergeWith.html), [toMerged](https://es-toolkit.slash.page/reference/object/toMerged.html), [isSymbol](https://es-toolkit.slash.page/reference/predicate/isSymbol.html), [pascalCase](https://es-toolkit.slash.page/reference/string/pascalCase.html).
+- Added compatibility tests with lodash for [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html).
+
+## Version v1.14.0
+
+Released on August 9th, 2024.
+
+- (`es-toolkit`) Added support for [mapKeys](https://es-toolkit.slash.page/reference/object/mapKeys.html), [mapValues](https://es-toolkit.slash.page/reference/object/mapValues.html), [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html), [before](https://es-toolkit.slash.page/reference/function/before.html), [after](https://es-toolkit.slash.page/reference/function/after.html), [isSubset](https://es-toolkit.slash.page/reference/array/isSubset.html), [ary](https://es-toolkit.slash.page/reference/function/ary.html), [unary](https://es-toolkit.slash.page/reference/function/unary.html), [flattenDeep](https://es-toolkit.slash.page/reference/array/flattenDeep.html), [isEqual](https://es-toolkit.slash.page/reference/predicate/isEqual.html), [isFunction](https://es-toolkit.slash.page/reference/predicate/isFunction.html), [isBoolean](https://es-toolkit.slash.page/reference/predicate/isBoolean.html), [isPrimitive](https://es-toolkit.slash.page/reference/predicate/isPrimitive.html), and [isTypedArray](https://es-toolkit.slash.page/reference/predicate/isTypedArray.html).
+- (`es-toolkit/compat`) Added support for [matches](https://es-toolkit.slash.page/reference/compat/predicate/matches.html), [isMatch](https://es-toolkit.slash.page/reference/compat/predicate/isMatch.html), [isArray](https://es-toolkit.slash.page/reference/compat/predicate/isArray.html), [isArrayLike](https://es-toolkit.slash.page/reference/compat/predicate/isArrayLike.html), [isObjectLike](https://es-toolkit.slash.page/reference/compat/predicate/isObjectLike.html), [isArguments](https://es-toolkit.slash.page/reference/compat/predicate/isArguments.html), [size](https://es-toolkit.slash.page/reference/compat/array/size.html), [bind](https://es-toolkit.slash.page/reference/compat/function/bind.html), [flattenDepth](https://es-toolkit.slash.page/reference/array/flatten.html), and [padStart](https://es-toolkit.slash.page/reference/compat/string/padStart.html).
+- Added compatibility tests with lodash for many functions like [initial](https://es-toolkit.slash.page/reference/array/initial.html), [last](https://es-toolkit.slash.page/reference/array/last.html), [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html), [without](https://es-toolkit.slash.page/reference/array/without.html), [uniq](https://es-toolkit.slash.page/reference/array/uniq.html), [invert](https://es-toolkit.slash.page/reference/object/invert.html), [isNull](https://es-toolkit.slash.page/reference/predicate/isNull.html), [isUndefined](https://es-toolkit.slash.page/reference/predicate/isUndefined.html), and [isNil](https://es-toolkit.slash.page/reference/predicate/isNil.html).
+
 ## Version v1.13.1
 
 Released on July 20th, 2024.

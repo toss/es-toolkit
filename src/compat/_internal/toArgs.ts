@@ -9,7 +9,7 @@
  */
 export function toArgs(array: unknown[]): IArguments {
   // eslint-disable-next-line prefer-spread, @typescript-eslint/no-unused-vars
-  return (function (..._: any[]) {
+  return (function (..._: unknown[]) {
     // eslint-disable-next-line prefer-rest-params
     return arguments;
   })(...array);
