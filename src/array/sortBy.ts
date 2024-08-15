@@ -45,8 +45,7 @@ export function sortBy<T extends object>(collection: T[], iteratees: Array<Itera
     return 0;
   };
 
-  const shallowCopiedCollection = collection.slice();
-  const sortedCollection = shallowCopiedCollection.sort((a, b) => {
+  return collection.slice().sort((a, b) => {
     for (let i = 0; i < iteratees.length; i++) {
       const iteratee = iteratees[i];
       const iterateeIsFunction = typeof iteratee === 'function';
@@ -63,6 +62,4 @@ export function sortBy<T extends object>(collection: T[], iteratees: Array<Itera
 
     return 0;
   });
-
-  return sortedCollection;
 }
