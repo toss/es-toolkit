@@ -1,18 +1,17 @@
-type Iteratee<T> = (object: T) => T[keyof T];
+import { compareValues } from '../_internal/compareValues';
 
 /**
- * Sorts an array of objects based on the given iteratees or keys in ascending order.
+ * Sorts an array of objects based on the given `criteria`.
  *
- * This function takes an array of objects, an array of iteratees (or keys) to sort by.
- * It returns the ascendingly sorted array of objects.
- * If `iteratees` are keys of the object, it sorts based on the values of the keys.
- * If `iteratees` are iteratee functions, it sorts based on the return values of the functions.
- * If values for a key are equal, it moves to the next key to determine the order.
+ * - If you provide keys, it sorts the objects by the values of those keys.
+ * - If you provide functions, it sorts based on the values returned by those functions.
+ *
+ * The function returns the array of objects sorted in ascending order.
+ * If two objects have the same value for the current criterion, it uses the next criterion to determine their order.
  *
  * @template T - The type of the objects in the array.
- * @param {T[]} collection - The array of objects to be sorted.
- * @param {Array<Iteratee<T> | keyof T>} iteratees - The array of iteratees or keys to sort by.
- * @returns {T[]} The ascendingly sorted array of objects.
+ * @param {T[]} arr - The array of objects to be sorted.
+ * @param {Array<(item: T) => unknown | keyof T>} criteria - The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
  *
  * @example
  * const users = [
@@ -32,22 +31,10 @@ type Iteratee<T> = (object: T) => T[keyof T];
  * //   { user : 'foo', age: 24 },
  * // ]
  */
-export function sortBy<T extends object>(collection: T[], iteratees: Array<Iteratee<T> | keyof T>): T[] {
-  const compareValues = (a: T[keyof T], b: T[keyof T]) => {
-    if (a < b) {
-      return -1;
-    }
-
-    if (a > b) {
-      return 1;
-    }
-
-    return 0;
-  };
-
-  return collection.slice().sort((a, b) => {
-    for (let i = 0; i < iteratees.length; i++) {
-      const iteratee = iteratees[i];
+export function sortBy<T extends object>(arr: T[], criteria: Array<(item: T) => unknown | keyof T>): T[] {
+  return arr.slice().sort((a, b) => {
+    for (let i = 0; i < criteria.length; i++) {
+      const iteratee = criteria[i];
       const iterateeIsFunction = typeof iteratee === 'function';
 
       const valueA = iterateeIsFunction ? iteratee(a) : a[iteratee];

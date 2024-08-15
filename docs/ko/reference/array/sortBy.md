@@ -1,29 +1,26 @@
 # sortBy
 
-주어진 `iteratees` (또는 키)에 따라 객체 배열을 오름차순으로 정렬해요.
+주어진 조건 `criteria`에 따라서 객체로 이루어진 배열을 정렬해요.
 
-이 함수는 객체 배열, 정렬할 기준이 되는 iteratee (또는 키)의 배열을 받아요.
-오름차순으로 정렬된 객체 배열을 반환해요.
-`iteratees`가 객체의 키일 경우엔 해당 키에 해당하는 값을 기준으로 정렬해요.
-`iteratees`가 `iteratee` 함수일 경우엔 해당 함수의 반환값을 기준으로 정렬해요.
-키의 값이 동일한 경우 다음 키를 기준으로 정렬 순서를 결정해요.
+- 조건이 프로퍼티 이름이면, 해당하는 프로퍼티 값에 따라 정렬해요.
+- 조건이 함수이면, 함수가 반환하는 값에 따라 정렬해요.
 
-> `iteratee` 함수는 객체를 매개변수로 받고 값을 반환하는 함수에요.
+배열은 오름차순으로 정렬돼요. 조건에 따라 두 요소의 값이 같으면, 다음 조건으로 정렬해요.
 
 ## 인터페이스
 
 ```typescript
-function sortBy<T extends object>(collection: T[], iteratees: Array<Iteratee<T> | keyof T>): T[];
+function sortBy<T extends object>(arr: T[], criteria: Array<((item: T) => unknown) | keyof T>): T[];
 ```
 
 ### 파라미터
 
-- `collection` (`T[]`): 정렬할 객체 배열.
-- `iteratees` (`Array<Iteratee<T> | keyof T>`): 정렬할 기준이 되는 iteratee 또는 키의 배열.
+- `arr` (`T[]`): 정렬할 객체 배열.
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 정렬할 기준. 객체의 프로퍼티 이름이나 함수를 쓸 수 있어요.
 
 ### 반환 값
 
-(`T[]`) 정렬된 배열.
+(`T[]`) 오름차순으로 정렬된 배열.
 
 ## 예시
 
