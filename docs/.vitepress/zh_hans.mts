@@ -120,6 +120,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'negate', link: '/zh_hans/reference/function/negate' },
             { text: 'once', link: '/zh_hans/reference/function/once' },
             { text: 'noop', link: '/zh_hans/reference/function/noop' },
+            { text: 'memoize', link: '/zh_hans/reference/function/memoize' },
             { text: 'ary', link: '/zh_hans/reference/function/ary' },
             { text: 'unary', link: '/zh_hans/reference/function/unary' },
             { text: 'bind (兼容性)', link: '/zh_hans/reference/compat/function/bind' },

@@ -1,23 +1,35 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { memoize } from './memoize';
 
 describe('memoize', () => {
-  it('should memoize results based on the first argument', () => {
-    const fn = (a: number, b: number, c: number) => a + b + c;
-    const memoized = memoize(fn);
-    expect(memoized(1, 2, 3)).toBe(6); // {1: 6}
-    expect(memoized(1, 3, 5)).toBe(6); // {1: 6}
+  it('should memoize results of an unary function', () => {
+    const add10 = vi.fn((x: number) => x + 10);
+
+    const memoizedAdd10 = memoize(add10);
+    expect(memoizedAdd10(5)).toBe(15);
+    expect(memoizedAdd10(5)).toBe(15);
+
+    expect(add10).toBeCalledTimes(1);
+
+    const now = () => Date.now();
+    const memoizedNow = memoize(now);
+
+    expect(memoizedNow()).toBe(memoizedNow());
   });
 
   it('should memoize results using a custom resolver function', () => {
-    const fn = function (a: number, b: number, c: number) {
-      return a + b + c;
-    };
-    const resolver = (...args: number[]) => args.join('-');
-    const memoized = memoize(fn, { resolver });
+    const sum = vi.fn(function sum(arr: number[]) {
+      return arr.reduce((x, y) => x + y, 0);
+    });
 
-    expect(memoized(1, 2, 3)).toBe(6); // {1-2-3: 6}
-    expect(memoized(1, 3, 5)).toBe(9); // {1-2-3: 6, 1-3-5: 6}
+    const memoizedSum = memoize(sum, {
+      getCacheKey: x => x.join(','),
+    });
+
+    expect(memoizedSum([1, 2, 3])).toBe(6);
+    expect(memoizedSum([1, 2, 3])).toBe(6);
+
+    expect(sum).toBeCalledTimes(1);
   });
 
   it('should use `this` context for resolver function', () => {
@@ -47,13 +59,6 @@ describe('memoize', () => {
     const memoized = memoize(fn);
     const actual = props.map(value => memoized(value));
     expect(actual).toEqual(props);
-  });
-
-  it('should throw TypeError if resolver is not a function', () => {
-    expect(() => {
-      // @ts-expect-error: resolver is not a function
-      memoize(() => {}, { resolver: true });
-    }).toThrowError(TypeError);
   });
 
   it('should allow custom cache implementation', () => {

@@ -1,98 +1,103 @@
 /**
- * Memoizes a given function by caching its result based on the arguments provided.
+ * Creates a memoized version of the provided function. The memoized function caches
+ * results based on the argument it receives, so if the same argument is passed again,
+ * it returns the cached result instead of recomputing it.
  *
- * @template F - The type of the function to memoize.
- * @template K - The type of the cache key.
- * @param func
- * @param {F} fn - The function to memoize.
- * @param {MemoizeOptions<K, ReturnType<F>>} [options] - An options object with a resolver function and/or a custom cache object.
- * @returns {F & { cache: Cache<K, ReturnType<F>> }} - The memoized function with a cache property.
+ * This function works with functions that take zero or just one argument. If your function
+ * originally takes multiple arguments, you should refactor it to take a single object or array
+ * that combines those arguments.
  *
- * @throws {TypeError} If the provided function or resolver is not valid.
+ * If the argument is not primitive (e.g., arrays or objects), provide a
+ * `getCacheKey` function to generate a unique cache key for proper caching.
+ *
+ * @param {F} fn - The function to be memoized. It should accept a single argument and return a value.
+ * @param {MemoizeOptions<Parameters<F>[0], ReturnType<F>>} [options={}] - Optional configuration for the memoization.
+ * @param {MemoizeCache<any, V>} [options.cache] - The cache object used to store results. Defaults to a new `Map`.
+ * @param {(args: A) => unknown} [options.getCacheKey] - An optional function to generate a unique cache key for each argument.
+ *
+ * @returns {F & { cache: MemoizeCache<any, ReturnType<F>> }} - The memoized function with an additional `cache` property that exposes the internal cache.
  *
  * @example
- * // Basic usage with default cache
- * const add = (a, b) => a + b;
+ * // Example using the default cache
+ * const add = (x: number) => x + 10;
  * const memoizedAdd = memoize(add);
- * console.log(memoizedAdd(1, 2)); // 3
+ *
+ * console.log(memoizedAdd(5)); // 15
+ * console.log(memoizedAdd(5)); // 15 (cached result)
  * console.log(memoizedAdd.cache.size); // 1
  *
  * @example
- * // Using a custom resolver
- * const resolver = (...args) => args.join('-');
- * const memoizedAddWithResolver = memoize(add, { resolver });
- * console.log(memoizedAddWithResolver(1, 2)); // 3
- * console.log(memoizedAddWithResolver.cache.size); // 1
+ * // Example using a custom resolver
+ * const sum = (arr: number[]) => arr.reduce((x, y) => x + y, 0);
+ * const memoizedSum = memoize(sum, { getCacheKey: (arr: number[]) => arr.join(',') });
+ * console.log(memoizedSum([1, 2])); // 3
+ * console.log(memoizedSum([1, 2])); // 3 (cached result)
+ * console.log(memoizedSum.cache.size); // 1
  *
  * @example
- * // Using a custom cache
- * class CustomCache {
- *   constructor() {
- *     this.store = {};
+ * // Example using a custom cache implementation
+ * class CustomCache<K, T> implements MemoizeCache<K, T> {
+ *   private cache = new Map<K, T>();
+ *
+ *   set(key: K, value: T): void {
+ *     this.cache.set(key, value);
  *   }
- *   set(key, value) {
- *     this.store[key] = value;
+ *
+ *   get(key: K): T | undefined {
+ *     return this.cache.get(key);
  *   }
- *   get(key) {
- *     return this.store[key];
+ *
+ *   has(key: K): boolean {
+ *     return this.cache.has(key);
  *   }
- *   has(key) {
- *     return key in this.store;
+ *
+ *   delete(key: K): boolean {
+ *     return this.cache.delete(key);
  *   }
- *   delete(key) {
- *     delete this.store[key];
+ *
+ *   clear(): void {
+ *     this.cache.clear();
  *   }
- *   clear() {
- *     this.store = {};
- *   }
- *   get size() {
- *     return Object.keys(this.store).length;
+ *
+ *   get size(): number {
+ *     return this.cache.size;
  *   }
  * }
- * const customCache = new CustomCache();
- * const memoizedAddWithCustomCache = memoize(add, { cache: customCache });
- * console.log(memoizedAddWithCustomCache(1, 2)); // 3
+ * const customCache = new CustomCache<string, number>();
+ * const memoizedSumWithCustomCache = memoize(sum, { cache: customCache });
+ * console.log(memoizedSumWithCustomCache([1, 2])); // 3
+ * console.log(memoizedSumWithCustomCache([1, 2])); // 3 (cached result)
  * console.log(memoizedAddWithCustomCache.cache.size); // 1
- *
- * @example
- * // Using both custom resolver and custom cache
- * const resolver = (...args) => args.join('-');
- * const customCache = new CustomCache();
- * const memoizedAddWithBoth = memoize(add, { resolver, cache: customCache });
- * console.log(memoizedAddWithBoth(1, 2)); // 3
- * console.log(memoizedAddWithBoth.cache.size); // 1
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function memoize<F extends (...args: any[]) => any, K = Parameters<F>[0]>(
+export function memoize<F extends (...args: any) => any>(
   fn: F,
-  options: MemoizeOptions<K, ReturnType<F>> = {}
-): F & { cache: Cache<K, ReturnType<F>> } {
-  const { cache = new Map<K, ReturnType<F>>(), resolver } = options;
+  options: {
+    cache?: MemoizeCache<any, ReturnType<F>>;
+    getCacheKey?: (args: Parameters<F>[0]) => unknown;
+  } = {}
+): F & { cache: MemoizeCache<any, ReturnType<F>> } {
+  const { cache = new Map<unknown, ReturnType<F>>(), getCacheKey } = options;
 
-  if (typeof fn !== 'function' || (resolver && typeof resolver !== 'function')) {
-    throw new TypeError('Expected a function and an optional resolver function');
-  }
+  const memoizedFn = function (this: unknown, arg: Parameters<F>[0]): ReturnType<F> {
+    const key = getCacheKey ? getCacheKey(arg) : arg;
 
-  const memoizedFn = function (this: unknown, ...args: Parameters<F>): ReturnType<F> {
-    const key = resolver ? resolver.apply(this, args) : (args[0] as K);
     if (cache.has(key)) {
       return cache.get(key)!;
     }
-    const result = fn.apply(this, args);
+
+    const result = fn.call(this, arg);
+
     cache.set(key, result);
+
     return result;
   };
 
   memoizedFn.cache = cache;
-  return memoizedFn as F & { cache: Cache<K, ReturnType<F>> };
+
+  return memoizedFn as F & { cache: MemoizeCache<any, ReturnType<F>> };
 }
 
-export interface MemoizeOptions<K, V> {
-  cache?: Cache<K, V>;
-  resolver?: (...args: any[]) => K;
-}
-
-export interface Cache<K, V> {
+export interface MemoizeCache<K, V> {
   set(key: K, value: V): void;
   get(key: K): V | undefined;
   has(key: K): boolean;

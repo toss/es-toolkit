@@ -1,61 +1,66 @@
 # memoize
 
-주어진 함수의 결과를 인수에 기반하여 캐싱함으로써 메모이제이션해요.
+연산 결과를 캐싱하는 새로운 메모이제이션된 함수를 반환해요. 메모이제이션된 함수는 같은 인자에 대해서 중복해서 연산하지 않고, 캐시된 결과를 반환해요.
+
+인자를 0개 또는 1개만 받는 함수만 메모이제이션할 수 있어요. 2개 이상의 인자를 받는 함수를 메모이제이션하려면,
+여러 인자를 1개의 객체나 배열로 받도록 리팩토링하세요.
+
+인자가 배열이나 객체여서 원시 값이 아닌 경우, 올바르게 캐시 키를 계산할 수 있도록 `getCacheKey` 함수를 옵션으로 제공하세요.
 
 ## 인터페이스
 
 ```typescript
-export function memoize<F extends (...args: any[]) => any, K = Parameters<F>[0]>(
+function memoize<F extends (...args: any) => any>(
   fn: F,
-  options: MemoizeOptions<K, ReturnType<F>> = {}
-): F & { cache: Cache<K, ReturnType<F>> };
+  options: {
+    cache?: MemoizeCache<any, ReturnType<F>>;
+    getCacheKey?: (args: Parameters<F>[0]) => unknown;
+  } = {}
+): F & { cache: MemoizeCache<any, ReturnType<F>> };
 
-export interface MemoizeOptions<K, V> {
-  cache?: Cache<K, V>;
-  resolver?: (...args: any[]) => K;
-}
-
-export interface Cache<K, V> {
-  set: (key: K, value: V) => void;
-  get: (key: K) => V | undefined;
-  has: (key: K) => boolean;
-  delete: (key: K) => boolean | void;
-  clear: () => void;
+interface MemoizeCache<K, V> {
+  set(key: K, value: V): void;
+  get(key: K): V | undefined;
+  has(key: K): boolean;
+  delete(key: K): boolean | void;
+  clear(): void;
   size: number;
 }
 ```
 
 ### 파라미터
 
-- `fn (T)`: 메모이제이션할 함수예요.
-- `options` (MemoizeOptions<K, ReturnType<F>>, optional): 캐시 키를 생성할 함수와 결과를 저장할 캐시 객체를 포함해요.
-  - `resolver ((...args: any[]) => K, optional)`: 캐시 키를 생성할 함수. 제공되지 않으면 메모이제이션된 함수의 첫 번째 인수를 키로 사용해요.
-  - `cache (Cache<K, ReturnType<F>>, optional)`: 결과를 저장할 캐시 객체. 기본값은 새로운 Map 인스턴스입니다.
+- `fn` (`F`) - 메모이제이션할 함수. 0개 또는 1개 인자를 받아야 해요.
+- `options`: 메모이제이션 옵션.
+  - `options.cache` (`MemoizeCache<any, ReturnType<F>>`): 연산 결과를 저장할 캐시 객체. 기본값은 새로운 `Map`이에요.
+  - `options.getCacheKey` (`(args: A) => unknown`): 원시 값이 아닌 인자에 대해서 캐시 키를 올바르게 계산할 수 있는 함수.
 
 ### 반환 값
 
-`(F & { cache: Cache<K, ReturnType<F>> })`: 캐시 속성을 가진 메모이제이션된 함수.
+(`F & { cache: MemoizeCache<any, ReturnType<F>> }`): 메모이제이션된 함수. 추가로 내부 캐시를 노출하는 `cache` 프로퍼티를 가져요.
 
 ## 예시
 
 ```typescript
-import { memoize } from 'es-toolkit/function';
-// 기본 캐시를 사용하는 예제
-const add = (a: number, b: number) => a + b;
+import { memoize, MemoizeCache } from 'es-toolkit/function';
+
+// 기본 사용법
+const add = (x: number) => x + 10;
 const memoizedAdd = memoize(add);
-console.log(memoizedAdd(1, 2)); // 3
-console.log(memoizedAdd(1, 2)); // 3, 캐시된 값 반환
+
+console.log(memoizedAdd(5)); // 15
+console.log(memoizedAdd(5)); // 15 (캐시된 결과)
 console.log(memoizedAdd.cache.size); // 1
 
-// 커스텀 리졸버를 사용하는 예제
-const resolver = (a: number, b: number) => `${a}-${b}`;
-const memoizedAddWithResolver = memoize(add, { resolver });
-console.log(memoizedAddWithResolver(1, 2)); // 3
-console.log(memoizedAddWithResolver(1, 2)); // 3, 캐시된 값 반환
-console.log(memoizedAddWithResolver.cache.size); // 1
+// 커스텀 `getCacheKey` 정의하기
+const sum = (arr: number[]) => arr.reduce((x, y) => x + y, 0);
+const memoizedSum = memoize(sum, { getCacheKey: (arr: number[]) => arr.join(',') });
+console.log(memoizedSum([1, 2])); // 3
+console.log(memoizedSum([1, 2])); // 3 (캐시된 결과)
+console.log(memoizedSum.cache.size); // 1
 
-// 커스텀 캐시 구현을 사용하는 예제
-class CustomCache<K, T> implements Cache<K, T> {
+// 커스텀 `MemoizeCache` 정의하기
+class CustomCache<K, T> implements MemoizeCache<K, T> {
   private cache = new Map<K, T>();
   set(key: K, value: T): void {
     this.cache.set(key, value);
@@ -77,33 +82,8 @@ class CustomCache<K, T> implements Cache<K, T> {
   }
 }
 const customCache = new CustomCache<string, number>();
-const memoizedAddWithCustomCache = memoize(add, { cache: customCache });
-console.log(memoizedAddWithCustomCache(1, 2)); // 3
-console.log(memoizedAddWithCustomCache(1, 2)); // 3, 캐시된 값 반환
+const memoizedSumWithCustomCache = memoize(sum, { cache: customCache });
+console.log(memoizedSumWithCustomCache([1, 2])); // 3
+console.log(memoizedSumWithCustomCache([1, 2])); // 3 (캐시된 결과)
 console.log(memoizedAddWithCustomCache.cache.size); // 1
-
-// 커스텀 리졸버와 캐시를 사용하는 예제
-const customResolver = (a: number, b: number) => `${a}-${b}`;
-const memoizedAddWithBoth = memoize(add, { resolver: customResolver, cache: customCache });
-console.log(memoizedAddWithBoth(1, 2)); // 3
-console.log(memoizedAddWithBoth(1, 2)); // 3, 캐시된 값 반환
-console.log(memoizedAddWithBoth.cache.size); // 1
-
-// `this` 바인딩을 사용하는 예제
-const obj = {
-  b: 2,
-  memoizedAdd: memoize(
-    function (a: number) {
-      return a + this.b;
-    },
-    {
-      resolver: function (a: number) {
-        return `${a}-${this.b}`;
-      },
-    }
-  ),
-};
-console.log(obj.memoizedAdd(1)); // 3
-obj.b = 3;
-console.log(obj.memoizedAdd(1)); // 4
 ```
