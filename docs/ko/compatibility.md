@@ -158,10 +158,10 @@ chunk([1, 2, 3, 4], 0);
 
 | 함수 이름                                                    | 구현 상태 |
 | ------------------------------------------------------------ | --------- |
-| [after](https://lodash.com/docs/4.17.15#after)               | ❌        |
-| [ary](https://lodash.com/docs/4.17.15#ary)                   | ❌        |
+| [after](https://lodash.com/docs/4.17.15#after)               | 📝        |
+| [ary](https://lodash.com/docs/4.17.15#ary)                   | 📝        |
 | [before](https://lodash.com/docs/4.17.15#before)             | ❌        |
-| [bind](https://lodash.com/docs/4.17.15#bind)                 | ❌        |
+| [bind](https://lodash.com/docs/4.17.15#bind)                 | ✅        |
 | [bindKey](https://lodash.com/docs/4.17.15#bindKey)           | ❌        |
 | [curry](https://lodash.com/docs/4.17.15#curry)               | ❌        |
 | [curryRight](https://lodash.com/docs/4.17.15#curryRight)     | ❌        |
@@ -173,13 +173,13 @@ chunk([1, 2, 3, 4], 0);
 | [negate](https://lodash.com/docs/4.17.15#negate)             | 📝        |
 | [once](https://lodash.com/docs/4.17.15#once)                 | 📝        |
 | [overArgs](https://lodash.com/docs/4.17.15#overArgs)         | ❌        |
-| [partial](https://lodash.com/docs/4.17.15#partial)           | ❌        |
-| [partialRight](https://lodash.com/docs/4.17.15#partialRight) | ❌        |
+| [partial](https://lodash.com/docs/4.17.15#partial)           | 📝        |
+| [partialRight](https://lodash.com/docs/4.17.15#partialRight) | 📝        |
 | [rearg](https://lodash.com/docs/4.17.15#rearg)               | ❌        |
-| [rest](https://lodash.com/docs/4.17.15#rest)                 | ❌        |
+| [rest](https://lodash.com/docs/4.17.15#rest)                 | ✅        |
 | [spread](https://lodash.com/docs/4.17.15#spread)             | ❌        |
 | [throttle](https://lodash.com/docs/4.17.15#throttle)         | 📝        |
-| [unary](https://lodash.com/docs/4.17.15#unary)               | ❌        |
+| [unary](https://lodash.com/docs/4.17.15#unary)               | 📝        |
 | [wrap](https://lodash.com/docs/4.17.15#wrap)                 | ❌        |
 
 ### "Lang" 메서드
