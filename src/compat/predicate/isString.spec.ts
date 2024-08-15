@@ -14,7 +14,7 @@ describe('isStirng', () => {
   it('returns false if the value is not string', () => {
     const expected = falsey.map(value => value === '');
 
-    const actual = falsey.map((value, index) => isString(value));
+    const actual = falsey.map((value) => isString(value));
 
     expect(actual).toEqual(expected);
 
