@@ -10,3 +10,4 @@ export { isTypedArray } from './isTypedArray.ts';
 export { isPrimitive } from './isPrimitive.ts';
 export { isBoolean } from './isBoolean.ts';
 export { isSymbol } from './isSymbol.ts';
+export { isString } from './isString.ts';
