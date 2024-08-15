@@ -211,6 +211,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'startsWith (兼容性)', link: '/zh_hans/reference/compat/string/startsWith' },
             { text: 'endsWith (兼容性)', link: '/zh_hans/reference/compat/string/endsWith' },
             { text: 'padStart (兼容性)', link: '/zh_hans/reference/compat/string/padStart' },
+            { text: 'padEnd (兼容性)', link: '/zh_hans/reference/compat/string/padEnd' },
           ],
         },
         {
