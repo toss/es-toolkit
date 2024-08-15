@@ -135,6 +135,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'negate', link: '/ko/reference/function/negate' },
             { text: 'once', link: '/ko/reference/function/once' },
             { text: 'noop', link: '/ko/reference/function/noop' },
+            { text: 'memoize', link: '/ko/reference/function/memoize' },
             { text: 'ary', link: '/ko/reference/function/ary' },
             { text: 'unary', link: '/ko/reference/function/unary' },
             { text: 'bind (호환성)', link: '/ko/reference/compat/function/unary' },

@@ -124,6 +124,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'negate', link: '/reference/function/negate' },
             { text: 'once', link: '/reference/function/once' },
             { text: 'noop', link: '/reference/function/noop' },
+            { text: 'memoize', link: '/reference/function/memoize' },
             { text: 'ary', link: '/reference/function/ary' },
             { text: 'unary', link: '/reference/function/unary' },
             { text: 'bind (compat)', link: '/reference/compat/function/bind' },
