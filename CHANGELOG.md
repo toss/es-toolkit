@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.16.0
+
+Released on August 15th, 2024.
+
+- Added support for [memoize](https://es-toolkit.slash.page/reference/function/memoize.html), [find](https://es-toolkit.slash.page/reference/compat/array/find.html), [findIndex](https://es-toolkit.slash.page/reference/compat/array/findIndex.html), [has](https://es-toolkit.slash.page/reference/compat/object/has.html), [partial](https://es-toolkit.slash.page/reference/function/partial.html), [partialRight](https://es-toolkit.slash.page/reference/function/partialRight.html), [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html), [isString](https://es-toolkit.slash.page/reference/predicate/isString.html), [rest](https://es-toolkit.slash.page/reference/function/rest.html), [padEnd](https://es-toolkit.slash.page/reference/compat/string/padEnd.html).
+
 ## Version v1.15.1
 
 Released on August 10th, 2024.
