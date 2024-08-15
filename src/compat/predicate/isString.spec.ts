@@ -5,7 +5,7 @@ import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
 
-describe('isStirng', () => {
+describe('isString', () => {
   it('returns true if the value is string', () => {
     expect(isString('a')).toBe(true);
     expect(isString(Object('a'))).toBe(true);
