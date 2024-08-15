@@ -41,6 +41,7 @@ export { indexOf } from './array/indexOf.ts';
 
 export { ary } from './function/ary.ts';
 export { bind } from './function/bind.ts';
+export { rest } from './function/rest.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';

@@ -129,6 +129,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'bind (compat)', link: '/reference/compat/function/bind' },
             { text: 'partial', link: '/reference/function/partial' },
             { text: 'partialRight', link: '/reference/function/partialRight' },
+            { text: 'rest', link: '/reference/function/rest' },
           ],
         },
         {

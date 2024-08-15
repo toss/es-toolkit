@@ -125,6 +125,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'bind (兼容性)', link: '/zh_hans/reference/compat/function/bind' },
             { text: 'partial', link: '/zh_hans/reference/function/partial' },
             { text: 'partialRight', link: '/zh_hans/reference/function/partialRight' },
+            { text: 'rest', link: '/zh_hans/reference/function/rest' },
           ],
         },
         {
