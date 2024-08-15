@@ -140,6 +140,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'bind (호환성)', link: '/ko/reference/compat/function/unary' },
             { text: 'partial', link: '/ko/reference/function/partial' },
             { text: 'partialRight', link: '/ko/reference/function/partialRight' },
+            { text: 'rest', link: '/ko/reference/function/rest' },
           ],
         },
         {
