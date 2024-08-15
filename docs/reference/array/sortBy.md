@@ -10,7 +10,7 @@ The function returns the array of objects sorted in ascending order. If two obje
 ## Signature
 
 ```typescript
-function sortBy<T extends object>(arr: T[], criteria: Array<keyof T | ((item: T) => unknown)>): T[];
+function sortBy<T extends object>(arr: T[], criteria: Array<((item: T) => unknown) | keyof T>): T[];
 ```
 
 ### Parameters

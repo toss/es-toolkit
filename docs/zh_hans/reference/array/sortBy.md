@@ -10,7 +10,7 @@
 ## 签名
 
 ```typescript
-function sortBy<T extends object>(arr: T[], criteria: Array<keyof T | ((item: T) => unknown)>): T[];
+function sortBy<T extends object>(arr: T[], criteria: Array<((item: T) => unknown) | keyof T>): T[];
 ```
 
 ### 参数
