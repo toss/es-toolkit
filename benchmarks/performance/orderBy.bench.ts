@@ -44,3 +44,13 @@ describe('orderBy (property path)', () => {
     orderByLodash(users, ['nested.user', 'age'], orders);
   });
 });
+
+describe('orderBy (custom key function)', () => {
+  bench('es-toolkit/compat/orderBy', () => {
+    orderByToolkitCompat(users, [item => item.user, item => item.age], orders);
+  });
+
+  bench('lodash/orderBy', () => {
+    orderByLodash(users, [item => item.user, item => item.age], orders);
+  });
+});
