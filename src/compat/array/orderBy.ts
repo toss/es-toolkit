@@ -10,7 +10,7 @@ import { getPath } from '../_internal/getPath';
  *
  * @template T - The type of elements in the array.
  * @param {T[] | null} collection - The array of objects to be sorted.
- * @param {string | Array<string | string[]>} keys - An array of keys (property names or property paths) to sort by.
+ * @param {((item: T) => unknown) | string | Array<((item: T) => unknown) | string | string[]>} keys - An array of keys (property names or property paths or custom key functions) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
  * @returns {T[]} - The sorted array.
  *
@@ -22,7 +22,7 @@ import { getPath } from '../_internal/getPath';
  *   { user: 'fred', age: 40 },
  *   { user: 'barney', age: 36 },
  * ];
- * const result = orderBy(users, ['user', 'age'], ['asc', 'desc']);
+ * const result = orderBy(users, ['user', (item) => item.age], ['asc', 'desc']);
  * // result will be:
  * // [
  * //   { user: 'barney', age: 36 },
@@ -32,8 +32,8 @@ import { getPath } from '../_internal/getPath';
  * // ]
  */
 export function orderBy<T extends object>(
-  collection?: T[] | null,
-  keys?: string | Array<string | string[]>,
+  collection: T[] | null | undefined,
+  keys?: ((item: T) => unknown) | string | Array<((item: T) => unknown) | string | string[]>,
   orders?: unknown | unknown[]
 ): T[] {
   if (collection == null) {
@@ -60,7 +60,7 @@ export function orderBy<T extends object>(
     return 0;
   };
 
-  const getValueByPath = (key: string | string[], obj: T) => {
+  const getValueByPath = (key: string | ((item: T) => unknown) | string[], obj: T) => {
     if (Array.isArray(key)) {
       let value: object = obj;
 
@@ -69,6 +69,10 @@ export function orderBy<T extends object>(
       }
 
       return value;
+    }
+
+    if (typeof key === 'function') {
+      return key(obj);
     }
 
     return obj[key as keyof typeof obj];

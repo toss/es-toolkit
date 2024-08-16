@@ -8,27 +8,34 @@ import { toPath } from './toPath';
  * @param {object} object - The object to query.
  * @returns {string | string[]} The converted key (only property name).
  */
-export function getPath(key: string | string[], object: object): string | string[] {
+export function getPath<T extends object>(
+  key: ((item: T) => unknown) | string | string[],
+  object: T
+): ((item: T) => unknown) | string | string[] {
   if (Array.isArray(key)) {
     const path = [];
+    let keyOwner: object = object;
 
     for (let i = 0; i < key.length; i++) {
       const k = key[i];
 
-      if (isKey(k, object)) {
-        object = object[k as keyof typeof object];
+      if (isKey(k, keyOwner)) {
+        keyOwner = keyOwner[k as keyof typeof keyOwner];
         path.push(k);
       } else {
         const keys = toPath(k);
 
         for (let i = 0; i < keys.length; i++) {
-          object = object[keys[i] as keyof typeof object];
+          keyOwner = keyOwner[keys[i] as keyof typeof keyOwner];
           path.push(keys[i]);
         }
       }
     }
 
     return path;
+  }
+  if (typeof key === 'function') {
+    return key;
   }
 
   return isKey(key, object) ? key : toPath(key);
