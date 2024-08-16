@@ -60,32 +60,32 @@ export function orderBy<T extends object>(
     return 0;
   };
 
-  const getValueByPath = (key: string | ((item: T) => unknown) | string[], obj: T) => {
-    if (Array.isArray(key)) {
+  const getValueByPath = (path: string | ((item: T) => unknown) | string[], obj: T) => {
+    if (Array.isArray(path)) {
       let value: object = obj;
 
-      for (let i = 0; i < key.length; i++) {
-        value = value[key[i] as keyof typeof value];
+      for (let i = 0; i < path.length; i++) {
+        value = value[path[i] as keyof typeof value];
       }
 
       return value;
     }
 
-    if (typeof key === 'function') {
-      return key(obj);
+    if (typeof path === 'function') {
+      return path(obj);
     }
 
-    return obj[key as keyof typeof obj];
+    return obj[path as keyof typeof obj];
   };
 
   keys = keys.map(key => getPath(key, collection[0]));
 
   return collection.slice().sort((a, b) => {
     for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
+      const path = keys[i];
 
-      const valueA = getValueByPath(key, a);
-      const valueB = getValueByPath(key, b);
+      const valueA = getValueByPath(path, a);
+      const valueB = getValueByPath(path, b);
       const order = String((orders as unknown[])[i]); // For Object('desc') case
 
       const comparedResult = compareValues(valueA, valueB, order);
