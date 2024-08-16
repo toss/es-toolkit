@@ -80,8 +80,7 @@ export function orderBy<T extends object>(
 
   keys = keys.map(key => getPath(key, collection[0]));
 
-  const shallowCopiedCollection = collection.slice();
-  const orderedCollection = shallowCopiedCollection.sort((a, b) => {
+  return collection.slice().sort((a, b) => {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
@@ -98,6 +97,4 @@ export function orderBy<T extends object>(
 
     return 0;
   });
-
-  return orderedCollection;
 }
