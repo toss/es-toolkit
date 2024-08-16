@@ -15,19 +15,19 @@ export function getPath<T extends object>(
 ): ((item: T) => unknown) | string | string[] {
   if (Array.isArray(key)) {
     const path = [];
-    let current: object = object;
+    let target: object = object;
 
     for (let i = 0; i < key.length; i++) {
       const k = key[i];
 
-      if (isKey(k, current)) {
-        current = current[k as keyof typeof current];
+      if (isKey(k, target)) {
+        target = target[k as keyof typeof target];
         path.push(k);
       } else {
         const keys = toPath(k);
 
         for (let i = 0; i < keys.length; i++) {
-          current = current[keys[i] as keyof typeof current];
+          target = target[keys[i] as keyof typeof target];
           path.push(keys[i]);
         }
       }
