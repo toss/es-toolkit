@@ -10,7 +10,7 @@ import { getPath } from '../_internal/getPath';
  *
  * @template T - The type of elements in the array.
  * @param {T[] | null} collection - The array of objects to be sorted.
- * @param {string | Array<string | string[]>} keys - An array of keys (property names or property paths) to sort by.
+ * @param {((item: T) => unknown) | string | Array<((item: T) => unknown) | string | string[]>} keys - An array of keys (property names or property paths or custom key functions) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
  * @returns {T[]} - The sorted array.
  *
@@ -22,7 +22,7 @@ import { getPath } from '../_internal/getPath';
  *   { user: 'fred', age: 40 },
  *   { user: 'barney', age: 36 },
  * ];
- * const result = orderBy(users, ['user', 'age'], ['asc', 'desc']);
+ * const result = orderBy(users, ['user', (item) => item.age], ['asc', 'desc']);
  * // result will be:
  * // [
  * //   { user: 'barney', age: 36 },
@@ -32,8 +32,8 @@ import { getPath } from '../_internal/getPath';
  * // ]
  */
 export function orderBy<T extends object>(
-  collection?: T[] | null,
-  keys?: string | Array<string | string[]>,
+  collection: T[] | null | undefined,
+  keys?: ((item: T) => unknown) | string | Array<((item: T) => unknown) | string | string[]>,
   orders?: unknown | unknown[]
 ): T[] {
   if (collection == null) {
@@ -60,29 +60,32 @@ export function orderBy<T extends object>(
     return 0;
   };
 
-  const getValueByPath = (key: string | string[], obj: T) => {
-    if (Array.isArray(key)) {
+  const getValueByPath = (path: string | ((item: T) => unknown) | string[], obj: T) => {
+    if (Array.isArray(path)) {
       let value: object = obj;
 
-      for (let i = 0; i < key.length; i++) {
-        value = value[key[i] as keyof typeof value];
+      for (let i = 0; i < path.length; i++) {
+        value = value[path[i] as keyof typeof value];
       }
 
       return value;
     }
 
-    return obj[key as keyof typeof obj];
+    if (typeof path === 'function') {
+      return path(obj);
+    }
+
+    return obj[path as keyof typeof obj];
   };
 
   keys = keys.map(key => getPath(key, collection[0]));
 
-  const shallowCopiedCollection = collection.slice();
-  const orderedCollection = shallowCopiedCollection.sort((a, b) => {
+  return collection.slice().sort((a, b) => {
     for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
+      const path = keys[i];
 
-      const valueA = getValueByPath(key, a);
-      const valueB = getValueByPath(key, b);
+      const valueA = getValueByPath(path, a);
+      const valueB = getValueByPath(path, b);
       const order = String((orders as unknown[])[i]); // For Object('desc') case
 
       const comparedResult = compareValues(valueA, valueB, order);
@@ -94,6 +97,4 @@ export function orderBy<T extends object>(
 
     return 0;
   });
-
-  return orderedCollection;
 }

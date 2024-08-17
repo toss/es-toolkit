@@ -80,4 +80,13 @@ describe('orderBy', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('should work with `keys` specified as functions', () => {
+    expect(orderBy(objects, [item => item.a, item => item.b], ['desc', 'asc'])).toEqual([
+      objects[3],
+      objects[1],
+      objects[2],
+      objects[0],
+    ]);
+  });
 });
