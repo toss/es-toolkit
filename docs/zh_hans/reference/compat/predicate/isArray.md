@@ -18,16 +18,16 @@
 ## 签名
 
 ```typescript
-function isArray<T>(value: T): value is Extract<T, unknown[]>;
+function isArray(value?: unknown): value is any[];
 ```
 
 ### 参数
 
-- `value` (`T`): 检查是否为数组的值。
+- `value` (`unknown`): 检查是否为数组的值。
 
 ### 返回值
 
-(`value is Extract<T, unknown[]>`): 如果值为数组，则返回 `true`，否则返回 `false`。
+(`value is any[]`): 如果值为数组，则返回 `true`，否则返回 `false`。
 
 ## 示例
 
