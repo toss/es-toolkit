@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { empties } from '../_internal/empties';
 import { findIndex } from './findIndex';
 import { slice } from '../_internal/slice';
 
