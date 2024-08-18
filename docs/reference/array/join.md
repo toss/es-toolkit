@@ -2,18 +2,16 @@
 
 This function concatenates all elements of an array into a single string using a specified separator.
 
-If the array is empty, it returns an empty string. The default separator is a comma (,).
-
 ## Signature
 
 ```typescript
-function join<T>(array: readonly T[], separator: string = ','): string;
+function join<T>(array: readonly T[], separator: string): string;
 ```
 
 ### Parameters
 
 - `array` (`T[]`): The array containing the elements to be joined.
-- `separator` (`string = ','`): The string to be inserted between elements. If not specified, a comma (,) is used as the default.
+- `separator` (`string`): The string to be inserted between elements.
 
 ### Returns
 
@@ -23,7 +21,7 @@ function join<T>(array: readonly T[], separator: string = ','): string;
 
 ```typescript
 const fruits = ['Apple', 'Banana', 'Cherry'];
-const result = join(fruits);
+const result = join(fruits, ',');
 // result will be 'Apple,Banana,Cherry'
 
 const numbers = [1, 2, 3];
@@ -31,6 +29,6 @@ const formattedNumbers = join(numbers, ' - ');
 // formattedNumbers will be '1 - 2 - 3'
 
 const emptyArray = [];
-const emptyResult = join(emptyArray);
+const emptyResult = join(emptyArray, ',');
 // emptyResult will be ''
 ```
