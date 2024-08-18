@@ -17,6 +17,7 @@ export { groupBy } from './groupBy.ts';
 export { intersection } from './intersection.ts';
 export { intersectionBy } from './intersectionBy.ts';
 export { intersectionWith } from './intersectionWith.ts';
+export { join } from './join.ts';
 export { keyBy } from './keyBy.ts';
 export { maxBy } from './maxBy.ts';
 export { minBy } from './minBy.ts';
