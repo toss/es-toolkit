@@ -10,7 +10,6 @@ describe('set', () => {
       a: number;
     }
     const result = set<Test>({}, 'a', 1);
-    result.a;
     expect(result).toEqual({ a: 1 });
   });
 
