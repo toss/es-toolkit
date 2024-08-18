@@ -4,6 +4,7 @@
  * This function takes an object and a predicate function, and returns a new object that
  * includes only the properties for which the predicate function returns false.
  *
+ * @template T - The type of object.
  * @param {T} obj - The object to omit properties from.
  * @param {(value: T[string], key: keyof T) => boolean} shouldOmit - A predicate function that determines
  * whether a property should be omitted. It takes the property's key and value as arguments and returns `true`

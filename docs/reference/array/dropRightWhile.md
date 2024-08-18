@@ -2,7 +2,7 @@
 
 Removes elements from the end of an array until the predicate returns false.
 
-This function iterates over an array and drops elements from the start until the provided
+This function iterates over an array and drops elements from the end until the provided
 predicate function returns false. It then returns a new array with the remaining elements.
 
 ## Signature

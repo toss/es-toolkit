@@ -15,7 +15,7 @@ function isUndefined(x: unknown): x is undefined;
 
 ### 파라미터
 
-- `x` (`unknown`): `undefined`인지 확인할 값
+- `x` (`unknown`): `undefined`인지 확인할 값.
 
 ### 반환 값
 

@@ -2,6 +2,7 @@
  * Finds the element in an array that has the maximum value when applying
  * the `getValue` function to each element.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} items The array of elements to search.
  * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
  * @returns {T} The element with the maximum value as determined by the `getValue` function.

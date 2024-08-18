@@ -4,6 +4,7 @@
  * This function takes an array and a number, and returns a new array with the specified number
  * of elements removed from the start.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} arr - The array from which to drop elements.
  * @param {number} itemsCount - The number of elements to drop from the beginning of the array.
  * @returns {T[]} A new array with the specified number of elements removed from the start.
@@ -14,5 +15,7 @@
  * // result will be [3, 4, 5] since the first two elements are dropped.
  */
 export function drop<T>(arr: readonly T[], itemsCount: number): T[] {
+  itemsCount = Math.max(itemsCount, 0);
+
   return arr.slice(itemsCount);
 }

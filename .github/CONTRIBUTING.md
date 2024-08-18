@@ -22,6 +22,31 @@ We value implementation and interface simplicity over a variety of features for 
 
 In this manner, instead of having complex options of making full use of overloading, etc, to support edge cases, we aim to provide the most simplest interface and implementation for the most common 85% usecases.
 
+We recognize that there are multiple approaches to achieving the same functionality. If the performance difference is less than 10%, please follow our coding style guidelines:
+
+<details>
+<summary>
+1. Prefer <code>for</code> loops over <code>reduce</code>.
+</summary>
+
+In most cases, we prefer using `for` loops over `reduce`. This is because maintaining immutability with `reduce` can be challenging without tools like [immer](https://github.com/immerjs/immer), and functional programming typically allows local mutability.
+
+For instance, we prefer implementing `keyBy` using a `for ... of` loop instead of `reduce`.
+
+```typescript
+export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T> {
+  const result = {} as Record<K, T>;
+
+  for (const item of arr) {
+    const key = getKeyFromItem(item);
+    result[key] = item;
+  }
+
+  return result;
+}
+```
+</details>
+
 ### 1.3 Documentation
 
 All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.

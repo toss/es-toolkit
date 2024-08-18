@@ -5,6 +5,8 @@
  * an object where the keys are the generated keys and the values are arrays of elements that share
  * the same key.
  *
+ * @template T - The type of elements in the array.
+ * @template K - The type of keys.
  * @param {T[]} arr - The array to group.
  * @param {(item: T) => K} getKeyFromItem - A function that generates a key from an element.
  * @returns {Record<K, T[]>} An object where each key is associated with an array of elements that
@@ -28,7 +30,7 @@
  * //   ]
  * // }
  */
-export function groupBy<T, K extends string>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T[]> {
+export function groupBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T[]> {
   const result = {} as Record<K, T[]>;
 
   for (const item of arr) {

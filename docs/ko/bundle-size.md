@@ -21,3 +21,16 @@ es-toolkit은 현대적인 구현을 가지고 있기 때문에, 다른 라이�
 | [throttle](./reference/function/throttle.md)  | 110 bytes        | 1460 bytes        | -92.5% |
 | [pick](./reference/object/pick.md)            | 657 bytes        | 3860 bytes        | -83.0% |
 | [zip](./reference/array/zip.md)               | 797 bytes        | 1790 bytes        | -55.5% |
+
+## 번들 사이즈 측정 방법
+
+[esbuild 0.23.0](https://esbuild.github.io)로 번들 사이즈를 측정하고 있어요. 아래와 같은 코드를 사용해요.
+
+```tsx
+import { chunk } from 'es-toolkit';
+// or import { chunk } from 'lodash-es';
+
+console.log(chunk);
+```
+
+[번들 사이즈 측정 벤치마크 코드](https://github.com/toss/es-toolkit/tree/main/benchmarks/bundle-size)를 참고하세요.

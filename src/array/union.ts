@@ -1,4 +1,4 @@
-import { uniq } from './uniq';
+import { uniq } from './uniq.ts';
 
 /**
  * Creates an array of unique values from all given arrays.
@@ -6,6 +6,7 @@ import { uniq } from './uniq';
  * This function takes two arrays, merges them into a single array, and returns a new array
  * containing only the unique values from the merged array.
  *
+ * @template T - The type of elements in the array.
  * @param {T[]} arr1 - The first array to merge and filter for unique values.
  * @param {T[]} arr2 - The second array to merge and filter for unique values.
  * @returns {T[]} A new array of unique values.

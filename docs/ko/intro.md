@@ -17,6 +17,7 @@ es-toolkit이 제공하는 기능 목록은 다음과 같습니다.
 - **객체**: [pick](./reference/object/pick.md)이나 [omit](./reference/object/omit.md)처럼 JavaScript 객체를 다루는 함수를 제공해요.
 - **타입 가드**: [isNotNil](./reference/predicate/isNotNil.md)처럼 특정한 객체가 어떤 상태인지 검사하는 타입 가드 함수를 제공해요.
 - **Promise**: [delay](./reference/promise/delay.md)와 같은 비동기 유틸리티 함수를 제공해요.
+- **문자열**: [snakeCase](./reference/string/snakeCase.md)와 같이 문자열을 다루기 위한 다양한 함수를 제공해요.
 
 ## 링크
 

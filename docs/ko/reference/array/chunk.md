@@ -13,7 +13,7 @@ function chunk<T>(arr: T[], size: number): T[][];
 
 ### 파라미터
 
-- `arr` (`T[]`): 작은 배열들로 나눌 배열
+- `arr` (`T[]`): 작은 배열들로 나눌 배열.
 - `size` (`number`): 작은 배열들의 길이. 양의 정수여야 해요.
 
 ### 반환 값
@@ -37,3 +37,36 @@ chunk([1, 2, 3, 4, 5], 2);
 chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
 // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
 ```
+
+## 사용해보기
+
+::: sandpack
+
+```ts index.ts
+import { chunk } from 'es-toolkit/array';
+
+console.log(chunk([1, 2, 3, 4, 5], 2));
+```
+
+:::
+
+## Lodash 호환성
+
+`es-toolkit/compat`에서 `chunk`를 가져오면 lodash와 호환돼요.
+
+- `size`가 1보다 작으면 빈 배열을 반환해요.
+- `size`에 소수점이 있는 숫자를 제공하더라도, 정수로 내림해요.
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+chunk([1, 2, 3], 0); // Returns []
+```
+
+## 성능 비교
+
+|                   | [번들 사이즈](../../bundle-size.md) | [런타임 성능](../../performance.md) |
+| ----------------- | ----------------------------------- | ----------------------------------- |
+| es-toolkit        | 238 바이트 (92.4% 작음)             | 9,338,821 회 (11% 느림)             |
+| es-toolkit/compat | 307 바이트 (90.2% 작음)             | 9,892,157 회 (5% 느림)              |
+| lodash-es         | 3,153 바이트                        | 10,523,270 회                       |

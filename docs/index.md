@@ -14,8 +14,8 @@ hero:
       text: Reference
       link: /reference/array/chunk
     - theme: alt
-      text: Installation
-      link: /installation
+      text: Usage
+      link: /usage
 
 features:
   - title: Best performance
@@ -28,4 +28,6 @@ features:
     details: es-toolkit offers simple yet robust types for all functions.
   - title: Battle-tested
     details: es-toolkit has 100% test coverage, ensuring maximum robustness.
+  - title: Comprehensive runtime support
+    details: es-toolkit supports all JavaScript environments, including Node.js, Deno, Bun, and browsers.
 ---

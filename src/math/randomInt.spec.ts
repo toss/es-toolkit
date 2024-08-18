@@ -13,6 +13,15 @@ describe('randomInt', () => {
     }
   });
 
+  it('generates a random floating-point between 0 and max (exclusive)', () => {
+    for (let i = 0; i < 100; i++) {
+      const result = randomInt(5);
+      expect(result).toBeGreaterThanOrEqual(0);
+      expect(result).toBeLessThan(5);
+      expect(Number.isInteger(result)).toBe(true);
+    }
+  });
+
   it('throws an error if min is greater than max', () => {
     const min = 5;
     const max = 0;

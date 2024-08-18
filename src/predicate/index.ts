@@ -1,4 +1,13 @@
-export { isNil } from './isNil';
-export { isNotNil } from './isNotNil';
-export { isNull } from './isNull';
-export { isUndefined } from './isUndefined';
+export { isEqual } from './isEqual.ts';
+export { isNil } from './isNil.ts';
+export { isNotNil } from './isNotNil.ts';
+export { isNull } from './isNull.ts';
+export { isUndefined } from './isUndefined.ts';
+export { isLength } from './isLength.ts';
+export { isPlainObject } from './isPlainObject.ts';
+export { isFunction } from './isFunction.ts';
+export { isTypedArray } from './isTypedArray.ts';
+export { isPrimitive } from './isPrimitive.ts';
+export { isBoolean } from './isBoolean.ts';
+export { isSymbol } from './isSymbol.ts';
+export { isString } from './isString.ts';

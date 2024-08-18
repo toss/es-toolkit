@@ -1,6 +1,6 @@
-import { differenceWith } from './differenceWith';
-import { intersectionWith } from './intersectionWith';
-import { unionWith } from './unionWith';
+import { differenceWith } from './differenceWith.ts';
+import { intersectionWith } from './intersectionWith.ts';
+import { unionWith } from './unionWith.ts';
 
 /**
  * Computes the symmetric difference between two arrays using a custom equality function.

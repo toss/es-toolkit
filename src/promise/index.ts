@@ -1,1 +1,2 @@
-export { delay } from './delay';
+export { delay } from './delay.ts';
+export { withTimeout } from './withTimeout.ts';

@@ -26,8 +26,8 @@ describe('once', () => {
     });
     const onceFunc = once(func);
 
-    onceFunc();
-    onceFunc();
+    expect(onceFunc()).toBeUndefined();
+    expect(onceFunc()).toBeUndefined();
     expect(func).toHaveBeenCalledTimes(1);
   });
 });

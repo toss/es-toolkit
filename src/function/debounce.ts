@@ -7,6 +7,7 @@ interface DebounceOptions {
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
  * method to cancel any pending execution.
  *
+ * @template F - The type of function.
  * @param {F} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
  * @param {DebounceOptions} options - The options object.
@@ -41,7 +42,7 @@ export function debounce<F extends (...args: any[]) => void>(
   debounceMs: number,
   { signal }: DebounceOptions = {}
 ): F & { cancel: () => void } {
-  let timeoutId: number | NodeJS.Timeout | null = null;
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   const debounced = function (...args: Parameters<F>) {
     if (timeoutId !== null) {

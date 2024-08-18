@@ -1,12 +1,11 @@
 /**
  * Returns an array of numbers from `start` to `end`, incrementing by `step`.
  *
- * If `step` is not provided, it defaults to `1` for an
- * ascending range and `-1` for a descending range.
+ * If `step` is not provided, it defaults to `1`.
  *
- * @param {number} start - The starting number of the range.
- * @param {number} [end] - The end number of the range.
- * @param {number} [step] - The step value for the range.
+ * @param {number} start - The starting number of the range (inclusive).
+ * @param {number} [end] - The end number of the range (exclusive).
+ * @param {number} [step] - The step value for the range. (default: 1)
  * @returns {number[]} An array of numbers from `start` to `end` with the specified `step`.
  *
  * @example
@@ -18,7 +17,7 @@
  * range(0, 20, 5);
  *
  * @example
- * // Returns []
+ * // Returns [0, -1, -2, -3]
  * range(0, -4, -1);
  *
  * @example

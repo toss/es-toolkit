@@ -1,4 +1,13 @@
-export { omit } from './omit';
-export { omitBy } from './omitBy';
-export { pick } from './pick';
-export { pickBy } from './pickBy';
+export { omit } from './omit.ts';
+export { omitBy } from './omitBy.ts';
+export { pick } from './pick.ts';
+export { pickBy } from './pickBy.ts';
+export { invert } from './invert.ts';
+export { clone } from './clone.ts';
+export { flattenObject } from './flattenObject.ts';
+export { mapKeys } from './mapKeys.ts';
+export { mapValues } from './mapValues.ts';
+export { cloneDeep } from './cloneDeep.ts';
+export { merge } from './merge.ts';
+export { toMerged } from './toMerged.ts';
+export { mergeWith } from './mergeWith.ts';

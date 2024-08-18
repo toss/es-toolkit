@@ -6,6 +6,8 @@
  * mapped elements in the second array. It effectively filters out any elements from the first array
  * that do not have corresponding mapped values in the second array.
  *
+ * @template T - The type of elements in the array.
+ * @template U - The type of mapped elements.
  * @param {T[]} firstArr - The first array to compare.
  * @param {T[]} secondArr - The second array to compare.
  * @param {(item: T) => U} mapper - A function to map the elements of both arrays for comparison.
