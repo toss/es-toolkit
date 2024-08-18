@@ -1,8 +1,12 @@
 import type { OptionalToNullable } from '../_internal/types';
 
-type CurryResult<F extends (...args: any) => any> =
-  OptionalToNullable<Parameters<F>> extends [infer First, ...infer Rest]
-    ? (arg: First) => CurryResult<(...args: Rest) => ReturnType<F>>
+type CurryResult<
+  F extends (...args: any) => any,
+  Origin extends (...args: any) => any = F,
+> = Parameters<Origin>['length'] extends 0
+  ? F
+  : OptionalToNullable<Parameters<F>> extends [infer First, ...infer Rest]
+    ? (arg: First) => CurryResult<(...args: Rest) => ReturnType<F>, Origin>
     : ReturnType<F>;
 
 /**
@@ -29,7 +33,7 @@ type CurryResult<F extends (...args: any) => any> =
  */
 export function curry<F extends (...args: any) => any>(func: F): CurryResult<F> {
   if (func.length === 0) {
-    throw new Error('`func` must have at least one argument that is not a rest parameter.');
+    return func as CurryResult<F>;
   }
 
   return function (arg: Parameters<F>[0]) {
