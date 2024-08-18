@@ -76,6 +76,7 @@ function sidebar(): DefaultTheme.Sidebar {
               link: '/reference/array/intersectionWith',
             },
             { text: 'isSubset', link: '/reference/array/isSubset' },
+            { text: 'join', link: '/reference/array/join' },
             { text: 'keyBy', link: '/reference/array/keyBy' },
             { text: 'minBy', link: '/reference/array/minBy' },
             { text: 'maxBy', link: '/reference/array/maxBy' },
