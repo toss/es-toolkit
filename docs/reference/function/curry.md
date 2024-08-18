@@ -36,39 +36,3 @@ const sum25 = sum10(15);
 // The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value
 const result = sum25(5);
 ```
-
-### Immediate Execution without Supplying All Arguments (e.g., when optional parameters are present)
-
-```typescript
-function sum(a: number, b: number, c = 5) {
-  return a + b + c;
-}
-
-const curriedSum = curry(sum);
-
-// The parameter `a` should be given the value `10`
-const sum10 = curriedSum(10);
-
-// The parameter `b` should be given the value `15`
-const sum25 = sum10(15);
-
-// Execute the `sum` function immediately with the received `a` and `b` parameters
-const result = sum25.run();
-```
-
-### Using Flexible Curry
-
-```typescript
-function sum(a: number, b: number, c: number) {
-  return a + b + c;
-}
-
-// Flexible curry allows multiple arguments to be received at once
-const curriedSum = curry.flexible(sum);
-
-// The parameter `a` should be given the value `10`, `b` the value `15`
-const sum20 = curriedSum(10, 15);
-
-// The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value
-const result = sum20(5);
-```

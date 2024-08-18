@@ -36,35 +36,3 @@ const sum25 = sum10(15);
 // `c` 매개변수에 값 `5`를 입력해요. 원본 함수(`sum`)에 모든 인자가 입력되었으므로, 결과값을 반환해요
 const result = sum25(5);
 ```
-
-### 모든 인자를 입력받지 않고 즉시 실행 (ex. optional parameter가 존재하는 경우)
-
-```typescript
-const sum = (a: number, b: number, c = 5) => a + b + c;
-
-const curriedSum = curry(sum);
-
-// `a` 매개변수에 값 `10`을 입력해요
-const sum10 = curriedSum(10);
-
-// `b` 매개변수에 값 `15`를 입력해요
-const sum25 = sum10(15);
-
-// `a`와 `b` 매개변수를 입력받은 상태에서, `sum` 함수를 즉시 실행해요
-const result = sum25.run();
-```
-
-### 유연한 방식의 커링 사용법
-
-```typescript
-const sum = (a: number, b: number, c = 5) => a + b + c;
-
-// 유연한 방식의 커링은 한 번에 여러개의 인자값을 입력받을 수 있어요
-const curriedSum = curry.flexible(sum);
-
-// `a` 매개변수에 값 `10`을, `b`에 `15`를 입력해요
-const sum20 = curriedSum(10, 15);
-
-// `c` 매개변수에 값 `5`를 입력해요. 원본 함수(`sum`)에 모든 인자가 입력되었으므로, 결과값을 반환해요
-const result = sum25(5);
-```

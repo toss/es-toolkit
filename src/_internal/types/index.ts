@@ -1,11 +1,2 @@
-export type { Last } from './Last';
-export type { LinearSubArray } from './LinearSubArray';
-export type { LiteralToPrimitive } from './LiteralToPrimitive';
-export type { Minus } from './Minus';
-export type { OptionalSince } from './OptionalSince';
 export type { OptionalToNullable } from './OptionalToNullable';
-export type { RemoveHead } from './RemoveHead';
-export type { RemoveHeads } from './RemoveHeads';
-export type { RemoveRest } from './RemoveRest';
 export type { RequiredArray } from './RequiredArray';
-export type { SizedTuple } from './SizedTuple';

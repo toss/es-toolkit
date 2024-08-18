@@ -1,28 +1,15 @@
-import type { LinearSubArray, RemoveHead, RemoveHeads, RemoveRest, OptionalToNullable } from '../_internal/types';
+import type { OptionalToNullable } from '../_internal/types';
 
-type NextCurriedFunction<F extends (...args: any) => any> = CurriedFunction<
-  (...args: RemoveHead<Parameters<F>>) => ReturnType<F>
-> & {
-  run: () => undefined extends Parameters<F>[1]
-    ? ReturnType<F>
-    : 'Cannot call `run` method now because current argument to be received is not optional';
-};
-
-type CurriedFunction<F extends (...args: any) => any> = (
-  arg: Parameters<F>[0]
-) => RemoveRest<OptionalToNullable<Parameters<F>>>['length'] extends 1 ? ReturnType<F> : NextCurriedFunction<F>;
-
-type CurriedFunctionResult<F extends (...args: any) => any> = RemoveRest<
-  OptionalToNullable<Parameters<F>>
->['length'] extends 1
-  ? ReturnType<F>
-  : NextCurriedFunction<F>;
+type CurryResult<F extends (...args: any) => any> =
+  OptionalToNullable<Parameters<F>> extends [infer First, ...infer Rest]
+    ? (arg: First) => CurryResult<(...args: Rest) => ReturnType<F>>
+    : ReturnType<F>;
 
 /**
  * Translate a function that takes multiple arguments into a sequence of families of functions, each taking a single argument.
  *
  * @param {F} func - The function to curry.
- * @returns {(arg: Parameters<F>[0]) => CurriedFunctionResult<F>} A curried function that could be called in sequence of families of functions.
+ * @returns {CurryResult<F>} A curried function that could be called in sequence of families of functions.
  *
  * @example
  * function sum(a: number, b: number, c: number) {
@@ -40,21 +27,17 @@ type CurriedFunctionResult<F extends (...args: any) => any> = RemoveRest<
  * // The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
  * const result = sum25(5);
  */
-export function curry<F extends (...args: any) => any>(func: F) {
+export function curry<F extends (...args: any) => any>(func: F): CurryResult<F> {
   if (func.length === 0) {
     throw new Error('`func` must have at least one argument that is not a rest parameter.');
   }
 
   return function (arg: Parameters<F>[0]) {
     return makeCurry(func, func.length, [arg]);
-  };
+  } as CurryResult<F>;
 }
 
-function makeCurry<F extends (...args: any) => any>(
-  origin: F,
-  requireArgumentsCount: number,
-  memoizedArgs: any[]
-): CurriedFunctionResult<F> {
+function makeCurry<F extends (...args: any) => any>(origin: F, requireArgumentsCount: number, memoizedArgs: any[]) {
   if (memoizedArgs.length === requireArgumentsCount) {
     return origin(...memoizedArgs);
   } else {
@@ -62,81 +45,6 @@ function makeCurry<F extends (...args: any) => any>(
       return makeCurry(origin, requireArgumentsCount, [...memoizedArgs, arg]);
     };
 
-    next.run = () => {
-      return origin(...memoizedArgs);
-    };
-
     return next as any;
   }
 }
-
-type MatchCurriedFunctionResult<F extends (...args: any) => any, S extends LinearSubArray<Parameters<F>>> = RemoveRest<
-  OptionalToNullable<S>
->['length'] extends RemoveRest<OptionalToNullable<Parameters<F>>>['length']
-  ? ReturnType<F>
-  : FlexibleCurriedFunction<(...args: RemoveHeads<Parameters<F>, S>) => ReturnType<F>> & { run: () => ReturnType<F> };
-
-// FlexibleCurriedFunction 타입 선언에서 유틸리티 타입을 사용
-type FlexibleCurriedFunction<F extends (...args: any) => any> = <S extends LinearSubArray<Parameters<F>>>(
-  ...args: S
-) => MatchCurriedFunctionResult<F, S>;
-
-// FlexibleCurriedFunctionResult 타입 선언에서 같은 유틸리티 타입을 사용
-type FlexibleCurriedFunctionResult<
-  F extends (...args: any) => any,
-  S extends LinearSubArray<Parameters<F>>,
-> = MatchCurriedFunctionResult<F, S>;
-
-/**
- * Translate a function that takes multiple arguments into a sequence of families of functions.
- * Differently to each functions by `curry`, each functions by `curry.flexible` can receive multiple arguments, not only single argument.
- *
- * @param {F} func - The function to curry.
- * @returns {<S extends LinearSubArray<Parameters<F>>>(...args: S) => FlexibleCurriedFunctionResult<F, S>} A curried function that could be called in sequence of families of functions.
- *
- * @example
- * function sum(a: number, b: number, c: number) {
- *   return a + b + c;
- * }
- *
- * // Flexible curry allows multiple arguments to be received at once
- * const curriedSum = curry.flexible(sum);
- *
- * // The parameter `a` should be given the value `10`, `b` the value `15`
- * const sum20 = curriedSum(10, 15);
- *
- * // The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value
- * const result = sum20(5);
- */
-function flexibleCurry<F extends (...args: any) => any>(func: F) {
-  if (func.length === 0) {
-    throw new Error('`func` must have at least one argument that is not a rest parameter.');
-  }
-
-  return function <S extends LinearSubArray<Parameters<F>>>(...args: S): FlexibleCurriedFunctionResult<F, S> {
-    return makeflexibleCurry(func, func.length, [], args);
-  };
-}
-
-function makeflexibleCurry<F extends (...args: any) => any, S extends LinearSubArray<Parameters<F>>>(
-  origin: F,
-  requireArgumentsCount: number,
-  memoizedArgs: any[],
-  args: S
-): FlexibleCurriedFunctionResult<F, S> {
-  if (args.length === requireArgumentsCount) {
-    return origin(...memoizedArgs, ...args);
-  } else {
-    const next = function (...newArgs: RemoveHeads<Parameters<F>, S>) {
-      return makeflexibleCurry(origin, requireArgumentsCount - args.length, [...memoizedArgs, ...args], newArgs as any);
-    };
-
-    next.run = () => {
-      return origin(...memoizedArgs, ...args);
-    };
-
-    return next as any;
-  }
-}
-
-curry.flexible = flexibleCurry;
