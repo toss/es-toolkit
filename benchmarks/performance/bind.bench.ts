@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { bind as bindToolkit } from 'es-toolkit';
+import { bind as bindToolkit } from 'es-toolkit/compat';
 import { bind as bindLodash } from 'lodash';
 
 function fn(this: any) {
