@@ -1,4 +1,4 @@
-import { compareValues } from '../_internal/compareValues';
+import { orderBy } from './orderBy';
 
 /**
  * Sorts an array of objects based on the given `criteria`.
@@ -33,21 +33,9 @@ import { compareValues } from '../_internal/compareValues';
  * // ]
  */
 export function sortBy<T extends object>(arr: T[], criteria: Array<((item: T) => unknown) | keyof T>): T[] {
-  return arr.slice().sort((a, b) => {
-    for (let i = 0; i < criteria.length; i++) {
-      const iteratee = criteria[i];
-      const iterateeIsFunction = typeof iteratee === 'function';
-
-      const valueA = iterateeIsFunction ? iteratee(a) : a[iteratee];
-      const valueB = iterateeIsFunction ? iteratee(b) : b[iteratee];
-
-      const result = compareValues(valueA, valueB, 'asc');
-
-      if (result !== 0) {
-        return result;
-      }
-    }
-
-    return 0;
-  });
+  return orderBy(
+    arr,
+    criteria,
+    criteria.map(() => 'asc')
+  );
 }
