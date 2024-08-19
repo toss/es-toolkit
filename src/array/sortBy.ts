@@ -33,9 +33,5 @@ import { orderBy } from './orderBy';
  * // ]
  */
 export function sortBy<T extends object>(arr: T[], criteria: Array<((item: T) => unknown) | keyof T>): T[] {
-  return orderBy(
-    arr,
-    criteria,
-    criteria.map(() => 'asc')
-  );
+  return orderBy(arr, criteria, ['asc']);
 }
