@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { isObjectLike as isObjectLikeToolkit } from 'es-toolkit';
+import { isObjectLike as isObjectLikeToolkit } from 'es-toolkit/compat';
 import { isObjectLike as isObjectLikeLodash } from 'lodash';
 
 describe('isObjectLike', () => {
