@@ -25,7 +25,7 @@ export function find<T>(
  * Finds the first item in an array that matches the given partial object.
  *
  * @template T
- * @param {readonly T[]} arr - The array to search through.
+ * @param {T[]} arr - The array to search through.
  * @param {Partial<T>} doesMatch - A partial object that specifies the properties to match.
  * @returns {T | undefined} - The first item that matches the partial object, or `undefined` if no match is found.
  *
