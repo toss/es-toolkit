@@ -7,23 +7,23 @@
 ## 签名
 
 ```typescript
-function debounce<F extends (...args: any[]) => void>(
+function debounce<F extends (...args: Parameters<F>) => void>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions
-): F & { cancel: () => void };
+): ((...args: Parameters<F>) => void) & { cancel: () => void };
 ```
 
 ### 参数
 
 - `func` (`F`): 要进行防抖处理的函数。
 - `debounceMs` (`number`): 延迟执行的毫秒数。
-- `options` (`DebounceOptions`, 可选): 一个选项对象。
+- `options` (`{signal?: AbortSignal}`, 可选): 一个选项对象。
   - `signal` (`AbortSignal`, 可选): 可选的 `AbortSignal` 对象，用于取消防抖函数的执行。
 
 ### 返回值
 
-(`F & { cancel: () => void }`): 一个带有 `cancel` 方法的新的防抖函数。
+(`((...args: Parameters<F>) => void) & { cancel: () => void }`): 一个带有 `cancel` 方法的新的防抖函数。
 
 ## 示例
 

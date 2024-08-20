@@ -10,9 +10,9 @@ interface DebounceOptions {
  * @template F - The type of function.
  * @param {F} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
- * @param {DebounceOptions} options - The options object.
+ * @param {DebounceOptions} options - The options object
  * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
- * @returns {F & { cancel: () => void }} A new debounced function with a `cancel` method.
+ * @returns {((...args: Parameters<F>) => void) & { cancel: () => void }} A new debounced function with a `cancel` method.
  *
  * @example
  * const debouncedFunction = debounce(() => {
@@ -37,12 +37,13 @@ interface DebounceOptions {
  * // Will cancel the debounced function call
  * controller.abort();
  */
-export function debounce<F extends (...args: any[]) => void>(
+export function debounce<F extends (...args: Parameters<F>) => void>(
   func: F,
   debounceMs: number,
-  { signal }: DebounceOptions = {}
-): F & { cancel: () => void } {
+  options?: DebounceOptions
+): ((...args: Parameters<F>) => void) & { cancel: () => void } {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
+  const signal = options?.signal;
 
   const debounced = function (...args: Parameters<F>) {
     if (timeoutId !== null) {
@@ -57,7 +58,7 @@ export function debounce<F extends (...args: any[]) => void>(
       func(...args);
       timeoutId = null;
     }, debounceMs);
-  } as F & { cancel: () => void };
+  };
 
   const onAbort = function () {
     debounced.cancel();
