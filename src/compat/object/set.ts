@@ -5,8 +5,8 @@ import { toPath } from '../_internal/toPath.ts';
  * Sets the value at the specified path of the given object. If any part of the path does not exist, it will be created.
  *
  * @template T - The type of the object.
- * @param {Settable} obj - The object to modify.
- * @param {Path} path - The path of the property to set.
+ * @param {T} obj - The object to modify.
+ * @param {PropertyKey | PropertyKey[]} path - The path of the property to set.
  * @param {any} value - The value to set.
  * @returns {T} - The modified object.
  *
