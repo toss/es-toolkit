@@ -5,3 +5,4 @@ export { lowerCase } from './lowerCase.ts';
 export { startCase } from './startCase.ts';
 export { capitalize } from './capitalize.ts';
 export { pascalCase } from './pascalCase.ts';
+export { upperFirst } from './upperFirst.ts';
