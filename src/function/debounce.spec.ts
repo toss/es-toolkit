@@ -24,9 +24,6 @@ describe('debounce', () => {
       ++count;
     }, debounceMs);
 
-    const fn = (a: number) => 3;
-    debounce(fn, 100);
-
     debouncedFunc();
     debouncedFunc();
     expect(count).toBe(0);
