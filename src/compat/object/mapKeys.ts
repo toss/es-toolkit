@@ -11,7 +11,7 @@ import { property } from './property.ts';
  *
  * @param {T} object - The object to iterate over.
  * @param {PropertyKey | PropertyKey[]} getNewKey - The path of the property to get to generate the new keys.
- * @returns {Record<K2, T[K1]>} - Returns the new mapped object.
+ * @returns {Record<PropertyKey, T[K1]>} - Returns the new mapped object.
  *
  * @example
  * // Example usage:

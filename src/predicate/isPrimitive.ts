@@ -4,7 +4,7 @@
  *
  * @param {unknown} value The value to check.
  * @returns {value is
- *   | null
+ *     null
  *   | undefined
  *   | string
  *   | number
