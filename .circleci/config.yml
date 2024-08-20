@@ -32,10 +32,10 @@ jobs:
           command: |
             changed_files=$(git diff --name-only --diff-filter=ACMRUXB origin/main)
 
-            if echo "$changed_files" | grep -q "^.eslintrc.js$"; then
-              yarn eslint -c .eslintrc.js .
+            if echo "$changed_files" | grep -q "^eslint.config.mjs$"; then
+              yarn lint
             else
-              echo "$changed_files" | grep -E "(.js$|.ts$)" | xargs -r yarn eslint -c .eslintrc.js
+              echo "$changed_files" | grep -E "(.js$|.ts$)" | xargs -r yarn lint
             fi
       - run:
           name: Prettier
