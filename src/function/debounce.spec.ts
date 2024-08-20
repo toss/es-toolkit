@@ -17,6 +17,24 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledTimes(1);
   });
 
+  it('should not immediately call the function when debounce time is 0', async () => {
+    const debounceMs = 0;
+    let count = 0;
+    const debouncedFunc = debounce(() => {
+      ++count;
+    }, debounceMs);
+
+    const fn = (a: number) => 3;
+    debounce(fn, 100);
+
+    debouncedFunc();
+    debouncedFunc();
+    expect(count).toBe(0);
+
+    await delay(1);
+    expect(count).toBe(1);
+  });
+
   it('should delay the function call by the specified wait time', async () => {
     const func = vi.fn();
     const debounceMs = 50;
