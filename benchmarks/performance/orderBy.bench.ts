@@ -15,14 +15,17 @@ const orders: Array<'asc' | 'desc'> = ['asc', 'desc'];
 describe('orderBy', () => {
   bench('es-toolkit/orderBy', () => {
     orderByToolkit(users, keys, orders);
+    orderByToolkit(users, [user => user.user, user => user.age], orders);
   });
 
   bench('es-toolkit/compat/orderBy', () => {
     orderByToolkitCompat(users, keys, orders);
+    orderByToolkitCompat(users, [user => user.user, user => user.age], orders);
   });
 
   bench('lodash/orderBy', () => {
     orderByLodash(users, keys, orders);
+    orderByLodash(users, [user => user.user, user => user.age], orders);
   });
 });
 
@@ -42,15 +45,5 @@ describe('orderBy (property path)', () => {
   });
   bench('lodash/orderBy', () => {
     orderByLodash(users, ['nested.user', 'age'], orders);
-  });
-});
-
-describe('orderBy (custom key function)', () => {
-  bench('es-toolkit/compat/orderBy', () => {
-    orderByToolkitCompat(users, [item => item.user, item => item.age], orders);
-  });
-
-  bench('lodash/orderBy', () => {
-    orderByLodash(users, [item => item.user, item => item.age], orders);
   });
 });
