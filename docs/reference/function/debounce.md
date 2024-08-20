@@ -7,23 +7,23 @@ method to cancel any pending execution.
 ## Signature
 
 ```typescript
-function debounce<F extends (...args: any[]) => void>(
+function debounce<F extends (...args: Parameters<F>) => void>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions
-): F & { cancel: () => void };
+): ((...args: Parameters<F>) => void) & { cancel: () => void };
 ```
 
 ### Parameters
 
 - `func` (`F`): The function to debounce.
 - `debounceMs` (`number`): The number of milliseconds to delay.
-- `options` (`DebounceOptions`, optional): An options object.
+- `options` (`{signal?: AbortSignal}`, optional): An options object.
   - `signal` (`AbortSignal`, optional): An optional `AbortSignal` to cancel the debounced function.
 
 ### Returns
 
-(`F & { cancel: () => void }`): A new debounced function with a `cancel` method.
+(`((...args: Parameters<F>) => void) & { cancel: () => void }`): A new debounced function with a `cancel` method.
 
 ## Examples
 
