@@ -40,10 +40,9 @@ interface DebounceOptions {
 export function debounce<F extends (...args: Parameters<F>) => void>(
   func: F,
   debounceMs: number,
-  options?: DebounceOptions
+  { signal }: DebounceOptions = {}
 ): ((...args: Parameters<F>) => void) & { cancel: () => void } {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
-  const signal = options?.signal;
 
   const debounced = function (...args: Parameters<F>) {
     if (timeoutId !== null) {
