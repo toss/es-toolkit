@@ -19,7 +19,7 @@ export const ltrim = (str: string, toTrim: string): string => {
   const chars: string[] = str.split('');
   let startHere = 0;
   while (chars[startHere] === toTrim && startHere < chars.length) {
-    startHere++
+    startHere++;
   }
-  return chars.splice(startHere, chars.length).join('')
-}
+  return chars.splice(startHere, chars.length).join('');
+};

@@ -21,4 +21,4 @@ export const rtrim = (str: string, toTrim: string): string => {
     chars.pop();
   }
   return chars.join('');
-}
+};

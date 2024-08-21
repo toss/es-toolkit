@@ -21,7 +21,7 @@ export const trim = (str: string, toTrim: TrimParameter): string => {
   const chars = str.split('');
   const trimmedChars: string[] = [];
   for (const char of chars) {
-    if (char !== toTrim && typeof toTrim === 'string' || !toTrim.includes(char)) {
+    if ((char !== toTrim && typeof toTrim === 'string') || !toTrim.includes(char)) {
       trimmedChars.push(char);
     }
   }
