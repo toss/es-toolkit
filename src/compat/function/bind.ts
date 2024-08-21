@@ -5,12 +5,11 @@
  *
  * Note: Unlike native `Function#bind`, this method doesn't set the `length` property of bound functions.
  *
- * @param {(...args: any[]) => any} func  The function to bind.
- * @param {any} thisArg  The `this` binding of `func`.
- * @param {any[]} partials  The arguments to be partially applied.
- * @param thisObj
- * @param {...any} partialArgs
- * @returns {(...args: any[]) => any} Returns the new bound function.
+ * @template F - The type of the function to bind.
+ * @param {F} func - The function to bind.
+ * @param {unknown} thisObj - The `this` binding of `func`.
+ * @param {...any} partialArgs - The arguments to be partially applied.
+ * @returns {F} - Returns the new bound function.
  *
  * @example
  * function greet(greeting, punctuation) {
@@ -26,7 +25,7 @@
  * // => 'hi fred!'
  */
 export function bind<F extends (...args: any[]) => any>(func: F, thisObj?: unknown, ...partialArgs: any[]): F {
-  const binded = function (this: any, ...providedArgs: any[]) {
+  const bound = function (this: any, ...providedArgs: any[]) {
     const args: any[] = [];
 
     // Populate args by merging partialArgs and providedArgs.
@@ -48,7 +47,7 @@ export function bind<F extends (...args: any[]) => any>(func: F, thisObj?: unkno
       args.push(providedArgs[i]);
     }
 
-    if (this instanceof binded) {
+    if (this instanceof bound) {
       // @ts-expect-error - fn is a constructor
       return new func(...args);
     }
@@ -56,7 +55,7 @@ export function bind<F extends (...args: any[]) => any>(func: F, thisObj?: unkno
     return func.apply(thisObj, args);
   };
 
-  return binded as any as F;
+  return bound as any as F;
 }
 
 const bindPlaceholder: unique symbol = Symbol('bind.placeholder');

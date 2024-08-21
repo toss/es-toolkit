@@ -10,6 +10,7 @@
  * If the argument is not primitive (e.g., arrays or objects), provide a
  * `getCacheKey` function to generate a unique cache key for proper caching.
  *
+ * @template F - The type of the function to be memoized.
  * @param {F} fn - The function to be memoized. It should accept a single argument and return a value.
  * @param {MemoizeOptions<Parameters<F>[0], ReturnType<F>>} [options={}] - Optional configuration for the memoization.
  * @param {MemoizeCache<any, V>} [options.cache] - The cache object used to store results. Defaults to a new `Map`.

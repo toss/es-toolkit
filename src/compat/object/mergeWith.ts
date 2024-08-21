@@ -33,7 +33,7 @@ declare let Buffer:
  *
  * @param {T} target - The target object into which the source object properties will be merged. This object is modified in place.
  * @param {S} source - The first source object whose properties will be merged into the target object.
- * @param merge
+ * @param {(targetValue: any, sourceValue: any, key: string, target: T, source: S, stack: Map<any, any>) => any} merge - The function to customize merging properties.
  * @returns {T & S} The updated target object with properties from the source object(s) merged in.
  *
  * @template T - Type of the target object.
@@ -90,7 +90,7 @@ export function mergeWith<T, S>(
  * @param {O} object - The target object into which the source object properties will be merged. This object is modified in place.
  * @param {S1} source1 - The first source object to be merged into the target object.
  * @param {S2} source2 - The second source object to be merged into the target object.
- * @param merge
+ * @param {(targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any} merge - The function to customize merging properties.
  * @returns {O & S1 & S2} The updated target object with properties from the source objects merged in.
  *
  * @template O - Type of the target object.
@@ -150,7 +150,7 @@ export function mergeWith<O, S1, S2>(
  * @param {S1} source1 - The first source object whose properties will be merged into the target object.
  * @param {S2} source2 - The second source object whose properties will be merged into the target object.
  * @param {S3} source3 - The third source object whose properties will be merged into the target object.
- * @param merge
+ * @param {(targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any} merge - The function to customize merging properties.
  * @returns {O & S1 & S2 & S3} The updated target object with properties from the source object(s) merged in.
  *
  * @template O - Type of the target object.
@@ -213,7 +213,7 @@ export function mergeWith<O, S1, S2, S3>(
  * @param {S2} source2 - The second source object whose properties will be merged into the target object.
  * @param {S3} source3 - The third source object whose properties will be merged into the target object.
  * @param {S4} source4 - The fourth source object whose properties will be merged into the target object.
- * @param merge
+ * @param {(targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any} merge - The function to customize merging properties.
  * @returns {O & S1 & S2 & S3 & S4} The updated target object with properties from the source object(s) merged in.
  *
  * @template O - Type of the target object.
@@ -273,10 +273,9 @@ export function mergeWith<O, S1, S2, S3, S4>(
  *
  * The function can handle multiple source objects and will merge them all into the target object.
  *
- * @param {any} any - The target object into which the source object properties will be merged. This object is modified in place.
+ * @param {any} object - The target object into which the source object properties will be merged. This object is modified in place.
  * @param {any[]} sources - The source objects whose properties will be merged into the target object.
- * @param object
- * @param {...any} otherArgs
+ * @param {...any} otherArgs - Additional source objects to merge into the target object, including the custom `merge` function.
  * @returns {any} The updated target object with properties from the source object(s) merged in.
  *
  * @example
