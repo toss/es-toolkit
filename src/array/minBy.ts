@@ -9,7 +9,7 @@
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  */
-export function minBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T {
+export function minBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => number): T {
   let minElement = items[0];
   let min = Infinity;
 
