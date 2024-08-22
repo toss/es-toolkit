@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isString } from './isString';
 
-describe('isStirng', () => {
+describe('isString', () => {
   it('returns true if the value is string', () => {
     expect(isString('abc')).toBe(true);
   });

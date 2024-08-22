@@ -18,7 +18,7 @@ describe('capitalize', () => {
     expect(capitalize('hyphen-text')).toEqual('Hyphen-text');
   });
 
-  it('should handle leading whitepspace', async () => {
+  it('should handle leading whitespace', async () => {
     expect(capitalize(' fred')).toEqual(' fred');
   });
 
