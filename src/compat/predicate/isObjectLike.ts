@@ -7,7 +7,7 @@
  *
  * @template T - The type of value.
  * @param {T} value - The value to test if it is an object-like.
- * @returns {value is Extract<T, object>} `true` if the value is an object-like, `false` otherwise.
+ * @returns {value is object} `true` if the value is an object-like, `false` otherwise.
  *
  * @example
  * const value1 = { a: 1 };
@@ -20,6 +20,7 @@
  * console.log(isObjectLike(value2)); // true
  * console.log(isObjectLike(value3)); // false
  * console.log(isObjectLike(value4)); // false
+ * console.log(isObjectLike(value5)); // false
  */
 
 export function isObjectLike(value: unknown): value is object {
