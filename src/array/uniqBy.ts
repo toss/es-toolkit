@@ -13,6 +13,17 @@
  * uniqBy([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19], Math.floor);
  * // [1.2, 2.1, 3.2, 5.7, 7.19]
  * ```
+ * 
+ * @example
+ * ```ts
+ * const array = [
+ *   { category: 'fruit', name: 'apple' },
+ *   { category: 'fruit', name: 'banana' },
+ *   { category: 'vegetable', name: 'carrot' },
+ * ];
+ * uniqBy(array, item => item.category).length
+ * // 2
+ * ```
  */
 export function uniqBy<T, U>(arr: readonly T[], mapper: (item: T) => U): T[] {
   const map = new Map<U, T>();
