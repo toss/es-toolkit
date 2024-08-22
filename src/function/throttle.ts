@@ -38,7 +38,7 @@ export function throttle<F extends (...args: Parameters<F>) => void | Promise<un
   let lastCallTime: number | null = null;
 
   if (throttleMs == null) {
-    // If `throttleMs` is not provided and the function returns a Promise, create a Promise-based throttled function
+    // If `throttleMs` is not provided, create a Promise-based throttled function
     return function (...args: Parameters<F>) {
       if (lastCallTime == null) {
         lastCallTime = Number.MAX_SAFE_INTEGER;
