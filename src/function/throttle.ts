@@ -5,8 +5,8 @@
  *
  * @template F - The type of function.
  * @param {F} func - The function to throttle.
- * @param {number} throttleMs - The number of milliseconds to throttle executions to.
- * @returns {F} A new throttled function that accepts the same parameters as the original function.
+ * @param {number | undefined} throttleMs - The number of milliseconds to throttle executions to, but if not provided and `func` returns a Promise, the function creates a Promise-based throttled function.
+ * @returns {(...args: Parameters<F>) => void} A new throttled function that accepts the same parameters as the original function.
  *
  * @example
  * const throttledFunction = throttle(() => {
@@ -24,6 +24,13 @@
  *   throttledFunction(); // Will log 'Function executed'
  * }, 1000);
  */
+export function throttle<F extends (...args: Parameters<F>) => void>(
+  func: F,
+  throttleMs: number
+): (...args: Parameters<F>) => void;
+export function throttle<F extends (...args: Parameters<F>) => Promise<unknown>>(
+  func: F
+): (...args: Parameters<F>) => void;
 export function throttle<F extends (...args: Parameters<F>) => void | Promise<unknown>>(
   func: F,
   throttleMs?: number
