@@ -37,21 +37,24 @@ export function throttle<F extends (...args: Parameters<F>) => void | Promise<un
 ): (...args: Parameters<F>) => void {
   let lastCallTime: number | null = null;
 
-  const throttledFunction = function (...args: Parameters<F>) {
-    const now = Date.now();
-
-    if (throttleMs == null && lastCallTime == null) {
-      lastCallTime = Number.MAX_SAFE_INTEGER;
-      func(...args)?.finally(() => {
-        lastCallTime = null;
-      });
-    }
-
-    if (typeof throttleMs === 'number' && (lastCallTime == null || now - lastCallTime >= throttleMs)) {
-      lastCallTime = now;
-      func(...args);
-    }
-  };
-
-  return throttledFunction;
+  if (throttleMs == null) {
+    // If `throttleMs` is not provided and the function returns a Promise, create a Promise-based throttled function
+    return function (...args: Parameters<F>) {
+      if (lastCallTime == null) {
+        lastCallTime = Number.MAX_SAFE_INTEGER;
+        func(...args)?.finally(() => {
+          lastCallTime = null;
+        });
+      }
+    };
+  } else {
+    // Create a time-based throttled function
+    return function (...args: Parameters<F>) {
+      const now = Date.now();
+      if (lastCallTime == null || now - lastCallTime >= throttleMs) {
+        lastCallTime = now;
+        func(...args);
+      }
+    };
+  }
 }
