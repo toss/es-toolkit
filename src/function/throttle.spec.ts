@@ -40,4 +40,17 @@ describe('throttle', () => {
     expect(func).toHaveBeenCalledTimes(1);
     expect(func).toHaveBeenCalledWith('test', 123);
   });
+
+  it('should work correctly if the throttled function is Promise-based and throttleMs is not provided', async () => {
+    const func = vi.fn(() => delay(1000));
+    const throttledFunc = throttle(func);
+
+    throttledFunc();
+    await delay(500);
+    throttledFunc();
+    await delay(500);
+    throttledFunc();
+
+    expect(func).toHaveBeenCalledTimes(2);
+  });
 });

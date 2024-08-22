@@ -24,17 +24,27 @@
  *   throttledFunction(); // Will log 'Function executed'
  * }, 1000);
  */
-export function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): F {
-  let lastCallTime: number | null;
+export function throttle<F extends (...args: Parameters<F>) => void | Promise<unknown>>(
+  func: F,
+  throttleMs?: number
+): (...args: Parameters<F>) => void {
+  let lastCallTime: number | null = null;
 
   const throttledFunction = function (...args: Parameters<F>) {
     const now = Date.now();
 
-    if (lastCallTime == null || now - lastCallTime >= throttleMs) {
+    if (throttleMs == null && lastCallTime == null) {
+      lastCallTime = Number.MAX_SAFE_INTEGER;
+      func(...args)?.finally(() => {
+        lastCallTime = null;
+      });
+    }
+
+    if (typeof throttleMs === 'number' && (lastCallTime == null || now - lastCallTime >= throttleMs)) {
       lastCallTime = now;
       func(...args);
     }
-  } as F;
+  };
 
   return throttledFunction;
 }
