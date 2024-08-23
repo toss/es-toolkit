@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { minBy } from './minBy';
 
+type Person = { name: string; age: number };
+
 describe('minBy', () => {
   it('minBy selects one min value in array', () => {
     const people = [
@@ -8,7 +10,7 @@ describe('minBy', () => {
       { name: 'Nunu', age: 20 },
       { name: 'Overmars', age: 35 },
     ] as const;
-    const result = minBy<{ name: string; age: number }>(people, person => person.age);
+    const result = minBy<Person>(people, person => person.age);
     expect(result).toEqual({ name: 'Nunu', age: 20 });
   });
 
@@ -18,7 +20,7 @@ describe('minBy', () => {
       { name: 'Nunu', age: 20 },
       { name: 'Overmars', age: 20 },
     ] as const;
-    const result = minBy<{ name: string; age: number }>(people, person => person.age);
+    const result = minBy<Person>(people, person => person.age);
     expect(result).toEqual({ name: 'Nunu', age: 20 });
   });
 
@@ -29,7 +31,6 @@ describe('minBy', () => {
   });
 
   it('if array is empty, return undefined', () => {
-    type Person = { name: string; age: number };
     const people: Person[] = [];
     const result = minBy(people, person => person.age);
     expect(result).toBeUndefined();
