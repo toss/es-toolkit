@@ -3,7 +3,7 @@
  * the `getValue` function to each element.
  *
  * @template T - The type of elements in the array.
- * @param {[T, ...T[]]} items The array of elements to search.
+ * @param {T[]} items The array of elements to search.
  * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
  * @returns {T} The element with the minimum value as determined by the `getValue` function.
  * @example
