@@ -27,4 +27,11 @@ describe('minBy', () => {
     const result = minBy(people, person => person.age);
     expect(result).toEqual({ name: 'Mark', age: 25 });
   });
+
+  it('if array is empty, return undefined', () => {
+    type Person = { name: string; age: number };
+    const people: Person[] = [];
+    const result = minBy(people, person => person.age);
+    expect(result).toBeUndefined();
+  });
 });

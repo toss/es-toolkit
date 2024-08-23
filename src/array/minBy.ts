@@ -8,8 +8,10 @@
  * @returns {T} The element with the minimum value as determined by the `getValue` function.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
+ * minBy([], x => x.a); // Returns: undefined
  */
-export function minBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => number): T {
+export function minBy<T>(items: readonly [T, ...T[]]): T;
+export function minBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined {
   let minElement = items[0];
   let min = Infinity;
 
