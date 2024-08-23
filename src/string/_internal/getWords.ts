@@ -1,7 +1,7 @@
 /**
  * Regular expression pattern to split strings into words for various case conversions
  *
- * This pattern matchs sequences of characters in a string, considering the following case:
+ * This pattern matches sequences of characters in a string, considering the following case:
  * - Sequences of two or more uppercase letters followed by an uppercase letter and lowercase letters or digits (for acronyms)
  * - Sequences of one uppercase letter optionally followed by lowercase letters and digits
  * - Single uppercase letters
@@ -12,7 +12,7 @@
  *
  * @example
  * const matches = 'camelCaseHTTPRequest'.match(CASE_SPLIT_PATTERN);
- * // matchs: ['camel', 'Case', 'HTTP', 'Request']
+ * // matches: ['camel', 'Case', 'HTTP', 'Request']
  */
 const CASE_SPLIT_PATTERN = /[A-Z]?[a-z]+|[0-9]+|[A-Z]+(?![a-z])/g;
 
