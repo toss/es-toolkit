@@ -11,3 +11,4 @@ export { unary } from './unary.ts';
 export { partial } from './partial.ts';
 export { partialRight } from './partialRight.ts';
 export { rest } from './rest.ts';
+export { rearg } from './rearg.ts';
