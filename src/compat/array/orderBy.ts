@@ -14,7 +14,7 @@ const memoizedToPath = memoizeCapped(toPath);
  * it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param {T[] | null} collection - The array of objects to be sorted.
+ * @param { T[] | object | null | undefined} collection - The array of objects to be sorted.
  * @param {((item: T) => unknown) | PropertyKey | Array<((item: T) => unknown) | PropertyKey | PropertyKey[]>} keys - An array of keys (property names or property paths or custom key functions) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
  * @returns {T[]} - The sorted array.
