@@ -7,12 +7,12 @@ import { flatten } from '../array';
  *
  * @template F The type of the function to re-arrange.
  * @param {F} func The function to rearrange arguments for.
- * @param {(number | number[])[]} indexes The arranged argument indexes.
+ * @param {Array<number | number[]>} indexes The arranged argument indexes.
  * @returns {(...args: any[]) => ReturnType<F>} Returns the new function.
  */
 export function rearg<F extends (...args: any[]) => any>(
   func: F,
-  ...indexes: (number | number[])[]
+  ...indexes: Array<number | number[]>
 ): (...args: any[]) => ReturnType<F> {
   const flattenIndexes = flatten(indexes);
 

@@ -3,6 +3,7 @@ import { rearg } from './rearg';
 
 describe('rearg', () => {
   function fn() {
+    // eslint-disable-next-line prefer-rest-params
     return Array.from(arguments);
   }
 
@@ -24,7 +25,7 @@ describe('rearg', () => {
   it('should use `undefined` for non-index values', () => {
     const values = [{}, null, undefined, false, NaN, '', -1, 1.1];
     for (const value of values) {
-      // @ts-expect-error
+      // @ts-expect-error - invalid args
       const rearged = rearg(fn, value);
       expect(rearged('a', 'b', 'c')).toEqual([undefined, 'b', 'c']);
     }

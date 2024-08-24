@@ -7,14 +7,14 @@
 ```typescript
 function rearg<F extends (...args: any[]) => any>(
   func: F,
-  ...indexes: (number | number[])[]
+  ...indexes: Array<number | number[]>
 ): (...args: any[]) => ReturnType<F>;
 ```
 
 ### 参数
 
 - `func` (`F`): 用于重新排列参数的函数。
-- `indexes` (`(number | number[])[]`): 排列后的参数索引。
+- `indexes` (`Array<number | number[]>`): 排列后的参数索引。
 
 ### 返回值
 

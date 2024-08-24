@@ -7,14 +7,14 @@ Creates a function that invokes `func` with arguments arranged according to the 
 ```typescript
 function rearg<F extends (...args: any[]) => any>(
   func: F,
-  ...indexes: (number | number[])[]
+  ...indexes: Array<number | number[]>
 ): (...args: any[]) => ReturnType<F>;
 ```
 
 ### Parameters
 
 - `func` (`F`): The function to rearrange arguments for.
-- `indexes` (`(number | number[])[]`): The arranged argument indexes.
+- `indexes` (`Array<number | number[]>`): The arranged argument indexes.
 
 ### Returns
 
