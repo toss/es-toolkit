@@ -6,7 +6,7 @@ import prettier from 'eslint-config-prettier';
 
 export default [
   {
-    ignores: ['.yarn/**', 'coverage/**', 'dist/**/*', '.pnp.*', '**/*.d.ts', '**/*.tgz', 'node_modules/**'],
+    ignores: ['.yarn/**', 'coverage/**', 'dist/**', '.pnp.*', '**/*.d.ts', '**/*.tgz', 'node_modules/**'],
   },
   {
     languageOptions: {
