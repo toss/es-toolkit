@@ -66,12 +66,12 @@ export function orderBy<T>(
       return path(object);
     }
 
-    // for the path array has only one deep property
+    // When the path is an array with a single element, we have to check whether it is a key or a deep property.
     if (Array.isArray(path) && path.length === 1) {
       path = path[0];
     }
 
-    // Handle the case when the path
+    // When the path is a key, use the key directly
     if (isKey(path, object)) {
       return object[path as keyof T];
     }
@@ -91,7 +91,7 @@ export function orderBy<T>(
   };
 
   const withCriteria = (collection as T[]).slice().map(item => ({
-    // Prepare the criteria for performance
+    // Prepare the criteria before sorting is more efficient.
     criteria: keys.map(key => getValueByPath(key, item)),
     original: item,
   }));
