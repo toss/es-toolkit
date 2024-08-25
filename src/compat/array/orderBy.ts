@@ -2,6 +2,7 @@ import { compareValues } from '../_internal/compareValues';
 import { isKey } from '../_internal/isKey';
 import { memoizeCapped } from '../_internal/memoizeCapped';
 import { toPath } from '../_internal/toPath';
+import { isSymbol } from '../predicate/isSymbol';
 
 const memoizedToPath = memoizeCapped(toPath);
 
@@ -57,58 +58,83 @@ export function orderBy<T>(
     orders = orders == null ? [] : [orders];
   }
 
-  const getValueByCriterion = (criterion: PropertyKey | ((item: T) => unknown) | PropertyKey[], object: T) => {
+  const getValueByCriterion = (
+    criterion: PropertyKey[][] | Array<number | symbol | ((item: T) => unknown)> | Array<string | string[]>,
+    object: T
+  ) => {
     if (object == null) {
       return object;
     }
 
-    if (typeof criterion === 'function') {
-      return criterion(object);
+    let currentCriterion: PropertyKey | ((item: T) => unknown) | PropertyKey[] | null = null;
+
+    // If criterion has only one case, it means it doesn't have possibility to be a deep path.
+    if (criterion.length === 1) {
+      currentCriterion = criterion[0];
+
+      if (typeof currentCriterion === 'function') {
+        return currentCriterion(object);
+      }
+
+      if (!Array.isArray(currentCriterion)) {
+        return object[currentCriterion as keyof typeof object];
+      }
+
+      // If criterion is and array, it needs to get value by nested path.
     }
 
-    // When the criterion is an array with a single element, we have to check whether it is a key or a deep property.
-    if (Array.isArray(criterion) && criterion.length === 1) {
-      criterion = criterion[0];
+    // If criterion has two cases, it means it has possibility to be a deep path.
+    if (!currentCriterion) {
+      // Just using property name when object has its own property
+      if (Object.hasOwn(object, criterion[0] as string)) {
+        return object[criterion[0] as keyof typeof object];
+      }
+
+      currentCriterion = criterion[1];
     }
 
-    // When the criterion is a key, use the key directly
-    if (isKey(criterion, object)) {
-      return object[criterion as keyof T];
-    }
-
-    // Convert the deep property to a criterion array
-    if (!Array.isArray(criterion)) {
-      criterion = memoizedToPath(criterion as string);
-    }
-
+    // Get value by nested path
     let target: object = object;
 
-    for (let i = 0; i < criterion.length && target != null; i++) {
-      target = target[criterion[i] as keyof typeof target];
+    for (let i = 0; i < (currentCriterion as PropertyKey[]).length && target != null; i++) {
+      target = target[(currentCriterion as PropertyKey[])[i] as keyof typeof target];
     }
 
     return target;
   };
 
-  const collectionWtihValues = (collection as T[]).slice().map(item => ({
-    // Prepare the values that will be used for sorting, this way is more efficient than getting the values in the comparator function.
-    values: criteria.map(criterion => getValueByCriterion(criterion, item)),
-    original: item,
-  }));
-
-  return collectionWtihValues
-    .sort((a, b) => {
-      for (let i = 0; i < criteria.length; i++) {
-        const order = String((orders as unknown[])[i]); // For Object('desc') case
-
-        const comparedResult = compareValues(a.values[i], b.values[i], order);
-
-        if (comparedResult !== 0) {
-          return comparedResult;
-        }
+  // Prepare all cases for criteria
+  const preparedCriteria = criteria.map(criterion => {
+    if (Array.isArray(criterion)) {
+      // if criterion is nested path, it doesn't have possibility to be a deep path.
+      if (criterion.length === 1) {
+        criterion = criterion[0];
+      } else {
+        return [criterion];
       }
+    }
 
-      return 0;
-    })
-    .map(item => item.original);
+    if (typeof criterion === 'function' || typeof criterion !== 'string') {
+      return [criterion];
+    }
+
+    // If criterion is a string, it has possibility to be a deep path. So we have to prepare both cases.
+    return [criterion, memoizedToPath(criterion)]; // [Using when object has its own property, Using when object doesn't have its own property]
+  });
+
+  return (collection as T[]).slice().sort((a, b) => {
+    for (let i = 0; i < criteria.length; i++) {
+      const order = String((orders as unknown[])[i]); // For Object('desc') case
+      const valueA = getValueByCriterion(preparedCriteria[i], a);
+      const valueB = getValueByCriterion(preparedCriteria[i], b);
+
+      const comparedResult = compareValues(valueA, valueB, order);
+
+      if (comparedResult !== 0) {
+        return comparedResult;
+      }
+    }
+
+    return 0;
+  });
 }
