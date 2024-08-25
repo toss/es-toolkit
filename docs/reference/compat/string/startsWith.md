@@ -20,7 +20,7 @@ function startsWith(str: string, target: string, position: number = 0): string;
 
 - `str` (`string`): The string that will be searched.
 - `target` (`string`): The string that it should contain at the start.
-- `position` (`number`, optional): Optional: offset to start searching in the str string.
+- `position` (`number`, optional): The offset to start searching in the str string.
 
 ### Returns
 

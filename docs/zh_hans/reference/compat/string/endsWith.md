@@ -21,11 +21,11 @@ function endsWith(str: string, target: string, position: number = 0): string;
 
 - `str` (`string`): 要搜索的字符串。
 - `target` (`string`): 应该包含在末尾的字符串。
-- `position` (`number`, 可选): 可选：搜索到这个字符位置。
+- `position` (`number`, 可选): 搜索到这个字符位置。
 
 ### 返回值
 
-(`boolean`): str 字符串是否以 target 字符串结尾。
+(`boolean`): `str` 字符串是否以 `target` 字符串结尾。
 
 ## 示例
 
