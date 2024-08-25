@@ -20,10 +20,32 @@ function spread<F extends (...args: any[]) => any>(func: F, startIndex: number =
 ## 示例
 
 ```typescript
+import { spread } from 'es-toolkit/function';
+
 const say = spread(function (who, what) {
   return who + ' says ' + what;
 });
 
 say(['fred', 'hello']);
 // => 'fred says hello'
+```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 中导入 `spread` 以实现与 lodash 的完全兼容。
+
+- `spread` 当给定的 `startIndex` 小于 0 或为 `NaN` 时将其视为 `0`。
+- `spread` 接受分数值的 `startIndex`，但将其强制转换为整数。
+
+```typescript
+import { spread } from 'es-toolkit/compat';
+
+function fn(a: unknown, b: unknown, c: unknown) {
+  return Array.from(arguments);
+}
+
+spread(fn, -1)([1, 2]); // Returns [1, 2]
+spread(fn, NaN)([1, 2]); // Returns [1, 2]
+spread(fn, 'a')([1, 2]); // Returns [1, 2]
+spread(fn, 1.6)(1, [2, 3]); // Returns [1, 2, 3]
 ```

@@ -28,7 +28,7 @@ describe('spread', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should work with `start`', () => {
+  it('should work with `startIndex`', () => {
     const spreadFn = spread(fn, 1);
     const expected = [1, 2, 3];
 
@@ -50,7 +50,7 @@ describe('spread', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should coerce `start` to an integer', () => {
+  it('should coerce `startIndex` to an integer', () => {
     const spreadFn = spread(fn, 1.6);
     const expected = [1, 2, 3];
 

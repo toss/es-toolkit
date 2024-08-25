@@ -20,10 +20,32 @@ function spread<F extends (...args: any[]) => any>(func: F, startIndex: number =
 ## Examples
 
 ```typescript
+import { spread } from 'es-toolkit/function';
+
 const say = spread(function (who, what) {
   return who + ' says ' + what;
 });
 
 say(['fred', 'hello']);
 // => 'fred says hello'
+```
+
+## Lodash Compatibility
+
+Import `spread` from `es-toolkit/compat` for full compatibility with lodash.
+
+- `spread` treats `startIndex` as `0` for negative or `NaN` values.
+- `spread` accepts `startIndex` with fractional values, but coerces them to integers.
+
+```typescript
+import { spread } from 'es-toolkit/compat';
+
+function fn(a: unknown, b: unknown, c: unknown) {
+  return Array.from(arguments);
+}
+
+spread(fn, -1)([1, 2]); // Returns [1, 2]
+spread(fn, NaN)([1, 2]); // Returns [1, 2]
+spread(fn, 'a')([1, 2]); // Returns [1, 2]
+spread(fn, 1.6)(1, [2, 3]); // Returns [1, 2, 3]
 ```
