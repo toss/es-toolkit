@@ -77,20 +77,15 @@ export function orderBy<T>(
       return object;
     }
 
-    // If criterion has only one case, it means it doesn't have possibility to be a deep path.
-    if (path == null) {
-      if (typeof criterion === 'function') {
-        return criterion(object);
-      }
+    if (typeof criterion === 'function') {
+      return criterion(object);
+    }
 
-      if (!Array.isArray(criterion)) {
-        return object[criterion as keyof typeof object];
-      }
-
+    if (Array.isArray(criterion)) {
       return getVaueByNestedPath(object, criterion);
     }
 
-    if (Object.hasOwn(object, criterion)) {
+    if (path == null || Object.hasOwn(object, criterion)) {
       return object[criterion as keyof typeof object];
     }
 
