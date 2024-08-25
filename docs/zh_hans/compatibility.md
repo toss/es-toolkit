@@ -49,72 +49,72 @@ chunk([1, 2, 3, 4], 0);
 
 ### "Array" 工具
 
-| 函数名称                                                               | 实现状态   |
-| ---------------------------------------------------------------------- | ---------- |
-| [chunk](https://lodash.com/docs/4.17.15#chunk)                         | ✅         |
-| [compact](https://lodash.com/docs/4.17.15#compact)                     | ✅         |
-| [concat](https://lodash.com/docs/4.17.15#concat)                       | ✅         |
-| [difference](https://lodash.com/docs/4.17.15#difference)               | ✅         |
-| [differenceBy](https://lodash.com/docs/4.17.15#differenceBy)           | 📝         |
-| [differenceWith](https://lodash.com/docs/4.17.15#differenceWith)       | 📝         |
-| [drop](https://lodash.com/docs/4.17.15#drop)                           | ✅         |
-| [dropRight](https://lodash.com/docs/4.17.15#dropRight)                 | ✅         |
-| [dropRightWhile](https://lodash.com/docs/4.17.15#dropRightWhile)       | 📝         |
-| [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | 📝         |
-| [fill](https://lodash.com/docs/4.17.15#fill)                           | ✅         |
-| [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ✅         |
-| [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌         |
-| [flatten](https://lodash.com/docs/4.17.15#flatten)                     | ✅         |
-| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | ✅         |
-| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | ✅         |
-| [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌         |
-| [head](https://lodash.com/docs/4.17.15#head)                           | 📝         |
-| [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ✅         |
-| [initial](https://lodash.com/docs/4.17.15#initial)                     | ✅         |
-| [intersection](https://lodash.com/docs/4.17.15#intersection)           | 📝         |
-| [intersectionBy](https://lodash.com/docs/4.17.15#intersectionBy)       | 📝         |
-| [intersectionWith](https://lodash.com/docs/4.17.15#intersectionWith)   | 📝         |
-| [join](https://lodash.com/docs/4.17.15#join)                           | ❌         |
-| [last](https://lodash.com/docs/4.17.15#last)                           | ✅         |
-| [lastIndexOf](https://lodash.com/docs/4.17.15#lastIndexOf)             | ❌         |
-| [nth](https://lodash.com/docs/4.17.15#nth)                             | ❌         |
-| [pull](https://lodash.com/docs/4.17.15#pull)                           | ❌         |
-| [pullAll](https://lodash.com/docs/4.17.15#pullAll)                     | ❌         |
-| [pullAllBy](https://lodash.com/docs/4.17.15#pullAllBy)                 | ❌         |
-| [pullAllWith](https://lodash.com/docs/4.17.15#pullAllWith)             | ❌         |
-| [pullAt](https://lodash.com/docs/4.17.15#pullAt)                       | ❌         |
-| [remove](https://lodash.com/docs/4.17.15#remove)                       | ❌         |
-| [reverse](https://lodash.com/docs/4.17.15#reverse)                     | ❌         |
-| [slice](https://lodash.com/docs/4.17.15#slice)                         | ❌         |
-| [sortedIndex](https://lodash.com/docs/4.17.15#sortedIndex)             | No support |
-| [sortedIndexBy](https://lodash.com/docs/4.17.15#sortedIndexBy)         | No support |
-| [sortedIndexOf](https://lodash.com/docs/4.17.15#sortedIndexOf)         | No support |
-| [sortedLastIndex](https://lodash.com/docs/4.17.15#sortedLastIndex)     | No support |
-| [sortedLastIndexBy](https://lodash.com/docs/4.17.15#sortedLastIndexBy) | No support |
-| [sortedLastIndexOf](https://lodash.com/docs/4.17.15#sortedLastIndexOf) | No support |
-| [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)               | No support |
-| [sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)           | No support |
-| [tail](https://lodash.com/docs/4.17.15#tail)                           | 📝         |
-| [take](https://lodash.com/docs/4.17.15#take)                           | 📝         |
-| [takeRight](https://lodash.com/docs/4.17.15#takeRight)                 | ✅         |
-| [takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)       | 📝         |
-| [takeWhile](https://lodash.com/docs/4.17.15#takeWhile)                 | 📝         |
-| [union](https://lodash.com/docs/4.17.15#union)                         | 📝         |
-| [unionBy](https://lodash.com/docs/4.17.15#unionBy)                     | 📝         |
-| [unionWith](https://lodash.com/docs/4.17.15#unionWith)                 | 📝         |
-| [uniq](https://lodash.com/docs/4.17.15#uniq)                           | ✅         |
-| [uniqBy](https://lodash.com/docs/4.17.15#uniqBy)                       | 📝         |
-| [uniqWith](https://lodash.com/docs/4.17.15#uniqWith)                   | 📝         |
-| [unzip](https://lodash.com/docs/4.17.15#unzip)                         | 📝         |
-| [unzipWith](https://lodash.com/docs/4.17.15#unzipWith)                 | 📝         |
-| [without](https://lodash.com/docs/4.17.15#without)                     | ✅         |
-| [xor](https://lodash.com/docs/4.17.15#xor)                             | 📝         |
-| [xorBy](https://lodash.com/docs/4.17.15#xorBy)                         | 📝         |
-| [xorWith](https://lodash.com/docs/4.17.15#xorWith)                     | 📝         |
-| [zip](https://lodash.com/docs/4.17.15#zip)                             | 📝         |
-| [zipObject](https://lodash.com/docs/4.17.15#zipObject)                 | 📝         |
-| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ✅         |
-| [zipWith](https://lodash.com/docs/4.17.15#zipWith)                     | 📝         |
+| 函数名称                                                               | 实现状态 |
+| ---------------------------------------------------------------------- | -------- |
+| [chunk](https://lodash.com/docs/4.17.15#chunk)                         | ✅       |
+| [compact](https://lodash.com/docs/4.17.15#compact)                     | ✅       |
+| [concat](https://lodash.com/docs/4.17.15#concat)                       | ✅       |
+| [difference](https://lodash.com/docs/4.17.15#difference)               | ✅       |
+| [differenceBy](https://lodash.com/docs/4.17.15#differenceBy)           | 📝       |
+| [differenceWith](https://lodash.com/docs/4.17.15#differenceWith)       | 📝       |
+| [drop](https://lodash.com/docs/4.17.15#drop)                           | ✅       |
+| [dropRight](https://lodash.com/docs/4.17.15#dropRight)                 | ✅       |
+| [dropRightWhile](https://lodash.com/docs/4.17.15#dropRightWhile)       | 📝       |
+| [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | 📝       |
+| [fill](https://lodash.com/docs/4.17.15#fill)                           | ✅       |
+| [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ✅       |
+| [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌       |
+| [flatten](https://lodash.com/docs/4.17.15#flatten)                     | ✅       |
+| [flattenDeep](https://lodash.com/docs/4.17.15#flattenDeep)             | ✅       |
+| [flattenDepth](https://lodash.com/docs/4.17.15#flattenDepth)           | ✅       |
+| [fromPairs](https://lodash.com/docs/4.17.15#fromPairs)                 | ❌       |
+| [head](https://lodash.com/docs/4.17.15#head)                           | 📝       |
+| [indexOf](https://lodash.com/docs/4.17.15#indexOf)                     | ✅       |
+| [initial](https://lodash.com/docs/4.17.15#initial)                     | ✅       |
+| [intersection](https://lodash.com/docs/4.17.15#intersection)           | 📝       |
+| [intersectionBy](https://lodash.com/docs/4.17.15#intersectionBy)       | 📝       |
+| [intersectionWith](https://lodash.com/docs/4.17.15#intersectionWith)   | 📝       |
+| [join](https://lodash.com/docs/4.17.15#join)                           | ❌       |
+| [last](https://lodash.com/docs/4.17.15#last)                           | ✅       |
+| [lastIndexOf](https://lodash.com/docs/4.17.15#lastIndexOf)             | ❌       |
+| [nth](https://lodash.com/docs/4.17.15#nth)                             | ❌       |
+| [pull](https://lodash.com/docs/4.17.15#pull)                           | ❌       |
+| [pullAll](https://lodash.com/docs/4.17.15#pullAll)                     | ❌       |
+| [pullAllBy](https://lodash.com/docs/4.17.15#pullAllBy)                 | ❌       |
+| [pullAllWith](https://lodash.com/docs/4.17.15#pullAllWith)             | ❌       |
+| [pullAt](https://lodash.com/docs/4.17.15#pullAt)                       | ❌       |
+| [remove](https://lodash.com/docs/4.17.15#remove)                       | ❌       |
+| [reverse](https://lodash.com/docs/4.17.15#reverse)                     | ❌       |
+| [slice](https://lodash.com/docs/4.17.15#slice)                         | ❌       |
+| [sortedIndex](https://lodash.com/docs/4.17.15#sortedIndex)             | 不支持   |
+| [sortedIndexBy](https://lodash.com/docs/4.17.15#sortedIndexBy)         | 不支持   |
+| [sortedIndexOf](https://lodash.com/docs/4.17.15#sortedIndexOf)         | 不支持   |
+| [sortedLastIndex](https://lodash.com/docs/4.17.15#sortedLastIndex)     | 不支持   |
+| [sortedLastIndexBy](https://lodash.com/docs/4.17.15#sortedLastIndexBy) | 不支持   |
+| [sortedLastIndexOf](https://lodash.com/docs/4.17.15#sortedLastIndexOf) | 不支持   |
+| [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)               | 不支持   |
+| [sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)           | 不支持   |
+| [tail](https://lodash.com/docs/4.17.15#tail)                           | ✅       |
+| [take](https://lodash.com/docs/4.17.15#take)                           | ✅       |
+| [takeRight](https://lodash.com/docs/4.17.15#takeRight)                 | ✅       |
+| [takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)       | 📝       |
+| [takeWhile](https://lodash.com/docs/4.17.15#takeWhile)                 | 📝       |
+| [union](https://lodash.com/docs/4.17.15#union)                         | 📝       |
+| [unionBy](https://lodash.com/docs/4.17.15#unionBy)                     | 📝       |
+| [unionWith](https://lodash.com/docs/4.17.15#unionWith)                 | 📝       |
+| [uniq](https://lodash.com/docs/4.17.15#uniq)                           | ✅       |
+| [uniqBy](https://lodash.com/docs/4.17.15#uniqBy)                       | 📝       |
+| [uniqWith](https://lodash.com/docs/4.17.15#uniqWith)                   | 📝       |
+| [unzip](https://lodash.com/docs/4.17.15#unzip)                         | 📝       |
+| [unzipWith](https://lodash.com/docs/4.17.15#unzipWith)                 | 📝       |
+| [without](https://lodash.com/docs/4.17.15#without)                     | ✅       |
+| [xor](https://lodash.com/docs/4.17.15#xor)                             | 📝       |
+| [xorBy](https://lodash.com/docs/4.17.15#xorBy)                         | 📝       |
+| [xorWith](https://lodash.com/docs/4.17.15#xorWith)                     | 📝       |
+| [zip](https://lodash.com/docs/4.17.15#zip)                             | 📝       |
+| [zipObject](https://lodash.com/docs/4.17.15#zipObject)                 | 📝       |
+| [zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)         | ✅       |
+| [zipWith](https://lodash.com/docs/4.17.15#zipWith)                     | 📝       |
 
 ### "Collection" 工具
 
@@ -143,7 +143,7 @@ chunk([1, 2, 3, 4], 0);
 | [sample](https://lodash.com/docs/4.17.15#sample)             | 📝       |
 | [sampleSize](https://lodash.com/docs/4.17.15#sampleSize)     | 📝       |
 | [shuffle](https://lodash.com/docs/4.17.15#shuffle)           | 📝       |
-| [size](https://lodash.com/docs/4.17.15#size)                 | ❌       |
+| [size](https://lodash.com/docs/4.17.15#size)                 | ✅       |
 | [some](https://lodash.com/docs/4.17.15#some)                 | ❌       |
 | [sortBy](https://lodash.com/docs/4.17.15#sortBy)             | ❌       |
 
@@ -221,7 +221,7 @@ chunk([1, 2, 3, 4], 0);
 | [isNumber](https://lodash.com/docs/4.17.15#isNumber)                   | ❌       |
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌       |
 | [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ✅       |
-| [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ❌       |
+| [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ✅       |
 | [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ❌       |
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌       |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌       |
@@ -300,7 +300,6 @@ chunk([1, 2, 3, 4], 0);
 | [keysIn](https://lodash.com/docs/4.17.15#keysIn)             | ❌       |
 | [mapKeys](https://lodash.com/docs/4.17.15#mapKeys)           | ✅       |
 | [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ✅       |
-| [mapValues](https://lodash.com/docs/4.17.15#mapValues)       | ❌       |
 | [merge](https://lodash.com/docs/4.17.15#merge)               | ✅       |
 | [mergeWith](https://lodash.com/docs/4.17.15#mergeWith)       | ✅       |
 | [omit](https://lodash.com/docs/4.17.15#omit)                 | 📝       |
@@ -356,39 +355,39 @@ chunk([1, 2, 3, 4], 0);
 
 ### "Util" 工具
 
-| 函数名称                                                           | 实现状态   |
-| ------------------------------------------------------------------ | ---------- |
-| [attempt](https://lodash.com/docs/4.17.15#attempt)                 | ❌         |
-| [bindAll](https://lodash.com/docs/4.17.15#bindAll)                 | ❌         |
-| [cond](https://lodash.com/docs/4.17.15#cond)                       | ❌         |
-| [confirms](https://lodash.com/docs/4.17.15#confirms)               | ❌         |
-| [constant](https://lodash.com/docs/4.17.15#constant)               | ❌         |
-| [defaultTo](https://lodash.com/docs/4.17.15#defaultTo)             | ❌         |
-| [flow](https://lodash.com/docs/4.17.15#flow)                       | ❌         |
-| [flowRight](https://lodash.com/docs/4.17.15#flowRight)             | ❌         |
-| [identity](https://lodash.com/docs/4.17.15#identity)               | 📝         |
-| [iteratee](https://lodash.com/docs/4.17.15#iteratee)               | ❌         |
-| [matches](https://lodash.com/docs/4.17.15#matches)                 | ✅         |
-| [matchesProperty](https://lodash.com/docs/4.17.15#matchesProperty) | ✅         |
-| [method](https://lodash.com/docs/4.17.15#method)                   | ❌         |
-| [methodOf](https://lodash.com/docs/4.17.15#methodOf)               | ❌         |
-| [mixin](https://lodash.com/docs/4.17.15#mixin)                     | No support |
-| [noConflict](https://lodash.com/docs/4.17.15#noConflict)           | No support |
-| [noop](https://lodash.com/docs/4.17.15#noop)                       | ❌         |
-| [nthArg](https://lodash.com/docs/4.17.15#nthArg)                   | ❌         |
-| [over](https://lodash.com/docs/4.17.15#over)                       | ❌         |
-| [overEvery](https://lodash.com/docs/4.17.15#overEvery)             | ❌         |
-| [overSome](https://lodash.com/docs/4.17.15#overSome)               | ❌         |
-| [property](https://lodash.com/docs/4.17.15#property)               | ✅         |
-| [propertyOf](https://lodash.com/docs/4.17.15#propertyOf)           | ❌         |
-| [range](https://lodash.com/docs/4.17.15#range)                     | 📝         |
-| [rangeRight](https://lodash.com/docs/4.17.15#rangeRight)           | 📝         |
-| [runInContext](https://lodash.com/docs/4.17.15#runInContext)       | No support |
-| [stubArray](https://lodash.com/docs/4.17.15#stubArray)             | ❌         |
-| [stubFalse](https://lodash.com/docs/4.17.15#stubFalse)             | ❌         |
-| [stubObject](https://lodash.com/docs/4.17.15#stubObject)           | ❌         |
-| [stubString](https://lodash.com/docs/4.17.15#stubString)           | ❌         |
-| [stubTrue](https://lodash.com/docs/4.17.15#stubTrue)               | ❌         |
-| [times](https://lodash.com/docs/4.17.15#times)                     | ❌         |
-| [toPath](https://lodash.com/docs/4.17.15#toPath)                   | ❌         |
-| [uniqueId](https://lodash.com/docs/4.17.15#uniqueId)               | ❌         |
+| 函数名称                                                           | 实现状态 |
+| ------------------------------------------------------------------ | -------- |
+| [attempt](https://lodash.com/docs/4.17.15#attempt)                 | ❌       |
+| [bindAll](https://lodash.com/docs/4.17.15#bindAll)                 | ❌       |
+| [cond](https://lodash.com/docs/4.17.15#cond)                       | ❌       |
+| [confirms](https://lodash.com/docs/4.17.15#confirms)               | ❌       |
+| [constant](https://lodash.com/docs/4.17.15#constant)               | ❌       |
+| [defaultTo](https://lodash.com/docs/4.17.15#defaultTo)             | ❌       |
+| [flow](https://lodash.com/docs/4.17.15#flow)                       | ❌       |
+| [flowRight](https://lodash.com/docs/4.17.15#flowRight)             | ❌       |
+| [identity](https://lodash.com/docs/4.17.15#identity)               | 📝       |
+| [iteratee](https://lodash.com/docs/4.17.15#iteratee)               | ❌       |
+| [matches](https://lodash.com/docs/4.17.15#matches)                 | ✅       |
+| [matchesProperty](https://lodash.com/docs/4.17.15#matchesProperty) | ✅       |
+| [method](https://lodash.com/docs/4.17.15#method)                   | ❌       |
+| [methodOf](https://lodash.com/docs/4.17.15#methodOf)               | ❌       |
+| [mixin](https://lodash.com/docs/4.17.15#mixin)                     | 不支持   |
+| [noConflict](https://lodash.com/docs/4.17.15#noConflict)           | 不支持   |
+| [noop](https://lodash.com/docs/4.17.15#noop)                       | ❌       |
+| [nthArg](https://lodash.com/docs/4.17.15#nthArg)                   | ❌       |
+| [over](https://lodash.com/docs/4.17.15#over)                       | ❌       |
+| [overEvery](https://lodash.com/docs/4.17.15#overEvery)             | ❌       |
+| [overSome](https://lodash.com/docs/4.17.15#overSome)               | ❌       |
+| [property](https://lodash.com/docs/4.17.15#property)               | ✅       |
+| [propertyOf](https://lodash.com/docs/4.17.15#propertyOf)           | ❌       |
+| [range](https://lodash.com/docs/4.17.15#range)                     | 📝       |
+| [rangeRight](https://lodash.com/docs/4.17.15#rangeRight)           | 📝       |
+| [runInContext](https://lodash.com/docs/4.17.15#runInContext)       | 不支持   |
+| [stubArray](https://lodash.com/docs/4.17.15#stubArray)             | ❌       |
+| [stubFalse](https://lodash.com/docs/4.17.15#stubFalse)             | ❌       |
+| [stubObject](https://lodash.com/docs/4.17.15#stubObject)           | ❌       |
+| [stubString](https://lodash.com/docs/4.17.15#stubString)           | ❌       |
+| [stubTrue](https://lodash.com/docs/4.17.15#stubTrue)               | ❌       |
+| [times](https://lodash.com/docs/4.17.15#times)                     | ❌       |
+| [toPath](https://lodash.com/docs/4.17.15#toPath)                   | ❌       |
+| [uniqueId](https://lodash.com/docs/4.17.15#uniqueId)               | ❌       |
