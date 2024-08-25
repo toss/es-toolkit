@@ -21,7 +21,7 @@ function upperFirst(str: string): string;
 ```typescript
 import { upperFirst } from 'es-toolkit/string';
 
-upperCase('fred') // returns 'fred'
-upperCase('Fred') // returns 'Fred'
-upperCase('FRED') // returns 'FRED'
+upperFirst('fred') // returns 'Fred'
+upperFirst('Fred') // returns 'Fred'
+upperFirst('FRED') // returns 'FRED'
 ```
