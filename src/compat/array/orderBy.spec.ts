@@ -182,4 +182,12 @@ describe('orderBy', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('shoud work with `deep-like` property paths', () => {
+    const objects = [{ 'a.b': 1 }, { 'a.b': 2 }, { 'a.b': 3 }, { 'a.b': 4 }];
+    const actual = orderBy(objects, ['a.b'], ['desc']);
+    const expected = [objects[3], objects[2], objects[1], objects[0]];
+
+    expect(actual).toEqual(expected);
+  });
 });
