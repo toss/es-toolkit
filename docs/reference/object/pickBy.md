@@ -3,7 +3,7 @@
 Creates a new object composed of the properties that satisfy the predicate function.
 
 This function takes an object and a predicate function, and returns a new object that
-includes only the properties for which the predicate function returns true.
+includes only the properties for which the predicate function returns `true`.
 
 ## Signature
 

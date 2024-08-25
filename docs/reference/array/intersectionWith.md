@@ -17,7 +17,7 @@ function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T
 
 - `firstArr` (`T[]`): The first array to compare.
 - `secondArr` (`T[]`): The second array to compare.
-- `areItemsEqual` (`(x: T, y: T) => boolean`): A custom function to determine if two elements are equal. This function takes two arguments, one from each array, and returns true if the elements are considered equal, and false otherwise.
+- `areItemsEqual` (`(x: T, y: T) => boolean`): A custom function to determine if two elements are equal. This function takes two arguments, one from each array, and returns `true` if the elements are considered equal, and `false` otherwise.
 
 ### Returns
 
