@@ -1,6 +1,6 @@
 # isRegExp
 
-Check if the given value is a RegExp.
+Check if the given value is a regular expression.
 
 This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `RegExp`.
 

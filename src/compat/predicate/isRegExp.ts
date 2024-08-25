@@ -6,6 +6,6 @@ import { getTag } from '../_internal/getTag';
  * @param {unknown} value The value to check.
  * @returns {boolean} Returns `true` if `value` is a RegExp, `false` otherwise.
  */
-export function isRegExp(value: unknown): value is RegExp {
+export function isRegExp(value?: unknown): value is RegExp {
   return getTag(value) === '[object RegExp]';
 }
