@@ -1,4 +1,4 @@
-import { flatten } from '../array';
+import { flatten } from '../array/flatten.ts';
 
 /**
  * Creates a function that invokes `func` with arguments arranged according to the specified `indexes`
