@@ -62,7 +62,7 @@ export function orderBy<T>(
       return object;
     }
 
-    let currentCriterion: PropertyKey | ((item: T) => unknown) | PropertyKey[] | null = null;
+    let currentCriterion = null;
 
     // If criterion has only one case, it means it doesn't have possibility to be a deep path.
     if (criterion.length === 1) {
