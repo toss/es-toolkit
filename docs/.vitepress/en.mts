@@ -131,6 +131,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'partial', link: '/reference/function/partial' },
             { text: 'partialRight', link: '/reference/function/partialRight' },
             { text: 'rest', link: '/reference/function/rest' },
+            { text: 'spread', link: '/reference/function/spread' },
           ],
         },
         {
