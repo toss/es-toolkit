@@ -1,8 +1,6 @@
 import { compareValues } from '../_internal/compareValues';
-import { memoizeCapped } from '../_internal/memoizeCapped';
+import { isKey } from '../_internal/isKey';
 import { toPath } from '../_internal/toPath';
-
-const memoizedToPath = memoizeCapped(toPath);
 
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
@@ -57,7 +55,7 @@ export function orderBy<T>(
   }
 
   const getValueByCriterion = (
-    criterion: PropertyKey[][] | Array<number | symbol | ((item: T) => unknown)> | Array<string | string[]>,
+    criterion: PropertyKey[][] | Array<PropertyKey | ((item: T) => unknown) | string[]>,
     object: T
   ) => {
     if (object == null) {
@@ -112,12 +110,12 @@ export function orderBy<T>(
       }
     }
 
-    if (typeof criterion === 'function' || typeof criterion !== 'string') {
+    if (typeof criterion === 'function' || isKey(criterion)) {
       return [criterion];
     }
 
-    // If criterion is a string, it has possibility to be a deep path. So we have to prepare both cases.
-    return [criterion, memoizedToPath(criterion)]; // [Using when object has its own property, Using when object doesn't have its own property]
+    // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
+    return [criterion, toPath(criterion as string)]; // [Using when object has its own property, Using when object doesn't have its own property]
   });
 
   return (collection as T[]).slice().sort((a, b) => {
