@@ -193,6 +193,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isLength', link: '/ko/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/ko/reference/predicate/isPlainObject' },
             { text: 'isPrimitive', link: '/ko/reference/predicate/isPrimitive' },
+            { text: 'isRegExp', link: '/ko/reference/predicate/isRegExp' },
             { text: 'isString', link: '/ko/reference/predicate/isString' },
             { text: 'isMatch (호환성)', link: '/ko/reference/compat/predicate/isMatch' },
             { text: 'matches (호환성)', link: '/ko/reference/compat/predicate/matches' },
