@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+Retrieves the value at a given path from an object. If the resolved value is `undefined`, the `defaultValue` is returned instead.
 
 ## Signature
 

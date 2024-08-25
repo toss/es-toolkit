@@ -217,6 +217,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'startsWith (compat)', link: '/reference/compat/string/startsWith' },
             { text: 'endsWith (compat)', link: '/reference/compat/string/endsWith' },
             { text: 'padStart (compat)', link: '/reference/compat/string/padStart' },
+            { text: 'padEnd (compat)', link: '/reference/compat/string/padEnd' },
           ],
         },
         {
