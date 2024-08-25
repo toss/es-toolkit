@@ -5,7 +5,8 @@ Finds the element in an array that has the maximum value when applying the `getV
 ## Signature
 
 ```typescript
-function maxBy<T>(items: T[], getValue: (item: T) => number): T;
+function maxBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T;
+function maxBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 ```
 
 ### Parameters

@@ -16,7 +16,7 @@ function initial<T>(arr: T[]): T[];
 
 ### Returns
 
-(T[]): A new array containing all elements except the last one from the input array. For an empty array or an array with a length of 1, it returns an empty array ([]).
+(`T[]`): A new array containing all elements except the last one from the input array. For an empty array or an array with a length of 1, it returns an empty array (`[]`).
 
 ## Examples
 

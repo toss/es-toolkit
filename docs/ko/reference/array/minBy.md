@@ -5,7 +5,8 @@
 ## 인터페이스
 
 ```typescript
-function minBy<T>(items: T[], getValue: (element: T) => number): T;
+function minBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T;
+function minBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 ```
 
 ### 파라미터
