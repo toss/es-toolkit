@@ -54,69 +54,59 @@ export function orderBy<T>(
     orders = orders == null ? [] : [orders];
   }
 
+  const getVaueByNestedPath = (object: object, path: PropertyKey[]) => {
+    let target: object = object;
+
+    for (let i = 0; i < path.length && target != null; i++) {
+      target = target[path[i] as keyof typeof target];
+    }
+
+    return target;
+  };
+
   const getValueByCriterion = (
-    criterion: PropertyKey[][] | Array<PropertyKey | ((item: T) => unknown) | string[]>,
+    {
+      criterion,
+      path,
+    }:
+      | { criterion: PropertyKey | ((item: T) => unknown) | PropertyKey[]; path?: undefined }
+      | { criterion: PropertyKey; path: string[] },
     object: T
   ) => {
     if (object == null) {
       return object;
     }
 
-    let currentCriterion = null;
-
     // If criterion has only one case, it means it doesn't have possibility to be a deep path.
-    if (criterion.length === 1) {
-      currentCriterion = criterion[0];
-
-      if (typeof currentCriterion === 'function') {
-        return currentCriterion(object);
+    if (path == null) {
+      if (typeof criterion === 'function') {
+        return criterion(object);
       }
 
-      if (!Array.isArray(currentCriterion)) {
-        return object[currentCriterion as keyof typeof object];
+      if (!Array.isArray(criterion)) {
+        return object[criterion as keyof typeof object];
       }
 
-      // If criterion is and array, it needs to get value by nested path.
+      return getVaueByNestedPath(object, criterion);
     }
 
-    // If criterion has two cases, it means it has possibility to be a deep path.
-    if (!currentCriterion) {
-      // Just using property name when object has its own property
-      if (Object.hasOwn(object, criterion[0] as string)) {
-        return object[criterion[0] as keyof typeof object];
-      }
-
-      currentCriterion = criterion[1];
+    if (Object.hasOwn(object, criterion)) {
+      return object[criterion as keyof typeof object];
     }
 
-    // Get value by nested path
-    let target: object = object;
-
-    for (let i = 0; i < (currentCriterion as PropertyKey[]).length && target != null; i++) {
-      target = target[(currentCriterion as PropertyKey[])[i] as keyof typeof target];
-    }
-
-    return target;
+    return getVaueByNestedPath(object, path);
   };
 
   // Prepare all cases for criteria
-  const preparedCriteria = criteria.map(criterion => {
-    if (Array.isArray(criterion)) {
-      // if criterion is nested path, it doesn't have possibility to be a deep path.
-      if (criterion.length === 1) {
-        criterion = criterion[0];
-      } else {
-        return [criterion];
+  const preparedCriteria = criteria
+    .map(criterion => (Array.isArray(criterion) && criterion.length === 1 ? criterion[0] : criterion)) // lodash handles a array with one element as a single criterion
+    .map(criterion => {
+      if (typeof criterion === 'function' || Array.isArray(criterion) || isKey(criterion)) {
+        return { criterion } as const;
       }
-    }
-
-    if (typeof criterion === 'function' || isKey(criterion)) {
-      return [criterion];
-    }
-
-    // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
-    return [criterion, toPath(criterion as string)]; // [Using when object has its own property, Using when object doesn't have its own property]
-  });
+      // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
+      return { criterion, path: toPath(criterion as string) } as const;
+    });
 
   return (collection as T[]).slice().sort((a, b) => {
     for (let i = 0; i < criteria.length; i++) {
