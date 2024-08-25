@@ -227,6 +227,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'startCase', link: '/ko/reference/string/startCase' },
             { text: 'pascalCase', link: '/ko/reference/string/pascalCase' },
             { text: 'capitalize', link: '/ko/reference/string/capitalize' },
+            { text: 'lowerFirst', link: '/ko/reference/string/lowerFirst' },
+            { text: 'upperFirst', link: '/ko/reference/string/upperFirst' },
             { text: 'startsWith (호환성)', link: '/ko/reference/compat/string/startsWith' },
             { text: 'endsWith (호환성)', link: '/ko/reference/compat/string/endsWith' },
             { text: 'padStart (호환성)', link: '/ko/reference/compat/string/padStart' },

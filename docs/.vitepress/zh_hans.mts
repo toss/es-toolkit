@@ -210,6 +210,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'startCase', link: '/zh_hans/reference/string/startCase' },
             { text: 'pascalCase', link: '/zh_hans/reference/string/pascalCase' },
             { text: 'capitalize', link: '/zh_hans/reference/string/capitalize' },
+            { text: 'lowerFirst', link: '/zh_hans/reference/string/lowerFirst' },
+            { text: 'upperFirst', link: '/zh_hans/reference/string/upperFirst' },
             { text: 'startsWith (兼容性)', link: '/zh_hans/reference/compat/string/startsWith' },
             { text: 'endsWith (兼容性)', link: '/zh_hans/reference/compat/string/endsWith' },
             { text: 'padStart (兼容性)', link: '/zh_hans/reference/compat/string/padStart' },

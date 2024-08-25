@@ -214,6 +214,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'startCase', link: '/reference/string/startCase' },
             { text: 'pascalCase', link: '/reference/string/pascalCase' },
             { text: 'capitalize', link: '/reference/string/capitalize' },
+            { text: 'lowerFirst', link: '/reference/string/lowerFirst' },
+            { text: 'upperFirst', link: '/reference/string/upperFirst' },
             { text: 'startsWith (compat)', link: '/reference/compat/string/startsWith' },
             { text: 'endsWith (compat)', link: '/reference/compat/string/endsWith' },
             { text: 'padStart (compat)', link: '/reference/compat/string/padStart' },
