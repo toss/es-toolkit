@@ -17,7 +17,7 @@ function dropRightWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean):
 
 ### 返回值
 
-(`T[]`) 谓词函数返回 false 后剩余的元素组成的新数组。
+(`T[]`) 谓词函数返回 `false` 后剩余的元素组成的新数组。
 
 ## 示例
 

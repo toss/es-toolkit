@@ -3,7 +3,7 @@ import { get } from './get.ts';
 /**
  * Creates a function that returns the value at a given path of an object.
  *
- * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to get.
+ * @param {PropertyKey | PropertyKey[]} path - The path of the property to get.
  * @returns {(object: unknown) => any} - Returns a new function that takes an object and returns the value at the specified path.
  *
  * @example

@@ -67,7 +67,7 @@ const result = mergeWith(target, source, (objValue, srcValue) => {
 
 ::: sandpack
 
-```typescript
+```ts index.ts
 import { mergeWith } from 'es-toolkit';
 
 const target = { a: 1, b: 2 };

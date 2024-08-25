@@ -4,7 +4,6 @@
  * @template F - The type of the function.
  * @param {F} func - The function to cap arguments for.
  * @param {number} n - The arity cap.
- * @param {any} guard - Enables use as an iteratee for methods like `map`.
  * @returns {(...args: any[]) => ReturnType<F>} Returns the new capped function.
  */
 export function ary<F extends (...args: any[]) => any>(func: F, n: number): (...args: any[]) => ReturnType<F> {
