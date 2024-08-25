@@ -95,8 +95,8 @@ chunk([1, 2, 3, 4], 0);
 | [sortedLastIndexOf](https://lodash.com/docs/4.17.15#sortedLastIndexOf) | 지원하지 않음 |
 | [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)               | 지원하지 않음 |
 | [sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)           | 지원하지 않음 |
-| [tail](https://lodash.com/docs/4.17.15#tail)                           | 📝            |
-| [take](https://lodash.com/docs/4.17.15#take)                           | 📝            |
+| [tail](https://lodash.com/docs/4.17.15#tail)                           | ✅            |
+| [take](https://lodash.com/docs/4.17.15#take)                           | ✅            |
 | [takeRight](https://lodash.com/docs/4.17.15#takeRight)                 | ✅            |
 | [takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)       | 📝            |
 | [takeWhile](https://lodash.com/docs/4.17.15#takeWhile)                 | 📝            |
@@ -222,8 +222,8 @@ chunk([1, 2, 3, 4], 0);
 | [isNumber](https://lodash.com/docs/4.17.15#isNumber)                   | ❌        |
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌        |
 | [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ✅        |
-| [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ❌        |
-| [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ❌        |
+| [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ✅        |
+| [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ✅        |
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌        |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌        |
 | [isString](https://lodash.com/docs/4.17.15#isString)                   | ✅        |

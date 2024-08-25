@@ -10,20 +10,20 @@
 
 ```typescript
 function fill<T>(array: unknown[], value: T): T[];
-function fill<T, P>(array: T[], value: P, start: number): Array<T | P>;
-function fill<T, P>(array: T[], value: P, start: number, end: number): Array<T | P>;
+function fill<T, U>(array: T[], value: T, start: number): Array<T | U>;
+function fill<T, U>(array: T[], value: T, start: number, end: number): Array<T | U>;
 ```
 
 ### 参数
 
-- `array` (`Array<T | P>`): 要填充的数组。
-- `value` (`P`): 用来填充数组的值。
+- `array` (`Array<T | U>`): 要填充的数组。
+- `value` (`U`): 用来填充数组的值。
 - `start` (`number`, 默认值为 0): 起始位置。默认为 0。
 - `end` (`number`, 默认值为 array.length): 结束位置。默认为数组的长度。
 
 ### 返回值
 
-(`Array<T | P>`): 填充后的数组。
+(`Array<T | U>`): 填充后的数组。
 
 ## 示例
 
@@ -39,4 +39,8 @@ const result2 = fill(array2, 2);
 const array3 = [4, 6, 8, 10];
 const result3 = fill(array3, '*', 1, 3);
 // result3 => [4, '*', '*', 10]
+
+const array4 = [1, 2, 3];
+const result4 = fill(array4, '*', -2, -1);
+// result4 => [1, '*', 3]
 ```

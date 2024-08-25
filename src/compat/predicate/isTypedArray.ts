@@ -4,7 +4,7 @@ import { isTypedArray as isTypedArrayToolkit } from '../../predicate/isTypedArra
  * Checks if a value is a TypedArray.
  * @param {unknown} x The value to check.
  * @returns {x is
- *   | Uint8Array
+ *     Uint8Array
  *   | Uint8ClampedArray
  *   | Uint16Array
  *   | Uint32Array
