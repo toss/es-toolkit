@@ -1,8 +1,6 @@
 import { compareValues } from '../_internal/compareValues';
-import { isKey } from '../_internal/isKey';
 import { memoizeCapped } from '../_internal/memoizeCapped';
 import { toPath } from '../_internal/toPath';
-import { isSymbol } from '../predicate/isSymbol';
 
 const memoizedToPath = memoizeCapped(toPath);
 
