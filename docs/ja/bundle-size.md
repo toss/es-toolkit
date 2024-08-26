@@ -12,7 +12,7 @@ es-toolkitは現代的な実装を持っているため、他のライブラリ�
 
 ## バンドルサイズの比較
 
-|                                            | es-toolkit@0.0.1 | lodash-es@4.17.21 | 差異       |
+|                                            | es-toolkit@0.0.1 | lodash-es@4.17.21 | Difference |
 | ------------------------------------------ | ---------------- | ----------------- | ---------- |
 | [sample](./reference/array/sample)         | 88 bytes         | 2000 bytes        | -95.6%     |
 | [difference](./reference/array/difference) | 91 bytes         | 3190 bytes        | -97.2%     |

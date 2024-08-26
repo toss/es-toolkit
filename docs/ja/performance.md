@@ -10,7 +10,7 @@ description: es-toolkitと他のライブラリのパフォーマンスの違い
 
 ## パフォーマンス比較
 
-|                                                           | es-toolkit@0.0.1 | lodash-es@4.17.21 | 差異       |
+|                                                           | es-toolkit@0.0.1 | lodash-es@4.17.21 | Difference |
 | --------------------------------------------------------- | ---------------- | ----------------- | ---------- |
 | [omit](./reference/object/omit.md)                        | 4,767,360 times  | 403,624 times     | 11.8×      |
 | [pick](./reference/object/pick.md)                        | 9,121,839 times  | 2,663,072 times   | 3.43×      |
