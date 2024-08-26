@@ -15,7 +15,7 @@
  * @returns {Record<string, number>} An object containing the transformed items as keys and the
  * counts as values.
  */
-export function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number> {
+export function countBy<T>(arr: readonly T[], mapper: (item: T) => string): Record<string, number> {
   const result: Record<string, number> = {};
 
   for (const item of arr) {
