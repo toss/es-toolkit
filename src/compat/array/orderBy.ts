@@ -65,7 +65,7 @@ export function orderBy<T>(
   };
 
   const getValueByCriterion = (
-    criterion: PropertyKey | ((item: T) => unknown) | PropertyKey[] | { criterion: PropertyKey; path: string[] },
+    criterion: PropertyKey | ((item: T) => unknown) | PropertyKey[] | { key: PropertyKey; path: string[] },
     object: T
   ) => {
     if (object == null) {
@@ -84,24 +84,28 @@ export function orderBy<T>(
       return object[criterion as keyof typeof object];
     }
 
-    // Case for deep path
-    if (Object.hasOwn(object, criterion.criterion)) {
-      return object[criterion.criterion as keyof typeof object];
+    // Case for possible to be a deep path
+    if (Object.hasOwn(object, criterion.key)) {
+      return object[criterion.key as keyof typeof object];
     }
 
     return getVaueByNestedPath(object, criterion.path);
   };
 
   // Prepare all cases for criteria
-  const preparedCriteria = criteria
-    .map(criterion => (Array.isArray(criterion) && criterion.length === 1 ? criterion[0] : criterion)) // lodash handles a array with one element as a single criterion
-    .map(criterion => {
-      if (typeof criterion === 'function' || Array.isArray(criterion) || isKey(criterion)) {
-        return criterion;
-      }
-      // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
-      return { criterion, path: toPath(criterion as string) } as const;
-    });
+  const preparedCriteria = criteria.map(criterion => {
+    // lodash handles a array with one element as a single criterion
+    if (Array.isArray(criterion) && criterion.length === 1) {
+      criterion = criterion[0];
+    }
+
+    if (typeof criterion === 'function' || Array.isArray(criterion) || isKey(criterion)) {
+      return criterion;
+    }
+
+    // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
+    return { key: criterion, path: toPath(criterion as string) } as const;
+  });
 
   return (collection as T[]).slice().sort((a, b) => {
     for (let i = 0; i < criteria.length; i++) {
