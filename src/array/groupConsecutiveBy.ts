@@ -1,7 +1,7 @@
-import { last } from './last'
+import { last } from './last';
 
-export type DistArray<T> = T extends any ? T[] : never;
-export type NonDistArray<T> = [T] extends [any] ? T[] : never;
+type DistArray<T> = T extends any ? T[] : never;
+type NonDistArray<T> = [T] extends [any] ? T[] : never;
 
 /**
  * Groups the consecutive elements (like discriminated unions, but not limit only discriminated unions)
@@ -42,8 +42,11 @@ export type NonDistArray<T> = [T] extends [any] ? T[] : never;
  * //   ]
  * // ]
  */
-export const groupConsecutiveBy = <T, K extends PropertyKey>(arr: NonDistArray<T>, getKeyFromItem: (item: T) => K): DistArray<T>[] => {
-  const result = [] as DistArray<T>[];
+export const groupConsecutiveBy = <T, K extends PropertyKey>(
+  arr: NonDistArray<T>,
+  getKeyFromItem: (item: T) => K
+): Array<DistArray<T>> => {
+  const result = [] as Array<DistArray<T>>;
 
   for (const item of arr) {
     const key = getKeyFromItem(item);
