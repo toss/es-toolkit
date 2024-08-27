@@ -3,6 +3,7 @@
 특정 인덱스 요소들을 찾아 새로운 배열을 반환해 주는 함수에요.
 
 이 함수는 파라미터로 특정 인덱스 요소를 조회할 배열과 인덱스 정보를 담은 배열을 받아요.
+
 첫 번재 파라미터로 받은 배열을 기준으로 두 번째로 받은 인덱스 정보를 담은 배열로 특정 요소를 조회해요.
 
 인덱스로 조회된 요소는 순서대로 조합되어 새로운 배열로 반환되고, 조회된 배열은 조회한 인덱스 값을 제외한 나머지로 이루어지게 돼요.
@@ -10,7 +11,7 @@
 ## 인터페이스
 
 ```typescript
-function pullAt<T>(array: T[], indexes: number[]): (T | undefined)[];
+function pullAt<T>(array: T[], indexes: number[]): Array<T | undefined>;
 ```
 
 ### 파라미터
@@ -20,7 +21,7 @@ function pullAt<T>(array: T[], indexes: number[]): (T | undefined)[];
 
 ### 반환 값
 
-(`(T | undefined)[]`): 배열의 특정 인덱스 요소를 찾아 조합한 새로운 배열을 반환해요.
+(`Array<T | undefined>`): 배열의 특정 인덱스 요소를 찾아 조합한 새로운 배열을 반환해요.
 
 ## 예시
 
