@@ -12,8 +12,8 @@
  * // arr: ['%', '3', '6'];
  * // result: [{ a: '2' }, '5']
  */
-export function pullAt<T>(arr: T[], indexes: number[]): (T | undefined)[] {
-  const result: (T | undefined)[] = [];
+export function pullAt<T>(arr: T[], indexes: number[]): Array<T | undefined> {
+  const result: Array<T | undefined> = [];
 
   for (const index of indexes) {
     result.push(arr[index]);
