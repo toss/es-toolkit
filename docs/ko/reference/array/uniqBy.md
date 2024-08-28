@@ -25,11 +25,11 @@ uniqBy([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19], Math.floor);
 ```
 
 ```typescript
-const 배열 = [
-  { 분류: '과일', 이름: '사과' },
-  { 분류: '과일', 이름: '바나나' },
-  { 분류: '채소', 이름: '당근' },
+const array = [
+  { category: 'fruit', name: 'apple' },
+  { category: 'fruit', name: 'banana' },
+  { category: 'vegetable', name: 'carrot' },
 ];
-uniqBy(배열, 항목 => 항목.분류).length
+uniqBy(array, item => item.category).length
 // 2
 ```

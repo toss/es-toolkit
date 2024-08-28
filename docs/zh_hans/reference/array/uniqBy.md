@@ -25,11 +25,11 @@ uniqBy([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19], Math.floor);
 ```
 
 ```typescript
-const 数组 = [
-  { 类别: '水果', 名称: '苹果' },
-  { 类别: '水果', 名称: '香蕉' },
-  { 类别: '蔬菜', 名称: '胡萝卜' },
+const array = [
+  { category: 'fruit', name: 'apple' },
+  { category: 'fruit', name: 'banana' },
+  { category: 'vegetable', name: 'carrot' },
 ];
-uniqBy(数组, 项目 => 项目.类别).length
+uniqBy(array, item => item.category).length
 // 2
 ```
