@@ -16,7 +16,7 @@ function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T
 
 ### 参数
 
-- `arr` (`Array<T>`): 基于其创建新数组的原始数组。
+- `arr` (`T[]`): 基于其创建新数组的原始数组。
 - `value` (`U`): 要用来填充新数组的值。
 - `start` (`number, 默认值 = 0`): 起始位置。默认为 0。
 - `end` (`number, 默认值 = array.length`): 结束位置。默认为数组的长度。

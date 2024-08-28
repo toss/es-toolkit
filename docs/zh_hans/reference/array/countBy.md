@@ -5,17 +5,17 @@
 ## 签名
 
 ```typescript
-function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number>;
+function countBy<T, K extends PropertyKey>(arr: T[], mapper: (item: T) => K): Record<K, number>;
 ```
 
 ### 参数
 
 - `arr` (`T[]`): 输入数组，用于统计每个项目的出现次数。
-- `mapper` (`(item: T) => string`): 将每个项目映射到字符串键的转换函数。
+- `mapper` (`(item: T) => K`): 将每个项目映射到字符串键的转换函数。
 
 ### 返回值
 
-(`Record<string, number>`) 包含基于转换函数的每个项目计数的对象。
+(`Record<K, number>`) 包含基于转换函数的每个项目计数的对象。
 
 ## 示例
 

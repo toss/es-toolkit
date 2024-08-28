@@ -5,7 +5,8 @@ Finds the element in an array that has the minimum value when applying the `getV
 ## Signature
 
 ```typescript
-function minBy<T>(items: T[], getValue: (item: T) => number): T;
+function minBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T;
+function minBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 ```
 
 ### Parameters

@@ -14,7 +14,11 @@
 ## 인터페이스
 
 ```typescript
-function merge<T, S>(target: T, source: S): T & S;
+function mergeWith<T, S>(
+  target: T,
+  source: S,
+  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
+): T & S;
 ```
 
 ### 파라미터

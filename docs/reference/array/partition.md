@@ -3,8 +3,8 @@
 Splits an array into two groups based on a predicate function.
 
 This function takes an array and a predicate function. It returns a tuple of two arrays:
-the first array contains elements for which the predicate function returns true, and
-the second array contains elements for which the predicate function returns false.
+the first array contains elements for which the predicate function returns `true`, and
+the second array contains elements for which the predicate function returns `false`.
 
 ## Signature
 
@@ -19,7 +19,7 @@ function partition<T>(arr: T[], isInTruthy: (value: T) => boolean): [truthy: T[]
 
 ### Returns
 
-(`[T[], T[]]`): A tuple containing two arrays: the first array contains elements for which the predicate returned true, and the second array contains elements for which the predicate returned false.
+(`[T[], T[]]`): A tuple containing two arrays: the first array contains elements for which the predicate returned `true`, and the second array contains elements for which the predicate returned `false`.
 
 ## Examples
 

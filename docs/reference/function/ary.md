@@ -1,6 +1,6 @@
 # ary
 
-Creates a function that invokes func, with up to n arguments, ignoring any additional arguments.
+Creates a function that invokes func, with up to `n` arguments, ignoring any additional arguments.
 
 ## Signature
 
@@ -11,7 +11,7 @@ function ary<F extends (...args: any[]) => any>(func: F, n: number): (...args: a
 ### Parameters
 
 - `func` (`F`): The function to cap arguments for.
-- `n` (`number`, optional): The arity cap, defaulting to the number of parameters of `func`. Negative numbers will be treated as `0`, and decimals will be rounded down.
+- `n` (`number`, optional): The arity cap, defaulting to the number of parameters of `func`.
 
 ### Returns
 

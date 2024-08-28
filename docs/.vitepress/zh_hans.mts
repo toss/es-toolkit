@@ -1,5 +1,6 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const zh_hans = defineConfig({
   lang: 'zh_hans',
   description: '一款先进的高性能 JavaScript 实用库，具有小巧的包体积和强大的类型注解。',
@@ -171,12 +172,14 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             { text: 'isArguments (兼容性)', link: '/zh_hans/reference/compat/predicate/isArguments' },
             { text: 'isArray (兼容性)', link: '/zh_hans/reference/compat/predicate/isArray' },
-            { text: 'isArrayLike (兼容性)', link: '/zh_hans/reference/predicate/isArrayLike' },
+            { text: 'isArrayLike (兼容性)', link: '/zh_hans/reference/compat/predicate/isArrayLike' },
+            { text: 'isBoolean', link: '/zh_hans/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/zh_hans/reference/predicate/isFunction' },
             { text: 'isLength', link: '/zh_hans/reference/predicate/isLength' },
             { text: 'isPlainObject', link: '/zh_hans/reference/predicate/isPlainObject' },
             { text: 'isPrimitive', link: '/zh_hans/reference/predicate/isPrimitive' },
+            { text: 'isRegExp', link: '/zh_hans/reference/predicate/isRegExp' },
             { text: 'isString', link: '/zh_hans/reference/predicate/isString' },
             { text: 'isSymbol', link: '/zh_hans/reference/predicate/isSymbol' },
             { text: 'isMatch (兼容性)', link: '/zh_hans/reference/compat/predicate/isMatch' },
@@ -208,6 +211,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'startCase', link: '/zh_hans/reference/string/startCase' },
             { text: 'pascalCase', link: '/zh_hans/reference/string/pascalCase' },
             { text: 'capitalize', link: '/zh_hans/reference/string/capitalize' },
+            { text: 'lowerFirst', link: '/zh_hans/reference/string/lowerFirst' },
+            { text: 'upperFirst', link: '/zh_hans/reference/string/upperFirst' },
             { text: 'startsWith (兼容性)', link: '/zh_hans/reference/compat/string/startsWith' },
             { text: 'endsWith (兼容性)', link: '/zh_hans/reference/compat/string/endsWith' },
             { text: 'padStart (兼容性)', link: '/zh_hans/reference/compat/string/padStart' },

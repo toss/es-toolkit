@@ -11,7 +11,7 @@ function isSubset<T>(superset: T[], subset: T[]): boolean;
 ### 파라미터
 
 - `superset` (`T[]`): 하위 집합의 모든 요소를 포함 할 수 있는 배열이에요.
-- `subset` (`D`): 상위 집합 배열에 포함되어 있는지 비교 할 배열이에요.
+- `subset` (`T[]`): 상위 집합 배열에 포함되어 있는지 비교 할 배열이에요.
 
 ### 반환 값
 
