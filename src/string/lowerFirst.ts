@@ -6,8 +6,8 @@
  *
  * @example
  * const convertedStr1 = lowerCase('fred') // returns 'fred'
- * const convertedStr2 = lowerCase('Fred') // returns 'Fred'
- * const convertedStr3 = lowerCase('FRED') // returns 'FRED'
+ * const convertedStr2 = lowerCase('Fred') // returns 'fred'
+ * const convertedStr3 = lowerCase('FRED') // returns 'fRED'
  */
 export const lowerFirst = (str: string): string => {
   return str.substring(0, 1).toLowerCase() + str.substring(1);
