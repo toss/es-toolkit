@@ -54,7 +54,7 @@ export function orderBy<T>(
     orders = orders == null ? [] : [orders];
   }
 
-  const getVaueByNestedPath = (object: object, path: PropertyKey[]) => {
+  const getValueByNestedPath = (object: object, path: PropertyKey[]) => {
     let target: object = object;
 
     for (let i = 0; i < path.length && target != null; i++) {
@@ -77,7 +77,7 @@ export function orderBy<T>(
     }
 
     if (Array.isArray(criterion)) {
-      return getVaueByNestedPath(object, criterion);
+      return getValueByNestedPath(object, criterion);
     }
 
     if (typeof criterion !== 'object') {
@@ -89,7 +89,7 @@ export function orderBy<T>(
       return object[criterion.key as keyof typeof object];
     }
 
-    return getVaueByNestedPath(object, criterion.path);
+    return getValueByNestedPath(object, criterion.path);
   };
 
   // Prepare all cases for criteria
