@@ -45,7 +45,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'リファレンス',
       items: [
         {
-          text: '配列ユーティリティ',
+          text: '配列',
           items: [
             { text: 'chunk', link: '/ja/reference/array/chunk' },
             { text: 'concat (compat)', link: '/ja/reference/compat/array/concat' },
@@ -114,7 +114,7 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
-          text: '関数ユーティリティ',
+          text: '関数',
           items: [
             { text: 'before', link: '/ja/reference/function/before' },
             { text: 'after', link: '/ja/reference/function/after' },
@@ -133,7 +133,7 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
-          text: '数学ユーティリティ',
+          text: '数学',
           items: [
             { text: 'clamp', link: '/ja/reference/math/clamp' },
             { text: 'inRange', link: '/ja/reference/math/inRange' },
@@ -148,7 +148,7 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
-          text: 'オブジェクトユーティリティ',
+          text: 'オブジェクト',
           items: [
             { text: 'clone', link: '/ja/reference/object/clone' },
             { text: 'cloneDeep', link: '/ja/reference/object/cloneDeep' },
@@ -195,7 +195,7 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
-          text: 'Promise ユーティリティ',
+          text: 'Promise',
           items: [
             { text: 'delay', link: '/ja/reference/promise/delay' },
             { text: 'timeout', link: '/ja/reference/promise/timeout' },
@@ -203,7 +203,7 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
-          text: '文字列ユーティリティ',
+          text: '文字列',
           items: [
             { text: 'camelCase', link: '/ja/reference/string/camelCase' },
             { text: 'snakeCase', link: '/ja/reference/string/snakeCase' },
