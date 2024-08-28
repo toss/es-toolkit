@@ -15,7 +15,6 @@
  * ```
  * 
  * @example
- * ```ts
  * const array = [
  *   { category: 'fruit', name: 'apple' },
  *   { category: 'fruit', name: 'banana' },
