@@ -3,20 +3,20 @@
  * based on a transformation function.
  *
  * This function takes an array and a transformation function
- * that converts each item in the array to a string. It then
+ * that converts each item in the array to a key. It then
  * counts the occurrences of each transformed item and returns
  * an object with the transformed items as keys and the counts
  * as values.
  *
  * @template T - The type of the items in the input array.
- *
+ * @template K - The type of keys.
  * @param {T[]} arr - The input array to count occurrences.
- * @param {(item: T) => string} mapper - The transformation function that maps each item to a string key.
- * @returns {Record<string, number>} An object containing the transformed items as keys and the
+ * @param {(item: T) => K} mapper - The transformation function that maps each item to a key.
+ * @returns {Record<K, number>} An object containing the transformed items as keys and the
  * counts as values.
  */
-export function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number> {
-  const result: Record<string, number> = {};
+export function countBy<T, K extends PropertyKey>(arr: readonly T[], mapper: (item: T) => K): Record<K, number> {
+  const result = {} as Record<K, number>;
 
   for (const item of arr) {
     const key = mapper(item);

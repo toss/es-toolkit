@@ -1,5 +1,6 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const zh_hans = defineConfig({
   lang: 'zh_hans',
   description: '一款先进的高性能 JavaScript 实用库，具有小巧的包体积和强大的类型注解。',
