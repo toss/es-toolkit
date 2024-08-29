@@ -4,6 +4,7 @@ import { rearg as reargLodash } from 'lodash';
 
 describe('rearg', () => {
   function fn() {
+    // eslint-disable-next-line prefer-rest-params
     return Array.from(arguments);
   }
 
