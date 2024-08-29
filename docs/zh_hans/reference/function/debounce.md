@@ -7,7 +7,7 @@
 ## 签名
 
 ```typescript
-function debounce<F extends (...args: Parameters<F>) => void>(
+function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions

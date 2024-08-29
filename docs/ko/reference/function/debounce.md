@@ -7,7 +7,7 @@ debounce된 함수는 또한 대기 중인 실행을 취소하는 `cancel` 메�
 ## 인터페이스
 
 ```typescript
-function debounce<F extends (...args: Parameters<F>) => void>(
+function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions

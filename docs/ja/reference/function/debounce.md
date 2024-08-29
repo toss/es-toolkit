@@ -7,11 +7,11 @@
 ## インターフェース
 
 ```typescript
-function debounce<F extends (...args: any[]) => void>(
+function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions
-): F & { cancel: () => void };
+): ((...args: Parameters<F>) => void) & { cancel: () => void };
 ```
 
 ### パラメータ
@@ -23,7 +23,7 @@ function debounce<F extends (...args: any[]) => void>(
 
 ### 戻り値
 
-(`F & { cancel: () => void }`): `cancel` メソッドを持つデバウンスされた関数。
+(`((...args: Parameters<F>) => void) & { cancel: () => void }`): `cancel` メソッドを持つデバウンスされた関数。
 
 ## 例
 
