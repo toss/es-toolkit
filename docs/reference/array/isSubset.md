@@ -11,7 +11,7 @@ function isSubset<T>(superset: T[], subset: T[]): boolean;
 ### Parameters
 
 - `superset` (`T[]`): The array that may contain all elements of the subset.
-- `subset` (`D`): The array to check against the superset.
+- `subset` (`T[]`): The array to check against the superset.
 
 ### Returns
 

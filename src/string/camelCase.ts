@@ -4,7 +4,8 @@ import { getWords } from './_internal/getWords.ts';
 /**
  * Converts a string to camel case.
  *
- * camel case is the naming convention in which each word is written in lowercase and separated by an underscore (_) character.
+ * Camel case is the naming convention in which the first word is written in lowercase and
+ * each subsequent word begins with a capital letter, concatenated without any separator characters.
  *
  * @param {string} str - The string that is to be changed to camel case.
  * @returns {string} - The converted string to camel case.

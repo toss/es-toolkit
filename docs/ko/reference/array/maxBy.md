@@ -7,7 +7,8 @@
 ## 인터페이스
 
 ```typescript
-function maxBy<T>(items: T[], getValue: (element: T) => number): T;
+function maxBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T;
+function maxBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 ```
 
 ### 파라미터

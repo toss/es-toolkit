@@ -7,7 +7,8 @@
 ## 签名
 
 ```typescript
-function minBy<T>(items: T[], getValue: (item: T) => number): T;
+function minBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T;
+function minBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 ```
 
 ### 参数

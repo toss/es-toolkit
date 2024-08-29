@@ -7,9 +7,9 @@ import { sum } from './sum.ts';
  * If the array is empty, this function returns `0`.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items An array to calculate the average.
+ * @param {T[]} items An array to calculate the sum.
  * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {number} The average of all the numbers as determined by the `getValue` function.
+ * @returns {number} The sum of all the numbers as determined by the `getValue` function.
  *
  * @example
  * sumBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: 6

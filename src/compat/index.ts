@@ -62,6 +62,7 @@ export { isObjectLike } from './predicate/isObjectLike.ts';
 export { isBoolean } from './predicate/isBoolean.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
+export { isRegExp } from './predicate/isRegExp.ts';
 export { isString } from './predicate/isString.ts';
 export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
