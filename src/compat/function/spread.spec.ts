@@ -38,7 +38,6 @@ describe('spread', () => {
 
   it('should treat `start` as `0` for negative or `NaN` values', () => {
     const values = [-1, NaN, 'a'];
-    // const expected = values.map(, lodashStable.constant([1, 2]));
     const expected = values.map(() => [1, 2]);
 
     const actual = values.map(value => {
