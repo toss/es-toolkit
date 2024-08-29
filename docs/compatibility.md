@@ -222,7 +222,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isObject](https://lodash.com/docs/4.17.15#isObject)                   | ❌                    |
 | [isObjectLike](https://lodash.com/docs/4.17.15#isObjectLike)           | ✅                    |
 | [isPlainObject](https://lodash.com/docs/4.17.15#isPlainObject)         | ✅                    |
-| [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ❌                    |
+| [isRegExp](https://lodash.com/docs/4.17.15#isRegExp)                   | ✅                    |
 | [isSafeInteger](https://lodash.com/docs/4.17.15#isSafeInteger)         | ❌                    |
 | [isSet](https://lodash.com/docs/4.17.15#isSet)                         | ❌                    |
 | [isString](https://lodash.com/docs/4.17.15#isString)                   | ✅                    |
@@ -330,7 +330,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [escapeRegExp](https://lodash.com/docs/4.17.15#escapeRegExp) | ❌                    |
 | [kebabCase](https://lodash.com/docs/4.17.15#kebabCase)       | 📝                    |
 | [lowerCase](https://lodash.com/docs/4.17.15#lowerCase)       | 📝                    |
-| [lowerFirst](https://lodash.com/docs/4.17.15#lowerFirst)     | ❌                    |
+| [lowerFirst](https://lodash.com/docs/4.17.15#lowerFirst)     | ✅                    |
 | [pad](https://lodash.com/docs/4.17.15#pad)                   | ❌                    |
 | [padEnd](https://lodash.com/docs/4.17.15#padEnd)             | ❌                    |
 | [padStart](https://lodash.com/docs/4.17.15#padStart)         | ❌                    |
@@ -350,7 +350,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [truncate](https://lodash.com/docs/4.17.15#truncate)         | ❌                    |
 | [unescape](https://lodash.com/docs/4.17.15#unescape)         | ❌                    |
 | [upperCase](https://lodash.com/docs/4.17.15#upperCase)       | 📝                    |
-| [upperFirst](https://lodash.com/docs/4.17.15#upperFirst)     | 📝                    |
+| [upperFirst](https://lodash.com/docs/4.17.15#upperFirst)     | ✅                    |
 | [words](https://lodash.com/docs/4.17.15#words)               | ❌                    |
 
 ### "Util" methods

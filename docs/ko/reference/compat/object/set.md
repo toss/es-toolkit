@@ -11,7 +11,11 @@
 ## 인터페이스
 
 ```typescript
-function set<T>(obj: Settable, path: Path, value: any): T;
+function set<T extends object>(
+  obj: T,
+  path: string | number | symbol | Array<string | number | symbol>,
+  value: unknown
+): T;
 ```
 
 ### 파라미터

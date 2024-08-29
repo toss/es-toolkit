@@ -5,17 +5,17 @@
 ## 인터페이스
 
 ```typescript
-function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number>;
+function countBy<T, K extends PropertyKey>(arr: T[], mapper: (item: T) => K): Record<K, number>;
 ```
 
 ### 파라미터
 
 - `arr` (`T[]`): 요소의 갯수를 세고자 하는 배열.
-- `mapper` (`(item: T) => string`): 요소를 분류할 기준이 되는 값을 반환하는 함수.
+- `mapper` (`(item: T) => K`): 요소를 분류할 기준이 되는 값을 반환하는 함수.
 
 ### 반환 값
 
-(`Record<string, number>`) 각 요소가 분류별로 몇 개 있는지를 계산한 객체.
+(`Record<K, number>`) 각 요소가 분류별로 몇 개 있는지를 계산한 객체.
 
 ## 예시
 

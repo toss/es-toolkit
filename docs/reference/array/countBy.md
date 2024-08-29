@@ -5,17 +5,17 @@ Count the occurrences of each item in an array based on a `mapper` function.
 ## Signature
 
 ```typescript
-function countBy<T>(arr: T[], mapper: (item: T) => string): Record<string, number>;
+function countBy<T, K extends PropertyKey>(arr: T[], mapper: (item: T) => K): Record<K, number>;
 ```
 
 ### Parameters
 
 - `arr` (`T[]`): The input array to count occurrences.
-- `mapper` (`(item: T) => string`): The transformation function that maps each item to a string key.
+- `mapper` (`(item: T) => K`): The transformation function that maps each item to a key.
 
 ### Returns
 
-(`Record<string, number>`) An object containing the count of each item based on the transformation function.
+(`Record<K, number>`) An object containing the count of each item based on the transformation function.
 
 ## Examples
 

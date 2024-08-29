@@ -49,11 +49,11 @@ has([1, 2, 3], 2); // true
 has([1, 2, 3], 5); // false
 ```
 
-## 데모
+## Demo
 
 ::: sandpack
 
-```typescript
+```ts index.ts
 import { has } from 'es-toolkit/compat';
 
 const obj = { a: { b: { c: 3 } } };

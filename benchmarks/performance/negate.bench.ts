@@ -4,10 +4,10 @@ import { negate as negateLodash } from 'lodash';
 
 describe('compact', () => {
   bench('es-toolkit', () => {
-    negateToolkit(() => true)() === false;
+    negateToolkit(() => true)();
   });
 
   bench('lodash', () => {
-    negateLodash(() => true)() === false;
+    negateLodash(() => true)();
   });
 });

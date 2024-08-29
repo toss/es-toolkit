@@ -1,6 +1,8 @@
 # partialRight
 
-此方法类似于 `partial`，但部分应用的参数会被附加到接收到的参数之后。
+创建一个函数，该函数在接收到参数时将 `partialArgs` 追加到这些参数上，并调用 `func`。
+
+此方法类似于 [partial](./partial.md)，但部分应用的参数会被附加到接收到的参数之后。
 
 `partialRight.placeholder` 的值默认是一个 `symbol`，可以用作附加的部分参数的占位符。
 
