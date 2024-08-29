@@ -5,7 +5,7 @@
  * @template T - Type of elements in the input array.
  *
  * @param {T[]} arr - The array to take elements from.
- * @param {number} count - The number of elements to take.
+ * @param {number} [count=1] - The number of elements to take.
  * @returns {T[]} A new array containing the first `count` elements from `arr`.
  *
  * @example
@@ -20,6 +20,6 @@
  * // Returns [1, 2, 3]
  * take([1, 2, 3], 5);
  */
-export function take<T>(arr: readonly T[], count: number): T[] {
+export function take<T>(arr: readonly T[], count = 1): T[] {
   return arr.slice(0, count);
 }
