@@ -4,7 +4,7 @@
 
 [English](https://github.com/toss/es-toolkit/blob/main/README.md) | [한국어](https://github.com/toss/es-toolkit/blob/main/README-ko_kr.md) | [简体中文](https://github.com/toss/es-toolkit/blob/main/README-zh_hans.md) | 日本語
 
-es-toolkitは、最新のJavaScriptユーティリティライブラリであり、高性能で小さなバンドルサイズ、強力な型注釈を提供します。
+es-toolkitは、最先端のJavaScriptユーティリティライブラリであり、高性能で小さなバンドルサイズ、強力な型注釈を提供します。
 
 - es-toolkitは、[debounce](https://es-toolkit.slash.page/reference/function/debounce.html)、[delay](https://es-toolkit.slash.page/reference/promise/delay.html)、[chunk](https://es-toolkit.slash.page/reference/array/chunk.html)、[sum](https://es-toolkit.slash.page/reference/math/sum.html)、[pick](https://es-toolkit.slash.page/reference/object/pick.html)など、日常的に使用するさまざまなユーティリティ関数を最新の実装で提供します。
 - パフォーマンスを重視して設計されており、es-toolkitは最新のJavaScript環境で[2-3倍の性能向上](https://es-toolkit.slash.page/performance.html)を実現します。
