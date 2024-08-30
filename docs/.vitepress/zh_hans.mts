@@ -125,6 +125,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'ary', link: '/zh_hans/reference/function/ary' },
             { text: 'unary', link: '/zh_hans/reference/function/unary' },
             { text: 'bind (兼容性)', link: '/zh_hans/reference/compat/function/bind' },
+            { text: 'bindKey', link: '/zh_hans/reference/function/bindKey' },
             { text: 'partial', link: '/zh_hans/reference/function/partial' },
             { text: 'partialRight', link: '/zh_hans/reference/function/partialRight' },
             { text: 'rest', link: '/zh_hans/reference/function/rest' },
