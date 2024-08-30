@@ -43,6 +43,7 @@ export function bindKey<T extends Record<PropertyKey, any>, K extends keyof T>(
       return new object[key](...args);
     }
 
+    // eslint-disable-next-line prefer-spread
     return object[key].apply(object, args);
   };
 
