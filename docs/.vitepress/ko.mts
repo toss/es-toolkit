@@ -1,4 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
+import { sortByText } from '../libs/sortByText.mts';
 
 export const ko = defineConfig({
   lang: 'ko',
@@ -43,7 +44,7 @@ function sidebar(): DefaultTheme.Sidebar {
     },
     {
       text: '레퍼런스',
-      items: [
+      items: sortByText([
         {
           text: '배열',
           items: [
@@ -245,7 +246,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'TimeoutError', link: '/ko/reference/error/TimeoutError' },
           ],
         },
-      ],
+      ]),
     },
   ];
 }
