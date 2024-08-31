@@ -1,3 +1,4 @@
+export { at } from './at.ts';
 export { chunk } from './chunk.ts';
 export { compact } from './compact.ts';
 export { countBy } from './countBy.ts';
