@@ -325,7 +325,7 @@ chunk([1, 2, 3, 4], 0);
 | ------------------------------------------------------------ | --------------------- |
 | [camelCase](https://lodash.com/docs/4.17.15#camelCase)       | 📝                    |
 | [capitalize](https://lodash.com/docs/4.17.15#capitalize)     | 📝                    |
-| [deburr](https://lodash.com/docs/4.17.15#deburr)             | ❌                    |
+| [deburr](https://lodash.com/docs/4.17.15#deburr)             | ✅                    |
 | [endsWith](https://lodash.com/docs/4.17.15#endsWith)         | ✅                    |
 | [escape](https://lodash.com/docs/4.17.15#escape)             | ❌                    |
 | [escapeRegExp](https://lodash.com/docs/4.17.15#escapeRegExp) | ❌                    |

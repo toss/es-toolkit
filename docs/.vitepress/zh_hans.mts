@@ -217,6 +217,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'endsWith (兼容性)', link: '/zh_hans/reference/compat/string/endsWith' },
             { text: 'padStart (兼容性)', link: '/zh_hans/reference/compat/string/padStart' },
             { text: 'padEnd (兼容性)', link: '/zh_hans/reference/compat/string/padEnd' },
+            { text: 'deburr', link: '/zh_hans/reference/string/deburr' },
           ],
         },
         {
