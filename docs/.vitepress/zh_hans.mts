@@ -81,6 +81,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'max (兼容性)', link: '/zh_hans/reference/compat/array/max' },
             { text: 'orderBy', link: '/zh_hans/reference/array/orderBy' },
             { text: 'partition', link: '/zh_hans/reference/array/partition' },
+            { text: 'pullAt', link: '/zh_hans/reference/array/pullAt' },
             { text: 'sample', link: '/zh_hans/reference/array/sample' },
             { text: 'sampleSize', link: '/zh_hans/reference/array/sampleSize' },
             { text: 'shuffle', link: '/zh_hans/reference/array/shuffle' },
