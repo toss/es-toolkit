@@ -335,7 +335,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [padEnd](https://lodash.com/docs/4.17.15#padEnd)             | ❌                    |
 | [padStart](https://lodash.com/docs/4.17.15#padStart)         | ❌                    |
 | [parseInt](https://lodash.com/docs/4.17.15#parseInt)         | ❌                    |
-| [repeat](https://lodash.com/docs/4.17.15#repeat)             | ❌                    |
+| [repeat](https://lodash.com/docs/4.17.15#repeat)             | ✅                    |
 | [replace](https://lodash.com/docs/4.17.15#replace)           | ❌                    |
 | [snakeCase](https://lodash.com/docs/4.17.15#snakeCase)       | 📝                    |
 | [split](https://lodash.com/docs/4.17.15#split)               | ❌                    |
