@@ -84,6 +84,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'max (compat)', link: '/ja/reference/compat/array/max' },
             { text: 'orderBy', link: '/ja/reference/array/orderBy' },
             { text: 'partition', link: '/ja/reference/array/partition' },
+            { text: 'pullAt', link: '/ja/reference/array/pullAt' },
             { text: 'sample', link: '/ja/reference/array/sample' },
             { text: 'sampleSize', link: '/ja/reference/array/sampleSize' },
             { text: 'shuffle', link: '/ja/reference/array/shuffle' },

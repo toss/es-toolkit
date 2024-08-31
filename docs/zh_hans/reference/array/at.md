@@ -2,10 +2,12 @@
 
 从数组中检索指定索引处的元素。
 
+这个函数支持负索引，负索引从数组的末尾开始计算。
+
 ## 签名
 
 ```typescript
-function at<T>(arr: T[], indices: number[]): T[];
+function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
 ```
 
 ### 参数
@@ -15,7 +17,7 @@ function at<T>(arr: T[], indices: number[]): T[];
 
 ### 返回值
 
-(`T[]`): 一个新数组，包含在指定索引处的元素。
+(`Array<T | undefined>`): 一个新数组，包含在指定索引处的元素。
 
 ## 示例
 

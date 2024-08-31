@@ -93,6 +93,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'max (호환성)', link: '/ko/reference/compat/array/max' },
             { text: 'orderBy', link: '/ko/reference/array/orderBy' },
             { text: 'partition', link: '/ko/reference/array/partition' },
+            { text: 'pullAt', link: '/ko/reference/array/pullAt' },
             { text: 'sample', link: '/ko/reference/array/sample' },
             { text: 'sampleSize', link: '/ko/reference/array/sampleSize' },
             { text: 'shuffle', link: '/ko/reference/array/shuffle' },

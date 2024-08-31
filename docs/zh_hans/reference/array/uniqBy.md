@@ -30,6 +30,6 @@ const array = [
   { category: 'fruit', name: 'banana' },
   { category: 'vegetable', name: 'carrot' },
 ];
-uniqBy(array, item => item.category).length
+uniqBy(array, item => item.category).length;
 // 2
 ```
