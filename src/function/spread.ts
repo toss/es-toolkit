@@ -1,22 +1,21 @@
 /**
- * Creates a function that invokes `func` with the `this` binding of the create function and an array of arguments much like `Function#apply`.
+Creates a new function that spreads elements of an array argument into individual arguments
+ * for the original function.
  *
- * @template F The type of the function to spread arguments over.
- * @param {F} func The function to spread arguments over.
- * @param {number} startIndex The start position of the spread.
- * @returns {(...args: any[]) => ReturnType<F>} A new function that invokes `func` with the spread arguments.
+ * @template F - A function type with any number of parameters and any return type.
+ * @param {F} func - The function to be transformed. It can be any function with any number of arguments.
+ * @returns {(argsArr: Parameters<F>) => ReturnType<F>} - A new function that takes an array of arguments and returns the result of calling the original function with those arguments.
+ *
+ * @example
+ * function add(a, b) {
+ *   return a + b;
+ * }
+ *
+ * const spreadAdd = spread(add);
+ * console.log(spreadAdd([1, 2])); // Output: 3
  */
-export function spread<F extends (...args: any[]) => any>(
-  func: F,
-  startIndex: number = 0
-): (...args: any[]) => ReturnType<F> {
-  return function (this: any, ...args: any[]) {
-    const array = args[startIndex];
-    const params = args.slice(0, startIndex);
-
-    if (array) {
-      params.push(...array);
-    }
-    return func.apply(this, params);
+export function spread<F extends (...args: any[]) => any>(func: F): (argsArr: Parameters<F>) => ReturnType<F> {
+  return function (this: any, argsArr: Parameters<F>) {
+    return func.apply(this, argsArr);
   };
 }

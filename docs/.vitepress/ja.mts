@@ -133,6 +133,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'partial', link: '/ja/reference/function/partial' },
             { text: 'partialRight', link: '/ja/reference/function/partialRight' },
             { text: 'rest', link: '/ja/reference/function/rest' },
+            { text: 'spread', link: '/ja/reference/function/spread' },
           ],
         },
         {

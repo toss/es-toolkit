@@ -145,6 +145,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'partial', link: '/ko/reference/function/partial' },
             { text: 'partialRight', link: '/ko/reference/function/partialRight' },
             { text: 'rest', link: '/ko/reference/function/rest' },
+            { text: 'spread', link: '/ko/reference/function/spread' },
           ],
         },
         {
