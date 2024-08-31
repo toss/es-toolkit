@@ -19,6 +19,6 @@ import { isWeakMap as isWeakMapToolkit } from '../../predicate/isWeakMap';
  * console.log(isWeakMap(value2)); // false
  * console.log(isWeakMap(value3)); // false
  */
-export function isWeakMap(value?: unknown): ReturnType<typeof isWeakMapToolkit> {
+export function isWeakMap(value?: unknown): value is WeakMap<WeakKey, any> {
   return isWeakMapToolkit(value);
 }
