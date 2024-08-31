@@ -46,4 +46,15 @@ describe('delay', () => {
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
   });
+
+  it('should clear event listener if timeout completes', async () => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    const spy = vi.spyOn(signal, 'removeEventListener');
+
+    await delay(100, { signal });
+
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+  });
 });

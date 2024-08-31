@@ -1,4 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
+import { sortByText } from '../libs/sortByText.mts';
 
 export const en = defineConfig({
   lang: 'en',
@@ -44,7 +45,7 @@ function sidebar(): DefaultTheme.Sidebar {
     },
     {
       text: 'Reference',
-      items: [
+      items: sortByText([
         {
           text: 'Array Utilities',
           items: [
@@ -84,6 +85,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'max (compat)', link: '/reference/compat/array/max' },
             { text: 'orderBy', link: '/reference/array/orderBy' },
             { text: 'partition', link: '/reference/array/partition' },
+            { text: 'pullAt', link: '/reference/array/pullAt' },
             { text: 'sample', link: '/reference/array/sample' },
             { text: 'sampleSize', link: '/reference/array/sampleSize' },
             { text: 'shuffle', link: '/reference/array/shuffle' },
@@ -132,6 +134,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'partial', link: '/reference/function/partial' },
             { text: 'partialRight', link: '/reference/function/partialRight' },
             { text: 'rest', link: '/reference/function/rest' },
+            { text: 'spread', link: '/reference/function/spread' },
           ],
         },
         {
@@ -231,7 +234,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'TimeoutError', link: '/reference/error/TimeoutError' },
           ],
         },
-      ],
+      ]),
     },
   ];
 }

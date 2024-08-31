@@ -2,10 +2,12 @@
 
 Retrieves elements from an array at the specified indices.
 
+This function supports negative indices, which count from the end of the array.
+
 ## Signature
 
 ```typescript
-function at<T>(arr: T[], indices: number[]): T[];
+function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
 ```
 
 ### Parameters
@@ -15,7 +17,7 @@ function at<T>(arr: T[], indices: number[]): T[];
 
 ### Returns
 
-(`T[]`): A new array containing the elements at the specified indices.
+(`Array<T | undefined>`): A new array containing the elements at the specified indices.
 
 ## Examples
 

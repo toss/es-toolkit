@@ -1,4 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
+import { sortByText } from '../libs/sortByText.mts';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const zh_hans = defineConfig({
@@ -44,7 +45,7 @@ function sidebar(): DefaultTheme.Sidebar {
     },
     {
       text: '参考',
-      items: [
+      items: sortByText([
         {
           text: '数组工具',
           items: [
@@ -81,6 +82,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'max (兼容性)', link: '/zh_hans/reference/compat/array/max' },
             { text: 'orderBy', link: '/zh_hans/reference/array/orderBy' },
             { text: 'partition', link: '/zh_hans/reference/array/partition' },
+            { text: 'pullAt', link: '/zh_hans/reference/array/pullAt' },
             { text: 'sample', link: '/zh_hans/reference/array/sample' },
             { text: 'sampleSize', link: '/zh_hans/reference/array/sampleSize' },
             { text: 'shuffle', link: '/zh_hans/reference/array/shuffle' },
@@ -129,6 +131,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'partial', link: '/zh_hans/reference/function/partial' },
             { text: 'partialRight', link: '/zh_hans/reference/function/partialRight' },
             { text: 'rest', link: '/zh_hans/reference/function/rest' },
+            { text: 'spread', link: '/zh_hans/reference/function/spread' },
           ],
         },
         {
@@ -228,7 +231,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'TimeoutError', link: '/zh_hans/reference/error/TimeoutError' },
           ],
         },
-      ],
+      ]),
     },
   ];
 }

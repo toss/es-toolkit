@@ -1,5 +1,20 @@
 # es-toolkit Changelog
 
+## Version v1.17.0
+
+Released on August 31st, 2024.
+
+### New Features
+
+- Added support for new functions: [at](https://es-toolkit.slash.page/reference/array/at.html), [pullAt](https://es-toolkit.slash.page/reference/array/pullAt.html), [deburr](https://es-toolkit.slash.page/reference/string/deburr.html), [lowerFirst](https://es-toolkit.slash.page/reference/string/lowerFirst.html), [upperFirst](https://es-toolkit.slash.page/reference/string/upperFirst.html), and [isRegExp](https://es-toolkit.slash.page/reference/predicate/isRegExp.html).
+- Enhanced [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html) and [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html) to support function criteria.
+- [countBy](https://es-toolkit.slash.page/reference/array/countBy.html) now supports numeric and symbol keys.
+
+#### Bug Fixes
+
+- Updated type definitions for [throttle](https://es-toolkit.slash.page/reference/function/throttle.html) and [debounce](https://es-toolkit.slash.page/reference/function/debounce.html).
+- (`es-toolkit/compat`) Fixed [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html) to correctly handle deep keys even when object shapes differ ([#427](https://github.com/toss/es-toolkit/pull/427)).
+
 ## Version v1.16.0
 
 Released on August 15th, 2024.

@@ -2,10 +2,12 @@
 
 指定したインデックスの位置から配列の要素を取得します。
 
+この関数は負のインデックスをサポートしており、配列の末尾からカウントします。
+
 ## インターフェース
 
 ```typescript
-function at<T>(arr: T[], indices: number[]): T[];
+function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
 ```
 
 ### パラメータ
@@ -15,7 +17,7 @@ function at<T>(arr: T[], indices: number[]): T[];
 
 ### 戻り値
 
-(`T[]`): 指定されたインデックスの位置にある要素を含む新しい配列。
+(`Array<T | undefined>`): 指定されたインデックスの位置にある要素を含む新しい配列。
 
 ## 例
 

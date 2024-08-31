@@ -1,33 +1,31 @@
 # pullAt
 
-특정 인덱스 요소들을 찾아 새로운 배열을 반환해 주는 함수에요.
+특정 인덱스에 있는 요소들을 제거하고, 제거된 요소들을 반환해요.
 
-이 함수는 파라미터로 특정 인덱스 요소를 조회할 배열과 인덱스 정보를 담은 배열을 받아요.
-
-첫 번재 파라미터로 받은 배열을 기준으로 두 번째로 받은 인덱스 정보를 담은 배열로 특정 요소를 조회해요.
-
-인덱스로 조회된 요소는 순서대로 조합되어 새로운 배열로 반환되고, 조회된 배열은 조회한 인덱스 값을 제외한 나머지로 이루어지게 돼요.
+이 함수는 음수 인덱스를 지원해요. 인덱스가 음수일 경우, 배열의 마지막부터 계산해요.
 
 ## 인터페이스
 
 ```typescript
-function pullAt<T>(array: T[], indexes: number[]): Array<T | undefined>;
+function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
 ```
 
 ### 파라미터
 
-- `arr` (`T[]`): 특정 인덱스 요소를 조회할 배열이에요.
-- `indexes`: (`number[]`): 배열의 인덱스 요소를 찾기 위한 인덱스 정보를 담은 배열이에요.
+- `arr` (`T[]`): 요소를 제거할 배열.
+- `indicesToRemove` (`number[]`): 요소를 제거할 인덱스.
 
 ### 반환 값
 
-(`Array<T | undefined>`): 배열의 특정 인덱스 요소를 찾아 조합한 새로운 배열을 반환해요.
+(`Array<T | undefined>`): 제거된 요소들의 배열.
 
 ## 예시
 
 ```typescript
-const array = [0, 1, 2, 3, 4, 5];
-const indexes = [1, 3, 5];
-const result = pullAt(array, indexes);
-// 조회할 인덱스는 1, 3, 5 이므로, 결과는 [1, 3, 5]이고 원본 배열은 [0, 2, 4]로 변화가 이루어져요.
+import { pullAt } from 'es-toolkit/array';
+
+const numbers = [10, 20, 30, 40, 50];
+const removed = pullAt(numbers, [1, 3, 4]);
+console.log(removed); // [20, 40, 50]
+console.log(numbers); // [10, 30]
 ```

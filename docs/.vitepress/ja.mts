@@ -1,4 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
+import { sortByText } from '../libs/sortByText.mts';
 
 export const ja = defineConfig({
   lang: 'ja',
@@ -43,7 +44,7 @@ function sidebar(): DefaultTheme.Sidebar {
     },
     {
       text: 'リファレンス',
-      items: [
+      items: sortByText([
         {
           text: '配列',
           items: [
@@ -83,6 +84,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'max (compat)', link: '/ja/reference/compat/array/max' },
             { text: 'orderBy', link: '/ja/reference/array/orderBy' },
             { text: 'partition', link: '/ja/reference/array/partition' },
+            { text: 'pullAt', link: '/ja/reference/array/pullAt' },
             { text: 'sample', link: '/ja/reference/array/sample' },
             { text: 'sampleSize', link: '/ja/reference/array/sampleSize' },
             { text: 'shuffle', link: '/ja/reference/array/shuffle' },
@@ -131,6 +133,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'partial', link: '/ja/reference/function/partial' },
             { text: 'partialRight', link: '/ja/reference/function/partialRight' },
             { text: 'rest', link: '/ja/reference/function/rest' },
+            { text: 'spread', link: '/ja/reference/function/spread' },
           ],
         },
         {
@@ -227,7 +230,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'TimeoutError', link: '/ja/reference/error/TimeoutError' },
           ],
         },
-      ],
+      ]),
     },
   ];
 }

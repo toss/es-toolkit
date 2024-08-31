@@ -19,7 +19,7 @@ describe('isRegExp', () => {
     const expected = falsey.map(stubFalse);
 
     const actual = falsey.map((value, index) => {
-      return index ? isRegExp(value) : isRegExp()
+      return index ? isRegExp(value) : isRegExp();
     });
 
     expect(actual).toEqual(expected);
