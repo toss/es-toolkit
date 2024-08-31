@@ -68,13 +68,5 @@ export function tail<T, U>(arr: readonly [T, ...U[]]): U[];
 export function tail<T>(arr: readonly T[]): T[];
 
 export function tail<T>(arr: readonly T[]): T[] {
-  const len = arr.length;
-  if (len <= 1) {
-    return [];
-  }
-  const result = new Array(len - 1);
-  for (let i = 1; i < len; i++) {
-    result[i - 1] = arr[i];
-  }
-  return result;
+  return arr.slice(1);
 }

@@ -1,3 +1,4 @@
+export { at } from './at.ts';
 export { chunk } from './chunk.ts';
 export { compact } from './compact.ts';
 export { countBy } from './countBy.ts';
@@ -17,11 +18,13 @@ export { groupBy } from './groupBy.ts';
 export { intersection } from './intersection.ts';
 export { intersectionBy } from './intersectionBy.ts';
 export { intersectionWith } from './intersectionWith.ts';
+export { join } from './join.ts';
 export { keyBy } from './keyBy.ts';
 export { maxBy } from './maxBy.ts';
 export { minBy } from './minBy.ts';
 export { orderBy } from './orderBy.ts';
 export { partition } from './partition.ts';
+export { pullAt } from './pullAt.ts';
 export { sortBy } from './sortBy.ts';
 export { sample } from './sample.ts';
 export { sampleSize } from './sampleSize.ts';

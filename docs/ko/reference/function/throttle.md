@@ -5,7 +5,7 @@
 ## 인터페이스
 
 ```typescript
-function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): F;
+function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): (...args: Parameters<F>) => void;
 ```
 
 ### 파라미터
@@ -15,7 +15,7 @@ function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: numbe
 
 ### 반환 값
 
-(`F`): 새로운 throttle된 함수.
+(`(...args: Parameters<F>) => void`): 새로운 throttle된 함수.
 
 ## 예시
 
