@@ -220,6 +220,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'endsWith (compat)', link: '/reference/compat/string/endsWith' },
             { text: 'padStart (compat)', link: '/reference/compat/string/padStart' },
             { text: 'padEnd (compat)', link: '/reference/compat/string/padEnd' },
+            { text: 'deburr', link: '/reference/string/deburr' },
           ],
         },
         {
