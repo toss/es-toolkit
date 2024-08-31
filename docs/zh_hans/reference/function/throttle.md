@@ -7,7 +7,7 @@
 ## 签名
 
 ```typescript
-function function throttle<F extends (...args: Parameters<F>) => ReturnType<F>>(func: F, throttleMs: number): (...args: Parameters<F>) => void;
+function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): (...args: Parameters<F>) => void;
 ```
 
 ### 参数

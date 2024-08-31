@@ -7,7 +7,7 @@ within the wait time will not trigger the execution of the original function.
 ## Signature
 
 ```typescript
-function function throttle<F extends (...args: Parameters<F>) => ReturnType<F>>(func: F, throttleMs: number): (...args: Parameters<F>) => void;
+function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): (...args: Parameters<F>) => void;
 ```
 
 ### Parameters

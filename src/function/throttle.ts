@@ -24,7 +24,7 @@
  *   throttledFunction(); // Will log 'Function executed'
  * }, 1000);
  */
-export function throttle<F extends (...args: Parameters<F>) => ReturnType<F>>(
+export function throttle<F extends (...args: any[]) => void>(
   func: F,
   throttleMs: number
 ): (...args: Parameters<F>) => void {
