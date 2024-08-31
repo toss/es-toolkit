@@ -5,7 +5,7 @@
 ## インターフェース
 
 ```typescript
-function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): F;
+function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): (...args: Parameters<F>) => void;
 ```
 
 ### パラメータ
@@ -15,7 +15,7 @@ function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: numbe
 
 ### 戻り値
 
-(`F`): 新しいスロットル化された関数。
+(`(...args: Parameters<F>) => void`): 新しいスロットル化された関数。
 
 ## 例
 
