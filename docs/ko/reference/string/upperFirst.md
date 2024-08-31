@@ -21,7 +21,7 @@ function upperFirst(str: string): string;
 ```typescript
 import { upperFirst } from 'es-toolkit/string';
 
-upperFirst('fred') // 반환 값은 'Fred'
-upperFirst('Fred') // 반환 값은 'Fred'
-upperFirst('FRED') // 반환 값은 'FRED'
+upperFirst('fred'); // 반환 값은 'Fred'
+upperFirst('Fred'); // 반환 값은 'Fred'
+upperFirst('FRED'); // 반환 값은 'FRED'
 ```
