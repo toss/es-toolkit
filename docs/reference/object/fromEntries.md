@@ -5,12 +5,12 @@ Convert a two-dimensional array or Map-type data into an object. It achieves the
 ## Signature
 
 ```typescript
-function fromEntries<T extends string | number | symbol, U>(data: (string | number|symbol)[][] | Map<T, U>): { [key in T]: U }
+function fromEntries<T extends string | number | symbol, U>(data: Array<[string | number | symbol, U]> | Map<string | number | symbol, U>): { [key in T]: U }
 ```
 
 ### Parameters
 
-- `data` (`(string | number | symbol)[][] | Map<T, U>`): The two-dimensional array or Map-type data to be converted. Each sub-array in the two-dimensional array should have two elements, with the first element as the key and the second as the value.
+- `data` (`Array<[string | number | symbol, U]> | Map<string | number | symbol, U>`): The two-dimensional array or Map-type data to be converted. Each sub-array in the two-dimensional array should have two elements, with the first element as the key and the second as the value.
 
 ### Returns
 

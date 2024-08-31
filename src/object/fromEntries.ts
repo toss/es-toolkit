@@ -16,10 +16,10 @@
  * // }  
  */
 
-export function fromEntries<T extends string | number | symbol, U>(data: (string | number|symbol)[][] | Map<T, U>): { [key in T]: U } {
-  const obj = {} as { [key in T]: U };
-  for (const [key, value] of data) {
-    obj[key as T] = value as U;
-  }
-  return obj;
+export function fromEntries<T extends PropertyKey, U>(data: Array<[PropertyKey, U]> | Map<PropertyKey, U>): { [key in T]: U } {  
+  const obj = {} as { [key in T]: U };  
+  for (const [key, value] of data) {  
+    obj[key as T] = value;  
+  }  
+  return obj;  
 }

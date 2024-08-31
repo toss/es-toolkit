@@ -3,7 +3,7 @@ import { fromEntries as fromEntriesToolkit } from 'es-toolkit';
 import { fromPairs as fromPairsLodash } from 'lodash';  
   
 describe('fromEntries/fromPairs', () => {  
-  const data: [string, number][] = [  
+  const data = [  
     ['a', 1],  
     ['b', 2],  
     ['c', 3],   
