@@ -128,7 +128,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'ary', link: '/reference/function/ary' },
             { text: 'unary', link: '/reference/function/unary' },
             { text: 'bind (compat)', link: '/reference/compat/function/bind' },
-            { text: 'bind', link: '/reference/function/bindKey' },
+            { text: 'bindKey', link: '/reference/function/bindKey' },
             { text: 'partial', link: '/reference/function/partial' },
             { text: 'partialRight', link: '/reference/function/partialRight' },
             { text: 'rest', link: '/reference/function/rest' },
