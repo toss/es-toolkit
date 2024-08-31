@@ -53,10 +53,10 @@ console.log(chunk([1, 2, 3, 4, 5], 2));
 
 ## Lodash 兼容性
 
-从`es-toolkit/compat`中导入`chunk`以实现与 lodash 的完全兼容。
+从 `es-toolkit/compat` 中导入 `chunk` 以实现与 lodash 的完全兼容。
 
-- chunk 不抛出异常，当给定的`size`小于 1 时。
-- chunk 接受分数值，这些值将被向下舍入到最近的整数。
+- `chunk` 当给定的 `size` 小于 1 时不抛出异常。
+- `chunk` 接受分数值，这些值将被向下舍入到最近的整数。
 
 ```typescript
 import { chunk } from 'es-toolkit/compat';
