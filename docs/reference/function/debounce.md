@@ -7,7 +7,7 @@ method to cancel any pending execution.
 ## Signature
 
 ```typescript
-function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
+function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions

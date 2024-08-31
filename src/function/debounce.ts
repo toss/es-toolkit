@@ -37,7 +37,7 @@ interface DebounceOptions {
  * // Will cancel the debounced function call
  * controller.abort();
  */
-export function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
+export function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   { signal }: DebounceOptions = {}
