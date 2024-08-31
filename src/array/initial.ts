@@ -22,8 +22,5 @@
  * // newSingleElementArr will be []
  */
 export function initial<T>(arr: readonly T[]): T[] {
-  if (arr.length <= 1) {
-    return [];
-  }
   return arr.slice(0, -1);
 }
