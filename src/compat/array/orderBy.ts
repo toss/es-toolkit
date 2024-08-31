@@ -1,16 +1,18 @@
-import { getPath } from '../_internal/getPath';
+import { compareValues } from '../_internal/compareValues';
+import { isKey } from '../_internal/isKey';
+import { toPath } from '../_internal/toPath';
 
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
  *
- * This function takes an array of objects, an array of keys to sort by, and an array of order directions.
+ * This function takes an array of objects, an array of criteria to sort by, and an array of order directions.
  * It returns the sorted array, ordering by each key according to its corresponding direction
  * ('asc' for ascending or 'desc' for descending). If values for a key are equal,string
  * it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param {T[] | null} collection - The array of objects to be sorted.
- * @param {((item: T) => unknown) | string | Array<((item: T) => unknown) | string | string[]>} keys - An array of keys (property names or property paths or custom key functions) to sort by.
+ * @param { T[] | object | null | undefined} collection - The array of objects to be sorted.
+ * @param {((item: T) => unknown) | PropertyKey | Array<((item: T) => unknown) | PropertyKey | PropertyKey[]>} criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
  * @returns {T[]} - The sorted array.
  *
@@ -31,62 +33,85 @@ import { getPath } from '../_internal/getPath';
  * //   { user: 'fred', age: 40 },
  * // ]
  */
-export function orderBy<T extends object>(
-  collection: T[] | null | undefined,
-  keys?: ((item: T) => unknown) | string | Array<((item: T) => unknown) | string | string[]>,
+export function orderBy<T>(
+  collection: T[] | object | null | undefined,
+  criteria?: ((item: T) => unknown) | PropertyKey | Array<((item: T) => unknown) | PropertyKey | PropertyKey[]>,
   orders?: unknown | unknown[]
 ): T[] {
   if (collection == null) {
     return [];
   }
 
-  if (!Array.isArray(keys)) {
-    keys = keys == null ? [] : [keys];
+  if (!Array.isArray(collection) && typeof collection === 'object') {
+    collection = Object.values(collection);
+  }
+
+  if (!Array.isArray(criteria)) {
+    criteria = criteria == null ? [] : [criteria];
   }
 
   if (!Array.isArray(orders)) {
     orders = orders == null ? [] : [orders];
   }
 
-  const compareValues = <V>(a: V, b: V, order: string) => {
-    if (a < b) {
-      return order === 'desc' ? 1 : -1; // Default is ascending order
+  const getValueByNestedPath = (object: object, path: PropertyKey[]) => {
+    let target: object = object;
+
+    for (let i = 0; i < path.length && target != null; i++) {
+      target = target[path[i] as keyof typeof target];
     }
 
-    if (a > b) {
-      return order === 'desc' ? -1 : 1;
-    }
-
-    return 0;
+    return target;
   };
 
-  const getValueByPath = (path: string | ((item: T) => unknown) | string[], obj: T) => {
-    if (Array.isArray(path)) {
-      let value: object = obj;
-
-      for (let i = 0; i < path.length; i++) {
-        value = value[path[i] as keyof typeof value];
-      }
-
-      return value;
+  const getValueByCriterion = (
+    criterion: PropertyKey | ((item: T) => unknown) | PropertyKey[] | { key: PropertyKey; path: string[] },
+    object: T
+  ) => {
+    if (object == null) {
+      return object;
     }
 
-    if (typeof path === 'function') {
-      return path(obj);
+    if (typeof criterion === 'function') {
+      return criterion(object);
     }
 
-    return obj[path as keyof typeof obj];
+    if (Array.isArray(criterion)) {
+      return getValueByNestedPath(object, criterion);
+    }
+
+    if (typeof criterion !== 'object') {
+      return object[criterion as keyof typeof object];
+    }
+
+    // Case for possible to be a deep path
+    if (Object.hasOwn(object, criterion.key)) {
+      return object[criterion.key as keyof typeof object];
+    }
+
+    return getValueByNestedPath(object, criterion.path);
   };
 
-  keys = keys.map(key => getPath(key, collection[0]));
+  // Prepare all cases for criteria
+  const preparedCriteria = criteria.map(criterion => {
+    // lodash handles a array with one element as a single criterion
+    if (Array.isArray(criterion) && criterion.length === 1) {
+      criterion = criterion[0];
+    }
 
-  return collection.slice().sort((a, b) => {
-    for (let i = 0; i < keys.length; i++) {
-      const path = keys[i];
+    if (typeof criterion === 'function' || Array.isArray(criterion) || isKey(criterion)) {
+      return criterion;
+    }
 
-      const valueA = getValueByPath(path, a);
-      const valueB = getValueByPath(path, b);
+    // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
+    return { key: criterion, path: toPath(criterion as string) } as const;
+  });
+
+  return (collection as T[]).slice().sort((a, b) => {
+    for (let i = 0; i < criteria.length; i++) {
       const order = String((orders as unknown[])[i]); // For Object('desc') case
+      const valueA = getValueByCriterion(preparedCriteria[i], a);
+      const valueB = getValueByCriterion(preparedCriteria[i], b);
 
       const comparedResult = compareValues(valueA, valueB, order);
 
