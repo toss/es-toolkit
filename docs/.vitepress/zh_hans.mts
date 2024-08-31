@@ -156,6 +156,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'cloneDeep', link: '/zh_hans/reference/object/cloneDeep' },
             { text: 'invert', link: '/zh_hans/reference/object/invert' },
             { text: 'flattenObject', link: '/zh_hans/reference/object/flattenObject' },
+            { text: 'fromEntries', link: '/zh_hans/reference/object/fromEntries' },
             { text: 'mapKeys', link: '/zh_hans/reference/object/mapKeys' },
             { text: 'mapValues', link: '/zh_hans/reference/object/mapValues' },
             { text: 'merge', link: '/zh_hans/reference/object/merge' },

@@ -159,6 +159,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'cloneDeep', link: '/reference/object/cloneDeep' },
             { text: 'invert', link: '/reference/object/invert' },
             { text: 'flattenObject', link: '/reference/object/flattenObject' },
+            { text: 'fromEntries', link: '/reference/object/fromEntries' },
             { text: 'mapKeys', link: '/reference/object/mapKeys' },
             { text: 'mapValues', link: '/reference/object/mapValues' },
             { text: 'merge', link: '/reference/object/merge' },
