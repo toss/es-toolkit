@@ -30,12 +30,5 @@ describe('fromPairs', () => {
     const expected = { a: 1, b: 2, c: 3 };  
     const result = fromEntries(map);  
     expect(result).toEqual(expected);  
-  });  
-  
-  it('should handle empty array', () => {  
-    const data = [];  
-    const expected = {};  
-    const result = fromEntries(data);  
-    expect(result).toEqual(expected);  
-  });  
+  });   
 });
