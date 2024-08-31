@@ -7,3 +7,4 @@ export { capitalize } from './capitalize.ts';
 export { pascalCase } from './pascalCase.ts';
 export { upperFirst } from './upperFirst.ts';
 export { lowerFirst } from './lowerFirst.ts';
+export { deburr } from './deburr.ts';

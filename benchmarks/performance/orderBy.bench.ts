@@ -9,41 +9,39 @@ const users = [
   { user: 'fred', age: 40, nested: { user: 'fred' } },
   { user: 'barney', age: 36, nested: { user: 'bar' } },
 ];
-const keys: Array<keyof (typeof users)[0]> = ['user', 'age'];
-const orders: Array<'asc' | 'desc'> = ['asc', 'desc'];
 
 describe('orderBy', () => {
   bench('es-toolkit/orderBy', () => {
-    orderByToolkit(users, keys, orders);
-    orderByToolkit(users, [user => user.user, user => user.age], orders);
+    orderByToolkit(users, ['user', 'age'], ['asc', 'desc']);
+    orderByToolkit(users, [user => user.user, user => user.age], ['asc', 'desc']);
   });
 
   bench('es-toolkit/compat/orderBy', () => {
-    orderByToolkitCompat(users, keys, orders);
-    orderByToolkitCompat(users, [user => user.user, user => user.age], orders);
+    orderByToolkitCompat(users, ['user', 'age'], ['asc', 'desc']);
+    orderByToolkitCompat(users, [user => user.user, user => user.age], ['asc', 'desc']);
   });
 
   bench('lodash/orderBy', () => {
-    orderByLodash(users, keys, orders);
-    orderByLodash(users, [user => user.user, user => user.age], orders);
+    orderByLodash(users, ['user', 'age'], ['asc', 'desc']);
+    orderByLodash(users, [user => user.user, user => user.age], ['asc', 'desc']);
   });
 });
 
 describe('orderBy (nested property names)', () => {
   bench('es-toolkit/compat/orderBy', () => {
-    orderByToolkitCompat(users, [['nested', 'user'], ['age']], orders);
+    orderByToolkitCompat(users, [['nested', 'user'], ['age']], ['asc', 'desc']);
   });
 
   bench('lodash/orderBy', () => {
-    orderByLodash(users, [['nested', 'user'], ['age']], orders);
+    orderByLodash(users, [['nested', 'user'], ['age']], ['asc', 'desc']);
   });
 });
 
 describe('orderBy (property path)', () => {
   bench('es-toolkit/compat/orderBy', () => {
-    orderByToolkitCompat(users, ['nested.user', 'age'], orders);
+    orderByToolkitCompat(users, ['nested.user', 'age'], ['asc', 'desc']);
   });
   bench('lodash/orderBy', () => {
-    orderByLodash(users, ['nested.user', 'age'], orders);
+    orderByLodash(users, ['nested.user', 'age'], ['asc', 'desc']);
   });
 });

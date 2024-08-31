@@ -1,4 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
+import { sortByText } from '../libs/sortByText.mts';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const zh_hans = defineConfig({
@@ -44,10 +45,11 @@ function sidebar(): DefaultTheme.Sidebar {
     },
     {
       text: '参考',
-      items: [
+      items: sortByText([
         {
           text: '数组工具',
           items: [
+            { text: 'at', link: '/zh_hans/reference/array/at' },
             { text: 'chunk', link: '/zh_hans/reference/array/chunk' },
             { text: 'concat (兼容性)', link: '/zh_hans/reference/compat/array/concat' },
             { text: 'countBy', link: '/zh_hans/reference/array/countBy' },
@@ -80,6 +82,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'max (兼容性)', link: '/zh_hans/reference/compat/array/max' },
             { text: 'orderBy', link: '/zh_hans/reference/array/orderBy' },
             { text: 'partition', link: '/zh_hans/reference/array/partition' },
+            { text: 'pullAt', link: '/zh_hans/reference/array/pullAt' },
             { text: 'sample', link: '/zh_hans/reference/array/sample' },
             { text: 'sampleSize', link: '/zh_hans/reference/array/sampleSize' },
             { text: 'shuffle', link: '/zh_hans/reference/array/shuffle' },
@@ -129,6 +132,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'partialRight', link: '/zh_hans/reference/function/partialRight' },
             { text: 'rearg', link: '/zh_hans/reference/function/rearg' },
             { text: 'rest', link: '/zh_hans/reference/function/rest' },
+            { text: 'spread', link: '/zh_hans/reference/function/spread' },
           ],
         },
         {
@@ -218,6 +222,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'endsWith (兼容性)', link: '/zh_hans/reference/compat/string/endsWith' },
             { text: 'padStart (兼容性)', link: '/zh_hans/reference/compat/string/padStart' },
             { text: 'padEnd (兼容性)', link: '/zh_hans/reference/compat/string/padEnd' },
+            { text: 'deburr', link: '/zh_hans/reference/string/deburr' },
           ],
         },
         {
@@ -227,7 +232,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'TimeoutError', link: '/zh_hans/reference/error/TimeoutError' },
           ],
         },
-      ],
+      ]),
     },
   ];
 }

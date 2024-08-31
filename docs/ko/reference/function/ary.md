@@ -11,7 +11,7 @@ function ary<F extends (...args: any[]) => any>(func: F, n: number): (...args: a
 ### 파라미터
 
 - `func` (`F`): 인자를 받는 것을 제한할 함수.
-- `n` (`number`, 선택): 최대로 받을 인자의 숫자.
+- `n` (`number`): 최대로 받을 인자의 숫자.
 
 ### 반환 값
 
@@ -22,13 +22,12 @@ function ary<F extends (...args: any[]) => any>(func: F, n: number): (...args: a
 ```typescript
 import { ary } from 'es-toolkit/function';
 
-function fn(a, b, c) {
-  console.log(arguments);
+function fn(a: number, b: number, c: number) {
+  return Array.from(arguments);
 }
 
-ary(fn, 2)(1, 2, 3); // [Arguments] { '0': 1, '1': 2 }
-ary(fn); // [Arguments] { '0': 1, '1': 2, '2': 3 }
-ary(fn, -1); // [Arguments] {}
-ary(fn, 1.5); // [Arguments] { '0': 1 }
-ary(fn, 2, {}); // [Arguments] { '0': 1, '1': 2, '2': 3 }
+ary(fn, 0)(1, 2, 3); // []
+ary(fn, 1)(1, 2, 3); // [1]
+ary(fn, 2)(1, 2, 3); // [1, 2]
+ary(fn, 3)(1, 2, 3); // [1, 2, 3]
 ```

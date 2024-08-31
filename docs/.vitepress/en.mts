@@ -1,4 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
+import { sortByText } from '../libs/sortByText.mts';
 
 export const en = defineConfig({
   lang: 'en',
@@ -44,10 +45,11 @@ function sidebar(): DefaultTheme.Sidebar {
     },
     {
       text: 'Reference',
-      items: [
+      items: sortByText([
         {
           text: 'Array Utilities',
           items: [
+            { text: 'at', link: '/reference/array/at' },
             { text: 'chunk', link: '/reference/array/chunk' },
             { text: 'concat (compat)', link: '/reference/compat/array/concat' },
             { text: 'countBy', link: '/reference/array/countBy' },
@@ -83,6 +85,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'max (compat)', link: '/reference/compat/array/max' },
             { text: 'orderBy', link: '/reference/array/orderBy' },
             { text: 'partition', link: '/reference/array/partition' },
+            { text: 'pullAt', link: '/reference/array/pullAt' },
             { text: 'sample', link: '/reference/array/sample' },
             { text: 'sampleSize', link: '/reference/array/sampleSize' },
             { text: 'shuffle', link: '/reference/array/shuffle' },
@@ -132,6 +135,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'partialRight', link: '/reference/function/partialRight' },
             { text: 'rearg', link: '/reference/function/rearg' },
             { text: 'rest', link: '/reference/function/rest' },
+            { text: 'spread', link: '/reference/function/spread' },
           ],
         },
         {
@@ -221,6 +225,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'endsWith (compat)', link: '/reference/compat/string/endsWith' },
             { text: 'padStart (compat)', link: '/reference/compat/string/padStart' },
             { text: 'padEnd (compat)', link: '/reference/compat/string/padEnd' },
+            { text: 'deburr', link: '/reference/string/deburr' },
           ],
         },
         {
@@ -230,7 +235,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'TimeoutError', link: '/reference/error/TimeoutError' },
           ],
         },
-      ],
+      ]),
     },
   ];
 }
