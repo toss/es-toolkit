@@ -21,7 +21,7 @@
  * const newSingleElementArr = initial(singleElementArr);
  * // newSingleElementArr will be []
  */
-export function initial<T>(arr: T[]): T[] {
+export function initial<T>(arr: readonly T[]): T[] {
   if (arr.length <= 1) {
     return [];
   }
