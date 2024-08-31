@@ -216,6 +216,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'endsWith (compat)', link: '/ja/reference/compat/string/endsWith' },
             { text: 'padStart (compat)', link: '/ja/reference/compat/string/padStart' },
             { text: 'padEnd (compat)', link: '/ja/reference/compat/string/padEnd' },
+            { text: 'deburr', link: '/ja/reference/string/deburr' },
           ],
         },
         {

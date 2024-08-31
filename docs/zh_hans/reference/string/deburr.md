@@ -1,6 +1,6 @@
 # deburr
 
-转换字符串 `str` 中[拉丁语-1补充字母](<https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table>)和[拉丁语扩展字母-A](https://en.wikipedia.org/wiki/Latin_Extended-A)为基本的拉丁字母，并且去除[组合变音标记](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks)。
+将字符串转换为 ASCII 等效字符，通过替换特殊字符和重音符号。例如，`"Crème brûlée"` 变为 `"Creme brulee"`。
 
 ## 签名
 
@@ -22,4 +22,7 @@ function deburr(str: string): string;
 import { deburr } from 'es-toolkit/string';
 
 deburr('déjà vu'); // 返回 'deja vu'
+deburr('Æthelred'); // 返回: 'Aethelred'
+deburr('München'); // 返回: 'Munchen'
+deburr('Crème brûlée'); // 返回: 'Creme brulee'
 ```

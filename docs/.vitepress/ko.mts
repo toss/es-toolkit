@@ -233,6 +233,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'endsWith (호환성)', link: '/ko/reference/compat/string/endsWith' },
             { text: 'padStart (호환성)', link: '/ko/reference/compat/string/padStart' },
             { text: 'padEnd (호환성)', link: '/ko/reference/compat/string/padEnd' },
+            { text: 'deburr', link: '/ko/reference/string/deburr' },
           ],
         },
         {

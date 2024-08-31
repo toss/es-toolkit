@@ -513,6 +513,12 @@ const deburredLetters = [
 ];
 
 describe('deburr', () => {
+  it('should convert examples correctly', () => {
+    expect(deburr('Æthelred')).toBe('Aethelred');
+    expect(deburr('München')).toBe('Munchen');
+    expect(deburr('Crème brûlée')).toBe('Creme brulee');
+  });
+
   it('should convert Latin Unicode letters to basic Latin', () => {
     const actual = burredLetters.map(deburr);
     expect(actual).toEqual(deburredLetters);
