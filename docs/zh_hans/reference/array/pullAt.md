@@ -2,10 +2,12 @@
 
 从数组中删除指定索引处的元素，并返回被删除的元素。
 
+这个函数支持负索引，负索引从数组的末尾开始计算。
+
 ## 签名
 
 ```typescript
-function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
+function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
 ```
 
 ### 参数
@@ -15,7 +17,7 @@ function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
 
 ### 返回值
 
-(`T[]`): 包含从原始数组中删除的元素的新数组。
+(`Array<T | undefined>`): 包含从原始数组中删除的元素的新数组。
 
 ## 示例
 

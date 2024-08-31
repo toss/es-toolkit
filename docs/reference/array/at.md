@@ -7,7 +7,7 @@ This function supports negative indices, which count from the end of the array.
 ## Signature
 
 ```typescript
-function at<T>(arr: T[], indices: number[]): T[];
+function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
 ```
 
 ### Parameters

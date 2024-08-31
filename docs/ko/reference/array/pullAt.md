@@ -2,10 +2,12 @@
 
 특정 인덱스에 있는 요소들을 제거하고, 제거된 요소들을 반환해요.
 
+이 함수는 음수 인덱스를 지원해요. 인덱스가 음수일 경우, 배열의 마지막부터 계산해요.
+
 ## 인터페이스
 
 ```typescript
-function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
+function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
 ```
 
 ### 파라미터
@@ -15,7 +17,7 @@ function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
 
 ### 반환 값
 
-(`T[]`): 제거된 요소들의 배열.
+(`Array<T | undefined>`): 제거된 요소들의 배열.
 
 ## 예시
 

@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function at<T>(arr: T[], indices: number[]): T[];
+function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
 ```
 
 ### 파라미터

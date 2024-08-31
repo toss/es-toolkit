@@ -2,10 +2,12 @@
 
 指定されたインデックスの位置から配列の要素を削除し、削除された要素を返します。
 
+この関数は負のインデックスをサポートしており、配列の末尾からカウントします。
+
 ## インターフェース
 
 ```typescript
-function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
+function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
 ```
 
 ### パラメータ
@@ -15,7 +17,7 @@ function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
 
 ### 戻り値
 
-(`T[]`): 元の配列から削除された要素を含む新しい配列。
+(`Array<T | undefined>`): 元の配列から削除された要素を含む新しい配列。
 
 ## 例
 
