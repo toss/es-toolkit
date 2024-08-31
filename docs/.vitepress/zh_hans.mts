@@ -1,4 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
+import { sortByText } from '../libs/sortByText.mts';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const zh_hans = defineConfig({
@@ -44,7 +45,7 @@ function sidebar(): DefaultTheme.Sidebar {
     },
     {
       text: '参考',
-      items: [
+      items: sortByText([
         {
           text: '数组工具',
           items: [
@@ -228,7 +229,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'TimeoutError', link: '/zh_hans/reference/error/TimeoutError' },
           ],
         },
-      ],
+      ]),
     },
   ];
 }

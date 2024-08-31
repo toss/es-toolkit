@@ -1,4 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
+import { sortByText } from '../libs/sortByText.mts';
 
 export const en = defineConfig({
   lang: 'en',
@@ -44,7 +45,7 @@ function sidebar(): DefaultTheme.Sidebar {
     },
     {
       text: 'Reference',
-      items: [
+      items: sortByText([
         {
           text: 'Array Utilities',
           items: [
@@ -231,7 +232,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'TimeoutError', link: '/reference/error/TimeoutError' },
           ],
         },
-      ],
+      ]),
     },
   ];
 }
