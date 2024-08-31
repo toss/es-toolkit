@@ -11,10 +11,10 @@
  *   return Array.from(arguments);
  * }
  *
- * expect(ary(fn, 0)(1, 2, 3)).toEqual([]);
- * expect(ary(fn, 1)(1, 2, 3)).toEqual([1]);
- * expect(ary(fn, 2)(1, 2, 3)).toEqual([1, 2]);
- * expect(ary(fn, 3)(1, 2, 3)).toEqual([1, 2, 3]);
+ * ary(fn, 0)(1, 2, 3) // []
+ * ary(fn, 1)(1, 2, 3) // [1]
+ * ary(fn, 2)(1, 2, 3) // [1, 2]
+ * ary(fn, 3)(1, 2, 3) // [1, 2, 3]
  */
 export function ary<F extends (...args: any[]) => any>(func: F, n: number): (...args: any[]) => ReturnType<F> {
   return function (this: any, ...args: Parameters<F>) {
