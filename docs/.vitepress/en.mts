@@ -48,6 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Array Utilities',
           items: [
+            { text: 'at', link: '/reference/array/at' },
             { text: 'chunk', link: '/reference/array/chunk' },
             { text: 'concat (compat)', link: '/reference/compat/array/concat' },
             { text: 'countBy', link: '/reference/array/countBy' },

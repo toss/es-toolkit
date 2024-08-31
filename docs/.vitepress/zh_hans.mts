@@ -48,6 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '数组工具',
           items: [
+            { text: 'at', link: '/zh_hans/reference/array/at' },
             { text: 'chunk', link: '/zh_hans/reference/array/chunk' },
             { text: 'concat (兼容性)', link: '/zh_hans/reference/compat/array/concat' },
             { text: 'countBy', link: '/zh_hans/reference/array/countBy' },

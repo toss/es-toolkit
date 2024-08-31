@@ -47,6 +47,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '配列',
           items: [
+            { text: 'at', link: '/ja/reference/array/at' },
             { text: 'chunk', link: '/ja/reference/array/chunk' },
             { text: 'concat (compat)', link: '/ja/reference/compat/array/concat' },
             { text: 'countBy', link: '/ja/reference/array/countBy' },
