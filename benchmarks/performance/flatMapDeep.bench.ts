@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
 import { flatMapDeep as flatMapToolkit } from 'es-toolkit';
-import { flatMapDeep as flatMapDeep } from 'lodash';
+import { flatMapDeep as flatMapDeepLodash } from 'lodash';
 
 function createNestedArray(arr: any[], depth: number) {
   let result = arr;
@@ -20,7 +20,7 @@ describe('flatMapDeep', () => {
   });
 
   bench('lodash/flatMapDeep', () => {
-    flatMapDeep(arr, iterateeDepth);
+    flatMapDeepLodash(arr, iterateeDepth);
   });
 
   bench('js built-in/map.flat', () => {
