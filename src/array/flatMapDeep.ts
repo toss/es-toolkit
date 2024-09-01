@@ -13,6 +13,6 @@ import { ExtractNestedArrayType, flattenDeep } from './flattenDeep';
  * const result = flatMapDeep([1, 2, 3], n => [[n, n]]);
  * // [1, 1, 2, 2, 3, 3]
  */
-export const flatMapDeep = <T, U>(arr: readonly T[], iteratee: (item: T) => U): Array<ExtractNestedArrayType<U>> => {
+export function flatMapDeep<T, U>(arr: readonly T[], iteratee: (item: T) => U): Array<ExtractNestedArrayType<U>> {
   return flattenDeep(arr.map((item: T) => iteratee(item)));
-};
+}
