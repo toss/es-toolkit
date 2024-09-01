@@ -61,7 +61,7 @@ chunk([1, 2, 3, 4], 0);
 | [drop](https://lodash.com/docs/4.17.15#drop)                           | ✅            |
 | [dropRight](https://lodash.com/docs/4.17.15#dropRight)                 | ✅            |
 | [dropRightWhile](https://lodash.com/docs/4.17.15#dropRightWhile)       | 📝            |
-| [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | 📝            |
+| [dropWhile](https://lodash.com/docs/4.17.15#dropWhile)                 | ✅            |
 | [fill](https://lodash.com/docs/4.17.15#fill)                           | ✅            |
 | [findIndex](https://lodash.com/docs/4.17.15#findIndex)                 | ✅            |
 | [findLastIndex](https://lodash.com/docs/4.17.15#findIndex)             | ❌            |
