@@ -10,7 +10,7 @@ import { flatten } from './flatten.ts';
  * ExtractNestedArrayType<(boolean | (string | number[])[])[]>
  * // string | number | boolean
  */
-type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNestedArrayType<U> : T;
+export type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNestedArrayType<U> : T;
 
 /**
  * Flattens all depths of a nested array.
