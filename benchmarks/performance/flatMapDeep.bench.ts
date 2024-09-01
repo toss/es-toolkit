@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { flatMapDeep as flatMapToolkit } from 'es-toolkit';
+import { flatMapDeep as flatMapDeepToolkit } from 'es-toolkit';
 import { flatMapDeep as flatMapDeepLodash } from 'lodash';
 
 function createNestedArray(arr: any[], depth: number) {
@@ -16,7 +16,7 @@ describe('flatMapDeep', () => {
   const arr = Array.from({ length: 30 }, (_, i) => i);
 
   bench('es-toolkit/flatMapDeep', () => {
-    flatMapToolkit(arr, iterateeDepth);
+    flatMapDeepToolkit(arr, iterateeDepth);
   });
 
   bench('lodash/flatMapDeep', () => {
