@@ -15,10 +15,12 @@
  * const trimmedStr4 = ltrim('xxxtrimmed', 'x') // returns 'trimmed'
  */
 
-export const ltrim = (str: string, toTrim: string): string => {
+import {TrimParameter} from "./trim.ts";
+
+export const ltrim = (str: string, toTrim: TrimParameter): string => {
   const chars: string[] = str.split('');
   let startHere = 0;
-  while (chars[startHere] === toTrim && startHere < chars.length) {
+  while ((chars[startHere] === toTrim || toTrim.includes(chars[startHere])) && startHere < chars.length) {
     startHere++;
   }
   return chars.splice(startHere, chars.length).join('');

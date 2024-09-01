@@ -14,16 +14,11 @@
  * const trimmedStr3 = trim('abcabcabc', 'b') // returns 'acacac'
  * const trimmedStr4 = trim('123-456-789', ['-', '3']) // returns '12456789'
  */
+import {ltrim} from "./ltrim.ts";
+import {rtrim} from "./rtrim.ts";
 
-type TrimParameter = string | string[];
+export type TrimParameter = string | string[];
 
 export const trim = (str: string, toTrim: TrimParameter): string => {
-  const chars = str.split('');
-  const trimmedChars: string[] = [];
-  for (const char of chars) {
-    if ((char !== toTrim && typeof toTrim === 'string') || !toTrim.includes(char)) {
-      trimmedChars.push(char);
-    }
-  }
-  return trimmedChars.join('');
+  return ltrim(rtrim(str, toTrim), toTrim);
 };

@@ -5,7 +5,7 @@ import { trim as trimLodash } from 'lodash';
 describe('trim', () => {
   bench('es-toolkit/trim', () => {
     const str = 'kebab-case';
-    trimToolkit(str);
+    trimToolkit(str, 'se');
   });
 
   bench('lodash/trim', () => {
