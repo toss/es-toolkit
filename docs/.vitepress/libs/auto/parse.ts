@@ -31,10 +31,16 @@ export function parse(source: string): Parsed[] {
   );
   // Filter out only comments that are above the function nodes
   const functionCommentsAst = commentsAst.filter(
-    comment =>
-      // Check if the comment is above the function node
-      functionTsAst.some(node => node.loc.start.line === Number(comment.source.at(-1)?.number) + 2) // +1 for 0-based index of comment-parser and +1 for the line below the comment
+    // Check if the comment is above the function node
+    comment => {
+      const commentLine = Number(comment.source.at(-1)?.number);
+      return functionTsAst.some(node => {
+        const diff = node.loc.start.line - commentLine;
+        return diff === 2 || diff === 3; // only accept just above the function node and 1 wrapped line
+      });
+    }
   );
+
   return functionCommentsAst.map((comment, index) => {
     const result: Parsed = {
       description: comment.description,
@@ -55,18 +61,20 @@ export function parse(source: string): Parsed[] {
             description: tag.description.slice(2),
           };
           break;
+
         case 'returns':
           result.returns = {
             type: '',
             // comment-parser can detect with `-`, so I have to use source instead of tag.description
             description: tag.source
               // .filter(line => line.source)
-              .map(line => line.source.replace(/\s?\*\s?\/?(@returns\s?{.*}\s?)?/, ''))
+              .map(line => line.source.replace(/\s?\*\s?\/?(@returns\s?{.*}\s?)?-?/, ''))
               .filter(line => line)
               .join(' ')
               .trim(),
           };
           break;
+
         case 'example':
           result.examples.push(tag.description.trim());
           break;
@@ -74,6 +82,7 @@ export function parse(source: string): Parsed[] {
     }
 
     const functionNode = functionTsAst[index];
+
     if (
       functionNode.type === 'ExportNamedDeclaration' &&
       (functionNode.declaration?.type === 'FunctionDeclaration' ||

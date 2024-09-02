@@ -36,7 +36,7 @@ export function createContent(name: string, parsed: Parsed[]): string {
         List(formatParameters(parsed.parameters)),
         Title('Returns', 3),
         formatReturns(parsed.returns),
-        parsed.examples.length ? Title('Examples', 2) : '',
+        Title('Examples', 2),
         ...parsed.examples.map(example => CodeBlock(example, 'typescript'))
       )
     )
