@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const zh_hans = defineConfig({
