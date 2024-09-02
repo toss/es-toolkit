@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "@deno/doc": "jsr:@deno/doc@^0.148.0",
+    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.17.0"
+  }
+}
