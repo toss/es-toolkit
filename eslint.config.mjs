@@ -6,7 +6,16 @@ import prettier from 'eslint-config-prettier';
 
 export default [
   {
-    ignores: ['.yarn/**', 'coverage/**', 'dist/**', '.pnp.*', '**/*.d.ts', '**/*.tgz', 'node_modules/**'],
+    ignores: [
+      '.yarn/**',
+      'coverage/**',
+      'dist/**',
+      '.pnp.*',
+      '**/*.d.ts',
+      '**/*.tgz',
+      'node_modules/**',
+      '**/cache/**',
+    ],
   },
   {
     languageOptions: {
@@ -79,6 +88,9 @@ export default [
       'jsdoc/tag-lines': 'off',
       'jsdoc/no-defaults': 'off',
       'jsdoc/require-jsdoc': 'off',
+      'jsdoc/no-types': 'error',
+      'jsdoc/require-param-type': 'off',
+      'jsdoc/require-returns-type': 'off',
     },
   },
 ];
