@@ -9,5 +9,6 @@ dist
 esm
 .junit
 out
+cache
 *.d.ts
 *.tgz

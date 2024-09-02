@@ -1,18 +1,7 @@
 /**
  * Checks if a value is a TypedArray.
  * @param x The value to check.
- * @returns
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- *  Returns true if `x` is a TypedArray, false otherwise.
+ * @returns Returns true if `x` is a TypedArray, false otherwise.
  */
 export function isTypedArray(
   x: unknown
