@@ -8,11 +8,11 @@ interface DebounceOptions {
  * method to cancel any pending execution.
  *
  * @template F - The type of function.
- * @param {F} func - The function to debounce.
- * @param {number} debounceMs - The number of milliseconds to delay.
- * @param {DebounceOptions} options - The options object
- * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
- * @returns {((...args: Parameters<F>) => void) & { cancel: () => void }} A new debounced function with a `cancel` method.
+ * @param func - The function to debounce.
+ * @param debounceMs - The number of milliseconds to delay.
+ * @param options - The options object
+ * @param options.signal - An optional AbortSignal to cancel the debounced function.
+ * @returns A new debounced function with a `cancel` method.
  *
  * @example
  * const debouncedFunction = debounce(() => {

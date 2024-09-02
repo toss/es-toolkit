@@ -3,9 +3,9 @@
  *
  * @template T - The type of elements within the array.
  * @template D - The depth to which the array should be flattened.
- * @param {T[] | object} value - The object to flatten.
- * @param {D} depth - The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
- * @returns {Array<FlatArray<T[], D>> | []} A new array that has been flattened.
+ * @param value - The object to flatten.
+ * @param depth - The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
+ * @returns A new array that has been flattened.
  *
  * @example
  * const arr = flatten([1, [2, 3], [4, [5, 6]]], 1);

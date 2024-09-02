@@ -10,9 +10,9 @@ import { orderBy } from './orderBy';
  * If two objects have the same value for the current criterion, it uses the next criterion to determine their order.
  *
  * @template T - The type of the objects in the array.
- * @param {T[]} arr - The array of objects to be sorted.
- * @param {Array<((item: T) => unknown) | keyof T>} criteria - The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
- * @returns {T[]} - The sorted array.
+ * @param arr - The array of objects to be sorted.
+ * @param criteria - The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
+ * @returns - The sorted array.
  *
  * @example
  * const users = [

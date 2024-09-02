@@ -4,10 +4,10 @@
  * This function takes a number and two bounds, and returns the number clamped within the specified bounds.
  * If only one bound is provided, it returns the minimum of the value and the bound.
  *
- * @param {number} value - The number to clamp.
- * @param {number} minimum - The minimum bound to clamp the number.
- * @param {number} maximum - The maximum bound to clamp the number.
- * @returns {number} The clamped number within the specified bounds.
+ * @param value - The number to clamp.
+ * @param minimum - The minimum bound to clamp the number.
+ * @param maximum - The maximum bound to clamp the number.
+ * @returns The clamped number within the specified bounds.
  *
  * @example
  * const result1 = clamp(10, 5); // result1 will be 5, as 10 is clamped to the bound 5

@@ -39,9 +39,9 @@ declare let Buffer:
 /**
  * Checks if two values are equal, including support for `Date`, `RegExp`, and deep object comparison.
  *
- * @param {unknown} a - The first value to compare.
- * @param {unknown} b - The second value to compare.
- * @returns {boolean} `true` if the values are equal, otherwise `false`.
+ * @param a - The first value to compare.
+ * @param b - The second value to compare.
+ * @returns `true` if the values are equal, otherwise `false`.
  *
  * @example
  * isEqual(1, 1); // true

@@ -9,9 +9,9 @@ import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
  *
  * Note that this function mutates the target object.
  *
- * @param {T} target - The target object into which the source object properties will be merged. This object is modified in place.
- * @param {S} source - The source object whose properties will be merged into the target object.
- * @returns {T & S} The updated target object with properties from the source object merged in.
+ * @param target - The target object into which the source object properties will be merged. This object is modified in place.
+ * @param source - The source object whose properties will be merged into the target object.
+ * @returns The updated target object with properties from the source object merged in.
  *
  * @template T - Type of the target object.
  * @template S - Type of the source object.

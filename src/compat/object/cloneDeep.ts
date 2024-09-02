@@ -5,8 +5,8 @@ import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tag
  * Creates a deep clone of the given object.
  *
  * @template T - The type of the object.
- * @param {T} obj - The object to clone.
- * @returns {T} - A deep clone of the given object.
+ * @param obj - The object to clone.
+ * @returns - A deep clone of the given object.
  *
  * @example
  * // Clone a primitive values

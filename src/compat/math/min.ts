@@ -2,8 +2,8 @@
  * Finds the element in an array that has the minimum value.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items The array of elements to search.
- * @returns {T | undefined} The element with the minimum value.
+ * @param items The array of elements to search.
+ * @returns The element with the minimum value.
  * @example
  * // Returns 1
  * min([3, 1, 4, 1, 5, 9])

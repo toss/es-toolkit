@@ -7,9 +7,9 @@
  *
  * @template T - The type of elements in the array.
  * @template K - The type of keys.
- * @param {T[]} arr - The array to group.
- * @param {(item: T) => K} getKeyFromItem - A function that generates a key from an element.
- * @returns {Record<K, T[]>} An object where each key is associated with an array of elements that
+ * @param arr - The array to group.
+ * @param getKeyFromItem - A function that generates a key from an element.
+ * @returns An object where each key is associated with an array of elements that
  * share that key.
  *
  * @example

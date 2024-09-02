@@ -12,16 +12,16 @@ import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
  *
  * Note that this function mutates the target object.
  *
- * @param {T} target - The target object into which the source object properties will be merged. This object is modified in place.
- * @param {S} source - The source object whose properties will be merged into the target object.
- * @param {(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any} merge - A custom merge function that defines how properties should be combined. It receives the following arguments:
+ * @param target - The target object into which the source object properties will be merged. This object is modified in place.
+ * @param source - The source object whose properties will be merged into the target object.
+ * @param merge - A custom merge function that defines how properties should be combined. It receives the following arguments:
  *   - `targetValue`: The current value of the property in the target object.
  *   - `sourceValue`: The value of the property in the source object.
  *   - `key`: The key of the property being merged.
  *   - `target`: The target object.
  *   - `source`: The source object.
  *
- * @returns {T & S} The updated target object with properties from the source object merged in.
+ * @returns The updated target object with properties from the source object merged in.
  *
  * @template T - Type of the target object.
  * @template S - Type of the source object.

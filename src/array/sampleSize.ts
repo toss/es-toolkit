@@ -8,9 +8,9 @@ import { randomInt } from '../math/randomInt.ts';
  * {@link https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html Floyd's algorithm}
  *
  * @template T - The type of elements in the array.
- * @param {T[]} array - The array to sample from.
- * @param {number} size - The size of sample.
- * @returns {T[]} A new array with sample size applied.
+ * @param array - The array to sample from.
+ * @param size - The size of sample.
+ * @returns A new array with sample size applied.
  * @throws {Error} Throws an error if `size` is greater than the length of `array`.
  *
  * @example

@@ -5,9 +5,9 @@
  * of elements removed from the start.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array from which to drop elements.
- * @param {number} itemsCount - The number of elements to drop from the beginning of the array.
- * @returns {T[]} A new array with the specified number of elements removed from the start.
+ * @param arr - The array from which to drop elements.
+ * @param itemsCount - The number of elements to drop from the beginning of the array.
+ * @returns A new array with the specified number of elements removed from the start.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];

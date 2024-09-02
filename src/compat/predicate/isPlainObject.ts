@@ -10,8 +10,8 @@
  * `Symbol.toStringTag` is a built-in symbol that a constructor can use to customize the
  * default string description of objects.
  *
- * @param {unknown} [object] - The value to check.
- * @returns {boolean} - True if the value is a plain object, otherwise false.
+ * @param [object] - The value to check.
+ * @returns - True if the value is a plain object, otherwise false.
  *
  * @example
  * console.log(isPlainObject({})); // true

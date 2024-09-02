@@ -7,9 +7,9 @@ const regexIsPlainProp = /^\w*$/;
 
 /**
  * Checks if `value` is a property name and not a property path. (It's ok that the `value` is not in the keys of the `object`)
- * @param {unknown} value The value to check.
- * @param {unknown} object The object to query.
- * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
+ * @param value The value to check.
+ * @param object The object to query.
+ * @returns Returns `true` if `value` is a property name, else `false`.
  *
  * @example
  * isKey('a', { a: 1 });

@@ -6,10 +6,10 @@
  * Note: Unlike native `Function#bind`, this method doesn't set the `length` property of bound functions.
  *
  * @template F - The type of the function to bind.
- * @param {F} func - The function to bind.
- * @param {unknown} thisObj - The `this` binding of `func`.
- * @param {...any} partialArgs - The arguments to be partially applied.
- * @returns {F} - Returns the new bound function.
+ * @param func - The function to bind.
+ * @param thisObj - The `this` binding of `func`.
+ * @param partialArgs - The arguments to be partially applied.
+ * @returns - Returns the new bound function.
  *
  * @example
  * function greet(greeting, punctuation) {

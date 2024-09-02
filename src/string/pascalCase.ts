@@ -6,8 +6,8 @@ import { capitalize } from './capitalize.ts';
  *
  * Pascal case is the naming convention in which each word is capitalized and concatenated without any separator characters.
  *
- * @param {string} str - The string that is to be changed to pascal case.
- * @returns {string} - The converted string to Pascal case.
+ * @param str - The string that is to be changed to pascal case.
+ * @returns - The converted string to Pascal case.
  *
  * @example
  * const convertedStr1 = pascalCase('pascalCase') // returns 'PascalCase'

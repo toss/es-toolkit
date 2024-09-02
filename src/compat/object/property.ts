@@ -3,8 +3,8 @@ import { get } from './get.ts';
 /**
  * Creates a function that returns the value at a given path of an object.
  *
- * @param {PropertyKey | PropertyKey[]} path - The path of the property to get.
- * @returns {(object: unknown) => any} - Returns a new function that takes an object and returns the value at the specified path.
+ * @param path - The path of the property to get.
+ * @returns - Returns a new function that takes an object and returns the value at the specified path.
  *
  * @example
  * const getObjectValue = property('a.b.c');

@@ -10,11 +10,11 @@ import { isMatch } from './isMatch.ts';
  * The returned function takes a target object and determines if the property at the
  * specified path within the target object is equal to the given value.
  *
- * @param {PropertyKey | PropertyKey[]} property - The property path to check within the target object.
+ * @param property - The property path to check within the target object.
  *     This can be a single property key or an array of property keys.
- * @param {unknown} source - The value to compare against the property value in the target object.
+ * @param source - The value to compare against the property value in the target object.
  *
- * @returns {(target: unknown) => boolean} - A function that takes a target object and returns
+ * @returns - A function that takes a target object and returns
  *     `true` if the property value at the given path in the target object matches the provided value,
  *     otherwise returns `false`.
  *

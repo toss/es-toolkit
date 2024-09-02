@@ -3,8 +3,8 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
 /**
  * Flattens a nested object into a single level object with dot-separated keys.
  *
- * @param {object} object - The object to flatten.
- * @returns {Record<string, any>} - The flattened object.
+ * @param object - The object to flatten.
+ * @returns - The flattened object.
  *
  * @example
  * const nestedObject = {

@@ -4,9 +4,9 @@
  * as an element does not satisfy the predicate.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to process.
- * @param {(element: T) => boolean} shouldContinueTaking - The predicate function that is called with each element. Elements are included in the result as long as this function returns true.
- * @returns {T[]} A new array containing the leading elements that satisfy the predicate.
+ * @param arr - The array to process.
+ * @param shouldContinueTaking - The predicate function that is called with each element. Elements are included in the result as long as this function returns true.
+ * @returns A new array containing the leading elements that satisfy the predicate.
  *
  * @example
  * // Returns [1, 2]

@@ -3,8 +3,8 @@
  * If the input array is empty or has only one element, the function returns an empty array.
  *
  * @template T The type of elements in the array.
- * @param {T[]} arr - The input array to query.
- * @returns {T[]} A new array containing all but the last element of the input array.
+ * @param arr - The input array to query.
+ * @returns A new array containing all but the last element of the input array.
  *
  * @example
  * const arr = [1, 2, 3, 4];

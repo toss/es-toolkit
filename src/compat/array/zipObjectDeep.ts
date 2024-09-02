@@ -12,9 +12,9 @@ import { set } from '../object/set.ts';
  *
  * @template P - The type of property paths.
  * @template V - The type of values corresponding to the property paths.
- * @param {P[] | P[][]} keys - An array of property paths, each path can be a dot-separated string or an array of property names.
- * @param {V[]} values - An array of values corresponding to the property paths.
- * @returns {object} A new object composed of the given property paths and values.
+ * @param keys - An array of property paths, each path can be a dot-separated string or an array of property names.
+ * @param values - An array of values corresponding to the property paths.
+ * @returns A new object composed of the given property paths and values.
  *
  * @example
  * const paths = ['a.b.c', 'd.e.f'];

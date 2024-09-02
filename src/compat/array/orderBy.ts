@@ -11,10 +11,10 @@ import { toPath } from '../_internal/toPath';
  * it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param { T[] | object | null | undefined} collection - The array of objects to be sorted.
- * @param {((item: T) => unknown) | PropertyKey | Array<((item: T) => unknown) | PropertyKey | PropertyKey[]>} criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
- * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
- * @returns {T[]} - The sorted array.
+ * @param collection - The array of objects to be sorted.
+ * @param criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
+ * @param orders - An array of order directions ('asc' for ascending or 'desc' for descending).
+ * @returns - The sorted array.
  *
  * @example
  * // Sort an array of objects by 'user' in ascending order and 'age' in descending order.

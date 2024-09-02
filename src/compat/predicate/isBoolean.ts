@@ -8,8 +8,8 @@ import { getTag } from '../_internal/getTag.ts';
  *
  *  This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `boolean`.
  *
- * @param {unknown} x - The Value to test if it is boolean.
- * @returns {x is boolean} True if the value is boolean, false otherwise.
+ * @param x - The Value to test if it is boolean.
+ * @returns True if the value is boolean, false otherwise.
  *
  * @example
  *

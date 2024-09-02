@@ -2,8 +2,8 @@
  * Gets the `toStringTag` of `value`.
  *
  * @private
- * @param {T} value The value to query.
- * @returns {string} Returns the `Object.prototype.toString.call` result.
+ * @param value The value to query.
+ * @returns Returns the `Object.prototype.toString.call` result.
  */
 export function getTag<T>(value: T) {
   if (value == null) {

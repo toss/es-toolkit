@@ -6,9 +6,9 @@
  * different lengths, the resulting array will have the length of the longest input array,
  * with undefined values for missing elements.
  *
- * @param {...T[][]} arrs - The arrays to zip together.
+ * @param arrs - The arrays to zip together.
  * @param arr1
- * @returns {T[][]} A new array of tuples containing the corresponding elements from the input arrays.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];

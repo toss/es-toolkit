@@ -3,9 +3,9 @@
  * Join elements of an array into a string.
  *
  * @template T - The type of elements in the array.
- * @param {readonly T[]} array - The array to join.
- * @param {string} separator - The separator used to join the elements, default is common separator `,`.
- * @returns {string} - Returns a string containing all elements of the array joined by the specified separator.
+ * @param array - The array to join.
+ * @param separator - The separator used to join the elements, default is common separator `,`.
+ * @returns - Returns a string containing all elements of the array joined by the specified separator.
  *
  * @example
  * ```typescript

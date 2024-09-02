@@ -3,9 +3,9 @@
  *
  * @template T - Type of elements in the input array.
  *
- * @param {T[]} arr - The array to take elements from.
- * @param {(item: T) => boolean} shouldContinueTaking - The function invoked per element.
- * @returns {T[]} A new array containing the elements taken from the end while the predicate returns `true`.
+ * @param arr - The array to take elements from.
+ * @param shouldContinueTaking - The function invoked per element.
+ * @returns A new array containing the elements taken from the end while the predicate returns `true`.
  *
  * @example
  * // Returns [3, 2, 1]

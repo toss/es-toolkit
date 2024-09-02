@@ -4,9 +4,9 @@
  *
  * @template T - Type of elements in the input array.
  *
- * @param {T[]} arr - The array to take elements from.
- * @param {number} count - The number of elements to take.
- * @returns {T[]} A new array containing the first `count` elements from `arr`.
+ * @param arr - The array to take elements from.
+ * @param count - The number of elements to take.
+ * @returns A new array containing the first `count` elements from `arr`.
  *
  * @example
  * // Returns [1, 2, 3]

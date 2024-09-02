@@ -4,8 +4,8 @@ type NotFalsey<T> = Exclude<T, false | null | 0 | '' | undefined>;
  * Removes falsey values (false, null, 0, '', undefined, NaN) from an array.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The input array to remove falsey values.
- * @returns {Array<Exclude<T, false | null | 0 | '' | undefined>>} - A new array with all falsey values removed.
+ * @param arr - The input array to remove falsey values.
+ * @returns - A new array with all falsey values removed.
  *
  * @example
  * compact([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);

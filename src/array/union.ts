@@ -7,9 +7,9 @@ import { uniq } from './uniq.ts';
  * containing only the unique values from the merged array.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr1 - The first array to merge and filter for unique values.
- * @param {T[]} arr2 - The second array to merge and filter for unique values.
- * @returns {T[]} A new array of unique values.
+ * @param arr1 - The first array to merge and filter for unique values.
+ * @param arr2 - The second array to merge and filter for unique values.
+ * @returns A new array of unique values.
  *
  * @example
  * const array1 = [1, 2, 3];

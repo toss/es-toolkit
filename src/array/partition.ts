@@ -6,11 +6,11 @@
  * the second array contains elements for which the predicate function returns false.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to partition.
- * @param {(value: T) => boolean} isInTruthy - A predicate function that determines
+ * @param arr - The array to partition.
+ * @param isInTruthy - A predicate function that determines
  * whether an element should be placed in the truthy array. The function is called with each
  * element of the array.
- * @returns {[T[], T[]]} A tuple containing two arrays: the first array contains elements for
+ * @returns A tuple containing two arrays: the first array contains elements for
  * which the predicate returned true, and the second array contains elements for which the
  * predicate returned false.
  *

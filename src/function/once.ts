@@ -3,8 +3,8 @@
  * Repeated calls to the function will return the value from the first invocation.
  *
  * @template F - The type of function.
- * @param {F} func - The function to restrict.
- * @returns {F} A new function that invokes `func` once and caches the result.
+ * @param func - The function to restrict.
+ * @returns A new function that invokes `func` once and caches the result.
  *
  * @example
  * const initialize = once(() => {

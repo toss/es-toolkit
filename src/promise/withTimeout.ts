@@ -8,9 +8,9 @@ import { timeout } from './timeout.ts';
  *
  *
  * @template T
- * @param {() => Promise<T>} run - A function that returns a promise to be executed.
- * @param {number} ms - The timeout duration in milliseconds.
- * @returns {Promise<T>} A promise that resolves with the result of the `run` function or rejects if the timeout is reached.
+ * @param run - A function that returns a promise to be executed.
+ * @param ms - The timeout duration in milliseconds.
+ * @returns A promise that resolves with the result of the `run` function or rejects if the timeout is reached.
  *
  * @example
  * try {

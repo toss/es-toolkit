@@ -5,8 +5,8 @@
  * If the array is empty, the function returns `undefined`.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array from which to get the first element.
- * @returns {T | undefined} The first element of the array, or `undefined` if the array is empty.
+ * @param arr - The array from which to get the first element.
+ * @returns The first element of the array, or `undefined` if the array is empty.
  *
  * @example
  * const arr = [1, 2, 3];

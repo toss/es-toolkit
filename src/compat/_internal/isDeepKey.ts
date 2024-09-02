@@ -6,8 +6,8 @@ const IS_DEEP = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
  *
  * A deep key is a string that contains a dot (.) or square brackets with a property accessor.
  *
- * @param {PropertyKey} key - The key to check.
- * @returns {boolean} - Returns true if the key is a deep key, otherwise false.
+ * @param key - The key to check.
+ * @returns - Returns true if the key is a deep key, otherwise false.
  *
  * Examples:
  *

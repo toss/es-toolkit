@@ -11,12 +11,12 @@
  * `getCacheKey` function to generate a unique cache key for proper caching.
  *
  * @template F - The type of the function to be memoized.
- * @param {F} fn - The function to be memoized. It should accept a single argument and return a value.
- * @param {MemoizeOptions<Parameters<F>[0], ReturnType<F>>} [options={}] - Optional configuration for the memoization.
- * @param {MemoizeCache<any, V>} [options.cache] - The cache object used to store results. Defaults to a new `Map`.
- * @param {(args: A) => unknown} [options.getCacheKey] - An optional function to generate a unique cache key for each argument.
+ * @param fn - The function to be memoized. It should accept a single argument and return a value.
+ * @param [options={}] - Optional configuration for the memoization.
+ * @param [options.cache] - The cache object used to store results. Defaults to a new `Map`.
+ * @param [options.getCacheKey] - An optional function to generate a unique cache key for each argument.
  *
- * @returns {F & { cache: MemoizeCache<any, ReturnType<F>> }} - The memoized function with an additional `cache` property that exposes the internal cache.
+ * @returns - The memoized function with an additional `cache` property that exposes the internal cache.
  *
  * @example
  * // Example using the default cache

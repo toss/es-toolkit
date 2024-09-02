@@ -8,9 +8,9 @@
  *
  * @template P - The type of elements in the array.
  * @template V - The type of elements in the array.
- * @param {P[]} keys - An array of property names.
- * @param {V[]} values - An array of values corresponding to the property names.
- * @returns {{ [K in P]: V }} A new object composed of the given property names and values.
+ * @param keys - An array of property names.
+ * @param values - An array of values corresponding to the property names.
+ * @returns A new object composed of the given property names and values.
  *
  * @example
  * const keys = ['a', 'b', 'c'];

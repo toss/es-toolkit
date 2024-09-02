@@ -3,10 +3,10 @@
  *
  * Checks if one string endsWith another string. Optional position parameter to offset searching before a certain index.
  *
- * @param {string} str - The string that might contain the target string.
- * @param {string} target - The string to search for.
- * @param {number} position - An optional position from the start to search up to this index
- * @returns {boolean} - True if the str string ends with the target string.
+ * @param str - The string that might contain the target string.
+ * @param target - The string to search for.
+ * @param position - An optional position from the start to search up to this index
+ * @returns - True if the str string ends with the target string.
  *
  * @example
  * const isPrefix = endsWith('fooBar', 'foo') // returns true

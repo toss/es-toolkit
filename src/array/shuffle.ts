@@ -4,8 +4,8 @@
  * This function takes an array and returns a new array with its elements shuffled in a random order.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to shuffle.
- * @returns {T[]} A new array with its elements shuffled in random order.
+ * @param arr - The array to shuffle.
+ * @returns A new array with its elements shuffled in random order.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];

@@ -9,11 +9,11 @@
  * mapped, match an element in the mapped version of the second array.
  *
  * @template T, U
- * @param {T[]} firstArr - The primary array from which to derive the difference.
- * @param {T[]} secondArr - The array containing elements to be excluded from the first array.
- * @param {(value: T) => U} mapper - The function to map the elements of both arrays. This function
+ * @param firstArr - The primary array from which to derive the difference.
+ * @param secondArr - The array containing elements to be excluded from the first array.
+ * @param mapper - The function to map the elements of both arrays. This function
  * is applied to each element in both arrays, and the comparison is made based on the mapped values.
- * @returns {T[]} A new array containing the elements from the first array that do not have a corresponding
+ * @returns A new array containing the elements from the first array that do not have a corresponding
  * mapped identity in the second array.
  *
  * @example

@@ -8,11 +8,11 @@ import { fill as fillToolkit } from '../../array/fill.ts';
  * entire array.
  *
  * @template T, U, S, V
- * @param {Array<T | U>} array - The array to fill.
- * @param {U} value - The value to fill the array with.
- * @param {S} [start=0] - The start position. Defaults to 0.
- * @param {V} [end=arr.length] - The end position. Defaults to the array's length.
- * @returns {Array<T | U>} The array with the filled values.
+ * @param array - The array to fill.
+ * @param value - The value to fill the array with.
+ * @param [start=0] - The start position. Defaults to 0.
+ * @param [end=arr.length] - The end position. Defaults to the array's length.
+ * @returns The array with the filled values.
  *
  * @example
  * const array = [1, 2, 3];

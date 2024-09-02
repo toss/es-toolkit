@@ -6,10 +6,10 @@
  * if elements are equal is made using the provided custom function.
  *
  * @template T
- * @param {T[]} firstArr - The array from which to get the difference.
- * @param {T[]} secondArr - The array containing elements to exclude from the first array.
- * @param {(x: T, y: T) => boolean} areItemsEqual - A function to determine if two items are equal.
- * @returns {T[]} A new array containing the elements from the first array that do not match any elements in the second array
+ * @param firstArr - The array from which to get the difference.
+ * @param secondArr - The array containing elements to exclude from the first array.
+ * @param areItemsEqual - A function to determine if two items are equal.
+ * @returns A new array containing the elements from the first array that do not match any elements in the second array
  * according to the custom equality function.
  *
  * @example

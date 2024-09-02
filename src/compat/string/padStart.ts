@@ -4,10 +4,10 @@
  * If the length is less than or equal to the original string's length, or if the padding character is an empty string,
  * the original string is returned unchanged.
  *
- * @param {string} str - The string to pad.
- * @param {number} [length] - The length of the resulting string once padded.
- * @param {string} [chars] - The character(s) to use for padding.
- * @returns {string} - The padded string, or the original string if padding is not required.
+ * @param str - The string to pad.
+ * @param [length] - The length of the resulting string once padded.
+ * @param [chars] - The character(s) to use for padding.
+ * @returns - The padded string, or the original string if padding is not required.
  *
  * @example
  * const result1 = padStart('abc', 6);          // result will be '   abc'

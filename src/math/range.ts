@@ -3,10 +3,10 @@
  *
  * If `step` is not provided, it defaults to `1`.
  *
- * @param {number} start - The starting number of the range (inclusive).
- * @param {number} [end] - The end number of the range (exclusive).
- * @param {number} [step] - The step value for the range. (default: 1)
- * @returns {number[]} An array of numbers from `start` to `end` with the specified `step`.
+ * @param start - The starting number of the range (inclusive).
+ * @param [end] - The end number of the range (exclusive).
+ * @param [step] - The step value for the range. (default: 1)
+ * @returns An array of numbers from `start` to `end` with the specified `step`.
  *
  * @example
  * // Returns [0, 1, 2, 3]

@@ -2,8 +2,8 @@
  * Returns an empty array when the input is a single-element array.
  *
  * @template T - The type of the single element in the array.
- * @param {[T]} arr - The single-element array to process.
- * @returns {[]} An empty array.
+ * @param arr - The single-element array to process.
+ * @returns An empty array.
  *
  * @example
  * const arr = [1];
@@ -16,8 +16,8 @@ export function tail<T>(arr: readonly [T]): [];
  * Returns an empty array when the input is an empty array.
  *
  * @template T - The type of elements in the array.
- * @param {[]} arr - The empty array to process.
- * @returns {[]} An empty array.
+ * @param arr - The empty array to process.
+ * @returns An empty array.
  *
  * @example
  * const arr = [];
@@ -31,8 +31,8 @@ export function tail(arr: readonly []): [];
  *
  * @template T - The type of the first element in the tuple array.
  * @template U - The type of the remaining elements in the tuple array.
- * @param {[T, ...U[]]} arr - The tuple array to process.
- * @returns {U[]} A new array containing all elements of the input array except for the first one.
+ * @param arr - The tuple array to process.
+ * @returns A new array containing all elements of the input array except for the first one.
  *
  * @example
  * const arr = [1, 2, 3];
@@ -49,8 +49,8 @@ export function tail<T, U>(arr: readonly [T, ...U[]]): U[];
  * an empty array is returned.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to get the tail of.
- * @returns {T[]} A new array containing all elements of the input array except for the first one.
+ * @param arr - The array to get the tail of.
+ * @returns A new array containing all elements of the input array except for the first one.
  *
  * @example
  * const arr1 = [1, 2, 3];

@@ -4,9 +4,9 @@
  * This function supports negative indices, which count from the end of the array.
  *
  * @template T
- * @param {readonly T[]} arr - The array to retrieve elements from.
- * @param {number[]} indices - An array of indices specifying the positions of elements to retrieve.
- * @returns {Array<T | undefined>} A new array containing the elements at the specified indices.
+ * @param arr - The array to retrieve elements from.
+ * @param indices - An array of indices specifying the positions of elements to retrieve.
+ * @returns A new array containing the elements at the specified indices.
  *
  * @example
  * const numbers = [10, 20, 30, 40, 50];

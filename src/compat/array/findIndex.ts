@@ -6,9 +6,9 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * Finds the index of the first item in an array that matches the given predicate function.
  *
  * @template T
- * @param {T[]} arr - The array to search through.
- * @param {(item: T, index: number, arr: T[]) => unknown} doesMatch - A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
- * @returns {number} - The index of the first item that matches the predicate, or `undefined` if no match is found.
+ * @param arr - The array to search through.
+ * @param doesMatch - A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
+ * @returns - The index of the first item that matches the predicate, or `undefined` if no match is found.
  *
  * @example
  * // Using a predicate function
@@ -25,9 +25,9 @@ export function findIndex<T>(
  * Finds the index of the first item in an array that matches the given partial object.
  *
  * @template T
- * @param {T[]} arr - The array to search through.
- * @param {Partial<T>} doesMatch - A partial object that specifies the properties to match.
- * @returns {number} - The index of the first item that matches the partial object, or `undefined` if no match is found.
+ * @param arr - The array to search through.
+ * @param doesMatch - A partial object that specifies the properties to match.
+ * @returns - The index of the first item that matches the partial object, or `undefined` if no match is found.
  *
  * @example
  * // Using a partial object
@@ -41,9 +41,9 @@ export function findIndex<T>(arr: readonly T[], doesMatch: Partial<T>): number;
  * Finds the index of the first item in an array that matches a property with a specific value.
  *
  * @template T
- * @param {readonly T[]} arr - The array to search through.
- * @param {[keyof T, unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
- * @returns {number} - The index of the first item that has the specified property value, or `undefined` if no match is found.
+ * @param arr - The array to search through.
+ * @param doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
+ * @returns - The index of the first item that has the specified property value, or `undefined` if no match is found.
  *
  * @example
  * // Using a property-value pair
@@ -57,9 +57,9 @@ export function findIndex<T>(arr: readonly T[], doesMatchProperty: [keyof T, unk
  * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
  *
  * @template T
- * @param {readonly T[]} arr - The array to search through.
- * @param {string} propertyToCheck - The property name to check.
- * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
+ * @param arr - The array to search through.
+ * @param propertyToCheck - The property name to check.
+ * @returns - The index of the first item that has the specified property, or `undefined` if no match is found.
  *
  * @example
  * // Using a property name

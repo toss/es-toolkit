@@ -13,10 +13,10 @@ import { isArguments } from '../predicate/isArguments.ts';
  * if the index is valid and within the bounds of the array or arguments object, even if the array or
  * arguments object is sparse (i.e., not all indexes are defined).
  *
- * @param {object} object - The object to query.
- * @param {PropertyKey | PropertyKey[]} path - The path to check. This can be a single property key,
+ * @param object - The object to query.
+ * @param path - The path to check. This can be a single property key,
  *        an array of property keys, or a string representing a deep path.
- * @returns {boolean} Returns `true` if the path exists in the object, `false` otherwise.
+ * @returns Returns `true` if the path exists in the object, `false` otherwise.
  *
  * @example
  *

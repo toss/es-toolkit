@@ -1,8 +1,8 @@
 /**
  * Converts the first character of string to upper case.
  *
- * @param {string} str - The string that is to be changed
- * @returns {string} - The converted string.
+ * @param str - The string that is to be changed
+ * @returns - The converted string.
  *
  * @example
  * const convertedStr1 = upperCase('fred') // returns 'fred'

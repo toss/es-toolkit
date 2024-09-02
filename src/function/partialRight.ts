@@ -6,9 +6,9 @@
  * Note: This method doesn't set the `length` property of partially applied functions.
  *
  * @template F The type of the function to partially apply.
- * @param {F} func The function to partially apply arguments to.
- * @param {any[]} partialArgs The arguments to be partially applied.
- * @returns {F} Returns the new partially applied function.
+ * @param func The function to partially apply arguments to.
+ * @param partialArgs The arguments to be partially applied.
+ * @returns Returns the new partially applied function.
  *
  * @example
  * function greet(greeting, name) {

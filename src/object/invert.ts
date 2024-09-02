@@ -7,8 +7,8 @@
  *
  * @template K - Type of the keys in the input object (string, number, symbol)
  * @template V - Type of the values in the input object (string, number, symbol)
- * @param {Record<K, V>} obj - The input object whose keys and values are to be inverted
- * @returns {{ [key in V]: K }} - A new object with keys and values inverted
+ * @param obj - The input object whose keys and values are to be inverted
+ * @returns - A new object with keys and values inverted
  *
  * @example
  * invert({ a: 1, b: 2, c: 3 }); // { 1: 'a', 2: 'b', 3: 'c' }

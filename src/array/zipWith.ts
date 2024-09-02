@@ -9,12 +9,12 @@
  * @template V - The type of elements in the third array (optional).
  * @template W - The type of elements in the fourth array (optional).
  * @template R - The type of elements in the resulting array.
- * @param {T[]} arr1 - The first array to zip.
- * @param {U[]} [arr2] - The second array to zip (optional).
- * @param {V[]} [arr3] - The third array to zip (optional).
- * @param {W[]} [arr4] - The fourth array to zip (optional).
- * @param {(...items: T[]) => R} combine - The combiner function that takes corresponding elements from each array and returns a single value.
- * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
+ * @param arr1 - The first array to zip.
+ * @param [arr2] - The second array to zip (optional).
+ * @param [arr3] - The third array to zip (optional).
+ * @param [arr4] - The fourth array to zip (optional).
+ * @param combine - The combiner function that takes corresponding elements from each array and returns a single value.
+ * @returns A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  *
  * @example
  * // Example usage with two arrays:

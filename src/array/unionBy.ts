@@ -3,10 +3,10 @@
  *
  * @template T - The type of elements in the array.
  * @template U - The type of mapped elements.
- * @param {T[]} arr1 - The first array.
- * @param {T[]} arr2 - The second array.
- * @param {(item: T) => U} mapper - The function to map array elements to comparison values.
- * @returns {T[]} A new array containing the union of unique elements from `arr1` and `arr2`, based on the values returned by the mapping function.
+ * @param arr1 - The first array.
+ * @param arr2 - The second array.
+ * @param mapper - The function to map array elements to comparison values.
+ * @returns A new array containing the union of unique elements from `arr1` and `arr2`, based on the values returned by the mapping function.
  *
  * @example
  * // Custom mapping function for numbers (modulo comparison)

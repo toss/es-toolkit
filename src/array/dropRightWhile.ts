@@ -5,11 +5,11 @@
  * predicate function returns false. It then returns a new array with the remaining elements.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array from which to drop elements.
- * @param {(item: T) => boolean} canContinueDropping - A predicate function that determines
+ * @param arr - The array from which to drop elements.
+ * @param canContinueDropping - A predicate function that determines
  * whether to continue dropping elements. The function is called with each element from the end,
  * and dropping continues as long as it returns true.
- * @returns {T[]} A new array with the elements remaining after the predicate returns false.
+ * @returns A new array with the elements remaining after the predicate returns false.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];

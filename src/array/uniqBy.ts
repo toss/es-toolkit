@@ -4,9 +4,9 @@
  *
  * @template T - The type of elements in the array.
  * @template U - The type of mapped elements.
- * @param {T[]} arr - The array to process.
- * @param {(item: T) => U} mapper - The function used to convert the array elements.
- * @returns {T[]} A new array containing only the unique elements from the original array, based on the values returned by the mapper function.
+ * @param arr - The array to process.
+ * @param mapper - The function used to convert the array elements.
+ * @returns A new array containing only the unique elements from the original array, based on the values returned by the mapper function.
  *
  * @example
  * ```ts

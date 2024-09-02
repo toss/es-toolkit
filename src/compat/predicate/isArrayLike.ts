@@ -3,8 +3,8 @@ import { isLength } from '../../predicate/isLength.ts';
 /**
  * Checks if `value` is array-like.
  *
- * @param {unknown} value The value to check.
- * @returns {value is ArrayLike<unknown>} Returns `true` if `value` is array-like, else `false`.
+ * @param value The value to check.
+ * @returns Returns `true` if `value` is array-like, else `false`.
  *
  * @example
  * isArrayLike([1, 2, 3]); // true

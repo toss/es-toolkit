@@ -16,8 +16,8 @@ type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNeste
  * Flattens all depths of a nested array.
  *
  * @template T - The type of elements within the array.
- * @param {T[] | object} value - The value to flatten.
- * @returns {Array<ExtractNestedArrayType<T>> | []} A new array that has been flattened.
+ * @param value - The value to flatten.
+ * @returns A new array that has been flattened.
  *
  * @example
  * const value = flattenDeep([1, [2, [3]], [4, [5, 6]]]);
