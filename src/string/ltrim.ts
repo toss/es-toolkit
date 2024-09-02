@@ -15,7 +15,7 @@
  * const trimmedStr4 = ltrim('xxxtrimmed', 'x') // returns 'trimmed'
  */
 
-import {TrimParameter} from "./trim.ts";
+import { TrimParameter } from './trim.ts';
 
 export const ltrim = (str: string, toTrim: TrimParameter): string => {
   const chars: string[] = str.split('');

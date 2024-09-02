@@ -14,8 +14,8 @@
  * const trimmedStr3 = trim('abcabcabc', 'b') // returns 'acacac'
  * const trimmedStr4 = trim('123-456-789', ['-', '3']) // returns '12456789'
  */
-import {ltrim} from "./ltrim.ts";
-import {rtrim} from "./rtrim.ts";
+import { ltrim } from './ltrim.ts';
+import { rtrim } from './rtrim.ts';
 
 export type TrimParameter = string | string[];
 
