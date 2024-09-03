@@ -7,10 +7,7 @@ JavaScript 언어에 포함된 [Array#flat](https://developer.mozilla.org/en-US/
 ## 인터페이스
 
 ```typescript
-// 중첩된 배열을 재귀적으로 풀어내어 가장 내부의 요소 타입을 추출하는 유틸리티 타입이에요.
-type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNestedArrayType<U> : T;
-
-function flattenDeep<T>(arr: readonly T[]): Array<ExtractNestedArrayType<T>>;
+function flattenDeep<T>(arr: T[]): Array<ExtractNestedArrayType<T>>;
 ```
 
 ### 파라미터

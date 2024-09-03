@@ -7,10 +7,7 @@ It works the same as if you called [Array#flat](https://developer.mozilla.org/en
 ## Signature
 
 ```typescript
-// 중첩된 배열을 재귀적으로 풀어내어 가장 내부의 요소 타입을 추출하는 유틸리티 타입이에요.
-type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNestedArrayType<U> : T;
-
-function flattenDeep<T>(arr: readonly T[]): Array<ExtractNestedArrayType<T>>;
+function flattenDeep<T>(arr: T[]): Array<ExtractNestedArrayType<T>>;
 ```
 
 ### Parameters
