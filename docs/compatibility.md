@@ -229,7 +229,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ✅                    |
 | [isTypedArray](https://lodash.com/docs/4.17.15#isTypedArray)           | ✅                    |
 | [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | ✅                    |
-| [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ❌                    |
+| [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ✅                    |
 | [isWeakSet](https://lodash.com/docs/4.17.15#isWeakSet)                 | ❌                    |
 | [lt](https://lodash.com/docs/4.17.15#lt)                               | ❌                    |
 | [lte](https://lodash.com/docs/4.17.15#lte)                             | ❌                    |
@@ -326,7 +326,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [capitalize](https://lodash.com/docs/4.17.15#capitalize)     | 📝                    |
 | [deburr](https://lodash.com/docs/4.17.15#deburr)             | ✅                    |
 | [endsWith](https://lodash.com/docs/4.17.15#endsWith)         | ✅                    |
-| [escape](https://lodash.com/docs/4.17.15#escape)             | ❌                    |
+| [escape](https://lodash.com/docs/4.17.15#escape)             | ✅                    |
 | [escapeRegExp](https://lodash.com/docs/4.17.15#escapeRegExp) | ❌                    |
 | [kebabCase](https://lodash.com/docs/4.17.15#kebabCase)       | 📝                    |
 | [lowerCase](https://lodash.com/docs/4.17.15#lowerCase)       | 📝                    |
@@ -335,7 +335,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [padEnd](https://lodash.com/docs/4.17.15#padEnd)             | ❌                    |
 | [padStart](https://lodash.com/docs/4.17.15#padStart)         | ❌                    |
 | [parseInt](https://lodash.com/docs/4.17.15#parseInt)         | ❌                    |
-| [repeat](https://lodash.com/docs/4.17.15#repeat)             | ❌                    |
+| [repeat](https://lodash.com/docs/4.17.15#repeat)             | ✅                    |
 | [replace](https://lodash.com/docs/4.17.15#replace)           | ❌                    |
 | [snakeCase](https://lodash.com/docs/4.17.15#snakeCase)       | 📝                    |
 | [split](https://lodash.com/docs/4.17.15#split)               | ❌                    |
@@ -348,7 +348,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [trimEnd](https://lodash.com/docs/4.17.15#trimEnd)           | ❌                    |
 | [trimStart](https://lodash.com/docs/4.17.15#trimStart)       | ❌                    |
 | [truncate](https://lodash.com/docs/4.17.15#truncate)         | ❌                    |
-| [unescape](https://lodash.com/docs/4.17.15#unescape)         | ❌                    |
+| [unescape](https://lodash.com/docs/4.17.15#unescape)         | ✅                    |
 | [upperCase](https://lodash.com/docs/4.17.15#upperCase)       | 📝                    |
 | [upperFirst](https://lodash.com/docs/4.17.15#upperFirst)     | ✅                    |
 | [words](https://lodash.com/docs/4.17.15#words)               | ❌                    |

@@ -230,7 +230,7 @@ chunk([1, 2, 3, 4], 0);
 | [isSymbol](https://lodash.com/docs/4.17.15#isSymbol)                   | ✅        |
 | [isTypedArray](https://lodash.com/docs/4.17.15#isTypedArray)           | ✅        |
 | [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | ✅        |
-| [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ❌        |
+| [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ✅        |
 | [isWeakSet](https://lodash.com/docs/4.17.15#isWeakSet)                 | ❌        |
 | [lt](https://lodash.com/docs/4.17.15#lt)                               | ❌        |
 | [lte](https://lodash.com/docs/4.17.15#lte)                             | ❌        |
@@ -327,7 +327,7 @@ chunk([1, 2, 3, 4], 0);
 | [capitalize](https://lodash.com/docs/4.17.15#capitalize)     | 📝        |
 | [deburr](https://lodash.com/docs/4.17.15#deburr)             | ✅        |
 | [endsWith](https://lodash.com/docs/4.17.15#endsWith)         | ✅        |
-| [escape](https://lodash.com/docs/4.17.15#escape)             | ❌        |
+| [escape](https://lodash.com/docs/4.17.15#escape)             | ✅        |
 | [escapeRegExp](https://lodash.com/docs/4.17.15#escapeRegExp) | ❌        |
 | [kebabCase](https://lodash.com/docs/4.17.15#kebabCase)       | 📝        |
 | [lowerCase](https://lodash.com/docs/4.17.15#lowerCase)       | 📝        |
@@ -349,7 +349,7 @@ chunk([1, 2, 3, 4], 0);
 | [trimEnd](https://lodash.com/docs/4.17.15#trimEnd)           | ❌        |
 | [trimStart](https://lodash.com/docs/4.17.15#trimStart)       | ❌        |
 | [truncate](https://lodash.com/docs/4.17.15#truncate)         | ❌        |
-| [unescape](https://lodash.com/docs/4.17.15#unescape)         | ❌        |
+| [unescape](https://lodash.com/docs/4.17.15#unescape)         | ✅        |
 | [upperCase](https://lodash.com/docs/4.17.15#upperCase)       | 📝        |
 | [upperFirst](https://lodash.com/docs/4.17.15#upperFirst)     | ✅        |
 | [words](https://lodash.com/docs/4.17.15#words)               | ❌        |
