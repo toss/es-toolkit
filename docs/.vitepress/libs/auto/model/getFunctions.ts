@@ -1,5 +1,5 @@
-import { readdir } from 'fs/promises';
-import { resolve, sep } from 'path';
+import { readdir } from 'node:fs/promises';
+import { resolve, sep } from 'node:path';
 
 export async function getFunctions(category: string): Promise<Array<{ name: string; path: string }>> {
   const dirname = import.meta.dirname;
