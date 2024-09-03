@@ -172,6 +172,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'set (compat)', link: '/reference/compat/object/set' },
             { text: 'has (compat)', link: '/reference/compat/object/has' },
             { text: 'property (compat)', link: '/reference/compat/object/property' },
+            { text: 'fromPairs (compat)', link: '/reference/compat/object/fromPairs' },
           ],
         },
         {
