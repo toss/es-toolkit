@@ -1,11 +1,5 @@
 # isWeakMap
 
-주어진 값이 `WeakMap` 인지 확인합니다.
-
-This function tests whether the provided value is an instance of `WeakMap`.
-It returns `true` if the value is a `WeakMap`, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `WeakMap`.
 
 이 함수는 주어진 값이 `WeakMap`의 인스턴스인지 확인해요.
 값이 `WeakMap`이면 `true`, 아니면 `false`를 반환해요.
