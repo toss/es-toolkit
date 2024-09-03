@@ -10,3 +10,5 @@ export { lowerFirst } from './lowerFirst.ts';
 export { deburr } from './deburr.ts';
 export { escape } from './escape.ts';
 export { unescape } from './unescape.ts';
+export { pad } from './pad.ts';
+
