@@ -1,4 +1,5 @@
 import { isWeakMap as isWeakMapToolkit } from '../../predicate/isWeakMap';
+
 /**
  * Checks if the given value is a `WeakMap`.
  *
