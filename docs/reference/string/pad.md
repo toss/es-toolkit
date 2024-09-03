@@ -7,18 +7,18 @@ If the length is less than or equal to the original string's length, or if the p
 ## Signature
 
 ```typescript
-function pad(str: string, length = 0, chars = ' '): string;
+function pad(str: string, length: number, chars = ' '): string;
 ```
 
 ## Parameters
 
 - `str` (`string`): The string to pad.
-- `length` (`number`): The length of the resulting string. Defaults to `0`.
+- `length` (`number`): The length of the resulting string.
 - `char` (`string`): The character to pad the string with. Defaults to `' '`.
 
 ## Returns
 
-Returns the padded string.
+(`string`): Returns the padded string.
 
 ## Example
 

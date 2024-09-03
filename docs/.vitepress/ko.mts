@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 export const ko = defineConfig({
   lang: 'ko',
@@ -238,6 +238,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (호환성)', link: '/ko/reference/compat/string/padStart' },
             { text: 'padEnd (호환성)', link: '/ko/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/ko/reference/string/deburr' },
+            { text: 'pad', link: '/ko/reference/string/pad' },
           ],
         },
         {
