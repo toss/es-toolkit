@@ -1,22 +1,22 @@
 # escape
 
-Converts the characters "&", "<", ">", '"', and "'" in `str` to their corresponding HTML entities. For example, `"<"` becomes `"&lt;"`.
+`"&"`、`"<"`、`">"`、`'"'`、および "\`" のような文字列を、HTMLで安全に使用できるエンティティ文字列に変換します。例えば、`"<"` は `"&lt;"` に変換されます。
 
-## Signature
+## インターフェース
 
 ```typescript
 function escape(str: string): string;
 ```
 
-### Parameters
+### パラメータ
 
-- `str` (`string`): The string to escape.
+- `str` (`string`): HTMLで安全に使用するために変換する文字列。
 
-### Returns
+### 戻り値
 
-(`string`): The escaped string.
+(`string`): 変換された文字列。
 
-## Examples
+## 例
 
 ```typescript
 import { escape } from 'es-toolkit/string';

@@ -1,22 +1,22 @@
 # unescape
 
-Converts the HTML entities `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `str` to their corresponding characters. It is the inverse of [`escape`](./escape.md). 
+`&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#39;` 같은 HTML 엔티티 문자열을 원래 문자열로 바꿔요. [`escape`](./escape.md)의 반대 연산이에요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function unescape(str: string): string;
 ```
 
-### Parameters
+### 파라미터
 
-- `str` (`string`): The string to unescape.
+- `str` (`string`): 변환할 문자열.
 
-### Returns
+### 반환 값
 
-(`string`): The unescaped string.
+(`string`): 변환된 문자열.
 
-## Examples
+## 예시
 
 ```typescript
 import { unescape } from 'es-toolkit/string';

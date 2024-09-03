@@ -1,22 +1,22 @@
 # escape
 
-Converts the characters "&", "<", ">", '"', and "'" in `str` to their corresponding HTML entities. For example, `"<"` becomes `"&lt;"`.
+`"&"`, `"<"`, `">"`, `'"'`, and `"'"` 같은 문자열을 HTML에 쓰기 안전한 엔티티 문자열로 바꿔요. 예를 들어서, `"<"`은 `"&lt;"`가 돼요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function escape(str: string): string;
 ```
 
-### Parameters
+### 파라미터
 
-- `str` (`string`): The string to escape.
+- `str` (`string`): HTML에서 쓰기 안전하게 바꿀 문자열.
 
-### Returns
+### 반환 값
 
-(`string`): The escaped string.
+(`string`): 변환된 문자열.
 
-## Examples
+## 예시
 
 ```typescript
 import { escape } from 'es-toolkit/string';

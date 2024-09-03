@@ -239,6 +239,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (호환성)', link: '/ko/reference/compat/string/padStart' },
             { text: 'padEnd (호환성)', link: '/ko/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/ko/reference/string/deburr' },
+            { text: 'escape', link: '/ko/reference/string/escape' },
+            { text: 'unescape', link: '/ko/reference/string/unescape' },
             { text: 'pad', link: '/ko/reference/string/pad' },
             { text: 'repeat (호환성)', link: '/ko/reference/compat/string/pad' },
           ],

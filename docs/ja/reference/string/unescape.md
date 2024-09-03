@@ -1,22 +1,22 @@
 # unescape
 
-Converts the HTML entities `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `str` to their corresponding characters. It is the inverse of [`escape`](./escape.md). 
+`"&amp;"`、`"&lt;"`、`"&gt;"`、`"&quot;"`、および `"&#39;"` のようなHTMLエンティティ文字列を元の文字列に戻します。これは[escape](./escape.md)の逆の操作です。
 
-## Signature
+## インターフェース
 
 ```typescript
 function unescape(str: string): string;
 ```
 
-### Parameters
+### パラメータ
 
-- `str` (`string`): The string to unescape.
+- `str` (`string`): 変換する文字列。
 
-### Returns
+### 戻り値
 
-(`string`): The unescaped string.
+(`string`): 変換された文字列。
 
-## Examples
+## 例
 
 ```typescript
 import { unescape } from 'es-toolkit/string';
