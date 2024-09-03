@@ -1,6 +1,5 @@
 # isWeakMap
 
-
 이 함수는 주어진 값이 `WeakMap`의 인스턴스인지 확인해요.
 값이 `WeakMap`이면 `true`, 아니면 `false`를 반환해요.
 
