@@ -240,6 +240,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padEnd (호환성)', link: '/ko/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/ko/reference/string/deburr' },
             { text: 'pad', link: '/ko/reference/string/pad' },
+            { text: 'repeat (호환성)', link: '/ko/reference/compat/string/pad' },
           ],
         },
         {

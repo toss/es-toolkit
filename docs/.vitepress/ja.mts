@@ -223,6 +223,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padEnd (compat)', link: '/ja/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/ja/reference/string/deburr' },
             { text: 'pad', link: '/ja/reference/string/pad' },
+            { text: 'repeat (compat)', link: '/ja/reference/compat/string/pad' },
           ],
         },
         {

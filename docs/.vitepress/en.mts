@@ -229,6 +229,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'escape', link: '/reference/string/escape' },
             { text: 'unescape', link: '/reference/string/unescape' },
             { text: 'pad', link: '/reference/string/pad' },
+            { text: 'repeat (compat)', link: '/reference/compat/string/pad' },
           ],
         },
         {

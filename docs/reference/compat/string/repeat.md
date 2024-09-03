@@ -6,9 +6,9 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-It returns the given string repeated a specified number of times.
+Returns the given string repeated a specified number of times.
 
-If the string is empty or the count is 0, it returns an empty string.
+If the string is empty or the count is `0`, it returns an empty string.
 
 
 ## Signature
@@ -16,14 +16,15 @@ If the string is empty or the count is 0, it returns an empty string.
 ```typescript
 function repeat(str: string, n: number): string
 ```
-## Parameters
+
+### Parameters
 
 - `str` (`string`): The string to repeat.
 - `n` (`number`): The number of times you want to repeat.
 
-## Returns
+### Returns
 
-The string repeated for the nth time.
+(`string`): The string repeated for the nth time.
 
 ## Examples
 
