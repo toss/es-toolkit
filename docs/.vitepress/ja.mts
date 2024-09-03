@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 export const ja = defineConfig({
   lang: 'ja',
@@ -221,6 +221,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (compat)', link: '/ja/reference/compat/string/padStart' },
             { text: 'padEnd (compat)', link: '/ja/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/ja/reference/string/deburr' },
+            { text: 'pad', link: '/ja/reference/string/pad' },
           ],
         },
         {

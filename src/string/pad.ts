@@ -2,8 +2,6 @@
  * Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length.
  * If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged.
  *
- *
- *
  * @param {string} str - The string to pad.
  * @param {number} [length] - The length of the resulting string once padded.
  * @param {string} [chars] - The character(s) to use for padding.
@@ -16,6 +14,6 @@
  * const result4 = pad('abc', 2);         // result will be 'abc'
  *
  */
-export const pad = (str: string, length = 0, chars = ' '): string => {
+export function pad(str: string, length: number, chars = ' '): string {
   return str.padStart(Math.floor((length - str.length) / 2) + str.length, chars).padEnd(length, chars);
 };

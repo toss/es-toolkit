@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 export const en = defineConfig({
   lang: 'en',
@@ -198,6 +198,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isObjectLike (compat)', link: '/reference/compat/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
+            { text: 'isWeakMap', link: '/reference/predicate/isWeakMap' },
           ],
         },
         {
