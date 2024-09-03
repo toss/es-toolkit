@@ -211,6 +211,7 @@ function sidebar(): DefaultTheme.Sidebar {
               text: 'isUndefined',
               link: '/ko/reference/predicate/isUndefined',
             },
+            { text: 'isWeakMap', link: '/ko/reference/predicate/isWeakMap' },
           ],
         },
         {
