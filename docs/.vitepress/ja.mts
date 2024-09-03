@@ -196,6 +196,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isObjectLike (compat)', link: '/ja/reference/compat/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/ja/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/ja/reference/predicate/isUndefined' },
+            { text: 'isWeakMap', link: '/ja/reference/predicate/isWeakMap' },
           ],
         },
         {

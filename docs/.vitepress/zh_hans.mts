@@ -195,6 +195,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isObjectLike (兼容性)', link: '/zh_hans/reference/compat/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/zh_hans/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/zh_hans/reference/predicate/isUndefined' },
+            { text: 'isWeakMap', link: '/zh_hans/reference/predicate/isWeakMap' },
           ],
         },
         {
