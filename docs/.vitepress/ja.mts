@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 export const ja = defineConfig({
   lang: 'ja',
@@ -196,6 +196,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isObjectLike (compat)', link: '/ja/reference/compat/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/ja/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/ja/reference/predicate/isUndefined' },
+            { text: 'isWeakMap', link: '/ja/reference/predicate/isWeakMap' },
           ],
         },
         {
@@ -221,6 +222,10 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (compat)', link: '/ja/reference/compat/string/padStart' },
             { text: 'padEnd (compat)', link: '/ja/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/ja/reference/string/deburr' },
+            { text: 'escape', link: '/ja/reference/string/escape' },
+            { text: 'unescape', link: '/ja/reference/string/unescape' },
+            { text: 'pad', link: '/ja/reference/string/pad' },
+            { text: 'repeat (compat)', link: '/ja/reference/compat/string/pad' },
           ],
         },
         {
