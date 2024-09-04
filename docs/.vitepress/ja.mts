@@ -65,6 +65,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'find (compat)', link: '/ja/reference/compat/array/find' },
             { text: 'findIndex (compat)', link: '/ja/reference/compat/array/findIndex' },
             { text: 'flatMap', link: '/ja/reference/array/flatMap' },
+            { text: 'flatMapDeep', link: '/ja/reference/array/flatMapDeep' },
             { text: 'flatten', link: '/ja/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ja/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/ja/reference/array/forEachRight' },
