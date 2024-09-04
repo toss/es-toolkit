@@ -66,11 +66,13 @@ export { isRegExp } from './predicate/isRegExp.ts';
 export { isString } from './predicate/isString.ts';
 export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
+export { isWeakMap } from './predicate/isWeakMap.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
+export { repeat } from './string/repeat.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';

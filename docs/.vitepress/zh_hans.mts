@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const zh_hans = defineConfig({
@@ -196,6 +196,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isObjectLike (兼容性)', link: '/zh_hans/reference/compat/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/zh_hans/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/zh_hans/reference/predicate/isUndefined' },
+            { text: 'isWeakMap', link: '/zh_hans/reference/predicate/isWeakMap' },
           ],
         },
         {
@@ -223,6 +224,10 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (兼容性)', link: '/zh_hans/reference/compat/string/padStart' },
             { text: 'padEnd (兼容性)', link: '/zh_hans/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/zh_hans/reference/string/deburr' },
+            { text: 'escape', link: '/zh_hans/reference/string/escape' },
+            { text: 'unescape', link: '/zh_hans/reference/string/unescape' },
+            { text: 'pad', link: '/zh_hans/reference/string/pad' },
+            { text: 'repeat (兼容性)', link: '/zh_hans/reference/compat/string/repeat' },
           ],
         },
         {
