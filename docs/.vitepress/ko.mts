@@ -71,6 +71,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'find (호환성)', link: '/ko/reference/compat/array/find' },
             { text: 'findIndex (호환성)', link: '/ko/reference/compat/array/findIndex' },
             { text: 'flatMap', link: '/ko/reference/array/flatMap' },
+            { text: 'flatMapDeep', link: '/ko/reference/array/flatMapDeep' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/ko/reference/array/forEachRight' },
