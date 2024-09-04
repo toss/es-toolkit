@@ -6,7 +6,7 @@ export function template(name: string, functionInfo: FunctionInfo[]): string {
     ...functionInfo.map(functionInfo =>
       Container(
         Head(name, functionInfo.description),
-        Signature(functionInfo.signature),
+        Signature(functionInfo.signatures),
         Parameters(functionInfo.parameters),
         Returns(functionInfo.returns),
         Examples(functionInfo.examples)

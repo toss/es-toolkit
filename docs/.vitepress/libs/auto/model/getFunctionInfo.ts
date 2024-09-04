@@ -14,21 +14,27 @@ export type FunctionInfo = {
     description: string;
   };
   examples: string[];
-  signature: string;
+  signatures: string[];
 };
 
 export function getFunctionInfo(source: string): FunctionInfo[] {
   const { functionNodes, types } = getFunctionTypes(source);
   const descriptions = getFunctionDescriptions(source, functionNodes);
+  const lastIndex = descriptions.length - 1;
 
   return descriptions.map((description, index) => {
     const combinedParams = {};
+    const signatures: string[] = [types[index].signature];
 
     for (const key in types[index].params) {
       combinedParams[key] = {
         type: types[index].params[key],
         description: description.parameters[key] || '',
       };
+    }
+
+    if (index === lastIndex) {
+      signatures.push(...types.slice(index + 1).map(type => type.signature));
     }
 
     return {
@@ -39,7 +45,7 @@ export function getFunctionInfo(source: string): FunctionInfo[] {
         description: description.returns,
       },
       examples: description.examples,
-      signature: types[index].signature,
+      signatures,
     };
   });
 }

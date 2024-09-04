@@ -20,13 +20,15 @@ export function Head(title: string, description: string): string {
   return Container(Title(title, 1), description);
 }
 
-export function Signature(signature: string): string {
-  return Container(Title('Signature', 2), CodeBlock(signature, 'typescript'));
+export function Signature(signatures: string[]): string {
+  return Container(Title('Signature', 2), CodeBlock(signatures.join('\n'), 'typescript'));
 }
 
 export function Parameters(parameters: FunctionInfo['parameters']): string {
   const params = Object.entries(parameters);
-  const formattedParams = params.map(([name, { type, description }]) => `\`${name}\` (\`${type}\`): ${description}`);
+  const formattedParams = params.map(
+    ([name, { type, description }]) => `\`${name}\` (\`${type.replace('readonly ', '')}\`): ${description}`
+  );
 
   return Container(Title('Parameters', 3), List(formattedParams));
 }
