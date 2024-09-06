@@ -144,7 +144,7 @@ chunk([1, 2, 3, 4], 0);
 | [sampleSize](https://lodash.com/docs/4.17.15#sampleSize)     | 📝       |
 | [shuffle](https://lodash.com/docs/4.17.15#shuffle)           | 📝       |
 | [size](https://lodash.com/docs/4.17.15#size)                 | ✅       |
-| [some](https://lodash.com/docs/4.17.15#some)                 | ❌       |
+| [some](https://lodash.com/docs/4.17.15#some)                 | ✅       |
 | [sortBy](https://lodash.com/docs/4.17.15#sortBy)             | ❌       |
 
 ### "Date" 工具

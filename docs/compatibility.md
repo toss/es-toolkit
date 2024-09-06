@@ -144,7 +144,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [sampleSize](https://lodash.com/docs/4.17.15#sampleSize)     | 📝                    |
 | [shuffle](https://lodash.com/docs/4.17.15#shuffle)           | 📝                    |
 | [size](https://lodash.com/docs/4.17.15#size)                 | ✅                    |
-| [some](https://lodash.com/docs/4.17.15#some)                 | ❌                    |
+| [some](https://lodash.com/docs/4.17.15#some)                 | ✅                    |
 | [sortBy](https://lodash.com/docs/4.17.15#sortBy)             | ❌                    |
 
 ### "Date" methods
