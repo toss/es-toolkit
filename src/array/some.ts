@@ -27,11 +27,11 @@ export function some<T>(
     return false;
   }
 
-  return arr.some(v => {
+  return arr.some(value => {
     if (typeof predicate === 'function') {
       return arr.some(predicate);
     }
 
-    return v[predicate];
+    return value[predicate];
   });
 }
