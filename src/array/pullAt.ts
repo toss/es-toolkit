@@ -1,5 +1,4 @@
 import { at } from './at.ts';
-import { uniq } from './uniq.ts';
 
 /**
  * Removes elements from an array at specified indices and returns the removed elements.
