@@ -13,33 +13,6 @@ export default {
 
     const srcDirname = resolve(import.meta.dirname, '../../../src');
     const excludeDirnames = ['_internal'];
-
-    const dirnames = [srcDirname];
-
-    while (dirnames.length) {
-      const curDirname = dirnames.pop() as string;
-      const files = readdirSync(curDirname, { withFileTypes: true });
-
-      // For searching subdirectories
-      dirnames.push(
-        ...files
-          .filter(dirent => dirent.isDirectory() && !excludeDirnames.some(exclude => dirent.name === exclude))
-          .map(dirent => resolve(curDirname, dirent.name))
-      );
-
-      const functions = files
-        .filter(dirent => dirent.isFile() && dirent.name.endsWith('.spec.ts'))
-        .map(dirent => dirent.name.replace('.spec.ts', ''));
-
-      for (const fn of functions) {
-        if (curDirname.includes('/compat/')) {
-          status[fn] = '✅';
-        } else if (status[fn] === '❌') {
-          status[fn] = '📝';
-        }
-      }
-    }
-
     const noSupports = [
       'sortedIndex',
       'sortedIndexBy',
@@ -53,6 +26,31 @@ export default {
       'noConflict',
       'runInContext',
     ];
+
+    const dirnames = [srcDirname];
+
+    while (dirnames.length) {
+      const curDirname = dirnames.pop() as string;
+      const files = readdirSync(curDirname, { withFileTypes: true });
+      const subDirnames = files
+        .filter(dirent => dirent.isDirectory() && !excludeDirnames.some(exclude => dirent.name === exclude))
+        .map(dirent => resolve(curDirname, dirent.name));
+
+      // For searching subdirectories
+      dirnames.push(...subDirnames);
+
+      const functions = files
+        .filter(dirent => dirent.isFile() && dirent.name.endsWith('.spec.ts'))
+        .map(dirent => dirent.name.replace('.spec.ts', ''));
+
+      for (const fn of functions) {
+        if (curDirname.includes('/compat/')) {
+          status[fn] = '✅';
+        } else if (status[fn] === '❌') {
+          status[fn] = '📝';
+        }
+      }
+    }
 
     for (const fn of noSupports) {
       status[fn] = 'No support';

@@ -59,7 +59,8 @@ const ids = titles.map(title => title.toLowerCase().replaceAll('"', '').replace(
               item.name
             }}</a>
           </td>
-          <td>{{ item.status.replace('No support', localized[props.lang].noSupport) }}</td>
+          <td v-if="item.status === 'No support'">{{ localized[props.lang].noSupport }}</td>
+          <td v-else>{{ item.status }}</td>
         </tr>
       </tbody>
     </table>
