@@ -117,7 +117,8 @@ export function orderBy<T>(
   }));
 
   return preparedCollection
-    .toSorted((a, b) => {
+    .slice()
+    .sort((a, b) => {
       for (let i = 0; i < preparedCriteria.length; i++) {
         const comparedResult = compareValues(a.criteria[i], b.criteria[i], (orders as string[])[i]);
 
