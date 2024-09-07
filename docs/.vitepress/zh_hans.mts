@@ -197,6 +197,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isTypedArray', link: '/zh_hans/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/zh_hans/reference/predicate/isUndefined' },
             { text: 'isWeakMap', link: '/zh_hans/reference/predicate/isWeakMap' },
+            { text: 'isWeakSet', link: '/zh_hans/reference/predicate/isWeakSet' },
           ],
         },
         {
