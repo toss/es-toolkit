@@ -12,3 +12,5 @@ export { isRegExp } from './isRegExp.ts';
 export { isBoolean } from './isBoolean.ts';
 export { isSymbol } from './isSymbol.ts';
 export { isString } from './isString.ts';
+export { isWeakMap } from './isWeakMap.ts';
+export { isWeakSet } from './isWeakSet.ts';

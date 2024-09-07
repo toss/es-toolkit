@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 export const ko = defineConfig({
   lang: 'ko',
@@ -71,6 +71,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'find (호환성)', link: '/ko/reference/compat/array/find' },
             { text: 'findIndex (호환성)', link: '/ko/reference/compat/array/findIndex' },
             { text: 'flatMap', link: '/ko/reference/array/flatMap' },
+            { text: 'flatMapDeep', link: '/ko/reference/array/flatMapDeep' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/ko/reference/array/forEachRight' },
@@ -211,6 +212,8 @@ function sidebar(): DefaultTheme.Sidebar {
               text: 'isUndefined',
               link: '/ko/reference/predicate/isUndefined',
             },
+            { text: 'isWeakMap', link: '/ko/reference/predicate/isWeakMap' },
+            { text: 'isWeakSet', link: '/ko/reference/predicate/isWeakSet' },
           ],
         },
         {
@@ -238,6 +241,10 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (호환성)', link: '/ko/reference/compat/string/padStart' },
             { text: 'padEnd (호환성)', link: '/ko/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/ko/reference/string/deburr' },
+            { text: 'escape', link: '/ko/reference/string/escape' },
+            { text: 'unescape', link: '/ko/reference/string/unescape' },
+            { text: 'pad', link: '/ko/reference/string/pad' },
+            { text: 'repeat (호환성)', link: '/ko/reference/compat/string/pad' },
           ],
         },
         {

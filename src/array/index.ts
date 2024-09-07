@@ -11,6 +11,7 @@ export { dropRightWhile } from './dropRightWhile.ts';
 export { dropWhile } from './dropWhile.ts';
 export { fill } from './fill.ts';
 export { flatMap } from './flatMap.ts';
+export { flatMapDeep } from './flatMapDeep.ts';
 export { flatten } from './flatten.ts';
 export { flattenDeep } from './flattenDeep.ts';
 export { forEachRight } from './forEachRight.ts';
