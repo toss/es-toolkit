@@ -11,14 +11,12 @@ Convert a two-dimensional array or Map into an object.
 ## Signature
 
 ```typescript
-function fromPairs<T extends string | number | symbol, U>(
-  data: Array<[string | number | symbol, U]> | Map<string | number | symbol, U>
-): { [key in T]: U };
+function fromPairs<T extends string | number | symbol, U>(data: Array<[T, U]> | Map<T, U>): { [key in T]: U };
 ```
 
 ### Parameters
 
-- `data` (`Array<[string | number | symbol, U]> | Map<string | number | symbol, U>`): The two-dimensional array or Map to be converted. Each sub-array in the two-dimensional array should have two elements, with the first element as the key and the second as the value.
+- `data` (`Array<[T, U]> | Map<T, U>`): The two-dimensional array or Map to be converted. Each sub-array in the two-dimensional array should have two elements, with the first element as the key and the second as the value.
 
 ### Returns
 
