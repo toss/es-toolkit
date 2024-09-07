@@ -226,6 +226,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padEnd (兼容性)', link: '/zh_hans/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/zh_hans/reference/string/deburr' },
             { text: 'escape', link: '/zh_hans/reference/string/escape' },
+            { text: 'escapeRegExp', link: '/zh_hans/reference/string/escapeRegExp' },
             { text: 'unescape', link: '/zh_hans/reference/string/unescape' },
             { text: 'pad', link: '/zh_hans/reference/string/pad' },
             { text: 'repeat (兼容性)', link: '/zh_hans/reference/compat/string/repeat' },
