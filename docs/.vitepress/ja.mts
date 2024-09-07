@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 export const ja = defineConfig({
   lang: 'ja',
@@ -65,6 +65,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'find (compat)', link: '/ja/reference/compat/array/find' },
             { text: 'findIndex (compat)', link: '/ja/reference/compat/array/findIndex' },
             { text: 'flatMap', link: '/ja/reference/array/flatMap' },
+            { text: 'flatMapDeep', link: '/ja/reference/array/flatMapDeep' },
             { text: 'flatten', link: '/ja/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ja/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/ja/reference/array/forEachRight' },
@@ -179,6 +180,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (compat)', link: '/ja/reference/compat/predicate/isArguments' },
             { text: 'isArray (compat)', link: '/ja/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (compat)', link: '/ja/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (compat)', link: '/ja/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/ja/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/ja/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/ja/reference/predicate/isFunction' },
@@ -196,6 +198,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isObjectLike (compat)', link: '/ja/reference/compat/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/ja/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/ja/reference/predicate/isUndefined' },
+            { text: 'isWeakMap', link: '/ja/reference/predicate/isWeakMap' },
+            { text: 'isWeakSet', link: '/ja/reference/predicate/isWeakSet' },
           ],
         },
         {
@@ -221,6 +225,10 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (compat)', link: '/ja/reference/compat/string/padStart' },
             { text: 'padEnd (compat)', link: '/ja/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/ja/reference/string/deburr' },
+            { text: 'escape', link: '/ja/reference/string/escape' },
+            { text: 'unescape', link: '/ja/reference/string/unescape' },
+            { text: 'pad', link: '/ja/reference/string/pad' },
+            { text: 'repeat (compat)', link: '/ja/reference/compat/string/pad' },
           ],
         },
         {

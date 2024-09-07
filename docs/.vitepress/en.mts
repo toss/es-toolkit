@@ -1,5 +1,5 @@
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from '../libs/sortByText.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 export const en = defineConfig({
   lang: 'en',
@@ -66,6 +66,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'find (compat)', link: '/reference/compat/array/find' },
             { text: 'findIndex (compat)', link: '/reference/compat/array/findIndex' },
             { text: 'flatMap', link: '/reference/array/flatMap' },
+            { text: 'flatMapDeep', link: '/reference/array/flatMapDeep' },
             { text: 'flatten', link: '/reference/array/flatten' },
             { text: 'flattenDeep', link: '/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/reference/array/forEachRight' },
@@ -180,6 +181,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (compat)', link: '/reference/compat/predicate/isArguments' },
             { text: 'isArray (compat)', link: '/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (compat)', link: '/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (compat)', link: '/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/reference/predicate/isFunction' },
@@ -198,6 +200,8 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isObjectLike (compat)', link: '/reference/compat/predicate/isObjectLike' },
             { text: 'isTypedArray', link: '/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
+            { text: 'isWeakMap', link: '/reference/predicate/isWeakMap' },
+            { text: 'isWeakSet', link: '/reference/predicate/isWeakSet' },
           ],
         },
         {
@@ -225,6 +229,11 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padStart (compat)', link: '/reference/compat/string/padStart' },
             { text: 'padEnd (compat)', link: '/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/reference/string/deburr' },
+            { text: 'escape', link: '/reference/string/escape' },
+            { text: 'escapeRegExp', link: '/reference/string/escapeRegExp' },
+            { text: 'unescape', link: '/reference/string/unescape' },
+            { text: 'pad', link: '/reference/string/pad' },
+            { text: 'repeat (compat)', link: '/reference/compat/string/pad' },
           ],
         },
         {
