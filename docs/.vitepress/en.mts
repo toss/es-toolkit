@@ -200,6 +200,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isTypedArray', link: '/reference/predicate/isTypedArray' },
             { text: 'isUndefined', link: '/reference/predicate/isUndefined' },
             { text: 'isWeakMap', link: '/reference/predicate/isWeakMap' },
+            { text: 'isWeakSet', link: '/reference/predicate/isWeakSet' },
           ],
         },
         {
