@@ -28,8 +28,5 @@ export function isTypedArray(
   | BigInt64Array
   | Float32Array
   | Float64Array {
-    return (
-      ArrayBuffer.isView(x) &&
-      !(x instanceof DataView)
-    )
+  return ArrayBuffer.isView(x) && !(x instanceof DataView);
 }
