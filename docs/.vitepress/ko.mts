@@ -192,6 +192,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (호환성)', link: '/ko/reference/compat/predicate/isArguments' },
             { text: 'isArray (호환성)', link: '/ko/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (호환성)', link: '/ko/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (호환성)', link: '/ko/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/ko/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/ko/reference/predicate/isFunction' },

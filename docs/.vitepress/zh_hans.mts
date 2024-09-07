@@ -178,6 +178,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (兼容性)', link: '/zh_hans/reference/compat/predicate/isArguments' },
             { text: 'isArray (兼容性)', link: '/zh_hans/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (兼容性)', link: '/zh_hans/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (兼容性)', link: '/zh_hans/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/zh_hans/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/zh_hans/reference/predicate/isFunction' },
