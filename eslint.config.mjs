@@ -32,6 +32,8 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
+        parser: tseslint.parser,
+        extraFileExtensions: ['.vue'],
       },
     },
   },
@@ -90,6 +92,7 @@ export default [
       'jsdoc/tag-lines': 'off',
       'jsdoc/no-defaults': 'off',
       'jsdoc/require-jsdoc': 'off',
+      'vue/multi-word-component-names': 'off',
     },
   },
 ];
