@@ -181,6 +181,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (compat)', link: '/reference/compat/predicate/isArguments' },
             { text: 'isArray (compat)', link: '/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (compat)', link: '/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (compat)', link: '/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/reference/predicate/isFunction' },

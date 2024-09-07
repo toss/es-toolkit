@@ -180,6 +180,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (compat)', link: '/ja/reference/compat/predicate/isArguments' },
             { text: 'isArray (compat)', link: '/ja/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (compat)', link: '/ja/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (compat)', link: '/ja/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/ja/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/ja/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/ja/reference/predicate/isFunction' },
