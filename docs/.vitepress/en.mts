@@ -230,6 +230,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padEnd (compat)', link: '/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/reference/string/deburr' },
             { text: 'escape', link: '/reference/string/escape' },
+            { text: 'escapeRegExp', link: '/reference/string/escapeRegExp' },
             { text: 'unescape', link: '/reference/string/unescape' },
             { text: 'pad', link: '/reference/string/pad' },
             { text: 'repeat (compat)', link: '/reference/compat/string/pad' },
