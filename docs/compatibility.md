@@ -230,7 +230,7 @@ Even if a feature is marked "in review," it might already be under review to ens
 | [isTypedArray](https://lodash.com/docs/4.17.15#isTypedArray)           | ✅                    |
 | [isUndefined](https://lodash.com/docs/4.17.15#isUndefined)             | ✅                    |
 | [isWeakMap](https://lodash.com/docs/4.17.15#isWeakMap)                 | ✅                    |
-| [isWeakSet](https://lodash.com/docs/4.17.15#isWeakSet)                 | ❌                    |
+| [isWeakSet](https://lodash.com/docs/4.17.15#isWeakSet)                 | ✅                    |
 | [lt](https://lodash.com/docs/4.17.15#lt)                               | ❌                    |
 | [lte](https://lodash.com/docs/4.17.15#lte)                             | ❌                    |
 | [toArray](https://lodash.com/docs/4.17.15#toArray)                     | ❌                    |
