@@ -170,6 +170,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'set (兼容性)', link: '/zh_hans/reference/compat/object/set' },
             { text: 'has (兼容性)', link: '/zh_hans/reference/compat/object/has' },
             { text: 'property (兼容性)', link: '/zh_hans/reference/compat/object/property' },
+            { text: 'fromPairs (兼容性)', link: '/zh_hans/reference/compat/object/fromPairs' },
           ],
         },
         {
