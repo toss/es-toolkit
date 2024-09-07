@@ -1,51 +1,46 @@
-import { doc } from "@deno/doc";
-import { groupBy } from "@es-toolkit/es-toolkit";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { toDocumentationItem } from "./operations/toDocumentationItem.ts";
-import { createDocumentationFile } from "./operations/createDocumentationFile/createDocumentationFile.ts";
+import { doc } from '@deno/doc';
+import { groupBy } from '@es-toolkit/es-toolkit';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { toDocumentationItem } from './operations/toDocumentationItem.ts';
+import { render as renderEN } from './operations/createDocumentationFile/en.ts';
+import { render as renderKO } from './operations/createDocumentationFile/ko.ts';
+import { render as renderZH } from './operations/createDocumentationFile/zh_hans.ts';
+import { render as renderJA } from './operations/createDocumentationFile/ja.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const basePath = path.resolve(__dirname, '..', '..', 'src');
+const docsRoot = path.resolve(__dirname, '..', '..', 'docs');
+
 async function run() {
-  // const modulePaths = {
-  //   array: await doc(`file:${path.resolve(__dirname, '..', '..', 'src', 'array', 'index.ts')}`),
-  //   array: await doc(`file:${path.resolve(__dirname, '..', '..', 'src', 'array', 'index.ts')}`),
-  // };
+  const result = await doc(`file:${path.join(basePath, 'index.ts')}`);
 
-  const basePath = path.resolve(__dirname, "..", "..", "src");
-  const result = await doc(
-    `file:${path.join(basePath, "index.ts")}`,
-  );
-
-  for (
-    const [name, entries] of Object.entries(groupBy(result, (x) => x.name))
-  ) {
-    if (name.trim() === "") {
+  for (const [name, entries] of Object.entries(groupBy(result, x => x.name))) {
+    if (name.trim() === '') {
       continue;
     }
 
     const filePath = fileURLToPath(entries[0].location.filename);
     const relativePath = path.relative(basePath, filePath);
+    const docPath = relativePath.replace(/.ts$/g, '.md');
 
-    console.log(relativePath);
+    const enPath = path.join(docsRoot, 'reference', docPath);
+    const hasEnDoc = await Deno.stat(enPath).catch(() => false);
 
-    // const filePath = path.resolve(__dirname, "..", "..", "src", "index.ts");
-    // try {
-    //   await Deno.stat(filePath);
-    //   console.log(`File exists: ${filePath}`);
-    // } catch (error) {
-    //   if (error instanceof Deno.errors.NotFound) {
-    //     console.log(`File does not exist: ${filePath}`);
-    //   } else {
-    //     console.error(`Error checking file: ${error}`);
-    //   }
-    // }
+    if (!hasEnDoc) {
+      // const item = toDocumentationItem(name, entries);
+      // console.log(item);
+    }
 
-    const item = toDocumentationItem(name, entries);
-    // const file = createDocumentationFile(item);
+    const koPath = path.join(docsRoot, 'ko', 'reference', docPath);
+    console.log(koPath);
+    const hasKoDoc = await Deno.stat(koPath).catch(() => false);
 
-    // console.log(file);
+    if (!hasKoDoc) {
+      const item = toDocumentationItem(name, entries);
+      console.log(item);
+    }
   }
 }
 
