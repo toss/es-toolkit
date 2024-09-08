@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { castArray as castArrayToolkit } from 'es-toolkit';
+import { castArray as castArrayToolkit } from 'es-toolkit/compat';
 import { castArray as castArrayLodash } from 'lodash';
 
 describe('castArray function performance comparison', () => {
