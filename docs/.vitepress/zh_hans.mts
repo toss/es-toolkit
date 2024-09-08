@@ -118,6 +118,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '函数工具',
           items: [
+            { text: 'attempt', link: '/zh_hans/reference/function/attempt' },
             { text: 'before', link: '/zh_hans/reference/function/before' },
             { text: 'after', link: '/zh_hans/reference/function/after' },
             { text: 'debounce', link: '/zh_hans/reference/function/debounce' },

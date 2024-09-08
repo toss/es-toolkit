@@ -121,6 +121,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Function Utilities',
           items: [
+            { text: 'attempt', link: '/reference/function/attempt' },
             { text: 'before', link: '/reference/function/before' },
             { text: 'after', link: '/reference/function/after' },
             { text: 'debounce', link: '/reference/function/debounce' },

@@ -12,3 +12,4 @@ export { partial } from './partial.ts';
 export { partialRight } from './partialRight.ts';
 export { rest } from './rest.ts';
 export { spread } from './spread.ts';
+export { attempt } from './attempt.ts';
