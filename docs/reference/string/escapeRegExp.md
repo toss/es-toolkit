@@ -1,6 +1,6 @@
 # escapeRegExp
 
-Escapes the RegExp special characters "^", "$", "\\", ".", "\*", "+", "?", "(", ")", "[", "]", "{", "}", and "|" in `str`.
+Escapes the RegExp special characters `"^"`, `"$"`, `"\\"`, `"."`, `"\*"`, `"+"`, `"?"`, `"("`, `")"`, `"["`, `"]"`, `"{"`, `"}"`, and `"|"` in `str`.
 
 ## Signature
 

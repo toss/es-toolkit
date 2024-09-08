@@ -44,6 +44,7 @@ export { ary } from './function/ary.ts';
 export { bind } from './function/bind.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
+export { attempt } from './function/attempt.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
@@ -53,6 +54,7 @@ export { mapKeys } from './object/mapKeys.ts';
 export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
+export { fromPairs } from './object/fromPairs.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';

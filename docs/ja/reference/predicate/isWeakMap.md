@@ -20,7 +20,6 @@ function isWeakMap(value: unknown): value is WeakMap<WeakKey, any>;
 
 (`value is WeakMap<WeakKey, any>`): 値が `WeakMap` の場合は `true`、それ以外の場合は `false`。
 
-
 ## 例
 
 ```typescript

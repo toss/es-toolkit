@@ -16,7 +16,7 @@ function isRegExp(value: unknown): value is RegExp;
 
 ### Returns
 
-- (`value is RegExp`): True if the value is a RegExp, otherwise false.
+(`value is RegExp`): True if the value is a RegExp, otherwise false.
 
 ## Examples
 
