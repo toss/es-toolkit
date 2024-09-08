@@ -1,5 +1,5 @@
-import { isIndex } from "../_internal/isIndex.ts";
-import { toPath } from "../_internal/toPath.ts";
+import { isIndex } from '../_internal/isIndex.ts';
+import { toPath } from '../_internal/toPath.ts';
 
 /**
  * Sets the value at the specified path of the given object. If any part of the path does not exist, it will be created.
@@ -28,11 +28,7 @@ import { toPath } from "../_internal/toPath.ts";
  * set(obj, 'a.b.c', 4);
  * console.log(obj); // { a: { b: { c: 4 } } }
  */
-export function set<T>(
-  obj: object,
-  path: PropertyKey | readonly PropertyKey[],
-  value: unknown,
-): T;
+export function set<T>(obj: object, path: PropertyKey | readonly PropertyKey[], value: unknown): T;
 /**
  * Sets the value at the specified path of the given object. If any part of the path does not exist, it will be created.
  *
@@ -60,16 +56,8 @@ export function set<T>(
  * set(obj, 'a.b.c', 4);
  * console.log(obj); // { a: { b: { c: 4 } } }
  */
-export function set<T extends object>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  value: unknown,
-): T {
-  const resolvedPath = Array.isArray(path)
-    ? path
-    : typeof path === "string"
-    ? toPath(path)
-    : [path];
+export function set<T extends object>(obj: T, path: PropertyKey | readonly PropertyKey[], value: unknown): T {
+  const resolvedPath = Array.isArray(path) ? path : typeof path === 'string' ? toPath(path) : [path];
 
   let current: any = obj;
 

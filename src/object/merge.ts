@@ -1,4 +1,4 @@
-import { isObjectLike } from "../compat/predicate/isObjectLike.ts";
+import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
 
 /**
  * Merges the properties of the source object into the target object.

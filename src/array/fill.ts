@@ -52,11 +52,7 @@ export function fill<T>(array: unknown[], value: T): T[];
  * const result = fill(array, '*', -2, -1);
  * // => [1, '*', 3]
  */
-export function fill<T, U>(
-  array: Array<T | U>,
-  value: U,
-  start: number,
-): Array<T | U>;
+export function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
 /**
  * Fills elements of an array with a specified value from the start position up to, but not including, the end position.
  *
@@ -85,12 +81,7 @@ export function fill<T, U>(
  * const result = fill(array, '*', -2, -1);
  * // => [1, '*', 3]
  */
-export function fill<T, U>(
-  array: Array<T | U>,
-  value: U,
-  start: number,
-  end: number,
-): Array<T | U>;
+export function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
 /**
  * Fills elements of an array with a specified value from the start position up to, but not including, the end position.
  *
@@ -119,12 +110,7 @@ export function fill<T, U>(
  * const result = fill(array, '*', -2, -1);
  * // => [1, '*', 3]
  */
-export function fill<T, U>(
-  array: Array<T | U>,
-  value: U,
-  start = 0,
-  end = array.length,
-): Array<T | U> {
+export function fill<T, U>(array: Array<T | U>, value: U, start = 0, end = array.length): Array<T | U> {
   const length = array.length;
   const finalStart = Math.max(start >= 0 ? start : length + start, 0);
   const finalEnd = Math.min(end >= 0 ? end : length + end, length);

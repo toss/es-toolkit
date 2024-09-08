@@ -1,5 +1,5 @@
-import { cloneDeep } from "./cloneDeep.ts";
-import { merge } from "./merge.ts";
+import { cloneDeep } from './cloneDeep.ts';
+import { merge } from './merge.ts';
 
 /**
  * Merges the properties of the source object into a deep clone of the target object.

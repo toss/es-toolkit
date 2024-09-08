@@ -8,7 +8,6 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Flattens an array up to the specified depth.
 
-
 ## Signature
 
 ```typescript

@@ -1,4 +1,4 @@
-import { isObjectLike } from "../compat/predicate/isObjectLike.ts";
+import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
 
 /**
  * Merges the properties of the source object into the target object.
@@ -51,13 +51,7 @@ import { isObjectLike } from "../compat/predicate/isObjectLike.ts";
 export function mergeWith<T, S>(
   target: T,
   source: S,
-  merge: (
-    targetValue: any,
-    sourceValue: any,
-    key: string,
-    target: T,
-    source: S,
-  ) => any,
+  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
 ): T & S;
 /**
  * Merges the properties of the source object into the target object.
@@ -110,13 +104,7 @@ export function mergeWith<T, S>(
 export function mergeWith(
   target: any,
   source: any,
-  merge: (
-    targetValue: any,
-    sourceValue: any,
-    key: string,
-    target: any,
-    source: any,
-  ) => any,
+  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any) => any
 ) {
   const sourceKeys = Object.keys(source);
 

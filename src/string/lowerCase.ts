@@ -1,4 +1,4 @@
-import { getWords } from "./_internal/getWords.ts";
+import { getWords } from './_internal/getWords.ts';
 
 /**
  * Converts a string to lower case.
@@ -16,5 +16,5 @@ import { getWords } from "./_internal/getWords.ts";
  */
 export function lowerCase(str: string): string {
   const words = getWords(str);
-  return words.map((word) => word.toLowerCase()).join(" ");
+  return words.map(word => word.toLowerCase()).join(' ');
 }

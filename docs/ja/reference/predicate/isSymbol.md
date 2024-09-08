@@ -7,7 +7,7 @@
 ## インターフェース
 
 ```typescript
-function isSymbol(value: unknown): value is symbol
+function isSymbol(value: unknown): value is symbol;
 ```
 
 ### パラメータ

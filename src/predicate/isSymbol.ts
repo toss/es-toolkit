@@ -22,5 +22,5 @@
  * isSymbol([1, 2, 3]); // false
  */
 export function isSymbol(value: unknown): value is symbol {
-  return typeof value === "symbol";
+  return typeof value === 'symbol';
 }

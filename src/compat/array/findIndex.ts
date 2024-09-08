@@ -1,6 +1,6 @@
-import { property } from "../object/property.ts";
-import { matches } from "../predicate/matches.ts";
-import { matchesProperty } from "../predicate/matchesProperty.ts";
+import { property } from '../object/property.ts';
+import { matches } from '../predicate/matches.ts';
+import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
  * Finds the index of the first item in an array that matches the given predicate function.
@@ -18,7 +18,7 @@ import { matchesProperty } from "../predicate/matchesProperty.ts";
  */
 export function findIndex<T>(
   arr: readonly T[],
-  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown,
+  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown
 ): number;
 
 /**
@@ -51,10 +51,7 @@ export function findIndex<T>(arr: readonly T[], doesMatch: Partial<T>): number;
  * const result = findIndex(items, ['name', 'Alice']);
  * console.log(result); // 0
  */
-export function findIndex<T>(
-  arr: readonly T[],
-  doesMatchProperty: [keyof T, unknown],
-): number;
+export function findIndex<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknown]): number;
 
 /**
  * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
@@ -70,10 +67,7 @@ export function findIndex<T>(
  * const result = findIndex(items, 'name');
  * console.log(result); // 0
  */
-export function findIndex<T>(
-  arr: readonly T[],
-  propertyToCheck: string,
-): number;
+export function findIndex<T>(arr: readonly T[], propertyToCheck: string): number;
 
 /**
  * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
@@ -91,16 +85,13 @@ export function findIndex<T>(
  */
 export function findIndex<T>(
   source: readonly T[],
-  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [
-    keyof T,
-    unknown,
-  ] | string,
+  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string
 ): number {
   switch (typeof doesMatch) {
-    case "function": {
+    case 'function': {
       return source.findIndex(doesMatch);
     }
-    case "object": {
+    case 'object': {
       if (Array.isArray(doesMatch) && doesMatch.length === 2) {
         const key = doesMatch[0];
         const value = doesMatch[1];
@@ -110,7 +101,7 @@ export function findIndex<T>(
         return source.findIndex(matches(doesMatch));
       }
     }
-    case "string": {
+    case 'string': {
       return source.findIndex(property(doesMatch));
     }
   }

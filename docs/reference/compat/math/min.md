@@ -8,7 +8,6 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Finds the element in an array that has the minimum value.
 
-
 ## Signature
 
 ```typescript

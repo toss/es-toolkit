@@ -1,5 +1,5 @@
-import { noop } from "../../function/noop.ts";
-import { mergeWith } from "./mergeWith.ts";
+import { noop } from '../../function/noop.ts';
+import { mergeWith } from './mergeWith.ts';
 
 /**
  * Merges the properties of one or more source objects into the target object.
@@ -85,11 +85,7 @@ export function merge<O, S>(object: O, source: S): O & S;
  * console.log(result);
  * // Output: { a: [1, 2, 3] }
  */
-export function merge<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-): O & S1 & S2;
+export function merge<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
 
 /**
  * Merges the properties of one or more source objects into the target object.
@@ -135,12 +131,7 @@ export function merge<O, S1, S2>(
  * console.log(result);
  * // Output: { a: [1, 2, 3] }
  */
-export function merge<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-): O & S1 & S2 & S3;
+export function merge<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
 
 /**
  * Merges the properties of one or more source objects into the target object.
@@ -193,7 +184,7 @@ export function merge<O, S1, S2, S3, S4>(
   source1: S1,
   source2: S2,
   source3: S3,
-  source4: S4,
+  source4: S4
 ): O & S1 & S2 & S3;
 
 /**

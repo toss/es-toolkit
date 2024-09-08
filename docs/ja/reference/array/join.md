@@ -2,7 +2,6 @@
 
 配列の要素を文字列に結合します。
 
-
 ## インターフェース
 
 ```typescript
@@ -20,10 +19,13 @@ function join<T>(array: T[], separator: string): string;
 
 ## 例
 
-```typescript
+````typescript
 ```typescript
 const arr = ["a","b","c"];
 const result = join(arr, "~");
 console.log(result); // Output: "a~b~c"
+````
+
 ```
+
 ```

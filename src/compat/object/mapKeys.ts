@@ -1,6 +1,6 @@
-import { mapKeys as mapKeysToolkit } from "../../object/mapKeys.ts";
-import { identity } from "../_internal/identity.ts";
-import { property } from "./property.ts";
+import { mapKeys as mapKeysToolkit } from '../../object/mapKeys.ts';
+import { identity } from '../_internal/identity.ts';
+import { property } from './property.ts';
 
 /**
  * Creates a new object with the same values as the given object, but with keys generated
@@ -21,7 +21,7 @@ import { property } from "./property.ts";
  */
 export function mapKeys<T extends object>(
   object: T,
-  getNewKey?: PropertyKey | readonly PropertyKey[],
+  getNewKey?: PropertyKey | readonly PropertyKey[]
 ): Record<PropertyKey, T[keyof T]>;
 
 /**
@@ -42,13 +42,9 @@ export function mapKeys<T extends object>(
  * const result = mapKeys(obj, (value, key) => key + value);
  * console.log(result); // { a1: 1, b2: 2 }
  */
-export function mapKeys<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends PropertyKey,
->(
+export function mapKeys<T extends object, K1 extends keyof T, K2 extends PropertyKey>(
   object: T,
-  getNewKey?: (value: T[K1], key: K1, object: T) => K2,
+  getNewKey?: (value: T[K1], key: K1, object: T) => K2
 ): Record<K2, T[K1]>;
 
 /**
@@ -69,28 +65,20 @@ export function mapKeys<
  * const result = mapKeys(obj, (value, key) => key + value);
  * console.log(result); // { a1: 1, b2: 2 }
  */
-export function mapKeys<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends PropertyKey,
->(
+export function mapKeys<T extends object, K1 extends keyof T, K2 extends PropertyKey>(
   object: T,
-  getNewKey?:
-    | PropertyKey
-    | readonly PropertyKey[]
-    | ((value: T[K1], key: K1, object: T) => K2),
+  getNewKey?: PropertyKey | readonly PropertyKey[] | ((value: T[K1], key: K1, object: T) => K2)
 ): Record<K2, T[K1]> {
-  getNewKey = getNewKey ??
-    (identity as (value: T[K1], key: K1, object: T) => K2);
+  getNewKey = getNewKey ?? (identity as (value: T[K1], key: K1, object: T) => K2);
 
   switch (typeof getNewKey) {
-    case "string":
-    case "symbol":
-    case "number":
-    case "object": {
+    case 'string':
+    case 'symbol':
+    case 'number':
+    case 'object': {
       return mapKeysToolkit(object, property(getNewKey));
     }
-    case "function": {
+    case 'function': {
       return mapKeysToolkit(object, getNewKey);
     }
   }

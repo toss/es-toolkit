@@ -13,7 +13,7 @@
 ## インターフェース
 
 ```typescript
-function repeat(str: string, n: number): string
+function repeat(str: string, n: number): string;
 ```
 
 ### パラメータ

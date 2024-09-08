@@ -36,10 +36,7 @@ export function zip<T>(arr1: readonly T[]): Array<[T]>;
  * const result = zip(arr1, arr2);
  * // result will be [[1, 'a'], [2, 'b'], [3, 'c']]
  */
-export function zip<T, U>(
-  arr1: readonly T[],
-  arr2: readonly U[],
-): Array<[T, U]>;
+export function zip<T, U>(arr1: readonly T[], arr2: readonly U[]): Array<[T, U]>;
 
 /**
  * Combines multiple arrays into a single array of tuples.
@@ -62,11 +59,7 @@ export function zip<T, U>(
  * const result = zip(arr1, arr2, arr3);
  * // result will be [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
  */
-export function zip<T, U, V>(
-  arr1: readonly T[],
-  arr2: readonly U[],
-  arr3: readonly V[],
-): Array<[T, U, V]>;
+export function zip<T, U, V>(arr1: readonly T[], arr2: readonly U[], arr3: readonly V[]): Array<[T, U, V]>;
 
 /**
  * Combines multiple arrays into a single array of tuples.
@@ -95,7 +88,7 @@ export function zip<T, U, V, W>(
   arr1: readonly T[],
   arr2: readonly U[],
   arr3: readonly V[],
-  arr4: readonly W[],
+  arr4: readonly W[]
 ): Array<[T, U, V, W]>;
 
 /**
@@ -120,7 +113,7 @@ export function zip<T, U, V, W>(
 export function zip<T>(...arrs: Array<readonly T[]>): T[][] {
   const result: T[][] = [];
 
-  const maxIndex = Math.max(...arrs.map((x) => x.length));
+  const maxIndex = Math.max(...arrs.map(x => x.length));
 
   for (let i = 0; i < maxIndex; i++) {
     const element: T[] = [];

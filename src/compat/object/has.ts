@@ -1,7 +1,7 @@
-import { isDeepKey } from "../_internal/isDeepKey.ts";
-import { isIndex } from "../_internal/isIndex.ts";
-import { toPath } from "../_internal/toPath.ts";
-import { isArguments } from "../predicate/isArguments.ts";
+import { isDeepKey } from '../_internal/isDeepKey.ts';
+import { isIndex } from '../_internal/isIndex.ts';
+import { toPath } from '../_internal/toPath.ts';
+import { isArguments } from '../predicate/isArguments.ts';
 
 /**
  * Checks if a given path exists within an object.
@@ -32,10 +32,7 @@ import { isArguments } from "../predicate/isArguments.ts";
  * has([1, 2, 3], 2); // true
  * has([1, 2, 3], 5); // false
  */
-export function has(
-  object: unknown,
-  path: PropertyKey | readonly PropertyKey[],
-): boolean;
+export function has(object: unknown, path: PropertyKey | readonly PropertyKey[]): boolean;
 
 /**
  * Checks if a given path exists within an object.
@@ -66,17 +63,12 @@ export function has(
  * has([1, 2, 3], 2); // true
  * has([1, 2, 3], 5); // false
  */
-export function has(
-  object: any,
-  path: PropertyKey | readonly PropertyKey[],
-): boolean {
+export function has(object: any, path: PropertyKey | readonly PropertyKey[]): boolean {
   let resolvedPath;
 
   if (Array.isArray(path)) {
     resolvedPath = path;
-  } else if (
-    typeof path === "string" && isDeepKey(path) && object?.[path] == null
-  ) {
+  } else if (typeof path === 'string' && isDeepKey(path) && object?.[path] == null) {
     resolvedPath = toPath(path);
   } else {
     resolvedPath = [path];
@@ -92,11 +84,8 @@ export function has(
     const key = resolvedPath[i];
 
     // Check if the current key is a direct property of the current object
-    if (
-      current == null || !Object.prototype.hasOwnProperty.call(current, key)
-    ) {
-      const isSparseIndex = (Array.isArray(current) || isArguments(current)) &&
-        isIndex(key) && key < current.length;
+    if (current == null || !Object.prototype.hasOwnProperty.call(current, key)) {
+      const isSparseIndex = (Array.isArray(current) || isArguments(current)) && isIndex(key) && key < current.length;
 
       if (!isSparseIndex) {
         return false;

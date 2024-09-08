@@ -75,14 +75,11 @@ export function memoize<F extends (...args: any) => any>(
   options: {
     cache?: MemoizeCache<any, ReturnType<F>>;
     getCacheKey?: (args: Parameters<F>[0]) => unknown;
-  } = {},
+  } = {}
 ): F & { cache: MemoizeCache<any, ReturnType<F>> } {
   const { cache = new Map<unknown, ReturnType<F>>(), getCacheKey } = options;
 
-  const memoizedFn = function (
-    this: unknown,
-    arg: Parameters<F>[0],
-  ): ReturnType<F> {
+  const memoizedFn = function (this: unknown, arg: Parameters<F>[0]): ReturnType<F> {
     const key = getCacheKey ? getCacheKey(arg) : arg;
 
     if (cache.has(key)) {

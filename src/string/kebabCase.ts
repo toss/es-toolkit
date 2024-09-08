@@ -1,4 +1,4 @@
-import { getWords } from "./_internal/getWords.ts";
+import { getWords } from './_internal/getWords.ts';
 
 /**
  * Converts a string to kebab case.
@@ -17,5 +17,5 @@ import { getWords } from "./_internal/getWords.ts";
 
 export function kebabCase(str: string): string {
   const words = getWords(str);
-  return words.map((word) => word.toLowerCase()).join("-");
+  return words.map(word => word.toLowerCase()).join('-');
 }

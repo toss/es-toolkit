@@ -4,7 +4,6 @@
 
 이 함수는 TypeScript에서 타입 술어로도 사용될 수 있으며, 인수의 타입을 `symbol`로 좁혀요.
 
-
 ## 인터페이스
 
 ```typescript

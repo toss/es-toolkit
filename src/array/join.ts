@@ -11,6 +11,6 @@
  * const result = join(arr, "~");
  * console.log(result); // Output: "a~b~c"
  */
-export function join<T>(array: readonly T[], separator = ","): string {
+export function join<T>(array: readonly T[], separator = ','): string {
   return array.join(separator);
 }

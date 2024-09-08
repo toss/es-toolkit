@@ -1,4 +1,4 @@
-import { flatten } from "./flatten.ts";
+import { flatten } from './flatten.ts';
 
 /**
  * Flattens an array up to the specified depth.
@@ -18,7 +18,7 @@ import { flatten } from "./flatten.ts";
  */
 export function flattenDepth<T, D extends number = 1>(
   value: T[] | object,
-  depth = 1 as D,
+  depth = 1 as D
 ): Array<FlatArray<T[], D>> | [] {
   return flatten(value, depth);
 }

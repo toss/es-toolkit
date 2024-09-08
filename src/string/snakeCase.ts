@@ -1,4 +1,4 @@
-import { getWords } from "./_internal/getWords.ts";
+import { getWords } from './_internal/getWords.ts';
 
 /**
  * Converts a string to snake case.
@@ -17,5 +17,5 @@ import { getWords } from "./_internal/getWords.ts";
 
 export function snakeCase(str: string): string {
   const words = getWords(str);
-  return words.map((word) => word.toLowerCase()).join("_");
+  return words.map(word => word.toLowerCase()).join('_');
 }

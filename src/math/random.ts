@@ -48,9 +48,7 @@ export function random(minimum: number, maximum?: number): number {
   }
 
   if (minimum >= maximum) {
-    throw new Error(
-      "Invalid input: The maximum value must be greater than the minimum value.",
-    );
+    throw new Error('Invalid input: The maximum value must be greater than the minimum value.');
   }
 
   return Math.random() * (maximum - minimum) + minimum;

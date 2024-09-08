@@ -1,6 +1,6 @@
-import { mapValues as mapValuesToolkit } from "../../object/mapValues.ts";
-import { identity } from "../_internal/identity.ts";
-import { property } from "./property.ts";
+import { mapValues as mapValuesToolkit } from '../../object/mapValues.ts';
+import { identity } from '../_internal/identity.ts';
+import { property } from './property.ts';
 
 /**
  * Creates a new object with the same keys as the given object, but with values generated
@@ -22,7 +22,7 @@ import { property } from "./property.ts";
  */
 export function mapValues<T extends object, K extends keyof T, V>(
   object: T,
-  getNewValue?: PropertyKey | readonly PropertyKey[] | null | undefined,
+  getNewValue?: PropertyKey | readonly PropertyKey[] | null | undefined
 ): Record<K, V>;
 
 /**
@@ -45,7 +45,7 @@ export function mapValues<T extends object, K extends keyof T, V>(
  */
 export function mapValues<T extends object, K extends keyof T, V>(
   object: T,
-  getNewValue: (value: T[K], key: K, object: T) => V,
+  getNewValue: (value: T[K], key: K, object: T) => V
 ): Record<K, V>;
 
 /**
@@ -69,24 +69,18 @@ export function mapValues<T extends object, K extends keyof T, V>(
  */
 export function mapValues<T extends object, K extends keyof T, V>(
   object: T,
-  getNewValue?:
-    | PropertyKey
-    | readonly PropertyKey[]
-    | null
-    | undefined
-    | ((value: T[K], key: K, object: T) => V),
+  getNewValue?: PropertyKey | readonly PropertyKey[] | null | undefined | ((value: T[K], key: K, object: T) => V)
 ): Record<K, V> {
-  getNewValue = getNewValue ??
-    (identity as (value: T[K], key: K, object: T) => V);
+  getNewValue = getNewValue ?? (identity as (value: T[K], key: K, object: T) => V);
 
   switch (typeof getNewValue) {
-    case "string":
-    case "symbol":
-    case "number":
-    case "object": {
+    case 'string':
+    case 'symbol':
+    case 'number':
+    case 'object': {
       return mapValuesToolkit(object, property(getNewValue));
     }
-    case "function": {
+    case 'function': {
       return mapValuesToolkit(object, getNewValue);
     }
   }

@@ -2,7 +2,6 @@
 
 文字列の最初の文字を大文字に変更します。
 
-
 ## インターフェース
 
 ```typescript
@@ -20,7 +19,7 @@ function upperFirst(str: string): string;
 ## 例
 
 ```typescript
-const convertedStr1 = upperCase('fred') // returns 'fred'
-const convertedStr2 = upperCase('Fred') // returns 'Fred'
-const convertedStr3 = upperCase('FRED') // returns 'FRED'
+const convertedStr1 = upperCase('fred'); // returns 'fred'
+const convertedStr2 = upperCase('Fred'); // returns 'Fred'
+const convertedStr3 = upperCase('FRED'); // returns 'FRED'
 ```

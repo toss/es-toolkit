@@ -1,4 +1,4 @@
-import { fill as fillToolkit } from "../../array/fill.ts";
+import { fill as fillToolkit } from '../../array/fill.ts';
 
 /**
  * Fills the whole array with a specified value.
@@ -54,11 +54,7 @@ export function fill<T>(array: unknown[], value?: T): T[];
  * const result = fill(array, '*', -2, -1);
  * // => [1, '*', 3]
  */
-export function fill<T, U, S>(
-  array: Array<T | U>,
-  value: U,
-  start: S,
-): Array<T | U>;
+export function fill<T, U, S>(array: Array<T | U>, value: U, start: S): Array<T | U>;
 /**
  * Fills elements of an array with a specified value from the start position up to, but not including, the end position.
  *
@@ -87,12 +83,7 @@ export function fill<T, U, S>(
  * const result = fill(array, '*', -2, -1);
  * // => [1, '*', 3]
  */
-export function fill<T, U, S, V>(
-  array: Array<T | U>,
-  value: U,
-  start: S,
-  end: V,
-): Array<T | U>;
+export function fill<T, U, S, V>(array: Array<T | U>, value: U, start: S, end: V): Array<T | U>;
 /**
  * Fills elements of an array with a specified value from the start position up to, but not including, the end position.
  *
@@ -121,12 +112,7 @@ export function fill<T, U, S, V>(
  * const result = fill(array, '*', -2, -1);
  * // => [1, '*', 3]
  */
-export function fill<T, U>(
-  array: Array<T | U>,
-  value: U,
-  start = 0,
-  end = array.length,
-): Array<T | U> {
+export function fill<T, U>(array: Array<T | U>, value: U, start = 0, end = array.length): Array<T | U> {
   start = Math.floor(start);
   end = Math.floor(end);
 
