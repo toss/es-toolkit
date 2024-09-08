@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { castArray } from './castArray';
+
 describe('castArray', () => {
   it('should wrap non-array items in an array', () => {
     const falsey = [false, null, undefined, 0, NaN, ''];
