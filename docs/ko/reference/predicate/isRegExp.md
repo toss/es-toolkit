@@ -16,7 +16,7 @@ function isRegExp(value: unknown): value is RegExp;
 
 ### 반환 값
 
-- (`value is RegExp`): 값이 RegExp이면 `true`, 아니면 `false`.
+(`value is RegExp`): 값이 RegExp이면 `true`, 아니면 `false`.
 
 ## 예시
 
