@@ -1,4 +1,4 @@
-# at
+# castArray
 
 값이 배열이 아닌 경우 배열로 변환하여 반환해요.
 
@@ -16,7 +16,7 @@ function castArray<T>(value?: T | readonly T[]): T[];
 
 (`T[]`): 입력값이 배열이 아니라면 해당 값을 포함하는 배열을 반환하고, 이미 배열이라면 원래의 배열을 반환해요.
 
-## Examples
+## 예시
 
 ```typescript
 import { castArray } from 'es-toolkit/array';
