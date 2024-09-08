@@ -9,7 +9,7 @@ const object = {
   },
 };
 
-describe('bind', () => {
+describe('bindKey', () => {
   bench('es-toolkit/bindKey - without placeholder', () => {
     bindKeyToolkit(object, 'greet', 'hi');
   });
