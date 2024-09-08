@@ -1,29 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import { castArray } from './castArray';
-
 describe('castArray', () => {
-  it('should cast a number to an array', () => {
-    expect(castArray(1)).toEqual([1]);
+  it('should wrap non-array items in an array', () => {
+    const falsey = [false, null, undefined, 0, NaN, ''];
+    const values = [...falsey, true, 1, 'a', { a: 1 }];
+    const expected = values.map(value => [value]);
+    const actual = values.map(value => castArray(value));
+
+    expect(actual).toEqual(expected);
   });
 
-  it('should return the original array if input is already an array', () => {
-    const input = [1];
-    expect(castArray(input)).toBe(input);
+  it('should return array values by reference', () => {
+    const array = [1];
+    expect(castArray(array)).toBe(array);
   });
 
-  it('should cast an object to an array', () => {
-    expect(castArray({ a: 1 })).toEqual([{ a: 1 }]);
-  });
-
-  it('should cast null to an array', () => {
-    expect(castArray(null)).toEqual([null]);
-  });
-
-  it('should cast undefined to an array with undefined', () => {
-    expect(castArray(undefined)).toEqual([undefined]);
-  });
-
-  it('should return an empty array when called without arguments', () => {
+  it('should return an empty array when no arguments are given', () => {
     expect(castArray()).toEqual([]);
   });
 });
