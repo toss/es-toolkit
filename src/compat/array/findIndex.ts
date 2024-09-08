@@ -74,6 +74,8 @@ export function findIndex<T>(arr: readonly T[], propertyToCheck: string): number
  *
  * @template T
  * @param {readonly T[]} arr - The array to search through.
+ * @param source
+ * @param doesMatch
  * @param {string} propertyToCheck - The property name to check.
  * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
  *

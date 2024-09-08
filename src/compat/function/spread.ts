@@ -42,10 +42,7 @@
  * console.log(spreadGreet(['Alice'])); // Output: Hello, Alice!
  * console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
  */
-export function spread<F extends (...args: any[]) => any>(
-  func: F,
-  argsIndex: number = 0
-): (...args: any[]) => ReturnType<F> {
+export function spread<F extends (...args: any[]) => any>(func: F, argsIndex = 0): (...args: any[]) => ReturnType<F> {
   argsIndex = Number.parseInt(argsIndex as any, 10);
 
   if (Number.isNaN(argsIndex) || argsIndex < 0) {

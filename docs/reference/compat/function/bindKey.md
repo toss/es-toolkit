@@ -33,7 +33,7 @@ namespace bindKey {
 ## Example
 
 ```typescript
-import { bindKey } from 'es-toolkit/function';
+import { bindKey } from 'es-toolkit/compat';
 
 const object = {
   user: 'fred',

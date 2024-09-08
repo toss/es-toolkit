@@ -11,6 +11,30 @@
  * @param {K} key - The key of the method.
  * @param {...any} partialArgs - The arguments to be partially applied.
  * @returns {T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never} - Returns the new bound function.
+ *
+ * @example
+ * const object = {
+ *   user: 'fred',
+ *   greet: function (greeting, punctuation) {
+ *     return greeting + ' ' + this.user + punctuation;
+ *   },
+ * };
+ *
+ * let bound = bindKey(object, 'greet', 'hi');
+ * bound('!');
+ * // => 'hi fred!'
+ *
+ * object.greet = function (greeting, punctuation) {
+ *   return greeting + 'ya ' + this.user + punctuation;
+ * };
+ *
+ * bound('!');
+ * // => 'hiya fred!'
+ *
+ * // Bound with placeholders.
+ * bound = bindKey(object, 'greet', bindKey.placeholder, '!');
+ * bound('hi');
+ * // => 'hiya fred!'
  */
 export function bindKey<T extends Record<PropertyKey, any>, K extends keyof T>(
   object: T,
