@@ -12,3 +12,5 @@ export { partial } from './partial.ts';
 export { partialRight } from './partialRight.ts';
 export { rest } from './rest.ts';
 export { spread } from './spread.ts';
+export { conforms } from './conforms.ts';
+export { conformsTo } from './conformsTo.ts';

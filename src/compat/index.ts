@@ -47,6 +47,8 @@ export { bindKey } from './function/bindKey.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
 export { attempt } from './function/attempt.ts';
+export { conforms } from './function/conforms.ts';
+export { conformsTo } from './function/conformsTo.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
