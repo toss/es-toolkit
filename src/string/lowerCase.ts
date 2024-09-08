@@ -14,7 +14,7 @@ import { getWords } from './_internal/getWords.ts';
  * const convertedStr3 = lowerCase('hyphen-text') // returns 'hyphen text'
  * const convertedStr4 = lowerCase('HTTPRequest') // returns 'http request'
  */
-export const lowerCase = (str: string): string => {
+export function lowerCase(str: string): string {
   const words = getWords(str);
   return words.map(word => word.toLowerCase()).join(' ');
-};
+}

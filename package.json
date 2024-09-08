@@ -146,6 +146,7 @@
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsdoc": "^50.2.2",
+    "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
     "globals": "^15.9.0",
     "prettier": "^3.2.5",
@@ -153,6 +154,7 @@
     "rollup-plugin-dts": "^6.1.1",
     "tar": "^6",
     "tslib": "^2.6.3",
+    "tsx": "^4.19.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^8.1.0",
     "vitest": "^1.5.2"
