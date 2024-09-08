@@ -15,9 +15,12 @@ You can specify the condition in several ways:
 - **Property-value pair**: If you provide a property-value pair, the function will return the first item that matches the property and value from the pair.
 - **Property name**: If you provide a property name, the function will return the first item where the specified property has a truthy value.
 
+If no predicate is provided, the function checks if there is any truthy element in the array.
+
 ## Signature
 
 ```typescript
+function some<T>(arr: T[]): boolean;
 function some<T>(arr: T[], predicate: (item: T, index: number, arr: any) => unknown): boolean;
 function some<T>(arr: T[], predicate: [keyof T, unknown]): boolean;
 function some<T>(arr: T[], predicate: string): boolean;
