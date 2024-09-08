@@ -5,16 +5,16 @@ Casts value as an array if it's not one.
 ## Signature
 
 ```typescript
-function castArray<T>(value?: unknown): T[];
+function castArray<T>(value?: T | readonly T[]): Array<T extends undefined ? undefined : T>;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to be cast to an array.
+- `value` (`T | readonly T[]`): The value to be cast to an array.
 
 ### Returns
 
-(`T[]`): An array containing the input value if it wasn't an array, or the original array if it was.
+(`Array<T extends undefined ? undefined : T>`): An array containing the input value if it wasn't an array, or the original array if it was.
 
 ## Examples
 

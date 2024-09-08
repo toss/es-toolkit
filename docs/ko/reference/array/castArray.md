@@ -5,16 +5,16 @@
 ## 인터페이스
 
 ```typescript
-function castArray<T>(value?: unknown): T[];
+function castArray<T>(value?: T | readonly T[]): Array<T extends undefined ? undefined : T>;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 배열로 변환할 값.
+- `value` (`T | readonly T[]`): 배열로 변환할 값.
 
 ### 반환 값
 
-(`T[]`): 입력값이 배열이 아니라면 해당 값을 포함하는 배열을 반환하고, 이미 배열이라면 원래의 배열을 반환해요.
+(`Array<T extends undefined ? undefined : T>`): 입력값이 배열이 아니라면 해당 값을 포함하는 배열을 반환하고, 이미 배열이라면 원래의 배열을 반환해요.
 
 ## Examples
 
