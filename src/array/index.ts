@@ -1,5 +1,4 @@
 export { at } from './at.ts';
-export { castArray } from './castArray.ts';
 export { chunk } from './chunk.ts';
 export { compact } from './compact.ts';
 export { countBy } from './countBy.ts';
