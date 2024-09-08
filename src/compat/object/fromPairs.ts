@@ -31,6 +31,7 @@ export function fromPairs<T extends PropertyKey, U>(pairs: Array<[T, U]> | Map<T
  * Converts an array of key-value pairs into an object.
  *
  * @template T - The type of the keys in the resulting object. It must extend `PropertyKey`.
+ * @param data
  * @template U - The type of the values in the resulting object.
  *
  * @param {Array<[T, U]>} pairs - An array of key-value pairs where each key is a `PropertyKey` and each value is of type `U`.

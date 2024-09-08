@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { attempt } from './attempt';
-import { isEqual } from '../predicate';
+import { isEqual } from '../../predicate/isEqual';
 
 describe('attempt', () => {
   const errors = [

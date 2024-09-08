@@ -36,12 +36,14 @@ export { flattenDepth } from './array/flattenDepth.ts';
 export { orderBy } from './array/orderBy.ts';
 export { sortBy } from './array/sortBy.ts';
 export { size } from './array/size.ts';
+export { some } from './array/some.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../array/head.ts';
 export { indexOf } from './array/indexOf.ts';
 
 export { ary } from './function/ary.ts';
 export { bind } from './function/bind.ts';
+export { bindKey } from './function/bindKey.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
 export { attempt } from './function/attempt.ts';

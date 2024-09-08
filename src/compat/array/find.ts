@@ -144,6 +144,8 @@ export function find<T extends Record<string, unknown>>(object: T, propertyToChe
  *
  * @template T
  * @param {T extends Record<string, unknown> ? T : never} object - The object to search through.
+ * @param source
+ * @param doesMatch
  * @param {string} propertyToCheck - The property name to check.
  * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
  *

@@ -1,5 +1,5 @@
 import { falsey } from '../_internal/falsey';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { fromPairs } from './fromPairs';
 
 describe('fromPairs', () => {
@@ -64,6 +64,7 @@ describe('fromPairs', () => {
         // eslint-disable-next-line
         // @ts-ignore
         return index ? fromPairs(array) : fromPairs();
+        // eslint-disable-next-line
       } catch (e) {}
     });
 
