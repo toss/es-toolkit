@@ -1,7 +1,7 @@
-import { isDeepKey } from '../_internal/isDeepKey.ts';
-import { toKey } from '../_internal/toKey.ts';
-import { toPath } from '../_internal/toPath.ts';
-import type { Get } from './get.types.ts';
+import { isDeepKey } from "../_internal/isDeepKey.ts";
+import { toKey } from "../_internal/toKey.ts";
+import { toPath } from "../_internal/toPath.ts";
+import type { Get } from "./get.types.ts";
 
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -14,7 +14,10 @@ import type { Get } from './get.types.ts';
  * @param {K | [K]} path - The path of the property to get.
  * @returns {T[K]} - Returns the resolved value.
  */
-export function get<T extends object, K extends keyof T>(object: T, path: K | [K]): T[K];
+export function get<T extends object, K extends keyof T>(
+  object: T,
+  path: K | [K],
+): T[K];
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -25,7 +28,10 @@ export function get<T extends object, K extends keyof T>(object: T, path: K | [K
  * @param {K | [K]} path - The path of the property to get.
  * @returns {T[K] | undefined} - Returns the resolved value.
  */
-export function get<T extends object, K extends keyof T>(object: T | null | undefined, path: K | [K]): T[K] | undefined;
+export function get<T extends object, K extends keyof T>(
+  object: T | null | undefined,
+  path: K | [K],
+): T[K] | undefined;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -41,7 +47,7 @@ export function get<T extends object, K extends keyof T>(object: T | null | unde
 export function get<T extends object, K extends keyof T, D>(
   object: T | null | undefined,
   path: K | [K],
-  defaultValue: D
+  defaultValue: D,
 ): Exclude<T[K], undefined> | D;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -54,7 +60,11 @@ export function get<T extends object, K extends keyof T, D>(
  * @param {[K1, K2]} path - The path of the property to get.
  * @returns {T[K1][K2]} - Returns the resolved value.
  */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(object: T, path: [K1, K2]): T[K1][K2];
+export function get<
+  T extends object,
+  K1 extends keyof T,
+  K2 extends keyof T[K1],
+>(object: T, path: [K1, K2]): T[K1][K2];
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -66,9 +76,13 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  * @param {[K1, K2]} path - The path of the property to get.
  * @returns {T[K1][K2] | undefined} - Returns the resolved value.
  */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(
+export function get<
+  T extends object,
+  K1 extends keyof T,
+  K2 extends keyof T[K1],
+>(
   object: T | null | undefined,
-  path: [K1, K2]
+  path: [K1, K2],
 ): T[K1][K2] | undefined;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -83,10 +97,15 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  * @param {D} defaultValue - The value returned if the resolved value is undefined.
  * @returns {Exclude<T[K1][K2], undefined> | D} - Returns the resolved value.
  */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], D>(
+export function get<
+  T extends object,
+  K1 extends keyof T,
+  K2 extends keyof T[K1],
+  D,
+>(
   object: T | null | undefined,
   path: [K1, K2],
-  defaultValue: D
+  defaultValue: D,
 ): Exclude<T[K1][K2], undefined> | D;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -100,9 +119,14 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  * @param {[K1, K2, K3]} path - The path of the property to get.
  * @returns {T[K1][K2][K3]} - Returns the resolved value.
  */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
+export function get<
+  T extends object,
+  K1 extends keyof T,
+  K2 extends keyof T[K1],
+  K3 extends keyof T[K1][K2],
+>(
   object: T,
-  path: [K1, K2, K3]
+  path: [K1, K2, K3],
 ): T[K1][K2][K3];
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -116,9 +140,14 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  * @param {[K1, K2, K3]} path - The path of the property to get.
  * @returns {T[K1][K2][K3] | undefined} - Returns the resolved value.
  */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
+export function get<
+  T extends object,
+  K1 extends keyof T,
+  K2 extends keyof T[K1],
+  K3 extends keyof T[K1][K2],
+>(
   object: T | null | undefined,
-  path: [K1, K2, K3]
+  path: [K1, K2, K3],
 ): T[K1][K2][K3] | undefined;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -134,10 +163,16 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  * @param {D} defaultValue - The value returned if the resolved value is undefined.
  * @returns {Exclude<T[K1][K2][K3], undefined> | D} - Returns the resolved value.
  */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], D>(
+export function get<
+  T extends object,
+  K1 extends keyof T,
+  K2 extends keyof T[K1],
+  K3 extends keyof T[K1][K2],
+  D,
+>(
   object: T | null | undefined,
   path: [K1, K2, K3],
-  defaultValue: D
+  defaultValue: D,
 ): Exclude<T[K1][K2][K3], undefined> | D;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -178,7 +213,10 @@ export function get<
   K2 extends keyof T[K1],
   K3 extends keyof T[K1][K2],
   K4 extends keyof T[K1][K2][K3],
->(object: T | null | undefined, path: [K1, K2, K3, K4]): T[K1][K2][K3][K4] | undefined;
+>(
+  object: T | null | undefined,
+  path: [K1, K2, K3, K4],
+): T[K1][K2][K3][K4] | undefined;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -201,7 +239,11 @@ export function get<
   K3 extends keyof T[K1][K2],
   K4 extends keyof T[K1][K2][K3],
   D,
->(object: T | null | undefined, path: [K1, K2, K3, K4], defaultValue: D): Exclude<T[K1][K2][K3][K4], undefined> | D;
+>(
+  object: T | null | undefined,
+  path: [K1, K2, K3, K4],
+  defaultValue: D,
+): Exclude<T[K1][K2][K3][K4], undefined> | D;
 /**
  * Retrieves the value at a given path from an object with numeric keys. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -221,7 +263,10 @@ export function get<T>(object: Record<number, T>, path: number): T;
  * @param {number} path - The path of the property to get.
  * @returns {T | undefined} - Returns the resolved value.
  */
-export function get<T>(object: Record<number, T> | null | undefined, path: number): T | undefined;
+export function get<T>(
+  object: Record<number, T> | null | undefined,
+  path: number,
+): T | undefined;
 /**
  * Retrieves the value at a given path from an object with numeric keys. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -233,7 +278,11 @@ export function get<T>(object: Record<number, T> | null | undefined, path: numbe
  * @param {D} defaultValue - The value returned if the resolved value is undefined.
  * @returns {T | D} - Returns the resolved value.
  */
-export function get<T, D>(object: Record<number, T> | null | undefined, path: number, defaultValue: D): T | D;
+export function get<T, D>(
+  object: Record<number, T> | null | undefined,
+  path: number,
+  defaultValue: D,
+): T | D;
 /**
  * Retrieves the value at a given path from a null or undefined object, returning the default value.
  *
@@ -244,7 +293,11 @@ export function get<T, D>(object: Record<number, T> | null | undefined, path: nu
  * @param {D} defaultValue - The value returned if the resolved value is undefined.
  * @returns {D} - Returns the default value.
  */
-export function get<D>(object: null | undefined, path: PropertyKey, defaultValue: D): D;
+export function get<D>(
+  object: null | undefined,
+  path: PropertyKey,
+  defaultValue: D,
+): D;
 /**
  * Retrieves the value at a given path from a null or undefined object, returning undefined.
  *
@@ -263,7 +316,10 @@ export function get(object: null | undefined, path: PropertyKey): undefined;
  * @param {P} path - The path of the property to get.
  * @returns {string extends P ? any : Get<T, P>} - Returns the resolved value.
  */
-export function get<T, P extends string>(data: T, path: P): string extends P ? any : Get<T, P>;
+export function get<T, P extends string>(
+  data: T,
+  path: P,
+): string extends P ? any : Get<T, P>;
 /**
  * Retrieves the value at a given path from a string-keyed object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -279,7 +335,7 @@ export function get<T, P extends string>(data: T, path: P): string extends P ? a
 export function get<T, P extends string, D = Get<T, P>>(
   data: T,
   path: P,
-  defaultValue: D
+  defaultValue: D,
 ): Exclude<Get<T, P>, null | undefined> | D;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -289,13 +345,31 @@ export function get<T, P extends string, D = Get<T, P>>(
  * @param {unknown} [defaultValue] - The value returned if the resolved value is undefined.
  * @returns {any} - Returns the resolved value.
  */
-export function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
-export function get(object: any, path: PropertyKey | readonly PropertyKey[], defaultValue?: any): any {
+export function get(
+  object: unknown,
+  path: PropertyKey | readonly PropertyKey[],
+  defaultValue?: unknown,
+): any;
+/**
+ * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ *
+ * @param {unknown} object - The object to query.
+ * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to get.
+ * @param {unknown} [defaultValue] - The value returned if the resolved value is undefined.
+ * @returns {any} - Returns the resolved value.
+ */
+export function get(
+  object: any,
+  path: PropertyKey | readonly PropertyKey[],
+  defaultValue?: any,
+): any {
   let resolvedPath;
 
   if (Array.isArray(path)) {
     resolvedPath = path;
-  } else if (typeof path === 'string' && isDeepKey(path) && object?.[path] == null) {
+  } else if (
+    typeof path === "string" && isDeepKey(path) && object?.[path] == null
+  ) {
     resolvedPath = toPath(path);
   } else {
     resolvedPath = [path];

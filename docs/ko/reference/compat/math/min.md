@@ -6,9 +6,7 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-배열에서 최솟값을 가지는 요소를 반환해요.
-
-배열이 비어 있다면, `undefined`를 반환해요.
+배열에서 최솟값을 가진 요소를 찾아요.
 
 ## 인터페이스
 
@@ -16,19 +14,23 @@
 function min<T>(items: [T, ...T[]]): T;
 function min(): undefined;
 function min<T>(items?: T[]): T | undefined;
+function min<T>(items: T[]): T;
 ```
 
 ### 파라미터
 
-- `items` (`T[]`): 최솟값을 가지는 요소를 찾을 배열.
+- `items` (`T[]`): 검색할 요소의 배열. 기본값은 빈 배열이에요.
 
 ### 반환 값
 
-(`T`): 배열에서 최솟값을 가지는 요소. 배열이 비어 있다면 `undefined`를 반환해요.
+(`T`): 최솟값을 가진 요.
 
-### 예시
+## 예시
 
 ```typescript
-min([1, 2, 3]); // Returns: 1
-min(['a', 'b']); // Returns: 'a'
+// Returns 1
+min([3, 1, 4, 1, 5, 9]);
+
+// Returns -3
+min([0, -3, 2, 8, 7]);
 ```

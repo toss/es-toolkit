@@ -8,7 +8,6 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Finds the element in an array that has the minimum value.
 
-If the list is empty, returns `undefined`.
 
 ## Signature
 
@@ -16,19 +15,13 @@ If the list is empty, returns `undefined`.
 function min<T>(items: [T, ...T[]]): T;
 function min(): undefined;
 function min<T>(items?: T[]): T | undefined;
+function min<T>(items: T[]): T;
 ```
 
 ### Parameters
 
-- `items` (`T[]`): The array of elements to search.
+- `items` (`T[]`): The array of elements to search. Defaults to an empty array.
 
 ### Returns
 
 (`T`): The element with the minimum value.
-
-### Example
-
-```typescript
-min([1, 2, 3]); // Returns: 1
-min(['a', 'b']); // Returns: 'a'
-```

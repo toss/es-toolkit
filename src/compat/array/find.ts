@@ -1,6 +1,6 @@
-import { property } from '../object/property.ts';
-import { matches } from '../predicate/matches.ts';
-import { matchesProperty } from '../predicate/matchesProperty.ts';
+import { property } from "../object/property.ts";
+import { matches } from "../predicate/matches.ts";
+import { matchesProperty } from "../predicate/matchesProperty.ts";
 
 /**
  * Finds the first item in an array that matches the given predicate function.
@@ -18,7 +18,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  */
 export function find<T>(
   arr: readonly T[],
-  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown
+  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown,
 ): T | undefined;
 
 /**
@@ -35,7 +35,10 @@ export function find<T>(
  * const result = find(items, { name: 'Bob' });
  * console.log(result); // { id: 2, name: 'Bob' }
  */
-export function find<T>(arr: readonly T[], doesMatch: Partial<T>): T | undefined;
+export function find<T>(
+  arr: readonly T[],
+  doesMatch: Partial<T>,
+): T | undefined;
 
 /**
  * Finds the first item in an array that matches a property with a specific value.
@@ -51,7 +54,10 @@ export function find<T>(arr: readonly T[], doesMatch: Partial<T>): T | undefined
  * const result = find(items, ['name', 'Alice']);
  * console.log(result); // { id: 1, name: 'Alice' }
  */
-export function find<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknown]): T | undefined;
+export function find<T>(
+  arr: readonly T[],
+  doesMatchProperty: [keyof T, unknown],
+): T | undefined;
 
 /**
  * Finds the first item in an array that has a specific property, where the property name is provided as a string.
@@ -67,7 +73,10 @@ export function find<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknown]
  * const result = find(items, 'name');
  * console.log(result); // { id: 1, name: 'Alice' }
  */
-export function find<T>(arr: readonly T[], propertyToCheck: string): T | undefined;
+export function find<T>(
+  arr: readonly T[],
+  propertyToCheck: string,
+): T | undefined;
 
 /**
  * Finds the first item in an object that matches the given predicate function.
@@ -85,7 +94,7 @@ export function find<T>(arr: readonly T[], propertyToCheck: string): T | undefin
  */
 export function find<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
 ): T | undefined;
 
 /**
@@ -102,7 +111,10 @@ export function find<T extends Record<string, unknown>>(
  * const result = find(obj, { name: 'Bob' });
  * console.log(result); // { id: 2, name: 'Bob' }
  */
-export function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
+export function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: Partial<T[keyof T]>,
+): T | undefined;
 
 /**
  * Finds the first item in an object that matches a property with a specific value.
@@ -120,7 +132,7 @@ export function find<T extends Record<string, unknown>>(object: T, doesMatch: Pa
  */
 export function find<T extends Record<string, unknown>>(
   object: T,
-  doesMatchProperty: [keyof T, unknown]
+  doesMatchProperty: [keyof T, unknown],
 ): T | undefined;
 
 /**
@@ -137,11 +149,31 @@ export function find<T extends Record<string, unknown>>(
  * const result = find(obj, 'name');
  * console.log(result); // { id: 1, name: 'Alice' }
  */
-export function find<T extends Record<string, unknown>>(object: T, propertyToCheck: string): T | undefined;
+export function find<T extends Record<string, unknown>>(
+  object: T,
+  propertyToCheck: string,
+): T | undefined;
 
+/**
+ * Finds the first item in an object that has a specific property, where the property name is provided as a string.
+ *
+ * @template T
+ * @param {T extends Record<string, unknown> ? T : never} object - The object to search through.
+ * @param {string} propertyToCheck - The property name to check.
+ * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
+ *
+ * @example
+ * // Using a property name
+ * const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
+ * const result = find(obj, 'name');
+ * console.log(result); // { id: 1, name: 'Alice' }
+ */
 export function find<T>(
   source: readonly T[] | Record<any, any>,
-  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string
+  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [
+    keyof T,
+    unknown,
+  ] | string,
 ): T | undefined {
   let values = source;
 
@@ -150,7 +182,7 @@ export function find<T>(
   }
 
   switch (typeof doesMatch) {
-    case 'function': {
+    case "function": {
       if (!Array.isArray(source)) {
         const entries: any[] = Object.entries(source);
 
@@ -169,7 +201,7 @@ export function find<T>(
 
       return values.find(doesMatch);
     }
-    case 'object': {
+    case "object": {
       if (Array.isArray(doesMatch) && doesMatch.length === 2) {
         const key = doesMatch[0];
         const value = doesMatch[1];
@@ -179,7 +211,7 @@ export function find<T>(
         return values.find(matches(doesMatch));
       }
     }
-    case 'string': {
+    case "string": {
       return values.find(property(doesMatch));
     }
   }

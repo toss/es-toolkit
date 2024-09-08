@@ -1,14 +1,14 @@
-import { clone } from '../../object/clone.ts';
-import { isArguments } from '../predicate/isArguments.ts';
-import { isObjectLike } from '../predicate/isObjectLike.ts';
-import { isPlainObject } from '../predicate/isPlainObject.ts';
-import { isTypedArray } from '../predicate/isTypedArray.ts';
-import { cloneDeep } from './cloneDeep.ts';
+import { clone } from "../../object/clone.ts";
+import { isArguments } from "../predicate/isArguments.ts";
+import { isObjectLike } from "../predicate/isObjectLike.ts";
+import { isPlainObject } from "../predicate/isPlainObject.ts";
+import { isTypedArray } from "../predicate/isTypedArray.ts";
+import { cloneDeep } from "./cloneDeep.ts";
 
 declare let Buffer:
   | {
-      isBuffer: (a: any) => boolean;
-    }
+    isBuffer: (a: any) => boolean;
+  }
   | undefined;
 
 /**
@@ -64,7 +64,14 @@ declare let Buffer:
 export function mergeWith<T, S>(
   target: T,
   source: S,
-  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S, stack: Map<any, any>) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: T,
+    source: S,
+    stack: Map<any, any>,
+  ) => any,
 ): T & S;
 
 /**
@@ -123,7 +130,14 @@ export function mergeWith<O, S1, S2>(
   object: O,
   source1: S1,
   source2: S2,
-  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: any,
+    source: any,
+    stack: Map<any, any>,
+  ) => any,
 ): O & S1 & S2;
 
 /**
@@ -185,7 +199,14 @@ export function mergeWith<O, S1, S2, S3>(
   source1: S1,
   source2: S2,
   source3: S3,
-  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: any,
+    source: any,
+    stack: Map<any, any>,
+  ) => any,
 ): O & S1 & S2 & S3;
 
 /**
@@ -250,7 +271,14 @@ export function mergeWith<O, S1, S2, S3, S4>(
   source2: S2,
   source3: S3,
   source4: S4,
-  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: any,
+    source: any,
+    stack: Map<any, any>,
+  ) => any,
 ): O & S1 & S2 & S3;
 
 /**
@@ -302,6 +330,53 @@ export function mergeWith<O, S1, S2, S3, S4>(
  */
 export function mergeWith(object: any, ...otherArgs: any[]): any;
 
+/**
+ * Merges the properties of one or more source objects into the target object.
+ *
+ * This function performs a deep merge, recursively merging nested objects and arrays.
+ * If a property in the source object is an array or object and the corresponding property in the target object is also an array or object, they will be merged.
+ * If a property in the source object is `undefined`, it will not overwrite a defined property in the target object.
+ *
+ * You can provide a custom `merge` function to control how properties are merged. The `merge` function is called for each property that is being merged and receives the following arguments:
+ *
+ * - `targetValue`: The current value of the property in the target object.
+ * - `sourceValue`: The value of the property in the source object.
+ * - `key`: The key of the property being merged.
+ * - `target`: The target object.
+ * - `source`: The source object.
+ * - `stack`: A `Map` used to keep track of objects that have already been processed to handle circular references.
+ *
+ * The `merge` function should return the value to be set in the target object. If it returns `undefined`, a default deep merge will be applied for arrays and objects.
+ *
+ * The function can handle multiple source objects and will merge them all into the target object.
+ *
+ * @param {any} object - The target object into which the source object properties will be merged. This object is modified in place.
+ * @param {any[]} sources - The source objects whose properties will be merged into the target object.
+ * @param {...any} otherArgs - Additional source objects to merge into the target object, including the custom `merge` function.
+ * @returns {any} The updated target object with properties from the source object(s) merged in.
+ *
+ * @example
+ * const target = { a: 1, b: 2 };
+ * const source = { b: 3, c: 4 };
+ *
+ * mergeWith(target, source, (targetValue, sourceValue) => {
+ *   if (typeof targetValue === 'number' && typeof sourceValue === 'number') {
+ *     return targetValue + sourceValue;
+ *   }
+ * });
+ * // Returns { a: 1, b: 5, c: 4 }
+ * @example
+ * const target = { a: [1], b: [2] };
+ * const source = { a: [3], b: [4] };
+ *
+ * const result = mergeWith(target, source, (objValue, srcValue) => {
+ *   if (Array.isArray(objValue)) {
+ *     return objValue.concat(srcValue);
+ *   }
+ * });
+ *
+ * expect(result).toEqual({ a: [1, 3], b: [2, 4] });
+ */
 export function mergeWith(object: any, ...otherArgs: any[]): any {
   const sources = otherArgs.slice(0, -1);
   const merge = otherArgs[otherArgs.length - 1] as (
@@ -310,7 +385,7 @@ export function mergeWith(object: any, ...otherArgs: any[]): any {
     key: string,
     target: any,
     source: any,
-    stack: Map<any, any>
+    stack: Map<any, any>,
   ) => any;
 
   let result = object;
@@ -327,10 +402,17 @@ export function mergeWith(object: any, ...otherArgs: any[]): any {
 function mergeWithDeep(
   target: any,
   source: any,
-  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any,
-  stack: Map<any, any>
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: any,
+    source: any,
+    stack: Map<any, any>,
+  ) => any,
+  stack: Map<any, any>,
 ) {
-  if (source == null || typeof source !== 'object') {
+  if (source == null || typeof source !== "object") {
     return target;
   }
 
@@ -363,12 +445,14 @@ function mergeWithDeep(
       targetValue = { ...targetValue };
     }
 
-    if (typeof Buffer !== 'undefined' && Buffer.isBuffer(sourceValue)) {
+    if (typeof Buffer !== "undefined" && Buffer.isBuffer(sourceValue)) {
       sourceValue = cloneDeep(sourceValue);
     }
 
     if (Array.isArray(sourceValue)) {
-      targetValue = typeof targetValue === 'object' ? Array.from(targetValue ?? []) : [];
+      targetValue = typeof targetValue === "object"
+        ? Array.from(targetValue ?? [])
+        : [];
     }
 
     const merged = merge(targetValue, sourceValue, key, target, source, stack);
