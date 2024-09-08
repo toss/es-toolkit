@@ -71,6 +71,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'find (호환성)', link: '/ko/reference/compat/array/find' },
             { text: 'findIndex (호환성)', link: '/ko/reference/compat/array/findIndex' },
             { text: 'flatMap', link: '/ko/reference/array/flatMap' },
+            { text: 'flatMapDeep', link: '/ko/reference/array/flatMapDeep' },
             { text: 'flatten', link: '/ko/reference/array/flatten' },
             { text: 'flattenDeep', link: '/ko/reference/array/flattenDeep' },
             { text: 'forEachRight', link: '/ko/reference/array/forEachRight' },
@@ -191,6 +192,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (호환성)', link: '/ko/reference/compat/predicate/isArguments' },
             { text: 'isArray (호환성)', link: '/ko/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (호환성)', link: '/ko/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (호환성)', link: '/ko/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/ko/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/ko/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/ko/reference/predicate/isFunction' },
@@ -212,6 +214,7 @@ function sidebar(): DefaultTheme.Sidebar {
               link: '/ko/reference/predicate/isUndefined',
             },
             { text: 'isWeakMap', link: '/ko/reference/predicate/isWeakMap' },
+            { text: 'isWeakSet', link: '/ko/reference/predicate/isWeakSet' },
           ],
         },
         {

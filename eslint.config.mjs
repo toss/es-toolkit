@@ -3,10 +3,20 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import jsdoc from 'eslint-plugin-jsdoc';
 import prettier from 'eslint-config-prettier';
+import pluginVue from 'eslint-plugin-vue';
 
 export default [
   {
-    ignores: ['.yarn/**', 'coverage/**', 'dist/**', '.pnp.*', '**/*.d.ts', '**/*.tgz', 'node_modules/**'],
+    ignores: [
+      '.yarn/**',
+      'coverage/**',
+      '**/dist/**',
+      '**/cache/**',
+      '.pnp.*',
+      '**/*.d.ts',
+      '**/*.tgz',
+      'node_modules/**',
+    ],
   },
   {
     languageOptions: {
@@ -22,6 +32,8 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
+        parser: tseslint.parser,
+        extraFileExtensions: ['.vue'],
       },
     },
   },
@@ -29,6 +41,7 @@ export default [
   ...tseslint.configs.recommended,
   prettier,
   jsdoc.configs['flat/recommended'],
+  ...pluginVue.configs['flat/recommended'],
   {
     rules: {
       'no-implicit-coercion': 'error',
@@ -79,6 +92,7 @@ export default [
       'jsdoc/tag-lines': 'off',
       'jsdoc/no-defaults': 'off',
       'jsdoc/require-jsdoc': 'off',
+      'vue/multi-word-component-names': 'off',
     },
   },
 ];
