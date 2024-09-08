@@ -33,7 +33,6 @@ export { pullAt } from './pullAt.ts';
 export { sample } from './sample.ts';
 export { sampleSize } from './sampleSize.ts';
 export { shuffle } from './shuffle.ts';
-export { some } from './some.ts';
 export { sortBy } from './sortBy.ts';
 export { tail } from './tail.ts';
 export { take } from './take.ts';

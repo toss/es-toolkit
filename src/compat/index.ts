@@ -35,6 +35,7 @@ export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
 export { orderBy } from './array/orderBy.ts';
 export { size } from './array/size.ts';
+export { some } from './array/some.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../array/head.ts';
 export { indexOf } from './array/indexOf.ts';

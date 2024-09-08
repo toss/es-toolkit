@@ -1,8 +1,14 @@
 # some
 
+::: info
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+:::
+
 The `some` function checks if at least one element in an array meets a given condition. You can pass a function or a property name of the object in the array.
 
-## Interface
+## Signature
 
 ```typescript
 function some<T>(

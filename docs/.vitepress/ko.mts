@@ -99,6 +99,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'sampleSize', link: '/ko/reference/array/sampleSize' },
             { text: 'shuffle', link: '/ko/reference/array/shuffle' },
             { text: 'size (호환성)', link: '/ko/reference/compat/array/size' },
+            { text: 'some (호환성)', link: '/ko/reference/compat/array/some' },
             { text: 'sortBy', link: '/ko/reference/array/sortBy' },
             { text: 'take', link: '/ko/reference/array/take' },
             { text: 'takeWhile', link: '/ko/reference/array/takeWhile' },

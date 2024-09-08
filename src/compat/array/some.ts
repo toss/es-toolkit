@@ -1,3 +1,5 @@
+import { property } from '../object/property';
+
 /**
  * Returns `true` if at least one element in the array meets the condition
  * set by the predicate function or a given property name.
@@ -27,11 +29,6 @@ export function some<T>(
     return false;
   }
 
-  return arr.some(value => {
-    if (typeof predicate === 'function') {
-      return arr.some(predicate);
-    }
-
-    return value[predicate];
-  });
+  const predicateFn = typeof predicate === 'function' ? predicate : property(predicate);
+  return arr.some((value, index, array) => predicateFn(value, index, array));
 }

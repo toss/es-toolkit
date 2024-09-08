@@ -1,4 +1,4 @@
-import { some as someToolkit } from 'es-toolkit';
+import { some as someToolkit } from 'es-toolkit/compat';
 import { some as lodashSome } from 'lodash';
 import { bench, describe } from 'vitest';
 
