@@ -15,6 +15,6 @@
  * const isPrefix = endsWith('fooBar', 'foo', 3) // returns true
  * const isPrefix = endsWith('fooBar', 'abc', 5) // returns false
  */
-export const endsWith = (str: string, target: string, position: number = str.length): boolean => {
+export function endsWith(str: string, target: string, position: number = str.length): boolean {
   return str.endsWith(target, position);
-};
+}

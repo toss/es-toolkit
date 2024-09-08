@@ -16,7 +16,7 @@
  * @param {MemoizeCache<any, V>} [options.cache] - The cache object used to store results. Defaults to a new `Map`.
  * @param {(args: A) => unknown} [options.getCacheKey] - An optional function to generate a unique cache key for each argument.
  *
- * @returns {F & { cache: MemoizeCache<any, ReturnType<F>> }} - The memoized function with an additional `cache` property that exposes the internal cache.
+ * @returns The memoized function with an additional `cache` property that exposes the internal cache.
  *
  * @example
  * // Example using the default cache
@@ -98,11 +98,52 @@ export function memoize<F extends (...args: any) => any>(
   return memoizedFn as F & { cache: MemoizeCache<any, ReturnType<F>> };
 }
 
+/**
+ * Represents a cache for memoization, allowing storage and retrieval of computed values.
+ *
+ * @template K - The type of keys used to store values in the cache.
+ * @template V - The type of values stored in the cache.
+ */
 export interface MemoizeCache<K, V> {
+  /**
+   * Stores a value in the cache with the specified key.
+   *
+   * @param key - The key to associate with the value.
+   * @param value - The value to store in the cache.
+   */
   set(key: K, value: V): void;
+
+  /**
+   * Retrieves a value from the cache by its key.
+   *
+   * @param key - The key of the value to retrieve.
+   * @returns The value associated with the key, or undefined if the key does not exist.
+   */
   get(key: K): V | undefined;
+
+  /**
+   * Checks if a value exists in the cache for the specified key.
+   *
+   * @param key - The key to check for existence in the cache.
+   * @returns True if the cache contains the key, false otherwise.
+   */
   has(key: K): boolean;
+
+  /**
+   * Deletes a value from the cache by its key.
+   *
+   * @param key - The key of the value to delete.
+   * @returns True if the value was successfully deleted, false otherwise.
+   */
   delete(key: K): boolean | void;
+
+  /**
+   * Clears all values from the cache.
+   */
   clear(): void;
+
+  /**
+   * The number of entries in the cache.
+   */
   size: number;
 }

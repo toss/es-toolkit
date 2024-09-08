@@ -16,4 +16,4 @@
  */
 export function pad(str: string, length: number, chars = ' '): string {
   return str.padStart(Math.floor((length - str.length) / 2) + str.length, chars).padEnd(length, chars);
-};
+}

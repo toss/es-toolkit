@@ -139,6 +139,22 @@ export function find<T extends Record<string, unknown>>(
  */
 export function find<T extends Record<string, unknown>>(object: T, propertyToCheck: string): T | undefined;
 
+/**
+ * Finds the first item in an object that has a specific property, where the property name is provided as a string.
+ *
+ * @template T
+ * @param {T extends Record<string, unknown> ? T : never} object - The object to search through.
+ * @param source
+ * @param doesMatch
+ * @param {string} propertyToCheck - The property name to check.
+ * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
+ *
+ * @example
+ * // Using a property name
+ * const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
+ * const result = find(obj, 'name');
+ * console.log(result); // { id: 1, name: 'Alice' }
+ */
 export function find<T>(
   source: readonly T[] | Record<any, any>,
   doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string
