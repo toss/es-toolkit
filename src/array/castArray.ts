@@ -25,10 +25,10 @@
  * // Returns: []
  */
 
-export function castArray<T>(value?: unknown): T[] {
+export function castArray<T>(value?: T | readonly T[]): Array<T extends undefined ? undefined : T> {
   if (arguments.length === 0) {
     return [];
   }
 
-  return Array.isArray(value) ? value : [value];
+  return Array.isArray(value) ? value : ([value] as Array<T extends undefined ? undefined : T>);
 }
