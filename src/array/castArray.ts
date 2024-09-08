@@ -6,22 +6,22 @@
  * @returns {T[]} An array containing the input value if it wasn't an array, or the original array if it was.
  *
  * @example
- * const arr = castArray(1); // [1]
+ * const arr1 = castArray(1);
  * // Returns: [1]
  *
- * const arr = castArray([1]);
+ * const arr2 = castArray([1]);
  * // Returns: [1]
  *
- * const arr = castArray({'a': 1});
+ * const arr3 = castArray({'a': 1});
  * // Returns: [{'a': 1}]
  *
- * const arr =  castArray(null);
+ * const arr4 =  castArray(null);
  * // Returns: [null]
  *
- * const arr = castArray(undefined); // [undefined]
+ * const arr5 = castArray(undefined);
  * // Returns: [undefined]
  *
- * const arr = castArray();
+ * const arr6 = castArray();
  * // Returns: []
  */
 
