@@ -24,6 +24,7 @@
  */
 export * from '../index.ts';
 
+export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
