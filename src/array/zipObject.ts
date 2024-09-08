@@ -10,7 +10,7 @@
  * @template V - The type of elements in the array.
  * @param {P[]} keys - An array of property names.
  * @param {V[]} values - An array of values corresponding to the property names.
- * @returns {{ [K in P]: V }} A new object composed of the given property names and values.
+ * @returns {Record<P, V>} - A new object composed of the given property names and values.
  *
  * @example
  * const keys = ['a', 'b', 'c'];
@@ -28,8 +28,11 @@
  * const result2 = zipObject(keys2, values2);
  * // result2 will be { a: 1, b: 2 }
  */
-export function zipObject<P extends PropertyKey, V>(keys: P[], values: V[]): { [K in P]: V } {
-  const result = {} as { [K in P]: V };
+export function zipObject<P extends PropertyKey, V>(
+  keys: P[],
+  values: V[],
+): Record<P, V> {
+  const result = {} as Record<P, V>;
 
   for (let i = 0; i < keys.length; i++) {
     result[keys[i]] = values[i];

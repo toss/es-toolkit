@@ -1,6 +1,9 @@
 {
   "imports": {
     "@deno/doc": "jsr:@deno/doc@^0.148.0",
-    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.17.0"
+    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.17.0",
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.2",
+    "clipanion": "npm:clipanion@^3.2.1",
+    "openai": "npm:openai@^4.58.1"
   }
 }
