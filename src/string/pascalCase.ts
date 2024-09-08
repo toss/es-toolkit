@@ -15,7 +15,7 @@ import { capitalize } from './capitalize.ts';
  * const convertedStr3 = pascalCase('hyphen-text') // returns 'HyphenText'
  * const convertedStr4 = pascalCase('HTTPRequest') // returns 'HttpRequest'
  */
-export const pascalCase = (str: string): string => {
+export function pascalCase(str: string): string {
   const words = getWords(str);
   return words.map(word => capitalize(word)).join('');
-};
+}

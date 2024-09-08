@@ -190,4 +190,16 @@ describe('orderBy', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('should work as an iteratee for methods like `_.map`', () => {
+    expect(
+      [
+        [2, 1, 3],
+        [3, 2, 1],
+      ].map(orderBy)
+    ).toEqual([
+      [1, 2, 3],
+      [1, 2, 3],
+    ]);
+  });
 });

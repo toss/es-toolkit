@@ -290,6 +290,14 @@ export function get<T, P extends string, D = Get<T, P>>(
  * @returns {any} - Returns the resolved value.
  */
 export function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
+/**
+ * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ *
+ * @param {unknown} object - The object to query.
+ * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to get.
+ * @param {unknown} [defaultValue] - The value returned if the resolved value is undefined.
+ * @returns {any} - Returns the resolved value.
+ */
 export function get(object: any, path: PropertyKey | readonly PropertyKey[], defaultValue?: any): any {
   let resolvedPath;
 

@@ -13,7 +13,7 @@ describe('randomInt', () => {
     }
   });
 
-  it('generates a random floating-point between 0 and max (exclusive)', () => {
+  it('generates a random integer between 0 (inclusive) and max (exclusive)', () => {
     for (let i = 0; i < 100; i++) {
       const result = randomInt(5);
       expect(result).toBeGreaterThanOrEqual(0);
