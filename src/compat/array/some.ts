@@ -105,7 +105,6 @@ export function some<T>(
  * @param {T[]} arr The array to iterate over.
  * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} [predicate=identity] The function invoked per iteration.
  * If a property name or an object is provided it will be used to create a predicate function.
- * @param guard
  * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
  *
  * @example

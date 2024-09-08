@@ -1,8 +1,15 @@
 # bindKey
 
+::: info
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+
+:::
+
 创建一个函数，该函数调用 `object[key]` 上的方法，并将 `partialArgs` 作为其接收的参数的前置参数。
 
-此方法与 [`bind`](../compat/function/bind.md) 不同，它允许绑定的函数引用可能被重新定义或尚不存在的方法。
+此方法与 [`bind`](./bind.md) 不同，它允许绑定的函数引用可能被重新定义或尚不存在的方法。
 
 `bindKey.placeholder` 的值默认是一个 `symbol`，可以用作附加的部分参数的占位符。
 

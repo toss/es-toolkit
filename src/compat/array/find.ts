@@ -144,8 +144,8 @@ export function find<T extends Record<string, unknown>>(object: T, propertyToChe
  *
  * @template T
  * @param {T extends Record<string, unknown> ? T : never} object - The object to search through.
- * @param source
- * @param doesMatch
+ * @param {readonly T[] | Record<any, any>} source - The source array or object to search through.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
  *
