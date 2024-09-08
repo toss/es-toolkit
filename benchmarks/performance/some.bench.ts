@@ -1,5 +1,5 @@
 import { some as someToolkit } from 'es-toolkit/compat';
-import { some as lodashSome } from 'lodash';
+import { some as someLodash } from 'lodash';
 import { bench, describe } from 'vitest';
 
 describe('some', () => {
@@ -11,9 +11,9 @@ describe('some', () => {
   });
 
   bench('lodash/some', () => {
-    lodashSome([1, 2, 3], number => number % 2 === 0);
-    lodashSome([1, 'string'], Number);
-    lodashSome([false, false, false], value => value);
-    lodashSome([1, false, 'string'], () => true);
+    someLodash([1, 2, 3], number => number % 2 === 0);
+    someLodash([1, 'string'], Number);
+    someLodash([false, false, false], value => value);
+    someLodash([1, false, 'string'], () => true);
   });
 });

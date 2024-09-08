@@ -1,34 +1,145 @@
-import { property } from '../object/property';
+import { identity } from '../_internal/identity.ts';
+import { property } from '../object/property.ts';
+import { matches } from '../predicate/matches.ts';
+import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
- * Returns `true` if at least one element in the array meets the condition
- * set by the predicate function or a given property name.
+ * Checks if there is an element in an array that matches the given predicate function.
  *
- * @template T - The type of elements in the array.
- *
- * @param {T[] | null | undefined} arr - The array to check, which can also be `null` or `undefined`.
- * @param {((value: T, index: number, arr: T[]) => unknown) | keyof T} predicate -
- * A predicate function that tests each element, or a string representing the property name of the objects in the array.
- *
- * @returns {boolean} Returns `true` if the predicate function returns a truthy value for any element,
- * or if the property value is truthy for any object in the array. Returns `false` otherwise.
+ * @param {T[]} arr The array to iterate over.
+ * @param {(item: T, index: number, arr: any) => unknown} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
  *
  * @example
- * ```ts
- * some([1, 2, 3], number => number % 2 === 0); // true;
- * some([1, 'string'], Number); // true
- * some([false, false, false], value => value); // false
- * some([1, false, 'string'], () => true); // true
- * ```
+ * some([1, 2, 3, 4], n => n % 2 === 0);
+ * // => true
+ */
+export function some<T>(arr: readonly T[], predicate: (item: T, index: number, arr: any) => unknown): boolean;
+
+/**
+ * Checks if there is an element in an array that matches the given key-value pair.
+ *
+ * @param {T[]} arr The array to iterate over.
+ * @param {[keyof T, unknown]} predicate The key-value pair to match.
+ * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
+ *
+ * @example
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], ['a', 2]);
+ * // => true
+ */
+export function some<T>(arr: readonly T[], predicate: [keyof T, unknown]): boolean;
+
+/**
+ * Checks if there is an element in an array that has a truthy value for the given property name.
+ *
+ * @param {T[]} arr The array to iterate over.
+ * @param {string} propertyToCheck The property name to check.
+ * @returns {boolean} Returns `true` if any element has a truthy value for the property, else `false`.
+ *
+ * @example
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], 'a');
+ * // => true
+ */
+export function some<T>(arr: readonly T[], propertyToCheck: string): boolean;
+
+/**
+ * Checks if there is an element in an array that matches the given partial object.
+ *
+ * @param {T[]} arr The array to iterate over.
+ * @param {Partial<T>} doesMatch The partial object to match.
+ * @returns {boolean} Returns `true` if any element matches the partial object, else `false`.
+ *
+ * @example
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], { a: 2 });
+ * // => true
+ */
+export function some<T>(arr: readonly T[], doesMatch: Partial<T>): boolean;
+
+/**
+ * Checks if there is an element in an array that matches the given predicate.
+ *
+ * Iteration is stopped once there is an element that matches `predicate`.
+ *
+ * @param {T[]} arr The array to iterate over.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} [predicate=identity] The function invoked per iteration.
+ * If a property name or an object is provided it will be used to create a predicate function.
+ * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
+ *
+ * @example
+ * some([1, 2, 3, 4], n => n % 2 === 0);
+ * // => true
+ *
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], { a: 2 });
+ * // => true
+ *
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], ['a', 2]);
+ * // => true
+ *
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], 'a');
+ * // => true
  */
 export function some<T>(
-  arr: T[] | null | undefined,
-  predicate: ((value: T, index: number, arr: T[]) => unknown) | keyof T
-) {
-  if (arr == null || typeof arr === 'undefined') {
+  arr: readonly T[] | null | undefined,
+  predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
+  guard?: unknown
+): boolean;
+
+/**
+ * Checks if there is an element in an array that matches the given predicate.
+ *
+ * Iteration is stopped once there is an element that matches `predicate`.
+ *
+ * @param {T[]} arr The array to iterate over.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} [predicate=identity] The function invoked per iteration.
+ * If a property name or an object is provided it will be used to create a predicate function.
+ * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
+ *
+ * @example
+ * some([1, 2, 3, 4], n => n % 2 === 0);
+ * // => true
+ *
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], { a: 2 });
+ * // => true
+ *
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], ['a', 2]);
+ * // => true
+ *
+ * some([{ a: 1 }, { a: 2 }, { a: 3 }], 'a');
+ * // => true
+ */
+export function some<T>(
+  arr: readonly T[] | null | undefined,
+  predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
+  guard?: unknown
+): boolean {
+  if (guard != null) {
+    predicate = undefined;
+  }
+
+  if (!predicate) {
+    predicate = identity;
+  }
+
+  if (!Array.isArray(arr)) {
     return false;
   }
 
-  const predicateFn = typeof predicate === 'function' ? predicate : property(predicate);
-  return arr.some((value, index, array) => predicateFn(value, index, array));
+  switch (typeof predicate) {
+    case 'function': {
+      return arr.some(predicate);
+    }
+    case 'object': {
+      if (Array.isArray(predicate) && predicate.length === 2) {
+        const key = predicate[0];
+        const value = predicate[1];
+
+        return arr.some(matchesProperty(key, value));
+      } else {
+        return arr.some(matches(predicate));
+      }
+    }
+    case 'string': {
+      return arr.some(property(predicate));
+    }
+  }
 }
