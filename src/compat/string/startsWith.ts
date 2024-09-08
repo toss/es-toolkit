@@ -15,6 +15,6 @@
  * const isPrefix = startsWith('fooBar', 'Bar', 2) // returns true
  * const isPrefix = startsWith('fooBar', 'Bar', 5) // returns false
  */
-export const startsWith = (str: string, target: string, position = 0): boolean => {
+export function startsWith(str: string, target: string, position = 0): boolean {
   return str.startsWith(target, position);
-};
+}

@@ -12,7 +12,7 @@ interface DebounceOptions {
  * @param {number} debounceMs - The number of milliseconds to delay.
  * @param {DebounceOptions} options - The options object
  * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
- * @returns {((...args: Parameters<F>) => void) & { cancel: () => void }} A new debounced function with a `cancel` method.
+ * @returns A new debounced function with a `cancel` method.
  *
  * @example
  * const debouncedFunction = debounce(() => {

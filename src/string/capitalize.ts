@@ -10,6 +10,6 @@
  * const result2 = capitalize('FRED') // returns 'Fred'
  */
 
-export const capitalize = <T extends string>(str: T): Capitalize<T> => {
+export function capitalize<T extends string>(str: T): Capitalize<T> {
   return (str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()) as Capitalize<T>;
-};
+}

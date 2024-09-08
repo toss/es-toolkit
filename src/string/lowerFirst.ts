@@ -9,6 +9,6 @@
  * const convertedStr2 = lowerCase('Fred') // returns 'fred'
  * const convertedStr3 = lowerCase('FRED') // returns 'fRED'
  */
-export const lowerFirst = (str: string): string => {
+export function lowerFirst(str: string): string {
   return str.substring(0, 1).toLowerCase() + str.substring(1);
-};
+}
