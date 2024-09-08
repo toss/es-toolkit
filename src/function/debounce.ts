@@ -12,7 +12,7 @@ interface DebounceOptions {
  * @param {number} debounceMs - The number of milliseconds to delay.
  * @param {DebounceOptions} options - The options object
  * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
- * @returns {((...args: Parameters<F>) => void) & { cancel: () => void }} A new debounced function with a `cancel` method.
+ * @returns A new debounced function with a `cancel` method.
  *
  * @example
  * const debouncedFunction = debounce(() => {
@@ -40,7 +40,7 @@ interface DebounceOptions {
 export function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
-  { signal }: DebounceOptions = {}
+  { signal }: DebounceOptions = {},
 ): ((...args: Parameters<F>) => void) & { cancel: () => void } {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
@@ -70,7 +70,7 @@ export function debounce<F extends (...args: any[]) => void>(
     }
   };
 
-  signal?.addEventListener('abort', onAbort, { once: true });
+  signal?.addEventListener("abort", onAbort, { once: true });
 
   return debounced;
 }
