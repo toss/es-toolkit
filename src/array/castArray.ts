@@ -26,7 +26,7 @@
  */
 
 export function castArray<T>(value?: unknown): T[] {
-  if (typeof value === 'undefined') {
+  if (arguments.length === 0) {
     return [];
   }
 
