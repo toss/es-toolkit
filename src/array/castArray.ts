@@ -3,7 +3,7 @@
  *
  * @template T The type of elements in the array.
  * @param {T | readonly T[]} value The value to be cast to an array.
- * @returns {Array<T extends undefined ? undefined : T>} An array containing the input value if it wasn't an array, or the original array if it was.
+ * @returns { T[]} An array containing the input value if it wasn't an array, or the original array if it was.
  *
  * @example
  * const arr1 = castArray(1);
@@ -25,10 +25,10 @@
  * // Returns: []
  */
 
-export function castArray<T>(value?: T | readonly T[]): Array<T extends undefined ? undefined : T> {
+export function castArray<T>(value?: T | readonly T[]): T[] {
   if (arguments.length === 0) {
     return [];
   }
 
-  return Array.isArray(value) ? value : ([value] as Array<T extends undefined ? undefined : T>);
+  return Array.isArray(value) ? value : ([value] as T[]);
 }

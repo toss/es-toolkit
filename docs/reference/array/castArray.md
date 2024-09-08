@@ -5,7 +5,7 @@ Casts value as an array if it's not one.
 ## Signature
 
 ```typescript
-function castArray<T>(value?: T | readonly T[]): Array<T extends undefined ? undefined : T>;
+function castArray<T>(value?: T | readonly T[]): T[];
 ```
 
 ### Parameters
@@ -14,7 +14,7 @@ function castArray<T>(value?: T | readonly T[]): Array<T extends undefined ? und
 
 ### Returns
 
-(`Array<T extends undefined ? undefined : T>`): An array containing the input value if it wasn't an array, or the original array if it was.
+(`T[]`): An array containing the input value if it wasn't an array, or the original array if it was.
 
 ## Examples
 
