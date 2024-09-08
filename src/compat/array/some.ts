@@ -4,6 +4,18 @@ import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
+ * Checks if there is an element in an array that is truthy.
+ *
+ * @param {T[]} arr The array to iterate over.
+ * @returns {boolean} Returns `true` if any element is truthy, else `false`.
+ *
+ * @example
+ * some([1, 2, 3, 4]);
+ * // => true
+ */
+export function some<T>(arr: readonly T[]): boolean;
+
+/**
  * Checks if there is an element in an array that matches the given predicate function.
  *
  * @param {T[]} arr The array to iterate over.

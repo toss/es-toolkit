@@ -6,7 +6,7 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-检查数组中是否有与给定谓词匹配的元素。
+检查数组中是否有元素满足给定的条件。
 
 您可以通过以下几种方式指定条件：
 
@@ -15,9 +15,12 @@
 - **属性-值对**：如果提供一个属性-值对，该函数将返回第一个匹配该属性和值的项。
 - **属性名称**：如果提供一个属性名称，该函数将返回第一个指定属性具有真值的项。
 
+如果没有提供条件，该函数会检查数组中是否有任何值为真的元素。
+
 ## 签名
 
 ```typescript
+function some<T>(arr: T[]): boolean;
 function some<T>(arr: T[], predicate: (item: T, index: number, arr: any) => unknown): boolean;
 function some<T>(arr: T[], predicate: [keyof T, unknown]): boolean;
 function some<T>(arr: T[], predicate: string): boolean;
