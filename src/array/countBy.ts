@@ -17,7 +17,7 @@
  *
  * @example
  * const array = ['a', 'b', 'c', 'a', 'b', 'a'];
- * const result = countBy(array, String);
+ * const result = countBy(array, x => x);
  * // result will be { a: 3, b: 2, c: 1 }
  *
  * @example
