@@ -47,8 +47,6 @@ export { bindKey } from './function/bindKey.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
 export { attempt } from './function/attempt.ts';
-export { conforms } from './function/conforms.ts';
-export { conformsTo } from './function/conformsTo.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
@@ -75,6 +73,8 @@ export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
 export { isWeakMap } from './predicate/isWeakMap.ts';
 export { isWeakSet } from './predicate/isWeakSet.ts';
+export { conforms } from './predicate/conforms.ts';
+export { conformsTo } from './predicate/conformsTo.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
