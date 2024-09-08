@@ -171,6 +171,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'set (兼容性)', link: '/zh_hans/reference/compat/object/set' },
             { text: 'has (兼容性)', link: '/zh_hans/reference/compat/object/has' },
             { text: 'property (兼容性)', link: '/zh_hans/reference/compat/object/property' },
+            { text: 'fromPairs (兼容性)', link: '/zh_hans/reference/compat/object/fromPairs' },
           ],
         },
         {
@@ -179,6 +180,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (兼容性)', link: '/zh_hans/reference/compat/predicate/isArguments' },
             { text: 'isArray (兼容性)', link: '/zh_hans/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (兼容性)', link: '/zh_hans/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (兼容性)', link: '/zh_hans/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/zh_hans/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/zh_hans/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/zh_hans/reference/predicate/isFunction' },
@@ -227,6 +229,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padEnd (兼容性)', link: '/zh_hans/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/zh_hans/reference/string/deburr' },
             { text: 'escape', link: '/zh_hans/reference/string/escape' },
+            { text: 'escapeRegExp', link: '/zh_hans/reference/string/escapeRegExp' },
             { text: 'unescape', link: '/zh_hans/reference/string/unescape' },
             { text: 'pad', link: '/zh_hans/reference/string/pad' },
             { text: 'repeat (兼容性)', link: '/zh_hans/reference/compat/string/repeat' },

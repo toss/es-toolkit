@@ -174,6 +174,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'set (compat)', link: '/reference/compat/object/set' },
             { text: 'has (compat)', link: '/reference/compat/object/has' },
             { text: 'property (compat)', link: '/reference/compat/object/property' },
+            { text: 'fromPairs (compat)', link: '/reference/compat/object/fromPairs' },
           ],
         },
         {
@@ -182,6 +183,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'isArguments (compat)', link: '/reference/compat/predicate/isArguments' },
             { text: 'isArray (compat)', link: '/reference/compat/predicate/isArray' },
             { text: 'isArrayLike (compat)', link: '/reference/compat/predicate/isArrayLike' },
+            { text: 'isArrayLikeObject (compat)', link: '/reference/compat/predicate/isArrayLikeObject' },
             { text: 'isBoolean', link: '/reference/predicate/isBoolean' },
             { text: 'isEqual', link: '/reference/predicate/isEqual' },
             { text: 'isFunction', link: '/reference/predicate/isFunction' },
@@ -230,6 +232,7 @@ function sidebar(): DefaultTheme.Sidebar {
             { text: 'padEnd (compat)', link: '/reference/compat/string/padEnd' },
             { text: 'deburr', link: '/reference/string/deburr' },
             { text: 'escape', link: '/reference/string/escape' },
+            { text: 'escapeRegExp', link: '/reference/string/escapeRegExp' },
             { text: 'unescape', link: '/reference/string/unescape' },
             { text: 'pad', link: '/reference/string/pad' },
             { text: 'repeat (compat)', link: '/reference/compat/string/pad' },
