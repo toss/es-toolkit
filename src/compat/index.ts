@@ -24,6 +24,7 @@
  */
 export * from '../index.ts';
 
+export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
@@ -73,6 +74,8 @@ export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
 export { isWeakMap } from './predicate/isWeakMap.ts';
 export { isWeakSet } from './predicate/isWeakSet.ts';
+export { conforms } from './predicate/conforms.ts';
+export { conformsTo } from './predicate/conformsTo.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';

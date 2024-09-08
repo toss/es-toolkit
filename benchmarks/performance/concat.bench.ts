@@ -1,15 +1,13 @@
 import { bench, describe } from 'vitest';
-import { camelCase as camelCaseToolkit } from 'es-toolkit';
-import { camelCase as camelCaseLodash } from 'lodash';
+import { concat as concatToolkit } from 'es-toolkit/compat';
+import { concat as concatLodash } from 'lodash';
 
-describe('camelCase', () => {
-  bench('es-toolkit/camelCase', () => {
-    const str = 'kebab-case';
-    camelCaseToolkit(str);
+describe('concat', () => {
+  bench('es-toolkit/concat', () => {
+    concatToolkit([1, [2, 3]], 4);
   });
 
-  bench('lodash/camelCase', () => {
-    const str = 'kebab-case';
-    camelCaseLodash(str);
+  bench('lodash/concat', () => {
+    concatLodash([1, [2, 3]], 4);
   });
 });
