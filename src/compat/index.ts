@@ -34,6 +34,7 @@ export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
 export { orderBy } from './array/orderBy.ts';
+export { sortBy } from './array/sortBy.ts';
 export { size } from './array/size.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../array/head.ts';
@@ -52,6 +53,7 @@ export { mapKeys } from './object/mapKeys.ts';
 export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
+export { fromPairs } from './object/fromPairs.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
@@ -67,6 +69,7 @@ export { isString } from './predicate/isString.ts';
 export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
 export { isWeakMap } from './predicate/isWeakMap.ts';
+export { isWeakSet } from './predicate/isWeakSet.ts';
 
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
