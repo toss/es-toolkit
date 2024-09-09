@@ -78,6 +78,7 @@ export const shared = defineConfig({
         link: 'https://jsr.io/@es-toolkit/es-toolkit',
         ariaLabel: 'JSR',
       },
+      { icon: 'discord', link: 'https://discord.gg/vGXbVjP2nY' },
     ],
   },
 
