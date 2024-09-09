@@ -16,10 +16,10 @@ describe('isObject', () => {
     expect(isObject(new Date())).toBe(true);
     expect(isObject(new Error())).toBe(true);
     expect(isObject({ a: 1 })).toBe(true);
-    expect(isObject(Object(0))).toBe(true);
+    expect(isObject(new Number(0))).toBe(true);
     expect(isObject(slice)).toBe(true);
     expect(isObject(/x/)).toBe(true);
-    expect(isObject(Object('a'))).toBe(true);
+    expect(isObject(new String(''))).toBe(true);
   });
 
   it('should return `false` for non-objects', () => {
