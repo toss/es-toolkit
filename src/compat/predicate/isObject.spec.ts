@@ -10,6 +10,7 @@ describe('isObject', () => {
   it('should return `true` if value is an object', () => {
     expect(isObject(args)).toBe(true);
     expect(isObject({})).toBe(true);
+    expect(isObject(() => { })).toBe(true);
     expect(isObject([1, 2, 3])).toBe(true);
     expect(isObject(Object(false))).toBe(true);
     expect(isObject(new Date())).toBe(true);
