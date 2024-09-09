@@ -6,6 +6,11 @@ describe('at', () => {
     expect(at(['a', 'b', 'c'], [0, 2])).toEqual(['a', 'c']);
     expect(at(['a', 'b', 'c'], [2, 0])).toEqual(['c', 'a']);
   });
+  
+  it('should support negative indices', () => {
+    expect(at(['a', 'b', 'c'], [-1, -2])).toEqual(['c', 'b']);
+    expect(at(['a', 'b', 'c'], [-2, -1])).toEqual(['b', 'c']);
+  });
 
   it('should return `undefined` for nonexistent keys', () => {
     expect(at(['a', 'b', 'c'], [2, 4, 0])).toEqual(['c', undefined, 'a']);
@@ -13,5 +18,5 @@ describe('at', () => {
 
   it('should return an empty array when no keys are given', () => {
     expect(at(['a', 'b', 'c'], [])).toEqual([]);
-  });
+  });  
 });
