@@ -160,6 +160,10 @@ describe('clone', () => {
   });
 
   it('should clone File', () => {
+    if (typeof File === 'undefined') {
+      return;
+    }
+
     const file = new File(['Hello'], 'file.txt', { type: 'text/plain' });
     const clonedFile = clone(file);
 
