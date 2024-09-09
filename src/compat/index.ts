@@ -63,6 +63,7 @@ export { isArray } from './predicate/isArray.ts';
 export { isArguments } from './predicate/isArguments.ts';
 export { isArrayLike } from './predicate/isArrayLike.ts';
 export { isSymbol } from './predicate/isSymbol.ts';
+export { isObject } from './predicate/isObject.ts';
 export { isObjectLike } from './predicate/isObjectLike.ts';
 export { isBoolean } from './predicate/isBoolean.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
