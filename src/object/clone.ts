@@ -38,7 +38,6 @@ export function clone<T>(obj: T): T {
     return obj.slice() as T;
   }
 
-  // Handle objects
   const prototype = Object.getPrototypeOf(obj);
   const Constructor = prototype.constructor;
 
