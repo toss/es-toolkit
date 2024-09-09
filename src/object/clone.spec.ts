@@ -11,6 +11,7 @@ describe('clone', () => {
     expect(clone(true)).toBe(true);
     expect(clone(null)).toBe(null);
     expect(clone(undefined)).toBe(undefined);
+    expect(clone(42n)).toBe(42n);
   });
 
   it('should clone arrays', () => {
@@ -65,14 +66,21 @@ describe('clone', () => {
 
     expect(clonedDate).toEqual(date);
     expect(clonedDate).not.toBe(date);
+    expect(clonedDate).toBeInstanceOf(Date);
   });
 
   it('should clone regular expressions', () => {
-    const regex = /abc/g;
+    const regex = /abc/gsu;
+    regex.lastIndex = 10;
     const clonedRegex = clone(regex);
 
     expect(clonedRegex).toEqual(regex);
     expect(clonedRegex).not.toBe(regex);
+    expect(clonedRegex).toBeInstanceOf(RegExp);
+
+    expect(clonedRegex.source).toBe(regex.source);
+    expect(clonedRegex.flags).toBe(regex.flags);
+    expect(clonedRegex.lastIndex).toBe(regex.lastIndex);
   });
 
   it('should shallow clone nested objects', () => {
@@ -98,6 +106,7 @@ describe('clone', () => {
 
     expect(clonedSet).toEqual(set);
     expect(clonedSet).not.toBe(set);
+    expect(clonedSet).toBeInstanceOf(Set);
   });
 
   it('should clone maps', () => {
@@ -110,5 +119,99 @@ describe('clone', () => {
 
     expect(clonedMap).toEqual(map);
     expect(clonedMap).not.toBe(map);
+    expect(clonedMap).toBeInstanceOf(Map);
+  });
+
+  it('should clone typed arrays', () => {
+    const typedArray = new Uint8Array([1, 2, 3]);
+    const clonedTypedArray = clone(typedArray);
+
+    expect(clonedTypedArray).toEqual(typedArray);
+    expect(clonedTypedArray).not.toBe(typedArray);
+    expect(clonedTypedArray).toBeInstanceOf(Uint8Array);
+  });
+
+  it('should clone BigInt64Array', () => {
+    const bigIntArray = new BigInt64Array([1n, 2n, 3n]);
+    const clonedBigIntArray = clone(bigIntArray);
+
+    expect(clonedBigIntArray).toEqual(bigIntArray);
+    expect(clonedBigIntArray).not.toBe(bigIntArray);
+    expect(clonedBigIntArray).toBeInstanceOf(BigInt64Array);
+  });
+
+  it('should clone Data views', () => {
+    const buffer = new ArrayBuffer(8);
+    const dataView = new DataView(buffer);
+    const clonedDataView = clone(dataView);
+
+    expect(clonedDataView).toEqual(dataView);
+    expect(clonedDataView).not.toBe(dataView);
+    expect(clonedDataView).toBeInstanceOf(DataView);
+  });
+
+  it('should clone Promises', () => {
+    const promise = Promise.resolve('Hello');
+    const clonedPromise = clone(promise);
+
+    expect(clonedPromise).toEqual(promise);
+    expect(clonedPromise).not.toBe(promise);
+    expect(clonedPromise).toBeInstanceOf(Promise);
+  });
+
+  it('should clone File', () => {
+    const file = new File(['Hello'], 'file.txt', { type: 'text/plain' });
+    const clonedFile = clone(file);
+
+    expect(clonedFile).toEqual(file);
+    expect(clonedFile).not.toBe(file);
+    expect(clonedFile).toBeInstanceOf(File);
+
+    expect(clonedFile.size).toBe(file.size);
+    expect(clonedFile.type).toBe(file.type);
+    expect(clonedFile.text()).resolves.toBe('Hello');
+  });
+
+  it('should clone Blob', () => {
+    const blob = new Blob(['Hello'], { type: 'text/plain' });
+    const clonedBlob = clone(blob);
+
+    expect(clonedBlob).toEqual(blob);
+    expect(clonedBlob).not.toBe(blob);
+    expect(clonedBlob).toBeInstanceOf(Blob);
+
+    expect(clonedBlob.size).toBe(blob.size);
+    expect(clonedBlob.type).toBe(blob.type);
+    expect(clonedBlob.text()).resolves.toBe('Hello');
+  });
+
+  it('should clone Error', () => {
+    const error = new Error('Something went wrong');
+    const clonedError = clone(error);
+
+    expect(clonedError).toEqual(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError).toBeInstanceOf(Error);
+
+    expect(clonedError.message).toBe(error.message);
+  });
+
+  it('should clone Custom Error', () => {
+    class CustomError extends Error {
+      constructor(message: string) {
+        super(message);
+        this.name = 'CustomError';
+      }
+    }
+
+    const error = new CustomError('Something went wrong');
+    const clonedError = clone(error);
+
+    expect(clonedError).toEqual(error);
+    expect(clonedError).not.toBe(error);
+    expect(clonedError).toBeInstanceOf(CustomError);
+
+    expect(clonedError.message).toBe(error.message);
+    expect(clonedError.name).toBe(error.name);
   });
 });
