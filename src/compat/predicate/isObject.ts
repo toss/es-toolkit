@@ -22,8 +22,7 @@
  * console.log(isArray(value4)); // false
  */
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export function isObject(value: unknown): value is object | Function {
+export function isObject(value: unknown): value is object | ((...args: any[]) => unknown) {
   const type = typeof value;
   return value !== null && (type === 'object' || type === 'function');
 }
