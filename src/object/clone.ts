@@ -37,7 +37,7 @@ export function clone<T>(obj: T): T {
   if (Array.isArray(obj) || isTypedArray(obj)) {
     return obj.slice() as T;
   }
-  g;
+
   // Handle objects
   const prototype = Object.getPrototypeOf(obj);
   const Constructor = prototype.constructor;
