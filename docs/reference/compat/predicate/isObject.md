@@ -15,7 +15,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isObject(value: unknown): value is object | Function;
+function isObject(value: unknown): value is object | ((...args: any[]) => unknown);
 ```
 
 ### Parameters
@@ -24,7 +24,7 @@ function isObject(value: unknown): value is object | Function;
 
 ### Returns
 
-(`value is object | Function`): Returns `true` if the value is an object, `false` otherwise.
+(`value is object | (...args: any[]) => unknown`): Returns `true` if the value is an object, `false` otherwise.
 
 ## Examples
 

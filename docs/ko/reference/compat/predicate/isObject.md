@@ -15,7 +15,7 @@ TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어�
 ## 인터페이스
 
 ```typescript
-function isObject(value: unknown): value is object | Function;
+function isObject(value: unknown): value is object | ((...args: any[]) => unknown);
 ```
 
 ### 파라미터
@@ -24,7 +24,7 @@ function isObject(value: unknown): value is object | Function;
 
 ### 반환 값
 
-(`value is object | Function`): 주어진 값이 객체 이면 `true`, 아니면 `false`를 반환해요.
+(`value is object | (...args: any[]) => unknown`): 주어진 값이 객체 이면 `true`, 아니면 `false`를 반환해요.
 
 ## 예시
 
