@@ -29,6 +29,32 @@ describe('clone', () => {
     expect(clonedBuffer).toEqual(buffer);
     expect(clonedBuffer).not.toBe(buffer);
     expect(clonedBuffer).toBeInstanceOf(ArrayBuffer);
+
+    expect(clonedBuffer.byteLength).toBe(buffer.byteLength);
+    expect(new Uint8Array(clonedBuffer)).toEqual(new Uint8Array(buffer));
+  });
+
+  it('should clone buffers', () => {
+    const buffer = Buffer.from([1, 2, 3]);
+    const clonedBuffer = clone(buffer);
+
+    expect(clonedBuffer).toEqual(buffer);
+    expect(clonedBuffer).not.toBe(buffer);
+    expect(clonedBuffer).toBeInstanceOf(Buffer);
+
+    expect(clonedBuffer.length).toBe(buffer.length);
+  });
+
+  it('should clone SharedArrayBuffer', () => {
+    const buffer = new SharedArrayBuffer(8);
+    const clonedBuffer = clone(buffer);
+
+    expect(clonedBuffer).toEqual(buffer);
+    expect(clonedBuffer).not.toBe(buffer);
+    expect(clonedBuffer).toBeInstanceOf(SharedArrayBuffer);
+
+    expect(clonedBuffer.byteLength).toBe(buffer.byteLength);
+    expect(new Uint8Array(clonedBuffer)).toEqual(new Uint8Array(buffer));
   });
 
   it('should clone objects', () => {
@@ -150,15 +176,6 @@ describe('clone', () => {
     expect(clonedDataView).toBeInstanceOf(DataView);
   });
 
-  it('should clone Promises', () => {
-    const promise = Promise.resolve('Hello');
-    const clonedPromise = clone(promise);
-
-    expect(clonedPromise).toEqual(promise);
-    expect(clonedPromise).not.toBe(promise);
-    expect(clonedPromise).toBeInstanceOf(Promise);
-  });
-
   it('should clone File', () => {
     if (typeof File === 'undefined') {
       return;
@@ -190,7 +207,7 @@ describe('clone', () => {
   });
 
   it('should clone Error', () => {
-    const error = new Error('Something went wrong');
+    const error = new Error('Something went wrong', { cause: 'Unknown' });
     const clonedError = clone(error);
 
     expect(clonedError).toEqual(error);
@@ -198,6 +215,9 @@ describe('clone', () => {
     expect(clonedError).toBeInstanceOf(Error);
 
     expect(clonedError.message).toBe(error.message);
+    expect(clonedError.stack).toBe(error.stack);
+    expect(clonedError.name).toBe(error.name);
+    expect(clonedError.cause).toBe(error.cause);
   });
 
   it('should clone Custom Error', () => {

@@ -1,4 +1,4 @@
-import { isTypedArray } from '../predicate';
+import { isTypedArray } from '../predicate/isTypedArray';
 import { isPrimitive } from '../predicate/isPrimitive';
 
 /**
@@ -34,8 +34,8 @@ export function clone<T>(obj: T): T {
     return obj;
   }
 
-  if (Array.isArray(obj) || isTypedArray(obj)) {
-    return obj.slice() as T;
+  if (Array.isArray(obj) || isTypedArray(obj) || obj instanceof ArrayBuffer || obj instanceof SharedArrayBuffer) {
+    return obj.slice(0) as T;
   }
 
   const prototype = Object.getPrototypeOf(obj);
@@ -46,10 +46,10 @@ export function clone<T>(obj: T): T {
   }
 
   if (obj instanceof RegExp) {
-    const result = new Constructor(obj);
-    result.lastIndex = obj.lastIndex;
+    const newRegExp = new Constructor(obj);
+    newRegExp.lastIndex = obj.lastIndex;
 
-    return result;
+    return newRegExp;
   }
 
   if (obj instanceof DataView) {
@@ -57,7 +57,18 @@ export function clone<T>(obj: T): T {
   }
 
   if (obj instanceof Error) {
-    return new Constructor(obj.message);
+    const newError = new Constructor(obj.message);
+
+    newError.stack = obj.stack;
+    newError.name = obj.name;
+    newError.cause = obj.cause;
+
+    return newError;
+  }
+
+  if (typeof File !== 'undefined' && obj instanceof File) {
+    const newFile = new Constructor([obj], obj.name, { type: obj.type, lastModified: obj.lastModified });
+    return newFile;
   }
 
   if (typeof obj === 'object') {
