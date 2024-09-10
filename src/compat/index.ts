@@ -78,6 +78,7 @@ export { isWeakSet } from './predicate/isWeakSet.ts';
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
 
+export { camelCase } from './string/camelCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
