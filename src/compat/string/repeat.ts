@@ -7,6 +7,10 @@
  * @param {string} str - The string to repeat.
  * @param {number} n - The number of times to repeat the string.
  * @returns {string} - The repeated string, or an empty string if n is less than 1.
+ *
+ * @example
+ * repeat('abc', 0); // ''
+ * repeat('abc', 2); // 'abcabc'
  */
 export function repeat(str: string, n: number): string {
   return str.repeat(n);
