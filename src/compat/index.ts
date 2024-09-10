@@ -86,3 +86,6 @@ export { repeat } from './string/repeat.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
+export { ceil } from './math/ceil.ts';
+export { floor } from './math/floor.ts';
+export { round } from './math/round.ts';
