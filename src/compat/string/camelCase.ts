@@ -1,5 +1,5 @@
 import { camelCase as camelCaseToolkit } from '../../string/camelCase';
-import { caseCompatLayer } from '../_internal/caseCompatLayer';
+import { normalizeForCase } from '../_internal/normalizeForCase';
 
 /**
  * Converts a string to camel case.
@@ -18,5 +18,5 @@ import { caseCompatLayer } from '../_internal/caseCompatLayer';
  */
 
 export function camelCase(str: string | object): string {
-  return caseCompatLayer(str, camelCaseToolkit);
+  return camelCaseToolkit(normalizeForCase(str));
 }
