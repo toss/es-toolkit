@@ -78,11 +78,13 @@ export { isWeakSet } from './predicate/isWeakSet.ts';
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
 
+export { camelCase } from './string/camelCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
 export { repeat } from './string/repeat.ts';
+export { parseInt } from './string/parseInt.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
