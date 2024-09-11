@@ -4,14 +4,14 @@ export function decimalAdjust(
   precision: number | string = 0
 ): number {
   number = Number(number);
-  if (number === 0 && 1 / number === -Infinity) {
+  if (Object.is(number, -0)) {
     number = '-0';
   }
   precision = Math.min(Number.parseInt(precision as string, 10), 292);
   if (precision) {
     const [magnitude, exponent = 0] = number.toString().split('e');
     let adjustedValue: string | number = Math[type](Number(`${magnitude}e${Number(exponent) + precision}`));
-    if (adjustedValue === 0 && 1 / adjustedValue === -Infinity) {
+    if (Object.is(adjustedValue, -0)) {
       adjustedValue = '-0';
     }
     const [newMagnitude, newExponent = 0] = adjustedValue.toString().split('e');

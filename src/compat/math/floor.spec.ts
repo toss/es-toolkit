@@ -56,6 +56,7 @@ describe('floor', () => {
     const values = [[0], [-0], ['0'], ['-0'], [0, 1], [-0, 1], ['0', 1], ['-0', 1]];
     const expected = [Infinity, -Infinity, Infinity, -Infinity, Infinity, -Infinity, Infinity, -Infinity];
 
+    // eslint-disable-next-line prefer-spread
     const actual = values.map(args => 1 / floor.apply(undefined, args as any));
 
     expect(actual).toEqual(expected);
