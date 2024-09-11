@@ -1,34 +1,36 @@
-const deburrMap: Record<string, string> = {
-  Æ: 'Ae',
-  Ð: 'D',
-  Ø: 'O',
-  Þ: 'Th',
-  ß: 'ss',
-  æ: 'ae',
-  ð: 'd',
-  ø: 'o',
-  þ: 'th',
-  Đ: 'D',
-  đ: 'd',
-  Ħ: 'H',
-  ħ: 'h',
-  ı: 'i',
-  Ĳ: 'IJ',
-  ĳ: 'ij',
-  ĸ: 'k',
-  Ŀ: 'L',
-  ŀ: 'l',
-  Ł: 'L',
-  ł: 'l',
-  ŉ: "'n",
-  Ŋ: 'N',
-  ŋ: 'n',
-  Œ: 'Oe',
-  œ: 'oe',
-  Ŧ: 'T',
-  ŧ: 't',
-  ſ: 's',
-};
+const deburrMap = new Map<string, string>(
+  Object.entries({
+    Æ: 'Ae',
+    Ð: 'D',
+    Ø: 'O',
+    Þ: 'Th',
+    ß: 'ss',
+    æ: 'ae',
+    ð: 'd',
+    ø: 'o',
+    þ: 'th',
+    Đ: 'D',
+    đ: 'd',
+    Ħ: 'H',
+    ħ: 'h',
+    ı: 'i',
+    Ĳ: 'IJ',
+    ĳ: 'ij',
+    ĸ: 'k',
+    Ŀ: 'L',
+    ŀ: 'l',
+    Ł: 'L',
+    ł: 'l',
+    ŉ: "'n",
+    Ŋ: 'N',
+    ŋ: 'n',
+    Œ: 'Oe',
+    œ: 'oe',
+    Ŧ: 'T',
+    ŧ: 't',
+    ſ: 's',
+  })
+);
 
 /**
  * Converts a string by replacing special characters and diacritical marks with their ASCII equivalents.
@@ -52,7 +54,7 @@ const deburrMap: Record<string, string> = {
 export function deburr(str: string): string {
   str = str.normalize('NFD');
 
-  const result: string[] = [];
+  let result = '';
 
   for (let i = 0; i < str.length; i++) {
     const char = str[i];
@@ -61,8 +63,8 @@ export function deburr(str: string): string {
       continue;
     }
 
-    result.push(deburrMap[char] ?? char);
+    result += deburrMap.get(char) ?? char;
   }
 
-  return result.join('');
+  return result;
 }
