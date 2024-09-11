@@ -8,7 +8,7 @@
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object value.
  *
  * @param {unknown} value - The value to check if it is an object.
- * @returns {value is object | Function} `true` if the value is the language type of Object, `false` otherwise.
+ * @returns {value is object} `true` if the value is the language type of Object, `false` otherwise.
  *
  * @example
  * const value1 = {};
@@ -22,7 +22,7 @@
  * console.log(isArray(value4)); // false
  */
 
-export function isObject(value: unknown): value is object | ((...args: any[]) => unknown) {
+export function isObject(value: unknown): value is object {
   const type = typeof value;
   return value !== null && (type === 'object' || type === 'function');
 }
