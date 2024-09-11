@@ -38,6 +38,7 @@ export { size } from './array/size.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../array/head.ts';
 export { indexOf } from './array/indexOf.ts';
+export { map } from './array/map.ts';
 
 export { ary } from './function/ary.ts';
 export { bind } from './function/bind.ts';
