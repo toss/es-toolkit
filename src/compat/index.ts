@@ -35,13 +35,14 @@ export { findLastIndex } from './array/findLastIndex.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
+export { indexOf } from './array/indexOf.ts';
+export { join } from './array/join.ts';
 export { orderBy } from './array/orderBy.ts';
 export { sortBy } from './array/sortBy.ts';
 export { size } from './array/size.ts';
 export { some } from './array/some.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../array/head.ts';
-export { indexOf } from './array/indexOf.ts';
 
 export { ary } from './function/ary.ts';
 export { bind } from './function/bind.ts';
@@ -86,10 +87,11 @@ export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
 export { repeat } from './string/repeat.ts';
-export { parseInt } from './string/parseInt.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
 export { ceil } from './math/ceil.ts';
 export { floor } from './math/floor.ts';
 export { round } from './math/round.ts';
+export { parseInt } from './math/parseInt.ts';
+
