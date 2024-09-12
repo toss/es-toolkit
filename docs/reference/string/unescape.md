@@ -1,6 +1,6 @@
 # unescape
 
-Converts the HTML entities `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `str` to their corresponding characters. It is the inverse of [`escape`](./escape.md). 
+Converts the HTML entities `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `str` to their corresponding characters. It is the inverse of [`escape`](./escape.md).
 
 ## Signature
 

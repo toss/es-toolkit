@@ -6,7 +6,7 @@
 
 ## 签名
 
-```typescript 
+```typescript
 function pad(str: string, length: number, chars = ' '): string;
 ```
 

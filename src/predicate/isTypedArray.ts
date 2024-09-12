@@ -13,6 +13,16 @@
  *   | BigInt64Array
  *   | Float32Array
  *   | Float64Array} Returns true if `x` is a TypedArray, false otherwise.
+ *
+ * @example
+ * const arr = new Uint8Array([1, 2, 3]);
+ * isTypedArray(arr); // true
+ *
+ * const regularArray = [1, 2, 3];
+ * isTypedArray(regularArray); // false
+ *
+ * const buffer = new ArrayBuffer(16);
+ * isTypedArray(buffer); // false
  */
 export function isTypedArray(
   x: unknown
@@ -28,17 +38,5 @@ export function isTypedArray(
   | BigInt64Array
   | Float32Array
   | Float64Array {
-  return (
-    x instanceof Uint8Array ||
-    x instanceof Uint8ClampedArray ||
-    x instanceof Uint16Array ||
-    x instanceof Uint32Array ||
-    x instanceof BigUint64Array ||
-    x instanceof Int8Array ||
-    x instanceof Int16Array ||
-    x instanceof Int32Array ||
-    x instanceof BigInt64Array ||
-    x instanceof Float32Array ||
-    x instanceof Float64Array
-  );
+  return ArrayBuffer.isView(x) && !(x instanceof DataView);
 }
