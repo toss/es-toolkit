@@ -1,3 +1,21 @@
+const ESCAPE_REGEXP = /\\(\\)?/g;
+const PROPERTY_REGEXP = RegExp(
+  // Match anything that isn't a dot or bracket.
+  '[^.[\\]]+' +
+    '|' +
+    // Or match property names within brackets.
+    '\\[(?:' +
+    // Match a non-string expression.
+    '([^"\'][^[]*)' +
+    '|' +
+    // Or match strings (supports escaping characters).
+    '(["\'])((?:(?!\\2)[^\\\\]|\\\\.)*?)\\2' +
+    ')\\]' +
+    '|' +
+    // Or match "" as the space between consecutive dots or empty brackets.
+    '(?=(?:\\.|\\[\\])(?:\\.|\\[\\]|$))',
+  'g'
+);
 /**
  * Converts a deep key string into an array of path segments.
  *
@@ -16,25 +34,6 @@
  * toPath('.a[b].c.d[e]["f.g"].h') // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
  */
 export function toPath(deepKey: string): string[] {
-  const ESCAPE_REGEXP = /\\(\\)?/g;
-  const PROPERTY_REGEXP = RegExp(
-    // Match anything that isn't a dot or bracket.
-    '[^.[\\]]+' +
-      '|' +
-      // Or match property names within brackets.
-      '\\[(?:' +
-      // Match a non-string expression.
-      '([^"\'][^[]*)' +
-      '|' +
-      // Or match strings (supports escaping characters).
-      '(["\'])((?:(?!\\2)[^\\\\]|\\\\.)*?)\\2' +
-      ')\\]' +
-      '|' +
-      // Or match "" as the space between consecutive dots or empty brackets.
-      '(?=(?:\\.|\\[\\])(?:\\.|\\[\\]|$))',
-    'g'
-  );
-
   const result: string[] = [];
 
   if (deepKey[0] === '.') {
