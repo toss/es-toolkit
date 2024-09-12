@@ -3,9 +3,7 @@ import { formatBrokenSyntax } from './_internal/formatter/brokenSyntax';
 import { transformImport } from './_internal/transform/import';
 import { transformLodashStable } from './_internal/transform/lodashStable';
 
-export default function transform(file: FileInfo, api: API) {
-  const { jscodeshift } = api;
-
+export default function transform(file: FileInfo, { jscodeshift }: API) {
   try {
     const root = jscodeshift(formatBrokenSyntax(file.source));
 
