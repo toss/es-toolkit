@@ -74,6 +74,21 @@ export function findLastIndex<T>(arr: readonly T[], doesMatchProperty: [keyof T,
  */
 export function findLastIndex<T>(arr: readonly T[], propertyToCheck: string, fromIndex?: number): number;
 
+/**
+ * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
+ *
+ * @template T
+ * @param {readonly T[]} arr - The array to search through.
+ * @param {string} propertyToCheck - The property name to check.
+ * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
+ * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
+ *
+ * @example
+ * // Using a property name
+ * const items = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+ * const result = findLastIndex(items, 'name');
+ * console.log(result); // 1
+ */
 export function findLastIndex<T>(
   source: readonly T[],
   doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
