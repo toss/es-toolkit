@@ -6,9 +6,10 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Check if a value is is [the language type](https://262.ecma-international.org/7.0/#sec-ecmascript-language-types) of Object. (e.g. arrays, functions, objects, regexes, new Number(0), and new String('')).
+Checks if the given value is an object. An object is a value that is not a primitive type (string, number, boolean, symbol, null, or undefined).
 
-A value is an object if its type is object, function and it is not null.
+This function tests whether the provided value is an object or not.
+It returns `true` if the value is an object, and `false` otherwise.
 
 This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object value.
 

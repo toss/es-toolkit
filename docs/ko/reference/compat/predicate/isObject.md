@@ -6,11 +6,11 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-주어진 값이 객체([language type](https://262.ecma-international.org/7.0/#sec-ecmascript-language-types) of Object)인지 확인해요.
+주어진 값이 객체인지 확인해요.
 
 객체란, `typeof` 연산의 결과가 `object`, `function` 이고 `null`이 아닌 값을 말해요.
 
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 객체 값으로 좁혀요.
+TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `object`로 좁혀요.
 
 ## 인터페이스
 
@@ -20,11 +20,11 @@ function isObject(value: unknown): value is object;
 
 ### 파라미터
 
-- `value` (`unknown`): 객체인지 확인할 값이에요.
+- `value` (`unknown`): 객체인지 확인할 값.
 
 ### 반환 값
 
-(`value is object`): 주어진 값이 객체 이면 `true`, 아니면 `false`를 반환해요.
+(`value is object`): 주어진 값이 객체이면 `true`, 아니면 `false`.
 
 ## 예시
 

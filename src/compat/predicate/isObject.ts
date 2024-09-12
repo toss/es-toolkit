@@ -1,6 +1,6 @@
 /**
- * Checks if the given value is the language type of Object.
- * https://262.ecma-international.org/7.0/#sec-ecmascript-language-types
+ * Checks if the given value is an object. An object is a value that is
+ * not a primitive type (string, number, boolean, symbol, null, or undefined).
  *
  * This function tests whether the provided value is an object or not.
  * It returns `true` if the value is an object, and `false` otherwise.
@@ -8,7 +8,7 @@
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object value.
  *
  * @param {unknown} value - The value to check if it is an object.
- * @returns {value is object} `true` if the value is the language type of Object, `false` otherwise.
+ * @returns {value is object} `true` if the value is an object, `false` otherwise.
  *
  * @example
  * const value1 = {};
@@ -23,6 +23,5 @@
  */
 
 export function isObject(value: unknown): value is object {
-  const type = typeof value;
-  return value !== null && (type === 'object' || type === 'function');
+  return value !== null && (typeof value === 'object' || typeof value === 'function');
 }
