@@ -18,10 +18,14 @@
 ## インターフェース
 
 ```typescript
-function findLastIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): number;
-function findLastIndex<T>(arr: T[], doesMatch: Partial<T>): number;
-function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown]): number;
-function findLastIndex<T>(arr: T[], doesMatch: string): number;
+function findLastIndex<T>(
+  arr: T[],
+  doesMatch: (item: T, index: number, arr: T[]) => unknown,
+  fromIndex?: number
+): number;
+function findLastIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
+function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findLastIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
 ```
 
 ### パラメータ
@@ -34,6 +38,8 @@ function findLastIndex<T>(arr: T[], doesMatch: string): number;
   - **部分オブジェクト** (`Partial<T>`): 一致させるプロパティと値を指定した部分オブジェクト。
   - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
   - **プロパティ名** (`string`): 真と評価される値を持っているか確認するプロパティ名。
+
+- `fromIndex` (`number`): 検索を開始するインデックス。デフォルトは配列の最後のインデックス (`arr.length - 1`)。
 
 ### 戻り値
 

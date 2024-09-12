@@ -8,6 +8,7 @@ import { matchesProperty } from '../predicate/matchesProperty';
  * @template T
  * @param {T[]} arr - The array to search through.
  * @param {(item: T, index: number, arr: T[]) => unknown} doesMatch - A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
+ * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
  * @returns {number} - The index of the first item that matches the predicate, or `undefined` if no match is found.
  *
  * @example
@@ -18,7 +19,8 @@ import { matchesProperty } from '../predicate/matchesProperty';
  */
 export function findLastIndex<T>(
   arr: readonly T[],
-  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown
+  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown,
+  fromIndex?: number
 ): number;
 
 /**
@@ -27,6 +29,7 @@ export function findLastIndex<T>(
  * @template T
  * @param {readonly T[]} arr - The array to search through.
  * @param {Partial<T>} doesMatch - A partial object that specifies the properties to match.
+ * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
  * @returns {number} - The index of the first item that matches the partial object, or `undefined` if no match is found.
  *
  * @example
@@ -35,7 +38,7 @@ export function findLastIndex<T>(
  * const result = findLastIndex(items, { name: 'Bob' });
  * console.log(result); // 1
  */
-export function findLastIndex<T>(arr: readonly T[], doesMatch: Partial<T>): number;
+export function findLastIndex<T>(arr: readonly T[], doesMatch: Partial<T>, fromIndex?: number): number;
 
 /**
  * Finds the index of the first item in an array that matches a property with a specific value.
@@ -43,6 +46,7 @@ export function findLastIndex<T>(arr: readonly T[], doesMatch: Partial<T>): numb
  * @template T
  * @param {readonly T[]} arr - The array to search through.
  * @param {[keyof T, unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
+ * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
  * @returns {number} - The index of the first item that has the specified property value, or `undefined` if no match is found.
  *
  * @example
@@ -51,7 +55,7 @@ export function findLastIndex<T>(arr: readonly T[], doesMatch: Partial<T>): numb
  * const result = findLastIndex(items, ['name', 'Alice']);
  * console.log(result); // 0
  */
-export function findLastIndex<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknown]): number;
+export function findLastIndex<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknown], fromIndex?: number): number;
 
 /**
  * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
@@ -59,6 +63,7 @@ export function findLastIndex<T>(arr: readonly T[], doesMatchProperty: [keyof T,
  * @template T
  * @param {readonly T[]} arr - The array to search through.
  * @param {string} propertyToCheck - The property name to check.
+ * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
  * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
  *
  * @example
@@ -67,12 +72,21 @@ export function findLastIndex<T>(arr: readonly T[], doesMatchProperty: [keyof T,
  * const result = findLastIndex(items, 'name');
  * console.log(result); // 1
  */
-export function findLastIndex<T>(arr: readonly T[], propertyToCheck: string): number;
+export function findLastIndex<T>(arr: readonly T[], propertyToCheck: string, fromIndex?: number): number;
 
 export function findLastIndex<T>(
   source: readonly T[],
-  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string
+  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
+  fromIndex: number = source.length - 1
 ): number {
+  if (fromIndex < 0) {
+    fromIndex = Math.max(source.length + fromIndex, 0);
+  } else {
+    fromIndex = Math.min(fromIndex, source.length - 1);
+  }
+
+  source = source.slice(0, fromIndex + 1);
+
   switch (typeof doesMatch) {
     case 'function': {
       return source.findLastIndex(doesMatch);
