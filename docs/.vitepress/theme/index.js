@@ -8,7 +8,6 @@ export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     app.component(
-       
       'Sandpack',
       defineAsyncComponent(() => import('../components/Sandpack.vue'))
     );
