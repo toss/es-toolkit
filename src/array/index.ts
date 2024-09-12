@@ -22,7 +22,6 @@ export { intersection } from './intersection.ts';
 export { intersectionBy } from './intersectionBy.ts';
 export { intersectionWith } from './intersectionWith.ts';
 export { isSubset } from './isSubset.ts';
-export { join } from './join.ts';
 export { keyBy } from './keyBy.ts';
 export { last } from './last.ts';
 export { maxBy } from './maxBy.ts';
