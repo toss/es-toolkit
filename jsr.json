@@ -6,8 +6,6 @@
     "./compat": "./src/compat/index.ts"
   },
   "publish": {
-    "include": [
-      "./src/**/*.ts"
-    ]
+    "include": ["./src/**/*.ts"]
   }
 }
