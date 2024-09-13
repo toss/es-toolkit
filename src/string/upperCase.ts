@@ -14,7 +14,17 @@ import { getWords } from './_internal/getWords.ts';
  * const convertedStr3 = upperCase('hyphen-text') // returns 'HYPHEN TEXT'
  * const convertedStr4 = upperCase('HTTPRequest') // returns 'HTTP REQUEST'
  */
-export const upperCase = (str: string): string => {
+export function upperCase(str: string): string {
   const words = getWords(str);
-  return words.map(word => word.toUpperCase()).join(' ');
-};
+
+  let result = '';
+
+  for (let i = 0; i < words.length; i++) {
+    result += words[i].toUpperCase();
+    if (i < words.length - 1) {
+      result += ' ';
+    }
+  }
+
+  return result;
+}

@@ -95,4 +95,3 @@ export { ceil } from './math/ceil.ts';
 export { floor } from './math/floor.ts';
 export { round } from './math/round.ts';
 export { parseInt } from './math/parseInt.ts';
-
