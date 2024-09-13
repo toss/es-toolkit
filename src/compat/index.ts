@@ -88,6 +88,7 @@ export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
 export { repeat } from './string/repeat.ts';
+export { toString } from './string/toString.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
