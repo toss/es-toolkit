@@ -92,6 +92,8 @@ export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
 export { repeat } from './string/repeat.ts';
+
+export { toString } from './string/toString.ts';
 export { trim } from './string/trim.ts';
 export { trimStart } from './string/trimStart.ts';
 export { trimEnd } from './string/trimEnd.ts';
