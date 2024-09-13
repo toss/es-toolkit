@@ -29,6 +29,12 @@ describe('compat/pick', () => {
     ['a.b', ['a.b']].forEach(path => {
       expect(pick(object, path)).toEqual({ 'a.b': 1 });
     });
+
+    const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: 3, 'f.g': 4 };
+    expect(pick(obj, ['a.b.c', 'f.g'])).toEqual({
+      a: { b: { c: 1 } },
+      'f.g': 4,
+    });
   });
 
   it('should coerce `paths` to strings', () => {
@@ -47,6 +53,8 @@ describe('compat/pick', () => {
 
   it('should work with `arguments` object `paths`', () => {
     const args = toArgs(['a', 'c']);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(pick(object, args)).toEqual({ a: 1, c: 3 });
   });
 
