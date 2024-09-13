@@ -24,7 +24,7 @@ function isArrayLike(value: unknown): value is ArrayLike<unknown>;
 
 ### 반환 값
 
-(`value is number`): 주어진 값이 유사 배열 객체이면 `true`, 아니면 `false`를 반환해요.
+(`value is ArrayLike<unknown>`): 주어진 값이 유사 배열 객체이면 `true`, 아니면 `false`를 반환해요.
 
 ## 예시
 

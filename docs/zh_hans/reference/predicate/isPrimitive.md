@@ -16,7 +16,7 @@ function isPrimitive(value: unknown): value is null | undefined | string | numbe
 
 ### 返回
 
-(`value is null | undefined | string | number | boolean | symbol | bigint`): 如果值是原始类型则返回 true，否则返回 false。
+(`value is null | undefined | string | number | boolean | symbol | bigint`): 如果值是原始类型则返回 `true`，否则返回 `false`。
 
 ## 示例
 

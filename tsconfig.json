@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["ESNext", "DOM"],
-    "target": "es2020",
+    "target": "ESNext",
     "module": "ESNext",
     "noEmit": true,
     "allowImportingTsExtensions": true,
@@ -11,5 +11,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src", ".scripts/**/*"],
+  "exclude": [".scripts/docs/**/*"]
 }

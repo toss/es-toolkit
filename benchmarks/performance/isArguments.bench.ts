@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { isArguments as isArgumentsToolkit } from 'es-toolkit';
+import { isArguments as isArgumentsToolkit } from 'es-toolkit/compat';
 import { isArguments as isArgumentsLodash } from 'lodash';
 
 describe('isArguments', () => {

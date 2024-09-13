@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { size as sizeToolkit } from 'es-toolkit';
+import { size as sizeToolkit } from 'es-toolkit/compat';
 import { size as sizeLodash } from 'lodash';
 
 describe('size', () => {

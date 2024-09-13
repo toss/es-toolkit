@@ -11,7 +11,7 @@ function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): 
 ### Parameters
 
 - `arr` (`T[]`): The array to process.
-- `areItemsEqual` (`(x: T, y: T) => boolean`): A custom function to determine if two elements are equal. This function takes two arguments, one from each array, and returns true if the elements are considered equal, and false otherwise.
+- `areItemsEqual` (`(x: T, y: T) => boolean`): A custom function to determine if two elements are equal. This function takes two arguments, one from each array, and returns `true` if the elements are considered equal, and `false` otherwise.
 
 ### Returns
 

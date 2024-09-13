@@ -27,7 +27,7 @@
  * afterFn()
  */
 
-export const after = <F extends (...args: any[]) => any>(n: number, func: F): F => {
+export function after<F extends (...args: any[]) => any>(n: number, func: F): F {
   if (!Number.isInteger(n) || n < 0) {
     throw new Error(`n must be a non-negative integer.`);
   }
@@ -39,4 +39,4 @@ export const after = <F extends (...args: any[]) => any>(n: number, func: F): F 
     }
     return undefined;
   }) as F;
-};
+}

@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { isArrayLike as isArrayLikeToolkit } from 'es-toolkit';
+import { isArrayLike as isArrayLikeToolkit } from 'es-toolkit/compat';
 import { isArrayLike as isArrayLikeLodash } from 'lodash';
 
 describe('isArrayLike', () => {

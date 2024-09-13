@@ -26,3 +26,15 @@ const obj = { a: 1, b: 2, c: 3 };
 const result = pick(obj, ['a', 'c']);
 // result 将会是 { a: 1, c: 3 }
 ```
+
+## 与 Lodash 的兼容性
+
+`es-toolkit/compat` 中的 `pick` 函数可以处理深路径选择。
+
+```typescript
+import { pick } from 'es-toolkit/compat';
+
+const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
+const result = pick(obj, ['a.b.c', 'f.g']);
+// result will be { a: { b: { c: 1 } }, 'f.g': 4 }
+```

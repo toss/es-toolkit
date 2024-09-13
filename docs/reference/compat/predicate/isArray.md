@@ -16,16 +16,16 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isArray<T>(value: T): value is Extract<T, unknown[]>;
+function isArray(value?: unknown): value is any[];
 ```
 
 ### Parameters
 
-- `value` (`T`): The value to test if it is an array.
+- `value` (`unknown`): The value to test if it is an array.
 
 ### Returns
 
-(`value is Extract<T, unknown[]>`): `true` if the value is an array, `false` otherwise.
+(`value is any[]`): `true` if the value is an array, `false` otherwise.
 
 ## Examples
 

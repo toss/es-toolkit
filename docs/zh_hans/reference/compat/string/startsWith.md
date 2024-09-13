@@ -21,7 +21,7 @@ function startsWith(str: string, target: string, position: number = 0): string;
 
 - `str` (`string`): 要搜索的字符串。
 - `target` (`string`): 应该包含在开头的字符串。
-- `position` (`number`, 可选): 可选：从 str 字符串的某个偏移量开始搜索。
+- `position` (`number`, 可选): 从 str 字符串的某个偏移量开始搜索。
 
 ### 返回值
 

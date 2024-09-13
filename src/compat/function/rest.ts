@@ -7,7 +7,7 @@ import { rest as restToolkit } from '../../function/rest.ts';
  *
  * @template F - The type of the function being transformed.
  * @param {F} func - The function whose arguments are to be transformed.
- * @param {number} [startIndex=func.length - 1] - The index from which to start grouping the remaining arguments into an array.
+ * @param {number} [start=func.length - 1] - The index from which to start grouping the remaining arguments into an array.
  *                                            Defaults to `func.length - 1`, grouping all arguments after the last parameter.
  * @returns {(...args: any[]) => ReturnType<F>} A new function that, when called, returns the result of calling `func` with the transformed arguments.
  *

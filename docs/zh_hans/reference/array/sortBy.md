@@ -34,7 +34,7 @@ const users = [
 
 sortBy(users, ['user', 'age']);
 sortBy(users, [obj => obj.user, obj => obj.age]);
-// results will be:
+// 结果为：
 // [
 //   { user : 'bar', age: 7 },
 //   { user : 'bar', age: 29 },

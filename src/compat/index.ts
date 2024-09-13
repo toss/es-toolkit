@@ -24,51 +24,81 @@
  */
 export * from '../index.ts';
 
+export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { fill } from './array/fill.ts';
 export { find } from './array/find.ts';
 export { findIndex } from './array/findIndex.ts';
+export { findLastIndex } from './array/findLastIndex.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
+export { indexOf } from './array/indexOf.ts';
+export { join } from './array/join.ts';
 export { orderBy } from './array/orderBy.ts';
+export { sortBy } from './array/sortBy.ts';
 export { size } from './array/size.ts';
+export { some } from './array/some.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { head as first } from '../array/head.ts';
-export { indexOf } from './array/indexOf.ts';
 
 export { ary } from './function/ary.ts';
 export { bind } from './function/bind.ts';
+export { bindKey } from './function/bindKey.ts';
 export { rest } from './function/rest.ts';
+export { spread } from './function/spread.ts';
+export { attempt } from './function/attempt.ts';
+export { rearg } from './function/rearg.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
+export { pick } from './object/pick.ts';
 export { has } from './object/has.ts';
 export { property } from './object/property.ts';
 export { mapKeys } from './object/mapKeys.ts';
 export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
+export { fromPairs } from './object/fromPairs.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
 export { isArguments } from './predicate/isArguments.ts';
 export { isArrayLike } from './predicate/isArrayLike.ts';
 export { isSymbol } from './predicate/isSymbol.ts';
+export { isObject } from './predicate/isObject.ts';
 export { isObjectLike } from './predicate/isObjectLike.ts';
 export { isBoolean } from './predicate/isBoolean.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
+export { isRegExp } from './predicate/isRegExp.ts';
 export { isString } from './predicate/isString.ts';
 export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
+export { isWeakMap } from './predicate/isWeakMap.ts';
+export { isWeakSet } from './predicate/isWeakSet.ts';
+export { conforms } from './predicate/conforms.ts';
+export { conformsTo } from './predicate/conformsTo.ts';
 
+export { camelCase } from './string/camelCase.ts';
+export { kebabCase } from './string/kebabCase.ts';
+export { snakeCase } from './string/snakeCase.ts';
+export { startCase } from './string/startCase.ts';
+export { lowerCase } from './string/lowerCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
+export { repeat } from './string/repeat.ts';
+export { trim } from './string/trim.ts';
+export { trimStart } from './string/trimStart.ts';
+export { trimEnd } from './string/trimEnd.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
+export { ceil } from './math/ceil.ts';
+export { floor } from './math/floor.ts';
+export { round } from './math/round.ts';
+export { parseInt } from './math/parseInt.ts';

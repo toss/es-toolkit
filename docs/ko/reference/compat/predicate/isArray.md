@@ -16,16 +16,16 @@ TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어
 ## 인터페이스
 
 ```typescript
-function isArray<T>(value: T): value is Extract<T, unknown[]>;
+function isArray(value?: unknown): value is any[];
 ```
 
 ### 파라미터
 
-- `value` (`T`): 배열인지 확인할 값.
+- `value` (`unknown`): 배열인지 확인할 값.
 
 ### 반환 값
 
-(`value is Extract<T, unknown[]>`): 값이 배열이면 `true`, 아니면 `false`.
+(`value is any[]`): 값이 배열이면 `true`, 아니면 `false`.
 
 ## 예시
 

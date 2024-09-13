@@ -20,3 +20,4 @@ out
 *.d.ts
 *.tgz
 umd
+.env
