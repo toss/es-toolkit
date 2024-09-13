@@ -5,7 +5,7 @@ import { randomInt } from '../math/randomInt.ts';
  *
  * This function takes an array and a number, and returns an array containing the sampled elements using Floyd's algorithm.
  *
- * {@link https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html Floyd's algoritm}
+ * {@link https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html Floyd's algorithm}
  *
  * @template T - The type of elements in the array.
  * @param {T[]} array - The array to sample from.

@@ -5,7 +5,7 @@
 ## 签名
 
 ```typescript
-function timeout(ms: number): Promise<void>;
+function timeout(ms: number): Promise<never>;
 ```
 
 ### 参数

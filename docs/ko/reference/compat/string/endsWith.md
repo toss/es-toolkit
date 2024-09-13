@@ -1,7 +1,9 @@
 # endsWith
 
 ::: info
-이 함수는 [lodash와 완전히 호환](../../../compatibility.md)돼요. `es-toolkit/compat` 라이브러리에서 쓸 수 있어요.
+이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+
+`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
 문자열이 주어진 문자열로 끝나는지 확인해요. 검색을 마칠 인덱스를 지정할 수 있어요.
@@ -27,8 +29,8 @@ function endsWith(str: string, target: string, position: number = 0): string;
 ```typescript
 import { endsWith } from 'es-toolkit/compat';
 
-endsWith('fooBar', 'foo') // returns true
-endsWith('fooBar', 'Bar') // returns false
-endsWith('fooBar', 'abcdef') // returns false
-endsWith('fooBar', 'Bar', 3) // returns true
+endsWith('fooBar', 'foo'); // returns true
+endsWith('fooBar', 'Bar'); // returns false
+endsWith('fooBar', 'abcdef'); // returns false
+endsWith('fooBar', 'Bar', 3); // returns true
 ```

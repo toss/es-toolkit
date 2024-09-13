@@ -11,7 +11,7 @@ function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions
-): F & { cancel: () => void };
+): ((...args: Parameters<F>) => void) & { cancel: () => void };
 ```
 
 ### Parameters
@@ -23,7 +23,7 @@ function debounce<F extends (...args: any[]) => void>(
 
 ### Returns
 
-(`F & { cancel: () => void }`): A new debounced function with a `cancel` method.
+(`((...args: Parameters<F>) => void) & { cancel: () => void }`): A new debounced function with a `cancel` method.
 
 ## Examples
 

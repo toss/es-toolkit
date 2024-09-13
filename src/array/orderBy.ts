@@ -1,17 +1,19 @@
-type Order = 'asc' | 'desc';
+import { compareValues } from '../_internal/compareValues';
 
 /**
- * Sorts an array of objects based on multiple properties and their corresponding order directions.
+ * Sorts an array of objects based on the given `criteria` and their corresponding order directions.
  *
- * This function takes an array of objects, an array of keys to sort by, and an array of order directions.
- * It returns the sorted array, ordering by each key according to its corresponding direction
- * ('asc' for ascending or 'desc' for descending). If values for a key are equal,
- * it moves to the next key to determine the order.
+ * - If you provide keys, it sorts the objects by the values of those keys.
+ * - If you provide functions, it sorts based on the values returned by those functions.
+ *
+ * The function returns the array of objects sorted in corresponding order directions.
+ * If two objects have the same value for the current criterion, it uses the next criterion to determine their order.
+ * If the number of orders is less than the number of criteria, it uses the last order for the rest of the criteria.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} collection - The array of objects to be sorted.
- * @param {Array<keyof T>} keys - An array of keys (properties) by which to sort.
- * @param {Order[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
+ * @param {T[]} arr - The array of objects to be sorted.
+ * @param {Array<((item: T) => unknown) | keyof T>} criteria  - The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
+ * @param {Array<'asc' | 'desc'>} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
  * @returns {T[]} - The sorted array.
  *
  * @example
@@ -22,7 +24,8 @@ type Order = 'asc' | 'desc';
  *   { user: 'fred', age: 40 },
  *   { user: 'barney', age: 36 },
  * ];
- * const result = orderBy(users, ['user', 'age'], ['asc', 'desc']);
+ *
+ * const result = orderBy(users, [obj => obj.user, 'age'], ['asc', 'desc']);
  * // result will be:
  * // [
  * //   { user: 'barney', age: 36 },
@@ -31,28 +34,29 @@ type Order = 'asc' | 'desc';
  * //   { user: 'fred', age: 40 },
  * // ]
  */
-export function orderBy<T>(collection: T[], keys: Array<keyof T>, orders: Order[]): T[] {
-  const compareValues = (a: T[keyof T], b: T[keyof T], order: Order) => {
-    if (a < b) {
-      return order === 'asc' ? -1 : 1;
-    }
-    if (a > b) {
-      return order === 'asc' ? 1 : -1;
-    }
-    return 0;
-  };
+export function orderBy<T extends object>(
+  arr: T[],
+  criteria: Array<((item: T) => unknown) | keyof T>,
+  orders: Array<'asc' | 'desc'>
+): T[] {
+  return arr.slice().sort((a, b) => {
+    const ordersLength = orders.length;
 
-  const effectiveOrders = keys.map((_, index) => orders[index] || orders[orders.length - 1]);
+    for (let i = 0; i < criteria.length; i++) {
+      const order = ordersLength > i ? orders[i] : orders[ordersLength - 1];
+      const criterion = criteria[i];
+      const criterionIsFunction = typeof criterion === 'function';
 
-  return collection.slice().sort((a, b) => {
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      const order = effectiveOrders[i];
-      const result = compareValues(a[key], b[key], order);
+      const valueA = criterionIsFunction ? criterion(a) : a[criterion];
+      const valueB = criterionIsFunction ? criterion(b) : b[criterion];
+
+      const result = compareValues(valueA, valueB, order);
+
       if (result !== 0) {
         return result;
       }
     }
+
     return 0;
   });
 }

@@ -1,15 +1,15 @@
-import { flatten } from "../../array/flatten.ts";
+import { flatten } from '../../array/flatten.ts';
 
 /**
  * Concatenates multiple arrays and values into a single array.
  *
  * @template T The type of elements in the array.
- * @param {...(T | readonly T[])} values - The values and/or arrays to concatenate.
+ * @param {...(T | T[])} values - The values and/or arrays to concatenate.
  * @returns {T[]} A new array containing all the input values.
- * 
+ *
  * @example
  * // Concatenate individual values
- * concat(1, 2, 3); 
+ * concat(1, 2, 3);
  * // returns [1, 2, 3]
  *
  * @example

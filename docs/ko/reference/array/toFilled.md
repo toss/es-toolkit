@@ -14,7 +14,7 @@ function toFilled<T, U>(arr: T[], value: U, start: number, end: number): Array<T
 
 ### 파라미터
 
-- `arr` (`Array<T>`): 채울 배열이에요.
+- `arr` (`T[]`): 채울 배열이에요.
 - `value` (`U`): 배열을 채울 값이에요.
 - `start` (`number, 기본값 = 0`): 시작 위치예요. 기본값은 0이에요.
 - `end` (`number, 기본값 = array.length`): 끝 위치예요. 기본값은 배열의 길이예요.

@@ -1,6 +1,6 @@
 # withTimeout
 
-Executes an async function and enforces a timeout. 
+Executes an async function and enforces a timeout.
 
 If the promise does not resolve within the specified time,
 the timeout will trigger and the returned promise will be rejected.

@@ -10,9 +10,9 @@ interface DebounceOptions {
  * @template F - The type of function.
  * @param {F} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
- * @param {DebounceOptions} options - The options object.
+ * @param {DebounceOptions} options - The options object
  * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
- * @returns {F & { cancel: () => void }} A new debounced function with a `cancel` method.
+ * @returns A new debounced function with a `cancel` method.
  *
  * @example
  * const debouncedFunction = debounce(() => {
@@ -41,8 +41,8 @@ export function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   { signal }: DebounceOptions = {}
-): F & { cancel: () => void } {
-  let timeoutId: number | null = null;
+): ((...args: Parameters<F>) => void) & { cancel: () => void } {
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   const debounced = function (...args: Parameters<F>) {
     if (timeoutId !== null) {
@@ -56,8 +56,8 @@ export function debounce<F extends (...args: any[]) => void>(
     timeoutId = setTimeout(() => {
       func(...args);
       timeoutId = null;
-    }, debounceMs) as any;
-  } as F & { cancel: () => void };
+    }, debounceMs);
+  };
 
   const onAbort = function () {
     debounced.cancel();

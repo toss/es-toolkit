@@ -1,5 +1,12 @@
 # isArray
 
+::: info
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+
+:::
+
 检查给定的值是否为数组。
 
 该函数测试提供的值是否为数组。
@@ -11,16 +18,16 @@
 ## 签名
 
 ```typescript
-function isArray<T>(value: T): value is Extract<T, unknown[]>;
+function isArray(value?: unknown): value is any[];
 ```
 
 ### 参数
 
-- `value` (`T`): 检查是否为数组的值。
+- `value` (`unknown`): 检查是否为数组的值。
 
 ### 返回值
 
-(`value is Extract<T, unknown[]>`): 如果值为数组，则返回 `true`，否则返回 `false`。
+(`value is any[]`): 如果值为数组，则返回 `true`，否则返回 `false`。
 
 ## 示例
 

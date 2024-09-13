@@ -1,7 +1,9 @@
 # endsWith
 
 ::: info
-This function is fully compatible with lodash. You can find it in our [compatibility library](../../../compatibility.md), `es-toolkit/compat`.
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
 Checks if a string contains another string at the end of the string.
@@ -18,19 +20,19 @@ function endsWith(str: string, target: string, position: number = 0): string;
 
 - `str` (`string`): The string that will be searched.
 - `target` (`string`): The string that it should contain at the end.
-- `position` (`number`, optional): Optional: position to search up to this character position.
+- `position` (`number`, optional): The position to search up to this character position.
 
 ### Returns
 
-(`boolean`): Whether or not the str string ends with the target string
+(`boolean`): Whether or not the `str` string ends with the `target` string
 
 ## Examples
 
 ```typescript
 import { endsWith } from 'es-toolkit/string';
 
-endsWith('fooBar', 'foo') // returns true
-endsWith('fooBar', 'Bar') // returns false
-endsWith('fooBar', 'abcdef') // returns false
-endsWith('fooBar', 'foo', 3) // returns true
+endsWith('fooBar', 'foo'); // returns false
+endsWith('fooBar', 'Bar'); // returns true
+endsWith('fooBar', 'abcdef'); // returns false
+endsWith('fooBar', 'foo', 3); // returns true
 ```

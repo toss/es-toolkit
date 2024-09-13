@@ -27,7 +27,7 @@ description: es-toolkit提供的最小包体积
 我们的包体积是使用 [esbuild 0.23.0](https://esbuild.github.io) 测量的，通过分析如下代码的大小：
 
 ```tsx
-import { chunk } from 'es-toolkit'; 
+import { chunk } from 'es-toolkit';
 // 或 import { chunk } from 'lodash-es';
 
 console.log(chunk);

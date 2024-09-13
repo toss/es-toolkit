@@ -7,11 +7,7 @@ It works the same as if you called [Array#flat](https://developer.mozilla.org/en
 ## Signature
 
 ```typescript
-function flatMap<T, U, D extends number = 1>(
-  arr: T[],
-  iteratee: (item: T) => U,
-  depth?: D
-): Array<FlatArray<U[], D>>;
+function flatMap<T, U, D extends number = 1>(arr: T[], iteratee: (item: T) => U, depth?: D): Array<FlatArray<U[], D>>;
 ```
 
 ### Parameters

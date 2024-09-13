@@ -11,7 +11,7 @@ function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions
-): F & { cancel: () => void };
+): ((...args: Parameters<F>) => void) & { cancel: () => void };
 ```
 
 ### 参数
@@ -23,7 +23,7 @@ function debounce<F extends (...args: any[]) => void>(
 
 ### 返回值
 
-(`F & { cancel: () => void }`): 一个带有 `cancel` 方法的新的防抖函数。
+(`((...args: Parameters<F>) => void) & { cancel: () => void }`): 一个带有 `cancel` 方法的新的防抖函数。
 
 ## 示例
 

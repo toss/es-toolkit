@@ -1,9 +1,9 @@
 # dropRightWhile
 
-Removes elements from the end of an array until the predicate returns false.
+Removes elements from the end of an array until the predicate returns `false`.
 
-This function iterates over an array and drops elements from the start until the provided
-predicate function returns false. It then returns a new array with the remaining elements.
+This function iterates over an array and drops elements from the end until the provided
+predicate function returns `false`. It then returns a new array with the remaining elements.
 
 ## Signature
 
@@ -14,11 +14,11 @@ function dropRightWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean):
 ### Parameters
 
 - `arr` (`T[]`): The array from which to drop elements.
-- `canContinueDropping` (`(item: T) => boolean`): A predicate function that determines whether to continue dropping elements. The function is called with each element from the end, with each element, and dropping continues as long as it returns true.
+- `canContinueDropping` (`(item: T) => boolean`): A predicate function that determines whether to continue dropping elements. The function is called with each element from the end, with each element, and dropping continues as long as it returns `true`.
 
 ### Returns
 
-(`T[]`) A new array with the elements remaining after the predicate returns false.
+(`T[]`) A new array with the elements remaining after the predicate returns `false`.
 
 ## Examples
 

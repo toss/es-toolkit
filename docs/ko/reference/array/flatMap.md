@@ -7,11 +7,7 @@ JavaScript 언어에 포함된 [Array#flat](https://developer.mozilla.org/en-US/
 ## 인터페이스
 
 ```typescript
-function flatMap<T, U, D extends number = 1>(
-  arr: T[],
-  iteratee: (item: T) => U,
-  depth?: D
-): Array<FlatArray<U[], D>>;
+function flatMap<T, U, D extends number = 1>(arr: T[], iteratee: (item: T) => U, depth?: D): Array<FlatArray<U[], D>>;
 ```
 
 ### 파라미터

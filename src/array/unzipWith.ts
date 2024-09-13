@@ -5,7 +5,7 @@
  * @param {T[][]} target - The nested array to unzip. This is an array of arrays,
  * where each inner array contains elements to be unzipped.
  * @param {(...args: T[]) => R} iteratee - A function to transform the unzipped elements.
- * @returns {R[]} A new array of unzipped and transformed elements. 
+ * @returns {R[]} A new array of unzipped and transformed elements.
  *
  * @example
  * const nestedArray = [[1, 2], [3, 4], [5, 6]];

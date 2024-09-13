@@ -1,4 +1,4 @@
-const IS_UNSIGNED_INTEGER = /^(?:0|[1-9]\d*)$/
+const IS_UNSIGNED_INTEGER = /^(?:0|[1-9]\d*)$/;
 
 export function isIndex(value: PropertyKey) {
   switch (typeof value) {

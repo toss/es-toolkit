@@ -21,3 +21,4 @@ function compact<T>(arr: T[]): Array<Exclude<T, false | null | 0 | '' | undefine
 ```typescript
 compact([0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
 // 返回: [1, 2, 3, 4, 5]
+```

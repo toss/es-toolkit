@@ -10,6 +10,10 @@ describe('isNotNil', () => {
   it('returns true if the value is not null nor undefined', () => {
     expect(isNotNil('')).toBe(true);
     expect(isNotNil(123)).toBe(true);
+    expect(isNotNil(0)).toBe(true);
+    expect(isNotNil(false)).toBe(true);
+    expect(isNotNil(true)).toBe(true);
+    expect(isNotNil([])).toBe(true);
   });
 
   it('can be used with TypeScript as a type predicate', () => {

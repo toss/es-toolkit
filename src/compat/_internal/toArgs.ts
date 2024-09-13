@@ -8,8 +8,8 @@
  * toArgs([1, 2, 3]); // { '0': 1, '1': 2, '2': 3 } as IArguments
  */
 export function toArgs(array: unknown[]): IArguments {
-  // eslint-disable-next-line prefer-spread, @typescript-eslint/no-unused-vars
-  return (function (..._: any[]) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return (function (..._: unknown[]) {
     // eslint-disable-next-line prefer-rest-params
     return arguments;
   })(...array);

@@ -14,8 +14,8 @@ hero:
       text: 参考文档
       link: /zh_hans/reference/array/chunk
     - theme: alt
-      text: 安装指南
-      link: /zh_hans/installation
+      text: 使用指南
+      link: /zh_hans/usage
 
 features:
   - title: 最佳性能

@@ -1,6 +1,6 @@
 # without
 
-배열에서 주어진 값을 제거한 새로운 배열을 만들어요. 
+배열에서 주어진 값을 제거한 새로운 배열을 만들어요.
 
 값이 같은지는 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 기준으로 비교하기 때문에, `NaN`과도 사용할 수 있어요.
 
