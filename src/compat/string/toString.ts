@@ -1,7 +1,8 @@
 /**
- *  Converts value to a string.
- *  An empty string is returned for `null` and `undefined` values.
- *  The sign of `-0` is preserved.
+ * Converts `value` to a string.
+ *
+ * An empty string is returned for `null` and `undefined` values.
+ * The sign of `-0` is preserved.
  *
  * @param {unknown} value - The value to convert.
  * @returns {string} Returns the converted string.
