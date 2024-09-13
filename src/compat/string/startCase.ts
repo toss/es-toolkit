@@ -1,4 +1,5 @@
-import { getWords } from './_internal/getWords.ts';
+import { startCase as startCaseToolkit } from '../../string/startCase';
+import { normalizeForCase } from '../_internal/normalizeForCase';
 
 /**
  * Converts the first character of each word in a string to uppercase and the remaining characters to lowercase.
@@ -13,18 +14,6 @@ import { getWords } from './_internal/getWords.ts';
  * const result3 = startCase('hello-world');  // result will be 'Hello World'
  * const result4 = startCase('hello_world');  // result will be 'Hello World'
  */
-export function startCase(str: string): string {
-  const words = getWords(str.trim());
-  let result = '';
-  for (const word of words) {
-    if (result) {
-      result += ' ';
-    }
-    if (word === word.toUpperCase()) {
-      result += word;
-    } else {
-      result += word[0].toUpperCase() + word.slice(1).toLowerCase();
-    }
-  }
-  return result;
+export function startCase(str: string | object): string {
+  return startCaseToolkit(normalizeForCase(str));
 }

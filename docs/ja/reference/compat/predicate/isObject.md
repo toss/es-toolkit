@@ -35,8 +35,8 @@ const value2 = [1, 2, 3];
 const value3 = () => {};
 const value4 = null;
 
-console.log(isArray(value1)); // true
-console.log(isArray(value2)); // true
-console.log(isArray(value3)); // true
-console.log(isArray(value4)); // false
+console.log(isObject(value1)); // true
+console.log(isObject(value2)); // true
+console.log(isObject(value3)); // true
+console.log(isObject(value4)); // false
 ```

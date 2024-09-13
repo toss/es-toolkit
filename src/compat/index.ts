@@ -83,12 +83,20 @@ export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
 
 export { camelCase } from './string/camelCase.ts';
+export { kebabCase } from './string/kebabCase.ts';
+export { snakeCase } from './string/snakeCase.ts';
+export { startCase } from './string/startCase.ts';
+export { lowerCase } from './string/lowerCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
 export { repeat } from './string/repeat.ts';
+
 export { toString } from './string/toString.ts';
+export { trim } from './string/trim.ts';
+export { trimStart } from './string/trimStart.ts';
+export { trimEnd } from './string/trimEnd.ts';
 
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
