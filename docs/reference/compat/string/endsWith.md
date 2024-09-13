@@ -20,11 +20,11 @@ function endsWith(str: string, target: string, position: number = 0): string;
 
 - `str` (`string`): The string that will be searched.
 - `target` (`string`): The string that it should contain at the end.
-- `position` (`number`, optional): Optional: position to search up to this character position.
+- `position` (`number`, optional): The position to search up to this character position.
 
 ### Returns
 
-(`boolean`): Whether or not the str string ends with the target string
+(`boolean`): Whether or not the `str` string ends with the `target` string
 
 ## Examples
 

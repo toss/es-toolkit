@@ -1,3 +1,6 @@
+import { isTypedArray } from '../predicate/isTypedArray';
+import { isPrimitive } from '../predicate/isPrimitive';
+
 /**
  * Creates a shallow clone of the given object.
  *
@@ -31,44 +34,47 @@ export function clone<T>(obj: T): T {
     return obj;
   }
 
-  if (Array.isArray(obj)) {
-    return obj.slice() as T;
+  if (Array.isArray(obj) || isTypedArray(obj) || obj instanceof ArrayBuffer || obj instanceof SharedArrayBuffer) {
+    return obj.slice(0) as T;
   }
 
-  if (obj instanceof Date) {
-    return new Date(obj.getTime()) as T;
+  const prototype = Object.getPrototypeOf(obj);
+  const Constructor = prototype.constructor;
+
+  if (obj instanceof Date || obj instanceof Map || obj instanceof Set) {
+    return new Constructor(obj);
   }
 
   if (obj instanceof RegExp) {
-    return new RegExp(obj.source, obj.flags) as T;
+    const newRegExp = new Constructor(obj);
+    newRegExp.lastIndex = obj.lastIndex;
+
+    return newRegExp;
   }
 
-  if (obj instanceof Map) {
-    const result = new Map();
-    for (const [key, value] of obj) {
-      result.set(key, value);
-    }
-    return result as T;
+  if (obj instanceof DataView) {
+    return new Constructor(obj.buffer.slice(0));
   }
 
-  if (obj instanceof Set) {
-    const result = new Set();
-    for (const value of obj) {
-      result.add(value);
-    }
-    return result as T;
+  if (obj instanceof Error) {
+    const newError = new Constructor(obj.message);
+
+    newError.stack = obj.stack;
+    newError.name = obj.name;
+    newError.cause = obj.cause;
+
+    return newError;
+  }
+
+  if (typeof File !== 'undefined' && obj instanceof File) {
+    const newFile = new Constructor([obj], obj.name, { type: obj.type, lastModified: obj.lastModified });
+    return newFile;
   }
 
   if (typeof obj === 'object') {
-    const prototype = Object.getPrototypeOf(obj);
-    const result = Object.create(prototype);
-    return Object.assign(result, obj);
+    const newObject = Object.create(prototype);
+    return Object.assign(newObject, obj);
   }
+
   return obj;
-}
-
-type Primitive = null | undefined | string | number | boolean | symbol | bigint;
-
-function isPrimitive(value: unknown): value is Primitive {
-  return value == null || (typeof value !== 'object' && typeof value !== 'function');
 }

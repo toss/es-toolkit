@@ -69,6 +69,22 @@ export function findIndex<T>(arr: readonly T[], doesMatchProperty: [keyof T, unk
  */
 export function findIndex<T>(arr: readonly T[], propertyToCheck: string): number;
 
+/**
+ * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
+ *
+ * @template T
+ * @param {readonly T[]} arr - The array to search through.
+ * @param {readonly T[]} source - The source array to search for the matching item.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The criteria to match against the items in the array. This can be a function, a partial object, a key-value pair, or a property name.
+ * @param {string} propertyToCheck - The property name to check for in the items of the array.
+ * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
+ *
+ * @example
+ * // Using a property name
+ * const items = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+ * const result = findIndex(items, 'name');
+ * console.log(result); // 0
+ */
 export function findIndex<T>(
   source: readonly T[],
   doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string

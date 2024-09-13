@@ -1,15 +1,16 @@
 import DefaultTheme from 'vitepress/theme';
-import './index.css';
 import { defineAsyncComponent } from 'vue';
+import './index.css';
+import CompatibilityStatus from '../components/CompatibilityStatus.vue';
 
 /** @type {import('vitepress').Theme} */
 export default {
-  ...DefaultTheme,
-  enhanceApp(ctx) {
-    DefaultTheme.enhanceApp(ctx);
-    ctx.app.component(
+  extends: DefaultTheme,
+  enhanceApp({ app }) {
+    app.component(
       'Sandpack',
-      defineAsyncComponent(() => import('../../components/Sandpack.vue'))
+      defineAsyncComponent(() => import('../components/Sandpack.vue'))
     );
+    app.component('CompatibilityStatus', CompatibilityStatus);
   },
 };

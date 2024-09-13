@@ -1,10 +1,10 @@
 ![](./docs/public/og.png)
 
-# es-toolkit &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/toss/slash/blob/main/LICENSE) [![codecov](https://codecov.io/gh/toss/es-toolkit/graph/badge.svg?token=8N5S3AR3C7)](https://codecov.io/gh/toss/es-toolkit) [![NPM badge](https://img.shields.io/npm/v/es-toolkit?logo=npm)](https://www.npmjs.com/package/es-toolkit) [![JSR badge](https://jsr.io/badges/@es-toolkit/es-toolkit)](https://jsr.io/@es-toolkit/es-toolkit)
+# es-toolkit &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/toss/slash/blob/main/LICENSE) [![codecov](https://codecov.io/gh/toss/es-toolkit/graph/badge.svg?token=8N5S3AR3C7)](https://codecov.io/gh/toss/es-toolkit) [![NPM badge](https://img.shields.io/npm/v/es-toolkit?logo=npm)](https://www.npmjs.com/package/es-toolkit) [![JSR badge](https://jsr.io/badges/@es-toolkit/es-toolkit)](https://jsr.io/@es-toolkit/es-toolkit) [![Discord Badge](https://discord.com/api/guilds/1281071127052943361/widget.png?style=shield)](https://discord.gg/vGXbVjP2nY)
 
 [English](https://github.com/toss/es-toolkit/blob/main/README.md) | [한국어](https://github.com/toss/es-toolkit/blob/main/README-ko_kr.md) | [简体中文](https://github.com/toss/es-toolkit/blob/main/README-zh_hans.md) | 日本語
 
-es-toolkitは、最新のJavaScriptユーティリティライブラリであり、高性能で小さなバンドルサイズ、強力な型注釈を提供します。
+es-toolkitは、最先端のJavaScriptユーティリティライブラリであり、高性能で小さなバンドルサイズ、強力な型注釈を提供します。
 
 - es-toolkitは、[debounce](https://es-toolkit.slash.page/reference/function/debounce.html)、[delay](https://es-toolkit.slash.page/reference/promise/delay.html)、[chunk](https://es-toolkit.slash.page/reference/array/chunk.html)、[sum](https://es-toolkit.slash.page/reference/math/sum.html)、[pick](https://es-toolkit.slash.page/reference/object/pick.html)など、日常的に使用するさまざまなユーティリティ関数を最新の実装で提供します。
 - パフォーマンスを重視して設計されており、es-toolkitは最新のJavaScript環境で[2-3倍の性能向上](https://es-toolkit.slash.page/performance.html)を実現します。

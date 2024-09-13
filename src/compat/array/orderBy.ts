@@ -1,16 +1,18 @@
-import { getPath } from '../_internal/getPath';
+import { compareValues } from '../_internal/compareValues';
+import { isKey } from '../_internal/isKey';
+import { toPath } from '../_internal/toPath';
 
+export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
  *
- * This function takes an array of objects, an array of keys to sort by, and an array of order directions.
- * It returns the sorted array, ordering by each key according to its corresponding direction
- * ('asc' for ascending or 'desc' for descending). If values for a key are equal,string
- * it moves to the next key to determine the order.
+ * This function takes an array of objects, an array of criteria to sort by, and an array of order directions.
+ * It returns the sorted array, ordering by each key according to its corresponding direction ('asc' for ascending or 'desc' for descending).
+ * If values for a key are equal, it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param {T[] | null} collection - The array of objects to be sorted.
- * @param {((item: T) => unknown) | string | Array<((item: T) => unknown) | string | string[]>} keys - An array of keys (property names or property paths or custom key functions) to sort by.
+ * @param { T[] | object | null | undefined} collection - The array of objects to be sorted.
+ * @param {Criterion<T> | Array<Criterion<T>>} criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
  * @returns {T[]} - The sorted array.
  *
@@ -31,70 +33,101 @@ import { getPath } from '../_internal/getPath';
  * //   { user: 'fred', age: 40 },
  * // ]
  */
-export function orderBy<T extends object>(
-  collection: T[] | null | undefined,
-  keys?: ((item: T) => unknown) | string | Array<((item: T) => unknown) | string | string[]>,
+export function orderBy<T>(
+  collection: T[] | object | number | null | undefined,
+  criteria?: Criterion<T> | Array<Criterion<T>>,
   orders?: unknown | unknown[]
 ): T[] {
-  if (collection == null) {
+  if (collection == null || typeof collection === 'number') {
     return [];
   }
 
-  if (!Array.isArray(keys)) {
-    keys = keys == null ? [] : [keys];
+  if (typeof collection === 'object' && !Array.isArray(collection)) {
+    collection = Object.values(collection);
+  }
+
+  if (!Array.isArray(criteria)) {
+    criteria = criteria == null ? [null] : [criteria];
   }
 
   if (!Array.isArray(orders)) {
     orders = orders == null ? [] : [orders];
   }
 
-  const compareValues = <V>(a: V, b: V, order: string) => {
-    if (a < b) {
-      return order === 'desc' ? 1 : -1; // Default is ascending order
+  // For Object('desc') case
+  orders = (orders as unknown[]).map(order => String(order));
+
+  const getValueByNestedPath = (object: object, path: PropertyKey[]) => {
+    let target: object = object;
+
+    for (let i = 0; i < path.length && target != null; ++i) {
+      target = target[path[i] as keyof typeof target];
     }
 
-    if (a > b) {
-      return order === 'desc' ? -1 : 1;
-    }
-
-    return 0;
+    return target;
   };
 
-  const getValueByPath = (path: string | ((item: T) => unknown) | string[], obj: T) => {
-    if (Array.isArray(path)) {
-      let value: object = obj;
+  const getValueByCriterion = (criterion: Criterion<T> | { key: PropertyKey; path: string[] }, object: T) => {
+    if (object == null || criterion == null) {
+      return object;
+    }
 
-      for (let i = 0; i < path.length; i++) {
-        value = value[path[i] as keyof typeof value];
+    if (typeof criterion === 'object' && 'key' in criterion) {
+      if (Object.hasOwn(object, criterion.key)) {
+        return object[criterion.key as keyof typeof object];
       }
 
-      return value;
+      return getValueByNestedPath(object, criterion.path);
     }
 
-    if (typeof path === 'function') {
-      return path(obj);
+    if (typeof criterion === 'function') {
+      return criterion(object);
     }
 
-    return obj[path as keyof typeof obj];
+    if (Array.isArray(criterion)) {
+      return getValueByNestedPath(object, criterion);
+    }
+
+    if (typeof object === 'object') {
+      return object[criterion as keyof typeof object];
+    }
+
+    return object;
   };
 
-  keys = keys.map(key => getPath(key, collection[0]));
-
-  return collection.slice().sort((a, b) => {
-    for (let i = 0; i < keys.length; i++) {
-      const path = keys[i];
-
-      const valueA = getValueByPath(path, a);
-      const valueB = getValueByPath(path, b);
-      const order = String((orders as unknown[])[i]); // For Object('desc') case
-
-      const comparedResult = compareValues(valueA, valueB, order);
-
-      if (comparedResult !== 0) {
-        return comparedResult;
-      }
+  // Prepare all cases for criteria
+  const preparedCriteria = criteria.map(criterion => {
+    // lodash handles a array with one element as a single criterion
+    if (Array.isArray(criterion) && criterion.length === 1) {
+      criterion = criterion[0];
     }
 
-    return 0;
+    if (criterion == null || typeof criterion === 'function' || Array.isArray(criterion) || isKey(criterion)) {
+      return criterion;
+    }
+
+    // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
+    return { key: criterion, path: toPath(criterion as string) } as const;
   });
+
+  // Array.prototype.sort() always shifts the `undefined` values to the end of the array. So we have to prevent it by using a wrapper object.
+  const preparedCollection = (collection as T[]).map(item => ({
+    original: item,
+    criteria: preparedCriteria.map(criterion => getValueByCriterion(criterion, item)),
+  }));
+
+  return preparedCollection
+    .slice()
+    .sort((a, b) => {
+      for (let i = 0; i < preparedCriteria.length; i++) {
+        const comparedResult = compareValues(a.criteria[i], b.criteria[i], (orders as string[])[i]);
+
+        if (comparedResult !== 0) {
+          return comparedResult;
+        }
+      }
+
+      return 0;
+    })
+    .map(item => item.original);
 }

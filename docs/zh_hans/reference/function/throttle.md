@@ -7,7 +7,7 @@
 ## 签名
 
 ```typescript
-function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): F;
+function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: number): (...args: Parameters<F>) => void;
 ```
 
 ### 参数
@@ -17,7 +17,7 @@ function throttle<F extends (...args: any[]) => void>(func: F, throttleMs: numbe
 
 ### 返回值
 
-(`F`): 一个新的节流函数。
+(`(...args: Parameters<F>) => void`): 一个新的节流函数。
 
 ## 示例
 

@@ -51,7 +51,10 @@ export function delay(ms: number, { signal }: DelayOptions = {}): Promise<void> 
       return abortError();
     }
 
-    const timeoutId = setTimeout(resolve, ms);
+    const timeoutId = setTimeout(() => {
+      signal?.removeEventListener('abort', abortHandler);
+      resolve();
+    }, ms);
 
     signal?.addEventListener('abort', abortHandler, { once: true });
   });

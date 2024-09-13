@@ -1,5 +1,27 @@
 # es-toolkit Changelog
 
+## Version v1.18.0
+
+Released on September 12th, 2024.
+
+- Added support for [isObject](https://es-toolkit.slash.page/reference/compat/predicate/isObject.html), [findLastIndex](https://es-toolkit.slash.page/reference/compat/array/findLastIndex.html), [parseInt](https://es-toolkit.slash.page/reference/compat/math/parseInt.html), [rearg](https://es-toolkit.slash.page/reference/compat/function/rearg.html), [conforms](https://es-toolkit.slash.page/reference/compat/predicate/conforms.html), [conformsTo](https://es-toolkit.slash.page/reference/compat/predicate/conformsTo.html), [bindKey](https://es-toolkit.slash.page/reference/compat/function/bindKey.html), [some](https://es-toolkit.slash.page/reference/compat/array/some.html), [fromPairs](https://es-toolkit.slash.page/reference/compat/object/fromPairs.html), [isArrayLikeObject](https://es-toolkit.slash.page/reference/compat/predicate/isArrayLikeObject.html), [escapeRegExp](https://es-toolkit.slash.page/reference/string/escapeRegExp.html), [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html), [isWeakSet](https://es-toolkit.slash.page/reference/predicate/isWeakSet.html), [isWeakMap](https://es-toolkit.slash.page/reference/predicate/isWeakMap.html), [flatMapDeep](https://es-toolkit.slash.page/reference/array/flatMapDeep.html), [escape](https://es-toolkit.slash.page/reference/string/escape.html), [unescape](https://es-toolkit.slash.page/reference/string/unescape.html), [repeat](https://es-toolkit.slash.page/reference/compat/string/repeat.html), [pad](https://es-toolkit.slash.page/reference/compat/string/pad.html), [join](https://es-toolkit.slash.page/reference/compat/array/join.html), and [spread](https://es-toolkit.slash.page/reference/compat/function/spread.html).
+- Improved performance for [deburr](https://es-toolkit.slash.page/reference/string/deburr.html).
+
+## Version v1.17.0
+
+Released on August 31st, 2024.
+
+### New Features
+
+- Added support for new functions: [at](https://es-toolkit.slash.page/reference/array/at.html), [pullAt](https://es-toolkit.slash.page/reference/array/pullAt.html), [deburr](https://es-toolkit.slash.page/reference/string/deburr.html), [lowerFirst](https://es-toolkit.slash.page/reference/string/lowerFirst.html), [upperFirst](https://es-toolkit.slash.page/reference/string/upperFirst.html), and [isRegExp](https://es-toolkit.slash.page/reference/predicate/isRegExp.html).
+- Enhanced [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html) and [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html) to support function criteria.
+- [countBy](https://es-toolkit.slash.page/reference/array/countBy.html) now supports numeric and symbol keys.
+
+#### Bug Fixes
+
+- Updated type definitions for [throttle](https://es-toolkit.slash.page/reference/function/throttle.html) and [debounce](https://es-toolkit.slash.page/reference/function/debounce.html).
+- (`es-toolkit/compat`) Fixed [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html) to correctly handle deep keys even when object shapes differ ([#427](https://github.com/toss/es-toolkit/pull/427)).
+
 ## Version v1.16.0
 
 Released on August 15th, 2024.

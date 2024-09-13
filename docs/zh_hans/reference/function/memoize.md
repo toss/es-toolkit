@@ -36,9 +36,9 @@ interface MemoizeCache<K, V> {
 
 ### 返回
 
-(`F & { cache: MemoizeCache<any, ReturnType<F>> }`): 备忘版本的函数，并带有一个额外的 cache 属性，用于暴露内部缓存。
+(`F & { cache: MemoizeCache<any, ReturnType<F>> }`): 备忘版本的函数，并带有一个额外的 `cache` 属性，用于暴露内部缓存。
 
-## Examples
+## 示例
 
 ```typescript
 import { memoize, MemoizeCache } from 'es-toolkit/function';

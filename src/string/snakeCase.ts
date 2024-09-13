@@ -15,7 +15,7 @@ import { getWords } from './_internal/getWords.ts';
  * const convertedStr4 = snakeCase('HTTPRequest') // returns 'http_request'
  */
 
-export const snakeCase = (str: string): string => {
+export function snakeCase(str: string): string {
   const words = getWords(str);
   return words.map(word => word.toLowerCase()).join('_');
-};
+}

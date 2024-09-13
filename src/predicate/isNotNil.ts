@@ -15,5 +15,5 @@
  * // result will be [1, 3]
  */
 export function isNotNil<T>(x: T | null | undefined): x is T {
-  return x !== null && x !== undefined;
+  return x != null;
 }
