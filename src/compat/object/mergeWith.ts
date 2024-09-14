@@ -1,4 +1,5 @@
 import { clone } from '../../object/clone.ts';
+import { getSymbols } from '../_internal/getSymbols.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
@@ -354,7 +355,7 @@ export function mergeWith(object: any, ...otherArgs: any[]): any {
   const merge = otherArgs[otherArgs.length - 1] as (
     targetValue: any,
     sourceValue: any,
-    key: string,
+    key: string | symbol,
     target: any,
     source: any,
     stack: Map<any, any>
@@ -374,7 +375,14 @@ export function mergeWith(object: any, ...otherArgs: any[]): any {
 function mergeWithDeep(
   target: any,
   source: any,
-  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any,
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string | symbol,
+    target: any,
+    source: any,
+    stack: Map<any, any>
+  ) => any,
   stack: Map<any, any>
 ) {
   if (source == null || typeof source !== 'object') {
@@ -394,7 +402,7 @@ function mergeWithDeep(
     }
   }
 
-  const sourceKeys = Object.keys(source);
+  const sourceKeys = [...Object.keys(source), ...getSymbols(source)];
 
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
@@ -415,7 +423,19 @@ function mergeWithDeep(
     }
 
     if (Array.isArray(sourceValue)) {
-      targetValue = typeof targetValue === 'object' ? Array.from(targetValue ?? []) : [];
+      if (typeof targetValue === 'object') {
+        const cloned = [];
+        const targetKeys = Reflect.ownKeys(targetValue);
+
+        for (let i = 0; i < targetKeys.length; i++) {
+          const targetKey = targetKeys[i];
+          cloned[targetKey] = targetValue[targetKey];
+        }
+
+        targetValue = cloned;
+      } else {
+        targetValue = [];
+      }
     }
 
     const merged = merge(targetValue, sourceValue, key, target, source, stack);
