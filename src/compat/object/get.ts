@@ -309,32 +309,78 @@ export function get(object: unknown, path: PropertyKey | readonly PropertyKey[],
  * @returns {any} - Returns the resolved value.
  */
 export function get(object: any, path: PropertyKey | readonly PropertyKey[], defaultValue?: any): any {
-  let resolvedPath;
-
-  if (Array.isArray(path)) {
-    resolvedPath = path;
-  } else if (typeof path === 'string' && isDeepKey(path) && object?.[path] == null) {
-    resolvedPath = toPath(path);
-  } else {
-    resolvedPath = [path];
+  if (object == null) {
+    return defaultValue;
   }
 
-  if (resolvedPath.length === 0) {
+  switch (typeof path) {
+    case 'string': {
+      const result = object[path];
+
+      if (result === undefined) {
+        if (isDeepKey(path)) {
+          return get(object, toPath(path), defaultValue);
+        } else {
+          return defaultValue;
+        }
+      }
+
+      return result;
+    }
+    case 'number':
+    case 'symbol': {
+      if (typeof path === 'number') {
+        path = toKey(path);
+      }
+
+      const result = object[path];
+
+      if (result === undefined) {
+        return defaultValue;
+      }
+
+      return result;
+    }
+    default: {
+      if (Array.isArray(path)) {
+        return getWithPath(object, path, defaultValue);
+      }
+
+      if (Object.is(path?.valueOf(), -0)) {
+        path = '-0';
+      } else {
+        path = String(path);
+      }
+
+      const result = object[path];
+
+      if (result === undefined) {
+        return defaultValue;
+      }
+
+      return result;
+    }
+  }
+}
+
+function getWithPath(object: any, path: readonly PropertyKey[], defaultValue?: any): any {
+  if (path.length === 0) {
     return defaultValue;
   }
 
   let current = object;
-  let index;
 
-  for (index = 0; index < resolvedPath.length && current != null; index++) {
-    const key = toKey(resolvedPath[index]);
+  for (let index = 0; index < path.length; index++) {
+    if (current == null) {
+      return defaultValue;
+    }
 
-    current = current[key];
+    current = current[path[index]];
   }
 
-  if (current === null && index === resolvedPath.length) {
-    return current;
+  if (current === undefined) {
+    return defaultValue;
   }
 
-  return current ?? defaultValue;
+  return current;
 }

@@ -1,3 +1,4 @@
+import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
 import { get } from './get.ts';
@@ -19,27 +20,67 @@ import { get } from './get.ts';
  * unset(obj, ['a', 'b', 'c']); // true
  * console.log(obj); // { a: { b: {} } }
  */
-export function unset(obj: unknown, path: PropertyKey | readonly PropertyKey[]): boolean {
+export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boolean {
   if (obj == null) {
     return true;
   }
 
-  const resolvedPath = Array.isArray(path) ? path : typeof path === 'string' ? toPath(path) : [path];
+  switch (typeof path) {
+    case 'symbol':
+    case 'number':
+    case 'object': {
+      if (Array.isArray(path)) {
+        return unsetWithPath(obj, path);
+      }
 
-  const parent = get(obj, resolvedPath.slice(0, -1), obj);
-  const lastKey = toKey(resolvedPath[resolvedPath.length - 1]);
+      if (typeof path === 'number') {
+        path = toKey(path);
+      } else if (typeof path === 'object') {
+        if (Object.is(path?.valueOf(), -0)) {
+          path = '-0';
+        } else {
+          path = String(path);
+        }
+      }
 
-  if (typeof parent !== 'object' || parent == null || !Object.prototype.hasOwnProperty.call(parent, lastKey)) {
+      if (obj?.[path] === undefined) {
+        return true;
+      }
+
+      try {
+        delete obj[path];
+        return true;
+      } catch {
+        return false;
+      }
+    }
+    case 'string': {
+      if (obj?.[path] === undefined && isDeepKey(path)) {
+        return unsetWithPath(obj, toPath(path));
+      }
+
+      try {
+        delete obj[path];
+        return true;
+      } catch {
+        return false;
+      }
+    }
+  }
+}
+
+function unsetWithPath(obj: unknown, path: readonly PropertyKey[]): boolean {
+  const parent = get(obj, path.slice(0, -1), obj);
+  const lastKey = path[path.length - 1];
+
+  if (parent?.[lastKey] === undefined) {
     return true;
   }
 
-  const isDeletable = Object.getOwnPropertyDescriptor(parent, lastKey)?.configurable;
-
-  if (!isDeletable) {
+  try {
+    delete parent[lastKey];
+    return true;
+  } catch {
     return false;
   }
-
-  delete parent[lastKey];
-
-  return true;
 }
