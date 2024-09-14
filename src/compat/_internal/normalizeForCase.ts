@@ -1,4 +1,4 @@
-import { toString } from '../string/toString';
+import { toString } from '../util/toString';
 
 export function normalizeForCase(str: unknown): string {
   // Coerce to string
