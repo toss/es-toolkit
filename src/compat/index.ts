@@ -55,6 +55,7 @@ export { rearg } from './function/rearg.ts';
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
 export { pick } from './object/pick.ts';
+export { omit } from './object/omit.ts';
 export { has } from './object/has.ts';
 export { property } from './object/property.ts';
 export { mapKeys } from './object/mapKeys.ts';
