@@ -9,15 +9,7 @@ describe('curry', () => {
     curryToolkit(fn)(1)('a')(true);
   });
 
-  bench('es-toolkit/curry.flexible', () => {
-    curryToolkit.flexible(fn)(1, 'a')(true);
-  });
-
   bench('lodash/curry', () => {
     curryLodash(fn)(1)('a')(true);
-  });
-
-  bench('lodash/curry (flexible style)', () => {
-    curryLodash(fn)(1, 'a')(true);
   });
 });
