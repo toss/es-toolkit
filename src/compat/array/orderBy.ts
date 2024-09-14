@@ -1,6 +1,6 @@
 import { compareValues } from '../_internal/compareValues';
 import { isKey } from '../_internal/isKey';
-import { toPath } from '../_internal/toPath';
+import { toPath } from '../util/toPath';
 
 export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
 /**

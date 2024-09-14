@@ -74,13 +74,13 @@ describe('mergeWith', () => {
     const symbol1 = Symbol('symbol1');
     const symbol2 = Symbol('symbol2');
 
-    const array1 = [1, 2, 3];
+    const array1: any = [1, 2, 3];
     // eslint-disable-next-line
     // @ts-ignore
     array1.foo = 1;
     array1[symbol1] = 'a';
 
-    const array2 = [3, 4, 5, 6, 7];
+    const array2: any = [3, 4, 5, 6, 7];
     array2[symbol2] = 'b';
 
     const merged = mergeWith({ value: array1 }, { value: array2 }, (targetValue: unknown, sourceValue: unknown) => {
@@ -97,7 +97,7 @@ describe('mergeWith', () => {
       return undefined;
     });
 
-    const resultArr = [1, 2, 3, 4, 5, 6, 7];
+    const resultArr: any = [1, 2, 3, 4, 5, 6, 7];
     // eslint-disable-next-line
     // @ts-ignore
     resultArr.foo = 1;

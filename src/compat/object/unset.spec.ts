@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { unset } from './unset';
-import { toString } from '../string/toString';
+import { toString } from '../util/toString';
 import { symbol } from '../_internal/symbol';
 import { numberProto } from '../_internal/numberProto';
 import { stringProto } from '../_internal/stringProto';
@@ -83,7 +83,7 @@ describe('unset', () => {
     const actual = values.map(value => {
       try {
         return [unset(value, 'a.b'), unset(value, ['a', 'b'])];
-      } catch (e) {
+      } catch (e: any) {
         return e.message;
       }
     });
