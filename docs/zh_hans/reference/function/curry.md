@@ -1,9 +1,8 @@
 # curry
 
-Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
-This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
+将一个函数柯里化，允许它每次只用一个参数调用，并返回一个接受下一个参数的新函数。这个过程会继续，直到所有参数都已提供，此时将使用所有累积的参数调用原始函数。
 
-## Signature
+## 签名
 
 ```typescript
 function curry<R>(func: () => R): () => R;
@@ -15,15 +14,15 @@ function curry<P1, P2, P3, P4, P5, R>(func: (p1: P1, p2: P2, p3: P3, p4: P4, p5:
 function curry(func: (...args: any[]) => any): (...args: any[]) => any;
 ```
 
-### Parameters
+### 参数
 
-- `func` (`Function`): The function to curry.
+- `func` (`(...args: any[]) => any`): 要进行柯里化的函数。
 
-### Returns
+### 返回值
 
-(`Function`): A curried function that can be called with a single argument at a time.
+(`(...args: any[]) => any`): 一个可以每次调用一个参数的柯里化函数。
 
-## Examples
+## 示例
 
 ```typescript
 function sum(a: number, b: number, c: number) {

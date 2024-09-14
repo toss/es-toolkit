@@ -1,38 +1,44 @@
 # curry
 
-제공된 함수의 인자를 여러번에 걸쳐 입력받을 수 있도록 함수를 커링 함수로 변환해요.
-커링 함수는 원본 함수의 인자를 모두 입력받을 때까지 다음 인자들을 한번에 하나씩 입력받는 형태의 함수에요.
-커링 함수를 사용하면 함수를 지연 실행 시키거나, 함수의 재사용성을 높일 수 있어요.
+함수를 커링하여 한 번에 하나의 파라미터로 호출할 수 있도록 하고, 다음 파라미터를 받는 새로운 함수를 반환해요.
+모든 파라미터가 제공되면, 이때 원래 함수가 지금까지 주어진 파라미터로 호출돼요.
 
 ## 인터페이스
 
 ```typescript
-function curry<F extends (...args: any) => any>(func: F): (arg: Parameters<F>[0]) => CurriedFunctionResult<F>;
+function curry<R>(func: () => R): () => R;
+function curry<P, R>(func: (p: P) => R): (p: P) => R;
+function curry<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P1) => (p2: P2) => R;
+function curry<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: P1) => (p2: P2) => (p3: P3) => R;
+function curry<P1, P2, P3, P4, R>(func: (p1: P1, p2: P2, p3: P3, p4: P4) => R): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => R;
+function curry<P1, P2, P3, P4, P5, R>(func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => (p5: P5) => R;
+function curry(func: (...args: any[]) => any): (...args: any[]) => any;
 ```
 
-## 파라미터
+### 파라미터
 
-- `func` (`F`): 커링 함수를 만들 함수.
+- `func` (`(...args: any[]) => any`): 커링할 함수예요.
 
-## 결괏값
+### 반환 값
 
-(`(arg: Parameters<F>[0]) => CurriedFunctionResult<F>`): 원본 함수의 인자를 하나씩 입력 받아, 모든 인자가 입력되었을 때 함수를 호출시키는 함수
+(`(...args: any[]) => any`): 한 번에 하나의 파라미터로 호출할 수 있는 커링된 함수예요.
 
 ## 예시
 
-### 기본 사용법
-
 ```typescript
-const sum = (a: number, b: number, c: number) => a + b + c;
+function sum(a: number, b: number, c: number) {
+  return a + b + c;
+}
 
 const curriedSum = curry(sum);
 
-// `a` 매개변수에 값 `10`을 입력해요
+// 파라미터 `a`로 값 `10`을 제공해요.
 const sum10 = curriedSum(10);
 
-// `b` 매개변수에 값 `15`를 입력해요
+// 파라미터 `b`로 값 `15`을 제공해요.
 const sum25 = sum10(15);
 
-// `c` 매개변수에 값 `5`를 입력해요. 원본 함수(`sum`)에 모든 인자가 입력되었으므로, 결과값을 반환해요
+// 파라미터 `c`로 값 `5`을 제공해요.
+// 함수 'sum'은 모든 파라미터를 받았기 때문에, 이제 값을 반환해요.
 const result = sum25(5);
 ```
