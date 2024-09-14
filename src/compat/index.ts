@@ -81,6 +81,7 @@ export { isWeakMap } from './predicate/isWeakMap.ts';
 export { isWeakSet } from './predicate/isWeakSet.ts';
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
+export { isInteger } from './predicate/isInteger.ts';
 
 export { camelCase } from './string/camelCase.ts';
 export { kebabCase } from './string/kebabCase.ts';
