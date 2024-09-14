@@ -10,6 +10,6 @@
  * isInteger('3'); // Returns: false
  * isInteger([]); // Returns: false
  */
-export function isInteger(value: any): boolean {
+export function isInteger(value: unknown): value is number {
   return Number.isInteger(value);
 }
