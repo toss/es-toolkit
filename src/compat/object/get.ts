@@ -1,6 +1,6 @@
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
-import { toPath } from '../_internal/toPath.ts';
+import { toPath } from '../util/toPath.ts';
 import type { Get } from './get.types.ts';
 
 /**
