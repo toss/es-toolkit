@@ -82,6 +82,7 @@ export { isWeakSet } from './predicate/isWeakSet.ts';
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
 export { isInteger } from './predicate/isInteger.ts';
+export { isSafeInteger } from './predicate/isSafeInteger.ts';
 
 export { camelCase } from './string/camelCase.ts';
 export { kebabCase } from './string/kebabCase.ts';
