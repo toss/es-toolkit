@@ -24,7 +24,7 @@ function isSafeInteger(value?: unknown): boolean;
 
 ### 戻り値
 
-(`boolean`): 「値」が整数で安全な値の範囲内であれば `true`、そうでなければ `false`。
+(`boolean`): `value`が整数で安全な値の範囲内であれば `true`、そうでなければ `false`。
 
 ## 例
 
