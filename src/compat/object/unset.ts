@@ -25,11 +25,11 @@ export function unset(obj: unknown, path: PropertyKey | readonly PropertyKey[]):
   }
 
   const resolvedPath = Array.isArray(path) ? path : typeof path === 'string' ? toPath(path) : [path];
-  const parent = get(obj, resolvedPath.slice(0, -1));
 
+  const parent = get(obj, resolvedPath.slice(0, -1), obj);
   const lastKey = toKey(resolvedPath[resolvedPath.length - 1]);
 
-  if (!Object.prototype.hasOwnProperty.call(parent, lastKey)) {
+  if (typeof parent !== 'object' || parent == null || !Object.prototype.hasOwnProperty.call(parent, lastKey)) {
     return true;
   }
 
