@@ -41,4 +41,8 @@ describe('trimEnd', () => {
   it('should handle cases where multiple trailing characters need removal', async () => {
     expect(trimEnd('abc123abc123abc', 'c')).toEqual('abc123abc123ab');
   });
+
+  it('should trim the string without giving the second parameter, which defaults to whitespace', async () => {
+    expect(trimEnd('  hello world  ')).toEqual('  hello world');
+  });
 });

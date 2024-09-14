@@ -27,6 +27,7 @@ describe('trimEnd', () => {
     const expected = `${'-_-'}a-b-c`;
 
     expect(func(string, '_-')).toBe(expected);
+    expect(func(string, ['-', '_'])).toBe(expected);
   });
 
   it(`\`trimEnd\` should coerce \`chars\` to a string`, () => {
