@@ -18,6 +18,7 @@ describe('trim', () => {
     };
     const expected = `a b c`;
 
+    // eslint-disable-next-line
     // @ts-ignore
     expect(func(object)).toBe(expected);
   });
@@ -35,6 +36,7 @@ describe('trim', () => {
     const string = '-_-a-b-c-_-';
     const expected = `a-b-c`;
 
+    // eslint-disable-next-line
     // @ts-ignore
     expect(func(string, object)).toBe(expected);
   });

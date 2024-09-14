@@ -46,6 +46,7 @@ describe('some', () => {
   });
 
   it('should use `_.identity` when `predicate` is nullish', () => {
+    // eslint-disable-next-line
     const values = [, null, undefined];
     let expected = values.map(stubFalse);
 

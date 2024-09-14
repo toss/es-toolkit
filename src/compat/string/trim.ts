@@ -5,6 +5,7 @@ import { trim as trimToolkit } from '../../string/trim.ts';
  *
  * @param {string} str - The string from which leading and trailing characters will be trimmed.
  * @param {string | string[]} chars - The character(s) to remove from the end of the string. Defaults to `" "`.
+ * @param guard
  * @returns {string} - The resulting string after the specified leading and trailing characters have been removed.
  *
  * @example

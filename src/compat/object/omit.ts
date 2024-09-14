@@ -33,9 +33,12 @@ export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, k
  * @param {...(PropertyKey | PropertyKey[] | PropertyKey[][]} keys - A variable number of keys to be omitted from the object.
  * @returns {Partial<T>} A new object with the specified keys omitted.
  */
-export function omit<T extends {}>(
+export function omit<
+  // eslint-disable-next-line
+  T extends {},
+>(
   obj: T | null | undefined,
-  ...keys: Array<PropertyKey | readonly PropertyKey[] | readonly (readonly PropertyKey[])[]>
+  ...keys: Array<PropertyKey | readonly PropertyKey[] | ReadonlyArray<readonly PropertyKey[]>>
 ): Partial<T>;
 
 /**
@@ -51,9 +54,12 @@ export function omit<T extends {}>(
  * @param {...(PropertyKey | PropertyKey[] | PropertyKey[][])} keysArr - A variable number of keys to be omitted from the object.
  * @returns {Partial<T>} A new object with the specified keys omitted.
  */
-export function omit<T extends {}>(
+export function omit<
+  // eslint-disable-next-line
+  T extends {},
+>(
   obj: T | null | undefined,
-  ...keysArr: Array<PropertyKey | readonly PropertyKey[] | readonly (readonly PropertyKey[])[]>
+  ...keysArr: Array<PropertyKey | readonly PropertyKey[] | ReadonlyArray<readonly PropertyKey[]>>
 ): Partial<T> {
   if (obj == null) {
     return {};
