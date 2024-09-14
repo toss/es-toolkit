@@ -34,7 +34,7 @@ export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] 
  * // ]
  */
 export function orderBy<T>(
-  collection: T[] | object | number | null | undefined,
+  collection: readonly T[] | object | number | null | undefined,
   criteria?: Criterion<T> | Array<Criterion<T>>,
   orders?: unknown | unknown[]
 ): T[] {
