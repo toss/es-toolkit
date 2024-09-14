@@ -2769,15 +2769,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:^0":
-  version: 0.30.2
-  resolution: "@types/ramda@npm:0.30.2"
-  dependencies:
-    types-ramda: "npm:^0.30.1"
-  checksum: 10c0/dda95008860f594eb7b4fd9819adeb2dcd4d4e2baca6cb33f692f6f8ea76d04a7fd81f9a057c5c67555612769e5592cb15f91de6c9f8b619b8b1d806d19dc9ea
-  languageName: node
-  linkType: hard
-
 "@types/semver@npm:^7.5.0":
   version: 7.5.8
   resolution: "@types/semver@npm:7.5.8"
@@ -3682,12 +3673,10 @@ __metadata:
   dependencies:
     "@types/lodash": "npm:^4"
     "@types/lodash-es": "npm:^4"
-    "@types/ramda": "npm:^0"
     es-toolkit: "workspace:^"
     esbuild: "npm:0.23.0"
     lodash: "npm:^4.17.21"
     lodash-es: "npm:^4.17.21"
-    ramda: "npm:^0.30.1"
     vitest: "npm:^2.0.5"
   languageName: unknown
   linkType: soft
@@ -8401,13 +8390,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ramda@npm:^0.30.1":
-  version: 0.30.1
-  resolution: "ramda@npm:0.30.1"
-  checksum: 10c0/3ea3e35c80e1a1b78c23de0c72d3382c3446f42052b113b851f1b7fc421e33a45ce92e7aef3c705cc6de3812a209d03417af5c264f67126cda539fd66c8bea71
-  languageName: node
-  linkType: hard
-
 "randombytes@npm:^2.1.0":
   version: 2.1.0
   resolution: "randombytes@npm:2.1.0"
@@ -9766,13 +9748,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-toolbelt@npm:^9.6.0":
-  version: 9.6.0
-  resolution: "ts-toolbelt@npm:9.6.0"
-  checksum: 10c0/838f9a2f0fe881d5065257a23b402c41315b33ff987b73db3e2b39fcb70640c4c7220e1ef118ed5676763543724fdbf4eda7b0e2c17acb667ed1401336af9f8c
-  languageName: node
-  linkType: hard
-
 "tslib@npm:^2.0.1":
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
@@ -9936,15 +9911,6 @@ __metadata:
   version: 0.0.6
   resolution: "typedarray@npm:0.0.6"
   checksum: 10c0/6005cb31df50eef8b1f3c780eb71a17925f3038a100d82f9406ac2ad1de5eb59f8e6decbdc145b3a1f8e5836e17b0c0002fb698b9fe2516b8f9f9ff602d36412
-  languageName: node
-  linkType: hard
-
-"types-ramda@npm:^0.30.1":
-  version: 0.30.1
-  resolution: "types-ramda@npm:0.30.1"
-  dependencies:
-    ts-toolbelt: "npm:^9.6.0"
-  checksum: 10c0/4a8b230ae9772e6534f65b1a154dd5604bcd1d74e27b49686337a215e83aa8fc93e49f8c49af395418d2950cb9fb9b900662077c1d4b73ff6fe4f4bcb83ab2d6
   languageName: node
   linkType: hard
 
