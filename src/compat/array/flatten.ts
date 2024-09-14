@@ -14,7 +14,10 @@
  * const arr = flatten([1, [2, 3], [4, [5, 6]]], 2);
  * // Returns: [1, 2, 3, 4, 5, 6]
  */
-export function flatten<T, D extends number = 1>(value: readonly T[] | object, depth = 1 as D): Array<FlatArray<T[], D>> | [] {
+export function flatten<T, D extends number = 1>(
+  value: readonly T[] | object,
+  depth = 1 as D
+): Array<FlatArray<T[], D>> | [] {
   const result: Array<FlatArray<T[], D>> = [];
   const flooredDepth = Math.floor(depth);
 

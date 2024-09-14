@@ -20,7 +20,7 @@
  *
  * console.log(result) // Output: [3, 2, 1]
  */
-export function forEachRight<T>(arr: T[], callback: (value: T, index: number, arr: T[]) => void): void
+export function forEachRight<T>(arr: T[], callback: (value: T, index: number, arr: T[]) => void): void;
 /**
  * Iterates over elements of 'arr' from right to left and invokes 'callback' for each element.
  *
@@ -43,7 +43,10 @@ export function forEachRight<T>(arr: T[], callback: (value: T, index: number, ar
  *
  * console.log(result) // Output: [3, 2, 1]
  */
-export function forEachRight<T>(arr: readonly T[], callback: (value: T, index: number, arr: readonly T[]) => void): void
+export function forEachRight<T>(
+  arr: readonly T[],
+  callback: (value: T, index: number, arr: readonly T[]) => void
+): void;
 
 export function forEachRight<T>(arr: readonly T[], callback: (value: T, index: number, arr: T[]) => void): void {
   for (let i = arr.length - 1; i >= 0; i--) {

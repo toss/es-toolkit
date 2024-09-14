@@ -1,15 +1,15 @@
-import { clone } from '../../object/clone.ts';
-import { getSymbols } from '../_internal/getSymbols.ts';
-import { isArguments } from '../predicate/isArguments.ts';
-import { isObjectLike } from '../predicate/isObjectLike.ts';
-import { isPlainObject } from '../predicate/isPlainObject.ts';
-import { isTypedArray } from '../predicate/isTypedArray.ts';
-import { cloneDeep } from './cloneDeep.ts';
+import { clone } from "../../object/clone.ts";
+import { getSymbols } from "../_internal/getSymbols.ts";
+import { isArguments } from "../predicate/isArguments.ts";
+import { isObjectLike } from "../predicate/isObjectLike.ts";
+import { isPlainObject } from "../predicate/isPlainObject.ts";
+import { isTypedArray } from "../predicate/isTypedArray.ts";
+import { cloneDeep } from "./cloneDeep.ts";
 
 declare let Buffer:
   | {
-      isBuffer: (a: any) => boolean;
-    }
+    isBuffer: (a: any) => boolean;
+  }
   | undefined;
 
 /**
@@ -65,7 +65,14 @@ declare let Buffer:
 export function mergeWith<T, S>(
   target: T,
   source: S,
-  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S, stack: Map<any, any>) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: T,
+    source: S,
+    stack: Map<any, any>,
+  ) => any,
 ): T & S;
 
 /**
@@ -124,7 +131,14 @@ export function mergeWith<O, S1, S2>(
   object: O,
   source1: S1,
   source2: S2,
-  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: any,
+    source: any,
+    stack: Map<any, any>,
+  ) => any,
 ): O & S1 & S2;
 
 /**
@@ -186,7 +200,14 @@ export function mergeWith<O, S1, S2, S3>(
   source1: S1,
   source2: S2,
   source3: S3,
-  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: any,
+    source: any,
+    stack: Map<any, any>,
+  ) => any,
 ): O & S1 & S2 & S3;
 
 /**
@@ -251,7 +272,14 @@ export function mergeWith<O, S1, S2, S3, S4>(
   source2: S2,
   source3: S3,
   source4: S4,
-  merge: (targetValue: any, sourceValue: any, key: string, target: any, source: any, stack: Map<any, any>) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: any,
+    source: any,
+    stack: Map<any, any>,
+  ) => any,
 ): O & S1 & S2 & S3;
 
 /**
@@ -358,7 +386,7 @@ export function mergeWith(object: any, ...otherArgs: any[]): any {
     key: string | symbol,
     target: any,
     source: any,
-    stack: Map<any, any>
+    stack: Map<any, any>,
   ) => any;
 
   let result = object;
@@ -381,11 +409,11 @@ function mergeWithDeep(
     key: string | symbol,
     target: any,
     source: any,
-    stack: Map<any, any>
+    stack: Map<any, any>,
   ) => any,
-  stack: Map<any, any>
+  stack: Map<any, any>,
 ) {
-  if (source == null || typeof source !== 'object') {
+  if (source == null || typeof source !== "object") {
     return target;
   }
 
@@ -418,13 +446,13 @@ function mergeWithDeep(
       targetValue = { ...targetValue };
     }
 
-    if (typeof Buffer !== 'undefined' && Buffer.isBuffer(sourceValue)) {
+    if (typeof Buffer !== "undefined" && Buffer.isBuffer(sourceValue)) {
       sourceValue = cloneDeep(sourceValue);
     }
 
     if (Array.isArray(sourceValue)) {
-      if (typeof targetValue === 'object') {
-        const cloned = [];
+      if (typeof targetValue === "object") {
+        const cloned: any = [];
         const targetKeys = Reflect.ownKeys(targetValue);
 
         for (let i = 0; i < targetKeys.length; i++) {
