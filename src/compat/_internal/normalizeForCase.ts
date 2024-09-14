@@ -1,9 +1,11 @@
-export function normalizeForCase(str: string | object): string {
-  if (typeof str === 'object') {
-    str = str.toString();
-  }
-  // Remove constraction apostrophes
-  str = str.replace(/['\u2019]/g, '');
+import { toString } from '../util/toString';
 
-  return str;
+export function normalizeForCase(str: unknown): string {
+  // Coerce to string
+  if (typeof str !== 'string') {
+    str = toString(str);
+  }
+
+  // Remove constraction apostrophes
+  return (str as string).replace(/['\u2019]/g, '');
 }
