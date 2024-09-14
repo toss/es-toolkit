@@ -16,6 +16,7 @@ const PROPERTY_REGEXP = RegExp(
     '(?=(?:\\.|\\[\\])(?:\\.|\\[\\]|$))',
   'g'
 );
+
 /**
  * Converts a deep key string into an array of path segments.
  *

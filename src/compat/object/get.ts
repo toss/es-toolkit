@@ -14,7 +14,7 @@ import type { Get } from './get.types.ts';
  * @param {K | [K]} path - The path of the property to get.
  * @returns {T[K]} - Returns the resolved value.
  */
-export function get<T extends object, K extends keyof T>(object: T, path: K | [K]): T[K];
+export function get<T extends object, K extends keyof T>(object: T, path: K | readonly [K]): T[K];
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -25,7 +25,10 @@ export function get<T extends object, K extends keyof T>(object: T, path: K | [K
  * @param {K | [K]} path - The path of the property to get.
  * @returns {T[K] | undefined} - Returns the resolved value.
  */
-export function get<T extends object, K extends keyof T>(object: T | null | undefined, path: K | [K]): T[K] | undefined;
+export function get<T extends object, K extends keyof T>(
+  object: T | null | undefined,
+  path: K | readonly [K]
+): T[K] | undefined;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -40,7 +43,7 @@ export function get<T extends object, K extends keyof T>(object: T | null | unde
  */
 export function get<T extends object, K extends keyof T, D>(
   object: T | null | undefined,
-  path: K | [K],
+  path: K | readonly [K],
   defaultValue: D
 ): Exclude<T[K], undefined> | D;
 /**
@@ -54,7 +57,10 @@ export function get<T extends object, K extends keyof T, D>(
  * @param {[K1, K2]} path - The path of the property to get.
  * @returns {T[K1][K2]} - Returns the resolved value.
  */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(object: T, path: [K1, K2]): T[K1][K2];
+export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(
+  object: T,
+  path: readonly [K1, K2]
+): T[K1][K2];
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -68,7 +74,7 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  */
 export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(
   object: T | null | undefined,
-  path: [K1, K2]
+  path: readonly [K1, K2]
 ): T[K1][K2] | undefined;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -85,7 +91,7 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  */
 export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], D>(
   object: T | null | undefined,
-  path: [K1, K2],
+  path: readonly [K1, K2],
   defaultValue: D
 ): Exclude<T[K1][K2], undefined> | D;
 /**
@@ -102,7 +108,7 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  */
 export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
   object: T,
-  path: [K1, K2, K3]
+  path: readonly [K1, K2, K3]
 ): T[K1][K2][K3];
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -118,7 +124,7 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  */
 export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
   object: T | null | undefined,
-  path: [K1, K2, K3]
+  path: readonly [K1, K2, K3]
 ): T[K1][K2][K3] | undefined;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -136,7 +142,7 @@ export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]
  */
 export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], D>(
   object: T | null | undefined,
-  path: [K1, K2, K3],
+  path: readonly [K1, K2, K3],
   defaultValue: D
 ): Exclude<T[K1][K2][K3], undefined> | D;
 /**
@@ -158,7 +164,7 @@ export function get<
   K2 extends keyof T[K1],
   K3 extends keyof T[K1][K2],
   K4 extends keyof T[K1][K2][K3],
->(object: T, path: [K1, K2, K3, K4]): T[K1][K2][K3][K4];
+>(object: T, path: readonly [K1, K2, K3, K4]): T[K1][K2][K3][K4];
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -178,7 +184,7 @@ export function get<
   K2 extends keyof T[K1],
   K3 extends keyof T[K1][K2],
   K4 extends keyof T[K1][K2][K3],
->(object: T | null | undefined, path: [K1, K2, K3, K4]): T[K1][K2][K3][K4] | undefined;
+>(object: T | null | undefined, path: readonly [K1, K2, K3, K4]): T[K1][K2][K3][K4] | undefined;
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
@@ -201,7 +207,11 @@ export function get<
   K3 extends keyof T[K1][K2],
   K4 extends keyof T[K1][K2][K3],
   D,
->(object: T | null | undefined, path: [K1, K2, K3, K4], defaultValue: D): Exclude<T[K1][K2][K3][K4], undefined> | D;
+>(
+  object: T | null | undefined,
+  path: readonly [K1, K2, K3, K4],
+  defaultValue: D
+): Exclude<T[K1][K2][K3][K4], undefined> | D;
 /**
  * Retrieves the value at a given path from an object with numeric keys. If the resolved value is undefined, the defaultValue is returned instead.
  *

@@ -26,6 +26,26 @@ describe('groupBy', () => {
     });
   });
 
+  it('should handle keys like `toString` or `valueOf', () => {
+    const array = [
+      { method: 'toString', foo: 1 },
+      { method: 'toString', foo: 2 },
+      { method: 'valueOf', bar: 1 },
+      { method: 'valueOf', bar: 2 },
+    ];
+
+    expect(groupBy(array, x => x.method)).toEqual({
+      toString: [
+        { method: 'toString', foo: 1 },
+        { method: 'toString', foo: 2 },
+      ],
+      valueOf: [
+        { method: 'valueOf', bar: 1 },
+        { method: 'valueOf', bar: 2 },
+      ],
+    });
+  });
+
   it('should handle an empty array', () => {
     const array: Array<{ category: string; name: string }> = [];
 

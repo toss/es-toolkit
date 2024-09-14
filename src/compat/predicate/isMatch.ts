@@ -1,7 +1,4 @@
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
-import { isArrayMatch } from '../_internal/isArrayMatch.ts';
-import { isMapMatch } from '../_internal/isMapMatch.ts';
-import { isSetMatch } from '../_internal/isSetMatch.ts';
 
 /**
  * Checks if the target matches the source by comparing their structures and values.
@@ -122,4 +119,61 @@ export function isMatch(target: any, source: any): boolean {
       return !source;
     }
   }
+}
+
+export function isMapMatch(target: unknown, source: Map<any, any>) {
+  if (source.size === 0) {
+    return true;
+  }
+
+  if (!(target instanceof Map)) {
+    return false;
+  }
+
+  for (const [key, value] of source.entries()) {
+    if (!isMatch(target.get(key), value)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export function isArrayMatch(target: unknown, source: readonly unknown[]) {
+  if (source.length === 0) {
+    return true;
+  }
+
+  if (!Array.isArray(target)) {
+    return false;
+  }
+
+  const countedIndex = new Set<number>();
+
+  for (let i = 0; i < source.length; i++) {
+    const sourceItem = source[i];
+    const index = target.findIndex((targetItem, index) => {
+      return isMatch(targetItem, sourceItem) && !countedIndex.has(index);
+    });
+
+    if (index === -1) {
+      return false;
+    }
+
+    countedIndex.add(index);
+  }
+
+  return true;
+}
+
+export function isSetMatch(target: unknown, source: Set<any>) {
+  if (source.size === 0) {
+    return true;
+  }
+
+  if (!(target instanceof Set)) {
+    return false;
+  }
+
+  return isArrayMatch([...target], [...source]);
 }

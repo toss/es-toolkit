@@ -19,7 +19,7 @@ import { set } from './set';
  * const result = pick(obj, ['a', 'c']);
  * // result will be { a: 1, c: 3 }
  */
-export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
+export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: readonly K[]): Pick<T, K>;
 
 /**
  * Creates a new object composed of the picked object properties.
@@ -48,7 +48,7 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
  */
 export function pick<T extends {}>(
   obj: T | null | undefined,
-  ...keys: Array<PropertyKey | PropertyKey[] | PropertyKey[][]>
+  ...keys: Array<PropertyKey | readonly PropertyKey[] | readonly (readonly PropertyKey[])[]>
 ): Partial<T>;
 
 /**
@@ -78,7 +78,7 @@ export function pick<T extends {}>(
  */
 export function pick<T extends {}>(
   obj: T | null | undefined,
-  ...keysArr: Array<PropertyKey | PropertyKey[] | PropertyKey[][]>
+  ...keysArr: Array<PropertyKey | readonly PropertyKey[] | readonly (readonly PropertyKey[])[]>
 ): Partial<T> {
   if (isNil(obj)) {
     return {};
@@ -90,6 +90,8 @@ export function pick<T extends {}>(
     switch (typeof keys) {
       case 'object': {
         if (!Array.isArray(keys)) {
+          // eslint-disable-next-line
+          // @ts-ignore
           keys = Array.from(keys) as PropertyKey[];
         }
         break;

@@ -99,6 +99,13 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
+          text: 'ユーティリティ',
+          items: [
+            ...getSidebarItems(docsRoot, 'ja', 'reference', 'util'),
+            ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'util'),
+          ],
+        },
+        {
           text: 'エラー',
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'error'),

@@ -62,6 +62,7 @@ export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
 export { fromPairs } from './object/fromPairs.ts';
+export { unset } from './object/unset.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
@@ -81,6 +82,8 @@ export { isWeakMap } from './predicate/isWeakMap.ts';
 export { isWeakSet } from './predicate/isWeakSet.ts';
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
+export { isInteger } from './predicate/isInteger.ts';
+export { isSafeInteger } from './predicate/isSafeInteger.ts';
 
 export { camelCase } from './string/camelCase.ts';
 export { kebabCase } from './string/kebabCase.ts';
@@ -93,7 +96,6 @@ export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
 export { repeat } from './string/repeat.ts';
 
-export { toString } from './string/toString.ts';
 export { trim } from './string/trim.ts';
 export { trimStart } from './string/trimStart.ts';
 export { trimEnd } from './string/trimEnd.ts';
@@ -104,3 +106,6 @@ export { ceil } from './math/ceil.ts';
 export { floor } from './math/floor.ts';
 export { round } from './math/round.ts';
 export { parseInt } from './math/parseInt.ts';
+
+export { toPath } from './util/toPath.ts';
+export { toString } from './util/toString.ts';
