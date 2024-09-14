@@ -100,6 +100,13 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
+          text: '工具函数',
+          items: [
+            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'util'),
+            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'util'),
+          ],
+        },
+        {
           text: '错误',
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'error'),
