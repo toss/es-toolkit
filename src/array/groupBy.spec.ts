@@ -42,9 +42,9 @@ describe('groupBy', () => {
       valueOf: [
         { method: 'valueOf', bar: 1 },
         { method: 'valueOf', bar: 2 },
-      ]
-    })
-  })
+      ],
+    });
+  });
 
   it('should handle an empty array', () => {
     const array: Array<{ category: string; name: string }> = [];

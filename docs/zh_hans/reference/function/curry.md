@@ -9,8 +9,12 @@ function curry<R>(func: () => R): () => R;
 function curry<P, R>(func: (p: P) => R): (p: P) => R;
 function curry<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P1) => (p2: P2) => R;
 function curry<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: P1) => (p2: P2) => (p3: P3) => R;
-function curry<P1, P2, P3, P4, R>(func: (p1: P1, p2: P2, p3: P3, p4: P4) => R): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => R;
-function curry<P1, P2, P3, P4, P5, R>(func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => (p5: P5) => R;
+function curry<P1, P2, P3, P4, R>(
+  func: (p1: P1, p2: P2, p3: P3, p4: P4) => R
+): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => R;
+function curry<P1, P2, P3, P4, P5, R>(
+  func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
+): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => (p5: P5) => R;
 function curry(func: (...args: any[]) => any): (...args: any[]) => any;
 ```
 

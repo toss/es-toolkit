@@ -8,7 +8,7 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Checks if `value` is a safe integer (between -(2^53 – 1) and (2^53 – 1), inclusive).
 
-A safe integer is an integer that can be exactly represented as a double precision number, 
+A safe integer is an integer that can be exactly represented as a double precision number,
 and no other integer rounds to it under any IEEE-754 rounding mode.
 
 This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
