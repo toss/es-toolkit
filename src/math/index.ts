@@ -9,3 +9,4 @@ export { sum } from './sum.ts';
 export { sumBy } from './sumBy.ts';
 export { range } from './range.ts';
 export { isInteger } from './isInteger.ts';
+export { isSafeInteger } from './isSafeInteger.ts';
