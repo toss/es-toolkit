@@ -14,7 +14,7 @@ function isInteger(value: unknown): value is number;
 
 ### Returns
 
-(`boolean`): `true` if `value` is integer, otherwise `false`
+(`value is number`): `true` if `value` is integer, otherwise `false`.
 
 ## Examples
 
