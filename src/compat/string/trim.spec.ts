@@ -27,6 +27,7 @@ describe('trim', () => {
     const expected = `a-b-c`;
 
     expect(func(string, '_-')).toBe(expected);
+    expect(func(string, ['_', '-'])).toBe(expected);
   });
 
   it(`\`trim\` should coerce \`chars\` to a string`, () => {
