@@ -10,7 +10,7 @@ function isInteger(value: unknown): value is number;
 
 ### Parameters
 
-- `value` (`any`): The value to check.
+- `value` (`unknown`): The value to check.
 
 ### Returns
 
