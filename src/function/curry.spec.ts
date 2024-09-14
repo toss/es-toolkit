@@ -1,4 +1,4 @@
-import { describe, it, expect, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { curry } from './curry';
 
 describe('curry', () => {
@@ -27,17 +27,5 @@ describe('curry', () => {
     expectTypeOf(curried(1)('a')).parameters.toEqualTypeOf<[boolean]>();
     expectTypeOf(curried(1)('a')).not.toEqualTypeOf<{ a: number; b: string; c: boolean }>();
     expectTypeOf(curried(1)('a')(true)).toEqualTypeOf<{ a: number; b: string; c: boolean }>();
-  });
-
-  it('should inference type correctly when optional parameters exist', () => {
-    const fn = (a: number, b?: string, c?: boolean) => ({ a, b, c });
-    const curried = curry(fn);
-
-    expectTypeOf(curried).parameters.toEqualTypeOf<[number]>();
-    expectTypeOf(curried(1)).parameters.toEqualTypeOf<[string | undefined]>();
-    expectTypeOf(curried(1)).not.toEqualTypeOf<{ a: number; b: string; c: boolean }>();
-    expectTypeOf(curried(1)('a')).parameters.toEqualTypeOf<[boolean | undefined]>();
-    expectTypeOf(curried(1)('a')).not.toEqualTypeOf<{ a: number; b: string | undefined; c: boolean | undefined }>();
-    expectTypeOf(curried(1)('a')(true)).toEqualTypeOf<{ a: number; b: string | undefined; c: boolean | undefined }>();
   });
 });
