@@ -1,4 +1,4 @@
-import { isPrimitive } from "../../predicate/isPrimitive.ts";
+import { isPrimitive } from '../../predicate/isPrimitive.ts';
 
 /**
  * Checks if the target matches the source by comparing their structures and values.
@@ -63,7 +63,7 @@ export function isMatch(target: any, source: any): boolean {
   }
 
   switch (typeof source) {
-    case "object": {
+    case 'object': {
       if (source == null) {
         return true;
       }
@@ -108,7 +108,7 @@ export function isMatch(target: any, source: any): boolean {
 
       return true;
     }
-    case "function": {
+    case 'function': {
       if (Object.keys(source).length > 0) {
         return isMatch(target, { ...source });
       }
