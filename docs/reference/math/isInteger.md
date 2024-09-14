@@ -5,7 +5,7 @@ Checks if `value` is an integer.
 ## Signature
 
 ```typescript
-function isInteger(value: any): boolean;
+function isInteger(value: unknown): value is number;
 ```
 
 ### Parameters
