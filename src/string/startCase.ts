@@ -9,7 +9,7 @@ import { getWords } from './_internal/getWords.ts';
  *
  * @example
  * const result1 = startCase('hello world');  // result will be 'Hello World'
- * const result2 = startCase('HELLO WORLD');  // result will be 'Hello World'
+ * const result2 = startCase('HELLO WORLD');  // result will be 'HELLO WORLD'
  * const result3 = startCase('hello-world');  // result will be 'Hello World'
  * const result4 = startCase('hello_world');  // result will be 'Hello World'
  */

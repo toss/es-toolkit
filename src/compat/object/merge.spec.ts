@@ -334,11 +334,29 @@ describe('merge', () => {
     expect(pass);
   });
 
+  it('should preserve original properties of arrays', () => {
+    const arr = [1, 2, 3];
+    // eslint-disable-next-line
+    // @ts-ignore
+    arr.foo = 1;
+
+    merge(arr, [2]);
+
+    expect(arr[0]).toBe(2);
+    expect(arr[1]).toBe(2);
+    expect(arr[2]).toBe(3);
+    // eslint-disable-next-line
+    // @ts-ignore
+    expect(arr.foo).toBe(1);
+  });
+
   it('should convert values to arrays when merging arrays of `source`', () => {
     const object = { a: { 1: 'y', b: 'z', length: 2 } };
     let actual: any = merge(object, { a: ['x'] });
 
-    expect(actual).toEqual({ a: ['x', 'y'] });
+    expect(Array.isArray(actual.a)).toEqual(true);
+    expect(actual.a[0]).toEqual('x');
+    expect(actual.a[1]).toEqual('y');
 
     actual = merge({ a: {} }, { a: [] });
     expect(actual).toEqual({ a: [] });

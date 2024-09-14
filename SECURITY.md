@@ -6,7 +6,7 @@ The following table describes the versions of this project that are currently su
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.x   | :white_check_mark: |
+| 1.x     | :white_check_mark: |
 
 ## Reporting a Vulnerability
 

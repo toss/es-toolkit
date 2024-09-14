@@ -16,7 +16,7 @@
  * indexOf(array, 3); // => 2
  * indexOf(array, NaN); // => 3
  */
-export function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?: number): number {
+export function indexOf<T>(array: readonly T[] | null | undefined, searchElement: T, fromIndex?: number): number {
   if (array == null) {
     return -1;
   }

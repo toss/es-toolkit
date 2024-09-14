@@ -2,26 +2,23 @@ import { difference as differenceToolkit } from '../../array/difference.ts';
 import { flatten } from '../../array/flatten.ts';
 
 /**
- * Computes the difference between two arrays.
- *
- * This function takes two arrays and returns a new array containing the elements
- * that are present in the first array but not in the second array. It effectively
- * filters out any elements from the first array that also appear in the second array.
+ * Computes the difference between an array and multiple arrays.
  *
  * @template T
- * @param {T[]} firstArr - The array from which to derive the difference. This is the primary array
+ * @param {T[]} arr - The primary array from which to derive the difference. This is the main array
  * from which elements will be compared and filtered.
- * @param {T[]} secondArr - The array containing elements to be excluded from the first array.
- * Each element in this array will be checked against the first array, and if a match is found,
- * that element will be excluded from the result.
- * @returns {T[]} A new array containing the elements that are present in the first array but not
- * in the second array.
+ * @param {...T[]} values - Multiple arrays containing elements to be excluded from the primary array.
+ * These arrays will be flattened into a single array, and each element in this array will be checked against the primary array.
+ * If a match is found, that element will be excluded from the result.
+ * @returns {T[]} A new array containing the elements that are present in the primary array but not
+ * in the flattened array.
  *
  * @example
  * const array1 = [1, 2, 3, 4, 5];
  * const array2 = [2, 4];
- * const result = difference(array1, array2);
- * // result will be [1, 3, 5] since 2 and 4 are in both arrays and are excluded from the result.
+ * const array3 = [5, 6];
+ * const result = difference(array1, array2, array3);
+ * // result will be [1, 3] since 2, 4, and 5 are in the other arrays and are excluded from the result.
  */
 export function difference<T>(arr: readonly T[], ...values: Array<readonly T[]>): T[] {
   const arr1 = arr;

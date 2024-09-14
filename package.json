@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.17.0",
+  "version": "1.19.0",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -139,6 +139,7 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/broken-link-checker": "^0",
     "@types/eslint": "^9",
+    "@types/jscodeshift": "^0.11.11",
     "@types/node": "^20.12.11",
     "@types/tar": "^6.1.13",
     "@vitest/coverage-istanbul": "^1.5.2",
@@ -149,6 +150,7 @@
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
     "globals": "^15.9.0",
+    "jscodeshift": "^17.0.0",
     "prettier": "^3.2.5",
     "rollup": "^4.19.0",
     "rollup-plugin-dts": "^6.1.1",
@@ -166,6 +168,7 @@
     "test": "vitest run --coverage --typecheck",
     "bench": "vitest bench",
     "lint": "eslint --config eslint.config.mjs",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0"
   }
 }

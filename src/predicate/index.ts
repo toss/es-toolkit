@@ -1,3 +1,4 @@
+export { isDate } from './isDate.ts';
 export { isEqual } from './isEqual.ts';
 export { isNil } from './isNil.ts';
 export { isNotNil } from './isNotNil.ts';

@@ -74,7 +74,9 @@ export function findIndex<T>(arr: readonly T[], propertyToCheck: string): number
  *
  * @template T
  * @param {readonly T[]} arr - The array to search through.
- * @param {string} propertyToCheck - The property name to check.
+ * @param {readonly T[]} source - The source array to search for the matching item.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The criteria to match against the items in the array. This can be a function, a partial object, a key-value pair, or a property name.
+ * @param {string} propertyToCheck - The property name to check for in the items of the array.
  * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
  *
  * @example

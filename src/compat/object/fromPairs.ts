@@ -11,7 +11,7 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * const result = fromPairs(pairs);
  * // result will be: { a: 1, b: 2 }
  */
-export function fromPairs(pairs: any[]): Record<string, any>;
+export function fromPairs(pairs: readonly any[]): Record<string, any>;
 /**
  * Converts an array of key-value pairs into an object.
  *
@@ -26,7 +26,7 @@ export function fromPairs(pairs: any[]): Record<string, any>;
  * const result = fromPairs(pairs);
  * // result will be: { a: 1, b: 2 }
  */
-export function fromPairs<T extends PropertyKey, U>(pairs: Array<[T, U]> | Map<T, U>): Record<T, U>;
+export function fromPairs<T extends PropertyKey, U>(pairs: ReadonlyArray<[T, U]> | Map<T, U>): Record<T, U>;
 /**
  * Converts an array of key-value pairs into an object.
  *
@@ -41,14 +41,14 @@ export function fromPairs<T extends PropertyKey, U>(pairs: Array<[T, U]> | Map<T
  * const result = fromPairs(pairs);
  * // result will be: { a: 1, b: 2 }
  */
-export function fromPairs<T extends PropertyKey, U>(data: Array<[T, U]> | Map<T, U>): Record<T, U> {
-  if (!isArrayLike(data) && !(data instanceof Map)) {
+export function fromPairs<T extends PropertyKey, U>(pairs: ReadonlyArray<[T, U]> | Map<T, U>): Record<T, U> {
+  if (!isArrayLike(pairs) && !(pairs instanceof Map)) {
     return {} as Record<T, U>;
   }
 
   const result = {} as Record<T, U>;
 
-  for (const [key, value] of data) {
+  for (const [key, value] of pairs) {
     result[key as T] = value;
   }
 
