@@ -1,1 +1,1 @@
-export const symbol = Symbol ? Symbol('a') : undefined;
+export const symbol = Symbol('a');
