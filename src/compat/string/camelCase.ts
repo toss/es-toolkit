@@ -17,6 +17,6 @@ import { normalizeForCase } from '../_internal/normalizeForCase';
  * const convertedStr4 = camelCase('HTTPRequest') // returns 'httpRequest'
  */
 
-export function camelCase(str: string | object): string {
+export function camelCase(str?: string | object): string {
   return camelCaseToolkit(normalizeForCase(str));
 }
