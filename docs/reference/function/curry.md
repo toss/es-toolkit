@@ -65,7 +65,7 @@ namespace curry {
 ```
 
 - `curry` accepts an additional numeric parameter, `arity`, which specifies the number of arguments the function should accept.
-  - Defaults to the `length` property of the function. If `arity` is negative or `NaN`, it will be converted to `0`. If it's a fractional number, it will be converted to an integer.
+  - Defaults to the `length` property of the function. If `arity` is negative or `NaN`, it will be converted to `0`. If it's a fractional number, it will be rounded down to the nearest integer.
 - `guard` enables use as an iteratee for methods like `Array#map`.
 - The `curry.placeholder` value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
 - Unlike the native `curry`, this function allows multiple arguments to be called at once and returns a new function that accepts the remaining arguments.
