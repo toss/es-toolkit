@@ -102,9 +102,9 @@ function replaceHolders(args: any[]): number[] {
 
 function composeArgs(args: any[], partials: any[], holders: number[]): any[] {
   const result = [...partials];
+  const argsLength = args.length;
+  const holdersLength = holders.length;
   let argsIndex = -1,
-    argsLength = args.length,
-    holdersLength = holders.length,
     leftIndex = partials.length,
     rangeLength = Math.max(argsLength - holdersLength, 0);
   while (++argsIndex < holdersLength) {

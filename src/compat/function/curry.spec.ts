@@ -45,7 +45,6 @@ describe('curry', () => {
     const curried = curry(fn),
       ph = curried.placeholder;
 
-    const p = curried(1)(ph, 3);
     expect(curried(1)(ph, 3)(ph, 4)(2)).toEqual([1, 2, 3, 4]);
     expect(curried(ph, 2)(1)(ph, 4)(3)).toEqual([1, 2, 3, 4]);
     expect(curried(ph, ph, 3)(ph, 2)(ph, 4)(1)).toEqual([1, 2, 3, 4]);
