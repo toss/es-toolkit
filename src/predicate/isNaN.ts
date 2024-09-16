@@ -11,5 +11,5 @@
  * isNaN(undefined); // false
  */
 export function isNaN(value: unknown): value is typeof NaN {
-  return typeof value === 'number' && value !== value;
+  return Number.isNaN(value);
 }
