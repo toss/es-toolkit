@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { debounce } from './debounce'; // adjust the import path as necessary
 import { delay } from '../promise';
 
@@ -148,59 +148,5 @@ describe('debounce', () => {
     expect(listenerCount).toBe(1);
 
     addEventListenerSpy.mockRestore();
-  });
-
-  it('should call the function immediately and only once if leading is true', async () => {
-    const func = vi.fn();
-    const debounceMs = 50;
-    const debouncedFunc = debounce(func, debounceMs, {
-      edges: ['leading', 'trailing'],
-    });
-
-    debouncedFunc();
-    expect(func).toHaveBeenCalledTimes(1);
-
-    await delay(debounceMs * 2);
-    expect(func).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call the function immediately and after the wait time if leading and trailing are true', async () => {
-    const func = vi.fn();
-    const debounceMs = 50;
-    const debouncedFunc = debounce(func, debounceMs, {
-      edges: ['leading', 'trailing'],
-    });
-
-    debouncedFunc();
-    debouncedFunc();
-
-    expect(func).toHaveBeenCalledTimes(1);
-
-    await delay(debounceMs * 2);
-    expect(func).toHaveBeenCalledTimes(2);
-  });
-
-  it('should not call the function immediately if leading is false', async () => {
-    const func = vi.fn();
-    const debounceMs = 50;
-    const debouncedFunc = debounce(func, debounceMs, { edges: ['trailing'] });
-
-    debouncedFunc();
-    expect(func).not.toHaveBeenCalled();
-
-    await delay(debounceMs * 2);
-    expect(func).toHaveBeenCalledTimes(1);
-  });
-
-  it('should not call the function after the wait time if no edges are given', async () => {
-    const func = vi.fn();
-    const debounceMs = 50;
-    const debouncedFunc = debounce(func, debounceMs, { edges: [] });
-
-    debouncedFunc();
-    expect(func).not.toHaveBeenCalled();
-
-    await delay(debounceMs * 2);
-    expect(func).not.toHaveBeenCalled();
   });
 });

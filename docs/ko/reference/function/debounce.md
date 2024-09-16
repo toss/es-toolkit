@@ -20,10 +20,6 @@ function debounce<F extends (...args: any[]) => void>(
 - `debounceMs`(`number`): debounce로 지연시킬 밀리초.
 - `options` (`DebounceOptions`, optional): 옵션 객체.
   - `signal` (`AbortSignal`, optional): debounce된 함수를 취소하기 위한 선택적 `AbortSignal`.
-  - `edges` (`Array<'leading' | 'trailing'>`, optional): 원래 함수를 언제 실행할지 나타내는 배열. 기본값은 `['trailing']`이에요.
-    - `'leading'`이 포함되면, 디바운스된 함수를 처음으로 호출했을 때 즉시 원래 함수를 실행해요.
-    - `'trailing'`이 포함되면, 마지막 디바운스된 함수 호출로부터 `debounceMs` 밀리세컨드가 지나면 원래 함수를 실행해요.
-    - `'leading'`과 `'trailing'`이 모두 포함된다면, 원래 함수는 실행을 지연하기 시작할 때와 끝날 때 모두 호출돼요. 그렇지만 양쪽 시점 모두에 호출되기 위해서는, 디바운스된 함수가 `debounceMs` 밀리세컨드 사이에 최소 2번은 호출되어야 해요. 디바운스된 함수를 한 번 호출해서 원래 함수를 두 번 호출할 수는 없기 때문이에요.
 
 ### 결괏값
 
@@ -73,6 +69,7 @@ controller.abort();
 
   - `leading`: 디바운스된 함수를 처음으로 호출했을 때 즉시 원래 함수를 실행할지 여부예요. 기본값은 `false`예요.
   - `trailing`: 마지막 디바운스된 함수 호출로부터 `debounceMs` 밀리세컨드가 지나면 원래 함수를 실행할지 여부예요. 기본값은 `true`예요.
+  - `leading`과 `trailing`가 모두 `true`라면, 원래 함수는 실행을 지연하기 시작할 때와 끝날 때 모두 호출돼요. 그렇지만 양쪽 시점 모두에 호출되기 위해서는, 디바운스된 함수가 `debounceMs` 밀리세컨드 사이에 최소 2번은 호출되어야 해요. 디바운스된 함수 호출 한 번이 원래 함수를 두 번 호출할 수는 없기 때문이에요.
 
 - `debounce` 함수는 `maxWait` 옵션도 받아요.
 
