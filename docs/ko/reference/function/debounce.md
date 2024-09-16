@@ -60,3 +60,69 @@ debouncedWithSignalFunction();
 // debounce 함수 호출을 취소해요
 controller.abort();
 ```
+
+## Lodash와의 호환성
+
+`es-toolkit/compat`에서 `debounce`를 가져오면 lodash와 완전히 호환돼요.
+
+- `debounce` 함수는 `leading` and `trailing` 옵션을 받아요.
+
+  - `leading`: 디바운스된 함수를 처음으로 호출했을 때 즉시 원래 함수를 실행할지 여부예요. 기본값은 `false`예요.
+  - `trailing`: 마지막 디바운스된 함수 호출로부터 `debounceMs` 밀리세컨드가 지나면 원래 함수를 실행할지 여부예요. 기본값은 `true`예요.
+  - `leading`과 `trailing`가 모두 `true`라면, 원래 함수는 실행을 지연하기 시작할 때와 끝날 때 모두 호출돼요. 그렇지만 양쪽 시점 모두에 호출되기 위해서는, 디바운스된 함수가 `debounceMs` 밀리세컨드 사이에 최소 2번은 호출되어야 해요. 디바운스된 함수 호출 한 번이 원래 함수를 두 번 호출할 수는 없기 때문이에요.
+
+- `debounce` 함수는 `maxWait` 옵션도 받아요.
+
+  - 원래 함수 호출이 최대로 지연될 수 있는 밀리세컨드예요. 기본값은 `Infinity`예요.
+
+- `debounceMs` 옵션의 기본값은 `0`이에요. 함수 호출이 다음 틱까지만 지연된다는 뜻이에요.
+
+::: info `{ leading: true }` 옵션의 의미
+
+`trailing`은 기본적으로 `true`이므로, 디바운스를 `{ leading: true }`로 설정하면 `leading`과 `trailing` 모두 `true`가 돼요.
+
+:::
+
+```typescript
+// leading 옵션 예시
+const leadingFn = debounce(
+  () => {
+    console.log('Leading function executed');
+  },
+  1000,
+  { leading: true }
+);
+
+// 'Leading function executed'를 바로 로깅해요.
+leadingFn();
+
+// trailing 옵션 예시
+const trailingFn = debounce(
+  () => {
+    console.log('Trailing function executed');
+  },
+  1000,
+  { trailing: true }
+);
+
+// 디바운스된 함수가 그 사이에 호출되지 않는다면, 'Trailing function executed'을 1초 뒤에 로깅해요.
+trailingFn();
+
+// maxWait 옵션 예시
+const maxWaitFn = debounce(
+  () => {
+    console.log('MaxWait function executed');
+  },
+  1000,
+  { maxWait: 2000 }
+);
+
+// 'MaxWait function executed'를 2초 안에는 반드시 로깅해요.
+maxWaitFn();
+setTimeout(maxWaitFn, 500);
+setTimeout(maxWaitFn, 1000);
+setTimeout(maxWaitFn, 1500);
+setTimeout(maxWaitFn, 2000);
+setTimeout(maxWaitFn, 2500);
+setTimeout(maxWaitFn, 3000);
+```
