@@ -112,7 +112,7 @@ export function debounce<F extends (...args: any[]) => any>(
       return;
     }
 
-    if (leading && timeoutId == null) {
+    if (leading && timeoutId === null) {
       result = func.apply(this, args);
     } else if (maxWait != null && pendingAt != null && Date.now() - pendingAt >= maxWait) {
       result = func.apply(this, args);
