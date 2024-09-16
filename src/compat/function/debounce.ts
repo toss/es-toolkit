@@ -112,26 +112,7 @@ export function debounce<F extends (...args: any[]) => any>(
       return;
     }
 
-    if (leading && timeoutId == null) {
-      result = func.apply(this, args);
-    } else if (maxWait != null && pendingAt != null && Date.now() - pendingAt >= maxWait) {
-      result = func.apply(this, args);
-
-      pendingAt = Date.now();
-      pendingArgs = null;
-    } else {
-      pendingArgs = args;
-    }
-
-    if (maxWait != null && pendingAt == null) {
-      pendingAt = Date.now();
-    }
-
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-    }
-
-    timeoutId = setTimeout(() => {
+    const timer = () => {
       timeoutId = null;
 
       if (trailing && pendingArgs != null) {
@@ -139,7 +120,35 @@ export function debounce<F extends (...args: any[]) => any>(
       }
 
       cancel();
-    }, debounceMs);
+    };
+
+    pendingArgs = args;
+
+    if (maxWait != null) {
+      if (pendingAt != null) {
+        if (Date.now() - pendingAt >= maxWait) {
+          result = func.apply(this, args);
+          pendingArgs = null;
+
+          pendingAt = Date.now();
+        }
+      } else {
+        pendingAt = Date.now();
+      }
+    }
+
+    const isFirstCall = timeoutId == null;
+
+    if (timeoutId != null) {
+      clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(timer, debounceMs);
+
+    if (leading && isFirstCall) {
+      result = func.apply(this, args);
+      pendingArgs = null;
+    }
 
     return result;
   };

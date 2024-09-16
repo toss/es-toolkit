@@ -70,7 +70,6 @@ Import `debounce` from `es-toolkit/compat` for full compatibility with lodash.
   - `leading`: If true, the function runs immediately on the first call. (defaults to `false`)
   - `trailing`: If true, the function runs after `debounceMs` milliseconds have passed since the last call. (defaults to `true`)
   - If both `leading` and `trailing` are true, the function runs at both the start and end of the delay period. However, it must be called at least twice within `debounceMs` milliseconds for this to happen, as one debounced function call cannot trigger the function twice.
-  - Note that since `trailing` is true by default, setting `{ leading: true }` means that both leading and trailing are true.
 
 - The `debounce` function also accepts a `maxWait` option:
 
