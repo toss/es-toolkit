@@ -26,3 +26,15 @@ const obj = { a: 1, b: 2, c: 3 };
 const result = omit(obj, ['b', 'c']);
 // result 将会是 { a: 1 }
 ```
+
+## 与 Lodash 的兼容性
+
+`es-toolkit/compat` 中的 `omit` 函数可以省略深层路径的属性。
+
+```typescript
+import { omit } from 'es-toolkit/compat';
+
+const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
+const result = omit(obj, ['a.b.c', 'f.g']);
+// result will be { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
+```

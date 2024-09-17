@@ -114,6 +114,7 @@ describe('conformsTo', () => {
   });
 
   it(`\`conformsTo\` should return \`false\` when \`object\` is nullish`, () => {
+    // eslint-disable-next-line
     const values = [, null, undefined];
     const expected = values.map(() => false);
 
@@ -130,6 +131,7 @@ describe('conformsTo', () => {
   });
 
   it(`\`conformsTo\` should return \`true\` when comparing an empty \`source\` to a nullish \`object\``, () => {
+    // eslint-disable-next-line
     const values = [, null, undefined];
     const expected = values.map(() => true);
     const par = conforms({});

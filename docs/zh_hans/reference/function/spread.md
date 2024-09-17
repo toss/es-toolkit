@@ -49,7 +49,7 @@ console.log(spreadGreet(['Bob', 'Hi'])); // 输出: Hi, Bob!
 从 `es-toolkit/compat` 中导入 `spread` 以实现与 lodash 的完全兼容。
 
 - `spread` 接受一个额外的数值参数 `argsIndex`，该参数指定了参数数组在前面参数中的位置。
-  - 如果 `argsIndex` 为负数或 `NaN`，默认为 `0`。如果它是一个小数，则会四舍五入为最接近的整数。
+  - 如果 `argsIndex` 为负数或 `NaN`，默认为 `0`。如果它是一个小数，则会向下取整为最接近的整数。
 
 ```typescript
 import { spread } from 'es-toolkit/compat';

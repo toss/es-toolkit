@@ -29,6 +29,7 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
  *
  * @template T - The type of object.
  * @param {T | null | undefined} obj - The object to pick keys from.
+ * @param {...any} keys
  * @param {PropertyKey | PropertyKey[] | ProperyKey[][]}} keys - An array of keys to be picked from the object. received keysgoes through a flattening process before being used.
  * @returns {Partial<T, K>} A new object with the specified keys picked.
  *
@@ -46,9 +47,12 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
  * const result = pick(obj, 'a.b');
  * // result will be { 'a.b': 1 }
  */
-export function pick<T extends {}>(
+export function pick<
+  // eslint-disable-next-line
+  T extends {},
+>(
   obj: T | null | undefined,
-  ...keys: Array<PropertyKey | readonly PropertyKey[] | readonly (readonly PropertyKey[])[]>
+  ...keys: Array<PropertyKey | readonly PropertyKey[] | ReadonlyArray<readonly PropertyKey[]>>
 ): Partial<T>;
 
 /**
@@ -59,6 +63,7 @@ export function pick<T extends {}>(
  *
  * @template T - The type of object.
  * @param {T | null | undefined} obj - The object to pick keys from.
+ * @param {...any} keysArr
  * @param {PropertyKey | PropertyKey[] | ProperyKey[][]}} keys - An array of keys to be picked from the object. received keysgoes through a flattening process before being used.
  * @returns {Partial<T, K>} A new object with the specified keys picked.
  *
@@ -76,9 +81,12 @@ export function pick<T extends {}>(
  * const result = pick(obj, 'a.b');
  * // result will be { 'a.b': 1 }
  */
-export function pick<T extends {}>(
+export function pick<
+  // eslint-disable-next-line
+  T extends {},
+>(
   obj: T | null | undefined,
-  ...keysArr: Array<PropertyKey | readonly PropertyKey[] | readonly (readonly PropertyKey[])[]>
+  ...keysArr: Array<PropertyKey | readonly PropertyKey[] | ReadonlyArray<readonly PropertyKey[]>>
 ): Partial<T> {
   if (isNil(obj)) {
     return {};

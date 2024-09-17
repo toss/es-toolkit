@@ -1,3 +1,5 @@
+const DOTS_KEY = /^[\w.]+$/g;
+
 const ESCAPE_REGEXP = /\\(\\)?/g;
 const PROPERTY_REGEXP = RegExp(
   // Match anything that isn't a dot or bracket.
@@ -35,16 +37,19 @@ const PROPERTY_REGEXP = RegExp(
  * toPath('.a[b].c.d[e]["f.g"].h') // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
  */
 export function toPath(deepKey: string): string[] {
+  if (DOTS_KEY.test(deepKey)) {
+    return deepKey.split('.');
+  }
+
   const result: string[] = [];
 
   if (deepKey[0] === '.') {
     result.push('');
   }
 
-  let match: RegExpExecArray | null;
-  let lastIndex = 0;
+  const matches = deepKey.matchAll(PROPERTY_REGEXP);
 
-  while ((match = PROPERTY_REGEXP.exec(deepKey)) !== null) {
+  for (const match of matches) {
     let key = match[0];
     const expr = match[1];
     const quote = match[2];
@@ -57,12 +62,6 @@ export function toPath(deepKey: string): string[] {
     }
 
     result.push(key);
-
-    if (PROPERTY_REGEXP.lastIndex === lastIndex) {
-      PROPERTY_REGEXP.lastIndex++;
-    } else {
-      lastIndex = PROPERTY_REGEXP.lastIndex;
-    }
   }
 
   return result;

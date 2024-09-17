@@ -37,3 +37,49 @@ setTimeout(() => {
   throttledFunction(); // Will log 'Function executed'
 }, 1000);
 ```
+
+## Compatibility with Lodash
+
+Import `throttle` from `es-toolkit/compat` for full compatibility with lodash.
+
+- The `throttle` function accepts `leading` and `trailing` options:
+
+  - `leading`: If true, the function runs immediately on the first call. (defaults to `true`)
+  - `trailing`: If true, the function runs after `throttleMs` milliseconds have passed since the last call. (defaults to `true`)
+  - If both `leading` and `trailing` are true, the function runs at both the start and end of the delay period. However, it must be called at least twice within `debounceMs` milliseconds for this to happen, as one throttled function call cannot trigger the function twice.
+
+- By default, the `throttleMs` option is set to `0`, meaning the function execution is only delayed until the next tick.
+
+::: info `leading` and `trailing` options in `throttle`
+
+By default, both `leading` and `trailing` are set to `true`, so specifying `{ leading: true }` or `{ trailing: true }` won't change anything.
+
+:::
+
+```typescript
+// Example with leading option
+const leadingFn = throttle(
+  () => {
+    console.log('Leading function executed');
+  },
+  1000,
+  { leading: true }
+);
+
+// Logs 'Leading function executed' immediately
+// Logs 'Leading function executed' again every 1 second, even if called continuously
+leadingFn();
+
+// Example with trailing option
+const trailingFn = throttle(
+  () => {
+    console.log('Trailing function executed');
+  },
+  1000,
+  { trailing: true }
+);
+
+// Logs 'Trailing function executed' immediately
+// Logs 'Trailing function executed' again every 1 second, even if called continuously
+trailingFn();
+```

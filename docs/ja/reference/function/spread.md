@@ -49,7 +49,7 @@ console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
 `es-toolkit/compat` から `chunk` をインポートすると、Lodash と互換になります。
 
 - `spread` は追加の数値パラメータ `argsIndex` を受け付け、引数配列が前の引数の中で位置する場所を指定します。
-  - `argsIndex` が負の値または `NaN` の場合、デフォルトで `0` になります。小数の場合は最も近い整数に丸められます。
+  - `argsIndex` が負の値または `NaN` の場合、デフォルトで `0` になります。小数の場合は最も近い整数に切り捨てられます。
 
 ```typescript
 import { spread } from 'es-toolkit/compat';

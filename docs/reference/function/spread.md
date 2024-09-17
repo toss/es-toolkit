@@ -49,7 +49,7 @@ console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
 Import `spread` from `es-toolkit/compat` for full compatibility with lodash.
 
 - `spread` accepts an additional numeric parameter, `argsIndex`, which specifies the position at which the argument array is positioned among the preceding parameters.
-  - If `argsIndex` is negative or `NaN`, it defaults to `0`. If it's a fractional number, it is rounded to the nearest integer.
+  - If `argsIndex` is negative or `NaN`, it defaults to `0`. If it's a fractional number, it is rounded down to the nearest integer.
 
 ```typescript
 import { spread } from 'es-toolkit/compat';

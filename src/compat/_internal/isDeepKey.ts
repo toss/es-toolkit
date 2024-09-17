@@ -1,6 +1,3 @@
-const IS_PLAIN = /^\w*$/;
-const IS_DEEP = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
-
 /**
  * Checks if a given key is a deep key.
  *
@@ -25,7 +22,7 @@ export function isDeepKey(key: PropertyKey): boolean {
       return false;
     }
     case 'string': {
-      return !IS_PLAIN.test(key) && IS_DEEP.test(key);
+      return key.includes('.') || key.includes('[') || key.includes(']');
     }
   }
 }
