@@ -14,3 +14,4 @@ export { isSymbol } from './isSymbol.ts';
 export { isString } from './isString.ts';
 export { isWeakMap } from './isWeakMap.ts';
 export { isWeakSet } from './isWeakSet.ts';
+export { isJSONObject } from './isJSONObject.ts';
