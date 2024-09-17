@@ -18,6 +18,7 @@ describe('trimEnd', () => {
     };
     const expected = `${whitespace}a b c`;
 
+    // eslint-disable-next-line
     // @ts-ignore
     expect(func(object)).toBe(expected);
   });
@@ -27,6 +28,7 @@ describe('trimEnd', () => {
     const expected = `${'-_-'}a-b-c`;
 
     expect(func(string, '_-')).toBe(expected);
+    expect(func(string, ['-', '_'])).toBe(expected);
   });
 
   it(`\`trimEnd\` should coerce \`chars\` to a string`, () => {
@@ -34,6 +36,7 @@ describe('trimEnd', () => {
     const string = '-_-a-b-c-_-';
     const expected = `${'-_-'}a-b-c`;
 
+    // eslint-disable-next-line
     // @ts-ignore
     expect(func(string, object)).toBe(expected);
   });

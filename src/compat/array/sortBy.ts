@@ -30,7 +30,7 @@ import { Criterion, orderBy } from './orderBy';
  * // ]
  */
 export function sortBy<T>(
-  collection: T[] | object | number | null | undefined,
+  collection: readonly T[] | object | number | null | undefined,
   criteria?: Criterion<T> | Array<Criterion<T>>
 ): T[] {
   return orderBy(collection, criteria, ['asc']);

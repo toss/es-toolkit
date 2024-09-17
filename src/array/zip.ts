@@ -111,19 +111,16 @@ export function zip<T, U, V, W>(
  * // result will be [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
  */
 export function zip<T>(...arrs: Array<readonly T[]>): T[][] {
-  const result: T[][] = [];
+  const rowCount = Math.max(...arrs.map(x => x.length));
+  const columnCount = arrs.length;
+  const result = Array(rowCount);
 
-  const maxIndex = Math.max(...arrs.map(x => x.length));
-
-  for (let i = 0; i < maxIndex; i++) {
-    const element: T[] = [];
-
-    for (const arr of arrs) {
-      element.push(arr[i]);
+  for (let i = 0; i < rowCount; ++i) {
+    const row = Array(columnCount);
+    for (let j = 0; j < columnCount; ++j) {
+      row[j] = arrs[j][i];
     }
-
-    result.push(element);
+    result[i] = row;
   }
-
   return result;
 }

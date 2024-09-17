@@ -41,4 +41,8 @@ describe('trim', () => {
   it('should remove numbers from a string', async () => {
     expect(trim('123abc456', ['1', '2', '3', '4', '5', '6'])).toEqual('abc');
   });
+
+  it('should trim the string without giving the second parameter, which defaults to whitespace', async () => {
+    expect(trim('  hello world  ')).toEqual('hello world');
+  });
 });

@@ -99,6 +99,13 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
+          text: '유틸리티',
+          items: [
+            ...getSidebarItems(docsRoot, 'ko', 'reference', 'util'),
+            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'util'),
+          ],
+        },
+        {
           text: '에러',
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'error'),

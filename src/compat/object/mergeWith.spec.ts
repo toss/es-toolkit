@@ -57,4 +57,56 @@ describe('mergeWith', () => {
 
     expect(actual).toEqual({ a: ['a', 'b', 'c'], b: ['b', 'c'] });
   });
+
+  it('should handle symbols correctly', () => {
+    const symbol1 = Symbol('symbol1');
+    const symbol2 = Symbol('symbol2');
+
+    const value1 = { [symbol1]: { [symbol2]: ['a'] } };
+    const value2 = { [symbol1]: { [symbol2]: ['c'] } };
+
+    expect(mergeWith(value1, value2, (a, b) => (Array.isArray(a) ? a.concat(b) : undefined))).toEqual({
+      [symbol1]: { [symbol2]: ['a', 'c'] },
+    });
+  });
+
+  it('should preserve the properties of the target object', () => {
+    const symbol1 = Symbol('symbol1');
+    const symbol2 = Symbol('symbol2');
+
+    const array1: any = [1, 2, 3];
+    // eslint-disable-next-line
+    // @ts-ignore
+    array1.foo = 1;
+    array1[symbol1] = 'a';
+
+    const array2: any = [3, 4, 5, 6, 7];
+    array2[symbol2] = 'b';
+
+    const merged = mergeWith({ value: array1 }, { value: array2 }, (targetValue: unknown, sourceValue: unknown) => {
+      if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+        for (const sourceItem of sourceValue) {
+          if (!targetValue.find(targetItem => targetItem === sourceItem)) {
+            targetValue.push(sourceItem);
+          }
+        }
+
+        return targetValue;
+      }
+
+      return undefined;
+    });
+
+    const resultArr: any = [1, 2, 3, 4, 5, 6, 7];
+    // eslint-disable-next-line
+    // @ts-ignore
+    resultArr.foo = 1;
+    resultArr[symbol1] = 'a';
+
+    expect(merged).toEqual({ value: resultArr });
+    // eslint-disable-next-line
+    // @ts-ignore
+    expect(merged.value.foo).toEqual(1);
+    expect(merged.value[symbol1]).toEqual('a');
+  });
 });

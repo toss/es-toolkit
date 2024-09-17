@@ -12,7 +12,7 @@
  * const trimmedStr4 = trimEnd('trimmedxxx', 'x') // returns 'trimmed'
  */
 export function trimEnd(str: string, chars?: string | string[]): string {
-  if (chars == null) {
+  if (chars === undefined) {
     return str.trimEnd();
   }
 

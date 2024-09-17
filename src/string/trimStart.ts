@@ -12,7 +12,7 @@
  * const trimmedStr4 = trimStart('xxxtrimmed', 'x') // returns 'trimmed'
  */
 export function trimStart(str: string, chars?: string | string[]): string {
-  if (chars == null) {
+  if (chars === undefined) {
     return str.trimStart();
   }
   let startIndex = 0;

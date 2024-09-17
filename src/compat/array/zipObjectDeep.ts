@@ -34,7 +34,10 @@ import { set } from '../object/set.ts';
  * const result = zipObjectDeep(paths, values);
  * // result will be { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }
  */
-export function zipObjectDeep<P extends PropertyKey, V>(keys: P[] | P[][], values: V[]): { [K in P]: V } {
+export function zipObjectDeep<P extends PropertyKey, V>(
+  keys: readonly P[] | readonly P[][],
+  values: readonly V[]
+): { [K in P]: V } {
   const result = {} as { [K in P]: V };
   const zipped = zip<P | P[], V>(keys, values);
 

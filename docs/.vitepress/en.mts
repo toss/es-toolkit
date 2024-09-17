@@ -100,6 +100,13 @@ function sidebar(): DefaultTheme.Sidebar {
           ],
         },
         {
+          text: 'Utility Functions',
+          items: [
+            ...getSidebarItems(docsRoot, 'reference', 'util'),
+            ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'util'),
+          ],
+        },
+        {
           text: 'Errors',
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'error'),

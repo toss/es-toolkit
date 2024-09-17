@@ -1,6 +1,7 @@
 import { DecoratorDef } from "@deno/doc";
 import { FormatOption } from "../options.ts";
 
+// eslint-disable-next-line
 export function formatDecorator(node: DecoratorDef, _: FormatOption) {
   let result = "";
 

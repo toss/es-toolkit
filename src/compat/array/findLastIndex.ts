@@ -80,6 +80,8 @@ export function findLastIndex<T>(arr: readonly T[], propertyToCheck: string, fro
  * @template T
  * @param {readonly T[]} arr - The array to search through.
  * @param {string} propertyToCheck - The property name to check.
+ * @param source
+ * @param doesMatch
  * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
  * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
  *

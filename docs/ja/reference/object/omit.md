@@ -26,3 +26,15 @@ const obj = { a: 1, b: 2, c: 3 };
 const result = omit(obj, ['b', 'c']);
 // 結果は次のようになります { a: 1 }
 ```
+
+## Lodashとの互換性
+
+`es-toolkit/compat`から`omit`関数をインポートすると、深いパスを省略することができます。
+
+```typescript
+import { omit } from 'es-toolkit/compat';
+
+const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
+const result = omit(obj, ['a.b.c', 'f.g']);
+// result will be { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
+```

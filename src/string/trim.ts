@@ -14,7 +14,7 @@ import { trimEnd } from './trimEnd.ts';
  * trim("##hello##", ["#", "o"]); // "hell"
  */
 export function trim(str: string, chars?: string | string[]): string {
-  if (chars == null) {
+  if (chars === undefined) {
     return str.trim();
   }
 

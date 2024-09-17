@@ -1,5 +1,16 @@
 # es-toolkit Changelog
 
+## Version v1.19.0
+
+Released on September 14th, 2024.
+
+- Added support for [isDate](https://es-toolkit.slash.page/reference/predicate/isDate.html), [curry](https://es-toolkit.slash.page/reference/function/curry.html), [upperCase](https://es-toolkit.slash.page/reference/string/upperCase.html).
+- Added compatibility functions for [pick](https://es-toolkit.slash.page/reference/object/pick.html), [omit](https://es-toolkit.slash.page/reference/object/omit.html), [unset](https://es-toolkit.slash.page/reference/compat/object/unset.html), [toPath](https://es-toolkit.slash.page/reference/compat/util/toPath.html), [trim](https://es-toolkit.slash.page/reference/compat/string/trim.html), [trimStart](https://es-toolkit.slash.page/reference/compat/string/trimStart.html), [trimEnd](https://es-toolkit.slash.page/reference/compat/string/trimEnd.html), [isInteger](https://es-toolkit.slash.page/reference/compat/predicate/isInteger.html), [isSafeInteger](https://es-toolkit.slash.page/reference/compat/predicate/isSafeInteger.html), [snakeCase](https://es-toolkit.slash.page/reference/string/snakeCase.html), [startCase](https://es-toolkit.slash.page/reference/string/startCase.html), [lowerCase](https://es-toolkit.slash.page/reference/string/lowerCase.html), [kebabCase](https://es-toolkit.slash.page/reference/string/kebabCase.html), [ceil](https://es-toolkit.slash.page/reference/compat/math/ceil.html), [floor](https://es-toolkit.slash.page/reference/compat/math/floor.html), [round](https://es-toolkit.slash.page/reference/math/round.html).
+- Enhanced [clone](https://es-toolkit.slash.page/reference/object/clone.html) to handle `Buffer`s, `SharedArrayBuffer`s, `File`s, `Blob`s, `TypedArray`s, and `Error`s.
+- Fixed a bug where [mergeWith](https://es-toolkit.slash.page/reference/object/mergeWith.html) did not preserve the original properties of the `target` object.
+- Fixed a bug where [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html) couldn't group with keys like `toString` and `indexOf`.
+- Improved performance for [has](https://es-toolkit.slash.page/reference/compat/object/has.html) and [get](https://es-toolkit.slash.page/reference/compat/object/get.html).
+
 ## Version v1.18.0
 
 Released on September 12th, 2024.

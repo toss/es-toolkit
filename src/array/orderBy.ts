@@ -35,7 +35,7 @@ import { compareValues } from '../_internal/compareValues';
  * // ]
  */
 export function orderBy<T extends object>(
-  arr: T[],
+  arr: readonly T[],
   criteria: Array<((item: T) => unknown) | keyof T>,
   orders: Array<'asc' | 'desc'>
 ): T[] {

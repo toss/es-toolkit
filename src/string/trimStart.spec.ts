@@ -41,4 +41,8 @@ describe('trimStart', () => {
   it('should handle cases where multiple leading characters need removal', async () => {
     expect(trimStart('aaaabbbcccc', 'a')).toEqual('bbbcccc');
   });
+
+  it('should trim the string without giving the second parameter, which defaults to whitespace', async () => {
+    expect(trimStart('  hello world  ')).toEqual('hello world  ');
+  });
 });
