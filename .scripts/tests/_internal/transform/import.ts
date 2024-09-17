@@ -53,4 +53,26 @@ export function transformImport(root: Collection, jscodeshift: JSCodeshift): voi
       },
     })
     .remove();
+
+  // Change '../src/merge' to '../index'
+  const methodSet = new Set<string>();
+  root
+    .find(jscodeshift.ImportDeclaration, {
+      source: {
+        value: (value: string) => value.startsWith('../src/'),
+      },
+    })
+    .forEach(({ node }) => {
+      if (node.specifiers && node.specifiers[0].type === 'ImportDefaultSpecifier' && node.specifiers[0].local) {
+        methodSet.add(node.specifiers[0].local.name);
+      }
+    })
+    .remove();
+
+  const methodImport = jscodeshift.importDeclaration(
+    Array.from(methodSet).map(method => jscodeshift.importSpecifier(jscodeshift.identifier(method))),
+    jscodeshift.literal('../index')
+  );
+
+  astPath.value.program.body.unshift(methodImport);
 }

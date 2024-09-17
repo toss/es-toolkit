@@ -7,8 +7,8 @@ export default function transform(file: FileInfo, { jscodeshift }: API) {
   try {
     const root = jscodeshift(formatBrokenSyntax(file.source));
 
-    transformImport(root, jscodeshift);
     transformLodashStable(root, jscodeshift);
+    transformImport(root, jscodeshift);
 
     return root.toSource();
   } catch (error) {
