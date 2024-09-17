@@ -17,17 +17,25 @@ describe('curry', () => {
     expect(curried(1)(2)(3)(4)).toEqual(expected);
   });
 
-  it('should ignore optional parameters', () => {
+  it('should correctly curry with optional arguments', () => {
     const fn = (a: number, b: number, c?: number, d?: number) => [a, b, c, d];
     const curried = curry(fn);
-    const expected = [1, 2];
+    const expected = [1, 2, undefined, undefined];
+
+    expect(curried(1)(2)()()).toEqual(expected);
+  });
+
+  it('should receive the arguments by specified arity', () => {
+    const fn = (a: number, b: number, c?: number, d?: number) => [a, b, c, d];
+    const curried = curry(fn, 2);
+    const expected = [1, 2, undefined, undefined];
 
     expect(curried(1)(2)).toEqual(expected);
   });
 
   it('should ignore rest parameters', () => {
     const fn = (a: number, b: number, ...rest: number[]) => [a, b, ...rest];
-    const curried = curry(fn);
+    const curried = curry(fn, 2);
     const expected = [1, 2];
 
     expect(curried(1)(2)).toEqual(expected);
@@ -43,5 +51,10 @@ describe('curry', () => {
     expectTypeOf(curried(1)('a')).parameters.toEqualTypeOf<[boolean]>();
     expectTypeOf(curried(1)('a')).not.toEqualTypeOf<{ a: number; b: string; c: boolean }>();
     expectTypeOf(curried(1)('a')(true)).toEqualTypeOf<{ a: number; b: string; c: boolean }>();
+
+    const optionalFn = (a: number, b: number, c?: number, d?: number) => [a, b, c, d];
+
+    expectTypeOf(curry(optionalFn)(1)(2)).parameters.toEqualTypeOf<[arg?: number | void]>();
+    expectTypeOf(curry(optionalFn, 2)(1)(2)).toEqualTypeOf<(number | undefined)[]>();
   });
 });
