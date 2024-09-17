@@ -55,6 +55,6 @@ describe('curry', () => {
     const optionalFn = (a: number, b: number, c?: number, d?: number) => [a, b, c, d];
 
     expectTypeOf(curry(optionalFn)(1)(2)).parameters.toEqualTypeOf<[arg?: number | void]>();
-    expectTypeOf(curry(optionalFn, 2)(1)(2)).toEqualTypeOf<(number | undefined)[]>();
+    expectTypeOf(curry(optionalFn, 2)(1)(2)).toEqualTypeOf<Array<number | undefined>>();
   });
 });
