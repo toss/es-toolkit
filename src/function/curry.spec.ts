@@ -17,6 +17,22 @@ describe('curry', () => {
     expect(curried(1)(2)(3)(4)).toEqual(expected);
   });
 
+  it('should ignore optional parameters', () => {
+    const fn = (a: number, b: number, c?: number, d?: number) => [a, b, c, d];
+    const curried = curry(fn);
+    const expected = [1, 2];
+
+    expect(curried(1)(2)).toEqual(expected);
+  });
+
+  it('should ignore rest parameters', () => {
+    const fn = (a: number, b: number, ...rest: number[]) => [a, b, ...rest];
+    const curried = curry(fn);
+    const expected = [1, 2];
+
+    expect(curried(1)(2)).toEqual(expected);
+  });
+
   it('should inference type correctly', () => {
     const fn = (a: number, b: string, c: boolean) => ({ a, b, c });
     const curried = curry(fn);
