@@ -43,19 +43,19 @@ const result = sum25(5);
 
 // Curring the function with optional parameters.
 function minus(a: number, b: number, c?: number, d?: number) {
-  return a - b - (c ?? 0) - (d ?? 0);
+  return a - b - (c ?? 1) - (d ?? 0);
 }
 
 // The parameter `a` should be given the value `10`, and `b` should be given the value `5`.
 const minusFrom5 = curry(minus)(10)(5);
 
-// The parameter `c` should be given the default value `1`.
+// The parameter `c` should not be given any value, the value `undefined` is received.
 const minusFrom4 = minusFrom5();
 
-// The parameter `d` should be given the value `undefined`. The function `minus` has received all its argument and will now return a value.
+// The parameter `d` should not be given any value, the value `undefined` is received. The function `minus` has received all its argument and will now return a value.
 const result4 = minusFrom4();
 
-// The parameter `d` should be given the value `1`. The function `minus` has received all its argument and will now return a value.
+// The parameter `d` can received a value since it's optional parameter.
 const result3 = minusFrom4(1);
 
 // Set arity. The function `minus` will receive only 2 arguments.
