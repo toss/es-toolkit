@@ -1,6 +1,7 @@
 export function formatBrokenSyntax(source: string): string {
   // Fix broken syntax
-  const brokenMatched = source.match(/(?<=,)[\s\d\w?]+\[.+\).toEqual\((?!\[).+\]\);/g);
+  const brokenMatched = source.match(/(?<=expect\(.+)[[{][^{[]+\)\.toEqual\([^\]}]+[\]}]\);/g);
+
   if (brokenMatched != null) {
     for (const match of brokenMatched) {
       const splited = match.split(').toEqual(');
