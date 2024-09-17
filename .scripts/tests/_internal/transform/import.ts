@@ -69,10 +69,12 @@ export function transformImport(root: Collection, jscodeshift: JSCodeshift): voi
     })
     .remove();
 
-  const methodImport = jscodeshift.importDeclaration(
-    Array.from(methodSet).map(method => jscodeshift.importSpecifier(jscodeshift.identifier(method))),
-    jscodeshift.literal('../index')
-  );
+  if (methodSet.size) {
+    const methodImport = jscodeshift.importDeclaration(
+      Array.from(methodSet).map(method => jscodeshift.importSpecifier(jscodeshift.identifier(method))),
+      jscodeshift.literal('../index')
+    );
 
-  astPath.value.program.body.unshift(methodImport);
+    astPath.value.program.body.unshift(methodImport);
+  }
 }

@@ -2,6 +2,7 @@ import type { API, FileInfo } from 'jscodeshift';
 import { formatBrokenSyntax } from './_internal/formatter/brokenSyntax';
 import { transformImport } from './_internal/transform/import';
 import { transformLodashStable } from './_internal/transform/lodashStable';
+import { transformAssert } from './_internal/transform/assert';
 
 export default function transform(file: FileInfo, { jscodeshift }: API) {
   try {
@@ -9,6 +10,7 @@ export default function transform(file: FileInfo, { jscodeshift }: API) {
 
     transformLodashStable(root, jscodeshift);
     transformImport(root, jscodeshift);
+    transformAssert(root, jscodeshift);
 
     return root.toSource();
   } catch (error) {
