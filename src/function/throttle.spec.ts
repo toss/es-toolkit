@@ -21,12 +21,16 @@ describe('throttle', () => {
 
     throttledFunc();
     await delay(throttleMs / 2);
-    throttledFunc();
 
+    throttledFunc();
     expect(func).toHaveBeenCalledTimes(1);
 
     await delay(throttleMs / 2 + 1);
+
+    expect(func).toHaveBeenCalledTimes(1);
+
     throttledFunc();
+
     expect(func).toHaveBeenCalledTimes(2);
   });
 
@@ -39,5 +43,65 @@ describe('throttle', () => {
 
     expect(func).toHaveBeenCalledTimes(1);
     expect(func).toHaveBeenCalledWith('test', 123);
+  });
+
+  it('should not trigger a trailing call when invoked once', async () => {
+    const func = vi.fn();
+    const throttleMs = 50;
+
+    const throttled = throttle(func, throttleMs);
+
+    throttled();
+    expect(func).toBeCalledTimes(1);
+
+    await delay(throttleMs + 1);
+    expect(func).toBeCalledTimes(1);
+  });
+
+  it('should trigger a trailing call as soon as possible', async () => {
+    const func = vi.fn();
+    const throttleMs = 50;
+
+    const throttled = throttle(func, throttleMs);
+
+    throttled();
+    throttled();
+    expect(func).toBeCalledTimes(1);
+
+    await delay(throttleMs + 1);
+    expect(func).toBeCalledTimes(2);
+  });
+
+  it('should be able to abort initial invocation', async () => {
+    const throttleMs = 50;
+    const func = vi.fn();
+    const controller = new AbortController();
+    controller.abort();
+
+    const throttled = throttle(func, throttleMs, { signal: controller.signal });
+
+    throttled();
+    throttled();
+    expect(func).toBeCalledTimes(0);
+
+    await delay(throttleMs + 1);
+    expect(func).toBeCalledTimes(0);
+  });
+
+  it('should be able to abort trailing edge invocation', async () => {
+    const throttleMs = 50;
+    const func = vi.fn();
+    const controller = new AbortController();
+
+    const throttled = throttle(func, throttleMs, { signal: controller.signal });
+
+    throttled();
+    throttled();
+    expect(func).toBeCalledTimes(1);
+
+    controller.abort();
+
+    await delay(throttleMs + 1);
+    expect(func).toBeCalledTimes(1);
   });
 });
