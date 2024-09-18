@@ -98,6 +98,7 @@ export { kebabCase } from './string/kebabCase.ts';
 export { snakeCase } from './string/snakeCase.ts';
 export { startCase } from './string/startCase.ts';
 export { lowerCase } from './string/lowerCase.ts';
+export { upperCase } from './string/upperCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';

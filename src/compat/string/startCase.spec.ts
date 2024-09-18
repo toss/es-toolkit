@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { startCase } from './startCase';
 
-describe('case methods', () => {
+describe('startCase', () => {
   const strings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];
 
   it(`should convert \`string\``, () => {
