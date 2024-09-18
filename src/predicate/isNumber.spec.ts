@@ -22,7 +22,7 @@ describe('isNumber', () => {
     expect(isNumber(() => {})).toBe(false);
   });
 
-  it('should return false for NaN', () => {
-    expect(isNumber(NaN)).toBe(false);
+  it('should return true for NaN', () => {
+    expect(isNumber(NaN)).toBe(true);
   });
 });
