@@ -1,4 +1,4 @@
-import { isSymbol } from '../predicate/isSymbol';
+import { isSymbol } from '../predicate/isSymbol.ts';
 
 /**  Matches any deep property path. (e.g. `a.b[0].c`)*/
 const regexIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;

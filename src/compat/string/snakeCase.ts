@@ -1,5 +1,5 @@
-import { snakeCase as snakeCaseToolkit } from '../../string/snakeCase';
-import { normalizeForCase } from '../_internal/normalizeForCase';
+import { snakeCase as snakeCaseToolkit } from '../../string/snakeCase.ts';
+import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
  * Converts a string to snake case.

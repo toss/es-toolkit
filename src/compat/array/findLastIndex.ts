@@ -1,6 +1,6 @@
-import { property } from '../object/property';
-import { matches } from '../predicate/matches';
-import { matchesProperty } from '../predicate/matchesProperty';
+import { property } from '../object/property.ts';
+import { matches } from '../predicate/matches.ts';
+import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
  * Iterates through an array in reverse order and returns the index of the first item that matches the given predicate function.

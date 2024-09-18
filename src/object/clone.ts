@@ -1,5 +1,5 @@
-import { isTypedArray } from '../predicate/isTypedArray';
-import { isPrimitive } from '../predicate/isPrimitive';
+import { isTypedArray } from '../predicate/isTypedArray.ts';
+import { isPrimitive } from '../predicate/isPrimitive.ts';
 
 /**
  * Creates a shallow clone of the given object.

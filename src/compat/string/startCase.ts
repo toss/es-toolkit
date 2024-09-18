@@ -1,5 +1,5 @@
-import { startCase as startCaseToolkit } from '../../string/startCase';
-import { normalizeForCase } from '../_internal/normalizeForCase';
+import { startCase as startCaseToolkit } from '../../string/startCase.ts';
+import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
  * Converts the first character of each word in a string to uppercase and the remaining characters to lowercase.
