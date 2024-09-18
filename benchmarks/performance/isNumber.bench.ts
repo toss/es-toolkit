@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { isNumber as isNumberToolkit } from 'es-toolkit';
+import { isNumber as isNumberToolkit } from 'es-toolkit/compat';
 import { isNumber as isNumberLodash } from 'lodash';
 
 describe('isNumber', () => {
