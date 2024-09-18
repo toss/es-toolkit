@@ -44,7 +44,7 @@ console.log(spreadGreet(['Alice'])); // Output: Hello, Alice!
 console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
 ```
 
-## Lodash 호환성
+## Lodash와의 호환성
 
 `es-toolkit/compat`에서 `spread`를 가져오면 lodash와 호환돼요.
 

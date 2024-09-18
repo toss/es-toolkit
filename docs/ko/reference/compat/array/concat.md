@@ -22,7 +22,7 @@ function concat<T>(...values: Array<T | T[]>): T[];
 
 (`T[]`): 모든 배열과 값이 연결된 새 배열.
 
-### 예시
+## 예시
 
 ```typescript
 // 값을 연결
