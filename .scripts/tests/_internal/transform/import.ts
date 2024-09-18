@@ -35,15 +35,44 @@ export function transformImport(root: Collection, jscodeshift: JSCodeshift): voi
     .remove();
 
   // Add import { describe, it, expect } from 'vitest';
-  const vitestImport = jscodeshift.importDeclaration(
-    [
-      jscodeshift.importSpecifier(jscodeshift.identifier('describe')),
-      jscodeshift.importSpecifier(jscodeshift.identifier('it')),
-      jscodeshift.importSpecifier(jscodeshift.identifier('expect')),
+  const vitestImport = root.find(jscodeshift.ImportDeclaration, {
+    source: {
+      value: 'vitest',
+    },
+    specifiers: [
+      {
+        type: 'ImportSpecifier',
+        imported: {
+          name: 'describe',
+        },
+      },
+      {
+        type: 'ImportSpecifier',
+        imported: {
+          name: 'it',
+        },
+      },
+      {
+        type: 'ImportSpecifier',
+        imported: {
+          name: 'expect',
+        },
+      },
     ],
-    jscodeshift.literal('vitest')
-  );
-  astPath.value.program.body.unshift(vitestImport);
+  });
+
+  if (!vitestImport.length) {
+    astPath.value.program.body.unshift(
+      jscodeshift.importDeclaration(
+        [
+          jscodeshift.importSpecifier(jscodeshift.identifier('describe')),
+          jscodeshift.importSpecifier(jscodeshift.identifier('it')),
+          jscodeshift.importSpecifier(jscodeshift.identifier('expect')),
+        ],
+        jscodeshift.literal('vitest')
+      )
+    );
+  }
 
   // Remove import from 'lodash'
   root
