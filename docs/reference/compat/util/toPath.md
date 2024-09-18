@@ -8,7 +8,7 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Converts a deep key string into an array of path segments.
 
-This function takes a string representing a deep key (e.g., 'a.b.c' or 'a[b][c]') and breaks it down into an array of strings, each representing a segment of the path.
+This function takes a string representing a deep key (e.g., `'a.b.c'` or `'a[b][c]'`) and breaks it down into an array of strings, each representing a segment of the path.
 
 ## Signature
 
@@ -24,11 +24,13 @@ function toPath(deepKey: string): string[];
 
 (`string[]`): An array of strings, each representing a segment of the path.
 
-Examples:
+## Examples
 
-toPath('a.b.c') // Returns ['a', 'b', 'c']
-toPath('a[b][c]') // Returns ['a', 'b', 'c']
-toPath('.a.b.c') // Returns ['', 'a', 'b', 'c']
-toPath('a["b.c"].d') // Returns ['a', 'b.c', 'd']
-toPath('') // Returns []
-toPath('.a[b].c.d[e]["f.g"].h') // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
+```typescript
+toPath('a.b.c'); // Returns ['a', 'b', 'c']
+toPath('a[b][c]'); // Returns ['a', 'b', 'c']
+toPath('.a.b.c'); // Returns ['', 'a', 'b', 'c']
+toPath('a["b.c"].d'); // Returns ['a', 'b.c', 'd']
+toPath(''); // Returns []
+toPath('.a[b].c.d[e]["f.g"].h'); // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
+```
