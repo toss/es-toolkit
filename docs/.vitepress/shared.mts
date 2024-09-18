@@ -38,6 +38,18 @@ export const shared = defineConfig({
       }
     ],
     [
+      'script',
+      {},
+      `window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`
+    ],
+    [
+      "script",
+      {
+        src: "/_vercel/insights/script.js",
+        defer: "true",
+      }
+    ],
+    [
       "meta",
       {
         property: "og:image",
