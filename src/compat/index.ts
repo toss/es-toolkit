@@ -108,6 +108,7 @@ export { trim } from './string/trim.ts';
 export { trimStart } from './string/trimStart.ts';
 export { trimEnd } from './string/trimEnd.ts';
 
+export { clamp } from './math/clamp.ts';
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
 export { ceil } from './math/ceil.ts';

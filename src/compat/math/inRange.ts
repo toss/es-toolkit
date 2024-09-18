@@ -1,3 +1,5 @@
+import { inRange as inRangeToolkit } from '../../math/inRange.ts';
+
 /**
  * Checks if the value is less than the maximum.
  *
@@ -40,14 +42,33 @@ export function inRange(value: number, minimum: number, maximum: number): boolea
  * const result3 = inRange(1, 5, 2); // If the minimum is greater or equal than the maximum, an error is thrown.
  */
 export function inRange(value: number, minimum: number, maximum?: number): boolean {
-  if (maximum == null) {
-    maximum = minimum;
+  if (!minimum) {
     minimum = 0;
   }
 
-  if (minimum >= maximum) {
-    throw new Error('The maximum value must be greater than the minimum value.');
+  if (maximum != null && !maximum) {
+    maximum = 0;
   }
 
-  return minimum <= value && value < maximum;
+  if (minimum != null && typeof minimum !== 'number') {
+    minimum = Number(minimum);
+  }
+
+  if (maximum == null && minimum === 0) {
+    return false;
+  }
+
+  if (maximum != null && typeof maximum !== 'number') {
+    maximum = Number(maximum);
+  }
+
+  if (maximum != null && minimum > maximum) {
+    [minimum, maximum] = [maximum, minimum];
+  }
+
+  if (minimum === maximum) {
+    return false;
+  }
+
+  return inRangeToolkit(value, minimum, maximum!);
 }
