@@ -17,14 +17,14 @@
 function matchesProperty(property: PropertyKey | PropertyKey[], source: unknown): (target?: unknown) => boolean;
 ```
 
-## 参数
+### 参数
 
 - `property` (`number | string | symbol | Array<number | string | symbol>`): 需要检查的目标对象中的属性路径。可以是单个属性键、属性键数组，或表示深层路径的字符串。
 - `source` (`unknown`): 要与目标对象中属性值进行比较的值。
 
-## 返回值
+### 返回值
 
-- (`(target: unknown) => boolean`): 一个函数，接受一个目标对象，如果目标对象中指定路径的属性值与提供的值匹配，则返回 `true`，否则返回 `false`。
+(`(target: unknown) => boolean`): 一个函数，接受一个目标对象，如果目标对象中指定路径的属性值与提供的值匹配，则返回 `true`，否则返回 `false`。
 
 ## 示例
 

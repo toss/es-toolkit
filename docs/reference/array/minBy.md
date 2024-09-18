@@ -18,7 +18,7 @@ function minBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 
 (`T`): The element with the minimum value as determined by the `getValue` function.
 
-### Example
+## Example
 
 ```typescript
 minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }

@@ -22,7 +22,7 @@ function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown)
 
 (`(object: unknown) => any`): オブジェクトの指定されたパスにある値を取得する関数。
 
-### 例
+## 例
 
 ```typescript
 import { property } from 'es-toolkit/compat';

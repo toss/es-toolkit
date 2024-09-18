@@ -19,7 +19,7 @@ function maxBy<T>(items: T[], getValue: (element: T) => number): T;
 
 (`T`): `getValue`関数を基準に、配列の中で最大値を持つ要素。配列が空の場合は`undefined`を返します。
 
-### 例
+## 例
 
 ```typescript
 maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 戻り値: { a: 3 }

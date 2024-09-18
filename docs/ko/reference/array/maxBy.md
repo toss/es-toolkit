@@ -20,7 +20,7 @@ function maxBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 
 (`T`): `getValue` 함수를 기준으로, 배열에서 최댓값을 가지는 요소. 배열이 비어 있다면 `undefined`를 반환해요.
 
-### Example
+## 예시
 
 ```typescript
 maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
