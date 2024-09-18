@@ -1,5 +1,5 @@
-import { kebabCase as kebabCaseToolkit } from '../../string';
-import { normalizeForCase } from '../_internal/normalizeForCase';
+import { kebabCase as kebabCaseToolkit } from '../../string/kebabCase.ts';
+import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
  * Converts a string to kebab case.

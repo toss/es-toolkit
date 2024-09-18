@@ -1,4 +1,4 @@
-import { compareValues } from '../_internal/compareValues';
+import { compareValues } from '../_internal/compareValues.ts';
 
 /**
  * Sorts an array of objects based on the given `criteria` and their corresponding order directions.

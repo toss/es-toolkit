@@ -1,5 +1,5 @@
-import { camelCase as camelCaseToolkit } from '../../string/camelCase';
-import { normalizeForCase } from '../_internal/normalizeForCase';
+import { camelCase as camelCaseToolkit } from '../../string/camelCase.ts';
+import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
  * Converts a string to camel case.

@@ -1,5 +1,5 @@
-import { lowerCase as lowerCaseToolkit } from '../../string/lowerCase';
-import { normalizeForCase } from '../_internal/normalizeForCase';
+import { lowerCase as lowerCaseToolkit } from '../../string/lowerCase.ts';
+import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
  * Converts a string to lower case.
