@@ -1,3 +1,5 @@
+import { getTag } from '../_internal/getTag';
+
 /**
  * Checks if a given value is a number.
  *
@@ -15,6 +17,10 @@
  * console.log(isNumber(value2)); // false
  * console.log(isNumber(value3)); // false
  */
-export function isNumber(value: unknown): value is number {
+export function isNumber(value?: unknown): value is number {
+  if (typeof value === 'object' && value != null && getTag(value) === '[object Number]') {
+    return true;
+  }
+
   return typeof value === 'number';
 }

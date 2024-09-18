@@ -78,10 +78,8 @@ export function findLastIndex<T>(arr: readonly T[], propertyToCheck: string, fro
  * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
  *
  * @template T
- * @param {readonly T[]} arr - The array to search through.
- * @param {string} propertyToCheck - The property name to check.
- * @param source
- * @param doesMatch
+ * @param {T[]} arr - The array to search through.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The property name to check.
  * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
  * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
  *
@@ -92,34 +90,34 @@ export function findLastIndex<T>(arr: readonly T[], propertyToCheck: string, fro
  * console.log(result); // 1
  */
 export function findLastIndex<T>(
-  source: readonly T[],
+  arr: readonly T[],
   doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
-  fromIndex: number = source.length - 1
+  fromIndex: number = arr.length - 1
 ): number {
   if (fromIndex < 0) {
-    fromIndex = Math.max(source.length + fromIndex, 0);
+    fromIndex = Math.max(arr.length + fromIndex, 0);
   } else {
-    fromIndex = Math.min(fromIndex, source.length - 1);
+    fromIndex = Math.min(fromIndex, arr.length - 1);
   }
 
-  source = source.slice(0, fromIndex + 1);
+  arr = arr.slice(0, fromIndex + 1);
 
   switch (typeof doesMatch) {
     case 'function': {
-      return source.findLastIndex(doesMatch);
+      return arr.findLastIndex(doesMatch);
     }
     case 'object': {
       if (Array.isArray(doesMatch) && doesMatch.length === 2) {
         const key = doesMatch[0];
         const value = doesMatch[1];
 
-        return source.findLastIndex(matchesProperty(key, value));
+        return arr.findLastIndex(matchesProperty(key, value));
       } else {
-        return source.findLastIndex(matches(doesMatch));
+        return arr.findLastIndex(matches(doesMatch));
       }
     }
     case 'string': {
-      return source.findLastIndex(property(doesMatch));
+      return arr.findLastIndex(property(doesMatch));
     }
   }
 }

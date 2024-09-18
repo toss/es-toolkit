@@ -6,7 +6,7 @@
       "jsr:@deno/doc@^0.148.0": "jsr:@deno/doc@0.148.0",
       "jsr:@deno/graph@0.82": "jsr:@deno/graph@0.82.1",
       "jsr:@deno/graph@^0.73.1": "jsr:@deno/graph@0.73.1",
-      "jsr:@es-toolkit/es-toolkit@^1.17.0": "jsr:@es-toolkit/es-toolkit@1.17.0",
+      "jsr:@es-toolkit/es-toolkit@^1.19.0": "jsr:@es-toolkit/es-toolkit@1.19.0",
       "jsr:@std/assert@^0.223.0": "jsr:@std/assert@0.223.0",
       "jsr:@std/bytes@^0.223.0": "jsr:@std/bytes@0.223.0",
       "jsr:@std/dotenv@^0.225.2": "jsr:@std/dotenv@0.225.2",
@@ -42,8 +42,8 @@
       "@deno/graph@0.82.1": {
         "integrity": "ce5ccb325b1c84f65000eddb6d1922cfb43545beabd4f395648ad541c1cd987c"
       },
-      "@es-toolkit/es-toolkit@1.17.0": {
-        "integrity": "dfbefedc4c821c97dbbfe33a716b4b34d486f2c214dce3b7c3f8161344d2e72a"
+      "@es-toolkit/es-toolkit@1.19.0": {
+        "integrity": "d792dcfe879d6b3a0586026f3e2f887074254418b5358a767506285c21af09dd"
       },
       "@std/assert@0.223.0": {
         "integrity": "eb8d6d879d76e1cc431205bd346ed4d88dc051c6366365b1af47034b0670be24"
@@ -316,7 +316,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@deno/doc@^0.148.0",
-      "jsr:@es-toolkit/es-toolkit@^1.17.0",
+      "jsr:@es-toolkit/es-toolkit@^1.19.0",
       "jsr:@std/dotenv@^0.225.2",
       "npm:clipanion@^3.2.1",
       "npm:openai@^4.58.1"
