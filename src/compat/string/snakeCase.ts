@@ -6,7 +6,7 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  *
  * Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (_) character.
  *
- * @param {string} str - The string that is to be changed to snake case.
+ * @param {string | object} str - The string that is to be changed to snake case.
  * @returns {string} - The converted string to snake case.
  *
  * @example
@@ -15,6 +15,6 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr3 = snakeCase('hyphen-text') // returns 'hyphen_text'
  * const convertedStr4 = snakeCase('HTTPRequest') // returns 'http_request'
  */
-export function snakeCase(str: string | object): string {
+export function snakeCase(str?: string | object): string {
   return snakeCaseToolkit(normalizeForCase(str));
 }
