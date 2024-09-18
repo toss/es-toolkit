@@ -16,17 +16,17 @@
 function padEnd(str: string, length = 0, chars = ' '): string;
 ```
 
-## 파라미터
+### 파라미터
 
 - `str` (`string`): 길이를 늘릴 문자열.
 - `length` (`number`): 늘리고 싶은 길이. 기본값은 `0`.
 - `char` (`string`): 길이를 늘릴 때 추가할 글자. 기본값은 `' '`.
 
-## 반환 값
+### 반환 값
 
 주어진 길이까지 길어진, 마지막에 글자가 추가된 문자열.
 
-## 예시 값
+## 예시
 
 ```javascript
 padEnd('hello', 10, 'a'); // 'helloaaaaa'

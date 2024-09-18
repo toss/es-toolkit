@@ -95,7 +95,7 @@ function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaul
 
 (`Get<T, P>`): 見つかった値。
 
-### 例
+## 例
 
 ```typescript
 import { get } from 'es-toolkit/compat';

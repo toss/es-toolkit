@@ -16,7 +16,7 @@ function after<F extends (...args: any[]) => any>(n: number, func: F): F;
 - `n` (`number`): `func`이 실행되기 위해 필요한 호출 횟수예요.
 - `func` (`F`): 실행될 함수예요.
 
-### 결괏값
+### 반환 값
 
 (`F`): 새로운 함수를 반환해요. 이 함수는 다음과 같은 기능을 가져요.
 

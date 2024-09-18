@@ -16,14 +16,14 @@
 function matchesProperty(property: PropertyKey | PropertyKey[], source: unknown): (target?: unknown) => boolean;
 ```
 
-## パラメータ
+### パラメータ
 
 - `property` (`number | string | symbol | Array<number | string | symbol>`): オブジェクトのプロパティを表すパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
 - `source` (`unknown`): オブジェクトのプロパティと比較する値。
 
-## 戻り値
+### 戻り値
 
-- (`(target: unknown) => boolean`): `target` オブジェクトを受け取り、指定されたプロパティの値を取得し、`source` と一致するかどうかを確認する関数。一致する場合は `true`、そうでない場合は `false` を返します。
+(`(target: unknown) => boolean`): `target` オブジェクトを受け取り、指定されたプロパティの値を取得し、`source` と一致するかどうかを確認する関数。一致する場合は `true`、そうでない場合は `false` を返します。
 
 ## 例
 

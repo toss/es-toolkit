@@ -27,7 +27,7 @@ function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?:
 
 (`number`): The index (zero-based) of the first occurrence of the value in the array, or `-1` if the value is not found.
 
-### Example
+## Example
 
 ```typescript
 const array = [1, 2, 3, NaN];
