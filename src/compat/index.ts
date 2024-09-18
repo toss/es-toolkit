@@ -68,6 +68,7 @@ export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { unset } from './object/unset.ts';
+export { cloneDeep } from './object/cloneDeep.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
@@ -91,6 +92,8 @@ export { isInteger } from './predicate/isInteger.ts';
 export { isSafeInteger } from './predicate/isSafeInteger.ts';
 export { isNumber } from './predicate/isNumber.ts';
 export { isNaN } from './predicate/isNaN.ts';
+export { isArrayLikeObject } from './predicate/isArrayLikeObject.ts';
+export { isNil } from './predicate/isNil.ts';
 
 export { camelCase } from './string/camelCase.ts';
 export { kebabCase } from './string/kebabCase.ts';
@@ -115,6 +118,8 @@ export { ceil } from './math/ceil.ts';
 export { floor } from './math/floor.ts';
 export { round } from './math/round.ts';
 export { parseInt } from './math/parseInt.ts';
+export { inRange } from './math/inRange.ts';
+export { random } from './math/random.ts';
 
 export { toPath } from './util/toPath.ts';
 export { toString } from './util/toString.ts';
