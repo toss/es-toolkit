@@ -1,7 +1,9 @@
 import type { Collection, JSCodeshift } from 'jscodeshift';
 
 export function transformLodashStable(root: Collection, jscodeshift: JSCodeshift): void {
-  // Replace lodashStable.each and lodashStable.map with Array.prototype.forEach and Array.prototype.map
+  const astPath = root.getAST()[0];
+  let needImportEsToolkit = false;
+
   root
     .find(jscodeshift.CallExpression, {
       callee: {
@@ -28,10 +30,19 @@ export function transformLodashStable(root: Collection, jscodeshift: JSCodeshift
             node.callee.object = node.arguments[0] as any;
             return jscodeshift.callExpression(node.callee, node.arguments.slice(1));
         }
-
         // Remove lodashStable from the callee
-        return jscodeshift.callExpression(node.callee.property, node.arguments);
+        node.callee.object = jscodeshift.identifier('esToolkit');
+        needImportEsToolkit = true;
       }
       return node;
     });
+
+  if (needImportEsToolkit) {
+    const esToolkitImport = jscodeshift.importDeclaration(
+      [jscodeshift.importNamespaceSpecifier(jscodeshift.identifier('esToolkit'))],
+      jscodeshift.literal('../index')
+    );
+
+    astPath.value.program.body.unshift(esToolkitImport);
+  }
 }

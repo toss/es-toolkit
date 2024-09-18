@@ -35,15 +35,44 @@ export function transformImport(root: Collection, jscodeshift: JSCodeshift): voi
     .remove();
 
   // Add import { describe, it, expect } from 'vitest';
-  const vitestImport = jscodeshift.importDeclaration(
-    [
-      jscodeshift.importSpecifier(jscodeshift.identifier('describe')),
-      jscodeshift.importSpecifier(jscodeshift.identifier('it')),
-      jscodeshift.importSpecifier(jscodeshift.identifier('expect')),
+  const vitestImport = root.find(jscodeshift.ImportDeclaration, {
+    source: {
+      value: 'vitest',
+    },
+    specifiers: [
+      {
+        type: 'ImportSpecifier',
+        imported: {
+          name: 'describe',
+        },
+      },
+      {
+        type: 'ImportSpecifier',
+        imported: {
+          name: 'it',
+        },
+      },
+      {
+        type: 'ImportSpecifier',
+        imported: {
+          name: 'expect',
+        },
+      },
     ],
-    jscodeshift.literal('vitest')
-  );
-  astPath.value.program.body.unshift(vitestImport);
+  });
+
+  if (!vitestImport.length) {
+    astPath.value.program.body.unshift(
+      jscodeshift.importDeclaration(
+        [
+          jscodeshift.importSpecifier(jscodeshift.identifier('describe')),
+          jscodeshift.importSpecifier(jscodeshift.identifier('it')),
+          jscodeshift.importSpecifier(jscodeshift.identifier('expect')),
+        ],
+        jscodeshift.literal('vitest')
+      )
+    );
+  }
 
   // Remove import from 'lodash'
   root
@@ -53,4 +82,28 @@ export function transformImport(root: Collection, jscodeshift: JSCodeshift): voi
       },
     })
     .remove();
+
+  // Change '../src/merge' to '../index'
+  const methodSet = new Set<string>();
+  root
+    .find(jscodeshift.ImportDeclaration, {
+      source: {
+        value: (value: string) => value.startsWith('../src/'),
+      },
+    })
+    .forEach(({ node }) => {
+      if (node.specifiers && node.specifiers[0].type === 'ImportDefaultSpecifier' && node.specifiers[0].local) {
+        methodSet.add(node.specifiers[0].local.name);
+      }
+    })
+    .remove();
+
+  if (methodSet.size) {
+    const methodImport = jscodeshift.importDeclaration(
+      Array.from(methodSet).map(method => jscodeshift.importSpecifier(jscodeshift.identifier(method))),
+      jscodeshift.literal('../index')
+    );
+
+    astPath.value.program.body.unshift(methodImport);
+  }
 }
