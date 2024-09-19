@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { attempt as attemptToolkit } from 'es-toolkit';
+import { attempt as attemptToolkit } from 'es-toolkit/compat';
 import { attempt as attemptLodash } from 'lodash';
 
 describe('attempt', () => {

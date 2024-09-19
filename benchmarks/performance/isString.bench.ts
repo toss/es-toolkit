@@ -1,5 +1,6 @@
 import { bench, describe } from 'vitest';
 import { isString as isStringToolkit } from 'es-toolkit';
+import { isString as isStringCompatToolkit } from 'es-toolkit/compat';
 import { isString as isStringLodash } from 'lodash';
 
 describe('isString', () => {
@@ -8,6 +9,13 @@ describe('isString', () => {
     isStringToolkit(true);
     isStringToolkit(undefined);
     isStringToolkit(123);
+  });
+
+  bench('es-toolkit/compat/isString', () => {
+    isStringCompatToolkit('');
+    isStringCompatToolkit(true);
+    isStringCompatToolkit(undefined);
+    isStringCompatToolkit(123);
   });
 
   bench('lodash/isString', () => {
