@@ -59,6 +59,14 @@ describe('merge', () => {
     expect(result).toEqual({ a: [1, 2, 3] });
   });
 
+  it('should handle merging arrays into non-array target values', () => {
+    const target = { a: 1, b: {} };
+    const source = { b: [1], c: 4 };
+    const result = merge(target, source);
+
+    expect(result).toEqual({ a: 1, b: [1], c: 4 });
+  });
+
   it('should not overwrite existing values with undefined from source', () => {
     const target = { a: 1, b: 2 };
     const source = { b: undefined, c: 3 };
