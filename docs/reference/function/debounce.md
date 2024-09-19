@@ -11,7 +11,11 @@ function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions
-): ((...args: Parameters<F>) => void) & { cancel: () => void };
+): ((...args: Parameters<F>) => void) & {
+  cancel: () => void;
+  flush: () => void;
+  schedule: () => void;
+};
 ```
 
 ### Parameters
@@ -20,10 +24,18 @@ function debounce<F extends (...args: any[]) => void>(
 - `debounceMs` (`number`): The number of milliseconds to delay.
 - `options` (`DebounceOptions`, optional): An options object.
   - `signal` (`AbortSignal`, optional): An optional `AbortSignal` to cancel the debounced function.
+  - `edges` (`Array<'leading' | 'trailing'>`, optional): An array specifying when the function should be called. Defaults to `['trailing']`.
+    - `'leading'`: If included, the function will be called immediately on the first call.
+    - `'trailing'`: If included, the function will be called after `debounceMs` milliseconds have passed since the last call.
+    - If both `'leading'` and `'trailing'` are included, the function will be called at both the start and end of the delay period. However, it must be called at least twice within `debounceMs` milliseconds for this to happen, as one debounced function call cannot trigger the function twice.
 
 ### Returns
 
-(`((...args: Parameters<F>) => void) & { cancel: () => void }`): A new debounced function with a `cancel` method.
+(`((...args: Parameters<F>) => void) & { cancel: () => void; flush: () => void; schedule: () => void; }`): A new debounced function with methods to manage execution.
+
+- `cancel` (`() => void`): Cancels any pending execution of the debounced function.
+- `flush` (`() => void`): Immediately invokes the debounced function, executing any pending calls.
+- `schedule` (`() => void`): Schedules the execution of the debounced function after the specified debounce delay.
 
 ## Examples
 
@@ -69,7 +81,6 @@ Import `debounce` from `es-toolkit/compat` for full compatibility with lodash.
 
   - `leading`: If true, the function runs immediately on the first call. (defaults to `false`)
   - `trailing`: If true, the function runs after `debounceMs` milliseconds have passed since the last call. (defaults to `true`)
-  - If both `leading` and `trailing` are true, the function runs at both the start and end of the delay period. However, it must be called at least twice within `debounceMs` milliseconds for this to happen, as one debounced function call cannot trigger the function twice.
 
 - The `debounce` function also accepts a `maxWait` option:
 

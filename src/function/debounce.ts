@@ -1,8 +1,40 @@
+interface DebounceTimer {
+  /**
+   * Checks if the timer is active.
+   * @returns {boolean} True if the timer is active, otherwise false.
+   */
+  isActive: () => boolean;
+
+  /**
+   * Triggers the debounce timer.
+   * This method resets the timer and schedules the execution of the debounced function
+   * after the specified delay. If the timer is already active, it clears the existing timeout
+   * before setting a new one.
+   */
+  trigger: () => void;
+
+  /**
+   * Cancels any pending execution of the debounced function.
+   * This method clears the active timer, ensuring that the function will not be called
+   * at the end of the debounce period. It also resets any stored context or arguments.
+   */
+  cancel: () => void;
+}
+
 interface DebounceOptions {
   /**
    * An optional AbortSignal to cancel the debounced function.
    */
   signal?: AbortSignal;
+
+  /**
+   * An optional array specifying whether the function should be invoked on the leading edge, trailing edge, or both.
+   * If `edges` includes "leading", the function will be invoked at the start of the delay period.
+   * If `edges` includes "trailing", the function will be invoked at the end of the delay period.
+   * If both "leading" and "trailing" are included, the function will be invoked at both the start and end of the delay period.
+   * @default ["trailing"]
+   */
+  edges?: Array<'leading' | 'trailing'>;
 }
 
 /**
@@ -43,37 +75,106 @@ interface DebounceOptions {
 export function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
-  { signal }: DebounceOptions = {}
-): ((...args: Parameters<F>) => void) & { cancel: () => void } {
+  { signal, edges }: DebounceOptions = {}
+): ((...args: Parameters<F>) => void) & {
+  /**
+   * Schedules the execution of the debounced function after the specified debounce delay.
+   * This method resets any existing timer, ensuring that the function is only invoked
+   * after the delay has elapsed since the last call to the debounced function.
+   * It is typically called internally whenever the debounced function is invoked.
+   *
+   * @returns {void}
+   */
+  schedule: () => void;
+
+  /**
+   * Cancels any pending execution of the debounced function.
+   * This method clears the active timer and resets any stored context or arguments.
+   */
+  cancel: () => void;
+
+  /**
+   * Immediately invokes the debounced function if there is a pending execution.
+   * This method also cancels the current timer, ensuring that the function executes right away.
+   */
+  flush: () => void;
+} {
+  let pendingThis: any = undefined;
+  let pendingArgs: Parameters<F> | null = null;
+
+  const leading = edges != null && edges.includes('leading');
+  const trailing = edges == null || edges.includes('trailing');
+
+  const invoke = () => {
+    if (pendingArgs !== null) {
+      func.apply(pendingThis, pendingArgs);
+      pendingThis = undefined;
+      pendingArgs = null;
+    }
+  };
+
+  const onTimerEnd = () => {
+    if (trailing) {
+      invoke();
+    }
+
+    cancel();
+  };
+
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  const debounced = function (...args: Parameters<F>) {
-    if (timeoutId !== null) {
+  const schedule = () => {
+    if (timeoutId != null) {
       clearTimeout(timeoutId);
     }
 
+    timeoutId = setTimeout(() => {
+      timeoutId = null;
+
+      onTimerEnd();
+    }, debounceMs);
+  };
+
+  const cancelTimer = () => {
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+  };
+
+  const cancel = () => {
+    cancelTimer();
+    pendingThis = undefined;
+    pendingArgs = null;
+  };
+
+  const flush = () => {
+    cancelTimer();
+    invoke();
+  };
+
+  const debounced = function (this: any, ...args: Parameters<F>) {
     if (signal?.aborted) {
       return;
     }
 
-    timeoutId = setTimeout(() => {
-      func(...args);
-      timeoutId = null;
-    }, debounceMs);
-  };
+    pendingThis = this;
+    pendingArgs = args;
 
-  const onAbort = function () {
-    debounced.cancel();
-  };
+    const isFirstCall = timeoutId == null;
 
-  debounced.cancel = function () {
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
+    schedule();
+
+    if (leading && isFirstCall) {
+      invoke();
     }
   };
 
-  signal?.addEventListener('abort', onAbort, { once: true });
+  debounced.schedule = schedule;
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+
+  signal?.addEventListener('abort', cancel, { once: true });
 
   return debounced;
 }

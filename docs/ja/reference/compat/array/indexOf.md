@@ -27,7 +27,7 @@ function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?:
 
 (`number`): 配列内で指定された値と最初に一致する要素のインデックス。一致する要素が見つからない場合は `-1` を返します。
 
-### 例
+## 例
 
 ```typescript
 const array = [1, 2, 3, NaN];

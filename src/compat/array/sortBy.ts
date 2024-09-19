@@ -1,4 +1,4 @@
-import { Criterion, orderBy } from './orderBy';
+import { Criterion, orderBy } from './orderBy.ts';
 
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.

@@ -23,7 +23,7 @@ function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown)
 
 - `(object: unknown) => any`: 一个函数，接收一个对象并返回指定路径的值。
 
-### 示例
+## 示例
 
 ```typescript
 import { property } from 'es-toolkit/compat';

@@ -12,11 +12,11 @@ function isPlainObject(object: object): boolean;
 
 - `object` (`object`): 검사할 값.
 
-### Returns
+### 반환 값
 
 (`boolean`): 값이 순수 객체이면 true.
 
-## Examples
+## 예시
 
 ```typescript
 console.log(isPlainObject({})); // true

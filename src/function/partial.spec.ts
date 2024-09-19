@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { partial } from './partial';
+import { curry } from '../compat/function/curry';
 
 function identity(arg?: any): any {
   return arg;
@@ -80,5 +81,26 @@ describe('partial', () => {
     expect(par1('fred')).toBe('hi fred');
     expect(par2()).toBe('hi barney');
     expect(par3()).toBe('hi pebbles');
+  });
+
+  it(`partial should work with curried functions`, () => {
+    const fn = function (a: any, b: any, c: any) {
+        return a + b + c;
+      },
+      curried = curry(partial(fn, 1), 2);
+
+    expect(curried(2, 3)).toBe(6);
+    expect(curried(2)(3)).toBe(6);
+  });
+
+  it('partial should work with placeholders and curried functions', () => {
+    const fn = function () {
+        // eslint-disable-next-line prefer-rest-params
+        return Array.from(arguments);
+      },
+      curried = curry(fn),
+      par = partial(curried, partial.placeholder, 'b', partial.placeholder, 'd');
+
+    expect(par('a', 'c')).toEqual(['a', 'b', 'c', 'd']);
   });
 });

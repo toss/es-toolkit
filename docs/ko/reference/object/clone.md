@@ -2,21 +2,21 @@
 
 주어진 객체의 얇은 복사본을 생성해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function clone<T>(value: T): T;
 ```
 
-### Parameters
+### 파라미터
 
 - `obj` (`T`): 복사할 객체예요.
 
-### Returns
+### 반환 값
 
 (`T`): 주어진 객체의 얇은 복사본이에요.
 
-## Examples
+## 예시
 
 ```typescript
 const num = 29;

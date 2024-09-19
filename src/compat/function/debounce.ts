@@ -1,3 +1,5 @@
+import { debounce as debounceToolkit } from '../../function/debounce.ts';
+
 interface DebounceOptions {
   /**
    * An optional AbortSignal to cancel the debounced function.
@@ -83,82 +85,56 @@ export function debounce<F extends (...args: any[]) => any>(
 
   const { signal, leading = false, trailing = true, maxWait } = options;
 
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
-  let pendingAt: number | null = null;
+  const edges = Array(2);
+
+  if (leading) {
+    edges[0] = 'leading';
+  }
+
+  if (trailing) {
+    edges[1] = 'trailing';
+  }
 
   let result: ReturnType<F> | undefined = undefined;
-  let pendingArgs: Parameters<F> | null = null;
+  let pendingAt: number | null = null;
 
-  const cancel = () => {
-    if (timeoutId != null) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
-    }
+  const _debounced = debounceToolkit(
+    function (this: any, ...args: Parameters<F>) {
+      result = func.apply(this, args);
+      pendingAt = null;
+    },
+    debounceMs,
+    { signal, edges }
+  );
 
-    pendingArgs = null;
-    pendingAt = null;
-  };
-
-  const flush = function (this: any) {
-    if (pendingArgs != null) {
-      result = func.apply(this, pendingArgs);
-    }
-    cancel();
-    return result;
-  };
-
-  const debounced = function (this: any, ...args: Parameters<F>): ReturnType<F> | undefined {
-    if (signal?.aborted) {
-      return;
-    }
-
-    const timer = () => {
-      timeoutId = null;
-
-      if (trailing && pendingArgs != null) {
-        result = func.apply(this, pendingArgs);
-      }
-
-      cancel();
-    };
-
-    pendingArgs = args;
-
+  const debounced = function (this: any, ...args: Parameters<F>) {
     if (maxWait != null) {
-      if (pendingAt != null) {
+      if (pendingAt === null) {
+        pendingAt = Date.now();
+      } else {
         if (Date.now() - pendingAt >= maxWait) {
           result = func.apply(this, args);
-          pendingArgs = null;
-
           pendingAt = Date.now();
+
+          _debounced.cancel();
+          _debounced.schedule();
+
+          return result;
         }
-      } else {
-        pendingAt = Date.now();
       }
     }
 
-    const isFirstCall = timeoutId == null;
-
-    if (timeoutId != null) {
-      clearTimeout(timeoutId);
-    }
-
-    timeoutId = setTimeout(timer, debounceMs);
-
-    if (leading && isFirstCall) {
-      result = func.apply(this, args);
-      pendingArgs = null;
-    }
-
+    _debounced.apply(this, args);
     return result;
   };
 
-  const onAbort = cancel;
+  const flush = () => {
+    _debounced.flush();
+    return result;
+  };
 
-  debounced.cancel = cancel;
+  debounced.cancel = _debounced.cancel;
   debounced.flush = flush;
-
-  signal?.addEventListener('abort', onAbort, { once: true });
 
   return debounced;
 }

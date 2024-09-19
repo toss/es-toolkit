@@ -1,4 +1,4 @@
-import { ExtractNestedArrayType, flattenDeep } from './flattenDeep';
+import { ExtractNestedArrayType, flattenDeep } from './flattenDeep.ts';
 
 /**
  * Recursively maps each element in an array using a provided iteratee function and then deeply flattens the resulting array.

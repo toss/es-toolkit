@@ -23,7 +23,7 @@ function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown)
 
 (`(object: unknown) => any`): A new function that takes an object and returns the value at the specified path.
 
-### Examples
+## Examples
 
 ```typescript
 import { property } from 'es-toolkit/compat';

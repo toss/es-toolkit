@@ -16,16 +16,16 @@
 function repeat(str: string, n: number): string;
 ```
 
-## 파라미터
+### 파라미터
 
 - `str` (`string`): 반복할 문자열.
 - `n` (`number`): 반복하시고 싶은 횟수.
 
-## 반환 값
+### 반환 값
 
 주어진 문자열이 n번째 반복된 문자열.
 
-## 예시 값
+## 예시
 
 ```javascript
 repeat('abc', 0); // ''

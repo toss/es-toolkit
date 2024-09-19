@@ -10,13 +10,13 @@ If the length is less than or equal to the original string's length, or if the p
 function pad(str: string, length: number, chars = ' '): string;
 ```
 
-## Parameters
+### Parameters
 
 - `str` (`string`): The string to pad.
 - `length` (`number`): The length of the resulting string.
 - `char` (`string`): The character to pad the string with. Defaults to `' '`.
 
-## Returns
+### Returns
 
 (`string`): Returns the padded string.
 

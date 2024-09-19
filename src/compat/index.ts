@@ -53,6 +53,8 @@ export { spread } from './function/spread.ts';
 export { attempt } from './function/attempt.ts';
 export { rearg } from './function/rearg.ts';
 export { curry } from './function/curry.ts';
+export { debounce } from './function/debounce.ts';
+export { throttle } from './function/throttle.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
@@ -66,6 +68,7 @@ export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { unset } from './object/unset.ts';
+export { cloneDeep } from './object/cloneDeep.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
@@ -87,12 +90,17 @@ export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
 export { isInteger } from './predicate/isInteger.ts';
 export { isSafeInteger } from './predicate/isSafeInteger.ts';
+export { isNumber } from './predicate/isNumber.ts';
+export { isNaN } from './predicate/isNaN.ts';
+export { isArrayLikeObject } from './predicate/isArrayLikeObject.ts';
+export { isNil } from './predicate/isNil.ts';
 
 export { camelCase } from './string/camelCase.ts';
 export { kebabCase } from './string/kebabCase.ts';
 export { snakeCase } from './string/snakeCase.ts';
 export { startCase } from './string/startCase.ts';
 export { lowerCase } from './string/lowerCase.ts';
+export { upperCase } from './string/upperCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
 export { padStart } from './string/padStart.ts';
@@ -103,12 +111,15 @@ export { trim } from './string/trim.ts';
 export { trimStart } from './string/trimStart.ts';
 export { trimEnd } from './string/trimEnd.ts';
 
+export { clamp } from './math/clamp.ts';
 export { max } from './math/max.ts';
 export { min } from './math/min.ts';
 export { ceil } from './math/ceil.ts';
 export { floor } from './math/floor.ts';
 export { round } from './math/round.ts';
 export { parseInt } from './math/parseInt.ts';
+export { inRange } from './math/inRange.ts';
+export { random } from './math/random.ts';
 
 export { toPath } from './util/toPath.ts';
 export { toString } from './util/toString.ts';

@@ -17,14 +17,14 @@ specified path within the source object is equal to the given value.
 function matchesProperty(property: PropertyKey | PropertyKey[], source: unknown): (target?: unknown) => boolean;
 ```
 
-## Parameters
+### Parameters
 
 - `property` (`number | string | symbol | Array<number | string | symbol>`): The property path to check within the target object. This can be a single property key, an array of property keys, or a string representing a deep path.
 - `source` (`unknown`): The value to compare against the property value in the target object.
 
-## Returns
+### Returns
 
-- (`(target: unknown) => boolean`): A function that takes a target object and returns `true` if the property value at the given path in the target object matches the provided value, otherwise returns `false`.
+(`(target: unknown) => boolean`): A function that takes a target object and returns `true` if the property value at the given path in the target object matches the provided value, otherwise returns `false`.
 
 ## Examples
 

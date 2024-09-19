@@ -15,14 +15,14 @@ This function supports deep comparison for objects, arrays, maps, and sets.
 function isMatch(target: unknown, source: unknown): boolean;
 ```
 
-## Parameters
+### Parameters
 
 - `target` (`unknown`): The target value to match against.
 - `source` (`unknown`): The source value to match with.
 
-## Returns
+### Returns
 
-- (`boolean`): Returns `true` if the target matches the source, otherwise `false`.
+(`boolean`): Returns `true` if the target matches the source, otherwise `false`.
 
 ## Examples
 

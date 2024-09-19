@@ -28,8 +28,6 @@ function isArguments(value?: unknown): value is IArguments;
 
 ## 예시
 
-## Examples
-
 ```typescript
 import { isArguments } from 'es-toolkit/predicate';
 

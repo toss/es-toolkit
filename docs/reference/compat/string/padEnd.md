@@ -17,13 +17,13 @@ the original string is returned unchanged.
 function padEnd(str: string, length = 0, chars = ' '): string;
 ```
 
-## Parameters
+### Parameters
 
 - `str` (`string`): The string to pad.
 - `length` (`number`): The length of the resulting string. Defaults to `0`.
 - `char` (`string`): The character to pad the string with. Defaults to `' '`.
 
-## Returns
+### Returns
 
 Returns a new string padded with the specified character until it reaches the specified length.
 

@@ -20,7 +20,7 @@ function dropRightWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean):
 
 (`T[]`): 조건 함수가 `false`를 반환할 때까지 남은 요소들로 이루어진 새로운 배열.
 
-## Examples
+## 예시
 
 ```typescript
 const array = [1, 2, 3, 2, 4, 5];

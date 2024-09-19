@@ -22,7 +22,7 @@ function isArrayLikeObject(value: unknown): value is ArrayLike<unknown> & object
 
 ### 파라미터
 
--`value` (`unknown`): 원시값이 아닌 유사 배열 객체인지 확인할 값이에요.
+- `value` (`unknown`): 원시값이 아닌 유사 배열 객체인지 확인할 값이에요.
 
 ### 반환 값
 
