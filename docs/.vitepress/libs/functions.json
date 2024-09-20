@@ -145,6 +145,7 @@
     "isFinite",
     "isFunction",
     "isInteger",
+    "isJSONObject",
     "isLength",
     "isMap",
     "isMatch",
