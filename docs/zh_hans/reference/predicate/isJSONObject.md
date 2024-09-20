@@ -7,7 +7,7 @@ JSON对象的键是字符串，值可以是字符串、数字、布尔值、null
 ## 签名
 
 ```typescript
-function isJSONObject(value: unknown): boolean
+function isJSONObject(value: unknown): boolean;
 ```
 
 ### 参数
@@ -21,8 +21,8 @@ function isJSONObject(value: unknown): boolean
 ## 示例
 
 ```typescript
-console.log(isJSONObject({ nested: { boolean: true, array: [1, 2, 3], string: 'test', null: null } })); // true   
-console.log(isJSONObject({})) // true
+console.log(isJSONObject({ nested: { boolean: true, array: [1, 2, 3], string: 'test', null: null } })); // true
+console.log(isJSONObject({})); // true
 console.log(isJSONObject({ regexp: /test/ })); // false
 console.log(isJSONObject(123)); // false
 ```

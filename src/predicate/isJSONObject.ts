@@ -1,17 +1,17 @@
-import { isString } from "./isString.ts";
-import { isBoolean } from "./isBoolean.ts";
-import { isNull } from "./isNull.ts";
-import { isArray } from "../compat/predicate/isArray.ts";
-import { isPlainObject } from "./isPlainObject.ts";
+import { isString } from './isString.ts';
+import { isBoolean } from './isBoolean.ts';
+import { isNull } from './isNull.ts';
+import { isArray } from '../compat/predicate/isArray.ts';
+import { isPlainObject } from './isPlainObject.ts';
 
-/**  
- * Checks if a value is a JSON object.  
- *  
- * @param {T} obj The value to check.  
- * @returns {boolean} True if `obj` is a JSON object, false otherwise.  
- *   
+/**
+ * Checks if a value is a JSON object.
+ *
+ * @param {T} obj The value to check.
+ * @returns {boolean} True if `obj` is a JSON object, false otherwise.
+ *
  * @example
- * isJSONObject({ nested: { boolean: true, array: [1, 2, 3], string: 'test', null: null } }); // true   
+ * isJSONObject({ nested: { boolean: true, array: [1, 2, 3], string: 'test', null: null } }); // true
  * isJSONObject({ regexp: /test/ }); // false
  * isJSONObject(123); // false
  */
@@ -25,7 +25,7 @@ export function isJSONObject(obj: unknown): boolean {
 
   for (const [key, value] of entries) {
     if (!isString(key)) {
-      return false
+      return false;
     }
 
     if (isPlainObject(value)) {
@@ -33,13 +33,7 @@ export function isJSONObject(obj: unknown): boolean {
         return false;
       }
     } else {
-      if (
-        typeof value !== 'number' &&
-        !isString(value) &&
-        !isBoolean(value) &&
-        !isNull(value) &&
-        !isArray(value)
-      ) {
+      if (typeof value !== 'number' && !isString(value) && !isBoolean(value) && !isNull(value) && !isArray(value)) {
         return false;
       }
     }
@@ -47,4 +41,3 @@ export function isJSONObject(obj: unknown): boolean {
 
   return true;
 }
-

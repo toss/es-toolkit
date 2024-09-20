@@ -16,10 +16,10 @@ describe('isJSONObject', () => {
     expect(isJSONObject(true)).toBe(false);
     expect(isJSONObject([1, 2, 3])).toBe(false);
     expect(isJSONObject({ date: new Date() })).toBe(false);
-    expect(isJSONObject({ func: () => { } })).toBe(false);
+    expect(isJSONObject({ func: () => {} })).toBe(false);
     expect(isJSONObject({ regexp: /test/ })).toBe(false);
     expect(isJSONObject({ undefinedProperty: undefined })).toBe(false);
     expect(isJSONObject({ symbolProperty: Symbol('test') })).toBe(false);
-    expect(isJSONObject({ nested: { a: function* () { } } })).toBe(false);
+    expect(isJSONObject({ nested: { a: function* () {} } })).toBe(false);
   });
-})
+});

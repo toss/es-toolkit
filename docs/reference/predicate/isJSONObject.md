@@ -7,7 +7,7 @@ The keys of a JSON object are strings, and the values can be strings, numbers, b
 ## Signature
 
 ```typescript
-function isJSONObject(value: unknown): boolean
+function isJSONObject(value: unknown): boolean;
 ```
 
 ### Parameters
@@ -21,8 +21,8 @@ function isJSONObject(value: unknown): boolean
 ## Examples
 
 ```typescript
-console.log(isJSONObject({ nested: { boolean: true, array: [1, 2, 3], string: 'test', number: 1, null: null } })); // true   
-console.log(isJSONObject({})) // true
+console.log(isJSONObject({ nested: { boolean: true, array: [1, 2, 3], string: 'test', number: 1, null: null } })); // true
+console.log(isJSONObject({})); // true
 console.log(isJSONObject({ regexp: /test/ })); // false
 console.log(isJSONObject(123)); // false
 ```
