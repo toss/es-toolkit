@@ -3596,7 +3596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ast-types@npm:0.14.2, ast-types@npm:^0.14.1":
+"ast-types@npm:0.14.2, ast-types@npm:^0.14.1, ast-types@npm:^0.14.2":
   version: 0.14.2
   resolution: "ast-types@npm:0.14.2"
   dependencies:
@@ -4923,6 +4923,7 @@ __metadata:
     "@types/node": "npm:^20.12.11"
     "@types/tar": "npm:^6.1.13"
     "@vitest/coverage-istanbul": "npm:^1.5.2"
+    ast-types: "npm:^0.14.2"
     broken-link-checker: "npm:^0.7.8"
     eslint: "npm:^9.9.0"
     eslint-config-prettier: "npm:^9.1.0"
