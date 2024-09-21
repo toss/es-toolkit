@@ -36,5 +36,5 @@ import { omit } from 'es-toolkit/compat';
 
 const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
 const result = omit(obj, ['a.b.c', 'f.g']);
-// result will be { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
+// result 将会是 { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
 ```

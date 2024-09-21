@@ -2,6 +2,8 @@
 
 检查 `value` 是否是 Date 对象。
 
+此函数还可以作为 TypeScript 中的类型谓词，将参数的类型缩小到Date。
+
 ## 签名
 
 ```typescript
