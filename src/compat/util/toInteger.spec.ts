@@ -195,4 +195,19 @@ describe('toInteger', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it(`should convert values to integers`, () => {
+    expect(toInteger(-5.6)).toBe(-5);
+    expect(toInteger('5.6')).toBe(5);
+    expect(toInteger()).toBe(0);
+    expect(toInteger(NaN)).toBe(0);
+
+    const expected = MAX_INTEGER;
+    expect(toInteger(Infinity)).toBe(expected);
+    expect(toInteger(-Infinity)).toBe(-expected);
+  });
+
+  it(`should support \`value\` of \`-0\``, () => {
+    expect(1 / toInteger(-0)).toBe(-Infinity);
+  });
 });
