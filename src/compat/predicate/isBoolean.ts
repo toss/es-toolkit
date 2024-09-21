@@ -23,13 +23,5 @@ import { getTag } from '../_internal/getTag.ts';
  *
  */
 export function isBoolean(x: unknown): x is boolean {
-  if (x === true || x === false) {
-    return true;
-  }
-
-  if (typeof x === 'object' && x != null && getTag(x) === '[object Boolean]') {
-    return true;
-  }
-
-  return false;
+  return typeof x === 'boolean' || x instanceof Boolean;
 }
