@@ -92,8 +92,8 @@ export function merge(target: any, source: any) {
 
     if (Array.isArray(sourceValue)) {
       target[key] = merge(Array.isArray(targetValue) ? targetValue : [], sourceValue);
-    } else if (isObjectLike(targetValue) && isObjectLike(sourceValue)) {
-      target[key] = merge(targetValue ?? {}, sourceValue);
+    } else if (isObjectLike(sourceValue)) {
+      target[key] = merge(isObjectLike(targetValue) ? targetValue : {}, sourceValue);
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
     }

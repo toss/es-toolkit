@@ -69,6 +69,16 @@ describe('merge', () => {
     expect(result.b).not.toBe(numbers);
   });
 
+  it('should create new plain object when merged', () => {
+    const plainObject = { b: 2 } as const;
+    const target = {};
+    const source = { a: plainObject };
+    const result = merge(target, source);
+
+    expect(result).toEqual({ a: plainObject });
+    expect(result.a).not.toBe(plainObject);
+  });
+
   it('should not overwrite existing values with undefined from source', () => {
     const target = { a: 1, b: 2 };
     const source = { b: undefined, c: 3 };
