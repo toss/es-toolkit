@@ -10,6 +10,8 @@ describe('isBoolean', () => {
     isBooleanToolkit(undefined);
     isBooleanToolkit('');
     isBooleanToolkit(123);
+    isBooleanToolkit({});
+    isBooleanToolkit(Boolean());
   });
 
   bench('es-toolkit/compat/isBoolean', () => {
@@ -18,6 +20,8 @@ describe('isBoolean', () => {
     isBooleanToolkitCompat(undefined);
     isBooleanToolkitCompat('');
     isBooleanToolkitCompat(123);
+    isBooleanToolkitCompat({});
+    isBooleanToolkitCompat(Boolean());
   });
 
   bench('lodash/isBoolean', () => {
@@ -26,5 +30,7 @@ describe('isBoolean', () => {
     isBooleanLodash(undefined);
     isBooleanLodash('');
     isBooleanLodash(123);
+    isBooleanLodash({});
+    isBooleanLodash(Boolean());
   });
 });
