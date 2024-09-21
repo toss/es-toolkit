@@ -8,7 +8,7 @@ import { identity } from '../_internal/identity';
 import { flatMap } from '../../array/flatMap';
 import { toInteger } from './toInteger';
 
-describe('number coercion methods', () => {
+describe('toInteger', () => {
   it(`should preserve the sign of \`0\``, () => {
     const values = [0, '0', -0, '-0'];
     const expected = [
