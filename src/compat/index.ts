@@ -69,6 +69,7 @@ export { mergeWith } from './object/mergeWith.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { unset } from './object/unset.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
+export { invertBy } from './object/invertBy.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
