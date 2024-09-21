@@ -1,5 +1,3 @@
-import { getTag } from '../_internal/getTag';
-
 /**
  * Checks if a given value is a number.
  *

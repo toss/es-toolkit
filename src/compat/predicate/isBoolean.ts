@@ -1,5 +1,3 @@
-import { getTag } from '../_internal/getTag.ts';
-
 /**
  * Checks if the given value is boolean.
  *
