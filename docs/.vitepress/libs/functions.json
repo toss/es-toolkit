@@ -145,6 +145,7 @@
     "isFinite",
     "isFunction",
     "isInteger",
+    "isJSONString",
     "isLength",
     "isMap",
     "isMatch",
