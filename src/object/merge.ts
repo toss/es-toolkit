@@ -1,4 +1,4 @@
-import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
  * Merges the properties of the source object into the target object.
@@ -92,8 +92,8 @@ export function merge(target: any, source: any) {
 
     if (Array.isArray(sourceValue)) {
       target[key] = merge(Array.isArray(targetValue) ? targetValue : [], sourceValue);
-    } else if (isObjectLike(sourceValue)) {
-      target[key] = merge(isObjectLike(targetValue) ? targetValue : {}, sourceValue);
+    } else if (isPlainObject(sourceValue)) {
+      target[key] = merge(isPlainObject(targetValue) ? targetValue : {}, sourceValue);
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
     }
