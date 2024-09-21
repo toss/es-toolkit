@@ -22,7 +22,7 @@ function isArrayLikeObject(value: unknown): value is ArrayLike<unknown> & object
 
 ### 参数
 
--`value` (`unknown`): 要检查是否为非原始的、类似数组的对象的值。
+- `value` (`unknown`): 要检查是否为非原始的、类似数组的对象的值。
 
 ### 返回值
 

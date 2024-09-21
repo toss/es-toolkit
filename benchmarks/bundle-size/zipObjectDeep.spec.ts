@@ -9,6 +9,6 @@ describe('zipObjectDeep bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'zipObjectDeep');
-    expect(bundleSize).toMatchInlineSnapshot(`992`);
+    expect(bundleSize).toMatchInlineSnapshot(`1022`);
   });
 });

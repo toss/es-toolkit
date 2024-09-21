@@ -15,7 +15,7 @@ function before<F extends (...args: any[]) => any>(n: number, func: F): F;
   - `n`이 양의 정수인 경우, `func`는 최대 `n-1`번 호출돼요.
 - `func` (`F`): 호출 횟수 제한이 적용될 함수예요.
 
-### 결괏값
+### 반환 값
 
 (`F`): 새로운 함수를 반환해요. 이 함수는 다음과 같은 기능을 가져요.
 

@@ -22,7 +22,7 @@ function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown)
 
 (`(object: unknown) => any`): 객체에서 주어진 경로에 있는 값을 가져오는 함수.
 
-### 예시
+## 예시
 
 ```typescript
 import { property } from 'es-toolkit/compat';

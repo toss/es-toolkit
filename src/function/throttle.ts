@@ -1,3 +1,21 @@
+import { debounce } from './debounce.ts';
+
+interface ThrottleOptions {
+  /**
+   * An optional AbortSignal to cancel the debounced function.
+   */
+  signal?: AbortSignal;
+
+  /**
+   * An optional array specifying whether the function should be invoked on the leading edge, trailing edge, or both.
+   * If `edges` includes "leading", the function will be invoked at the start of the delay period.
+   * If `edges` includes "trailing", the function will be invoked at the end of the delay period.
+   * If both "leading" and "trailing" are included, the function will be invoked at both the start and end of the delay period.
+   * @default ["leading", "trailing"]
+   */
+  edges?: Array<'leading' | 'trailing'>;
+}
+
 /**
  * Creates a throttled function that only invokes the provided function at most once
  * per every `throttleMs` milliseconds. Subsequent calls to the throttled function
@@ -26,18 +44,31 @@
  */
 export function throttle<F extends (...args: any[]) => void>(
   func: F,
-  throttleMs: number
-): (...args: Parameters<F>) => void {
-  let lastCallTime: number | null;
+  throttleMs: number,
+  { signal, edges = ['leading', 'trailing'] }: ThrottleOptions = {}
+): ((...args: Parameters<F>) => void) & {
+  cancel: () => void;
+  flush: () => void;
+} {
+  let pendingAt: number | null = null;
 
-  const throttledFunction = function (...args: Parameters<F>) {
-    const now = Date.now();
+  const debounced = debounce(func, throttleMs, { signal, edges });
 
-    if (lastCallTime == null || now - lastCallTime >= throttleMs) {
-      lastCallTime = now;
-      func(...args);
+  const throttled = function (...args: Parameters<F>) {
+    if (pendingAt == null) {
+      pendingAt = Date.now();
+    } else {
+      if (Date.now() - pendingAt >= throttleMs) {
+        debounced.cancel();
+        debounced(...args);
+      }
     }
+
+    debounced(...args);
   };
 
-  return throttledFunction;
+  throttled.cancel = debounced.cancel;
+  throttled.flush = debounced.flush;
+
+  return throttled;
 }

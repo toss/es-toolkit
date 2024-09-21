@@ -1,4 +1,4 @@
-import { isWeakSet as isWeakSetToolkit } from '../../predicate/isWeakSet';
+import { isWeakSet as isWeakSetToolkit } from '../../predicate/isWeakSet.ts';
 
 /**
  * Checks if the given value is a `WeakSet`.

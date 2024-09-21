@@ -1,6 +1,6 @@
 import { isNil } from '../predicate/isNil.ts';
-import { get } from './get';
-import { set } from './set';
+import { get } from './get.ts';
+import { set } from './set.ts';
 
 /**
  * Creates a new object composed of the picked object properties.
@@ -63,7 +63,7 @@ export function pick<
  *
  * @template T - The type of object.
  * @param {T | null | undefined} obj - The object to pick keys from.
- * @param {...any} keysArr
+ * @param {...any} keysArr - An array of keys to be picked from the object. received keysgoes through a flattening process before being used.
  * @param {PropertyKey | PropertyKey[] | ProperyKey[][]}} keys - An array of keys to be picked from the object. received keysgoes through a flattening process before being used.
  * @returns {Partial<T, K>} A new object with the specified keys picked.
  *

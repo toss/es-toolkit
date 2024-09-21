@@ -17,7 +17,7 @@ function minBy<T>(items: T[], getValue: (element: T) => number): T;
 
 (`T`): `getValue` 関数を基準に、配列から最小値を持つ要素。
 
-### 例
+## 例
 
 ```typescript
 minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 戻り値: { a: 1 }

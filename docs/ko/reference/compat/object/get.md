@@ -95,7 +95,7 @@ function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaul
 
 (`Get<T, P>`): 찾은 값.
 
-### 예시
+## 예시
 
 ```typescript
 import { get } from 'es-toolkit/compat';
