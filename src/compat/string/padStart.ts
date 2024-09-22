@@ -1,4 +1,4 @@
-import { toString } from '../util/toString';
+import { toString } from '../util/toString.ts';
 
 /**
  * Pads the start of a string with a given character until it reaches the specified length.

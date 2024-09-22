@@ -65,6 +65,7 @@ describe('padStart', () => {
   });
 
   it('should pad a string to a given length', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, undefined];
     const expected = values.map(() => '   abc');
 
