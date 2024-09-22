@@ -19,7 +19,7 @@ describe('kebabCase', () => {
   });
 
   it('should handle leading and trailing whitespace', () => {
-    expect(kebabCase('    leading and trailing whitespace')).toEqual('leading-and-trailing-whitespace');
+    expect(kebabCase('    leading and trailing whitespace    ')).toEqual('leading-and-trailing-whitespace');
   });
 
   it('should handle special characters correctly', () => {

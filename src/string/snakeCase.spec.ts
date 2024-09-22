@@ -19,7 +19,7 @@ describe('snakeCase', () => {
   });
 
   it('should handle leading and trailing whitespace', () => {
-    expect(snakeCase('    leading and trailing whitespace')).toEqual('leading_and_trailing_whitespace');
+    expect(snakeCase('    leading and trailing whitespace    ')).toEqual('leading_and_trailing_whitespace');
   });
 
   it('should handle special characters correctly', () => {

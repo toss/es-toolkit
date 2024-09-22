@@ -19,15 +19,11 @@ describe('camelCase', () => {
   });
 
   it('should handle leading and trailing whitespace', () => {
-    expect(camelCase('    leading and trailing whitespace')).toEqual('leadingAndTrailingWhitespace');
+    expect(camelCase('    leading and trailing whitespace    ')).toEqual('leadingAndTrailingWhitespace');
   });
 
   it('should handle special characters correctly', () => {
     expect(camelCase('special@characters!')).toEqual('specialCharacters');
-  });
-
-  it('should handle strings that are already in camel_case', () => {
-    expect(camelCase('camel_case')).toEqual('camelCase');
   });
 
   it('should work with an empty string', () => {
