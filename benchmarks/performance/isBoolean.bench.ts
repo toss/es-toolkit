@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { isBoolean as isBooleanToolkit } from 'es-toolkit/predicate';
+import { isBoolean as isBooleanToolkit } from 'es-toolkit';
 import { isBoolean as isBooleanToolkitCompat } from 'es-toolkit/compat';
 import { isBoolean as isBooleanLodash } from 'lodash';
 

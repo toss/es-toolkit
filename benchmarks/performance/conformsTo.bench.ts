@@ -1,20 +1,10 @@
 import { bench, describe } from 'vitest';
-import { conformsTo as conformsToToolkit } from 'es-toolkit';
-import { conformsTo as conformsCompat } from 'es-toolkit/compat';
+import { conformsTo as conformsToolkit } from 'es-toolkit/compat';
 import { conformsTo as conformsToLodash } from 'lodash';
 
 describe('conformsTo', () => {
   bench('es-toolkit/conformsTo', () => {
-    conformsToToolkit(
-      { a: 1, b: 2 },
-      {
-        b: (n: number) => n > 1,
-      }
-    );
-  });
-
-  bench('es-toolkit/compat/conformsTo', () => {
-    conformsCompat(
+    conformsToolkit(
       { a: 1, b: 2 },
       {
         b: (n: number) => n > 1,
