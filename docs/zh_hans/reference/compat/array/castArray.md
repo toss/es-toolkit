@@ -11,7 +11,7 @@
 ## 签名
 
 ```typescript
-function castArray<T>(value?: T | readonly T[]): T[];
+function castArray<T>(value?: T | T[]): T[];
 ```
 
 ### 参数
