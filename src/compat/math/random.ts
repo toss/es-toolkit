@@ -5,7 +5,6 @@ import { clamp } from './clamp.ts';
 /**
  * Generate a random number within 0 and 1.
  *
- * @param floating
  * @returns {number} A random number between 0 (inclusive) and 1 (exclusive). The number can be an integer or a decimal.
  * @throws {Error} Throws an error if `maximum` is not greater than `0`.
  *
@@ -17,9 +16,6 @@ export function random(floating?: boolean): number;
 /**
  * Generate a random number within 0 and 1.
  *
- * @param min
- * @param index
- * @param guard
  * @returns {number} A random number between 0 (inclusive) and 1 (exclusive). The number can be an integer or a decimal.
  * @throws {Error} Throws an error if `maximum` is not greater than `0`.
  *
@@ -34,7 +30,6 @@ export function random(min: number, index: string | number, guard: object): numb
  * If only one argument is provided, a number between `0` and the given number is returned.
  *
  * @param {number} maximum - The upper bound (exclusive).
- * @param floating
  * @returns {number} A random number between 0 (inclusive) and maximum (exclusive). The number can be an integer or a decimal.
  * @throws {Error} Throws an error if `maximum` is not greater than `0`.
  *
@@ -49,7 +44,6 @@ export function random(maximum: number, floating?: boolean): number;
  *
  * @param {number} minimum - The lower bound (inclusive).
  * @param {number} maximum - The upper bound (exclusive).
- * @param floating
  * @returns {number} A random number between minimum (inclusive) and maximum (exclusive). The number can be an integer or a decimal.
  * @throws {Error} Throws an error if `maximum` is not greater than `minimum`.
  *
@@ -65,7 +59,6 @@ export function random(minimum: number, maximum: number, floating?: boolean): nu
  *
  * @param {number} minimum - The lower bound (inclusive).
  * @param {number} maximum - The upper bound (exclusive).
- * @param {...any} args
  * @returns {number} A random number between minimum (inclusive) and maximum (exclusive). The number can be an integer or a decimal.
  * @throws {Error} Throws an error if `maximum` is not greater than `minimum`.
  *
