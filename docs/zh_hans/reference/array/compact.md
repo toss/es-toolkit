@@ -1,6 +1,6 @@
 # compact
 
-从数组中删除假值（`false`、`null`、`0`、`0n`,`''`、`undefined`、`NaN`）。
+从数组中删除假值（`false`、 `null`、 `0`、 `0n`, `''`、 `undefined`、 `NaN`）。
 
 ## 签名
 
