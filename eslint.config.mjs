@@ -4,7 +4,7 @@ import tseslint from 'typescript-eslint';
 import jsdoc from 'eslint-plugin-jsdoc';
 import prettier from 'eslint-config-prettier';
 import pluginVue from 'eslint-plugin-vue';
-import preferFor from 'eslint-prefer-for-over-array';
+import noForOfArrayPlugin from 'eslint-plugin-no-for-of-array';
 
 export default [
   {
@@ -55,10 +55,10 @@ export default [
       },
     },
     plugins: {
-      'prefer-for-over-array': preferFor,
+      'no-for-of-array': noForOfArrayPlugin,
     },
     rules: {
-      'prefer-for-over-array/prefer-for-over-array': 'error',
+      'no-for-of-array/no-for-of-array': 'error',
     },
   },
   {

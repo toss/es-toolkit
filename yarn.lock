@@ -4987,8 +4987,8 @@ __metadata:
     eslint: "npm:^9.9.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-jsdoc: "npm:^50.2.2"
+    eslint-plugin-no-for-of-array: "npm:^0.0.1"
     eslint-plugin-vue: "npm:^9.28.0"
-    eslint-prefer-for-over-array: "npm:^0.0.1"
     execa: "npm:^9.3.0"
     globals: "npm:^15.9.0"
     jscodeshift: "npm:^17.0.0"
@@ -5397,6 +5397,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-no-for-of-array@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "eslint-plugin-no-for-of-array@npm:0.0.1"
+  dependencies:
+    "@typescript-eslint/utils": "npm:^8.6.0"
+  peerDependencies:
+    "@typescript-eslint/parser": ^8.6.0
+    eslint: ^9.11.0
+    typescript: ^5.6.2
+  checksum: 10c0/37aeb5fcd71b05a5cc3c10617febc74c7da51467f1149d2e9f1b9d322b7e5090e780f8efa79007979bb52a026b8212690af74e88b35745dbc9ab3f5f6c0f14d7
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-vue@npm:^9.28.0":
   version: 9.28.0
   resolution: "eslint-plugin-vue@npm:9.28.0"
@@ -5412,19 +5425,6 @@ __metadata:
   peerDependencies:
     eslint: ^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
   checksum: 10c0/97a52895599321b04d0617ae465c66257709e81b1967310cfafe143441a9f7e5ef38e010e51d4f1916e3fe5b0bbadcc18a99297e23225ac757a7262ab0a37e99
-  languageName: node
-  linkType: hard
-
-"eslint-prefer-for-over-array@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "eslint-prefer-for-over-array@npm:0.0.1"
-  dependencies:
-    "@typescript-eslint/utils": "npm:^8.6.0"
-  peerDependencies:
-    "@typescript-eslint/parser": ^8.6.0
-    eslint: ^9.11.0
-    typescript: ^5.6.2
-  checksum: 10c0/7bfaf8d4ba1e853064f17b2d6225f23c9a2a857e4ccf99663c8731ed5e6f9309e0a0d33c0fc7c66ee17f9079649e6291604cef28d23ec2c72352ae701eba8b87
   languageName: node
   linkType: hard
 
