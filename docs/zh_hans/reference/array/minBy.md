@@ -25,4 +25,12 @@ function minBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 ```typescript
 minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 返回: { a: 1 }
 minBy([], x => x.a); // 返回: undefined
+minBy(
+  [
+    { name: 'john', age: 30 },
+    { name: 'jane', age: 28 },
+    { name: 'joe', age: 26 },
+  ],
+  x => x.age
+); // 返回: { name: 'joe', age: 26 }
 ```
