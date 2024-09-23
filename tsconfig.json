@@ -11,6 +11,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*", ".scripts/**/*", "benchmarks/**/*", "tests/**/*", ".vitepress/**/*"],
+  "include": ["src", ".scripts/**/*"],
   "exclude": [".scripts/docs/**/*"]
 }
