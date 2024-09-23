@@ -28,11 +28,3 @@ const numbers = [10, 20, 30, 40, 50];
 const result = at(numbers, [1, 3, 4]);
 console.log(result); // [20, 40, 50]
 ```
-
-## Performance Comparison
-
-|                   | [Bundle Size](../../bundle-size.md) | [Performance](../../performance.md) |
-| ----------------- | ----------------------------------- | ----------------------------------- |
-| es-toolkit        | 238 bytes (92.4% smaller)           | 9,338,821 times (11% slower)        |
-| es-toolkit/compat | 307 bytes (90.2% smaller)           | 9,892,157 times (5% slower)         |
-| lodash-es         | 3,153 bytes                         | 10,523,270 times                    |
