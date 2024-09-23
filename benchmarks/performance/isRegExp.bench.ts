@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
-import { isRegExp as isRegExpToolkit } from 'es-toolkit';
-import { isRegExp as isRegExpCompatToolkit } from 'es-toolkit/compat';
+import { isRegExp as isRegExpToolkit } from 'es-toolkit/predicate';
+import { isRegExp as isRegExpToolkitCompat } from 'es-toolkit/compat';
 import { isRegExp as isRegExpLodash } from 'lodash';
 
 describe('isRegExp', () => {
@@ -11,9 +11,9 @@ describe('isRegExp', () => {
   });
 
   bench('es-toolkit/compat/isRegExp', () => {
-    isRegExpCompatToolkit(new RegExp(''));
-    isRegExpCompatToolkit(/abc/);
-    isRegExpCompatToolkit('/abc/');
+    isRegExpToolkitCompat(new RegExp(''));
+    isRegExpToolkitCompat(/abc/);
+    isRegExpToolkitCompat('/abc/');
   });
 
   bench('lodash/isRegExp', () => {

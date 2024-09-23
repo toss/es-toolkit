@@ -8,6 +8,8 @@
 
 检查值是否为`NaN`。
 
+此函数还可以作为 TypeScript 中的类型谓词，将参数的类型缩小到`NaN`。
+
 ## 签名
 
 ```typescript

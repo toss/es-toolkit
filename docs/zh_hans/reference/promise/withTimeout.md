@@ -24,9 +24,15 @@ function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
 ### 基本用法
 
 ```typescript
+async function fetchData() {
+  const response = await fetch('https://example.com/data');
+  return response.json();
+}
+
 try {
-  await withTimeout(() => new Promise(() => {}), 1000); // 代码时间最长为 1秒
+  const data = await withTimeout(fetchData, 1000);
+  console.log(data); // 如果 `fetchData` 在 1 秒内解决，将记录获取的数据。
 } catch (error) {
-  console.error(error); // 将会输出 'The operation was timed out'
+  console.error(error); // 如果 `fetchData` 在 1 秒内没有解决，将记录 'TimeoutError'。
 }
 ```

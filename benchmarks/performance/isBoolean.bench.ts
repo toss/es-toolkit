@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
 import { isBoolean as isBooleanToolkit } from 'es-toolkit';
-import { isBoolean as isBooleanCompatToolkit } from 'es-toolkit/compat';
+import { isBoolean as isBooleanToolkitCompat } from 'es-toolkit/compat';
 import { isBoolean as isBooleanLodash } from 'lodash';
 
 describe('isBoolean', () => {
@@ -10,14 +10,18 @@ describe('isBoolean', () => {
     isBooleanToolkit(undefined);
     isBooleanToolkit('');
     isBooleanToolkit(123);
+    isBooleanToolkit({});
+    isBooleanToolkit(Boolean());
   });
 
   bench('es-toolkit/compat/isBoolean', () => {
-    isBooleanCompatToolkit(true);
-    isBooleanCompatToolkit(false);
-    isBooleanCompatToolkit(undefined);
-    isBooleanCompatToolkit('');
-    isBooleanCompatToolkit(123);
+    isBooleanToolkitCompat(true);
+    isBooleanToolkitCompat(false);
+    isBooleanToolkitCompat(undefined);
+    isBooleanToolkitCompat('');
+    isBooleanToolkitCompat(123);
+    isBooleanToolkitCompat({});
+    isBooleanToolkitCompat(Boolean());
   });
 
   bench('lodash/isBoolean', () => {
@@ -26,5 +30,7 @@ describe('isBoolean', () => {
     isBooleanLodash(undefined);
     isBooleanLodash('');
     isBooleanLodash(123);
+    isBooleanLodash({});
+    isBooleanLodash(Boolean());
   });
 });

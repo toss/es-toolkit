@@ -48,17 +48,17 @@ export function curry(
     arity = 0;
   }
 
-  const wrapper = function (this: any, ...partials: any[]) {
-    const holders = replaceHolders(partials);
-    const length = partials.length - holders.length;
+  const wrapper = function (this: any, ...partialArgs: any[]) {
+    const holders = partialArgs.filter(item => item === curry.placeholder);
+    const length = partialArgs.length - holders.length;
     if (length < arity) {
-      return makeCurry(func, holders, arity - length, partials);
+      return makeCurry(func, arity - length, partialArgs);
     }
     if (this instanceof wrapper) {
       // @ts-expect-error - fn is a constructor
-      return new func(...partials);
+      return new func(...partialArgs);
     }
-    return func.apply(this, partials);
+    return func.apply(this, partialArgs);
   };
 
   wrapper.placeholder = curryPlaceholder;
@@ -68,54 +68,42 @@ export function curry(
 
 function makeCurry(
   func: (...args: any[]) => any,
-  holders: any[],
   arity: number,
-  partials: any[]
+  partialArgs: any[]
 ): ((...args: any[]) => any) & { placeholder: typeof curry.placeholder } {
-  function wrapper(this: any, ...args: any[]) {
-    const holdersCount = args.filter(item => item === curry.placeholder).length;
-    const length = args.length - holdersCount;
-    args = composeArgs(args, partials, holders);
+  function wrapper(this: any, ...providedArgs: any[]) {
+    const holders = providedArgs.filter(item => item === curry.placeholder);
+    const length = providedArgs.length - holders.length;
+    providedArgs = composeArgs(providedArgs, partialArgs);
     if (length < arity) {
-      const newHolders = replaceHolders(args);
-      return makeCurry(func, newHolders, arity - length, args);
+      return makeCurry(func, arity - length, providedArgs);
     }
     if (this instanceof wrapper) {
       // @ts-expect-error - fn is a constructor
-      return new func(...args);
+      return new func(...providedArgs);
     }
-    return func.apply(this, args);
+    return func.apply(this, providedArgs);
   }
   wrapper.placeholder = curryPlaceholder;
   return wrapper;
 }
 
-function replaceHolders(args: any[]): number[] {
-  const result = [];
-  for (let i = 0; i < args.length; i++) {
-    if (args[i] === curry.placeholder) {
-      result.push(i);
-    }
-  }
-  return result;
-}
+function composeArgs(providedArgs: any[], partialArgs: any[]): any[] {
+  const args = [];
+  let startIndex = 0;
+  for (let i = 0; i < partialArgs.length; i++) {
+    const arg = partialArgs[i];
 
-function composeArgs(args: any[], partials: any[], holders: number[]): any[] {
-  const result = [...partials];
-  const argsLength = args.length;
-  const holdersLength = holders.length;
-  let argsIndex = -1,
-    leftIndex = partials.length,
-    rangeLength = Math.max(argsLength - holdersLength, 0);
-  while (++argsIndex < holdersLength) {
-    if (argsIndex < argsLength) {
-      result[holders[argsIndex]] = args[argsIndex];
+    if (arg === curry.placeholder && startIndex < providedArgs.length) {
+      args.push(providedArgs[startIndex++]);
+    } else {
+      args.push(arg);
     }
   }
-  while (rangeLength--) {
-    result[leftIndex++] = args[argsIndex++];
+  for (let i = startIndex; i < providedArgs.length; i++) {
+    args.push(providedArgs[i]);
   }
-  return result;
+  return args;
 }
 
 const curryPlaceholder: unique symbol = Symbol('curry.placeholder');
