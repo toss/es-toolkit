@@ -26,7 +26,8 @@ export function flatten<T, D extends number = 1>(
   }
 
   const recursive = (arr: readonly T[], currentDepth: number) => {
-    for (const item of arr) {
+    for (let i = 0; i < arr.length; i++) {
+      const item = arr[i];
       if (
         currentDepth < flooredDepth &&
         (Array.isArray(item) ||

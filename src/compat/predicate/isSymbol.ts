@@ -13,5 +13,5 @@
  * // => false
  */
 export function isSymbol(value?: unknown): value is symbol {
-  return typeof value === 'symbol' || (value != null && value instanceof Symbol);
+  return typeof value === 'symbol' || value instanceof Symbol;
 }

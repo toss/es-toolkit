@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { startsWith as startsWithToolkit } from 'es-toolkit';
+import { startsWith as startsWithToolkit } from 'es-toolkit/compat';
 import { startsWith as startsWithLodash } from 'lodash';
 
 describe('startsWith', () => {

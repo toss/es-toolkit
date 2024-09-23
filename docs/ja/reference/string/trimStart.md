@@ -11,7 +11,7 @@ function trimStart(str: string, chars?: string | string[]): string;
 ### パラメータ
 
 - `str` (`string`): 先頭の文字が削除される文字列。
-- `chars` (`string | string[]`): 文字列の末尾から削除する文字。
+- `chars` (`string | string[]`): 文字列の開始から削除する文字。
 
 ### 戻り値
 

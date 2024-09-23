@@ -12,7 +12,7 @@ describe('startCase', () => {
     startCaseToolkit('hello-World_of XML_httpRequest');
   });
 
-  bench('es-toolkit/comapt/startCase', () => {
+  bench('es-toolkit/compat/startCase', () => {
     startCaseToolkitCompat('hello world');
     startCaseToolkitCompat('--foo--bar__baz 123');
     startCaseToolkitCompat('123numericValues');
