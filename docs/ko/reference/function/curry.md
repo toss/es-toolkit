@@ -16,6 +16,7 @@ function curry<P1, P2, P3, P4, R>(
 function curry<P1, P2, P3, P4, P5, R>(
   func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
 ): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => (p5: P5) => R;
+function curry(func: (...args: any[]) => any): (...args: any[]) => any;
 ```
 
 ### 파라미터
