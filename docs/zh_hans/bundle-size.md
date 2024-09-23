@@ -6,7 +6,7 @@ description: es-toolkit提供的最小包体积
 
 ![图表显示es-toolkit与lodash之间包大小的差异，差异高达97%。](/assets/bundle-size.png)
 
-通过其现代化的实现，es-toolkit显著减少了其包体积，与lodash等其他库相比，可以减少高达97%。
+通过其现代化的实现，es-toolkit显著减少了其包体积，与 [lodash](https://lodash.com) 等其他库相比，可以减少高达97%。
 
 这使得es-toolkit在包体积方面成为最高效的选择，其中一些实用函数的体积甚至少于100字节。
 
