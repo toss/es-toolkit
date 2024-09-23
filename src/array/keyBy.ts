@@ -28,7 +28,8 @@
 export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T> {
   const result = {} as Record<K, T>;
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
     const key = getKeyFromItem(item);
     result[key] = item;
   }

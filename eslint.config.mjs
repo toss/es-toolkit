@@ -4,6 +4,7 @@ import tseslint from 'typescript-eslint';
 import jsdoc from 'eslint-plugin-jsdoc';
 import prettier from 'eslint-config-prettier';
 import pluginVue from 'eslint-plugin-vue';
+import preferFor from 'eslint-prefer-for-over-array';
 
 export default [
   {
@@ -16,6 +17,7 @@ export default [
       '**/*.d.ts',
       '**/*.tgz',
       'node_modules/**',
+      '**/*.vue',
     ],
   },
   {
@@ -27,13 +29,10 @@ export default [
         ...globals['shared-node-browser'],
         ...globals.es2015,
       },
-
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
         },
-        parser: tseslint.parser,
-        extraFileExtensions: ['.vue'],
       },
     },
   },
@@ -42,6 +41,26 @@ export default [
   prettier,
   jsdoc.configs['flat/recommended'],
   ...pluginVue.configs['flat/recommended'],
+  {
+    files: ['src/**/*.ts'],
+    ignores: ['**/*.spec.ts'],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: import.meta.dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    plugins: {
+      'prefer-for-over-array': preferFor,
+    },
+    rules: {
+      'prefer-for-over-array/prefer-for-over-array': 'error',
+    },
+  },
   {
     rules: {
       'no-implicit-coercion': 'error',

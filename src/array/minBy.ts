@@ -40,7 +40,8 @@ export function minBy<T>(items: readonly T[], getValue: (element: T) => number):
   let minElement = items[0];
   let min = Infinity;
 
-  for (const element of items) {
+  for (let i = 0; i < items.length; i++) {
+    const element = items[i];
     const value = getValue(element);
     if (value < min) {
       min = value;

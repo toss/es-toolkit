@@ -16,7 +16,8 @@ import { getWords } from './_internal/getWords.ts';
 export function startCase(str: string): string {
   const words = getWords(str.trim());
   let result = '';
-  for (const word of words) {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
     if (result) {
       result += ' ';
     }

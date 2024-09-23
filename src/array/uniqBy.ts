@@ -27,7 +27,8 @@
 export function uniqBy<T, U>(arr: readonly T[], mapper: (item: T) => U): T[] {
   const map = new Map<U, T>();
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
     const key = mapper(item);
 
     if (!map.has(key)) {

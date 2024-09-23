@@ -36,7 +36,9 @@ export function conformsTo(
     return Object.keys(source).length === 0;
   }
 
-  for (const key of Object.keys(source)) {
+  const keys = Object.keys(source);
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
     const predicate = source[key];
     const value = target[key];
     if ((value === undefined && !(key in target)) || !predicate(value)) {

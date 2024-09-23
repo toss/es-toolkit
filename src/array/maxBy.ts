@@ -40,7 +40,8 @@ export function maxBy<T>(items: readonly T[], getValue: (element: T) => number):
   let maxElement = items[0];
   let max = -Infinity;
 
-  for (const element of items) {
+  for (let i = 0; i < items.length; i++) {
+    const element = items[i];
     const value = getValue(element);
     if (value > max) {
       max = value;
