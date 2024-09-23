@@ -25,4 +25,12 @@ function maxBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
 ```typescript
 maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 返回: { a: 3 }
 maxBy([], x => x.a); // 返回: undefined
+maxBy(
+  [
+    { name: 'john', age: 30 },
+    { name: 'jane', age: 28 },
+    { name: 'joe', age: 26 },
+  ],
+  x => x.age
+); // 返回: { name: 'john', age: 30 }
 ```
