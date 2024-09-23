@@ -17,7 +17,6 @@ export default [
       '**/*.d.ts',
       '**/*.tgz',
       'node_modules/**',
-      '**/*.vue',
     ],
   },
   {
@@ -33,6 +32,8 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
+        parser: tseslint.parser,
+        extraFileExtensions: ['.vue'],
       },
     },
   },
