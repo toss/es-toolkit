@@ -8,7 +8,7 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Check if the given value is a finite number.
 
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to number.
+This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
 
 ## Signature
 
