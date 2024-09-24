@@ -124,3 +124,6 @@ export { random } from './math/random.ts';
 
 export { toPath } from './util/toPath.ts';
 export { toString } from './util/toString.ts';
+export { toNumber } from './util/toNumber.ts';
+export { toInteger } from './util/toInteger.ts';
+export { toFinite } from './util/toFinite.ts';
