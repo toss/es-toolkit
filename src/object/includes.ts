@@ -2,7 +2,7 @@
  * Check if the object includes the target value using SameValueZero comparison.
  *
  * It only checks the given object's own enumerable string-keyed property values.
- * But, if `options.allowSymbolKeys` is set to `true`, it will also check the object's own enumerable symbol-keyed property values.
+ * But, if `options.allowSymbolKeyed` is set to `true`, it will also check the object's own enumerable symbol-keyed property values.
  *
  * @template T - The object type.
  * @param {T extends unknown[] ? never : T} object - The object to check. (Array is not allowed)
