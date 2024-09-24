@@ -15,7 +15,7 @@
  * const result = omit(obj, ['b', 'c']);
  * // result will be { a: 1 }
  */
-export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
+export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: readonly K[]): Omit<T, K> {
   const result = { ...obj };
 
   for (let i = 0; i < keys.length; i++) {
