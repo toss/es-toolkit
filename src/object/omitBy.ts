@@ -23,12 +23,12 @@ export function omitBy<T extends Record<string, any>>(
 ): Partial<T> {
   const result: Partial<T> = {};
 
-  for (const [key, value] of Object.entries(obj)) {
-    if (shouldOmit(value, key)) {
-      continue;
+  const objEntries = Object.entries(obj);
+  for (let i = 0; i < objEntries.length; i++) {
+    const [key, value] = objEntries[i];
+    if (!shouldOmit(value, key)) {
+      (result as any)[key] = value;
     }
-
-    (result as any)[key] = value;
   }
 
   return result;

@@ -1,26 +1,3 @@
-interface DebounceTimer {
-  /**
-   * Checks if the timer is active.
-   * @returns {boolean} True if the timer is active, otherwise false.
-   */
-  isActive: () => boolean;
-
-  /**
-   * Triggers the debounce timer.
-   * This method resets the timer and schedules the execution of the debounced function
-   * after the specified delay. If the timer is already active, it clears the existing timeout
-   * before setting a new one.
-   */
-  trigger: () => void;
-
-  /**
-   * Cancels any pending execution of the debounced function.
-   * This method clears the active timer, ensuring that the function will not be called
-   * at the end of the debounce period. It also resets any stored context or arguments.
-   */
-  cancel: () => void;
-}
-
 interface DebounceOptions {
   /**
    * An optional AbortSignal to cancel the debounced function.
@@ -158,6 +135,7 @@ export function debounce<F extends (...args: any[]) => void>(
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     pendingThis = this;
     pendingArgs = args;
 

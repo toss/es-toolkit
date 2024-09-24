@@ -94,7 +94,8 @@ export function pick<
 
   const result: any = {};
 
-  for (let keys of keysArr) {
+  for (let i = 0; i < keysArr.length; i++) {
+    let keys = keysArr[i];
     switch (typeof keys) {
       case 'object': {
         if (!Array.isArray(keys)) {

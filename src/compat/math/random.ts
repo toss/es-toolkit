@@ -68,9 +68,9 @@ export function random(minimum: number, maximum: number, floating?: boolean): nu
  * const result3 = random(5, 5); // If the minimum is equal to the maximum, an error is thrown.
  */
 export function random(...args: any[]): number {
-  let minimum: number = 0;
-  let maximum: number = 1;
-  let floating: boolean = false;
+  let minimum = 0;
+  let maximum = 1;
+  let floating = false;
 
   switch (args.length) {
     case 1: {
@@ -91,6 +91,7 @@ export function random(...args: any[]): number {
         maximum = args[1];
       }
     }
+    // eslint-disable-next-line no-fallthrough
     case 3: {
       if (typeof args[2] === 'object' && args[2] != null && args[2][args[1]] === args[0]) {
         minimum = 0;
