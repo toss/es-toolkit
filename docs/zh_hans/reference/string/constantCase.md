@@ -2,7 +2,7 @@
 
 Converts a string to constant case.
 
-Constant case is a naming convention where each word is written in uppercase letters and separated by an underscore (\_). Such as `CONSTANT_CASE`.
+Constant case is a naming convention where each word is written in uppercase letters and separated by an underscore (`_`). For example, `CONSTANT_CASE`.
 
 ## Signature
 
