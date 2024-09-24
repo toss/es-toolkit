@@ -15,7 +15,7 @@ describe('PascalCase', () => {
   });
 
   it('should handle leading and trailing whitespace', () => {
-    expect(pascalCase('    leading and trailing whitespace')).toEqual('LeadingAndTrailingWhitespace');
+    expect(pascalCase('    leading and trailing whitespace    ')).toEqual('LeadingAndTrailingWhitespace');
   });
 
   it('should handle special characters correctly', () => {

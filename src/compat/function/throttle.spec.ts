@@ -39,9 +39,8 @@ describe('throttle', () => {
     expect(results2[0]).not.toStrictEqual(undefined);
   });
 
-  it('should clear timeout when `func` is called', async done => {
+  it('should clear timeout when `func` is called', async () => {
     let callCount = 0;
-    let dateCount = 0;
 
     const throttled = throttle(() => {
       callCount++;
@@ -81,7 +80,7 @@ describe('throttle', () => {
         options
       );
 
-      const start = +new Date();
+      const start = Number(new Date());
       while (Date.now() - start < limit) {
         throttled();
       }
@@ -229,7 +228,7 @@ describe('throttle', () => {
     expect(callCount).toBe(isDebounce ? 1 : 2);
   });
 
-  it(`\`_.${methodName}\` should invoke \`func\` with the correct \`this\` binding`, async done => {
+  it(`\`_.${methodName}\` should invoke \`func\` with the correct \`this\` binding`, async () => {
     const actual: any[] = [];
     const object = {
       funced: func(function (this: any) {
@@ -250,8 +249,10 @@ describe('throttle', () => {
     const expected = args.slice();
     const queue: any[] = args.slice();
 
-    var funced = func(function (this: any, _: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const funced = func(function (this: any, _: unknown) {
       const current = [this];
+      // eslint-disable-next-line prefer-rest-params
       Array.prototype.push.apply(current, arguments as any);
       actual.push(current);
 

@@ -51,18 +51,17 @@ export function curry<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P1) => (p2: 
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {(p1: P1, p2: P2, p3: P3, p4: P4) => R} func - The function to curry.
- * @returns {(p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => R} A curried function.
+ * @param {(p1: P1, p2: P2, p3: P3) => R} func - The function to curry.
+ * @returns {(p1: P1) => (p2: P2) => (p3: P3) => R} A curried function.
  *
  * @example
- * function fourArgFunc(a: number, b: number, c: number, d: number) {
- *   return a + b + c + d;
+ * function threeArgFunc(a: number, b: number, c: number) {
+ *   return a + b + c;
  * }
- * const curriedFourArgFunc = curry(fourArgFunc);
- * const add1 = curriedFourArgFunc(1);
- * const add2 = add1(2);
- * const add3 = add2(3);
- * console.log(add3(4)); // 10
+ * const curriedThreeArgFunc = curry(threeArgFunc);
+ * const add1 = curriedThreeArgFunc(1);
+ * const add3 = add1(2);
+ * console.log(add3(3)); // 6
  */
 export function curry<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: P1) => (p2: P2) => (p3: P3) => R;
 
@@ -79,9 +78,9 @@ export function curry<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: 
  * }
  * const curriedFourArgFunc = curry(fourArgFunc);
  * const add1 = curriedFourArgFunc(1);
- * const add2 = add1(2);
- * const add3 = add2(3);
- * console.log(add3(4)); // 10
+ * const add3 = add1(2);
+ * const add6 = add3(3);
+ * console.log(add6(4)); // 10
  */
 export function curry<P1, P2, P3, P4, R>(
   func: (p1: P1, p2: P2, p3: P3, p4: P4) => R
@@ -100,10 +99,10 @@ export function curry<P1, P2, P3, P4, R>(
  * }
  * const curriedFiveArgFunc = curry(fiveArgFunc);
  * const add1 = curriedFiveArgFunc(1);
- * const add2 = add1(2);
- * const add3 = add2(3);
- * const add4 = add3(4);
- * console.log(add4(5)); // 15
+ * const add3 = add1(2);
+ * const add6 = add3(3);
+ * const add10 = add6(4);
+ * console.log(add10(5)); // 15
  */
 export function curry<P1, P2, P3, P4, P5, R>(
   func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
@@ -124,13 +123,13 @@ export function curry<P1, P2, P3, P4, P5, R>(
  * const curriedSum = curry(sum);
  *
  * // The parameter `a` should be given the value `10`.
- * const sum10 = curriedSum(10);
+ * const add10 = curriedSum(10);
  *
  * // The parameter `b` should be given the value `15`.
- * const sum25 = sum10(15);
+ * const add25 = add10(15);
  *
  * // The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
- * const result = sum25(5);
+ * const result = add25(5);
  */
 export function curry(func: (...args: any[]) => any): (...args: any[]) => any;
 
@@ -149,13 +148,13 @@ export function curry(func: (...args: any[]) => any): (...args: any[]) => any;
  * const curriedSum = curry(sum);
  *
  * // The parameter `a` should be given the value `10`.
- * const sum10 = curriedSum(10);
+ * const add10 = curriedSum(10);
  *
  * // The parameter `b` should be given the value `15`.
- * const sum25 = sum10(15);
+ * const add25 = add10(15);
  *
  * // The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
- * const result = sum25(5);
+ * const result = add25(5);
  */
 export function curry(func: (...args: any[]) => any): (...args: any[]) => any {
   if (func.length === 0 || func.length === 1) {

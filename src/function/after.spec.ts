@@ -2,14 +2,14 @@ import { describe, expect, it, vi } from 'vitest';
 import { after } from './after';
 
 describe('after', () => {
-  it('should throw error if n is less than zero.', async () => {
+  it('should throw error if n is less than zero.', () => {
     const mockFn = vi.fn();
     const n = -1;
     expect(() => after(n, mockFn)).toThrowErrorMatchingInlineSnapshot('[Error: n must be a non-negative integer.]');
     expect(() => after(NaN, mockFn)).toThrowErrorMatchingInlineSnapshot('[Error: n must be a non-negative integer.]');
   });
 
-  it('should create a function that invokes `func` only after being called `n` calls.`', async () => {
+  it('should create a function that invokes `func` only after being called `n` calls.`', () => {
     const mockFn = vi.fn();
     const n = 3;
 
@@ -26,7 +26,7 @@ describe('after', () => {
     expect(mockFn).toHaveBeenCalledTimes(2);
   });
 
-  it('should not invoke func immediately when n is zero.', async () => {
+  it('should not invoke func immediately when n is zero.', () => {
     const mockFn = vi.fn();
     const afterFn = after(0, mockFn);
     expect(mockFn).toHaveBeenCalledTimes(0);
@@ -35,7 +35,7 @@ describe('after', () => {
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  it('should handle arguments correctly.', async () => {
+  it('should handle arguments correctly.', () => {
     const mockFn = vi.fn();
     mockFn.mockReturnValue(3);
 
