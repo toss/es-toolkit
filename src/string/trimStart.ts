@@ -2,7 +2,7 @@
  * Removes leading whitespace or specified characters from a string.
  *
  * @param {string} str - The string from which leading characters will be trimmed.
- * @param {string | string[]} chars - The character(s) to remove from the end of the string.
+ * @param {string | string[]} chars - The character(s) to remove from the start of the string.
  * @returns {string} - The resulting string after the specified leading character has been removed.
  *
  * @example

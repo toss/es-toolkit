@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { endsWith as endsWithToolkit } from 'es-toolkit';
+import { endsWith as endsWithToolkit } from 'es-toolkit/compat';
 import { endsWith as endsWithLodash } from 'lodash';
 
 describe('endsWith', () => {

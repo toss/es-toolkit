@@ -78,6 +78,7 @@ export { isSymbol } from './predicate/isSymbol.ts';
 export { isObject } from './predicate/isObject.ts';
 export { isObjectLike } from './predicate/isObjectLike.ts';
 export { isBoolean } from './predicate/isBoolean.ts';
+export { isError } from './predicate/isError.ts';
 export { isFinite } from './predicate/isFinite.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
@@ -124,3 +125,6 @@ export { random } from './math/random.ts';
 
 export { toPath } from './util/toPath.ts';
 export { toString } from './util/toString.ts';
+export { toNumber } from './util/toNumber.ts';
+export { toInteger } from './util/toInteger.ts';
+export { toFinite } from './util/toFinite.ts';
