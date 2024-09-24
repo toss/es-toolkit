@@ -3,6 +3,7 @@ export { omitBy } from './omitBy.ts';
 export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
 export { invert } from './invert.ts';
+export { includes } from './includes.ts';
 export { clone } from './clone.ts';
 export { flattenObject } from './flattenObject.ts';
 export { mapKeys } from './mapKeys.ts';
