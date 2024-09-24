@@ -2,7 +2,7 @@
  * Checks if `value` is a finite number.
  *
  * @param {unknown} value The value to check.
- * @returns {value is number} Returns `true` if `value` is finite value, `false` otherwise.
+ * @returns {value is number} Returns `true` if `value` is a finite number, `false` otherwise.
  *
  * @example
  * ```typescript
