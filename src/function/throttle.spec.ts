@@ -3,7 +3,7 @@ import { throttle } from './throttle';
 import { delay } from '../promise';
 
 describe('throttle', () => {
-  it('should throttle function calls', async () => {
+  it('should throttle function calls', () => {
     const func = vi.fn();
     const throttledFunc = throttle(func, 100);
 
@@ -34,7 +34,7 @@ describe('throttle', () => {
     expect(func).toHaveBeenCalledTimes(2);
   });
 
-  it('should call the function with correct arguments', async () => {
+  it('should call the function with correct arguments', () => {
     const func = vi.fn();
     const throttleMs = 50;
     const throttledFunc = throttle(func, throttleMs);
