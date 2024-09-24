@@ -3,7 +3,7 @@ import { getWords } from './_internal/getWords.ts';
 /**
  * Converts a string to constant case.
  *
- * Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (_) character.
+ * Constant case is a naming convention where each word is written in uppercase letters and separated by an underscore (`_`). For example, `CONSTANT_CASE`.
  *
  * @param {string} str - The string that is to be changed to constant case.
  * @returns {string} - The converted string to constant case.
