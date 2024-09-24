@@ -11,7 +11,11 @@ function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   options?: DebounceOptions
-): ((...args: Parameters<F>) => void) & { cancel: () => void };
+): ((...args: Parameters<F>) => void) & {
+  cancel: () => void;
+  flush: () => void;
+  schedule: () => void;
+};
 ```
 
 ### パラメータ

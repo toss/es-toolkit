@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { ary as aryToolkit } from 'es-toolkit';
+import { ary as aryToolkit } from 'es-toolkit/compat';
 import { ary as aryLodash } from 'lodash';
 
 describe('ary', () => {

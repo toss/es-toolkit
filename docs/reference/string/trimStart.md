@@ -11,7 +11,7 @@ function trimStart(str: string, chars?: string | string[]): string;
 ### Parameters
 
 - `str` (`string`): The string from which leading characters will be trimmed.
-- `chars` (`string | string[]`): The character(s) to remove from the end of the string.
+- `chars` (`string | string[]`): The character(s) to remove from the start of the string.
 
 ### Returns
 
