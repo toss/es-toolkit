@@ -79,6 +79,7 @@ export { isObject } from './predicate/isObject.ts';
 export { isObjectLike } from './predicate/isObjectLike.ts';
 export { isBoolean } from './predicate/isBoolean.ts';
 export { isError } from './predicate/isError.ts';
+export { isFinite } from './predicate/isFinite.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
 export { isRegExp } from './predicate/isRegExp.ts';
