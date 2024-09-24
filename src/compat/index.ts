@@ -106,6 +106,7 @@ export { lowerCase } from './string/lowerCase.ts';
 export { upperCase } from './string/upperCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { endsWith } from './string/endsWith.ts';
+export { pad } from './string/pad.ts';
 export { padStart } from './string/padStart.ts';
 export { padEnd } from './string/padEnd.ts';
 export { repeat } from './string/repeat.ts';

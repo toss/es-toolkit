@@ -1,15 +1,15 @@
 import { bench, describe } from 'vitest';
-import { padEnd as padStartToolkit } from 'es-toolkit/compat';
-import { padEnd as padStartLodash } from 'lodash';
+import { padEnd as padEndToolkit } from 'es-toolkit/compat';
+import { padEnd as padEndLodash } from 'lodash';
 
 describe('padEnd', () => {
   bench('es-toolkit/padEnd', () => {
     const str = 'abc';
-    padStartToolkit(str, 6, '_-');
+    padEndToolkit(str, 6, '_-');
   });
 
   bench('lodash/padEnd', () => {
     const str = 'abc';
-    padStartLodash(str, 6, '_-');
+    padEndLodash(str, 6, '_-');
   });
 });
