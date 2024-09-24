@@ -26,10 +26,11 @@ export function includes<T extends object>(
 ): boolean {
   const keys = options.allowSymbolKeyed ? Reflect.ownKeys(object) : Object.keys(object);
 
+  // Not using `Object.values` because it always creates an array of all values.
   for (let i = 0; i < keys.length; i++) {
     const value = Reflect.get(object, keys[i]);
 
-    // SameValueZero comparison for early return
+    // This condition is the SameValueZero comparison.
     if (value === target || (Number.isNaN(value) && Number.isNaN(target))) {
       return true;
     }
