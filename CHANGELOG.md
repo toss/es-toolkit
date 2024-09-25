@@ -1,5 +1,18 @@
 # es-toolkit Changelog
 
+## Version v1.21.0
+
+Released on September 25th, 2024.
+
+- Added support for [constantCase](https://es-toolkit.slash.page/reference/string/constantCase.html) and [isError](https://es-toolkit.slash.page/reference/predicate/isError.html).
+- Added compatibility functions for [pad](https://es-toolkit.slash.page/reference/compat/string/pad.html), [padStart](https://es-toolkit.slash.page/reference/compat/string/padStart.html), [padEnd](https://es-toolkit.slash.page/reference/compat/string/padEnd.html), [defer](https://es-toolkit.slash.page/reference/compat/function/defer.html), [isFinite](https://es-toolkit.slash.page/reference/compat/predicate/isFinite.html), [toNumber](https://es-toolkit.slash.page/reference/compat/math/toNumber.html), [toFinite](https://es-toolkit.slash.page/reference/compat/math/toFinite.html), and [toInteger](https://es-toolkit.slash.page/reference/compat/math/toInteger.html).
+- Improved performance for [flatten](https://es-toolkit.slash.page/reference/array/flatten.html), [isNumber](https://es-toolkit.slash.page/reference/predicate/isNumber.html), [isString](https://es-toolkit.slash.page/reference/predicate/isString.html), [isSymbol](https://es-toolkit.slash.page/reference/predicate/isSymbol.html), [isRegExp](https://es-toolkit.slash.page/reference/predicate/isRegExp.html), and [isBoolean](https://es-toolkit.slash.page/reference/predicate/isBoolean.html).
+- Fixed [compact](https://es-toolkit.slash.page/reference/array/compact.html) to correctly exclude `0n` as a falsey value.
+- Fixed [pick](https://es-toolkit.slash.page/reference/object/pick.html) to not pick nonexistent keys from the original object.
+- Fixed [omit](https://es-toolkit.slash.page/reference/object/omit.html) to accept readonly arrays.
+
+This version includes contributions from @hyesungoh, @D-Sketon, @mass2527, @gweesin, @VVSOGI, @coding-honey, @seonghun0828, and @jsparkdev. Thank you for your valuable contributions!
+
 ## Version v1.20.0
 
 Released on September 20th, 2024.

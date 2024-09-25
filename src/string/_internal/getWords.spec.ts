@@ -63,4 +63,8 @@ describe('caseSplitPattern', () => {
   it('should work with numbers', () => {
     expect(getWords('foo2bar')).toEqual(['foo', '2', 'bar']);
   });
+
+  it('should match emojis', () => {
+    expect(getWords('camelCaseHTTPRequest🚀')).toEqual(['camel', 'Case', 'HTTP', 'Request', '🚀']);
+  });
 });
