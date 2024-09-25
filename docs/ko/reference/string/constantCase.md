@@ -1,24 +1,24 @@
 # constantCase
 
-Converts a string to constant case.
+문자열을 상수 케이스로 변환해요.
 
-Constant case is a naming convention where each word is written in uppercase letters and separated by an underscore (`_`). For example, `CONSTANT_CASE`.
+상수 케이스는 각 단어가 대문자로 쓰여지고 밑줄(`_`)로 구분되는 명명 규칙이에요. 예를 들어, `CONSTANT_CASE` 처럼 표기해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function constantCase(str: string): string;
 ```
 
-### Parameters
+### 파라미터
 
-- `str` (`string`): The string that is to be changed to constant case.
+- `str` (`string`): 상수 케이스로 변경할 문자열.
 
-### Returns
+### 반환 값
 
-(`string`): The converted string to constant case.
+(`string`): 상수 케이스로 변환된 문자열.
 
-## Examples
+## 예시
 
 ```typescript
 const convertedStr1 = constantCase('camelCase') // returns 'CAMEL_CASE'
