@@ -25,7 +25,7 @@ function castArray<T>(value?: T | readonly T[]): T[];
 ## 예시
 
 ```typescript
-import { castArray } from 'es-toolkit/array';
+import { castArray } from 'es-toolkit/compat';
 
 const arr1 = castArray(1);
 // [1]을 반환해요.
