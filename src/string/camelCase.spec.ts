@@ -33,4 +33,8 @@ describe('camelCase', () => {
   it('should work with screaming camel case', () => {
     expect(camelCase('FOO_BAR')).toEqual('fooBar');
   });
+
+  it('should support emojis', () => {
+    expect(camelCase('Keep unicode 😅')).toEqual('keepUnicode😅');
+  });
 });
