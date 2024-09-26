@@ -29,7 +29,7 @@ function startsWith(str: string, target: string, position: number = 0): string;
 ## Examples
 
 ```typescript
-import { startsWith } from 'es-toolkit/string';
+import { startsWith } from 'es-toolkit/compat';
 
 startsWith('fooBar', 'foo'); // returns true
 startsWith('fooBar', 'Bar'); // returns false

@@ -30,7 +30,7 @@ function isObject(value: unknown): value is object;
 ## Examples
 
 ```typescript
-import { isObject } from 'es-toolkit/predicate';
+import { isObject } from 'es-toolkit/compat';
 
 const value1 = {};
 const value2 = [1, 2, 3];
