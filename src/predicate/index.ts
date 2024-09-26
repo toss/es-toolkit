@@ -1,6 +1,7 @@
 export { isDate } from './isDate.ts';
 export { isEqual } from './isEqual.ts';
 export { isError } from './isError.ts';
+export { isMap } from './isMap.ts';
 export { isNil } from './isNil.ts';
 export { isNotNil } from './isNotNil.ts';
 export { isNull } from './isNull.ts';
