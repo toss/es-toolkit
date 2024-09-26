@@ -30,7 +30,7 @@ function isArrayLike(value: unknown): value is ArrayLike<unknown>;
 ## 示例
 
 ```typescript
-import { isArrayLike } from 'es-toolkit/predicate';
+import { isArrayLike } from 'es-toolkit/compat';
 
 console.log(isArrayLike([1, 2, 3])); // true
 console.log(isArrayLike('abc')); // true

@@ -40,7 +40,7 @@ namespace bindKey {
 ## 示例
 
 ```typescript
-import { bindKey } from 'es-toolkit/function';
+import { bindKey } from 'es-toolkit/compat';
 
 const object = {
   user: 'fred',

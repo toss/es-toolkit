@@ -30,7 +30,7 @@ function isArguments(value?: unknown): value is IArguments;
 ## 示例
 
 ```typescript
-import { isArguments } from 'es-toolkit/predicate';
+import { isArguments } from 'es-toolkit/compat';
 
 const args = (function () {
   return arguments;

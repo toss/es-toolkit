@@ -23,7 +23,7 @@ function rearg<F extends (...args: any[]) => any>(
 ## 示例
 
 ```typescript
-import { rearg } from 'es-toolkit/function';
+import { rearg } from 'es-toolkit/compat';
 
 const rearged = rearg(
   function (a, b, c) {
