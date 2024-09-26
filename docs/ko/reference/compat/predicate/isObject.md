@@ -29,7 +29,7 @@ function isObject(value: unknown): value is object;
 ## 예시
 
 ```typescript
-import { isObject } from 'es-toolkit/predicate';
+import { isObject } from 'es-toolkit/compat';
 
 const value1 = {};
 const value2 = [1, 2, 3];
