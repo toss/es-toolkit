@@ -7,7 +7,7 @@ describe('startCase', () => {
   it(`should convert \`string\``, () => {
     const actual = strings.map(string => startCase(string));
 
-    const expected = actual.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
+    const expected = strings.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
 
     expect(actual).toEqual(expected);
   });
@@ -15,7 +15,7 @@ describe('startCase', () => {
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => startCase(startCase(string)));
 
-    const expected = actual.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
+    const expected = strings.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
 
     expect(actual).toEqual(expected);
   });
@@ -41,5 +41,11 @@ describe('startCase', () => {
     const string = 'foo bar';
     expect(startCase(Object(string))).toBe('Foo Bar');
     expect(startCase({ toString: () => string })).toBe('Foo Bar');
+  });
+
+  it('should uppercase only the first character of each word', () => {
+    expect(startCase('--foo-bar--')).toBe('Foo Bar');
+    expect(startCase('fooBar')).toBe('Foo Bar');
+    expect(startCase('__FOO_BAR__')).toBe('FOO BAR');
   });
 });
