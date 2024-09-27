@@ -22,6 +22,7 @@ describe('includes (object)', () => {
     includesToolkitCompat(object, Infinity);
     includesToolkitCompat(object, Symbol('sym1'));
     includesToolkitCompat(object, -0);
+    includesToolkitCompat(object, 1, -1);
   });
 
   bench('lodash/includes', () => {
@@ -35,6 +36,7 @@ describe('includes (object)', () => {
     // @ts-expect-error
     includesLodash(object, Symbol('sym1'));
     includesLodash(object, -0);
+    includesLodash(object, 1, -1);
   });
 });
 
@@ -50,6 +52,7 @@ describe('includes (array)', () => {
     includesToolkitCompat(array, Infinity);
     includesToolkitCompat(array, Symbol('sym1'));
     includesToolkitCompat(array, -0);
+    includesToolkitCompat(array, 0, -1);
   });
 
   bench('lodash/includes', () => {
@@ -61,13 +64,14 @@ describe('includes (array)', () => {
     includesLodash(array, Infinity);
     includesLodash(array, Symbol('sym1'));
     includesLodash(array, -0);
+    includesLodash(array, 0, -1);
   });
 });
 
 describe('includes (string)', () => {
-  const string = 'abc';
+  const string = 'abcdefg';
 
-  bench('es-toolkit/includes', () => {
+  bench('es-toolkit/compat/includes', () => {
     includesToolkitCompat(string, 'bc');
     includesToolkitCompat(string, 'd');
   });
