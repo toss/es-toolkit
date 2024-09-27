@@ -41,7 +41,12 @@ export function includes<T>(
     return source.includes(target as any, safeIndex);
   }
 
-  const keys = Object.keys(source);
+  const keys = [];
+
+  // Not using `Object.keys` because it can't access inherited properties.
+  for (const key in source) {
+    keys.push(key);
+  }
 
   if (safeIndex < 0) {
     safeIndex = Math.max(0, keys.length + safeIndex);
