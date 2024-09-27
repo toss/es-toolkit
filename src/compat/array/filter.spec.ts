@@ -81,7 +81,7 @@ describe('filter', () => {
     ]);
   });
 
-  it(`test`, () => {
+  it(`filter should work when looking for values inside nested objects`, () => {
     const obj: Record<string, unknown> = {
       item1: { a: 0, b: { c: 1 } },
       item2: { a: 1, b: { c: 2 } },
