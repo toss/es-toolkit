@@ -28,19 +28,19 @@ describe('throttle', () => {
     throttledFunc(); // should be ignored
     expect(func).toHaveBeenCalledTimes(1);
 
-    await delay(throttleMs / 2);
+    await delay(throttleMs / 2 + 1);
     expect(func).toHaveBeenCalledTimes(1);
 
     throttledFunc(); // should be excuted
     expect(func).toHaveBeenCalledTimes(2);
 
-    await delay(throttleMs / 2);
+    await delay(throttleMs / 2 - 1);
     expect(func).toHaveBeenCalledTimes(2);
 
     throttledFunc(); // should be ignored
     expect(func).toHaveBeenCalledTimes(2);
 
-    await delay(throttleMs / 2);
+    await delay(throttleMs / 2 + 1);
     expect(func).toHaveBeenCalledTimes(2);
 
     throttledFunc(); // should be executed
