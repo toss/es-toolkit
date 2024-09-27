@@ -17,7 +17,7 @@ import { toInteger } from '../util/toInteger';
  * includes({ a: 1, b: 'a', c: NaN }, NaN); // true
  * includes({ [Symbol('sym1')]: 1 }, 1); // false
  */
-export function includes<T>(
+export function includes(
   source: readonly unknown[] | object | string | null | undefined,
   target?: unknown,
   fromIndex?: unknown,
