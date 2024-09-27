@@ -34,7 +34,12 @@ export function clone<T>(obj: T): T {
     return obj;
   }
 
-  if (Array.isArray(obj) || isTypedArray(obj) || obj instanceof ArrayBuffer || obj instanceof SharedArrayBuffer) {
+  if (
+    Array.isArray(obj) ||
+    isTypedArray(obj) ||
+    obj instanceof ArrayBuffer ||
+    (typeof SharedArrayBuffer !== 'undefined' && obj instanceof SharedArrayBuffer)
+  ) {
     return obj.slice(0) as T;
   }
 

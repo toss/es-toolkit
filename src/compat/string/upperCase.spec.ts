@@ -6,7 +6,7 @@ describe('upperCase', () => {
   it(`should convert \`string\``, () => {
     const actual = strings.map(string => upperCase(string));
 
-    const expected = actual.map(() => 'FOO BAR');
+    const expected = strings.map(() => 'FOO BAR');
 
     expect(actual).toEqual(expected);
   });
@@ -14,7 +14,7 @@ describe('upperCase', () => {
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => upperCase(upperCase(string)));
 
-    const expected = actual.map(() => 'FOO BAR');
+    const expected = strings.map(() => 'FOO BAR');
 
     expect(actual).toEqual(expected);
   });
