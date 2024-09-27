@@ -166,7 +166,7 @@
   "scripts": {
     "prepack": "yarn build",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
-    "test": "vitest run --coverage --typecheck",
+    "test": "vitest --coverage --typecheck",
     "bench": "vitest bench",
     "lint": "eslint --config eslint.config.mjs",
     "format": "prettier --write .",
