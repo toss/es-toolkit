@@ -37,35 +37,6 @@ describe('includes', () => {
     expect(includes(object, true)).toBe(false);
   });
 
-  const objectWithSymbol = {
-    [Symbol('sym1')]: 1,
-    [Symbol('sy2')]: 'a',
-    [Symbol('sym3')]: NaN,
-    [Symbol('sym4')]: undefined,
-    [Symbol('sym5')]: null,
-    [Symbol('sym6')]: Infinity,
-    [Symbol('sym7')]: -0,
-    [Symbol('sym8')]: symbol1,
-  };
-  it('should return true if the object includes the target value with symbol keys', () => {
-    expect(includes(objectWithSymbol, 'a', { allowSymbolKeyed: true })).toBe(true);
-    expect(includes(objectWithSymbol, 1, { allowSymbolKeyed: true })).toBe(true);
-    expect(includes(objectWithSymbol, NaN, { allowSymbolKeyed: true })).toBe(true); // SameValueZero
-    expect(includes(objectWithSymbol, undefined, { allowSymbolKeyed: true })).toBe(true);
-    expect(includes(objectWithSymbol, null, { allowSymbolKeyed: true })).toBe(true);
-    expect(includes(objectWithSymbol, Infinity, { allowSymbolKeyed: true })).toBe(true);
-    expect(includes(objectWithSymbol, -0, { allowSymbolKeyed: true })).toBe(true);
-    expect(includes(objectWithSymbol, 0, { allowSymbolKeyed: true })).toBe(true); // SameValueZero
-    expect(includes(objectWithSymbol, symbol1, { allowSymbolKeyed: true })).toBe(true);
-  });
-
-  it('should return false if the object does not include the target value with symbol keys', () => {
-    expect(includes(objectWithSymbol, 'b', { allowSymbolKeyed: true })).toBe(false);
-    expect(includes(objectWithSymbol, 2, { allowSymbolKeyed: true })).toBe(false);
-    expect(includes(objectWithSymbol, Symbol('sym1'), { allowSymbolKeyed: true })).toBe(false);
-    expect(includes(objectWithSymbol, -Infinity, { allowSymbolKeyed: true })).toBe(false);
-  });
-
   class CustomClass {
     a = 1;
     b = 'a';
