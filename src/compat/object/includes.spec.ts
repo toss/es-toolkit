@@ -95,6 +95,7 @@ describe('includes', () => {
   Object.entries({
     'an `arguments` object': args,
     'an array': [1, 2, 3],
+    'a string': '123',
   }).forEach(([key, collection]) => {
     const values = Array.from(collection);
 

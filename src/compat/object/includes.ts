@@ -29,16 +29,20 @@ export function includes<T>(
 
   let safeIndex = fromIndex && !guard ? toInteger(fromIndex) : 0;
 
-  if (isString(source) || Array.isArray(source)) {
+  if (isString(source)) {
+    if (safeIndex > source.length || target instanceof RegExp) {
+      return false;
+    }
+
     if (safeIndex < 0) {
       safeIndex = Math.max(0, source.length + safeIndex);
     }
 
-    if (isString(source) && (safeIndex > source.length || target instanceof RegExp)) {
-      return false;
-    }
-
     return source.includes(target as any, safeIndex);
+  }
+
+  if (Array.isArray(source)) {
+    return source.includes(target, safeIndex);
   }
 
   const keys = [];
@@ -52,7 +56,6 @@ export function includes<T>(
     safeIndex = Math.max(0, keys.length + safeIndex);
   }
 
-  // Not using `Object.values` because it always creates an array of all values.
   for (let i = safeIndex; i < keys.length; i++) {
     const value = Reflect.get(source, keys[i]);
 
