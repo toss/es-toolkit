@@ -1,4 +1,4 @@
-import { orderBy } from './orderBy';
+import { orderBy } from './orderBy.ts';
 
 /**
  * Sorts an array of objects based on the given `criteria`.
@@ -32,6 +32,6 @@ import { orderBy } from './orderBy';
  * //   { user : 'foo', age: 24 },
  * // ]
  */
-export function sortBy<T extends object>(arr: T[], criteria: Array<((item: T) => unknown) | keyof T>): T[] {
+export function sortBy<T extends object>(arr: readonly T[], criteria: Array<((item: T) => unknown) | keyof T>): T[] {
   return orderBy(arr, criteria, ['asc']);
 }

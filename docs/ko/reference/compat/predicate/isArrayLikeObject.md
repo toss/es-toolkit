@@ -22,7 +22,7 @@ function isArrayLikeObject(value: unknown): value is ArrayLike<unknown> & object
 
 ### 파라미터
 
--`value` (`unknown`): 원시값이 아닌 유사 배열 객체인지 확인할 값이에요.
+- `value` (`unknown`): 원시값이 아닌 유사 배열 객체인지 확인할 값이에요.
 
 ### 반환 값
 
@@ -31,7 +31,7 @@ function isArrayLikeObject(value: unknown): value is ArrayLike<unknown> & object
 ## 예시
 
 ```typescript
-import { isArrayLikeObject } from 'es-toolkit/predicate';
+import { isArrayLikeObject } from 'es-toolkit/compat';
 
 console.log(isArrayLikeObject([1, 2, 3])); // true
 console.log(isArrayLikeObject({ 0: 'a', length: 1 })); // true

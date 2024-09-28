@@ -25,7 +25,7 @@ npm install es-toolkit
 ```
 
 ```sh [pnpm]
-pnpm install es-toolkit
+pnpm add es-toolkit
 ```
 
 ```sh [yarn]

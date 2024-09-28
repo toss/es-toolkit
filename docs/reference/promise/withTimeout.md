@@ -25,9 +25,15 @@ function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
 ### Basic Usage
 
 ```typescript
+async function fetchData() {
+  const response = await fetch('https://example.com/data');
+  return response.json();
+}
+
 try {
-  await withTimeout(() => new Promise(() => {}), 1000); // Timeout exception after 1 second
+  const data = await withTimeout(fetchData, 1000);
+  console.log(data); // Logs the fetched data if `fetchData` is resolved within 1 second.
 } catch (error) {
-  console.error(error); // Will log 'The operation was timed out'
+  console.error(error); // Will log 'TimeoutError' if `fetchData` is not resolved within 1 second.
 }
 ```

@@ -14,14 +14,14 @@
 function isMatch(target: unknown, source: unknown): boolean;
 ```
 
-## 파라미터
+### 파라미터
 
 - `target` (`unknown`): 모양과 값이 일치하는지 확인할 값.
 - `source` (`unknown`): 확인할 모양과 값을 가진 객체.
 
-## 반환 값
+### 반환 값
 
-- (`boolean`): `target`이 `source`의 모양 및 값과 일치하면 `true`. 아니면 `false`.
+(`boolean`): `target`이 `source`의 모양 및 값과 일치하면 `true`. 아니면 `false`.
 
 ## 예시
 

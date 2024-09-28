@@ -1,3 +1,5 @@
+import { toString } from '../util/toString.ts';
+
 /**
  * Pads the end of a string with a given character until it reaches the specified length.
  *
@@ -17,5 +19,5 @@
  */
 
 export function padEnd(str: string, length = 0, chars = ' '): string {
-  return str.padEnd(length, chars);
+  return toString(str).padEnd(length, chars);
 }

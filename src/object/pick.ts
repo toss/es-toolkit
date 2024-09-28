@@ -15,11 +15,15 @@
  * const result = pick(obj, ['a', 'c']);
  * // result will be { a: 1, c: 3 }
  */
-export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
+export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: readonly K[]): Pick<T, K> {
   const result = {} as Pick<T, K>;
 
-  for (const key of keys) {
-    result[key] = obj[key];
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      result[key] = obj[key];
+    }
   }
 
   return result;

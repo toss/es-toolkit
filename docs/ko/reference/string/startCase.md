@@ -25,8 +25,8 @@ import { startCase } from 'es-toolkit/string';
 
 startCase('--foo-bar--'); // returns 'Foo Bar'
 startCase('fooBar'); // returns 'Foo Bar'
-startCase('__FOO_BAR__'); // returns 'FOO BAR'
-startCase('XMLHttpRequest'); // returns 'XML Http Request'
+startCase('__FOO_BAR__'); // returns 'Foo Bar'
+startCase('XMLHttpRequest'); // returns 'Xml Http Request'
 startCase('_abc_123_def'); // returns 'Abc 123 Def'
 startCase('__abc__123__def__'); // returns 'Abc 123 Def'
 startCase('_-_-_-_'); // returns ''

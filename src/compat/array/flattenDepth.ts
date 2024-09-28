@@ -17,7 +17,7 @@ import { flatten } from './flatten.ts';
  * // Returns: [1, 2, 3, 4, 5, 6]
  */
 export function flattenDepth<T, D extends number = 1>(
-  value: T[] | object,
+  value: readonly T[] | object,
   depth = 1 as D
 ): Array<FlatArray<T[], D>> | [] {
   return flatten(value, depth);

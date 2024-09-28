@@ -16,15 +16,13 @@ import { getWords } from './_internal/getWords.ts';
 export function startCase(str: string): string {
   const words = getWords(str.trim());
   let result = '';
-  for (const word of words) {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
     if (result) {
       result += ' ';
     }
-    if (word === word.toUpperCase()) {
-      result += word;
-    } else {
-      result += word[0].toUpperCase() + word.slice(1).toLowerCase();
-    }
+
+    result += word[0].toUpperCase() + word.slice(1).toLowerCase();
   }
   return result;
 }

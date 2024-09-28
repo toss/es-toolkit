@@ -24,9 +24,15 @@ function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
 ### 基本的な使用法
 
 ```typescript
+async function fetchData() {
+  const response = await fetch('https://example.com/data');
+  return response.json();
+}
+
 try {
-  await withTimeout(() => new Promise(() => {}), 1000); // コードの最大時間を1秒に設定
+  const data = await withTimeout(fetchData, 1000);
+  console.log(data); // `fetchData` が1秒以内に解決されれば、取得したデータをログに出力します。
 } catch (error) {
-  console.error(error); // 'The operation was timed out'がログに記録される
+  console.error(error); // `fetchData` が1秒以内に解決されなければ、'TimeoutError' をログに出力します。
 }
 ```

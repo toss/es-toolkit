@@ -1,6 +1,6 @@
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { isIndex } from '../_internal/isIndex.ts';
-import { toPath } from '../_internal/toPath.ts';
+import { toPath } from '../util/toPath.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 
 /**

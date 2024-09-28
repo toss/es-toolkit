@@ -17,7 +17,7 @@ function union<T>(arr1: T[], arr2: T[]): T[];
 
 (`T[]`): 합쳐지고 중복된 값이 제거된 새 배열.
 
-## 예제
+## 예시
 
 ```typescript
 const array1 = [1, 2, 3];

@@ -14,14 +14,14 @@
 function isMatch(target: unknown, source: unknown): boolean;
 ```
 
-## パラメータ
+### パラメータ
 
 - `target` (`unknown`): 形状と値が一致するかどうかを確認する値。
 - `source` (`unknown`): 確認する形状と値を持つオブジェクト。
 
-## 戻り値
+### 戻り値
 
-- (`boolean`): `target` が `source` の形状と値に一致する場合は `true`。そうでない場合は `false`。
+(`boolean`): `target` が `source` の形状と値に一致する場合は `true`。そうでない場合は `false`。
 
 ## 例
 

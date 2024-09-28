@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
 import { stubTrue } from '../_internal/stubTrue';
-import { isMatch } from './isMatch';
+import { isArrayMatch, isMapMatch, isMatch, isSetMatch } from './isMatch';
 
 describe('isMatch', () => {
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {
@@ -225,7 +225,13 @@ describe('isMatch', () => {
 
     expect(actual2).toEqual(expected2);
 
-    const objects3 = [{ a: { b: 2 } }, { a: { b: 2, c: 3 } }, { a: { b: 2, c: undefined } }];
+    const objects3 = [
+      { a: { b: 2 } },
+      { a: { b: 2, c: 3 } },
+      {
+        a: { b: 2, c: undefined },
+      },
+    ];
     const actual3 = objects3.map(x => isMatch(x, { a: { c: undefined } }));
     const expected3 = [false, false, true];
 
@@ -322,5 +328,146 @@ describe('isMatch', () => {
     const actual = objects.filter(x => isMatch(x, { a: [], b: {} }));
 
     expect(actual).toEqual(objects);
+  });
+});
+
+describe('isMapMatch', () => {
+  it('can match maps', () => {
+    expect(
+      isMapMatch(
+        new Map([
+          ['a', 1],
+          ['b', 2],
+        ]),
+        new Map([
+          ['a', 1],
+          ['b', 2],
+        ])
+      )
+    ).toBe(true);
+
+    expect(
+      isMapMatch(
+        new Map([
+          ['a', 1],
+          ['b', 2],
+          ['c', 3],
+        ]),
+        new Map([
+          ['a', 1],
+          ['b', 2],
+        ])
+      )
+    ).toBe(true);
+
+    expect(
+      isMapMatch(
+        new Map([['b', 2]]),
+        new Map([
+          ['a', 1],
+          ['b', 2],
+        ])
+      )
+    ).toBe(false);
+
+    expect(
+      isMapMatch(
+        new Map([
+          ['a', 2],
+          ['b', 2],
+        ]),
+        new Map([
+          ['a', 1],
+          ['b', 2],
+        ])
+      )
+    ).toBe(false);
+  });
+
+  it('returns true if source is empty', () => {
+    const map = new Map();
+
+    expect(
+      isMapMatch(
+        new Map([
+          ['a', 2],
+          ['b', 2],
+        ]),
+        map
+      )
+    ).toBe(true);
+    expect(isMapMatch(1, map)).toBe(true);
+    expect(isMapMatch('a', map)).toBe(true);
+    expect(isMapMatch(new Set(), map)).toBe(true);
+    expect(isMapMatch([1, 2, 3], map)).toBe(true);
+    expect(isMapMatch({ a: 1, b: 2 }, map)).toBe(true);
+  });
+
+  it('returns false if source is not empty and targets that are not maps', () => {
+    const map = new Map([
+      ['a', 1],
+      ['b', 2],
+    ]);
+
+    expect(isMapMatch(1, map)).toBe(false);
+    expect(isMapMatch('a', map)).toBe(false);
+    expect(isMapMatch(new Set(), map)).toBe(false);
+    expect(isMapMatch([1, 2, 3], map)).toBe(false);
+    expect(isMapMatch({ a: 1, b: 2 }, map)).toBe(false);
+  });
+});
+
+describe('isArrayMatch', () => {
+  it('can match arrays', () => {
+    expect(isArrayMatch([1, 2, 3], [2, 3])).toBe(true);
+    expect(isArrayMatch([1, 2, 3, 4, 5], [1, 3, 5])).toBe(true);
+    expect(isArrayMatch([1, 2, 3, 4, 5], [0, 1])).toBe(false);
+  });
+
+  it('can match arrays with duplicated values', () => {
+    expect(isArrayMatch([2, 2], [2, 2])).toEqual(true);
+    expect(isArrayMatch([1, 2], [2, 2])).toEqual(false);
+  });
+
+  it('returns true if source is empty', () => {
+    expect(isArrayMatch([1, 2, 3], [])).toBe(true);
+    expect(isArrayMatch(1, [])).toBe(true);
+    expect(isArrayMatch(new Map(), [])).toBe(true);
+    expect(isArrayMatch(new Set(), [])).toBe(true);
+  });
+
+  it('can match non-arrays', () => {
+    expect(isArrayMatch(1, [2, 3])).toBe(false);
+    expect(isArrayMatch(new Map(), [2, 3])).toBe(false);
+    expect(isArrayMatch(new Set(), [2, 3])).toBe(false);
+  });
+});
+
+describe('isSetMatch', () => {
+  it('can match sets', () => {
+    expect(isSetMatch(new Set([1, 2, 3]), new Set([1, 2, 3]))).toBe(true);
+    expect(isSetMatch(new Set([1, 2, 3]), new Set([1, 2]))).toBe(true);
+    expect(isSetMatch(new Set([1, 2]), new Set([1, 2, 3]))).toBe(false);
+  });
+
+  it('returns true if source is empty', () => {
+    const set = new Set();
+
+    expect(isSetMatch(new Set([1, 2, 3]), set)).toBe(true);
+    expect(isSetMatch(1, set)).toBe(true);
+    expect(isSetMatch('a', set)).toBe(true);
+    expect(isSetMatch(new Set(), set)).toBe(true);
+    expect(isSetMatch([1, 2, 3], set)).toBe(true);
+    expect(isSetMatch({ a: 1, b: 2 }, set)).toBe(true);
+  });
+
+  it('returns false if source is not empty and target is not a map', () => {
+    const set = new Set([1, 2, 3]);
+
+    expect(isSetMatch(1, set)).toBe(false);
+    expect(isSetMatch('a', set)).toBe(false);
+    expect(isSetMatch(new Set(), set)).toBe(false);
+    expect(isSetMatch([1, 2, 3], set)).toBe(false);
+    expect(isSetMatch({ a: 1, b: 2 }, set)).toBe(false);
   });
 });

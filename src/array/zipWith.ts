@@ -105,12 +105,12 @@ export function zipWith<T, R>(arr1: readonly T[], ...rest: any[]): R[] {
   const arrs = [arr1, ...rest.slice(0, -1)];
   const combine = rest[rest.length - 1] as (...items: T[]) => R;
 
-  const result: R[] = [];
   const maxIndex = Math.max(...arrs.map(arr => arr.length));
+  const result: R[] = Array(maxIndex);
 
   for (let i = 0; i < maxIndex; i++) {
     const elements: T[] = arrs.map(arr => arr[i]);
-    result.push(combine(...elements));
+    result[i] = combine(...elements);
   }
 
   return result;

@@ -26,3 +26,15 @@ const obj = { a: 1, b: 2, c: 3 };
 const result = pick(obj, ['a', 'c']);
 // 結果は次のようになります { a: 1, c: 3 }
 ```
+
+## Lodashとの互換性
+
+`es-toolkit/compat`から`pick`関数をインポートすると、深いパスを選択することができます。
+
+```typescript
+import { pick } from 'es-toolkit/compat';
+
+const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
+const result = pick(obj, ['a.b.c', 'f.g']);
+// 結果は次のようになります { a: { b: { c: 1 } }, 'f.g': 4 }
+```

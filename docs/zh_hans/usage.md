@@ -25,7 +25,7 @@ npm install es-toolkit
 ```
 
 ```sh [pnpm]
-pnpm install es-toolkit
+pnpm add es-toolkit
 ```
 
 ```sh [yarn]
@@ -60,7 +60,7 @@ bun add es-toolkit
 
 ## 浏览器
 
-你可以在诸如[jsdelivr](https://www.jsdelivr.com)或[unpkg](https://unpkg.com)等CDN上找到es-toolkit。我们将 `_` 定义为包含所有函数，类似于 Lodash。
+你可以在诸如 [jsdelivr](https://www.jsdelivr.com) 或 [unpkg](https://unpkg.com) 等CDN上找到 es-toolkit。我们将 `_` 定义为包含所有函数，类似于 Lodash。
 
 ::: code-group
 
@@ -80,7 +80,7 @@ bun add es-toolkit
 
 :::
 
-es-toolkit 也可在 [esm.sh](https://esm.sh) 上为现代浏览器提供。
+es-toolkit 也可在 [esm.sh](https://esm.sh) 上用于现代浏览器。
 
 ::: code-group
 

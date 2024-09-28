@@ -19,7 +19,7 @@ function without<T>(array: T[], ...values: T[]): T[];
 
 (`T[]`) 주어진 값을 제외한 새 배열.
 
-## Examples
+## 예시
 
 ```typescript
 import { without } from 'es-toolkit/array';

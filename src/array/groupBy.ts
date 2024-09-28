@@ -31,9 +31,10 @@
  * // }
  */
 export function groupBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T[]> {
-  const result = {} as Record<K, T[]>;
+  const result = Object.create(null) as Record<K, T[]>;
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
     const key = getKeyFromItem(item);
 
     if (result[key] == null) {
