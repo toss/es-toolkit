@@ -58,6 +58,7 @@ export { rearg } from './function/rearg.ts';
 export { curry } from './function/curry.ts';
 export { debounce } from './function/debounce.ts';
 export { throttle } from './function/throttle.ts';
+export { flip } from './function/flip.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';
