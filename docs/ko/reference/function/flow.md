@@ -1,10 +1,10 @@
 # flow
 
-Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+주어진 함수들을 연속해서 실행하는 새로운 함수를 만들어요. 이전 함수의 결괏값은 다음 함수의 인자로 주어져요.
 
-The `this` context of the returned function is also passed to the functions provided as parameters.
+반환된 함수에게 주어진 `this`는 파라미터로 주어진 함수들에게도 전달돼요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function flow<R>(f: () => R): () => R;
@@ -31,20 +31,20 @@ function flow<A extends any[], R1, R2, R3, R4, R5>(
 function flow(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
 ```
 
-### Parameters
+### 파라미터
 
-- `funcs` (`Array<(...args: any[]) => any>`): The functions to invoke.
+- `funcs` (`Array<(...args: any[]) => any>`): 호출할 함수들.
 
-### Returns
+### 반환 값
 
-(`(...args: any[]) => any`): The new composite function.
+(`(...args: any[]) => any`): 주어진 함수들을 연속해서 실행하는 새로운 함수.
 
-## Examples
+## 예시
 
 ```typescript
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 
 const combined = flow(add, square);
-console.log(combined(1, 2)); // => 9
+console.log(combined(1, 2)); // 9
 ```

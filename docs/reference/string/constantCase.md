@@ -21,8 +21,8 @@ function constantCase(str: string): string;
 ## Examples
 
 ```typescript
-const convertedStr1 = constantCase('camelCase') // returns 'CAMEL_CASE'
-const convertedStr2 = constantCase('some whitespace') // returns 'SOME_WHITESPACE'
-const convertedStr3 = constantCase('hyphen-text') // returns 'HYPHEN_TEXT'
-const convertedStr4 = constantCase('HTTPRequest') // returns 'HTTP_REQUEST'
+const convertedStr1 = constantCase('camelCase'); // returns 'CAMEL_CASE'
+const convertedStr2 = constantCase('some whitespace'); // returns 'SOME_WHITESPACE'
+const convertedStr3 = constantCase('hyphen-text'); // returns 'HYPHEN_TEXT'
+const convertedStr4 = constantCase('HTTPRequest'); // returns 'HTTP_REQUEST'
 ```

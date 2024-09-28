@@ -26,7 +26,7 @@ function defer<F extends (...args: any[]) => any>(func: F, ...args: Parameters<F
 ## 예시
 
 ```typescript
-defer((text) => {
+defer(text => {
   console.log(text);
 }, 'deferred');
 // => Logs 'deferred' after the current call stack has cleared.

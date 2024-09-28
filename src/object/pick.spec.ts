@@ -31,5 +31,5 @@ describe('pick', () => {
     const result = pick(obj, ['a']);
 
     expect(Reflect.ownKeys(result)).toEqual([]);
-  })
+  });
 });

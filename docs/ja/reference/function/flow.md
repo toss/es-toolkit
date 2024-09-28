@@ -1,10 +1,10 @@
 # flow
 
-Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+与えられた関数を順番に実行する新しい関数を作成します。前の関数の戻り値は次の関数への引数として渡されます。
 
-The `this` context of the returned function is also passed to the functions provided as parameters.
+返された関数の `this` コンテキストも、パラメータとして提供された関数に渡されます。
 
-## Signature
+## インターフェース
 
 ```typescript
 function flow<R>(f: () => R): () => R;
@@ -31,20 +31,20 @@ function flow<A extends any[], R1, R2, R3, R4, R5>(
 function flow(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
 ```
 
-### Parameters
+### パラメータ
 
-- `funcs` (`Array<(...args: any[]) => any>`): The functions to invoke.
+- `funcs` (`Array<(...args: any[]) => any>`): 呼び出す関数。
 
-### Returns
+### 戻り値
 
-(`(...args: any[]) => any`): The new composite function.
+(`(...args: any[]) => any`): 新しい合成関数。
 
-## Examples
+## 例
 
 ```typescript
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 
 const combined = flow(add, square);
-console.log(combined(1, 2)); // => 9
+console.log(combined(1, 2)); // 9
 ```
