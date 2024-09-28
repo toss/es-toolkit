@@ -141,7 +141,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
   }
 
   if (obj instanceof DataView) {
-    const result = new DataView(obj.buffer.slice(0));
+    const result = new DataView(obj.buffer.slice(0), obj.byteOffset, obj.byteLength);
     stack.set(obj, result);
 
     copyProperties(result, obj, stack);
