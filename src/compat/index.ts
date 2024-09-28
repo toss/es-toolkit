@@ -38,6 +38,7 @@ export { findLastIndex } from './array/findLastIndex.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
+export { includes } from './array/includes.ts';
 export { indexOf } from './array/indexOf.ts';
 export { join } from './array/join.ts';
 export { orderBy } from './array/orderBy.ts';
@@ -74,7 +75,6 @@ export { mergeWith } from './object/mergeWith.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { unset } from './object/unset.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
-export { includes } from './object/includes.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
