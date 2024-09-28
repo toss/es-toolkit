@@ -21,20 +21,35 @@ function spread<F extends (...args: any[]) => any>(func: F): (argsArr: Parameter
 ```typescript
 import { spread } from 'es-toolkit/function';
 
-const say = spread(function (who, what) {
-  return who + ' says ' + what;
-});
+function add(a, b) {
+  return a + b;
+}
+const spreadAdd = spread(add);
+console.log(spreadAdd([1, 2])); // Output: 3
 
-say(['fred', 'hello']);
-// => 'fred says hello'
+// Example function to spread arguments over
+// Create a new function that uses `spread` to combine arguments
+const spreadAdd = spread(add, 1);
+// Calling `spreadAdd` with an array as the second argument
+console.log(spreadAdd(1, [2])); // Output: 3
+
+// Function with default arguments
+function greet(name, greeting = 'Hello') {
+  return `${greeting}, ${name}!`;
+}
+// Create a new function that uses `spread` to position the argument array at index 0
+const spreadGreet = spread(greet, 0);
+// Calling `spreadGreet` with an array of arguments
+console.log(spreadGreet(['Alice'])); // Output: Hello, Alice!
+console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
 ```
 
-## Lodash 호환성
+## Lodash와의 호환성
 
 `es-toolkit/compat`에서 `spread`를 가져오면 lodash와 호환돼요.
 
 - `spread`는 `argsIndex`라고 하는 숫자 인자를 추가로 받아요. 이 인자는 펼칠 인자 배열이 주어진 인덱스를 나타내요.
-  - 만약 `argsIndex`이 음수이거나 `NaN`이라면, 기본값 `0`으로 취급돼요. 소수라면, 가까운 정수로 반올림돼요.
+  - 만약 `argsIndex`이 음수이거나 `NaN`이라면, 기본값 `0`으로 취급돼요. 소수라면, 가까운 정수로 내림해요.
 
 ```typescript
 import { spread } from 'es-toolkit/compat';

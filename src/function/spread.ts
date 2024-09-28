@@ -1,5 +1,5 @@
 /**
-Creates a new function that spreads elements of an array argument into individual arguments
+ * Creates a new function that spreads elements of an array argument into individual arguments
  * for the original function.
  *
  * @template F - A function type with any number of parameters and any return type.

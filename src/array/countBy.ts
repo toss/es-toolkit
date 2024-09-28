@@ -14,11 +14,22 @@
  * @param {(item: T) => K} mapper - The transformation function that maps each item to a key.
  * @returns {Record<K, number>} An object containing the transformed items as keys and the
  * counts as values.
+ *
+ * @example
+ * const array = ['a', 'b', 'c', 'a', 'b', 'a'];
+ * const result = countBy(array, x => x);
+ * // result will be { a: 3, b: 2, c: 1 }
+ *
+ * @example
+ * const array = [1, 2, 3, 4, 5];
+ * const result = countBy(array, item => item % 2 === 0 ? 'even' : 'odd');
+ * // result will be { odd: 3, even: 2 }
  */
 export function countBy<T, K extends PropertyKey>(arr: readonly T[], mapper: (item: T) => K): Record<K, number> {
   const result = {} as Record<K, number>;
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
     const key = mapper(item);
 
     result[key] = (result[key] ?? 0) + 1;

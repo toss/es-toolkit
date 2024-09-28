@@ -24,9 +24,15 @@ function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T>;
 ### 기본 사용법
 
 ```typescript
+async function fetchData() {
+  const response = await fetch('https://example.com/data');
+  return response.json();
+}
+
 try {
-  await withTimeout(() => new Promise(() => {}), 1000); // 코드 최대 시간을 1초로 지정
+  const data = await withTimeout(fetchData, 1000);
+  console.log(data); // `fetchData`가 1초 이내에 완료되면 가져온 데이터를 로깅해요.
 } catch (error) {
-  console.error(error); // 'The operation was timed out' 로깅
+  console.error(error); // `fetchData`가 1초 이내에 완료되지 않으면 'TimeoutError'를 로깅해요.
 }
 ```

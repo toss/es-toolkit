@@ -2,12 +2,12 @@ import { describe, expect, it, vi } from 'vitest';
 import { before } from './before';
 
 describe('before', () => {
-  it('should throw error if n is less than zero.', async () => {
+  it('should throw error if n is less than zero.', () => {
     const mockFn = vi.fn();
     expect(() => before(-1, mockFn)).toThrowErrorMatchingInlineSnapshot('[Error: n must be a non-negative integer.]');
   });
 
-  it('should create a function that invokes `func` only until the `n-1`-th calls.', async () => {
+  it('should create a function that invokes `func` only until the `n-1`-th calls.', () => {
     const mockFn = vi.fn();
     mockFn.mockReturnValue(1);
     const n = 3;
@@ -21,7 +21,7 @@ describe('before', () => {
     expect(beforeFn()).toBeUndefined();
   });
 
-  it('should not invoke func immediately when n is a positive integer', async () => {
+  it('should not invoke func immediately when n is a positive integer', () => {
     const mockFn = vi.fn();
     mockFn.mockReturnValue(1);
     const n = 3;
@@ -32,7 +32,7 @@ describe('before', () => {
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  it('should handle arguments correctly', async () => {
+  it('should handle arguments correctly', () => {
     const mockFn = vi.fn();
     mockFn.mockReturnValue(3);
     const n = 3;

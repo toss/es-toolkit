@@ -21,12 +21,27 @@ function spread<F extends (...args: any[]) => any>(func: F): (argsArr: Parameter
 ```typescript
 import { spread } from 'es-toolkit/function';
 
-const say = spread(function (who, what) {
-  return who + ' says ' + what;
-});
+function add(a, b) {
+  return a + b;
+}
+const spreadAdd = spread(add);
+console.log(spreadAdd([1, 2])); // Output: 3
 
-say(['fred', 'hello']);
-// => 'fred says hello'
+// Example function to spread arguments over
+// Create a new function that uses `spread` to combine arguments
+const spreadAdd = spread(add, 1);
+// Calling `spreadAdd` with an array as the second argument
+console.log(spreadAdd(1, [2])); // Output: 3
+
+// Function with default arguments
+function greet(name, greeting = 'Hello') {
+  return `${greeting}, ${name}!`;
+}
+// Create a new function that uses `spread` to position the argument array at index 0
+const spreadGreet = spread(greet, 0);
+// Calling `spreadGreet` with an array of arguments
+console.log(spreadGreet(['Alice'])); // Output: Hello, Alice!
+console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
 ```
 
 ## Lodash 互換性
@@ -34,7 +49,7 @@ say(['fred', 'hello']);
 `es-toolkit/compat` から `chunk` をインポートすると、Lodash と互換になります。
 
 - `spread` は追加の数値パラメータ `argsIndex` を受け付け、引数配列が前の引数の中で位置する場所を指定します。
-  - `argsIndex` が負の値または `NaN` の場合、デフォルトで `0` になります。小数の場合は最も近い整数に丸められます。
+  - `argsIndex` が負の値または `NaN` の場合、デフォルトで `0` になります。小数の場合は最も近い整数に切り捨てられます。
 
 ```typescript
 import { spread } from 'es-toolkit/compat';

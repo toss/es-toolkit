@@ -13,7 +13,7 @@ function dropRight<T>(arr: T[], itemsCount: number): T[];
 ### 파라미터
 
 - `arr` (`T[]`): 요소를 제거할 배열.
-- `itemsCount` (`number`): 배열의 지막부터 제거할 요소의 숫자.
+- `itemsCount` (`number`): 배열의 마지막부터 제거할 요소의 숫자.
 
 ### 반환 값
 

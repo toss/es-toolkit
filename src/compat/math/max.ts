@@ -37,7 +37,8 @@ export function max<T>(items: readonly T[] = []): T | undefined {
   let maxElement = items[0];
   let max: any = undefined;
 
-  for (const element of items) {
+  for (let i = 0; i < items.length; i++) {
+    const element = items[i];
     if (max == null || element > max) {
       max = element;
       maxElement = element;

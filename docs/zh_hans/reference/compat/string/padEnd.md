@@ -17,13 +17,13 @@
 function padEnd(str: string, length = 0, chars = ' '): string;
 ```
 
-## 参数
+### 参数
 
 - `str` (`string`): 要填充的字符串。
 - `length` (`number`): 填充后的字符串长度。默认值为 `0`。
 - `char` (`string`): 用于填充字符串的字符。默认值为 `' '`。
 
-## 返回值
+### 返回值
 
 返回一个新的字符串，该字符串用指定的字符填充，直到达到指定的长度。
 

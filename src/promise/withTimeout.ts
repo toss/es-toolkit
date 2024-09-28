@@ -13,10 +13,16 @@ import { timeout } from './timeout.ts';
  * @returns {Promise<T>} A promise that resolves with the result of the `run` function or rejects if the timeout is reached.
  *
  * @example
+ * async function fetchData() {
+ *   const response = await fetch('https://example.com/data');
+ *   return response.json();
+ * }
+ *
  * try {
- *   await withTimeout(() => {}, 1000); // Timeout exception after 1 second
+ *   const data = await withTimeout(fetchData, 1000);
+ *   console.log(data); // Logs the fetched data if `fetchData` is resolved within 1 second.
  * } catch (error) {
- *   console.error(error); // Will log 'TimeoutError'
+ *   console.error(error); // Will log 'TimeoutError' if `fetchData` is not resolved within 1 second.
  * }
  */
 export async function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T> {

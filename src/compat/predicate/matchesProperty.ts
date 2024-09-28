@@ -33,7 +33,19 @@ export function matchesProperty(
   property: PropertyKey | readonly PropertyKey[],
   source: unknown
 ): (target?: unknown) => boolean {
-  property = Array.isArray(property) ? property : toKey(property);
+  switch (typeof property) {
+    case 'object': {
+      if (Object.is(property?.valueOf(), -0)) {
+        property = '-0';
+      }
+      break;
+    }
+    case 'number': {
+      property = toKey(property);
+      break;
+    }
+  }
+
   source = cloneDeep(source);
 
   return function (target?: unknown) {

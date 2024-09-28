@@ -9,6 +9,6 @@ describe('camelCase bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'camelCase');
-    expect(bundleSize).toMatchInlineSnapshot(`297`);
+    expect(bundleSize).toMatchInlineSnapshot(`309`);
   });
 });

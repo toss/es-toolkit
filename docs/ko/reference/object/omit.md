@@ -26,3 +26,15 @@ const obj = { a: 1, b: 2, c: 3 };
 const result = omit(obj, ['b', 'c']);
 // 결과는 다음과 같아요 { a: 1 }
 ```
+
+## Lodash와의 호환성
+
+`es-toolkit/compat`에서 `omit` 함수를 가져오면, 깊은 경로를 제외할 수 있어요.
+
+```typescript
+import { omit } from 'es-toolkit/compat';
+
+const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
+const result = omit(obj, ['a.b.c', 'f.g']);
+// result will be { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
+```

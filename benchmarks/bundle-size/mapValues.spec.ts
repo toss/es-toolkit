@@ -14,6 +14,6 @@ describe('mapValues bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'mapValues');
-    expect(bundleSize).toMatchInlineSnapshot(`1248`);
+    expect(bundleSize).toMatchInlineSnapshot(`1355`);
   });
 });

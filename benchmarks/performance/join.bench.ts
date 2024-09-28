@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { join as joinToolkit } from 'es-toolkit';
+import { join as joinToolkit } from 'es-toolkit/compat';
 import { join as joinLodash } from 'lodash';
 
 describe('join', () => {

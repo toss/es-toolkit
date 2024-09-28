@@ -1,6 +1,6 @@
-import { compareValues } from '../_internal/compareValues';
-import { isKey } from '../_internal/isKey';
-import { toPath } from '../_internal/toPath';
+import { compareValues } from '../_internal/compareValues.ts';
+import { isKey } from '../_internal/isKey.ts';
+import { toPath } from '../util/toPath.ts';
 
 export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
 /**
@@ -34,7 +34,7 @@ export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] 
  * // ]
  */
 export function orderBy<T>(
-  collection: T[] | object | number | null | undefined,
+  collection: readonly T[] | object | number | null | undefined,
   criteria?: Criterion<T> | Array<Criterion<T>>,
   orders?: unknown | unknown[]
 ): T[] {

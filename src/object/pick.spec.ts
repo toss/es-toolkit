@@ -25,4 +25,11 @@ describe('pick', () => {
     const result = pick(object, ['a', 'b', 'c']);
     expect(result).toEqual({ a: 1, b: { nested: 'pick' }, c: 3 });
   });
+
+  it('should not pick from nonexistent keys', () => {
+    const obj: { a?: unknown } = {};
+    const result = pick(obj, ['a']);
+
+    expect(Reflect.ownKeys(result)).toEqual([]);
+  })
 });

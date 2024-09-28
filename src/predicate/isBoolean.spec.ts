@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isBoolean } from './isBoolean';
 
-describe('isNull', () => {
+describe('isBoolean', () => {
   it('returns true if the value is boolean', () => {
     expect(isBoolean(true)).toBe(true);
     expect(isBoolean(false)).toBe(true);

@@ -8,7 +8,6 @@ export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     app.component(
-      // eslint-disable-next-line vue/multi-word-component-names
       'Sandpack',
       defineAsyncComponent(() => import('../components/Sandpack.vue'))
     );

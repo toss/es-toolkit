@@ -1,4 +1,4 @@
-import { isWeakMap as isWeakMapToolkit } from '../../predicate/isWeakMap';
+import { isWeakMap as isWeakMapToolkit } from '../../predicate/isWeakMap.ts';
 
 /**
  * Checks if the given value is a `WeakMap`.

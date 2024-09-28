@@ -1,4 +1,4 @@
-import { compareValues } from '../_internal/compareValues';
+import { compareValues } from '../_internal/compareValues.ts';
 
 /**
  * Sorts an array of objects based on the given `criteria` and their corresponding order directions.
@@ -35,7 +35,7 @@ import { compareValues } from '../_internal/compareValues';
  * // ]
  */
 export function orderBy<T extends object>(
-  arr: T[],
+  arr: readonly T[],
   criteria: Array<((item: T) => unknown) | keyof T>,
   orders: Array<'asc' | 'desc'>
 ): T[] {

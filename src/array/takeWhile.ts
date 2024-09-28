@@ -19,7 +19,8 @@
 export function takeWhile<T>(arr: readonly T[], shouldContinueTaking: (element: T) => boolean): T[] {
   const result: T[] = [];
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
     if (!shouldContinueTaking(item)) {
       break;
     }

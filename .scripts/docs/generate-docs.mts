@@ -14,6 +14,7 @@ import { DocumentationItem } from "./types/DocumentationItem.ts";
 import { Locale } from "./types/Locale.ts";
 import { RenderOptions } from "./operations/render/types.ts";
 
+// eslint-disable-next-line
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const basePath = path.resolve(__dirname, "..", "..", "src");

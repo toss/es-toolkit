@@ -1,5 +1,44 @@
 # es-toolkit Changelog
 
+## Version v1.21.0
+
+Released on September 25th, 2024.
+
+- Added support for [constantCase](https://es-toolkit.slash.page/reference/string/constantCase.html) and [isError](https://es-toolkit.slash.page/reference/predicate/isError.html).
+- Added compatibility functions for [pad](https://es-toolkit.slash.page/reference/compat/string/pad.html), [padStart](https://es-toolkit.slash.page/reference/compat/string/padStart.html), [padEnd](https://es-toolkit.slash.page/reference/compat/string/padEnd.html), [defer](https://es-toolkit.slash.page/reference/compat/function/defer.html), [isFinite](https://es-toolkit.slash.page/reference/compat/predicate/isFinite.html), [toNumber](https://es-toolkit.slash.page/reference/compat/math/toNumber.html), [toFinite](https://es-toolkit.slash.page/reference/compat/math/toFinite.html), and [toInteger](https://es-toolkit.slash.page/reference/compat/math/toInteger.html).
+- Improved performance for [flatten](https://es-toolkit.slash.page/reference/array/flatten.html), [isNumber](https://es-toolkit.slash.page/reference/predicate/isNumber.html), [isString](https://es-toolkit.slash.page/reference/predicate/isString.html), [isSymbol](https://es-toolkit.slash.page/reference/predicate/isSymbol.html), [isRegExp](https://es-toolkit.slash.page/reference/predicate/isRegExp.html), and [isBoolean](https://es-toolkit.slash.page/reference/predicate/isBoolean.html).
+- Fixed [compact](https://es-toolkit.slash.page/reference/array/compact.html) to correctly exclude `0n` as a falsey value.
+- Fixed [pick](https://es-toolkit.slash.page/reference/object/pick.html) to not pick nonexistent keys from the original object.
+- Fixed [omit](https://es-toolkit.slash.page/reference/object/omit.html) to accept readonly arrays.
+
+This version includes contributions from @hyesungoh, @D-Sketon, @mass2527, @gweesin, @VVSOGI, @coding-honey, @seonghun0828, and @jsparkdev. Thank you for your valuable contributions!
+
+## Version v1.20.0
+
+Released on September 20th, 2024.
+
+- Added support for function invocation on leading and trailing edges for [debounce](https://es-toolkit.slash.page/reference/function/debounce.html) and [throttle](https://es-toolkit.slash.page/reference/function/throttle.html).
+- Added compatibility functions for [debounce](https://es-toolkit.slash.page/reference/function/debounce.html), [throttle](https://es-toolkit.slash.page/reference/function/throttle.html), [curry](https://es-toolkit.slash.page/reference/function/curry.html), [isNumber](https://es-toolkit.slash.page/reference/compat/predicate/isNumber.html), and [isNaN](https://es-toolkit.slash.page/reference/compat/predicate/isNaN.html).
+- Improved performance for [at](https://es-toolkit.slash.page/reference/array/at.html), [zip](https://es-toolkit.slash.page/reference/array/zip.html), [zipWith](https://es-toolkit.slash.page/reference/array/zipWith.html), and [drop](https://es-toolkit.slash.page/reference/array/drop.html).
+
+## Version v1.19.0
+
+Released on September 14th, 2024.
+
+- Added support for [isDate](https://es-toolkit.slash.page/reference/predicate/isDate.html), [curry](https://es-toolkit.slash.page/reference/function/curry.html), [upperCase](https://es-toolkit.slash.page/reference/string/upperCase.html).
+- Added compatibility functions for [pick](https://es-toolkit.slash.page/reference/object/pick.html), [omit](https://es-toolkit.slash.page/reference/object/omit.html), [unset](https://es-toolkit.slash.page/reference/compat/object/unset.html), [toPath](https://es-toolkit.slash.page/reference/compat/util/toPath.html), [trim](https://es-toolkit.slash.page/reference/compat/string/trim.html), [trimStart](https://es-toolkit.slash.page/reference/compat/string/trimStart.html), [trimEnd](https://es-toolkit.slash.page/reference/compat/string/trimEnd.html), [isInteger](https://es-toolkit.slash.page/reference/compat/predicate/isInteger.html), [isSafeInteger](https://es-toolkit.slash.page/reference/compat/predicate/isSafeInteger.html), [snakeCase](https://es-toolkit.slash.page/reference/string/snakeCase.html), [startCase](https://es-toolkit.slash.page/reference/string/startCase.html), [lowerCase](https://es-toolkit.slash.page/reference/string/lowerCase.html), [kebabCase](https://es-toolkit.slash.page/reference/string/kebabCase.html), [ceil](https://es-toolkit.slash.page/reference/compat/math/ceil.html), [floor](https://es-toolkit.slash.page/reference/compat/math/floor.html), [round](https://es-toolkit.slash.page/reference/math/round.html).
+- Enhanced [clone](https://es-toolkit.slash.page/reference/object/clone.html) to handle `Buffer`s, `SharedArrayBuffer`s, `File`s, `Blob`s, `TypedArray`s, and `Error`s.
+- Fixed a bug where [mergeWith](https://es-toolkit.slash.page/reference/object/mergeWith.html) did not preserve the original properties of the `target` object.
+- Fixed a bug where [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html) couldn't group with keys like `toString` and `indexOf`.
+- Improved performance for [has](https://es-toolkit.slash.page/reference/compat/object/has.html) and [get](https://es-toolkit.slash.page/reference/compat/object/get.html).
+
+## Version v1.18.0
+
+Released on September 12th, 2024.
+
+- Added support for [isObject](https://es-toolkit.slash.page/reference/compat/predicate/isObject.html), [findLastIndex](https://es-toolkit.slash.page/reference/compat/array/findLastIndex.html), [parseInt](https://es-toolkit.slash.page/reference/compat/math/parseInt.html), [rearg](https://es-toolkit.slash.page/reference/compat/function/rearg.html), [conforms](https://es-toolkit.slash.page/reference/compat/predicate/conforms.html), [conformsTo](https://es-toolkit.slash.page/reference/compat/predicate/conformsTo.html), [bindKey](https://es-toolkit.slash.page/reference/compat/function/bindKey.html), [some](https://es-toolkit.slash.page/reference/compat/array/some.html), [fromPairs](https://es-toolkit.slash.page/reference/compat/object/fromPairs.html), [isArrayLikeObject](https://es-toolkit.slash.page/reference/compat/predicate/isArrayLikeObject.html), [escapeRegExp](https://es-toolkit.slash.page/reference/string/escapeRegExp.html), [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html), [isWeakSet](https://es-toolkit.slash.page/reference/predicate/isWeakSet.html), [isWeakMap](https://es-toolkit.slash.page/reference/predicate/isWeakMap.html), [flatMapDeep](https://es-toolkit.slash.page/reference/array/flatMapDeep.html), [escape](https://es-toolkit.slash.page/reference/string/escape.html), [unescape](https://es-toolkit.slash.page/reference/string/unescape.html), [repeat](https://es-toolkit.slash.page/reference/compat/string/repeat.html), [pad](https://es-toolkit.slash.page/reference/compat/string/pad.html), [join](https://es-toolkit.slash.page/reference/compat/array/join.html), and [spread](https://es-toolkit.slash.page/reference/compat/function/spread.html).
+- Improved performance for [deburr](https://es-toolkit.slash.page/reference/string/deburr.html).
+
 ## Version v1.17.0
 
 Released on August 31st, 2024.
