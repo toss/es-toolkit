@@ -7,16 +7,12 @@
 
 :::
 
-创建一个函数，该函数调用 `func` 上的方法，并将参数反转。
+反转给定函数的参数顺序。
 
 ## 签名
 
 ```typescript
-type ReverseParameters<T extends any[]> = T extends [infer First, ...infer Rest]
-  ? [...ReverseParameters<Rest>, First]
-  : [];
-
-function flip<F extends (...args: any[]) => any>(func: F): (...args: ReverseParameters<Parameters<F>>) => ReturnType<F>;
+function flip<F extends (...args: any[]) => any>(func: F): (...args: Reversed<Parameters<F>>) => ReturnType<F>;
 ```
 
 ### 参数
@@ -25,14 +21,14 @@ function flip<F extends (...args: any[]) => any>(func: F): (...args: ReversePara
 
 ### 返回值
 
-(`(...args: ReverseParameters<Parameters<F>>) => ReturnType<F>`): 返回新的反转函数。
+(`(...args: Reversed<Parameters<F>>) => ReturnType<F>`): 返回新的反转函数。
 
 ## 示例
 
 ```typescript
 import { flip } from 'es-toolkit/compat';
 
-function fn(a: any, b: any, c: any, d: any) {
+function fn(a: string, b: string, c: string, d: string) {
   return [a, b, c, d];
 }
 

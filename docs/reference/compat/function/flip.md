@@ -6,32 +6,28 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Creates a function that invokes `func` with arguments reversed.
+Reverses the order of arguments for a given function.
 
 ## Signature
 
 ```typescript
-type ReverseParameters<T extends any[]> = T extends [infer First, ...infer Rest]
-  ? [...ReverseParameters<Rest>, First]
-  : [];
-
-function flip<F extends (...args: any[]) => any>(func: F): (...args: ReverseParameters<Parameters<F>>) => ReturnType<F>;
+function flip<F extends (...args: any[]) => any>(func: F): (...args: Reversed<Parameters<F>>) => ReturnType<F>;
 ```
 
 ### Parameters
 
-- `func` (`F`): The function to flip arguments for.
+- `func` (`F`): The function whose arguments will be reversed.
 
 ### Returns
 
-(`(...args: ReverseParameters<Parameters<F>>) => ReturnType<F>`): The new flipped function.
+(`(...args: ReverseParameters<Parameters<F>>) => ReturnType<F>`): A new function that takes the reversed arguments and returns the result of calling `func`.
 
 ## Example
 
 ```typescript
 import { flip } from 'es-toolkit/compat';
 
-function fn(a: any, b: any, c: any, d: any) {
+function fn(a: string, b: string, c: string, d: string) {
   return [a, b, c, d];
 }
 
