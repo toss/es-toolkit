@@ -29,6 +29,7 @@ export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { drop } from './array/drop.ts';
+export { dropWhile } from './array/dropWhile.ts';
 export { fill } from './array/fill.ts';
 export { find } from './array/find.ts';
 export { findIndex } from './array/findIndex.ts';
