@@ -1,5 +1,7 @@
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * @param {() => R} f The function to invoke.
  * @returns {() => R} Returns the new composite function.
@@ -14,7 +16,9 @@
  */
 export function flow<R>(f: () => R): () => R;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * @param {(...args: A) => R} f1 The function to invoke.
  * @returns {(...args: A) => R} Returns the new composite function.
@@ -29,7 +33,9 @@ export function flow<R>(f: () => R): () => R;
  */
 export function flow<A extends any[], R>(f1: (...args: A) => R): (...args: A) => R;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * @param {(...args: A) => R1} f1 The function to invoke.
  * @param {(a: R1) => R2} f2 The function to invoke.
@@ -44,7 +50,9 @@ export function flow<A extends any[], R>(f1: (...args: A) => R): (...args: A) =>
  */
 export function flow<A extends any[], R1, R2>(f1: (...args: A) => R1, f2: (a: R1) => R2): (...args: A) => R2;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * @param {(...args: A) => R1} f1 The function to invoke.
  * @param {(a: R1) => R2} f2 The function to invoke.
@@ -65,7 +73,9 @@ export function flow<A extends any[], R1, R2, R3>(
   f3: (a: R2) => R3
 ): (...args: A) => R3;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * @param {(...args: A) => R1} f1 The function to invoke.
  * @param {(a: R1) => R2} f2 The function to invoke.
@@ -89,7 +99,9 @@ export function flow<A extends any[], R1, R2, R3, R4>(
   f4: (a: R3) => R4
 ): (...args: A) => R4;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * @param {(...args: A) => R1} f1 The function to invoke.
  * @param {(a: R1) => R2} f2 The function to invoke.
@@ -116,7 +128,9 @@ export function flow<A extends any[], R1, R2, R3, R4, R5>(
   f5: (a: R4) => R5
 ): (...args: A) => R5;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * @param {Array<(...args: any[]) => any>} funcs The functions to invoke.
  * @returns {(...args: any[]) => any} Returns the new composite function.
@@ -130,7 +144,9 @@ export function flow<A extends any[], R1, R2, R3, R4, R5>(
  */
 export function flow(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * @param {Array<(...args: any[]) => any>} funcs The functions to invoke.
  * @returns {(...args: any[]) => any} Returns the new composite function.

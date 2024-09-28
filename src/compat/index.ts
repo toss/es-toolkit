@@ -29,6 +29,8 @@ export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { drop } from './array/drop.ts';
+export { dropWhile } from './array/dropWhile.ts';
+export { every } from './array/every.ts';
 export { fill } from './array/fill.ts';
 export { find } from './array/find.ts';
 export { findIndex } from './array/findIndex.ts';
@@ -56,6 +58,7 @@ export { rearg } from './function/rearg.ts';
 export { curry } from './function/curry.ts';
 export { debounce } from './function/debounce.ts';
 export { throttle } from './function/throttle.ts';
+export { flip } from './function/flip.ts';
 
 export { get } from './object/get.ts';
 export { set } from './object/set.ts';

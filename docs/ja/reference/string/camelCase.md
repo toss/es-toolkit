@@ -27,5 +27,5 @@ camelCase('camelCase'); // 'camelCase' を返します
 camelCase('some whitespace'); // 'someWhitespace' を返します
 camelCase('hyphen-text'); // 'hyphenText' を返します
 camelCase('HTTPRequest'); // 'httpRequest' を返します
-camelCase('Keep unicode 😅') // 'keepUnicode😅' を返します
+camelCase('Keep unicode 😅'); // 'keepUnicode😅' を返します
 ```

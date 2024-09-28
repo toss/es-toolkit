@@ -27,5 +27,5 @@ camelCase('camelCase'); // 返回 'camelCase'
 camelCase('some whitespace'); // 返回 'someWhitespace'
 camelCase('hyphen-text'); // 返回 'hyphenText'
 camelCase('HTTPRequest'); // 返回 'httpRequest'
-camelCase('Keep unicode 😅') // 返回 'keepUnicode😅'
+camelCase('Keep unicode 😅'); // 返回 'keepUnicode😅'
 ```
