@@ -24,6 +24,7 @@ describe('includes', () => {
     it(`should work with ${key} and floor \`position\` values`, () => {
       expect(includes(collection, 2, 1.2)).toBe(true);
     });
+
     // it(`should work with ${key} and return an unwrapped value implicitly when chaining`, () => {
     //   expect(_(collection).includes(3)).toBe(true);
     // });
@@ -126,6 +127,8 @@ describe('includes', () => {
     it(`should work with ${key} and treat falsey \`fromIndex\` values as \`0\``, () => {
       const expected = falsey.map(() => true);
 
+      // eslint-disable-next-line
+      // @ts-ignore
       const actual = falsey.map(fromIndex => includes(collection, resolve(values[0]), fromIndex));
 
       expect(actual).toEqual(expected);
@@ -137,6 +140,8 @@ describe('includes', () => {
       const actual = [
         includes(collection, resolve(values[0]), 0.1),
         includes(collection, resolve(values[0]), NaN),
+        // eslint-disable-next-line
+        // @ts-ignore
         includes(collection, resolve(values[0]), '1'),
       ];
 
