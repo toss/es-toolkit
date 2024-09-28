@@ -1,5 +1,18 @@
 # es-toolkit Changelog
 
+## Version v1.22.0
+
+Released on September 28th, 2024.
+
+- Added support for [flow](https://es-toolkit.slash.page/reference/function/flow.html), [flowRight](https://es-toolkit.slash.page/reference/function/flowRight.html), [isMap](https://es-toolkit.slash.page/reference/predicate/isMap.html), and [isSet](https://es-toolkit.slash.page/reference/predicate/isSet.html).
+- Added compatibility functions for [filter](https://es-toolkit.slash.page/reference/compat/array/filter.html), [includes](https://es-toolkit.slash.page/reference/compat/array/includes.html), [every](https://es-toolkit.slash.page/reference/compat/array/every.html), [flip](https://es-toolkit.slash.page/reference/compat/function/flip.html), and [dropWhile](https://es-toolkit.slash.page/reference/array/dropWhile.html).
+
+- Fixed a bug in [throttle](https://es-toolkit.slash.page/reference/function/throttle.html) that prevented it from throttling after the initial `throttleMs`.
+- Fixed a bug in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) that caused it to not clone the offset and length of `DataView`.
+- Fixed a bug in [clone](https://es-toolkit.slash.page/reference/object/clone.html) that threw an error if `SharedArrayBuffer` is unavailable.
+
+This version includes contributions from @dayongkr, @k-jeonghee, @D-Sketon, @iDevGon, @mass2527, @wojtekmaj, @jonganebski, @hyesungoh, and @chhw130. Thank you for your valuable contributions!
+
 ## Version v1.21.0
 
 Released on September 25th, 2024.
