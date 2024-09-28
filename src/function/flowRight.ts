@@ -1,7 +1,9 @@
 import { flow } from './flow.ts';
 
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
@@ -17,7 +19,9 @@ import { flow } from './flow.ts';
  */
 export function flowRight<R>(f: () => R): () => R;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
@@ -33,7 +37,9 @@ export function flowRight<R>(f: () => R): () => R;
  */
 export function flowRight<A extends any[], R>(f1: (...args: A) => R): (...args: A) => R;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
@@ -50,7 +56,9 @@ export function flowRight<A extends any[], R>(f1: (...args: A) => R): (...args: 
  */
 export function flowRight<A extends any[], R1, R2>(f2: (a: R1) => R2, f1: (...args: A) => R1): (...args: A) => R2;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
@@ -73,7 +81,9 @@ export function flowRight<A extends any[], R1, R2, R3>(
   f1: (...args: A) => R1
 ): (...args: A) => R3;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
@@ -99,7 +109,9 @@ export function flowRight<A extends any[], R1, R2, R3, R4>(
   f1: (...args: A) => R1
 ): (...args: A) => R4;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
@@ -128,7 +140,9 @@ export function flowRight<A extends any[], R1, R2, R3, R4, R5>(
   f1: (...args: A) => R1
 ): (...args: A) => R5;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
@@ -144,7 +158,9 @@ export function flowRight<A extends any[], R1, R2, R3, R4, R5>(
  */
 export function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
 /**
- * Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+ * Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+ *
+ * The `this` context of the returned function is also passed to the functions provided as parameters.
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *

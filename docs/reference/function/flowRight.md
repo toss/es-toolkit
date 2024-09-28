@@ -1,6 +1,8 @@
 # flowRight
 
-Creates a function that returns the result of invoking the given functions with the `this` binding of the created function, where each successive invocation is supplied the return value of the previous.
+Creates a new function that executes the given functions in sequence from right to left. The return value of the previous function is passed as an argument to the next function.
+
+The `this` context of the returned function is also passed to the functions provided as parameters.
 
 This method is like [flow](./flow.md), except that it creates a function that invokes the given functions from right to left.
 

@@ -1,12 +1,12 @@
 # flowRight
 
-创建一个新函数，该函数按从右到左的顺序执行给定的函数。前一个函数的返回值作为参数传递给下一个函数。
+주어진 함수들을 오른쪽에서 왼쪽으로 순서대로 실행하는 새로운 함수를 생성해요. 이전 함수의 결괏값은 다음 함수의 파라미터로 주어져요.
 
-返回函数的 `this` 上下文也会传递给作为参数提供的函数。
+반환된 함수에게 주어진 `this`는 파라미터로 주어진 함수들에게도 전달돼요.
 
-此方法类似于 [flow](./flow.md)，但它创建的函数从右到左调用给定的函数。
+이 메서드는 `flow`와 비슷하지만, 주어진 함수들을 오른쪽에서 왼쪽으로 호출하는 함수를 생성해요.
 
-## 签名
+## 인터페이스
 
 ```typescript
 function flowRight<R>(f: () => R): () => R;
@@ -31,22 +31,23 @@ function flowRight<A extends any[], R1, R2, R3, R4, R5>(
   f1: (...args: A) => R1
 ): (...args: A) => R5;
 function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
+function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
 ```
 
-### 参数
+### 파라미터
 
-- `funcs` (`Array<(...args: any[]) => any>`): 需要调用的函数。
+- `funcs` (`(...args: any[]) => any`): 호출할 함수들.
 
-### 返回值
+### 반환 값
 
-(`(...args: any[]) => any`): 新的组合函数。
+(`(...args: any[]) => any`): 주어진 함수들을 오른쪽에서 왼쪽으로 순서대로 실행하는 새로운 함수.
 
-## 示例
+## 예시
 
 ```typescript
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 
 const combined = flowRight(square, add);
-console.log(combined(1, 2)); // => 9
+console.log(combined(1, 2)); // 9
 ```

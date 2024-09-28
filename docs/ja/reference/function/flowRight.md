@@ -1,12 +1,12 @@
 # flowRight
 
-创建一个新函数，该函数按从右到左的顺序执行给定的函数。前一个函数的返回值作为参数传递给下一个函数。
+右から左に順番に与えられた関数を実行する新しい関数を作成します。前の関数の戻り値が次の関数への引数として渡されます。
 
-返回函数的 `this` 上下文也会传递给作为参数提供的函数。
+戻り関数の`this`コンテキストも、パラメーターとして提供された関数に渡されます。
 
-此方法类似于 [flow](./flow.md)，但它创建的函数从右到左调用给定的函数。
+このメソッドは`flow`のようですが、右から左に与えられた関数を呼び出す関数を作成する点が異なります。
 
-## 签名
+## インターフェース
 
 ```typescript
 function flowRight<R>(f: () => R): () => R;
@@ -31,22 +31,23 @@ function flowRight<A extends any[], R1, R2, R3, R4, R5>(
   f1: (...args: A) => R1
 ): (...args: A) => R5;
 function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
+function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
 ```
 
-### 参数
+### パラメータ
 
-- `funcs` (`Array<(...args: any[]) => any>`): 需要调用的函数。
+- `funcs` (`(...args: any[]) => any`): 呼び出す関数。
 
-### 返回值
+### 戻り値
 
-(`(...args: any[]) => any`): 新的组合函数。
+(`(...args: any[]) => any`): 新しい合成関数。
 
-## 示例
+## 例
 
 ```typescript
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 
 const combined = flowRight(square, add);
-console.log(combined(1, 2)); // => 9
+console.log(combined(1, 2)); // 9
 ```
