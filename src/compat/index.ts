@@ -45,6 +45,7 @@ export { sortBy } from './array/sortBy.ts';
 export { size } from './array/size.ts';
 export { some } from './array/some.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
+export { filter } from './array/filter.ts';
 export { head as first } from '../array/head.ts';
 
 export { ary } from './function/ary.ts';
