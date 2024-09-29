@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { castArray } from './castArray';
 
+/**
+ * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/castArray.spec.js#L1
+ */
 describe('castArray', () => {
   it('should wrap non-array items in an array', () => {
     const falsey = [false, null, undefined, 0, NaN, ''];

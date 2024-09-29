@@ -7,7 +7,7 @@ describe('snakeCase', () => {
   it(`should convert \`string\``, () => {
     const actual = strings.map(string => snakeCase(string));
 
-    const expected = actual.map(() => 'foo_bar');
+    const expected = strings.map(() => 'foo_bar');
 
     expect(actual).toEqual(expected);
   });
@@ -15,7 +15,7 @@ describe('snakeCase', () => {
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => snakeCase(snakeCase(string)));
 
-    const expected = actual.map(() => 'foo_bar');
+    const expected = strings.map(() => 'foo_bar');
 
     expect(actual).toEqual(expected);
   });

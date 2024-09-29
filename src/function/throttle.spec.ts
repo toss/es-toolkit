@@ -3,7 +3,7 @@ import { throttle } from './throttle';
 import { delay } from '../promise';
 
 describe('throttle', () => {
-  it('should throttle function calls', async () => {
+  it('should throttle function calls', () => {
     const func = vi.fn();
     const throttledFunc = throttle(func, 100);
 
@@ -19,22 +19,35 @@ describe('throttle', () => {
     const throttleMs = 500;
     const throttledFunc = throttle(func, throttleMs);
 
-    throttledFunc();
-    await delay(throttleMs / 2);
+    throttledFunc(); // should be excuted
+    expect(func).toHaveBeenCalledTimes(1);
 
-    throttledFunc();
+    await delay(throttleMs / 2);
+    expect(func).toHaveBeenCalledTimes(1);
+
+    throttledFunc(); // should be ignored
     expect(func).toHaveBeenCalledTimes(1);
 
     await delay(throttleMs / 2 + 1);
-
     expect(func).toHaveBeenCalledTimes(1);
 
-    throttledFunc();
-
+    throttledFunc(); // should be excuted
     expect(func).toHaveBeenCalledTimes(2);
+
+    await delay(throttleMs / 2 - 1);
+    expect(func).toHaveBeenCalledTimes(2);
+
+    throttledFunc(); // should be ignored
+    expect(func).toHaveBeenCalledTimes(2);
+
+    await delay(throttleMs / 2 + 1);
+    expect(func).toHaveBeenCalledTimes(2);
+
+    throttledFunc(); // should be executed
+    expect(func).toHaveBeenCalledTimes(3);
   });
 
-  it('should call the function with correct arguments', async () => {
+  it('should call the function with correct arguments', () => {
     const func = vi.fn();
     const throttleMs = 50;
     const throttledFunc = throttle(func, throttleMs);

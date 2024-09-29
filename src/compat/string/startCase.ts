@@ -1,4 +1,4 @@
-import { startCase as startCaseToolkit } from '../../string/startCase.ts';
+import { getWords } from '../../string/_internal/getWords.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
@@ -15,5 +15,23 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const result4 = startCase('hello_world');  // result will be 'Hello World'
  */
 export function startCase(str?: string | object): string {
-  return startCaseToolkit(normalizeForCase(str));
+  const words = getWords(normalizeForCase(str).trim());
+
+  let result = '';
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+
+    if (result) {
+      result += ' ';
+    }
+
+    if (word === word.toUpperCase()) {
+      result += word;
+    } else {
+      result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+    }
+  }
+
+  return result;
 }

@@ -6,6 +6,6 @@ export function normalizeForCase(str: unknown): string {
     str = toString(str);
   }
 
-  // Remove constraction apostrophes
+  // Remove contraction apostrophes
   return (str as string).replace(/['\u2019]/g, '');
 }

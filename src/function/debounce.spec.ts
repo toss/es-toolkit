@@ -74,7 +74,7 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledTimes(2);
   });
 
-  it('should have no effect if we call cancel when the function is not executed', async () => {
+  it('should have no effect if we call cancel when the function is not executed', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);

@@ -10,5 +10,6 @@ export default defineConfig({
       include: ['src/**/*'],
       exclude: ['src/compat/_internal/**/*'],
     },
+    watch: false,
   },
 });

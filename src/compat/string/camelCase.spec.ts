@@ -31,13 +31,13 @@ describe('camelCase', () => {
 
   it('should convert string to camel case', () => {
     const actual = strings.map(camelCase);
-    const expected = actual.map(() => 'fooBar');
+    const expected = strings.map(() => 'fooBar');
     expect(actual).toEqual(expected);
   });
 
   it('should handle double-converting strings', () => {
     const actual = strings.map(str => camelCase(camelCase(str)));
-    const expected = actual.map(() => 'fooBar');
+    const expected = strings.map(() => 'fooBar');
     expect(actual).toEqual(expected);
   });
 

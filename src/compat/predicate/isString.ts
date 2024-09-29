@@ -1,5 +1,3 @@
-import { getTag } from '../_internal/getTag.ts';
-
 /**
  * Checks if a given value is string.
  *
@@ -18,14 +16,6 @@ import { getTag } from '../_internal/getTag.ts';
  * console.log(isString(value3)); // false
  */
 
-export function isString(value: unknown): value is string {
-  if (typeof value === 'string') {
-    return true;
-  }
-
-  if (typeof value === 'object' && value != null && getTag(value) === '[object String]') {
-    return true;
-  }
-
-  return false;
+export function isString(value?: unknown): value is string {
+  return typeof value === 'string' || value instanceof String;
 }

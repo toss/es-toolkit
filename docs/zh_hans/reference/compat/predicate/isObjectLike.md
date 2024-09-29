@@ -30,7 +30,7 @@ function isObjectLike(value: unknown): value is object;
 ## 示例
 
 ```typescript
-import { isObjectLike } from 'es-toolkit/predicate';
+import { isObjectLike } from 'es-toolkit/compat';
 
 const value1 = { a: 1 };
 const value2 = [1, 2, 3];

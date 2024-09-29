@@ -94,7 +94,8 @@ export function pick<
 
   const result: any = {};
 
-  for (let keys of keysArr) {
+  for (let i = 0; i < keysArr.length; i++) {
+    let keys = keysArr[i];
     switch (typeof keys) {
       case 'object': {
         if (!Array.isArray(keys)) {
@@ -115,7 +116,7 @@ export function pick<
     for (const key of keys) {
       const value = get(obj, key);
 
-      if (typeof key === 'string' && Object.prototype.hasOwnProperty.call(obj, key)) {
+      if (typeof key === 'string' && Object.hasOwn(obj, key)) {
         result[key] = value;
       } else {
         set(result, key, value);

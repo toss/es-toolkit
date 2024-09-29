@@ -1,5 +1,7 @@
 export { isDate } from './isDate.ts';
 export { isEqual } from './isEqual.ts';
+export { isError } from './isError.ts';
+export { isMap } from './isMap.ts';
 export { isNil } from './isNil.ts';
 export { isNotNil } from './isNotNil.ts';
 export { isNull } from './isNull.ts';
@@ -16,5 +18,6 @@ export { isString } from './isString.ts';
 export { isJSONObject } from './isJSONObject.ts';
 export { isJSONValue } from './isJSONValue.ts';
 export { isJSONArray } from './isJSONArray.ts';
+export { isSet } from './isSet.ts';
 export { isWeakMap } from './isWeakMap.ts';
 export { isWeakSet } from './isWeakSet.ts';

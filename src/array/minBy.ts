@@ -9,6 +9,14 @@
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
+ * minBy(
+ *   [
+ *     { name: 'john', age: 30 },
+ *     { name: 'jane', age: 28 },
+ *     { name: 'joe', age: 26 },
+ *   ],
+ *   x => x.age
+ * ); // Returns: { name: 'joe', age: 26 }
  */
 export function minBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => number): T;
 /**
@@ -22,6 +30,14 @@ export function minBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => 
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
+ * minBy(
+ *   [
+ *     { name: 'john', age: 30 },
+ *     { name: 'jane', age: 28 },
+ *     { name: 'joe', age: 26 },
+ *   ],
+ *   x => x.age
+ * ); // Returns: { name: 'joe', age: 26 }
  */
 export function minBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined;
 /**
@@ -35,12 +51,21 @@ export function minBy<T>(items: readonly T[], getValue: (element: T) => number):
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
+ * minBy(
+ *   [
+ *     { name: 'john', age: 30 },
+ *     { name: 'jane', age: 28 },
+ *     { name: 'joe', age: 26 },
+ *   ],
+ *   x => x.age
+ * ); // Returns: { name: 'joe', age: 26 }
  */
 export function minBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined {
   let minElement = items[0];
   let min = Infinity;
 
-  for (const element of items) {
+  for (let i = 0; i < items.length; i++) {
+    const element = items[i];
     const value = getValue(element);
     if (value < min) {
       min = value;

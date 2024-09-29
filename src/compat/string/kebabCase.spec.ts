@@ -7,7 +7,7 @@ describe('kebabCase', () => {
   it(`should convert \`string\``, () => {
     const actual = strings.map(string => kebabCase(string));
 
-    const expected = actual.map(() => 'foo-bar');
+    const expected = strings.map(() => 'foo-bar');
 
     expect(actual).toEqual(expected);
   });
@@ -15,7 +15,7 @@ describe('kebabCase', () => {
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => kebabCase(kebabCase(string)));
 
-    const expected = actual.map(() => 'foo-bar');
+    const expected = strings.map(() => 'foo-bar');
 
     expect(actual).toEqual(expected);
   });

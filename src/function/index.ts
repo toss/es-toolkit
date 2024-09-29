@@ -13,3 +13,5 @@ export { partialRight } from './partialRight.ts';
 export { rest } from './rest.ts';
 export { curry } from './curry.ts';
 export { spread } from './spread.ts';
+export { flow } from './flow.ts';
+export { flowRight } from './flowRight.ts';

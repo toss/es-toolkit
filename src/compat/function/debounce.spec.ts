@@ -76,7 +76,7 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledTimes(2);
   });
 
-  it('should have no effect if we call cancel when the function is not executed', async () => {
+  it('should have no effect if we call cancel when the function is not executed', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
@@ -231,7 +231,7 @@ describe('debounce', () => {
     expect(callCount).toBe(2);
   });
 
-  it('subsequent debounced calls return the last `func` result', async done => {
+  it('subsequent debounced calls return the last `func` result', async () => {
     const debounced = debounce(identity, 32);
     debounced('a');
 
@@ -383,7 +383,7 @@ describe('debounce', () => {
     expect(callCount).toBe(2);
   });
 
-  it('should support `maxWait` in a tight loop', async done => {
+  it('should support `maxWait` in a tight loop', async () => {
     const limit = 1000;
     let withCount = 0;
     let withoutCount = 0;
@@ -460,10 +460,12 @@ describe('debounce', () => {
     const object = {};
 
     const debounced = debounce(
-      function (this: any, value: any) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      function (this: any, _: any) {
         actual = [this];
+        // eslint-disable-next-line prefer-rest-params
         Array.prototype.push.apply(actual, arguments as any);
-        return ++callCount != 2;
+        return ++callCount !== 2;
       },
       32,
       { leading: true, maxWait: 64 }
@@ -505,7 +507,7 @@ describe('debounce', () => {
     expect(callCount).toBe(isDebounce ? 1 : 2);
   });
 
-  it(`\`_.${methodName}\` should invoke \`func\` with the correct \`this\` binding`, async done => {
+  it(`\`_.${methodName}\` should invoke \`func\` with the correct \`this\` binding`, async () => {
     const actual: any[] = [];
     const object = {
       funced: func(function (this: any) {
@@ -526,8 +528,10 @@ describe('debounce', () => {
     const expected = args.slice();
     const queue: any[] = args.slice();
 
-    var funced = func(function (this: any, _: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const funced = func(function (this: any, _: unknown) {
       const current = [this];
+      // eslint-disable-next-line prefer-rest-params
       Array.prototype.push.apply(current, arguments as any);
       actual.push(current);
 

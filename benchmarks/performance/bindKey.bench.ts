@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { bindKey as bindKeyToolkit } from 'es-toolkit';
+import { bindKey as bindKeyToolkit } from 'es-toolkit/compat';
 import { bindKey as bindKeyLodash } from 'lodash';
 
 const object = {

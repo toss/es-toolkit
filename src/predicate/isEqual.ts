@@ -241,7 +241,7 @@ function areObjectsEqual(a: any, b: any, stack?: Map<any, any>) {
           const propKey = aKeys[i];
           const aProp = (a as any)[propKey];
 
-          if (!Object.prototype.hasOwnProperty.call(b, propKey)) {
+          if (!Object.hasOwn(b, propKey)) {
             return false;
           }
 

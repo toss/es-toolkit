@@ -9,6 +9,14 @@
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
  * maxBy([], x => x.a); // Returns: undefined
+ * maxBy(
+ *   [
+ *     { name: 'john', age: 30 },
+ *     { name: 'jane', age: 28 },
+ *     { name: 'joe', age: 26 },
+ *   ],
+ *   x => x.age
+ * ); // Returns: { name: 'john', age: 30 }
  */
 export function maxBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => number): T;
 /**
@@ -22,6 +30,14 @@ export function maxBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => 
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
  * maxBy([], x => x.a); // Returns: undefined
+ * maxBy(
+ *   [
+ *     { name: 'john', age: 30 },
+ *     { name: 'jane', age: 28 },
+ *     { name: 'joe', age: 26 },
+ *   ],
+ *   x => x.age
+ * ); // Returns: { name: 'john', age: 30 }
  */
 export function maxBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined;
 /**
@@ -35,12 +51,21 @@ export function maxBy<T>(items: readonly T[], getValue: (element: T) => number):
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
  * maxBy([], x => x.a); // Returns: undefined
+ * maxBy(
+ *   [
+ *     { name: 'john', age: 30 },
+ *     { name: 'jane', age: 28 },
+ *     { name: 'joe', age: 26 },
+ *   ],
+ *   x => x.age
+ * ); // Returns: { name: 'john', age: 30 }
  */
 export function maxBy<T>(items: readonly T[], getValue: (element: T) => number): T {
   let maxElement = items[0];
   let max = -Infinity;
 
-  for (const element of items) {
+  for (let i = 0; i < items.length; i++) {
+    const element = items[i];
     const value = getValue(element);
     if (value > max) {
       max = value;

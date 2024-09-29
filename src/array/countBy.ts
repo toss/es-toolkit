@@ -28,7 +28,8 @@
 export function countBy<T, K extends PropertyKey>(arr: readonly T[], mapper: (item: T) => K): Record<K, number> {
   const result = {} as Record<K, number>;
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
     const key = mapper(item);
 
     result[key] = (result[key] ?? 0) + 1;

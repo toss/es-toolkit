@@ -41,7 +41,8 @@ export function min<T>(items: readonly T[] = []): T {
   let minElement = items[0];
   let min: any = undefined;
 
-  for (const element of items) {
+  for (let i = 0; i < items.length; i++) {
+    const element = items[i];
     if (min == null || element < min) {
       min = element;
       minElement = element;

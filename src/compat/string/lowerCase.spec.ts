@@ -7,7 +7,7 @@ describe('lowerCase', () => {
   it(`should convert \`string\``, () => {
     const actual = strings.map(string => lowerCase(string));
 
-    const expected = actual.map(() => 'foo bar');
+    const expected = strings.map(() => 'foo bar');
 
     expect(actual).toEqual(expected);
   });
@@ -15,7 +15,7 @@ describe('lowerCase', () => {
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => lowerCase(lowerCase(string)));
 
-    const expected = actual.map(() => 'foo bar');
+    const expected = strings.map(() => 'foo bar');
 
     expect(actual).toEqual(expected);
   });
