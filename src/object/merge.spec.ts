@@ -60,8 +60,9 @@ describe('merge', () => {
   });
 
   it('should handle merging arrays into non-array target values', () => {
-    const target = { a: 1, b: {} };
     const numbers = [1, 2, 3];
+    
+    const target = { a: 1, b: {} };
     const source = { b: numbers, c: 4 };
     const result = merge(target, source);
 
@@ -71,6 +72,7 @@ describe('merge', () => {
 
   it('should create new plain object when merged', () => {
     const plainObject = { b: 2 } as const;
+    
     const target = {};
     const source = { a: plainObject };
     const result = merge(target, source);
