@@ -170,7 +170,8 @@ export function filter<T>(
 
         for (let i = 0; i < entries.length; i++) {
           const entry = entries[i];
-          const [key, value] = entry;
+          const key = entry[0];
+          const value = entry[1];
 
           if (predicate(value, key, source)) {
             result.push(value);
