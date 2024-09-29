@@ -48,3 +48,21 @@ const square = (n: number) => n * n;
 const combined = flow(add, square);
 console.log(combined(1, 2)); // => 9
 ```
+
+## Lodash Compatibility
+
+Import `flow` from `es-toolkit/compat` for full compatibility with lodash.
+
+- `flow` can accept both arrays of functions and individual functions as arguments.
+- `flow` will throw an error if any of the functions provided are not functions.
+
+```typescript
+import { flow } from 'es-toolkit/compat';
+
+const add = (x: number, y: number) => x + y;
+const square = (n: number) => n * n;
+const double = (n: number) => n * 2;
+
+const combined = flow([add, square], double);
+console.log(combined(1, 2)); // => 18
+```

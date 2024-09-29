@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { flow as flowToolkit } from 'es-toolkit';
+import { flow as flowToolkitCompat } from 'es-toolkit/compat';
 import { flow as flowLodash } from 'lodash';
 
 const flow = flowToolkit;
+const flowCompat = flowToolkitCompat;
 const flowLo = flowLodash;
 
 describe('flow', () => {
@@ -11,6 +13,11 @@ describe('flow', () => {
 
   bench('es-toolkit/flow', () => {
     const combined = flow(add, square);
+    combined(1, 2);
+  });
+
+  bench('es-toolkit/compat/flow', () => {
+    const combined = flowCompat(add, square);
     combined(1, 2);
   });
 

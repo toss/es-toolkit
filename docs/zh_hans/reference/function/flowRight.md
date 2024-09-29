@@ -50,3 +50,21 @@ const square = (n: number) => n * n;
 const combined = flowRight(square, add);
 console.log(combined(1, 2)); // => 9
 ```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 导入 `flowRight` 以获得与 lodash 的完全兼容性。
+
+- `flowRight` 可以接受函数数组和单个函数作为参数。
+- 如果提供的函数中有任何一个不是函数，`flowRight` 将抛出错误。
+
+```typescript
+import { flowRight } from 'es-toolkit/compat';
+
+const add = (x: number, y: number) => x + y;
+const square = (n: number) => n * n;
+const double = (n: number) => n * 2;
+
+const combined = flowRight(double, [square, add]);
+console.log(combined(1, 2)); // => 18
+```

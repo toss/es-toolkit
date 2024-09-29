@@ -48,3 +48,21 @@ const square = (n: number) => n * n;
 const combined = flow(add, square);
 console.log(combined(1, 2)); // => 9
 ```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 导入 `flow` 以获得与 lodash 的完全兼容性。
+
+- `flow` 可以接受函数数组和单个函数作为参数。
+- 如果提供的函数中有任何一个不是函数，`flow` 将抛出错误。
+
+```typescript
+import { flow } from 'es-toolkit/compat';
+
+const add = (x: number, y: number) => x + y;
+const square = (n: number) => n * n;
+const double = (n: number) => n * 2;
+
+const combined = flow([add, square], double);
+console.log(combined(1, 2)); // => 18
+```
