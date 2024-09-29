@@ -25,7 +25,7 @@ function flip<F extends (...args: any[]) => any>(func: F): (...args: Reversed<Pa
 ## 例
 
 ```typescript
-function fn(a: any, b: any, c: any, d: any) {
+function fn(a: string, b: string, c: string, d: string) {
   return [a, b, c, d];
 }
 
