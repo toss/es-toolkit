@@ -7,13 +7,13 @@
 ## 签名
 
 ```typescript
-function dropWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[];
+function dropWhile<T>(arr: T[], canContinueDropping: (item: T, index: number, arr: T[]) => boolean): T[];
 ```
 
 ### 参数
 
 - `arr` (`T[]`): 要从中移除元素的数组。
-- `canContinueDropping` (`(item: T) => boolean`): 一个谓词函数，用于确定是否继续移除元素。该函数将对数组中的每个元素调用，只要返回 `true`，移除操作就会继续。
+- `canContinueDropping` (`(item: T, index: number, arr: T[]) => boolean`): 一个谓词函数，用于确定是否继续移除元素。该函数会与每个元素、其索引及数组一起调用，只要返回 `true`，移除操作就会继续。
 
 ### 返回值
 
