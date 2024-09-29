@@ -411,4 +411,13 @@ describe('matchesProperty', () => {
       expect(matches({ a: source })).toBe(false);
     });
   });
+
+  it('should correctly match the boolean property value', () => {
+    const truthy = { a: true };
+    const falsey = { a: false };
+    const matches = matchesProperty('a', false);
+
+    expect(matches(truthy)).toBe(false);
+    expect(matches(falsey)).toBe(true);
+  });
 });

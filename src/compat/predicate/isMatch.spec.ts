@@ -15,6 +15,13 @@ describe('isMatch', () => {
     expect(isMatch({ a: { b: { c: 1, d: 2 }, e: 3 }, f: 4 }, { a: { b: { c: 1 } } })).toBe(true);
   });
 
+  it(`should match boolean values`, () => {
+    expect(isMatch(true, true)).toBe(true);
+    expect(isMatch(false, true)).toBe(false);
+    expect(isMatch(true, false)).toBe(false);
+    expect(isMatch(false, false)).toBe(true);
+  });
+
   it(`should match inherited string keyed \`object\` properties`, () => {
     interface Foo {
       a: number;

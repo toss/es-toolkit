@@ -33,6 +33,13 @@ describe('filter', () => {
     ];
 
     expect(filter(arr, ['name', 'Alice'])).toEqual([{ id: 1, name: 'Alice' }]);
+
+    const users = [
+      { user: 'barney', age: 36, active: true },
+      { user: 'fred', age: 40, active: false },
+    ];
+
+    expect(filter(users, ['active', false])).toEqual([{ user: 'fred', age: 40, active: false }]);
   });
 
   it(`filter should work with \`property\` shorthands`, () => {
