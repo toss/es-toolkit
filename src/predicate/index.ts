@@ -14,5 +14,7 @@ export { isBoolean } from './isBoolean.ts';
 export { isSymbol } from './isSymbol.ts';
 export { isString } from './isString.ts';
 export { isJSONObject } from './isJSONObject.ts';
+export { isJSONValue } from './isJSONValue.ts';
+export { isJSONArray } from './isJSONArray.ts';
 export { isWeakMap } from './isWeakMap.ts';
 export { isWeakSet } from './isWeakSet.ts';
