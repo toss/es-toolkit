@@ -18,6 +18,7 @@ You can specify the condition in several ways:
 ## Signature
 
 ```typescript
+function every<T>(arr: T[]): boolean;
 function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
 function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
 function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
@@ -25,7 +26,7 @@ function every<T>(arr: T[], doesMatch: string): boolean;
 
 function every<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): boolean;
@@ -46,7 +47,7 @@ function every<T extends Record<string, unknown>>(object: T, doesMatch: string):
     - **Property name** (`string`): The name of the property to check for a truthy value.
 
   - For the `every` overloads with objects:
-    - **Predicate function** (`(item: T[keyof T], index: number, object: T) => unknown`): A function that takes an item, its key, and the object, and returns a truthy value if the item matches the criteria.
+    - **Predicate function** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): A function that takes an value, its key, and the object, and returns a truthy value if the item matches the criteria.
     - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
     - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
     - **Property name** (`string`): The name of the property to check for a truthy value.
@@ -89,7 +90,7 @@ const items = [
   { id: 2, name: 'Bob' },
 ];
 const result = every(items, 'name');
-console.log(result); // false
+console.log(result); // true
 ```
 
 ### Objects
@@ -99,7 +100,7 @@ import { every } from 'es-toolkit/compat';
 
 // Using a predicate function
 const obj = { a: 1, b: 2, c: 3 };
-const result = every(obj, item => item > 0);
+const result = every(obj, value => value > 0);
 console.log(result); // true
 
 // Using a partial value
@@ -108,12 +109,12 @@ const result = every(obj, { name: 'Bob' });
 console.log(result); // false
 
 // Using a property-value pair
-const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = every(items, ['name', 'Alice']);
+const obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
+const result = every(obj, ['name', 'Alice']);
 console.log(result); // false
 
 // Using a property name
 const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
 const result = every(obj, 'name');
-console.log(result); // false
+console.log(result); // true
 ```
