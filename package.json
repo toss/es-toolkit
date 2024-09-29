@@ -28,7 +28,8 @@
   },
   "files": [
     "dist",
-    "*.d.ts"
+    "*.d.ts",
+    "src"
   ],
   "publishConfig": {
     "access": "public",
