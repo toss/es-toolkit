@@ -25,7 +25,7 @@ function filter<T>(arr: T[], doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
@@ -47,7 +47,7 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
 
   - オブジェクトの場合:
 
-    - **検査関数** (`(item: T[keyof T], index: number, object: T) => unknown`): 各要素が条件を満たしているか確認する関数。
+    - **検査関数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 各要素が条件を満たしているか確認する関数。
     - **部分値** (`Partial<T[keyof T]>`): 要素の属性と値が一致するか確認する部分オブジェクト。
     - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初の要素が対象プロパティ、2番目が対象値を示すタプル。
     - **プロパティ名** (`string`): 特定の属性を持っているか確認するプロパティ名。
@@ -61,60 +61,70 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
 ### 配列の場合
 
 ```typescript
-import { find } from 'es-toolkit/compat';
+import { filter } from 'es-toolkit/compat';
 
 // 検査関数を使う場合
-const items = [1, 2, 3, 4, 5];
-const result = find(items, item => item > 3);
-console.log(result); // 4
+filter([1, 2, 3], n => n % 2 === 0);
+// => [2]
 
 // 部分オブジェクトを使う場合
-const items = [
+const arr = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
-const result = find(items, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
+filter(arr, { name: 'Bob' });
+// => [{ id: 2, name: 'Bob' }]
 
 // プロパティ-値ペアを使う場合
-const items = [
+const arr = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
-const result = find(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
+filter(arr, ['name', 'Alice']);
+// => [{ id: 1, name: 'Alice' }]
 
 // プロパティ名を使う場合
-const items = [
+const arr = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
+  { id: 3, age: 28 },
 ];
-const result = find(items, 'name');
-console.log(result); // { id: 1, name: 'Alice' }
+filter(arr, 'name');
+// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
 ```
 
 ### オブジェクトの場合
 
 ```typescript
-import { find } from 'es-toolkit/compat';
+import { filter } from 'es-toolkit/compat';
 
 // 検査関数を使う場合
 const obj = { a: 1, b: 2, c: 3 };
-const result = find(obj, item => item > 2);
-console.log(result); // 3
+filter(obj, item => item > 2);
+// => [3]
 
 // 部分オブジェクトを使う場合
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = find(obj, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
+const obj = {
+  a: { id: 1, name: 'Alice' },
+  b: { id: 2, name: 'Bob' },
+};
+filter(obj, { name: 'Bob' });
+// => [{ id: 2, name: 'Bob' }]
 
 // プロパティ-値ペアを使う場合
-const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = find(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
+const obj = {
+  alice: { id: 1, name: 'Alice' },
+  bob: { id: 2, name: 'Bob' },
+};
+filter(obj, ['name', 'Alice']);
+// => [{ id: 1, name: 'Alice' }]
 
 // プロパティ名を使う場合
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = find(obj, 'name');
-console.log(result); // { id: 1, name: 'Alice' }
+const obj = {
+  a: { id: 1, name: 'Alice' },
+  b: { id: 2, name: 'Bob' },
+  c: { id: 3, age: 28 },
+};
+filter(obj, 'name');
+// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
 ```

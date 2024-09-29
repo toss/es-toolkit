@@ -25,7 +25,7 @@ function filter<T>(arr: T[], doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
@@ -46,7 +46,7 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
     - **Property name** (`string`): The name of the property to check for in the elements.
 
   - For the `filter` overloads with objects:
-    - **Predicate function** (`(item: T[keyof T], index: number, object: T) => unknown`): A function that takes an item, its key, and the object, and returns a truthy value if the item matches the criteria.
+    - **Predicate function** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): A function that takes an value, its key, and the object, and returns a truthy value if the item matches the criteria.
     - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
     - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
     - **Property name** (`string`): The name of the property to check for a truthy value.
@@ -89,7 +89,7 @@ const arr = [
   { id: 3, age: 28 },
 ];
 filter(arr, 'name');
-// => [{ id: 1, name: 'Alice' }]
+// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
 ```
 
 ### Object
