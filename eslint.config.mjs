@@ -113,6 +113,7 @@ export default [
       'jsdoc/no-defaults': 'off',
       'jsdoc/require-jsdoc': 'off',
       'vue/multi-word-component-names': 'off',
+      'prefer-object-has-own': 'error',
     },
   },
 ];

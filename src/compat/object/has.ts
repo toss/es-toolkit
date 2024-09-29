@@ -84,7 +84,7 @@ export function has(object: any, path: PropertyKey | readonly PropertyKey[]): bo
     const key = resolvedPath[i];
 
     // Check if the current key is a direct property of the current object
-    if (current == null || !Object.prototype.hasOwnProperty.call(current, key)) {
+    if (current == null || !Object.hasOwn(current, key)) {
       const isSparseIndex = (Array.isArray(current) || isArguments(current)) && isIndex(key) && key < current.length;
 
       if (!isSparseIndex) {
