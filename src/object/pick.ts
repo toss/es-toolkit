@@ -21,7 +21,7 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
 
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+    if (Object.hasOwn(obj, key)) {
       result[key] = obj[key];
     }
   }

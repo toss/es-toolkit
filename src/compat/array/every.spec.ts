@@ -62,7 +62,9 @@ describe('every', () => {
     const actual = empties.map(value => {
       try {
         return every(value, identity);
-      } catch (e) {}
+      } catch (e) {
+        /* empty */
+      }
     });
 
     expect(actual).toEqual(expected);
@@ -86,6 +88,7 @@ describe('every', () => {
   });
 
   it('should use `_.identity` when `predicate` is nullish', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     let expected = values.map(stubFalse);
 

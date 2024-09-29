@@ -69,12 +69,12 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     }
 
     // For RegExpArrays
-    if (Object.prototype.hasOwnProperty.call(obj, 'index')) {
+    if (Object.hasOwn(obj, 'index')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.index = obj.index;
     }
-    if (Object.prototype.hasOwnProperty.call(obj, 'input')) {
+    if (Object.hasOwn(obj, 'input')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.input = obj.input;

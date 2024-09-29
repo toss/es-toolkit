@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { dropWhile } from './dropWhile';
 import { slice } from '../_internal/slice';
-import { range } from '../../math/range';
-import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/dropWhile.spec.js
@@ -28,6 +26,7 @@ describe('dropWhile', () => {
     let args;
 
     dropWhile(array, function () {
+      // eslint-disable-next-line prefer-rest-params
       args = slice.call(arguments);
     });
 
