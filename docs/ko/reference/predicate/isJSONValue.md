@@ -5,7 +5,7 @@
 유효한 JSON 값이란, 다음 중 하나를 말해요.
 
 - [JSON 객체](./isJSONObject.md) (문자열 키와 유효한 JSON 값을 가진 객체)
-- [JSON 객체](./isJSONArray.md) (유효한 JSON 값의 배열)
+- [JSON 배열](./isJSONArray.md) (유효한 JSON 값의 배열)
 - 문자열 (`string`)
 - 숫자 (`number`)
 - 참값 (`boolean`)
