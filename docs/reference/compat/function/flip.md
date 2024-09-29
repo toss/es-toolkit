@@ -20,7 +20,7 @@ function flip<F extends (...args: any[]) => any>(func: F): (...args: Reversed<Pa
 
 ### Returns
 
-(`(...args: ReverseParameters<Parameters<F>>) => ReturnType<F>`): A new function that takes the reversed arguments and returns the result of calling `func`.
+(`(...args: Reversed<Parameters<F>>) => ReturnType<F>`): A new function that takes the reversed arguments and returns the result of calling `func`.
 
 ## Example
 
