@@ -55,6 +55,10 @@ export function matchesProperty(
       return has(target, property as PropertyKey | PropertyKey[]);
     }
 
+    if (typeof source === 'boolean') {
+      return result === source;
+    }
+
     if (source === undefined) {
       return result === undefined;
     }

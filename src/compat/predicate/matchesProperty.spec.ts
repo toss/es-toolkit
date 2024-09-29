@@ -8,6 +8,13 @@ import { numberProto } from '../_internal/numberProto';
 import { cloneDeep } from '../object/cloneDeep';
 
 describe('matchesProperty', () => {
+  it('should return true when the property value matches the boolean source', () => {
+    const object = { a: false };
+    const matches = matchesProperty('a', false);
+
+    expect(matches(object)).toBe(true);
+  });
+
   it('should create a function that performs a deep comparison between a property value and `srcValue`', () => {
     let object: any = { a: 1, b: 2, c: 3 };
     let matches = matchesProperty('a', 1);
