@@ -7,16 +7,16 @@
 ## 인터페이스
 
 ```typescript
-function isJSONObject(obj: unknown): boolean;
+function isJSONObject(obj: unknown): obj is Record<string, any>;
 ```
 
 ### 파라미터
 
-- `obj` (`T`): 확인할 값이에요.
+- `obj` (`unknown`): 확인할 값.
 
 ### 반환 값
 
-(`boolean`): `obj`가 JSON 객체이면 True, 그렇지 않으면 False에요.
+(`obj is Record<string, any>`): `obj`가 JSON 객체이면 `true`, 그렇지 않으면 `false`.
 
 ## 예시
 

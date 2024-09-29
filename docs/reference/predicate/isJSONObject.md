@@ -7,7 +7,7 @@ The keys of a JSON object are strings, and the values can be strings, numbers, b
 ## Signature
 
 ```typescript
-function isJSONObject(value: unknown): boolean;
+function isJSONObject(obj: unknown): obj is Record<string, any>;
 ```
 
 ### Parameters
@@ -16,7 +16,7 @@ function isJSONObject(value: unknown): boolean;
 
 ### Returns
 
-(`boolean`): True if the value is a JSON object, otherwise false.
+(`obj is Record<string, any>`): True if the value is a JSON object, otherwise false.
 
 ## Examples
 
