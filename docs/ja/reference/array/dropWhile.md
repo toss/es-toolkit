@@ -8,13 +8,13 @@
 ## インターフェース
 
 ```typescript
-function dropWhile<T>(arr: T[], canContinueDropping: (item: T) => boolean): T[];
+function dropWhile<T>(arr: T[], canContinueDropping: (item: T, index: number, arr: T[]) => boolean): T[];
 ```
 
 ### パラメータ
 
 - `arr` (`T[]`): 要素を削除する配列。
-- `canContinueDropping` (`(item: T) => boolean`): 要素の削除を続けるかどうかを返す条件関数です。各要素に対して呼び出され、`true`を返す間は要素を削除します。
+- `canContinueDropping` (`(item: T, index: number, arr: T[]) => boolean`): 要素の削除を続けるかどうかを返す条件関数です。各要素、そのインデックス、および配列とともに呼び出され、`true`を返す間は要素を削除します。
 
 ### 戻り値
 
