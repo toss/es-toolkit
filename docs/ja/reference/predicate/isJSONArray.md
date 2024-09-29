@@ -2,7 +2,7 @@
 
 与えられた値が有効なJSON配列かどうかを確認します。
 
-有効なJSON配列は、すべての項目が有効なJSON値である配列として定義されますます。
+有効なJSON配列は、すべての項目が有効なJSON値である配列として定義されます。
 
 ## インターフェース
 
@@ -12,11 +12,11 @@ function isJSONArray(value: unknown): value is any[];
 
 ### パラメータ
 
-- `value` (`unknown`): 確認する値ですます。
+- `value` (`unknown`): 確認する値。
 
 ### 戻り値
 
-(`value is any[]`): 値が有効なJSON配列であればTrue、それ以外の場合はFalseですます。
+(`value is any[]`): 値が有効なJSON配列であれば`true`、それ以外の場合は`false`。
 
 ## 例
 
