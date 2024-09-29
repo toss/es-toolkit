@@ -5,16 +5,16 @@
 ## 签名
 
 ```typescript
-function isPlainObject(object: object): boolean;
+function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 ```
 
 ### 参数
 
-- `object` (`object`): 要检查的值。
+- `value` (`unknown`): 要检查的值。
 
 ### 返回值
 
-(`boolean`): 如果该值是普通对象，则返回 `true`，否则返回 `false`。
+(`value is Record<string, any>`): 如果该值是普通对象，则返回 `true`，否则返回 `false`。
 
 ## 示例
 

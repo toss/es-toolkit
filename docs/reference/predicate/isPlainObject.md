@@ -5,16 +5,16 @@ Checks if a given value is a plain object.
 ## Signature
 
 ```typescript
-function isPlainObject(object: object): boolean;
+function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 ```
 
 ### Parameters
 
-- `object` (`object`): The value to check.
+- `value` (`unknown`): The value to check.
 
 ### Returns
 
-(`boolean`): True if the value is a plain object, otherwise false.
+(`value is Record<string, any>`): True if the value is a plain object, otherwise false.
 
 ## Examples
 
