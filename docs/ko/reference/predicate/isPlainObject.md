@@ -5,16 +5,16 @@
 ## 인터페이스
 
 ```typescript
-function isPlainObject(object: object): boolean;
+function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 ```
 
 ### 파라미터
 
-- `object` (`object`): 검사할 값.
+- `value` (`unknown`): 검사할 값.
 
 ### 반환 값
 
-(`boolean`): 값이 순수 객체이면 true.
+(`value is Record<PropertyKey, any>`): 값이 순수 객체이면 `true`.
 
 ## 예시
 
