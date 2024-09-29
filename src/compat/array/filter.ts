@@ -83,7 +83,7 @@ export function filter<T>(arr: readonly T[], propertyToCheck: string): T[];
  */
 export function filter<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (item: T[keyof T], index: keyof T, object: T) => unknown
 ): T[];
 
 /**
@@ -165,6 +165,22 @@ export function filter<T>(
 
   switch (typeof predicate) {
     case 'function': {
+      if (!Array.isArray(source)) {
+        const result: T[] = [];
+        const entries: any[] = Object.entries(source);
+
+        for (let i = 0; i < entries.length; i++) {
+          const entry = entries[i];
+          const [key, value] = entry;
+
+          if (predicate(value, key, source)) {
+            result.push(value);
+          }
+        }
+
+        return result;
+      }
+
       return collection.filter(predicate);
     }
     case 'object': {

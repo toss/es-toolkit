@@ -55,7 +55,7 @@ describe('filter', () => {
       c: 3,
     };
 
-    expect(filter(obj, item => item > 2)).toEqual([3]);
+    expect(filter(obj, (value, key) => value >= 2 && key === 'b')).toEqual([2]);
   });
 
   it(`filter should work with \`matches\` shorthands for objects.`, () => {
