@@ -1,8 +1,8 @@
 # isJSONObject
 
-Checks if a value is a valid JSON object.
+Checks if a value is a JSON object.
 
-The keys of a JSON object are strings, and the values can be strings, numbers, booleans, null, plain objects, or arrays.
+A valid JSON object is defined as an object with string keys and valid [JSON values](./isJSONValue.md).
 
 ## Signature
 
