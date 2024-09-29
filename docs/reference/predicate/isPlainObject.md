@@ -14,7 +14,7 @@ function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 
 ### Returns
 
-(`value is Record<string, any>`): True if the value is a plain object, otherwise false.
+(`value is Record<PropertyKey, any>`): True if the value is a plain object, otherwise false.
 
 ## Examples
 

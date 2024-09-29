@@ -14,7 +14,7 @@ function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 
 ### 返回值
 
-(`value is Record<string, any>`): 如果该值是普通对象，则返回 `true`，否则返回 `false`。
+(`value is Record<PropertyKey, any>`): 如果该值是普通对象，则返回 `true`，否则返回 `false`。
 
 ## 示例
 

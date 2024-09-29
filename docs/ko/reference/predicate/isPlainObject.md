@@ -14,7 +14,7 @@ function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 
 ### 반환 값
 
-(`value is Record<string, any>`): 값이 순수 객체이면 true.
+(`value is Record<PropertyKey, any>`): 값이 순수 객체이면 `true`.
 
 ## 예시
 

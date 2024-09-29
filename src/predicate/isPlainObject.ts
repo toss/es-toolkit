@@ -2,7 +2,7 @@
  * Checks if a given value is a plain object.
  *
  * @param {object} value - The value to check.
- * @returns {boolean} - True if the value is a plain object, otherwise false.
+ * @returns {value is Record<PropertyKey, any>} - True if the value is a plain object, otherwise false.
  *
  * @example
  * console.log(isPlainObject({})); // true

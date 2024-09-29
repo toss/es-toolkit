@@ -14,7 +14,7 @@ function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 
 ### 戻り値
 
-(`value is Record<string, any>`): 値がプレーンオブジェクトの場合はtrue。
+(`value is Record<PropertyKey, any>`): 値がプレーンオブジェクトの場合は`true`。
 
 ## 例
 
