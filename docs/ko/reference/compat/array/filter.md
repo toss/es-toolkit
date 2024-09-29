@@ -25,7 +25,7 @@ function filter<T>(arr: T[], doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
@@ -47,7 +47,7 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
 
   - 객체의 경우:
 
-    - **검사 함수** (`(item: T[keyof T], index: number, object: T) => unknown`): 각 요소가 조건을 만족하는지 확인하는 함수.
+    - **검사 함수** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 각 요소가 조건을 만족하는지 확인하는 함수.
     - **부분 객체** (`Partial<T[keyof T]>`): 요소의 속성과 값과 일치하는지 확인할 부분 객체.
     - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 찾는 프로퍼티, 두 번째가 찾는 값을 나타내는 튜플.
     - **프로퍼티 이름** (`string`): 특정 속성을 가지고 있는지 확인할 프로퍼티 이름.
@@ -90,7 +90,7 @@ const arr = [
   { id: 3, age: 28 },
 ];
 filter(arr, 'name');
-// => [{ id: 1, name: 'Alice' }]
+// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
 ```
 
 ### 객체의 경우

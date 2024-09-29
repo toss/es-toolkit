@@ -11,7 +11,6 @@ import { matchesProperty } from '../predicate/matchesProperty';
  * @param {T[]} arr - The array to iterate over.
  * @param {(item: T, index: number, arr: T[]) => unknown} doesMatch - The function invoked per iteration.
  * @returns {T[]} - Returns a new array of elements that satisfy the given doesMatch function.
-
  *
  * @example
  * filter([1, 2, 3], n => n % 2 === 0)
@@ -38,7 +37,7 @@ export function filter<T>(arr: readonly T[], doesMatch: Partial<T>): T[];
  * Filters elements in a arr that match the given key-value pair.
  *
  * @template T
- * @param {readonly T[]} arr - The array to iterate over.
+ * @param {T[]} arr - The array to iterate over.
  * @param {[keyof T, unknown]} doesMatchProperty - The key-value pair to match.
  * @returns {T[]} - Returns a new array of elements that match the given key-value pair.
  *
@@ -53,7 +52,7 @@ export function filter<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknow
  * Filters the arr, returning elements that contain the given property name.
  *
  * @template T
- * @param {readonly T[]} arr - The array to iterate over.
+ * @param {T[]} arr - The array to iterate over.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {T[]} - Returns a new array of elements that match the given property name.
  *
@@ -68,29 +67,29 @@ export function filter<T>(arr: readonly T[], propertyToCheck: string): T[];
  * Filters items from a object and returns an array of elements that match the given predicate function.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T : never} object - The object to iterate over.
- * @param {(item: T[keyof T], index: number, arr: T) => unknown} doesMatch - The function invoked per iteration.
+ * @param {T} object - The object to iterate over.
+ * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} doesMatch - The function invoked per iteration.
  * @returns {T[]} - Returns a new array of elements that satisfy the given predicate function.
  *
  * @example
  * const obj = { item1: { a: 0 }, item2: { a: 1 }, item3: { a: 0 } }
- * filter(obj, items => items.a)
+ * filter(obj, value => value.a)
  * // => [{ a: 1 }]
  *
  * const obj = { a: 1, b: 2, c: 3 };
- * filter(obj, item => item > 2)
+ * filter(obj, value => value > 2)
  * // => [3]
  */
 export function filter<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: keyof T, object: T) => unknown
+  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
 
 /**
  * Filters elements in a object that match the properties of the given partial object.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T : never} object - The object to iterate over.
+ * @param {T} object - The object to iterate over.
  * @param {Partial<T[keyof T]>} doesMatch - The partial object to match
  * @returns {T[]} - Returns a new array of elements that match the given properties.pair.
  *
@@ -105,7 +104,7 @@ export function filter<T extends Record<string, unknown>>(object: T, doesMatch: 
  * Filters elements in a arr that match the given key-value pair.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T : never} object - The object to iterate over.
+ * @param {T} object - The object to iterate over.
  * @param {[keyof T, unknown]} doesMatchProperty - The key-value pair to match.
  * @returns {T[]} - Returns a new array of elements that match the given key-value pair.
  *
@@ -120,7 +119,7 @@ export function filter<T extends Record<string, unknown>>(object: T, doesMatchPr
  * Filters the object, returning elements that contain the given property name.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T : never} object - The object to iterate over.
+ * @param {T} object - The object to iterate over.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {T[]} - Returns a new array of elements that match the given property name.
  *
@@ -136,7 +135,7 @@ export function filter<T extends Record<string, unknown>>(object: T, propertyToC
  * If a function is provided, it is invoked for each element in the collection.
  *
  * @template T
- * @param {readonly T[] | Record<any, any>} source - The array or object to iterate over.
+ * @param {T[] | Record<any, any>} source - The array or object to iterate over.
  * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} [predicate=identity] - The function invoked per iteration.
  * @returns {T[]} - Returns a new array of filtered elements that satisfy the predicate.
  *

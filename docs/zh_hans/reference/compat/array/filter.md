@@ -26,7 +26,7 @@ function filter<T>(arr: T[], doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
@@ -47,7 +47,7 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
     - **属性名称** (`string`): 用于检查是否具有特定属性的属性名称。
 
   - 对于对象的 `filter` 重载：
-    - **谓词函数** (`(item: T[keyof T], index: number, object: T) => unknown`): 一个函数，接收一个项、其键和对象，如果该项符合条件，则返回一个真值。
+    - **谓词函数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 一个函数，接收一个项、其键和对象，如果该项符合条件，则返回一个真值。
     - **部分值** (`Partial<T[keyof T]>`): 用于检查元素的属性和值是否匹配的部分对象。
     - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
     - **属性名称** (`string`): 用于检查是否具有特定属性的属性名称。
@@ -90,7 +90,7 @@ const arr = [
   { id: 3, age: 28 },
 ];
 filter(arr, 'name');
-// => [{ id: 1, name: 'Alice' }]
+// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
 ```
 
 ### 对象
