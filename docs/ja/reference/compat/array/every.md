@@ -18,6 +18,7 @@
 ## インターフェース
 
 ```typescript
+function every<T>(arr: T[]): boolean;
 function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
 function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
 function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
@@ -25,7 +26,7 @@ function every<T>(arr: T[], doesMatch: string): boolean;
 
 function every<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): boolean;
@@ -46,7 +47,7 @@ function every<T extends Record<string, unknown>>(object: T, doesMatch: string):
     - **プロパティ名** (`string`): 指定されたプロパティがすべての要素に対して真と評価される場合、結果は `true` になります。
 
   - オブジェクトの場合:
-    - **検査関数** (`(item: T[keyof T], index: number, object: T) => unknown`): 条件を満たすかどうかを確認する関数。すべての要素が条件を満たす場合、結果は `true` になります。
+    - **検査関数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 条件を満たすかどうかを確認する関数。すべての要素が条件を満たす場合、結果は `true` になります。
     - **部分値** (`Partial<T[keyof T]>`): 与えられた部分値に一致する場合、すべての要素が条件を満たす必要があります。
     - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。すべての要素がこの条件を満たす場合、結果は `true` になります。
     - **プロパティ名** (`string`): 指定されたプロパティがすべての要素に対して真と評価される場合、結果は `true` になります。
@@ -89,7 +90,7 @@ const items = [
   { id: 2, name: 'Bob' },
 ];
 const result = every(items, 'name');
-console.log(result); // false
+console.log(result); // true
 ```
 
 ### オブジェクトの場合
@@ -99,7 +100,7 @@ import { every } from 'es-toolkit/compat';
 
 // 検査関数を使う場合
 const obj = { a: 1, b: 2, c: 3 };
-const result = every(obj, item => item > 0);
+const result = every(obj, value => value > 0);
 console.log(result); // true
 
 // 部分オブジェクトを使う場合
@@ -108,12 +109,12 @@ const result = every(obj, { name: 'Bob' });
 console.log(result); // false
 
 // プロパティ-値ペアを使う場合
-const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = every(items, ['name', 'Alice']);
+const obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
+const result = every(obj, ['name', 'Alice']);
 console.log(result); // false
 
 // プロパティ名を使う場合
 const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
 const result = every(obj, 'name');
-console.log(result); // false
+console.log(result); // true
 ```
