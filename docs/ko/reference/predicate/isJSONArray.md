@@ -12,11 +12,11 @@ function isJSONArray(value: unknown): value is any[];
 
 ### 파라미터
 
-- `value` (`unknown`): 확인할 값입니다.
+- `value` (`unknown`): 확인할 값.
 
 ### 반환 값
 
-(`value is any[]`): 값이 유효한 JSON 배열이면 true, 그렇지 않으면 false입니다.
+(`value is any[]`): 값이 유효한 JSON 배열이면 `true`, 그렇지 않으면 `false`.
 
 ## 예시
 
