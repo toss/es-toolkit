@@ -48,7 +48,7 @@ describe('compat/pick', () => {
   });
 
   it('should work with a primitive `object`', () => {
-    expect(pick('32', [1])).toEqual({ slice: ''.slice });
+    expect(pick('', 'slice')).toEqual({ slice: ''.slice });
   });
 
   it('should work with `arguments` object `paths`', () => {
