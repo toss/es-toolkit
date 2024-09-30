@@ -1,10 +1,10 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
 import jsdoc from 'eslint-plugin-jsdoc';
-import prettier from 'eslint-config-prettier';
-import pluginVue from 'eslint-plugin-vue';
 import noForOfArrayPlugin from 'eslint-plugin-no-for-of-array';
+import prettier from 'eslint-plugin-prettier/recommended';
+import pluginVue from 'eslint-plugin-vue';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import pluginJs from '@eslint/js';
 
 export default [
   {
