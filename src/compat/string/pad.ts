@@ -1,5 +1,6 @@
 import { pad as padToolkit } from '../../string/pad.ts';
 import { toString } from '../util/toString.ts';
+
 /**
  * Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length.
  * If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged.

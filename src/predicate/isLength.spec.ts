@@ -1,5 +1,5 @@
-import { isLength } from './isLength';
 import { describe, expect, it } from 'vitest';
+import { isLength } from './isLength';
 
 describe('isLength', () => {
   it('should return `true` for lengths', () => {

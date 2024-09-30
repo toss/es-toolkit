@@ -1,13 +1,10 @@
-import { LiteralPropertyDef } from "@deno/doc";
-import { formatType } from "./type.ts";
-import { formatReadonly } from "../helpers/readonly.ts";
-import { FormatOption } from "../options.ts";
+import { LiteralPropertyDef } from '@deno/doc';
+import { formatType } from './type.ts';
+import { formatReadonly } from '../helpers/readonly.ts';
+import { FormatOption } from '../options.ts';
 
-export function formatPropertyDef(
-  node: LiteralPropertyDef,
-  options: FormatOption,
-) {
-  let result = "";
+export function formatPropertyDef(node: LiteralPropertyDef, options: FormatOption) {
+  let result = '';
 
   result += formatReadonly(node, options);
 
@@ -18,11 +15,11 @@ export function formatPropertyDef(
   }
 
   if (node.optional) {
-    result += "?";
+    result += '?';
   }
 
   if (node.tsType != null) {
-    result += ": ";
+    result += ': ';
     result += formatType(node.tsType, options);
   }
 

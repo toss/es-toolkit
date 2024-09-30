@@ -1,5 +1,5 @@
-import { cloneDeep } from '../../object/cloneDeep.ts';
 import { isMatch } from './isMatch.ts';
+import { cloneDeep } from '../../object/cloneDeep.ts';
 
 /**
  * Creates a function that performs a deep comparison between a given target and the source object.

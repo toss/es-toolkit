@@ -1,5 +1,5 @@
-import { capitalize } from './capitalize.ts';
 import { getWords } from './_internal/getWords.ts';
+import { capitalize } from './capitalize.ts';
 
 /**
  * Converts a string to camel case.

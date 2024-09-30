@@ -1,5 +1,5 @@
-import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { isObject } from './isObject.ts';
+import { isPrimitive } from '../../predicate/isPrimitive.ts';
 
 /**
  * Checks if the target matches the source by comparing their structures and values.

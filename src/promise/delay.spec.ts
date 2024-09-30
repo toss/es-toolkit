@@ -1,5 +1,5 @@
-import { performance } from 'node:perf_hooks';
 import { describe, expect, it, vi } from 'vitest';
+import { performance } from 'node:perf_hooks';
 import { delay } from './delay';
 
 describe('delay', () => {

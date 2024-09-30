@@ -1,5 +1,5 @@
-import { trimStart } from './trimStart.ts';
 import { trimEnd } from './trimEnd.ts';
+import { trimStart } from './trimStart.ts';
 
 /**
  * Removes leading and trailing whitespace or specified characters from a string.

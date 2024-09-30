@@ -1,6 +1,6 @@
+import { bench, describe } from 'vitest';
 import { property as propertyToolkit } from 'es-toolkit/compat';
 import { property as propertyLodash } from 'lodash';
-import { bench, describe } from 'vitest';
 
 describe('property', () => {
   bench('es-toolkit/property', () => {

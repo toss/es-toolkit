@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { merge } from './merge';
-import { args } from '../_internal/args';
-import { isArguments } from '../predicate/isArguments';
-import { typedArrays } from '../_internal/typedArrays';
 import { range } from '../../math/range';
-import { stubTrue } from '../_internal/stubTrue';
 import { isEqual } from '../../predicate/isEqual';
+import { args } from '../_internal/args';
+import { stubTrue } from '../_internal/stubTrue';
+import { typedArrays } from '../_internal/typedArrays';
+import { isArguments } from '../predicate/isArguments';
 
 describe('merge', () => {
   it('should merge `source` into `object`', () => {

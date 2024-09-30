@@ -1,3 +1,6 @@
+import { isPlainObject } from './isPlainObject.ts';
+import { getSymbols } from '../compat/_internal/getSymbols.ts';
+import { getTag } from '../compat/_internal/getTag.ts';
 import {
   argumentsTag,
   arrayBufferTag,
@@ -11,9 +14,9 @@ import {
   float32ArrayTag,
   float64ArrayTag,
   functionTag,
+  int8ArrayTag,
   int16ArrayTag,
   int32ArrayTag,
-  int8ArrayTag,
   mapTag,
   numberTag,
   objectTag,
@@ -21,14 +24,11 @@ import {
   setTag,
   stringTag,
   symbolTag,
-  uint16ArrayTag,
-  uint32ArrayTag,
   uint8ArrayTag,
   uint8ClampedArrayTag,
+  uint16ArrayTag,
+  uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
-import { getSymbols } from '../compat/_internal/getSymbols.ts';
-import { getTag } from '../compat/_internal/getTag.ts';
-import { isPlainObject } from './isPlainObject.ts';
 
 declare let Buffer:
   | {
