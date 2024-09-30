@@ -121,7 +121,9 @@ export function includes(
 
   // Not using `Object.keys` because it can't access inherited properties.
   for (const key in source) {
-    keys.push(key);
+    if (Object.hasOwn(source, key)) {
+      keys.push(key);
+    }
   }
 
   if (fromIndex < 0) {

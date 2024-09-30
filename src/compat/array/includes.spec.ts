@@ -7,6 +7,11 @@ import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 
 describe('includes', () => {
+  it('should ignore inherited value', () => {
+    const obj = Object.create({ inherited: 'value' });
+    expect(includes(obj, 'value')).toBe(false);
+  });
+
   Object.entries({
     'an `arguments` object': toArgs([1, 2, 3, 4]),
     'an array': [1, 2, 3, 4],
