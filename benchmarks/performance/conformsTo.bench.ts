@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { conformsTo as conformsToolkit } from 'es-toolkit/compat';
-import { conformsTo as conformsToLodash } from 'lodash';
+import { conformsTo as conformsToolkit_ } from 'es-toolkit/compat';
+import { conformsTo as conformsToLodash_ } from 'lodash';
+
+const conformsToolkit = conformsToolkit_;
+const conformsToLodash = conformsToLodash_;
 
 describe('conformsTo', () => {
   bench('es-toolkit/conformsTo', () => {

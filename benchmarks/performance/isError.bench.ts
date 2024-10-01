@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isError as isErrorToolkit } from 'es-toolkit';
-import { isError as isErrorLodash } from 'lodash';
+import { isError as isErrorToolkit_ } from 'es-toolkit';
+import { isError as isErrorLodash_ } from 'lodash';
+
+const isErrorToolkit = isErrorToolkit_;
+const isErrorLodash = isErrorLodash_;
 
 describe('isError', () => {
   bench('es-toolkit/isError', () => {

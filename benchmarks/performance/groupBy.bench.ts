@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { groupBy as groupByToolkit } from 'es-toolkit';
-import { groupBy as groupByLodash } from 'lodash';
+import { groupBy as groupByToolkit_ } from 'es-toolkit';
+import { groupBy as groupByLodash_ } from 'lodash';
+
+const groupByToolkit = groupByToolkit_;
+const groupByLodash = groupByLodash_;
 
 describe('groupBy', () => {
   bench('es-toolkit/groupBy', () => {

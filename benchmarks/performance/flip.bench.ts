@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { flip as flipToolkit } from 'es-toolkit/compat';
-import { flip as flipLodash } from 'lodash';
+import { flip as flipToolkit_ } from 'es-toolkit/compat';
+import { flip as flipLodash_ } from 'lodash';
+
+const flipToolkit = flipToolkit_;
+const flipLodash = flipLodash_;
 
 describe('flip', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

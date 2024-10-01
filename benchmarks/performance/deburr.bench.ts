@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { deburr as deburrToolkit } from 'es-toolkit';
-import { deburr as deburrLodash } from 'lodash';
+import { deburr as deburrToolkit_ } from 'es-toolkit';
+import { deburr as deburrLodash_ } from 'lodash';
+
+const deburrToolkit = deburrToolkit_;
+const deburrLodash = deburrLodash_;
 
 const longWord = 'déjà vu'.repeat(1000);
 describe('deburr', () => {
