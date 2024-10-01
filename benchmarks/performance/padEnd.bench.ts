@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { padEnd as padEndToolkit } from 'es-toolkit/compat';
-import { padEnd as padEndLodash } from 'lodash';
+import { padEnd as padEndToolkit_ } from 'es-toolkit/compat';
+import { padEnd as padEndLodash_ } from 'lodash';
+
+const padEndToolkit = padEndToolkit_;
+const padEndLodash = padEndLodash_;
 
 describe('padEnd', () => {
   bench('es-toolkit/padEnd', () => {

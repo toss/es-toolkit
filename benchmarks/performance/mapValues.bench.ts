@@ -1,7 +1,11 @@
 import { bench, describe } from 'vitest';
-import { mapValues as mapValuesToolkit } from 'es-toolkit';
-import { mapValues as mapValuesCompatToolkit } from 'es-toolkit/compat';
-import { mapValues as mapValuesLodash } from 'lodash';
+import { mapValues as mapValuesToolkit_ } from 'es-toolkit';
+import { mapValues as mapValuesCompatToolkit_ } from 'es-toolkit/compat';
+import { mapValues as mapValuesLodash_ } from 'lodash';
+
+const mapValuesToolkit = mapValuesToolkit_;
+const mapValuesCompatToolkit = mapValuesCompatToolkit_;
+const mapValuesLodash = mapValuesLodash_;
 
 describe('mapValues', () => {
   bench('es-toolkit/mapValues', () => {

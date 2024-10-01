@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { memoize } from 'es-toolkit';
-import { memoize as lodashMemoize } from 'lodash';
+import { memoize as memoizeToolkit_ } from 'es-toolkit';
+import { memoize as memoizeLodash_ } from 'lodash';
+
+const memoizeToolkit = memoizeToolkit_;
+const lodashMemoize = memoizeLodash_;
 
 describe('memoize', () => {
   const object = { a: 1, b: 2, c: 3 };
@@ -9,7 +12,7 @@ describe('memoize', () => {
     return Object.values(args);
   };
   bench('es-toolkit/memoize', () => {
-    const memoized = memoize(values);
+    const memoized = memoizeToolkit(values);
     memoized(object);
     memoized(object); // cached
     memoized(other);
@@ -17,7 +20,7 @@ describe('memoize', () => {
   });
 
   bench('lodash/memoize', () => {
-    const memoized = lodashMemoize(values);
+    const memoized = memoizeLodash(values);
     memoized(object);
     memoized(object); // cached
     memoized(other);
