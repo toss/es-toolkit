@@ -7,7 +7,6 @@ const isStringToolkit = isStringToolkit_;
 const isStringToolkitCompat = isStringToolkitCompat_;
 const isStringLodash = isStringLodash_;
 
-
 describe('isString', () => {
   bench('es-toolkit/isString', () => {
     isStringToolkit('');

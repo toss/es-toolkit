@@ -7,7 +7,6 @@ const isSymbolToolkit = isSymbolToolkit_;
 const isSymbolToolkitCompat = isSymbolToolkitCompat_;
 const isSymbolLodash = isSymbolLodash_;
 
-
 describe('isSymbol', () => {
   bench('es-toolkit/isSymbol', () => {
     isSymbolToolkit(Symbol('a'));
