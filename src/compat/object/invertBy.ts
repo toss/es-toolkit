@@ -37,7 +37,7 @@ export function invertBy<T extends object>(
   }
 
   if (iteratee == null) {
-    iteratee = identity;
+    iteratee = identity as any as (value: T[keyof T]) => string;
   }
 
   for (const key in object) {
