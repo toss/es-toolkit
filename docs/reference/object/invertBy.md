@@ -18,6 +18,7 @@ function invertBy<T extends object>(
 ```
 
 ### Parameters
+
 - `object` (T | null | undefined): The object to iterate over. If null or undefined, returns an empty object.
 - `iteratee` ((value: T[keyof T]) => string): Optional. A function applied to each value to generate a key. If not provided, defaults to a function that converts the value to a string.
 
