@@ -1,6 +1,7 @@
 # curryRight
 
-Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
+Curries a function from right to left, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
+
 This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
 
 This method is like [curry](./curry.md), except that it curries the function from right to left.
