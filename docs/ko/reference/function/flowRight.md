@@ -31,7 +31,6 @@ function flowRight<A extends any[], R1, R2, R3, R4, R5>(
   f1: (...args: A) => R1
 ): (...args: A) => R5;
 function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
-function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
 ```
 
 ### 파라미터
@@ -50,4 +49,23 @@ const square = (n: number) => n * n;
 
 const combined = flowRight(square, add);
 console.log(combined(1, 2)); // 9
+```
+
+
+## Lodash와 호환성  
+
+`es-toolkit/compat`에서 `flowRight`를 가져오면 lodash와 완전히 호환돼요.
+
+- `flowRight`는 함수들의 배열과 개별 함수들 모두를 인수로 받을 수 있어요.  
+- 제공된 함수들 중 하나라도 함수가 아니면 `flowRight`는 오류를 발생시켜요.
+
+```typescript
+import { flowRight } from 'es-toolkit/compat';
+
+const add = (x: number, y: number) => x + y;
+const square = (n: number) => n * n;
+const double = (n: number) => n * 2;
+
+const combined = flowRight(double, [square, add]);
+console.log(combined(1, 2)); // => 18
 ```
