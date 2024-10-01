@@ -9,14 +9,14 @@
 ```typescript
 function curryRight<R>(func: () => R): () => R;
 function curryRight<P, R>(func: (p: P) => R): (p: P) => R;
-function curryRight<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P2) => (p2: P1) => R;
-function curryRight<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: P3) => (p2: P2) => (p3: P1) => R;
+function curryRight<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p2: P2) => (p1: P1) => R;
+function curryRight<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p3: P3) => (p2: P2) => (p1: P1) => R;
 function curryRight<P1, P2, P3, P4, R>(
   func: (p1: P1, p2: P2, p3: P3, p4: P4) => R
-): (p1: P4) => (p2: P3) => (p3: P2) => (p4: P1) => R;
+): (p4: P4) => (p3: P3) => (p2: P2) => (p1: P1) => R;
 function curryRight<P1, P2, P3, P4, P5, R>(
   func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
-): (p1: P5) => (p2: P4) => (p3: P3) => (p4: P2) => (p5: P1) => R;
+): (p5: P5) => (p4: P4) => (p3: P3) => (p2: P2) => (p1: P1) => R;
 function curryRight(func: (...args: any[]) => any): (...args: any[]) => any;
 ```
 
@@ -44,5 +44,5 @@ const sum10 = curriedSum(10);
 const sum25 = sum10(15);
 
 // 参数 `a` 应该被赋值为 `5`。函数 'sum' 已经接收到了所有参数，现在将返回一个值。
-const result = sum25(5);
+const result = sum25(5); // 30
 ```
