@@ -1,7 +1,7 @@
-import { type DefaultTheme, defineConfig } from 'vitepress';
-import { sortByText } from './libs/sortByText.mts';
 import path from 'node:path';
+import { type DefaultTheme, defineConfig } from 'vitepress';
 import { getSidebarItems } from './libs/getSidebarItems.mts';
+import { sortByText } from './libs/sortByText.mts';
 
 const docsRoot = path.resolve(import.meta.dirname, '..');
 

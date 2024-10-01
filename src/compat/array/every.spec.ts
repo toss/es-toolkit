@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { every } from './every';
-import { identity } from '../_internal/identity';
 import { empties } from '../_internal/empties';
-import { stubTrue } from '../_internal/stubTrue';
+import { identity } from '../_internal/identity';
 import { stubFalse } from '../_internal/stubFalse';
+import { stubTrue } from '../_internal/stubTrue';
 
 describe('every', () => {
   it('should return true for array with all elements passing predicate', () => {

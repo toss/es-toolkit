@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { falsey } from '../_internal/falsey';
 import { fill } from './fill.ts';
+import { falsey } from '../_internal/falsey';
 
 describe('fill', () => {
   it('should use a default `start` of `0` and a default `end` of `length`', () => {

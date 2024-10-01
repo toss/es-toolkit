@@ -1,6 +1,6 @@
-import { falsey } from '../_internal/falsey';
 import { describe, expect, it } from 'vitest';
 import { fromPairs } from './fromPairs';
+import { falsey } from '../_internal/falsey';
 
 describe('fromPairs', () => {
   it('should convert an array of key-value pairs into an object', () => {

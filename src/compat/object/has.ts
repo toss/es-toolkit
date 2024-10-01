@@ -1,7 +1,7 @@
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { isIndex } from '../_internal/isIndex.ts';
-import { toPath } from '../util/toPath.ts';
 import { isArguments } from '../predicate/isArguments.ts';
+import { toPath } from '../util/toPath.ts';
 
 /**
  * Checks if a given path exists within an object.

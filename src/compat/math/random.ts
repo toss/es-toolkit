@@ -1,6 +1,6 @@
+import { clamp } from './clamp.ts';
 import { random as randomToolkit } from '../../math/random.ts';
 import { randomInt as randomIntToolkit } from '../../math/randomInt.ts';
-import { clamp } from './clamp.ts';
 
 /**
  * Generate a random number within 0 and 1.

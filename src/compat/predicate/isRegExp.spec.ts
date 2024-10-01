@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { isRegExp } from './isRegExp';
-import { stubFalse } from '../_internal/stubFalse';
-import { falsey } from '../_internal/falsey';
 import { args } from '../_internal/args';
+import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
+import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
 
 /**

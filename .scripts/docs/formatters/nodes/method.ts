@@ -1,10 +1,10 @@
-import { LiteralMethodDef } from "@deno/doc";
-import { formatParam } from "./param.ts";
-import { formatType } from "./type.ts";
-import { FormatOption } from "../options.ts";
+import { LiteralMethodDef } from '@deno/doc';
+import { formatParam } from './param.ts';
+import { formatType } from './type.ts';
+import { FormatOption } from '../options.ts';
 
 export function formatMethodDef(node: LiteralMethodDef, options: FormatOption) {
-  let result = "";
+  let result = '';
 
   if (node.computed) {
     result += `[${node.name}]`;
@@ -13,15 +13,15 @@ export function formatMethodDef(node: LiteralMethodDef, options: FormatOption) {
   }
 
   if (node.optional) {
-    result += "?";
+    result += '?';
   }
 
-  result += "(";
-  result += node.params.map((x) => formatParam(x, options)).join(", ");
-  result += ")";
+  result += '(';
+  result += node.params.map(x => formatParam(x, options)).join(', ');
+  result += ')';
 
   if (node.returnType != null) {
-    result += ": ";
+    result += ': ';
     result += formatType(node.returnType, options);
   }
 

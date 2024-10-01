@@ -1,6 +1,6 @@
+import { bench, describe } from 'vitest';
 import { filter as filterToolkit } from 'es-toolkit/compat';
 import { filter as filterLodash } from 'lodash';
-import { bench, describe } from 'vitest';
 
 const arr = [
   { a: 0, b: true },

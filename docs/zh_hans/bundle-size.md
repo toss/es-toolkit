@@ -28,6 +28,7 @@ description: es-toolkit提供的最小包体积
 
 ```tsx
 import { chunk } from 'es-toolkit';
+
 // 或 import { chunk } from 'lodash-es';
 
 console.log(chunk);

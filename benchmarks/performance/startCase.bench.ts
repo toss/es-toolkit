@@ -1,7 +1,7 @@
+import { bench, describe } from 'vitest';
 import { startCase as startCaseToolkit } from 'es-toolkit';
 import { startCase as startCaseToolkitCompat } from 'es-toolkit/compat';
 import { startCase as startCaseLodash } from 'lodash';
-import { bench, describe } from 'vitest';
 
 describe('startCase', () => {
   bench('es-toolkit/startCase', () => {

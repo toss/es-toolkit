@@ -1,12 +1,17 @@
+import { describe, expect, it } from 'vitest';
 import { includes } from './includes';
-import { describe, it, expect } from 'vitest';
-import { stubFalse } from '../_internal/stubFalse';
-import { empties } from '../_internal/empties';
-import { toArgs } from '../_internal/toArgs';
 import { args } from '../_internal/args';
+import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
+import { stubFalse } from '../_internal/stubFalse';
+import { toArgs } from '../_internal/toArgs';
 
 describe('includes', () => {
+  it('should ignore inherited value', () => {
+    const obj = Object.create({ inherited: 'value' });
+    expect(includes(obj, 'value')).toBe(false);
+  });
+
   Object.entries({
     'an `arguments` object': toArgs([1, 2, 3, 4]),
     'an array': [1, 2, 3, 4],

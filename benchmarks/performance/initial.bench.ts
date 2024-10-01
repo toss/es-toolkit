@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
-import { initial as initialLodash } from 'lodash';
 import { initial as initialToolkit } from 'es-toolkit';
+import { initial as initialLodash } from 'lodash';
 
 // Helper function to generate a large array
 function generateLargeArray(size) {

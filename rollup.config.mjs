@@ -1,12 +1,11 @@
 // @ts-check
-
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import dtsPlugin from 'rollup-plugin-dts';
 import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
-import dtsPlugin from 'rollup-plugin-dts';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = dirname(fileURLToPath(import.meta.url));

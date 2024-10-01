@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { flattenDepth } from './flattenDepth';
 import { args } from '../_internal/args';
 

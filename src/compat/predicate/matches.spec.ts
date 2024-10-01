@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import { matches } from './matches';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
 import { stubTrue } from '../_internal/stubTrue';
-import { matches } from './matches';
 
 describe('matches', () => {
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {

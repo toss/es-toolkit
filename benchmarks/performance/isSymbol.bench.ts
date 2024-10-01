@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
-import { isSymbol as isSymbolToolkit } from 'es-toolkit/predicate';
 import { isSymbol as isSymbolToolkitCompat } from 'es-toolkit/compat';
+import { isSymbol as isSymbolToolkit } from 'es-toolkit/predicate';
 import { isSymbol as isSymbolLodash } from 'lodash';
 
 describe('isSymbol', () => {

@@ -117,12 +117,7 @@ export function includes(
     return source.includes(target, fromIndex);
   }
 
-  const keys = [];
-
-  // Not using `Object.keys` because it can't access inherited properties.
-  for (const key in source) {
-    keys.push(key);
-  }
+  const keys = Object.keys(source);
 
   if (fromIndex < 0) {
     fromIndex = Math.max(0, keys.length + fromIndex);

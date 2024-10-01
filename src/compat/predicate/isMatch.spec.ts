@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import { isArrayMatch, isMapMatch, isMatch, isSetMatch } from './isMatch';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
 import { stubTrue } from '../_internal/stubTrue';
-import { isArrayMatch, isMapMatch, isMatch, isSetMatch } from './isMatch';
 
 describe('isMatch', () => {
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {

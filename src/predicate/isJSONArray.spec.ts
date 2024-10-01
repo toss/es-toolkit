@@ -1,5 +1,5 @@
-import { isJSONArray } from './isJSONArray.ts';
 import { describe, expect, it } from 'vitest';
+import { isJSONArray } from './isJSONArray.ts';
 
 describe('isJSONArray', () => {
   it('should return true for valid JSON arrays', () => {

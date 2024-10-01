@@ -1,6 +1,6 @@
-import { isNil } from '../predicate/isNil.ts';
 import { get } from './get.ts';
 import { set } from './set.ts';
+import { isNil } from '../predicate/isNil.ts';
 
 /**
  * Creates a new object composed of the picked object properties.

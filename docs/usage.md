@@ -94,6 +94,7 @@ es-toolkit is also available on [esm.sh](https://esm.sh) for modern browsers.
 </script>
 <script type="module">
   import { chunk } from 'es-toolkit';
+
   chunk([1, 2, 3, 4, 5, 6], 3);
 </script>
 ```

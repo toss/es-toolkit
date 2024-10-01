@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { symbol } from '../_internal/symbol';
-import { stubString } from '../_internal/stubString';
+import { describe, expect, it } from 'vitest';
 import { toString } from './toString';
+import { stubString } from '../_internal/stubString';
+import { symbol } from '../_internal/symbol';
 
 describe('toString', () => {
   it('should treat nullish values as empty strings', () => {
