@@ -1,18 +1,18 @@
 import { bench, describe } from 'vitest';
-import { flow as flowToolkit } from 'es-toolkit';
-import { flow as flowToolkitCompat } from 'es-toolkit/compat';
-import { flow as flowLodash } from 'lodash';
+import { flow as flowToolkit_ } from 'es-toolkit';
+import { flow as flowToolkitCompat_ } from 'es-toolkit/compat';
+import { flow as flowLodash_ } from 'lodash';
 
-const flow = flowToolkit;
-const flowCompat = flowToolkitCompat;
-const flowLo = flowLodash;
+const flowToolkit = flowToolkit_;
+const flowCompat = flowToolkitCompat_;
+const flowLodash = flowLodash_;
 
 describe('flow', () => {
   const add = (x: number, y: number) => x + y;
   const square = (n: number) => n * n;
 
   bench('es-toolkit/flow', () => {
-    const combined = flow(add, square);
+    const combined = flowToolkit(add, square);
     combined(1, 2);
   });
 
@@ -22,7 +22,7 @@ describe('flow', () => {
   });
 
   bench('lodash/flow', () => {
-    const combined = flowLo(add, square);
+    const combined = flowLodash(add, square);
     combined(1, 2);
   });
 });

@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { ary as aryToolkit } from 'es-toolkit/compat';
-import { ary as aryLodash } from 'lodash';
+import { ary as aryToolkit_ } from 'es-toolkit/compat';
+import { ary as aryLodash_ } from 'lodash';
+
+const aryToolkit = aryToolkit_;
+const aryLodash = aryLodash_;
 
 describe('ary', () => {
   bench('es-toolkit/ary', () => {

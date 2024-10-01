@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { pullAt as pullAtToolkit } from 'es-toolkit';
-import { pullAt as pullAtLodash } from 'lodash';
+import { pullAt as pullAtToolkit_ } from 'es-toolkit';
+import { pullAt as pullAtLodash_ } from 'lodash';
+
+const pullAtToolkit = pullAtToolkit_;
+const pullAtLodash = pullAtLodash_;
 
 describe('pullAt', () => {
   const array = [0, 1, 2, 3, 4, 5];

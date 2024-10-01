@@ -1,7 +1,11 @@
 import { bench, describe } from 'vitest';
-import { isRegExp as isRegExpToolkitCompat } from 'es-toolkit/compat';
-import { isRegExp as isRegExpToolkit } from 'es-toolkit/predicate';
-import { isRegExp as isRegExpLodash } from 'lodash';
+import { isRegExp as isRegExpToolkitCompat_ } from 'es-toolkit/compat';
+import { isRegExp as isRegExpToolkit_ } from 'es-toolkit/predicate';
+import { isRegExp as isRegExpLodash_ } from 'lodash';
+
+const isRegExpToolkit = isRegExpToolkit_;
+const isRegExpToolkitCompat = isRegExpToolkitCompat_;
+const isRegExpLodash = isRegExpLodash_;
 
 describe('isRegExp', () => {
   bench('es-toolkit/isRegExp', () => {

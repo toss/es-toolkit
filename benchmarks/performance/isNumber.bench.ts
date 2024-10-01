@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isNumber as isNumberToolkit } from 'es-toolkit/compat';
-import { isNumber as isNumberLodash } from 'lodash';
+import { isNumber as isNumberToolkit_ } from 'es-toolkit/compat';
+import { isNumber as isNumberLodash_ } from 'lodash';
+
+const isNumberToolkit = isNumberToolkit_;
+const isNumberLodash = isNumberLodash_;
 
 describe('isNumber', () => {
   bench('es-toolkit/isNumber', () => {

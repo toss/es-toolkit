@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { takeRight as takeRightToolkit } from 'es-toolkit';
-import { takeRight as takeRightLodash } from 'lodash';
+import { takeRight as takeRightToolkit_ } from 'es-toolkit';
+import { takeRight as takeRightLodash_ } from 'lodash';
+
+const takeRightToolkit = takeRightToolkit_;
+const takeRightLodash = takeRightLodash_;
 
 describe('takeRight', () => {
   bench('es-toolkit/takeRight', () => {

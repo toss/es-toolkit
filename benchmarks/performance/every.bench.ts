@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { every as everyEsToolkit } from 'es-toolkit';
-import { every as everyLodash } from 'lodash';
+import { every as everyEsToolkit_ } from 'es-toolkit';
+import { every as everyLodash_ } from 'lodash';
+
+const everyEsToolkit = everyEsToolkit_;
+const everyLodash = everyLodash_;
 
 const generateArray = (length: number, max: number) => Array.from({ length }, () => Math.floor(Math.random() * max));
 const array = generateArray(1_000_000, 1000);

@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { unzip as unzipToolkit } from 'es-toolkit';
-import { unzip as unzipLodash } from 'lodash';
+import { unzip as unzipToolkit_ } from 'es-toolkit';
+import { unzip as unzipLodash_ } from 'lodash';
+
+const unzipToolkit = unzipToolkit_;
+const unzipLodash = unzipLodash_;
 
 describe('unzip, small arrays', () => {
   bench('es-toolkit/unzip', () => {

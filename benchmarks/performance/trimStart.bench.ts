@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { trimStart as trimStartToolkit } from 'es-toolkit/compat';
-import { trimStart as trimStartLodash } from 'lodash';
+import { trimStart as trimStartToolkit_ } from 'es-toolkit/compat';
+import { trimStart as trimStartLodash_ } from 'lodash';
+
+const trimStartToolkit = trimStartToolkit_;
+const trimStartLodash = trimStartLodash_;
 
 describe('trimStart', () => {
   bench('es-toolkit/trimStart', () => {
@@ -10,6 +13,6 @@ describe('trimStart', () => {
 
   bench('lodash/trimStart', () => {
     const str = 'kebab-case';
-    trimStartLodash(str);
+    trimStartLodash(str, 'se');
   });
 });

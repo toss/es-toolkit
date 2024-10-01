@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isNaN as isNaNToolkit } from 'es-toolkit/compat';
-import { isNaN as isNaNLodash } from 'lodash';
+import { isNaN as isNaNToolkit_ } from 'es-toolkit/compat';
+import { isNaN as isNaNLodash_ } from 'lodash';
+
+const isNaNToolkit = isNaNToolkit_;
+const isNaNLodash = isNaNLodash_;
 
 describe('isNaN', () => {
   bench('es-toolkit/isNaN', () => {

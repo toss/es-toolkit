@@ -1,7 +1,11 @@
 import { bench, describe } from 'vitest';
-import { isString as isStringToolkitCompat } from 'es-toolkit/compat';
-import { isString as isStringToolkit } from 'es-toolkit/predicate';
-import { isString as isStringLodash } from 'lodash';
+import { isString as isStringToolkitCompat_ } from 'es-toolkit/compat';
+import { isString as isStringToolkit_ } from 'es-toolkit/predicate';
+import { isString as isStringLodash_ } from 'lodash';
+
+const isStringToolkit = isStringToolkit_;
+const isStringToolkitCompat = isStringToolkitCompat_;
+const isStringLodash = isStringLodash_;
 
 describe('isString', () => {
   bench('es-toolkit/isString', () => {

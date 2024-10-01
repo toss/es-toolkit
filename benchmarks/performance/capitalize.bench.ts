@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { capitalize as capitalizeToolkit } from 'es-toolkit';
-import { capitalize as capitalizeLodash } from 'lodash';
+import { capitalize as capitalizeToolkit_ } from 'es-toolkit';
+import { capitalize as capitalizeLodash_ } from 'lodash';
+
+const capitalizeToolkit = capitalizeToolkit_;
+const capitalizeLodash = capitalizeLodash_;
 
 describe('capitalize', () => {
   bench('es-toolkit/capitalize', () => {

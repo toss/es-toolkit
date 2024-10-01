@@ -1,7 +1,11 @@
 import { bench, describe } from 'vitest';
-import { clamp as clampToolkit } from 'es-toolkit';
-import { clamp as clampCompatToolkit } from 'es-toolkit/compat';
-import { clamp as clampLodash } from 'lodash';
+import { clamp as clampToolkit_ } from 'es-toolkit';
+import { clamp as clampCompatToolkit_ } from 'es-toolkit/compat';
+import { clamp as clampLodash_ } from 'lodash';
+
+const clampToolkit = clampToolkit_;
+const clampCompatToolkit = clampCompatToolkit_;
+const clampLodash = clampLodash_;
 
 describe('clamp', () => {
   bench('es-toolkit/clamp', () => {

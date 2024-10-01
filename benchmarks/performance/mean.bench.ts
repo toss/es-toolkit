@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { mean as meanToolkit } from 'es-toolkit';
-import { mean as meanLodash } from 'lodash';
+import { mean as meanToolkit_ } from 'es-toolkit';
+import { mean as meanLodash_ } from 'lodash';
+
+const meanToolkit = meanToolkit_;
+const meanLodash = meanLodash_;
 
 describe('mean', () => {
   bench('es-toolkit/mean', () => {

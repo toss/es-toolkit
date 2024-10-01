@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { escape as escapeToolkit } from 'es-toolkit';
-import { escape as escapeLodash } from 'lodash';
+import { escape as escapeToolkit_ } from 'es-toolkit';
+import { escape as escapeLodash_ } from 'lodash';
+
+const escapeToolkit = escapeToolkit_;
+const escapeLodash = escapeLodash_;
 
 describe('escape', () => {
   const longString = 'fred, barney, & pebbles'.repeat(100);

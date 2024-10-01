@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { at as atToolkit } from 'es-toolkit';
-import { at as atLodash } from 'lodash';
+import { at as atToolkit_ } from 'es-toolkit';
+import { at as atLodash_ } from 'lodash';
+
+const atToolkit = atToolkit_;
+const atLodash = atLodash_;
 
 describe('at', () => {
   bench('es-toolkit/at', () => {

@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { matches as matchesToolkit } from 'es-toolkit/compat';
-import { matches as matchesLodash } from 'lodash';
+import { matches as matchesToolkit_ } from 'es-toolkit/compat';
+import { matches as matchesLodash_ } from 'lodash';
+
+const matchesToolkit = matchesToolkit_;
+const matchesLodash = matchesLodash_;
 
 describe('matches', () => {
   bench('es-toolkit/matches', () => {
