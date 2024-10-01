@@ -9,7 +9,7 @@ describe('invertBy', () => {
     invertByWithLodash(object);
   });
 
-  bench('es-toolkit/compat/invertByWithCompatToolkit', () => {
+  bench('es-toolkit/compat/invertBy', () => {
     invertByWithCompatToolkit(object);
   });
 });
