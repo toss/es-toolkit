@@ -1,3 +1,4 @@
+export { isArrayBuffer } from './isArrayBuffer.ts';
 export { isDate } from './isDate.ts';
 export { isEqual } from './isEqual.ts';
 export { isError } from './isError.ts';

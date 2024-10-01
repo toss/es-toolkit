@@ -1,6 +1,6 @@
-import { DefaultTheme } from 'vitepress';
-import path from 'node:path';
 import glob from 'fast-glob';
+import path from 'node:path';
+import { DefaultTheme } from 'vitepress';
 
 export function getSidebarItems(docsRoot: string, ...parts: string[]): DefaultTheme.SidebarItem[] {
   const files = glob.sync(path.join(docsRoot, ...parts, '*'));

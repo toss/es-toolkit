@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { debounce } from './debounce';
+import { noop } from '../../function/noop';
 import { delay } from '../../promise/delay';
 import { identity } from '../_internal/identity';
-import { noop } from '../../function/noop';
 
 describe('debounce', () => {
   it('should debounce function calls', async () => {

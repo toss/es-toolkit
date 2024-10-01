@@ -28,6 +28,7 @@ es-toolkit은 현대적인 구현을 가지고 있기 때문에, 다른 라이�
 
 ```tsx
 import { chunk } from 'es-toolkit';
+
 // 또는 import { chunk } from 'lodash-es';
 
 console.log(chunk);

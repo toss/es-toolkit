@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { empties } from '../_internal/empties';
 import { find } from './find';
+import { empties } from '../_internal/empties';
 import { slice } from '../_internal/slice';
 
 describe('find', () => {

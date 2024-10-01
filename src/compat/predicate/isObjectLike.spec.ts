@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { isObjectLike } from './isObjectLike';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
-import { symbol } from '../_internal/symbol';
 import { slice } from '../_internal/slice';
 import { stubFalse } from '../_internal/stubFalse';
+import { symbol } from '../_internal/symbol';
 
 describe('isObjectLike', () => {
   it('should return `true` for objects', () => {

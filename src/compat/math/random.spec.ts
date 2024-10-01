@@ -1,7 +1,7 @@
+import { describe, expect, it } from 'vitest';
+import { random } from './random';
 import { uniq } from '../../array/uniq';
 import { stubTrue } from '../_internal/stubTrue';
-import { random } from './random';
-import { describe, expect, it } from 'vitest';
 
 describe('random', () => {
   const array = Array.from({ length: 100 });

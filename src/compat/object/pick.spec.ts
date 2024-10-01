@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { toArgs } from '../_internal/toArgs';
 import { pick } from './pick';
+import { toArgs } from '../_internal/toArgs';
 
 describe('compat/pick', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };

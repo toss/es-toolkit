@@ -1,7 +1,7 @@
-import { pick, toMerged } from "@es-toolkit/es-toolkit";
-import OpenAI from "openai";
-import { DocumentationItem } from "../types/DocumentationItem.ts";
-import { Locale } from "../types/Locale.ts";
+import OpenAI from 'openai';
+import { pick, toMerged } from '@es-toolkit/es-toolkit';
+import { DocumentationItem } from '../types/DocumentationItem.ts';
+import { Locale } from '../types/Locale.ts';
 
 interface TranslateOptions {
   openAiApiKey: string;
@@ -10,7 +10,7 @@ interface TranslateOptions {
 export async function translate(
   doc: DocumentationItem,
   locale: Locale,
-  { openAiApiKey }: TranslateOptions,
+  { openAiApiKey }: TranslateOptions
 ): Promise<DocumentationItem> {
   const client = new OpenAI({
     apiKey: openAiApiKey,
@@ -18,10 +18,10 @@ export async function translate(
 
   const item = {
     description: doc.description,
-    parameters: doc.parameters?.map((param) => {
-      return pick(param, ["document"]);
+    parameters: doc.parameters?.map(param => {
+      return pick(param, ['document']);
     }),
-    returns: pick(doc.returns! ?? {}, ["document"]),
+    returns: pick(doc.returns! ?? {}, ['document']),
   };
 
   const prompt = `
@@ -39,8 +39,8 @@ ${JSON.stringify(item, null, 2)}
   `;
 
   const response = await client.chat.completions.create({
-    model: "gpt-4o",
-    messages: [{ role: "user", content: prompt }],
+    model: 'gpt-4o',
+    messages: [{ role: 'user', content: prompt }],
   });
 
   const translatedItem = response.choices[0].message.content;

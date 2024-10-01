@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { orderBy } from './orderBy.ts';
-import { falsey } from '../_internal/falsey.ts';
 import { zipObject } from '../../array/zipObject.ts';
 import { partialRight } from '../../function/partialRight.ts';
+import { falsey } from '../_internal/falsey.ts';
 
 describe('orderBy', () => {
   class Pair {

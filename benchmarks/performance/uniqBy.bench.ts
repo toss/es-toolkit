@@ -1,7 +1,7 @@
 import { bench, describe } from 'vitest';
 import { uniqBy as uniqByToolkit_ } from 'es-toolkit';
-import { uniqBy as uniqByLodash_ } from 'lodash';
 import { randomInt } from 'crypto';
+import { uniqBy as uniqByLodash_ } from 'lodash';
 
 const uniqByToolkit = uniqByToolkit_;
 const uniqByLodash = uniqByLodash_;

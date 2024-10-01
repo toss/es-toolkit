@@ -1,8 +1,8 @@
+import { describe, expect, it } from 'vitest';
 import { execa } from 'execa';
 import fs from 'node:fs';
 import path from 'node:path';
 import { Readable } from 'node:stream';
-import { describe, expect, it } from 'vitest';
 import { createPackageTarball } from './utils/createPackageTarball';
 import { createTmpDir } from './utils/createTmpDir';
 import { parseTar } from './utils/parseTar';

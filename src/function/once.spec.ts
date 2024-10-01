@@ -1,5 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { once } from './once'; // adjust the import path as necessary
+import { describe, expect, it, vi } from 'vitest';
+import { once } from './once';
+
+// adjust the import path as necessary
 
 describe('once', () => {
   it('should call the function only once', () => {

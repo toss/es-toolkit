@@ -28,6 +28,7 @@ Our bundle size is measured using [esbuild 0.23.0](https://esbuild.github.io), b
 
 ```tsx
 import { chunk } from 'es-toolkit';
+
 // or import { chunk } from 'lodash-es';
 
 console.log(chunk);

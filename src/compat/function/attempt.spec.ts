@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { attempt } from './attempt';
 import { isEqual } from '../../predicate/isEqual';
 

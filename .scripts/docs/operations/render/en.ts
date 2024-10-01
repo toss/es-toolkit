@@ -1,15 +1,10 @@
-import { DocumentationItem } from "../../types/DocumentationItem.ts";
-import { RenderOptions } from "./types.ts";
+import { RenderOptions } from './types.ts';
+import { DocumentationItem } from '../../types/DocumentationItem.ts';
 
 export function render(item: DocumentationItem, options: RenderOptions = {}) {
-  return [
-    title(item.name),
-    compatNotice(options),
-    item.description,
-    signature(item),
-    examples(item),
-  ]
-    .filter((x) => x != null).join("\n\n");
+  return [title(item.name), compatNotice(options), item.description, signature(item), examples(item)]
+    .filter(x => x != null)
+    .join('\n\n');
 }
 
 function title(name: string) {
@@ -31,12 +26,7 @@ When imported from \`es-toolkit/compat\`, it behaves exactly like lodash and pro
 }
 
 function signature(item: DocumentationItem) {
-  return [
-    "## Signature",
-    symbolInterface(item),
-    parameters(item),
-    returns(item),
-  ].filter((x) => x != null).join("\n\n");
+  return ['## Signature', symbolInterface(item), parameters(item), returns(item)].filter(x => x != null).join('\n\n');
 }
 
 function symbolInterface(item: DocumentationItem): string {
@@ -55,10 +45,7 @@ function parameters(item: DocumentationItem) {
   return `
 ### Parameters
 
-${
-    item.parameters.map((p) => `- \`${p.name}\` (\`${p.type}\`): ${p.document}`)
-      .join("\n")
-  }
+${item.parameters.map(p => `- \`${p.name}\` (\`${p.type}\`): ${p.document}`).join('\n')}
   `.trim();
 }
 
@@ -91,7 +78,7 @@ function examples(item: DocumentationItem) {
 ## Examples
 
 \`\`\`typescript
-${item.exampleCodes.join("\n\n")}
+${item.exampleCodes.join('\n\n')}
 \`\`\`
   `.trim();
 }

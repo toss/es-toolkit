@@ -1,5 +1,5 @@
-import { cloneDeep } from '../../object/cloneDeep.ts';
 import { unset } from './unset.ts';
+import { cloneDeep } from '../../object/cloneDeep.ts';
 
 /**
  * Creates a new object with specified keys omitted.

@@ -1,11 +1,11 @@
-import { defineConfig } from 'vitepress';
 import container from 'markdown-it-container';
+import { defineConfig } from 'vitepress';
 import { renderSandbox } from 'vitepress-plugin-sandpack';
 import { en } from './en.mts';
-import { ko } from './ko.mts';
 import { ja } from './ja.mts';
-import { zh_hans } from './zh_hans.mts';
+import { ko } from './ko.mts';
 import { shared } from './shared.mts';
+import { zh_hans } from './zh_hans.mts';
 
 export default defineConfig({
   ...shared,

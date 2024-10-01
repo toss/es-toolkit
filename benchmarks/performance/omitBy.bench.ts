@@ -1,6 +1,6 @@
+import { bench, describe } from 'vitest';
 import { omitBy as omitByToolkit_ } from 'es-toolkit';
 import { omitBy as omitByLodash_ } from 'lodash';
-import { bench, describe } from 'vitest';
 
 const omitByToolkit = omitByToolkit_;
 const omitByLodash = omitByLodash_;

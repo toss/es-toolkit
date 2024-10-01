@@ -1,6 +1,6 @@
+import { bench, describe } from 'vitest';
 import { filter as filterToolkit_ } from 'es-toolkit/compat';
 import { filter as filterLodash_ } from 'lodash';
-import { bench, describe } from 'vitest';
 
 const filterToolkit = filterToolkit_;
 const filterLodash = filterLodash_;

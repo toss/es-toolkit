@@ -1,6 +1,6 @@
+import { bench, describe } from 'vitest';
 import { unzipWith as unzipWithToolkit_ } from 'es-toolkit';
 import { unzipWith as unzipWithLodash_ } from 'lodash';
-import { bench, describe } from 'vitest';
 
 const unzipWithToolkit = unzipWithToolkit_;
 const unzipWithLodash = unzipWithLodash_;

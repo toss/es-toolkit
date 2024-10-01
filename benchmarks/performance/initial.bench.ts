@@ -1,9 +1,10 @@
 import { bench, describe } from 'vitest';
-import { initial as initialLodash_ } from 'lodash';
 import { initial as initialToolkit_ } from 'es-toolkit';
+import { initial as initialLodash_ } from 'lodash';
 
 const initialLodash = initialLodash_;
 const initialToolkit = initialToolkit_;
+
 
 // Helper function to generate a large array
 function generateLargeArray(size) {

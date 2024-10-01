@@ -1,6 +1,6 @@
+import { bench, describe } from 'vitest';
 import { isFinite as isFiniteToolkit_ } from 'es-toolkit/compat';
 import { isFinite as isFiniteLodash_ } from 'lodash';
-import { bench, describe } from 'vitest';
 
 const isFiniteToolkit = isFiniteToolkit_;
 const isFiniteLodash = isFiniteLodash_;

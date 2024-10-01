@@ -1,4 +1,4 @@
-import { describe, bench } from 'vitest';
+import { bench, describe } from 'vitest';
 import { unset as unsetToolkitCompat_ } from 'es-toolkit/compat';
 import { unset as unsetLodash_ } from 'lodash';
 

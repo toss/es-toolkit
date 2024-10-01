@@ -1,6 +1,6 @@
+import { bench, describe } from 'vitest';
 import { once as onceToolkit_ } from 'es-toolkit';
 import { once as onceLodash_ } from 'lodash';
-import { bench, describe } from 'vitest';
 
 const onceToolkit = onceToolkit_;
 const onceLodash = onceLodash_;

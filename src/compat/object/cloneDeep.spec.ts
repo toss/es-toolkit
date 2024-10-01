@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { cloneDeep } from './cloneDeep';
 import { range } from '../../math/range';
-import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 import { args } from '../_internal/args';
+import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 import { stubTrue } from '../_internal/stubTrue';
 
 describe('cloneDeep', () => {

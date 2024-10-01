@@ -1,5 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
-import { debounce } from './debounce'; // adjust the import path as necessary
+import { describe, expect, it, vi } from 'vitest';
+import { debounce } from './debounce';
+// adjust the import path as necessary
 import { delay } from '../promise';
 
 describe('debounce', () => {

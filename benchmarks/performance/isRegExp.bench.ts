@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
-import { isRegExp as isRegExpToolkit_ } from 'es-toolkit/predicate';
 import { isRegExp as isRegExpToolkitCompat_ } from 'es-toolkit/compat';
+import { isRegExp as isRegExpToolkit_ } from 'es-toolkit/predicate';
 import { isRegExp as isRegExpLodash_ } from 'lodash';
 
 const isRegExpToolkit = isRegExpToolkit_;

@@ -1,6 +1,6 @@
+import { bench, describe } from 'vitest';
 import { union as unionToolkit_ } from 'es-toolkit';
 import { union as unionLodash_ } from 'lodash';
-import { bench, describe } from 'vitest';
 
 const unionToolkit = unionToolkit_;
 const unionLodash = unionLodash_;

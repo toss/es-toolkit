@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { unset } from './unset';
-import { toString } from '../util/toString';
-import { symbol } from '../_internal/symbol';
 import { numberProto } from '../_internal/numberProto';
 import { stringProto } from '../_internal/stringProto';
+import { symbol } from '../_internal/symbol';
+import { toString } from '../util/toString';
 
 describe('unset', () => {
   it('should unset property values', () => {

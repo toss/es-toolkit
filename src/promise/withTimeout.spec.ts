@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { withTimeout } from './withTimeout.ts';
 import { delay } from './delay.ts';
+import { withTimeout } from './withTimeout.ts';
 
 describe('withTimeout', () => {
   it('returns the result value if a response is received before the specified wait time', async () => {

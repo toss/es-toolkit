@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
-import { fill as fillLodash_ } from 'lodash';
 import { toFilled as toFilledToolkit_ } from 'es-toolkit';
+import { fill as fillLodash_ } from 'lodash';
 
 const fillLodash = fillLodash_;
 const toFilledToolkit = toFilledToolkit_;

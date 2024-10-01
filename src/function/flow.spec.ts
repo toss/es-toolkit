@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
-import { flow } from './flow';
-import { curry } from '../compat/function/curry';
-import { head } from '../array';
+import { describe, expect, it } from 'vitest';
 import { ary } from './ary';
+import { flow } from './flow';
+import { head } from '../array';
 import { uniq } from '../array';
+import { curry } from '../compat/function/curry';
 
 const add = function (x: number, y: number) {
   return x + y;
