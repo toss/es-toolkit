@@ -1,6 +1,9 @@
-import { some as someToolkit } from 'es-toolkit/compat';
-import { some as someLodash } from 'lodash';
+import { some as someToolkit_ } from 'es-toolkit/compat';
+import { some as someLodash_ } from 'lodash';
 import { bench, describe } from 'vitest';
+
+const someToolkit = someToolkit_;
+const someLodash = someLodash_;
 
 describe('some', () => {
   bench('es-toolkit/some', () => {

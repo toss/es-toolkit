@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { tail as tailToolkit } from 'es-toolkit';
-import { tail as tailLodash } from 'lodash';
+import { tail as tailToolkit_ } from 'es-toolkit';
+import { tail as tailLodash_ } from 'lodash';
+
+const tailToolkit = tailToolkit_;
+const tailLodash = tailLodash_;
 
 describe('tail', () => {
   bench('es-toolkit/tail', () => {

@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { toFinite as toFiniteToolkitCompat } from 'es-toolkit/compat';
-import { toFinite as toFiniteLodash } from 'lodash';
+import { toFinite as toFiniteToolkitCompat_ } from 'es-toolkit/compat';
+import { toFinite as toFiniteLodash_ } from 'lodash';
+
+const toFiniteToolkitCompat = toFiniteToolkitCompat_;
+const toFiniteLodash = toFiniteLodash_;
 
 describe('toFinite', () => {
   bench('es-toolkit/compat/toFinite', () => {

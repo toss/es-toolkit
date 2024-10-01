@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { trimEnd as trimEndToolkit } from 'es-toolkit/compat';
-import { trimEnd as trimEndLodash } from 'lodash';
+import { trimEnd as trimEndToolkit_ } from 'es-toolkit/compat';
+import { trimEnd as trimEndLodash_ } from 'lodash';
+
+const trimEndToolkit = trimEndToolkit_;
+const trimEndLodash = trimEndLodash_;
 
 describe('trimEnd', () => {
   bench('es-toolkit/trimEnd', () => {
@@ -10,6 +13,6 @@ describe('trimEnd', () => {
 
   bench('lodash/trimEnd', () => {
     const str = 'kebab-case';
-    trimEndLodash(str);
+    trimEndLodash(str, 'se');
   });
 });
