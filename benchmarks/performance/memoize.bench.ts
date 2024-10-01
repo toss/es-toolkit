@@ -3,7 +3,7 @@ import { memoize as memoizeToolkit_ } from 'es-toolkit';
 import { memoize as memoizeLodash_ } from 'lodash';
 
 const memoizeToolkit = memoizeToolkit_;
-const lodashMemoize = memoizeLodash_;
+const memoizeLodash = memoizeLodash_;
 
 describe('memoize', () => {
   const object = { a: 1, b: 2, c: 3 };
