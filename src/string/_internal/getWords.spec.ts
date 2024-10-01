@@ -67,4 +67,8 @@ describe('caseSplitPattern', () => {
   it('should match emojis', () => {
     expect(getWords('camelCaseHTTPRequest🚀')).toEqual(['camel', 'Case', 'HTTP', 'Request', '🚀']);
   });
+
+  it('should match accented letters', () => {
+    expect(getWords('Lunedì 18 Set')).toEqual(['Lunedì', '18', 'Set']);
+  });
 });

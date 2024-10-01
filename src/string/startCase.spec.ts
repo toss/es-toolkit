@@ -63,4 +63,8 @@ describe('startCase', function () {
     expect(startCase('FOO BAR')).toBe('Foo Bar');
     expect(startCase('FOO BAR BAZ')).toBe('Foo Bar Baz');
   });
+
+  it('should correctly handle accented letters', () => {
+    expect(startCase('lunedì 18 set')).toBe('Lunedì 18 Set');
+  });
 });

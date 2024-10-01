@@ -16,7 +16,7 @@
  * // matches: ['camel', 'Case', 'HTTP', 'Request', '🚀']
  */
 const CASE_SPLIT_PATTERN =
-  /[A-Z]?[a-z]+|[0-9]+|[A-Z]+(?![a-z])|\p{Emoji_Presentation}|\p{Extended_Pictographic}|\p{L}+/gu;
+  /\p{Lu}?\p{Ll}+|[0-9]+|\p{Lu}+(?!\p{Ll})|\p{Emoji_Presentation}|\p{Extended_Pictographic}|\p{L}+/gu;
 
 export function getWords(str: string): string[] {
   return Array.from(str.match(CASE_SPLIT_PATTERN) ?? []);
