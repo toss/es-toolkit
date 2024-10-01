@@ -54,7 +54,7 @@ console.log(combined(1, 2)); // 9
 `es-toolkit/compat`에서 `flow`를 가져오면 lodash와 완전히 호환돼요.
 
 - `flow`는 파라미터로 개별 함수뿐만 아니라 함수들의 배열도 받을 수 있어요.  
-- 제공된 함수들 중 하나라도 함수가 아니면 `flow`는 오류를 발생시켜요.
+- 파라미터로 함수가 아닌 값이 주어지면 `flow`는 오류를 발생시켜요.
 
 ```typescript
 import { flow } from 'es-toolkit/compat';
