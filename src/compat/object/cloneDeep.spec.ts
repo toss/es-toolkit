@@ -55,7 +55,13 @@ describe('cloneDeep', () => {
   it(`should clone arguments objects`, () => {
     const actual = cloneDeep(args);
 
-    expect(actual).toEqual(args);
+    // Arguments objects equality doesn't work properly in Vitest 2, so we need to check the properties manually
+    expect(actual).toHaveProperty('0', 1);
+    expect(actual).toHaveProperty('1', 2);
+    expect(actual).toHaveProperty('2', 3);
+    expect(actual).toHaveProperty('length', 3);
+    expect(actual[Symbol.iterator]).toBe(args[Symbol.iterator]);
+
     expect(actual).not.toBe(args);
   });
 
