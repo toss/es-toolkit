@@ -1,6 +1,6 @@
 # curryRight
 
-함수를 오른쪽에서 왼쪽으로 커링해서, 한 번에 하나의 파라미터로 호출할 수 있도록 해요. 
+함수를 오른쪽에서 왼쪽으로 커링해서, 한 번에 하나의 파라미터로 호출할 수 있도록 해요.
 
 순서대로 다음 파라미터를 받는 함수를 생성해요. 새로 생성된 함수에 모든 파라미터가 제공되면, 이때 원래 함수가 지금까지 주어진 파라미터로 호출돼요.
 
@@ -13,8 +13,12 @@ function curryRight<R>(func: () => R): () => R;
 function curryRight<P, R>(func: (p: P) => R): (p: P) => R;
 function curryRight<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P2) => (p2: P1) => R;
 function curryRight<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: P3) => (p2: P2) => (p3: P1) => R;
-function curryRight<P1, P2, P3, P4, R>(func: (p1: P1, p2: P2, p3: P3, p4: P4) => R): (p1: P4) => (p2: P3) => (p3: P2) => (p4: P1) => R;
-function curryRight<P1, P2, P3, P4, P5, R>(func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R): (p1: P5) => (p2: P4) => (p3: P3) => (p4: P2) => (p5: P1) => R;
+function curryRight<P1, P2, P3, P4, R>(
+  func: (p1: P1, p2: P2, p3: P3, p4: P4) => R
+): (p1: P4) => (p2: P3) => (p3: P2) => (p4: P1) => R;
+function curryRight<P1, P2, P3, P4, P5, R>(
+  func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
+): (p1: P5) => (p2: P4) => (p3: P3) => (p4: P2) => (p5: P1) => R;
 function curryRight(func: (...args: any[]) => any): (...args: any[]) => any;
 function curryRight(func: (...args: any[]) => any): (...args: any[]) => any;
 ```
