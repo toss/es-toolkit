@@ -59,6 +59,39 @@ describe('merge', () => {
     expect(result).toEqual({ a: [1, 2, 3] });
   });
 
+  it('should handle merging arrays into non-array target values', () => {
+    const numbers = [1, 2, 3];
+    
+    const target = { a: 1, b: {} };
+    const source = { b: numbers, c: 4 };
+    const result = merge(target, source);
+
+    expect(result).toEqual({ a: 1, b: numbers, c: 4 });
+    expect(result.b).not.toBe(numbers);
+  });
+
+  it('should create new plain object when merged', () => {
+    const plainObject = { b: 2 } as const;
+    
+    const target = {};
+    const source = { a: plainObject };
+    const result = merge(target, source);
+
+    expect(result).toEqual({ a: plainObject });
+    expect(result.a).not.toBe(plainObject);
+  });
+
+  it('should handle merging values that are neither arrays nor plain objects', () => {
+    const date = new Date();
+    const target = {};
+    const source = { a: date };
+    const result = merge(target, source);
+
+    expect(result).toEqual({ a: date });
+    // unlike arrays and plain objects, the original value is used.
+    expect(result.a).toBe(date);
+  });
+
   it('should not overwrite existing values with undefined from source', () => {
     const target = { a: 1, b: 2 };
     const source = { b: undefined, c: 3 };
