@@ -49,11 +49,11 @@ const combined = flow(add, square);
 console.log(combined(1, 2)); // 9
 ```
 
-## Lodash 互換性  
+## Lodash 互換性
 
 `es-toolkit/compat` から `flow` をインポートすると、Lodash と互換になります。
 
-- `flow` は関数の配列と個別の関数の両方を引数として受け入れます。  
+- `flow` は関数の配列と個別の関数の両方を引数として受け入れます。
 - 提供された関数が関数でない場合、`flow` はエラーをスローします。
 
 ```typescript
