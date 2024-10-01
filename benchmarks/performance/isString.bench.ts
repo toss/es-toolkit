@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
-import { isString as isStringToolkit } from 'es-toolkit/predicate';
 import { isString as isStringToolkitCompat } from 'es-toolkit/compat';
+import { isString as isStringToolkit } from 'es-toolkit/predicate';
 import { isString as isStringLodash } from 'lodash';
 
 describe('isString', () => {

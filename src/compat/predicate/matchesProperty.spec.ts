@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { matchesProperty } from './matchesProperty';
-import { stubTrue } from '../_internal/stubTrue';
-import { range } from '../../math/range';
-import { stubFalse } from '../_internal/stubFalse';
 import { noop } from '../../function/noop';
+import { range } from '../../math/range';
 import { numberProto } from '../_internal/numberProto';
+import { stubFalse } from '../_internal/stubFalse';
+import { stubTrue } from '../_internal/stubTrue';
 import { cloneDeep } from '../object/cloneDeep';
 
 describe('matchesProperty', () => {

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { isSafeInteger } from './isSafeInteger.ts';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { stubFalse } from '../_internal/stubFalse';
 import { stubTrue } from '../_internal/stubTrue';
 import { symbol } from '../_internal/symbol';
-import { isSafeInteger } from './isSafeInteger.ts';
 
 const MAX_INTEGER = 1.7976931348623157e308;
 

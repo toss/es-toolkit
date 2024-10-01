@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { isJSONObject } from './isJSONObject.ts';
-import { describe, it, expect } from 'vitest';
 
 describe('isJSONObject', () => {
   it('isJSONObject should return true for valid JSON objects', () => {

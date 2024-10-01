@@ -1,5 +1,5 @@
-import { noop } from '../../function/noop.ts';
 import { mergeWith } from './mergeWith.ts';
+import { noop } from '../../function/noop.ts';
 
 /**
  * Merges the properties of one or more source objects into the target object.

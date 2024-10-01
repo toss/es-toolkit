@@ -1,6 +1,6 @@
+import { property } from './property.ts';
 import { mapKeys as mapKeysToolkit } from '../../object/mapKeys.ts';
 import { identity } from '../_internal/identity.ts';
-import { property } from './property.ts';
 
 /**
  * Creates a new object with the same values as the given object, but with keys generated

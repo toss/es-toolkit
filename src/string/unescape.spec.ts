@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { unescape } from './unescape';
+import { describe, expect, it } from 'vitest';
 import { escape } from './escape';
+import { unescape } from './unescape';
 
 describe('unescape', () => {
   let escaped = '&amp;&lt;&gt;&quot;&#39;/';

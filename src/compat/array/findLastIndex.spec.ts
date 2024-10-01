@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { findLastIndex } from './findLastIndex';
+import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { stubZero } from '../_internal/stubZero';
-import { falsey } from '../_internal/falsey';
 
 describe('findLastIndex', () => {
   const objects = [

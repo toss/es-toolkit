@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { whitespace } from '../_internal/whitespace';
 import { trimStart } from './trimStart';
+import { whitespace } from '../_internal/whitespace';
 
 describe('trimStart', () => {
   const func = trimStart;

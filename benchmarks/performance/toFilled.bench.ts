@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
-import { fill as fillLodash } from 'lodash';
 import { toFilled as toFilledToolkit } from 'es-toolkit';
+import { fill as fillLodash } from 'lodash';
 
 describe('fill function performance comparison', () => {
   bench('es-toolkit/toFilled', () => {

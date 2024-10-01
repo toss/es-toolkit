@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { isArray } from './isArray';
-import { falsey } from '../_internal/falsey';
 import { args } from '../_internal/args';
+import { falsey } from '../_internal/falsey';
 
 describe('isArray', function () {
   it('returns true if value is an array', () => {

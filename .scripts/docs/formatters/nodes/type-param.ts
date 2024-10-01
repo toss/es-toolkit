@@ -1,22 +1,19 @@
-import { TsTypeParamDef } from "@deno/doc";
-import { FormatOption } from "../options.ts";
-import { formatType } from "./type.ts";
+import { TsTypeParamDef } from '@deno/doc';
+import { formatType } from './type.ts';
+import { FormatOption } from '../options.ts';
 
-export function formatTypeParam(
-  node: TsTypeParamDef,
-  options: FormatOption,
-) {
-  let result = "";
+export function formatTypeParam(node: TsTypeParamDef, options: FormatOption) {
+  let result = '';
 
   result += node.name;
 
   if (node.constraint != null) {
-    result += " extends ";
+    result += ' extends ';
     result += formatType(node.constraint, options);
   }
 
   if (node.default != null) {
-    result += " = ";
+    result += ' = ';
     result += formatType(node.default, options);
   }
 

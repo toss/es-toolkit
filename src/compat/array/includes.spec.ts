@@ -1,10 +1,10 @@
+import { describe, expect, it } from 'vitest';
 import { includes } from './includes';
-import { describe, it, expect } from 'vitest';
-import { stubFalse } from '../_internal/stubFalse';
-import { empties } from '../_internal/empties';
-import { toArgs } from '../_internal/toArgs';
 import { args } from '../_internal/args';
+import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
+import { stubFalse } from '../_internal/stubFalse';
+import { toArgs } from '../_internal/toArgs';
 
 describe('includes', () => {
   Object.entries({

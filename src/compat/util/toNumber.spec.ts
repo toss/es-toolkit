@@ -1,12 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { toNumber } from './toNumber';
+import { flatMap } from '../../array/flatMap';
 import { falsey } from '../_internal/falsey';
-import { symbol } from '../_internal/symbol';
+import { identity } from '../_internal/identity';
 import { MAX_INTEGER } from '../_internal/MAX_INTEGER';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
+import { symbol } from '../_internal/symbol';
 import { whitespace } from '../_internal/whitespace';
-import { identity } from '../_internal/identity';
-import { flatMap } from '../../array/flatMap';
-import { toNumber } from './toNumber';
 
 describe('toNumber', () => {
   it(`should preserve the sign of \`0\``, () => {
