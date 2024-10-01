@@ -39,7 +39,7 @@ export function curryRight<P, R>(func: (p: P) => R): (p: P) => R;
  * Unlike `curry`, this function curries the function from right to left.
  *
  * @param {(p1: P1, p2: P2) => R} func - The function to curry.
- * @returns {(p1: P2) => (p2: P1) => R} A curried function.
+ * @returns {(p2: P2) => (p1: P1) => R} A curried function.
  *
  * @example
  * function twoArgFunc(a: number, b: number) {
@@ -49,7 +49,7 @@ export function curryRight<P, R>(func: (p: P) => R): (p: P) => R;
  * const func = curriedTwoArgFunc(1);
  * console.log(func(2)); // [2, 1]
  */
-export function curryRight<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P2) => (p2: P1) => R;
+export function curryRight<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p2: P2) => (p1: P1) => R;
 /**
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
@@ -57,7 +57,7 @@ export function curryRight<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P2) => 
  * Unlike `curry`, this function curries the function from right to left.
  *
  * @param {(p1: P1, p2: P2, p3: P3) => R} func - The function to curry.
- * @returns {(p1: P3) => (p2: P2) => (p3: P1) => R} A curried function.
+ * @returns {(p3: P3) => (p2: P2) => (p1: P1) => R} A curried function.
  *
  * @example
  * function threeArgFunc(a: number, b: number, c: number) {
@@ -68,7 +68,7 @@ export function curryRight<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P2) => 
  * const func2 = func(2);
  * console.log(func2(3)); // [3, 2, 1]
  */
-export function curryRight<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: P3) => (p2: P2) => (p3: P1) => R;
+export function curryRight<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p3: P3) => (p2: P2) => (p1: P1) => R;
 /**
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
@@ -76,7 +76,7 @@ export function curryRight<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): 
  * Unlike `curry`, this function curries the function from right to left.
  *
  * @param {(p1: P1, p2: P2, p3: P3, p4: P4) => R} func - The function to curry.
- * @returns {(p1: P4) => (p2: P3) => (p3: P2) => (p4: P1) => R} A curried function.
+ * @returns {(p4: P4) => (p3: P3) => (p2: P2) => (p1: P1) => R} A curried function.
  *
  * @example
  * function fourArgFunc(a: number, b: number, c: number, d: number) {
@@ -90,7 +90,7 @@ export function curryRight<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): 
  */
 export function curryRight<P1, P2, P3, P4, R>(
   func: (p1: P1, p2: P2, p3: P3, p4: P4) => R
-): (p1: P4) => (p2: P3) => (p3: P2) => (p4: P1) => R;
+): (p4: P4) => (p3: P3) => (p2: P2) => (p1: P1) => R;
 /**
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
@@ -98,7 +98,7 @@ export function curryRight<P1, P2, P3, P4, R>(
  * Unlike `curry`, this function curries the function from right to left.
  *
  * @param {(p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R} func - The function to curry.
- * @returns {(p1: P5) => (p2: P4) => (p3: P3) => (p4: P2) => (p5: P1) => R} A curried function.
+ * @returns {(p5: P5) => (p4: P4) => (p3: P3) => (p2: P2) => (p1: P1) => R} A curried function.
  *
  * @example
  * function fiveArgFunc(a: number, b: number, c: number, d: number, e: number) {
@@ -113,7 +113,7 @@ export function curryRight<P1, P2, P3, P4, R>(
  */
 export function curryRight<P1, P2, P3, P4, P5, R>(
   func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
-): (p1: P5) => (p2: P4) => (p3: P3) => (p4: P2) => (p5: P1) => R;
+): (p5: P5) => (p4: P4) => (p3: P3) => (p2: P2) => (p1: P1) => R;
 /**
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
@@ -137,7 +137,7 @@ export function curryRight<P1, P2, P3, P4, P5, R>(
  * const add25 = add10(15);
  *
  * // The parameter `a` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
- * const result = add25(5);
+ * const result = add25(5); // 30
  */
 export function curryRight(func: (...args: any[]) => any): (...args: any[]) => any;
 /**
@@ -163,7 +163,7 @@ export function curryRight(func: (...args: any[]) => any): (...args: any[]) => a
  * const add25 = add10(15);
  *
  * // The parameter `a` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
- * const result = add25(5);
+ * const result = add25(5); // 30
  */
 export function curryRight(func: (...args: any[]) => any): (...args: any[]) => any {
   if (func.length === 0 || func.length === 1) {
