@@ -36,7 +36,7 @@ export function invertBy<T extends object>(
     return result;
   }
 
-  if (iteratee == null) [
+  if (iteratee == null) {
     iteratee = identity;
   }
 
