@@ -94,13 +94,13 @@ export function merge(target: any, source: any) {
       if (Array.isArray(targetValue)) {
         target[key] = merge(targetValue, sourceValue);
       } else {
-        target[key] = [...sourceValue];
+        target[key] = merge([], sourceValue);
       }
     } else if (isPlainObject(sourceValue)) {
       if (isPlainObject(targetValue)) {
         target[key] = merge(targetValue, sourceValue);
       } else {
-        target[key] = { ...sourceValue };
+        target[key] = merge({}, sourceValue);
       }
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
