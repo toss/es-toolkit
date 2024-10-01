@@ -8,7 +8,7 @@
 - [JSON 배열](./isJSONArray.md) (유효한 JSON 값의 배열)
 - 문자열 (`string`)
 - 숫자 (`number`)
-- 참값 (`boolean`)
+- 참/거짓 값 (`boolean`)
 - `null`
 
 ## 인터페이스
