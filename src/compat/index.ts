@@ -82,6 +82,7 @@ export { invertBy } from './object/invertBy.ts';
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
 export { isArguments } from './predicate/isArguments.ts';
+export { isArrayBuffer } from './predicate/isArrayBuffer.ts';
 export { isArrayLike } from './predicate/isArrayLike.ts';
 export { isSymbol } from './predicate/isSymbol.ts';
 export { isObject } from './predicate/isObject.ts';

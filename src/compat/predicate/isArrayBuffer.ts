@@ -1,3 +1,5 @@
+import { isArrayBuffer as isArrayBufferToolkit } from '../../predicate/isArrayBuffer.ts';
+
 /**
  * Checks if a given value is `ArrayBuffer`.
  *
@@ -17,5 +19,5 @@
  */
 
 export function isArrayBuffer(value?: unknown): value is ArrayBuffer {
-  return value instanceof ArrayBuffer;
+  return isArrayBufferToolkit(value);
 }
