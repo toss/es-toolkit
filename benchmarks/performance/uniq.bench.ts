@@ -17,7 +17,7 @@ describe('uniq', () => {
 });
 
 describe('uniq/largeArray', () => {
-  const largeArray = Array.from({ length: 10000 }, _ => randomInt(0, 10000));
+  const largeArray = Array.from({ length: 10000 }, () => randomInt(0, 10000));
 
   bench('es-toolkit/uniq', () => {
     uniqToolkit(largeArray);
