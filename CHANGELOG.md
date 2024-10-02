@@ -1,5 +1,18 @@
 # es-toolkit Changelog
 
+## Version v1.23.0
+
+Released on October 1st, 2024.
+
+- Added support for [isEqualWith](https://es-toolkit.slash.page/reference/predicate/isEqualWith.html), [isArrayBuffer](https://es-toolkit.slash.page/reference/predicate/isArrayBuffer.html), [curryRight](https://es-toolkit.slash.page/reference/function/curryRight.html), [isJSONValue](https://es-toolkit.slash.page/reference/predicate/isJSONValue.html), [isJSONObject](https://es-toolkit.slash.page/reference/predicate/isJSONObject.html), [isJSONArray](https://es-toolkit.slash.page/reference/predicate/isJSONArray.html).
+- Fixed a bug in [merge](https://es-toolkit.slash.page/reference/object/merge.html) that copied the reference from the `source` object to the `target` object.
+- Fixed a bug in [includes](https://es-toolkit.slash.page/reference/compat/array/includes.html) that returned `true` for inherited properties.
+- Fixed a bug in [startCase](https://es-toolkit.slash.page/reference/string/startCase.html) and other string methods that did not correctly split the words when using accented letters.
+- Fixed a bug in [filter](https://es-toolkit.slash.page/reference/compat/array/filter.html) that did not provide correct arguments to the predicate function.
+- Fixed a bug in [isMatch](https://es-toolkit.slash.page/reference/compat/predicate/isMatch.html) that did not strictly compare primitive falsy values.
+
+This version includes contributions from @D-Sketon, @wojtekmaj, @mass2527, @chhw130, and @knott11. Thank you for your valuable contributions!
+
 ## Version v1.22.0
 
 Released on September 28th, 2024.

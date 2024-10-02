@@ -1,6 +1,6 @@
 # isEqual
 
-`isEqual` 함수는 두 값이 동일한지 확인하며, `Date`, `RegExp`, 깊은 객체 비교도 지원해요.
+두 값이 동일한지 확인해요. `Date`, `RegExp` 같은 깊은 객체 비교도 지원해요.
 
 ## 인터페이스
 
@@ -10,12 +10,12 @@ function isEqual(a: unknown, b: unknown): boolean;
 
 ## 파라미터
 
-- **`a`**: `unknown` - 비교할 첫 번째 값.
-- **`b`**: `unknown` - 비교할 두 번째 값.
+- `a` (`unknown`): 비교할 첫 번째 값.
+- `b` (`unknown`): 비교할 두 번째 값.
 
 ## 반환 값
 
-- **`boolean`** - 두 값이 동일하면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 두 값이 동일하면 `true`, 그렇지 않으면 `false`를 반환해요.
 
 ## 예시
 
