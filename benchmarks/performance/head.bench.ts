@@ -20,3 +20,19 @@ describe('head', () => {
     headLodash([1, 2, 3, 4]);
   });
 });
+
+describe('head/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/head', () => {
+    headToolkit(largeArray);
+  });
+
+  bench('es-toolkit/compat/head', () => {
+    headCompatToolkit(largeArray);
+  });
+
+  bench('lodash/head', () => {
+    headLodash(largeArray);
+  });
+});

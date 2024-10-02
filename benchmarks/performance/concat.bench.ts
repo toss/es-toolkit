@@ -14,3 +14,15 @@ describe('concat', () => {
     concatLodash([1, [2, 3]], 4);
   });
 });
+
+describe('concat/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/concat', () => {
+    concatToolkit(largeArray, largeArray);
+  });
+
+  bench('lodash/concat', () => {
+    concatLodash(largeArray, largeArray);
+  });
+});

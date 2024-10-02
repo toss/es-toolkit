@@ -14,3 +14,15 @@ describe('dropRightWhile', () => {
     dropRightWhileLodash([1.2, 2.3, 3.4], x => x < 2);
   });
 });
+
+describe('dropRightWhile/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/dropRightWhile', () => {
+    dropRightWhileToolkit(largeArray, x => x < 5000);
+  });
+
+  bench('lodash/dropRightWhile', () => {
+    dropRightWhileLodash(largeArray, x => x < 5000);
+  });
+});
