@@ -6,8 +6,18 @@ describe('isBlob', () => {
     expect(isBlob(new Blob())).toBe(true);
     const blobWithOptions = new Blob(['content'], { type: 'text/plain' });
     expect(isBlob(blobWithOptions)).toBe(true);
+    const originalFile = globalThis.File;
+    //@ts-expect-error - globalThis.File is browser only.
+    globalThis.File = class File extends Blob {
+      name: string;
+      constructor(chunks: any[], filename: string, options?: BlobPropertyBag) {
+        super(chunks, options);
+        this.name = filename;
+      }
+    };
     const file = new File(['content'], 'example.txt', { type: 'text/plain' });
     expect(isBlob(file)).toBe(true);
+    globalThis.File = originalFile;
   });
 
   it('returns false if the value is not a Blob', () => {
