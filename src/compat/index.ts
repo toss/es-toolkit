@@ -58,6 +58,7 @@ export { spread } from './function/spread.ts';
 export { attempt } from './function/attempt.ts';
 export { rearg } from './function/rearg.ts';
 export { curry } from './function/curry.ts';
+export { curryRight } from './function/curryRight.ts';
 export { debounce } from './function/debounce.ts';
 export { throttle } from './function/throttle.ts';
 export { flip } from './function/flip.ts';
