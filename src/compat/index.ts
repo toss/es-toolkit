@@ -91,6 +91,7 @@ export { isError } from './predicate/isError.ts';
 export { isFinite } from './predicate/isFinite.ts';
 export { isTypedArray } from './predicate/isTypedArray.ts';
 export { isMatch } from './predicate/isMatch.ts';
+export { isMap } from './predicate/isMap.ts';
 export { isRegExp } from './predicate/isRegExp.ts';
 export { isString } from './predicate/isString.ts';
 export { matches } from './predicate/matches.ts';

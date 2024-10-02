@@ -1,9 +1,7 @@
 import { bench, describe } from 'vitest';
-import { isMap as isMapToolkit_ } from 'es-toolkit';
-import { isMap as isMapLodash_ } from 'lodash';
-
-const isMapToolkit = isMapToolkit_;
-const isMapLodash = isMapLodash_;
+import { isMap as isMapToolkit } from 'es-toolkit';
+import { isMap as isMapToolkitCompat } from 'es-toolkit/compat';
+import { isMap as isMapLodash } from 'lodash';
 
 describe('isMap', () => {
   bench('es-toolkit/isMap', () => {
@@ -13,6 +11,15 @@ describe('isMap', () => {
     isMapToolkit([]);
     isMapToolkit({});
     isMapToolkit(null);
+  });
+
+  bench('es-toolkit/compat/isMap', () => {
+    isMapToolkitCompat(new Map());
+    isMapToolkitCompat(new Map([['key', 'value']]));
+    isMapToolkitCompat(new WeakMap());
+    isMapToolkitCompat([]);
+    isMapToolkitCompat({});
+    isMapToolkitCompat(null);
   });
 
   bench('lodash/isMap', () => {
