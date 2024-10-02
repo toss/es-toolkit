@@ -16,7 +16,7 @@ describe('isArrayBuffer', () => {
     isArrayBufferToolkit(new Map());
   });
 
-  bench('es-toolkit/isArrayBufferCompat', () => {
+  bench('es-toolkit/compat/isArrayBuffer', () => {
     isArrayBufferToolkitCompat(new ArrayBuffer(16));
     isArrayBufferToolkitCompat(null);
     isArrayBufferToolkitCompat([]);
