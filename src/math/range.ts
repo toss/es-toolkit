@@ -69,7 +69,7 @@ export function range(start: number, end?: number, step?: number): number[] {
   }
 
   const length = Math.max(Math.ceil((end - start) / step), 0);
-  const result = new Array(length);
+  const result = new Array<number>(length);
 
   for (let i = 0; i < length; i++) {
     result[i] = start + i * step;
