@@ -1,3 +1,5 @@
+import { isMap as isMapToolKit } from '../../predicate';
+
 /**
  * Checks if a given value is `Map`.
  *
@@ -17,5 +19,5 @@
  */
 
 export function isMap(value?: unknown): value is Map<any, any> {
-  return value instanceof Map;
+  return isMapToolKit(value);
 }
