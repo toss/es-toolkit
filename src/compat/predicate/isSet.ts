@@ -1,3 +1,5 @@
+import { isSet as isSetToolkit } from '../../predicate/isSet.ts';
+
 /**
  * Checks if a given value is `Set`.
  *
@@ -17,5 +19,5 @@
  */
 
 export function isSet(value?: unknown): value is Set<any> {
-  return value instanceof Set;
+  return isSetToolkit(value);
 }
