@@ -48,7 +48,7 @@ export function isEqualWith(
     bParent?: any,
     stack?: Map<any, any>
   ) => boolean | void = noop
-) {
+): boolean {
   if (typeof areValuesEqual !== 'function') {
     areValuesEqual = noop;
   }

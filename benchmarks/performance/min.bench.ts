@@ -14,3 +14,15 @@ describe('min', () => {
     minLodash([1, 2, 3]);
   });
 });
+
+describe('min/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/min', () => {
+    minToolkit(largeArray);
+  });
+
+  bench('lodash/min', () => {
+    minLodash(largeArray);
+  });
+});

@@ -25,3 +25,15 @@ describe('findIndex', () => {
     findIndexLodash(items, 'name');
   });
 });
+
+describe('findIndex/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Name ${i}` }));
+
+  bench('es-toolkit/compat/findIndex', () => {
+    findIndexToolkit(largeArray, x => x.name === 'Name 5000');
+  });
+
+  bench('lodash/findIndex', () => {
+    findIndexLodash(largeArray, x => x.name === 'Name 5000');
+  });
+});

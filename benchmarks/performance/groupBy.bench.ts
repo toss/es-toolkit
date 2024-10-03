@@ -30,3 +30,18 @@ describe('groupBy', () => {
     groupByLodash(array, item => item.category);
   });
 });
+
+describe('groupBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({
+    category: i % 2 === 0 ? 'even' : 'odd',
+    value: i,
+  }));
+
+  bench('es-toolkit/groupBy', () => {
+    groupByToolkit(largeArray, item => item.category);
+  });
+
+  bench('lodash/groupBy', () => {
+    groupByLodash(largeArray, item => item.category);
+  });
+});
