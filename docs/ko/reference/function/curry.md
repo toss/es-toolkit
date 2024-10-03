@@ -49,3 +49,58 @@ const sum25 = sum10(15);
 // 함수 'sum'은 모든 파라미터를 받았기 때문에, 이제 값을 반환해요.
 const result = sum25(5);
 ```
+
+## Lodash와의 호환성
+
+`es-toolkit/compat`에서 `curry`를 가져오면 lodash와 호환돼요.
+
+### 인터페이스
+
+```typescript
+function curry(
+  func: (...args: any[]) => any,
+  arity: number = func.length,
+  guard?: unknown
+): ((...args: any[]) => any) & { placeholder: typeof curry.placeholder };
+
+namespace curry {
+  placeholder: symbol;
+}
+```
+
+- `curry` 함수는 숫자 `arity`를 파라미터로 받아요. 이 파라미터는 함수가 호출되기 위해 받아야 하는 파라미터의 숫자를 지정해요.
+  - 기본값은 함수의 `length` 프로퍼티예요. `arity`가 음수이거나 `NaN`이라면, `0`으로 변환돼요. 소수점이 있는 숫자라면, 가장 가까운 정수로 내림해요.
+- `funcs.map(curry)` 처럼 `Array#map` 함수와 쉽게 사용할 수 있어요.
+- Symbol인 `curry.placeholder` 값을 사용해서, 파라미터를 부분 적용할 위치를 지정할 수 있어요.
+- 기본 `curry`와 다르게, 한 번에 여러 파라미터를 제공할 수 있어요. 남은 파라미터를 받는 새로운 함수를 반환해요.
+
+### 예시
+
+```typescript
+import { curry } from 'es-toolkit/compat';
+
+const abc = function (a, b, c) {
+  return Array.from(arguments);
+};
+
+let curried = curry(abc);
+
+curried(1)(2)(3);
+// => [1, 2, 3]
+
+curried(1, 2)(3);
+// => [1, 2, 3]
+
+curried(1, 2, 3);
+// => [1, 2, 3]
+
+// Curried with placeholders.
+curried(1)(curry.placeholder, 3)(2);
+// => [1, 2, 3]
+
+// Curried with arity.
+curried = curry(abc, 2);
+
+curried(1)(2);
+// => [1, 2]
+```

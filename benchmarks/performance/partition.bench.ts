@@ -14,3 +14,15 @@ describe('partition', () => {
     partitionLodash([1, 2, 3], x => x < 3);
   });
 });
+
+describe('partition/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, index) => index);
+
+  bench('es-toolkit/partition', () => {
+    partitionToolkit(largeArray, x => x < 5000);
+  });
+
+  bench('lodash/partition', () => {
+    partitionLodash(largeArray, x => x < 5000);
+  });
+});
