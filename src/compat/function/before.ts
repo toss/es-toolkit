@@ -24,7 +24,7 @@ import { toInteger } from '../util/toInteger';
  * before3(); // => 3
  * before3(); // => 3
  */
-export function before<F extends (...args: unknown[]) => any>(
+export function before<F extends (...args: any[]) => any>(
   n: number,
   func: F
 ): (...args: Parameters<F>) => ReturnType<F> {
