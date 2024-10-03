@@ -16,7 +16,7 @@ function isBlob(x: unknown): x is Blob;
 
 ### 戻り値
 
-(`x is Blob`): 値がBlobであればtrue、そうでなければfalseを返します。
+(`x is Blob`): 値がBlobであれば`true`、そうでなければ`false`。
 
 ## 例
 
