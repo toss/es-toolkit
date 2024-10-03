@@ -14,3 +14,15 @@ describe('mean', () => {
     meanLodash([1, 2, 3]);
   });
 });
+
+describe('mean/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/mean', () => {
+    meanToolkit(largeArray);
+  });
+
+  bench('lodash/mean', () => {
+    meanLodash(largeArray);
+  });
+});

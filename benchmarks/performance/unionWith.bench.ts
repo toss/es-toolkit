@@ -20,3 +20,16 @@ describe('unionWith', () => {
     unionWithLodash(array1, array2, areItemsEqual);
   });
 });
+
+describe('unionWith/largeArray', () => {
+  const largeArray1 = Array.from({ length: 10000 }, (_, i) => ({ id: i }));
+  const largeArray2 = Array.from({ length: 10000 }, (_, i) => ({ id: i + 5000 }));
+
+  bench('es-toolkit/unionWith', () => {
+    unionWithToolkit(largeArray1, largeArray2, (a, b) => a.id === b.id);
+  });
+
+  bench('lodash/unionWith', () => {
+    unionWithLodash(largeArray1, largeArray2, (a, b) => a.id === b.id);
+  });
+});

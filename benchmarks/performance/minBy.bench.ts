@@ -24,3 +24,15 @@ describe('minBy', () => {
     minByLodash(people, person => person.age);
   });
 });
+
+describe('minBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
+
+  bench('es-toolkit/minBy', () => {
+    minByToolkit(largeArray, person => person.age);
+  });
+
+  bench('lodash/minBy', () => {
+    minByLodash(largeArray, person => person.age);
+  });
+});

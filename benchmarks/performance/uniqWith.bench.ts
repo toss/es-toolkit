@@ -17,7 +17,7 @@ describe('uniqWith, small arrays', () => {
 });
 
 describe('uniqWith, large arrays', () => {
-  const array = Array.from({ length: 10000 }).map(() => randomInt(0, 10000));
+  const array = Array.from({ length: 10000 }, () => randomInt(0, 10000));
   const comparator = (x, y) => Math.floor(x) === Math.floor(y);
 
   bench('es-toolkit/uniqWith', () => {

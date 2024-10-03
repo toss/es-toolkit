@@ -14,3 +14,15 @@ describe('sum', () => {
     sumLodash([1, 2, 3]);
   });
 });
+
+describe('sum/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/sum', () => {
+    sumToolkit(largeArray);
+  });
+
+  bench('lodash/sum', () => {
+    sumLodash(largeArray);
+  });
+});
