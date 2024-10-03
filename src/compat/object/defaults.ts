@@ -1,50 +1,56 @@
 import { eq } from '../util/eq.ts';
 
 /**
- * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
+ * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
+ * It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
  *
- * Source objects are applied from left to right. Once a property is set, additional values of the same property are ignored.
- * It ensures that the destination object is not `null` or `undefined`.
+ * You can pass in multiple objects to define these default values,
+ * and they will be applied in order from left to right.
+ * Once a property has been assigned a value, any subsequent values for that property will be ignored.
  *
- * Note: This method mutates a first argument `object`.
+ * Note: This function modifies the first argument, `object`. If you want to keep `object` unchanged, consider using `toDefaulted` instead.
  *
- * @template T - The destination object type.
- * @param {T} object - The destination object.
- * @returns {NonNullable<T>} Returns `object`, ensuring that the destination object is not `null` or `undefined`.
+ * @template T - The type of the object being processed.
+ * @param {T} object - The target object.
+ * @returns {T} The object itself.
  */
 export function defaults<T extends object>(object: T): NonNullable<T>;
 
 /**
- * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
+ * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
+ * It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
  *
- * Source objects are applied from left to right. Once a property is set, additional values of the same property are ignored.
- * It ensures that the destination object is not `null` or `undefined`.
+ * You can pass in multiple objects to define these default values,
+ * and they will be applied in order from left to right.
+ * Once a property has been assigned a value, any subsequent values for that property will be ignored.
  *
- * Note: This method mutates a first argument `object`.
+ * Note: This function modifies the first argument, `object`. If you want to keep `object` unchanged, consider using `toDefaulted` instead.
  *
- * @template T - The destination object type.
- * @template S - The source object type.
- * @param {T} object - The destination object.
- * @param {S} source - The source object.
- * @returns {NonNullable<T & S>} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
+ * @template T - The type of the object being processed.
+ * @template S - The type of the object that provides default values.
+ * @param {T} object - The target object that will receive default values.
+ * @param {S} source - The object that specifies the default values to apply.
+ * @returns {NonNullable<T & S>} The `object` that has been updated with default values from `source`, ensuring that all properties are defined and none are left as `undefined`.
  */
 export function defaults<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
 
 /**
- * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
+ * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
+ * It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
  *
- * Source objects are applied from left to right. Once a property is set, additional values of the same property are ignored.
- * It ensures that the destination object is not `null` or `undefined`.
+ * You can pass in multiple objects to define these default values,
+ * and they will be applied in order from left to right.
+ * Once a property has been assigned a value, any subsequent values for that property will be ignored.
  *
- * Note: This method mutates a first argument `object`.
+ * Note: This function modifies the first argument, `object`. If you want to keep `object` unchanged, consider using `toDefaulted` instead.
  *
- * @template T - The destination object type.
- * @template S1 - The first source object type.
- * @template S2 - The second source object type.
- * @param {T} object - The destination object.
- * @param {S1} source1 - The first source object.
- * @param {S2} source2 - The second source object.
- * @returns {NonNullable<T & S1 & S2>} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
+ * @template T - The type of the object being processed.
+ * @template S1 - The type of the first object that provides default values.
+ * @template S2 - The type of the second object that provides default values.
+ * @param {T} object - The target object that will receive default values.
+ * @param {S1} source1 - The first object that specifies the default values to apply.
+ * @param {S2} source2 - The second object that specifies the default values to apply.
+ * @returns {NonNullable<T & S1 & S2>} The `object` that has been updated with default values from `source1` and `source2`, ensuring that all properties are defined and none are left as `undefined`.
  */
 export function defaults<T extends object, S1 extends object, S2 extends object>(
   object: T,
@@ -53,22 +59,24 @@ export function defaults<T extends object, S1 extends object, S2 extends object>
 ): NonNullable<T & S1 & S2>;
 
 /**
- * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
+ * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
+ * It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
  *
- * Source objects are applied from left to right. Once a property is set, additional values of the same property are ignored.
- * It ensures that the destination object is not `null` or `undefined`.
+ * You can pass in multiple objects to define these default values,
+ * and they will be applied in order from left to right.
+ * Once a property has been assigned a value, any subsequent values for that property will be ignored.
  *
- * Note: This method mutates a first argument `object`.
+ * Note: This function modifies the first argument, `object`. If you want to keep `object` unchanged, consider using `toDefaulted` instead.
  *
- * @template T - The destination object type.
- * @template S1 - The first source object type.
- * @template S2 - The second source object type.
- * @template S3 - The third source object type.
- * @param {T} object - The destination object.
- * @param {S1} source1 - The first source object.
- * @param {S2} source2 - The second source object.
- * @param {S3} source3 - The third source object.
- * @returns {NonNullable<T & S1 & S2 & S3>} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
+ * @template T - The type of the object being processed.
+ * @template S1 - The type of the first object that provides default values.
+ * @template S2 - The type of the second object that provides default values.
+ * @template S3 - The type of the third object that provides default values.
+ * @param {T} object - The target object that will receive default values.
+ * @param {S1} source1 - The first object that specifies the default values to apply.
+ * @param {S2} source2 - The second object that specifies the default values to apply.
+ * @param {S3} source3 - The third object that specifies the default values to apply.
+ * @returns {NonNullable<T & S1 & S2 & S3>} The `object` that has been updated with default values from `source1`, `source2`, and `source3`, ensuring that all properties are defined and none are left as `undefined`.
  */
 export function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object>(
   object: T,
@@ -76,26 +84,27 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
   source2: S2,
   source3: S3
 ): NonNullable<T & S1 & S2 & S3>;
-
 /**
- * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
+ * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
+ * It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
  *
- * Source objects are applied from left to right. Once a property is set, additional values of the same property are ignored.
- * It ensures that the destination object is not `null` or `undefined`.
+ * You can pass in multiple objects to define these default values,
+ * and they will be applied in order from left to right.
+ * Once a property has been assigned a value, any subsequent values for that property will be ignored.
  *
- * Note: This method mutates a first argument `object`.
+ * Note: This function modifies the first argument, `object`. If you want to keep `object` unchanged, consider using `toDefaulted` instead.
  *
- * @template T - The destination object type.
- * @template S1 - The first source object type.
- * @template S2 - The second source object type.
- * @template S3 - The third source object type.
- * @template S4 - The fourth source object type.
- * @param {T} object - The destination object.
- * @param {S1} source1 - The first source object.
- * @param {S2} source2 - The second source object.
- * @param {S3} source3 - The third source object.
- * @param {S4} source4 - The fourth source object.
- * @returns {NonNullable<T & S1 & S2 & S3 & S4>} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
+ * @template T - The type of the object being processed.
+ * @template S1 - The type of the first object that provides default values.
+ * @template S2 - The type of the second object that provides default values.
+ * @template S3 - The type of the third object that provides default values.
+ * @template S4 - The type of the fourth object that provides default values.
+ * @param {T} object - The target object that will receive default values.
+ * @param {S1} source1 - The first object that specifies the default values to apply.
+ * @param {S2} source2 - The second object that specifies the default values to apply.
+ * @param {S3} source3 - The third object that specifies the default values to apply.
+ * @param {S4} source4 - The fourth object that specifies the default values to apply.
+ * @returns {NonNullable<T & S1 & S2 & S3 & S4>} The `object` that has been updated with default values from `source1`, `source2`, `source3`, and `source4`, ensuring that all properties are defined and none are left as `undefined`.
  */
 export function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
   object: T,
@@ -106,18 +115,20 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
 ): NonNullable<T & S1 & S2 & S3 & S4>;
 
 /**
- * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
+ * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
+ * It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
  *
- * Source objects are applied from left to right. Once a property is set, additional values of the same property are ignored.
- * It ensures that the destination object is not `null` or `undefined`.
+ * You can pass in multiple objects to define these default values,
+ * and they will be applied in order from left to right.
+ * Once a property has been assigned a value, any subsequent values for that property will be ignored.
  *
- * Note: This method mutates a first argument `object`.
+ * Note: This function modifies the first argument, `object`. If you want to keep `object` unchanged, consider using `toDefaulted` instead.
  *
- * @template T - The destination object type.
- * @template S - The source object type.
- * @param {T} object - The destination object.
- * @param {S[]} sources - The source objects.
- * @returns {object} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
+ * @template T - The type of the object being processed.
+ * @template S - The type of the objects that provides default values.
+ * @param {T} object - The target object that will receive default values.
+ * @param {S[]} source - The objects that specifies the default values to apply.
+ * @returns {object} The `object` that has been updated with default values from `sources`, ensuring that all properties are defined and none are left as `undefined`.
  *
  * @example
  * defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
@@ -128,18 +139,20 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
 export function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object;
 
 /**
- * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
+ * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
+ * It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
  *
- * Source objects are applied from left to right. Once a property is set, additional values of the same property are ignored.
- * It ensures that the destination object is not `null` or `undefined`.
+ * You can pass in multiple objects to define these default values,
+ * and they will be applied in order from left to right.
+ * Once a property has been assigned a value, any subsequent values for that property will be ignored.
  *
- * Note: This method mutates a first argument `object`.
+ * Note: This function modifies the first argument, `object`. If you want to keep `object` unchanged, consider using `toDefaulted` instead.
  *
- * @template T - The destination object type.
- * @template S - The source object type.
- * @param {T} object - The destination object.
- * @param {S[]} sources - The source objects.
- * @returns {object} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
+ * @template T - The type of the object being processed.
+ * @template S - The type of the objects that provides default values.
+ * @param {T} object - The target object that will receive default values.
+ * @param {S[]} source - The objects that specifies the default values to apply.
+ * @returns {object} The `object` that has been updated with default values from `sources`, ensuring that all properties are defined and none are left as `undefined`.
  *
  * @example
  * defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
