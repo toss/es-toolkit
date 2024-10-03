@@ -7,11 +7,12 @@
 
 ```typescript
 function once<F extends () => any>(func: F): F;
+function once<F extends (...args: any[]) => void>(func: F): F;
 ```
 
 ### 파라미터
 
-- `func` (`F extends () => any`): 한 번만 호출하도록 제한할 함수예요.
+- `func` (`F extends (() => any) | ((...args: any[]) => void)`): 한 번만 호출하도록 제한할 함수예요.
 
 ### 반환 값
 

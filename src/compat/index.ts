@@ -52,6 +52,7 @@ export { head as first } from '../array/head.ts';
 
 export { ary } from './function/ary.ts';
 export { bind } from './function/bind.ts';
+export { before } from './function/before.ts';
 export { bindKey } from './function/bindKey.ts';
 export { defer } from './function/defer.ts';
 export { rest } from './function/rest.ts';
@@ -80,10 +81,13 @@ export { fromPairs } from './object/fromPairs.ts';
 export { unset } from './object/unset.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { invertBy } from './object/invertBy.ts';
+export { defaults } from './object/defaults.ts';
+export { toDefaulted } from './object/toDefaulted.ts';
 
 export { isPlainObject } from './predicate/isPlainObject.ts';
 export { isArray } from './predicate/isArray.ts';
 export { isArguments } from './predicate/isArguments.ts';
+export { isArrayBuffer } from './predicate/isArrayBuffer.ts';
 export { isArrayLike } from './predicate/isArrayLike.ts';
 export { isSymbol } from './predicate/isSymbol.ts';
 export { isObject } from './predicate/isObject.ts';
@@ -143,3 +147,4 @@ export { toString } from './util/toString.ts';
 export { toNumber } from './util/toNumber.ts';
 export { toInteger } from './util/toInteger.ts';
 export { toFinite } from './util/toFinite.ts';
+export { eq } from './util/eq.ts';

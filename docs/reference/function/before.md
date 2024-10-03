@@ -5,7 +5,10 @@ Creates a new function that limits the number of times the given function (`func
 ## Signature
 
 ```typescript
-function before<F extends (...args: any[]) => any>(n: number, func: F): F;
+function before<F extends (...args: any[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### Parameters
@@ -17,7 +20,7 @@ function before<F extends (...args: any[]) => any>(n: number, func: F): F;
 
 ### Returns
 
-(`F`): A new function that:
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): A new function that:
 
 - Tracks the number of calls.
 - Invokes `func` until the `n-1`-th call.

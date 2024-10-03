@@ -29,6 +29,7 @@ import {
   uint16ArrayTag,
   uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
+import { eq } from '../compat/index.ts';
 
 declare let Buffer:
   | {
@@ -172,7 +173,7 @@ function areObjectsEqual(
       const x = a.valueOf();
       const y = b.valueOf();
 
-      return x === y || (Number.isNaN(x) && Number.isNaN(y));
+      return eq(x, y);
     }
 
     case booleanTag:
