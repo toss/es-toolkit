@@ -5,13 +5,17 @@ import { difference as differenceLodash_ } from 'lodash';
 const isSubsetToolkit = isSubsetToolkit_;
 const differenceLodash = differenceLodash_;
 
+const isSubsetLodash = (array: any[], subset: any[]) => {
+  return differenceLodash(array, subset).length === 0;
+};
+
 describe('isSubset', () => {
   bench('es-toolkit/isSubset', () => {
     isSubsetToolkit([1, 2, 3], [1, 2]);
   });
 
   bench('lodash/difference implementation', () => {
-    differenceLodash([1, 2, 3], [1, 2]).length === 0;
+    isSubsetLodash([1, 2, 3], [1, 2]);
   });
 });
 
@@ -24,6 +28,6 @@ describe('isSubset/largeArray', () => {
   });
 
   bench('lodash/difference implementation', () => {
-    differenceLodash(largeArray, subset).length === 0;
+    isSubsetLodash(largeArray, subset);
   });
 });
