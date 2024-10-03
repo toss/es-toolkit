@@ -15,6 +15,8 @@ describe('constant', () => {
       if (index < 2) {
         return index ? _constant.call({}) : _constant();
       }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       return _constant(value);
     });
 
