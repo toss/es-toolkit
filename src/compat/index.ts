@@ -28,6 +28,7 @@ export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
+export { differenceBy } from './array/differenceBy.ts';
 export { fill } from './array/fill.ts';
 export { find } from './array/find.ts';
 export { findIndex } from './array/findIndex.ts';
