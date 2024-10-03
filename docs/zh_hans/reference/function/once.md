@@ -8,11 +8,12 @@
 
 ```typescript
 function once<F extends () => any>(func: F): F;
+function once<F extends (...args: any[]) => void>(func: F): F;
 ```
 
 ### 参数
 
-- `func` (`F extends () => any`): 要限制的函数。
+- `func` (`F extends (() => any) | ((...args: any[]) => void)`): 要限制的函数。
 
 ### 返回值
 
