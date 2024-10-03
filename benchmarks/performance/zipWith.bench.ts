@@ -20,3 +20,15 @@ describe('zipWith', () => {
     zipWithLodash(arr1, arr2, arr3, (a, b, c) => `${a}${b}${c}`);
   });
 });
+
+describe('zipWith/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/zipWith', () => {
+    zipWithToolkit(largeArray, largeArray, largeArray, (a, b, c) => a + b + c);
+  });
+
+  bench('lodash/zipWith', () => {
+    zipWithLodash(largeArray, largeArray, largeArray, (a, b, c) => a + b + c);
+  });
+});

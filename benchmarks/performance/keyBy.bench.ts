@@ -30,3 +30,15 @@ describe('keyBy', () => {
     keyByLodash(people, person => person.name);
   });
 });
+
+describe('keyBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
+
+  bench('es-toolkit/keyBy', () => {
+    keyByToolkit(largeArray, person => person.name);
+  });
+
+  bench('lodash/keyBy', () => {
+    keyByLodash(largeArray, person => person.name);
+  });
+});

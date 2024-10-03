@@ -14,3 +14,15 @@ describe('tail', () => {
     tailLodash([1, 2, 3, 4]);
   });
 });
+
+describe('tail/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/tail', () => {
+    tailToolkit(largeArray);
+  });
+
+  bench('lodash/tail', () => {
+    tailLodash(largeArray);
+  });
+});

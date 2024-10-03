@@ -423,9 +423,9 @@ describe('debounce', () => {
 
     debounced();
 
-    setTimeout(debounced, 190);
+    setTimeout(debounced, 150);
     setTimeout(debounced, 200);
-    setTimeout(debounced, 210);
+    setTimeout(debounced, 250);
 
     await delay(500);
 

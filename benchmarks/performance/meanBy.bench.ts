@@ -16,3 +16,15 @@ describe('meanBy', () => {
     meanByLodash(items, x => x.a);
   });
 });
+
+describe('meanBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ a: i }));
+
+  bench('es-toolkit/meanBy', () => {
+    meanByToolkit(largeArray, x => x.a);
+  });
+
+  bench('lodash/meanBy', () => {
+    meanByLodash(largeArray, x => x.a);
+  });
+});

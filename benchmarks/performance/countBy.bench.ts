@@ -18,3 +18,19 @@ describe('countBy', () => {
     });
   });
 });
+
+describe('countBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i + 0.5);
+
+  bench('es-toolkit/countBy', () => {
+    countByToolkit(largeArray, (item: number) => {
+      return Math.floor(item).toString();
+    });
+  });
+
+  bench('lodash/countBy', () => {
+    countByLodash(largeArray, (item: number) => {
+      return Math.floor(item).toString();
+    });
+  });
+});

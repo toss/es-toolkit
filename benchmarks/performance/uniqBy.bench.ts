@@ -17,13 +17,13 @@ describe('uniqBy, small arrays', () => {
 });
 
 describe('uniqBy, large arrays', () => {
-  const array = Array.from({ length: 10000 }).map(() => randomInt(0, 10000));
+  const largeArray = Array.from({ length: 10000 }, () => randomInt(0, 10000));
 
   bench('es-toolkit/uniqBy', () => {
-    uniqByToolkit(array, Math.floor);
+    uniqByToolkit(largeArray, Math.floor);
   });
 
   bench('lodash/uniqBy', () => {
-    uniqByLodash(array, Math.floor);
+    uniqByLodash(largeArray, Math.floor);
   });
 });

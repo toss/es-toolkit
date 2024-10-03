@@ -28,3 +28,15 @@ describe('unzipWith', () => {
     );
   });
 });
+
+describe('unzipWith, large arrays', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => [i, i + 1]);
+
+  bench('es-toolkit/unzipWith', () => {
+    unzipWithToolkit(largeArray, (a, b) => a + b);
+  });
+
+  bench('lodash/unzipWith', () => {
+    unzipWithLodash(largeArray, (a, b) => a + b);
+  });
+});
