@@ -13,6 +13,7 @@ import { eq } from '../util/eq.ts';
  * @returns {NonNullable<T>} Returns `object`, ensuring that the destination object is not `null` or `undefined`.
  */
 export function defaults<T extends object>(object: T): NonNullable<T>;
+
 /**
  * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
  *
@@ -27,8 +28,8 @@ export function defaults<T extends object>(object: T): NonNullable<T>;
  * @param {S} source - The source object.
  * @returns {NonNullable<T & S>} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
  */
-
 export function defaults<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
+
 /**
  * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
  *
@@ -45,12 +46,12 @@ export function defaults<T extends object, S extends object>(object: T, source: 
  * @param {S2} source2 - The second source object.
  * @returns {NonNullable<T & S1 & S2>} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
  */
-
 export function defaults<T extends object, S1 extends object, S2 extends object>(
   object: T,
   source1: S1,
   source2: S2
 ): NonNullable<T & S1 & S2>;
+
 /**
  * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
  *
@@ -69,13 +70,13 @@ export function defaults<T extends object, S1 extends object, S2 extends object>
  * @param {S3} source3 - The third source object.
  * @returns {NonNullable<T & S1 & S2 & S3>} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
  */
-
 export function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object>(
   object: T,
   source1: S1,
   source2: S2,
   source3: S3
 ): NonNullable<T & S1 & S2 & S3>;
+
 /**
  * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
  *
@@ -96,7 +97,6 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
  * @param {S4} source4 - The fourth source object.
  * @returns {NonNullable<T & S1 & S2 & S3 & S4>} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
  */
-
 export function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
   object: T,
   source1: S1,
@@ -104,6 +104,29 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
   source3: S3,
   source4: S4
 ): NonNullable<T & S1 & S2 & S3 & S4>;
+
+/**
+ * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
+ *
+ * Source objects are applied from left to right. Once a property is set, additional values of the same property are ignored.
+ * It ensures that the destination object is not `null` or `undefined`.
+ *
+ * Note: This method mutates a first argument `object`.
+ *
+ * @template T - The destination object type.
+ * @template S - The source object type.
+ * @param {T} object - The destination object.
+ * @param {S[]} sources - The source objects.
+ * @returns {object} Returns the merged object, ensuring that the destination object is not `null` or `undefined`.
+ *
+ * @example
+ * defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
+ * defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
+ * defaults({ a: null }, { a: 1 }); // { a: null }
+ * defaults({ a: undefined }, { a: 1 }); // { a: 1 }
+ */
+export function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object;
+
 /**
  * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
  *
