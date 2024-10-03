@@ -5,7 +5,10 @@
 ## 인터페이스
 
 ```typescript
-function before<F extends (...args: unknown[]) => any>(n: number, func: F): (...args: Parameters<F>) => ReturnType<F> | undefined;
+function before<F extends (...args: unknown[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### 파라미터

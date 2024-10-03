@@ -5,7 +5,10 @@ Creates a new function that limits the number of times the given function (`func
 ## Signature
 
 ```typescript
-function before<F extends (...args: unkown[]) => any>(n: number, func: F): (...args: Parameters<F>) => ReturnType<F> | undefined;
+function before<F extends (...args: unkown[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### Parameters
