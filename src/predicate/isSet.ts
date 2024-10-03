@@ -16,6 +16,6 @@
  * console.log(isSet(value3)); // false
  */
 
-export function isSet(value?: unknown): value is Set<any> {
+export function isSet(value: unknown): value is Set<any> {
   return value instanceof Set;
 }
