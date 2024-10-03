@@ -16,7 +16,7 @@ function isBlob(x: unknown): x is Blob;
 
 ### 반환값
 
-(`x is Blob`): 값이 Blob이면 true, 그렇지 않으면 false
+(`x is Blob`): 값이 Blob이면 `true`, 그렇지 않으면 `false`.
 
 ## 예시
 
