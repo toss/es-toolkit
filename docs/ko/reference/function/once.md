@@ -6,16 +6,17 @@
 ## 인터페이스
 
 ```typescript
-function once<F extends (...args: any[]) => any>(func: F): (...args: Parameters<F>) => ReturnType<F>;
+function once<F extends () => any>(func: F): F;
+function once<F extends (...args: any[]) => void>(func: F): F;
 ```
 
 ### 파라미터
 
-- `func` (`F extends (...args: unknown[]) => any`): 한 번만 호출하도록 제한할 함수예요.
+- `func` (`F extends (() => any) | ((...args: any[]) => void)`): 한 번만 호출하도록 제한할 함수예요.
 
 ### 반환 값
 
-(`(...args: Parameters<F>) => ReturnType<F>`): `func`가 한 번 호출되면 결과를 캐시하고 반환할 새로운 함수예요.
+(`F`): `func`가 한 번 호출되면 결과를 캐시하고 반환할 새로운 함수예요.
 
 ## 예시
 

@@ -6,16 +6,17 @@
 ## インターフェース
 
 ```typescript
-function once<F extends (...args: any[]) => any>(func: F): (...args: Parameters<F>) => ReturnType<F>;
+function once<F extends () => any>(func: F): F;
+function once<F extends (...args: any[]) => void>(func: F): F;
 ```
 
 ### パラメータ
 
-- `func` (`F extends (...args: any[]) => any`): 一度だけ呼び出すように制限する関数です。
+- `func` (`F extends (() => any) | ((...args: any[]) => void)`): 一度だけ呼び出すように制限する関数です。
 
 ### 戻り値
 
-(`(...args: Parameters<F>) => ReturnType<F>`): `func` が一度呼び出されると結果をキャッシュして返す新しい関数です。
+(`F`): `func` が一度呼び出されると結果をキャッシュして返す新しい関数です。
 
 ## 例
 
