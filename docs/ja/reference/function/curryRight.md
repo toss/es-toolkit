@@ -48,3 +48,58 @@ const add25 = add10(15);
 // パラメータ `a` には値 `5` を与える必要があります。関数 'sum' はすべての引数を受け取り、値を返します。
 const result = add25(5); // 30
 ```
+
+## Lodashとの互換性
+
+`es-toolkit/compat`から`curryRight`をインポートすると、lodashと互換性があります。
+
+### インターフェース
+
+```typescript
+function curryRight(
+  func: (...args: any[]) => any,
+  arity: number = func.length,
+  guard?: unknown
+): ((...args: any[]) => any) & { placeholder: typeof curryRight.placeholder };
+
+namespace curryRight {
+  placeholder: symbol;
+}
+```
+
+- `curryRight` 関数は数値 `arity` をパラメータとして受け取ります。このパラメータは関数が呼び出されるために必要なパラメータの数を指定します。
+  - デフォルト値は関数の `length` プロパティです。`arity` が負の値または `NaN` の場合、`0` に変換されます。小数点を含む数値の場合は、最も近い整数に切り捨てられます。
+- `funcs.map(curryRight)` のように `Array#map` 関数と簡単に使用できます。
+- Symbol である `curryRight.placeholder` の値を使用して、パラメータを部分適用する位置を指定できます。
+- 基本の `curryRight` とは異なり、一度に複数のパラメータを提供できます。残りのパラメータを受け取る新しい関数を返します。
+
+### 例
+
+```typescript
+import { curryRight } from 'es-toolkit/compat';
+
+const abc = function (a, b, c) {
+  return [a, b, c];
+};
+
+const curried = curryRight(abc);
+
+curried(3)(2)(1);
+// => [1, 2, 3]
+
+curried(2, 3)(1);
+// => [1, 2, 3]
+
+curried(1, 2, 3);
+// => [1, 2, 3]
+
+// Curried with placeholders.
+curried(3)(curryRight.placeholder, 2)(1);
+// => [1, 2, 3]
+
+// Curried with arity.
+curried = curryRight(abc, 2);
+
+curried(2)(1);
+// => [1, 2]
+```
