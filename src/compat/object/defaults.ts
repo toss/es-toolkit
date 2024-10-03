@@ -1,4 +1,4 @@
-import { eq } from '../_internal/eq';
+import { eq } from '../util/eq.ts';
 
 /**
  * Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to `undefined`.
