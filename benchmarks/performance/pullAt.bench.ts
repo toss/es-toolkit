@@ -17,3 +17,16 @@ describe('pullAt', () => {
     pullAtLodash(array, indexes);
   });
 });
+
+describe('pullAt/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+  const largeIndexes = Array.from({ length: 1000 }, (_, i) => i + 1000);
+
+  bench('es-toolkit/pullAt', () => {
+    pullAtToolkit(largeArray, largeIndexes);
+  });
+
+  bench('lodash/pullAt', () => {
+    pullAtLodash(largeArray, largeIndexes);
+  });
+});

@@ -34,7 +34,7 @@ isEqual(true, false); // false
 
 ```javascript
 isEqual(NaN, NaN); // true
-isEqual(+0, -0); // false
+isEqual(+0, -0); // true
 ```
 
 ### 例3: Dateオブジェクトの比較

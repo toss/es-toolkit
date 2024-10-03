@@ -14,3 +14,15 @@ describe('take', () => {
     takeLodash([1, 2, 3, 4], 2);
   });
 });
+
+describe('take/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/take', () => {
+    takeToolkit(largeArray, 100);
+  });
+
+  bench('lodash/take', () => {
+    takeLodash(largeArray, 100);
+  });
+});

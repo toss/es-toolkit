@@ -24,3 +24,19 @@ describe('fromPairs', () => {
     Object.fromEntries(data);
   });
 });
+
+describe('fromPairs/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => [i, i]);
+
+  bench('es-toolkit/fromPairs', () => {
+    fromPairsToolkit(largeArray);
+  });
+
+  bench('lodash/fromPairs', () => {
+    fromPairsLodash(largeArray);
+  });
+
+  bench('javascript/fromEntries', () => {
+    Object.fromEntries(largeArray);
+  });
+});

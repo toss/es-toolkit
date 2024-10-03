@@ -30,3 +30,15 @@ describe('last', () => {
     lastLodash(people);
   });
 });
+
+describe('last/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
+
+  bench('es-toolkit/last', () => {
+    lastToolkit(largeArray);
+  });
+
+  bench('lodash/last', () => {
+    lastLodash(largeArray);
+  });
+});

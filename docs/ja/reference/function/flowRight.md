@@ -31,7 +31,6 @@ function flowRight<A extends any[], R1, R2, R3, R4, R5>(
   f1: (...args: A) => R1
 ): (...args: A) => R5;
 function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
-function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
 ```
 
 ### パラメータ
@@ -50,4 +49,22 @@ const square = (n: number) => n * n;
 
 const combined = flowRight(square, add);
 console.log(combined(1, 2)); // 9
+```
+
+## Lodash 互換性  
+
+`es-toolkit/compat` から `flowRight` をインポートすると、Lodash と互換になります。
+
+- `flowRight` は関数の配列と個別の関数の両方を引数として受け入れます。  
+- 提供された関数が関数でない場合、`flowRight` はエラーをスローします。
+
+```typescript
+import { flowRight } from 'es-toolkit/compat';
+
+const add = (x: number, y: number) => x + y;
+const square = (n: number) => n * n;
+const double = (n: number) => n * 2;
+
+const combined = flowRight(double, [square, add]);
+console.log(combined(1, 2)); // => 18
 ```

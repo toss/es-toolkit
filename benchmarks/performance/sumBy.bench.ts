@@ -16,3 +16,15 @@ describe('sumBy', () => {
     sumByLodash(items, x => x.a);
   });
 });
+
+describe('sumBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ a: i }));
+
+  bench('es-toolkit/sumBy', () => {
+    sumByToolkit(largeArray, x => x.a);
+  });
+
+  bench('lodash/sumBy', () => {
+    sumByLodash(largeArray, x => x.a);
+  });
+});

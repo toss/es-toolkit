@@ -25,3 +25,15 @@ describe('findLastIndex', () => {
     findLastIndexLodash(items, 'name');
   });
 });
+
+describe('findLastIndex/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Name ${i}` }));
+
+  bench('es-toolkit/compat/findLastIndex', () => {
+    findLastIndexToolkit(largeArray, x => x.name === 'Name 5000');
+  });
+
+  bench('lodash/findLastIndex', () => {
+    findLastIndexLodash(largeArray, x => x.name === 'Name 5000');
+  });
+});

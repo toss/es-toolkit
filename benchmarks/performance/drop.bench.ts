@@ -20,3 +20,19 @@ describe('drop', () => {
     dropLodash([1, 2, 3, 4, 5, 6], 3);
   });
 });
+
+describe('drop/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/drop', () => {
+    dropToolkit(largeArray, 5000);
+  });
+
+  bench('es-toolkit/compat/drop', () => {
+    dropCompatToolkit(largeArray, 5000);
+  });
+
+  bench('lodash/drop', () => {
+    dropLodash(largeArray, 5000);
+  });
+});

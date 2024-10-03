@@ -30,7 +30,7 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
  * @template T - The type of object.
  * @param {T | null | undefined} obj - The object to pick keys from.
  * @param {...any} keys
- * @param {PropertyKey | PropertyKey[] | ProperyKey[][]}} keys - An array of keys to be picked from the object. received keysgoes through a flattening process before being used.
+ * @param {PropertyKey | PropertyKey[] | PropertyKey[][]}} keys - An array of keys to be picked from the object. received keys goes through a flattening process before being used.
  * @returns {Partial<T, K>} A new object with the specified keys picked.
  *
  * @example
@@ -63,8 +63,8 @@ export function pick<
  *
  * @template T - The type of object.
  * @param {T | null | undefined} obj - The object to pick keys from.
- * @param {...any} keysArr - An array of keys to be picked from the object. received keysgoes through a flattening process before being used.
- * @param {PropertyKey | PropertyKey[] | ProperyKey[][]}} keys - An array of keys to be picked from the object. received keysgoes through a flattening process before being used.
+ * @param {...any} keysArr - An array of keys to be picked from the object. received keys goes through a flattening process before being used.
+ * @param {PropertyKey | PropertyKey[] | PropertyKey[][]}} keys - An array of keys to be picked from the object. received keys goes through a flattening process before being used.
  * @returns {Partial<T, K>} A new object with the specified keys picked.
  *
  * @example

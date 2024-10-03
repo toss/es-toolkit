@@ -28,3 +28,15 @@ describe('filter', () => {
     filterLodash({ a: 1, b: 2, c: 3 }, 'b');
   });
 });
+
+describe('filter/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ a: i, b: i % 2 === 0 }));
+
+  bench('es-toolkit/filter', () => {
+    filterToolkit(largeArray, { b: true });
+  });
+
+  bench('lodash/filter', () => {
+    filterLodash(largeArray, { b: true });
+  });
+});

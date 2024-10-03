@@ -16,3 +16,15 @@ describe('sampleSize', () => {
     sampleSizeLodash(array, 3);
   });
 });
+
+describe('sampleSize/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/sampleSize', () => {
+    sampleSizeToolkit(largeArray, 100);
+  });
+
+  bench('lodash/sampleSize', () => {
+    sampleSizeLodash(largeArray, 100);
+  });
+});
