@@ -51,6 +51,7 @@ export { head as first } from '../array/head.ts';
 
 export { ary } from './function/ary.ts';
 export { bind } from './function/bind.ts';
+export { before } from './function/before.ts';
 export { bindKey } from './function/bindKey.ts';
 export { defer } from './function/defer.ts';
 export { rest } from './function/rest.ts';
