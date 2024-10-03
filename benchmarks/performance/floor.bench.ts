@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { floor as floorToolkit } from 'es-toolkit/compat';
-import { floor as floorLodash } from 'lodash';
+import { floor as floorToolkit_ } from 'es-toolkit/compat';
+import { floor as floorLodash_ } from 'lodash';
+
+const floorToolkit = floorToolkit_;
+const floorLodash = floorLodash_;
 
 describe('floor', () => {
   bench('es-toolkit/floor', () => {

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { noop } from '../../function/noop';
-import { stubFalse } from '../_internal/stubFalse';
 import { isEqual } from 'es-toolkit/compat';
+import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
 import { arrayViews } from '../_internal/arrayViews';
+import { stubFalse } from '../_internal/stubFalse';
 
 describe('isEqual', () => {
   const symbol1 = Symbol ? Symbol('a') : true;

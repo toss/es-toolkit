@@ -25,7 +25,7 @@ function repeat(str: string, n: number): string;
 
 (`string`): `n`回繰り返された文字列。
 
-## Examples
+## 例
 
 ```javascript
 repeat('abc', 0); // ''

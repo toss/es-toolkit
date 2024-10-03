@@ -19,7 +19,7 @@ export function at<T>(arr: readonly T[], indices: number[]): Array<T | undefined
   for (let i = 0; i < indices.length; i++) {
     const index = indices[i];
 
-    result.push(arr.at(index));
+    result[i] = arr.at(index);
   }
 
   return result;

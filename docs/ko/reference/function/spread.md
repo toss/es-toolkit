@@ -44,12 +44,12 @@ console.log(spreadGreet(['Alice'])); // Output: Hello, Alice!
 console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
 ```
 
-## Lodash 호환성
+## Lodash와의 호환성
 
 `es-toolkit/compat`에서 `spread`를 가져오면 lodash와 호환돼요.
 
 - `spread`는 `argsIndex`라고 하는 숫자 인자를 추가로 받아요. 이 인자는 펼칠 인자 배열이 주어진 인덱스를 나타내요.
-  - 만약 `argsIndex`이 음수이거나 `NaN`이라면, 기본값 `0`으로 취급돼요. 소수라면, 가까운 정수로 반올림돼요.
+  - 만약 `argsIndex`이 음수이거나 `NaN`이라면, 기본값 `0`으로 취급돼요. 소수라면, 가까운 정수로 내림해요.
 
 ```typescript
 import { spread } from 'es-toolkit/compat';

@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { isArray as isArrayToolkit } from 'es-toolkit/compat';
-import { isArray as isArrayLodash } from 'lodash';
+import { isArray as isArrayToolkit_ } from 'es-toolkit/compat';
+import { isArray as isArrayLodash_ } from 'lodash';
+
+const isArrayToolkit = isArrayToolkit_;
+const isArrayLodash = isArrayLodash_;
 
 describe('isArray', () => {
   bench('es-toolkit/isArray', () => {

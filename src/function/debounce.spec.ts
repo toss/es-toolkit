@@ -1,5 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
-import { debounce } from './debounce'; // adjust the import path as necessary
+import { describe, expect, it, vi } from 'vitest';
+import { debounce } from './debounce';
+// adjust the import path as necessary
 import { delay } from '../promise';
 
 describe('debounce', () => {
@@ -74,7 +75,7 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledTimes(2);
   });
 
-  it('should have no effect if we call cancel when the function is not executed', async () => {
+  it('should have no effect if we call cancel when the function is not executed', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);

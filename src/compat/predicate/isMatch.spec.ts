@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import { isArrayMatch, isMapMatch, isMatch, isSetMatch } from './isMatch';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
 import { stubTrue } from '../_internal/stubTrue';
-import { isArrayMatch, isMapMatch, isMatch, isSetMatch } from './isMatch';
 
 describe('isMatch', () => {
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {
@@ -13,6 +13,13 @@ describe('isMatch', () => {
     expect(isMatch(object, { a: 1, c: 3 })).toBe(true);
     expect(isMatch(object, { c: 3, d: 4 })).toBe(false);
     expect(isMatch({ a: { b: { c: 1, d: 2 }, e: 3 }, f: 4 }, { a: { b: { c: 1 } } })).toBe(true);
+  });
+
+  it(`should match boolean values`, () => {
+    expect(isMatch(true, true)).toBe(true);
+    expect(isMatch(false, true)).toBe(false);
+    expect(isMatch(true, false)).toBe(false);
+    expect(isMatch(false, false)).toBe(true);
   });
 
   it(`should match inherited string keyed \`object\` properties`, () => {

@@ -23,7 +23,7 @@ function forEachRight<T>(arr: T[], callback: (value: T, index: number, arr: T[])
 ## Examples
 
 ```ts
-import { forEachRight } from 'es-toolkit/forEachRight';
+import { forEachRight } from 'es-toolkit/array';
 
 const array = [1, 2, 3];
 const result: number[] = [];

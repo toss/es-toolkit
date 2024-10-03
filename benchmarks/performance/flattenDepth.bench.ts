@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { flattenDepth as flattenDepthToolkit } from 'es-toolkit/compat';
-import { flattenDepth as flattenDepthLodash } from 'lodash';
+import { flattenDepth as flattenDepthToolkit_ } from 'es-toolkit/compat';
+import { flattenDepth as flattenDepthLodash_ } from 'lodash';
+
+const flattenDepthToolkit = flattenDepthToolkit_;
+const flattenDepthLodash = flattenDepthLodash_;
 
 describe('flattenDepth', () => {
   const arr = [1, [2, 3], [4, [5, 6]]];

@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { bindKey as bindKeyToolkit } from 'es-toolkit';
-import { bindKey as bindKeyLodash } from 'lodash';
+import { bindKey as bindKeyToolkit_ } from 'es-toolkit/compat';
+import { bindKey as bindKeyLodash_ } from 'lodash';
+
+const bindKeyToolkit = bindKeyToolkit_;
+const bindKeyLodash = bindKeyLodash_;
 
 const object = {
   user: 'fred',
@@ -9,7 +12,7 @@ const object = {
   },
 };
 
-describe('bindKey', () => {
+describe('bindKey - without placeholder', () => {
   bench('es-toolkit/bindKey - without placeholder', () => {
     bindKeyToolkit(object, 'greet', 'hi');
   });
@@ -17,7 +20,9 @@ describe('bindKey', () => {
   bench('lodash/bindKey - without placeholder', () => {
     bindKeyLodash(object, 'greet', 'hi');
   });
+});
 
+describe('bindKey - with placeholder', () => {
   bench('es-toolkit/bindKey - with placeholder', () => {
     bindKeyToolkit(object, 'greet', bindKeyToolkit.placeholder);
   });

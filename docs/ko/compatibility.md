@@ -15,7 +15,7 @@ chunk([1, 2, 3, 4], 0);
 
 `es-toolkit/compat`은 실제 `lodash` 테스트 코드를 이용해서 테스트돼요.
 
-`es-toolkit/compat`는 원래 `es-toolkit`에 비해 런타임 퍼포먼스나 번들 크기가 최적은 아닐 수 있어요. 마이그레이션 중에 사용하는 도구로 생각해 주시고, 새로운 기능은 `es-toolkit`로 개발해주세요.
+`es-toolkit/compat`은 원래 `es-toolkit`에 비해 런타임 퍼포먼스나 번들 크기가 최적은 아닐 수 있어요. 마이그레이션 중에 사용하는 도구로 생각해 주시고, 새로운 기능은 `es-toolkit`로 개발해주세요.
 
 ## 설계 원칙
 

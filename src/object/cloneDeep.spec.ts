@@ -329,8 +329,8 @@ describe('cloneDeep', () => {
   });
 
   it('should clone DataViews', () => {
-    const buffer = new Uint8Array([1, 2]).buffer;
-    const view = new DataView(buffer);
+    const buffer = new Uint8Array([0, 1, 2]).buffer;
+    const view = new DataView(buffer, 1, 2);
 
     const cloned = cloneDeep(view);
 

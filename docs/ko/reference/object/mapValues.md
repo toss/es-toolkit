@@ -20,7 +20,7 @@ function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>
 
 (`Record<K, V>`): The new mapped object.
 
-## Examples
+## 예시
 
 ```typescript
 const obj = { a: 1, b: 2 };

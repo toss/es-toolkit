@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { countBy as countByToolkit } from 'es-toolkit';
-import { countBy as countByLodash } from 'lodash';
+import { countBy as countByToolkit_ } from 'es-toolkit';
+import { countBy as countByLodash_ } from 'lodash';
+
+const countByToolkit = countByToolkit_;
+const countByLodash = countByLodash_;
 
 describe('countBy', () => {
   bench('es-toolkit/countBy', () => {

@@ -23,7 +23,9 @@
 export function unionBy<T, U>(arr1: readonly T[], arr2: readonly T[], mapper: (item: T) => U): T[] {
   const map = new Map<U, T>();
 
-  for (const item of [...arr1, ...arr2]) {
+  const items = [...arr1, ...arr2];
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
     const key = mapper(item);
 
     if (!map.has(key)) {

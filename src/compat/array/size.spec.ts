@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { size } from './size';
 import { falsey } from '../_internal/falsey';
 import { toArgs } from '../_internal/toArgs';
-import { size } from './size';
 
 const args = toArgs([1, 2, 3]);
 /**

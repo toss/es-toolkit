@@ -1,7 +1,7 @@
+import { get } from './get.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
-import { get } from './get.ts';
 
 /**
  * Removes the property at the given path of the object.

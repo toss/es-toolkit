@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isFunction } from './isFunction';
-import { falsey } from '../compat/_internal/falsey';
 import { args } from '../compat/_internal/args';
+import { falsey } from '../compat/_internal/falsey';
 
 describe('isFunction', () => {
   it('should return `true` for functions', () => {

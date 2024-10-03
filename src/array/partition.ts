@@ -24,7 +24,8 @@ export function partition<T>(arr: readonly T[], isInTruthy: (value: T) => boolea
   const truthy: T[] = [];
   const falsy: T[] = [];
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
     if (isInTruthy(item)) {
       truthy.push(item);
     } else {

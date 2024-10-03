@@ -27,7 +27,7 @@ const result = pick(obj, ['a', 'c']);
 // 결과는 다음과 같아요 { a: 1, c: 3 }
 ```
 
-## Lodash와 호환성
+## Lodash와의 호환성
 
 `es-toolkit/compat`에서 `pick` 함수를 가져오면, 깊은 경로를 선택할 수 있어요.
 

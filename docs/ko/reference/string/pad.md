@@ -10,13 +10,13 @@
 function pad(str: string, length: number, chars = ' '): string;
 ```
 
-## 파라미터
+### 파라미터
 
 - `str` (`string`): 길이를 맞출 문자열.
 - `length` (`number`): 문자열을 맞출 길이.
 - `char` (`string`): 문자열의 길이를 맞추기 위해 사용할 문자. 기본값은 `' '`이에요.
 
-## 반환 값
+### 반환 값
 
 (`string`): 길이가 맞춰진 문자열.
 

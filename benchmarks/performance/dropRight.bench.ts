@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { dropRight as dropRightToolkit } from 'es-toolkit';
-import { dropRight as dropRightLodash } from 'lodash';
+import { dropRight as dropRightToolkit_ } from 'es-toolkit';
+import { dropRight as dropRightLodash_ } from 'lodash';
+
+const dropRightToolkit = dropRightToolkit_;
+const dropRightLodash = dropRightLodash_;
 
 describe('dropRight', () => {
   bench('es-toolkit/dropRight', () => {

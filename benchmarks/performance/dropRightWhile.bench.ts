@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { dropRightWhile as dropRightWhileToolkit } from 'es-toolkit';
-import { dropRightWhile as dropRightWhileLodash } from 'lodash';
+import { dropRightWhile as dropRightWhileToolkit_ } from 'es-toolkit';
+import { dropRightWhile as dropRightWhileLodash_ } from 'lodash';
+
+const dropRightWhileToolkit = dropRightWhileToolkit_;
+const dropRightWhileLodash = dropRightWhileLodash_;
 
 describe('dropRightWhile', () => {
   bench('es-toolkit/dropRightWhile', () => {

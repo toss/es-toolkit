@@ -85,7 +85,7 @@ export function find<T>(arr: readonly T[], propertyToCheck: string): T | undefin
  */
 export function find<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (item: T[keyof T], index: keyof T, object: T) => unknown
 ): T | undefined;
 
 /**

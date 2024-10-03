@@ -11,7 +11,7 @@ function trimStart(str: string, chars?: string | string[]): string;
 ### 参数
 
 - `str` (`string`): 将要去除开头字符的字符串。
-- `chars` (`string | string[]`): 要从字符串结尾删除的字符。
+- `chars` (`string | string[]`): 要从字符串开头删除的字符。
 
 ### 返回值
 

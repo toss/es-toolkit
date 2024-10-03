@@ -1,3 +1,4 @@
+import { isObject } from './isObject.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 
 /**
@@ -116,6 +117,10 @@ export function isMatch(target: any, source: any): boolean {
       return false;
     }
     default: {
+      if (!isObject(target)) {
+        return target === source || (Number.isNaN(target) && Number.isNaN(source));
+      }
+
       return !source;
     }
   }

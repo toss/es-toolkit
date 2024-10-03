@@ -9,7 +9,7 @@
  *
  * @example
  * const result1 = random(5); // Returns a random number between 0 and 5.
- * const result2 = random(0); // Returns a random number between 0 and 0 (which is 0).
+ * const result2 = random(0); // If the `maximum` is less than or equal to 0, an error is thrown.
  */
 export function random(maximum: number): number;
 

@@ -93,7 +93,9 @@
     "some",
     "sortBy"
   ],
-  "date": ["now"],
+  "date": [
+    "now"
+  ],
   "function": [
     "after",
     "ary",
@@ -194,7 +196,11 @@
     "sum",
     "sumBy"
   ],
-  "number": ["clamp", "inRange", "random"],
+  "number": [
+    "clamp",
+    "inRange",
+    "random"
+  ],
   "object": [
     "assign",
     "assignIn",

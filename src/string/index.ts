@@ -6,6 +6,7 @@ export { lowerCase } from './lowerCase.ts';
 export { startCase } from './startCase.ts';
 export { capitalize } from './capitalize.ts';
 export { pascalCase } from './pascalCase.ts';
+export { constantCase } from './constantCase.ts';
 export { trim } from './trim.ts';
 export { trimStart } from './trimStart.ts';
 export { trimEnd } from './trimEnd.ts';

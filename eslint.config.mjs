@@ -1,9 +1,10 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
 import jsdoc from 'eslint-plugin-jsdoc';
-import prettier from 'eslint-config-prettier';
+import noForOfArrayPlugin from 'eslint-plugin-no-for-of-array';
+import prettier from 'eslint-plugin-prettier/recommended';
 import pluginVue from 'eslint-plugin-vue';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import pluginJs from '@eslint/js';
 
 export default [
   {
@@ -27,7 +28,6 @@ export default [
         ...globals['shared-node-browser'],
         ...globals.es2015,
       },
-
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -42,6 +42,26 @@ export default [
   prettier,
   jsdoc.configs['flat/recommended'],
   ...pluginVue.configs['flat/recommended'],
+  {
+    files: ['src/**/*.ts'],
+    ignores: ['**/*.spec.ts'],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: import.meta.dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    plugins: {
+      'no-for-of-array': noForOfArrayPlugin,
+    },
+    rules: {
+      'no-for-of-array/no-for-of-array': 'error',
+    },
+  },
   {
     rules: {
       'no-implicit-coercion': 'error',
@@ -93,6 +113,7 @@ export default [
       'jsdoc/no-defaults': 'off',
       'jsdoc/require-jsdoc': 'off',
       'vue/multi-word-component-names': 'off',
+      'prefer-object-has-own': 'error',
     },
   },
 ];

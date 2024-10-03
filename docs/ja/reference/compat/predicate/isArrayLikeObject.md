@@ -29,7 +29,7 @@ function isArrayLikeObject(value: unknown): value is ArrayLike<unknown> & object
 ## 例
 
 ```typescript
-import { isArrayLikeObject } from 'es-toolkit/predicate';
+import { isArrayLikeObject } from 'es-toolkit/compat';
 
 console.log(isArrayLikeObject([1, 2, 3])); // true
 console.log(isArrayLikeObject({ 0: 'a', length: 1 })); // true

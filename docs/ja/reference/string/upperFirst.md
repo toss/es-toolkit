@@ -19,7 +19,9 @@ function upperFirst(str: string): string;
 ## 例
 
 ```typescript
-const convertedStr1 = upperCase('fred'); // returns 'fred'
-const convertedStr2 = upperCase('Fred'); // returns 'Fred'
-const convertedStr3 = upperCase('FRED'); // returns 'FRED'
+import { upperFirst } from 'es-toolkit/string';
+
+upperFirst('fred'); // returns 'Fred'
+upperFirst('Fred'); // returns 'Fred'
+upperFirst('FRED'); // returns 'FRED'
 ```

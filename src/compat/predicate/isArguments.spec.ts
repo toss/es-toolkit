@@ -1,12 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { isArguments } from './isArguments';
+import { noop } from '../../function';
 import { args } from '../_internal/args';
-import { stubFalse } from '../_internal/stubFalse';
 import { falsey } from '../_internal/falsey';
-import { symbol } from '../_internal/symbol';
 import { slice } from '../_internal/slice';
 import { strictArgs } from '../_internal/strictArgs';
-import { noop } from '../../function';
+import { stubFalse } from '../_internal/stubFalse';
+import { symbol } from '../_internal/symbol';
 
 describe('isArguments', () => {
   it('should return `true` for `arguments` objects', () => {

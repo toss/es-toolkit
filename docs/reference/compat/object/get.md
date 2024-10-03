@@ -89,7 +89,7 @@ function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaul
 
 (`Get<T, P>`): The resolved value.
 
-### Examples
+## Examples
 
 ```typescript
 import { get } from 'es-toolkit/compat';

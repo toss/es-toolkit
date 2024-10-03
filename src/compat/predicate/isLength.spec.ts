@@ -1,5 +1,5 @@
-import { isLength } from '../index';
 import { describe, expect, it } from 'vitest';
+import { isLength } from '../index';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/isLength.spec.js#L1

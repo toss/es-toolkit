@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { without as withoutEsToolkit } from 'es-toolkit';
-import { without as withoutLodash } from 'lodash';
+import { without as withoutEsToolkit_ } from 'es-toolkit';
+import { without as withoutLodash_ } from 'lodash';
+
+const withoutEsToolkit = withoutEsToolkit_;
+const withoutLodash = withoutLodash_;
 
 const generateArray = (length: number, max: number) => Array.from({ length }, () => Math.floor(Math.random() * max));
 

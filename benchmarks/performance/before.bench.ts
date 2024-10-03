@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { before as beforeToolkit } from 'es-toolkit';
-import { before as beforeLodash } from 'lodash';
+import { before as beforeToolkit_ } from 'es-toolkit';
+import { before as beforeLodash_ } from 'lodash';
+
+const beforeToolkit = beforeToolkit_;
+const beforeLodash = beforeLodash_;
 
 describe('before', () => {
   bench('es-toolkit/before', () => {

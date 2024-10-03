@@ -5,7 +5,6 @@ import { trimEnd as trimEndToolkit } from '../../string/trimEnd.ts';
  *
  * @param {string} str - The string from which trailing characters will be trimmed.
  * @param {string | string[]} chars - The character(s) to remove from the end of the string. Defaults to `" "`.
- * @param guard
  * @returns {string} - The resulting string after the specified trailing character has been removed.
  *
  * @example

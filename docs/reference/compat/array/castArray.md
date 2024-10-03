@@ -25,7 +25,7 @@ function castArray<T>(value?: T | readonly T[]): T[];
 ## Examples
 
 ```typescript
-import { castArray } from 'es-toolkit/array';
+import { castArray } from 'es-toolkit/compat';
 
 const arr1 = castArray(1);
 // Returns: [1]

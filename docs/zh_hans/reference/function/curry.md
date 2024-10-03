@@ -35,12 +35,67 @@ function sum(a: number, b: number, c: number) {
 
 const curriedSum = curry(sum);
 
-// The parameter `a` should be given the value `10`.
+// 参数 `a` 应该被赋值为 `10`。
 const sum10 = curriedSum(10);
 
-// The parameter `b` should be given the value `15`.
+// 参数 `b` 应该被赋值为 `15`。
 const sum25 = sum10(15);
 
-// The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
+// 参数 `c` 应该被赋值为 `5`。函数 'sum' 已经接收到了所有参数，现在将返回一个值。
 const result = sum25(5);
+```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 中导入 `curry` 以实现与 lodash 的完全兼容。
+
+### 签名
+
+```typescript
+function curry(
+  func: (...args: any[]) => any,
+  arity: number = func.length,
+  guard?: unknown
+): ((...args: any[]) => any) & { placeholder: typeof curry.placeholder };
+
+namespace curry {
+  placeholder: symbol;
+}
+```
+
+- `curry` 接受一个额外的数值参数 `arity`，该参数指定了函数的参数数量。
+  - 默认为 `func.length`，如果 `arity` 为负数或 `NaN`，则会被转换为 `0`。如果它是一个小数，则会被向下取整到最接近的整数。
+- `guard` 使其可以用作 `Array#map` 等方法的迭代器。
+- `curry.placeholder` 值默认为一个 `symbol`，可以用作部分应用参数的占位符。
+- 不像原生的 `curry`，这个方法允许每次使用多个参数调用，并返回一个接受剩余参数的新函数。
+
+### 示例
+
+```typescript
+import { curry } from 'es-toolkit/compat';
+
+const abc = function (a, b, c) {
+  return Array.from(arguments);
+};
+
+let curried = curry(abc);
+
+curried(1)(2)(3);
+// => [1, 2, 3]
+
+curried(1, 2)(3);
+// => [1, 2, 3]
+
+curried(1, 2, 3);
+// => [1, 2, 3]
+
+// 使用占位符进行柯里化
+curried(1)(curry.placeholder, 3)(2);
+// => [1, 2, 3]
+
+// 指定参数数量
+curried = curry(abc, 2);
+
+curried(1)(2);
+// => [1, 2]
 ```

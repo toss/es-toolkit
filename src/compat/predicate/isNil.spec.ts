@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { falsey } from '../_internal/falsey.ts';
-import { args } from '../_internal/args.ts';
 import { isNil } from './isNil.ts';
+import { args } from '../_internal/args.ts';
+import { falsey } from '../_internal/falsey.ts';
 
 /**
  * @see https://github.com/lodash/lodash/blob/main/test/isNil.spec.js

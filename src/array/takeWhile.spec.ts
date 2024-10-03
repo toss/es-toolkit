@@ -1,5 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { takeWhile } from './takeWhile'; // adjust the import path as necessary
+import { describe, expect, it } from 'vitest';
+import { takeWhile } from './takeWhile';
+
+// adjust the import path as necessary
 
 describe('takeWhile', () => {
   it('should return elements while the predicate is true', () => {

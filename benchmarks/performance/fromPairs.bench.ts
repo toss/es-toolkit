@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { fromPairs as fromPairsToolkit } from 'es-toolkit/compat';
-import { fromPairs as fromPairsLodash } from 'lodash';
+import { fromPairs as fromPairsToolkit_ } from 'es-toolkit/compat';
+import { fromPairs as fromPairsLodash_ } from 'lodash';
+
+const fromPairsToolkit = fromPairsToolkit_;
+const fromPairsLodash = fromPairsLodash_;
 
 describe('fromPairs', () => {
   const data = [

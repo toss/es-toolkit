@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { difference } from './difference';
-import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 import { range } from '../../math/range';
+import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/difference-methods.spec.js#L1

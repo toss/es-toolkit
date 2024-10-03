@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { some } from './some';
+import { empties } from '../_internal/empties';
 import { identity } from '../_internal/identity';
 import { stubFalse } from '../_internal/stubFalse';
-import { empties } from '../_internal/empties';
 import { stubTrue } from '../_internal/stubTrue';
 
 describe('some', () => {
