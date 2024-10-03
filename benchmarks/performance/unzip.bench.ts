@@ -20,3 +20,15 @@ describe('unzip, small arrays', () => {
     ]);
   });
 });
+
+describe('unzip, large arrays', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ['a', i, true]);
+
+  bench('es-toolkit/unzip', () => {
+    unzipToolkit(largeArray);
+  });
+
+  bench('lodash/unzip', () => {
+    unzipLodash(largeArray);
+  });
+});

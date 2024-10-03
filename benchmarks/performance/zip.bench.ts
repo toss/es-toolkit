@@ -14,3 +14,15 @@ describe('zip', () => {
     zipLodash([1, 2, 3, 4], [3, 4, 5, 6]);
   });
 });
+
+describe('zip/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/zip', () => {
+    zipToolkit(largeArray, largeArray);
+  });
+
+  bench('lodash/zip', () => {
+    zipLodash(largeArray, largeArray);
+  });
+});

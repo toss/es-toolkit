@@ -14,3 +14,16 @@ describe('xorWith', () => {
     xorWithLodash([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], (x, y) => x.id === y.id);
   });
 });
+
+describe('xorWith/largeArray', () => {
+  const largeArray1 = Array.from({ length: 10000 }, (_, i) => ({ id: i }));
+  const largeArray2 = Array.from({ length: 10000 }, (_, i) => ({ id: i + 5000 }));
+
+  bench('es-toolkit/xorWith', () => {
+    xorWithToolkit(largeArray1, largeArray2, (x, y) => x.id === y.id);
+  });
+
+  bench('lodash/xorWith', () => {
+    xorWithLodash(largeArray1, largeArray2, (x, y) => x.id === y.id);
+  });
+});

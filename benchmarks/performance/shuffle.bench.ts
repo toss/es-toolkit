@@ -16,3 +16,15 @@ describe('shuffle', () => {
     shuffleLodash(array);
   });
 });
+
+describe('shuffle/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
+
+  bench('es-toolkit/shuffle', () => {
+    shuffleToolkit(largeArray);
+  });
+
+  bench('lodash/shuffle', () => {
+    shuffleLodash(largeArray);
+  });
+});
