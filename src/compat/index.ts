@@ -44,6 +44,7 @@ export { join } from './array/join.ts';
 export { orderBy } from './array/orderBy.ts';
 export { sortBy } from './array/sortBy.ts';
 export { size } from './array/size.ts';
+export { slice } from './array/slice.ts';
 export { some } from './array/some.ts';
 export { take } from './array/take.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
