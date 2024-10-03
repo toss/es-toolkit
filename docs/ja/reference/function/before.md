@@ -5,7 +5,7 @@
 ## インターフェース
 
 ```typescript
-function before<F extends (...args: any[]) => any>(n: number, func: F): F;
+function before<F extends (...args: unkown[]) => any>(n: number, func: F): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### パラメータ
@@ -17,7 +17,7 @@ function before<F extends (...args: any[]) => any>(n: number, func: F): F;
 
 ### 戻り値
 
-(`F`): 新しい関数を返します。この関数は以下の機能を持ちます：
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 新しい関数を返します。この関数は以下の機能を持ちます：
 
 - 呼び出し回数を追跡します。
 - `n-1` 回目の呼び出しまで `func` を呼び出します。

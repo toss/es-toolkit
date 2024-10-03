@@ -5,7 +5,7 @@
 ## 签名
 
 ```typescript
-function before<F extends (...args: any[]) => any>(n: number, func: F): F;
+function before<F extends (...args: unkown[]) => any>(n: number, func: F): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### 参数
@@ -17,7 +17,7 @@ function before<F extends (...args: any[]) => any>(n: number, func: F): F;
 
 ### 返回值
 
-(`F`): 一个新函数，该函数：
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 一个新函数，该函数：
 
 - 追踪调用次数。
 - 在调用次数达到 `n-1` 次之前调用 `func`。
