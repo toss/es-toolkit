@@ -51,8 +51,7 @@ const combined = flowRight(square, add);
 console.log(combined(1, 2)); // 9
 ```
 
-
-## Lodash와 호환성  
+## Lodash와 호환성
 
 `es-toolkit/compat`에서 `flowRight`를 가져오면 lodash와 완전히 호환돼요.
 

@@ -51,11 +51,11 @@ const combined = flowRight(square, add);
 console.log(combined(1, 2)); // 9
 ```
 
-## Lodash 互換性  
+## Lodash 互換性
 
 `es-toolkit/compat` から `flowRight` をインポートすると、Lodash と互換になります。
 
-- `flowRight` は関数の配列と個別の関数の両方を引数として受け入れます。  
+- `flowRight` は関数の配列と個別の関数の両方を引数として受け入れます。
 - 提供された関数が関数でない場合、`flowRight` はエラーをスローします。
 
 ```typescript
