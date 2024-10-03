@@ -29,7 +29,7 @@ import {
   uint16ArrayTag,
   uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
-import { eq } from '../compat/index.ts';
+import { eq } from '../compat/util/eq.ts';
 
 declare let Buffer:
   | {
