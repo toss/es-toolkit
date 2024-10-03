@@ -31,3 +31,19 @@ const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
 // resultは[{ id: 1 }, { id: 3 }, { id: 5 }]になります。idが2の要素は両方の配列に存在するため、結果から除外されます。
 ```
+
+## Lodash 互換性
+
+`es-toolkit/compat` から `differenceBy` をインポートすると、Lodash と互換になります。
+
+- `differenceBy` は最初の配列のようなオブジェクトを1つ以上の後続の配列のようなオブジェクトと比較します。
+- `differenceBy` はオプションとして、最後の引数に関数またはプロパティキーを受け取ることができます。
+
+```typescript
+import { differenceBy } from 'es-toolkit/compat';
+
+differenceBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], item => item.x); // Returns [{ x: 2 }]
+differenceBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], 'x'); // Returns [{ x: 2 }]
+differenceBy([{ x: 1 }, { x: 2 }, { x: 3 }], [{ x: 2 }], [{ x: 3 }], 'x'); // Returns [{ x: 1 }]
+differenceBy([1, 2, 3], [2], [3]); // Returns [1]
+```
