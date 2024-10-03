@@ -34,7 +34,7 @@ isEqual(true, false); // false
 
 ```javascript
 isEqual(NaN, NaN); // true
-isEqual(+0, -0); // false
+isEqual(+0, -0); // true
 ```
 
 ### 예시 3: 날짜 객체 비교
