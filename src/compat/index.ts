@@ -45,6 +45,7 @@ export { orderBy } from './array/orderBy.ts';
 export { sortBy } from './array/sortBy.ts';
 export { size } from './array/size.ts';
 export { some } from './array/some.ts';
+export { take } from './array/take.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { filter } from './array/filter.ts';
 export { head as first } from '../array/head.ts';
@@ -105,6 +106,7 @@ export { isNumber } from './predicate/isNumber.ts';
 export { isNaN } from './predicate/isNaN.ts';
 export { isArrayLikeObject } from './predicate/isArrayLikeObject.ts';
 export { isNil } from './predicate/isNil.ts';
+export { isEqualWith } from './predicate/isEqualWith.ts';
 
 export { camelCase } from './string/camelCase.ts';
 export { kebabCase } from './string/kebabCase.ts';
