@@ -124,7 +124,6 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
  * defaults({ a: null }, { a: 1 }); // { a: null }
  * defaults({ a: undefined }, { a: 1 }); // { a: 1 }
  */
-
 export function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object {
   object = Object(object);
   const objectProto = Object.prototype;
