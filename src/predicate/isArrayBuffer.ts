@@ -16,6 +16,6 @@
  * console.log(isArrayBuffer(value3)); // false
  */
 
-export function isArrayBuffer(value?: unknown): value is ArrayBuffer {
+export function isArrayBuffer(value: unknown): value is ArrayBuffer {
   return value instanceof ArrayBuffer;
 }
