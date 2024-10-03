@@ -1,4 +1,5 @@
 import { isString } from '../predicate/isString.ts';
+import { eq } from '../util/eq.ts';
 import { toInteger } from '../util/toInteger.ts';
 
 /**
@@ -77,6 +78,7 @@ export function includes<T>(
  * @param {T[] | Record<string, any> | string} source - The source to search in. It can be an array, an object, or a string.
  * @param {T} [target] - The value to search for in the source.
  * @param {number} [fromIndex=0] - The index to start searching from. If negative, it is treated as an offset from the end of the source.
+ * @param guard
  * @returns {boolean} `true` if the value is found in the source, `false` otherwise.
  *
  * @example
@@ -126,8 +128,7 @@ export function includes(
   for (let i = fromIndex; i < keys.length; i++) {
     const value = Reflect.get(source, keys[i]);
 
-    // This condition is the SameValueZero comparison.
-    if (value === target || (Number.isNaN(value) && Number.isNaN(target))) {
+    if (eq(value, target)) {
       return true;
     }
   }
