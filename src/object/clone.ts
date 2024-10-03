@@ -81,5 +81,9 @@ export function clone<T>(obj: T): T {
     return Object.assign(newObject, obj);
   }
 
+  if (typeof obj === 'function') {
+    return {} as T;
+  }
+
   return obj;
 }

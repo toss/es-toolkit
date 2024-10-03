@@ -119,11 +119,11 @@ describe('clone', () => {
     expect(clonedNestedObj.a[2]).toEqual(nestedObj.a[2]);
   });
 
-  it('should return functions as is', () => {
+  it('should return an empty object when cloning a function', () => {
     const func = () => {};
     const clonedFunc = clone(func);
 
-    expect(clonedFunc).toBe(func);
+    expect(clonedFunc).toEqual({});
   });
 
   it('should clone sets', () => {
