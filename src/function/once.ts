@@ -4,7 +4,7 @@
  *
  * @template F - The type of function.
  * @param {F} func - The function to restrict.
- * @returns {() => ReturnType<F>} A new function that invokes `func` once and caches the result.
+ * @returns {(...args: Parameters<F>) => ReturnType<F>} A new function that invokes `func` once and caches the result.
  *
  * @example
  * const initialize = once(() => {
@@ -15,14 +15,14 @@
  * initialize(); // Logs: 'Initialized!' and returns true
  * initialize(); // Returns true without logging
  */
-export function once<F extends (...args: unknown[]) => any>(func: F): () => ReturnType<F> {
+export function once<F extends (...args: any[]) => any>(func: F): (...args: Parameters<F>) => ReturnType<F> {
   let called = false;
   let cache: ReturnType<F>;
 
-  return function () {
+  return function (...args: Parameters<F>): ReturnType<F> {
     if (!called) {
       called = true;
-      cache = func();
+      cache = func(...args);
     }
 
     return cache;

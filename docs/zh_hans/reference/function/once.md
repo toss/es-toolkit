@@ -7,16 +7,16 @@
 ## 签名
 
 ```typescript
-function once<F extends (...args: unknown[]) => any>(func: F): () => ReturnType<F>;
+function once<F extends (...args: any[]) => any>(func: F): (...args: Parameters<F>) => ReturnType<F>;
 ```
 
 ### 参数
 
-- `func` (`F extends (...args: unknown[]) => any`): 要限制的函数。
+- `func` (`F extends (...args: any[]) => any`): 要限制的函数。
 
 ### 返回值
 
-(`() => ReturnType<F>`): 调用 `func` 一次并缓存结果的新函数。
+(`(...args: Parameters<F>) => ReturnType<F>`): 调用 `func` 一次并缓存结果的新函数。
 
 ## 示例
 

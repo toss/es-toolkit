@@ -6,7 +6,7 @@
 ## 인터페이스
 
 ```typescript
-function once<F extends (...args: any[]) => any>(func: F): () => ReturnType<F>;
+function once<F extends (...args: any[]) => any>(func: F): (...args: Parameters<F>) => ReturnType<F>;
 ```
 
 ### 파라미터
@@ -15,7 +15,7 @@ function once<F extends (...args: any[]) => any>(func: F): () => ReturnType<F>;
 
 ### 반환 값
 
-(`() => ReturnType<F>`): `func`가 한 번 호출되면 결과를 캐시하고 반환할 새로운 함수예요.
+(`(...args: Parameters<F>) => ReturnType<F>`): `func`가 한 번 호출되면 결과를 캐시하고 반환할 새로운 함수예요.
 
 ## 예시
 

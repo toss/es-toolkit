@@ -6,16 +6,16 @@ Repeated calls to the function will return the value from the first invocation.
 ## Signature
 
 ```typescript
-function once<F extends () => any>(func: F): () => ReturnType<F>;
+function once<F extends (...args: any[]) => any>(func: F): (...args: Parameters<F>) => ReturnType<F>;
 ```
 
 ### Parameters
 
-- `func` (`F extends () => any`): The function to restrict.
+- `func` (`F extends (...args: any[]) => any`): The function to restrict.
 
 ### Returns
 
-(`() => ReturnType<F>`): A new function that invokes `func` once and caches the result.
+(`(...args: Parameters<F>) => ReturnType<F>`): A new function that invokes `func` once and caches the result.
 
 ## Examples
 
