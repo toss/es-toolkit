@@ -6,7 +6,7 @@
 ## 인터페이스
 
 ```typescript
-function once<F extends (...args: unknown[]) => any>(func: F): () => ReturnType<F>;
+function once<F extends (...args: any[]) => any>(func: F): () => ReturnType<F>;
 ```
 
 ### 파라미터

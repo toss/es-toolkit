@@ -27,7 +27,7 @@
  * beforeFn();
  */
 
-export function before<F extends (...args: unknown[]) => any>(
+export function before<F extends (...args: any[]) => any>(
   n: number,
   func: F
 ): (...args: Parameters<F>) => ReturnType<F> | undefined {

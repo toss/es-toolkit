@@ -6,12 +6,12 @@
 ## インターフェース
 
 ```typescript
-function once<F extends (...args: unknown[]) => any>(func: F): () => ReturnType<F>;
+function once<F extends (...args: any[]) => any>(func: F): () => ReturnType<F>;
 ```
 
 ### パラメータ
 
-- `func` (`F extends (...args: unknown[]) => any`): 一度だけ呼び出すように制限する関数です。
+- `func` (`F extends (...args: any[]) => any`): 一度だけ呼び出すように制限する関数です。
 
 ### 戻り値
 
