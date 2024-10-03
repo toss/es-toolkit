@@ -1,10 +1,10 @@
 import { bench, describe } from 'vitest';
 import { isMap as isMapToolkit_ } from 'es-toolkit';
-import { isMap as isMapToolkitCompat_ } from 'es-toolkit/compat'
+import { isMap as isMapToolkitCompat_ } from 'es-toolkit/compat';
 import { isMap as isMapLodash_ } from 'lodash';
 
 const isMapToolkit = isMapToolkit_;
-const isMapToolkitCompat = isMapToolkitCompat_ ;
+const isMapToolkitCompat = isMapToolkitCompat_;
 const isMapLodash = isMapLodash_;
 
 describe('isMap', () => {
