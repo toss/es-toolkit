@@ -46,3 +46,58 @@ const sum25 = sum10(15);
 // 参数 `a` 应该被赋值为 `5`。函数 'sum' 已经接收到了所有参数，现在将返回一个值。
 const result = sum25(5); // 30
 ```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 中导入 `curryRight` 以实现与 lodash 的完全兼容。
+
+### 签名
+
+```typescript
+function curryRight(
+  func: (...args: any[]) => any,
+  arity: number = func.length,
+  guard?: unknown
+): ((...args: any[]) => any) & { placeholder: typeof curryRight.placeholder };
+
+namespace curryRight {
+  placeholder: symbol;
+}
+```
+
+- `curryRight` 接受一个额外的数值参数 `arity`，该参数指定了函数的参数数量。
+  - 默认为 `func.length`，如果 `arity` 为负数或 `NaN`，则会被转换为 `0`。如果它是一个小数，则会被向下取整到最接近的整数。
+- `guard` 使其可以用作 `Array#map` 等方法的迭代器。
+- `curryRight.placeholder` 值默认为一个 `symbol`，可以用作部分应用参数的占位符。
+- 不像原生的 `curryRight`，这个方法允许每次使用多个参数调用，并返回一个接受剩余参数的新函数。
+
+### 示例
+
+```typescript
+import { curryRight } from 'es-toolkit/compat';
+
+const abc = function (a, b, c) {
+  return [a, b, c];
+};
+
+const curried = curryRight(abc);
+
+curried(3)(2)(1);
+// => [1, 2, 3]
+
+curried(2, 3)(1);
+// => [1, 2, 3]
+
+curried(1, 2, 3);
+// => [1, 2, 3]
+
+// Curried with placeholders.
+curried(3)(curryRight.placeholder, 2)(1);
+// => [1, 2, 3]
+
+// Curried with arity.
+curried = curryRight(abc, 2);
+
+curried(2)(1);
+// => [1, 2]
+```
