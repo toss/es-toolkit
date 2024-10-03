@@ -1,6 +1,21 @@
 import { isIterateeCall } from '../_internal/isIterateeCall';
 import { toInteger } from '../util/toInteger';
 
+/**
+ * Create a slice of `array` from `start` up to, but not including, `end`.
+ *
+ * It does not return a dense array for sparse arrays unlike the native `Array.prototype.slice`.
+ *
+ * @template T - The type of the array elements.
+ * @param {T[]} array - The array to slice.
+ * @param {number} [start=0] - The start position.
+ * @param {number} [end=array.length] - The end position.
+ * @returns {T[]} - Returns the slice of `array`.
+ *
+ * @example
+ * slice([1, 2, 3], 1, 2); // => [2]
+ * slice(new Array(3)); // => [undefined, undefined, undefined]
+ */
 export function slice<T>(array: readonly T[], start?: number, end?: number): T[] {
   const length = array == null ? 0 : array.length;
 
