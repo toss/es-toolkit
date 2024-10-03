@@ -6,11 +6,21 @@ const initialLodash = initialLodash_;
 const initialToolkit = initialToolkit_;
 
 // Helper function to generate a large array
-function generateLargeArray(size) {
+function generateLargeArray(size: number) {
   return Array.from({ length: size }, (_, index) => index);
 }
 
-describe('initial function performance', () => {
+describe('initial', () => {
+  bench('es-toolkit/initial', () => {
+    initialToolkit([1, 2, 3, 4, 5, 6]);
+  });
+
+  bench('lodash/initial', () => {
+    initialLodash([1, 2, 3, 4, 5, 6]);
+  });
+});
+
+describe('initial/largeArray', () => {
   const largeArray = generateLargeArray(1000000);
 
   bench('es-toolkit/initial', () => {

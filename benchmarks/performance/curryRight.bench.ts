@@ -22,3 +22,27 @@ describe('curryRight', () => {
     curryRightLodash(fn)(true)('a')(1);
   });
 });
+
+describe('curryRight - compat', () => {
+  const fn = (a: number, b: string, c: boolean) => ({ a, b, c });
+
+  bench('es-toolkit/compat/curryRight', () => {
+    curryRightToolkitCompat(fn)(true, 'a', 1);
+  });
+
+  bench('lodash/curryRight', () => {
+    curryRightLodash(fn)(true, 'a', 1);
+  });
+});
+
+describe('curryRight - compat with placeholder', () => {
+  const fn = (a: number, b: string, c: boolean) => ({ a, b, c });
+
+  bench('es-toolkit/compat/curryRight', () => {
+    curryRightToolkitCompat(fn)(true, curryRightToolkitCompat.placeholder, 1)('a');
+  });
+
+  bench('lodash/curryRight', () => {
+    curryRightLodash(fn)(true, curryRightLodash.placeholder, 1)('a');
+  });
+});

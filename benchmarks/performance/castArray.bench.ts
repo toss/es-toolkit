@@ -5,7 +5,7 @@ import { castArray as castArrayLodash_ } from 'lodash';
 const castArrayToolkit = castArrayToolkit_;
 const castArrayLodash = castArrayLodash_;
 
-describe('castArray function performance comparison', () => {
+describe('castArray', () => {
   bench('es-toolkit/castArray', () => {
     castArrayToolkit(1);
     castArrayToolkit([1]);

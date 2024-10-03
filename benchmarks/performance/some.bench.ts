@@ -20,3 +20,16 @@ describe('some', () => {
     someLodash([1, false, 'string'], () => true);
   });
 });
+
+describe('some/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, index) => index);
+  const predicate = (number: number) => number > 5000;
+
+  bench('es-toolkit/some', () => {
+    someToolkit(largeArray, predicate);
+  });
+
+  bench('lodash/some', () => {
+    someLodash(largeArray, predicate);
+  });
+});
