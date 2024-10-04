@@ -46,7 +46,7 @@ describe('cloneDeep', () => {
   // object
   //-------------------------------------------------------------------------------------
   it('should clone objects', () => {
-    const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3] };
+    const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3], [Symbol()]: 2 };
     const clonedObj = cloneDeep(obj);
 
     expect(clonedObj).toEqual(obj);
