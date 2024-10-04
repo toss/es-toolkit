@@ -11,5 +11,13 @@ export default defineConfig({
       exclude: ['src/compat/_internal/**/*'],
     },
     watch: false,
+    deps: {
+      optimizer: {
+        ssr: {
+          enabled: true,
+          include: ['es-toolkit', 'es-toolkit/compat'],
+        },
+      },
+    },
   },
 });
