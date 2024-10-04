@@ -119,11 +119,24 @@ describe('clone', () => {
     expect(clonedNestedObj.a[2]).toEqual(nestedObj.a[2]);
   });
 
-  it('should return functions as is', () => {
+  it('should clone function', () => {
     const func = () => {};
     const clonedFunc = clone(func);
 
-    expect(clonedFunc).toBe(func);
+    expect(clonedFunc).toEqual({});
+  });
+
+  it('should clone function with property', () => {
+    function Foo() {}
+    const a = (value: number) => value > 1;
+    const sym = Symbol();
+
+    Foo.a = a;
+    Foo[sym] = 1;
+
+    const clonedFoo = clone(Foo);
+
+    expect(clonedFoo).toEqual({ a, [sym]: 1 });
   });
 
   it('should clone sets', () => {

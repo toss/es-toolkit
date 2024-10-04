@@ -1,3 +1,4 @@
+import { getSymbols } from '../compat/_internal/getSymbols.ts';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
@@ -79,6 +80,19 @@ export function clone<T>(obj: T): T {
   if (typeof obj === 'object') {
     const newObject = Object.create(prototype);
     return Object.assign(newObject, obj);
+  }
+
+  if (typeof obj === 'function') {
+    const result: Record<PropertyKey, unknown> = {};
+    const keys = [...Object.keys(obj), ...getSymbols(obj)];
+
+    for (let i = 0; i < keys.length; ++i) {
+      const key = keys[i];
+
+      result[key] = obj[key as keyof typeof obj];
+    }
+
+    return result as T;
   }
 
   return obj;
