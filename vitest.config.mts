@@ -10,6 +10,11 @@ export default defineConfig({
       include: ['src/**/*'],
       exclude: ['src/compat/_internal/**/*'],
     },
+    server: {
+      deps: {
+        inline: ['lodash'],
+      },
+    },
     watch: false,
   },
 });
