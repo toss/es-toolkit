@@ -142,6 +142,7 @@ export { parseInt } from './math/parseInt.ts';
 export { inRange } from './math/inRange.ts';
 export { random } from './math/random.ts';
 
+export { constant } from './util/constant.ts';
 export { toPath } from './util/toPath.ts';
 export { toString } from './util/toString.ts';
 export { toNumber } from './util/toNumber.ts';
