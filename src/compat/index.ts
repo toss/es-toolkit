@@ -149,3 +149,4 @@ export { toNumber } from './util/toNumber.ts';
 export { toInteger } from './util/toInteger.ts';
 export { toFinite } from './util/toFinite.ts';
 export { eq } from './util/eq.ts';
+export { times } from './util/times.ts';
