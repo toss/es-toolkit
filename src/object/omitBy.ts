@@ -22,10 +22,13 @@ export function omitBy<T extends Record<string, any>>(
   shouldOmit: (value: T[keyof T], key: keyof T) => boolean
 ): Partial<T> {
   const result: Partial<T> = {};
-  for (const key in obj) {
+
+  const objectKeys = Object.keys(obj);
+  for (let i = 0; i < objectKeys.length; i++) {
+    const key = objectKeys[i];
     const value = obj[key];
     if (!shouldOmit(value, key)) {
-      result[key] = value;
+      (result as any)[key] = value;
     }
   }
 
