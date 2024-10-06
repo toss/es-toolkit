@@ -17,7 +17,11 @@ import { toInteger } from '../util/toInteger';
  * slice(new Array(3)); // => [undefined, undefined, undefined]
  */
 export function slice<T>(array: readonly T[], start?: number, end?: number): T[] {
-  const length = array == null ? 0 : array.length;
+  if (array == null) {
+    return [];
+  }
+  
+  const length = array.length;
 
   if (end && typeof end !== 'number' && isIterateeCall(array, start, end)) {
     // support for expression like `_.map(slice)`
