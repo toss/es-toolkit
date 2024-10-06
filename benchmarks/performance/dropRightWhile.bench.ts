@@ -1,7 +1,7 @@
 import { bench, describe } from 'vitest';
 import { dropRightWhile as dropRightWhileToolkit_ } from 'es-toolkit';
 import { dropRightWhile as dropRightWhileLodash_ } from 'lodash';
-import { dropRightWhile as dropRightWhileToolkitCompat_ } from '../../src/compat/array/dropRightWhile';
+import { dropRightWhile as dropRightWhileToolkitCompat_ } from 'es-toolkit/compat';
 
 const dropRightWhileToolkit = dropRightWhileToolkit_;
 const dropRightWhileToolkitCompat = dropRightWhileToolkitCompat_;
