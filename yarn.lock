@@ -4545,7 +4545,7 @@ __metadata:
     globals: "npm:^15.9.0"
     jscodeshift: "npm:^17.0.0"
     prettier: "npm:^3.2.5"
-    prettier-plugin-sort-re-exports: "npm:^0.0.1"
+    prettier-plugin-sort-re-exports: "npm:^0.1.0"
     rollup: "npm:^4.19.0"
     rollup-plugin-dts: "npm:^6.1.1"
     tar: "npm:^6"
@@ -7696,14 +7696,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-sort-re-exports@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "prettier-plugin-sort-re-exports@npm:0.0.1"
+"prettier-plugin-sort-re-exports@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "prettier-plugin-sort-re-exports@npm:0.1.0"
   dependencies:
     "@babel/parser": "npm:^7.25.7"
   peerDependencies:
     prettier: ^3
-  checksum: 10c0/993d828f205a7d500aad83d517ac854d748299c26ac229db6ec464849864fe46d46cf8c730d803f28b2f3f0c62f5821bbbab16a6acd4a4a9bf631d85af08b252
+  checksum: 10c0/abb1c38d27104acf6ca96d515a1451624a346dd7b7892c56891c3d9b3cf46c77568a92c03c1b02922392f4eca3ef5588dac4dea4ee2f1ff9f56a71f67e0f2c14
   languageName: node
   linkType: hard
 
