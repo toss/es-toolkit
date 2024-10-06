@@ -13,7 +13,7 @@
  *
  * @example
  * const obj = { a: 1, b: 'omit', c: 3 };
- * const shouldOmit = (value, key) => typeof value === 'string';
+ * const shouldOmit = (value) => typeof value === 'string';
  * const result = omitBy(obj, shouldOmit);
  * // result will be { a: 1, c: 3 }
  */
