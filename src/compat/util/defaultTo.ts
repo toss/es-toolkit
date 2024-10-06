@@ -15,5 +15,9 @@
  * defaultTo(123, 0) // returns 123
  */
 export function defaultTo(value?: unknown, defaultValue?: unknown): any {
-  return value == null || Number.isNaN(value) ? defaultValue : value;
+  if (value == null || Number.isNaN(value)) {
+    return defaultValue;
+  }
+  
+  return value;
 }
