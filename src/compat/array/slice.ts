@@ -23,13 +23,11 @@ export function slice<T>(array: readonly T[], start?: number, end?: number): T[]
 
   const length = array.length;
 
-  // support for expression like `_.map(slice)`
-  if (typeof end !== 'number' && isIterateeCall(array, start, end)) {
-    start = 0;
-    end = length;
-  }
-
   if (end === undefined) {
+    end = length;
+  } else if (typeof end !== 'number' && isIterateeCall(array, start, end)) {
+    // support for expression like `_.map(slice)`
+    start = 0;
     end = length;
   }
 
