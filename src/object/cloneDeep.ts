@@ -197,7 +197,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
 
 // eslint-disable-next-line
 export function copyProperties(target: any, source: any, stack?: Map<any, any>): void {
-  const keys = [...Object.keys(source), ...getSymbols(source)];
+  const keys = Reflect.ownKeys(source);
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
