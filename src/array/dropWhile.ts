@@ -6,7 +6,7 @@
  *
  * @template T - The type of elements in the array.
  * @param {T[]} arr - The array from which to drop elements.
- * @param {(item: T) => boolean} canContinueDropping - A predicate function that determines
+ * @param {(item: T, index: number, arr: T[]) => boolean} canContinueDropping - A predicate function that determines
  * whether to continue dropping elements. The function is called with each element, and dropping
  * continues as long as it returns true.
  * @returns {T[]} A new array with the elements remaining after the predicate returns false.

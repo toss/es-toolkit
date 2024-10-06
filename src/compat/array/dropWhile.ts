@@ -83,7 +83,7 @@ export function dropWhile<T>(arr: readonly T[], propertyToDrop: string): T[];
  *
  * @example
  * const array = [1, 2, 3];
- * const result = dropWhile(array, (item, index, arr) => index < 2);
+ * const result = dropWhile(array, (item, index, arr) => index <= 2);
  * // Returns: [3]
  */
 export function dropWhile<T>(

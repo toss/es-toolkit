@@ -9,7 +9,7 @@
     "esbuild": "0.23.0",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.2"
   },
   "devDependencies": {
     "@types/lodash": "^4",
