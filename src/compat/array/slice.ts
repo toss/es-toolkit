@@ -17,14 +17,14 @@ import { toInteger } from '../util/toInteger';
  * slice(new Array(3)); // => [undefined, undefined, undefined]
  */
 export function slice<T>(array: readonly T[], start?: number, end?: number): T[] {
-  if (!Array.isArray(array)) {
+  if (array == null) {
     return [];
   }
 
   const length = array.length;
 
-  if (isIterateeCall(array, start, end)) {
-    // support for expression like `_.map(slice)`
+  // support for expression like `_.map(slice)`
+  if (typeof end !== 'number' && isIterateeCall(array, start, end)) {
     start = 0;
     end = length;
   }
