@@ -1,13 +1,19 @@
 import { bench, describe } from 'vitest';
 import { dropWhile as dropWhileToolkit_ } from 'es-toolkit';
+import { dropWhile as dropWhileToolkitCompat_ } from 'es-toolkit/compat';
 import { dropWhile as dropWhileLodash_ } from 'lodash';
 
 const dropWhileToolkit = dropWhileToolkit_;
+const dropWhileToolkitCompat = dropWhileToolkitCompat_;
 const dropWhileLodash = dropWhileLodash_;
 
 describe('dropWhile', () => {
   bench('es-toolkit/dropWhile', () => {
     dropWhileToolkit([1.2, 2.3, 3.4], x => x < 2);
+  });
+
+  bench('es-toolkit/compat/dropWhile', () => {
+    dropWhileToolkitCompat([1.2, 2.3, 3.4], x => x < 2);
   });
 
   bench('lodash/dropWhile', () => {
@@ -20,6 +26,10 @@ describe('dropWhile/largeArray', () => {
 
   bench('es-toolkit/dropWhile', () => {
     dropWhileToolkit(largeArray, x => x < 5000);
+  });
+
+  bench('es-toolkit/compat/dropWhile', () => {
+    dropWhileToolkitCompat(largeArray, x => x < 5000);
   });
 
   bench('lodash/dropWhile', () => {

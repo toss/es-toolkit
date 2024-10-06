@@ -21,3 +21,4 @@ out
 *.tgz
 umd
 .env
+.vite-node
