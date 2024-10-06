@@ -19,7 +19,7 @@ export function toLength(value?: unknown): number {
     return 0;
   }
 
-  value = Math.floor(Number(value));
+  const length = Math.floor(Number(value));
   
-  return clamp(value, 0, MAX_ARRAY_LENGTH);
+  return clamp(length, 0, MAX_ARRAY_LENGTH);
 }
