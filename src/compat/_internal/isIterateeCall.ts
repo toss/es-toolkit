@@ -9,7 +9,7 @@ export function isIterateeCall(value: unknown, index: unknown, object: unknown):
   }
 
   if (
-    (typeof index === 'number' && isArrayLike(object) && isIndex(index, object.length)) ||
+    (typeof index === 'number' && isArrayLike(object) && isIndex(index) && index < object.length) ||
     (typeof index === 'string' && index in object)
   ) {
     return eq((object as any)[index], value);

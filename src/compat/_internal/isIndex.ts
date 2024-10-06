@@ -1,11 +1,9 @@
 const IS_UNSIGNED_INTEGER = /^(?:0|[1-9]\d*)$/;
 
-export function isIndex(value: PropertyKey, length?: number): boolean {
-  length = typeof length === 'number' ? length : Number.MAX_SAFE_INTEGER;
-
+export function isIndex(value: PropertyKey): boolean {
   switch (typeof value) {
     case 'number': {
-      return Number.isInteger(value) && value >= 0 && value < length;
+      return Number.isInteger(value) && value >= 0 && value < Number.MAX_SAFE_INTEGER;
     }
     case 'symbol': {
       return false;
