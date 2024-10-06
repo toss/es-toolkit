@@ -45,6 +45,7 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
   return result;
 }
 ```
+
 </details>
 
 ### 1.3 Documentation
