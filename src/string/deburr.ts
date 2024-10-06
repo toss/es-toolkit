@@ -1,4 +1,5 @@
 const deburrMap = new Map<string, string>(
+  // eslint-disable-next-line no-restricted-syntax
   Object.entries({
     Æ: 'Ae',
     Ð: 'D',

@@ -189,14 +189,13 @@ export function every<T>(
   switch (typeof doesMatch) {
     case 'function': {
       if (!Array.isArray(source)) {
-        const entries: any[] = Object.entries(source);
+        const keys = Object.keys(source) as Array<keyof T>;
 
-        for (let i = 0; i < entries.length; i++) {
-          const entry = entries[i];
-          const key = entry[0];
-          const value = entry[1];
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          const value = source[key];
 
-          if (!doesMatch(value, key, source)) {
+          if (!doesMatch(value as T, key as number, source)) {
             return false;
           }
         }
