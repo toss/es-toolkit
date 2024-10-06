@@ -151,3 +151,4 @@ export { toInteger } from './util/toInteger.ts';
 export { toNumber } from './util/toNumber.ts';
 export { toPath } from './util/toPath.ts';
 export { toString } from './util/toString.ts';
+export { defaultTo } from './util/defaultTo.ts';
