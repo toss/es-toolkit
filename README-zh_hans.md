@@ -16,7 +16,7 @@ es-toolkit 是一个先进的、高性能的 JavaScript 实用工具库，具有
 
 ```tsx
 // import from '@es-toolkit/es-toolkit' in jsr.
-import { debounce, chunk } from 'es-toolkit';
+import { chunk, debounce } from 'es-toolkit';
 
 const debouncedLog = debounce(message => {
   console.log(message);

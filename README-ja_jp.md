@@ -16,7 +16,7 @@ es-toolkitは、最先端のJavaScriptユーティリティライブラリであ
 
 ```tsx
 // jsrでは '@es-toolkit/es-toolkit' からインポートします。
-import { debounce, chunk } from 'es-toolkit';
+import { chunk, debounce } from 'es-toolkit';
 
 const debouncedLog = debounce(message => {
   console.log(message);
