@@ -20,6 +20,6 @@ export function toLength(value?: unknown): number {
   }
 
   const length = Math.floor(Number(value));
-  
+
   return clamp(length, 0, MAX_ARRAY_LENGTH);
 }
