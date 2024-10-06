@@ -16,7 +16,7 @@ es-toolkit is a state-of-the-art, high-performance JavaScript utility library wi
 
 ```tsx
 // import from '@es-toolkit/es-toolkit' in jsr.
-import { debounce, chunk } from 'es-toolkit';
+import { chunk, debounce } from 'es-toolkit';
 
 const debouncedLog = debounce(message => {
   console.log(message);

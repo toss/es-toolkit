@@ -15,4 +15,12 @@ module.exports = {
   importOrder: ['^vitest', '^es-toolkit', '<THIRD_PARTY_MODULES>', '^@(.*)$', '^[.]/', '^[.]{2,}/'],
   importOrderSortSpecifiers: true,
   importOrderCaseInsensitive: true,
+  overrides: [
+    {
+      files: 'src/**/index.ts',
+      options: {
+        plugins: [require.resolve('prettier-plugin-sort-re-exports')],
+      },
+    },
+  ],
 };
