@@ -148,6 +148,7 @@ export { eq } from './util/eq.ts';
 export { times } from './util/times.ts';
 export { toFinite } from './util/toFinite.ts';
 export { toInteger } from './util/toInteger.ts';
+export { toLength } from './util/toLength.ts';
 export { toNumber } from './util/toNumber.ts';
 export { toPath } from './util/toPath.ts';
 export { toString } from './util/toString.ts';
