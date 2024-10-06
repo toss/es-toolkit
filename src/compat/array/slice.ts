@@ -17,20 +17,24 @@ import { toInteger } from '../util/toInteger';
  * slice(new Array(3)); // => [undefined, undefined, undefined]
  */
 export function slice<T>(array: readonly T[], start?: number, end?: number): T[] {
-  if (array == null) {
+  if (!Array.isArray(array)) {
     return [];
   }
-  
+
   const length = array.length;
 
-  if (end && typeof end !== 'number' && isIterateeCall(array, start, end)) {
+  if (isIterateeCall(array, start, end)) {
     // support for expression like `_.map(slice)`
     start = 0;
     end = length;
-  } else {
-    start = start == null ? 0 : toInteger(start);
-    end = end === undefined ? length : toInteger(end);
   }
+
+  if (end === undefined) {
+    end = length;
+  }
+
+  start = toInteger(start);
+  end = toInteger(end);
 
   if (start < 0) {
     start = Math.max(length + start, 0);
