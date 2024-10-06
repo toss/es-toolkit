@@ -6,7 +6,6 @@ const flipToolkit = flipToolkit_;
 const flipLodash = flipLodash_;
 
 describe('flip', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function fn(a: any, b: any, c: any, d: any) {
     return [a, b, c, d];
   }

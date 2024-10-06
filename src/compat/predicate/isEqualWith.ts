@@ -57,7 +57,7 @@ export function isEqualWith(
     const result = areValuesEqual(...args);
 
     if (result !== undefined) {
-      return !!result;
+      return Boolean(result);
     }
 
     if (a instanceof Map && b instanceof Map) {

@@ -126,6 +126,7 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
  *
  * @template T - The type of the object being processed.
  * @template S - The type of the objects that provides default values.
+ * @param {...any} sources
  * @param {T} object - The target object that will receive default values.
  * @param {S[]} source - The objects that specifies the default values to apply.
  * @returns {object} The `object` that has been updated with default values from `sources`, ensuring that all properties are defined and none are left as `undefined`.
@@ -150,6 +151,7 @@ export function defaults<T extends object, S extends object>(object: T, ...sourc
  *
  * @template T - The type of the object being processed.
  * @template S - The type of the objects that provides default values.
+ * @param {...any} sources
  * @param {T} object - The target object that will receive default values.
  * @param {S[]} source - The objects that specifies the default values to apply.
  * @returns {object} The `object` that has been updated with default values from `sources`, ensuring that all properties are defined and none are left as `undefined`.
