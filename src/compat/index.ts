@@ -31,6 +31,7 @@ export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { drop } from './array/drop.ts';
 export { dropWhile } from './array/dropWhile.ts';
+export { dropRightWhile } from './array/dropRightWhile.ts';
 export { every } from './array/every.ts';
 export { fill } from './array/fill.ts';
 export { filter } from './array/filter.ts';
