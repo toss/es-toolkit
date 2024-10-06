@@ -156,7 +156,7 @@
     "globals": "^15.9.0",
     "jscodeshift": "^17.0.0",
     "prettier": "^3.2.5",
-    "prettier-plugin-sort-re-exports": "^0.0.1",
+    "prettier-plugin-sort-re-exports": "^0.1.0",
     "rollup": "^4.19.0",
     "rollup-plugin-dts": "^6.1.1",
     "tar": "^6",

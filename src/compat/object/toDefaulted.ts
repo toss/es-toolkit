@@ -1,6 +1,5 @@
 import { cloneDeep } from './cloneDeep.ts';
 import { defaults } from './defaults.ts';
-import { eq } from '../util/eq.ts';
 
 /**
  * Creates a new object based on the provided `object`, applying default values from the `sources` to ensure that no properties are left `undefined`.

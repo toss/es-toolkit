@@ -18,6 +18,6 @@ export function defaultTo(value?: unknown, defaultValue?: unknown): any {
   if (value == null || Number.isNaN(value)) {
     return defaultValue;
   }
-  
+
   return value;
 }
