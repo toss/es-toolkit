@@ -23,8 +23,7 @@ export function pickBy<T extends Record<string, any>>(
 ): Partial<T> {
   const result: Partial<T> = {};
 
-  const keys = Object.keys(obj) as Array<keyof T>;
-
+  const keys = Object.keys(obj);
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const value = obj[key];
