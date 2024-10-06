@@ -15,5 +15,11 @@ import { clamp } from '../math/clamp';
  * toLength(null) // => 0
  */
 export function toLength(value?: unknown): number {
-  return value ? clamp(Math.floor(Number(value)), 0, MAX_ARRAY_LENGTH) : 0;
+  if (value == null) {
+    return 0;
+  }
+
+  value = Math.floor(Number(value));
+  
+  return clamp(value, 0, MAX_ARRAY_LENGTH);
 }
