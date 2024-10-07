@@ -26,12 +26,10 @@ describe('isEqualWith', () => {
     ];
 
     isEqualWith(object1, object2, function () {
+      // eslint-disable-next-line
       const length = arguments.length;
-      // eslint-disable-next-line prefer-rest-params
+      // eslint-disable-next-line
       const args = slice.call(arguments, 0, length - (length > 2 ? 1 : 0));
-
-      // eslint-disable-next-line prefer-rest-params
-      console.log(Array.from(arguments));
 
       argsList.push(args);
     });
@@ -133,7 +131,11 @@ describe('isEqualWith', () => {
         }
         isEqualWith(pair[0], pair[1], function () {
           const length = arguments.length;
+<<<<<<< HEAD
           // eslint-disable-next-line prefer-rest-params
+=======
+          // eslint-disable-next-line
+>>>>>>> doc
           const args = slice.call(arguments, 0, length - (length > 2 ? 1 : 0));
 
           argsList.push(args);

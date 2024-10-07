@@ -1,5 +1,5 @@
-import { isArrayLike } from './isArrayLike';
-import { isObjectLike } from './isObjectLike';
+import { isArrayLike } from './isArrayLike.ts';
+import { isObjectLike } from './isObjectLike.ts';
 
 /**
  * Checks if the given value is a non-primitive, array-like object.

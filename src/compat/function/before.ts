@@ -1,4 +1,4 @@
-import { toInteger } from '../util/toInteger';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Creates a function that invokes `func`, with the `this` binding and arguments
