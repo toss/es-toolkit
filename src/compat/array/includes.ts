@@ -78,7 +78,6 @@ export function includes<T>(
  * @param {T[] | Record<string, any> | string} source - The source to search in. It can be an array, an object, or a string.
  * @param {T} [target] - The value to search for in the source.
  * @param {number} [fromIndex=0] - The index to start searching from. If negative, it is treated as an offset from the end of the source.
- * @param guard
  * @returns {boolean} `true` if the value is found in the source, `false` otherwise.
  *
  * @example

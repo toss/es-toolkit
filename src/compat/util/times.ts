@@ -1,4 +1,4 @@
-import { toInteger } from './toInteger';
+import { toInteger } from "./toInteger";
 
 /**
  * Invokes the iteratee n times, returning an array of the results of each invocation.
@@ -15,7 +15,7 @@ import { toInteger } from './toInteger';
  * times(4); // => [0, 1, 2, 3]
  * times(2, () => 'es-toolkit') // => ['es-toolkit', 'es-toolkit']
  */
-export function times<F extends (n: number) => any>(n?: number, iteratee?: F): Array<ReturnType<F>> {
+export function times<R>(n?: number, getValue?: (index: number) => R): R[] {
   n = toInteger(n);
 
   if (n < 1 || !Number.isSafeInteger(n)) {
@@ -25,7 +25,7 @@ export function times<F extends (n: number) => any>(n?: number, iteratee?: F): A
   const result = new Array(n);
 
   for (let i = 0; i < n; i++) {
-    result[i] = typeof iteratee === 'function' ? iteratee(i) : i;
+    result[i] = typeof getValue === "function" ? getValue(i) : i;
   }
 
   return result;
