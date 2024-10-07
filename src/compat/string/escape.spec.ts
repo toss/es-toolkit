@@ -12,6 +12,10 @@ describe('escape', () => {
     expect(escape(unescaped)).toBe(escaped);
   });
 
+  it('should handle undefined', () => {
+    expect(escape(undefined)).toBe('');
+  });
+
   it('should handle strings with nothing to escape', () => {
     expect(escape('abc')).toBe('abc');
   });
