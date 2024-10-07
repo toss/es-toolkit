@@ -47,3 +47,25 @@ afterFn();
 // '실행됨'을 로깅해요.
 afterFn();
 ```
+## Lodash와의 호환성
+
+`es-toolkit/compat`에서 `before`를 가져오면 lodash와 호환돼요.
+
+- `n`이 음수여도 에러를 던지지 않아요.
+- `func`가 함수가 아니면 에러를 던져요.
+- 호출 횟수가 `n`에 도달하거나 초과하면 `func`의 마지막 결과를 반환해요.
+
+```typescript
+import { before } from 'es-toolkit/compat';
+
+let count = 0;
+
+const before3 = before(3, () => {
+  console.log('카운트를 증가시켜요...');
+  return ++count;
+});
+
+console.log(before3()); // 카운트를 증가시켜요... => 1
+console.log(before3()); // 카운트를 증가시켜요... => 2
+console.log(before3()); //                   => 2
+```

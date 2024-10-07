@@ -48,3 +48,26 @@ beforeFn();
 // 不会打印 anything.
 beforeFn();
 ```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 中导入 `before` 以实现与 lodash 的完全兼容。
+
+- `n` 为负数时不会抛出错误。
+- 如果 `func` 不是一个函数，会抛出错误。
+- 当调用次数达到或超过 `n` 时，`before` 返回 `func` 的最后结果。
+
+```typescript
+import { before } from 'es-toolkit/compat';
+
+let count = 0;
+
+const before3 = before(3, () => {
+  console.log('正在增加计数...');
+  return ++count;
+});
+
+console.log(before3()); // 正在增加计数... => 1
+console.log(before3()); // 正在增加计数... => 2
+console.log(before3()); //              => 2
+```
