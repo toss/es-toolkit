@@ -32,6 +32,22 @@ const result = difference(array1, array2);
 // 2와 4는 두 배열 모두에 있기 때문에 결과에서 제외되고, result 변수에는 [1, 3, 5]가 할당되어요.
 ```
 
+## Lodash 호환성
+
+`es-toolkit/compat`에서 `difference`를 가져오면 lodash와 호환돼요.
+
+- `difference`는 첫 번째 배열과 비교하기 위해 여러 배열을 받을 수 있어요.
+
+```typescript
+import { difference } from 'es-toolkit/compat';
+
+const array1 = [1, 2, 3, 4, 5];
+const array2 = [2, 4];
+const array3 = [5, 6];
+const result = difference(array1, array2, array3);
+// 2, 4, 5는 적어도 하나의 배열에 있기 때문에 결과에서 제외되고, result 변수에는 [1, 3]가 할당되어요.
+```
+
 ## 성능 비교
 
 |            | [번들 사이즈](../../bundle-size.md) | [성능](../../performance.md) |

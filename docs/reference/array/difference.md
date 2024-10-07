@@ -33,6 +33,22 @@ const result = difference(array1, array2);
 // result will be [1, 3, 5] since 2 and 4 are in both arrays and are excluded from the result.
 ```
 
+## Lodash Compatibility
+
+Import `difference` from `es-toolkit/compat` for full compatibility with lodash.
+
+- `difference` can accept multiple arrays to be compared against the first array.
+
+```typescript
+import { difference } from 'es-toolkit/compat';
+
+const array1 = [1, 2, 3, 4, 5];
+const array2 = [2, 4];
+const array3 = [5, 6];
+const result = difference(array1, array2, array3);
+// result will be [1, 3] since 2, 4, and 5 are in at least one of the arrays and are excluded from the result.
+```
+
 ## Performance Comparison
 
 |            | [Bundle Size](../../bundle-size.md) | [Performance](../../performance.md) |

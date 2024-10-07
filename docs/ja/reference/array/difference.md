@@ -32,6 +32,22 @@ const result = difference(array1, array2);
 // 2と4は両方の配列に存在するため結果から除外され、result変数には[1, 3, 5]が割り当てられます。
 ```
 
+## Lodashとの互換性
+
+`es-toolkit/compat`から`difference`をインポートすると、lodashと互換性があります。
+
+- `difference`は最初の配列と比較するために複数の配列を受け入れることができます。
+
+```typescript
+import { difference } from 'es-toolkit/compat';
+
+const array1 = [1, 2, 3, 4, 5];
+const array2 = [2, 4];
+const array3 = [5, 6];
+const result = difference(array1, array2, array3);
+// 2、4、5は少なくとも1つの配列に存在するため、結果から除外され、result変数には[1, 3]が割り当てられます。
+```
+
 ## パフォーマンス比較
 
 |            | [Bundle Size](../../bundle-size.md) | [Performance](../../performance.md) |
