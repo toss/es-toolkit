@@ -11,4 +11,9 @@ describe('difference bundle size', () => {
     const bundleSize = await getBundleSize('es-toolkit', 'difference');
     expect(bundleSize).toMatchInlineSnapshot(`90`);
   });
+
+  it('es-toolkit/compat', async () => {
+    const bundleSize = await getBundleSize('es-toolkit/compat', 'difference');
+    expect(bundleSize).toMatchInlineSnapshot(`433`);
+  });
 });
