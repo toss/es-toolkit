@@ -18,5 +18,5 @@
  */
 
 export function values<T extends Record<string, any>, K extends keyof T>(obj: T): Array<T[K]> {
-    return obj == null ? [] : Object.values(obj);
+  return obj == null ? [] : Object.values(obj);
 }
