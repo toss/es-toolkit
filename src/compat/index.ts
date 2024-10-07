@@ -30,6 +30,7 @@ export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { drop } from './array/drop.ts';
+export { dropRight } from './array/dropRight.ts';
 export { dropRightWhile } from './array/dropRightWhile.ts';
 export { dropWhile } from './array/dropWhile.ts';
 export { every } from './array/every.ts';

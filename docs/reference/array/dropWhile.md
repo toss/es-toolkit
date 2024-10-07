@@ -42,10 +42,10 @@ You can specify the condition for dropping elements, and the array will remove i
 ### Signature
 
 ```typescript
-function dropWhile<T>(arr: T[], canContinueDropping: (item: T, index: number, arr: T[]) => unknown): T[];
-function dropWhile<T>(arr: T[], objectToDrop: Partial<T>): T[];
-function dropWhile<T>(arr: T[], propertyToDrop: [keyof T, unknown]): T[];
-function dropWhile<T>(arr: readonly T[], propertyToDrop: string): T[];
+function dropWhile<T>(arr: ArrayLike<T>, canContinueDropping: (item: T, index: number, arr: T[]) => unknown): T[];
+function dropWhile<T>(arr: ArrayLike<T>, objectToDrop: Partial<T>): T[];
+function dropWhile<T>(arr: ArrayLike<T>, propertyToDrop: [keyof T, unknown]): T[];
+function dropWhile<T>(arr: ArrayLike<T>, propertyToDrop: string): T[];
 ```
 
 ### Examples

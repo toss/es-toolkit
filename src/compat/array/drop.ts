@@ -1,3 +1,6 @@
+import { drop as dropToolkit } from '../../array/drop.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+
 /**
  * Removes a specified number of elements from the beginning of an array and returns the rest.
  *
@@ -5,7 +8,7 @@
  * of elements removed from the start.
  *
  * @template T - The type of elements in the array.
- * @param { T[] |  null | undefined} collection - - The array from which to drop elements.
+ * @param {ArrayLike<T> | null | undefined} collection - The array from which to drop elements.
  * @param {number} itemsCount - The number of elements to drop from the beginning of the array.
  * @returns {T[]} A new array with the specified number of elements removed from the start.
  *
@@ -14,12 +17,10 @@
  * const result = drop(array, 2);
  * result will be [3, 4, 5] since the first two elements are dropped.
  */
-export function drop<T>(collection: readonly T[] | null | undefined, itemsCount: number): T[] {
-  if (collection === null || collection === undefined) {
+export function drop<T>(collection: ArrayLike<T> | null | undefined, itemsCount: number): T[] {
+  if (!isArrayLike(collection)) {
     return [];
   }
 
-  itemsCount = Math.max(itemsCount, 0);
-
-  return collection.slice(itemsCount);
+  return dropToolkit(Array.from(collection), itemsCount);
 }
