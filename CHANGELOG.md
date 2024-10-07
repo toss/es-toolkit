@@ -1,5 +1,14 @@
 # es-toolkit Changelog
 
+## Version v1.24.0
+
+Released on October 7th, 2024.
+
+- Added support for [isBlob](https://es-toolkit.slash.page/reference/predicate/isBlob.html) and [isDate](https://es-toolkit.slash.page/reference/predicate/isDate.html).
+- Added compatibility functions for [invertBy](https://es-toolkit.slash.page/reference/compat/object/invertBy.html), [times](https://es-toolkit.slash.page/reference/compat/util/times.html), [constant](https://es-toolkit.slash.page/reference/compat/util/constant.html), [slice](https://es-toolkit.slash.page/reference/compat/array/slice.html), [toLength](https://es-toolkit.slash.page/reference/compat/util/toLength.html), [defaultTo](https://es-toolkit.slash.page/reference/compat/util/defaultTo.html), [dropRightWhile](https://es-toolkit.slash.page/reference/array/dropRightWhile.html), [curryRight](https://es-toolkit.slash.page/reference/function/curryRight.html), [rangeRight](https://es-toolkit.slash.page/reference/math/rangeRight.html), [before](https://es-toolkit.slash.page/reference/function/before.html), [eq](https://es-toolkit.slash.page/reference/compat/util/eq.html), [defaults](https://es-toolkit.slash.page/reference/compat/object/defaults.html), [toDefaulted](https://es-toolkit.slash.page/reference/compat/object/toDefaulted.html), [isArrayBuffer](https://es-toolkit.slash.page/reference/predicate/isArrayBuffer.html), [isSet](https://es-toolkit.slash.page/reference/predicate/isSet.html), and [isMap](https://es-toolkit.slash.page/reference/predicate/isMap.html).
+- Enhanced [difference](https://es-toolkit.slash.page/reference/array/difference.html) to work with Array-like objects, aligning its functionality with lodash's behavior.
+- Improved performance for [pickBy](https://es-toolkit.slash.page/reference/object/pickBy.html) and [omitBy](https://es-toolkit.slash.page/reference/object/omitBy.html).
+
 ## Version v1.23.0
 
 Released on October 1st, 2024.
