@@ -17,7 +17,7 @@ function times<R = number>(n?: number, getValue?: (index: number) => R): R[];
 ### 参数
 
 - `n` (`number`): 调用函数的次数。
-- `iteratee` (`F extends (n: number) => any`): 每次迭代调用的函数。
+- `getValue` (`(index: number) => R`): 每次迭代调用的函数。
   - 如果未提供，则返回一个从 `0` 到 `n-1` 的数组。
 
 ### 返回值

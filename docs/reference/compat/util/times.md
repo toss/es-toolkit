@@ -17,7 +17,7 @@ function times<R = number>(n?: number, getValue?: (index: number) => R): R[];
 ### Parameters
 
 - `n` (`number`): The number of times to call the function.
-- `iteratee` (`F extends (n: number) => any`): The function called for each iteration.
+- `getValue` (`(index: number) => R`): The function called for each iteration.
   - If not provided, an array from `0` to `n-1`.
 
 ### Returns

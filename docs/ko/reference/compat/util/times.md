@@ -17,7 +17,7 @@ function times<R = number>(n?: number, getValue?: (index: number) => R): R[];
 ### 파라미터
 
 - `n` (`number`): 함수를 호출할 횟수.
-- `iteratee` (`F extends (n: number) => any`): 반복마다 호출되는 함수.
+- `getValue` (`(index: number) => R`): 반복마다 호출되는 함수.
   - 제공되지 않으면, `0` 이상 `n-1` 미만의 배열.
 
 ### 반환 값
