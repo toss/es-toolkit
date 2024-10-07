@@ -1,8 +1,8 @@
-import { identity } from '../_internal/identity';
-import { property } from '../object/property';
-import { isArray } from '../predicate/isArray';
-import { matches } from '../predicate/matches';
-import { matchesProperty } from '../predicate/matchesProperty';
+import { identity } from '../_internal/identity.ts';
+import { property } from '../object/property.ts';
+import { isArray } from '../predicate/isArray.ts';
+import { matches } from '../predicate/matches.ts';
+import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
  * Filters items from a array and returns an array of elements.

@@ -26,9 +26,9 @@ function defaultTo(value?: unknown, defaultValue?: unknown): any;
 ## 示例
 
 ```typescript
-defaultTo(null, 'default') // returns 'default'
-defaultTo(undefined, 42) // returns 42
-defaultTo(NaN, 0) // returns 0
-defaultTo('actual', 'default') // returns 'actual'
-defaultTo(123, 0) // returns 123
+defaultTo(null, 'default'); // returns 'default'
+defaultTo(undefined, 42); // returns 42
+defaultTo(NaN, 0); // returns 0
+defaultTo('actual', 'default'); // returns 'actual'
+defaultTo(123, 0); // returns 123
 ```

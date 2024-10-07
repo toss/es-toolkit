@@ -1,4 +1,4 @@
-import { isMap as isMapToolKit } from '../../predicate';
+import { isMap as isMapToolKit } from '../../predicate/isMap.ts';
 
 /**
  * Checks if a given value is `Map`.

@@ -27,9 +27,9 @@ function toLength(value?: unknown): number;
 ## 例
 
 ```typescript
-toLength(3.2)  // => 3
-toLength(-1)   // => 0
-toLength(1.9)  // => 1
-toLength('42') // => 42
-toLength(null) // => 0
+toLength(3.2); // => 3
+toLength(-1); // => 0
+toLength(1.9); // => 1
+toLength('42'); // => 42
+toLength(null); // => 0
 ```

@@ -1,5 +1,5 @@
-import { MAX_ARRAY_LENGTH } from "../_internal/MAX_ARRAY_LENGTH";
-import { clamp } from "../math/clamp";
+import { MAX_ARRAY_LENGTH } from '../_internal/MAX_ARRAY_LENGTH.ts';
+import { clamp } from '../math/clamp.ts';
 
 /**
  * Converts the value to a valid index. A valid index is an integer that is greater than or equal to `0` and less than or equal to `2^32 - 1`.
