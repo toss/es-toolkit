@@ -30,8 +30,8 @@ export { chunk } from './array/chunk.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { drop } from './array/drop.ts';
-export { dropWhile } from './array/dropWhile.ts';
 export { dropRightWhile } from './array/dropRightWhile.ts';
+export { dropWhile } from './array/dropWhile.ts';
 export { every } from './array/every.ts';
 export { fill } from './array/fill.ts';
 export { filter } from './array/filter.ts';
@@ -139,11 +139,13 @@ export { startCase } from './string/startCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { upperCase } from './string/upperCase.ts';
 
+export { template } from './string/template.ts';
 export { trim } from './string/trim.ts';
 export { trimEnd } from './string/trimEnd.ts';
 export { trimStart } from './string/trimStart.ts';
 
 export { constant } from './util/constant.ts';
+export { defaultTo } from './util/defaultTo.ts';
 export { eq } from './util/eq.ts';
 export { times } from './util/times.ts';
 export { toFinite } from './util/toFinite.ts';
@@ -151,4 +153,3 @@ export { toInteger } from './util/toInteger.ts';
 export { toNumber } from './util/toNumber.ts';
 export { toPath } from './util/toPath.ts';
 export { toString } from './util/toString.ts';
-export { defaultTo } from './util/defaultTo.ts';
