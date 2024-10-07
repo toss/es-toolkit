@@ -1,5 +1,5 @@
-import { isIterateeCall } from '../_internal/isIterateeCall';
-import { toInteger } from '../util/toInteger';
+import { isIterateeCall } from '../_internal/isIterateeCall.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Create a slice of `array` from `start` up to, but not including, `end`.
