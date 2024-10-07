@@ -47,6 +47,7 @@ afterFn();
 // '실행됨'을 로깅해요.
 afterFn();
 ```
+
 ## Lodash와의 호환성
 
 `es-toolkit/compat`에서 `before`를 가져오면 lodash와 호환돼요.

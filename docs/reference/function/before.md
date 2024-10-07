@@ -69,5 +69,5 @@ const before3 = before(3, () => {
 
 console.log(before3()); // Incrementing count... => 1
 console.log(before3()); // Incrementing count... => 2
-console.log(before3()); //                       => 2 
+console.log(before3()); //                       => 2
 ```
