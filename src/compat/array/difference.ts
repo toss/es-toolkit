@@ -21,7 +21,9 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * // result will be [1, 3] since 2, 4, and 5 are in the other arrays and are excluded from the result.
  */
 export function difference<T>(arr: ArrayLike<T>, ...values: Array<ArrayLike<T>>): T[] {
-  if (!isArrayLikeObject(arr)) return [];
+  if (!isArrayLikeObject(arr)) {
+    return [];
+  }
   const arr1 = Array.from(arr);
   const arr2 = [];
   for (let i = 0; i < values.length; i++) {
