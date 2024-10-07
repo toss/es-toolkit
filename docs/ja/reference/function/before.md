@@ -47,3 +47,26 @@ afterFn();
 // '実行されました' がログに出力されます
 afterFn();
 ```
+
+## Lodash 互換性
+
+`es-toolkit/compat` から `before` をインポートすると、Lodash と互換になります。
+
+- `n` が負の場合でもエラーをスローしません。
+- `func` が関数でない場合はエラーをスローします。
+- 呼び出し回数が `n` に達するか、それ以上になると、`func` の最後の結果を返します。
+
+```typescript
+import { before } from 'es-toolkit/compat';
+
+let count = 0;
+
+const before3 = before(3, () => {
+  console.log('カウントを増やします...');
+  return ++count;
+});
+
+console.log(before3()); // カウントを増やします... => 1
+console.log(before3()); // カウントを増やします... => 2
+console.log(before3()); //                    => 2
+```
