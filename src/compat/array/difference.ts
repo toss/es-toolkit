@@ -1,5 +1,5 @@
 import { difference as differenceToolkit } from '../../array/difference.ts';
-import { flatten } from '../../array/flatten.ts';
+import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
  * Computes the difference between an array and multiple arrays.
@@ -20,9 +20,16 @@ import { flatten } from '../../array/flatten.ts';
  * const result = difference(array1, array2, array3);
  * // result will be [1, 3] since 2, 4, and 5 are in the other arrays and are excluded from the result.
  */
-export function difference<T>(arr: readonly T[], ...values: Array<readonly T[]>): T[] {
-  const arr1 = arr;
-  const arr2 = flatten(values);
+export function difference<T>(arr: ArrayLike<T>, ...values: Array<ArrayLike<T>>): T[] {
+  if (!isArrayLikeObject(arr)) return [];
+  const arr1 = Array.from(arr);
+  const arr2 = [];
+  for (let i = 0; i < values.length; i++) {
+    const value = values[i];
+    if (isArrayLikeObject(value)) {
+      arr2.push(...Array.from(value));
+    }
+  }
 
   return differenceToolkit(arr1, arr2);
 }
