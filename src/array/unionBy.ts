@@ -1,4 +1,4 @@
-import { uniqBy } from './uniqBy';
+import { uniqBy } from './uniqBy.ts';
 
 /**
  * Creates an array of unique values, in order, from all given arrays using a provided mapping function to determine equality.
