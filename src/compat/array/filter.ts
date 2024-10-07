@@ -1,8 +1,8 @@
-import { identity } from '../_internal/identity';
-import { property } from '../object/property';
-import { isArray } from '../predicate/isArray';
-import { matches } from '../predicate/matches';
-import { matchesProperty } from '../predicate/matchesProperty';
+import { identity } from '../_internal/identity.ts';
+import { property } from '../object/property.ts';
+import { isArray } from '../predicate/isArray.ts';
+import { matches } from '../predicate/matches.ts';
+import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
  * Filters items from a array and returns an array of elements.
@@ -166,14 +166,13 @@ export function filter<T>(
     case 'function': {
       if (!Array.isArray(source)) {
         const result: T[] = [];
-        const entries: any[] = Object.entries(source);
+        const keys = Object.keys(source) as Array<keyof T>;
 
-        for (let i = 0; i < entries.length; i++) {
-          const entry = entries[i];
-          const key = entry[0];
-          const value = entry[1];
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          const value = source[key];
 
-          if (predicate(value, key, source)) {
+          if (predicate(value, key as number, source)) {
             result.push(value);
           }
         }

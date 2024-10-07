@@ -73,7 +73,7 @@ interface DebounceOptions {
  */
 export function debounce<F extends (...args: any[]) => any>(
   func: F,
-  debounceMs: number = 0,
+  debounceMs = 0,
   options: DebounceOptions = {}
 ): ((...args: Parameters<F>) => ReturnType<F> | undefined) & {
   cancel: () => void;

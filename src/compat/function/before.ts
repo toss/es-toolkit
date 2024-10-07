@@ -1,4 +1,4 @@
-import { toInteger } from '../util/toInteger';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Creates a function that invokes `func`, with the `this` binding and arguments
@@ -21,8 +21,7 @@ import { toInteger } from '../util/toInteger';
  *
  * before3(); // => 1
  * before3(); // => 2
- * before3(); // => 3
- * before3(); // => 3
+ * before3(); // => 2
  */
 export function before<F extends (...args: any[]) => any>(
   n: number,

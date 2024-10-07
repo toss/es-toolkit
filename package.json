@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.23.0",
+  "version": "1.24.0",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -156,7 +156,7 @@
     "globals": "^15.9.0",
     "jscodeshift": "^17.0.0",
     "prettier": "^3.2.5",
-    "prettier-plugin-sort-re-exports": "^0.0.1",
+    "prettier-plugin-sort-re-exports": "^0.1.0",
     "rollup": "^4.19.0",
     "rollup-plugin-dts": "^6.1.1",
     "tar": "^6",
