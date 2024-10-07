@@ -51,7 +51,7 @@ interface ThrottleOptions {
  */
 export function throttle<F extends (...args: any[]) => any>(
   func: F,
-  throttleMs: number = 0,
+  throttleMs = 0,
   options: ThrottleOptions = {}
 ): ((...args: Parameters<F>) => ReturnType<F> | undefined) & {
   cancel: () => void;

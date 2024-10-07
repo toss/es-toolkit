@@ -1,21 +1,17 @@
-import { toInteger } from './toInteger';
+import { toInteger } from './toInteger.ts';
 
 /**
- * Invokes the iteratee n times, returning an array of the results of each invocation.
+ * Invokes the getValue function n times, returning an array of the results.
  *
- * The iteratee is invoked with one argument; (index).
- *
- * @template F The type of the iteratee function.
- * @param {number} n - The number of times to invoke iteratee.
- * @param {F extends (n: number) => any} [iteratee] - The function invoked per iteration. Default is identity.
- * @returns {Array<ReturnType<F>>} - Returns the array of results.
- *
+ * @template R The return type of the getValue function.
+ * @param {number} n - The number of times to invoke getValue.
+ * @param {(index: number) => R} getValue - The function to invoke for each index.
+ * @returns {R[]} An array containing the results of invoking getValue n times.
  * @example
- * times(3, doubled); // => [0, 2, 4]
- * times(4); // => [0, 1, 2, 3]
- * times(2, () => 'es-toolkit') // => ['es-toolkit', 'es-toolkit']
+ * times(3, (i) => i * 2); // => [0, 2, 4]
+ * times(2, () => 'es-toolkit'); // => ['es-toolkit', 'es-toolkit']
  */
-export function times<F extends (n: number) => any>(n?: number, iteratee?: F): Array<ReturnType<F>> {
+export function times<R = number>(n?: number, getValue?: (index: number) => R): R[] {
   n = toInteger(n);
 
   if (n < 1 || !Number.isSafeInteger(n)) {
@@ -25,7 +21,7 @@ export function times<F extends (n: number) => any>(n?: number, iteratee?: F): A
   const result = new Array(n);
 
   for (let i = 0; i < n; i++) {
-    result[i] = typeof iteratee === 'function' ? iteratee(i) : i;
+    result[i] = typeof getValue === 'function' ? getValue(i) : i;
   }
 
   return result;

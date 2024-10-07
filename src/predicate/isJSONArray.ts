@@ -1,4 +1,4 @@
-import { isJSONValue } from './isJSONValue';
+import { isJSONValue } from './isJSONValue.ts';
 
 /**
  * Checks if a given value is a valid JSON array.

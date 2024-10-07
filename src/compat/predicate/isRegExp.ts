@@ -1,4 +1,4 @@
-import { isRegExp as isRegExpToolkit } from '../../predicate/isRegExp';
+import { isRegExp as isRegExpToolkit } from '../../predicate/isRegExp.ts';
 
 /**
  * Checks if `value` is a RegExp.
