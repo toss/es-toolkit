@@ -83,7 +83,7 @@ export function dropRightWhile<T>(arr: readonly T[], propertyToDrop: string): T[
  *
  * @example
  * const array = [3, 2, 1];
- * const result = dropRightWhile(array, (item, index, arr) => index <= 2);
+ * const result = dropRightWhile(array, (item, index, arr) => index >= 1);
  * // Returns: [3]
  */
 export function dropRightWhile<T>(
