@@ -37,6 +37,7 @@ const result = difference(array1, array2);
 `es-toolkit/compat`から`difference`をインポートすると、lodashと互換性があります。
 
 - `difference`は最初の配列と比較するために複数の配列を受け入れることができます。
+- `difference`は引数として配列のようなオブジェクトを受け入れることができます。
 
 ```typescript
 import { difference } from 'es-toolkit/compat';
@@ -46,6 +47,11 @@ const array2 = [2, 4];
 const array3 = [5, 6];
 const result = difference(array1, array2, array3);
 // 2、4、5は少なくとも1つの配列に存在するため、結果から除外され、result変数には[1, 3]が割り当てられます。
+
+const arrayLike1 = { 0: 1, 1: 2, 2: 3, length: 3 };
+const arrayLike2 = { 0: 2, 1: 4, length: 2 };
+const result2 = difference(arrayLike1, arrayLike2);
+// 2は両方の配列のようなオブジェクトに存在するため、結果から除外され、result2変数には[1, 3]が割り当てられます。
 ```
 
 ## パフォーマンス比較

@@ -37,6 +37,7 @@ const result = difference(array1, array2);
 `es-toolkit/compat`에서 `difference`를 가져오면 lodash와 호환돼요.
 
 - `difference`는 첫 번째 배열과 비교하기 위해 여러 배열을 받을 수 있어요.
+- `difference`는 유사 배열 객체를 인수로 받을 수 있어요.
 
 ```typescript
 import { difference } from 'es-toolkit/compat';
@@ -46,6 +47,11 @@ const array2 = [2, 4];
 const array3 = [5, 6];
 const result = difference(array1, array2, array3);
 // 2, 4, 5는 적어도 하나의 배열에 있기 때문에 결과에서 제외되고, result 변수에는 [1, 3]가 할당되어요.
+
+const arrayLike1 = { 0: 1, 1: 2, 2: 3, length: 3 };
+const arrayLike2 = { 0: 2, 1: 4, length: 2 };
+const result2 = difference(arrayLike1, arrayLike2);
+// 2는 두 유사 배열 객체에 있기 때문에 결과에서 제외되고, result2 변수에는 [1, 3]가 할당되어요.
 ```
 
 ## 성능 비교
