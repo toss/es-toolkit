@@ -3,7 +3,6 @@ import { isEqualWith } from './isEqualWith';
 import { isString } from './isString';
 import { without } from '../../array/without';
 import { noop } from '../../function/noop';
-import { partial } from '../../function/partial';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { stubC } from '../_internal/stubC';
@@ -28,14 +27,11 @@ describe('isEqualWith', () => {
 
     isEqualWith(object1, object2, function () {
       const length = arguments.length;
+      // eslint-disable-next-line
       const args = slice.call(arguments, 0, length - (length > 2 ? 1 : 0));
-
-      console.log(Array.from(arguments));
 
       argsList.push(args);
     });
-
-    console.log(argsList);
 
     expect(argsList).toEqual(expected);
   });
@@ -100,16 +96,16 @@ describe('isEqualWith', () => {
   it('should call `customizer` for values maps and sets', () => {
     const value = { a: { b: 2 } };
 
-    var map1 = new Map();
+    const map1 = new Map();
     map1.set('a', value);
 
-    var map2 = new Map();
+    const map2 = new Map();
     map2.set('a', value);
 
-    var set1 = new Set();
+    const set1 = new Set();
     set1.add(value);
 
-    var set2 = new Set();
+    const set2 = new Set();
     set2.add(value);
 
     [
@@ -132,6 +128,7 @@ describe('isEqualWith', () => {
         }
         isEqualWith(pair[0], pair[1], function () {
           const length = arguments.length;
+          // eslint-disable-next-line
           const args = slice.call(arguments, 0, length - (length > 2 ? 1 : 0));
 
           argsList.push(args);

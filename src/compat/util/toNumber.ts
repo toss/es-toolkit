@@ -1,4 +1,4 @@
-import { isSymbol } from '../predicate/isSymbol';
+import { isSymbol } from '../predicate/isSymbol.ts';
 
 /**
  * Converts `value` to a number.

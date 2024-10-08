@@ -1,4 +1,4 @@
-import { toFinite } from './toFinite';
+import { toFinite } from './toFinite.ts';
 
 /**
  * Converts `value` to an integer.

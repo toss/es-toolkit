@@ -1,5 +1,5 @@
-import { upperCase as upperCaseToolkit } from '../../string';
-import { normalizeForCase } from '../_internal/normalizeForCase';
+import { upperCase as upperCaseToolkit } from '../../string/upperCase.ts';
+import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
  * Converts a string to upper case.
