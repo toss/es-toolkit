@@ -411,8 +411,6 @@ describe('template', () => {
     expect('a' in templateSettings).toBe(false);
     template('', {}, data);
     expect('a' in templateSettings).toBe(false);
-
-    delete templateSettings.a;
   });
 
   it('should not error for non-object `data` and `options` values', () => {
