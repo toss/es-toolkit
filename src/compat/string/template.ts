@@ -1,9 +1,16 @@
 import { templateSettings } from './templateSettings.ts';
+import { attempt } from '../function/attempt.ts';
 import { defaults } from '../object/defaults.ts';
 import { toString } from '../util/toString.ts';
 
+// A regular expression for matching literal string in ES template string.
 const esTemplateRegExp = /\$\{([^\\}]*(?:\\.[^\\}]*)*)\}/g;
+
+// A regular expression for matching unescaped characters in string.
 const unEscapedRegExp = /['\n\r\u2028\u2029\\]/g;
+
+// A regular expression for matching no match.
+const noMatchExp = /($^)/;
 
 const escapeMap = new Map([
   ['\\', '\\'],
@@ -18,6 +25,59 @@ function escapeString(match: string): string {
   return `\\${escapeMap.get(match)}`;
 }
 
+/**
+ * Creates a compiled template function that can interpolate data properties in "interpolate" delimiters, evaluate JavaScript code in "evaluate" delimiters, and escape data properties in "escape" delimiters.
+ *
+ * If `options` is provided, it takes precedence over `templateSettings` values.
+ * In the development build, you can utilize the `sourceURL` option.
+ *
+ * @param {string} string - The template string.
+ * @param {{ escape?: RegExp, evaluate?: RegExp, interpolate?: RegExp, variable?: string, imports?: Record<string, unknown>, sourceURL?: string }} [options] - The options object.
+ * @param {RegExp} [options.escape] - The regular expression for "escape" delimiter.
+ * @param {RegExp} [options.evaluate] - The regular expression for "evaluate" delimiter.
+ * @param {RegExp} [options.interpolate] - The regular expression for "interpolate" delimiter.
+ * @param {string} [options.variable] - The data object variable name.
+ * @param {Record<string, unknown>} [options.imports] - The object of imported functions.
+ * @param {string} [options.sourceURL] - The source URL of the template.
+ * @param {unknown} [guard] - The guard to detect if the function is called with `options`.
+ * @returns {(data?: object) => string} Returns the compiled template function.
+ *
+ * @example
+ * // Use the "escape" delimiter to escape data properties.
+ * const compiled = template('<%- value %>');
+ * compiled({ value: '<div>' }); // returns '&lt;div&gt;'
+ *
+ * // Use the "interpolate" delimiter to interpolate data properties.
+ * const compiled = template('<%= value %>');
+ * compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+ *
+ * // Use the "evaluate" delimiter to evaluate JavaScript code.
+ * const compiled = template('<% if (value) { %>Yes<% } else { %>No<% } %>');
+ * compiled({ value: true }); // returns 'Yes'
+ *
+ * // Use the "variable" option to specify the data object variable name.
+ * const compiled = template('<%= data.value %>', { variable: 'data' });
+ * compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+ *
+ * // Use the "imports" option to import functions.
+ * const compiled = template('<%= _.toUpper(value) %>', { imports: { _: { toUpper } } });
+ * compiled({ value: 'hello, world!' }); // returns 'HELLO, WORLD!'
+ *
+ * // Use the custom "escape" delimiter.
+ * const compiled = template('<@ value @>', { escape: /<@([\s\S]+?)@>/g });
+ * compiled({ value: '<div>' }); // returns '&lt;div&gt;'
+ *
+ * // Use the custom "evaluate" delimiter.
+ * const compiled = template('<# if (value) { #>Yes<# } else { #>No<# } #>', { evaluate: /<#([\s\S]+?)#>/g });
+ * compiled({ value: true }); // returns 'Yes'
+ *
+ * // Use the custom "interpolate" delimiter.
+ * const compiled = template('<$ value $>', { interpolate: /<\$([\s\S]+?)\$>/g });
+ * compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+ *
+ * // Use the "sourceURL" option to specify the source URL of the template.
+ * const compiled = template('hello <%= user %>!', { sourceURL: 'template.js' });
+ */
 export function template(
   string: string,
   options?: {
@@ -25,49 +85,51 @@ export function template(
     evaluate?: RegExp;
     interpolate?: RegExp;
     variable?: string;
+    imports?: Record<string, unknown>;
     sourceURL?: string;
-    imports?: object;
   },
   guard?: unknown
-): ((...args: unknown[]) => string) & { source: string } {
+): ((data?: object) => string) & { source: string } {
   string = toString(string);
 
   if (guard) {
     options = templateSettings;
   }
 
-  options = defaults(options || {}, templateSettings);
-
-  const availableDelimiters = [
-    options.escape?.source,
-    options.interpolate?.source,
-    options.interpolate ? esTemplateRegExp.source : undefined,
-    options.evaluate?.source,
-    '$',
-  ].filter(Boolean);
-  const delimitersRegExp = new RegExp(availableDelimiters.join('|'), 'g');
+  options = defaults({ ...options }, templateSettings);
 
   let index = 0;
   let isEvaluated = false;
-  const functionBody = [`__p += ''`];
 
-  string.replace(delimitersRegExp, (match, esacape, interpolate, esTemplate, evaluate, offset) => {
-    functionBody.push(`+ '${string.slice(index, offset).replace(unEscapedRegExp, escapeString)}'`);
+  let source = `__p += ''`;
+  const delimitersRegExp = new RegExp(
+    [
+      options.escape?.source ?? noMatchExp.source,
+      options.interpolate?.source ?? noMatchExp.source,
+      options.interpolate ? esTemplateRegExp.source : noMatchExp.source,
+      options.evaluate?.source ?? noMatchExp.source,
+      '$',
+    ].join('|'),
+    'g'
+  );
 
-    if (!interpolate) {
-      interpolate = esTemplate;
+  string.replace(delimitersRegExp, (match, escapeValue, interpolateValue, esTemplateValue, evaluateValue, offset) => {
+    source += ` + '${string.slice(index, offset).replace(unEscapedRegExp, escapeString)}'`;
+
+    if (!interpolateValue) {
+      interpolateValue = esTemplateValue;
     }
 
-    if (esacape) {
-      functionBody.push(`+ _.escape(${esacape})`);
+    if (escapeValue) {
+      source += ` + _.escape(_.toString(${escapeValue}))`;
     }
 
-    if (interpolate) {
-      functionBody.push(`+ (${interpolate} ?? '')`);
+    if (interpolateValue) {
+      source += ` + (${interpolateValue} ?? '')`;
     }
 
-    if (evaluate) {
-      functionBody.push(`; ${evaluate};\n __p += ''`);
+    if (evaluateValue) {
+      source += `;\n${evaluateValue};\n __p += ''`;
       isEvaluated = true;
     }
 
@@ -76,22 +138,29 @@ export function template(
     return match;
   });
 
-  const source = options.variable ? functionBody.join('\n') : `with(obj) {\n${functionBody.join('\n')}\n}`;
   const functionString = `function(${options.variable || 'obj'}) {
   let __p = '';
   ${options.variable ? '' : 'obj || (obj = {});'}
-  ${isEvaluated ? `function print() { __p += Array.prototype.join.call(arguments, ''); }` : ''}
-  ${source};
+  ${isEvaluated ? `function print(...args) { __p += args.join(''); }` : ''}
+  ${options.variable ? source : `with(obj) {\n${source}\n}`}
   return __p;
 }`;
 
-  const imports = defaults(options.imports || {}, templateSettings.imports);
+  const sourceURL = `//# sourceURL=${
+    options.sourceURL ? String(options.sourceURL).replace(/[\r\n]/g, ' ') : `es-toolkit.templateSource[${Date.now()}]`
+  }\n`;
+
+  const imports = defaults({ ...options.imports }, templateSettings.imports);
   const importsKeys = Object.keys(imports);
   const importValues = Object.values(imports);
 
-  const newFunction = new Function(...importsKeys, `return ${functionString}`)(...importValues);
+  const result = attempt(() => new Function(...importsKeys, `${sourceURL}return ${functionString}`)(...importValues));
 
-  newFunction.source = functionString;
+  result.source = functionString;
 
-  return newFunction;
+  if (result instanceof Error) {
+    throw result;
+  }
+
+  return result;
 }

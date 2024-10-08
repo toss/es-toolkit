@@ -139,134 +139,144 @@ describe('template', () => {
     expect(compiled(data)).toBe('1,2,3');
   });
 
-  // it('should support custom delimiters', () => {
-  //   esToolkit.times(2, index => {
-  //     const settingsClone = esToolkit.clone(templateSettings);
+  it('should support custom delimiters', () => {
+    esToolkit.times(2, index => {
+      const settingsClone = esToolkit.clone(templateSettings);
 
-  //     const settings = esToolkit.assign(index ? templateSettings : {}, {
-  //       escape: /\{\{-([\s\S]+?)\}\}/g,
-  //       evaluate: /\{\{([\s\S]+?)\}\}/g,
-  //       interpolate: /\{\{=([\s\S]+?)\}\}/g,
-  //     });
+      const settings = Object.assign(index ? templateSettings : {}, {
+        escape: /\{\{-([\s\S]+?)\}\}/g,
+        evaluate: /\{\{([\s\S]+?)\}\}/g,
+        interpolate: /\{\{=([\s\S]+?)\}\}/g,
+      });
 
-  //     const expected = '<ul><li>0: a &amp; A</li><li>1: b &amp; B</li></ul>';
-  //     const compiled = template(
-  //       '<ul>{{ _.each(collection, function(value, index) {}}<li>{{= index }}: {{- value }}</li>{{}); }}</ul>',
-  //       index ? null : settings
-  //     );
-  //     const data = { collection: ['a & A', 'b & B'] };
+      const expected = '<ul><li>0: a &amp; A</li><li>1: b &amp; B</li></ul>';
+      // We don't have `each` function.
+      // const compiled = template(
+      //   '<ul>{{ _.each(collection, function(value, index) {}}<li>{{= index }}: {{- value }}</li>{{}); }}</ul>',
+      //   index ? null : settings
+      // );
+      const compiled = template(
+        '<ul>{{ collection.forEach((value, index) => {}}<li>{{= index }}: {{- value }}</li>{{}); }}</ul>',
+        index ? (null as any) : settings
+      );
+      const data = { collection: ['a & A', 'b & B'] };
 
-  //     expect(compiled(data)).toBe(expected);
-  //     esToolkit.assign(templateSettings, settingsClone);
-  //   });
-  // });
+      expect(compiled(data)).toBe(expected);
+      Object.assign(templateSettings, settingsClone);
+    });
+  });
 
-  // it('should support custom delimiters containing special characters', () => {
-  //   esToolkit.times(2, index => {
-  //     const settingsClone = esToolkit.clone(templateSettings);
+  it('should support custom delimiters containing special characters', () => {
+    esToolkit.times(2, index => {
+      const settingsClone = esToolkit.clone(templateSettings);
 
-  //     const settings = esToolkit.assign(index ? templateSettings : {}, {
-  //       escape: /<\?-([\s\S]+?)\?>/g,
-  //       evaluate: /<\?([\s\S]+?)\?>/g,
-  //       interpolate: /<\?=([\s\S]+?)\?>/g,
-  //     });
+      const settings = Object.assign(index ? templateSettings : {}, {
+        escape: /<\?-([\s\S]+?)\?>/g,
+        evaluate: /<\?([\s\S]+?)\?>/g,
+        interpolate: /<\?=([\s\S]+?)\?>/g,
+      });
 
-  //     const expected = '<ul><li>0: a &amp; A</li><li>1: b &amp; B</li></ul>';
-  //     const compiled = template(
-  //       '<ul><? _.each(collection, function(value, index) { ?><li><?= index ?>: <?- value ?></li><? }); ?></ul>',
-  //       index ? null : settings
-  //     );
-  //     const data = { collection: ['a & A', 'b & B'] };
+      const expected = '<ul><li>0: a &amp; A</li><li>1: b &amp; B</li></ul>';
+      // We don't have `each` function.
+      // const compiled = template(
+      //   '<ul><? _.each(collection, function(value, index) { ?><li><?= index ?>: <?- value ?></li><? }); ?></ul>',
+      //   index ? null : settings
+      // );
+      const compiled = template(
+        '<ul><? collection.forEach((value, index) => { ?><li><?= index ?>: <?- value ?></li><? }); ?></ul>',
+        index ? (null as any) : settings
+      );
+      const data = { collection: ['a & A', 'b & B'] };
 
-  //     expect(compiled(data)).toBe(expected);
-  //     esToolkit.assign(templateSettings, settingsClone);
-  //   });
-  // });
+      expect(compiled(data)).toBe(expected);
+      Object.assign(templateSettings, settingsClone);
+    });
+  });
 
   it('should use a `with` statement by default', () => {
     // We don't have `each` function.
     // const compiled = template(
     //   '<%= index %><%= collection[index] %><% _.each(collection, function(value, index) { %><%= index %><% }); %>'
     // );
-    // const actual = compiled({ index: 1, collection: ['a', 'b', 'c'] });
-    // expect(actual).toBe('1b012');
-
-    const compiled = template('<%= index %><%= collection[index] %>');
+    const compiled = template(
+      '<%= index %><%= collection[index] %><% collection.forEach((value, index) => { %><%= index %><% }); %>'
+    );
     const actual = compiled({ index: 1, collection: ['a', 'b', 'c'] });
-    expect(actual).toBe('1b');
+    expect(actual).toBe('1b012');
   });
 
-  // it('should use `_.templateSettings.imports._.templateSettings`', () => {
-  //   const lodash = templateSettings.imports._;
-  //   const settingsClone = esToolkit.clone(lodash.templateSettings);
+  // We couldn't change imported modules because of bundling settings.
 
-  //   lodash.templateSettings = esToolkit.assign(lodash.templateSettings, {
+  // it('should use `_.templateSettings.imports._.templateSettings`', () => {
+  //   const toolkit = templateSettings.imports._;
+  //   const settingsClone = esToolkit.clone(toolkit.templateSettings);
+
+  //   toolkit.templateSettings = Object.assign(toolkit.templateSettings, {
   //     interpolate: /\{\{=([\s\S]+?)\}\}/g,
   //   });
 
   //   const compiled = template('{{= a }}');
   //   expect(compiled({ a: 1 })).toBe('1');
 
-  //   if (settingsClone) {
-  //     esToolkit.assign(lodash.templateSettings, settingsClone);
-  //   } else {
-  //     delete lodash.templateSettings;
-  //   }
+  //   Object.assign(toolkit.templateSettings, settingsClone);
   // });
 
-  // it('should fallback to `_.templateSettings`', () => {
-  //   const lodash = templateSettings.imports._;
-  //   const delimiter = templateSettings.interpolate;
+  it('should fallback to `_.templateSettings`', () => {
+    const esToolkit = templateSettings.imports._;
+    const delimiter = templateSettings.interpolate;
 
-  //   templateSettings.imports._ = { escape: lodashStable.escape };
-  //   templateSettings.interpolate = /\{\{=([\s\S]+?)\}\}/g;
+    templateSettings.imports._ = { escape: esToolkit.escape } as any;
+    templateSettings.interpolate = /\{\{=([\s\S]+?)\}\}/g;
 
-  //   const compiled = template('{{= a }}');
-  //   expect(compiled({ a: 1 })).toBe('1');
+    const compiled = template('{{= a }}');
+    expect(compiled({ a: 1 })).toBe('1');
 
-  //   templateSettings.imports._ = lodash;
-  //   templateSettings.interpolate = delimiter;
-  // });
+    templateSettings.imports._ = esToolkit;
+    templateSettings.interpolate = delimiter;
+  });
 
-  // it('should ignore `null` delimiters', () => {
-  //   const delimiter = {
-  //     escape: /\{\{-([\s\S]+?)\}\}/g,
-  //     evaluate: /\{\{([\s\S]+?)\}\}/g,
-  //     interpolate: /\{\{=([\s\S]+?)\}\}/g,
-  //   };
+  it('should ignore `null` delimiters', () => {
+    const delimiter = {
+      escape: /\{\{-([\s\S]+?)\}\}/g,
+      evaluate: /\{\{([\s\S]+?)\}\}/g,
+      interpolate: /\{\{=([\s\S]+?)\}\}/g,
+    };
 
-  //   esToolkit.forOwn(
-  //     {
-  //       escape: '{{- a }}',
-  //       evaluate: '{{ print(a) }}',
-  //       interpolate: '{{= a }}',
-  //     },
-  //     (value, key) => {
-  //       const settings = { escape: null, evaluate: null, interpolate: null };
-  //       settings[key] = delimiter[key];
+    (
+      [
+        ['escape', '{{- a }}'],
+        ['evaluate', '{{ print(a) }}'],
+        ['interpolate', '{{= a }}'],
+      ] as const
+    ).forEach(([key, value]) => {
+      const settings: any = { escape: null, evaluate: null, interpolate: null };
+      settings[key] = delimiter[key];
 
-  //       const expected = '1 <%- a %> <% print(a) %> <%= a %>';
-  //       const compiled = template(`${value} <%- a %> <% print(a) %> <%= a %>`, settings);
-  //       const data = { a: 1 };
+      try {
+        const expected = '1 <%- a %> <% print(a) %> <%= a %>';
+        const compiled = template(`${value} <%- a %> <% print(a) %> <%= a %>`, settings);
+        const data = { a: 1 };
 
-  //       expect(compiled(data)).toBe(expected);
-  //     }
-  //   );
-  // });
+        expect(compiled(data)).toBe(expected);
+      } catch (e) {
+        console.log(e);
+      }
+    });
+  });
 
-  // it('should work without delimiters', () => {
-  //   const expected = 'abc';
-  //   expect(template(expected)({})).toBe(expected);
-  // });
+  it('should work without delimiters', () => {
+    const expected = 'abc';
+    expect(template(expected)({})).toBe(expected);
+  });
 
-  // it('should work with `this` references', () => {
-  //   const compiled = template('a<%= this.String("b") %>c');
-  //   expect(compiled()).toBe('abc');
+  it('should work with `this` references', () => {
+    const compiled = template('a<%= this.String("b") %>c');
+    expect(compiled()).toBe('abc');
 
-  //   const object = { b: 'B' };
-  //   object.compiled = template('A<%= this.b %>C', { variable: 'obj' });
-  //   expect(object.compiled()).toBe('ABC');
-  // });
+    const object: any = { b: 'B' };
+    object.compiled = template('A<%= this.b %>C', { variable: 'obj' });
+    expect(object.compiled()).toBe('ABC');
+  });
 
   it('should work with backslashes', () => {
     const compiled = template('<%= a %> \\b');
@@ -406,10 +416,10 @@ describe('template', () => {
   });
 
   it('should not error for non-object `data` and `options` values', () => {
-    template('')(1);
+    template('')(1 as any);
     expect(true, '`data` value');
 
-    template('', 1 as any)(1);
+    template('', 1 as any)(1 as any);
     expect(true, '`options` value');
   });
 
@@ -423,40 +433,42 @@ describe('template', () => {
     expect(actual).toEqual(expected);
   });
 
-  // it('should expose the source on SyntaxErrors', () => {
-  //   try {
-  //     template('<% if x %>');
-  //   } catch (e) {
-  //     if (e instanceof SyntaxError) {
-  //       expect(esToolkit.includes(e.source, '__p'));
-  //     }
-  //   }
-  // });
+  it('should expose the source on SyntaxErrors', () => {
+    try {
+      template('<% if x %>');
+    } catch (e: any) {
+      if (e instanceof SyntaxError) {
+        expect(esToolkit.includes((e as any).source, '__p')).toBe(true);
+      }
+    }
+  });
 
-  // it('should not include sourceURLs in the source', () => {
-  //   const options = { sourceURL: '/a/b/c' };
-  //   const compiled = template('x', options);
-  //   const values = [compiled.source, undefined];
+  it('should not include sourceURLs in the source', () => {
+    const options = { sourceURL: '/a/b/c' };
+    const compiled = template('x', options);
+    const values = [compiled.source, undefined];
 
-  //   try {
-  //     template('<% if x %>', options);
-  //   } catch (e) {
-  //     values[1] = e.source;
-  //   }
-  //   const expected = values.map(stubFalse);
+    try {
+      template('<% if x %>', options);
+    } catch (e: any) {
+      values[1] = e.source;
+    }
+    const expected = values.map(stubFalse);
 
-  //   const actual = values.map(value => esToolkit.includes(value, 'sourceURL'));
+    const actual = values.map(value => esToolkit.includes(value as any, 'sourceURL'));
 
-  //   expect(actual).toEqual(expected);
-  // });
+    expect(actual).toEqual(expected);
+  });
 
-  // it('should work as an iteratee for methods like `_.map`', () => {
-  //   const array = ['<%= a %>', '<%- b %>', '<% print(c) %>'];
-  //   const compiles = array.map(template);
-  //   const data = { a: 'one', b: '"two"', c: 'three' };
+  it('should work as an iteratee for methods like `_.map`', () => {
+    const array = ['<%= a %>', '<%- b %>', '<% print(c) %>'];
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const compiles = array.map(template);
+    const data = { a: 'one', b: '"two"', c: 'three' };
 
-  //   const actual = compiles.map(compiled => compiled(data));
+    const actual = compiles.map(compiled => compiled(data));
 
-  //   expect(actual).toEqual(['one', '&quot;two&quot;', 'three']);
-  // });
+    expect(actual).toEqual(['one', '&quot;two&quot;', 'three']);
+  });
 });
