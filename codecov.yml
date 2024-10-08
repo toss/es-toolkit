@@ -11,3 +11,4 @@ comment:
 
 ignore:
   - '**/*.test-d.*'
+  - '**/*.spec.ts'
