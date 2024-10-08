@@ -102,4 +102,12 @@ describe('isPlainObject', () => {
   it.each(cases)('when "%s" is given, should return %s', (v, expected) => {
     expect(isPlainObject(v)).toStrictEqual(expected);
   });
+
+  describe('Cross-realms node:vm:runInNewContext support', () => {
+    const isNodeLike = !('window' in globalThis);
+    it.skipIf(!isNodeLike)('should support vm', async () => {
+      const runInNewContext = await import('node:vm').then(mod => mod.runInNewContext);
+      expect(isPlainObject(runInNewContext('({})'))).toBe(true);
+    });
+  });
 });
