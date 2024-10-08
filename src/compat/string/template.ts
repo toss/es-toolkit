@@ -100,8 +100,8 @@ export function template(
 
   let index = 0;
   let isEvaluated = false;
-
   let source = `__p += ''`;
+
   const delimitersRegExp = new RegExp(
     [
       options.escape?.source ?? noMatchExp.source,
