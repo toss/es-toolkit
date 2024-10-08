@@ -42,7 +42,7 @@
  * ```
  */
 export function isPlainObject(value: unknown): value is Record<PropertyKey, any> {
-  if (value === null || typeof value !== 'object') {
+  if (!value || typeof value !== 'object') {
     return false;
   }
 
