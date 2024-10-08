@@ -10,5 +10,4 @@ comment:
   layout: 'header, reach, diff, flags, components'
 
 ignore:
-  - '**/*.test-d.*'
   - '**/*.spec.ts'
