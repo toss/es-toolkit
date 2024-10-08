@@ -97,7 +97,7 @@ By default, both `leading` and `trailing` are set to `true`, so specifying `{ le
 :::
 
 ```typescript
-// Example with leading option
+// Example with the leading option
 const leadingFn = throttle(
   () => {
     console.log('Leading function executed');
@@ -106,11 +106,11 @@ const leadingFn = throttle(
   { leading: true }
 );
 
-// Logs 'Leading function executed' immediately
-// Logs 'Leading function executed' again every 1 second, even if called continuously
+// Logs 'Leading function executed' immediately.
+// Even if called repeatedly, it logs 'Leading function executed' every 1 second.
 leadingFn();
 
-// Example with trailing option
+// Example with the trailing option
 const trailingFn = throttle(
   () => {
     console.log('Trailing function executed');
@@ -119,7 +119,20 @@ const trailingFn = throttle(
   { trailing: true }
 );
 
-// Logs 'Trailing function executed' immediately
-// Logs 'Trailing function executed' again every 1 second, even if called continuously
+// Logs 'Trailing function executed' immediately.
+// Even if called repeatedly, it logs 'Trailing function executed' every 1 second.
 trailingFn();
+
+// Example with the leading: false, trailing: true option
+const trailingOnlyFn = throttle(
+  () => {
+    console.log('Trailing-only function executed');
+  },
+  1000,
+  { leading: false, trailing: true }
+);
+
+// 'Trailing-only function executed' does not log initially.
+// Even if called repeatedly, it logs 'Trailing-only function executed' every 1 second.
+trailingOnlyFn();
 ```

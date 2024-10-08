@@ -110,16 +110,16 @@ const leadingFn = throttle(
 // 即使连续调用，每1秒记录一次 'Leading function executed'。
 leadingFn();
 
-// trailing 选项示例
-const trailingFn = throttle(
+// leading: false, trailing: true 选项示例
+const trailingOnlyFn = throttle(
   () => {
-    console.log('Trailing function executed');
+    console.log('Trailing-only function executed');
   },
   1000,
-  { trailing: true }
+  { leading: false, trailing: true }
 );
 
-// 立即记录 'Trailing function executed'。
-// 即使连续调用，每1秒记录一次 'Trailing function executed'。
-trailingFn();
+// 最初不会记录 'Trailing-only function executed'。
+// 即使连续调用，每1秒记录一次 'Trailing-only function executed'。
+trailingOnlyFn();
 ```
