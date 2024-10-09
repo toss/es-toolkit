@@ -134,5 +134,3 @@ const trailingOnlyFn = throttle(
 // 계속 호출하더라도 1초마다 'Trailing-only function executed'를 로깅해요.
 trailingOnlyFn();
 ```
-
-
