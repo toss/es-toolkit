@@ -5,34 +5,52 @@
  * @returns {value is Record<PropertyKey, any>} - True if the value is a plain object, otherwise false.
  *
  * @example
- * console.log(isPlainObject({})); // true
- * console.log(isPlainObject([])); // false
- * console.log(isPlainObject(null)); // false
- * console.log(isPlainObject(Object.create(null))); // true
- * console.log(Buffer.from('hello, world')); // false
+ * ```typescript
+ * // ✅👇 True
+ *
+ * isPlainObject({ });                       // ✅
+ * isPlainObject({ key: 'value' });          // ✅
+ * isPlainObject({ key: new Date() });       // ✅
+ * isPlainObject(new Object());              // ✅
+ * isPlainObject(Object.create(null));       // ✅
+ * isPlainObject({ nested: { key: true} });  // ✅
+ * isPlainObject(new Proxy({}, {}));         // ✅
+ * isPlainObject({ [Symbol('tag')]: 'A' });  // ✅
+ *
+ * // ✅👇 (cross-realms, node context, workers, ...)
+ * const runInNewContext = await import('node:vm').then(
+ *     (mod) => mod.runInNewContext
+ * );
+ * isPlainObject(runInNewContext('({})'));   // ✅
+ *
+ * // ❌👇 False
+ *
+ * class Test { };
+ * isPlainObject(new Test())           // ❌
+ * isPlainObject(10);                  // ❌
+ * isPlainObject(null);                // ❌
+ * isPlainObject('hello');             // ❌
+ * isPlainObject([]);                  // ❌
+ * isPlainObject(new Date());          // ❌
+ * isPlainObject(new Uint8Array([1])); // ❌
+ * isPlainObject(Buffer.from('ABC'));  // ❌
+ * isPlainObject(Promise.resolve({})); // ❌
+ * isPlainObject(Object.create({}));   // ❌
+ * isPlainObject(new (class Cls {}));  // ❌
+ * isPlainObject(globalThis);          // ❌,
+ * ```
  */
 export function isPlainObject(value: unknown): value is Record<PropertyKey, any> {
-  if (typeof value !== 'object') {
+  if (!value || typeof value !== 'object') {
     return false;
   }
 
-  if (value == null) {
-    return false;
-  }
+  const proto = Object.getPrototypeOf(value) as typeof Object.prototype | null;
 
-  if (Object.getPrototypeOf(value) === null) {
-    return true;
-  }
-
-  if (value.toString() !== '[object Object]') {
-    return false;
-  }
-
-  let proto = value;
-
-  while (Object.getPrototypeOf(proto) !== null) {
-    proto = Object.getPrototypeOf(proto);
-  }
-
-  return Object.getPrototypeOf(value) === proto;
+  return (
+    proto === null ||
+    proto === Object.prototype ||
+    // Required to support node:vm.runInNewContext({})
+    Object.getPrototypeOf(proto) === null
+  );
 }
