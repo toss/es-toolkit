@@ -21,11 +21,20 @@ function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 ## 예시
 
 ```typescript
-console.log(isPlainObject({})); // true
-console.log(isPlainObject([])); // false
-console.log(isPlainObject(null)); // false
-console.log(isPlainObject(Object.create(null))); // true
-console.log(Buffer.from('hello, world')); // false
+isPlainObject({}); // true
+isPlainObject([]); // false
+isPlainObject(Object.create(null)); // true
+
+class Foo {}
+isPlainObject(new Foo()); // false
+isPlainObject(new Date()); // false
+isPlainObject(new Set()); // false
+isPlainObject(new Map()); // false
+isPlainObject(Buffer.from('hello, world')); // false
+isPlainObject(Math); // false
+isPlainObject(JSON); // false
+isPlainObject(null); // false
+isPlainObject(1); // false
 ```
 
 ## 성능 비교
