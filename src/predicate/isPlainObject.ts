@@ -32,7 +32,6 @@
  * isPlainObject('hello');             // ❌
  * isPlainObject([]);                  // ❌
  * isPlainObject(new Date());          // ❌
- * isPlainObject(Math);                // ❌ Static built-in classes
  * isPlainObject(new Uint8Array([1])); // ❌
  * isPlainObject(Buffer.from('ABC'));  // ❌
  * isPlainObject(Promise.resolve({})); // ❌
@@ -47,13 +46,11 @@ export function isPlainObject(value: unknown): value is Record<PropertyKey, any>
   }
 
   const proto = Object.getPrototypeOf(value) as typeof Object.prototype | null;
+
   return (
-    (proto === null ||
-      proto === Object.prototype ||
-      // Required to support node:vm.runInNewContext({})
-      Object.getPrototypeOf(proto) === null) &&
-    // https://stackoverflow.com/a/76387885/5490184
-    !(Symbol.toStringTag in value) &&
-    !(Symbol.iterator in value)
+    proto === null ||
+    proto === Object.prototype ||
+    // Required to support node:vm.runInNewContext({})
+    Object.getPrototypeOf(proto) === null
   );
 }
