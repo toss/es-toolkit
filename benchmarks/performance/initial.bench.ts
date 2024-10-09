@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { initial as initialToolkit_ } from 'es-toolkit';
+import { initial as initialToolkitCompat_ } from 'es-toolkit/compat';
 import { initial as initialLodash_ } from 'lodash';
 
 const initialLodash = initialLodash_;
+const initialToolkitCompat = initialToolkitCompat_;
 const initialToolkit = initialToolkit_;
 
 // Helper function to generate a large array
@@ -15,6 +17,10 @@ describe('initial', () => {
     initialToolkit([1, 2, 3, 4, 5, 6]);
   });
 
+  bench('es-toolkit/compat/initial', () => {
+    initialToolkitCompat([1, 2, 3, 4, 5, 6]);
+  });
+
   bench('lodash/initial', () => {
     initialLodash([1, 2, 3, 4, 5, 6]);
   });
@@ -25,6 +31,10 @@ describe('initial/largeArray', () => {
 
   bench('es-toolkit/initial', () => {
     initialToolkit(largeArray);
+  });
+
+  bench('es-toolkit/compat/initial', () => {
+    initialToolkitCompat(largeArray);
   });
 
   bench('lodash/initial', () => {
