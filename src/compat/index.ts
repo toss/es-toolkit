@@ -24,9 +24,11 @@
  */
 export * from '../index.ts';
 
-export { head as first } from '../array/head.ts';
+export { head } from './array/head.ts';
+export { head as first } from './array/head.ts';
 export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
+export { compact } from './array/compact.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { drop } from './array/drop.ts';
@@ -51,6 +53,10 @@ export { slice } from './array/slice.ts';
 export { some } from './array/some.ts';
 export { sortBy } from './array/sortBy.ts';
 export { take } from './array/take.ts';
+export { takeRight } from './array/takeRight.ts';
+export { tail } from './array/tail.ts';
+export { uniq } from './array/uniq.ts';
+export { without } from './array/without.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 
 export { ary } from './function/ary.ts';
