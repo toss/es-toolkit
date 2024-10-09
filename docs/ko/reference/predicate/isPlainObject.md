@@ -2,6 +2,8 @@
 
 주어진 값이 순수 객체(Plain object)인지 확인해요.
 
+순수 객체는 `{}`나 `{ name: 'John', age: 30 }` 같은 단순한 JavaScript 객체를 말해요. 클래스에서 만들어지지 않고, 프로토타입은 `Object.prototype`이나 `null`이에요. `toString` 메서드를 호출해서 문자열로 변환될 때는 `[object Object]`로 나타나요.
+
 ## 인터페이스
 
 ```typescript

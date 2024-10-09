@@ -47,12 +47,11 @@ export function isPlainObject(value: unknown): value is Record<PropertyKey, any>
 
   const proto = Object.getPrototypeOf(value) as typeof Object.prototype | null;
 
-  const hasObjectPrototype = (
+  const hasObjectPrototype =
     proto === null ||
     proto === Object.prototype ||
     // Required to support node:vm.runInNewContext({})
-    Object.getPrototypeOf(proto) === null
-  );
+    Object.getPrototypeOf(proto) === null;
 
   if (!hasObjectPrototype) {
     return false;
