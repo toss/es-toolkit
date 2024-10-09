@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { drop } from './drop';
+import { args } from '../_internal/args';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/drop.spec.js#L1
@@ -29,5 +30,18 @@ describe('drop', () => {
 
   it('should return an empty array when the collection is null or undefined', () => {
     expect(drop(null, 2)).toEqual([]);
+  });
+
+  it('should return an empty array when the collection is not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(drop(1, 2)).toEqual([]);
+    // @ts-expect-error - invalid argument
+    expect(drop(true, 2)).toEqual([]);
+  });
+
+  it('should support array-like', () => {
+    expect(drop({ 0: 1, 1: 2, length: 2 }, 1)).toEqual([2]);
+    expect(drop('123', 2)).toEqual(['3']);
+    expect(drop(args, 1)).toEqual([2, 3]);
   });
 });
