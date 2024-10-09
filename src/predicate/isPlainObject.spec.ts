@@ -30,9 +30,6 @@ describe('isPlainObject', () => {
     expect(isPlainObject(JSON.parse('{}'))).toBe(true);
     expect(isPlainObject(new Proxy({}, {}))).toBe(true);
     expect(isPlainObject(new Proxy({ key: 'proxied_key' }, {}))).toBe(true);
-    expect(isPlainObject(JSON)).toBe(true);
-    expect(isPlainObject(Math)).toBe(true);
-    expect(isPlainObject(Atomics)).toBe(true);
     expect(
       isPlainObject({
         [Symbol.iterator]: function* () {
@@ -40,7 +37,6 @@ describe('isPlainObject', () => {
         },
       })
     ).toBe(true);
-    expect(isPlainObject({ [Symbol.toStringTag]: 'string-tagged' })).toBe(true);
   });
 
   it('should return false for invalid plain objects', () => {
@@ -60,6 +56,10 @@ describe('isPlainObject', () => {
     expect(isPlainObject(10)).toBe(false);
     expect(isPlainObject([])).toBe(false);
     expect(isPlainObject(Number.NaN)).toBe(false);
+    expect(isPlainObject(JSON)).toBe(false);
+    expect(isPlainObject(Math)).toBe(false);
+    expect(isPlainObject(Atomics)).toBe(false);
+    expect(isPlainObject({ [Symbol.toStringTag]: 'string-tagged' })).toBe(false);
     expect(isPlainObject(() => 'cool')).toBe(false);
     expect(isPlainObject(new (class Cls {})())).toBe(false);
     expect(isPlainObject(new Intl.Locale('en'))).toBe(false);
