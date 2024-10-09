@@ -94,23 +94,30 @@ export function dropWhile<T>(
   if (!isArrayLike(arr)) {
     return [];
   }
-  arr = Array.from(arr);
+
+  return dropWhileImpl(Array.from(arr), predicate);
+}
+
+function dropWhileImpl<T>(
+  arr: readonly T[],
+  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | string
+): T[] {
   switch (typeof predicate) {
     case 'function': {
-      return dropWhileToolkit(arr as T[], (item, index, arr) => Boolean(predicate(item, index, arr)));
+      return dropWhileToolkit(arr, (item, index, arr) => Boolean(predicate(item, index, arr)));
     }
     case 'object': {
       if (Array.isArray(predicate) && predicate.length === 2) {
         const key = predicate[0];
         const value = predicate[1];
 
-        return dropWhileToolkit(arr as T[], matchesProperty(key, value));
+        return dropWhileToolkit(arr, matchesProperty(key, value));
       } else {
-        return dropWhileToolkit(arr as T[], matches(predicate));
+        return dropWhileToolkit(arr, matches(predicate));
       }
     }
     case 'string': {
-      return dropWhileToolkit(arr as T[], property(predicate));
+      return dropWhileToolkit(arr, property(predicate));
     }
   }
 }
