@@ -6,7 +6,11 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-This function first converts `value` to a safe integer. If the value is infinite, it is converted to the maximum or minimum safe integer. Any decimal points are removed by truncating the value.
+Converts `value` to a safe integer. 
+
+A safe integer is an integer that can be exactly represented as a double precision number, and no other integer rounds to it under any IEEE-754 rounding mode. 
+
+If the value is infinite, it is converted to the maximum or minimum safe integer. Any decimal points are removed by truncating the value.
 
 ## Signature
 
