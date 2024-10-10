@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { args } from '../_internal/args';
 import { tail } from '../index';
 
 /**
@@ -28,5 +29,22 @@ describe('tail', () => {
       [5, 6],
       [8, 9],
     ]);
+  });
+
+  it('should return an empty array when the collection is null or undefined', () => {
+    expect(tail(null)).toEqual([]);
+  });
+
+  it('should return an empty array when the collection is not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(tail(1)).toEqual([]);
+    // @ts-expect-error - invalid argument
+    expect(tail(true)).toEqual([]);
+  });
+
+  it('should support array-like', () => {
+    expect(tail({ 0: 1, 1: null, 2: 3, length: 3 })).toEqual([null, 3]);
+    expect(tail('123')).toEqual(['2', '3']);
+    expect(tail(args)).toEqual([2, 3]);
   });
 });

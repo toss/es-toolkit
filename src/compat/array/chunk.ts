@@ -1,4 +1,5 @@
 import { chunk as chunkToolkit } from '../../array/chunk.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
  * Splits an array into smaller arrays of a specified length.
@@ -8,10 +9,9 @@ import { chunk as chunkToolkit } from '../../array/chunk.ts';
  * the final sub-array will contain the remaining elements.
  *
  * @template T The type of elements in the array.
- * @param {T[]} arr - The array to be chunked into smaller arrays.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to be chunked into smaller arrays.
  * @param {number} size - The size of each smaller array. Must be a positive integer.
  * @returns {T[][]} A two-dimensional array where each sub-array has a maximum length of `size`.
- * @throws {Error} Throws an error if `size` is not a positive integer.
  *
  * @example
  * // Splits an array of numbers into sub-arrays of length 2
@@ -23,12 +23,12 @@ import { chunk as chunkToolkit } from '../../array/chunk.ts';
  * chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
  * // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
  */
-export function chunk<T>(arr: readonly T[], size = 1): T[][] {
+export function chunk<T>(arr: ArrayLike<T> | null | undefined, size = 1): T[][] {
   size = Math.max(Math.floor(size), 0);
 
-  if (size === 0) {
+  if (size === 0 || !isArrayLike(arr)) {
     return [];
   }
 
-  return chunkToolkit(arr, size);
+  return chunkToolkit(Array.from(arr), size);
 }

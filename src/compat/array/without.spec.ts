@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { without } from '../../array/without';
+import { without } from './without';
+import { args } from '../_internal/args';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/without.spec.js#L1
@@ -22,5 +23,22 @@ describe('without', () => {
   it('should remove all occurrences of each value from an array', () => {
     const array = [1, 2, 3, 1, 2, 3];
     expect(without(array, 1, 2)).toEqual([3, 3]);
+  });
+
+  it('should return an empty array when the collection is null or undefined', () => {
+    expect(without(null, 1, 2)).toEqual([]);
+  });
+
+  it('should return an empty array when the collection is not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(without(1, 2)).toEqual([]);
+    // @ts-expect-error - invalid argument
+    expect(without(true, 2)).toEqual([]);
+  });
+
+  it('should support array-like object', () => {
+    expect(without({ 0: 1, 1: 2, 2: 3, length: 3 }, 1, 2)).toEqual([3]);
+    expect(without('123', '1', '2')).toEqual([]);
+    expect(without(args, 1, 2)).toEqual([3]);
   });
 });
