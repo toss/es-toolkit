@@ -33,3 +33,19 @@ const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
 // 结果将是 [{ id: 1 }, { id: 3 }, { id: 5 }] 因为具有 id 为 2 的元素在两个数组中都存在，所以它们被排除在结果之外。
 ```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 中导入 `differenceBy` 以实现与 lodash 的完全兼容。
+
+- `differenceBy` 将第一个类数组对象与一个或多个后续类数组对象进行比较。
+- `differenceBy` 可以选择性地接受一个迭代器作为最后一个参数，该迭代器可以是函数或属性键。
+
+```typescript
+import { differenceBy } from 'es-toolkit/compat';
+
+differenceBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], item => item.x); // Returns [{ x: 2 }]
+differenceBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], 'x'); // Returns [{ x: 2 }]
+differenceBy([{ x: 1 }, { x: 2 }, { x: 3 }], [{ x: 2 }], [{ x: 3 }], 'x'); // Returns [{ x: 1 }]
+differenceBy([1, 2, 3], [2], [3]); // Returns [1]
+```
