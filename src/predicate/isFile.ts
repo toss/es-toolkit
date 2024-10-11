@@ -1,4 +1,4 @@
-import { isBlob } from './isBlob';
+import { isBlob } from './isBlob.ts';
 
 /**
  * Checks if the given value is a File.
@@ -24,5 +24,5 @@ export function isFile(x: unknown): x is File {
     return false;
   }
 
-  return x instanceof File && isBlob(x);
+  return isBlob(x) && x instanceof File;
 }
