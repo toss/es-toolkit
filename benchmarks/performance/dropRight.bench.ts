@@ -1,13 +1,19 @@
 import { bench, describe } from 'vitest';
 import { dropRight as dropRightToolkit_ } from 'es-toolkit';
+import { dropRight as dropRightToolkitCompat_ } from 'es-toolkit/compat';
 import { dropRight as dropRightLodash_ } from 'lodash';
 
 const dropRightToolkit = dropRightToolkit_;
+const dropRightToolkitCompat = dropRightToolkitCompat_;
 const dropRightLodash = dropRightLodash_;
 
 describe('dropRight', () => {
   bench('es-toolkit/dropRight', () => {
     dropRightToolkit([1, 2, 3, 4, 5, 6], 3);
+  });
+
+  bench('es-toolkit/compat/dropRight', () => {
+    dropRightToolkitCompat([1, 2, 3, 4, 5, 6], 3);
   });
 
   bench('lodash/dropRight', () => {
@@ -20,6 +26,10 @@ describe('dropRight/largeArray', () => {
 
   bench('es-toolkit/dropRight', () => {
     dropRightToolkit(largeArray, 5000);
+  });
+
+  bench('es-toolkit/compat/dropRight', () => {
+    dropRightToolkitCompat(largeArray, 5000);
   });
 
   bench('lodash/dropRight', () => {
