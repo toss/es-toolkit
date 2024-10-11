@@ -5,6 +5,7 @@ export { isDate } from './isDate.ts';
 export { isEqual } from './isEqual.ts';
 export { isEqualWith } from './isEqualWith.ts';
 export { isError } from './isError.ts';
+export { isFile } from './isFile';
 export { isFunction } from './isFunction.ts';
 export { isJSONArray } from './isJSONArray.ts';
 export { isJSONObject } from './isJSONObject.ts';
