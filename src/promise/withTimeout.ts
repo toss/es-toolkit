@@ -26,5 +26,5 @@ import { timeout } from './timeout.ts';
  * }
  */
 export async function withTimeout<T>(run: () => Promise<T>, ms: number): Promise<T> {
-  return Promise.race([run(), timeout(ms) as T]);
+  return Promise.race([run(), timeout(ms)]);
 }
