@@ -98,10 +98,6 @@ export function template(
 
   options = defaults({ ...options }, templateSettings);
 
-  let index = 0;
-  let isEvaluated = false;
-  let source = `__p += ''`;
-
   const delimitersRegExp = new RegExp(
     [
       options.escape?.source ?? noMatchExp.source,
@@ -113,8 +109,12 @@ export function template(
     'g'
   );
 
+  let lastIndex = 0;
+  let isEvaluated = false;
+  let source = `__p += ''`;
+
   string.replace(delimitersRegExp, (match, escapeValue, interpolateValue, esTemplateValue, evaluateValue, offset) => {
-    source += ` + '${string.slice(index, offset).replace(unEscapedRegExp, escapeString)}'`;
+    source += ` + '${string.slice(lastIndex, offset).replace(unEscapedRegExp, escapeString)}'`;
 
     if (!interpolateValue) {
       interpolateValue = esTemplateValue;
@@ -133,30 +133,30 @@ export function template(
       isEvaluated = true;
     }
 
-    index = offset + match.length;
+    lastIndex = offset + match.length;
 
     return match;
   });
-
-  const functionString = `function(${options.variable || 'obj'}) {
-  let __p = '';
-  ${options.variable ? '' : 'obj || (obj = {});'}
-  ${isEvaluated ? `function print(...args) { __p += args.join(''); }` : ''}
-  ${options.variable ? source : `with(obj) {\n${source}\n}`}
-  return __p;
-}`;
-
-  const sourceURL = `//# sourceURL=${
-    options.sourceURL ? String(options.sourceURL).replace(/[\r\n]/g, ' ') : `es-toolkit.templateSource[${Date.now()}]`
-  }\n`;
 
   const imports = defaults({ ...options.imports }, templateSettings.imports);
   const importsKeys = Object.keys(imports);
   const importValues = Object.values(imports);
 
-  const result = attempt(() => new Function(...importsKeys, `${sourceURL}return ${functionString}`)(...importValues));
+  const sourceURL = `//# sourceURL=${
+    options.sourceURL ? String(options.sourceURL).replace(/[\r\n]/g, ' ') : `es-toolkit.templateSource[${Date.now()}]`
+  }\n`;
 
-  result.source = functionString;
+  const compiledFunction = `function(${options.variable || 'obj'}) {
+    let __p = '';
+    ${options.variable ? '' : 'if (obj == null) { obj = {}; }'}
+    ${isEvaluated ? `function print(...args) { __p += args.join(''); }` : ''}
+    ${options.variable ? source : `with(obj) {\n${source}\n}`}
+    return __p;
+  }`;
+
+  const result = attempt(() => new Function(...importsKeys, `${sourceURL}return ${compiledFunction}`)(...importValues));
+
+  result.source = compiledFunction;
 
   if (result instanceof Error) {
     throw result;
