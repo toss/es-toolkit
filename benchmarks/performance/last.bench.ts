@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { last as lastToolkit_ } from 'es-toolkit';
+import { last as lastToolkitCompat_ } from 'es-toolkit/compat';
 import { last as lastLodash_ } from 'lodash';
 
 const lastToolkit = lastToolkit_;
+const lastToolkitCompat = lastToolkitCompat_;
 const lastLodash = lastLodash_;
 
 describe('last', () => {
@@ -16,6 +18,18 @@ describe('last', () => {
     ];
 
     lastToolkit(people);
+  });
+
+  bench('es-toolkit/compat/last', () => {
+    const people = [
+      { name: 'mike', age: 20 },
+      { name: 'jake', age: 30 },
+      { name: 'john', age: 25 },
+      { name: 'sarah', age: 25 },
+      { name: 'emma', age: 25 },
+    ];
+
+    lastToolkitCompat(people);
   });
 
   bench('lodash/last', () => {
@@ -36,6 +50,10 @@ describe('last/largeArray', () => {
 
   bench('es-toolkit/last', () => {
     lastToolkit(largeArray);
+  });
+
+  bench('es-toolkit/compat/last', () => {
+    lastToolkitCompat(largeArray);
   });
 
   bench('lodash/last', () => {
