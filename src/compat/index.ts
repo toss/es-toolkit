@@ -44,6 +44,7 @@ export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
 export { includes } from './array/includes.ts';
 export { indexOf } from './array/indexOf.ts';
+export { intersection } from './array/intersection.ts';
 export { join } from './array/join.ts';
 export { orderBy } from './array/orderBy.ts';
 export { size } from './array/size.ts';
