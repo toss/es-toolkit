@@ -100,7 +100,7 @@ export function sample<T>(collection: ArrayLike<T> | Record<string, T>): T | str
   }
 
   if (isArrayLike(collection)) {
-    return sampleToolkit(collection as readonly T[]);
+    return sampleToolkit(Array.from(collection));
   }
 
   const values = Object.values(collection);
