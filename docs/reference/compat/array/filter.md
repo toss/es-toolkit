@@ -18,23 +18,23 @@ The condition can be specified in several ways:
 ## Signature
 
 ```typescript
-function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
-function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: T[], doesMatch: string): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: string): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: Partial<T[keyof T]>): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T[];
 ```
 
 ### Parameters
 
-- `arr` (`T[]`) or `object` (`T`): The array or object to iterate over.
+- `arr` (`ArrayLike<T> | null | undefined`) or `object` (`T | null | undefined`): The array or object to iterate over.
 
 - `doesMatch`:
 

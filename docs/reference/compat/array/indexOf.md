@@ -14,12 +14,12 @@ It uses strict equality (`===`) to compare elements other than `NaN`.
 ## Signature
 
 ```typescript
-function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?: number): number;
+function indexOf<T>(array: ArrayLike<T> | null | undefined, searchElement: T, fromIndex?: number): number;
 ```
 
 ### Parameters
 
-- `array` (`T[] | null | undefined`): The array to search.
+- `array` (`ArrayLike<T> | null | undefined`): The array to search.
 - `searchElement` (`T`): The value to search for.
 - `fromIndex` (`number`, optional): The index to start the search at.
 

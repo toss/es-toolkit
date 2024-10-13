@@ -19,23 +19,23 @@
 ## 签名
 
 ```typescript
-function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
-function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: T[], doesMatch: string): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: string): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: Partial<T[keyof T]>): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T[];
 ```
 
 ### 参数
 
-- `arr` (`T[]`) 或 `object` (`T`): 要迭代的数组或对象。
+- `arr` (`ArrayLike<T> | null | undefined`) 或 `object` (`T | null | undefined`): 要迭代的数组或对象。
 
 - `doesMatch`:
 

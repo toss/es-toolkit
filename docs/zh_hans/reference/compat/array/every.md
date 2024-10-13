@@ -19,24 +19,30 @@
 ## 签名
 
 ```typescript
-function every<T>(arr: T[]): boolean;
-function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
-function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
-function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: string): boolean;
+function every<T>(arr: ArrayLike<T> | null | undefined): boolean;
+function every<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: (item: T, index: number, arr: T[]) => unknown
+): boolean;
+function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): boolean;
+function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): boolean;
+function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): boolean;
 
 function every<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: string): boolean;
+function every<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatch: Partial<T[keyof T]>
+): boolean;
+function every<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): boolean;
+function every<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): boolean;
 ```
 
 ### 参数
 
-- `arr` (`T[]`) 或 `object` (`T`): 要搜索的数组或对象。
+- `arr` (`ArrayLike<T> | null | undefined`) 或 `object` (`T | null | undefined`): 要搜索的数组或对象。
 
 - `doesMatch`:
 

@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-function join<T>(array: T[], separator: string): string;
+function join<T>(array: ArrayLike<T> | null | undefined, separator?: string): string;
 ```
 
 ### 파라미터
 
-- `array` (`T[]`) - 결합할 배열이에요.
+- `array` (`ArrayLike<T> | null | undefined`) - 결합할 배열이에요.
 - `separator` (`string`) - 요소를 결합하는 데 사용하는 구분자. 기본값은 쉼표(,)에요.
 
 ### 반환 값

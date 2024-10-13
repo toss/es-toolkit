@@ -11,12 +11,12 @@ Joins elements of an array into a string.
 ## Signature
 
 ```typescript
-function join<T>(array: T[], separator: string): string;
+function join<T>(array: ArrayLike<T> | null | undefined, separator?: string): string;
 ```
 
 ### Parameters
 
-- `array` (`T[]`) - The array to join.
+- `array` (`ArrayLike<T> | null | undefined`) - The array to join.
 - `separator` (`string`) - The separator used to join the elements. Defaults to `,`.
 
 ### Returns

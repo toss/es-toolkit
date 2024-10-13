@@ -14,12 +14,12 @@
 ## インターフェース
 
 ```typescript
-function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?: number): number;
+function indexOf<T>(array: ArrayLike<T> | null | undefined, searchElement: T, fromIndex?: number): number;
 ```
 
 ### パラメータ
 
-- `array` (`T[] | null | undefined`): 検索対象の配列。
+- `array` (`ArrayLike<T> | null | undefined`): 検索対象の配列。
 - `searchElement` (`T`): 検索する値。
 - `fromIndex` (`number`, オプション): 検索を開始するインデックス。
 

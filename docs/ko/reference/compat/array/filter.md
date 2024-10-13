@@ -18,23 +18,23 @@
 ## 인터페이스
 
 ```typescript
-function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
-function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: T[], doesMatch: string): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T[];
+function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: string): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: Partial<T[keyof T]>): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): T[];
+function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T[];
 ```
 
 ### 파라미터
 
-- `arr` (`T[]`) or `object` (`T`): 반복할 배열이나 객체.
+- `arr` (`ArrayLike<T> | null | undefined`) or `object` (`T | null | undefined`): 반복할 배열이나 객체.
 
 - `doesMatch`:
 

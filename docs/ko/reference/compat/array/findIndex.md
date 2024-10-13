@@ -18,15 +18,19 @@
 ## 인터페이스
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): number;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>): number;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown]): number;
-function findIndex<T>(arr: T[], doesMatch: string): number;
+function findIndex<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: (item: T, index: number, arr: T[]) => unknown,
+  fromIndex?: number
+): number;
+function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): number;
+function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string, fromIndex?: number): number;
 ```
 
 ### 파라미터
 
-- `arr` (`T[]`): 검색할 배열.
+- `arr` (`ArrayLike<T> | null | undefined`): 검색할 배열.
 
 - `doesMatch`:
 
@@ -34,6 +38,8 @@ function findIndex<T>(arr: T[], doesMatch: string): number;
   - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
   - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
   - **프로퍼티 이름** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+
+- `fromIndex` (`number`): 검색을 시작할 인덱스. 기본값은 `0`.
 
 ### 반환 값
 

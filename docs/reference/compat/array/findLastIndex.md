@@ -19,18 +19,22 @@ You can specify the condition in several ways:
 
 ```typescript
 function findLastIndex<T>(
-  arr: T[],
+  arr: ArrayLike<T> | null | undefined,
   doesMatch: (item: T, index: number, arr: T[]) => unknown,
   fromIndex?: number
 ): number;
-function findLastIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
+function findLastIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): number;
+function findLastIndex<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: [keyof T, unknown],
+  fromIndex?: number
+): number;
+function findLastIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string, fromIndex?: number): number;
 ```
 
 ### Parameters
 
-- `arr` (`T[]`): The array to search through.
+- `arr` (`ArrayLike<T> | null | undefined`): The array to search through.
 
 - `doesMatch`:
 

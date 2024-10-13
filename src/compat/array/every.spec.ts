@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { every } from './every';
+import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { identity } from '../_internal/identity';
 import { stubFalse } from '../_internal/stubFalse';
@@ -133,5 +134,16 @@ describe('every', () => {
   it('should work as an iteratee for methods like `_.map`', () => {
     const actual = [[1]].map(every);
     expect(actual).toEqual([true]);
+  });
+
+  it('should return true when provided `null` or `undefined`', () => {
+    expect(every(null, identity)).toBe(true);
+    expect(every(undefined, identity)).toBe(true);
+  });
+
+  it('should support array-like objects', () => {
+    expect(every({ 0: 'a', 1: 'b', length: 2 }, stubFalse)).toBe(false);
+    expect(every('123', stubFalse)).toBe(false);
+    expect(every(args, stubFalse)).toBe(false);
   });
 });

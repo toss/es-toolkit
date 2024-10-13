@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { find } from './find';
+import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { slice } from '../_internal/slice';
 
@@ -74,5 +75,23 @@ describe('find', () => {
     });
 
     expect(args).toEqual([1, 'a', object]);
+  });
+
+  it('should return `undefined` when provided `null` or `undefined`', () => {
+    expect(find(null, 'a')).toBe(undefined);
+    expect(find(undefined, 'a')).toBe(undefined);
+  });
+
+  it('should return `undefined` when provided none array-like object', () => {
+    // @ts-expect-error - invalid argument
+    expect(find(1, 'a')).toBe(undefined);
+    // @ts-expect-error - invalid argument
+    expect(find(true, 'a')).toBe(undefined);
+  });
+
+  it('should support array-like objects', () => {
+    expect(find({ 0: 1, 1: 2, 2: 3, length: 3 }, i => i === 3)).toBe(3);
+    expect(find('123', i => i === '3')).toBe('3');
+    expect(find(args, i => i === 3)).toBe(3);
   });
 });

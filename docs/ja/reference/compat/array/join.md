@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-function join<T>(array: T[], separator: string): string;
+function join<T>(array: ArrayLike<T> | null | undefined, separator?: string): string;
 ```
 
 ### パラメータ
 
-- `array` (`T[]`) - 結合する配列です。
+- `array` (`ArrayLike<T> | null | undefined`) - 結合する配列です。
 - `separator` (`string`) - 要素を結合するために用いるセパレータ、デフォルトは一般的なセパレータ `,` です。
 
 ### 戻り値
@@ -25,13 +25,8 @@ function join<T>(array: T[], separator: string): string;
 
 ## 例
 
-````typescript
 ```typescript
-const arr = ["a","b","c"];
-const result = join(arr, "~");
+const arr = ['a', 'b', 'c'];
+const result = join(arr, '~');
 console.log(result); // Output: "a~b~c"
-````
-
-```
-
 ```

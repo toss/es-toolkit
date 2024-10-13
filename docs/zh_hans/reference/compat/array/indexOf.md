@@ -15,12 +15,12 @@
 ## 签名
 
 ```typescript
-function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?: number): number;
+function indexOf<T>(array: ArrayLike<T> | null | undefined, searchElement: T, fromIndex?: number): number;
 ```
 
 ### 参数
 
-- `array` (`T[] | null | undefined`): 要搜索的数组。
+- `array` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
 - `searchElement` (`T`): 要搜索的值。
 - `fromIndex` (`number`, 可选): 开始搜索的索引。
 

@@ -8,7 +8,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * Filters items from a array and returns an array of elements.
  *
  * @template T
- * @param {T[]} arr - The array to iterate over.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
  * @param {(item: T, index: number, arr: T[]) => unknown} doesMatch - The function invoked per iteration.
  * @returns {T[]} - Returns a new array of elements that satisfy the given doesMatch function.
  *
@@ -16,13 +16,16 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * filter([1, 2, 3], n => n % 2 === 0)
  * // => [2]
  */
-export function filter<T>(arr: readonly T[], doesMatch?: (item: T, index: number, arr: readonly T[]) => unknown): T[];
+export function filter<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch?: (item: T, index: number, arr: readonly T[]) => unknown
+): T[];
 
 /**
  * Filters elements in a arr that match the properties of the given partial object.
  *
  * @template T
- * @param {T[]} arr - The array to iterate over.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
  * @param {Partial<T>} doesMatch - A partial object that specifies the properties to match.
  * @returns {T[]} - Returns a new array of elements that match the given properties.
  *
@@ -31,13 +34,13 @@ export function filter<T>(arr: readonly T[], doesMatch?: (item: T, index: number
  * filter(arr, { name: 'Bob' });
  * // => [{ id: 2, name: 'Bob' }]
  */
-export function filter<T>(arr: readonly T[], doesMatch: Partial<T>): T[];
+export function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T[];
 
 /**
  * Filters elements in a arr that match the given key-value pair.
  *
  * @template T
- * @param {T[]} arr - The array to iterate over.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
  * @param {[keyof T, unknown]} doesMatchProperty - The key-value pair to match.
  * @returns {T[]} - Returns a new array of elements that match the given key-value pair.
  *
@@ -46,13 +49,13 @@ export function filter<T>(arr: readonly T[], doesMatch: Partial<T>): T[];
  * filter(arr, ['name', 'Alice']);
  * // => [{ id: 1, name: 'Alice' }]
  */
-export function filter<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknown]): T[];
+export function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatchProperty: [keyof T, unknown]): T[];
 
 /**
  * Filters the arr, returning elements that contain the given property name.
  *
  * @template T
- * @param {T[]} arr - The array to iterate over.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {T[]} - Returns a new array of elements that match the given property name.
  *
@@ -61,7 +64,7 @@ export function filter<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknow
  * filter(arr, 'name');
  * // => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
  */
-export function filter<T>(arr: readonly T[], propertyToCheck: string): T[];
+export function filter<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: string): T[];
 
 /**
  * Filters items from a object and returns an array of elements that match the given predicate function.
@@ -81,7 +84,7 @@ export function filter<T>(arr: readonly T[], propertyToCheck: string): T[];
  * // => [3]
  */
 export function filter<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
 
@@ -89,7 +92,7 @@ export function filter<T extends Record<string, unknown>>(
  * Filters elements in a object that match the properties of the given partial object.
  *
  * @template T
- * @param {T} object - The object to iterate over.
+ * @param {T | null | undefined} object - The object to iterate over.
  * @param {Partial<T[keyof T]>} doesMatch - The partial object to match
  * @returns {T[]} - Returns a new array of elements that match the given properties.pair.
  *
@@ -98,13 +101,16 @@ export function filter<T extends Record<string, unknown>>(
  * filter(obj, { name: 'Bob' });
  * // => [{ id: 2, name: 'Bob' }]
  */
-export function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
+export function filter<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatch: Partial<T[keyof T]>
+): T[];
 
 /**
  * Filters elements in a arr that match the given key-value pair.
  *
  * @template T
- * @param {T} object - The object to iterate over.
+ * @param {T | null | undefined} object - The object to iterate over.
  * @param {[keyof T, unknown]} doesMatchProperty - The key-value pair to match.
  * @returns {T[]} - Returns a new array of elements that match the given key-value pair.
  *
@@ -113,13 +119,16 @@ export function filter<T extends Record<string, unknown>>(object: T, doesMatch: 
  * filter(obj, ['name', 'Alice']);
  * // => [{ id: 1, name: 'Alice' }]
  */
-export function filter<T extends Record<string, unknown>>(object: T, doesMatchProperty: [keyof T, unknown]): T[];
+export function filter<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatchProperty: [keyof T, unknown]
+): T[];
 
 /**
  * Filters the object, returning elements that contain the given property name.
  *
  * @template T
- * @param {T} object - The object to iterate over.
+ * @param {T | null | undefined} object - The object to iterate over.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {T[]} - Returns a new array of elements that match the given property name.
  *
@@ -128,14 +137,14 @@ export function filter<T extends Record<string, unknown>>(object: T, doesMatchPr
  * filter(obj, 'name');
  * // => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
  */
-export function filter<T extends Record<string, unknown>>(object: T, propertyToCheck: string): T[];
+export function filter<T extends Record<string, unknown>>(object: T | null | undefined, propertyToCheck: string): T[];
 
 /**
  * Iterates over the collection and filters elements based on the given predicate.
  * If a function is provided, it is invoked for each element in the collection.
  *
  * @template T
- * @param {T[] | Record<any, any>} source - The array or object to iterate over.
+ * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The array or object to iterate over.
  * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} [predicate=identity] - The function invoked per iteration.
  * @returns {T[]} - Returns a new array of filtered elements that satisfy the predicate.
  *
@@ -153,9 +162,12 @@ export function filter<T extends Record<string, unknown>>(object: T, propertyToC
  * // => [{ a: 2 }]
  */
 export function filter<T>(
-  source: T[] | Record<any, any>,
+  source: ArrayLike<T> | Record<any, any> | null | undefined,
   predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string
 ): T[] {
+  if (!source) {
+    return [];
+  }
   if (!predicate) {
     predicate = identity;
   }
@@ -164,13 +176,13 @@ export function filter<T>(
 
   switch (typeof predicate) {
     case 'function': {
-      if (!Array.isArray(source)) {
+      if (!isArray(source)) {
         const result: T[] = [];
         const keys = Object.keys(source) as Array<keyof T>;
 
         for (let i = 0; i < keys.length; i++) {
           const key = keys[i];
-          const value = source[key];
+          const value = source[key] as T;
 
           if (predicate(value, key as number, source)) {
             result.push(value);

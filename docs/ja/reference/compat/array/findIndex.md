@@ -18,15 +18,19 @@
 ## インターフェース
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): number;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>): number;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown]): number;
-function findIndex<T>(arr: T[], doesMatch: string): number;
+function findIndex<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: (item: T, index: number, arr: T[]) => unknown,
+  fromIndex?: number
+): number;
+function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): number;
+function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string, fromIndex?: number): number;
 ```
 
 ### パラメータ
 
-- `arr` (`T[]`): 検索する配列。
+- `arr` (`ArrayLike<T> | null | undefined`): 検索する配列。
 
 - `doesMatch`:
 
@@ -34,6 +38,8 @@ function findIndex<T>(arr: T[], doesMatch: string): number;
   - **部分オブジェクト** (`Partial<T>`): 一致させるプロパティと値を指定した部分オブジェクト。
   - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
   - **プロパティ名** (`string`): 真と評価される値を持っているか確認するプロパティ名。
+
+- `fromIndex` (`number`): 検索を開始するインデックス。デフォルトは `0`。
 
 ### 戻り値
 

@@ -12,12 +12,12 @@
 ## 签名
 
 ```typescript
-function join<T>(array: T[], separator: string): string;
+function join<T>(array: ArrayLike<T> | null | undefined, separator?: string): string;
 ```
 
 ### 参数
 
-- `array` (`T[]`) - 要连接的数组。
+- `array` (`ArrayLike<T> | null | undefined`) - 要连接的数组。
 - `separator` (`string`) - 用于分隔元素的分隔符，默认是常用分隔符`,`。
 
 ### 返回值

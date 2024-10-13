@@ -18,23 +18,32 @@ You can specify the condition in several ways:
 ## Signature
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
-function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: T[], doesMatch: string): T | undefined;
+function find<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: (item: T, index: number, arr: T[]) => unknown
+): T | undefined;
+function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T | undefined;
+function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T | undefined;
 
 function find<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatch: Partial<T[keyof T]>
+): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatch: [keyof T, unknown]
+): T | undefined;
+function find<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T | undefined;
 ```
 
 ### Parameters
 
-- `arr` (`T[]`) or `object` (`T`): The array or object to search through.
+- `arr` (`ArrayLike<T> | null | undefined`) or `object` (`T | null | undefined`): The array or object to search through.
 
 - `doesMatch`:
 

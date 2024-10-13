@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { every as everyEsToolkit_ } from 'es-toolkit';
+import { every as everyEsToolkit_ } from 'es-toolkit/compat';
 import { every as everyLodash_ } from 'lodash';
 
 const everyEsToolkit = everyEsToolkit_;

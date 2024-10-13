@@ -18,23 +18,32 @@
 ## 인터페이스
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
-function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: T[], doesMatch: string): T | undefined;
+function find<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: (item: T, index: number, arr: T[]) => unknown
+): T | undefined;
+function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T | undefined;
+function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T | undefined;
 
 function find<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatch: Partial<T[keyof T]>
+): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatch: [keyof T, unknown]
+): T | undefined;
+function find<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T | undefined;
 ```
 
 ### 파라미터
 
-- `arr` (`T[]`) or `object` (`T`): 검색할 배열이나 객체.
+- `arr` (`ArrayLike<T> | null | undefined`) or `object` (`T | null | undefined`): 검색할 배열이나 객체.
 
 - `doesMatch`:
 

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { findIndex } from './findIndex';
+import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
 
 describe('findIndex', () => {
@@ -39,5 +40,25 @@ describe('findIndex', () => {
     });
 
     expect(args).toEqual(['a', 0, array]);
+  });
+
+  it('findIndex should support fromIndex', () => {
+    expect(findIndex(objects, { b: 2 }, -1)).toBe(2);
+    expect(findIndex(objects, { b: 2 }, 0)).toBe(2);
+    expect(findIndex(objects, { b: 2 }, 1)).toBe(2);
+    expect(findIndex(objects, { b: 2 }, 2)).toBe(2);
+    expect(findIndex(objects, { b: 2 }, 3)).toBe(-1);
+    expect(findIndex(objects, { b: 2 }, 4)).toBe(-1);
+  });
+
+  it('should return `-1` when provided `null` or `undefined`', () => {
+    expect(findIndex(null, 'a')).toBe(-1);
+    expect(findIndex(undefined, 'a')).toBe(-1);
+  });
+
+  it('should support array-like objects', () => {
+    expect(findIndex({ 0: 'a', 1: 'b', length: 2 }, i => i === 'b')).toBe(1);
+    expect(findIndex('123', i => i === '2')).toBe(1);
+    expect(findIndex(args, i => i === 2)).toBe(1);
   });
 });

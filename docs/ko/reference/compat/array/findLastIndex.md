@@ -19,18 +19,22 @@
 
 ```typescript
 function findLastIndex<T>(
-  arr: T[],
+  arr: ArrayLike<T> | null | undefined,
   doesMatch: (item: T, index: number, arr: T[]) => unknown,
   fromIndex?: number
-): T | undefined;
-function findLastIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
-function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
-function findLastIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): T | undefined;
+): number;
+function findLastIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): number;
+function findLastIndex<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: [keyof T, unknown],
+  fromIndex?: number
+): number;
+function findLastIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string, fromIndex?: number): number;
 ```
 
 ### 파라미터
 
-- `arr` (`T[]`): 검색할 배열.
+- `arr` (`ArrayLike<T> | null | undefined`): 검색할 배열.
 
 - `doesMatch`:
 

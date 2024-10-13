@@ -18,24 +18,30 @@ You can specify the condition in several ways:
 ## Signature
 
 ```typescript
-function every<T>(arr: T[]): boolean;
-function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
-function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
-function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: string): boolean;
+function every<T>(arr: ArrayLike<T> | null | undefined): boolean;
+function every<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: (item: T, index: number, arr: T[]) => unknown
+): boolean;
+function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): boolean;
+function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): boolean;
+function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): boolean;
 
 function every<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: string): boolean;
+function every<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatch: Partial<T[keyof T]>
+): boolean;
+function every<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): boolean;
+function every<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): boolean;
 ```
 
 ### Parameters
 
-- `arr` (`T[]`) or `object` (`T`): The array or object to search through.
+- `arr` (`ArrayLike<T> | null | undefined`) or `object` (`T | null | undefined`): The array or object to search through.
 
 - `doesMatch`:
 
