@@ -1,6 +1,6 @@
-import { uniq } from '../../array';
-import { intersection as intersectionToolkit } from '../../array/intersection';
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject';
+import { uniq } from '../../array/uniq.ts';
+import { intersection as intersectionToolkit } from '../../array/intersection.ts';
+import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 export function intersection<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[] {
   if (arrays.length === 0) {
