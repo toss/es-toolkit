@@ -140,6 +140,7 @@ export { matchesProperty } from './predicate/matchesProperty.ts';
 
 export { camelCase } from './string/camelCase.ts';
 export { endsWith } from './string/endsWith.ts';
+export { escape } from './string/escape.ts';
 export { kebabCase } from './string/kebabCase.ts';
 export { lowerCase } from './string/lowerCase.ts';
 export { pad } from './string/pad.ts';
