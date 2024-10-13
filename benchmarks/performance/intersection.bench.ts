@@ -15,7 +15,7 @@ describe('intersection, small arrays', () => {
     intersectionToolkit(array1, array2);
   });
 
-  bench('es-toolkit/compat/difference', () => {
+  bench('es-toolkit/compat/intersection', () => {
     intersectionCompatToolkit([1, 2, 3], [2]);
   });
 
