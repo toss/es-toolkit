@@ -18,30 +18,41 @@
 ## 인터페이스
 
 ```typescript
-function every<T>(arr: ArrayLike<T> | null | undefined): boolean;
-function every<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: T[]) => unknown
-): boolean;
-function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): boolean;
-function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): boolean;
+function every<T>(arr: T[]): boolean;
+function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
+function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
+function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
+function every<T>(arr: T[], doesMatch: string): boolean;
 
 function every<T extends Record<string, unknown>>(
-  object: T | null | undefined,
+  object: T,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): boolean;
-function every<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: Partial<T[keyof T]>
-): boolean;
-function every<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: string): boolean;
 ```
 
 ### 파라미터
 
-- `arr` (`ArrayLike<T> | null | undefined`) 또는 `object` (`T | null | undefined`): 검색할 배열이나 객체.
+- `arr` (`T[]`) 또는 `object` (`T`): 검색할 배열이나 객체.
+
+::: info `arr`는 `ArrayLike<T>`일 수도 있고, `null` 또는 `undefined`일 수도 있어요
+
+lodash와 완벽하게 호환되도록 `every` 함수는 `arr`을 다음과 같이 처리해요:
+
+- `arr`가 `ArrayLike<T>`인 경우 `Array.from(...)`을 사용하여 배열로 변환해요.
+- `arr`가 `null` 또는 `undefined`인 경우 빈 배열로 간주돼요.
+
+:::
+
+::: info `object`는 `null` 또는 `undefined`일 수도 있어요
+
+lodash와 완벽하게 호환되도록 `every` 함수는 `object`를 다음과 같이 처리해요:
+
+- `object`가 `null` 또는 `undefined`인 경우 빈 객체로 변환돼요.
+
+:::
 
 - `doesMatch`:
 

@@ -18,30 +18,41 @@
 ## インターフェース
 
 ```typescript
-function every<T>(arr: ArrayLike<T> | null | undefined): boolean;
-function every<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: T[]) => unknown
-): boolean;
-function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): boolean;
-function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): boolean;
+function every<T>(arr: T[]): boolean;
+function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
+function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
+function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
+function every<T>(arr: T[], doesMatch: string): boolean;
 
 function every<T extends Record<string, unknown>>(
-  object: T | null | undefined,
+  object: T,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): boolean;
-function every<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: Partial<T[keyof T]>
-): boolean;
-function every<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: string): boolean;
 ```
 
 ### パラメータ
 
-- `arr` (`ArrayLike<T> | null | undefined`) または `object` (`T | null | undefined`): 検索する配列またはオブジェクト。
+- `arr` (`T[]`) または `object` (`T`): 検索する配列またはオブジェクト。
+
+::: info `arr` は `ArrayLike<T>`、`null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`every` 関数は `arr` を次のように処理します:
+
+- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換されます。
+- `arr` が `null` または `undefined` の場合、空の配列として扱われます。
+
+:::
+
+::: info `object` は `null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`every` 関数は `object` を次のように処理します:
+
+- `object` が `null` または `undefined` の場合、空のオブジェクトに変換されます。
+
+:::
 
 - `doesMatch`:
 
