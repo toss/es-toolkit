@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { args } from '../_internal/args';
 import { first, head } from '../index';
 
 /**
@@ -24,5 +25,22 @@ describe('head', () => {
 
   it('should be aliased', () => {
     expect(first).toBe(head);
+  });
+
+  it('should return an empty array when the collection is null or undefined', () => {
+    expect(first(null)).toBeUndefined();
+  });
+
+  it('should return an empty array when the collection is not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(first(1)).toBeUndefined();
+    // @ts-expect-error - invalid argument
+    expect(first(true)).toBeUndefined();
+  });
+
+  it('should support array-like', () => {
+    expect(first({ 0: 1, 1: null, 2: 3, length: 3 })).toEqual(1);
+    expect(first('123')).toEqual('1');
+    expect(first(args)).toEqual(1);
   });
 });
