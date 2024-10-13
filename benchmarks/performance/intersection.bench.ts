@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { intersection as intersectionToolkit_ } from 'es-toolkit';
+import { intersection as intersectionCompatToolkit_ } from 'es-toolkit/compat';
 import { intersection as intersectionLodash_ } from 'lodash';
 
 const intersectionToolkit = intersectionToolkit_;
+const intersectionCompatToolkit = intersectionCompatToolkit_;
 const intersectionLodash = intersectionLodash_;
 
 describe('intersection, small arrays', () => {
@@ -11,6 +13,10 @@ describe('intersection, small arrays', () => {
 
   bench('es-toolkit/intersection', () => {
     intersectionToolkit(array1, array2);
+  });
+
+  bench('es-toolkit/compat/intersection', () => {
+    intersectionCompatToolkit([1, 2, 3], [2]);
   });
 
   bench('lodash/intersection', () => {
@@ -24,6 +30,10 @@ describe('intersection, large arrays', () => {
 
   bench('es-toolkit/intersection', () => {
     intersectionToolkit(array1, array2);
+  });
+
+  bench('es-toolkit/compat/intersection', () => {
+    intersectionCompatToolkit(array1, array2);
   });
 
   bench('lodash/intersection', () => {
