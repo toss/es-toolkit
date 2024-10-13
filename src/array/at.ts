@@ -14,7 +14,7 @@
  * console.log(result); // [20, 40, 50]
  */
 export function at<T>(arr: readonly T[], indices: number[]): Array<T | undefined> {
-  const result: Array<T | undefined> = [];
+  const result: Array<T | undefined> = new Array(indices.length);
 
   for (let i = 0; i < indices.length; i++) {
     const index = indices[i];
