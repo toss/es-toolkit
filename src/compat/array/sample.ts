@@ -103,6 +103,5 @@ export function sample<T>(collection: ArrayLike<T> | Record<string, T>): T | str
     return sampleToolkit(Array.from(collection));
   }
 
-  const values = Object.values(collection);
-  return values.length ? sampleToolkit(values) : undefined;
+  return sampleToolkit(Object.values(collection));
 }
