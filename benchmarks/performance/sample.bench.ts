@@ -1,5 +1,6 @@
 import { bench, describe } from 'vitest';
 import { sample as sampleToolkit_ } from 'es-toolkit';
+import { sample as sampleToolkitCompat } from 'es-toolkit/compat';
 import { sample as sampleLodash_ } from 'lodash';
 
 const sampleToolkit = sampleToolkit_;
@@ -9,6 +10,11 @@ describe('sample', () => {
   bench('es-toolkit/sample', () => {
     const array = [1, 2, 3, 4, 5];
     sampleToolkit(array);
+  });
+
+  bench('es-toolkit/compat/sample', () => {
+    const array = [1, 2, 3, 4, 5];
+    sampleToolkitCompat(array);
   });
 
   bench('lodash/sample', () => {
@@ -22,6 +28,10 @@ describe('sample/largeArray', () => {
 
   bench('es-toolkit/sample', () => {
     sampleToolkit(largeArray);
+  });
+
+  bench('es-toolkit/compat/sample', () => {
+    sampleToolkitCompat(largeArray);
   });
 
   bench('lodash/sample', () => {
