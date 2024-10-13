@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { sample } from './sample';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';

@@ -81,7 +81,9 @@ export function sample<T>(collection: ArrayLike<T> | Record<string, T>): T | str
  * @returns {T | string | undefined} A random element from the collection, or `undefined` if the collection is empty or invalid.
  */
 export function sample<T>(collection: ArrayLike<T> | Record<string, T>): T | string | undefined {
-  if (collection == null) return undefined;
+  if (collection == null) {
+    return undefined;
+  }
 
   if (isArrayLike(collection)) {
     return sampleToolkit(collection as readonly T[]);
