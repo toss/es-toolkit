@@ -1,5 +1,5 @@
-import { sample as sampleToolkit } from '../../array/sample';
-import { isArrayLike } from '../predicate/isArrayLike';
+import { sample as sampleToolkit } from '../../array/sample.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
  * Returns a random element from an array.
