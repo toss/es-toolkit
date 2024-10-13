@@ -107,7 +107,7 @@ export function orderBy<T>(
     }
 
     // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
-    return { key: criterion, path: toPath(criterion as string) } as const;
+    return { key: criterion, path: toPath(criterion) };
   });
 
   // Array.prototype.sort() always shifts the `undefined` values to the end of the array. So we have to prevent it by using a wrapper object.
