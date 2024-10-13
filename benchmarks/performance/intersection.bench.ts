@@ -32,7 +32,7 @@ describe('intersection, large arrays', () => {
     intersectionToolkit(array1, array2);
   });
 
-  bench('es-toolkit/compat/difference', () => {
+  bench('es-toolkit/compat/intersection', () => {
     intersectionCompatToolkit(array1, array2);
   });
 
