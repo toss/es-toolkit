@@ -13,12 +13,14 @@ export function intersection<T>(...arrays: Array<ArrayLike<T> | null | undefined
 
   let result: T[] = uniq(Array.from(arrays[0]));
   
-  for (let i = 1; i < normalizedArrays.length; i++) {
-    if (!isArrayLikeObject(arrays[i])) {
+  for (let i = 1; i < arrays.length; i++) {
+    const array = arrays[i];
+    
+    if (!isArrayLikeObject(array)) {
       return [];
     }
     
-    result = intersectionToolkit(result, Array.from(arrays[i]));
+    result = intersectionToolkit(result, Array.from(array));
   }
 
   return result;
