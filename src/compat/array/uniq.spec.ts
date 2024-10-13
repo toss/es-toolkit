@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { args } from '../_internal/args';
 import { uniq } from '../index';
 
 /**
@@ -16,5 +17,22 @@ describe('uniq', () => {
       [2, 1],
       [1, 2],
     ]);
+  });
+
+  it('should return an empty array when the collection is null or undefined', () => {
+    expect(uniq(null)).toEqual([]);
+  });
+
+  it('should return an empty array when the collection is not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(uniq(1)).toEqual([]);
+    // @ts-expect-error - invalid argument
+    expect(uniq(true)).toEqual([]);
+  });
+
+  it('should support array-like', () => {
+    expect(uniq({ 0: 1, 1: 2, 2: 1, length: 3 })).toEqual([1, 2]);
+    expect(uniq('112')).toEqual(['1', '2']);
+    expect(uniq(args)).toEqual([1, 2, 3]);
   });
 });

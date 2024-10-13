@@ -24,9 +24,9 @@
  */
 export * from '../index.ts';
 
-export { head as first } from '../array/head.ts';
 export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
+export { compact } from './array/compact.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { drop } from './array/drop.ts';
@@ -42,16 +42,23 @@ export { findLastIndex } from './array/findLastIndex.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
+export { head } from './array/head.ts';
+export { head as first } from './array/head.ts';
 export { includes } from './array/includes.ts';
 export { indexOf } from './array/indexOf.ts';
 export { intersection } from './array/intersection.ts';
 export { join } from './array/join.ts';
+export { last } from './array/last.ts';
 export { orderBy } from './array/orderBy.ts';
 export { size } from './array/size.ts';
 export { slice } from './array/slice.ts';
 export { some } from './array/some.ts';
 export { sortBy } from './array/sortBy.ts';
+export { tail } from './array/tail.ts';
 export { take } from './array/take.ts';
+export { takeRight } from './array/takeRight.ts';
+export { uniq } from './array/uniq.ts';
+export { without } from './array/without.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 
 export { ary } from './function/ary.ts';

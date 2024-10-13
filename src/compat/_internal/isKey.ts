@@ -18,7 +18,7 @@ const regexIsPlainProp = /^\w*$/;
  * isKey('a.b', { a: { b: 2 } });
  * // => false
  */
-export function isKey(value?: unknown, object?: unknown): boolean {
+export function isKey(value?: unknown, object?: unknown): value is PropertyKey {
   if (Array.isArray(value)) {
     return false;
   }

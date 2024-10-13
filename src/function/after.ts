@@ -8,7 +8,7 @@
  * @template F - The type of the function to be invoked.
  * @param {number} n - The number of calls required for `func` to execute.
  * @param {F} func - The function to be invoked.
- * @returns {F} - A new function that:
+ * @returns {(...args: Parameters<F>) => ReturnType<F> | undefined} - A new function that:
  * - Tracks the number of calls.
  * - Invokes `func` starting from the `n`-th call.
  * - Returns `undefined` if fewer than `n` calls have been made.
@@ -27,16 +27,19 @@
  * afterFn()
  */
 
-export function after<F extends (...args: any[]) => any>(n: number, func: F): F {
+export function after<F extends (...args: any[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined {
   if (!Number.isInteger(n) || n < 0) {
     throw new Error(`n must be a non-negative integer.`);
   }
 
   let counter = 0;
-  return ((...args: Parameters<F>) => {
+  return (...args: Parameters<F>) => {
     if (++counter >= n) {
       return func(...args);
     }
     return undefined;
-  }) as F;
+  };
 }
