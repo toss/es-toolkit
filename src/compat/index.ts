@@ -52,6 +52,7 @@ export { some } from './array/some.ts';
 export { sortBy } from './array/sortBy.ts';
 export { take } from './array/take.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
+export { sample } from './array/sample.ts';
 
 export { ary } from './function/ary.ts';
 export { attempt } from './function/attempt.ts';
