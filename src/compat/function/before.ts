@@ -21,8 +21,7 @@ import { toInteger } from '../util/toInteger.ts';
  *
  * before3(); // => 1
  * before3(); // => 2
- * before3(); // => 3
- * before3(); // => 3
+ * before3(); // => 2
  */
 export function before<F extends (...args: any[]) => any>(
   n: number,

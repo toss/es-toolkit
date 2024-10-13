@@ -8,7 +8,10 @@
 ## 인터페이스
 
 ```typescript
-function after<F extends (...args: any[]) => any>(n: number, func: F): F;
+function after<F extends (...args: any[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### 파라미터
@@ -18,7 +21,7 @@ function after<F extends (...args: any[]) => any>(n: number, func: F): F;
 
 ### 반환 값
 
-(`F`): 새로운 함수를 반환해요. 이 함수는 다음과 같은 기능을 가져요.
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 새로운 함수를 반환해요. 이 함수는 다음과 같은 기능을 가져요.
 
 - 호출된 횟수를 추적해요.
 - `n`번째 호출부터 `func`을 호출해요.

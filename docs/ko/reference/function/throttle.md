@@ -120,4 +120,17 @@ const trailingFn = throttle(
 // 'Trailing function executed'를 바로 로깅해요.
 // 계속 호출하더라도 1초마다 'Trailing function executed'를 로깅해요.
 trailingFn();
+
+// leading: false, trailing: true 옵션 예시
+const trailingOnlyFn = throttle(
+  () => {
+    console.log('Trailing-only function executed');
+  },
+  1000,
+  { leading: false, trailing: true }
+);
+
+// 'Trailing-only function executed'는 처음에는 로깅되지 않아요.
+// 계속 호출하더라도 1초마다 'Trailing-only function executed'를 로깅해요.
+trailingOnlyFn();
 ```

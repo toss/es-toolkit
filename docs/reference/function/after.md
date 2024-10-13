@@ -8,7 +8,10 @@ The is particularly useful for scenarios involving events or asynchronous operat
 ## Signature
 
 ```typescript
-function after<F extends (...args: any[]) => any>(n: number, func: F): F;
+function after<F extends (...args: any[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### Parameters
@@ -18,7 +21,7 @@ function after<F extends (...args: any[]) => any>(n: number, func: F): F;
 
 ### Returns
 
-(`F`): A new function that:
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): A new function that:
 
 - Tracks the number of calls.
 - Invokes `func` starting from the `n`-th call.
