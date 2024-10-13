@@ -29,6 +29,20 @@ export function sample<T>(array: readonly T[]): T | undefined;
 export function sample(str: string): string | undefined;
 
 /**
+ * Returns a random element from an array.
+ *
+ * @template T
+ * @param {ArrayLike<T>} array - The array-like object to sample from.
+ * @returns {T | undefined} A random element from the array, or `undefined` if the array is empty.
+ *
+ * @example
+ * const arrayLike: ArrayLike<string> = { 0: 'a', 1: 'b', 2: 'c', length: 3 };
+ * const result = sample(arrayLike);
+ * console.log(result); // Output: 'a', 'b', or 'c' (randomly selected)
+ */
+export function sample<T>(array: ArrayLike<T>): T | undefined;
+
+/**
  * Returns a random value from an object.
  *
  * @template T - The type of values in the object.
