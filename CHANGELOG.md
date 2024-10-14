@@ -1,5 +1,17 @@
 # es-toolkit Changelog
 
+## Version v1.25.0
+
+Released on October 14th, 2024.
+
+- Added support for [isFile](https://es-toolkit.slash.page/reference/predicate/isFile.html).
+- Added compatibility functions for [escape](https://es-toolkit.slash.page/reference/string/escape.html), [toSafeInteger](https://es-toolkit.slash.page/reference/compat/util/toSafeInteger.html), [intersection](https://es-toolkit.slash.page/reference/array/intersection.html), [sample](https://es-toolkit.slash.page/reference/array/sample.html), [chunk](https://es-toolkit.slash.page/reference/array/chunk.html), [compact](https://es-toolkit.slash.page/reference/array/compact.html), [head](https://es-toolkit.slash.page/reference/array/head.html), [initial](https://es-toolkit.slash.page/reference/array/initial.html), [last](https://es-toolkit.slash.page/reference/array/last.html), [tail](https://es-toolkit.slash.page/reference/array/tail.html), [take](https://es-toolkit.slash.page/reference/array/take.html), [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html), [uniq](https://es-toolkit.slash.page/reference/array/uniq.html), and [without](https://es-toolkit.slash.page/reference/array/without.html).
+- Enhanced performance for [at](https://es-toolkit.slash.page/reference/array/at.html) and [isPlainObject](https://es-toolkit.slash.page/reference/predicate/isPlainObject.html).
+- Resolved an issue in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) that prevented it from cloning symbol properties and read-only properties of objects.
+- Fixed a problem in [pick](https://es-toolkit.slash.page/reference/object/pick.html) within our compatibility library that incorrectly added `undefined` for keys that do not exist.
+
+This version includes contributions from @D-Sketon, @mass2527, @dayongkr, @lukaszkowalik2, @Gyumong, @Dohun-choi, @belgattitude, and @chhw130. Thank you for your valuable contributions!
+
 ## Version v1.24.0
 
 Released on October 7th, 2024.
