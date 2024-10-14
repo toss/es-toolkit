@@ -1,4 +1,5 @@
 import { get } from './get.ts';
+import { has } from './has.ts';
 import { set } from './set.ts';
 import { isNil } from '../predicate/isNil.ts';
 
@@ -115,6 +116,10 @@ export function pick<
 
     for (const key of keys) {
       const value = get(obj, key);
+
+      if (value === undefined && !has(obj, key)) {
+        continue;
+      }
 
       if (typeof key === 'string' && Object.hasOwn(obj, key)) {
         result[key] = value;
