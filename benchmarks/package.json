@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4",
-    "@types/lodash-es": "^4"
+    "@types/lodash-es": "^4",
+    "tinybench": "^2.9.0"
   }
 }
