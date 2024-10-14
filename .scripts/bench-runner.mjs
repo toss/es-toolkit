@@ -14,59 +14,64 @@ if (existsSync(dirPath)) {
   rmSync(dirPath, { recursive: true, force: true });
 }
 
-console.log('Building es-toolkit library...');
-const buildStart = performance.now();
+const { output } = await time('Build', async () => {
+  // Build the es-toolkit library
+  const libOption = libBuildOptions({
+    format: 'esm',
+    extension: 'mjs',
+    entrypoints,
+    outDir: OUTPUT_DIR,
+    sourcemap: false,
+  });
+  const toolkitBundle = await rollup({ ...libOption, logLevel: 'silent' });
+  await toolkitBundle.write(libOption.output);
 
-// Build the es-toolkit library
-const libOption = libBuildOptions({
-  format: 'esm',
-  extension: 'mjs',
-  entrypoints,
-  outDir: OUTPUT_DIR,
-  sourcemap: false,
-});
-const toolkitBundle = await rollup({ ...libOption, logLevel: 'silent' });
-await toolkitBundle.write(libOption.output);
+  // Build the benchmark file
+  const benchBundle = await rollup({
+    input: 'benchmarks/performance/bench.ts',
+    plugins: [
+      aliasPlugin({
+        entries: [{ find: /^es-toolkit/, replacement: `../../${OUTPUT_DIR}` }], // Replace the es-toolkit import with the pre-built.
+      }),
+      tsPlugin({
+        include: ['**/*.ts'],
+        exclude: ['**/*.spec.ts'],
+        compilerOptions: {
+          sourceMap: false,
+          inlineSources: false,
+          removeComments: true,
+          declaration: false,
+        },
+      }),
+      resolvePlugin({
+        resolveOnly: ['lodash-es', 'tinybench'],
+      }),
+    ],
+    logLevel: 'silent',
+  });
 
-console.log('Building benchmark file...');
-// Build the benchmark file
-const benchBundle = await rollup({
-  input: 'benchmarks/performance/bench.ts',
-  plugins: [
-    aliasPlugin({
-      entries: [{ find: /^es-toolkit/, replacement: `../../${OUTPUT_DIR}` }], // Replace the es-toolkit import with the pre-built.
-    }),
-    tsPlugin({
-      include: ['**/*.ts'],
-      exclude: ['**/*.spec.ts'],
-      compilerOptions: {
-        sourceMap: false,
-        inlineSources: false,
-        removeComments: true,
-        declaration: false,
-      },
-    }),
-    resolvePlugin({
-      resolveOnly: ['lodash-es', 'tinybench'],
-    }),
-  ],
-  logLevel: 'silent',
+  return await benchBundle.write({
+    format: 'esm',
+    dir: OUTPUT_DIR,
+    entryFileNames: '[name].mjs',
+    generatedCode: 'es2015',
+  });
 });
-const { output } = await benchBundle.write({
-  format: 'esm',
-  dir: OUTPUT_DIR,
-  entryFileNames: '[name].mjs',
-  generatedCode: 'es2015',
-});
-const buildEnd = performance.now();
 
-const benchStart = performance.now();
-console.log('Running the benchmark...');
 // Run the benchmark
-const bulitBenchFile = resolve(OUTPUT_DIR, output[0].fileName);
-execSync(`node ${bulitBenchFile}`, { stdio: 'inherit' });
-const benchEnd = performance.now();
+await time('Benchmark', () => {
+  const bulitBenchFile = resolve(OUTPUT_DIR, output[0].fileName);
+  execSync(`node ${bulitBenchFile}`, { stdio: 'inherit' });
+});
 
-console.log(
-  `Build time: ${((buildEnd - buildStart) / 1000).toFixed(2)}s | Benchmark time: ${((benchEnd - benchStart) / 1000).toFixed(2)}s`
-);
+async function time(title, fn) {
+  console.log(`Running ${title}...`);
+
+  const start = performance.now();
+  const result = await fn();
+  const end = performance.now();
+
+  console.log(`${title}: ${((end - start) / 1000).toFixed(2)}s`);
+
+  return result;
+}
