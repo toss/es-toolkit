@@ -6,12 +6,6 @@ import commonjsPlugin from '@rollup/plugin-commonjs';
 import resolvePlugin from '@rollup/plugin-node-resolve';
 import tsPlugin from '@rollup/plugin-typescript';
 
-const includeStrings = process.argv.slice(2);
-
-if (includeStrings.length === 0) {
-  includeStrings.push('.');
-}
-
 const OUTPUT_DIR = '.bench-bundle';
 const dirPath = resolve(process.cwd(), OUTPUT_DIR);
 
@@ -21,6 +15,8 @@ if (existsSync(dirPath)) {
 
 const benchmarkDir = resolve(process.cwd(), 'benchmarks/performance');
 const allBenchmarkFiles = readdirSync(benchmarkDir);
+
+const includeStrings = process.argv[2] ? process.argv.slice(2) : ['.']; // default to all benchmarks
 
 for (const includeString of includeStrings) {
   const targetBenchFiles = allBenchmarkFiles.filter(f => f.includes(includeString));
@@ -37,7 +33,7 @@ for (const includeString of includeStrings) {
         input: resolve(benchmarkDir, file),
         plugins: [
           tsPlugin({
-            tsconfig: resolve(process.cwd(), 'tsconfig.build.json'),
+            tsconfig: resolve(process.cwd(), 'tsconfig.build.json'), // for transforming `benchmarks/**/*.ts`
             compilerOptions: {
               sourceMap: false,
               inlineSources: false,
@@ -45,9 +41,9 @@ for (const includeString of includeStrings) {
               declaration: false,
             },
           }),
-          commonjsPlugin(),
+          commonjsPlugin(), // for importing `lodash`
           resolvePlugin({
-            extensions: ['.mjs', '.js', '.json', '.node', '.ts'],
+            extensions: ['.mjs', '.js', '.json', '.node', '.ts'], // for running on Node.js
           }),
         ],
         logLevel: 'silent',
