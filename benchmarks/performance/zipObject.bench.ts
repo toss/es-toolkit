@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { zipObject as zipObjectToolkit_ } from 'es-toolkit';
-import { zipObject as zipObjectLodash_ } from 'lodash';
-
-const zipObjectToolkit = zipObjectToolkit_;
-const zipObjectLodash = zipObjectLodash_;
+import { zipObject as zipObjectToolkit } from 'es-toolkit';
+import { zipObject as zipObjectLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('zipObject', () => {
   bench('es-toolkit/zipObject', () => {

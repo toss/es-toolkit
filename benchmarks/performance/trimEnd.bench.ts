@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { trimEnd as trimEndToolkit_ } from 'es-toolkit/compat';
-import { trimEnd as trimEndLodash_ } from 'lodash';
-
-const trimEndToolkit = trimEndToolkit_;
-const trimEndLodash = trimEndLodash_;
+import { trimEnd as trimEndToolkit } from 'es-toolkit/compat';
+import { trimEnd as trimEndLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('trimEnd', () => {
   bench('es-toolkit/trimEnd', () => {

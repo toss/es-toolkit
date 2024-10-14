@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { constant as constantToolkitCompat_ } from 'es-toolkit/compat';
-import { constant as constantToLodash_ } from 'lodash';
-
-const constantToolkitCompat = constantToolkitCompat_;
-const constantToLodash = constantToLodash_;
+import { constant as constantToolkitCompat } from 'es-toolkit/compat';
+import { constant as constantToLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('constant', () => {
   bench(

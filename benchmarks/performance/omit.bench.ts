@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { omit as omitToolkit_ } from 'es-toolkit';
-import { omit as omitToolkitCompat_ } from 'es-toolkit/compat';
-import { omit as omitLodash_ } from 'lodash';
-
-const omitToolkit = omitToolkit_;
-const omitToolkitCompat = omitToolkitCompat_;
-const omitLodash = omitLodash_;
+import { omit as omitToolkit } from 'es-toolkit';
+import { omit as omitToolkitCompat } from 'es-toolkit/compat';
+import { omit as omitLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('omit: simple', () => {
   bench('es-toolkit/omit', () => {

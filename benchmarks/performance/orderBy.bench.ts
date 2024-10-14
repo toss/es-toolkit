@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { orderBy as orderByToolkit_ } from 'es-toolkit';
-import { orderBy as orderByToolkitCompat_ } from 'es-toolkit/compat';
-import { orderBy as orderByLodash_ } from 'lodash';
-
-const orderByToolkit = orderByToolkit_;
-const orderByToolkitCompat = orderByToolkitCompat_;
-const orderByLodash = orderByLodash_;
+import { orderBy as orderByToolkit } from 'es-toolkit';
+import { orderBy as orderByToolkitCompat } from 'es-toolkit/compat';
+import { orderBy as orderByLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 const users = [
   { user: 'fred', age: 48, nested: { user: 'fred' } },

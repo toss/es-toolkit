@@ -1,6 +1,6 @@
-import { bench, describe } from 'vitest';
 import { includes as includesToolkitCompat } from 'es-toolkit/compat';
 import { includes as includesLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('includes (object)', () => {
   const object = {

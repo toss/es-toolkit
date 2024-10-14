@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { rest as restToolkit_ } from 'es-toolkit';
-import { rest as restCompat_ } from 'es-toolkit/compat';
-import { rest as restLodash_ } from 'lodash';
-
-const restToolkit = restToolkit_;
-const restCompat = restCompat_;
-const restLodash = restLodash_;
+import { rest as restToolkit } from 'es-toolkit';
+import { rest as restCompat } from 'es-toolkit/compat';
+import { rest as restLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('rest', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

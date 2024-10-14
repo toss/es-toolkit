@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { pick as pickToolkit_ } from 'es-toolkit';
-import { pick as pickCompatToolkit_ } from 'es-toolkit/compat';
-import { pick as pickLodash_ } from 'lodash';
-
-const pickToolkit = pickToolkit_;
-const pickCompatToolkit = pickCompatToolkit_;
-const pickLodash = pickLodash_;
+import { pick as pickToolkit } from 'es-toolkit';
+import { pick as pickCompatToolkit } from 'es-toolkit/compat';
+import { pick as pickLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('pick', () => {
   bench('es-toolkit/pick', () => {

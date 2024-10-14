@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { camelCase as camelCaseToolkit_ } from 'es-toolkit';
-import { camelCase as camelCaseToolkitCompat_ } from 'es-toolkit/compat';
-import { camelCase as camelCaseLodash_ } from 'lodash';
-
-const camelCaseToolkit = camelCaseToolkit_;
-const camelCaseToolkitCompat = camelCaseToolkitCompat_;
-const camelCaseLodash = camelCaseLodash_;
+import { camelCase as camelCaseToolkit } from 'es-toolkit';
+import { camelCase as camelCaseToolkitCompat } from 'es-toolkit/compat';
+import { camelCase as camelCaseLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('camelCase', () => {
   bench('es-toolkit/camelCase', () => {

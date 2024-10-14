@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { isFunction as isFunctionToolkit_ } from 'es-toolkit';
-import { isFunction as isFunctionLodash_ } from 'lodash';
-
-const isFunctionToolkit = isFunctionToolkit_;
-const isFunctionLodash = isFunctionLodash_;
+import { isFunction as isFunctionToolkit } from 'es-toolkit';
+import { isFunction as isFunctionLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('isFunction', () => {
   bench('es-toolkit/isFunction', () => {

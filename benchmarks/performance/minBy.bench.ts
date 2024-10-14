@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { minBy as minByToolkit_ } from 'es-toolkit';
-import { minBy as minByLodash_ } from 'lodash';
-
-const minByToolkit = minByToolkit_;
-const minByLodash = minByLodash_;
+import { minBy as minByToolkit } from 'es-toolkit';
+import { minBy as minByLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('minBy', () => {
   bench('es-toolkit/minBy', () => {

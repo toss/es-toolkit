@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { rangeRight as rangeRightToolkit_ } from 'es-toolkit';
-import { rangeRight as rangeRightLodash_ } from 'lodash';
-
-const rangeRightToolkit = rangeRightToolkit_;
-const rangeRightLodash = rangeRightLodash_;
+import { rangeRight as rangeRightToolkit } from 'es-toolkit';
+import { rangeRight as rangeRightLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('rangeRight', () => {
   bench('es-toolkit/rangeRight', () => {

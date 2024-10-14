@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { padStart as padStartToolkit_ } from 'es-toolkit/compat';
-import { padStart as padStartLodash_ } from 'lodash';
-
-const padStartToolkit = padStartToolkit_;
-const padStartLodash = padStartLodash_;
+import { padStart as padStartToolkit } from 'es-toolkit/compat';
+import { padStart as padStartLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('padStart', () => {
   bench('es-toolkit/padStart', () => {

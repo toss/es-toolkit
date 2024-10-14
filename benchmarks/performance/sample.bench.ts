@@ -1,10 +1,7 @@
-import { bench, describe } from 'vitest';
-import { sample as sampleToolkit_ } from 'es-toolkit';
+import { sample as sampleToolkit } from 'es-toolkit';
 import { sample as sampleToolkitCompat } from 'es-toolkit/compat';
-import { sample as sampleLodash_ } from 'lodash';
-
-const sampleToolkit = sampleToolkit_;
-const sampleLodash = sampleLodash_;
+import { sample as sampleLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('sample', () => {
   bench('es-toolkit/sample', () => {

@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { isEqual as isEqualToolkit_ } from 'es-toolkit';
-import { isEqual as isEqualLodash_ } from 'lodash';
-
-const isEqualToolkit = isEqualToolkit_;
-const isEqualLodash = isEqualLodash_;
+import { isEqual as isEqualToolkit } from 'es-toolkit';
+import { isEqual as isEqualLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('isEqual primitives', () => {
   bench('es-toolkit/isEqual', () => {

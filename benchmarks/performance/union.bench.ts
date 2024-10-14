@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { union as unionToolkit_ } from 'es-toolkit';
-import { union as unionLodash_ } from 'lodash';
-
-const unionToolkit = unionToolkit_;
-const unionLodash = unionLodash_;
+import { union as unionToolkit } from 'es-toolkit';
+import { union as unionLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('union', () => {
   bench('es-toolkit/union', () => {

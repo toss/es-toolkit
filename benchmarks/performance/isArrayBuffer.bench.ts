@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { isArrayBuffer as isArrayBufferToolkit_ } from 'es-toolkit';
-import { isArrayBuffer as isArrayBufferToolkitCompat_ } from 'es-toolkit/compat';
-import { isArrayBuffer as isArrayBufferLodash_ } from 'lodash';
-
-const isArrayBufferToolkit = isArrayBufferToolkit_;
-const isArrayBufferToolkitCompat = isArrayBufferToolkitCompat_;
-const isArrayBufferLodash = isArrayBufferLodash_;
+import { isArrayBuffer as isArrayBufferToolkit } from 'es-toolkit';
+import { isArrayBuffer as isArrayBufferToolkitCompat } from 'es-toolkit/compat';
+import { isArrayBuffer as isArrayBufferLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('isArrayBuffer', () => {
   bench('es-toolkit/isArrayBuffer', () => {

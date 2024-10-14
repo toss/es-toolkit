@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { isSafeInteger as isSafeIntegerToolkit_ } from 'es-toolkit/compat';
-import { isSafeInteger as isSafeIntegerLodash_ } from 'lodash';
-
-const isSafeIntegerToolkit = isSafeIntegerToolkit_;
-const isSafeIntegerLodash = isSafeIntegerLodash_;
+import { isSafeInteger as isSafeIntegerToolkit } from 'es-toolkit/compat';
+import { isSafeInteger as isSafeIntegerLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('after', () => {
   bench('es-toolkit/isSafeInteger', () => {

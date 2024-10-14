@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { lowerCase as lowerCaseToolkit_ } from 'es-toolkit';
-import { lowerCase as lowerCaseToolkitCompat_ } from 'es-toolkit/compat';
-import { lowerCase as lowerCaseLodash_ } from 'lodash';
-
-const lowerCaseToolkit = lowerCaseToolkit_;
-const lowerCaseToolkitCompat = lowerCaseToolkitCompat_;
-const lowerCaseLodash = lowerCaseLodash_;
+import { lowerCase as lowerCaseToolkit } from 'es-toolkit';
+import { lowerCase as lowerCaseToolkitCompat } from 'es-toolkit/compat';
+import { lowerCase as lowerCaseLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('lowerCase - short string', () => {
   bench('es-toolkit/lowerCase', () => {

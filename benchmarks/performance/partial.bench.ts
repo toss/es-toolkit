@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { partial as partialToolkit_ } from 'es-toolkit';
-import { partial as partialLodash_ } from 'lodash';
-
-const partialToolkit = partialToolkit_;
-const partialLodash = partialLodash_;
+import { partial as partialToolkit } from 'es-toolkit';
+import { partial as partialLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 const fn = function () {
   // eslint-disable-next-line prefer-rest-params

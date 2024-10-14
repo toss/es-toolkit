@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { compact as compactToolkit_ } from 'es-toolkit';
-import { compact as compactToolkitCompat_ } from 'es-toolkit/compat';
-import { compact as compactLodash_ } from 'lodash';
-
-const compactToolkit = compactToolkit_;
-const compactToolkitCompat = compactToolkitCompat_;
-const compactLodash = compactLodash_;
+import { compact as compactToolkit } from 'es-toolkit';
+import { compact as compactToolkitCompat } from 'es-toolkit/compat';
+import { compact as compactLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('compact', () => {
   bench('es-toolkit', () => {
