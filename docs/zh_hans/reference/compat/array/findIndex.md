@@ -19,19 +19,24 @@
 ## 签名
 
 ```typescript
-function findIndex<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: T[]) => unknown,
-  fromIndex?: number
-): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
 ```
 
 ### 参数
 
-- `arr` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
+- `arr` (`T[]`): 要搜索的数组。
+
+::: info `arr` 可能是 `ArrayLike<T>`，也可能是 `null` 或 `undefined`
+
+为了与 lodash 完全兼容，`findIndex` 函数会对 `arr` 进行如下处理：
+
+- 如果 `arr` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
+- 如果 `arr` 是 `null` 或 `undefined`，则会将其视为空数组。
+
+:::
 
 - `doesMatch`:
 

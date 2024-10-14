@@ -18,32 +18,40 @@
 ## インターフェース
 
 ```typescript
-function find<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: T[]) => unknown
-): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
+function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
+function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
+function find<T>(arr: T[], doesMatch: string): T | undefined;
 
 function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
+  object: T,
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: Partial<T[keyof T]>
-): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: [keyof T, unknown]
-): T | undefined;
-function find<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
 ```
 
 ### パラメータ
 
-- `arr` (`ArrayLike<T> | null | undefined`) または `object` (`T | null | undefined`): 検索する配列またはオブジェクト。
+- `arr` (`T[]`) または `object` (`T`): 検索する配列またはオブジェクト。
+
+::: info `arr` は `ArrayLike<T>` であるか、`null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`find` 関数は `arr` を次のように処理します。
+
+- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
+- `arr` が `null` または `undefined` の場合、空の配列と見なされます。
+
+:::
+
+::: info `object` は `null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`find` 関数は `object` を次のように処理します。
+
+- `object` が `null` または `undefined` の場合、空のオブジェクトに変換されます。
+
+:::
 
 - `doesMatch`:
 

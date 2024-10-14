@@ -18,23 +18,32 @@ The condition can be specified in several ways:
 ## Signature
 
 ```typescript
-function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T[];
-function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T[];
+function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
+function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
+function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
+function filter<T>(arr: T[], doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
-  object: T | null | undefined,
+  object: T,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
-function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T[];
+function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
+function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
+function filter<T extends Record<string, unknown>>(object: T, doesMatch: string): T[];
 ```
 
 ### Parameters
 
-- `arr` (`ArrayLike<T> | null | undefined`) or `object` (`T | null | undefined`): The array or object to iterate over.
+- `arr` (`T[]`) or `object` (`T`): The array or object to iterate over.
+
+::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
+
+To ensure full compatibility with lodash, the `filter` function handles `arr` in this way:
+
+- If `arr` is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
+- If `arr` is `null` or `undefined`, it will be treated as an empty array.
+
+:::
 
 - `doesMatch`:
 

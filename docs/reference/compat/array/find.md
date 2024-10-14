@@ -18,32 +18,40 @@ You can specify the condition in several ways:
 ## Signature
 
 ```typescript
-function find<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: T[]) => unknown
-): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
+function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
+function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
+function find<T>(arr: T[], doesMatch: string): T | undefined;
 
 function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
+  object: T,
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: Partial<T[keyof T]>
-): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: [keyof T, unknown]
-): T | undefined;
-function find<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
 ```
 
 ### Parameters
 
-- `arr` (`ArrayLike<T> | null | undefined`) or `object` (`T | null | undefined`): The array or object to search through.
+- `arr` (`T[]`) or `object` (`T`): The array or object to search through.
+
+::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
+
+To ensure full compatibility with lodash, the `find` function handles `arr` in this way:
+
+- If `arr` is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
+- If `arr` is `null` or `undefined`, it will be treated as an empty array.
+
+:::
+
+::: info `object` can be `null` or `undefined`
+
+To ensure full compatibility with lodash, the `find` function handles `object` in this way:
+
+- If `object` is `null` or `undefined`, it will be converted into an empty object.
+
+:::
 
 - `doesMatch`:
 

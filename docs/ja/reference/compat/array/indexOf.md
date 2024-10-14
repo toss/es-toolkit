@@ -14,12 +14,22 @@
 ## インターフェース
 
 ```typescript
-function indexOf<T>(array: ArrayLike<T> | null | undefined, searchElement: T, fromIndex?: number): number;
+function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 ```
 
 ### パラメータ
 
-- `array` (`ArrayLike<T> | null | undefined`): 検索対象の配列。
+- `array` (`T[]`): 検索対象の配列。
+
+::: info `array` は `ArrayLike<T>` または `null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`join` 関数は `array` を次のように処理します。
+
+- `array` が `ArrayLike<T>` の場合、配列に変換するために `Array.from(...)` を使用します。
+- `array` が `null` または `undefined` の場合、空の配列と見なされます。
+
+:::
+
 - `searchElement` (`T`): 検索する値。
 - `fromIndex` (`number`, オプション): 検索を開始するインデックス。
 

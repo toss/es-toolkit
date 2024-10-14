@@ -18,19 +18,24 @@
 ## 인터페이스
 
 ```typescript
-function findIndex<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: T[]) => unknown,
-  fromIndex?: number
-): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
 ```
 
 ### 파라미터
 
-- `arr` (`ArrayLike<T> | null | undefined`): 검색할 배열.
+- `arr` (`T[]`): 검색할 배열.
+
+::: info `arr`는 `ArrayLike<T>`이거나 `null` 또는 `undefined`일 수 있어요
+
+lodash와 완전히 호환되도록 `findIndex` 함수는 `arr`를 다음과 같이 처리해요.
+
+- `arr`가 `ArrayLike<T>`인 경우, 배열로 변환하기 위해 `Array.from(...)`을 사용해요.
+- `arr`가 `null` 또는 `undefined`인 경우, 빈 배열로 간주돼요.
+
+:::
 
 - `doesMatch`:
 

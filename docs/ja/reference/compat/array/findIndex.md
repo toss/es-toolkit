@@ -18,19 +18,24 @@
 ## インターフェース
 
 ```typescript
-function findIndex<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: T[]) => unknown,
-  fromIndex?: number
-): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
 ```
 
 ### パラメータ
 
-- `arr` (`ArrayLike<T> | null | undefined`): 検索する配列。
+- `arr` (`T[]`): 検索する配列。
+
+::: info `arr` は `ArrayLike<T>` であるか、`null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`findIndex` 関数は `arr` を次のように処理します。
+
+- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
+- `arr` が `null` または `undefined` の場合、空の配列と見なされます。
+
+:::
 
 - `doesMatch`:
 

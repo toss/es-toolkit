@@ -18,23 +18,32 @@
 ## インターフェース
 
 ```typescript
-function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T[];
-function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T[];
+function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
+function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
+function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
+function filter<T>(arr: T[], doesMatch: string): T[];
 
 function filter<T extends Record<string, unknown>>(
-  object: T | null | undefined,
+  object: T,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
-function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: [keyof T, unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T[];
+function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
+function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
+function filter<T extends Record<string, unknown>>(object: T, doesMatch: string): T[];
 ```
 
 ### パラメータ
 
-- `arr` (`ArrayLike<T> | null | undefined`) または `object` (`T | null | undefined`): 繰り返し処理する配列やオブジェクト。
+- `arr` (`T[]`) または `object` (`T`): 繰り返し処理する配列やオブジェクト。
+
+::: info `arr` は `ArrayLike<T>`、`null` または `undefined` になります
+
+lodash と完全に互換性を保つため、`filter` 関数は `arr` を次のように処理します。
+
+- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
+- `arr` が `null` または `undefined` の場合、空の配列として扱います。
+
+:::
 
 - `doesMatch`:
 

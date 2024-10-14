@@ -19,32 +19,40 @@
 ## 签名
 
 ```typescript
-function find<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: T[]) => unknown
-): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
+function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
+function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
+function find<T>(arr: T[], doesMatch: string): T | undefined;
 
 function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
+  object: T,
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: Partial<T[keyof T]>
-): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: [keyof T, unknown]
-): T | undefined;
-function find<T extends Record<string, unknown>>(object: T | null | undefined, doesMatch: string): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
 ```
 
 ### 参数
 
-- `arr` (`ArrayLike<T> | null | undefined`) 或 `object` (`T | null | undefined`): 要搜索的数组或对象。
+- `arr` (`T[]`) 或 `object` (`T`): 要搜索的数组或对象。
+
+::: info `arr` 可以是 `ArrayLike<T>`、`null` 或 `undefined`
+
+为了确保与 lodash 的完全兼容性，`find` 函数会按照以下方式处理 `arr`：
+
+- 如果 `arr` 是 `ArrayLike<T>`，它将使用 `Array.from(...)` 转换为数组。
+- 如果 `arr` 是 `null` 或 `undefined`，它将被视为一个空数组。
+
+:::
+
+::: info `object` 可以是 `null` 或 `undefined`
+
+为了确保与 lodash 的完全兼容性，`find` 函数会按照以下方式处理 `object`：
+
+- 如果 `object` 是 `null` 或 `undefined`，它将被转换为一个空对象。
+
+:::
 
 - `doesMatch`:
 

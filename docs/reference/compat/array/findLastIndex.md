@@ -19,22 +19,27 @@ You can specify the condition in several ways:
 
 ```typescript
 function findLastIndex<T>(
-  arr: ArrayLike<T> | null | undefined,
+  arr: T[],
   doesMatch: (item: T, index: number, arr: T[]) => unknown,
   fromIndex?: number
 ): number;
-function findLastIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): number;
-function findLastIndex<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch: [keyof T, unknown],
-  fromIndex?: number
-): number;
-function findLastIndex<T>(arr: ArrayLike<T> | null | undefined, doesMatch: string, fromIndex?: number): number;
+function findLastIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
+function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findLastIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
 ```
 
 ### Parameters
 
-- `arr` (`ArrayLike<T> | null | undefined`): The array to search through.
+- `arr` (`T[]`): The array to search through.
+
+::: info `arr` can be `ArrayLike<T>` or `null` or `undefined`
+
+To ensure full compatibility with lodash, the `findLastIndex` function processes `arr` as follows:
+
+- If `arr` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
+- If `arr` is `null` or `undefined`, it is treated as an empty array.
+
+:::
 
 - `doesMatch`:
 
