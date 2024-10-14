@@ -13,7 +13,7 @@ describe('flowRight', () => {
   });
 
   bench('es-toolkit/compat/flowRight', () => {
-    const combined = flowRightCompat(add, square);
+    const combined = flowRightToolkitCompat(add, square);
     combined(1, 2);
   });
 
