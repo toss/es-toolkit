@@ -36,6 +36,15 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
 
 - `arr` (`T[]`) or `object` (`T`): 반복할 배열이나 객체.
 
+::: info `arr`는 `ArrayLike<T>`일 수도 있고, `null` 또는 `undefined`일 수도 있어요
+
+lodash와 완벽하게 호환되도록 `filter` 함수는 `arr`을 다음과 같이 처리해요:
+
+- `arr`가 `ArrayLike<T>`인 경우 `Array.from(...)`을 사용하여 배열로 변환해요.
+- `arr`가 `null` 또는 `undefined`인 경우 빈 배열로 간주돼요.
+
+:::
+
 - `doesMatch`:
 
   - 배열의 경우:

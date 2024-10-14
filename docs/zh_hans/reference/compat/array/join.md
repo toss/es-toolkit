@@ -12,12 +12,22 @@
 ## 签名
 
 ```typescript
-function join<T>(array: T[], separator: string): string;
+function join<T>(array: T[], separator?: string): string;
 ```
 
 ### 参数
 
 - `array` (`T[]`) - 要连接的数组。
+
+::: info `array` 可以是 `ArrayLike<T>` 或 `null` 或 `undefined`
+
+为了确保与 lodash 的完全兼容性，`join` 函数会按照以下方式处理 `array`：
+
+- 如果 `array` 是 `ArrayLike<T>`，它会使用 `Array.from(...)` 将其转换为数组。
+- 如果 `array` 是 `null` 或 `undefined`，它会被视为一个空数组。
+
+:::
+
 - `separator` (`string`) - 用于分隔元素的分隔符，默认是常用分隔符`,`。
 
 ### 返回值

@@ -19,15 +19,24 @@
 ## 签名
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): number;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>): number;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown]): number;
-function findIndex<T>(arr: T[], doesMatch: string): number;
+function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
 ```
 
 ### 参数
 
 - `arr` (`T[]`): 要搜索的数组。
+
+::: info `arr` 可能是 `ArrayLike<T>`，也可能是 `null` 或 `undefined`
+
+为了与 lodash 完全兼容，`findIndex` 函数会对 `arr` 进行如下处理：
+
+- 如果 `arr` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
+- 如果 `arr` 是 `null` 或 `undefined`，则会将其视为空数组。
+
+:::
 
 - `doesMatch`:
 
@@ -35,6 +44,8 @@ function findIndex<T>(arr: T[], doesMatch: string): number;
   - **部分对象** (`Partial<T>`): 指定要匹配的属性的部分对象。
   - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
   - **属性名称** (`string`): 要检查其真值的属性名称。
+
+- `fromIndex` (`number`): 搜索开始的位置。默认为 `0`。
 
 ### 返回
 

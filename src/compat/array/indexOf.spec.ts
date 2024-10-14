@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { indexOf } from './indexOf';
+import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { stubZero } from '../_internal/stubZero';
 
@@ -68,5 +69,20 @@ describe('indexOf', () => {
 
   it('should coerce `fromIndex` to an integer', () => {
     expect(indexOf(array, 2, 1.2)).toBe(1);
+  });
+
+  it('should return `-1` when provided `null` or `undefined`', () => {
+    expect(indexOf(null as any, 1)).toBe(-1);
+    expect(indexOf(undefined as any, 1)).toBe(-1);
+  });
+
+  it('should return `-1` when provided none array-like object', () => {
+    expect(indexOf(1 as any, 1)).toBe(-1);
+  });
+
+  it('should support array-like', () => {
+    expect(indexOf({ 0: 1, 1: 2, length: 2 }, 2)).toBe(1);
+    expect(indexOf('123', '2')).toBe(1);
+    expect(indexOf(args, 2)).toBe(1);
   });
 });
