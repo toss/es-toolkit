@@ -176,7 +176,7 @@ export function filter<T>(
 
   switch (typeof predicate) {
     case 'function': {
-      if (!isArray(source)) {
+      if (!Array.isArray(source)) {
         const result: T[] = [];
         const keys = Object.keys(source) as Array<keyof T>;
 
