@@ -37,6 +37,7 @@ for (const includeString of includeStrings) {
         input: resolve(benchmarkDir, file),
         plugins: [
           tsPlugin({
+            tsconfig: resolve(process.cwd(), 'tsconfig.build.json'),
             compilerOptions: {
               sourceMap: false,
               inlineSources: false,

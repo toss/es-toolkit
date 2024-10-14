@@ -1,4 +1,4 @@
-import { every as everyEsToolkit } from 'es-toolkit';
+import { every as everyEsToolkit } from 'es-toolkit/compat';
 import { every as everyLodash } from 'lodash';
 import { bench, describe } from '../bench';
 
