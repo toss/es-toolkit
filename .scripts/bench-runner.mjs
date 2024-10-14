@@ -14,8 +14,7 @@ if (existsSync(dirPath)) {
   rmSync(dirPath, { recursive: true, force: true });
 }
 
-const { output } = await time('Build', async () => {
-  // Build the es-toolkit library
+await time('Build es-toolkit', async () => {
   const libOption = libBuildOptions({
     format: 'esm',
     extension: 'mjs',
@@ -25,7 +24,10 @@ const { output } = await time('Build', async () => {
   });
   const toolkitBundle = await rollup({ ...libOption, logLevel: 'silent' });
   await toolkitBundle.write(libOption.output);
+  await toolkitBundle.close();
+});
 
+const output = await time('Build benchmark', async () => {
   // Build the benchmark file
   const benchBundle = await rollup({
     input: 'benchmarks/performance/bench.ts',
@@ -43,19 +45,18 @@ const { output } = await time('Build', async () => {
           declaration: false,
         },
       }),
-      resolvePlugin({
-        resolveOnly: ['lodash-es', 'tinybench'],
-      }),
+      resolvePlugin(),
     ],
     logLevel: 'silent',
   });
-
-  return await benchBundle.write({
+  const { output } = await benchBundle.write({
     format: 'esm',
     dir: OUTPUT_DIR,
     entryFileNames: '[name].mjs',
     generatedCode: 'es2015',
   });
+  await benchBundle.close();
+  return output;
 });
 
 // Run the benchmark
