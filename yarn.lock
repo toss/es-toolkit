@@ -2068,15 +2068,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-alias@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "@rollup/plugin-alias@npm:5.1.1"
+"@rollup/plugin-commonjs@npm:^28.0.0":
+  version: 28.0.0
+  resolution: "@rollup/plugin-commonjs@npm:28.0.0"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.0.1"
+    commondir: "npm:^1.0.1"
+    estree-walker: "npm:^2.0.2"
+    fdir: "npm:^6.1.1"
+    is-reference: "npm:1.2.1"
+    magic-string: "npm:^0.30.3"
+    picomatch: "npm:^2.3.1"
   peerDependencies:
-    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    rollup: ^2.68.0||^3.0.0||^4.0.0
   peerDependenciesMeta:
     rollup:
       optional: true
-  checksum: 10c0/00592400563b65689631e820bd72ff440f5cd21021bbd2f21b8558582ab58fd109067da77000091e40fcb8c20cabcd3a09b239a30e012bb47f6bc1a15b68ca59
+  checksum: 10c0/2dd5e56bb61b097697965e48f7bcccab2c6a453a783d1a0c6a599c1bdf9bb07ce8952b9ba88ae190a07c8819f774d72173a633f9f4a914727f2fd28f670fd649
   languageName: node
   linkType: hard
 
@@ -4569,7 +4577,7 @@ __metadata:
     "@changesets/changelog-github": "npm:^0.5.0"
     "@changesets/cli": "npm:^2.27.1"
     "@eslint/js": "npm:^9.9.0"
-    "@rollup/plugin-alias": "npm:^5.1.1"
+    "@rollup/plugin-commonjs": "npm:^28.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.3.0"
     "@rollup/plugin-terser": "npm:^0.4.4"
     "@rollup/plugin-typescript": "npm:^12.1.0"
@@ -5249,6 +5257,18 @@ __metadata:
   dependencies:
     reusify: "npm:^1.0.4"
   checksum: 10c0/1095f16cea45fb3beff558bb3afa74ca7a9250f5a670b65db7ed585f92b4b48381445cd328b3d87323da81e43232b5d5978a8201bde84e0cd514310f1ea6da34
+  languageName: node
+  linkType: hard
+
+"fdir@npm:^6.1.1":
+  version: 6.4.0
+  resolution: "fdir@npm:6.4.0"
+  peerDependencies:
+    picomatch: ^3 || ^4
+  peerDependenciesMeta:
+    picomatch:
+      optional: true
+  checksum: 10c0/9a03efa1335d78ea386b701799b08ad9e7e8da85d88567dc162cd28dd8e9486e8c269b3e95bfeb21dd6a5b14ebf69d230eb6e18f49d33fbda3cd97432f648c48
   languageName: node
   linkType: hard
 
@@ -6184,6 +6204,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-reference@npm:1.2.1":
+  version: 1.2.1
+  resolution: "is-reference@npm:1.2.1"
+  dependencies:
+    "@types/estree": "npm:*"
+  checksum: 10c0/7dc819fc8de7790264a0a5d531164f9f5b9ef5aa1cd05f35322d14db39c8a2ec78fd5d4bf57f9789f3ddd2b3abeea7728432b759636157a42db12a9e8c3b549b
+  languageName: node
+  linkType: hard
+
 "is-regex@npm:^1.1.4":
   version: 1.1.4
   resolution: "is-regex@npm:1.1.4"
@@ -6762,12 +6791,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.10, magic-string@npm:^0.30.11":
-  version: 0.30.11
-  resolution: "magic-string@npm:0.30.11"
+"magic-string@npm:^0.30.10, magic-string@npm:^0.30.11, magic-string@npm:^0.30.3":
+  version: 0.30.12
+  resolution: "magic-string@npm:0.30.12"
   dependencies:
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
-  checksum: 10c0/b9eb370773d0bd90ca11a848753409d8e5309b1ad56d2a1aa49d6649da710a6d2fe7237ad1a643c5a5d3800de2b9946ed9690acdfc00e6cc1aeafff3ab1752c4
+  checksum: 10c0/469f457d18af37dfcca8617086ea8a65bcd8b60ba8a1182cb024ce43e470ace3c9d1cb6bee58d3b311768fb16bc27bd50bdeebcaa63dadd0fd46cac4d2e11d5f
   languageName: node
   linkType: hard
 
