@@ -44,6 +44,21 @@ console.log(clonedNestedObj.d === nestedObj.d); // false
 console.log(clonedNestedObj.d[2] === nestedObj.d[2]); // false
 ```
 
+### Read-only properties
+
+When you clone an object that has read-only properties defined by getters, the values produced by those getters will be included in the new copied object.
+
+```tsx
+const source = {
+  get value() {
+    return 3;
+  },
+};
+
+const cloned = cloneDeep(source);
+// cloned is now { value: 3 }
+```
+
 ## Demo
 
 ::: sandpack

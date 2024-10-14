@@ -44,6 +44,21 @@ console.log(clonedNestedObj.d === nestedObj.d); // false
 console.log(clonedNestedObj.d[2] === nestedObj.d[2]); // false
 ```
 
+### 読み取り専用プロパティ
+
+getterとして定義された読み取り専用プロパティを持つオブジェクトを深くコピーすると、新しくコピーされたオブジェクトはgetterの返す値を持ちます。
+
+```tsx
+const source = {
+  get value() {
+    return 3;
+  },
+};
+
+const cloned = cloneDeep(source);
+// cloned is now { value: 3 }
+```
+
 ## デモ
 
 ::: sandpack

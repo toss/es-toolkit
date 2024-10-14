@@ -347,4 +347,32 @@ describe('cloneDeep', () => {
     expect(cloned).not.toBe(buffer);
     expect(cloned).toEqual(buffer);
   });
+
+  it('should clone read-only properties', () => {
+    const object: any = {};
+
+    Object.defineProperties(object, {
+      first: {
+        enumerable: true,
+        writable: true,
+        value: 1,
+      },
+      second: {
+        enumerable: true,
+        get() {
+          return 2;
+        },
+      },
+    });
+
+    object.third = 3;
+
+    const cloned = cloneDeep(object);
+    expect(cloned).not.toBe(object);
+    expect(cloned).toEqual({
+      first: 1,
+      second: 2,
+      third: 3,
+    });
+  });
 });
