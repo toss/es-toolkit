@@ -201,8 +201,9 @@ export function copyProperties(target: any, source: any, stack?: Map<any, any>):
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
+    const descriptor = Object.getOwnPropertyDescriptor(target, key);
 
-    if (Object.getOwnPropertyDescriptor(source, key)?.writable !== false) {
+    if (descriptor == null || descriptor.writable) {
       target[key] = cloneDeepImpl(source[key], stack);
     }
   }
