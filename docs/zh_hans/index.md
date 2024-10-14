@@ -28,6 +28,8 @@ features:
     details: es-toolkit为所有函数提供简单而强大的类型支持。
   - title: 经过实战验证
     details: es-toolkit具有100%的测试覆盖率，确保最大的健壮性。
+  - title: 广泛采用
+    details: es-toolkit被多个流行的开源库广泛采用，例如Storybook和ink。
   - title: 全面的运行时支持
     details: es-toolkit支持包括Node.js、Deno、Bun和浏览器在内的所有JavaScript环境。
 ---

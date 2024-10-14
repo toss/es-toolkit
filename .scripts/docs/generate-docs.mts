@@ -120,7 +120,7 @@ function toDocumentationItems(docs: DocNode[]): DocumentationItems {
     })
     .map(([name, entries]) => {
       const sourcePath = fileURLToPath(entries[0].location.filename);
-      const docPath: string = path.relative(basePath, sourcePath).replace(/.ts$/g, '.md');
+      const docPath: string = path.join(path.dirname(path.relative(basePath, sourcePath)), `${name}.md`);
 
       return {
         docPath: docPath,
