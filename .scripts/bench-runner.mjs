@@ -7,7 +7,10 @@ import resolvePlugin from '@rollup/plugin-node-resolve';
 import tsPlugin from '@rollup/plugin-typescript';
 
 const includeStrings = process.argv.slice(2);
-assert(includeStrings.length > 0, 'Please provide at least one include string. (e.g. `yarn bench chunk`)');
+
+if (includeStrings.length === 0) {
+  includeStrings.push('.');
+}
 
 const OUTPUT_DIR = '.bench-bundle';
 const dirPath = resolve(process.cwd(), OUTPUT_DIR);
@@ -80,11 +83,4 @@ async function time(title, fn) {
   console.log(`${title}: ${((end - start) / 1000).toFixed(2)}s`);
 
   return result;
-}
-
-function assert(condition, message) {
-  if (!condition) {
-    console.error(message);
-    process.exit(1);
-  }
 }
