@@ -181,7 +181,7 @@
     "prepack": "yarn build",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
     "test": "vitest --coverage --typecheck",
-    "bench": "vitest bench",
+    "bench": "node .scripts/bench-runner.mjs",
     "lint": "eslint --config eslint.config.mjs",
     "format": "prettier --write .",
     "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0"
