@@ -28,7 +28,23 @@ function first<T>(arr: ArrayLike<T> | undefined | null): T | undefined;
 ## 例
 
 ```typescript
-const emptyArr: number[] = [];
-const noElement = head(emptyArr);
-// noElement will be undefined
+const arr1 = [1, 2, 3];
+const firstElement1 = first(arr1);
+// firstElement1は1です。
+
+const arr2: string[] = [];
+const firstElement2 = first(arr2);
+// firstElement2はundefinedです。
+
+const arr3 = ['a', 'b', 'c'];
+const firstElement3 = first(arr3);
+// firstElement3は'a'です。
+
+const arr4 = [true, false, true];
+const firstElement4 = first(arr4);
+// firstElement4はtrueです。
+
+const arr5: [number, string, boolean] = [1, 'a', true];
+const firstElement5 = first(arr5);
+// firstElement5は1です。
 ```
