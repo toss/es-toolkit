@@ -13,13 +13,13 @@
 ## インターフェース
 
 ```typescript
-function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
 ```
 
 ### パラメータ
 
-- `keys` (`P[]`): プロパティパスを含む配列。
-- `values` (`V[]`): 対応する値を含む配列。
+- `keys` (`ArrayLike<P | P[]>`): プロパティパスを含む配列。
+- `values` (`ArrayLike<V>`): 対応する値を含む配列。
 
 ### 戻り値
 
