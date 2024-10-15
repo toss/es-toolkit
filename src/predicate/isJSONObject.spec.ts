@@ -22,4 +22,8 @@ describe('isJSONObject', () => {
     expect(isJSONObject({ symbolProperty: Symbol('test') })).toBe(false);
     expect(isJSONObject({ nested: { a: function* () {} } })).toBe(false);
   });
+
+  it('isJSONObject should return false when key is not a string', () => {
+    expect(isJSONObject({ [Symbol('a')]: 'a' })).toBe(false);
+  });
 });
