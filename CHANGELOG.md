@@ -3,6 +3,7 @@
 ## Version v1.25.1
 
 Released on October 15th, 2024.
+
 - Resolved an issue in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) that incorrectly copied properties from the `target` when they were read-only.
 - Updated [every](https://es-toolkit.slash.page/reference/compat/array/every.html), [filter](https://es-toolkit.slash.page/reference/compat/array/filter.html), [find](https://es-toolkit.slash.page/reference/compat/array/find.html), [findIndex](https://es-toolkit.slash.page/reference/compat/array/findIndex.html), [findLastIndex](https://es-toolkit.slash.page/reference/compat/array/findLastIndex.html), [indexOf](https://es-toolkit.slash.page/reference/compat/array/indexOf.html), and [join](https://es-toolkit.slash.page/reference/compat/array/join.html) to now accept array-like objects and a `fromIndex` parameter, making them compatible with lodash.
 
