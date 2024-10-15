@@ -113,12 +113,11 @@ export function template(
   let isEvaluated = false;
   let source = `__p += ''`;
 
-  string.replace(delimitersRegExp, (match, escapeValue, interpolateValue, esTemplateValue, evaluateValue, offset) => {
-    source += ` + '${string.slice(lastIndex, offset).replace(unEscapedRegExp, escapeString)}'`;
+  for (const match of string.matchAll(delimitersRegExp)) {
+    const [fullMatch, escapeValue, interpolateValue, esTemplateValue, evaluateValue] = match;
+    const { index } = match;
 
-    if (!interpolateValue) {
-      interpolateValue = esTemplateValue;
-    }
+    source += ` + '${string.slice(lastIndex, index).replace(unEscapedRegExp, escapeString)}'`;
 
     if (escapeValue) {
       source += ` + _.escape(${escapeValue})`;
@@ -126,6 +125,8 @@ export function template(
 
     if (interpolateValue) {
       source += ` + (${interpolateValue} ?? '')`;
+    } else if (esTemplateValue) {
+      source += ` + (${esTemplateValue} ?? '')`;
     }
 
     if (evaluateValue) {
@@ -133,10 +134,8 @@ export function template(
       isEvaluated = true;
     }
 
-    lastIndex = offset + match.length;
-
-    return match;
-  });
+    lastIndex = index + fullMatch.length;
+  }
 
   const imports = defaults({ ...options.imports }, templateSettings.imports);
   const importsKeys = Object.keys(imports);
