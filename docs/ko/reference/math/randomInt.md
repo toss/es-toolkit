@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function random(maximum: number): number;
+function randomInt(maximum: number): number;
 function randomInt(minimum: number, maximum: number): number;
 ```
 

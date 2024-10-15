@@ -1,8 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { filter } from './filter';
+import { args } from '../_internal/args';
 
 function isEven(n: number) {
   return n % 2 === 0;
+}
+
+function isEven2(n: string) {
+  return parseInt(n) % 2 === 0;
 }
 
 describe('filter', () => {
@@ -118,5 +123,23 @@ describe('filter', () => {
       { id: 1, name: 'Alice' },
       { id: 2, name: 'Bob' },
     ]);
+  });
+
+  it('should return `[]` when provided `null` or `undefined`', () => {
+    expect(filter(null as any, isEven)).toEqual([]);
+    expect(filter(undefined as any, isEven)).toEqual([]);
+  });
+
+  it('should return `[]` when provided none array-like object', () => {
+    expect(filter(1 as any, isEven)).toEqual([]);
+    expect(filter('' as any, isEven)).toEqual([]);
+    expect(filter(true as any, isEven)).toEqual([]);
+    expect(filter(Symbol() as any, isEven)).toEqual([]);
+  });
+
+  it('should support array-like objects', () => {
+    expect(filter({ 0: 1, 1: 2, 2: 3, length: 3 }, isEven)).toEqual([2]);
+    expect(filter('123', isEven2)).toEqual(['2']);
+    expect(filter(args, isEven)).toEqual([2]);
   });
 });

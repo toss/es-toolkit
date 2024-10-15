@@ -36,6 +36,15 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
 
 - `arr` (`T[]`) または `object` (`T`): 繰り返し処理する配列やオブジェクト。
 
+::: info `arr` は `ArrayLike<T>`、`null` または `undefined` になります
+
+lodash と完全に互換性を保つため、`filter` 関数は `arr` を次のように処理します。
+
+- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
+- `arr` が `null` または `undefined` の場合、空の配列として扱います。
+
+:::
+
 - `doesMatch`:
 
   - 配列の場合:

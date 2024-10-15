@@ -32,6 +32,15 @@ function findLastIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): numb
 
 - `arr` (`T[]`): The array to search through.
 
+::: info `arr` can be `ArrayLike<T>` or `null` or `undefined`
+
+To ensure full compatibility with lodash, the `findLastIndex` function processes `arr` as follows:
+
+- If `arr` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
+- If `arr` is `null` or `undefined`, it is treated as an empty array.
+
+:::
+
 - `doesMatch`:
 
   - **Predicate function** (`(item: T, index: number, arr: readonly T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.

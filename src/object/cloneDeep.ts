@@ -1,3 +1,4 @@
+import { getSymbols } from '../compat/_internal/getSymbols.ts';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
@@ -196,13 +197,13 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
 
 // eslint-disable-next-line
 export function copyProperties(target: any, source: any, stack?: Map<any, any>): void {
-  const keys = Object.keys(source);
+  const keys = [...Object.keys(source), ...getSymbols(source)];
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-    const descriptor = Object.getOwnPropertyDescriptor(source, key);
+    const descriptor = Object.getOwnPropertyDescriptor(target, key);
 
-    if (descriptor?.writable || descriptor?.set) {
+    if (descriptor == null || descriptor.writable) {
       target[key] = cloneDeepImpl(source[key], stack);
     }
   }

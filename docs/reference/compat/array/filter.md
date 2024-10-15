@@ -36,6 +36,15 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
 
 - `arr` (`T[]`) or `object` (`T`): The array or object to iterate over.
 
+::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
+
+To ensure full compatibility with lodash, the `filter` function handles `arr` in this way:
+
+- If `arr` is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
+- If `arr` is `null` or `undefined`, it will be treated as an empty array.
+
+:::
+
 - `doesMatch`:
 
   - For the first `filter` overload with arrays:

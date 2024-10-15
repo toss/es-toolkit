@@ -1,8 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { take } from './take.ts';
+import { args } from '../_internal/args';
 
 describe('take', () => {
   const array = [1, 2, 3];
+
+  it('should take the first element when `n` is not provided', () => {
+    expect(take(array)).toEqual([1]);
+  });
 
   it('should take the first two elements', () => {
     expect(take(array, 2)).toEqual([1, 2]);
@@ -18,5 +23,22 @@ describe('take', () => {
     [3, 4, 2 ** 32, Infinity].forEach(n => {
       expect(take(array, n)).toEqual(array);
     });
+  });
+
+  it('should return an empty array when the collection is null or undefined', () => {
+    expect(take(null)).toEqual([]);
+  });
+
+  it('should return an empty array when the collection is not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(take(1)).toEqual([]);
+    // @ts-expect-error - invalid argument
+    expect(take(true)).toEqual([]);
+  });
+
+  it('should support array-like', () => {
+    expect(take({ 0: 1, 1: 2, 2: 3, length: 3 }, 2)).toEqual([1, 2]);
+    expect(take('123', 2)).toEqual(['1', '2']);
+    expect(take(args, 2)).toEqual([1, 2]);
   });
 });

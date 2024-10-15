@@ -26,6 +26,8 @@ features:
     details: es-toolkit fully leverages modern JavaScript APIs for straightforward and error-free implementation.
   - title: Robust types
     details: es-toolkit offers simple yet robust types for all functions.
+  - title: Widely adopted
+    details: es-toolkit is widely adopted by popular open-source libraries such as Storybook and ink.
   - title: Battle-tested
     details: es-toolkit has 100% test coverage, ensuring maximum robustness.
   - title: Comprehensive runtime support

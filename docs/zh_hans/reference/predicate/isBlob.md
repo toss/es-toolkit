@@ -24,7 +24,9 @@ function isBlob(x: unknown): x is Blob;
 ```typescript
 const value1 = new Blob();
 const value2 = {};
+const value3 = new File(['content'], 'example.txt', { type: 'text/plain' });
 
 console.log(isBlob(value1)); // true
 console.log(isBlob(value2)); // false
+console.log(isBlob(value3)); // true
 ```

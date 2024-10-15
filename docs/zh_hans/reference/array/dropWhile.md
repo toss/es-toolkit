@@ -41,10 +41,10 @@ const result = dropWhile(array, x => x < 3);
 ### 签名
 
 ```typescript
-function dropWhile<T>(arr: T[], canContinueDropping: (item: T, index: number, arr: T[]) => unknown): T[];
-function dropWhile<T>(arr: T[], objectToDrop: Partial<T>): T[];
-function dropWhile<T>(arr: T[], propertyToDrop: [keyof T, unknown]): T[];
-function dropWhile<T>(arr: readonly T[], propertyToDrop: string): T[];
+function dropWhile<T>(arr: ArrayLike<T> | null | undefined, canContinueDropping: (item: T, index: number, arr: T[]) => unknown): T[];
+function dropWhile<T>(arr: ArrayLike<T> | null | undefined objectToDrop: Partial<T>): T[];
+function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: [keyof T, unknown]): T[];
+function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: string): T[];
 ```
 
 ### 示例

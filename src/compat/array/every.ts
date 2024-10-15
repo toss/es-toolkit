@@ -7,7 +7,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * Checks if all elements in an array are truthy.
  *
  * @template T
- * @param {T[]} arr - The array to check through.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to check through.
  * @returns {boolean} - `true` if all elements are truthy, or `false` if at least one element is falsy.
  *
  * @example
@@ -19,13 +19,13 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * const resultWithFalsy = every(itemsWithFalsy);
  * console.log(resultWithFalsy); // false
  */
-export function every<T>(arr: readonly T[]): boolean;
+export function every<T>(arr: ArrayLike<T> | null | undefined): boolean;
 
 /**
  * Checks if every item in an array matches the given predicate function.
  *
  * @template T
- * @param {T[]} arr - The array to check through.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to check through.
  * @param {(item: T, index: number, arr: T[]) => unknown} doesMatch - A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
  * @returns {boolean} - `true` if every item matches the predicate, or `false` if at least one item does not match.
  *
@@ -35,13 +35,16 @@ export function every<T>(arr: readonly T[]): boolean;
  * const result = every(items, (item) => item > 0);
  * console.log(result); // true
  */
-export function every<T>(arr: readonly T[], doesMatch: (item: T, index: number, arr: readonly T[]) => unknown): boolean;
+export function every<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown
+): boolean;
 
 /**
  * Checks if every item in an array matches the given partial object.
  *
  * @template T
- * @param {T[]} arr - The array to check through.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to check through.
  * @param {Partial<T>} doesMatch - A partial object that specifies the properties to match.
  * @returns {boolean} - `true` if every item matches the partial object, or `false` if at least one item does not match.
  *
@@ -51,13 +54,13 @@ export function every<T>(arr: readonly T[], doesMatch: (item: T, index: number, 
  * const result = every(items, { name: 'Bob' });
  * console.log(result); // false
  */
-export function every<T>(arr: readonly T[], doesMatch: Partial<T>): boolean;
+export function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): boolean;
 
 /**
  * Checks if every item in an array matches a property with a specific value.
  *
  * @template T
- * @param {T[]} arr - The array to check through.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to check through.
  * @param {[keyof T, unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
  * @returns {boolean} - `true` if every item has the specified property value, or `false` if at least one item does not match.
  *
@@ -67,13 +70,13 @@ export function every<T>(arr: readonly T[], doesMatch: Partial<T>): boolean;
  * const result = every(items, ['name', 'Alice']);
  * console.log(result); // false
  */
-export function every<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknown]): boolean;
+export function every<T>(arr: ArrayLike<T> | null | undefined, doesMatchProperty: [keyof T, unknown]): boolean;
 
 /**
  * Checks if every item in an array has a specific property, where the property name is provided as a string.
  *
  * @template T
- * @param {T[]} arr - The array to check through.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to check through.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {boolean} - `true` if every item has the specified property, or `false` if at least one item does not match.
  *
@@ -83,13 +86,13 @@ export function every<T>(arr: readonly T[], doesMatchProperty: [keyof T, unknown
  * const result = every(items, 'name');
  * console.log(result); // true
  */
-export function every<T>(arr: readonly T[], propertyToCheck: string): boolean;
+export function every<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: string): boolean;
 
 /**
  * Checks if every item in an object matches the given predicate function.
  *
  * @template T
- * @param {T} object - The object to check through.
+ * @param {T | null | undefined} object - The object to check through.
  * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} doesMatch - A function that takes an value, its key, and the object, and returns a truthy value if the item matches the criteria.
  * @returns {boolean} - `true` if every property value matches the predicate, or `false` if at least one does not match.
  *
@@ -100,7 +103,7 @@ export function every<T>(arr: readonly T[], propertyToCheck: string): boolean;
  * console.log(result); // true
  */
 export function every<T extends Record<string, unknown>>(
-  object: T,
+  object: T | null | undefined,
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): boolean;
 
@@ -108,7 +111,7 @@ export function every<T extends Record<string, unknown>>(
  * Checks if every item in an object matches the given partial value.
  *
  * @template T
- * @param {T} object - The object to check through.
+ * @param {T | null | undefined} object - The object to check through.
  * @param {Partial<T[keyof T]>} doesMatch - A partial value to match against the values of the object.
  * @returns {boolean} - `true` if every property value matches the partial value, or `false` if at least one does not match.
  *
@@ -118,13 +121,16 @@ export function every<T extends Record<string, unknown>>(
  * const result = every(obj, { name: 'Bob' });
  * console.log(result); // false
  */
-export function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
+export function every<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatch: Partial<T[keyof T]>
+): boolean;
 
 /**
  * Checks if every item in an object matches a property with a specific value.
  *
  * @template T
- * @param {T[]} object - The object to check through.
+ * @param {T | null | undefined} object - The object to check through.
  * @param {[keyof T, unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
  * @returns {boolean} - `true` if every item has the specified property value, or `false` if at least one item does not match.
  *
@@ -134,13 +140,16 @@ export function every<T extends Record<string, unknown>>(object: T, doesMatch: P
  * const result = every(obj, ['name', 'Alice']);
  * console.log(result); // false
  */
-export function every<T extends Record<string, unknown>>(object: T, doesMatchProperty: [keyof T, unknown]): boolean;
+export function every<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  doesMatchProperty: [keyof T, unknown]
+): boolean;
 
 /**
  * Checks if every item in an object has a specific property, where the property name is provided as a string.
  *
  * @template T
- * @param {T} object - The object to check through.
+ * @param {T | null | undefined} object - The object to check through.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {boolean} - `true` if every property value has the specified property, or `false` if at least one does not match.
  *
@@ -150,14 +159,17 @@ export function every<T extends Record<string, unknown>>(object: T, doesMatchPro
  * const result = every(obj, 'name');
  * console.log(result); // true
  */
-export function every<T extends Record<string, unknown>>(object: T, propertyToCheck: string): boolean;
+export function every<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  propertyToCheck: string
+): boolean;
 
 /**
  * Checks if every item in an object has a specific property, where the property name is provided as a string.
  *
  * @template T
  * @param {T extends Record<string, unknown> ? T : never} object - The object to check through.
- * @param {readonly T[] | Record<any, any>} source - The source array or object to check through.
+ * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to check through.
  * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {boolean} - `true` if every property value has the specified property, or `false` if at least one does not match.
@@ -169,18 +181,14 @@ export function every<T extends Record<string, unknown>>(object: T, propertyToCh
  * console.log(result); // true
  */
 export function every<T>(
-  source: readonly T[] | Record<any, any>,
+  source: ArrayLike<T> | Record<any, any> | null | undefined,
   doesMatch?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string
 ): boolean {
   if (!source) {
-    source = [];
+    return true;
   }
 
-  let values = source;
-
-  if (!Array.isArray(source)) {
-    values = Object.values(source);
-  }
+  const values = Array.isArray(source) ? source : Object.values(source);
 
   if (!doesMatch) {
     doesMatch = identity;

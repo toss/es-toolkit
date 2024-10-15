@@ -10,11 +10,11 @@ function cloneDeep<T>(obj: T): T;
 
 ### 파라미터
 
-- `obj` (`T`): 복사할 객체예요.
+- `obj` (`T`): 복사할 객체.
 
 ### 반환 값
 
-(`T`): 주어진 객체의 깊은 복사본이에요.
+(`T`): 주어진 객체의 깊은 복사본.
 
 ## 예시
 
@@ -42,6 +42,21 @@ console.log(clonedNestedObj === nestedObj); // false
 console.log(clonedNestedObj.a === nestedObj.a); // false
 console.log(clonedNestedObj.d === nestedObj.d); // false
 console.log(clonedNestedObj.d[2] === nestedObj.d[2]); // false
+```
+
+### 읽기 전용 프로퍼티
+
+접근자(getter)로 정의된 읽기 전용 프로퍼티가 있는 객체를 깊은 복사하면, 새로 복사된 객체는 접근자의 반환 값을 값으로 가져요.
+
+```tsx
+const source = {
+  get value() {
+    return 3;
+  },
+};
+
+const cloned = cloneDeep(source);
+// cloned is now { value: 3 }
 ```
 
 ## 데모

@@ -15,12 +15,22 @@
 ## 签名
 
 ```typescript
-function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?: number): number;
+function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 ```
 
 ### 参数
 
-- `array` (`T[] | null | undefined`): 要搜索的数组。
+- `array` (`T[]`): 要搜索的数组。
+
+::: info `array` 可以是 `ArrayLike<T>` 或 `null` 或 `undefined` 。
+
+为了确保与 lodash 的完全兼容性，`indexOf` 函数会按照以下方式处理 `array`：
+
+- 如果 `array` 是 `ArrayLike<T>`，它会使用 `Array.from(...)` 将其转换为数组。
+- 如果 `array` 是 `null` 或 `undefined`，它会被视为一个空数组。
+
+:::
+
 - `searchElement` (`T`): 要搜索的值。
 - `fromIndex` (`number`, 可选): 开始搜索的索引。
 

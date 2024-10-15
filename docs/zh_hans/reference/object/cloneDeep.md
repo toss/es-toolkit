@@ -44,6 +44,21 @@ console.log(clonedNestedObj.d === nestedObj.d); // false
 console.log(clonedNestedObj.d[2] === nestedObj.d[2]); // false
 ```
 
+### 读取属性
+
+当你克隆一个具有由 getter 定义的只读属性的对象时，这些 getter 产生的值将包含在新复制的对象中。
+
+```tsx
+const source = {
+  get value() {
+    return 3;
+  },
+};
+
+const cloned = cloneDeep(source);
+// cloned is now { value: 3 }
+```
+
 ## 演示
 
 ::: sandpack

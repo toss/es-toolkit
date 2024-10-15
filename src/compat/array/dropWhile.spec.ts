@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { dropWhile } from './dropWhile';
+import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
 
 /**
@@ -43,5 +44,23 @@ describe('dropWhile', () => {
 
   it('should work with `_.property` shorthands', function () {
     expect(dropWhile(objects, 'b')).toEqual(objects.slice(2));
+  });
+
+  it('should return an empty array when the collection is null or undefined', () => {
+    expect(dropWhile(null, () => true)).toEqual([]);
+    expect(dropWhile(undefined, () => true)).toEqual([]);
+  });
+
+  it('should return an empty array when the collection is not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(dropWhile(1, () => true)).toEqual([]);
+    // @ts-expect-error - invalid argument
+    expect(dropWhile(true, () => true)).toEqual([]);
+  });
+
+  it('should support array-like', () => {
+    expect(dropWhile({ 0: 1, 1: 2, 2: 3, length: 3 }, n => n < 3)).toEqual([3]);
+    expect(dropWhile('123', n => Number(n) < 3)).toEqual(['3']);
+    expect(dropWhile(args, n => n < 3)).toEqual([3]);
   });
 });
