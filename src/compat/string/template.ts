@@ -121,7 +121,7 @@ export function template(
     }
 
     if (escapeValue) {
-      source += ` + _.escape(_.toString(${escapeValue}))`;
+      source += ` + _.escape(${escapeValue})`;
     }
 
     if (interpolateValue) {
