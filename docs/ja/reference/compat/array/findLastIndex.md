@@ -32,6 +32,15 @@ function findLastIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): numb
 
 - `arr` (`T[]`): 検索する配列。
 
+::: info `arr` は `ArrayLike<T>` であるか、`null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`findLastIndex` 関数は `arr` を次のように処理します。
+
+- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
+- `arr` が `null` または `undefined` の場合、空の配列と見なされます。
+
+:::
+
 - `doesMatch`:
 
   - **検査関数** (`(item: T, index: number, arr: T[]) => unknown`): 探している要素かどうかを返す関数。

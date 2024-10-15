@@ -37,6 +37,15 @@ function filter<T extends Record<string, unknown>>(object: T, doesMatch: string)
 
 - `arr` (`T[]`) 或 `object` (`T`): 要迭代的数组或对象。
 
+::: info `arr` 可以是 `ArrayLike<T>`、`null` 或 `undefined`
+
+为了确保与 lodash 的完全兼容性，`filter` 函数会按照以下方式处理 `arr`：
+
+- 如果 `arr` 是 `ArrayLike<T>`，它将使用 `Array.from(...)` 转换为数组。
+- 如果 `arr` 是 `null` 或 `undefined`，它将被视为一个空数组。
+
+:::
+
 - `doesMatch`:
 
   - 对于数组的第一个 `filter` 重载：

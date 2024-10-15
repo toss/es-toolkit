@@ -18,15 +18,24 @@
 ## インターフェース
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): number;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>): number;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown]): number;
-function findIndex<T>(arr: T[], doesMatch: string): number;
+function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
 ```
 
 ### パラメータ
 
 - `arr` (`T[]`): 検索する配列。
+
+::: info `arr` は `ArrayLike<T>` であるか、`null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`findIndex` 関数は `arr` を次のように処理します。
+
+- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
+- `arr` が `null` または `undefined` の場合、空の配列と見なされます。
+
+:::
 
 - `doesMatch`:
 
@@ -34,6 +43,8 @@ function findIndex<T>(arr: T[], doesMatch: string): number;
   - **部分オブジェクト** (`Partial<T>`): 一致させるプロパティと値を指定した部分オブジェクト。
   - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
   - **プロパティ名** (`string`): 真と評価される値を持っているか確認するプロパティ名。
+
+- `fromIndex` (`number`): 検索を開始するインデックス。デフォルトは `0`。
 
 ### 戻り値
 

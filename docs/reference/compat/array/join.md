@@ -11,12 +11,22 @@ Joins elements of an array into a string.
 ## Signature
 
 ```typescript
-function join<T>(array: T[], separator: string): string;
+function join<T>(array: T[], separator?: string): string;
 ```
 
 ### Parameters
 
 - `array` (`T[]`) - The array to join.
+
+::: info `array` can be `ArrayLike<T>` or `null` or `undefined`
+
+To ensure full compatibility with lodash, the `join` function processes `array` as follows:
+
+- If `array` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
+- If `array` is `null` or `undefined`, it is treated as an empty array.
+
+:::
+
 - `separator` (`string`) - The separator used to join the elements. Defaults to `,`.
 
 ### Returns

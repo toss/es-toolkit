@@ -36,6 +36,23 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: string): 
 
 - `arr` (`T[]`) or `object` (`T`): The array or object to search through.
 
+::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
+
+To ensure full compatibility with lodash, the `find` function handles `arr` in this way:
+
+- If `arr` is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
+- If `arr` is `null` or `undefined`, it will be treated as an empty array.
+
+:::
+
+::: info `object` can be `null` or `undefined`
+
+To ensure full compatibility with lodash, the `find` function handles `object` in this way:
+
+- If `object` is `null` or `undefined`, it will be converted into an empty object.
+
+:::
+
 - `doesMatch`:
 
   - For the first `find` overload with arrays:
