@@ -1,4 +1,4 @@
-import { templateSettings } from './templateSettings.ts';
+import { escape } from './escape.ts';
 import { attempt } from '../function/attempt.ts';
 import { defaults } from '../object/defaults.ts';
 import { toString } from '../util/toString.ts';
@@ -24,6 +24,19 @@ const escapeMap = new Map([
 function escapeString(match: string): string {
   return `\\${escapeMap.get(match)}`;
 }
+
+export const templateSettings = {
+  escape: /<%-([\s\S]+?)%>/g,
+  evaluate: /<%([\s\S]+?)%>/g,
+  interpolate: /<%=([\s\S]+?)%>/g,
+  variable: '',
+  imports: {
+    _: {
+      escape,
+      template,
+    },
+  },
+};
 
 /**
  * Creates a compiled template function that can interpolate data properties in "interpolate" delimiters, evaluate JavaScript code in "evaluate" delimiters, and escape data properties in "escape" delimiters.

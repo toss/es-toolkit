@@ -152,8 +152,7 @@ export { startCase } from './string/startCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { upperCase } from './string/upperCase.ts';
 
-export { template } from './string/template.ts';
-export { templateSettings } from './string/templateSettings.ts';
+export { template, templateSettings } from './string/template.ts';
 export { trim } from './string/trim.ts';
 export { trimEnd } from './string/trimEnd.ts';
 export { trimStart } from './string/trimStart.ts';

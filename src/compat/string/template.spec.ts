@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { template } from './template';
-import { templateSettings } from './templateSettings';
+import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';
 import { stubFalse } from '../_internal/stubFalse';
 import { stubString } from '../_internal/stubString';
