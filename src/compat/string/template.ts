@@ -25,6 +25,7 @@ function escapeString(match: string): string {
   return `\\${escapeMap.get(match)}`;
 }
 
+// Only import the necessary functions for preventing circular dependencies.(lodash-es also does this)
 export const templateSettings = {
   escape: /<%-([\s\S]+?)%>/g,
   evaluate: /<%([\s\S]+?)%>/g,
