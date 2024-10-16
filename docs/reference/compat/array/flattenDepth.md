@@ -11,12 +11,22 @@ Flattens an array up to the specified depth.
 ## Signature
 
 ```typescript
-function flattenDepth<T, D extends number = 1>(value: T[] | object, depth: D): Array<FlatArray<T[], D>> | [];
+function flattenDepth<T, D extends number = 1>(value: T[], depth: D): Array<FlatArray<T[], D>> | [];
 ```
 
 ### Parameters
 
-- `value` (`T[] | object`): The value to flatten.
+- `value` (`T[]`): The value to flatten.
+
+::: info `value` can be `ArrayLike<T>`, `null`, or `undefined`
+
+To ensure full compatibility with lodash, the `flattenDepth` function handles `value` in this way:
+
+- If `value` is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
+- If `value` is `null` or `undefined`, it will be treated as an empty array.
+
+:::
+
 - `depth` (`D`): The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
 
 ### Returns

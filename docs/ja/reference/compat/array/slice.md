@@ -19,6 +19,16 @@ function slice<T>(array: T[], start?: number, end?: number): T[];
 ### パラメータ
 
 - `array` (`T[]`): 部分配列を作成する配列。
+
+::: info `array` は `ArrayLike<T>`、`null`、または `undefined` になります。
+
+lodash との完全な互換性を確保するため、`slice` 関数は `array` を次のように処理します。
+
+- `array` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換されます。
+- `array` が `null` または `undefined` の場合、空の配列として扱われます。
+
+:::
+
 - `start` (`number`): 開始位置。デフォルトは `0` です。
 - `end` (`number`): 終了位置。デフォルトは `array.length` です。
 

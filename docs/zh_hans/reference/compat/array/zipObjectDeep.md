@@ -14,13 +14,13 @@
 ## 签名
 
 ```typescript
-function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
 ```
 
 ### 参数
 
-- `keys` (`P[]`): 属性名称的数组。
-- `values` (`V[]`): 与属性名称对应的值的数组。
+- `keys` (`ArrayLike<P | P[]>`): 属性名称的数组。
+- `values` (`ArrayLike<V>`): 与属性名称对应的值的数组。
 
 ### 返回值
 

@@ -11,12 +11,22 @@
 ## 인터페이스
 
 ```typescript
-function flattenDepth<T, D extends number = 1>(value: T[] | object, depth: D): Array<FlatArray<T[], D>> | [];
+function flattenDepth<T, D extends number = 1>(value: T[], depth: D): Array<FlatArray<T[], D>> | [];
 ```
 
 ### 파라미터
 
-- `value` (`T[] | object`): 평평하게 할 값이에요.
+- `value` (`T[]`): 평평하게 할 값이에요.
+
+::: info `value`는 `ArrayLike<T>`, `null`, 또는 `undefined`가 될 수 있어요.
+
+lodash와 완전한 호환성을 보장하기 위해, `flattenDepth` 함수는 `value`를 다음과 같이 처리해요.
+
+- `value`가 `ArrayLike<T>`인 경우, `Array.from(...)`을 사용하여 배열로 변환돼요.
+- `value`가 `null` 또는 `undefined`인 경우, 빈 배열로 처리돼요.
+
+:::
+
 - `depth` (`D`): 중첩 배열 구조가 얼마나 깊게 평평해져야 하는지 지정하는 깊이 수준이에요. 기본값은 1이에요.
 
 ### 반환 값
