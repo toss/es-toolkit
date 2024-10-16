@@ -10,4 +10,8 @@ describe('differenceWith', () => {
 
     expect(differenceWith(array1, array2, (a, b) => a.id === b.id)).toEqual([{ id: 1 }, { id: 3 }]);
   });
+
+  it('should handle duplicate elements correctly', () => {
+    expect(differenceWith([1, 1, 2, 2, 3], [2], (a, b) => a === b)).toEqual([1, 1, 3]);
+  });
 });
