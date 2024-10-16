@@ -19,6 +19,16 @@ function slice<T>(array: T[], start?: number, end?: number): T[];
 ### 参数
 
 - `array` (`T[]`): 用于创建部分数组的数组。
+
+::: info `array` 可以是 `ArrayLike<T>`、`null` 或 `undefined`。
+
+为了确保与 lodash 的完全兼容性，`slice` 函数以以下方式处理 `array`：
+
+- 如果 `array` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
+- 如果 `array` 是 `null` 或 `undefined`，则会将其视为一个空数组。
+
+:::
+
 - `start` (`number`): 开始位置。默认值为 `0`。
 - `end` (`number`): 结束位置。默认值为 `array.length`。
 

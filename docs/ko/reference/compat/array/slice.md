@@ -19,6 +19,16 @@ function slice<T>(array: T[], start?: number, end?: number): T[];
 ### 파라미터
 
 - `array` (`T[]`): 부분 배열을 만들 배열.
+
+::: info `array`는 `ArrayLike<T>`, `null`, 또는 `undefined`가 될 수 있어요.
+
+lodash와 완전한 호환성을 보장하기 위해, `slice` 함수는 `array`를 다음과 같이 처리해요.
+
+- `array`가 `ArrayLike<T>`인 경우, `Array.from(...)`을 사용하여 배열로 변환돼요.
+- `array`가 `null` 또는 `undefined`인 경우, 빈 배열로 처리돼요.
+
+:::
+
 - `start` (`number`): 시작 위치. 기본값은 `0`이에요.
 - `end` (`number`): 끝 위치. 기본값은 `array.length`예요.
 

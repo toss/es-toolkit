@@ -37,4 +37,19 @@ describe('zipObject', () => {
   it('should support deep paths', () => {
     expect(zipObjectDeep(['a.b.c'], [1])).toEqual({ a: { b: { c: 1 } } });
   });
+
+  it('should return an empty object when given null or undefined `keys`', () => {
+    expect(zipObjectDeep(null as any, [1])).toEqual({});
+    expect(zipObjectDeep(undefined as any, [1])).toEqual({});
+  });
+
+  it('should support array-like keys', () => {
+    expect(zipObjectDeep({ 0: ['a'], length: 1 }, [1])).toEqual({ a: 1 });
+    expect(zipObjectDeep('12', [1, 2])).toEqual({ 1: 1, 2: 2 });
+  });
+
+  it('should support array-like values', () => {
+    expect(zipObjectDeep(['a'], { 0: 1, length: 1 })).toEqual({ a: 1 });
+    expect(zipObjectDeep(['a', 'b'], '12')).toEqual({ a: '1', b: '2' });
+  });
 });

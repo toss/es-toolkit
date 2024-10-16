@@ -11,12 +11,22 @@
 ## 签名
 
 ```typescript
-function flattenDepth<T, D extends number = 1>(value: T[] | object, depth: D): Array<FlatArray<T[], D>> | [];
+function flattenDepth<T, D extends number = 1>(value: T[], depth: D): Array<FlatArray<T[], D>> | [];
 ```
 
 ### 参数
 
-- `value` (`T[] | object`): 要展平的值。
+- `value` (`T[]`): 要展平的值。
+
+::: info `value` 可以是 `ArrayLike<T>`、`null` 或 `undefined`。
+
+为了确保与 lodash 的完全兼容性，`flattenDepth` 函数以以下方式处理 `value`：
+
+- 如果 `value` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
+- 如果 `value` 是 `null` 或 `undefined`，则会将其视为一个空数组。
+
+:::
+
 - `depth` (`D`): 指定嵌套数组结构展平深度的级别。默认值为1。
 
 ### 返回值

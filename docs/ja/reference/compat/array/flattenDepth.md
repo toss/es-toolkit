@@ -11,12 +11,22 @@
 ## インターフェース
 
 ```typescript
-function flattenDepth<T, D extends number = 1>(value: T[] | object, depth: D): Array<FlatArray<T[], D>> | [];
+function flattenDepth<T, D extends number = 1>(value: T[], depth: D): Array<FlatArray<T[], D>> | [];
 ```
 
 ### パラメータ
 
-- `value` (`T[] | object`): フラット化する値。
+- `value` (`T[]`): フラット化する値。
+
+::: info `value` は `ArrayLike<T>`、`null`、または `undefined` になります。
+
+lodash との完全な互換性を確保するため、`flattenDepth` 関数は `value` を次のように処理します。
+
+- `value` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換されます。
+- `value` が `null` または `undefined` の場合、空の配列として扱われます。
+
+:::
+
 - `depth` (`D`): ネストされた配列構造をどの深さまでフラット化するかを指定する深さレベル。デフォルトは1です。
 
 ### 戻り値

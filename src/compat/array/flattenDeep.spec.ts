@@ -47,8 +47,14 @@ describe('flattenDeep', () => {
   it('should return an empty array for non array-like objects', () => {
     const nonArray = { 0: 'a' };
     const expected: [] = [];
-    const actual = flattenDeep(nonArray);
+    const actual = flattenDeep(nonArray as any);
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should support array-like', () => {
+    expect(flattenDeep({ 0: [1, 2, [3]], length: 1 })).toEqual([1, 2, 3]);
+    expect(flattenDeep('123')).toEqual(['1', '2', '3']);
+    expect(flattenDeep(args)).toEqual([1, 2, 3]);
   });
 });
