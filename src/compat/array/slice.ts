@@ -1,4 +1,5 @@
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
 /**
@@ -7,7 +8,7 @@ import { toInteger } from '../util/toInteger.ts';
  * It does not return a dense array for sparse arrays unlike the native `Array.prototype.slice`.
  *
  * @template T - The type of the array elements.
- * @param {T[]} array - The array to slice.
+ * @param {ArrayLike<T> | null | undefined} array - The array to slice.
  * @param {number} [start=0] - The start position.
  * @param {number} [end=array.length] - The end position.
  * @returns {T[]} - Returns the slice of `array`.
@@ -16,8 +17,8 @@ import { toInteger } from '../util/toInteger.ts';
  * slice([1, 2, 3], 1, 2); // => [2]
  * slice(new Array(3)); // => [undefined, undefined, undefined]
  */
-export function slice<T>(array: readonly T[], start?: number, end?: number): T[] {
-  if (array == null) {
+export function slice<T>(array: ArrayLike<T> | null | undefined, start?: number, end?: number): T[] {
+  if (!isArrayLike(array)) {
     return [];
   }
 

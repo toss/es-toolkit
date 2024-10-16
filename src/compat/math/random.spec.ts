@@ -93,8 +93,6 @@ describe('random', () => {
     const expected = array.map(stubTrue);
     const randoms = array.map(random);
 
-    console.log(randoms);
-
     const actual = randoms.map((result, index) => result >= 0 && result <= array[index] && result % 1 === 0);
 
     expect(actual).toEqual(expected);

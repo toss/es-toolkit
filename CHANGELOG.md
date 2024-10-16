@@ -1,5 +1,14 @@
 # es-toolkit Changelog
 
+## Version v1.25.2
+
+Released on October 16th, 2024.
+
+- Fixed a problem with [isJSONValue](https://es-toolkit.slash.page/reference/predicate/isJSONValue.html), [isJSONArray](https://es-toolkit.slash.page/reference/predicate/isJSONArray.html), and [isJSONObject](https://es-toolkit.slash.page/reference/predicate/isJSONObject.html) that led to circular dependencies.
+- Enhanced [flatten](https://es-toolkit.slash.page/reference/array/flatten.html), [flattenDeep](https://es-toolkit.slash.page/reference/array/flattenDeep.html), [flattenDepth](https://es-toolkit.slash.page/reference/compat/array/flattenDepth.html#flattendepth), [slice](https://es-toolkit.slash.page/reference/compat/array/slice.html), and [zipObjectDeep](https://es-toolkit.slash.page/reference/compat/array/zipObjectDeep.html) to work with array-like objects in our compatibility library, ensuring they are fully compatible with lodash.
+
+This version includes contributions from @D-Sketon. Thank you for your valuable contributions!
+
 ## Version v1.25.1
 
 Released on October 15th, 2024.
