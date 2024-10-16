@@ -46,7 +46,7 @@ for (const includeString of includeStrings) {
             extensions: ['.mjs', '.js', '.json', '.node', '.ts'], // for running on Node.js
           }),
         ],
-        logLevel: 'silent',
+        logLevel: 'silent', // suppress rollup logs
       });
 
       const { output } = await benchBundle.write({
