@@ -7,7 +7,7 @@ import { mean } from './mean';
  * If the array has an odd number of elements, it returns the middle element.
  * If the array has an even number of elements, it returns the average of the two middle elements.
  *
- * @param {readonly number[]} nums - An array of numbers to calculate the median.
+ * @param {number[]} nums - An array of numbers to calculate the median.
  * @returns {number} The median of all the numbers in the array.
  *
  * @example
@@ -21,7 +21,9 @@ import { mean } from './mean';
  * // result will be 2.5
  */
 export function median(nums: readonly number[]): number {
-  if (nums.length === 0) return NaN;
+  if (nums.length === 0) {
+    return NaN;
+  }
 
   const sorted = nums.toSorted((a, b) => a - b);
   const middleIndex = Math.floor(sorted.length / 2);

@@ -9,7 +9,7 @@ import { median } from './median';
  * If the array has an even number of elements, it returns the average of the two middle elements.
  *
  * @template T - The type of elements in the array.
- * @param {readonly T[]} items An array to calculate the median.
+ * @param {T[]} items An array to calculate the median.
  * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
  * @returns {number} The median of all the numbers as determined by the `getValue` function.
  *
