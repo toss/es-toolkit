@@ -25,7 +25,9 @@ import { isBlob, isBoolean, isDate, isFile, isNull, isSymbol, isUndefined } from
  * // "preferences[food]" -> "pizza"
  */
 export function toFormData(data: any, formData: FormData = new FormData(), parentKey?: string): FormData {
-  if (isUndefined(data)) return formData;
+  if (isUndefined(data)) {
+    return formData;
+  }
 
   if (isNull(data) && parentKey) {
     formData.append(parentKey, '');

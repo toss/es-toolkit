@@ -184,7 +184,7 @@ describe('toFormData', () => {
     expect(formData.get('foo[1][1]')).toBe('4');
   });
   it('should append BigInt as string', () => {
-    const bigIntValue = BigInt(123456789012345678901234567890);
+    const bigIntValue = BigInt(123456789012345678901234567890n);
     const formData = toFormData({
       foo: bigIntValue,
     });
