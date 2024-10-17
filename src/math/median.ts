@@ -25,7 +25,7 @@ export function median(nums: readonly number[]): number {
     return NaN;
   }
 
-  const sorted = nums.toSorted((a, b) => a - b);
+  const sorted = [...nums].sort((a, b) => a - b);
   const middleIndex = Math.floor(sorted.length / 2);
 
   if (sorted.length % 2 === 0) {
