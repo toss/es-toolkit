@@ -1,0 +1,25 @@
+import { median } from './median';
+
+/**
+ * Calculates the median of an array of elements when applying
+ * the `getValue` function to each element.
+ *
+ * If the array is empty, this function returns `NaN`.
+ * If the array has an odd number of elements, it returns the middle element.
+ * If the array has an even number of elements, it returns the average of the two middle elements.
+ *
+ * @template T - The type of elements in the array.
+ * @param {readonly T[]} items An array to calculate the median.
+ * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
+ * @returns {number} The median of all the numbers as determined by the `getValue` function.
+ *
+ * @example
+ * medianBy([{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }], x => x.a); // Returns: 3
+ * medianBy([{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }], x => x.a); // Returns: 2.5
+ * medianBy([], x => x.a); // Returns: NaN
+ */
+export function medianBy<T>(items: readonly T[], getValue: (element: T) => number): number {
+  const nums = items.map(x => getValue(x));
+
+  return median(nums);
+}
