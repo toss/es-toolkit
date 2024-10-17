@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { isObjectLike as isObjectLikeToolkit_ } from 'es-toolkit/compat';
-import { isObjectLike as isObjectLikeLodash_ } from 'lodash';
-
-const isObjectLikeToolkit = isObjectLikeToolkit_;
-const isObjectLikeLodash = isObjectLikeLodash_;
+import { isObjectLike as isObjectLikeToolkit } from 'es-toolkit/compat';
+import { isObjectLike as isObjectLikeLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('isObjectLike', () => {
   bench('es-toolkit/isObjectLike', () => {

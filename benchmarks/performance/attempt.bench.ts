@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { attempt as attemptToolkit_ } from 'es-toolkit/compat';
-import { attempt as attemptLodash_ } from 'lodash';
-
-const attemptToolkit = attemptToolkit_;
-const attemptLodash = attemptLodash_;
+import { attempt as attemptToolkit } from 'es-toolkit/compat';
+import { attempt as attemptLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('attempt', () => {
   bench('es-toolkit/attempt', () => {

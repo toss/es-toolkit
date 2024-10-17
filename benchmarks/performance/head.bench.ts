@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { head as headToolkit_ } from 'es-toolkit';
-import { head as headCompatToolkit_ } from 'es-toolkit/compat';
-import { head as headLodash_ } from 'lodash';
-
-const headToolkit = headToolkit_;
-const headCompatToolkit = headCompatToolkit_;
-const headLodash = headLodash_;
+import { head as headToolkit } from 'es-toolkit';
+import { head as headCompatToolkit } from 'es-toolkit/compat';
+import { head as headLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('head', () => {
   bench('es-toolkit/head', () => {

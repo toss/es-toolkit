@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { eq as eqToolkitCompat_ } from 'es-toolkit/compat';
-import { eq as eqLodash_ } from 'lodash';
-
-const eqToolkitCompat = eqToolkitCompat_;
-const eqLodash = eqLodash_;
+import { eq as eqToolkitCompat } from 'es-toolkit/compat';
+import { eq as eqLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('eq', () => {
   bench('es-toolkit/compat/eq', () => {

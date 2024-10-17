@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { matchesProperty as matchesPropertyToolkit_ } from 'es-toolkit/compat';
-import { matchesProperty as matchesPropertyLodash_ } from 'lodash';
-
-const matchesPropertyToolkit = matchesPropertyToolkit_;
-const matchesPropertyLodash = matchesPropertyLodash_;
+import { matchesProperty as matchesPropertyToolkit } from 'es-toolkit/compat';
+import { matchesProperty as matchesPropertyLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('matchesProperty', () => {
   bench('es-toolkit/matchesProperty', () => {

@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { slice as sliceToolkitCompat_ } from 'es-toolkit/compat';
-import { slice as sliceLodash_ } from 'lodash';
-
-const sliceToolkitCompat = sliceToolkitCompat_;
-const sliceLodash = sliceLodash_;
+import { slice as sliceToolkitCompat } from 'es-toolkit/compat';
+import { slice as sliceLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('slice', () => {
   const array = Array(1000);

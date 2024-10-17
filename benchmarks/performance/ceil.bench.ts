@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { ceil as ceilToolkit_ } from 'es-toolkit/compat';
-import { ceil as ceilLodash_ } from 'lodash';
-
-const ceilToolkit = ceilToolkit_;
-const ceilLodash = ceilLodash_;
+import { ceil as ceilToolkit } from 'es-toolkit/compat';
+import { ceil as ceilLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('ceil', () => {
   bench('es-toolkit/ceil', () => {

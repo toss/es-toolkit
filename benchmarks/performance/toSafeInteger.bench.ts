@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { toSafeInteger as toSafeIntegerToolkitCompat_ } from 'es-toolkit/compat';
-import { toSafeInteger as toSafeIntegerLodash_ } from 'lodash';
-
-const toSafeIntegerToolkitCompat = toSafeIntegerToolkitCompat_;
-const toSafeIntegerLodash = toSafeIntegerLodash_;
+import { toSafeInteger as toSafeIntegerToolkitCompat } from 'es-toolkit/compat';
+import { toSafeInteger as toSafeIntegerLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('toSafeInteger', () => {
   bench('es-toolkit/compat/toSafeInteger', () => {

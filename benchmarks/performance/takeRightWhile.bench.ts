@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { takeRightWhile as takeRightWhileToolkit_ } from 'es-toolkit';
-import { takeRightWhile as takeRightWhileLodash_ } from 'lodash';
-
-const takeRightWhileToolkit = takeRightWhileToolkit_;
-const takeRightWhileLodash = takeRightWhileLodash_;
+import { takeRightWhile as takeRightWhileToolkit } from 'es-toolkit';
+import { takeRightWhile as takeRightWhileLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('takeRightWhile', () => {
   bench('es-toolkit/takeRightWhile', () => {

@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { set as setToolkitCompat_ } from 'es-toolkit/compat';
-import { set as lodashSet_ } from 'lodash';
-
-const setToolkitCompat = setToolkitCompat_;
-const lodashSet = lodashSet_;
+import { set as setToolkitCompat } from 'es-toolkit/compat';
+import { set as lodashSet } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('set - dot', () => {
   bench('es-toolkit/set', () => {

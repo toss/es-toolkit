@@ -17,6 +17,7 @@ export default [
       '**/*.d.ts',
       '**/*.tgz',
       'node_modules/**',
+      '.bench-bundle/**',
     ],
   },
   {

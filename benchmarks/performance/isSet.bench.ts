@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { isSet as isSetToolkit_ } from 'es-toolkit';
-import { isSet as isSetToolkitCompat_ } from 'es-toolkit/compat';
-import { isSet as isSetLodash_ } from 'lodash';
-
-const isSetToolkit = isSetToolkit_;
-const isSetToolkitCompat = isSetToolkitCompat_;
-const isSetLodash = isSetLodash_;
+import { isSet as isSetToolkit } from 'es-toolkit';
+import { isSet as isSetToolkitCompat } from 'es-toolkit/compat';
+import { isSet as isSetLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('isSet', () => {
   bench('es-toolkit/isSet', () => {

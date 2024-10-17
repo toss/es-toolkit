@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { omitBy as omitByToolkit_ } from 'es-toolkit';
-import { omitBy as omitByLodash_ } from 'lodash';
-
-const omitByToolkit = omitByToolkit_;
-const omitByLodash = omitByLodash_;
+import { omitBy as omitByToolkit } from 'es-toolkit';
+import { omitBy as omitByLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('omitBy', () => {
   const obj = { a: 1, b: 'omit', c: 3, d: 'test', e: 0 };

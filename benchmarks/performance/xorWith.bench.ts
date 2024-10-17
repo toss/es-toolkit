@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { xorWith as xorWithToolkit_ } from 'es-toolkit';
-import { xorWith as xorWithLodash_ } from 'lodash';
-
-const xorWithLodash = xorWithLodash_;
-const xorWithToolkit = xorWithToolkit_;
+import { xorWith as xorWithToolkit } from 'es-toolkit';
+import { xorWith as xorWithLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('xorWith', () => {
   bench('es-toolkit/xorWith', () => {

@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { drop as dropToolkit_ } from 'es-toolkit';
-import { drop as dropCompatToolkit_ } from 'es-toolkit/compat';
-import { drop as dropLodash_ } from 'lodash';
-
-const dropToolkit = dropToolkit_;
-const dropCompatToolkit = dropCompatToolkit_;
-const dropLodash = dropLodash_;
+import { drop as dropToolkit } from 'es-toolkit';
+import { drop as dropCompatToolkit } from 'es-toolkit/compat';
+import { drop as dropLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('drop', () => {
   bench('es-toolkit/drop', () => {

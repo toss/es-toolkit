@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { isWeakSet as isWeakSetToolkit_ } from 'es-toolkit';
-import { isWeakSet as isWeakSetToolkitCompat_ } from 'es-toolkit/compat';
-import { isWeakSet as isWeakSetLodash_ } from 'lodash';
-
-const isWeakSetToolkit = isWeakSetToolkit_;
-const isWeakSetToolkitCompat = isWeakSetToolkitCompat_;
-const isWeakSetLodash = isWeakSetLodash_;
+import { isWeakSet as isWeakSetToolkit } from 'es-toolkit';
+import { isWeakSet as isWeakSetToolkitCompat } from 'es-toolkit/compat';
+import { isWeakSet as isWeakSetLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('isWeakSet', () => {
   bench('es-toolkit/isWeakSet', () => {

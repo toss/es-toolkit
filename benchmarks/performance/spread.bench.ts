@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { spread as spreadToolkit_ } from 'es-toolkit';
-import { spread as spreadCompat_ } from 'es-toolkit/compat';
-import { spread as spreadLodash_ } from 'lodash';
-
-const spreadToolkit = spreadToolkit_;
-const spreadCompat = spreadCompat_;
-const spreadLodash = spreadLodash_;
+import { spread as spreadToolkit } from 'es-toolkit';
+import { spread as spreadCompat } from 'es-toolkit/compat';
+import { spread as spreadLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('spread', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

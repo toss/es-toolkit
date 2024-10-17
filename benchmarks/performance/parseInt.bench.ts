@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { parseInt as parseIntToolkit_ } from 'es-toolkit/compat';
-import { parseInt as parseIntLodash_ } from 'lodash';
-
-const parseIntToolkit = parseIntToolkit_;
-const parseIntLodash = parseIntLodash_;
+import { parseInt as parseIntToolkit } from 'es-toolkit/compat';
+import { parseInt as parseIntLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('parseInt', () => {
   bench('es-toolkit/parseInt', () => {

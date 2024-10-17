@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { shuffle as shuffleToolkit_ } from 'es-toolkit';
-import { shuffle as shuffleLodash_ } from 'lodash';
-
-const shuffleToolkit = shuffleToolkit_;
-const shuffleLodash = shuffleLodash_;
+import { shuffle as shuffleToolkit } from 'es-toolkit';
+import { shuffle as shuffleLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('shuffle', () => {
   bench('es-toolkit/shuffle', () => {
