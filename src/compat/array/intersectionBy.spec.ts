@@ -128,4 +128,11 @@ describe('intersectionBy', () => {
   it('should return empty array if non array-like object is provided in the middle', () => {
     expect(intersectionBy([1, 2, 3], '123', [1, 2])).toEqual([]);
   });
+
+  it('should support array-like object', () => {
+    expect(intersectionBy({ 0: 'a', 1: 'b', 2: 'c', length: 3 }, { 0: 'b', 1: 'c', length: 2 })).toEqual(['b', 'c']);
+    expect(intersectionBy({ 0: 1.1, 1: 2.2, 2: 3.3, length: 3 }, { 0: 1.7, 1: 2.7, length: 2 }, Math.floor)).toEqual([
+      1.1, 2.2,
+    ]);
+  });
 });
