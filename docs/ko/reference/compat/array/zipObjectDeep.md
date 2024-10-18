@@ -13,13 +13,13 @@
 ## 인터페이스
 
 ```typescript
-function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
 ```
 
 ### 파라미터
 
-- `keys` (`P[]`): 프로퍼티 경로가 포함된 배열.
-- `values` (`V[]`): 값에 대응되는 값이 포함된 배열.
+- `keys` (`ArrayLike<P | P[]>`): 프로퍼티 경로가 포함된 배열.
+- `values` (`ArrayLike<V>`): 값에 대응되는 값이 포함된 배열.
 
 ### 반환 값
 
