@@ -86,17 +86,21 @@ describe('toFormData', () => {
     expect(formData.get('foo')).toBeInstanceOf(Blob);
   });
   it('should append file as is', () => {
+    if (typeof File === 'undefined') {
+      return;
+    }
     const file = new File(['content'], 'file.txt', { type: 'text/plain' });
     const formData = toFormData({
       foo: file,
     });
     expect(formData.append).toHaveBeenCalledTimes(1);
     expect(formData.append).toHaveBeenCalledWith('foo', file);
-    if (typeof File !== 'undefined') {
-      expect(formData.get('foo')).toBeInstanceOf(File);
-    }
+    expect(formData.get('foo')).toBeInstanceOf(File);
   });
   it('should append all types of values', () => {
+    if (typeof File === 'undefined') {
+      return;
+    }
     const date = new Date();
     const blob = new Blob(['content'], { type: 'text/plain' });
     const file = new File(['content'], 'file.txt', { type: 'text/plain' });
@@ -128,9 +132,7 @@ describe('toFormData', () => {
     expect(formData.get('corge[grault]')).toBe('garply');
     expect(formData.get('waldo[0][fred]')).toBe('plugh');
     expect(formData.get('xyzzy')).toBeInstanceOf(Blob);
-    if (typeof File !== 'undefined') {
-      expect(formData.get('thud')).toBeInstanceOf(File);
-    }
+    expect(formData.get('thud')).toBeInstanceOf(File);
   });
   it('should append float values', () => {
     const formData = toFormData({
