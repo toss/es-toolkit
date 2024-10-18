@@ -92,7 +92,9 @@ describe('toFormData', () => {
     });
     expect(formData.append).toHaveBeenCalledTimes(1);
     expect(formData.append).toHaveBeenCalledWith('foo', file);
-    expect(formData.get('foo')).toBeInstanceOf(File);
+    if (typeof File !== undefined) {
+      expect(formData.get('foo')).toBeInstanceOf(File);
+    }
   });
   it('should append all types of values', () => {
     const date = new Date();
@@ -126,7 +128,9 @@ describe('toFormData', () => {
     expect(formData.get('corge[grault]')).toBe('garply');
     expect(formData.get('waldo[0][fred]')).toBe('plugh');
     expect(formData.get('xyzzy')).toBeInstanceOf(Blob);
-    expect(formData.get('thud')).toBeInstanceOf(File);
+    if (typeof File !== undefined) {
+      expect(formData.get('thud')).toBeInstanceOf(File);
+    }
   });
   it('should append float values', () => {
     const formData = toFormData({
