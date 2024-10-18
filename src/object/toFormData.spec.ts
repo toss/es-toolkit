@@ -92,7 +92,7 @@ describe('toFormData', () => {
     });
     expect(formData.append).toHaveBeenCalledTimes(1);
     expect(formData.append).toHaveBeenCalledWith('foo', file);
-    if (typeof File !== undefined) {
+    if (typeof File !== 'undefined') {
       expect(formData.get('foo')).toBeInstanceOf(File);
     }
   });
@@ -128,7 +128,7 @@ describe('toFormData', () => {
     expect(formData.get('corge[grault]')).toBe('garply');
     expect(formData.get('waldo[0][fred]')).toBe('plugh');
     expect(formData.get('xyzzy')).toBeInstanceOf(Blob);
-    if (typeof File !== undefined) {
+    if (typeof File !== 'undefined') {
       expect(formData.get('thud')).toBeInstanceOf(File);
     }
   });
