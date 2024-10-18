@@ -39,4 +39,9 @@ describe('fill', () => {
     const result = fill([1, 2, 3, 4, 5], '*', -4, -1);
     expect(result).toEqual([1, '*', '*', '*', 5]);
   });
+
+  it('does not fill if start is greater than end', () => {
+    const result = fill([1, 2, 3, 4, 5], '*', 3, 2);
+    expect(result).toEqual([1, 2, 3, 4, 5]);
+  });
 });
