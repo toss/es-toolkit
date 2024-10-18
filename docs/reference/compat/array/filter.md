@@ -28,7 +28,7 @@ function filter<T extends Record<string, unknown>>(
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T[];
+function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: string): T[];
 ```
 
@@ -57,7 +57,7 @@ To ensure full compatibility with lodash, the `filter` function handles `arr` in
   - For the `filter` overloads with objects:
     - **Predicate function** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): A function that takes an value, its key, and the object, and returns a truthy value if the item matches the criteria.
     - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
-    - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
+    - **Property-value pair** (`[keyof T[keyof T], unknown]`): An array where the first element is the property key and the second element is the value to match.
     - **Property name** (`string`): The name of the property to check for a truthy value.
 
 ### Returns
