@@ -100,7 +100,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     const result = new Map();
     stack.set(obj, result);
 
-    for (const [key, value] of obj.entries()) {
+    for (const [key, value] of obj) {
       result.set(key, cloneDeepImpl(value, stack));
     }
 
@@ -111,7 +111,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     const result = new Set();
     stack.set(obj, result);
 
-    for (const value of obj.values()) {
+    for (const value of obj) {
       result.add(cloneDeepImpl(value, stack));
     }
 
