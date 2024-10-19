@@ -1,4 +1,5 @@
 import { identity } from '../_internal/identity.ts';
+import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
@@ -172,6 +173,7 @@ export function every<T extends Record<string, unknown>>(
  * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to check through.
  * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
  * @param {string} propertyToCheck - The property name to check.
+ * @param {unknown} guard - Enables use as an iteratee for methods like `_.map`.
  * @returns {boolean} - `true` if every property value has the specified property, or `false` if at least one does not match.
  *
  * @example
@@ -182,13 +184,16 @@ export function every<T extends Record<string, unknown>>(
  */
 export function every<T>(
   source: ArrayLike<T> | Record<any, any> | null | undefined,
-  doesMatch?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string
+  doesMatch?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
+  guard?: unknown
 ): boolean {
   if (!source) {
     return true;
   }
-
   const values = Array.isArray(source) ? source : Object.values(source);
+  if (guard && isIterateeCall(source, doesMatch, guard)) {
+    doesMatch = undefined;
+  }
 
   if (!doesMatch) {
     doesMatch = identity;
@@ -228,3 +233,4 @@ export function every<T>(
     }
   }
 }
+// guard
