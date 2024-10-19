@@ -233,4 +233,3 @@ export function every<T>(
     }
   }
 }
-// guard
