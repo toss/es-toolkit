@@ -44,4 +44,8 @@ describe('dropRight', () => {
     expect(dropRight('123', 2)).toEqual(['1']);
     expect(dropRight(args, 1)).toEqual([1, 2]);
   });
+
+  it('should work as an iteratee for methods like `_.map`', () => {
+    expect([[1, 2], [3, 4], [5]].map(dropRight)).toEqual([[1], [3], []]);
+  });
 });

@@ -132,8 +132,8 @@ describe('every', () => {
   });
 
   it('should work as an iteratee for methods like `_.map`', () => {
-    const actual = [[1]].map(every);
-    expect(actual).toEqual([true]);
+    const actual = [[1], [2, 3]].map(every);
+    expect(actual).toEqual([true, true]);
   });
 
   it('should return true when provided `null` or `undefined`', () => {
