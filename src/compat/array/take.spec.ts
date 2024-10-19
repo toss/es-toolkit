@@ -41,4 +41,8 @@ describe('take', () => {
     expect(take('123', 2)).toEqual(['1', '2']);
     expect(take(args, 2)).toEqual([1, 2]);
   });
+
+  it('should work as an iteratee for methods like `_.map`', () => {
+    expect([[1, 2], [3, 4], [5]].map(take)).toEqual([[1], [3], [5]]);
+  });
 });

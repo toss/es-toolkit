@@ -73,7 +73,7 @@ export function find<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: s
  * Finds the first item in an object that matches the given predicate function.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T | null | undefined: never} object - The object to search through.
+ * @param {T | null | undefined} object - The object to search through.
  * @param {(item: T[keyof T], index: number, arr: T) => unknown} doesMatch - A function that takes an item, its key, and the object, and returns a truthy value if the item matches the criteria.
  * @returns {T | undefined} - The first property value that matches the predicate, or `undefined` if no match is found.
  *
@@ -92,7 +92,7 @@ export function find<T extends Record<string, unknown>>(
  * Finds the first item in an object that matches the given partial value.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T | null | undefined: never} object - The object to search through.
+ * @param {T | null | undefined} object - The object to search through.
  * @param {Partial<T[keyof T]>} doesMatch - A partial value to match against the values of the object.
  * @returns {T | undefined} - The first property value that matches the partial value, or `undefined` if no match is found.
  *
@@ -111,7 +111,7 @@ export function find<T extends Record<string, unknown>>(
  * Finds the first item in an object that matches a property with a specific value.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T | null | undefined: never} object - The object to search through.
+ * @param {T | null | undefined} object - The object to search through.
  * @param {[keyof T[keyof T], unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
  * @returns {T | undefined} - The first item that has the specified property value, or `undefined` if no match is found.
  *
@@ -130,7 +130,7 @@ export function find<T extends Record<string, unknown>>(
  * Finds the first item in an object that has a specific property, where the property name is provided as a string.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T | null | undefined: never} object - The object to search through.
+ * @param {T | null | undefined} object - The object to search through.
  * @param {string} propertyToCheck - The property name to check.
  * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
  *
@@ -149,10 +149,8 @@ export function find<T extends Record<string, unknown>>(
  * Finds the first item in an object that has a specific property, where the property name is provided as a string.
  *
  * @template T
- * @param {T extends Record<string, unknown> ? T | null | undefined: never} object - The object to search through.
- * @param {readonly T[] | Record<any, any>} source - The source array or object to search through.
+ * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to search through.
  * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
- * @param {string} propertyToCheck - The property name to check.
  * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
  *
  * @example
