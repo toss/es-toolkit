@@ -31,4 +31,3 @@ export function dropRight<T>(
 
   return dropRightToolkit(Array.from(collection), itemsCount);
 }
-// guard
