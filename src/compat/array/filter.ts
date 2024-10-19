@@ -70,7 +70,7 @@ export function filter<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck:
  * Filters items from a object and returns an array of elements that match the given predicate function.
  *
  * @template T
- * @param {T} object - The object to iterate over.
+ * @param {T | null | undefined} object - The object to iterate over.
  * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} doesMatch - The function invoked per iteration.
  * @returns {T[]} - Returns a new array of elements that satisfy the given predicate function.
  *

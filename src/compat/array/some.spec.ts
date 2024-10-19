@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { some } from './some';
+import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { identity } from '../_internal/identity';
 import { stubFalse } from '../_internal/stubFalse';
@@ -72,6 +73,30 @@ describe('some', () => {
     });
 
     expect(actual).toEqual(expected);
+
+    expected = values.map(stubFalse);
+    actual = values.map((value, index) => {
+      const array = { 0: 0, a: 0 };
+      return index
+        ? // eslint-disable-next-line
+          // @ts-ignore
+          some(array, value)
+        : some(array);
+    });
+
+    expect(actual).toEqual(expected);
+
+    expected = values.map(stubTrue);
+    actual = values.map((value, index) => {
+      const array = { 0: 0, a: 1 };
+      return index
+        ? // eslint-disable-next-line
+          // @ts-ignore
+          some(array, value)
+        : some(array);
+    });
+
+    expect(actual).toEqual(expected);
   });
 
   it('should work with `_.property` shorthands', () => {
@@ -104,5 +129,41 @@ describe('some', () => {
   it('should work as an iteratee for methods like `_.map`', () => {
     const actual = [[1]].map(some);
     expect(actual).toEqual([true]);
+  });
+
+  it('should return true for object with one value passing the predicate', () => {
+    expect(some({ a: 1, b: 2, c: 3 }, value => value >= 3)).toBe(true);
+  });
+
+  it('should return false for object with all values failing the predicate', () => {
+    expect(some({ a: 1, b: 2, c: 3 }, value => value > 3)).toBe(false);
+  });
+
+  it('should return true for object with one value matching the partial', () => {
+    expect(some({ a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } }, { name: 'Bob' })).toBe(true);
+  });
+
+  it('should return true for object with one value matching the property', () => {
+    expect(some({ a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } }, 'name')).toBe(true);
+  });
+
+  it('should return true for object with one value matching the property and value', () => {
+    expect(some({ a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } }, ['name', 'Bob'])).toBe(true);
+  });
+
+  it('should return false for empty object', () => {
+    const result = some({}, () => false);
+    expect(result).toBe(false);
+  });
+
+  it('should return false when provided `null` or `undefined`', () => {
+    expect(some(null, identity)).toBe(false);
+    expect(some(undefined, identity)).toBe(false);
+  });
+
+  it('should support array-like objects', () => {
+    expect(some({ 0: 'a', 1: 'b', length: 2 }, value => value === 'b')).toBe(true);
+    expect(some('123', value => value === '3')).toBe(true);
+    expect(some(args, value => value === 1)).toBe(true);
   });
 });
