@@ -150,11 +150,10 @@ export { repeat } from './string/repeat.ts';
 export { snakeCase } from './string/snakeCase.ts';
 export { startCase } from './string/startCase.ts';
 export { startsWith } from './string/startsWith.ts';
-export { upperCase } from './string/upperCase.ts';
-
 export { trim } from './string/trim.ts';
 export { trimEnd } from './string/trimEnd.ts';
 export { trimStart } from './string/trimStart.ts';
+export { upperCase } from './string/upperCase.ts';
 
 export { constant } from './util/constant.ts';
 export { defaultTo } from './util/defaultTo.ts';
@@ -167,3 +166,4 @@ export { toNumber } from './util/toNumber.ts';
 export { toPath } from './util/toPath.ts';
 export { toSafeInteger } from './util/toSafeInteger.ts';
 export { toString } from './util/toString.ts';
+export { uniqueId } from './util/uniqueId.ts';
