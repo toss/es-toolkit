@@ -183,7 +183,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     return result as T;
   }
 
-  if (typeof obj === 'object' && obj !== null) {
+  if (typeof obj === 'object' && obj !== null && !(obj instanceof WeakMap) && !(obj instanceof WeakSet)) {
     const result = {};
     stack.set(obj, result);
 

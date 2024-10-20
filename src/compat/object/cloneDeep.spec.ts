@@ -265,12 +265,33 @@ describe('cloneDeep', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should not clone function, error objects and weakMap', () => {
+  it('should not clone function, error objects, weakMap and weakSet', () => {
     expect(cloneDeep(() => {})).toEqual({});
     expect(cloneDeep(async () => {})).toEqual({});
     expect(cloneDeep(function* () {})).toEqual({});
     expect(cloneDeep(new Error())).toEqual({});
     expect(cloneDeep(new DOMException())).toEqual({});
     expect(cloneDeep(new WeakMap())).toEqual({});
+    expect(cloneDeep(new WeakSet())).toEqual({});
+  });
+
+  it('should copy function properties', () => {
+    function Foo() {}
+    Foo.a = 1;
+    Foo.b = function () {};
+    Foo.c = 3;
+    // @ts-expect-error - Symbol
+    Foo[Symbol.for('map')] = new WeakMap();
+    // @ts-expect-error - Symbol
+    Foo[Symbol.for('set')] = new WeakSet();
+
+    const actual = cloneDeep(Foo);
+    expect(actual.a).toBe(1);
+    expect(actual.b).toBe(Foo.b);
+    expect(actual.c).toBe(3);
+    // @ts-expect-error - Symbol
+    expect(actual[Symbol.for('map')]).toBe(Foo[Symbol.for('map')]);
+    // @ts-expect-error - Symbol
+    expect(actual[Symbol.for('set')]).toBe(Foo[Symbol.for('set')]);
   });
 });
