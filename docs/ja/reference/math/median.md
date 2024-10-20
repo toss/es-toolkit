@@ -11,7 +11,7 @@
 ## インターフェース
 
 ```typescript
-function median(nums: readonly number[]): number;
+function median(nums: number[]): number;
 ```
 
 ### パラメータ
