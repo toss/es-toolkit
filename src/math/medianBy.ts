@@ -3,11 +3,11 @@ import { median } from './median';
 /**
  * Calculates the median of an array of elements when applying
  * the `getValue` function to each element.
- * 
- * The median is the middle value of a sorted array. 
- * If the array has an odd number of elements, the median is the middle value. 
+ *
+ * The median is the middle value of a sorted array.
+ * If the array has an odd number of elements, the median is the middle value.
  * If the array has an even number of elements, it returns the average of the two middle values.
- * 
+ *
  * If the array is empty, this function returns `NaN`.
  *
  * @template T - The type of elements in the array.

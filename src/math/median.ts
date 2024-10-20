@@ -2,11 +2,11 @@ import { mean } from './mean';
 
 /**
  * Calculates the median of an array of numbers.
- * 
- * The median is the middle value of a sorted array. 
- * If the array has an odd number of elements, the median is the middle value. 
+ *
+ * The median is the middle value of a sorted array.
+ * If the array has an odd number of elements, the median is the middle value.
  * If the array has an even number of elements, it returns the average of the two middle values.
- * 
+ *
  * If the array is empty, this function returns `NaN`.
  *
  * @param {number[]} nums - An array of numbers to calculate the median.
@@ -31,7 +31,7 @@ export function median(nums: readonly number[]): number {
   const middleIndex = Math.floor(sorted.length / 2);
 
   if (sorted.length % 2 === 0) {
-    return (sorted[middleIndex - 1] + sorted[middleIndex])/ 2;
+    return (sorted[middleIndex - 1] + sorted[middleIndex]) / 2;
   } else {
     return sorted[middleIndex];
   }
