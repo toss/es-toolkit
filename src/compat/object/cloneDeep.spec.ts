@@ -264,4 +264,13 @@ describe('cloneDeep', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('should not clone function, error objects and weakMap', () => {
+    expect(cloneDeep(() => {})).toEqual({});
+    expect(cloneDeep(async () => {})).toEqual({});
+    expect(cloneDeep(new Function())).toEqual({});
+    expect(cloneDeep(new Error())).toEqual({});
+    expect(cloneDeep(new DOMException())).toEqual({});
+    expect(cloneDeep(new WeakMap())).toEqual({});
+  });
 });

@@ -48,6 +48,9 @@ import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tag
  * console.log(clonedObj === obj); // false
  */
 export function cloneDeep<T>(obj: T): T {
+  if (typeof obj === 'function' || obj instanceof Error) {
+    return {} as any;
+  }
   if (typeof obj !== 'object') {
     return cloneDeepToolkit(obj);
   }
