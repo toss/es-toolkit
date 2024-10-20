@@ -29,7 +29,7 @@ export function median(nums: readonly number[]): number {
   const middleIndex = Math.floor(sorted.length / 2);
 
   if (sorted.length % 2 === 0) {
-    return mean([sorted[middleIndex - 1], sorted[middleIndex]]);
+    return (sorted[middleIndex - 1] + sorted[middleIndex])/ 2;
   } else {
     return sorted[middleIndex];
   }
