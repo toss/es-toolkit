@@ -2,9 +2,11 @@
 
 Calculates the median of an array of numbers.
 
+The median is the middle value of a sorted array. 
+If the array has an odd number of elements, the median is the middle value. 
+If the array has an even number of elements, it returns the average of the two middle values.
+
 If the array is empty, this function returns `NaN`.
-If the array has an odd number of elements, it returns the middle element.
-If the array has an even number of elements, it returns the average of the two middle elements.
 
 ## Signature
 
