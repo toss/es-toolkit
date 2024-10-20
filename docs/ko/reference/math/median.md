@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-function median(nums: readonly number[]): number;
+function median(nums: number[]): number;
 ```
 
 ### 파라미터
 
-- `nums` (`readonly number[]`): 중앙값을 계산할 숫자 배열이에요.
+- `nums` (`number[]`): 중앙값을 계산할 숫자 배열이에요.
 
 ### 반환 값
 

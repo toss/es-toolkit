@@ -2,19 +2,21 @@
 
 通过对每个元素应用 `getValue` 函数来计算元素数组的中位数。
 
-如果数组为空，则此函数返回 `NaN`。
-如果数组有奇数个元素，则返回中间的元素。
-如果数组有偶数个元素，则返回中间两个元素的平均值。
+[中位数](./median.md)是排序数组中的中间值。
+如果数组的元素个数为奇数，中位数就是中间的值。
+如果数组的元素个数为偶数，则返回两个中间值的平均值。
+
+如果数组为空，此函数返回`NaN`。
 
 ## 签名
 
 ```typescript
-export function medianBy<T>(items: readonly T[], getValue: (element: T) => number): number;
+export function medianBy<T>(items: T[], getValue: (element: T) => number): number;
 ```
 
 ### 参数
 
-- `items` (`readonly T[]`): 要计算中位数的数组。
+- `items` (`T[]`): 要计算中位数的数组。
 - `getValue` (`(element: T) => number`): 从每个元素选择数值的函数。
 
 ### 返回值

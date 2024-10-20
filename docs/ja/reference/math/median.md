@@ -16,7 +16,7 @@ function median(nums: number[]): number;
 
 ### パラメータ
 
-- `nums` (`readonly number[]`): 中央値を計算する数値の配列です。
+- `nums` (`number[]`): 中央値を計算する数値の配列です。
 
 ### 戻り値
 

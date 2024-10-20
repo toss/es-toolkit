@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-export function medianBy<T>(items: readonly T[], getValue: (element: T) => number): number;
+export function medianBy<T>(items: T[], getValue: (element: T) => number): number;
 ```
 
 ### 파라미터
 
-- `items` (`readonly T[]`): 중앙값을 계산할 배열이에요.
+- `items` (`T[]`): 중앙값을 계산할 배열이에요.
 - `getValue` (`(element: T) => number`): 각 요소에서 숫자 값을 선택하는 함수에요.
 
 ### 반환 값

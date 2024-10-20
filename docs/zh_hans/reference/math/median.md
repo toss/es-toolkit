@@ -11,12 +11,12 @@
 ## 签名
 
 ```typescript
-function median(nums: readonly number[]): number;
+function median(nums: number[]): number;
 ```
 
 ### 参数
 
-- `nums` (`readonly number[]`): 要计算中位数的数字数组。
+- `nums` (`number[]`): 要计算中位数的数字数组。
 
 ### 返回值
 

@@ -11,12 +11,12 @@ If the array is empty, this function returns `NaN`.
 ## Signature
 
 ```typescript
-export function medianBy<T>(items: readonly T[], getValue: (element: T) => number): number;
+export function medianBy<T>(items: T[], getValue: (element: T) => number): number;
 ```
 
 ### Parameters
 
-- `items` (`readonly T[]`): An array to calculate the median.
+- `items` (`T[]`): An array to calculate the median.
 - `getValue` (`(element: T) => number`): A function that selects a numeric value from each element.
 
 ### Returns

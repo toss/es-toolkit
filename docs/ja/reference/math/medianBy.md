@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-export function medianBy<T>(items: readonly T[], getValue: (element: T) => number): number;
+export function medianBy<T>(items: T[], getValue: (element: T) => number): number;
 ```
 
 ### パラメータ
 
-- `items` (`readonly T[]`): 中央値を計算する配列です。
+- `items` (`T[]`): 中央値を計算する配列です。
 - `getValue` (`(element: T) => number`): 各要素から数値を選択する関数です。
 
 ### 戻り値

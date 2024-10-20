@@ -11,12 +11,12 @@ If the array is empty, this function returns `NaN`.
 ## Signature
 
 ```typescript
-function median(nums: readonly number[]): number;
+function median(nums: number[]): number;
 ```
 
 ### Parameters
 
-- `nums` (`readonly number[]`): An array of numbers to calculate the median.
+- `nums` (`number[]`): An array of numbers to calculate the median.
 
 ### Returns
 
