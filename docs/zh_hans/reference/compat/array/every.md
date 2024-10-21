@@ -30,7 +30,7 @@ function every<T extends Record<string, unknown>>(
   doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: string): boolean;
 ```
 
@@ -67,7 +67,7 @@ function every<T extends Record<string, unknown>>(object: T, doesMatch: string):
   - 对于对象的 `every` 重载：
     - **检查函数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 一个函数，接受项、其键和对象，如果所有项都符合条件则返回 `true`。
     - **部分值** (`Partial<T[keyof T]>`): 用于与对象的值进行匹配的部分值，所有项必须匹配这些值。
-    - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值，所有项必须匹配该属性和值。
+    - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值，所有项必须匹配该属性和值。
     - **属性名称** (`string`): 要检查其真值的属性名称，所有项必须具有该属性且其值为真。
 
 ### 返回

@@ -112,7 +112,7 @@ export function find<T extends Record<string, unknown>>(
  *
  * @template T
  * @param {T | null | undefined} object - The object to search through.
- * @param {[keyof T, unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
+ * @param {[keyof T[keyof T], unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
  * @returns {T | undefined} - The first item that has the specified property value, or `undefined` if no match is found.
  *
  * @example
@@ -123,7 +123,7 @@ export function find<T extends Record<string, unknown>>(
  */
 export function find<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  doesMatchProperty: [keyof T, unknown]
+  doesMatchProperty: [keyof T[keyof T], unknown]
 ): T | undefined;
 
 /**
