@@ -29,8 +29,8 @@ let idCounter = 0;
  * uniqueId('item_');  // => 'item_3'
  * uniqueId();         // => '4'
  */
-export function uniqueId(prefix?: string): string {
+export function uniqueId(prefix = ''): string {
   const id = ++idCounter;
 
-  return toString(prefix) + id;
+  return `${prefix}${id}`;
 }
