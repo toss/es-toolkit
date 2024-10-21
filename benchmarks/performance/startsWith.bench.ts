@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { startsWith as startsWithToolkit_ } from 'es-toolkit/compat';
-import { startsWith as startsWithLodash_ } from 'lodash';
-
-const startsWithToolkit = startsWithToolkit_;
-const startsWithLodash = startsWithLodash_;
+import { startsWith as startsWithToolkit } from 'es-toolkit/compat';
+import { startsWith as startsWithLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('startsWith', () => {
   bench('es-toolkit/startsWith', () => {

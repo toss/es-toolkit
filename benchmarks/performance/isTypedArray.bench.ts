@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { isTypedArray as isTypedArrayToolkit_ } from 'es-toolkit';
-import { isTypedArray as isTypedArrayCompatToolkit_ } from 'es-toolkit/compat';
-import { isTypedArray as isTypedArrayLodash_ } from 'lodash';
-
-const isTypedArrayToolkit = isTypedArrayToolkit_;
-const isTypedArrayCompatToolkit = isTypedArrayCompatToolkit_;
-const isTypedArrayLodash = isTypedArrayLodash_;
+import { isTypedArray as isTypedArrayToolkit } from 'es-toolkit';
+import { isTypedArray as isTypedArrayCompatToolkit } from 'es-toolkit/compat';
+import { isTypedArray as isTypedArrayLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('isTypedArrayToolkit', () => {
   bench('es-toolkit/isTypedArray', () => {

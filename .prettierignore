@@ -11,3 +11,4 @@ esm
 out
 *.d.ts
 *.tgz
+.bench-bundle

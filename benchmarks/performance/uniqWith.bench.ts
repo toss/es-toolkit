@@ -1,10 +1,7 @@
-import { bench, describe } from 'vitest';
-import { uniqWith as uniqWithToolkit_ } from 'es-toolkit';
+import { uniqWith as uniqWithToolkit } from 'es-toolkit';
 import { randomInt } from 'crypto';
-import { uniqWith as uniqWithLodash_ } from 'lodash';
-
-const uniqWithToolkit = uniqWithToolkit_;
-const uniqWithLodash = uniqWithLodash_;
+import { uniqWith as uniqWithLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('uniqWith, small arrays', () => {
   bench('es-toolkit/uniqWith', () => {

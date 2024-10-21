@@ -18,12 +18,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  */
 const packageJson = createRequire(import.meta.url)('./package.json');
 
+export const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
+
 const testPatterns = ['**/*.bench.ts', '**/*.spec.ts', '**/*.test.ts'];
 
 export default () => {
   clearDir('dist');
-
-  const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
 
   return [
     libBuildOptions({
@@ -62,7 +62,7 @@ export default () => {
  *   sourcemap: boolean;
  * }) => import('rollup').RollupOptions}
  */
-function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) {
+export function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) {
   const isESM = format === 'esm';
 
   return {

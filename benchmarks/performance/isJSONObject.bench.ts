@@ -1,7 +1,5 @@
-import { bench, describe } from 'vitest';
-import { isJSONObject as isJSONObjectToolkit_ } from 'es-toolkit';
-
-const isJSONObjectToolkit = isJSONObjectToolkit_;
+import { isJSONObject as isJSONObjectToolkit } from 'es-toolkit';
+import { bench, describe } from '../bench';
 
 describe('isJSONObject', () => {
   bench('es-toolkit/isJSONObject', () => {

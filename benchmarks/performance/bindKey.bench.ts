@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { bindKey as bindKeyToolkit_ } from 'es-toolkit/compat';
-import { bindKey as bindKeyLodash_ } from 'lodash';
-
-const bindKeyToolkit = bindKeyToolkit_;
-const bindKeyLodash = bindKeyLodash_;
+import { bindKey as bindKeyToolkit } from 'es-toolkit/compat';
+import { bindKey as bindKeyLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 const object = {
   user: 'fred',

@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { tail as tailToolkit_ } from 'es-toolkit';
-import { tail as tailToolkitCompat_ } from 'es-toolkit/compat';
-import { tail as tailLodash_ } from 'lodash';
-
-const tailToolkit = tailToolkit_;
-const tailToolkitCompat = tailToolkitCompat_;
-const tailLodash = tailLodash_;
+import { tail as tailToolkit } from 'es-toolkit';
+import { tail as tailToolkitCompat } from 'es-toolkit/compat';
+import { tail as tailLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('tail', () => {
   bench('es-toolkit/tail', () => {

@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { upperFirst as upperFirstToolkit_ } from 'es-toolkit';
-import { upperFirst as upperFirstLodash_ } from 'lodash';
-
-const upperFirstToolkit = upperFirstToolkit_;
-const upperFirstLodash = upperFirstLodash_;
+import { upperFirst as upperFirstToolkit } from 'es-toolkit';
+import { upperFirst as upperFirstLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('upperFirst', () => {
   describe('short string', () => {

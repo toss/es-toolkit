@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { isInteger as isIntegerToolkit_ } from 'es-toolkit/compat';
-import { isInteger as isIntegerLodash_ } from 'lodash';
-
-const isIntegerToolkit = isIntegerToolkit_;
-const isIntegerLodash = isIntegerLodash_;
+import { isInteger as isIntegerToolkit } from 'es-toolkit/compat';
+import { isInteger as isIntegerLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('isInteger', () => {
   bench('es-toolkit/isInteger', () => {

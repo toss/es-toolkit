@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { toFilled as toFilledToolkit_ } from 'es-toolkit';
-import { fill as fillLodash_ } from 'lodash';
-
-const fillLodash = fillLodash_;
-const toFilledToolkit = toFilledToolkit_;
+import { toFilled as toFilledToolkit } from 'es-toolkit';
+import { fill as fillLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('fill function performance comparison', () => {
   bench('es-toolkit/toFilled', () => {

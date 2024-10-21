@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { dropRight as dropRightToolkit_ } from 'es-toolkit';
-import { dropRight as dropRightToolkitCompat_ } from 'es-toolkit/compat';
-import { dropRight as dropRightLodash_ } from 'lodash';
-
-const dropRightToolkit = dropRightToolkit_;
-const dropRightToolkitCompat = dropRightToolkitCompat_;
-const dropRightLodash = dropRightLodash_;
+import { dropRight as dropRightToolkit } from 'es-toolkit';
+import { dropRight as dropRightToolkitCompat } from 'es-toolkit/compat';
+import { dropRight as dropRightLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('dropRight', () => {
   bench('es-toolkit/dropRight', () => {

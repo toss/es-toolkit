@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { mergeWith as mergeWithToolkit_ } from 'es-toolkit';
-import { mergeWith as mergeWithCompatToolkit_ } from 'es-toolkit/compat';
-import { mergeWith as mergeWithLodash_ } from 'lodash';
-
-const mergeWithToolkit = mergeWithToolkit_;
-const mergeWithCompatToolkit = mergeWithCompatToolkit_;
-const mergeWithLodash = mergeWithLodash_;
+import { mergeWith as mergeWithToolkit } from 'es-toolkit';
+import { mergeWith as mergeWithCompatToolkit } from 'es-toolkit/compat';
+import { mergeWith as mergeWithLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 const object = { a: 1, b: 2 };
 

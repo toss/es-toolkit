@@ -1,9 +1,6 @@
-import { bench, describe } from 'vitest';
-import { rearg as reargToolkit_ } from 'es-toolkit/compat';
-import { rearg as reargLodash_ } from 'lodash';
-
-const reargToolkit = reargToolkit_;
-const reargLodash = reargLodash_;
+import { rearg as reargToolkit } from 'es-toolkit/compat';
+import { rearg as reargLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 describe('rearg', () => {
   function fn() {

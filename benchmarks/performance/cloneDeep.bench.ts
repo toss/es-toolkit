@@ -1,11 +1,7 @@
-import { bench, describe } from 'vitest';
-import { cloneDeep as cloneDeepToolkit_ } from 'es-toolkit';
-import { cloneDeep as cloneDeepCompatToolkit_ } from 'es-toolkit/compat';
-import { cloneDeep as cloneDeepLodash_ } from 'lodash';
-
-const cloneDeepToolkit = cloneDeepToolkit_;
-const cloneDeepCompatToolkit = cloneDeepCompatToolkit_;
-const cloneDeepLodash = cloneDeepLodash_;
+import { cloneDeep as cloneDeepToolkit } from 'es-toolkit';
+import { cloneDeep as cloneDeepCompatToolkit } from 'es-toolkit/compat';
+import { cloneDeep as cloneDeepLodash } from 'lodash';
+import { bench, describe } from '../bench';
 
 const obj = {
   number: 29,
