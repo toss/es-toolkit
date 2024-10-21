@@ -70,7 +70,7 @@ export function filter<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck:
  * Filters items from a object and returns an array of elements that match the given predicate function.
  *
  * @template T
- * @param {T} object - The object to iterate over.
+ * @param {T | null | undefined} object - The object to iterate over.
  * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} doesMatch - The function invoked per iteration.
  * @returns {T[]} - Returns a new array of elements that satisfy the given predicate function.
  *
@@ -111,7 +111,7 @@ export function filter<T extends Record<string, unknown>>(
  *
  * @template T
  * @param {T | null | undefined} object - The object to iterate over.
- * @param {[keyof T, unknown]} doesMatchProperty - The key-value pair to match.
+ * @param {[keyof T[keyof T], unknown]} doesMatchProperty - The key-value pair to match.
  * @returns {T[]} - Returns a new array of elements that match the given key-value pair.
  *
  * @example
@@ -121,7 +121,7 @@ export function filter<T extends Record<string, unknown>>(
  */
 export function filter<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  doesMatchProperty: [keyof T, unknown]
+  doesMatchProperty: [keyof T[keyof T], unknown]
 ): T[];
 
 /**

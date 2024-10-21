@@ -11,9 +11,10 @@ export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] 
  * If values for a key are equal, it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param { T[] | object | null | undefined} collection - The array of objects to be sorted.
+ * @param {ArrayLike<T> | object | null | undefined} collection - The array of objects to be sorted.
  * @param {Criterion<T> | Array<Criterion<T>>} criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
+ * @param {unknown} [guard] Enables use as an iteratee for methods like `_.reduce`.
  * @returns {T[]} - The sorted array.
  *
  * @example
@@ -33,21 +34,27 @@ export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] 
  * //   { user: 'fred', age: 40 },
  * // ]
  */
-export function orderBy<T>(
-  collection: readonly T[] | object | number | null | undefined,
+export function orderBy<T = any>(
+  collection: ArrayLike<T> | object | null | undefined,
   criteria?: Criterion<T> | Array<Criterion<T>>,
-  orders?: unknown | unknown[]
+  orders?: unknown | unknown[],
+  guard?: unknown
 ): T[] {
-  if (collection == null || typeof collection === 'number') {
+  if (collection == null) {
     return [];
   }
 
-  if (typeof collection === 'object' && !Array.isArray(collection)) {
+  orders = guard ? undefined : orders;
+
+  if (!Array.isArray(collection)) {
     collection = Object.values(collection);
   }
 
   if (!Array.isArray(criteria)) {
     criteria = criteria == null ? [null] : [criteria];
+  }
+  if (criteria.length === 0) {
+    criteria = [null];
   }
 
   if (!Array.isArray(orders)) {
