@@ -34,3 +34,19 @@ const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
 // result will be [{ id: 1 }, { id: 3 }, { id: 5 }] since the elements with id 2 are in both arrays and are excluded from the result.
 ```
+
+## Lodash Compatibility
+
+Import `differenceBy` from `es-toolkit/compat` for full compatibility with lodash.
+
+- `differenceBy` compares the first array-like object to one or more subsequent array-like objects.
+- `differenceBy` can optionally accept an iteratee as the last argument, which can either be a function or a property key.
+
+```typescript
+import { differenceBy } from 'es-toolkit/compat';
+
+differenceBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], item => item.x); // Returns [{ x: 2 }]
+differenceBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], 'x'); // Returns [{ x: 2 }]
+differenceBy([{ x: 1 }, { x: 2 }, { x: 3 }], [{ x: 2 }], [{ x: 3 }], 'x'); // Returns [{ x: 1 }]
+differenceBy([1, 2, 3], [2], [3]); // Returns [1]
+```
