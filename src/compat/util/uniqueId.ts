@@ -1,5 +1,3 @@
-import { toString } from './toString';
-
 /** Counter used to generate unique numeric identifiers. */
 let idCounter = 0;
 

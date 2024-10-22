@@ -11,4 +11,13 @@ describe('uniqueId', () => {
   it('should return a string value when not providing a `prefix`', () => {
     expect(typeof uniqueId()).toBe('string');
   });
+
+  it('should coerce the prefix argument to a string', () => {
+    // @ts-expect-error
+    const ids = [uniqueId(3), uniqueId(2), uniqueId(1), uniqueId(true)];
+    expect(ids[0].startsWith('3')).toBe(true);
+    expect(ids[1].startsWith('2')).toBe(true);
+    expect(ids[2].startsWith('1')).toBe(true);
+    expect(ids[3].startsWith('true')).toBe(true);
+  });
 });
