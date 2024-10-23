@@ -44,7 +44,7 @@ export function merge<T extends Record<PropertyKey, any>, S extends Record<Prope
   target: T,
   source: S
 ): T & S {
-  const sourceKeys = Object.keys(source) as (keyof S)[];
+  const sourceKeys = Object.keys(source) as Array<keyof S>;
 
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
