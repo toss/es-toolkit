@@ -139,10 +139,10 @@ export function forEach<T>(
     return collection;
   }
 
-  const keys = Object.keys(collection) as Array<keyof typeof collection>;
+  const keys = Object.keys(collection);
 
   for (let i = 0; i < keys.length; i++) {
-    const key = keys[i] as keyof T;
+    const key = keys[i];
     const value = collection[key];
     callback(value, key, collection);
   }
