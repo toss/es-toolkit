@@ -33,7 +33,7 @@ const result = intersection(array1, array2);
 
 `es-toolkit/compat`から`intersection`をインポートすると、lodashと互換性があります。
 
-- `intersection`は公通要素を見つけるために複数の配列風オブジェクト(Array-like object)を受け入れます。
+- `intersection`は共通要素を見つけるために複数の配列風オブジェクト(Array-like object)を受け入れます。
 - `intersection`はユニークな要素のみを返します。
 
 ```typescript
