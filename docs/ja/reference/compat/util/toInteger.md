@@ -20,7 +20,7 @@ function toInteger(value?: unknown): number;
 
 ### 戻り値
 
-(`number`): 整数。
+(`number`): 変換された整数。
 
 ## 例
 

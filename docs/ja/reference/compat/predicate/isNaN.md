@@ -16,7 +16,7 @@ function isNaN(value: unknown): value is typeof NaN;
 
 ### パラメータ
 
-- `value` (`unknown`): 確認する値。
+- `value` (`unknown`): `NaN`かどうか確認する値。
 
 ### 戻り値
 
