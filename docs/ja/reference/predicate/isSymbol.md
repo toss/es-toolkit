@@ -12,7 +12,7 @@ function isSymbol(value: unknown): value is symbol;
 
 ### パラメータ
 
-- `value` (`unknown`) 確認する値ます。
+- `value` (`unknown`): 確認する値。
 
 ### 戻り値
 
