@@ -14,7 +14,7 @@ function spread<F extends (...args: any[]) => any>(func: F): (argsArr: Parameter
 
 ### 戻り値
 
-(`(args: Parameters<F>) => ReturnType<F>`): A new function that takes an array of arguments and returns the result of calling the original function with those arguments.
+(`(args: Parameters<F>) => ReturnType<F>`): 引数の配列を受け取り、元の関数をその引数で呼び出した結果を返す新しい関数を作成します。
 
 ## 例
 
