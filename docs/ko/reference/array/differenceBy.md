@@ -31,3 +31,19 @@ const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
 // result는 [{ id: 1 }, { id: 3 }, { id: 5 }]가 돼요. id가 2인 요소들은 두 배열 모두에 있어서 결과에서 제외돼요.
 ```
+
+## Lodash 호환성
+
+`es-toolkit/compat`에서 `differenceBy`를 가져오면 lodash와 호환돼요.
+
+- `differenceBy`는 첫 번째 유사 배열 객체와 하나 이상의 후속 유사 배열 객체를 비교해요.
+- `differenceBy`는 선택적으로 마지막 인자로 함수 또는 속성 키를 받아요.
+
+```typescript
+import { differenceBy } from 'es-toolkit/compat';
+
+differenceBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], item => item.x); // Returns [{ x: 2 }]
+differenceBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], 'x'); // Returns [{ x: 2 }]
+differenceBy([{ x: 1 }, { x: 2 }, { x: 3 }], [{ x: 2 }], [{ x: 3 }], 'x'); // Returns [{ x: 1 }]
+differenceBy([1, 2, 3], [2], [3]); // Returns [1]
+```
