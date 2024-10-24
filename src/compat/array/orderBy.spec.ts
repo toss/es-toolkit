@@ -202,4 +202,20 @@ describe('orderBy', () => {
       [1, 2, 3],
     ]);
   });
+
+  it('should move `NaN`, nullish, and symbol values to the end', () => {
+    const symbol1 = Symbol ? Symbol('a') : null;
+    const symbol2 = Symbol ? Symbol('b') : null;
+    const array = [NaN, undefined, null, 4, symbol1, null, 1, symbol2, undefined, 3, NaN, 2];
+    const expected = [1, 2, 3, 4, symbol1, symbol2, null, null, undefined, undefined, NaN, NaN];
+
+    expect(orderBy(array)).toEqual(expected);
+    expect(orderBy(array, [])).toEqual(expected);
+
+    const array2 = [NaN, undefined, symbol1, null, 'd', null, 'a', symbol2, undefined, 'c', NaN, 'b'];
+    const expected2 = ['a', 'b', 'c', 'd', symbol1, symbol2, null, null, undefined, undefined, NaN, NaN];
+
+    expect(orderBy(array2)).toEqual(expected2);
+    expect(orderBy(array2, [])).toEqual(expected2);
+  });
 });

@@ -18,7 +18,7 @@ function isInteger(value?: unknown): value is number;
 
 ### パラメータ
 
-- `value` (`unknown`): 確認する値ます。
+- `value` (`unknown`): 確認する値。
 
 ### 戻り値
 

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { some } from './some';
+import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
-import { identity } from '../_internal/identity';
 import { stubFalse } from '../_internal/stubFalse';
 import { stubTrue } from '../_internal/stubTrue';
 
@@ -140,7 +140,14 @@ describe('some', () => {
   });
 
   it('should return true for object with one value matching the partial', () => {
-    expect(some({ a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } }, { name: 'Bob' })).toBe(true);
+    expect(
+      some(
+        { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } },
+        {
+          name: 'Bob',
+        }
+      )
+    ).toBe(true);
   });
 
   it('should return true for object with one value matching the property', () => {

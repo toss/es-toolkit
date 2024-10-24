@@ -10,11 +10,11 @@ function upperFirst(str: string): string;
 
 ### パラメータ
 
-- `str` (`string`) - 変更する文字列ます。
+- `str` (`string`): 変更する文字列。
 
 ### 戻り値
 
-(`string`): - 変換された文字列ます。
+(`string`): 変換された文字列。
 
 ## 例
 

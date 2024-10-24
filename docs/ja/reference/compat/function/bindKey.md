@@ -34,7 +34,7 @@ namespace bindKey {
 
 ### 戻り値
 
-(`T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never`): `this`가 고정된 함수.
+(`T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never`): `this`が固定された関数。
 
 ## 例
 

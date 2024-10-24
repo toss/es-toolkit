@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { toInteger } from './toInteger';
 import { flatMap } from '../../array/flatMap';
+import { identity } from '../../function/identity';
 import { falsey } from '../_internal/falsey';
-import { identity } from '../_internal/identity';
 import { MAX_INTEGER } from '../_internal/MAX_INTEGER';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { symbol } from '../_internal/symbol';

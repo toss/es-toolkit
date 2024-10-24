@@ -21,7 +21,7 @@ function floor(number: number | string, precision: number | string): number;
 
 ### 戻り値
 
-(`number`): 切り捨てられた数値。
+(`number`): 切り捨てられた数値。デフォルトは`0`です。
 
 ## 例
 

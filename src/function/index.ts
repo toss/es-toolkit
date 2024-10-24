@@ -6,6 +6,7 @@ export { curryRight } from './curryRight.ts';
 export { debounce } from './debounce.ts';
 export { flow } from './flow.ts';
 export { flowRight } from './flowRight.ts';
+export { identity } from './identity.ts';
 export { memoize, type MemoizeCache } from './memoize.ts';
 export { negate } from './negate.ts';
 export { noop } from './noop.ts';

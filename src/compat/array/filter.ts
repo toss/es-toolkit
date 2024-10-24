@@ -1,4 +1,4 @@
-import { identity } from '../_internal/identity.ts';
+import { identity } from '../../function/identity.ts';
 import { property } from '../object/property.ts';
 import { isArray } from '../predicate/isArray.ts';
 import { matches } from '../predicate/matches.ts';
@@ -111,7 +111,7 @@ export function filter<T extends Record<string, unknown>>(
  *
  * @template T
  * @param {T | null | undefined} object - The object to iterate over.
- * @param {[keyof T, unknown]} doesMatchProperty - The key-value pair to match.
+ * @param {[keyof T[keyof T], unknown]} doesMatchProperty - The key-value pair to match.
  * @returns {T[]} - Returns a new array of elements that match the given key-value pair.
  *
  * @example
@@ -121,7 +121,7 @@ export function filter<T extends Record<string, unknown>>(
  */
 export function filter<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  doesMatchProperty: [keyof T, unknown]
+  doesMatchProperty: [keyof T[keyof T], unknown]
 ): T[];
 
 /**

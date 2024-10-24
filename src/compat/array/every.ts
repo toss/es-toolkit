@@ -1,4 +1,4 @@
-import { identity } from '../_internal/identity.ts';
+import { identity } from '../../function/identity.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
@@ -132,7 +132,7 @@ export function every<T extends Record<string, unknown>>(
  *
  * @template T
  * @param {T | null | undefined} object - The object to check through.
- * @param {[keyof T, unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
+ * @param {[keyof T[keyof T], unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
  * @returns {boolean} - `true` if every item has the specified property value, or `false` if at least one item does not match.
  *
  * @example
@@ -143,7 +143,7 @@ export function every<T extends Record<string, unknown>>(
  */
 export function every<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  doesMatchProperty: [keyof T, unknown]
+  doesMatchProperty: [keyof T[keyof T], unknown]
 ): boolean;
 
 /**

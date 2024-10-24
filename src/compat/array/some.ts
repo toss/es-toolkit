@@ -1,4 +1,4 @@
-import { identity } from '../_internal/identity.ts';
+import { identity } from '../../function/identity.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
@@ -76,7 +76,6 @@ export function some<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: s
 export function some<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): boolean;
 
 /**
- *
  * Checks if there is an element in an object that matches the given predicate function.
  *
  * @template T
@@ -90,7 +89,6 @@ export function some<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial
 export function some<T extends Record<string, unknown>>(object: T | null | undefined): boolean;
 
 /**
- *
  * Checks if there is an element in an object that matches the given predicate function.
  *
  * @template T
@@ -108,7 +106,6 @@ export function some<T extends Record<string, unknown>>(
 ): boolean;
 
 /**
- *
  * Checks if there is an element in an object that matches the given partial value.
  *
  * @template T
@@ -126,7 +123,6 @@ export function some<T extends Record<string, unknown>>(
 ): boolean;
 
 /**
- *
  * Checks if there is an element in an object that matches a property with a specific value.
  *
  * @template T
@@ -145,7 +141,6 @@ export function some<T extends Record<string, unknown>>(
 ): boolean;
 
 /**
- *
  * Checks if there is an element in an object that has a specific property, where the property name is provided as a string.
  *
  * @template T
