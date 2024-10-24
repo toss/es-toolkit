@@ -15,7 +15,7 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * @template V - The type of values corresponding to the property paths.
  * @param {ArrayLike<P | P[]>} keys - An array of property paths, each path can be a dot-separated string or an array of property names.
  * @param {ArrayLike<V>} values - An array of values corresponding to the property paths.
- * @returns {{ [K in P]: V }} A new object composed of the given property paths and values.
+ * @returns {Record<P, V>} A new object composed of the given property paths and values.
  *
  * @example
  * const paths = ['a.b.c', 'd.e.f'];
@@ -35,10 +35,7 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * const result = zipObjectDeep(paths, values);
  * // result will be { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }
  */
-export function zipObjectDeep<P extends PropertyKey, V>(
-  keys: ArrayLike<P | P[]>,
-  values: ArrayLike<V>
-): { [K in P]: V } {
+export function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): Record<P, V> {
   const result = {} as { [K in P]: V };
   if (!isArrayLike(keys)) {
     return result;

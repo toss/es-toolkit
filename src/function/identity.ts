@@ -17,6 +17,6 @@
  * // Returns { key: 'value' }
  * identity({ key: 'value' });
  */
-export function identity<T>(x: T) {
+export function identity<T>(x: T): T {
   return x;
 }
