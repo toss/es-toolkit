@@ -34,38 +34,38 @@ function template(string: string, options?: TemplateOptions): ((data?: object) =
 ## 示例
 
 ```typescript
-// Use the "escape" delimiter to escape data properties.
+// 使用 "escape" 定界符来转义数据属性。
 const compiled = template('<%- value %>');
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
+compiled({ value: '<div>' }); // 返回 '&lt;div&gt;'
 
-// Use the "interpolate" delimiter to interpolate data properties.
+// 使用 "interpolate" 定界符来插入数据属性。
 const compiled = template('<%= value %>');
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+compiled({ value: '你好，世界！' }); // 返回 '你好，世界！'
 
-// Use the "evaluate" delimiter to evaluate JavaScript code.
-const compiled = template('<% if (value) { %>Yes<% } else { %>No<% } %>');
-compiled({ value: true }); // returns 'Yes'
+// 使用 "evaluate" 定界符来评估 JavaScript 代码。
+const compiled = template('<% if (value) { %>是<% } else { %>否<% } %>');
+compiled({ value: true }); // 返回 '是'
 
-// Use the "variable" option to specify the data object variable name.
+// 使用 "variable" 选项来指定数据对象的变量名。
 const compiled = template('<%= data.value %>', { variable: 'data' });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+compiled({ value: '你好，世界！' }); // 返回 '你好，世界！'
 
-// Use the "imports" option to import functions.
+// 使用 "imports" 选项来导入函数。
 const compiled = template('<%= _.toUpper(value) %>', { imports: { _: { toUpper } } });
-compiled({ value: 'hello, world!' }); // returns 'HELLO, WORLD!'
+compiled({ value: 'hello, world!' }); // 返回 'HELLO, WORLD!'
 
-// Use the custom "escape" delimiter.
+// 使用自定义 "escape" 定界符。
 const compiled = template('<@ value @>', { escape: /<@([\s\S]+?)@>/g });
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
+compiled({ value: '<div>' }); // 返回 '&lt;div&gt;'
 
-// Use the custom "evaluate" delimiter.
-const compiled = template('<# if (value) { #>Yes<# } else { #>No<# } #>', { evaluate: /<#([\s\S]+?)#>/g });
-compiled({ value: true }); // returns 'Yes'
+// 使用自定义 "evaluate" 定界符。
+const compiled = template('<# if (value) { #>是<# } else { #>否<# } #>', { evaluate: /<#([\s\S]+?)#>/g });
+compiled({ value: true }); // 返回 '是'
 
-// Use the custom "interpolate" delimiter.
+// 使用自定义 "interpolate" 定界符。
 const compiled = template('<$ value $>', { interpolate: /<\$([\s\S]+?)\$>/g });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+compiled({ value: '你好，世界！' }); // 返回 '你好，世界！'
 
-// Use the "sourceURL" option to specify the source URL of the template.
-const compiled = template('hello <%= user %>!', { sourceURL: 'template.js' });
+// 使用 "sourceURL" 选项来指定模板的源 URL。
+const compiled = template('你好 <%= user %>!', { sourceURL: 'template.js' });
 ```
