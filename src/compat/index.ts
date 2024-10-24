@@ -92,6 +92,7 @@ export { round } from './math/round.ts';
 
 export { cloneDeep } from './object/cloneDeep.ts';
 export { defaults } from './object/defaults.ts';
+export { forEach } from './object/forEach.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { get } from './object/get.ts';
 export { has } from './object/has.ts';
