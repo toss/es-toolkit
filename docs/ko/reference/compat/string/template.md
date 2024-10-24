@@ -34,38 +34,38 @@ function template(string: string, options?: TemplateOptions): ((data?: object) =
 ## 예시
 
 ```typescript
-// Use the "escape" delimiter to escape data properties.
+// "escape" 구분 기호를 사용해서 값을 안전하게 쓸 수 있도록 이스케이핑하세요.
 const compiled = template('<%- value %>');
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
+compiled({ value: '<div>' }); // '&lt;div&gt;'을 반환
 
-// Use the "interpolate" delimiter to interpolate data properties.
+// "interpolate" 구분 기호를 사용해서 값을 연결한 문자열을 만드세요.
 const compiled = template('<%= value %>');
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+compiled({ value: 'Hello, World!' }); // 'Hello, World!'을 반환
 
-// Use the "evaluate" delimiter to evaluate JavaScript code.
+// "evaluate" 구분 기호를 사용해서 JavaScript 식을 평가하세요.
 const compiled = template('<% if (value) { %>Yes<% } else { %>No<% } %>');
-compiled({ value: true }); // returns 'Yes'
+compiled({ value: true }); // 'Yes'를 반환
 
-// Use the "variable" option to specify the data object variable name.
+// "variable" 구분 기호를 사용해서 변수나 프로퍼티 값에 접근하세요.
 const compiled = template('<%= data.value %>', { variable: 'data' });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+compiled({ value: 'Hello, World!' }); // 'Hello, World!'을 반환
 
-// Use the "imports" option to import functions.
+// "imports" 옵션을 사용하여 함수를 임포트하세요.
 const compiled = template('<%= _.toUpper(value) %>', { imports: { _: { toUpper } } });
-compiled({ value: 'hello, world!' }); // returns 'HELLO, WORLD!'
+compiled({ value: 'hello, world!' }); // 'HELLO, WORLD!'을 반환
 
-// Use the custom "escape" delimiter.
+// 커스텀 "escape" 구분 기호를 사용하는 방법
 const compiled = template('<@ value @>', { escape: /<@([\s\S]+?)@>/g });
 compiled({ value: '<div>' }); // returns '&lt;div&gt;'
 
-// Use the custom "evaluate" delimiter.
+// 커스텀 "evaluate" 구분 기호를 사용하는 방법
 const compiled = template('<# if (value) { #>Yes<# } else { #>No<# } #>', { evaluate: /<#([\s\S]+?)#>/g });
 compiled({ value: true }); // returns 'Yes'
 
-// Use the custom "interpolate" delimiter.
+// 커스텀 "interpolate" 구분 기호를 사용하는 방법
 const compiled = template('<$ value $>', { interpolate: /<\$([\s\S]+?)\$>/g });
 compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
 
-// Use the "sourceURL" option to specify the source URL of the template.
+// "sourceURL" 옵션으로 템플릿의 소스 URL을 지정하세요.
 const compiled = template('hello <%= user %>!', { sourceURL: 'template.js' });
 ```

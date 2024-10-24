@@ -34,38 +34,38 @@ function template(string: string, options?: TemplateOptions): ((data?: object) =
 ## 例
 
 ```typescript
-// Use the "escape" delimiter to escape data properties.
+// "escape" デリミタを使用して値を安全にエスケープできます。
 const compiled = template('<%- value %>');
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
+compiled({ value: '<div>' }); // '&lt;div&gt;'を返します
 
-// Use the "interpolate" delimiter to interpolate data properties.
+// "interpolate" デリミタを使用して値を結合した文字列を作成できます。
 const compiled = template('<%= value %>');
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+compiled({ value: 'Hello, World!' }); // 'Hello, World!'を返します
 
-// Use the "evaluate" delimiter to evaluate JavaScript code.
+// "evaluate" デリミタを使用して JavaScript 式を評価できます。
 const compiled = template('<% if (value) { %>Yes<% } else { %>No<% } %>');
-compiled({ value: true }); // returns 'Yes'
+compiled({ value: true }); // 'Yes'を返します
 
-// Use the "variable" option to specify the data object variable name.
+// "variable" デリミタを使用して変数やプロパティ値にアクセスできます。
 const compiled = template('<%= data.value %>', { variable: 'data' });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+compiled({ value: 'Hello, World!' }); // 'Hello, World!'を返します
 
-// Use the "imports" option to import functions.
+// "imports" オプションを使用して関数をインポートできます。
 const compiled = template('<%= _.toUpper(value) %>', { imports: { _: { toUpper } } });
-compiled({ value: 'hello, world!' }); // returns 'HELLO, WORLD!'
+compiled({ value: 'hello, world!' }); // 'HELLO, WORLD!'を返します
 
-// Use the custom "escape" delimiter.
+// カスタム "escape" デリミタを使用する方法
 const compiled = template('<@ value @>', { escape: /<@([\s\S]+?)@>/g });
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
+compiled({ value: '<div>' }); // '&lt;div&gt;'を返します
 
-// Use the custom "evaluate" delimiter.
+// カスタム "evaluate" デリミタを使用する方法
 const compiled = template('<# if (value) { #>Yes<# } else { #>No<# } #>', { evaluate: /<#([\s\S]+?)#>/g });
-compiled({ value: true }); // returns 'Yes'
+compiled({ value: true }); // 'Yes'を返します
 
-// Use the custom "interpolate" delimiter.
+// カスタム "interpolate" デリミタを使用する方法
 const compiled = template('<$ value $>', { interpolate: /<\$([\s\S]+?)\$>/g });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
+compiled({ value: 'Hello, World!' }); // 'Hello, World!'を返します
 
-// Use the "sourceURL" option to specify the source URL of the template.
+// "sourceURL" オプションでテンプレートのソース URL を指定できます。
 const compiled = template('hello <%= user %>!', { sourceURL: 'template.js' });
 ```
