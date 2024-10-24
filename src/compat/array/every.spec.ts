@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { every } from './every';
+import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
-import { identity } from '../_internal/identity';
 import { stubFalse } from '../_internal/stubFalse';
 import { stubTrue } from '../_internal/stubTrue';
 

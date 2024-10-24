@@ -1,7 +1,7 @@
 import { intersectionBy as intersectionByToolkit } from '../../array/intersectionBy.ts';
 import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
-import { identity } from '../_internal/identity.ts';
+import { identity } from '../../function/identity.ts';
 import { property } from '../object/property.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
