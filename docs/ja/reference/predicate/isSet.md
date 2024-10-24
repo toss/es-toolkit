@@ -15,7 +15,7 @@ function isSet(value: unknown): value is Set<any>;
 
 ### パラメータ
 
-- `value` (`unknown`): テストする値。
+- `value` (`unknown`): `Set`かどうか確認する値。
 
 ### 戻り値
 

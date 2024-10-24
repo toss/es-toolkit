@@ -24,7 +24,7 @@ function parseInt(string: string, radix: number, guard?: unknown): number;
 
 ### 戻り値
 
-(`number`): 変換された整数を返しますます。
+(`number`): 変換された整数を返します。
 
 ## 例
 

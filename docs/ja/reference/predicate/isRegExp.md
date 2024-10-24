@@ -12,7 +12,7 @@ function isRegExp(value: unknown): value is RegExp;
 
 ### パラメータ
 
-- `value` (`unknown`) チェックする値ます。
+- `value` (`unknown`): RegExpかどうかテストする値。
 
 ### 戻り値
 
