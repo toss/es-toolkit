@@ -1,5 +1,16 @@
 # es-toolkit Changelog
 
+## Version v1.26.0
+
+Released on October 24th, 2024.
+
+- Added support for [invariant](https://es-toolkit.slash.page/reference/util/invariant.html), [identity](https://es-toolkit.slash.page/reference/function/identity.html), [median](https://es-toolkit.slash.page/reference/math/median.html), and [medianBy](https://es-toolkit.slash.page/reference/math/medianBy.html).
+- Added compatibility functions for [template](https://es-toolkit.slash.page/reference/compat/string/template.html), [uniqueId](https://es-toolkit.slash.page/reference/compat/util/uniqueId.html), [intersectionBy](https://es-toolkit.slash.page/reference/array/intersectionBy.html), [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html), [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html), and [some](https://es-toolkit.slash.page/reference/array/some.html).
+- Made it possible to use [drop](https://es-toolkit.slash.page/reference/array/drop.html), [dropRight](https://es-toolkit.slash.page/reference/array/dropRight.html), [every](https://es-toolkit.slash.page/reference/compat/array/every.html), [take](https://es-toolkit.slash.page/reference/array/take.html), and [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html) directly as iteratees, allowing for usage like `arr.map(drop)`.
+- Corrected [merge](https://es-toolkit.slash.page/reference/object/merge.html) to disallow primitive values such as numbers or strings.
+
+This version includes contributions from @dayongkr, @Na-hyunwoo, @ssi02014, @kaehehehe, @jakvbs, @D-Sketon, and @seonghun0828. Thank you for your valuable contributions!
+
 ## Version v1.25.2
 
 Released on October 16th, 2024.
