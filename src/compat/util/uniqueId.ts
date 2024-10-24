@@ -4,10 +4,6 @@ let idCounter = 0;
 /**
  * Generates a unique identifier, optionally prefixed with a given string.
  *
- * This function increments an internal counter to ensure uniqueness within
- * the current session. If a prefix is provided, it is prepended to the
- * generated identifier.
- *
  * @param {string} [prefix] - An optional string to prefix the unique identifier.
  *                            If not provided or not a string, only the unique
  *                            numeric identifier is returned.

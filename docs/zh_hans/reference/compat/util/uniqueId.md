@@ -6,21 +6,21 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-生成唯一的 ID。如果给出了前缀，则将 ID 附加到其上。
+生成一个唯一的标识符，可选地以给定字符串作为前缀。
 
 ## 签名
 
 ```typescript
-function uniqueId(value?: string): string;
+function uniqueId(prefix?: string): string;
 ```
 
 ### 参数
 
-- `value` (`string`, optional): ID 的前缀值。
+- `prefix` (`string`, optional): 标识符的前缀值。
 
 ### 返回值
 
-(`string`): 返回唯一 ID。
+(`string`): 返回唯一标识符。
 
 ## 示例
 
