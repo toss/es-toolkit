@@ -5,6 +5,15 @@ import { empties } from '../_internal/empties';
 import { stubTrue } from '../_internal/stubTrue';
 
 describe('isMatch', () => {
+  it('should handle null correctly', () => {
+    expect(isMatch({ a: { b: 1 } }, { a: { b: null } })).toBe(false);
+    expect(isMatch({ a: { b: 1 } }, { a: null })).toBe(false);
+    expect(isMatch({ a: 1 }, { a: null })).toBe(false);
+    expect(isMatch({ a: 1 }, null)).toBe(true);
+    expect(isMatch(null, { a: 1 })).toBe(false);
+    expect(isMatch(null, null)).toBe(true);
+  });
+
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {
     const object: any = { a: 1, b: 2, c: 3 };
 
