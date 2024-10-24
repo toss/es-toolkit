@@ -138,9 +138,9 @@ export function template(
     }
 
     if (interpolateValue) {
-      source += ` + (${interpolateValue} ?? '')`;
+      source += ` + ((${interpolateValue}) == null ? '' : ${interpolateValue})`;
     } else if (esTemplateValue) {
-      source += ` + (${esTemplateValue} ?? '')`;
+      source += ` + ((${esTemplateValue}) == null ? '' : ${esTemplateValue})`;
     }
 
     if (evaluateValue) {
@@ -162,7 +162,7 @@ export function template(
   const compiledFunction = `function(${options.variable || 'obj'}) {
     let __p = '';
     ${options.variable ? '' : 'if (obj == null) { obj = {}; }'}
-    ${isEvaluated ? `function print(...args) { __p += args.join(''); }` : ''}
+    ${isEvaluated ? `function print() { __p += Array.prototype.join.call(arguments, ''); }` : ''}
     ${options.variable ? source : `with(obj) {\n${source}\n}`}
     return __p;
   }`;
