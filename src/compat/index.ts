@@ -148,15 +148,15 @@ export { pad } from './string/pad.ts';
 export { padEnd } from './string/padEnd.ts';
 export { padStart } from './string/padStart.ts';
 export { repeat } from './string/repeat.ts';
+export { replace } from './string/replace.ts';
 export { snakeCase } from './string/snakeCase.ts';
 export { startCase } from './string/startCase.ts';
 export { startsWith } from './string/startsWith.ts';
-export { upperCase } from './string/upperCase.ts';
-
 export { template, templateSettings } from './string/template.ts';
 export { trim } from './string/trim.ts';
 export { trimEnd } from './string/trimEnd.ts';
 export { trimStart } from './string/trimStart.ts';
+export { upperCase } from './string/upperCase.ts';
 
 export { constant } from './util/constant.ts';
 export { defaultTo } from './util/defaultTo.ts';
