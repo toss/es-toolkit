@@ -1,5 +1,13 @@
 # es-toolkit Changelog
 
+## Version v1.26.1
+
+Released on October 25th, 2024.
+
+- Fixed a bug in [isMatch](https://es-toolkit.slash.page/reference/compat/predicate/isMatch.html) that did not strictly compare `null` in objects.
+
+This version includes contributions from @D-Sketon. Thank you for your valuable contributions!
+
 ## Version v1.26.0
 
 Released on October 24th, 2024.
