@@ -11,3 +11,4 @@ export { omitBy } from './omitBy.ts';
 export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
 export { toMerged } from './toMerged.ts';
+export { findKey } from './findKey.ts';
