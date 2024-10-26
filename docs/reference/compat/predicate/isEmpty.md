@@ -10,7 +10,7 @@ Checks if a given value is empty.
 
 - If the given value is a string, checks if it is an empty string.
 - If the given value is an array, `Map`, or `Set`, checks if its size is 0.
-- If the given value is an [array-like object](../compat/predicate/isArrayLike.md), checks if its length is 0.
+- If the given value is an [array-like object](../predicate/isArrayLike.md), checks if its length is 0.
 - If the given value is an object, checks if it is an empty object with no properties.
 - Primitive values (strings, booleans, numbers, or bigints) are considered empty.
 
