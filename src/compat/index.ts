@@ -161,6 +161,7 @@ export { upperCase } from './string/upperCase.ts';
 export { constant } from './util/constant.ts';
 export { defaultTo } from './util/defaultTo.ts';
 export { eq } from './util/eq.ts';
+export { iteratee } from './util/iteratee.ts';
 export { times } from './util/times.ts';
 export { toFinite } from './util/toFinite.ts';
 export { toInteger } from './util/toInteger.ts';
