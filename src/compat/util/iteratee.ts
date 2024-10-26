@@ -52,6 +52,18 @@ export function iteratee(value: symbol | number | string | object): (...args: an
  *
  * @param {symbol | number | string | object | null | ((...args: any[]) => unknown)} value - The value to convert to an iteratee.
  * @returns {(...args: any[]) => unknown} - Returns the new iteratee function.
+ * @example
+ * const func = iteratee();
+ *
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [{ a: 1 }, { a: 2 }, { a: 3 }]
+ * @example
+ * const func = iteratee((object) => object.a);
+ *
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
+ * @example
+ * const func = iteratee('a');
+ *
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
  */
 export function iteratee(
   value?: symbol | number | string | object | null | ((...args: any[]) => unknown)
