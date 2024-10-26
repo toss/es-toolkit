@@ -4,6 +4,12 @@ import { isTypedArray } from './isTypedArray.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
 
+declare let Buffer:
+  | {
+      isBuffer: (a: any) => boolean;
+    }
+  | undefined;
+
 /**
  * Checks if a given value is empty.
  *
@@ -125,7 +131,7 @@ export function isEmpty(value?: unknown): boolean {
     if (
       typeof (value as any).splice !== 'function' &&
       typeof value !== 'string' &&
-      !Buffer.isBuffer(value) &&
+      (typeof Buffer === 'undefined' || !Buffer.isBuffer(value)) &&
       !isTypedArray(value) &&
       !isArguments(value)
     ) {

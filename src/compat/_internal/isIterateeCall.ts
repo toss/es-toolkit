@@ -1,7 +1,7 @@
-import { isIndex } from './isIndex';
-import { isArrayLike } from '../predicate/isArrayLike';
-import { isObject } from '../predicate/isObject';
-import { eq } from '../util/eq';
+import { isIndex } from './isIndex.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { isObject } from '../predicate/isObject.ts';
+import { eq } from '../util/eq.ts';
 
 export function isIterateeCall(value: unknown, index: unknown, object: unknown): boolean {
   if (!isObject(object)) {
