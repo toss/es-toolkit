@@ -30,8 +30,10 @@ export function difference<T>(arr: ArrayLike<T> | undefined | null, ...values: A
   if (!isArrayLikeObject(arr)) {
     return [];
   }
+
   const arr1 = Array.from(arr);
   const arr2 = [];
+
   for (let i = 0; i < values.length; i++) {
     const value = values[i];
     if (isArrayLikeObject(value)) {
