@@ -117,6 +117,7 @@ export { isArrayLike } from './predicate/isArrayLike.ts';
 export { isArrayLikeObject } from './predicate/isArrayLikeObject.ts';
 export { isBoolean } from './predicate/isBoolean.ts';
 export { isDate } from './predicate/isDate.ts';
+export { isEmpty } from './predicate/isEmpty.ts';
 export { isEqualWith } from './predicate/isEqualWith.ts';
 export { isError } from './predicate/isError.ts';
 export { isFinite } from './predicate/isFinite.ts';

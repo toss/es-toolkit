@@ -2,6 +2,7 @@ export { isArrayBuffer } from './isArrayBuffer.ts';
 export { isBlob } from './isBlob.ts';
 export { isBoolean } from './isBoolean.ts';
 export { isDate } from './isDate.ts';
+export { isEmpty } from './isEmpty.ts';
 export { isEqual } from './isEqual.ts';
 export { isEqualWith } from './isEqualWith.ts';
 export { isError } from './isError.ts';
