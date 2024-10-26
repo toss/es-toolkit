@@ -1,7 +1,8 @@
 import { isArguments } from './isArguments.ts';
 import { isArrayLike } from './isArrayLike.ts';
 import { isTypedArray } from './isTypedArray.ts';
-import { isEmpty as isEmptyToolkit } from '../../predicate/isEmpty.ts';
+import { getSymbols } from '../_internal/getSymbols.ts';
+import { isPrototype } from '../_internal/isPrototype.ts';
 
 /**
  * Checks if a given value is empty.
@@ -95,6 +96,7 @@ export function isEmpty(value: unknown): boolean;
  * - If the given value is an array, `Map`, or `Set`, checks if its size is 0.
  * - If the given value is an [array-like object](../compat/predicate/isArrayLike.md), checks if its length is 0.
  * - If the given value is an object, checks if it is an empty object with no properties.
+ * - Primitive values (strings, booleans, numbers, or bigints) are considered empty.
  *
  * @param {unknown} [value] - The value to check.
  * @returns {boolean} `true` if the value is empty, `false` otherwise.
@@ -114,6 +116,10 @@ export function isEmpty(value: unknown): boolean;
  * isEmpty(new Set([1, 2, 3])); // false
  */
 export function isEmpty(value?: unknown): boolean {
+  if (value == null) {
+    return true;
+  }
+
   // Objects like { "length": 0 } are not empty in lodash
   if (isArrayLike(value)) {
     if (
@@ -125,17 +131,24 @@ export function isEmpty(value?: unknown): boolean {
     ) {
       return false;
     }
+
+    return value.length === 0;
   }
 
-  // Handle prototypes
-  if (typeof value === 'object' && value != null) {
-    const constructor = value.constructor;
-    const prototype = typeof constructor === 'function' ? constructor.prototype : Object.prototype;
-
-    if (value === prototype) {
-      return Object.keys(value).filter(x => x !== 'constructor').length === 0;
+  if (typeof value === 'object') {
+    if (value instanceof Map || value instanceof Set) {
+      return value.size === 0;
     }
+
+    const keys = Object.keys(value);
+    const symbols = getSymbols(value);
+
+    if (isPrototype(value)) {
+      return keys.filter(x => x !== 'constructor').length === 0 && symbols.length === 0;
+    }
+
+    return keys.length === 0 && symbols.length === 0;
   }
 
-  return isEmptyToolkit(value);
+  return true;
 }
