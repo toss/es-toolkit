@@ -46,10 +46,16 @@ export function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
 export function iteratee(value: symbol | number | string | object): (...args: any[]) => any;
 
 /**
- * Creates a function that invokes `value` with the arguments of the created function.
+ * Creates a function that returns a value from an element in a collection.
  *
- * - If `value` is a property name, the created function returns the property value for a given element.
- * - If `value` is an array or object, the created function returns `true` for elements that contain the equivalent source properties, otherwise `false`.
+ * You can call `iteratee` with the following types of arguments:
+ *
+ * - **Function**: Returns the function as-is, which will be called with the element from the collection.
+ * - **Property name**: Returns the value of the specified property from the element.
+ * - **Property-value pair**: Returns a boolean indicating whether the element's property matches the given value.
+ * - **Partial object**: Returns a boolean indicating whether the element matches the properties of the partial object.
+ *
+ * If you don't provide any arguments or pass `null`, this function will return a function that simply returns its input unchanged.
  *
  * @param {symbol | number | string | object | null | ((...args: any[]) => any)} value - The value to convert to an iteratee.
  * @returns {(...args: any[]) => unknown} - Returns the new iteratee function.
@@ -78,8 +84,16 @@ export function iteratee(
       return value as any;
     }
     case 'object': {
-      return Array.isArray(value) ? matchesProperty(value[0], value[1]) : matches(value);
+      if (Array.isArray(value) && value.length === 2) {
+        return matchesProperty(value[0], value[1]);
+      }
+
+      return matches(value);
+    }
+    case 'string':
+    case 'symbol':
+    case 'number': {
+      return property(value);
     }
   }
-  return property(value);
 }
