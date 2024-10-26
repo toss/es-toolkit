@@ -12,7 +12,7 @@
 ## 인터페이스
 
 ```typescript
-function merge<T, S>(target: T, source: S): T & S;
+function merge<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(target: T, source: S): T & S;
 ```
 
 ### 파라미터
