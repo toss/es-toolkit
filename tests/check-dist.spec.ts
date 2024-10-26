@@ -31,6 +31,7 @@ const ENTRYPOINTS = [
   './predicate',
   './promise',
   './string',
+  './util',
   './compat',
 ];
 

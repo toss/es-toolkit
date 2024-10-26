@@ -1,5 +1,5 @@
+import { identity } from '../../function/identity.ts';
 import { isNil } from '../../predicate/isNil.ts';
-import { identity } from '../_internal/identity.ts';
 
 /**
  * Creates a new object that reverses the keys and values of the given object, similar to the invert.

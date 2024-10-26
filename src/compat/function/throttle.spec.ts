@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { throttle } from './throttle';
+import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
 import { delay } from '../../promise/delay';
-import { identity } from '../_internal/identity';
 
 describe('throttle', () => {
   it('should throttle a function', async () => {

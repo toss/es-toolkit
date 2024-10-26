@@ -103,6 +103,10 @@ export function isMatch(target: any, source: any): boolean {
           return false;
         }
 
+        if (source[key] === null && target[key] !== null) {
+          return false;
+        }
+
         if (!isMatch(target[key], source[key])) {
           return false;
         }

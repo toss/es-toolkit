@@ -1,4 +1,4 @@
-import { identity } from '../_internal/identity.ts';
+import { identity } from '../../function/identity.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';

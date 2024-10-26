@@ -15,7 +15,7 @@ function isMap(value: unknown): value is Map<any, any>;
 
 ### パラメータ
 
-- `value` (`unknown`): テストする値。
+- `value` (`unknown`): `Map`かどうか確認する値。
 
 ### 戻り値
 

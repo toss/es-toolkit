@@ -12,7 +12,7 @@
 ## 签名
 
 ```typescript
-function toMerged<T, S>(target: T, source: S): T & S;
+function toMerged<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(target: T, source: S): T & S;
 ```
 
 ### 参数

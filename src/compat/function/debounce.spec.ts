@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { debounce } from './debounce';
+import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
 import { delay } from '../../promise/delay';
-import { identity } from '../_internal/identity';
 
 describe('debounce', () => {
   it('should debounce function calls', async () => {
@@ -312,7 +312,10 @@ describe('debounce', () => {
   });
 
   it('subsequent leading debounced calls return the last `func` result', async () => {
-    const debounced = debounce(identity, 32, { leading: true, trailing: false });
+    const debounced = debounce(identity, 32, {
+      leading: true,
+      trailing: false,
+    });
     const results = [debounced('a'), debounced('b')];
 
     expect(results).toEqual(['a', 'a']);
