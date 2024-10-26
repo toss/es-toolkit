@@ -1,5 +1,3 @@
-import { sumBy } from './sumBy';
-
 /**
  * Calculates the sum of an array of numbers.
  *
@@ -14,5 +12,11 @@ import { sumBy } from './sumBy';
  * // result will be 15
  */
 export function sum(nums: readonly number[]): number {
-  return sumBy(nums, x => x);
+  let result = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    result += nums[i];
+  }
+
+  return result;
 }
