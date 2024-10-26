@@ -1,4 +1,7 @@
-export function sumBy<T>(array: ArrayLike<T> | null | undefined, iteratee?: (value: T) => number): number {
+export function sumBy<T>(
+  array: ArrayLike<T> | null | undefined,
+  iteratee?: (value: T) => number | bigint
+): number | bigint {
   if (!array || !array.length) {
     return 0;
   }
