@@ -1,5 +1,3 @@
-import { mean } from './mean';
-
 /**
  * Calculates the median of an array of numbers.
  *
