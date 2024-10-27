@@ -47,7 +47,7 @@ describe('unzip', () => {
         [undefined, false],
       ],
     ];
-    let actual = unzip(pair[1]) as any;
+    const actual = unzip(pair[1]) as any;
     expect('2' in actual[0]).toBeTruthy();
     expect(actual).toEqual([
       ['barney', 36, undefined],
