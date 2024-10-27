@@ -111,7 +111,15 @@ export function zip<T, U, V, W>(
  * // result will be [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
  */
 export function zip<T>(...arrs: Array<readonly T[]>): T[][] {
-  const rowCount = Math.max(...arrs.map(x => x.length));
+  // For performance reasons, use this implementation instead of
+  // const rowCount = Math.max(...arrs.map(x => x.length));
+  let rowCount = 0;
+
+  for (let i = 0; i < arrs.length; i++) {
+    if (arrs[i].length > rowCount) {
+      rowCount = arrs[i].length;
+    }
+  }
   const columnCount = arrs.length;
   const result = Array(rowCount);
 
