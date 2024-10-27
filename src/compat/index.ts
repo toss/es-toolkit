@@ -90,6 +90,8 @@ export { min } from './math/min.ts';
 export { parseInt } from './math/parseInt.ts';
 export { random } from './math/random.ts';
 export { round } from './math/round.ts';
+export { sum } from './math/sum.ts';
+export { sumBy } from './math/sumBy.ts';
 
 export { cloneDeep } from './object/cloneDeep.ts';
 export { defaults } from './object/defaults.ts';

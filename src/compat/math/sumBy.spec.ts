@@ -4,7 +4,10 @@ import { empties } from '../_internal/empties';
 import { slice } from '../_internal/slice';
 import { stubZero } from '../_internal/stubZero';
 
-describe('sum methods', () => {
+describe('sumBy', () => {
+  const array = [6, 4, 2];
+  const objects = [{ a: 2 }, { a: 3 }, { a: 1 }];
+
   it(`should return the sum of an array of numbers`, () => {
     expect(sumBy(array)).toBe(12);
   });
@@ -28,9 +31,6 @@ describe('sum methods', () => {
   it(`should not coerce values to numbers`, () => {
     expect(sumBy(['1', '2'])).toBe('12');
   });
-
-  const array = [6, 4, 2];
-  const objects = [{ a: 2 }, { a: 3 }, { a: 1 }];
 
   it('should work with an `iteratee`', () => {
     const actual = sumBy(objects, object => object.a);
