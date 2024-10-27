@@ -1,4 +1,4 @@
-import { median } from './median';
+import { median } from './median.ts';
 
 /**
  * Calculates the median of an array of elements when applying

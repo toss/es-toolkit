@@ -1,4 +1,4 @@
-import { isDate as isDateToolkit } from '../../predicate';
+import { isDate as isDateToolkit } from '../../predicate/isDate.ts';
 
 /**
  * Checks if `value` is a Date object.
