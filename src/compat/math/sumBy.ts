@@ -4,7 +4,7 @@ import { iteratee as iterateeToolkit } from '../util/iteratee';
  * Computes the sum of the `number` values in `array`.
  *
  * @param {ArrayLike<number> | null | undefined} array - The array to iterate over.
- * @returns {number} - Returns the sum.
+ * @returns {number} Returns the sum.
  *
  * @example
  * sumBy([1, 2, 3]); // => 6
@@ -17,7 +17,7 @@ export function sumBy(array: ArrayLike<number> | null | undefined): number;
  * Computes the sum of the `bigint` values in `array`.
  *
  * @param {ArrayLike<bigint>} array - The array to iterate over.
- * @returns {bigint} - Returns the sum.
+ * @returns {bigint} Returns the sum.
  *
  * @example
  * sumBy([1n, 2n, 3n]); // => 6n
@@ -30,7 +30,7 @@ export function sumBy(array: ArrayLike<bigint>): bigint;
  * It does not coerce values to `number`.
  *
  * @param {ArrayLike<unknown> | null | undefined} array - The array to iterate over.
- * @returns {unknown} - Returns the sum.
+ * @returns {unknown} Returns the sum.
  *
  * @example
  * sumBy(["1", "2"]); // => "12"
@@ -44,7 +44,7 @@ export function sumBy(array: ArrayLike<unknown> | null | undefined): unknown;
  * @template T - The type of the array elements.
  * @param {ArrayLike<T>} array - The array to iterate over.
  * @param {(value: T) => number} iteratee - The function invoked per iteration.
- * @returns {number} - Returns the sum.
+ * @returns {number} Returns the sum.
  *
  * @example
  * sumBy([{ a: 1 }, { a: 2 }, { a: 3 }], object => object.a); // => 6
@@ -57,7 +57,7 @@ export function sumBy<T>(array: ArrayLike<T>, iteratee: (value: T) => number): n
  * @template T - The type of the array elements.
  * @param {ArrayLike<T>} array - The array to iterate over.
  * @param {(value: T) => bigint} iteratee - The function invoked per iteration.
- * @returns {bigint} - Returns the sum.
+ * @returns {bigint} Returns the sum.
  *
  * @example
  * sumBy([{ a: 1n }, { a: 2n }, { a: 3n }], object => object.a); // => 6n

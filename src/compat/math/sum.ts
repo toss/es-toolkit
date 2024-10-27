@@ -4,7 +4,7 @@ import { sumBy } from './sumBy';
  * Computes the sum of the `number` values in `array`.
  *
  * @param {ArrayLike<number> | null | undefined} array - The array to iterate over.
- * @returns {number} - Returns the sum.
+ * @returns {number} Returns the sum.
  *
  * @example
  * sum([1, 2, 3]); // => 6
@@ -17,7 +17,7 @@ export function sum(array: ArrayLike<number> | null | undefined): number;
  * Computes the sum of the `bigint` values in `array`.
  *
  * @param {ArrayLike<bigint>} array - The array to iterate over.
- * @returns {bigint} - Returns the sum.
+ * @returns {bigint} Returns the sum.
  *
  * @example
  * sum([1n, 2n, 3n]); // => 6n
@@ -30,7 +30,7 @@ export function sum(array: ArrayLike<bigint>): bigint;
  * It does not coerce values to `number`.
  *
  * @param {ArrayLike<unknown> | null | undefined} array - The array to iterate over.
- * @returns {unknown} - Returns the sum.
+ * @returns {unknown} Returns the sum.
  *
  * @example
  * sum(["1", "2"]); // => "12"
