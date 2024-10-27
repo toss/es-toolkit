@@ -22,7 +22,7 @@ export function sumBy<T>(items: readonly T[], getValue: (element: T) => number):
  * @template T - The type of elements in the array.
  * @param {T[]} items An array to calculate the sum.
  * @param {(element: T) => bigint} getValue A function that selects a bigint value from each element.
- * @returns {bigint} The sum of all the bigints as determined by the `getValue` function.
+ * @returns {bigint | number} The sum of all the bigints as determined by the `getValue` function. If `items` is empty, this function returns `0` as a `number`.
  *
  * @example
  * sumBy([{ a: 1n }, { a: 2n }, { a: 3n }], x => x.a); // Returns: 6n
