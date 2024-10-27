@@ -26,8 +26,11 @@ export function sumBy<T>(items: readonly T[], getValue: (element: T) => number):
  *
  * @example
  * sumBy([{ a: 1n }, { a: 2n }, { a: 3n }], x => x.a); // Returns: 6n
+ *
+ * const people: { name: string; age: number; id: bigint }[] = [];
+ * sumBy(people, x => x.age); // Returns: 0
  */
-export function sumBy<T>(items: readonly T[], getValue: (element: T) => bigint): bigint;
+export function sumBy<T>(items: readonly T[], getValue: (element: T) => bigint): bigint | number;
 
 export function sumBy<T>(items: readonly T[], getValue: (element: T) => number | bigint): number | bigint {
   if (!items || items.length === 0) {

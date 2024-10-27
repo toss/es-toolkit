@@ -10,7 +10,7 @@
 
 ```typescript
 function sumBy<T>(items: T[], getValue: (element: T) => number): number;
-function sumBy<T>(items: T[], getValue: (element: T) => bigint): bigint;
+function sumBy<T>(items: T[], getValue: (element: T) => bigint): bigint | number;
 ```
 
 ### 参数
