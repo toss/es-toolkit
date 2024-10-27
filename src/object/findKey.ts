@@ -16,7 +16,7 @@
  * };
  * findKey(users, function(o) { return o.age < 40; }); => 'barney'
  */
-export default function findKey<T extends Record<any, any>>(
+export function findKey<T extends Record<any, any>>(
   obj: T,
   predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
 ): keyof T | undefined {
