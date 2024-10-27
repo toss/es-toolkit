@@ -14,7 +14,7 @@
 ## インターフェース
 
 ```typescript
-function mergeWith<T, S>(
+function mergeWith<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
   target: T,
   source: S,
   merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
