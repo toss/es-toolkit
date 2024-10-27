@@ -8,9 +8,15 @@ describe('sumBy function', () => {
   });
 
   it('returns 0 for empty arrays', () => {
-    type Person = { name: string; age: number };
+    type Person = { name: string; age: number; id: bigint };
     const people: Person[] = [];
 
     expect(sumBy(people, x => x.age)).toEqual(0);
+    expect(sumBy(people, x => x.id)).toEqual(0);
+  });
+
+  it('calculates the sum of bigints extracted from objects', () => {
+    const result = sumBy([{ a: 1n }, { a: 2n }, { a: 3n }], x => x.a);
+    expect(result).toBe(6n);
   });
 });

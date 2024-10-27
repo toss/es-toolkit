@@ -16,4 +16,9 @@ describe('sum function', () => {
     const result = sum([-1, -2, -3, 4]);
     expect(result).toBe(-2);
   });
+
+  it('calculates the sum of an array of bigints', () => {
+    const result = sum([1n, 2n, 3n, 4n]);
+    expect(result).toBe(10n);
+  });
 });
