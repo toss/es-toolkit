@@ -16,9 +16,9 @@
  * };
  * findKey(users, function(o) { return o.age < 40; }); => 'barney'
  */
-export function findKey<T extends PropertyKey, K>(
-  obj: Record<T, K>,
-  predicate: (value: K, key: T, obj: Record<T, K>) => boolean
-): T | undefined {
-  return (Object.keys(obj) as Array<T>).find(key => predicate(obj[key], key, obj));
+export default function findKey<T extends Record<any, any>>(
+  obj: T,
+  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
+): keyof T | undefined {
+  return (Object.keys(obj) as Array<keyof T>).find(key => predicate(obj[key], key, obj));
 }
