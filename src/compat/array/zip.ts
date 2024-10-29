@@ -152,6 +152,27 @@ export function zip<T, U, V, W, X>(
  * // result will be [[1, 'a', true, null, undefined], [2, 'b', false, null, undefined], [3, 'c', undefined, null, undefined]]
  */
 export function zip<T>(...arrays: Array<ArrayLike<any> | null | undefined>): Array<Array<T | undefined>>;
+/**
+ * Combines multiple arrays into a single array of tuples.
+ *
+ * This function takes multiple arrays and returns a new array where each element is a tuple
+ * containing the corresponding elements from the input arrays. If the input arrays are of
+ * different lengths, the resulting array will have the length of the longest input array,
+ * with undefined values for missing elements.
+ *
+ * @template T
+ * @param {Array<ArrayLike<any> | null | undefined>} arrays - The arrays to zip.
+ * @returns {Array<Array<T | undefined>>} A new array of tuples containing the corresponding elements from the input arrays.
+ *
+ * @example
+ * const arr1 = [1, 2, 3];
+ * const arr2 = ['a', 'b', 'c'];
+ * const arr3 = [true, false];
+ * const arr4 = [null, null, null];
+ * const arr5 = [undefined, undefined, undefined];
+ * const result = zip(arr1, arr2, arr3, arr4, arr5);
+ * // result will be [[1, 'a', true, null, undefined], [2, 'b', false, null, undefined], [3, 'c', undefined, null, undefined]]
+ */
 export function zip<T>(...arrays: Array<ArrayLike<any> | null | undefined>): Array<Array<T | undefined>> {
   if (!arrays.length) {
     return [];
