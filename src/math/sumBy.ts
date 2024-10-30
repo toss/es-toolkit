@@ -32,6 +32,22 @@ export function sumBy<T>(items: readonly T[], getValue: (element: T) => number):
  */
 export function sumBy<T>(items: readonly T[], getValue: (element: T) => bigint): bigint | number;
 
+/**
+ * Calculates the sum of an array of numbers or bigints when applying
+ * the `getValue` function to each element.
+ *
+ * If the array is empty, this function returns `0`.
+ *
+ * @template T - The type of elements in the array.
+ * @param {T[]} items - An array to calculate the sum.
+ * @param {(element: T) => number | bigint} getValue - A function that selects a numeric value from each element.
+ * @returns {number | bigint} The sum of all the numbers as determined by the `getValue` function.
+ *
+ * @example
+ * sumBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: 6
+ * sumBy([{ a: 1n }, { a: 2n }, { a: 3n }], x => x.a); // Returns: 6n
+ * sumBy([], x => x.a); // Returns: 0
+ */
 export function sumBy<T>(items: readonly T[], getValue: (element: T) => number | bigint): number | bigint {
   if (!items || items.length === 0) {
     return 0;
