@@ -8,7 +8,7 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * from all input arrays, preserving the order of their first occurrence.
  *
  * @template T - The type of elements in the arrays.
- * @param {...ArrayLike<T>} [arrays] - The arrays to inspect.
+ * @param {Array<ArrayLike<T> | null | undefined>} arrays - The arrays to inspect.
  * @returns {T[]} Returns the new array of combined unique values.
  *
  * @example
@@ -30,7 +30,7 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * // Returns [0, 'a', 2, 1] (treats array-like object { 0: 'a', length: 1 } as a valid array)
  * union([0], { 0: 'a', length: 1 }, [2, 1]);
  */
-export const union = rest(function <T>(arrays: ArrayLike<T>[]): T[] {
+export const union = rest(function <T>(arrays: Array<ArrayLike<T> | null | undefined>): T[] {
   const validArrays = arrays.filter(isArrayLikeObject);
 
   const flattened = flatten(validArrays, 1);
