@@ -23,7 +23,6 @@ export function sumBy(array: ArrayLike<number> | null | undefined): number;
  * sumBy([1n, 2n, 3n]); // => 6n
  */
 export function sumBy(array: ArrayLike<bigint>): bigint;
-
 /**
  * Computes the sum of the values in `array`.
  *
@@ -57,12 +56,13 @@ export function sumBy<T>(array: ArrayLike<T>, iteratee: (value: T) => number): n
  * @template T - The type of the array elements.
  * @param {ArrayLike<T>} array - The array to iterate over.
  * @param {(value: T) => bigint} iteratee - The function invoked per iteration.
- * @returns {bigint} Returns the sum.
+ * @returns {bigint | number} Returns the sum.
  *
  * @example
  * sumBy([{ a: 1n }, { a: 2n }, { a: 3n }], object => object.a); // => 6n
+ * sumBy([], (item: { a: bigint }) => item.a); // => 0
  */
-export function sumBy<T>(array: ArrayLike<T>, iteratee: (value: T) => bigint): bigint;
+export function sumBy<T>(array: ArrayLike<T>, iteratee: (value: T) => bigint): bigint | number;
 
 /**
  * Compmutes the sum of the values that are returned by the `iteratee` function.
