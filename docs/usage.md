@@ -65,14 +65,14 @@ You can find es-toolkit on CDNs such as [jsdelivr](https://www.jsdelivr.com), [u
 ::: code-group
 
 ```html [jsdelivr]
-<script src="https://cdn.jsdelivr.net/npm/es-toolkit@%5E1"></script>
+<script src="https://cdn.jsdelivr.net/npm/es-toolkit"></script>
 <script>
   var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
 </script>
 ```
 
 ```html [unpkg]
-<script src="https://unpkg.com/es-toolkit@%5E1"></script>
+<script src="https://unpkg.com/es-toolkit"></script>
 <script>
   var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
 </script>
@@ -88,7 +88,7 @@ es-toolkit is also available on [esm.sh](https://esm.sh) for modern browsers.
 <script type="importmap">
   {
     "imports": {
-      "es-toolkit": "https://esm.sh/es-toolkit@%5E1"
+      "es-toolkit": "https://esm.sh/es-toolkit"
     }
   }
 </script>
