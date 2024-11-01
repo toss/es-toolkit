@@ -61,6 +61,7 @@ export { tail } from './array/tail.ts';
 export { take } from './array/take.ts';
 export { takeRight } from './array/takeRight.ts';
 export { uniq } from './array/uniq.ts';
+export { unzip } from './array/unzip.ts';
 export { without } from './array/without.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 
