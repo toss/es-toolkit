@@ -20,6 +20,8 @@ describe('union', () => {
 
   it('should ignore values that are not arrays or arguments objects', () => {
     const array = [0];
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(union(array, 3, { '0': 1 }, null)).toEqual(array);
     expect(union(null, array, null, [2, 1])).toEqual([0, 2, 1]);
     expect(union(array, null, args, null)).toEqual([0, 1, 2, 3]);
