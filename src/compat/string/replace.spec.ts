@@ -19,4 +19,14 @@ describe('replace', () => {
     // @ts-expect-error
     expect(replace()).toBe('');
   });
+
+  it('should return the original string if arguments length is less than 3', () => {
+    const string = 'abcde';
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(replace(string)).toBe(string);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(replace(string, 'de')).toBe(string);
+  });
 });

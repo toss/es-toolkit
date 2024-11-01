@@ -19,5 +19,9 @@ export function replace(
   pattern: string | RegExp,
   replacement: string | ((substring: string, ...args: any[]) => string)
 ): string {
+  if (arguments.length < 3) {
+    return toString(target);
+  }
+
   return toString(target).replace(pattern, replacement as any);
 }
