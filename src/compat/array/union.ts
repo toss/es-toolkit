@@ -30,10 +30,10 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * // Returns [0, 'a', 2, 1] (treats array-like object { 0: 'a', length: 1 } as a valid array)
  * union([0], { 0: 'a', length: 1 }, [2, 1]);
  */
-export const union = rest(function <T>(arrays: Array<ArrayLike<T> | null | undefined>): T[] {
+export function union<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[] {
   const validArrays = arrays.filter(isArrayLikeObject);
 
   const flattened = flatten(validArrays, 1);
 
   return uniq(flattened) as T[];
-});
+};
