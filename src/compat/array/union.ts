@@ -35,4 +35,4 @@ export function union<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[]
   const flattened = flatten(validArrays, 1);
 
   return uniq(flattened) as T[];
-};
+}
