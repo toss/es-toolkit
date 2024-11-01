@@ -17,7 +17,7 @@ describe('sum function', () => {
     expect(result).toBe(-2);
   });
 
-  it('satisfies associative property for addition', () => {
+  it('ensures that adding the sums of two arrays equals the sum of their concatenation.', () => {
     const array1: number[] = [];
     const array2 = [1, 2, 3, 4];
 

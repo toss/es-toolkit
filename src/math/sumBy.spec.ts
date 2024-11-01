@@ -14,7 +14,7 @@ describe('sumBy function', () => {
     expect(sumBy(people, x => x.age)).toEqual(0);
   });
 
-  it('should satisfies associative property for addition', () => {
+  it('ensures that adding the sums of two arrays equals the sum of their concatenation.', () => {
     const array1: { a: number }[] = [];
     const array2 = [{ a: 1 }, { a: 2 }, { a: 3 }];
 

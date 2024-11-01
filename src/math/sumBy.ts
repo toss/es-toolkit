@@ -3,6 +3,7 @@
  * the `getValue` function to each element.
  *
  * If the array is empty, this function returns `0`.
+ * It ensures that adding the sums of two arrays equals the sum of their concatenation.
  *
  * @template T - The type of elements in the array.
  * @param {T[]} items An array to calculate the sum.

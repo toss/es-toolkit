@@ -3,6 +3,7 @@
 Calculates the sum of an array of numbers when applying the `getValue` function to each element.
 
 If the array is empty, this function returns `0`.
+It ensures that adding the sums of two arrays equals the sum of their concatenation.
 
 ## Signature
 
