@@ -1,6 +1,5 @@
 import { flatten } from './flatten.ts';
 import { uniq } from '../../array/uniq.ts';
-import { rest } from '../function/rest.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
