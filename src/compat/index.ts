@@ -63,6 +63,7 @@ export { takeRight } from './array/takeRight.ts';
 export { uniq } from './array/uniq.ts';
 export { unzip } from './array/unzip.ts';
 export { without } from './array/without.ts';
+export { zip } from './array/zip.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 
 export { ary } from './function/ary.ts';
