@@ -53,6 +53,8 @@ export function sumBy<T>(array: ArrayLike<T>, iteratee: (value: T) => number): n
 /**
  * Compmutes the sum of the `bigint` values that are returned by the `iteratee` function.
  *
+ * NOTE: If the `array` is empty, the function returns `0`.
+ *
  * @template T - The type of the array elements.
  * @param {ArrayLike<T>} array - The array to iterate over.
  * @param {(value: T) => bigint} iteratee - The function invoked per iteration.
