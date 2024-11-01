@@ -13,4 +13,11 @@ describe('sumBy function', () => {
 
     expect(sumBy(people, x => x.age)).toEqual(0);
   });
+
+  it('should satisfies associative property for addition', () => {
+    const array1: { a: number }[] = [];
+    const array2 = [{ a: 1 }, { a: 2 }, { a: 3 }];
+
+    expect(sumBy(array1, x => x.a) + sumBy(array2, x => x.a)).toBe(sumBy([...array1, ...array2], x => x.a));
+  });
 });

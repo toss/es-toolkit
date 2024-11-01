@@ -16,4 +16,11 @@ describe('sum function', () => {
     const result = sum([-1, -2, -3, 4]);
     expect(result).toBe(-2);
   });
+
+  it('satisfies associative property for addition', () => {
+    const array1: number[] = [];
+    const array2 = [1, 2, 3, 4];
+
+    expect(sum(array1) + sum(array2)).toBe(sum([...array1, ...array2]));
+  });
 });
