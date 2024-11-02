@@ -38,7 +38,7 @@ getSidebarItems.compat = function (locale: 'en' | 'ko' | 'ja' | 'zh_hans', docsR
 
 getSidebarItems.fp = function (locale: 'en' | 'ko' | 'ja' | 'zh_hans', docsRoot: string, ...paths: string[]) {
   return getSidebarItems(docsRoot, ...paths).map(item => {
-    const compatStr =
+    const fpStr =
       locale === 'en'
         ? '(fp)'
         : locale === 'ko'
@@ -51,7 +51,7 @@ getSidebarItems.fp = function (locale: 'en' | 'ko' | 'ja' | 'zh_hans', docsRoot:
 
     return {
       ...item,
-      text: `${item.text} ${compatStr}`,
+      text: `${item.text} ${fpStr}`,
     };
   });
 };

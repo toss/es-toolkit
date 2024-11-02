@@ -2,7 +2,7 @@ import { RenderOptions } from './types.ts';
 import { DocumentationItem } from '../../types/DocumentationItem.ts';
 
 export function render(item: DocumentationItem, options: RenderOptions = {}) {
-  return [title(item.name), compatNotice(options), item.description, signature(item), examples(item)]
+  return [title(item.name), getNotice(options), item.description, signature(item), examples(item)]
     .filter(x => x != null)
     .join('\n\n');
 }
@@ -11,18 +11,28 @@ function title(name: string) {
   return `# ${name}`;
 }
 
-function compatNotice(options: RenderOptions) {
-  if (!options.compat) {
-    return null;
-  }
-
-  return `
+function getNotice(options: RenderOptions) {
+  if (options.compat) {
+    return `
 ::: info
 この関数は互換性のために \`es-toolkit/compat\` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
 
 \`es-toolkit/compat\` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 `.trim();
+  }
+
+  if (options.fp) {
+    return `
+::: info
+この関数は関数型プログラミングスタイルのコードを書くために \`es-toolkit/fp\` からのみインポートできます。
+
+\`es-toolkit/fp\` から関数をインポートすると、パイプ文法を使用したり、引数の数に応じて自動的に curry 化される関数を使用することができます。
+:::
+`.trim();
+  }
+
+  return null;
 }
 
 function signature(item: DocumentationItem) {

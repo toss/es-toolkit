@@ -1,5 +1,11 @@
 # pipe
 
+::: info
+This function can only be imported from `es-toolkit/fp`, which supports writing code in a functional programming style.
+
+When import code from `es-toolkit/fp`, you can use the pipe syntax or functions that automatically curry based on the number of input arguments.
+:::
+
 Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
 
 Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.

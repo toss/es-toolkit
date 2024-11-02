@@ -3,7 +3,8 @@
   "version": "1.26.1",
   "exports": {
     ".": "./src/index.ts",
-    "./compat": "./src/compat/index.ts"
+    "./compat": "./src/compat/index.ts",
+    "./fp": "./src/fp/index.ts"
   },
   "publish": {
     "include": ["./src/**/*.ts"]

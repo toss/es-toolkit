@@ -5,6 +5,7 @@
 # (which is the default when using "module": "commonjs").
 echo "export * from './dist/array';" > array.d.ts
 echo "export * from './dist/compat';" > compat.d.ts
+echo "export * from './dist/fp';" > fp.d.ts
 echo "export * from './dist/function';" > function.d.ts
 echo "export * from './dist/math';" > math.d.ts
 echo "export * from './dist/object';" > object.d.ts

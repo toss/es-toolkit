@@ -33,6 +33,7 @@ const ENTRYPOINTS = [
   './string',
   './util',
   './compat',
+  './fp',
 ];
 
 describe(`es-toolkit's package tarball`, () => {

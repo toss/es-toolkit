@@ -18,6 +18,7 @@
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
     "./compat": "./src/compat/index.ts",
+    "./fp": "./src/fp/index.ts",
     "./function": "./src/function/index.ts",
     "./math": "./src/math/index.ts",
     "./object": "./src/object/index.ts",
@@ -136,6 +137,16 @@
         "require": {
           "types": "./dist/compat/index.d.ts",
           "default": "./dist/compat/index.js"
+        }
+      },
+      "./fp": {
+        "import": {
+          "types": "./dist/fp/index.d.mts",
+          "default": "./dist/fp/index.mjs"
+        },
+        "require": {
+          "types": "./dist/fp/index.d.ts",
+          "default": "./dist/fp/index.js"
         }
       },
       "./package.json": "./package.json"

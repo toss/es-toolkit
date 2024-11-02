@@ -15,7 +15,7 @@ export default defineConfig({
       optimizer: {
         ssr: {
           enabled: true,
-          include: ['es-toolkit', 'es-toolkit/compat'],
+          include: ['es-toolkit', 'es-toolkit/compat', 'es-toolkit/fp'],
         },
       },
     },
