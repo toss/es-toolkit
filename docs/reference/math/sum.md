@@ -3,7 +3,6 @@
 Calculates the sum of an array of numbers.
 
 This function takes an array of numbers and returns the sum of all the elements in the array.
-It ensures that adding the sums of two arrays equals the sum of their concatenation.
 
 ## Signature
 
