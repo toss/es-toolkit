@@ -1,8 +1,11 @@
 import { bench, describe } from 'vitest';
-import { castArray as castArrayToolkit } from 'es-toolkit/compat';
-import { castArray as castArrayLodash } from 'lodash';
+import { castArray as castArrayToolkit_ } from 'es-toolkit/compat';
+import { castArray as castArrayLodash_ } from 'lodash';
 
-describe('castArray function performance comparison', () => {
+const castArrayToolkit = castArrayToolkit_;
+const castArrayLodash = castArrayLodash_;
+
+describe('castArray', () => {
   bench('es-toolkit/castArray', () => {
     castArrayToolkit(1);
     castArrayToolkit([1]);

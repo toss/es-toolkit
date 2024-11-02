@@ -14,12 +14,22 @@ It uses strict equality (`===`) to compare elements other than `NaN`.
 ## Signature
 
 ```typescript
-function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?: number): number;
+function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 ```
 
 ### Parameters
 
-- `array` (`T[] | null | undefined`): The array to search.
+- `array` (`T[]`): The array to search.
+
+::: info `array` can be `ArrayLike<T>` or `null` or `undefined`
+
+To ensure full compatibility with lodash, the `indexOf` function processes `array` as follows:
+
+- If `array` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
+- If `array` is `null` or `undefined`, it is treated as an empty array.
+
+:::
+
 - `searchElement` (`T`): The value to search for.
 - `fromIndex` (`number`, optional): The index to start the search at.
 
@@ -27,7 +37,7 @@ function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?:
 
 (`number`): The index (zero-based) of the first occurrence of the value in the array, or `-1` if the value is not found.
 
-### Example
+## Example
 
 ```typescript
 const array = [1, 2, 3, NaN];

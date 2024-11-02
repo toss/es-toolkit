@@ -1,4 +1,6 @@
 import { take as takeToolkit } from '../../array/take.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { toInteger } from '../util/toInteger.ts';
 
 /**
  * Returns a new array containing the first `count` elements from the input array `arr`.
@@ -6,8 +8,9 @@ import { take as takeToolkit } from '../../array/take.ts';
  *
  * @template T - Type of elements in the input array.
  *
- * @param {T[]} arr - The array to take elements from.
- * @param {number} count - The number of elements to take.
+ * @param {ArrayLike<T> | null | undefined} arr - The array to take elements from.
+ * @param {number} [count=1] - The number of elements to take.
+ * @param {unknown} [guard] - Enables use as an iteratee for methods like `_.map`.
  * @returns {T[]} A new array containing the first `count` elements from `arr`.
  *
  * @example
@@ -22,10 +25,11 @@ import { take as takeToolkit } from '../../array/take.ts';
  * // Returns [1, 2, 3]
  * take([1, 2, 3], 5);
  */
-export function take<T>(arr: readonly T[], count: number): T[] {
-  if (count < 1) {
+export function take<T>(arr: ArrayLike<T> | null | undefined, count: number = 1, guard?: unknown): T[] {
+  count = guard ? 1 : toInteger(count);
+  if (count < 1 || !isArrayLike(arr)) {
     return [];
   }
 
-  return takeToolkit(arr, count);
+  return takeToolkit(Array.from(arr), count);
 }

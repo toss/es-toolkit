@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { toArgs } from '../_internal/toArgs';
 import { pick } from './pick';
+import { toArgs } from '../_internal/toArgs';
 
 describe('compat/pick', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };
@@ -66,5 +66,12 @@ describe('compat/pick', () => {
     const array2: number[] = [];
     array2[1] = 2;
     expect(pick({ array: [1, 2, 3] }, 'array[1]')).toEqual({ array: array2 });
+  });
+
+  it('should not pick from nonexistent keys', () => {
+    const obj: { a?: unknown; b?: unknown } = {};
+    const result = pick(obj, ['a', 'b']);
+
+    expect(Reflect.ownKeys(result)).toEqual([]);
   });
 });

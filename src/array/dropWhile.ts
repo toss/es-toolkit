@@ -6,7 +6,7 @@
  *
  * @template T - The type of elements in the array.
  * @param {T[]} arr - The array from which to drop elements.
- * @param {(item: T) => boolean} canContinueDropping - A predicate function that determines
+ * @param {(item: T, index: number, arr: T[]) => boolean} canContinueDropping - A predicate function that determines
  * whether to continue dropping elements. The function is called with each element, and dropping
  * continues as long as it returns true.
  * @returns {T[]} A new array with the elements remaining after the predicate returns false.
@@ -16,8 +16,12 @@
  * const result = dropWhile(array, x => x < 3);
  * // result will be [3, 4, 5] since elements less than 3 are dropped.
  */
-export function dropWhile<T>(arr: readonly T[], canContinueDropping: (item: T) => boolean): T[] {
-  const dropEndIndex = arr.findIndex(item => !canContinueDropping(item));
+export function dropWhile<T>(
+  arr: readonly T[],
+  canContinueDropping: (item: T, index: number, arr: readonly T[]) => boolean
+): T[] {
+  const dropEndIndex = arr.findIndex((item, index, arr) => !canContinueDropping(item, index, arr));
+
   if (dropEndIndex === -1) {
     return [];
   }

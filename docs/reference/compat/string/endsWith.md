@@ -29,7 +29,7 @@ function endsWith(str: string, target: string, position: number = 0): string;
 ## Examples
 
 ```typescript
-import { endsWith } from 'es-toolkit/string';
+import { endsWith } from 'es-toolkit/compat';
 
 endsWith('fooBar', 'foo'); // returns false
 endsWith('fooBar', 'Bar'); // returns true

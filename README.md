@@ -10,13 +10,14 @@ es-toolkit is a state-of-the-art, high-performance JavaScript utility library wi
 - Designed with performance in mind, es-toolkit achieves [2-3× better performance](https://es-toolkit.slash.page/performance.html) in modern JavaScript environments.
 - es-toolkit supports tree shaking out of the box, and [reduces JavaScript code by up to 97%](https://es-toolkit.slash.page/bundle-size.html) compared to other libraries.
 - es-toolkit includes built-in TypeScript support, with straightforward yet robust types. It also provides useful type guards such as [isNotNil](https://es-toolkit.slash.page/reference/predicate/isNotNil.html).
+- es-toolkit is utilized by several popular open-source libraries, such as [Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358) and [ink](https://github.com/vadimdemedes/ink/blob/2090ad9779be59dea71d173eb49785b7bd4495d0/package.json#L55).
 - es-toolkit is battle-tested with 100% test coverage, ensuring reliability and robustness.
 
 ## Examples
 
 ```tsx
 // import from '@es-toolkit/es-toolkit' in jsr.
-import { debounce, chunk } from 'es-toolkit';
+import { chunk, debounce } from 'es-toolkit';
 
 const debouncedLog = debounce(message => {
   console.log(message);

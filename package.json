@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.19.0",
+  "version": "1.26.1",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -24,6 +24,7 @@
     "./predicate": "./src/predicate/index.ts",
     "./promise": "./src/promise/index.ts",
     "./string": "./src/string/index.ts",
+    "./util": "./src/util/index.ts",
     "./package.json": "./package.json"
   },
   "files": [
@@ -117,6 +118,16 @@
           "default": "./dist/string/index.js"
         }
       },
+      "./util": {
+        "import": {
+          "types": "./dist/util/index.d.mts",
+          "default": "./dist/util/index.mjs"
+        },
+        "require": {
+          "types": "./dist/util/index.d.ts",
+          "default": "./dist/util/index.js"
+        }
+      },
       "./compat": {
         "import": {
           "types": "./dist/compat/index.d.mts",
@@ -136,23 +147,28 @@
     "@changesets/cli": "^2.27.1",
     "@eslint/js": "^9.9.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-typescript": "^12.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/broken-link-checker": "^0",
     "@types/eslint": "^9",
-    "@types/jscodeshift": "^0.11.11",
-    "@types/node": "^20.12.11",
+    "@types/jscodeshift": "^0.12.0",
+    "@types/node": "^22.7.4",
     "@types/tar": "^6.1.13",
-    "@vitest/coverage-istanbul": "^1.5.2",
+    "@vitest/coverage-istanbul": "^2.1.2",
+    "@vue/compiler-sfc": "^3.5.10",
     "ast-types": "^0.14.2",
     "broken-link-checker": "^0.7.8",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsdoc": "^50.2.2",
+    "eslint-plugin-no-for-of-array": "^0.0.1",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
     "globals": "^15.9.0",
     "jscodeshift": "^17.0.0",
     "prettier": "^3.2.5",
+    "prettier-plugin-sort-re-exports": "^0.1.0",
     "rollup": "^4.19.0",
     "rollup-plugin-dts": "^6.1.1",
     "tar": "^6",
@@ -160,13 +176,21 @@
     "tsx": "^4.19.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^8.1.0",
-    "vitest": "^1.5.2"
+    "vitest": "^2.1.2"
+  },
+  "dependenciesMeta": {
+    "@trivago/prettier-plugin-sort-imports@4.3.0": {
+      "unplugged": true
+    },
+    "prettier-plugin-sort-re-exports@0.0.1": {
+      "unplugged": true
+    }
   },
   "sideEffects": false,
   "scripts": {
     "prepack": "yarn build",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
-    "test": "vitest run --coverage --typecheck",
+    "test": "vitest --coverage --typecheck",
     "bench": "vitest bench",
     "lint": "eslint --config eslint.config.mjs",
     "format": "prettier --write .",

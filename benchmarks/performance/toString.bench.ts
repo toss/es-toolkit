@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { toString as toStringToolkitCompat } from 'es-toolkit/compat';
-import { toString as toStringLodash } from 'lodash';
+import { toString as toStringToolkitCompat_ } from 'es-toolkit/compat';
+import { toString as toStringLodash_ } from 'lodash';
+
+const toStringToolkitCompat = toStringToolkitCompat_;
+const toStringLodash = toStringLodash_;
 
 describe('toString', () => {
   const number = -0;

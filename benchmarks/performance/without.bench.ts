@@ -1,6 +1,11 @@
 import { bench, describe } from 'vitest';
-import { without as withoutEsToolkit } from 'es-toolkit';
-import { without as withoutLodash } from 'lodash';
+import { without as withoutEsToolkit_ } from 'es-toolkit';
+import { without as withoutToolkitCompat_ } from 'es-toolkit/compat';
+import { without as withoutLodash_ } from 'lodash';
+
+const withoutEsToolkit = withoutEsToolkit_;
+const withoutToolkitCompat = withoutToolkitCompat_;
+const withoutLodash = withoutLodash_;
 
 const generateArray = (length: number, max: number) => Array.from({ length }, () => Math.floor(Math.random() * max));
 
@@ -10,6 +15,10 @@ describe('without, small arrays', () => {
 
   bench('es-toolkit/without', () => {
     withoutEsToolkit(array, ...values);
+  });
+
+  bench('es-toolkit/compat/without', () => {
+    withoutToolkitCompat(array, ...values);
   });
 
   bench('lodash/without', () => {
@@ -23,6 +32,10 @@ describe('without, large arrays', () => {
 
   bench('es-toolkit/without', () => {
     withoutEsToolkit(array, ...values);
+  });
+
+  bench('es-toolkit/compat/without', () => {
+    withoutToolkitCompat(array, ...values);
   });
 
   bench('lodash/without', () => {

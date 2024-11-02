@@ -1,5 +1,3 @@
-import { getTag } from '../_internal/getTag.ts';
-
 /**
  * Checks if the given value is boolean.
  *
@@ -8,8 +6,8 @@ import { getTag } from '../_internal/getTag.ts';
  *
  *  This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `boolean`.
  *
- * @param {unknown} x - The Value to test if it is boolean.
- * @returns {x is boolean} True if the value is boolean, false otherwise.
+ * @param {unknown} value - The Value to test if it is boolean.
+ * @returns {value is boolean} True if the value is boolean, false otherwise.
  *
  * @example
  *
@@ -22,14 +20,6 @@ import { getTag } from '../_internal/getTag.ts';
  * console.log(isBoolean(value3)); // false
  *
  */
-export function isBoolean(x: unknown): x is boolean {
-  if (x === true || x === false) {
-    return true;
-  }
-
-  if (typeof x === 'object' && x != null && getTag(x) === '[object Boolean]') {
-    return true;
-  }
-
-  return false;
+export function isBoolean(value?: unknown): value is boolean {
+  return typeof value === 'boolean' || value instanceof Boolean;
 }

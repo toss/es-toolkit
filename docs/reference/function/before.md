@@ -5,7 +5,10 @@ Creates a new function that limits the number of times the given function (`func
 ## Signature
 
 ```typescript
-function before<F extends (...args: any[]) => any>(n: number, func: F): F;
+function before<F extends (...args: any[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### Parameters
@@ -17,7 +20,7 @@ function before<F extends (...args: any[]) => any>(n: number, func: F): F;
 
 ### Returns
 
-(`F`): A new function that:
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): A new function that:
 
 - Tracks the number of calls.
 - Invokes `func` until the `n-1`-th call.
@@ -44,4 +47,27 @@ beforeFn();
 
 // Will not log anything.
 beforeFn();
+```
+
+## Lodash Compatibility
+
+Import `before` from `es-toolkit/compat` for full compatibility with lodash.
+
+- `before` does not throw an error when `n` is negative.
+- `before` throws an error if `func` is not a function.
+- `before` returns the last result of `func` when the number of calls reaches or exceeds `n`.
+
+```typescript
+import { before } from 'es-toolkit/compat';
+
+let count = 0;
+
+const before3 = before(3, () => {
+  console.log('Incrementing count...');
+  return ++count;
+});
+
+console.log(before3()); // Incrementing count... => 1
+console.log(before3()); // Incrementing count... => 2
+console.log(before3()); //                       => 2
 ```

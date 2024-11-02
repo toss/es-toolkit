@@ -7,11 +7,12 @@ Repeated calls to the function will return the value from the first invocation.
 
 ```typescript
 function once<F extends () => any>(func: F): F;
+function once<F extends (...args: any[]) => void>(func: F): F;
 ```
 
 ### Parameters
 
-- `func` (`F extends () => any`): The function to restrict.
+- `func` (`F extends (() => any) | ((...args: any[]) => void)`): The function to restrict.
 
 ### Returns
 

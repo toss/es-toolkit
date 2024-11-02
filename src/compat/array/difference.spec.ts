@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { difference } from './difference';
-import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 import { range } from '../../math/range';
+import { args } from '../_internal/args';
+import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/difference-methods.spec.js#L1
@@ -71,5 +72,27 @@ describe('difference', () => {
     const largeArray = Array.from({ length: LARGE_ARRAY_SIZE }).map(() => ({}));
 
     expect(difference([object1, object2], largeArray)).toEqual([object1, object2]);
+  });
+
+  it(`should work with \`arguments\` objects`, () => {
+    const array = [0, 1, null, 3];
+
+    expect(difference(array, args)).toEqual([0, null]);
+    expect(difference(args, array)).toEqual([2]);
+  });
+
+  it('should work with arrayLike objects', () => {
+    const array = { 0: 1, 1: 2, length: 2 };
+
+    expect(difference(array, [2, 3])).toEqual([1]);
+    expect(difference([1, 2, 3], array)).toEqual([3]);
+  });
+
+  it('should return an empty array when the first array is not array-like object', () => {
+    expect(difference('23', ['2', '3'])).toEqual([]);
+  });
+
+  it('should filter out values that are not arrays or array-like objects', () => {
+    expect(difference(['2', '3'], '2', ['3'])).toEqual(['2']);
   });
 });

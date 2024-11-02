@@ -28,13 +28,30 @@ function find<T extends Record<string, unknown>>(
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
 ```
 
 ### パラメータ
 
 - `arr` (`T[]`) または `object` (`T`): 検索する配列またはオブジェクト。
+
+::: info `arr` は `ArrayLike<T>` であるか、`null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`find` 関数は `arr` を次のように処理します。
+
+- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
+- `arr` が `null` または `undefined` の場合、空の配列と見なされます。
+
+:::
+
+::: info `object` は `null` または `undefined` である可能性があります
+
+lodash と完全に互換性があるように、`find` 関数は `object` を次のように処理します。
+
+- `object` が `null` または `undefined` の場合、空のオブジェクトに変換されます。
+
+:::
 
 - `doesMatch`:
 
@@ -48,7 +65,7 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: string): 
   - オブジェクトの場合:
     - **検査関数** (`(item: T[keyof T], index: number, object: T) => unknown`): 探している要素かどうかを返す関数。
     - **部分値** (`Partial<T[keyof T]>`): 一致させるプロパティと値を指定した部分オブジェクト。
-    - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
+    - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
     - **プロパティ名** (`string`): 真と評価される値を持っているか確認するプロパティ名。
 
 ### 戻り値

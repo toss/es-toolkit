@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { findIndex as findIndexToolkit } from 'es-toolkit/compat';
-import { findIndex as findIndexLodash } from 'lodash';
+import { findIndex as findIndexToolkit_ } from 'es-toolkit/compat';
+import { findIndex as findIndexLodash_ } from 'lodash';
+
+const findIndexToolkit = findIndexToolkit_;
+const findIndexLodash = findIndexLodash_;
 
 const items = [
   { id: 1, name: 'Alice' },
@@ -20,5 +23,17 @@ describe('findIndex', () => {
     findIndexLodash(items, { name: 'Bob' });
     findIndexLodash(items, ['name', 'Bob']);
     findIndexLodash(items, 'name');
+  });
+});
+
+describe('findIndex/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Name ${i}` }));
+
+  bench('es-toolkit/compat/findIndex', () => {
+    findIndexToolkit(largeArray, x => x.name === 'Name 5000');
+  });
+
+  bench('lodash/findIndex', () => {
+    findIndexLodash(largeArray, x => x.name === 'Name 5000');
   });
 });

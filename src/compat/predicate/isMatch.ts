@@ -1,4 +1,6 @@
+import { isObject } from './isObject.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
+import { eq } from '../util/eq.ts';
 
 /**
  * Checks if the target matches the source by comparing their structures and values.
@@ -101,6 +103,10 @@ export function isMatch(target: any, source: any): boolean {
           return false;
         }
 
+        if (source[key] === null && target[key] !== null) {
+          return false;
+        }
+
         if (!isMatch(target[key], source[key])) {
           return false;
         }
@@ -116,6 +122,10 @@ export function isMatch(target: any, source: any): boolean {
       return false;
     }
     default: {
+      if (!isObject(target)) {
+        return eq(target, source);
+      }
+
       return !source;
     }
   }

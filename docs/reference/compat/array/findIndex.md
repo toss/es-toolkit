@@ -18,15 +18,24 @@ You can specify the condition in several ways:
 ## Signature
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): number;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>): number;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown]): number;
-function findIndex<T>(arr: T[], doesMatch: string): number;
+function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
 ```
 
 ### Parameters
 
 - `arr` (`T[]`): The array to search through.
+
+::: info `arr` can be `ArrayLike<T>` or `null` or `undefined`
+
+To ensure full compatibility with lodash, the `findIndex` function processes `arr` as follows:
+
+- If `arr` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
+- If `arr` is `null` or `undefined`, it is treated as an empty array.
+
+:::
 
 - `doesMatch`:
 
@@ -34,6 +43,8 @@ function findIndex<T>(arr: T[], doesMatch: string): number;
   - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
   - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
   - **Property name** (`string`): The name of the property to check for a truthy value.
+
+- `fromIndex` (`number`): The index to start the search from, defaults to `0`.
 
 ### Returns
 

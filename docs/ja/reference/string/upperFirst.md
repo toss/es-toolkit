@@ -10,16 +10,18 @@ function upperFirst(str: string): string;
 
 ### パラメータ
 
-- `str` (`string`) - 変更する文字列ます。
+- `str` (`string`): 変更する文字列。
 
 ### 戻り値
 
-(`string`): - 変換された文字列ます。
+(`string`): 変換された文字列。
 
 ## 例
 
 ```typescript
-const convertedStr1 = upperCase('fred'); // returns 'fred'
-const convertedStr2 = upperCase('Fred'); // returns 'Fred'
-const convertedStr3 = upperCase('FRED'); // returns 'FRED'
+import { upperFirst } from 'es-toolkit/string';
+
+upperFirst('fred'); // returns 'Fred'
+upperFirst('Fred'); // returns 'Fred'
+upperFirst('FRED'); // returns 'FRED'
 ```

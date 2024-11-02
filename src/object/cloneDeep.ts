@@ -1,3 +1,4 @@
+import { getSymbols } from '../compat/_internal/getSymbols.ts';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
@@ -69,12 +70,12 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     }
 
     // For RegExpArrays
-    if (Object.prototype.hasOwnProperty.call(obj, 'index')) {
+    if (Object.hasOwn(obj, 'index')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.index = obj.index;
     }
-    if (Object.prototype.hasOwnProperty.call(obj, 'input')) {
+    if (Object.hasOwn(obj, 'input')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.input = obj.input;
@@ -99,7 +100,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     const result = new Map();
     stack.set(obj, result);
 
-    for (const [key, value] of obj.entries()) {
+    for (const [key, value] of obj) {
       result.set(key, cloneDeepImpl(value, stack));
     }
 
@@ -110,7 +111,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
     const result = new Set();
     stack.set(obj, result);
 
-    for (const value of obj.values()) {
+    for (const value of obj) {
       result.add(cloneDeepImpl(value, stack));
     }
 
@@ -141,7 +142,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
   }
 
   if (obj instanceof DataView) {
-    const result = new DataView(obj.buffer.slice(0));
+    const result = new DataView(obj.buffer.slice(0), obj.byteOffset, obj.byteLength);
     stack.set(obj, result);
 
     copyProperties(result, obj, stack);
@@ -196,13 +197,13 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
 
 // eslint-disable-next-line
 export function copyProperties(target: any, source: any, stack?: Map<any, any>): void {
-  const keys = Object.keys(source);
+  const keys = [...Object.keys(source), ...getSymbols(source)];
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-    const descriptor = Object.getOwnPropertyDescriptor(source, key);
+    const descriptor = Object.getOwnPropertyDescriptor(target, key);
 
-    if (descriptor?.writable || descriptor?.set) {
+    if (descriptor == null || descriptor.writable) {
       target[key] = cloneDeepImpl(source[key], stack);
     }
   }

@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { sumBy as sumByToolkit } from 'es-toolkit';
-import { sumBy as sumByLodash } from 'lodash';
+import { sumBy as sumByToolkit_ } from 'es-toolkit';
+import { sumBy as sumByLodash_ } from 'lodash';
+
+const sumByToolkit = sumByToolkit_;
+const sumByLodash = sumByLodash_;
 
 describe('sumBy', () => {
   bench('es-toolkit/sumBy', () => {
@@ -11,5 +14,17 @@ describe('sumBy', () => {
   bench('lodash/sumBy', () => {
     const items = [{ a: 1 }, { a: 2 }, { a: 3 }];
     sumByLodash(items, x => x.a);
+  });
+});
+
+describe('sumBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ a: i }));
+
+  bench('es-toolkit/sumBy', () => {
+    sumByToolkit(largeArray, x => x.a);
+  });
+
+  bench('lodash/sumBy', () => {
+    sumByLodash(largeArray, x => x.a);
   });
 });

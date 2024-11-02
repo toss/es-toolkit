@@ -13,7 +13,7 @@
  *
  * @example
  * const obj = { a: 1, b: 'omit', c: 3 };
- * const shouldOmit = (key, value) => typeof value === 'string';
+ * const shouldOmit = (value) => typeof value === 'string';
  * const result = omitBy(obj, shouldOmit);
  * // result will be { a: 1, c: 3 }
  */
@@ -23,12 +23,15 @@ export function omitBy<T extends Record<string, any>>(
 ): Partial<T> {
   const result: Partial<T> = {};
 
-  for (const [key, value] of Object.entries(obj)) {
-    if (shouldOmit(value, key)) {
-      continue;
-    }
+  const keys = Object.keys(obj) as Array<keyof T>;
 
-    (result as any)[key] = value;
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const value = obj[key];
+
+    if (!shouldOmit(value, key)) {
+      result[key] = value;
+    }
   }
 
   return result;

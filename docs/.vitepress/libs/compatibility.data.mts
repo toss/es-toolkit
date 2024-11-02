@@ -1,6 +1,6 @@
+import { readdirSync } from 'fs';
 import { resolve } from 'path';
 import functions from './functions.json';
-import { readdirSync } from 'fs';
 
 export default {
   load() {

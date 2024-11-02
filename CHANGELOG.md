@@ -1,5 +1,110 @@
 # es-toolkit Changelog
 
+## Version v1.26.1
+
+Released on October 25th, 2024.
+
+- Fixed a bug in [isMatch](https://es-toolkit.slash.page/reference/compat/predicate/isMatch.html) that did not strictly compare `null` in objects.
+
+This version includes contributions from @D-Sketon. Thank you for your valuable contributions!
+
+## Version v1.26.0
+
+Released on October 24th, 2024.
+
+- Added support for [invariant](https://es-toolkit.slash.page/reference/util/invariant.html), [identity](https://es-toolkit.slash.page/reference/function/identity.html), [median](https://es-toolkit.slash.page/reference/math/median.html), and [medianBy](https://es-toolkit.slash.page/reference/math/medianBy.html).
+- Added compatibility functions for [template](https://es-toolkit.slash.page/reference/compat/string/template.html), [uniqueId](https://es-toolkit.slash.page/reference/compat/util/uniqueId.html), [intersectionBy](https://es-toolkit.slash.page/reference/array/intersectionBy.html), [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html), [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html), and [some](https://es-toolkit.slash.page/reference/array/some.html).
+- Made it possible to use [drop](https://es-toolkit.slash.page/reference/array/drop.html), [dropRight](https://es-toolkit.slash.page/reference/array/dropRight.html), [every](https://es-toolkit.slash.page/reference/compat/array/every.html), [take](https://es-toolkit.slash.page/reference/array/take.html), and [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html) directly as iteratees, allowing for usage like `arr.map(drop)`.
+- Corrected [merge](https://es-toolkit.slash.page/reference/object/merge.html) to disallow primitive values such as numbers or strings.
+
+This version includes contributions from @dayongkr, @Na-hyunwoo, @ssi02014, @kaehehehe, @jakvbs, @D-Sketon, and @seonghun0828. Thank you for your valuable contributions!
+
+## Version v1.25.2
+
+Released on October 16th, 2024.
+
+- Fixed a problem with [isJSONValue](https://es-toolkit.slash.page/reference/predicate/isJSONValue.html), [isJSONArray](https://es-toolkit.slash.page/reference/predicate/isJSONArray.html), and [isJSONObject](https://es-toolkit.slash.page/reference/predicate/isJSONObject.html) that led to circular dependencies.
+- Enhanced [flatten](https://es-toolkit.slash.page/reference/array/flatten.html), [flattenDeep](https://es-toolkit.slash.page/reference/array/flattenDeep.html), [flattenDepth](https://es-toolkit.slash.page/reference/compat/array/flattenDepth.html#flattendepth), [slice](https://es-toolkit.slash.page/reference/compat/array/slice.html), and [zipObjectDeep](https://es-toolkit.slash.page/reference/compat/array/zipObjectDeep.html) to work with array-like objects in our compatibility library, ensuring they are fully compatible with lodash.
+
+This version includes contributions from @D-Sketon. Thank you for your valuable contributions!
+
+## Version v1.25.1
+
+Released on October 15th, 2024.
+
+- Resolved an issue in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) that incorrectly copied properties from the `target` when they were read-only.
+- Updated [every](https://es-toolkit.slash.page/reference/compat/array/every.html), [filter](https://es-toolkit.slash.page/reference/compat/array/filter.html), [find](https://es-toolkit.slash.page/reference/compat/array/find.html), [findIndex](https://es-toolkit.slash.page/reference/compat/array/findIndex.html), [findLastIndex](https://es-toolkit.slash.page/reference/compat/array/findLastIndex.html), [indexOf](https://es-toolkit.slash.page/reference/compat/array/indexOf.html), and [join](https://es-toolkit.slash.page/reference/compat/array/join.html) to now accept array-like objects and a `fromIndex` parameter, making them compatible with lodash.
+
+This version includes contributions from @D-Sketon. Thank you for your valuable contributions!
+
+## Version v1.25.0
+
+Released on October 14th, 2024.
+
+- Added support for [isFile](https://es-toolkit.slash.page/reference/predicate/isFile.html).
+- Added compatibility functions for [escape](https://es-toolkit.slash.page/reference/string/escape.html), [toSafeInteger](https://es-toolkit.slash.page/reference/compat/util/toSafeInteger.html), [intersection](https://es-toolkit.slash.page/reference/array/intersection.html), [sample](https://es-toolkit.slash.page/reference/array/sample.html), [chunk](https://es-toolkit.slash.page/reference/array/chunk.html), [compact](https://es-toolkit.slash.page/reference/array/compact.html), [head](https://es-toolkit.slash.page/reference/array/head.html), [initial](https://es-toolkit.slash.page/reference/array/initial.html), [last](https://es-toolkit.slash.page/reference/array/last.html), [tail](https://es-toolkit.slash.page/reference/array/tail.html), [take](https://es-toolkit.slash.page/reference/array/take.html), [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html), [uniq](https://es-toolkit.slash.page/reference/array/uniq.html), and [without](https://es-toolkit.slash.page/reference/array/without.html).
+- Enhanced performance for [at](https://es-toolkit.slash.page/reference/array/at.html) and [isPlainObject](https://es-toolkit.slash.page/reference/predicate/isPlainObject.html).
+- Resolved an issue in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) that prevented it from cloning symbol properties and read-only properties of objects.
+- Fixed a problem in [pick](https://es-toolkit.slash.page/reference/object/pick.html) within our compatibility library that incorrectly added `undefined` for keys that do not exist.
+
+This version includes contributions from @D-Sketon, @mass2527, @dayongkr, @lukaszkowalik2, @Gyumong, @Dohun-choi, @belgattitude, and @chhw130. Thank you for your valuable contributions!
+
+## Version v1.24.0
+
+Released on October 7th, 2024.
+
+- Added support for [isBlob](https://es-toolkit.slash.page/reference/predicate/isBlob.html) and [isDate](https://es-toolkit.slash.page/reference/predicate/isDate.html).
+- Added compatibility functions for [invertBy](https://es-toolkit.slash.page/reference/compat/object/invertBy.html), [times](https://es-toolkit.slash.page/reference/compat/util/times.html), [constant](https://es-toolkit.slash.page/reference/compat/util/constant.html), [slice](https://es-toolkit.slash.page/reference/compat/array/slice.html), [toLength](https://es-toolkit.slash.page/reference/compat/util/toLength.html), [defaultTo](https://es-toolkit.slash.page/reference/compat/util/defaultTo.html), [dropRightWhile](https://es-toolkit.slash.page/reference/array/dropRightWhile.html), [curryRight](https://es-toolkit.slash.page/reference/function/curryRight.html), [rangeRight](https://es-toolkit.slash.page/reference/math/rangeRight.html), [before](https://es-toolkit.slash.page/reference/function/before.html), [eq](https://es-toolkit.slash.page/reference/compat/util/eq.html), [defaults](https://es-toolkit.slash.page/reference/compat/object/defaults.html), [toDefaulted](https://es-toolkit.slash.page/reference/compat/object/toDefaulted.html), [isArrayBuffer](https://es-toolkit.slash.page/reference/predicate/isArrayBuffer.html), [isSet](https://es-toolkit.slash.page/reference/predicate/isSet.html), and [isMap](https://es-toolkit.slash.page/reference/predicate/isMap.html).
+- Enhanced [difference](https://es-toolkit.slash.page/reference/array/difference.html) to work with Array-like objects, aligning its functionality with lodash's behavior.
+- Improved performance for [pickBy](https://es-toolkit.slash.page/reference/object/pickBy.html) and [omitBy](https://es-toolkit.slash.page/reference/object/omitBy.html).
+
+## Version v1.23.0
+
+Released on October 1st, 2024.
+
+- Added support for [isEqualWith](https://es-toolkit.slash.page/reference/predicate/isEqualWith.html), [isArrayBuffer](https://es-toolkit.slash.page/reference/predicate/isArrayBuffer.html), [curryRight](https://es-toolkit.slash.page/reference/function/curryRight.html), [isJSONValue](https://es-toolkit.slash.page/reference/predicate/isJSONValue.html), [isJSONObject](https://es-toolkit.slash.page/reference/predicate/isJSONObject.html), [isJSONArray](https://es-toolkit.slash.page/reference/predicate/isJSONArray.html).
+- Fixed a bug in [merge](https://es-toolkit.slash.page/reference/object/merge.html) that copied the reference from the `source` object to the `target` object.
+- Fixed a bug in [includes](https://es-toolkit.slash.page/reference/compat/array/includes.html) that returned `true` for inherited properties.
+- Fixed a bug in [startCase](https://es-toolkit.slash.page/reference/string/startCase.html) and other string methods that did not correctly split the words when using accented letters.
+- Fixed a bug in [filter](https://es-toolkit.slash.page/reference/compat/array/filter.html) that did not provide correct arguments to the predicate function.
+- Fixed a bug in [isMatch](https://es-toolkit.slash.page/reference/compat/predicate/isMatch.html) that did not strictly compare primitive falsy values.
+
+This version includes contributions from @D-Sketon, @wojtekmaj, @mass2527, @chhw130, and @knott11. Thank you for your valuable contributions!
+
+## Version v1.22.0
+
+Released on September 28th, 2024.
+
+- Added support for [flow](https://es-toolkit.slash.page/reference/function/flow.html), [flowRight](https://es-toolkit.slash.page/reference/function/flowRight.html), [isMap](https://es-toolkit.slash.page/reference/predicate/isMap.html), and [isSet](https://es-toolkit.slash.page/reference/predicate/isSet.html).
+- Added compatibility functions for [filter](https://es-toolkit.slash.page/reference/compat/array/filter.html), [includes](https://es-toolkit.slash.page/reference/compat/array/includes.html), [every](https://es-toolkit.slash.page/reference/compat/array/every.html), [flip](https://es-toolkit.slash.page/reference/compat/function/flip.html), and [dropWhile](https://es-toolkit.slash.page/reference/array/dropWhile.html).
+
+- Fixed a bug in [throttle](https://es-toolkit.slash.page/reference/function/throttle.html) that prevented it from throttling after the initial `throttleMs`.
+- Fixed a bug in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) that caused it to not clone the offset and length of `DataView`.
+- Fixed a bug in [clone](https://es-toolkit.slash.page/reference/object/clone.html) that threw an error if `SharedArrayBuffer` is unavailable.
+
+This version includes contributions from @dayongkr, @k-jeonghee, @D-Sketon, @iDevGon, @mass2527, @wojtekmaj, @jonganebski, @hyesungoh, and @chhw130. Thank you for your valuable contributions!
+
+## Version v1.21.0
+
+Released on September 25th, 2024.
+
+- Added support for [constantCase](https://es-toolkit.slash.page/reference/string/constantCase.html) and [isError](https://es-toolkit.slash.page/reference/predicate/isError.html).
+- Added compatibility functions for [pad](https://es-toolkit.slash.page/reference/compat/string/pad.html), [padStart](https://es-toolkit.slash.page/reference/compat/string/padStart.html), [padEnd](https://es-toolkit.slash.page/reference/compat/string/padEnd.html), [defer](https://es-toolkit.slash.page/reference/compat/function/defer.html), [isFinite](https://es-toolkit.slash.page/reference/compat/predicate/isFinite.html), [toNumber](https://es-toolkit.slash.page/reference/compat/math/toNumber.html), [toFinite](https://es-toolkit.slash.page/reference/compat/math/toFinite.html), and [toInteger](https://es-toolkit.slash.page/reference/compat/math/toInteger.html).
+- Improved performance for [flatten](https://es-toolkit.slash.page/reference/array/flatten.html), [isNumber](https://es-toolkit.slash.page/reference/predicate/isNumber.html), [isString](https://es-toolkit.slash.page/reference/predicate/isString.html), [isSymbol](https://es-toolkit.slash.page/reference/predicate/isSymbol.html), [isRegExp](https://es-toolkit.slash.page/reference/predicate/isRegExp.html), and [isBoolean](https://es-toolkit.slash.page/reference/predicate/isBoolean.html).
+- Fixed [compact](https://es-toolkit.slash.page/reference/array/compact.html) to correctly exclude `0n` as a falsey value.
+- Fixed [pick](https://es-toolkit.slash.page/reference/object/pick.html) to not pick nonexistent keys from the original object.
+- Fixed [omit](https://es-toolkit.slash.page/reference/object/omit.html) to accept readonly arrays.
+
+This version includes contributions from @hyesungoh, @D-Sketon, @mass2527, @gweesin, @VVSOGI, @coding-honey, @seonghun0828, and @jsparkdev. Thank you for your valuable contributions!
+
+## Version v1.20.0
+
+Released on September 20th, 2024.
+
+- Added support for function invocation on leading and trailing edges for [debounce](https://es-toolkit.slash.page/reference/function/debounce.html) and [throttle](https://es-toolkit.slash.page/reference/function/throttle.html).
+- Added compatibility functions for [debounce](https://es-toolkit.slash.page/reference/function/debounce.html), [throttle](https://es-toolkit.slash.page/reference/function/throttle.html), [curry](https://es-toolkit.slash.page/reference/function/curry.html), [isNumber](https://es-toolkit.slash.page/reference/compat/predicate/isNumber.html), and [isNaN](https://es-toolkit.slash.page/reference/compat/predicate/isNaN.html).
+- Improved performance for [at](https://es-toolkit.slash.page/reference/array/at.html), [zip](https://es-toolkit.slash.page/reference/array/zip.html), [zipWith](https://es-toolkit.slash.page/reference/array/zipWith.html), and [drop](https://es-toolkit.slash.page/reference/array/drop.html).
+
 ## Version v1.19.0
 
 Released on September 14th, 2024.

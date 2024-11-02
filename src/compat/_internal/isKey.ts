@@ -1,4 +1,4 @@
-import { isSymbol } from '../predicate/isSymbol';
+import { isSymbol } from '../predicate/isSymbol.ts';
 
 /**  Matches any deep property path. (e.g. `a.b[0].c`)*/
 const regexIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
@@ -18,7 +18,7 @@ const regexIsPlainProp = /^\w*$/;
  * isKey('a.b', { a: { b: 2 } });
  * // => false
  */
-export function isKey(value?: unknown, object?: unknown): boolean {
+export function isKey(value?: unknown, object?: unknown): value is PropertyKey {
   if (Array.isArray(value)) {
     return false;
   }

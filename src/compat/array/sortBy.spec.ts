@@ -50,6 +50,7 @@ describe('sortBy', () => {
   it(`should sort multiple properties in ascending order`, () => {
     const actual = sortBy(objects, ['a', 'b']);
     expect(actual).toEqual([objects[2], objects[0], objects[3], objects[1]]);
+    expect(sortBy(objects, 'a', 'b')).toEqual([objects[2], objects[0], objects[3], objects[1]]);
   });
 
   it(`should support iteratees`, () => {
@@ -60,11 +61,14 @@ describe('sortBy', () => {
       },
     ]);
     expect(actual).toEqual([objects[2], objects[0], objects[3], objects[1]]);
+    expect(sortBy(objects, 'a', object => object.b)).toEqual([objects[2], objects[0], objects[3], objects[1]]);
   });
 
   it(`should perform a stable sort (test in IE > 8 and V8)`, () => {
     expect(sortBy(stableArray, ['a', 'c'])).toEqual(stableArray);
+    expect(sortBy(stableArray, 'a', 'c')).toEqual(stableArray);
     expect(sortBy(stableObject, ['a', 'c'])).toEqual(stableArray);
+    expect(sortBy(stableObject, 'a', 'c')).toEqual(stableArray);
   });
 
   it(`should not error on nullish elements`, () => {
@@ -76,6 +80,14 @@ describe('sortBy', () => {
     }
 
     expect(actual).toEqual([objects[2], objects[0], objects[3], objects[1], null, undefined]);
+    expect(sortBy([...objects, null, undefined], 'a', 'b')).toEqual([
+      objects[2],
+      objects[0],
+      objects[3],
+      objects[1],
+      null,
+      undefined,
+    ]);
   });
 
   it(`should work as an iteratee for methods like \`_.reduce\``, () => {
@@ -126,15 +138,17 @@ describe('sortBy', () => {
     const expected = [1, 2, 3, 4, symbol1, symbol2, null, null, undefined, undefined, NaN, NaN];
 
     expect(sortBy(array)).toEqual(expected);
+    expect(sortBy(array, [])).toEqual(expected);
 
     const array2 = [NaN, undefined, symbol1, null, 'd', null, 'a', symbol2, undefined, 'c', NaN, 'b'];
     const expected2 = ['a', 'b', 'c', 'd', symbol1, symbol2, null, null, undefined, undefined, NaN, NaN];
 
     expect(sortBy(array2)).toEqual(expected2);
+    expect(sortBy(array2, [])).toEqual(expected2);
   });
 
   it('should treat number values for `collection` as empty', () => {
-    expect(sortBy(1)).toEqual([]);
+    expect(sortBy(1 as any)).toEqual([]);
   });
 
   it('should coerce arrays returned from `iteratee`', () => {

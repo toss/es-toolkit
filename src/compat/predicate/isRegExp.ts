@@ -1,4 +1,4 @@
-import { getTag } from '../_internal/getTag';
+import { isRegExp as isRegExpToolkit } from '../../predicate/isRegExp.ts';
 
 /**
  * Checks if `value` is a RegExp.
@@ -14,5 +14,5 @@ import { getTag } from '../_internal/getTag';
  * console.log(isRegExp(value2)); // false
  */
 export function isRegExp(value?: unknown): value is RegExp {
-  return getTag(value) === '[object RegExp]';
+  return isRegExpToolkit(value);
 }

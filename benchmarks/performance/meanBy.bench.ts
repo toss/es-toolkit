@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { meanBy as meanByToolkit } from 'es-toolkit';
-import { meanBy as meanByLodash } from 'lodash';
+import { meanBy as meanByToolkit_ } from 'es-toolkit';
+import { meanBy as meanByLodash_ } from 'lodash';
+
+const meanByToolkit = meanByToolkit_;
+const meanByLodash = meanByLodash_;
 
 describe('meanBy', () => {
   bench('es-toolkit/meanBy', () => {
@@ -11,5 +14,17 @@ describe('meanBy', () => {
   bench('lodash/meanBy', () => {
     const items = [{ a: 1 }, { a: 2 }, { a: 3 }];
     meanByLodash(items, x => x.a);
+  });
+});
+
+describe('meanBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ a: i }));
+
+  bench('es-toolkit/meanBy', () => {
+    meanByToolkit(largeArray, x => x.a);
+  });
+
+  bench('lodash/meanBy', () => {
+    meanByLodash(largeArray, x => x.a);
   });
 });

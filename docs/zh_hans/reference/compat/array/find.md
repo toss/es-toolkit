@@ -29,13 +29,30 @@ function find<T extends Record<string, unknown>>(
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
 ```
 
 ### 参数
 
 - `arr` (`T[]`) 或 `object` (`T`): 要搜索的数组或对象。
+
+::: info `arr` 可以是 `ArrayLike<T>`、`null` 或 `undefined`
+
+为了确保与 lodash 的完全兼容性，`find` 函数会按照以下方式处理 `arr`：
+
+- 如果 `arr` 是 `ArrayLike<T>`，它将使用 `Array.from(...)` 转换为数组。
+- 如果 `arr` 是 `null` 或 `undefined`，它将被视为一个空数组。
+
+:::
+
+::: info `object` 可以是 `null` 或 `undefined`
+
+为了确保与 lodash 的完全兼容性，`find` 函数会按照以下方式处理 `object`：
+
+- 如果 `object` 是 `null` 或 `undefined`，它将被转换为一个空对象。
+
+:::
 
 - `doesMatch`:
 
@@ -49,7 +66,7 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: string): 
   - 对于对象的 `find` 重载：
     - **谓词函数** (`(item: T[keyof T], index: number, object: T) => unknown`): 一个函数，接受项、其键和对象，如果项符合条件则返回真值。
     - **部分值** (`Partial<T[keyof T]>`): 用于与对象的值进行匹配的部分值。
-    - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
+    - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
     - **属性名称** (`string`): 要检查其真值的属性名称。
 
 ### 返回

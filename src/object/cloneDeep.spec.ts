@@ -46,7 +46,7 @@ describe('cloneDeep', () => {
   // object
   //-------------------------------------------------------------------------------------
   it('should clone objects', () => {
-    const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3] };
+    const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3], [Symbol()]: 2 };
     const clonedObj = cloneDeep(obj);
 
     expect(clonedObj).toEqual(obj);
@@ -329,8 +329,8 @@ describe('cloneDeep', () => {
   });
 
   it('should clone DataViews', () => {
-    const buffer = new Uint8Array([1, 2]).buffer;
-    const view = new DataView(buffer);
+    const buffer = new Uint8Array([0, 1, 2]).buffer;
+    const view = new DataView(buffer, 1, 2);
 
     const cloned = cloneDeep(view);
 
@@ -346,5 +346,33 @@ describe('cloneDeep', () => {
 
     expect(cloned).not.toBe(buffer);
     expect(cloned).toEqual(buffer);
+  });
+
+  it('should clone read-only properties', () => {
+    const object: any = {};
+
+    Object.defineProperties(object, {
+      first: {
+        enumerable: true,
+        writable: true,
+        value: 1,
+      },
+      second: {
+        enumerable: true,
+        get() {
+          return 2;
+        },
+      },
+    });
+
+    object.third = 3;
+
+    const cloned = cloneDeep(object);
+    expect(cloned).not.toBe(object);
+    expect(cloned).toEqual({
+      first: 1,
+      second: 2,
+      third: 3,
+    });
   });
 });

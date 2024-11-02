@@ -5,7 +5,10 @@
 ## インターフェース
 
 ```typescript
-function before<F extends (...args: any[]) => any>(n: number, func: F): F;
+function before<F extends (...args: any[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### パラメータ
@@ -17,7 +20,7 @@ function before<F extends (...args: any[]) => any>(n: number, func: F): F;
 
 ### 戻り値
 
-(`F`): 新しい関数を返します。この関数は以下の機能を持ちます：
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 新しい関数を返します。この関数は以下の機能を持ちます：
 
 - 呼び出し回数を追跡します。
 - `n-1` 回目の呼び出しまで `func` を呼び出します。
@@ -43,4 +46,27 @@ afterFn();
 afterFn();
 // '実行されました' がログに出力されます
 afterFn();
+```
+
+## Lodash 互換性
+
+`es-toolkit/compat` から `before` をインポートすると、Lodash と互換になります。
+
+- `n` が負の場合でもエラーをスローしません。
+- `func` が関数でない場合はエラーをスローします。
+- 呼び出し回数が `n` に達するか、それ以上になると、`func` の最後の結果を返します。
+
+```typescript
+import { before } from 'es-toolkit/compat';
+
+let count = 0;
+
+const before3 = before(3, () => {
+  console.log('カウントを増やします...');
+  return ++count;
+});
+
+console.log(before3()); // カウントを増やします... => 1
+console.log(before3()); // カウントを増やします... => 2
+console.log(before3()); //                    => 2
 ```

@@ -31,3 +31,30 @@ const mapper = item => item.id;
 const result = intersectionBy(array1, array2, mapper);
 // 结果将是 [{ id: 2 }] 因为只有这个元素在两个数组中具有匹配的 id。
 ```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 导入 `intersectionBy` 以获得与 lodash 的完全兼容性。
+
+- `intersectionBy` 可以接受多个类数组对象来查找公共元素。
+- `intersectionBy` 可以将属性键作为迭代器使用。
+
+```typescript
+import { intersectionBy } from 'es-toolkit/compat';
+
+const array1 = [1.2, 2.4, 3.6];
+const array2 = [2.5, 3.7];
+const array3 = [2.6, 3.8];
+const result = intersectionBy(array1, array2, array3, Math.floor);
+// 结果是 [2.4, 3.6]，因为在应用 Math.floor 之后，公共元素是2和3。
+
+const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
+const array2 = [{ x: 2 }, { x: 3 }, { x: 4 }];
+const result = intersectionBy(array1, array2, 'x');
+// 结果是 [{ x: 2 }, { x: 3 }]，因为这些元素有相同的 `x` 属性。
+
+const arrayLike1 = { 0: 'apple', 1: 'banana', 2: 'cherry', length: 3 };
+const arrayLike2 = { 0: 'banana', 1: 'cherry', 2: 'date', length: 3 };
+const result = intersectionBy(arrayLike1, arrayLike2);
+// 结果是 ['banana', 'cherry']，因为这些元素在两个类数组对象中都存在。
+```

@@ -15,13 +15,13 @@ Paths can be dot-separated strings or arrays of property names. If the `keys` ar
 ## Signature
 
 ```typescript
-function zipObjectDeep<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
 ```
 
 ### Parameters
 
-- `keys` (`P[]`): An array of property names.
-- `values` (`V[]`): An array of values corresponding to the property names.
+- `keys` (`ArrayLike<P | P[]>`): An array of property names.
+- `values` (`ArrayLike<V>`): An array of values corresponding to the property names.
 
 ### Returns
 

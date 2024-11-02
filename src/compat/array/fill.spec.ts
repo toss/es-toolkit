@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { falsey } from '../_internal/falsey';
 import { fill } from './fill.ts';
+import { args } from '../_internal/args';
+import { falsey } from '../_internal/falsey';
+import { toArgs } from '../_internal/toArgs.ts';
 
 describe('fill', () => {
   it('should use a default `start` of `0` and a default `end` of `length`', () => {
@@ -32,6 +34,7 @@ describe('fill', () => {
     const expected = falsey.map(() => ['a', 'a', 'a']);
     const actual = falsey.map(start => {
       const array = [1, 2, 3];
+      // @ts-expect-error testing invalid input
       return fill(array, 'a', start);
     });
 
@@ -73,6 +76,7 @@ describe('fill', () => {
     const expected = falsey.map(value => (value === undefined ? ['a', 'a', 'a'] : [1, 2, 3]));
     const actual = falsey.map(end => {
       const array = [1, 2, 3];
+      // @ts-expect-error testing invalid input
       return fill(array, 'a', 0, end);
     });
 
@@ -95,6 +99,7 @@ describe('fill', () => {
     const positions = [[0.1, 1.6], ['0', 1], [0, '1'], ['1'], [NaN, 1], [1, NaN]];
     const actual = positions.map(pos => {
       const array = [1, 2, 3];
+      // @ts-expect-error testing invalid input
       return fill(array, 'a', pos[0], pos[1]);
     });
 
@@ -119,5 +124,23 @@ describe('fill', () => {
       [0, 0],
       [1, 1],
     ]);
+  });
+
+  it('should return an empty array when provided `null` or `undefined`', () => {
+    expect(fill(null, 'a')).toEqual([]);
+    expect(fill(undefined, 'a')).toEqual([]);
+  });
+
+  it('should return an empty array when provided none array-like object', () => {
+    // @ts-expect-error - invalid argument
+    expect(fill(1, 'a')).toEqual([]);
+    // @ts-expect-error - invalid argument
+    expect(fill(true, 'a')).toEqual([]);
+  });
+
+  it('should support array-like objects', () => {
+    expect(fill({ 0: 1, 1: 2, length: 2 }, 3)).toEqual({ 0: 3, 1: 3, length: 2 });
+    expect(fill('12', '3')).toEqual('12');
+    expect(fill(args, 3)).toEqual(toArgs([3, 3, 3]));
   });
 });

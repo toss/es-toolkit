@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { curry } from './curry';
+import { describe, expect, it } from 'vitest';
 import { bind } from './bind';
+import { curry } from './curry';
 import { partial } from '../../function/partial';
 import { partialRight } from '../../function/partialRight';
 

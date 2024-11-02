@@ -2,28 +2,39 @@
 
 与えられた値がプレーンオブジェクトであるかどうかを確認します。
 
+プレーンオブジェクトとは、`{}`や`{ name: 'John', age: 30 }`のような基本的なJavaScriptオブジェクトです。クラスから派生しておらず、プロトタイプは`Object.prototype`または`null`のいずれかです。`toString`メソッドを使用して文字列に変換すると、`[object Object]`として表示されます。
+
 ## インターフェース
 
 ```typescript
-function isPlainObject(object: object): boolean;
+function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 ```
 
 ### パラメータ
 
-- `object` (`object`): 検査する値。
+- `value` (`unknown`): 検査する値。
 
 ### 戻り値
 
-(`boolean`): 値がプレーンオブジェクトの場合はtrue。
+(`value is Record<PropertyKey, any>`): 値がプレーンオブジェクトの場合は`true`。
 
 ## 例
 
 ```typescript
-console.log(isPlainObject({})); // true
-console.log(isPlainObject([])); // false
-console.log(isPlainObject(null)); // false
-console.log(isPlainObject(Object.create(null))); // true
-console.log(Buffer.from('hello, world')); // false
+isPlainObject({}); // true
+isPlainObject([]); // false
+isPlainObject(Object.create(null)); // true
+
+class Foo {}
+isPlainObject(new Foo()); // false
+isPlainObject(new Date()); // false
+isPlainObject(new Set()); // false
+isPlainObject(new Map()); // false
+isPlainObject(Buffer.from('hello, world')); // false
+isPlainObject(Math); // false
+isPlainObject(JSON); // false
+isPlainObject(null); // false
+isPlainObject(1); // false
 ```
 
 ## パフォーマンス比較

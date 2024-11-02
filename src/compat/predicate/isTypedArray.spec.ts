@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { typedArrays } from '../_internal/typedArrays';
 import { isTypedArray } from './isTypedArray';
+import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { stubFalse } from '../_internal/stubFalse';
-import { args } from '../_internal/args';
+import { typedArrays } from '../_internal/typedArrays';
 
 /**
  * @see https://github.com/lodash/lodash/blob/main/test/isTypedArray.spec.js

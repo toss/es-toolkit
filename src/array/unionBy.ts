@@ -1,3 +1,5 @@
+import { uniqBy } from './uniqBy.ts';
+
 /**
  * Creates an array of unique values, in order, from all given arrays using a provided mapping function to determine equality.
  *
@@ -21,15 +23,5 @@
  * // Returns [{ id: 1 }, { id: 2 }, { id: 3 }]
  */
 export function unionBy<T, U>(arr1: readonly T[], arr2: readonly T[], mapper: (item: T) => U): T[] {
-  const map = new Map<U, T>();
-
-  for (const item of [...arr1, ...arr2]) {
-    const key = mapper(item);
-
-    if (!map.has(key)) {
-      map.set(key, item);
-    }
-  }
-
-  return Array.from(map.values());
+  return uniqBy(arr1.concat(arr2), mapper);
 }

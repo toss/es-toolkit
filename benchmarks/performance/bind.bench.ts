@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { bind as bindToolkit } from 'es-toolkit/compat';
-import { bind as bindLodash } from 'lodash';
+import { bind as bindToolkit_ } from 'es-toolkit/compat';
+import { bind as bindLodash_ } from 'lodash';
+
+const bindToolkit = bindToolkit_;
+const bindLodash = bindLodash_;
 
 function fn(this: any) {
   const result = [this];
@@ -8,7 +11,7 @@ function fn(this: any) {
   return result.concat(Array.from(arguments));
 }
 
-describe('bind', () => {
+describe('bind - without placeholder', () => {
   bench('es-toolkit/bind - without placeholder', () => {
     const object = {};
     bindToolkit(fn, object, 'a');
@@ -18,7 +21,9 @@ describe('bind', () => {
     const object = {};
     bindLodash(fn, object, 'a');
   });
+});
 
+describe('bind - with placeholder', () => {
   bench('es-toolkit/bind - with placeholder', () => {
     const object = {};
     bindToolkit(fn, object, 'a', bindToolkit.placeholder);

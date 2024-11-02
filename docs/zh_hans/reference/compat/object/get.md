@@ -90,7 +90,7 @@ function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaul
 
 (`Get<T, P>`): 解析后的值。
 
-### 示例
+## 示例
 
 ```typescript
 import { get } from 'es-toolkit/compat';

@@ -1,5 +1,5 @@
-import { cloneDeep } from '../../object/cloneDeep.ts';
 import { unset } from './unset.ts';
+import { cloneDeep } from '../../object/cloneDeep.ts';
 
 /**
  * Creates a new object with specified keys omitted.
@@ -30,7 +30,7 @@ export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, k
  *
  * @template T - The type of object.
  * @param {T} obj - The object to omit keys from.
- * @param {...(PropertyKey | PropertyKey[] | PropertyKey[][]} keys - A variable number of keys to be omitted from the object.
+ * @param {...(PropertyKey | PropertyKey[] | PropertyKey[][])} keys - A variable number of keys to be omitted from the object.
  * @returns {Partial<T>} A new object with the specified keys omitted.
  */
 export function omit<

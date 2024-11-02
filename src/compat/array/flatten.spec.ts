@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { flatten } from './flatten';
 import { args } from '../_internal/args';
 
@@ -47,8 +47,14 @@ describe('flatten', () => {
   it('should return an empty array for non array-like objects', () => {
     const nonArray = { 0: 'a' };
     const expected: [] = [];
-    const actual = flatten(nonArray);
+    const actual = flatten(nonArray as any);
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should support array-like', () => {
+    expect(flatten({ 0: [1, 2, 3], length: 1 })).toEqual([1, 2, 3]);
+    expect(flatten('123')).toEqual(['1', '2', '3']);
+    expect(flatten(args)).toEqual([1, 2, 3]);
   });
 });

@@ -33,6 +33,15 @@ function findLastIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): numb
 
 - `arr` (`T[]`): 要搜索的数组。
 
+::: info `arr` 可能是 `ArrayLike<T>`，也可能是 `null` 或 `undefined`
+
+为了与 lodash 完全兼容，`findLastIndex` 函数会对 `arr` 进行如下处理。
+
+- 如果 `arr` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
+- 如果 `arr` 是 `null` 或 `undefined`，则会将其视为空数组。
+
+:::
+
 - `doesMatch`:
 
   - **谓词函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个函数，接受项、其索引和数组，如果项符合条件则返回真值。

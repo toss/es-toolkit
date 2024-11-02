@@ -1,4 +1,4 @@
-import { orderBy } from './orderBy';
+import { orderBy } from './orderBy.ts';
 
 /**
  * Sorts an array of objects based on the given `criteria`.

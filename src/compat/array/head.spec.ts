@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { head, first } from '../index';
+import { args } from '../_internal/args';
+import { first, head } from '../index';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/head.spec.js#L1
@@ -24,5 +25,22 @@ describe('head', () => {
 
   it('should be aliased', () => {
     expect(first).toBe(head);
+  });
+
+  it('should return an empty array when the collection is null or undefined', () => {
+    expect(first(null)).toBeUndefined();
+  });
+
+  it('should return an empty array when the collection is not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(first(1)).toBeUndefined();
+    // @ts-expect-error - invalid argument
+    expect(first(true)).toBeUndefined();
+  });
+
+  it('should support array-like', () => {
+    expect(first({ 0: 1, 1: null, 2: 3, length: 3 })).toEqual(1);
+    expect(first('123')).toEqual('1');
+    expect(first(args)).toEqual(1);
   });
 });

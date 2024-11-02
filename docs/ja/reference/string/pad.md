@@ -10,13 +10,13 @@
 function pad(str: string, length: number, chars = ' '): string;
 ```
 
-## パラメータ
+### パラメータ
 
 - `str` (`string`): パディングする文字列。
 - `length` (`number`): 結果として得られる文字列の長さ。
 - `char` (`string`): 文字列をパディングするための文字。デフォルトは `' '` です。
 
-## 戻り値
+### 戻り値
 
 (`string`): パディングされた文字列。
 

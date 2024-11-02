@@ -1,3 +1,5 @@
+import { toString } from '../util/toString.ts';
+
 /**
  * Pads the start of a string with a given character until it reaches the specified length.
  *
@@ -16,5 +18,5 @@
  * const result4 = padStart('abc', 2);          // result will be 'abc'
  */
 export function padStart(str: string, length = 0, chars = ' '): string {
-  return str.padStart(length, chars);
+  return toString(str).padStart(length, chars);
 }

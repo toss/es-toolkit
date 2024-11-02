@@ -1,5 +1,5 @@
-import { capitalize } from './capitalize.ts';
 import { getWords } from './_internal/getWords.ts';
+import { capitalize } from './capitalize.ts';
 
 /**
  * Converts a string to camel case.
@@ -15,8 +15,8 @@ import { getWords } from './_internal/getWords.ts';
  * const convertedStr2 = camelCase('some whitespace') // returns 'someWhitespace'
  * const convertedStr3 = camelCase('hyphen-text') // returns 'hyphenText'
  * const convertedStr4 = camelCase('HTTPRequest') // returns 'httpRequest'
+ * const convertedStr5 = camelCase('Keep unicode 😅') // returns 'keepUnicode😅'
  */
-
 export function camelCase(str: string): string {
   const words = getWords(str);
 

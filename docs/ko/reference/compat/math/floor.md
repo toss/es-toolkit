@@ -11,13 +11,13 @@
 ## 인터페이스
 
 ```typescript
-function floor(number: number | string, precision: number | string): number;
+function floor(number: number | string, precision: number | string = 0): number;
 ```
 
 ### 파라미터
 
 - `number` (`number | string`): 내림할 숫자.
-- `precision` (`number | string`): 내림할 정확도.
+- `precision` (`number | string`, 선택 사항): 내림할 정확도. 기본값은 0이에요.
 
 ### 반환 값
 

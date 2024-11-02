@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { noop } from '../../function/noop';
-import { identity } from '../_internal/identity';
 import { mergeWith } from './mergeWith';
 import { last } from '../../array/last';
+import { identity } from '../../function/identity';
+import { noop } from '../../function/noop';
 
 describe('mergeWith', () => {
   it('should handle merging when `customizer` returns `undefined`', () => {

@@ -1,3 +1,5 @@
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+
 /**
  * Finds the index of the first occurrence of a value in an array.
  *
@@ -5,8 +7,7 @@
  * It uses strict equality (`===`) to compare elements.
  *
  * @template T - The type of elements in the array.
- * @template U - The type of the value to search for.
- * @param {T[] | null | undefined} array - The array to search.
+ * @param {ArrayLike<T> | null | undefined} array - The array to search.
  * @param {T} searchElement - The value to search for.
  * @param {number} [fromIndex] - The index to start the search at.
  * @returns {number} The index (zero-based) of the first occurrence of the value in the array, or `-1` if the value is not found.
@@ -16,8 +17,8 @@
  * indexOf(array, 3); // => 2
  * indexOf(array, NaN); // => 3
  */
-export function indexOf<T>(array: readonly T[] | null | undefined, searchElement: T, fromIndex?: number): number {
-  if (array == null) {
+export function indexOf<T>(array: ArrayLike<T> | null | undefined, searchElement: T, fromIndex?: number): number {
+  if (!isArrayLike(array)) {
     return -1;
   }
 
@@ -40,5 +41,5 @@ export function indexOf<T>(array: readonly T[] | null | undefined, searchElement
 
   // Array.prototype.indexOf already handles `fromIndex < -array.length`, `fromIndex >= array.length` and converts `fromIndex` to an integer, so we don't need to handle those cases here.
   // And it uses strict equality (===) to compare elements like `lodash/indexOf` does.
-  return array.indexOf(searchElement as T, fromIndex);
+  return Array.from(array).indexOf(searchElement, fromIndex);
 }

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { flattenDepth } from './flattenDepth';
 import { args } from '../_internal/args';
 
@@ -47,7 +47,7 @@ describe('flattenDepth', () => {
   it('should return an empty array for non array-like objects', () => {
     const nonArray = { 0: 'a' };
     const expected: [] = [];
-    const actual = flattenDepth(nonArray, 2);
+    const actual = flattenDepth(nonArray as any, 2);
 
     expect(actual).toEqual(expected);
   });
@@ -67,5 +67,11 @@ describe('flattenDepth', () => {
   it('should coerce `depth` to an integer', () => {
     const array = [1, [2, [3, [4]], 5]];
     expect(flattenDepth(array, 2.2)).toEqual([1, 2, 3, [4], 5]);
+  });
+
+  it('should support array-like', () => {
+    expect(flattenDepth({ 0: [1, 2, 3], length: 1 })).toEqual([1, 2, 3]);
+    expect(flattenDepth('123')).toEqual(['1', '2', '3']);
+    expect(flattenDepth(args)).toEqual([1, 2, 3]);
   });
 });

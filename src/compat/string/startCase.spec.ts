@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { startCase } from './startCase';
 
-describe('case methods', () => {
+describe('startCase', () => {
   const strings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];
 
   it(`should convert \`string\``, () => {
     const actual = strings.map(string => startCase(string));
 
-    const expected = actual.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
+    const expected = strings.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
 
     expect(actual).toEqual(expected);
   });
@@ -15,7 +15,7 @@ describe('case methods', () => {
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => startCase(startCase(string)));
 
-    const expected = actual.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
+    const expected = strings.map(string => (string === 'FOO BAR' ? 'FOO BAR' : 'Foo Bar'));
 
     expect(actual).toEqual(expected);
   });
@@ -41,5 +41,11 @@ describe('case methods', () => {
     const string = 'foo bar';
     expect(startCase(Object(string))).toBe('Foo Bar');
     expect(startCase({ toString: () => string })).toBe('Foo Bar');
+  });
+
+  it('should uppercase only the first character of each word', () => {
+    expect(startCase('--foo-bar--')).toBe('Foo Bar');
+    expect(startCase('fooBar')).toBe('Foo Bar');
+    expect(startCase('__FOO_BAR__')).toBe('FOO BAR');
   });
 });

@@ -16,14 +16,14 @@
 function isMatch(target: unknown, source: unknown): boolean;
 ```
 
-## 参数
+### 参数
 
 - `target` (`unknown`): 要匹配的目标值。
 - `source` (`unknown`): 用于匹配的源值。
 
-## 返回值
+### 返回值
 
-- (`boolean`): 如果目标与源匹配，则返回 `true`，否则返回 `false`。
+(`boolean`): 如果目标与源匹配，则返回 `true`，否则返回 `false`。
 
 ## 示例
 

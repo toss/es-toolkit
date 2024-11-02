@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { isSymbol } from './isSymbol';
-import { falsey } from '../_internal/falsey';
-import { stubFalse } from '../_internal/stubFalse';
 import { args } from '../_internal/args';
+import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
+import { stubFalse } from '../_internal/stubFalse';
 
 describe('isSymbol', () => {
   it('should return `true` for symbols', () => {

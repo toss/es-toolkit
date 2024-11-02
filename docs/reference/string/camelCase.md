@@ -27,4 +27,5 @@ camelCase('camelCase'); // returns 'camelCase'
 camelCase('some whitespace'); // returns 'someWhitespace'
 camelCase('hyphen-text'); // returns 'hyphenText'
 camelCase('HTTPRequest'); // returns 'httpRequest'
+camelCase('Keep unicode 😅'); // returns 'keepUnicode😅'
 ```

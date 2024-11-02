@@ -35,13 +35,13 @@ function sum(a: number, b: number, c: number) {
 
 const curriedSum = curry(sum);
 
-// The parameter `a` should be given the value `10`.
+// 参数 `a` 应该被赋值为 `10`。
 const sum10 = curriedSum(10);
 
-// The parameter `b` should be given the value `15`.
+// 参数 `b` 应该被赋值为 `15`。
 const sum25 = sum10(15);
 
-// The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
+// 参数 `c` 应该被赋值为 `5`。函数 'sum' 已经接收到了所有参数，现在将返回一个值。
 const result = sum25(5);
 ```
 

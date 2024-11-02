@@ -10,9 +10,9 @@ chunk([1, 2, 3, 4], 0);
 
 为了最大限度地兼容 `lodash`，请使用 `es-toolkit/compat`，这是一个弥合这两个库之间差距的兼容性层。
 
-该模块旨在提供与 `lodash` 相同的 API，使得在这两个库之间进行切换更加容易。
+该模块旨在提供与 `lodash` 相同的 API，使得在这两个库之间能够更加容易地进行切换。
 
-`es-toolkit/compat` 已经过 `lodash` 的实际测试用例进行了全面测试。
+`es-toolkit/compat` 已经对 `lodash` 的实际测试用例进行了全面测试。
 
 需要注意的是，与原始 `es-toolkit` 相比，`es-toolkit/compat` 可能会对性能产生轻微影响，并且包大小可能会更大。该模块旨在促进平滑过渡，一旦迁移完成，应替换回原始的 `es-toolkit` 以获得最佳性能。
 

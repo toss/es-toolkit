@@ -5,7 +5,10 @@
 ## 인터페이스
 
 ```typescript
-function before<F extends (...args: any[]) => any>(n: number, func: F): F;
+function before<F extends (...args: any[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### 파라미터
@@ -15,9 +18,9 @@ function before<F extends (...args: any[]) => any>(n: number, func: F): F;
   - `n`이 양의 정수인 경우, `func`는 최대 `n-1`번 호출돼요.
 - `func` (`F`): 호출 횟수 제한이 적용될 함수예요.
 
-### 결괏값
+### 반환 값
 
-(`F`): 새로운 함수를 반환해요. 이 함수는 다음과 같은 기능을 가져요.
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 새로운 함수를 반환해요. 이 함수는 다음과 같은 기능을 가져요.
 
 - 호출 횟수를 추적해요.
 - `n-1`번째 호출까지 `func`를 호출해요.
@@ -43,4 +46,27 @@ afterFn();
 afterFn();
 // '실행됨'을 로깅해요.
 afterFn();
+```
+
+## Lodash와의 호환성
+
+`es-toolkit/compat`에서 `before`를 가져오면 lodash와 호환돼요.
+
+- `n`이 음수여도 에러를 던지지 않아요.
+- `func`가 함수가 아니면 에러를 던져요.
+- 호출 횟수가 `n`에 도달하거나 초과하면 `func`의 마지막 결과를 반환해요.
+
+```typescript
+import { before } from 'es-toolkit/compat';
+
+let count = 0;
+
+const before3 = before(3, () => {
+  console.log('카운트를 증가시켜요...');
+  return ++count;
+});
+
+console.log(before3()); // 카운트를 증가시켜요... => 1
+console.log(before3()); // 카운트를 증가시켜요... => 2
+console.log(before3()); //                   => 2
 ```

@@ -1,13 +1,13 @@
 import { difference as differenceToolkit } from '../../array/difference.ts';
-import { flatten } from '../../array/flatten.ts';
+import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
  * Computes the difference between an array and multiple arrays.
  *
  * @template T
- * @param {T[]} arr - The primary array from which to derive the difference. This is the main array
+ * @param {ArrayLike<T> | undefined | null} arr - The primary array from which to derive the difference. This is the main array
  * from which elements will be compared and filtered.
- * @param {...T[]} values - Multiple arrays containing elements to be excluded from the primary array.
+ * @param {Array<ArrayLike<T>>} values - Multiple arrays containing elements to be excluded from the primary array.
  * These arrays will be flattened into a single array, and each element in this array will be checked against the primary array.
  * If a match is found, that element will be excluded from the result.
  * @returns {T[]} A new array containing the elements that are present in the primary array but not
@@ -19,10 +19,27 @@ import { flatten } from '../../array/flatten.ts';
  * const array3 = [5, 6];
  * const result = difference(array1, array2, array3);
  * // result will be [1, 3] since 2, 4, and 5 are in the other arrays and are excluded from the result.
+ *
+ * @example
+ * const arrayLike1 = { 0: 1, 1: 2, 2: 3, length: 3 };
+ * const arrayLike2 = { 0: 2, 1: 4, length: 2 };
+ * const result = difference(arrayLike1, arrayLike2);
+ * // result will be [1, 3] since 2 is in both array-like objects and is excluded from the result.
  */
-export function difference<T>(arr: readonly T[], ...values: Array<readonly T[]>): T[] {
-  const arr1 = arr;
-  const arr2 = flatten(values);
+export function difference<T>(arr: ArrayLike<T> | undefined | null, ...values: Array<ArrayLike<T>>): T[] {
+  if (!isArrayLikeObject(arr)) {
+    return [];
+  }
+
+  const arr1 = Array.from(arr);
+  const arr2 = [];
+
+  for (let i = 0; i < values.length; i++) {
+    const value = values[i];
+    if (isArrayLikeObject(value)) {
+      arr2.push(...Array.from(value));
+    }
+  }
 
   return differenceToolkit(arr1, arr2);
 }

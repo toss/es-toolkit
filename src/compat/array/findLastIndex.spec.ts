@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { findLastIndex } from './findLastIndex';
+import { args } from '../_internal/args';
+import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { stubZero } from '../_internal/stubZero';
-import { falsey } from '../_internal/falsey';
 
 describe('findLastIndex', () => {
   const objects = [
@@ -95,5 +96,16 @@ describe('findLastIndex', () => {
 
   it(`\`findLastIndex\` should coerce \`fromIndex\` to an integer`, () => {
     expect(findLastIndex(array, x => x === 2, 4.2)).toBe(4);
+  });
+
+  it('should return `-1` when provided `null` or `undefined`', () => {
+    expect(findLastIndex(null, 'a')).toBe(-1);
+    expect(findLastIndex(undefined, 'a')).toBe(-1);
+  });
+
+  it('should support array-like objects', () => {
+    expect(findLastIndex({ 0: 'a', 1: 'b', length: 2 }, i => i === 'b')).toBe(1);
+    expect(findLastIndex('123', i => i === '2')).toBe(1);
+    expect(findLastIndex(args, i => i === 2)).toBe(1);
   });
 });

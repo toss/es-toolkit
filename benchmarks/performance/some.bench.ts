@@ -1,6 +1,9 @@
-import { some as someToolkit } from 'es-toolkit/compat';
-import { some as someLodash } from 'lodash';
 import { bench, describe } from 'vitest';
+import { some as someToolkit_ } from 'es-toolkit/compat';
+import { some as someLodash_ } from 'lodash';
+
+const someToolkit = someToolkit_;
+const someLodash = someLodash_;
 
 describe('some', () => {
   bench('es-toolkit/some', () => {
@@ -15,5 +18,18 @@ describe('some', () => {
     someLodash([1, 'string'], Number);
     someLodash([false, false, false], value => value);
     someLodash([1, false, 'string'], () => true);
+  });
+});
+
+describe('some/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, index) => index);
+  const predicate = (number: number) => number > 5000;
+
+  bench('es-toolkit/some', () => {
+    someToolkit(largeArray, predicate);
+  });
+
+  bench('lodash/some', () => {
+    someLodash(largeArray, predicate);
   });
 });

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isWeakMap } from './isWeakMap';
-import { falsey } from '../_internal/falsey';
 import { args } from '../_internal/args';
+import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
 

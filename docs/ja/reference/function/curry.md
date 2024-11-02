@@ -17,7 +17,6 @@ function curry<P1, P2, P3, P4, P5, R>(
   func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
 ): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => (p5: P5) => R;
 function curry(func: (...args: any[]) => any): (...args: any[]) => any;
-function curry(func: (...args: any[]) => any): (...args: any[]) => any;
 ```
 
 ### パラメータ
@@ -46,4 +45,59 @@ const sum25 = sum10(15);
 // パラメータ `c` に値 `5` を与えます。
 // 関数 'sum' はすべてのパラメータを受け取ったので、今値を返します。
 const result = sum25(5);
+```
+
+## Lodashとの互換性
+
+`es-toolkit/compat`から`curry`をインポートすると、lodashと互換性があります。
+
+### インターフェース
+
+```typescript
+function curry(
+  func: (...args: any[]) => any,
+  arity: number = func.length,
+  guard?: unknown
+): ((...args: any[]) => any) & { placeholder: typeof curry.placeholder };
+
+namespace curry {
+  placeholder: symbol;
+}
+```
+
+- `curry` 関数は数値 `arity` をパラメータとして受け取ります。このパラメータは関数が呼び出されるために必要なパラメータの数を指定します。
+  - デフォルト値は関数の `length` プロパティです。`arity` が負の値または `NaN` の場合、`0` に変換されます。小数点を含む数値の場合は、最も近い整数に切り捨てられます。
+- `funcs.map(curry)` のように `Array#map` 関数と簡単に使用できます。
+- Symbol である `curry.placeholder` の値を使用して、パラメータを部分適用する位置を指定できます。
+- 基本の `curry` とは異なり、一度に複数のパラメータを提供できます。残りのパラメータを受け取る新しい関数を返します。
+
+### 例
+
+```typescript
+import { curry } from 'es-toolkit/compat';
+
+const abc = function (a, b, c) {
+  return Array.from(arguments);
+};
+
+let curried = curry(abc);
+
+curried(1)(2)(3);
+// => [1, 2, 3]
+
+curried(1, 2)(3);
+// => [1, 2, 3]
+
+curried(1, 2, 3);
+// => [1, 2, 3]
+
+// Curried with placeholders.
+curried(1)(curry.placeholder, 3)(2);
+// => [1, 2, 3]
+
+// Curried with arity.
+curried = curry(abc, 2);
+
+curried(1)(2);
+// => [1, 2]
 ```

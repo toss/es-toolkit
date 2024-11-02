@@ -28,13 +28,30 @@ function find<T extends Record<string, unknown>>(
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
 ```
 
 ### 파라미터
 
 - `arr` (`T[]`) or `object` (`T`): 검색할 배열이나 객체.
+
+::: info `arr`는 `ArrayLike<T>`일 수도 있고, `null` 또는 `undefined`일 수도 있어요
+
+lodash와 완벽하게 호환되도록 `find` 함수는 `arr`을 다음과 같이 처리해요:
+
+- `arr`가 `ArrayLike<T>`인 경우 `Array.from(...)`을 사용하여 배열로 변환해요.
+- `arr`가 `null` 또는 `undefined`인 경우 빈 배열로 간주돼요.
+
+:::
+
+::: info `object`는 `null` 또는 `undefined`일 수도 있어요
+
+lodash와 완벽하게 호환되도록 `find` 함수는 `object`를 다음과 같이 처리해요:
+
+- `object`가 `null` 또는 `undefined`인 경우 빈 객체로 변환돼요.
+
+:::
 
 - `doesMatch`:
 
@@ -48,7 +65,7 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: string): 
   - 객체의 경우:
     - **검사 함수** (`(item: T[keyof T], index: number, object: T) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
     - **Partial value** (`Partial<T[keyof T]>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
-    - **Property-value pair** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
+    - **Property-value pair** (`[keyof T[keyof T], unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
     - **Property name** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
 
 ### 반환 값

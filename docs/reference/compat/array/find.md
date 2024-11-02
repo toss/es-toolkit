@@ -28,13 +28,30 @@ function find<T extends Record<string, unknown>>(
   doesMatch: (item: T[keyof T], index: number, object: T) => unknown
 ): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T, unknown]): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T | undefined;
 function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
 ```
 
 ### Parameters
 
 - `arr` (`T[]`) or `object` (`T`): The array or object to search through.
+
+::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
+
+To ensure full compatibility with lodash, the `find` function handles `arr` in this way:
+
+- If `arr` is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
+- If `arr` is `null` or `undefined`, it will be treated as an empty array.
+
+:::
+
+::: info `object` can be `null` or `undefined`
+
+To ensure full compatibility with lodash, the `find` function handles `object` in this way:
+
+- If `object` is `null` or `undefined`, it will be converted into an empty object.
+
+:::
 
 - `doesMatch`:
 
@@ -48,7 +65,7 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: string): 
   - For the `find` overloads with objects:
     - **Predicate function** (`(item: T[keyof T], index: number, object: T) => unknown`): A function that takes an item, its key, and the object, and returns a truthy value if the item matches the criteria.
     - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
-    - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
+    - **Property-value pair** (`[keyof T[keyof T], unknown]`): An array where the first element is the property key and the second element is the value to match.
     - **Property name** (`string`): The name of the property to check for a truthy value.
 
 ### Returns

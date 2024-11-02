@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { keyBy as keyByToolkit } from 'es-toolkit';
-import { keyBy as keyByLodash } from 'lodash';
+import { keyBy as keyByToolkit_ } from 'es-toolkit';
+import { keyBy as keyByLodash_ } from 'lodash';
+
+const keyByToolkit = keyByToolkit_;
+const keyByLodash = keyByLodash_;
 
 describe('keyBy', () => {
   bench('es-toolkit/keyBy', () => {
@@ -25,5 +28,17 @@ describe('keyBy', () => {
     ];
 
     keyByLodash(people, person => person.name);
+  });
+});
+
+describe('keyBy/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => ({ name: `name${i}`, age: i }));
+
+  bench('es-toolkit/keyBy', () => {
+    keyByToolkit(largeArray, person => person.name);
+  });
+
+  bench('lodash/keyBy', () => {
+    keyByLodash(largeArray, person => person.name);
   });
 });

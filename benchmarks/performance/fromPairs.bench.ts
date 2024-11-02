@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { fromPairs as fromPairsToolkit } from 'es-toolkit/compat';
-import { fromPairs as fromPairsLodash } from 'lodash';
+import { fromPairs as fromPairsToolkit_ } from 'es-toolkit/compat';
+import { fromPairs as fromPairsLodash_ } from 'lodash';
+
+const fromPairsToolkit = fromPairsToolkit_;
+const fromPairsLodash = fromPairsLodash_;
 
 describe('fromPairs', () => {
   const data = [
@@ -19,5 +22,21 @@ describe('fromPairs', () => {
 
   bench('javascript/fromEntries', () => {
     Object.fromEntries(data);
+  });
+});
+
+describe('fromPairs/largeArray', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => [i, i]);
+
+  bench('es-toolkit/fromPairs', () => {
+    fromPairsToolkit(largeArray);
+  });
+
+  bench('lodash/fromPairs', () => {
+    fromPairsLodash(largeArray);
+  });
+
+  bench('javascript/fromEntries', () => {
+    Object.fromEntries(largeArray);
   });
 });

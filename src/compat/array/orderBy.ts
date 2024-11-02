@@ -1,6 +1,6 @@
-import { compareValues } from '../_internal/compareValues';
-import { isKey } from '../_internal/isKey';
-import { toPath } from '../util/toPath';
+import { compareValues } from '../_internal/compareValues.ts';
+import { isKey } from '../_internal/isKey.ts';
+import { toPath } from '../util/toPath.ts';
 
 export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
 /**
@@ -11,9 +11,10 @@ export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] 
  * If values for a key are equal, it moves to the next key to determine the order.
  *
  * @template T - The type of elements in the array.
- * @param { T[] | object | null | undefined} collection - The array of objects to be sorted.
+ * @param {ArrayLike<T> | object | null | undefined} collection - The array of objects to be sorted.
  * @param {Criterion<T> | Array<Criterion<T>>} criteria - An array of criteria (property names or property paths or custom key functions) to sort by.
  * @param {unknown | unknown[]} orders - An array of order directions ('asc' for ascending or 'desc' for descending).
+ * @param {unknown} [guard] Enables use as an iteratee for methods like `_.reduce`.
  * @returns {T[]} - The sorted array.
  *
  * @example
@@ -33,21 +34,27 @@ export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] 
  * //   { user: 'fred', age: 40 },
  * // ]
  */
-export function orderBy<T>(
-  collection: readonly T[] | object | number | null | undefined,
+export function orderBy<T = any>(
+  collection: ArrayLike<T> | object | null | undefined,
   criteria?: Criterion<T> | Array<Criterion<T>>,
-  orders?: unknown | unknown[]
+  orders?: unknown | unknown[],
+  guard?: unknown
 ): T[] {
-  if (collection == null || typeof collection === 'number') {
+  if (collection == null) {
     return [];
   }
 
-  if (typeof collection === 'object' && !Array.isArray(collection)) {
+  orders = guard ? undefined : orders;
+
+  if (!Array.isArray(collection)) {
     collection = Object.values(collection);
   }
 
   if (!Array.isArray(criteria)) {
     criteria = criteria == null ? [null] : [criteria];
+  }
+  if (criteria.length === 0) {
+    criteria = [null];
   }
 
   if (!Array.isArray(orders)) {
@@ -107,7 +114,7 @@ export function orderBy<T>(
     }
 
     // If criterion is not key, it has possibility to be a deep path. So we have to prepare both cases.
-    return { key: criterion, path: toPath(criterion as string) } as const;
+    return { key: criterion, path: toPath(criterion) };
   });
 
   // Array.prototype.sort() always shifts the `undefined` values to the end of the array. So we have to prevent it by using a wrapper object.

@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { pickBy as pickByToolkit } from 'es-toolkit';
-import { pickBy as pickByLodash } from 'lodash';
+import { pickBy as pickByToolkit_ } from 'es-toolkit';
+import { pickBy as pickByLodash_ } from 'lodash';
+
+const pickByToolkit = pickByToolkit_;
+const pickByLodash = pickByLodash_;
 
 describe('pickBy', () => {
   bench('es-toolkit/pickBy', () => {

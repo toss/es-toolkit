@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { omit } from './omit';
-import { toArgs } from '../_internal/toArgs';
 import { objectProto } from '../_internal/objectProto';
 import { stringProto } from '../_internal/stringProto';
+import { toArgs } from '../_internal/toArgs';
 
 describe('omit', () => {
   it('should omit deep properties', () => {

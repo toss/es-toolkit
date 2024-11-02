@@ -25,8 +25,8 @@ import { startCase } from 'es-toolkit/string';
 
 startCase('--foo-bar--'); // 'Foo Bar' を返します
 startCase('fooBar'); // 'Foo Bar' を返します
-startCase('__FOO_BAR__'); // 'FOO BAR' を返します
-startCase('XMLHttpRequest'); // 'XML Http Request' を返します
+startCase('__FOO_BAR__'); // 'Foo Bar' を返します
+startCase('XMLHttpRequest'); // 'Xml Http Request' を返します
 startCase('_abc_123_def'); // 'Abc 123 Def' を返します
 startCase('__abc__123__def__'); // 'Abc 123 Def' を返します
 startCase('_-_-_-_'); // '' を返します

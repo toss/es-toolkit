@@ -1,6 +1,11 @@
 import { bench, describe } from 'vitest';
-import { intersectionBy as intersectionByToolkit } from 'es-toolkit';
-import { intersectionBy as intersectionByLodash } from 'lodash';
+import { intersectionBy as intersectionByToolkit_ } from 'es-toolkit';
+import { intersectionBy as intersectionByCompatToolkit_ } from 'es-toolkit/compat';
+import { intersectionBy as intersectionByLodash_ } from 'lodash';
+
+const intersectionByToolkit = intersectionByToolkit_;
+const intersectionByCompatToolkit = intersectionByCompatToolkit_;
+const intersectionByLodash = intersectionByLodash_;
 
 describe('intersectionBy', () => {
   bench('es-toolkit/intersectionBy', () => {
@@ -10,10 +15,35 @@ describe('intersectionBy', () => {
     intersectionByToolkit(array1, array2, mapper);
   });
 
+  bench('es-toolkit/compat/intersectionBy', () => {
+    const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+    const array2 = [{ id: 2 }, { id: 4 }];
+    const mapper = item => item.id;
+    intersectionByCompatToolkit(array1, array2, mapper);
+  });
+
   bench('lodash/intersectionBy', () => {
     const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
     const array2 = [{ id: 2 }, { id: 4 }];
     const mapper = item => item.id;
+    intersectionByLodash(array1, array2, mapper);
+  });
+});
+
+describe('intersectionBy/largeArrays', () => {
+  const array1 = Array.from({ length: 10000 }, (_, i) => ({ id: i }));
+  const array2 = Array.from({ length: 10000 }, (_, i) => ({ id: i + 5000 }));
+  const mapper = item => item.id;
+
+  bench('es-toolkit/intersectionBy', () => {
+    intersectionByToolkit(array1, array2, mapper);
+  });
+
+  bench('es-toolkit/compat/intersectionBy', () => {
+    intersectionByCompatToolkit(array1, array2, mapper);
+  });
+
+  bench('lodash/intersectionBy', () => {
     intersectionByLodash(array1, array2, mapper);
   });
 });

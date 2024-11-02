@@ -14,12 +14,22 @@
 ## 인터페이스
 
 ```typescript
-function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?: number): number;
+function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 ```
 
 ### 파라미터
 
-- `array` (`T[] | null | undefined`): 검색할 배열.
+- `array` (`T[]`): 검색할 배열.
+
+::: info `array`는 `ArrayLike<T>`이거나 `null` 또는 `undefined`일 수 있어요
+
+lodash와 완전히 호환되도록 `indexOf` 함수는 `array`를 다음과 같이 처리해요.
+
+- `array`가 `ArrayLike<T>`인 경우, 배열로 변환하기 위해 `Array.from(...)`을 사용해요.
+- `array`가 `null` 또는 `undefined`인 경우, 빈 배열로 간주돼요.
+
+:::
+
 - `searchElement` (`T`): 찾을 값.
 - `fromIndex` (`number`, 선택): 검색을 시작할 인덱스.
 
@@ -27,7 +37,7 @@ function indexOf<T>(array: T[] | null | undefined, searchElement: T, fromIndex?:
 
 (`number`): 배열에서 주어진 값과 첫 번째로 일치하는 요소의 인덱스. 일치하는 요소를 찾을 수 없으면 `-1`을 반환해요.
 
-### 예시
+## 예시
 
 ```typescript
 const array = [1, 2, 3, NaN];

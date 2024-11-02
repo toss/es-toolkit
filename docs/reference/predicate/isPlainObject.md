@@ -1,29 +1,40 @@
 # isPlainObject
 
-Checks if a given value is a plain object.
+Checks if a value is a plain object.
+
+A plain object is a basic JavaScript object, such as `{}` or `{ name: 'John', age: 30 }`. It is not derived from a class and has either `Object.prototype` or `null` as its prototype. When you convert it to a string using the `toString` method, it will show up as `[object Object]`.
 
 ## Signature
 
 ```typescript
-function isPlainObject(object: object): boolean;
+function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
 ```
 
 ### Parameters
 
-- `object` (`object`): The value to check.
+- `value` (`unknown`): The value to check.
 
 ### Returns
 
-(`boolean`): True if the value is a plain object, otherwise false.
+(`value is Record<PropertyKey, any>`): True if the value is a plain object, otherwise false.
 
 ## Examples
 
 ```typescript
-console.log(isPlainObject({})); // true
-console.log(isPlainObject([])); // false
-console.log(isPlainObject(null)); // false
-console.log(isPlainObject(Object.create(null))); // true
-console.log(Buffer.from('hello, world')); // false
+isPlainObject({}); // true
+isPlainObject([]); // false
+isPlainObject(Object.create(null)); // true
+
+class Foo {}
+isPlainObject(new Foo()); // false
+isPlainObject(new Date()); // false
+isPlainObject(new Set()); // false
+isPlainObject(new Map()); // false
+isPlainObject(Buffer.from('hello, world')); // false
+isPlainObject(Math); // false
+isPlainObject(JSON); // false
+isPlainObject(null); // false
+isPlainObject(1); // false
 ```
 
 ## Performance Comparison

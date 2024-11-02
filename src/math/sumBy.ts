@@ -1,5 +1,3 @@
-import { sum } from './sum.ts';
-
 /**
  * Calculates the sum of an array of numbers when applying
  * the `getValue` function to each element.
@@ -16,7 +14,11 @@ import { sum } from './sum.ts';
  * sumBy([], x => x.a); // Returns: 0
  */
 export function sumBy<T>(items: readonly T[], getValue: (element: T) => number): number {
-  const nums = items.map(x => getValue(x));
+  let result = 0;
 
-  return sum(nums);
+  for (let i = 0; i < items.length; i++) {
+    result += getValue(items[i]);
+  }
+
+  return result;
 }

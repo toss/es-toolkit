@@ -1,6 +1,9 @@
-import { unzipWith as unzipWithToolkit } from 'es-toolkit';
-import { unzipWith as unzipWithLodash } from 'lodash';
 import { bench, describe } from 'vitest';
+import { unzipWith as unzipWithToolkit_ } from 'es-toolkit';
+import { unzipWith as unzipWithLodash_ } from 'lodash';
+
+const unzipWithToolkit = unzipWithToolkit_;
+const unzipWithLodash = unzipWithLodash_;
 
 describe('unzipWith', () => {
   bench('es-toolkit/unzipWith', () => {
@@ -23,5 +26,17 @@ describe('unzipWith', () => {
       ],
       (a, b, c) => a + b + c
     );
+  });
+});
+
+describe('unzipWith, large arrays', () => {
+  const largeArray = Array.from({ length: 10000 }, (_, i) => [i, i + 1]);
+
+  bench('es-toolkit/unzipWith', () => {
+    unzipWithToolkit(largeArray, (a, b) => a + b);
+  });
+
+  bench('lodash/unzipWith', () => {
+    unzipWithLodash(largeArray, (a, b) => a + b);
   });
 });

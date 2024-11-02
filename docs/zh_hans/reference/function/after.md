@@ -8,7 +8,10 @@
 ## 签名
 
 ```typescript
-function after<F extends (...args: any[]) => any>(n: number, func: F): F;
+function after<F extends (...args: any[]) => any>(
+  n: number,
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> | undefined;
 ```
 
 ### 参数
@@ -18,7 +21,7 @@ function after<F extends (...args: any[]) => any>(n: number, func: F): F;
 
 ### 返回值
 
-(`F`): 一个新函数，它：
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 一个新函数，它：
 
 - 跟踪调用次数。
 - 从第 `n` 次调用开始调用 `func`。

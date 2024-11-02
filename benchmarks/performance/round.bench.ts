@@ -1,7 +1,11 @@
 import { bench, describe } from 'vitest';
-import { round as roundToolkit } from 'es-toolkit';
-import { round as roundCompat } from 'es-toolkit/compat';
-import { round as roundLodash } from 'lodash';
+import { round as roundToolkit_ } from 'es-toolkit';
+import { round as roundCompat_ } from 'es-toolkit/compat';
+import { round as roundLodash_ } from 'lodash';
+
+const roundToolkit = roundToolkit_;
+const roundCompat = roundCompat_;
+const roundLodash = roundLodash_;
 
 describe('round', () => {
   bench('es-toolkit/round', () => {
