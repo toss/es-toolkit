@@ -55,6 +55,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'array'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'array'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'array'),
           ],
         },
         {
@@ -62,6 +63,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'function'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'function'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'function'),
           ],
         },
         {
@@ -69,6 +71,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'math'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'math'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'math'),
           ],
         },
         {
@@ -76,6 +79,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'object'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'object'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'object'),
           ],
         },
         {
@@ -83,6 +87,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'predicate'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'predicate'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'predicate'),
           ],
         },
         {
@@ -90,6 +95,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'promise'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'promise'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'promise'),
           ],
         },
         {
@@ -97,6 +103,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'string'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'string'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'string'),
           ],
         },
         {
@@ -104,6 +111,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'util'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'util'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'util'),
           ],
         },
         {
@@ -111,6 +119,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'error'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'error'),
+            ...getSidebarItems.fp('zh_hans', docsRoot, 'zh_hans', 'reference', 'fp', 'error'),
           ],
         },
       ]),

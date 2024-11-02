@@ -54,6 +54,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'array'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'array'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'array'),
           ],
         },
         {
@@ -61,6 +62,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'function'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'function'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'function'),
           ],
         },
         {
@@ -68,6 +70,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'math'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'math'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'math'),
           ],
         },
         {
@@ -75,6 +78,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'object'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'object'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'object'),
           ],
         },
         {
@@ -82,6 +86,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'predicate'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'predicate'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'predicate'),
           ],
         },
         {
@@ -89,6 +94,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'promise'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'promise'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'array'),
           ],
         },
         {
@@ -96,6 +102,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'string'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'string'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'string'),
           ],
         },
         {
@@ -103,6 +110,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'util'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'util'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'util'),
           ],
         },
         {
@@ -110,6 +118,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'error'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'error'),
+            ...getSidebarItems.fp('ko', docsRoot, 'ko', 'reference', 'fp', 'error'),
           ],
         },
       ]),

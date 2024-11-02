@@ -27,11 +27,14 @@ type PipeReturnType<T, Last = any, Promised = false, Initial = true> = T extends
     : never;
 
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward,
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter,
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain,
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -48,16 +51,27 @@ type PipeReturnType<T, Last = any, Promised = false, Initial = true> = T extends
  * const result = pipe(1, toString);
  * console.log(result); // 'string:1'
  *
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync);
  * console.log(asyncResult); // 'string:1'
+ *
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<I, F1 extends NextFunction<I, 'initial'>>(initial: I, fn1: F1): PipeReturnType<[I, F1]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -77,9 +91,17 @@ export function pipe<I, F1 extends NextFunction<I, 'initial'>>(initial: I, fn1: 
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<I, F1 extends NextFunction<I, 'initial'>, F2 extends NextFunction<F1>>(
   initial: I,
@@ -87,11 +109,14 @@ export function pipe<I, F1 extends NextFunction<I, 'initial'>, F2 extends NextFu
   fn2: F2
 ): PipeReturnType<[I, F1, F2]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -112,9 +137,17 @@ export function pipe<I, F1 extends NextFunction<I, 'initial'>, F2 extends NextFu
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -123,11 +156,14 @@ export function pipe<
   F3 extends NextFunction<F2>,
 >(initial: I, fn1: F1, fn2: F2, fn3: F3): PipeReturnType<[I, F1, F2, F3]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -149,9 +185,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -161,11 +205,14 @@ export function pipe<
   F4 extends NextFunction<F3>,
 >(initial: I, fn1: F1, fn2: F2, fn3: F3, fn4: F4): PipeReturnType<[I, F1, F2, F3, F4]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward,
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter,
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain,
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -189,8 +236,16 @@ export function pipe<
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
  *
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ *
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -201,11 +256,14 @@ export function pipe<
   F5 extends NextFunction<F4>,
 >(initial: I, fn1: F1, fn2: F2, fn3: F3, fn4: F4, fn5: F5): PipeReturnType<[I, F1, F2, F3, F4, F5]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -229,9 +287,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -243,11 +309,14 @@ export function pipe<
   F6 extends NextFunction<F5>,
 >(initial: I, fn1: F1, fn2: F2, fn3: F3, fn4: F4, fn5: F5, fn6: F6): PipeReturnType<[I, F1, F2, F3, F4, F5, F6]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -272,9 +341,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -296,11 +373,14 @@ export function pipe<
   fn7: F7
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -326,9 +406,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -352,11 +440,14 @@ export function pipe<
   fn8: F8
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -383,9 +474,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -411,11 +510,14 @@ export function pipe<
   fn9: F9
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -443,9 +545,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -473,11 +583,14 @@ export function pipe<
   fn10: F10
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -506,9 +619,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -538,11 +659,14 @@ export function pipe<
   fn11: F11
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -572,9 +696,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -606,11 +738,14 @@ export function pipe<
   fn12: F12
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -641,9 +776,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -677,11 +820,14 @@ export function pipe<
   fn13: F13
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -713,9 +859,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -751,11 +905,14 @@ export function pipe<
   fn14: F14
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -788,9 +945,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -828,11 +993,14 @@ export function pipe<
   fn15: F15
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -866,9 +1034,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -908,11 +1084,14 @@ export function pipe<
   fn16: F16
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -947,9 +1126,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,
@@ -991,11 +1178,14 @@ export function pipe<
   fn17: F17
 ): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17]>;
 /**
- * Process a value through pipe.
- * The first parameter of the `pipe` function is the initial value, and from the second parameter onward, it receives functions.
- * The first function receives the initial value as its parameter, while each subsequent function receives the return value of the previous function as its parameter,
- * executing all the way to the last function. Ultimately, the pipe function returns the return value of the last function.
- * The pipe function can also handle async functions during the value processing.
+ * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
+ *
+ * Pass the initial value you want to process as the first argument to the `pipe` function, and from the second argument onward, 
+ * provide the functions that process the value in order. This way, the first function receives the initial value as a parameter, 
+ * and the remaining functions receive the return value of the previous function, executing sequentially all the way to the last function.
+ *
+ * If the initial value is a `Promise` or if there are async functions in the processing chain, 
+ * the `pipe` function will handle the value asynchronously and return a `Promise`.
  *
  * @param {I} initial - The initial value to be processed.
  * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
@@ -1031,9 +1221,17 @@ export function pipe<
  *
  * const result = pipe(1, toString, length);
  * console.log(result); // 8
- *
+ 
+ * // Use pipe with async function
  * const asyncResult = await pipe(1, toStringAsync, length);
  * console.log(asyncResult); // 8
+ * 
+ * // Use pipe with curried function
+ * const mapKeyResult = await pipe(
+ *   { a: 1, b: 2 },
+ *   mapKeys((value, key) => key + value)
+ * );
+ * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
 export function pipe<
   I,

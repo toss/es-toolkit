@@ -7,3 +7,7 @@
 :root[lang='ko'] {
   word-break: keep-all;
 }
+
+#signature + div > pre.vp-code {
+  max-height: 500px;
+}

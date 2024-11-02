@@ -35,3 +35,23 @@ getSidebarItems.compat = function (locale: 'en' | 'ko' | 'ja' | 'zh_hans', docsR
     };
   });
 };
+
+getSidebarItems.fp = function (locale: 'en' | 'ko' | 'ja' | 'zh_hans', docsRoot: string, ...paths: string[]) {
+  return getSidebarItems(docsRoot, ...paths).map(item => {
+    const compatStr =
+      locale === 'en'
+        ? '(fp)'
+        : locale === 'ko'
+          ? '(함수형)'
+          : locale === 'ja'
+            ? '(関数型プログラミング)'
+            : locale === 'zh_hans'
+              ? '(函数式编程)'
+              : '';
+
+    return {
+      ...item,
+      text: `${item.text} ${compatStr}`,
+    };
+  });
+};
