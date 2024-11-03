@@ -13,12 +13,12 @@ function findKey<T extends Record<any, any>>(
 
 ### Parameters
 
-- `obj` (`Record<T, K>`): The object to search.
-- `predicate` (`(value: K, key: T, obj: Record<T, K>) => boolean`): The function to execute on each value in the object.
+- `obj` (`T extends Record<any, any>`): The object to search.
+- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): The function to execute on each value in the object.
 
 ### Returns
 
-(`T | undefined`): The key of the first element in the object that satisfies the provided testing function, or undefined if no element passes the test.
+(`keyof T | undefined`): The key of the first element in the object that satisfies the provided testing function, or undefined if no element passes the test.
 
 ## Examples
 
