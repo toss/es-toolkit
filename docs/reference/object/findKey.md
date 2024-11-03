@@ -5,7 +5,10 @@ Finds the key of the first element in the object that satisfies the provided tes
 ## Signature
 
 ```typescript
-function findKey<T, K>(obj: Record<T, K>, predicate: (value: K, key: T, obj: Record<T, K>) => boolean): T | undefined;
+function findKey<T extends Record<any, any>>(
+  obj: T,
+  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
+): keyof T | undefined;
 ```
 
 ### Parameters
