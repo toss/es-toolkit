@@ -13,6 +13,6 @@ describe('withTimeout', () => {
   });
 
   it('returns a reason if a response is received after the specified wait time', () => {
-    expect(withTimeout(() => delay(100), 50)).rejects.toThrow('The operation was timed out');
+    expect(withTimeout(() => delay(1000), 50)).rejects.toThrow('The operation was timed out');
   });
 });
