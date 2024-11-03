@@ -1,3 +1,4 @@
+import { range } from '../../math/range';
 import { identity } from '../_internal/identity';
 import { isArrayLike } from '../predicate/isArrayLike';
 
@@ -124,27 +125,24 @@ export function forEach<T extends object | null | undefined>(
 
 export function forEach<T>(
   collection: ArrayLike<T> | Record<any, any> | string | null | undefined,
-  callback?: (item: any, index: any, arr: any) => unknown
+  callback: (item: any, index: any, arr: any) => unknown = identity
 ): ArrayLike<T> | Record<any, any> | string | null | undefined {
   if (!collection) {
     return collection;
   }
 
-  if (!callback) {
-    callback = identity;
-  }
-
-  if (isArrayLike(collection)) {
-    Array.from(collection).forEach(callback);
-    return collection;
-  }
-
-  const keys = Object.keys(collection);
+  const keys: PropertyKey[] =
+    isArrayLike(collection) || Array.isArray(collection) ? range(0, collection.length) : Object.keys(collection);
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-    const value = collection[key];
-    callback(value, key, collection);
+    const value = (collection as any)[key];
+
+    const result = callback(value, key, collection);
+
+    if (result === false) {
+      break;
+    }
   }
 
   return collection;
