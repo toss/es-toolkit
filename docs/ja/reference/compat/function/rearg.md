@@ -1,5 +1,11 @@
 # rearg
 
+::: info
+この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+
+`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+:::
+
 `func` 関数に与えられる引数の順序を変更する新しい関数を生成します。
 
 `indices` 配列が示すインデックスに従って引数の順序が変わります。例えば、`indices` が `[2, 0, 1]` の場合、新しい関数の最初の引数は第三の引数として、第二の引数は第一の引数として、第三の引数は第二の引数として与えられます。
@@ -25,6 +31,8 @@ function rearg<F extends (...args: any[]) => any>(
 ## 例
 
 ```typescript
+import { rearg } from 'es-toolkit/compat';
+
 const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
 const rearrangedGreet = rearg(greet, 1, 0);
 console.log(rearrangedGreet('World', 'Hello')); // Output: "Hello, World!"

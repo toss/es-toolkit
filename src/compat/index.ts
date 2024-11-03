@@ -61,7 +61,9 @@ export { tail } from './array/tail.ts';
 export { take } from './array/take.ts';
 export { takeRight } from './array/takeRight.ts';
 export { uniq } from './array/uniq.ts';
+export { unzip } from './array/unzip.ts';
 export { without } from './array/without.ts';
+export { zip } from './array/zip.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 
 export { ary } from './function/ary.ts';
@@ -90,6 +92,8 @@ export { min } from './math/min.ts';
 export { parseInt } from './math/parseInt.ts';
 export { random } from './math/random.ts';
 export { round } from './math/round.ts';
+export { sum } from './math/sum.ts';
+export { sumBy } from './math/sumBy.ts';
 
 export { cloneDeep } from './object/cloneDeep.ts';
 export { defaults } from './object/defaults.ts';

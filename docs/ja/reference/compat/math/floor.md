@@ -11,17 +11,17 @@
 ## インターフェース
 
 ```typescript
-function floor(number: number | string, precision: number | string): number;
+function floor(number: number | string, precision: number | string = 0): number;
 ```
 
 ### パラメータ
 
 - `number` (`number | string`): 切り捨てたい数値。
-- `precision` (`number | string`): 切り捨てたい精度。
+- `precision` (`number | string`, オプション): 切り捨てたい精度。デフォルトは`0`です。
 
 ### 戻り値
 
-(`number`): 切り捨てられた数値。デフォルトは`0`です。
+(`number`): 切り捨てられた数値。
 
 ## 例
 
