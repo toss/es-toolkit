@@ -1,5 +1,5 @@
+import { identity } from '../../function/identity';
 import { range } from '../../math/range';
-import { identity } from '../_internal/identity';
 import { isArrayLike } from '../predicate/isArrayLike';
 
 /**
