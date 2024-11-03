@@ -1,5 +1,6 @@
 export { clone } from './clone.ts';
 export { cloneDeep } from './cloneDeep.ts';
+export { findKey } from './findKey.ts';
 export { flattenObject } from './flattenObject.ts';
 export { invert } from './invert.ts';
 export { mapKeys } from './mapKeys.ts';
@@ -11,4 +12,3 @@ export { omitBy } from './omitBy.ts';
 export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
 export { toMerged } from './toMerged.ts';
-export { findKey } from './findKey.ts';
