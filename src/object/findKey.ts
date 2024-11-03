@@ -20,5 +20,7 @@ export function findKey<T extends Record<any, any>>(
   obj: T,
   predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
 ): keyof T | undefined {
-  return (Object.keys(obj) as Array<keyof T>).find(key => predicate(obj[key], key, obj));
+  const keys = Object.keys(obj) as Array<keyof T>;
+
+  return keys.find(key => predicate(obj[key], key, obj));
 }
