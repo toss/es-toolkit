@@ -1,3 +1,5 @@
+import { difference } from './difference.ts';
+
 /**
  * Creates an array that excludes all specified values.
  *
@@ -19,6 +21,5 @@
  * // Returns: ['b', 'c']
  */
 export function without<T>(array: readonly T[], ...values: T[]): T[] {
-  const valuesSet = new Set(values);
-  return array.filter(item => !valuesSet.has(item));
+  return difference(array, values);
 }
