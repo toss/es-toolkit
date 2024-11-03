@@ -42,6 +42,8 @@ export { findLastIndex } from './array/findLastIndex.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
+export { forEach as each } from './array/forEach.ts';
+export { forEach } from './array/forEach.ts';
 export { head } from './array/head.ts';
 export { head as first } from './array/head.ts';
 export { includes } from './array/includes.ts';
@@ -92,8 +94,6 @@ export { round } from './math/round.ts';
 
 export { cloneDeep } from './object/cloneDeep.ts';
 export { defaults } from './object/defaults.ts';
-export { forEach as each } from './object/forEach.ts';
-export { forEach } from './object/forEach.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { get } from './object/get.ts';
 export { has } from './object/has.ts';
