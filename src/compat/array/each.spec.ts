@@ -1,15 +1,15 @@
 import { describe, expect, it, vi } from 'vitest';
-import { forEach } from './forEach';
+import { forEach as each } from './forEach';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { slice } from '../_internal/slice';
 import { stubTrue } from '../_internal/stubTrue';
 
-describe('forEach', () => {
+describe('each', () => {
   it('should iterate over array elements', () => {
     const array = [1, 2, 3];
     const result: number[] = [];
 
-    forEach(array, value => {
+    each(array, value => {
       result.push(value);
     });
 
@@ -20,7 +20,7 @@ describe('forEach', () => {
     const string = 'abc';
     const result: string[] = [];
 
-    forEach(string, value => {
+    each(string, value => {
       result.push(value);
     });
 
@@ -31,7 +31,7 @@ describe('forEach', () => {
     const object = { a: 1, b: 2 };
     const result: Array<[number, string]> = [];
 
-    forEach(object, (value, key) => {
+    each(object, (value, key) => {
       result.push([value, key]);
     });
 
@@ -43,21 +43,21 @@ describe('forEach', () => {
 
   it('should return the original array after iteration', () => {
     const array = [1, 2, 3];
-    const result = forEach(array, value => value * 2);
+    const result = each(array, value => value * 2);
 
     expect(result).toBe(array);
   });
 
   it('should return the original string after iteration', () => {
     const string = 'abc';
-    const result = forEach(string, value => value.toUpperCase());
+    const result = each(string, value => value.toUpperCase());
 
     expect(result).toBe(string);
   });
 
   it('should return the original object after iteration', () => {
     const object = { a: 1, b: 2 };
-    const result = forEach(object, value => value + 1);
+    const result = each(object, value => value + 1);
 
     expect(result).toBe(object);
   });
@@ -66,8 +66,8 @@ describe('forEach', () => {
     const nullValue = null;
     const undefinedValue = undefined;
 
-    const resultForNull = forEach(nullValue, vi.fn());
-    const resultForUndefined = forEach(undefinedValue, vi.fn());
+    const resultForNull = each(nullValue, vi.fn());
+    const resultForUndefined = each(undefinedValue, vi.fn());
 
     expect(resultForNull).toBe(null);
     expect(resultForUndefined).toBe(undefined);
@@ -75,7 +75,7 @@ describe('forEach', () => {
 
   it('should use identity function as the callback if no callback is provided', () => {
     const array = [1, 2, 3];
-    const result = forEach(array);
+    const result = each(array);
 
     expect(result).toBe(array);
   });
@@ -84,7 +84,7 @@ describe('forEach', () => {
     const arrayLike = { 0: 'a', 1: 'b', length: 2 };
     const result: Array<[number, string]> = [];
 
-    forEach(arrayLike, (value, index) => {
+    each(arrayLike, (value, index) => {
       result.push([index, value]);
     });
 
@@ -95,8 +95,8 @@ describe('forEach', () => {
   });
 
   const array = [1, 2, 3];
-  const func = forEach;
-  const methodName = 'forEach';
+  const func = each;
+  const methodName = 'each';
 
   it(`\`_.${methodName}\` should provide correct iteratee arguments`, () => {
     let args: any;
