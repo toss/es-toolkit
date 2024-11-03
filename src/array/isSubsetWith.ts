@@ -1,3 +1,5 @@
+import { differenceWith } from './differenceWith.ts';
+
 /**
  * Checks if the `subset` array is entirely contained within the `superset` array based on a custom equality function.
  *
@@ -33,7 +35,5 @@ export function isSubsetWith<T>(
   subset: readonly T[],
   areItemsEqual: (x: T, y: T) => boolean
 ): boolean {
-  return subset.every(subsetItem => {
-    return superset.some(supersetItem => areItemsEqual(supersetItem, subsetItem));
-  });
+  return differenceWith(subset, superset, areItemsEqual).length === 0;
 }
