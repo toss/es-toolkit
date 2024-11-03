@@ -23,7 +23,7 @@ describe('findKey', () => {
   it('should return undefined for an empty object', () => {
     const users = {};
 
-    // @ts-expect-error
+    // @ts-expect-error users is empty here
     expect(findKey(users, o => o.age < 40)).toBeUndefined();
   });
 
