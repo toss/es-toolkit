@@ -62,6 +62,7 @@ export { sortBy } from './array/sortBy.ts';
 export { tail } from './array/tail.ts';
 export { take } from './array/take.ts';
 export { takeRight } from './array/takeRight.ts';
+export { union } from './array/union.ts';
 export { uniq } from './array/uniq.ts';
 export { unzip } from './array/unzip.ts';
 export { without } from './array/without.ts';
