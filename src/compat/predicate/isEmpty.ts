@@ -147,13 +147,12 @@ export function isEmpty(value?: unknown): boolean {
     }
 
     const keys = Object.keys(value);
-    const symbols = getSymbols(value);
 
     if (isPrototype(value)) {
-      return keys.filter(x => x !== 'constructor').length === 0 && symbols.length === 0;
+      return keys.filter(x => x !== 'constructor').length === 0;
     }
 
-    return keys.length === 0 && symbols.length === 0;
+    return keys.length === 0;
   }
 
   return true;
