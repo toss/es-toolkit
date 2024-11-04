@@ -1,7 +1,6 @@
 import { isArguments } from './isArguments.ts';
 import { isArrayLike } from './isArrayLike.ts';
 import { isTypedArray } from './isTypedArray.ts';
-import { getSymbols } from '../_internal/getSymbols.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
 
 declare let Buffer:
