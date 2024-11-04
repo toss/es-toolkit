@@ -129,8 +129,19 @@ export function differenceBy<T>(arr: ArrayLike<T> | null | undefined, ...values:
   const iteratee = last(values);
 
   if (isArrayLikeObject(iteratee)) {
-    return differenceToolkit(Array.from(arr), flatten(values));
+    return differenceToolkit(Array.from(arr), flatten(toValidArrays(values)) as T[]);
   }
 
-  return differenceByToolkit(Array.from(arr), flatten(values.slice(0, -1)), createIteratee(iteratee));
+  return differenceByToolkit(
+    Array.from(arr),
+    flatten(toValidArrays(values.slice(0, -1))) as T[],
+    createIteratee(iteratee)
+  );
+}
+
+function toValidArrays<T>(values: Array<ArrayLike<T>>) {
+  const filteredValues = values.filter(value => isArrayLikeObject(value));
+  const arrays = filteredValues.map(value => Array.from(value));
+
+  return arrays;
 }
