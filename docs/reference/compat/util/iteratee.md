@@ -15,7 +15,7 @@ You can call `iteratee` with the following types of arguments:
 - **Property-value pair**: Returns a boolean indicating whether the element's property matches the given value.
 - **Partial object**: Returns a boolean indicating whether the element matches the properties of the partial object.
 
-If you don't provide any arguments or pass `null`, this function will return a function that simply returns its input unchanged.
+If you don't provide any arguments or pass `null`, this function will return a [function that simply returns its input unchanged](../../function/identity.md).
 
 ## Signature
 
