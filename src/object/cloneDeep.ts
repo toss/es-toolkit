@@ -1,4 +1,5 @@
 import { getSymbols } from '../compat/_internal/getSymbols.ts';
+import { isPrototype } from '../compat/_internal/isPrototype.ts';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
@@ -184,7 +185,9 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
   }
 
   if (typeof obj === 'object' && obj !== null) {
-    const result = {};
+    const result =
+      typeof obj.constructor === 'function' && !isPrototype(obj) ? Object.create(Object.getPrototypeOf(obj)) : {};
+
     stack.set(obj, result);
 
     copyProperties(result, obj, stack);
