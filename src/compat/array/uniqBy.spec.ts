@@ -41,9 +41,9 @@ describe('uniqBy', () => {
 
   it('should provide correct iteratee arguments', () => {
     let args: any;
-    uniqBy(objects, function () {
+    uniqBy(objects, (...params: any[]) => {
       if (!args) {
-        args = Array.from(arguments);
+        args = params;
       }
     });
     expect(args).toEqual([objects[0]]);
