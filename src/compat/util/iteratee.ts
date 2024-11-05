@@ -11,7 +11,6 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  *
  * @example
  * const func = iteratee();
- *
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [{ a: 1 }, { a: 2 }, { a: 3 }]
  */
 export function iteratee(value?: null): <T>(value: T) => T;
@@ -25,7 +24,6 @@ export function iteratee(value?: null): <T>(value: T) => T;
  *
  * @example
  * const func = iteratee((object) => object.a);
- *
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
  */
 export function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
@@ -40,8 +38,13 @@ export function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
  *
  * @example
  * const func = iteratee('a');
- *
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
+ *
+ * const func = iteratee({ a: 1 });
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee({ a: 1 })) // => { a: 1 }
+ *
+ * const func = iteratee(['a', 1]);
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee(['a', 1])) // => { a: 1 }
  */
 export function iteratee(value: symbol | number | string | object): (...args: any[]) => any;
 
@@ -61,16 +64,19 @@ export function iteratee(value: symbol | number | string | object): (...args: an
  * @returns {(...args: any[]) => unknown} - Returns the new iteratee function.
  * @example
  * const func = iteratee();
- *
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [{ a: 1 }, { a: 2 }, { a: 3 }]
- * @example
+ *
  * const func = iteratee((object) => object.a);
- *
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
- * @example
+ *
  * const func = iteratee('a');
- *
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
+ *
+ * const func = iteratee({ a: 1 });
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee({ a: 1 })) // => { a: 1 }
+ *
+ * const func = iteratee(['a', 1]);
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee(['a', 1])) // => { a: 1 }
  */
 export function iteratee(
   value?: symbol | number | string | object | null | ((...args: any[]) => unknown)
