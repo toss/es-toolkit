@@ -39,6 +39,21 @@ export function uniqBy<T>(array: ArrayLike<T>, iteratee: (value: T) => unknown):
 export function uniqBy<T>(array: ArrayLike<T>, path: string): T[];
 
 /**
+ * Creates a duplicate-free version of an array using a property index for comparison.
+ *
+ * @template T
+ * @param {ArrayLike<T>} array - The array to inspect.
+ * @param {number} index - The index to get values from.
+ * @returns {T[]} Returns the new duplicate-free array.
+ *
+ * @example
+ * const arrays = [[2], [3], [1], [2], [3], [1]];
+ * uniqBy(arrays, 0);
+ * // => [[2], [3], [1]]
+ */
+export function uniqBy<T>(array: ArrayLike<T>, index: number): T[];
+
+/**
  * Creates a duplicate-free version of an array, combining multiple arrays and using an optional transform function.
  *
  * @template T
@@ -60,7 +75,7 @@ export function uniqBy<T>(
  */
 export function uniqBy<T>(
   arr: ArrayLike<T> | null | undefined,
-  ...values: Array<ArrayLike<T> | ((value: T) => unknown) | string>
+  ...values: Array<ArrayLike<T> | ((value: T) => unknown) | string | number>
 ): T[] {
   if (!isArrayLikeObject(arr)) {
     return [];
