@@ -1,4 +1,5 @@
 import { last as lastToolkit } from '../../array/last.ts';
+import { ensureIsArray } from '../_internal/ensureIsArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -27,5 +28,5 @@ export function last<T>(array: ArrayLike<T> | null | undefined): T | undefined {
   if (!isArrayLike(array)) {
     return undefined;
   }
-  return lastToolkit(Array.from(array));
+  return lastToolkit(ensureIsArray(array));
 }

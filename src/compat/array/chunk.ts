@@ -1,4 +1,5 @@
 import { chunk as chunkToolkit } from '../../array/chunk.ts';
+import { ensureIsArray } from '../_internal/ensureIsArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -30,5 +31,5 @@ export function chunk<T>(arr: ArrayLike<T> | null | undefined, size = 1): T[][] 
     return [];
   }
 
-  return chunkToolkit(Array.from(arr), size);
+  return chunkToolkit(ensureIsArray(arr), size);
 }
