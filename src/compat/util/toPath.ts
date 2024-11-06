@@ -15,11 +15,11 @@
  * toPath('') // Returns []
  * toPath('.a[b].c.d[e]["f.g"].h') // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
  */
-export function toPath( deepKey: string ): string[] {
+export function toPath(deepKey: string): string[] {
   const result: string[] = [];
   const length = deepKey.length;
 
-  if ( length === 0 ) return result;
+  if (length === 0) return result;
 
   let index = 0;
   let key = '';
@@ -27,48 +27,48 @@ export function toPath( deepKey: string ): string[] {
   let bracket = false;
 
   // Leading dot
-  if ( deepKey.charCodeAt( 0 ) === 46 ) {
-    result.push( '' );
+  if (deepKey.charCodeAt(0) === 46) {
+    result.push('');
     index++;
   }
 
-  while ( index < length ) {
-    const char = deepKey[ index ];
+  while (index < length) {
+    const char = deepKey[index];
 
-    if ( quoteChar ) {
-      if ( char === '\\' && index + 1 < length ) {
+    if (quoteChar) {
+      if (char === '\\' && index + 1 < length) {
         // Escape character
         index++;
-        key += deepKey[ index ];
-      } else if ( char === quoteChar ) {
+        key += deepKey[index];
+      } else if (char === quoteChar) {
         // End of quote
         quoteChar = '';
       } else {
         key += char;
       }
-    } else if ( bracket ) {
-      if ( char === '"' || char === "'" ) {
+    } else if (bracket) {
+      if (char === '"' || char === "'") {
         // Start of quoted string inside brackets
         quoteChar = char;
-      } else if ( char === ']' ) {
+      } else if (char === ']') {
         // End of bracketed segment
         bracket = false;
-        result.push( key );
+        result.push(key);
         key = '';
       } else {
         key += char;
       }
     } else {
-      if ( char === '[' ) {
+      if (char === '[') {
         // Start of bracketed segment
         bracket = true;
-        if ( key ) {
-          result.push( key );
+        if (key) {
+          result.push(key);
           key = '';
         }
-      } else if ( char === '.' ) {
-        if ( key ) {
-          result.push( key );
+      } else if (char === '.') {
+        if (key) {
+          result.push(key);
           key = '';
         }
       } else {
@@ -79,8 +79,8 @@ export function toPath( deepKey: string ): string[] {
     index++;
   }
 
-  if ( key ) {
-    result.push( key );
+  if (key) {
+    result.push(key);
   }
 
   return result;
