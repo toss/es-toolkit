@@ -5,20 +5,20 @@
 ## 签名
 
 ```typescript
-function mapKeys<T extends Record<PropertyKey, unknown>, K1 extends keyof T, K2 extends PropertyKey>(
+function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKey>(
   object: T,
-  getNewKey: (value: T[K1], key: K1, object: T) => K2
-): Record<K2, T[K1]>;
+  getNewKey: (value: T[keyof T], key: keyof T, object: T) => K
+): Record<K, T[keyof T]>;
 ```
 
 ### 参数
 
-- `obj` (`T extends object`): 要迭代的对象。
-- `getNewKey`: (`(value: T[K1], key: K1, object: T) => N`): 每个自身可枚举属性调用的函数。
+- `obj` (`T extends Record<PropertyKey, any>`): 要迭代的对象。
+- `getNewKey`: (`(value: T[keyof T], key: keyof T, object: T) => K`): 每个自身可枚举属性调用的函数。
 
 ### 返回值
 
-(`Record<K2, T[K]>`): 新映射的对象。
+(`Record<K, T[keyof T]>`): 新映射的对象。
 
 ## 示例
 
