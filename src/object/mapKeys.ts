@@ -20,7 +20,7 @@ export function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKe
   getNewKey: (value: T[keyof T], key: keyof T, object: T) => K
 ): Record<K, T[keyof T]> {
   const result = {} as Record<K, T[keyof T]>;
-  const keys = Object.keys(object) as (keyof T)[];
+  const keys = Object.keys(object) as Array<keyof T>;
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];

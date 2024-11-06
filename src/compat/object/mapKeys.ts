@@ -65,11 +65,11 @@ export function mapKeys<T extends object, K1 extends keyof T, K2 extends Propert
  * const result = mapKeys(obj, (value, key) => key + value);
  * console.log(result); // { a1: 1, b2: 2 }
  */
-export function mapKeys<T extends object, K1 extends keyof T, K2 extends PropertyKey>(
+export function mapKeys<T extends object, K extends PropertyKey>(
   object: T,
-  getNewKey?: PropertyKey | readonly PropertyKey[] | ((value: T[K1], key: K1, object: T) => K2)
-): Record<K2, T[K1]> {
-  getNewKey = getNewKey ?? (identity as (value: T[K1], key: K1, object: T) => K2);
+  getNewKey?: PropertyKey | readonly PropertyKey[] | ((value: T[keyof T], key: keyof T, object: T) => K)
+): Record<K, T[keyof T]> {
+  getNewKey = getNewKey ?? (identity as (value: T[keyof T], key: keyof T, object: T) => K);
 
   switch (typeof getNewKey) {
     case 'string':
