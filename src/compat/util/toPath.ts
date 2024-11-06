@@ -19,7 +19,9 @@ export function toPath(deepKey: string): string[] {
   const result: string[] = [];
   const length = deepKey.length;
 
-  if (length === 0) return result;
+  if (length === 0) {
+    return result;
+  }
 
   let index = 0;
   let key = '';
