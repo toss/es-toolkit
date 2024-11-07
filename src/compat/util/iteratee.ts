@@ -41,10 +41,10 @@ export function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
  *
  * const func = iteratee({ a: 1 });
- * [{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee({ a: 1 })) // => { a: 1 }
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
  *
  * const func = iteratee(['a', 1]);
- * [{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee(['a', 1])) // => { a: 1 }
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
  */
 export function iteratee(value: symbol | number | string | object): (...args: any[]) => any;
 
@@ -73,10 +73,10 @@ export function iteratee(value: symbol | number | string | object): (...args: an
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
  *
  * const func = iteratee({ a: 1 });
- * [{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee({ a: 1 })) // => { a: 1 }
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
  *
  * const func = iteratee(['a', 1]);
- * [{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee(['a', 1])) // => { a: 1 }
+ * [{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
  */
 export function iteratee(
   value?: symbol | number | string | object | null | ((...args: any[]) => unknown)

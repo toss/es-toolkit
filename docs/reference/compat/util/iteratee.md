@@ -49,8 +49,8 @@ const func = iteratee('a');
 [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
 
 const func = iteratee({ a: 1 });
-[{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee({ a: 1 })) // => { a: 1 }
+[{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
 
 const func = iteratee(['a', 1]);
-[{ a: 1 }, { a: 2 }, { a: 3 }].find(iteratee(['a', 1])) // => { a: 1 }
+[{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
 ```
