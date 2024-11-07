@@ -1,5 +1,5 @@
 import { drop as dropToolkit } from '../../array/drop.ts';
-import { ensureIsArray } from '../_internal/ensureIsArray.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
@@ -26,5 +26,5 @@ export function drop<T>(collection: ArrayLike<T> | null | undefined, itemsCount:
   }
   itemsCount = guard ? 1 : toInteger(itemsCount);
 
-  return dropToolkit(ensureIsArray(collection), itemsCount);
+  return dropToolkit(toArray(collection), itemsCount);
 }

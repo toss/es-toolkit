@@ -1,5 +1,5 @@
 import { head as headToolkit } from '../../array/head.ts';
-import { ensureIsArray } from '../_internal/ensureIsArray.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -21,5 +21,5 @@ export function head<T>(arr: ArrayLike<T> | undefined | null): T | undefined {
   if (!isArrayLike(arr)) {
     return undefined;
   }
-  return headToolkit(ensureIsArray(arr));
+  return headToolkit(toArray(arr));
 }

@@ -1,5 +1,5 @@
 import { takeRight as takeRightToolkit } from '../../array/takeRight.ts';
-import { ensureIsArray } from '../_internal/ensureIsArray.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
@@ -31,5 +31,5 @@ export function takeRight<T>(arr: ArrayLike<T> | null | undefined, count: number
     return [];
   }
 
-  return takeRightToolkit(ensureIsArray(arr), count);
+  return takeRightToolkit(toArray(arr), count);
 }

@@ -1,5 +1,5 @@
 import { tail as tailToolkit } from '../../array/tail.ts';
-import { ensureIsArray } from '../_internal/ensureIsArray.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -30,5 +30,5 @@ export function tail<T>(arr: ArrayLike<T> | null | undefined): T[] {
   if (!isArrayLike(arr)) {
     return [];
   }
-  return tailToolkit(ensureIsArray(arr));
+  return tailToolkit(toArray(arr));
 }

@@ -1,5 +1,5 @@
 import { sample as sampleToolkit } from '../../array/sample.ts';
-import { ensureIsArray } from '../_internal/ensureIsArray.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -101,7 +101,7 @@ export function sample<T>(collection: ArrayLike<T> | Record<string, T>): T | str
   }
 
   if (isArrayLike(collection)) {
-    return sampleToolkit(ensureIsArray(collection));
+    return sampleToolkit(toArray(collection));
   }
 
   return sampleToolkit(Object.values(collection));

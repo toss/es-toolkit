@@ -1,5 +1,5 @@
 import { difference as differenceToolkit } from '../../array/difference.ts';
-import { ensureIsArray } from '../_internal/ensureIsArray.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
@@ -32,7 +32,7 @@ export function difference<T>(arr: ArrayLike<T> | undefined | null, ...values: A
     return [];
   }
 
-  const arr1 = ensureIsArray(arr);
+  const arr1 = toArray(arr);
   const arr2 = [];
 
   for (let i = 0; i < values.length; i++) {
