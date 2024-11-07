@@ -5,20 +5,20 @@
 ## インターフェース
 
 ```typescript
-function mapKeys<T extends Record<PropertyKey, unknown>, K1 extends keyof T, K2 extends PropertyKey>(
+function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKey>(
   object: T,
-  getNewKey: (value: T[K1], key: K1, object: T) => N
-): Record<K2, T[K]>;
+  getNewKey: (value: T[keyof T], key: keyof T, object: T) => K
+): Record<K, T[keyof T]>;
 ```
 
 ### パラメータ
 
-- `obj` (`T extends object`): キーを置き換えるオブジェクト。
-- `getNewKey`: (`(value: T[K1], key: K1, object: T) => N`): 新しいキーを生成する関数。
+- `obj` (`T extends Record<PropertyKey, any>`): キーを置き換えるオブジェクト。
+- `getNewKey`: (`(value: T[keyof T], key: keyof T, object: T) => K`): 新しいキーを生成する関数。
 
 ### 戻り値
 
-(`Record<K2, T[K]>`): キーが置き換えられた新しいオブジェクト。
+(`Record<K, T[keyof T]>`): キーが置き換えられた新しいオブジェクト。
 
 ## 例
 
