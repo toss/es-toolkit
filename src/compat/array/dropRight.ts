@@ -1,4 +1,5 @@
 import { dropRight as dropRightToolkit } from '../../array/dropRight.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
@@ -29,5 +30,5 @@ export function dropRight<T>(
   }
   itemsCount = guard ? 1 : toInteger(itemsCount);
 
-  return dropRightToolkit(Array.from(collection), itemsCount);
+  return dropRightToolkit(toArray(collection), itemsCount);
 }

@@ -65,14 +65,14 @@ bun add es-toolkit
 ::: code-group
 
 ```html [jsdelivr]
-<script src="https://cdn.jsdelivr.net/npm/es-toolkit"></script>
+<script src="https://cdn.jsdelivr.net/npm/es-toolkit@%5E1"></script>
 <script>
   var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
 </script>
 ```
 
 ```html [unpkg]
-<script src="https://unpkg.com/es-toolkit"></script>
+<script src="https://unpkg.com/es-toolkit@%5E1"></script>
 <script>
   var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
 </script>
@@ -88,7 +88,7 @@ es-toolkit 也可在 [esm.sh](https://esm.sh) 上用于现代浏览器。
 <script type="importmap">
   {
     "imports": {
-      "es-toolkit": "https://esm.sh/es-toolkit"
+      "es-toolkit": "https://esm.sh/es-toolkit@%5E1"
     }
   }
 </script>

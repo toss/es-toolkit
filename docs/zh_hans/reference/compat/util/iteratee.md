@@ -14,7 +14,7 @@
 - **属性-值对**: 返回一个布尔值，指示元素的属性是否与给定值匹配。
 - **部分对象**: 返回一个布尔值，指示元素是否与部分对象的属性匹配。
 
-如果你不提供任何参数或传递 `null`，此函数将返回一个简单返回其输入的函数。
+如果你不提供任何参数或传递 `null`，此函数将返回一个[简单返回其输入的函数](../../function/identity.md)。
 
 ## 签名
 
@@ -39,14 +39,17 @@ function iteratee(
 
 ```typescript
 const func = iteratee();
-
 [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [{ a: 1 }, { a: 2 }, { a: 3 }]
 
 const func = iteratee((object) => object.a);
-
 [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
 
 const func = iteratee('a');
-
 [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
+
+const func = iteratee({ a: 1 });
+[{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
+
+const func = iteratee(['a', 1]);
+[{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
 ```
