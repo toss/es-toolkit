@@ -1,4 +1,5 @@
 import { take as takeToolkit } from '../../array/take.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
@@ -31,5 +32,5 @@ export function take<T>(arr: ArrayLike<T> | null | undefined, count: number = 1,
     return [];
   }
 
-  return takeToolkit(Array.from(arr), count);
+  return takeToolkit(toArray(arr), count);
 }
