@@ -185,8 +185,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
   }
 
   if (typeof obj === 'object' && obj !== null) {
-    const result =
-      typeof obj.constructor === 'function' && !isPrototype(obj) ? Object.create(Object.getPrototypeOf(obj)) : {};
+    const result = Object.create(Object.getPrototypeOf(obj));
 
     stack.set(obj, result);
 
