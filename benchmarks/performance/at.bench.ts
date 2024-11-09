@@ -7,7 +7,7 @@ const atLodash = atLodash_;
 
 describe('at', () => {
   const data = ['a', 'b', 'c', 'd', 'e'];
-  const indices = [0, 2, 4];
+  const indices = [0, 2, -2, 1.5, -1.5];
 
   bench('es-toolkit/at', () => {
     atToolkit(data, indices);

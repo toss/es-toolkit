@@ -18,7 +18,9 @@ export function at<T>(arr: readonly T[], indices: number[]): Array<T | undefined
   const length = arr.length;
 
   for (let i = 0; i < indices.length; i++) {
-    let index = Math.trunc(indices[i]) || 0;
+    let index = indices[i];
+
+    index = Number.isInteger(index) ? index : Math.trunc(index) || 0;
 
     if (index < 0) {
       index += length;
