@@ -18,6 +18,7 @@ describe('differenceBy', () => {
     let args: any;
 
     differenceBy([2.1, 1.2], [2.3, 3.4], function () {
+      // eslint-disable-next-line
       args || (args = slice.call(arguments));
     });
 

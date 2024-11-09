@@ -1,4 +1,3 @@
-import { flatten } from './flatten.ts';
 import { last } from './last.ts';
 import { difference as differenceToolkit } from '../../array/difference.ts';
 import { differenceBy as differenceByToolkit } from '../../array/differenceBy.ts';
