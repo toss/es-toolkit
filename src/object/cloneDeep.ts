@@ -191,6 +191,7 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
 
     return result as T;
   }
+
   return obj;
 }
 
