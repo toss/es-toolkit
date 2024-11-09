@@ -48,34 +48,34 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
  * console.log(clonedObj); // { a: 1, b: { c: 1 } }
  * console.log(clonedObj === obj); // false
  */
-export function cloneDeep<T>( obj: T ): T {
-  return cloneDeepImpl( obj );
+export function cloneDeep<T>(obj: T): T {
+  return cloneDeepImpl(obj);
 }
 
-function cloneDeepImpl<T>( obj: T, stack = new Map<any, any>() ): T {
-  if ( isPrimitive( obj ) ) {
+function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
+  if (isPrimitive(obj)) {
     return obj as T;
   }
 
-  if ( stack.has( obj ) ) {
-    return stack.get( obj ) as T;
+  if (stack.has(obj)) {
+    return stack.get(obj) as T;
   }
 
-  if ( Array.isArray( obj ) ) {
-    const result: any = new Array( obj.length );
-    stack.set( obj, result );
+  if (Array.isArray(obj)) {
+    const result: any = new Array(obj.length);
+    stack.set(obj, result);
 
-    for ( let i = 0; i < obj.length; i++ ) {
-      result[ i ] = cloneDeepImpl( obj[ i ], stack );
+    for (let i = 0; i < obj.length; i++) {
+      result[i] = cloneDeepImpl(obj[i], stack);
     }
 
     // For RegExpArrays
-    if ( Object.hasOwn( obj, 'index' ) ) {
+    if (Object.hasOwn(obj, 'index')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.index = obj.index;
     }
-    if ( Object.hasOwn( obj, 'input' ) ) {
+    if (Object.hasOwn(obj, 'input')) {
       // eslint-disable-next-line
       // @ts-ignore
       result.input = obj.input;
@@ -84,35 +84,35 @@ function cloneDeepImpl<T>( obj: T, stack = new Map<any, any>() ): T {
     return result as T;
   }
 
-  if ( obj instanceof Date ) {
-    return new Date( obj.getTime() ) as T;
+  if (obj instanceof Date) {
+    return new Date(obj.getTime()) as T;
   }
 
-  if ( obj instanceof RegExp ) {
-    const result = new RegExp( obj.source, obj.flags );
+  if (obj instanceof RegExp) {
+    const result = new RegExp(obj.source, obj.flags);
 
     result.lastIndex = obj.lastIndex;
 
     return result as T;
   }
 
-  if ( obj instanceof Map ) {
+  if (obj instanceof Map) {
     const result = new Map();
-    stack.set( obj, result );
+    stack.set(obj, result);
 
-    for ( const [ key, value ] of obj ) {
-      result.set( key, cloneDeepImpl( value, stack ) );
+    for (const [key, value] of obj) {
+      result.set(key, cloneDeepImpl(value, stack));
     }
 
     return result as T;
   }
 
-  if ( obj instanceof Set ) {
+  if (obj instanceof Set) {
     const result = new Set();
-    stack.set( obj, result );
+    stack.set(obj, result);
 
-    for ( const value of obj ) {
-      result.add( cloneDeepImpl( value, stack ) );
+    for (const value of obj) {
+      result.add(cloneDeepImpl(value, stack));
     }
 
     return result as T;
@@ -120,75 +120,75 @@ function cloneDeepImpl<T>( obj: T, stack = new Map<any, any>() ): T {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  if ( typeof Buffer !== 'undefined' && Buffer.isBuffer( obj ) ) {
+  if (typeof Buffer !== 'undefined' && Buffer.isBuffer(obj)) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return obj.subarray() as T;
   }
 
-  if ( isTypedArray( obj ) ) {
-    const result = new ( Object.getPrototypeOf( obj ).constructor )( obj.length );
-    stack.set( obj, result );
+  if (isTypedArray(obj)) {
+    const result = new (Object.getPrototypeOf(obj).constructor)(obj.length);
+    stack.set(obj, result);
 
-    for ( let i = 0; i < obj.length; i++ ) {
-      result[ i ] = cloneDeepImpl( obj[ i ], stack );
+    for (let i = 0; i < obj.length; i++) {
+      result[i] = cloneDeepImpl(obj[i], stack);
     }
 
     return result as T;
   }
 
-  if ( obj instanceof ArrayBuffer || ( typeof SharedArrayBuffer !== 'undefined' && obj instanceof SharedArrayBuffer ) ) {
-    return obj.slice( 0 ) as T;
+  if (obj instanceof ArrayBuffer || (typeof SharedArrayBuffer !== 'undefined' && obj instanceof SharedArrayBuffer)) {
+    return obj.slice(0) as T;
   }
 
-  if ( obj instanceof DataView ) {
-    const result = new DataView( obj.buffer.slice( 0 ), obj.byteOffset, obj.byteLength );
-    stack.set( obj, result );
+  if (obj instanceof DataView) {
+    const result = new DataView(obj.buffer.slice(0), obj.byteOffset, obj.byteLength);
+    stack.set(obj, result);
 
-    copyProperties( result, obj, stack );
+    copyProperties(result, obj, stack);
 
     return result as T;
   }
 
   // For legacy NodeJS support
-  if ( typeof File !== 'undefined' && obj instanceof File ) {
-    const result = new File( [ obj ], obj.name, { type: obj.type } );
-    stack.set( obj, result );
+  if (typeof File !== 'undefined' && obj instanceof File) {
+    const result = new File([obj], obj.name, { type: obj.type });
+    stack.set(obj, result);
 
-    copyProperties( result, obj, stack );
-
-    return result as T;
-  }
-
-  if ( obj instanceof Blob ) {
-    const result = new Blob( [ obj ], { type: obj.type } );
-    stack.set( obj, result );
-
-    copyProperties( result, obj, stack );
+    copyProperties(result, obj, stack);
 
     return result as T;
   }
 
-  if ( obj instanceof Error ) {
-    const result = new ( obj.constructor as { new(): Error } )();
-    stack.set( obj, result );
+  if (obj instanceof Blob) {
+    const result = new Blob([obj], { type: obj.type });
+    stack.set(obj, result);
+
+    copyProperties(result, obj, stack);
+
+    return result as T;
+  }
+
+  if (obj instanceof Error) {
+    const result = new (obj.constructor as { new (): Error })();
+    stack.set(obj, result);
 
     result.message = obj.message;
     result.name = obj.name;
     result.stack = obj.stack;
     result.cause = obj.cause;
 
-    copyProperties( result, obj, stack );
+    copyProperties(result, obj, stack);
 
     return result as T;
   }
 
-  if ( typeof obj === 'object' && obj !== null ) {
-    const result = Object.create( Object.getPrototypeOf( obj ) );
+  if (typeof obj === 'object' && obj !== null) {
+    const result = Object.create(Object.getPrototypeOf(obj));
 
-    stack.set( obj, result );
+    stack.set(obj, result);
 
-    copyProperties( result, obj, stack );
+    copyProperties(result, obj, stack);
 
     return result as T;
   }
@@ -198,14 +198,14 @@ function cloneDeepImpl<T>( obj: T, stack = new Map<any, any>() ): T {
 
 // eslint-disable-next-line
 export function copyProperties( target: any, source: any, stack?: Map<any, any> ): void {
-  const keys = [ ...Object.keys( source ), ...getSymbols( source ) ];
+  const keys = [...Object.keys(source), ...getSymbols(source)];
 
-  for ( let i = 0; i < keys.length; i++ ) {
-    const key = keys[ i ];
-    const descriptor = Object.getOwnPropertyDescriptor( target, key );
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const descriptor = Object.getOwnPropertyDescriptor(target, key);
 
-    if ( descriptor == null || descriptor.writable ) {
-      target[ key ] = cloneDeepImpl( source[ key ], stack );
+    if (descriptor == null || descriptor.writable) {
+      target[key] = cloneDeepImpl(source[key], stack);
     }
   }
 }
