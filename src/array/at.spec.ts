@@ -21,12 +21,9 @@ describe('at', () => {
   });
 
   it('should return undefined for non-integer indices', () => {
-    expect(at(['a', 'b', 'c'], [1.5, -1.5, NaN, Infinity, -Infinity])).toEqual([
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-    ]);
+    const data = ['a', 'b', 'c'];
+    const indices = [1.5, -1.5, NaN, Infinity, -Infinity];
+
+    expect(at(data, indices)).toEqual(indices.map(i => data.at(i)));
   });
 });

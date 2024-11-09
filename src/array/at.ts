@@ -18,13 +18,13 @@ export function at<T>(arr: readonly T[], indices: number[]): Array<T | undefined
   const length = arr.length;
 
   for (let i = 0; i < indices.length; i++) {
-    let index = indices[i];
+    let index = Math.trunc(indices[i]) || 0;
 
     if (index < 0) {
       index += length;
     }
 
-    result[i] = index >= 0 && index < length && Number.isInteger(index) ? arr[index] : undefined;
+    result[i] = arr[index];
   }
 
   return result;

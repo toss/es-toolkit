@@ -6,24 +6,35 @@ const atToolkit = atToolkit_;
 const atLodash = atLodash_;
 
 describe('at', () => {
+  const data = ['a', 'b', 'c', 'd', 'e'];
+  const indices = [0, 2, 4];
+
   bench('es-toolkit/at', () => {
-    atToolkit(['a', 'b', 'c', 'd', 'e'], [0, 2, 4]);
+    atToolkit(data, indices);
   });
 
   bench('lodash/at', () => {
-    atLodash(['a', 'b', 'c', 'd', 'e'], [0, 2, 4]);
+    atLodash(data, indices);
+  });
+
+  bench('Array.prototype.at', () => {
+    indices.map(i => data.at(i));
   });
 });
 
 describe('at/largeArray', () => {
-  const largeArray = Array.from({ length: 10000 }, (_, i) => i);
-  const largeIndex = Array.from({ length: 1000 }, (_, i) => i * 2);
+  const largeData = Array.from({ length: 10000 }, (_, i) => i);
+  const largeIndices = Array.from({ length: 1000 }, (_, i) => i * 2);
 
   bench('es-toolkit/at', () => {
-    atToolkit(largeArray, largeIndex);
+    atToolkit(largeData, largeIndices);
   });
 
   bench('lodash/at', () => {
-    atLodash(largeArray, largeIndex);
+    atLodash(largeData, largeIndices);
+  });
+
+  bench('Array.prototype.at', () => {
+    largeIndices.map(i => largeData.at(i));
   });
 });
