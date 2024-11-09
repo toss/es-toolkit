@@ -1,3 +1,4 @@
+import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
@@ -115,7 +116,7 @@ export function findLastIndex<T>(
     fromIndex = Math.min(fromIndex, arr.length - 1);
   }
 
-  const subArray = Array.from(arr).slice(0, fromIndex + 1);
+  const subArray = toArray(arr).slice(0, fromIndex + 1);
 
   switch (typeof doesMatch) {
     case 'function': {
