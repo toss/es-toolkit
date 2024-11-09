@@ -58,14 +58,14 @@ export function isEmpty(value: Set<any>): boolean;
 /**
  * Checks if a given array is empty.
  *
- * @param {Array<any>} value - The array to check.
+ * @param {any[]} value - The array to check.
  * @returns {boolean} `true` if the array is empty, `false` otherwise.
  *
  * @example
  * isEmpty([]); // true
  * isEmpty([1, 2, 3]); // false
  */
-export function isEmpty(value: Array<any>): value is [];
+export function isEmpty(value: any[]): value is [];
 
 /**
  * Checks if a given object is empty.
