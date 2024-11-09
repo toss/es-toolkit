@@ -1,24 +1,3 @@
-const DOTS_KEY = /^[\w.]+$/g;
-
-const ESCAPE_REGEXP = /\\(\\)?/g;
-const PROPERTY_REGEXP = RegExp(
-  // Match anything that isn't a dot or bracket.
-  '[^.[\\]]+' +
-    '|' +
-    // Or match property names within brackets.
-    '\\[(?:' +
-    // Match a non-string expression.
-    '([^"\'][^[]*)' +
-    '|' +
-    // Or match strings (supports escaping characters).
-    '(["\'])((?:(?!\\2)[^\\\\]|\\\\.)*?)\\2' +
-    ')\\]' +
-    '|' +
-    // Or match "" as the space between consecutive dots or empty brackets.
-    '(?=(?:\\.|\\[\\])(?:\\.|\\[\\]|$))',
-  'g'
-);
-
 /**
  * Converts a deep key string into an array of path segments.
  *
@@ -37,30 +16,72 @@ const PROPERTY_REGEXP = RegExp(
  * toPath('.a[b].c.d[e]["f.g"].h') // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
  */
 export function toPath(deepKey: string): string[] {
-  if (DOTS_KEY.test(deepKey)) {
-    return deepKey.split('.');
-  }
-
   const result: string[] = [];
+  const length = deepKey.length;
 
-  if (deepKey[0] === '.') {
-    result.push('');
+  if (length === 0) {
+    return result;
   }
 
-  const matches = deepKey.matchAll(PROPERTY_REGEXP);
+  let index = 0;
+  let key = '';
+  let quoteChar = '';
+  let bracket = false;
 
-  for (const match of matches) {
-    let key = match[0];
-    const expr = match[1];
-    const quote = match[2];
-    const substr = match[3];
+  // Leading dot
+  if (deepKey.charCodeAt(0) === 46) {
+    result.push('');
+    index++;
+  }
 
-    if (quote) {
-      key = substr.replace(ESCAPE_REGEXP, '$1');
-    } else if (expr) {
-      key = expr;
+  while (index < length) {
+    const char = deepKey[index];
+
+    if (quoteChar) {
+      if (char === '\\' && index + 1 < length) {
+        // Escape character
+        index++;
+        key += deepKey[index];
+      } else if (char === quoteChar) {
+        // End of quote
+        quoteChar = '';
+      } else {
+        key += char;
+      }
+    } else if (bracket) {
+      if (char === '"' || char === "'") {
+        // Start of quoted string inside brackets
+        quoteChar = char;
+      } else if (char === ']') {
+        // End of bracketed segment
+        bracket = false;
+        result.push(key);
+        key = '';
+      } else {
+        key += char;
+      }
+    } else {
+      if (char === '[') {
+        // Start of bracketed segment
+        bracket = true;
+        if (key) {
+          result.push(key);
+          key = '';
+        }
+      } else if (char === '.') {
+        if (key) {
+          result.push(key);
+          key = '';
+        }
+      } else {
+        key += char;
+      }
     }
 
+    index++;
+  }
+
+  if (key) {
     result.push(key);
   }
 
