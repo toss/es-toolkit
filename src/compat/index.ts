@@ -64,6 +64,7 @@ export { take } from './array/take.ts';
 export { takeRight } from './array/takeRight.ts';
 export { union } from './array/union.ts';
 export { uniq } from './array/uniq.ts';
+export { uniqBy } from './array/uniqBy.ts';
 export { unzip } from './array/unzip.ts';
 export { without } from './array/without.ts';
 export { zip } from './array/zip.ts';
