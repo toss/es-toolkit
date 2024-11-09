@@ -171,6 +171,22 @@ describe('cloneDeep', () => {
     });
   });
 
+  it('should clone instances of custom classes', () => {
+    class CustomTest {
+      constructor(public value: number) {}
+      myFunc() {
+        return `value is ${this.value}`;
+      }
+    }
+
+    const instance = new CustomTest(5);
+    const clonedInstance = cloneDeep(instance);
+
+    expect(clonedInstance).not.toBe(instance);
+    expect(clonedInstance).toEqual(instance);
+    expect(clonedInstance.myFunc()).toBe('value is 5');
+  });
+
   //-------------------------------------------------------------------------------------
   // File
   //-------------------------------------------------------------------------------------
