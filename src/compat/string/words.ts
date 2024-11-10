@@ -1,4 +1,4 @@
-import { words as wordsToolkit } from '../../string/words.ts';
+import { CASE_SPLIT_PATTERN } from '../../string/words.ts';
 import { toString } from '../util/toString.ts';
 
 /**
@@ -13,8 +13,10 @@ import { toString } from '../util/toString.ts';
  * // => ['fred', 'barney', 'pebbles']
  *
  */
-export function words(str?: string | object, pattern?: RegExp | string): string[] {
+export function words(str?: string | object, pattern: RegExp | string = CASE_SPLIT_PATTERN): string[] {
   const input = toString(str);
 
-  return wordsToolkit(input, pattern);
+  const words = Array.from(input.match(pattern) ?? []);
+
+  return words.filter(x => x !== '');
 }
