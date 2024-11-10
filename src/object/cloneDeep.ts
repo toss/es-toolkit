@@ -184,7 +184,8 @@ function cloneDeepImpl<T>(obj: T, stack = new Map<any, any>()): T {
   }
 
   if (typeof obj === 'object' && obj !== null) {
-    const result = {};
+    const result = Object.create(Object.getPrototypeOf(obj));
+
     stack.set(obj, result);
 
     copyProperties(result, obj, stack);

@@ -5,20 +5,20 @@ Creates a new object with the same values as the given object, but with keys gen
 ## Signature
 
 ```typescript
-function mapKeys<T extends Record<PropertyKey, unknown>, K1 extends keyof T, K2 extends PropertyKey>(
+function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKey>(
   object: T,
-  getNewKey: (value: T[K1], key: K1, object: T) => N
-): Record<K2, T[K]>;
+  getNewKey: (value: T[keyof T], key: keyof T, object: T) => K
+): Record<K, T[keyof T]>;
 ```
 
 ### Parameters
 
-- `obj` (`T extends object`): The object to iterate over.
-- `getNewKey`: (`(value: T[K1], key: K1, object: T) => N`): The function invoked per own enumerable property.
+- `obj` (`T extends Record<PropertyKey, any>`): The object to iterate over.
+- `getNewKey`: (`(value: T[keyof T], key: keyof T, object: T) => K`): The function invoked per own enumerable property.
 
 ### Returns
 
-(`Record<K2, T[K]>`): The new mapped object.
+(`Record<K, T[keyof T]>`): The new mapped object.
 
 ## Examples
 

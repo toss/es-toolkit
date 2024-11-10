@@ -100,4 +100,13 @@ describe('isEmpty', () => {
   it('should not treat objects with non-number lengths as array-like', () => {
     expect(isEmpty({ length: '0' })).toBe(false);
   });
+
+  it('should return `true` for objects with only enumerable symbol properties', () => {
+    const value = { [Symbol('a')]: 1 };
+    expect(isEmpty(value)).toBe(true);
+
+    function Foo() {}
+    Foo.prototype = { constructor: Foo, [Symbol('a')]: 1 };
+    expect(isEmpty(Foo.prototype)).toBe(true);
+  });
 });

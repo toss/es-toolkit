@@ -1,4 +1,5 @@
 import { dropWhile as dropWhileToolkit } from '../../array/dropWhile.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { matches } from '../predicate/matches.ts';
@@ -95,7 +96,7 @@ export function dropWhile<T>(
     return [];
   }
 
-  return dropWhileImpl(Array.from(arr), predicate);
+  return dropWhileImpl(toArray(arr), predicate);
 }
 
 function dropWhileImpl<T>(
