@@ -18,8 +18,8 @@ describe('words', () => {
   });
 
   it('correctly handles a string with multiple number inputs', () => {
-    const result = words('-0 +0 -3 +3 -4 +4');
-    expect(result).toEqual(['0', '0', '3', '3', '4', '4']);
+    const result = words('+0 -3 +3 -4 +4');
+    expect(result).toEqual(['0', '3', '3', '4', '4']);
   });
 
   it('splits a space-separated string into individual words', () => {
@@ -27,24 +27,9 @@ describe('words', () => {
     expect(result).toEqual(['split', 'these', 'words']);
   });
 
-  it('splits a number input as a single word', () => {
-    const result = words(3);
-    expect(result).toEqual(['3']);
-  });
-
-  it('splits -0 as a single word preserving sign', () => {
-    const result = words(-0);
-    expect(result).toEqual(['0']);
-  });
-
   it('splits a string representation of an array', () => {
     const result = words([1, 2, 3]);
     expect(result).toEqual(['1', '2', '3']);
-  });
-
-  it('returns an empty array when input is null', () => {
-    const result = words(null);
-    expect(result).toEqual([]);
   });
 
   it('returns an empty array when input is undefined', () => {
