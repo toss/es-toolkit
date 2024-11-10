@@ -3,7 +3,7 @@
  * This pattern matches sequences of alphanumeric ASCII characters
  * as well as non-ASCII Unicode characters (e.g., emojis).
  */
-const reUnicodeWord = /[a-zA-Z0-9]+|[^\x00-\x7F]+/g;
+const reUnicodeWord = /[a-zA-Z0-9]+|[^\u0000-\u007F]+/g;
 
 /**
  * Splits `string` into an array of its words.
