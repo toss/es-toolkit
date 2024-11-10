@@ -66,7 +66,7 @@ export function isEmpty(value: Set<any>): boolean;
  * isEmpty([]); // true
  * isEmpty([1, 2, 3]); // false
  */
-export function isEmpty(value: Array<any>): value is [];
+export function isEmpty(value: any[]): value is [];
 
 /**
  * Checks if a given object is empty.

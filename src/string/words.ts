@@ -21,6 +21,5 @@ export function words(str = '', pattern?: RegExp | string): string[] {
   if (pattern instanceof RegExp) {
     return Array.from(str.match(pattern) ?? []);
   }
-
   return Array.from(str.match(reUnicodeWord) ?? []).filter(word => word.trim().length > 0);
 }
