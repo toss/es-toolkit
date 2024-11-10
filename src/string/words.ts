@@ -4,7 +4,7 @@
  * This pattern matches sequences of alphanumeric ASCII characters,
  * non-ASCII Unicode characters (e.g., emojis), and punctuation marks.
  */
-const reUnicodeWord = /[a-zA-Z0-9]+|[^\u0000-\u007F]+/g;
+const reUnicodeWord = /[a-zA-Z0-9]+|[\p{Emoji}]+|[\p{L}]+/gu;
 
 /**
  * Splits `string` into an array of its words, treating spaces and punctuation marks as separators.
