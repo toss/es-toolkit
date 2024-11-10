@@ -1,4 +1,4 @@
-import { bench, describe, expect, it } from 'vitest';
+import { bench, describe } from 'vitest';
 import { words as wordsToolkit } from 'es-toolkit';
 import { words as wordLodash_ } from 'lodash';
 
