@@ -17,3 +17,4 @@ export { trimStart } from './trimStart.ts';
 export { unescape } from './unescape.ts';
 export { upperCase } from './upperCase.ts';
 export { upperFirst } from './upperFirst.ts';
+export { words } from "./words.ts"
