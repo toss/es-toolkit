@@ -1,4 +1,4 @@
-import { getWords } from './_internal/getWords.ts';
+import { words as getWords } from './words.ts';
 import { capitalize } from './capitalize.ts';
 
 /**

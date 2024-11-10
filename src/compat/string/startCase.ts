@@ -1,4 +1,4 @@
-import { getWords } from '../../string/_internal/getWords.ts';
+import { words as getWords } from '../../string/words.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
 /**
