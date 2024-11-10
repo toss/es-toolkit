@@ -19,7 +19,7 @@ const reUnicodeWord = /[a-zA-Z0-9]+|[^\u0000-\u007F]+/g;
  * words('camelCaseHTTPRequest🚀');
  * // => ['camel', 'Case', 'HTTP', 'Request', '🚀']
  */
-export function words(str: string = '', pattern?: RegExp | string): string[] {
+export function words(str = '', pattern?: RegExp | string): string[] {
   if (pattern instanceof RegExp) {
     return Array.from(str.match(pattern) ?? []);
   }
