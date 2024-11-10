@@ -11,12 +11,12 @@ describe('differenceBy', () => {
     expect(actual).toEqual([{ x: 2 }]);
   });
 
-  it('should provide correct `iteratee` arguments', () => {
+  it('should provide correct iteratee arguments', () => {
     let args: any;
 
-    differenceBy([2.1, 1.2], [2.3, 3.4], function () {
+    differenceBy([2.1, 1.2], [2.3, 3.4], function (...rest: any[]) {
       if (!args) {
-        args = slice.call(arguments);
+        args = Array.prototype.slice.call(rest);
       }
     });
 
