@@ -16,7 +16,7 @@ describe('differenceBy', () => {
 
     differenceBy([2.1, 1.2], [2.3, 3.4], function (...rest: any[]) {
       if (!args) {
-        args = Array.prototype.slice.call(rest);
+        args = slice.call(rest);
       }
     });
 
