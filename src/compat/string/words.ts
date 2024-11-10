@@ -12,11 +12,6 @@ import { toString } from '../util/toString.ts';
  * const wordsArray1 = words('fred, barney, & pebbles');
  * // => ['fred', 'barney', 'pebbles']
  *
- * const wordsArray2 = words('camelCaseHTTPRequest🚀');
- * // => ['camel', 'Case', 'HTTP', 'Request', '🚀']
- *
- * const wordsArray3 = words('hyphen-text');
- * // => ['hyphen', 'text']
  */
 export function words(str?: string | object, pattern?: RegExp | string): string[] {
   const input = toString(str);
