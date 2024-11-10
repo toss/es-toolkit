@@ -15,7 +15,9 @@ describe('differenceBy', () => {
     let args: any;
 
     differenceBy([2.1, 1.2], [2.3, 3.4], function () {
-      args || (args = slice.call(arguments));
+      if (!args) {
+        args = slice.call(arguments);
+      }
     });
 
     expect(args).toEqual([2.3]);
