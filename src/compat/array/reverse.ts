@@ -20,7 +20,9 @@
  * // nullArray is null.
  */
 export function reverse<T>(array: T[] | null | undefined): T[] | null | undefined {
-  if (array == null) return array;
+  if (array == null) {
+    return array;
+  }
 
   let left = 0;
   let right = array.length - 1;
