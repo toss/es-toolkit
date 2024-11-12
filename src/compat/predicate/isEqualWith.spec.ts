@@ -37,6 +37,7 @@ describe('isEqualWith', () => {
   });
 
   it('should handle comparisons when `customizer` returns `undefined`', () => {
+    expect(isEqualWith('a', 'a')).toBe(true);
     expect(isEqualWith('a', 'a', noop)).toBe(true);
     expect(isEqualWith(['a'], ['a'], noop)).toBe(true);
     expect(isEqualWith({ 0: 'a' }, { 0: 'a' }, noop)).toBe(true);
