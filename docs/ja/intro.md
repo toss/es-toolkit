@@ -37,10 +37,10 @@ es-toolkitが提供する機能リストは以下の通りです：
 [もっと見る](https://github.com/toss/es-toolkit/network/dependents)
 
 <script setup>
-import CustomComponent from '../components/NpmWeeklyDownloadsChart.vue'
+import NpmWeeklyDownloadsChart from '../components/NpmWeeklyDownloadsChart.vue'
 </script>
 
-<CustomComponent />
+<NpmWeeklyDownloadsChart />
 
 ## リンク
 

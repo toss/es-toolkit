@@ -37,10 +37,10 @@ Developers from major repositories have chosen es-toolkit, as shown below.
 [Check more](https://github.com/toss/es-toolkit/network/dependents)
 
 <script setup>
-import CustomComponent from './components/NpmWeeklyDownloadsChart.vue'
+import NpmWeeklyDownloadsChart from './components/NpmWeeklyDownloadsChart.vue'
 </script>
 
-<CustomComponent />
+<NpmWeeklyDownloadsChart />
 
 ## Links
 
