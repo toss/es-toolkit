@@ -27,17 +27,11 @@ export function keys(object?: any): string[] {
     return arrayLikeKeys(object, false);
   }
 
+  const result = Object.keys(Object(object));
+
   if (!isPrototype(object)) {
-    return Object.keys(Object(object));
+    return result;
   }
 
-  const result = [];
-
-  for (const key in Object(object)) {
-    if (Object.hasOwn(object, key) && key != 'constructor') {
-      result.push(key);
-    }
-  }
-
-  return result;
+  return result.filter(key => key !== 'constructor');
 }
