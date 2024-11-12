@@ -5,6 +5,7 @@ import { MAX_INTEGER } from '../_internal/MAX_INTEGER';
 
 describe('toLength', () => {
   it('should return a valid length', () => {
+    expect(toLength(null)).toBe(0);
     expect(toLength(-1)).toBe(0);
     expect(toLength('1')).toBe(1);
     expect(toLength(1.1)).toBe(1);
