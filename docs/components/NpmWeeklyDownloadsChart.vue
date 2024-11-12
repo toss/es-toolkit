@@ -90,12 +90,13 @@ export default {
         }
       });
 
-      const yStep = 10000;
-      const steps = Math.ceil(maxDownload / yStep);
+      const yStep = Math.ceil(maxDownload / 5 / 10000) * 10000;
       ctx.font = '12px Arial';
-      for (let i = 0; i <= steps; i++) {
-        const y = padding + (chartHeight - (chartHeight / steps) * i);
-        const label = i * yStep;
+      for (let i = 0; i <= 5; i++) {
+        const value = maxDownload - i * yStep;
+        if (value < 0) break;
+
+        const y = padding + (chartHeight - (chartHeight / maxDownload) * value);
 
         ctx.strokeStyle = '#d3d3d3';
         ctx.beginPath();
@@ -105,7 +106,7 @@ export default {
 
         ctx.fillStyle = '#000';
         ctx.textAlign = 'right';
-        ctx.fillText(label, padding - 10, y + 5);
+        ctx.fillText(value, padding - 10, y + 5);
       }
 
       ctx.strokeStyle = '#007bff';
