@@ -87,4 +87,8 @@ describe('intersection', () => {
     expect(intersection(null, array, null, [2, 3])).toEqual([]);
     expect(intersection(array, null, args, null)).toEqual([]);
   });
+
+  it('should return an empty array when there are no arguments', () => {
+    expect(intersection()).toEqual([]);
+  });
 });
