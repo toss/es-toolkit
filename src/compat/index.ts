@@ -105,6 +105,7 @@ export { fromPairs } from './object/fromPairs.ts';
 export { get } from './object/get.ts';
 export { has } from './object/has.ts';
 export { invertBy } from './object/invertBy.ts';
+export { keys } from './object/keys.ts'
 export { mapKeys } from './object/mapKeys.ts';
 export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
