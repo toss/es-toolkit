@@ -36,6 +36,12 @@ es-toolkit 内置 TypeScript 类型，并经过严格测试，确保了100%的�
 
 [查看更多](https://github.com/toss/es-toolkit/network/dependents)
 
+<script setup>
+import CustomComponent from '../components/NpmWeeklyDownloadsChart.vue'
+</script>
+
+<CustomComponent />
+
 ## 链接
 
 请参考以下链接获取有关该项目的更多信息。

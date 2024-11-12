@@ -36,6 +36,12 @@ es-toolkit이 제공하는 기능 목록은 다음과 같습니다.
 
 [더 보기](https://github.com/toss/es-toolkit/network/dependents)
 
+<script setup>
+import CustomComponent from '../components/NpmWeeklyDownloadsChart.vue'
+</script>
+
+<CustomComponent />
+
 ## 링크
 
 이 프로젝트에 대해서 더 많은 정보를 얻기 위해서는 아래 링크를 참고하세요.
