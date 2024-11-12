@@ -10,6 +10,9 @@ import { stringProto } from '../_internal/stringProto';
 import { stubArray } from '../_internal/stubArray';
 import { constant } from '../util/constant';
 
+/**
+ * @see https://github.com/lodash/lodash/blob/afcd5bc1e8801867c31a17566e0e0edebb083d0e/test/keys-methods.spec.js#L1
+ */
 describe('keys', () => {
   it('should return the string keyed property names of `object`', () => {
     const actual = keys({ a: 1, b: 1 }).sort();
