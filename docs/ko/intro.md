@@ -18,6 +18,24 @@ es-toolkit이 제공하는 기능 목록은 다음과 같습니다.
 - **Promise**: [delay](./reference/promise/delay.md)와 같은 비동기 유틸리티 함수를 제공해요.
 - **문자열**: [snakeCase](./reference/string/snakeCase.md)와 같이 문자열을 다루기 위한 다양한 함수를 제공해요.
 
+## 신뢰할 수 있는 라이브러리
+
+아래와 같이 대형 리포지토리의 개발자들이 es-toolkit을 선택했습니다.
+
+- [storybookjs/storybook](https://github.com/storybookjs/storybook)
+  ![GitHub stars](https://img.shields.io/github/stars/storybookjs/storybook?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/storybook?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+- [microsoft/genaiscript](https://github.com/microsoft/genaiscript)
+  ![GitHub stars](https://img.shields.io/github/stars/microsoft/genaiscript?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/genaiscript?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+- [vadimdemedes/ink](https://github.com/vadimdemedes/ink)
+  ![GitHub stars](https://img.shields.io/github/stars/vadimdemedes/ink?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/ink?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+[더 보기](https://github.com/toss/es-toolkit/network/dependents)
+
 ## 링크
 
 이 프로젝트에 대해서 더 많은 정보를 얻기 위해서는 아래 링크를 참고하세요.

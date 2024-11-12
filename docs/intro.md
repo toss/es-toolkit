@@ -18,6 +18,22 @@ Here are some of the features es-toolkit offers:
 - **Promise**: Asynchronous utilities like [delay](./reference/promise/delay.md).
 - **String**: Utilities for string manipulation, such as [snakeCase](./reference/string/snakeCase.md)
 
+## Trusted by Developers
+
+Developers from major repositories have chosen es-toolkit, as shown below.
+
+- [storybookjs/storybook](https://github.com/storybookjs/storybook)
+  ![GitHub stars](https://img.shields.io/github/stars/storybookjs/storybook?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/storybook?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+- [microsoft/genaiscript](https://github.com/microsoft/genaiscript)
+  ![GitHub stars](https://img.shields.io/github/stars/microsoft/genaiscript?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/genaiscript?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+- [vadimdemedes/ink](https://github.com/vadimdemedes/ink)
+  ![GitHub stars](https://img.shields.io/github/stars/vadimdemedes/ink?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/ink?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+[Check more](https://github.com/toss/es-toolkit/network/dependents)
+
 ## Links
 
 Please refer to the following links for more information about this project.

@@ -18,6 +18,24 @@ es-toolkitが提供する機能リストは以下の通りです：
 - **Promise**: 非同期操作のためのユーティリティ、例えば [delay](./reference/promise/delay.md) など。
 - **String**: 文字列操作のためのユーティリティ、例えば [snakeCase](./reference/string/snakeCase.md) など。
 
+## 信頼されるツール
+
+以下のように、大規模リポジトリの開発者たちが es-toolkit を選択しています。
+
+- [storybookjs/storybook](https://github.com/storybookjs/storybook)
+  ![GitHub stars](https://img.shields.io/github/stars/storybookjs/storybook?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/storybook?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+- [microsoft/genaiscript](https://github.com/microsoft/genaiscript)
+  ![GitHub stars](https://img.shields.io/github/stars/microsoft/genaiscript?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/genaiscript?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+- [vadimdemedes/ink](https://github.com/vadimdemedes/ink)
+  ![GitHub stars](https://img.shields.io/github/stars/vadimdemedes/ink?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/ink?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+[もっと見る](https://github.com/toss/es-toolkit/network/dependents)
+
 ## リンク
 
 このプロジェクトについてより多くの情報を得るには、以下のリンクを参照してください：

@@ -18,6 +18,24 @@ es-toolkit 内置 TypeScript 类型，并经过严格测试，确保了100%的�
 - **Promise**: 异步操作工具，如 [delay](./reference/promise/delay.md)。
 - **String**: 字符串操作工具，如 [snakeCase](./reference/string/snakeCase.md)。
 
+## 值得信赖的工具
+
+如下所示，来自大型代码库的开发者选择了 es-toolkit。
+
+- [storybookjs/storybook](https://github.com/storybookjs/storybook)
+  ![GitHub stars](https://img.shields.io/github/stars/storybookjs/storybook?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/storybook?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+- [microsoft/genaiscript](https://github.com/microsoft/genaiscript)
+  ![GitHub stars](https://img.shields.io/github/stars/microsoft/genaiscript?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/genaiscript?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+- [vadimdemedes/ink](https://github.com/vadimdemedes/ink)
+  ![GitHub stars](https://img.shields.io/github/stars/vadimdemedes/ink?style=flat-square&logo=github&label=Stars&labelColor=black&color=black)
+  ![NPM downloads](https://img.shields.io/npm/dw/ink?style=flat-square&logo=npm&label=Downloads&labelColor=black&color=black)
+
+[查看更多](https://github.com/toss/es-toolkit/network/dependents)
+
 ## 链接
 
 请参考以下链接获取有关该项目的更多信息。
