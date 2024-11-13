@@ -72,4 +72,14 @@ describe('trim', () => {
 
     expect(actual).toEqual([trimmed, trimmed, trimmed]);
   });
+
+  it(`\`trim\` should support character arrays`, () => {
+    const string = 'hello world';
+    const expected = 'o wo';
+
+    expect(func(string, ['rld', 'hel'])).toBe(expected);
+    expect(func(string, ['rl', 'd', 'he', 'l'])).toBe(expected);
+    expect(func(string, ['he', 'd', 'lr'])).toBe(expected);
+    expect(func(string, ['d', 'l', 'r', 'e', 'h'])).toBe(expected);
+  });
 });

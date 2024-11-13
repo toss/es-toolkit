@@ -1,4 +1,5 @@
 import { trimStart as trimStartToolkit } from '../../string/trimStart.ts';
+import { flatten } from '../array/flatten.ts';
 
 /**
  * Removes leading whitespace or specified characters from a string.
@@ -28,10 +29,7 @@ export function trimStart(str: string, chars?: string | string[], guard?: unknow
     }
     case 'object': {
       if (Array.isArray(chars)) {
-        return trimStartToolkit(
-          str,
-          chars.map(x => x.toString())
-        );
+        return trimStartToolkit(str, flatten(chars.map(x => x.toString().split(''))));
       } else {
         return trimStartToolkit(str, (chars as any).toString().split(''));
       }
