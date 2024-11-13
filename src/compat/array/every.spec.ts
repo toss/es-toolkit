@@ -146,4 +146,12 @@ describe('every', () => {
     expect(every('123', stubFalse)).toBe(false);
     expect(every(args, stubFalse)).toBe(false);
   });
+  it('should support property-value pair', () => {
+    const objects = [
+      { a: 0, b: 0 },
+      { a: 0, b: 1 },
+    ];
+    expect(every(objects, ['a', 0])).toBe(true);
+    expect(every(objects, ['b', 1])).toBe(false);
+  });
 });

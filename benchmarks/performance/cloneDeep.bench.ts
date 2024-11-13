@@ -15,6 +15,9 @@ const obj = {
   object: { a: 1, b: 'es-toolkit' },
   date: new Date(),
   regex: /abc/g,
+  instance: new (class Test {
+    value: 1;
+  })(),
   nested: { a: [1, 2, 3], b: { c: 'es-toolkit' }, d: new Date() },
   nested2: { a: { b: { c: { d: { e: { f: { g: 'es-toolkit' } } } } } } },
 };

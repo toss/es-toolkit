@@ -238,4 +238,28 @@ describe('clone', () => {
     expect(clonedError.message).toBe(error.message);
     expect(clonedError.name).toBe(error.name);
   });
+
+  it('should clone class instance', () => {
+    class CustomClass {
+      value: number;
+
+      constructor(value: number) {
+        this.value = value;
+      }
+
+      getValue() {
+        return this.value;
+      }
+    }
+
+    const instance = new CustomClass(123);
+    const clonedInstance = clone(instance);
+
+    expect(clonedInstance).toEqual(instance);
+    expect(clonedInstance).not.toBe(instance);
+    expect(clonedInstance).toBeInstanceOf(CustomClass);
+
+    expect(clonedInstance.value).toBe(instance.value);
+    expect(clonedInstance.getValue()).toBe(123);
+  });
 });
