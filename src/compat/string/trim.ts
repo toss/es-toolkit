@@ -1,5 +1,4 @@
 import { trim as trimToolkit } from '../../string/trim.ts';
-import { flatten } from '../array/flatten.ts';
 
 /**
  * Removes leading and trailing whitespace or specified characters from a string.
