@@ -48,4 +48,8 @@ describe('dropRight', () => {
   it('should work as an iteratee for methods like `_.map`', () => {
     expect([[1, 2], [3, 4], [5]].map(dropRight)).toEqual([[1], [3], []]);
   });
+
+  it('should support default itemsCount', () => {
+    expect(dropRight([1, 2, 3, 4, 5])).toEqual([1, 2, 3, 4]);
+  });
 });
