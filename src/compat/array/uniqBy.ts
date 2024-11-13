@@ -51,7 +51,7 @@ export function uniqBy<T>(array: ArrayLike<T>, iteratee: PropertyKey): T[];
  *
  * @template T
  * @param {ArrayLike<T>} array - The array to inspect.
- * @param {Partial<T>} iteratee - The property path to get values from.
+ * @param {Partial<T>} iteratee - The partial object to get values from.
  * @returns {T[]} Returns the new duplicate-free array.
  *
  * @example
@@ -69,7 +69,7 @@ export function uniqBy<T>(array: ArrayLike<T>, iteratee: Partial<T>): T[];
  *
  * @template T
  * @param {ArrayLike<T>} array - The array to inspect.
- * @param {[keyof T, unknown]} iteratee - The property path to get values from.
+ * @param {[keyof T, unknown]} iteratee - The property-value pair to get values from.
  * @returns {T[]} Returns the new duplicate-free array.
  *
  * @example
@@ -87,7 +87,7 @@ export function uniqBy<T>(array: ArrayLike<T>, iteratee: [keyof T, unknown]): T[
  *
  * @template T
  * @param {ArrayLike<T>} array - The array to inspect.
- * @param {((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>} iteratee - Additional arrays and/or iteratee.
+ * @param {((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>} iteratee - The transform function or property name to get values from.
  * @returns {T[]} Returns the new duplicate-free array.
  *
  * @example
