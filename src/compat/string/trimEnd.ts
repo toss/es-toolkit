@@ -1,5 +1,4 @@
 import { trimEnd as trimEndToolkit } from '../../string/trimEnd.ts';
-import { flatten } from '../array/flatten.ts';
 
 /**
  * Removes trailing whitespace or specified characters from a string.
@@ -29,7 +28,10 @@ export function trimEnd(str: string, chars?: string | string[], guard?: unknown)
     }
     case 'object': {
       if (Array.isArray(chars)) {
-        return trimEndToolkit(str, flatten(chars.map(x => x.toString().split(''))));
+        return trimEndToolkit(
+          str,
+          chars.flatMap(x => x.toString().split(''))
+        );
       } else {
         return trimEndToolkit(str, (chars as any).toString().split(''));
       }
