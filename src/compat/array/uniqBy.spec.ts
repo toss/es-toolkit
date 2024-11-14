@@ -92,4 +92,8 @@ describe('uniqBy', () => {
     uniqBy(objects, 'a');
     expect(objects).toEqual(original);
   });
+
+  it('should work with no iteratee', () => {
+    expect(uniqBy([1, 2, 3, 4, 1, 2, 3])).toEqual([1, 2, 3, 4]);
+  });
 });
