@@ -115,6 +115,7 @@ export { property } from './object/property.ts';
 export { set } from './object/set.ts';
 export { toDefaulted } from './object/toDefaulted.ts';
 export { unset } from './object/unset.ts';
+export { findKey } from './object/findKey.ts'
 
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
