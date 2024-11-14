@@ -10,22 +10,25 @@ const addLodash = addLodash_;
 describe('add function benchmark', () => {
   bench('es-toolkit/add', () => {
     addToolkit(2, 3);
+    addToolkit(-1, -5);
     addToolkit(NaN, 3);
     addToolkit(3, NaN);
-    addToolkit('2', '4');
+    addToolkit(NaN, NaN);
   });
 
   bench('es-toolkit/compat/add', () => {
     addToolkitCompat(2, 3);
+    addToolkitCompat(-1, -5);
     addToolkitCompat(NaN, 3);
     addToolkitCompat(3, NaN);
-    addToolkitCompat('2', '4');
+    addToolkitCompat(NaN, NaN);
   });
 
   bench('lodash/add', () => {
     addLodash(2, 3);
+    addLodash(-1, -5);
     addLodash(NaN, 3);
     addLodash(3, NaN);
-    addLodash('2', '4');
+    addLodash(NaN, NaN);
   });
 });
