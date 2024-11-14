@@ -15,7 +15,6 @@ import { add as addToolkit } from '../../math/add';
  * const result2 = add(5, 'a'); // result2 will be NaN, as 'a' is not a number and is treated as NaN.
  * const result3 = add(NaN, 10); // result3 will be NaN
  * const result4 = add(2, NaN);  // result4 will be NaN
- * const result5 = add(NaN, NaN);  // result5 will be NaN
  */
 
 export function add(value: number, other: number): number {
