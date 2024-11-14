@@ -15,9 +15,10 @@ describe('inRange', () => {
     expect(inRange(3, 1, 5)).toBe(true);
     expect(inRange(0, 1, 5)).toBe(false);
     expect(inRange(5, 1, 5)).toBe(false);
+    expect(inRange(5, 5, 5)).toBe(false);
   });
 
-  it('should treat falsey `start` as `0`', () => {
+  it('should treat falsy `start` as `0`', () => {
     falsey.forEach((value, index) => {
       if (index) {
         // eslint-disable-next-line
