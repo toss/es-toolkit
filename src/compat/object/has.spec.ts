@@ -204,4 +204,8 @@ describe('has', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it(`should return \`false\` for empty paths`, () => {
+    expect(has({ a: null }, [])).toBe(false);
+  });
 });
