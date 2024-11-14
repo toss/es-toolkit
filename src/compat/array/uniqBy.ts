@@ -1,10 +1,19 @@
-import { flatten } from './flatten';
-import { last } from './last';
-import { uniq as uniqToolkit } from '../../array/uniq.ts';
 import { uniqBy as uniqByToolkit } from '../../array/uniqBy';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
+/**
+ * Creates a duplicate-free version of an array using a transform function for comparison.
+ *
+ * @template T
+ * @param {ArrayLike<T>} array - The array to inspect.
+ * @returns {T[]} Returns the new duplicate-free array.
+ *
+ * @example
+ * uniqBy([1, 2, 3, 1]);
+ * // => [1, 2, 3]
+ */
+export function uniqBy<T>(array: ArrayLike<T>): T[];
 /**
  * Creates a duplicate-free version of an array using a transform function for comparison.
  *
@@ -24,7 +33,7 @@ export function uniqBy<T>(array: ArrayLike<T>, iteratee: (value: T) => unknown):
  *
  * @template T
  * @param {ArrayLike<T>} array - The array to inspect.
- * @param {string} path - The property path to get values from.
+ * @param {PropertyKey} iteratee - The property path to get values from.
  * @returns {T[]} Returns the new duplicate-free array.
  *
  * @example
@@ -36,29 +45,49 @@ export function uniqBy<T>(array: ArrayLike<T>, iteratee: (value: T) => unknown):
  * uniqBy(users, 'user');
  * // => [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 40 }]
  */
-export function uniqBy<T>(array: ArrayLike<T>, path: string): T[];
-
+export function uniqBy<T>(array: ArrayLike<T>, iteratee: PropertyKey): T[];
 /**
- * Creates a duplicate-free version of an array using a property index for comparison.
+ * Creates a duplicate-free version of an array using a property name for comparison.
  *
  * @template T
  * @param {ArrayLike<T>} array - The array to inspect.
- * @param {number} index - The index to get values from.
+ * @param {Partial<T>} iteratee - The partial object to get values from.
  * @returns {T[]} Returns the new duplicate-free array.
  *
  * @example
- * const arrays = [[2], [3], [1], [2], [3], [1]];
- * uniqBy(arrays, 0);
- * // => [[2], [3], [1]]
+ * const users = [
+ *   { 'user': 'barney', 'age': 36 },
+ *   { 'user': 'fred',   'age': 40 },
+ *   { 'user': 'barney', 'age': 37 }
+ * ];
+ * uniqBy(users, { 'user': 'barney'});
+ * // => [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 40 }]
  */
-export function uniqBy<T>(array: ArrayLike<T>, index: number): T[];
-
+export function uniqBy<T>(array: ArrayLike<T>, iteratee: Partial<T>): T[];
+/**
+ * Creates a duplicate-free version of an array using a property name for comparison.
+ *
+ * @template T
+ * @param {ArrayLike<T>} array - The array to inspect.
+ * @param {[keyof T, unknown]} iteratee - The property-value pair to get values from.
+ * @returns {T[]} Returns the new duplicate-free array.
+ *
+ * @example
+ * const users = [
+ *   { 'user': 'barney', 'age': 36 },
+ *   { 'user': 'fred',   'age': 40 },
+ *   { 'user': 'barney', 'age': 37 }
+ * ];
+ * uniqBy(users, ['user', 'barney']);
+ * // => [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 40 }]
+ */
+export function uniqBy<T>(array: ArrayLike<T>, iteratee: [keyof T, unknown]): T[];
 /**
  * Creates a duplicate-free version of an array, combining multiple arrays and using an optional transform function.
  *
  * @template T
  * @param {ArrayLike<T>} array - The array to inspect.
- * @param {...Array<ArrayLike<T> | ((value: T) => unknown) | string>} values - Additional arrays and/or iteratee.
+ * @param {((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>} iteratee - The transform function or property name to get values from.
  * @returns {T[]} Returns the new duplicate-free array.
  *
  * @example
@@ -67,32 +96,11 @@ export function uniqBy<T>(array: ArrayLike<T>, index: number): T[];
  */
 export function uniqBy<T>(
   array: ArrayLike<T> | null | undefined,
-  ...values: Array<ArrayLike<T> | ((value: T) => unknown) | string>
-): T[];
-
-/**
- * Implementation of the uniqBy function.
- */
-export function uniqBy<T>(
-  arr: ArrayLike<T> | null | undefined,
-  ...values: Array<ArrayLike<T> | ((value: T) => unknown) | string | number>
+  iteratee?: ((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>
 ): T[] {
-  if (!isArrayLikeObject(arr)) {
+  if (!isArrayLikeObject(array)) {
     return [];
   }
 
-  const iteratee = last(values);
-  if (iteratee === undefined) {
-    return Array.from(arr);
-  }
-
-  const validArrays = values.slice(0, -1).filter(isArrayLikeObject);
-  const flattenedArrays = flatten(validArrays) as T[];
-  const allValues = [...Array.from(arr), ...flattenedArrays];
-
-  if (isArrayLikeObject(iteratee)) {
-    return uniqToolkit(allValues);
-  }
-
-  return uniqByToolkit(allValues, createIteratee(iteratee));
+  return uniqByToolkit(Array.from(array), createIteratee(iteratee));
 }

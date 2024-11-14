@@ -29,7 +29,7 @@ export function trim(str: string, chars?: string | string[], guard?: unknown): s
       if (Array.isArray(chars)) {
         return trimToolkit(
           str,
-          chars.map(x => x.toString())
+          chars.flatMap(x => x.toString().split(''))
         );
       } else {
         return trimToolkit(str, (chars as any).toString().split(''));

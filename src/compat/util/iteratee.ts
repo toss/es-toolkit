@@ -46,7 +46,7 @@ export function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
  * const func = iteratee(['a', 1]);
  * [{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
  */
-export function iteratee(value: symbol | number | string | object): (...args: any[]) => any;
+export function iteratee(value?: symbol | number | string | object): (...args: any[]) => any;
 
 /**
  * Creates a function that returns a value from an element in a collection.
