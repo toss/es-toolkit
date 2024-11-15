@@ -117,7 +117,8 @@ describe('unset', () => {
   });
 
   it('should return `false` for non-configurable properties', () => {
-    const object = {};
+    const object = { b: { c: {} } };
+    const symbol = Symbol('a');
 
     Object.defineProperty(object, 'a', {
       configurable: false,
@@ -126,6 +127,31 @@ describe('unset', () => {
       value: 1,
     });
 
+    Object.defineProperty(object, symbol, {
+      configurable: false,
+      enumerable: true,
+      writable: true,
+      value: 1,
+    });
+
+    Object.defineProperty(object.b.c, 'a', {
+      configurable: false,
+      enumerable: true,
+      writable: true,
+      value: 1,
+    });
+
     expect(unset(object, 'a')).toBe(false);
+    expect(unset(object, symbol)).toBe(false);
+    expect(unset(object, 'b.c.a')).toBe(false);
+  });
+
+  it('should return `true` when the target property is undefined', () => {
+    const object = { a: { b: {} } };
+
+    expect(unset(object, 'a.b.c')).toBe(true);
+    expect(unset(object, 'c')).toBe(true);
+    expect(unset(object, 0)).toBe(true);
+    expect(unset(object, Symbol('a'))).toBe(true);
   });
 });
