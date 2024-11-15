@@ -109,4 +109,11 @@ describe('mergeWith', () => {
     expect(merged.value.foo).toEqual(1);
     expect(merged.value[symbol1]).toEqual('a');
   });
+
+  it('should return the target object when no sources are provided', () => {
+    const target = { a: 1 };
+    expect(mergeWith(target, null, noop)).toBe(target);
+    expect(mergeWith(target, undefined, noop)).toBe(target);
+    expect(mergeWith(target, 1, noop)).toBe(target);
+  });
 });
