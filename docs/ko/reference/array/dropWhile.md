@@ -48,7 +48,7 @@ function dropWhile<T>(
 ): T[];
 function dropWhile<T>(arr: ArrayLike<T> | null | undefined, objectToDrop: Partial<T>): T[];
 function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: [keyof T, unknown]): T[];
-function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: string): T[];
+function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: PropertyKey): T[];
 ```
 
 ### 예시

@@ -22,7 +22,7 @@ function every<T>(arr: T[]): boolean;
 function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
 function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
 function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: string): boolean;
+function every<T>(arr: T[], doesMatch: PropertyKey): boolean;
 
 function every<T extends Record<string, unknown>>(
   object: T,
@@ -30,7 +30,7 @@ function every<T extends Record<string, unknown>>(
 ): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: string): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): boolean;
 ```
 
 ### Parameters
@@ -61,13 +61,13 @@ To ensure full compatibility with lodash, the every function handles `object` in
     - **Predicate function** (`(item: T, index: number, arr: T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
     - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
     - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`string`): The name of the property to check for a truthy value.
+    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
 
   - For the `every` overloads with objects:
     - **Predicate function** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): A function that takes an value, its key, and the object, and returns a truthy value if the item matches the criteria.
     - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
     - **Property-value pair** (`[keyof T[keyof T], unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`string`): The name of the property to check for a truthy value.
+    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
 
 ### Returns
 

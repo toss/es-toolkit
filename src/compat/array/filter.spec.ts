@@ -33,11 +33,13 @@ describe('filter', () => {
 
   it(`filter should work with \`matchesProperty\` shorthands`, () => {
     const arr = [
-      { id: 1, name: 'Alice' },
-      { id: 2, name: 'Bob' },
+      { id: 1, name: 'Alice', 0: 1, [Symbol.for('key')]: 1 },
+      { id: 2, name: 'Bob', 0: 2, [Symbol.for('key')]: 2 },
     ];
 
-    expect(filter(arr, ['name', 'Alice'])).toEqual([{ id: 1, name: 'Alice' }]);
+    expect(filter(arr, ['name', 'Alice'])).toEqual(arr.slice(0, 1));
+    expect(filter(arr, [0, 1])).toEqual(arr.slice(0, 1));
+    expect(filter(arr, [Symbol.for('key'), 1])).toEqual(arr.slice(0, 1));
 
     const users = [
       { user: 'barney', age: 36, active: true },
@@ -49,14 +51,25 @@ describe('filter', () => {
 
   it(`filter should work with \`property\` shorthands`, () => {
     const arr = [
-      { id: 1, name: 'Alice' },
-      { id: 2, name: 'Bob' },
-      { id: 3, age: 28 },
+      { id: 1, name: 'Alice', 0: 1, [Symbol.for('key')]: 1 },
+      { id: 2, name: 'Bob', 0: 2, [Symbol.for('key')]: 2 },
+      { id: 3, age: 28, 0: 3 },
     ];
 
     expect(filter(arr, 'name')).toEqual([
-      { id: 1, name: 'Alice' },
-      { id: 2, name: 'Bob' },
+      { id: 1, name: 'Alice', 0: 1, [Symbol.for('key')]: 1 },
+      { id: 2, name: 'Bob', 0: 2, [Symbol.for('key')]: 2 },
+    ]);
+
+    expect(filter(arr, 0)).toEqual([
+      { id: 1, name: 'Alice', 0: 1, [Symbol.for('key')]: 1 },
+      { id: 2, name: 'Bob', 0: 2, [Symbol.for('key')]: 2 },
+      { id: 3, age: 28, 0: 3 },
+    ]);
+
+    expect(filter(arr, Symbol.for('key'))).toEqual([
+      { id: 1, name: 'Alice', 0: 1, [Symbol.for('key')]: 1 },
+      { id: 2, name: 'Bob', 0: 2, [Symbol.for('key')]: 2 },
     ]);
   });
 
