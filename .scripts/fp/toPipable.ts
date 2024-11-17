@@ -116,7 +116,36 @@ export default function transformer(file: FileInfo, api: API) {
         j
       );
 
-      curriedDeclaration.comments = [j.commentBlock(comments[0].value, true)];
+      const firstParamLine = comments[0].value.split('\n').find(line => line.startsWith(' * @param')) ?? '';
+
+      // if(firstParamLine === undefined) {
+      // } else {
+      // }
+
+      const firstParamRegResult = /{([^}]+)} ([^\s]+)/.exec(firstParamLine);
+
+      if (firstParamRegResult == null) {
+        curriedDeclaration.comments = [j.commentBlock(comments[0].value, true)];
+      } else {
+        const [_, typeName, paramName] = firstParamRegResult;
+
+        curriedDeclaration.comments = [
+          j.commentBlock(
+            comments[0].value.replace(`${firstParamLine}\n`, '').replace(
+              /@returns {([^}]+)} (.+)/,
+              (_, returnType, note) =>
+                `@returns {(${paramName}: ${typeName}) => ${returnType}} A function that receive ${firstParamLine
+                  .split('-')[1]
+                  .trim()
+                  .replace(/\.$/, '')
+                  .replace(/^./, firstLetter => firstLetter.toLowerCase())} as argument and returns ${String(note)
+                  .replace(/\.$/, '')
+                  .replace(/^./, firstLetter => firstLetter.toLowerCase())}.`
+            ),
+            true
+          ),
+        ];
+      }
 
       path.value.comments = null;
 

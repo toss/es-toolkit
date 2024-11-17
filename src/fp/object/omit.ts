@@ -27,9 +27,8 @@ export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, k
  *
  * @template T - The type of object.
  * @template K - The type of keys in object.
- * @param {T} obj - The object to omit keys from.
  * @param {K[]} keys - An array of keys to be omitted from the object.
- * @returns {Omit<T, K>} A new object with the specified keys omitted.
+ * @returns {(obj: T) => Omit<T, K>} A function that receive the object to omit keys from as argument and returns a new object with the specified keys omitted.
  *
  * @example
  * const obj = { a: 1, b: 2, c: 3 };
