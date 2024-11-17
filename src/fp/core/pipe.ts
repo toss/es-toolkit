@@ -1,32 +1,18 @@
 import { cloneDeep } from '../../object';
 
-type NextFunction<T, Type extends 'none' | 'initial' = 'none'> = Type extends 'initial'
-  ? (arg: T) => any
-  : T extends (args: any) => Promise<infer R>
-    ? (arg: R) => any
-    : T extends (args: any) => any
-      ? (arg: ReturnType<T>) => any
-      : never;
+type Parameter<T> = T extends Promise<infer P> ? P : T;
 
-type PipeReturnType<T, Last = any, Promised = false, Initial = true> = T extends [infer First, ...infer Last]
+type PipeReturnType<T, Last = any, Promised = false> = T extends [infer First, ...infer Last]
   ? Promised extends true
-    ? PipeReturnType<Last, First, true, false>
-    : Initial extends true
-      ? First extends Promise<any>
-        ? PipeReturnType<Last, First, true, false>
-        : PipeReturnType<Last, First, false, false>
-      : First extends (args: any) => infer R
-        ? R extends Promise<any>
-          ? PipeReturnType<Last, First, true, false>
-          : PipeReturnType<Last, First, false, false>
-        : never
-  : Last extends (args: any) => infer R
-    ? R extends Promise<any>
-      ? R
-      : Promised extends true
-        ? Promise<R>
-        : R
-    : never;
+    ? PipeReturnType<Last, First, true>
+    : First extends Promise<any>
+      ? PipeReturnType<Last, First, true>
+      : PipeReturnType<Last, First, false>
+  : Last extends Promise<any>
+    ? Last
+    : Promised extends true
+      ? Promise<Last>
+      : Last;
 
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
@@ -36,9 +22,9 @@ type PipeReturnType<T, Last = any, Promised = false, Initial = true> = T extends
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @returns {PipeReturnType<[I, F1]>} A processed value - return value of 1st function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @returns {PipeReturnType<[T1, T2]>} A processed value - return value of 1st function.
  *
  * @example
  * function toString(value: unknown) {
@@ -62,7 +48,7 @@ type PipeReturnType<T, Last = any, Promised = false, Initial = true> = T extends
  * );
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<I, F1 extends NextFunction<I, 'initial'>>(initial: I, fn1: F1): PipeReturnType<[I, F1]>;
+export function pipe<T1, T2>(initial: T1, fn1: (arg: Parameter<T1>) => T2): PipeReturnType<[T1, T2]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -71,10 +57,10 @@ export function pipe<I, F1 extends NextFunction<I, 'initial'>>(initial: I, fn1: 
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2]>} A processed value - return value of 2nd function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3]>} A processed value - return value of 2nd function.
  *
  * @example
  * function toString(value: unknown) {
@@ -102,11 +88,11 @@ export function pipe<I, F1 extends NextFunction<I, 'initial'>>(initial: I, fn1: 
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<I, F1 extends NextFunction<I, 'initial'>, F2 extends NextFunction<F1>>(
-  initial: I,
-  fn1: F1,
-  fn2: F2
-): PipeReturnType<[I, F1, F2]>;
+export function pipe<T1, T2, T3>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3
+): PipeReturnType<[T1, T2, T3]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -115,11 +101,11 @@ export function pipe<I, F1 extends NextFunction<I, 'initial'>, F2 extends NextFu
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3]>} A processed value - return value of 3rd function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4]>} A processed value - return value of 3rd function.
  *
  * @example
  * function toString(value: unknown) {
@@ -147,12 +133,12 @@ export function pipe<I, F1 extends NextFunction<I, 'initial'>, F2 extends NextFu
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
->(initial: I, fn1: F1, fn2: F2, fn3: F3): PipeReturnType<[I, F1, F2, F3]>;
+export function pipe<T1, T2, T3, T4>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4
+): PipeReturnType<[T1, T2, T3, T4]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -161,12 +147,12 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4]>} A processed value - return value of 4th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5]>} A processed value - return value of 4th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -194,13 +180,13 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
->(initial: I, fn1: F1, fn2: F2, fn3: F3, fn4: F4): PipeReturnType<[I, F1, F2, F3, F4]>;
+export function pipe<T1, T2, T3, T4, T5>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5
+): PipeReturnType<[T1, T2, T3, T4, T5]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -209,13 +195,13 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5]>} A processed value - return value of 5th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6]>} A processed value - return value of 5th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -243,14 +229,14 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
->(initial: I, fn1: F1, fn2: F2, fn3: F3, fn4: F4, fn5: F5): PipeReturnType<[I, F1, F2, F3, F4, F5]>;
+export function pipe<T1, T2, T3, T4, T5, T6>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6
+): PipeReturnType<[T1, T2, T3, T4, T5, T6]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -259,14 +245,14 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6]>} A processed value - return value of 6th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7]>} A processed value - return value of 6th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -294,15 +280,15 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
->(initial: I, fn1: F1, fn2: F2, fn3: F3, fn4: F4, fn5: F5, fn6: F6): PipeReturnType<[I, F1, F2, F3, F4, F5, F6]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -311,15 +297,15 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7]>} A processed value - return value of 7th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8]>} A processed value - return value of 7th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -347,25 +333,16 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -374,16 +351,16 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8]>} A processed value - return value of 8th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9]>} A processed value - return value of 8th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -411,27 +388,17 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -440,17 +407,17 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9]>} A processed value - return value of 9th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10]>} A processed value - return value of 9th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -478,29 +445,18 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -509,18 +465,18 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10]>} A processed value - return value of 10th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11]>} A processed value - return value of 10th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -548,31 +504,19 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -581,19 +525,19 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11]>} A processed value - return value of 11th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12]>} A processed value - return value of 11th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -621,33 +565,20 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -656,20 +587,20 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]>} A processed value - return value of 12th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13]>} A processed value - return value of 12th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -697,35 +628,21 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -734,21 +651,21 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13]>} A processed value - return value of 13th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14]>} A processed value - return value of 13th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -776,37 +693,22 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -815,22 +717,22 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14]>} A processed value - return value of 14th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15]>} A processed value - return value of 14th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -858,39 +760,23 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -899,23 +785,23 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @param {F15 extends NextFunction<F14>} fn15 - 15th function that receives return value of 14th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15]>} A processed value - return value of 15th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @param {(arg: Parameter<T15>) => T16} fn15 - 15th function that receives return value of 14th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16]>} A processed value - return value of 15th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -943,41 +829,24 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
-  F15 extends NextFunction<F14>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14,
-  fn15: F15
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15,
+  fn15: (arg: Parameter<T15>) => T16
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -986,24 +855,24 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @param {F15 extends NextFunction<F14>} fn15 - 15th function that receives return value of 14th function as its parameter.
- * @param {F16 extends NextFunction<F15>} fn16 - 16th function that receives return value of 15th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16]>} A processed value - return value of 16th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @param {(arg: Parameter<T15>) => T16} fn15 - 15th function that receives return value of 14th function as its parameter.
+ * @param {(arg: Parameter<T16>) => T17} fn16 - 16th function that receives return value of 15th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17]>} A processed value - return value of 16th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1031,43 +900,25 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
-  F15 extends NextFunction<F14>,
-  F16 extends NextFunction<F15>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14,
-  fn15: F15,
-  fn16: F16
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15,
+  fn15: (arg: Parameter<T15>) => T16,
+  fn16: (arg: Parameter<T16>) => T17
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1076,25 +927,25 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @param {F15 extends NextFunction<F14>} fn15 - 15th function that receives return value of 14th function as its parameter.
- * @param {F16 extends NextFunction<F15>} fn16 - 16th function that receives return value of 15th function as its parameter.
- * @param {F17 extends NextFunction<F16>} fn17 - 17th function that receives return value of 16th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17]>} A processed value - return value of 17th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @param {(arg: Parameter<T15>) => T16} fn15 - 15th function that receives return value of 14th function as its parameter.
+ * @param {(arg: Parameter<T16>) => T17} fn16 - 16th function that receives return value of 15th function as its parameter.
+ * @param {(arg: Parameter<T17>) => T18} fn17 - 17th function that receives return value of 16th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18]>} A processed value - return value of 17th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1122,45 +973,26 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
-  F15 extends NextFunction<F14>,
-  F16 extends NextFunction<F15>,
-  F17 extends NextFunction<F16>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14,
-  fn15: F15,
-  fn16: F16,
-  fn17: F17
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15,
+  fn15: (arg: Parameter<T15>) => T16,
+  fn16: (arg: Parameter<T16>) => T17,
+  fn17: (arg: Parameter<T17>) => T18
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1169,26 +1001,26 @@ export function pipe<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends NextFunction<I, 'initial'>} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @param {F15 extends NextFunction<F14>} fn15 - 15th function that receives return value of 14th function as its parameter.
- * @param {F16 extends NextFunction<F15>} fn16 - 16th function that receives return value of 15th function as its parameter.
- * @param {F17 extends NextFunction<F16>} fn17 - 17th function that receives return value of 16th function as its parameter.
- * @param {F18 extends NextFunction<F17>} fn18 - 18th function that receives return value of 17th function as its parameter.
- * @returns {PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17, F18]>} A processed value - return value of 18th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @param {(arg: Parameter<T15>) => T16} fn15 - 15th function that receives return value of 14th function as its parameter.
+ * @param {(arg: Parameter<T16>) => T17} fn16 - 16th function that receives return value of 15th function as its parameter.
+ * @param {(arg: Parameter<T17>) => T18} fn17 - 17th function that receives return value of 16th function as its parameter.
+ * @param {(arg: Parameter<T18>) => T19} fn18 - 18th function that receives return value of 17th function as its parameter.
+ * @returns {PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19]>} A processed value - return value of 18th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1216,47 +1048,27 @@ export function pipe<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-export function pipe<
-  I,
-  F1 extends NextFunction<I, 'initial'>,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
-  F15 extends NextFunction<F14>,
-  F16 extends NextFunction<F15>,
-  F17 extends NextFunction<F16>,
-  F18 extends NextFunction<F17>,
->(
-  initial: I,
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14,
-  fn15: F15,
-  fn16: F16,
-  fn17: F17,
-  fn18: F18
-): PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17, F18]>;
+export function pipe<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(
+  initial: T1,
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15,
+  fn15: (arg: Parameter<T15>) => T16,
+  fn16: (arg: Parameter<T16>) => T17,
+  fn17: (arg: Parameter<T17>) => T18,
+  fn18: (arg: Parameter<T18>) => T19
+): PipeReturnType<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19]>;
 
 export function pipe(initial: any, ...functions: Array<(arg: any) => any>): any {
   const cloned = cloneDeep(initial);
@@ -1271,8 +1083,8 @@ export function pipe(initial: any, ...functions: Array<(arg: any) => any>): any 
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1]>} A processed value - return value of 1st function.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2]>} A processed value - return value of 1st function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1297,9 +1109,9 @@ export function pipe(initial: any, ...functions: Array<(arg: any) => any>): any 
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<F1 extends (args: any) => any>(
-  fn1: F1
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1]>;
+function pipeLazy<T1, T2>(
+  fn1: (arg: Parameter<T1>) => T2
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1308,9 +1120,9 @@ function pipeLazy<F1 extends (args: any) => any>(
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2]>} A processed value - return value of 2nd function.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3]>} A processed value - return value of 2nd function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1338,10 +1150,10 @@ function pipeLazy<F1 extends (args: any) => any>(
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<F1 extends (args: any) => any, F2 extends NextFunction<F1>>(
-  fn1: F1,
-  fn2: F2
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2]>;
+function pipeLazy<T1, T2, T3>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1350,10 +1162,10 @@ function pipeLazy<F1 extends (args: any) => any, F2 extends NextFunction<F1>>(
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3]>} A processed value - return value of 3rd function.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4]>} A processed value - return value of 3rd function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1381,11 +1193,11 @@ function pipeLazy<F1 extends (args: any) => any, F2 extends NextFunction<F1>>(
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<F1 extends (args: any) => any, F2 extends NextFunction<F1>, F3 extends NextFunction<F2>>(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3]>;
+function pipeLazy<T1, T2, T3, T4>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1394,11 +1206,11 @@ function pipeLazy<F1 extends (args: any) => any, F2 extends NextFunction<F1>, F3
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4]>} A processed value - return value of 4th function.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5]>} A processed value - return value of 4th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1426,12 +1238,12 @@ function pipeLazy<F1 extends (args: any) => any, F2 extends NextFunction<F1>, F3
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
->(fn1: F1, fn2: F2, fn3: F3, fn4: F4): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4]>;
+function pipeLazy<T1, T2, T3, T4, T5>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1440,13 +1252,13 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5]>} A processed value - return value of 5th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6]>} A processed value - return value of 5th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1474,19 +1286,13 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1495,14 +1301,14 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6]>} A processed value - return value of 6th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7]>} A processed value - return value of 6th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1530,21 +1336,14 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1553,15 +1352,15 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7]>} A processed value - return value of 7th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8]>} A processed value - return value of 7th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1589,23 +1388,15 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1614,16 +1405,16 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8]>} A processed value - return value of 8th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9]>} A processed value - return value of 8th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1651,25 +1442,16 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1678,17 +1460,17 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9]>} A processed value - return value of 9th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10]>} A processed value - return value of 9th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1716,27 +1498,17 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1745,18 +1517,18 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10]>} A processed value - return value of 10th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11]>} A processed value - return value of 10th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1784,29 +1556,18 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1815,19 +1576,19 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11]>} A processed value - return value of 11th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12]>} A processed value - return value of 11th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1855,31 +1616,19 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11
-): <I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1888,20 +1637,20 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]>} A processed value - return value of 12th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13]>} A processed value - return value of 12th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -1929,35 +1678,20 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12
-): (
-  initial: Parameters<F1>[0]
-) => PipeReturnType<[Parameters<F1>[0], F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13
+): <I extends T1 | Promise<T1>>(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -1966,21 +1700,21 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13]>} A processed value - return value of 13th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14]>} A processed value - return value of 13th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -2008,37 +1742,23 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13
-): (
-  initial: Parameters<F1>[0]
-) => PipeReturnType<[Parameters<F1>[0], F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14
+): <I extends T1 | Promise<T1>>(
+  initial: I
+) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -2047,22 +1767,22 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14]>} A processed value - return value of 14th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15]>} A processed value - return value of 14th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -2090,39 +1810,24 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14
-): (
-  initial: Parameters<F1>[0]
-) => PipeReturnType<[Parameters<F1>[0], F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15
+): <I extends T1 | Promise<T1>>(
+  initial: I
+) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -2131,23 +1836,23 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @param {F15 extends NextFunction<F14>} fn15 - 15th function that receives return value of 14th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15]>} A processed value - return value of 15th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @param {(arg: Parameter<T15>) => T16} fn15 - 15th function that receives return value of 14th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16]>} A processed value - return value of 15th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -2175,41 +1880,25 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
-  F15 extends NextFunction<F14>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14,
-  fn15: F15
-): (
-  initial: Parameters<F1>[0]
-) => PipeReturnType<[Parameters<F1>[0], F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15,
+  fn15: (arg: Parameter<T15>) => T16
+): <I extends T1 | Promise<T1>>(
+  initial: I
+) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -2218,24 +1907,24 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @param {F15 extends NextFunction<F14>} fn15 - 15th function that receives return value of 14th function as its parameter.
- * @param {F16 extends NextFunction<F15>} fn16 - 16th function that receives return value of 15th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16]>} A processed value - return value of 16th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @param {(arg: Parameter<T15>) => T16} fn15 - 15th function that receives return value of 14th function as its parameter.
+ * @param {(arg: Parameter<T16>) => T17} fn16 - 16th function that receives return value of 15th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17]>} A processed value - return value of 16th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -2263,43 +1952,26 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
-  F15 extends NextFunction<F14>,
-  F16 extends NextFunction<F15>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14,
-  fn15: F15,
-  fn16: F16
-): (
-  initial: Parameters<F1>[0]
-) => PipeReturnType<[Parameters<F1>[0], F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15,
+  fn15: (arg: Parameter<T15>) => T16,
+  fn16: (arg: Parameter<T16>) => T17
+): <I extends T1 | Promise<T1>>(
+  initial: I
+) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -2308,25 +1980,25 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @param {F15 extends NextFunction<F14>} fn15 - 15th function that receives return value of 14th function as its parameter.
- * @param {F16 extends NextFunction<F15>} fn16 - 16th function that receives return value of 15th function as its parameter.
- * @param {F17 extends NextFunction<F16>} fn17 - 17th function that receives return value of 16th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17]>} A processed value - return value of 17th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @param {(arg: Parameter<T15>) => T16} fn15 - 15th function that receives return value of 14th function as its parameter.
+ * @param {(arg: Parameter<T16>) => T17} fn16 - 16th function that receives return value of 15th function as its parameter.
+ * @param {(arg: Parameter<T17>) => T18} fn17 - 17th function that receives return value of 16th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18]>} A processed value - return value of 17th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -2354,45 +2026,27 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
-  F15 extends NextFunction<F14>,
-  F16 extends NextFunction<F15>,
-  F17 extends NextFunction<F16>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14,
-  fn15: F15,
-  fn16: F16,
-  fn17: F17
-): (
-  initial: Parameters<F1>[0]
-) => PipeReturnType<[Parameters<F1>[0], F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17]>;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15,
+  fn15: (arg: Parameter<T15>) => T16,
+  fn16: (arg: Parameter<T16>) => T17,
+  fn17: (arg: Parameter<T17>) => T18
+): <I extends T1 | Promise<T1>>(
+  initial: I
+) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18]>;
 /**
  * Processes the value as it passes through pipe. It is useful for declaratively writing code that transforms a value through multiple stages.
  *
@@ -2401,26 +2055,26 @@ function pipeLazy<
  * Provide the functions that process the value in order when calling the first function,
  * and pass the initial value to the function when calling the second function.
  *
- * @param {I} initial - The initial value to be processed.
- * @param {F1 extends (args: any) => any} fn1 - 1st function that receives initial value as its parameter.
- * @param {F2 extends NextFunction<F1>} fn2 - 2nd function that receives return value of 1st function as its parameter.
- * @param {F3 extends NextFunction<F2>} fn3 - 3rd function that receives return value of 2nd function as its parameter.
- * @param {F4 extends NextFunction<F3>} fn4 - 4th function that receives return value of 3rd function as its parameter.
- * @param {F5 extends NextFunction<F4>} fn5 - 5th function that receives return value of 4th function as its parameter.
- * @param {F6 extends NextFunction<F5>} fn6 - 6th function that receives return value of 5th function as its parameter.
- * @param {F7 extends NextFunction<F6>} fn7 - 7th function that receives return value of 6th function as its parameter.
- * @param {F8 extends NextFunction<F7>} fn8 - 8th function that receives return value of 7th function as its parameter.
- * @param {F9 extends NextFunction<F8>} fn9 - 9th function that receives return value of 8th function as its parameter.
- * @param {F10 extends NextFunction<F9>} fn10 - 10th function that receives return value of 9th function as its parameter.
- * @param {F11 extends NextFunction<F10>} fn11 - 11th function that receives return value of 10th function as its parameter.
- * @param {F12 extends NextFunction<F11>} fn12 - 12th function that receives return value of 11th function as its parameter.
- * @param {F13 extends NextFunction<F12>} fn13 - 13th function that receives return value of 12th function as its parameter.
- * @param {F14 extends NextFunction<F13>} fn14 - 14th function that receives return value of 13th function as its parameter.
- * @param {F15 extends NextFunction<F14>} fn15 - 15th function that receives return value of 14th function as its parameter.
- * @param {F16 extends NextFunction<F15>} fn16 - 16th function that receives return value of 15th function as its parameter.
- * @param {F17 extends NextFunction<F16>} fn17 - 17th function that receives return value of 16th function as its parameter.
- * @param {F18 extends NextFunction<F17>} fn18 - 18th function that receives return value of 17th function as its parameter.
- * @returns {<I extends Parameters<F1>[0]>(initial: I) => PipeReturnType<[I, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17, F18]>} A processed value - return value of 18th function.
+ * @param {T1} initial - The initial value to be processed.
+ * @param {(arg: Parameter<T1>) => T2} fn1 - 1st function that receives initial value as its parameter.
+ * @param {(arg: Parameter<T2>) => T3} fn2 - 2nd function that receives return value of 1st function as its parameter.
+ * @param {(arg: Parameter<T3>) => T4} fn3 - 3rd function that receives return value of 2nd function as its parameter.
+ * @param {(arg: Parameter<T4>) => T5} fn4 - 4th function that receives return value of 3rd function as its parameter.
+ * @param {(arg: Parameter<T5>) => T6} fn5 - 5th function that receives return value of 4th function as its parameter.
+ * @param {(arg: Parameter<T6>) => T7} fn6 - 6th function that receives return value of 5th function as its parameter.
+ * @param {(arg: Parameter<T7>) => T8} fn7 - 7th function that receives return value of 6th function as its parameter.
+ * @param {(arg: Parameter<T8>) => T9} fn8 - 8th function that receives return value of 7th function as its parameter.
+ * @param {(arg: Parameter<T9>) => T10} fn9 - 9th function that receives return value of 8th function as its parameter.
+ * @param {(arg: Parameter<T10>) => T11} fn10 - 10th function that receives return value of 9th function as its parameter.
+ * @param {(arg: Parameter<T11>) => T12} fn11 - 11th function that receives return value of 10th function as its parameter.
+ * @param {(arg: Parameter<T12>) => T13} fn12 - 12th function that receives return value of 11th function as its parameter.
+ * @param {(arg: Parameter<T13>) => T14} fn13 - 13th function that receives return value of 12th function as its parameter.
+ * @param {(arg: Parameter<T14>) => T15} fn14 - 14th function that receives return value of 13th function as its parameter.
+ * @param {(arg: Parameter<T15>) => T16} fn15 - 15th function that receives return value of 14th function as its parameter.
+ * @param {(arg: Parameter<T16>) => T17} fn16 - 16th function that receives return value of 15th function as its parameter.
+ * @param {(arg: Parameter<T17>) => T18} fn17 - 17th function that receives return value of 16th function as its parameter.
+ * @param {(arg: Parameter<T18>) => T19} fn18 - 18th function that receives return value of 17th function as its parameter.
+ * @returns {(initial: I) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19]>} A processed value - return value of 18th function.
  *
  * @example
  * function toString(value: unknown) {
@@ -2448,49 +2102,28 @@ function pipeLazy<
  * const mapKeyResult = await pipedMapKeys({ a: 1, b: 2 });
  * console.log(mapKeyResult); // { a1: 1, b2: 2 }
  */
-function pipeLazy<
-  F1 extends (args: any) => any,
-  F2 extends NextFunction<F1>,
-  F3 extends NextFunction<F2>,
-  F4 extends NextFunction<F3>,
-  F5 extends NextFunction<F4>,
-  F6 extends NextFunction<F5>,
-  F7 extends NextFunction<F6>,
-  F8 extends NextFunction<F7>,
-  F9 extends NextFunction<F8>,
-  F10 extends NextFunction<F9>,
-  F11 extends NextFunction<F10>,
-  F12 extends NextFunction<F11>,
-  F13 extends NextFunction<F12>,
-  F14 extends NextFunction<F13>,
-  F15 extends NextFunction<F14>,
-  F16 extends NextFunction<F15>,
-  F17 extends NextFunction<F16>,
-  F18 extends NextFunction<F17>,
->(
-  fn1: F1,
-  fn2: F2,
-  fn3: F3,
-  fn4: F4,
-  fn5: F5,
-  fn6: F6,
-  fn7: F7,
-  fn8: F8,
-  fn9: F9,
-  fn10: F10,
-  fn11: F11,
-  fn12: F12,
-  fn13: F13,
-  fn14: F14,
-  fn15: F15,
-  fn16: F16,
-  fn17: F17,
-  fn18: F18
-): (
-  initial: Parameters<F1>[0]
-) => PipeReturnType<
-  [Parameters<F1>[0], F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17, F18]
->;
+function pipeLazy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(
+  fn1: (arg: Parameter<T1>) => T2,
+  fn2: (arg: Parameter<T2>) => T3,
+  fn3: (arg: Parameter<T3>) => T4,
+  fn4: (arg: Parameter<T4>) => T5,
+  fn5: (arg: Parameter<T5>) => T6,
+  fn6: (arg: Parameter<T6>) => T7,
+  fn7: (arg: Parameter<T7>) => T8,
+  fn8: (arg: Parameter<T8>) => T9,
+  fn9: (arg: Parameter<T9>) => T10,
+  fn10: (arg: Parameter<T10>) => T11,
+  fn11: (arg: Parameter<T11>) => T12,
+  fn12: (arg: Parameter<T12>) => T13,
+  fn13: (arg: Parameter<T13>) => T14,
+  fn14: (arg: Parameter<T14>) => T15,
+  fn15: (arg: Parameter<T15>) => T16,
+  fn16: (arg: Parameter<T16>) => T17,
+  fn17: (arg: Parameter<T17>) => T18,
+  fn18: (arg: Parameter<T18>) => T19
+): <I extends T1 | Promise<T1>>(
+  initial: I
+) => PipeReturnType<[I, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19]>;
 
 function pipeLazy(...functions: Array<(arg: any) => any>) {
   return (initial: any) => {

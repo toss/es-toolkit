@@ -42,10 +42,10 @@ describe('pipe', () => {
       };
     };
 
-    const curriedMapValue = <T extends Record<string, any>, R>(mapper: (value: T[string]) => R) => {
+    const curriedMapValue = <T extends Record<string, unknown>, R>(mapper: (value: T[keyof T]) => R) => {
       return (obj: T) => {
         for (const key of Object.keys(obj)) {
-          (obj as any)[key] = mapper(obj[key]);
+          (obj as any)[key] = mapper(obj[key] as any);
         }
 
         return obj;
