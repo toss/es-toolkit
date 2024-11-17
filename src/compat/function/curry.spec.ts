@@ -91,6 +91,13 @@ describe('curry', () => {
 
     // @ts-expect-error - curried is a constructor
     expect(new curried(true)).toBe(object);
+
+    function Bar(a: unknown, b: unknown, object: unknown) {
+      return a && b && object;
+    }
+
+    const curriedBar = curry(Bar);
+    expect(new (curriedBar(true)(true))(object)).toBe(object);
   });
 
   it('should use `this` binding of function', () => {
