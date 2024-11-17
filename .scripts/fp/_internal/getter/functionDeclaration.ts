@@ -1,3 +1,4 @@
+import { CommentKind } from 'ast-types/gen/kinds';
 import {
   FunctionDeclaration,
   Identifier,
@@ -25,8 +26,11 @@ export function getFunctionDeclaration(
   j: JSCodeshift
 ) {
   const newFunctionDeclaration = j.template.statement([
-    `export function ${functionName}(${params.name.join(', ')});\n`,
+    `
+    export function ${functionName}(${params.name.join(', ')});\n\n
+  `,
   ]) as {
+    comments?: CommentKind[];
     declaration: Omit<FunctionDeclaration, 'params'> & {
       params: Identifier[];
     };

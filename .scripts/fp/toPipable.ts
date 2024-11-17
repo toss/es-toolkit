@@ -17,6 +17,7 @@ export default function transformer(file: FileInfo, api: API) {
   return j(file.source)
     .find(j.ExportNamedDeclaration)
     .forEach(path => {
+      const comments = [...(path.value.comments ?? [])];
       const functionDeclaration = path.value.declaration;
 
       if (!isValidFunctionDeclaration(functionDeclaration)) {
@@ -97,6 +98,8 @@ export default function transformer(file: FileInfo, api: API) {
         j
       );
 
+      nonCurriedDeclaration.comments = [j.commentBlock(comments[0].value, true)];
+
       const returnOfCurried = j.tsFunctionType([getTypedParam(originParams.first, j)]);
       returnOfCurried.typeAnnotation = functionDeclaration.returnType as TSTypeAnnotation;
 
@@ -112,6 +115,10 @@ export default function transformer(file: FileInfo, api: API) {
         },
         j
       );
+
+      curriedDeclaration.comments = [j.commentBlock(comments[0].value, true)];
+
+      path.value.comments = null;
 
       functionDeclaration.returnType = undefined;
 
