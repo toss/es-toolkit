@@ -8,7 +8,7 @@
  * @template F The type of the function to partially apply.
  * @param {F} func The function to partially apply arguments to.
  * @param {any[]} partialArgs The arguments to be partially applied.
- * @returns {F} Returns the new partially applied function.
+ * @returns {(...args: any[]) => ReturnType<F>} Returns the new partially applied function.
  *
  * @example
  * function greet(greeting, name) {
@@ -24,7 +24,10 @@
  * sayHelloTo('fred');
  * // => 'hello fred'
  */
-export function partialRight<F extends (...args: any[]) => any>(func: F, ...partialArgs: any[]): F {
+export function partialRight<F extends (...args: any[]) => any>(
+  func: F,
+  ...partialArgs: any[]
+): (...args: any[]) => ReturnType<F> {
   return function (this: any, ...providedArgs: any[]) {
     const placeholderLength = partialArgs.filter(arg => arg === partialRightPlaceholder).length;
     const rangeLength = Math.max(providedArgs.length - placeholderLength, 0);

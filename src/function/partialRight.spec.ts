@@ -14,7 +14,7 @@ describe('partialRight', () => {
   });
 
   it('partialRight creates a function that can be invoked with additional arguments', () => {
-    const fn = function (a?: string, b?: string) {
+    const fn = function (a: string, b: string) {
       return [a, b];
     };
     const par = partialRight(fn, 'a');
@@ -71,7 +71,7 @@ describe('partialRight', () => {
   });
 
   it('partialRight clones metadata for created functions', () => {
-    function greet(greeting?: string, name?: string) {
+    function greet(greeting: string, name: string) {
       return `${greeting} ${name}`;
     }
 
