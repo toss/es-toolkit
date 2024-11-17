@@ -10,9 +10,9 @@ describe('dropWhile', () => {
   const array = [1, 2, 3, 4];
 
   const objects = [
-    { a: 2, b: 2 },
-    { a: 1, b: 1 },
-    { a: 0, b: 0 },
+    { a: 2, b: 2, 0: 2, [Symbol.for('a')]: 2 },
+    { a: 1, b: 1, 0: 1, [Symbol.for('a')]: 1 },
+    { a: 0, b: 0, 0: 0, [Symbol.for('a')]: 0 },
   ];
 
   it('should drop elements while `predicate` returns truthy', function () {
@@ -40,10 +40,14 @@ describe('dropWhile', () => {
 
   it('should work with `_.matchesProperty` shorthands', function () {
     expect(dropWhile(objects, ['b', 2])).toEqual(objects.slice(1));
+    expect(dropWhile(objects, [0, 2])).toEqual(objects.slice(1));
+    expect(dropWhile(objects, [Symbol.for('a'), 2])).toEqual(objects.slice(1));
   });
 
   it('should work with `_.property` shorthands', function () {
     expect(dropWhile(objects, 'b')).toEqual(objects.slice(2));
+    expect(dropWhile(objects, 0)).toEqual(objects.slice(2));
+    expect(dropWhile(objects, Symbol.for('a'))).toEqual(objects.slice(2));
   });
 
   it('should return an empty array when the collection is null or undefined', () => {

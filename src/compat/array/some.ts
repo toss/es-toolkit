@@ -52,14 +52,14 @@ export function some<T>(arr: ArrayLike<T> | null | undefined, predicate: [keyof 
  *
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr The array to iterate over.
- * @param {string} propertyToCheck The property name to check.
+ * @param {PropertyKey} propertyToCheck The property name to check.
  * @returns {boolean} Returns `true` if any element has a truthy value for the property, else `false`.
  *
  * @example
  * some([{ a: 1 }, { a: 2 }, { a: 3 }], 'a');
  * // => true
  */
-export function some<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: string): boolean;
+export function some<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: PropertyKey): boolean;
 
 /**
  * Checks if there is an element in an array that matches the given partial object.
@@ -141,11 +141,11 @@ export function some<T extends Record<string, unknown>>(
 ): boolean;
 
 /**
- * Checks if there is an element in an object that has a specific property, where the property name is provided as a string.
+ * Checks if there is an element in an object that has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
  * @param {T | null | undefined} object The object to iterate over.
- * @param {string} propertyToCheck The property name to check.
+ * @param {PropertyKey} propertyToCheck The property name to check.
  * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
  *
  * @example
@@ -153,7 +153,10 @@ export function some<T extends Record<string, unknown>>(
  * const result = some(obj, 'name');
  * // => true
  */
-export function some<T extends Record<string, unknown>>(object: T | null | undefined, propertyToCheck: string): boolean;
+export function some<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  propertyToCheck: PropertyKey
+): boolean;
 /**
  * Checks if there is an element in an array that matches the given predicate.
  *
@@ -161,7 +164,7 @@ export function some<T extends Record<string, unknown>>(object: T | null | undef
  *
  * @template T
  * @param {ArrayLike<T> | Record<string, any> | null | undefined} source The source to iterate over.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} [predicate=identity] The function invoked per iteration.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} [predicate=identity] The function invoked per iteration.
  * If a property name or an object is provided it will be used to create a predicate function.
  * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
  *
@@ -192,7 +195,7 @@ export function some<T extends Record<string, unknown>>(object: T | null | undef
  */
 export function some<T>(
   source: ArrayLike<T> | Record<any, any> | null | undefined,
-  predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
+  predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
   guard?: unknown
 ): boolean {
   if (!source) {
@@ -236,6 +239,8 @@ export function some<T>(
         return values.some(matches(predicate));
       }
     }
+    case 'number':
+    case 'symbol':
     case 'string': {
       return values.some(property(predicate));
     }
