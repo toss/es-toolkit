@@ -22,7 +22,7 @@ function every<T>(arr: T[]): boolean;
 function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
 function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
 function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: string): boolean;
+function every<T>(arr: T[], doesMatch: PropertyKey): boolean;
 
 function every<T extends Record<string, unknown>>(
   object: T,
@@ -30,7 +30,7 @@ function every<T extends Record<string, unknown>>(
 ): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: string): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): boolean;
 ```
 
 ### 파라미터
@@ -61,13 +61,13 @@ lodash와 완벽하게 호환되도록 `every` 함수는 `object`를 다음과 �
     - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 모든 요소가 조건을 만족하는지 확인하는 함수.
     - **부분 객체** (`Partial<T>`): 모든 요소가 주어진 부분 객체의 프로퍼티와 값에 일치해야 `true`를 반환하는 객체.
     - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플로, 모든 요소가 이 조건을 만족해야 `true`를 반환.
-    - **프로퍼티 이름** (`string`): 모든 요소가 해당 프로퍼티에 대해 참으로 평가되는 값을 가져야 `true`를 반환.
+    - **프로퍼티 이름** (`PropertyKey`): 모든 요소가 해당 프로퍼티에 대해 참으로 평가되는 값을 가져야 `true`를 반환.
 
   - 객체의 경우:
     - **검사 함수** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 모든 요소가 조건을 만족하는지 확인하는 함수.
     - **Partial value** (`Partial<T[keyof T]>`): 모든 요소가 주어진 부분 값에 일치해야 `true`를 반환하는 객체.
     - **Property-value pair** (`[keyof T[keyof T], unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플로, 모든 요소가 이 조건을 만족해야 `true`를 반환.
-    - **Property name** (`string`): 모든 요소가 해당 프로퍼티에 대해 참으로 평가되는 값을 가져야 `true`를 반환.
+    - **Property name** (`PropertyKey`): 모든 요소가 해당 프로퍼티에 대해 참으로 평가되는 값을 가져야 `true`를 반환.
 
 ### 반환 값
 

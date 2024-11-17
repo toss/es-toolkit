@@ -15,9 +15,26 @@
  * const matches = 'camelCaseHTTPRequest🚀'.match(CASE_SPLIT_PATTERN);
  * // matches: ['camel', 'Case', 'HTTP', 'Request', '🚀']
  */
-const CASE_SPLIT_PATTERN =
+export const CASE_SPLIT_PATTERN =
   /\p{Lu}?\p{Ll}+|[0-9]+|\p{Lu}+(?!\p{Ll})|\p{Emoji_Presentation}|\p{Extended_Pictographic}|\p{L}+/gu;
 
-export function getWords(str: string): string[] {
+/**
+ * Splits `string` into an array of its words, treating spaces and punctuation marks as separators.
+ *
+ * @param {string} str The string to inspect.
+ * @param {RegExp | string} [pattern] The pattern to match words.
+ * @returns {string[]} Returns the words of `string`.
+ *
+ * @example
+ * words('fred, barney, & pebbles');
+ * // => ['fred', 'barney', 'pebbles']
+ *
+ * words('camelCaseHTTPRequest🚀');
+ * // => ['camel', 'Case', 'HTTP', 'Request', '🚀']
+ *
+ * words('Lunedì 18 Set')
+ * // => ['Lunedì', '18', 'Set']
+ */
+export function words(str: string): string[] {
   return Array.from(str.match(CASE_SPLIT_PATTERN) ?? []);
 }

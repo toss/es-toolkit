@@ -104,7 +104,7 @@ export function forEach<T>(
  * Iterates over each element of the object invoking the provided callback function for each property.
  *
  * @template T - The type of object.
- * @param {T} object - The object to iterate over
+ * @param {T} object - The object to iterate over.
  * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} [callback] - The function invoked for each property.
  * The callback function receives three arguments:
  *  - 'value': The current property being processed in the object.
@@ -123,6 +123,24 @@ export function forEach<T extends object | null | undefined>(
   callback?: (value: T[keyof T], key: keyof T, object: T) => unknown
 ): T;
 
+/**
+ * Iterates over each element of the object invoking the provided callback function for each property.
+ *
+ * @template T - The type of object.
+ * @param {T} object - The object to iterate over.
+ * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} [callback] - The function invoked for each property.
+ * The callback function receives three arguments:
+ *  - 'value': The current property being processed in the object.
+ *  - 'key': The key of the current property being processed in the object.
+ *  - 'object': The object 'forEach' was called upon.
+ * @returns {T} Returns the original object.
+ *
+ * @example
+ * forEach({'a': 1, 'b': 2 }, (value, key, object) => console.log(value, key));
+ * // Output:
+ * // 1 'a'
+ * // 2 'b'
+ */
 export function forEach<T>(
   collection: ArrayLike<T> | Record<any, any> | string | null | undefined,
   callback: (item: any, index: any, arr: any) => unknown = identity

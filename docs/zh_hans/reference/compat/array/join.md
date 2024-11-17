@@ -42,7 +42,3 @@ const arr = ["a","b","c"];
 const result = join(arr, "~");
 console.log(result); // Output: "a~b~c"
 ````
-
-```
-
-```

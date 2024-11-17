@@ -30,7 +30,7 @@ export function trimEnd(str: string, chars?: string | string[], guard?: unknown)
       if (Array.isArray(chars)) {
         return trimEndToolkit(
           str,
-          chars.map(x => x.toString())
+          chars.flatMap(x => x.toString().split(''))
         );
       } else {
         return trimEndToolkit(str, (chars as any).toString().split(''));
