@@ -2,10 +2,15 @@ import { bench, describe } from 'vitest';
 import { cloneDeep as cloneDeepToolkit_ } from 'es-toolkit';
 import { cloneDeep as cloneDeepCompatToolkit_ } from 'es-toolkit/compat';
 import { cloneDeep as cloneDeepLodash_ } from 'lodash';
+import rfdc_ from 'rfdc';
 
 const cloneDeepToolkit = cloneDeepToolkit_;
 const cloneDeepCompatToolkit = cloneDeepCompatToolkit_;
 const cloneDeepLodash = cloneDeepLodash_;
+const rfdcWithCircle = rfdc_({
+  circles: true,
+});
+const rfdc = rfdc_();
 
 const obj = {
   number: 29,
@@ -41,5 +46,13 @@ describe('cloneDeep', () => {
 
   bench('node/structuredClone', () => {
     structuredClone(obj);
+  });
+
+  bench('rfdc without circle', () => {
+    rfdc(obj);
+  });
+
+  bench('rfdc with circle', () => {
+    rfdcWithCircle(obj);
   });
 });

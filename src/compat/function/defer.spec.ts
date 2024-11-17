@@ -34,4 +34,8 @@ describe('defer', () => {
       done();
     }, 32);
   });
+
+  it('should throw an error if `func` is not a function', () => {
+    expect(() => defer(1 as any)).toThrow();
+  });
 });

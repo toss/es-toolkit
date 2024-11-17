@@ -25,7 +25,7 @@ function findLastIndex<T>(
 ): number;
 function findLastIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
 function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
+function findLastIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
 ```
 
 ### 파라미터
@@ -46,7 +46,7 @@ lodash와 완전히 호환되도록 `findLastIndex` 함수는 `arr`를 다음과
   - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
   - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
   - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-  - **프로퍼티 이름** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+  - **프로퍼티 이름** (`PropertyKey`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
 
 - `fromIndex` (`number`): 검색을 시작할 인덱스. 기본값은 배열의 마지막 인덱스 (`arr.length - 1`).
 

@@ -3378,6 +3378,7 @@ __metadata:
     esbuild: "npm:0.23.0"
     lodash: "npm:^4.17.21"
     lodash-es: "npm:^4.17.21"
+    rfdc: "npm:^1.4.1"
     vitest: "npm:^2.1.2"
   languageName: unknown
   linkType: soft

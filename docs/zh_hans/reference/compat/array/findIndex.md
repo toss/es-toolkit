@@ -22,7 +22,7 @@
 function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
 function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
 function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
 ```
 
 ### 参数
@@ -43,7 +43,7 @@ function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
   - **谓词函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个函数，接受项、其索引和数组，如果项符合条件则返回真值。
   - **部分对象** (`Partial<T>`): 指定要匹配的属性的部分对象。
   - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
-  - **属性名称** (`string`): 要检查其真值的属性名称。
+  - **属性名称** (`PropertyKey`): 要检查其真值的属性名称。
 
 - `fromIndex` (`number`): 搜索开始的位置。默认为 `0`。
 
