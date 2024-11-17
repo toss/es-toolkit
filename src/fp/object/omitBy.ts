@@ -1,3 +1,5 @@
+import { omitBy as omitByToolkit } from '../../object/omitBy';
+
 export function omitBy<T extends Record<string, any>>(
   obj: T,
   shouldOmit: (value: T[keyof T], key: keyof T) => boolean
@@ -20,7 +22,7 @@ export function omitBy<T extends Record<string, any>>(
  *
  * @example
  * const obj = { a: 1, b: 'omit', c: 3 };
- * const shouldOmit = (key, value) => typeof value === 'string';
+ * const shouldOmit = (value) => typeof value === 'string';
  * const result = omitBy(obj, shouldOmit);
  * // result will be { a: 1, c: 3 }
  */
@@ -33,15 +35,5 @@ export function omitBy<T extends Record<string, any>>(
   }
 
   const obj = objOrShouldOmit as T;
-  const result: Partial<T> = {};
-
-  for (const [key, value] of Object.entries(obj)) {
-    if (shouldOmit(value, key)) {
-      continue;
-    }
-
-    (result as any)[key] = value;
-  }
-
-  return result;
+  return omitByToolkit(obj, shouldOmit);
 }

@@ -1,5 +1,7 @@
-export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
-export function omit<T extends Record<string, any>, K extends keyof T>(keys: K[]): (obj: T) => Omit<T, K>;
+import { omit as omitToolkit } from '../../object/omit';
+
+export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: readonly K[]): Omit<T, K>;
+export function omit<T extends Record<string, any>, K extends keyof T>(keys: readonly K[]): (obj: T) => Omit<T, K>;
 /**
  * Creates a new object with specified keys omitted.
  *
@@ -17,17 +19,14 @@ export function omit<T extends Record<string, any>, K extends keyof T>(keys: K[]
  * const result = omit(obj, ['b', 'c']);
  * // result will be { a: 1 }
  */
-export function omit<T extends Record<string, any>, K extends keyof T>(objOrKeys: T | K[], keys?: K[]) {
+export function omit<T extends Record<string, any>, K extends keyof T>(
+  objOrKeys: T | readonly K[],
+  keys?: readonly K[]
+) {
   if (keys == null) {
-    return (obj: T) => omit(obj, objOrKeys as K[]);
+    return (obj: T) => omit(obj, objOrKeys as readonly K[]);
   }
 
   const obj = objOrKeys as T;
-  const result = { ...obj };
-
-  for (const key of keys) {
-    delete result[key];
-  }
-
-  return result as Omit<T, K>;
+  return omitToolkit(obj, keys);
 }

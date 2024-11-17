@@ -1,15 +1,18 @@
-import { API, FileInfo, TSTypeAnnotation } from 'jscodeshift';
 import { TSTypeKind } from 'ast-types/gen/kinds';
+import { API, FileInfo, TSTypeAnnotation } from 'jscodeshift';
+import { getFunctionDeclaration } from './_internal/getter/functionDeclaration';
+import { getTypedParam } from './_internal/getter/typedParam';
+import { Param } from './_internal/types';
 import { isValidFunctionDeclaration } from './_internal/validator/functionDeclaration';
 import { isValidParams } from './_internal/validator/params';
-import { Param } from './_internal/types';
-import { getTypedParam } from './_internal/getter/typedParam';
-import { getFunctionDeclaration } from './_internal/getter/functionDeclaration';
 
 export const parser = 'tsx';
 
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
+
+  const categoryRegResult = /fp\/([a-z]+)/.exec(file.path);
+  const category = categoryRegResult ? categoryRegResult[1] : '';
 
   return j(file.source)
     .find(j.ExportNamedDeclaration)
@@ -21,7 +24,6 @@ export default function transformer(file: FileInfo, api: API) {
       }
 
       const functionName = functionDeclaration.id.name;
-      const functionBody = functionDeclaration.body;
 
       const params = functionDeclaration.params;
 
@@ -67,13 +69,20 @@ export default function transformer(file: FileInfo, api: API) {
         ]),
       ]);
 
+      const referrerCallStatement = j.returnStatement(
+        j.callExpression(j.identifier(`${functionName}Toolkit`), [
+          j.identifier(originParams.first.name),
+          j.identifier(originParams.second.name),
+        ])
+      );
+
       params[0].name = newFirstArgumentName;
       params[0].typeAnnotation = j.tsTypeAnnotation(
         j.tsUnionType([originParams.first.type, originParams.second.type].map(j.tsParenthesizedType))
       );
       params[1].name = `${originParams.second.name}?`;
 
-      functionDeclaration.body = j.blockStatement([...curringConditionalStatement.body, ...functionBody.body]);
+      functionDeclaration.body = j.blockStatement([...curringConditionalStatement.body, referrerCallStatement]);
 
       const nonCurriedDeclaration = getFunctionDeclaration(
         {
@@ -106,6 +115,12 @@ export default function transformer(file: FileInfo, api: API) {
 
       functionDeclaration.returnType = undefined;
 
+      const referrerImportDeclaration = j.importDeclaration(
+        [j.importSpecifier(j.identifier(functionName), j.identifier(`${functionName}Toolkit`))],
+        j.literal(`../../${category}/${functionName}`)
+      );
+
+      j(path).insertBefore(referrerImportDeclaration);
       j(path).insertBefore(nonCurriedDeclaration);
       j(path).insertBefore(curriedDeclaration);
     })

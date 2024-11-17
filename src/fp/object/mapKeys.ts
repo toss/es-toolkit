@@ -1,3 +1,5 @@
+import { mapKeys as mapKeysToolkit } from '../../object/mapKeys';
+
 export function mapKeys<T extends object, K1 extends keyof T, K2 extends PropertyKey>(
   object: T,
   getNewKey: (value: T[K1], key: K1, object: T) => K2
@@ -32,15 +34,5 @@ export function mapKeys<T extends object, K1 extends keyof T, K2 extends Propert
   }
 
   const object = objectOrGetNewKey as T;
-  const result = {} as Record<K2, T[K1]>;
-  const keys = Object.keys(object);
-
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i] as K1;
-    const value = object[key];
-
-    result[getNewKey(value, key, object)] = value as any;
-  }
-
-  return result;
+  return mapKeysToolkit(object, getNewKey);
 }
