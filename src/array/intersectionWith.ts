@@ -20,6 +20,17 @@
  * const areItemsEqual = (a, b) => a.id === b.id;
  * const result = intersectionWith(array1, array2, areItemsEqual);
  * // result will be [{ id: 2 }] since this element has a matching id in both arrays.
+ *
+ * @example
+ * const array1 = [
+ *   { id: 1, name: 'jane' },
+ *   { id: 2, name: 'amy' },
+ *   { id: 3, name: 'michael' },
+ * ];
+ * const array2 = [2, 4];
+ * const areItemsEqual = (a, b) => a.id === b;
+ * const result = intersectionWith(array1, array2, areItemsEqual);
+ * // result will be [{ id: 2, name: 'amy' }] since this element has a matching id that is equal to seconds array's element.
  */
 export function intersectionWith<T, U>(
   firstArr: readonly T[],
