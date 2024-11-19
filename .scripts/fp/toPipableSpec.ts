@@ -14,17 +14,10 @@ export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
 
   const categoryRegResult = /fp\/([a-zA-Z]+)\/([a-zA-Z]+)/.exec(file.path);
-  const category = categoryRegResult ? categoryRegResult[1] : '';
   const fileName = categoryRegResult ? categoryRegResult[2] : '';
 
   j.FunctionDeclaration;
   const firstTouched = j(file.source)
-    .find(j.CallExpression, node => n.Identifier.check(node.callee) && node.callee.name === 'describe')
-    .forEach(path => {
-      if (n.StringLiteral.check(path.value.arguments[0])) {
-        path.value.arguments[0].value = `${path.value.arguments[0].value}/fp`;
-      }
-    })
     .find(j.ExpressionStatement, node => {
       return (
         n.CallExpression.check(node.expression) &&

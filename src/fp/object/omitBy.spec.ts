@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { omitBy } from './omitBy';
 
-describe('omitBy/fp', () => {
+describe('omitBy', () => {
   it('(non-curried) should omit properties based on the predicate function', () => {
     const obj = { a: 1, b: 'omit', c: 3 };
     const shouldOmit = (value: number | string) => typeof value === 'string';
