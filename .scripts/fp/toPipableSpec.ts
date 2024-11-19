@@ -58,8 +58,6 @@ export default function transformer(file: FileInfo, api: API) {
         .forEach(omitCall => {
           const [firstParameter, secondParameter] = omitCall.value.arguments;
 
-          console.log(firstParameter);
-
           omitCall.value.arguments = [secondParameter];
           const curried = j.callExpression(omitCall.value, [firstParameter]);
           omitCall.replace(curried);
