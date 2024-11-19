@@ -32,7 +32,6 @@ export function difference<T>(firstArr: readonly T[], secondArr: readonly T[]): 
  * filters out any elements from the first array that also appear in the second array.
  *
  * @template T
- * from which elements will be compared and filtered.
  * @param {T[]} secondArr - The array containing elements to be excluded from the first array.
  * Each element in this array will be checked against the first array, and if a match is found,
  * that element will be excluded from the result.
