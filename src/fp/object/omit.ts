@@ -32,7 +32,7 @@ export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, k
  *
  * @example
  * const obj = { a: 1, b: 2, c: 3 };
- * const result = omit(obj, ['b', 'c']);
+ * const result = omit(['b', 'c'])(obj);
  * // result will be { a: 1 }
  */
 export function omit<T extends Record<string, any>, K extends keyof T>(keys: readonly K[]): (obj: T) => Omit<T, K>;

@@ -18,6 +18,7 @@ export default function transformer(file: FileInfo, api: API) {
     .find(j.ExportNamedDeclaration)
     .forEach(path => {
       const comments = [...(path.value.comments ?? [])];
+      const comment = comments[0].value;
       const functionDeclaration = path.value.declaration;
 
       if (!isValidFunctionDeclaration(functionDeclaration)) {
@@ -116,22 +117,35 @@ export default function transformer(file: FileInfo, api: API) {
         j
       );
 
-      const firstParamLine = comments[0].value.split('\n').find(line => line.startsWith(' * @param')) ?? '';
-
-      // if(firstParamLine === undefined) {
-      // } else {
-      // }
+      const firstParamLine = comment.split('\n').find(line => line.startsWith(' * @param')) ?? '';
 
       const firstParamRegResult = /{([^}]+)} ([^\s]+)/.exec(firstParamLine);
 
       if (firstParamRegResult == null) {
-        curriedDeclaration.comments = [j.commentBlock(comments[0].value, true)];
+        curriedDeclaration.comments = [j.commentBlock(comment, true)];
       } else {
         const [_, typeName, paramName] = firstParamRegResult;
 
+        const exampleComments = comment.split('@example')[1];
+
+        const usageExampleLine = exampleComments
+          .split('\n')
+          .find(comment => new RegExp(`${functionName}\(.+\);`).test(comment));
+
+        const curriedComment =
+          usageExampleLine == null
+            ? comment
+            : comment.replace(
+                usageExampleLine,
+                usageExampleLine.replace(
+                  new RegExp(`${functionName}\\(([^,]+), (.+)\\);`),
+                  (_, firstParam, secondParam) => `${functionName}(${String(secondParam).trim()})(${firstParam});`
+                )
+              );
+
         curriedDeclaration.comments = [
           j.commentBlock(
-            comments[0].value.replace(`${firstParamLine}\n`, '').replace(
+            curriedComment.replace(`${firstParamLine}\n`, '').replace(
               /@returns {([^}]+)} (.+)/,
               (_, returnType, note) =>
                 `@returns {(${paramName}: ${typeName}) => ${returnType}} A function that receive ${firstParamLine

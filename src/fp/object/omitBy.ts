@@ -39,7 +39,7 @@ export function omitBy<T extends Record<string, any>>(
  * @example
  * const obj = { a: 1, b: 'omit', c: 3 };
  * const shouldOmit = (value) => typeof value === 'string';
- * const result = omitBy(obj, shouldOmit);
+ * const result = omitBy(shouldOmit)(obj);
  * // result will be { a: 1, c: 3 }
  */
 export function omitBy<T extends Record<string, any>>(
