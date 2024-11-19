@@ -14,6 +14,7 @@ export default function transformer(file: FileInfo, api: API) {
   const categoryRegResult = /fp\/([a-z]+)/.exec(file.path);
   const category = categoryRegResult ? categoryRegResult[1] : '';
 
+  j.FunctionDeclaration;
   return j(file.source)
     .find(j.ExportNamedDeclaration)
     .forEach(path => {
