@@ -31,7 +31,7 @@ export function at<T>(arr: readonly T[], indices: number[]): Array<T | undefined
  * const result = at([1, 3, 4])(numbers);
  * console.log(result); // [20, 40, 50]
  */
-export function at(indices: number[]): <T>(arr: readonly T[]) => Array<T | undefined>;
+export function at<T>(indices: number[]): (arr: readonly T[]) => Array<T | undefined>;
 
 export function at<T>(arrOrIndices: readonly T[] | number[], indices?: number[]) {
   if (indices == null) {

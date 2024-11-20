@@ -17,7 +17,7 @@ describe('countBy', () => {
 
   it('(curried) should count the occurrences of each item in an array', () => {
     const arr = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
-    const result = countBy(String)(arr);
+    const result = countBy<number>(String)(arr);
 
     expect(result).toEqual({
       '1': 2,
@@ -40,7 +40,7 @@ describe('countBy', () => {
 
   it('(curried) should count the occurrences of each item in an array that applied transformer', () => {
     const arr = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
-    const result = countBy((item: number) => (item % 2 === 0 ? 'even' : 'odd'))(arr);
+    const result = countBy<number>(item => (item % 2 === 0 ? 'even' : 'odd'))(arr);
 
     expect(result).toEqual({
       odd: 6,

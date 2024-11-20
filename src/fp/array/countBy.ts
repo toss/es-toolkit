@@ -55,7 +55,9 @@ export function countBy<T, K extends PropertyKey>(arr: readonly T[], mapper: (it
  * const result = countBy(array, item => item % 2 === 0 ? 'even' : 'odd');
  * // result will be { odd: 3, even: 2 }
  */
-export function countBy<T, K extends PropertyKey>(mapper: (item: T) => K): (arr: readonly T[]) => Record<K, number>;
+export function countBy<T, K extends PropertyKey = PropertyKey>(
+  mapper: (item: T) => K
+): (arr: readonly T[]) => Record<K, number>;
 
 export function countBy<T, K extends PropertyKey>(
   arrOrMapper: readonly T[] | ((item: T) => K),

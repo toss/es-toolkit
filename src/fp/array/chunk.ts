@@ -47,7 +47,7 @@ export function chunk<T>(arr: readonly T[], size: number): T[][];
  * chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
  * // Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
  */
-export function chunk(size: number): <T>(arr: readonly T[]) => T[][];
+export function chunk<T>(size: number): (arr: readonly T[]) => T[][];
 
 export function chunk<T>(arrOrSize: readonly T[] | number, size?: number) {
   if (size == null) {

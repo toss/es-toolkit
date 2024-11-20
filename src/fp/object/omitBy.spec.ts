@@ -54,7 +54,7 @@ describe('omitBy', () => {
   it('(curried) should work with an empty object', () => {
     const obj = {};
     const shouldOmit = (value: never) => value;
-    const result = omitBy(shouldOmit)(obj);
+    const result = omitBy<{}>(shouldOmit)(obj);
     expect(result).toEqual({});
   });
 
@@ -68,7 +68,7 @@ describe('omitBy', () => {
   it('(curried) should work with nested objects', () => {
     const obj = { a: 1, b: { nested: 'omit' }, c: 3 };
     const shouldOmit = (_: number | { nested: string }, key: string) => key === 'b';
-    const result = omitBy(shouldOmit)(obj);
+    const result = omitBy<typeof obj>(shouldOmit)(obj);
     expect(result).toEqual({ a: 1, c: 3 });
   });
 });
