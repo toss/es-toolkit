@@ -7,14 +7,14 @@
 ## インターフェース
 
 ```typescript
-function differenceWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[];
+function differenceWith<T, U>(firstArr: T[], secondArr: U[], areItemsEqual: (x: T, y: U) => boolean): T[];
 ```
 
 ### パラメータ
 
 - `firstArr` (`T[]`): 差分を計算する配列です。この配列が主な配列で、この配列の要素が比較されフィルタリングされます。
-- `secondArr` (`T[]`): 最初の配列から除外する要素を含む配列です。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 2つの要素が同じかどうかを決定する関数です。
+- `secondArr` (`U[]`): 最初の配列から除外する要素を含む配列です。
+- `areItemsEqual` (`(x: T, y: U) => boolean`): 2つの要素が同じかどうかを決定する関数です。
 
 ### 戻り値
 
@@ -30,4 +30,10 @@ const array2 = [{ id: 2 }, { id: 4 }];
 const areItemsEqual = (a, b) => a.id === b.id;
 const result = differenceWith(array1, array2, areItemsEqual);
 // resultは[{ id: 1 }, { id: 3 }]になります。idが2の要素は同じと見なされ、結果から除外されます。
+
+const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+const array2 = [2, 4];
+const areItemsEqual = (a, b) => a.id === b;
+const result = differenceWith(array1, array2, areItemsEqual);
+// resultは[{ id: 1 }, { id: 3 }]になります。idが2の要素は2番目の配列の要素と同じと見なされ、結果から除外されます。
 ```
