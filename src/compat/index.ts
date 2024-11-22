@@ -99,6 +99,8 @@ export { round } from './math/round.ts';
 export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
 
+export { assignIn } from './object/assignIn.ts';
+export { assignIn as extend } from './object/assignIn.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { defaults } from './object/defaults.ts';
 export { fromPairs } from './object/fromPairs.ts';
