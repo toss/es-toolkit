@@ -11,6 +11,27 @@ describe('differenceWith', () => {
     expect(differenceWith(array1, array2, (a, b) => a.id === b.id)).toEqual([{ id: 1 }, { id: 3 }]);
   });
 
+  it('should return the difference of two arrays with different element types using the `areItemsEqual` function', () => {
+    type CSV = { id: number; csv: number };
+    type JSON = { id: number; json: number };
+
+    const array1: CSV[] = [
+      { id: 1, csv: 1 },
+      { id: 2, csv: 1 },
+      { id: 3, csv: 1 },
+    ];
+    const array2: JSON[] = [
+      { id: 2, json: 2 },
+      { id: 4, json: 2 },
+    ];
+
+    const result = differenceWith(array1, array2, (a, b) => a.id === b.id);
+    expect(result).toEqual([
+      { id: 1, csv: 1 },
+      { id: 3, csv: 1 },
+    ]);
+  });
+
   it('should handle duplicate elements correctly', () => {
     expect(differenceWith([1, 1, 2, 2, 3], [2], (a, b) => a === b)).toEqual([1, 1, 3]);
   });

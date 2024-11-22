@@ -9,14 +9,14 @@
 ## 签名
 
 ```typescript
-function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[];
+function differenceBy<T, U>(firstArr: T[], secondArr: U[], mapper: (value: T | U) => unknown): T[];
 ```
 
 ### 参数
 
 - `firstArr` (`T[]`): 主要的数组，从中计算差异。
-- `secondArr` (`T[]`): 包含要从第一个数组中排除的元素的数组。
-- `mapper` (`(value: T) => U`): 用于映射两个数组元素的函数。该函数应用于两个数组中的每个元素，并基于映射后的值进行比较。
+- `secondArr` (`U[]`): 包含要从第一个数组中排除的元素的数组。
+- `mapper` (`(value: T | U) => unknown`): 用于映射两个数组元素的函数。该函数应用于两个数组中的每个元素，并基于映射后的值进行比较。
 
 ### 返回值
 
@@ -32,4 +32,10 @@ const array2 = [{ id: 2 }, { id: 4 }];
 const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
 // 结果将是 [{ id: 1 }, { id: 3 }, { id: 5 }] 因为具有 id 为 2 的元素在两个数组中都存在，所以它们被排除在结果之外。
+
+const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+const array2 = [2, 4];
+const mapper = item => (typeof item === 'object' ? item.id : item);
+const result = differenceBy(array1, array2, mapper);
+// 结果将是 [{ id: 1 }, { id: 3 }] 因为 2 在映射后存在于两个数组中，所以它被排除在结果之外。
 ```
