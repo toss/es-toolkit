@@ -4,12 +4,10 @@
 
 値がBufferの場合は`true`を返し、それ以外の場合は`false`を返します。
 
-この関数はTypeScriptで型述語としても機能し、引数の型を `Buffer` に狭めます。
-
 ## インターフェース
 
 ```typescript
-function isBuffer(x: unknown): x is Buffer;
+function isBuffer(x: unknown): boolean;
 ```
 
 ### パラメータ
@@ -18,8 +16,7 @@ function isBuffer(x: unknown): x is Buffer;
 
 ### 戻り値
 
-(`x is Buffer`): `x`がBufferの場合は`true`、それ以外の場合は`false`。
-数値配列。
+(`boolean`): `x`がBufferの場合は`true`、それ以外の場合は`false`。
 
 ## 例
 

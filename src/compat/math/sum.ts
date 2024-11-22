@@ -1,4 +1,4 @@
-import { sumBy } from './sumBy';
+import { sumBy } from './sumBy.ts';
 
 /**
  * Computes the sum of the `number` values in `array`.

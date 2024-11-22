@@ -5,12 +5,10 @@ Checks if the given value is a Buffer instance.
 This function tests whether the provided value is an instance of Buffer.
 It returns `true` if the value is a Buffer, and `false` otherwise.
 
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Buffer`.
-
 ## Signature
 
 ```typescript
-function isBuffer(x: unknown): x is Buffer;
+function isBuffer(x: unknown): boolean;
 ```
 
 ### Parameters
@@ -19,7 +17,7 @@ function isBuffer(x: unknown): x is Buffer;
 
 ### Returns
 
-(`x is Buffer`): Returns `true` if `x` is a Buffer, else `false`.
+(`boolean`): Returns `true` if `x` is a Buffer, else `false`.
 
 ## Examples
 

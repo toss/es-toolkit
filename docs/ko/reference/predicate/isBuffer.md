@@ -9,7 +9,7 @@ TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어�
 ## 인터페이스
 
 ```typescript
-function isBuffer(x: unknown): x is Buffer;
+function isBuffer(x: unknown): boolean;
 ```
 
 ### 파라미터
@@ -18,7 +18,7 @@ function isBuffer(x: unknown): x is Buffer;
 
 ### 반환 값
 
-(`x is Buffer`): `x`가 Buffer이면 `true`, 그렇지 않으면 `false`.
+(`boolean`): `x`가 Buffer이면 `true`, 그렇지 않으면 `false`.
 
 ## 예시
 

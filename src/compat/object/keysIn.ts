@@ -1,8 +1,8 @@
-import { isBuffer } from '../../predicate/isBuffer';
-import { isPrototype } from '../_internal/isPrototype';
-import { isArrayLike } from '../predicate/isArrayLike';
-import { isTypedArray } from '../predicate/isTypedArray';
-import { times } from '../util/times';
+import { isBuffer } from '../../predicate/isBuffer.ts';
+import { isPrototype } from '../_internal/isPrototype.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { isTypedArray } from '../predicate/isTypedArray.ts';
+import { times } from '../util/times.ts';
 
 /**
  * This function retrieves the names of string-keyed properties from an object, including those inherited from its prototype.

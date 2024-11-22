@@ -13,7 +13,7 @@ declare let Buffer:
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Buffer`.
  *
  * @param {unknown} x - The value to check if it is a Buffer.
- * @returns {x is Buffer} Returns `true` if `x` is a Buffer, else `false`.
+ * @returns {boolean} Returns `true` if `x` is a Buffer, else `false`.
  *
  * @example
  * const buffer = Buffer.from("test");
@@ -22,6 +22,7 @@ declare let Buffer:
  * const notBuffer = "not a buffer";
  * console.log(isBuffer(notBuffer)); // false
  */
-export function isBuffer(x: unknown): x is Buffer {
+export function isBuffer(x: unknown): boolean {
+  // @ts-ignore
   return typeof Buffer !== 'undefined' && Buffer.isBuffer(x);
 }

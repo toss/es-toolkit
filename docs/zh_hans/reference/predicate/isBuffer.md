@@ -4,12 +4,10 @@
 
 如果该值是 Buffer，则返回 `true`，否则返回 `false`。
 
-此函数也可以作为 TypeScript 中的类型谓词， 将参数的类型缩小为 `Buffer`。
-
 ## 签名
 
 ```typescript
-function isBuffer(x: unknown): x is Buffer;
+function isBuffer(x: unknown): boolean;
 ```
 
 ### 参数
@@ -18,7 +16,7 @@ function isBuffer(x: unknown): x is Buffer;
 
 ### 返回值
 
-(`x is Buffer`): 如果 `x` 是 Buffer 则返回 `true`，否则返回 `false`。
+(`boolean`): 如果 `x` 是 Buffer 则返回 `true`，否则返回 `false`。
 
 ## 示例
 
