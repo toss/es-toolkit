@@ -8,7 +8,7 @@
 
 将 `source` 对象的属性值分配给 `object`。它还包括从原型链继承的属性。
 
-在 `source` 和 `target` 中具有相同值的属性将不会被覆盖。
+在 `source` 和 `object` 中具有相同值的属性将不会被覆盖。
 
 它是 [assignIn](./assignIn.md) 的别名。
 

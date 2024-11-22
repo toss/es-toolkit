@@ -6,9 +6,9 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Assigns the property values from the `source` object to the `object`. It also includes properties inherited from the prototype chain.
+Assigns the property values from the `source` object to the `object` object. It also includes properties inherited from the prototype chain.
 
-Properties that have the same value in both `source` and `target` will not be overwritten.
+Properties that have the same value in both `source` and `object` will not be overwritten.
 
 It is an alias of [assignIn](./assignIn.md).
 

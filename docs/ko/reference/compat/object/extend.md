@@ -6,9 +6,9 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-`source`가 가지고 있는 프로퍼티 값들을 `object` 객체에 할당해요. 프로토타입에서 상속된 프로퍼티도 포함돼요.
+`source` 객체가 가지고 있는 프로퍼티 값들을 `object` 객체에 할당해요. 프로토타입에서 상속된 프로퍼티도 포함돼요.
 
-`source`와 `target`이 같은 값으로 가지고 있는 프로퍼티는 덮어쓰지 않아요.
+`source`와 `object`이 같은 값으로 가지고 있는 프로퍼티는 덮어쓰지 않아요.
 
 [assignIn](./assignIn.md)의 다른 이름이에요.
 
