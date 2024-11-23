@@ -14,6 +14,32 @@ interface DebounceOptions {
   edges?: Array<'leading' | 'trailing'>;
 }
 
+export interface DebouncedFunction<F extends (...args: any[]) => void> {
+  (...args: Parameters<F>): void;
+
+  /**
+   * Schedules the execution of the debounced function after the specified debounce delay.
+   * This method resets any existing timer, ensuring that the function is only invoked
+   * after the delay has elapsed since the last call to the debounced function.
+   * It is typically called internally whenever the debounced function is invoked.
+   *
+   * @returns {void}
+   */
+  schedule: () => void;
+
+  /**
+   * Cancels any pending execution of the debounced function.
+   * This method clears the active timer and resets any stored context or arguments.
+   */
+  cancel: () => void;
+
+  /**
+   * Immediately invokes the debounced function if there is a pending execution.
+   * This method also cancels the current timer, ensuring that the function executes right away.
+   */
+  flush: () => void;
+}
+
 /**
  * Creates a debounced function that delays invoking the provided function until after `debounceMs` milliseconds
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
@@ -53,29 +79,7 @@ export function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   { signal, edges }: DebounceOptions = {}
-): ((...args: Parameters<F>) => void) & {
-  /**
-   * Schedules the execution of the debounced function after the specified debounce delay.
-   * This method resets any existing timer, ensuring that the function is only invoked
-   * after the delay has elapsed since the last call to the debounced function.
-   * It is typically called internally whenever the debounced function is invoked.
-   *
-   * @returns {void}
-   */
-  schedule: () => void;
-
-  /**
-   * Cancels any pending execution of the debounced function.
-   * This method clears the active timer and resets any stored context or arguments.
-   */
-  cancel: () => void;
-
-  /**
-   * Immediately invokes the debounced function if there is a pending execution.
-   * This method also cancels the current timer, ensuring that the function executes right away.
-   */
-  flush: () => void;
-} {
+): DebouncedFunction<F> {
   let pendingThis: any = undefined;
   let pendingArgs: Parameters<F> | null = null;
 
