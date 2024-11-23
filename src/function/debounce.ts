@@ -14,7 +14,7 @@ interface DebounceOptions {
   edges?: Array<'leading' | 'trailing'>;
 }
 
-export interface DebouncedFunc<F extends (...args: any[]) => void> {
+export interface DebouncedFunction<F extends (...args: any[]) => void> {
   (...args: Parameters<F>): void;
 
   /**
@@ -79,7 +79,7 @@ export function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
   { signal, edges }: DebounceOptions = {}
-): DebouncedFunc<F> {
+): DebouncedFunction<F> {
   let pendingThis: any = undefined;
   let pendingArgs: Parameters<F> | null = null;
 

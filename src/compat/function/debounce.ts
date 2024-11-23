@@ -25,7 +25,7 @@ interface DebounceOptions {
   maxWait?: number;
 }
 
-export interface DebouncedFunc<F extends (...args: any[]) => any> {
+export interface DebouncedFunction<F extends (...args: any[]) => any> {
   (...args: Parameters<F>): ReturnType<F> | undefined;
   cancel(): void;
   flush(): void;
@@ -81,7 +81,7 @@ export function debounce<F extends (...args: any[]) => any>(
   func: F,
   debounceMs = 0,
   options: DebounceOptions = {}
-): DebouncedFunc<F> {
+): DebouncedFunction<F> {
   if (typeof options !== 'object') {
     options = {};
   }

@@ -16,7 +16,7 @@ interface ThrottleOptions {
   edges?: Array<'leading' | 'trailing'>;
 }
 
-export interface ThrottledFunc<F extends (...args: any[]) => void> {
+export interface ThrottledFunction<F extends (...args: any[]) => void> {
   (...args: Parameters<F>): void;
   cancel: () => void;
   flush: () => void;
@@ -52,7 +52,7 @@ export function throttle<F extends (...args: any[]) => void>(
   func: F,
   throttleMs: number,
   { signal, edges = ['leading', 'trailing'] }: ThrottleOptions = {}
-): ThrottledFunc<F> {
+): ThrottledFunction<F> {
   let pendingAt: number | null = null;
 
   const debounced = debounce(func, throttleMs, { signal, edges });
