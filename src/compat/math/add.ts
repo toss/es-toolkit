@@ -1,5 +1,3 @@
-import { add as addToolkit } from '../../math/add';
-
 /**
  * Adds two numbers while safely handling `NaN` values.
  *
@@ -17,5 +15,5 @@ import { add as addToolkit } from '../../math/add';
  */
 
 export function add(value: number, other: number): number {
-  return addToolkit(value, other);
+  return value + other;
 }
