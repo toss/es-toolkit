@@ -1,4 +1,4 @@
-import { iteratee as iterateeToolkit } from '../util/iteratee';
+import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
 /**
  * Computes the sum of the `number` values in `array`.

@@ -99,12 +99,15 @@ export { round } from './math/round.ts';
 export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
 
+export { assignIn } from './object/assignIn.ts';
+export { assignIn as extend } from './object/assignIn.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { defaults } from './object/defaults.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { get } from './object/get.ts';
 export { has } from './object/has.ts';
 export { invertBy } from './object/invertBy.ts';
+export { keysIn } from './object/keysIn.ts';
 export { mapKeys } from './object/mapKeys.ts';
 export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
