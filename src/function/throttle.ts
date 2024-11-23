@@ -1,4 +1,4 @@
-import { debounce, DebouncedFunc } from './debounce.ts';
+import { debounce } from './debounce.ts';
 
 interface ThrottleOptions {
   /**
