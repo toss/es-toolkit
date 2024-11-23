@@ -87,6 +87,7 @@ export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
 export { throttle } from './function/throttle.ts';
 
+export { add } from './math/add.ts';
 export { ceil } from './math/ceil.ts';
 export { clamp } from './math/clamp.ts';
 export { floor } from './math/floor.ts';
