@@ -1,4 +1,4 @@
-import { debounce } from './debounce.ts';
+import { debounce, DebouncedFunc } from './debounce.ts';
 
 interface ThrottleOptions {
   /**
@@ -14,6 +14,12 @@ interface ThrottleOptions {
    * @default ["leading", "trailing"]
    */
   edges?: Array<'leading' | 'trailing'>;
+}
+
+export interface ThrottledFunc<F extends (...args: any[]) => void> {
+  (...args: Parameters<F>): void;
+  cancel: () => void;
+  flush: () => void;
 }
 
 /**
@@ -46,10 +52,7 @@ export function throttle<F extends (...args: any[]) => void>(
   func: F,
   throttleMs: number,
   { signal, edges = ['leading', 'trailing'] }: ThrottleOptions = {}
-): ((...args: Parameters<F>) => void) & {
-  cancel: () => void;
-  flush: () => void;
-} {
+): ThrottledFunc<F> {
   let pendingAt: number | null = null;
 
   const debounced = debounce(func, throttleMs, { signal, edges });
