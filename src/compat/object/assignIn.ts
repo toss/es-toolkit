@@ -137,7 +137,7 @@ export function assignIn(object: any, ...sources: any[]): any {
   return object;
 }
 
-function assignInImpl<O, S>(object: any, source: any): any {
+function assignInImpl(object: any, source: any): any {
   const keys = keysIn(source);
 
   for (let i = 0; i < keys.length; i++) {

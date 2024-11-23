@@ -77,7 +77,7 @@ describe('assignIn', () => {
       })
     );
 
-    var actual;
+    let actual;
 
     try {
       actual = func(object, source);
