@@ -9,14 +9,14 @@
 ## インターフェース
 
 ```typescript
-function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[];
+function intersectionWith<T, U>(firstArr: T[], secondArr: U[], areItemsEqual: (x: T, y: U) => boolean): T[];
 ```
 
 ### パラメータ
 
 - `firstArr` (`T[]`): 比較する最初の配列。
-- `secondArr` (`T[]`): 比較する2番目の配列。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 2つの要素が一致するかどうかを判断する一致関数です。2つの要素が一致する場合は `true` を、一致しない場合は `false` を返すようにしてください。
+- `secondArr` (`U[]`): 比較する2番目の配列。
+- `areItemsEqual` (`(x: T, y: U) => boolean`): 2つの要素が一致するかどうかを判断する一致関数です。2つの要素が一致する場合は `true` を、一致しない場合は `false` を返すようにしてください。
 
 ### 戻り値
 
@@ -30,4 +30,14 @@ const array2 = [{ id: 2 }, { id: 4 }];
 const areItemsEqual = (a, b) => a.id === b.id;
 const result = intersectionWith(array1, array2, areItemsEqual);
 // `areItemsEqual` 基準でarray1とarray2の両方に含まれている要素からなる [{ id: 2 }] が返されます。
+
+const array1 = [
+  { id: 1, name: 'jane' },
+  { id: 2, name: 'amy' },
+  { id: 3, name: 'michael' },
+];
+const array2 = [2, 4];
+const areItemsEqual = (a, b) => a.id === b;
+const result = intersectionWith(array1, array2, areItemsEqual);
+// 結果は [{ id: 2, name: 'amy' }] になります。この要素は、2番目の配列の要素と一致するidを持っているためです。
 ```

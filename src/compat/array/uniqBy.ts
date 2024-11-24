@@ -1,5 +1,5 @@
-import { uniqBy as uniqByToolkit } from '../../array/uniqBy';
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject';
+import { uniqBy as uniqByToolkit } from '../../array/uniqBy.ts';
+import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**

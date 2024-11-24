@@ -7,14 +7,14 @@
 ## 인터페이스
 
 ```typescript
-function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[];
+function differenceBy<T, U>(firstArr: T[], secondArr: U[], mapper: (value: T | U) => unknown): T[];
 ```
 
 ### 파라미터
 
 - `firstArr` (`T[]`): 차이를 계산할 배열이에요. 이 배열이 주 배열이고, 이 배열의 요소들이 비교되고 필터링돼요.
-- `secondArr` (`T[]`): 첫 번째 배열에서 제외할 요소들을 포함한 배열이에요.
-- `mapper` (`(value: T) => U`): 두 배열의 요소들을 매핑할 함수에요. 이 함수는 두 배열의 각 요소에 적용되며, 매핑된 값들을 기준으로 비교를 해요.
+- `secondArr` (`U[]`): 첫 번째 배열에서 제외할 요소들을 포함한 배열이에요.
+- `mapper` (`(value: T | U) => unknown`): 두 배열의 요소들을 매핑할 함수에요. 이 함수는 두 배열의 각 요소에 적용되며, 매핑된 값들을 기준으로 비교를 해요.
 
 ### 반환 값
 
@@ -30,4 +30,10 @@ const array2 = [{ id: 2 }, { id: 4 }];
 const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
 // result는 [{ id: 1 }, { id: 3 }, { id: 5 }]가 돼요. id가 2인 요소들은 두 배열 모두에 있어서 결과에서 제외돼요.
+
+const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+const array2 = [2, 4];
+const mapper = item => (typeof item === 'object' ? item.id : item);
+const result = differenceBy(array1, array2, mapper);
+// result는 [{ id: 1 }, { id: 3 }]가 돼요. 매핑 결과가 2인 요소들은 두 배열 모두에 있어서 결과에서 제외돼요.
 ```
