@@ -2,17 +2,18 @@
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "version": "1.27.0",
-  "private": true,
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
-  "repository": "https://github.com/toss/es-toolkit.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toss/es-toolkit.git"
+  },
   "license": "MIT",
   "workspaces": [
     "docs",
-    "benchmarks",
-    "packages/*"
+    "benchmarks"
   ],
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "yarn@4.2.2",
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
@@ -164,7 +165,6 @@
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
     "globals": "^15.9.0",
-    "jest": "^29.7.0",
     "jscodeshift": "^17.0.0",
     "prettier": "^3.2.5",
     "prettier-plugin-sort-re-exports": "^0.1.0",
@@ -189,12 +189,10 @@
   "scripts": {
     "prepack": "yarn build",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
-    "test": "vitest --coverage --typecheck --run jest NODE_OPTIONS=\"--max-old-space-size=4096 --trace-warnings\" node --trace-warnings ./node_modules/.bin/vitest --reporter=junit > ./junit",
+    "test": "vitest --coverage --typecheck",
     "bench": "vitest bench",
     "lint": "eslint --config eslint.config.mjs",
     "format": "prettier --write .",
     "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0"
-  },
-  "main": "index.js",
-  "author": "jodasom <jodasom0216@gmail.com>"
+  }
 }
