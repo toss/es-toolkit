@@ -4,6 +4,7 @@
   "version": "1.27.0",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/toss/es-toolkit.git"
@@ -11,9 +12,10 @@
   "license": "MIT",
   "workspaces": [
     "docs",
-    "benchmarks"
+    "benchmarks",
+    "packages/*"
   ],
-  "packageManager": "yarn@4.2.2",
+  "packageManager":  "yarn@1.22.19",
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
@@ -142,6 +144,7 @@
     }
   },
   "devDependencies": {
+    "some-package": "workspace:^1.0.0",
     "@arethetypeswrong/cli": "^0.15.3",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
