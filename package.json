@@ -170,7 +170,6 @@
     "prettier-plugin-sort-re-exports": "^0.1.0",
     "rollup": "^4.19.0",
     "rollup-plugin-dts": "^6.1.1",
-
     "tar": "^6",
     "tslib": "^2.6.3",
     "tsx": "^4.19.0",
