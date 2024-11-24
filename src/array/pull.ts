@@ -16,13 +16,13 @@
  * console.log(numbers); // [2, 2]
  */
 export function pull<T>(arr: T[], ...values: T[]): T[] {
-    const valuesSet = new Set(values);
+  const valuesSet = new Set(values);
 
-    for (let i = arr.length - 1; i >= 0; i--) {
-      if (valuesSet.has(arr[i])) {
-        arr.splice(i, 1);
-      }
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (valuesSet.has(arr[i])) {
+      arr.splice(i, 1);
     }
-
-    return arr;
   }
+
+  return arr;
+}
