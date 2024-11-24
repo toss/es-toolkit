@@ -10,7 +10,7 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',
       include: ['src/**/*'],
-      exclude: ['src/compat/_internal/**/*', 'src/**/*.spec.ts'],
+      exclude: ['src/compat/_internal/**/*'],
     },
     watch: false,
     deps: {
