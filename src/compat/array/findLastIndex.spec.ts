@@ -7,9 +7,9 @@ import { stubZero } from '../_internal/stubZero';
 
 describe('findLastIndex', () => {
   const objects = [
-    { a: 0, b: 0 },
-    { a: 1, b: 1 },
-    { a: 2, b: 2 },
+    { a: 0, b: 0, 0: 0, [Symbol.for('a')]: 0 },
+    { a: 1, b: 1, 0: 1, [Symbol.for('a')]: 1 },
+    { a: 2, b: 2, 0: 2, [Symbol.for('a')]: 2 },
   ];
 
   it(`should return the found value`, () => {
@@ -26,10 +26,14 @@ describe('findLastIndex', () => {
 
   it(`findLastIndex should work with \`matchesProperty\` shorthands`, () => {
     expect(findLastIndex(objects, ['b', 2])).toBe(2);
+    expect(findLastIndex(objects, [0, 2])).toBe(2);
+    expect(findLastIndex(objects, [Symbol.for('a'), 2])).toBe(2);
   });
 
   it(`findLastIndex should work with \`property\` shorthands`, () => {
     expect(findLastIndex(objects, 'b')).toBe(2);
+    expect(findLastIndex(objects, 0)).toBe(2);
+    expect(findLastIndex(objects, Symbol.for('a'))).toBe(2);
   });
 
   it(`findLastIndex should provide correct \`predicate\` arguments for arrays`, () => {

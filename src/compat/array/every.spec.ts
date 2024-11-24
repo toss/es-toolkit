@@ -115,11 +115,13 @@ describe('every', () => {
 
   it('should work with `_.property` shorthands', () => {
     const objects = [
-      { a: 0, b: 1 },
-      { a: 1, b: 2 },
+      { a: 0, b: 1, 0: 1, [Symbol.for('c')]: 1 },
+      { a: 1, b: 2, 0: 2, [Symbol.for('c')]: 2 },
     ];
     expect(every(objects, 'a')).toBe(false);
     expect(every(objects, 'b')).toBe(true);
+    expect(every(objects, 0)).toBe(true);
+    expect(every(objects, Symbol.for('c'))).toBe(true);
   });
 
   it('should work with `_.matches` shorthands', () => {
@@ -148,10 +150,12 @@ describe('every', () => {
   });
   it('should support property-value pair', () => {
     const objects = [
-      { a: 0, b: 0 },
-      { a: 0, b: 1 },
+      { a: 0, b: 0, 0: 1, [Symbol.for('c')]: 1 },
+      { a: 0, b: 1, 0: 2, [Symbol.for('c')]: 1 },
     ];
     expect(every(objects, ['a', 0])).toBe(true);
     expect(every(objects, ['b', 1])).toBe(false);
+    expect(every(objects, [0, 1])).toBe(false);
+    expect(every(objects, [Symbol.for('c'), 1])).toBe(true);
   });
 });

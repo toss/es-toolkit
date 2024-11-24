@@ -9,14 +9,14 @@
 ## 签名
 
 ```typescript
-function intersectionWith<T>(firstArr: T[], secondArr: T[], areItemsEqual: (x: T, y: T) => boolean): T[];
+function intersectionWith<T, U>(firstArr: T[], secondArr: U[], areItemsEqual: (x: T, y: U) => boolean): T[];
 ```
 
 ### 参数
 
 - `firstArr` (`T[]`): 要比较的第一个数组。
-- `secondArr` (`T[]`): 要比较的第二个数组。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 一个自定义函数，用于确定两个元素是否相等。该函数接受两个参数，分别来自每个数组，如果这两个元素被认为相等，则返回 `true`，否则返回 `false`。
+- `secondArr` (`U[]`): 要比较的第二个数组。
+- `areItemsEqual` (`(x: T, y: U) => boolean`): 一个自定义函数，用于确定两个元素是否相等。该函数接受两个参数，分别来自每个数组，如果这两个元素被认为相等，则返回 `true`，否则返回 `false`。
 
 ### 返回值
 
@@ -30,4 +30,14 @@ const array2 = [{ id: 2 }, { id: 4 }];
 const areItemsEqual = (a, b) => a.id === b.id;
 const result = intersectionWith(array1, array2, areItemsEqual);
 // 结果将是 [{ id: 2 }] 因为这个元素在两个数组中具有匹配的 id。
+
+const array1 = [
+  { id: 1, name: 'jane' },
+  { id: 2, name: 'amy' },
+  { id: 3, name: 'michael' },
+];
+const array2 = [2, 4];
+const areItemsEqual = (a, b) => a.id === b;
+const result = intersectionWith(array1, array2, areItemsEqual);
+// 结果将是 [{ id: 2, name: 'amy' }] 因为该元素的 id 与第二个数组中的元素匹配。
 ```

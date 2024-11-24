@@ -9,14 +9,14 @@
 ## インターフェース
 
 ```typescript
-function intersectionBy<T, U>(firstArr: T[], secondArr: T[], mapper: (item: T) => U): T[];
+function intersectionBy<T, U>(firstArr: T[], secondArr: U[], mapper: (item: T | U) => unknown): T[];
 ```
 
 ### パラメータ
 
 - `firstArr` (`T[]`): 比較する最初の配列。
-- `secondArr` (`T[]`): 比較する2番目の配列。
-- `mapper` (`(item: T) => U`): 比較するために要素を新しい値に変換する関数。
+- `secondArr` (`U[]`): 比較する2番目の配列。
+- `mapper` (`(item: T | U) => unknown`): 比較するために要素を新しい値に変換する関数。
 
 ### 戻り値
 
@@ -30,6 +30,16 @@ const array2 = [{ id: 2 }, { id: 4 }];
 const mapper = item => item.id;
 const result = intersectionBy(array1, array2, mapper);
 // `mapper`で変換したとき、両方の配列に含まれる要素からなる [{ id: 2 }] 値が返されます。
+
+const array1 = [
+  { id: 1, name: 'jane' },
+  { id: 2, name: 'amy' },
+  { id: 3, name: 'michael' },
+];
+const array2 = [2, 4];
+const mapper = item => (typeof item === 'object' ? item.id : item);
+const result = intersectionBy(array1, array2, mapper);
+// `mapper`で変換したとき、両方の配列に含まれる要素からなる [{ id: 2, name: 'amy' }] 値が返されます。
 ```
 
 ## Lodashとの互換性
