@@ -16,6 +16,12 @@ interface ThrottleOptions {
   edges?: Array<'leading' | 'trailing'>;
 }
 
+export interface ThrottledFunction<F extends (...args: any[]) => void> {
+  (...args: Parameters<F>): void;
+  cancel: () => void;
+  flush: () => void;
+}
+
 /**
  * Creates a throttled function that only invokes the provided function at most once
  * per every `throttleMs` milliseconds. Subsequent calls to the throttled function
@@ -46,10 +52,7 @@ export function throttle<F extends (...args: any[]) => void>(
   func: F,
   throttleMs: number,
   { signal, edges = ['leading', 'trailing'] }: ThrottleOptions = {}
-): ((...args: Parameters<F>) => void) & {
-  cancel: () => void;
-  flush: () => void;
-} {
+): ThrottledFunction<F> {
   let pendingAt: number | null = null;
 
   const debounced = debounce(func, throttleMs, { signal, edges });
