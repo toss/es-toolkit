@@ -3,7 +3,7 @@ import { EventEmitter } from 'events';
 import packageJson from './package.json';
 
 // EventEmitter의 리스너 최대치를 20으로 설정
-EventEmitter.defaultMaxListeners = 20;
+EventEmitter.defaultMaxListeners = 50;
 
 export default defineConfig({
   test: {
