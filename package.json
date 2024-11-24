@@ -189,7 +189,7 @@
   "scripts": {
     "prepack": "yarn build",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
-    "test": "vitest --coverage --typecheck jest",
+    "test": "vitest --coverage --typecheck jest NODE_OPTIONS=\"--max-old-space-size=4096 --trace-warnings\" node --trace-warnings ./node_modules/.bin/vitest --reporter=junit > ./junit",
     "bench": "vitest bench",
     "lint": "eslint --config eslint.config.mjs",
     "format": "prettier --write .",

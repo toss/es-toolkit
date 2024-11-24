@@ -3,6 +3,7 @@ import packageJson from './package.json';
 
 export default defineConfig({
   test: {
+    isolate: true,
     maxConcurrency: 5,
     name: packageJson.name,
     exclude: ['./benchmarks/**/*', '.yarn/**/*'],
