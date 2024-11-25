@@ -1,5 +1,17 @@
 # es-toolkit Changelog
 
+## Version v1.27.0
+
+Released on November 10th, 2024.
+
+- Added support for [findKey](https://es-toolkit.slash.page/reference/object/findKey.html) and [isSubsetWith](https://es-toolkit.slash.page/reference/array/isSubsetWith.html).
+- Introduced compatibility functions for [words](https://es-toolkit.slash.page/reference/string/words.html), [at](https://es-toolkit.slash.page/reference/array/at.html), [differenceBy](https://es-toolkit.slash.page/reference/array/differenceBy.html), [uniqBy](https://es-toolkit.slash.page/reference/array/uniqBy.html), [forEach](https://es-toolkit.slash.page/reference/compat/array/forEach.html), [each](https://es-toolkit.slash.page/reference/compat/array/each.html), [sum](https://es-toolkit.slash.page/reference/math/sum.html), [sumBy](https://es-toolkit.slash.page/reference/array/sumBy.html), [union](https://es-toolkit.slash.page/reference/array/union.html), [zip](https://es-toolkit.slash.page/reference/array/zip.html), [unzip](https://es-toolkit.slash.page/reference/array/unzip.html), [iteratee](https://es-toolkit.slash.page/reference/compat/util/iteratee.html), [isEmpty](https://es-toolkit.slash.page/reference/compat/predicate/isEmpty.html), and [replace](https://es-toolkit.slash.page/reference/compat/string/replace.html).
+- Fixed a bug in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) that prevented it from correctly cloning object prototypes.
+- Improved performance for [at](https://es-toolkit.slash.page/reference/array/at.html).
+- Enhanced performance for [toPath](https://es-toolkit.slash.page/reference/compat/util/toPath.html), [get](https://es-toolkit.slash.page/reference/compat/object/get.html), [set](https://es-toolkit.slash.page/reference/compat/object/set.html), [unset](https://es-toolkit.slash.page/reference/compat/object/unset.html), [has](https://es-toolkit.slash.page/reference/compat/object/has.html), [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html), [chunk](https://es-toolkit.slash.page/reference/array/chunk.html), [difference](https://es-toolkit.slash.page/reference/array/difference.html), [drop](https://es-toolkit.slash.page/reference/array/drop.html), [dropRight](https://es-toolkit.slash.page/reference/array/dropRight.html), [dropWhile](https://es-toolkit.slash.page/reference/array/dropWhile.html), [findLastIndex](https://es-toolkit.slash.page/reference/compat/array/findLastIndex.html), [head](https://es-toolkit.slash.page/reference/array/head.html), [last](https://es-toolkit.slash.page/reference/array/last.html), [sample](https://es-toolkit.slash.page/reference/array/sample.html), [tail](https://es-toolkit.slash.page/reference/array/tail.html), [take](https://es-toolkit.slash.page/reference/array/take.html), and [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html) in our compatibility library.
+
+We sincerely thank @scato3, @ssi02014, @filipsobol, @mass2527, @Gyumong, @D-Sketon, @dayongkr, @kyvg, @Na-hyunwoo, @kaehehehe, and @bhollis for their contributions. Special thanks to @cruelladevil for improving the documentation. We appreciate your great efforts!
+
 ## Version v1.26.1
 
 Released on October 25th, 2024.

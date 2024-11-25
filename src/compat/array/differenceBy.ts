@@ -1,7 +1,7 @@
-import { flatten } from './flatten.ts';
 import { last } from './last.ts';
 import { difference as differenceToolkit } from '../../array/difference.ts';
 import { differenceBy as differenceByToolkit } from '../../array/differenceBy.ts';
+import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
@@ -121,16 +121,17 @@ export function differenceBy<T>(array: ArrayLike<T> | null | undefined, ...value
  * @param {...any[]} values - Multiple arrays containing elements to be excluded from the primary array.
  * @returns {T[]} A new array containing the elements that are present in the primary array but not in the values arrays.
  */
-export function differenceBy<T>(arr: ArrayLike<T> | null | undefined, ...values: any[]): T[] {
+export function differenceBy<T>(arr: ArrayLike<T> | null | undefined, ..._values: any[]): T[] {
   if (!isArrayLikeObject(arr)) {
     return [];
   }
 
-  const iteratee = last(values);
+  const iteratee = last(_values);
+  const values = flattenArrayLike<T>(_values);
 
   if (isArrayLikeObject(iteratee)) {
-    return differenceToolkit(Array.from(arr), flatten(values));
+    return differenceToolkit(Array.from(arr), values);
   }
 
-  return differenceByToolkit(Array.from(arr), flatten(values.slice(0, -1)), createIteratee(iteratee));
+  return differenceByToolkit(Array.from(arr), values, createIteratee(iteratee));
 }

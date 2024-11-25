@@ -23,7 +23,7 @@
 function some<T>(arr: T[]): boolean;
 function some<T>(arr: T[], predicate: (item: T, index: number, arr: any) => unknown): boolean;
 function some<T>(arr: T[], predicate: [keyof T, unknown]): boolean;
-function some<T>(arr: T[], predicate: string): boolean;
+function some<T>(arr: T[], predicate: PropertyKey): boolean;
 function some<T>(arr: T[], predicate: Partial<T>): boolean;
 
 function some<T extends Record<string, unknown>>(object: T): boolean;
@@ -33,7 +33,7 @@ function some<T extends Record<string, unknown>>(
 ): boolean;
 function some<T extends Record<string, unknown>>(object: T, predicate: Partial<T[keyof T]>): boolean;
 function some<T extends Record<string, unknown>>(object: T, predicate: [keyof T[keyof T], unknown]): boolean;
-function some<T extends Record<string, unknown>>(object: T, predicate: string): boolean;
+function some<T extends Record<string, unknown>>(object: T, predicate: PropertyKey): boolean;
 ```
 
 ### 파라미터
@@ -64,14 +64,14 @@ lodash와 완벽하게 호환되도록 `every` 함수는 `object`를 다음과 �
     - **검사 함수** (`(item: T, index: number, arr: any) => unknown`): 요소, 인덱스, 배열을 받아 조건을 만족하면 `true`를 반환하는 함수.
     - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
     - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-    - **프로퍼티 이름** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+    - **프로퍼티 이름** (`PropertyKey`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
 
   - 객체의 경우:
 
     - **검사 함수** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 값, 키, 객체를 받아 조건을 만족하면 `true`를 반환하는 함수.
     - **부분 값** (`Partial<T[keyof T]>`): 값과 일치시킬 부분 값을 명시한 부분 객체.
     - **프로퍼티-값 쌍** (`[keyof T[keyof T], unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-    - **프로퍼티 이름** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+    - **프로퍼티 이름** (`PropertyKey`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
 
 ### 반환 값
 

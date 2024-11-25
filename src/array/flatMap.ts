@@ -20,10 +20,10 @@ import { flatten } from './flatten.ts';
  * flatMap(arr, (item: number) => [[item, item]], 2);
  * // [1, 1, 2, 2, 3, 3]
  */
-export function flatMap<T, U, D extends number>(
+export function flatMap<T, U, D extends number = 1>(
   arr: readonly T[],
   iteratee: (item: T) => U,
-  depth = 1 as D
+  depth: D = 1 as D
 ): Array<FlatArray<U[], D>> {
   return flatten(
     arr.map(item => iteratee(item)),
