@@ -172,6 +172,7 @@ export { trim } from './string/trim.ts';
 export { trimEnd } from './string/trimEnd.ts';
 export { trimStart } from './string/trimStart.ts';
 export { upperCase } from './string/upperCase.ts';
+export { words } from './string/words.ts';
 
 export { constant } from './util/constant.ts';
 export { defaultTo } from './util/defaultTo.ts';
