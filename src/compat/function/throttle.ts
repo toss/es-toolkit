@@ -1,4 +1,4 @@
-import { debounce } from './debounce.ts';
+import { debounce, type DebouncedFunction } from './debounce.ts';
 
 interface ThrottleOptions {
   /**
@@ -53,15 +53,17 @@ export function throttle<F extends (...args: any[]) => any>(
   func: F,
   throttleMs = 0,
   options: ThrottleOptions = {}
-): ((...args: Parameters<F>) => ReturnType<F> | undefined) & {
-  cancel: () => void;
-  flush: () => void;
-} {
+): DebouncedFunction<F> {
   if (typeof options !== 'object') {
     options = {};
   }
 
   const { leading = true, trailing = true, signal } = options;
 
-  return debounce(func, throttleMs, { leading, trailing, signal, maxWait: throttleMs });
+  return debounce(func, throttleMs, {
+    leading,
+    trailing,
+    signal,
+    maxWait: throttleMs,
+  });
 }
