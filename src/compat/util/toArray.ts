@@ -15,7 +15,7 @@ import { isMap } from '../predicate/isMap';
  */
 
 export function toArray(value?: unknown): any[] {
-  if (value == null || typeof value === 'number' || typeof value === 'boolean') {
+  if (value == null) {
     return [];
   }
 
