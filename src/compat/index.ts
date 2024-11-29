@@ -178,6 +178,7 @@ export { words } from './string/words.ts';
 export { constant } from './util/constant.ts';
 export { defaultTo } from './util/defaultTo.ts';
 export { eq } from './util/eq.ts';
+export { gte } from './util/gte.ts';
 export { gt } from './util/gt.ts';
 export { iteratee } from './util/iteratee.ts';
 export { times } from './util/times.ts';
