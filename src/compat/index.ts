@@ -181,6 +181,7 @@ export { eq } from './util/eq.ts';
 export { gt } from './util/gt.ts';
 export { iteratee } from './util/iteratee.ts';
 export { times } from './util/times.ts';
+export { toArray } from './util/toArray.ts';
 export { toFinite } from './util/toFinite.ts';
 export { toInteger } from './util/toInteger.ts';
 export { toLength } from './util/toLength.ts';
