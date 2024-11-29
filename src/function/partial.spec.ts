@@ -14,7 +14,7 @@ describe('partial', () => {
   });
 
   it('partial creates a function that can be invoked with additional arguments', () => {
-    const fn = function (a?: string, b?: string) {
+    const fn = function (a: string, b: string) {
       return [a, b];
     };
     const par = partial(fn, 'a');
@@ -70,7 +70,7 @@ describe('partial', () => {
   });
 
   it('partial clones metadata for created functions', () => {
-    function greet(greeting?: string, name?: string) {
+    function greet(greeting: string, name: string) {
       return `${greeting} ${name}`;
     }
 
