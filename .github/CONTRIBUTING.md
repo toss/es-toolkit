@@ -18,9 +18,9 @@ When a new functionality is added, a benchmark code should be added. Please add 
 
 ### 1.2 Simplicity
 
-We value implementation and interface simplicity over a variety of features for performance, code readability, and easy maintenance. Our functions will not provide complex options to suit every usecase.
+We value implementation and interface simplicity over a variety of features for performance, code readability, and easy maintenance. Our functions will not provide complex options to suit every use case.
 
-In this manner, instead of having complex options of making full use of overloading, etc, to support edge cases, we aim to provide the most simplest interface and implementation for the most common 85% usecases.
+In this manner, instead of having complex options of making full use of overloading, etc, to support edge cases, we aim to provide the simplest interface and implementation for the most common 85% use cases.
 
 We recognize that there are multiple approaches to achieving the same functionality. If the performance difference is less than 10%, please follow our coding style guidelines:
 
