@@ -1,5 +1,15 @@
 # es-toolkit Changelog
 
+## Version v1.29.0
+
+Released on December 1st, 2024.
+
+- Introduced support for [cloneDeepWith](https://es-toolkit.slash.page/reference/object/cloneDeepWith.html).
+- Added a compatibility function for [lastIndexOf](https://es-toolkit.slash.page/reference/compat/array/lastIndexOf.html).
+- Fixed an issue in [flattenObject](https://es-toolkit.slash.page/reference/object/flattenObject.html) where nested objects in arrays were not flattened correctly.
+
+We sincerely thank @nnnnoel and @evan-moon for their contributions. We appreciate your great efforts!
+
 ## Version v1.28.0
 
 Released on November 30th, 2024.
