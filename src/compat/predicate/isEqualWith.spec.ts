@@ -6,7 +6,7 @@ import { noop } from '../../function/noop';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { stubC } from '../_internal/stubC';
-import { stubFalse } from '../_internal/stubFalse';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isEqualWith', () => {
   it('should provide correct `customizer` arguments', () => {

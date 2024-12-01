@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { constant } from './constant';
+import { stubTrue } from './stubTrue';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
-import { stubTrue } from '../_internal/stubTrue';
 import * as esToolkit from '../index';
 
 describe('constant', () => {

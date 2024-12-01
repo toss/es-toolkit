@@ -3,8 +3,8 @@ import { some } from './some';
 import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubTrue } from '../_internal/stubTrue';
+import { stubFalse } from '../util/stubFalse';
+import { stubTrue } from '../util/stubTrue';
 
 describe('some', () => {
   it('should return `true` if `predicate` returns truthy for any element', () => {

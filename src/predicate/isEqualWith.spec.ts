@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { isEqualWith } from './isEqualWith';
 import { args } from '../compat/_internal/args';
 import { arrayViews } from '../compat/_internal/arrayViews';
-import { stubFalse } from '../compat/_internal/stubFalse';
+import { stubFalse } from '../compat/util/stubFalse';
 import { noop } from '../function';
 
 describe('isEqualWith', () => {
@@ -667,7 +667,18 @@ describe('isEqualWith', () => {
     expect(isEqualWith(/x/gi, /x/g, noop)).toBe(false);
     expect(isEqualWith(/x/, /y/, noop)).toBe(false);
 
-    expect(isEqualWith(/x/g, { global: true, ignoreCase: false, multiline: false, source: 'x' }, noop)).toBe(false);
+    expect(
+      isEqualWith(
+        /x/g,
+        {
+          global: true,
+          ignoreCase: false,
+          multiline: false,
+          source: 'x',
+        },
+        noop
+      )
+    ).toBe(false);
   });
 
   it('should compare sets when customizer returns undefined', () => {

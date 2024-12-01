@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { iteratee } from './iteratee';
+import { stubFalse } from './stubFalse';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { partial, partialRight } from '../index';
 import * as esToolkit from '../index';
 
