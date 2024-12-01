@@ -53,6 +53,7 @@ export { intersection } from './array/intersection.ts';
 export { intersectionBy } from './array/intersectionBy.ts';
 export { join } from './array/join.ts';
 export { last } from './array/last.ts';
+export { lastIndexOf } from './array/lastIndexOf.ts';
 export { orderBy } from './array/orderBy.ts';
 export { sample } from './array/sample.ts';
 export { size } from './array/size.ts';

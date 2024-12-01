@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { lastIndexOf } from './lastIndexOf';
-import { falsey } from '../_internal/falsey';
 
 /**
  * @see https://github.com/lodash/lodash/blob/v5-wip/test/findLastIndex-and-lastIndexOf.spec.js
