@@ -141,4 +141,17 @@ describe('flattenObject', function () {
       'a.2': 3,
     });
   });
+
+  it('handles object arrays', () => {
+    const result = flattenObject({
+      a: [1, { b: 2 }, 3, [{ c: 4 }]],
+    });
+
+    expect(result).toEqual({
+      'a.0': 1,
+      'a.1.b': 2,
+      'a.2': 3,
+      'a.3.0.c': 4,
+    });
+  });
 });
