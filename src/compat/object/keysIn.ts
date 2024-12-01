@@ -68,7 +68,7 @@ function prototypeKeysIn(object: object): string[] {
   return keys.filter(key => key !== 'constructor');
 }
 
-function arrayLikeKeysIn(object: ArrayLike<any>): string[] {
+export function arrayLikeKeysIn(object: ArrayLike<any>): string[] {
   const indices = times(object.length, index => `${index}`);
 
   const filteredKeys = new Set(indices);

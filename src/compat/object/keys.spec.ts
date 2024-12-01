@@ -7,8 +7,8 @@ import { objectProto } from '../_internal/objectProto';
 import { primitives } from '../_internal/primitives';
 import { strictArgs } from '../_internal/strictArgs';
 import { stringProto } from '../_internal/stringProto';
-import { stubArray } from '../_internal/stubArray';
 import { constant } from '../util/constant';
+import { stubArray } from '../util/stubArray';
 
 /**
  * @see https://github.com/lodash/lodash/blob/afcd5bc1e8801867c31a17566e0e0edebb083d0e/test/keys-methods.spec.js#L1

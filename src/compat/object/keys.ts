@@ -1,6 +1,9 @@
+import { isBuffer } from '../../predicate/isBuffer.ts';
 import { arrayLikeKeys } from '../_internal/arrayLikeKeys.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { isTypedArray } from '../predicate/isTypedArray.ts';
+import { times } from '../util/times.ts';
 
 /**
  * Creates an array of the own enumerable property names of `object`.
@@ -24,7 +27,7 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  */
 export function keys(object?: any): string[] {
   if (isArrayLike(object)) {
-    return arrayLikeKeys(object, false);
+    return arrayLikeKeys(object);
   }
 
   const result = Object.keys(Object(object));
@@ -34,4 +37,23 @@ export function keys(object?: any): string[] {
   }
 
   return result.filter(key => key !== 'constructor');
+}
+
+function arrayLikeKeys(object: ArrayLike<any>): string[] {
+  const indices = times(object.length, index => `${index}`);
+
+  const filteredKeys = new Set(indices);
+
+  if (isBuffer(object)) {
+    filteredKeys.add('offset');
+    filteredKeys.add('parent');
+  }
+
+  if (isTypedArray(object)) {
+    filteredKeys.add('buffer');
+    filteredKeys.add('byteLength');
+    filteredKeys.add('byteOffset');
+  }
+
+  return [...indices, ...Object.keys(object).filter(key => !filteredKeys.has(key))];
 }
