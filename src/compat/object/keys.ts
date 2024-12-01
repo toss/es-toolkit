@@ -1,5 +1,4 @@
 import { isBuffer } from '../../predicate/isBuffer.ts';
-import { arrayLikeKeys } from '../_internal/arrayLikeKeys.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
@@ -13,7 +12,6 @@ import { times } from '../util/times.ts';
  * @param {object} object The object to query.
  * @returns {string[]} Returns the array of property names.
  * @example
- *
  * function Foo() {
  *   this.a = 1;
  *   this.b = 2;
