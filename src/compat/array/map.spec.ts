@@ -18,6 +18,10 @@ describe('map', () => {
   it('should work with `_.property` shorthands', () => {
     const objects = [{ a: 'x' }, { a: 'y' }];
     expect(map(objects, 'a')).toEqual(['x', 'y']);
+    const objects2 = [{ 1: 'x' }, { 1: 'y' }];
+    expect(map(objects2, 1)).toEqual(['x', 'y']);
+    const object3 = [{ [Symbol.for('a')]: 'x' }, { [Symbol.for('a')]: 'y' }];
+    expect(map(object3, Symbol.for('a'))).toEqual(['x', 'y']);
   });
 
   it('should iterate over own string keyed properties of objects', () => {
@@ -80,5 +84,10 @@ describe('map', () => {
     const expected = [true, false, true];
 
     expect(map(object, { a: 1 })).toEqual(expected);
+  });
+
+  it('should accept a string as the collection', () => {
+    const actual = map('abc', identity);
+    expect(actual).toEqual(['a', 'b', 'c']);
   });
 });
