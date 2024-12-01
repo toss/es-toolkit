@@ -1,9 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { constant, each } from '..';
+import { constant, each, stubArray } from '..';
 import { map } from './map';
 import { identity } from '../../function/identity';
 import { falsey } from '../_internal/falsey';
-import { stubArray } from '../_internal/stubArray';
 
 describe('map', () => {
   const array = [1, 2];
