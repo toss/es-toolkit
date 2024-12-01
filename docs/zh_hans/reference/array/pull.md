@@ -8,13 +8,13 @@
 ## 签名
 
 ```typescript
-function pull<T, U>(arr: T[], valuesToRemove: U[]): T[];
+function pull<T>(arr: T[], valuesToRemove: unknown[]): T[];
 ```
 
 ### 参数
 
 - `arr` (`T[]`): 要修改的数组。
-- `valuesToRemove` (`U[]`): 要从数组中移除的值。
+- `valuesToRemove` (`unknown[]`): 要从数组中移除的值。
 
 ### 返回值
 

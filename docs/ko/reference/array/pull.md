@@ -8,13 +8,13 @@
 ## 인터페이스
 
 ```typescript
-function pull<T, U>(arr: T[], valuesToRemove: U[]): T[];
+function pull<T>(arr: T[], valuesToRemove: unknown[]): T[];
 ```
 
 ### 파라미터
 
 - `arr` (`T[]`): 수정할 배열.
-- `valuesToRemove` (`U[]`): 배열에서 제거할 값들.
+- `valuesToRemove` (`unknown[]`): 배열에서 제거할 값들.
 
 ### 반환 값
 
