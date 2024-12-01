@@ -25,6 +25,12 @@ interface DebounceOptions {
   maxWait?: number;
 }
 
+export interface DebouncedFunction<F extends (...args: any[]) => any> {
+  (...args: Parameters<F>): ReturnType<F> | undefined;
+  cancel(): void;
+  flush(): void;
+}
+
 /**
  * Creates a debounced function that delays invoking the provided function until after `debounceMs` milliseconds
  * have elapsed since the last time the debounced function was invoked. The debounced function also has a `cancel`
@@ -75,10 +81,7 @@ export function debounce<F extends (...args: any[]) => any>(
   func: F,
   debounceMs = 0,
   options: DebounceOptions = {}
-): ((...args: Parameters<F>) => ReturnType<F> | undefined) & {
-  cancel: () => void;
-  flush: () => void;
-} {
+): DebouncedFunction<F> {
   if (typeof options !== 'object') {
     options = {};
   }

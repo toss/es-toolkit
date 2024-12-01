@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubString } from '../_internal/stubString';
-import { stubTrue } from '../_internal/stubTrue';
 import * as esToolkit from '../index';
+import { stubFalse } from '../util/stubFalse';
+import { stubString } from '../util/stubString';
+import { stubTrue } from '../util/stubTrue';
 
 describe('template', () => {
   it('should escape values in "escape" delimiters', () => {

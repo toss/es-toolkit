@@ -56,7 +56,7 @@ export function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatchPropert
  *
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
- * @param {string} propertyToCheck - The property name to check.
+ * @param {PropertyKey} propertyToCheck - The property name to check.
  * @returns {T[]} - Returns a new array of elements that match the given property name.
  *
  * @example
@@ -64,7 +64,7 @@ export function filter<T>(arr: ArrayLike<T> | null | undefined, doesMatchPropert
  * filter(arr, 'name');
  * // => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
  */
-export function filter<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: string): T[];
+export function filter<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: PropertyKey): T[];
 
 /**
  * Filters items from a object and returns an array of elements that match the given predicate function.
@@ -129,7 +129,7 @@ export function filter<T extends Record<string, unknown>>(
  *
  * @template T
  * @param {T | null | undefined} object - The object to iterate over.
- * @param {string} propertyToCheck - The property name to check.
+ * @param {PropertyKey} propertyToCheck - The property name to check.
  * @returns {T[]} - Returns a new array of elements that match the given property name.
  *
  * @example
@@ -137,7 +137,10 @@ export function filter<T extends Record<string, unknown>>(
  * filter(obj, 'name');
  * // => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
  */
-export function filter<T extends Record<string, unknown>>(object: T | null | undefined, propertyToCheck: string): T[];
+export function filter<T extends Record<string, unknown>>(
+  object: T | null | undefined,
+  propertyToCheck: PropertyKey
+): T[];
 
 /**
  * Iterates over the collection and filters elements based on the given predicate.
@@ -145,7 +148,7 @@ export function filter<T extends Record<string, unknown>>(object: T | null | und
  *
  * @template T
  * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The array or object to iterate over.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} [predicate=identity] - The function invoked per iteration.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} [predicate=identity] - The function invoked per iteration.
  * @returns {T[]} - Returns a new array of filtered elements that satisfy the predicate.
  *
  * @example
@@ -163,7 +166,7 @@ export function filter<T extends Record<string, unknown>>(object: T | null | und
  */
 export function filter<T>(
   source: ArrayLike<T> | Record<any, any> | null | undefined,
-  predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string
+  predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
 ): T[] {
   if (!source) {
     return [];
@@ -199,6 +202,8 @@ export function filter<T>(
         ? collection.filter(matchesProperty(predicate[0], predicate[1]))
         : collection.filter(matches(predicate));
     }
+    case 'symbol':
+    case 'number':
     case 'string': {
       return collection.filter(property(predicate));
     }

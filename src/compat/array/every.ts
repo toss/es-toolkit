@@ -74,11 +74,11 @@ export function every<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partia
 export function every<T>(arr: ArrayLike<T> | null | undefined, doesMatchProperty: [keyof T, unknown]): boolean;
 
 /**
- * Checks if every item in an array has a specific property, where the property name is provided as a string.
+ * Checks if every item in an array has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr - The array to check through.
- * @param {string} propertyToCheck - The property name to check.
+ * @param {PropertyKey} propertyToCheck - The property name to check.
  * @returns {boolean} - `true` if every item has the specified property, or `false` if at least one item does not match.
  *
  * @example
@@ -87,7 +87,7 @@ export function every<T>(arr: ArrayLike<T> | null | undefined, doesMatchProperty
  * const result = every(items, 'name');
  * console.log(result); // true
  */
-export function every<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: string): boolean;
+export function every<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: PropertyKey): boolean;
 
 /**
  * Checks if every item in an object matches the given predicate function.
@@ -147,11 +147,11 @@ export function every<T extends Record<string, unknown>>(
 ): boolean;
 
 /**
- * Checks if every item in an object has a specific property, where the property name is provided as a string.
+ * Checks if every item in an object has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
  * @param {T | null | undefined} object - The object to check through.
- * @param {string} propertyToCheck - The property name to check.
+ * @param {PropertyKey} propertyToCheck - The property name to check.
  * @returns {boolean} - `true` if every property value has the specified property, or `false` if at least one does not match.
  *
  * @example
@@ -162,17 +162,17 @@ export function every<T extends Record<string, unknown>>(
  */
 export function every<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  propertyToCheck: string
+  propertyToCheck: PropertyKey
 ): boolean;
 
 /**
- * Checks if every item in an object has a specific property, where the property name is provided as a string.
+ * Checks if every item in an object has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
  * @param {T extends Record<string, unknown> ? T : never} object - The object to check through.
  * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to check through.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
- * @param {string} propertyToCheck - The property name to check.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param {PropertyKey} propertyToCheck - The property name to check.
  * @param {unknown} guard - Enables use as an iteratee for methods like `_.map`.
  * @returns {boolean} - `true` if every property value has the specified property, or `false` if at least one does not match.
  *
@@ -184,7 +184,7 @@ export function every<T extends Record<string, unknown>>(
  */
 export function every<T>(
   source: ArrayLike<T> | Record<any, any> | null | undefined,
-  doesMatch?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
+  doesMatch?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
   guard?: unknown
 ): boolean {
   if (!source) {
@@ -228,6 +228,8 @@ export function every<T>(
         return values.every(matches(doesMatch));
       }
     }
+    case 'symbol':
+    case 'number':
     case 'string': {
       return values.every(property(doesMatch));
     }

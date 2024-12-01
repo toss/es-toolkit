@@ -22,7 +22,7 @@ function every<T>(arr: T[]): boolean;
 function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
 function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
 function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: string): boolean;
+function every<T>(arr: T[], doesMatch: PropertyKey): boolean;
 
 function every<T extends Record<string, unknown>>(
   object: T,
@@ -30,7 +30,7 @@ function every<T extends Record<string, unknown>>(
 ): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
 function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: string): boolean;
+function every<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): boolean;
 ```
 
 ### パラメータ
@@ -61,13 +61,13 @@ lodash と完全に互換性があるように、`every` 関数は `object` を�
     - **検査関数** (`(item: T, index: number, arr: T[]) => unknown`): 条件を満たすかどうかを確認する関数。すべての要素が条件を満たす場合、結果は `true` になります。
     - **部分オブジェクト** (`Partial<T>`): 与えられた部分オブジェクトのプロパティと値に一致する場合、すべての要素が条件を満たす必要があります。
     - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。すべての要素がこの条件を満たす場合、結果は `true` になります。
-    - **プロパティ名** (`string`): 指定されたプロパティがすべての要素に対して真と評価される場合、結果は `true` になります。
+    - **プロパティ名** (`PropertyKey`): 指定されたプロパティがすべての要素に対して真と評価される場合、結果は `true` になります。
 
   - オブジェクトの場合:
     - **検査関数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 条件を満たすかどうかを確認する関数。すべての要素が条件を満たす場合、結果は `true` になります。
     - **部分値** (`Partial<T[keyof T]>`): 与えられた部分値に一致する場合、すべての要素が条件を満たす必要があります。
     - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。すべての要素がこの条件を満たす場合、結果は `true` になります。
-    - **プロパティ名** (`string`): 指定されたプロパティがすべての要素に対して真と評価される場合、結果は `true` になります。
+    - **プロパティ名** (`PropertyKey`): 指定されたプロパティがすべての要素に対して真と評価される場合、結果は `true` になります。
 
 ### 戻り値
 

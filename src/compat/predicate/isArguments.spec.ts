@@ -5,8 +5,8 @@ import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { strictArgs } from '../_internal/strictArgs';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isArguments', () => {
   it('should return `true` for `arguments` objects', () => {

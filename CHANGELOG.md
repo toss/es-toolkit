@@ -1,5 +1,29 @@
 # es-toolkit Changelog
 
+## Version v1.29.0
+
+Released on December 1st, 2024.
+
+- Introduced support for [cloneDeepWith](https://es-toolkit.slash.page/reference/object/cloneDeepWith.html).
+- Added a compatibility function for [lastIndexOf](https://es-toolkit.slash.page/reference/compat/array/lastIndexOf.html).
+- Fixed an issue in [flattenObject](https://es-toolkit.slash.page/reference/object/flattenObject.html) where nested objects in arrays were not flattened correctly.
+
+We sincerely thank @nnnnoel and @evan-moon for their contributions. We appreciate your great efforts!
+
+## Version v1.28.0
+
+Released on November 30th, 2024.
+
+- Added compatibility functions for [gt](https://es-toolkit.slash.page/reference/compat/util/gt.html), [gte](https://es-toolkit.slash.page/reference/compat/util/gte.html), [toArray](https://es-toolkit.slash.page/reference/compat/util/toArray.html), [toUpper](https://es-toolkit.slash.page/reference/compat/string/toUpper.html), [add](https://es-toolkit.slash.page/reference/compat/math/add.html), [assignIn](https://es-toolkit.slash.page/reference/compat/object/assignIn.html) ([extend](https://es-toolkit.slash.page/reference/compat/object/extend.html)), and [isElement](https://es-toolkit.slash.page/reference/compat/predicate/isElement.html).
+- Introduced new compatibility types for `DebouncedFunc`.
+- Enhanced our function types to accept `PropertyKey` instead of just `string` for property keys.
+- Corrected [flatMap](https://es-toolkit.slash.page/reference/array/flatMap.html) to accurately infer return types when the `depth` parameter is omitted.
+- Resolved issues with incorrect types for [partial](https://es-toolkit.slash.page/reference/function/partial.html) and [partialRight](https://es-toolkit.slash.page/reference/function/partialRight.html).
+- Fixed [intersectionBy](https://es-toolkit.slash.page/reference/array/intersectionBy.html), [differenceBy](https://es-toolkit.slash.page/reference/array/differenceBy.html), and [differenceWith](https://es-toolkit.slash.page/reference/array/differenceWith.html) to properly calculate differences between various element types.
+- Ensured that [words](https://es-toolkit.slash.page/reference/string/words.html) is now correctly exported in our compatibility library.
+
+We sincerely thank @D-Sketon, @mass2527, @1eeminhyeong, @chhw130, @DONG-8, @filipsobol, @kim-dongho, @nnnnoel, @pbstar, and @jsparkdev for their contributions. We appreciate your great efforts!
+
 ## Version v1.27.0
 
 Released on November 10th, 2024.

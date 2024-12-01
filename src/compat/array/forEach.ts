@@ -1,6 +1,6 @@
-import { identity } from '../../function/identity';
-import { range } from '../../math/range';
-import { isArrayLike } from '../predicate/isArrayLike';
+import { identity } from '../../function/identity.ts';
+import { range } from '../../math/range.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
  * Iterates over each element of the array invoking the provided callback function for each element.
