@@ -12,11 +12,11 @@ describe('cloneDeepWith', function () {
   Foo.prototype.b = 1;
   Foo.c = function () {};
 
-  var map = new Map();
+  const map = new Map();
   map.set('a', 1);
   map.set('b', 2);
 
-  var set = new Set();
+  const set = new Set();
   set.add(1);
   set.add(2);
 

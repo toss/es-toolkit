@@ -207,7 +207,6 @@ export function cloneDeepWithImpl<T>(
   return valueToClone;
 }
 
-// eslint-disable-next-line
 export function copyProperties<T>(
   target: any,
   source: any,

@@ -159,7 +159,6 @@
     "broken-link-checker": "^0.7.8",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jsdoc": "^50.2.2",
     "eslint-plugin-no-for-of-array": "^0.0.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
