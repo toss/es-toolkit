@@ -11,7 +11,7 @@
 ## 签名
 
 ```typescript
-function stubFalse(): false;
+function stubFalse(): boolean;
 ```
 
 ### 返回值

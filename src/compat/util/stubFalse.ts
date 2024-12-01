@@ -5,6 +5,6 @@
  * @example
  * stubFalse() // Returns false
  */
-export function stubFalse(): false {
+export function stubFalse(): boolean {
   return false;
 }

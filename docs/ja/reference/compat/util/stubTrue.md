@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-function stubTrue(): true;
+function stubTrue(): boolean;
 ```
 
 ### 戻り値
 
-(`true`): `true`。
+(`boolean`): `true`。
 
 ## 例
 

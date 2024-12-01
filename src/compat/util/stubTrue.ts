@@ -5,6 +5,6 @@
  * @example
  * stubTrue() // Returns true
  */
-export function stubTrue(): true {
+export function stubTrue(): boolean {
   return true;
 }
