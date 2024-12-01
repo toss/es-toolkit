@@ -3,7 +3,7 @@
 Removes all specified values from an array.
 
 This function changes `arr` in place.
-If you want to remove values without modifying the original array, use `difference`.
+If you want to remove values without modifying the original array, use [difference](./difference.md).
 
 ## Signature
 
