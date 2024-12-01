@@ -1,4 +1,4 @@
-import { isPlainObject } from "../predicate/isPlainObject.ts";
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
  * Flattens a nested object into a single level object with dot-separated keys.
@@ -29,7 +29,7 @@ export function flattenObject(object: object): Record<string, any> {
   return flattenObjectImpl(object);
 }
 
-function flattenObjectImpl(object: object, prefix = ""): Record<string, any> {
+function flattenObjectImpl(object: object, prefix = ''): Record<string, any> {
   const result: Record<string, any> = {};
   const keys = Object.keys(object);
 
