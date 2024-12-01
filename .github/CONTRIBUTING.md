@@ -4,7 +4,7 @@ We welcome contribution from everyone in the community. All communications in th
 
 > Every contributor to es-toolkit should adhere to our Code of Conduct. Please read the [full text](./CODE_OF_CONDUCT.md) to understand what actions will and will not be tolerated.
 
-## 1. Our Design Priniciples
+## 1. Our Design Principles
 
 Note that we value performance, simplicity of implementation, and detailed documentations. We do not aim for supporting a variety of features and options. Our goal is to provide a small set of performant and well-functioning utilities.
 
@@ -18,9 +18,9 @@ When a new functionality is added, a benchmark code should be added. Please add 
 
 ### 1.2 Simplicity
 
-We value implementation and interface simplicity over a variety of features for performance, code readability, and easy maintenance. Our functions will not provide complex options to suit every usecase.
+We value implementation and interface simplicity over a variety of features for performance, code readability, and easy maintenance. Our functions will not provide complex options to suit every use case.
 
-In this manner, instead of having complex options of making full use of overloading, etc, to support edge cases, we aim to provide the most simplest interface and implementation for the most common 85% usecases.
+In this manner, instead of having complex options of making full use of overloading, etc, to support edge cases, we aim to provide the simplest interface and implementation for the most common 85% use cases.
 
 We recognize that there are multiple approaches to achieving the same functionality. If the performance difference is less than 10%, please follow our coding style guidelines:
 

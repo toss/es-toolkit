@@ -1,4 +1,4 @@
-# gte
+# toArray
 
 ::: info
 出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
@@ -6,27 +6,27 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-检查值是否大于或等于另一个值。
+将值转换为数组.
 
 ## 签名
 
 ```typescript
-function gte(value: unknown, other: unknown): boolean;
+function toArray(value?: unknown): any[];
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要比较的值。
-- `other` (`unknown`): 要比较的另一个值。
+- `value` (`unknown`): 要转换的值.
 
 ### 返回值
 
-(`boolean`): 如果值大于或等于另一个值，则返回`true`，否则返回`false`。
+(`any[]`): 返回转换后的数组.
 
 ## 示例
 
 ```typescript
-gte(3, 1); // => true
-gte(3, 3); // => true
-gte(1, 3); // => false
+toArray({ a: 1, b: 2 }); // => returns [1,2]
+toArray('abc'); // => returns ['a', 'b', 'c']
+toArray(1); // => returns []
+toArray(null); // => returns []
 ```

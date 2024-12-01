@@ -1,4 +1,4 @@
-# gte
+# isElement
 
 ::: info
 出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
@@ -6,27 +6,25 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-检查值是否大于或等于另一个值。
+检查 `value` 是否是 DOM 元素。由于是结构性检查，结果可能不准确。
 
 ## 签名
 
 ```typescript
-function gte(value: unknown, other: unknown): boolean;
+function isElement(value: any): boolean;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要比较的值。
-- `other` (`unknown`): 要比较的另一个值。
+- `value` (`any`): 要检查的值。
 
 ### 返回值
 
-(`boolean`): 如果值大于或等于另一个值，则返回`true`，否则返回`false`。
+(`boolean`): 如果 `value` 是 DOM 元素，则返回 `true`，否则返回 `false`。
 
 ## 示例
 
 ```typescript
-gte(3, 1); // => true
-gte(3, 3); // => true
-gte(1, 3); // => false
+console.log(isElement(document.body)); // true
+console.log(isElement('<body>')); // false
 ```

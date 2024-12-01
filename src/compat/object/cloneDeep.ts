@@ -1,5 +1,4 @@
-import { cloneDeep as cloneDeepToolkit, copyProperties } from '../../object/cloneDeep.ts';
-import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tags.ts';
+import { cloneDeepWith } from './cloneDeepWith.ts';
 
 /**
  * Creates a deep clone of the given object.
@@ -48,38 +47,5 @@ import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tag
  * console.log(clonedObj === obj); // false
  */
 export function cloneDeep<T>(obj: T): T {
-  if (typeof obj !== 'object') {
-    return cloneDeepToolkit(obj);
-  }
-
-  switch (Object.prototype.toString.call(obj)) {
-    case numberTag:
-    case stringTag:
-    case booleanTag: {
-      // eslint-disable-next-line
-      // @ts-ignore
-      const result = new obj.constructor(obj?.valueOf()) as T;
-      copyProperties(result, obj);
-      return result;
-    }
-
-    case argumentsTag: {
-      const result = {} as any;
-
-      copyProperties(result, obj);
-
-      // eslint-disable-next-line
-      // @ts-ignore
-      result.length = obj.length;
-      // eslint-disable-next-line
-      // @ts-ignore
-      result[Symbol.iterator] = obj[Symbol.iterator];
-
-      return result as T;
-    }
-
-    default: {
-      return cloneDeepToolkit(obj);
-    }
-  }
+  return cloneDeepWith(obj);
 }

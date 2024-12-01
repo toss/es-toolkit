@@ -101,7 +101,7 @@ export function findIndex<T>(
 export function findIndex<T>(
   arr: ArrayLike<T> | null | undefined,
   doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
-  fromIndex: number = 0
+  fromIndex = 0
 ): number {
   if (!arr) {
     return -1;
