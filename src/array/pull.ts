@@ -1,22 +1,21 @@
 /**
- * 지정된 값을 배열에서 모두 제거하고 수정된 배열을 반환합니다.
+ * Removes all specified values from an array.
  *
- * 이 함수는 원본 배열을 변형합니다.
+ * This function changes `arr` in place.
+ * If you want to remove values without modifying the original array, use `difference`.
  *
- * @template T
- * @param {T[]} arr - 요소를 제거할 배열입니다.
- * @param {...T} values - 배열에서 제거할 값들입니다.
- * @returns {T[]} 지정된 값들이 제거된 수정된 배열입니다.
+ * @template T, U
+ * @param {T[]} arr - The array to modify.
+ * @param {U[]} valuesToRemove - The values to remove from the array.
+ * @returns {T[]} The modified array with the specified values removed.
  *
  * @example
- * import { pull } from './pull';
- *
- * const numbers = [1, 2, 3, 1, 2, 3];
- * pull(numbers, 1, 3);
- * console.log(numbers); // [2, 2]
+ * const numbers = [1, 2, 3, 4, 5, 2, 4];
+ * pull(numbers, [2, 4]);
+ * console.log(numbers); // [1, 3, 5]
  */
-export function pull<T>(arr: T[], ...values: T[]): T[] {
-  const valuesSet = new Set(values);
+export function pull<T, U>(arr: T[], valuesToRemove: readonly U[]): T[] {
+  const valuesSet = new Set<T | U>(valuesToRemove);
 
   for (let i = arr.length - 1; i >= 0; i--) {
     if (valuesSet.has(arr[i])) {
