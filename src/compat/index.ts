@@ -185,6 +185,7 @@ export { eq } from './util/eq.ts';
 export { gt } from './util/gt.ts';
 export { gte } from './util/gte.ts';
 export { iteratee } from './util/iteratee.ts';
+export { now } from './util/now.ts';
 export { stubArray } from './util/stubArray.ts';
 export { stubFalse } from './util/stubFalse.ts';
 export { stubObject } from './util/stubObject.ts';
