@@ -45,9 +45,7 @@ function flattenObjectImpl(object: object, prefix = ''): Record<string, any> {
     }
 
     if (Array.isArray(value)) {
-      for (let index = 0; index < value.length; index++) {
-        result[`${prefixedKey}.${index}`] = value[index];
-      }
+      Object.assign(result, flattenObjectImpl(value, prefixedKey));
       continue;
     }
 

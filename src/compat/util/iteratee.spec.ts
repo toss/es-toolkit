@@ -133,13 +133,13 @@ describe('iteratee', () => {
     const expected = [1, 2, 3];
     const object = { a: 1, iteratee: iteratee(partial(fn, 2)) };
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(object.iteratee(3)).toEqual(expected);
 
     object.iteratee = iteratee(partialRight(fn, 3));
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(object.iteratee(2)).toEqual(expected);
   });
 
