@@ -13,6 +13,10 @@ describe('lastIndexOf', () => {
     expect(lastIndexOf(array, 3)).toBe(5);
   });
 
+  it(`should work with \`NaN\``, () => {
+    expect(lastIndexOf([1, 2, 3, NaN, 1, 2], NaN)).toBe(3);
+  });
+
   it(`should work with a positive \`fromIndex\``, () => {
     expect(lastIndexOf(array, 1, 2)).toBe(0);
   });
