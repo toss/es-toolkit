@@ -3,9 +3,9 @@ import { merge } from './merge';
 import { range } from '../../math/range';
 import { isEqual } from '../../predicate/isEqual';
 import { args } from '../_internal/args';
-import { stubTrue } from '../_internal/stubTrue';
 import { typedArrays } from '../_internal/typedArrays';
 import { isArguments } from '../predicate/isArguments';
+import { stubTrue } from '../util/stubTrue';
 
 describe('merge', () => {
   it('should merge `source` into `object`', () => {

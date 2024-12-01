@@ -4,8 +4,8 @@ import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { slice } from '../_internal/slice';
-import { stubTrue } from '../_internal/stubTrue';
 import { symbol } from '../_internal/symbol';
+import { stubTrue } from '../util/stubTrue';
 
 describe('isEmpty', () => {
   it('should return `true` for empty values', () => {

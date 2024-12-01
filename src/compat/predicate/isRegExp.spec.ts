@@ -3,8 +3,8 @@ import { isRegExp } from './isRegExp';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
+import { stubFalse } from '../util/stubFalse';
 
 /**
  * https://github.com/lodash/lodash/blob/main/test/isRegExp.spec.js
