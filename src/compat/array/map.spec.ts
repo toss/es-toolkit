@@ -33,6 +33,7 @@ describe('map', () => {
 
   it('should use `_.identity` when `iteratee` is nullish', () => {
     const object = { a: 1, b: 2 };
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = values.map(constant([1, 2]));
 
@@ -47,10 +48,8 @@ describe('map', () => {
     const expected = falsey.map(stubArray);
 
     const actual = falsey.map((collection, index) => {
-      try {
-        // @ts-expect-error - invalid types
-        return index ? map(collection as any) : map();
-      } catch (e) {}
+      // @ts-expect-error - invalid types
+      return index ? map(collection as any) : map();
     });
 
     expect(actual).toEqual(expected);
@@ -74,5 +73,12 @@ describe('map', () => {
     const object = { length: { value: 'x' } };
 
     expect(map(object, identity)).toEqual([value]);
+  });
+
+  it('should accept an object iteratee', () => {
+    const object = [{ a: 1 }, { a: 2 }, { a: 1 }];
+    const expected = [true, false, true];
+
+    expect(map(object, { a: 1 })).toEqual(expected);
   });
 });
