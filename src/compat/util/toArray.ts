@@ -23,10 +23,6 @@ export function toArray(value?: unknown): any[] {
     return Array.from(value);
   }
 
-  if (typeof value === 'string') {
-    return value.split('');
-  }
-
   if (typeof value === 'object') {
     return Object.values(value);
   }
