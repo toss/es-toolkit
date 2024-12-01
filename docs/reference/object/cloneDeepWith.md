@@ -9,14 +9,14 @@ You can customize the deep cloning process using the `cloneValue` function. The 
 ```typescript
 function cloneDeepWith<T>(
   obj: T,
-  cloneValue: (value: any, key: PropertyKey | undefined, obj: T | undefined, stack: Map<any, any>) => any
+  cloneValue: (value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any
 ): T;
 ```
 
 ### Parameters
 
 - `obj` (`T`): The object to clone.
-- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T | undefined, stack: Map<any, any>) => any`): A function that specifies how to clone the value. It can return a cloned value instead of using the default method. If it returns `undefined`, the default method is used to clone the value.
+- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any`): A function that specifies how to clone the value. It can return a cloned value instead of using the default method. If it returns `undefined`, the default method is used to clone the value.
   - `value`: The current value being cloned.
   - `key`: The property name of the current value being cloned.
   - `obj`: The entire object `obj` to clone.

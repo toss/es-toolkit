@@ -9,14 +9,14 @@
 ```typescript
 function cloneDeepWith<T>(
   obj: T,
-  cloneValue: (value: any, key: PropertyKey | undefined, obj: T | undefined, stack: Map<any, any>) => any
+  cloneValue: (value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any
 ): T;
 ```
 
 ### 파라미터
 
 - `obj` (`T`): 복사할 객체.
-- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T | undefined, stack: Map<any, any>) => any`): 값을 복사하는 방법을 나타내는 함수. 기본 방법을 사용하지 않고 값을 복사해서 반환할 수 있어요. `undefined`를 반환하면 기본 방법으로 값이 복사돼요.
+- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any`): 값을 복사하는 방법을 나타내는 함수. 기본 방법을 사용하지 않고 값을 복사해서 반환할 수 있어요. `undefined`를 반환하면 기본 방법으로 값이 복사돼요.
   - `value`: 현재 복사되고 있는 값.
   - `key`: 현재 복사되고 있는 값에 대한 프로퍼티 이름.
   - `obj`: 복사할 전체 객체 `obj`.

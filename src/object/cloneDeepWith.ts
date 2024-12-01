@@ -3,7 +3,12 @@ import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
 /**
- * Creates a deep clone of the given object using a customizer function.
+ * Deeply clones the given object.
+ *
+ * You can customize the deep cloning process using the `cloneValue` function.
+ * The function takes the current value `value`, the property name `key`, and the entire object `obj` as arguments.
+ * If the function returns a value, that value is used;
+ * if it returns `undefined`, the default cloning method is used.
  *
  * @template T - The type of the object.
  * @param {T} obj - The object to clone.
@@ -39,7 +44,7 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
  */
 export function cloneDeepWith<T>(
   obj: T,
-  cloneValue: (value: any, key: PropertyKey | undefined, object: T | undefined, stack: Map<any, any>) => any
+  cloneValue: (value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any
 ): T {
   return cloneDeepWithImpl(obj, undefined, obj, new Map(), cloneValue);
 }
@@ -49,9 +54,7 @@ export function cloneDeepWithImpl<T>(
   keyToClone: PropertyKey | undefined,
   objectToClone: T,
   stack = new Map<any, any>(),
-  cloneValue:
-    | ((value: any, key: PropertyKey | undefined, object: T | undefined, stack: Map<any, any>) => any)
-    | undefined = undefined
+  cloneValue: ((value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any) | undefined = undefined
 ): T {
   const cloned = cloneValue?.(valueToClone, keyToClone, objectToClone, stack);
 
@@ -212,9 +215,7 @@ export function copyProperties<T>(
   source: any,
   objectToClone: T = target,
   stack?: Map<any, any> | undefined,
-  cloneValue?:
-    | ((value: any, key: PropertyKey | undefined, object: T | undefined, stack: Map<any, any>) => any)
-    | undefined
+  cloneValue?: ((value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any) | undefined
 ): void {
   const keys = [...Object.keys(source), ...getSymbols(source)];
 

@@ -9,14 +9,14 @@
 ```typescript
 function cloneDeepWith<T>(
   obj: T,
-  cloneValue: (value: any, key: PropertyKey | undefined, obj: T | undefined, stack: Map<any, any>) => any
+  cloneValue: (value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any
 ): T;
 ```
 
 ### 参数
 
 - `obj` (`T`): 要克隆的对象。
-- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T | undefined, stack: Map<any, any>) => any`): 表示如何克隆值的函数。可以返回克隆后的值而不是使用默认方法。如果返回 `undefined`，则使用默认方法克隆值。
+- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any`): 表示如何克隆值的函数。可以返回克隆后的值而不是使用默认方法。如果返回 `undefined`，则使用默认方法克隆值。
   - `value`: 当前正在克隆的值。
   - `key`: 当前正在克隆的值的属性名。
   - `obj`: 要克隆的整个对象 `obj`。

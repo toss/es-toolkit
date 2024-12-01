@@ -16,7 +16,7 @@ function cloneDeepWith<T>(
 ### パラメータ
 
 - `obj` (`T`): クローンするオブジェクト。
-- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T | undefined, stack: Map<any, any>) => any`): 値をクローンする方法を示す関数。デフォルトの方法を使用せずに値をクローンして返すことができます。`undefined`を返すと、デフォルトの方法で値がクローンされます。
+- `cloneValue` (`(value: any, key: PropertyKey | undefined, obj: T, stack: Map<any, any>) => any`): 値をクローンする方法を示す関数。デフォルトの方法を使用せずに値をクローンして返すことができます。`undefined`を返すと、デフォルトの方法で値がクローンされます。
   - `value`: 現在クローンされている値。
   - `key`: 現在クローンされている値のプロパティ名。
   - `obj`: クローンする全体のオブジェクト `obj`。
