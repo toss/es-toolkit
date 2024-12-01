@@ -3,9 +3,9 @@ import { isSet } from './isSet';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
 import { weakSet } from '../_internal/weakSet';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isSet', () => {
   it('should return `true` for sets', () => {

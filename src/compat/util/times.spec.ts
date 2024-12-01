@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
+import { stubArray } from './stubArray';
 import { times } from './times';
 import { doubled } from '../_internal/doubled';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubArray } from '../_internal/stubArray';
 
 describe('times', () => {
   it('should coerce non-finite `n` values to `0`', () => {

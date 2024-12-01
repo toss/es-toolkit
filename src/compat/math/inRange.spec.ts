@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { inRange } from './inRange';
 import { falsey } from '../_internal/falsey';
-import { stubTrue } from '../_internal/stubTrue';
+import { stubTrue } from '../util/stubTrue';
 
 describe('inRange', () => {
   it('should work with an `end`', () => {

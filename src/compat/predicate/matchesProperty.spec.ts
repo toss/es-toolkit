@@ -3,9 +3,9 @@ import { matchesProperty } from './matchesProperty';
 import { noop } from '../../function/noop';
 import { range } from '../../math/range';
 import { numberProto } from '../_internal/numberProto';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubTrue } from '../_internal/stubTrue';
 import { cloneDeep } from '../object/cloneDeep';
+import { stubFalse } from '../util/stubFalse';
+import { stubTrue } from '../util/stubTrue';
 
 describe('matchesProperty', () => {
   it('should create a function that performs a deep comparison between a property value and `srcValue`', () => {
@@ -337,7 +337,13 @@ describe('matchesProperty', () => {
 
     expect(actual).toEqual(expected);
 
-    objects = [{ a: { a: 1 } }, { a: { a: 1, b: 1 } }, { a: { a: 1, b: undefined } }];
+    objects = [
+      { a: { a: 1 } },
+      { a: { a: 1, b: 1 } },
+      {
+        a: { a: 1, b: undefined },
+      },
+    ];
     actual = objects.map(matchesProperty('a', { b: undefined }));
 
     expect(actual).toEqual(expected);

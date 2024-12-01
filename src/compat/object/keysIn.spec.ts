@@ -3,7 +3,7 @@ import { keysIn } from './keysIn';
 import { args } from '../_internal/args';
 import { primitives } from '../_internal/primitives';
 import { strictArgs } from '../_internal/strictArgs';
-import { stubArray } from '../_internal/stubArray';
+import { stubArray } from '../util/stubArray';
 
 describe('keys methods', () => {
   const func = keysIn;

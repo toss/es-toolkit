@@ -3,7 +3,7 @@ import { isSymbol } from './isSymbol';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isSymbol', () => {
   it('should return `true` for symbols', () => {
