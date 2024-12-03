@@ -38,7 +38,7 @@ export function sumBy(array: ArrayLike<bigint>): bigint;
 export function sumBy(array: ArrayLike<unknown> | null | undefined): unknown;
 
 /**
- * Compmutes the sum of the `number` values that are returned by the `iteratee` function.
+ * Computes the sum of the `number` values that are returned by the `iteratee` function.
  *
  * @template T - The type of the array elements.
  * @param {ArrayLike<T>} array - The array to iterate over.
@@ -51,7 +51,7 @@ export function sumBy(array: ArrayLike<unknown> | null | undefined): unknown;
 export function sumBy<T>(array: ArrayLike<T>, iteratee: (value: T) => number): number;
 
 /**
- * Compmutes the sum of the `bigint` values that are returned by the `iteratee` function.
+ * Computes the sum of the `bigint` values that are returned by the `iteratee` function.
  *
  * NOTE: If the `array` is empty, the function returns `0`.
  *
@@ -67,7 +67,7 @@ export function sumBy<T>(array: ArrayLike<T>, iteratee: (value: T) => number): n
 export function sumBy<T>(array: ArrayLike<T>, iteratee: (value: T) => bigint): bigint | number;
 
 /**
- * Compmutes the sum of the values that are returned by the `iteratee` function.
+ * Computes the sum of the values that are returned by the `iteratee` function.
  *
  * It does not coerce values to `number`.
  *
