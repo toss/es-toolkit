@@ -54,6 +54,7 @@ export { intersectionBy } from './array/intersectionBy.ts';
 export { join } from './array/join.ts';
 export { last } from './array/last.ts';
 export { lastIndexOf } from './array/lastIndexOf.ts';
+export { nth } from './array/nth.ts';
 export { orderBy } from './array/orderBy.ts';
 export { pull } from './array/pull.ts';
 export { sample } from './array/sample.ts';
