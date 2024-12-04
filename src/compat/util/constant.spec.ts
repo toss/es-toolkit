@@ -36,7 +36,7 @@ describe('constant', () => {
     expect(actual).toEqual(expected);
   });
 
-  // Chaning is out of scope for es-toolkit
+  // Chaining is out of scope for es-toolkit
 
   // it('should return a wrapped value when chaining', () => {
   //   const wrapped = _(true).constant();
