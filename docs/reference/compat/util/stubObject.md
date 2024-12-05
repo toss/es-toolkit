@@ -11,12 +11,12 @@ Returns an empty object.
 ## Signature
 
 ```typescript
-function stubObject(): {};
+function stubObject(): Record<PropertyKey, never>;
 ```
 
 ### Returns
 
-(`{}`): An empty object.
+(`Record<PropertyKey, never>`): An empty object.
 
 ## Examples
 

@@ -1,10 +1,10 @@
 /**
  * Returns an empty object.
  *
- * @returns {Object} An empty object.
+ * @returns {Record<PropertyKey, never>} An empty object.
  * @example
  * stubObject() // Returns {}
  */
-export function stubObject(): {} {
+export function stubObject(): Record<PropertyKey, never> {
   return {};
 }
