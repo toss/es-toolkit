@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Determines the lowest index at which a given value should be inserted into a sorted array to maintain its sort order. Unlike sortedIndex, this function allows you to specify a custom iteratee function to extract the value for comparison.
+Determines the lowest index at which a given value should be inserted into a sorted array to maintain its sort order. Unlike [sortedIndex](./sortedIndex.md), this function allows you to specify a custom iteratee function to extract the value for comparison.
 
 - The iteratee is invoked for both the array elements and the value being inserted.
 - This is particularly useful for arrays containing objects or custom data types where the sort order is based on specific properties or computed values.
@@ -44,12 +44,12 @@ const objects = [{ x: 10 }, { x: 20 }, { x: 30 }];
 
 // Use an iteratee to extract the `x` property for comparison
 sortedIndexBy(objects, { x: 25 }, o => o.x);
-// Returns: 2
-// Explanation: Based on the `x` property, the value `{ x: 25 }` should be inserted at index 2.
+// Return value: 2
+// Explanation: Based on the `x` property, `{ x: 25 }` returns index 2.
 
 // Handle custom sorting logic
 const strings = ['apple', 'banana', 'cherry'];
 sortedIndexBy(strings, 'apricot', str => str.length);
-// Returns: 1
-// Explanation: The insertion is based on the string length.
+// Return value: 1
+// Explanation: Based on the string length, 'apricot' returns index 1.
 ```

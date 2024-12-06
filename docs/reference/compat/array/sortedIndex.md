@@ -10,7 +10,7 @@ Finds the lowest index at which a given value should be inserted into a sorted a
 
 - If the array is already sorted, sortedIndex ensures that the new value is inserted in the correct position without disrupting the order.
 - The search is performed using a binary search algorithm, making it efficient for large arrays.
-- For more complex or custom sorting logic, it delegates to sortedIndexBy, which allows specifying an iteratee function to customize how elements are compared.
+- For more complex or custom sorting logic, it delegates to [sortedIndexBy](./sortedIndexBy.md), which allows specifying an iteratee function to customize how elements are compared.
 
 The function returns the index at which the value should be inserted. If the value already exists in the array, the returned index will be before the first occurrence of the value.
 
@@ -34,18 +34,18 @@ function sortedIndex<T>(array: ArrayLike<T> | null | undefined, value: T): numbe
 ```typescript
 import { sortedIndex } from 'es-toolkit/compat';
 
-// Basic usage with numbers
+// Basic usage with a number array
 sortedIndex([10, 20, 30, 50], 40);
-// Returns: 3
-// Explanation: 40 should be inserted at index 3 to maintain order.
+// Return value: 3
+// Explanation: 40 returns index 3 to maintain the sort order.
 
 // Handling an empty or null array
 sortedIndex(null, 25);
-// Returns: 0
-// Explanation: Null or undefined arrays are treated as empty, so insertion is at index 0.
+// Return value: 0
+// Explanation: Null or undefined arrays are treated as empty, so 0 is returned.
 
-// Custom comparison through sortedIndexBy (delegated behavior)
+// Using default comparison logic (delegated behavior with sortedIndexBy)
 sortedIndex([10, '20', 30], 25);
-// Returns: 2
-// Explanation: Delegates to sortedIndexBy, using default comparison logic.
+// Return value: 2
+// Explanation: Using default comparison logic, it returns index 2.
 ```
