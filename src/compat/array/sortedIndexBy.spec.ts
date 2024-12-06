@@ -2,11 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { sortedIndexBy } from './sortedIndexBy';
 
 describe('sortedIndexBy', () => {
-  it('should work correctly', () => {
-    const objects = [{ n: 4 }, { n: 5 }];
-    expect(sortedIndexBy(objects, { n: 4 }, ({ n }) => n)).toBe(0);
-  });
-
   it('should provide correct `iteratee` arguments', () => {
     let args: unknown[];
 

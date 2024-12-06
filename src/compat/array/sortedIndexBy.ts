@@ -25,7 +25,7 @@ const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
 export function sortedIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
-  iteratee: Iteratee<T, R>,
+  iteratee?: Iteratee<T, R>,
   retHighest?: boolean
 ): number {
   let low = 0;
@@ -34,7 +34,7 @@ export function sortedIndexBy<T, R>(
     return 0;
   }
 
-  const transformedValue = iteratee(value);
+  const transformedValue = iteratee?.(value);
 
   const valIsNaN = isNaN(transformedValue);
   const valIsNull = isNull(transformedValue);
@@ -44,7 +44,7 @@ export function sortedIndexBy<T, R>(
   while (low < high) {
     let setLow: boolean;
     const mid = Math.floor((low + high) / 2);
-    const computed = iteratee(array[mid]);
+    const computed = iteratee?.(array[mid]);
 
     const othIsDefined = !isUndefined(computed);
     const othIsNull = isNull(computed);

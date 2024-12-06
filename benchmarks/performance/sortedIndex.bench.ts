@@ -6,10 +6,19 @@ const sortedIndexToolkitCompat = sortedIndexToolkitCompat_;
 const sortedIndexLodash = sortedIndexLodash_;
 
 describe('sortedIndex', () => {
+  const largeArray = Array.from({ length: 1000000 }, (_, i) => i * 2);
+  const array = [...largeArray, NaN, undefined, null];
+
   bench('es-toolkit/compat', () => {
-    sortedIndexToolkitCompat([30, 50], 40);
+    sortedIndexToolkitCompat(array, 39);
+    sortedIndexToolkitCompat(array, NaN);
+    sortedIndexToolkitCompat(array, undefined);
+    sortedIndexToolkitCompat(array, null);
   });
   bench('lodash/sortedIndex', () => {
-    sortedIndexLodash([30, 50], 40);
+    sortedIndexLodash(array, 39);
+    sortedIndexLodash(array, NaN);
+    sortedIndexLodash(array, undefined);
+    sortedIndexLodash(array, null);
   });
 });
