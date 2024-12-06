@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { sortBy } from './sortBy.ts';
 import { sortedIndex } from './sortedIndex.ts';
 
 describe('sortedIndex', () => {
@@ -35,17 +36,18 @@ describe('sortedIndex', () => {
     expect(actual).toEqual(expected);
   });
 
-  it(`should align with '_.sortBy' for various data types`, () => {
+  it(`should align with 'sortBy' for various data types`, () => {
     const symbol1 = Symbol ? Symbol('a') : null;
     const symbol2 = Symbol ? Symbol('b') : null;
+    const symbol3 = Symbol ? Symbol('c') : null;
+
     const expected = [1, '2', {}, symbol1, symbol2, null, undefined, NaN, NaN];
 
     const array = [NaN, symbol1, null, 1, '2', {}, symbol2, NaN, undefined];
-    const sorted = [...array].sort((a, b) => (String(a) > String(b) ? 1 : -1));
 
-    expect(sorted).toEqual(expected);
+    expect(sortBy(array)).toEqual(expected);
     expect(sortedIndex(expected, 3)).toBe(2);
-    expect(sortedIndex(expected, symbol1)).toBe(3);
+    expect(sortedIndex(expected, symbol3)).toBe(3);
     expect(sortedIndex(expected, null)).toBe(5);
     expect(sortedIndex(expected, undefined)).toBe(6);
     expect(sortedIndex(expected, NaN)).toBe(7);
