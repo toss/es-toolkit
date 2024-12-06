@@ -33,7 +33,7 @@ function sortedIndexBy<T, R>(
 
 ### Returns
 
-(`number`): The index at which the value should be inserted to maintain the sort order.
+`number`: The index at which the value should be inserted to maintain the sort order.
 
 ## Example
 

@@ -32,6 +32,10 @@ function sortedIndexBy<T, R>(
 - `retHighest` (`boolean, 선택 사항`):
   동일한 값이 배열에 존재하는 경우, 마지막 위치를 반환하려면 true로 설정해요. (기본값: false)
 
+### 반환 값
+
+`number`: 정렬 순서를 유지하기 위해 값을 삽입할 인덱스입니다.
+
 ## 예시
 
 ```typescript
