@@ -1,9 +1,30 @@
+import { isNull, isUndefined } from '../../predicate';
+import { isNaN } from '../predicate/isNaN';
 import { isNil } from '../predicate/isNil';
 import { isSymbol } from '../predicate/isSymbol';
 
 type Iteratee<T, R> = (value: T) => R;
-const MAX_ARRAY_INDEX = Number.MAX_SAFE_INTEGER;
 
+const MAX_ARRAY_LENGTH = 4294967295;
+const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
+/**
+ * This method is like `sortedIndex` except that it accepts `iteratee`
+ * which is invoked for `value` and each element of `array` to compute their
+ * sort ranking. The iteratee is invoked with one argument: (value).
+ *
+ * @category Array
+ * @param {Array} array The sorted array to inspect.
+ * @param {*} value The value to evaluate.
+ * @param {Function} iteratee The iteratee invoked per element.
+ * @returns {number} Returns the index at which `value` should be inserted
+ *  into `array`.
+ * @example
+ *
+ * const objects = [{ 'n': 4 }, { 'n': 5 }]
+ *
+ * sortedIndexBy(objects, { 'n': 4 }, ({ n }) => n)
+ * // => 0
+ */
 export function sortedIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
@@ -18,19 +39,19 @@ export function sortedIndexBy<T, R>(
 
   const transformedValue = iteratee(value);
 
-  const valIsNaN = transformedValue !== transformedValue; // Check for NaN
-  const valIsNull = transformedValue === null;
+  const valIsNaN = isNaN(transformedValue);
+  const valIsNull = isNull(transformedValue);
   const valIsSymbol = isSymbol(transformedValue);
-  const valIsUndefined = transformedValue === undefined;
+  const valIsUndefined = isUndefined(transformedValue);
 
   while (low < high) {
     let setLow: boolean;
     const mid = Math.floor((low + high) / 2);
     const computed = iteratee(array[mid]);
 
-    const othIsDefined = computed !== undefined;
-    const othIsNull = computed === null;
-    const othIsReflexive = computed === computed; // Check for NaN
+    const othIsDefined = !isUndefined(computed);
+    const othIsNull = isNull(computed);
+    const othIsReflexive = !isNaN(computed);
     const othIsSymbol = isSymbol(computed);
 
     if (valIsNaN) {
