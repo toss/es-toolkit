@@ -5,10 +5,10 @@ describe('sortedIndexBy', () => {
   it('should provide correct `iteratee` arguments', () => {
     let args: unknown[];
 
-    sortedIndexBy([30, 50], 40, function () {
-      args || (args = Array.prototype.slice.call(arguments));
+    sortedIndexBy([30, 50], 40, function (value) {
+      args = args || [value];
     });
-    // @ts-expect-error
+    // @ts-expect-error Variable 'args' is used before being assigned.ts(2454)
     expect(args).toEqual([40]);
   });
 
