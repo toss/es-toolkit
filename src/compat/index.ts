@@ -61,6 +61,8 @@ export { size } from './array/size.ts';
 export { slice } from './array/slice.ts';
 export { some } from './array/some.ts';
 export { sortBy } from './array/sortBy.ts';
+export { sortedIndex } from './array/sortedIndex.ts'
+export { sortedIndexBy } from './array/sortedIndexBy.ts'
 export { tail } from './array/tail.ts';
 export { take } from './array/take.ts';
 export { takeRight } from './array/takeRight.ts';
