@@ -24,16 +24,16 @@ function sortedIndexBy<T, R>(
 
 ### Parameters
 
-- array (`ArrayLike<T> | null | undefined`):
+- `array` (`ArrayLike<T> | null | undefined`):
   The sorted array to inspect. Can be null or undefined, in which case it is treated as an empty array.
-- value (`T`):
+- `value` (`T`):
   The value to evaluate and find the appropriate index for insertion.
-- iteratee (`(item: T) => R`):
+- `iteratee` (`(item: T) => R`):
   A function that transforms the elements of the array and the value to be inserted. This function determines the sort order by returning the value used for comparison.
 
 ### Returns
 
-`number`: The index at which the value should be inserted to maintain the sort order.
+(`number`): The index at which the value should be inserted to maintain the sort order.
 
 ## Example
 

@@ -30,7 +30,7 @@ function sortedIndex<T>(array: ArrayLike<T> | null | undefined, value: T): numbe
 
 ### 반환 값
 
-`number`: 배열의 정렬 순서를 유지하기 위해 값이 삽입되어야 할 인덱스.
+(`number`): 배열의 정렬 순서를 유지하기 위해 값이 삽입되어야 할 인덱스.
 
 ## 예시
 

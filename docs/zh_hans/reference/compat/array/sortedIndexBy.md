@@ -24,16 +24,16 @@ function sortedIndexBy<T, R>(
 
 ### 参数
 
-- array (`ArrayLike<T> | null | undefined`)：
+- `array` (`ArrayLike<T> | null | undefined`)：
   要检查的排序数组。可以是 null 或 undefined，在这种情况下，它将被视为空数组。
-- value (`T`)：
+- `value` (`T`)：
   要评估的值，为插入找到合适的索引。
-- iteratee (`(item: T) => R`)：
+- `iteratee` (`(item: T) => R`)：
   一个转换数组元素和要插入的值的函数。该函数通过返回用于比较的值来确定排序顺序。
 
 ### 返回值
 
-`number`： 为保持排序顺序而插入值的索引。
+(`number`)： 为保持排序顺序而插入值的索引。
 
 ## 示例
 

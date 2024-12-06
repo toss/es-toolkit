@@ -27,7 +27,7 @@ function sortedIndex<T>(array: ArrayLike<T> | null | undefined, value: T): numbe
 
 ### 返回值
 
-`number`： 应插入值的索引
+(`number`)： 应插入值的索引
 
 ## 示例
 
