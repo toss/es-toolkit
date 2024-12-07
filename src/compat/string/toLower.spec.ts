@@ -22,25 +22,16 @@ describe('toLower', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should preserve contractions with apostrophes', () => {
-    const postfixes = ['d', 'll', 'm', 're', 's', 't', 've'];
-    ["'", '\u2019'].forEach(apos => {
-      const actual = postfixes.map(postfix => toLower(`a b${apos}${postfix} c`));
-      const expected = postfixes.map(postfix => `A B${apos}${postfix.toLowerCase()} C`);
-      expect(actual).toEqual(expected);
-    });
-  });
-
   it('should preserve spaces and special characters', () => {
-    expect(toLower('hello   world')).toBe('HELLO   WORLD');
-    expect(toLower('!@#$hello%^&*')).toBe('!@#$HELLO%^&*');
-    expect(toLower('tabs\tand\nnewlines')).toBe('TABS\tAND\nNEWLINES');
+    expect(toLower('HELLO   WORLD')).toBe('hello   world');
+    expect(toLower('!@#$HELLO%^&*')).toBe('!@#$hello%^&*');
+    expect(toLower('TABS\tAND\nNEWLINES')).toBe('tabs\tand\nnewlines');
   });
 
   it('should handle unicode characters', () => {
-    expect(toLower('café')).toBe('CAFÉ');
-    expect(toLower('über')).toBe('ÜBER');
-    expect(toLower('señor')).toBe('SEÑOR');
+    expect(toLower('CAFÉ')).toBe('café');
+    expect(toLower('ÜBER')).toBe('über');
+    expect(toLower('SEÑOR')).toBe('señor');
   });
 
   it('should preserve Latin mathematical operators', () => {
@@ -57,39 +48,39 @@ describe('toLower', () => {
     expect(toLower(123)).toBe('123');
     expect(toLower(-0)).toBe('-0');
     expect(toLower(0)).toBe('0');
-    expect(toLower(Infinity)).toBe('INFINITY');
-    expect(toLower(NaN)).toBe('NAN');
+    expect(toLower(Infinity)).toBe('infinity');
+    expect(toLower(NaN)).toBe('nan');
   });
 
   it('should handle arrays', () => {
     expect(toLower([1, 2, 3])).toBe('1,2,3');
-    expect(toLower(['a', 'b', 'c'])).toBe('A,B,C');
-    expect(toLower([1, 'b', -0])).toBe('1,B,-0');
+    expect(toLower(['a', 'b', 'c'])).toBe('a,b,c');
+    expect(toLower([1, 'b', -0])).toBe('1,b,-0');
     expect(toLower([])).toBe('');
   });
 
   it('should handle nested arrays', () => {
     expect(toLower([1, [2, 3], 4])).toBe('1,2,3,4');
-    expect(toLower([[['a']]])).toBe('A');
+    expect(toLower([[['a']]])).toBe('a');
   });
 
   it('should handle symbols', () => {
     const sym1 = Symbol('test');
     const sym2 = Symbol('');
-    expect(toLower(sym1)).toBe('SYMBOL(TEST)');
-    expect(toLower(sym2)).toBe('SYMBOL()');
-    expect(toLower([Symbol('a'), Symbol('b')])).toBe('SYMBOL(A),SYMBOL(B)');
+    expect(toLower(sym1)).toBe('symbol(test)');
+    expect(toLower(sym2)).toBe('symbol()');
+    expect(toLower([Symbol('a'), Symbol('b')])).toBe('symbol(a),symbol(b)');
   });
 
   it('should handle objects', () => {
     const obj = { toString: () => 'custom' };
-    expect(toLower(obj)).toBe('CUSTOM');
-    expect(toLower({})).toBe('[OBJECT OBJECT]');
+    expect(toLower(obj)).toBe('custom');
+    expect(toLower({})).toBe('[object object]');
   });
 
   it('should handle mixed types in arrays', () => {
     const sym = Symbol('test');
-    expect(toLower([1, 'b', sym, null, undefined])).toBe('1,B,SYMBOL(TEST),,');
+    expect(toLower([1, 'b', sym, null, undefined])).toBe('1,b,symbol(test),,');
   });
 
   it('should maintain proper TypeScript types', () => {
