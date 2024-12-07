@@ -19,7 +19,7 @@ describe('throttle', () => {
     const throttleMs = 500;
     const throttledFunc = throttle(func, throttleMs);
 
-    throttledFunc(); // should be excuted
+    throttledFunc(); // should be executed
     expect(func).toHaveBeenCalledTimes(1);
 
     await delay(throttleMs / 2);
@@ -31,7 +31,7 @@ describe('throttle', () => {
     await delay(throttleMs / 2 + 1);
     expect(func).toHaveBeenCalledTimes(1);
 
-    throttledFunc(); // should be excuted
+    throttledFunc(); // should be executed
     expect(func).toHaveBeenCalledTimes(2);
 
     await delay(throttleMs / 2 - 1);

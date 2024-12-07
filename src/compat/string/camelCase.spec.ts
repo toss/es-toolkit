@@ -41,7 +41,7 @@ describe('camelCase', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should remove constraction apostrophes', () => {
+  it('should remove contraction apostrophes', () => {
     const apostrophes = ["'", '\u2019'];
     const postfixes = ['d', 'll', 'm', 're', 's', 't', 've'];
 
