@@ -1,9 +1,32 @@
 import { describe, expect, it } from 'vitest';
 import { reverse } from './reverse';
-
-// reverse 함수 경로에 맞게 수정하세요
+import { range } from '../../math/range';
+import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
+import { times } from '../util/times';
 
 describe('reverse', () => {
+  const largeArray = range(LARGE_ARRAY_SIZE).concat([null as any]);
+  const smallArray = [0, 1, 2, null];
+
+  it('should reverse `array`', () => {
+    const array = [1, 2, 3];
+    const actual = reverse(array);
+
+    expect(actual).toBe(array);
+    expect(array).toEqual([3, 2, 1]);
+  });
+
+  it('should return the wrapped reversed `array`', () => {
+    times(2, index => {
+      const array = (index ? largeArray : smallArray).slice();
+      const clone = array.slice();
+      const actual = reverse(array);
+
+      expect(actual).toBe(array);
+      expect(actual).toEqual(clone.slice().reverse());
+    });
+  });
+
   it('should return null if input is null', () => {
     expect(reverse(null)).toBeNull();
   });
@@ -16,13 +39,6 @@ describe('reverse', () => {
     const array: number[] = [];
     const result = reverse(array);
     expect(result).toEqual([]);
-    expect(result).toBe(array);
-  });
-
-  it('should reverse an array with multiple elements', () => {
-    const array = [1, 2, 3, 4, 5];
-    const result = reverse(array);
-    expect(result).toEqual([5, 4, 3, 2, 1]);
     expect(result).toBe(array);
   });
 

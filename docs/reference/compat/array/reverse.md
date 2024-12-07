@@ -1,5 +1,11 @@
 # reverse
 
+::: info
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+:::
+
 Reverses the elements of an array in place.
 
 This function reverses the array elements in place, directly modifying the original array. If the input is null or undefined, it returns the input as is.
@@ -7,16 +13,16 @@ This function reverses the array elements in place, directly modifying the origi
 ## Signature
 
 ```typescript
-function reverse<T>(array: T[] | null | undefined): T[] | null | undefined;
+function reverse<T>(array: T[]): T[];
 ```
 
 ### Parameters
 
-- - `array` (`T[] | null | undefined`): The array to reverse.
+- `array` (`T[]`): The array to reverse.
 
 ### Returns
 
-(`T[] | null | undefined`): The reversed array, or null/undefined if the input was null/undefined.
+(`T[]`): The reversed array.
 
 ## Examples
 
