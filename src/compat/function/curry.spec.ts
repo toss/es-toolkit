@@ -3,6 +3,7 @@ import { bind } from './bind';
 import { curry } from './curry';
 import { partial } from '../../function/partial';
 import { partialRight } from '../../function/partialRight';
+import { map } from '../array/map';
 
 describe('curry', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -151,14 +152,13 @@ describe('curry', () => {
       return Array.from(arguments);
     }
     const array = [fn, fn, fn];
-    // TODO test object like this
-    // const object = { 'a': fn, 'b': fn, 'c': fn };
+    const object = { a: fn, b: fn, c: fn };
 
-    [array].forEach(collection => {
-      const curries = collection.map(curry),
-        expected = collection.map(() => ['a', 'b']);
+    [array, object].forEach(collection => {
+      const curries = map(collection, curry as (...args: any[]) => any),
+        expected = map(collection, () => ['a', 'b']);
 
-      const actual = curries.map(curried => curried('a')('b'));
+      const actual = map(curries, curried => curried('a')('b'));
 
       expect(actual).toEqual(expected);
     });
