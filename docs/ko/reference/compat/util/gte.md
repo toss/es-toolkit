@@ -22,7 +22,7 @@ function gte(value: unknown, other: unknown): boolean;
 ### 반환 값
 
 (`boolean`): 값이 다른 값보다 크거나 같으면 `true`를 반환하고, 그렇지 않으면 `false`를 반환해요.
- 문자열.
+문자열.
 
 ## 예시
 

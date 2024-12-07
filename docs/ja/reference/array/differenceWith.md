@@ -44,7 +44,7 @@ const result = differenceWith(array1, array2, areItemsEqual);
 
 - `differenceWith`は、最初の配列と比較するための複数の配列を受け取ることができます。
 - `differenceWith`は、配列風オブジェクト(Array-like object)も引数として受け取ることができます。
-- `differenceWith` 可以省略自定义比较函数。如果省略，将默认使用 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 算法。
+- `differenceWith`はカスタム比較関数を省略することができます。省略した場合、デフォルトで[SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero)アルゴリズムが使用されます。
 
 ```typescript
 import { differenceWith } from 'es-toolkit/compat';
