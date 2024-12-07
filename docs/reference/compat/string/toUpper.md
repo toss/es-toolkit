@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Converts the given value to a string and transforms it to uppercase. The function can handle various input types by first converting them to strings.
+Converts the given value to a string and transforms it to upper case. The function can handle various input types by first converting them to strings.
 
 ## Signature
 
@@ -16,11 +16,11 @@ function toUpper(value?: unknown): string;
 
 ## Parameters
 
-- `value`(`unknown`) : The value to convert to uppercase. If omitted, returns an empty string.
+- `value`(`unknown`) : The value to convert to upper case. If omitted, returns an empty string.
 
 ## Returns
 
-`string` : The uppercase version of the input value converted to a string.
+`string` : The upper case version of the input value converted to a string.
 
 ## Examples
 

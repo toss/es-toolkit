@@ -1,4 +1,4 @@
-# nth
+# lt
 
 ::: info
 This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
@@ -6,26 +6,27 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.
+Checks if value is less than other.
 
 ## Signature
 
 ```typescript
-function nth<T>(array: ArrayLike<T> | null | undefined, n: number): T | undefined;
+function lt(value: unknown, other: unknown): boolean;
 ```
 
 ### Parameters
 
-- `array` (`ArrayLike<T> | null | undefined`): The array to query.
-- `n` (`number`): The index of the element to return.
+- `value` (`unknown`): The value to compare.
+- `other` (`unknown`): The other value to compare.
 
 ### Returns
 
-(`T | undefined`): Returns the nth element of `array`.
+(`boolean`): Returns `true` if value is less than other, else `false`.
 
 ## Examples
 
 ```typescript
-nth([1, 2, 3], 1); // => 2
-nth([1, 2, 3], -1); // => 3
+lt(1, 3); // true
+lt(3, 3); // false
+lt(3, 1); // false
 ```
