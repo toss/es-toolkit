@@ -40,7 +40,7 @@ describe('partial', () => {
       // eslint-disable-next-line prefer-rest-params
       return Array.from(arguments);
     };
-    const par = partial(fn, placeholder, 'b', placeholder);
+    const par = partial(fn, placeholder, 'b', placeholder) as any;
     expect(par('a', 'c')).toEqual(['a', 'b', 'c']);
     expect(par('a')).toEqual(['a', 'b', undefined]);
     expect(par()).toEqual([undefined, 'b', undefined]);

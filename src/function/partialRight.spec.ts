@@ -1,10 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { identity } from './identity';
 import { partialRight } from './partialRight';
 import { curry } from '../compat/function/curry';
-
-function identity(arg?: any): any {
-  return arg;
-}
 
 describe('partialRight', () => {
   const { placeholder } = partialRight;
@@ -40,7 +37,7 @@ describe('partialRight', () => {
       // eslint-disable-next-line prefer-rest-params
       return Array.from(arguments);
     };
-    let par = partialRight(fn, placeholder, 'b', placeholder);
+    let par: any = partialRight(fn, placeholder, 'b', placeholder);
     expect(par('a', 'c')).toEqual(['a', 'b', 'c']);
     expect(par('a')).toEqual(['a', 'b', undefined]);
     expect(par()).toEqual([undefined, 'b', undefined]);

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { iteratee } from './iteratee';
+import { stubFalse } from './stubFalse';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { partial, partialRight } from '../index';
 import * as esToolkit from '../index';
 
@@ -133,9 +133,13 @@ describe('iteratee', () => {
     const expected = [1, 2, 3];
     const object = { a: 1, iteratee: iteratee(partial(fn, 2)) };
 
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(object.iteratee(3)).toEqual(expected);
 
     object.iteratee = iteratee(partialRight(fn, 3));
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(object.iteratee(2)).toEqual(expected);
   });
 

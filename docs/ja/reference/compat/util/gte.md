@@ -16,12 +16,12 @@ function gte(value: unknown, other: unknown): boolean;
 
 ### パラメータ
 
-- `value` (`unknown`): 比較する値です。
-- `other` (`unknown`): 比較する他の値です。
+- `value` (`unknown`): 比較する値。
+- `other` (`unknown`): 比較する他の値。
 
 ### 戻り値
 
-(`boolean`): 値が他の値以上である場合は`true`を、それ以外の場合は`false`を返します。
+(`boolean`): 値が他の値以上である場合は`true`、それ以外の場合は`false`。
 
 ## 例
 

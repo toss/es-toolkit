@@ -20,7 +20,7 @@ import { toInteger } from '../util/toInteger.ts';
  * const result = drop(array, 2);
  * result will be [3, 4, 5] since the first two elements are dropped.
  */
-export function drop<T>(collection: ArrayLike<T> | null | undefined, itemsCount: number = 1, guard?: unknown): T[] {
+export function drop<T>(collection: ArrayLike<T> | null | undefined, itemsCount = 1, guard?: unknown): T[] {
   if (!isArrayLike(collection)) {
     return [];
   }
