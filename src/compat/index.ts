@@ -30,6 +30,7 @@ export { compact } from './array/compact.ts';
 export { concat } from './array/concat.ts';
 export { difference } from './array/difference.ts';
 export { differenceBy } from './array/differenceBy.ts';
+export { differenceWith } from './array/differenceWith.ts';
 export { drop } from './array/drop.ts';
 export { dropRight } from './array/dropRight.ts';
 export { dropRightWhile } from './array/dropRightWhile.ts';
