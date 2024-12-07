@@ -5,36 +5,67 @@
 
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
+将数组的每个元素转换并返回一个新的数组。
 
-返回基于提供的迭代器的转换值的新数组。
+每个元素的转换方式可以根据 [iteratee](../util/iteratee.md) 函数的行为来指定。
 
-迭代器可以通过以下几种方式指定：
-
-- **转换函数**：如果提供了转换函数，将对每个元素应用该函数。
-- **属性键**：如果提供了属性键，函数将从每个元素中返回指定属性的值。
-- **对象**：如果提供了对象，函数将使用 `isEqual` 比较每个元素与对象，并在它们匹配时返回 `true`。
+- **转换函数**: 对每个元素执行给定的函数，并将其转换为结果。
+- **属性名称**: 从每个元素中选择指定的属性名称。
+- **属性-值对**: 将每个元素转换为一个布尔值，指示元素的属性是否与给定值匹配。
+- **部分对象**: 将每个元素转换为一个布尔值，指示元素是否与部分对象的属性和值匹配。
 
 ## 签名
 
 ```typescript
-function map<T, U>(collection: T[], iteratee: (value: T, index: number, collection: T[]) => U): U[];
-function map<T, U>(collection: ArrayLike<T>, iteratee: (value: T, index: number, collection: ArrayLike<T>) => U): U[];
-function map<T>(collection: Record<string, T> | Record<number, T>, iteratee?: null | undefined): T[];
-function map<T extends object, U>(collection: T, iteratee: (value: T[keyof T], key: string, collection: T) => U): U[];
-function map<T, K extends keyof T>(collection: Record<string, T> | Record<number, T>, iteratee: K): Array<T[K]>;
-function map<T>(collection: Record<string, T> | Record<number, T>, iteratee?: string): any[];
-function map<T>(collection: Record<string, T> | Record<number, T>, iteratee?: object): boolean[];
+function map<T, U>(arr: T[], iteratee: (value: T, index: number, arr: T[]) => U): U[];
+function map<T>(arr: T[], iteratee: Partial<T>): boolean[];
+function map<T>(arr: T[], iteratee: [keyof T, unknown]): boolean[];
+function map<T, K extends keyof T>(arr: T[], iteratee: K): Array<T[K]>;
+function map<T>(arr: T[], iteratee?: null | undefined): T[];
+
+function map<T extends object, U>(object: T, iteratee: (value: T[keyof T], key: string, object: T) => U): U[];
+function map<T>(object: T, iteratee: Partial<T[keyof T]>): boolean[];
+function map<T>(object: T, iteratee: [keyof T[keyof T], unknown]): boolean[];
+function map<T, K extends keyof T[keyof T]>(object: T, iteratee: K): Array<T[keyof T][K]>;
+function map<T extends object, U>(object: T, iteratee?: null | undefined): U[];
 ```
 
 ### 参数
 
-- `collection` (`T[]` | `ArrayLike<T>` | `Record<string, T>` | `Record<number, T>`): 要迭代的集合。
+- `arr` (`T[]`) 或 `object` (`T`): 要转换的数组或对象。
+
+::: info `arr` 可以是 `ArrayLike<T>`，`null`，或 `undefined`
+
+为了确保与 lodash 完全兼容，`map` 函数按以下方式处理 `arr`：
+
+- 如果 `arr` 是 `ArrayLike<T>`，则使用 `Array.from(...)` 将其转换为数组。
+- 如果 `arr` 是 `null` 或 `undefined`，则视为一个空数组。
+
+:::
+
+::: info `object` 可以是 `null` 或 `undefined`
+
+为了确保与 lodash 完全兼容，`map` 函数按以下方式处理 `object`：
+
+- 如果 `object` 是 `null` 或 `undefined`，则转换为空对象。
+
+:::
 
 - `iteratee`:
 
-  - **转换函数** (`(value: T, index: number, collection: T[]) => U`): 一个将每个元素转换的函数。
-  - **属性键** (`K` | `string`): 要从每个元素中提取的属性的键。
-  - **对象** (`object`): 要将每个元素与之比较的对象。
+  - 对于数组：
+
+    - **转换函数** (`(value: T, index: number, arr: T[]) => U`): 用于转换数组每个元素的函数。
+    - **属性名称** (`keyof T`): 从每个元素中选择的属性名称。
+    - **属性-值对** (`[keyof T, unknown]`): 一个元组，第一个元素是要匹配的属性，第二个是要匹配的值。
+    - **部分对象** (`Partial<T>`): 指定要匹配的属性和值的部分对象。
+
+  - 对于对象：
+
+    - **转换函数** (`(item: T[keyof T], index: number, object: T) => unknown`): 用于转换对象每个值的函数。
+    - **属性名称** (`keyof T[keyof T]`): 从对象每个值中选择的属性名称。
+    - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个元组，第一个元素是要匹配的属性，第二个是要匹配的值。
+    - **部分对象** (`Partial<T[keyof T]>`): 指定要匹配的属性和值的部分对象。
 
 ### 返回
 
