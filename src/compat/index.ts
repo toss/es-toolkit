@@ -163,6 +163,7 @@ export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
 
 export { camelCase } from './string/camelCase.ts';
+export { deburr } from './string/deburr.ts';
 export { endsWith } from './string/endsWith.ts';
 export { escape } from './string/escape.ts';
 export { kebabCase } from './string/kebabCase.ts';
