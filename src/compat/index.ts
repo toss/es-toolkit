@@ -167,6 +167,7 @@ export { endsWith } from './string/endsWith.ts';
 export { escape } from './string/escape.ts';
 export { kebabCase } from './string/kebabCase.ts';
 export { lowerCase } from './string/lowerCase.ts';
+export { lowerFirst } from './string/lowerFirst.ts';
 export { pad } from './string/pad.ts';
 export { padEnd } from './string/padEnd.ts';
 export { padStart } from './string/padStart.ts';
@@ -181,6 +182,7 @@ export { trim } from './string/trim.ts';
 export { trimEnd } from './string/trimEnd.ts';
 export { trimStart } from './string/trimStart.ts';
 export { upperCase } from './string/upperCase.ts';
+export { upperFirst } from './string/upperFirst.ts';
 export { words } from './string/words.ts';
 
 export { constant } from './util/constant.ts';
