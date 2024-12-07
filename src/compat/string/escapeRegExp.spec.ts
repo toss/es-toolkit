@@ -20,10 +20,7 @@ describe('escapeRegExp', () => {
     const values = [, null, undefined, ''];
     const expected = map(values, stubString);
 
-    const actual = map(values, (value, index) =>
-      // @ts-expect-error - invalid escapeRegExp arguments
-      index ? escapeRegExp(value as any) : escapeRegExp()
-    );
+    const actual = map(values, (value, index) => (index ? escapeRegExp(value as any) : escapeRegExp()));
 
     expect(actual).toEqual(expected);
   });

@@ -12,6 +12,6 @@ import { toString } from '../util/toString.ts';
  *
  * escapeRegExp('[es-toolkit](https://es-toolkit.slash.page/)'); // returns '\[es-toolkit\]\(https://es-toolkit\.slash\.page/\)'
  */
-export function escapeRegExp(str: string): string {
+export function escapeRegExp(str?: string): string {
   return escapeRegExpToolkit(toString(str));
 }
