@@ -33,7 +33,7 @@ function map<T extends object, U>(object: T, iteratee?: null | undefined): U[];
 
 ### Parameters
 
-- `arr` (`T[]`) or `object` (`Record<PropertyKey, T>`): The array or object to transform.
+- `arr` (`T[]`) or `object` (`T`): The array or object to transform.
 
 ::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
 
