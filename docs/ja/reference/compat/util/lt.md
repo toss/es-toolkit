@@ -1,4 +1,4 @@
-# nth
+# lt
 
 ::: info
 この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
@@ -6,26 +6,27 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-`array`のインデックス`n`にある要素を取得します。 `n`が負の場合、最後からn番目の要素が返されます。
+値が他の値より小さいかどうかを確認します。
 
 ## インターフェース
 
 ```typescript
-function nth<T>(array: ArrayLike<T> | null | undefined, n: number): T | undefined;
+function lt(value: unknown, other: unknown): boolean;
 ```
 
 ### パラメータ
 
-- `array` (`ArrayLike<T> | null | undefined`): 照会する配列。数値配列。
-- `n` (`number`): 返す要素のインデックス。数値。
+- `value` (`unknown`): 比較する値。
+- `other` (`unknown`): 比較するもう一方の値。
 
 ### 戻り値
 
-(`T | undefined`): `array`のn番目の要素を返します。
+(`boolean`): 値が他の値より小さい場合は `true` 、それ以外の場合は `false`
 
 ## 例
 
 ```typescript
-nth([1, 2, 3], 1); // => 2
-nth([1, 2, 3], -1); // => 3
+lt(1, 3); // true
+lt(3, 3); // false
+lt(3, 1); // false
 ```

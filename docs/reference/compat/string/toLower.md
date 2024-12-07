@@ -1,4 +1,4 @@
-# nth
+# toLower
 
 ::: info
 This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
@@ -6,26 +6,31 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.
+Converts the given value to a string and transforms it to lower case. The function can handle various input types by first converting them to strings.
 
 ## Signature
 
 ```typescript
-function nth<T>(array: ArrayLike<T> | null | undefined, n: number): T | undefined;
+function toLower(value?: unknown): string;
 ```
 
 ### Parameters
 
-- `array` (`ArrayLike<T> | null | undefined`): The array to query.
-- `n` (`number`): The index of the element to return.
+- `value` (`unknown`): The value to convert.
 
 ### Returns
 
-(`T | undefined`): Returns the nth element of `array`.
+(`string`): Returns the lower cased string.
 
 ## Examples
 
 ```typescript
-nth([1, 2, 3], 1); // => 2
-nth([1, 2, 3], -1); // => 3
+toLower('--FOO-BAR--');
+// => '--foo-bar--'
+
+toLower(null);
+// => ''
+
+toLower([1, 2, 3]);
+// => '1,2,3'
 ```
