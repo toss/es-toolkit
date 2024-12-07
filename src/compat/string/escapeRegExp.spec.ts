@@ -16,6 +16,7 @@ describe('escapeRegExp', () => {
   });
 
   it('should return an empty string for empty values', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined, ''];
     const expected = map(values, stubString);
 
