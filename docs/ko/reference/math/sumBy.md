@@ -13,7 +13,7 @@ export function sumBy<T>(items: T[], getValue: (element: T) => number): number;
 ### 파라미터
 
 - `items` (`T[]`): 합계를 계산할 숫자 배열이에요.
-- `getValue` (`(item: T) => number`): 각 요소에서 숫자 값을 선택하는 함수에요.
+- `getValue` (`(item: T) => number`): 각 요소에서 숫자 값을 선택하는 함수예요.
 
 ### 반환 값
 
