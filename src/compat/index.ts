@@ -166,6 +166,7 @@ export { camelCase } from './string/camelCase.ts';
 export { deburr } from './string/deburr.ts';
 export { endsWith } from './string/endsWith.ts';
 export { escape } from './string/escape.ts';
+export { escapeRegExp } from './string/escapeRegExp.ts';
 export { kebabCase } from './string/kebabCase.ts';
 export { lowerCase } from './string/lowerCase.ts';
 export { lowerFirst } from './string/lowerFirst.ts';
