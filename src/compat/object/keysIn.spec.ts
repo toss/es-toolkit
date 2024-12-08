@@ -199,4 +199,19 @@ describe('keys methods', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('buffers should not have offset or parent keys', () => {
+    const buffer = Buffer.from('test');
+    const actual = keysIn(buffer);
+    expect(actual).not.toContain('offset');
+    expect(actual).not.toContain('parent');
+  });
+
+  it('typedArray should not have buffer, byteLength, or byteOffset keys', () => {
+    const typedArray = new Uint8Array(1);
+    const actual = keysIn(typedArray);
+    expect(actual).not.toContain('buffer');
+    expect(actual).not.toContain('byteLength');
+    expect(actual).not.toContain('byteOffset');
+  });
 });

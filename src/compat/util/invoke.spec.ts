@@ -77,4 +77,9 @@ describe('invoke', () => {
       expect(invoke(object, path)).toEqual(1);
     });
   });
+
+  it('should return `undefined` when resolving deep paths on nullish values', () => {
+    const object = { a: null };
+    expect(invoke(object, 'a.b')).toBeUndefined();
+  });
 });

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { cloneDeepWith } from './cloneDeepWith';
 import { noop } from '../../function/noop';
-import { cloneDeepWith } from '../../object/cloneDeepWith';
 import { args } from '../_internal/args';
 import { last } from '../array/last';
 import { isPlainObject } from '../predicate/isPlainObject';
