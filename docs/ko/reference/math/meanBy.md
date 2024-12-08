@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-export function meanBy<T>(items: T[], getValue: (element: T) => number): number;
+function meanBy<T>(items: T[], getValue: (element: T) => number): number;
 ```
 
 ### 파라미터
