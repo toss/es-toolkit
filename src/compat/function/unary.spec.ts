@@ -18,6 +18,7 @@ describe('unary', () => {
   });
 
   it('should use `this` binding of function', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const capped = unary(function (this: any, _a: unknown, _b: unknown) {
       return this;
     });
