@@ -88,6 +88,7 @@ export { defer } from './function/defer.ts';
 export { flip } from './function/flip.ts';
 export { flow } from './function/flow.ts';
 export { flowRight } from './function/flowRight.ts';
+export { nthArg } from './function/nthArg.ts';
 export { rearg } from './function/rearg.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
