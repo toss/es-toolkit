@@ -76,6 +76,7 @@ export { without } from './array/without.ts';
 export { zip } from './array/zip.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 
+export { after } from './function/after.ts';
 export { ary } from './function/ary.ts';
 export { attempt } from './function/attempt.ts';
 export { before } from './function/before.ts';
