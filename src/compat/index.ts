@@ -218,5 +218,6 @@ export { toInteger } from './util/toInteger.ts';
 export { toLength } from './util/toLength.ts';
 export { toNumber } from './util/toNumber.ts';
 export { toPath } from './util/toPath.ts';
+export { toPlainObject } from './util/toPlainObject.ts';
 export { toSafeInteger } from './util/toSafeInteger.ts';
 export { toString } from './util/toString.ts';
