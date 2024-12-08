@@ -16,7 +16,7 @@
 ## インターフェース
 
 ```typescript
-function isObject(value: unknown): value is object;
+function isObject(value?: unknown): value is object;
 ```
 
 ### パラメータ

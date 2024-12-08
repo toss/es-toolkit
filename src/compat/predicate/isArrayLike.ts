@@ -14,6 +14,6 @@ import { isLength } from '../../predicate/isLength.ts';
  * isArrayLike(null); // false
  * isArrayLike(undefined); // false
  */
-export function isArrayLike(value: unknown): value is ArrayLike<unknown> {
+export function isArrayLike(value?: unknown): value is ArrayLike<unknown> {
   return value != null && typeof value !== 'function' && isLength((value as ArrayLike<unknown>).length);
 }

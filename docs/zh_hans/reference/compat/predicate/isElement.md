@@ -11,7 +11,7 @@
 ## 签名
 
 ```typescript
-function isElement(value: any): boolean;
+function isElement(value?: any): boolean;
 ```
 
 ### 参数

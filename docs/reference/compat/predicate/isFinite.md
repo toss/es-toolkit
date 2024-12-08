@@ -13,7 +13,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isFinite(value: unknown): value is number;
+function isFinite(value?: unknown): value is number;
 ```
 
 ### Parameters
