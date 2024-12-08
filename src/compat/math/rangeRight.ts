@@ -69,7 +69,7 @@ export function rangeRight(end: number, index: PropertyKey, guard: object): numb
  */
 export function rangeRight(start: number, end?: PropertyKey, step?: any): number[] {
   // Enables use as an iteratee for methods like `_.map`.
-  if (step && typeof step != 'number' && isIterateeCall(start, end, step)) {
+  if (step && typeof step !== 'number' && isIterateeCall(start, end, step)) {
     end = step = undefined;
   }
   start = toFinite(start);
