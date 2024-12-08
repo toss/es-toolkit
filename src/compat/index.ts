@@ -125,6 +125,7 @@ export { mergeWith } from './object/mergeWith.ts';
 export { omit } from './object/omit.ts';
 export { pick } from './object/pick.ts';
 export { property } from './object/property.ts';
+export { propertyOf } from './object/propertyOf.ts';
 export { set } from './object/set.ts';
 export { toDefaulted } from './object/toDefaulted.ts';
 export { unset } from './object/unset.ts';
