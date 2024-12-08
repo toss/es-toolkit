@@ -13,7 +13,7 @@ describe('once', () => {
   it('should ignore recursive calls', () => {
     let count = 0;
 
-    var resultFunc = once(() => {
+    const resultFunc = once(() => {
       resultFunc();
       return ++count;
     });

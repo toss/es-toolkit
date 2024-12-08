@@ -3,8 +3,8 @@ import { unary } from '../../function';
 import { map } from '../array/map';
 
 describe('unary', () => {
-  function fn() {
-    return Array.prototype.slice.call(arguments);
+  function fn(...args: any[]) {
+    return args;
   }
 
   it('should cap the number of arguments provided to `func`', () => {
@@ -18,7 +18,7 @@ describe('unary', () => {
   });
 
   it('should use `this` binding of function', () => {
-    const capped = unary(function (this: any, a: unknown, b: unknown) {
+    const capped = unary(function (this: any, _a: unknown, _b: unknown) {
       return this;
     });
     const object = { capped: capped };
