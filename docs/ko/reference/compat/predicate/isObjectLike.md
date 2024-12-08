@@ -20,7 +20,7 @@ function isObjectLike(value: unknown): value is object;
 
 ### 파라미터
 
-- `value` (`T`): 객체 같은지 확인할 값이에요.
+- `value` (`unknown`): 객체 같은지 확인할 값이에요.
 
 ### 반환 값
 

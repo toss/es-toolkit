@@ -13,7 +13,7 @@ TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어�
 ## 인터페이스
 
 ```typescript
-function isNaN(value: unknown): value is typeof NaN;
+function isNaN(value?: unknown): value is typeof NaN;
 ```
 
 ### 파라미터

@@ -11,7 +11,7 @@
 ## 인터페이스
 
 ```typescript
-function isElement(value: any): boolean;
+function isElement(value?: any): boolean;
 ```
 
 ### 파라미터
