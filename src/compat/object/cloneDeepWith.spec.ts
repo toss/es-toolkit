@@ -70,6 +70,7 @@ describe('cloneDeepWith', function () {
     let actual: any;
 
     cloneDeepWith({ a: 1 }, function () {
+      // eslint-disable-next-line prefer-rest-params
       actual = last(arguments);
     });
 
@@ -86,6 +87,7 @@ describe('cloneDeepWith', function () {
     const object: any = new Foo();
 
     func(object, function () {
+      // eslint-disable-next-line prefer-rest-params
       const length = arguments.length;
       const args = Array.prototype.slice.call(arguments, 0, length - (length > 1 ? 1 : 0));
 

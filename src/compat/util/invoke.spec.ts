@@ -31,9 +31,7 @@ describe('invoke', () => {
     const expected = map(values, noop);
 
     const actual = map(values, value => {
-      try {
-        return invoke(value, 'a.b', [1, 2]);
-      } catch (e) {}
+      return invoke(value, 'a.b', [1, 2]);
     });
 
     expect(actual).toEqual(expected);
