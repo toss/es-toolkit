@@ -104,6 +104,8 @@ export { max } from './math/max.ts';
 export { min } from './math/min.ts';
 export { parseInt } from './math/parseInt.ts';
 export { random } from './math/random.ts';
+export { range } from './math/range.ts';
+export { rangeRight } from './math/rangeRight.ts';
 export { round } from './math/round.ts';
 export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
