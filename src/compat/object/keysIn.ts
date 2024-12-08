@@ -74,11 +74,13 @@ function arrayLikeKeysIn(object: ArrayLike<any>): string[] {
   const filteredKeys = new Set(indices);
 
   if (isBuffer(object)) {
+    // Node.js 0.10 has enumerable non-index properties on buffers.
     filteredKeys.add('offset');
     filteredKeys.add('parent');
   }
 
   if (isTypedArray(object)) {
+    // PhantomJS 2 has enumerable non-index properties on typed arrays.
     filteredKeys.add('buffer');
     filteredKeys.add('byteLength');
     filteredKeys.add('byteOffset');

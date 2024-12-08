@@ -31,9 +31,7 @@ describe('invoke', () => {
     const expected = map(values, noop);
 
     const actual = map(values, value => {
-      try {
-        return invoke(value, 'a.b', [1, 2]);
-      } catch (e) {}
+      return invoke(value, 'a.b', [1, 2]);
     });
 
     expect(actual).toEqual(expected);
@@ -76,5 +74,10 @@ describe('invoke', () => {
     forEach(['a.b', ['a', 'b']], path => {
       expect(invoke(object, path)).toEqual(1);
     });
+  });
+
+  it('should return `undefined` when resolving deep paths on nullish values', () => {
+    const object = { a: null };
+    expect(invoke(object, 'a.b')).toBeUndefined();
   });
 });

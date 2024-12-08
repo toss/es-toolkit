@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { cloneDeepWith } from './cloneDeepWith';
 import { noop } from '../../function/noop';
-import { cloneDeepWith } from '../../object/cloneDeepWith';
 import { args } from '../_internal/args';
 import { last } from '../array/last';
 import { isPlainObject } from '../predicate/isPlainObject';
@@ -70,6 +70,7 @@ describe('cloneDeepWith', function () {
     let actual: any;
 
     cloneDeepWith({ a: 1 }, function () {
+      // eslint-disable-next-line prefer-rest-params
       actual = last(arguments);
     });
 
@@ -86,7 +87,9 @@ describe('cloneDeepWith', function () {
     const object: any = new Foo();
 
     func(object, function () {
+      // eslint-disable-next-line prefer-rest-params
       const length = arguments.length;
+      // eslint-disable-next-line prefer-rest-params
       const args = Array.prototype.slice.call(arguments, 0, length - (length > 1 ? 1 : 0));
 
       argsList.push(args);

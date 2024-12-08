@@ -39,4 +39,10 @@ describe('after', () => {
     expect(object.after()).toBe(2);
     expect(object.count).toBe(2);
   });
+
+  it('should throw an error if `func` is not a function', () => {
+    expect(() => {
+      after(1, 42 as any);
+    }).toThrow();
+  });
 });
