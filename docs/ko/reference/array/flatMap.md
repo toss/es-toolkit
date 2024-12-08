@@ -13,7 +13,7 @@ function flatMap<T, U, D extends number = 1>(arr: T[], iteratee: (item: T) => U,
 ### 파라미터
 
 - `arr` (`T[]`): 평탄화할 중첩 배열이에요.
-- `iteratee` (`T[]`): 각 배열 요소를 매핑하는 함수에요.
+- `iteratee` (`T[]`): 각 배열 요소를 매핑하는 함수예요.
 - `depth` (`D`): 평탄화할 깊이에요. 기본값은 1이에요.
 
 ### 반환 값

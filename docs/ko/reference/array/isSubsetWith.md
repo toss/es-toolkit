@@ -14,7 +14,7 @@ function isSubsetWith<T>(superset: T[], subset: T[], areItemsEqual: (x: T, y: T)
 
 - `superset` (`T[]`): 하위 집합의 모든 요소를 포함 할 수 있는 배열이에요.
 - `subset` (`T[]`): 상위 집합 배열에 포함되어 있는지 비교 할 배열이에요.
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 두 요소가 동일한지 결정할 함수에요.
+- `areItemsEqual` (`(x: T, y: T) => boolean`): 두 요소가 동일한지 결정할 함수예요.
 
 ### 반환 값
 

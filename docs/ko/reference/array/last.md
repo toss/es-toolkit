@@ -28,7 +28,7 @@ const result = last(arr1);
 
 const arr2: number[] = [];
 const result = last(arr2);
-// result는 undefined에요.
+// result는 undefined예요.
 
 const largeArray = Array(1000)
   .fill(0)

@@ -14,7 +14,7 @@ function differenceWith<T, U>(firstArr: T[], secondArr: U[], areItemsEqual: (x: 
 
 - `firstArr` (`T[]`): 차이를 계산할 배열이에요. 이 배열이 주 배열이고, 이 배열의 요소들이 비교되고 필터링돼요.
 - `secondArr` (`U[]`) : 첫 번째 배열에서 제외할 요소들을 포함한 배열이에요.
-- `areItemsEqual` (`(x: T, y: U) => boolean`): 두 요소가 동일한지 결정할 함수에요.
+- `areItemsEqual` (`(x: T, y: U) => boolean`): 두 요소가 동일한지 결정할 함수예요.
 
 ### 반환 값
 

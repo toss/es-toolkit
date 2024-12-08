@@ -19,8 +19,8 @@ function fill<T, U>(array: T[], value: T, start: number, end: number): Array<T |
 
 - `array` (`Array<T | U>`): 채울 배열이에요.
 - `value` (`U`): 배열을 채울 값이에요.
-- `start` (`number`, 기본값 = 0): 시작 위치에요. 기본값은 0이에요.
-- `end` (`number`, 기본값 = array.length): 끝 위치에요. 기본값은 배열의 길이에요.
+- `start` (`number`, 기본값 = 0): 시작 위치예요. 기본값은 0이에요.
+- `end` (`number`, 기본값 = array.length): 끝 위치예요. 기본값은 배열의 길이예요.
 
 ### 반환 값
 
