@@ -10,7 +10,7 @@ Checks if `value` is likely a DOM element.
 ## Signature
 
 ```typescript
-function isElement(value: any): boolean;
+function isElement(value?: any): boolean;
 ```
 
 ### Parameters

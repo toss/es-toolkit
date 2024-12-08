@@ -15,7 +15,7 @@ TypeScript の型ガードとして使用できます。パラメータとして
 ## インターフェース
 
 ```typescript
-function isArrayLikeObject(value: unknown): value is ArrayLike<unknown> & object;
+function isArrayLikeObject(value?: unknown): value is ArrayLike<unknown> & object;
 ```
 
 ### パラメータ

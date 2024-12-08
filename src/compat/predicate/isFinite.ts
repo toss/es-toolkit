@@ -15,6 +15,6 @@
  * console.log(isFinite(value3)); // false
  * ```
  */
-export function isFinite(value: unknown): value is number {
+export function isFinite(value?: unknown): value is number {
   return Number.isFinite(value);
 }

@@ -15,12 +15,12 @@ TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어�
 ## 인터페이스
 
 ```typescript
-export function isObjectLike(value: unknown): value is object;
+export function isObjectLike(value?: unknown): value is object;
 ```
 
 ### 파라미터
 
-- `value` (`T`): 객체 같은지 확인할 값이에요.
+- `value` (`unknown`): 객체 같은지 확인할 값이에요.
 
 ### 반환 값
 
