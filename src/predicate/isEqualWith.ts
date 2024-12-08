@@ -2,6 +2,7 @@ import { isPlainObject } from './isPlainObject.ts';
 import { getSymbols } from '../compat/_internal/getSymbols.ts';
 import { getTag } from '../compat/_internal/getTag.ts';
 import {
+  abortSignalTag,
   argumentsTag,
   arrayBufferTag,
   arrayTag,
@@ -187,6 +188,10 @@ function areObjectsEqual(
 
     case functionTag: {
       return a === b;
+    }
+
+    case abortSignalTag: {
+      return a.aborted === b.aborted;
     }
   }
 
