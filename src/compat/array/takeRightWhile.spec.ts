@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { takeRightWhile as takeRightWhileLodash } from 'lodash';
 import { takeRightWhile } from './takeRightWhile';
 import { slice } from '../_internal/slice';
 import { toArgs } from '../_internal/toArgs';
@@ -41,7 +40,7 @@ describe('takeRightWhile', () => {
 
   it('should use identity function as default `predicate`', () => {
     expect(takeRightWhile(['a', 'b'])).toEqual(['a', 'b']);
-    expect(takeRightWhileLodash([false, true])).toEqual([true]);
+    expect(takeRightWhile([false, true])).toEqual([true]);
   });
 
   it('should return empty array when `array` is nullable', () => {
