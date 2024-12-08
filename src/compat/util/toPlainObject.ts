@@ -15,8 +15,10 @@ import { keysIn } from '../object/keysIn.ts';
  */
 export function toPlainObject(value: any): Record<string, any> {
   const plainObject: Record<string, any> = {};
+  const valueKeys = keysIn(value);
 
-  for (const key of keysIn(value)) {
+  for (let i = 0; i < valueKeys.length; i++) {
+    const key = valueKeys[i];
     const objValue = (value as any)[key];
     if (key === '__proto__') {
       Object.defineProperty(plainObject, key, {
