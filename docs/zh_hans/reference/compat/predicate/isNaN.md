@@ -13,7 +13,7 @@
 ## 签名
 
 ```typescript
-function isNaN(value: unknown): value is typeof NaN;
+function isNaN(value?: unknown): value is typeof NaN;
 ```
 
 ### 参数

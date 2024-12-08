@@ -10,6 +10,6 @@
  * isNaN('NaN'); // false
  * isNaN(undefined); // false
  */
-export function isNaN(value: unknown): value is typeof NaN {
+export function isNaN(value?: unknown): value is typeof NaN {
   return Number.isNaN(value);
 }
