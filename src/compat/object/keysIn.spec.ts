@@ -183,6 +183,7 @@ describe('keys methods', () => {
   });
 
   it(`\`keysIn\` should return an empty array when \`object\` is nullish`, () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = values.map(stubArray);
 
