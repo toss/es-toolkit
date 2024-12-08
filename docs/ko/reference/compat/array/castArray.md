@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-function castArray<T>(value?: T | readonly T[]): T[];
+function castArray<T>(value?: T | T[]): T[];
 ```
 
 ### 파라미터
 
-- `value` (`T | readonly T[]`): 배열로 변환할 값.
+- `value` (`T | T[]`): 배열로 변환할 값.
 
 ### 반환 값
 

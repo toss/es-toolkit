@@ -11,7 +11,7 @@
 ## 인터페이스
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
+function property(path: PropertyKey | PropertyKey[]): (object: unknown) => any;
 ```
 
 ### 파라미터
