@@ -183,6 +183,7 @@ export { toUpper } from './string/toUpper.ts';
 export { trim } from './string/trim.ts';
 export { trimEnd } from './string/trimEnd.ts';
 export { trimStart } from './string/trimStart.ts';
+export { unescape } from './string/unescape.ts';
 export { upperCase } from './string/upperCase.ts';
 export { upperFirst } from './string/upperFirst.ts';
 export { words } from './string/words.ts';
