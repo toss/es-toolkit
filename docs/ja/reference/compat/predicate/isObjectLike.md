@@ -15,7 +15,7 @@ TypeScript の型ガードとして使用できます。パラメータとして
 ## インターフェース
 
 ```typescript
-export function isObjectLike(value?: unknown): value is object;
+function isObjectLike(value?: unknown): value is object;
 ```
 
 ### パラメータ

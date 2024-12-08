@@ -15,7 +15,7 @@ TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어�
 ## 인터페이스
 
 ```typescript
-export function isObjectLike(value?: unknown): value is object;
+function isObjectLike(value?: unknown): value is object;
 ```
 
 ### 파라미터
