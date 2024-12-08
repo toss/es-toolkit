@@ -40,17 +40,10 @@ const ids = titles.map(title => title.toLowerCase().replaceAll('"', '').replace(
 </script>
 
 <template>
-  <template
-v-for="(category, index) in categories" :key="category"
->
-    <h3
-:id="ids[index]" tabindex="-1"
->
+  <template v-for="(category, index) in categories" :key="category">
+    <h3 :id="ids[index]" tabindex="-1">
       {{ titles[index] }}
-      <a
-class="header-anchor" :href="`#${ids[index]}`"
-:aria-label="`Permalink to ${ids[index]}`"
-/>
+      <a class="header-anchor" :href="`#${ids[index]}`" :aria-label="`Permalink to ${ids[index]}`" />
     </h3>
     <table tabindex="0">
       <thead>
@@ -60,14 +53,9 @@ class="header-anchor" :href="`#${ids[index]}`"
         </tr>
       </thead>
       <tbody>
-        <tr
-v-for="item in data[category]" :key="item.name"
->
+        <tr v-for="item in data[category]" :key="item.name">
           <td>
-            <a
-:href="`https://lodash.com/docs/4.17.15#${item.name}`" target="_blank"
-rel="noopener noreferrer"
->
+            <a :href="`https://lodash.com/docs/4.17.15#${item.name}`" target="_blank" rel="noopener noreferrer">
               {{ item.name }}
             </a>
           </td>
