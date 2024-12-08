@@ -17,7 +17,7 @@ TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어�
 ## 인터페이스
 
 ```typescript
-function isArrayLikeObject(value: unknown): value is ArrayLike<unknown> & object;
+function isArrayLikeObject(value?: unknown): value is ArrayLike<unknown> & object;
 ```
 
 ### 파라미터
