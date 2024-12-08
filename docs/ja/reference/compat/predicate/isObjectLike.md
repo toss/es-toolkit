@@ -15,12 +15,12 @@ TypeScript の型ガードとして使用できます。パラメータとして
 ## インターフェース
 
 ```typescript
-export function isObjectLike(value: unknown): value is object;
+export function isObjectLike(value?: unknown): value is object;
 ```
 
 ### パラメータ
 
-- `value` (`T`): オブジェクトのようであるかを確認する値です。
+- `value` (`unknown`): オブジェクトのようであるかを確認する値です。
 
 ### 戻り値
 
