@@ -10,7 +10,7 @@
 
 주어진 값이 원시값이 아닌 유사 배열 객체인지 확인해요.
 
-유사 배열 객체는 `null`이나 `undefined`나 함수가 아니며, `length` 프로퍼티가 유효한 길이인 객체에요.
+유사 배열 객체는 `null`이나 `undefined`나 함수가 아니며, `length` 프로퍼티가 유효한 길이인 객체예요.
 
 TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `ArrayLike<unknown> & object`로 좁혀요.
 

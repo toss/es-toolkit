@@ -16,8 +16,8 @@ function add(value: number, other: number): number;
 
 ### 파라미터
 
-- `value` (`number`): 더할 첫 번째 숫자에요.
-- `other` (`number`): 더할 두 번째 숫자에요.
+- `value` (`number`): 더할 첫 번째 숫자예요.
+- `other` (`number`): 더할 두 번째 숫자예요.
 
 ### 반환 값
 
