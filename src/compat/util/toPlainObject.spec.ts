@@ -27,4 +27,13 @@ describe('toPlainObject', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('should convert objects with an enumerable `__proto__` property to plain objects', () => {
+    const object = {};
+    Object.defineProperty(object, '__proto__', {
+      value: { a: 1 },
+      enumerable: true,
+    });
+    expect(toPlainObject(object)).toEqual({ ['__proto__']: { a: 1 } });
+  });
 });
