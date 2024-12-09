@@ -13,19 +13,7 @@ export default {
 
     const srcDirname = resolve(import.meta.dirname, '../../../src');
     const excludeDirnames = ['_internal'];
-    const noSupports = [
-      'sortedIndex',
-      'sortedIndexBy',
-      'sortedIndexOf',
-      'sortedLastIndex',
-      'sortedLastIndexBy',
-      'sortedLastIndexOf',
-      'sortedUniq',
-      'sortedUniqBy',
-      'mixin',
-      'noConflict',
-      'runInContext',
-    ];
+    const noSupports = ['sortedUniq', 'sortedUniqBy', 'mixin', 'noConflict', 'runInContext'];
 
     const dirnames = [srcDirname];
 
