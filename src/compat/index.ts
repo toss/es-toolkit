@@ -86,6 +86,7 @@ export { curry } from './function/curry.ts';
 export { curryRight } from './function/curryRight.ts';
 export { debounce, type DebouncedFunction, type DebouncedFunction as DebouncedFunc } from './function/debounce.ts';
 export { defer } from './function/defer.ts';
+export { delay } from './function/delay.ts';
 export { flip } from './function/flip.ts';
 export { flow } from './function/flow.ts';
 export { flowRight } from './function/flowRight.ts';
