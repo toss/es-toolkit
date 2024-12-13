@@ -222,3 +222,4 @@ export { toPath } from './util/toPath.ts';
 export { toPlainObject } from './util/toPlainObject.ts';
 export { toSafeInteger } from './util/toSafeInteger.ts';
 export { toString } from './util/toString.ts';
+export { uniqueId } from './util/uniqueId.ts';
