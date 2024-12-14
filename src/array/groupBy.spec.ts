@@ -46,6 +46,21 @@ describe('groupBy', () => {
     });
   });
 
+  it('should preserve Object prototype', () => {
+    const array = [
+      { category: 'fruit', name: 'apple' },
+      { category: 'fruit', name: 'banana' },
+    ]
+    const result = groupBy(array, item => item.category)
+    
+    expect('toString' in result).toBeTruthy()
+    expect(typeof result.toString).toBe('function')
+    expect(result.fruit).toEqual([
+      { category: 'fruit', name: 'apple' },
+      { category: 'fruit', name: 'banana' },
+    ])
+  })
+
   it('should handle an empty array', () => {
     const array: Array<{ category: string; name: string }> = [];
 
