@@ -1,5 +1,13 @@
 # es-toolkit Changelog
 
+## Version v1.30.1
+
+Released on December 14th, 2024.
+
+- Fixed [uniqueId](https://es-toolkit.slash.page/reference/compat/util/uniqueId.html) not being exported in our compatibility library.
+
+We sincerely thank @redd97 for their contributions. We appreciate your great efforts!
+
 ## Version v1.30.0
 
 Released on December 13th, 2024.
