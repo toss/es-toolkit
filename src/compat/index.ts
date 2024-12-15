@@ -90,6 +90,7 @@ export { delay } from './function/delay.ts';
 export { flip } from './function/flip.ts';
 export { flow } from './function/flow.ts';
 export { flowRight } from './function/flowRight.ts';
+export { negate } from './function/negate.ts';
 export { nthArg } from './function/nthArg.ts';
 export { rearg } from './function/rearg.ts';
 export { rest } from './function/rest.ts';
