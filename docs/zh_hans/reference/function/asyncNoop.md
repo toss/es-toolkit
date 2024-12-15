@@ -10,7 +10,7 @@ function asyncNoop(): Promise<void>;
 
 ### 返回值
 
-(`Promise<void>`): 这个函数返回一个Promise，它将解析为undefined。
+(`Promise<void>`): 一个`Promise`，它将解析为`undefined`。
 
 ## 示例
 
