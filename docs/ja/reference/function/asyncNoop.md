@@ -10,7 +10,7 @@ function asyncNoop(): Promise<void>;
 
 ### 戻り値
 
-(`Promise<void>`): この関数は、未定義を解決するPromiseを返します。
+(`Promise<void>`): `undefined` に解決する `Promise`。
 
 ## 例
 
