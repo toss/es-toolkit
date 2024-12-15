@@ -81,6 +81,7 @@ describe('methodOf', () => {
   });
 
   it('should return `undefined` when `object` is nullish', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = map(values, noop);
 
@@ -96,6 +97,7 @@ describe('methodOf', () => {
   });
 
   it('should return `undefined` for deep paths when `object` is nullish', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = map(values, noop);
 
@@ -122,6 +124,7 @@ describe('methodOf', () => {
   it('should apply partial arguments to function', () => {
     const object = {
       fn: function () {
+        // eslint-disable-next-line prefer-rest-params
         return Array.prototype.slice.call(arguments);
       },
     };
