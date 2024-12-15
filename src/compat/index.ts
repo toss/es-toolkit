@@ -207,6 +207,7 @@ export { iteratee } from './util/iteratee.ts';
 export { lt } from './util/lt.ts';
 export { lte } from './util/lte.ts';
 export { method } from './util/method.ts';
+export { methodOf } from './util/methodOf.ts';
 export { now } from './util/now.ts';
 export { stubArray } from './util/stubArray.ts';
 export { stubFalse } from './util/stubFalse.ts';
