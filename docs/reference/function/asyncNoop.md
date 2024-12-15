@@ -10,7 +10,7 @@ function asyncNoop(): Promise<void>;
 
 ### Returns
 
-(`Promise<void>`): This function returns a Promise that resolves to undefined.
+(`Promise<void>`): A Promise that resolves to undefined.
 
 ## Examples
 
