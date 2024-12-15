@@ -10,7 +10,7 @@ function asyncNoop(): Promise<void>;
 
 ### 반환 값
 
-(`Promise<void>`): 이 함수는 아무런 값도 resolve하지 않는 Promise를 반환해요.
+(`Promise<void>`): `undefined`로 이행하는 `Promise`.
 
 ## 예시
 
