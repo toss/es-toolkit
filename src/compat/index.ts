@@ -108,6 +108,7 @@ export { random } from './math/random.ts';
 export { range } from './math/range.ts';
 export { rangeRight } from './math/rangeRight.ts';
 export { round } from './math/round.ts';
+export { subtract } from './math/subtract.ts';
 export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
 
