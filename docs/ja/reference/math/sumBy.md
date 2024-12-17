@@ -7,7 +7,7 @@
 ## インターフェース
 
 ```typescript
-export function sumBy<T>(items: T[], getValue: (element: T) => number): number;
+function sumBy<T>(items: T[], getValue: (element: T) => number): number;
 ```
 
 ### パラメータ

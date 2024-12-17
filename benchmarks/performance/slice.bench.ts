@@ -7,7 +7,7 @@ const sliceLodash = sliceLodash_;
 
 describe('slice', () => {
   const array = Array(1000);
-  bench('es-toolkit/comapt/slice', () => {
+  bench('es-toolkit/compat/slice', () => {
     sliceToolkitCompat(array);
     sliceToolkitCompat(array, 1);
     sliceToolkitCompat(array, 1, 2);

@@ -30,4 +30,14 @@ describe('toArray', () => {
     expect(toArray('ab')).toEqual(['a', 'b']);
     expect(toArray(Object('ab'))).toEqual(['a', 'b']);
   });
+
+  it('should convert nullish values to empty arrays', () => {
+    expect(toArray(null)).toEqual([]);
+    expect(toArray(undefined)).toEqual([]);
+  });
+
+  it('should convert non-iterable values to empty arrays', () => {
+    expect(toArray(1)).toEqual([]);
+    expect(toArray(true)).toEqual([]);
+  });
 });

@@ -21,14 +21,13 @@ describe('keys', () => {
   });
 
   it('should not include inherited string keyed properties', () => {
-    function Foo() {
-      // @ts-ignore
+    function Foo(this: any) {
       this.a = 1;
     }
     Foo.prototype.b = 2;
 
     const expected = ['a'];
-    // @ts-ignore
+    // @ts-expect-error - Foo is a constructor
     const actual = keys(new Foo()).sort();
 
     expect(actual).toEqual(expected);
@@ -44,8 +43,7 @@ describe('keys', () => {
   });
 
   it('should return keys for custom properties on arrays', () => {
-    const array = [1];
-    // @ts-ignore
+    const array: any = [1];
     array.a = 1;
 
     const actual = keys(array).sort();
@@ -76,11 +74,9 @@ describe('keys', () => {
     const values = [args, strictArgs];
     const expected = values.map(constant(['0', '1', '2', 'a']));
 
-    const actual = values.map(value => {
-      // @ts-ignore
+    const actual = values.map((value: any) => {
       value.a = 1;
       const result = keys(value).sort();
-      // @ts-ignore
       delete value.a;
       return result;
     });
@@ -157,13 +153,13 @@ describe('keys', () => {
     Foo.prototype = { constructor: Foo, a: 1 };
     expect(keys(Foo.prototype)).toEqual(expected);
 
-    const Fake = { prototype: {} };
-    // @ts-ignore
+    const Fake = { prototype: {} as any };
     Fake.prototype.constructor = Fake;
     expect(keys(Fake.prototype)).toEqual(['constructor']);
   });
 
   it('should return an empty array when `object` is nullish', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = values.map(stubArray);
 
@@ -175,5 +171,17 @@ describe('keys', () => {
     });
 
     expect(actual).toEqual(expected);
+  });
+
+  it('buffers should not have offset or parent keys', () => {
+    const buffer = Buffer.from('test');
+    const actual = keys(buffer);
+    expect(actual).toEqual(['0', '1', '2', '3']);
+  });
+
+  it('typedArray should not have buffer, byteLength, or byteOffset keys', () => {
+    const typedArray = new Uint8Array(1);
+    const actual = keys(typedArray);
+    expect(actual).toEqual(['0']);
   });
 });

@@ -46,16 +46,16 @@ findKey(users, o => o.age > 50); // undefined
 ### インターフェース
 
 ```typescript
-export function findKey<T extends Record<any, any>>(
+function findKey<T extends Record<any, any>>(
   obj: T,
   conditionToFind: (value: T[keyof T], key: keyof T, obj: T) => boolean
 ): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(
+function findKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
+function findKey<T extends Record<any, any>>(
   obj: T,
   propertyToFind: [keyof T[keyof T], any]
 ): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
+function findKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
 ```
 
 ### 例

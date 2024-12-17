@@ -14,11 +14,11 @@ function findKey<T extends Record<any, any>>(
 ### 파라미터
 
 - `obj` (`T extends Record<any, any>`): 탐색할 객체예요.
-- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 객체의 각 값에 대해 실행할 함수에요.
+- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 객체의 각 값에 대해 실행할 함수예요.
 
 ### 반환 값
 
-(`keyof T | undefined`): 인자로 받은 함수를 만족하는 첫 번째 요소의 키에요. 함수를 만족하는 요소가 없으면 undefined를 반환해요.
+(`keyof T | undefined`): 인자로 받은 함수를 만족하는 첫 번째 요소의 키예요. 함수를 만족하는 요소가 없으면 undefined를 반환해요.
 
 ## 예시
 
@@ -47,16 +47,16 @@ findKey(users, o => o.age > 50); // undefined
 ### 인터페이스
 
 ```typescript
-export function findKey<T extends Record<any, any>>(
+function findKey<T extends Record<any, any>>(
   obj: T,
   conditionToFind: (value: T[keyof T], key: keyof T, obj: T) => boolean
 ): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(
+function findKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
+function findKey<T extends Record<any, any>>(
   obj: T,
   propertyToFind: [keyof T[keyof T], any]
 ): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
+function findKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
 ```
 
 ### 예시

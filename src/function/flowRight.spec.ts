@@ -3,6 +3,7 @@ import { ary } from './ary';
 import { flowRight } from './flowRight';
 import { head } from '../array';
 import { uniq } from '../array';
+import { map } from '../compat';
 import { curry } from '../compat/function/curry';
 
 const add = function (x: number, y: number) {
@@ -38,10 +39,6 @@ describe('flowRight', () => {
   });
 
   it(`\`flowRight\` should work with curried functions with placeholders`, () => {
-    // TODO change to es-toolkit/compat - map
-    const map = (array: any[], func: (...args: any[]) => any) => {
-      return array.map(func);
-    };
     const curried = curry(ary(map, 2), 2);
     const getProp = curried(curried.placeholder, (value: { a: any }) => value.a);
     const objects = [{ a: 1 }, { a: 2 }, { a: 1 }];

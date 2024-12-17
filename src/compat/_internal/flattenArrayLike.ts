@@ -1,6 +1,6 @@
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
-export function flattenArrayLike<T>(values: Array<ArrayLike<T>>): T[] {
+export function flattenArrayLike<T>(values: Array<ArrayLike<T> | unknown>): T[] {
   const result: T[] = [];
 
   for (let i = 0; i < values.length; i++) {
@@ -11,7 +11,7 @@ export function flattenArrayLike<T>(values: Array<ArrayLike<T>>): T[] {
     }
 
     for (let j = 0; j < arrayLike.length; j++) {
-      result.push(arrayLike[j]);
+      result.push(arrayLike[j] as T);
     }
   }
 
