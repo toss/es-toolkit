@@ -144,6 +144,7 @@ export { isArrayBuffer } from './predicate/isArrayBuffer.ts';
 export { isArrayLike } from './predicate/isArrayLike.ts';
 export { isArrayLikeObject } from './predicate/isArrayLikeObject.ts';
 export { isBoolean } from './predicate/isBoolean.ts';
+export { isBuffer } from './predicate/isBuffer.ts';
 export { isDate } from './predicate/isDate.ts';
 export { isElement } from './predicate/isElement.ts';
 export { isEmpty } from './predicate/isEmpty.ts';
