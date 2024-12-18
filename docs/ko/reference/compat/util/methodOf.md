@@ -21,7 +21,7 @@ function methodOf(object: object, ...args: any[]): (path: PropertyKey | Property
 
 ### 반환 값
 
-(`(path: PropertyKey | PropertyKey[]) => any`): 새 함수를 반환하며, 해당 함수는 경로를 받아 `object`의 `path`에서 `args`로 메서드를 호출합니다.
+(`(path: PropertyKey | PropertyKey[]) => any`): 경로를 받아 `object`의 `path`에서 `args`로 메서드를 호출하는 새로운 함수.
 
 ## 예시
 
