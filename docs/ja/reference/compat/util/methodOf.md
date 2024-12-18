@@ -21,7 +21,7 @@ function methodOf(object: object, ...args: any[]): (path: PropertyKey | Property
 
 ### 戻り値
 
-(`(path: PropertyKey | PropertyKey[]) => any`): 新しい関数を返し、その関数はパスを受け取り、`object` の `path` で `args` でメソッドを呼び出します。
+(`(path: PropertyKey | PropertyKey[]) => any`): パスを受け取り、`object` の `path` で `args` でメソッドを呼び出す新しい関数。
 
 ## 例
 
