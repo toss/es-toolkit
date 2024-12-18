@@ -112,4 +112,18 @@ describe('isEqual', () => {
 
     expect(isEqual(buffer3, buffer4)).toBe(false);
   });
+
+  it('should compare AbortSignal objects', () => {
+    const controller1 = new AbortController();
+    const controller2 = new AbortController();
+
+    const signal1 = controller1.signal;
+    const signal2 = controller2.signal;
+
+    expect(isEqual(signal1, signal2)).toBe(true);
+
+    controller1.abort();
+
+    expect(isEqual(signal1, signal2)).toBe(false);
+  });
 });
