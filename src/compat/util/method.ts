@@ -1,5 +1,4 @@
 import { invoke } from './invoke.ts';
-import { flatten } from '../array/flatten.ts';
 
 /**
  * Creates a function that invokes the method at `path` of a given object with the provided arguments.
