@@ -73,11 +73,7 @@ export function isMatch(target: any, source: any): boolean {
       const keys = Object.keys(source as any);
 
       if (target == null) {
-        if (keys.length === 0) {
-          return true;
-        }
-
-        return false;
+        return keys.length === 0;
       }
 
       if (Array.isArray(source)) {
