@@ -16,12 +16,20 @@
  */
 export function pull<T>(arr: T[], valuesToRemove: readonly unknown[]): T[] {
   const valuesSet = new Set(valuesToRemove);
+  let resultIndex = 0;
 
-  for (let i = arr.length - 1; i >= 0; i--) {
-    if (valuesSet.has(arr[i])) {
-      arr.splice(i, 1);
+  for (let i = 0; i < arr.length; i++) {
+    if (valuesSet.has(arr[i])) continue;
+
+    if (!(i in arr)) {
+      delete arr[resultIndex++];
+      continue;
     }
+
+    arr[resultIndex++] = arr[i];
   }
+
+  arr.length = resultIndex;
 
   return arr;
 }
