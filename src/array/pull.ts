@@ -19,7 +19,9 @@ export function pull<T>(arr: T[], valuesToRemove: readonly unknown[]): T[] {
   let resultIndex = 0;
 
   for (let i = 0; i < arr.length; i++) {
-    if (valuesSet.has(arr[i])) continue;
+    if (valuesSet.has(arr[i])) {
+      continue;
+    }
 
     if (!(i in arr)) {
       delete arr[resultIndex++];
