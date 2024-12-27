@@ -1,5 +1,18 @@
 # es-toolkit Changelog
 
+## Version v1.31.0
+
+Released on December 27th, 2024.
+
+- Added support for the [windowed](https://es-toolkit.slash.page/reference/array/windowed.html), [remove](https://es-toolkit.slash.page/reference/array/remove.html) and [asyncNoop](https://es-toolkit.slash.page/reference/function/asyncNoop.html) functions.
+- Introduced compatibility functions for [pullAll](https://es-toolkit.slash.page/reference/compat/array/pullAll.html), [subtract](https://es-toolkit.slash.page/reference/compat/math/subtract.html), [isBuffer](https://es-toolkit.slash.page/reference/predicate/isBuffer.html), and [methodOf](https://es-toolkit.slash.page/reference/compat/util/methodOf.html).
+- Enhanced the performance of [pull](https://es-toolkit.slash.page/reference/array/pull.html) when working with large arrays.
+- Resolved an issue where [reverse](https://es-toolkit.slash.page/reference/compat/array/reverse.html) was not being exported in our compatibility library.
+- Updated [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html) to properly handle keys like `toString` or `valueOf`.
+- Fixed [merge](https://es-toolkit.slash.page/reference/object/merge.html) to correctly merge values when `target` or any of its values are `null` or `undefined`.
+
+We sincerely thank @T3sT3ro, @D-Sketon, @tuhm1, @willmanduffy, @apeltop, @aken-you, @SaeWooKKang, and @ssi02014 for their contributions. We appreciate your great efforts!
+
 ## Version v1.30.1
 
 Released on December 14th, 2024.
