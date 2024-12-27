@@ -23,6 +23,7 @@ export function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: numbe
   for (let i = 0; i < arr.length; i++) {
     if (shouldRemoveElement(arr[i], i, originalArr)) {
       removed.push(arr[i]);
+
       continue;
     }
 
