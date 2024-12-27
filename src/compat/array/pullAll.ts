@@ -8,7 +8,7 @@ import { pull as pullToolkit } from '../../array/pull.ts';
  *
  * @template T
  * @param {T[]} arr - The array to modify.
- * @param {ArrayLike<T>} [valuesToRemove=[]] - The values to remove from the array.
+ * @param {ArrayLike<T>} valuesToRemove - The values to remove from the array.
  * @returns {T[]} The modified array with the specified values removed.
  *
  * @example
