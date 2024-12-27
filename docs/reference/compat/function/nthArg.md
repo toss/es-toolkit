@@ -19,7 +19,7 @@ function nthArg(n: number): (...args: any[]) => unknown;
 ### Parameters
 
 - `n` (`number`): The index of the argument to retrieve.
-If negative, counts from the end of the arguments list.
+  If negative, counts from the end of the arguments list.
 
 ### Returns
 
