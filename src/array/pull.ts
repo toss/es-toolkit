@@ -23,7 +23,8 @@ export function pull<T>(arr: T[], valuesToRemove: readonly unknown[]): T[] {
       continue;
     }
 
-    if (!(i in arr)) {
+    // For handling sparse arrays
+    if (!Object.hasOwn(arr, i)) {
       delete arr[resultIndex++];
       continue;
     }
