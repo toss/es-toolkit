@@ -24,3 +24,4 @@ export const int32ArrayTag = '[object Int32Array]';
 export const bigInt64ArrayTag = '[object BigInt64Array]';
 export const float32ArrayTag = '[object Float32Array]';
 export const float64ArrayTag = '[object Float64Array]';
+export const abortSignalTag = '[object AbortSignal]';
