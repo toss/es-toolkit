@@ -3,7 +3,7 @@
 根据谓词函数从数组中移除元素。
 
 此函数会直接修改 `arr`。
-如果希望在不修改原始数组的情况下移除元素，请使用 `filter`。
+如果希望在不修改原始数组的情况下移除元素，请使用 [Array.prototype.filter](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)。
 
 ## 签名
 
@@ -24,6 +24,6 @@ function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: number, arra
 
 ```typescript
 const numbers = [1, 2, 3, 4, 5];
-remove(numbers, (value) => value % 2 === 0);
+remove(numbers, value => value % 2 === 0);
 console.log(numbers); // [1, 3, 5]
 ```
