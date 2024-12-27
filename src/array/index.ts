@@ -49,6 +49,7 @@ export { uniqBy } from './uniqBy.ts';
 export { uniqWith } from './uniqWith.ts';
 export { unzip } from './unzip.ts';
 export { unzipWith } from './unzipWith.ts';
+export { windowed } from './windowed.ts';
 export { without } from './without.ts';
 export { xor } from './xor.ts';
 export { xorBy } from './xorBy.ts';

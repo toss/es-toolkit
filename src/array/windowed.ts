@@ -1,26 +1,69 @@
 /**
- * Returns a list of snapshots of the window of the given size sliding along
- * this collection with the given step, where each snapshot is a list.
+ * Options for the windowed function.
  *
- * Several last lists may have fewer elements than the given size.
- *
- * Both size and step must be positive and can be greater than the number of elements in this collection.
- *
- * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to window.
- * @param {number} size - The size of the window.
- * @param {number} step - The step of the window. Default is 1.
- * @param {boolean} partialWindows - Whether to include partial windows at the end. Default is false.
- * @returns {T[][]} A list of snapshots of the window of the given size sliding along this collection.
+ * @interface WindowedOptions
+ * @property {boolean} [partialWindows=false] - Whether to include partial windows at the end of the array.
  */
-export function windowed<T>(arr: readonly T[], size: number, step: number = 1, partialWindows: boolean = false): T[][] {
-  if (size <= 0 || step <= 0 || !Number.isInteger(size) || !Number.isInteger(step)) {
-    throw new Error('Size and step must be positive integers.');
+export interface WindowedOptions {
+  /**
+   * Whether to include partial windows at the end of the array.
+   *
+   * By default, `windowed` only includes full windows in the result,
+   * ignoring any leftover elements that can't form a full window.
+   *
+   * If `partialWindows` is true, the function will also include these smaller, partial windows at the end of the result.
+   */
+  partialWindows?: boolean;
+}
+
+/**
+ * Creates an array of sub-arrays (windows) from the input array, each of the specified size.
+ * The windows can overlap depending on the step size provided.
+ *
+ * By default, only full windows are included in the result, and any leftover elements that can't form a full window are ignored.
+ *
+ * If the `partialWindows` option is set to true in the options object, the function will also include partial windows at the end of the result.
+ * Partial windows are smaller sub-arrays created when there aren't enough elements left in the input array to form a full window.
+ *
+ * @template T
+ * @param {readonly T[]} arr - The input array to create windows from.
+ * @param {number} size - The size of each window. Must be a positive integer.
+ * @param {number} [step=1] - The step size between the start of each window. Must be a positive integer.
+ * @param {WindowedOptions} [options={}] - Options object to configure the behavior of the function.
+ * @param {boolean} [options.partialWindows=false] - Whether to include partial windows at the end of the array.
+ * @returns {T[][]} An array of windows (sub-arrays) created from the input array.
+ * @throws {Error} If the size or step is not a positive integer.
+ *
+ * @example
+ * windowed([1, 2, 3, 4], 2);
+ * // => [[1, 2], [2, 3], [3, 4]]
+ *
+ * @example
+ * windowed([1, 2, 3, 4, 5, 6], 3, 2);
+ * // => [[1, 2, 3], [3, 4, 5]]
+ *
+ * @example
+ * windowed([1, 2, 3, 4, 5, 6], 3, 2, { partialWindows: true });
+ * // => [[1, 2, 3], [3, 4, 5], [5, 6]]
+ */
+export function windowed<T>(
+  arr: readonly T[],
+  size: number,
+  step: number = 1,
+  { partialWindows = false }: WindowedOptions = {}
+): T[][] {
+  if (size <= 0 || !Number.isInteger(size)) {
+    throw new Error('Size must be a positive integer.');
+  }
+
+  if (step <= 0 || !Number.isInteger(step)) {
+    throw new Error('Step must be a positive integer.');
   }
 
   const result: T[][] = [];
+  const end = partialWindows ? arr.length : arr.length - size + 1;
 
-  for (let i = 0, end = arr.length; i < end && (partialWindows || i + size <= end); i += step) {
+  for (let i = 0; i < end; i += step) {
     result.push(arr.slice(i, i + size));
   }
 
