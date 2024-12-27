@@ -31,6 +31,7 @@ export { orderBy } from './orderBy.ts';
 export { partition } from './partition.ts';
 export { pull } from './pull.ts';
 export { pullAt } from './pullAt.ts';
+export { remove } from './remove.ts';
 export { sample } from './sample.ts';
 export { sampleSize } from './sampleSize.ts';
 export { shuffle } from './shuffle.ts';
