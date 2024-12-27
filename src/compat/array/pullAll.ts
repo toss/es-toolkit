@@ -1,4 +1,3 @@
-import { flatten } from './flatten.ts';
 import { pull as pullToolkit } from '../../array/pull.ts';
 
 /**
@@ -7,16 +6,16 @@ import { pull as pullToolkit } from '../../array/pull.ts';
  * This function changes `arr` in place.
  * If you want to remove values without modifying the original array, use `difference`.
  *
- * @template T, U
+ * @template T
  * @param {T[]} arr - The array to modify.
- * @param {...unknown[]} valuesToRemove - The values to remove from the array.
+ * @param {ArrayLike<T>} [valuesToRemove=[]] - The values to remove from the array.
  * @returns {T[]} The modified array with the specified values removed.
  *
  * @example
  * const numbers = [1, 2, 3, 4, 5, 2, 4];
- * pull(numbers, [2, 4]);
+ * pullAll(numbers, [2, 4]);
  * console.log(numbers); // [1, 3, 5]
  */
-export function pull<T>(arr: T[], ...valuesToRemove: readonly unknown[]): T[] {
-  return pullToolkit(arr, valuesToRemove);
+export function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T> = []): T[] {
+  return pullToolkit(arr, Array.from(valuesToRemove));
 }

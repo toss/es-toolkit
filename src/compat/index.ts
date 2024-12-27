@@ -59,6 +59,7 @@ export { map } from './array/map.ts';
 export { nth } from './array/nth.ts';
 export { orderBy } from './array/orderBy.ts';
 export { pull } from './array/pull.ts';
+export { pullAll } from './array/pullAll.ts';
 export { reverse } from './array/reverse.ts';
 export { sample } from './array/sample.ts';
 export { size } from './array/size.ts';
