@@ -7,12 +7,12 @@ This function takes an array and either a function that generates a key from eac
 ## Signature
 
 ```typescript
-function groupBy<T, K extends PropertyKey>(arr: T[], keyOrFn: ((item: T) => K) | keyof T): Record<K, T[]>;
+function groupBy<T, K extends PropertyKey>(arr: readonly T[], keyOrFn: ((item: T) => K) | keyof T): Record<K, T[]>;
 ```
 
 ### Parameters
 
-- `arr` (`T[]`): The array to group.
+- `arr` (`readonly T[]`): The array to group.
 - `keyOrFn` (`((item: T) => K) | keyof T`): Either a function that generates a key from an element, or a string property key to group by.
 
 ### Returns
@@ -21,16 +21,20 @@ function groupBy<T, K extends PropertyKey>(arr: T[], keyOrFn: ((item: T) => K) |
 
 ## Examples
 
-Using a key-generating function:
-
 ```typescript
 const array = [
   { category: 'fruit', name: 'apple' },
   { category: 'fruit', name: 'banana' },
   { category: 'vegetable', name: 'carrot' },
 ];
-const result = groupBy(array, item => item.category);
-// result will be:
+
+// Using a key-generating function:
+const result1 = groupBy(array, item => item.category);
+
+// Using a property key:
+const result2 = groupBy(array, 'category');
+
+// Both approaches produce the same result:
 // {
 //   fruit: [
 //     { category: 'fruit', name: 'apple' },
@@ -40,16 +44,4 @@ const result = groupBy(array, item => item.category);
 //     { category: 'vegetable', name: 'carrot' }
 //   ]
 // }
-```
-
-Using a property key:
-
-```typescript
-const array = [
-  { category: 'fruit', name: 'apple' },
-  { category: 'fruit', name: 'banana' },
-  { category: 'vegetable', name: 'carrot' },
-];
-const result = groupBy(array, 'category');
-// Results in the same output as above
 ```
