@@ -45,3 +45,21 @@ describe('groupBy/largeArray', () => {
     groupByLodash(largeArray, item => item.category);
   });
 });
+
+describe('groupBy/stringKey', () => {
+  const array = [
+    { category: 'fruit', name: 'apple' },
+    { category: 'fruit', name: 'banana' },
+    { category: 'vegetable', name: 'carrot' },
+    { category: 'fruit', name: 'pear' },
+    { category: 'vegetable', name: 'broccoli' },
+  ];
+
+  bench('es-toolkit/groupBy', () => {
+    groupByToolkit(array, 'category');
+  });
+
+  bench('lodash/groupBy', () => {
+    groupByLodash(array, 'category');
+  });
+});

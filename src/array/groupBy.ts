@@ -30,12 +30,16 @@
  * //   ]
  * // }
  */
-export function groupBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T[]> {
+export function groupBy<T, K extends PropertyKey>(
+  arr: readonly T[],
+  keyOrFn: ((item: T) => K) | keyof T
+): Record<K, T[]> {
   const result = {} as Record<K, T[]>;
+  const getKey = typeof keyOrFn === 'function' ? keyOrFn : (item: T) => item[keyOrFn] as unknown as K;
 
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
-    const key = getKeyFromItem(item);
+    const key = getKey(item);
 
     if (!Object.hasOwn(result, key)) {
       result[key] = [];

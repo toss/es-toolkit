@@ -97,4 +97,28 @@ describe('groupBy', () => {
       ],
     });
   });
+
+  it('should group elements using a string property key', () => {
+    const array = [
+      { category: 'fruit', name: 'apple' },
+      { category: 'fruit', name: 'banana' },
+      { category: 'vegetable', name: 'carrot' },
+      { category: 'fruit', name: 'pear' },
+      { category: 'vegetable', name: 'broccoli' },
+    ];
+
+    const result = groupBy(array, 'category');
+
+    expect(result).toEqual({
+      fruit: [
+        { category: 'fruit', name: 'apple' },
+        { category: 'fruit', name: 'banana' },
+        { category: 'fruit', name: 'pear' },
+      ],
+      vegetable: [
+        { category: 'vegetable', name: 'carrot' },
+        { category: 'vegetable', name: 'broccoli' },
+      ],
+    });
+  });
 });
