@@ -60,7 +60,6 @@ export { nth } from './array/nth.ts';
 export { orderBy } from './array/orderBy.ts';
 export { pull } from './array/pull.ts';
 export { pullAll } from './array/pullAll.ts';
-export { reduce } from '../array/reduce';
 export { remove } from './array/remove.ts';
 export { reverse } from './array/reverse.ts';
 export { sample } from './array/sample.ts';
