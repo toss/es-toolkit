@@ -1,5 +1,6 @@
 import { cloneDeep } from './cloneDeep.ts';
 import { clone } from '../../object/clone.ts';
+import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
@@ -366,7 +367,7 @@ export function mergeWith(object: any, ...otherArgs: any[]): any {
   for (let i = 0; i < sources.length; i++) {
     const source = sources[i];
 
-    result = mergeWithDeep(object, source, merge, new Map());
+    result = mergeWithDeep(result, source, merge, new Map());
   }
 
   return result;
@@ -385,6 +386,10 @@ function mergeWithDeep(
   ) => any,
   stack: Map<any, any>
 ) {
+  if (isPrimitive(target)) {
+    target = Object(target);
+  }
+
   if (source == null || typeof source !== 'object') {
     return target;
   }
@@ -423,7 +428,7 @@ function mergeWithDeep(
     }
 
     if (Array.isArray(sourceValue)) {
-      if (typeof targetValue === 'object') {
+      if (typeof targetValue === 'object' && targetValue != null) {
         const cloned: any = [];
         const targetKeys = Reflect.ownKeys(targetValue);
 

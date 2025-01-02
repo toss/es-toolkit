@@ -1,5 +1,11 @@
 # isEmpty
 
+::: info
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+:::
+
 检查给定的值是否为空。
 
 - 如果给定的值是字符串，检查它是否为空字符串。
@@ -15,7 +21,7 @@ function isEmpty(): true;
 function isEmpty(value: string): value is '';
 function isEmpty(value: Map<any, any>): boolean;
 function isEmpty(value: Set<any>): boolean;
-function isEmpty(value: Array<any>): value is [];
+function isEmpty(value: any[]): value is [];
 function isEmpty<T extends Record<any, any>>(
   value: T | null | undefined
 ): value is Record<keyof T, never> | null | undefined;

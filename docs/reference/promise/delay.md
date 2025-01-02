@@ -51,3 +51,30 @@ async function foo() {
   }
 }
 ```
+
+## Lodash Compatibility
+
+Import `delay` from `es-toolkit/compat` for full compatibility with Lodash.
+
+- `delay` accepts a function that will be invoked after a delay.
+- `delay` accepts arguments that will be passed to the function.
+- `delay` returns a timer ID that can be used to clear the timeout.
+
+```typescript
+import { delay } from 'es-toolkit/compat';
+
+// Example 1: Delayed function execution
+const timerId = delay(
+  (greeting, recipient) => {
+    console.log(`${greeting}, ${recipient}!`);
+  },
+  1000,
+  'Hello',
+  'Alice'
+);
+// => 'Hello, Alice!' will be logged after one second.
+
+// Example 2: Clearing the timeout before execution
+clearTimeout(timerId);
+// The function will not be executed because the timeout was cleared.
+```

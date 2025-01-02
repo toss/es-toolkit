@@ -33,11 +33,11 @@ const firstElement1 = first(arr1);
 
 const arr2: string[] = [];
 const firstElement2 = first(arr2);
-// firstElement2는 undefined에요.
+// firstElement2는 undefined예요.
 
 const arr3 = ['a', 'b', 'c'];
 const firstElement3 = first(arr3);
-// firstElement3는 'a'이에요.
+// firstElement3는 'a'예요.
 
 const arr4 = [true, false, true];
 const firstElement4 = first(arr4);

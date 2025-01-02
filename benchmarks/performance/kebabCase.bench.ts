@@ -16,7 +16,7 @@ describe('kebabCase', () => {
     kebabCaseToolkit('hello-World_of XML_httpRequest');
   });
 
-  bench('es-toolkit/comapt/kebabCase', () => {
+  bench('es-toolkit/compat/kebabCase', () => {
     kebabCaseToolkitCompat('hello world');
     kebabCaseToolkitCompat('--foo--bar__baz 123');
     kebabCaseToolkitCompat('123numericValues');

@@ -169,6 +169,7 @@ describe('cloneDeep', () => {
       d,
       c: 2,
     });
+    expect(b.getA()).toEqual({ a: 'es-toolkit' });
   });
 
   //-------------------------------------------------------------------------------------
@@ -374,5 +375,29 @@ describe('cloneDeep', () => {
       second: 2,
       third: 3,
     });
+  });
+
+  it('should clone class instance', () => {
+    class CustomClass {
+      value: number;
+
+      constructor(value: number) {
+        this.value = value;
+      }
+
+      getValue() {
+        return this.value;
+      }
+    }
+
+    const instance = new CustomClass(123);
+    const clonedInstance = cloneDeep(instance);
+
+    expect(clonedInstance).toEqual(instance);
+    expect(clonedInstance).not.toBe(instance);
+    expect(clonedInstance).toBeInstanceOf(CustomClass);
+
+    expect(clonedInstance.value).toBe(instance.value);
+    expect(clonedInstance.getValue()).toBe(123);
   });
 });

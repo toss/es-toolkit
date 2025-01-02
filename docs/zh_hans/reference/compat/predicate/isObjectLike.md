@@ -16,7 +16,7 @@
 ## 签名
 
 ```typescript
-function isObjectLike(value: unknown): value is object;
+function isObjectLike(value?: unknown): value is object;
 ```
 
 ### 参数

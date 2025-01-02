@@ -27,13 +27,13 @@ const superset = [{ id: 1 }, { id: 2 }, { id: 3 }];
 const subset = [{ id: 2 }, { id: 1 }];
 const areItemsEqual = (a, b) => a.id === b.id;
 
-isSubsetWith(superset1, subset1, areItemsEqual);
+isSubsetWith(superset, subset, areItemsEqual);
 // true を返します。
 
 const superset = [{ id: 1 }, { id: 2 }, { id: 3 }];
 const subset = [{ id: 4 }];
 const areItemsEqual = (a, b) => a.id === b.id;
 
-isSubsetWith(superset2, subset2, areItemsEqual);
+isSubsetWith(superset, subset, areItemsEqual);
 // false を返します。
 ```

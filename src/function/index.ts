@@ -1,9 +1,10 @@
 export { after } from './after.ts';
 export { ary } from './ary.ts';
+export { asyncNoop } from './asyncNoop.ts';
 export { before } from './before.ts';
 export { curry } from './curry.ts';
 export { curryRight } from './curryRight.ts';
-export { debounce } from './debounce.ts';
+export { debounce, type DebouncedFunction } from './debounce.ts';
 export { flow } from './flow.ts';
 export { flowRight } from './flowRight.ts';
 export { identity } from './identity.ts';
@@ -15,5 +16,5 @@ export { partial } from './partial.ts';
 export { partialRight } from './partialRight.ts';
 export { rest } from './rest.ts';
 export { spread } from './spread.ts';
-export { throttle } from './throttle.ts';
+export { throttle, type ThrottledFunction } from './throttle.ts';
 export { unary } from './unary.ts';

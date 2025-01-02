@@ -21,7 +21,7 @@ You can specify the condition in several ways:
 function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
 function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
 function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: string, fromIndex?: number): number;
+function findIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
 ```
 
 ### Parameters
@@ -42,7 +42,7 @@ To ensure full compatibility with lodash, the `findIndex` function processes `ar
   - **Predicate function** (`(item: T, index: number, arr: readonly T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
   - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
   - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
-  - **Property name** (`string`): The name of the property to check for a truthy value.
+  - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
 
 - `fromIndex` (`number`): The index to start the search from, defaults to `0`.
 

@@ -20,11 +20,7 @@ import { toInteger } from '../util/toInteger.ts';
  * const result = dropRight(array, 2);
  * // result will be [1, 2, 3] since the last two elements are dropped.
  */
-export function dropRight<T>(
-  collection: ArrayLike<T> | null | undefined,
-  itemsCount: number = 1,
-  guard?: unknown
-): T[] {
+export function dropRight<T>(collection: ArrayLike<T> | null | undefined, itemsCount = 1, guard?: unknown): T[] {
   if (!isArrayLike(collection)) {
     return [];
   }
