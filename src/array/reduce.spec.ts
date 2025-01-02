@@ -11,7 +11,7 @@ describe('reduce', () => {
 
   it('handles negative indices correctly', () => {
     const arr = [10, 20, 30, 40, 50];
-    const removed = reduce(arr, [-1, -3]);
+    const removed = reduce(arr, [-1, -3]); // -1 → 4, -3 → 2
     expect(removed).toEqual([50, 30]);
     expect(arr).toEqual([10, 20, 40]);
   });

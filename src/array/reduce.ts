@@ -17,17 +17,19 @@
  * console.log(numbers); // [10, 30]
  */
 export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
-    // Ensure unique and sorted indices in ascending order
-    const indicesSet = Array.from(new Set(indicesToRemove)).sort((a, b) => a - b);
+    // Convert negative indices to positive indices and ensure unique and sorted indices
+    const indicesSet = Array.from(new Set(indicesToRemove.map(index =>
+      index < 0 ? arr.length + index : index
+    ))).sort((a, b) => b - a);
 
     // Collect removed elements while iterating in reverse order to avoid index shifting
     const removed: Array<T | undefined> = [];
 
-    for (let i = indicesSet.length - 1; i >= 0; i--) {
+    for (let i = 0; i < indicesSet.length; i++) {
       const index = indicesSet[i];
       if (index >= 0 && index < arr.length) {
         removed.unshift(arr[index]); // Add the removed element to the front
-        arr.splice(index, 1); // Remove the element from the original array
+        arr.splice(index, 1); // Remove the element from the array
       } else {
         removed.unshift(undefined); // Handle out-of-bounds indices
       }
