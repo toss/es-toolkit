@@ -16,6 +16,13 @@ describe('reduce', () => {
     expect(arr).toEqual([10, 20, 30]);
   });
 
+  it('returns an empty array and does not modify the input array when no indices are specified', () => {
+    const arr: number[] = [10, 20, 30];
+    const removed = reduce(arr, []);
+    expect(removed).toEqual([]);
+    expect(arr).toEqual([10, 20, 30]);
+  });
+
   it('handles duplicate indices gracefully', () => {
     const arr = [10, 20, 30, 40];
     const removed = reduce(arr, [1, 1, 3]);
