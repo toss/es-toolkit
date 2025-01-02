@@ -9,7 +9,6 @@ describe('reduce', () => {
     expect(arr).toEqual([10, 30]);
   });
 
-
   it('returns undefined for out-of-bounds indices', () => {
     const arr = [10, 20, 30];
     const removed = reduce(arr, [10, -10]);
