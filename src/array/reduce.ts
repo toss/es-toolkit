@@ -32,6 +32,5 @@ export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefi
         removed.unshift(undefined); // Handle out-of-bounds indices
       }
     }
-
     return removed;
   }
