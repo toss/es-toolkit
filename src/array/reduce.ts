@@ -8,10 +8,17 @@
  * @param {number[]} indicesToRemove - An array of indices specifying the positions of elements to remove.
  * @returns {Array<T | undefined>} An array containing the elements that were removed from the original array.
  */
-export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
+export function reduce<T>(
+  arr: T[],
+  indicesToRemove: number[]
+): Array<T | undefined> {
   // Normalize indices and sort in descending order
   const indicesSet = Array.from(
-    new Set(indicesToRemove.map(index => (index < 0 ? arr.length + index : index)))
+    new Set(
+      indicesToRemove.map(index =>
+        index < 0 ? arr.length + index : index
+      )
+    )
   ).sort((a, b) => b - a);
 
   const removed: Array<T | undefined> = [];
