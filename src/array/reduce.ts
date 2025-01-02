@@ -16,9 +16,16 @@
  * console.log(removed); // [20, 40, 50]
  * console.log(numbers); // [10, 30]
  */
-export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
+export function reduce<T>(
+  arr: T[],
+  indicesToRemove: number[]
+): Array<T | undefined> {
   const indicesSet = Array.from(
-    new Set(indicesToRemove.map((index) => (index < 0 ? arr.length + index : index)))
+    new Set(
+      indicesToRemove.map((index) =>
+        index < 0 ? arr.length + index : index
+      )
+    )
   ).sort((a, b) => b - a);
 
   const removed: Array<T | undefined> = [];
