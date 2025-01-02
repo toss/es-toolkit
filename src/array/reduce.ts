@@ -17,12 +17,13 @@
  * console.log(numbers); // [10, 30]
  */
 export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
+    // Create a sorted set of indices to ensure unique and descending order
     const indicesSet = new Set(indicesToRemove.slice().sort((x, y) => y - x));
 
-    // Use reduce to construct the array of removed elements while modifying the input array
+    // Construct the array of removed elements while modifying the input array
     const removed = Array.from(indicesSet).reduce<Array<T | undefined>>((acc, index) => {
       if (index >= 0 && index < arr.length) {
-        acc.push(arr[index]); // Push the element to the removed array
+        acc.push(arr[index]); // Add the element to the removed array
         arr.splice(index, 1); // Remove the element from the original array
       }
       return acc;
