@@ -16,7 +16,7 @@ function castArray<T>(value?: T | T[]): T[];
 
 ### パラメータ
 
-- `value` (`T | readonly T[]`): 配列にキャストされる値。
+- `value` (`T | T[]`): 配列にキャストされる値。
 
 ### 戻り値
 

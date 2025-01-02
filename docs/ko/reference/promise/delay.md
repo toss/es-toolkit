@@ -49,3 +49,30 @@ async function foo() {
   }
 }
 ```
+
+## Lodash 호환성
+
+`es-toolkit/compat`에서 `delay`를 가져오면 lodash와 호환돼요.
+
+- `delay`는 일정 시간이 지난 후 호출될 함수를 받을 수 있어요.
+- `delay`는 함수에 전달될 인수를 받을 수 있어요.
+- `delay`는 타임아웃을 취소할 수 있는 타이머 ID를 반환해요.
+
+```typescript
+import { delay } from 'es-toolkit/compat';
+
+// 예제 1: 지연된 함수 실행
+const timerId = delay(
+  (greeting, recipient) => {
+    console.log(`${greeting}, ${recipient}!`);
+  },
+  1000,
+  '안녕하세요',
+  '홍길동'
+);
+// => 1초 후 '안녕하세요, 홍길동!'이 로그로 출력돼요.
+
+// 예제 2: 실행 전에 타임아웃 취소
+clearTimeout(timerId);
+// 타임아웃이 취소되었기 때문에 함수는 실행되지 않아요.
+```

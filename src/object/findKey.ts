@@ -1,12 +1,12 @@
 /**
  * Finds the key of the first element in the object that satisfies the provided testing function.
  *
- * @param obj - The object to search.
- * @param predicate - The function to execute on each value in the object. It takes three arguments:
+ * @param {T} obj - The object to search.
+ * @param {(value: T[keyof T], key: keyof T, obj: T) => boolean} predicate - The function to execute on each value in the object. It takes three arguments:
  *   - value: The current value being processed in the object.
  *   - key: The key of the current value being processed in the object.
  *   - obj: The object that findKey was called upon.
- * @returns The key of the first element in the object that passes the test, or undefined if no element passes.
+ * @returns {keyof T | undefined} The key of the first element in the object that passes the test, or undefined if no element passes.
  *
  * @example
  * const users = {

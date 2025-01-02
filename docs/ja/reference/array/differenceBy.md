@@ -7,14 +7,14 @@
 ## インターフェース
 
 ```typescript
-function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[];
+function differenceBy<T, U>(firstArr: T[], secondArr: U[], mapper: (value: T | U) => unknown): T[];
 ```
 
 ### パラメータ
 
 - `firstArr` (`T[]`): 差分を計算する配列です。この配列が主な配列で、この配列の要素が比較されフィルタリングされます。
-- `secondArr` (`T[]`): 最初の配列から除外する要素を含む配列です。
-- `mapper` (`(value: T) => U`): 2つの配列の要素をマッピングする関数です。この関数は2つの配列の各要素に適用され、マッピングされた値を基準に比較を行います。
+- `secondArr` (`U[]`): 最初の配列から除外する要素を含む配列です。
+- `mapper` (`(value: T | U) => unknown`): 2つの配列の要素をマッピングする関数です。この関数は2つの配列の各要素に適用され、マッピングされた値を基準に比較を行います。
 
 ### 戻り値
 
@@ -30,4 +30,10 @@ const array2 = [{ id: 2 }, { id: 4 }];
 const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
 // resultは[{ id: 1 }, { id: 3 }, { id: 5 }]になります。idが2の要素は両方の配列に存在するため、結果から除外されます。
+
+const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+const array2 = [2, 4];
+const mapper = item => (typeof item === 'object' ? item.id : item);
+const result = differenceBy(array1, array2, mapper);
+// resultは[{ id: 1 }, { id: 3 }]になります。2はマッピング後に両方の配列に存在するため、結果から除外されます。
 ```

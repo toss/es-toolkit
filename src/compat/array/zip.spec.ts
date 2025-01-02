@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { zip } from './zip';
 import { unzip } from '../../array/unzip';
 import { falsey } from '../_internal/falsey';
-import { stubArray } from '../_internal/stubArray';
+import { stubArray } from '../util/stubArray';
 
 describe('zip', () => {
   const object = {

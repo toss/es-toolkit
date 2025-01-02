@@ -4,8 +4,8 @@ import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { slice } from '../_internal/slice';
-import { stubTrue } from '../_internal/stubTrue';
 import { symbol } from '../_internal/symbol';
+import { stubTrue } from '../util/stubTrue';
 
 describe('isEmpty', () => {
   it('should return `true` for empty values', () => {
@@ -99,5 +99,14 @@ describe('isEmpty', () => {
 
   it('should not treat objects with non-number lengths as array-like', () => {
     expect(isEmpty({ length: '0' })).toBe(false);
+  });
+
+  it('should return `true` for objects with only enumerable symbol properties', () => {
+    const value = { [Symbol('a')]: 1 };
+    expect(isEmpty(value)).toBe(true);
+
+    function Foo() {}
+    Foo.prototype = { constructor: Foo, [Symbol('a')]: 1 };
+    expect(isEmpty(Foo.prototype)).toBe(true);
   });
 });

@@ -16,7 +16,7 @@ describe('snakeCase', () => {
     snakeCaseToolkit('hello-World_of XML_httpRequest');
   });
 
-  bench('es-toolkit/comapt/snakeCase', () => {
+  bench('es-toolkit/compat/snakeCase', () => {
     snakeCaseToolkitCompat('hello world');
     snakeCaseToolkitCompat('--foo--bar__baz 123');
     snakeCaseToolkitCompat('123numericValues');

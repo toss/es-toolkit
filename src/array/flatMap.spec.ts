@@ -33,4 +33,11 @@ describe('flatMap', () => {
     const result = flatMap(emptyArr, item => [item, item]);
     expect(result).toEqual([]);
   });
+
+  it('should return type is flatten array without depth prop', () => {
+    const arr: string[] = ['1', '2'];
+    const result = flatMap(arr, item => [item, item]);
+    expect(result).toEqual(['1', '1', '2', '2']);
+    result[0].substring(0, 1);
+  });
 });

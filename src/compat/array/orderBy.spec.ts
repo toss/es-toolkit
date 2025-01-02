@@ -101,8 +101,14 @@ describe('orderBy', () => {
 
     const wrapped = partialRight(orderBy, 'bogus');
 
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(['a'].reduce(wrapped, objects)).toEqual([objects[0], objects[2], objects[1], objects[3]]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect([0].reduce(wrapped, objects)).toEqual([objects[2], objects[3], objects[0], objects[1]]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect([[0]].reduce(wrapped, objects)).toEqual([objects[2], objects[3], objects[0], objects[1]]);
   });
 
@@ -183,7 +189,7 @@ describe('orderBy', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('shoud work with `deep-like` property paths', () => {
+  it('should work with `deep-like` property paths', () => {
     const objects = [{ 'a.b': 1 }, { 'a.b': 2 }, { 'a.b': 3 }, { 'a.b': 4 }];
     const actual = orderBy(objects, ['a.b'], ['desc']);
     const expected = [objects[3], objects[2], objects[1], objects[0]];

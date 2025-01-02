@@ -23,6 +23,6 @@
  * console.log(isObjectLike(value5)); // false
  */
 
-export function isObjectLike(value: unknown): value is object {
+export function isObjectLike(value?: unknown): value is object {
   return typeof value === 'object' && value !== null;
 }

@@ -7,13 +7,13 @@ JavaScript 언어에 포함된 [Array#flat](https://developer.mozilla.org/en-US/
 ## 인터페이스
 
 ```typescript
-function flattenDeep<T>(arr: T[]): Array<ExtractNestedArrayType<T>>;
+function flatMapDeep<T, U>(arr: T[], iteratee: (item: T) => U): Array<ExtractNestedArrayType<U>>;
 ```
 
 ### 파라미터
 
 - `arr` (`T[]`): 평탄화할 중첩 배열이에요.
-- `iteratee` (`T[]`): 각 배열 요소를 매핑하는 함수에요.
+- `iteratee` (`T[]`): 각 배열 요소를 매핑하는 함수예요.
 
 ### 반환 값
 

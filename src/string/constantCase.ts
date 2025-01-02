@@ -1,4 +1,4 @@
-import { getWords } from './_internal/getWords.ts';
+import { words as getWords } from './words.ts';
 
 /**
  * Converts a string to constant case.
