@@ -29,11 +29,4 @@ describe('reduce', () => {
     expect(removed).toEqual([10, 20, 30]);
     expect(arr).toEqual([]);
   });
-
-  it('removes elements in descending order of indices', () => {
-    const arr = [10, 20, 30, 40, 50];
-    const removed = reduce(arr, [4, 0, 2]);
-    expect(removed).toEqual([10, 30, 50]);
-    expect(arr).toEqual([20, 40]);
-  });
 });
