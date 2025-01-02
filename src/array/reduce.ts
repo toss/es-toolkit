@@ -1,4 +1,4 @@
-/*
+/**
  * Removes elements from an array at specified indices and returns the removed elements.
  *
  * This function supports negative indices, which count from the end of the array.
@@ -16,6 +16,7 @@
  * console.log(removed); // [20, 40, 50]
  * console.log(numbers); // [10, 30]
  */
+
 export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
   const indicesSet = Array.from(
     new Set(indicesToRemove.map(index => (index < 0 ? arr.length + index : index)))
