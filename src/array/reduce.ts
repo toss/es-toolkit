@@ -11,20 +11,22 @@
 export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
   // Normalize indices and sort in descending order
   const indicesSet = Array.from(
-    new Set(indicesToRemove.map(index => (index < 0 ? arr.length + index : index)))
+    new Set(
+      indicesToRemove.map((index) => (index < 0 ? arr.length + index : index))
+    )
   ).sort((a, b) => b - a);
 
   const removed: Array<T | undefined> = [];
 
   // Remove elements at specified indices
-  indicesSet.forEach(index => {
+  for (const index of indicesSet) {
     if (index >= 0 && index < arr.length) {
       removed.unshift(arr[index]); // Add the removed element to the front
       arr.splice(index, 1); // Remove the element from the array
     } else {
       removed.unshift(undefined); // Handle out-of-bounds indices
     }
-  });
+  }
 
   return removed;
 }
