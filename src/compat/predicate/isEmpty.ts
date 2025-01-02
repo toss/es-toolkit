@@ -1,7 +1,6 @@
 import { isArguments } from './isArguments.ts';
 import { isArrayLike } from './isArrayLike.ts';
 import { isTypedArray } from './isTypedArray.ts';
-import { getSymbols } from '../_internal/getSymbols.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
 
 declare let Buffer:
@@ -59,14 +58,14 @@ export function isEmpty(value: Set<any>): boolean;
 /**
  * Checks if a given array is empty.
  *
- * @param {Array<any>} value - The array to check.
+ * @param {any[]} value - The array to check.
  * @returns {boolean} `true` if the array is empty, `false` otherwise.
  *
  * @example
  * isEmpty([]); // true
  * isEmpty([1, 2, 3]); // false
  */
-export function isEmpty(value: Array<any>): value is [];
+export function isEmpty(value: any[]): value is [];
 
 /**
  * Checks if a given object is empty.
@@ -147,13 +146,12 @@ export function isEmpty(value?: unknown): boolean {
     }
 
     const keys = Object.keys(value);
-    const symbols = getSymbols(value);
 
     if (isPrototype(value)) {
-      return keys.filter(x => x !== 'constructor').length === 0 && symbols.length === 0;
+      return keys.filter(x => x !== 'constructor').length === 0;
     }
 
-    return keys.length === 0 && symbols.length === 0;
+    return keys.length === 0;
   }
 
   return true;

@@ -13,6 +13,6 @@ import { isObjectLike } from './isObjectLike.ts';
  * isArrayLikeObject('abc'); // false
  * isArrayLikeObject(()=>{}); // false
  */
-export function isArrayLikeObject(value: unknown): value is ArrayLike<unknown> & object {
+export function isArrayLikeObject(value?: unknown): value is ArrayLike<unknown> & object {
   return isObjectLike(value) && isArrayLike(value);
 }

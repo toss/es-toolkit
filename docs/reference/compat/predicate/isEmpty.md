@@ -20,7 +20,7 @@ Checks if a given value is empty.
 function isEmpty(value: string): value is '';
 function isEmpty(value: Map<any, any>): boolean;
 function isEmpty(value: Set<any>): boolean;
-function isEmpty(value: Array<any>): value is [];
+function isEmpty(value: any[]): value is [];
 function isEmpty<T extends Record<any, any>>(
   value: T | null | undefined
 ): value is Record<keyof T, never> | null | undefined;

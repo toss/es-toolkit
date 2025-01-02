@@ -1,28 +1,39 @@
 /**
- * Removes all occurrences of the specified values from an array and returns the modified array.
+ * Removes all specified values from an array.
  *
- * This function mutates the original array.
+ * This function changes `arr` in place.
+ * If you want to remove values without modifying the original array, use `difference`.
  *
- * @template T
- * @param {T[]} arr - The array from which elements will be removed.
- * @param {...T} values - The values to remove from the array.
- * @returns {T[]} The modified array with specified values removed.
+ * @template T, U
+ * @param {T[]} arr - The array to modify.
+ * @param {unknown[]} valuesToRemove - The values to remove from the array.
+ * @returns {T[]} The modified array with the specified values removed.
  *
  * @example
- * import { pull } from './pull';
- *
- * const numbers = [1, 2, 3, 1, 2, 3];
- * pull(numbers, 1, 3);
- * console.log(numbers); // [2, 2]
+ * const numbers = [1, 2, 3, 4, 5, 2, 4];
+ * pull(numbers, [2, 4]);
+ * console.log(numbers); // [1, 3, 5]
  */
-export function pull<T>(arr: T[], ...values: T[]): T[] {
-    const valuesSet = new Set(values);
+export function pull<T>(arr: T[], valuesToRemove: readonly unknown[]): T[] {
+  const valuesSet = new Set(valuesToRemove);
+  let resultIndex = 0;
 
-    for (let i = arr.length - 1; i >= 0; i--) {
-      if (valuesSet.has(arr[i])) {
-        arr.splice(i, 1);
-      }
+  for (let i = 0; i < arr.length; i++) {
+    if (valuesSet.has(arr[i])) {
+      continue;
     }
 
-    return arr;
+    // For handling sparse arrays
+    if (!Object.hasOwn(arr, i)) {
+      delete arr[resultIndex++];
+      continue;
+    }
+
+    arr[resultIndex++] = arr[i];
   }
+
+  arr.length = resultIndex;
+
+  return arr;
+}
+

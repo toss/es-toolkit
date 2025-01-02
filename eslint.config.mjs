@@ -1,4 +1,3 @@
-import jsdoc from 'eslint-plugin-jsdoc';
 import noForOfArrayPlugin from 'eslint-plugin-no-for-of-array';
 import prettier from 'eslint-plugin-prettier/recommended';
 import pluginVue from 'eslint-plugin-vue';
@@ -40,7 +39,6 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   prettier,
-  jsdoc.configs['flat/recommended'],
   ...pluginVue.configs['flat/recommended'],
   {
     files: ['src/**/*.ts'],
@@ -117,9 +115,6 @@ export default [
           ],
         },
       ],
-      'jsdoc/tag-lines': 'off',
-      'jsdoc/no-defaults': 'off',
-      'jsdoc/require-jsdoc': 'off',
       'vue/multi-word-component-names': 'off',
       'prefer-object-has-own': 'error',
     },

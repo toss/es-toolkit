@@ -23,7 +23,7 @@ If no predicate is provided, the function checks if there is any truthy element 
 function some<T>(arr: T[]): boolean;
 function some<T>(arr: T[], predicate: (item: T, index: number, arr: any) => unknown): boolean;
 function some<T>(arr: T[], predicate: [keyof T, unknown]): boolean;
-function some<T>(arr: T[], predicate: string): boolean;
+function some<T>(arr: T[], predicate: PropertyKey): boolean;
 function some<T>(arr: T[], predicate: Partial<T>): boolean;
 
 function some<T extends Record<string, unknown>>(object: T): boolean;
@@ -33,7 +33,7 @@ function some<T extends Record<string, unknown>>(
 ): boolean;
 function some<T extends Record<string, unknown>>(object: T, predicate: Partial<T[keyof T]>): boolean;
 function some<T extends Record<string, unknown>>(object: T, predicate: [keyof T[keyof T], unknown]): boolean;
-function some<T extends Record<string, unknown>>(object: T, predicate: string): boolean;
+function some<T extends Record<string, unknown>>(object: T, predicate: PropertyKey): boolean;
 ```
 
 ### Parameters
@@ -64,13 +64,13 @@ To ensure full compatibility with lodash, the `some` function handles `object` i
     - **Predicate function** (`(item: T, index: number, arr: T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
     - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
     - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`string`): The name of the property to check for a truthy value.
+    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
 
   - For the `some` overloads with objects:
     - **Predicate function** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): A function that takes an value, its key, and the object, and returns a truthy value if the item matches the criteria.
     - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
     - **Property-value pair** (`[keyof T[keyof T], unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`string`): The name of the property to check for a truthy value.
+    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
 
 ### Returns
 

@@ -3,9 +3,9 @@ import { isMap } from './isMap';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
 import { weakMap } from '../_internal/weakMap';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isMap', () => {
   it('should return `true` for maps', () => {

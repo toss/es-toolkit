@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { invariant } from './invariant';
 
 describe('invariant', () => {
@@ -29,5 +29,15 @@ describe('invariant', () => {
 
     const number = -1;
     expect(() => invariant(number > 0, 'Number must be positive')).toThrow('Number must be positive');
+  });
+
+  it('should assert non-null value and treat it as string', () => {
+    const value = 'es-toolkit' as string | null;
+
+    invariant(value !== null, 'Value should not be null');
+
+    // Narrow the type.
+    expect(value.length).toBe(10);
+    expectTypeOf(value).toEqualTypeOf<string>();
   });
 });

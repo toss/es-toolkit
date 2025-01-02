@@ -23,7 +23,7 @@
 function some<T>(arr: T[]): boolean;
 function some<T>(arr: T[], predicate: (item: T, index: number, arr: any) => unknown): boolean;
 function some<T>(arr: T[], predicate: [keyof T, unknown]): boolean;
-function some<T>(arr: T[], predicate: string): boolean;
+function some<T>(arr: T[], predicate: PropertyKey): boolean;
 function some<T>(arr: T[], predicate: Partial<T>): boolean;
 
 function some<T extends Record<string, unknown>>(object: T): boolean;
@@ -33,7 +33,7 @@ function some<T extends Record<string, unknown>>(
 ): boolean;
 function some<T extends Record<string, unknown>>(object: T, predicate: Partial<T[keyof T]>): boolean;
 function some<T extends Record<string, unknown>>(object: T, predicate: [keyof T[keyof T], unknown]): boolean;
-function some<T extends Record<string, unknown>>(object: T, predicate: string): boolean;
+function some<T extends Record<string, unknown>>(object: T, predicate: PropertyKey): boolean;
 ```
 
 ### 参数
@@ -64,14 +64,14 @@ function some<T extends Record<string, unknown>>(object: T, predicate: string): 
     - **谓词函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个函数，接受项、其索引和数组，如果项符合条件则返回真值。
     - **部分对象** (`Partial<T>`): 指定要匹配的属性的部分对象。
     - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
-    - **属性名称** (`string`): 要检查其真值的属性名称。
+    - **属性名称** (`PropertyKey`): 要检查其真值的属性名称。
 
   - 对于对象的`some`重载：
 
     - **谓词函数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 一个函数，接受值、其键和对象，如果值符合条件则返回真值。
     - **部分值** (`Partial<T[keyof T]>`): 要与对象的值匹配的部分值。
     - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
-    - **属性名称** (`string`): 要检查其真值的属性名称。
+    - **属性名称** (`PropertyKey`): 要检查其真值的属性名称。
 
 ### 返回值
 

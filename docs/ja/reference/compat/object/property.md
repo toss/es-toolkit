@@ -11,7 +11,7 @@
 ## インターフェース
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
+function property(path: PropertyKey | PropertyKey[]): (object: unknown) => any;
 ```
 
 ### パラメータ

@@ -21,7 +21,7 @@
 function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
 function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
 function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: T[], doesMatch: string): T[];
+function filter<T>(arr: T[], doesMatch: PropertyKey): T[];
 
 function filter<T extends Record<string, unknown>>(
   object: T,
@@ -29,7 +29,7 @@ function filter<T extends Record<string, unknown>>(
 ): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
 function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: string): T[];
+function filter<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T[];
 ```
 
 ### パラメータ
@@ -52,14 +52,14 @@ lodash と完全に互換性を保つため、`filter` 関数は `arr` を次の
     - **検査関数** (`(item: T, index: number, arr: T[]) => unknown`): 各要素が条件を満たしているか確認する関数。
     - **部分オブジェクト** (`Partial<T>`): 要素の属性と値が一致するか確認する部分オブジェクト。
     - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初の要素が対象プロパティ、2番目が対象値を示すタプル。
-    - **プロパティ名** (`string`): 特定の属性を持っているか確認するプロパティ名。
+    - **プロパティ名** (`PropertyKey`): 特定の属性を持っているか確認するプロパティ名。
 
   - オブジェクトの場合:
 
     - **検査関数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 各要素が条件を満たしているか確認する関数。
     - **部分値** (`Partial<T[keyof T]>`): 要素の属性と値が一致するか確認する部分オブジェクト。
     - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初の要素が対象プロパティ、2番目が対象値を示すタプル。
-    - **プロパティ名** (`string`): 特定の属性を持っているか確認するプロパティ名。
+    - **プロパティ名** (`PropertyKey`): 特定の属性を持っているか確認するプロパティ名。
 
 ### 戻り値
 

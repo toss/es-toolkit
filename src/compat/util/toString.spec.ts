@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { stubString } from './stubString';
 import { toString } from './toString';
-import { stubString } from '../_internal/stubString';
 import { symbol } from '../_internal/symbol';
 
 describe('toString', () => {

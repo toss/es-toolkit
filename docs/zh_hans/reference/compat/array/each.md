@@ -1,4 +1,4 @@
-# forEach
+# each
 
 ::: info
 出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
@@ -15,7 +15,7 @@
 ### 参数
 
 ```ts
-function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
 ```
 
 ### 参数
@@ -24,19 +24,19 @@ function forEach<T extends object>(object: T, callback: (value: T[keyof T], key:
 - `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 每次迭代调用的函数。
   - `value`: 当前正在处理的对象属性的值。
   - `key`: 当前正在处理的对象属性的键。
-  - `object`: 调用 `forEach` 的对象。
+  - `object`: 调用 `each` 的对象。
 
 ### 返回值
 
-(`T`): 调用 `forEach` 的对象。
+(`T`): 调用 `each` 的对象。
 
 ## 示例
 
 ```ts
-import { forEach } from 'es-toolkit/compat';
+import { each } from 'es-toolkit/compat';
 
 const object = { a: 1, b: 2 };
-forEach(object, (value, key, object) => console.log(value, key));
+each(object, (value, key, object) => console.log(value, key));
 // Output:
 // 1 'a'
 // 2 'b'
