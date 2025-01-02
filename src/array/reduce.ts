@@ -1,4 +1,4 @@
-/*
+/**
  * Removes elements from an array at specified indices and returns the removed elements.
  *
  * This function supports negative indices, which count from the end of the array.
