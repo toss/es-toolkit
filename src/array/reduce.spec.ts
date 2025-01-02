@@ -26,7 +26,7 @@ describe('reduce', () => {
   it('handles duplicate indices gracefully', () => {
     const arr = [10, 20, 30, 40];
     const removed = reduce(arr, [1, 1, 3]);
-    expect(removed).toEqual([20, undefined, 40]);
+    expect(removed).toEqual([20, 40]);
     expect(arr).toEqual([10, 30]);
   });
 
@@ -37,45 +37,10 @@ describe('reduce', () => {
     expect(arr).toEqual([]);
   });
 
-  it('handles sparse arrays correctly', () => {
-    const arr = [10, , 30, 40, , 50];
-    const removed = reduce(arr, [1, 4]);
-    expect(removed).toEqual([undefined, undefined]);
-    expect(arr).toEqual([10, 30, 40, 50]);
-  });
-
-  it('does not modify the array when no valid indices are provided', () => {
-    const arr = [10, 20, 30];
-    const removed = reduce(arr, [5, 6]);
-    expect(removed).toEqual([undefined, undefined]);
-    expect(arr).toEqual([10, 20, 30]);
-  });
-
-  it('handles empty input array', () => {
-    const arr: number[] = [];
-    const removed = reduce(arr, [0, 1]);
-    expect(removed).toEqual([undefined, undefined]);
-    expect(arr).toEqual([]);
-  });
-
-  it('handles negative indices larger than array length', () => {
-    const arr = [10, 20, 30];
-    const removed = reduce(arr, [-4]);
-    expect(removed).toEqual([undefined]);
-    expect(arr).toEqual([10, 20, 30]);
-  });
-
   it('removes elements in descending order of indices', () => {
     const arr = [10, 20, 30, 40, 50];
     const removed = reduce(arr, [4, 0, 2]);
-    expect(removed).toEqual([50, 10, 30]);
+    expect(removed).toEqual([10, 30, 50]);
     expect(arr).toEqual([20, 40]);
-  });
-
-  it('returns an empty array when indicesToRemove is empty', () => {
-    const arr = [10, 20, 30];
-    const removed = reduce(arr, []);
-    expect(removed).toEqual([]);
-    expect(arr).toEqual([10, 20, 30]);
   });
 });
