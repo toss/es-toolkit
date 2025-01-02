@@ -13,7 +13,9 @@ export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefi
   const indicesSet = Array.from(
     new Set(indicesToRemove.map(index => (index < 0 ? arr.length + index : index)))
   ).sort((a, b) => b - a);
+
   const removed: Array<T | undefined> = [];
+
   // Remove elements at specified indices
   indicesSet.forEach(index => {
     if (index >= 0 && index < arr.length) {
