@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { isArrayMatch, isMapMatch, isMatch, isSetMatch } from './isMatch';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
-import { stubTrue } from '../_internal/stubTrue';
+import { stubTrue } from '../util/stubTrue';
 
 describe('isMatch', () => {
   it('should handle null correctly', () => {

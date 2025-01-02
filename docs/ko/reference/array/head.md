@@ -7,8 +7,8 @@
 ## 인터페이스
 
 ```typescript
-export function head<T>(arr: [T, ...T[]]): T;
-export function head<T>(arr: T[]): T | undefined;
+function head<T>(arr: [T, ...T[]]): T;
+function head<T>(arr: T[]): T | undefined;
 ```
 
 ### 파라미터
@@ -28,15 +28,15 @@ const firstElement1 = head(arr1);
 
 const arr2: string[] = [];
 const firstElement2 = head(arr2);
-// firstElement2는 undefined에요.
+// firstElement2는 undefined예요.
 
 const arr3 = ['a', 'b', 'c'];
 const firstElement3 = head(arr3);
-// firstElement3는 'a'이에요.
+// firstElement3는 'a'예요.
 
 const arr4 = [true, false, true];
 const firstElement4 = head(arr4);
-// firstElement4는 true에요.
+// firstElement4는 true예요.
 
 const arr5: [number, string, boolean] = [1, 'a', true];
 const firstElement5 = head(arr5);

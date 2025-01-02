@@ -10,14 +10,14 @@ mapped, match an element in the mapped version of the second array.
 ## Signature
 
 ```typescript
-function differenceBy<T, U>(firstArr: T[], secondArr: T[], mapper: (value: T) => U): T[];
+function differenceBy<T, U>(firstArr: T[], secondArr: U[], mapper: (value: T | U) => unknown): T[];
 ```
 
 ### Parameters
 
 - `firstArr` (`T[]`): The primary array from which to derive the difference.
-- `secondArr` (`T[]`): The array containing elements to be excluded from the first array.
-- `mapper` (`(value: T) => U`): The function to map the elements of both arrays. This function is applied to each element in both arrays, and the comparison is made based on the mapped values.
+- `secondArr` (`U[]`): The array containing elements to be excluded from the first array.
+- `mapper` (`(value: T | U) => unknown`): The function to map the elements of both arrays. This function is applied to each element in both arrays, and the comparison is made based on the mapped values.
 
 ### Returns
 
@@ -33,4 +33,10 @@ const array2 = [{ id: 2 }, { id: 4 }];
 const mapper = item => item.id;
 const result = differenceBy(array1, array2, mapper);
 // result will be [{ id: 1 }, { id: 3 }, { id: 5 }] since the elements with id 2 are in both arrays and are excluded from the result.
+
+const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+const array2 = [2, 4];
+const mapper = item => (typeof item === 'object' ? item.id : item);
+const result = differenceBy(array1, array2, mapper);
+// result will be [{ id: 1 }, { id: 3 }] since 2 is present in both arrays after mapping, and is excluded from the result.
 ```

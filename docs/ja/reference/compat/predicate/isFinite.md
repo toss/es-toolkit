@@ -13,7 +13,7 @@
 ## インターフェース
 
 ```typescript
-function isFinite(value: unknown): value is number;
+function isFinite(value?: unknown): value is number;
 ```
 
 ### パラメータ

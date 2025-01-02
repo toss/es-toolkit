@@ -7,13 +7,13 @@
 ## 인터페이스
 
 ```typescript
-export function sampleSize<T>(array: T[], size: number): T[];
+function sampleSize<T>(array: T[], size: number): T[];
 ```
 
 ### 파리미터
 
 - `array` (`T[]`): 샘플링할 배열이에요.
-- `size` (`number`): 샘플링할 크기에요.
+- `size` (`number`): 샘플링할 크기예요.
 
 ### 반환 값
 

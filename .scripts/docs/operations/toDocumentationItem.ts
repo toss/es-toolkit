@@ -79,11 +79,11 @@ function toParameters(symbolName: string, tags: JsDocTag[]): DocumentationItem['
     }
 
     if (param.type == null) {
-      throw new Error(`parameter type is not provided in ${symbolName}.`);
+      throw new Error(`parameter type is not provided in ${symbolName}. (for parameter ${param.name})`);
     }
 
     if (param.doc == null) {
-      throw new Error(`parameter doc is not provided in ${symbolName}.`);
+      throw new Error(`parameter doc is not provided in ${symbolName}. (for parameter ${param.name})`);
     }
 
     return {

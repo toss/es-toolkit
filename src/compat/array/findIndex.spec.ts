@@ -5,9 +5,9 @@ import { slice } from '../_internal/slice';
 
 describe('findIndex', () => {
   const objects = [
-    { a: 0, b: 0 },
-    { a: 1, b: 1 },
-    { a: 2, b: 2 },
+    { a: 0, b: 0, 0: 0, [Symbol.for('a')]: 0 },
+    { a: 1, b: 1, 0: 1, [Symbol.for('a')]: 1 },
+    { a: 2, b: 2, 0: 2, [Symbol.for('a')]: 2 },
   ];
 
   it(`should return the found value`, () => {
@@ -24,10 +24,14 @@ describe('findIndex', () => {
 
   it(`findIndex should work with \`matchesProperty\` shorthands`, () => {
     expect(findIndex(objects, ['b', 2])).toBe(2);
+    expect(findIndex(objects, [0, 2])).toBe(2);
+    expect(findIndex(objects, [Symbol.for('a'), 2])).toBe(2);
   });
 
   it(`findIndex should work with \`property\` shorthands`, () => {
     expect(findIndex(objects, 'b')).toBe(1);
+    expect(findIndex(objects, 0)).toBe(1);
+    expect(findIndex(objects, Symbol.for('a'))).toBe(1);
   });
 
   it(`findIndex should provide correct \`predicate\` arguments for arrays`, () => {

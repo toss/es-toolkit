@@ -1,4 +1,4 @@
-# forEach
+# each
 
 ::: info
 この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
@@ -15,7 +15,7 @@
 ## インターフェース
 
 ```ts
-function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
 ```
 
 ### パラメータ
@@ -24,21 +24,21 @@ function forEach<T extends object>(object: T, callback: (value: T[keyof T], key:
 - `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 各反復で呼び出される関数。
   - `value`: 配列で現在処理中の要素。
   - `index`: 配列で現在処理中の要素のプロパティ名。
-  - `object`: `forEach` 関数が呼び出されたオブジェクト。
+  - `object`: `each` 関数が呼び出されたオブジェクト。
 
 ### 戻り値
 
-(`T`): `forEach`で走査するオブジェクト。
+(`T`): `each`で走査するオブジェクト。
 
 ## 例
 
 ```ts
-import { forEach } from 'es-toolkit/array';
+import { each } from 'es-toolkit/array';
 
 const array = [1, 2, 3];
 const result: number[] = [];
-// forEach関数を使用して配列を走査し、各要素を結果配列に追加します。
-forEach(array, value => {
+// each関数を使用して配列を走査し、各要素を結果配列に追加します。
+each(array, value => {
   result.push(value);
 });
 

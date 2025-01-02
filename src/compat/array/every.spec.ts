@@ -3,8 +3,8 @@ import { every } from './every';
 import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubTrue } from '../_internal/stubTrue';
+import { stubFalse } from '../util/stubFalse';
+import { stubTrue } from '../util/stubTrue';
 
 describe('every', () => {
   it('should return true for array with all elements passing predicate', () => {
@@ -115,11 +115,13 @@ describe('every', () => {
 
   it('should work with `_.property` shorthands', () => {
     const objects = [
-      { a: 0, b: 1 },
-      { a: 1, b: 2 },
+      { a: 0, b: 1, 0: 1, [Symbol.for('c')]: 1 },
+      { a: 1, b: 2, 0: 2, [Symbol.for('c')]: 2 },
     ];
     expect(every(objects, 'a')).toBe(false);
     expect(every(objects, 'b')).toBe(true);
+    expect(every(objects, 0)).toBe(true);
+    expect(every(objects, Symbol.for('c'))).toBe(true);
   });
 
   it('should work with `_.matches` shorthands', () => {
@@ -145,5 +147,15 @@ describe('every', () => {
     expect(every({ 0: 'a', 1: 'b', length: 2 }, stubFalse)).toBe(false);
     expect(every('123', stubFalse)).toBe(false);
     expect(every(args, stubFalse)).toBe(false);
+  });
+  it('should support property-value pair', () => {
+    const objects = [
+      { a: 0, b: 0, 0: 1, [Symbol.for('c')]: 1 },
+      { a: 0, b: 1, 0: 2, [Symbol.for('c')]: 1 },
+    ];
+    expect(every(objects, ['a', 0])).toBe(true);
+    expect(every(objects, ['b', 1])).toBe(false);
+    expect(every(objects, [0, 1])).toBe(false);
+    expect(every(objects, [Symbol.for('c'), 1])).toBe(true);
   });
 });

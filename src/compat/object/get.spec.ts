@@ -8,6 +8,8 @@ describe('get', () => {
     expect(get(obj, 'a.c', null)).toBe(null);
     expect(get(obj, 'a.d', 4)).toBe(4);
     expect(get(obj, 'a.e', undefined)).toBe(undefined);
+    expect(get(obj, 0, 5)).toBe(5);
+    expect(get(obj, Symbol('a'), 3)).toBe(3);
   });
 
   it('should return value', () => {

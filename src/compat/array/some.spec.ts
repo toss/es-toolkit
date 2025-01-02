@@ -3,8 +3,8 @@ import { some } from './some';
 import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubTrue } from '../_internal/stubTrue';
+import { stubFalse } from '../util/stubFalse';
+import { stubTrue } from '../util/stubTrue';
 
 describe('some', () => {
   it('should return `true` if `predicate` returns truthy for any element', () => {
@@ -99,22 +99,30 @@ describe('some', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should work with `_.property` shorthands', () => {
+  it('should work with matchesProperty shorthands', () => {
     const objects = [
-      { a: 0, b: 0 },
-      { a: 0, b: 1 },
+      { a: 0, b: 0, 0: 0, [Symbol.for('a')]: 0 },
+      { a: 0, b: 1, 0: 1, [Symbol.for('a')]: 1 },
     ];
-    expect(some(objects, 'a')).toBe(false);
-    expect(some(objects, 'b')).toBe(true);
+
+    expect(some(objects, ['a', 0])).toBe(true);
+    expect(some(objects, ['b', 1])).toBe(true);
+    expect(some(objects, ['b', 2])).toBe(false);
+
+    expect(some(objects, [0, 1])).toBe(true);
+    expect(some(objects, [Symbol.for('a'), 1])).toBe(true);
   });
 
   it('should work with `_.property` shorthands', () => {
     const objects = [
-      { a: 0, b: 0 },
-      { a: 0, b: 1 },
+      { a: 0, b: 0, 0: 0, [Symbol.for('a')]: 0 },
+      { a: 0, b: 1, 0: 1, [Symbol.for('a')]: 1 },
     ];
     expect(some(objects, 'a')).toBe(false);
     expect(some(objects, 'b')).toBe(true);
+
+    expect(some(objects, 0)).toBe(true);
+    expect(some(objects, Symbol.for('a'))).toBe(true);
   });
 
   it('should work with `_.matches` shorthands', () => {

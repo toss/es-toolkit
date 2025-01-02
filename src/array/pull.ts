@@ -1,4 +1,4 @@
-/**
+
  * Removes all occurrences of the specified values from an array and returns the modified array.
  *
  * This function mutates the original array.
@@ -26,3 +26,4 @@ export function pull<T>(arr: T[], ...values: T[]): T[] {
 
     return arr;
   }
+

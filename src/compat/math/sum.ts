@@ -1,4 +1,4 @@
-import { sumBy } from './sumBy';
+import { sumBy } from './sumBy.ts';
 
 /**
  * Computes the sum of the `number` values in `array`.
@@ -39,7 +39,7 @@ export function sum(array: ArrayLike<bigint>): bigint;
 export function sum(array: ArrayLike<unknown> | null | undefined): unknown;
 
 /**
- * Compmutes the sum of the values that are returned by the `iteratee` function.
+ * Computes the sum of the values that are returned by the `iteratee` function.
  *
  * It does not coerce values to `number`.
  *

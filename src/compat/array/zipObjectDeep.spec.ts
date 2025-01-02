@@ -52,4 +52,9 @@ describe('zipObject', () => {
     expect(zipObjectDeep(['a'], { 0: 1, length: 1 })).toEqual({ a: 1 });
     expect(zipObjectDeep(['a', 'b'], '12')).toEqual({ a: '1', b: '2' });
   });
+
+  it('should treat values as empty arrays when keys are not array-like', () => {
+    // @ts-expect-error - invalid argument
+    expect(zipObjectDeep([1, 2, 3], undefined)).toEqual({ 1: undefined, 2: undefined, 3: undefined });
+  });
 });
