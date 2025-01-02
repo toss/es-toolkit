@@ -16,8 +16,8 @@
  * console.log(removed); // [20, 40, 50]
  * console.log(numbers); // [10, 30]
  */
-
 export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
+  // Normalize indices and sort in descending order
   const indicesSet = Array.from(
     new Set(
       indicesToRemove.map((index) => (index < 0 ? arr.length + index : index))
@@ -26,14 +26,15 @@ export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefi
 
   const removed: Array<T | undefined> = [];
 
-  for (let i = 0; i < indicesSet.length; i++) {
-    const index = indicesSet[i];
+  // Remove elements at specified indices
+  indicesSet.forEach((index) => {
     if (index >= 0 && index < arr.length) {
       removed.unshift(arr[index]); // Add the removed element to the front
       arr.splice(index, 1); // Remove the element from the array
     } else {
       removed.unshift(undefined); // Handle out-of-bounds indices
     }
-  }
+  });
+
   return removed;
 }
