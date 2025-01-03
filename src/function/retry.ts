@@ -56,22 +56,3 @@ export async function retry<T>(func: () => Promise<T>, options: RetryOptions): P
   }
   throw new Error('Failed after maximum retries');
 }
-
-/* async function getNumber() {
-  return Promise.resolve(3);
-}
-async function getError() {
-  return Promise.reject(new Error('MyFailed'));
-}
-// The result will be 3
-await retry(getNumber, {
-  intervalMs: 1000,
-  retries: 2,
-});
-// After executing twice, an exception is thrown
-await retry(getError, {
-  intervalMs: 1000,
-  retries: 2,
-});
-
- */
