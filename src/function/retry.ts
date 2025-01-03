@@ -22,8 +22,8 @@ interface RetryOptions {
  * @returns {Awaited<ReturnType<F>>} - Function return value
  * @throws {Error} - Throws an error if the maximum number of retries is exceeded.
  * @example
- * 
- * async function getNumber() { 
+ *
+ * async function getNumber() {
  *  return Promise.resolve(3);
  * }
  * async function getError() {

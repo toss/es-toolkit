@@ -20,6 +20,8 @@ describe('retry', () => {
   });
 
   it('When retries is 0, a fallback error is triggered', async () => {
-    expect(retry(getError, { intervalMs: 1000, retries: 0 })).rejects.toThrowError(new Error('Failed after maximum retries'));
+    expect(retry(getError, { intervalMs: 1000, retries: 0 })).rejects.toThrowError(
+      new Error('Failed after maximum retries')
+    );
   });
 });
