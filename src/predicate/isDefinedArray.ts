@@ -16,8 +16,8 @@
  * ```
  */
 export function isDefinedArray<T>(array: Array<T | undefined | null>): array is T[] {
-  for (const item of array) {
-    if (item === undefined || item === null) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === undefined || array[i] === null) {
       return false;
     }
   }
