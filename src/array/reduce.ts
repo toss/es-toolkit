@@ -21,7 +21,8 @@ export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefi
 
   const removed: Array<T | undefined> = [];
 
-  for (const index of normalizedIndices) {
+  for (let i = 0; i < normalizedIndices.length; i++) {
+    const index = normalizedIndices[i];
     if (index >= 0 && index < arr.length) {
       removed.unshift(arr[index]);
       arr.splice(index, 1);
