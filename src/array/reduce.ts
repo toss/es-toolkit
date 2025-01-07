@@ -3,27 +3,30 @@
  *
  * This function supports negative indices, which count from the end of the array.
  *
- * @template T
+ * @template T - The type of elements in the array.
  * @param {T[]} arr - The array from which elements will be removed.
  * @param {number[]} indicesToRemove - An array of indices specifying the positions of elements to remove.
  * @returns {Array<T | undefined>} An array containing the elements that were removed from the original array.
+ *
+ * @example
+ * const array = [1, 2, 3, 4, 5];
+ * const removed = reduce(array, [0, -1]);
+ * // removed will be [1, 5]
+ * // array will be [2, 3, 4]
  */
 export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
-  // Normalize indices and sort in descending order
-  const indicesSet = Array.from(
+  const normalizedIndices = Array.from(
     new Set(indicesToRemove.map((index) => (index < 0 ? arr.length + index : index)))
   ).sort((a, b) => b - a);
 
   const removed: Array<T | undefined> = [];
 
-  // Remove elements at specified indices
-  for (let i = 0; i < indicesSet.length; i++) {
-    const index = indicesSet[i];
+  for (const index of normalizedIndices) {
     if (index >= 0 && index < arr.length) {
-      removed.unshift(arr[index]); // Add the removed element to the front
-      arr.splice(index, 1); // Remove the element from the array
+      removed.unshift(arr[index]);
+      arr.splice(index, 1);
     } else {
-      removed.unshift(undefined); // Handle out-of-bounds indices
+      removed.unshift(undefined);
     }
   }
 
