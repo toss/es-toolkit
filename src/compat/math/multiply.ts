@@ -1,11 +1,11 @@
 /**
- * Multiplies two numbers.
+ * Multiply two numbers.
  *
  * If either of the numbers is `NaN`, the function returns `NaN`.
  *
- * @param {number} value The first number
- * @param {number} other The second number
- * @returns {number} The product of the two numbers
+ * @param {number} value The first number in a multiplication
+ * @param {number} other The second number in a multiplication
+ * @returns {number} The product of value and other
  *
  * @example
  * multiply(2, 3); // => 6
