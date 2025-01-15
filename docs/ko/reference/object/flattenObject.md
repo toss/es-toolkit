@@ -8,12 +8,13 @@
 ## 인터페이스
 
 ```typescript
-function flattenObject(object: object): Record<string, any>;
+function flattenObject(object: object, delimiter = '.'): Record<string, any>;
 ```
 
 ### 파라미터
 
 - `object` (`object`): 평탄화할 객체.
+- `delimiter` (`string`): 네스팅된 키의 구분자.
 
 ### 반환 값
 
@@ -38,5 +39,16 @@ console.log(flattened);
 //   'a.b.c': 1,
 //   'd.0': 2,
 //   'd.1': 3
+// }
+```
+
+```typescript
+const flattened = flattenObject(nestedObject, '/');
+console.log(flattened);
+// Output:
+// {
+//   'a/b/c': 1,
+//   'd/0': 2,
+//   'd/1': 3
 // }
 ```

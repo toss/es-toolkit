@@ -154,4 +154,113 @@ describe('flattenObject', function () {
       'a.3.0.c': 4,
     });
   });
+
+  describe('custom delimiters', () => {
+    it('handles forward slash delimiter', () => {
+      const result = flattenObject({
+        a: {
+          b: {
+            c: 1,
+          },
+          d: [2, 3],
+        },
+      }, '/');
+
+      expect(result).toEqual({
+        'a/b/c': 1,
+        'a/d/0': 2,
+        'a/d/1': 3,
+      });
+    });
+
+    it('handles dash delimiter', () => {
+      const result = flattenObject({
+        users: {
+          profile: {
+            firstName: 'John',
+            lastName: 'Doe',
+            settings: {
+              theme: 'dark',
+            },
+          },
+        },
+      }, '-');
+
+      expect(result).toEqual({
+        'users-profile-firstName': 'John',
+        'users-profile-lastName': 'Doe',
+        'users-profile-settings-theme': 'dark',
+      });
+    });
+
+    it('handles underscore delimiter', () => {
+      const result = flattenObject({
+        database: {
+          tables: {
+            users: ['admin', 'guest'],
+            permissions: {
+              read: true,
+              write: false,
+            },
+          },
+        },
+      }, '_');
+
+      expect(result).toEqual({
+        'database_tables_users_0': 'admin',
+        'database_tables_users_1': 'guest',
+        'database_tables_permissions_read': true,
+        'database_tables_permissions_write': false,
+      });
+    });
+
+    it('handles multi-character delimiter', () => {
+      const result = flattenObject({
+        app: {
+          config: {
+            api: {
+              url: 'https://api.example.com',
+              key: '12345',
+            },
+          },
+        },
+      }, '->');
+
+      expect(result).toEqual({
+        'app->config->api->url': 'https://api.example.com',
+        'app->config->api->key': '12345',
+      });
+    });
+
+    it('handles empty string delimiter', () => {
+      const result = flattenObject({
+        x: {
+          y: {
+            z: 42,
+          },
+        },
+      }, '');
+
+      expect(result).toEqual({
+        'xyz': 42,
+      });
+    });
+
+    it('handles special characters delimiter', () => {
+      const result = flattenObject({
+        level1: {
+          level2: {
+            data: 'test',
+            array: [1, 2],
+          },
+        },
+      }, '@#$');
+
+      expect(result).toEqual({
+        'level1@#$level2@#$data': 'test',
+        'level1@#$level2@#$array@#$0': 1,
+        'level1@#$level2@#$array@#$1': 2,
+      });
+    });
+  });
 });
