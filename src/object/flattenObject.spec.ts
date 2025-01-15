@@ -157,14 +157,17 @@ describe('flattenObject', function () {
 
   describe('custom delimiters', () => {
     it('handles forward slash delimiter', () => {
-      const result = flattenObject({
-        a: {
-          b: {
-            c: 1,
+      const result = flattenObject(
+        {
+          a: {
+            b: {
+              c: 1,
+            },
+            d: [2, 3],
           },
-          d: [2, 3],
         },
-      }, '/');
+        '/'
+      );
 
       expect(result).toEqual({
         'a/b/c': 1,
@@ -174,17 +177,20 @@ describe('flattenObject', function () {
     });
 
     it('handles dash delimiter', () => {
-      const result = flattenObject({
-        users: {
-          profile: {
-            firstName: 'John',
-            lastName: 'Doe',
-            settings: {
-              theme: 'dark',
+      const result = flattenObject(
+        {
+          users: {
+            profile: {
+              firstName: 'John',
+              lastName: 'Doe',
+              settings: {
+                theme: 'dark',
+              },
             },
           },
         },
-      }, '-');
+        '-'
+      );
 
       expect(result).toEqual({
         'users-profile-firstName': 'John',
@@ -194,37 +200,43 @@ describe('flattenObject', function () {
     });
 
     it('handles underscore delimiter', () => {
-      const result = flattenObject({
-        database: {
-          tables: {
-            users: ['admin', 'guest'],
-            permissions: {
-              read: true,
-              write: false,
+      const result = flattenObject(
+        {
+          database: {
+            tables: {
+              users: ['admin', 'guest'],
+              permissions: {
+                read: true,
+                write: false,
+              },
             },
           },
         },
-      }, '_');
+        '_'
+      );
 
       expect(result).toEqual({
-        'database_tables_users_0': 'admin',
-        'database_tables_users_1': 'guest',
-        'database_tables_permissions_read': true,
-        'database_tables_permissions_write': false,
+        database_tables_users_0: 'admin',
+        database_tables_users_1: 'guest',
+        database_tables_permissions_read: true,
+        database_tables_permissions_write: false,
       });
     });
 
     it('handles multi-character delimiter', () => {
-      const result = flattenObject({
-        app: {
-          config: {
-            api: {
-              url: 'https://api.example.com',
-              key: '12345',
+      const result = flattenObject(
+        {
+          app: {
+            config: {
+              api: {
+                url: 'https://api.example.com',
+                key: '12345',
+              },
             },
           },
         },
-      }, '->');
+        '->'
+      );
 
       expect(result).toEqual({
         'app->config->api->url': 'https://api.example.com',
@@ -233,28 +245,34 @@ describe('flattenObject', function () {
     });
 
     it('handles empty string delimiter', () => {
-      const result = flattenObject({
-        x: {
-          y: {
-            z: 42,
+      const result = flattenObject(
+        {
+          x: {
+            y: {
+              z: 42,
+            },
           },
         },
-      }, '');
+        ''
+      );
 
       expect(result).toEqual({
-        'xyz': 42,
+        xyz: 42,
       });
     });
 
     it('handles special characters delimiter', () => {
-      const result = flattenObject({
-        level1: {
-          level2: {
-            data: 'test',
-            array: [1, 2],
+      const result = flattenObject(
+        {
+          level1: {
+            level2: {
+              data: 'test',
+              array: [1, 2],
+            },
           },
         },
-      }, '@#$');
+        '@#$'
+      );
 
       expect(result).toEqual({
         'level1@#$level2@#$data': 'test',
