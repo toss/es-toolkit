@@ -49,6 +49,16 @@
           "default": "./dist/index.js"
         }
       },
+      "./array": {
+        "import": {
+          "types": "./dist/array/index.d.mts",
+          "default": "./dist/array/index.mjs"
+        },
+        "require": {
+          "types": "./dist/array/index.d.ts",
+          "default": "./dist/array/index.js"
+        }
+      },
       "./compat": {
         "import": {
           "types": "./dist/compat/index.d.mts",
@@ -67,16 +77,6 @@
         "require": {
           "types": "./dist/error/index.d.ts",
           "default": "./dist/error/index.js"
-        }
-      },
-      "./array": {
-        "import": {
-          "types": "./dist/array/index.d.mts",
-          "default": "./dist/array/index.mjs"
-        },
-        "require": {
-          "types": "./dist/array/index.d.ts",
-          "default": "./dist/array/index.js"
         }
       },
       "./function": {
