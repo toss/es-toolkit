@@ -14,20 +14,11 @@
  * console.log(result); // [20, 40, 50]
  */
 export function at<T>(arr: readonly T[], indices: number[]): Array<T | undefined> {
-  const result = new Array<T | undefined>(indices.length);
-  const length = arr.length;
-
-  for (let i = 0; i < indices.length; i++) {
-    let index = indices[i];
-
+  return indices.map(index => {
     index = Number.isInteger(index) ? index : Math.trunc(index) || 0;
-
     if (index < 0) {
-      index += length;
+      index += arr.length;
     }
-
-    result[i] = arr[index];
-  }
-
-  return result;
+    return arr[index];
+  });
 }
