@@ -18,6 +18,7 @@
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
     "./compat": "./src/compat/index.ts",
+    "./error": "./src/error/index.ts",
     "./function": "./src/function/index.ts",
     "./math": "./src/math/index.ts",
     "./object": "./src/object/index.ts",
@@ -46,6 +47,26 @@
         "require": {
           "types": "./dist/index.d.ts",
           "default": "./dist/index.js"
+        }
+      },
+      "./compat": {
+        "import": {
+          "types": "./dist/compat/index.d.mts",
+          "default": "./dist/compat/index.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/index.d.ts",
+          "default": "./dist/compat/index.js"
+        }
+      },
+      "./error": {
+        "import": {
+          "types": "./dist/error/index.d.mts",
+          "default": "./dist/error/index.mjs"
+        },
+        "require": {
+          "types": "./dist/error/index.d.ts",
+          "default": "./dist/error/index.js"
         }
       },
       "./array": {
@@ -126,16 +147,6 @@
         "require": {
           "types": "./dist/util/index.d.ts",
           "default": "./dist/util/index.js"
-        }
-      },
-      "./compat": {
-        "import": {
-          "types": "./dist/compat/index.d.mts",
-          "default": "./dist/compat/index.mjs"
-        },
-        "require": {
-          "types": "./dist/compat/index.d.ts",
-          "default": "./dist/compat/index.js"
         }
       },
       "./package.json": "./package.json"
