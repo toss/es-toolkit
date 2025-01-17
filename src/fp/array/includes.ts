@@ -33,5 +33,12 @@ export function includes<T extends unknown[]>(arrOrSearchElement: T | T[number],
   }
 
   const arr = arrOrSearchElement as T;
-  return arr.includes(searchElement as T[number]);
+
+  for (const item of arr) {
+    if (item === searchElement) {
+      return true;
+    }
+  }
+
+  return false;
 }
