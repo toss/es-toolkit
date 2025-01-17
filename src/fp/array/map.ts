@@ -1,3 +1,17 @@
+/**
+ * Map each values of array by mapper function.
+ *
+ * @template T - The type of array.
+ * @template R - The type of mapped value.
+ * @param {(value: T[number]) => R} mapper - The function that map each items to new value.
+ * @returns {(arr: T) => R[]} A new array with mapped values.
+ *
+ * @example
+ * const arr = [1, 2, 3];
+ * const double = map(value => value * 2);
+ * const result = double(arr);
+ * // result will be [2, 4, 6]
+ */
 export function map<T extends unknown[], R>(mapper: (value: T[number]) => R): (arr: T) => R[];
 /**
  * Map each values of array by mapper function.
@@ -14,20 +28,7 @@ export function map<T extends unknown[], R>(mapper: (value: T[number]) => R): (a
  * // result will be [2, 4, 6]
  */
 export function map<T extends unknown[], R>(arr: T, mapper: (value: T[number]) => R): R[];
-/**
- * Map each values of array by mapper function.
- *
- * @template T - The type of array.
- * @template R - The type of mapped value.
- * @param {(value: T[number]) => R} mapper - The function that map each items to new value.
- * @returns {(arr: T) => R[]} A new array with mapped values.
- *
- * @example
- * const arr = [1, 2, 3];
- * const double = map(value => value * 2);
- * const result = double(arr);
- * // result will be [2, 4, 6]
- */
+
 export function map<T extends unknown[], R>(
   arrOrMapper: T | ((value: T[number]) => R),
   mapper?: (value: T[number]) => R

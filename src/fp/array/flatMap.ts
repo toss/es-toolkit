@@ -1,5 +1,19 @@
 import { flatMap as flatMapToolkit } from '../../array/flatMap';
 
+/**
+ * Map each values of array by mapper function and flatten the result.
+ *
+ * @template T - The type of array.
+ * @template R - The type of mapped value.
+ * @param {(value: T[number]) => R[]} mapper - The function that map each items to array of new values.
+ * @returns {(arr: T) => R[]} A function that takes an array and returns flattened mapped values.
+ *
+ * @example
+ * const arr = [1, 2, 3];
+ * const duplicate = flatMap(value => [value, value]);
+ * const result = duplicate(arr);
+ * // result will be [1, 1, 2, 2, 3, 3]
+ */
 export function flatMap<T extends unknown[], R>(mapper: (value: T[number]) => R[]): (arr: T) => R[];
 /**
  * Map each values of array by mapper function and flatten the result.
@@ -16,20 +30,7 @@ export function flatMap<T extends unknown[], R>(mapper: (value: T[number]) => R[
  * // result will be [1, 2, 2, 4, 3, 6]
  */
 export function flatMap<T extends unknown[], R>(arr: T, mapper: (value: T[number]) => R[]): R[];
-/**
- * Map each values of array by mapper function and flatten the result.
- *
- * @template T - The type of array.
- * @template R - The type of mapped value.
- * @param {(value: T[number]) => R[]} mapper - The function that map each items to array of new values.
- * @returns {(arr: T) => R[]} A function that takes an array and returns flattened mapped values.
- *
- * @example
- * const arr = [1, 2, 3];
- * const duplicate = flatMap(value => [value, value]);
- * const result = duplicate(arr);
- * // result will be [1, 1, 2, 2, 3, 3]
- */
+
 export function flatMap<T extends unknown[], R>(
   arrOrMapper: T | ((value: T[number]) => R[]),
   mapper?: (value: T[number]) => R[]
