@@ -8,6 +8,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr - The array to search through.
  * @param {(item: T, index: number, arr: T[]) => unknown} doesMatch - A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first item that matches the predicate, or `undefined` if no match is found.
  *
  * @example
@@ -18,7 +19,8 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  */
 export function find<T>(
   arr: ArrayLike<T> | null | undefined,
-  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown
+  doesMatch: (item: T, index: number, arr: readonly T[]) => unknown,
+  fromIndex?: number
 ): T | undefined;
 
 /**
@@ -27,6 +29,7 @@ export function find<T>(
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr - The array to search through.
  * @param {Partial<T>} doesMatch - A partial object that specifies the properties to match.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first item that matches the partial object, or `undefined` if no match is found.
  *
  * @example
@@ -35,7 +38,7 @@ export function find<T>(
  * const result = find(items, { name: 'Bob' });
  * console.log(result); // { id: 2, name: 'Bob' }
  */
-export function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T | undefined;
+export function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>, fromIndex?: number): T | undefined;
 
 /**
  * Finds the first item in an array that matches a property with a specific value.
@@ -43,6 +46,7 @@ export function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr - The array to search through.
  * @param {[keyof T, unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first item that has the specified property value, or `undefined` if no match is found.
  *
  * @example
@@ -51,7 +55,11 @@ export function find<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial
  * const result = find(items, ['name', 'Alice']);
  * console.log(result); // { id: 1, name: 'Alice' }
  */
-export function find<T>(arr: ArrayLike<T> | null | undefined, doesMatchProperty: [keyof T, unknown]): T | undefined;
+export function find<T>(
+  arr: ArrayLike<T> | null | undefined,
+  doesMatchProperty: [keyof T, unknown],
+  fromIndex?: number
+): T | undefined;
 
 /**
  * Finds the first item in an array that has a specific property, where the property name is provided as a PropertyKey.
@@ -59,6 +67,7 @@ export function find<T>(arr: ArrayLike<T> | null | undefined, doesMatchProperty:
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr - The array to search through.
  * @param {PropertyKey} propertyToCheck - The property name to check.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first item that has the specified property, or `undefined` if no match is found.
  *
  * @example
@@ -67,7 +76,11 @@ export function find<T>(arr: ArrayLike<T> | null | undefined, doesMatchProperty:
  * const result = find(items, 'name');
  * console.log(result); // { id: 1, name: 'Alice' }
  */
-export function find<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: PropertyKey): T | undefined;
+export function find<T>(
+  arr: ArrayLike<T> | null | undefined,
+  propertyToCheck: PropertyKey,
+  fromIndex?: number
+): T | undefined;
 
 /**
  * Finds the first item in an object that matches the given predicate function.
@@ -75,6 +88,7 @@ export function find<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: P
  * @template T
  * @param {T | null | undefined} object - The object to search through.
  * @param {(item: T[keyof T], index: number, arr: T) => unknown} doesMatch - A function that takes an item, its key, and the object, and returns a truthy value if the item matches the criteria.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first property value that matches the predicate, or `undefined` if no match is found.
  *
  * @example
@@ -85,7 +99,8 @@ export function find<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: P
  */
 export function find<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  doesMatch: (item: T[keyof T], index: keyof T, object: T) => unknown
+  doesMatch: (item: T[keyof T], index: keyof T, object: T) => unknown,
+  fromIndex?: number
 ): T | undefined;
 
 /**
@@ -94,6 +109,7 @@ export function find<T extends Record<string, unknown>>(
  * @template T
  * @param {T | null | undefined} object - The object to search through.
  * @param {Partial<T[keyof T]>} doesMatch - A partial value to match against the values of the object.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first property value that matches the partial value, or `undefined` if no match is found.
  *
  * @example
@@ -104,7 +120,8 @@ export function find<T extends Record<string, unknown>>(
  */
 export function find<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  doesMatch: Partial<T[keyof T]>
+  doesMatch: Partial<T[keyof T]>,
+  fromIndex?: number
 ): T | undefined;
 
 /**
@@ -113,6 +130,7 @@ export function find<T extends Record<string, unknown>>(
  * @template T
  * @param {T | null | undefined} object - The object to search through.
  * @param {[keyof T[keyof T], unknown]} doesMatchProperty - An array where the first element is the property key and the second element is the value to match.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first item that has the specified property value, or `undefined` if no match is found.
  *
  * @example
@@ -123,7 +141,8 @@ export function find<T extends Record<string, unknown>>(
  */
 export function find<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  doesMatchProperty: [keyof T[keyof T], unknown]
+  doesMatchProperty: [keyof T[keyof T], unknown],
+  fromIndex?: number
 ): T | undefined;
 
 /**
@@ -132,6 +151,7 @@ export function find<T extends Record<string, unknown>>(
  * @template T
  * @param {T | null | undefined} object - The object to search through.
  * @param {PropertyKey} propertyToCheck - The property name to check.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
  *
  * @example
@@ -142,7 +162,8 @@ export function find<T extends Record<string, unknown>>(
  */
 export function find<T extends Record<string, unknown>>(
   object: T | null | undefined,
-  propertyToCheck: PropertyKey
+  propertyToCheck: PropertyKey,
+  fromIndex?: number
 ): T | undefined;
 
 /**
@@ -151,6 +172,7 @@ export function find<T extends Record<string, unknown>>(
  * @template T
  * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to search through.
  * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
  * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
  *
  * @example
@@ -161,12 +183,17 @@ export function find<T extends Record<string, unknown>>(
  */
 export function find<T>(
   source: ArrayLike<T> | Record<any, any> | null | undefined,
-  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
+  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
+  fromIndex = 0
 ): T | undefined {
   if (!source) {
     return undefined;
   }
-  const values = Array.isArray(source) ? source : Object.values(source);
+  if (fromIndex < 0) {
+    fromIndex = Math.max(source.length + fromIndex, 0);
+  }
+
+  const values = Array.isArray(source) ? source.slice(fromIndex) : Object.values(source).slice(fromIndex);
 
   switch (typeof doesMatch) {
     case 'function': {
