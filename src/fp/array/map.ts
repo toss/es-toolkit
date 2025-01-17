@@ -1,5 +1,3 @@
-import { pipe } from '../core/pipe';
-
 export function map<T extends unknown[], R>(mapper: (value: T[number]) => R): (arr: T) => R[];
 /**
  * Map each values of array by mapper function.
