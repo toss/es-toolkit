@@ -30,7 +30,10 @@
  * //   ]
  * // }
  */
-export function groupBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, [T, ...T[]]> {
+export function groupBy<T, K extends PropertyKey>(
+  arr: readonly T[],
+  getKeyFromItem: (item: T) => K
+): Record<K, [T, ...T[]]> {
   const result = {} as Record<K, [T, ...T[]]>;
 
   for (let i = 0; i < arr.length; i++) {
