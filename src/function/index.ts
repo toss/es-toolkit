@@ -15,6 +15,7 @@ export { once } from './once.ts';
 export { partial } from './partial.ts';
 export { partialRight } from './partialRight.ts';
 export { rest } from './rest.ts';
+export { retry } from './retry.ts';
 export { spread } from './spread.ts';
 export { throttle, type ThrottledFunction } from './throttle.ts';
 export { unary } from './unary.ts';
