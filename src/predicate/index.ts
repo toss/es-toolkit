@@ -16,6 +16,7 @@ export { isNotNil } from './isNotNil.ts';
 export { isNull } from './isNull.ts';
 export { isPlainObject } from './isPlainObject.ts';
 export { isPrimitive } from './isPrimitive.ts';
+export { isPromise } from './isPromise.ts';
 export { isRegExp } from './isRegExp.ts';
 export { isSet } from './isSet.ts';
 export { isString } from './isString.ts';
