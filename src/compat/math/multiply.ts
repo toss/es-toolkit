@@ -1,3 +1,5 @@
+import { toString } from "../util/toString.ts";
+
 /**
  * Multiply two numbers.
  *
@@ -15,5 +17,21 @@
  */
 
 export function multiply(value: number, other: number): number {
+  if (value === undefined && other === undefined) {
+    return 1;
+  }
+
+  if (value === undefined || other === undefined) {
+    return value || other;
+  }
+
+  if (typeof value === "string" || typeof other === "string") {
+    value = toString(value) as any;
+    other = toString(other) as any;
+  } else {
+    value = +value;
+    other = +other;
+  }
+
   return value * other;
 }
