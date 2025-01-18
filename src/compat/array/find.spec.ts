@@ -81,6 +81,15 @@ describe('find', () => {
     expect(args).toEqual([1, 'a', object]);
   });
 
+  it('find should support fromIndex', () => {
+    expect(find(objects, { b: 2 }, -1)).toBe(objects[2]);
+    expect(find(objects, { b: 2 }, 0)).toBe(objects[2]);
+    expect(find(objects, { b: 2 }, 1)).toBe(objects[2]);
+    expect(find(objects, { b: 2 }, 2)).toBe(objects[2]);
+    expect(find(objects, { b: 2 }, 3)).toBe(undefined);
+    expect(find(objects, { b: 2 }, 4)).toBe(undefined);
+  });
+
   it('should return `undefined` when provided `null` or `undefined`', () => {
     expect(find(null, 'a')).toBe(undefined);
     expect(find(undefined, 'a')).toBe(undefined);
