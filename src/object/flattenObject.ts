@@ -1,4 +1,4 @@
-import { isPlainObject } from "../predicate/isPlainObject.ts";
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 interface FlattenObjectOptions {
   /**
@@ -34,18 +34,11 @@ interface FlattenObjectOptions {
  * //   'd.1': 3
  * // }
  */
-export function flattenObject(
-  object: object,
-  { delimiter = "." }: FlattenObjectOptions = {},
-): Record<string, any> {
-  return flattenObjectImpl(object, "", delimiter);
+export function flattenObject(object: object, { delimiter = '.' }: FlattenObjectOptions = {}): Record<string, any> {
+  return flattenObjectImpl(object, '', delimiter);
 }
 
-function flattenObjectImpl(
-  object: object,
-  prefix = "",
-  delimiter = ".",
-): Record<string, any> {
+function flattenObjectImpl(object: object, prefix = '', delimiter = '.'): Record<string, any> {
   const result: Record<string, any> = {};
   const keys = Object.keys(object);
 
