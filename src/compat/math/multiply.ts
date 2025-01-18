@@ -1,4 +1,4 @@
-import { toString } from "../util/toString.ts";
+import { toString } from '../util/toString.ts';
 
 /**
  * Multiply two numbers.
@@ -25,12 +25,12 @@ export function multiply(value: number, other: number): number {
     return value || other;
   }
 
-  if (typeof value === "string" || typeof other === "string") {
+  if (typeof value === 'string' || typeof other === 'string') {
     value = toString(value) as any;
     other = toString(other) as any;
   } else {
-    value = +value;
-    other = +other;
+    value = Number(value);
+    other = Number(other);
   }
 
   return value * other;
