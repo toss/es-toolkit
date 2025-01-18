@@ -1,10 +1,18 @@
-import { isPlainObject } from '../predicate/isPlainObject.ts';
+import { isPlainObject } from "../predicate/isPlainObject.ts";
+
+interface FlattenObjectOptions {
+  /**
+   * The delimiter to use between nested keys.
+   * @default '.''
+   */
+  delimiter?: string;
+}
 
 /**
- * Flattens a nested object into a single level object with delimeter-separated keys.
+ * Flattens a nested object into a single level object with delimiter-separated keys.
  *
  * @param {object} object - The object to flatten.
- * @param {string} [delimiter='.'] - The delimiter to use between nested keys.
+ * @param {string} [options.delimiter='.'] - The delimiter to use between nested keys.
  * @returns {Record<string, any>} - The flattened object.
  *
  * @example
@@ -26,11 +34,18 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
  * //   'd.1': 3
  * // }
  */
-export function flattenObject(object: object, delimiter = '.'): Record<string, any> {
-  return flattenObjectImpl(object, '', delimiter);
+export function flattenObject(
+  object: object,
+  { delimiter = "." }: FlattenObjectOptions = {},
+): Record<string, any> {
+  return flattenObjectImpl(object, "", delimiter);
 }
 
-function flattenObjectImpl(object: object, prefix = '', delimiter = '.'): Record<string, any> {
+function flattenObjectImpl(
+  object: object,
+  prefix = "",
+  delimiter = ".",
+): Record<string, any> {
   const result: Record<string, any> = {};
   const keys = Object.keys(object);
 

@@ -8,13 +8,13 @@
 ## インターフェース
 
 ```typescript
-function flattenObject(object: object, delimiter = '.'): Record<string, any>;
+function flattenObject(object: object, { delimiter = '.' }: FlattenObjectOptions = {}): Record<string, any>;
 ```
 
 ### パラメータ
 
 - `object` (`object`): 平坦化するオブジェクト。
-- `delimiter` (`string`): ネストされたキーの区切り文字。
+- `delimiter` (`string`): ネストされたキーの区切り文字。デフォルトは `'.'`。
 
 ### 戻り値
 
@@ -43,7 +43,7 @@ console.log(flattened);
 ```
 
 ```typescript
-const flattened = flattenObject(nestedObject, '/');
+const flattened = flattenObject(nestedObject, { delimiter: '/' });
 console.log(flattened);
 // 出力:
 // {

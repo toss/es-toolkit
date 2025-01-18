@@ -8,13 +8,13 @@
 ## 签名
 
 ```typescript
-function flattenObject(object: object, delimiter = '.'): Record<string, any>;
+function flattenObject(object: object, { delimiter = '.' }: FlattenObjectOptions = {}): Record<string, any>;
 ```
 
 ### 参数
 
 - `object` (`object`): 要扁平化的对象。
-- `delimiter` (`string`): 嵌套键之间的分隔符。
+- `delimiter` (`string`): 嵌套键之间的分隔符。默认为 `'.'`。
 
 ### 返回值
 
@@ -43,7 +43,7 @@ console.log(flattened);
 ```
 
 ```typescript
-const flattened = flattenObject(nestedObject, '/');
+const flattened = flattenObject(nestedObject, { delimiter: '/' });
 console.log(flattened);
 // 输出:
 // {
