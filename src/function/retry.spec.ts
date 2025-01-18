@@ -1,27 +1,50 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { retry } from './retry';
 
-async function getNumber() {
-  return Promise.resolve(3);
-}
-
-async function getError() {
-  return Promise.reject(new Error('MyFailed'));
-}
-
-// Tests
 describe('retry', () => {
-  it('Execute successfully and return value', async () => {
-    const num = await retry(getNumber, { intervalMs: 1000, retries: 3 });
-    expect(num).toBe(3);
-  });
-  it('Retry multiple times and throw an exception', async () => {
-    expect(retry(getError, { intervalMs: 1000, retries: 2 })).rejects.toThrowError(new Error('MyFailed'));
+  it('should resolve successfully on the first attempt', async () => {
+    const func = vi.fn().mockResolvedValue('success');
+    const result = await retry(func);
+    expect(result).toBe('success');
+    expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('When retries is 0, a fallback error is triggered', async () => {
-    expect(retry(getError, { intervalMs: 1000, retries: 0 })).rejects.toThrowError(
-      new Error('Failed after maximum retries')
+  it('should retry the specified number of times and eventually resolve', async () => {
+    const func = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('failure'))
+      .mockRejectedValueOnce(new Error('failure'))
+      .mockResolvedValue('success');
+    const result = await retry(func, 3);
+    expect(result).toBe('success');
+    expect(func).toHaveBeenCalledTimes(3);
+  });
+
+  it('should retry with the specified delay between attempts', async () => {
+    const func = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('success');
+    const delay = 100;
+    const start = Date.now();
+    const result = await retry(func, { delay, retries: 2 });
+    const end = Date.now();
+    expect(result).toBe('success');
+    expect(func).toHaveBeenCalledTimes(2);
+    expect(end - start).toBeGreaterThanOrEqual(delay);
+  });
+
+  it('should throw an error after the specified number of retries', async () => {
+    const func = vi.fn().mockRejectedValue(new Error('failure'));
+    await expect(retry(func, 3)).rejects.toThrow('failure');
+    expect(func).toHaveBeenCalledTimes(3);
+  });
+
+  it('should abort the retry operation if the signal is already aborted', async () => {
+    const func = vi.fn().mockRejectedValue(new Error('failure'));
+    const controller = new AbortController();
+    const signal = controller.signal;
+    controller.abort();
+    await expect(retry(func, { retries: 5, signal })).rejects.toThrow(
+      'The retry operation was aborted due to an abort signal.'
     );
+    expect(func).toHaveBeenCalledTimes(0);
   });
 });

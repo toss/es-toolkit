@@ -1,25 +1,27 @@
 # retry
 
-该函数可以设置重试间隔以及重试次数，达到最大重试次数后抛出Error。
+`Promise`返回的函数会在成功之前进行重试。您可以设置重试次数和每次重试之间的间隔。
 
 ## 签名
 
 ```typescript
-function retry<T>(func: () => Promise<T>, options: RetryOptions): T;
+function retry<T>(func: () => Promise<T>): Promise<T>;
+function retry<T>(func: () => Promise<T>, retries: number): Promise<T>;
+function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
 ```
 
 ### 参数
 
-- `func` (`F`): 重试的功能函数
-- `options` (`RetryOptions`): 选项
-  - `intervalMs`: 间隔延迟的毫秒数.
-  - `retries`: 最大重试次数.
+- `func` (`() => Promise<T>`): 一个返回 `Promise` 的函数。
+- `retries`: 重试的次数。默认值为 `Number.POSITIVE_INFINITY`，即会一直重试直到成功。
+- `delay`: 重试之间的间隔，单位为毫秒(ms)，默认值为 `0`。
+- `signal`: 一个可以用来取消重试的 `AbortSignal`。
 
 ### 返回值
 
-(`Awaited<ReturnType<F>>`): 函数返回值
+(`Promise<T>`): `func` 返回的值。
 
-### 异常
+### 错误
 
 如果重试次数达到 `retries` 则抛出错误
 

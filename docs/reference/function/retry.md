@@ -1,45 +1,48 @@
 # retry
 
-This function can set the retry interval and the number of retries, and throw an Error after the maximum number of retries is reached.
+Retries a function that returns a `Promise` until it succeeds. You can specify how many times to retry and the delay between each attempt.
 
 ## Signature
 
 ```typescript
-function retry<T>(func: () => Promise<T>, options: RetryOptions): T;
+function retry<T>(func: () => Promise<T>): Promise<T>;
+function retry<T>(func: () => Promise<T>, retries: number): Promise<T>;
+function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
 ```
 
 ### Parameters
 
-- `func` (`F`): The function to retry.
-- `options` (`RetryOptions`): An options object.
-  - `intervalMs`: The number of milliseconds to interval delay.
-  - `retries`: The number of retries to attemptcalled.
+- `func` (`() => Promise<T>`): A function that returns a `Promise`.
+- `retries`: The number of times to retry. The default is `Number.POSITIVE_INFINITY`, which means it will retry until it succeeds.
+- `delay`: The interval between retries, measured in milliseconds (ms). The default is `0`.
+- `signal`: An `AbortSignal` that can be used to cancel the retries.
 
 ### Returns
 
-(`Awaited<ReturnType<F>>`): Function return value
+(`Promise<T>`): The value returned by the `func` function.
 
-### Error
+### Errors
 
-Throws an error if the number of retries reaches `retries`
+An error occurs when the number of retries reaches `retries` or when canceled by the `AbortSignal`.
 
 ## Examples
 
 ```typescript
-async function getNumber() {
-  return Promise.resolve(3);
-}
-async function getError() {
-  return Promise.reject(new Error('MyFailed'));
-}
-// The result will be 3
-await retry(getNumber, {
-  intervalMs: 1000,
-  retries: 2,
-});
-// After executing twice, an exception is thrown
-await retry(getError, {
-  intervalMs: 1000,
-  retries: 2,
-});
+// Retry indefinitely until `fetchData` succeeds.
+const data1 = await retry(() => fetchData());
+console.log(data1);
+
+// Retry only 3 times until `fetchData` succeeds.
+const data2 = await retry(() => fetchData(), 3);
+console.log(data2);
+
+// Retry only 3 times until `fetchData` succeeds, with a 100ms interval in between.
+const data3 = await retry(() => fetchData(), { retries: 3, delay: 100 });
+console.log(data3);
+
+const controller = new AbortController();
+
+// The retry operation for `fetchData` can be canceled with the `signal`.
+const data4 = await retry(() => fetchData(), { signal: controller.signal });
+console.log(data4);
 ```
