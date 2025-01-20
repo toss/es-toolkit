@@ -138,7 +138,7 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
       error = err;
 
       const random = randomize ? Math.random() + 1 : 1;
-      console.log(err);
+
       const delay = Math.min(Math.round(random * retryMinDelay * Math.pow(factor, attempt)), retryMaxDelay);
 
       await delayToolkit(delay);
