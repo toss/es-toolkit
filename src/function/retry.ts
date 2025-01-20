@@ -16,7 +16,7 @@ interface RetryOptions {
 
   /**
    * The exponential factor to use for increasing retry delay.
-   * @default 2
+   * @default 1
    */
   factor?: number;
 
@@ -41,7 +41,7 @@ interface RetryOptions {
 const DEFAULT_RETRIES = Number.POSITIVE_INFINITY;
 const DEFAULT_MIN_DELAY = 0;
 const DEFAULT_MAX_DELAY = Number.POSITIVE_INFINITY;
-const DEFAULT_FACTOR = 2;
+const DEFAULT_FACTOR = 1;
 const DEFAULT_RANDOMIZE = false;
 
 /**
@@ -80,7 +80,7 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * @param {number} [options.retries=Infinity] - The number of retries to attempt. Default is Infinity.
  * @param {number} [options.retryMinDelay=0] - The minimum delay in milliseconds between retry attempts. Default is 0.
  * @param {number} [options.retryMaxDelay=Infinity] - The maximum delay in milliseconds between retry attempts. Default is Infinity.
- * @param {number} [options.factor=2] - The exponential factor to use for increasing retry delay. Default is 2.
+ * @param {number} [options.factor=1] - The exponential factor to use for increasing retry delay. Default is 1.
  * @param {boolean} [options.randomize=false] - Whether to randomize the retry delay by a factor between 1 and 2. Default is false.
  * @param {AbortSignal} [options.signal] - An AbortSignal to cancel the retry operation.
  * @returns {Promise<T>} A promise that resolves with the value of the successful function call.

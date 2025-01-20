@@ -23,6 +23,21 @@ describe('retry', () => {
     expect(func).toHaveBeenCalledTimes(retries);
   });
 
+  it('should retry with fixed delay when factor is 1 and randomize is false', async () => {
+    const func = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('success');
+    const retryMinDelay = 100;
+    const retries = 2;
+    const delaySpy = vi.spyOn(Delay, 'delay');
+
+    const result = await retry(func, { retryMinDelay, retries });
+
+    expect(result).toBe('success');
+    expect(func).toHaveBeenCalledTimes(retries);
+
+    const calls = delaySpy.mock.calls.map(([ms]) => ms);
+    expect(Math.min(...calls)).toBeGreaterThanOrEqual(retryMinDelay);
+  });
+
   it('should retry with the specified delay between attempts', async () => {
     const func = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('success');
     const retryMinDelay = 100;
@@ -35,11 +50,10 @@ describe('retry', () => {
     expect(result).toBe('success');
     expect(func).toHaveBeenCalledTimes(retries);
 
+    expect(delaySpy).to;
     const calls = delaySpy.mock.calls.map(([ms]) => ms);
-    calls.forEach(delayTime => {
-      expect(delayTime).toBeGreaterThanOrEqual(retryMinDelay);
-      expect(delayTime).toBeLessThanOrEqual(retryMaxDelay);
-    });
+    expect(Math.min(...calls)).toBeGreaterThanOrEqual(retryMinDelay);
+    expect(Math.max(...calls)).toBeLessThanOrEqual(retryMaxDelay);
   });
 
   it('should throw an error after the specified number of retries', async () => {
@@ -65,10 +79,8 @@ describe('retry', () => {
     expect(result).toBe('success');
 
     const calls = delaySpy.mock.calls.map(([ms]) => ms);
-    calls.forEach(delayTime => {
-      expect(delayTime).toBeGreaterThanOrEqual(retryMinDelay);
-      expect(delayTime).toBeLessThanOrEqual(retryMaxDelay);
-    });
+    expect(Math.min(...calls)).toBeGreaterThanOrEqual(retryMinDelay);
+    expect(Math.max(...calls)).toBeLessThanOrEqual(retryMaxDelay);
   });
 
   it('should increase delay exponentially based on the factor', async () => {
@@ -82,9 +94,9 @@ describe('retry', () => {
     await retry(func, { retryMinDelay, factor, retries }).catch(() => {});
 
     expect(func).toHaveBeenCalledTimes(3);
-    expect(delaySpy).toHaveBeenCalledWith(100);
-    expect(delaySpy).toHaveBeenCalledWith(200);
-    expect(delaySpy).toHaveBeenCalledWith(400);
+    expect(delaySpy).toHaveBeenCalledWith(retryMinDelay * Math.pow(factor, 0));
+    expect(delaySpy).toHaveBeenCalledWith(retryMinDelay * Math.pow(factor, 1));
+    expect(delaySpy).toHaveBeenCalledWith(retryMinDelay * Math.pow(factor, 2));
   });
 
   it('should abort the retry operation if the signal is already aborted', async () => {
