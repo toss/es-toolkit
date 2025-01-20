@@ -22,13 +22,13 @@ describe('retry', () => {
 
   it('should retry with the specified delay between attempts', async () => {
     const func = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('success');
-    const delay = 100;
+    const retryMinDelay = 100;
     const start = Date.now();
-    const result = await retry(func, { delay, retries: 2 });
+    const result = await retry(func, { retryMinDelay, retries: 2 });
     const end = Date.now();
     expect(result).toBe('success');
     expect(func).toHaveBeenCalledTimes(2);
-    expect(end - start).toBeGreaterThanOrEqual(delay);
+    expect(end - start).toBeGreaterThanOrEqual(retryMinDelay);
   });
 
   it('should throw an error after the specified number of retries', async () => {
