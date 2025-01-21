@@ -2,13 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { multiply } from './multiply';
 
 describe('multiply', () => {
-  it('should multiply two numbers', () => {
-    expect(multiply(2, 3)).toBe(6);
-    expect(multiply(2, -3)).toBe(-6);
-    expect(multiply(-2, 3)).toBe(-6);
-    expect(multiply(-2, -3)).toBe(6);
-  });
-
   it('should return the product of two positive numbers', () => {
     expect(multiply(2, 4)).toBe(8);
     expect(multiply(3, 4)).toBe(12);
@@ -39,6 +32,7 @@ describe('multiply', () => {
   it('should multiply two numbers', () => {
     expect(multiply(6, 4)).toBe(24);
     expect(multiply(-6, 4)).toBe(-24);
+    expect(multiply(6, -4)).toBe(-24);
     expect(multiply(-6, -4)).toBe(24);
   });
 
