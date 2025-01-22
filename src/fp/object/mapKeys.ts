@@ -53,5 +53,5 @@ export function mapKeys<T extends object, K1 extends keyof T, K2 extends Propert
   }
 
   const object = objectOrGetNewKey as T;
-  return mapKeysToolkit(object, getNewKey);
+  return mapKeysToolkit(object, getNewKey as any);
 }
