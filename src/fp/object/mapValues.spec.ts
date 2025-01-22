@@ -35,10 +35,12 @@ describe('mapValues', () => {
 
   it("(curried) should pass the cloned object into the iteratee", () => {
     expect(
-      mapValues((value, key, object) => {
-        object[key] = value * 11;
-        return value * 11;
-      })({ a: 1, b: 2, c: 3 })
+      mapValues<{ a: number; b: number; c: number }, 'a' | 'b' | 'c', number>(
+        (value, key, object) => {
+          object[key] = value * 11;
+          return value * 11;
+        }
+      )({ a: 1, b: 2, c: 3 })
     ).toEqual({ a: 11, b: 22, c: 33 });
   });
 });
