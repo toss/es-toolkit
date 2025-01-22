@@ -1,49 +1,115 @@
 import { describe, expect, it } from 'vitest';
 import { sortBy } from './sortBy';
 
+type User = {
+  user: string;
+  age: number;
+};
+
 describe('sortBy', () => {
-  it('should sort array by key selector', () => {
-    const users = [
-      { name: 'fred', age: 48 },
-      { name: 'barney', age: 36 },
-      { name: 'fred', age: 40 },
-    ];
+  const users: User[] = [
+    { user: 'foo', age: 24 },
+    { user: 'bar', age: 7 },
+    { user: 'foo', age: 8 },
+    { user: 'bar', age: 29 },
+  ];
 
-    expect(sortBy(users, user => user.age)).toEqual([
-      { name: 'barney', age: 36 },
-      { name: 'fred', age: 40 },
-      { name: 'fred', age: 48 },
-    ]);
+  it(
+    "(non-curried) should stable sort objects by a single property in ascending order",
+    () => {
+      expect(sortBy(users, ['user'])).toEqual([
+        { user: 'bar', age: 7 },
+        { user: 'bar', age: 29 },
+        { user: 'foo', age: 24 },
+        { user: 'foo', age: 8 },
+      ]);
+    }
+  );
 
-    expect(sortBy<typeof users, number>(user => user.age)(users)).toEqual([
-      { name: 'barney', age: 36 },
-      { name: 'fred', age: 40 },
-      { name: 'fred', age: 48 },
-    ]);
-  });
-
-  it('should sort array by string key', () => {
-    const users = [
-      { name: 'fred', age: 48 },
-      { name: 'barney', age: 36 },
-      { name: 'fred', age: 40 },
-    ];
-
-    expect(sortBy(users, user => user.name)).toEqual([
-      { name: 'barney', age: 36 },
-      { name: 'fred', age: 48 },
-      { name: 'fred', age: 40 },
+  it("(curried) should stable sort objects by a single property in ascending order", () => {
+    expect(sortBy(['user'])(users)).toEqual([
+      { user: 'bar', age: 7 },
+      { user: 'bar', age: 29 },
+      { user: 'foo', age: 24 },
+      { user: 'foo', age: 8 },
     ]);
   });
 
-  it('should not change value of original array', () => {
-    const arr = [{ id: 3 }, { id: 1 }, { id: 2 }];
-    const arr2 = [{ id: 3 }, { id: 1 }, { id: 2 }];
+  it("(non-curried) should stable sort objects by multiple properties", () => {
+    expect(sortBy(users, ['user', 'age'])).toEqual([
+      { user: 'bar', age: 7 },
+      { user: 'bar', age: 29 },
+      { user: 'foo', age: 8 },
+      { user: 'foo', age: 24 },
+    ]);
+  });
 
-    sortBy(arr, item => item.id);
-    sortBy<typeof arr, number>(item => item.id)(arr2);
+  it("(curried) should stable sort objects by multiple properties", () => {
+    expect(sortBy(['user', 'age'])(users)).toEqual([
+      { user: 'bar', age: 7 },
+      { user: 'bar', age: 29 },
+      { user: 'foo', age: 8 },
+      { user: 'foo', age: 24 },
+    ]);
+  });
 
-    expect(arr).toEqual([{ id: 3 }, { id: 1 }, { id: 2 }]);
-    expect(arr2).toEqual([{ id: 3 }, { id: 1 }, { id: 2 }]);
+  it("(non-curried) should stable sort objects by iteratee function", () => {
+    expect(sortBy(users, [user => user.user])).toEqual([
+      { user: 'bar', age: 7 },
+      { user: 'bar', age: 29 },
+      { user: 'foo', age: 24 },
+      { user: 'foo', age: 8 },
+    ]);
+  });
+
+  it("(curried) should stable sort objects by iteratee function", () => {
+    expect(sortBy<User>([user => user.user])(users)).toEqual([
+      { user: 'bar', age: 7 },
+      { user: 'bar', age: 29 },
+      { user: 'foo', age: 24 },
+      { user: 'foo', age: 8 },
+    ]);
+  });
+
+  it(
+    "(non-curried) should stable sort objects by iteratee function and property",
+    () => {
+      expect(sortBy(users, [user => user.user, user => user.age])).toEqual([
+        { user: 'bar', age: 7 },
+        { user: 'bar', age: 29 },
+        { user: 'foo', age: 8 },
+        { user: 'foo', age: 24 },
+      ]);
+    }
+  );
+
+  it("(curried) should stable sort objects by iteratee function and property", () => {
+    expect(sortBy<User>([user => user.user, user => user.age])(users)).toEqual([
+      { user: 'bar', age: 7 },
+      { user: 'bar', age: 29 },
+      { user: 'foo', age: 8 },
+      { user: 'foo', age: 24 },
+    ]);
+  });
+
+  it(
+    "(non-curried) should stable sort objects by mixed iteratee function and key",
+    () => {
+      expect(sortBy(users, ['user', user => user.age])).toEqual([
+        { user: 'bar', age: 7 },
+        { user: 'bar', age: 29 },
+        { user: 'foo', age: 8 },
+        { user: 'foo', age: 24 },
+      ]);
+    }
+  );
+
+  it("(curried) should stable sort objects by mixed iteratee function and key", () => {
+    expect(sortBy<User>(['user', user => user.age])(users)).toEqual([
+      { user: 'bar', age: 7 },
+      { user: 'bar', age: 29 },
+      { user: 'foo', age: 8 },
+      { user: 'foo', age: 24 },
+    ]);
   });
 });

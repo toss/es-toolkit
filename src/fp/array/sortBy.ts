@@ -1,44 +1,81 @@
+import { orderBy } from './orderBy.ts';
 import { sortBy as sortByToolkit } from '../../array/sortBy';
 
 /**
- * Sorts an array by the results of running each element through a key selector function.
+ * Sorts an array of objects based on the given `criteria`.
  *
- * @template T - The type of array.
- * @template U - The type of the sort key.
- * @param {(value: T[number]) => U} keySelector - The function to select the sort key.
- * @returns {(arr: T) => T} A function that takes an array and returns a new sorted array.
+ * - If you provide keys, it sorts the objects by the values of those keys.
+ * - If you provide functions, it sorts based on the values returned by those functions.
  *
- * @example
- * const users = [{ name: 'fred', age: 48 }, { name: 'barney', age: 36 }];
- * const sortByAge = sortBy(user => user.age);
- * const result = sortByAge(users);
- * // result will be [{ name: 'barney', age: 36 }, { name: 'fred', age: 48 }]
- */
-export function sortBy<T extends unknown[], U>(keySelector: (value: T[number]) => U): (arr: T) => T;
-/**
- * Sorts an array by the results of running each element through a key selector function.
+ * The function returns the array of objects sorted in ascending order.
+ * If two objects have the same value for the current criterion, it uses the next criterion to determine their order.
  *
- * @template T - The type of array.
- * @template U - The type of the sort key.
- * @param {T} arr - The array to sort.
- * @param {(value: T[number]) => U} keySelector - The function to select the sort key.
- * @returns {T} A new sorted array.
+ * @template T - The type of the objects in the array.
+ * @param {T[]} arr - The array of objects to be sorted.
+ * @param {Array<((item: T) => unknown) | keyof T>} criteria - The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
+ * @returns {T[]} - The sorted array.
  *
  * @example
- * const users = [{ name: 'fred', age: 48 }, { name: 'barney', age: 36 }];
- * const result = sortBy(users, user => user.age);
- * // result will be [{ name: 'barney', age: 36 }, { name: 'fred', age: 48 }]
+ * const users = [
+ *  { user: 'foo', age: 24 },
+ *  { user: 'bar', age: 7 },
+ *  { user: 'foo ', age: 8 },
+ *  { user: 'bar ', age: 29 },
+ * ];
+ *
+ * sortBy(users, ['user', 'age']);
+ * sortBy(users, [obj => obj.user, 'age']);
+ * // results will be:
+ * // [
+ * //   { user : 'bar', age: 7 },
+ * //   { user : 'bar', age: 29 },
+ * //   { user : 'foo', age: 8 },
+ * //   { user : 'foo', age: 24 },
+ * // ]
  */
-export function sortBy<T extends unknown[], U>(arr: T, keySelector: (value: T[number]) => U): T;
+export function sortBy<T extends object>(arr: readonly T[], criteria: Array<((item: T) => unknown) | keyof T>): T[];
 
-export function sortBy<T extends unknown[], U>(
-  arrOrKeySelector: T | ((value: T[number]) => U),
-  keySelector?: (value: T[number]) => U
+/**
+ * Sorts an array of objects based on the given `criteria`.
+ *
+ * - If you provide keys, it sorts the objects by the values of those keys.
+ * - If you provide functions, it sorts based on the values returned by those functions.
+ *
+ * The function returns the array of objects sorted in ascending order.
+ * If two objects have the same value for the current criterion, it uses the next criterion to determine their order.
+ *
+ * @template T - The type of the objects in the array.
+ * @param {Array<((item: T) => unknown) | keyof T>} criteria - The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
+ * @returns {(arr: T[]) => T[]} A function that receive the array of objects to be sorted as argument and returns - The sorted array.
+ *
+ * @example
+ * const users = [
+ *  { user: 'foo', age: 24 },
+ *  { user: 'bar', age: 7 },
+ *  { user: 'foo ', age: 8 },
+ *  { user: 'bar ', age: 29 },
+ * ];
+ *
+ * sortBy(['user', 'age'])(users);
+ * sortBy(users, [obj => obj.user, 'age']);
+ * // results will be:
+ * // [
+ * //   { user : 'bar', age: 7 },
+ * //   { user : 'bar', age: 29 },
+ * //   { user : 'foo', age: 8 },
+ * //   { user : 'foo', age: 24 },
+ * // ]
+ */
+export function sortBy<T extends object>(criteria: Array<((item: T) => unknown) | keyof T>): (arr: readonly T[]) => T[];
+
+export function sortBy<T extends object>(
+  arrOrCriteria: readonly T[] | Array<((item: T) => unknown) | keyof T>,
+  criteria?: Array<((item: T) => unknown) | keyof T>
 ) {
-  if (typeof arrOrKeySelector === 'function') {
-    return (arr: T) => sortBy(arr, arrOrKeySelector as (value: T[number]) => U);
+  if (criteria == null) {
+    return (arr: readonly T[]) => sortBy(arr, arrOrCriteria as Array<((item: T) => unknown) | keyof T>);
   }
 
-  const arr = arrOrKeySelector as T;
-  return sortByToolkit(arr as any, [keySelector!]) as T;
+  const arr = arrOrCriteria as readonly T[];
+  return sortByToolkit(arr, criteria);
 }
