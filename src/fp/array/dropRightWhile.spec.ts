@@ -29,7 +29,7 @@ describe('dropRightWhile', () => {
   );
 
   it("(curried) should drop elements from an array until `canContinueDropping` returns false, from the end", () => {
-    expect(dropRightWhile(x => x < 2)([1.2, 2.3, 3.4])).toEqual([1.2, 2.3, 3.4]);
+    expect(dropRightWhile<number>(x => x < 2)([1.2, 2.3, 3.4])).toEqual([1.2, 2.3, 3.4]);
 
     const items = [
       { id: 1, enabled: false },
@@ -37,7 +37,7 @@ describe('dropRightWhile', () => {
       { id: 3, enabled: false },
     ];
 
-    expect(dropRightWhile(x => !x.enabled)(items)).toEqual([
+    expect(dropRightWhile<{ id: number; enabled: boolean }>(x => !x.enabled)(items)).toEqual([
       {
         id: 1,
         enabled: false,
@@ -48,6 +48,6 @@ describe('dropRightWhile', () => {
       },
     ]);
 
-    expect(dropRightWhile(x => x < 4)([1, 2, 3])).toEqual([]);
+    expect(dropRightWhile<number>(x => x < 4)([1, 2, 3])).toEqual([]);
   });
 });

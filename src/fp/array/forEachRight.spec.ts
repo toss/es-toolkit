@@ -17,7 +17,7 @@ describe('forEachRight', () => {
     const array = [1, 2, 3];
     const result: number[] = [];
 
-    forEachRight(value => {
+    forEachRight<number>(value => {
       result.push(value);
     })(array);
 
@@ -43,7 +43,7 @@ describe('forEachRight', () => {
     const indices: number[] = [];
     const arrays: number[][] = [];
 
-    forEachRight((_, index, arr) => {
+    forEachRight<number>((_, index, arr) => {
       indices.push(index);
       arrays.push(arr);
     })(array);
@@ -67,7 +67,7 @@ describe('forEachRight', () => {
     const array: number[] = [];
     const result: number[] = [];
 
-    forEachRight(value => {
+    forEachRight<number>(value => {
       result.push(value);
     })(array);
 

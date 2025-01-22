@@ -8,8 +8,8 @@ describe('flatMap', () => {
   });
 
   it('(curried) should map and flatten array values', () => {
-    expect(flatMap((x: number) => [x, x * 2])([1, 2, 3])).toEqual([1, 2, 2, 4, 3, 6]);
-    expect(flatMap((x: string) => [x, x])(['a', 'b'])).toEqual(['a', 'a', 'b', 'b']);
+    expect(flatMap<number[], number>(x => [x, x * 2])([1, 2, 3])).toEqual([1, 2, 2, 4, 3, 6]);
+    expect(flatMap<string[], string>(x => [x, x])(['a', 'b'])).toEqual(['a', 'a', 'b', 'b']);
   });
 
   it('(non-curried) should handle empty arrays', () => {
@@ -17,7 +17,7 @@ describe('flatMap', () => {
   });
 
   it('(curried) should handle empty arrays', () => {
-    expect(flatMap((x: number) => [x, x])([])).toEqual([]);
+    expect(flatMap<number[], number>(x => [x, x])([])).toEqual([]);
   });
 
   it('(non-curried) should handle empty result arrays', () => {
@@ -25,7 +25,7 @@ describe('flatMap', () => {
   });
 
   it('(curried) should handle empty result arrays', () => {
-    expect(flatMap(() => [])([1, 2, 3])).toEqual([]);
+    expect(flatMap<number[], number>(() => [])([1, 2, 3])).toEqual([]);
   });
 
   it('(non-curried) should handle nested arrays', () => {
@@ -33,6 +33,6 @@ describe('flatMap', () => {
   });
 
   it('(curried) should handle nested arrays', () => {
-    expect(flatMap((x: number) => [[x, x]])([1, 2])).toEqual([[1, 1], [2, 2]]);
+    expect(flatMap<number[], number[]>(x => [[x, x]])([1, 2])).toEqual([[1, 1], [2, 2]]);
   });
 }); 

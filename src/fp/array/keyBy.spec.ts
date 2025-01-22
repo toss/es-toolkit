@@ -18,7 +18,7 @@ describe('keyBy', () => {
       { name: 'jake', age: 30 },
     ];
 
-    const result = keyBy(person => person.name)(people);
+    const result = keyBy<{ name: string; age: number }, string>(person => person.name)(people);
     expect(result).toEqual({ mike: { name: 'mike', age: 20 }, jake: { name: 'jake', age: 30 } });
   });
 
@@ -38,7 +38,7 @@ describe('keyBy', () => {
       { name: 'jake', age: 30 },
     ];
 
-    const result = keyBy(person => person.age)(people);
+    const result = keyBy<{ name: string; age: number }, number>(person => person.age)(people);
     expect(result).toEqual({ 20: { name: 'mike', age: 20 }, 30: { name: 'jake', age: 30 } });
   });
 
@@ -65,7 +65,7 @@ describe('keyBy', () => {
       { id: id2, name: 'jake', age: 30 },
     ];
 
-    const result = keyBy(person => person.id)(people);
+    const result = keyBy<{ id: symbol; name: string; age: number }, symbol>(person => person.id)(people);
     expect(result).toEqual({
       [id1]: { id: id1, name: 'mike', age: 20 },
       [id2]: { id: id2, name: 'jake', age: 30 },
@@ -92,7 +92,7 @@ describe('keyBy', () => {
       { name: 'mike', age: 30 },
     ];
 
-    const result = keyBy(person => person.name)(people);
+    const result = keyBy<{ name: string; age: number }, string>(person => person.name)(people);
 
     expect(result).toEqual({ mike: { name: 'mike', age: 30 } });
   });
@@ -108,7 +108,7 @@ describe('keyBy', () => {
   it("(curried) should handle empty array", () => {
     const people: Array<{ name: string; age: number }> = [];
 
-    const result = keyBy(person => person.name)(people);
+    const result = keyBy<{ name: string; age: number }, string>(person => person.name)(people);
 
     expect(result).toEqual({});
   });

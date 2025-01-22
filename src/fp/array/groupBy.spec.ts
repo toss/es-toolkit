@@ -35,7 +35,7 @@ describe('groupBy', () => {
       { category: 'vegetable', name: 'broccoli' },
     ];
 
-    const result = groupBy(item => item.category)(array);
+    const result = groupBy<{ category: string; name: string }, string>(item => item.category)(array);
 
     expect(result).toEqual({
       fruit: [
@@ -78,7 +78,7 @@ describe('groupBy', () => {
       { method: 'valueOf', bar: 2 },
     ];
 
-    expect(groupBy(x => x.method)(array)).toEqual({
+    expect(groupBy<{ method: string; foo?: number, bar?: number }, string>(x => x.method)(array)).toEqual({
       toString: [
         { method: 'toString', foo: 1 },
         { method: 'toString', foo: 2 },
@@ -101,7 +101,7 @@ describe('groupBy', () => {
   it("(curried) should handle an empty array", () => {
     const array: Array<{ category: string; name: string }> = [];
 
-    const result = groupBy(item => item.category)(array);
+    const result = groupBy<{ category: string; name: string }, string>(item => item.category)(array);
 
     expect(result).toEqual({});
   });
@@ -119,7 +119,7 @@ describe('groupBy', () => {
   it("(curried) should handle an array with one element", () => {
     const array = [{ category: 'fruit', name: 'apple' }];
 
-    const result = groupBy(item => item.category)(array);
+    const result = groupBy<{ category: string; name: string }, string>(item => item.category)(array);
 
     expect(result).toEqual({
       fruit: [{ category: 'fruit', name: 'apple' }],
@@ -151,7 +151,7 @@ describe('groupBy', () => {
       { score: 1, name: 'Joe' },
     ];
 
-    const result = groupBy(item => item.score)(array);
+    const result = groupBy<{ score: number; name: string }, number>(item => item.score)(array);
 
     expect(result).toEqual({
       '1': [
@@ -191,7 +191,7 @@ describe('groupBy', () => {
       { type: TYPE_B, score: 1, name: 'Joe' },
     ];
 
-    const result = groupBy(item => item.type)(array);
+    const result = groupBy<{ type: symbol; score: number; name: string }, symbol>(item => item.type)(array);
 
     expect(result).toEqual({
       [TYPE_A]: [
@@ -224,7 +224,7 @@ describe('groupBy', () => {
       { category: 'fruit', name: 'apple' },
     ];
 
-    const result = groupBy(item => item.category)(array);
+    const result = groupBy<{ category: string; name: string }, string>(item => item.category)(array);
 
     expect(result).toEqual({
       fruit: [

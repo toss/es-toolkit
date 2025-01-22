@@ -1,4 +1,4 @@
-import { ExtractNestedArrayType, flattenDeep } from './flattenDeep.ts';
+import { ExtractNestedArrayType } from '../../array/flattenDeep.ts';
 import { flatMapDeep as flatMapDeepToolkit } from '../../array/flatMapDeep';
 
 /**

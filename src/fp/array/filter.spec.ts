@@ -24,13 +24,13 @@ describe('filter', () => {
 
   describe('when called with predicate only', () => {
     it('should return a function that filters array values', () => {
-      const filterEven = filter(isEven);
+      const filterEven = filter<number[]>(isEven);
       const result = filterEven(arr);
       expect(result).toEqual([2, 4]);
     });
 
     it('should maintain curried function behavior', () => {
-      const greaterThan = (min: number) => filter((value: number) => value > min);
+      const greaterThan = (min: number) => filter<number[]>(value => value > min);
       const greaterThan3 = greaterThan(3);
       const result = greaterThan3(arr);
       expect(result).toEqual([4, 5]);

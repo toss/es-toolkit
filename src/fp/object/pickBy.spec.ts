@@ -63,7 +63,7 @@ describe('pickBy', () => {
   it("(curried) should work with an empty object", () => {
     const obj = {};
     const shouldPick = (value: never) => value;
-    const result = pickBy(shouldPick)(obj);
+    const result = pickBy<{ [key: string]: never }>(shouldPick)(obj);
     expect(result).toEqual({});
   });
 
@@ -77,7 +77,7 @@ describe('pickBy', () => {
   it("(curried) should work with nested objects", () => {
     const obj = { a: 1, b: { nested: 'pick' }, c: 3 };
     const shouldPick = (value: number | { nested: string }, key: string) => key === 'b';
-    const result = pickBy(shouldPick)(obj);
+    const result = pickBy<typeof obj>(shouldPick)(obj);
     expect(result).toEqual({ b: { nested: 'pick' } });
   });
 });

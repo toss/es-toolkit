@@ -19,12 +19,12 @@ describe('uniqWith', () => {
 
   it("(curried) should work with a `comparator`", () => {
     expect(
-      uniqWith((a, b) => a.x === b.x)([
+      uniqWith<{ x: number; y: number }>((a, b) => a.x === b.x)([
         { x: 1, y: 2 },
         { x: 1, y: 3 },
       ])
     ).toEqual([{ x: 1, y: 2 }]);
-    expect(uniqWith((a, b) => Math.abs(a - b) < 1)([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19])).toEqual([
+    expect(uniqWith<number>((a, b) => Math.abs(a - b) < 1)([1.2, 1.5, 2.1, 3.2, 5.7, 5.3, 7.19])).toEqual([
       1.2, 3.2, 5.7, 7.19,
     ]);
   });

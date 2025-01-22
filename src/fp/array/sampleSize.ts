@@ -1,5 +1,4 @@
 import { sampleSize as sampleSizeToolkit } from '../../array/sampleSize';
-import { randomInt } from '../math/randomInt.ts';
 
 /**
  * Returns a sample element array of a specified `size`.
