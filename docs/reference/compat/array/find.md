@@ -18,18 +18,27 @@ You can specify the condition in several ways:
 ## Signature
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
-function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: T[], doesMatch: PropertyKey): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): T | undefined;
 
 function find<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
+  fromIndex?: number
 ): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: Partial<T[keyof T]>,
+  fromIndex?: number
+): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: [keyof T[keyof T], unknown],
+  fromIndex?: number
+): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey, fromIndex?: number): T | undefined;
 ```
 
 ### Parameters
@@ -67,6 +76,8 @@ To ensure full compatibility with lodash, the `find` function handles `object` i
     - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
     - **Property-value pair** (`[keyof T[keyof T], unknown]`): An array where the first element is the property key and the second element is the value to match.
     - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
+
+- `fromIndex` (`number`): The index to start the search from, defaults to `0`.
 
 ### Returns
 
