@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/lodash": "^4",
     "@types/lodash-es": "^4",
-    "@types/ramda": "^0"
+    "@types/ramda": "^0",
+    "rfdc": "^1.4.1"
   }
 }

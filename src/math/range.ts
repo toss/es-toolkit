@@ -54,14 +54,10 @@ export function range(start: number, end: number, step: number): number[];
  * // Returns [0, -1, -2, -3]
  * range(0, -4, -1);
  */
-export function range(start: number, end?: number, step?: number): number[] {
+export function range(start: number, end?: number, step = 1): number[] {
   if (end == null) {
     end = start;
     start = 0;
-  }
-
-  if (step == null) {
-    step = 1;
   }
 
   if (!Number.isInteger(step) || step === 0) {

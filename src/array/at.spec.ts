@@ -13,10 +13,17 @@ describe('at', () => {
   });
 
   it('should return `undefined` for nonexistent keys', () => {
-    expect(at(['a', 'b', 'c'], [2, 4, 0])).toEqual(['c', undefined, 'a']);
+    expect(at(['a', 'b', 'c'], [2, 4, 0, -4])).toEqual(['c', undefined, 'a', undefined]);
   });
 
   it('should return an empty array when no keys are given', () => {
     expect(at(['a', 'b', 'c'], [])).toEqual([]);
+  });
+
+  it('should return undefined for non-integer indices', () => {
+    const data = ['a', 'b', 'c'];
+    const indices = [1.5, -1.5, NaN, Infinity, -Infinity];
+
+    expect(at(data, indices)).toEqual(indices.map(i => data.at(i)));
   });
 });

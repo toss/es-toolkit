@@ -6,7 +6,7 @@ import { noop } from '../../function/noop';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { stubC } from '../_internal/stubC';
-import { stubFalse } from '../_internal/stubFalse';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isEqualWith', () => {
   it('should provide correct `customizer` arguments', () => {
@@ -37,6 +37,7 @@ describe('isEqualWith', () => {
   });
 
   it('should handle comparisons when `customizer` returns `undefined`', () => {
+    expect(isEqualWith('a', 'a')).toBe(true);
     expect(isEqualWith('a', 'a', noop)).toBe(true);
     expect(isEqualWith(['a'], ['a'], noop)).toBe(true);
     expect(isEqualWith({ 0: 'a' }, { 0: 'a' }, noop)).toBe(true);

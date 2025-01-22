@@ -1,5 +1,71 @@
 # es-toolkit Changelog
 
+## Version v1.31.0
+
+Released on December 27th, 2024.
+
+- Added support for the [windowed](https://es-toolkit.slash.page/reference/array/windowed.html), [remove](https://es-toolkit.slash.page/reference/array/remove.html) and [asyncNoop](https://es-toolkit.slash.page/reference/function/asyncNoop.html) functions.
+- Introduced compatibility functions for [pullAll](https://es-toolkit.slash.page/reference/compat/array/pullAll.html), [subtract](https://es-toolkit.slash.page/reference/compat/math/subtract.html), [isBuffer](https://es-toolkit.slash.page/reference/predicate/isBuffer.html), and [methodOf](https://es-toolkit.slash.page/reference/compat/util/methodOf.html).
+- Enhanced the performance of [pull](https://es-toolkit.slash.page/reference/array/pull.html) when working with large arrays.
+- Resolved an issue where [reverse](https://es-toolkit.slash.page/reference/compat/array/reverse.html) was not being exported in our compatibility library.
+- Updated [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html) to properly handle keys like `toString` or `valueOf`.
+- Fixed [merge](https://es-toolkit.slash.page/reference/object/merge.html) to correctly merge values when `target` or any of its values are `null` or `undefined`.
+
+We sincerely thank @T3sT3ro, @D-Sketon, @tuhm1, @willmanduffy, @apeltop, @aken-you, @SaeWooKKang, and @ssi02014 for their contributions. We appreciate your great efforts!
+
+## Version v1.30.1
+
+Released on December 14th, 2024.
+
+- Fixed [uniqueId](https://es-toolkit.slash.page/reference/compat/util/uniqueId.html) not being exported in our compatibility library.
+
+We sincerely thank @redd97 for their contributions. We appreciate your great efforts!
+
+## Version v1.30.0
+
+Released on December 13th, 2024.
+
+- Introduced support for [pull](https://es-toolkit.slash.page/reference/array/pull.html).
+- Added compatibility functions for [map](https://es-toolkit.slash.page/reference/compat/array/map.html), [range](https://es-toolkit.slash.page/reference/math/range.html), [rangeRight](https://es-toolkit.slash.page/reference/math/rangeRight.html), [differenceWith](https://es-toolkit.slash.page/reference/array/differenceWith.html), [nth](https://es-toolkit.slash.page/reference/compat/array/nth.html), [noop](https://es-toolkit.slash.page/reference/function/noop.html), [identity](https://es-toolkit.slash.page/reference/function/identity.html), [keys](https://es-toolkit.slash.page/reference/compat/object/keys.html), [propertyOf](https://es-toolkit.slash.page/reference/compat/object/propertyOf.html), [nthArg](https://es-toolkit.slash.page/reference/compat/function/nthArg.html), [delay](https://es-toolkit.slash.page/reference/promise/delay.html), [toPlainObject](https://es-toolkit.slash.page/reference/compat/util/toPlainObject.html), [unary](https://es-toolkit.slash.page/reference/function/unary.html), [once](https://es-toolkit.slash.page/reference/function/once.html), [after](https://es-toolkit.slash.page/reference/function/after.html), [takeRightWhile](https://es-toolkit.slash.page/reference/array/takeRightWhile.html), [escapeRegExp](https://es-toolkit.slash.page/reference/string/escapeRegExp.html), [unescape](https://es-toolkit.slash.page/reference/string/unescape.html), [upperFirst](https://es-toolkit.slash.page/reference/string/upperFirst.html), [lowerFirst](https://es-toolkit.slash.page/reference/string/lowerFirst.html), [deburr](https://es-toolkit.slash.page/reference/string/deburr.html), [lt](https://es-toolkit.slash.page/reference/util/lt.html), [lte](https://es-toolkit.slash.page/reference/util/lte.html), [toLower](https://es-toolkit.slash.page/reference/compat/string/toLower.html), [invoke](https://es-toolkit.slash.page/reference/compat/util/invoke.html), [method](https://es-toolkit.slash.page/reference/compat/util/method.html), [reverse](https://es-toolkit.slash.page/reference/compat/array/reverse.html), [now](https://es-toolkit.slash.page/reference/compat/util/now.html), [findKey](https://es-toolkit.slash.page/reference/object/findKey.html), [stubArray](https://es-toolkit.slash.page/reference/compat/util/stubArray.html), [stubFalse](https://es-toolkit.slash.page/reference/compat/util/stubFalse.html), [stubObject](https://es-toolkit.slash.page/reference/compat/util/stubObject.html), [stubString](https://es-toolkit.slash.page/reference/compat/util/stubString.html), and [stubTrue](https://es-toolkit.slash.page/reference/compat/util/stubTrue.html).
+
+We sincerely thank @healtheloper, @mass2527, @D-Sketon, @eunhyulkim, @scato3, @Na-hyunwoo, and @dasom-jo for their contributions. We appreciate your great efforts!
+
+## Version v1.29.0
+
+Released on December 1st, 2024.
+
+- Introduced support for [cloneDeepWith](https://es-toolkit.slash.page/reference/object/cloneDeepWith.html).
+- Added a compatibility function for [lastIndexOf](https://es-toolkit.slash.page/reference/compat/array/lastIndexOf.html).
+- Fixed an issue in [flattenObject](https://es-toolkit.slash.page/reference/object/flattenObject.html) where nested objects in arrays were not flattened correctly.
+
+We sincerely thank @nnnnoel and @evan-moon for their contributions. We appreciate your great efforts!
+
+## Version v1.28.0
+
+Released on November 30th, 2024.
+
+- Added compatibility functions for [gt](https://es-toolkit.slash.page/reference/compat/util/gt.html), [gte](https://es-toolkit.slash.page/reference/compat/util/gte.html), [toArray](https://es-toolkit.slash.page/reference/compat/util/toArray.html), [toUpper](https://es-toolkit.slash.page/reference/compat/string/toUpper.html), [add](https://es-toolkit.slash.page/reference/compat/math/add.html), [assignIn](https://es-toolkit.slash.page/reference/compat/object/assignIn.html) ([extend](https://es-toolkit.slash.page/reference/compat/object/extend.html)), and [isElement](https://es-toolkit.slash.page/reference/compat/predicate/isElement.html).
+- Introduced new compatibility types for `DebouncedFunc`.
+- Enhanced our function types to accept `PropertyKey` instead of just `string` for property keys.
+- Corrected [flatMap](https://es-toolkit.slash.page/reference/array/flatMap.html) to accurately infer return types when the `depth` parameter is omitted.
+- Resolved issues with incorrect types for [partial](https://es-toolkit.slash.page/reference/function/partial.html) and [partialRight](https://es-toolkit.slash.page/reference/function/partialRight.html).
+- Fixed [intersectionBy](https://es-toolkit.slash.page/reference/array/intersectionBy.html), [differenceBy](https://es-toolkit.slash.page/reference/array/differenceBy.html), and [differenceWith](https://es-toolkit.slash.page/reference/array/differenceWith.html) to properly calculate differences between various element types.
+- Ensured that [words](https://es-toolkit.slash.page/reference/string/words.html) is now correctly exported in our compatibility library.
+
+We sincerely thank @D-Sketon, @mass2527, @1eeminhyeong, @chhw130, @DONG-8, @filipsobol, @kim-dongho, @nnnnoel, @pbstar, and @jsparkdev for their contributions. We appreciate your great efforts!
+
+## Version v1.27.0
+
+Released on November 10th, 2024.
+
+- Added support for [findKey](https://es-toolkit.slash.page/reference/object/findKey.html) and [isSubsetWith](https://es-toolkit.slash.page/reference/array/isSubsetWith.html).
+- Introduced compatibility functions for [words](https://es-toolkit.slash.page/reference/string/words.html), [at](https://es-toolkit.slash.page/reference/array/at.html), [differenceBy](https://es-toolkit.slash.page/reference/array/differenceBy.html), [uniqBy](https://es-toolkit.slash.page/reference/array/uniqBy.html), [forEach](https://es-toolkit.slash.page/reference/compat/array/forEach.html), [each](https://es-toolkit.slash.page/reference/compat/array/each.html), [sum](https://es-toolkit.slash.page/reference/math/sum.html), [sumBy](https://es-toolkit.slash.page/reference/array/sumBy.html), [union](https://es-toolkit.slash.page/reference/array/union.html), [zip](https://es-toolkit.slash.page/reference/array/zip.html), [unzip](https://es-toolkit.slash.page/reference/array/unzip.html), [iteratee](https://es-toolkit.slash.page/reference/compat/util/iteratee.html), [isEmpty](https://es-toolkit.slash.page/reference/compat/predicate/isEmpty.html), and [replace](https://es-toolkit.slash.page/reference/compat/string/replace.html).
+- Fixed a bug in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) that prevented it from correctly cloning object prototypes.
+- Improved performance for [at](https://es-toolkit.slash.page/reference/array/at.html).
+- Enhanced performance for [toPath](https://es-toolkit.slash.page/reference/compat/util/toPath.html), [get](https://es-toolkit.slash.page/reference/compat/object/get.html), [set](https://es-toolkit.slash.page/reference/compat/object/set.html), [unset](https://es-toolkit.slash.page/reference/compat/object/unset.html), [has](https://es-toolkit.slash.page/reference/compat/object/has.html), [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html), [chunk](https://es-toolkit.slash.page/reference/array/chunk.html), [difference](https://es-toolkit.slash.page/reference/array/difference.html), [drop](https://es-toolkit.slash.page/reference/array/drop.html), [dropRight](https://es-toolkit.slash.page/reference/array/dropRight.html), [dropWhile](https://es-toolkit.slash.page/reference/array/dropWhile.html), [findLastIndex](https://es-toolkit.slash.page/reference/compat/array/findLastIndex.html), [head](https://es-toolkit.slash.page/reference/array/head.html), [last](https://es-toolkit.slash.page/reference/array/last.html), [sample](https://es-toolkit.slash.page/reference/array/sample.html), [tail](https://es-toolkit.slash.page/reference/array/tail.html), [take](https://es-toolkit.slash.page/reference/array/take.html), and [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html) in our compatibility library.
+
+We sincerely thank @scato3, @ssi02014, @filipsobol, @mass2527, @Gyumong, @D-Sketon, @dayongkr, @kyvg, @Na-hyunwoo, @kaehehehe, and @bhollis for their contributions. Special thanks to @cruelladevil for improving the documentation. We appreciate your great efforts!
+
 ## Version v1.26.1
 
 Released on October 25th, 2024.

@@ -71,4 +71,14 @@ describe('trimStart', () => {
 
     expect(actual).toEqual([trimmed, trimmed, trimmed]);
   });
+
+  it(`\`trimStart\` should support character arrays`, () => {
+    const string = 'hello world';
+    const expected = 'o world';
+
+    expect(func(string, ['hel'])).toBe(expected);
+    expect(func(string, ['he', 'l'])).toBe(expected);
+    expect(func(string, ['eh', 'l'])).toBe(expected);
+    expect(func(string, ['l', 'e', 'h'])).toBe(expected);
+  });
 });

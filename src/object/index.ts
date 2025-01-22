@@ -1,5 +1,7 @@
 export { clone } from './clone.ts';
 export { cloneDeep } from './cloneDeep.ts';
+export { cloneDeepWith } from './cloneDeepWith.ts';
+export { findKey } from './findKey.ts';
 export { flattenObject } from './flattenObject.ts';
 export { invert } from './invert.ts';
 export { mapKeys } from './mapKeys.ts';

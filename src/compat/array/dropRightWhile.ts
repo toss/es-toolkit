@@ -59,7 +59,7 @@ export function dropRightWhile<T>(arr: ArrayLike<T> | null | undefined, property
  *
  * @template T - The type of elements in the array.
  * @param {ArrayLike<T> | null | undefined} arr - The array from which to drop elements.
- * @param {string} propertyToDrop - The name of the property to match for dropping elements.
+ * @param {PropertyKey} propertyToDrop - The name of the property to match for dropping elements.
  * @returns {T[]} A new array with the elements remaining after the predicate returns false.
  *
  * @example
@@ -67,7 +67,7 @@ export function dropRightWhile<T>(arr: ArrayLike<T> | null | undefined, property
  * const result = dropRightWhile(array, 'isActive');
  * result will be [{ isActive: false }] since it drops elements until it finds one with a falsy isActive property.
  */
-export function dropRightWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: string): T[];
+export function dropRightWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: PropertyKey): T[];
 
 /**
  * Removes elements from the end of an array until the predicate returns false.
@@ -89,7 +89,7 @@ export function dropRightWhile<T>(arr: ArrayLike<T> | null | undefined, property
  */
 export function dropRightWhile<T>(
   arr: ArrayLike<T> | null | undefined,
-  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | string
+  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
 ): T[] {
   if (!isArrayLike(arr)) {
     return [];
@@ -100,7 +100,7 @@ export function dropRightWhile<T>(
 
 function dropRightWhileImpl<T>(
   arr: readonly T[],
-  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | string
+  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
 ): T[] {
   switch (typeof predicate) {
     case 'function': {
@@ -116,6 +116,8 @@ function dropRightWhileImpl<T>(
         return dropRightWhileToolkit(arr, matches(predicate));
       }
     }
+    case 'symbol':
+    case 'number':
     case 'string': {
       return dropRightWhileToolkit(arr, property(predicate));
     }

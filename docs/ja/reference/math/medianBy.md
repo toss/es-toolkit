@@ -11,7 +11,7 @@
 ## インターフェース
 
 ```typescript
-export function medianBy<T>(items: T[], getValue: (element: T) => number): number;
+function medianBy<T>(items: T[], getValue: (element: T) => number): number;
 ```
 
 ### パラメータ

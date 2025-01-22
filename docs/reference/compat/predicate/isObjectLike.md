@@ -15,7 +15,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isObjectLike(value: unknown): value is object;
+function isObjectLike(value?: unknown): value is object;
 ```
 
 ### Parameters

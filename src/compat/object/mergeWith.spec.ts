@@ -109,4 +109,33 @@ describe('mergeWith', () => {
     expect(merged.value.foo).toEqual(1);
     expect(merged.value[symbol1]).toEqual('a');
   });
+
+  it('should return the target object when no sources are provided', () => {
+    const target = { a: 1 };
+    expect(mergeWith(target, null, noop)).toBe(target);
+    expect(mergeWith(target, undefined, noop)).toBe(target);
+    expect(mergeWith(target, 1, noop)).toBe(target);
+  });
+
+  it('should work with nullish variables', () => {
+    const source = { a: 1 };
+    expect(mergeWith(null, source, noop)).toEqual(source);
+    expect(mergeWith(undefined, source, noop)).toEqual(source);
+    expect(mergeWith(null, undefined, source, noop)).toEqual(source);
+    expect(mergeWith(null, undefined, noop)).toEqual({});
+    expect(mergeWith(undefined, null, noop)).toEqual({});
+  });
+
+  it('should merge array to a null prop', () => {
+    const target = { a: null };
+    const source = { a: ['abc', '123'] };
+    expect(mergeWith(target, source, noop)).toEqual({ a: ['abc', '123'] });
+  });
+
+  it('should return an object when the target is a primitive', () => {
+    expect(mergeWith(1, null, noop)).toEqual(Object(1));
+    expect(mergeWith('a', null, noop)).toEqual(Object('a'));
+    expect(mergeWith(true, null, noop)).toEqual(Object(true));
+    expect(mergeWith(1, { a: 1 }, noop)).toEqual(Object.assign(1, { a: 1 }));
+  });
 });

@@ -44,7 +44,7 @@ const result = dropWhile(array, x => x < 3);
 function dropWhile<T>(arr: ArrayLike<T> | null | undefined, canContinueDropping: (item: T, index: number, arr: T[]) => unknown): T[];
 function dropWhile<T>(arr: ArrayLike<T> | null | undefined objectToDrop: Partial<T>): T[];
 function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: [keyof T, unknown]): T[];
-function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: string): T[];
+function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: PropertyKey): T[];
 ```
 
 ### 示例

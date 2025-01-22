@@ -1,6 +1,6 @@
 # clamp
 
-숫자를 최솟값과 최댓값의 범위 내로 고정하는 함수에요.
+숫자를 최솟값과 최댓값의 범위 내로 고정하는 함수예요.
 
 이 함수는 숫자와 두 개의 경계를 받아서, 지정된 범위 내에서 고정된 숫자를 반환해요.
 하나의 경계만 제공되면, 값과 경계 중 최솟값을 반환해요.
@@ -14,7 +14,7 @@ function clamp(value: number, minimum: number, maximum: number): number;
 
 ### 파라미터
 
-- `value` (`number`): 고정할 숫자에요.
+- `value` (`number`): 고정할 숫자예요.
 - `minimum` (`number`): 숫자를 고정할 최솟값이에요.
 - `maximum` (`number`): 숫자를 고정할 최댓값이에요.
 

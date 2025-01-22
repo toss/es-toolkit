@@ -1,3 +1,4 @@
+import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
@@ -66,11 +67,11 @@ export function findLastIndex<T>(
 ): number;
 
 /**
- * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
+ * Finds the index of the first item in an array that has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr - The array to search through.
- * @param {string} propertyToCheck - The property name to check.
+ * @param {PropertyKey} propertyToCheck - The property name to check.
  * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
  * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
  *
@@ -82,16 +83,16 @@ export function findLastIndex<T>(
  */
 export function findLastIndex<T>(
   arr: ArrayLike<T> | null | undefined,
-  propertyToCheck: string,
+  propertyToCheck: PropertyKey,
   fromIndex?: number
 ): number;
 
 /**
- * Finds the index of the first item in an array that has a specific property, where the property name is provided as a string.
+ * Finds the index of the first item in an array that has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
  * @param {ArrayLike<T> | null | undefined} arr - The array to search through.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string} doesMatch - The property name to check.
+ * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The property name to check.
  * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
  * @returns {number} - The index of the first item that has the specified property, or `undefined` if no match is found.
  *
@@ -103,7 +104,7 @@ export function findLastIndex<T>(
  */
 export function findLastIndex<T>(
   arr: ArrayLike<T> | null | undefined,
-  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | string,
+  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
   fromIndex: number = arr ? arr.length - 1 : 0
 ): number {
   if (!arr) {
@@ -115,7 +116,7 @@ export function findLastIndex<T>(
     fromIndex = Math.min(fromIndex, arr.length - 1);
   }
 
-  const subArray = Array.from(arr).slice(0, fromIndex + 1);
+  const subArray = toArray(arr).slice(0, fromIndex + 1);
 
   switch (typeof doesMatch) {
     case 'function': {
@@ -131,6 +132,8 @@ export function findLastIndex<T>(
         return subArray.findLastIndex(matches(doesMatch));
       }
     }
+    case 'number':
+    case 'symbol':
     case 'string': {
       return subArray.findLastIndex(property(doesMatch));
     }

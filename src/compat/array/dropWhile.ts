@@ -1,4 +1,5 @@
 import { dropWhile as dropWhileToolkit } from '../../array/dropWhile.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { matches } from '../predicate/matches.ts';
@@ -59,7 +60,7 @@ export function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDro
  *
  * @template T - The type of elements in the array.
  * @param {ArrayLike<T> | null | undefined} arr - The array from which to drop elements.
- * @param {string} propertyToDrop - The name of the property to match for dropping elements.
+ * @param {PropertyKey} propertyToDrop - The name of the property to match for dropping elements.
  * @returns {T[]} A new array with the elements remaining after the predicate returns false.
  *
  * @example
@@ -67,7 +68,7 @@ export function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDro
  * const result = dropWhile(array, 'isActive');
  * result will be [{ isActive: false }] since it drops elements until it finds one with a falsy isActive property.
  */
-export function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: string): T[];
+export function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: PropertyKey): T[];
 
 /**
  * Removes elements from the beginning of an array until the predicate returns false.
@@ -89,18 +90,18 @@ export function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDro
  */
 export function dropWhile<T>(
   arr: ArrayLike<T> | null | undefined,
-  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | string
+  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
 ): T[] {
   if (!isArrayLike(arr)) {
     return [];
   }
 
-  return dropWhileImpl(Array.from(arr), predicate);
+  return dropWhileImpl(toArray(arr), predicate);
 }
 
 function dropWhileImpl<T>(
   arr: readonly T[],
-  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | string
+  predicate: ((item: T, index: number, arr: readonly T[]) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
 ): T[] {
   switch (typeof predicate) {
     case 'function': {
@@ -116,6 +117,8 @@ function dropWhileImpl<T>(
         return dropWhileToolkit(arr, matches(predicate));
       }
     }
+    case 'number':
+    case 'symbol':
     case 'string': {
       return dropWhileToolkit(arr, property(predicate));
     }

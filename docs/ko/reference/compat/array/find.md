@@ -18,18 +18,27 @@
 ## 인터페이스
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
-function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: T[], doesMatch: string): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): T | undefined;
 
 function find<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
+  fromIndex?: number
 ): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: string): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: Partial<T[keyof T]>,
+  fromIndex?: number
+): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: [keyof T[keyof T], unknown],
+  fromIndex?: number
+): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey, fromIndex?: number): T | undefined;
 ```
 
 ### 파라미터
@@ -60,13 +69,15 @@ lodash와 완벽하게 호환되도록 `find` 함수는 `object`를 다음과 �
     - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
     - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
     - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-    - **프로퍼티 이름** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+    - **프로퍼티 이름** (`PropertyKey`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
 
   - 객체의 경우:
     - **검사 함수** (`(item: T[keyof T], index: number, object: T) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
     - **Partial value** (`Partial<T[keyof T]>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
     - **Property-value pair** (`[keyof T[keyof T], unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-    - **Property name** (`string`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+    - **Property name** (`PropertyKey`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
+
+- `fromIndex` (`number`): 검색을 시작할 인덱스. 기본값은 `0`.
 
 ### 반환 값
 

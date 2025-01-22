@@ -23,7 +23,7 @@
 function some<T>(arr: T[]): boolean;
 function some<T>(arr: T[], predicate: (item: T, index: number, arr: any) => unknown): boolean;
 function some<T>(arr: T[], predicate: [keyof T, unknown]): boolean;
-function some<T>(arr: T[], predicate: string): boolean;
+function some<T>(arr: T[], predicate: PropertyKey): boolean;
 function some<T>(arr: T[], predicate: Partial<T>): boolean;
 
 function some<T extends Record<string, unknown>>(object: T): boolean;
@@ -33,7 +33,7 @@ function some<T extends Record<string, unknown>>(
 ): boolean;
 function some<T extends Record<string, unknown>>(object: T, predicate: Partial<T[keyof T]>): boolean;
 function some<T extends Record<string, unknown>>(object: T, predicate: [keyof T[keyof T], unknown]): boolean;
-function some<T extends Record<string, unknown>>(object: T, predicate: string): boolean;
+function some<T extends Record<string, unknown>>(object: T, predicate: PropertyKey): boolean;
 ```
 
 ### パラメータ
@@ -47,14 +47,14 @@ function some<T extends Record<string, unknown>>(object: T, predicate: string): 
     - **検査関数** (`(item: T, index: number, arr: T[]) => unknown`): 各要素に対して検査する関数。
     - **部分オブジェクト** (`Partial<T>`): 部分的に一致するプロパティを持つ最初の要素を返す。
     - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
-    - **プロパティ名** (`string`): 真と評価される値を持っているか確認するプロパティ名。
+    - **プロパティ名** (`PropertyKey`): 真と評価される値を持っているか確認するプロパティ名。
 
   - オブジェクトの場合:
 
     - **検査関数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 条件を満たすかどうかを確認する関数。
     - **部分オブジェクト** (`Partial<T[keyof T]>`): 部分的に一致するプロパティを持つ最初の要素を返す。
     - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
-    - **プロパティ名** (`string`): 真と評価される値を持っているか確認するプロパティ名。
+    - **プロパティ名** (`PropertyKey`): 真と評価される値を持っているか確認するプロパティ名。
 
 ### 戻り値
 

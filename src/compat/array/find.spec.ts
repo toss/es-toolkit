@@ -6,9 +6,9 @@ import { slice } from '../_internal/slice';
 
 describe('find', () => {
   const objects = [
-    { a: 0, b: 0 },
-    { a: 1, b: 1 },
-    { a: 2, b: 2 },
+    { a: 0, b: 0, 0: 0, [Symbol.for('a')]: 0 },
+    { a: 1, b: 1, 0: 1, [Symbol.for('a')]: 1 },
+    { a: 2, b: 2, 0: 2, [Symbol.for('a')]: 2 },
   ];
 
   it(`should return the found value`, () => {
@@ -25,10 +25,14 @@ describe('find', () => {
 
   it(`find should work with \`matchesProperty\` shorthands`, () => {
     expect(find(objects, ['b', 2])).toBe(objects[2]);
+    expect(find(objects, [0, 2])).toBe(objects[2]);
+    expect(find(objects, [Symbol.for('a'), 2])).toBe(objects[2]);
   });
 
   it(`find should work with \`property\` shorthands`, () => {
     expect(find(objects, 'b')).toBe(objects[1]);
+    expect(find(objects, 0)).toBe(objects[1]);
+    expect(find(objects, Symbol.for('a'))).toBe(objects[1]);
   });
 
   it(`find should return undefined for empty collections`, () => {
@@ -75,6 +79,15 @@ describe('find', () => {
     });
 
     expect(args).toEqual([1, 'a', object]);
+  });
+
+  it('find should support fromIndex', () => {
+    expect(find(objects, { b: 2 }, -1)).toBe(objects[2]);
+    expect(find(objects, { b: 2 }, 0)).toBe(objects[2]);
+    expect(find(objects, { b: 2 }, 1)).toBe(objects[2]);
+    expect(find(objects, { b: 2 }, 2)).toBe(objects[2]);
+    expect(find(objects, { b: 2 }, 3)).toBe(undefined);
+    expect(find(objects, { b: 2 }, 4)).toBe(undefined);
   });
 
   it('should return `undefined` when provided `null` or `undefined`', () => {

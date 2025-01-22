@@ -1,6 +1,7 @@
 export { isArrayBuffer } from './isArrayBuffer.ts';
 export { isBlob } from './isBlob.ts';
 export { isBoolean } from './isBoolean.ts';
+export { isBuffer } from './isBuffer.ts';
 export { isDate } from './isDate.ts';
 export { isEqual } from './isEqual.ts';
 export { isEqualWith } from './isEqualWith.ts';
@@ -15,6 +16,7 @@ export { isNotNil } from './isNotNil.ts';
 export { isNull } from './isNull.ts';
 export { isPlainObject } from './isPlainObject.ts';
 export { isPrimitive } from './isPrimitive.ts';
+export { isPromise } from './isPromise.ts';
 export { isRegExp } from './isRegExp.ts';
 export { isSet } from './isSet.ts';
 export { isString } from './isString.ts';

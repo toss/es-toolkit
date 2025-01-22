@@ -1,4 +1,5 @@
 import { take as takeToolkit } from '../../array/take.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { toInteger } from '../util/toInteger.ts';
 
@@ -25,11 +26,11 @@ import { toInteger } from '../util/toInteger.ts';
  * // Returns [1, 2, 3]
  * take([1, 2, 3], 5);
  */
-export function take<T>(arr: ArrayLike<T> | null | undefined, count: number = 1, guard?: unknown): T[] {
+export function take<T>(arr: ArrayLike<T> | null | undefined, count = 1, guard?: unknown): T[] {
   count = guard ? 1 : toInteger(count);
   if (count < 1 || !isArrayLike(arr)) {
     return [];
   }
 
-  return takeToolkit(Array.from(arr), count);
+  return takeToolkit(toArray(arr), count);
 }

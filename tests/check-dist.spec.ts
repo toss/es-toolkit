@@ -25,6 +25,8 @@ async function getPackageJsonOfTarball() {
 const ENTRYPOINTS = [
   '.',
   './array',
+  './compat',
+  './error',
   './function',
   './math',
   './object',
@@ -32,7 +34,6 @@ const ENTRYPOINTS = [
   './promise',
   './string',
   './util',
-  './compat',
   './fp',
 ];
 

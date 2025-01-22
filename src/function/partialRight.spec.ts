@@ -1,10 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { identity } from './identity';
 import { partialRight } from './partialRight';
 import { curry } from '../compat/function/curry';
-
-function identity(arg?: any): any {
-  return arg;
-}
 
 describe('partialRight', () => {
   const { placeholder } = partialRight;
@@ -14,7 +11,7 @@ describe('partialRight', () => {
   });
 
   it('partialRight creates a function that can be invoked with additional arguments', () => {
-    const fn = function (a?: string, b?: string) {
+    const fn = function (a: string, b: string) {
       return [a, b];
     };
     const par = partialRight(fn, 'a');
@@ -40,7 +37,7 @@ describe('partialRight', () => {
       // eslint-disable-next-line prefer-rest-params
       return Array.from(arguments);
     };
-    let par = partialRight(fn, placeholder, 'b', placeholder);
+    let par: any = partialRight(fn, placeholder, 'b', placeholder);
     expect(par('a', 'c')).toEqual(['a', 'b', 'c']);
     expect(par('a')).toEqual(['a', 'b', undefined]);
     expect(par()).toEqual([undefined, 'b', undefined]);
@@ -71,7 +68,7 @@ describe('partialRight', () => {
   });
 
   it('partialRight clones metadata for created functions', () => {
-    function greet(greeting?: string, name?: string) {
+    function greet(greeting: string, name: string) {
       return `${greeting} ${name}`;
     }
 
