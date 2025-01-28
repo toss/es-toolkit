@@ -15,7 +15,8 @@ export function sum(nums: readonly number[]): number {
   let result = 0;
 
   for (let i = 0; i < nums.length; i++) {
-    result += nums[i];
+    const value = nums[i];
+    result += typeof value === 'number' ? value : 0;
   }
 
   return result;
