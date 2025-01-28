@@ -12,17 +12,17 @@
  * // result will be 15
  */
 export function sum(nums: readonly number[]): number {
-  let result: number | undefined;
-
   if (nums.length === 0) {
     return 0;
   }
-  for (let i = 0; i < nums.length; i++) {
+
+  let result = nums[0];
+  for (let i = 1; i < nums.length; i++) {
     const current = nums[i];
     if (current !== undefined) {
       result = result === undefined ? current : result + current;
     }
   }
 
-  return result as number;
+  return result;
 }
