@@ -24,6 +24,12 @@ describe('sum function', () => {
     expect(sum([1, 2, undefined, 3] as unknown as number[])).toBe(6);
     expect(sum([1, 2, null, 3] as unknown as number[])).toBe(6);
     expect(sum([1, 2, null, undefined, 3] as unknown as number[])).toBe(6);
+
+    expect(sum([undefined] as unknown as number[])).toBe(undefined);
+    expect(sum([null] as unknown as number[])).toBe(null);
+    expect(sum([null, undefined] as unknown as number[])).toBe(null);
+    expect(sum([undefined, null] as unknown as number[])).toBe(null);
+    expect(sum([null, undefined, null] as unknown as number[])).toBe(0);
   });
 
   it('handles arrays with NaN, Infinity, and -Infinity values', () => {
