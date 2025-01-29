@@ -178,7 +178,9 @@ describe('cloneDeep', () => {
   it('should clone File objects', () => {
     // For legacy NodeJS support
     if (typeof File !== 'undefined') {
-      const file = new File(['es-toolkit'], 'es-toolkit.txt', { type: 'text/plain' });
+      const file = new File(['es-toolkit'], 'es-toolkit.txt', {
+        type: 'text/plain',
+      });
       const clonedFile = cloneDeep(file);
       expect(clonedFile).not.toBe(file);
       expect(clonedFile.name).toBe(file.name);

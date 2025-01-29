@@ -1,4 +1,29 @@
 import { getSymbols } from '../compat/_internal/getSymbols.ts';
+import { getTag } from '../compat/_internal/getTag.ts';
+import {
+  argumentsTag,
+  arrayBufferTag,
+  arrayTag,
+  booleanTag,
+  dataViewTag,
+  dateTag,
+  float32ArrayTag,
+  float64ArrayTag,
+  int8ArrayTag,
+  int16ArrayTag,
+  int32ArrayTag,
+  mapTag,
+  numberTag,
+  objectTag,
+  regexpTag,
+  setTag,
+  stringTag,
+  symbolTag,
+  uint8ArrayTag,
+  uint8ClampedArrayTag,
+  uint16ArrayTag,
+  uint32ArrayTag,
+} from '../compat/_internal/tags.ts';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
@@ -197,7 +222,7 @@ export function cloneDeepWithImpl<T>(
     return result as T;
   }
 
-  if (typeof valueToClone === 'object' && valueToClone !== null) {
+  if (typeof valueToClone === 'object' && isCloneableObject(valueToClone)) {
     const result = Object.create(Object.getPrototypeOf(valueToClone));
 
     stack.set(valueToClone, result);
@@ -225,6 +250,38 @@ export function copyProperties<T>(
 
     if (descriptor == null || descriptor.writable) {
       target[key] = cloneDeepWithImpl(source[key], key, objectToClone, stack, cloneValue);
+    }
+  }
+}
+
+function isCloneableObject(object: object) {
+  switch (getTag(object)) {
+    case argumentsTag:
+    case arrayTag:
+    case arrayBufferTag:
+    case dataViewTag:
+    case booleanTag:
+    case dateTag:
+    case float32ArrayTag:
+    case float64ArrayTag:
+    case int8ArrayTag:
+    case int16ArrayTag:
+    case int32ArrayTag:
+    case mapTag:
+    case numberTag:
+    case objectTag:
+    case regexpTag:
+    case setTag:
+    case stringTag:
+    case symbolTag:
+    case uint8ArrayTag:
+    case uint8ClampedArrayTag:
+    case uint16ArrayTag:
+    case uint32ArrayTag: {
+      return true;
+    }
+    default: {
+      return false;
     }
   }
 }
