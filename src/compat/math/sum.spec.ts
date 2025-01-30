@@ -20,6 +20,7 @@ describe('sum', () => {
 
   it(`should skip \`undefined\` values`, () => {
     expect(sum([1, undefined])).toBe(1);
+    expect(sum([undefined, 1, 2, 3])).toBe(6);
   });
 
   it(`should not skip \`NaN\` values`, () => {
