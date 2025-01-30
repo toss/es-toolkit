@@ -1,39 +1,54 @@
-import { describe, expect, it } from 'vitest';
-import { reduce } from './reduce';
+import { describe, expect, it } from "vitest";
+import { reduce } from "./reduce";
 
-describe('reduce', () => {
-  it('removes elements at specified indices and returns the removed elements', () => {
-    const arr = [10, 20, 30, 40, 50];
-    const removed = reduce(arr, [1, 3, 4]);
-    expect(removed).toEqual([20, 40, 50]);
-    expect(arr).toEqual([10, 30]);
+describe("reduce", () => {
+  it("sums an array of numbers", () => {
+    const result = reduce([1, 2, 3, 4, 5], (acc, cur) => acc + cur, 0);
+    expect(result).toBe(15);
   });
 
-  it('returns undefined for out-of-bounds indices', () => {
-    const arr = [10, 20, 30];
-    const removed = reduce(arr, [10, -10]);
-    expect(removed).toEqual([undefined, undefined]);
-    expect(arr).toEqual([10, 20, 30]);
+  it("multiplies an array of numbers", () => {
+    const result = reduce([1, 2, 3, 4], (acc, cur) => acc * cur, 1);
+    expect(result).toBe(24);
   });
 
-  it('handles duplicate indices gracefully', () => {
-    const arr = [10, 20, 30, 40];
-    const removed = reduce(arr, [1, 1, 3]);
-    expect(removed).toEqual([20, 40]);
-    expect(arr).toEqual([10, 30]);
+  it("concatenates an array of strings", () => {
+    const result = reduce(["H", "e", "l", "l", "o"], (acc, cur) => acc + cur, "");
+    expect(result).toBe("Hello");
   });
 
-  it('removes all elements when all indices are specified', () => {
-    const arr = [10, 20, 30];
-    const removed = reduce(arr, [0, 1, 2]);
-    expect(removed).toEqual([10, 20, 30]);
-    expect(arr).toEqual([]);
+  it("works with an empty array and returns the initial value", () => {
+    const result = reduce<number, number>([], (acc, cur) => acc + cur, 10);
+    expect(result).toBe(10);
   });
 
-  it('removes elements in descending order of indices', () => {
-    const arr = [10, 20, 30, 40, 50];
-    const removed = reduce(arr, [4, 0, 2]);
-    expect(removed).toEqual([10, 30, 50]);
-    expect(arr).toEqual([20, 40]);
+  it("creates an object counting occurrences of elements", () => {
+    const input = ["a", "b", "a", "c", "b", "a"];
+    const result = reduce(
+      input,
+      (acc, cur) => {
+        acc[cur] = (acc[cur] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+
+    expect(result).toEqual({ a: 3, b: 2, c: 1 });
+  });
+
+  it("reduces an array to find the maximum value", () => {
+    const result = reduce([5, 1, 8, 3, 10], (acc, cur) => (cur > acc ? cur : acc), -Infinity);
+    expect(result).toBe(10);
+  });
+
+  it("reduces an array to find the minimum value", () => {
+    const result = reduce([5, 1, 8, 3, 10], (acc, cur) => (cur < acc ? cur : acc), Infinity);
+    expect(result).toBe(1);
+  });
+
+  it("flattens a nested array", () => {
+    const input = [[1, 2], [3, 4], [5]];
+    const result = reduce(input, (acc, cur) => acc.concat(cur), [] as number[]);
+    expect(result).toEqual([1, 2, 3, 4, 5]);
   });
 });

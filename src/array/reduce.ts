@@ -1,35 +1,27 @@
 /**
- * Removes elements from an array at specified indices and returns the removed elements.
+ * Custom implementation of the Array.prototype.reduce function.
  *
- * This function supports negative indices, which count from the end of the array.
- *
- * @template T - The type of elements in the array.
- * @param {T[]} arr - The array from which elements will be removed.
- * @param {number[]} indicesToRemove - An array of indices specifying the positions of elements to remove.
- * @returns {Array<T | undefined>} An array containing the elements that were removed from the original array.
+ * @template T, U
+ * @param {T[]} array - The array to iterate over.
+ * @param {(accumulator: U, currentValue: T, currentIndex: number, array: T[]) => U} callback
+ *        - The function to execute on each element in the array.
+ * @param {U} initialValue - The initial value of the accumulator.
+ * @returns {U} The final accumulated value.
  *
  * @example
- * const array = [1, 2, 3, 4, 5];
- * const removed = reduce(array, [0, -1]);
- * // removed will be [1, 5]
- * // array will be [2, 3, 4]
+ * const sum = reduce([1, 2, 3, 4], (acc, cur) => acc + cur, 0);
+ * console.log(sum); // 10
  */
-export function reduce<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
-  const normalizedIndices = Array.from(
-    new Set(indicesToRemove.map(index => (index < 0 ? arr.length + index : index)))
-  ).sort((a, b) => b - a);
+export function reduce<T, U>(
+  array: T[],
+  callback: (accumulator: U, currentValue: T, currentIndex: number, array: T[]) => U,
+  initialValue: U
+): U {
+  let accumulator = initialValue;
 
-  const removed: Array<T | undefined> = [];
-
-  for (let i = 0; i < normalizedIndices.length; i++) {
-    const index = normalizedIndices[i];
-    if (index >= 0 && index < arr.length) {
-      removed.unshift(arr[index]);
-      arr.splice(index, 1);
-    } else {
-      removed.unshift(undefined);
-    }
+  for (let i = 0; i < array.length; i++) {
+    accumulator = callback(accumulator, array[i], i, array);
   }
 
-  return removed;
+  return accumulator;
 }
