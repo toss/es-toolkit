@@ -52,6 +52,7 @@ export { includes } from './array/includes.ts';
 export { indexOf } from './array/indexOf.ts';
 export { intersection } from './array/intersection.ts';
 export { intersectionBy } from './array/intersectionBy.ts';
+export { intersectionWith } from './array/intersectionWith.ts';
 export { join } from './array/join.ts';
 export { last } from './array/last.ts';
 export { lastIndexOf } from './array/lastIndexOf.ts';
