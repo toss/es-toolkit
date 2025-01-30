@@ -7,7 +7,7 @@
 ## 签名
 
 ```typescript
-function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
+function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
 ```
 
 ### 参数
@@ -17,7 +17,7 @@ function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
 
 ### 返回值
 
-(`Array<T | undefined>`): 包含从原始数组中删除的元素的新数组。
+(`T[]`): 包含从原始数组中删除的元素的新数组。
 
 ## 示例
 

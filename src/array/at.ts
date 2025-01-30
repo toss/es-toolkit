@@ -13,8 +13,8 @@
  * const result = at(numbers, [1, 3, 4]);
  * console.log(result); // [20, 40, 50]
  */
-export function at<T>(arr: readonly T[], indices: number[]): Array<T | undefined> {
-  const result = new Array<T | undefined>(indices.length);
+export function at<T>(arr: readonly T[], indices: number[]): T[] {
+  const result = new Array<T>(indices.length);
   const length = arr.length;
 
   for (let i = 0; i < indices.length; i++) {
