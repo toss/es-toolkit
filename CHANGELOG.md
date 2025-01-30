@@ -1,5 +1,15 @@
 # es-toolkit Changelog
 
+## Version v1.32.0
+
+Released on January 30th, 2024.
+
+- Added support for [Semaphore](https://es-toolkit.slash.page/reference/promise/Semaphore.html), [Mutex](https://es-toolkit.slash.page/reference/promise/Mutex.html), [isPromise](https://es-toolkit.slash.page/reference/predicate/isPromise.html), and [retry](https://es-toolkit.slash.page/reference/function/retry.html).
+- Introduced compatibility functions for [multiply](https://es-toolkit.slash.page/reference/compat/math/multiply.html), [sortedIndex](https://es-toolkit.slash.page/reference/compat/array/sortedIndex.html), and [sortedIndexBy](https://es-toolkit.slash.page/reference/compat/array/sortedIndexBy.html).
+- Added support for custom delimiters in [flattenObject](https://es-toolkit.slash.page/reference/object/flattenObject.html).
+- Added support for `fromIndex` parameters in [find](https://es-toolkit.slash.page/reference/compat/array/find.html).
+- Fixed a bug in [cloneDeep](https://es-toolkit.slash.page/reference/object/cloneDeep.html) and [cloneDeepWith](https://es-toolkit.slash.page/reference/object/cloneDeepWith.html) that cloned uncloneable objects.
+
 ## Version v1.31.0
 
 Released on December 27th, 2024.
