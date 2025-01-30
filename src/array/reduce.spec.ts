@@ -24,7 +24,7 @@ describe('reduce', () => {
 
   it('creates an object counting occurrences of elements', () => {
     const input = ['a', 'b', 'a', 'c', 'b', 'a'];
-    const result = reduce(input, (acc, cur) => (acc[cur] = (acc[cur] ?? 0) + 1, acc), {} as Record<string, number>);
+    const result = reduce(input, (acc, cur) => ((acc[cur] = (acc[cur] ?? 0) + 1), acc), {} as Record<string, number>);
     expect(result).toEqual({ a: 3, b: 2, c: 1 });
   });
 
