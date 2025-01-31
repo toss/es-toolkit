@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-function stubObject(): {};
+function stubObject(): Record<PropertyKey, never>;
 ```
 
 ### 戻り値
 
-(`Object`): 空のオブジェクト。
+(`Record<PropertyKey, never>`): 空のオブジェクト。
 
 ## 例
 
