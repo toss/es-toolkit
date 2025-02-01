@@ -2,22 +2,23 @@ import { toNumber } from '../util/toNumber.ts';
 import { toString } from '../util/toString.ts';
 
 /**
- * Multiply two numbers.
+ * Divide two numbers.
  *
  * If either of the numbers is `NaN`, the function returns `NaN`.
  *
- * @param {number} value The first number in a multiplication
- * @param {number} other The second number in a multiplication
- * @returns {number} The product of value and other
+ * @param {number} value The first number in a division.
+ * @param {number} other The second number in a division.
+ * @returns {number} The quotient of value and other.
  *
  * @example
- * multiply(2, 3); // => 6
- * multiply(2, NaN); // => NaN
- * multiply(NaN, 3); // => NaN
- * multiply(NaN, NaN); // => NaN
+ * divide(6, 3); // => 2
+ * divide(2, NaN); // => NaN
+ * divide(NaN, 3); // => NaN
+ * divide(NaN, NaN); // => NaN
  */
+export function divide(value: number, other: number): number {
+  console.log(value, other);
 
-export function multiply(value: number, other: number): number {
   if (value === undefined && other === undefined) {
     return 1;
   }
@@ -34,5 +35,5 @@ export function multiply(value: number, other: number): number {
     other = toNumber(other);
   }
 
-  return value * other;
+  return value / other;
 }

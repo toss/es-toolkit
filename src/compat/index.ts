@@ -110,6 +110,7 @@ export { throttle } from './function/throttle.ts';
 export { add } from './math/add.ts';
 export { ceil } from './math/ceil.ts';
 export { clamp } from './math/clamp.ts';
+export { divide } from './math/divide.ts';
 export { floor } from './math/floor.ts';
 export { inRange } from './math/inRange.ts';
 export { max } from './math/max.ts';
