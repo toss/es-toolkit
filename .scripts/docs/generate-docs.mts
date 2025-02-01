@@ -48,6 +48,14 @@ async function run() {
   );
 
   await renderDocs(docsPaths, compatItems, { compat: true });
+
+  const fpItems = differenceWith(
+    toDocumentationItems(await doc(`file:${path.join(basePath, 'fp', 'index.ts')}`)),
+    items,
+    (x, y) => x.item.name === y.item.name
+  );
+
+  await renderDocs(docsPaths, fpItems, { fp: true });
 }
 
 async function renderDocs(docsPaths: DocumentationPaths, items: DocumentationItems, options: RenderOptions = {}) {
