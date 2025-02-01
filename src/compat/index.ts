@@ -148,6 +148,8 @@ export { propertyOf } from './object/propertyOf.ts';
 export { set } from './object/set.ts';
 export { toDefaulted } from './object/toDefaulted.ts';
 export { unset } from './object/unset.ts';
+export { values } from './object/values.ts';
+export { valuesIn } from './object/valuesIn.ts';
 
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';

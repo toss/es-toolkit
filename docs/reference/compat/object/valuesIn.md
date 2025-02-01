@@ -1,4 +1,4 @@
-# keysIn
+# valuesIn
 
 ::: info
 This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Retrieves the names of string-keyed properties from an object, including those inherited from its prototype.
+Retrieves the values from an object, including those inherited from its prototype.
 
 - If the value is not an object, it is converted to an object.
 - Array-like objects are treated like arrays.
@@ -17,27 +17,22 @@ Retrieves the names of string-keyed properties from an object, including those i
 ## Signature
 
 ```typescript
-function keysIn(object?: unknown): string[];
+function valuesIn<T>(object: Record<PropertyKey, T> | null | undefined): T[];
+function valuesIn<T>(arr: ArrayLike<T>): T[];
+function valuesIn<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
 ```
 
 ### Parameters
 
-- `object` (`unknown`): The object to inspect for keys.
+- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): The object to query.
 
 ### Returns
 
-(`string[]`): An array of string keys from the object.
+(`T[]`): Returns an array of property values.
 
 ## Examples
 
 ```typescript
-const obj = { a: 1, b: 2 };
-console.log(keysIn(obj)); // ['a', 'b']
-
-const arr = [1, 2, 3];
-console.log(keysIn(arr)); // ['0', '1', '2']
-
-function Foo() {}
-Foo.prototype.a = 1;
-console.log(keysIn(new Foo())); // ['a']
+const obj = { a: 1, b: 2, c: 3 };
+valuesIn(obj); // => [1, 2, 3]
 ```
