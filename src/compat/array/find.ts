@@ -1,6 +1,4 @@
-import { property } from '../object/property.ts';
-import { matches } from '../predicate/matches.ts';
-import { matchesProperty } from '../predicate/matchesProperty.ts';
+import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Finds the first item in an array that matches the given predicate function.
@@ -183,7 +181,7 @@ export function find<T extends Record<string, unknown>>(
  */
 export function find<T>(
   source: ArrayLike<T> | Record<any, any> | null | undefined,
-  doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
+  _doesMatch: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey,
   fromIndex = 0
 ): T | undefined {
   if (!source) {
@@ -193,41 +191,23 @@ export function find<T>(
     fromIndex = Math.max(source.length + fromIndex, 0);
   }
 
+  const doesMatch = iteratee(_doesMatch);
   const values = Array.isArray(source) ? source.slice(fromIndex) : Object.values(source).slice(fromIndex);
 
-  switch (typeof doesMatch) {
-    case 'function': {
-      if (!Array.isArray(source)) {
-        const keys = Object.keys(source) as Array<keyof T>;
+  if (typeof doesMatch === 'function' && !Array.isArray(source)) {
+    const keys = Object.keys(source).slice(fromIndex) as Array<keyof T>;
 
-        for (let i = 0; i < keys.length; i++) {
-          const key = keys[i];
-          const value = source[key] as T;
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const value = source[key] as T;
 
-          if (doesMatch(value, key as number, source)) {
-            return value;
-          }
-        }
-
-        return undefined;
-      }
-
-      return values.find(doesMatch);
-    }
-    case 'object': {
-      if (Array.isArray(doesMatch) && doesMatch.length === 2) {
-        const key = doesMatch[0];
-        const value = doesMatch[1];
-
-        return values.find(matchesProperty(key, value));
-      } else {
-        return values.find(matches(doesMatch));
+      if (doesMatch(value, key as number, source)) {
+        return value;
       }
     }
-    case 'symbol':
-    case 'number':
-    case 'string': {
-      return values.find(property(doesMatch));
-    }
+
+    return undefined;
   }
+
+  return values.find(doesMatch);
 }

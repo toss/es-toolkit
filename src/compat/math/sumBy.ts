@@ -93,13 +93,17 @@ export function sumBy<T>(array: ArrayLike<T> | null | undefined, iteratee?: (val
     iteratee = iterateeToolkit(iteratee);
   }
 
-  let result: any = iteratee ? iteratee(array[0]) : array[0];
+  let result: any = undefined;
 
-  for (let i = 1; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     const current = iteratee ? iteratee(array[i]) : array[i];
 
     if (current !== undefined) {
-      result += current;
+      if (result === undefined) {
+        result = current;
+      } else {
+        result += current;
+      }
     }
   }
 
