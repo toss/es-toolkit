@@ -1,4 +1,3 @@
-import { identity } from '../../function';
 import { property } from '../object/property';
 import { isArray } from '../predicate/isArray';
 import { matches } from '../predicate/matches';
@@ -100,7 +99,9 @@ export function maxBy<T>(
   items: readonly T[],
   iteratee: ((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>
 ): T | undefined {
-  if (!items.length) return undefined;
+  if (!items.length) {
+    return undefined;
+  }
   let getValue: (element: T) => number | undefined;
 
   switch (typeof iteratee) {
