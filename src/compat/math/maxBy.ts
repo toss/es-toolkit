@@ -1,7 +1,5 @@
 import { property } from '../object/property';
 import { isArray } from '../predicate/isArray';
-import { matches } from '../predicate/matches';
-import { matchesProperty } from '../predicate/matchesProperty';
 
 /**
  * Finds the element in an array that has the maximum value when applying
