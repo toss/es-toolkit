@@ -143,6 +143,7 @@ export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
 export { omit } from './object/omit.ts';
 export { pick } from './object/pick.ts';
+export { pickBy } from './object/pickBy.ts';
 export { property } from './object/property.ts';
 export { propertyOf } from './object/propertyOf.ts';
 export { set } from './object/set.ts';
