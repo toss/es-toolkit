@@ -102,29 +102,44 @@ export function maxBy<T>(
   if (!items.length) {
     return undefined;
   }
+
   let getValue: (element: T) => number | undefined;
 
   switch (typeof iteratee) {
     case 'function':
       getValue = (item: T) => {
         const value = iteratee(item);
-        return value === undefined || isNaN(value) ? undefined : value;
+        return typeof value === 'number' ? value : undefined;
+      };
+      break;
+    case 'number':
+      getValue = (item: T) => {
+        if (Array.isArray(item)) {
+          const value = item[iteratee];
+          return typeof value === 'number' ? value : undefined;
+        }
+        return undefined;
       };
       break;
     case 'string':
     case 'symbol':
       getValue = (item: T) => {
-        const value = property(iteratee)(item);
-        return value === undefined || isNaN(value) ? undefined : value;
+        const value = property(iteratee as keyof T)(item);
+        return typeof value === 'number' ? value : undefined;
       };
       break;
     case 'object':
       if (isArray(iteratee)) {
-        const predicate = matchesProperty(iteratee[0], iteratee[1]);
-        getValue = (item: T) => (predicate(item) ? Infinity : -Infinity);
+        getValue = (item: T) => {
+          const value = property(iteratee[0] as keyof T)(item);
+          return typeof value === 'number' ? value : undefined;
+        };
       } else {
-        const predicate = matches(iteratee);
-        getValue = (item: T) => (predicate(item) ? Infinity : -Infinity);
+        getValue = (item: T) => {
+          const key = Object.keys(iteratee)[0] as keyof T;
+          const value = property(key)(item);
+          return typeof value === 'number' ? value : undefined;
+        };
       }
       break;
     default:
@@ -132,11 +147,11 @@ export function maxBy<T>(
   }
 
   let maxElement: T | undefined = undefined;
-  let maxValue: number = -Infinity;
+  let maxValue: number | undefined = undefined;
 
   for (let i = 0; i < items.length; i++) {
     const value = getValue(items[i]);
-    if (value !== undefined && value > maxValue) {
+    if (value !== undefined && !Number.isNaN(value) && (maxValue === undefined || value > maxValue)) {
       maxValue = value;
       maxElement = items[i];
     }
