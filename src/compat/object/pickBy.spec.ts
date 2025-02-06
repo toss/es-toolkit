@@ -42,4 +42,18 @@ describe('pickBy', () => {
     const result = pickBy(obj);
     expect(result).toEqual(obj);
   });
+
+  it('should return an empty object if the object is null', () => {
+    const obj = null;
+    const shouldPick = (value: string) => typeof value === 'string';
+    const result = pickBy(obj as unknown as object, shouldPick);
+    expect(result).toEqual({});
+  });
+
+  it('should return an empty object if the object is undefined', () => {
+    const obj = undefined;
+    const shouldPick = (value: string) => typeof value === 'string';
+    const result = pickBy(obj as unknown as object, shouldPick);
+    expect(result).toEqual({});
+  });
 });
