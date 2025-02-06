@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Determines the lowest index at which a given value should be inserted into a sorted array to maintain its sort order. Unlike [sortedIndex](./sortedIndex.md), this function allows you to specify a custom iteratee function to extract the value for comparison.
+Determines the highest index at which a given value should be inserted into a sorted array to maintain its sort order. Unlike [sortedLastIndex](./sortedLastIndex.md), this function allows you to specify a custom iteratee function to extract the value for comparison.
 
 - The iteratee is invoked for both the array elements and the value being inserted.
 - This is particularly useful for arrays containing objects or custom data types where the sort order is based on specific properties or computed values.
@@ -14,7 +14,7 @@ Determines the lowest index at which a given value should be inserted into a sor
 ## Signature
 
 ```typescript
-function sortedIndexBy<T, R>(
+function sortedLastIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
   iteratee: (value: T) => R,
@@ -38,18 +38,18 @@ function sortedIndexBy<T, R>(
 ## Example
 
 ```typescript
-import { sortedIndexBy } from 'es-toolkit/compat';
+import { sortedLastIndexBy } from 'es-toolkit/compat';
 
-const objects = [{ x: 10 }, { x: 20 }, { x: 30 }];
+const objects = [{ x: 10 }, { x: 20 }, { x: 20 }, { x: 30 }];
 
 // Use an iteratee to extract the `x` property for comparison
-sortedIndexBy(objects, { x: 25 }, o => o.x);
-// Return value: 2
-// Explanation: Based on the `x` property, `{ x: 25 }` returns index 2.
+sortedLastIndexBy(objects, { x: 20 }, o => o.x);
+// Return value: 3
+// Explanation: Based on the `x` property, `{ x: 20 }` returns index 3.
 
 // Handle custom sorting logic
 const strings = ['apple', 'banana', 'cherry'];
-sortedIndexBy(strings, 'apricot', str => str.length);
+sortedLastIndexBy(strings, 'apricot', str => str.length);
 // Return value: 3
 // Explanation: Based on the string length, 'apricot' returns index 3.
 ```
