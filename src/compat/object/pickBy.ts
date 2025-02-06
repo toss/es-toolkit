@@ -21,7 +21,9 @@ export function pickBy<T extends Record<string, any>>(
   obj: T,
   shouldPick?: (value: T[keyof T], key: keyof T) => boolean
 ): Partial<T> {
-  if (obj === null || obj === undefined) return {};
+  if (obj === null || obj === undefined) {
+    return {};
+  }
   const result: Partial<T> = {};
 
   if (shouldPick === undefined) {
