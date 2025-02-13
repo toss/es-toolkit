@@ -105,4 +105,10 @@ describe('assignIn', () => {
   it(`\`assignIn\` should coerce string sources to objects`, () => {
     expect(func({}, 'a')).toEqual({ 0: 'a' });
   });
+
+  it(`\`assignIn\` should assign properties with undefined values correctly`, () => {
+    const values = [{ workId: undefined }, { exerciseId: '1' }];
+    const result = assignIn({}, ...values);
+    expect(result).toEqual({ workId: undefined, exerciseId: '1' });
+  });
 });
