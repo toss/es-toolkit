@@ -54,6 +54,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'array'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'array'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'array'),
           ],
         },
         {
@@ -61,6 +62,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'function'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'function'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'function'),
           ],
         },
         {
@@ -68,6 +70,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'math'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'math'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'math'),
           ],
         },
         {
@@ -75,6 +78,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'object'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'object'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'object'),
           ],
         },
         {
@@ -82,6 +86,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'predicate'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'predicate'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'predicate'),
           ],
         },
         {
@@ -89,6 +94,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'promise'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'promise'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'promise'),
           ],
         },
         {
@@ -96,6 +102,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'string'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'string'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'string'),
           ],
         },
         {
@@ -103,6 +110,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'util'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'util'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'util'),
           ],
         },
         {
@@ -110,6 +118,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'error'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'error'),
+            ...getSidebarItems.fp('ja', docsRoot, 'ja', 'reference', 'fp', 'error'),
           ],
         },
       ]),

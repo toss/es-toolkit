@@ -4,6 +4,7 @@
   "includeEntrypoints": [
     "array",
     "compat",
+    "fp",
     "function",
     "math",
     "object",
