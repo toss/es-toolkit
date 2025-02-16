@@ -3,7 +3,7 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
 interface FlattenObjectOptions {
   /**
    * The delimiter to use between nested keys.
-   * @default '.''
+   * @default '.'
    */
   delimiter?: string;
 }
