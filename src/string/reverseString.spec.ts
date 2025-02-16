@@ -10,12 +10,9 @@ describe('reverseString', () => {
     expect(reverseString('foo bar')).toBe('rab oof');
   });
 
-  it('should reverse a string with emojis', () => {
-    expect(reverseString('foo 😄 bar')).toBe('rab 😄 oof');
-  });
-
   it('should reverse a string with Unicode characters', () => {
-    expect(reverseString('𝓗𝓮𝓵𝓵𝓸')).toBe('𝓸𝓵𝓵𝓮𝓗');
+    expect(reverseString('foo 😄 bar')).toBe('rab 😄 oof');
+    expect(reverseString('foo 𝌆 bar')).toBe('rab 𝌆 oof');
   });
 
   it('should reverse an empty string', () => {
