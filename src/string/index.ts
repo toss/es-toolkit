@@ -14,6 +14,7 @@ export { startCase } from './startCase.ts';
 export { trim } from './trim.ts';
 export { trimEnd } from './trimEnd.ts';
 export { trimStart } from './trimStart.ts';
+export { truncate } from './truncate.ts';
 export { unescape } from './unescape.ts';
 export { upperCase } from './upperCase.ts';
 export { upperFirst } from './upperFirst.ts';
