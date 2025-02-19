@@ -2,7 +2,7 @@ import { RenderOptions } from './types.ts';
 import { DocumentationItem } from '../../types/DocumentationItem.ts';
 
 export function render(item: DocumentationItem, options: RenderOptions = {}) {
-  return [title(item.name), compatNotice(options), item.description, signature(item), examples(item)]
+  return [title(item.name), getNotice(options), item.description, signature(item), examples(item)]
     .filter(x => x != null)
     .join('\n\n');
 }
@@ -11,18 +11,28 @@ function title(name: string) {
   return `# ${name}`;
 }
 
-function compatNotice(options: RenderOptions) {
-  if (!options.compat) {
-    return null;
-  }
-
-  return `
+function getNotice(options: RenderOptions) {
+  if (options.compat) {
+    return `
 ::: info
 이 함수는 호환성을 위한 \`es-toolkit/compat\` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
 
 \`es-toolkit/compat\`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 `.trim();
+  }
+
+  if (options.fp) {
+    return `
+::: info
+이 함수는 함수형 프로그래밍 방식의 코드 작성을 지원하기 위한 \`es-toolkit/fp\` 에서만 가져올 수 있어요.
+
+\`es-toolkit/fp\`에서 함수를 가져오면 pipe 문법을 사용하거나 인자 입력 갯수에 따라 자동으로 커링되는 함수를 사용할 수 있어요.
+:::
+`.trim();
+  }
+
+  return null;
 }
 
 function signature(item: DocumentationItem) {

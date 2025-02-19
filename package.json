@@ -19,6 +19,7 @@
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
     "./compat": "./src/compat/index.ts",
+    "./fp": "./src/fp/index.ts",
     "./error": "./src/error/index.ts",
     "./function": "./src/function/index.ts",
     "./math": "./src/math/index.ts",
@@ -150,6 +151,16 @@
           "default": "./dist/util/index.js"
         }
       },
+      "./fp": {
+        "import": {
+          "types": "./dist/fp/index.d.mts",
+          "default": "./dist/fp/index.mjs"
+        },
+        "require": {
+          "types": "./dist/fp/index.d.ts",
+          "default": "./dist/fp/index.js"
+        }
+      },
       "./package.json": "./package.json"
     }
   },
@@ -168,6 +179,7 @@
     "@types/tar": "^6.1.13",
     "@vitest/coverage-istanbul": "^2.1.2",
     "@vue/compiler-sfc": "^3.5.10",
+    "ast-types": "^0.14.2",
     "broken-link-checker": "^0.7.8",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
@@ -205,6 +217,7 @@
     "bench": "vitest bench",
     "lint": "eslint --config eslint.config.mjs",
     "format": "prettier --write .",
-    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0"
+    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0",
+    "fp": "sh ./.scripts/fp/create-fp-version.sh $0"
   }
 }
