@@ -45,4 +45,12 @@ describe('trimEnd', () => {
   it('should trim the string without giving the second parameter, which defaults to whitespace', () => {
     expect(trimEnd('  hello world  ')).toEqual('  hello world');
   });
+
+  it('should remove multiple characters from the end of the string', () => {
+    expect(trimEnd('abc-_-', '_-')).toEqual('abc');
+  });
+
+  it('should remove multiple characters from the end of the string when an array of characters is provided', () => {
+    expect(trimEnd('abc-_-', ['-', '_'])).toEqual('abc');
+  });
 });

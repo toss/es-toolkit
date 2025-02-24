@@ -1,3 +1,5 @@
+import { flatMap } from '../array/flatMap.ts';
+
 /**
  * Removes trailing whitespace or specified characters from a string.
  *
@@ -16,20 +18,11 @@ export function trimEnd(str: string, chars?: string | string[]): string {
     return str.trimEnd();
   }
 
+  const charsToUse = Array.isArray(chars) ? flatMap(chars, char => char.split('')) : chars;
   let endIndex = str.length;
 
-  switch (typeof chars) {
-    case 'string': {
-      while (endIndex > 0 && str[endIndex - 1] === chars) {
-        endIndex--;
-      }
-      break;
-    }
-    case 'object': {
-      while (endIndex > 0 && chars.includes(str[endIndex - 1])) {
-        endIndex--;
-      }
-    }
+  while (endIndex > 0 && charsToUse.includes(str[endIndex - 1])) {
+    endIndex--;
   }
 
   return str.substring(0, endIndex);

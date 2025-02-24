@@ -1,3 +1,5 @@
+import { flatMap } from '../array/flatMap.ts';
+
 /**
  * Removes leading whitespace or specified characters from a string.
  *
@@ -15,20 +17,12 @@ export function trimStart(str: string, chars?: string | string[]): string {
   if (chars === undefined) {
     return str.trimStart();
   }
+
+  const charsToUse = Array.isArray(chars) ? flatMap(chars, char => char.split('')) : chars;
   let startIndex = 0;
 
-  switch (typeof chars) {
-    case 'string': {
-      while (startIndex < str.length && str[startIndex] === chars) {
-        startIndex++;
-      }
-      break;
-    }
-    case 'object': {
-      while (startIndex < str.length && chars.includes(str[startIndex])) {
-        startIndex++;
-      }
-    }
+  while (startIndex < str.length && charsToUse.includes(str[startIndex])) {
+    startIndex++;
   }
 
   return str.substring(startIndex);
