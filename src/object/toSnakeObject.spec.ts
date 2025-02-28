@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { toSnakeObject } from './toSnakeObject';
 
-describe.only('toSnakeObject', () => {
+describe('toSnakeObject', () => {
   it('should convert object keys to snake_case', () => {
     const input = {
       firstName: 'Gweesin',
