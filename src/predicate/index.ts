@@ -23,5 +23,6 @@ export { isString } from './isString.ts';
 export { isSymbol } from './isSymbol.ts';
 export { isTypedArray } from './isTypedArray.ts';
 export { isUndefined } from './isUndefined.ts';
+export { isURL } from './isURL.ts';
 export { isWeakMap } from './isWeakMap.ts';
 export { isWeakSet } from './isWeakSet.ts';
