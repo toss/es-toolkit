@@ -12,10 +12,14 @@ import { sortedIndex } from './sortedIndex';
  *
  */
 export function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number {
-  if (!array?.length) return -1;
+  if (!array?.length) {
+    return -1;
+  }
 
   const index = sortedIndex(array, value);
-  if (index < array.length && areValuesEqual(array[index], value)) return index;
+  if (index < array.length && areValuesEqual(array[index], value)) {
+    return index;
+  }
   return -1;
 }
 
