@@ -32,7 +32,7 @@ const numbers = [11, 22, 33, 44, 55];
 const unSortedNumbers = [55, 33, 22, 11, 44];
 
 // 일반적인 경우
-sortedIndexBy(numbers, 11);
+sortedIndexOf(numbers, 11);
 // 반환값: 0
 // 설명: numbers 배열 기준으로 11과 같은 값의 위치는 0이예요.
 
@@ -42,7 +42,7 @@ sortedIndexOf(numbers, 30);
 // 설명: 30은 배열 내에 존재하지 않으므로 -1을 반환해요.
 
 // 빈 배열
-sortedIndexOf([], 30); 
+sortedIndexOf([], 30);
 // 반환값: -1
 // 설명: 빈 배열 내에서 값을 찾으면 -1을 반환해요.
 
@@ -50,5 +50,4 @@ sortedIndexOf([], 30);
 sortedIndexOf(unSortedNumbers, 11);
 // 반환값: -1
 // 설명: 정렬되지 않은 배열을 사용할 시에는 -1을 반환해요.
-
 ```

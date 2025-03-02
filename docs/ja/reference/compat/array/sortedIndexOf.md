@@ -42,7 +42,7 @@ sortedIndexOf(numbers, 30);
 // 説明: 30 は配列内に存在しないため、-1 を返します。
 
 // 空の配列
-sortedIndexOf([], 30); 
+sortedIndexOf([], 30);
 // 戻り値: -1
 // 説明: 空の配列内で値を探すと -1 を返します。
 
