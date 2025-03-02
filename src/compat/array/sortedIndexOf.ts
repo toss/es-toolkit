@@ -1,7 +1,4 @@
 import { sortedIndex } from './sortedIndex';
-import { isNull, isUndefined } from '../../predicate';
-import { isNaN } from '../predicate/isNaN';
-import { isSymbol } from '../predicate/isSymbol';
 
 /**
  * This method is like `indexOf` but performs a binary search on a sorted array.
