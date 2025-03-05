@@ -166,7 +166,7 @@ describe('flattenObject', function () {
             d: [2, 3],
           },
         },
-        { delimiter: '/' }
+        { delimiter: '/', flattenArray: true }
       );
 
       expect(result).toEqual({
@@ -212,7 +212,7 @@ describe('flattenObject', function () {
             },
           },
         },
-        { delimiter: '_' }
+        { delimiter: '_', flattenArray: true }
       );
 
       expect(result).toEqual({
