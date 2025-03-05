@@ -12,7 +12,7 @@ function takeWhile<T>(arr: T[], shouldContinueTaking: (element: T) => boolean): 
 ### 파라미터
 
 - `arr` (`T[]`): 요소를 가져올 배열이에요.
-- `shouldContinueTaking` (`(item: T) => boolean`) 각 요소와 함께 호출되는 조건 함수예요. 이 함수가 `true`를 반환하는 동안 요소들이 결과에 포함돼요.
+- `shouldContinueTaking` (`(item: T) => boolean`): 각 요소와 함께 호출되는 조건 함수예요. 이 함수가 `true`를 반환하는 동안 요소들이 결과에 포함돼요.
 
 ### 반환 값
 
