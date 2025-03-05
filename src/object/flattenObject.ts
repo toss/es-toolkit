@@ -41,7 +41,7 @@ interface FlattenObjectOptions {
  * // }
  */
 export function flattenObject(object: object, { delimiter = '.', flattenArray = false }: FlattenObjectOptions = {}): Record<string, any> {
-  return flattenObjectImpl(object, '', delimiter);
+  return flattenObjectImpl(object, '', delimiter, flattenArray);
 }
 
 function flattenObjectImpl(object: object, prefix = '', delimiter = '.', flattenArray = false): Record<string, any> {
