@@ -55,12 +55,12 @@ function flattenObjectImpl(object: object, prefix = '', delimiter = '.', flatten
     const prefixedKey = prefix ? `${prefix}${delimiter}${key}` : key;
 
     if (isPlainObject(value) && Object.keys(value).length > 0) {
-      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter, flattenArray));
       continue;
     }
 
     if (Array.isArray(value) && flattenArray) {
-      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter, flattenArray));
       continue;
     }
 
