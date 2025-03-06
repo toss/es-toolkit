@@ -40,7 +40,10 @@ interface FlattenObjectOptions {
  * //   'd.1': 3
  * // }
  */
-export function flattenObject(object: object, { delimiter = '.', flattenArray = false }: FlattenObjectOptions = {}): Record<string, any> {
+export function flattenObject(
+  object: object,
+  { delimiter = '.', flattenArray = false }: FlattenObjectOptions = {}
+): Record<string, any> {
   return flattenObjectImpl(object, '', delimiter, flattenArray);
 }
 
