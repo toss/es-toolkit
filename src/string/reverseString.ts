@@ -8,7 +8,7 @@
  *
  * @example
  * const reversedStr1 = reverseString('hello') // returns 'olleh'
- * const reversedStr2 = reverseString('PascalCase') // returns 'esaClaP'
+ * const reversedStr2 = reverseString('PascalCase') // returns 'esaClacsaP'
  * const reversedStr3 = reverseString('foo 😄 bar') // returns 'rab 😄 oof'
  */
 export function reverseString(value: string): string {

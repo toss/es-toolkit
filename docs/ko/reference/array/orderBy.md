@@ -25,7 +25,7 @@ function orderBy<T extends object>(
 
 - `arr` (`T[]`): 정렬할 객체 배열.
 - `criteria` (`Array<((item: T) => unknown) | keyof T>`): 정렬할 기준. 객체의 프로퍼티 이름이나 함수를 쓸 수 있어요.
-- `orders` (`Array<'asc' | 'desc'>)`): 각 키에 대한 정렬 방향 배열('asc'는 오름차순, 'desc'는 내림차순).
+- `orders` (`Array<'asc' | 'desc'>`): 각 키에 대한 정렬 방향 배열('asc'는 오름차순, 'desc'는 내림차순).
 
 ### 반환 값
 

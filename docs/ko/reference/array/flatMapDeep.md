@@ -13,7 +13,7 @@ function flatMapDeep<T, U>(arr: T[], iteratee: (item: T) => U): Array<ExtractNes
 ### 파라미터
 
 - `arr` (`T[]`): 평탄화할 중첩 배열이에요.
-- `iteratee` (`T[]`): 각 배열 요소를 매핑하는 함수예요.
+- `iteratee` (`(item: T) => U)`): 각 배열 요소를 매핑하는 함수예요.
 
 ### 반환 값
 
