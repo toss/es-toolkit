@@ -114,6 +114,7 @@ export { divide } from './math/divide.ts';
 export { floor } from './math/floor.ts';
 export { inRange } from './math/inRange.ts';
 export { max } from './math/max.ts';
+export { maxBy } from './math/maxBy.ts';
 export { min } from './math/min.ts';
 export { multiply } from './math/multiply.ts';
 export { parseInt } from './math/parseInt.ts';
