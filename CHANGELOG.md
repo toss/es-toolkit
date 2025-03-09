@@ -1,8 +1,18 @@
 # es-toolkit Changelog
 
+## Version v1.33.0
+
+Released on March 9th, 2025.
+
+- Added support for [reverseString](https://es-toolkit.slash.page/reference/string/reverseString.html) and [isJSON](https://es-toolkit.slash.page/reference/predicate/isJSON.html).
+- Introduced compatibility functions for [pullAllBy](https://es-toolkit.slash.page/reference/compat/array/pullAllBy.html), [intersectionWith](https://es-toolkit.slash.page/reference/array/intersectionWith.html), [findLast](https://es-toolkit.slash.page/reference/compat/array/findLast.html), [reduce](https://es-toolkit.slash.page/reference/compat/array/reduce.html), [reduceRight](https://es-toolkit.slash.page/reference/compat/array/reduceRight.html), [divide](https://es-toolkit.slash.page/reference/compat/math/divide.html), [values](https://es-toolkit.slash.page/reference/compat/object/values.html), [valuesIn](https://es-toolkit.slash.page/reference/compat/object/valuesIn.html), [maxBy](https://es-toolkit.slash.page/reference/compat/math/maxBy.html), and [pickBy](https://es-toolkit.slash.page/reference/compat/object/pickBy.html).
+- Fixed package exports on React Native so that `es-toolkit` can be used in React Native projects.
+- Fixed a bug in [sum](https://es-toolkit.slash.page/reference/math/sum.html) where passing `undefined` values like `sum([undefined, 1, 2, 3])` resulted in `NaN`, which was different from lodash.
+- Fixed a bug in [assignIn](https://es-toolkit.slash.page/reference/compat/object/assignIn.html) that didn't assign keys with undefined values.
+
 ## Version v1.32.0
 
-Released on January 30th, 2024.
+Released on January 30th, 2025.
 
 - Added support for [Semaphore](https://es-toolkit.slash.page/reference/promise/Semaphore.html), [Mutex](https://es-toolkit.slash.page/reference/promise/Mutex.html), [isPromise](https://es-toolkit.slash.page/reference/predicate/isPromise.html), and [retry](https://es-toolkit.slash.page/reference/function/retry.html).
 - Introduced compatibility functions for [multiply](https://es-toolkit.slash.page/reference/compat/math/multiply.html), [sortedIndex](https://es-toolkit.slash.page/reference/compat/array/sortedIndex.html), and [sortedIndexBy](https://es-toolkit.slash.page/reference/compat/array/sortedIndexBy.html).
