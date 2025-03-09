@@ -1,3 +1,6 @@
+import { range } from "../../math/range.ts";
+import { isArrayLike } from "../predicate/isArrayLike.ts";
+
 /**
  * Creates a new object composed of the properties that satisfy the predicate function.
  *
@@ -19,22 +22,27 @@
  */
 export function pickBy<T extends Record<string, any>>(
   obj: T,
-  shouldPick?: (value: T[keyof T], key: keyof T) => boolean
+  shouldPick?: (value: T[keyof T], key: keyof T, obj: T) => boolean,
 ): Partial<T> {
-  if (obj === null || obj === undefined) {
+  if (obj == null) {
     return {};
   }
+
   const result: Partial<T> = {};
 
-  if (shouldPick === undefined) {
+  if (shouldPick == null) {
     return obj;
   }
-  const keys = Object.keys(obj) as Array<keyof T>;
+
+  const keys = isArrayLike(obj)
+    ? range(0, obj.length)
+    : Object.keys(obj) as Array<keyof T>;
+
   for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
+    const key = keys[i].toString() as keyof T;
     const value = obj[key];
 
-    if (shouldPick(value, key)) {
+    if (shouldPick(value, key, obj)) {
       result[key] = value;
     }
   }
