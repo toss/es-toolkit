@@ -1,5 +1,5 @@
-import { maxBy as maxByToolkit } from "../../array/maxBy.ts";
-import { iteratee as iterateeToolkit } from "../util/iteratee.ts";
+import { maxBy as maxByToolkit } from '../../array/maxBy.ts';
+import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
 /**
  * Finds the element in an array that has the maximum value when applying
@@ -31,11 +31,7 @@ import { iteratee as iterateeToolkit } from "../util/iteratee.ts";
  */
 export function maxBy<T>(
   items: ArrayLike<T> | null | undefined,
-  iteratee:
-    | ((element: T) => number)
-    | keyof T
-    | [keyof T, unknown]
-    | Partial<T>,
+  iteratee: ((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>
 ): T | undefined {
   if (items == null) {
     return undefined;
