@@ -1,8 +1,21 @@
 # isJSON
 
-Checks if a given value is a valid JSON string. A valid JSON string is one that can be successfully parsed using `JSON.parse()`. This function can be used as a type guard in TypeScript, narrowing the type of the argument to `string`.
+Checks if a given value is a valid JSON string.
 
-According to JSON specifications, string values like `null`, `true`, `false`, and numeric strings are considered valid JSON and will return true.
+A valid JSON string is one that can be successfully parsed using `JSON.parse()`. According to JSON
+specifications, valid JSON can represent:
+
+- Objects (with string keys and valid JSON values)
+- Arrays (containing valid JSON values)
+- Strings
+- Numbers
+- Booleans
+- `null`
+
+String values like `"null"`, `"true"`, `"false"`, and numeric strings (e.g., `"42"`) are considered
+valid JSON and will return true.
+
+This function serves as a type guard in TypeScript, narrowing the type of the argument to `string`.
 
 ## Interface
 
