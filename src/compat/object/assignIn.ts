@@ -142,8 +142,7 @@ function assignInImpl(object: any, source: any): any {
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-
-    if (!eq(object[key], source[key])) {
+    if (!(key in object) || !eq(object[key], source[key])) {
       object[key] = source[key];
     }
   }
