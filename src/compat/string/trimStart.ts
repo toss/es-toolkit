@@ -24,14 +24,11 @@ export function trimStart(str: string, chars?: string | string[], guard?: unknow
 
   switch (typeof chars) {
     case 'string': {
-      return trimStartToolkit(str, chars.toString().split(''));
+      return trimStartToolkit(str, chars);
     }
     case 'object': {
       if (Array.isArray(chars)) {
-        return trimStartToolkit(
-          str,
-          chars.flatMap(x => x.toString().split(''))
-        );
+        return trimStartToolkit(str, chars);
       } else {
         return trimStartToolkit(str, (chars as any).toString().split(''));
       }

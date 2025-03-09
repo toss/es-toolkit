@@ -24,14 +24,11 @@ export function trimEnd(str: string, chars?: string | string[], guard?: unknown)
 
   switch (typeof chars) {
     case 'string': {
-      return trimEndToolkit(str, chars.toString().split(''));
+      return trimEndToolkit(str, chars);
     }
     case 'object': {
       if (Array.isArray(chars)) {
-        return trimEndToolkit(
-          str,
-          chars.flatMap(x => x.toString().split(''))
-        );
+        return trimEndToolkit(str, chars);
       } else {
         return trimEndToolkit(str, (chars as any).toString().split(''));
       }
