@@ -1,8 +1,15 @@
-import { describe, expect, it, vi } from 'vitest';
-import { delay } from './delay';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Mutex } from './mutex';
 
 describe('Mutex', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should allow acquisition when the mutex is available', async () => {
     const mutex = new Mutex();
 
@@ -18,7 +25,7 @@ describe('Mutex', () => {
 
     mutex.acquire().then(spy);
 
-    await delay(0);
+    await vi.advanceTimersByTimeAsync(0);
 
     expect(spy).not.toHaveBeenCalled();
   });
@@ -43,7 +50,7 @@ describe('Mutex', () => {
 
     mutex.release();
 
-    await delay(100);
+    await vi.advanceTimersByTimeAsync(100);
 
     expect(spy).toBeCalledTimes(1);
   });

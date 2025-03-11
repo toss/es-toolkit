@@ -1,9 +1,17 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { debounce } from './debounce';
+
 // adjust the import path as necessary
-import { delay } from '../promise';
 
 describe('debounce', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should debounce function calls', async () => {
     const func = vi.fn();
     const debounceMs = 50;
@@ -13,7 +21,7 @@ describe('debounce', () => {
     debouncedFunc();
     debouncedFunc();
 
-    await delay(debounceMs * 2);
+    await vi.advanceTimersByTimeAsync(debounceMs * 2);
 
     expect(func).toHaveBeenCalledTimes(1);
   });
@@ -24,10 +32,10 @@ describe('debounce', () => {
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs / 2);
+    await vi.advanceTimersByTimeAsync(debounceMs / 2);
     expect(func).not.toHaveBeenCalled();
 
-    await delay(debounceMs / 2 + 1);
+    await vi.advanceTimersByTimeAsync(debounceMs / 2 + 1);
     expect(func).toHaveBeenCalledTimes(1);
   });
 
@@ -37,16 +45,16 @@ describe('debounce', () => {
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs / 2);
+    await vi.advanceTimersByTimeAsync(debounceMs / 2);
     debouncedFunc();
-    await delay(debounceMs / 2);
+    await vi.advanceTimersByTimeAsync(debounceMs / 2);
     debouncedFunc();
-    await delay(debounceMs / 2);
+    await vi.advanceTimersByTimeAsync(debounceMs / 2);
     debouncedFunc();
 
     expect(func).not.toHaveBeenCalled();
 
-    await delay(debounceMs + 1);
+    await vi.advanceTimersByTimeAsync(debounceMs + 1);
     expect(func).toHaveBeenCalledTimes(1);
   });
 
@@ -57,7 +65,7 @@ describe('debounce', () => {
 
     debouncedFunc();
     debouncedFunc.cancel();
-    await delay(debounceMs);
+    await vi.advanceTimersByTimeAsync(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
   });
@@ -68,9 +76,9 @@ describe('debounce', () => {
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs + 1);
+    await vi.advanceTimersByTimeAsync(debounceMs + 1);
     debouncedFunc();
-    await delay(debounceMs + 1);
+    await vi.advanceTimersByTimeAsync(debounceMs + 1);
 
     expect(func).toHaveBeenCalledTimes(2);
   });
@@ -90,7 +98,7 @@ describe('debounce', () => {
 
     debouncedFunc('test', 123);
 
-    await delay(debounceMs * 2);
+    await vi.advanceTimersByTimeAsync(debounceMs * 2);
 
     expect(func).toHaveBeenCalledTimes(1);
     expect(func).toHaveBeenCalledWith('test', 123);
@@ -106,7 +114,7 @@ describe('debounce', () => {
     debouncedFunc();
     controller.abort();
 
-    await delay(debounceMs);
+    await vi.advanceTimersByTimeAsync(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
   });
@@ -124,7 +132,7 @@ describe('debounce', () => {
 
     debouncedFunc();
 
-    await delay(debounceMs);
+    await vi.advanceTimersByTimeAsync(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
   });
@@ -141,7 +149,7 @@ describe('debounce', () => {
     debouncedFunc();
     debouncedFunc();
 
-    await new Promise(resolve => setTimeout(resolve, 150));
+    await vi.advanceTimersByTimeAsync(150);
 
     expect(func).toHaveBeenCalledTimes(1);
 

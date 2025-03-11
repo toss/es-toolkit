@@ -1,8 +1,15 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { throttle } from './throttle';
-import { delay } from '../promise';
 
 describe('throttle', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should throttle function calls', () => {
     const func = vi.fn();
     const throttledFunc = throttle(func, 100);
@@ -22,25 +29,25 @@ describe('throttle', () => {
     throttledFunc(); // should be executed
     expect(func).toHaveBeenCalledTimes(1);
 
-    await delay(throttleMs / 2);
+    await vi.advanceTimersByTimeAsync(throttleMs / 2);
     expect(func).toHaveBeenCalledTimes(1);
 
     throttledFunc(); // should be ignored
     expect(func).toHaveBeenCalledTimes(1);
 
-    await delay(throttleMs / 2 + 1);
+    await vi.advanceTimersByTimeAsync(throttleMs / 2 + 1);
     expect(func).toHaveBeenCalledTimes(1);
 
     throttledFunc(); // should be executed
     expect(func).toHaveBeenCalledTimes(2);
 
-    await delay(throttleMs / 2 - 1);
+    await vi.advanceTimersByTimeAsync(throttleMs / 2 - 1);
     expect(func).toHaveBeenCalledTimes(2);
 
     throttledFunc(); // should be ignored
     expect(func).toHaveBeenCalledTimes(2);
 
-    await delay(throttleMs / 2 + 1);
+    await vi.advanceTimersByTimeAsync(throttleMs / 2 + 1);
     expect(func).toHaveBeenCalledTimes(2);
 
     throttledFunc(); // should be executed
@@ -67,7 +74,7 @@ describe('throttle', () => {
     throttled();
     expect(func).toBeCalledTimes(1);
 
-    await delay(throttleMs + 1);
+    await vi.advanceTimersByTimeAsync(throttleMs + 1);
     expect(func).toBeCalledTimes(1);
   });
 
@@ -81,7 +88,7 @@ describe('throttle', () => {
     throttled();
     expect(func).toBeCalledTimes(1);
 
-    await delay(throttleMs + 1);
+    await vi.advanceTimersByTimeAsync(throttleMs + 1);
     expect(func).toBeCalledTimes(2);
   });
 
@@ -97,7 +104,7 @@ describe('throttle', () => {
     throttled();
     expect(func).toBeCalledTimes(0);
 
-    await delay(throttleMs + 1);
+    await vi.advanceTimersByTimeAsync(throttleMs + 1);
     expect(func).toBeCalledTimes(0);
   });
 
@@ -114,7 +121,7 @@ describe('throttle', () => {
 
     controller.abort();
 
-    await delay(throttleMs + 1);
+    await vi.advanceTimersByTimeAsync(throttleMs + 1);
     expect(func).toBeCalledTimes(1);
   });
 });

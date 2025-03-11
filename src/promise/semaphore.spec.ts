@@ -1,8 +1,15 @@
-import { describe, expect, it, vi } from 'vitest';
-import { delay } from './delay';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Semaphore } from './semaphore';
 
 describe('Semaphore', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should allow acquisition when a permit is available', async () => {
     const sema = new Semaphore(1);
 
@@ -18,7 +25,7 @@ describe('Semaphore', () => {
 
     sema.acquire().then(spy);
 
-    await delay(0);
+    await vi.advanceTimersByTimeAsync(0);
 
     expect(spy).not.toHaveBeenCalled();
   });
@@ -43,7 +50,7 @@ describe('Semaphore', () => {
 
     sema.release();
 
-    await delay(100);
+    await vi.advanceTimersByTimeAsync(100);
 
     expect(spy).toBeCalledTimes(1);
   });
@@ -60,19 +67,19 @@ describe('Semaphore', () => {
     semaphore.acquire().then(spy1);
     semaphore.acquire().then(spy2);
 
-    await delay(0);
+    await vi.advanceTimersByTimeAsync(0);
 
     expect(spy1).not.toHaveBeenCalled();
     expect(spy2).not.toHaveBeenCalled();
 
     semaphore.release();
 
-    await delay(0);
+    await vi.advanceTimersByTimeAsync(0);
 
     expect(spy1).toHaveBeenCalledTimes(1);
     expect(spy2).not.toHaveBeenCalled();
 
-    await delay(0);
+    await vi.advanceTimersByTimeAsync(0);
 
     expect(spy1).toHaveBeenCalledTimes(1);
     expect(spy2).not.toHaveBeenCalledTimes(1);
@@ -93,7 +100,7 @@ describe('Semaphore', () => {
     semaphore.acquire().then(spy1);
     semaphore.acquire().then(spy2);
 
-    await delay(0);
+    await vi.advanceTimersByTimeAsync(0);
 
     expect(spy1).toHaveBeenCalledTimes(1);
     expect(spy2).not.toHaveBeenCalled();

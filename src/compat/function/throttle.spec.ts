@@ -1,10 +1,17 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { throttle } from './throttle';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
-import { delay } from '../../promise/delay';
 
 describe('throttle', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should throttle a function', async () => {
     let callCount = 0;
     const throttled = throttle(() => {
@@ -18,7 +25,7 @@ describe('throttle', () => {
     const lastCount = callCount;
     expect(callCount).toBeGreaterThan(0);
 
-    await delay(64);
+    await vi.advanceTimersByTime(64);
 
     expect(callCount > lastCount).toBe(true);
   });
@@ -29,7 +36,7 @@ describe('throttle', () => {
 
     expect(results).toEqual(['a', 'a']);
 
-    await delay(64);
+    await vi.advanceTimersByTimeAsync(64);
 
     const results2 = [throttled('c'), throttled('d')];
     expect(results2[0]).not.toStrictEqual('a');
@@ -49,7 +56,7 @@ describe('throttle', () => {
     throttled();
     throttled();
 
-    await delay(64);
+    await vi.advanceTimersByTimeAsync(64);
 
     expect(callCount).toBe(2);
   });
@@ -63,14 +70,13 @@ describe('throttle', () => {
     throttled();
     expect(callCount).toBe(1);
 
-    await delay(64);
+    await vi.advanceTimersByTimeAsync(64);
     expect(callCount).toBe(1);
   });
 
   [0, 1].forEach(index => {
     it(`should trigger a call when invoked repeatedly${index ? ' and `leading` is `false`' : ''}`, async () => {
       let callCount = 0;
-      const limit = 1000;
       const options = index ? { leading: false } : {};
       const throttled = throttle(
         () => {
@@ -79,14 +85,14 @@ describe('throttle', () => {
         32,
         options
       );
-
-      const start = Number(new Date());
-      while (Date.now() - start < limit) {
+      for (let i = 0; i < 10; i++) {
         throttled();
+        await vi.advanceTimersByTimeAsync(10);
       }
+
       const actual = callCount > 1;
 
-      await delay(1);
+      await vi.advanceTimersByTimeAsync(1);
 
       expect(actual).toBe(true);
     });
@@ -104,16 +110,16 @@ describe('throttle', () => {
 
       throttled();
 
-      await delay(192);
+      await vi.advanceTimersByTimeAsync(192);
 
       expect(callCount).toBe(1);
       throttled();
 
-      await delay(254 - 192);
+      await vi.advanceTimersByTimeAsync(254 - 192);
 
       expect(callCount).toBe(1);
 
-      await delay(384 - 254);
+      await vi.advanceTimersByTimeAsync(384 - 254);
 
       expect(callCount).toBe(2);
     });
@@ -132,7 +138,7 @@ describe('throttle', () => {
       throttled();
       expect(callCount).toBe(1);
 
-      await delay(128);
+      await vi.advanceTimersByTimeAsync(128);
 
       expect(callCount).toBe(2);
     });
@@ -173,7 +179,7 @@ describe('throttle', () => {
       expect(withoutTrailing('a')).toBe('a');
       expect(withoutTrailing('b')).toBe('a');
 
-      await delay(256);
+      await vi.advanceTimersByTimeAsync(256);
 
       expect(withCount).toBe(2);
       expect(withoutCount).toBe(1);
@@ -193,12 +199,12 @@ describe('throttle', () => {
       throttled();
       throttled();
 
-      await delay(96);
+      await vi.advanceTimersByTimeAsync(96);
 
       throttled();
       throttled();
 
-      await delay(192 - 96);
+      await vi.advanceTimersByTimeAsync(192 - 96);
 
       expect(callCount).toBeGreaterThan(1);
     });
@@ -222,7 +228,7 @@ describe('throttle', () => {
 
     funced();
 
-    await delay(32);
+    await vi.advanceTimersByTimeAsync(32);
 
     funced();
     expect(callCount).toBe(isDebounce ? 1 : 2);
@@ -239,7 +245,7 @@ describe('throttle', () => {
 
     object.funced();
 
-    await delay(64);
+    await vi.advanceTimersByTimeAsync(64);
     expect(actual).toEqual(expected);
   });
 
@@ -266,7 +272,7 @@ describe('throttle', () => {
     funced.call(next[0], next[1]);
     expect(actual).toEqual(expected.slice(0, isDebounce ? 0 : 1));
 
-    await delay(256);
+    await vi.advanceTimersByTimeAsync(256);
 
     expect(actual).toEqual(expected.slice(0, actual.length));
   });
@@ -285,7 +291,7 @@ describe('throttle', () => {
     funced();
     funced.cancel();
 
-    await delay(64);
+    await vi.advanceTimersByTimeAsync(64);
 
     expect(callCount).toBe(0);
   });
@@ -301,7 +307,7 @@ describe('throttle', () => {
     expect(funced()).toBe(2);
     funced();
 
-    await delay(64);
+    await vi.advanceTimersByTimeAsync(64);
     expect(callCount).toBe(3);
   });
 
@@ -313,7 +319,7 @@ describe('throttle', () => {
     funced();
     expect(funced.flush()).toBe(1);
 
-    await delay(64);
+    await vi.advanceTimersByTimeAsync(64);
 
     expect(callCount).toBe(1);
   });
@@ -327,7 +333,7 @@ describe('throttle', () => {
     funced.cancel();
     expect(funced.flush()).toBe(undefined);
 
-    await delay(64);
+    await vi.advanceTimersByTimeAsync(64);
     expect(callCount).toBe(0);
   });
 });
