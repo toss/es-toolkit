@@ -91,6 +91,4 @@ sortedIndexOf(zeroPlusArray, -0);
 sortedIndexOf(arrayLike, 20);
 // 반환값: 1
 // 설명: 유사 배열 객체에서도 작동합니다.
-
-//
 ```
