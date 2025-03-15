@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { sortedIndexOf } from './sortedIndexOf';
+import { falsey } from '../_internal/falsey';
 
 describe('sortedIndexOf', () => {
   //--------------- Lodash Test Case #1 -------------------
@@ -9,6 +10,21 @@ describe('sortedIndexOf', () => {
   });
 
   //--------------- Lodash Test Case #2 -------------------
+  it(`should accept a falsey \`array\``, () => {
+    const expected = falsey.map(() => -1);
+
+    const actual = falsey.map((array, index) => {
+      try {
+        // @ts-expect-error - Testing with falsey values
+        return index === 0 ? sortedIndexOf(array, 1) : sortedIndexOf();
+      } catch (e) {
+        return;
+      }
+    });
+
+    expect(actual).toEqual(expected);
+  });
+
   it(`should return \`-1\` for an unmatched value`, () => {
     const array = [1, 2, 3];
     const empty: unknown[] = [];
@@ -21,8 +37,6 @@ describe('sortedIndexOf', () => {
     // @ts-expect-error
     expect(sortedIndexOf(array, undefined, true)).toBe(-1);
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     expect(sortedIndexOf(empty, undefined)).toBe(-1);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
@@ -68,12 +82,6 @@ describe('sortedIndexOf', () => {
   it('should not handle array with NaN Searching Number', () => {
     const array = [NaN, 2, NaN, 3, 4];
     expect(sortedIndexOf(array, 3)).toBe(-1);
-  });
-
-  // Non-existent values
-  it('should return -1 for non-existent values', () => {
-    const array = [1, 3, 5];
-    expect(sortedIndexOf(array, 2)).toBe(-1);
   });
 
   // Null/undefined handling
