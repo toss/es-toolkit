@@ -3,7 +3,7 @@ import { sortedIndexOf } from './sortedIndexOf';
 
 describe('sortedIndexOf', () => {
   //--------------- Lodash Test Case #1 -------------------
-  it('should find first occurrence in numeric array', () => {
+  it('should perform a binary search', () => {
     const array = [4, 4, 5, 5, 5, 6, 6];
     expect(sortedIndexOf(array, 5)).toBe(2);
   });
