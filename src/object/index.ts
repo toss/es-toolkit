@@ -13,3 +13,4 @@ export { omitBy } from './omitBy.ts';
 export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
 export { toMerged } from './toMerged.ts';
+export { toSnakeObject } from './toSnakeObject.ts';
