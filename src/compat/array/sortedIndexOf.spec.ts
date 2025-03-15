@@ -11,9 +11,7 @@ describe('sortedIndexOf', () => {
   //--------------- Lodash Test Case #2 -------------------
   it(`should return \`-1\` for an unmatched value`, () => {
     const array = [1, 2, 3];
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    const empty = [];
+    const empty: unknown[] = [];
 
     expect(sortedIndexOf(array, 4)).toBe(-1);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
