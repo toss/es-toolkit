@@ -91,6 +91,4 @@ sortedIndexOf(zeroPlusArray, -0);
 sortedIndexOf(arrayLike, 20);
 // Return value: 1
 // Explanation: Works with array-like objects too.
-
-//
 ```
