@@ -3,6 +3,7 @@ import { eq } from '../util/eq';
 
 /**
  * This method is like `indexOf` but performs a binary search on a sorted `array`.
+ *
  * @param {ArrayLike<T> | null | undefined} array The sorted array to inspect.
  * @param {T} value The value to search for.
  * @returns {number} Returns the index of the matched value, else -1.
