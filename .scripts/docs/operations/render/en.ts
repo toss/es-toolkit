@@ -2,7 +2,7 @@ import { RenderOptions } from './types.ts';
 import { DocumentationItem } from '../../types/DocumentationItem.ts';
 
 export function render(item: DocumentationItem, options: RenderOptions = {}) {
-  return [title(item.name), compatNotice(options), item.description, signature(item), examples(item)]
+  return [title(item.name), getNotice(options), item.description, signature(item), examples(item)]
     .filter(x => x != null)
     .join('\n\n');
 }
@@ -11,18 +11,28 @@ function title(name: string) {
   return `# ${name}`;
 }
 
-function compatNotice(options: RenderOptions) {
-  if (!options.compat) {
-    return null;
-  }
-
-  return `
+function getNotice(options: RenderOptions) {
+  if (options.compat) {
+    return `
 ::: info
 This function is only available in \`es-toolkit/compat\` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
 
 When imported from \`es-toolkit/compat\`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 `.trim();
+  }
+
+  if (options.fp) {
+    return `
+::: info
+This function can only be imported from \`es-toolkit/fp\`, which supports writing code in a functional programming style.
+
+When import code from \`es-toolkit/fp\`, you can use the pipe syntax or functions that automatically curry based on the number of input arguments.
+:::
+`.trim();
+  }
+
+  return null;
 }
 
 function signature(item: DocumentationItem) {
