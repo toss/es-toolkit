@@ -29,25 +29,66 @@ export function sortedIndexOf(array: ArrayLike | null | undefined, value: T): nu
 import { sortedIndexOf } from 'es-toolkit/compat';
 
 const numbers = [11, 22, 33, 44, 55];
-const unSortedNumbers = [55, 33, 22, 11, 44];
+const unSortedArray = [55, 33, 22, 11, 44];
+const duplicateArray = [1, 2, 2, 3, 3, 3, 4];
+const emptyArray = [];
+const zeroMinusArray = [-0];
+const zeroPlusArray = [0];
+const floatingArray = [1.1, 2.2, 3.3];
+const arrayLike = { length: 3, 0: 10, 1: 20, 2: 30 };
 
 // 通常のケース
 sortedIndexOf(numbers, 11);
 // 戻り値: 0
-// 説明: numbers 配列において 11 と同じ値の位置は 0 です。
+// 説明: numbers配列における値11の位置は0です。
+
+// 重複値
+sortedIndexOf(duplicateArray, 3);
+// 戻り値: 3
+// 説明: 値3の最初の出現インデックスは3です。
 
 // 存在しない値
 sortedIndexOf(numbers, 30);
 // 戻り値: -1
-// 説明: 30 は配列内に存在しないため、-1 を返します。
+// 説明: 30は配列に存在しないため、-1を返します。
+
+// 余分な引数
+sortedIndexOf(numbers, 22, true);
+// 戻り値: 1
+// 説明: 余分な引数を追加しても無視されます。
+
+// 浮動小数点値
+sortedIndexOf(floatingArray, 2.2);
+// 戻り値: 1
+// 説明: 配列における値2.2の位置は1です。
 
 // 空の配列
-sortedIndexOf([], 30);
+sortedIndexOf(emptyArray, 30);
 // 戻り値: -1
-// 説明: 空の配列内で値を探すと -1 を返します。
+// 説明: 空の配列で値を検索すると、-1を返します。
+
+// undefinedと空の配列
+sortedIndexOf(emptyArray, undefined);
+// 戻り値: -1
+// 説明: 空の配列で値を検索する場合、undefinedであっても常に-1を返します。
 
 // ソートされていない配列
-sortedIndexOf(unSortedNumbers, 11);
+sortedIndexOf(unSortedArray, 11);
 // 戻り値: -1
-// 説明: ソートされていない配列を使用すると -1 を返します。
+// 説明: ソートされていない配列を使用すると、-1を返します。
+
+// -0と0は同じ扱い
+sortedIndexOf(zeroMinusArray, 0);
+// 戻り値: 0
+// 説明: JavaScriptでは、-0と0は等しいとみなされます。
+
+// -0と0は同じ扱い
+sortedIndexOf(zeroPlusArray, -0);
+// 戻り値: 0
+// 説明: JavaScriptでは、-0と0は等しいとみなされます。
+
+// 配列風オブジェクト
+sortedIndexOf(arrayLike, 20);
+// 戻り値: 1
+// 説明: 配列風オブジェクトでも動作します。
 ```

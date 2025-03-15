@@ -29,25 +29,68 @@ export function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: 
 import { sortedIndexOf } from 'es-toolkit/compat';
 
 const numbers = [11, 22, 33, 44, 55];
-const unSortedNumbers = [55, 33, 22, 11, 44];
+const unSortedArray = [55, 33, 22, 11, 44];
+const duplicateArray = [1, 2, 2, 3, 3, 3, 4];
+const emptyArray = [];
+const zeroMinusArray = [-0];
+const zeroPlusArray = [0];
+const floatingArray = [1.1, 2.2, 3.3];
+const arrayLike = { length: 3, 0: 10, 1: 20, 2: 30 };
 
 // 일반적인 경우
 sortedIndexOf(numbers, 11);
 // 반환값: 0
-// 설명: numbers 배열 기준으로 11과 같은 값의 위치는 0이예요.
+// 설명: numbers 배열에서 값 11의 위치는 0입니다.
+
+// 중복된 값
+sortedIndexOf(duplicateArray, 3);
+// 반환값: 3
+// 설명: 값 3의 첫 번째 발생 인덱스는 3입니다.
 
 // 존재하지 않는 값
 sortedIndexOf(numbers, 30);
 // 반환값: -1
-// 설명: 30은 배열 내에 존재하지 않으므로 -1을 반환해요.
+// 설명: 30은 배열에 존재하지 않으므로 -1을 반환합니다.
+
+// 추가 인자 값
+sortedIndexOf(numbers, 22, true);
+// 반환값: 1
+// 설명: 추가 인자를 넣으면 무시됩니다.
+
+// 부동 소수점 값
+sortedIndexOf(floatingArray, 2.2);
+// 반환값: 1
+// 설명: 배열에서 값 2.2의 위치는 1입니다.
 
 // 빈 배열
-sortedIndexOf([], 30);
+sortedIndexOf(emptyArray, 30);
 // 반환값: -1
-// 설명: 빈 배열 내에서 값을 찾으면 -1을 반환해요.
+// 설명: 빈 배열에서 값을 검색하면 -1을 반환합니다.
+
+// undefined와 빈 배열
+sortedIndexOf(emptyArray, undefined);
+// 반환값: -1
+// 설명: 빈 배열에서 값을 검색할 때는 undefined여도 항상 -1을 반환합니다.
 
 // 정렬되지 않은 배열
-sortedIndexOf(unSortedNumbers, 11);
+sortedIndexOf(unSortedArray, 11);
 // 반환값: -1
-// 설명: 정렬되지 않은 배열을 사용할 시에는 -1을 반환해요.
+// 설명: 정렬되지 않은 배열을 사용하면 -1을 반환합니다.
+
+// -0과 0은 동일하게 취급됨
+sortedIndexOf(zeroMinusArray, 0);
+// 반환값: 0
+// 설명: JavaScript에서 -0과 0은 동일하게 취급됩니다.
+
+// -0과 0은 동일하게 취급됨
+sortedIndexOf(zeroPlusArray, -0);
+// 반환값: 0
+// 설명: JavaScript에서 -0과 0은 동일하게 취급됩니다.
+
+// 유사 배열 객체
+sortedIndexOf(arrayLike, 20);
+// 반환값: 1
+// 설명: 유사 배열 객체에서도 작동합니다.
+
+//
 ```
