@@ -2,12 +2,45 @@ import { describe, expect, it } from 'vitest';
 import { sortedIndexOf } from './sortedIndexOf';
 
 describe('sortedIndexOf', () => {
-  // Basic functionality
+  //--------------- Lodash Test Case #1 -------------------
   it('should find first occurrence in numeric array', () => {
-    const array = [4, 5, 5, 5, 6];
-    expect(sortedIndexOf(array, 5)).toBe(1);
+    const array = [4, 4, 5, 5, 5, 6, 6];
+    expect(sortedIndexOf(array, 5)).toBe(2);
   });
 
+  //--------------- Lodash Test Case #2 -------------------
+  it(`should return \`-1\` for an unmatched value`, () => {
+    const array = [1, 2, 3];
+    const empty = [];
+
+    expect(sortedIndexOf(array, 4)).toBe(-1);
+    expect(sortedIndexOf(array, 4, true)).toBe(-1);
+    expect(sortedIndexOf(array, undefined, true)).toBe(-1);
+
+    expect(sortedIndexOf(empty, undefined)).toBe(-1);
+    expect(sortedIndexOf(empty, undefined, true)).toBe(-1);
+  });
+
+  it(`should not match values on empty arrays`, () => {
+    const array = [];
+    array[-1] = 0;
+
+    expect(sortedIndexOf(array, undefined)).toBe(-1);
+    expect(sortedIndexOf(array, 0, true)).toBe(-1);
+  });
+
+  it(`should match \`NaN\``, () => {
+    const sortedArray = [1, 2, NaN, NaN];
+
+    expect(sortedIndexOf(sortedArray, NaN, true)).toBe(2);
+  });
+
+  it(`should match \`-0\` as \`0\``, () => {
+    expect(sortedIndexOf([-0], 0)).toBe(0);
+    expect(sortedIndexOf([0], -0)).toBe(0);
+  });
+
+  //--------------- Additional Test Case ---------------
   // Floating point handling
   it('should handle floating point numbers', () => {
     const array = [1.1, 2.2, 3.3];
@@ -20,14 +53,8 @@ describe('sortedIndexOf', () => {
     expect(sortedIndexOf(array, '5')).toBe(1);
   });
 
-  // Special values
-  it('should handle NaN values', () => {
-    const array = [NaN, NaN, 3];
-    const result = sortedIndexOf(array, NaN);
-    expect(result).toBe(0);
-  });
 
-  //NaN values in array
+  //NaN values in unsorted array
   it('should not handle array with NaN Searching Number', () => {
     const array = [NaN, 2, NaN, 3, 4];
     expect(sortedIndexOf(array, 3)).toBe(-1);
@@ -56,11 +83,6 @@ describe('sortedIndexOf', () => {
     const array = [0, 1, NaN, NaN, NaN, 3];
     expect(sortedIndexOf(array, NaN)).toBe(2);
     expect(sortedIndexOf(array, 0)).toBe(0);
-  });
-
-  // Empty array case
-  it('should return -1 for empty arrays', () => {
-    expect(sortedIndexOf([], 1)).toBe(-1);
   });
 
   // Symbol handling

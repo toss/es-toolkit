@@ -1,4 +1,5 @@
 import { sortedIndex } from './sortedIndex';
+import { eq } from '../util/eq';
 
 /**
  * This method is like `indexOf` but performs a binary search on a sorted `array`.
@@ -22,5 +23,3 @@ export function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: 
   }
   return -1;
 }
-
-const areValuesEqual = <T>(a: T, b: T): boolean => Object.is(a, b);
