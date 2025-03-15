@@ -11,13 +11,23 @@ describe('sortedIndexOf', () => {
   //--------------- Lodash Test Case #2 -------------------
   it(`should return \`-1\` for an unmatched value`, () => {
     const array = [1, 2, 3];
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const empty = [];
 
     expect(sortedIndexOf(array, 4)).toBe(-1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(sortedIndexOf(array, 4, true)).toBe(-1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(sortedIndexOf(array, undefined, true)).toBe(-1);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(sortedIndexOf(empty, undefined)).toBe(-1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(sortedIndexOf(empty, undefined, true)).toBe(-1);
   });
 
@@ -26,12 +36,15 @@ describe('sortedIndexOf', () => {
     array[-1] = 0;
 
     expect(sortedIndexOf(array, undefined)).toBe(-1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(sortedIndexOf(array, 0, true)).toBe(-1);
   });
 
   it(`should match \`NaN\``, () => {
     const sortedArray = [1, 2, NaN, NaN];
-
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(sortedIndexOf(sortedArray, NaN, true)).toBe(2);
   });
 
