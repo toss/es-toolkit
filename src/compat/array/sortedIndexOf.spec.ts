@@ -53,7 +53,6 @@ describe('sortedIndexOf', () => {
     expect(sortedIndexOf(array, '5')).toBe(1);
   });
 
-
   //NaN values in unsorted array
   it('should not handle array with NaN Searching Number', () => {
     const array = [NaN, 2, NaN, 3, 4];
