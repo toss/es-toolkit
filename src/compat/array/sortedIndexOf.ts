@@ -17,7 +17,7 @@ export function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: 
   }
 
   const index = sortedIndex(array, value);
-  if (index < array.length && areValuesEqual(array[index], value)) {
+  if (index < array.length && eq(array[index], value)) {
     return index;
   }
   return -1;
