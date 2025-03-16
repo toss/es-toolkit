@@ -13,7 +13,7 @@
     "docs",
     "benchmarks"
   ],
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@4.7.0",
   "react-native": "./dist/index.js",
   "exports": {
     ".": "./src/index.ts",
