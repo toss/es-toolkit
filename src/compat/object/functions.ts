@@ -4,7 +4,7 @@
  *
  * @param {Object} object The object to inspect.
  * @returns {Array} Returns the function names.
- * 
+ *
  * @example
  *
  * function Foo() {
@@ -18,8 +18,8 @@
  * // => ['a', 'b']
  */
 export function functions(object: any): string[] {
-    if (object == null) {
-        return [];
-    }
-    return Object.keys(object).filter((key) => typeof object[key] === 'function');
+  if (object == null) {
+    return [];
+  }
+  return Object.keys(object).filter(key => typeof object[key] === 'function');
 }

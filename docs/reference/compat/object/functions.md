@@ -29,9 +29,9 @@ function Foo() {
   this.a = constant('a');
   this.b = constant('b');
 }
- 
+
 Foo.prototype.c = constant('c');
- 
-console.log(functions(new Foo));
+
+console.log(functions(new Foo()));
 // => ['a', 'b']
 ```
