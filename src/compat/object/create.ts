@@ -20,10 +20,7 @@ export function create<T extends object, U extends object>(prototype: T, propert
       const key = propsKeys[i];
       const propsValue = (properties as any)[key];
       const protoValue = proto[key];
-      if (
-        !(Object.prototype.hasOwnProperty.call(proto, key) && eq(protoValue, propsValue)) ||
-        (propsValue === undefined && !(key in proto))
-      ) {
+      if (!(Object.hasOwn(proto, key) && eq(protoValue, propsValue)) || (propsValue === undefined && !(key in proto))) {
         proto[key] = propsValue;
       }
     }
