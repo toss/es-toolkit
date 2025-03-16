@@ -134,6 +134,7 @@ export { cloneDeepWith } from './object/cloneDeepWith.ts';
 export { defaults } from './object/defaults.ts';
 export { findKey } from './object/findKey.ts';
 export { fromPairs } from './object/fromPairs.ts';
+export { functions } from './object/functions.ts';
 export { get } from './object/get.ts';
 export { has } from './object/has.ts';
 export { invertBy } from './object/invertBy.ts';
