@@ -130,6 +130,7 @@ export { assignIn } from './object/assignIn.ts';
 export { assignIn as extend } from './object/assignIn.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { cloneDeepWith } from './object/cloneDeepWith.ts';
+export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
 export { findKey } from './object/findKey.ts';
 export { fromPairs } from './object/fromPairs.ts';
