@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { intersectionWith as intersectionWithToolkit_ } from 'es-toolkit';
+import { intersectionWith as intersectionWithCompat_ } from 'es-toolkit/compat';
 import { intersectionWith as intersectionWithLodash_ } from 'lodash';
 
 const intersectionWithToolkit = intersectionWithToolkit_;
+const intersectionWithCompat = intersectionWithCompat_;
 const intersectionWithLodash = intersectionWithLodash_;
 
 describe('intersectionWith', () => {
@@ -11,6 +13,13 @@ describe('intersectionWith', () => {
     const array2 = [{ id: 2 }, { id: 4 }];
     const areItemsEqual = (a, b) => a.id === b.id;
     intersectionWithToolkit(array1, array2, areItemsEqual);
+  });
+
+  bench('es-toolkit/compat/intersectionWith', () => {
+    const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
+    const array2 = [{ id: 2 }, { id: 4 }];
+    const areItemsEqual = (a, b) => a.id === b.id;
+    intersectionWithCompat(array1, array2, areItemsEqual);
   });
 
   bench('lodash/intersectionWith', () => {
@@ -28,6 +37,10 @@ describe('intersectionWith/largeArrays', () => {
 
   bench('es-toolkit/intersectionWith', () => {
     intersectionWithToolkit(array1, array2, areItemsEqual);
+  });
+
+  bench('es-toolkit/compat/intersectionWith', () => {
+    intersectionWithCompat(array1, array2, areItemsEqual);
   });
 
   bench('lodash/intersectionWith', () => {
