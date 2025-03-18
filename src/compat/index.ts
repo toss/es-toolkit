@@ -63,6 +63,7 @@ export { orderBy } from './array/orderBy.ts';
 export { pull } from './array/pull.ts';
 export { pullAll } from './array/pullAll.ts';
 export { pullAllBy } from './array/pullAllBy.ts';
+export { pullAllWith } from './array/pullAllWith.ts';
 export { reduce } from './array/reduce.ts';
 export { reduceRight } from './array/reduceRight.ts';
 export { remove } from './array/remove.ts';
