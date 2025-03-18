@@ -1,13 +1,19 @@
 import { bench, describe } from 'vitest';
 import { takeWhile as takeWhileToolkit_ } from 'es-toolkit';
+import { takeWhile as takeWhileCompatToolkit_ } from 'es-toolkit/compat';
 import { takeWhile as takeWhileLodash_ } from 'lodash';
 
 const takeWhileToolkit = takeWhileToolkit_;
 const takeWhileLodash = takeWhileLodash_;
+const takeWhileCompatToolkit = takeWhileCompatToolkit_;
 
 describe('takeWhile', () => {
   bench('es-toolkit/takeWhile', () => {
     takeWhileToolkit([5, 4, 3, 2, 1], n => n < 4);
+  });
+
+  bench('es-toolkit/compat/takeWhile', () => {
+    takeWhileCompatToolkit([5, 4, 3, 2, 1], n => n < 4);
   });
 
   bench('lodash/takeWhile', () => {
@@ -20,6 +26,10 @@ describe('takeWhile/largeArray', () => {
 
   bench('es-toolkit/takeWhile', () => {
     takeWhileToolkit(largeArray, n => n < 100);
+  });
+
+  bench('es-toolkit/compat/takeWhile', () => {
+    takeWhileCompatToolkit(largeArray, n => n < 100);
   });
 
   bench('lodash/takeWhile', () => {
