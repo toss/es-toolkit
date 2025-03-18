@@ -4,8 +4,8 @@ import { takeWhile as takeWhileCompatToolkit_ } from 'es-toolkit/compat';
 import { takeWhile as takeWhileLodash_ } from 'lodash';
 
 const takeWhileToolkit = takeWhileToolkit_;
-const takeWhileLodash = takeWhileLodash_;
 const takeWhileCompatToolkit = takeWhileCompatToolkit_;
+const takeWhileLodash = takeWhileLodash_;
 
 describe('takeWhile', () => {
   bench('es-toolkit/takeWhile', () => {
