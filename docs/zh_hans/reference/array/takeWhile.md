@@ -82,3 +82,4 @@ const result5 将是 [1, 2, 3]，因为在没有条件的情况下，默认使�
 // null 或 undefined 数组
 const result6 = takeWhile(null);
 // result6 将是 []，因为输入数组为 null 或 undefined。
+```
