@@ -52,4 +52,10 @@ describe('pullAllWith', () => {
     pullAllWith(largeArray, [{ x: 500, y: 409 }], isEqual);
     expect(largeArray.some(item => item.x === 500 && item.y === 409)).toBe(false);
   });
+
+  it('should remove NaN values correctly', () => {
+    const array = [1, NaN, 3, NaN];
+    pullAllWith(array, [NaN], (a, b) => Object.is(a, b));
+    expect(array).toEqual([1, 3]);
+  });
 });
