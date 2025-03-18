@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { pullAllWith } from './pullAllWith';
-import { isEqual } from '../predicate';
+import { isEqual } from '../../predicate';
 
 describe('pullAllWith', () => {
   it('should remove all occurrences of specified values from the array', () => {
