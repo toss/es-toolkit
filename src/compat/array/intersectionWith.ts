@@ -136,8 +136,6 @@ export function intersectionWith<T>(
   firstArr: ArrayLike<T> | null | undefined,
   ...otherArrs: Array<ArrayLike<T> | null | undefined | ((x: T, y: T) => boolean)>
 ): T[] {
-  console.log(firstArr);
-
   if (firstArr == null) {
     return [];
   }
