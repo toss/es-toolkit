@@ -65,6 +65,7 @@ export { pullAll } from './array/pullAll.ts';
 export { pullAllBy } from './array/pullAllBy.ts';
 export { reduce } from './array/reduce.ts';
 export { reduceRight } from './array/reduceRight.ts';
+export { reject } from './array/reject.ts';
 export { remove } from './array/remove.ts';
 export { reverse } from './array/reverse.ts';
 export { sample } from './array/sample.ts';
