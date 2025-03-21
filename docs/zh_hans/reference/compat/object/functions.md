@@ -26,12 +26,12 @@ function functions(object: any): string[];
 
 ```typescript
 function Foo() {
-  this.a = () => 'a'
-  this.b = () => 'b'
+  this.a = () => 'a';
+  this.b = () => 'b';
 }
 
-Foo.prototype.c = () => 'c'
+Foo.prototype.c = () => 'c';
 
-functions(new Foo)
+functions(new Foo());
 // => ['a', 'b']
 ```
