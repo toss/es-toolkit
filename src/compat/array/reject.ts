@@ -1,5 +1,5 @@
-import { isArray } from '../predicate/isArray.ts';
-import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { filter } from './filter.ts';
+import { negate } from '../function/negate.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
@@ -166,30 +166,5 @@ export function reject<T>(
   source: ArrayLike<T> | Record<any, any> | null | undefined,
   predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
 ): T[] {
-  if (!source) {
-    return [];
-  }
-
-  const collection = isArray(source) ? source : Object.values(source);
-
-  predicate = iteratee(predicate);
-
-  if (!Array.isArray(source)) {
-    const result: T[] = [];
-    const keys = Object.keys(source) as Array<keyof T>;
-    const length = isArrayLike(source) ? source.length : keys.length;
-
-    for (let i = 0; i < length; i++) {
-      const key = keys[i];
-      const value = source[key] as T;
-
-      if (!predicate(value, key as number, source)) {
-        result.push(value);
-      }
-    }
-
-    return result;
-  }
-
-  return collection.filter((...props) => !predicate(...props));
+  return filter(source, negate(iteratee(predicate)));
 }
