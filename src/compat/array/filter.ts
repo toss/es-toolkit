@@ -1,5 +1,5 @@
-import { identity } from '../../function/identity.ts';
 import { isArray } from '../predicate/isArray.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
@@ -170,10 +170,6 @@ export function filter<T>(
     return [];
   }
 
-  if (!predicate) {
-    predicate = identity;
-  }
-
   const collection = isArray(source) ? source : Object.values(source);
 
   predicate = iteratee(predicate);
@@ -181,8 +177,9 @@ export function filter<T>(
   if (!Array.isArray(source)) {
     const result: T[] = [];
     const keys = Object.keys(source) as Array<keyof T>;
+    const length = isArrayLike(source) ? source.length : keys.length;
 
-    for (let i = 0; i < keys.length; i++) {
+    for (let i = 0; i < length; i++) {
       const key = keys[i];
       const value = source[key] as T;
 
