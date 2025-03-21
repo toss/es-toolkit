@@ -21,7 +21,7 @@ describe('divide', () => {
 
   it(`should return 1 when no arguments are given`, () => {
     // eslint-disable-next-line
-      // @ts-ignore
+    // @ts-ignore
     expect(divide()).toBe(1);
   });
 
