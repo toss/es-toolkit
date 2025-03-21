@@ -166,4 +166,8 @@ describe('uniqWith', () => {
 
     expect(result).toEqual([{ id: 1 }, { id: 2 }]);
   });
+
+  it('should return an empty array when input is not array-like', () => {
+    expect(uniqWith(null, (a, b) => a === b)).toEqual([]);
+  });
 });
