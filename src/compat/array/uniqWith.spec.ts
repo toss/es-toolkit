@@ -143,4 +143,27 @@ describe('uniqWith', () => {
 
     expect(uniqWith(largeArray)).toEqual(expected);
   });
+
+  // additional test
+  it('should unique Symbol instances', () => {
+    const a = Symbol('a');
+    const b = Symbol('a');
+
+    const result = uniqWith([a, a, b], Object.is);
+
+    expect(result).toEqual([a, b]);
+  });
+
+  it('should handle array-like objects', () => {
+    const arrayLike = {
+      0: { id: 1 },
+      1: { id: 1 },
+      2: { id: 2 },
+      length: 3,
+    };
+
+    const result = uniqWith(Array.from(arrayLike), (a, b) => a.id === b.id);
+
+    expect(result).toEqual([{ id: 1 }, { id: 2 }]);
+  });
 });
