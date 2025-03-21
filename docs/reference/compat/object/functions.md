@@ -6,7 +6,8 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Creates an array of function property names from own enumerable properties of `object`.
+Creates an array of function property names from own enumerable properties
+of `object`.
 
 ## Signature
 
@@ -20,18 +21,18 @@ function functions(object: any): string[];
 
 ### Returns
 
-(`Array`): Returns the function names.
+(`Array`): function names.
 
 ## Examples
 
 ```typescript
 function Foo() {
-  this.a = constant('a');
-  this.b = constant('b');
+  this.a = () => 'a'
+  this.b = () => 'b'
 }
 
-Foo.prototype.c = constant('c');
+Foo.prototype.c = () => 'c'
 
-console.log(functions(new Foo()));
+functions(new Foo)
 // => ['a', 'b']
 ```

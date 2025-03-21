@@ -6,7 +6,7 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-`object`의 열거 가능한 속성으로부터 함수 속성 이름의 배열을 생성해요.
+`object`의 자체 열거 가능한 속성에서 함수 속성 이름 배열을 만들어요.
 
 ## 인터페이스
 
@@ -20,18 +20,19 @@ function functions(object: any): string[];
 
 ### 반환 값
 
-(`Array`): 함수의 이름.
+(`Array`): 함수 이름.
+문자열 배열.
 
 ## 예시
 
 ```typescript
 function Foo() {
-  this.a = constant('a');
-  this.b = constant('b');
+  this.a = () => 'a'
+  this.b = () => 'b'
 }
 
-Foo.prototype.c = constant('c');
+Foo.prototype.c = () => 'c'
 
-console.log(functions(new Foo()));
+functions(new Foo)
 // => ['a', 'b']
 ```
