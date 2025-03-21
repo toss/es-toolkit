@@ -62,7 +62,8 @@ jobs:
           generate_release_notes: false
           token: ${{ secrets.GITHUB_TOKEN }}
           files: out/*.tgz
-      - if: |
+      - name: Publish to registry
+        if: |
           github.event_name == 'push' &&
           (github.ref_type == 'tag' || github.ref == 'refs/heads/main')
         run: |
@@ -78,3 +79,20 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         working-directory: ${{ github.workspace }}/out/
+
+  deploy-docs:
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: yarn install
+      - name: Deploy a docs site
+        run: yarn vercel deploy --yes --prod --token=${{ secrets.VERCEL_TOKEN }}
