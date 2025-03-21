@@ -45,4 +45,12 @@ describe('trimStart', () => {
   it('should trim the string without giving the second parameter, which defaults to whitespace', () => {
     expect(trimStart('  hello world  ')).toEqual('hello world  ');
   });
+
+  it('should remove multiple characters from the start of the string', () => {
+    expect(trimStart('-_-abc', '_-')).toEqual('abc');
+  });
+
+  it('should remove multiple characters from the start of the string when an array of characters is provided', () => {
+    expect(trimStart('-_-abc', ['-', '_'])).toEqual('abc');
+  });
 });

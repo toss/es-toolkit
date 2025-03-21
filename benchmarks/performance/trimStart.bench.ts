@@ -8,11 +8,11 @@ const trimStartLodash = trimStartLodash_;
 describe('trimStart', () => {
   bench('es-toolkit/trimStart', () => {
     const str = 'kebab-case';
-    trimStartToolkit(str, 'se');
+    trimStartToolkit(str, 'ke');
   });
 
   bench('lodash/trimStart', () => {
     const str = 'kebab-case';
-    trimStartLodash(str, 'se');
+    trimStartLodash(str, 'ke');
   });
 });
