@@ -11,12 +11,12 @@
 ## 签名
 
 ```typescript
-function stubObject(): {};
+function stubObject(): Record<PropertyKey, never>;
 ```
 
 ### 返回值
 
-(`{}`): 一个空对象。
+(`Record<PropertyKey, never>`): 一个空对象。
 
 ## 示例
 
