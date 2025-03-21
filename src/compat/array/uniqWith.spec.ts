@@ -57,7 +57,7 @@ describe('uniqWith', () => {
   });
 
   it(`should work with large arrays`, () => {
-    const largeArray = [];
+    const largeArray: any[] = [];
     const expected = [0, {}, 'a'];
     const count = Math.ceil(LARGE_ARRAY_SIZE / expected.length);
 
@@ -78,7 +78,7 @@ describe('uniqWith', () => {
   });
 
   it(`should work with large arrays of boolean, \`NaN\`, and nullish values`, () => {
-    const largeArray = [];
+    const largeArray: any[] = [];
     const expected = [null, undefined, false, true, NaN];
     const count = Math.ceil(LARGE_ARRAY_SIZE / expected.length);
 
@@ -115,7 +115,7 @@ describe('uniqWith', () => {
         Symbol.unscopables,
       ];
 
-      const largeArray = [];
+      const largeArray: any[] = [];
       const count = Math.ceil(LARGE_ARRAY_SIZE / expected.length);
 
       expected = lodashStable.map(expected, symbol => symbol || {});
@@ -131,7 +131,7 @@ describe('uniqWith', () => {
   });
 
   it(`should distinguish between numbers and numeric strings`, () => {
-    const largeArray = [];
+    const largeArray: any[] = [];
     const expected = ['2', 2, Object('2'), Object(2)];
     const count = Math.ceil(LARGE_ARRAY_SIZE / expected.length);
 
