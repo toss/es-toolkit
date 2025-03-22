@@ -4,10 +4,10 @@
  * - On success: [null, Result] - First element is null, second is the result
  * - On error: [Error, null] - First element is the caught error, second is null
  *
- * @template {unknown} AttemptResult - The type of the result of the async function.
- * @template {unknown} AttemptError - The type of the error that can be thrown by the async function.
- * @param {() => Promise<AttemptResult>} func - The async function to execute.
- * @returns {Promise<[null, AttemptResult] | [AttemptError, null]>} A Promise that resolves to a tuple containing either [null, result] or [error, null].
+ * @template {unknown} T - The type of the result of the async function.
+ * @template {unknown} E - The type of the error that can be thrown by the async function.
+ * @param {() => Promise<T>} func - The async function to execute.
+ * @returns {Promise<[null, T] | [E, null]>} A Promise that resolves to a tuple containing either [null, result] or [error, null].
  *
  * @example
  * // Successful execution
@@ -30,13 +30,11 @@
  * });
  * // users is typed as User[]
  */
-export async function attemptAsync<AttemptResult, AttemptError>(
-  func: () => Promise<AttemptResult>
-): Promise<[null, AttemptResult] | [AttemptError, null]> {
+export async function attemptAsync<T, E>(func: () => Promise<T>): Promise<[null, T] | [E, null]> {
   try {
     const result = await func();
     return [null, result];
   } catch (error) {
-    return [error as AttemptError, null];
+    return [error as E, null];
   }
 }

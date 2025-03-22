@@ -4,10 +4,10 @@
  * - On success: [null, Result] - First element is null, second is the result
  * - On error: [Error, null] - First element is the caught error, second is null
  *
- * @template {unknown} AttemptResult - The type of the result of the function.
- * @template {unknown} AttemptError - The type of the error that can be thrown by the function.
- * @param {() => AttemptResult} func - The function to execute.
- * @returns {[null, AttemptResult] | [AttemptError, null]} A tuple containing either [null, result] or [error, null].
+ * @template {unknown} T - The type of the result of the function.
+ * @template {unknown} E - The type of the error that can be thrown by the function.
+ * @param {() => T} func - The function to execute.
+ * @returns {[null, T] | [E, null]} A tuple containing either [null, result] or [error, null].
  *
  * @example
  * // Successful execution
@@ -37,12 +37,10 @@
  * });
  * ```
  */
-export function attempt<AttemptResult, AttemptError>(
-  func: () => AttemptResult
-): [null, AttemptResult] | [AttemptError, null] {
+export function attempt<T, E>(func: () => T): [null, T] | [E, null] {
   try {
     return [null, func()];
   } catch (error) {
-    return [error as AttemptError, null];
+    return [error as E, null];
   }
 }
