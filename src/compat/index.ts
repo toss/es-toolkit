@@ -131,6 +131,7 @@ export { sumBy } from './math/sumBy.ts';
 
 export { assignIn } from './object/assignIn.ts';
 export { assignIn as extend } from './object/assignIn.ts';
+export { at } from './object/at.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { cloneDeepWith } from './object/cloneDeepWith.ts';
 export { defaults } from './object/defaults.ts';
