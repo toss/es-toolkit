@@ -88,7 +88,7 @@ describe('pickBy', () => {
     });
 
     // eslint-disable-next-line
-    expected[1] += "";
+    expected[1] += '';
 
     expect(args).toEqual(expected);
   });
@@ -105,7 +105,7 @@ describe('pickBy', () => {
 
     expected = lodashStable.map(expected, args => {
       // eslint-disable-next-line
-      args[1] += "";
+      args[1] += '';
       return args;
     });
 
