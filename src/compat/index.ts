@@ -230,6 +230,7 @@ export { lte } from './util/lte.ts';
 export { method } from './util/method.ts';
 export { methodOf } from './util/methodOf.ts';
 export { now } from './util/now.ts';
+export { overEvery } from './util/overEvery.ts';
 export { stubArray } from './util/stubArray.ts';
 export { stubFalse } from './util/stubFalse.ts';
 export { stubObject } from './util/stubObject.ts';
