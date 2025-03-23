@@ -57,7 +57,7 @@ function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
   }
 
   let lastKey = last(path);
-  let lastValue = lastKey?.valueOf();
+  const lastValue = lastKey?.valueOf();
 
   if (typeof lastValue === 'number') {
     lastKey = toKey(lastValue);
