@@ -11,7 +11,7 @@ describe('countBy', () => {
 
   it('should use `_.identity` when `iteratee` is nullish', () => {
     const array = [4, 6, 6];
-    const values = [, null, undefined];
+    const values = [, null, undefined]; // eslint-disable-line no-sparse-arrays
     const expected = values.map(() => ({ 4: 1, 6: 2 }));
 
     const actual = values.map((value, index) => (index ? countBy(array, value) : countBy(array)));
