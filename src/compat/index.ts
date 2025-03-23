@@ -28,7 +28,7 @@ export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { compact } from './array/compact.ts';
 export { concat } from './array/concat.ts';
-export { countBy } fron './array/countBy.ts';
+export { countBy } from './array/countBy.ts';
 export { difference } from './array/difference.ts';
 export { differenceBy } from './array/differenceBy.ts';
 export { differenceWith } from './array/differenceWith.ts';
