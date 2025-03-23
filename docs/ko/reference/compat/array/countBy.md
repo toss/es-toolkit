@@ -6,8 +6,8 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-Creates an object composed of keys generated from the results of running each element of `collection`
-through `iteratee`. The corresponding value of each key is the number of times the key was returned.
+`iteratee`를 통해 `collection`의 각 요소를 실행한 결과에서 생성된 키로 구성된 객체를 만듭니다.
+각 키에 해당하는 값은 해당 키가 반환된 횟수예요.
 
 ## 인터페이스
 
@@ -25,6 +25,10 @@ function countBy<T, K extends PropertyKey>(
   iteratee?: ((item: T) => K) | keyof T | [keyof T, K] | Partial<T> | null | undefined
 ): Record<K, number>;
 ```
+
+### 반환 값
+
+(`undefined`): undefined
 
 ## 예시
 

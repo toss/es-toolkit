@@ -6,8 +6,7 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-Creates an object composed of keys generated from the results of running each element of `collection`
-through `iteratee`. The corresponding value of each key is the number of times the key was returned.
+创建一个对象，该对象由通过 `iteratee` 运行 `collection` 的每个元素生成的键组成。每个键对应的值是键被返回的次数。
 
 ## 签名
 
@@ -25,6 +24,10 @@ function countBy<T, K extends PropertyKey>(
   iteratee?: ((item: T) => K) | keyof T | [keyof T, K] | Partial<T> | null | undefined
 ): Record<K, number>;
 ```
+
+### 返回值
+
+(`undefined`): undefined
 
 ## 示例
 
