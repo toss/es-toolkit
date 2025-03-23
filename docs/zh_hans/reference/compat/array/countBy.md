@@ -12,9 +12,18 @@ through `iteratee`. The corresponding value of each key is the number of times t
 ## 签名
 
 ```typescript
-function countBy<T, K extends PropertyKey = PropertyKey>(collection: ArrayLike<T> | null | undefined, iteratee?: ((item: T) => K) | keyof T | [keyof T, K] | Partial<T> | null | undefined): Record<K, number>;
-function countBy<T, K extends PropertyKey = PropertyKey>(collection: Record<PropertyKey, T> | null | undefined, iteratee?: ((item: T) => K) | keyof T | [keyof T, K] | Partial<T> | null | undefined): Record<K, number>;
-function countBy<T, K extends PropertyKey>(collection: ArrayLike<T> | Record<PropertyKey, T> | null | undefined, iteratee?: ((item: T) => K) | keyof T | [keyof T, K] | Partial<T> | null | undefined): Record<K, number>;
+function countBy<T, K extends PropertyKey = PropertyKey>(
+  collection: ArrayLike<T> | null | undefined,
+  iteratee?: ((item: T) => K) | keyof T | [keyof T, K] | Partial<T> | null | undefined
+): Record<K, number>;
+function countBy<T, K extends PropertyKey = PropertyKey>(
+  collection: Record<PropertyKey, T> | null | undefined,
+  iteratee?: ((item: T) => K) | keyof T | [keyof T, K] | Partial<T> | null | undefined
+): Record<K, number>;
+function countBy<T, K extends PropertyKey>(
+  collection: ArrayLike<T> | Record<PropertyKey, T> | null | undefined,
+  iteratee?: ((item: T) => K) | keyof T | [keyof T, K] | Partial<T> | null | undefined
+): Record<K, number>;
 ```
 
 ## 示例
