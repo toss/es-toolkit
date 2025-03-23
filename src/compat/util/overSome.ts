@@ -1,4 +1,4 @@
-import { iteratee } from './iteratee.ts';
+import { iteratee as createIteratee } from './iteratee.ts';
 
 /**
  * Creates a predicate function that checks if a value satisfies at least one of the given predicates.
@@ -128,14 +128,14 @@ export function overSome<T>(
       const predicate = predicates[i];
 
       if (!Array.isArray(predicate)) {
-        if (iteratee(predicate).apply(this, values)) {
+        if (createIteratee(predicate).apply(this, values)) {
           return true;
         }
         continue;
       }
 
       for (let j = 0; j < predicate.length; ++j) {
-        if (iteratee(predicate[j]).apply(this, values)) {
+        if (createIteratee(predicate[j]).apply(this, values)) {
           return true;
         }
       }
