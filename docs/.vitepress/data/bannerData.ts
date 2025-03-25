@@ -6,25 +6,30 @@ export interface Banner {
 
 export const BANNER_DATA: Banner[] = [
   {
-    title: '🎙️ 조건부 렌더링, 어떻게 처리하시나요?',
+    title: '🛠️ frontend-fundamentals',
+    description: '프론트엔드 코드를 더 잘 짜는 방법을 고민하고 있나요? 실제 경험에서 나온 원칙과 예시들을 모아봤어요.',
+    link: 'https://github.com/toss/frontend-fundamentals',
+  },
+  {
+    title: '🇰🇷 es-hangul',
+    description: '조사 붙이기, 초성 검색 같은 한글 작업을 쉽게 처리해주는 라이브러리예요.',
+    link: 'https://github.com/toss/es-hangul',
+  },
+  {
+    title: '⏳ suspensive',
+    description: 'React Suspense 쓰고 싶은데 어렵게 느껴지셨나요? 실제 서비스에 바로 적용할 수 있게 도와드려요.',
+    link: 'https://github.com/toss/suspensive',
+  },
+  {
+    title: '🧩 use-funnel',
     description:
-      '논리 연산자(&&)와 삼항 연산자(?:)를 활용하는 전통적인 방식, 혹은 <If /> 같은 선언적인 컴포넌트를 사용하는 방식. 어떤 접근법이 효과적일까요?',
-    link: 'https://github.com/toss/frontend-fundamentals/discussions/4',
+      '회원가입이나 결제처럼 여러 단계로 이뤄진 화면, 관리하기 복잡하죠? use-funnel 훅을 통해 깔끔하게 정리해보세요.',
+    link: 'https://github.com/toss/use-funnel',
   },
   {
-    title: '[🏟️ 3월 콜로세움] 처음 커리어 시작은 대기업에서 vs 스타트업에서 어디가 좋을까?',
-    description: 'UpVote을 많이 받은 코멘트 작성자에게는 Frontend Fundamentals 굿즈를 보내드려요.',
-    link: 'https://github.com/toss/frontend-fundamentals/discussions/172',
-  },
-  {
-    title: '토스에서 Desktop Frontend Engineer를 모시고 있어요.',
-    description: '수많은 기능을 어떻게 우아한 코드로 구현할 수 있을까요? 함께 개발해요!',
-    link: 'https://toss.im/career/job-detail?job_id=4664498003',
-  },
-  {
-    title: '🎙️ if문의 return이 간단한 한 줄이라면 어떻게 사용하시나요?',
+    title: '✨ overlay-kit',
     description:
-      '간단한 조건문에서 return을 한 줄로 작성할지, 중괄호 {}를 사용할지 고민되시나요? 가독성, 코드 일관성, 유지보수성, Diff 최소화 등의 측면에서 다양한 의견이 오갔습니다.',
-    link: 'https://github.com/toss/frontend-fundamentals/discussions/41',
+      '모달 만들기, 매번 같은 코드를 반복하고 계신가요? 접근성까지 신경 쓴 모달/팝오버 컴포넌트를 소개합니다.',
+    link: 'https://github.com/toss/overlay-kit',
   },
 ];
