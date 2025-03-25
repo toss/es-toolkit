@@ -39,22 +39,44 @@ export function useBanner() {
     return Math.floor(Math.random() * banners.value.length);
   };
 
+  let intervalId: ReturnType<typeof setInterval> | null = null;
+
+  const updateCurrentLang = () => {
+    const newLang = getCurrentLang();
+    if (newLang !== currentLang.value) {
+      currentLang.value = newLang;
+
+      if (shouldShowBanner.value) {
+        currentBannerIndex.value = getRandomBannerIndex();
+      }
+    }
+  };
+
   onMounted(() => {
-    // 현재 언어 설정
-    currentLang.value = getCurrentLang();
+    updateCurrentLang();
 
     if (!shouldShowBanner.value) {
       return;
     }
 
-    // 초기에 랜덤한 배너 표시
     currentBannerIndex.value = getRandomBannerIndex();
 
-    // 일정 시간 간격으로 배너 로테이션
-    const intervalId = setInterval(rotateBanner, rotationInterval);
+    intervalId = setInterval(rotateBanner, rotationInterval);
+
+    window.addEventListener('popstate', updateCurrentLang);
+
+    const originalPushState = history.pushState;
+    history.pushState = function (...args) {
+      originalPushState.apply(this, args);
+      updateCurrentLang();
+    };
 
     return () => {
-      clearInterval(intervalId);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      window.removeEventListener('popstate', updateCurrentLang);
+      history.pushState = originalPushState;
     };
   });
 
