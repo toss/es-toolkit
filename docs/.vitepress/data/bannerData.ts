@@ -28,8 +28,7 @@ export const KO_BANNER_DATA: Banner[] = [
   },
   {
     title: '✨ overlay-kit',
-    description:
-      '모달 만들기, 매번 같은 코드를 반복하고 계신가요? 접근성까지 보장된 모달/팝오버 컴포넌트를 소개합니다.',
+    description: '오버레이, 매번 같은 코드를 반복하고 계신가요? 선언적인 코드로 모달/팝오버 컴포넌트를 작성해보세요.',
     link: 'https://github.com/toss/overlay-kit',
   },
 ];
@@ -52,7 +51,7 @@ export const EN_BANNER_DATA: Banner[] = [
   },
   {
     title: '✨ overlay-kit',
-    description: 'Accessible modals and popovers with zero hassle.',
+    description: 'Modals and popovers with declarative API and type safety. Build rich UIs without breaking your flow.',
     link: 'https://github.com/toss/overlay-kit',
   },
 ];
