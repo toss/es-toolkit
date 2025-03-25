@@ -7,7 +7,7 @@ export interface Banner {
 export const KO_BANNER_DATA: Banner[] = [
   {
     title: '🛠️ frontend-fundamentals',
-    description: '프론트엔드 코드를 더 잘 짜는 방법을 고민하고 있나요? 실제 경험에서 나온 원칙과 예시들을 모아봤어요.',
+    description: '프론트엔드 코드를 더 잘 짜는 방법을 고민하고 있나요? 실무에서 비롯한 원칙과 예시들을 모아봤어요.',
     link: 'https://frontend-fundamentals.com/',
   },
   {
@@ -17,7 +17,7 @@ export const KO_BANNER_DATA: Banner[] = [
   },
   {
     title: '⏳ suspensive',
-    description: 'React Suspense 쓰고 싶은데 어렵게 느껴지셨나요? 실제 서비스에 바로 적용할 수 있게 도와드려요.',
+    description: 'React Suspense를 실무에서 더 쉽게 활용하고 싶으신가요? 비동기 데이터 로딩을 간결하게 처리해보세요.',
     link: 'https://github.com/toss/suspensive',
   },
   {
@@ -29,7 +29,7 @@ export const KO_BANNER_DATA: Banner[] = [
   {
     title: '✨ overlay-kit',
     description:
-      '모달 만들기, 매번 같은 코드를 반복하고 계신가요? 접근성까지 신경 쓴 모달/팝오버 컴포넌트를 소개합니다.',
+      '모달 만들기, 매번 같은 코드를 반복하고 계신가요? 접근성까지 보장된 모달/팝오버 컴포넌트를 소개합니다.',
     link: 'https://github.com/toss/overlay-kit',
   },
 ];
