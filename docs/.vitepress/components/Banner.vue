@@ -1,17 +1,17 @@
 <template>
-  <div class="custom-banner-container">
+  <div v-if="shouldShowBanner && currentBanner" class="custom-banner-container">
     <div class="custom-banner-box">
       <a
-        :href="currentBanner?.link"
+        :href="currentBanner.link"
         target="_blank"
         rel="noopener noreferrer"
         class="custom-banner-link"
         @click="currentBanner && trackBannerClick(currentBanner)"
       >
         <div class="custom-banner-content">
-          <div class="custom-banner-title">{{ currentBanner?.title }}</div>
+          <div class="custom-banner-title">{{ currentBanner.title }}</div>
           <div class="custom-banner-description">
-            {{ currentBanner?.description }}
+            {{ currentBanner.description }}
           </div>
         </div>
       </a>
@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { useBanner } from '../composables';
 
-const { banners, currentBanner, setBannerIndex, trackBannerClick, currentBannerIndex } = useBanner();
+const { banners, currentBanner, setBannerIndex, trackBannerClick, currentBannerIndex, shouldShowBanner } = useBanner();
 </script>
 
 <style scoped>
