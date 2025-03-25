@@ -8,7 +8,7 @@ export const KO_BANNER_DATA: Banner[] = [
   {
     title: '🛠️ frontend-fundamentals',
     description: '프론트엔드 코드를 더 잘 짜는 방법을 고민하고 있나요? 실제 경험에서 나온 원칙과 예시들을 모아봤어요.',
-    link: 'https://github.com/toss/frontend-fundamentals',
+    link: 'https://frontend-fundamentals.com/',
   },
   {
     title: '🇰🇷 es-hangul',
@@ -37,25 +37,22 @@ export const KO_BANNER_DATA: Banner[] = [
 export const EN_BANNER_DATA: Banner[] = [
   {
     title: '🛠️ frontend-fundamentals',
-    description:
-      'Looking for better ways to write frontend code? Check out principles and examples from real-world experience.',
-    link: 'https://github.com/toss/frontend-fundamentals',
+    description: 'Your compass for better code. Four core principles for writing easily modifiable frontend code.',
+    link: 'https://frontend-fundamentals.com/en/',
   },
   {
     title: '⏳ suspensive',
-    description:
-      'Is React Suspense challenging to use? This utility helps you implement it in production with minimal effort.',
+    description: 'Make React Suspense easy. Less code, more power for async operations.',
     link: 'https://github.com/toss/suspensive',
   },
   {
     title: '🧩 use-funnel',
-    description:
-      'Managing multi-step flows like signup or checkout? This hook helps you organize complex user journeys cleanly.',
+    description: 'Multi-step flows made simple. Perfect for funnels such as signup, checkout, and onboarding flows.',
     link: 'https://github.com/toss/use-funnel',
   },
   {
     title: '✨ overlay-kit',
-    description: 'Tired of writing the same modal code? Try these accessible modal and popover components for your UI.',
+    description: 'Accessible modals and popovers with zero hassle.',
     link: 'https://github.com/toss/overlay-kit',
   },
 ];
