@@ -119,6 +119,7 @@ export { max } from './math/max.ts';
 export { maxBy } from './math/maxBy.ts';
 export { mean } from './math/mean.ts';
 export { min } from './math/min.ts';
+export { minBy } from './math/minBy.ts';
 export { multiply } from './math/multiply.ts';
 export { parseInt } from './math/parseInt.ts';
 export { random } from './math/random.ts';
