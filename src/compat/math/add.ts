@@ -1,3 +1,6 @@
+import { toNumber } from '../util/toNumber.ts';
+import { toString } from '../util/toString.ts';
+
 /**
  * Adds two numbers while safely handling `NaN` values.
  *
@@ -13,7 +16,19 @@
  * const result2 = add(5, NaN);  // result2 will be NaN
  * const result3 = add(NaN, 10); // result3 will be NaN
  */
-
 export function add(value: number, other: number): number {
+  if (value === undefined && other === undefined) {
+    return 0;
+  }
+  if (value === undefined || other === undefined) {
+    return value ?? other;
+  }
+  if (typeof value === 'string' || typeof other === 'string') {
+    value = toString(value) as any;
+    other = toString(other) as any;
+  } else {
+    value = toNumber(value);
+    other = toNumber(other);
+  }
   return value + other;
 }
