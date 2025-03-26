@@ -1,6 +1,6 @@
-import { keys } from './keys';
-import { isObject } from '../predicate/isObject';
-import { eq } from '../util/eq';
+import { keys } from './keys.ts';
+import { assignValue } from '../_internal/assignValue.ts';
+import { isObject } from '../predicate/isObject.ts';
 
 /**
  * Creates an object that inherits from the prototype object.
@@ -18,11 +18,8 @@ export function create<T extends object, U extends object>(prototype: T, propert
     const propsKeys = keys(properties);
     for (let i = 0; i < propsKeys.length; i++) {
       const key = propsKeys[i];
-      const propsValue = (properties as any)[key];
-      const protoValue = proto[key];
-      if (!(Object.hasOwn(proto, key) && eq(protoValue, propsValue)) || (propsValue === undefined && !(key in proto))) {
-        proto[key] = propsValue;
-      }
+      const propsValue = properties[key as keyof U];
+      assignValue(proto, key, propsValue);
     }
   }
   return proto as T & U;
