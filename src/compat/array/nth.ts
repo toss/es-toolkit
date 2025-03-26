@@ -12,7 +12,7 @@ import { toInteger } from '../util/toInteger.ts';
  * nth([1, 2, 3], 1); // => 2
  * nth([1, 2, 3], -1); // => 3
  */
-export function nth<T>(array: ArrayLike<T> | null | undefined, n: number = 0): T | undefined {
+export function nth<T>(array: ArrayLike<T> | null | undefined, n = 0): T | undefined {
   if (!isArrayLikeObject(array) || array.length === 0) {
     return undefined;
   }
