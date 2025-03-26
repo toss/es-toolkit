@@ -13,7 +13,7 @@
     "docs",
     "benchmarks"
   ],
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@4.7.0",
   "react-native": "./dist/index.js",
   "exports": {
     ".": "./src/index.ts",
@@ -188,6 +188,7 @@
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.6.0",
+    "vercel": "^41.4.1",
     "vitest": "^2.1.2"
   },
   "dependenciesMeta": {
