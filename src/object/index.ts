@@ -1,3 +1,4 @@
+export { camelizeKeys } from './camelizeKeys.ts';
 export { clone } from './clone.ts';
 export { cloneDeep } from './cloneDeep.ts';
 export { cloneDeepWith } from './cloneDeepWith.ts';
@@ -12,4 +13,5 @@ export { omit } from './omit.ts';
 export { omitBy } from './omitBy.ts';
 export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
+export { snakeizeKeys } from './snakeizeKeys.ts';
 export { toMerged } from './toMerged.ts';
