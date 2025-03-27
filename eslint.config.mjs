@@ -61,6 +61,10 @@ export default [
       'no-restricted-syntax': [
         'error',
         {
+          selector: 'CallExpression[callee.object.name="console"]',
+          message: 'console.log() is not allowed in source code.',
+        },
+        {
           selector: 'CallExpression[callee.object.name="Object"][callee.property.name="entries"]',
           message:
             'Do not use Object.entries for performance. Consider using alternatives like Object.keys() or Object.values().',
