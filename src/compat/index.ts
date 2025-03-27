@@ -80,6 +80,7 @@ export { tail } from './array/tail.ts';
 export { take } from './array/take.ts';
 export { takeRight } from './array/takeRight.ts';
 export { takeRightWhile } from './array/takeRightWhile.ts';
+export { takeWhile } from './array/takeWhile.ts';
 export { union } from './array/union.ts';
 export { uniq } from './array/uniq.ts';
 export { uniqBy } from './array/uniqBy.ts';
