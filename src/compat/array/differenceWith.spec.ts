@@ -83,10 +83,13 @@ describe('differenceWith', () => {
   it(`should ignore values that are not array-like`, () => {
     const array = [1, null, 3];
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(differenceWith(args, 3, { 0: 1 })).toEqual([1, 2, 3]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(differenceWith(null, array, 1)).toEqual([]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(differenceWith(array, args, null)).toEqual([null]);
   });
