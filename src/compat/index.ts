@@ -153,6 +153,8 @@ export { property } from './object/property.ts';
 export { propertyOf } from './object/propertyOf.ts';
 export { set } from './object/set.ts';
 export { toDefaulted } from './object/toDefaulted.ts';
+export { toPairs } from './object/toPairs.ts';
+export { toPairsIn } from './object/toPairsIn.ts';
 export { unset } from './object/unset.ts';
 export { values } from './object/values.ts';
 export { valuesIn } from './object/valuesIn.ts';
