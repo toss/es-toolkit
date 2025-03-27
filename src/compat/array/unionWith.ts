@@ -36,8 +36,7 @@ type Comparator<T> = (x: T, y: T) => boolean;
 
 export function unionWith<T>(...values: Array<ArrayLike<T> | null | undefined | Comparator<T>>): T[] {
   const lastValue = last(values);
-  const validArray = values.filter(isArrayLikeObject);
-  const flattened = flattenArrayLike<T>(validArray);
+  const flattened = flattenArrayLike<T>(values);
 
   if (isArrayLikeObject(lastValue) || lastValue == null) {
     return uniq(flattened);

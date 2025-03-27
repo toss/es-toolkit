@@ -31,8 +31,7 @@ type Iteratee<T> = PropertyKey | Partial<T> | ((value: T) => unknown);
 
 export function unionBy<T>(...values: Array<ArrayLike<T> | null | undefined | Iteratee<T>>): T[] {
   const lastValue = last(values);
-  const validArray = values.filter(isArrayLikeObject);
-  const flattened = flattenArrayLike<T>(validArray);
+  const flattened = flattenArrayLike<T>(values);
 
   if (isArrayLikeObject(lastValue) || lastValue == null) {
     return uniq(flattened);
