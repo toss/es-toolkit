@@ -103,6 +103,7 @@ describe('map', () => {
       const expected = [1, 0, array];
 
       func(array, function () {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions, prefer-rest-params
         args || (args = Array.prototype.slice.call(arguments));
       });
 
@@ -113,7 +114,7 @@ describe('map', () => {
       const array = [1];
       array[2] = 3;
 
-      let expected = [
+      const expected = [
         [1, 0, array],
         [undefined, 1, array],
         [3, 2, array],
@@ -121,6 +122,7 @@ describe('map', () => {
 
       const argsList: any[] = [];
       func(array, function () {
+        // eslint-disable-next-line prefer-rest-params
         argsList.push(Array.prototype.slice.call(arguments));
         return !(isFind || isSome);
       });

@@ -87,7 +87,6 @@ describe('cloneDeepWith', function () {
     const object: any = new Foo();
 
     func(object, function () {
-      // eslint-disable-next-line prefer-rest-params
       const length = arguments.length;
       // eslint-disable-next-line prefer-rest-params
       const args = Array.prototype.slice.call(arguments, 0, length - (length > 1 ? 1 : 0));
