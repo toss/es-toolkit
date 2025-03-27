@@ -1,5 +1,15 @@
 # es-toolkit Changelog
 
+## Version v1.34.0
+
+Released on March 27th, 2025.
+
+- Added support for [isBrowser](https://es-toolkit.slash.page/reference/predicate/isBrowser.html), [isNode](https://es-toolkit.slash.page/reference/predicate/isNode.html), [attempt](https://es-toolkit.slash.page/reference/util/attempt.html), [attemptAsync](https://es-toolkit.slash.page/reference/util/attemptAsync.html).
+- Introduced compatibility functions for [functionsIn](https://es-toolkit.slash.page/reference/compat/object/functionsIn.html), [meanBy](https://es-toolkit.slash.page/reference/math/meanBy.html), [minBy](https://es-toolkit.slash.page/reference/math/minBy.html), [mean](https://es-toolkit.slash.page/reference/math/mean.html), [sortedIndexOf](https://es-toolkit.slash.page/reference/compat/array/sortedIndexOf.html).
+- Fixed compatibility with lodash for [set](https://es-toolkit.slash.page/reference/compat/object/set.html), [add](https://es-toolkit.slash.page/reference/compat/math/add.html), [subtract](https://es-toolkit.slash.page/reference/compat/math/subtract.html).
+
+We sincerely thank @dayongkr, @D-Sketon, @seongminn, @Kyujenius for their contributions. We appreciate your great efforts!
+
 ## Version v1.33.0
 
 Released on March 9th, 2025.
