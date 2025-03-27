@@ -35,18 +35,23 @@ export function camelizeKeys<T>(obj: T): Camelized<T> {
   if (isArray(obj)) {
     return obj.map(item => camelizeKeys(item)) as unknown as Camelized<T>;
   } else if (isObject(obj)) {
+    const result = {} as Camelized<T>;
     const defaultObjectKeys = new Set(Object.getOwnPropertyNames(Object.prototype));
+    const keys = Object.keys(obj);
 
-    return Object.keys(obj).reduce((result, key) => {
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+
       if (defaultObjectKeys.has(key)) {
         result[key as keyof Camelized<T>] = obj[key];
-        return result;
+        continue;
       }
 
       const camelKey = camelCase(key) as keyof Camelized<T>;
       result[camelKey] = camelizeKeys(obj[key]);
-      return result;
-    }, {} as Camelized<T>);
+    }
+
+    return result;
   }
 
   return obj as Camelized<T>;

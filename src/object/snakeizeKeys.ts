@@ -37,18 +37,23 @@ export function snakeizeKeys<T>(obj: T): Snakified<T> {
   if (isArray(obj)) {
     return obj.map(item => snakeizeKeys(item)) as unknown as Snakified<T>;
   } else if (isObject(obj)) {
+    const result = {} as Snakified<T>;
     const defaultObjectKeys = new Set(Object.getOwnPropertyNames(Object.prototype));
+    const keys = Object.keys(obj);
 
-    return Object.keys(obj).reduce((result, key) => {
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+
       if (defaultObjectKeys.has(key)) {
         result[key as keyof Snakified<T>] = obj[key];
-        return result;
+        continue;
       }
 
       const snakeKey = snakeCase(key) as keyof Snakified<T>;
       result[snakeKey] = snakeizeKeys(obj[key]);
-      return result;
-    }, {} as Snakified<T>);
+    }
+
+    return result;
   }
 
   return obj as Snakified<T>;
