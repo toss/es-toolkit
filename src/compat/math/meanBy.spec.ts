@@ -16,6 +16,7 @@ describe('meanBy', () => {
 
     // @ts-expect-error - invalid args
     meanBy(objects, function () {
+      // eslint-disable-next-line
       args || (args = slice.call(arguments));
     });
 
