@@ -1,5 +1,6 @@
 import { bench, describe } from 'vitest';
 import { unionWith as unionWithToolkit_ } from 'es-toolkit';
+import { unionWith as unionWithToolkitCompat_ } from 'es-toolkit/compat';
 import { unionWith as unionWithLodash_ } from 'lodash';
 
 const unionWithToolkit = unionWithToolkit_;
@@ -11,6 +12,13 @@ describe('unionWith', () => {
     const array2 = [{ id: 2 }, { id: 3 }];
     const areItemsEqual = (a, b) => a.id === b.id;
     unionWithToolkit(array1, array2, areItemsEqual);
+  });
+
+  bench('es-toolkit/compat/unionWith', () => {
+    const array1 = [{ id: 1 }, { id: 2 }];
+    const array2 = [{ id: 2 }, { id: 3 }];
+    const areItemsEqual = (a, b) => a.id === b.id;
+    unionWithToolkitCompat_(array1, array2, areItemsEqual);
   });
 
   bench('lodash/unionWith', () => {
@@ -27,6 +35,10 @@ describe('unionWith/largeArray', () => {
 
   bench('es-toolkit/unionWith', () => {
     unionWithToolkit(largeArray1, largeArray2, (a, b) => a.id === b.id);
+  });
+
+  bench('es-toolkit/compat/unionWith', () => {
+    unionWithToolkitCompat_(largeArray1, largeArray2, (a, b) => a.id === b.id);
   });
 
   bench('lodash/unionWith', () => {
