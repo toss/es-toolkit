@@ -6,7 +6,13 @@ This function can only be imported from `es-toolkit/compat` for compatibility re
 When you import this function from `es-toolkit/compat`, it [behaves exactly the same as lodash](../../../compatibility.md).
 :::
 
-This function finds the index of the first occurrence of the second argument value in a sorted array. In other words, it tells you at which position the value you're looking for is located in the sorted array. It uses the [sortedIndex](./sortedIndex.md) function, repeatedly comparing and returning the index.
+Finds the index of the first occurrence of a value in a sorted array, similar to how `Array#indexOf` works, but specifically for sorted arrays.
+
+::: warn Ensure the array is sorted
+
+It's important to provide a sorted array to this function because it uses a binary search to quickly find the index.
+
+:::
 
 ## Interface
 
@@ -19,7 +25,7 @@ export function sortedIndexOf(array: ArrayLike | null | undefined, value: T): nu
 - `array` (`ArrayLike | null | undefined`): A sorted array. If the array is null or undefined, it returns -1.
 - `value` (`T`): The value to search for in the sorted array through comparison.
 
-### Return Value
+### Returns
 
 (`number`): The index at which the value should be inserted to maintain the sort order.
 
