@@ -52,9 +52,19 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 
 All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
 
-We use English as our primary language, but we aim to support Korean documents in our best effort. If you have difficulties writing Korean documents, please let our contributors know so that we can provide the corresponding Korean documents for you.
+Our primary language is English, but we strive to support documents in Korean, Japanese, and Simplified Chinese as well. If you have trouble writing documents in a foreign language, please let our contributors know, and we will help provide the necessary translations.
 
-## 2. Issues
+## 2. Coding Conventions
+
+Here are the coding conventions we follow in the `es-toolkit` repository:
+
+### 2.1 Use short names for type parameters
+
+- Use `T` for elements, like in [difference](https://es-toolkit.slash.page/reference/array/difference.html).
+- Use `E` for errors, like in [attempt](https://es-toolkit.slash.page/reference/util/attempt.html).
+- Use `K` for keys, like in [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html).
+
+## 3. Issues
 
 You can contribute to es-toolkit via:
 
