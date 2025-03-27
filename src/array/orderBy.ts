@@ -34,7 +34,7 @@ import { compareValues } from '../_internal/compareValues.ts';
  * //   { user: 'fred', age: 40 },
  * // ]
  */
-export function orderBy<T extends object>(
+export function orderBy<T extends Object>(
   arr: readonly T[],
   criteria: Array<((item: T) => unknown) | keyof T>,
   orders: Array<'asc' | 'desc'>
