@@ -82,6 +82,7 @@ export { takeRight } from './array/takeRight.ts';
 export { takeRightWhile } from './array/takeRightWhile.ts';
 export { union } from './array/union.ts';
 export { unionBy } from './array/unionBy.ts';
+export { unionWith } from './array/unionWith.ts';
 export { uniq } from './array/uniq.ts';
 export { uniqBy } from './array/uniqBy.ts';
 export { unzip } from './array/unzip.ts';
