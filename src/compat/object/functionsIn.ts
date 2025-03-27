@@ -1,7 +1,7 @@
 import { isFunction } from '../../predicate';
 
 /**
- * Creates an array of function property names from own and inherited enumerable properties of an object.
+ * Returns an array of property names whose values are functions, including inherited properties.
  *
  * @param {*} object The object to inspect.
  * @returns {Array} Returns the function names.

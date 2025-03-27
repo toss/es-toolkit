@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed @here.
 :::
 
-Creates an array of function property names from own and inherited enumerable properties of an object.
+Returns an array of property names whose values are functions, including inherited properties.
 
 ## Signature
 

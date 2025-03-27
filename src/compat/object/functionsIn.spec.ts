@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { functionsIn } from './functionsIn';
+import { identity } from '../../function/identity';
+import { noop } from '../../function/noop';
 
 describe('functionsIn', () => {
   function Foo(this: any) {
@@ -59,5 +61,28 @@ describe('functionsIn', () => {
     };
 
     expect(functionsIn(object)).toEqual(['a', 'b']);
+  });
+
+  it('should return the function names of an object', () => {
+    const object = { a: 'a', b: identity, c: /x/, d: noop };
+    const actual = functionsIn(object).sort();
+
+    expect(actual).toEqual(['b', 'd']);
+  });
+
+  it('should not include inherited functions', () => {
+    function Foo() {
+      // eslint-disable-next-line
+      // @ts-ignore
+      this.a = identity;
+      // eslint-disable-next-line
+      // @ts-ignore
+      this.b = 'b';
+    }
+    Foo.prototype.c = noop;
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    expect(functionsIn(new Foo())).toEqual(['a', 'c']);
   });
 });
