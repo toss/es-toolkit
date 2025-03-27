@@ -59,6 +59,6 @@ describe('trimEnd', () => {
   });
 
   it('should handle cases where multiple trailing characters in the array need removal', () => {
-    expect(trimEnd('abcabcabc', ['c', 'b'])).toEqual('a');
+    expect(trimEnd('abcabcabc', ['c', 'b'])).toEqual('abcabca');
   });
 });
