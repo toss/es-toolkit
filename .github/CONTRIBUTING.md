@@ -73,7 +73,7 @@ You can contribute to es-toolkit via:
 - [Requesting a new feature or package](https://github.com/toss/es-toolkit/issues/new/choose)
 - [Having a look at our issue list](https://github.com/toss/es-toolkit/issues) to see what's to be fixed
 
-## 3. Pull Requests
+## 4. Pull Requests
 
 > [Opening a pull request](https://github.com/toss/es-toolkit/compare) <br/>
 
@@ -86,7 +86,7 @@ You can raise your own pull request. The title of your pull request should match
 > We do not care about the number, or style of commits in your history, because we squash merge every PR into main. <br/>
 > Feel free to commit in whatever style you feel comfortable with.
 
-### 3.1 Type
+### 4.1 Type
 
 **Type must be one of those**
 
@@ -104,11 +104,11 @@ other :
 
 - chore - anything else
 
-### 3.2 Function Names
+### 4.2 Function Names
 
 The name of function that you made changes. (ex: debounce, throttle)<br/>
 If you made changes across multiple packages, writing package scope is optional.
 
-### 3.3 Description
+### 4.3 Description
 
 A clear and concise description of what the pr is about.
