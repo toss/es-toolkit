@@ -20,6 +20,10 @@ export function trimEnd(str: string, chars?: string | string[]): string {
 
   switch (typeof chars) {
     case 'string': {
+      if (chars.length !== 1) {
+        throw new Error(`The 'chars' parameter should be a single character string.`);
+      }
+
       while (endIndex > 0 && str[endIndex - 1] === chars) {
         endIndex--;
       }
