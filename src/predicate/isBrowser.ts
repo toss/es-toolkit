@@ -1,3 +1,9 @@
+declare let window:
+  | {
+      document: unknown;
+    }
+  | undefined;
+
 /**
  * Checks if the current environment is a browser.
  *
@@ -13,5 +19,5 @@
  * }
  */
 export function isBrowser(): boolean {
-  return globalThis.window?.document != null;
+  return typeof window !== 'undefined' && window?.document != null;
 }
