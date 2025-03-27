@@ -16,6 +16,21 @@ const isObject = (value: any): value is Record<string, any> => {
 
 const isArray = Array.isArray;
 
+/**
+ * Creates a new object composed of the properties with keys converted to camelCase.
+ *
+ * This function takes an object and returns a new object that includes the same properties,
+ * but with all keys converted to camelCase format.
+ *
+ * @template T - The type of object.
+ * @param {T} obj - The object to convert keys from.
+ * @returns {Camelized<T>} A new object with all keys converted to camelCase.
+ *
+ * @example
+ * const obj = { user_id: 1, first_name: 'John' };
+ * const result = camelizeKeys(obj);
+ * // result will be { userId: 1, firstName: 'John' }
+ */
 export function camelizeKeys<T>(obj: T): Camelized<T> {
   if (isArray(obj)) {
     return obj.map(item => camelizeKeys(item)) as unknown as Camelized<T>;

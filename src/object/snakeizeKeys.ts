@@ -18,6 +18,21 @@ const isObject = (value: any): value is Record<string, any> => {
 
 const isArray = Array.isArray;
 
+/**
+ * Creates a new object composed of the properties with keys converted to snake_case.
+ *
+ * This function takes an object and returns a new object that includes the same properties,
+ * but with all keys converted to snake_case format.
+ *
+ * @template T - The type of object.
+ * @param {T} obj - The object to convert keys from.
+ * @returns {Snakified<T>} A new object with all keys converted to snake_case.
+ *
+ * @example
+ * const obj = { userId: 1, firstName: 'John' };
+ * const result = snakeizeKeys(obj);
+ * // result will be { user_id: 1, first_name: 'John' }
+ */
 export function snakeizeKeys<T>(obj: T): Snakified<T> {
   if (isArray(obj)) {
     return obj.map(item => snakeizeKeys(item)) as unknown as Snakified<T>;
