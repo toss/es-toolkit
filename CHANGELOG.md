@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.34.1
+
+Released on March 27th, 2025.
+
+- Fixed a bug in [isBrowser](https://es-toolkit.slash.page/reference/predicate/isBrowser.html) and [isNode](https://es-toolkit.slash.page/reference/predicate/isNode.html) that caused them to not work properly in Deno environments.
+
 ## Version v1.34.0
 
 Released on March 27th, 2025.
