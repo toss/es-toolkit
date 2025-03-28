@@ -27,27 +27,11 @@ const testObject = {
 };
 
 describe('snakeizeKeys', () => {
-  bench('es-toolkit/snakeizeKeys', () => {
-    snakeizeKeysToolkit(testObject);
-  });
-
-  bench('lodash/fp/snakeizeKeys', () => {
-    snakeizeKeysLodash(testObject);
-  });
-
   bench('es-toolkit/snakeizeKeys (deep nested)', () => {
     snakeizeKeysToolkit(testObject);
   });
 
-  bench('lodash/fp/snakeizeKeys (deep nested)', () => {
+  bench('lodash/fp/snakeizeKeys (shallow comparison)', () => {
     snakeizeKeysLodash(testObject);
-  });
-
-  bench('es-toolkit/snakeizeKeys (array)', () => {
-    snakeizeKeysToolkit(testObject.orderHistory);
-  });
-
-  bench('lodash/fp/snakeizeKeys (array)', () => {
-    snakeizeKeysLodash(testObject.orderHistory as any);
   });
 });

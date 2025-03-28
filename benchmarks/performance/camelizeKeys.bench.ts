@@ -27,27 +27,11 @@ const testObject = {
 };
 
 describe('camelizeKeys', () => {
-  bench('es-toolkit/camelizeKeys', () => {
-    camelizeKeysToolkit(testObject);
-  });
-
-  bench('lodash/fp/camelizeKeys', () => {
-    camelizeKeysLodash(testObject);
-  });
-
   bench('es-toolkit/camelizeKeys (deep nested)', () => {
     camelizeKeysToolkit(testObject);
   });
 
-  bench('lodash/fp/camelizeKeys (deep nested)', () => {
+  bench('lodash/fp/camelizeKeys (shallow comparison)', () => {
     camelizeKeysLodash(testObject);
-  });
-
-  bench('es-toolkit/camelizeKeys (array)', () => {
-    camelizeKeysToolkit(testObject.order_history);
-  });
-
-  bench('lodash/fp/camelizeKeys (array)', () => {
-    camelizeKeysLodash(testObject.order_history);
   });
 });

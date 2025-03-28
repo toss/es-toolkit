@@ -1,3 +1,4 @@
+import { isArray, isPlainObject } from '../compat/index.ts';
 import { camelCase } from '../string/camelCase.ts';
 
 type CamelCase<S extends string> = S extends `${infer P1}_${infer P2}${infer P3}`
@@ -9,12 +10,6 @@ export type Camelized<T> = T extends any[]
   : T extends Record<string, any>
     ? { [K in keyof T as CamelCase<string & K>]: Camelized<T[K]> }
     : T;
-
-const isObject = (value: any): value is Record<string, any> => {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
-};
-
-const isArray = Array.isArray;
 
 /**
  * Creates a new object composed of the properties with keys converted to camelCase.
@@ -33,22 +28,25 @@ const isArray = Array.isArray;
  */
 export function camelizeKeys<T>(obj: T): Camelized<T> {
   if (isArray(obj)) {
-    return obj.map(item => camelizeKeys(item)) as unknown as Camelized<T>;
-  } else if (isObject(obj)) {
+    return obj.map(item => camelizeKeys(item)) as Camelized<T>;
+  } else if (isPlainObject(obj)) {
     const result = {} as Camelized<T>;
     const defaultObjectKeys = new Set(Object.getOwnPropertyNames(Object.prototype));
-    const keys = Object.keys(obj);
+
+    const plainObject = obj as Record<string, any>;
+
+    const keys = Object.keys(plainObject);
 
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
       if (defaultObjectKeys.has(key)) {
-        result[key as keyof Camelized<T>] = obj[key];
+        result[key as keyof Camelized<T>] = plainObject[key];
         continue;
       }
 
       const camelKey = camelCase(key) as keyof Camelized<T>;
-      result[camelKey] = camelizeKeys(obj[key]);
+      result[camelKey] = camelizeKeys(plainObject[key]);
     }
 
     return result;

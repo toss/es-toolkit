@@ -1,3 +1,4 @@
+import { isArray, isPlainObject } from '../compat/index.ts';
 import { snakeCase } from '../string/snakeCase.ts';
 
 type SnakeCase<S extends string> = S extends `${infer P1}${infer P2}`
@@ -11,12 +12,6 @@ export type Snakified<T> = T extends any[]
   : T extends Record<string, any>
     ? { [K in keyof T as SnakeCase<string & K>]: Snakified<T[K]> }
     : T;
-
-const isObject = (value: any): value is Record<string, any> => {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
-};
-
-const isArray = Array.isArray;
 
 /**
  * Creates a new object composed of the properties with keys converted to snake_case.
@@ -36,21 +31,23 @@ const isArray = Array.isArray;
 export function snakeizeKeys<T>(obj: T): Snakified<T> {
   if (isArray(obj)) {
     return obj.map(item => snakeizeKeys(item)) as unknown as Snakified<T>;
-  } else if (isObject(obj)) {
+  } else if (isPlainObject(obj)) {
     const result = {} as Snakified<T>;
+    const plainObject = obj as Record<string, any>;
+
     const defaultObjectKeys = new Set(Object.getOwnPropertyNames(Object.prototype));
-    const keys = Object.keys(obj);
+    const keys = Object.keys(plainObject);
 
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
       if (defaultObjectKeys.has(key)) {
-        result[key as keyof Snakified<T>] = obj[key];
+        result[key as keyof Snakified<T>] = plainObject[key];
         continue;
       }
 
       const snakeKey = snakeCase(key) as keyof Snakified<T>;
-      result[snakeKey] = snakeizeKeys(obj[key]);
+      result[snakeKey] = snakeizeKeys(plainObject[key]);
     }
 
     return result;
