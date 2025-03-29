@@ -25,7 +25,7 @@ function cond(pairs: any[][]): (...args: any[]) => unknown;
 ## 예시
 
 ```typescript
-var func = cond([
+const func = cond([
   [matches({ a: 1 }), constant('matches A')],
   [conforms({ b: isNumber }), constant('matches B')],
   [stubTrue, constant('no match')],

@@ -25,18 +25,18 @@ function cond(pairs: any[][]): (...args: any[]) => unknown;
 ## 例
 
 ```typescript
-var func = cond([
-  [matches({ 'a': 1 }),           constant('matches A')],
-  [conforms({ 'b': isNumber }), constant('matches B')],
-  [stubTrue,                      constant('no match')]
+const func = cond([
+  [matches({ a: 1 }), constant('matches A')],
+  [conforms({ b: isNumber }), constant('matches B')],
+  [stubTrue, constant('no match')],
 ]);
 
-func({ 'a': 1, 'b': 2 });
+func({ a: 1, b: 2 });
 // => 'matches A'
 
-func({ 'a': 0, 'b': 1 });
+func({ a: 0, b: 1 });
 // => 'matches B'
 
-func({ 'a': '1', 'b': '2' });
+func({ a: '1', b: '2' });
 // => 'no match'
 ```
