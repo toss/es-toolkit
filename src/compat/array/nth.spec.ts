@@ -10,7 +10,7 @@ describe('nth', () => {
   const array = ['a', 'b', 'c', 'd'];
 
   it('should get the nth element of `array`', () => {
-    const actual = array.map((value, index) => nth(array, index));
+    const actual = array.map((_value, index) => nth(array, index));
 
     expect(actual).toEqual(array);
   });
@@ -25,6 +25,7 @@ describe('nth', () => {
     let values = falsey;
     let expected = values.map(stubA);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     let actual = values.map(n => (n ? nth(array, n) : nth(array)));
 
@@ -33,6 +34,7 @@ describe('nth', () => {
     values = ['1', 1.6];
     expected = values.map(stubB);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     actual = values.map(n => nth(array, n));
 

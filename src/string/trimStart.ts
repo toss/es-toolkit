@@ -1,6 +1,9 @@
 /**
  * Removes leading whitespace or specified characters from a string.
  *
+ * If `chars` is a string, it should be a single character. To trim a string with multiple characters,
+ * provide an array instead.
+ *
  * @param {string} str - The string from which leading characters will be trimmed.
  * @param {string | string[]} chars - The character(s) to remove from the start of the string.
  * @returns {string} - The resulting string after the specified leading character has been removed.
@@ -15,6 +18,7 @@ export function trimStart(str: string, chars?: string | string[]): string {
   if (chars === undefined) {
     return str.trimStart();
   }
+
   let startIndex = 0;
 
   switch (typeof chars) {
