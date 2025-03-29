@@ -1,4 +1,8 @@
+import { assignValue } from '../_internal/assignValue.ts';
 import { isIndex } from '../_internal/isIndex.ts';
+import { isKey } from '../_internal/isKey.ts';
+import { toKey } from '../_internal/toKey.ts';
+import { isObject } from '../predicate/isObject.ts';
 import { toPath } from '../util/toPath.ts';
 
 /**
@@ -57,23 +61,29 @@ export function set<T>(obj: object, path: PropertyKey | readonly PropertyKey[], 
  * console.log(obj); // { a: { b: { c: 4 } } }
  */
 export function set<T extends object>(obj: T, path: PropertyKey | readonly PropertyKey[], value: unknown): T {
-  const resolvedPath = Array.isArray(path) ? path : typeof path === 'string' ? toPath(path) : [path];
+  if (obj == null && !isObject(obj)) {
+    return obj;
+  }
+  const resolvedPath = isKey(path, obj)
+    ? [path]
+    : Array.isArray(path)
+      ? path
+      : typeof path === 'string'
+        ? toPath(path)
+        : [path];
 
   let current: any = obj;
 
-  for (let i = 0; i < resolvedPath.length - 1; i++) {
-    const key = resolvedPath[i];
-    const nextKey = resolvedPath[i + 1];
-
-    if (current[key] == null) {
-      current[key] = isIndex(nextKey) ? [] : {};
+  for (let i = 0; i < resolvedPath.length && current != null; i++) {
+    const key = toKey(resolvedPath[i]);
+    let newValue = value;
+    if (i !== resolvedPath.length - 1) {
+      const objValue = current[key];
+      newValue = isObject(objValue) ? objValue : isIndex(resolvedPath[i + 1]) ? [] : {};
     }
-
+    assignValue(current, key, newValue);
     current = current[key];
   }
-
-  const lastKey = resolvedPath[resolvedPath.length - 1];
-  current[lastKey] = value;
 
   return obj;
 }
