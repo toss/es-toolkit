@@ -13,6 +13,7 @@ describe('uniqueId', () => {
   });
 
   it('should coerce the prefix argument to a string', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const ids = [uniqueId(3), uniqueId(2), uniqueId(1), uniqueId(true)];
     expect(ids[0].startsWith('3')).toBe(true);

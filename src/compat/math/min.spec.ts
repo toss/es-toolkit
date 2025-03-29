@@ -14,4 +14,21 @@ describe('min', () => {
   it('should work with non-numeric collection values', () => {
     expect(min(['a', 'b'])).toBe('a');
   });
+
+  it('should work with Date objects', () => {
+    const curr = new Date();
+    const past = new Date(0);
+
+    expect(min([curr, past])).toBe(past);
+  });
+
+  it('should work with extremely large arrays', () => {
+    const array = Array.from({ length: 5e5 }, (_, i) => i);
+    expect(min(array)).toBe(0);
+  });
+
+  it('should work when chaining on an array with only one value', () => {
+    const array = [40];
+    expect(min(array)).toBe(40);
+  });
 });

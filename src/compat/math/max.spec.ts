@@ -15,4 +15,21 @@ describe('max', () => {
   it('should work with non-numeric collection values', () => {
     expect(max(['a', 'b'])).toBe('b');
   });
+
+  it('should work with Date objects', () => {
+    const curr = new Date();
+    const past = new Date(0);
+
+    expect(max([curr, past])).toBe(curr);
+  });
+
+  it('should work with extremely large arrays', () => {
+    const array = Array.from({ length: 5e5 }, (_, i) => i);
+    expect(max(array)).toBe(499999);
+  });
+
+  it('should work when chaining on an array with only one value', () => {
+    const array = [40];
+    expect(max(array)).toBe(40);
+  });
 });
