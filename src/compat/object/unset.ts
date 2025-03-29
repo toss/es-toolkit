@@ -43,12 +43,12 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
         }
       }
 
-      if (obj?.[path] === undefined) {
+      if (obj?.[path as PropertyKey] === undefined) {
         return true;
       }
 
       try {
-        delete obj[path];
+        delete obj[path as PropertyKey];
         return true;
       } catch {
         return false;

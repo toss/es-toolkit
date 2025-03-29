@@ -1,4 +1,3 @@
-import { flatten } from './flatten.ts';
 import { pull as pullToolkit } from '../../array/pull.ts';
 
 /**
