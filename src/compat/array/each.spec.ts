@@ -103,6 +103,7 @@ describe('each', () => {
     const expected = [1, 0, array];
 
     func(array, function () {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions, prefer-rest-params
       args || (args = slice.call(arguments));
     });
     expect(args).toEqual(expected);
@@ -120,6 +121,7 @@ describe('each', () => {
 
     const argsList: any[] = [];
     func(array, function () {
+      // eslint-disable-next-line prefer-rest-params
       argsList.push(slice.call(arguments));
       return true;
     });
@@ -177,6 +179,7 @@ describe('each', () => {
 
     const actual = values.map(length => isIteratedAsObject({ length: length }));
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const Foo = function (a: any) {};
     Foo.a = 1;
 
