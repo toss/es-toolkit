@@ -21,26 +21,26 @@
  * console.log(result); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
  * console.log(array);  // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
  */
-export function pullAllWith<T>(array: T[], values: T[], comparator: (a: T, b: T) => boolean): T[] {
+export function pullAllWith<T>(arr: T[], values: T[], comparator: (a: T, b: T) => boolean): T[] {
   let resultIndex = 0;
 
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     // For handling sparse arrays
-    if (!(i in array)) {
+    if (!(i in arr)) {
       if (!values.includes(undefined as T)) {
-        delete array[resultIndex++];
+        delete arr[resultIndex++];
       }
       continue;
     }
 
-    const shouldRemove = values.some(value => comparator(array[i], value));
+    const shouldRemove = values.some(value => comparator(arr[i], value));
 
     if (!shouldRemove) {
-      array[resultIndex++] = array[i];
+      arr[resultIndex++] = arr[i];
     }
   }
 
-  array.length = resultIndex;
+  arr.length = resultIndex;
 
-  return array;
+  return arr;
 }
