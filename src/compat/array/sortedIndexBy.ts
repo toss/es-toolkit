@@ -2,34 +2,10 @@ import { isNull, isUndefined } from '../../predicate';
 import { isNaN } from '../predicate/isNaN';
 import { isNil } from '../predicate/isNil';
 import { isSymbol } from '../predicate/isSymbol';
+import { iteratee } from '../util/iteratee';
 
 type PropertyName = string | number | symbol;
-
 type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | Partial<T>;
-
-function iterateeToFunction<T, R>(iteratee: Iteratee<T, R>): (value: T) => any {
-  if (typeof iteratee === 'function') {
-    return iteratee;
-  }
-
-  if (typeof iteratee === 'string' || typeof iteratee === 'number' || typeof iteratee === 'symbol') {
-    return (obj: any) => obj?.[iteratee];
-  }
-
-  if (Array.isArray(iteratee)) {
-    const [path, value] = iteratee;
-    return (obj: any) => obj?.[path] === value;
-  }
-
-  return (obj: any) => {
-    for (const key in iteratee) {
-      if (obj?.[key] !== iteratee[key]) {
-        return false;
-      }
-    }
-    return true;
-  };
-}
 
 const MAX_ARRAY_LENGTH = 4294967295;
 const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
@@ -40,7 +16,7 @@ const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
  *
  * @param {ArrayLike<T> | null | undefined} array The sorted array to inspect.
  * @param {T} value The value to evaluate.
- * @param {(value: T) => R} iteratee The iteratee invoked per element.
+ * @param {(value: T) => R | PropertyName | [PropertyName, any] | Partial<T>} iteratee The iteratee invoked per element.
  * @returns {number} Returns the index at which `value` should be inserted
  *  into `array`.
  * @example
@@ -51,7 +27,7 @@ const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
 export function sortedIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
-  iteratee?: Iteratee<T, R>,
+  iterateeFunc?: Iteratee<T, R>,
   retHighest?: boolean
 ): number {
   let low = 0;
@@ -60,8 +36,8 @@ export function sortedIndexBy<T, R>(
     return 0;
   }
 
-  const iterFn = iteratee ? iterateeToFunction(iteratee) : (val: T) => val;
-  const transformedValue = iterFn(value);
+  const iterateeFunction = iterateeFunc ? iteratee(iterateeFunc) : iteratee();
+  const transformedValue = iterateeFunction(value);
 
   const valIsNaN = isNaN(transformedValue);
   const valIsNull = isNull(transformedValue);
@@ -71,7 +47,7 @@ export function sortedIndexBy<T, R>(
   while (low < high) {
     let setLow: boolean;
     const mid = Math.floor((low + high) / 2);
-    const computed = iterFn(array[mid]);
+    const computed = iterateeFunction(array[mid]);
 
     const othIsDefined = !isUndefined(computed);
     const othIsNull = isNull(computed);

@@ -2,6 +2,7 @@ import { sortedIndexBy } from './sortedIndexBy';
 
 type PropertyName = string | number | symbol;
 
+// Lodash 스타일의 Iteratee 타입 정의
 type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | Partial<T>;
 
 /**
@@ -11,7 +12,7 @@ type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | P
  *
  * @param {ArrayLike<T> | null | undefined} array The sorted array to inspect.
  * @param {T} value The value to evaluate.
- * @param {(value: T) => R} iteratee The iteratee invoked per element.
+ * @param {(value: T) => R | PropertyName | [PropertyName, any] | Partial<T>} iteratee The iteratee invoked per element.
  * @returns {number} Returns the highest index at which `value` should be inserted
  *  into `array`.
  * @example
