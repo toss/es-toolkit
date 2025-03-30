@@ -6,25 +6,18 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
+객체의 `paths`에 해당하는 값들의 배열을 반환합니다.
+
 ## 인터페이스
 
 ```typescript
-function at<T>(object: T, ...paths: Array<PropertyKey | PropertyKey[]>): unknown[];
+function at<T>(object: T, ...paths: Array<PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>>): unknown[];
 ```
 
 ### 파라미터
 
 - `object` (`T`): 순회할 객체입니다.
-
-::: info `object`는 `null` 또는 `undefined`일 수 있습니다
-
-lodash와의 완전한 호환성을 위해 `at` 함수는 `object`를 다음과 같이 처리합니다:
-
-- `object`가 `null` 또는 `undefined`인 경우 빈 객체로 처리됩니다.
-
-:::
-
-- `...paths` (`Array<PropertyKey | PropertyKey[]>`): 선택할 속성 경로들입니다. 각 경로는 문자열, 숫자, 심볼 또는 이들의 배열이 될 수 있습니다.
+- `...paths` (`Array<PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>>`): 선택할 속성 경로들입니다. 각 경로는 문자열, 숫자, 심볼 또는 이들의 배열이나 유사 배열 객체가 될 수 있습니다.
 
 ### 반환 값
 

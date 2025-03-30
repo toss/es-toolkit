@@ -3,7 +3,7 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isString } from '../predicate/isString.ts';
 
 /**
- * Creates an array of values corresponding to `paths` of `object`.
+ * Returns an array of values corresponding to `paths` of `object`.
  *
  * @template T - The type of the object.
  * @param {T} object - The object to iterate over.

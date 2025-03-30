@@ -6,29 +6,22 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
+Returns an array of values corresponding to `paths` of `object`.
+
 ## Signature
 
 ```typescript
-function at<T>(object: T, ...paths: Array<PropertyKey | PropertyKey[]>): unknown[];
+function at<T>(object: T, ...paths: Array<PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>>): unknown[];
 ```
 
 ### Parameters
 
 - `object` (`T`): The object to iterate over.
-
-::: info `object` can be `null` or `undefined`
-
-To ensure full compatibility with lodash, the `at` function handles `object` in this way:
-
-- If `object` is `null` or `undefined`, it will be treated as an empty object.
-
-:::
-
-- `...paths` (`Array<PropertyKey | PropertyKey[]>`): The property paths to pick. Each path can be a string, number, symbol, or an array of these types.
+- `...paths` (`Array<PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>>`): The property paths to pick. Each path can be a string, number, symbol, or an array of these types, or an array-like object.
 
 ### Returns
 
-(`any[]`): Returns an array of values corresponding to the specified paths.
+(`unknown[]`): Returns an array of values corresponding to the specified paths.
 
 ## Examples
 
