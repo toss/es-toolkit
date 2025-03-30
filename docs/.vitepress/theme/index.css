@@ -2,6 +2,10 @@
   --vp-nav-logo-height: 16px;
   --vp-font-family-base: 'Toss Product Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --vp-c-brand-1: var(--vp-c-green-1);
+  --vp-c-brand-2: var(--vp-c-green-2);
+  --vp-c-brand-3: var(--vp-c-green-3);
 }
 
 :root[lang='ko'] {
