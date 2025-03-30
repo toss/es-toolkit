@@ -333,7 +333,7 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
         path = toKey(path);
       }
 
-      const result = object[path];
+      const result = object[path as PropertyKey];
 
       if (result === undefined) {
         return defaultValue;

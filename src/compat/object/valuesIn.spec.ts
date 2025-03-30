@@ -27,7 +27,7 @@ describe('valuesIn', () => {
 
     const expected = [1, 2];
     // eslint-disable-next-line
-      // @ts-ignore
+    // @ts-ignore
     const actual = valuesIn(new Foo()).sort();
 
     expect(actual).toEqual(expected);

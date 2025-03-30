@@ -5,6 +5,6 @@
  * @example
  * stubObject() // Returns {}
  */
-export function stubObject(): {} {
+export function stubObject(): object {
   return {};
 }
