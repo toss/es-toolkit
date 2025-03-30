@@ -14,7 +14,7 @@ describe('sortedLastIndexBy', () => {
 
   it('should work with `_.property` shorthands', () => {
     const objects = [{ x: 30 }, { x: 50 }];
-    const actual = sortedLastIndexBy(objects, { x: 40 }, v => v.x);
+    const actual = sortedLastIndexBy(objects, { x: 40 }, 'x');
 
     expect(actual).toBe(1);
   });

@@ -1,6 +1,8 @@
 import { sortedIndexBy } from './sortedIndexBy';
 
-type Iteratee<T, R> = (value: T) => R;
+type PropertyName = string | number | symbol;
+
+type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | Partial<T>;
 
 /**
  * This method is like `sortedLastIndex` except that it accepts `iteratee`

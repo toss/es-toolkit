@@ -3,7 +3,33 @@ import { isNaN } from '../predicate/isNaN';
 import { isNil } from '../predicate/isNil';
 import { isSymbol } from '../predicate/isSymbol';
 
-type Iteratee<T, R> = (value: T) => R;
+type PropertyName = string | number | symbol;
+
+type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | Partial<T>;
+
+function iterateeToFunction<T, R>(iteratee: Iteratee<T, R>): (value: T) => any {
+  if (typeof iteratee === 'function') {
+    return iteratee;
+  }
+
+  if (typeof iteratee === 'string' || typeof iteratee === 'number' || typeof iteratee === 'symbol') {
+    return (obj: any) => obj?.[iteratee];
+  }
+
+  if (Array.isArray(iteratee)) {
+    const [path, value] = iteratee;
+    return (obj: any) => obj?.[path] === value;
+  }
+
+  return (obj: any) => {
+    for (const key in iteratee) {
+      if (obj?.[key] !== iteratee[key]) {
+        return false;
+      }
+    }
+    return true;
+  };
+}
 
 const MAX_ARRAY_LENGTH = 4294967295;
 const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
@@ -34,7 +60,8 @@ export function sortedIndexBy<T, R>(
     return 0;
   }
 
-  const transformedValue = iteratee?.(value);
+  const iterFn = iteratee ? iterateeToFunction(iteratee) : (val: T) => val;
+  const transformedValue = iterFn(value);
 
   const valIsNaN = isNaN(transformedValue);
   const valIsNull = isNull(transformedValue);
@@ -44,7 +71,7 @@ export function sortedIndexBy<T, R>(
   while (low < high) {
     let setLow: boolean;
     const mid = Math.floor((low + high) / 2);
-    const computed = iteratee?.(array[mid]);
+    const computed = iterFn(array[mid]);
 
     const othIsDefined = !isUndefined(computed);
     const othIsNull = isNull(computed);
