@@ -2,7 +2,7 @@ import { isNull, isUndefined } from '../../predicate';
 import { isNaN } from '../predicate/isNaN';
 import { isNil } from '../predicate/isNil';
 import { isSymbol } from '../predicate/isSymbol';
-import { iteratee } from '../util/iteratee';
+import { iteratee as iterateeToolkit } from '../util/iteratee';
 
 type PropertyName = string | number | symbol;
 type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | Partial<T>;
@@ -27,7 +27,7 @@ const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
 export function sortedIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
-  iterateeFunc?: Iteratee<T, R>,
+  iteratee?: Iteratee<T, R>,
   retHighest?: boolean
 ): number {
   let low = 0;
@@ -36,7 +36,7 @@ export function sortedIndexBy<T, R>(
     return 0;
   }
 
-  const iterateeFunction = iterateeFunc ? iteratee(iterateeFunc) : iteratee();
+  const iterateeFunction = iterateeToolkit(iteratee);
   const transformedValue = iterateeFunction(value);
 
   const valIsNaN = isNaN(transformedValue);
