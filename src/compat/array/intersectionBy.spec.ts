@@ -83,7 +83,8 @@ describe('intersectionBy', () => {
 
   it('should treat values that are not arrays or `arguments` objects as empty', () => {
     const array = [0, 1, null, 3];
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(intersection(array, 3, { 0: 1 }, null)).toEqual([]);
     expect(intersection(null, array, null, [2, 3])).toEqual([]);
     expect(intersection(array, null, args, null)).toEqual([]);
@@ -110,6 +111,7 @@ describe('intersectionBy', () => {
     let args: number[] | undefined;
 
     intersectionBy([2.1, 1.2], [2.3, 3.4], function () {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions, prefer-rest-params
       args || (args = slice.call(arguments));
     });
 
