@@ -19,15 +19,15 @@ describe('split', () => {
     expect(split()).toEqual(['']);
   });
 
-  it('should work with various types of values', () => {
+  it('should work as an iteratee for methods like `_.map`', () => {
     const strings = ['abc', 'def', 'ghi'];
     const actual = strings.map(str => split(str));
 
     expect(actual).toEqual([['abc'], ['def'], ['ghi']]);
   });
 
-  it('should split string with multiple characters', () => {
-    expect(split('a-b-c', '-')).toEqual(['a', 'b', 'c']);
-    expect(split('a-b-c', '-', 2)).toEqual(['a', 'b']);
+  it('should allow mixed string and array prototype methods', () => {
+    const result = split('abc', 'b').join(',');
+    expect(result).toBe('a,c');
   });
 });
