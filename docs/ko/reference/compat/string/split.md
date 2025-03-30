@@ -6,7 +6,7 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-문자열을 구분자를 기준으로 분할합니다.
+문자열을 구분자를 기준으로 분할해요.
 
 ## 인터페이스
 
@@ -18,13 +18,13 @@ function split(string: string, separator: RegExp | string, limit: number): strin
 
 ## 파라미터
 
-- `string` (`string`): 분할할 문자열입니다.
-- `separator` (`RegExp|string`): 분할 기준으로 사용할 구분자 패턴입니다.
-- `limit` (`number`): 결과 배열의 최대 길이입니다.
+- `string` (`string`): 분할할 문자열이에요.
+- `separator` (`RegExp|string`): 분할 기준으로 사용할 구분자 패턴이에요.
+- `limit` (`number`): 결과 배열의 최대 길이예요.
 
 ## 반환 값
 
-- (`Array`): 분할된 문자열 세그먼트들의 배열입니다.
+- (`Array`): 분할된 문자열 세그먼트들의 배열이에요.
 
 ## 예시
 
