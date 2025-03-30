@@ -6,7 +6,9 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Creates an object that inherits from the prototype object. If a properties object is given, its own enumerable string keyed properties are assigned to the created object.
+Creates an object that inherits from the prototype object.
+
+If `properties` are provided, they will be added to the new object. Only string-keyed enumerable properties directly owned by the properties object are copied. Inherited properties or those with `Symbol` keys are not copied.
 
 ## Signature
 
