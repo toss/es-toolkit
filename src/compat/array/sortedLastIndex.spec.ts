@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { sortBy } from './sortBy.ts';
 import { sortedLastIndex } from './sortedLastIndex.ts';
 
-describe('sortedIndex', () => {
+describe('sortedLastIndex', () => {
   it(`should return the correct insert index`, () => {
     const array = [30, 50];
     const values = [30, 40, 50];
@@ -43,9 +43,10 @@ describe('sortedIndex', () => {
 
     const expected = [1, '2', {}, symbol1, symbol2, null, undefined, NaN, NaN];
 
-    const array = [NaN, symbol1, null, 1, '2', {}, symbol2, NaN, undefined];
-
-    expect(sortBy(array)).toEqual(expected);
+    const array1 = [NaN, symbol1, null, 1, '2', {}, symbol2, NaN, undefined];
+    const array2 = ['2', null, 1, symbol1, NaN, {}, NaN, symbol2, undefined];
+    expect(sortBy(array1)).toEqual(expected);
+    expect(sortBy(array2)).toEqual(expected);
     expect(sortedLastIndex(expected, 3)).toBe(2);
     expect(sortedLastIndex(expected, symbol3)).toBe(5);
     expect(sortedLastIndex(expected, null)).toBe(6);
