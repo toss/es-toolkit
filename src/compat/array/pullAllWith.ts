@@ -4,7 +4,7 @@
  * This function mutates the original array by removing elements that match the criteria defined by `comparator`.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} array - The array from which elements will be removed.
+ * @param {T[]} arr - The array from which elements will be removed.
  * @param {T[]} values - The values to compare against, which determine which elements should be removed.
  * @param {(a: T, b: T) => boolean} comparator - A function that compares elements in `array` with `values`. If it returns `true`, the element is removed.
  * @returns {T[]} - The modified array after removing matching elements.
@@ -22,9 +22,25 @@
  * console.log(array);  // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
  */
 export function pullAllWith<T>(array: T[], values: T[], comparator: (a: T, b: T) => boolean): T[] {
-  const modifiedArray = array.filter(item => !values.some(value => comparator(item, value)));
-  array.length = 0; // Reset array
-  array.push(...modifiedArray);
+  let resultIndex = 0;
+
+  for (let i = 0; i < array.length; i++) {
+    // For handling sparse arrays
+    if (!(i in array)) {
+      if (!values.includes(undefined as T)) {
+        delete array[resultIndex++];
+      }
+      continue;
+    }
+
+    const shouldRemove = values.some(value => comparator(array[i], value));
+
+    if (!shouldRemove) {
+      array[resultIndex++] = array[i];
+    }
+  }
+
+  array.length = resultIndex;
 
   return array;
 }
