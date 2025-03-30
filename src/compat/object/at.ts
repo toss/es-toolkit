@@ -1,12 +1,13 @@
 import { get } from './get.ts';
-import { isArray } from '../predicate/isArray.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { isString } from '../predicate/isString.ts';
 
 /**
  * Creates an array of values corresponding to `paths` of `object`.
  *
  * @template T - The type of the object.
  * @param {T} object - The object to iterate over.
- * @param {...(PropertyKey | PropertyKey[])} [paths] - The property paths to pick.
+ * @param {...(PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>)} [paths] - The property paths to pick.
  * @returns {Array<unknown>} - Returns the picked values.
  *
  * @example
@@ -17,7 +18,7 @@ import { isArray } from '../predicate/isArray.ts';
  * // => [3, 4]
  * ```
  */
-export function at<T>(object: T, ...paths: Array<PropertyKey | PropertyKey[]>): unknown[] {
+export function at<T>(object: T, ...paths: Array<PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>>): unknown[] {
   if (paths.length === 0) {
     return [];
   }
@@ -27,12 +28,13 @@ export function at<T>(object: T, ...paths: Array<PropertyKey | PropertyKey[]>): 
   for (let i = 0; i < paths.length; i++) {
     const path = paths[i];
 
-    if (isArray(path)) {
-      for (let j = 0; j < path.length; j++) {
-        allPaths.push(path[j]);
-      }
-    } else {
-      allPaths.push(path);
+    if (!isArrayLike(path) || isString(path)) {
+      allPaths.push(path as PropertyKey);
+      continue;
+    }
+
+    for (let j = 0; j < path.length; j++) {
+      allPaths.push(path[j]);
     }
   }
 
