@@ -45,4 +45,24 @@ describe('trimStart', () => {
   it('should trim the string without giving the second parameter, which defaults to whitespace', () => {
     expect(trimStart('  hello world  ')).toEqual('hello world  ');
   });
+
+  it('should remove leading characters when chars is an array', () => {
+    expect(trimStart('---hello', ['-', 'h'])).toEqual('ello');
+  });
+
+  it('should remove leading characters from the string when multiple characters are provided in an array', () => {
+    expect(trimStart('000123', ['0', '1'])).toEqual('23');
+  });
+
+  it('should return the string unchanged when none of the leading characters in the array match', () => {
+    expect(trimStart('hello', ['x', 'y', 'z'])).toEqual('hello');
+  });
+
+  it('should handle cases where multiple leading characters in the array need removal', () => {
+    expect(trimStart('abcabcabc', ['a', 'b'])).toEqual('cabcabc');
+  });
+
+  it('should remove leading spaces and other characters when specified in an array', () => {
+    expect(trimStart('   hello world', [' ', 'h'])).toEqual('ello world');
+  });
 });

@@ -6,17 +6,23 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-这个函数用于在已排序的数组中查找第二个参数值首次出现的索引。换句话说，它告诉你要查找的值在已排序数组中的位置。它使用 [sortedIndex](./sortedIndex.md) 函数，通过重复比较后返回索引。
+在已排序的数组中找到值首次出现的索引。它的工作方式类似于 `Array#indexOf`，但专门用于已排序的数组。
+
+::: warn 请提供已排序的数组作为参数
+
+此函数使用二分查找（Binary search）快速找到索引，因此如果不提供已排序的数组，它将无法正常工作。
+
+:::
 
 ## 签名
 
 ```typescript
-export function sortedIndexOf(array: ArrayLike | null | undefined, value: T): number;
+function sortedIndexOf(array: ArrayLike | null | undefined, value: T): number;
 ```
 
 ### 参数
 
-- `array` (`ArrayLike | null | undefined`): 已排序的数组。如果数组为 null 或 undefined，则返回 -1。
+- `array` (`ArrayLike | null | undefined`): 已排序的数组。如果数组为 `null` 或 `undefined`，则返回 `-1`。
 - `value` (`T`): 要在已排序数组中通过比较查找的值。
 
 ### 返回值

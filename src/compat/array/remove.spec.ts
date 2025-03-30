@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { remove } from './remove';
 
 const isEven = function (n: number) {
+  // eslint-disable-next-line eqeqeq
   return n % 2 == 0;
 };
 
@@ -20,6 +21,7 @@ describe('remove', () => {
     const clone = array.slice();
 
     remove(array, function (n, index) {
+      // eslint-disable-next-line prefer-rest-params
       const args = Array.prototype.slice.call(arguments);
       args[2] = args[2].slice();
       argsList.push(args);

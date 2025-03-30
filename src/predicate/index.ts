@@ -1,6 +1,7 @@
 export { isArrayBuffer } from './isArrayBuffer.ts';
 export { isBlob } from './isBlob.ts';
 export { isBoolean } from './isBoolean.ts';
+export { isBrowser } from './isBrowser.ts';
 export { isBuffer } from './isBuffer.ts';
 export { isDate } from './isDate.ts';
 export { isEqual } from './isEqual.ts';
@@ -13,6 +14,7 @@ export { isJSONArray, isJSONObject, isJSONValue } from './isJSONValue.ts';
 export { isLength } from './isLength.ts';
 export { isMap } from './isMap.ts';
 export { isNil } from './isNil.ts';
+export { isNode } from './isNode.ts';
 export { isNotNil } from './isNotNil.ts';
 export { isNull } from './isNull.ts';
 export { isPlainObject } from './isPlainObject.ts';
