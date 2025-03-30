@@ -6,17 +6,23 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-この関数は、ソートされた配列内で2番目の引数値が最初に出現するインデックスを見つけます。つまり、探している値がソートされた配列の何番目に位置しているかを教えてくれる関数です。[sortedIndex](./sortedIndex.md)関数を使用して、繰り返し比較した後にインデックスを返します。
+ソートされた配列で値が最初に現れるインデックスを見つけます。`Array#indexOf`と似ていますが、ソートされた配列に特化しています。
+
+::: warn ソートされた配列を引数として提供してください
+
+この関数はバイナリ検索（Binary search）を使用してインデックスを迅速に見つけるため、ソートされた配列を提供しないと正しく動作しません。
+
+:::
 
 ## インターフェース
 
 ```typescript
-export function sortedIndexOf(array: ArrayLike | null | undefined, value: T): number;
+function sortedIndexOf(array: ArrayLike | null | undefined, value: T): number;
 ```
 
 ### パラメータ
 
-- `array` (`ArrayLike | null | undefined`): ソートされた配列です。配列が null または undefined の場合、-1 を返します。
+- `array` (`ArrayLike | null | undefined`): ソートされた配列です。配列が `null` または `undefined` の場合、`-1` を返します。
 - `value` (`T`): ソートされた配列内で比較を通じて探す値。
 
 ### 戻り値
