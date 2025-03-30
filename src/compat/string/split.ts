@@ -1,7 +1,8 @@
 import { toString } from '../util/toString.ts';
 
 /**
- * Splits `string` by `separator`.
+ * Splits the input string by the specified `separator`
+ * and returns a new array containing the split segments.
  *
  * @param {string | null | undefined} [string=''] The string to split.
  * @param {RegExp|string} [separator] The separator pattern to split by.

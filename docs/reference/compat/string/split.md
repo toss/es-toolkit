@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Splits a string by a separator.
+Splits the input string by the specified `separator` and returns a new array containing the split segments.
 
 ## Signature
 
