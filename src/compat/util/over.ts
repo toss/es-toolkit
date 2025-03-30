@@ -1,7 +1,7 @@
 import { iteratee } from '../util/iteratee.ts';
 
 /**
- * Creates a function that invokes the provided function iteratees with the arguments it receives
+ * Returns a function that invokes the provided function iteratees with the arguments it receives
  * and returns an array of the results.
  *
  * @template T - The type of arguments the created function will receive
@@ -17,7 +17,7 @@ import { iteratee } from '../util/iteratee.ts';
 export function over<T extends unknown[], R>(iteratees: Array<(...args: T) => R>): (...args: T) => R[];
 
 /**
- * Creates a function that checks if an object's properties match the given key-value pairs.
+ * Returns a function that checks if an object's properties match the given key-value pairs.
  *
  * @template T - The type of arguments the created function will receive
  * @param {Array<[PropertyKey, unknown]>} iteratees - The key-value pairs to match
@@ -31,7 +31,7 @@ export function over<T extends unknown[], R>(iteratees: Array<(...args: T) => R>
 export function over<T extends [object]>(iteratees: Array<[PropertyKey, unknown]>): (...args: T) => boolean[];
 
 /**
- * Creates a function that checks if an object matches the given source objects.
+ * Returns a function that checks if an object matches the given source objects.
  *
  * @template T - The type of arguments the created function will receive
  * @param {Array<object>} iteratees - The source objects to match
@@ -45,7 +45,7 @@ export function over<T extends [object]>(iteratees: Array<[PropertyKey, unknown]
 export function over<T extends [object]>(iteratees: object[]): (...args: T) => boolean[];
 
 /**
- * Creates a function that returns property values at the given paths for an object.
+ * Returns a function that returns property values at the given paths for an object.
  *
  * @template T - The type of arguments the created function will receive
  * @param {PropertyKey[]} iteratees - The property paths to get
@@ -59,11 +59,10 @@ export function over<T extends [object]>(iteratees: object[]): (...args: T) => b
 export function over<T extends [object]>(iteratees: PropertyKey[]): (...args: T) => unknown[];
 
 /**
- * Creates a function that invokes iteratees with the arguments provided to the created function and returns
+ * Returns a function that invokes iteratees with the arguments provided to the created function and returns
  * their results.
  *
- * @template R - The return type of the iteratee functions
- * @param {...Array<((...args: any[]) => R) | PropertyKey | object | null | undefined>} iteratees - The iteratees to invoke.
+ * @param {Array<((...args: any[]) => unknown) | symbol | number | string | object | null>} iteratees - The iteratees to invoke.
  * @returns {Function} Returns the new function.
  *
  * @example
@@ -94,10 +93,12 @@ export function over<T extends [object]>(iteratees: PropertyKey[]): (...args: T)
  * emptyFunc(1, 2, 3);
  * // => []
  */
-export function over<R = unknown>(iteratees: any[]): (...args: any[]) => R[] {
-  const funcs = iteratees.map(item => iteratee(item));
+export function over(
+  iteratees: Array<((...args: any[]) => unknown) | symbol | number | string | object | null>
+): (...args: any[]) => unknown[] {
+  const funcs = iteratees.map(item => iteratee(item as any));
 
-  return function (this: any, ...args: any[]): R[] {
+  return function (this: any, ...args: unknown[]) {
     return funcs.map(func => func.apply(this, args));
   };
 }
