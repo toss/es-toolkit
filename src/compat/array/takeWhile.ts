@@ -1,7 +1,7 @@
 import { toArray } from '../_internal/toArray';
 import { negate } from '../function/negate';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject';
-import { iteratee as createIteratee } from '../util/iteratee';
+import { iteratee } from '../util/iteratee';
 
 /**
  * Creates a slice of array.
@@ -151,7 +151,7 @@ export function takeWhile<T>(
   }
 
   const _array = toArray(array);
-  const index = _array.findIndex(negate(createIteratee(predicate)));
+  const index = _array.findIndex(negate(iteratee(predicate)));
 
   return index === -1 ? _array : _array.slice(0, index);
 }
