@@ -139,19 +139,19 @@ export function takeWhile<T>(array: ArrayLike<T> | null | undefined, property: P
  * console.log(result6); // []
  **/
 export function takeWhile<T>(
-  _array: ArrayLike<T> | null | undefined,
+  array: ArrayLike<T> | null | undefined,
   predicate?:
     | ((value: T, index: number, array: ArrayLike<T>) => unknown)
     | Partial<T>
     | [keyof T, unknown]
     | PropertyKey
 ): T[] {
-  if (!isArrayLikeObject(_array)) {
+  if (!isArrayLikeObject(array)) {
     return [];
   }
 
-  const array = toArray(_array);
-  const index = array.findIndex(negate(createIteratee(predicate)));
+  const _array = toArray(array);
+  const index = _array.findIndex(negate(createIteratee(predicate)));
 
-  return index === -1 ? array : array.slice(0, index);
+  return index === -1 ? _array : _array.slice(0, index);
 }
