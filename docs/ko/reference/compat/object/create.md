@@ -6,7 +6,9 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-원형 객체로부터 객체를 생성해요. 속성이 주어진 경우, 객체에 할당될 속성은 자신의 열거 가능한 문자열 키 속성만 할당돼요.
+주어진 객체를 상속해서 새로운 객체를 만들어요.
+
+속성(`properties`)을 함께 전달하면, 새 객체에 그 속성들을 추가해요. 이때 문자열 키를 가진 열거 가능한 속성만 복사돼요. 상속받은 속성이나 `Symbol` 키를 가진 속성은 복사되지 않아요.
 
 ## 인터페이스
 
@@ -16,7 +18,7 @@ function create<T extends object, U extends object>(prototype: T, properties?: U
 
 ### 파라미터
 
-- `prototype` (`T extends object`): 원형 객체.
+- `prototype` (`T extends object`): 상속할 객체.
 - `properties` (`U extends object`, 선택): 객체에 할당할 속성.
 
 ### 반환 값
