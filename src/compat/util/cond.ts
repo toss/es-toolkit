@@ -2,12 +2,15 @@ import { iteratee } from './iteratee.ts';
 import { isFunction } from '../../predicate/isFunction';
 
 /**
- * Returns a function that iterates over `pairs` and invokes the corresponding
- * function of the first predicate to return truthy. The predicate-function pairs
- * are invoked with the `this` binding and arguments of the created function.
+ * Creates a function that checks conditions one by one and runs the matching function.
  *
- * @param {Array} pairs - The predicate-function pairs.
- * @returns {(...args: any[]) => unknown} Returns the new composite function.
+ * Each pair consists of a condition (predicate) and a function to run.
+ * The function goes through each condition in order until it finds one that's true.
+ * When it finds a true condition, it runs the corresponding function and returns its result.
+ * If none of the conditions are true, it returns undefined.
+ *
+ * @param {Array<Array>} pairs - Array of pairs. Each pair consists of a predicate function and a function to run.
+ * @returns {(...args: any[]) => unknown} A new composite function that checks conditions and runs the matching function.
  * @example
  *
  * const func = cond([

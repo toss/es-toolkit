@@ -6,9 +6,12 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Returns a function that iterates over `pairs` and invokes the corresponding
-function of the first predicate to return truthy. The predicate-function pairs
-are invoked with the `this` binding and arguments of the created function.
+Creates a function that checks conditions one by one and runs the matching function.
+
+Each pair consists of a condition (predicate) and a function to run.
+The function goes through each condition in order until it finds one that's `true`.
+When it finds a `true` condition, it runs the corresponding function and returns its result.
+If none of the conditions are true, it returns `undefined`.
 
 ## Signature
 
@@ -18,11 +21,11 @@ function cond(pairs: any[][]): (...args: any[]) => unknown;
 
 ### Parameters
 
-- `pairs` (`Array`): The predicate-function pairs.
+- `pairs` (`Array`): Array of pairs. Each pair consists of a predicate function and a function to run.
 
 ### Returns
 
-(`(...args: any[]) => unknown`): Returns the new composite function.
+(`(...args: any[]) => unknown`): A new composite function that checks conditions and runs the matching function.
 
 ## Examples
 
