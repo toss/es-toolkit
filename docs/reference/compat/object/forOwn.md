@@ -13,7 +13,10 @@ iteration early by explicitly returning false.
 ## Signature
 
 ```typescript
-function forOwn<T>(object: T | null | undefined, iteratee: (value: T[keyof T], key: string, collection: T) => any): T | null | undefined;
+function forOwn<T>(
+  object: T | null | undefined,
+  iteratee: (value: T[keyof T], key: string, collection: T) => any
+): T | null | undefined;
 ```
 
 ### Parameters
@@ -35,7 +38,7 @@ function Foo() {
 
 Foo.prototype.c = 3;
 
-forOwn(new Foo(), function(value, key) {
+forOwn(new Foo(), function (value, key) {
   console.log(key);
 });
 // => Logs 'a' then 'b' (iteration order is not guaranteed).
