@@ -94,7 +94,7 @@ describe('bindAll', () => {
 
   it('should work with an array `object`', () => {
     const array = ['push', 'pop'];
-    bindAll(array);
+    bindAll(array as unknown as { [key: string]: unknown });
     expect(array.pop).toBe(Array.prototype.pop);
   });
 
