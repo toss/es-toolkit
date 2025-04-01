@@ -27,6 +27,7 @@ describe('forOwn', () => {
   });
 
   it(`should provide correct iteratee arguments`, () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let args: any;
     const object = {
       a: 1,
@@ -58,14 +59,15 @@ describe('forOwn', () => {
 
   it('should not iterate inherited properties', () => {
     class Foo {
+      a: number;
+      b: number;
+
       constructor() {
-        // @ts-expect-error
         this.a = 1;
-        // @ts-expect-error
         this.b = 2;
       }
     }
-    // @ts-expect-error
+    // @ts-expect-error - testing inherited properties
     Foo.prototype.c = 3;
 
     expect(getOwnEnumerableStringKeys(new Foo())).toEqual(['a', 'b']);
@@ -95,6 +97,7 @@ describe('forOwn', () => {
   });
 
   it('should iterate over empty slots in sparse array', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const a = [1, , , 4];
 
     expect(getOwnEnumerableStringKeys(a)).toEqual(['0', '1', '2', '3']);

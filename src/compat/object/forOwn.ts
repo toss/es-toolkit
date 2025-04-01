@@ -26,6 +26,7 @@ import { identity } from '../../function';
  */
 export function forOwn<T>(
   object: T | null | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   iteratee: (value: T[keyof T], key: string, collection: T) => any = identity
 ): T | null | undefined {
   if (!object) {
