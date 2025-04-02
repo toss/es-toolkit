@@ -85,6 +85,7 @@ export { uniq } from './array/uniq.ts';
 export { uniqBy } from './array/uniqBy.ts';
 export { unzip } from './array/unzip.ts';
 export { without } from './array/without.ts';
+export { xor } from './array/xor.ts';
 export { zip } from './array/zip.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 
