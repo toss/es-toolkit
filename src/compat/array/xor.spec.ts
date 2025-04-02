@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { xor } from './xor';
 import { args } from '../_internal/args';
 
+/**
+ * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/xor-methods.spec.js
+ */
 describe('xor', () => {
   it(`should return the symmetric difference of two arrays`, () => {
     const actual = xor([2, 1], [2, 3]);

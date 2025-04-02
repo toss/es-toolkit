@@ -22,10 +22,6 @@ import { toArray } from '../util/toArray.ts';
  * xor([1, 2], [2, 3], [4, 5]);
  */
 export function xor<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[] {
-  if (arrays.length === 0) {
-    return [];
-  }
-
   const itemCounts: Map<T, number> = new Map();
 
   for (let i = 0; i < arrays.length; i++) {
