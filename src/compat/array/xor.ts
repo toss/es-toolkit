@@ -2,8 +2,8 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { toArray } from '../util/toArray.ts';
 
 /**
- * Computes the symmetric difference between two arrays. The symmetric difference is the set of elements
- * which are in either of the arrays, but not in their intersection.
+ * Computes the symmetric difference of the provided arrays, returning an array of elements
+ * that exist in only one of the arrays.
  *
  * @template T - The type of elements in the arrays.
  * @param {...(ArrayLike<T> | null | undefined)} arrays - The arrays to compare.
