@@ -8,6 +8,13 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Creates a function that invokes given functions and returns their results as an array.
 
+You can use several types of iteratees:
+
+- **Functions**: Each function is called with the same arguments and the results are collected.
+- **Property names**: Each property name is used to extract values from the provided object.
+- **Objects**: Each object is used to check if the provided object matches its properties.
+- **Property-value pairs**: Each pair checks if the specified property of the provided object matches the value.
+
 ## Signature
 
 ```typescript
