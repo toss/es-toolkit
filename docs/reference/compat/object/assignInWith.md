@@ -22,10 +22,32 @@ the default behavior is equivalent to using the identity function (returning the
 ## Signature
 
 ```typescript
-function assignInWith<O, S>(object: O, source: S, getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any): O & S;
-function assignInWith<O, S1, S2>(object: O, source1: S1, source2: S2, getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any): O & S1 & S2;
-function assignInWith<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3, getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any): O & S1 & S2 & S3;
-function assignInWith<O, S1, S2, S3, S4>(object: O, source1: S1, source2: S2, source3: S3, source4: S4, getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any): O & S1 & S2 & S3 & S4;
+function assignInWith<O, S>(
+  object: O,
+  source: S,
+  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
+): O & S;
+function assignInWith<O, S1, S2>(
+  object: O,
+  source1: S1,
+  source2: S2,
+  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
+): O & S1 & S2;
+function assignInWith<O, S1, S2, S3>(
+  object: O,
+  source1: S1,
+  source2: S2,
+  source3: S3,
+  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
+): O & S1 & S2 & S3;
+function assignInWith<O, S1, S2, S3, S4>(
+  object: O,
+  source1: S1,
+  source2: S2,
+  source3: S3,
+  source4: S4,
+  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
+): O & S1 & S2 & S3 & S4;
 function assignInWith(object: any, ...sources: any[]): any;
 ```
 
@@ -43,7 +65,7 @@ function assignInWith(object: any, ...sources: any[]): any;
 
 ```typescript
 const target = { a: 1 };
-const result = assignInWith(target, { b: 2 }, { c: 3 }, function(objValue, srcValue) {
+const result = assignInWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
   return objValue === undefined ? srcValue : objValue;
 });
 console.log(result); // Output: { a: 1, b: 2, c: 3 }

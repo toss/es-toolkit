@@ -18,7 +18,13 @@ it will not be overwritten.
 function assign<O, S>(object: O, source: S): O & S;
 function assign<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
 function assign<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function assign<O, S1, S2, S3, S4>(object: O, source1: S1, source2: S2, source3: S3, source4: S4): O & S1 & S2 & S3 & S4;
+function assign<O, S1, S2, S3, S4>(
+  object: O,
+  source1: S1,
+  source2: S2,
+  source3: S3,
+  source4: S4
+): O & S1 & S2 & S3 & S4;
 function assign(object: any, ...sources: any[]): any;
 function assign(object: any, ...sources: any[]): any;
 ```
