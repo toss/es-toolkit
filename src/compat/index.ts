@@ -88,6 +88,7 @@ export { unionBy } from './array/unionBy.ts';
 export { unionWith } from './array/unionWith.ts';
 export { uniq } from './array/uniq.ts';
 export { uniqBy } from './array/uniqBy.ts';
+export { uniqWith } from './array/uniqWith.ts';
 export { unzip } from './array/unzip.ts';
 export { without } from './array/without.ts';
 export { zip } from './array/zip.ts';
