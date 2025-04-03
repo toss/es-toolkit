@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities.
 :::
 
-Updates the value at the specified path of the given object using an updater function and a customizer. If any part of the path doesn't exist, it will be created according to the customizer function.
+Updates the value at the specified path of an object with the value returned by the `updater` function. If parts of the path don’t exist, you can use the `customizer` function to define how new objects should be created.
 
 ## Signature
 
