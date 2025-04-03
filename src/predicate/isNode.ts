@@ -1,9 +1,9 @@
 declare let process:
   | {
-      versions?: {
-        node?: unknown;
-      };
-    }
+    versions?: {
+      node?: unknown;
+    };
+  }
   | undefined;
 
 /**
@@ -15,11 +15,11 @@ declare let process:
  * @returns {boolean} `true` if the current environment is Node.js, otherwise `false`.
  *
  * @example
- *if (isNode()) {
+ * if (isNode()) {
  *   console.log('This is running in Node.js');
  *   const fs = import('node:fs');
  * }
  */
 export function isNode(): boolean {
-  return process?.versions?.node != null;
+  return typeof process !== "undefined" && process?.versions?.node != null;
 }
