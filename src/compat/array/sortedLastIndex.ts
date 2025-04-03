@@ -22,20 +22,24 @@ export function sortedLastIndex<T>(array: ArrayLike<T> | null | undefined, value
   if (isNil(array)) {
     return 0;
   }
-  let low = 0,
-    high = isNil(array) ? low : array.length;
 
-  if (isNumber(value) && value === value && high <= HALF_MAX_ARRAY_LENGTH) {
-    while (low < high) {
-      const mid = (low + high) >>> 1;
-      const compute = array[mid];
-      if (!isNull(compute) && !isSymbol(compute) && (compute as any) <= value) {
-        low = mid + 1;
-      } else {
-        high = mid;
-      }
-    }
-    return high;
+  let high = array.length;
+
+  if (!isNumber(value) || Number.isNaN(value) || high > HALF_MAX_ARRAY_LENGTH) {
+    return sortedLastIndexBy(array, value, value => value);
   }
-  return sortedLastIndexBy(array, value, value => value);
+
+  let low = 0;
+
+  while (low < high) {
+    const mid = (low + high) >>> 1;
+    const compute = array[mid];
+    if (!isNull(compute) && !isSymbol(compute) && (compute as any) <= value) {
+      low = mid + 1;
+    } else {
+      high = mid;
+    }
+  }
+
+  return high;
 }
