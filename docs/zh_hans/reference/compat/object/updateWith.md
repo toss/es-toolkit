@@ -6,7 +6,7 @@
 从 `es-toolkit/compat` 导入时，此函数的行为与 lodash 完全相同，并提供相同的功能。
 :::
 
-使用更新函数和定制器函数更新给定对象中指定路径的值。如果路径的任何部分不存在，将根据定制器函数创建它。
+使用 `updater` 函数返回的值更新对象指定路径上的值。当路径的某部分不存在时，可以通过 `customizer` 函数指定如何创建新对象。
 
 ## 签名
 
@@ -33,7 +33,7 @@ function updateWith<T extends object | null | undefined>(
 ## 示例
 
 ```typescript
-import { updateWith } from 'es-toolkit/compat/object/updateWith';
+import { updateWith } from 'es-toolkit/compat';
 
 const object = { a: [{ b: { c: 3 } }] };
 

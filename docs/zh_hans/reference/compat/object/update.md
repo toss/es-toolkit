@@ -6,7 +6,7 @@
 从 `es-toolkit/compat` 导入时，此函数的行为与 lodash 完全相同，并提供相同的功能。
 :::
 
-使用更新函数更新给定对象中指定路径的值。如果路径的任何部分不存在，将会创建它。
+使用更新函数更新指定对象路径上的值。如果路径的某部分不存在，则会创建它。
 
 ## 签名
 
@@ -31,7 +31,7 @@ function update<T extends object | null | undefined>(
 ## 示例
 
 ```typescript
-import { update } from 'es-toolkit/compat/object/update';
+import { update } from 'es-toolkit/compat';
 
 const object = { a: [{ b: { c: 3 } }] };
 

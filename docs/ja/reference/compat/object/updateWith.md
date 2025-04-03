@@ -6,7 +6,7 @@
 `es-toolkit/compat`からインポートする場合、この関数はlodashと全く同じように動作し、同じ機能を提供します。
 :::
 
-指定されたパスのオブジェクトの値をアップデーター関数とカスタマイザーを使用して更新します。パスの一部が存在しない場合はカスタマイザー関数に基づいて作成されます。
+オブジェクトの指定されたパスにある値を`updater`関数が返す値で更新します。パスの一部が存在しない場合、`customizer`関数を使用して新しいオブジェクトをどのように作成するかを指定できます。
 
 ## インターフェース
 
@@ -33,7 +33,7 @@ function updateWith<T extends object | null | undefined>(
 ## 例
 
 ```typescript
-import { updateWith } from 'es-toolkit/compat/object/updateWith';
+import { updateWith } from 'es-toolkit/compat';
 
 const object = { a: [{ b: { c: 3 } }] };
 

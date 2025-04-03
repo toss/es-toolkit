@@ -33,7 +33,7 @@ function updateWith<T extends object | null | undefined>(
 ## Examples
 
 ```typescript
-import { updateWith } from 'es-toolkit/compat/object/updateWith';
+import { updateWith } from 'es-toolkit/compat';
 
 const object = { a: [{ b: { c: 3 } }] };
 
