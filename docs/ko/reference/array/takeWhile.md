@@ -47,7 +47,7 @@ function takeWhile<T>(
   array: ArrayLike<T> | null | undefined,
   predicate: (item: T, index: number, array: T[]) => unknown
 ): T[];
-function takeWhile<T작(array: ArrayLike<T> | null | undefined, matches: Partial<T>): T[];
+function takeWhile<T>(array: ArrayLike<T> | null | undefined, matches: Partial<T>): T[];
 function takeWhile<T>(array: ArrayLike<T> | null | undefined, matchesProperty: [keyof T, unknown]): T[];
 function takeWhile<T>(array: ArrayLike<T> | null | undefined, property: PropertyKey): T[];
 ```
