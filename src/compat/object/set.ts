@@ -1,12 +1,5 @@
 import { updateWith } from './updateWith.ts';
-import { assignValue } from '../_internal/assignValue.ts';
-import { isIndex } from '../_internal/isIndex.ts';
-import { isKey } from '../_internal/isKey.ts';
-import { toKey } from '../_internal/toKey.ts';
-import { isObject } from '../predicate/isObject.ts';
-import { toPath } from '../util/toPath.ts';
 
-export function set<T extends object>(obj: T, path: PropertyKey | readonly PropertyKey[], value: unknown): T;
 /**
  * Sets the value at the specified path of the given object. If any part of the path does not exist, it will be created.
  *
