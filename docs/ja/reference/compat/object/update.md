@@ -31,7 +31,7 @@ function update<T extends object | null | undefined>(
 ## 例
 
 ```typescript
-import { update } from 'es-toolkit/compat/object/update';
+import { update } from 'es-toolkit/compat';
 
 const object = { a: [{ b: { c: 3 } }] };
 
