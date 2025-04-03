@@ -1,10 +1,10 @@
-declare let process:
-  | {
-      versions?: {
-        node?: unknown;
-      };
-    }
-  | undefined;
+// declare let process:
+//   | {
+//       versions?: {
+//         node?: unknown;
+//       };
+//     }
+//   | undefined;
 
 /**
  * Checks if the current environment is Node.js.
@@ -21,5 +21,5 @@ declare let process:
  * }
  */
 export function isNode(): boolean {
-  return typeof process !== 'undefined' && process?.versions?.node != null;
+  return process?.versions?.node != null;
 }

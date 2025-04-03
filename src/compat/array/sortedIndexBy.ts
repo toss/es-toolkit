@@ -1,7 +1,8 @@
-import { isNull, isUndefined } from '../../predicate';
-import { isNaN } from '../predicate/isNaN';
-import { isNil } from '../predicate/isNil';
-import { isSymbol } from '../predicate/isSymbol';
+import { isNull } from '../../predicate/isNull.ts';
+import { isUndefined } from '../../predicate/isUndefined.ts';
+import { isNaN } from '../predicate/isNaN.ts';
+import { isNil } from '../predicate/isNil.ts';
+import { isSymbol } from '../predicate/isSymbol.ts';
 
 type Iteratee<T, R> = (value: T) => R;
 
