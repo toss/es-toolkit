@@ -131,6 +131,7 @@ export { subtract } from './math/subtract.ts';
 export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
 
+export { assign } from './object/assign.ts';
 export { assignIn } from './object/assignIn.ts';
 export { assignIn as extend } from './object/assignIn.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
