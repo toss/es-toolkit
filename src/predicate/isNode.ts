@@ -1,10 +1,10 @@
-// declare let process:
-//   | {
-//       versions?: {
-//         node?: unknown;
-//       };
-//     }
-//   | undefined;
+declare let process:
+  | {
+      versions?: {
+        node?: unknown;
+      };
+    }
+  | undefined;
 
 /**
  * Checks if the current environment is Node.js.
