@@ -1,5 +1,5 @@
 import { iteratee } from './iteratee.ts';
-import { isFunction } from '../../predicate/isFunction';
+import { isFunction } from '../../predicate/isFunction.ts';
 
 /**
  * Creates a function that checks conditions one by one and runs the matching function.

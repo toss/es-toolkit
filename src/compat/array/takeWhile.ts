@@ -1,7 +1,7 @@
-import { toArray } from '../_internal/toArray';
-import { negate } from '../function/negate';
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject';
-import { iteratee } from '../util/iteratee';
+import { toArray } from '../_internal/toArray.ts';
+import { negate } from '../function/negate.ts';
+import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Creates a slice of array.

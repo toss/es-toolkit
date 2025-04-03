@@ -1,8 +1,9 @@
-import { isNull, isUndefined } from '../../predicate';
-import { isNaN } from '../predicate/isNaN';
-import { isNil } from '../predicate/isNil';
-import { isSymbol } from '../predicate/isSymbol';
-import { iteratee as iterateeToolkit } from '../util/iteratee';
+import { isNull } from '../../predicate/isNull.ts';
+import { isUndefined } from '../../predicate/isUndefined.ts';
+import { isNaN } from '../predicate/isNaN.ts';
+import { isNil } from '../predicate/isNil.ts';
+import { isSymbol } from '../predicate/isSymbol.ts';
+import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
 type PropertyName = string | number | symbol;
 type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | Partial<T>;

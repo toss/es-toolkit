@@ -1,4 +1,4 @@
-import { delay as delayToolkit } from '../promise';
+import { delay as delayToolkit } from '../promise/delay.ts';
 
 interface RetryOptions {
   /**
