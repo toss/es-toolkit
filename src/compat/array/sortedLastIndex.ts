@@ -1,6 +1,8 @@
-import { sortedLastIndexBy } from './sortedLastIndexBy';
-import { isNil, isNull, isSymbol } from '../../predicate';
-import { isNumber } from '../predicate/isNumber';
+import { sortedLastIndexBy } from './sortedLastIndexBy.ts';
+import { isNil } from '../../predicate/isNil.ts';
+import { isNull } from '../../predicate/isNull.ts';
+import { isSymbol } from '../../predicate/isSymbol.ts';
+import { isNumber } from '../predicate/isNumber.ts';
 
 const MAX_ARRAY_LENGTH = 4294967295;
 const HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
