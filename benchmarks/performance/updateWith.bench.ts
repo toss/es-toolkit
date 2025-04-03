@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { updateWith as updateWithToolkitCompat_ } from 'es-toolkit/compat/object/updateWith';
+import { updateWith as updateWithToolkitCompat_ } from 'es-toolkit/compat';
 import { updateWith as lodashUpdateWith_ } from 'lodash';
 
 const updateWithToolkitCompat = updateWithToolkitCompat_;
