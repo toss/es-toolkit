@@ -42,6 +42,7 @@ export { find } from './array/find.ts';
 export { findIndex } from './array/findIndex.ts';
 export { findLast } from './array/findLast.ts';
 export { findLastIndex } from './array/findLastIndex.ts';
+export { flatMap } from './array/flatMap.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
