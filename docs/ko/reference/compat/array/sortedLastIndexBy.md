@@ -6,8 +6,8 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-정렬된 배열에서 특정 값을 삽입할 수 있는 가장 낮은 인덱스를 찾아, 배열의 정렬 순서를 유지하도록 해요.
-[sortedIndex](./sortedIndex.md)와 달리, 이 함수는 비교에 사용할 값을 추출하기 위해 커스텀 iteratee 함수를 지정할 수 있어요.
+정렬된 배열에서 특정 값을 삽입할 수 있는 가장 높은 인덱스를 찾아, 배열의 정렬 순서를 유지하도록 해요.
+[sortedLastIndex](./sortedLastIndex.md)와 달리, 이 함수는 비교에 사용할 값을 추출하기 위해 커스텀 iteratee 함수를 지정할 수 있어요.
 
 - iteratee 함수는 배열의 각 요소와 삽입할 값에 대해 호출돼요.
 - 객체나 사용자 정의 데이터 타입을 포함한 배열에서 특정 속성이나 계산된 값에 따라 정렬 순서를 정하고 싶을 때 유용해요.
@@ -15,7 +15,7 @@
 ## 인터페이스
 
 ```typescript
-function sortedIndexBy<T, R>(
+function sortedLastIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
   iteratee: (value: T) => R,
@@ -39,18 +39,18 @@ function sortedIndexBy<T, R>(
 ## 예시
 
 ```typescript
-import { sortedIndexBy } from 'es-toolkit/compat';
+import { sortedLastIndexBy } from 'es-toolkit/compat';
 
-const objects = [{ x: 10 }, { x: 20 }, { x: 30 }];
+const objects = [{ x: 10 }, { x: 20 }, { x: 20 }, { x: 30 }];
 
 // 비교를 위해 `x` 속성을 추출하는 iteratee 사용
-sortedIndexBy(objects, { x: 25 }, o => o.x);
-// 반환값: 2
-// 설명: `x` 속성을 기준으로 `{ x: 25 }`는 인덱스 2를 반환해요.
+sortedLastIndexBy(objects, { x: 20 }, o => o.x);
+// 반환값: 3
+// 설명: `x` 속성을 기준으로 `{ x: 20 }`는 인덱스 3을 반환해요.
 
 // 사용자 정의 정렬 로직 처리
 const strings = ['apple', 'banana', 'cherry'];
-sortedIndexBy(strings, 'apricot', str => str.length);
+sortedLastIndexBy(strings, 'apricot', str => str.length);
 // 반환값: 3
 // 설명: 문자열의 길이를 기준으로 'apricot'은 인덱스 3을 반환해요.
 ```

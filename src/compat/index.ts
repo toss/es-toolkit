@@ -76,6 +76,8 @@ export { sortBy } from './array/sortBy.ts';
 export { sortedIndex } from './array/sortedIndex.ts';
 export { sortedIndexBy } from './array/sortedIndexBy.ts';
 export { sortedIndexOf } from './array/sortedIndexOf.ts';
+export { sortedLastIndex } from './array/sortedLastIndex.ts';
+export { sortedLastIndexBy } from './array/sortedLastIndexBy.ts';
 export { tail } from './array/tail.ts';
 export { take } from './array/take.ts';
 export { takeRight } from './array/takeRight.ts';
