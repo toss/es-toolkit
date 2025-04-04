@@ -27,6 +27,13 @@ describe('shuffle', () => {
   });
 
   it('should treat number values for `collection` as empty', () => {
+    // @ts-expect-error - Testing behavior with number input, though not strictly typed
     expect(shuffle(1)).toEqual([]);
+  });
+
+  // additional test
+  it('should treat nullish values for `collection` as empty', () => {
+    expect(shuffle(null)).toEqual([]);
+    expect(shuffle(undefined)).toEqual([]);
   });
 });
