@@ -17,6 +17,7 @@ describe('keyBy', () => {
 
   it('should use identity when iteratee is nullish', () => {
     const array = [4, 6, 6];
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = values.map(() => ({ 4: 4, 6: 6 }));
 
