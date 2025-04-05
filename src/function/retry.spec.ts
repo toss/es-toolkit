@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { performance } from 'node:perf_hooks';
 import { retry } from './retry';
 
 describe('retry', () => {
@@ -23,12 +24,37 @@ describe('retry', () => {
   it('should retry with the specified delay between attempts', async () => {
     const func = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('success');
     const delay = 100;
-    const start = Date.now();
+    const start = performance.now();
     const result = await retry(func, { delay, retries: 2 });
-    const end = Date.now();
+    const end = performance.now();
     expect(result).toBe('success');
     expect(func).toHaveBeenCalledTimes(2);
     expect(end - start).toBeGreaterThanOrEqual(delay);
+  });
+
+  it('should retry with a dynamic delay function based on attempt count', async () => {
+    const func = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('failure'))
+      .mockRejectedValueOnce(new Error('failure'))
+      .mockResolvedValue('success');
+
+    const delays: number[] = [];
+    const delayFn = vi.fn(attempt => {
+      const d = attempt * 50;
+      delays.push(d);
+      return d;
+    });
+
+    const start = performance.now();
+    const result = await retry(func, { delay: delayFn, retries: 3 });
+    const end = performance.now();
+
+    const totalDelay = delays.reduce((sum, d) => sum + d, 0);
+
+    expect(result).toBe('success');
+    expect(func).toHaveBeenCalledTimes(3);
+    expect(end - start).toBeGreaterThanOrEqual(totalDelay);
   });
 
   it('should throw an error after the specified number of retries', async () => {
