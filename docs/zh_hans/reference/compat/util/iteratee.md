@@ -21,10 +21,7 @@
 ```typescript
 function iteratee(value?: null): (value: T) => T;
 function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
-function iteratee(value: symbol | number | string | object): (...args: any[]) => any;
-function iteratee(
-  value?: symbol | number | string | object | null | ((...args: any[]) => unknown)
-): (...args: any[]) => any;
+function iteratee(value: symbol | number | string | object | null): (...args: any[]) => any;
 ```
 
 ### 参数

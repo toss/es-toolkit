@@ -33,7 +33,7 @@ export function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
  *
  * The created function returns the property value for a given element.
  *
- * @param {symbol | number | string | object} value - The value to convert to an iteratee.
+ * @param {symbol | number | string | object | null} value - The value to convert to an iteratee.
  * @returns {(...args: any[]) => any} - Returns the new iteratee function.
  *
  * @example
@@ -46,7 +46,7 @@ export function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
  * const func = iteratee(['a', 1]);
  * [{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
  */
-export function iteratee(value?: symbol | number | string | object): (...args: any[]) => any;
+export function iteratee(value?: symbol | number | string | object | null): (...args: any[]) => any;
 
 /**
  * Creates a function that returns a value from an element in a collection.
