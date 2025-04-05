@@ -1,4 +1,3 @@
-
 # constantCase
 
 将字符串转换为大写格式。
