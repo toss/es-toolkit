@@ -2,10 +2,14 @@ import { delay as delayToolkit } from '../promise/delay.ts';
 
 interface RetryOptions {
   /**
-   * The number of milliseconds to interval delay.
+   * Delay between retries. Can be a static number (milliseconds) or a function
+   * that computes delay dynamically based on the current attempt.
+   *
    * @default 0
+   * @example
+   * delay: (attempts) => Math.random() * 100 * 2 ** attempts
    */
-  delay?: number;
+  delay?: number | ((attempts: number) => number);
 
   /**
    * The number of retries to attempt.
@@ -55,7 +59,7 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * @template T
  * @param {() => Promise<T>} func - The function to retry. It should return a promise.
  * @param {RetryOptions} options - Options to configure the retry behavior.
- * @param {number} [options.delay=0] - The number of milliseconds to wait between retries.
+ * @param {number | ((attempts: number) => number)} [options.delay=0] - Delay between retries.
  * @param {number} [options.retries=Infinity] - The number of retries to attempt.
  * @param {AbortSignal} [options.signal] - An AbortSignal to cancel the retry operation.
  * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
@@ -63,6 +67,13 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * @example
  * // Retry a function with a delay of 1000ms between attempts
  * retry(() => fetchData(), { delay: 1000, times: 5 }).then(data => console.log(data));
+ *
+ * @example
+ * // Retry a function with a fixed delay
+ * retry(() => fetchData(), { delay: 1000, retries: 5 });
+ *
+ * // Retry a function with exponential backoff + jitter
+ * retry(() => fetchData(), { delay: (attempt) => Math.random() * 100 * 2 ** attempt, retries: 5 });
  */
 export async function retry<T>(func: () => Promise<T>, options: RetryOptions): Promise<T>;
 
@@ -75,7 +86,7 @@ export async function retry<T>(func: () => Promise<T>, options: RetryOptions): P
  * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
  */
 export async function retry<T>(func: () => Promise<T>, _options?: number | RetryOptions): Promise<T> {
-  let delay: number;
+  let delay: number | ((attempts: number) => number);
   let retries: number;
   let signal: AbortSignal | undefined;
 
@@ -91,7 +102,7 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
 
   let error;
 
-  for (let i = 0; i < retries; i++) {
+  for (let attempts = 0; attempts < retries; attempts++) {
     if (signal?.aborted) {
       throw error ?? new Error(`The retry operation was aborted due to an abort signal.`);
     }
@@ -100,7 +111,11 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
       return await func();
     } catch (err) {
       error = err;
-      await delayToolkit(delay);
+
+      const currentDelay = typeof delay === 'function' ? delay(attempts) : delay;
+      if (currentDelay > 0) {
+        await delayToolkit(currentDelay);
+      }
     }
   }
 
