@@ -7,7 +7,7 @@ interface RetryOptions {
    *
    * @default 0
    * @example
-   * delay: (attempts) => Math.random() * 100 * 2 ** attempts
+   * delay: (attempts) => attempt * 50
    */
   delay?: number | ((attempts: number) => number);
 
@@ -72,8 +72,15 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * // Retry a function with a fixed delay
  * retry(() => fetchData(), { delay: 1000, retries: 5 });
  *
- * // Retry a function with exponential backoff + jitter
- * retry(() => fetchData(), { delay: (attempt) => Math.random() * 100 * 2 ** attempt, retries: 5 });
+ * // Retry a function with a delay increasing linearly by 50ms per attempt
+ * retry(() => fetchData(), { delay: (attempts) => attempt * 50, retries: 5 });
+ *
+ * @example
+ * // Retry a function with exponential backoff + jitter (max delay 10 seconds)
+ * retry(() => fetchData(), {
+ *   delay: (attempts) => Math.min(Math.random() * 100 * 2 ** attempts, 10000),
+ *   retries: 5
+ * });
  */
 export async function retry<T>(func: () => Promise<T>, options: RetryOptions): Promise<T>;
 
