@@ -120,9 +120,7 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
       error = err;
 
       const currentDelay = typeof delay === 'function' ? delay(attempts) : delay;
-      if (currentDelay > 0) {
-        await delayToolkit(currentDelay);
-      }
+      await delayToolkit(currentDelay);
     }
   }
 
