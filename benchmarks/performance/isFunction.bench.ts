@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { isFunction as isFunctionToolkit_ } from 'es-toolkit';
+import { isFunction as isFunctionToolkitCompat_ } from 'es-toolkit/compat';
 import { isFunction as isFunctionLodash_ } from 'lodash';
 
 const isFunctionToolkit = isFunctionToolkit_;
+const isFunctionToolkitCompat = isFunctionToolkitCompat_;
 const isFunctionLodash = isFunctionLodash_;
 
 describe('isFunction', () => {
@@ -21,6 +23,23 @@ describe('isFunction', () => {
     isFunctionToolkit(() => {});
     isFunctionToolkit(Array.prototype.slice);
   });
+
+  bench('es-toolkit/compat/isFunction', () => {
+    isFunctionToolkitCompat(true);
+    isFunctionToolkitCompat(new Date());
+    isFunctionToolkitCompat(new Error());
+    isFunctionToolkitCompat({ a: 1 });
+    isFunctionToolkitCompat(1);
+    isFunctionToolkitCompat(/x/);
+    isFunctionToolkitCompat(Array.from({ length: 10000 }));
+    isFunctionToolkitCompat(async function () {});
+    isFunctionToolkitCompat(function* () {});
+    isFunctionToolkitCompat(Proxy);
+    isFunctionToolkitCompat(Int8Array);
+    isFunctionToolkitCompat(() => {});
+    isFunctionToolkitCompat(Array.prototype.slice);
+  });
+
   bench('lodash/isFunction', () => {
     isFunctionLodash(true);
     isFunctionLodash(new Date());
