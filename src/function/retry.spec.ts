@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { performance } from 'node:perf_hooks';
 import { retry } from './retry';
 
 describe('retry', () => {
@@ -23,9 +24,9 @@ describe('retry', () => {
   it('should retry with the specified delay between attempts', async () => {
     const func = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('success');
     const delay = 100;
-    const start = Date.now();
+    const start = performance.now();
     const result = await retry(func, { delay, retries: 2 });
-    const end = Date.now();
+    const end = performance.now();
     expect(result).toBe('success');
     expect(func).toHaveBeenCalledTimes(2);
     expect(end - start).toBeGreaterThanOrEqual(delay);
@@ -45,9 +46,9 @@ describe('retry', () => {
       return d;
     });
 
-    const start = Date.now();
+    const start = performance.now();
     const result = await retry(func, { delay: delayFn, retries: 3 });
-    const end = Date.now();
+    const end = performance.now();
 
     const totalDelay = delays.reduce((sum, d) => sum + d, 0);
 
