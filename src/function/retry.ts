@@ -59,7 +59,7 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * @template T
  * @param {() => Promise<T>} func - The function to retry. It should return a promise.
  * @param {RetryOptions} options - Options to configure the retry behavior.
- * @param {number | ((attempts: number) => number)} [options.delay=0] - Delay between retries.
+ * @param {number | ((attempts: number) => number)} [options.delay=0] - Delay(milliseconds) between retries.
  * @param {number} [options.retries=Infinity] - The number of retries to attempt.
  * @param {AbortSignal} [options.signal] - An AbortSignal to cancel the retry operation.
  * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
