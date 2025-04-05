@@ -14,7 +14,7 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 
 - `func` (`() => Promise<T>`): A function that returns a `Promise`.
 - `retries`: The number of times to retry. The default is `Number.POSITIVE_INFINITY`, which means it will retry until it succeeds.
-- `delay`: The interval between retries, measured in milliseconds (ms). The default is `0`.
+- `delay`: The interval between retries, measured in milliseconds (ms). or a function that returns a delay based on the current attempt. The default is `0`.
 - `signal`: An `AbortSignal` that can be used to cancel the retries.
 
 ### Returns
@@ -40,9 +40,16 @@ console.log(data2);
 const data3 = await retry(() => fetchData(), { retries: 3, delay: 100 });
 console.log(data3);
 
+// Retry 5 times with a linearly increasing delay
+const data4 = await retry(() => fetchData(), {
+  retries: 5,
+  delay: (attempts) => attempts * 50,
+});
+console.log(data4);
+
 const controller = new AbortController();
 
 // The retry operation for `fetchData` can be canceled with the `signal`.
-const data4 = await retry(() => fetchData(), { signal: controller.signal });
-console.log(data4);
+const data5 = await retry(() => fetchData(), { signal: controller.signal });
+console.log(data5);
 ```
