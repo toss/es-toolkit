@@ -1,4 +1,4 @@
-import { unzip } from './unzip';
+import { unzip } from './unzip.ts';
 
 /**
  * Combines one array into a single array using a custom combiner function.
