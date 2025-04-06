@@ -1,4 +1,5 @@
 import { unzip } from './unzip.ts';
+import { isFunction } from '../../predicate/isFunction.ts';
 
 /**
  * Combines one array into a single array using a custom combiner function.
@@ -131,7 +132,7 @@ export function zipWith<T, R>(...combine: Array<((...group: T[]) => R) | ArrayLi
   const length = combine.length;
   let iteratee = length > 1 ? combine[length - 1] : undefined;
 
-  if (typeof iteratee === 'function') {
+  if (isFunction(iteratee)) {
     combine.pop();
   } else {
     iteratee = undefined;
