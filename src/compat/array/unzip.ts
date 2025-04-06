@@ -18,8 +18,7 @@ export function unzip<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefin
   if (!isArrayLikeObject(array) || !array.length) {
     return [];
   }
-  if (Array.isArray(array)) {
-    return unzipToolkit(array);
-  }
-  return unzipToolkit(Array.from(array, value => Array.from(value)));
+  array = Array.isArray(array) ? array : Array.from(array);
+  array = (array as T[][]).filter(item => isArrayLikeObject(item));
+  return unzipToolkit(array as T[][]);
 }
