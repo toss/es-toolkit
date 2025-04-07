@@ -1,4 +1,5 @@
 import { unzip as unzipToolkit } from '../../array/unzip.ts';
+import { isArray } from '../predicate/isArray.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject';
 
 /**
@@ -111,9 +112,7 @@ export function unzipWith<T>(
     return [];
   }
 
-  const unziped = Array.isArray(array)
-    ? unzipToolkit(array)
-    : unzipToolkit(Array.from(array, value => Array.from(value)));
+  const unziped = isArray(array) ? unzipToolkit(array) : unzipToolkit(Array.from(array, value => Array.from(value)));
 
   if (!iteratee) {
     return unziped;
