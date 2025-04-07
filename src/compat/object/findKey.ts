@@ -1,6 +1,7 @@
 import { property } from './property.ts';
 import { findKey as findKeyToolkit } from '../../object/findKey.ts';
 import { isObject } from '../predicate/isObject.ts';
+import { isString } from '../predicate/isString.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
 
@@ -126,7 +127,7 @@ function findKeyImpl<T extends Record<any, any>>(
     return findKeyToolkit(obj, matches(predicate));
   }
 
-  if (typeof predicate === 'string') {
+  if (isString(predicate)) {
     return findKeyToolkit(obj, property(predicate));
   }
 }

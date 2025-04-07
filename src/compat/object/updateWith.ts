@@ -3,6 +3,7 @@ import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { isObject } from '../predicate/isObject.ts';
+import { isString } from '../predicate/isString.ts';
 import { toPath } from '../util/toPath.ts';
 
 /**
@@ -26,13 +27,7 @@ export function updateWith<T extends object | null | undefined>(
     return obj;
   }
 
-  const resolvedPath = isKey(path, obj)
-    ? [path]
-    : Array.isArray(path)
-      ? path
-      : typeof path === 'string'
-        ? toPath(path)
-        : [path];
+  const resolvedPath = isKey(path, obj) ? [path] : Array.isArray(path) ? path : isString(path) ? toPath(path) : [path];
 
   let current: any = obj;
 

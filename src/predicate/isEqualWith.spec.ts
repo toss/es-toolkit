@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { isEqualWith } from './isEqualWith';
+import { isString } from './isString';
 import { args } from '../compat/_internal/args';
 import { arrayViews } from '../compat/_internal/arrayViews';
 import { stubFalse } from '../compat/util/stubFalse';
@@ -11,7 +12,7 @@ describe('isEqualWith', () => {
 
   it('should use the customizer function for string comparison', () => {
     const customizer = (a: any, b: any) => {
-      if (typeof a === 'string' && typeof b === 'string') {
+      if (isString(a) && isString(b)) {
         return a.toLowerCase() === b.toLowerCase();
       }
     };

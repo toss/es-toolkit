@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { findKey } from './findKey';
+import { isString } from '../predicate/isString.ts';
 
 describe('findKey', () => {
   const users = {
@@ -34,7 +35,7 @@ describe('findKey', () => {
       bool: true,
     };
 
-    expect(findKey(data, value => typeof value === 'string')).toBe('str');
+    expect(findKey(data, value => isString(value))).toBe('str');
   });
 
   it('should pass the key and object to the predicate function', () => {

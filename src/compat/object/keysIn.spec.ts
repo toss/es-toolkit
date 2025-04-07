@@ -3,6 +3,7 @@ import { keysIn } from './keysIn';
 import { args } from '../_internal/args';
 import { primitives } from '../_internal/primitives';
 import { strictArgs } from '../_internal/strictArgs';
+import { isString } from '../predicate/isString.ts';
 import { stubArray } from '../util/stubArray';
 
 describe('keys methods', () => {
@@ -146,7 +147,7 @@ describe('keys methods', () => {
   });
 
   it(`\`keysIn\` should coerce primitives to objects (test in IE 9)`, () => {
-    const expected = primitives.map(value => (typeof value === 'string' ? ['0'] : []));
+    const expected = primitives.map(value => (isString(value) ? ['0'] : []));
 
     // eslint-disable-next-line
     // @ts-ignore

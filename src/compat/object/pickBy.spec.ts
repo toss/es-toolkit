@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
 import { pickBy } from './pickBy';
 import { symbol } from '../_internal/symbol';
+import { isString } from '../predicate/isString.ts';
 import { stubTrue } from '../util/stubTrue';
 
 describe('pickBy', () => {
@@ -91,21 +92,21 @@ describe('pickBy', () => {
 
   it('should pick properties based on the predicate function', () => {
     const obj = { a: 1, b: 'pick', c: 3 };
-    const shouldPick = (value: string | number) => typeof value === 'string';
+    const shouldPick = (value: string | number) => isString(value);
     const result = pickBy(obj, shouldPick);
     expect(result).toEqual({ b: 'pick' });
   });
 
   it('should return an empty object if no properties satisfy the predicate', () => {
     const obj = { a: 1, b: 2, c: 3 };
-    const shouldPick = (value: number) => typeof value === 'string';
+    const shouldPick = (value: number) => isString(value);
     const result = pickBy(obj, shouldPick);
     expect(result).toEqual({});
   });
 
   it('should return the same object if all properties satisfy the predicate', () => {
     const obj = { a: 'pick', b: 'pick', c: 'pick' };
-    const shouldPick = (value: string) => typeof value === 'string';
+    const shouldPick = (value: string) => isString(value);
     const result = pickBy(obj, shouldPick);
     expect(result).toEqual(obj);
   });
@@ -132,14 +133,14 @@ describe('pickBy', () => {
 
   it('should return an empty object if the object is null', () => {
     const obj = null;
-    const shouldPick = (value: string) => typeof value === 'string';
+    const shouldPick = (value: string) => isString(value);
     const result = pickBy(obj as unknown as object, shouldPick);
     expect(result).toEqual({});
   });
 
   it('should return an empty object if the object is undefined', () => {
     const obj = undefined;
-    const shouldPick = (value: string) => typeof value === 'string';
+    const shouldPick = (value: string) => isString(value);
     const result = pickBy(obj as unknown as object, shouldPick);
     expect(result).toEqual({});
   });
