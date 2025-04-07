@@ -44,10 +44,7 @@ const result = unzipWith(nestedArray, (item, item2, item3) => item + item2 + ite
 ```typescript
 function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined): T[][];
 function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee?: null): T[][];
-function unzipWith<T, R>(
-  array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
-  iteratee: (...args: T[]) => R
-): R[];
+function unzipWith<T, R>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee: (...args: T[]) => R): R[];
 function unzipWith<T>(
   array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
   iteratee: (...args: any[]) => unknown
@@ -58,12 +55,18 @@ function unzipWith<T>(
 
 ```typescript
 // 使用 iteratee 函数的示例
-const array1 = [[1, 3], [2, 4]];
+const array1 = [
+  [1, 3],
+  [2, 4],
+];
 const result1 = unzipWith(array3, (a, b) => a + b);
 // result3 为 [3, 7]，因为提供了 iteratee 函数时会转换重新分组的元素。
 
 // iteratee 为 null 或 undefined 的情况
-const array2 = [[1, 3], [2, 4]];
+const array2 = [
+  [1, 3],
+  [2, 4],
+];
 const result2 = unzipWith(array1, null);
 // result1 为 [[1, 2], [3, 4]]，因为 iteratee 为 null 时会像 unzip 一样工作。
 

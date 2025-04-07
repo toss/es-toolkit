@@ -44,10 +44,7 @@ The function supports the following features in compatibility mode:
 ```typescript
 function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined): T[][];
 function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee?: null): T[][];
-function unzipWith<T, R>(
-  array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
-  iteratee: (...args: T[]) => R
-): R[];
+function unzipWith<T, R>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee: (...args: T[]) => R): R[];
 function unzipWith<T>(
   array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
   iteratee: (...args: any[]) => unknown
@@ -58,12 +55,18 @@ function unzipWith<T>(
 
 ```typescript
 // Example using iteratee
-const array1 = [[1, 3], [2, 4]];
+const array1 = [
+  [1, 3],
+  [2, 4],
+];
 const result1 = unzipWith(array3, (a, b) => a + b);
 // result3 will be [3, 7] because when the iteratee is provided, the function transform regrouped elements.
 
 // Example with null or undefined iteratee
-const array2 = [[1, 3], [2, 4]];
+const array2 = [
+  [1, 3],
+  [2, 4],
+];
 const result2 = unzipWith(array1, null);
 // result1 will be [[1, 2], [3, 4]] because when the iteratee is null, the function behaves like unzip.
 

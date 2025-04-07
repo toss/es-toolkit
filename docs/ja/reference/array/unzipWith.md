@@ -44,10 +44,7 @@ const result = unzipWith(nestedArray, (item, item2, item3) => item + item2 + ite
 ```typescript
 function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined): T[][];
 function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee?: null): T[][];
-function unzipWith<T, R>(
-  array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
-  iteratee: (...args: T[]) => R
-): R[];
+function unzipWith<T, R>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee: (...args: T[]) => R): R[];
 function unzipWith<T>(
   array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
   iteratee: (...args: any[]) => unknown
@@ -58,12 +55,18 @@ function unzipWith<T>(
 
 ```typescript
 // iteratee関数を使用する例
-const array1 = [[1, 3], [2, 4]];
+const array1 = [
+  [1, 3],
+  [2, 4],
+];
 const result1 = unzipWith(array3, (a, b) => a + b);
 // result3は[3, 7]になります。iteratee関数が提供されると、再構成された要素を変換するためです。
 
 // iterateeがnullまたはundefinedの場合
-const array2 = [[1, 3], [2, 4]];
+const array2 = [
+  [1, 3],
+  [2, 4],
+];
 const result2 = unzipWith(array1, null);
 // result1は[[1, 2], [3, 4]]になります。iterateeがnullの場合、unzipのように動作するためです。
 
