@@ -51,6 +51,7 @@ describe('unzipWith', () => {
 
   it('should work with array-like objects', () => {
     const array = { 0: [1, 3], 1: [2, 4], length: 2 };
+
     expect(unzipWith(array, (a, b) => a + b)).toEqual([3, 7]);
   });
 
@@ -59,6 +60,7 @@ describe('unzipWith', () => {
       ['barney', 36],
       ['fred', 40, false],
     ];
+
     expect(unzipWith(array, (a, b) => [a, b])).toEqual([
       ['barney', 'fred'],
       [36, 40],
