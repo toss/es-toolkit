@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { bindAll } from './bindAll';
-import { cloneDeep } from '../compat';
 import { toArgs } from '../compat/_internal/toArgs';
+import { cloneDeep } from '../object';
 
 interface TestObject {
   _n0: number;

@@ -1,3 +1,5 @@
+import { isFunction } from '../../predicate/isFunction.ts';
+import { isArray } from '../predicate/isArray.ts';
 import { isObject } from '../predicate/isObject.ts';
 import { toString } from '../util/toString.ts';
 
@@ -38,14 +40,14 @@ export function bindAll(
     return object;
   }
 
-  if (Array.isArray(object) && methodNames.length === 0) {
+  if (isArray(object) && methodNames.length === 0) {
     return object;
   }
 
   const methods: any[] = [];
   for (let i = 0; i < methodNames.length; i++) {
     const name = methodNames[i];
-    if (Array.isArray(name)) {
+    if (isArray(name)) {
       methods.push(...name);
     } else if (name && typeof name === 'object' && 'length' in name) {
       methods.push(...Array.from(name));
@@ -63,7 +65,7 @@ export function bindAll(
     const stringKey = toString(key);
     const func = object[stringKey];
 
-    if (typeof func === 'function') {
+    if (isFunction(func)) {
       object[stringKey] = func.bind(object);
     }
   }
