@@ -1,7 +1,7 @@
-import { isFunction } from '../../predicate/isFunction.ts';
-import { isArray } from '../predicate/isArray.ts';
-import { isObject } from '../predicate/isObject.ts';
-import { toString } from '../util/toString.ts';
+import { toString } from './toString';
+import { isFunction } from '../../predicate';
+import { isArray } from '../predicate/isArray';
+import { isObject } from '../predicate/isObject';
 
 /**
  * Binds methods of an object to the object itself, overwriting the existing method.

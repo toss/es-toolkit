@@ -19,8 +19,8 @@
  * jQuery(element).on('click', view.click);
  * // => Logs 'clicked docs' when clicked.
  */
-import { isArray } from '../compat/predicate/isArray';
-import { isFunction } from '../predicate';
+import { isArray } from '../compat';
+import { isFunction } from '../compat';
 
 export function bindAll<T extends { [key: string]: unknown }>(
   object: T,
