@@ -20,7 +20,7 @@
  * // => Logs 'clicked docs' when clicked.
  */
 import { isArray } from '../compat';
-import { isFunction } from '../compat';
+import { isFunction } from '../predicate';
 
 export function bindAll<T extends { [key: string]: unknown }>(
   object: T,
