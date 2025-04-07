@@ -1,4 +1,4 @@
-import { isFunction } from '../../predicate';
+import { isFunction } from '../../predicate/isFunction.ts';
 import { isArray } from '../predicate/isArray.ts';
 import { isObject } from '../predicate/isObject.ts';
 import { toString } from '../util/toString.ts';
