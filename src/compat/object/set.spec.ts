@@ -15,22 +15,22 @@ describe('set', () => {
     interface Test {
       a: number;
     }
-    const result = set<Test>({}, 'a', 1);
+    const result = set<Test>({} as Test, 'a', 1);
     expect(result).toEqual({ a: 1 });
   });
 
   it('should set a value on an object with nested path', () => {
-    const result = set<{ a: { b: number } }>({}, 'a.b', 1);
+    const result = set<{ a: { b: number } }>({} as { a: { b: number } }, 'a.b', 1);
     expect(result).toEqual({ a: { b: 1 } });
   });
 
   it('should set a value on an object with paths with arrays', () => {
-    const result = set<{ a: { b: number } }>({}, ['a', 'b'], 1);
+    const result = set<{ a: { b: number } }>({} as { a: { b: number } }, ['a', 'b'], 1);
     expect(result).toEqual({ a: { b: 1 } });
   });
 
   it('should set a value on an object with nested path', () => {
-    const result = set<{ a: { b: { c: { d: number } } } }>({}, 'a.b.c.d', 1);
+    const result = set<{ a: { b: { c: { d: number } } } }>({} as { a: { b: { c: { d: number } } } }, 'a.b.c.d', 1);
     expect(result).toEqual({ a: { b: { c: { d: 1 } } } });
   });
 
@@ -38,13 +38,13 @@ describe('set', () => {
   // array
   //--------------------------------------------------------------------------------
   it('should set a value on an array', () => {
-    const result = set<number[]>([], 0, 1);
+    const result = set<number[]>([] as number[], 0, 1);
     expect(result).toEqual([1]);
     expect(result[0]).toEqual(1);
   });
 
   it('should set a value on an array with nested path', () => {
-    const result = set<number[][]>([], '0.0', 1);
+    const result = set<number[][]>([] as number[][], '0.0', 1);
     expect(result).toEqual([[1]]);
     expect(result[0][0]).toEqual(1);
   });
@@ -65,25 +65,25 @@ describe('set', () => {
   // object and array
   //--------------------------------------------------------------------------------
   it('should set a value on an object and array', () => {
-    const result = set<Array<{ a: number }>>([], '0.a', 1);
+    const result = set<Array<{ a: number }>>([] as Array<{ a: number }>, '0.a', 1);
     expect(result).toEqual([{ a: 1 }]);
     expect(result[0].a).toEqual(1);
   });
 
   it('should set a value on an object and array', () => {
-    const result = set<{ a: number[] }>({}, 'a.0', 1);
+    const result = set<{ a: number[] }>({} as { a: number[] }, 'a.0', 1);
     expect(result).toEqual({ a: [1] });
     expect(result.a[0]).toEqual(1);
   });
 
   it('should set a value on an object and array', () => {
-    const result = set<{ a: number[][] }>({}, 'a.0.0', 1);
+    const result = set<{ a: number[][] }>({} as { a: number[][] }, 'a.0.0', 1);
     expect(result).toEqual({ a: [[1]] });
     expect(result.a[0][0]).toEqual(1);
   });
 
   it('should set a value on an object and array', () => {
-    const result = set<{ a: number[][][] }>({}, 'a[0][0][0]', 1);
+    const result = set<{ a: number[][][] }>({} as { a: number[][][] }, 'a[0][0][0]', 1);
     expect(result).toEqual({ a: [[[1]]] });
     expect(result.a[0][0][0]).toEqual(1);
   });

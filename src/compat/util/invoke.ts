@@ -1,4 +1,4 @@
-import { toPath } from './toPath';
+import { toPath } from './toPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { last } from '../array/last.ts';
 import { get } from '../object/get.ts';

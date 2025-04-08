@@ -6,22 +6,23 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Creates an array of function property names from own enumerable properties
-of `object`.
+Creates an array of property names from an object where the property values are functions.
+
+Only checks for own properties with string keys. Inherited properties or properties with `Symbol` keys are not included.
 
 ## Signature
 
 ```typescript
-function functions(object: any): string[];
+function functions(object: unknown): string[];
 ```
 
 ### Parameters
 
-- `object` (`Object`): The object to inspect.
+- `object` (`unknown`): The object to inspect.
 
 ### Returns
 
-(`Array`): function names.
+(`string[]`): An array of function property names.
 
 ## Examples
 
