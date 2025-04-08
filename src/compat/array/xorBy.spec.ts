@@ -42,18 +42,18 @@ describe('xor methods', () => {
 
   it(`should ignore individual secondary arguments`, () => {
     const array = [0];
-    expect(xorBy(array, 3, null, { 0: 1 })).toEqual(array);
+    expect(xorBy(array, 3, null, { 0: 1 } as any)).toEqual(array);
   });
 
   it(`should ignore values that are not arrays or \`arguments\` objects`, () => {
     const array = [1, 2];
-    expect(xorBy(array, 3, { 0: 1 }, null)).toEqual(array);
+    expect(xorBy(array, 3, { 0: 1 } as any, null)).toEqual(array);
     expect(xorBy(null, array, null, [2, 3])).toEqual([1, 3]);
     expect(xorBy(array, null, args, null)).toEqual([3]);
   });
 
   it('should accept an `iteratee`', () => {
-    let actual = xorBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+    let actual: any = xorBy([2.1, 1.2], [2.3, 3.4], Math.floor);
     expect(actual).toEqual([1.2, 3.4]);
 
     actual = xorBy([{ x: 1 }], [{ x: 2 }, { x: 1 }], 'x');
