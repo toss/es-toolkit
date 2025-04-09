@@ -1,16 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import { identity } from './identity';
+import { isObject, mergeWith } from '..';
+import { curry } from './curry';
 import { partialRight } from './partialRight';
-import { curry } from '../compat/function/curry';
+
+function identity(arg?: any): any {
+  return arg;
+}
 
 describe('partialRight', () => {
   const { placeholder } = partialRight;
-  it('partialRight partially applies arguments', () => {
+
+  it('should partially apply arguments', () => {
     const par = partialRight(identity, 'a');
     expect(par()).toBe('a');
   });
 
-  it('partialRight creates a function that can be invoked with additional arguments', () => {
+  it('should create a function that can be invoked with additional arguments', () => {
     const fn = function (a: string, b: string) {
       return [a, b];
     };
@@ -18,7 +23,7 @@ describe('partialRight', () => {
     expect(par('b')).toEqual(['b', 'a']);
   });
 
-  it('partialRight works when there are no partially applied arguments and the created function is invoked without additional arguments', () => {
+  it('should work when there are no partially applied arguments and the created function is invoked without additional arguments', () => {
     const fn = function () {
       return arguments.length;
     };
@@ -26,34 +31,31 @@ describe('partialRight', () => {
     expect(par()).toBe(0);
   });
 
-  it('partialRight works when there are no partially applied arguments and the created function is invoked with additional arguments', () => {
+  it('should work when there are no partially applied arguments and the created function is invoked with additional arguments', () => {
     const par = partialRight(identity);
     expect(par('a')).toBe('a');
   });
 
-  it('partialRight supports placeholders', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  it('should support placeholders', () => {
     const fn = function (..._: any[]) {
-      // eslint-disable-next-line prefer-rest-params
       return Array.from(arguments);
     };
-    let par: any = partialRight(fn, placeholder, 'b', placeholder);
+    const par = partialRight(fn, placeholder, 'b', placeholder) as any;
     expect(par('a', 'c')).toEqual(['a', 'b', 'c']);
     expect(par('a')).toEqual(['a', 'b', undefined]);
     expect(par()).toEqual([undefined, 'b', undefined]);
 
-    par = partialRight(fn, placeholder, 'c', placeholder);
-    expect(par('a', 'b', 'd')).toEqual(['a', 'b', 'c', 'd']);
+    const par2 = partialRight(fn, placeholder, 'c', placeholder);
+    expect(par2('a', 'b', 'd')).toEqual(['a', 'b', 'c', 'd']);
   });
 
-  it('partialRight creates a function with a length of 0', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  it('should create a function with a length of 0', () => {
     const fn = function (_a: string, _b: string, _c: string) {};
     const par = partialRight(fn, 'a');
     expect(par.length).toBe(0);
   });
 
-  it('partialRight ensures new par is an instance of func', () => {
+  it('should ensure `new par` is an instance of `func`', () => {
     function Foo(value: unknown) {
       return value && object;
     }
@@ -67,7 +69,7 @@ describe('partialRight', () => {
     expect(new par(true)).toBe(object);
   });
 
-  it('partialRight clones metadata for created functions', () => {
+  it('should clone metadata for created functions', () => {
     function greet(greeting: string, name: string) {
       return `${greeting} ${name}`;
     }
@@ -81,24 +83,35 @@ describe('partialRight', () => {
     expect(par3()).toBe('pebbles hi');
   });
 
-  it(`partialRight should work with curried functions`, () => {
+  it('should work with curried functions', () => {
     const fn = function (a: any, b: any, c: any) {
-        return a + b + c;
-      },
-      curried = curry(partialRight(fn, 1), 2);
+      return a + b + c;
+    };
+    const curried = curry(partialRight(fn, 1), 2);
 
     expect(curried(2, 3)).toBe(6);
     expect(curried(2)(3)).toBe(6);
   });
 
-  it('partialRight should work with placeholders and curried functions', () => {
+  it('should work with placeholders and curried functions', () => {
     const fn = function () {
-        // eslint-disable-next-line prefer-rest-params
-        return Array.from(arguments);
-      },
-      curried = curry(fn),
-      par = partialRight(curried, partialRight.placeholder, 'b', partialRight.placeholder, 'd');
+      return Array.from(arguments);
+    };
+    const curried = curry(fn);
+    const par = partialRight(curried, placeholder, 'b', placeholder, 'd');
 
     expect(par('a', 'c')).toEqual(['a', 'b', 'c', 'd']);
+  });
+
+  it('should work as a deep defaults', () => {
+    const object = { a: { b: 2 } };
+    const source = { a: { b: 3, c: 3 } };
+    const expected = { a: { b: 2, c: 3 } };
+
+    const defaultsDeep = partialRight(mergeWith, function deep(value: any, other: any) {
+      return isObject(value) ? mergeWith(value, other, deep) : value;
+    });
+
+    expect(defaultsDeep(object, source)).toEqual(expected);
   });
 });
