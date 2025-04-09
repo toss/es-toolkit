@@ -43,12 +43,12 @@ describe('xor methods', () => {
 
   it(`should ignore individual secondary arguments`, () => {
     const array = [0];
-    expect(xorWith(array, 3, null, { 0: 1 } as any)).toEqual(array);
+    expect(xorWith(array, 3 as any, null, { 0: 1 } as any)).toEqual(array);
   });
 
   it(`should ignore values that are not arrays or \`arguments\` objects`, () => {
     const array = [1, 2];
-    expect(xorWith(array, 3, { 0: 1 } as any, null)).toEqual(array);
+    expect(xorWith(array, 3 as any, { 0: 1 } as any, null)).toEqual(array);
     expect(xorWith(null, array, null, [2, 3])).toEqual([1, 3]);
     expect(xorWith(array, null, args, null)).toEqual([3]);
   });
