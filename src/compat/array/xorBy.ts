@@ -1,5 +1,9 @@
-import { last } from './last.ts';
+import { differenceBy } from '../../array/differenceBy.ts';
+import { intersectionBy } from '../../array/intersectionBy.ts';
+import { last } from '../../array/last.ts';
+import { unionBy } from '../../array/unionBy.ts';
 import { uniq } from '../../array/uniq.ts';
+import { uniqBy } from '../../array/uniqBy.ts';
 import { identity } from '../../function/identity.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
@@ -27,28 +31,18 @@ type Mapper<T> = PropertyKey | Partial<T> | ((value: T) => unknown);
  */
 export function xorBy<T>(...values: Array<ArrayLike<T> | null | undefined | Mapper<T>>): T[] {
   const lastValue = last(values);
-  const arrays = values.filter(isArrayLikeObject).map(toArray);
-  const flatten = flattenArrayLike(arrays.map(uniq));
+  const arrays = values.filter(isArrayLikeObject).map(toArray).map(uniq);
+  const flatten = flattenArrayLike<T>(arrays);
   const mapper = isArrayLikeObject(lastValue) || lastValue == null ? identity : iteratee(lastValue);
 
-  const itemMap = new Map();
+  const union = uniqBy(flatten, mapper);
+  let intersection = Array<T>();
 
-  for (let i = 0; i < flatten.length; ++i) {
-    const mapped = mapper(flatten[i]);
-    if (!itemMap.has(mapped)) {
-      itemMap.set(mapped, flatten[i]);
-    } else {
-      itemMap.set(mapped, null);
+  for (let i = 0; i < arrays.length; ++i) {
+    for (let j = i + 1; j < arrays.length; ++j) {
+      intersection = unionBy(intersection, intersectionBy(arrays[i], arrays[j], mapper), mapper);
     }
   }
 
-  const result = [];
-
-  for (const item of itemMap.values()) {
-    if (item != null) {
-      result.push(item);
-    }
-  }
-
-  return result;
+  return differenceBy(union, intersection, mapper) as T[];
 }
