@@ -1,1 +1,1 @@
-export { partialRight } from '../../function/partialRight';
+export { partialRight } from '../../function/partialRight.ts';

@@ -1,1 +1,1 @@
-export { partial } from '../../function/partial';
+export { partial } from '../../function/partial.ts';
