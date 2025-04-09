@@ -5,8 +5,8 @@ import { partial as partialLodash_ } from 'lodash';
 
 const partialToolkit = partialToolkit_;
 const partialToolkitCompat = partialToolkitCompat_;
-
 const partialLodash = partialLodash_;
+
 const fn = function () {
   // eslint-disable-next-line prefer-rest-params
   return Array.from(arguments);

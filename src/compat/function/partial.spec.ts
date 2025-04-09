@@ -1,10 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { curry } from './curry';
 import { partial } from './partial';
-
-function identity(arg?: any): any {
-  return arg;
-}
+import { identity } from '../../function';
 
 describe('partial', () => {
   const { placeholder } = partial;
@@ -36,8 +33,7 @@ describe('partial', () => {
   });
 
   it('should support placeholders', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const fn = function (..._: any[]) {
+    const fn = function () {
       // eslint-disable-next-line prefer-rest-params
       return Array.from(arguments);
     };
