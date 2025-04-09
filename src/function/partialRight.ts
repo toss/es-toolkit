@@ -795,7 +795,7 @@ export function partialRight<F extends (...args: any[]) => any>(
   ...partialArgs: any[]
 ): (...args: any[]) => ReturnType<F> {
   const partialedRight = function (this: any, ...providedArgs: any[]) {
-    const placeholderLength = partialArgs.filter(arg => arg === placeholder).length;
+    const placeholderLength = partialArgs.filter(arg => arg === placeholderSymbol).length;
     const rangeLength = Math.max(providedArgs.length - placeholderLength, 0);
     const remainingArgs: any[] = providedArgs.slice(0, rangeLength);
 
@@ -803,7 +803,7 @@ export function partialRight<F extends (...args: any[]) => any>(
 
     const substitutedArgs = partialArgs
       .slice()
-      .map(arg => (arg === placeholder ? providedArgs[providedArgsIndex++] : arg));
+      .map(arg => (arg === placeholderSymbol ? providedArgs[providedArgsIndex++] : arg));
 
     return func.apply(this, remainingArgs.concat(substitutedArgs));
   };
@@ -815,7 +815,7 @@ export function partialRight<F extends (...args: any[]) => any>(
   return partialedRight;
 }
 
-const placeholder: unique symbol = Symbol('partialRight.placeholder');
-partialRight.placeholder = placeholder;
+const placeholderSymbol: unique symbol = Symbol('partialRight.placeholder');
+partialRight.placeholder = placeholderSymbol;
 
-type Placeholder = typeof placeholder;
+type Placeholder = typeof placeholderSymbol;

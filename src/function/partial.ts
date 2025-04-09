@@ -700,7 +700,7 @@ export function partial<F extends (...args: any[]) => any>(
 
     const substitutedArgs: any[] = partialArgs
       .slice()
-      .map(arg => (arg === placeholder ? providedArgs[providedArgsIndex++] : arg));
+      .map(arg => (arg === placeholderSymbol ? providedArgs[providedArgsIndex++] : arg));
 
     const remainingArgs = providedArgs.slice(providedArgsIndex);
 
@@ -714,7 +714,7 @@ export function partial<F extends (...args: any[]) => any>(
   return partialed;
 }
 
-const placeholder: unique symbol = Symbol('partial.placeholder');
-partial.placeholder = placeholder;
+const placeholderSymbol: unique symbol = Symbol('partial.placeholder');
+partial.placeholder = placeholderSymbol;
 
-type Placeholder = typeof placeholder;
+type Placeholder = typeof placeholderSymbol;
