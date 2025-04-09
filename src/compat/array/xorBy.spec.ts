@@ -6,7 +6,7 @@ import { args } from '../_internal/args';
  * @see https://github.com/lodash/lodash/blob/v5-wip/test/xor-methods.spec.js
  * @see https://github.com/lodash/lodash/blob/v5-wip/test/xorBy.spec.js
  */
-describe('xor methods', () => {
+describe('xorBy', () => {
   it(`should return the symmetric difference of two arrays`, () => {
     const actual = xorBy([2, 1], [2, 3]);
     expect(actual).toEqual([1, 3]);

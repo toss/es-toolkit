@@ -7,7 +7,7 @@ import { args } from '../_internal/args';
  * @see https://github.com/lodash/lodash/blob/v5-wip/test/xor-methods.spec.js
  * @see https://github.com/lodash/lodash/blob/v5-wip/test/xorWith.spec.js
  */
-describe('xor methods', () => {
+describe('xorWith', () => {
   it(`should return the symmetric difference of two arrays`, () => {
     const actual = xorWith([2, 1], [2, 3]);
     expect(actual).toEqual([1, 3]);
