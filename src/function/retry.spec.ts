@@ -28,7 +28,9 @@ describe('retry', () => {
     const end = Date.now();
     expect(result).toBe('success');
     expect(func).toHaveBeenCalledTimes(2);
-    expect(end - start).toBeGreaterThanOrEqual(delay);
+    // Date.now() has millisecond precision but not microsecond precision, so the result might be 99ms due to rounding.
+    // Date.now() is also *not* guaranteed to increment every millisecond - on some systems, it may tick every ~4ms.
+    expect(end - start).toBeGreaterThanOrEqual(delay - 1);
   });
 
   it('should throw an error after the specified number of retries', async () => {
