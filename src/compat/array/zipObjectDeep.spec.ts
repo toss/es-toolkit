@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { zipObjectDeep } from './zipObjectDeep.ts';
 
-describe('zipObject', () => {
+describe('zipObjectDeep', () => {
   it('creates an object from two arrays of keys and values', () => {
     const symbols = [Symbol('a'), Symbol('b')];
 
