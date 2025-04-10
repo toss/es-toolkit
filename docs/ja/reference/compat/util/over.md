@@ -6,7 +6,7 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-作成された関数に提供された引数を用いて反復子を呼び出し、その結果を返します。
+与えられた関数を呼び出し、その結果を配列として返す関数を作成します。
 
 以下のような様々なタイプのイテレータを使用できます：
 
@@ -18,25 +18,26 @@
 ## インターフェース
 
 ```typescript
-function over<T extends unknown[], R>(iteratees: Array<(...args: T) => R>): (...args: T) => R[];
-function over<T extends [object]>(iteratees: Array<[PropertyKey, unknown]>): (...args: T) => boolean[];
-function over<T extends [object]>(iteratees: object[]): (...args: T) => boolean[];
-function over<T extends [object]>(iteratees: PropertyKey[]): (...args: T) => unknown[];
+function over(...iteratees: Array<Iteratee | Iteratee[]>): (...args: any[]) => unknown[];
 ```
 
 ### パラメータ
 
-- `iteratees` (`Array<((...args: any[]) => unknown) | symbol | number | string | object | null>`): 呼び出す反復子。
+- `iteratees` (`Array<Iteratee | Iteratee[]>`): 呼び出す反復子。
+  - `Iteratee` は `((...args: any[]) => unknown) | symbol | number | string | object | null` 型です。
 
 ### 戻り値
 
-(`Function`): 新しい関数を返します。
+(`(...args: any[]) => unknown[]`): 新しい関数を返します。
 
 ## 例
 
 ```typescript
 const func = over([Math.max, Math.min]);
+const func2 = over(Math.max, Math.min);
 func(1, 2, 3, 4);
+// => [4, 1]
+func2(1, 2, 3, 4);
 // => [4, 1]
 
 const func = over(['a', 'b']);
@@ -50,15 +51,4 @@ func({ a: 1, b: 2 });
 const func = over([['a', 1], ['b', 2]]);
 func({ a: 1, b: 2 });
 // => [true, true]
-
-// nullまたはundefined値（恒等関数として処理）
-// 注意：型アサーションなしではTypeScriptエラーが発生します
-const func = over([null, undefined]);
-func('a', 'b', 'c');
-// => ['a', 'a']
-
-// 空のイテレータ配列
-const emptyFunc = over([]);
-emptyFunc(1, 2, 3);
-// => []
 ```
