@@ -1,6 +1,6 @@
 import { unzip as unzipToolkit } from '../../array/unzip.ts';
 import { isArray } from '../predicate/isArray.ts';
-import { isArrayLikeObject } from '../predicate/isArrayLikeObject';
+import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
  * Unzips an array of arrays.
