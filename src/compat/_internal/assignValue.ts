@@ -1,4 +1,4 @@
-import { eq } from '../util/eq';
+import { eq } from '../util/eq.ts';
 
 export const assignValue = (object: any, key: PropertyKey, value: any): void => {
   const objValue = object[key];

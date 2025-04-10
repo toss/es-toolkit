@@ -1,4 +1,4 @@
-import { iteratee } from '../util/iteratee';
+import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Removes all specified values from an array using an iteratee function.
