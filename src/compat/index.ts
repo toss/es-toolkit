@@ -69,6 +69,7 @@ export { reject } from './array/reject.ts';
 export { remove } from './array/remove.ts';
 export { reverse } from './array/reverse.ts';
 export { sample } from './array/sample.ts';
+export { sampleSize } from './array/sampleSize.ts';
 export { size } from './array/size.ts';
 export { slice } from './array/slice.ts';
 export { some } from './array/some.ts';
