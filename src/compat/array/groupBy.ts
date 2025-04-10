@@ -1,6 +1,6 @@
-import { groupBy as groupByToolkit } from "../../array/groupBy";
-import { isArrayLike } from "../predicate/isArrayLike";
-import { iteratee, iteratee as createIteratee } from "../util/iteratee";
+import { groupBy as groupByToolkit } from '../../array/groupBy';
+import { isArrayLike } from '../predicate/isArrayLike';
+import { iteratee as createIteratee, iteratee } from '../util/iteratee';
 
 /**
  * Maps each element of an array based on a provided key-generating function.
@@ -36,8 +36,8 @@ export function groupBy<T, K extends PropertyKey>(
     | Partial<T>
     | [keyof T, unknown]
     | PropertyKey
-    | null,
-): Record<K, T>;
+    | null
+): Record<K, T[]>;
 
 /**
  * Groups the elements of an object based on a provided key-generating function.
@@ -70,8 +70,8 @@ export function groupBy<T, K extends PropertyKey>(
     | Partial<T>
     | [keyof T, unknown]
     | PropertyKey
-    | null,
-): Record<K, T>;
+    | null
+): Record<K, T[]>;
 
 /**
  * Groups the elements of an array or object based on a provided key-generating function.
@@ -110,16 +110,14 @@ export function groupBy<T, K extends PropertyKey>(
     | Partial<T>
     | [keyof T, unknown]
     | PropertyKey
-    | null,
-): Record<K, T> {
+    | null
+): Record<K, T[]> {
   if (source == null) {
-    return {} as Record<K, T>;
+    return {} as Record<K, T[]>;
   }
 
-  const items = isArrayLike(source)
-    ? Array.from(source)
-    : Object.values(source);
+  const items = isArrayLike(source) ? Array.from(source) : Object.values(source);
   const getKeyFromItem = createIteratee(_getKeyFromItem ?? iteratee);
 
-  return groupByToolkit(items, getKeyFromItem);
+  return groupByToolkit<T, K>(items, getKeyFromItem);
 }
