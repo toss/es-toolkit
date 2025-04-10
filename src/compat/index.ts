@@ -90,6 +90,7 @@ export { uniq } from './array/uniq.ts';
 export { uniqBy } from './array/uniqBy.ts';
 export { uniqWith } from './array/uniqWith.ts';
 export { unzip } from './array/unzip.ts';
+export { unzipWith } from './array/unzipWith.ts';
 export { without } from './array/without.ts';
 export { zip } from './array/zip.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
