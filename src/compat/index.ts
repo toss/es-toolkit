@@ -137,8 +137,12 @@ export { subtract } from './math/subtract.ts';
 export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
 
+export { assign } from './object/assign.ts';
 export { assignIn } from './object/assignIn.ts';
 export { assignIn as extend } from './object/assignIn.ts';
+export { assignInWith } from './object/assignInWith.ts';
+export { assignInWith as extendWith } from './object/assignInWith.ts';
+export { assignWith } from './object/assignWith.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { cloneDeepWith } from './object/cloneDeepWith.ts';
 export { create } from './object/create.ts';
