@@ -1,4 +1,5 @@
 import { toNumber } from './toNumber.ts';
+import { isString } from '../predicate/isString.ts';
 
 /**
  * Checks if value is less than other.
@@ -13,7 +14,7 @@ import { toNumber } from './toNumber.ts';
  * lt(3, 1); // false
  */
 export function lt(value: unknown, other: unknown): boolean {
-  if (typeof value === 'string' && typeof other === 'string') {
+  if (isString(value) && isString(other)) {
     return value < other;
   }
 

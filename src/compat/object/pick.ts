@@ -3,6 +3,7 @@ import { has } from './has.ts';
 import { set } from './set.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isNil } from '../predicate/isNil.ts';
+import { isString } from '../predicate/isString.ts';
 
 /**
  * Creates a new object composed of the picked object properties.
@@ -126,7 +127,7 @@ export function pick<
         continue;
       }
 
-      if (typeof key === 'string' && Object.hasOwn(obj, key)) {
+      if (isString(key) && Object.hasOwn(obj, key)) {
         result[key] = value;
       } else {
         set(result, key, value);

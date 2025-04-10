@@ -7,6 +7,7 @@ import { objectProto } from '../_internal/objectProto';
 import { primitives } from '../_internal/primitives';
 import { strictArgs } from '../_internal/strictArgs';
 import { stringProto } from '../_internal/stringProto';
+import { isString } from '../predicate/isString.ts';
 import { constant } from '../util/constant';
 import { stubArray } from '../util/stubArray';
 
@@ -132,7 +133,7 @@ describe('keys', () => {
   });
 
   it('should coerce primitives to objects (test in IE 9)', () => {
-    const expected = primitives.map(value => (typeof value === 'string' ? ['0'] : []));
+    const expected = primitives.map(value => (isString(value) ? ['0'] : []));
 
     const actual = primitives.map(keys);
     expect(actual).toEqual(expected);
