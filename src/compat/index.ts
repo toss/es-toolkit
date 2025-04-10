@@ -237,6 +237,7 @@ export { upperCase } from './string/upperCase.ts';
 export { upperFirst } from './string/upperFirst.ts';
 export { words } from './string/words.ts';
 
+export { bindAll } from './util/bindAll.ts';
 export { cond } from './util/cond.ts';
 export { constant } from './util/constant.ts';
 export { defaultTo } from './util/defaultTo.ts';
