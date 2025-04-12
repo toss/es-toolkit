@@ -16,14 +16,14 @@ es-toolkit은 높은 성능과 작은 번들 사이즈, 강력한 타입을 자�
 ## 예시
 
 ```tsx
-// jsr을 사용하는 경우에는 '@es-toolkit/es-toolkit'에서 가져옵니다.
+// jsr을 사용하는 경우에는 '@es-toolkit/es-toolkit'에서 가져와요.
 import { chunk, debounce } from 'es-toolkit';
 
 const debouncedLog = debounce(message => {
   console.log(message);
 }, 300);
 
-// 이 호출은 디바운스 처리됩니다.
+// 이 호출은 디바운스 처리돼요.
 debouncedLog('Hello, world!');
 
 const array = [1, 2, 3, 4, 5, 6];
