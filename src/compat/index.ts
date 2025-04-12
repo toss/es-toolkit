@@ -94,6 +94,7 @@ export { without } from './array/without.ts';
 export { zip } from './array/zip.ts';
 export { zipObject } from './array/zipObject.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
+export { zipWith } from './array/zipWith.ts';
 
 export { after } from './function/after.ts';
 export { ary } from './function/ary.ts';
