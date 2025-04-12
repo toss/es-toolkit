@@ -13,6 +13,26 @@ es-toolkit은 높은 성능과 작은 번들 사이즈, 강력한 타입을 자�
 - es-toolkit은 [Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358)이나 [ink](https://github.com/vadimdemedes/ink/blob/2090ad9779be59dea71d173eb49785b7bd4495d0/package.json#L55) 같이 자주 사용되는 오픈소스 라이브러리에서 사용돼요.
 - es-toolkit은 100% 테스트 커버리지를 유지하면서, 높은 안정성을 자랑해요.
 
+## 예시
+
+```tsx
+// jsr을 사용하는 경우에는 '@es-toolkit/es-toolkit'에서 가져와요.
+import { chunk, debounce } from 'es-toolkit';
+
+const debouncedLog = debounce(message => {
+  console.log(message);
+}, 300);
+
+// 이 호출은 디바운스 처리돼요.
+debouncedLog('Hello, world!');
+
+const array = [1, 2, 3, 4, 5, 6];
+const chunkedArray = chunk(array, 2);
+
+console.log(chunkedArray);
+// 출력: [[1, 2], [3, 4], [5, 6]]
+```
+
 ## 기여하기
 
 커뮤니티에 있는 모든 분들에게 기여를 환영해요. 아래에 작성되어 있는 기여 가이드를 확인하세요.
