@@ -1,4 +1,4 @@
-import { partialRightImpl } from '../../function/partialRight';
+import { partialRightImpl } from '../../function/partialRight.ts';
 
 /**
  * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.

@@ -1,4 +1,4 @@
-import { partialImpl } from '../../function/partial';
+import { partialImpl } from '../../function/partial.ts';
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
