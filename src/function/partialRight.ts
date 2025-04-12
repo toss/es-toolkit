@@ -794,8 +794,16 @@ export function partialRight<F extends (...args: any[]) => any>(
   func: F,
   ...partialArgs: any[]
 ): (...args: any[]) => ReturnType<F> {
+  return partialRightImpl<F, Placeholder>(func, placeholderSymbol, ...partialArgs);
+}
+
+export function partialRightImpl<F extends (...args: any[]) => any, P>(
+  func: F,
+  placeholder: P,
+  ...partialArgs: any[]
+): (...args: any[]) => ReturnType<F> {
   const partialedRight = function (this: any, ...providedArgs: any[]) {
-    const placeholderLength = partialArgs.filter(arg => arg === placeholderSymbol).length;
+    const placeholderLength = partialArgs.filter(arg => arg === placeholder).length;
     const rangeLength = Math.max(providedArgs.length - placeholderLength, 0);
     const remainingArgs: any[] = providedArgs.slice(0, rangeLength);
 
@@ -803,7 +811,7 @@ export function partialRight<F extends (...args: any[]) => any>(
 
     const substitutedArgs = partialArgs
       .slice()
-      .map(arg => (arg === placeholderSymbol ? providedArgs[providedArgsIndex++] : arg));
+      .map(arg => (arg === placeholder ? providedArgs[providedArgsIndex++] : arg));
 
     return func.apply(this, remainingArgs.concat(substitutedArgs));
   };

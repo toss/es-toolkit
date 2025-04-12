@@ -695,12 +695,20 @@ export function partial<F extends (...args: any[]) => any>(
   func: F,
   ...partialArgs: any[]
 ): (...args: any[]) => ReturnType<F> {
+  return partialImpl<F, Placeholder>(func, placeholderSymbol, ...partialArgs);
+}
+
+export function partialImpl<F extends (...args: any[]) => any, P>(
+  func: F,
+  placeholder: P,
+  ...partialArgs: any[]
+): (...args: any[]) => ReturnType<F> {
   const partialed = function (this: unknown, ...providedArgs: any[]) {
     let providedArgsIndex = 0;
 
     const substitutedArgs: any[] = partialArgs
       .slice()
-      .map(arg => (arg === placeholderSymbol ? providedArgs[providedArgsIndex++] : arg));
+      .map(arg => (arg === placeholder ? providedArgs[providedArgsIndex++] : arg));
 
     const remainingArgs = providedArgs.slice(providedArgsIndex);
 

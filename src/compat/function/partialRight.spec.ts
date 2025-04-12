@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { identity, isObject, mergeWith } from '..';
+import _ from '..';
 import { curry } from './curry';
 import { partialRight } from './partialRight';
 
@@ -112,5 +113,13 @@ describe('partialRight', () => {
     }) as any;
 
     expect(defaultsDeep(object, source)).toEqual(expected);
+  });
+
+  it('should work with default values', () => {
+    const fn = function (a: any, b: any, c: any) {
+      return a + b + c;
+    };
+    const par = partialRight(fn, _, 'b', _);
+    expect(par('a', 'c')).toBe('abc');
   });
 });

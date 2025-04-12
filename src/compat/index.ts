@@ -24,6 +24,8 @@
  */
 export * from '../index.ts';
 
+export { toolkit as default } from './toolkit.ts';
+
 export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { compact } from './array/compact.ts';
