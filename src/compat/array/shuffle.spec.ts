@@ -36,4 +36,18 @@ describe('shuffle', () => {
     expect(shuffle(null)).toEqual([]);
     expect(shuffle(undefined)).toEqual([]);
   });
+
+  it('should treat array-like objects as arrays', () => {
+    const arrayLike = {
+      2: 'a',
+      0: 'b',
+      1: 'c',
+      length: 3,
+    };
+
+    const result = shuffle(arrayLike);
+
+    expect(result).not.toBe(Array.from(arrayLike));
+    expect(shuffle(arrayLike).sort()).toEqual(['a', 'b', 'c']);
+  });
 });

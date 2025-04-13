@@ -1,6 +1,7 @@
 import { shuffle as shuffleToolkit } from '../../array/shuffle.ts';
 import { values } from '../object/values.ts';
 import { isArray } from '../predicate/isArray.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isNil } from '../predicate/isNil.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 
@@ -42,6 +43,10 @@ export function shuffle<T>(collection: ArrayLike<T> | T | null | undefined): T[]
 
   if (isArray(collection)) {
     return shuffleToolkit(collection);
+  }
+
+  if (isArrayLike(collection)) {
+    return shuffleToolkit(Array.from(collection));
   }
 
   if (isObjectLike(collection)) {
