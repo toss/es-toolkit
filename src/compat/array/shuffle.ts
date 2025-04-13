@@ -1,64 +1,51 @@
-import { shuffle as shuffleToolkit } from '../../array';
-import { isArrayLike } from '../predicate/isArrayLike';
-import { isObjectLike } from '../predicate/isObjectLike';
+import { shuffle as shuffleToolkit } from '../../array/shuffle.ts';
+import { values } from '../object/values.ts';
+import { isArray } from '../predicate/isArray.ts';
+import { isNil } from '../predicate/isNil.ts';
+import { isObjectLike } from '../predicate/isObjectLike.ts';
 
 /**
- * Shuffles the elements of an array-like object (e.g., array, string, arguments) into a new array.
+ * Randomizes the order of elements in an `array` using the Fisher-Yates algorithm.
  *
- * @template T - The element type of the array-like collection.
- * @param {ArrayLike<T>} collection - The array-like collection to shuffle.
- * @returns {T[]} A new array with shuffled elements.
+ * This function takes an `array` and returns a new `array` with its elements shuffled in a random order.
  *
- * @example
- * shuffle([1, 2, 3, 4]); // e.g., [3, 1, 4, 2]
- *
- * @example
- * shuffle('abcd'); // e.g., ['b', 'd', 'a', 'c']
+ * @template T - The type of elements in the `array`.
+ * @param {T[]} array - The `array` to shuffle.
+ * @returns {T[]} A new `array` with its elements shuffled in random order.
  */
-export function shuffle<T>(collection: ArrayLike<T>): T[];
+export function shuffle<T>(array: ArrayLike<T> | null | undefined): T[];
 
 /**
- * Shuffles the values of an object into a new array.
+ * Randomizes the order of elements in an `object` using the Fisher-Yates algorithm.
  *
- * @template T - The value type of the object.
- * @param {T} collection - The object whose values will be shuffled.
- * @returns {T[]} A new array containing the shuffled values of the object.
+ * This function takes an `object` and returns a new `object` with its values shuffled in a random order.
  *
- * @example
- * shuffle({ a: 1, b: 2, c: 3 }); // e.g., [2, 1, 3]
+ * @template T - The type of elements in the `object`.
+ * @param {T} object - The `object` to shuffle.
+ * @returns {T[]} A new `Array` with the values of the `object` shuffled in a random order.
  */
-export function shuffle<T extends object>(collection: T): Array<T[keyof T]>;
+export function shuffle<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
 
 /**
- * Handles `null` or `undefined` input by returning an empty array.
+ * Randomizes the order of elements in an `collection` using the Fisher-Yates algorithm.
  *
- * @param {null | undefined} collection - A null or undefined value.
- * @returns {[]} An empty array.
+ * This function takes an `collection` and returns a new `collection` with its elements shuffled in a random order.
  *
- * @example
- * shuffle(null); // []
- * shuffle(undefined); // []
+ * @template T - The type of elements in the `collection`.
+ * @param {T[]} collection - The `collection` to shuffle.
+ * @returns {T[]} A new `collection` with its elements shuffled in random order.
  */
-export function shuffle(collection: null | undefined): [];
-
-/**
- * Shuffles the values of an array-like or object-like collection into a new array.
- * Returns an empty array for `null`, `undefined`, or unsupported types.
- *
- * @param {unknown} collection - The collection to shuffle.
- * @returns {unknown[]} A new shuffled array, or an empty array for unsupported types.
- */
-export function shuffle(collection: unknown): unknown[] {
-  if (!collection) {
+export function shuffle<T>(collection: ArrayLike<T> | T | null | undefined): T[] | Array<T[keyof T]> {
+  if (isNil(collection)) {
     return [];
   }
 
-  if (isArrayLike(collection)) {
-    return shuffleToolkit(Array.from(collection));
+  if (isArray(collection)) {
+    return shuffleToolkit(collection);
   }
 
   if (isObjectLike(collection)) {
-    return shuffleToolkit(Object.values(collection));
+    return shuffleToolkit(values(collection));
   }
 
   return [];
