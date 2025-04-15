@@ -60,7 +60,11 @@ export function maxBy<T>(items: readonly T[], getValue: (element: T) => number):
  *   x => x.age
  * ); // Returns: { name: 'john', age: 30 }
  */
-export function maxBy<T>(items: readonly T[], getValue: (element: T) => number): T {
+export function maxBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined {
+  if (items.length === 0) {
+    return undefined;
+  }
+
   let maxElement = items[0];
   let max = -Infinity;
 
