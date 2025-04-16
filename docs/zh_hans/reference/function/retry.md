@@ -43,7 +43,7 @@ console.log(data3);
 // 使用函数动态设置重试间隔（例如每次增加 50ms）
 const data4 = await retry(() => fetchData(), {
   retries: 5,
-  delay: (attempts) => attempts * 50,
+  delay: attempts => attempts * 50,
 });
 console.log(data4);
 

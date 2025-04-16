@@ -19,7 +19,6 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 
 delay: 再試行の間隔。ミリ秒単位の数値、または現在の試行回数（attempts）を受け取って遅延を動的に決定する関数。デフォルトは 0 です。
 
-
 ### 戻り値
 
 (`Promise<T>`): `func` が返す値です。
@@ -46,7 +45,7 @@ console.log(data3);
 // 試行回数に応じて、遅延を線形に増やすことができます（例: attempts * 50ms）
 const data4 = await retry(() => fetchData(), {
   retries: 5,
-  delay: (attempts) => attempts * 50,
+  delay: attempts => attempts * 50,
 });
 console.log(data4);
 

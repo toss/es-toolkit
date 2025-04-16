@@ -43,7 +43,7 @@ console.log(data3);
 // Retry 5 times with a linearly increasing delay
 const data4 = await retry(() => fetchData(), {
   retries: 5,
-  delay: (attempts) => attempts * 50,
+  delay: attempts => attempts * 50,
 });
 console.log(data4);
 

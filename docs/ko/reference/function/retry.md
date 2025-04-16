@@ -40,10 +40,10 @@ console.log(data2);
 const data3 = await retry(() => fetchData(), { retries: 3, delay: 100 });
 console.log(data3);
 
-// 재시도 횟수에 따라 딜레이가 커지는 함수로 설정할 수 있어요 
+// 재시도 횟수에 따라 딜레이가 커지는 함수로 설정할 수 있어요
 const data4 = await retry(() => fetchData(), {
   retries: 5,
-  delay: (attempts) => attempt * 50,
+  delay: attempts => attempt * 50,
 });
 console.log(data4);
 
