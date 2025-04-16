@@ -10,7 +10,9 @@ import { isFunction } from '../../predicate/isFunction.ts';
  * @param {(item: T) => R} combine - The combiner function that takes corresponding elements from each array and returns a single value.
  * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  */
+
 export function zipWith<T, R>(arr1: ArrayLike<T>, combine: (item: T) => R): R[];
+
 /**
  * Combines two arrays into a single array using a custom combiner function.
  *
@@ -23,6 +25,7 @@ export function zipWith<T, R>(arr1: ArrayLike<T>, combine: (item: T) => R): R[];
  * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  */
 export function zipWith<T, U, R>(arr1: ArrayLike<T>, arr2: ArrayLike<U>, combine: (item1: T, item2: U) => R): R[];
+
 /**
  * Combines three arrays into a single array using a custom combiner function.
  *
@@ -42,6 +45,7 @@ export function zipWith<T, U, V, R>(
   arr3: ArrayLike<V>,
   combine: (item1: T, item2: U, item3: V) => R
 ): R[];
+
 /**
  * Combines four arrays into a single array using a custom combiner function.
  *
@@ -64,6 +68,7 @@ export function zipWith<T, U, V, W, R>(
   arr4: ArrayLike<W>,
   combine: (item1: T, item2: U, item3: V, item4: W) => R
 ): R[];
+
 /**
  * Combines five arrays into a single array using a custom combiner function.
  *
@@ -89,6 +94,7 @@ export function zipWith<T, U, V, W, X, R>(
   arr5: ArrayLike<X>,
   combine: (item1: T, item2: U, item3: V, item4: W, item5: X) => R
 ): R[];
+
 /**
  * Combines multiple arrays into a single array using a custom combiner function.
  *
@@ -109,6 +115,7 @@ export function zipWith<T, U, V, W, X, R>(
  * // result will be ['1a', '2b', '3c']
  */
 export function zipWith<T, R>(...combine: Array<((...group: T[]) => R) | ArrayLike<T> | null | undefined>): R[];
+
 /**
  * Combines multiple arrays into a single array using a custom combiner function.
  *
@@ -129,20 +136,22 @@ export function zipWith<T, R>(...combine: Array<((...group: T[]) => R) | ArrayLi
  * // result will be ['1a', '2b', '3c']
  */
 export function zipWith<T, R>(...combine: Array<((...group: T[]) => R) | ArrayLike<T> | null | undefined>): R[] {
-  const length = combine.length;
-  let iteratee = length > 1 ? combine[length - 1] : undefined;
+  let iteratee = combine.pop();
 
-  if (isFunction(iteratee)) {
-    combine.pop();
-  } else {
+  if (!isFunction(iteratee)) {
+    combine.push(iteratee);
     iteratee = undefined;
   }
+
   if (!combine?.length) {
     return [];
   }
+
   const result = unzip(combine as ArrayLike<ArrayLike<T>>);
+
   if (iteratee == null) {
     return result as R[];
   }
+
   return result.map(group => iteratee(...group)) as R[];
 }
