@@ -49,6 +49,6 @@ sortedIndexBy(objects, { x: 25 }, o => o.x)；
 // ユーザー定義のソートロジック処理
 const strings = ['apple', 'banana', 'cherry']；
 sortedIndexBy(strings, 'apricot', str => str.length)；
-// 戻り値: 1
-// 説明: 文字列の長さを基準に'apricot'はインデックス1を返します。
+// 戻り値: 3
+// 説明: 文字列の長さを基準に'apricot'はインデックス3を返します。
 ```

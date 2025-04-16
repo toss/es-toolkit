@@ -14,7 +14,7 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 
 - `func` (`() => Promise<T>`): `Promise`를 반환하는 함수.
 - `retries`: 재시도할 횟수. 기본값은 `Number.POSITIVE_INFINITY`로, 성공할 때까지 재시도해요.
-- `delay`: 재시도 사이 간격. 단위는 밀리세컨드(ms)로, 기본값은 `0`이에요.
+- `delay`: 재시도 사이 간격. 밀리세컨드(ms) 단위의 숫자이거나, 현재 재시도 횟수(`attempts`)를 기반으로 동적으로 간격을 계산하는 함수일 수 있어요. 기본값은 `0`이에요.
 - `signal`: 재시도를 취소할 수 있는 `AbortSignal`.
 
 ### 반환 값
@@ -40,9 +40,16 @@ console.log(data2);
 const data3 = await retry(() => fetchData(), { retries: 3, delay: 100 });
 console.log(data3);
 
+// 재시도 횟수에 따라 딜레이가 커지는 함수로 설정할 수 있어요
+const data4 = await retry(() => fetchData(), {
+  retries: 5,
+  delay: attempts => attempt * 50,
+});
+console.log(data4);
+
 const controller = new AbortController();
 
 // `fetchData`를 재시도하는 작업을 `signal`로 취소할 수 있어요.
-const data4 = await retry(() => fetchData(), { signal: controller.signal });
-console.log(data4);
+const data5 = await retry(() => fetchData(), { signal: controller.signal });
+console.log(data5);
 ```

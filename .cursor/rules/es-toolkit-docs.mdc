@@ -1,0 +1,58 @@
+---
+description: 
+globs: **/*.md
+alwaysApply: false
+---
+---
+description: es-toolkit Documentation Guidelines
+globs: **/*.md
+---
+
+- Provide documentation in English (docs), Korean (docs/ko), Japanese (docs/ja), and Simplified Chinese (docs/zh_hans).
+- For functions in `src/compat`, create docs within each compat folder. If original documentation already exists (e.g., `docs/reference/object/create.md` for `src/compat/object/create.ts`), no additional docs are required.
+- Write Korean documentation in polite conversational tone ("해요체").
+
+## Reference Documentation Template
+
+```md
+# [Function Name]
+
+[If this documentation is for compat, add this section: ::: info
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed @here.
+:::]
+
+[Explain what this element is, when to use it, and its value.]
+
+## Signature
+
+```typescript
+Insert the function signature(s), including overrides if applicable.
+```
+
+### Parameters
+
+- `[Parameter Name]` (`[Paramter Type]`):: [Description] // Insert content from jsdoc @params
+
+### Returns [영어면 Returns 한국어면 반환 값 일본어면 戻り値 zh_hans면 返回值]
+
+(`[Return Type]`): Insert content from jsdoc @returns
+
+## Examples
+
+```typescript
+Insert content from jsdoc @example
+```
+```
+
+- Always translate these terms consistently for each language:
+
+| English   | Korean       | Japanese       | zh_hans   |
+|-----------|--------------|----------------|-----------|
+| Signature | 인터페이스   | インターフェース | 签名      |
+| Parameters| 파라미터     | パラメータ       | 参数      |
+| Returns   | 반환 값      | 戻り値          | 返回值     |
+| Examples  | 예시         | 例             | 示例       |
+
+
