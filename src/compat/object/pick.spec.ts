@@ -1,10 +1,72 @@
 import { describe, expect, it } from 'vitest';
 import { pick } from './pick';
+import { symbol } from '../_internal/symbol';
 import { toArgs } from '../_internal/toArgs';
+import { map } from '../array/map';
+import { nthArg } from '../function/nthArg';
 
 describe('compat/pick', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };
   const nested = { a: 1, b: { c: 2, d: 3 } };
+  const expected = { a: 1, c: 3 };
+  const resolve = nthArg(1) as (obj: any, keys: any) => any;
+
+  it(`\`pick\` should create an object of picked string keyed properties`, () => {
+    expect(pick(object, resolve(object, 'a'))).toEqual({ a: 1 });
+    expect(pick(object, resolve(object, ['a', 'c']))).toEqual(expected);
+  });
+
+  it(`\`pick\` should pick inherited string keyed properties`, () => {
+    function Foo() {}
+    Foo.prototype = object;
+
+    // @ts-expect-error - Foo is a constructor
+    const foo = new Foo();
+    expect(pick(foo, resolve(foo, ['a', 'c']))).toEqual(expected);
+  });
+
+  it(`\`pick\` should preserve the sign of \`0\``, () => {
+    const object = { '-0': 'a', 0: 'b' };
+    const props = [-0, Object(-0), 0, Object(0)];
+    const expected = [{ '-0': 'a' }, { '-0': 'a' }, { 0: 'b' }, { 0: 'b' }];
+
+    const actual = map(props, key => pick(object, resolve(object, key)));
+
+    expect(actual).toEqual(expected);
+  });
+
+  it(`\`pick\` should pick symbols`, () => {
+    function Foo(this: any) {
+      this[symbol] = 1;
+    }
+
+    if (Symbol) {
+      const symbol2 = Symbol('b');
+      Foo.prototype[symbol2] = 2;
+
+      const symbol3 = Symbol('c');
+      Object.defineProperty(Foo.prototype, symbol3, {
+        configurable: true,
+        enumerable: false,
+        writable: true,
+        value: 3,
+      });
+
+      // @ts-expect-error - Foo is a constructor
+      const foo = new Foo();
+      const actual = pick(foo, resolve(foo, [symbol, symbol2, symbol3]));
+
+      expect(actual[symbol]).toBe(1);
+      expect(actual[symbol2]).toBe(2);
+
+      expect(actual[symbol3]).toBe(3);
+    }
+  });
+
+  it(`\`pick\` should work with an array \`object\``, () => {
+    const array = [1, 2, 3];
+    expect(pick(array, resolve(array, '1'))).toEqual({ 1: 2 });
+  });
 
   it('should flatten `paths`', () => {
     pick(object, 'a', 'b');
