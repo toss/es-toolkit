@@ -226,6 +226,7 @@ export { padStart } from './string/padStart.ts';
 export { repeat } from './string/repeat.ts';
 export { replace } from './string/replace.ts';
 export { snakeCase } from './string/snakeCase.ts';
+export { split } from './string/split.ts';
 export { startCase } from './string/startCase.ts';
 export { startsWith } from './string/startsWith.ts';
 export { template, templateSettings } from './string/template.ts';
