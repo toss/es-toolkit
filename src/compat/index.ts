@@ -61,6 +61,7 @@ export { lastIndexOf } from './array/lastIndexOf.ts';
 export { map } from './array/map.ts';
 export { nth } from './array/nth.ts';
 export { orderBy } from './array/orderBy.ts';
+export { partition } from './array/partition.ts';
 export { pull } from './array/pull.ts';
 export { pullAll } from './array/pullAll.ts';
 export { pullAllBy } from './array/pullAllBy.ts';
