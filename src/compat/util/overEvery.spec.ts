@@ -94,6 +94,8 @@ describe('overEvery', () => {
       args = slice.call(arguments);
     });
 
+    // eslint-disable-next-line
+    // @ts-ignore
     over('a', 'b', 'c');
     expect(args).toEqual(['a', 'b', 'c']);
   });
