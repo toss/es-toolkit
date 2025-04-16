@@ -1,5 +1,16 @@
 # es-toolkit Changelog
 
+## Version v1.35.0
+
+Released on April 16th, 2025.
+
+- Added support for [toCamelCaseKeys](https://es-toolkit.slash.page/reference/object/toCamelCaseKeys.html) and [toSnakeCaseKeys](https://es-toolkit.slash.page/reference/object/toSnakeCaseKeys.html).
+- Added support for custom delay function based on attempts in [retry](https://es-toolkit.slash.page/reference/function/retry.html).
+- Introduced compatibility functions for [at](https://es-toolkit.slash.page/reference/array/at.html) (array), [split](https://es-toolkit.slash.page/reference/compat/string/split.html), [shuffle](https://es-toolkit.slash.page/reference/array/shuffle.html), [zipWith](https://es-toolkit.slash.page/reference/array/zipWith.html), [zipObject](https://es-toolkit.slash.page/reference/array/zipObject.html), [keyBy](https://es-toolkit.slash.page/reference/array/keyBy.html), [assign](https://es-toolkit.slash.page/reference/compat/object/assign.html), [assignInWith](https://es-toolkit.slash.page/reference/compat/object/assignInWith.html), [assignWith](https://es-toolkit.slash.page/reference/compat/object/assignWith.html), [update](https://es-toolkit.slash.page/reference/compat/object/update.html), [updateWith](https://es-toolkit.slash.page/reference/compat/object/updateWith.html), [uniqWith](https://es-toolkit.slash.page/reference/array/uniqWith.html), [unionBy](https://es-toolkit.slash.page/reference/array/unionBy.html), [unionWith](https://es-toolkit.slash.page/reference/array/unionWith.html), [takeWhile](https://es-toolkit.slash.page/reference/array/takeWhile.html), [sortedLastIndex](https://es-toolkit.slash.page/reference/compat/array/sortedLastIndex.html), [sortedLastIndexBy](https://es-toolkit.slash.page/reference/compat/array/sortedLastIndexBy.html), [toPairs](https://es-toolkit.slash.page/reference/compat/object/toPairs.html), [toPairsIn](https://es-toolkit.slash.page/reference/compat/object/toPairsIn.html), [cond](https://es-toolkit.slash.page/reference/compat/util/cond.html), [over](https://es-toolkit.slash.page/reference/compat/util/over.html), [functions](https://es-toolkit.slash.page/reference/compat/object/functions.html), and [create](https://es-toolkit.slash.page/reference/compat/object/create.html) in `es-toolkit/compat`.
+- Fixed Lodash compatibility issues in [pick](https://es-toolkit.slash.page/reference/object/pick.html) and [pickBy](https://es-toolkit.slash.page/reference/object/pickBy.html).
+
+We sincerely thank @shren207, @kim-sung-jee, @HyeokjaeLee, @Jeong-Rae, @D-Sketon, @jsparkdev, @wojtekmaj, @FengBuPi, @oror-sine, @L2HYUNN, @gs18004, @ohprettyhak, and @kimpuro for their contributions. We appreciate your great efforts!
+
 ## Version v1.34.1
 
 Released on March 27th, 2025.
