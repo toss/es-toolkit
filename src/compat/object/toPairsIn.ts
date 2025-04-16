@@ -1,4 +1,6 @@
 import { keysIn as keysInToolkit } from './keysIn.ts';
+import { mapToEntries } from '../_internal/mapToEntries.ts';
+import { setToEntries } from '../_internal/setToEntries.ts';
 
 /**
  * Creates an array of string keyed-value pairs from an object, including inherited properties.
@@ -53,8 +55,12 @@ export function toPairsIn<K, V>(map: Map<K, V>): Array<[key: K, value: V]>;
  * toPairsIn(map); // [['a', 1], ['b', 2]]
  */
 export function toPairsIn(object: Record<any, any> | Set<any> | Map<any, any>): Array<[key: PropertyKey, value: any]> {
-  if (object instanceof Set || object instanceof Map) {
-    return Array.from(object.entries());
+  if (object instanceof Set) {
+    return setToEntries(object);
+  }
+
+  if (object instanceof Map) {
+    return mapToEntries(object);
   }
 
   const keys = keysInToolkit(object);
