@@ -62,14 +62,16 @@ export type ToSnakeCaseKeys<T> = T extends any[]
 export function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T> {
   if (isArray(obj)) {
     return obj.map(item => toSnakeCaseKeys(item)) as unknown as ToSnakeCaseKeys<T>;
-  } else if (isPlainObject(obj)) {
+  }
+
+  if (isPlainObject(obj)) {
     const result = {} as ToSnakeCaseKeys<T>;
     const keys = Object.keys(obj);
 
     for (let i = 0; i < keys.length; i++) {
-      const key = keys[i] as keyof T;
+      const key = keys[i];
 
-      const snakeKey = snakeCase(key as string) as keyof typeof result;
+      const snakeKey = snakeCase(key) as keyof typeof result;
       const snakeCaseKeys = toSnakeCaseKeys(obj[key]);
       result[snakeKey] = snakeCaseKeys as ToSnakeCaseKeys<T>[keyof ToSnakeCaseKeys<T>];
     }

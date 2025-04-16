@@ -60,14 +60,16 @@ type ToCamelCaseKeys<T> = T extends any[]
 export function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T> {
   if (isArray(obj)) {
     return obj.map(item => toCamelCaseKeys(item)) as ToCamelCaseKeys<T>;
-  } else if (isPlainObject(obj)) {
+  }
+
+  if (isPlainObject(obj)) {
     const result = {} as ToCamelCaseKeys<T>;
     const keys = Object.keys(obj);
 
     for (let i = 0; i < keys.length; i++) {
-      const key = keys[i] as keyof T;
+      const key = keys[i];
 
-      const camelKey = camelCase(key as string) as keyof typeof result;
+      const camelKey = camelCase(key) as keyof typeof result;
       const camelCaseKeys = toCamelCaseKeys(obj[key]);
       result[camelKey] = camelCaseKeys as ToCamelCaseKeys<T>[keyof ToCamelCaseKeys<T>];
     }
