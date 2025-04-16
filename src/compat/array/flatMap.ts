@@ -1,6 +1,6 @@
 import { flatten } from './flatten.ts';
 import { map } from './map.ts';
-import { isNil } from '../../predicate';
+import { isNil } from '../../predicate/isNil.ts';
 
 /**
  * Maps each element in the collection using the iteratee function and flattens the result by one level.
