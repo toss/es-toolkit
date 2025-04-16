@@ -257,6 +257,7 @@ export { method } from './util/method.ts';
 export { methodOf } from './util/methodOf.ts';
 export { now } from './util/now.ts';
 export { over } from './util/over.ts';
+export { overSome } from './util/overSome.ts';
 export { stubArray } from './util/stubArray.ts';
 export { stubFalse } from './util/stubFalse.ts';
 export { stubObject } from './util/stubObject.ts';
