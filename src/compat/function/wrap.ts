@@ -1,4 +1,4 @@
-import { isFunction } from '../../predicate';
+import { isFunction } from '../../predicate/isFunction.ts';
 
 /**
  * Creates a new function that passes the original function `value` as the first argument to the `wrapper`.
