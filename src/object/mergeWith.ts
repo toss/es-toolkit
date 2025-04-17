@@ -1,4 +1,5 @@
-import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
+import { isUnsafeProperty } from "../_internal/isUnsafeProperty.ts";
+import { isObjectLike } from "../compat/predicate/isObjectLike.ts";
 
 /**
  * Merges the properties of the source object into the target object.
@@ -48,27 +49,54 @@ import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
  *
  * expect(result).toEqual({ a: [1, 3], b: [2, 4] });
  */
-export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
+export function mergeWith<
+  T extends Record<PropertyKey, any>,
+  S extends Record<PropertyKey, any>,
+>(
   target: T,
   source: S,
-  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
+  merge: (
+    targetValue: any,
+    sourceValue: any,
+    key: string,
+    target: T,
+    source: S,
+  ) => any,
 ): T & S {
   const sourceKeys = Object.keys(source) as Array<keyof T>;
 
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
 
+    if (isUnsafeProperty(key)) {
+      continue;
+    }
+
     const sourceValue = source[key];
     const targetValue = target[key];
 
-    const merged = merge(targetValue, sourceValue, key as string, target, source);
+    const merged = merge(
+      targetValue,
+      sourceValue,
+      key as string,
+      target,
+      source,
+    );
 
     if (merged != null) {
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
-      target[key] = mergeWith<any, S[keyof T]>(targetValue ?? [], sourceValue, merge);
+      target[key] = mergeWith<any, S[keyof T]>(
+        targetValue ?? [],
+        sourceValue,
+        merge,
+      );
     } else if (isObjectLike(targetValue) && isObjectLike(sourceValue)) {
-      target[key] = mergeWith<any, S[keyof T]>(targetValue ?? {}, sourceValue, merge);
+      target[key] = mergeWith<any, S[keyof T]>(
+        targetValue ?? {},
+        sourceValue,
+        merge,
+      );
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
     }

@@ -22,6 +22,7 @@
  *
  * @module
  */
+<<<<<<< Updated upstream
 export * from '../index.ts';
 
 export { castArray } from './array/castArray.ts';
@@ -272,3 +273,7 @@ export { toPlainObject } from './util/toPlainObject.ts';
 export { toSafeInteger } from './util/toSafeInteger.ts';
 export { toString } from './util/toString.ts';
 export { uniqueId } from './util/uniqueId.ts';
+=======
+export * from "./compat.ts";
+export { toolkit as default } from "./toolkit.ts";
+>>>>>>> Stashed changes
