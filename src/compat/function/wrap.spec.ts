@@ -7,19 +7,16 @@ import { escape } from '../string/escape';
 
 describe('wrap', () => {
   it('should create a wrapped function', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    const p = wrap(escape, (func, text) => `<p>${func(text)}</p>`);
+    const p = wrap(escape, (func, text: string) => `<p>${func(text)}</p>`);
 
-    expect(`<p>${escape('fred, barney & pebbles')}</p>`).toBe('<p>fred, barney &amp; pebbles</p>');
+    expect(p('fred, barney & pebbles')).toBe('<p>fred, barney &amp; pebbles</p>');
   });
 
   it('should provide correct `wrapper` arguments', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    let args;
+    let args: unknown;
 
     const wrapped = wrap(noop, function () {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions, prefer-rest-params
       args || (args = slice.call(arguments));
     });
 
@@ -30,6 +27,7 @@ describe('wrap', () => {
   });
 
   it('should use `_.identity` when `wrapper` is nullish', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = values.map(stubA);
 
