@@ -12,8 +12,14 @@ This allows you to decorate or extend the behavior of the original value in a fl
 ## Signature
 
 ```typescript
-function wrap<T extends (...args: any[]) => any>(value: T, wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>): (...args: Parameters<T>) => ReturnType<T>;
-function wrap<T, TArgs extends unknown[], TResult>(value: T, wrapper: (value: T, ...args: TArgs) => TResult): (...args: TArgs) => TResult;
+function wrap<T extends (...args: any[]) => any>(
+  value: T,
+  wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>
+): (...args: Parameters<T>) => ReturnType<T>;
+function wrap<T, TArgs extends unknown[], TResult>(
+  value: T,
+  wrapper: (value: T, ...args: TArgs) => TResult
+): (...args: TArgs) => TResult;
 function wrap(value: unknown, wrapper: (...args: unknown[]) => unknown): (...args: unknown[]) => unknown;
 ```
 
