@@ -12,7 +12,10 @@ This allows you to decorate or extend the behavior of the original function in a
 ## 인터페이스
 
 ```typescript
-function wrap<T extends (...args: any[]) => any>(value: T, wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>): (...args: Parameters<T>) => ReturnType<T>;
+function wrap<T extends (...args: any[]) => any>(
+  value: T,
+  wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>
+): (...args: Parameters<T>) => ReturnType<T>;
 ```
 
 ### 파라미터
