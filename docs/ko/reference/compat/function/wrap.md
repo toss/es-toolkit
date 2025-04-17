@@ -18,7 +18,7 @@ function wrap<T extends (...args: unknown[]) => unknown>(value: T, wrapper: (fn:
 ### 파라미터
 
 - `value` (`T`): The original function to wrap.
-- `wrapper` (`(fn: T, ...args: Parameters<T>) => ReturnType<T>`): A function that receives the original function and its arguments, and returns the result.
+- `wrapper` (`(value: T, ...args: Parameters<T>) => ReturnType<T>`): A function that receives the original function and its arguments, and returns the result.
 
 ### 반환 값
 

@@ -16,12 +16,12 @@ import { isFunction } from '../../predicate';
  * doubleFirst(3, 4); // => 24
  *
  * @param {T} value - The original function to wrap.
- * @param {(fn: T, ...args: Parameters<T>) => ReturnType<T>} wrapper - A function that receives the original function and its arguments, and returns the result.
+ * @param {(value: T, ...args: Parameters<T>) => ReturnType<T>} wrapper - A function that receives the original function and its arguments, and returns the result.
  * @returns A new function with the same signature as `value`, but wrapped by `wrapper`.
  */
 export function wrap<T extends (...args: unknown[]) => unknown>(
   value: T,
-  wrapper: (fn: T, ...args: Parameters<T>) => ReturnType<T>
+  wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>
 ): (...args: Parameters<T>) => ReturnType<T> {
   return function (this: unknown, ...args: Parameters<T>): ReturnType<T> {
     const wrapFn = isFunction(wrapper)
