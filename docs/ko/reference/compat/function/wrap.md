@@ -12,7 +12,7 @@ This allows you to decorate or extend the behavior of the original function in a
 ## 인터페이스
 
 ```typescript
-function wrap<T extends (...args: unknown[]) => unknown>(value: T, wrapper: (fn: T, ...args: Parameters<T>) => ReturnType<T>): (...args: Parameters<T>) => ReturnType<T>;
+function wrap<T extends (...args: any[]) => any>(value: T, wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>): (...args: Parameters<T>) => ReturnType<T>;
 ```
 
 ### 파라미터
@@ -28,11 +28,11 @@ function wrap<T extends (...args: unknown[]) => unknown>(value: T, wrapper: (fn:
 
 ```typescript
 const greet = (name: string) => `Hi, ${name}`;
-const wrapped = wrap(greet, (fn, name) => `[LOG] ${fn(name)}`);
+const wrapped = wrap(greet, (value, name) => `[LOG] ${value(name)}`);
 wrapped('Bob'); // => "[LOG] Hi, Bob"
 
 // Wrapping to modify arguments
 const multiply = (a: number, b: number) => a * b;
-const doubleFirst = wrap(multiply, (fn, a, b) => fn(a * 2, b));
+const doubleFirst = wrap(multiply, (value, a, b) => value(a * 2, b));
 doubleFirst(3, 4); // => 24
 ```
