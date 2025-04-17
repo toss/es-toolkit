@@ -6,20 +6,21 @@ import { isFunction } from '../../predicate';
  *
  * @example
  * const greet = (name: string) => `Hi, ${name}`;
- * const wrapped = wrap(greet, (fn, name) => `[LOG] ${fn(name)}`);
+ * const wrapped = wrap(greet, (value, name) => `[LOG] ${value(name)}`);
  * wrapped('Bob'); // => "[LOG] Hi, Bob"
  *
  * @example
  * // Wrapping to modify arguments
  * const multiply = (a: number, b: number) => a * b;
- * const doubleFirst = wrap(multiply, (fn, a, b) => fn(a * 2, b));
+ * const doubleFirst = wrap(multiply, (value, a, b) => value(a * 2, b));
  * doubleFirst(3, 4); // => 24
  *
  * @param {T} value - The original function to wrap.
  * @param {(value: T, ...args: Parameters<T>) => ReturnType<T>} wrapper - A function that receives the original function and its arguments, and returns the result.
  * @returns A new function with the same signature as `value`, but wrapped by `wrapper`.
  */
-export function wrap<T extends (...args: unknown[]) => unknown>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function wrap<T extends (...args: any[]) => any>(
   value: T,
   wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>
 ): (...args: Parameters<T>) => ReturnType<T> {
