@@ -35,6 +35,6 @@ function extend(object: any, ...sources: any[]): any;
 
 ```typescript
 const target = { a: 1 };
-const result = assignIn(target, { b: 2 }, { c: 3 });
+const result = extend(target, { b: 2 }, { c: 3 });
 console.log(result); // Output: { a: 1, b: 2, c: 3 }
 ```
