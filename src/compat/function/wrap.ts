@@ -13,8 +13,7 @@ import { isFunction } from '../../predicate/isFunction.ts';
  * const wrapped = wrap(greet, (value, name) => `[LOG] ${value(name)}`);
  * wrapped('Bob'); // => "[LOG] Hi, Bob"
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function wrap<T extends (...args: any[]) => any>(
+export function wrap<T extends (...args: unknown[]) => unknown>(
   value: T,
   wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>
 ): (...args: Parameters<T>) => ReturnType<T>;
