@@ -20,7 +20,6 @@ function wrap<T, TArgs extends unknown[], TResult>(
   value: T,
   wrapper: (value: T, ...args: TArgs) => TResult
 ): (...args: TArgs) => TResult;
-function wrap(value: unknown, wrapper: (...args: unknown[]) => unknown): (...args: unknown[]) => unknown;
 ```
 
 ## Examples
