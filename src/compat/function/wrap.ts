@@ -1,3 +1,4 @@
+import { identity } from '../../function/identity.ts';
 import { isFunction } from '../../predicate/isFunction.ts';
 
 /**
@@ -49,12 +50,9 @@ export function wrap<T, TArgs extends unknown[], TResult>(
  * const wrapped = wrap('value', v => `<p>${v}</p>`);
  * wrapped(); // => "<p>value</p>"
  */
-export function wrap(value: unknown, wrapper: (...args: unknown[]) => unknown): (...args: unknown[]) => unknown {
+export function wrap(value: unknown, wrapper: unknown): (...args: unknown[]) => unknown {
   return function (this: unknown, ...args: unknown[]): unknown {
-    const wrapFn = isFunction(wrapper)
-      ? wrapper
-      : // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        (fn: unknown, ..._args: unknown[]) => fn;
+    const wrapFn = isFunction(wrapper) ? (wrapper as (value: unknown, ...args: unknown[]) => unknown) : identity;
 
     return wrapFn.apply(this, [value, ...args]);
   };
