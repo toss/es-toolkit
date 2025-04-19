@@ -179,6 +179,7 @@
     "globals": "^15.9.0",
     "happy-dom": "^16.7.3",
     "jscodeshift": "^17.0.0",
+    "jsdom": "^26.1.0",
     "prettier": "^3.2.5",
     "prettier-plugin-sort-re-exports": "^0.1.0",
     "rollup": "^4.19.0",

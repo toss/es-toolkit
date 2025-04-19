@@ -4,6 +4,7 @@ import packageJson from './package.json';
 export default defineConfig({
   test: {
     name: packageJson.name,
+    environment: 'jsdom',
     exclude: ['./benchmarks/**/*', '.yarn/**/*'],
     coverage: {
       provider: 'istanbul',
