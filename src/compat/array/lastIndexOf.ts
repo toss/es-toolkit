@@ -1,4 +1,4 @@
-import { isArrayLike } from '../predicate/isArrayLike';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
  * Finds the index of the last occurrence of a value in an array.

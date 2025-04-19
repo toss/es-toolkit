@@ -1,4 +1,4 @@
-import { keys } from './keys';
+import { keys } from './keys.ts';
 
 /**
  * Creates an array of property names from an object where the property values are functions.
