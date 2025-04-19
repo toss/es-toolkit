@@ -1,10 +1,9 @@
 import { flatten } from './flatten.ts';
-import { last } from './last.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { at } from '../object/at.ts';
-import { get } from '../object/get.ts';
+import { unset } from '../object/unset.ts';
 import { isArray } from '../predicate/isArray.ts';
 import { toPath } from '../util/toPath.ts';
 
@@ -51,7 +50,7 @@ export function pullAt<T>(
  *
  * @template T
  * @param {ArrayLike<T>} array - The array from which elements will be removed.
- * @param {Array<number | readonly number[] | string | readonly string[]>} indicesToRemove - An array of indices specifying the positions of elements to remove.
+ * @param {Array<number | readonly number[] | string | readonly string[]>} _indices - An array of indices specifying the positions of elements to remove.
  * @returns {ArrayLike<T>} An array containing the elements that were removed from the original array.
  *
  * @example
@@ -62,34 +61,36 @@ export function pullAt<T>(
  */
 export function pullAt<T>(
   array: ArrayLike<T>,
-  ...indicesToRemove: Array<number | readonly number[] | string | readonly string[]>
+  ..._indices: Array<number | readonly number[] | string | readonly string[]>
 ): ArrayLike<T> {
-  const flattenIndexes = flatten(indicesToRemove, 1);
-  const result = at(array, flattenIndexes);
+  const indices = flatten(_indices, 1);
+
   if (!array) {
-    return result as T[];
+    return Array(indices.length);
   }
 
-  const arrayLength = array ? array.length : 0;
-  const indexes = new Set(
-    flattenIndexes
-      .map(index => (isIndex(index, arrayLength) ? Number(index) : index))
-      .sort((a, b) => (b as any) - (a as any))
-  );
+  const result = at(array, indices);
 
-  for (const index of indexes) {
-    if (isIndex(index)) {
+  const indicesToPull = indices
+    .map(index => (isIndex(index, array.length) ? Number(index) : index))
+    .sort((a: any, b: any) => b - a);
+
+  for (let i = 0; i < indicesToPull.length; i++) {
+    const index = indicesToPull[i];
+
+    if (isIndex(index, array.length)) {
       Array.prototype.splice.call(array, index as number, 1);
-    } else if (!isKey(index, array)) {
-      const path = isArray(index) ? index : toPath(index);
-      const object = array.length === 1 ? array : get(array, path.slice(0, -1));
-
-      if (object != null) {
-        delete object[toKey(last(path))];
-      }
-    } else {
-      delete (array as any)[toKey(index)];
+      continue;
     }
+
+    if (isKey(index, array)) {
+      delete (array as any)[toKey(index)];
+      continue;
+    }
+
+    const path = isArray(index) ? index : toPath(index);
+    unset(array, path);
   }
+
   return result as T[];
 }
