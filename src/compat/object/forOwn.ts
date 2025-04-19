@@ -1,5 +1,5 @@
-import { keys as keysToolkit } from './keys';
-import { identity } from '../../function';
+import { keys as keysToolkit } from './keys.ts';
+import { identity } from '../../function/identity.ts';
 
 /**
  * Iterates over own enumerable properties of an object invoking iteratee for each property. The iteratee is
