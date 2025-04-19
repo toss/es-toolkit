@@ -1,3 +1,5 @@
+import { partialRightImpl } from '../../function/partialRight.ts';
+
 /**
  * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
  *
@@ -201,6 +203,34 @@ export function partialRight<T1, T2, T3, R>(
   arg2: Placeholder,
   arg3: Placeholder
 ): (arg2: T2, arg3: T3) => R;
+
+/**
+ * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ *
+ * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ *
+ * Note: This method doesn't set the `length` property of partially applied functions.
+ *
+ * @template T1 The type of the first argument.
+ * @template T2 The type of the second argument.
+ * @template T3 The type of the third argument.
+ * @template R The return type of the function.
+ * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
+ * @param {Placeholder} arg1 The placeholder for the first argument.
+ * @param {T2} arg2 The second argument to be partially applied.
+ * @param {Placeholder} arg3 The placeholder for the third argument.
+ * @returns {(arg1: T1, arg3: T3) => R} Returns a new function that takes the first and third arguments and returns the result of the original function.
+ * @example
+ * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
+ * const greetWithPlaceholder = partialRight(greet, 'Hello', partialRight.placeholder);
+ * console.log(greetWithPlaceholder('John')); // => 'Hello, John!'
+ */
+export function partialRight<T1, T2, T3, R>(
+  func: (arg1: T1, arg2: T2, arg3: T3) => R,
+  arg1: Placeholder,
+  arg2: T2,
+  arg3: Placeholder
+): (arg1: T1, arg3: T3) => R;
 
 /**
  * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
@@ -794,36 +824,9 @@ export function partialRight<F extends (...args: any[]) => any>(
   func: F,
   ...partialArgs: any[]
 ): (...args: any[]) => ReturnType<F> {
-  return partialRightImpl<F, Placeholder>(func, placeholderSymbol, ...partialArgs);
+  return partialRightImpl<F, Placeholder>(func, partialRight.placeholder, ...partialArgs);
 }
 
-export function partialRightImpl<F extends (...args: any[]) => any, P>(
-  func: F,
-  placeholder: P,
-  ...partialArgs: any[]
-): (...args: any[]) => ReturnType<F> {
-  const partialedRight = function (this: any, ...providedArgs: any[]) {
-    const placeholderLength = partialArgs.filter(arg => arg === placeholder).length;
-    const rangeLength = Math.max(providedArgs.length - placeholderLength, 0);
-    const remainingArgs: any[] = providedArgs.slice(0, rangeLength);
+partialRight.placeholder = Symbol('compat.partialRight.placeholder') as Placeholder;
 
-    let providedArgsIndex = rangeLength;
-
-    const substitutedArgs = partialArgs
-      .slice()
-      .map(arg => (arg === placeholder ? providedArgs[providedArgsIndex++] : arg));
-
-    return func.apply(this, remainingArgs.concat(substitutedArgs));
-  };
-
-  if (func.prototype) {
-    partialedRight.prototype = Object.create(func.prototype);
-  }
-
-  return partialedRight;
-}
-
-const placeholderSymbol: unique symbol = Symbol('partialRight.placeholder');
-partialRight.placeholder = placeholderSymbol;
-
-type Placeholder = typeof placeholderSymbol;
+type Placeholder = symbol | (((value: any) => any) & { partialRight: typeof partialRight });

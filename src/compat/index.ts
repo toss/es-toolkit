@@ -24,6 +24,8 @@
  */
 export * from '../index.ts';
 
+export { toolkit as default } from './toolkit.ts';
+
 export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { compact } from './array/compact.ts';
@@ -114,6 +116,8 @@ export { flow } from './function/flow.ts';
 export { flowRight } from './function/flowRight.ts';
 export { negate } from './function/negate.ts';
 export { nthArg } from './function/nthArg.ts';
+export { partial } from './function/partial.ts';
+export { partialRight } from './function/partialRight.ts';
 export { rearg } from './function/rearg.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
