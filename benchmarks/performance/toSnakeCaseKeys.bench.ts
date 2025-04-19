@@ -1,10 +1,10 @@
 import { bench, describe } from 'vitest';
-import { snakeizeKeys as snakeizeKeysToolkit_ } from 'es-toolkit';
+import { toSnakeCaseKeys as toSnakeCaseKeysToolkit_ } from 'es-toolkit';
 import lodashFp from 'lodash/fp';
 
-const snakeizeKeysToolkit = snakeizeKeysToolkit_;
+const toSnakeCaseKeysToolkit = toSnakeCaseKeysToolkit_;
 
-const snakeizeKeysLodash = <T extends Record<string, any>>(obj: T) => {
+const toSnakeCaseKeysLodash = <T extends Record<string, any>>(obj: T) => {
   return lodashFp.mapKeys(lodashFp.snakeCase)(obj);
 };
 
@@ -26,12 +26,12 @@ const testObject = {
   ],
 };
 
-describe('snakeizeKeys', () => {
-  bench('es-toolkit/snakeizeKeys (deep nested)', () => {
-    snakeizeKeysToolkit(testObject);
+describe('toSnakeCaseKeys', () => {
+  bench('es-toolkit/toSnakeCaseKeys (deep nested)', () => {
+    toSnakeCaseKeysToolkit(testObject);
   });
 
-  bench('lodash/fp/snakeizeKeys (shallow comparison)', () => {
-    snakeizeKeysLodash(testObject);
+  bench('lodash/fp/toSnakeCaseKeys (shallow comparison)', () => {
+    toSnakeCaseKeysLodash(testObject);
   });
 });
