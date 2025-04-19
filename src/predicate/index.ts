@@ -28,3 +28,4 @@ export { isTypedArray } from './isTypedArray.ts';
 export { isUndefined } from './isUndefined.ts';
 export { isWeakMap } from './isWeakMap.ts';
 export { isWeakSet } from './isWeakSet.ts';
+export { isWindow } from './isWindow.ts';
