@@ -120,6 +120,7 @@ export { rearg } from './function/rearg.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
 export { throttle } from './function/throttle.ts';
+export { wrap } from './function/wrap.ts';
 
 export { add } from './math/add.ts';
 export { ceil } from './math/ceil.ts';
