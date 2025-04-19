@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { pullAt as pullAtToolkit_ } from 'es-toolkit';
+import { pullAt as pullAtToolkitCompat_ } from 'es-toolkit/compat';
 import { pullAt as pullAtLodash_ } from 'lodash';
 
 const pullAtToolkit = pullAtToolkit_;
+const pullAtToolkitCompat = pullAtToolkitCompat_;
 const pullAtLodash = pullAtLodash_;
 
 describe('pullAt', () => {
@@ -11,6 +13,10 @@ describe('pullAt', () => {
 
   bench('es-toolkit/pullAt', () => {
     pullAtToolkit(array, indexes);
+  });
+
+  bench('es-toolkit/compat/pullAt', () => {
+    pullAtToolkitCompat(array, indexes);
   });
 
   bench('lodash/pullAt', () => {
@@ -24,6 +30,10 @@ describe('pullAt/largeArray', () => {
 
   bench('es-toolkit/pullAt', () => {
     pullAtToolkit(largeArray, largeIndexes);
+  });
+
+  bench('es-toolkit/compat/pullAt', () => {
+    pullAtToolkitCompat(largeArray, largeIndexes);
   });
 
   bench('lodash/pullAt', () => {
