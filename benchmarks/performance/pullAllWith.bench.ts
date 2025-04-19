@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { pullAllWith as pullAllWithToolkit_ } from 'es-toolkit';
+import { pullAllWith as pullAllWithToolkit_ } from 'es-toolkit/compat';
 import { pullAllWith as pullAllWithLodash_ } from 'lodash';
 
 const pullAllWithToolkit = pullAllWithToolkit_;
