@@ -177,7 +177,7 @@
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
     "globals": "^15.9.0",
-    "happy-dom": "^16.7.3",
+    "happy-dom": "^17.4.4",
     "jscodeshift": "^17.0.0",
     "prettier": "^3.2.5",
     "prettier-plugin-sort-re-exports": "^0.1.0",
