@@ -75,9 +75,7 @@ export function pullAt<T>(
     .map(index => (isIndex(index, array.length) ? Number(index) : index))
     .sort((a: any, b: any) => b - a);
 
-  for (let i = 0; i < indicesToPull.length; i++) {
-    const index = indicesToPull[i];
-
+  for (const index of new Set(indicesToPull)) {
     if (isIndex(index, array.length)) {
       Array.prototype.splice.call(array, index as number, 1);
       continue;
