@@ -65,6 +65,7 @@ export { partition } from './array/partition.ts';
 export { pull } from './array/pull.ts';
 export { pullAll } from './array/pullAll.ts';
 export { pullAllBy } from './array/pullAllBy.ts';
+export { pullAllWith } from './array/pullAllWith.ts';
 export { reduce } from './array/reduce.ts';
 export { reduceRight } from './array/reduceRight.ts';
 export { reject } from './array/reject.ts';
