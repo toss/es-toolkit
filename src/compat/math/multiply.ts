@@ -1,3 +1,4 @@
+import { isString } from '../predicate/isString.ts';
 import { toNumber } from '../util/toNumber.ts';
 import { toString } from '../util/toString.ts';
 
@@ -26,7 +27,7 @@ export function multiply(value: number, other: number): number {
     return value ?? other;
   }
 
-  if (typeof value === 'string' || typeof other === 'string') {
+  if (isString(value) || isString(other)) {
     value = toString(value) as any;
     other = toString(other) as any;
   } else {

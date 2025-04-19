@@ -1,4 +1,5 @@
 import { bench, describe } from 'vitest';
+import { isString } from 'es-toolkit';
 import { isEqualWith as isEqualWithToolkit_ } from 'es-toolkit';
 import { isEqualWith as isEqualWithToolkitCompat_ } from 'es-toolkit/compat';
 import { isEqualWith as isEqualWithLodash_ } from 'lodash';
@@ -9,7 +10,7 @@ const isEqualWithLodash = isEqualWithLodash_;
 
 describe('isEqualWith primitives', () => {
   const customizer = (a, b) => {
-    if (typeof a === 'string' && typeof b === 'string') {
+    if (isString(a) && isString(b)) {
       return a.toLowerCase() === b.toLowerCase();
     }
   };

@@ -4,6 +4,7 @@ import { uniq } from '../../array/uniq.ts';
 import { identity } from '../../function/identity.ts';
 import { property } from '../object/property.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
+import { isString } from '../predicate/isString.ts';
 
 /**
  * Returns the intersection of multiple arrays after applying the iteratee function to their elements.
@@ -188,7 +189,7 @@ export function intersectionBy<T>(
       result = intersectionByToolkit(result, Array.from(value), identity);
     } else if (typeof lastValue === 'function') {
       result = intersectionByToolkit(result, Array.from(value), value => lastValue(value));
-    } else if (typeof lastValue === 'string') {
+    } else if (isString(lastValue)) {
       result = intersectionByToolkit(result, Array.from(value), property(lastValue));
     }
   }

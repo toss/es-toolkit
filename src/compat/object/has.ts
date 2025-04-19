@@ -1,6 +1,7 @@
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { isArguments } from '../predicate/isArguments.ts';
+import { isString } from '../predicate/isString.ts';
 import { toPath } from '../util/toPath.ts';
 
 /**
@@ -68,7 +69,7 @@ export function has(object: any, path: PropertyKey | readonly PropertyKey[]): bo
 
   if (Array.isArray(path)) {
     resolvedPath = path;
-  } else if (typeof path === 'string' && isDeepKey(path) && object?.[path] == null) {
+  } else if (isString(path) && isDeepKey(path) && object?.[path] == null) {
     resolvedPath = toPath(path);
   } else {
     resolvedPath = [path];

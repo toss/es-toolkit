@@ -1,3 +1,4 @@
+import { isString } from '../predicate/isString.ts';
 import { isSymbol } from '../predicate/isSymbol.ts';
 
 /**  Matches any deep property path. (e.g. `a.b[0].c`)*/
@@ -28,7 +29,7 @@ export function isKey(value?: unknown, object?: unknown): value is PropertyKey {
   }
 
   return (
-    (typeof value === 'string' && (regexIsPlainProp.test(value) || !regexIsDeepProp.test(value))) ||
+    (isString(value) && (regexIsPlainProp.test(value) || !regexIsDeepProp.test(value))) ||
     (object != null && Object.hasOwn(object, value as PropertyKey))
   );
 }

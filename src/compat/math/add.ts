@@ -1,3 +1,4 @@
+import { isString } from '../predicate/isString.ts';
 import { toNumber } from '../util/toNumber.ts';
 import { toString } from '../util/toString.ts';
 
@@ -23,7 +24,7 @@ export function add(value: number, other: number): number {
   if (value === undefined || other === undefined) {
     return value ?? other;
   }
-  if (typeof value === 'string' || typeof other === 'string') {
+  if (isString(value) || isString(other)) {
     value = toString(value) as any;
     other = toString(other) as any;
   } else {
