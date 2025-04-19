@@ -21,7 +21,7 @@ describe('pullAllWith', () => {
   // -------------------- lodash test case 2 -------------------- //
   it(`\`_.${methodName}\` should modify and return the array`, () => {
     const array = [1, 2, 3];
-    const result = pullAllWith(array, [1, 3], isEqual);
+    const result = pullAllWith(array, [1, 3]);
 
     expect(result).toBe(array);
     expect(array).toEqual([2]);
@@ -32,7 +32,7 @@ describe('pullAllWith', () => {
     delete array[1];
     delete array[3];
 
-    pullAllWith(array, [1], isEqual);
+    pullAllWith(array, [1]);
     expect(0 in array).toBe(false);
     expect(1 in array).toBe(true);
     expect(2 in array).toBe(false);
@@ -42,14 +42,14 @@ describe('pullAllWith', () => {
     const array = [1, 2, 3];
     delete array[1];
 
-    pullAllWith(array, [undefined], isEqual);
+    pullAllWith(array, [undefined]);
     expect(array).toEqual([1, 3]);
   });
 
   it(`\`_.${methodName}\` should match NaN`, () => {
     const array = [1, NaN, 3, NaN];
 
-    pullAllWith(array, [NaN], isEqual);
+    pullAllWith(array, [NaN]);
     expect(array).toEqual([1, 3]);
   });
 
@@ -81,7 +81,7 @@ describe('pullAllWith', () => {
     const array = [NaN, undefined, null, false, 0];
     const values = [NaN, undefined, null];
 
-    pullAllWith(array, values, isEqual);
+    pullAllWith(array, values);
     expect(array).toEqual([false, 0]);
   });
 
@@ -91,7 +91,7 @@ describe('pullAllWith', () => {
     array[456] = 2;
     array[789] = 3;
 
-    pullAllWith(array, [2], isEqual);
+    pullAllWith(array, [2]);
 
     expect(123 in array).toBe(true);
     expect(456 in array).toBe(false);
