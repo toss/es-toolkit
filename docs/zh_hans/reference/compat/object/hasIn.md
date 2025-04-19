@@ -6,7 +6,7 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-检查给定路径在对象中是否存在，**包括继承的属性**。
+检查给定路径在对象中是否存在，包括继承的属性。
 
 您可以提供路径作为单个属性键、属性键数组，或表示深层路径的字符串。
 
@@ -77,4 +77,4 @@ console.log('hasIn(rect, "width"):', hasIn(rect, 'width')); // true - 自有属�
 ```
 
 :::
-</rewritten_file>
+

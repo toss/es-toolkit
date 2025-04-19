@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Checks if a given path exists in an object, **including inherited properties**.
+Checks if a given path exists in an object, including inherited properties.
 
 You can provide the path as a single property key, an array of property keys,
 or a string representing a deep path.
