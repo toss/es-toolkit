@@ -1,10 +1,10 @@
 import { bench, describe } from 'vitest';
-import { camelizeKeys as camelizeKeysToolkit_ } from 'es-toolkit';
+import { toCamelCaseKeys as toCamelCaseKeysToolkit_ } from 'es-toolkit';
 import lodashFp from 'lodash/fp';
 
-const camelizeKeysToolkit = camelizeKeysToolkit_;
+const toCamelCaseKeysToolkit = toCamelCaseKeysToolkit_;
 
-const camelizeKeysLodash = <T extends Record<string, any>>(obj: T) => {
+const toCamelCaseKeysLodash = <T extends Record<string, any>>(obj: T) => {
   return lodashFp.mapKeys(lodashFp.camelCase)(obj);
 };
 
@@ -26,12 +26,12 @@ const testObject = {
   ],
 };
 
-describe('camelizeKeys', () => {
-  bench('es-toolkit/camelizeKeys (deep nested)', () => {
-    camelizeKeysToolkit(testObject);
+describe('toCamelCaseKeys', () => {
+  bench('es-toolkit/toCamelCaseKeys (deep nested)', () => {
+    toCamelCaseKeysToolkit(testObject);
   });
 
-  bench('lodash/fp/camelizeKeys (shallow comparison)', () => {
-    camelizeKeysLodash(testObject);
+  bench('lodash/fp/toCamelCaseKeys (shallow comparison)', () => {
+    toCamelCaseKeysLodash(testObject);
   });
 });
