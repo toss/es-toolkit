@@ -6,14 +6,18 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-遍历对象的自身可枚举属性，为每个属性调用迭代函数。该迭代函数以三个参数调用： (value, key, object)。迭代函数可以通过显式返回false来提前退出迭代。
+遍历对象的属性并为每个属性调用 `iteratee` 函数。
+
+它只遍历对象自身的属性，不包括继承的属性或带有 `Symbol` 键的属性。
+
+`iteratee` 函数可以通过返回 `false` 提前结束遍历。
 
 ## 签名
 
 ```typescript
 function forOwn<T>(
   object: T | null | undefined,
-  iteratee: (value: T[keyof T], key: string, collection: T) => any
+  iteratee?: (value: T[keyof T], key: string, collection: T) => any
 ): T | null | undefined;
 ```
 

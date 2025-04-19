@@ -6,16 +6,18 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Iterates over own enumerable properties of an object invoking iteratee for each property. The iteratee is
-invoked with three arguments: (value, key, object). Iteratee functions may exit
-iteration early by explicitly returning false.
+Iterates over an object's properties and calls the `iteratee` function for each property.
+
+It only iterates over the object's own properties, not including inherited properties or properties with `Symbol` keys.
+
+The `iteratee` function can terminate the iteration early by returning `false`.
 
 ## Signature
 
 ```typescript
 function forOwn<T>(
   object: T | null | undefined,
-  iteratee: (value: T[keyof T], key: string, collection: T) => any
+  iteratee?: (value: T[keyof T], key: string, collection: T) => any
 ): T | null | undefined;
 ```
 

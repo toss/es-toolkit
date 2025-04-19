@@ -6,21 +6,25 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-객체의 직접 열거 가능한 속성을 순회하면서 각 속성에 대해 이터리 함수를 호출해요. 이터리는 세 개의 인수(value, key, object)와 함께 호출돼요. 이터리 함수는 명시적으로 false를 반환하여 순회를 조기에 종료할 수 있어요.
+객체를 순회하면서 각 속성에 대해 `iteratee` 함수를 호출해요.
+
+객체가 직접 소유한 속성만 순회해요. 상속받은 속성이나 `Symbol` 키를 가진 속성은 확인하지 않아요.
+
+`iteratee` 함수가 `false`를 반환하면 순회를 조기에 종료해요.
 
 ## 인터페이스
 
 ```typescript
 function forOwn<T>(
   object: T | null | undefined,
-  iteratee: (value: T[keyof T], key: string, collection: T) => any
+  iteratee?: (value: T[keyof T], key: string, collection: T) => any
 ): T | null | undefined;
 ```
 
 ### 파라미터
 
 - `object` (`T | null | undefined`): 순회할 객체.
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 순회할 때마다 호출되는 함수. 제공되지 않으면 identity 함수가 사용돼요.
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 순회할 때마다 호출되는 함수. 제공되지 않으면 `identity` 함수가 사용돼요.
 
 ### 반환 값
 
