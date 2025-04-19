@@ -166,6 +166,7 @@ export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
 export { omit } from './object/omit.ts';
+export { omitBy } from './object/omitBy.ts';
 export { pick } from './object/pick.ts';
 export { pickBy } from './object/pickBy.ts';
 export { property } from './object/property.ts';
