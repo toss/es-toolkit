@@ -6,14 +6,18 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-オブジェクトの自分自身の列挙可能なプロパティを反復し、各プロパティに対してiterateeを呼び出します。iterateeは、3つの引数：（value、key、object）で呼び出されます。iteratee関数は、falseを明示的に返すことによって早期に反復を終了することができます。
+オブジェクトのプロパティを順次処理し、各プロパティに対して `iteratee` 関数を呼び出します。
+
+オブジェクトが直接所有するプロパティのみを処理し、継承されたプロパティや `Symbol` キーを持つプロパティは含まれません。
+
+`iteratee` 関数が `false` を返すことで、順次処理を早期に終了することができます。
 
 ## インターフェース
 
 ```typescript
 function forOwn<T>(
   object: T | null | undefined,
-  iteratee: (value: T[keyof T], key: string, collection: T) => any
+  iteratee?: (value: T[keyof T], key: string, collection: T) => any
 ): T | null | undefined;
 ```
 
