@@ -119,7 +119,7 @@ describe('hasIn', () => {
     expect(hasIn(object, symbol2)).toBe(true);
   });
 
-  it(`hasIn should check for a key over a path`, () => {
+  it(`should check for a key over a path`, () => {
     const object = { 'a.b': 1 };
 
     ['a.b', ['a.b']].forEach(path => {
@@ -231,6 +231,8 @@ describe('hasIn', () => {
     const sparseString = Object('a');
 
     delete sparseArgs[0];
+    // String 객체의 인덱스는 읽기 전용이므로 삭제할 수 없음
+    // delete sparseString[0];
 
     const values = [sparseArgs, sparseArray, sparseString];
     const expected = values.map(() => [false, false]);
