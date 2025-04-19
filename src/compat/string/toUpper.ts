@@ -1,4 +1,4 @@
-import { toString } from '../util/toString';
+import { toString } from '../util/toString.ts';
 
 /**
  * Converts `string`, as a whole, to upper case just like

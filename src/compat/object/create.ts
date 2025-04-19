@@ -4,7 +4,10 @@ import { isObject } from '../predicate/isObject.ts';
 
 /**
  * Creates an object that inherits from the prototype object.
- * If a properties object is given, its own enumerable string keyed properties are assigned to the created object.
+ *
+ * If `properties` are provided, they will be added to the new object.
+ * Only string-keyed enumerable properties directly owned by the `properties` object are copied.
+ * Inherited properties or those with `Symbol` keys are not copied.
  *
  * @template T - The prototype object type.
  * @template U - The properties object type.
