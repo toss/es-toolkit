@@ -158,6 +158,7 @@ export { functions } from './object/functions.ts';
 export { functionsIn } from './object/functionsIn.ts';
 export { get } from './object/get.ts';
 export { has } from './object/has.ts';
+export { hasIn } from './object/hasIn.ts';
 export { invertBy } from './object/invertBy.ts';
 export { keys } from './object/keys.ts';
 export { keysIn } from './object/keysIn.ts';
