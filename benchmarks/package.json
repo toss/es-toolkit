@@ -12,8 +12,10 @@
     "vitest": "^2.1.2"
   },
   "devDependencies": {
+    "@types/is-semver": "^1",
     "@types/lodash": "^4",
     "@types/lodash-es": "^4",
+    "is-semver": "^1.0.12",
     "rfdc": "^1.4.1"
   }
 }
