@@ -5,7 +5,12 @@ layout: home
 hero:
   name: 'es-toolkit'
   text: '最先端のJavaScriptユーティリティライブラリ'
-  # tagline:
+  image:
+    loading: eager
+    fetchpriority: high
+    decoding: async
+    src: /hero.webp
+    alt:
   actions:
     - theme: brand
       text: es-toolkitを知る

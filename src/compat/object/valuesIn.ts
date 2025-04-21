@@ -1,4 +1,4 @@
-import { keysIn } from './keysIn';
+import { keysIn } from './keysIn.ts';
 
 /**
  * Retrieves the values from an object, including those inherited from its prototype.

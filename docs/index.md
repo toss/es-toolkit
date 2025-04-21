@@ -5,7 +5,12 @@ layout: home
 hero:
   name: 'es-toolkit'
   text: 'State-of-the-art JavaScript utility library'
-  # tagline:
+  image:
+    loading: eager
+    fetchpriority: high
+    decoding: async
+    src: /hero.webp
+    alt:
   actions:
     - theme: brand
       text: About es-toolkit

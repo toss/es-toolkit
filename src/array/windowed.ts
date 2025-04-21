@@ -49,7 +49,7 @@ export interface WindowedOptions {
 export function windowed<T>(
   arr: readonly T[],
   size: number,
-  step: number = 1,
+  step = 1,
   { partialWindows = false }: WindowedOptions = {}
 ): T[][] {
   if (size <= 0 || !Number.isInteger(size)) {

@@ -1,9 +1,12 @@
-import { isNull, isUndefined } from '../../predicate';
-import { isNaN } from '../predicate/isNaN';
-import { isNil } from '../predicate/isNil';
-import { isSymbol } from '../predicate/isSymbol';
+import { isNull } from '../../predicate/isNull.ts';
+import { isUndefined } from '../../predicate/isUndefined.ts';
+import { isNaN } from '../predicate/isNaN.ts';
+import { isNil } from '../predicate/isNil.ts';
+import { isSymbol } from '../predicate/isSymbol.ts';
+import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
-type Iteratee<T, R> = (value: T) => R;
+type PropertyName = string | number | symbol;
+type Iteratee<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | Partial<T>;
 
 const MAX_ARRAY_LENGTH = 4294967295;
 const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
@@ -14,7 +17,7 @@ const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
  *
  * @param {ArrayLike<T> | null | undefined} array The sorted array to inspect.
  * @param {T} value The value to evaluate.
- * @param {(value: T) => R} iteratee The iteratee invoked per element.
+ * @param {(value: T) => R | PropertyName | [PropertyName, any] | Partial<T>} iteratee The iteratee invoked per element.
  * @returns {number} Returns the index at which `value` should be inserted
  *  into `array`.
  * @example
@@ -34,7 +37,8 @@ export function sortedIndexBy<T, R>(
     return 0;
   }
 
-  const transformedValue = iteratee?.(value);
+  const iterateeFunction = iterateeToolkit(iteratee);
+  const transformedValue = iterateeFunction(value);
 
   const valIsNaN = isNaN(transformedValue);
   const valIsNull = isNull(transformedValue);
@@ -44,7 +48,7 @@ export function sortedIndexBy<T, R>(
   while (low < high) {
     let setLow: boolean;
     const mid = Math.floor((low + high) / 2);
-    const computed = iteratee?.(array[mid]);
+    const computed = iterateeFunction(array[mid]);
 
     const othIsDefined = !isUndefined(computed);
     const othIsNull = isNull(computed);

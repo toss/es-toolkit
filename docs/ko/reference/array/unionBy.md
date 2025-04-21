@@ -15,7 +15,7 @@ function unionBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[];
 
 - `arr1` (`T[]`): 첫 번째 배열.
 - `arr2` (`T[]`): 두 번째 배열.
-- `mapper`: (`(item: T) => U`): 비교하기 위해 요소를 새로운 값으로 변환할 함수.
+- `mapper` (`(item: T) => U`): 비교하기 위해 요소를 새로운 값으로 변환할 함수.
 
 ### 반환 값
 
