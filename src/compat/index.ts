@@ -156,6 +156,7 @@ export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
 export { findKey } from './object/findKey.ts';
 export { forOwn } from './object/forOwn.ts';
+export { forOwnRight } from './object/forOwnRight.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { functions } from './object/functions.ts';
 export { functionsIn } from './object/functionsIn.ts';
