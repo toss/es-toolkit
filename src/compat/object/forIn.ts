@@ -1,4 +1,4 @@
-import { identity } from '..';
+import { identity } from '../../function/identity.ts';
 
 /**
  * Iterates over an object and invokes the `iteratee` function for each property.
