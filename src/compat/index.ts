@@ -203,6 +203,7 @@ export { isInteger } from './predicate/isInteger.ts';
 export { isMap } from './predicate/isMap.ts';
 export { isMatch } from './predicate/isMatch.ts';
 export { isNaN } from './predicate/isNaN.ts';
+export { isNative } from './predicate/isNative.ts';
 export { isNil } from './predicate/isNil.ts';
 export { isNumber } from './predicate/isNumber.ts';
 export { isObject } from './predicate/isObject.ts';

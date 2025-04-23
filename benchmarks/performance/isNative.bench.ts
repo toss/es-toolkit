@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
+import { isNative as isNativeToolkit_ } from 'es-toolkit/compat';
 import { isNative as isNativeLodash_ } from 'lodash';
-import { isNative as isNativeToolkit_ } from '../../src/compat/predicate/isNative';
 
 const isNativeToolkit = isNativeToolkit_;
 const isNativeLodash = isNativeLodash_;
