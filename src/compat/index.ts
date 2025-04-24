@@ -155,6 +155,8 @@ export { cloneDeepWith } from './object/cloneDeepWith.ts';
 export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
 export { findKey } from './object/findKey.ts';
+export { forIn } from './object/forIn.ts';
+export { forInRight } from './object/forInRight.ts';
 export { forOwn } from './object/forOwn.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { functions } from './object/functions.ts';
