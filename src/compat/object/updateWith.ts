@@ -1,4 +1,4 @@
-import {isUnsafeProperty} from '../../_internal/isUnsafeProperty.ts';
+import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { assignValue } from '../_internal/assignValue.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
@@ -43,7 +43,7 @@ export function updateWith<T extends object | null | undefined>(
     if (isUnsafeProperty(key)) {
       continue;
     }
-    
+
     let newValue: unknown;
 
     if (i === resolvedPath.length - 1) {

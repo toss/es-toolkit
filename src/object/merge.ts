@@ -1,5 +1,5 @@
-import { isUnsafeProperty } from "../_internal/isUnsafeProperty.ts";
-import { isPlainObject } from "../predicate/isPlainObject.ts";
+import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
  * Merges the properties of the source object into the target object.
@@ -41,12 +41,9 @@ import { isPlainObject } from "../predicate/isPlainObject.ts";
  * console.log(result);
  * // Output: { a: [1, 2, 3] }
  */
-export function merge<
-  T extends Record<PropertyKey, any>,
-  S extends Record<PropertyKey, any>,
->(
+export function merge<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
   target: T,
-  source: S,
+  source: S
 ): T & S {
   const sourceKeys = Object.keys(source) as Array<keyof S>;
 
