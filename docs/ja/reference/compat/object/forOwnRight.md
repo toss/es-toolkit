@@ -1,4 +1,4 @@
-# forOwn
+# forOwnRight
 
 ::: info
 この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
@@ -6,7 +6,7 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-オブジェクトのプロパティを順次処理し、各プロパティに対して `iteratee` 関数を呼び出します。
+オブジェクトのプロパティを逆順に順次処理し、各プロパティに対して `iteratee` 関数を呼び出します。
 
 オブジェクトが直接所有するプロパティのみを処理し、継承されたプロパティや `Symbol` キーを持つプロパティは含まれません。
 
@@ -15,7 +15,7 @@
 ## インターフェース
 
 ```typescript
-function forOwn<T>(
+function forOwnRight<T>(
   object: T | null | undefined,
   iteratee?: (value: T[keyof T], key: string, collection: T) => any
 ): T | null | undefined;
@@ -40,8 +40,8 @@ function Foo() {
 
 Foo.prototype.c = 3;
 
-forOwn(new Foo(), function (value, key) {
+forOwnRight(new Foo(), function (value, key) {
   console.log(key);
 });
-// => Logs 'a' then 'b' (iteration order is not guaranteed).
+// => 'b' と 'a' を出力します (順序は保証されません)。
 ```

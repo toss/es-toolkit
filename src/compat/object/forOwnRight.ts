@@ -2,7 +2,7 @@ import { keys as keysToolkit } from './keys.ts';
 import { identity } from '../../function/identity.ts';
 
 /**
- * Iterates over an object's properties and calls the `iteratee` function for each property.
+ * Iterates over an object's properties in reverse order and calls the `iteratee` function for each property.
  *
  * It only iterates over the object's own properties, not including inherited properties or properties with `Symbol` keys.
  *
@@ -21,15 +21,15 @@ import { identity } from '../../function/identity.ts';
  *
  * Foo.prototype.c = 3;
  *
- * forOwn(new Foo(), function(value, key) {
+ * forOwnRight(new Foo(), function(value, key) {
  *   console.log(key);
  * });
- * // => Logs 'a' then 'b' (iteration order is not guaranteed).
+ * // => Logs 'b' then 'a' (iteration order is not guaranteed).
  */
-export function forOwn<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
+export function forOwnRight<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
 
 /**
- * Iterates over an object's properties and calls the `iteratee` function for each property.
+ * Iterates over an object's properties in reverse order and calls the `iteratee` function for each property.
  *
  * It only iterates over the object's own properties, not including inherited properties or properties with `Symbol` keys.
  *
@@ -48,18 +48,18 @@ export function forOwn<T>(object: T, iteratee?: (value: T[keyof T], key: string,
  *
  * Foo.prototype.c = 3;
  *
- * forOwn(new Foo(), function(value, key) {
+ * forOwnRight(new Foo(), function(value, key) {
  *   console.log(key);
  * });
- * // => Logs 'a' then 'b' (iteration order is not guaranteed).
+ * // => Logs 'b' then 'a' (iteration order is not guaranteed).
  */
-export function forOwn<T>(
+export function forOwnRight<T>(
   object: T | null | undefined,
   iteratee?: (value: T[keyof T], key: string, collection: T) => any
 ): T | null | undefined;
 
 /**
- * Iterates over an object's properties and calls the `iteratee` function for each property.
+ * Iterates over an object's properties in reverse order and calls the `iteratee` function for each property.
  *
  * It only iterates over the object's own properties, not including inherited properties or properties with `Symbol` keys.
  *
@@ -78,12 +78,12 @@ export function forOwn<T>(
  *
  * Foo.prototype.c = 3;
  *
- * forOwn(new Foo(), function(value, key) {
+ * forOwnRight(new Foo(), function(value, key) {
  *   console.log(key);
  * });
- * // => Logs 'a' then 'b' (iteration order is not guaranteed).
+ * // => Logs 'b' then 'a' (iteration order is not guaranteed).
  */
-export function forOwn<T>(
+export function forOwnRight<T>(
   object: T | null | undefined,
   iteratee: (value: T[keyof T], key: string, collection: T) => any = identity
 ): T | null | undefined {
@@ -94,7 +94,7 @@ export function forOwn<T>(
   const iterable = Object(object);
   const keys = keysToolkit(object);
 
-  for (let i = 0; i < keys.length; ++i) {
+  for (let i = keys.length - 1; i >= 0; --i) {
     const key = keys[i];
     if (iteratee(iterable[key], key, iterable) === false) {
       break;

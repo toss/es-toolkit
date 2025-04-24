@@ -1,12 +1,12 @@
-# forOwn
+# forOwnRight
 
 ::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
 
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Iterates over an object's properties and calls the `iteratee` function for each property.
+Iterates over an object's properties in reverse order and calls the `iteratee` function for each property.
 
 It only iterates over the object's own properties, not including inherited properties or properties with `Symbol` keys.
 
@@ -15,7 +15,7 @@ The `iteratee` function can terminate the iteration early by returning `false`.
 ## Signature
 
 ```typescript
-function forOwn<T>(
+function forOwnRight<T>(
   object: T | null | undefined,
   iteratee?: (value: T[keyof T], key: string, collection: T) => any
 ): T | null | undefined;
@@ -40,8 +40,8 @@ function Foo() {
 
 Foo.prototype.c = 3;
 
-forOwn(new Foo(), function (value, key) {
+forOwnRight(new Foo(), function (value, key) {
   console.log(key);
 });
-// => Logs 'a' then 'b' (iteration order is not guaranteed).
+// => Logs 'b' then 'a' (iteration order is not guaranteed).
 ```
