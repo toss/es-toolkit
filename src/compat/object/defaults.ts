@@ -1,3 +1,4 @@
+import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { eq } from '../util/eq.ts';
 
 /**
@@ -164,7 +165,13 @@ export function defaults<T extends object, S extends object>(object: T, ...sourc
   object = Object(object);
   const objectProto = Object.prototype;
 
-  for (let i = 0; i < sources.length; i++) {
+  let length = sources.length;
+  const guard = length > 2 ? sources[2] : undefined;
+  if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+    length = 1;
+  }
+
+  for (let i = 0; i < length; i++) {
     const source = sources[i];
     const keys = Object.keys(source) as Array<keyof S>;
 
