@@ -23,6 +23,8 @@ export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
 export { forEach as each } from './array/forEach.ts';
 export { forEach } from './array/forEach.ts';
+export { forEachRight } from './array/forEachRight.ts';
+export { groupBy } from './array/groupBy.ts';
 export { head } from './array/head.ts';
 export { head as first } from './array/head.ts';
 export { includes } from './array/includes.ts';
