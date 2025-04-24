@@ -1,4 +1,16 @@
 # es-toolkit Changelog
+## Version v1.36.0
+
+Released on April 24th, 2025.
+
+- Introduced compatibility functions for [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html), [partial](https://es-toolkit.slash.page/reference/function/partial.html), [partialRight](https://es-toolkit.slash.page/reference/function/partialRight.html), [forEachRight](https://es-toolkit.slash.page/reference/array/forEachRight.html), [forOwnRight](https://es-toolkit.slash.page/reference/compat/object/forOwnRight.html), [forIn](https://es-toolkit.slash.page/reference/compat/object/forIn.html), [forInRight](https://es-toolkit.slash.page/reference/compat/object/forInRight.html), [overEvery](https://es-toolkit.slash.page/reference/compat/util/overEvery.html), [hasIn](https://es-toolkit.slash.page/reference/compat/object/hasIn.html), [pullAt](https://es-toolkit.slash.page/reference/array/pullAt.html), [forOwn](https://es-toolkit.slash.page/reference/compat/object/forOwn.html), [pullAllWith](https://es-toolkit.slash.page/reference/compat/array/pullAllWith.html), [overSome](https://es-toolkit.slash.page/reference/compat/util/overSome.html), [partition](https://es-toolkit.slash.page/reference/array/partition.html), and [flatMap](https://es-toolkit.slash.page/reference/array/flatMap.html).
+- Fixed compatibility issues in [take](https://es-toolkit.slash.page/reference/array/take.html), [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html), [defaults](https://es-toolkit.slash.page/reference/compat/object/defaults.html), [repeat](https://es-toolkit.slash.page/reference/compat/string/repeat.html), and [words](https://es-toolkit.slash.page/reference/string/words.html) by adding proper guards.
+- Fixed [throttle](https://es-toolkit.slash.page/reference/function/throttle.html) behavior when both leading and trailing options are enabled.
+- Improved performance for [find](https://es-toolkit.slash.page/reference/compat/array/find.html) by removing unnecessary slice operations.
+- Enhanced performance of [toPairs](https://es-toolkit.slash.page/reference/compat/object/toPairs.html) by pre-allocating arrays and using iterator values.
+- Simplified implementation and aligned types with Lodash for [partition](https://es-toolkit.slash.page/reference/array/partition.html).
+
+We sincerely thank @D-Sketon, @raon0211, @dayongkr, @minjongbaek, @seungrodotlee, @mass2527, @uniqueeest, @leehj322, @cruelladevil, @shren207, and @ssi02014 for their contributions. We appreciate your great efforts!
 
 ## Version v1.35.0
 
