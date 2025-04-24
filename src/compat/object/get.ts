@@ -2,6 +2,7 @@ import type { Get } from './get.types.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
+import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
@@ -315,6 +316,10 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
 
   switch (typeof path) {
     case 'string': {
+      if (isUnsafeProperty(path)) {
+        return defaultValue;
+      }
+
       const result = object[path];
 
       if (result === undefined) {
@@ -352,6 +357,10 @@ export function get(object: any, path: PropertyKey | readonly PropertyKey[], def
         path = String(path);
       }
 
+      if (isUnsafeProperty(path)) {
+        return defaultValue;
+      }
+
       const result = object[path];
 
       if (result === undefined) {
@@ -372,6 +381,10 @@ function getWithPath(object: any, path: readonly PropertyKey[], defaultValue?: a
 
   for (let index = 0; index < path.length; index++) {
     if (current == null) {
+      return defaultValue;
+    }
+
+    if (isUnsafeProperty(path[index])) {
       return defaultValue;
     }
 
