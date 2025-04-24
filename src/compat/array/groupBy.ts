@@ -1,7 +1,7 @@
 import { groupBy as groupByToolkit } from '../../array/groupBy';
 import { identity } from '../../function';
 import { isArrayLike } from '../predicate/isArrayLike';
-import { iteratee as createIteratee, iteratee } from '../util/iteratee';
+import { iteratee as createIteratee } from '../util/iteratee';
 
 /**
  * Maps each element of an array based on a provided key-generating function.
