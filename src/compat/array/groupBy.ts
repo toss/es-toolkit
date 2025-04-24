@@ -32,7 +32,7 @@ import { iteratee as createIteratee, iteratee } from '../util/iteratee';
  */
 export function groupBy<T, K extends PropertyKey>(
   source: ArrayLike<T> | null | undefined,
-  _getKeyFromItem?:
+  getKeyFromItem?:
     | ((item: T, index: number, arr: any) => unknown)
     | Partial<T>
     | [keyof T, unknown]
@@ -50,7 +50,7 @@ export function groupBy<T, K extends PropertyKey>(
  * @template T - The type of values in the object.
  * @template K - The type of keys.
  * @param {Record<any, T> | null | undefined} source - The object to group.
- * @param {Function | PropertyKey | Array | Object} [_getKeyFromItem] - The iteratee to transform keys.
+ * @param {Function | PropertyKey | Array | Object} [getKeyFromItem] - The iteratee to transform keys.
  *   - If a function is provided, it's invoked for each element in the collection.
  *   - If a property name (string) is provided, that property of each element is used as the key.
  *   - If a property-value pair (array) is provided, elements with matching property values are used.
@@ -66,7 +66,7 @@ export function groupBy<T, K extends PropertyKey>(
  */
 export function groupBy<T, K extends PropertyKey>(
   source: Record<any, T> | null | undefined,
-  _getKeyFromItem?:
+  getKeyFromItem?:
     | ((item: T, index: number, arr: any) => unknown)
     | Partial<T>
     | [keyof T, unknown]
