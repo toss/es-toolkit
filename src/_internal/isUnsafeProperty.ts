@@ -9,5 +9,5 @@
  * @internal
  */
 export function isUnsafeProperty(key: PropertyKey) {
-  return key === '__proto__' || key === 'constructor' || key === 'prototype';
+  return key === '__proto__';
 }
