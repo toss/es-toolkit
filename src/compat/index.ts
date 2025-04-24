@@ -158,6 +158,7 @@ export { findKey } from './object/findKey.ts';
 export { forIn } from './object/forIn.ts';
 export { forInRight } from './object/forInRight.ts';
 export { forOwn } from './object/forOwn.ts';
+export { forOwnRight } from './object/forOwnRight.ts';
 export { fromPairs } from './object/fromPairs.ts';
 export { functions } from './object/functions.ts';
 export { functionsIn } from './object/functionsIn.ts';
