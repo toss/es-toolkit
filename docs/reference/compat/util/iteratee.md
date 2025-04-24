@@ -22,10 +22,7 @@ If you don't provide any arguments or pass `null`, this function will return a [
 ```typescript
 function iteratee(value?: null): <T>(value: T) => T;
 function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
-function iteratee(value: symbol | number | string | object): (...args: any[]) => any;
-function iteratee(
-  value?: symbol | number | string | object | null | ((...args: any[]) => unknown)
-): (...args: any[]) => any;
+function iteratee(value: symbol | number | string | object | null): (...args: any[]) => any;
 ```
 
 ### Parameters
