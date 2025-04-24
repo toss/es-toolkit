@@ -1,7 +1,7 @@
-import { groupBy as groupByToolkit } from '../../array/groupBy';
-import { identity } from '../../function';
-import { isArrayLike } from '../predicate/isArrayLike';
-import { iteratee as createIteratee } from '../util/iteratee';
+import { groupBy as groupByToolkit } from '../../array/groupBy.ts';
+import { identity } from '../../function/identity.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
  * Maps each element of an array based on a provided key-generating function.
