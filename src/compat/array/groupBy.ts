@@ -1,4 +1,5 @@
 import { groupBy as groupByToolkit } from '../../array/groupBy';
+import { identity } from '../../function';
 import { isArrayLike } from '../predicate/isArrayLike';
 import { iteratee as createIteratee, iteratee } from '../util/iteratee';
 
@@ -117,7 +118,7 @@ export function groupBy<T, K extends PropertyKey>(
   }
 
   const items = isArrayLike(source) ? Array.from(source) : Object.values(source);
-  const getKeyFromItem = createIteratee(_getKeyFromItem ?? iteratee);
+  const getKeyFromItem = createIteratee(_getKeyFromItem ?? identity);
 
   return groupByToolkit<T, K>(items, getKeyFromItem);
 }
