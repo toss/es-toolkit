@@ -5,7 +5,12 @@ layout: home
 hero:
   name: 'es-toolkit'
   text: '最先进的JavaScript工具库'
-  # tagline:
+  image:
+    loading: eager
+    fetchpriority: high
+    decoding: async
+    src: /hero.webp
+    alt:
   actions:
     - theme: brand
       text: 关于 es-toolkit

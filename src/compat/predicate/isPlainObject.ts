@@ -20,7 +20,7 @@
  * console.log(isPlainObject(Object.create(null))); // true
  * console.log(isPlainObject(new Map())); // false
  */
-export function isPlainObject(object?: unknown): boolean {
+export function isPlainObject(object?: unknown): object is Record<PropertyKey, any> {
   if (typeof object !== 'object') {
     return false;
   }

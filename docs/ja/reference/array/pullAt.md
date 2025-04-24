@@ -7,7 +7,7 @@
 ## インターフェース
 
 ```typescript
-function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
+function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
 ```
 
 ### パラメータ
@@ -17,7 +17,7 @@ function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
 
 ### 戻り値
 
-(`Array<T | undefined>`): 元の配列から削除された要素を含む新しい配列。
+(`T[]`): 元の配列から削除された要素を含む新しい配列。
 
 ## 例
 

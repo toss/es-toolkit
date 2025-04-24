@@ -6,7 +6,7 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-This function retrieves the names of string-keyed properties from an object, including those inherited from its prototype.
+Retrieves the names of string-keyed properties from an object, including those inherited from its prototype.
 
 - If the value is not an object, it is converted to an object.
 - Array-like objects are treated like arrays.

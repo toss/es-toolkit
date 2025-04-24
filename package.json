@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.31.0",
+  "version": "1.35.0",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -13,7 +13,8 @@
     "docs",
     "benchmarks"
   ],
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@4.7.0",
+  "react-native": "./dist/index.js",
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
@@ -165,16 +166,18 @@
     "@types/jscodeshift": "^0.12.0",
     "@types/node": "^22.7.4",
     "@types/tar": "^6.1.13",
+    "@typescript-eslint/parser": "^8.26.1",
     "@vitest/coverage-istanbul": "^2.1.2",
     "@vue/compiler-sfc": "^3.5.10",
     "broken-link-checker": "^0.7.8",
-    "eslint": "^9.9.0",
+    "eslint": "^9.22.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-no-for-of-array": "^0.0.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
     "globals": "^15.9.0",
+    "happy-dom": "^16.7.3",
     "jscodeshift": "^17.0.0",
     "prettier": "^3.2.5",
     "prettier-plugin-sort-re-exports": "^0.1.0",
@@ -183,8 +186,9 @@
     "tar": "^6",
     "tslib": "^2.6.3",
     "tsx": "^4.19.0",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^8.1.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.6.0",
+    "vercel": "^41.4.1",
     "vitest": "^2.1.2"
   },
   "dependenciesMeta": {
@@ -197,6 +201,7 @@
   },
   "sideEffects": false,
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "prepack": "yarn build",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
     "test": "vitest --coverage --typecheck",

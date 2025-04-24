@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
+function at<T>(arr: T[], indices: number[]): T[];
 ```
 
 ### 파라미터
@@ -17,7 +17,7 @@ function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
 
 ### 반환 값
 
-(`Array<T | undefined>`): 주어진 인덱스에 있는 요소들을 가지는 새 배열.
+(`T[]`): 주어진 인덱스에 있는 요소들을 가지는 새 배열.
 
 ## 예시
 

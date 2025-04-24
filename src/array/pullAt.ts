@@ -11,14 +11,12 @@ import { at } from './at.ts';
  * @returns {Array<T | undefined>} An array containing the elements that were removed from the original array.
  *
  * @example
- * import { pullAt } from './pullAt';
- *
  * const numbers = [10, 20, 30, 40, 50];
  * const removed = pullAt(numbers, [1, 3, 4]);
  * console.log(removed); // [20, 40, 50]
  * console.log(numbers); // [10, 30]
  */
-export function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined> {
+export function pullAt<T>(arr: T[], indicesToRemove: number[]): T[] {
   const removed = at(arr, indicesToRemove);
   const indices = new Set(indicesToRemove.slice().sort((x, y) => y - x));
 

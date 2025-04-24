@@ -1,8 +1,8 @@
-import { property } from './property';
-import { findKey as findKeyToolkit } from '../../object';
-import { isObject } from '../predicate/isObject';
-import { matches } from '../predicate/matches';
-import { matchesProperty } from '../predicate/matchesProperty';
+import { property } from './property.ts';
+import { findKey as findKeyToolkit } from '../../object/findKey.ts';
+import { isObject } from '../predicate/isObject.ts';
+import { matches } from '../predicate/matches.ts';
+import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
  * Finds the key of the first element predicate returns truthy for.
