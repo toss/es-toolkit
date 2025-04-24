@@ -150,7 +150,7 @@ export function forEachRight<T>(
   }
 
   const keys: PropertyKey[] =
-    isArrayLike(collection) || Array.isArray(collection) ? range(0, collection.length) : Object.keys(collection);
+    isArrayLike(collection) ? range(0, collection.length) : Object.keys(collection);
 
   for (let i = keys.length - 1; i >= 0; i--) {
     const key = keys[i];
