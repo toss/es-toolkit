@@ -192,12 +192,10 @@ export function find<T>(
   }
 
   const doesMatch = iteratee(_doesMatch);
-  const values = Array.isArray(source) ? source.slice(fromIndex) : Object.values(source).slice(fromIndex);
-
   if (typeof doesMatch === 'function' && !Array.isArray(source)) {
-    const keys = Object.keys(source).slice(fromIndex) as Array<keyof T>;
+    const keys = Object.keys(source) as Array<keyof T>;
 
-    for (let i = 0; i < keys.length; i++) {
+    for (let i = fromIndex; i < keys.length; i++) {
       const key = keys[i];
       const value = source[key] as T;
 
@@ -209,5 +207,6 @@ export function find<T>(
     return undefined;
   }
 
+  const values = Array.isArray(source) ? source.slice(fromIndex) : Object.values(source).slice(fromIndex);
   return values.find(doesMatch);
 }

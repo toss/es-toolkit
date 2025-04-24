@@ -11,8 +11,6 @@ import { at } from './at.ts';
  * @returns {Array<T | undefined>} An array containing the elements that were removed from the original array.
  *
  * @example
- * import { pullAt } from './pullAt';
- *
  * const numbers = [10, 20, 30, 40, 50];
  * const removed = pullAt(numbers, [1, 3, 4]);
  * console.log(removed); // [20, 40, 50]
