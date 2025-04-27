@@ -1,3 +1,5 @@
+import { partialImpl } from '../../function/partial.ts';
+
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
@@ -171,6 +173,35 @@ export function partial<T1, T2, T3, R>(
   arg2: Placeholder,
   arg3: T3
 ): (arg2: T2) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+ *
+ * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ *
+ * Note: This method doesn't set the `length` property of partially applied functions.
+ *
+ * @template T1 The type of the first argument.
+ * @template T2 The type of the second argument.
+ * @template T3 The type of the third argument.
+ * @template R The return type of the function.
+ * @param {function(arg1: T1, arg2: T2, arg3: T3): R} func The function to partially apply.
+ * @param {Placeholder} arg1 The placeholder for the first argument.
+ * @param {T2} arg2 The second argument to apply.
+ * @param {Placeholder} arg3 The placeholder for the third argument.
+ * @returns {function(arg1: T1, arg3: T3): R} A new function that takes the first and third arguments and returns the result of the original function.
+ *
+ * @example
+ * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
+ * const greetWithPlaceholder = partial(greet, 'Hello', partial.placeholder);
+ * console.log(greetWithPlaceholder('John')); // => 'Hello, John!'
+ */
+export function partial<T1, T2, T3, R>(
+  func: (arg1: T1, arg2: T2, arg3: T3) => R,
+  arg1: Placeholder,
+  arg2: T2,
+  arg3: Placeholder
+): (arg1: T1, arg3: T3) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
@@ -695,34 +726,9 @@ export function partial<F extends (...args: any[]) => any>(
   func: F,
   ...partialArgs: any[]
 ): (...args: any[]) => ReturnType<F> {
-  return partialImpl<F, Placeholder>(func, placeholderSymbol, ...partialArgs);
+  return partialImpl<F, Placeholder>(func, partial.placeholder, ...partialArgs);
 }
 
-export function partialImpl<F extends (...args: any[]) => any, P>(
-  func: F,
-  placeholder: P,
-  ...partialArgs: any[]
-): (...args: any[]) => ReturnType<F> {
-  const partialed = function (this: unknown, ...providedArgs: any[]) {
-    let providedArgsIndex = 0;
+partial.placeholder = Symbol('compat.partial.placeholder') as Placeholder;
 
-    const substitutedArgs: any[] = partialArgs
-      .slice()
-      .map(arg => (arg === placeholder ? providedArgs[providedArgsIndex++] : arg));
-
-    const remainingArgs = providedArgs.slice(providedArgsIndex);
-
-    return func.apply(this, substitutedArgs.concat(remainingArgs));
-  };
-
-  if (func.prototype) {
-    partialed.prototype = Object.create(func.prototype);
-  }
-
-  return partialed;
-}
-
-const placeholderSymbol: unique symbol = Symbol('partial.placeholder');
-partial.placeholder = placeholderSymbol;
-
-type Placeholder = typeof placeholderSymbol;
+type Placeholder = symbol | (((value: any) => any) & { partial: typeof partial });

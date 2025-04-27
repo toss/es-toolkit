@@ -13,9 +13,9 @@ import { toString } from '../util/toString.ts';
  * // => ['fred', 'barney', 'pebbles']
  *
  */
-export function words(str?: string | object, pattern: RegExp | string = CASE_SPLIT_PATTERN): string[] {
+export function words(str?: string | object, pattern: RegExp | string = CASE_SPLIT_PATTERN, guard?: unknown): string[] {
   const input = toString(str);
-
+  pattern = guard ? CASE_SPLIT_PATTERN : pattern;
   const words = Array.from(input.match(pattern) ?? []);
 
   return words.filter(x => x !== '');
