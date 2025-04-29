@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
 import { stubObject } from 'es-toolkit/compat';
 import { transform } from './transform';
-import { falsey } from '../compat/_internal/falsey';
-import { typedArrays } from '../compat/_internal/typedArrays';
+import { falsey } from '../_internal/falsey';
+import { typedArrays } from '../_internal/typedArrays';
 
 describe('transform', () => {
   class Foo {

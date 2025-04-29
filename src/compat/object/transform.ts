@@ -1,11 +1,15 @@
-import { isArray, isBuffer, isNil, isObject, isTypedArray } from '../compat/index.ts';
-import { range } from '../math/index.ts';
+import { range } from '../../math/index.ts';
+import { isArray, isBuffer, isNil, isObject, isTypedArray } from '../index.ts';
 
 /**
- * Transforms an array to a new accumulator array which is the result of running each element thru `iteratee`.
- * The iteratee is invoked with four arguments: (accumulator, value, index, array).
- * If `accumulator` is not provided, a new array with the same `[[Prototype]]` will be used.
- * Iteratee functions may exit iteration early by explicitly returning `false`.
+ * Transforms an array by applying an iteratee function to each element and collecting the results.
+ *
+ * The `transform()` function processes each element in an array, allowing you to build up a new result.
+ * For each element, it calls your iteratee function with the current accumulator and element.
+ * You can modify the accumulator in each step, and the final accumulator becomes your result.
+ *
+ * If you don't provide an accumulator, it creates a new array matching the original array's prototype.
+ * You can also stop the transformation early by returning `false` from your iteratee function.
  *
  * @template T - The type of array.
  * @template U - The type of accumulator.
@@ -25,10 +29,14 @@ export function transform<T, U>(
 ): U | undefined | null;
 
 /**
- * Transforms an object to a new accumulator object which is the result of running each property thru `iteratee`.
- * The iteratee is invoked with four arguments: (accumulator, value, key, object).
- * If `accumulator` is not provided, a new object with the same `[[Prototype]]` will be used.
- * Iteratee functions may exit iteration early by explicitly returning `false`.
+ * Transforms an object by applying an iteratee function to each property and collecting the results.
+ *
+ * The `transform()` function goes through each property in your object, letting you build up a new result.
+ * For each property, it calls your iteratee function with the current accumulator and property value.
+ * You can modify the accumulator however you want, and the final accumulator becomes your result.
+ *
+ * If you don't provide an accumulator, it creates a new object with the same prototype as the original.
+ * You can also stop the transformation early by returning `false` from your iteratee function.
  *
  * @template T - The type of object.
  * @template U - The type of accumulator.
@@ -48,12 +56,7 @@ export function transform<T extends object, U>(
 ): U | undefined | null;
 
 /**
- * Transforms a collection to a new accumulator object which is the result of running each element thru `iteratee`,
- * with each invocation potentially mutating the `accumulator` object.
- * If `accumulator` is not provided, a new object with the same `[[Prototype]]` will be used for objects,
- * or a new array for array-like objects.
- * The iteratee is invoked with four arguments: (accumulator, value, key, object).
- * Iteratee functions may exit iteration early by explicitly returning `false`.
+ * Transforms any collection (array or object) into a new result by applying an iteratee function.
  *
  * @template T - The type of object.
  * @template U - The type of accumulator.

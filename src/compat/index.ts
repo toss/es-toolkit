@@ -174,6 +174,7 @@ export { set } from './object/set.ts';
 export { toDefaulted } from './object/toDefaulted.ts';
 export { toPairs } from './object/toPairs.ts';
 export { toPairsIn } from './object/toPairsIn.ts';
+export { transform } from './object/transform.ts';
 export { unset } from './object/unset.ts';
 export { update } from './object/update.ts';
 export { updateWith } from './object/updateWith.ts';
