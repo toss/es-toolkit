@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { stubObject } from 'es-toolkit/compat';
 import { transform } from './transform';
+import { falsey } from '../compat/_internal/falsey';
 import { typedArrays } from '../compat/_internal/typedArrays';
 
 describe('transform', () => {
@@ -17,85 +19,54 @@ describe('transform', () => {
   }
 
   it('should create an object with the same `[[Prototype]]` as `object` when `accumulator` is nullish', () => {
-    const accumulators = [undefined, null] as const;
-    const object = new Foo();
-    const expected = lodashStable.map(accumulators, lodashStable.stubTrue);
+    // eslint-disable-next-line no-sparse-arrays
+    const accumulators = [, undefined, null];
 
-    const iteratee = function (result: Record<string, number>, value: number, key: string) {
+    const iteratee = function (result: Record<string | number, number>, value: number, key: string | number) {
       result[key] = value * value;
     };
 
-    const mapper = function (accumulator: undefined | null, index: number) {
-      return index ? transform(object, iteratee, accumulator) : transform(object, iteratee);
+    const mapper = (object: object | any[]) => {
+      return function (accumulator: undefined | null, index: number) {
+        return index ? transform(object, iteratee, accumulator) : transform(object, iteratee);
+      };
     };
 
-    const results = lodashStable.map(accumulators, mapper);
-    const actual = lodashStable.map(results, result => result instanceof Foo);
-    expect(actual).toEqual(expected);
-  });
+    {
+      const object = new Foo();
+      const expected = lodashStable.map(accumulators, lodashStable.stubTrue);
 
-  it('should return accumulator when `object` is nullish', () => {
-    const objects = [undefined, null] as const;
-    const expected = lodashStable.map(objects, lodashStable.stubObject);
+      const results = lodashStable.map(accumulators, mapper(object));
+      const actual = lodashStable.map(results, result => result instanceof Foo);
 
-    const iteratee = function (result: Record<string, number>, value: number, key: string) {
-      result[key] = value * value;
-    };
+      expect(actual).toEqual(expected);
+    }
 
-    const actual = lodashStable.map(objects, object => transform(object as unknown as object, iteratee));
-    expect(actual).toEqual(expected);
-  });
+    {
+      const object = new Foo();
+      const expected = lodashStable.map(accumulators, () => ({ a: 1, b: 4, c: 9 }));
 
-  it('should transform object properties correctly', () => {
-    const accumulators = [undefined, null] as const;
-    const object = new Foo();
-    const expected = lodashStable.map(accumulators, () => ({ a: 1, b: 4, c: 9 }));
+      const results = lodashStable.map(accumulators, mapper(object));
+      const actual = lodashStable.map(results, lodashStable.toPlainObject);
 
-    const iteratee = function (result: Record<string, number>, value: number, key: string) {
-      result[key] = value * value;
-    };
+      expect(actual).toEqual(expected);
+    }
 
-    const mapper = function (accumulator: undefined | null, index: number) {
-      return index ? transform(object, iteratee, accumulator) : transform(object, iteratee);
-    };
+    {
+      const object = { a: 1, b: 2, c: 3 };
+      const expected = lodashStable.map(accumulators, () => ({ a: 1, b: 4, c: 9 }));
+      const actual = lodashStable.map(accumulators, mapper(object));
 
-    const results = lodashStable.map(accumulators, mapper);
-    const actual = lodashStable.map(results, result => ({ ...result }));
-    expect(actual).toEqual(expected);
-  });
+      expect(actual).toEqual(expected);
+    }
 
-  it('should transform plain object correctly', () => {
-    const accumulators = [undefined, null] as const;
-    const object = { a: 1, b: 2, c: 3 };
-    const expected = lodashStable.map(accumulators, () => ({ a: 1, b: 4, c: 9 }));
+    {
+      const object = [1, 2, 3];
+      const expected = lodashStable.map(accumulators, () => [1, 4, 9]);
+      const actual = lodashStable.map(accumulators, mapper(object));
 
-    const iteratee = function (result: Record<string, number>, value: number, key: string) {
-      result[key] = value * value;
-    };
-
-    const mapper = function (accumulator: undefined | null, index: number) {
-      return index ? transform(object, iteratee, accumulator) : transform(object, iteratee);
-    };
-
-    const actual = lodashStable.map(accumulators, mapper);
-    expect(actual).toEqual(expected);
-  });
-
-  it('should transform array correctly', () => {
-    const accumulators = [undefined, null] as const;
-    const object = [1, 2, 3];
-    const expected = lodashStable.map(accumulators, () => [1, 4, 9]);
-
-    const iteratee = function (result: number[], value: number, index: number) {
-      result[index] = value * value;
-    };
-
-    const mapper = function (accumulator: undefined | null, index: number) {
-      return index ? transform(object, iteratee, accumulator) : transform(object, iteratee);
-    };
-
-    const actual = lodashStable.map(accumulators, mapper);
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    }
   });
 
   it('should create regular arrays from typed arrays', () => {
@@ -142,9 +113,11 @@ describe('transform', () => {
 
     expect(actualObj).toEqual(expectedObj);
 
-    [[], {}].forEach(accumulator => {
+    lodashStable.each([[], {}], accumulator => {
       const actual = lodashStable.map(values, value => transform(value, lodashStable.noop, accumulator));
+
       expect(actual.every(result => result === accumulator)).toBe(true);
+
       expect(transform([], lodashStable.noop, accumulator)).toBe(accumulator);
     });
   });
@@ -155,6 +128,10 @@ describe('transform', () => {
     });
 
     expect(actual).toEqual(['undefined']);
+  });
+
+  it('should work without an `iteratee`', () => {
+    expect(transform(new Foo()) instanceof Foo).toBe(true);
   });
 
   it('should ensure `object` is an object before using its `[[Prototype]]`', () => {
@@ -171,6 +148,22 @@ describe('transform', () => {
       (value, index) => (value as unknown as object) instanceof Ctors[index]
     );
     expect(actualInstanceCheck).toEqual(expectedInstanceCheck);
+  });
+
+  it('should ensure `object` constructor is a function before using its `[[Prototype]]`', () => {
+    // eslint-disable-next-line
+    // @ts-ignore
+    Foo.prototype.constructor = null;
+    expect(transform(new Foo()) instanceof Foo).toBe(false);
+    Foo.prototype.constructor = Foo;
+  });
+
+  it('should create an empty object when given a falsey `object`', () => {
+    const expected = lodashStable.map(falsey, stubObject);
+
+    const actual = lodashStable.map(falsey, (object, index) => (index ? transform(object as any) : transform()));
+
+    expect(actual).toEqual(expected);
   });
 
   lodashStable.each(

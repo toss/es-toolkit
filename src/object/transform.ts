@@ -19,7 +19,7 @@ import { range } from '../math/index.ts';
  * transform(array, (acc, value) => { acc += value; return value % 2 === 0; }, 0) // => 5
  */
 export function transform<T, U>(
-  object: readonly T[],
+  object?: readonly T[],
   iteratee?: ((accumulator: U, value: T, index: number, object: readonly T[]) => unknown) | undefined | null,
   accumulator?: U | undefined | null
 ): U | undefined | null;
@@ -41,7 +41,7 @@ export function transform<T, U>(
  * transform(obj, (result, value, key) => { (result[value] || (result[value] = [])).push(key) }, {}) // => { '1': ['a', 'c'], '2': ['b'] }
  */
 export function transform<T extends object, U>(
-  object: T,
+  object?: T,
   iteratee?: ((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null,
   accumulator?: U | undefined | null
 ): U | undefined | null;
@@ -72,7 +72,7 @@ export function transform<T extends object, U>(
  * transform(obj, (result, value, key) => { (result[value] || (result[value] = [])).push(key) }, {}) // => { '1': ['a', 'c'], '2': ['b'] }
  */
 export function transform<T, U>(
-  object: readonly T[] | T | null | undefined,
+  object?: readonly T[] | T | null | undefined,
   iteratee?:
     | ((accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown)
     | undefined
@@ -83,10 +83,11 @@ export function transform<T, U>(
   const isArrLike = isArr || isBuffer(object) || isTypedArray(object);
 
   if (isNil(accumulator)) {
+    const Ctor = object && object.constructor;
     if (isArrLike) {
-      accumulator = (isArr ? object.constructor() : []) as U;
+      accumulator = (isArr && Ctor ? Ctor() : []) as U;
     } else if (isObject(object)) {
-      accumulator = Object.create(Object.getPrototypeOf(object));
+      accumulator = (typeof Ctor === 'function' ? Object.create(Object.getPrototypeOf(object)) : {}) as U;
     } else {
       accumulator = {} as U;
     }
