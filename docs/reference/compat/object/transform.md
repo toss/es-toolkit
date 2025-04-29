@@ -8,6 +8,13 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Transforms any collection (array or object) into a new result by applying an iteratee function.
 
+The `transform()` function goes through each property in your array or object, letting you build up a new result.
+For each property, it calls your iteratee function with the current accumulator and property value.
+You can modify the accumulator however you want, and the final accumulator becomes your result.
+
+If you don't provide an accumulator, it creates a new array or object with the same prototype as the original.
+You can also stop the transformation early by returning `false` from your iteratee function.
+
 ## Signature
 
 ```typescript
