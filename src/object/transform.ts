@@ -31,6 +31,7 @@ export function transform<T, U>(
  * Iteratee functions may exit iteration early by explicitly returning `false`.
  *
  * @template T - The type of object.
+ * @template U - The type of accumulator.
  * @param {T} object - The object to iterate over.
  * @param {((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null} iteratee - The function invoked per iteration.
  * @param {U} accumulator - The initial accumulator value.
