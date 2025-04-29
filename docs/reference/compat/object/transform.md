@@ -18,9 +18,21 @@ You can also stop the transformation early by returning `false` from your iterat
 ## Signature
 
 ```typescript
-function transform<T, U>(object?: T[], iteratee?: ((accumulator: U, value: T, index: number, object: T[]) => unknown) | undefined | null, accumulator?: U | undefined | null): U | undefined | null;
-function transform<T extends object, U>(object?: T, iteratee?: ((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null, accumulator?: U | undefined | null): U | undefined | null;
-function transform<T, U>(object?: T[] | T | null | undefined, iteratee?: ((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null, accumulator?: U | undefined | null): U | undefined | null;
+function transform<T, U>(
+  object?: T[],
+  iteratee?: ((accumulator: U, value: T, index: number, object: T[]) => unknown) | undefined | null,
+  accumulator?: U | undefined | null
+): U | undefined | null;
+function transform<T extends object, U>(
+  object?: T,
+  iteratee?: ((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null,
+  accumulator?: U | undefined | null
+): U | undefined | null;
+function transform<T, U>(
+  object?: T[] | T | null | undefined,
+  iteratee?: ((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null,
+  accumulator?: U | undefined | null
+): U | undefined | null;
 ```
 
 ### Parameters
@@ -38,9 +50,22 @@ function transform<T, U>(object?: T[] | T | null | undefined, iteratee?: ((accum
 ```typescript
 // Transform an array
 const array = [2, 3, 4];
-transform(array, (acc, value) => { acc += value; return value % 2 === 0; }, 0) // => 5
+transform(
+  array,
+  (acc, value) => {
+    acc += value;
+    return value % 2 === 0;
+  },
+  0
+); // => 5
 
 // Transform an object
-const obj = { 'a': 1, 'b': 2, 'c': 1 };
-transform(obj, (result, value, key) => { (result[value] || (result[value] = [])).push(key) }, {}) // => { '1': ['a', 'c'], '2': ['b'] }
+const obj = { a: 1, b: 2, c: 1 };
+transform(
+  obj,
+  (result, value, key) => {
+    (result[value] || (result[value] = [])).push(key);
+  },
+  {}
+); // => { '1': ['a', 'c'], '2': ['b'] }
 ```
