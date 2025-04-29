@@ -15,3 +15,4 @@ export { pickBy } from './pickBy.ts';
 export { toCamelCaseKeys } from './toCamelCaseKeys.ts';
 export { toMerged } from './toMerged.ts';
 export { toSnakeCaseKeys } from './toSnakeCaseKeys.ts';
+export { transform } from './transform.ts';
