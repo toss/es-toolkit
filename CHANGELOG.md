@@ -1,4 +1,43 @@
 # es-toolkit Changelog
+## Version v1.36.0
+
+Released on April 24th, 2025.
+
+- Introduced compatibility functions for [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html), [partial](https://es-toolkit.slash.page/reference/function/partial.html), [partialRight](https://es-toolkit.slash.page/reference/function/partialRight.html), [forEachRight](https://es-toolkit.slash.page/reference/array/forEachRight.html), [forOwnRight](https://es-toolkit.slash.page/reference/compat/object/forOwnRight.html), [forIn](https://es-toolkit.slash.page/reference/compat/object/forIn.html), [forInRight](https://es-toolkit.slash.page/reference/compat/object/forInRight.html), [overEvery](https://es-toolkit.slash.page/reference/compat/util/overEvery.html), [hasIn](https://es-toolkit.slash.page/reference/compat/object/hasIn.html), [pullAt](https://es-toolkit.slash.page/reference/array/pullAt.html), [forOwn](https://es-toolkit.slash.page/reference/compat/object/forOwn.html), [pullAllWith](https://es-toolkit.slash.page/reference/compat/array/pullAllWith.html), [overSome](https://es-toolkit.slash.page/reference/compat/util/overSome.html), [partition](https://es-toolkit.slash.page/reference/array/partition.html), and [flatMap](https://es-toolkit.slash.page/reference/array/flatMap.html).
+- Fixed compatibility issues in [take](https://es-toolkit.slash.page/reference/array/take.html), [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html), [defaults](https://es-toolkit.slash.page/reference/compat/object/defaults.html), [repeat](https://es-toolkit.slash.page/reference/compat/string/repeat.html), and [words](https://es-toolkit.slash.page/reference/string/words.html) by adding proper guards.
+- Fixed [throttle](https://es-toolkit.slash.page/reference/function/throttle.html) behavior when both leading and trailing options are enabled.
+- Improved performance for [find](https://es-toolkit.slash.page/reference/compat/array/find.html) by removing unnecessary slice operations.
+- Enhanced performance of [toPairs](https://es-toolkit.slash.page/reference/compat/object/toPairs.html) by pre-allocating arrays and using iterator values.
+- Simplified implementation and aligned types with Lodash for [partition](https://es-toolkit.slash.page/reference/array/partition.html).
+
+We sincerely thank @D-Sketon, @raon0211, @dayongkr, @minjongbaek, @seungrodotlee, @mass2527, @uniqueeest, @leehj322, @cruelladevil, @shren207, and @ssi02014 for their contributions. We appreciate your great efforts!
+
+## Version v1.35.0
+
+Released on April 16th, 2025.
+
+- Added support for [toCamelCaseKeys](https://es-toolkit.slash.page/reference/object/toCamelCaseKeys.html) and [toSnakeCaseKeys](https://es-toolkit.slash.page/reference/object/toSnakeCaseKeys.html).
+- Added support for custom delay function based on attempts in [retry](https://es-toolkit.slash.page/reference/function/retry.html).
+- Introduced compatibility functions for [at](https://es-toolkit.slash.page/reference/array/at.html) (array), [split](https://es-toolkit.slash.page/reference/compat/string/split.html), [shuffle](https://es-toolkit.slash.page/reference/array/shuffle.html), [zipWith](https://es-toolkit.slash.page/reference/array/zipWith.html), [zipObject](https://es-toolkit.slash.page/reference/array/zipObject.html), [keyBy](https://es-toolkit.slash.page/reference/array/keyBy.html), [assign](https://es-toolkit.slash.page/reference/compat/object/assign.html), [assignInWith](https://es-toolkit.slash.page/reference/compat/object/assignInWith.html), [assignWith](https://es-toolkit.slash.page/reference/compat/object/assignWith.html), [update](https://es-toolkit.slash.page/reference/compat/object/update.html), [updateWith](https://es-toolkit.slash.page/reference/compat/object/updateWith.html), [uniqWith](https://es-toolkit.slash.page/reference/array/uniqWith.html), [unionBy](https://es-toolkit.slash.page/reference/array/unionBy.html), [unionWith](https://es-toolkit.slash.page/reference/array/unionWith.html), [takeWhile](https://es-toolkit.slash.page/reference/array/takeWhile.html), [sortedLastIndex](https://es-toolkit.slash.page/reference/compat/array/sortedLastIndex.html), [sortedLastIndexBy](https://es-toolkit.slash.page/reference/compat/array/sortedLastIndexBy.html), [toPairs](https://es-toolkit.slash.page/reference/compat/object/toPairs.html), [toPairsIn](https://es-toolkit.slash.page/reference/compat/object/toPairsIn.html), [cond](https://es-toolkit.slash.page/reference/compat/util/cond.html), [over](https://es-toolkit.slash.page/reference/compat/util/over.html), [functions](https://es-toolkit.slash.page/reference/compat/object/functions.html), and [create](https://es-toolkit.slash.page/reference/compat/object/create.html) in `es-toolkit/compat`.
+- Fixed Lodash compatibility issues in [pick](https://es-toolkit.slash.page/reference/object/pick.html) and [pickBy](https://es-toolkit.slash.page/reference/object/pickBy.html).
+
+We sincerely thank @shren207, @kim-sung-jee, @HyeokjaeLee, @Jeong-Rae, @D-Sketon, @jsparkdev, @wojtekmaj, @FengBuPi, @oror-sine, @L2HYUNN, @gs18004, @ohprettyhak, and @kimpuro for their contributions. We appreciate your great efforts!
+
+## Version v1.34.1
+
+Released on March 27th, 2025.
+
+- Fixed a bug in [isBrowser](https://es-toolkit.slash.page/reference/predicate/isBrowser.html) and [isNode](https://es-toolkit.slash.page/reference/predicate/isNode.html) that caused them to not work properly in Deno environments.
+
+## Version v1.34.0
+
+Released on March 27th, 2025.
+
+- Added support for [isBrowser](https://es-toolkit.slash.page/reference/predicate/isBrowser.html), [isNode](https://es-toolkit.slash.page/reference/predicate/isNode.html), [attempt](https://es-toolkit.slash.page/reference/util/attempt.html), [attemptAsync](https://es-toolkit.slash.page/reference/util/attemptAsync.html).
+- Introduced compatibility functions for [functionsIn](https://es-toolkit.slash.page/reference/compat/object/functionsIn.html), [meanBy](https://es-toolkit.slash.page/reference/math/meanBy.html), [minBy](https://es-toolkit.slash.page/reference/math/minBy.html), [mean](https://es-toolkit.slash.page/reference/math/mean.html), [sortedIndexOf](https://es-toolkit.slash.page/reference/compat/array/sortedIndexOf.html).
+- Fixed compatibility with lodash for [set](https://es-toolkit.slash.page/reference/compat/object/set.html), [add](https://es-toolkit.slash.page/reference/compat/math/add.html), [subtract](https://es-toolkit.slash.page/reference/compat/math/subtract.html).
+
+We sincerely thank @dayongkr, @D-Sketon, @seongminn, @Kyujenius for their contributions. We appreciate your great efforts!
 
 ## Version v1.33.0
 

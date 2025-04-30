@@ -137,7 +137,7 @@ export function map<T, K extends keyof T>(collection: ArrayLike<T>, iteratee: K)
  * const arrayLike = {0: 1, 1: 2, 2: 3, length: 3};
  * map(arrayLike); // => {0: 1, 1: 2, 2: 3, length: 3}
  */
-export function map<T, U>(collection: ArrayLike<T>, iteratee?: null | undefined): ArrayLike<T>;
+export function map<T>(collection: ArrayLike<T>, iteratee?: null | undefined): ArrayLike<T>;
 
 /**
  * Maps each value in an object to a new array of values using an iteratee function.

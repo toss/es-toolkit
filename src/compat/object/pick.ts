@@ -1,6 +1,7 @@
 import { get } from './get.ts';
 import { has } from './has.ts';
 import { set } from './set.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isNil } from '../predicate/isNil.ts';
 
 /**
@@ -100,9 +101,13 @@ export function pick<
     switch (typeof keys) {
       case 'object': {
         if (!Array.isArray(keys)) {
-          // eslint-disable-next-line
-          // @ts-ignore
-          keys = Array.from(keys) as PropertyKey[];
+          if (isArrayLike(keys)) {
+            // eslint-disable-next-line
+            // @ts-ignore
+            keys = Array.from(keys) as PropertyKey[];
+          } else {
+            keys = [keys];
+          }
         }
         break;
       }

@@ -1,5 +1,3 @@
-type Placeholder = typeof partialRightPlaceholder;
-
 /**
  * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
  *
@@ -796,27 +794,36 @@ export function partialRight<F extends (...args: any[]) => any>(
   func: F,
   ...partialArgs: any[]
 ): (...args: any[]) => ReturnType<F> {
-  return function (this: any, ...providedArgs: any[]) {
-    const placeholderLength = partialArgs.filter(arg => arg === partialRightPlaceholder).length;
-    const rangeLength = Math.max(providedArgs.length - placeholderLength, 0);
-    const args: any[] = [];
-
-    let providedIndex = 0;
-    for (let i = 0; i < rangeLength; i++) {
-      args.push(providedArgs[providedIndex++]);
-    }
-    for (let i = 0; i < partialArgs.length; i++) {
-      const arg = partialArgs[i];
-
-      if (arg === partialRight.placeholder) {
-        args.push(providedArgs[providedIndex++]);
-      } else {
-        args.push(arg);
-      }
-    }
-    return func.apply(this, args);
-  } as any as F;
+  return partialRightImpl<F, Placeholder>(func, placeholderSymbol, ...partialArgs);
 }
 
-const partialRightPlaceholder: unique symbol = Symbol('partialRight.placeholder');
-partialRight.placeholder = partialRightPlaceholder;
+export function partialRightImpl<F extends (...args: any[]) => any, P>(
+  func: F,
+  placeholder: P,
+  ...partialArgs: any[]
+): (...args: any[]) => ReturnType<F> {
+  const partialedRight = function (this: any, ...providedArgs: any[]) {
+    const placeholderLength = partialArgs.filter(arg => arg === placeholder).length;
+    const rangeLength = Math.max(providedArgs.length - placeholderLength, 0);
+    const remainingArgs: any[] = providedArgs.slice(0, rangeLength);
+
+    let providedArgsIndex = rangeLength;
+
+    const substitutedArgs = partialArgs
+      .slice()
+      .map(arg => (arg === placeholder ? providedArgs[providedArgsIndex++] : arg));
+
+    return func.apply(this, remainingArgs.concat(substitutedArgs));
+  };
+
+  if (func.prototype) {
+    partialedRight.prototype = Object.create(func.prototype);
+  }
+
+  return partialedRight;
+}
+
+const placeholderSymbol: unique symbol = Symbol('partialRight.placeholder');
+partialRight.placeholder = placeholderSymbol;
+
+type Placeholder = typeof placeholderSymbol;

@@ -1,8 +1,10 @@
-import { sortedIndex } from './sortedIndex';
-import { eq } from '../util/eq';
+import { sortedIndex } from './sortedIndex.ts';
+import { eq } from '../util/eq.ts';
 
 /**
- * This method is like `indexOf` but performs a binary search on a sorted `array`.
+ * Finds the index of the first occurrence of a value in a sorted array, similar to how `Array#indexOf` works, but specifically for sorted arrays.
+ *
+ * Make sure to provide a sorted array to this function, as it uses a binary search to quickly find the index.
  *
  * @param {ArrayLike<T> | null | undefined} array The sorted array to inspect.
  * @param {T} value The value to search for.
