@@ -1,4 +1,4 @@
-import { isFunction } from '../../predicate';
+import { isFunction } from '../../predicate/isFunction.ts';
 
 /**
  * Returns an array of property names whose values are functions, including inherited properties.
