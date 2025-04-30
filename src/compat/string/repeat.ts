@@ -1,3 +1,7 @@
+import { isIterateeCall } from '../_internal/isIterateeCall.ts';
+import { toInteger } from '../util/toInteger.ts';
+import { toString } from '../util/toString.ts';
+
 /**
  * Repeats the given string n times.
  *
@@ -12,6 +16,11 @@
  * repeat('abc', 0); // ''
  * repeat('abc', 2); // 'abcabc'
  */
-export function repeat(str: string, n: number): string {
-  return str.repeat(n);
+export function repeat(str: string, n?: number, guard?: unknown): string {
+  if (guard ? isIterateeCall(str, n, guard) : n === undefined) {
+    n = 1;
+  } else {
+    n = toInteger(n);
+  }
+  return toString(str).repeat(n);
 }

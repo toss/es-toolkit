@@ -64,7 +64,7 @@ describe('partial', () => {
     const par = partial(Foo);
 
     // @ts-expect-error - par is a constructor
-    expect(new par() instanceof Foo);
+    expect(new par() instanceof Foo).toBe(true);
     // @ts-expect-error - par is a constructor
     expect(new par(true)).toBe(object);
   });
