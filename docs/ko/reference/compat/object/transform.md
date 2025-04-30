@@ -6,40 +6,39 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-모든 컬렉션(배열 또는 객체)을 반복 함수에 적용해서 새로운 결과로 변환해요.
+객체의 값을 순회하면서, 원하는 형태로 누적해서 새 객체를 만들어요.
 
-`transform()` 함수는 배열이나 객체의 각 속성을 통해 새로운 결과를 만들어가면서 진행돼요.
-각 속성마다 현재 누적값과 속성 값을 사용하여 반복 함수를 호출해요.
-누적값을 원하는 대로 수정할 수 있으며, 최종 누적값이 결과가 돼요.
+`accumulator`에 초깃값을 제공하지 않으면, 프로토타입의 새로운 배열이나 객체를 생성해서 사용해요.
 
-초깃값을 제공하지 않으면 원래와 같은 프로토타입의 새로운 배열이나 객체를 생성해요.
-또한, 반복 함수에서 `false`를 반환하여 변환을 일찍 멈출 수도 있어요.
+`iteratee` 함수가 반환하는 값이 `false`이면, 순회를 중단해요.
 
 ## 인터페이스
 
 ```typescript
-function transform<T, U>(
-  object?: T[],
-  iteratee?: ((accumulator: U, value: T, index: number, object: T[]) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
-function transform<T extends object, U>(
-  object?: T,
-  iteratee?: ((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
-function transform<T, U>(
-  object?: T[] | T | null | undefined,
-  iteratee?: ((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
+export function transform<T, U>(
+  object: readonly T[],
+  iteratee?: (acc: U, curr: T, index: number, arr: readonly T[]) => void,
+  accumulator?: U
+): U;
+
+export function transform<T, U>(
+  object: Record<string, T>,
+  iteratee?: (acc: U, curr: T, key: string, dict: Record<string, T>) => void,
+  accumulator?: U
+): U;
+
+export function transform<T extends object, U>(
+  object: T,
+  iteratee?: (acc: U, curr: T[keyof T], key: keyof T, dict: Record<keyof T, T[keyof T]>) => void,
+  accumulator?: U
+): U;
 ```
 
 ### 파라미터
 
-- `object` (`readonly T[] | T | null | undefined`): 반복할 객체예요.
-- `iteratee` (`((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null`): 반복마다 호출되는 함수예요.
-- `accumulator` (`U | undefined | null`): 초기 값이에요.
+- `object` (`readonly T[] | T`): 반복할 객체.
+- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown`): 반복마다 호출되는 함수.
+- `accumulator` (`U`): 초깃값.
 
 ### 반환 값
 

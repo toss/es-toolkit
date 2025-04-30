@@ -1,49 +1,48 @@
 # transform
 
 ::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+When imported from `es-toolkit/compat`, it behaves exactly like lodash, as detailed [here](../../../compatibility.md).
 :::
 
-Transforms any collection (array or object) into a new result by applying an iteratee function.
+Traverses object values and creates a new object by accumulating them in the desired form.
 
-The `transform()` function goes through each property in your array or object, letting you build up a new result.
-For each property, it calls your iteratee function with the current accumulator and property value.
-You can modify the accumulator however you want, and the final accumulator becomes your result.
+If no initial value is provided for `accumulator`, it creates a new array or object with the same prototype.
 
-If you don't provide an accumulator, it creates a new array or object with the same prototype as the original.
-You can also stop the transformation early by returning `false` from your iteratee function.
+The traversal is interrupted when the `iteratee` function returns `false`.
 
-## Signature
+## Interface
 
 ```typescript
-function transform<T, U>(
-  object?: T[],
-  iteratee?: ((accumulator: U, value: T, index: number, object: T[]) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
-function transform<T extends object, U>(
-  object?: T,
-  iteratee?: ((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
-function transform<T, U>(
-  object?: T[] | T | null | undefined,
-  iteratee?: ((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
+export function transform<T, U>(
+  object: readonly T[],
+  iteratee?: (acc: U, curr: T, index: number, arr: readonly T[]) => void,
+  accumulator?: U
+): U;
+
+export function transform<T, U>(
+  object: Record<string, T>,
+  iteratee?: (acc: U, curr: T, key: string, dict: Record<string, T>) => void,
+  accumulator?: U
+): U;
+
+export function transform<T extends object, U>(
+  object: T,
+  iteratee?: (acc: U, curr: T[keyof T], key: keyof T, dict: Record<keyof T, T[keyof T]>) => void,
+  accumulator?: U
+): U;
 ```
 
 ### Parameters
 
-- `object` (`readonly T[] | T | null | undefined`): The object to iterate over.
-- `iteratee` (`((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null`): The function invoked per iteration.
-- `accumulator` (`U | undefined | null`): The initial value.
+- `object` (`readonly T[] | T`): The object to iterate over.
+- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown`): The function called for each iteration.
+- `accumulator` (`U`): The initial value.
 
 ### Returns
 
-(`U | undefined | null`): Returns the accumulated value.
+(`U`): Returns the accumulated value.
 
 ## Examples
 
