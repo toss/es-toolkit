@@ -1,9 +1,79 @@
 import { describe, expect, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
 import { pickBy } from './pickBy';
+import { symbol } from '../_internal/symbol';
 import { stubTrue } from '../util/stubTrue';
 
 describe('pickBy', () => {
+  const object = { a: 1, b: 2, c: 3, d: 4 };
+  const expected = { a: 1, c: 3 };
+  const resolve = function (object: any, props: any) {
+    props = lodashStable.castArray(props);
+    return function (value: any) {
+      return lodashStable.some(props, key => {
+        key = lodashStable.isSymbol(key) ? key : lodashStable.toString(key);
+        return object[key] === value;
+      });
+    };
+  };
+
+  it(`\`pickBy\` should create an object of picked string keyed properties`, () => {
+    expect(pickBy(object, resolve(object, 'a'))).toEqual({ a: 1 });
+    expect(pickBy(object, resolve(object, ['a', 'c']))).toEqual(expected);
+  });
+
+  it(`\`pickBy\` should pick inherited string keyed properties`, () => {
+    function Foo() {}
+    Foo.prototype = object;
+
+    // @ts-expect-error - Foo is a constructor
+    const foo = new Foo();
+    expect(pickBy(foo, resolve(foo, ['a', 'c']))).toEqual(expected);
+  });
+
+  it(`\`pickBy\` should preserve the sign of \`0\``, () => {
+    const object = { '-0': 'a', 0: 'b' };
+    const props = [-0, Object(-0), 0, Object(0)];
+    const expected = [{ '-0': 'a' }, { '-0': 'a' }, { 0: 'b' }, { 0: 'b' }];
+
+    const actual = lodashStable.map(props, key => pickBy(object, resolve(object, key)));
+
+    expect(actual).toEqual(expected);
+  });
+
+  it(`\`pickBy\` should pick symbols`, () => {
+    function Foo(this: any) {
+      this[symbol] = 1;
+    }
+
+    if (Symbol) {
+      const symbol2 = Symbol('b');
+      Foo.prototype[symbol2] = 2;
+
+      const symbol3 = Symbol('c');
+      Object.defineProperty(Foo.prototype, symbol3, {
+        configurable: true,
+        enumerable: false,
+        writable: true,
+        value: 3,
+      });
+
+      // @ts-expect-error - Foo is a constructor
+      const foo = new Foo();
+      const actual = pickBy(foo, resolve(foo, [symbol, symbol2, symbol3]));
+
+      expect(actual[symbol as any]).toBe(1);
+      expect(actual[symbol2 as any]).toBe(2);
+
+      expect(symbol3 in actual).toBe(false);
+    }
+  });
+
+  it(`\`pickBy\` should work with an array \`object\``, () => {
+    const array = [1, 2, 3];
+    expect(pickBy(array, resolve(array, '1'))).toEqual({ 1: 2 });
+  });
+
   it('should work with a predicate argument', () => {
     const object = { a: 1, b: 2, c: 3, d: 4 };
 
@@ -88,7 +158,7 @@ describe('pickBy', () => {
     });
 
     // eslint-disable-next-line
-    expected[1] += "";
+    expected[1] += '';
 
     expect(args).toEqual(expected);
   });
@@ -105,7 +175,7 @@ describe('pickBy', () => {
 
     expected = lodashStable.map(expected, args => {
       // eslint-disable-next-line
-      args[1] += "";
+      args[1] += '';
       return args;
     });
 
@@ -117,23 +187,6 @@ describe('pickBy', () => {
     });
 
     expect(argsList).toEqual(expected);
-  });
-
-  it(`iterates over own string keyed properties of objects`, () => {
-    function Foo(this: any) {
-      // eslint-disable-next-line
-      // @ts-ignore
-      this.a = 1;
-    }
-    Foo.prototype.b = 2;
-
-    const values: any[] = [];
-    // eslint-disable-next-line
-    // @ts-ignore
-    pickBy(new Foo(), value => {
-      values.push(value);
-    });
-    expect(values).toEqual([1]);
   });
 
   it(`should ignore changes to \`length\``, () => {

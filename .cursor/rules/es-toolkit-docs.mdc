@@ -1,0 +1,81 @@
+---
+description: 
+globs: **/*.md
+alwaysApply: false
+---
+- Provide documentation in English (docs), Korean (docs/ko), Japanese (docs/ja), and Simplified Chinese (docs/zh_hans).
+- For functions in `src/compat`, create docs within each compat folder. If original documentation already exists (e.g., `docs/reference/object/create.md` for `src/compat/object/create.ts`), no additional docs are required.
+- Write Korean documentation in polite conversational tone ("해요체").
+- Always translate these terms consistently for each language:
+
+| English   | Korean       | Japanese       | zh_hans   |
+|-----------|--------------|----------------|-----------|
+| Signature | 인터페이스   | インターフェース | 签名      |
+| Parameters| 파라미터     | パラメータ       | 参数      |
+| Returns   | 반환 값      | 戻り値          | 返回值     |
+| Examples  | 예시         | 例             | 示例       |
+
+
+## Reference Documentation Template
+
+Always follow the below template
+
+--- TEMPLATE START ---
+
+# [Function Name]
+
+[If this documentation is for compat, add this section:
+[For Eng docs:
+::: info
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed @here.
+:::
+]
+[For Kor docs:
+::: info
+이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+
+`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](mdc:../../../compatibility.md)해요.
+:::
+]
+[For Ja docs:
+::: info
+この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+
+`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](mdc:../../../compatibility.md)します。
+:::
+]
+[For zh_hans docs:
+::: info
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](mdc:../../../compatibility.md)。
+:::
+]
+]
+
+[Explain what this element is, when to use it, and its value.]
+
+## Signature
+
+```typescript
+Insert the function signature(s), including overrides if applicable.
+```
+
+### Parameters
+
+- `[Parameter Name]` (`[Paramter Type]`):: [Description] // Insert content from jsdoc @params
+
+### Returns [영어면 Returns 한국어면 반환 값 일본어면 戻り値 zh_hans면 返回值]
+
+(`[Return Type]`): Insert content from jsdoc @returns
+
+## Examples
+
+```typescript
+Insert content from jsdoc @example
+```
+
+--- TEMPLATE END ---
+

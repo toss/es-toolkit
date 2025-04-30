@@ -1,5 +1,5 @@
-import { isArrayLike } from '../predicate/isArrayLike';
-import { isMap } from '../predicate/isMap';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { isMap } from '../predicate/isMap.ts';
 
 /**
  * Converts a value to an array.

@@ -1,4 +1,4 @@
-import { toPath } from './toPath';
+import { toPath } from './toPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { last } from '../array/last.ts';
 import { get } from '../object/get.ts';
@@ -57,7 +57,7 @@ function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
   }
 
   let lastKey = last(path);
-  let lastValue = lastKey?.valueOf();
+  const lastValue = lastKey?.valueOf();
 
   if (typeof lastValue === 'number') {
     lastKey = toKey(lastValue);
@@ -65,7 +65,7 @@ function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
     lastKey = String(lastKey);
   }
 
-  const func = get(parent, lastKey);
+  const func = get(parent, lastKey as PropertyKey);
 
   return func?.apply(parent, args);
 }

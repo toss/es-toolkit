@@ -48,13 +48,34 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 
 </details>
 
+<details>
+<summary>
+2. Prefer built-in JavaScript functions and operators.
+</summary>
+
+We prefer using built-in JavaScript functions, methods, or operators like `Array.isArray()`, `typeof value === 'string'`, and `Number.isNaN()`. Avoid using custom functions such as `isArray()`, `isString()`, or `isNaN()` from `es-toolkit` or other libraries.
+
+This helps keep the code more concise, eliminates unnecessary function calls, and reduces coupling between functions.
+
+</details>
+
 ### 1.3 Documentation
 
 All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
 
-We use English as our primary language, but we aim to support Korean documents in our best effort. If you have difficulties writing Korean documents, please let our contributors know so that we can provide the corresponding Korean documents for you.
+Our primary language is English, but we strive to support documents in Korean, Japanese, and Simplified Chinese as well. If you have trouble writing documents in a foreign language, please let our contributors know, and we will help provide the necessary translations.
 
-## 2. Issues
+## 2. Coding Conventions
+
+Here are the coding conventions we follow in the `es-toolkit` repository:
+
+### 2.1 Use short names for type parameters
+
+- Use `T` for elements, like in [difference](https://es-toolkit.slash.page/reference/array/difference.html).
+- Use `E` for errors, like in [attempt](https://es-toolkit.slash.page/reference/util/attempt.html).
+- Use `K` for keys, like in [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html).
+
+## 3. Issues
 
 You can contribute to es-toolkit via:
 
@@ -63,7 +84,7 @@ You can contribute to es-toolkit via:
 - [Requesting a new feature or package](https://github.com/toss/es-toolkit/issues/new/choose)
 - [Having a look at our issue list](https://github.com/toss/es-toolkit/issues) to see what's to be fixed
 
-## 3. Pull Requests
+## 4. Pull Requests
 
 > [Opening a pull request](https://github.com/toss/es-toolkit/compare) <br/>
 
@@ -76,7 +97,7 @@ You can raise your own pull request. The title of your pull request should match
 > We do not care about the number, or style of commits in your history, because we squash merge every PR into main. <br/>
 > Feel free to commit in whatever style you feel comfortable with.
 
-### 3.1 Type
+### 4.1 Type
 
 **Type must be one of those**
 
@@ -94,11 +115,11 @@ other :
 
 - chore - anything else
 
-### 3.2 Function Names
+### 4.2 Function Names
 
 The name of function that you made changes. (ex: debounce, throttle)<br/>
 If you made changes across multiple packages, writing package scope is optional.
 
-### 3.3 Description
+### 4.3 Description
 
 A clear and concise description of what the pr is about.

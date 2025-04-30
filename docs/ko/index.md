@@ -5,7 +5,12 @@ layout: home
 hero:
   name: 'es-toolkit'
   text: '현대적인 JavaScript 유틸리티 라이브러리'
-  # tagline:
+  image:
+    loading: eager
+    fetchpriority: high
+    decoding: async
+    src: /hero.webp
+    alt:
   actions:
     - theme: brand
       text: es-toolkit 알아보기
