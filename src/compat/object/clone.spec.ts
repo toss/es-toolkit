@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import * as lodashStable from 'es-toolkit/compat';
 import { clone } from './clone';
 import { args } from '../_internal/args';
 import { typedArrays } from '../_internal/typedArrays';
@@ -204,7 +205,7 @@ describe('clone', () => {
 
     const sizes = [0, 1, 16, 1024];
 
-    sizes.forEach(size => {
+    lodashStable.each(sizes, size => {
       const buffer = new ArrayBuffer(size);
       const actual = clone(buffer);
 
@@ -465,7 +466,7 @@ describe('clone', () => {
     expect(actual[1].b).toBe(expected[1].b);
   });
 
-  typedArrays.forEach(type => {
+  lodashStable.each(typedArrays, type => {
     it(`should clone ${type} values`, () => {
       const Ctor = globalThis[type as keyof typeof globalThis] as any;
 
@@ -473,51 +474,29 @@ describe('clone', () => {
         return;
       }
 
-      const buffer = new ArrayBuffer(24);
-      const view = new Ctor(buffer);
+      lodashStable.times(2, index => {
+        const buffer = new ArrayBuffer(24);
+        const view = index ? new Ctor(buffer, 8, 1) : new Ctor(buffer);
+        const actual = clone(view);
 
-      if (view.length > 0) {
-        for (let i = 0; i < view.length; i++) {
-          view[i] = i + 1;
-        }
-      }
-
-      const actual = clone(view);
-
-      expect(actual).toEqual(view);
-      expect(actual).not.toBe(view);
-      expect(actual.buffer === view.buffer).toBe(true);
-      expect(actual.byteOffset).toBe(view.byteOffset);
-      expect(actual.length).toBe(view.length);
-
-      if (view.length > 0) {
-        for (let i = 0; i < view.length; i++) {
-          expect(actual[i]).toBe(view[i]);
-        }
-      }
-
-      const view2 = new Ctor(buffer, 8, 1);
-      if (view2.length > 0) {
-        view2[0] = 99;
-      }
-
-      const actual2 = clone(view2);
-
-      expect(actual2).toEqual(view2);
-      expect(actual2).not.toBe(view2);
-      expect(actual2.buffer === view2.buffer).toBe(true);
-      expect(actual2.byteOffset).toBe(view2.byteOffset);
-      expect(actual2.length).toBe(view2.length);
-
-      if (view2.length > 0) {
-        expect(actual2[0]).toBe(view2[0]);
-      }
+        expect(actual).toEqual(view);
+        expect(actual).not.toBe(view);
+        expect(actual.buffer === view.buffer).toBe(true);
+        expect(actual.byteOffset).toBe(view.byteOffset);
+        expect(actual.length).toBe(view.length);
+      });
     });
   });
 
-  const uncloneables = ['DOM elements', 'functions', 'async functions', 'generator functions', 'the Proxy constructor'];
+  const uncloneableObjects = [
+    'DOM elements',
+    'functions',
+    'async functions',
+    'generator functions',
+    'the Proxy constructor',
+  ];
 
-  uncloneables.forEach(type => {
+  lodashStable.each(uncloneableObjects, type => {
     it(`should not clone ${type}`, () => {
       let value;
 
@@ -546,7 +525,7 @@ describe('clone', () => {
 
   const errorTypes = ['Error', 'EvalError', 'RangeError', 'ReferenceError', 'SyntaxError', 'TypeError', 'URIError'];
 
-  errorTypes.forEach(type => {
+  lodashStable.each(errorTypes, type => {
     it(`should not clone ${type}s`, () => {
       const Ctor = globalThis[type as keyof typeof globalThis];
       const value = new Ctor('error');
