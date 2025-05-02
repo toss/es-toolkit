@@ -134,6 +134,7 @@ export { assignInWith } from './object/assignInWith.ts';
 export { assignInWith as extendWith } from './object/assignInWith.ts';
 export { assignWith } from './object/assignWith.ts';
 export { at } from './object/at.ts';
+export { clone } from './object/clone.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { cloneDeepWith } from './object/cloneDeepWith.ts';
 export { create } from './object/create.ts';
