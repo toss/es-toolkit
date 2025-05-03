@@ -6,7 +6,7 @@
  * @template T
  * @param {readonly T[]} arr - The array to retrieve elements from.
  * @param {number[]} indices - An array of indices specifying the positions of elements to retrieve.
- * @returns {Array<T>} A new array containing the elements at the specified indices.
+ * @returns {T[]} A new array containing the elements at the specified indices.
  *
  * @example
  * const numbers = [10, 20, 30, 40, 50];
