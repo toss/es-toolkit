@@ -50,5 +50,5 @@ const clonedObjWithCustomizer = cloneWith(obj2, value => {
   }
   // 返回 undefined 时使用默认克隆方法
 });
-console.log(clonedObj2); // { a: 2, b: 4 }
+console.log(clonedObjWithCustomizer); // { a: 2, b: 4 }
 ```

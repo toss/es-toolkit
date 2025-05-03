@@ -50,5 +50,5 @@ const clonedObjWithCustomizer = cloneWith(obj2, value => {
   }
   // undefined를 반환하면 기본 복제 방식을 사용해요
 });
-console.log(clonedObj2); // { a: 2, b: 4 }
+console.log(clonedObjWithCustomizer); // { a: 2, b: 4 }
 ```
