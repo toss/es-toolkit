@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.37.1
+
+Released on May 3rd, 2025.
+
+- Fixed a bug in JSR's `@es-toolkit/es-toolkit` package that prevented importing the `camelCase` function in Deno.
+
 ## Version v1.37.0
 
 Released on May 3rd, 2025.
