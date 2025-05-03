@@ -7,28 +7,30 @@
 :::
 
 객체의 주어진 경로에서 값을 가져와요.
-해결된 값이 함수라면, 객체를 `this` 컨텍스트로 하여 호출돼요.
-값이 `undefined`인 경우, `defaultValue`가 반환돼요.
+
+[get](./get.md) 함수와 기본적인 동작은 같지만, 값을 찾는 과정에서 함수를 만나면 해당 함수를 호출하며 진행해요.
+
+찾은 값이 `undefined`인 경우, 기본값을 반환하며 기본값이 함수라면 해당 함수를 호출해요.
 
 ## 인터페이스
 
 ```typescript
-function result<T>(
-  object: unknown,
-  path: string | number | symbol | ReadonlyArray<string | number | symbol>,
-  defaultValue?: T | ((...args: unknown[]) => T)
-): T;
+function result(
+  object: any,
+  path: PropertyKey | PropertyKey[],
+  defaultValue?: any | ((...args: any[]) => any)
+): any;
 ```
 
 ### 파라미터
 
-- `object` (`unknown`): 쿼리할 객체예요.
-- `path` (`string | number | symbol | ReadonlyArray<string | number | symbol>`): 얻고자 하는 속성의 경로예요.
-- `defaultValue` (`T | ((...args: unknown[]) => T)`): 해결된 값이 `undefined`일 때 반환되는 값이에요.
+- `object` (`any`): 검색할 객체.
+- `path` (`PropertyKey | PropertyKey[]`): 속성을 가져올 경로.
+- `defaultValue` (`any`): 찾은 값이 `undefined` 일 때 반환할 값.
 
 ### 반환 값
 
-(`T`): 해결된 값을 반환해요.
+(`any`): 해결된 값을 반환해요.
 
 ## 예시
 
