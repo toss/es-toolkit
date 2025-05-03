@@ -137,6 +137,7 @@ export { at } from './object/at.ts';
 export { clone } from './object/clone.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { cloneDeepWith } from './object/cloneDeepWith.ts';
+export { cloneWith } from './object/cloneWith.ts';
 export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
 export { findKey } from './object/findKey.ts';
