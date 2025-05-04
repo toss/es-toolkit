@@ -6,25 +6,29 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-オブジェクトの指定されたパスの値を取得します。
-解決された値が関数である場合、その関数はオブジェクトを`this`コンテキストとして呼び出されます。
-値が`undefined`の場合、`defaultValue`が返されます。
+
+オブジェクトの指定されたパスから値を取得します。
+
+[get](./get.md) 関数と基本的な動作は同じですが、値を探す過程で関数に遭遇した場合、その関数を呼び出しながら進みます。
+
+見つかった値が`undefined`の場合、デフォルト値を返し、デフォルト値が関数であればその関数を呼び出します。
+
 
 ## インターフェース
 
 ```typescript
-function result<T>(
-  object: unknown,
-  path: string | number | symbol | ReadonlyArray<string | number | symbol>,
-  defaultValue?: T | ((...args: unknown[]) => T)
-): T;
+function result(
+  object: any,
+  path: PropertyKey | PropertyKey[],
+  defaultValue?: any | ((...args: any[]) => any)
+): any;
 ```
 
 ### パラメータ
 
 - `object` (`unknown`): クエリを行うオブジェクトです。
-- `path` (`string | number | symbol | ReadonlyArray<string | number | symbol>`): 取得するプロパティのパスです。
-- `defaultValue` (`T | ((...args: unknown[]) => T)`): 解決された値が`undefined`の場合に返される値です。
+- `path` (`PropertyKey | PropertyKey[]`): 取得するプロパティのパスです。
+- `defaultValue` (`any`): 解決された値が`undefined`の場合に返される値です。
 
 ### 戻り値
 

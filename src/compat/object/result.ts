@@ -1,17 +1,17 @@
 import { isKey } from '../_internal/isKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
+import { toString } from '../util/toString.ts';
 
 /**
  * Retrieves the value at a given path of an object.
  * If the resolved value is a function, it is invoked with the object as its `this` context.
  * If the value is `undefined`, the `defaultValue` is returned.
  *
- * @template T - The expected return type.
- * @param {unknown} object - The object to query.
- * @param {string | number | symbol | ReadonlyArray<string | number | symbol>} path - The path of the property to get.
- * @param {T | ((...args: unknown[]) => T)} [defaultValue] - The value returned if the resolved value is `undefined`.
- * @returns {T} - Returns the resolved value.
+ * @param {any} object - The object to query.
+ * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to get.
+ * @param {any} [defaultValue] - The value returned if the resolved value is `undefined`.
+ * @returns {any} - Returns the resolved value.
  *
  * @example
  * const obj = { a: { b: { c: 3 } } };
@@ -33,23 +33,28 @@ import { toPath } from '../util/toPath.ts';
  * result(obj, 'a.b.d', () => 'default');
  * // => 'default'
  */
-export function result<T>(
-  object: unknown,
-  path: string | number | symbol | ReadonlyArray<string | number | symbol>,
-  defaultValue?: T | ((...args: unknown[]) => T)
-): T {
-  const resolvedPath = Array.isArray(path) ? path : isKey(path, object) ? [path] : toPath(String(path));
-  const length = resolvedPath.length;
+export function result(
+  object: any,
+  path: PropertyKey | readonly PropertyKey[],
+  defaultValue?: any | ((...args: any[]) => any)
+): any {
+  if (isKey(path, object)) {
+    path = [path];
+  } else if (!Array.isArray(path)) {
+    path = toPath(toString(path));
+  }
 
-  for (let index = 0; index < (length || 1); index++) {
-    const key = toKey(resolvedPath[index]);
-    const value = object == null ? undefined : (object as Record<string | number | symbol, unknown>)[key];
+  const pathLength = Math.max(path.length, 1);
+
+  for (let index = 0; index < pathLength; index++) {
+    const value = object == null ? undefined : object[toKey(path[index])];
+
     if (value === undefined) {
-      object =
-        typeof defaultValue === 'function' ? (defaultValue as (...args: unknown[]) => T).call(object) : defaultValue;
-      break;
+      return typeof defaultValue === 'function' ? defaultValue.call(object) : defaultValue;
     }
+
     object = typeof value === 'function' ? value.call(object) : value;
   }
-  return object as T;
+
+  return object;
 }

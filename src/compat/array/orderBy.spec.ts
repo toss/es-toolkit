@@ -224,4 +224,12 @@ describe('orderBy', () => {
     expect(orderBy(array2)).toEqual(expected2);
     expect(orderBy(array2, [])).toEqual(expected2);
   });
+
+  it('should compare strings with ASCII code', () => {
+    expect(orderBy(['A', 'a'], null, 'desc')).toEqual(['a', 'A']);
+    expect(orderBy(['ABC', 'abc'], null, 'desc')).toEqual(['abc', 'ABC']);
+
+    expect(orderBy(['A', 'a'])).toEqual(['A', 'a']);
+    expect(orderBy(['ABC', 'abc'])).toEqual(['ABC', 'abc']);
+  });
 });

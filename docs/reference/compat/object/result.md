@@ -7,28 +7,30 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 :::
 
 Retrieves the value at a given path of an object.
-If the resolved value is a function, it is invoked with the object as its `this` context.
-If the value is `undefined`, the `defaultValue` is returned.
+
+Works similarly to [get](./get.md), but if it encounters a function while traversing the path, it invokes that function and continues.
+
+If the resolved value is `undefined`, it returns the default value. If the default value is a function, it invokes that function.
 
 ## Signature
 
 ```typescript
-function result<T>(
-  object: unknown,
-  path: string | number | symbol | ReadonlyArray<string | number | symbol>,
-  defaultValue?: T | ((...args: unknown[]) => T)
-): T;
+function result(
+  object: any,
+  path: PropertyKey | PropertyKey[],
+  defaultValue?: any | ((...args: any[]) => any)
+): any;
 ```
 
 ### Parameters
 
-- `object` (`unknown`): The object to query.
-- `path` (`string | number | symbol | ReadonlyArray<string | number | symbol>`): The path of the property to get.
-- `defaultValue` (`T | ((...args: unknown[]) => T)`): The value returned if the resolved value is `undefined`.
+- `object` (`any`): The object to query.
+- `path` (`PropertyKey | PropertyKey[]`): The path of the property to get.
+- `defaultValue` (`any`): The value returned if the resolved value is `undefined`.
 
 ### Returns
 
-(`T`): Returns the resolved value.
+(`any`): Returns the resolved value.
 
 ## Examples
 

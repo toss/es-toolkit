@@ -1,5 +1,5 @@
 import { reduce } from './reduce.ts';
-import { identity } from '../../function';
+import { identity } from '../../function/identity.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
