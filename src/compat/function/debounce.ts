@@ -114,16 +114,16 @@ export function debounce<F extends (...args: any[]) => any>(
     if (maxWait != null) {
       if (pendingAt === null) {
         pendingAt = Date.now();
-      } else {
-        if (Date.now() - pendingAt >= maxWait) {
-          result = func.apply(this, args);
-          pendingAt = Date.now();
+      }
 
-          _debounced.cancel();
-          _debounced.schedule();
+      if (Date.now() - pendingAt >= maxWait) {
+        result = func.apply(this, args);
+        pendingAt = Date.now();
 
-          return result;
-        }
+        _debounced.cancel();
+        _debounced.schedule();
+
+        return result;
       }
     }
 
