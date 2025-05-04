@@ -1,3 +1,4 @@
+import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getTag } from '../_internal/getTag.ts';
 import {
   argumentsTag,
@@ -23,7 +24,6 @@ import {
   uint16ArrayTag,
   uint32ArrayTag,
 } from '../_internal/tags.ts';
-import { isPrimitive } from '../compat.ts';
 import { isArray } from '../predicate/isArray.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
