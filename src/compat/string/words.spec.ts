@@ -41,4 +41,28 @@ describe('words', () => {
     const result = words('example🚀with✨emojis💡and🔍special🌟characters');
     expect(result).toEqual(['example', '🚀', 'with', '✨', 'emojis', '💡', 'and', '🔍', 'special', '🌟', 'characters']);
   });
+
+  it('should match accented letters', () => {
+    expect(words('Lunedì 18 Set')).toEqual(['Lunedì', '18', 'Set']);
+  });
+
+  it('should match Hindi characters', () => {
+    expect(words('नमस्ते नमस्ते')).toEqual(['नमस्ते', 'नमस्ते']);
+  });
+
+  it('should match ordinal numbers', () => {
+    expect(words('1st 2nd+3rd--4th@1ST*2ND-3RD_4TH')).toEqual(['1st', '2nd', '3rd', '4th', '1ST', '2ND', '3RD', '4TH']);
+  });
+
+  it('should match contractions', () => {
+    expect(words("I don't+can't-won't-DON'T*THEY'RE-I'LL")).toEqual([
+      'I',
+      "don't",
+      "can't",
+      "won't",
+      "DON'T",
+      "THEY'RE",
+      "I'LL",
+    ]);
+  });
 });
