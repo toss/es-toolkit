@@ -28,4 +28,11 @@ describe('meanBy', () => {
     expect(meanBy(arrays, 0)).toBe(2);
     expect(meanBy(objects, 'a')).toBe(2);
   });
+
+  it('should handle null and undefined values', () => {
+    // @ts-expect-error - null is not an array
+    expect(meanBy(null)).toBe(NaN);
+    // @ts-expect-error - undefined is not an array
+    expect(meanBy(undefined)).toBe(NaN);
+  });
 });
