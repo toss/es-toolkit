@@ -5,21 +5,21 @@
 
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
+与えられた関数 `func` をラップする新しい関数を作成します。
+このプロセスでは、元の関数の実行前後に `wrapper` 関数で定義された追加のロジックを適用できます。
 
-Creates a new function that passes the original function or value `value` as the first argument to the `wrapper`.
-This allows you to decorate or extend the behavior of the original value in a flexible way.
-
+関数の代わりに値 `value` が提供された場合、この値は `wrapper` 関数の最初の引数として渡されます。
 ## インターフェース
 
 ```typescript
-function wrap<T extends (...args: unknown[]) => unknown>(
+function wrap<F extends (...args: unknown[]) => unknown>(
+  func: F,
+  wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
+): F;
+function wrap<T, A extends unknown[], R>(
   value: T,
-  wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>
-): (...args: Parameters<T>) => ReturnType<T>;
-function wrap<T, TArgs extends unknown[], TResult>(
-  value: T,
-  wrapper: (value: T, ...args: TArgs) => TResult
-): (...args: TArgs) => TResult;
+  wrapper: (value: T, ...args: A) => R
+): (...args: A) => R;
 ```
 
 ## 例

@@ -6,20 +6,22 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-Creates a new function that passes the original function or value `value` as the first argument to the `wrapper`.
-This allows you to decorate or extend the behavior of the original value in a flexible way.
+주어진 함수 `func`를 감싸는 새로운 함수를 만들어요. 
+이 과정에서 원본 함수의 실행 전후에 `wrapper` 함수에 정의된 추가 로직을 적용할 수 있어요.
+
+만약 함수 대신 값 `value`가 주어진다면, 이 값은 `wrapper` 함수의 첫 번째 인자로 전달돼요.
 
 ## 인터페이스
 
 ```typescript
-function wrap<T extends (...args: unknown[]) => unknown>(
+function wrap<F extends (...args: unknown[]) => unknown>(
+  func: F,
+  wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
+): F;
+function wrap<T, A extends unknown[], R>(
   value: T,
-  wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>
-): (...args: Parameters<T>) => ReturnType<T>;
-function wrap<T, TArgs extends unknown[], TResult>(
-  value: T,
-  wrapper: (value: T, ...args: TArgs) => TResult
-): (...args: TArgs) => TResult;
+  wrapper: (value: T, ...args: A) => R
+): (...args: A) => R;
 ```
 
 ## 예시

@@ -1,4 +1,31 @@
 # es-toolkit Changelog
+
+## Version v1.37.2
+
+Released on May 4th, 2025.
+
+- Fixed an issue in `es-toolkit/compat`'s `throttle` function to match Lodash's behavior by immediately invoking the throttled function when wait time is zero.
+
+## Version v1.37.1
+
+Released on May 3rd, 2025.
+
+- Fixed a bug in JSR's `@es-toolkit/es-toolkit` package that prevented importing the `camelCase` function in Deno.
+
+## Version v1.37.0
+
+Released on May 3rd, 2025.
+
+- Introduced compatibility functions for [result](https://es-toolkit.slash.page/reference/compat/object/result.html), [omitBy](https://es-toolkit.slash.page/reference/object/omitBy.html), [xorBy](https://es-toolkit.slash.page/reference/array/xorBy.html), [xorWith](https://es-toolkit.slash.page/reference/array/xorWith.html), [unzipWith](https://es-toolkit.slash.page/reference/array/unzipWith.html), [sampleSize](https://es-toolkit.slash.page/reference/array/sampleSize.html), [transform](https://es-toolkit.slash.page/reference/compat/object/transform.html), [wrap](https://es-toolkit.slash.page/reference/compat/function/wrap.html), [countBy](https://es-toolkit.slash.page/reference/array/countBy.html), and [xor](https://es-toolkit.slash.page/reference/array/xor.html).
+- Added vitest benchmark for [ary](https://es-toolkit.slash.page/reference/function/ary.html) function.
+- Fixed string comparison in [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html) and [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html) by removing locale comparison and using ASCII code instead.
+- Fixed type definition in [isBuffer](https://es-toolkit.slash.page/reference/predicate/isBuffer.html).
+- Fixed internal documentation links for Korean and Japanese headings.
+- Improved code readability and documentation for various functions.
+- Prevented circular dependencies by updating import paths in [toCamelCaseKeys](https://es-toolkit.slash.page/reference/object/toCamelCaseKeys.html) and [toSnakeCaseKeys](https://es-toolkit.slash.page/reference/object/toSnakeCaseKeys.html).
+
+We sincerely thank @chldmsqls34, @umsungjun, @raon0211, @dayongkr, @shren207, @oror-sine, @L2HYUNN, @D-Sketon, @ariandel-dev, @Jeong-Rae, and @beomxtone for their contributions. We appreciate your great efforts!
+
 ## Version v1.36.0
 
 Released on April 24th, 2025.

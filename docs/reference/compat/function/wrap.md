@@ -6,20 +6,23 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Creates a new function that passes the original function or value `value` as the first argument to the `wrapper`.
-This allows you to decorate or extend the behavior of the original value in a flexible way.
+Creates a new function that wraps the given function `func`.
+In this process, you can apply additional logic defined in the `wrapper` function before and after the execution of the original function.
+
+If a `value` is provided instead of a function, this value is passed as the first argument to the `wrapper` function.
+
 
 ## Signature
 
 ```typescript
-function wrap<T extends (...args: unknown[]) => unknown>(
+function wrap<F extends (...args: unknown[]) => unknown>(
+  func: F,
+  wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
+): F;
+function wrap<T, A extends unknown[], R>(
   value: T,
-  wrapper: (value: T, ...args: Parameters<T>) => ReturnType<T>
-): (...args: Parameters<T>) => ReturnType<T>;
-function wrap<T, TArgs extends unknown[], TResult>(
-  value: T,
-  wrapper: (value: T, ...args: TArgs) => TResult
-): (...args: TArgs) => TResult;
+  wrapper: (value: T, ...args: A) => R
+): (...args: A) => R;
 ```
 
 ## Examples

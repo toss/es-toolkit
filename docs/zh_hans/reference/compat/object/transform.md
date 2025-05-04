@@ -3,43 +3,42 @@
 ::: info
 出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，详情请见 [这里](../../../compatibility.md)。
 :::
 
-通过应用迭代函数将任何集合（数组或对象）转换为新的结果。
+遍历对象的值，按照期望的形式累积并创建新对象。
 
-`transform()`函数遍历数组或对象中的每个属性，让您构建一个新的结果。
-对于每个属性，它使用当前的累加器和属性值调用您的迭代函数。
-您可以随意修改累加器，最终的累加器成为您的结果。
+如果不提供 `accumulator` 的初始值，将创建一个具有相同原型的新数组或对象。
 
-如果您不提供累加器，它将创建一个具有与原始对象相同原型的新数组或对象。
-您还可以通过在迭代函数中返回`false`来提前停止转换。
+当 `iteratee` 函数返回 `false` 时，将中断遍历。
 
-## 签名
+## 接口
 
 ```typescript
-function transform<T, U>(
-  object?: T[],
-  iteratee?: ((accumulator: U, value: T, index: number, object: T[]) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
-function transform<T extends object, U>(
-  object?: T,
-  iteratee?: ((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
-function transform<T, U>(
-  object?: T[] | T | null | undefined,
-  iteratee?: ((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
+export function transform<T, U>(
+  object: readonly T[],
+  iteratee?: (acc: U, curr: T, index: number, arr: readonly T[]) => void,
+  accumulator?: U
+): U;
+
+export function transform<T, U>(
+  object: Record<string, T>,
+  iteratee?: (acc: U, curr: T, key: string, dict: Record<string, T>) => void,
+  accumulator?: U
+): U;
+
+export function transform<T extends object, U>(
+  object: T,
+  iteratee?: (acc: U, curr: T[keyof T], key: keyof T, dict: Record<keyof T, T[keyof T]>) => void,
+  accumulator?: U
+): U;
 ```
 
 ### 参数
 
-- `object` (`readonly T[] | T | null | undefined`): 要迭代的对象。
-- `iteratee` (`((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null`): 每次迭代调用的函数。
-- `accumulator` (`U | undefined | null`): 初始值。
+- `object` (`readonly T[] | T`): 要处理的对象。
+- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown`): 每次处理时调用的函数。
+- `accumulator` (`U`): 初始值。
 
 ### 返回值
 

@@ -1,48 +1,71 @@
-import { range } from '../../math/index.ts';
-import { isArray, isBuffer, isNil, isObject, isTypedArray } from '../index.ts';
+import { identity } from '../../function/identity.ts';
+import { isFunction } from '../../predicate/isFunction.ts';
+import { forEach } from '../array/forEach.ts';
+import { isBuffer } from '../predicate/isBuffer.ts';
+import { isObject } from '../predicate/isObject.ts';
+import { isTypedArray } from '../predicate/isTypedArray.ts';
+import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
- * Transforms an array by applying an iteratee function to each element and collecting the results.
+ * Traverses array values and creates a new array by accumulating them in the desired form.
  *
- * The `transform()` function processes each element in an array, allowing you to build up a new result.
- * For each element, it calls your iteratee function with the current accumulator and element.
- * You can modify the accumulator in each step, and the final accumulator becomes your result.
+ * If no initial value is provided for `accumulator`, it creates a new array with the same prototype.
  *
- * If you don't provide an accumulator, it creates a new array matching the original array's prototype.
- * You can also stop the transformation early by returning `false` from your iteratee function.
+ * The traversal is interrupted when the `iteratee` function returns `false`.
  *
  * @template T - The type of array.
  * @template U - The type of accumulator.
- * @param {readonly T[]} object - The object to iterate over.
- * @param {((accumulator: U, value: T, index: number, object: readonly T[]) => unknown) | undefined | null} iteratee - The function invoked per iteration.
- * @param {U | undefined | null} accumulator - The initial accumulator value.
- * @returns {U | undefined | null} Returns the accumulated value.
+ * @param {readonly T[]} object - The array to iterate over.
+ * @param {(accumulator: U, value: T, index: number, array: readonly T[]) => unknown} [iteratee] - The function called for each iteration.
+ * @param {U} [accumulator] - The initial value.
+ * @returns {U} Returns the accumulated value.
  *
  * @example
  * const array = [2, 3, 4];
  * transform(array, (acc, value) => { acc += value; return value % 2 === 0; }, 0) // => 5
  */
 export function transform<T, U>(
-  object?: readonly T[],
-  iteratee?: ((accumulator: U, value: T, index: number, object: readonly T[]) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
+  object: readonly T[],
+  iteratee?: (acc: U, curr: T, index: number, arr: readonly T[]) => void,
+  accumulator?: U
+): U;
 
 /**
- * Transforms an object by applying an iteratee function to each property and collecting the results.
+ * Traverses object values and creates a new object by accumulating them in the desired form.
  *
- * The `transform()` function goes through each property in your object, letting you build up a new result.
- * For each property, it calls your iteratee function with the current accumulator and property value.
- * You can modify the accumulator however you want, and the final accumulator becomes your result.
+ * If no initial value is provided for `accumulator`, it creates a new array or object with the same prototype.
  *
- * If you don't provide an accumulator, it creates a new object with the same prototype as the original.
- * You can also stop the transformation early by returning `false` from your iteratee function.
+ * The traversal is interrupted when the `iteratee` function returns `false`.
  *
  * @template T - The type of object.
  * @template U - The type of accumulator.
- * @param {T} object - The object to iterate over.
- * @param {((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null} iteratee - The function invoked per iteration.
- * @param {U} accumulator - The initial accumulator value.
+ * @param {Record<string, T>} object - The object to iterate over.
+ * @param {(accumulator: U, value: T, key: string, object: Record<string, T>) => unknown} [iteratee] - The function called for each iteration.
+ * @param {U} [accumulator] - The initial value.
+ * @returns {U} Returns the accumulated value.
+ *
+ * @example
+ * const obj = { 'a': 1, 'b': 2, 'c': 1 };
+ * transform(obj, (result, value, key) => { (result[value] || (result[value] = [])).push(key) }, {}) // => { '1': ['a', 'c'], '2': ['b'] }
+ */
+export function transform<T, U>(
+  object: Record<string, T>,
+  iteratee?: (acc: U, curr: T, key: string, dict: Record<string, T>) => void,
+  accumulator?: U
+): U;
+
+/**
+ * Traverses object values and creates a new object by accumulating them in the desired form.
+ *
+ * If no initial value is provided for `accumulator`, it creates a new array or object with the same prototype.
+ *
+ * The traversal is interrupted when the `iteratee` function returns `false`.
+ *
+ * @template T - The type of object.
+ * @template U - The type of accumulator.
+ * @param {readonly T[] | T} object - The object to iterate over.
+ * @param {(accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown} [iteratee] - The function called for each iteration.
+ * @param {U} [accumulator] - The initial value.
  * @returns {U} Returns the accumulated value.
  *
  * @example
@@ -50,20 +73,24 @@ export function transform<T, U>(
  * transform(obj, (result, value, key) => { (result[value] || (result[value] = [])).push(key) }, {}) // => { '1': ['a', 'c'], '2': ['b'] }
  */
 export function transform<T extends object, U>(
-  object?: T,
-  iteratee?: ((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
+  object: T,
+  iteratee?: (acc: U, curr: T[keyof T], key: keyof T, dict: Record<keyof T, T[keyof T]>) => void,
+  accumulator?: U
+): U;
 
 /**
- * Transforms any collection (array or object) into a new result by applying an iteratee function.
+ * Traverses object values and creates a new object by accumulating them in the desired form.
+ *
+ * If no initial value is provided for `accumulator`, it creates a new array or object with the same prototype.
+ *
+The traversal is interrupted when the `iteratee` function returns `false`.
  *
  * @template T - The type of object.
  * @template U - The type of accumulator.
- * @param {readonly T[] | T | null | undefined} object - The object to iterate over.
- * @param {((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null} iteratee - The function invoked per iteration.
- * @param {U | undefined | null} accumulator - The initial value.
- * @returns {U | undefined | null} Returns the accumulated value.
+ * @param {readonly T[] | T} object - The object to iterate over.
+ * @param {(accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown} [iteratee] - The function invoked per iteration.
+ * @param {U} [accumulator] - The initial value.
+ * @returns {U} Returns the accumulated value.
  *
  * @example
  * // Transform an array
@@ -76,43 +103,29 @@ export function transform<T extends object, U>(
  * transform(obj, (result, value, key) => { (result[value] || (result[value] = [])).push(key) }, {}) // => { '1': ['a', 'c'], '2': ['b'] }
  */
 export function transform<T, U>(
-  object?: readonly T[] | T | null | undefined,
-  iteratee?:
-    | ((accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown)
-    | undefined
-    | null,
-  accumulator?: U | undefined | null
-): U | undefined | null {
-  const isArr = isArray(object);
-  const isArrLike = isArr || isBuffer(object) || isTypedArray(object);
+  object?: readonly T[] | T,
+  iteratee: (accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown = identity,
+  accumulator?: U
+): U | any[] | Record<string, any> {
+  const isArrayOrBufferOrTypedArray = Array.isArray(object) || isBuffer(object) || isTypedArray(object);
 
-  if (isNil(accumulator)) {
-    const Ctor = object && object.constructor;
-    if (isArrLike) {
-      accumulator = (isArr && Ctor ? Ctor() : []) as U;
-    } else if (isObject(object)) {
-      accumulator = (typeof Ctor === 'function' ? Object.create(Object.getPrototypeOf(object)) : {}) as U;
+  iteratee = createIteratee(iteratee);
+
+  if (accumulator == null) {
+    if (isArrayOrBufferOrTypedArray) {
+      accumulator = [] as U;
+    } else if (isObject(object) && isFunction(object.constructor)) {
+      accumulator = Object.create(Object.getPrototypeOf(object));
     } else {
       accumulator = {} as U;
     }
   }
 
-  if (isNil(iteratee) || isNil(object)) {
-    return accumulator;
+  if (object == null) {
+    return accumulator as U;
   }
 
-  const keys: PropertyKey[] = isArrLike ? range(0, (object as ArrayLike<T>).length) : Object.keys(object as object);
+  forEach(object, (value, key, object) => iteratee(accumulator as U, value as T, key, object));
 
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    const value = (object as Record<PropertyKey, any>)[key];
-
-    const result = iteratee(accumulator!, value, key, object);
-
-    if (result === false) {
-      break;
-    }
-  }
-
-  return accumulator;
+  return accumulator as U;
 }

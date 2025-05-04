@@ -41,6 +41,7 @@ export function sampleSize<T>(collection: Record<string, T> | Record<number, T> 
  * // [1, 2] or [1, 3] or [2, 3]
  */
 export function sampleSize<T extends object>(collection: T | null | undefined, size?: number): Array<T[keyof T]>;
+
 /**
  * Returns a sample element array of a specified `size`.
  *
@@ -64,10 +65,12 @@ export function sampleSize<T>(
   guard?: unknown
 ): Array<T[keyof T]> | T[] {
   const arrayCollection = toArray(collection);
+
   if (guard ? isIterateeCall(collection, size, guard) : size === undefined) {
     size = 1;
   } else {
     size = clamp(toInteger(size), 0, arrayCollection.length);
   }
+
   return sampleSizeToolkit(arrayCollection, size);
 }

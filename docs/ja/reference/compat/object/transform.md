@@ -6,44 +6,43 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-あらゆるコレクション（配列またはオブジェクト）を、反復関数を適用して新しい結果に変換します。
+オブジェクトの値を順番に処理しながら、希望する形に累積して新しいオブジェクトを作成します。
 
-`transform()`関数は、配列またはオブジェクトの各プロパティを通過して、新しい結果を構築します。
-各プロパティに対して、現在の累積値とプロパティ値を使用して反復関数を呼び出します。
-累積値を好きなように変更でき、最終的な累積値が結果になります。
+`accumulator`に初期値を提供しない場合、プロトタイプの新しい配列やオブジェクトを生成して使用します。
 
-累積値を提供しない場合、元のプロトタイプを持つ新しい配列またはオブジェクトを作成します。
-反復関数から`false`を返すことで、変換を早期に停止することもできます。
+`iteratee`関数が`false`を返すと、処理を中断します。
 
 ## インターフェース
 
 ```typescript
-function transform<T, U>(
-  object?: T[],
-  iteratee?: ((accumulator: U, value: T, index: number, object: T[]) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
-function transform<T extends object, U>(
-  object?: T,
-  iteratee?: ((accumulator: U, value: T[keyof T], key: keyof T, object: T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
-function transform<T, U>(
-  object?: T[] | T | null | undefined,
-  iteratee?: ((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null,
-  accumulator?: U | undefined | null
-): U | undefined | null;
+export function transform<T, U>(
+  object: readonly T[],
+  iteratee?: (acc: U, curr: T, index: number, arr: readonly T[]) => void,
+  accumulator?: U
+): U;
+
+export function transform<T, U>(
+  object: Record<string, T>,
+  iteratee?: (acc: U, curr: T, key: string, dict: Record<string, T>) => void,
+  accumulator?: U
+): U;
+
+export function transform<T extends object, U>(
+  object: T,
+  iteratee?: (acc: U, curr: T[keyof T], key: keyof T, dict: Record<keyof T, T[keyof T]>) => void,
+  accumulator?: U
+): U;
 ```
 
 ### パラメータ
 
-- `object` (`readonly T[] | T | null | undefined`): 反復するオブジェクトです。
-- `iteratee` (`((accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown) | undefined | null`): 各イテレーションで呼び出される関数です。
-- `accumulator` (`U | undefined | null`): 初期値です。
+- `object` (`readonly T[] | T`): 処理するオブジェクト。
+- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown`): 各処理で呼び出される関数。
+- `accumulator` (`U`): 初期値。
 
 ### 戻り値
 
-(`U | undefined | null`): 累積された値を返します。
+(`U`): 累積された値を返します。
 
 ## 例
 

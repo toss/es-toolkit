@@ -60,4 +60,9 @@ describe('groupBy', () => {
     const actual = groupBy({ a: 6.1, b: 4.2, c: 6.3 }, Math.floor);
     expect(actual).toEqual({ 4: [4.2], 6: [6.1, 6.3] });
   });
+
+  it('should return empty object if null or undefined is passed', () => {
+    expect(groupBy(undefined)).toEqual({});
+    expect(groupBy(null)).toEqual({});
+  });
 });

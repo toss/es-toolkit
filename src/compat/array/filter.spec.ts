@@ -151,4 +151,14 @@ describe('filter', () => {
     expect(filter('123', isEven2)).toEqual(['2']);
     expect(filter(args, isEven)).toEqual([2]);
   });
+
+  it('should not modify the resulting value from within `predicate`', () => {
+    const actual = filter([0], (value, index, array) => {
+      // @ts-expect-error - testing
+      array[index] = 1;
+      return true;
+    });
+
+    expect(actual).toEqual([0]);
+  });
 });
