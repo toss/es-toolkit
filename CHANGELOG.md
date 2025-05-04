@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.37.2
+
+Released on May 4th, 2025.
+
+- Fixed an issue in `es-toolkit/compat`'s `throttle` function to match Lodash's behavior by immediately invoking the throttled function when wait time is zero.
+
 ## Version v1.37.1
 
 Released on May 3rd, 2025.
