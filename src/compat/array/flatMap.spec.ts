@@ -3,6 +3,8 @@ import { flatMap } from './flatMap';
 import { map } from './map';
 import { identity } from '../../function/identity';
 import { empties } from '../_internal/empties';
+import { falsey } from '../_internal/falsey';
+import { each, stubArray } from '../compat';
 import { range } from '../math/range';
 import { constant } from '../util/constant';
 
@@ -83,5 +85,55 @@ describe('flatMap', () => {
   it('should work with undefined iteratee', () => {
     const array = [[1], [2, [3]], 4];
     expect(flatMap(array)).toEqual([1, 2, [3], 4]);
+  });
+
+  it(`should iterate over own string keyed properties of objects`, () => {
+    function Foo(this: any) {
+      this.a = [1, 2];
+    }
+    Foo.prototype.b = [3, 4];
+
+    // @ts-expect-error - Foo is a constructor
+    const actual = flatMap(new Foo(), identity);
+    expect(actual).toEqual([1, 2]);
+  });
+
+  it(`should use \`_.identity\` when \`iteratee\` is nullish`, () => {
+    const array = [
+      [1, 2],
+      [3, 4],
+    ];
+    const object = { a: [1, 2], b: [3, 4] };
+    // eslint-disable-next-line no-sparse-arrays
+    const values = [, null, undefined];
+    const expected = map(values, constant([1, 2, 3, 4]));
+
+    each([array, object], collection => {
+      // @ts-expect-error - testing
+      const actual = map(values, (value, index) => (index ? flatMap(collection, value) : flatMap(collection)));
+
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  it(`should accept a falsey \`collection\``, () => {
+    const expected = map(falsey, stubArray);
+
+    const actual = map(falsey, (collection, index) => {
+      // @ts-expect-error - testing
+      return index ? flatMap(collection) : flatMap();
+    });
+
+    expect(actual).toEqual(expected);
+  });
+
+  it(`should treat number values for \`collection\` as empty`, () => {
+    // @ts-expect-error - testing
+    expect(flatMap(1)).toEqual([]);
+  });
+
+  it(`should work with objects with non-number length properties`, () => {
+    const object = { length: [1, 2] };
+    expect(flatMap(object, identity)).toEqual([1, 2]);
   });
 });

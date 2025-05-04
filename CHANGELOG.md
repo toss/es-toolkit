@@ -1,5 +1,44 @@
 # es-toolkit Changelog
 
+## Version v1.37.2
+
+Released on May 4th, 2025.
+
+- Fixed an issue in `es-toolkit/compat`'s `throttle` function to match Lodash's behavior by immediately invoking the throttled function when wait time is zero.
+
+## Version v1.37.1
+
+Released on May 3rd, 2025.
+
+- Fixed a bug in JSR's `@es-toolkit/es-toolkit` package that prevented importing the `camelCase` function in Deno.
+
+## Version v1.37.0
+
+Released on May 3rd, 2025.
+
+- Introduced compatibility functions for [result](https://es-toolkit.slash.page/reference/compat/object/result.html), [omitBy](https://es-toolkit.slash.page/reference/object/omitBy.html), [xorBy](https://es-toolkit.slash.page/reference/array/xorBy.html), [xorWith](https://es-toolkit.slash.page/reference/array/xorWith.html), [unzipWith](https://es-toolkit.slash.page/reference/array/unzipWith.html), [sampleSize](https://es-toolkit.slash.page/reference/array/sampleSize.html), [transform](https://es-toolkit.slash.page/reference/compat/object/transform.html), [wrap](https://es-toolkit.slash.page/reference/compat/function/wrap.html), [countBy](https://es-toolkit.slash.page/reference/array/countBy.html), and [xor](https://es-toolkit.slash.page/reference/array/xor.html).
+- Added vitest benchmark for [ary](https://es-toolkit.slash.page/reference/function/ary.html) function.
+- Fixed string comparison in [sortBy](https://es-toolkit.slash.page/reference/array/sortBy.html) and [orderBy](https://es-toolkit.slash.page/reference/array/orderBy.html) by removing locale comparison and using ASCII code instead.
+- Fixed type definition in [isBuffer](https://es-toolkit.slash.page/reference/predicate/isBuffer.html).
+- Fixed internal documentation links for Korean and Japanese headings.
+- Improved code readability and documentation for various functions.
+- Prevented circular dependencies by updating import paths in [toCamelCaseKeys](https://es-toolkit.slash.page/reference/object/toCamelCaseKeys.html) and [toSnakeCaseKeys](https://es-toolkit.slash.page/reference/object/toSnakeCaseKeys.html).
+
+We sincerely thank @chldmsqls34, @umsungjun, @raon0211, @dayongkr, @shren207, @oror-sine, @L2HYUNN, @D-Sketon, @ariandel-dev, @Jeong-Rae, and @beomxtone for their contributions. We appreciate your great efforts!
+
+## Version v1.36.0
+
+Released on April 24th, 2025.
+
+- Introduced compatibility functions for [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html), [partial](https://es-toolkit.slash.page/reference/function/partial.html), [partialRight](https://es-toolkit.slash.page/reference/function/partialRight.html), [forEachRight](https://es-toolkit.slash.page/reference/array/forEachRight.html), [forOwnRight](https://es-toolkit.slash.page/reference/compat/object/forOwnRight.html), [forIn](https://es-toolkit.slash.page/reference/compat/object/forIn.html), [forInRight](https://es-toolkit.slash.page/reference/compat/object/forInRight.html), [overEvery](https://es-toolkit.slash.page/reference/compat/util/overEvery.html), [hasIn](https://es-toolkit.slash.page/reference/compat/object/hasIn.html), [pullAt](https://es-toolkit.slash.page/reference/array/pullAt.html), [forOwn](https://es-toolkit.slash.page/reference/compat/object/forOwn.html), [pullAllWith](https://es-toolkit.slash.page/reference/compat/array/pullAllWith.html), [overSome](https://es-toolkit.slash.page/reference/compat/util/overSome.html), [partition](https://es-toolkit.slash.page/reference/array/partition.html), and [flatMap](https://es-toolkit.slash.page/reference/array/flatMap.html).
+- Fixed compatibility issues in [take](https://es-toolkit.slash.page/reference/array/take.html), [takeRight](https://es-toolkit.slash.page/reference/array/takeRight.html), [defaults](https://es-toolkit.slash.page/reference/compat/object/defaults.html), [repeat](https://es-toolkit.slash.page/reference/compat/string/repeat.html), and [words](https://es-toolkit.slash.page/reference/string/words.html) by adding proper guards.
+- Fixed [throttle](https://es-toolkit.slash.page/reference/function/throttle.html) behavior when both leading and trailing options are enabled.
+- Improved performance for [find](https://es-toolkit.slash.page/reference/compat/array/find.html) by removing unnecessary slice operations.
+- Enhanced performance of [toPairs](https://es-toolkit.slash.page/reference/compat/object/toPairs.html) by pre-allocating arrays and using iterator values.
+- Simplified implementation and aligned types with Lodash for [partition](https://es-toolkit.slash.page/reference/array/partition.html).
+
+We sincerely thank @D-Sketon, @raon0211, @dayongkr, @minjongbaek, @seungrodotlee, @mass2527, @uniqueeest, @leehj322, @cruelladevil, @shren207, and @ssi02014 for their contributions. We appreciate your great efforts!
+
 ## Version v1.35.0
 
 Released on April 16th, 2025.

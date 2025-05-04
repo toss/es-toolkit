@@ -3,18 +3,25 @@ description:
 globs: **/*.md
 alwaysApply: false
 ---
----
-description: es-toolkit Documentation Guidelines
-globs: **/*.md
----
-
 - Provide documentation in English (docs), Korean (docs/ko), Japanese (docs/ja), and Simplified Chinese (docs/zh_hans).
 - For functions in `src/compat`, create docs within each compat folder. If original documentation already exists (e.g., `docs/reference/object/create.md` for `src/compat/object/create.ts`), no additional docs are required.
 - Write Korean documentation in polite conversational tone ("해요체").
+- Always translate these terms consistently for each language:
+
+| English   | Korean       | Japanese       | zh_hans   |
+|-----------|--------------|----------------|-----------|
+| Signature | 인터페이스   | インターフェース | 签名      |
+| Parameters| 파라미터     | パラメータ       | 参数      |
+| Returns   | 반환 값      | 戻り値          | 返回值     |
+| Examples  | 예시         | 例             | 示例       |
+
 
 ## Reference Documentation Template
 
-```md
+Always follow the below template
+
+--- TEMPLATE START ---
+
 # [Function Name]
 
 [If this documentation is for compat, add this section:
@@ -43,7 +50,7 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 ::: info
 出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](mdc:../../../compatibility.md)。
 :::
 ]
 ]
@@ -70,13 +77,5 @@ Insert the function signature(s), including overrides if applicable.
 Insert content from jsdoc @example
 ```
 
-- Always translate these terms consistently for each language:
-
-| English   | Korean       | Japanese       | zh_hans   |
-|-----------|--------------|----------------|-----------|
-| Signature | 인터페이스   | インターフェース | 签名      |
-| Parameters| 파라미터     | パラメータ       | 参数      |
-| Returns   | 반환 값      | 戻り値          | 返回值     |
-| Examples  | 예시         | 例             | 示例       |
-
+--- TEMPLATE END ---
 

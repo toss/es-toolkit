@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { throttle } from './throttle';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -329,5 +329,23 @@ describe('throttle', () => {
 
     await delay(64);
     expect(callCount).toBe(0);
+  });
+
+  it('should invoke the function immediately if wait is 0', () => {
+    const fn = vi.fn();
+
+    const throttled = throttle(fn, 0, { leading: true, trailing: true });
+
+    throttled();
+    expect(fn).toHaveBeenCalledTimes(1);
+
+    throttled();
+    expect(fn).toHaveBeenCalledTimes(2);
+
+    throttled();
+    expect(fn).toHaveBeenCalledTimes(3);
+
+    throttled();
+    expect(fn).toHaveBeenCalledTimes(4);
   });
 });

@@ -48,6 +48,17 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 
 </details>
 
+<details>
+<summary>
+2. Prefer built-in JavaScript functions and operators.
+</summary>
+
+We prefer using built-in JavaScript functions, methods, or operators like `Array.isArray()`, `typeof value === 'string'`, and `Number.isNaN()`. Avoid using custom functions such as `isArray()`, `isString()`, or `isNaN()` from `es-toolkit` or other libraries.
+
+This helps keep the code more concise, eliminates unnecessary function calls, and reduces coupling between functions.
+
+</details>
+
 ### 1.3 Documentation
 
 All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
