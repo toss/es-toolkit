@@ -41,4 +41,11 @@ describe('maxBy', () => {
     const actual = maxBy([object, { a: value }], obj => obj.a);
     expect(actual).toBe(object);
   });
+
+  it('should handle null and undefined values', () => {
+    // @ts-expect-error - null is not an array
+    expect(maxBy(null)).toBe(undefined);
+    // @ts-expect-error - undefined is not an array
+    expect(maxBy(undefined)).toBe(undefined);
+  });
 });
