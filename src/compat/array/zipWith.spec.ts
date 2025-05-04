@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { map } from './map';
 import { zip } from './zip';
 import { zipWith } from './zipWith';
+import { identity } from '../compat';
 import { constant } from '../util/constant';
 
 describe('zipWith', () => {
@@ -38,5 +39,15 @@ describe('zipWith', () => {
     const actual = map(values, (value, index) => (index ? zipWith(array1, array2, value) : zipWith(array1, array2)));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should handle null and undefined values', () => {
+    expect(zipWith(null)).toEqual([]);
+    expect(zipWith(undefined)).toEqual([]);
+    expect(zipWith()).toEqual([]);
+  });
+
+  it('should return an empty array when no arrays are provided', () => {
+    expect(zipWith(identity)).toEqual([]);
   });
 });

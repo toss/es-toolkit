@@ -63,4 +63,11 @@ describe('defaults', () => {
     expected = esToolkit.clone(object);
     expect(defaults({}, object, source)).toEqual(expected);
   });
+
+  it('should be used as a iteratee', () => {
+    const array = [{ b: 1 }, { c: 2 }, { d: 3 }];
+    const source = { a: 4 };
+    array.forEach((...args: any[]) => defaults(source, ...args));
+    expect(source).toEqual({ a: 4, b: 1, c: 2, d: 3 });
+  });
 });

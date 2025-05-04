@@ -3,6 +3,8 @@ import { forEachRight } from './forEachRight';
 import { includes } from './includes';
 import { map } from './map';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
+import { identity } from '../compat';
+import { isArray } from '../predicate/isArray';
 import { stubTrue } from '../util/stubTrue';
 
 describe('forEachRight', () => {
@@ -120,5 +122,40 @@ describe('forEachRight', () => {
     });
 
     expect(count).toBe(1);
+  });
+
+  it(`can exit early when iterating arrays`, () => {
+    const array = [1, 2, 3];
+    const values: any[] = [];
+
+    forEachRight(array, (value, other) => {
+      values.push(isArray(value) ? other : value);
+      return false;
+    });
+
+    expect(values).toEqual([3]);
+  });
+
+  it(`can exit early when iterating objects`, () => {
+    const object = { a: 1, b: 2, c: 3 };
+    const values: any[] = [];
+
+    forEachRight(object, (value, other) => {
+      values.push(isArray(value) ? other : value);
+      return false;
+    });
+
+    expect(values.length).toBe(1);
+  });
+
+  it('should return the input collection if null or undefined is passed', () => {
+    const nullValue = null;
+    const undefinedValue = undefined;
+
+    const resultForNull = forEachRight(nullValue, identity);
+    const resultForUndefined = forEachRight(undefinedValue, identity);
+
+    expect(resultForNull).toBe(null);
+    expect(resultForUndefined).toBe(undefined);
   });
 });
