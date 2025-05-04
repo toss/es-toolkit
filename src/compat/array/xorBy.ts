@@ -3,9 +3,9 @@ import { intersectionBy } from './intersectionBy.ts';
 import { last } from './last.ts';
 import { unionBy } from './unionBy.ts';
 import { windowed } from '../../array/windowed.ts';
-import { identity } from '../../function/identity';
+import { identity } from '../../function/identity.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
-import { iteratee } from '../util/iteratee';
+import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Creates an array of unique values that is the symmetric difference of the given arrays after applying the iteratee function to each element.
