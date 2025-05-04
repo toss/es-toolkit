@@ -2,24 +2,25 @@ import { updateWith } from './updateWith.ts';
 
 /**
  * Sets the value at the specified path of the given object using a customizer function.
- * If any part of the path does not exist, it will be created.
- * If `customizer` returns `undefined`, path creation is handled by the method instead.
- * The `customizer` is invoked with three arguments: (nsValue, key, nsObject).
+ * If any part of the path does not exist, it will be created based on the customizer's result.
  *
- * **Note:** This method mutates `object`.
+ * The customizer is invoked to produce the objects of the path. If the customizer returns
+ * a value, that value is used for the current path segment. If the customizer returns
+ * `undefined`, the method will create an appropriate object based on the path - an array
+ * if the next path segment is a valid array index, or an object otherwise.
  *
  * @template T - The type of the object.
  * @param {T} obj - The object to modify.
- * @param {PropertyKey | PropertyKey[]} path - The path of the property to set.
+ * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to set.
  * @param {unknown} value - The value to set.
- * @param {(value: unknown) => unknown} [customizer] - The function to customize path creation.
+ * @param {(value: unknown) => unknown} [customizer] - The function to customize assigned values.
  * @returns {T} - The modified object.
  *
  * @example
- * // Set a value in a nested array with customizer
- * const obj = {};
- * setWith(obj, '[0][1]', 'a', Object);
- * console.log(obj); // { '0': { '1': 'a' } }
+ * // Set a value with a customizer that creates arrays for numeric path segments
+ * const object = {};
+ * setWith(object, '[0][1]', 'a', (value) => Array.isArray(value) ? value : []);
+ * // => { '0': ['a'] }
  */
 export function setWith<T extends object | null | undefined>(
   obj: T,

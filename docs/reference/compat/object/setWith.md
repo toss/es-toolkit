@@ -6,9 +6,15 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Sets the value at the specified path of the given object using a customizer function for path creation. This method is similar to `set` except that it accepts a customizer for creating nested objects.
+Sets the value at the specified path of the given object using a `customizer` function.
+If any part of the path does not exist, it will be created based on the `customizer`'s result.
 
-If the customizer returns `undefined`, path creation is handled by the method instead. The customizer is invoked with three arguments: (nsValue, key, nsObject).
+This method is similar to [set](./set.md) except that it accepts a `customizer` for creating nested objects.
+
+The `customizer` is invoked to produce the objects of the path. If the `customizer` returns
+a value, that value is used for the current path segment. If the `customizer` returns
+`undefined`, the method will create an appropriate object based on the path - an array
+if the next path segment is a valid array index, or an object otherwise.
 
 ## Signature
 
