@@ -1,3 +1,19 @@
+const functionToString = Function.prototype.toString;
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+const REGEXP_SYNTAX_CHARS = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to detect if a method is native. */
+const IS_NATIVE_FUNCTION_REGEXP = RegExp(
+  `^${functionToString
+    .call(Object.prototype.hasOwnProperty)
+    .replace(REGEXP_SYNTAX_CHARS, '\\$&')
+    .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?')}$`
+);
+
 /**
  * Checks if a given value is a native function.
  *
@@ -13,14 +29,14 @@
  * const result1 = isNative(value1); // true
  * const result2 = isNative(value2); // false
  */
-export function isNative(value: unknown): boolean {
-  if (value == null) {
-    return false;
-  }
-
+export function isNative(value?: unknown): boolean {
   if (typeof value !== 'function') {
     return false;
   }
 
-  return /\[native code\]/.test(Function.prototype.toString.call(value));
+  if ((globalThis as any)?.['__core-js_shared__'] != null) {
+    throw new Error('Unsupported core-js use. Try https://npms.io/search?q=ponyfill.');
+  }
+
+  return IS_NATIVE_FUNCTION_REGEXP.test(functionToString.call(value));
 }
