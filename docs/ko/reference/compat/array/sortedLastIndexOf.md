@@ -22,8 +22,8 @@ function sortedLastIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T):
 
 ### 파라미터
 
-* `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 배열이 null 또는 undefined일 경우 `-1`을 리턴해요.
-* `value` (`T`): 정렬된 배열 속 비교를 통해 찾으려는 값.
+- `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 배열이 null 또는 undefined일 경우 `-1`을 리턴해요.
+- `value` (`T`): 정렬된 배열 속 비교를 통해 찾으려는 값.
 
 ### 반환 값
 
@@ -32,26 +32,26 @@ function sortedLastIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T):
 ## 예시
 
 ```typescript
-import { sortedLastIndexOf } from 'es-toolkit/compat'; 
+import { sortedLastIndexOf } from 'es-toolkit/compat';
 
-const numbers = [1, 2, 3, 4, 5]; 
+const numbers = [1, 2, 3, 4, 5];
 sortedLastIndexOf(numbers, 3); // 반환 값: 2
 sortedLastIndexOf(numbers, 6); // 반환 값: -1
 
 // 값이 중복된 경우, 마지막 값의 인덱스를 반환합니다.
-const duplicateNumbers = [1, 2, 2, 3, 3, 3, 4]; 
+const duplicateNumbers = [1, 2, 2, 3, 3, 3, 4];
 sortedLastIndexOf(duplicateNumbers, 3); // 반환 값: 5
 
 // 배열이 정렬되지 않은 경우, 잘못된 인덱스를 반환할 수 있습니다.
-const unSortedArray = [55, 33, 22, 11, 44]; 
+const unSortedArray = [55, 33, 22, 11, 44];
 sortedLastIndexOf(unSortedArray, 11); // 반환 값: -1
 
 // -0과 0은 동일하게 취급됩니다.
-const mixedZeroArray = [-0, 0]; 
+const mixedZeroArray = [-0, 0];
 sortedLastIndexOf(mixedZeroArray, 0); // 반환 값: 1
 sortedLastIndexOf(mixedZeroArray, -0); // 반환 값: 1
 
 // 배열과 유사한 객체에서도 작동합니다.
-const arrayLike = { length: 3, 0: 10, 1: 20, 2: 20 }; 
+const arrayLike = { length: 3, 0: 10, 1: 20, 2: 20 };
 sortedLastIndexOf(arrayLike, 20); // 반환 값: 2
 ```
