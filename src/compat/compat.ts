@@ -66,7 +66,7 @@ export { sortedIndexBy } from './array/sortedIndexBy.ts';
 export { sortedIndexOf } from './array/sortedIndexOf.ts';
 export { sortedLastIndex } from './array/sortedLastIndex.ts';
 export { sortedLastIndexBy } from './array/sortedLastIndexBy.ts';
-// export { sortedLastIndexOf } from './array/sortedLastIndexOf.ts';
+export { sortedLastIndexOf } from './array/sortedLastIndexOf.ts';
 // export { sortedUniq } from './array/sortedUniq.ts';
 // export { sortedUniqBy } from './array/sortedUniqBy.ts';
 export { tail } from './array/tail.ts';
