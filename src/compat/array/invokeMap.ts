@@ -1,6 +1,6 @@
-import { isFunction, isNil } from '../../predicate';
-import { get } from '../object/get';
-import { isArrayLike } from '../predicate/isArrayLike';
+import { isFunction, isNil } from '../../predicate/index.ts';
+import { get } from '../object/get.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
  * Invokes the method at `path` of each element in `collection`, returning
