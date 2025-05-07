@@ -1,12 +1,39 @@
-// export function memoize<T extends (...args: any[]) => any>(fn: T, resolver?: (...args: Parameters<T>) => string): T {}
-export function memoize(func, resolver) {
+interface MapCacheConstructor {
+  new (): MapCache;
+}
+
+interface MemoizedFunction<T extends (...args: any) => any> {
+  (...args: Parameters<T>): ReturnType<T>;
+  cache: MapCache;
+}
+
+type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) => any ? P : never;
+
+export interface MemoizeFunction {
+  <T extends (...args: any) => any>(func: T, resolver?: (...args: Parameters<T>) => any): MemoizedFunction<T>;
+  Cache: MapCacheConstructor;
+}
+
+/**
+ * Creates a function that memoizes the result of func. If resolver is provided it determines the cache key for
+ * storing the result based on the arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is coerced to a string and used as the cache key. The func is invoked with
+ * the this binding of the memoized function.
+ *
+ * @param func The function to have its output memoized.
+ * @param resolver The function to resolve the cache key.
+ * @return Returns the new memoizing function.
+ */
+function memoizeImpl<T extends (...args: any) => any>(
+  func: T,
+  resolver?: (...args: Parameters<T>) => any
+): MemoizedFunction<T> {
   if (typeof func !== 'function' || (resolver != null && typeof resolver !== 'function')) {
     throw new TypeError('Expected a function');
   }
 
-  const memoized = function () {
-    const args = arguments,
-      key = resolver ? resolver.apply(this, args) : args[0],
+  const memoized = function (this: any, ...args: Parameters<T>) {
+    const key = resolver ? resolver.apply(this, args) : args[0],
       cache = memoized.cache;
 
     if (cache.has(key)) {
@@ -15,14 +42,18 @@ export function memoize(func, resolver) {
     const result = func.apply(this, args);
     memoized.cache = cache.set(key, result) || cache;
     return result;
-  };
+  } as MemoizedFunction<T>;
 
-  memoized.cache = new (memoize.Cache || MapCache)();
+  const CacheConstructor = memoizeImpl.Cache || MapCache;
+  memoized.cache = new CacheConstructor();
   return memoized;
 }
 
-// Expose `MapCache`.
-memoize.Cache = MapCache;
+// Cache 속성 할당
+memoizeImpl.Cache = MapCache as unknown as MapCacheConstructor;
+
+// 최종 export 할당
+export const memoize: MemoizeFunction = memoizeImpl;
 
 /**
  * Checks if `value` is suitable for use as unique object key.
@@ -38,15 +69,50 @@ function isKeyable(value: unknown) {
     : value === null;
 }
 
-// 캐시 객체의 인터페이스 정의
-interface MapCache {
+/**
+ * Creates a cache object to store key/value pairs.
+ */
+interface MapCache extends MapCacheConstructor {
+  /**
+   * The size of the map cache.
+   */
   size: number;
+
+  /**
+   * The internal data structure.
+   */
   __data__: any;
-  clear(): void;
-  delete(key: unknown): boolean;
-  get(key: unknown): unknown;
-  has(key: unknown): boolean;
-  set(key: unknown, value: unknown): any;
+
+  /**
+   * Removes all key-value entries from the map.
+   */
+  clear?: (() => void) | undefined;
+
+  /**
+   * Removes `key` and its value from the cache.
+   * @param key The key of the value to remove.
+   * @return Returns `true` if the entry was removed successfully, else `false`.
+   */
+  delete(key: any): boolean;
+  /**
+   * Gets the cached value for `key`.
+   * @param key The key of the value to get.
+   * @return Returns the cached value.
+   */
+  get(key: any): any;
+  /**
+   * Checks if a cached value for `key` exists.
+   * @param key The key of the entry to check.
+   * @return Returns `true` if an entry for `key` exists, else `false`.
+   */
+  has(key: any): boolean;
+  /**
+   * Sets `value` to `key` of the cache.
+   * @param key The key of the value to cache.
+   * @param value The value to cache.
+   * @return Returns the cache object.
+   */
+  set(key: any, value: any): this;
 }
 
 /**
@@ -60,7 +126,7 @@ function MapCache(this: MapCache, entries: Array<[unknown, unknown]> = []) {
   let index = -1;
   const length = entries == null ? 0 : entries.length;
 
-  this.clear();
+  this.clear?.();
   while (++index < length) {
     const entry = entries[index];
     this.set(entry[0], entry[1]);
@@ -77,9 +143,9 @@ function MapCache(this: MapCache, entries: Array<[unknown, unknown]> = []) {
 function mapCacheClear(this: MapCache) {
   this.size = 0;
   this.__data__ = {
-    hash: new Hash(),
-    map: new (Map || ListCache)(),
-    string: new Hash(),
+    hash: new (Hash as any)(),
+    map: new ((Map || ListCache) as any)(),
+    string: new (Hash as any)(),
   };
 }
 
@@ -91,7 +157,7 @@ function mapCacheClear(this: MapCache) {
  * @param {string} key The reference key.
  * @returns {*} Returns the map data.
  */
-function getMapData(map, key) {
+function getMapData(map: MapCache, key: any) {
   const data = map.__data__;
   return isKeyable(key) ? data[typeof key === 'string' ? 'string' : 'hash'] : data.map;
 }
@@ -105,7 +171,7 @@ function getMapData(map, key) {
  * @param {string} key The key of the value to remove.
  * @returns {boolean} Returns `true` if the entry was removed, else `false`.
  */
-function mapCacheDelete(this: MapCache, key) {
+function mapCacheDelete(this: MapCache, key: any) {
   const result = getMapData(this, key)['delete'](key);
   this.size -= result ? 1 : 0;
   return result;
@@ -120,7 +186,7 @@ function mapCacheDelete(this: MapCache, key) {
  * @param {string} key The key of the value to get.
  * @returns {*} Returns the entry value.
  */
-function mapCacheGet(this: MapCache, key) {
+function mapCacheGet(this: MapCache, key: any) {
   return getMapData(this, key).get(key);
 }
 
@@ -133,7 +199,7 @@ function mapCacheGet(this: MapCache, key) {
  * @param {string} key The key of the entry to check.
  * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
  */
-function mapCacheHas(this: MapCache, key) {
+function mapCacheHas(this: MapCache, key: any) {
   return getMapData(this, key).has(key);
 }
 
@@ -147,7 +213,7 @@ function mapCacheHas(this: MapCache, key) {
  * @param {*} value The value to set.
  * @returns {Object} Returns the map cache instance.
  */
-function mapCacheSet(this: MapCache, key, value) {
+function mapCacheSet(this: MapCache, key: any, value: any) {
   const data = getMapData(this, key),
     size = data.size;
 
@@ -215,7 +281,7 @@ function hashClear(this: Hash): void {
  * @returns {boolean} Returns `true` if the entry was removed, else `false`.
  */
 function hashDelete(this: Hash, key: unknown): boolean {
-  const result = this.has(key) && delete this.__data__[key];
+  const result = this.has(key) && delete this.__data__[key as string];
   this.size -= result ? 1 : 0;
   return result;
 }
@@ -235,11 +301,12 @@ const hasOwnProperty = Object.prototype.hasOwnProperty;
  */
 function hashGet(this: Hash, key: unknown): unknown {
   const data = this.__data__;
+
   // if (nativeCreate) {
   //   const result = data[key];
   //   return result === '__lodash_hash_undefined__' ? undefined : result;
   // }
-  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+  return hasOwnProperty.call(data, key as PropertyKey) ? data[key as string] : undefined;
 }
 
 /**
@@ -254,7 +321,7 @@ function hashGet(this: Hash, key: unknown): unknown {
 function hashHas(this: Hash, key: unknown): boolean {
   const data = this.__data__;
   // return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
-  return hasOwnProperty.call(data, key);
+  return hasOwnProperty.call(data, key as PropertyKey);
 }
 
 /**
@@ -271,7 +338,7 @@ function hashSet(this: Hash, key: unknown, value: unknown): Hash {
   const data = this.__data__;
   this.size += this.has(key) ? 0 : 1;
   // data[key] = nativeCreate && value === undefined ? '__lodash_hash_undefined__' : value;
-  data[key] = value === undefined ? '__lodash_hash_undefined__' : value;
+  data[key as string] = value === undefined ? '__lodash_hash_undefined__' : value;
   return this;
 }
 
@@ -440,7 +507,7 @@ ListCache.prototype.set = listCacheSet;
  * _.eq(NaN, NaN);
  * // => true
  */
-function eq(value, other) {
+function eq(value: unknown, other: unknown): boolean {
   return value === other || (value !== value && other !== other);
 }
 
@@ -452,7 +519,7 @@ function eq(value, other) {
  * @param {*} key The key to search for.
  * @returns {number} Returns the index of the matched value, else `-1`.
  */
-function assocIndexOf(array, key) {
+function assocIndexOf(array: Array<[unknown, unknown]>, key: unknown): number {
   let length = array.length;
   while (length--) {
     if (eq(array[length][0], key)) {
