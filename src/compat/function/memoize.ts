@@ -1,4 +1,4 @@
-import { eq } from '../util/eq';
+import { eq } from '../util/eq.ts';
 
 /**
  * A simple hash table implementation for caching with string keys.
