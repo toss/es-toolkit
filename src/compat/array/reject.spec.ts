@@ -149,4 +149,11 @@ describe('reject', () => {
 
     expect(actual).toEqual([0]);
   });
+
+  it('should handle sparse arrays correctly', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const sparseArray = [1, , 3, , 5] as any[];
+
+    expect(reject(sparseArray, value => value > 2)).toEqual([1, undefined, undefined]);
+  });
 });

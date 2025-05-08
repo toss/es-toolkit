@@ -181,4 +181,12 @@ describe('some', () => {
     expect(some('123', value => value === '3')).toBe(true);
     expect(some(args, value => value === 1)).toBe(true);
   });
+
+  it('should handle sparse arrays correctly', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const sparseArray = [1, , 3, , 5] as any[];
+
+    expect(some(sparseArray, value => value > 0)).toEqual(true);
+    expect(some(sparseArray, value => value === undefined)).toEqual(true);
+  });
 });
