@@ -35,7 +35,7 @@ export { initial } from './array/initial.ts';
 export { intersection } from './array/intersection.ts';
 export { intersectionBy } from './array/intersectionBy.ts';
 export { intersectionWith } from './array/intersectionWith.ts';
-// export { invokeMap } from './array/invokeMap.ts';
+export { invokeMap } from './array/invokeMap.ts';
 export { join } from './array/join.ts';
 export { keyBy } from './array/keyBy.ts';
 export { last } from './array/last.ts';
