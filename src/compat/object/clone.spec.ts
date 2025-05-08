@@ -177,6 +177,15 @@ describe('clone', () => {
     expect(actual).toBe(object);
   });
 
+  it('should clone string objects', () => {
+    const object = Object('a');
+
+    const actual = clone(object);
+
+    expect(actual).toEqual(object);
+    expect(actual).not.toBe(object);
+  });
+  
   it('should clone undefined values', () => {
     const object = undefined;
 
