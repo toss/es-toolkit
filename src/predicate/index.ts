@@ -21,6 +21,7 @@ export { isPlainObject } from './isPlainObject.ts';
 export { isPrimitive } from './isPrimitive.ts';
 export { isPromise } from './isPromise.ts';
 export { isRegExp } from './isRegExp.ts';
+export { isSemver } from './isSemver.ts';
 export { isSet } from './isSet.ts';
 export { isString } from './isString.ts';
 export { isSymbol } from './isSymbol.ts';
