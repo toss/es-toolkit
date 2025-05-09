@@ -4,7 +4,7 @@ import lodashFp from 'lodash/fp';
 
 const toCamelCaseKeysToolkit = toCamelCaseKeysToolkit_;
 
-const toCamelCaseKeysLodashFp = <T extends Record<string, any>>(obj: T) => {
+const toCamelCaseKeysWithLodashFp = <T extends Record<string, any>>(obj: T) => {
   return lodashFp.mapKeys(lodashFp.camelCase)(obj);
 };
 
@@ -32,6 +32,6 @@ describe('toCamelCaseKeys', () => {
   });
 
   bench('lodash/fp/toCamelCaseKeys (shallow comparison)', () => {
-    toCamelCaseKeysLodashFp(testObject);
+    toCamelCaseKeysWithLodashFp(testObject);
   });
 });
