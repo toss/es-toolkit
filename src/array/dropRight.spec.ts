@@ -19,4 +19,12 @@ describe('dropRight', () => {
   it('should return empty array if itemsCount >= arr.length', () => {
     expect(dropRight([1.2, 2.3, 3.4], 4)).toEqual([]);
   });
+
+  it('should correctly handle edge cases with very large numbers', () => {
+    expect(dropRight([1, 2, 3], Number.MAX_SAFE_INTEGER)).toEqual([]);
+  });
+
+  it('should handle NaN values as 0', () => {
+    expect(dropRight([1, 2, 3], Number.NaN)).toEqual([1, 2, 3]);
+  });
 });
