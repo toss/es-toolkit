@@ -15,11 +15,7 @@
 ## 인터페이스
 
 ```typescript
-function result(
-  object: any,
-  path: PropertyKey | PropertyKey[],
-  defaultValue?: any | ((...args: any[]) => any)
-): any;
+function result(object: any, path: PropertyKey | PropertyKey[], defaultValue?: any | ((...args: any[]) => any)): any;
 ```
 
 ### 파라미터

@@ -9,6 +9,7 @@
 このプロセスでは、元の関数の実行前後に `wrapper` 関数で定義された追加のロジックを適用できます。
 
 関数の代わりに値 `value` が提供された場合、この値は `wrapper` 関数の最初の引数として渡されます。
+
 ## インターフェース
 
 ```typescript
@@ -16,10 +17,7 @@ function wrap<F extends (...args: unknown[]) => unknown>(
   func: F,
   wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
 ): F;
-function wrap<T, A extends unknown[], R>(
-  value: T,
-  wrapper: (value: T, ...args: A) => R
-): (...args: A) => R;
+function wrap<T, A extends unknown[], R>(value: T, wrapper: (value: T, ...args: A) => R): (...args: A) => R;
 ```
 
 ## 例
