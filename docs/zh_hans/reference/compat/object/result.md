@@ -15,11 +15,7 @@
 ## 签名
 
 ```typescript
-function result(
-  object: any,
-  path: PropertyKey | PropertyKey[],
-  defaultValue?: any | ((...args: any[]) => any)
-): any;
+function result(object: any, path: PropertyKey | PropertyKey[], defaultValue?: any | ((...args: any[]) => any)): any;
 ```
 
 ### 参数
