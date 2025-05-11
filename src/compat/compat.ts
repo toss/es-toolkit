@@ -35,7 +35,7 @@ export { initial } from './array/initial.ts';
 export { intersection } from './array/intersection.ts';
 export { intersectionBy } from './array/intersectionBy.ts';
 export { intersectionWith } from './array/intersectionWith.ts';
-// export { invokeMap } from './array/invokeMap.ts';
+export { invokeMap } from './array/invokeMap.ts';
 export { join } from './array/join.ts';
 export { keyBy } from './array/keyBy.ts';
 export { last } from './array/last.ts';
@@ -66,7 +66,7 @@ export { sortedIndexBy } from './array/sortedIndexBy.ts';
 export { sortedIndexOf } from './array/sortedIndexOf.ts';
 export { sortedLastIndex } from './array/sortedLastIndex.ts';
 export { sortedLastIndexBy } from './array/sortedLastIndexBy.ts';
-// export { sortedLastIndexOf } from './array/sortedLastIndexOf.ts';
+export { sortedLastIndexOf } from './array/sortedLastIndexOf.ts';
 // export { sortedUniq } from './array/sortedUniq.ts';
 // export { sortedUniqBy } from './array/sortedUniqBy.ts';
 export { tail } from './array/tail.ts';
@@ -150,12 +150,10 @@ export { assignInWith } from './object/assignInWith.ts';
 export { assignInWith as extendWith } from './object/assignInWith.ts';
 export { assignWith } from './object/assignWith.ts';
 export { at } from './object/at.ts';
-// FIXME: Replace with compat version
-export { clone } from '../object/clone.ts';
+export { clone } from './object/clone.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { cloneDeepWith } from './object/cloneDeepWith.ts';
-// FIXME: Replace with compat version
-// export { cloneWith } from './object/cloneWith.ts';
+export { cloneWith } from './object/cloneWith.ts';
 // FIXME: Replace with compat version
 // export { countBy } from './object/countBy.ts';
 export { create } from './object/create.ts';
