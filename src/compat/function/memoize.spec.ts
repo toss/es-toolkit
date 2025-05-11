@@ -192,4 +192,53 @@ describe('memoize', () => {
 
     memoize.Cache = oldCache;
   });
+
+  it('should use Map as the default cache when memoize.Cache is not specified', () => {
+    const oldCache = memoize.Cache;
+    // @ts-expect-error - Intentionally setting to null to test default behavior
+    memoize.Cache = null;
+
+    const memoized = memoize(identity);
+
+    expect(memoized.cache instanceof Map).toBe(true);
+
+    const key = 'test-key';
+    memoized(key);
+    expect(memoized.cache.has(key)).toBe(true);
+    expect(memoized.cache.get(key)).toBe(key);
+
+    memoize.Cache = oldCache;
+  });
+
+  it('should handle cache.set() not returning a value', () => {
+    class NonReturningCache {
+      data: Record<string, any> = {};
+
+      get(key: any) {
+        return this.data[key];
+      }
+
+      has(key: any) {
+        return key in this.data;
+      }
+
+      set(key: any, value: any) {
+        this.data[key] = value;
+        // Intentionally not returning anything
+      }
+    }
+
+    const oldCache = memoize.Cache;
+    memoize.Cache = NonReturningCache as any;
+
+    const memoized = memoize(identity);
+    const originalCache = memoized.cache;
+
+    memoized('a');
+    expect(memoized.cache).toBe(originalCache);
+    expect(memoized.cache.has('a')).toBe(true);
+    expect(memoized.cache.get('a')).toBe('a');
+
+    memoize.Cache = oldCache;
+  });
 });
