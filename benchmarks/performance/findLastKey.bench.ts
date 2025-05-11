@@ -1,7 +1,6 @@
 import { bench, describe } from 'vitest';
 import { findLastKey as findLastKeyLodash } from 'lodash';
-// import { findLastKey as findLastKeyCompatToolkit } from 'es-toolkit/compat';
-import { findLastKey as findLastKeyCompatToolkit } from '../../src/compat/object/findLastKey';
+import { findLastKey as findLastKeyCompatToolkit } from 'es-toolkit/compat';
 
 describe('findLastKey', () => {
   const users = {
