@@ -17,20 +17,11 @@ function findLastKey<T extends Record<any, any>>(
   predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
 ): keyof T | undefined;
 
-function findLastKey<T extends Record<any, any>>(
-  obj: T,
-  objectToFind: Partial<T[keyof T]>
-): keyof T | undefined;
+function findLastKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
 
-function findLastKey<T extends Record<any, any>>(
-  obj: T,
-  propertyToFind: [keyof T[keyof T], any]
-): keyof T | undefined;
+function findLastKey<T extends Record<any, any>>(obj: T, propertyToFind: [keyof T[keyof T], any]): keyof T | undefined;
 
-function findLastKey<T extends Record<any, any>>(
-  obj: T,
-  propertyToFind: keyof T[keyof T]
-): keyof T | undefined;
+function findLastKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
 ```
 
 ### パラメータ
