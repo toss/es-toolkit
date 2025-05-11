@@ -6,22 +6,16 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-
 オブジェクトの指定されたパスから値を取得します。
 
 [get](./get.md) 関数と基本的な動作は同じですが、値を探す過程で関数に遭遇した場合、その関数を呼び出しながら進みます。
 
 見つかった値が`undefined`の場合、デフォルト値を返し、デフォルト値が関数であればその関数を呼び出します。
 
-
 ## インターフェース
 
 ```typescript
-function result(
-  object: any,
-  path: PropertyKey | PropertyKey[],
-  defaultValue?: any | ((...args: any[]) => any)
-): any;
+function result(object: any, path: PropertyKey | PropertyKey[], defaultValue?: any | ((...args: any[]) => any)): any;
 ```
 
 ### パラメータ
