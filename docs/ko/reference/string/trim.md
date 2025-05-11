@@ -15,7 +15,7 @@ function trim(str: string, chars?: string | string[]): string;
 
 ### 반환 값
 
-(`string`): 지정된 문자가 제거된 후의 결과 문자열입니다요.
+(`string`): 지정된 문자가 제거된 후의 결과 문자열입니다.
 
 ## 예시
 
