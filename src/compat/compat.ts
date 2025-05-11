@@ -105,8 +105,7 @@ export { delay } from './function/delay.ts';
 export { flip } from './function/flip.ts';
 export { flow } from './function/flow.ts';
 export { flowRight } from './function/flowRight.ts';
-// FIXME: Replace with compat version
-export { memoize } from '../function/memoize.ts';
+export { memoize } from './function/memoize.ts';
 export { negate } from './function/negate.ts';
 export { nthArg } from './function/nthArg.ts';
 // FIXME: Replace with compat version
