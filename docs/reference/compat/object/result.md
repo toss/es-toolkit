@@ -15,11 +15,7 @@ If the resolved value is `undefined`, it returns the default value. If the defau
 ## Signature
 
 ```typescript
-function result(
-  object: any,
-  path: PropertyKey | PropertyKey[],
-  defaultValue?: any | ((...args: any[]) => any)
-): any;
+function result(object: any, path: PropertyKey | PropertyKey[], defaultValue?: any | ((...args: any[]) => any)): any;
 ```
 
 ### Parameters

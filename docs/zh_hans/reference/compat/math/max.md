@@ -16,16 +16,16 @@
 ```typescript
 function max<T>(items: [T, ...T[]]): T;
 function max(): undefined;
-function max<T>(items?: T[]): T | undefined;
+function max<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### 参数
 
-- `items` (`T[]`): 要搜索的元素数组。
+- `items` (`ArrayLike<T> | null | undefined`): 要搜索的元素数组。
 
 ### 返回
 
-(`T`): 具有最大值的元素。
+(`T | undefined`): 具有最大值的元素。如果数组为空、`null` 或 `undefined`，则返回 `undefined`。
 
 ### 示例
 

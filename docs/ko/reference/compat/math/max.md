@@ -15,16 +15,16 @@
 ```typescript
 function max<T>(items: [T, ...T[]]): T;
 function max(): undefined;
-function max<T>(items?: T[]): T | undefined;
+function max<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### 파라미터
 
-- `items` (`T[]`): 최댓값을 가지는 요소를 찾을 배열이에요.
+- `items` (`ArrayLike<T> | null | undefined`): 최댓값을 가지는 요소를 찾을 배열이에요.
 
 ### 반환 값
 
-(`T`): 배열에서 최댓값을 가지는 요소. 배열이 비어 있다면 `undefined`를 반환해요.
+(`T | undefined`): 배열에서 최댓값을 가지는 요소. 배열이 비어 있거나, `null`, 또는 `undefined`인 경우 `undefined`를 반환해요.
 
 ## 예시
 

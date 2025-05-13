@@ -13,17 +13,16 @@
 ```typescript
 function min<T>(items: [T, ...T[]]): T;
 function min(): undefined;
-function min<T>(items?: T[]): T | undefined;
-function min<T>(items: T[]): T;
+function min<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### 파라미터
 
-- `items` (`T[]`): 검색할 요소의 배열. 기본값은 빈 배열이에요.
+- `items` (`readonly [T, ...T[]]` 또는 `ArrayLike<T> | null | undefined`): 검색할 요소의 배열.
 
 ### 반환 값
 
-(`T`): 배열에서 최솟값을 가지는 요소. 배열이 비어 있다면 `undefined`를 반환해요.
+(`T | undefined`): 배열에서 최솟값을 가지는 요소. 배열이 비어 있거나, `null`, 또는 `undefined`인 경우 `undefined`를 반환해요.
 
 ## 예시
 
