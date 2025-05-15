@@ -214,7 +214,7 @@ export { updateWith } from './object/updateWith.ts';
 export { values } from './object/values.ts';
 export { valuesIn } from './object/valuesIn.ts';
 
-// export { bindAll } from './util/bindAll.ts';
+export { bindAll } from './util/bindAll.ts';
 // FIXME: Replace with compat version
 export { capitalize } from '../string/capitalize.ts';
 export { conforms } from './predicate/conforms.ts';

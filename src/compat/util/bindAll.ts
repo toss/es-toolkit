@@ -28,10 +28,7 @@ import { toString } from '../util/toString.ts';
  * bindAll(view, 'click');
  * // => Same as above
  */
-export function bindAll(
-  object: Record<string, any>,
-  ...methodNames: Array<string | string[] | number | IArguments>
-): Record<string, any> {
+export function bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T {
   if (object == null) {
     return object;
   }
@@ -62,11 +59,11 @@ export function bindAll(
 
   for (let i = 0; i < methods.length; i++) {
     const key = methods[i];
-    const stringKey = toString(key);
+    const stringKey = toString(key) as keyof typeof object;
     const func = object[stringKey];
 
     if (isFunction(func)) {
-      object[stringKey] = func.bind(object);
+      object[stringKey] = func.bind(object) as any;
     }
   }
 
