@@ -203,7 +203,7 @@ export { property } from './object/property.ts';
 export { propertyOf } from './object/propertyOf.ts';
 export { result } from './object/result.ts';
 export { set } from './object/set.ts';
-// export { setWith } from './object/setWith.ts';
+export { setWith } from './object/setWith.ts';
 export { toDefaulted } from './object/toDefaulted.ts';
 export { toPairs } from './object/toPairs.ts';
 export { toPairsIn } from './object/toPairsIn.ts';
