@@ -11,7 +11,6 @@ In this process, you can apply additional logic defined in the `wrapper` functio
 
 If a `value` is provided instead of a function, this value is passed as the first argument to the `wrapper` function.
 
-
 ## Signature
 
 ```typescript
@@ -19,10 +18,7 @@ function wrap<F extends (...args: unknown[]) => unknown>(
   func: F,
   wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
 ): F;
-function wrap<T, A extends unknown[], R>(
-  value: T,
-  wrapper: (value: T, ...args: A) => R
-): (...args: A) => R;
+function wrap<T, A extends unknown[], R>(value: T, wrapper: (value: T, ...args: A) => R): (...args: A) => R;
 ```
 
 ## Examples

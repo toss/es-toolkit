@@ -1,4 +1,3 @@
-import { isArray } from '../predicate/isArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 
@@ -170,8 +169,6 @@ export function filter<T>(
     return [];
   }
 
-  const collection = isArray(source) ? source : Object.values(source);
-
   predicate = iteratee(predicate);
 
   if (!Array.isArray(source)) {
@@ -191,5 +188,15 @@ export function filter<T>(
     return result;
   }
 
-  return collection.filter(predicate);
+  const result: T[] = [];
+  const length = source.length;
+
+  for (let i = 0; i < length; i++) {
+    const value = source[i];
+    if (predicate(value, i, source)) {
+      result.push(value);
+    }
+  }
+
+  return result;
 }

@@ -18,10 +18,7 @@ function wrap<F extends (...args: unknown[]) => unknown>(
   func: F,
   wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
 ): F;
-function wrap<T, A extends unknown[], R>(
-  value: T,
-  wrapper: (value: T, ...args: A) => R
-): (...args: A) => R;
+function wrap<T, A extends unknown[], R>(value: T, wrapper: (value: T, ...args: A) => R): (...args: A) => R;
 ```
 
 ## 示例

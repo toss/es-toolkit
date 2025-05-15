@@ -227,22 +227,55 @@ export function some<T>(
 
         return false;
       }
-      return values.some(predicate);
+
+      for (let i = 0; i < source.length; i++) {
+        if (predicate(source[i] as T, i, source)) {
+          return true;
+        }
+      }
+      return false;
     }
     case 'object': {
       if (Array.isArray(predicate) && predicate.length === 2) {
         const key = predicate[0];
         const value = predicate[1];
 
-        return values.some(matchesProperty(key, value));
+        const matchFunc = matchesProperty(key, value);
+        if (Array.isArray(source)) {
+          for (let i = 0; i < source.length; i++) {
+            if (matchFunc(source[i])) {
+              return true;
+            }
+          }
+          return false;
+        }
+        return values.some(matchFunc);
       } else {
-        return values.some(matches(predicate));
+        const matchFunc = matches(predicate);
+        if (Array.isArray(source)) {
+          for (let i = 0; i < source.length; i++) {
+            if (matchFunc(source[i])) {
+              return true;
+            }
+          }
+          return false;
+        }
+        return values.some(matchFunc);
       }
     }
     case 'number':
     case 'symbol':
     case 'string': {
-      return values.some(property(predicate));
+      const propFunc = property(predicate);
+      if (Array.isArray(source)) {
+        for (let i = 0; i < source.length; i++) {
+          if (propFunc(source[i])) {
+            return true;
+          }
+        }
+        return false;
+      }
+      return values.some(propFunc);
     }
   }
 }
