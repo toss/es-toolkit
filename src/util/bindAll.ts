@@ -29,7 +29,7 @@ export function bindAll<T extends { [key: string]: unknown }>(
 
   const bindValue = (obj: { [key: string]: unknown }, key: string) => {
     const value = obj[key];
-    if (isFunction(value)) {
+    if (typeof value === 'function') {
       obj[key] = value.bind(obj);
     }
   };
