@@ -17,7 +17,7 @@ hero:
       link: /intro
     - theme: alt
       text: Reference
-      link: /reference/array/chunk
+      link: /reference/array/at
     - theme: alt
       text: Usage
       link: /usage

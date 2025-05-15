@@ -15,7 +15,7 @@ declare let process:
  * @returns {boolean} `true` if the current environment is Node.js, otherwise `false`.
  *
  * @example
- *if (isNode()) {
+ * if (isNode()) {
  *   console.log('This is running in Node.js');
  *   const fs = import('node:fs');
  * }

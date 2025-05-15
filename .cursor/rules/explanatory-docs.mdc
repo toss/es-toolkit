@@ -1,0 +1,41 @@
+---
+description: 
+globs: **/*.md
+alwaysApply: false
+---
+---
+description: Explanatory Documentation Guidelines
+globs: **/*.md
+---
+
+# Explanatory Documentation
+
+- Provide background and context
+  - Explain why the technology emerged and what problems it solves
+  - Persuasively describe why readers should choose this technology
+- Actively use visual aids
+  - Visualize complex concepts using diagrams, flowcharts, and tables
+  - Make overall structure, data flow, or component architecture more intuitive through visual representation
+
+## Template
+
+```md
+# [Concept Name]
+
+## Introduction
+
+[Briefly explain what this concept is.]
+
+## Background
+
+[Explain why this concept emerged and what problems it solves.]
+
+## Applications
+
+[Explain how this concept is used in real projects.]
+```
+
+## Checklist
+- Is the core principle and background clearly explained?
+- Are complex concepts explained with visual aids?
+- Is prerequisite knowledge sufficiently provided?

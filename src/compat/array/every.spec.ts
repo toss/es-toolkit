@@ -158,4 +158,12 @@ describe('every', () => {
     expect(every(objects, [0, 1])).toBe(false);
     expect(every(objects, [Symbol.for('c'), 1])).toBe(true);
   });
+
+  it('should handle sparse arrays correctly', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const sparseArray = [1, , 3, , 5] as any[];
+
+    expect(every(sparseArray, value => value > 0)).toEqual(false);
+    expect(every(sparseArray, value => value === undefined)).toEqual(false);
+  });
 });

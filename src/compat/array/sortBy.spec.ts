@@ -180,4 +180,9 @@ describe('sortBy', () => {
       [1, 2, 3],
     ]);
   });
+
+  it('should compare strings with ASCII code', () => {
+    expect(sortBy(['A', 'a'])).toEqual(['A', 'a']);
+    expect(sortBy(['ABC', 'abc'])).toEqual(['ABC', 'abc']);
+  });
 });

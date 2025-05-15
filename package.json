@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.34.1",
+  "version": "1.37.2",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -201,6 +201,7 @@
   },
   "sideEffects": false,
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "prepack": "yarn build",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
     "test": "vitest --coverage --typecheck",

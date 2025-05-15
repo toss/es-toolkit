@@ -1,5 +1,5 @@
-import { sortedIndex } from './sortedIndex';
-import { eq } from '../util/eq';
+import { sortedIndex } from './sortedIndex.ts';
+import { eq } from '../util/eq.ts';
 
 /**
  * Finds the index of the first occurrence of a value in a sorted array, similar to how `Array#indexOf` works, but specifically for sorted arrays.

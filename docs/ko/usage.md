@@ -12,7 +12,7 @@ next:
 
 Node.js나 Bun을 사용하는 경우, [npm](https://npmjs.com/package/es-toolkit)에서 설치할 수 있어요. Deno에서는 [JSR](https://jsr.io/@es-toolkit/es-toolkit)에서 설치할 수 있어요.
 
-브라우저에서 바로 쓰는 경우, [CDN에서 가져올 수](#브라우저) 있어요.
+브라우저에서 바로 쓰는 경우, [CDN에서 가져올 수](#브라우저) 있어요.
 
 ## Node.js
 

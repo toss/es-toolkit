@@ -51,6 +51,6 @@ sortedIndexBy(objects, { x: 25 }, o => o.x);
 // 사용자 정의 정렬 로직 처리
 const strings = ['apple', 'banana', 'cherry'];
 sortedIndexBy(strings, 'apricot', str => str.length);
-// 반환값: 1
-// 설명: 문자열의 길이를 기준으로 'apricot'은 인덱스 1을 반환해요.
+// 반환값: 3
+// 설명: 문자열의 길이를 기준으로 'apricot'은 인덱스 3을 반환해요.
 ```
