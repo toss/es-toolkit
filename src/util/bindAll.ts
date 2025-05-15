@@ -19,9 +19,6 @@
  * jQuery(element).on('click', view.click);
  * // => Logs 'clicked docs' when clicked.
  */
-import { isArray } from '../compat';
-import { isFunction } from '../predicate';
-
 export function bindAll<T extends { [key: string]: unknown }>(
   object: T,
   ...methodNames: Array<string | string[] | number | IArguments>
