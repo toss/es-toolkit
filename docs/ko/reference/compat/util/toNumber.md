@@ -23,7 +23,6 @@ function toNumber(value?: unknown): number;
 ### 반환 값
 
 (`number`): 숫자를 반환해요.
-문자열.
 
 ## 예시
 
