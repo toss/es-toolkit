@@ -35,7 +35,7 @@ export function bindAll<T extends { [key: string]: unknown }>(
   };
 
   methodNames.forEach(name => {
-    if (isArray(name)) {
+    if (Array.isArray(name)) {
       name.forEach(key => bindValue(object, String(key)));
     } else if (typeof name === 'number') {
       const key = Object.is(name, -0) ? '-0' : String(name);
