@@ -23,7 +23,7 @@ export function bindAll<T extends { [key: string]: unknown }>(
   object: T,
   ...methodNames: Array<string | string[] | number | IArguments>
 ): T {
-  if (isArray(object) && methodNames.length === 0) {
+  if (Array.isArray(object) && methodNames.length === 0) {
     return object;
   }
 
