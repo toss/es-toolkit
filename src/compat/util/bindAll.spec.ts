@@ -100,7 +100,7 @@ describe('bindAll', () => {
 
   it('should work with `arguments` objects as secondary arguments', () => {
     const object = cloneDeep(source);
-    bindAll(object, args);
+    bindAll(object, args as any);
 
     const actual = Array.from(args).map((key: string) => {
       const method = object[key];
