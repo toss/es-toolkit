@@ -1,3 +1,4 @@
+import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
@@ -48,6 +49,10 @@ export function merge<T extends Record<PropertyKey, any>, S extends Record<Prope
 
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
+
+    if (isUnsafeProperty(key)) {
+      continue;
+    }
 
     const sourceValue = source[key];
     const targetValue = target[key];
