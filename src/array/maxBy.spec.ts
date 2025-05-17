@@ -34,4 +34,10 @@ describe('maxBy', () => {
     const result = maxBy(people, person => person.age);
     expect(result).toBeUndefined();
   });
+
+  it('should skip NaN values when comparing elements', () => {
+    const numbers = [1, Number.NaN, 3, 2];
+    const result = maxBy(numbers, x => x);
+    expect(result).toBe(3);
+  });
 });
