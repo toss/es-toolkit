@@ -6,37 +6,46 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-`predicate`에 전달한 조건을 만족하는 **마지막 요소의 키**를 반환해요.
+`predicate`에 전달한 조건을 만족하는 마지막 요소의 키를 반환해요.
 
-`findKey`와 거의 같지만, **뒤에서부터** 조건을 검사한다는 점이 달라요.
+`findKey`는 앞에서부터 조건을 검사하는 반면, `findLastKey`는 뒤에서부터 조건을 검사해요.
 
 ## 인터페이스
 
 ```ts
-function findLastKey<T extends Record<any, any>>(
-  obj: T,
-  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined;
+function findLastKey<T>(
+  obj: T | null | undefined,
+  conditionToFind: (value: T[keyof T], key: string, obj: T) => unknown
+): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, objectToFind: Partial<T[keyof T]>): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, propertyToFind: [keyof T[keyof T], any]): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, propertyToFind: [PropertyKey, any]): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, propertyToFind: PropertyKey): string | undefined;
+
+function findLastKey<T>(
+  obj: T | null | undefined,
+  predicate?:
+    | ((value: T[keyof T], key: string, obj: T) => unknown)
+    | PropertyKey
+    | [PropertyKey, any]
+    | Partial<T[keyof T]>
+): string | undefined;
 ```
 
 ### 파라미터
 
 - `obj` (`T`): 탐색할 객체예요.
 - `predicate`: 다음 중 하나의 형태를 가질 수 있어요.
-  - `(value, key, obj) => boolean`: 각 요소를 검사할 함수.
-  - `Partial<T[keyof T]>`: 부분 객체와 일치하는 요소를 찾을 때 사용해요.
-  - `[key, value]`: 특정 프로퍼티와 값이 일치하는 요소를 찾을 때 사용해요.
-  - `key`: 해당 프로퍼티가 truthy한 요소를 찾을 때 사용해요.
+  - `(value, key, obj) => unknown`: 각각의 요소에 대해서 검사하는 함수를 실행해요. 처음으로 `true`를 반환하는 요소의 키를 반환해요.
+  - `Partial<T[keyof T]>`: 주어진 객체와 부분적으로 일치하는 요소를 찾을 때 사용해요.
+  - `[PropertyKey, any]`: 해당 프로퍼티와 값이 일치하는 요소의 키를 반환해요.
+  - `PropertyKey`: 해당 프로퍼티에 대해서 참으로 평가되는 요소의 키를 반환해요.
 
 ### 반환 값
 
-(`keyof T | undefined`): 조건을 만족하는 **마지막 요소의 키**를 반환해요. 만족하는 키가 없으면 `undefined`를 반환해요.
+(`string | undefined`): 조건을 만족하는 마지막 요소의 키를 반환해요. 만족하는 키가 없으면 `undefined`를 반환해요.
 
 ## 예시
 

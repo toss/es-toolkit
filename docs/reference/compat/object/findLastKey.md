@@ -1,46 +1,55 @@
 # findLastKey
 
 ::: info
-This function is only available from `es-toolkit/compat`.  
-It’s provided for compatibility with lodash and isn’t part of the core `es-toolkit` bundle.
+This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Returns the **key of the last element** in an object that satisfies the provided condition.
+Returns the key of the last element that satisfies the provided predicate.
 
-It's just like `findKey`, but works from the **end** of the object instead of the beginning.
+Unlike `findKey` which searches from the beginning, `findLastKey` searches from the end of the object.
 
 ## Signature
 
-```ts
-function findLastKey<T extends Record<any, any>>(
-  obj: T,
-  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined;
+```typescript
+function findLastKey<T>(
+  obj: T | null | undefined,
+  conditionToFind: (value: T[keyof T], key: string, obj: T) => unknown
+): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, objectToFind: Partial<T[keyof T]>): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, propertyToFind: [keyof T[keyof T], any]): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, propertyToFind: [PropertyKey, any]): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, propertyToFind: PropertyKey): string | undefined;
+
+function findLastKey<T>(
+  obj: T | null | undefined,
+  predicate?:
+    | ((value: T[keyof T], key: string, obj: T) => unknown)
+    | PropertyKey
+    | [PropertyKey, any]
+    | Partial<T[keyof T]>
+): string | undefined;
 ```
 
 ### Parameters
 
-- `obj` (`T`): The object to search.
-- `predicate`: The condition to match. This can be:
-  - A **function**: `(value, key, obj) => boolean`
-  - A **partial object**: e.g. `{ active: true }`
-  - A **property-value pair**: e.g. `['active', true]`
-  - A **property name**: e.g. `'active'` (truthy check)
+- `obj` (`T | null | undefined`): The object to inspect.
+- `predicate`: The function invoked per iteration. Can be one of:
+  - `(value, key, obj) => unknown` - The function executed for each element.
+  - `Partial<T[keyof T]>` - Matches elements that have matching properties.
+  - `[PropertyKey, any]` - Matches elements with the specified property and value.
+  - `PropertyKey` - Matches elements with truthy values for the specified property.
 
 ### Returns
 
-Returns the key of the last element that satisfies the condition.  
-If no element matches, `undefined` is returned.
+(`string | undefined`): Returns the key of the matched element, else `undefined`.
 
 ## Examples
 
-```ts
+```typescript
 import { findLastKey } from 'es-toolkit/compat';
 
 const users = {

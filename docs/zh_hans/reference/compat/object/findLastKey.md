@@ -1,46 +1,55 @@
 # findLastKey
 
 ::: info
-此函数仅可从 `es-toolkit/compat` 导入。  
-它是为兼容 lodash 而提供的，不属于 `es-toolkit` 的核心部分。
+出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-返回对象中**最后一个满足条件的元素的键**。
+返回对象中满足指定条件的最后一个元素的键。
 
-它的行为类似于 `findKey`，但搜索顺序是从对象末尾开始的。
+与从头开始搜索的 `findKey` 不同，`findLastKey` 从对象的末尾开始搜索。
 
 ## 签名
 
-```ts
-function findLastKey<T extends Record<any, any>>(
-  obj: T,
-  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined;
+```typescript
+function findLastKey<T>(
+  obj: T | null | undefined,
+  conditionToFind: (value: T[keyof T], key: string, obj: T) => unknown
+): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, objectToFind: Partial<T[keyof T]>): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, propertyToFind: [keyof T[keyof T], any]): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, propertyToFind: [PropertyKey, any]): string | undefined;
 
-function findLastKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
+function findLastKey<T>(obj: T | null | undefined, propertyToFind: PropertyKey): string | undefined;
+
+function findLastKey<T>(
+  obj: T | null | undefined,
+  predicate?:
+    | ((value: T[keyof T], key: string, obj: T) => unknown)
+    | PropertyKey
+    | [PropertyKey, any]
+    | Partial<T[keyof T]>
+): string | undefined;
 ```
 
 ### 参数
 
-- `obj` (`T`): 要遍历的对象。
-- `predicate`: 用于判断的条件。支持以下几种形式：
-  - **函数**：`(value, key, obj) => boolean`
-  - **部分对象**：例如 `{ active: true }`
-  - **属性-值对**：例如 `['active', true]`
-  - **属性名（判断是否为 truthy）**：例如 `'active'`
+- `obj` (`T | null | undefined`): 要检查的对象。
+- `predicate`: 每次迭代调用的函数。可以是以下之一：
+  - `(value, key, obj) => unknown` - 为每个元素执行的函数。
+  - `Partial<T[keyof T]>` - 匹配具有相同属性的元素。
+  - `[PropertyKey, any]` - 匹配具有指定属性和值的元素。
+  - `PropertyKey` - 匹配指定属性为真值的元素。
 
-### 返回值
+### 返回
 
-返回满足条件的最后一个元素的键。  
-如果没有匹配的元素，则返回 `undefined`。
+(`string | undefined`): 返回匹配元素的键，如果没有匹配的元素则返回 `undefined`。
 
-## 示例
+### 示例
 
-```ts
+```typescript
 import { findLastKey } from 'es-toolkit/compat';
 
 const users = {
@@ -49,7 +58,7 @@ const users = {
   pebbles: { age: 1, active: true },
 };
 
-// 使用函数
+// 使用函数谓词
 findLastKey(users, o => o.age < 40);
 // => 'pebbles'
 
@@ -61,7 +70,7 @@ findLastKey(users, { active: true });
 findLastKey(users, ['active', false]);
 // => 'fred'
 
-// 使用属性名
+// 使用属性名（真值检查）
 findLastKey(users, 'active');
 // => 'pebbles'
 ```
