@@ -1,12 +1,14 @@
-# invariant
+# assert
 
 与えられた条件が真であることを主張します。条件が偽の場合は、指定されたメッセージでエラーが投げられますます。
+
+この関数は、[invariant](./invariant.md) 関数のエイリアスです。
 
 ## インターフェース
 
 ```typescript
-function invariant(condition: unknown, message: string): asserts condition;
-function invariant(condition: unknown, error: Error): asserts condition;
+function assert(condition: unknown, message: string): asserts condition;
+function assert(condition: unknown, error: Error): asserts condition;
 ```
 
 ### パラメータ
@@ -26,28 +28,28 @@ function invariant(condition: unknown, error: Error): asserts condition;
 
 ```typescript
 // This call will succeed without any errors
-invariant(true, 'This should not throw');
+assert(true, 'This should not throw');
 
 // This call will fail and throw an error with the message 'This should throw'
-invariant(false, 'This should throw');
+assert(false, 'This should throw');
 
-// Example of using invariant with a condition
-invariant(condition, 'Expected condition is false');
+// Example of using assert with a condition
+assert(condition, 'Expected condition is false');
 
 // Ensure that the value is neither null nor undefined
-invariant(value !== null && value !== undefined, 'Value should not be null or undefined');
+assert(value !== null && value !== undefined, 'Value should not be null or undefined');
 
-// Example of using invariant to check if a number is positive
-invariant(number > 0, 'Number must be positive');
+// Example of using assert to check if a number is positive
+assert(number > 0, 'Number must be positive');
 
-// Example of using invariant with an error
-invariant(false, new Error('This should throw'));
+// Example of using assert with an error
+assert(false, new Error('This should throw'));
 
-// Example of using invariant with a custom error
+// Example of using assert with a custom error
 class CustomError extends Error {
   constructor(message: string) {
     super(message);
   }
 }
-invariant(false, new CustomError('This should throw'));
+assert(false, new CustomError('This should throw'));
 ```
