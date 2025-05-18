@@ -2,7 +2,7 @@
 
 ## Version v1.38.0
 
-Released on May 5th, 2025.
+Released on May 18th, 2025.
 
 - Added compatibility functions for [bindAll](https://es-toolkit.slash.page/reference/compat/util/bindAll.html), [setWith](https://es-toolkit.slash.page/reference/compat/object/setWith.html), [memoize](https://es-toolkit.slash.page/reference/function/memoize.html), [isNative](https://es-toolkit.slash.page/reference/compat/predicate/isNative.html), [invokeMap](https://es-toolkit.slash.page/reference/compat/array/invokeMap.html), [clone](https://es-toolkit.slash.page/reference/object/clone.html), [cloneWith](https://es-toolkit.slash.page/reference/compat/object/cloneWith.html), and [sortedLastIndexOf](https://es-toolkit.slash.page/reference/compat/array/sortedLastIndexOf.html).
 - Enhanced [invariant](https://es-toolkit.slash.page/reference/util/invariant.html) function to accept Error instances and added [assert](https://es-toolkit.slash.page/reference/util/assert.html) alias.
