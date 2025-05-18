@@ -1,7 +1,7 @@
-import { property } from './property';
-import { isObject } from '../predicate/isObject';
-import { matches } from '../predicate/matches';
-import { matchesProperty } from '../predicate/matchesProperty';
+import { property } from './property.ts';
+import { isObject } from '../predicate/isObject.ts';
+import { matches } from '../predicate/matches.ts';
+import { matchesProperty } from '../predicate/matchesProperty.ts';
 
 /**
  * Finds the key of the last element predicate returns truthy for.
