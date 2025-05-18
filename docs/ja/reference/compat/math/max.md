@@ -15,16 +15,16 @@
 ```typescript
 function max<T>(items: [T, ...T[]]): T;
 function max(): undefined;
-function max<T>(items?: T[]): T | undefined;
+function max<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### パラメータ
 
-- `items` (`T[]`): 最大値を持つ要素を探す配列。
+- `items` (`ArrayLike<T> | null | undefined`): 最大値を持つ要素を探す配列。
 
 ### 戻り値
 
-(`T`): 配列から最大値を持つ要素。配列が空の場合は `undefined` を返します。
+(`T | undefined`): 配列から最大値を持つ要素。配列が空の場合、`null`、または `undefined` の場合は `undefined` を返します。
 
 ### 例
 

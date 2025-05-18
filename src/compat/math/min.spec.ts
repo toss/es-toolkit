@@ -31,4 +31,24 @@ describe('min', () => {
     const array = [40];
     expect(min(array)).toBe(40);
   });
+
+  it('should skip NaN values', () => {
+    expect(min([1, NaN, 2])).toBe(1);
+    expect(min([NaN, 1, 2])).toBe(1);
+  });
+
+  it('should skip symbol values', () => {
+    expect(min([1, Symbol('a'), 2])).toBe(1);
+    expect(min([Symbol('a'), 1, 2])).toBe(1);
+    expect(min([Symbol('a'), Symbol('b'), 1])).toBe(1);
+  });
+
+  it('should skip null values', () => {
+    expect(min([1, null, 2])).toBe(1);
+    expect(min([null, 1, 2])).toBe(1);
+  });
+
+  it('should return undefined when skipping all values', () => {
+    expect(min([Symbol('a'), null, NaN])).toBe(undefined);
+  });
 });

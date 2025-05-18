@@ -15,16 +15,16 @@
 ```typescript
 function min<T>(items: [T, ...T[]]): T;
 function min(): undefined;
-function min<T>(items?: T[]): T | undefined;
+function min<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### 参数
 
-- `items` (`T[]`): 要搜索的元素数组。
+- `items` (`ArrayLike<T> | null | undefined`): 要搜索的元素数组。
 
 ### 返回
 
-具有最小值的元素。
+(`T | undefined`): 具有最小值的元素。如果数组为空、`null` 或 `undefined`，则返回 `undefined`。
 
 ### 示例
 

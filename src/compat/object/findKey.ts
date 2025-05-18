@@ -27,7 +27,7 @@ export function findKey<T extends Record<any, any>>(
  *
  * @template T - The type of the object.
  * @param {T | null | undefined} obj - The object to inspect.
- * @param {Partail<T[keyof T]>} objectToFind - The object to match.
+ * @param {Partial<T[keyof T]>} objectToFind - The object to match.
  * @returns {keyof T | undefined} Returns the key of the matched element, else `undefined`.
  *
  * @example
