@@ -52,4 +52,9 @@ describe('max', () => {
   it('should return undefined when skipping all values', () => {
     expect(max([Symbol('a'), null, NaN])).toBe(undefined);
   });
+
+  it('should return undefined when input is null or undefined', () => {
+    expect(max(null)).toBe(undefined);
+    expect(max(undefined)).toBe(undefined);
+  });
 });

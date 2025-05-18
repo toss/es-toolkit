@@ -51,4 +51,9 @@ describe('min', () => {
   it('should return undefined when skipping all values', () => {
     expect(min([Symbol('a'), null, NaN])).toBe(undefined);
   });
+
+  it('should return undefined when input is null or undefined', () => {
+    expect(min(null)).toBe(undefined);
+    expect(min(undefined)).toBe(undefined);
+  });
 });
