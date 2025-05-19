@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import dtsPlugin from 'rollup-plugin-dts';
 import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
-import { BUNDLE_PATH } from './configs/bundlePath.ts';
+import { BUNDLE_PATH } from './configs/bundlePath.js';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = dirname(fileURLToPath(import.meta.url));

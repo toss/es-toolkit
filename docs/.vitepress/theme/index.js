@@ -1,7 +1,7 @@
 import DefaultTheme from 'vitepress/theme';
 import { defineAsyncComponent, h } from 'vue';
 import './index.css';
-import { BUNDLE_PATH } from '../../../configs/bundlePath.ts';
+import { BUNDLE_PATH } from '../../../configs/bundlePath.js';
 import Banner from '../components/Banner.vue';
 import CompatibilityStatus from '../components/CompatibilityStatus.vue';
 
