@@ -110,6 +110,7 @@ export { negate } from './function/negate.ts';
 export { nthArg } from './function/nthArg.ts';
 // FIXME: Replace with compat version
 export { once } from '../function/once.ts';
+export { overArgs } from './function/overArgs.ts';
 // export { overArgs } from './function/overArgs.ts';
 export { partial } from './function/partial.ts';
 export { partialRight } from './function/partialRight.ts';
