@@ -15,11 +15,15 @@
  * // result will be [1, 2, 3] since the last two elements are dropped.
  */
 export function dropRight<T>(arr: readonly T[], itemsCount: number): T[] {
-  itemsCount = Math.min(-itemsCount, 0);
-
-  if (itemsCount === 0) {
+  if (Number.isNaN(itemsCount) || itemsCount <= 0) {
     return arr.slice();
   }
 
-  return arr.slice(0, itemsCount);
+  itemsCount = Math.floor(itemsCount);
+
+  if (itemsCount >= arr.length) {
+    return [];
+  }
+
+  return arr.slice(0, arr.length - itemsCount);
 }
