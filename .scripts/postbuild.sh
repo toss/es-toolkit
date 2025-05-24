@@ -14,6 +14,7 @@ echo "export * from './dist/promise';" > promise.d.ts
 echo "export * from './dist/string';" > string.d.ts
 echo "export * from './dist/util';" > util.d.ts
 
+# Copy bundles to docs/public directory for using API in the console.
 mkdir -p docs/public/dist
 cp dist/browser.global.js docs/public/dist/
 cp dist/browser.global.js.map docs/public/dist/
