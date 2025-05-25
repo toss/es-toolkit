@@ -182,7 +182,7 @@ export { isEqual } from '../predicate/isEqual.ts';
 export { isFunction } from '../predicate/isFunction.ts';
 // FIXME: Replace with compat version
 export { isLength } from '../predicate/isLength.ts';
-// export { isMatchWith } from './predicate/isMatchWith.ts';
+export { isMatchWith } from './predicate/isMatchWith.ts';
 export { isNative } from './predicate/isNative.ts';
 // FIXME: Replace with compat version
 export { isNull } from '../predicate/isNull.ts';
