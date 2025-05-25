@@ -157,10 +157,10 @@ export { cloneDeepWith } from './object/cloneDeepWith.ts';
 export { cloneWith } from './object/cloneWith.ts';
 // FIXME: Replace with compat version
 // export { countBy } from './object/countBy.ts';
+export { identity } from '../function/identity.ts';
 export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
 export { defaultsDeep } from './object/defaultsDeep.ts';
-export { identity } from '../function/identity.ts';
 export { findKey } from './object/findKey.ts';
 export { findLastKey } from './object/findLastKey.ts';
 export { forIn } from './object/forIn.ts';
