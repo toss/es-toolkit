@@ -1,5 +1,20 @@
 # es-toolkit Changelog
 
+## Version v1.38.0
+
+Released on May 18th, 2025.
+
+- Added compatibility functions for [bindAll](https://es-toolkit.slash.page/reference/compat/util/bindAll.html), [setWith](https://es-toolkit.slash.page/reference/compat/object/setWith.html), [memoize](https://es-toolkit.slash.page/reference/function/memoize.html), [isNative](https://es-toolkit.slash.page/reference/compat/predicate/isNative.html), [invokeMap](https://es-toolkit.slash.page/reference/compat/array/invokeMap.html), [clone](https://es-toolkit.slash.page/reference/object/clone.html), [cloneWith](https://es-toolkit.slash.page/reference/compat/object/cloneWith.html), and [sortedLastIndexOf](https://es-toolkit.slash.page/reference/compat/array/sortedLastIndexOf.html).
+- Enhanced [invariant](https://es-toolkit.slash.page/reference/util/invariant.html) function to accept Error instances and added [assert](https://es-toolkit.slash.page/reference/util/assert.html) alias.
+- Fixed type definitions and empty array handling in [maxBy](https://es-toolkit.slash.page/reference/array/maxBy.html) and [minBy](https://es-toolkit.slash.page/reference/array/minBy.html).
+- Fixed typo 'Partail' to 'Partial' in [findKey](https://es-toolkit.slash.page/reference/object/findKey.html) type annotation.
+- Enhanced [max](https://es-toolkit.slash.page/reference/math/max.html) and [min](https://es-toolkit.slash.page/reference/math/min.html) functions to skip NaN, symbol, and null values, and return undefined when all values are skipped.
+- Fixed sparse array handling in compat functions to match Lodash's behavior.
+- Improved test coverage and documentation for various functions.
+- Fixed various documentation issues and typos.
+
+We sincerely thank @myungjuice, @scato3, @uniqueeest, @YEONDG, @shren207, @hyesungoh, @kms0219kms, @minjongbaek, @kristian240, @D-Sketon, @Seung-wan, @jiji-hoon96, @raon0211, and @dayongkr for their contributions. We appreciate your great efforts!
+
 ## Version v1.37.2
 
 Released on May 4th, 2025.

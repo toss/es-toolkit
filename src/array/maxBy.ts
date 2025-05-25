@@ -26,7 +26,8 @@ export function maxBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => 
  * @template T - The type of elements in the array.
  * @param {T[]} items The array of elements to search.
  * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {T | undefined} The element with the maximum value as determined by the `getValue` function.
+ * @returns {T | undefined} The element with the maximum value as determined by the `getValue` function,
+ * or `undefined` if the array is empty.
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
  * maxBy([], x => x.a); // Returns: undefined
@@ -47,7 +48,8 @@ export function maxBy<T>(items: readonly T[], getValue: (element: T) => number):
  * @template T - The type of elements in the array.
  * @param {T[]} items The array of elements to search.
  * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {T | undefined} The element with the maximum value as determined by the `getValue` function.
+ * @returns {T | undefined} The element with the maximum value as determined by the `getValue` function,
+ * or `undefined` if the array is empty.
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
  * maxBy([], x => x.a); // Returns: undefined
@@ -60,11 +62,15 @@ export function maxBy<T>(items: readonly T[], getValue: (element: T) => number):
  *   x => x.age
  * ); // Returns: { name: 'john', age: 30 }
  */
-export function maxBy<T>(items: readonly T[], getValue: (element: T) => number): T {
-  let maxElement = items[0];
-  let max = -Infinity;
+export function maxBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined {
+  if (items.length === 0) {
+    return undefined;
+  }
 
-  for (let i = 0; i < items.length; i++) {
+  let maxElement = items[0];
+  let max = getValue(maxElement);
+
+  for (let i = 1; i < items.length; i++) {
     const element = items[i];
     const value = getValue(element);
     if (value > max) {

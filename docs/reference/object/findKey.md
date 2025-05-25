@@ -47,16 +47,18 @@ You can specify the condition for finding keys in several ways:
 ### Signature
 
 ```typescript
-export function findKey<T extends Record<any, any>>(
-  obj: T,
-  conditionToFind: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(
-  obj: T,
-  propertyToFind: [keyof T[keyof T], any]
-): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
+function findKey<T>(obj: T, conditionToFind: (value: T[keyof T], key: string, obj: T) => boolean): string | undefined;
+function findKey<T>(obj: T, objectToFind: Partial<T[keyof T]>): string | undefined;
+function findKey<T>(obj: T, propertyToFind: [PropertyKey, any]): string | undefined;
+function findKey<T>(obj: T, propertyToFind: PropertyKey): string | undefined;
+function findKey<T>(
+  obj: T | null | undefined,
+  predicate?:
+    | ((value: T[keyof T], key: string, obj: T) => unknown)
+    | PropertyKey
+    | [PropertyKey, any]
+    | Partial<T[keyof T]>
+): string | undefined;
 ```
 
 ### Examples

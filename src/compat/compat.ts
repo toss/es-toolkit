@@ -17,8 +17,8 @@ export { findIndex } from './array/findIndex.ts';
 export { findLast } from './array/findLast.ts';
 export { findLastIndex } from './array/findLastIndex.ts';
 export { flatMap } from './array/flatMap.ts';
-// export { flatMapDeep } from './array/flatMapDeep.ts';
-// export { flatMapDepth } from './array/flatMapDepth.ts';
+export { flatMapDeep } from './array/flatMapDeep.ts';
+export { flatMapDepth } from './array/flatMapDepth.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
@@ -110,6 +110,7 @@ export { negate } from './function/negate.ts';
 export { nthArg } from './function/nthArg.ts';
 // FIXME: Replace with compat version
 export { once } from '../function/once.ts';
+export { overArgs } from './function/overArgs.ts';
 // export { overArgs } from './function/overArgs.ts';
 export { partial } from './function/partial.ts';
 export { partialRight } from './function/partialRight.ts';
@@ -159,9 +160,9 @@ export { cloneWith } from './object/cloneWith.ts';
 export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
 export { defaultsDeep } from './object/defaultsDeep.ts';
-export { findKey } from './object/findKey.ts';
-// export { findLastKey } from './object/findLastKey.ts';
 export { identity } from '../function/identity.ts';
+export { findKey } from './object/findKey.ts';
+export { findLastKey } from './object/findLastKey.ts';
 export { forIn } from './object/forIn.ts';
 export { forInRight } from './object/forInRight.ts';
 export { forOwn } from './object/forOwn.ts';
@@ -181,7 +182,7 @@ export { isEqual } from '../predicate/isEqual.ts';
 export { isFunction } from '../predicate/isFunction.ts';
 // FIXME: Replace with compat version
 export { isLength } from '../predicate/isLength.ts';
-// export { isMatchWith } from './predicate/isMatchWith.ts';
+export { isMatchWith } from './predicate/isMatchWith.ts';
 export { isNative } from './predicate/isNative.ts';
 // FIXME: Replace with compat version
 export { isNull } from '../predicate/isNull.ts';
@@ -203,7 +204,7 @@ export { property } from './object/property.ts';
 export { propertyOf } from './object/propertyOf.ts';
 export { result } from './object/result.ts';
 export { set } from './object/set.ts';
-// export { setWith } from './object/setWith.ts';
+export { setWith } from './object/setWith.ts';
 export { toDefaulted } from './object/toDefaulted.ts';
 export { toPairs } from './object/toPairs.ts';
 export { toPairsIn } from './object/toPairsIn.ts';
@@ -214,7 +215,7 @@ export { updateWith } from './object/updateWith.ts';
 export { values } from './object/values.ts';
 export { valuesIn } from './object/valuesIn.ts';
 
-// export { bindAll } from './util/bindAll.ts';
+export { bindAll } from './util/bindAll.ts';
 // FIXME: Replace with compat version
 export { capitalize } from '../string/capitalize.ts';
 export { conforms } from './predicate/conforms.ts';
