@@ -1,4 +1,4 @@
-import { isMatchInternal } from './isMatchWith.ts';
+import { isMatchWithInternal } from './isMatchWith.ts';
 
 /**
  * Checks if the target matches the source by comparing their structures and values.
@@ -29,5 +29,5 @@ import { isMatchInternal } from './isMatchWith.ts';
  * isMatch(targetSet, sourceSet); // true
  */
 export function isMatch(target: unknown, source: unknown): boolean {
-  return isMatchInternal(target, source);
+  return isMatchWithInternal(target, source);
 }

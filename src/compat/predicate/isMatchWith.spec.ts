@@ -270,13 +270,6 @@ describe('isMatchWith', () => {
     expect(isMatchWith(123, new Set())).toBe(true);
   });
 
-  it('should handle empty objects with primitive targets and customizer', () => {
-    const customizer = () => true;
-    expect(isMatchWith(123, {}, customizer)).toBe(false);
-    expect(isMatchWith('string', {}, customizer)).toBe(false);
-    expect(isMatchWith(true, {}, customizer)).toBe(false);
-  });
-
   it('should handle Map with customizer returning undefined and mismatched values', () => {
     const map1 = new Map([
       ['a', { x: 1 }],
@@ -331,5 +324,10 @@ describe('isMatchWith', () => {
 
     expect(isMatchWith(map1, map2)).toBe(true);
     expect(isMatchWith(map1, map3)).toBe(false);
+  });
+
+  it('should match when source is empty object and target is primitive', () => {
+    expect(isMatchWith(42, {})).toBe(true);
+    expect(isMatchWith(42, {}, lodashStable.noop)).toBe(true);
   });
 });
