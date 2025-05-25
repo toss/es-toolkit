@@ -1,13 +1,19 @@
 import { bench, describe } from 'vitest';
 import { xorWith as xorWithToolkit_ } from 'es-toolkit';
+import { xorWith as xorWithToolkitCompat_ } from 'es-toolkit/compat';
 import { xorWith as xorWithLodash_ } from 'lodash';
 
 const xorWithLodash = xorWithLodash_;
+const xorWithToolkitCompat = xorWithToolkitCompat_;
 const xorWithToolkit = xorWithToolkit_;
 
 describe('xorWith', () => {
   bench('es-toolkit/xorWith', () => {
     xorWithToolkit([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], (x, y) => x.id === y.id);
+  });
+
+  bench('es-toolkit/compat/xorWith', () => {
+    xorWithToolkitCompat([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], (x, y) => x.id === y.id);
   });
 
   bench('lodash/xorWith', () => {
@@ -21,6 +27,10 @@ describe('xorWith/largeArray', () => {
 
   bench('es-toolkit/xorWith', () => {
     xorWithToolkit(largeArray1, largeArray2, (x, y) => x.id === y.id);
+  });
+
+  bench('es-toolkit/compat/xorWith', () => {
+    xorWithToolkitCompat(largeArray1, largeArray2, (x, y) => x.id === y.id);
   });
 
   bench('lodash/xorWith', () => {

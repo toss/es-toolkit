@@ -64,7 +64,6 @@ export function throttle<F extends (...args: any[]) => void>(
       if (Date.now() - pendingAt >= throttleMs) {
         pendingAt = Date.now();
         debounced.cancel();
-        debounced(...args);
       }
     }
 

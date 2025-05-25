@@ -6,9 +6,12 @@ describe('find bundle size', () => {
     const bundleSize = await getBundleSize('lodash-es', 'find');
     expect(bundleSize).toMatchInlineSnapshot(`17334`);
   });
-
   it('es-toolkit', async () => {
+    const bundleSize = await getBundleSize('es-toolkit', 'find');
+    expect(bundleSize).toMatchInlineSnapshot(`6724`);
+  });
+  it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'find');
-    expect(bundleSize).toMatchInlineSnapshot(`5661`);
+    expect(bundleSize).toMatchInlineSnapshot(`6724`);
   });
 });

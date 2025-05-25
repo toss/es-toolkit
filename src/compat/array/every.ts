@@ -1,6 +1,7 @@
 import { identity } from '../../function/identity.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { property } from '../object/property.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
 
@@ -190,7 +191,7 @@ export function every<T>(
   if (!source) {
     return true;
   }
-  const values = Array.isArray(source) ? source : Object.values(source);
+
   if (guard && isIterateeCall(source, doesMatch, guard)) {
     doesMatch = undefined;
   }
@@ -199,39 +200,50 @@ export function every<T>(
     doesMatch = identity;
   }
 
+  let predicate: (value: any, index: number, collection: any) => boolean;
+
   switch (typeof doesMatch) {
     case 'function': {
-      if (!Array.isArray(source)) {
-        const keys = Object.keys(source) as Array<keyof T>;
-
-        for (let i = 0; i < keys.length; i++) {
-          const key = keys[i];
-          const value = source[key];
-
-          if (!doesMatch(value as T, key as number, source)) {
-            return false;
-          }
-        }
-
-        return true;
-      }
-
-      return values.every(doesMatch);
+      predicate = doesMatch as any;
+      break;
     }
     case 'object': {
       if (Array.isArray(doesMatch) && doesMatch.length === 2) {
         const key = doesMatch[0];
         const value = doesMatch[1];
-
-        return values.every(matchesProperty(key, value));
+        predicate = matchesProperty(key, value);
       } else {
-        return values.every(matches(doesMatch));
+        predicate = matches(doesMatch);
       }
+      break;
     }
     case 'symbol':
     case 'number':
     case 'string': {
-      return values.every(property(doesMatch));
+      predicate = property(doesMatch);
     }
   }
+
+  if (!isArrayLike(source)) {
+    const keys = Object.keys(source) as Array<keyof typeof source>;
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const value = source[key];
+
+      if (!predicate(value, key, source)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  for (let i = 0; i < source.length; i++) {
+    if (!predicate(source[i], i, source)) {
+      return false;
+    }
+  }
+
+  return true;
 }

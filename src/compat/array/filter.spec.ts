@@ -1,17 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { filter } from './filter';
 import { args } from '../_internal/args';
-
-function isEven(n: number) {
-  return n % 2 === 0;
-}
+import { isEven } from '../_internal/isEven';
 
 function isEven2(n: string) {
   return parseInt(n) % 2 === 0;
 }
 
 describe('filter', () => {
-  it('It should return an empty array when no predicate is provided.', () => {
+  it('should return the same array when no predicate is provided.', () => {
     const arr = [1, 2, 3];
 
     expect(filter(arr)).toEqual([1, 2, 3]);
@@ -36,7 +33,6 @@ describe('filter', () => {
       { id: 1, name: 'Alice', 0: 1, [Symbol.for('key')]: 1 },
       { id: 2, name: 'Bob', 0: 2, [Symbol.for('key')]: 2 },
     ];
-
     expect(filter(arr, ['name', 'Alice'])).toEqual(arr.slice(0, 1));
     expect(filter(arr, [0, 1])).toEqual(arr.slice(0, 1));
     expect(filter(arr, [Symbol.for('key'), 1])).toEqual(arr.slice(0, 1));
@@ -154,5 +150,23 @@ describe('filter', () => {
     expect(filter({ 0: 1, 1: 2, 2: 3, length: 3 }, isEven)).toEqual([2]);
     expect(filter('123', isEven2)).toEqual(['2']);
     expect(filter(args, isEven)).toEqual([2]);
+  });
+
+  it('should not modify the resulting value from within `predicate`', () => {
+    const actual = filter([0], (value, index, array) => {
+      // @ts-expect-error - testing
+      array[index] = 1;
+      return true;
+    });
+
+    expect(actual).toEqual([0]);
+  });
+
+  it('should handle sparse arrays correctly', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const sparseArray = [1, , 3, , 5] as any[];
+
+    expect(filter(sparseArray, value => value > 0)).toEqual([1, 3, 5]);
+    expect(filter(sparseArray, value => value === undefined)).toEqual([undefined, undefined]);
   });
 });

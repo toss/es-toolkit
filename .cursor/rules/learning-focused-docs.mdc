@@ -1,0 +1,59 @@
+---
+description: 
+globs: **/*.md
+alwaysApply: false
+---
+---
+description: Learning-Focused Documentation Guidelines
+globs: **/*.md
+---
+
+# Learning-Focused Documentation
+
+- Ensure smooth progression from start to finish
+  - Create a stable learning environment for readers
+  - Verify all example code works and provide detailed preparation instructions
+- Explain in step-by-step format
+  - Structure content for gradual progress
+  - Present examples in increasing order of difficulty
+- Include executable code examples
+  - Go beyond concepts with practical, runnable code
+  - Examples should demonstrate key features and allow hands-on learning
+- Consider adding FAQ sections
+- Use collapsible components for quick access to core content
+
+## Template
+
+```md
+# [Tutorial Title]
+
+## Goal
+
+[Briefly explain what readers will achieve by following this tutorial.]
+
+## Prerequisites
+
+- [List required knowledge and tools before starting. Skip if none.]
+- [Example: Node.js version, API key, required packages]
+
+## Step-by-Step Guide
+
+### [First Step Title]
+
+[Explain tasks with code examples or UI captures.]
+
+### [Second Step Title]
+
+[Explain next steps.]
+
+// ...
+
+### Verify Final Result
+
+[Explain expected outcome after completing the tutorial.]
+```
+
+## Checklist
+- Did you clearly present the learning objectives?
+- Is the content explained in a step-by-step manner?
+  - Does it include executable code examples for readers to try?

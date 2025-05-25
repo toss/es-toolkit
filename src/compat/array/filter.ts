@@ -1,8 +1,5 @@
-import { identity } from '../../function/identity.ts';
-import { property } from '../object/property.ts';
-import { isArray } from '../predicate/isArray.ts';
-import { matches } from '../predicate/matches.ts';
-import { matchesProperty } from '../predicate/matchesProperty.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Filters items from a array and returns an array of elements.
@@ -171,41 +168,35 @@ export function filter<T>(
   if (!source) {
     return [];
   }
-  if (!predicate) {
-    predicate = identity;
-  }
 
-  const collection = isArray(source) ? source : Object.values(source);
+  predicate = iteratee(predicate);
 
-  switch (typeof predicate) {
-    case 'function': {
-      if (!Array.isArray(source)) {
-        const result: T[] = [];
-        const keys = Object.keys(source) as Array<keyof T>;
+  if (!Array.isArray(source)) {
+    const result: T[] = [];
+    const keys = Object.keys(source) as Array<keyof T>;
+    const length = isArrayLike(source) ? source.length : keys.length;
 
-        for (let i = 0; i < keys.length; i++) {
-          const key = keys[i];
-          const value = source[key] as T;
+    for (let i = 0; i < length; i++) {
+      const key = keys[i];
+      const value = source[key] as T;
 
-          if (predicate(value, key as number, source)) {
-            result.push(value);
-          }
-        }
-
-        return result;
+      if (predicate(value, key as number, source)) {
+        result.push(value);
       }
+    }
 
-      return collection.filter(predicate);
-    }
-    case 'object': {
-      return isArray(predicate)
-        ? collection.filter(matchesProperty(predicate[0], predicate[1]))
-        : collection.filter(matches(predicate));
-    }
-    case 'symbol':
-    case 'number':
-    case 'string': {
-      return collection.filter(property(predicate));
+    return result;
+  }
+
+  const result: T[] = [];
+  const length = source.length;
+
+  for (let i = 0; i < length; i++) {
+    const value = source[i];
+    if (predicate(value, i, source)) {
+      result.push(value);
     }
   }
+
+  return result;
 }

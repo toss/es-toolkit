@@ -26,7 +26,8 @@ export function minBy<T>(items: readonly [T, ...T[]], getValue: (element: T) => 
  * @template T - The type of elements in the array.
  * @param {T[]} items The array of elements to search.
  * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {T | undefined} The element with the minimum value as determined by the `getValue` function.
+ * @returns {T | undefined} The element with the minimum value as determined by the `getValue` function,
+ * or `undefined` if the array is empty.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
@@ -47,7 +48,8 @@ export function minBy<T>(items: readonly T[], getValue: (element: T) => number):
  * @template T - The type of elements in the array.
  * @param {T[]} items The array of elements to search.
  * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {T | undefined} The element with the minimum value as determined by the `getValue` function.
+ * @returns {T | undefined} The element with the minimum value as determined by the `getValue` function,
+ * or `undefined` if the array is empty.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
@@ -61,10 +63,14 @@ export function minBy<T>(items: readonly T[], getValue: (element: T) => number):
  * ); // Returns: { name: 'joe', age: 26 }
  */
 export function minBy<T>(items: readonly T[], getValue: (element: T) => number): T | undefined {
-  let minElement = items[0];
-  let min = Infinity;
+  if (items.length === 0) {
+    return undefined;
+  }
 
-  for (let i = 0; i < items.length; i++) {
+  let minElement = items[0];
+  let min = getValue(minElement);
+
+  for (let i = 1; i < items.length; i++) {
     const element = items[i];
     const value = getValue(element);
     if (value < min) {
