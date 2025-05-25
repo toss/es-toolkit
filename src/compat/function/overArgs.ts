@@ -1,5 +1,5 @@
-import { identity } from '../../function/identity';
-import { iteratee } from '../util/iteratee';
+import { identity } from '../../function/identity.ts';
+import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Creates a function that invokes `func` with its arguments transformed by corresponding transform functions.
