@@ -6,7 +6,6 @@ import { fileURLToPath } from 'node:url';
 import dtsPlugin from 'rollup-plugin-dts';
 import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
-import { BUNDLE_PATH } from './configs/bundlePath.js';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -46,15 +45,9 @@ export default () => {
       outDir: 'dist',
     }),
     browserBuildConfig({
-      inputFile: './src/index.ts',
-      outFile: BUNDLE_PATH.ES_TOOLKIT,
-      name: '_',
-      sourcemap: true,
-    }),
-    browserBuildConfig({
       inputFile: './src/compat/index.ts',
-      outFile: BUNDLE_PATH.ES_TOOLKIT_COMPAT,
-      name: '__',
+      outFile: packageJson.publishConfig.browser,
+      name: '_',
       sourcemap: true,
     }),
   ];
