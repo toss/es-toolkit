@@ -1,6 +1,16 @@
 # overArgs
 
-Creates a function that invokes func with its arguments transformed by the corresponding transform functions.
+Creates a function that invokes `func` with its arguments transformed by corresponding transform functions.
+
+Transform functions can be:
+
+- Functions that accept and return a value
+- Property names (strings) to get a property value from each argument
+- Objects to check if arguments match the object properties
+- Arrays of [property, value] to check if argument properties match values
+
+If a transform is nullish, the identity function is used instead.
+Only transforms arguments up to the number of transform functions provided.
 
 ## Signature
 
@@ -14,9 +24,7 @@ function overArgs<F extends (...args: any[]) => any, T extends Array<any>>(
 ### Parameters
 
 - `func` (`F`): The function to wrap.
-- `transforms` (`T`): The functions to transform arguments. Transform functions can be:
-  - Functions that accept and return a value
-  - Strings for property access (e.g., 'name' accesses the name property)
+- `transforms` (`T`): The functions to transform arguments.
 
 ### Returns
 
