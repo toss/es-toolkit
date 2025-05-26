@@ -17,8 +17,8 @@ export { findIndex } from './array/findIndex.ts';
 export { findLast } from './array/findLast.ts';
 export { findLastIndex } from './array/findLastIndex.ts';
 export { flatMap } from './array/flatMap.ts';
-// export { flatMapDeep } from './array/flatMapDeep.ts';
-// export { flatMapDepth } from './array/flatMapDepth.ts';
+export { flatMapDeep } from './array/flatMapDeep.ts';
+export { flatMapDepth } from './array/flatMapDepth.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
@@ -157,10 +157,10 @@ export { cloneDeepWith } from './object/cloneDeepWith.ts';
 export { cloneWith } from './object/cloneWith.ts';
 // FIXME: Replace with compat version
 // export { countBy } from './object/countBy.ts';
+export { identity } from '../function/identity.ts';
 export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
-// export { defaultsDeep } from '../object/defaultsDeep.ts';
-export { identity } from '../function/identity.ts';
+export { defaultsDeep } from './object/defaultsDeep.ts';
 export { findKey } from './object/findKey.ts';
 export { findLastKey } from './object/findLastKey.ts';
 export { forIn } from './object/forIn.ts';
@@ -182,7 +182,7 @@ export { isEqual } from '../predicate/isEqual.ts';
 export { isFunction } from '../predicate/isFunction.ts';
 // FIXME: Replace with compat version
 export { isLength } from '../predicate/isLength.ts';
-// export { isMatchWith } from './predicate/isMatchWith.ts';
+export { isMatchWith } from './predicate/isMatchWith.ts';
 export { isNative } from './predicate/isNative.ts';
 // FIXME: Replace with compat version
 export { isNull } from '../predicate/isNull.ts';

@@ -1,11 +1,28 @@
+import { identity } from '../../function/identity.ts';
+import { iteratee } from '../util/iteratee.ts';
+
 /**
- * Creates a function that invokes `func` with its arguments transformed by the corresponding
- * transform functions.
+ * Creates a function that invokes `func` with its arguments transformed by corresponding transform functions.
  *
- * @param func - The function to wrap.
- * @param transforms - The functions to transform arguments. A transform can be a function, a string (property shorthand),
- *  or an array/object (matches shorthand).
- * @returns A new function that transforms its arguments before passing them to `func`.
+ * Transform functions can be:
+ * - Functions that accept and return a value
+ * - Property names (strings) to get a property value from each argument
+ * - Objects to check if arguments match the object properties
+ * - Arrays of [property, value] to check if argument properties match values
+ *
+ * If a transform is nullish, the identity function is used instead.
+ * Only transforms arguments up to the number of transform functions provided.
+ *
+ * @template F - The type of the function to wrap
+ * @template T - The type of the transform functions array
+ * @param {F} func - The function to wrap
+ * @param {T} transforms - The functions to transform arguments. Each transform can be:
+ *   - A function that accepts and returns a value
+ *   - A string to get a property value (e.g. 'name' gets the name property)
+ *   - An object to check if arguments match its properties
+ *   - An array of [property, value] to check property matches
+ * @returns {(...args: any[]) => ReturnType<F>} A new function that transforms arguments before passing them to func
+ * @throws {TypeError} If func is not a function.
  * @example
  * ```ts
  * function doubled(n: number) {
@@ -33,31 +50,21 @@
  */
 export function overArgs<F extends (...args: any[]) => any, T extends any[]>(
   func: F,
-  transforms: T
+  _transforms: T
 ): (...args: any[]) => ReturnType<F> {
   if (typeof func !== 'function') {
     throw new TypeError('Expected a function');
   }
 
-  function createTransform(transform: any): (arg: any) => any {
-    if (typeof transform === 'function') {
-      return transform;
-    }
-    if (typeof transform === 'string') {
-      return (obj: any) => obj?.[transform];
-    }
-    return (value: any) => value;
-  }
-
-  const transformsArray = Array.isArray(transforms) ? transforms : [transforms];
+  const transforms = Array.isArray(_transforms) ? _transforms : [_transforms];
 
   return function (this: any, ...args: any[]) {
-    const length = Math.min(args.length, transformsArray.length);
+    const length = Math.min(args.length, transforms.length);
     const transformedArgs = [...args];
 
     for (let i = 0; i < length; i++) {
-      const transform = createTransform(transformsArray[i]);
-      transformedArgs[i] = transform(args[i]);
+      const transform = iteratee(transforms[i] ?? identity);
+      transformedArgs[i] = transform.call(this, args[i]);
     }
 
     return func.apply(this, transformedArgs);
