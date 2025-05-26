@@ -2654,6 +2654,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/is-semver@npm:^1":
+  version: 1.0.2
+  resolution: "@types/is-semver@npm:1.0.2"
+  checksum: 10c0/d4f52bfe267b6b2732165be44499273a2129a726b877138bad399bc7483aef37bc4f6070bef23579a7fcb584f20710e51a4c746546ce8742214e45c4d5b6084a
+  languageName: node
+  linkType: hard
+
 "@types/jscodeshift@npm:^0.12.0":
   version: 0.12.0
   resolution: "@types/jscodeshift@npm:0.12.0"
@@ -3883,10 +3890,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "benchmarks@workspace:benchmarks"
   dependencies:
+    "@types/is-semver": "npm:^1"
     "@types/lodash": "npm:^4"
     "@types/lodash-es": "npm:^4"
     es-toolkit: "workspace:^"
     esbuild: "npm:0.23.0"
+    is-semver: "npm:^1.0.12"
     lodash: "npm:^4.17.21"
     lodash-es: "npm:^4.17.21"
     rfdc: "npm:^1.4.1"
@@ -7054,6 +7063,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-semver@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "is-semver@npm:1.0.12"
+  dependencies:
+    semver: "npm:^7.3.7"
+  checksum: 10c0/224b71e66cf97b7aa9dec09657db0d2e36d41cd20ff6fe26fb26e4cbaf4e249b10b9ac27235d659d6f6be481b4e4fd2c76dfe0b625442f293ac0c9fb7b468110
+  languageName: node
+  linkType: hard
+
 "is-shared-array-buffer@npm:^1.0.2, is-shared-array-buffer@npm:^1.0.3":
   version: 1.0.3
   resolution: "is-shared-array-buffer@npm:1.0.3"
@@ -9492,6 +9510,15 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 10c0/88f33e148b210c153873cb08cfe1e281d518aaa9a666d4d148add6560db5cd3c582f3a08ccb91f38d5f379ead256da9931234ed122057f40bb5766e65e58adaf
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.3.7":
+  version: 7.7.1
+  resolution: "semver@npm:7.7.1"
+  bin:
+    semver: bin/semver.js
+  checksum: 10c0/fd603a6fb9c399c6054015433051bdbe7b99a940a8fb44b85c2b524c4004b023d7928d47cb22154f8d054ea7ee8597f586605e05b52047f048278e4ac56ae958
   languageName: node
   linkType: hard
 
