@@ -2,6 +2,7 @@ export { castArray } from './array/castArray.ts';
 export { chunk } from './array/chunk.ts';
 export { compact } from './array/compact.ts';
 export { concat } from './array/concat.ts';
+export { countBy } from './array/countBy.ts';
 export { difference } from './array/difference.ts';
 export { differenceBy } from './array/differenceBy.ts';
 export { differenceWith } from './array/differenceWith.ts';
@@ -9,6 +10,8 @@ export { drop } from './array/drop.ts';
 export { dropRight } from './array/dropRight.ts';
 export { dropRightWhile } from './array/dropRightWhile.ts';
 export { dropWhile } from './array/dropWhile.ts';
+export { each } from './array/each.ts';
+export { eachRight } from './array/eachRight.ts';
 export { every } from './array/every.ts';
 export { fill } from './array/fill.ts';
 export { filter } from './array/filter.ts';
@@ -16,19 +19,17 @@ export { find } from './array/find.ts';
 export { findIndex } from './array/findIndex.ts';
 export { findLast } from './array/findLast.ts';
 export { findLastIndex } from './array/findLastIndex.ts';
+export { first } from './array/first.ts';
 export { flatMap } from './array/flatMap.ts';
 export { flatMapDeep } from './array/flatMapDeep.ts';
 export { flatMapDepth } from './array/flatMapDepth.ts';
 export { flatten } from './array/flatten.ts';
 export { flattenDeep } from './array/flattenDeep.ts';
 export { flattenDepth } from './array/flattenDepth.ts';
-export { forEach as each } from './array/forEach.ts';
 export { forEach } from './array/forEach.ts';
-export { forEachRight as eachRight } from './array/forEachRight.ts';
 export { forEachRight } from './array/forEachRight.ts';
 export { groupBy } from './array/groupBy.ts';
 export { head } from './array/head.ts';
-export { head as first } from './array/head.ts';
 export { includes } from './array/includes.ts';
 export { indexOf } from './array/indexOf.ts';
 export { initial } from './array/initial.ts';
@@ -91,6 +92,8 @@ export { zipObject } from './array/zipObject.ts';
 export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { zipWith } from './array/zipWith.ts';
 
+export { once } from '../function/once.ts';
+export { unary } from '../function/unary.ts';
 export { after } from './function/after.ts';
 export { ary } from './function/ary.ts';
 export { attempt } from './function/attempt.ts';
@@ -108,18 +111,13 @@ export { flowRight } from './function/flowRight.ts';
 export { memoize } from './function/memoize.ts';
 export { negate } from './function/negate.ts';
 export { nthArg } from './function/nthArg.ts';
-// FIXME: Replace with compat version
-export { once } from '../function/once.ts';
 export { overArgs } from './function/overArgs.ts';
-// export { overArgs } from './function/overArgs.ts';
 export { partial } from './function/partial.ts';
 export { partialRight } from './function/partialRight.ts';
 export { rearg } from './function/rearg.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
 export { throttle } from './function/throttle.ts';
-// FIXME: Replace with compat version
-export { unary } from '../function/unary.ts';
 export { wrap } from './function/wrap.ts';
 
 export { add } from './math/add.ts';
@@ -144,23 +142,28 @@ export { subtract } from './math/subtract.ts';
 export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
 
+export { identity } from '../function/identity.ts';
+export { noop } from '../function/noop.ts';
+export { invert } from '../object/invert.ts';
+export { isEqual } from '../predicate/isEqual.ts';
+export { isFunction } from '../predicate/isFunction.ts';
+export { isLength } from '../predicate/isLength.ts';
+export { isNull } from '../predicate/isNull.ts';
+export { isUndefined } from '../predicate/isUndefined.ts';
 export { assign } from './object/assign.ts';
 export { assignIn } from './object/assignIn.ts';
-export { assignIn as extend } from './object/assignIn.ts';
 export { assignInWith } from './object/assignInWith.ts';
-export { assignInWith as extendWith } from './object/assignInWith.ts';
 export { assignWith } from './object/assignWith.ts';
 export { at } from './object/at.ts';
 export { clone } from './object/clone.ts';
 export { cloneDeep } from './object/cloneDeep.ts';
 export { cloneDeepWith } from './object/cloneDeepWith.ts';
 export { cloneWith } from './object/cloneWith.ts';
-// FIXME: Replace with compat version
-// export { countBy } from './object/countBy.ts';
-export { identity } from '../function/identity.ts';
 export { create } from './object/create.ts';
 export { defaults } from './object/defaults.ts';
 export { defaultsDeep } from './object/defaultsDeep.ts';
+export { extend } from './object/extend.ts';
+export { extendWith } from './object/extendWith.ts';
 export { findKey } from './object/findKey.ts';
 export { findLastKey } from './object/findLastKey.ts';
 export { forIn } from './object/forIn.ts';
@@ -173,29 +176,13 @@ export { functionsIn } from './object/functionsIn.ts';
 export { get } from './object/get.ts';
 export { has } from './object/has.ts';
 export { hasIn } from './object/hasIn.ts';
-// FIXME: Replace with compat version
-export { invert } from '../object/invert.ts';
 export { invertBy } from './object/invertBy.ts';
-// FIXME: Replace with compat version
-export { isEqual } from '../predicate/isEqual.ts';
-// FIXME: Replace with compat version
-export { isFunction } from '../predicate/isFunction.ts';
-// FIXME: Replace with compat version
-export { isLength } from '../predicate/isLength.ts';
-export { isMatchWith } from './predicate/isMatchWith.ts';
-export { isNative } from './predicate/isNative.ts';
-// FIXME: Replace with compat version
-export { isNull } from '../predicate/isNull.ts';
-// FIXME: Replace with compat version
-export { isUndefined } from '../predicate/isUndefined.ts';
 export { keys } from './object/keys.ts';
 export { keysIn } from './object/keysIn.ts';
 export { mapKeys } from './object/mapKeys.ts';
 export { mapValues } from './object/mapValues.ts';
 export { merge } from './object/merge.ts';
 export { mergeWith } from './object/mergeWith.ts';
-// FIXME: Replace with compat version
-export { noop } from '../function/noop.ts';
 export { omit } from './object/omit.ts';
 export { omitBy } from './object/omitBy.ts';
 export { pick } from './object/pick.ts';
@@ -214,9 +201,9 @@ export { update } from './object/update.ts';
 export { updateWith } from './object/updateWith.ts';
 export { values } from './object/values.ts';
 export { valuesIn } from './object/valuesIn.ts';
+export { isMatchWith } from './predicate/isMatchWith.ts';
+export { isNative } from './predicate/isNative.ts';
 
-export { bindAll } from './util/bindAll.ts';
-// FIXME: Replace with compat version
 export { capitalize } from '../string/capitalize.ts';
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
@@ -252,6 +239,7 @@ export { isWeakMap } from './predicate/isWeakMap.ts';
 export { isWeakSet } from './predicate/isWeakSet.ts';
 export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
+export { bindAll } from './util/bindAll.ts';
 
 export { camelCase } from './string/camelCase.ts';
 export { deburr } from './string/deburr.ts';
@@ -270,7 +258,8 @@ export { snakeCase } from './string/snakeCase.ts';
 export { split } from './string/split.ts';
 export { startCase } from './string/startCase.ts';
 export { startsWith } from './string/startsWith.ts';
-export { template, templateSettings } from './string/template.ts';
+export { template } from './string/template.ts';
+export { templateSettings } from './string/templateSettings.ts';
 export { toLower } from './string/toLower.ts';
 export { toUpper } from './string/toUpper.ts';
 export { trim } from './string/trim.ts';

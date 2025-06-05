@@ -31,7 +31,9 @@
   },
   "files": [
     "dist",
-    "*.d.ts"
+    "compat",
+    "*.d.ts",
+    "*.js"
   ],
   "publishConfig": {
     "access": "public",
@@ -68,6 +70,12 @@
         "require": {
           "types": "./dist/compat/index.d.ts",
           "default": "./dist/compat/index.js"
+        }
+      },
+      "./compat/*": {
+        "require": {
+          "types": "./compat/*.d.ts",
+          "default": "./compat/*.js"
         }
       },
       "./error": {
