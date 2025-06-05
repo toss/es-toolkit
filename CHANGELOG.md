@@ -1,5 +1,27 @@
 # es-toolkit Changelog
 
+## Version v1.39.0
+
+🎉 Released on June 5th, 2025. 🎉
+
+We're thrilled to announce that `es-toolkit/compat` has achieved full compatibility with Lodash! 🎉
+
+A huge thank you to all our contributors who made this possible.
+
+- Introduced compatibility functions for [defaultsDeep](https://es-toolkit.slash.page/reference/compat/object/defaultsDeep.html), [isMatchWith](https://es-toolkit.slash.page/reference/compat/predicate/isMatchWith.html), [flatMapDepth](https://es-toolkit.slash.page/reference/compat/array/flatMapDepth.html), [flatMapDeep](https://es-toolkit.slash.page/reference/compat/array/flatMapDeep.html), [overArgs](https://es-toolkit.slash.page/reference/compat/function/overArgs.html), [findLastKey](https://es-toolkit.slash.page/reference/compat/object/findLastKey.html) and [truncate](https://es-toolkit.slash.page/reference/compat/string/truncate.html).
+- Enhanced build system to support `es-toolkit/compat/*` module imports.
+- Fixed special functions like `each` to ensure proper functionality.
+- Fixed Deno compatibility issues for `defaultsDeep` function.
+- Fixed import paths in Deno environment.
+- Added benchmark comparing es-toolkit and lodash `identity` function performance.
+- Improved documentation and test coverage for various functions.
+
+We sincerely thank @raon0211, @dayongkr, @mreiden, @hwibaski, @shren207, @jiji-hoon96, and @myungjuice for their contributions. We appreciate your great efforts!
+
+### ⭐️ Special Thanks to Our Amazing Contributors Who Made 100% Compatibility Possible ⭐️
+
+@raon0211, @dayongkr, @D-Sketon, @mass2527, @ssi02014, @shren207, @chhw130, @haejunejung, @jsparkdev, @manudeli, @jgjgill, @hyesungoh, @kaehehehe, @filipsobol, @fvsch, @wondonghwi, @seungrodotlee, @bertyhell, @minchodang, @Jeong-Rae, @kangju2000, @juno7803, @wojtekmaj, @mattiacoll, @changwoolab, @po4tion, @gyumong, @choi2021, @mancuoj, @de-novo, @eunhyulkim, @kim-sung-jee, @gs18004, @Hanna922, @Na-hyunwoo, @aken-you, @tanggd, @ho991217, @piquark6046, @jiji-hoon96, @seonghun0828, @pkovzz, @nnnnoel, @noelkim-prestolabs, @minsoo-web, @hautest, @scato3, @l2hyunwoo, @WooWan, @VVSOGI, @k-jeonghee, @knott11, @lukaszkowalik2, @moonheekim0118, @sadobass, @minjongbaek, @umsungjun, @sossost, @sunrabbit123, @Seung-wan, @cruelladevil, @iDevGon, @oror-sine, @1eeminhyeong, @benzyminzy, @BlackWhite2000, @tooooo1, @L2HYUNN, @DonghyunKim98, @dasom-jo, @guesung, @uniqueeest, @KiKoS0, @myungjuice, @seung-juv, @Collection50, @nowethan, @coding-honey, @ariandel-dev, @apeltop, @jch1223, @yhay81, @milooy, @raviqqe, @youznn, @BinskLee, @YEONDG, @shinwonse, @willmanduffy, @vjo, @touhidrahman, @T3sT3ro, @belgattitude, @WISUNGWON, @anaclumos, @hsskey, @BasixKOR, @Kyujenius, @Dohun-choi, @dngur9801, @sanginchun, @westofsky, @DONG-8, @yhmpc, @pbstar, @MoXiaoluo, @uussong, @tuhm1, @tisou1, @spookyuser, @sa02045, @Hotanya, @nia3y, @mreiden, @kms0219kms, @IkumaTadokoro, @hansolbangul, @hainan-612, @hwibaski, @jeongshin, @HoberMin, @ohprettyhak, @gweesin, @FengBuPi, @kyvg, @evan-moon, @chldmsqls34, @kimpuro, @dogagenc, @Duck-98, @redd97, @faner11, @bhollis, @jaehunn, @babay123, @beomxtone, @ankitjha420, @shan-mx, @2skydev, @StyleShit, @confidential-nt, @siddsarkar, @seongminn, @healtheloper, @pnodet, @Gaic4o, @leeminhee119, @leehj322, @kristian240, @kingston, @kim-dongho, @jungwoo3490, @joris-gallot, @jonganebski, @jiwooproity, @moshuying, @jakvbs, @therealjamesjung, @SaeWooKKang and @HyeokjaeLee
+
 ## Version v1.38.0
 
 Released on May 18th, 2025.
