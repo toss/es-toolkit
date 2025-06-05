@@ -1,4 +1,4 @@
-import { isPlainObject } from '../compat';
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
  * Recursively assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
