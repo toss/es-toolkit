@@ -1,6 +1,6 @@
 {
   "name": "@es-toolkit/codemod-lodash-to-es-toolkit",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A codemod to transform lodash imports to es-toolkit/compat imports",
   "keywords": [
     "codemod",
