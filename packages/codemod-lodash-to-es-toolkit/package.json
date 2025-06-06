@@ -1,0 +1,56 @@
+{
+  "name": "@es-toolkit/codemod-lodash-to-es-toolkit",
+  "version": "1.0.0",
+  "description": "A codemod to transform lodash imports to es-toolkit/compat imports",
+  "keywords": [
+    "codemod",
+    "jscodeshift",
+    "lodash",
+    "es-toolkit",
+    "migration",
+    "refactor"
+  ],
+  "homepage": "https://github.com/toss/es-toolkit/tree/main/packages/codemod-lodash-to-es-toolkit",
+  "bugs": "https://github.com/toss/es-toolkit/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toss/es-toolkit.git",
+    "directory": "packages/codemod-lodash-to-es-toolkit"
+  },
+  "license": "MIT",
+  "author": "Toss",
+  "main": "dist/transform.js",
+  "module": "dist/transform.mjs",
+  "types": "dist/transform.d.ts",
+  "bin": {
+    "es-toolkit-codemod-lodash": "./bin/cli.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "dev": "rollup -c rollup.config.js --watch"
+  },
+  "dependencies": {
+    "jscodeshift": "^17.3.0"
+  },
+  "devDependencies": {
+    "@types/jscodeshift": "^17.3.0",
+    "@types/node": "^22.7.4",
+    "rollup": "^4.19.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.8.2",
+    "vitest": "^2.1.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -11,7 +11,8 @@
   "license": "MIT",
   "workspaces": [
     "docs",
-    "benchmarks"
+    "benchmarks",
+    "packages/codemod-lodash-to-es-toolkit"
   ],
   "packageManager": "yarn@4.9.1",
   "react-native": "./dist/index.js",
