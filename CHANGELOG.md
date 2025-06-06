@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.39.1
+
+Released on June 6th, 2025.
+
+- Resolved mismatch between named and default exports in compat .d.ts and .js files to improve TypeScript integration.
+
 ## Version v1.39.0
 
 🎉 Released on June 5th, 2025. 🎉
