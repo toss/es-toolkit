@@ -1,4 +1,4 @@
-// 예제 파일 - lodash 사용
+// Example file - using lodash
 import _ from 'lodash';
 import { filter, map, reduce } from 'lodash';
 import { cloneDeep } from 'lodash-es';
@@ -6,11 +6,12 @@ import debounce from 'lodash/debounce';
 import { pipe } from 'lodash/fp';
 import throttle from 'lodash/throttle';
 
-// 다양한 lodash 함수 사용 예제
+// Examples of using various lodash functions
 const data = [1, 2, 3, 4, 5];
 
 const doubledData = _.map(data, x => x * 2);
 const filteredData = filter(data, x => x > 2);
+const mappedData = map(data, x => x + 1);
 const sum = reduce(data, (acc, val) => acc + val, 0);
 
 const debouncedFn = debounce(() => {
@@ -23,4 +24,9 @@ const throttledFn = throttle(() => {
 
 const clonedObject = cloneDeep({ a: 1, b: { c: 2 } });
 
-export { doubledData, filteredData, sum, debouncedFn, throttledFn, clonedObject };
+const pipeExample = pipe(
+  x => x + 1,
+  x => x * 2
+)(5);
+
+export { doubledData, filteredData, mappedData, sum, debouncedFn, throttledFn, clonedObject, pipeExample };

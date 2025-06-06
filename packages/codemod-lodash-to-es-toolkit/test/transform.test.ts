@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import jscodeshift from 'jscodeshift';
 import transform from '../src/transform';
 
-// transform 함수를 직접 테스트하는 헬퍼 함수
 function testTransform(input: string): string | null {
   const fileInfo = {
     path: 'test.js',

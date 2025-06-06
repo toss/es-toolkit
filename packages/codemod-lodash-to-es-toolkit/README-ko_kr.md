@@ -1,30 +1,30 @@
 # @es-toolkit/codemod-lodash-to-es-toolkit
 
-🔧 **Automatic migration codemod from lodash to es-toolkit/compat**
+🔧 **lodash에서 es-toolkit/compat으로 자동 마이그레이션하는 codemod**
 
-This codemod automatically transforms lodash import statements to es-toolkit/compat import statements. It provides safe and accurate transformations based on AST (Abstract Syntax Tree).
+이 codemod는 lodash import문을 es-toolkit/compat import문으로 자동 변환해주는 도구입니다. AST(Abstract Syntax Tree)를 기반으로 안전하고 정확한 변환을 제공합니다.
 
-## ✨ Key Features
+## ✨ 주요 기능
 
-* 🎯 **Supports all lodash patterns**: Perfect support for various lodash import styles
-* 📝 **Quote style preservation**: Automatically detects and maintains the quote style of the original code
-* 🔒 **Safe transformation**: Accurate and safe code transformation based on AST
-* ⚡ **Fast processing**: Quickly processes even large codebases
+* 🎯 **모든 lodash 패턴 지원**: 다양한 lodash import 스타일을 완벽 지원
+* 📝 **Quote 스타일 보존**: 원본 코드의 따옴표 스타일을 자동으로 감지하고 유지
+* 🔒 **안전한 변환**: AST 기반으로 정확하고 안전한 코드 변환
+* ⚡ **빠른 처리**: 대규모 코드베이스도 빠르게 처리
 
-## 🚀 Quick Start
+## 🚀 빠른 시작
 
 ```bash
-# Using npm
+# npm을 사용하는 경우
 npx @es-toolkit/codemod-lodash-to-es-toolkit src/
 
-# Using yarn  
+# yarn을 사용하는 경우  
 yarn dlx @es-toolkit/codemod-lodash-to-es-toolkit src/
 
-# Preview mode (check changes without applying them)
+# 미리보기 모드 (변경사항을 적용하지 않고 확인만)
 npx @es-toolkit/codemod-lodash-to-es-toolkit src/ --dry
 ```
 
-## 📋 Supported transformations
+## 📋 지원하는 변환
 
 ### 1. Default Import
 
@@ -128,50 +128,50 @@ import _ from "lodash";
 import * as _ from "es-toolkit/compat";
 ```
 
-## 🎯 Usage
+## 🎯 사용법
 
-### Basic Usage
+### 기본 사용법
 
 ```bash
 npx @es-toolkit/codemod-lodash-to-es-toolkit <path>
 ```
 
-### Options
+### 옵션
 
-| Option | Description | Example |
+| 옵션 | 설명 | 예시 |
 |------|------|------|
-| `<path>` | File or directory path to transform | `src/` , `components/` |
-| `--dry` | Preview mode (don't apply changes) | `--dry` |
-| `--help` , `-h` | Show help | `--help` |
+| `<path>` | 변환할 파일 또는 디렉토리 경로 | `src/` , `components/` |
+| `--dry` | 미리보기 모드 (변경 적용 안함) | `--dry` |
+| `--help` , `-h` | 도움말 표시 | `--help` |
 
-### Usage Examples
+### 사용 예시
 
 ```bash
-# Transform entire src directory
+# 전체 src 디렉토리 변환
 npx @es-toolkit/codemod-lodash-to-es-toolkit src/
 
-# Transform specific file only
+# 특정 파일만 변환
 npx @es-toolkit/codemod-lodash-to-es-toolkit src/utils/helpers.ts
 
-# Check changes in preview mode
+# 미리보기 모드로 변경사항 확인
 npx @es-toolkit/codemod-lodash-to-es-toolkit src/ --dry
 
-# Transform components directory only
+# components 디렉토리만 변환
 npx @es-toolkit/codemod-lodash-to-es-toolkit src/components/
 ```
 
-## ⚠️ Important Notes
+## ⚠️ 주의사항
 
-1. **Backup Required**: Always create a backup before using on important codebases.
-2. **Preview Check**: Use the `--dry` option to check changes first.
-3. **Run Tests**: Always run tests after transformation to verify functionality.
-4. **compat Mode**: es-toolkit/compat provides 100% compatible API with lodash.
+1. **백업 필수**: 중요한 코드베이스에서 사용하기 전에 반드시 백업을 만드세요.
+2. **미리보기 확인**: `--dry` 옵션으로 변경사항을 먼저 확인하세요.
+3. **테스트 실행**: 변환 후에는 반드시 테스트를 실행하여 동작을 확인하세요.
+4. **compat 모드**: es-toolkit/compat은 lodash와 100% 호환되는 API를 제공합니다.
 
-## 🔗 Related Links
+## 🔗 관련 링크
 
-* [es-toolkit Official Documentation](https://es-toolkit.slash.page)
+* [es-toolkit 공식 문서](https://es-toolkit.slash.page)
 * [es-toolkit GitHub](https://github.com/toss/es-toolkit)
 
-## 📄 License
+## 📄 라이선스
 
-MIT License - See [LICENSE](../../LICENSE) file for details.
+MIT License - [LICENSE](../../LICENSE) 파일을 참고하세요. 

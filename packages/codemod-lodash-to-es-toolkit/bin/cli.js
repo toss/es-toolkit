@@ -4,7 +4,6 @@ const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
-// CLI 도움말 표시
 function showHelp() {
   console.log(`
 🔧 es-toolkit Codemod for Lodash Migration
@@ -111,7 +110,6 @@ function main() {
   }
 }
 
-// CLI 실행
 if (require.main === module) {
   main();
 }

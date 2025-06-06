@@ -1,4 +1,4 @@
-// 예제 파일 - es-toolkit/compat 사용 (변환 후)
+// Example file - using es-toolkit/compat (after transformation)
 import * as _ from 'es-toolkit/compat';
 import { filter, map, reduce } from 'es-toolkit/compat';
 import { debounce } from 'es-toolkit/compat';
@@ -6,11 +6,12 @@ import { throttle } from 'es-toolkit/compat';
 import { pipe } from 'es-toolkit/compat';
 import { cloneDeep } from 'es-toolkit/compat';
 
-// 다양한 es-toolkit/compat 함수 사용 예제
+// Examples of using various es-toolkit/compat functions
 const data = [1, 2, 3, 4, 5];
 
 const doubledData = _.map(data, x => x * 2);
 const filteredData = filter(data, x => x > 2);
+const mappedData = map(data, x => x + 1);
 const sum = reduce(data, (acc, val) => acc + val, 0);
 
 const debouncedFn = debounce(() => {
@@ -23,4 +24,9 @@ const throttledFn = throttle(() => {
 
 const clonedObject = cloneDeep({ a: 1, b: { c: 2 } });
 
-export { doubledData, filteredData, sum, debouncedFn, throttledFn, clonedObject };
+const pipeExample = pipe(
+  x => x + 1,
+  x => x * 2
+)(5);
+
+export { doubledData, filteredData, mappedData, sum, debouncedFn, throttledFn, clonedObject, pipeExample };

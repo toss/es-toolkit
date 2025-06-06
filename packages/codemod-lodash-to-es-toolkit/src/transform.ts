@@ -7,10 +7,10 @@ export default function transform(file: FileInfo, api: API): string | null {
     const root = j(file.source);
     let hasChanges = false;
 
-    // 모든 lodash 관련 import 변환
+    // Transform all lodash-related imports
     hasChanges = transformLodashImports(root, j) || hasChanges;
 
-    // 원본 코드에서 사용한 quote 스타일 감지
+    // Detect quote style used in original code
     const quoteStyle = detectQuoteStyle(file.source);
 
     return hasChanges ? root.toSource({ quote: quoteStyle }) : null;
@@ -21,11 +21,11 @@ export default function transform(file: FileInfo, api: API): string | null {
 }
 
 function detectQuoteStyle(source: string): 'single' | 'double' {
-  // import 문에서 사용된 quote 스타일을 감지
+  // Detect quote style used in import statements
   const singleQuoteMatches = source.match(/import.*from\s+'/g) || [];
   const doubleQuoteMatches = source.match(/import.*from\s+"/g) || [];
 
-  // 더 많이 사용된 스타일을 반환, 기본값은 single
+  // Return the more frequently used style, default is single
   return doubleQuoteMatches.length > singleQuoteMatches.length ? 'double' : 'single';
 }
 
@@ -86,7 +86,7 @@ function transformLodashImports(root: Collection, j: JSCodeshift): boolean {
     lodashFpImports.replaceWith(path => {
       const { node } = path;
 
-      // lodash/fp의 named imports를 그대로 es-toolkit/compat으로 변경
+      // Transform lodash/fp named imports directly to es-toolkit/compat
       if (node.specifiers) {
         return j.importDeclaration(node.specifiers, j.literal('es-toolkit/compat'));
       }
@@ -96,7 +96,7 @@ function transformLodashImports(root: Collection, j: JSCodeshift): boolean {
   }
 
   // 4. import debounce from 'lodash/debounce' → import { debounce } from 'es-toolkit/compat'
-  // (lodash/fp와 lodash-es는 이미 처리했으므로 제외)
+  // (lodash/fp and lodash-es are already processed, so exclude them)
   const lodashFunctionImports = root.find(j.ImportDeclaration).filter(path => {
     const source = path.node.source.value;
     return typeof source === 'string' && source.startsWith('lodash/') && source !== 'lodash/fp';
@@ -112,7 +112,7 @@ function transformLodashImports(root: Collection, j: JSCodeshift): boolean {
         const localIdentifier = node.specifiers[0].local;
         const importedName = localIdentifier.type === 'Identifier' ? localIdentifier.name : localIdentifier.toString();
 
-        // 함수명이 다르면 alias 사용
+        // Use alias if function name is different
         const specifier =
           functionName === importedName
             ? j.importSpecifier(j.identifier(functionName))
