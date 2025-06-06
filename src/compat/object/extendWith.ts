@@ -1,1 +1,1 @@
-export { assignInWith as extendWith } from './assignInWith';
+export { assignInWith as extendWith } from './assignInWith.ts';
