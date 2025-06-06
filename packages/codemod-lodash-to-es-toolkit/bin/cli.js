@@ -38,7 +38,6 @@ Repository: https://github.com/toss/es-toolkit
   `);
 }
 
-// 메인 실행 로직
 function main() {
   const args = process.argv.slice(2);
 

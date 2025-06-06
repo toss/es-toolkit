@@ -31,7 +31,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rollup -c rollup.config.js",
+    "build": "rollup -c rollup.config.mjs",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "dev": "rollup -c rollup.config.js --watch"
