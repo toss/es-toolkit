@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.39.3
+
+Released on June 7th, 2025.
+
+- Fixed postbuild script to ensure compat function categorization aligns with src directory structure.
+
 ## Version v1.39.2
 
 Released on June 7th, 2025.
