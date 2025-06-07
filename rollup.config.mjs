@@ -84,7 +84,7 @@ function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) 
       ...fileNames(extension),
       // Using preserveModules disables bundling and the creation of chunks,
       // leading to a result that is a mirror of the input module graph.
-      preserveModules: isESM,
+      preserveModules: true,
       sourcemap,
       generatedCode: 'es2015',
       // Hoisting transitive imports adds bare imports in modules,

@@ -27,6 +27,9 @@ features:
     details: es-toolkit在现代JavaScript运行时中的性能比其他库提高了2-3倍。
   - title: 小型包体积
     details: 与其他替代库相比，es-toolkit的JavaScript代码体积最多减少了97%。
+  - title: 简单替代Lodash
+    details: es-toolkit提供了一个完整的兼容层，可以轻松替代Lodash。
+    link: /zh_hans/compatibility
   - title: 现代化实现
     details: es-toolkit充分利用现代JavaScript API进行简单且无错误的实现。
   - title: 强大的类型支持

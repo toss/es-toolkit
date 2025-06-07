@@ -27,6 +27,9 @@ features:
     details: 같은 기능을 제공하는 다른 라이브러리와 비교했을 때, 평균 2-3배 빠른 런타임 성능을 제공해요.
   - title: 작은 번들 사이즈
     details: 같은 기능의 함수들을 기준으로, 최대 97% 작은 JavaScript 크기를 가져요.
+  - title: 쉬운 Lodash 대체
+    details: es-toolkit은 Lodash를 손쉽게 대체할 수 있는 완전한 호환성 레이어를 제공해요.
+    link: /ko/compatibility
   - title: 현대적인 구현
     details: 최신 JavaScript API를 사용하여, 구현이 직관적이고 간단해요.
   - title: 견고한 타입
