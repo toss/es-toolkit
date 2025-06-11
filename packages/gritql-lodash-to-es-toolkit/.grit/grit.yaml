@@ -1,0 +1,44 @@
+version: 0.0.1
+patterns:
+  - name: lodash_default_import_to_es_toolkit_compat
+    level: info
+    title: 'Convert lodash default import to es-toolkit/compat namespace import'
+    description: "Transforms `import _ from 'lodash'` to `import * as _ from 'es-toolkit/compat'`"
+    body: |
+      `import $name from 'lodash'` => `import * as $name from 'es-toolkit/compat'`
+
+  - name: lodash_named_imports_to_es_toolkit_compat
+    level: info
+    title: 'Convert lodash named imports to es-toolkit/compat'
+    description: "Transforms `import { func1, func2 } from 'lodash'` to `import { func1, func2 } from 'es-toolkit/compat'`"
+    body: |
+      `import { $imports } from 'lodash'` => `import { $imports } from 'es-toolkit/compat'`
+
+  - name: lodash_individual_imports_to_es_toolkit_compat
+    level: info
+    title: 'Convert individual lodash function imports to es-toolkit/compat named imports'
+    description: "Transforms `import debounce from 'lodash/debounce'` to `import { debounce } from 'es-toolkit/compat'`"
+    body: |
+      `import $funcName from 'lodash/$moduleName'` => `import { $moduleName } from 'es-toolkit/compat'` where {
+        $funcName <: identifier(),
+        $moduleName <: identifier(),
+        $funcName <: $moduleName
+      }
+
+  - name: lodash_individual_imports_aliased_to_es_toolkit_compat
+    level: info
+    title: 'Convert aliased individual lodash function imports to es-toolkit/compat'
+    description: "Transforms `import myDebounce from 'lodash/debounce'` to `import { debounce as myDebounce } from 'es-toolkit/compat'`"
+    body: |
+      `import $alias from 'lodash/$funcName'` => `import { $funcName as $alias } from 'es-toolkit/compat'` where {
+        $alias <: identifier(),
+        $funcName <: identifier(),
+        $alias <: not $funcName
+      }
+
+  - name: lodash_es_imports_to_es_toolkit_compat
+    level: info
+    title: 'Convert lodash-es imports to es-toolkit/compat'
+    description: "Transforms `import { func1, func2 } from 'lodash-es'` to `import { func1, func2 } from 'es-toolkit/compat'`"
+    body: |
+      `import { $imports } from 'lodash-es'` => `import { $imports } from 'es-toolkit/compat'`
