@@ -50,6 +50,24 @@ export const shared = defineConfig({
       }
     ],
     [
+      "script",
+      {
+        type: "module",
+      },
+      `
+        import * as es from "https://cdn.jsdelivr.net/npm/es-toolkit@latest/+esm";
+        import * as esCompat from "https://cdn.jsdelivr.net/npm/es-toolkit@latest/compat/+esm";
+        window.es = es;
+        window.esCompat = esCompat;
+        setTimeout(() => {
+          console.log(
+            '%cTry es-toolkit in the console! 😃',
+            'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
+          );
+        }, 1000);
+      `
+    ],
+    [
       "meta",
       {
         property: "og:image",

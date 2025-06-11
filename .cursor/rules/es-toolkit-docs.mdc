@@ -65,7 +65,7 @@ Insert the function signature(s), including overrides if applicable.
 
 ### Parameters
 
-- `[Parameter Name]` (`[Paramter Type]`):: [Description] // Insert content from jsdoc @params
+- `[Parameter Name]` (`[Parameter Type]`):: [Description] // Insert content from jsdoc @params
 
 ### Returns [영어면 Returns 한국어면 반환 값 일본어면 戻り値 zh_hans면 返回值]
 

@@ -1,5 +1,17 @@
 # es-toolkit Changelog
 
+## Version v1.39.3
+
+Released on June 7th, 2025.
+
+- Fixed postbuild script to ensure compat function categorization aligns with src directory structure.
+
+## Version v1.39.2
+
+Released on June 7th, 2025.
+
+- Added dual package export support for individual compat functions (e.g., `es-toolkit/compat/add`).
+
 ## Version v1.39.1
 
 Released on June 6th, 2025.
