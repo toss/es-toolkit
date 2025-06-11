@@ -3,7 +3,6 @@ import * as _ from 'es-toolkit/compat';
 import { filter, map, reduce } from 'es-toolkit/compat';
 import { debounce } from 'es-toolkit/compat';
 import { throttle } from 'es-toolkit/compat';
-import { pipe } from 'es-toolkit/compat';
 import { cloneDeep } from 'es-toolkit/compat';
 
 // Examples of using various es-toolkit/compat functions
@@ -23,10 +22,5 @@ const throttledFn = throttle(() => {
 }, 1000);
 
 const clonedObject = cloneDeep({ a: 1, b: { c: 2 } });
-
-const pipeExample = pipe(
-  x => x + 1,
-  x => x * 2
-)(5);
 
 export { doubledData, filteredData, mappedData, sum, debouncedFn, throttledFn, clonedObject, pipeExample };

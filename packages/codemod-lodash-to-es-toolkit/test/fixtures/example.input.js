@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { filter, map, reduce } from 'lodash';
 import { cloneDeep } from 'lodash-es';
 import debounce from 'lodash/debounce';
-import { pipe } from 'lodash/fp';
 import throttle from 'lodash/throttle';
 
 // Examples of using various lodash functions
@@ -23,10 +22,5 @@ const throttledFn = throttle(() => {
 }, 1000);
 
 const clonedObject = cloneDeep({ a: 1, b: { c: 2 } });
-
-const pipeExample = pipe(
-  x => x + 1,
-  x => x * 2
-)(5);
 
 export { doubledData, filteredData, mappedData, sum, debouncedFn, throttledFn, clonedObject, pipeExample };

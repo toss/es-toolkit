@@ -85,19 +85,6 @@ const result = map([1, 2, 3], x => x * 2);`;
     });
   });
 
-  describe('lodash/fp transformation', () => {
-    it('should transform lodash/fp imports', () => {
-      const input = `import { pipe, map } from 'lodash/fp';
-const result = pipe(map(x => x * 2))([1, 2, 3]);`;
-
-      const expected = `import { pipe, map } from 'es-toolkit/compat';
-const result = pipe(map(x => x * 2))([1, 2, 3]);`;
-
-      const result = testTransform(input);
-      expect(result).toBe(expected);
-    });
-  });
-
   describe('mixed imports', () => {
     it('should handle multiple types of lodash imports in one file', () => {
       const input = `import _ from 'lodash';

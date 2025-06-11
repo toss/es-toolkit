@@ -77,29 +77,11 @@ function transformLodashImports(root: Collection, j: JSCodeshift): boolean {
     hasChanges = true;
   }
 
-  // 3. import { pipe, map } from 'lodash/fp' → import { pipe, map } from 'es-toolkit/compat'
-  const lodashFpImports = root.find(j.ImportDeclaration, {
-    source: { value: 'lodash/fp' },
-  });
-
-  if (lodashFpImports.length > 0) {
-    lodashFpImports.replaceWith(path => {
-      const { node } = path;
-
-      // Transform lodash/fp named imports directly to es-toolkit/compat
-      if (node.specifiers) {
-        return j.importDeclaration(node.specifiers, j.literal('es-toolkit/compat'));
-      }
-      return node;
-    });
-    hasChanges = true;
-  }
-
-  // 4. import debounce from 'lodash/debounce' → import { debounce } from 'es-toolkit/compat'
-  // (lodash/fp and lodash-es are already processed, so exclude them)
+  // 3. import debounce from 'lodash/debounce' → import { debounce } from 'es-toolkit/compat'
+  // (lodash-es are already processed, so exclude them)
   const lodashFunctionImports = root.find(j.ImportDeclaration).filter(path => {
     const source = path.node.source.value;
-    return typeof source === 'string' && source.startsWith('lodash/') && source !== 'lodash/fp';
+    return typeof source === 'string' && source.startsWith('lodash/');
   });
 
   if (lodashFunctionImports.length > 0) {

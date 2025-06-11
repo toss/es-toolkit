@@ -98,36 +98,6 @@ import {
 } from 'es-toolkit/compat';
 ```
 
-### 6. lodash/fp Import
-
-```javascript
-// Before
-import {
-    pipe,
-    map
-} from 'lodash/fp';
-
-// After
-import {
-    pipe,
-    map
-} from 'es-toolkit/compat';
-```
-
-### 7. Quote Style Preservation
-
-```javascript
-// Single quotes preserved
-import _ from 'lodash';
-// ↓
-import * as _ from 'es-toolkit/compat';
-
-// Double quotes preserved
-import _ from "lodash";
-// ↓
-import * as _ from "es-toolkit/compat";
-```
-
 ## 🎯 Usage
 
 ### Basic Usage
