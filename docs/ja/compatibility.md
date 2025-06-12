@@ -27,6 +27,7 @@ chunk([1, 2, 3, 4], 0);
 
 - `lodash`のテストケースで作成された機能
 - `@types/lodash`または`@types/lodash-es`の型から推論できる機能
+- `lodash`から`es-toolkit`にコードを移行する際に発見された機能の違い（[イシューページ](https://github.com/toss/es-toolkit/issues)に報告してください。）
 
 以下のような機能は`es-toolkit/compat`ではサポートしていません。
 

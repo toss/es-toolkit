@@ -26,6 +26,7 @@ chunk([1, 2, 3, 4], 0);
 
 - 作为 lodash 测试用例编写的功能。
 - 可以从 `@types/lodash` 或 `@types/lodash-es` 的类型推断出的功能。
+- 在从 `lodash` 迁移到 `es-toolkit` 的过程中发现的功能差异（请在[问题页面](https://github.com/toss/es-toolkit/issues)报告。）
 
 然而，以下内容不在 `es-toolkit/compat` 的范围之内：
 
