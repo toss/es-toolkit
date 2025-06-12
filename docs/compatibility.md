@@ -1,5 +1,14 @@
 # Compatibility with Lodash
 
+::: tip ✅ Starting with version 1.39.3, we ensure 100% compatibility with Lodash
+
+`es-toolkit/compat` functions exactly like all Lodash functions while being lighter and faster.
+
+- It ensures identical behavior with Lodash's actual test code.
+- It is used by well-known open-source libraries like Storybook and Recharts.
+
+:::
+
 ```tsx
 // es-toolkit/compat aims to provide 100% feature parity with lodash
 import { chunk } from 'es-toolkit/compat';

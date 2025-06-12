@@ -1,5 +1,14 @@
 # 与 Lodash 兼容性
 
+::: tip ✅ 从1.39.3版本开始，我们确保与Lodash 100%兼容
+
+`es-toolkit/compat`在所有Lodash函数上表现相同，同时更轻更快。
+
+- 确保与Lodash的实际测试代码行为一致。
+- 被Storybook、Recharts等知名开源库使用。
+
+:::
+
 ```tsx
 // es-toolkit/compat 的目标是提供与 lodash 百分之百的功能兼容性
 import { chunk } from 'es-toolkit/compat';

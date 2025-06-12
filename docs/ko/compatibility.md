@@ -1,5 +1,14 @@
 # Lodash와의 호환성
 
+::: tip ✅ 1.39.3 버전부터 Lodash와 100% 호환성을 보장해요
+
+`es-toolkit/compat`은 Lodash의 모든 함수에 대해서 똑같이 동작하면서 더 가볍고 빨라요.
+
+- Lodash의 실제 테스트 코드로 동일하게 동작하는 것을 보장해요.
+- Storybook, Recharts 등 유명 오픈소스 라이브러리들이 사용하고 있어요.
+
+:::
+
 ```tsx
 // es-toolkit/compat은 lodash와 100% 동일한 동작을 제공하도록 목표하고 있어요
 import { chunk } from 'es-toolkit/compat';
