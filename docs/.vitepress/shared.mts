@@ -64,6 +64,18 @@ export const shared = defineConfig({
             '%cTry es-toolkit in the console! 😃',
             'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
           );
+          console.log(
+            '%cExample: es',
+            'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
+          );
+          console.log('%ces.at([10, 20, 30, 40, 50], [1, 3, 4]);', 'font-weight: bold;');
+          console.log('%c// [20, 40, 50]', 'font-weight: bold;');
+          console.log(
+            '%cExample: esCompat',
+            'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
+          );
+          console.log('%cesCompat.concat([1, 2, 3], [4, 5, 6]);', 'font-weight: bold;');
+          console.log('%c// [1, 2, 3, 4, 5, 6]', 'font-weight: bold;');
         }, 1000);
       `
     ],
