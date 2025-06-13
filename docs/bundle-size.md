@@ -6,7 +6,7 @@ description: The minimal bundle footprint offered by es-toolkit
 
 ![Graph showing the difference in bundle size between es-toolkit and lodash. There is a difference up to 97% in bundle size.](/assets/bundle-size.png)
 
-With its modern implementation, es-toolkit significantly reduces its bundle size, cutting it down by up to 97% compared to other libraries like lodash.
+With its modern implementation, es-toolkit significantly reduces its bundle size, cutting it down by up to 97% compared to other libraries like [lodash](https://lodash.com/).
 
 This makes es-toolkit the most efficient in terms of bundle size, with some utility functions being as small as less than 100 bytes.
 
