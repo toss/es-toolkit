@@ -2,7 +2,7 @@
 
 es-toolkit 是一个现代的 JavaScript 实用库，提供了一系列强大的函数供日常使用。
 
-与 lodash 等替代品相比，es-toolkit 提供了 [显著更小的包体积](./bundle-size.md)（最多减少97%）和 [2-3倍更快的运行时性能](./performance.md)。这是通过利用最新的 JavaScript 特性实现的。
+与 [lodash](https://lodash.com/) 等替代品相比，es-toolkit 提供了 [显著更小的包体积](./bundle-size.md)（最多减少97%）和 [2-3倍更快的运行时性能](./performance.md)。这是通过利用最新的 JavaScript 特性实现的。
 
 es-toolkit 内置 TypeScript 类型，并经过严格测试，确保了100%的测试覆盖率，以保证最大的可靠性。
 
