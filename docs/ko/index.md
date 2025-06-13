@@ -17,7 +17,7 @@ hero:
       link: /ko/intro
     - theme: alt
       text: 레퍼런스
-      link: /ko/reference/array/chunk
+      link: /ko/reference/array/at
     - theme: alt
       text: 설치 및 사용
       link: /ko/usage

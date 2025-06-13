@@ -17,7 +17,7 @@ hero:
       link: /zh_hans/intro
     - theme: alt
       text: 参考文档
-      link: /zh_hans/reference/array/chunk
+      link: /zh_hans/reference/array/at
     - theme: alt
       text: 使用指南
       link: /zh_hans/usage
