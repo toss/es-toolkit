@@ -13,8 +13,6 @@ create_compat_export() {
     local name=$2
     echo "module.exports = require('../dist/compat/$category/$name.js').$name;" > compat/$name.js
     echo "export { $name as default } from '../dist/compat/$category/$name.js';" > compat/$name.d.ts
-    echo "export { $name as default } from '../dist/compat/$category/$name.mjs';" > compat/$name.mjs
-    echo "export { $name as default } from '../dist/compat/$category/$name.mjs';" > compat/$name.d.mts
 }
 
 # Function to create compat reexports (for functions from main src)
@@ -23,8 +21,6 @@ create_compat_reexport() {
     local name=$2
     echo "module.exports = require('../dist/$category/$name.js').$name;" > compat/$name.js
     echo "export { $name as default } from '../dist/$category/$name.js';" > compat/$name.d.ts
-    echo "export { $name as default } from '../dist/$category/$name.mjs';" > compat/$name.mjs
-    echo "export { $name as default } from '../dist/$category/$name.mjs';" > compat/$name.d.mts
 }
 
 # Function to create compat alias
@@ -34,8 +30,6 @@ create_compat_alias() {
     local alias=$3
     echo "module.exports = require('../dist/compat/$category/$original.js').$original;" > compat/$alias.js
     echo "export { $original as default } from '../dist/compat/$category/$original.js';" > compat/$alias.d.ts
-    echo "export { $original as default } from '../dist/compat/$category/$original.mjs';" > compat/$alias.mjs
-    echo "export { $original as default } from '../dist/compat/$category/$original.mjs';" > compat/$alias.d.mts
 }
 
 # Create root exports
