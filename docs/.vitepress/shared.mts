@@ -71,7 +71,7 @@ export const shared = defineConfig({
           console.log('%ces.at([10, 20, 30, 40, 50], [1, 3, 4]);', 'font-weight: bold;');
           console.log('%c// [20, 40, 50]', 'font-weight: bold;');
           console.log(
-            '%cExample: esCompat',
+            '%cExample for es-toolkit/compat',
             'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
           );
           console.log('%cesCompat.concat([1, 2, 3], [4, 5, 6]);', 'font-weight: bold;');
