@@ -17,7 +17,7 @@ hero:
       link: /ja/intro
     - theme: alt
       text: リファレンス
-      link: /ja/reference/array/chunk
+      link: /ja/reference/array/at
     - theme: alt
       text: インストールと使用方法
       link: /ja/usage
