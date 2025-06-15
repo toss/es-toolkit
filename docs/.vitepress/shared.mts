@@ -65,7 +65,7 @@ export const shared = defineConfig({
             'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
           );
           console.log(
-            '%cExample: es',
+            '%cExample for es-toolkit',
             'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
           );
           console.log('%ces.at([10, 20, 30, 40, 50], [1, 3, 4]);', 'font-weight: bold;');
