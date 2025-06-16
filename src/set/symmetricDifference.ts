@@ -1,4 +1,4 @@
-import { ensureSet, hasWorkingSetMethods, type SetLike } from './types';
+import { ensureSet, hasWorkingSetMethods, type SetLike } from './types.ts';
 
 /**
  * Returns the symmetric difference of two sets or arrays.
