@@ -15,14 +15,12 @@ export function hasNativeIteratorHelpers(): boolean {
 /**
  * ECMAScript 2024 Iterator Helper Types
  */
-declare global {
-  interface Iterator<T> {
-    map?<U>(mapper: (value: T) => U): Iterator<U>;
-    filter?(predicate: (value: T) => boolean): Iterator<T>;
-    take?(limit: number): Iterator<T>;
-    drop?(limit: number): Iterator<T>;
-    flatMap?<U>(mapper: (value: T) => Iterator<U>): Iterator<U>;
-  }
+export interface IteratorWithHelpers<T> extends Iterator<T> {
+  map?<U>(mapper: (value: T) => U): IteratorWithHelpers<U>;
+  filter?(predicate: (value: T) => boolean): IteratorWithHelpers<T>;
+  take?(limit: number): IteratorWithHelpers<T>;
+  drop?(limit: number): IteratorWithHelpers<T>;
+  flatMap?<U>(mapper: (value: T) => IteratorWithHelpers<U>): IteratorWithHelpers<U>;
 }
 
 /**

@@ -36,7 +36,12 @@ export function hasWorkingSetMethods(): boolean {
   try {
     const testSet1 = new Set([1, 2]);
     const testSet2 = new Set([2, 3]);
-    const result = (testSet1 as Set<number>).intersection?.(testSet2);
+    const intersectionMethod = (testSet1 as Set<number>).intersection;
+    if (typeof intersectionMethod !== 'function') {
+      return false;
+    }
+
+    const result = intersectionMethod.call(testSet1, testSet2);
     return result instanceof Set && result.has(2) && result.size === 1;
   } catch {
     return false;
@@ -46,14 +51,17 @@ export function hasWorkingSetMethods(): boolean {
 /**
  * ECMAScript 2025 Set Types
  */
-declare global {
-  interface Set<T> {
-    intersection(other: Set<T>): Set<T>;
-    union(other: Set<T>): Set<T>;
-    difference(other: Set<T>): Set<T>;
-    symmetricDifference(other: Set<T>): Set<T>;
-    isSubsetOf(other: Set<T>): boolean;
-    isSupersetOf(other: Set<T>): boolean;
-    isDisjointFrom(other: Set<T>): boolean;
-  }
+export interface SetOperations<T> {
+  intersection(other: Set<T>): Set<T>;
+  union(other: Set<T>): Set<T>;
+  difference(other: Set<T>): Set<T>;
+  symmetricDifference(other: Set<T>): Set<T>;
+  isSubsetOf(other: Set<T>): boolean;
+  isSupersetOf(other: Set<T>): boolean;
+  isDisjointFrom(other: Set<T>): boolean;
 }
+
+/**
+ * Type representing a Set with additional operations
+ */
+export type EnhancedSet<T> = Set<T> & SetOperations<T>;
