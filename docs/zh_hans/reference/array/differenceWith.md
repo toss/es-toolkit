@@ -46,7 +46,7 @@ const result = differenceWith(array1, array2, areItemsEqual);
 
 - `differenceWith` 可以接受多个数组与第一个数组进行比较。
 - `differenceWith` 可以接受类数组对象作为参数。
-- `differenceWith` はカスタム比較関数を省略することができます。省略された場合、デフォルトで [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) アルゴリズムが使用されます。
+- `differenceWith` 可以省略自定义比较函数。如果省略，默认将使用 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 算法。
 
 ```typescript
 import { differenceWith } from 'es-toolkit/compat';
