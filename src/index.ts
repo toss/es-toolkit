@@ -63,3 +63,26 @@ export * from './predicate/index.ts';
 export * from './promise/index.ts';
 export * from './string/index.ts';
 export * from './util/index.ts';
+
+// ECMAScript 2024 Iterator Helpers - Explicit Exports
+export {
+  hasNativeIteratorHelpers,
+  // Prevent conflicts with existing array module by renaming using 'as'
+  map as mapIterable,
+  filter as filterIterable,
+  take as takeIterable,
+  drop as dropIterable,
+} from './iterator/index.ts';
+
+// ECMAScript 2025 Set Methods - Explicit Exports
+export {
+  hasNativeSetMethods,
+  hasWorkingSetMethods,
+  isSet,
+  ensureSet,
+  // Prevent conflicts with existing array module by renaming using 'as'
+  intersection as setIntersection,
+  union as setUnion,
+  difference as setDifference,
+  symmetricDifference,
+} from './set/index.ts';
