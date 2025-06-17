@@ -82,11 +82,7 @@
         }
       },
       "./compat/*": {
-        "import": {
-          "types": "./compat/*.d.mts",
-          "default": "./compat/*.mjs"
-        },
-        "require": {
+        "default": {
           "types": "./compat/*.d.ts",
           "default": "./compat/*.js"
         }
