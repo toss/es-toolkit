@@ -1,4 +1,4 @@
-import { ensureSet, hasWorkingSetMethods, type SetLike } from './types.ts';
+import { ensureSet, hasWorkingSetMethods, type SetLike, type SetOperations } from './types.ts';
 
 /**
  * Returns the difference of two sets or arrays.
@@ -32,8 +32,11 @@ export function difference<T>(first: SetLike<T>, second: SetLike<T>): Set<T> {
   const set2 = ensureSet(second);
 
   // Use native implementation if available
-  if (hasWorkingSetMethods() && typeof set1.difference === 'function') {
-    return set1.difference(set2);
+  if (hasWorkingSetMethods()) {
+    const differenceMethod = (set1 as unknown as SetOperations<T>).difference;
+    if (typeof differenceMethod === 'function') {
+      return differenceMethod.call(set1, set2);
+    }
   }
 
   // Fallback implementation

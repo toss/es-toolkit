@@ -1,4 +1,4 @@
-import { ensureSet, hasWorkingSetMethods, type SetLike } from './types.ts';
+import { ensureSet, hasWorkingSetMethods, type SetLike, type SetOperations } from './types.ts';
 
 /**
  * Returns the symmetric difference of two sets or arrays.
@@ -32,8 +32,11 @@ export function symmetricDifference<T>(first: SetLike<T>, second: SetLike<T>): S
   const set2 = ensureSet(second);
 
   // Use native implementation if available
-  if (hasWorkingSetMethods() && typeof set1.symmetricDifference === 'function') {
-    return set1.symmetricDifference(set2);
+  if (hasWorkingSetMethods()) {
+    const symmetricDifferenceMethod = (set1 as unknown as SetOperations<T>).symmetricDifference;
+    if (typeof symmetricDifferenceMethod === 'function') {
+      return symmetricDifferenceMethod.call(set1, set2);
+    }
   }
 
   // Fallback implementation

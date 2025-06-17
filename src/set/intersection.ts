@@ -1,4 +1,4 @@
-import { ensureSet, hasWorkingSetMethods, type SetLike } from './types.ts';
+import { ensureSet, hasWorkingSetMethods, type SetLike, type SetOperations } from './types.ts';
 
 /**
  * Returns the intersection of two sets or arrays.
@@ -32,8 +32,11 @@ export function intersection<T>(first: SetLike<T>, second: SetLike<T>): Set<T> {
   const set2 = ensureSet(second);
 
   // Use native implementation if available
-  if (hasWorkingSetMethods() && typeof set1.intersection === 'function') {
-    return set1.intersection(set2);
+  if (hasWorkingSetMethods()) {
+    const intersectionMethod = (set1 as unknown as SetOperations<T>).intersection;
+    if (typeof intersectionMethod === 'function') {
+      return intersectionMethod.call(set1, set2);
+    }
   }
 
   // Fallback implementation

@@ -1,4 +1,10 @@
-import { hasNativeIteratorHelpers, isArray, type IterableLike, type IterationResult } from './types.ts';
+import {
+  hasNativeIteratorHelpers,
+  isArray,
+  type IterableLike,
+  type IterationResult,
+  type IteratorWithHelpers,
+} from './types.ts';
 
 /**
  * Returns a specified number of contiguous elements from the start of the iterator or array.
@@ -37,7 +43,7 @@ export function take<T, I extends IterableLike<T>>(input: I, count: number): Ite
 
   // Use native iterator helpers if available
   if (hasNativeIteratorHelpers()) {
-    const iterator = input[Symbol.iterator]();
+    const iterator = input[Symbol.iterator]() as IteratorWithHelpers<T>;
     if (typeof iterator.take === 'function') {
       return iterator.take(limit) as IterationResult<T, T, I>;
     }

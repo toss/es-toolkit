@@ -1,4 +1,4 @@
-import { ensureSet, hasWorkingSetMethods, type SetLike } from './types.ts';
+import { ensureSet, hasWorkingSetMethods, type SetLike, type SetOperations } from './types.ts';
 
 /**
  * Returns the union of two sets or arrays.
@@ -32,8 +32,11 @@ export function union<T>(first: SetLike<T>, second: SetLike<T>): Set<T> {
   const set2 = ensureSet(second);
 
   // Use native implementation if available
-  if (hasWorkingSetMethods() && typeof set1.union === 'function') {
-    return set1.union(set2);
+  if (hasWorkingSetMethods()) {
+    const unionMethod = (set1 as unknown as SetOperations<T>).union;
+    if (typeof unionMethod === 'function') {
+      return unionMethod.call(set1, set2);
+    }
   }
 
   // Fallback implementation

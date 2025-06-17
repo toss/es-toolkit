@@ -1,4 +1,10 @@
-import { hasNativeIteratorHelpers, isArray, type IterableLike, type IterationResult } from './types.ts';
+import {
+  hasNativeIteratorHelpers,
+  isArray,
+  type IterableLike,
+  type IterationResult,
+  type IteratorWithHelpers,
+} from './types.ts';
 
 /**
  * Filters values in the iterator or array using the provided predicate function.
@@ -37,7 +43,7 @@ export function filter<T, I extends IterableLike<T>>(
 
   // Use native iterator helpers if available
   if (hasNativeIteratorHelpers()) {
-    const iterator = input[Symbol.iterator]();
+    const iterator = input[Symbol.iterator]() as IteratorWithHelpers<T>;
     if (typeof iterator.filter === 'function') {
       return iterator.filter((value: T) => predicate(value, 0)) as IterationResult<T, T, I>;
     }
