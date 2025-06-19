@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { words as wordsLodash } from 'lodash';
 import { words } from './words';
 
@@ -29,6 +29,8 @@ describe('words', () => {
   });
 
   it('splits a string representation of an array', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const result = words([1, 2, 3]);
     expect(result).toEqual(['1', '2', '3']);
   });

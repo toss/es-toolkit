@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { compareValues as compareValuesLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { compareValues } from './compareValues';
 
 describe('compareValues', () => {

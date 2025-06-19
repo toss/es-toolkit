@@ -1,7 +1,7 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { methodOf as methodOfLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { constant, each, map, noop } from '..';
-import { methodOf as methodOfToolkit } from './methodOf';
+import type { methodOf as methodOfLodash } from 'lodash';
+import { methodOf, methodOf as methodOfToolkit } from './methodOf';
 import { times } from './times';
 import { stubFour } from '../_internal/stubFour';
 import { stubOne } from '../_internal/stubOne';

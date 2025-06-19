@@ -1,10 +1,14 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { eq as eqLodash } from 'lodash';
 import { eq } from './eq';
 
 describe('eq', () => {
   it('should perform a `SameValueZero` comparison of two values', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(eq()).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(eq(undefined)).toBe(true);
     expect(eq(0, -0)).toBe(true);
     expect(eq(NaN, NaN)).toBe(true);

@@ -1,8 +1,9 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { range as rangeLodash } from 'lodash';
-import { each, map } from '..';
 import { range } from './range';
 import { falsey } from '../_internal/falsey';
+import { each } from '../array/each';
+import { map } from '../array/map';
 
 describe('range', () => {
   it(`\`_.range\` should infer the sign of \`step\` when only \`end\` is given`, () => {

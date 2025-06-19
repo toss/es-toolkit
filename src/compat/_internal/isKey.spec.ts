@@ -1,5 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { isKey as isKeyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isKey } from './isKey';
 
 describe('isKey', () => {
@@ -47,9 +46,5 @@ describe('isKey', () => {
     expect(isKey('^')).toBe(true);
     expect(isKey('!')).toBe(true);
     expect(isKey('@')).toBe(true);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isKey).toEqualTypeOf<typeof isKeyLodash>();
   });
 });

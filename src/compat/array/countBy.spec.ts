@@ -15,6 +15,8 @@ describe('countBy', () => {
     const values = [, null, undefined]; // eslint-disable-line no-sparse-arrays
     const expected = values.map(() => ({ 4: 1, 6: 2 }));
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? countBy(array, value) : countBy(array)));
     expect(actual).toEqual(expected);
   });

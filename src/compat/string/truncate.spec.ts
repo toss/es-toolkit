@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { truncate as truncateLodash } from 'lodash';
 import { truncate } from './truncate.ts';
 import { forEach } from '../array/forEach.ts';

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { stubArray as stubArrayLodash } from 'lodash';
 import { stubArray } from './stubArray';
 

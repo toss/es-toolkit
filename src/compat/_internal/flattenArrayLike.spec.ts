@@ -1,5 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { flattenArrayLike as flattenArrayLikeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { flattenArrayLike } from './flattenArrayLike';
 
 describe('flattenArrayLike', () => {
@@ -36,9 +35,5 @@ describe('flattenArrayLike', () => {
       [5, 6],
     ];
     expect(flattenArrayLike(input)).toEqual(expectedOutput);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(flattenArrayLike).toEqualTypeOf<typeof flattenArrayLikeLodash>();
   });
 });

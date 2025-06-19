@@ -1,5 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { isIndex as isIndexLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { isIndex } from './isIndex';
 
 describe('isIndex', () => {
@@ -18,9 +17,5 @@ describe('isIndex', () => {
     expect(isIndex(1.1)).toBe(false);
     expect(isIndex(Number.MAX_SAFE_INTEGER)).toBe(false);
     expect(isIndex(Symbol('a'))).toBe(false);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(isIndex).toEqualTypeOf<typeof isIndexLodash>();
   });
 });

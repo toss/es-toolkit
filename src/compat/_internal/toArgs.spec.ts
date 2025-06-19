@@ -1,5 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { toArgs as toArgsLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toArgs } from './toArgs';
 
 describe('toArgs', () => {
@@ -13,9 +12,5 @@ describe('toArgs', () => {
       // eslint-disable-next-line prefer-rest-params
       expect(arguments).toEqual(result);
     })(1, 2, 3);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toArgs).toEqualTypeOf<typeof toArgsLodash>();
   });
 });

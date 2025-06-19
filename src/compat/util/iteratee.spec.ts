@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { iteratee as iterateeLodash } from 'lodash';
 import { iteratee } from './iteratee';
 import { stubFalse } from './stubFalse';
@@ -27,6 +27,8 @@ describe('iteratee', () => {
     const expected = values.map(esToolkit.constant(object));
 
     const actual = values.map((value, index) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       const identity = index ? iteratee(value) : iteratee();
       return identity(object);
     });

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { stubObject as stubObjectLodash } from 'lodash';
 import { stubObject } from './stubObject';
 

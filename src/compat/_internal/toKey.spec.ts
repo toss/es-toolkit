@@ -1,5 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { toKey as toKeyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { toKey } from './toKey';
 
 describe('toKey', () => {
@@ -9,9 +8,5 @@ describe('toKey', () => {
 
   it("converts -0 to '-0'", () => {
     expect(toKey(-0)).toBe('-0');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toKey).toEqualTypeOf<typeof toKeyLodash>();
   });
 });

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { times as timesLodash } from 'lodash';
 import { stubArray } from './stubArray';
 import { times } from './times';
@@ -47,6 +47,8 @@ describe('times', () => {
     const values = falsey.concat(-1, -Infinity);
     const expected = values.map(stubArray);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? times(value as any) : times()));
 
     expect(actual).toEqual(expected);
