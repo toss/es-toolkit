@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { pad as padLodash } from 'lodash';
 import { pad } from './pad';
 
@@ -27,7 +27,6 @@ describe('pad', () => {
       const expected = chars ? '__' : '  ';
       // @ts-expect-error - invalid string
       expect(pad(null, 2, chars)).toBe(expected);
-      // @ts-expect-error - invalid string
       expect(pad(undefined, 2, chars)).toBe(expected);
       expect(pad('', 2, chars)).toBe(expected);
     });

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { split as splitLodash } from 'lodash';
 import { split } from './split';
 
@@ -17,6 +17,8 @@ describe('split', () => {
     const actual = values.map(value => split(value));
 
     expect(actual).toEqual(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(split()).toEqual(['']);
   });
 

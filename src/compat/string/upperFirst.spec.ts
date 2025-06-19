@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { upperFirst as upperFirstLodash } from 'lodash';
 import { upperFirst } from './upperFirst';
 import { map } from '../array/map';

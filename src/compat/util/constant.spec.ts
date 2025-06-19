@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { constant as constantLodash } from 'lodash';
 import { constant } from './constant';
 import { stubTrue } from './stubTrue';
@@ -28,6 +28,8 @@ describe('constant', () => {
     const expected = falsey.map(stubTrue);
 
     const actual = falsey.map((value, index) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       const _constant = index ? constant(value) : constant();
       const result = _constant();
 

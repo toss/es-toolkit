@@ -20,6 +20,6 @@ import { isWeakMap as isWeakMapToolkit } from '../../predicate/isWeakMap.ts';
  * console.log(isWeakMap(value2)); // false
  * console.log(isWeakMap(value3)); // false
  */
-export function isWeakMap(value?: unknown): value is WeakMap<WeakKey, any> {
+export function isWeakMap(value?: any): value is WeakMap<object, any> {
   return isWeakMapToolkit(value);
 }
