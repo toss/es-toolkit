@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isString as isStringLodash } from 'lodash';
 import { isString } from './isString';
 import { args } from '../_internal/args';

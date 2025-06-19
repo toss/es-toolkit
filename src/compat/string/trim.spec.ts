@@ -1,10 +1,10 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { trim as trimLodash } from 'lodash';
 import { trim } from './trim';
 import { whitespace } from '../_internal/whitespace';
 
 describe('trim', () => {
-  const func = trim;
+  const func = trim as any;
 
   it(`\`trim\` should remove trailing whitespace`, () => {
     const string = `${whitespace}a b c${whitespace}`;

@@ -75,10 +75,10 @@ export function words(string: string, index: string | number, guard: object): st
  * const wordsArray1 = words('fred, barney, & pebbles');
  * // => ['fred', 'barney', 'pebbles']
  */
-export function words(str: string, _pattern: string | number, guard: object): string[] {
+export function words(str?: string, _pattern?: string | number | RegExp, guard?: object): string[] {
   const input = toString(str);
-  const pattern: RegExp | string | number = guard ? rUnicodeWord : _pattern.toString();
-  const words = Array.from(input.match(pattern) ?? []);
+  const pattern = guard ? undefined : _pattern?.toString();
+  const words = Array.from(input.match(pattern ?? rUnicodeWord) ?? []);
 
   return words.filter(x => x !== '');
 }
