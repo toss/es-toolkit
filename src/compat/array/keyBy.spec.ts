@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { keyBy as keyByLodash } from 'lodash';
 import { keyBy } from './keyBy.ts';
 
 describe('keyBy', () => {
@@ -64,5 +65,9 @@ describe('keyBy', () => {
       // @ts-expect-error Testing invalid input types
       expect(keyBy(collection)).toEqual({});
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(keyBy).toEqualTypeOf<typeof keyByLodash>();
   });
 });

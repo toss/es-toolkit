@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { minBy as minByLodash } from 'lodash';
 import { minBy } from './minBy';
 
 describe('minBy', () => {
@@ -47,5 +48,9 @@ describe('minBy', () => {
     expect(minBy(null)).toBe(undefined);
     // @ts-expect-error - undefined is not an array
     expect(minBy(undefined)).toBe(undefined);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(minBy).toEqualTypeOf<typeof minByLodash>();
   });
 });

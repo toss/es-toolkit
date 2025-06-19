@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { findLastIndex as findLastIndexLodash } from 'lodash';
 import { findLastIndex } from './findLastIndex';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -111,5 +112,9 @@ describe('findLastIndex', () => {
     expect(findLastIndex({ 0: 'a', 1: 'b', length: 2 }, i => i === 'b')).toBe(1);
     expect(findLastIndex('123', i => i === '2')).toBe(1);
     expect(findLastIndex(args, i => i === 2)).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(findLastIndex).toEqualTypeOf<typeof findLastIndexLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { merge as mergeLodash } from 'lodash';
 import { merge } from './merge';
 import { range } from '../../math/range';
 import { isEqual } from '../../predicate/isEqual';
@@ -367,5 +368,9 @@ describe('merge', () => {
     const actual = merge(object, { a: ['x', 'y', 'z'] });
 
     expect(actual).toEqual({ a: ['x', 'y', 'z'] });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(merge).toEqualTypeOf<typeof mergeLodash>();
   });
 });

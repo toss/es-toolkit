@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { keysIn as keysInLodash } from 'lodash';
 import { keysIn } from './keysIn';
 import { args } from '../_internal/args';
 import { primitives } from '../_internal/primitives';
@@ -214,5 +215,9 @@ describe('keys methods', () => {
     expect(actual).not.toContain('buffer');
     expect(actual).not.toContain('byteLength');
     expect(actual).not.toContain('byteOffset');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(keysIn).toEqualTypeOf<typeof keysInLodash>();
   });
 });

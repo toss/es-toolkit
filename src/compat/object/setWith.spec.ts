@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { setWith as setWithLodash } from 'lodash';
 import { setWith } from './setWith.ts';
 import { symbol } from '../_internal/symbol.ts';
 import { constant, each, map, toString, unset, update } from '../compat.ts';
@@ -230,5 +231,9 @@ describe('setWith', () => {
     const obj: unknown[] = [];
     setWith(obj, 0, 'value');
     expect(obj).toEqual(['value']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(setWith).toEqualTypeOf<typeof setWithLodash>();
   });
 });

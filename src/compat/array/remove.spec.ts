@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { remove as removeLodash } from 'lodash';
 import { remove } from './remove';
 
 const isEven = function (n: number) {
@@ -85,5 +86,9 @@ describe('remove', () => {
     remove(array, (n, index) => isEven(index));
 
     expect(array).toEqual([2]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(remove).toEqualTypeOf<typeof removeLodash>();
   });
 });

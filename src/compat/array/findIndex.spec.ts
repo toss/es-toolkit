@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { findIndex as findIndexLodash } from 'lodash';
 import { findIndex } from './findIndex';
 import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
@@ -64,5 +65,9 @@ describe('findIndex', () => {
     expect(findIndex({ 0: 'a', 1: 'b', length: 2 }, i => i === 'b')).toBe(1);
     expect(findIndex('123', i => i === '2')).toBe(1);
     expect(findIndex(args, i => i === 2)).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(findIndex).toEqualTypeOf<typeof findIndexLodash>();
   });
 });

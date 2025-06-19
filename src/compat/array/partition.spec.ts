@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { partition as partitionLodash } from 'lodash';
 import { partition } from './partition';
 import { args } from '../_internal/args';
 
@@ -146,5 +147,9 @@ describe('partition', () => {
     expect(partition({ 0: 1, 1: 2, 2: 3, length: 3 }, isEven)).toEqual([[2], [1, 3]]);
     expect(partition('123', isEven2)).toEqual([['2'], ['1', '3']]);
     expect(partition(args, isEven)).toEqual([[2], [1, 3]]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(partition).toEqualTypeOf<typeof partitionLodash>();
   });
 });

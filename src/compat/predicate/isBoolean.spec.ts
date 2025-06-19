@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isBoolean as isBooleanLodash } from 'lodash';
 import { isBoolean } from './isBoolean';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -30,5 +31,9 @@ describe('isBoolean', () => {
     expect(isBoolean(/x/)).toBe(false);
     expect(isBoolean('a')).toBe(false);
     expect(isBoolean(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isBoolean).toEqualTypeOf<typeof isBooleanLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { snakeCase as snakeCaseLodash } from 'lodash';
 import { snakeCase } from './snakeCase';
 
 describe('snakeCase', () => {
@@ -41,5 +42,9 @@ describe('snakeCase', () => {
     const string = 'foo bar';
     expect(snakeCase(Object(string))).toBe('foo_bar');
     expect(snakeCase({ toString: () => string })).toBe('foo_bar');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(snakeCase).toEqualTypeOf<typeof snakeCaseLodash>();
   });
 });

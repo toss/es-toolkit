@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isRegExp as isRegExpLodash } from 'lodash';
 import { isRegExp } from './isRegExp';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -34,5 +35,9 @@ describe('isRegExp', () => {
     expect(isRegExp(1)).toBe(false);
     expect(isRegExp('a')).toBe(false);
     expect(isRegExp(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isRegExp).toEqualTypeOf<typeof isRegExpLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { keys as keysLodash } from 'lodash';
 import { keys } from './keys';
 import { args } from '../_internal/args';
 import { arrayProto } from '../_internal/arrayProto';
@@ -183,5 +184,9 @@ describe('keys', () => {
     const typedArray = new Uint8Array(1);
     const actual = keys(typedArray);
     expect(actual).toEqual(['0']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(keys).toEqualTypeOf<typeof keysLodash>();
   });
 });

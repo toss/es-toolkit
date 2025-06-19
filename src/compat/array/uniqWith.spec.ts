@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { uniqWith as uniqWithLodash } from 'lodash';
 import * as lodashStable from 'es-toolkit/compat';
 import { uniqWith } from './uniqWith';
 import { isEven } from '../_internal/isEven';
@@ -169,5 +170,9 @@ describe('uniqWith', () => {
 
   it('should return an empty array when input is not array-like', () => {
     expect(uniqWith(null, (a, b) => a === b)).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(uniqWith).toEqualTypeOf<typeof uniqWithLodash>();
   });
 });

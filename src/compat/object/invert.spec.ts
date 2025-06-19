@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { invert as invertLodash } from 'lodash';
 import { invert } from '../../object/invert';
 
 describe('invert', () => {
@@ -18,5 +19,9 @@ describe('invert', () => {
   it('should work with an object that has a `length` property', () => {
     const object = { 0: 'a', 1: 'b', length: 2 };
     expect(invert(object)).toEqual({ a: '0', b: '1', 2: 'length' });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(invert).toEqualTypeOf<typeof invertLodash>();
   });
 });

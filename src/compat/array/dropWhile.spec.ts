@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { dropWhile as dropWhileLodash } from 'lodash';
 import { dropWhile } from './dropWhile';
 import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
@@ -66,5 +67,9 @@ describe('dropWhile', () => {
     expect(dropWhile({ 0: 1, 1: 2, 2: 3, length: 3 }, n => n < 3)).toEqual([3]);
     expect(dropWhile('123', n => Number(n) < 3)).toEqual(['3']);
     expect(dropWhile(args, n => n < 3)).toEqual([3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(dropWhile).toEqualTypeOf<typeof dropWhileLodash>();
   });
 });

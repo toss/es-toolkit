@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { find as findLodash } from 'lodash';
 import { find } from './find';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -106,5 +107,9 @@ describe('find', () => {
     expect(find({ 0: 1, 1: 2, 2: 3, length: 3 }, i => i === 3)).toBe(3);
     expect(find('123', i => i === '3')).toBe('3');
     expect(find(args, i => i === 3)).toBe(3);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(find).toEqualTypeOf<typeof findLodash>();
   });
 });

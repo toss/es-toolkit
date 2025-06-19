@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { forIn as forInLodash } from 'lodash';
 import { forIn } from './forIn';
 
 describe('forIn', () => {
@@ -35,5 +36,9 @@ describe('forIn', () => {
     });
 
     expect(obj).toEqual({ a: 3, b: 2 });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(forIn).toEqualTypeOf<typeof forInLodash>();
   });
 });

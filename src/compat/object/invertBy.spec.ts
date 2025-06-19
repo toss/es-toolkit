@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { invertBy as invertByLodash } from 'lodash';
 import { invertBy } from './invertBy.ts';
 
 /**
@@ -39,5 +40,9 @@ describe('invertBy', () => {
     expect(invertBy(null)).toEqual({});
     // @ts-expect-error - nullish value
     expect(invertBy(undefined)).toEqual({});
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(invertBy).toEqualTypeOf<typeof invertByLodash>();
   });
 });

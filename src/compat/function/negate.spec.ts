@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { negate as negateLodash } from 'lodash';
 import { negate } from './negate';
 import { stubTrue } from '../util/stubTrue';
 import { times } from '../util/times';
@@ -65,5 +66,9 @@ describe('negate', () => {
 
     expect(negateFn.call(object, 1)).toBe(true);
     expect(negateFn.call(object, 2)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(negate).toEqualTypeOf<typeof negateLodash>();
   });
 });

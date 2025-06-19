@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { unary as unaryLodash } from 'lodash';
 import { unary } from '../../function';
 import { map } from '../array/map';
 
@@ -25,5 +26,9 @@ describe('unary', () => {
     const object = { capped: capped };
 
     expect(object.capped()).toBe(object);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(unary).toEqualTypeOf<typeof unaryLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { uniqBy as uniqByLodash } from 'lodash';
 import { uniqBy } from './uniqBy';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 
@@ -95,5 +96,9 @@ describe('uniqBy', () => {
 
   it('should work with no iteratee', () => {
     expect(uniqBy([1, 2, 3, 4, 1, 2, 3])).toEqual([1, 2, 3, 4]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(uniqBy).toEqualTypeOf<typeof uniqByLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { create as createLodash } from 'lodash';
 import { create } from './create';
 import { keys } from './keys';
 import { falsey } from '../_internal/falsey';
@@ -95,5 +96,9 @@ describe('create', () => {
     const actual = map(objects, object => object.a === 1 && !keys(object).length);
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(create).toEqualTypeOf<typeof createLodash>();
   });
 });

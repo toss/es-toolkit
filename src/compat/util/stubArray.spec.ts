@@ -1,8 +1,13 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { stubArray as stubArrayLodash } from 'lodash';
 import { stubArray } from './stubArray';
 
 describe('stubArray', () => {
   it('should return an empty array', () => {
     expect(stubArray()).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(stubArray).toEqualTypeOf<typeof stubArrayLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { toPairs as toPairsLodash } from 'lodash';
 import * as lodashStable from 'es-toolkit/compat';
 import { toPairs } from './toPairs';
 
@@ -68,5 +69,9 @@ describe('toPairs', () => {
         ['1', 'o'],
       ]);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toPairs).toEqualTypeOf<typeof toPairsLodash>();
   });
 });

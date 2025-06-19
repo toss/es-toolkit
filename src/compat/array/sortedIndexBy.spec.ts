@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { sortedIndexBy as sortedIndexByLodash } from 'lodash';
 import { sortedIndexBy } from './sortedIndexBy';
 
 describe('sortedIndexBy', () => {
@@ -55,5 +56,9 @@ describe('sortedIndexBy', () => {
         expect(actual).toBe(expected);
       });
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(sortedIndexBy).toEqualTypeOf<typeof sortedIndexByLodash>();
   });
 });

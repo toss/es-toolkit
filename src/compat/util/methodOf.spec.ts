@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { methodOf as methodOfLodash } from 'lodash';
 import { constant, each, map, noop } from '..';
 import { methodOf as methodOfToolkit } from './methodOf';
 import { times } from './times';
@@ -150,5 +151,9 @@ describe('methodOf', () => {
     each(['a.b', ['a', 'b']], path => {
       expect(methodOf(path)).toBe(1);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(methodOf).toEqualTypeOf<typeof methodOfLodash>();
   });
 });

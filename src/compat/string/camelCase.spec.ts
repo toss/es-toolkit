@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { camelCase as camelCaseLodash } from 'lodash';
 import { camelCase } from './camelCase';
 
 describe('camelCase', () => {
@@ -59,5 +60,9 @@ describe('camelCase', () => {
   it('should coerce string to a string', () => {
     expect(camelCase(Object('foo bar'))).toBe('fooBar');
     expect(camelCase({ toString: () => 'foo bar' })).toBe('fooBar');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(camelCase).toEqualTypeOf<typeof camelCaseLodash>();
   });
 });

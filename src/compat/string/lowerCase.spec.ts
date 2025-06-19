@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { lowerCase as lowerCaseLodash } from 'lodash';
 import { lowerCase } from './lowerCase';
 
 describe('lowerCase', () => {
@@ -41,5 +42,9 @@ describe('lowerCase', () => {
     const string = 'foo bar';
     expect(lowerCase(Object(string))).toBe('foo bar');
     expect(lowerCase({ toString: () => string })).toBe('foo bar');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(lowerCase).toEqualTypeOf<typeof lowerCaseLodash>();
   });
 });

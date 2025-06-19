@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { drop as dropLodash } from 'lodash';
 import { drop } from './drop';
 import { args } from '../_internal/args';
 
@@ -47,5 +48,9 @@ describe('drop', () => {
 
   it('should work as an iteratee for methods like `_.map`', () => {
     expect([[1, 2], [3, 4], [5]].map(drop)).toEqual([[2], [4], []]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(drop).toEqualTypeOf<typeof dropLodash>();
   });
 });

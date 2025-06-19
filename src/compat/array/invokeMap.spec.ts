@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { invokeMap as invokeMapLodash } from 'lodash';
 import { invokeMap } from './invokeMap';
 import { stubOne } from '../_internal/stubOne';
 
@@ -152,5 +153,9 @@ describe('invokeMap', () => {
 
     const aEmptyDotC = invokeMap([objectWithEmptyPart], 'a..c');
     expect(aEmptyDotC[0]).toBeUndefined();
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(invokeMap).toEqualTypeOf<typeof invokeMapLodash>();
   });
 });

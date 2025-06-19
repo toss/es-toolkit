@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { startCase as startCaseLodash } from 'lodash';
 import { startCase } from './startCase';
 
 describe('startCase', () => {
@@ -47,5 +48,9 @@ describe('startCase', () => {
     expect(startCase('--foo-bar--')).toBe('Foo Bar');
     expect(startCase('fooBar')).toBe('Foo Bar');
     expect(startCase('__FOO_BAR__')).toBe('FOO BAR');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(startCase).toEqualTypeOf<typeof startCaseLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { size as sizeLodash } from 'lodash';
 import { size } from './size';
 import { falsey } from '../_internal/falsey';
 import { toArgs } from '../_internal/toArgs';
@@ -75,5 +76,9 @@ describe('size', () => {
 
   it('should not treat objects with non-number lengths as array-like', () => {
     expect(size({ length: '0' })).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(size).toEqualTypeOf<typeof sizeLodash>();
   });
 });

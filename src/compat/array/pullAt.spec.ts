@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { pullAt as pullAtLodash } from 'lodash';
 import { map } from './map';
 import { pullAt } from './pullAt';
 import { reduce } from './reduce';
@@ -139,5 +140,9 @@ describe('pullAt', () => {
 
     expect(actual).toEqual(['a', 'c']);
     expect(arrayLike).toEqual({ 0: 'b', length: 1 });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(pullAt).toEqualTypeOf<typeof pullAtLodash>();
   });
 });

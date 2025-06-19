@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { bind as bindLodash } from 'lodash';
 import { bind } from './bind';
 import { isEqual } from '../../predicate/isEqual';
 
@@ -186,5 +187,9 @@ describe('bind', () => {
     expect(Boolean(new bound(1, 2, 3, 4, 5))).toBe(true);
     expect(Boolean(new bound(1, 2, 3, 4, 5, 6))).toBe(true);
     expect(Boolean(new bound(1, 2, 3, 4, 5, 6, 7))).toBe(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(bind).toEqualTypeOf<typeof bindLodash>();
   });
 });

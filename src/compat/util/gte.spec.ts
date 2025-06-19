@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { gte as gteLodash } from 'lodash';
 import { gte } from './gte';
 
 describe('gte', () => {
@@ -12,5 +13,9 @@ describe('gte', () => {
   it('should return `false` if `value` is less than `other`', () => {
     expect(gte(1, 3)).toBe(false);
     expect(gte('abc', 'def')).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(gte).toEqualTypeOf<typeof gteLodash>();
   });
 });

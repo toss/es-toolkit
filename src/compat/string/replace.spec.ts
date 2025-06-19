@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { replace as replaceLodash } from 'lodash';
 import { replace } from './replace';
 
 describe('replace', () => {
@@ -28,5 +29,9 @@ describe('replace', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(replace(string, 'de')).toBe(string);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(replace).toEqualTypeOf<typeof replaceLodash>();
   });
 });

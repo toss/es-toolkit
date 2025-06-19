@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { curryRight as curryRightLodash } from 'lodash';
 import { bind } from './bind';
 import { curryRight } from './curryRight';
 import { partial } from '../../function/partial';
@@ -162,5 +163,9 @@ describe('curryRight', () => {
 
       expect(actual).toEqual(expected);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(curryRight).toEqualTypeOf<typeof curryRightLodash>();
   });
 });

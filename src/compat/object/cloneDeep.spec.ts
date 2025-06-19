@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { cloneDeep as cloneDeepLodash } from 'lodash';
 import { cloneDeep } from './cloneDeep';
 import { range } from '../../math/range';
 import { args } from '../_internal/args';
@@ -263,5 +264,9 @@ describe('cloneDeep', () => {
     });
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(cloneDeep).toEqualTypeOf<typeof cloneDeepLodash>();
   });
 });

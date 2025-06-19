@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { partial as partialLodash } from 'lodash';
 import _ from '..';
 import { curry } from './curry';
 import { partial } from './partial';
@@ -108,5 +109,9 @@ describe('partial', () => {
     };
     const par = partial(fn, _, 'b', _);
     expect(par('a', 'c')).toBe('abc');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(partial).toEqualTypeOf<typeof partialLodash>();
   });
 });

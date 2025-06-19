@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { reverse as reverseLodash } from 'lodash';
 import { reverse } from './reverse';
 import { range } from '../../math/range';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
@@ -74,5 +75,9 @@ describe('reverse', () => {
     const result = reverse(array);
     expect(result).toEqual(['four', 3, 'two', 1]);
     expect(result).toBe(array);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(reverse).toEqualTypeOf<typeof reverseLodash>();
   });
 });

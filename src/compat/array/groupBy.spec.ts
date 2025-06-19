@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { groupBy as groupByLodash } from 'lodash';
 import * as lodashStable from 'es-toolkit/compat';
 import { groupBy } from './groupBy';
 
@@ -64,5 +65,9 @@ describe('groupBy', () => {
   it('should return empty object if null or undefined is passed', () => {
     expect(groupBy(undefined)).toEqual({});
     expect(groupBy(null)).toEqual({});
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(groupBy).toEqualTypeOf<typeof groupByLodash>();
   });
 });

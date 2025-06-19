@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { map as mapLodash } from 'lodash';
 import { constant, each, stubArray } from '..';
 import { map } from './map';
 import { identity } from '../../function/identity';
@@ -212,5 +213,9 @@ describe('map', () => {
 
       expect(count).toBe(1);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(map).toEqualTypeOf<typeof mapLodash>();
   });
 });

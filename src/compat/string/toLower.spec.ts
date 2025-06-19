@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { toLower as toLowerLodash } from 'lodash';
 import { toLower } from './toLower';
 
 describe('toLower', () => {
@@ -103,5 +104,9 @@ describe('toLower', () => {
     expect(toLower(' ')).toBe(' ');
     expect(toLower('\t')).toBe('\t');
     expect(toLower('\n')).toBe('\n');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toLower).toEqualTypeOf<typeof toLowerLodash>();
   });
 });

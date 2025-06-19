@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { get as getLodash } from 'lodash';
 import { get } from './get';
 import { empties } from '../_internal/empties';
 
@@ -147,5 +148,9 @@ describe('get', () => {
 
   it(`should return the default value when \`path\` is empty`, () => {
     expect(get({}, [], 'a')).toBe('a');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(get).toEqualTypeOf<typeof getLodash>();
   });
 });

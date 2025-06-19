@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { getTag as getTagLodash } from 'lodash';
 import { getTag } from './getTag';
 
 describe('getTag function', () => {
@@ -19,5 +20,9 @@ describe('getTag function', () => {
   it('should return the tag of the custom object', () => {
     class Custom {}
     expect(getTag(new Custom())).toBe('[object Object]');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(getTag).toEqualTypeOf<typeof getTagLodash>();
   });
 });

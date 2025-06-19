@@ -4,7 +4,7 @@
  * An empty string is returned for `null` and `undefined` values.
  * The sign of `-0` is preserved.
  *
- * @param {unknown} value - The value to convert.
+ * @param {any} value - The value to convert.
  * @returns {string} Returns the converted string.
  *
  * @example
@@ -14,7 +14,7 @@
  * toString([1, 2, -0]) // returns '1,2,-0'
  * toString([Symbol('a'), Symbol('b')]) // returns 'Symbol(a),Symbol(b)'
  */
-export function toString(value?: unknown): string {
+export function toString(value: any): string {
   if (value == null) {
     return '';
   }

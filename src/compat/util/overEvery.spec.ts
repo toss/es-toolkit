@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { overEvery as overEveryLodash } from 'lodash';
 import { overEvery } from './overEvery';
 import { stubFalse } from './stubFalse';
 import { stubTrue } from './stubTrue';
@@ -117,5 +118,9 @@ describe('overEvery', () => {
 
     object.a = 0;
     expect(object.over()).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(overEvery).toEqualTypeOf<typeof overEveryLodash>();
   });
 });

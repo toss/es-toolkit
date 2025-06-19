@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { words as wordsLodash } from 'lodash';
 import { words } from './words';
 
 describe('words', () => {
@@ -64,5 +65,9 @@ describe('words', () => {
       "THEY'RE",
       "I'LL",
     ]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(words).toEqualTypeOf<typeof wordsLodash>();
   });
 });

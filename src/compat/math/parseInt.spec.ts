@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { parseInt as parseIntLodash } from 'lodash';
 import { parseInt } from './parseInt';
 
 describe('parseInt', () => {
@@ -65,5 +66,9 @@ describe('parseInt', () => {
 
     actual = ['1', '2', '3'].map(parseInt);
     expect(actual).toEqual([1, 2, 3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(parseInt).toEqualTypeOf<typeof parseIntLodash>();
   });
 });

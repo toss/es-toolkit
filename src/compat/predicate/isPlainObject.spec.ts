@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isPlainObject as isPlainObjectLodash } from 'lodash';
 import { isPlainObject } from './isPlainObject';
 import { falsey } from '../_internal/falsey';
 
@@ -94,5 +95,9 @@ describe('isPlainObject', () => {
       // eslint-disable-next-line no-prototype-builtins
       expect(object.hasOwnProperty(Symbol.toStringTag)).toBe(false);
     }
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isPlainObject).toEqualTypeOf<typeof isPlainObjectLodash>();
   });
 });

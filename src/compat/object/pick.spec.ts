@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { pick as pickLodash } from 'lodash';
 import { pick } from './pick';
 import { symbol } from '../_internal/symbol';
 import { toArgs } from '../_internal/toArgs';
@@ -135,5 +136,9 @@ describe('compat/pick', () => {
     const result = pick(obj, ['a', 'b']);
 
     expect(Reflect.ownKeys(result)).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(pick).toEqualTypeOf<typeof pickLodash>();
   });
 });

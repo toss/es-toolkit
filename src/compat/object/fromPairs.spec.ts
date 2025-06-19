@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { fromPairs as fromPairsLodash } from 'lodash';
 import { fromPairs } from './fromPairs';
 import { falsey } from '../_internal/falsey';
 
@@ -80,4 +81,8 @@ describe('fromPairs', () => {
   //   const object = { 'a.b': 1 };
   //   expect(fromPairs(toPairs(object))).toEqual(object);
   // });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(fromPairs).toEqualTypeOf<typeof fromPairsLodash>();
+  });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { bindAll as bindAllLodash } from 'lodash';
 import { bindAll } from './bindAll';
 import { toArgs } from '../_internal/toArgs';
 import { cloneDeep } from '../object/cloneDeep';
@@ -111,5 +112,9 @@ describe('bindAll', () => {
     });
 
     expect(actual).toEqual([1]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(bindAll).toEqualTypeOf<typeof bindAllLodash>();
   });
 });

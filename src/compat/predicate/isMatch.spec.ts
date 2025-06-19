@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isMatch as isMatchLodash } from 'lodash';
 import { isMatch } from './isMatch';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
@@ -344,5 +345,9 @@ describe('isMatch', () => {
     const actual = objects.filter(x => isMatch(x, { a: [], b: {} }));
 
     expect(actual).toEqual(objects);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isMatch).toEqualTypeOf<typeof isMatchLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { sortedLastIndex as sortedLastIndexLodash } from 'lodash';
 import { sortBy } from './sortBy.ts';
 import { sortedLastIndex } from './sortedLastIndex.ts';
 
@@ -71,5 +72,9 @@ describe('sortedLastIndex', () => {
     expect(sortedLastIndex(array, symbol3)).toBe(2);
     expect(sortedLastIndex(array, 1 as unknown as symbol)).toBe(0);
     expect(sortedLastIndex(array, 'a' as unknown as symbol)).toBe(0);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(sortedLastIndex).toEqualTypeOf<typeof sortedLastIndexLodash>();
   });
 });

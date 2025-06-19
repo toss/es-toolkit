@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { defaultsDeep as defaultsDeepLodash } from 'lodash';
 import { defaultsDeep } from './defaultsDeep';
 import { cloneDeep, noop } from '../compat';
 
@@ -221,5 +222,9 @@ describe('defaultsDeep', () => {
       }
       expect(result).toEqual(expected);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(defaultsDeep).toEqualTypeOf<typeof defaultsDeepLodash>();
   });
 });

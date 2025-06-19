@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { compact as compactLodash } from 'lodash';
 import { compact } from './compact';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -27,5 +28,9 @@ describe('compact', () => {
     expect(compact({ 0: 1, 1: null, 2: 3, length: 3 })).toEqual([1, 3]);
     expect(compact('123')).toEqual(['1', '2', '3']);
     expect(compact(args)).toEqual([1, 2, 3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(compact).toEqualTypeOf<typeof compactLodash>();
   });
 });

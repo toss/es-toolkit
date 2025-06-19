@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { updateWith as updateWithLodash } from 'lodash';
 import { each, isObject, map, noop, toString, unset, updateWith } from '..';
 import { isKey } from '../_internal/isKey';
 import { stubFour } from '../_internal/stubFour';
@@ -216,5 +217,9 @@ describe('updateWith', () => {
     updateWith(object, 'a.b', updater, noop);
     expect(object.a.b).toBe(value);
     console.log(isKey('a.b', object));
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(updateWith).toEqualTypeOf<typeof updateWithLodash>();
   });
 });

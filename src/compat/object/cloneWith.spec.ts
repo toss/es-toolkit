@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { cloneWith as cloneWithLodash } from 'lodash';
 import * as lodashStable from 'es-toolkit/compat';
 import { cloneWith } from './cloneWith';
 import { noop } from '../../function/noop';
@@ -734,5 +735,9 @@ describe('cloneWith', () => {
 
     expect(result).toEqual(obj);
     expect(result).not.toBe(obj);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(cloneWith).toEqualTypeOf<typeof cloneWithLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { mapKeys as mapKeysLodash } from 'lodash';
 import { mapKeys } from './mapKeys';
 
 describe('mapKeys', () => {
@@ -33,5 +34,9 @@ describe('mapKeys', () => {
     );
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(mapKeys).toEqualTypeOf<typeof mapKeysLodash>();
   });
 });

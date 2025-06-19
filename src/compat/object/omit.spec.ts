@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { omit as omitLodash } from 'lodash';
 import { omit } from './omit';
 import { objectProto } from '../_internal/objectProto';
 import { stringProto } from '../_internal/stringProto';
@@ -80,5 +81,9 @@ describe('omit', () => {
       omit(object, path);
       expect(object).toEqual({ a: { b: 2 } });
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(omit).toEqualTypeOf<typeof omitLodash>();
   });
 });

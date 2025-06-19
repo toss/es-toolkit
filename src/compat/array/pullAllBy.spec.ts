@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { pullAllBy as pullAllByLodash } from 'lodash';
 import { pullAllBy } from './pullAllBy';
 
 describe('pullAllBy', () => {
@@ -30,5 +31,9 @@ describe('pullAllBy', () => {
 
     expect(Object.hasOwn(actual, '0')).toEqual(true);
     expect(Object.hasOwn(actual, '1')).toEqual(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(pullAllBy).toEqualTypeOf<typeof pullAllByLodash>();
   });
 });

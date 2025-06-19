@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { noop as noopLodash } from 'lodash';
 import { noop } from '../../function';
 
 describe('noop', () => {
@@ -8,5 +9,9 @@ describe('noop', () => {
 
   it('should return undefined', () => {
     expect(noop()).toBeUndefined();
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(noop).toEqualTypeOf<typeof noopLodash>();
   });
 });

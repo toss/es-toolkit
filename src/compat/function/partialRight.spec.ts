@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { partialRight as partialRightLodash } from 'lodash';
 import { identity, isObject, mergeWith } from '..';
 import _ from '..';
 import { curry } from './curry';
@@ -121,5 +122,9 @@ describe('partialRight', () => {
     };
     const par = partialRight(fn, _, 'b', _);
     expect(par('a', 'c')).toBe('abc');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(partialRight).toEqualTypeOf<typeof partialRightLodash>();
   });
 });

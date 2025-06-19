@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isMatchWith as isMatchWithLodash } from 'lodash';
 import * as lodashStable from 'es-toolkit/compat';
 import { isMatchWith } from './isMatchWith.ts';
 import { last } from '../../array/last.ts';
@@ -329,5 +330,9 @@ describe('isMatchWith', () => {
   it('should match when source is empty object and target is primitive', () => {
     expect(isMatchWith(42, {})).toBe(true);
     expect(isMatchWith(42, {}, lodashStable.noop)).toBe(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isMatchWith).toEqualTypeOf<typeof isMatchWithLodash>();
   });
 });

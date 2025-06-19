@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { padEnd as padEndLodash } from 'lodash';
 import { padEnd } from './padEnd';
 
 describe('padEnd', () => {
@@ -85,5 +86,9 @@ describe('padEnd', () => {
     const actual = values.map(value => padEnd(value, 6) === 'abc   ');
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(padEnd).toEqualTypeOf<typeof padEndLodash>();
   });
 });

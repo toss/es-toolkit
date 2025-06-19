@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isSafeInteger as isSafeIntegerLodash } from 'lodash';
 import { isSafeInteger } from './isSafeInteger.ts';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -92,5 +93,9 @@ describe('isSafeInteger function', () => {
     expect(func(/x/)).toBe(false);
     expect(func('a')).toBe(false);
     expect(func(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isSafeInteger).toEqualTypeOf<typeof isSafeIntegerLodash>();
   });
 });

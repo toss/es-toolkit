@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { xor as xorLodash } from 'lodash';
 import { xor } from './xor';
 import { args } from '../_internal/args';
 
@@ -53,5 +54,9 @@ describe('xor', () => {
     expect(xor(array, 3, { 0: 1 }, null)).toEqual(array);
     expect(xor(null, array, null, [2, 3])).toEqual([1, 3]);
     expect(xor(array, null, args, null)).toEqual([3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(xor).toEqualTypeOf<typeof xorLodash>();
   });
 });

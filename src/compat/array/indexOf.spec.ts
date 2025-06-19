@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { indexOf as indexOfLodash } from 'lodash';
 import { indexOf } from './indexOf';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -84,5 +85,9 @@ describe('indexOf', () => {
     expect(indexOf({ 0: 1, 1: 2, length: 2 }, 2)).toBe(1);
     expect(indexOf('123', '2')).toBe(1);
     expect(indexOf(args, 2)).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(indexOf).toEqualTypeOf<typeof indexOfLodash>();
   });
 });

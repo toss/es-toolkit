@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { findLast as findLastLodash } from 'lodash';
 import * as lodashStable from 'es-toolkit/compat';
 import { findLast } from './findLast';
 import { args } from '../_internal/args';
@@ -155,4 +156,8 @@ describe('findLast', () => {
       });
     }
   );
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(findLast).toEqualTypeOf<typeof findLastLodash>();
+  });
 });

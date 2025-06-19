@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { findLastKey as findLastKeyLodash } from 'lodash';
 import { findLastKey } from './findLastKey';
 
 describe('findLastKey', () => {
@@ -51,5 +52,9 @@ describe('findLastKey', () => {
     });
 
     expect(args).toEqual([1, 'a', object]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(findLastKey).toEqualTypeOf<typeof findLastKeyLodash>();
   });
 });

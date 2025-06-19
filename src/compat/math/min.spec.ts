@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { min as minLodash } from 'lodash';
 import { min } from './min';
 
 describe('min', () => {
@@ -50,5 +51,9 @@ describe('min', () => {
 
   it('should return undefined when skipping all values', () => {
     expect(min([Symbol('a'), null, NaN])).toBe(undefined);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(min).toEqualTypeOf<typeof minLodash>();
   });
 });

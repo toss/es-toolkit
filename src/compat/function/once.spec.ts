@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { once as onceLodash } from 'lodash';
 import { once } from '../../function';
 
 describe('once', () => {
@@ -29,5 +30,9 @@ describe('once', () => {
 
     expect(resultFunc).toThrow();
     expect(resultFunc).not.toThrow();
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(once).toEqualTypeOf<typeof onceLodash>();
   });
 });

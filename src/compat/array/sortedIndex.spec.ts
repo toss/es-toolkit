@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { sortedIndex as sortedIndexLodash } from 'lodash';
 import { sortBy } from './sortBy.ts';
 import { sortedIndex } from './sortedIndex.ts';
 
@@ -70,5 +71,9 @@ describe('sortedIndex', () => {
     expect(sortedIndex(array, symbol3)).toBe(0);
     expect(sortedIndex(array, 1 as unknown as symbol)).toBe(0);
     expect(sortedIndex(array, 'a' as unknown as symbol)).toBe(0);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(sortedIndex).toEqualTypeOf<typeof sortedIndexLodash>();
   });
 });

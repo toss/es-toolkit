@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { pickBy as pickByLodash } from 'lodash';
 import * as lodashStable from 'es-toolkit/compat';
 import { pickBy } from './pickBy';
 import { symbol } from '../_internal/symbol';
@@ -217,5 +218,9 @@ describe('pickBy', () => {
     });
 
     expect(count).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(pickBy).toEqualTypeOf<typeof pickByLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { fill as fillLodash } from 'lodash';
 import { fill } from './fill.ts';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -142,5 +143,9 @@ describe('fill', () => {
     expect(fill({ 0: 1, 1: 2, length: 2 }, 3)).toEqual({ 0: 3, 1: 3, length: 2 });
     expect(fill('12', '3')).toEqual('12');
     expect(fill(args, 3)).toEqual(toArgs([3, 3, 3]));
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(fill).toEqualTypeOf<typeof fillLodash>();
   });
 });

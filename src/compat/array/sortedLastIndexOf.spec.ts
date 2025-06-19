@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { sortedLastIndexOf as sortedLastIndexOfLodash } from 'lodash';
 import { sortedLastIndexOf } from './sortedLastIndexOf';
 import { falsey } from '../_internal/falsey';
 
@@ -66,5 +67,9 @@ describe('sortedLastIndexOf', () => {
     expect(sortedLastIndexOf(array, 2)).toBe(2);
     expect(sortedLastIndexOf(array, 3)).toBe(5);
     expect(sortedLastIndexOf(array, 5)).toBe(8);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(sortedLastIndexOf).toEqualTypeOf<typeof sortedLastIndexOfLodash>();
   });
 });

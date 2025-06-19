@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { lastIndexOf as lastIndexOfLodash } from 'lodash';
 import { lastIndexOf } from './lastIndexOf';
 
 /**
@@ -53,5 +54,9 @@ describe('lastIndexOf', () => {
     expect(lastIndexOf([], 1)).toBe(-1);
     expect(lastIndexOf(null, 1)).toBe(-1);
     expect(lastIndexOf(undefined, 1)).toBe(-1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(lastIndexOf).toEqualTypeOf<typeof lastIndexOfLodash>();
   });
 });

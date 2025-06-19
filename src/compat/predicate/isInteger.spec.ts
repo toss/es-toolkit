@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isInteger as isIntegerLodash } from 'lodash';
 import { isInteger } from './isInteger';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -81,5 +82,9 @@ describe('isInteger function', () => {
     expect(func(/x/)).toBe(false);
     expect(func('a')).toBe(false);
     expect(func(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isInteger).toEqualTypeOf<typeof isIntegerLodash>();
   });
 });

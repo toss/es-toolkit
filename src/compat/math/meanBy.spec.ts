@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { meanBy as meanByLodash } from 'lodash';
 import { meanBy } from './meanBy';
 import { slice } from '../_internal/slice';
 
@@ -34,5 +35,9 @@ describe('meanBy', () => {
     expect(meanBy(null)).toBe(NaN);
     // @ts-expect-error - undefined is not an array
     expect(meanBy(undefined)).toBe(NaN);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(meanBy).toEqualTypeOf<typeof meanByLodash>();
   });
 });

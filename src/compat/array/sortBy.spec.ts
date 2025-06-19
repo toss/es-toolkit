@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { sortBy as sortByLodash } from 'lodash';
 import { sortBy } from './sortBy.ts';
 import { zipObject } from '../../array/zipObject.ts';
 import { partialRight } from '../../function/partialRight.ts';
@@ -184,5 +185,9 @@ describe('sortBy', () => {
   it('should compare strings with ASCII code', () => {
     expect(sortBy(['A', 'a'])).toEqual(['A', 'a']);
     expect(sortBy(['ABC', 'abc'])).toEqual(['ABC', 'abc']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(sortBy).toEqualTypeOf<typeof sortByLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { times as timesLodash } from 'lodash';
 import { stubArray } from './stubArray';
 import { times } from './times';
 import { doubled } from '../_internal/doubled';
@@ -54,5 +55,9 @@ describe('times', () => {
   it('should return an empty array when `n > Number.MAX_SAFE_INTEGER`', () => {
     expect(times(Number.MAX_SAFE_INTEGER + 1)).toEqual([]);
     expect(times(Number.MAX_VALUE, doubled)).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(times).toEqualTypeOf<typeof timesLodash>();
   });
 });

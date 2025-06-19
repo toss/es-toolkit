@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { dropRight as dropRightLodash } from 'lodash';
 import { dropRight } from './dropRight';
 import { args } from '../_internal/args';
 
@@ -51,5 +52,9 @@ describe('dropRight', () => {
 
   it('should support default itemsCount', () => {
     expect(dropRight([1, 2, 3, 4, 5])).toEqual([1, 2, 3, 4]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(dropRight).toEqualTypeOf<typeof dropRightLodash>();
   });
 });

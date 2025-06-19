@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isWeakSet as isWeakSetLodash } from 'lodash';
 import { isWeakSet } from './isWeakSet';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -25,5 +26,9 @@ describe('isWeakSet', () => {
     expect(isWeakSet('a')).toBe(false);
     expect(isWeakSet(new Set())).toBe(false);
     expect(isWeakSet(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isWeakSet).toEqualTypeOf<typeof isWeakSetLodash>();
   });
 });

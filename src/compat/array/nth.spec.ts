@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { nth as nthLodash } from 'lodash';
 import { nth } from './nth';
 import { noop } from '../../function';
 import { range } from '../../math';
@@ -60,5 +61,9 @@ describe('nth', () => {
     const actual = values.map(n => nth(array, n));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(nth).toEqualTypeOf<typeof nthLodash>();
   });
 });

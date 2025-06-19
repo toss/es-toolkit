@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { pullAll as pullAllLodash } from 'lodash';
 import { pullAll } from './pullAll';
 
 describe('pullAll', () => {
@@ -44,5 +45,9 @@ describe('pullAll', () => {
     const actual = pullAll(array, array);
 
     expect(actual).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(pullAll).toEqualTypeOf<typeof pullAllLodash>();
   });
 });

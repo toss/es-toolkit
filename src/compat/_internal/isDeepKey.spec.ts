@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isDeepKey as isDeepKeyLodash } from 'lodash';
 import { isDeepKey } from './isDeepKey';
 
 describe('isDeepKey function', () => {
@@ -12,5 +13,9 @@ describe('isDeepKey function', () => {
   it('returns false for non-deep keys', () => {
     expect(isDeepKey('a')).toBe(false);
     expect(isDeepKey(123)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isDeepKey).toEqualTypeOf<typeof isDeepKeyLodash>();
   });
 });

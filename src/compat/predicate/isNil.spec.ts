@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { isNil as isNilLodash } from 'lodash';
 import { isNil } from './isNil.ts';
 import { args } from '../_internal/args.ts';
 import { falsey } from '../_internal/falsey.ts';
@@ -35,5 +36,9 @@ describe('isNil', () => {
     expect(isNil(/x/)).toBe(false);
     expect(isNil('a')).toBe(false);
     expect(isNil(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isNil).toEqualTypeOf<typeof isNilLodash>();
   });
 });

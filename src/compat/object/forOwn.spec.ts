@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { forOwn as forOwnLodash } from 'lodash';
 import { forOwn } from './forOwn';
 
 /**
@@ -109,7 +110,11 @@ function getOwnEnumerableStringKeys(object: object) {
 
   forOwn(object, (_, key) => {
     keys.push(key);
+  
+  it('should match the type of lodash', () => {
+    expectTypeOf(forOwn).toEqualTypeOf<typeof forOwnLodash>();
   });
+});
 
   return keys;
 }

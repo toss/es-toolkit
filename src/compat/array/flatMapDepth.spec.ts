@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { flatMapDepth as flatMapDepthLodash } from 'lodash';
 import { flatMapDepth } from './flatMapDepth';
 
 describe('flatMapDepth', () => {
@@ -88,5 +89,9 @@ describe('flatMapDepth', () => {
       [1, 2],
       [3, 4],
     ]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(flatMapDepth).toEqualTypeOf<typeof flatMapDepthLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, expectTypeOf } from 'vitest';
+import type { zipWith as zipWithLodash } from 'lodash';
 import { map } from './map';
 import { zip } from './zip';
 import { zipWith } from './zipWith';
@@ -49,5 +50,9 @@ describe('zipWith', () => {
 
   it('should return an empty array when no arrays are provided', () => {
     expect(zipWith(identity)).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(zipWith).toEqualTypeOf<typeof zipWithLodash>();
   });
 });
