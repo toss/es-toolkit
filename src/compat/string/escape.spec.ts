@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { escape as escapeLodash } from 'lodash';
 import { escape, unescape } from '../index';
 

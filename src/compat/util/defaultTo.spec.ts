@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { defaultTo as defaultToLodash } from 'lodash';
 import { defaultTo } from './defaultTo';
 import { falsey } from '../_internal/falsey';

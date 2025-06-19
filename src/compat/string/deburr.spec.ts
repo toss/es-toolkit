@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { deburr as deburrLodash } from 'lodash';
 import { deburr } from './deburr';
 import { burredLetters } from '../../_internal/burredLetters';

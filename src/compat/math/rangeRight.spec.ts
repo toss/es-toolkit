@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { rangeRight as rangeRightLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { each, map } from '..';
+import type { rangeRight as rangeRightLodash } from 'lodash';
 import { rangeRight } from './rangeRight';
 import { falsey } from '../_internal/falsey';
 

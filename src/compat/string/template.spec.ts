@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { template as templateLodash } from 'lodash';
 import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';

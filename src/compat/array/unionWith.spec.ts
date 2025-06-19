@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { unionWith as unionWithLodash } from 'lodash';
 import { unionWith } from './unionWith';
 import { isEqual } from '../../predicate';

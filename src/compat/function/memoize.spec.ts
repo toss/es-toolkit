@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { memoize as memoizeLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { memoize as memoizeLodash } from 'lodash';
 import { memoize } from './memoize';
 import { identity, isFunction, noop, stubTrue } from '../index';
 

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { pullAt as pullAtLodash } from 'lodash';
 import { map } from './map';
 import { pullAt } from './pullAt';

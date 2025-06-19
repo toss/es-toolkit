@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { every as everyLodash } from 'lodash';
 import { every } from './every';
 import { identity } from '../../function/identity';

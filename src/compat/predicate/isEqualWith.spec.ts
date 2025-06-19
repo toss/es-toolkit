@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isEqualWith as isEqualWithLodash } from 'lodash';
 import { isEqualWith } from './isEqualWith';
 import { isString } from './isString';

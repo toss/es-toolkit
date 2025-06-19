@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { findIndex as findIndexLodash } from 'lodash';
 import { findIndex } from './findIndex';
 import { args } from '../_internal/args';

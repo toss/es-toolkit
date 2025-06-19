@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 import type { each as eachLodash } from 'lodash';
 import { forEach as each } from './forEach';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';

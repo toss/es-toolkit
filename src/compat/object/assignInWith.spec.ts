@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { assignInWith as assignInWithLodash } from 'lodash';
 import { assignInWith } from './assignInWith';
 import { noop } from '../../function/noop';

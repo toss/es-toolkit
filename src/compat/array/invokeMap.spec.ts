@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { invokeMap as invokeMapLodash } from 'lodash';
 import { invokeMap } from './invokeMap';
 import { stubOne } from '../_internal/stubOne';

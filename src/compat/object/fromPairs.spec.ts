@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { fromPairs as fromPairsLodash } from 'lodash';
 import { fromPairs } from './fromPairs';
 import { falsey } from '../_internal/falsey';

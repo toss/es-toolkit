@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { divide as divideLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { divide as divideLodash } from 'lodash';
 import { divide } from './divide';
 import { symbol } from '../_internal/symbol';
 

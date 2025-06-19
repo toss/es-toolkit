@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { flatMapDepth as flatMapDepthLodash } from 'lodash';
 import { flatMapDepth } from './flatMapDepth';
 

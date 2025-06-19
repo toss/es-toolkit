@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { clone as cloneLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { clone as cloneLodash } from 'lodash';
 import { clone } from './clone';
 import { args } from '../_internal/args';
 import { typedArrays } from '../_internal/typedArrays';

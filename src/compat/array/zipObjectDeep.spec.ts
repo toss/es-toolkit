@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { zipObjectDeep as zipObjectDeepLodash } from 'lodash';
 import { zipObjectDeep } from './zipObjectDeep.ts';
 

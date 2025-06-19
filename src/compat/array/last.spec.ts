@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { last as lastLodash } from 'lodash';
 import { args } from '../_internal/args';
 import { last } from '../index';

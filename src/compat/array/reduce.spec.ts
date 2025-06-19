@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { reduce as reduceLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { reduce as reduceLodash } from 'lodash';
 import { head } from './head';
 import { reduce } from './reduce';
 import { empties } from '../_internal/empties';

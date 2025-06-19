@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { shuffle as shuffleLodash } from 'lodash';
 import { shuffle } from './shuffle.ts';
 import { sortBy } from './sortBy';

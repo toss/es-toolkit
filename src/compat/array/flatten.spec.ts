@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { flatten as flattenLodash } from 'lodash';
 import { flatten } from './flatten';
 import { args } from '../_internal/args';

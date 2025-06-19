@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { maxBy as maxByLodash } from 'lodash';
 import { maxBy } from './maxBy';
 

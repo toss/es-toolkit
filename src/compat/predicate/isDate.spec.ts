@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isDate as isDateLodash } from 'lodash';
 import { isDate } from './isDate';
 import { args } from '../_internal/args';

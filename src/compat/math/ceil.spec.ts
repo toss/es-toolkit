@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { ceil as ceilLodash } from 'lodash';
 import { ceil } from './ceil';
 

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { wrap as wrapLodash } from 'lodash';
 import { wrap } from './wrap';
 import { noop } from '../../function';

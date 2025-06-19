@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { xorWith as xorWithLodash } from 'lodash';
 import { xorWith } from './xorWith';
 import { isEqual } from '../../predicate';

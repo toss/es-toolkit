@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isTypedArray as isTypedArrayLodash } from 'lodash';
 import { isTypedArray } from './isTypedArray';
 import { args } from '../_internal/args';

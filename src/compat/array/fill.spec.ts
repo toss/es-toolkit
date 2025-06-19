@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { fill as fillLodash } from 'lodash';
 import { fill } from './fill.ts';
 import { args } from '../_internal/args';

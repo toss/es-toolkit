@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { forInRight as forInRightLodash } from 'lodash';
 import { forInRight } from './forInRight';
 

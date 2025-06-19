@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { mergeWith as mergeWithLodash } from 'lodash';
 import { mergeWith } from './mergeWith';
 import { last } from '../../array/last';

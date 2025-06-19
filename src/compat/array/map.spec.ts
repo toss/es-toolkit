@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { map as mapLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { constant, each, stubArray } from '..';
+import type { map as mapLodash } from 'lodash';
 import { map } from './map';
 import { identity } from '../../function/identity';
 import { falsey } from '../_internal/falsey';

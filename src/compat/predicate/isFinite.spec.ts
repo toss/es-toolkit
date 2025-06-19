@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isFinite as isFiniteLodash } from 'lodash';
 import { isFinite } from './isFinite';
 

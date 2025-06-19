@@ -1,7 +1,7 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { partialRight as partialRightLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { identity, isObject, mergeWith } from '..';
 import _ from '..';
+import type { partialRight as partialRightLodash } from 'lodash';
 import { curry } from './curry';
 import { partialRight } from './partialRight';
 

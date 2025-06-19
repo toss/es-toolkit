@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { omitBy as omitByLodash } from 'lodash';
 import { omitBy } from './omitBy';
 import { symbol } from '../_internal/symbol';

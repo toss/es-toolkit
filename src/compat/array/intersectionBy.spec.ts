@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { intersectionBy as intersectionByLodash } from 'lodash';
 import { intersection } from './intersection';
 import { intersectionBy } from './intersectionBy';

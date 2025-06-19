@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { now as nowLodash } from 'lodash';
 import { now } from './now';
 import { delay } from '../../promise/delay';

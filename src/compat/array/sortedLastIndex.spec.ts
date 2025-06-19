@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { sortedLastIndex as sortedLastIndexLodash } from 'lodash';
 import { sortBy } from './sortBy.ts';
 import { sortedLastIndex } from './sortedLastIndex.ts';

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { indexOf as indexOfLodash } from 'lodash';
 import { indexOf } from './indexOf';
 import { args } from '../_internal/args';

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { bind as bindLodash } from 'lodash';
 import { bind } from './bind';
 import { isEqual } from '../../predicate/isEqual';

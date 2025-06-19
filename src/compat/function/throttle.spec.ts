@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 import type { throttle as throttleLodash } from 'lodash';
 import { throttle } from './throttle';
 import { identity } from '../../function/identity';

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { functionsIn as functionsInLodash } from 'lodash';
 import { functionsIn } from './functionsIn';
 import { identity } from '../../function/identity';

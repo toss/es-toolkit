@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { takeRight as takeRightLodash } from 'lodash';
 import { args } from '../_internal/args';
 import { takeRight } from '../index';

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isArrayLike as isArrayLikeLodash } from 'lodash';
 import { isArrayLike } from './isArrayLike';
 import { args } from '../_internal/args';

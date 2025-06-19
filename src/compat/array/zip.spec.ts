@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { zip as zipLodash } from 'lodash';
 import { zip } from './zip';
 import { unzip } from '../../array/unzip';

@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { update as updateLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { each, map, toString, unset, update } from '..';
+import type { update as updateLodash } from 'lodash';
 import { symbol } from '../_internal/symbol';
 import { constant } from '../util/constant';
 

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { takeWhile as takeWhileLodash } from 'lodash';
 import { takeWhile } from './takeWhile';
 import { slice } from '../_internal/slice';

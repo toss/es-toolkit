@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { startCase as startCaseLodash } from 'lodash';
 import { startCase } from './startCase';
 

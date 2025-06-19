@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { flow as flowLodash } from 'lodash';
 import { ary } from './ary';
 import { flow } from './flow';

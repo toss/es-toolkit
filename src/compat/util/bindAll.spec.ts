@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { bindAll as bindAllLodash } from 'lodash';
 import { bindAll } from './bindAll';
 import { toArgs } from '../_internal/toArgs';

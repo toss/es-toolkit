@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { property as propertyLodash } from 'lodash';
 import { property } from './property';
 import { noop } from '../../function/noop';

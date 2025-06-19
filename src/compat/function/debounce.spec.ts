@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 import type { debounce as debounceLodash } from 'lodash';
 import { debounce } from './debounce';
 import { identity } from '../../function/identity';

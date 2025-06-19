@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { pick as pickLodash } from 'lodash';
 import { pick } from './pick';
 import { symbol } from '../_internal/symbol';

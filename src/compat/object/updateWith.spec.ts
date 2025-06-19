@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { updateWith as updateWithLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { each, isObject, map, noop, toString, unset, updateWith } from '..';
+import type { updateWith as updateWithLodash } from 'lodash';
 import { isKey } from '../_internal/isKey';
 import { stubFour } from '../_internal/stubFour';
 import { stubThree } from '../_internal/stubThree';

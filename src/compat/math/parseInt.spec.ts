@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { parseInt as parseIntLodash } from 'lodash';
 import { parseInt } from './parseInt';
 

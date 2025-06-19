@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { sortedLastIndexOf as sortedLastIndexOfLodash } from 'lodash';
 import { sortedLastIndexOf } from './sortedLastIndexOf';
 import { falsey } from '../_internal/falsey';

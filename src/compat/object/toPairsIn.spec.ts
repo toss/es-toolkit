@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { toPairsIn as toPairsInLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { toPairsIn as toPairsInLodash } from 'lodash';
 import { toPairsIn } from './toPairsIn';
 
 describe('toPairsIn', () => {

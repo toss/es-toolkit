@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { isMatchWith as isMatchWithLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { isMatchWith as isMatchWithLodash } from 'lodash';
 import { isMatchWith } from './isMatchWith.ts';
 import { last } from '../../array/last.ts';
 import { partial } from '../../function/partial.ts';

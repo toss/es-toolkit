@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { without as withoutLodash } from 'lodash';
 import { without } from './without';
 import { args } from '../_internal/args';

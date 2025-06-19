@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { escapeRegExp as escapeRegExpLodash } from 'lodash';
 import { escapeRegExp } from './escapeRegExp';
 import { map } from '../array/map';

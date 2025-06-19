@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { differenceWith as differenceWithLodash } from 'lodash';
 import { differenceWith } from './differenceWith';
 import { range } from '../../math';

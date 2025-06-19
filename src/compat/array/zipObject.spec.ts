@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { zipObject as zipObjectLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { each } from '..';
+import type { zipObject as zipObjectLodash } from 'lodash';
 import { zipObject } from './zipObject';
 
 describe('zipObject', () => {

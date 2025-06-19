@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { drop as dropLodash } from 'lodash';
 import { drop } from './drop';
 import { args } from '../_internal/args';

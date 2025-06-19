@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { unary as unaryLodash } from 'lodash';
 import { unary } from '../../function';
 import { map } from '../array/map';

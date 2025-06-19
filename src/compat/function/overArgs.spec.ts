@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { overArgs as overArgsLodash } from 'lodash';
 import { overArgs } from './overArgs';
 import { slice } from '../_internal/slice';

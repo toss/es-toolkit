@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { sampleSize as sampleSizeLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { sampleSize as sampleSizeLodash } from 'lodash';
 import { sampleSize } from './sampleSize';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';

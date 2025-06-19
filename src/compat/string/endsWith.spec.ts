@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { endsWith as endsWithLodash } from 'lodash';
 import { endsWith } from './endsWith';
 

@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { pickBy as pickByLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { pickBy as pickByLodash } from 'lodash';
 import { pickBy } from './pickBy';
 import { symbol } from '../_internal/symbol';
 import { stubTrue } from '../util/stubTrue';

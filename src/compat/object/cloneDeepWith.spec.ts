@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { cloneDeepWith as cloneDeepWithLodash } from 'lodash';
 import { cloneDeepWith } from './cloneDeepWith';
 import { noop } from '../../function/noop';

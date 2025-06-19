@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { pullAllWith as pullAllWithLodash } from 'lodash';
 import { pullAllWith } from './pullAllWith';
 import { isEqual } from '../../predicate';

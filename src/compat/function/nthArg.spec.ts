@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { nthArg as nthArgLodash } from 'lodash';
 import { nthArg } from './nthArg';
 import { noop } from '../../function';

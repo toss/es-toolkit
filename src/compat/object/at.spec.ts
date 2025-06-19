@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { at as atLodash } from 'lodash';
 import { at } from './at';
 import { args } from '../_internal/args';

@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { union as unionLodash } from 'lodash';
 import { union } from './union';
 import { args } from '../_internal/args';

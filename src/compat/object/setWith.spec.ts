@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { setWith as setWithLodash } from 'lodash';
 import { setWith } from './setWith.ts';
 import { symbol } from '../_internal/symbol.ts';

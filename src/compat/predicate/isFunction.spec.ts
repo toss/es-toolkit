@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isFunction as isFunctionLodash } from 'lodash';
 import { isFunction } from '../../predicate/isFunction';
 import { args } from '../_internal/args';

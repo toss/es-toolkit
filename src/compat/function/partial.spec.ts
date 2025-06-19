@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { partial as partialLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import _ from '..';
+import type { partial as partialLodash } from 'lodash';
 import { curry } from './curry';
 import { partial } from './partial';
 import { identity } from '../../function';

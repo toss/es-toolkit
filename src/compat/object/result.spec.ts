@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { result as resultLodash } from 'lodash';
 import { result } from './result';
 import { empties } from '../_internal/empties';

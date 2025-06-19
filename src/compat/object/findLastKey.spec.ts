@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { findLastKey as findLastKeyLodash } from 'lodash';
 import { findLastKey } from './findLastKey';
 

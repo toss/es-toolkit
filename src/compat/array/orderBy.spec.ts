@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { orderBy as orderByLodash } from 'lodash';
 import { orderBy } from './orderBy.ts';
 import { zipObject } from '../../array/zipObject.ts';

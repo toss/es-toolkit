@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isNil as isNilLodash } from 'lodash';
 import { isNil } from './isNil.ts';
 import { args } from '../_internal/args.ts';

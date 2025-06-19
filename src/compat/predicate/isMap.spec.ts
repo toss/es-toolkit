@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isMap as isMapLodash } from 'lodash';
 import { isMap } from './isMap';
 import { args } from '../_internal/args';

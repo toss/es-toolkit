@@ -1,4 +1,4 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { defaultsDeep as defaultsDeepLodash } from 'lodash';
 import { defaultsDeep } from './defaultsDeep';
 import { cloneDeep, noop } from '../compat';

@@ -1,6 +1,6 @@
-import { describe, expect, it, expectTypeOf } from 'vitest';
-import type { isEqual as isEqualLodash } from 'lodash';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { isEqual } from 'es-toolkit/compat';
+import type { isEqual as isEqualLodash } from 'lodash';
 import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
 import { arrayViews } from '../_internal/arrayViews';
