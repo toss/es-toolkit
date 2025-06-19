@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { random as randomLodash } from 'lodash';
+import { random as randomLodash } from 'lodash';
 import { random } from './random';
 import { uniq } from '../../array/uniq';
 import { stubTrue } from '../util/stubTrue';

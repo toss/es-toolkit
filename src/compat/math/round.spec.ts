@@ -38,6 +38,7 @@ describe('round', () => {
     actual = round(4.016, 2.6);
     expect(actual).toBe(expected);
 
+    // @ts-expect-error - Invalid arguments
     actual = round(4.016, '+2');
     expect(actual).toBe(expected);
   });
@@ -46,9 +47,11 @@ describe('round', () => {
     let actual = round(5e1, 2);
     expect(actual).toEqual(50);
 
+    // @ts-expect-error - Invalid arguments
     actual = round('5e', 1);
     expect(actual).toEqual(NaN);
 
+    // @ts-expect-error - Invalid arguments
     actual = round('5e1e1', 1);
     expect(actual).toEqual(NaN);
   });

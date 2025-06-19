@@ -15,7 +15,6 @@ describe('meanBy', () => {
   it('should provide correct `iteratee` arguments', () => {
     let args: any;
 
-    // @ts-expect-error - invalid args
     meanBy(objects, function () {
       // eslint-disable-next-line
       args || (args = slice.call(arguments));
@@ -31,9 +30,7 @@ describe('meanBy', () => {
   });
 
   it('should handle null and undefined values', () => {
-    // @ts-expect-error - null is not an array
     expect(meanBy(null)).toBe(NaN);
-    // @ts-expect-error - undefined is not an array
     expect(meanBy(undefined)).toBe(NaN);
   });
 

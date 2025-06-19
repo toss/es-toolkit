@@ -15,9 +15,10 @@
  *
  * ['6', '08', '10'].map(parseInt); // => [6, 8, 10]
  */
-export function parseInt(string: string, radix = 0, guard?: unknown): number {
-  if (guard) {
+export function parseInt(string: string, radix = 0): number {
+  if (arguments.length > 2) {
     radix = 0;
   }
+
   return Number.parseInt(string, radix);
 }

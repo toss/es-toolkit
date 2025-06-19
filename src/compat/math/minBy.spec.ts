@@ -44,9 +44,7 @@ describe('minBy', () => {
   });
 
   it('should handle null and undefined values', () => {
-    // @ts-expect-error - null is not an array
     expect(minBy(null)).toBe(undefined);
-    // @ts-expect-error - undefined is not an array
     expect(minBy(undefined)).toBe(undefined);
   });
 
