@@ -10,6 +10,7 @@ describe('max', () => {
 
   it('should return `undefined` for empty collections', () => {
     expect(max([])).toBe(undefined);
+    //@ts-expect-error - Invalid argument
     expect(max()).toBe(undefined);
   });
 

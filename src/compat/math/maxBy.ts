@@ -1,4 +1,5 @@
 import { maxBy as maxByToolkit } from '../../array/maxBy.ts';
+import { identity } from '../../function/identity.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
 /**
@@ -31,11 +32,15 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  */
 export function maxBy<T>(
   items: ArrayLike<T> | null | undefined,
-  iteratee: ((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>
+  iteratee?: ((value: T) => unknown) | PropertyKey | [PropertyKey, any] | PartialShallow<T>
 ): T | undefined {
   if (items == null) {
     return undefined;
   }
 
-  return maxByToolkit(Array.from(items), iterateeToolkit(iteratee));
+  return maxByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
 }
+
+type PartialShallow<T> = {
+  [P in keyof T]?: T[P] extends object ? object : T[P];
+};
