@@ -1,5 +1,3 @@
-type PartialShallow<T> = {
-  [P in keyof T]?: T[P] extends object ? object : T[P];
-};
+import { PartialShallow } from './PartialShallow';
 
 export type ValueIteratee<T> = ((value: T) => unknown) | (PropertyKey | [PropertyKey, any] | PartialShallow<T>);
