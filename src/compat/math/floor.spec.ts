@@ -38,6 +38,8 @@ describe('floor', () => {
     actual = floor(4.016, 2.6);
     expect(actual).toBe(expected);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = floor(4.016, '+2');
     expect(actual).toBe(expected);
   });
@@ -46,9 +48,13 @@ describe('floor', () => {
     let actual = floor(5e1, 2);
     expect(actual).toEqual(50);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = floor('5e', 1);
     expect(actual).toEqual(NaN);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = floor('5e1e1', 1);
     expect(actual).toEqual(NaN);
   });

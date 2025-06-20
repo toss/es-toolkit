@@ -93,7 +93,6 @@ export { zipObjectDeep } from './array/zipObjectDeep.ts';
 export { zipWith } from './array/zipWith.ts';
 
 export { once } from '../function/once.ts';
-export { unary } from '../function/unary.ts';
 export { after } from './function/after.ts';
 export { ary } from './function/ary.ts';
 export { attempt } from './function/attempt.ts';
@@ -118,6 +117,7 @@ export { rearg } from './function/rearg.ts';
 export { rest } from './function/rest.ts';
 export { spread } from './function/spread.ts';
 export { throttle } from './function/throttle.ts';
+export { unary } from './function/unary.ts';
 export { wrap } from './function/wrap.ts';
 
 export { add } from './math/add.ts';
