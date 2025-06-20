@@ -17,6 +17,8 @@ describe('groupBy', () => {
     const values = [, null, undefined];
     const expected = lodashStable.map(values, lodashStable.constant({ 4: [4], 6: [6, 6] }));
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = lodashStable.map(values, (value, index) => (index ? groupBy(array, value) : groupBy(array)));
 
     expect(actual).toEqual(expected);
