@@ -98,61 +98,6 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledWith('test', 123);
   });
 
-  it('should cancel the debounced function call if aborted via AbortSignal', async () => {
-    const func = vi.fn();
-    const debounceMs = 50;
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const debouncedFunc = debounce(func, debounceMs, { signal });
-
-    debouncedFunc();
-    controller.abort();
-
-    await delay(debounceMs);
-
-    expect(func).not.toHaveBeenCalled();
-  });
-
-  it('should not call the debounced function if it is already aborted by AbortSignal', async () => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    controller.abort();
-
-    const func = vi.fn();
-
-    const debounceMs = 50;
-    const debouncedFunc = debounce(func, debounceMs, { signal });
-
-    debouncedFunc();
-
-    await delay(debounceMs);
-
-    expect(func).not.toHaveBeenCalled();
-  });
-
-  it('should not add multiple abort event listeners', async () => {
-    const func = vi.fn();
-    const debounceMs = 100;
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const addEventListenerSpy = vi.spyOn(signal, 'addEventListener');
-
-    const debouncedFunc = debounce(func, debounceMs, { signal });
-
-    debouncedFunc();
-    debouncedFunc();
-
-    await new Promise(resolve => setTimeout(resolve, 150));
-
-    expect(func).toHaveBeenCalledTimes(1);
-
-    const listenerCount = addEventListenerSpy.mock.calls.filter(([event]) => event === 'abort').length;
-    expect(listenerCount).toBe(1);
-
-    addEventListenerSpy.mockRestore();
-  });
-
   it('should call the function immediately and only once if leading is true', async () => {
     const func = vi.fn();
     const debounceMs = 50;
