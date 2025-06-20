@@ -17,27 +17,27 @@
 ## 인터페이스
 
 ```typescript
-function defaults<T extends object>(object: T): NonNullable<T>;
-function defaults<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function defaults<T extends object, S1 extends object, S2 extends object>(
+function defaults<T extends object | null | undefined>(object: T): NonNullable<T>;
+function defaults<T extends object | null | undefined, S extends object>(object: T, source: S): NonNullable<T & S>;
+function defaults<T extends object | null | undefined, S1 extends object, S2 extends object>(
   object: T,
   source1: S1,
   source2: S2
 ): NonNullable<T & S1 & S2>;
-function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object>(
+function defaults<T extends object | null | undefined, S1 extends object, S2 extends object, S3 extends object>(
   object: T,
   source1: S1,
   source2: S2,
   source3: S3
 ): NonNullable<T & S1 & S2 & S3>;
-function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): NonNullable<T & S1 & S2 & S3 & S4>;
-function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object;
+function defaults<
+  T extends object | null | undefined,
+  S1 extends object,
+  S2 extends object,
+  S3 extends object,
+  S4 extends object,
+>(object: T, source1: S1, source2: S2, source3: S3, source4: S4): NonNullable<T & S1 & S2 & S3 & S4>;
+function defaults<T extends object | null | undefined, S extends object>(object: T, ...sources: S[]): object;
 ```
 
 ### 파라미터
@@ -56,4 +56,6 @@ defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
 defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
 defaults({ a: null }, { a: 1 }); // { a: null }
 defaults({ a: undefined }, { a: 1 }); // { a: 1 }
+defaults(null, { a: 1 }); // { a: 1 }
+defaults(undefined, { a: 1 }); // { a: 1 }
 ```

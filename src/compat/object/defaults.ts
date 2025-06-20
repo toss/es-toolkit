@@ -15,7 +15,7 @@ import { eq } from '../util/eq.ts';
  * @param {T} object - The target object.
  * @returns {T} The object itself.
  */
-export function defaults<T extends object>(object: T): NonNullable<T>;
+export function defaults<T extends object | null | undefined>(object: T): NonNullable<T>;
 
 /**
  * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
@@ -33,7 +33,10 @@ export function defaults<T extends object>(object: T): NonNullable<T>;
  * @param {S} source - The object that specifies the default values to apply.
  * @returns {NonNullable<T & S>} The `object` that has been updated with default values from `source`, ensuring that all properties are defined and none are left as `undefined`.
  */
-export function defaults<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
+export function defaults<T extends object | null | undefined, S extends object>(
+  object: T,
+  source: S
+): NonNullable<T & S>;
 
 /**
  * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
@@ -53,7 +56,7 @@ export function defaults<T extends object, S extends object>(object: T, source: 
  * @param {S2} source2 - The second object that specifies the default values to apply.
  * @returns {NonNullable<T & S1 & S2>} The `object` that has been updated with default values from `source1` and `source2`, ensuring that all properties are defined and none are left as `undefined`.
  */
-export function defaults<T extends object, S1 extends object, S2 extends object>(
+export function defaults<T extends object | null | undefined, S1 extends object, S2 extends object>(
   object: T,
   source1: S1,
   source2: S2
@@ -79,7 +82,7 @@ export function defaults<T extends object, S1 extends object, S2 extends object>
  * @param {S3} source3 - The third object that specifies the default values to apply.
  * @returns {NonNullable<T & S1 & S2 & S3>} The `object` that has been updated with default values from `source1`, `source2`, and `source3`, ensuring that all properties are defined and none are left as `undefined`.
  */
-export function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object>(
+export function defaults<T extends object | null | undefined, S1 extends object, S2 extends object, S3 extends object>(
   object: T,
   source1: S1,
   source2: S2,
@@ -107,13 +110,13 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
  * @param {S4} source4 - The fourth object that specifies the default values to apply.
  * @returns {NonNullable<T & S1 & S2 & S3 & S4>} The `object` that has been updated with default values from `source1`, `source2`, `source3`, and `source4`, ensuring that all properties are defined and none are left as `undefined`.
  */
-export function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): NonNullable<T & S1 & S2 & S3 & S4>;
+export function defaults<
+  T extends object | null | undefined,
+  S1 extends object,
+  S2 extends object,
+  S3 extends object,
+  S4 extends object,
+>(object: T, source1: S1, source2: S2, source3: S3, source4: S4): NonNullable<T & S1 & S2 & S3 & S4>;
 
 /**
  * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
@@ -137,7 +140,7 @@ export function defaults<T extends object, S1 extends object, S2 extends object,
  * defaults({ a: null }, { a: 1 }); // { a: null }
  * defaults({ a: undefined }, { a: 1 }); // { a: 1 }
  */
-export function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object;
+export function defaults<T extends object | null | undefined, S extends object>(object: T, ...sources: S[]): object;
 
 /**
  * Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
@@ -161,8 +164,8 @@ export function defaults<T extends object, S extends object>(object: T, ...sourc
  * defaults({ a: null }, { a: 1 }); // { a: null }
  * defaults({ a: undefined }, { a: 1 }); // { a: 1 }
  */
-export function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object {
-  object = Object(object);
+export function defaults<T extends object | null | undefined, S extends object>(object: T, ...sources: S[]): object {
+  const targetObject = Object(object) as object;
   const objectProto = Object.prototype;
 
   let length = sources.length;
@@ -177,16 +180,16 @@ export function defaults<T extends object, S extends object>(object: T, ...sourc
 
     for (let j = 0; j < keys.length; j++) {
       const key = keys[j];
-      const value = (object as any)[key];
+      const value = (targetObject as any)[key];
 
       if (
         value === undefined ||
-        (!Object.hasOwn(object, key) && eq(value, objectProto[key as keyof typeof objectProto]))
+        (!Object.hasOwn(targetObject, key) && eq(value, objectProto[key as keyof typeof objectProto]))
       ) {
-        (object as any)[key] = source[key];
+        (targetObject as any)[key] = source[key];
       }
     }
   }
 
-  return object;
+  return targetObject;
 }

@@ -70,4 +70,22 @@ describe('defaults', () => {
     array.forEach((...args: any[]) => defaults(source, ...args));
     expect(source).toEqual({ a: 4, b: 1, c: 2, d: 3 });
   });
+
+  it('should return an object with default values when `object` is `null`', () => {
+    const target = null;
+    const source = { a: 1 };
+
+    const result = defaults(target, source);
+
+    expect(result).toEqual({ a: 1 });
+  });
+
+  it('should return an object with default values when `object` is `undefined`', () => {
+    const target = undefined;
+    const source = { a: 1 };
+
+    const result = defaults(target, source);
+
+    expect(result).toEqual({ a: 1 });
+  });
 });
