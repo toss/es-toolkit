@@ -13,6 +13,8 @@ describe('fill', () => {
 
   it('should use `undefined` for `value` if not given', () => {
     const array = [1, 2, 3];
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = fill(array);
 
     expect(actual).toEqual(Array(3));
