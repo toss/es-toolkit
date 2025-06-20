@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { noop as noopLodash } from 'lodash';
-import { noop } from '../../function';
+import { noop } from './noop';
 
 describe('noop', () => {
   it('should be a function', () => {

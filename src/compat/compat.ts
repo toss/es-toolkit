@@ -142,14 +142,14 @@ export { subtract } from './math/subtract.ts';
 export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
 
-export { identity } from '../function/identity.ts';
-export { noop } from '../function/noop.ts';
 export { invert } from '../object/invert.ts';
 export { isEqual } from '../predicate/isEqual.ts';
 export { isFunction } from '../predicate/isFunction.ts';
 export { isLength } from '../predicate/isLength.ts';
 export { isNull } from '../predicate/isNull.ts';
 export { isUndefined } from '../predicate/isUndefined.ts';
+export { identity } from './function/identity.ts';
+export { noop } from './function/noop.ts';
 export { assign } from './object/assign.ts';
 export { assignIn } from './object/assignIn.ts';
 export { assignInWith } from './object/assignInWith.ts';
