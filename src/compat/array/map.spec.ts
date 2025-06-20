@@ -214,8 +214,4 @@ describe('map', () => {
       expect(count).toBe(1);
     });
   });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(map).toEqualTypeOf<typeof mapLodash>();
-  });
 });

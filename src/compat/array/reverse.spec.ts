@@ -29,10 +29,14 @@ describe('reverse', () => {
   });
 
   it('should return null if input is null', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(reverse(null)).toBeNull();
   });
 
   it('should return undefined if input is undefined', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(reverse(undefined)).toBeUndefined();
   });
 
