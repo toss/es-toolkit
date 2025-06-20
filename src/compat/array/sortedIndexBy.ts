@@ -52,7 +52,7 @@ export function sortedIndexBy<T>(array: ArrayLike<T> | null | undefined, value: 
 export function sortedIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
-  iteratee?: Iteratee<T, R>,
+  iteratee: Iteratee<T, R> = iterateeToolkit,
   retHighest?: boolean
 ): number {
   let low = 0;

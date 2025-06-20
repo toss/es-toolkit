@@ -1,6 +1,8 @@
 import { Criterion, orderBy } from './orderBy.ts';
 import { flatten } from '../../array/flatten.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
+import { ListIteratee } from '../_internal/ListIteratee.ts';
+import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
 
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
@@ -31,6 +33,46 @@ import { isIterateeCall } from '../_internal/isIterateeCall.ts';
  * //   { user: 'fred', age: 48 },
  * // ]
  */
+/**
+ * Creates an array of elements, sorted in ascending order by the results of running each element in a collection thru each iteratee.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
+ * @param {...Array<T | readonly T[] | ListIteratee<T>>} iteratees - The iteratees to sort by.
+ * @returns {T[]} Returns the new sorted array.
+ *
+ * @example
+ * const users = [
+ *   { 'user': 'fred',   'age': 48 },
+ *   { 'user': 'barney', 'age': 36 },
+ *   { 'user': 'fred',   'age': 42 },
+ *   { 'user': 'barney', 'age': 34 }
+ * ];
+ *
+ * sortBy(users, [function(o) { return o.user; }]);
+ * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 42]]
+ */
+export function sortBy<T>(collection: ArrayLike<T> | null | undefined, ...iteratees: Array<T | readonly T[] | ListIteratee<T>>): T[];
+
+/**
+ * Creates an array of elements, sorted in ascending order by the results of running each element in a collection thru each iteratee.
+ *
+ * @template T
+ * @param {T | null | undefined} collection - The object to iterate over.
+ * @param {...Array<T[keyof T] | readonly Array<T[keyof T]> | ObjectIteratee<T>>} iteratees - The iteratees to sort by.
+ * @returns {Array<T[keyof T]>} Returns the new sorted array.
+ *
+ * @example
+ * const users = {
+ *   'a': { 'user': 'fred',   'age': 48 },
+ *   'b': { 'user': 'barney', 'age': 36 }
+ * };
+ *
+ * sortBy(users, [function(o) { return o.user; }]);
+ * // => [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 48 }]
+ */
+export function sortBy<T extends object>(collection: T | null | undefined, ...iteratees: Array<T[keyof T] | readonly Array<T[keyof T]> | ObjectIteratee<T>>): Array<T[keyof T]>;
+
 export function sortBy<T = any>(
   collection: ArrayLike<T> | object | null | undefined,
   ...criteria: Array<Criterion<T> | Array<Criterion<T>>>

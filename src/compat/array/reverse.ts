@@ -1,23 +1,16 @@
 /**
- * Reverses `array` so that the first element becomes the last, the second
- * element becomes the second to last, and so on.
+ * Reverses `array` so that the first element becomes the last, the second element becomes the second to last, and so on.
  *
- * **Note:** This method mutates `array` and is based on
- * [`Array#reverse`](https://mdn.io/Array/reverse).
- *
- * @template T
- * @param {T[]} array - The array to reverse.
- * @returns {T[]} Returns `array`.
+ * @template L
+ * @param {L extends readonly any[] ? never : L} array - The array to reverse.
+ * @returns {L} Returns `array`.
  *
  * @example
  * const array = [1, 2, 3];
  * reverse(array);
  * // => [3, 2, 1]
- *
- * console.log(array);
- * // => [3, 2, 1]
  */
-export function reverse<T>(array: T[]): T[];
+export function reverse<L extends ArrayLike<any>>(array: L extends readonly any[] ? never : L): L;
 
 /**
  * Reverses the elements of an array in place.

@@ -63,6 +63,8 @@ describe('some', () => {
 
     expect(actual).toEqual(expected);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expected = values.map(stubTrue);
     actual = values.map((value, index) => {
       const array = [0, 1];
@@ -87,6 +89,8 @@ describe('some', () => {
 
     expect(actual).toEqual(expected);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expected = values.map(stubTrue);
     actual = values.map((value, index) => {
       const array = { 0: 0, a: 1 };

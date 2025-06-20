@@ -57,6 +57,8 @@ describe('sortBy', () => {
   it(`should support iteratees`, () => {
     const actual = sortBy(objects, [
       'a',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       function (object) {
         return object.b;
       },
@@ -131,6 +133,8 @@ describe('sortBy', () => {
   });
 
   it('should work with `_.property` shorthands', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(sortBy({ ...objects, undefined }, 'b').map(object => object?.b)).toEqual([1, 2, 3, 4, undefined]);
   });
 
@@ -175,6 +179,8 @@ describe('sortBy', () => {
       [
         [2, 1, 3],
         [3, 2, 1],
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       ].map(sortBy)
     ).toEqual([
       [1, 2, 3],
@@ -188,6 +194,8 @@ describe('sortBy', () => {
   });
 
   it('should match the type of lodash', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expectTypeOf(sortBy).toEqualTypeOf<typeof sortByLodash>();
   });
 });

@@ -4,15 +4,12 @@ import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
- * Removes all elements from array that predicate returns truthy for and returns an array of the removed
- * elements. The predicate is invoked with three arguments: (value, index, array).
+ * Removes all elements from array that predicate returns truthy for and returns an array of the removed elements.
  *
- * Note: Unlike _.filter, this method mutates array.
- *
- * @template T
- * @param {T[]} array - The array to modify.
- * @param {ListIteratee<T>} [predicate] - The function invoked per iteration.
- * @returns {T[]} Returns the new array of removed elements.
+ * @template L
+ * @param {L extends readonly any[] ? never : L} array - The array to modify.
+ * @param {ListIteratee<L[0]>} [predicate] - The function invoked per iteration.
+ * @returns {Array<L[0]>} Returns the new array of removed elements.
  *
  * @example
  * const array = [1, 2, 3, 4];
@@ -20,7 +17,10 @@ import { iteratee } from '../util/iteratee.ts';
  * console.log(array); // => [1, 3]
  * console.log(evens); // => [2, 4]
  */
-export function remove<T>(array: T[], predicate?: ListIteratee<T>): T[];
+export function remove<L extends ArrayLike<any>>(
+  array: L extends readonly any[] ? never : L,
+  predicate?: ListIteratee<L[0]>
+): Array<L[0]>;
 
 /**
  * Removes elements from an array based on various criteria.
