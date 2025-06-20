@@ -69,7 +69,7 @@ describe('pullAt', () => {
   });
 
   it('should work with non-index paths', () => {
-    const values: any[] = reject(empties, value => value === 0 || isArray(value)).concat(-1, 1.1);
+    const values: any[] = reject(empties, (value: any) => value === 0 || isArray(value)).concat(-1, 1.1);
 
     const array = reduce(
       values,
@@ -149,8 +149,6 @@ describe('pullAt', () => {
   });
 
   it('should match the type of lodash', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     expectTypeOf(pullAt).toEqualTypeOf<typeof pullAtLodash>();
   });
 });

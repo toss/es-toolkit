@@ -1,20 +1,6 @@
-import { Many } from '../_internal/Many.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
- * Flattens array a single level deep.
- *
- * @template T
- * @param {ArrayLike<Many<T>> | null | undefined} array - The array to flatten.
- * @returns {T[]} Returns the new flattened array.
- *
- * @example
- * flatten([1, [2, [3, [4]], 5]]);
- * // => [1, 2, [3, [4]], 5]
- */
-export function flatten<T>(array: ArrayLike<Many<T>> | null | undefined): T[];
-
-/**
  * Flattens array up to depth times.
  *
  * @template T
@@ -26,32 +12,14 @@ export function flatten<T>(array: ArrayLike<Many<T>> | null | undefined): T[];
  * flatten([1, [2, [3, [4]], 5]], 2);
  * // => [1, 2, 3, [4], 5]
  */
-export function flatten<T, D extends number = 1>(
-  value: ArrayLike<T> | null | undefined,
-  depth: D
-): Array<FlatArray<T[], D>>;
+export function flatten<T>(value: ArrayLike<T | readonly T[]> | null | undefined): T[];
 
-/**
- * Flattens array up to depth times.
- *
- * @template T
- * @param {ArrayLike<T> | null | undefined} value - The array to flatten.
- * @param {number} depth - The maximum recursion depth.
- * @returns {any[]} Returns the new flattened array.
- *
- * @example
- * flatten([1, [2, [3, [4]], 5]], 2);
- * // => [1, 2, 3, [4], 5]
- */
-export function flatten<T, D extends number = 1>(
-  value: ArrayLike<T> | null | undefined,
-  depth: D = 1 as D
-): Array<FlatArray<T[], D>> {
-  const result: Array<FlatArray<T[], D>> = [];
+export function flatten<T>(value: ArrayLike<T | readonly T[]> | null | undefined, depth = 1): T[] {
+  const result: T[] = [];
   const flooredDepth = Math.floor(depth);
 
   if (!isArrayLike(value)) {
-    return result;
+    return result as T[];
   }
 
   const recursive = (arr: readonly T[], currentDepth: number) => {
@@ -69,12 +37,12 @@ export function flatten<T, D extends number = 1>(
           recursive(Array.from(item as T[]), currentDepth + 1);
         }
       } else {
-        result.push(item as FlatArray<T[], D>);
+        result.push(item);
       }
     }
   };
 
-  recursive(Array.from(value), 0);
+  recursive(Array.from(value) as any, 0);
 
   return result;
 }

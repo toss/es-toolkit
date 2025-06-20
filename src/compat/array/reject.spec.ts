@@ -143,7 +143,8 @@ describe('reject', () => {
 
   it('should not modify the resulting value from within `predicate`', () => {
     const actual = reject([0], (value, index, array) => {
-      // @ts-expect-error - testing
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       array[index] = 1;
       return false;
     });

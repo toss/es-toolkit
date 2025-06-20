@@ -210,7 +210,7 @@ describe('orderBy', () => {
       [
         [2, 1, 3],
         [3, 2, 1],
-      // @ts-expect-error - type mismatch
+        // @ts-expect-error - type mismatch
       ].map(orderBy)
     ).toEqual([
       [1, 2, 3],
@@ -245,8 +245,6 @@ describe('orderBy', () => {
   });
 
   it('should match the type of lodash', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     expectTypeOf(orderBy).toEqualTypeOf<typeof orderByLodash>();
   });
 });

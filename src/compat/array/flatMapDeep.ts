@@ -1,5 +1,6 @@
 import { flatMapDepth } from './flatMapDepth.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
+import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
 
 type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
@@ -16,7 +17,13 @@ type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
  * flatMapDeep(obj);
  * // => [1, 2, 3]
  */
-export function flatMapDeep<T>(collection: Record<string, RecursiveArray<T> | T> | Record<number, RecursiveArray<T> | T> | null | undefined): T[];
+export function flatMapDeep<T>(
+  collection:
+    | Record<string, ListOfRecursiveArraysOrValues<T> | T>
+    | Record<number, ListOfRecursiveArraysOrValues<T> | T>
+    | null
+    | undefined
+): T[];
 
 /**
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
@@ -30,11 +37,14 @@ export function flatMapDeep<T>(collection: Record<string, RecursiveArray<T> | T>
  * function duplicate(n) {
  *   return [[[n, n]]];
  * }
- * 
+ *
  * flatMapDeep([1, 2], duplicate);
  * // => [1, 1, 2, 2]
  */
-export function flatMapDeep<T, R>(collection: ArrayLike<T> | null | undefined, iteratee: ListIterator<T, RecursiveArray<R> | R>): R[];
+export function flatMapDeep<T, R>(
+  collection: ArrayLike<T> | null | undefined,
+  iteratee: ListIterator<T, ListOfRecursiveArraysOrValues<R> | R>
+): R[];
 
 /**
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
@@ -49,7 +59,10 @@ export function flatMapDeep<T, R>(collection: ArrayLike<T> | null | undefined, i
  * flatMapDeep(obj, (value, key) => [[[key, value]]]);
  * // => ['a', 1, 'b', 2]
  */
-export function flatMapDeep<T extends object, R>(collection: T | null | undefined, iteratee: ObjectIterator<T, RecursiveArray<R> | R>): R[];
+export function flatMapDeep<T extends object, R>(
+  collection: T | null | undefined,
+  iteratee: ObjectIterator<T, ListOfRecursiveArraysOrValues<R> | R>
+): R[];
 
 /**
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.

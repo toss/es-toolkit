@@ -1,4 +1,4 @@
-import { flatten } from './flatten.ts';
+import { flattenDepth } from './flattenDepth.ts';
 import { map } from './map.ts';
 import { isNil } from '../../predicate/isNil.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
@@ -122,5 +122,5 @@ export function flatMap<R = any>(collection: object | null | undefined, iteratee
   // @ts-ignore
   const mapped = isNil(iteratee) ? map(collection) : map(collection, iteratee);
 
-  return flatten(mapped, 1) as R[];
+  return flattenDepth(mapped, 1) as R[];
 }

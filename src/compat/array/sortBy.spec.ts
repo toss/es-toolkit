@@ -179,8 +179,8 @@ describe('sortBy', () => {
       [
         [2, 1, 3],
         [3, 2, 1],
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
       ].map(sortBy)
     ).toEqual([
       [1, 2, 3],
@@ -194,8 +194,6 @@ describe('sortBy', () => {
   });
 
   it('should match the type of lodash', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     expectTypeOf(sortBy).toEqualTypeOf<typeof sortByLodash>();
   });
 });

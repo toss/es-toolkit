@@ -2,16 +2,15 @@ import { flatten } from './flatten.ts';
 import { map } from './map.ts';
 import { identity } from '../../function/identity.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
+import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
-
-type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
 
 /**
  * Creates a flattened array of values by running each element through iteratee and flattening the mapped results up to depth times.
  *
  * @template T
- * @param {Record<string, RecursiveArray<T> | T> | Record<number, RecursiveArray<T> | T> | null | undefined} collection - The collection to iterate over.
+ * @param {Record<string, ListOfRecursiveArraysOrValues<T> | T> | Record<number, ListOfRecursiveArraysOrValues<T> | T> | null | undefined} collection - The collection to iterate over.
  * @returns {T[]} Returns the new flattened array.
  *
  * @example
@@ -20,7 +19,11 @@ type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
  * // => [1, 2, [3]]
  */
 export function flatMapDepth<T>(
-  collection: Record<string, RecursiveArray<T> | T> | Record<number, RecursiveArray<T> | T> | null | undefined
+  collection:
+    | Record<string, ListOfRecursiveArraysOrValues<T> | T>
+    | Record<number, ListOfRecursiveArraysOrValues<T> | T>
+    | null
+    | undefined
 ): T[];
 
 /**
@@ -42,7 +45,7 @@ export function flatMapDepth<T>(
  */
 export function flatMapDepth<T, R>(
   collection: ArrayLike<T> | null | undefined,
-  iteratee: ListIterator<T, RecursiveArray<R> | R>,
+  iteratee: ListIterator<T, ListOfRecursiveArraysOrValues<R> | R>,
   depth?: number
 ): R[];
 
@@ -62,7 +65,7 @@ export function flatMapDepth<T, R>(
  */
 export function flatMapDepth<T extends object, R>(
   collection: T | null | undefined,
-  iteratee: ObjectIterator<T, RecursiveArray<R> | R>,
+  iteratee: ObjectIterator<T, ListOfRecursiveArraysOrValues<R> | R>,
   depth?: number
 ): R[];
 
@@ -106,7 +109,7 @@ export function flatMapDepth(collection: object | null | undefined, iteratee: ob
  * Creates a flattened array of values by running each element through iteratee and flattening the mapped results up to depth times.
  *
  * @template T, R
- * @param {Record<string, ArrayLike<T | RecursiveArray<T>> | T> | Record<number, ArrayLike<T | RecursiveArray<T>> | T> | ArrayLike<T> | object | null | undefined} collection - The array or object to iterate over.
+ * @param {Record<string, ArrayLike<T | ListOfRecursiveArraysOrValues<T>> | T> | Record<number, ArrayLike<T | ListOfRecursiveArraysOrValues<T>> | T> | ArrayLike<T> | object | null | undefined} collection - The array or object to iterate over.
  * @param {((value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R) | ((value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R) | string | object} [iteratee] - The function that produces the new array elements.
  * @param {number} [depth=1] - The maximum recursion depth.
  * @returns {T[] | R[] | any[] | boolean[]} A new array that has been flattened up to the specified depth.
@@ -117,15 +120,15 @@ export function flatMapDepth(collection: object | null | undefined, iteratee: ob
  */
 export function flatMapDepth<T, R>(
   collection:
-    | Record<string, ArrayLike<T | RecursiveArray<T>> | T>
-    | Record<number, ArrayLike<T | RecursiveArray<T>> | T>
+    | Record<string, ArrayLike<T | ListOfRecursiveArraysOrValues<T>> | T>
+    | Record<number, ArrayLike<T | ListOfRecursiveArraysOrValues<T>> | T>
     | ArrayLike<T>
     | object
     | null
     | undefined,
   iteratee:
-    | ((value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R)
-    | ((value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R)
+    | ((value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | ListOfRecursiveArraysOrValues<R>> | R)
+    | ((value: T[keyof T], key: string, object: T) => ArrayLike<R | ListOfRecursiveArraysOrValues<R>> | R)
     | string
     | object = identity,
   depth = 1
@@ -137,5 +140,5 @@ export function flatMapDepth<T, R>(
   const iterateeFn = createIteratee(iteratee);
   const mapped = map(collection, iterateeFn);
 
-  return flatten(mapped, depth);
+  return (flatten as any)(mapped, depth);
 }

@@ -1,5 +1,5 @@
 import { identity } from '../../function/identity.ts';
-import { ListIterateeCustom } from '../_internal/ListIteratee.ts';
+import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';

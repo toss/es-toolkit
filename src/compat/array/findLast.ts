@@ -1,5 +1,6 @@
 import { identity } from '../../function/identity.ts';
-import { ListIterateeCustom, ListIteratorTypeGuard } from '../_internal/ListIteratee.ts';
+import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
+import { ListIteratorTypeGuard } from '../_internal/ListIteratorTypeGuard.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
 import { iteratee } from '../util/iteratee.ts';

@@ -93,8 +93,6 @@ describe('flatMapDepth', () => {
   });
 
   it('should match the type of lodash', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     expectTypeOf(flatMapDepth).toEqualTypeOf<typeof flatMapDepthLodash>();
   });
 });

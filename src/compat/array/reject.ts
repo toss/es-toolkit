@@ -1,6 +1,6 @@
 import { filter } from './filter.ts';
 import { identity } from '../../function/identity.ts';
-import { ListIterateeCustom } from '../_internal/ListIteratee.ts';
+import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import type { StringIterator } from '../_internal/StringIterator.ts';
 import { negate } from '../function/negate.ts';

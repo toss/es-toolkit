@@ -52,7 +52,10 @@ import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
  * sortBy(users, [function(o) { return o.user; }]);
  * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 42]]
  */
-export function sortBy<T>(collection: ArrayLike<T> | null | undefined, ...iteratees: Array<T | readonly T[] | ListIteratee<T>>): T[];
+export function sortBy<T>(
+  collection: ArrayLike<T> | null | undefined,
+  ...iteratees: Array<T | readonly T[] | ListIteratee<T>>
+): T[];
 
 /**
  * Creates an array of elements, sorted in ascending order by the results of running each element in a collection thru each iteratee.
@@ -71,7 +74,10 @@ export function sortBy<T>(collection: ArrayLike<T> | null | undefined, ...iterat
  * sortBy(users, [function(o) { return o.user; }]);
  * // => [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 48 }]
  */
-export function sortBy<T extends object>(collection: T | null | undefined, ...iteratees: Array<T[keyof T] | readonly Array<T[keyof T]> | ObjectIteratee<T>>): Array<T[keyof T]>;
+export function sortBy<T extends object>(
+  collection: T | null | undefined,
+  ...iteratees: Array<T[keyof T] | ReadonlyArray<T[keyof T]> | ObjectIteratee<T>>
+): Array<T[keyof T]>;
 
 export function sortBy<T = any>(
   collection: ArrayLike<T> | object | null | undefined,
@@ -84,5 +90,12 @@ export function sortBy<T = any>(
   } else if (length > 2 && isIterateeCall(criteria[0], criteria[1], criteria[2])) {
     criteria = [criteria[0]];
   }
-  return orderBy(collection, flatten(criteria), ['asc']);
+  return orderBy(
+    collection,
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    flatten(criteria),
+    ['asc']
+  );
 }
