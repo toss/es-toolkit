@@ -7,17 +7,23 @@ import { iteratee } from '../util/iteratee.ts';
  * If you want to remove values without modifying the original array, use `differenceBy`.
  *
  * @template T
- * @param {T[]} arr - The array to modify.
- * @param {ArrayLike<T>} valuesToRemove - The values to remove from the array.
- * @param {(value: T) => unknown} getValue - The iteratee invoked per element.
- * @returns {T[]} The modified array with the specified values removed.
+ * @param {T[]} array - The array to modify.
+ * @param {ArrayLike<T>} [values] - The values to remove.
+ * @param {((value: T) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T>} [iteratee] - The iteratee invoked per element.
+ * @returns {T[]} Returns `array`.
  *
  * @example
- * const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
- * const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], obj => obj.value);
- * console.log(result); // [{ value: 2 }]
+ * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
+ *
+ * pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x');
+ * console.log(array);
+ * // => [{ 'x': 2 }]
  */
-export function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: (value: T) => unknown): T[];
+export function pullAllBy<T>(
+  array: T[],
+  values?: ArrayLike<T>,
+  iteratee?: ((value: T) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T>
+): T[];
 
 /**
  * Removes all specified values from an array using an iteratee function.
@@ -25,46 +31,74 @@ export function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: (
  * This function changes `arr` in place.
  * If you want to remove values without modifying the original array, use `differenceBy`.
  *
- * @template T
- * @param {T[]} arr - The array to modify.
- * @param {ArrayLike<T>} valuesToRemove - The values to remove from the array.
- * @param {Partial<T>} getValue - The partial object to match against each element.
- * @returns {T[]} The modified array with the specified values removed.
- */
-export function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: Partial<T>): T[];
-
-/**
- * Removes all specified values from an array using an iteratee function.
- *
- * This function changes `arr` in place.
- * If you want to remove values without modifying the original array, use `differenceBy`.
- *
- * @template T
- * @param {T[]} arr - The array to modify.
- * @param {ArrayLike<T>} valuesToRemove - The values to remove from the array.
- * @param {[keyof T, unknown]} getValue - The property-value pair to match against each element.
- * @returns {T[]} The modified array with the specified values removed.
- */
-export function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: [keyof T, unknown]): T[];
-
-/**
- * Removes all specified values from an array using an iteratee function.
- *
- * This function changes `arr` in place.
- * If you want to remove values without modifying the original array, use `differenceBy`.
- *
- * @template T
- * @param {T[]} arr - The array to modify.
- * @param {ArrayLike<T>} valuesToRemove - The values to remove from the array.
- * @param {keyof T} getValue - The key of the property to match against each element.
- * @returns {T[]} The modified array with the specified values removed.
+ * @template L
+ * @param {L} array - The array to modify.
+ * @param {ArrayLike<L[0]>} [values] - The values to remove.
+ * @param {((value: L[0]) => unknown) | PropertyKey | [PropertyKey, any] | Partial<L[0]>} [iteratee] - The iteratee invoked per element.
+ * @returns {L} Returns `array`.
  *
  * @example
- * const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
- * const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], 'value');
- * console.log(result); // [{ value: 2 }]
+ * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
+ *
+ * pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x');
+ * console.log(array);
+ * // => [{ 'x': 2 }]
  */
-export function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: keyof T): T[];
+export function pullAllBy<L extends ArrayLike<any>>(
+  array: L extends readonly any[] ? never : L,
+  values?: ArrayLike<L[0]>,
+  iteratee?: ((value: L[0]) => unknown) | PropertyKey | [PropertyKey, any] | Partial<L[0]>
+): L;
+
+/**
+ * Removes all specified values from an array using an iteratee function.
+ *
+ * This function changes `arr` in place.
+ * If you want to remove values without modifying the original array, use `differenceBy`.
+ *
+ * @template T, U
+ * @param {T[]} array - The array to modify.
+ * @param {ArrayLike<U>} values - The values to remove.
+ * @param {((value: T | U) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T | U>} iteratee - The iteratee invoked per element.
+ * @returns {T[]} Returns `array`.
+ *
+ * @example
+ * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
+ *
+ * pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x');
+ * console.log(array);
+ * // => [{ 'x': 2 }]
+ */
+export function pullAllBy<T, U>(
+  array: T[],
+  values: ArrayLike<U>,
+  iteratee: ((value: T | U) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T | U>
+): T[];
+
+/**
+ * Removes all specified values from an array using an iteratee function.
+ *
+ * This function changes `arr` in place.
+ * If you want to remove values without modifying the original array, use `differenceBy`.
+ *
+ * @template L, U
+ * @param {L} array - The array to modify.
+ * @param {ArrayLike<U>} values - The values to remove.
+ * @param {((value: L[0] | U) => unknown) | PropertyKey | [PropertyKey, any] | Partial<L[0] | U>} iteratee - The iteratee invoked per element.
+ * @returns {L} Returns `array`.
+ *
+ * @example
+ * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
+ *
+ * pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x');
+ * console.log(array);
+ * // => [{ 'x': 2 }]
+ */
+export function pullAllBy<L extends ArrayLike<any>, U>(
+  array: L extends readonly any[] ? never : L,
+  values: ArrayLike<U>,
+  iteratee: ((value: L[0] | U) => unknown) | PropertyKey | [PropertyKey, any] | Partial<L[0] | U>
+): L;
 
 /**
  * Removes all specified values from an array using an iteratee function.
@@ -89,11 +123,7 @@ export function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: k
  * const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], 'value');
  * console.log(result); // [{ value: 2 }]
  */
-export function pullAllBy<T>(
-  arr: T[],
-  valuesToRemove: ArrayLike<T>,
-  _getValue: ((value: T, index: number, arr: ArrayLike<T>) => boolean) | Partial<T> | [keyof T, unknown] | keyof T
-): T[] {
+export function pullAllBy(arr: any, valuesToRemove: any, _getValue: any): any {
   const getValue = iteratee(_getValue);
   const valuesSet = new Set(Array.from(valuesToRemove).map(x => getValue(x)));
 

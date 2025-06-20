@@ -88,7 +88,11 @@ describe('intersectionWith', () => {
     // eslint-disable-next-line
     // @ts-ignore
     expect(func(array, 3, { 0: 1 }, null)).toEqual([]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(func(null, array, null, [2, 3])).toEqual([]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(func(array, null, args, null)).toEqual([]);
   });
 

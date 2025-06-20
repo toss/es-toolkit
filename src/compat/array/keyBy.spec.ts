@@ -22,6 +22,8 @@ describe('keyBy', () => {
     const values = [, null, undefined];
     const expected = values.map(() => ({ 4: 4, 6: 6 }));
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? keyBy(array, value) : keyBy(array)));
 
     expect(actual).toEqual(expected);
@@ -68,6 +70,8 @@ describe('keyBy', () => {
   });
 
   it('should match the type of lodash', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expectTypeOf(keyBy).toEqualTypeOf<typeof keyByLodash>();
   });
 });

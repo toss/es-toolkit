@@ -1,25 +1,52 @@
+import { Many } from '../_internal/Many.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
- * Flattens an array up to the specified depth.
+ * Flattens array a single level deep.
  *
- * @template T - The type of elements within the array.
- * @template D - The depth to which the array should be flattened.
- * @param {ArrayLike<T> | null | undefined} value - The object to flatten.
- * @param {D} depth - The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
- * @returns {Array<FlatArray<T[], D>> | []} A new array that has been flattened.
+ * @template T
+ * @param {ArrayLike<Many<T>> | null | undefined} array - The array to flatten.
+ * @returns {T[]} Returns the new flattened array.
  *
  * @example
- * const arr = flatten([1, [2, 3], [4, [5, 6]]], 1);
- * // Returns: [1, 2, 3, 4, [5, 6]]
+ * flatten([1, [2, [3, [4]], 5]]);
+ * // => [1, 2, [3, [4]], 5]
+ */
+export function flatten<T>(array: ArrayLike<Many<T>> | null | undefined): T[];
+
+/**
+ * Flattens array up to depth times.
  *
- * const arr = flatten([1, [2, 3], [4, [5, 6]]], 2);
- * // Returns: [1, 2, 3, 4, 5, 6]
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} value - The array to flatten.
+ * @param {number} depth - The maximum recursion depth.
+ * @returns {any[]} Returns the new flattened array.
+ *
+ * @example
+ * flatten([1, [2, [3, [4]], 5]], 2);
+ * // => [1, 2, 3, [4], 5]
  */
 export function flatten<T, D extends number = 1>(
   value: ArrayLike<T> | null | undefined,
-  depth = 1 as D
-): Array<FlatArray<T[], D>> | [] {
+  depth: D
+): Array<FlatArray<T[], D>>;
+
+/**
+ * Flattens array up to depth times.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} value - The array to flatten.
+ * @param {number} depth - The maximum recursion depth.
+ * @returns {any[]} Returns the new flattened array.
+ *
+ * @example
+ * flatten([1, [2, [3, [4]], 5]], 2);
+ * // => [1, 2, 3, [4], 5]
+ */
+export function flatten<T, D extends number = 1>(
+  value: ArrayLike<T> | null | undefined,
+  depth: D = 1 as D
+): Array<FlatArray<T[], D>> {
   const result: Array<FlatArray<T[], D>> = [];
   const flooredDepth = Math.floor(depth);
 

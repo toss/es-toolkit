@@ -42,7 +42,8 @@ describe('flatMapDepth', () => {
 
     [array, object].forEach(collection => {
       const actual = values.map(value =>
-        // @ts-expect-error - invalid argument
+        // eslint-disable-next-line
+        // @ts-ignore
         value ? flatMapDepth(collection, value, 1) : flatMapDepth(collection, undefined, 1)
       );
 
@@ -92,6 +93,8 @@ describe('flatMapDepth', () => {
   });
 
   it('should match the type of lodash', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expectTypeOf(flatMapDepth).toEqualTypeOf<typeof flatMapDepthLodash>();
   });
 });

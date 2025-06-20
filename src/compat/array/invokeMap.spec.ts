@@ -82,6 +82,8 @@ describe('invokeMap', () => {
     const paths = ['a.b', ['a', 'b']];
 
     paths.forEach(path => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       expect(invokeMap([object], path)).toEqual([1]);
     });
   });
@@ -92,6 +94,8 @@ describe('invokeMap', () => {
         return this;
       },
     };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(invokeMap([singlePropObject], ['value'])[0]).toBe(singlePropObject);
 
     const emptyPathObject = {
@@ -99,7 +103,11 @@ describe('invokeMap', () => {
         return this;
       },
     };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(invokeMap([emptyPathObject], []).length).toBe(1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(invokeMap([emptyPathObject], [])[0]).toBeUndefined();
 
     const nestedObject = {
@@ -111,6 +119,8 @@ describe('invokeMap', () => {
         },
       },
     };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(invokeMap([nestedObject], ['a', 'b', 'c'])[0]).toBe(nestedObject.a.b);
   });
 

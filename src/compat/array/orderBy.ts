@@ -3,6 +3,113 @@ import { isKey } from '../_internal/isKey.ts';
 import { toPath } from '../util/toPath.ts';
 
 export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] | null | undefined;
+
+/**
+ * This method is like `_.sortBy` except that it allows specifying the sort
+ * orders of the iteratees to sort by. If `orders` is unspecified, all values
+ * are sorted in ascending order. Otherwise, specify an order of "desc" for
+ * descending or "asc" for ascending sort order of corresponding values.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
+ * @param {Array<((value: T) => unknown) | PropertyKey>} [iteratees] - The iteratees to sort by.
+ * @param {Array<boolean|"asc"|"desc">} [orders] - The sort orders of `iteratees`.
+ * @returns {T[]} Returns the new sorted array.
+ *
+ * @example
+ * var users = [
+ *   { 'user': 'fred',   'age': 48 },
+ *   { 'user': 'barney', 'age': 34 },
+ *   { 'user': 'fred',   'age': 42 },
+ *   { 'user': 'barney', 'age': 36 }
+ * ];
+ *
+ * orderBy(users, ['user', 'age'], ['asc', 'desc']);
+ * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 42]]
+ */
+export function orderBy<T>(
+  collection: ArrayLike<T> | null | undefined,
+  iteratees?: Array<((value: T) => unknown) | PropertyKey>,
+  orders?: Array<boolean | 'asc' | 'desc'>
+): T[];
+
+/**
+ * This method is like `_.sortBy` except that it allows specifying the sort
+ * orders of the iteratees to sort by. If `orders` is unspecified, all values
+ * are sorted in ascending order. Otherwise, specify an order of "desc" for
+ * descending or "asc" for ascending sort order of corresponding values.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
+ * @param {Array<((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>>} [iteratees] - The iteratees to sort by.
+ * @param {Array<boolean|"asc"|"desc">} [orders] - The sort orders of `iteratees`.
+ * @returns {T[]} Returns the new sorted array.
+ *
+ * @example
+ * var users = [
+ *   { 'user': 'fred',   'age': 48 },
+ *   { 'user': 'barney', 'age': 34 },
+ *   { 'user': 'fred',   'age': 42 },
+ *   { 'user': 'barney', 'age': 36 }
+ * ];
+ *
+ * orderBy(users, ['user', 'age'], ['asc', 'desc']);
+ * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 42]]
+ */
+export function orderBy<T>(
+  collection: ArrayLike<T> | null | undefined,
+  iteratees?: Array<((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>>,
+  orders?: Array<boolean | 'asc' | 'desc'>
+): T[];
+
+/**
+ * This method is like `_.sortBy` except that it allows specifying the sort
+ * orders of the iteratees to sort by. If `orders` is unspecified, all values
+ * are sorted in ascending order. Otherwise, specify an order of "desc" for
+ * descending or "asc" for ascending sort order of corresponding values.
+ *
+ * @template T
+ * @param {T | null | undefined} collection - The collection to iterate over.
+ * @param {Array<((value: T[keyof T]) => unknown) | PropertyKey>} [iteratees] - The iteratees to sort by.
+ * @param {Array<boolean|"asc"|"desc">} [orders] - The sort orders of `iteratees`.
+ * @returns {Array<T[keyof T]>} Returns the new sorted array.
+ *
+ * @example
+ * var users = { a: { 'user': 'fred', 'age': 48 }, b: { 'user': 'barney', 'age': 34 } };
+ *
+ * orderBy(users, ['user', 'age'], ['asc', 'desc']);
+ * // => [{ 'user': 'barney', 'age': 34 }, { 'user': 'fred', 'age': 48 }]
+ */
+export function orderBy<T extends object>(
+  collection: T | null | undefined,
+  iteratees?: Array<((value: T[keyof T]) => unknown) | PropertyKey>,
+  orders?: Array<boolean | 'asc' | 'desc'>
+): Array<T[keyof T]>;
+
+/**
+ * This method is like `_.sortBy` except that it allows specifying the sort
+ * orders of the iteratees to sort by. If `orders` is unspecified, all values
+ * are sorted in ascending order. Otherwise, specify an order of "desc" for
+ * descending or "asc" for ascending sort order of corresponding values.
+ *
+ * @template T
+ * @param {T | null | undefined} collection - The collection to iterate over.
+ * @param {Array<((value: T[keyof T]) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>>} [iteratees] - The iteratees to sort by.
+ * @param {Array<boolean|"asc"|"desc">} [orders] - The sort orders of `iteratees`.
+ * @returns {Array<T[keyof T]>} Returns the new sorted array.
+ *
+ * @example
+ * var users = { a: { 'user': 'fred', 'age': 48 }, b: { 'user': 'barney', 'age': 34 } };
+ *
+ * orderBy(users, ['user', 'age'], ['asc', 'desc']);
+ * // => [{ 'user': 'barney', 'age': 34 }, { 'user': 'fred', 'age': 48 }]
+ */
+export function orderBy<T extends object>(
+  collection: T | null | undefined,
+  iteratees?: Array<((value: T[keyof T]) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>>,
+  orders?: Array<boolean | 'asc' | 'desc'>
+): Array<T[keyof T]>;
+
 /**
  * Sorts an array of objects based on multiple properties and their corresponding order directions.
  *
@@ -35,8 +142,8 @@ export type Criterion<T> = ((item: T) => unknown) | PropertyKey | PropertyKey[] 
  * // ]
  */
 export function orderBy<T = any>(
-  collection: ArrayLike<T> | object | null | undefined,
-  criteria?: Criterion<T> | Array<Criterion<T>>,
+  collection: any,
+  criteria?: any[],
   orders?: unknown | unknown[],
   guard?: unknown
 ): T[] {

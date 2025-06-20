@@ -76,6 +76,8 @@ describe('findLast', () => {
     let args: any;
     const object = { a: 1 };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     findLast(object, function () {
       // eslint-disable-next-line
       args || (args = Array.prototype.slice.call(arguments));

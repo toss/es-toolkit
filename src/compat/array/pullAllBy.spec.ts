@@ -34,6 +34,8 @@ describe('pullAllBy', () => {
   });
 
   it('should match the type of lodash', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expectTypeOf(pullAllBy).toEqualTypeOf<typeof pullAllByLodash>();
   });
 });

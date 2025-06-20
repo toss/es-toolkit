@@ -14,6 +14,8 @@ describe('findLastIndex', () => {
   ];
 
   it(`should return the found value`, () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(findLastIndex(objects, object => object.a)).toEqual(2);
   });
 
@@ -41,6 +43,8 @@ describe('findLastIndex', () => {
     let args: any;
     const array = ['a'];
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     findLastIndex(array, function () {
       // eslint-disable-next-line
       args || (args = slice.call(arguments));

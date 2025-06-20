@@ -107,11 +107,15 @@ describe('pullAt', () => {
     const array: any = [];
     array.a = { b: 2 };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     let actual = pullAt(array, 'a.b');
 
     expect(actual).toEqual([2]);
     expect(array.a).toEqual({});
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = pullAt(array, 'a.b.c');
 
     expect(actual).toEqual([undefined]);
@@ -122,6 +126,8 @@ describe('pullAt', () => {
     const expected = map(values, constant(Array(4)));
 
     const actual = map(values, array => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       return pullAt(array, 0, 1, 'pop', 'push');
     });
 
@@ -143,6 +149,8 @@ describe('pullAt', () => {
   });
 
   it('should match the type of lodash', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expectTypeOf(pullAt).toEqualTypeOf<typeof pullAtLodash>();
   });
 });

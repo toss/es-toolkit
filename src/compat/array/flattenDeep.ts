@@ -13,16 +13,29 @@ import { flatten } from './flatten.ts';
 type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNestedArrayType<U> : T;
 
 /**
- * Flattens all depths of a nested array.
+ * Recursively flattens array.
  *
- * @template T - The type of elements within the array.
- * @param {ArrayLike<T>} value - The value to flatten.
- * @returns {Array<ExtractNestedArrayType<T>> | []} A new array that has been flattened.
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} array - The array to flatten.
+ * @returns {Array<ExtractNestedArrayType<T>>} Returns the new flattened array.
  *
  * @example
- * const value = flattenDeep([1, [2, [3]], [4, [5, 6]]]);
- * // Returns: [1, 2, 3, 4, 5, 6]
+ * flattenDeep([1, [2, [3, [4]], 5]]);
+ * // => [1, 2, 3, 4, 5]
  */
-export function flattenDeep<T>(value: ArrayLike<T> | null | undefined): Array<ExtractNestedArrayType<T>> | [] {
+export function flattenDeep<T>(array: ArrayLike<T> | null | undefined): Array<ExtractNestedArrayType<T>>;
+
+/**
+ * Recursively flattens array.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} array - The array to flatten.
+ * @returns {Array<ExtractNestedArrayType<T>>} Returns the new flattened array.
+ *
+ * @example
+ * flattenDeep([1, [2, [3, [4]], 5]]);
+ * // => [1, 2, 3, 4, 5]
+ */
+export function flattenDeep<T>(value: ArrayLike<T> | null | undefined): Array<ExtractNestedArrayType<T>> {
   return flatten(value, Infinity) as Array<ExtractNestedArrayType<T>>;
 }
