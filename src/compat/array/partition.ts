@@ -1,3 +1,4 @@
+import { identity } from '../../function/identity.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 
@@ -101,7 +102,7 @@ export function partition<T extends object>(
  */
 export function partition<T>(
   source: ArrayLike<T> | T | null | undefined,
-  predicate?: ((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey
+  predicate: ((value: T) => unknown) | Partial<T> | [PropertyKey, any] | PropertyKey = identity
 ): [T[], T[]] {
   if (!source) {
     return [[], []];
