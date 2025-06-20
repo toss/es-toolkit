@@ -7,6 +7,104 @@ import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
+type MergeWithCustomizer = (objValue: any, srcValue: any, key: string, object: any, source: any, stack: any) => any;
+
+/**
+ * This method is like `merge` except that it accepts `customizer` which is invoked to produce the merged values of the destination and source properties.
+ *
+ * @template T
+ * @template U
+ * @param {T} object - The destination object.
+ * @param {U} source - The source object.
+ * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
+ * @returns {T & U} - Returns `object`.
+ *
+ * @example
+ * function customizer(objValue, srcValue) {
+ *   if (Array.isArray(objValue)) {
+ *     return objValue.concat(srcValue);
+ *   }
+ * }
+ * const object = { a: [1], b: [2] };
+ * const other = { a: [3], b: [4] };
+ * mergeWith(object, other, customizer);
+ * // => { a: [1, 3], b: [2, 4] }
+ */
+export function mergeWith<T, U>(object: T, source: U, customizer: MergeWithCustomizer): T & U;
+
+/**
+ * This method is like `merge` except that it accepts `customizer` which is invoked to produce the merged values of the destination and source properties.
+ *
+ * @template T
+ * @template U
+ * @template V
+ * @param {T} object - The destination object.
+ * @param {U} source1 - The first source object.
+ * @param {V} source2 - The second source object.
+ * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
+ * @returns {T & U & V} - Returns `object`.
+ *
+ * @example
+ * mergeWith({ a: 1 }, { b: 2 }, { c: 3 }, customizer);
+ * // => { a: 1, b: 2, c: 3 }
+ */
+export function mergeWith<T, U, V>(object: T, source1: U, source2: V, customizer: MergeWithCustomizer): T & U & V;
+
+/**
+ * This method is like `merge` except that it accepts `customizer` which is invoked to produce the merged values of the destination and source properties.
+ *
+ * @template T
+ * @template U
+ * @template V
+ * @template W
+ * @param {T} object - The destination object.
+ * @param {U} source1 - The first source object.
+ * @param {V} source2 - The second source object.
+ * @param {W} source3 - The third source object.
+ * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
+ * @returns {T & U & V & W} - Returns `object`.
+ *
+ * @example
+ * mergeWith({ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }, customizer);
+ * // => { a: 1, b: 2, c: 3, d: 4 }
+ */
+export function mergeWith<T, U, V, W>(object: T, source1: U, source2: V, source3: W, customizer: MergeWithCustomizer): T & U & V & W;
+
+/**
+ * This method is like `merge` except that it accepts `customizer` which is invoked to produce the merged values of the destination and source properties.
+ *
+ * @template T
+ * @template U
+ * @template V
+ * @template W
+ * @template X
+ * @param {T} object - The destination object.
+ * @param {U} source1 - The first source object.
+ * @param {V} source2 - The second source object.
+ * @param {W} source3 - The third source object.
+ * @param {X} source4 - The fourth source object.
+ * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
+ * @returns {T & U & V & W & X} - Returns `object`.
+ *
+ * @example
+ * mergeWith({ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }, { e: 5 }, customizer);
+ * // => { a: 1, b: 2, c: 3, d: 4, e: 5 }
+ */
+export function mergeWith<T, U, V, W, X>(object: T, source1: U, source2: V, source3: W, source4: X, customizer: MergeWithCustomizer): T & U & V & W & X;
+
+/**
+ * This method is like `merge` except that it accepts `customizer` which is invoked to produce the merged values of the destination and source properties.
+ *
+ * @param {any} object - The destination object.
+ * @param {...any[]} otherArgs - The source objects and customizer.
+ * @returns {any} - Returns `object`.
+ *
+ * @example
+ * mergeWith({ a: 1 }, { b: 2 }, customizer);
+ * // => { a: 1, b: 2 }
+ */
+export function mergeWith(object: any, ...otherArgs: any[]): any;
+
 declare let Buffer:
   | {
       isBuffer: (a: any) => boolean;

@@ -2,6 +2,20 @@ import { unset } from './unset.ts';
 import { cloneDeep } from '../../object/cloneDeep.ts';
 
 /**
+ * Creates an object composed of the own and inherited enumerable property paths of `object` that are not omitted.
+ *
+ * @template T
+ * @param {T | null | undefined} object - The source object.
+ * @param {...Array<PropertyKey | readonly PropertyKey[]>} paths - The property paths to omit.
+ * @returns {Partial<T>} - Returns the new object.
+ *
+ * @example
+ * omit({ a: 1, b: '2', c: 3 }, ['a', 'c']);
+ * // => { b: '2' }
+ */
+export function omit<T>(object: T | null | undefined, ...paths: Array<PropertyKey | readonly PropertyKey[]>): Partial<T>;
+
+/**
  * Creates a new object with specified keys omitted.
  *
  * This function takes an object and an array of keys, and returns a new object that

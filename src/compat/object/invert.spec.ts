@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { invert as invertLodash } from 'lodash';
-import { invert } from '../../object/invert';
+import { invert } from './invert';
 
 describe('invert', () => {
   it('should invert an object', () => {

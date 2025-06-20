@@ -36,9 +36,7 @@ describe('invertBy', () => {
   });
 
   it('should return an empty object for nullish values', () => {
-    // @ts-expect-error - nullish value
     expect(invertBy(null)).toEqual({});
-    // @ts-expect-error - nullish value
     expect(invertBy(undefined)).toEqual({});
   });
 

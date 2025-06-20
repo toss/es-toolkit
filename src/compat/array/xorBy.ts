@@ -4,9 +4,9 @@ import { last } from './last.ts';
 import { unionBy } from './unionBy.ts';
 import { windowed } from '../../array/windowed.ts';
 import { identity } from '../../function/identity.ts';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 
 /**
  * This method is like `xor` except that it accepts `iteratee` which is
@@ -43,7 +43,11 @@ export function xorBy<T>(arrays: ArrayLike<T> | null | undefined, iteratee?: Val
  * xorBy([2.1, 1.2], [4.3, 2.4], Math.floor);
  * // => [1.2, 4.3]
  */
-export function xorBy<T>(arrays: ArrayLike<T> | null | undefined, arrays2: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): T[];
+export function xorBy<T>(
+  arrays: ArrayLike<T> | null | undefined,
+  arrays2: ArrayLike<T> | null | undefined,
+  iteratee?: ValueIteratee<T>
+): T[];
 
 /**
  * This method is like `xor` except that it accepts `iteratee` which is
@@ -61,8 +65,12 @@ export function xorBy<T>(arrays: ArrayLike<T> | null | undefined, arrays2: Array
  * xorBy([1.2, 2.3], [3.4, 4.5], [5.6, 6.7], Math.floor);
  * // => [1.2, 3.4, 5.6]
  */
-export function xorBy<T>(arrays: ArrayLike<T> | null | undefined, arrays2: ArrayLike<T> | null | undefined, arrays3: ArrayLike<T> | null | undefined, ...iteratee: Array<ValueIteratee<T> | ArrayLike<T> | null | undefined>): T[];
-
+export function xorBy<T>(
+  arrays: ArrayLike<T> | null | undefined,
+  arrays2: ArrayLike<T> | null | undefined,
+  arrays3: ArrayLike<T> | null | undefined,
+  ...iteratee: Array<ValueIteratee<T> | ArrayLike<T> | null | undefined>
+): T[];
 
 /**
  * Computes the symmetric difference between two arrays using a custom mapping function.
@@ -81,9 +89,7 @@ export function xorBy<T>(arrays: ArrayLike<T> | null | undefined, arrays2: Array
  * xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idMapper);
  * // Returns [{ id: 1 }, { id: 3 }]
  */
-export function xorBy<T>(
-  ...values: Array<ArrayLike<T> | null | undefined | PropertyKey | Partial<T> | ((value: T) => unknown)>
-): T[] {
+export function xorBy<T>(...values: Array<ArrayLike<T> | null | undefined | ValueIteratee<T>>): T[] {
   const lastValue = last(values);
 
   let mapper = identity;
@@ -93,10 +99,10 @@ export function xorBy<T>(
     values = values.slice(0, -1);
   }
 
-  const arrays = values.filter(isArrayLikeObject) as T[][];
+  const arrays = values.filter(isArrayLikeObject) as [any];
 
   const union = unionBy(...arrays, mapper);
-  const intersections = windowed(arrays, 2).map(([arr1, arr2]) => intersectionBy(arr1, arr2, mapper));
+  const intersections = windowed(arrays, 2).map(([arr1, arr2]) => intersectionBy(arr1, arr2, mapper)) as [any];
 
-  return differenceBy(union, unionBy(...intersections, mapper), mapper);
+  return differenceBy(union, unionBy(...intersections, mapper), mapper) as T[];
 }

@@ -28,6 +28,8 @@ describe('mapValues', () => {
     const expected = values.map(() => [true, false]);
 
     const actual = values.map((value, index) => {
+      // eslint-disable-next-line
+      // @ts-ignore
       const result = index ? mapValues(object, value) : mapValues(object);
       return [isEqual(result, object), result === object];
     });

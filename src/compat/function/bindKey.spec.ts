@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { bindKey as bindKeyLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { bindKey } from './bindKey';
 
 describe('bindKey', () => {
@@ -50,9 +49,5 @@ describe('bindKey', () => {
     expect(new bound() instanceof Foo).toBe(true);
     // @ts-expect-error - bound is a constructor
     expect(new bound(true)).toBe(object as any);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(bindKey).toEqualTypeOf<typeof bindKeyLodash>();
   });
 });

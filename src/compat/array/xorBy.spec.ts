@@ -43,11 +43,15 @@ describe('xorBy', () => {
 
   it(`should ignore individual secondary arguments`, () => {
     const array = [0];
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(xorBy(array, 3, null, { 0: 1 } as any)).toEqual(array);
   });
 
   it(`should ignore values that are not arrays or \`arguments\` objects`, () => {
     const array = [1, 2];
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(xorBy(array, 3, { 0: 1 } as any, null)).toEqual(array);
     expect(xorBy(null, array, null, [2, 3])).toEqual([1, 3]);
     expect(xorBy(array, null, args, null)).toEqual([3]);

@@ -18,6 +18,18 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * const result = zip(arr1);
  * // result will be [[1], [2], [3]]
  */
+/**
+ * Creates an array of grouped elements, the first of which contains the first elements of the given arrays,
+ * the second of which contains the second elements of the given arrays, and so on.
+ *
+ * @template T
+ * @param {ArrayLike<T>} arr1 - The first array to zip.
+ * @returns {Array<[T | undefined]>} Returns the new array of grouped elements.
+ *
+ * @example
+ * zip([1, 2, 3]);
+ * // => [[1], [2], [3]]
+ */
 export function zip<T>(arr1: ArrayLike<T>): Array<[T | undefined]>;
 
 /**
@@ -38,6 +50,19 @@ export function zip<T>(arr1: ArrayLike<T>): Array<[T | undefined]>;
  * const arr2 = ['a', 'b', 'c'];
  * const result = zip(arr1, arr2);
  * // result will be [[1, 'a'], [2, 'b'], [3, 'c']]
+ */
+/**
+ * Creates an array of grouped elements, the first of which contains the first elements of the given arrays,
+ * the second of which contains the second elements of the given arrays, and so on.
+ *
+ * @template T, U
+ * @param {ArrayLike<T>} arr1 - The first array to zip.
+ * @param {ArrayLike<U>} arr2 - The second array to zip.
+ * @returns {Array<[T | undefined, U | undefined]>} Returns the new array of grouped elements.
+ *
+ * @example
+ * zip([1, 2], ['a', 'b']);
+ * // => [[1, 'a'], [2, 'b']]
  */
 export function zip<T, U>(arr1: ArrayLike<T>, arr2: ArrayLike<U>): Array<[T | undefined, U | undefined]>;
 
@@ -61,6 +86,20 @@ export function zip<T, U>(arr1: ArrayLike<T>, arr2: ArrayLike<U>): Array<[T | un
  * const arr3 = [true, false];
  * const result = zip(arr1, arr2, arr3);
  * // result will be [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
+ */
+/**
+ * Creates an array of grouped elements, the first of which contains the first elements of the given arrays,
+ * the second of which contains the second elements of the given arrays, and so on.
+ *
+ * @template T, U, V
+ * @param {ArrayLike<T>} arr1 - The first array to zip.
+ * @param {ArrayLike<U>} arr2 - The second array to zip.
+ * @param {ArrayLike<V>} arr3 - The third array to zip.
+ * @returns {Array<[T | undefined, U | undefined, V | undefined]>} Returns the new array of grouped elements.
+ *
+ * @example
+ * zip([1, 2], ['a', 'b'], [true, false]);
+ * // => [[1, 'a', true], [2, 'b', false]]
  */
 export function zip<T, U, V>(
   arr1: ArrayLike<T>,
@@ -89,6 +128,21 @@ export function zip<T, U, V>(
  * const arr4 = [null, null, null];
  * const result = zip(arr1, arr2, arr3, arr4);
  * // result will be [[1, 'a', true, null], [2, 'b', false, null], [3, 'c', undefined, null]]
+ */
+/**
+ * Creates an array of grouped elements, the first of which contains the first elements of the given arrays,
+ * the second of which contains the second elements of the given arrays, and so on.
+ *
+ * @template T, U, V, W
+ * @param {ArrayLike<T>} arr1 - The first array to zip.
+ * @param {ArrayLike<U>} arr2 - The second array to zip.
+ * @param {ArrayLike<V>} arr3 - The third array to zip.
+ * @param {ArrayLike<W>} arr4 - The fourth array to zip.
+ * @returns {Array<[T | undefined, U | undefined, V | undefined, W | undefined]>} Returns the new array of grouped elements.
+ *
+ * @example
+ * zip([1], ['a'], [true], [null]);
+ * // => [[1, 'a', true, null]]
  */
 export function zip<T, U, V, W>(
   arr1: ArrayLike<T>,
@@ -122,6 +176,22 @@ export function zip<T, U, V, W>(
  * const result = zip(arr1, arr2, arr3, arr4, arr5);
  * // result will be [[1, 'a', true, null, undefined], [2, 'b', false, null, undefined], [3, 'c', undefined, null, undefined]]
  */
+/**
+ * Creates an array of grouped elements, the first of which contains the first elements of the given arrays,
+ * the second of which contains the second elements of the given arrays, and so on.
+ *
+ * @template T, U, V, W, X
+ * @param {ArrayLike<T>} arr1 - The first array to zip.
+ * @param {ArrayLike<U>} arr2 - The second array to zip.
+ * @param {ArrayLike<V>} arr3 - The third array to zip.
+ * @param {ArrayLike<W>} arr4 - The fourth array to zip.
+ * @param {ArrayLike<X>} arr5 - The fifth array to zip.
+ * @returns {Array<[T | undefined, U | undefined, V | undefined, W | undefined, X | undefined]>} Returns the new array of grouped elements.
+ *
+ * @example
+ * zip([1], ['a'], [true], [null], [undefined]);
+ * // => [[1, 'a', true, null, undefined]]
+ */
 export function zip<T, U, V, W, X>(
   arr1: ArrayLike<T>,
   arr2: ArrayLike<U>,
@@ -151,7 +221,20 @@ export function zip<T, U, V, W, X>(
  * const result = zip(arr1, arr2, arr3, arr4, arr5);
  * // result will be [[1, 'a', true, null, undefined], [2, 'b', false, null, undefined], [3, 'c', undefined, null, undefined]]
  */
-export function zip<T>(...arrays: Array<ArrayLike<any> | null | undefined>): Array<Array<T | undefined>>;
+/**
+ * Creates an array of grouped elements, the first of which contains the first elements of the given arrays,
+ * the second of which contains the second elements of the given arrays, and so on.
+ *
+ * @template T
+ * @param {...Array<ArrayLike<T> | null | undefined>} arrays - The arrays to process.
+ * @returns {Array<Array<T | undefined>>} Returns the new array of grouped elements.
+ *
+ * @example
+ * zip([1, 2], ['a', 'b'], [true, false]);
+ * // => [[1, 'a', true], [2, 'b', false]]
+ */
+export function zip<T>(...arrays: Array<ArrayLike<T> | null | undefined>): Array<Array<T | undefined>>;
+
 /**
  * Combines multiple arrays into a single array of tuples.
  *

@@ -83,10 +83,11 @@ describe('zip', () => {
   });
 
   it(`\`_.zip\` should support consuming its return value`, () => {
-    const expected = [
+    const expected: any[][] = [
       ['barney', 'fred'],
       [36, 40],
     ];
+
     expect(unzip(zip(...unzip(zip(...expected))))).toEqual(expected);
   });
 
