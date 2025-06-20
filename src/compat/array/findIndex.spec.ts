@@ -12,6 +12,8 @@ describe('findIndex', () => {
   ];
 
   it(`should return the found value`, () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(findIndex(objects, object => object.a)).toEqual(1);
   });
 
@@ -39,6 +41,8 @@ describe('findIndex', () => {
     let args: any;
     const array = ['a'];
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     findIndex(array, function () {
       // eslint-disable-next-line
       args || (args = slice.call(arguments));

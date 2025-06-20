@@ -42,8 +42,8 @@ describe('find', () => {
 
     const actual = emptyValues.map(value => {
       try {
-        // eslint-disable-next-line
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return find(value, { a: 3 });
         // eslint-disable-next-line
       } catch (e) {}
@@ -74,6 +74,8 @@ describe('find', () => {
     let args: any;
     const object = { a: 1 };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     find(object, function () {
       // eslint-disable-next-line
       args || (args = slice.call(arguments));
@@ -97,9 +99,11 @@ describe('find', () => {
   });
 
   it('should return `undefined` when provided none array-like object', () => {
-    // @ts-expect-error - invalid argument
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(find(1, 'a')).toBe(undefined);
-    // @ts-expect-error - invalid argument
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(find(true, 'a')).toBe(undefined);
   });
 
