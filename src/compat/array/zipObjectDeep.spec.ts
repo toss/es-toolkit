@@ -55,7 +55,6 @@ describe('zipObjectDeep', () => {
   });
 
   it('should treat values as empty arrays when keys are not array-like', () => {
-    // @ts-expect-error - invalid argument
     expect(zipObjectDeep([1, 2, 3], undefined)).toEqual({ 1: undefined, 2: undefined, 3: undefined });
   });
 

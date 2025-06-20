@@ -9,37 +9,6 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * different lengths, the resulting array will have the length of the longest input array,
  * with undefined values for missing elements.
  *
- * @template T
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @returns {Array<[T | undefined]>} A new array of tuples containing the corresponding elements from the input arrays.
- *
- * @example
- * const arr1 = [1, 2, 3];
- * const result = zip(arr1);
- * // result will be [[1], [2], [3]]
- */
-/**
- * Creates an array of grouped elements, the first of which contains the first elements of the given arrays,
- * the second of which contains the second elements of the given arrays, and so on.
- *
- * @template T
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @returns {Array<[T | undefined]>} Returns the new array of grouped elements.
- *
- * @example
- * zip([1, 2, 3]);
- * // => [[1], [2], [3]]
- */
-export function zip<T>(arr1: ArrayLike<T>): Array<[T | undefined]>;
-
-/**
- * Combines multiple arrays into a single array of tuples.
- *
- * This function takes multiple arrays and returns a new array where each element is a tuple
- * containing the corresponding elements from the input arrays. If the input arrays are of
- * different lengths, the resulting array will have the length of the longest input array,
- * with undefined values for missing elements.
- *
  * @template T, U
  * @param {ArrayLike<T>} arr1 - The first array to zip.
  * @param {ArrayLike<U>} arr2 - The second array to zip.
