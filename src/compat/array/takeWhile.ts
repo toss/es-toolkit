@@ -2,96 +2,40 @@ import { toArray } from '../_internal/toArray.ts';
 import { negate } from '../function/negate.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
+import { ListIteratee } from '../_internal/ListIteratee.ts';
 
 /**
- * Creates a slice of array.
- *
- * If the array is `null` or `undefined`, returns an empty array.
- *
- * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to process.
- * @returns {T[]} - A slice of the array or an empty array if `array` is `null` or `undefined`.
- *
- * @example
- * const items = [1, 2, 3];
- * const result = takeWhile(items);
- * console.log(result); // [1, 2, 3]
- *
- * const result2 = takeWhile(null);
- * console.log(result2); // []
- */
-export function takeWhile<T>(array: ArrayLike<T> | null | undefined): T[];
-
-/**
- * Creates a slice of array with elements taken from the beginning until the predicate function returns falsey.
- *
- * If the array is `null` or `undefined`, returns an empty array.
+ * Creates a slice of array with elements taken from the beginning. Elements are taken until predicate
+ * returns falsey. The predicate is invoked with three arguments: (value, index, array).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to process.
- * @param {(item: T, index: number, array: T[]) => unknown} predicate - A function invoked per iteration. Returns a truthy value to continue taking elements.
- * @returns {T[]} - A slice of the array with elements taken from the beginning or an empty array if `array` is `null` or `undefined`.
+ * @param {ArrayLike<T> | null | undefined} array - The array to query.
+ * @param {ListIteratee<T>} [predicate] - The function invoked per iteration.
+ * @returns {T[]} Returns the slice of array.
  *
  * @example
- * const items = [1, 2, 3, 4, 5];
- * const result = takeWhile(items, (item) => item < 3);
- * console.log(result); // [1, 2]
- */
-export function takeWhile<T>(
-  array: ArrayLike<T> | null | undefined,
-  predicate: (item: T, index: number, array: T[]) => unknown
-): T[];
-
-/**
- * Creates a slice of array with elements taken from the beginning until the element does not match the given object.
+ * const users = [
+ *   { 'user': 'barney',  'active': false },
+ *   { 'user': 'fred',    'active': false },
+ *   { 'user': 'pebbles', 'active': true }
+ * ];
  *
- * If the array is `null` or `undefined`, returns an empty array.
- *
- * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to process.
- * @param {Partial<T>} matches - A partial object that specifies the properties to match.
- * @returns {T[]} - A slice of the array with elements taken from the beginning or an empty array if `array` is `null` or `undefined`.
+ * takeWhile(users, function(o) { return !o.active; });
+ * // => objects for ['barney', 'fred']
  *
  * @example
- * const items = [{ id: 30 }, { id: 20 }, { id: 10 }];
- * const result = takeWhile(items, { id: 30 });
- * console.log(result); // [{ id: 30 }]
- */
-export function takeWhile<T>(array: ArrayLike<T> | null | undefined, matches: Partial<T>): T[];
-
-/**
- * Creates a slice of array with elements taken from the beginning until the element does not match the given property key and value.
- *
- * If the array is `null` or `undefined`, returns an empty array.
- *
- * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to process.
- * @param {[keyof T, unknown]} matchesProperty - An array where the first element is the property key and the second element is the value to match.
- * @returns {T[]} - A slice of the array with elements taken from the beginning or an empty array if `array` is `null` or `undefined`.
+ * takeWhile(users, { 'user': 'barney', 'active': false });
+ * // => objects for ['barney']
  *
  * @example
- * const items = [{ name: 'Alice' }, { name: 'Bob' }, { name: 'Alice' }];
- * const result = takeWhile(items, ['name', 'Alice']);
- * console.log(result); // [{ name: 'Alice' }]
- */
-export function takeWhile<T>(array: ArrayLike<T> | null | undefined, matchesProperty: [keyof T, unknown]): T[];
-
-/**
- * Creates a slice of array with elements taken from the beginning until the element does not have a truthy value for the given property key.
- *
- * If the array is `null` or `undefined`, returns an empty array.
- *
- * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to process.
- * @param {PropertyKey} property - A property key. Elements are included if they have a truthy value for this key.
- * @returns {T[]} - A slice of the array with elements taken from the beginning or an empty array if `array` is `null` or `undefined`.
+ * takeWhile(users, ['active', false]);
+ * // => objects for ['barney', 'fred']
  *
  * @example
- * const items = [{ valid: true }, { valid: true }, { valid: false }];
- * const result = takeWhile(items, 'valid');
- * console.log(result); // [{ valid: true }, { valid: true }]
+ * takeWhile(users, 'active');
+ * // => []
  */
-export function takeWhile<T>(array: ArrayLike<T> | null | undefined, property: PropertyKey): T[];
+export function takeWhile<T>(array: ArrayLike<T> | null | undefined, predicate?: ListIteratee<T>): T[];
 
 /**
  * Creates a slice of the array with elements taken from the beginning while the specified predicate is satisfied.
