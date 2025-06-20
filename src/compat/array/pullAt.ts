@@ -1,6 +1,7 @@
-import { flatten } from './flatten.ts';
+import { flattenDepth } from './flattenDepth.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
+import { Many } from '../_internal/Many.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { at } from '../object/at.ts';
 import { unset } from '../object/unset.ts';
@@ -28,7 +29,7 @@ import { toPath } from '../util/toPath.ts';
  * console.log(evens);
  * // => [10, 20]
  */
-export function pullAt<T>(array: T[], ...indexes: Array<number | number[]>): T[];
+export function pullAt<T>(array: T[], ...indexes: Array<Many<number>>): T[];
 
 /**
  * Removes elements from array corresponding to the given indexes and returns an array of the removed elements.
@@ -51,7 +52,10 @@ export function pullAt<T>(array: T[], ...indexes: Array<number | number[]>): T[]
  * console.log(evens);
  * // => [10, 20]
  */
-export function pullAt<L extends ArrayLike<any>>(array: L extends readonly any[] ? never : L, ...indexes: Array<number | number[]>): L;
+export function pullAt<L extends ArrayLike<any>>(
+  array: L extends readonly any[] ? never : L,
+  ...indexes: Array<Many<number>>
+): L;
 
 /**
  * Removes elements from an array at specified indices and returns the removed elements.
@@ -71,7 +75,7 @@ export function pullAt<T>(
   array: ArrayLike<T>,
   ..._indices: Array<number | readonly number[] | string | readonly string[]>
 ): ArrayLike<T> {
-  const indices = flatten(_indices, 1);
+  const indices: Array<number | string> = flattenDepth(_indices as any, 1);
 
   if (!array) {
     return Array(indices.length);

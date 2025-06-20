@@ -29,7 +29,11 @@ describe('unionWith', () => {
     // eslint-disable-next-line
     // @ts-ignore
     expect(unionWith(array, 3, { '0': 1 }, null)).toEqual(array);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(unionWith(null, array, null, [2, 1])).toEqual([0, 2, 1]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(unionWith(array, null, args, null)).toEqual([0, 1, 2, 3]);
   });
 

@@ -24,7 +24,11 @@ describe('unzipWith', () => {
 
     unzipWith(
       [
+        // eslint-disable-next-line
+        // @ts-ignore
         [1, 3, 5],
+        // eslint-disable-next-line
+        // @ts-ignore
         [2, 4, 6],
       ],
       function () {
@@ -45,6 +49,8 @@ describe('unzipWith', () => {
     const values = [, null, undefined];
     const expected = map(values, constant(unzip(array)));
 
+    // eslint-disable-next-line
+    // @ts-ignore
     const actual = map(values, (value, index) => (index ? unzipWith(array, value) : unzipWith(array)));
 
     expect(actual).toEqual(expected);

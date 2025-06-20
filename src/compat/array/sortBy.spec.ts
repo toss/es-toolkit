@@ -57,8 +57,6 @@ describe('sortBy', () => {
   it(`should support iteratees`, () => {
     const actual = sortBy(objects, [
       'a',
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       function (object) {
         return object.b;
       },
@@ -128,6 +126,8 @@ describe('sortBy', () => {
     const values = [, null, undefined];
     const expected = values.map(() => [1, 2, 3]);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? sortBy(array, value) : sortBy(array)));
     expect(actual).toEqual(expected);
   });

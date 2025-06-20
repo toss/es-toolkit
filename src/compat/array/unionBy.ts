@@ -2,10 +2,11 @@ import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
 import { uniqBy } from '../../array/uniqBy.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
 
-import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+type Iteratee<T> = PropertyKey | Partial<T> | ((value: T) => unknown);
 
 /**
  * This method is like `union` except that it accepts `iteratee` which is
@@ -122,8 +123,6 @@ export function unionBy<T>(
   arrays5: ArrayLike<T> | null | undefined,
   ...iteratee: Array<ValueIteratee<T> | ArrayLike<T> | null | undefined>
 ): T[];
-
-type Iteratee<T> = PropertyKey | Partial<T> | ((value: T) => unknown);
 
 /**
  * This function takes multiple arrays and returns a new array containing only the unique values

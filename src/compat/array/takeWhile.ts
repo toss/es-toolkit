@@ -1,8 +1,8 @@
+import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { negate } from '../function/negate.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
-import { ListIteratee } from '../_internal/ListIteratee.ts';
 
 /**
  * Creates a slice of array with elements taken from the beginning. Elements are taken until predicate
@@ -84,11 +84,11 @@ export function takeWhile<T>(array: ArrayLike<T> | null | undefined, predicate?:
  **/
 export function takeWhile<T>(
   array: ArrayLike<T> | null | undefined,
-  predicate?:
+  predicate:
     | ((value: T, index: number, array: ArrayLike<T>) => unknown)
     | Partial<T>
     | [keyof T, unknown]
-    | PropertyKey
+    | PropertyKey = iteratee
 ): T[] {
   if (!isArrayLikeObject(array)) {
     return [];

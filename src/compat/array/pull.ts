@@ -36,7 +36,7 @@ export function pull<T>(array: T[], ...values: T[]): T[];
  * console.log(array);
  * // => [1, 1]
  */
-export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ? never : L, ...values: L[0][]): L;
+export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ? never : L, ...values: Array<L[0]>): L;
 
 /**
  * Removes all specified values from an array.

@@ -1,3 +1,4 @@
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
@@ -19,11 +20,7 @@ import { iteratee } from '../util/iteratee.ts';
  * console.log(array);
  * // => [{ 'x': 2 }]
  */
-export function pullAllBy<T>(
-  array: T[],
-  values?: ArrayLike<T>,
-  iteratee?: ((value: T) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T>
-): T[];
+export function pullAllBy<T>(array: T[], values?: ArrayLike<T>, iteratee?: ValueIteratee<T>): T[];
 
 /**
  * Removes all specified values from an array using an iteratee function.
@@ -47,7 +44,7 @@ export function pullAllBy<T>(
 export function pullAllBy<L extends ArrayLike<any>>(
   array: L extends readonly any[] ? never : L,
   values?: ArrayLike<L[0]>,
-  iteratee?: ((value: L[0]) => unknown) | PropertyKey | [PropertyKey, any] | Partial<L[0]>
+  iteratee?: ValueIteratee<L[0]>
 ): L;
 
 /**
@@ -69,11 +66,7 @@ export function pullAllBy<L extends ArrayLike<any>>(
  * console.log(array);
  * // => [{ 'x': 2 }]
  */
-export function pullAllBy<T, U>(
-  array: T[],
-  values: ArrayLike<U>,
-  iteratee: ((value: T | U) => unknown) | PropertyKey | [PropertyKey, any] | Partial<T | U>
-): T[];
+export function pullAllBy<T, U>(array: T[], values: ArrayLike<U>, iteratee: ValueIteratee<T | U>): T[];
 
 /**
  * Removes all specified values from an array using an iteratee function.
@@ -97,7 +90,7 @@ export function pullAllBy<T, U>(
 export function pullAllBy<L extends ArrayLike<any>, U>(
   array: L extends readonly any[] ? never : L,
   values: ArrayLike<U>,
-  iteratee: ((value: L[0] | U) => unknown) | PropertyKey | [PropertyKey, any] | Partial<L[0] | U>
+  iteratee: ValueIteratee<L[0] | U>
 ): L;
 
 /**

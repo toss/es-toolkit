@@ -95,6 +95,8 @@ describe('uniqBy', () => {
   });
 
   it('should work with no iteratee', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(uniqBy([1, 2, 3, 4, 1, 2, 3])).toEqual([1, 2, 3, 4]);
   });
 

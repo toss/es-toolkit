@@ -1,7 +1,8 @@
-import { Criterion, orderBy } from './orderBy.ts';
+import { orderBy } from './orderBy.ts';
 import { flatten } from '../../array/flatten.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
+import { Many } from '../_internal/Many.ts';
 import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
 
 /**
@@ -52,10 +53,7 @@ import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
  * sortBy(users, [function(o) { return o.user; }]);
  * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 42]]
  */
-export function sortBy<T>(
-  collection: ArrayLike<T> | null | undefined,
-  ...iteratees: Array<T | readonly T[] | ListIteratee<T>>
-): T[];
+export function sortBy<T>(collection: ArrayLike<T> | null | undefined, ...iteratees: Array<Many<ListIteratee<T>>>): T[];
 
 /**
  * Creates an array of elements, sorted in ascending order by the results of running each element in a collection thru each iteratee.
@@ -76,13 +74,10 @@ export function sortBy<T>(
  */
 export function sortBy<T extends object>(
   collection: T | null | undefined,
-  ...iteratees: Array<T[keyof T] | ReadonlyArray<T[keyof T]> | ObjectIteratee<T>>
+  ...iteratees: Array<Many<ObjectIteratee<T>>>
 ): Array<T[keyof T]>;
 
-export function sortBy<T = any>(
-  collection: ArrayLike<T> | object | null | undefined,
-  ...criteria: Array<Criterion<T> | Array<Criterion<T>>>
-): T[] {
+export function sortBy<T = any>(collection: ArrayLike<T> | object | null | undefined, ...criteria: any[]): T[] {
   const length = criteria.length;
   // Enables use as an iteratee for methods like `_.reduce` and `_.map`.
   if (length > 1 && isIterateeCall(collection, criteria[0], criteria[1])) {
@@ -90,12 +85,5 @@ export function sortBy<T = any>(
   } else if (length > 2 && isIterateeCall(criteria[0], criteria[1], criteria[2])) {
     criteria = [criteria[0]];
   }
-  return orderBy(
-    collection,
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    flatten(criteria),
-    ['asc']
-  );
+  return orderBy(collection, flatten(criteria), ['asc']);
 }

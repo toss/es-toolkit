@@ -1,18 +1,16 @@
 import { reduce } from './reduce.ts';
 import { identity } from '../../function/identity.ts';
+import { ValueIterateeCustom } from '../_internal/ValueIterateeCustom.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
-
-type PropertyName = string | number | symbol;
-type ValueIterateeCustom<T, R> = ((value: T) => R) | PropertyName | [PropertyName, any] | Partial<T>;
 
 /**
  * Creates an object composed of keys generated from the results of running each element of collection thru iteratee.
  *
  * @template T
  * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {ValueIterateeCustom<T, PropertyName>} [iteratee] - The iteratee to transform keys.
+ * @param {ValueIterateeCustom<T, PropertyKey>} [iteratee] - The iteratee to transform keys.
  * @returns {Record<string, T>} Returns the composed aggregate object.
  *
  * @example
@@ -29,7 +27,7 @@ type ValueIterateeCustom<T, R> = ((value: T) => R) | PropertyName | [PropertyNam
  */
 export function keyBy<T>(
   collection: ArrayLike<T> | null | undefined,
-  iteratee?: ValueIterateeCustom<T, PropertyName>
+  iteratee?: ValueIterateeCustom<T, PropertyKey>
 ): Record<string, T>;
 
 /**
@@ -37,7 +35,7 @@ export function keyBy<T>(
  *
  * @template T
  * @param {T | null | undefined} collection - The object to iterate over.
- * @param {ValueIterateeCustom<T[keyof T], PropertyName>} [iteratee] - The iteratee to transform keys.
+ * @param {ValueIterateeCustom<T[keyof T], PropertyKey>} [iteratee] - The iteratee to transform keys.
  * @returns {Record<string, T[keyof T]>} Returns the composed aggregate object.
  *
  * @example
@@ -47,7 +45,7 @@ export function keyBy<T>(
  */
 export function keyBy<T extends object>(
   collection: T | null | undefined,
-  iteratee?: ValueIterateeCustom<T[keyof T], PropertyName>
+  iteratee?: ValueIterateeCustom<T[keyof T], PropertyKey>
 ): Record<string, T[keyof T]>;
 
 /**

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { pull as pullLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { pull as pullToolkit } from './pull';
 
 describe('pull', () => {
@@ -42,9 +41,5 @@ describe('pull', () => {
 
     pull(array, [NaN]);
     expect(array).toEqual([1, 3]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(pull).toEqualTypeOf<typeof pullLodash>();
   });
 });

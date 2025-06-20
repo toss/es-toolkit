@@ -138,7 +138,6 @@ describe('orderBy', () => {
   });
 
   it('should sort by a single property by a specified order', () => {
-    // @ts-expect-error - type mismatch
     const actual = orderBy(objects, 'a', 'desc');
     const expected = [objects[1], objects[3], objects[0], objects[2]];
 
@@ -146,7 +145,6 @@ describe('orderBy', () => {
   });
 
   it('should sort by nested key in array format', () => {
-    // @ts-expect-error - type mismatch
     const actual = orderBy(nestedObj, [['address', 'zipCode'], ['address.streetName']], ['asc', 'desc']);
     const expected = [nestedObj[2], nestedObj[3], nestedObj[1], nestedObj[0], nestedObj[4]];
 
@@ -190,7 +188,6 @@ describe('orderBy', () => {
   });
 
   it('should work with nested `deep` property paths when paths length is 1', () => {
-    // @ts-expect-error - type mismatch
     const actual = orderBy(nestedObj, [['address.zipCode']], ['asc']);
     const expected = [nestedObj[2], nestedObj[3], nestedObj[1], nestedObj[0], nestedObj[4]];
 
