@@ -1,10 +1,13 @@
+import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject';
+
 /**
  * Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`.
  *
  * Note: This method is equivalent to `conforms` when source is partially applied.
  *
- * @param {Record<PropertyKey, any>} target The object to inspect.
- * @param {Record<PropertyKey, (value: any) => boolean>} source The object of property predicates to conform to.
+ * @template T - The type of the target object.
+ * @param {T} target The object to inspect.
+ * @param {ConformsPredicateObject<T>} source The object of property predicates to conform to.
  * @returns {boolean} Returns `true` if `object` conforms, else `false`.
  *
  * @example
@@ -24,10 +27,7 @@
  *
  * console.log(conformsTo(object, source2)); // => false
  */
-export function conformsTo(
-  target: Record<PropertyKey, any>,
-  source: Record<PropertyKey, (value: any) => boolean>
-): boolean {
+export function conformsTo<T>(target: T, source: ConformsPredicateObject<T>): boolean {
   if (source == null) {
     return true;
   }
@@ -36,12 +36,17 @@ export function conformsTo(
     return Object.keys(source).length === 0;
   }
 
-  const keys = Object.keys(source);
+  const keys = Object.keys(source) as Array<keyof T>;
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const predicate = source[key];
     const value = target[key];
-    if ((value === undefined && !(key in target)) || !predicate(value)) {
+
+    if (value === undefined && !(key in (target as any))) {
+      return false;
+    }
+
+    if (typeof predicate === 'function' && !predicate(value)) {
       return false;
     }
   }

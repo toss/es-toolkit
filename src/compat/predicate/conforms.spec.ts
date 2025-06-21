@@ -10,7 +10,7 @@ describe('conforms', () => {
       { a: 3, b: 16 },
     ];
 
-    let par = conforms({
+    let par: any = conforms({
       b: (value: number) => value > 4,
     });
 
@@ -61,6 +61,7 @@ describe('conforms', () => {
       },
     });
 
+    // @ts-expect-error - invalid argument
     expect(par({})).toBe(false);
     expect(count).toBe(0);
   });
@@ -85,7 +86,7 @@ describe('conforms', () => {
     Foo.a = (value: number) => value > 1;
 
     const objects = [{ a: 1 }, { a: 2 }];
-    // @ts-expect-error - unusual argument
+
     const actual = objects.filter(conforms(Foo));
 
     expect(actual).toEqual([objects[1]]);
@@ -105,6 +106,7 @@ describe('conforms', () => {
       b: (value: number) => value > 1,
     });
 
+    // @ts-expect-error - unusual argument
     expect(par(new Foo())).toBe(true);
   });
 
@@ -167,6 +169,6 @@ describe('conforms', () => {
   });
 
   it('should match the type of lodash', () => {
-    expectTypeOf(conforms).toEqualTypeOf<typeof conformsLodash>();
+    expectTypeOf(conforms<unknown>).toEqualTypeOf<typeof conformsLodash<unknown>>();
   });
 });

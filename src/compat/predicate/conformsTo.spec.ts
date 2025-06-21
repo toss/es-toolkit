@@ -160,6 +160,6 @@ describe('conformsTo', () => {
   });
 
   it('should match the type of lodash', () => {
-    expectTypeOf(conformsTo).toEqualTypeOf<typeof conformsToLodash>();
+    expectTypeOf(conformsTo<unknown>).toEqualTypeOf<typeof conformsToLodash<unknown>>();
   });
 });
