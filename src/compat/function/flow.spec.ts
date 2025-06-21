@@ -41,6 +41,8 @@ describe('flow', () => {
 
   it(`\`flow\` should work with curried functions with placeholders`, () => {
     const curried = curry(ary(map, 2), 2);
+    // eslint-disable-next-line
+    // @ts-ignore
     const getProp = curried(curried.placeholder, (value: { a: any }) => value.a);
     const objects = [{ a: 1 }, { a: 2 }, { a: 1 }];
 

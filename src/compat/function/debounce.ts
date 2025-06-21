@@ -22,7 +22,7 @@ interface DebounceSettingsLeading extends DebounceSettings {
   leading: true;
 }
 
-interface DebouncedFunc<T extends (...args: any[]) => any> {
+export interface DebouncedFunc<T extends (...args: any[]) => any> {
   /**
    * Call the original function, but applying the debounce rules.
    *
@@ -49,7 +49,7 @@ interface DebouncedFunc<T extends (...args: any[]) => any> {
   flush(): ReturnType<T> | undefined;
 }
 
-interface DebouncedFuncLeading<T extends (...args: any[]) => any> extends DebouncedFunc<T> {
+export interface DebouncedFuncLeading<T extends (...args: any[]) => any> extends DebouncedFunc<T> {
   (...args: Parameters<T>): ReturnType<T>;
   flush(): ReturnType<T>;
 }

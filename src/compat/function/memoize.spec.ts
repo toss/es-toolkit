@@ -151,6 +151,8 @@ describe('memoize', () => {
 
       expect(count).toBe(1);
       expect(cache.get(key)).toBe(array);
+      // eslint-disable-next-line
+      // @ts-ignore
       expect(cache.__data__ instanceof Array).toBe(false);
       expect(cache.delete(key)).toBe(true);
     });

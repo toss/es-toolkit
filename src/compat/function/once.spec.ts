@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { once as onceLodash } from 'lodash';
-import { once } from '../../function';
+import { once } from './once';
 
 describe('once', () => {
   it('should invoke `func` once', () => {

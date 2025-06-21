@@ -9,6 +9,8 @@ describe('min', () => {
 
   it('should return `undefined` for empty collections', () => {
     expect(min([])).toBe(undefined);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(min()).toBe(undefined);
   });
 

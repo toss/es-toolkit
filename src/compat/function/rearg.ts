@@ -1,3 +1,4 @@
+import { Many } from '../_internal/Many.ts';
 import { flatten } from '../array/flatten.ts';
 
 /**
@@ -15,10 +16,7 @@ import { flatten } from '../array/flatten.ts';
  * const rearrangedGreet = rearg(greet, 1, 0);
  * console.log(rearrangedGreet('World', 'Hello')); // Output: "Hello, World!"
  */
-export function rearg<F extends (...args: any[]) => any>(
-  func: F,
-  ...indices: Array<number | number[]>
-): (...args: any[]) => ReturnType<F> {
+export function rearg(func: (...args: any[]) => any, ...indices: Array<Many<number>>): (...args: any[]) => any {
   const flattenIndices = flatten(indices);
 
   return function (this: any, ...args: any[]) {

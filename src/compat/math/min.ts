@@ -5,7 +5,7 @@
  * @param {ArrayLike<T> | null | undefined} [items] - The array of elements to search. Defaults to an empty array.
  * @returns {T | undefined} - The element with the minimum value, or undefined if the array is empty.
  */
-export function min<T>(items?: ArrayLike<T> | null | undefined): T | undefined {
+export function min<T>(items: ArrayLike<T> | null | undefined): T | undefined {
   if (!items || items.length === 0) {
     return undefined;
   }
