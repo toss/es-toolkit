@@ -107,4 +107,67 @@ describe('merge', () => {
 
     expect(result).toEqual({ a: { b: { c: [2], d: 3 }, e: [4] } });
   });
+
+  describe('prototype pollution prevention', () => {
+    it('should not merge __proto__ property', () => {
+      const target = {};
+      const source = JSON.parse('{"__proto__": {"polluted": true}}');
+      
+      const result = merge(target, source);
+      
+      expect(result).toEqual({});
+      expect({}.polluted).toBeUndefined();
+      expect(Object.prototype.polluted).toBeUndefined();
+    });
+
+    it('should not merge constructor property', () => {
+      const target = {};
+      const source = { constructor: { prototype: { polluted: true } } };
+      
+      const result = merge(target, source);
+      
+      expect(result).toEqual({});
+      expect({}.polluted).toBeUndefined();
+    });
+
+    it('should not merge prototype property', () => {
+      const target = {};
+      const source = { prototype: { polluted: true } };
+      
+      const result = merge(target, source);
+      
+      expect(result).toEqual({});
+      expect({}.polluted).toBeUndefined();
+    });
+
+    it('should still merge safe properties when dangerous keys are present', () => {
+      const target = { a: 1 };
+      const source = { 
+        b: 2, 
+        __proto__: { polluted: true },
+        c: 3,
+        constructor: { prototype: { polluted: true } }
+      };
+      
+      const result = merge(target, source);
+      
+      expect(result).toEqual({ a: 1, b: 2, c: 3 });
+      expect({}.polluted).toBeUndefined();
+    });
+
+    it('should handle nested prototype pollution attempts', () => {
+      const target = { nested: {} };
+      const source = { 
+        nested: {
+          safe: 'value',
+          __proto__: { polluted: true }
+        }
+      };
+      
+      const result = merge(target, source);
+      
+      expect(result.nested.safe).toBe('value');
+      expect({}.polluted).toBeUndefined();
+    });
+  });
 });

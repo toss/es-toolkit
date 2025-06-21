@@ -1,4 +1,5 @@
 import { isPlainObject } from '../predicate/isPlainObject.ts';
+import { isPrototypePollutionKey } from '../../_internal/isPrototypePollutionKey.ts';
 
 /**
  * Recursively assigns default values to an `object`, ensuring that certain properties do not remain `undefined`.
@@ -118,6 +119,11 @@ function defaultsDeepRecursive(
   stack: WeakMap<any, any>
 ): void {
   for (const key in source) {
+    // Prevent prototype pollution
+    if (isPrototypePollutionKey(key)) {
+      continue;
+    }
+    
     const sourceValue = source[key];
     const targetValue = target[key];
     const targetHasKey = Object.hasOwn(target, key);

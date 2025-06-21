@@ -1,4 +1,5 @@
 import { isPlainObject } from '../predicate/isPlainObject.ts';
+import { isPrototypePollutionKey } from '../_internal/isPrototypePollutionKey.ts';
 
 /**
  * Merges the properties of the source object into the target object.
@@ -48,6 +49,11 @@ export function merge<T extends Record<PropertyKey, any>, S extends Record<Prope
 
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
+    
+    // Prevent prototype pollution
+    if (isPrototypePollutionKey(key)) {
+      continue;
+    }
 
     const sourceValue = source[key];
     const targetValue = target[key];

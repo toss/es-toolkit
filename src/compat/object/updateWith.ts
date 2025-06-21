@@ -4,6 +4,7 @@ import { isKey } from '../_internal/isKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { isObject } from '../predicate/isObject.ts';
 import { toPath } from '../util/toPath.ts';
+import { isPrototypePollutionKey } from '../../_internal/isPrototypePollutionKey.ts';
 
 /**
  * Updates the value at the specified path of the given object using an updater function and a customizer.
@@ -38,6 +39,12 @@ export function updateWith<T extends object | null | undefined>(
 
   for (let i = 0; i < resolvedPath.length && current != null; i++) {
     const key = toKey(resolvedPath[i]);
+    
+    // Prevent prototype pollution
+    if (isPrototypePollutionKey(key)) {
+      return obj;
+    }
+    
     let newValue: unknown;
 
     if (i === resolvedPath.length - 1) {

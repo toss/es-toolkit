@@ -6,6 +6,7 @@ import { isArguments } from '../predicate/isArguments.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
+import { isPrototypePollutionKey } from '../../_internal/isPrototypePollutionKey.ts';
 
 declare let Buffer:
   | {
@@ -411,6 +412,11 @@ function mergeWithDeep(
 
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
+    
+    // Prevent prototype pollution
+    if (isPrototypePollutionKey(key)) {
+      continue;
+    }
 
     let sourceValue = source[key];
     let targetValue = target[key];

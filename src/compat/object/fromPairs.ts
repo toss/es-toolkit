@@ -1,4 +1,5 @@
 import { isArrayLike } from '../predicate/isArrayLike.ts';
+import { isPrototypePollutionKey } from '../../_internal/isPrototypePollutionKey.ts';
 
 /**
  * Converts an array of key-value pairs into an object.
@@ -49,7 +50,10 @@ export function fromPairs<T extends PropertyKey, U>(pairs: ReadonlyArray<[T, U]>
   const result = {} as Record<T, U>;
 
   for (const [key, value] of pairs) {
-    result[key as T] = value;
+    // Prevent prototype pollution
+    if (!isPrototypePollutionKey(key)) {
+      result[key as T] = value;
+    }
   }
 
   return result;
