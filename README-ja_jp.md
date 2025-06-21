@@ -9,6 +9,7 @@ es-toolkitは、最先端のJavaScriptユーティリティライブラリであ
 - es-toolkitは、[debounce](https://es-toolkit.slash.page/reference/function/debounce.html)、[delay](https://es-toolkit.slash.page/reference/promise/delay.html)、[chunk](https://es-toolkit.slash.page/reference/array/chunk.html)、[sum](https://es-toolkit.slash.page/reference/math/sum.html)、[pick](https://es-toolkit.slash.page/reference/object/pick.html)など、日常的に使用するさまざまなユーティリティ関数を最新の実装で提供します。
 - パフォーマンスを重視して設計されており、es-toolkitは最新のJavaScript環境で[2-3倍の性能向上](https://es-toolkit.slash.page/performance.html)を実現します。
 - es-toolkitはツリーシェイキングをサポートしており、他のライブラリと比較してJavaScriptコードを最大[97%削減](https://es-toolkit.slash.page/bundle-size.html)します。
+- es-toolkitは、lodashを簡単に置き換えることができる完全な互換性レイヤー、[es-toolkit/compat](https://es-toolkit.slash.page/compatibility.html)を提供します。
 - es-toolkitには組み込みのTypeScriptサポートが含まれており、直感的で堅牢な型を提供します。また、[isNotNil](https://es-toolkit.slash.page/reference/predicate/isNotNil.html)などの便利な型ガードも提供します。
 - es-toolkitは、[Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358)や[ink](https://github.com/vadimdemedes/ink/blob/2090ad9779be59dea71d173eb49785b7bd4495d0/package.json#L55)など、よく使われるオープンソースライブラリで利用されています。
 - es-toolkitは100%のテストカバレッジを持ち、信頼性と堅牢性を確保しています。

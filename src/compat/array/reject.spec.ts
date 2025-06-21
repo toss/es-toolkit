@@ -139,4 +139,21 @@ describe('reject', () => {
     expect(reject('123', value => isEven(parseInt(value)))).toEqual(['1', '3']);
     expect(reject(args, isEven)).toEqual([1, 3]);
   });
+
+  it('should not modify the resulting value from within `predicate`', () => {
+    const actual = reject([0], (value, index, array) => {
+      // @ts-expect-error - testing
+      array[index] = 1;
+      return false;
+    });
+
+    expect(actual).toEqual([0]);
+  });
+
+  it('should handle sparse arrays correctly', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const sparseArray = [1, , 3, , 5] as any[];
+
+    expect(reject(sparseArray, value => value > 2)).toEqual([1, undefined, undefined]);
+  });
 });

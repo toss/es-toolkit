@@ -8,7 +8,28 @@ We welcome contribution from everyone in the community. All communications in th
 
 Note that we value performance, simplicity of implementation, and detailed documentations. We do not aim for supporting a variety of features and options. Our goal is to provide a small set of performant and well-functioning utilities.
 
-### 1.1 Performance
+### 1.1 Development Scope
+
+#### `es-toolkit`
+
+es-toolkit is a high-quality library of utility functions commonly used in modern JavaScript projects.
+
+We focus on implementing functions that are difficult to create with JavaScript's built-in methods but are frequently needed and useful.
+
+Examples include [`delay`](https://es-toolkit.slash.page/reference/promise/delay.html), [`windowed`](https://es-toolkit.slash.page/reference/array/windowed.html), [`keyBy`](https://es-toolkit.slash.page/reference/array/keyBy.html), [`mapValues`](https://es-toolkit.slash.page/reference/object/mapValues.html), [`camelCase`](https://es-toolkit.slash.page/reference/string/camelCase.html), and [`toSnakeCaseKeys`](https://es-toolkit.slash.page/reference/object/toSnakeCaseKeys.html).
+
+We don't implement functions that can be easily replaced with modern JavaScript, such as:
+
+- `isArray` (use `Array.isArray` instead)
+- `isNaN` (use `Number.isNaN` instead)
+- `isNumber` (use `typeof value === 'number'` instead)
+- `min` (use `Math.min()` instead)
+
+#### `es-toolkit/compat`
+
+To help projects using [`lodash`](https://lodash.com/docs/4.17.15) migrate easily to es-toolkit, we implement all functions provided by `lodash`.
+
+### 1.2 Performance
 
 All functions es-toolkit provides should be more performant than or similar with that of alternative libraries provide.
 
@@ -16,7 +37,7 @@ We measure the performance of our library every time our code is edited. We are 
 
 When a new functionality is added, a benchmark code should be added. Please add screenshots of the benchmarks when opening a pull request for easy reference and history tracking.
 
-### 1.2 Simplicity
+### 1.3 Simplicity
 
 We value implementation and interface simplicity over a variety of features for performance, code readability, and easy maintenance. Our functions will not provide complex options to suit every use case.
 
@@ -48,7 +69,18 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 
 </details>
 
-### 1.3 Documentation
+<details>
+<summary>
+2. Prefer built-in JavaScript functions and operators.
+</summary>
+
+We prefer using built-in JavaScript functions, methods, or operators like `Array.isArray()`, `typeof value === 'string'`, and `Number.isNaN()`. Avoid using custom functions such as `isArray()`, `isString()`, or `isNaN()` from `es-toolkit` or other libraries.
+
+This helps keep the code more concise, eliminates unnecessary function calls, and reduces coupling between functions.
+
+</details>
+
+### 1.4 Documentation
 
 All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
 

@@ -1,4 +1,5 @@
-import { isArray, isPlainObject } from '../compat/index.ts';
+import { isArray } from '../compat/predicate/isArray.ts';
+import { isPlainObject } from '../compat/predicate/isPlainObject.ts';
 import { snakeCase } from '../string/snakeCase.ts';
 
 type SnakeCase<S extends string> = S extends `${infer P1}${infer P2}`

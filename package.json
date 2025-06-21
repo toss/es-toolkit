@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.35.0",
+  "version": "1.39.3",
   "homepage": "https://es-toolkit.slash.page",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -13,7 +13,7 @@
     "docs",
     "benchmarks"
   ],
-  "packageManager": "yarn@4.7.0",
+  "packageManager": "yarn@4.9.1",
   "react-native": "./dist/index.js",
   "exports": {
     ".": "./src/index.ts",
@@ -31,7 +31,18 @@
   },
   "files": [
     "dist",
-    "*.d.ts"
+    "compat",
+    "*.d.ts",
+    "array.js",
+    "compat.js",
+    "error.js",
+    "function.js",
+    "math.js",
+    "object.js",
+    "predicate.js",
+    "promise.js",
+    "string.js",
+    "util.js"
   ],
   "publishConfig": {
     "access": "public",
@@ -68,6 +79,12 @@
         "require": {
           "types": "./dist/compat/index.d.ts",
           "default": "./dist/compat/index.js"
+        }
+      },
+      "./compat/*": {
+        "default": {
+          "types": "./compat/*.d.ts",
+          "default": "./compat/*.js"
         }
       },
       "./error": {

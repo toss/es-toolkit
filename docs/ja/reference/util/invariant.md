@@ -6,12 +6,13 @@
 
 ```typescript
 function invariant(condition: unknown, message: string): asserts condition;
+function invariant(condition: unknown, error: Error): asserts condition;
 ```
 
 ### パラメータ
 
 - `condition` (`unknown`): 評価する条件。
-- `message` (`string`): 条件が偽である場合に投げるエラーメッセージ。
+- `message` (`string` | `Error`): 条件が偽である場合に投げるエラーメッセージ。
 
 ### 戻り値
 
@@ -38,4 +39,15 @@ invariant(value !== null && value !== undefined, 'Value should not be null or un
 
 // Example of using invariant to check if a number is positive
 invariant(number > 0, 'Number must be positive');
+
+// Example of using invariant with an error
+invariant(false, new Error('This should throw'));
+
+// Example of using invariant with a custom error
+class CustomError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+invariant(false, new CustomError('This should throw'));
 ```

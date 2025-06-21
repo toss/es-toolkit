@@ -15,16 +15,16 @@ If the list is empty, returns `undefined`.
 ```typescript
 function max<T>(items: [T, ...T[]]): T;
 function max(): undefined;
-function max<T>(items?: T[]): T | undefined;
+function max<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### Parameters
 
-- `items` (`T[]`): The array of elements to search.
+- `items` (`ArrayLike<T> | null | undefined`): The array of elements to search.
 
 ### Returns
 
-(`T`): The element with the maximum value.
+(`T | undefined`): The element with the maximum value, or `undefined` if the array is empty, `null`, or `undefined`.
 
 ### Example
 

@@ -97,4 +97,11 @@ describe('pullAllWith', () => {
     expect(456 in array).toBe(false);
     expect(789 in array).toBe(false);
   });
+
+  it('should handle null and undefined values', () => {
+    // @ts-expect-error - null is not an array
+    expect(pullAllWith(null, [1, 2, 3])).toEqual(null);
+    // @ts-expect-error - undefined is not an array
+    expect(pullAllWith(undefined, [1, 2, 3])).toEqual(undefined);
+  });
 });

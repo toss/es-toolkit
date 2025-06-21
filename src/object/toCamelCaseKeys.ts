@@ -1,4 +1,5 @@
-import { isArray, isPlainObject } from '../compat/index.ts';
+import { isArray } from '../compat/predicate/isArray.ts';
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { camelCase } from '../string/camelCase.ts';
 
 type CamelCase<S extends string> = S extends `${infer P1}_${infer P2}${infer P3}`
