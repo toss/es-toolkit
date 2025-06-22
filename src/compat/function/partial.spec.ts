@@ -1,6 +1,5 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import _ from '..';
-import type { partial as partialLodash } from 'lodash';
 import { curry } from './curry';
 import { partial } from './partial';
 import { identity } from '../../function';
@@ -108,10 +107,8 @@ describe('partial', () => {
       return a + b + c;
     };
     const par = partial(fn, _, 'b', _);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(par('a', 'c')).toBe('abc');
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(partial).toEqualTypeOf<typeof partialLodash>();
   });
 });

@@ -96,7 +96,7 @@ export function unionWith<T>(
 
 export function unionWith<T>(...values: Array<ArrayLike<T> | null | undefined | ((a: T, b: T) => boolean)>): T[] {
   const lastValue = last(values);
-  const flattened = flattenArrayLike<T>(values);
+  const flattened = flattenArrayLike(values as Array<ArrayLike<T>>);
 
   if (isArrayLikeObject(lastValue) || lastValue == null) {
     return uniq(flattened);

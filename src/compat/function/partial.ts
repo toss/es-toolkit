@@ -1,700 +1,312 @@
 import { partialImpl } from '../../function/partial.ts';
 
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @returns {function(): R} A new function that takes no arguments and returns the result of the original function.
- *
- * @example
- * const addOne = (x: number) => x + 1;
- * const addOneToFive = partial(addOne, 5);
- * console.log(addOneToFive()); // => 6
- */
-export function partial<T1, R>(func: (arg1: T1) => R, arg1: T1): () => R;
+// eslint-disable-next-line @typescript-eslint/naming-convention
+type __ = Placeholder;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
  * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @returns {function(arg2: T2): R} A new function that takes the second argument and returns the result of the original function.
- *
  * @example
- * const multiply = (x: number, y: number) => x * y;
- * const double = partial(multiply, 2);
- * console.log(double(5)); // => 10
+ * const greet = (greeting: string, name: string) => `${greeting} ${name}`;
+ * const sayHello = partial(greet, _, 'world');
+ * console.log(sayHello('Hello')); // => 'Hello world'
  */
-export function partial<T1, T2, R>(func: (arg1: T1, arg2: T2) => R, arg1: T1): (arg2: T2) => R;
+export function partial<T1, T2, R>(func: (t1: T1, t2: T2) => R, plc1: __, arg2: T2): (t1: T1) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2): R} func The function to partially apply.
- * @param {Placeholder} placeholder The placeholder for the first argument.
- * @param {T2} arg2 The second argument to apply.
- * @returns {function(arg1: T1): R} A new function that takes the first argument and returns the result of the original function.
+ * @example
+ * const calculate = (x: number, y: number, z: number) => x + y + z;
+ * const addToY = partial(calculate, _, 2);
+ * console.log(addToY(1, 3)); // => 6
+ */
+export function partial<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R, plc1: __, arg2: T2): (t1: T1, t3: T3) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
  * @example
- * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
- * const greetWithHello = partial(greet, partial.placeholder, 'John');
- * console.log(greetWithHello('Hello')); // => 'Hello, John!'
+ * const calculate = (x: number, y: number, z: number) => x + y + z;
+ * const addZ = partial(calculate, _, _, 3);
+ * console.log(addZ(1, 2)); // => 6
  */
-export function partial<T1, T2, R>(
-  func: (arg1: T1, arg2: T2) => R,
-  placeholder: Placeholder,
+export function partial<T1, T2, T3, R>(
+  func: (t1: T1, t2: T2, t3: T3) => R,
+  plc1: __,
+  plc2: __,
+  arg3: T3
+): (t1: T1, t2: T2) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+ *
+ * @example
+ * const calculate = (x: number, y: number, z: number) => x + y + z;
+ * const withXandZ = partial(calculate, 1, _, 3);
+ * console.log(withXandZ(2)); // => 6
+ */
+export function partial<T1, T2, T3, R>(
+  func: (t1: T1, t2: T2, t3: T3) => R,
+  arg1: T1,
+  plc2: __,
+  arg3: T3
+): (t2: T2) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+ *
+ * @example
+ * const calculate = (x: number, y: number, z: number) => x + y + z;
+ * const withYandZ = partial(calculate, _, 2, 3);
+ * console.log(withYandZ(1)); // => 6
+ */
+export function partial<T1, T2, T3, R>(
+  func: (t1: T1, t2: T2, t3: T3) => R,
+  plc1: __,
+  arg2: T2,
+  arg3: T3
+): (t1: T1) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+ *
+ * @example
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withB = partial(format, _, 'b');
+ * console.log(withB('a', 'c', 'd')); // => 'a-b-c-d'
+ */
+export function partial<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  plc1: __,
   arg2: T2
-): (arg1: T1) => R;
+): (t1: T1, t3: T3, t4: T4) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @returns {function(arg2: T2, arg3: T3): R} A new function that takes the second and third arguments and returns the result of the original function.
- *
  * @example
- * const sumThree = (a: number, b: number, c: number) => a + b + c;
- * const addFive = partial(sumThree, 5);
- * console.log(addFive(3, 2)); // => 10
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withC = partial(format, _, _, 'c');
+ * console.log(withC('a', 'b', 'd')); // => 'a-b-c-d'
  */
-export function partial<T1, T2, T3, R>(func: (arg1: T1, arg2: T2, arg3: T3) => R, arg1: T1): (arg2: T2, arg3: T3) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3): R} func The function to partially apply.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {T2} arg2 The second argument to apply.
- * @returns {function(arg1: T1, arg3: T3): R} A new function that takes the first and third arguments and returns the result of the original function.
- *
- * @example
- * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
- * const greetWithPlaceholder = partial(greet, partial.placeholder, 'John');
- * console.log(greetWithPlaceholder('Hello')); // => 'Hello, John!'
- */
-export function partial<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  arg1: Placeholder,
-  arg2: T2
-): (arg1: T1, arg3: T3) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3): R} func The function to partially apply.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to apply.
- * @returns {function(arg1: T1, arg2: T2): R} A new function that takes the first and second arguments and returns the result of the original function.
- *
- * @example
- * const multiply = (x: number, y: number, z: number) => x * y * z;
- * const multiplyWithPlaceholders = partial(multiply, partial.placeholder, partial.placeholder, 2);
- * console.log(multiplyWithPlaceholders(3, 4)); // => 24
- */
-export function partial<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  arg1: Placeholder,
-  arg2: Placeholder,
+export function partial<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  plc1: __,
+  plc2: __,
   arg3: T3
-): (arg1: T1, arg2: T2) => R;
+): (t1: T1, t2: T2, t4: T4) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to apply.
- * @returns {function(arg2: T2): R} A new function that takes the second argument and returns the result of the original function.
- *
  * @example
- * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
- * const greetWithPlaceholder = partial(greet, 'Hello', partial.placeholder);
- * console.log(greetWithPlaceholder('John')); // => 'Hello, John!'
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withAandC = partial(format, 'a', _, 'c');
+ * console.log(withAandC('b', 'd')); // => 'a-b-c-d'
  */
-export function partial<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
+export function partial<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
   arg1: T1,
-  arg2: Placeholder,
+  plc2: __,
   arg3: T3
-): (arg2: T2) => R;
+): (t2: T2, t4: T4) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3): R} func The function to partially apply.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {T2} arg2 The second argument to apply.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @returns {function(arg1: T1, arg3: T3): R} A new function that takes the first and third arguments and returns the result of the original function.
- *
  * @example
- * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
- * const greetWithPlaceholder = partial(greet, 'Hello', partial.placeholder);
- * console.log(greetWithPlaceholder('John')); // => 'Hello, John!'
- */
-export function partial<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  arg1: Placeholder,
-  arg2: T2,
-  arg3: Placeholder
-): (arg1: T1, arg3: T3) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3): R} func The function to partially apply.
- * @param {Placeholder} arg1 The first argument to apply.
- * @param {T2} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to apply.
- * @returns {function(arg2: T2): R} A new function that takes the second argument and returns the result of the original function.
- *
- * @example
- * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
- * const greetWithPlaceholder = partial(greet, 'Hello', partial.placeholder);
- * console.log(greetWithPlaceholder('John')); // => 'Hello, John!'
- */
-export function partial<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  plc1: Placeholder,
-  arg2: T2,
-  arg3: T3
-): (arg1: T1) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @returns {function(arg2: T2): R} A new function that takes the second argument and returns the result of the original function.
- *
- * @example
- * const multiply = (x: number, y: number, z: number, w: number) => x * y * z * w;
- * const double = partial(multiply, 2);
- * console.log(double(5, 4, 3)); // => 120
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withBandC = partial(format, _, 'b', 'c');
+ * console.log(withBandC('a', 'd')); // => 'a-b-c-d'
  */
 export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1
-): (arg2: T2, arg3: T3, arg4: T4) => R;
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  plc1: __,
+  arg2: T2,
+  arg3: T3
+): (t1: T1, t4: T4) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to apply.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(arg1: T1, arg2: T2): R} A new function that takes the first and second arguments and returns the result of the original function.
- *
  * @example
- * const multiply = (x: number, y: number, z: number, w: number) => x * y * z * w;
- * const multiplyWithPlaceholders = partial(multiply, partial.placeholder, partial.placeholder, 2, 3);
- * console.log(multiplyWithPlaceholders(4, 5)); // => 120
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withD = partial(format, _, _, _, 'd');
+ * console.log(withD('a', 'b', 'c')); // => 'a-b-c-d'
  */
 export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: Placeholder,
-  arg2: Placeholder,
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  plc1: __,
+  plc2: __,
+  plc3: __,
+  arg4: T4
+): (t1: T1, t2: T2, t3: T3) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+ *
+ * @example
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withAandD = partial(format, 'a', _, _, 'd');
+ * console.log(withAandD('b', 'c')); // => 'a-b-c-d'
+ */
+export function partial<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  plc2: __,
+  plc3: __,
+  arg4: T4
+): (t2: T2, t3: T3) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+ *
+ * @example
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withBandD = partial(format, _, 'b', _, 'd');
+ * console.log(withBandD('a', 'c')); // => 'a-b-c-d'
+ */
+export function partial<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  plc1: __,
+  arg2: T2,
+  plc3: __,
+  arg4: T4
+): (t1: T1, t3: T3) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+ *
+ * @example
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withABandD = partial(format, 'a', 'b', _, 'd');
+ * console.log(withABandD('c')); // => 'a-b-c-d'
+ */
+export function partial<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  arg2: T2,
+  plc3: __,
+  arg4: T4
+): (t3: T3) => R;
+
+/**
+ * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
+ *
+ * @example
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withCandD = partial(format, _, _, 'c', 'd');
+ * console.log(withCandD('a', 'b')); // => 'a-b-c-d'
+ */
+export function partial<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  plc1: __,
+  plc2: __,
   arg3: T3,
   arg4: T4
-): (arg1: T1, arg2: T2) => R;
+): (t1: T1, t2: T2) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @param {T2} arg2 The second argument to apply.
- * @returns {function(arg3: T3, arg4: T4): R} A new function that takes the third and fourth arguments and returns the result of the original function.
- *
  * @example
- * const sumFour = (a: number, b: number, c: number, d: number) => a + b + c + d;
- * const addOneAndTwo = partial(sumFour, 1, 2);
- * console.log(addOneAndTwo(3, 4)); // => 10
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withACandD = partial(format, 'a', _, 'c', 'd');
+ * console.log(withACandD('b')); // => 'a-b-c-d'
  */
 export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
   arg1: T1,
-  arg2: T2
-): (arg3: T3, arg4: T4) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to apply.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(arg2: T2, arg4: T4): R} A new function that takes the second and fourth arguments and returns the result of the original function.
- *
- * @example
- * const greet = (greeting: string, name: string, punctuation: string) => `${greeting}, ${name}${punctuation}`;
- * const greetWithPlaceholder = partial(greet, 'Hello', partial.placeholder, '!');
- * console.log(greetWithPlaceholder('John')); // => 'Hello, John!'
- */
-export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: Placeholder,
-  arg3: T3
-): (arg2: T2, arg4: T4) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {T2} arg2 The second argument to apply.
- * @param {T3} arg3 The third argument to apply.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(arg1: T1, arg3: T3): R} A new function that takes the first and third arguments and returns the result of the original function.
- *
- * @example
- * const multiply = (x: number, y: number, z: number, w: number) => x * y * z * w;
- * const multiplyWithPlaceholder = partial(multiply, partial.placeholder, 2, 3);
- * console.log(multiplyWithPlaceholder(4)); // => 24
- */
-export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: Placeholder,
-  arg2: T2,
-  arg3: T3
-): (arg1: T1, arg4: T4) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {T2} arg2 The second argument to apply.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(arg1: T1, arg3: T3): R} A new function that takes the first and third arguments and returns the result of the original function.
- */
-export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: Placeholder,
-  arg2: T2,
-  arg3: Placeholder,
-  arg4: T4
-): (arg1: T1, arg3: T3) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to apply.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(arg1: T1, arg2: T2): R} A new function that takes the first and second arguments and returns the result of the original function.
- *
- * @example
- * const multiply = (x: number, y: number, z: number, w: number) => x * y * z * w;
- * const multiplyWithPlaceholders = partial(multiply, partial.placeholder, partial.placeholder, 2, 3);
- * console.log(multiplyWithPlaceholders(4, 5)); // => 120
- */
-export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: Placeholder,
-  arg2: Placeholder,
+  plc2: __,
   arg3: T3,
   arg4: T4
-): (arg1: T1, arg2: T2) => R;
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @param {T2} arg2 The second argument to apply.
- * @param {T3} arg3 The third argument to apply.
- * @returns {function(arg4: T4): R} A new function that takes the fourth argument and returns the result of the original function.
- */
-export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: T2,
-  arg3: T3
-): (arg4: T4) => R;
+): (t2: T2) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @param {T2} arg2 The second argument to apply.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(arg3: T3): R} A new function that takes the third argument and returns the result of the original function.
+ * @example
+ * const format = (a: string, b: string, c: string, d: string) => `${a}-${b}-${c}-${d}`;
+ * const withBCandD = partial(format, _, 'b', 'c', 'd');
+ * console.log(withBCandD('a')); // => 'a-b-c-d'
  */
 export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: T2,
-  arg3: Placeholder,
-  arg4: T4
-): (arg3: T3) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to apply.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(arg2: T2): R} A new function that takes the second argument and returns the result of the original function.
- */
-export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: Placeholder,
-  arg3: T3,
-  arg4: T4
-): (arg2: T2) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, arg3: T3, arg4: T4): R} func The function to partially apply.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {T2} arg2 The second argument to apply.
- * @param {T3} arg3 The third argument to apply.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(arg1: T1): R} A new function that takes the first argument and returns the result of the original function.
- */
-export function partial<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: Placeholder,
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  plc1: __,
   arg2: T2,
   arg3: T3,
   arg4: T4
-): (arg1: T1) => R;
+): (t1: T1) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template TS The types of the arguments.
- * @template R The return type of the function.
- * @param {function(...args: TS): R} func The function to partially apply.
- * @returns {function(...args: TS): R} A new function that takes the same arguments as the original function.
- *
  * @example
- * const add = (...numbers: number[]) => numbers.reduce((sum, n) => sum + n, 0);
- * const addFive = partial(add, 5);
- * console.log(addFive(1, 2, 3)); // => 11
+ * const sum = (...numbers: number[]) => numbers.reduce((a, b) => a + b, 0);
+ * const partialSum = partial(sum);
+ * console.log(partialSum(1, 2, 3)); // => 6
  */
-export function partial<TS extends any[], R>(func: (...args: TS) => R): (...args: TS) => R;
+export function partial<TS extends any[], R>(func: (...ts: TS) => R): (...ts: TS) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template TS The types of the arguments.
- * @template T1 The type of the first argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, ...args: TS): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @returns {function(...args: TS): R} A new function that takes the remaining arguments and returns the result of the original function.
- *
  * @example
- * const greet = (greeting: string, ...names: string[]) => `${greeting}, ${names.join(', ')}!`;
- * const greetHello = partial(greet, 'Hello');
- * console.log(greetHello('Alice', 'Bob')); // => 'Hello, Alice, Bob!'
+ * const log = (prefix: string, ...messages: string[]) => console.log(prefix, ...messages);
+ * const debugLog = partial(log, '[DEBUG]');
+ * debugLog('message 1', 'message 2'); // => '[DEBUG] message 1 message 2'
  */
-export function partial<TS extends any[], T1, R>(func: (arg1: T1, ...args: TS) => R, arg1: T1): (...args: TS) => R;
+export function partial<TS extends any[], T1, R>(func: (t1: T1, ...ts: TS) => R, arg1: T1): (...ts: TS) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template TS The types of the arguments.
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template R The return type of the function.
- * @param {function(arg1: T1, arg2: T2, ...args: TS): R} func The function to partially apply.
- * @param {T1} arg1 The first argument to apply.
- * @param {T2} arg2 The second argument to apply.
- * @returns {function(...args: TS): R} A new function that takes the remaining arguments and returns the result of the original function.
- *
  * @example
- * const greet = (greeting: string, name: string, punctuation: string) => `${greeting}, ${name}${punctuation}`;
- * const greetWithHello = partial(greet, 'Hello', '!');
- * console.log(greetWithHello('John')); // => 'Hello, John!'
+ * const format = (prefix: string, separator: string, ...messages: string[]) => `${prefix}${messages.join(separator)}`;
+ * const logWithPrefix = partial(format, '[LOG]', ' - ');
+ * console.log(logWithPrefix('msg1', 'msg2')); // => '[LOG]msg1 - msg2'
  */
 export function partial<TS extends any[], T1, T2, R>(
-  func: (arg1: T1, arg2: T2, ...args: TS) => R,
+  func: (t1: T1, t2: T2, ...ts: TS) => R,
   t1: T1,
-  arg2: T2
-): (...args: TS) => R;
+  t2: T2
+): (...ts: TS) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template TS The types of the arguments.
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {function(t1: T1, arg2: T2, arg3: T3, ...args: TS): R} func The function to partially apply.
- * @param {T1} t1 The first argument to apply.
- * @param {T2} arg2 The second argument to apply.
- * @param {T3} arg3 The third argument to apply.
- * @returns {function(...args: TS): R} A new function that takes the remaining arguments and returns the result of the original function.
- *
  * @example
- * const greet = (greeting: string, name: string, punctuation: string) => `${greeting}, ${name}${punctuation}`;
- * const greetWithHello = partial(greet, 'Hello', 'John', '!');
- * console.log(greetWithHello()); // => 'Hello, John!'
+ * const format = (type: string, level: string, message: string, ...tags: string[]) =>
+ *   `[${type}][${level}] ${message} ${tags.join(',')}`;
+ * const errorLog = partial(format, 'ERROR', 'HIGH', 'Something went wrong');
+ * console.log(errorLog('critical', 'urgent')); // => '[ERROR][HIGH] Something went wrong critical,urgent'
  */
 export function partial<TS extends any[], T1, T2, T3, R>(
-  func: (t1: T1, arg2: T2, arg3: T3, ...args: TS) => R,
+  func: (t1: T1, t2: T2, t3: T3, ...ts: TS) => R,
   t1: T1,
-  arg2: T2,
-  arg3: T3
-): (...args: TS) => R;
+  t2: T2,
+  t3: T3
+): (...ts: TS) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template TS The types of the arguments.
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {function(t1: T1, arg2: T2, arg3: T3, arg4: T4, ...args: TS): R} func The function to partially apply.
- * @param {T1} t1 The first argument to apply.
- * @param {T2} arg2 The second argument to apply.
- * @param {T3} arg3 The third argument to apply.
- * @param {T4} arg4 The fourth argument to apply.
- * @returns {function(...args: TS): R} A new function that takes the remaining arguments and returns the result of the original function.
- *
  * @example
- * const greet = (greeting: string, name: string, punctuation: string) => `${greeting}, ${name}${punctuation}`;
- * const greetWithHello = partial(greet, 'Hello', 'John', '!');
- * console.log(greetWithHello()); // => 'Hello, John!'
+ * const format = (a: string, b: string, c: string, d: string, ...rest: string[]) =>
+ *   `${a}-${b}-${c}-${d}:${rest.join(',')}`;
+ * const prefixedFormat = partial(format, 'a', 'b', 'c', 'd');
+ * console.log(prefixedFormat('e', 'f')); // => 'a-b-c-d:e,f'
  */
 export function partial<TS extends any[], T1, T2, T3, T4, R>(
-  func: (t1: T1, arg2: T2, arg3: T3, arg4: T4, ...args: TS) => R,
+  func: (t1: T1, t2: T2, t3: T3, t4: T4, ...ts: TS) => R,
   t1: T1,
-  arg2: T2,
-  arg3: T3,
-  arg4: T4
-): (...args: TS) => R;
-
-/**
- * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
- *
- * The partial.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template F The type of the function to partially apply.
- * @param {F} func The function to partially apply.
- * @param {...any[]} partialArgs The arguments to be partially applied.
- * @returns {function(...args: any[]): ReturnType<F>} A new function that takes the remaining arguments and returns the result of the original function.
- *
- * @example
- * const add = (...numbers: number[]) => numbers.reduce((sum, n) => sum + n, 0);
- * const addFive = partial(add, 5);
- * console.log(addFive(1, 2, 3)); // => 11
- */
-export function partial<F extends (...args: any[]) => any>(
-  func: F,
-  ...partialArgs: any[]
-): (...args: any[]) => ReturnType<F>;
+  t2: T2,
+  t3: T3,
+  t4: T4
+): (...ts: TS) => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
