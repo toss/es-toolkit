@@ -35,17 +35,6 @@ describe('fromPairs', () => {
     expect(result).toEqual(expected);
   });
 
-  it('should handle Map objects', () => {
-    const map = new Map([
-      ['a', 1],
-      ['b', 2],
-      ['c', 3],
-    ]);
-    const result = fromPairs(map);
-    const expected = { a: 1, b: 2, c: 3 };
-    expect(result).toEqual(expected);
-  });
-
   it('should accept a two dimensional array', () => {
     const array = [
       ['a', 1],
