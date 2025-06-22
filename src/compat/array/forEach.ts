@@ -1,10 +1,10 @@
 import { identity } from '../../function/identity.ts';
 import { range } from '../../math/range.ts';
-import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { ArrayIterator } from '../_internal/ArrayIterator.ts';
-import { StringIterator } from '../_internal/StringIterator.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import { StringIterator } from '../_internal/StringIterator.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
  * Iterates over elements of array and invokes iteratee for each element.
@@ -73,7 +73,10 @@ export function forEach<T extends object>(collection: T, iteratee?: ObjectIterat
  * forEach([1, 2], value => console.log(value));
  * // => Logs `1` then `2`.
  */
-export function forEach<T, U extends T[] | null | undefined>(collection: U & (T[] | null | undefined), iteratee?: ArrayIterator<T, any>): U;
+export function forEach<T, U extends T[] | null | undefined>(
+  collection: U & (T[] | null | undefined),
+  iteratee?: ArrayIterator<T, any>
+): U;
 
 /**
  * Iterates over characters of string and invokes iteratee for each character.
@@ -101,7 +104,10 @@ export function forEach<T extends string | null | undefined>(collection: T, iter
  * forEach({ 0: 'a', 1: 'b', length: 2 }, value => console.log(value));
  * // => Logs 'a' then 'b'.
  */
-export function forEach<T, L extends ArrayLike<T> | null | undefined>(collection: L & (ArrayLike<T> | null | undefined), iteratee?: ListIterator<T, any>): L;
+export function forEach<T, L extends ArrayLike<T> | null | undefined>(
+  collection: L & (ArrayLike<T> | null | undefined),
+  iteratee?: ListIterator<T, any>
+): L;
 
 /**
  * Iterates over own enumerable string keyed properties of an object and invokes iteratee for each property.
@@ -115,7 +121,10 @@ export function forEach<T, L extends ArrayLike<T> | null | undefined>(collection
  * forEach({ a: 1, b: 2 }, (value, key) => console.log(key));
  * // => Logs 'a' then 'b'.
  */
-export function forEach<T extends object>(collection: T | null | undefined, iteratee?: ObjectIterator<T, any>): T | null | undefined;
+export function forEach<T extends object>(
+  collection: T | null | undefined,
+  iteratee?: ObjectIterator<T, any>
+): T | null | undefined;
 
 /**
  * Iterates over each element of the object invoking the provided callback function for each property.

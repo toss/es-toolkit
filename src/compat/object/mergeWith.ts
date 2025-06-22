@@ -68,7 +68,13 @@ export function mergeWith<T, U, V>(object: T, source1: U, source2: V, customizer
  * mergeWith({ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }, customizer);
  * // => { a: 1, b: 2, c: 3, d: 4 }
  */
-export function mergeWith<T, U, V, W>(object: T, source1: U, source2: V, source3: W, customizer: MergeWithCustomizer): T & U & V & W;
+export function mergeWith<T, U, V, W>(
+  object: T,
+  source1: U,
+  source2: V,
+  source3: W,
+  customizer: MergeWithCustomizer
+): T & U & V & W;
 
 /**
  * This method is like `merge` except that it accepts `customizer` which is invoked to produce the merged values of the destination and source properties.
@@ -90,7 +96,14 @@ export function mergeWith<T, U, V, W>(object: T, source1: U, source2: V, source3
  * mergeWith({ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }, { e: 5 }, customizer);
  * // => { a: 1, b: 2, c: 3, d: 4, e: 5 }
  */
-export function mergeWith<T, U, V, W, X>(object: T, source1: U, source2: V, source3: W, source4: X, customizer: MergeWithCustomizer): T & U & V & W & X;
+export function mergeWith<T, U, V, W, X>(
+  object: T,
+  source1: U,
+  source2: V,
+  source3: W,
+  source4: X,
+  customizer: MergeWithCustomizer
+): T & U & V & W & X;
 
 /**
  * This method is like `merge` except that it accepts `customizer` which is invoked to produce the merged values of the destination and source properties.

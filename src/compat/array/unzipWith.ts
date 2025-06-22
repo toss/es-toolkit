@@ -16,7 +16,10 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * unzipWith([[1, 10, 100], [2, 20, 200]], (a, b) => a + b);
  * // => [3, 30, 300]
  */
-export function unzipWith<T, R>(array: ArrayLike<ArrayLike<T>> | null | undefined, iteratee: (...values: T[]) => R): R[];
+export function unzipWith<T, R>(
+  array: ArrayLike<ArrayLike<T>> | null | undefined,
+  iteratee: (...values: T[]) => R
+): R[];
 
 /**
  * This method is like `unzip` except that it accepts an iteratee to specify
@@ -31,8 +34,6 @@ export function unzipWith<T, R>(array: ArrayLike<ArrayLike<T>> | null | undefine
  * // => [[1, 2], [10, 20], [100, 200]]
  */
 export function unzipWith<T>(array: ArrayLike<ArrayLike<T>> | null | undefined): T[][];
-
-
 
 /**
  * Unzips an array of arrays, applying an `iteratee` function to regrouped elements.

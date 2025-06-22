@@ -36,7 +36,10 @@ export function pullAll<T>(array: T[], values?: ArrayLike<T>): T[];
  * console.log(array);
  * // => [1, 1]
  */
-export function pullAll<L extends ArrayLike<any>>(array: L extends readonly any[] ? never : L, values?: ArrayLike<L[0]>): L;
+export function pullAll<L extends ArrayLike<any>>(
+  array: L extends readonly any[] ? never : L,
+  values?: ArrayLike<L[0]>
+): L;
 
 /**
  * Removes all specified values from an array.

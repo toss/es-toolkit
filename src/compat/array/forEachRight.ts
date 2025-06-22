@@ -1,10 +1,10 @@
 import { identity } from '../../function/identity.ts';
 import { range } from '../../math/range.ts';
-import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { ArrayIterator } from '../_internal/ArrayIterator.ts';
-import { StringIterator } from '../_internal/StringIterator.ts';
 import { ListIterator } from '../_internal/ListIterator.ts';
 import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import { StringIterator } from '../_internal/StringIterator.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
  * Iterates over elements of array from right to left and invokes iteratee for each element.
@@ -73,7 +73,10 @@ export function forEachRight<T extends object>(collection: T, iteratee?: ObjectI
  * forEachRight([1, 2], value => console.log(value));
  * // => Logs `2` then `1`.
  */
-export function forEachRight<T, U extends T[] | null | undefined>(collection: U & (T[] | null | undefined), iteratee?: ArrayIterator<T, any>): U;
+export function forEachRight<T, U extends T[] | null | undefined>(
+  collection: U & (T[] | null | undefined),
+  iteratee?: ArrayIterator<T, any>
+): U;
 
 /**
  * Iterates over characters of string from right to left and invokes iteratee for each character.
@@ -101,7 +104,10 @@ export function forEachRight<T extends string | null | undefined>(collection: T,
  * forEachRight({ 0: 'a', 1: 'b', length: 2 }, value => console.log(value));
  * // => Logs 'b' then 'a'.
  */
-export function forEachRight<T, L extends ArrayLike<T> | null | undefined>(collection: L & (ArrayLike<T> | null | undefined), iteratee?: ListIterator<T, any>): L;
+export function forEachRight<T, L extends ArrayLike<T> | null | undefined>(
+  collection: L & (ArrayLike<T> | null | undefined),
+  iteratee?: ListIterator<T, any>
+): L;
 
 /**
  * Iterates over own enumerable string keyed properties of an object from right to left and invokes iteratee for each property.
@@ -115,7 +121,10 @@ export function forEachRight<T, L extends ArrayLike<T> | null | undefined>(colle
  * forEachRight({ a: 1, b: 2 }, (value, key) => console.log(key));
  * // => Logs 'b' then 'a'.
  */
-export function forEachRight<T extends object>(collection: T | null | undefined, iteratee?: ObjectIterator<T, any>): T | null | undefined;
+export function forEachRight<T extends object>(
+  collection: T | null | undefined,
+  iteratee?: ObjectIterator<T, any>
+): T | null | undefined;
 
 /**
  * Iterates over elements of 'array' from right to left and invokes 'callback' for each element.

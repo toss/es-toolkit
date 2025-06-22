@@ -43,7 +43,11 @@ export function pullAllWith<T>(array: T[], values?: ArrayLike<T>, comparator?: (
  * console.log(array);
  * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
-export function pullAllWith<L extends ArrayLike<any>>(array: L extends readonly any[] ? never : L, values?: ArrayLike<L[0]>, comparator?: (a: L[0], b: L[0]) => boolean): L;
+export function pullAllWith<L extends ArrayLike<any>>(
+  array: L extends readonly any[] ? never : L,
+  values?: ArrayLike<L[0]>,
+  comparator?: (a: L[0], b: L[0]) => boolean
+): L;
 
 /**
  * This method is like `_.pullAll` except that it accepts `comparator` which is
@@ -87,7 +91,11 @@ export function pullAllWith<T, U>(array: T[], values: ArrayLike<U>, comparator: 
  * console.log(array);
  * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
-export function pullAllWith<L extends ArrayLike<any>, U>(array: L extends readonly any[] ? never : L, values: ArrayLike<U>, comparator: (a: L[0], b: U) => boolean): L;
+export function pullAllWith<L extends ArrayLike<any>, U>(
+  array: L extends readonly any[] ? never : L,
+  values: ArrayLike<U>,
+  comparator: (a: L[0], b: U) => boolean
+): L;
 
 /**
  * Removes and returns elements from an array using a provided comparison function to determine which elements to remove.

@@ -13,7 +13,10 @@ import { cloneDeep } from '../../object/cloneDeep.ts';
  * omit({ a: 1, b: '2', c: 3 }, ['a', 'c']);
  * // => { b: '2' }
  */
-export function omit<T>(object: T | null | undefined, ...paths: Array<PropertyKey | readonly PropertyKey[]>): Partial<T>;
+export function omit<T>(
+  object: T | null | undefined,
+  ...paths: Array<PropertyKey | readonly PropertyKey[]>
+): Partial<T>;
 
 /**
  * Creates a new object with specified keys omitted.
