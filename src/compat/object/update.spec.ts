@@ -132,6 +132,8 @@ describe('update', () => {
 
     const actual = map(values, value => {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return [update(value, 'a.b', updater), update(value, ['a', 'b'], updater)];
       } catch (e: unknown) {
         return e instanceof Error ? e.message : 'unknown error';

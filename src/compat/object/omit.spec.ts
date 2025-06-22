@@ -27,6 +27,7 @@ describe('omit', () => {
 
   it('should support path arrays', () => {
     const object = { 'a.b': 1, a: { b: 2 } };
+    // @ts-expect-error - path is a string
     const actual = omit(object, [['a.b']]);
 
     expect(actual).toEqual({ a: { b: 2 } });

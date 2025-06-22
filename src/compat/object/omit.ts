@@ -1,62 +1,56 @@
 import { unset } from './unset.ts';
 import { cloneDeep } from '../../object/cloneDeep.ts';
-
-/**
- * Creates an object composed of the own and inherited enumerable property paths of `object` that are not omitted.
- *
- * @template T
- * @param {T | null | undefined} object - The source object.
- * @param {...Array<PropertyKey | readonly PropertyKey[]>} paths - The property paths to omit.
- * @returns {Partial<T>} - Returns the new object.
- *
- * @example
- * omit({ a: 1, b: '2', c: 3 }, ['a', 'c']);
- * // => { b: '2' }
- */
-export function omit<T>(
-  object: T | null | undefined,
-  ...paths: Array<PropertyKey | readonly PropertyKey[]>
-): Partial<T>;
+import { Many } from '../_internal/Many.ts';
 
 /**
  * Creates a new object with specified keys omitted.
  *
- * This function takes an object and an array of keys, and returns a new object that
- * excludes the properties corresponding to the specified keys.
+ * @template T - The type of object.
+ * @template K - The type of keys to omit.
+ * @param {T | null | undefined} object - The object to omit keys from.
+ * @param {...K} paths - The keys to be omitted from the object.
+ * @returns {Pick<T, Exclude<keyof T, K[number]>>} A new object with the specified keys omitted.
+ *
+ * @example
+ * omit({ a: 1, b: 2, c: 3 }, 'a', 'c');
+ * // => { b: 2 }
+ */
+export function omit<T extends object, K extends PropertyKey[]>(
+  object: T | null | undefined,
+  ...paths: K
+): Pick<T, Exclude<keyof T, K[number]>>;
+
+/**
+ * Creates a new object with specified keys omitted.
  *
  * @template T - The type of object.
- * @template K - The type of keys in object.
- * @param {T} obj - The object to omit keys from.
- * @param {K[]} keys - An array of keys to be omitted from the object.
+ * @template K - The type of keys to omit.
+ * @param {T | null | undefined} object - The object to omit keys from.
+ * @param {...Array<Many<K>>} paths - The keys to be omitted from the object.
  * @returns {Omit<T, K>} A new object with the specified keys omitted.
  *
  * @example
- * const obj = { a: 1, b: 2, c: 3 };
- * const result = omit(obj, ['b', 'c']);
- * // result will be { a: 1 }
+ * omit({ a: 1, b: 2, c: 3 }, 'a', ['b', 'c']);
+ * // => {}
  */
-export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: readonly K[]): Omit<T, K>;
+export function omit<T extends object, K extends keyof T>(
+  object: T | null | undefined,
+  ...paths: Array<Many<K>>
+): Omit<T, K>;
 
 /**
  * Creates a new object with specified keys omitted.
  *
- * This function takes an object and a variable number of keys, and returns a new object that
- * excludes the properties corresponding to the specified keys.
- *
- * Deep keys can be specified for keys.
- *
  * @template T - The type of object.
- * @param {T} obj - The object to omit keys from.
- * @param {...(PropertyKey | PropertyKey[] | PropertyKey[][])} keys - A variable number of keys to be omitted from the object.
+ * @param {T | null | undefined} object - The object to omit keys from.
+ * @param {...Array<Many<PropertyKey>>} paths - The keys to be omitted from the object.
  * @returns {Partial<T>} A new object with the specified keys omitted.
+ *
+ * @example
+ * omit({ a: 1, b: 2, c: 3 }, 'a', 'b');
+ * // => { c: 3 }
  */
-export function omit<
-  // eslint-disable-next-line
-  T extends {},
->(
-  obj: T | null | undefined,
-  ...keys: Array<PropertyKey | readonly PropertyKey[] | ReadonlyArray<readonly PropertyKey[]>>
-): Partial<T>;
+export function omit<T extends object>(object: T | null | undefined, ...paths: Array<Many<PropertyKey>>): Partial<T>;
 
 /**
  * Creates a new object with specified keys omitted.
@@ -67,16 +61,20 @@ export function omit<
  * Deep keys can be specified for keys.
  *
  * @template T - The type of object.
- * @param {T} obj - The object to omit keys from.
- * @param {...(PropertyKey | PropertyKey[] | PropertyKey[][])} keysArr - A variable number of keys to be omitted from the object.
+ * @param {T | null | undefined} obj - The object to omit keys from.
+ * @param {...Array<Many<PropertyKey>> | Array<Many<PropertyKey[]>>} keysArr - A variable number of keys to be omitted from the object.
  * @returns {Partial<T>} A new object with the specified keys omitted.
+ *
+ * @example
+ * omit({ a: 1, b: 2, c: 3 }, 'a', 'b');
+ * // => { c: 3 }
+ *
+ * omit({ a: { b: 1, c: 2 }, d: 3 }, 'a.b', 'd');
+ * // => { a: { c: 2 } }
  */
-export function omit<
-  // eslint-disable-next-line
-  T extends {},
->(
+export function omit<T extends object>(
   obj: T | null | undefined,
-  ...keysArr: Array<PropertyKey | readonly PropertyKey[] | ReadonlyArray<readonly PropertyKey[]>>
+  ...keysArr: Array<Many<PropertyKey>> | Array<Many<PropertyKey[]>>
 ): Partial<T> {
   if (obj == null) {
     return {};
@@ -90,9 +88,7 @@ export function omit<
     switch (typeof keys) {
       case 'object': {
         if (!Array.isArray(keys)) {
-          // eslint-disable-next-line
-          // @ts-ignore
-          keys = Array.from(keys) as PropertyKey[];
+          keys = Array.from(keys as PropertyKey[]);
         }
 
         for (let j = 0; j < keys.length; j++) {

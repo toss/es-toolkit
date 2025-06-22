@@ -5,23 +5,6 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
 import { times } from '../util/times.ts';
 
 /**
- * Creates an array of the own and inherited enumerable property names of `object`.
- *
- * @param {any} [object] - The object to query.
- * @returns {string[]} - Returns the array of property names.
- *
- * @example
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- * Foo.prototype.c = 3;
- * keysIn(new Foo);
- * // => ['a', 'b', 'c']
- */
-export function keysIn(object?: any): string[];
-
-/**
  * This function retrieves the names of string-keyed properties from an object, including those inherited from its prototype.
  *
  * - If the value is not an object, it is converted to an object.
@@ -30,7 +13,7 @@ export function keysIn(object?: any): string[];
  * - If the value is `null` or `undefined`, an empty array is returned.
  * - When handling prototype objects, the `constructor` property is excluded from the results.
  *
- * @param {unknown} [object] - The object to inspect for keys.
+ * @param {any} [object] - The object to inspect for keys.
  * @returns {string[]} An array of string keys from the object.
  *
  * @example
@@ -44,7 +27,7 @@ export function keysIn(object?: any): string[];
  * Foo.prototype.a = 1;
  * console.log(keysIn(new Foo())); // ['a']
  */
-export function keysIn(object?: unknown): string[] {
+export function keysIn(object?: any): string[] {
   if (object == null) {
     return [];
   }

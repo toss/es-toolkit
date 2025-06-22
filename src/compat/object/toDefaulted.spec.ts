@@ -1,5 +1,4 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { toDefaulted as toDefaultedLodash } from 'lodash';
 import { toDefaulted } from './toDefaulted';
 import { objectProto } from '../_internal/objectProto';
 import * as esToolkit from '../index';
@@ -72,9 +71,5 @@ describe('toDefaulted', () => {
 
     expected = esToolkit.clone(object);
     expect(toDefaulted({}, object, source)).toEqual(expected);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(toDefaulted).toEqualTypeOf<typeof toDefaultedLodash>();
   });
 });

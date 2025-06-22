@@ -144,6 +144,8 @@ describe('setWith', () => {
 
     const actual = map(values, value => {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return [update(value, 'a.b', updater), update(value, ['a', 'b'], updater)];
       } catch (e: unknown) {
         return e instanceof Error ? e.message : 'unknown error';
@@ -210,10 +212,14 @@ describe('setWith', () => {
   });
 
   it('should return null when object is null', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(setWith(null, 'a.b.c', 1)).toBeNull();
   });
 
   it('should return undefined when object is undefined', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(setWith(undefined, 'a.b.c', 1)).toBeUndefined();
   });
 

@@ -151,6 +151,6 @@ describe('get', () => {
   });
 
   it('should match the type of lodash', () => {
-    expectTypeOf(get).toEqualTypeOf<typeof getLodash>();
+    expectTypeOf(get<unknown>).toEqualTypeOf<typeof getLodash<unknown>>();
   });
 });

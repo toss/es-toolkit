@@ -1,312 +1,474 @@
 import type { Get } from './get.types.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
+import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
 
 /**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
  *
- * @template T - The type of the object.
- * @template K - The type of the key in the object.
- * @template D - The type of the default value.
+ * @template TObject
+ * @template TKey
+ * @param {TObject} object - The object to query.
+ * @param {TKey | [TKey]} path - The path of the property to get.
+ * @returns {TObject[TKey]} Returns the resolved value.
  *
- * @param {T} object - The object to query.
- * @param {K | [K]} path - The path of the property to get.
- * @returns {T[K]} - Returns the resolved value.
+ * @example
+ * const object = { 'a': [{ 'b': { 'c': 3 } }] };
+ * get(object, 'a[0].b.c');
+ * // => 3
  */
-export function get<T extends object, K extends keyof T>(object: T, path: K | readonly [K]): T[K];
+export function get<TObject extends object, TKey extends keyof TObject>(
+  object: TObject,
+  path: TKey | [TKey]
+): TObject[TKey];
+
 /**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
  *
- * @template T - The type of the object.
- * @template K - The type of the key in the object.
+ * @template TObject
+ * @template TKey
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {TKey | [TKey]} path - The path of the property to get.
+ * @returns {TObject[TKey] | undefined} Returns the resolved value.
  *
- * @param {T | null | undefined} object - The object to query.
- * @param {K | [K]} path - The path of the property to get.
- * @returns {T[K] | undefined} - Returns the resolved value.
+ * @example
+ * const object = { 'a': [{ 'b': { 'c': 3 } }] };
+ * get(object, 'a[0].b.c');
+ * // => 3
  */
-export function get<T extends object, K extends keyof T>(
-  object: T | null | undefined,
-  path: K | readonly [K]
-): T[K] | undefined;
+export function get<TObject extends object, TKey extends keyof TObject>(
+  object: TObject | null | undefined,
+  path: TKey | [TKey]
+): TObject[TKey] | undefined;
+
 /**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
  *
- * @template T - The type of the object.
- * @template K - The type of the key in the object.
- * @template D - The type of the default value.
+ * @template TObject
+ * @template TKey
+ * @template TDefault
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {TKey | [TKey]} path - The path of the property to get.
+ * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
+ * @returns {Exclude<TObject[TKey], undefined> | TDefault} Returns the resolved value.
  *
- * @param {T | null | undefined} object - The object to query.
- * @param {K | [K]} path - The path of the property to get.
- * @param {D} defaultValue - The value returned if the resolved value is undefined.
- * @returns {Exclude<T[K], undefined> | D} - Returns the resolved value.
+ * @example
+ * const object = { 'a': [{ 'b': { 'c': 3 } }] };
+ * get(object, 'a[0].b.c', 'default');
+ * // => 3
  */
-export function get<T extends object, K extends keyof T, D>(
-  object: T | null | undefined,
-  path: K | readonly [K],
-  defaultValue: D
-): Exclude<T[K], undefined> | D;
+export function get<TObject extends object, TKey extends keyof TObject, TDefault>(
+  object: TObject | null | undefined,
+  path: TKey | [TKey],
+  defaultValue: TDefault
+): Exclude<TObject[TKey], undefined> | TDefault;
+
 /**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
  *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @param {TObject} object - The object to query.
+ * @param {[TKey1, TKey2]} path - The path of the property to get.
+ * @returns {TObject[TKey1][TKey2]} Returns the resolved value.
  *
- * @param {T} object - The object to query.
- * @param {[K1, K2]} path - The path of the property to get.
- * @returns {T[K1][K2]} - Returns the resolved value.
+ * @example
+ * const object = { 'a': { 'b': 2 } };
+ * get(object, ['a', 'b']);
+ * // => 2
  */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(
-  object: T,
-  path: readonly [K1, K2]
-): T[K1][K2];
+export function get<TObject extends object, TKey1 extends keyof TObject, TKey2 extends keyof TObject[TKey1]>(
+  object: TObject,
+  path: [TKey1, TKey2]
+): TObject[TKey1][TKey2];
+
 /**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
  *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {[TKey1, TKey2]} path - The path of the property to get.
+ * @returns {NonNullable<TObject[TKey1]>[TKey2] | undefined} Returns the resolved value.
  *
- * @param {T | null | undefined} object - The object to query.
- * @param {[K1, K2]} path - The path of the property to get.
- * @returns {T[K1][K2] | undefined} - Returns the resolved value.
- */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(
-  object: T | null | undefined,
-  path: readonly [K1, K2]
-): T[K1][K2] | undefined;
-/**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
- *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
- * @template D - The type of the default value.
- *
- * @param {T | null | undefined} object - The object to query.
- * @param {[K1, K2]} path - The path of the property to get.
- * @param {D} defaultValue - The value returned if the resolved value is undefined.
- * @returns {Exclude<T[K1][K2], undefined> | D} - Returns the resolved value.
- */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], D>(
-  object: T | null | undefined,
-  path: readonly [K1, K2],
-  defaultValue: D
-): Exclude<T[K1][K2], undefined> | D;
-/**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
- *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
- * @template K3 - The type of the third key in the object.
- *
- * @param {T} object - The object to query.
- * @param {[K1, K2, K3]} path - The path of the property to get.
- * @returns {T[K1][K2][K3]} - Returns the resolved value.
- */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T,
-  path: readonly [K1, K2, K3]
-): T[K1][K2][K3];
-/**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
- *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
- * @template K3 - The type of the third key in the object.
- *
- * @param {T | null | undefined} object - The object to query.
- * @param {[K1, K2, K3]} path - The path of the property to get.
- * @returns {T[K1][K2][K3] | undefined} - Returns the resolved value.
- */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T | null | undefined,
-  path: readonly [K1, K2, K3]
-): T[K1][K2][K3] | undefined;
-/**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
- *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
- * @template K3 - The type of the third key in the object.
- * @template D - The type of the default value.
- *
- * @param {T | null | undefined} object - The object to query.
- * @param {[K1, K2, K3]} path - The path of the property to get.
- * @param {D} defaultValue - The value returned if the resolved value is undefined.
- * @returns {Exclude<T[K1][K2][K3], undefined> | D} - Returns the resolved value.
- */
-export function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], D>(
-  object: T | null | undefined,
-  path: readonly [K1, K2, K3],
-  defaultValue: D
-): Exclude<T[K1][K2][K3], undefined> | D;
-/**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
- *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
- * @template K3 - The type of the third key in the object.
- * @template K4 - The type of the fourth key in the object.
- *
- * @param {T} object - The object to query.
- * @param {[K1, K2, K3, K4]} path - The path of the property to get.
- * @returns {T[K1][K2][K3][K4]} - Returns the resolved value.
+ * @example
+ * const object = { 'a': { 'b': 2 } };
+ * get(object, ['a', 'b']);
+ * // => 2
  */
 export function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
->(object: T, path: readonly [K1, K2, K3, K4]): T[K1][K2][K3][K4];
+  TObject extends object,
+  TKey1 extends keyof TObject,
+  TKey2 extends keyof NonNullable<TObject[TKey1]>,
+>(object: TObject | null | undefined, path: [TKey1, TKey2]): NonNullable<TObject[TKey1]>[TKey2] | undefined;
+
 /**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
  *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
- * @template K3 - The type of the third key in the object.
- * @template K4 - The type of the fourth key in the object.
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @template TDefault
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {[TKey1, TKey2]} path - The path of the property to get.
+ * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
+ * @returns {Exclude<NonNullable<TObject[TKey1]>[TKey2], undefined> | TDefault} Returns the resolved value.
  *
- * @param {T | null | undefined} object - The object to query.
- * @param {[K1, K2, K3, K4]} path - The path of the property to get.
- * @returns {T[K1][K2][K3][K4] | undefined} - Returns the resolved value.
+ * @example
+ * const object = { 'a': { 'b': 2 } };
+ * get(object, ['a', 'b'], 'default');
+ * // => 2
  */
 export function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
->(object: T | null | undefined, path: readonly [K1, K2, K3, K4]): T[K1][K2][K3][K4] | undefined;
-/**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
- *
- * @template T - The type of the object.
- * @template K1 - The type of the first key in the object.
- * @template K2 - The type of the second key in the object.
- * @template K3 - The type of the third key in the object.
- * @template K4 - The type of the fourth key in the object.
- * @template D - The type of the default value.
- *
- * @param {T | null | undefined} object - The object to query.
- * @param {[K1, K2, K3, K4]} path - The path of the property to get.
- * @param {D} defaultValue - The value returned if the resolved value is undefined.
- * @returns {Exclude<T[K1][K2][K3][K4], undefined> | D} - Returns the resolved value.
- */
-export function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
-  D,
+  TObject extends object,
+  TKey1 extends keyof TObject,
+  TKey2 extends keyof NonNullable<TObject[TKey1]>,
+  TDefault,
 >(
-  object: T | null | undefined,
-  path: readonly [K1, K2, K3, K4],
-  defaultValue: D
-): Exclude<T[K1][K2][K3][K4], undefined> | D;
+  object: TObject | null | undefined,
+  path: [TKey1, TKey2],
+  defaultValue: TDefault
+): Exclude<NonNullable<TObject[TKey1]>[TKey2], undefined> | TDefault;
+
 /**
- * Retrieves the value at a given path from an object with numeric keys. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
  *
- * @template T - The type of the value.
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @template TKey3
+ * @param {TObject} object - The object to query.
+ * @param {[TKey1, TKey2, TKey3]} path - The path of the property to get.
+ * @returns {TObject[TKey1][TKey2][TKey3]} Returns the resolved value.
  *
+ * @example
+ * const object = { 'a': { 'b': { 'c': 3 } } };
+ * get(object, ['a', 'b', 'c']);
+ * // => 3
+ */
+export function get<
+  TObject extends object,
+  TKey1 extends keyof TObject,
+  TKey2 extends keyof TObject[TKey1],
+  TKey3 extends keyof TObject[TKey1][TKey2],
+>(object: TObject, path: [TKey1, TKey2, TKey3]): TObject[TKey1][TKey2][TKey3];
+
+/**
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
+ *
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @template TKey3
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {[TKey1, TKey2, TKey3]} path - The path of the property to get.
+ * @returns {NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3] | undefined} Returns the resolved value.
+ *
+ * @example
+ * const object = { 'a': { 'b': { 'c': 3 } } };
+ * get(object, ['a', 'b', 'c']);
+ * // => 3
+ */
+export function get<
+  TObject extends object,
+  TKey1 extends keyof TObject,
+  TKey2 extends keyof NonNullable<TObject[TKey1]>,
+  TKey3 extends keyof NonNullable<NonNullable<TObject[TKey1]>[TKey2]>,
+>(
+  object: TObject | null | undefined,
+  path: [TKey1, TKey2, TKey3]
+): NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3] | undefined;
+
+/**
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
+ *
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @template TKey3
+ * @template TDefault
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {[TKey1, TKey2, TKey3]} path - The path of the property to get.
+ * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
+ * @returns {Exclude<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3], undefined> | TDefault} Returns the resolved value.
+ *
+ * @example
+ * const object = { 'a': { 'b': { 'c': 3 } } };
+ * get(object, ['a', 'b', 'c'], 'default');
+ * // => 3
+ */
+
+/**
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
+ *
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @template TKey3
+ * @template TDefault
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {[TKey1, TKey2, TKey3]} path - The path of the property to get.
+ * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
+ * @returns {Exclude<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3], undefined> | TDefault} Returns the resolved value.
+ *
+ * @example
+ * const object = { 'a': { 'b': { 'c': 3 } } };
+ * get(object, ['a', 'b', 'c'], 'default');
+ * // => 3
+ */
+export function get<
+  TObject extends object,
+  TKey1 extends keyof TObject,
+  TKey2 extends keyof NonNullable<TObject[TKey1]>,
+  TKey3 extends keyof NonNullable<NonNullable<TObject[TKey1]>[TKey2]>,
+  TDefault,
+>(
+  object: TObject | null | undefined,
+  path: [TKey1, TKey2, TKey3],
+  defaultValue: TDefault
+): Exclude<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3], undefined> | TDefault;
+
+/**
+ * Gets the value at path of object.
+ *
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @template TKey3
+ * @template TKey4
+ * @param {TObject} object - The object to query.
+ * @param {[TKey1, TKey2, TKey3, TKey4]} path - The path of the property to get.
+ * @returns {TObject[TKey1][TKey2][TKey3][TKey4]} Returns the resolved value.
+ *
+ * @example
+ * const object = { 'a': { 'b': { 'c': { 'd': 4 } } } };
+ * get(object, ['a', 'b', 'c', 'd']);
+ * // => 4
+ */
+export function get<
+  TObject extends object,
+  TKey1 extends keyof TObject,
+  TKey2 extends keyof TObject[TKey1],
+  TKey3 extends keyof TObject[TKey1][TKey2],
+  TKey4 extends keyof TObject[TKey1][TKey2][TKey3],
+>(object: TObject, path: [TKey1, TKey2, TKey3, TKey4]): TObject[TKey1][TKey2][TKey3][TKey4];
+
+/**
+ * Gets the value at path of object. If the resolved value is undefined, undefined is returned.
+ *
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @template TKey3
+ * @template TKey4
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {[TKey1, TKey2, TKey3, TKey4]} path - The path of the property to get.
+ * @returns {NonNullable<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3]>[TKey4] | undefined} Returns the resolved value.
+ *
+ * @example
+ * const object = { 'a': { 'b': { 'c': { 'd': 4 } } } };
+ * get(object, ['a', 'b', 'c', 'd']);
+ * // => 4
+ */
+export function get<
+  TObject extends object,
+  TKey1 extends keyof TObject,
+  TKey2 extends keyof NonNullable<TObject[TKey1]>,
+  TKey3 extends keyof NonNullable<NonNullable<TObject[TKey1]>[TKey2]>,
+  TKey4 extends keyof NonNullable<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3]>,
+>(
+  object: TObject | null | undefined,
+  path: [TKey1, TKey2, TKey3, TKey4]
+): NonNullable<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3]>[TKey4] | undefined;
+
+/**
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
+ *
+ * @template TObject
+ * @template TKey1
+ * @template TKey2
+ * @template TKey3
+ * @template TKey4
+ * @template TDefault
+ * @param {TObject | null | undefined} object - The object to query.
+ * @param {[TKey1, TKey2, TKey3, TKey4]} path - The path of the property to get.
+ * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
+ * @returns {Exclude<NonNullable<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3]>[TKey4], undefined> | TDefault} Returns the resolved value.
+ *
+ * @example
+ * const object = { 'a': { 'b': { 'c': { 'd': 4 } } } };
+ * get(object, ['a', 'b', 'c', 'd'], 'default');
+ * // => 4
+ */
+export function get<
+  TObject extends object,
+  TKey1 extends keyof TObject,
+  TKey2 extends keyof NonNullable<TObject[TKey1]>,
+  TKey3 extends keyof NonNullable<NonNullable<TObject[TKey1]>[TKey2]>,
+  TKey4 extends keyof NonNullable<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3]>,
+  TDefault,
+>(
+  object: TObject | null | undefined,
+  path: [TKey1, TKey2, TKey3, TKey4],
+  defaultValue: TDefault
+): Exclude<NonNullable<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3]>[TKey4], undefined> | TDefault;
+
+/**
+ * Gets the value at path of object.
+ *
+ * @template T
  * @param {Record<number, T>} object - The object to query.
  * @param {number} path - The path of the property to get.
- * @returns {T} - Returns the resolved value.
+ * @returns {T} Returns the resolved value.
+ *
+ * @example
+ * const object = { 0: 'a', 1: 'b', 2: 'c' };
+ * get(object, 1);
+ * // => 'b'
  */
 export function get<T>(object: Record<number, T>, path: number): T;
+
 /**
- * Retrieves the value at a given path from an object with numeric keys. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, undefined is returned.
  *
- * @template T - The type of the value.
- *
+ * @template T
  * @param {Record<number, T> | null | undefined} object - The object to query.
  * @param {number} path - The path of the property to get.
- * @returns {T | undefined} - Returns the resolved value.
+ * @returns {T | undefined} Returns the resolved value.
+ *
+ * @example
+ * const object = { 0: 'a', 1: 'b', 2: 'c' };
+ * get(object, 1);
+ * // => 'b'
  */
 export function get<T>(object: Record<number, T> | null | undefined, path: number): T | undefined;
+
 /**
- * Retrieves the value at a given path from an object with numeric keys. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
  *
- * @template T - The type of the value.
- * @template D - The type of the default value.
- *
+ * @template T
+ * @template TDefault
  * @param {Record<number, T> | null | undefined} object - The object to query.
  * @param {number} path - The path of the property to get.
- * @param {D} defaultValue - The value returned if the resolved value is undefined.
- * @returns {T | D} - Returns the resolved value.
- */
-export function get<T, D>(object: Record<number, T> | null | undefined, path: number, defaultValue: D): T | D;
-/**
- * Retrieves the value at a given path from a null or undefined object, returning the default value.
+ * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
+ * @returns {T | TDefault} Returns the resolved value.
  *
- * @template D - The type of the default value.
+ * @example
+ * const object = { 0: 'a', 1: 'b', 2: 'c' };
+ * get(object, 1, 'default');
+ * // => 'b'
+ */
+export function get<T, TDefault>(
+  object: Record<number, T> | null | undefined,
+  path: number,
+  defaultValue: TDefault
+): T | TDefault;
+
+/**
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
+ *
+ * @template TDefault
+ * @param {null | undefined} object - The object to query.
+ * @param {PropertyPath} path - The path of the property to get.
+ * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
+ * @returns {TDefault} Returns the default value.
+ *
+ * @example
+ * get(null, 'a.b.c', 'default');
+ * // => 'default'
+ */
+export function get<TDefault>(object: null | undefined, path: PropertyPath, defaultValue: TDefault): TDefault;
+
+/**
+ * Gets the value at path of object. If the resolved value is undefined, undefined is returned.
  *
  * @param {null | undefined} object - The object to query.
- * @param {PropertyKey} path - The path of the property to get.
- * @param {D} defaultValue - The value returned if the resolved value is undefined.
- * @returns {D} - Returns the default value.
+ * @param {PropertyPath} path - The path of the property to get.
+ * @returns {undefined} Returns undefined.
+ *
+ * @example
+ * get(null, 'a.b.c');
+ * // => undefined
  */
-export function get<D>(object: null | undefined, path: PropertyKey, defaultValue: D): D;
+export function get(object: null | undefined, path: PropertyPath): undefined;
+
 /**
- * Retrieves the value at a given path from a null or undefined object, returning undefined.
+ * Gets the value at path of object using type-safe path.
  *
- * @param {null | undefined} object - The object to query.
- * @param {PropertyKey} path - The path of the property to get.
- * @returns {undefined} - Returns undefined.
+ * @template TObject
+ * @template TPath
+ * @param {TObject} data - The object to query.
+ * @param {TPath} path - The path of the property to get.
+ * @returns {string extends TPath ? any : Get<TObject, TPath>} Returns the resolved value.
+ *
+ * @example
+ * const object = { a: { b: { c: 1 } } };
+ * get(object, 'a.b.c');
+ * // => 1
  */
-export function get(object: null | undefined, path: PropertyKey): undefined;
+export function get<TObject, TPath extends string>(
+  data: TObject,
+  path: TPath
+): string extends TPath ? any : Get<TObject, TPath>;
+
 /**
- * Retrieves the value at a given path from a string-keyed object. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object using type-safe path. If the resolved value is undefined, the defaultValue is returned.
  *
- * @template T - The type of the object.
- * @template P - The type of the path.
+ * @template TObject
+ * @template TPath
+ * @template TDefault
+ * @param {TObject} data - The object to query.
+ * @param {TPath} path - The path of the property to get.
+ * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
+ * @returns {Exclude<Get<TObject, TPath>, null | undefined> | TDefault} Returns the resolved value.
  *
- * @param {T} data - The object to query.
- * @param {P} path - The path of the property to get.
- * @returns {string extends P ? any : Get<T, P>} - Returns the resolved value.
+ * @example
+ * const object = { a: { b: { c: 1 } } };
+ * get(object, 'a.b.d', 'default');
+ * // => 'default'
  */
-export function get<T, P extends string>(data: T, path: P): string extends P ? any : Get<T, P>;
+export function get<TObject, TPath extends string, TDefault = Get<TObject, TPath>>(
+  data: TObject,
+  path: TPath,
+  defaultValue: TDefault
+): Exclude<Get<TObject, TPath>, null | undefined> | TDefault;
+
 /**
- * Retrieves the value at a given path from a string-keyed object. If the resolved value is undefined, the defaultValue is returned instead.
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned.
  *
- * @template T - The type of the object.
- * @template P - The type of the path.
- * @template D - The type of the default value.
+ * @param {any} object - The object to query.
+ * @param {PropertyPath} path - The path of the property to get.
+ * @param {any} [defaultValue] - The value returned if the resolved value is undefined.
+ * @returns {any} Returns the resolved value.
  *
- * @param {T} data - The object to query.
- * @param {P} path - The path of the property to get.
- * @param {D} defaultValue - The value returned if the resolved value is undefined.
- * @returns {Exclude<Get<T, P>, null | undefined> | D} - Returns the resolved value.
+ * @example
+ * const object = { a: { b: { c: 1 } } };
+ * get(object, 'a.b.c', 'default');
+ * // => 1
  */
-export function get<T, P extends string, D = Get<T, P>>(
-  data: T,
-  path: P,
-  defaultValue: D
-): Exclude<Get<T, P>, null | undefined> | D;
+export function get(object: any, path: PropertyPath, defaultValue?: any): any;
+
 /**
  * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
  *
- * @param {unknown} object - The object to query.
+ * @param {any} object - The object to query.
  * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to get.
- * @param {unknown} [defaultValue] - The value returned if the resolved value is undefined.
- * @returns {any} - Returns the resolved value.
- */
-export function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
-/**
- * Retrieves the value at a given path from an object. If the resolved value is undefined, the defaultValue is returned instead.
+ * @param {any} [defaultValue] - The value returned if the resolved value is undefined.
+ * @returns {any} Returns the resolved value.
  *
- * @param {unknown} object - The object to query.
- * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to get.
- * @param {unknown} [defaultValue] - The value returned if the resolved value is undefined.
- * @returns {any} - Returns the resolved value.
+ * @example
+ * const object = { a: { b: { c: 1 } } };
+ * get(object, 'a.b.c');
+ * // => 1
+ *
+ * get(object, ['a', 'b', 'c']);
+ * // => 1
+ *
+ * get(object, 'a.b.d', 'default');
+ * // => 'default'
  */
 export function get(object: any, path: PropertyKey | readonly PropertyKey[], defaultValue?: any): any {
   if (object == null) {

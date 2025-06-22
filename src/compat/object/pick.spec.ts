@@ -57,9 +57,11 @@ describe('compat/pick', () => {
       const foo = new Foo();
       const actual = pick(foo, resolve(foo, [symbol, symbol2, symbol3]));
 
+      // @ts-expect-error - symbol is a symbol
       expect(actual[symbol]).toBe(1);
+      // @ts-expect-error - symbol2 is a symbol
       expect(actual[symbol2]).toBe(2);
-
+      // @ts-expect-error - symbol3 is a symbol
       expect(actual[symbol3]).toBe(3);
     }
   });

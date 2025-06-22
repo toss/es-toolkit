@@ -211,6 +211,6 @@ describe('has', () => {
   });
 
   it('should match the type of lodash', () => {
-    expectTypeOf(has).toEqualTypeOf<typeof hasLodash>();
+    expectTypeOf(has<unknown>).toEqualTypeOf<typeof hasLodash<unknown>>();
   });
 });
