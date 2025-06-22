@@ -1,8 +1,9 @@
+import { identity } from '../../function/identity.ts';
 import { negate } from '../../function/negate.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { toArray } from '../_internal/toArray.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
-import { iteratee as createIteratee, iteratee } from '../util/iteratee.ts';
+import { iteratee as createIteratee } from '../util/iteratee.ts';
 
 /**
  * Creates a slice of array with elements taken from the end. Elements are taken until predicate
@@ -84,18 +85,18 @@ export function takeRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  */
 export function takeRightWhile<T>(
   _array: ArrayLike<T> | null | undefined,
-  predicate:
+  predicate?:
     | ((value: T, index: number, array: ArrayLike<T>) => unknown)
     | Partial<T>
     | [keyof T, unknown]
-    | PropertyKey = iteratee
+    | PropertyKey
 ): T[] {
   if (!isArrayLikeObject(_array)) {
     return [];
   }
 
   const array = toArray(_array);
-  const index = array.findLastIndex(negate(createIteratee(predicate)));
+  const index = array.findLastIndex(negate(createIteratee(predicate ?? identity)));
 
   return array.slice(index + 1);
 }

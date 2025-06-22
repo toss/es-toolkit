@@ -43,6 +43,10 @@ import { toPath } from '../util/toPath.ts';
  * has(rect, 'area'); // false - has only checks own properties
  */
 export function hasIn<T>(object: T, path: PropertyPath): boolean {
+  if (object == null) {
+    return false;
+  }
+
   let resolvedPath;
 
   if (Array.isArray(path)) {
@@ -72,7 +76,7 @@ export function hasIn<T>(object: T, path: PropertyPath): boolean {
       }
     }
 
-    current = current[key] as T;
+    current = current[key] as NonNullable<T>;
   }
 
   return true;

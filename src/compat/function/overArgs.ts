@@ -57,7 +57,7 @@ export function overArgs(
     throw new TypeError('Expected a function');
   }
 
-  const transforms = Array.isArray(_transforms) ? _transforms : [_transforms];
+  const transforms = _transforms.flat();
 
   return function (this: any, ...args: any[]) {
     const length = Math.min(args.length, transforms.length);

@@ -103,6 +103,10 @@ describe('forOwn', () => {
 
     expect(getOwnEnumerableStringKeys(a)).toEqual(['0', '1', '2', '3']);
   });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(forOwn).toEqualTypeOf<typeof forOwnLodash>();
+  });
 });
 
 function getOwnEnumerableStringKeys(object: object) {
@@ -110,10 +114,6 @@ function getOwnEnumerableStringKeys(object: object) {
 
   forOwn(object, (_, key) => {
     keys.push(key);
-
-    it('should match the type of lodash', () => {
-      expectTypeOf(forOwn).toEqualTypeOf<typeof forOwnLodash>();
-    });
   });
 
   return keys;

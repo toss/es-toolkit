@@ -1,5 +1,6 @@
 import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { toArray } from '../_internal/toArray.ts';
+import { identity } from '../function/identity.ts';
 import { negate } from '../function/negate.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
@@ -84,18 +85,18 @@ export function takeWhile<T>(array: ArrayLike<T> | null | undefined, predicate?:
  **/
 export function takeWhile<T>(
   array: ArrayLike<T> | null | undefined,
-  predicate:
+  predicate?:
     | ((value: T, index: number, array: ArrayLike<T>) => unknown)
     | Partial<T>
     | [keyof T, unknown]
-    | PropertyKey = iteratee
+    | PropertyKey
 ): T[] {
   if (!isArrayLikeObject(array)) {
     return [];
   }
 
   const _array = toArray(array);
-  const index = _array.findIndex(negate(iteratee(predicate)));
+  const index = _array.findIndex(negate(iteratee(predicate ?? identity)));
 
   return index === -1 ? _array : _array.slice(0, index);
 }
