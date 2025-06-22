@@ -1,4 +1,4 @@
-import { List, ValueIteratee } from 'lodash';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
@@ -15,7 +15,10 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * countBy([6.1, 4.2, 6.3], Math.floor); // => { '4': 1, '6': 2 }
  * countBy(['one', 'two', 'three'], 'length'); // => { '3': 2, '5': 1 }
  */
-export function countBy<T>(collection: List<T> | null | undefined, iteratee?: ValueIteratee<T>): Record<string, number>;
+export function countBy<T>(
+  collection: ArrayLike<T> | null | undefined,
+  iteratee?: ValueIteratee<T>
+): Record<string, number>;
 
 export function countBy<T extends object>(
   collection: T | null | undefined,

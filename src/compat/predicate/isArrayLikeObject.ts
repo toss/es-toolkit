@@ -1,10 +1,10 @@
-import { FunctionBase } from 'lodash';
 import { isArrayLike } from './isArrayLike.ts';
 import { isObjectLike } from './isObjectLike.ts';
 
 export function isArrayLikeObject<T extends { __lodashAnyHack: any }>(value: T): boolean;
 export function isArrayLikeObject(
-  value: ((...args: any[]) => any) | FunctionBase | string | boolean | number | null | undefined
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  value: ((...args: any[]) => any) | Function | string | boolean | number | null | undefined
 ): value is never;
 export function isArrayLikeObject(value: any): value is object & { length: number };
 

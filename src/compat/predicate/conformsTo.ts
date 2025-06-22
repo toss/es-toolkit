@@ -1,4 +1,4 @@
-import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject';
+import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject.ts';
 
 /**
  * Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`.
