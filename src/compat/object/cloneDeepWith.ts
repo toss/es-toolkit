@@ -2,6 +2,11 @@ import { cloneDeepWith as cloneDeepWithToolkit } from '../../object/cloneDeepWit
 import { copyProperties } from '../../object/cloneDeepWith.ts';
 import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tags.ts';
 
+type CloneDeepWithCustomizer<TObject> = (value: any, key: number | string | undefined, object: TObject | undefined, stack: any) => any;
+
+export function cloneDeepWith<T>(value: T, customizer: CloneDeepWithCustomizer<T>): any;
+export function cloneDeepWith<T>(value: T): T;
+
 /**
  * Creates a deep clone of the given object using a customizer function.
  *

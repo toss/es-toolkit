@@ -2,6 +2,9 @@ import { get } from './get.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isString } from '../predicate/isString.ts';
 
+export function at<T>(object: Dictionary<T> | NumericDictionary<T> | null | undefined, ...props: PropertyPath[]): T[];
+export function at<T extends object>(object: T | null | undefined, ...props: Array<Many<keyof T>>): Array<T[keyof T]>;
+
 /**
  * Returns an array of values corresponding to `paths` of `object`.
  *
