@@ -1,7 +1,8 @@
 import { partialImpl } from '../../function/partial.ts';
+import type { Toolkit } from '../toolkit.ts';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-type __ = Placeholder;
+type __ = Placeholder | Toolkit;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
