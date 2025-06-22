@@ -63,8 +63,6 @@ export default () => {
  * }) => import('rollup').RollupOptions}
  */
 function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) {
-  const isESM = format === 'esm';
-
   return {
     input: mapInputs(entrypoints),
     plugins: [

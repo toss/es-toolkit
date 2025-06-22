@@ -11,9 +11,9 @@ import { keys } from './keys.ts';
  *   this.a = () => 'a';
  *   this.b = () => 'b';
  * }
- * 
+ *
  * Foo.prototype.c = () => 'c';
- * 
+ *
  * functions(new Foo);
  * // => ['a', 'b']
  */

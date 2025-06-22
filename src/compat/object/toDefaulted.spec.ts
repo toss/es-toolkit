@@ -1,4 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { toDefaulted } from './toDefaulted';
 import { objectProto } from '../_internal/objectProto';
 import * as esToolkit from '../index';

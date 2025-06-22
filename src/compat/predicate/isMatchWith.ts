@@ -1,7 +1,7 @@
 import { isMatch } from './isMatch.ts';
 import { isObject } from './isObject.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
-import type { isMatchWithCustomizer } from '../_internal/isMatchWithCustomizer.ts';
+import type { IsMatchWithCustomizer } from '../_internal/IsMatchWithCustomizer.ts';
 import { eq } from '../util/eq.ts';
 
 /**
@@ -10,7 +10,7 @@ import { eq } from '../util/eq.ts';
  *
  * @param {object} target - The value to be tested for matching
  * @param {object} source - The pattern/template to match against
- * @param {isMatchWithCustomizer} compare - Custom comparison function for fine-grained control
+ * @param {IsMatchWithCustomizer} compare - Custom comparison function for fine-grained control
  * @returns {boolean} `true` if the target matches the source pattern, `false` otherwise
  *
  * @example
@@ -28,7 +28,7 @@ import { eq } from '../util/eq.ts';
  *   caseInsensitiveCompare
  * ); // true
  */
-export function isMatchWith(target: object, source: object, compare: isMatchWithCustomizer): boolean;
+export function isMatchWith(target: object, source: object, compare: IsMatchWithCustomizer): boolean;
 
 /**
  * Performs a deep comparison between a target value and a source pattern to determine if they match,

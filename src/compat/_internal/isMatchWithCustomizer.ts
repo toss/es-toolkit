@@ -1,4 +1,4 @@
-export type isMatchWithCustomizer = (
+export type IsMatchWithCustomizer = (
   value: any,
   other: any,
   indexOrKey: PropertyKey,
