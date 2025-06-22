@@ -1,4 +1,5 @@
 import { cloneDeep } from './cloneDeep.ts';
+import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { clone } from '../../object/clone.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
@@ -411,6 +412,10 @@ function mergeWithDeep(
 
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
+
+    if (isUnsafeProperty(key)) {
+      continue;
+    }
 
     let sourceValue = source[key];
     let targetValue = target[key];

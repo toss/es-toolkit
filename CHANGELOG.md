@@ -1,4 +1,11 @@
-# es-toolkit Changelog
+## Version v1.39.4
+
+Released on June 21st, 2025.
+
+- Fixed prototype pollution issue in es-toolkit to enhance security.
+- Enhanced build system to provide compat/\* functions in CommonJS format by default.
+
+We thank @raon0211, and @dayongkr for their contributions.
 
 ## Version v1.39.3
 
