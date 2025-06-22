@@ -59,6 +59,8 @@ describe('camelCase', () => {
 
   it('should coerce string to a string', () => {
     expect(camelCase(Object('foo bar'))).toBe('fooBar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(camelCase({ toString: () => 'foo bar' })).toBe('fooBar');
   });
 

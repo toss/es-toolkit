@@ -41,6 +41,8 @@ describe('startCase', () => {
   it(`should coerce \`string\` to a string`, () => {
     const string = 'foo bar';
     expect(startCase(Object(string))).toBe('Foo Bar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(startCase({ toString: () => string })).toBe('Foo Bar');
   });
 

@@ -59,7 +59,6 @@ describe('padStart', () => {
       const expected = chars ? chars : '  ';
       // @ts-expect-error - invalid string
       expect(padStart(null, 2, chars)).toBe(expected);
-      // @ts-expect-error - invalid string
       expect(padStart(undefined, 2, chars)).toBe(expected);
       expect(padStart('', 2, chars)).toBe(expected);
     });

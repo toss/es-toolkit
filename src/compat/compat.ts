@@ -204,7 +204,6 @@ export { valuesIn } from './object/valuesIn.ts';
 export { isMatchWith } from './predicate/isMatchWith.ts';
 export { isNative } from './predicate/isNative.ts';
 
-export { capitalize } from '../string/capitalize.ts';
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';
 export { isArguments } from './predicate/isArguments.ts';
@@ -239,6 +238,7 @@ export { isWeakMap } from './predicate/isWeakMap.ts';
 export { isWeakSet } from './predicate/isWeakSet.ts';
 export { matches } from './predicate/matches.ts';
 export { matchesProperty } from './predicate/matchesProperty.ts';
+export { capitalize } from './string/capitalize.ts';
 export { bindAll } from './util/bindAll.ts';
 
 export { camelCase } from './string/camelCase.ts';

@@ -41,6 +41,8 @@ describe('lowerCase', () => {
   it(`should coerce \`string\` to a string`, () => {
     const string = 'foo bar';
     expect(lowerCase(Object(string))).toBe('foo bar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(lowerCase({ toString: () => string })).toBe('foo bar');
   });
 

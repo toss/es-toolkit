@@ -409,6 +409,8 @@ describe('template', () => {
     const data = { a: 1 };
 
     expect('a' in templateSettings).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     template('', {}, data);
     expect('a' in templateSettings).toBe(false);
   });

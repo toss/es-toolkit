@@ -77,9 +77,17 @@ describe('trimStart', () => {
     const string = 'hello world';
     const expected = 'o world';
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['hel'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['he', 'l'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['eh', 'l'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['l', 'e', 'h'])).toBe(expected);
   });
 

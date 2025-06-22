@@ -26,8 +26,6 @@ describe('replace', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(replace(string)).toBe(string);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     expect(replace(string, 'de')).toBe(string);
   });
 

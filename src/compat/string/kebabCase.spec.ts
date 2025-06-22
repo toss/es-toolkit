@@ -41,6 +41,8 @@ describe('kebabCase', () => {
   it(`should coerce \`string\` to a string`, () => {
     const string = 'foo bar';
     expect(kebabCase(Object(string))).toBe('foo-bar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(kebabCase({ toString: () => string })).toBe('foo-bar');
   });
 

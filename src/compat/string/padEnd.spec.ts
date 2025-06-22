@@ -59,7 +59,6 @@ describe('padEnd', () => {
       const expected = chars ? chars : '  ';
       // @ts-expect-error - invalid string
       expect(padEnd(null, 2, chars)).toBe(expected);
-      // @ts-expect-error - invalid string
       expect(padEnd(undefined, 2, chars)).toBe(expected);
       expect(padEnd('', 2, chars)).toBe(expected);
     });

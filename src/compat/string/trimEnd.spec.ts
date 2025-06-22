@@ -29,6 +29,8 @@ describe('trimEnd', () => {
     const expected = `${'-_-'}a-b-c`;
 
     expect(func(string, '_-')).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['-', '_'])).toBe(expected);
   });
 
@@ -78,9 +80,17 @@ describe('trimEnd', () => {
     const string = 'hello world';
     const expected = 'hello wo';
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['rld'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['rl', 'd'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['d', 'lr'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['d', 'l', 'r'])).toBe(expected);
   });
 

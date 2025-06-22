@@ -41,6 +41,8 @@ describe('snakeCase', () => {
   it(`should coerce \`string\` to a string`, () => {
     const string = 'foo bar';
     expect(snakeCase(Object(string))).toBe('foo_bar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(snakeCase({ toString: () => string })).toBe('foo_bar');
   });
 
