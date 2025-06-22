@@ -47,7 +47,7 @@ describe('cloneWith', () => {
 
   it('should perform a shallow clone when `customizer` returns `undefined`', () => {
     const object = { a: [1, 2, 3] };
-    const actual = cloneWith(object, noop);
+    const actual = cloneWith(object, noop) as any;
 
     expect(actual).toEqual(object);
     expect(actual).not.toBe(object);
@@ -164,7 +164,7 @@ describe('cloneWith', () => {
       [Symbol.iterator]: Array.prototype[Symbol.iterator],
     };
 
-    const actual = cloneWith(args, noop);
+    const actual = cloneWith(args, noop) as any;
 
     expect(actual).toHaveProperty('0', 1);
     expect(actual).toHaveProperty('1', 2);
@@ -299,7 +299,7 @@ describe('cloneWith', () => {
     }
 
     const buffer = new ArrayBuffer(10);
-    const actual = cloneWith(buffer, noop);
+    const actual = cloneWith(buffer, noop) as any;
 
     expect(actual.byteLength).toBe(buffer.byteLength);
     expect(actual).not.toBe(buffer);
@@ -314,7 +314,7 @@ describe('cloneWith', () => {
 
     lodashStable.each(sizes, size => {
       const buffer = new ArrayBuffer(size);
-      const actual = cloneWith(buffer, noop);
+      const actual = cloneWith(buffer, noop) as any;
 
       expect(actual.byteLength).toBe(size);
       expect(actual).not.toBe(buffer);
@@ -334,7 +334,7 @@ describe('cloneWith', () => {
     dataView.setFloat32(4, 3.14159, true);
     dataView.setFloat64(8, 123456789.123456, true);
 
-    const cloned = cloneWith(dataView, noop);
+    const cloned = cloneWith(dataView, noop) as any;
 
     expect(cloned).not.toBe(dataView);
     expect(cloned.buffer).not.toBe(dataView.buffer);
@@ -362,7 +362,7 @@ describe('cloneWith', () => {
     const regexp = /c/g;
     regexp.exec('abcde');
 
-    const actual = cloneWith(regexp, noop);
+    const actual = cloneWith(regexp, noop) as any;
     expect(actual.lastIndex).toBe(3);
   });
 
@@ -551,7 +551,7 @@ describe('cloneWith', () => {
   it('should perform a shallow clone when used as an iteratee for methods like `_.map` and customizer returns undefined', () => {
     const expected = [{ a: [0] }, { b: [1] }];
     const customizer = () => undefined;
-    const actual = expected.map(obj => cloneWith(obj, customizer));
+    const actual = expected.map(obj => cloneWith(obj, customizer)) as any;
 
     expect(actual).toEqual(expected);
     expect(actual[0]).not.toBe(expected[0]);
@@ -666,7 +666,7 @@ describe('cloneWith', () => {
       str: 'test',
     };
 
-    const result = cloneWith(obj, customizer);
+    const result = cloneWith(obj, customizer) as any;
 
     expect(result.num).toBe(42);
     expect(result.str).toBe('test');

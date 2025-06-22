@@ -2,9 +2,39 @@ import { cloneDeepWith as cloneDeepWithToolkit } from '../../object/cloneDeepWit
 import { copyProperties } from '../../object/cloneDeepWith.ts';
 import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tags.ts';
 
-type CloneDeepWithCustomizer<TObject> = (value: any, key: number | string | undefined, object: TObject | undefined, stack: any) => any;
+type CloneDeepWithCustomizer<T> = (value: any, key: number | string | undefined, object: T | undefined, stack: any) => any;
 
+/**
+ * Creates a deep clone of a value using a customizer function.
+ *
+ * @template T - The type of the value to clone.
+ * @param {T} value - The value to clone.
+ * @param {CloneDeepWithCustomizer<T>} customizer - The function to customize cloning.
+ * @returns {any} Returns the cloned value.
+ *
+ * @example
+ * const obj = { a: 1, b: { c: 2 } };
+ * const cloned = cloneDeepWith(obj, (value) => {
+ *   if (typeof value === 'number') {
+ *     return value * 2;
+ *   }
+ * });
+ * // => { a: 2, b: { c: 4 } }
+ */
 export function cloneDeepWith<T>(value: T, customizer: CloneDeepWithCustomizer<T>): any;
+
+/**
+ * Creates a deep clone of a value.
+ *
+ * @template T - The type of the value to clone.
+ * @param {T} value - The value to clone.
+ * @returns {T} Returns the cloned value.
+ *
+ * @example
+ * const obj = { a: 1, b: { c: 2 } };
+ * const cloned = cloneDeepWith(obj);
+ * // => { a: 1, b: { c: 2 } }
+ */
 export function cloneDeepWith<T>(value: T): T;
 
 /**

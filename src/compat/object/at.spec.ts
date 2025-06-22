@@ -56,7 +56,7 @@ describe('at', () => {
 
     const actual = map(falsey, object => {
       try {
-        return at(object, 0, 1, 'pop', 'push');
+        return at(object as any, 0, 1, 'pop', 'push');
       } catch (e) {
         return Array(4).fill(undefined);
       }
@@ -71,7 +71,7 @@ describe('at', () => {
   });
 
   it('should work with `arguments` object as secondary arguments', () => {
-    const actual = at([1, 2, 3, 4, 5], args);
+    const actual = at([1, 2, 3, 4, 5], args as any);
     expect(actual).toEqual([2, 3, 4]);
   });
 
