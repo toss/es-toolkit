@@ -29,6 +29,8 @@ describe('isMatchWith', () => {
       [object1.b.b, object2.b.b, 'b', object1.b, object2.b],
     ];
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     isMatchWith(object1, object2, function () {
       // eslint-disable-next-line prefer-rest-params
       argsList.push(Array.prototype.slice.call(arguments, 0, -1));
@@ -38,6 +40,8 @@ describe('isMatchWith', () => {
   });
 
   it('should handle comparisons when `customizer` returns `undefined`', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: 1 }, { a: 1 })).toBe(true);
   });
 
@@ -61,6 +65,8 @@ describe('isMatchWith', () => {
 
   it('should return a boolean value even when `customizer` does not', () => {
     const object = { a: 1 };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = isMatchWith(object, { a: 1 }, stubA);
 
     expect(actual).toBe(true);
@@ -69,6 +75,8 @@ describe('isMatchWith', () => {
 
     const actualArray: boolean[] = [];
     lodashStable.each(falsey, (value: unknown) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       actualArray.push(isMatchWith(object, { a: 2 }, lodashStable.constant(value)));
     });
 
@@ -78,6 +86,8 @@ describe('isMatchWith', () => {
   it('should provide `stack` to `customizer`', () => {
     let actual: unknown;
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     isMatchWith({ a: 1 }, { a: 1 }, function (...args: unknown[]) {
       actual = last(args);
     });
@@ -125,6 +135,9 @@ describe('isMatchWith', () => {
           const argsList: any[] = [];
 
           const minimumExpectedCalls = 2;
+
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           isMatchWith({ a: pair[0] }, { a: pair[1] }, function (...args: unknown[]) {
             argsList.push(args.slice(0, -1));
           });
@@ -139,21 +152,45 @@ describe('isMatchWith', () => {
   });
 
   it('should handle primitive value comparisons', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(1, 1)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(1, 2)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith('a', 'a')).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith('a', 'b')).toBe(false);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, 0)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, false)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, null)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, 'abc')).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, 123)).toBe(true);
   });
 
   it('should handle arrays', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith([1, 2, 3], [1, 2])).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith([1, 2], [1, 2, 3])).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, [1, 2])).toBe(false);
     expect(isMatchWith([{ id: 1 }, { id: 2 }, { id: 3 }], [{ id: 1 }, { id: 99 }], stubFalse)).toBe(false);
 
@@ -170,9 +207,17 @@ describe('isMatchWith', () => {
     const map2 = new Map([['a', 1]]);
     const map3 = new Map([['a', 2]]);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(map1, map2)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(map1, map3)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, new Map())).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(new Map([['a', 1]]), new Map([['b', 2]]))).toBe(false);
 
     const keyTrueCustomizer = (objValue: any, srcValue: any, key: any) => (key === 'a' ? true : undefined);
@@ -201,10 +246,20 @@ describe('isMatchWith', () => {
     const set2 = new Set([1, 2]);
     const set3 = new Set([1, 3]);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(set1, set2)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(set1, set3)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, new Set())).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(new Set([1]), new Set([1, 2, 3]))).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(new Set([1, 2]), new Set([99]))).toBe(false);
 
     const valueCustomizer = (objValue: any, srcValue: any) => (objValue === 1 && srcValue === 3 ? true : undefined);
@@ -218,33 +273,65 @@ describe('isMatchWith', () => {
     function fn2() {}
     fn1.a = 1;
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(fn1, fn2)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(fn1, { a: 1 })).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, fn1)).toBe(false);
 
     const fnWithProps = function () {};
     fnWithProps.prop1 = 'value1';
     fnWithProps.prop2 = 'value2';
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ prop1: 'value1', prop2: 'value2' }, fnWithProps)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(fnWithProps, { prop1: 'value1' })).toBe(true);
   });
 
   it('should handle null and undefined', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: 1 }, null)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(null, null)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(undefined, null)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(null, { a: 1 })).toBe(false);
   });
 
   it('should handle object property matching', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: 1, b: 2 }, { a: 1 })).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: 1 }, { b: 2 })).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } })).toBe(true);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: undefined }, { a: undefined })).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: null }, { a: null })).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: 1 }, { a: undefined })).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ a: 1 }, { a: null })).toBe(false);
 
     const rootCustomizer = (objValue: unknown, srcValue: unknown, key: unknown) => (key === 'root' ? true : undefined);
@@ -252,11 +339,21 @@ describe('isMatchWith', () => {
   });
 
   it('should handle empty collections', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith([1, 2, 3], [])).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith([], [])).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, [])).toBe(true);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ arr: [1, 2, 3] }, { arr: [] })).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({ arr: [] }, { arr: [] })).toBe(true);
 
     const customizer = () => undefined;
@@ -265,9 +362,17 @@ describe('isMatchWith', () => {
 
     expect(isMatchWith([1, 2, 3], [], stubTrue)).toBe(true);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(new Map([['a', 1]]), new Map())).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith([], new Map())).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, new Set())).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(123, new Set())).toBe(true);
   });
 
@@ -287,27 +392,53 @@ describe('isMatchWith', () => {
       }
     };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(map1, map2, customizer)).toBe(false);
   });
 
   it('should handle type mismatches', () => {
     const source = new Map([['key', 'value']]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith([], source)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, source)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith('string', source)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(123, source)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(new Set(), source)).toBe(false);
 
     const setSource = new Set([1, 2, 3]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith([], setSource)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith({}, setSource)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith('string', setSource)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(123, setSource)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(new Map(), setSource)).toBe(false);
   });
 
   it('should handle comparisons without customizer', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(new Map([['a', { nested: 1 }]]), new Map([['a', { nested: 2 }]]))).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith([{ id: 1 }, { id: 2 }, { id: 3 }], [{ id: 2 }])).toBe(true);
 
     const map1 = new Map([
@@ -323,12 +454,20 @@ describe('isMatchWith', () => {
       ['key2', { nested: 'different' }],
     ]);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(map1, map2)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(map1, map3)).toBe(false);
   });
 
   it('should match when source is empty object and target is primitive', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(42, {})).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatchWith(42, {}, lodashStable.noop)).toBe(true);
   });
 

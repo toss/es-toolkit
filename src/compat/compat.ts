@@ -143,10 +143,6 @@ export { sum } from './math/sum.ts';
 export { sumBy } from './math/sumBy.ts';
 
 export { isEqual } from '../predicate/isEqual.ts';
-export { isFunction } from '../predicate/isFunction.ts';
-export { isLength } from '../predicate/isLength.ts';
-export { isNull } from '../predicate/isNull.ts';
-export { isUndefined } from '../predicate/isUndefined.ts';
 export { identity } from './function/identity.ts';
 export { noop } from './function/noop.ts';
 export { assign } from './object/assign.ts';
@@ -201,8 +197,12 @@ export { update } from './object/update.ts';
 export { updateWith } from './object/updateWith.ts';
 export { values } from './object/values.ts';
 export { valuesIn } from './object/valuesIn.ts';
+export { isFunction } from './predicate/isFunction.ts';
+export { isLength } from './predicate/isLength.ts';
 export { isMatchWith } from './predicate/isMatchWith.ts';
 export { isNative } from './predicate/isNative.ts';
+export { isNull } from './predicate/isNull.ts';
+export { isUndefined } from './predicate/isUndefined.ts';
 
 export { conforms } from './predicate/conforms.ts';
 export { conformsTo } from './predicate/conformsTo.ts';

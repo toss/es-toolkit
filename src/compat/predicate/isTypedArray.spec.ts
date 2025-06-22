@@ -22,6 +22,8 @@ describe('isTypedArray', () => {
   it('should return `false` for non typed arrays', () => {
     const expected = falsey.map(stubFalse);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = falsey.map((value, index) => (index ? isTypedArray(value) : isTypedArray()));
 
     expect(actual).toEqual(expected);

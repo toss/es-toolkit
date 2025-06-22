@@ -11,6 +11,8 @@ import { falsey } from '../_internal/falsey.ts';
 describe('isNil', () => {
   it('should return `true` for nullish values', () => {
     expect(isNil(null)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isNil()).toBe(true);
     expect(isNil(undefined)).toBe(true);
   });
@@ -21,6 +23,8 @@ describe('isNil', () => {
 
     const expected = falsey.map(value => value == null);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = falsey.map((value, index) => (index ? isNil(value) : isNil()));
 
     expect(actual).toEqual(expected);

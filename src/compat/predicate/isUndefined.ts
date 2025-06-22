@@ -1,3 +1,5 @@
+import { isUndefined as isUndefinedToolkit } from '../../predicate/isUndefined.ts';
+
 /**
  * Checks if the given value is undefined.
  *
@@ -6,7 +8,7 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `undefined`.
  *
- * @param {unknown} x - The value to test if it is undefined.
+ * @param {any} x - The value to test if it is undefined.
  * @returns {x is undefined} true if the value is undefined, false otherwise.
  *
  * @example
@@ -19,5 +21,5 @@
  * console.log(isUndefined(value3)); // false
  */
 export function isUndefined(x: any): x is undefined {
-  return x === undefined;
+  return isUndefinedToolkit(x);
 }

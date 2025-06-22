@@ -39,6 +39,8 @@ describe('isNative', () => {
   it('should return `false` for non-native methods', () => {
     const expected = falsey.map(stubFalse);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = falsey.map((value, index) => (index ? isNative(value) : isNative()));
 
     expect(actual).toEqual(expected);

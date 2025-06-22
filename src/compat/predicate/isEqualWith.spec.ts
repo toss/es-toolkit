@@ -26,9 +26,11 @@ describe('isEqualWith', () => {
       [object1.b, object2.b, 'b', object1.b, object2.b],
     ];
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     isEqualWith(object1, object2, function () {
       const length = arguments.length;
-      // eslint-disable-next-line
+      // eslint-disable-next-line prefer-rest-params
       const args = slice.call(arguments, 0, length - (length > 2 ? 1 : 0));
 
       argsList.push(args);
@@ -39,8 +41,17 @@ describe('isEqualWith', () => {
 
   it('should handle comparisons when `customizer` returns `undefined`', () => {
     expect(isEqualWith('a', 'a')).toBe(true);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isEqualWith('a', 'a', noop)).toBe(true);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isEqualWith(['a'], ['a'], noop)).toBe(true);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isEqualWith({ 0: 'a' }, { 0: 'a' }, noop)).toBe(true);
   });
 
@@ -128,9 +139,11 @@ describe('isEqualWith', () => {
         if (index) {
           expected.length = 2;
         }
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         isEqualWith(pair[0], pair[1], function () {
           const length = arguments.length;
-          // eslint-disable-next-line
+          // eslint-disable-next-line prefer-rest-params
           const args = slice.call(arguments, 0, length - (length > 2 ? 1 : 0));
 
           argsList.push(args);

@@ -109,6 +109,8 @@ describe('matchesProperty', () => {
 
       const actual = values.map((value, index) => {
         try {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           return index ? matches(value) : matches();
           // eslint-disable-next-line
         } catch (e) {}
@@ -128,6 +130,8 @@ describe('matchesProperty', () => {
 
       const actual = values.map((value, index) => {
         try {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           return index ? matches(value) : matches();
           // eslint-disable-next-line
         } catch (e) {}

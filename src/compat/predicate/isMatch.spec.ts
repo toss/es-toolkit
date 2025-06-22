@@ -10,8 +10,16 @@ describe('isMatch', () => {
     expect(isMatch({ a: { b: 1 } }, { a: { b: null } })).toBe(false);
     expect(isMatch({ a: { b: 1 } }, { a: null })).toBe(false);
     expect(isMatch({ a: 1 }, { a: null })).toBe(false);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatch({ a: 1 }, null)).toBe(true);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatch(null, { a: 1 })).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatch(null, null)).toBe(true);
   });
 
@@ -26,9 +34,17 @@ describe('isMatch', () => {
   });
 
   it(`should match boolean values`, () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatch(true, true)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatch(false, true)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatch(true, false)).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isMatch(false, false)).toBe(true);
   });
 
@@ -266,12 +282,16 @@ describe('isMatch', () => {
     numberProto.b = undefined;
 
     try {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       expect(isMatch(1, { b: undefined })).toBe(true);
     } catch (e: any) {
       expect(false, e.message);
     }
 
     try {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       expect(isMatch(1, { a: 1, b: undefined })).toBe(true);
     } catch (e: any) {
       expect(false, e.message);
@@ -281,6 +301,8 @@ describe('isMatch', () => {
     // @ts-ignore
     numberProto.a = { b: 1, c: undefined };
     try {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       expect(isMatch(1, { a: { c: undefined } })).toBe(true);
     } catch (e: any) {
       expect(false, e.message);
@@ -301,6 +323,8 @@ describe('isMatch', () => {
 
     const actual = values.map((value, index) => {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return index ? isMatch(value, { a: 1 }) : isMatch(undefined, { a: 1 });
       } catch (e: unknown) {
         /* empty */
@@ -328,6 +352,8 @@ describe('isMatch', () => {
 
     const actual = values.map((value, index) => {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return index ? isMatch(value, {}) : isMatch(undefined, {});
       } catch (e: unknown) {
         /* empty */

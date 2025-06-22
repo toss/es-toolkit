@@ -4,8 +4,8 @@ import { isMatchWith } from './isMatchWith.ts';
  * Checks if the target matches the source by comparing their structures and values.
  * This function supports deep comparison for objects, arrays, maps, and sets.
  *
- * @param {unknown} target - The target value to match against.
- * @param {unknown} source - The source value to match with.
+ * @param {object} target - The target value to match against.
+ * @param {object} source - The source value to match with.
  * @returns {boolean} - Returns `true` if the target matches the source, otherwise `false`.
  *
  * @example
@@ -28,6 +28,6 @@ import { isMatchWith } from './isMatchWith.ts';
  * const sourceSet = new Set([1, 2]);
  * isMatch(targetSet, sourceSet); // true
  */
-export function isMatch(target: unknown, source: unknown): boolean {
-  return isMatchWith(target, source);
+export function isMatch(target: object, source: object): boolean {
+  return isMatchWith(target, source, () => undefined);
 }

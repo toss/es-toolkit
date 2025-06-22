@@ -2,7 +2,7 @@
  * Checks if `value` is a function.
  *
  * @param {any} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @returns {value is (...args: any[]) => any} Returns `true` if `value` is a function, else `false`.
  *
  * @example
  * isFunction(Array.prototype.slice); // true

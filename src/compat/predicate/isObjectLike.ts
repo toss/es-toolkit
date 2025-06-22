@@ -5,9 +5,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object-like value.
  *
- * @template T - The type of value.
- * @param {T} value - The value to test if it is an object-like.
- * @returns {value is object} `true` if the value is an object-like, `false` otherwise.
+ * @param {any} value - The value to test if it is an object-like.
+ * @returns {boolean} `true` if the value is an object-like, `false` otherwise.
  *
  * @example
  * const value1 = { a: 1 };
@@ -23,6 +22,6 @@
  * console.log(isObjectLike(value5)); // false
  */
 
-export function isObjectLike(value?: unknown): value is object {
+export function isObjectLike(value?: any): boolean {
   return typeof value === 'object' && value !== null;
 }
