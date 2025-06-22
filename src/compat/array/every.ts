@@ -148,7 +148,7 @@ export function every<T>(
   }
 
   for (let i = 0; i < source.length; i++) {
-    if (!predicate(source[i], i, source)) {
+    if (!predicate((source as ArrayLike<T>)[i], i, source)) {
       return false;
     }
   }

@@ -142,7 +142,7 @@ export function reduce(
     keys = range(0, collection.length);
 
     if (accumulator == null && collection.length > 0) {
-      accumulator = collection[0];
+      accumulator = (collection as ArrayLike<any>)[0];
       startIndex += 1;
     }
   } else {

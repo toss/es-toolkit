@@ -183,7 +183,7 @@ export function reduceRight(
     keys = range(0, collection.length).reverse();
 
     if (accumulator == null && collection.length > 0) {
-      accumulator = collection[collection.length - 1];
+      accumulator = (collection as ArrayLike<any>)[collection.length - 1];
       startIndex = 1;
     } else {
       startIndex = 0;
