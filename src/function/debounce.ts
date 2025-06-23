@@ -1,4 +1,4 @@
-interface DebounceOptions {
+export interface DebounceOptions {
   /**
    * An optional AbortSignal to cancel the debounced function.
    */
