@@ -43,8 +43,3 @@ update(object, 'a[0].b.c', n => (n as number) * 2);
 update({}, 'a.b[0]', () => 'c');
 // => { a: { b: ['c'] } }
 ```
-
-```
-
-</rewritten_file>
-```
