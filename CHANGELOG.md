@@ -1,3 +1,14 @@
+# es-toolkit Changelog
+
+## Version v1.39.5
+
+Released on June 24th, 2025.
+
+- Fixed type compatibility issues between `es-toolkit/compat` and `@types/lodash`.
+- Improved documentation.
+
+We thank @raon0211, @dayongkr, @sukvvon, and @yhb-flydream for their contributions.
+
 ## Version v1.39.4
 
 Released on June 21st, 2025.
