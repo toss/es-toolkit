@@ -21,5 +21,5 @@ function escapeRegExp(str: string): string;
 ```typescript
 import { escapeRegExp } from 'es-toolkit/string';
 
-escapeRegExp('[es-toolkit](https://es-toolkit.slash.page/)'); // 返回 '\[es-toolkit\]\(https://es-toolkit\.slash\.page/\)'
+escapeRegExp('[es-toolkit](https://es-toolkit.dev/)'); // 返回 '\[es-toolkit\]\(https://es-toolkit\.slash\.page/\)'
 ```

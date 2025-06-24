@@ -10,7 +10,7 @@ import { toString } from '../util/toString.ts';
  * @example
  * import { escapeRegExp } from 'es-toolkit/string';
  *
- * escapeRegExp('[es-toolkit](https://es-toolkit.slash.page/)'); // returns '\[es-toolkit\]\(https://es-toolkit\.slash\.page/\)'
+ * escapeRegExp('[es-toolkit](https://es-toolkit.dev/)'); // returns '\[es-toolkit\]\(https://es-toolkit\.slash\.page/\)'
  */
 export function escapeRegExp(str?: string): string {
   return escapeRegExpToolkit(toString(str));

@@ -16,7 +16,7 @@ es-toolkit is a high-quality library of utility functions commonly used in moder
 
 We focus on implementing functions that are difficult to create with JavaScript's built-in methods but are frequently needed and useful.
 
-Examples include [`delay`](https://es-toolkit.slash.page/reference/promise/delay.html), [`windowed`](https://es-toolkit.slash.page/reference/array/windowed.html), [`keyBy`](https://es-toolkit.slash.page/reference/array/keyBy.html), [`mapValues`](https://es-toolkit.slash.page/reference/object/mapValues.html), [`camelCase`](https://es-toolkit.slash.page/reference/string/camelCase.html), and [`toSnakeCaseKeys`](https://es-toolkit.slash.page/reference/object/toSnakeCaseKeys.html).
+Examples include [`delay`](https://es-toolkit.dev/reference/promise/delay.html), [`windowed`](https://es-toolkit.dev/reference/array/windowed.html), [`keyBy`](https://es-toolkit.dev/reference/array/keyBy.html), [`mapValues`](https://es-toolkit.dev/reference/object/mapValues.html), [`camelCase`](https://es-toolkit.dev/reference/string/camelCase.html), and [`toSnakeCaseKeys`](https://es-toolkit.dev/reference/object/toSnakeCaseKeys.html).
 
 We don't implement functions that can be easily replaced with modern JavaScript, such as:
 
@@ -92,15 +92,15 @@ Here are the coding conventions we follow in the `es-toolkit` repository:
 
 ### 2.1 Use short names for type parameters
 
-- Use `T` for elements, like in [difference](https://es-toolkit.slash.page/reference/array/difference.html).
-- Use `E` for errors, like in [attempt](https://es-toolkit.slash.page/reference/util/attempt.html).
-- Use `K` for keys, like in [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html).
+- Use `T` for elements, like in [difference](https://es-toolkit.dev/reference/array/difference.html).
+- Use `E` for errors, like in [attempt](https://es-toolkit.dev/reference/util/attempt.html).
+- Use `K` for keys, like in [groupBy](https://es-toolkit.dev/reference/array/groupBy.html).
 
 ## 3. Issues
 
 You can contribute to es-toolkit via:
 
-- Improving our [docs](https://es-toolkit.slash.page)
+- Improving our [docs](https://es-toolkit.dev)
 - [Reporting a bug in our issues tab](https://github.com/toss/es-toolkit/issues/new/choose)
 - [Requesting a new feature or package](https://github.com/toss/es-toolkit/issues/new/choose)
 - [Having a look at our issue list](https://github.com/toss/es-toolkit/issues) to see what's to be fixed
