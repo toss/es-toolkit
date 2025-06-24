@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { groupBy as groupByLodash } from 'lodash';
 import { groupBy } from './groupBy';
 
 describe('groupBy', () => {
@@ -16,6 +17,8 @@ describe('groupBy', () => {
     const values = [, null, undefined];
     const expected = lodashStable.map(values, lodashStable.constant({ 4: [4], 6: [6, 6] }));
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = lodashStable.map(values, (value, index) => (index ? groupBy(array, value) : groupBy(array)));
 
     expect(actual).toEqual(expected);
@@ -64,5 +67,9 @@ describe('groupBy', () => {
   it('should return empty object if null or undefined is passed', () => {
     expect(groupBy(undefined)).toEqual({});
     expect(groupBy(null)).toEqual({});
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(groupBy).toEqualTypeOf<typeof groupByLodash>();
   });
 });

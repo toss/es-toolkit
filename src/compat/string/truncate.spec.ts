@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { truncate as truncateLodash } from 'lodash';
 import { truncate } from './truncate.ts';
 import { forEach } from '../array/forEach.ts';
 import { map } from '../array/map.ts';
@@ -109,5 +110,9 @@ describe('truncate', () => {
 
   it('should truncate unicode characters correctly', () => {
     expect(truncate('¥§✈✉🤓', { length: 4, omission: '…' })).toEqual('¥§✈…');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(truncate).toEqualTypeOf<typeof truncateLodash>();
   });
 });

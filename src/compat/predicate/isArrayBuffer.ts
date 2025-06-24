@@ -5,7 +5,7 @@ import { isArrayBuffer as isArrayBufferToolkit } from '../../predicate/isArrayBu
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `ArrayBuffer`.
  *
- * @param {unknown} value The value to check if it is a `ArrayBuffer`.
+ * @param {any} value The value to check if it is a `ArrayBuffer`.
  * @returns {value is ArrayBuffer} Returns `true` if `value` is a `ArrayBuffer`, else `false`.
  *
  * @example
@@ -18,6 +18,6 @@ import { isArrayBuffer as isArrayBufferToolkit } from '../../predicate/isArrayBu
  * console.log(isArrayBuffer(value3)); // false
  */
 
-export function isArrayBuffer(value?: unknown): value is ArrayBuffer {
+export function isArrayBuffer(value?: any): value is ArrayBuffer {
   return isArrayBufferToolkit(value);
 }

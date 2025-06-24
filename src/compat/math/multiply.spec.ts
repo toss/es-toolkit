@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { multiply as multiplyLodash } from 'lodash';
 import { multiply } from './multiply';
 import { symbol } from '../_internal/symbol';
 import { map } from '../array/map';
@@ -94,5 +95,9 @@ describe('multiply', () => {
     expect(multiply(0, symbol)).toEqual(NaN);
     // @ts-expect-error - invalid arguments
     expect(multiply(symbol, 0)).toEqual(NaN);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(multiply).toEqualTypeOf<typeof multiplyLodash>();
   });
 });

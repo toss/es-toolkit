@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isElement as isElementLodash } from 'lodash';
 import { isElement } from './isElement';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -60,4 +61,8 @@ describe('isElement', () => {
     }
   } );
    */
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isElement).toEqualTypeOf<typeof isElementLodash>();
+  });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { findKey as findKeyLodash } from 'lodash';
 import { findKey } from './findKey';
 
 describe('findKey', () => {
@@ -51,5 +52,9 @@ describe('findKey', () => {
     });
 
     expect(args).toEqual([1, 'a', object]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(findKey).toEqualTypeOf<typeof findKeyLodash>();
   });
 });

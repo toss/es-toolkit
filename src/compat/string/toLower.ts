@@ -17,6 +17,6 @@ import { toString } from '../util/toString.ts';
  * toLower([1, 2, 3]);
  * // => '1,2,3'
  */
-export function toLower(value?: unknown): string {
-  return toString(value).toLowerCase();
+export function toLower<T extends string = string>(value?: T): Lowercase<T> {
+  return toString(value).toLowerCase() as Lowercase<T>;
 }

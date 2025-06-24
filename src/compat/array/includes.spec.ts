@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { includes as includesLodash } from 'lodash';
 import { includes } from './includes';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -54,6 +55,8 @@ describe('includes', () => {
 
     const actual = empties.map(value => {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return includes(value);
       } catch (e) {
         /* empty */
@@ -71,6 +74,8 @@ describe('includes', () => {
     const expected = indexes.map(index => [false, false, index === length]);
 
     const actual = indexes.map(fromIndex => [
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       includes(string, 1, fromIndex),
       includes(string, undefined, fromIndex),
       includes(string, '', fromIndex),
@@ -132,8 +137,8 @@ describe('includes', () => {
     it(`should work with ${key} and treat falsey \`fromIndex\` values as \`0\``, () => {
       const expected = falsey.map(() => true);
 
-      // eslint-disable-next-line
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       const actual = falsey.map(fromIndex => includes(collection, resolve(values[0]), fromIndex));
 
       expect(actual).toEqual(expected);
@@ -145,8 +150,8 @@ describe('includes', () => {
       const actual = [
         includes(collection, resolve(values[0]), 0.1),
         includes(collection, resolve(values[0]), NaN),
-        // eslint-disable-next-line
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         includes(collection, resolve(values[0]), '1'),
       ];
 
@@ -169,5 +174,9 @@ describe('includes', () => {
 
       expect(actual).toEqual(expected);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(includes).toEqualTypeOf<typeof includesLodash>();
   });
 });

@@ -12,6 +12,6 @@ import { decimalAdjust } from '../_internal/decimalAdjust.ts';
  * floor(0.046, 2); // => 0.04
  * floor(4060, -2); // => 4000
  */
-export function floor(number: number | string, precision: number | string = 0): number {
+export function floor(number: number, precision = 0): number {
   return decimalAdjust('floor', number, precision);
 }

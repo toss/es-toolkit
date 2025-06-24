@@ -3,17 +3,49 @@ import { trimStart as trimStartToolkit } from '../../string/trimStart.ts';
 /**
  * Removes leading whitespace or specified characters from a string.
  *
- * @param {string} str - The string from which leading characters will be trimmed.
- * @param {string | string[]} chars - The character(s) to remove from the end of the string. Defaults to `" "`.
- * @returns {string} - The resulting string after the specified leading character has been removed.
+ * @param {string} string - The string to trim.
+ * @param {string} chars - The characters to trim from the start of the string.
+ * @returns {string} Returns the trimmed string.
  *
  * @example
- * const trimmedStr1 = ltrim('---hello', '-') // returns 'hello'
- * const trimmedStr2 = ltrim('000123', '0') // returns '123'
- * const trimmedStr3 = ltrim('abcabcabc', 'a') // returns 'bcabcabc'
- * const trimmedStr4 = ltrim('xxxtrimmed', 'x') // returns 'trimmed'
+ * trimStart('  abc  ');
+ * // => 'abc  '
+ *
+ * trimStart('-_-abc-_-', '_-');
+ * // => 'abc-_-'
  */
-export function trimStart(str: string, chars?: string | string[], guard?: unknown): string {
+export function trimStart(string?: string, chars?: string): string;
+
+/**
+ * Removes leading whitespace or specified characters from a string.
+ *
+ * @param {string} string - The string to trim.
+ * @param {string | number} index - The index parameter (used with guard).
+ * @param {object} guard - Enables use as an iteratee for methods like `map`.
+ * @returns {string} Returns the trimmed string.
+ *
+ * @example
+ * trimStart('  abc  ', 0, {});
+ * // => 'abc  '
+ */
+export function trimStart(string: string, index: string | number, guard: object): string;
+
+/**
+ * Removes leading whitespace or specified characters from a string.
+ *
+ * @param {string} str - The string from which leading characters will be trimmed.
+ * @param {string | number} chars - The character(s) to remove from the start of the string.
+ * @param {object} guard - Enables use as an iteratee for methods like `map`.
+ * @returns {string} Returns the trimmed string.
+ *
+ * @example
+ * trimStart('  abc  ');
+ * // => 'abc  '
+ *
+ * trimStart('-_-abc-_-', '_-');
+ * // => 'abc-_-'
+ */
+export function trimStart(str?: string, chars?: string | number, guard?: object): string {
   if (str == null) {
     return '';
   }
@@ -22,19 +54,5 @@ export function trimStart(str: string, chars?: string | string[], guard?: unknow
     return str.toString().trimStart();
   }
 
-  switch (typeof chars) {
-    case 'string': {
-      return trimStartToolkit(str, chars.toString().split(''));
-    }
-    case 'object': {
-      if (Array.isArray(chars)) {
-        return trimStartToolkit(
-          str,
-          chars.flatMap(x => x.toString().split(''))
-        );
-      } else {
-        return trimStartToolkit(str, (chars as any).toString().split(''));
-      }
-    }
-  }
+  return trimStartToolkit(str, chars.toString().split(''));
 }

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { some as someLodash } from 'lodash';
 import { some } from './some';
 import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
@@ -62,6 +63,8 @@ describe('some', () => {
 
     expect(actual).toEqual(expected);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expected = values.map(stubTrue);
     actual = values.map((value, index) => {
       const array = [0, 1];
@@ -86,6 +89,8 @@ describe('some', () => {
 
     expect(actual).toEqual(expected);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expected = values.map(stubTrue);
     actual = values.map((value, index) => {
       const array = { 0: 0, a: 1 };
@@ -188,5 +193,9 @@ describe('some', () => {
 
     expect(some(sparseArray, value => value > 0)).toEqual(true);
     expect(some(sparseArray, value => value === undefined)).toEqual(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(some).toEqualTypeOf<typeof someLodash>();
   });
 });

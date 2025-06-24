@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { mergeWith as mergeWithLodash } from 'lodash';
 import { mergeWith } from './mergeWith';
 import { last } from '../../array/last';
 import { identity } from '../../function/identity';
@@ -137,5 +138,9 @@ describe('mergeWith', () => {
     expect(mergeWith('a', null, noop)).toEqual(Object('a'));
     expect(mergeWith(true, null, noop)).toEqual(Object(true));
     expect(mergeWith(1, { a: 1 }, noop)).toEqual(Object.assign(1, { a: 1 }));
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(mergeWith).toEqualTypeOf<typeof mergeWithLodash>();
   });
 });

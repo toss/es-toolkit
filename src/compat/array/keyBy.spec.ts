@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { keyBy as keyByLodash } from 'lodash';
 import { keyBy } from './keyBy.ts';
 
 describe('keyBy', () => {
@@ -21,6 +22,8 @@ describe('keyBy', () => {
     const values = [, null, undefined];
     const expected = values.map(() => ({ 4: 4, 6: 6 }));
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? keyBy(array, value) : keyBy(array)));
 
     expect(actual).toEqual(expected);
@@ -64,5 +67,9 @@ describe('keyBy', () => {
       // @ts-expect-error Testing invalid input types
       expect(keyBy(collection)).toEqual({});
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(keyBy).toEqualTypeOf<typeof keyByLodash>();
   });
 });
