@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { omitBy as omitByLodash } from 'lodash';
 import { omitBy } from './omitBy';
 import { symbol } from '../_internal/symbol';
 import { castArray } from '../array/castArray';
@@ -124,5 +125,9 @@ describe('omitBy', () => {
     const shouldOmit = (value: string) => typeof value === 'string';
     const result = omitBy(obj as unknown as object, shouldOmit);
     expect(result).toEqual({});
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(omitBy).toEqualTypeOf<typeof omitByLodash>();
   });
 });

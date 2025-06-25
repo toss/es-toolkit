@@ -2,135 +2,97 @@ import { intersectionBy as intersectionByToolkit } from '../../array/intersectio
 import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
 import { identity } from '../../function/identity.ts';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { property } from '../object/property.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
- * Returns the intersection of multiple arrays after applying the iteratee function to their elements.
+ * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
  *
- * This function takes multiple arrays and an iteratee function (or property key) to
- * compare the elements after transforming them. It returns a new array containing the elements from
- * the first array that are present in all subsequent arrays after applying the iteratee to each element.
- *
- * @template T1, T2
- * @param {ArrayLike<T1> | null | undefined} array - The first array to compare.
- * @param {ArrayLike<T2>} values - The second array to compare.
- * @param {(value: T1 | T2) => unknown | string} iteratee - The iteratee invoked on each element
- *  for comparison. It can also be a property key to compare based on that property.
- * @returns {T1[]} A new array containing the elements from the first array that are present
- *  in all subsequent arrays after applying the iteratee.
+ * @template T, U
+ * @param {ArrayLike<T> | null} array - The array to inspect.
+ * @param {ArrayLike<U>} values - The values to compare.
+ * @param {ValueIteratee<T | U>} iteratee - The iteratee invoked per element.
+ * @returns {T[]} Returns the new array of intersecting values.
  *
  * @example
- * const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
- * const array2 = [{ x: 2 }, { x: 3 }, { x: 4 }];
- * const result = intersectionBy(array1, array2, 'x');
- * // result will be [{ x: 2 }, { x: 3 }] since these elements have the same `x` property.
- *
- * const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
- * const array2 = [{ x: 2 }, { x: 3 }, { x: 4 }];
- * const result = intersectionBy(array1, array2, value => value.x);
- * // result will be [{ x: 2 }, { x: 3 }] since these elements have the same `x` property.
+ * intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+ * // => [2.1]
  */
-export function intersectionBy<T1, T2>(
-  array: ArrayLike<T1> | null | undefined,
-  values: ArrayLike<T2>,
-  iteratee: ((value: T1 | T2) => unknown) | string
-): T1[];
+export function intersectionBy<T, U>(
+  array: ArrayLike<T> | null,
+  values: ArrayLike<U>,
+  iteratee: ValueIteratee<T | U>
+): T[];
 
 /**
- * Returns the intersection of multiple arrays after applying the iteratee function to their elements.
+ * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
  *
- * This function takes multiple arrays and an iteratee function (or property key) to
- * compare the elements after transforming them. It returns a new array containing the elements from
- * the first array that are present in all subsequent arrays after applying the iteratee to each element.
- *
- * @template T1, T2, T3
- * @param {ArrayLike<T1> | null | undefined} array - The first array to compare.
- * @param {ArrayLike<T2>} values1 - The second array to compare.
- * @param {ArrayLike<T3>} values2 - The third array to compare.
- * @param {(value: T1 | T2 | T3) => unknown | string} iteratee - The iteratee invoked on each element
- *  for comparison. It can also be a property key to compare based on that property.
- * @returns {T1[]} A new array containing the elements from the first array that are present
- *  in all subsequent arrays after applying the iteratee.
+ * @template T, U, V
+ * @param {ArrayLike<T> | null} array - The array to inspect.
+ * @param {ArrayLike<U>} values1 - The first values to compare.
+ * @param {ArrayLike<V>} values2 - The second values to compare.
+ * @param {ValueIteratee<T | U | V>} iteratee - The iteratee invoked per element.
+ * @returns {T[]} Returns the new array of intersecting values.
  *
  * @example
- * const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
- * const array2 = [{ x: 2 }, { x: 3 }];
- * const array3 = [{ x: 3 }];
- * const result = intersectionBy(array1, array2, array3, 'x');
- * // result will be [{ x: 3 }] since this element has the same `x` property in all arrays.
- *
- * const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
- * const array2 = [{ x: 2 }, { x: 3 }];
- * const array3 = [{ x: 3 }];
- * const result = intersectionBy(array1, array2, array3, value => value.x);
- * // result will be [{ x: 3 }] since this element has the same `x` property in all arrays.
+ * intersectionBy([2.1, 1.2], [2.3, 3.4], [2.5], Math.floor);
+ * // => [2.1]
  */
-export function intersectionBy<T1, T2, T3>(
-  array: ArrayLike<T1> | null | undefined,
-  values1: ArrayLike<T2>,
-  values2: ArrayLike<T3>,
-  iteratee: ((value: T1 | T2 | T3) => unknown) | string
-): T1[];
+export function intersectionBy<T, U, V>(
+  array: ArrayLike<T> | null,
+  values1: ArrayLike<U>,
+  values2: ArrayLike<V>,
+  iteratee: ValueIteratee<T | U | V>
+): T[];
 
 /**
- * Returns the intersection of multiple arrays after applying the iteratee function to their elements.
+ * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
  *
- * This function takes multiple arrays and an iteratee function (or property key) to
- * compare the elements after transforming them. It returns a new array containing the elements from
- * the first array that are present in all subsequent arrays after applying the iteratee to each element.
- *
- * @template T1, T2, T3, T4
- * @param {ArrayLike<T1> | null | undefined} array - The first array to compare.
- * @param {ArrayLike<T2>} values1 - The second array to compare.
- * @param {ArrayLike<T3>} values2 - The third array to compare.
- * @param {...(ArrayLike<T4> | ((value: T1 | T2 | T3 | T4) => unknown) | string)} values - Additional arrays to compare, or the iteratee function.
- * @returns {T1[]} A new array containing the elements from the first array that are present
- *  in all subsequent arrays after applying the iteratee.
+ * @template T, U, V, W
+ * @param {ArrayLike<T> | null | undefined} array - The array to inspect.
+ * @param {ArrayLike<U>} values1 - The first values to compare.
+ * @param {ArrayLike<V>} values2 - The second values to compare.
+ * @param {...Array<ArrayLike<W> | ValueIteratee<T | U | V | W>>} values - The other arrays to compare, and the iteratee to use.
+ * @returns {T[]} Returns the new array of intersecting values.
  *
  * @example
- * const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
- * const array2 = [{ x: 2 }, { x: 3 }];
- * const array3 = [{ x: 3 }];
- * const array4 = [{ x: 3 }, { x: 4 }];
- * const result = intersectionBy(array1, array2, array3, array4, 'x');
- * // result will be [{ x: 3 }] since this element has the same `x` property in all arrays.
- *
- * const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
- * const array2 = [{ x: 2 }, { x: 3 }];
- * const array3 = [{ x: 3 }];
- * const array4 = [{ x: 3 }, { x: 4 }];
- * const result = intersectionBy(array1, array2, array3, array4, value => value.x);
- * // result will be [{ x: 3 }] since this element has the same `x` property in all arrays.
+ * intersectionBy([2.1, 1.2], [2.3, 3.4], [2.5], [2.6, 1.7], Math.floor);
+ * // => [2.1]
  */
-export function intersectionBy<T1, T2, T3, T4>(
-  array: ArrayLike<T1> | null | undefined,
-  values1: ArrayLike<T2>,
-  values2: ArrayLike<T3>,
-  ...values: Array<ArrayLike<T4> | ((value: T1 | T2 | T3 | T4) => unknown) | string>
-): T1[];
+export function intersectionBy<T, U, V, W>(
+  array: ArrayLike<T> | null | undefined,
+  values1: ArrayLike<U>,
+  values2: ArrayLike<V>,
+  ...values: Array<ArrayLike<W> | ValueIteratee<T | U | V | W>>
+): T[];
 
 /**
- * Returns the intersection of multiple arrays after applying the iteratee function to their elements.
- *
- * This function takes multiple arrays and an iteratee function (or property key) to
- * compare the elements after transforming them. It returns a new array containing the elements from
- * the first array that are present in all subsequent arrays after applying the iteratee to each element.
+ * Creates an array of unique values that are included in all given arrays.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} [array] - The first array to compare.
- * @param {...ArrayLike<T>} values - Additional arrays to compare.
- * @returns {T[]} A new array containing the elements from the first array that are present
- *  in all subsequent arrays after applying the iteratee.
+ * @param {ArrayLike<T> | null} [array] - The array to inspect.
+ * @param {...Array<ArrayLike<T>>} values - The values to compare.
+ * @returns {T[]} Returns the new array of intersecting values.
  *
  * @example
- * const array1 = [1, 2, 3];
- * const array2 = [2, 3];
- * const array3 = [3];
- * const result = intersectionBy(array1, array2, array3);
- * // result will be [3] since these all elements have the same value 3.
+ * intersectionBy([2, 1], [2, 3]);
+ * // => [2]
  */
-export function intersectionBy<T>(array?: ArrayLike<T> | null | undefined, ...values: Array<ArrayLike<T>>): T[];
+export function intersectionBy<T>(array?: ArrayLike<T> | null, ...values: Array<ArrayLike<T>>): T[];
+
+/**
+ * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
+ *
+ * @template T
+ * @param {...Array<ArrayLike<T> | ValueIteratee<T>>} values - The arrays to compare and the iteratee to use.
+ * @returns {T[]} Returns the new array of intersecting values.
+ *
+ * @example
+ * intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+ * // => [2.1]
+ */
+export function intersectionBy<T>(...values: Array<ArrayLike<T> | ValueIteratee<T>>): T[];
 
 /**
  * Returns the intersection of multiple arrays after applying the iteratee function to their elements.
@@ -160,17 +122,14 @@ export function intersectionBy<T>(array?: ArrayLike<T> | null | undefined, ...va
  * const result = intersectionBy(array1, array2, Math.floor);
  * // result will be [2.3, 3.3] since it shares the same integer part when `Math.floor` is applied.
  */
-export function intersectionBy<T>(
-  array: ArrayLike<T> | null | undefined,
-  ...values: Array<ArrayLike<T> | ((value: T) => unknown) | string>
-): T[] {
+export function intersectionBy<T>(array: any, ...values: any[]): T[] {
   if (!isArrayLikeObject(array)) {
     return [];
   }
 
   const lastValue = last(values);
   if (lastValue === undefined) {
-    return Array.from(array);
+    return Array.from(array) as T[];
   }
 
   let result = uniq(Array.from(array));
@@ -193,5 +152,5 @@ export function intersectionBy<T>(
     }
   }
 
-  return result;
+  return result as T[];
 }

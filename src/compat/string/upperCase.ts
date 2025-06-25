@@ -15,6 +15,6 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr3 = upperCase('hyphen-text') // returns 'HYPHEN TEXT'
  * const convertedStr4 = upperCase('HTTPRequest') // returns 'HTTP REQUEST'
  */
-export function upperCase(str?: string | object): string {
+export function upperCase(str?: string): string {
   return upperCaseToolkit(normalizeForCase(str));
 }

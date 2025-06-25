@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { assignWith as assignWithLodash } from 'lodash';
 import { assignWith } from './assignWith';
 import { noop } from '../../function/noop';
 
@@ -19,5 +20,9 @@ describe('assignWith', () => {
     const source = { b: 2 };
     const result = assignWith(target, source);
     expect(result).toEqual({ a: 1, b: 2 });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(assignWith).toEqualTypeOf<typeof assignWithLodash>();
   });
 });

@@ -15,6 +15,6 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr3 = kebabCase('hyphen-text') // returns 'hyphen-text'
  * const convertedStr4 = kebabCase('HTTPRequest') // returns 'http-request'
  */
-export function kebabCase(str?: string | object): string {
+export function kebabCase(str?: string): string {
   return kebabCaseToolkit(normalizeForCase(str));
 }

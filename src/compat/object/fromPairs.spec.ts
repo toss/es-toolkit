@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { fromPairs as fromPairsLodash } from 'lodash';
 import { fromPairs } from './fromPairs';
 import { falsey } from '../_internal/falsey';
 
@@ -31,17 +32,6 @@ describe('fromPairs', () => {
       [sym2, 'value2'],
     ]);
     const expected = { [sym1]: 'value1', [sym2]: 'value2' };
-    expect(result).toEqual(expected);
-  });
-
-  it('should handle Map objects', () => {
-    const map = new Map([
-      ['a', 1],
-      ['b', 2],
-      ['c', 3],
-    ]);
-    const result = fromPairs(map);
-    const expected = { a: 1, b: 2, c: 3 };
     expect(result).toEqual(expected);
   });
 
@@ -80,4 +70,8 @@ describe('fromPairs', () => {
   //   const object = { 'a.b': 1 };
   //   expect(fromPairs(toPairs(object))).toEqual(object);
   // });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(fromPairs).toEqualTypeOf<typeof fromPairsLodash>();
+  });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isNative as isNativeLodash } from 'lodash';
 import { isNative } from './isNative';
 import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
@@ -38,6 +39,8 @@ describe('isNative', () => {
   it('should return `false` for non-native methods', () => {
     const expected = falsey.map(stubFalse);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = falsey.map((value, index) => (index ? isNative(value) : isNative()));
 
     expect(actual).toEqual(expected);
@@ -102,5 +105,9 @@ describe('isNative', () => {
     });
 
     expect(isNative(fakeNative)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isNative).toEqualTypeOf<typeof isNativeLodash>();
   });
 });

@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { findLast as findLastLodash } from 'lodash';
 import { findLast } from './findLast';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -75,6 +76,8 @@ describe('findLast', () => {
     let args: any;
     const object = { a: 1 };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     findLast(object, function () {
       // eslint-disable-next-line
       args || (args = Array.prototype.slice.call(arguments));
@@ -155,4 +158,8 @@ describe('findLast', () => {
       });
     }
   );
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(findLast).toEqualTypeOf<typeof findLastLodash>();
+  });
 });

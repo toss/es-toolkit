@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { uniqBy as uniqByLodash } from 'lodash';
 import { uniqBy } from './uniqBy';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 
@@ -94,6 +95,12 @@ describe('uniqBy', () => {
   });
 
   it('should work with no iteratee', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(uniqBy([1, 2, 3, 4, 1, 2, 3])).toEqual([1, 2, 3, 4]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(uniqBy).toEqualTypeOf<typeof uniqByLodash>();
   });
 });

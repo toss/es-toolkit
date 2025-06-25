@@ -1,4 +1,5 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, expectTypeOf, it, vi } from 'vitest';
+import type { throttle as throttleLodash } from 'lodash';
 import { throttle } from './throttle';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -347,5 +348,9 @@ describe('throttle', () => {
 
     throttled();
     expect(fn).toHaveBeenCalledTimes(4);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(throttle).toEqualTypeOf<typeof throttleLodash>();
   });
 });

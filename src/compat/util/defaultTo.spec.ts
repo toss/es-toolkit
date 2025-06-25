@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { defaultTo as defaultToLodash } from 'lodash';
 import { defaultTo } from './defaultTo';
 import { falsey } from '../_internal/falsey';
 
@@ -9,5 +10,9 @@ describe('defaultTo', () => {
     const actual = falsey.map(value => defaultTo(value, 1));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(defaultTo).toEqualTypeOf<typeof defaultToLodash>();
   });
 });

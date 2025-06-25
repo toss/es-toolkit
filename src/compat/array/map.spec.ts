@@ -43,6 +43,8 @@ describe('map', () => {
     const expected = values.map(constant([1, 2]));
 
     each([array, object], collection => {
+      // eslint-disable-next-line
+      // @ts-ignore
       const actual = values.map((value, index) => (index ? map(collection, value) : map(collection)));
 
       expect(actual).toEqual(expected);

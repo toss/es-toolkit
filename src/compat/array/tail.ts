@@ -3,6 +3,32 @@ import { toArray } from '../_internal/toArray.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
+ * Gets all but the first element of array.
+ *
+ * @template T
+ * @param {readonly [unknown, ...T]} array - The array to query.
+ * @returns {T} Returns the slice of array.
+ *
+ * @example
+ * tail([1, 2, 3]);
+ * // => [2, 3]
+ */
+export function tail<T extends unknown[]>(array: readonly [unknown, ...T]): T;
+
+/**
+ * Gets all but the first element of array.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} array - The array to query.
+ * @returns {T[]} Returns the slice of array.
+ *
+ * @example
+ * tail([1, 2, 3]);
+ * // => [2, 3]
+ */
+export function tail<T>(array: ArrayLike<T> | null | undefined): T[];
+
+/**
  * Returns a new array with all elements except for the first.
  *
  * This function takes an array and returns a new array containing all the elements

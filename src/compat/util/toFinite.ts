@@ -14,7 +14,7 @@ import { toNumber } from './toNumber.ts';
  * toNumber(Symbol.iterator); // => 0
  * toNumber(NaN); // => 0
  */
-export function toFinite(value?: unknown): number {
+export function toFinite(value: any): number {
   if (!value) {
     return value === 0 ? value : 0;
   }

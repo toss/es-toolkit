@@ -1,10 +1,4 @@
-interface MemoizeCache {
-  /**
-   * Optional internal data structure for the cache implementation.
-   * This is primarily used for testing and internal operations.
-   */
-  __data__?: any;
-
+interface MapCache {
   /**
    * Removes the value associated with the specified key from the cache.
    *
@@ -81,29 +75,22 @@ interface MemoizeCache {
 }
 
 /**
- * Interface for the constructor of cache implementations.
- * This allows for creating new cache instances with optional initial entries.
+ * Constructor interface for creating a new MapCache instance.
+ * This defines the shape of a constructor that can create cache objects
+ * conforming to the MapCache interface.
  *
  * @example
  * ```typescript
- * // Use a custom cache constructor with memoize
- * memoize.Cache = CustomCache;
+ * class CustomCache implements MapCache {
+ *   // Cache implementation
+ * }
  *
- * // Create a cache with initial entries
- * const cache = new CustomCache([
- *   ['key1', 'value1'],
- *   ['key2', 'value2']
- * ]);
+ * const CacheConstructor: MapCacheConstructor = CustomCache;
+ * const cache = new CacheConstructor();
  * ```
  */
-interface MemoizeCacheConstructor {
-  /**
-   * Creates a new cache instance.
-   *
-   * @param entries - Optional array of key-value pairs to initialize the cache with
-   * @returns A new cache instance
-   */
-  new (entries?: Array<[any, any]>): MemoizeCache;
+interface MapCacheConstructor {
+  new (): MapCache;
 }
 
 /**
@@ -113,19 +100,12 @@ interface MemoizeCacheConstructor {
  *
  * @template T - The type of the original function being memoized
  */
-interface MemoizedFunction<T extends (...args: any) => any> {
-  /**
-   * Calls the function with the provided arguments, using cached results when available
-   *
-   * @param {...Parameters<T>} args - The arguments to pass to the original function
-   * @returns {ReturnType<T>} The result of the function call, either from cache or freshly computed
-   */
-  (...args: Parameters<T>): ReturnType<T>;
 
+interface MemoizedFunction {
   /**
    * The cache storing previously computed results
    */
-  cache: MemoizeCache;
+  cache: MapCache;
 }
 
 /**
@@ -142,7 +122,7 @@ interface MemoizedFunction<T extends (...args: any) => any> {
 export function memoize<T extends (...args: any) => any>(
   func: T,
   resolver?: (...args: Parameters<T>) => any
-): MemoizedFunction<T> {
+): T & MemoizedFunction {
   if (typeof func !== 'function' || (resolver != null && typeof resolver !== 'function')) {
     throw new TypeError('Expected a function');
   }
@@ -163,7 +143,7 @@ export function memoize<T extends (...args: any) => any>(
   const CacheConstructor = memoize.Cache || Map;
   memoized.cache = new CacheConstructor();
 
-  return memoized;
+  return memoized as T & MemoizedFunction;
 }
 
-memoize.Cache = Map as unknown as MemoizeCacheConstructor;
+memoize.Cache = Map as unknown as MapCacheConstructor;

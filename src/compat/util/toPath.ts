@@ -3,7 +3,7 @@
  *
  * This function takes a string representing a deep key (e.g., 'a.b.c' or 'a[b][c]') and breaks it down into an array of strings, each representing a segment of the path.
  *
- * @param {string} deepKey - The deep key string to convert.
+ * @param {any} deepKey - The deep key string to convert.
  * @returns {string[]} An array of strings, each representing a segment of the path.
  *
  * Examples:
@@ -15,7 +15,7 @@
  * toPath('') // Returns []
  * toPath('.a[b].c.d[e]["f.g"].h') // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
  */
-export function toPath(deepKey: string): string[] {
+export function toPath(deepKey: any): string[] {
   const result: string[] = [];
   const length = deepKey.length;
 

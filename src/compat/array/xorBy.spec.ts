@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { xorBy as xorByLodash } from 'lodash';
 import { xorBy } from './xorBy';
 import { args } from '../_internal/args';
 
@@ -42,11 +43,15 @@ describe('xorBy', () => {
 
   it(`should ignore individual secondary arguments`, () => {
     const array = [0];
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(xorBy(array, 3, null, { 0: 1 } as any)).toEqual(array);
   });
 
   it(`should ignore values that are not arrays or \`arguments\` objects`, () => {
     const array = [1, 2];
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(xorBy(array, 3, { 0: 1 } as any, null)).toEqual(array);
     expect(xorBy(null, array, null, [2, 3])).toEqual([1, 3]);
     expect(xorBy(array, null, args, null)).toEqual([3]);
@@ -70,5 +75,9 @@ describe('xorBy', () => {
     });
 
     expect(args).not.toEqual([1.2, 3.4]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(xorBy).toEqualTypeOf<typeof xorByLodash>();
   });
 });

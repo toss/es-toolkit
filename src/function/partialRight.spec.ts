@@ -97,7 +97,7 @@ describe('partialRight', () => {
         return Array.from(arguments);
       },
       curried = curry(fn),
-      par = partialRight(curried, partialRight.placeholder, 'b', partialRight.placeholder, 'd');
+      par = partialRight(curried, partialRight.placeholder, 'b', partialRight.placeholder, 'd') as any;
 
     expect(par('a', 'c')).toEqual(['a', 'b', 'c', 'd']);
   });

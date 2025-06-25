@@ -2,6 +2,46 @@ import { cloneDeepWith as cloneDeepWithToolkit } from '../../object/cloneDeepWit
 import { copyProperties } from '../../object/cloneDeepWith.ts';
 import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tags.ts';
 
+type CloneDeepWithCustomizer<TObject> = (
+  value: any,
+  key: number | string | undefined,
+  object: TObject | undefined,
+  stack: any
+) => any;
+
+/**
+ * Creates a deep clone of the given value using a customizer function.
+ *
+ * @template T - The type of the value.
+ * @param {T} value - The value to clone.
+ * @param {CloneDeepWithCustomizer<T>} customizer - A function to customize the cloning process.
+ * @returns {any} - A deep clone of the given value.
+ *
+ * @example
+ * const obj = { a: 1, b: 2 };
+ * const clonedObj = cloneDeepWith(obj, (value) => {
+ *   if (typeof value === 'number') {
+ *     return value * 2;
+ *   }
+ * });
+ * // => { a: 2, b: 4 }
+ */
+export function cloneDeepWith<T>(value: T, customizer: CloneDeepWithCustomizer<T>): any;
+
+/**
+ * Creates a deep clone of the given value.
+ *
+ * @template T - The type of the value.
+ * @param {T} value - The value to clone.
+ * @returns {T} - A deep clone of the given value.
+ *
+ * @example
+ * const obj = { a: 1, b: { c: 2 } };
+ * const clonedObj = cloneDeepWith(obj);
+ * // => { a: 1, b: { c: 2 } }
+ */
+export function cloneDeepWith<T>(value: T): T;
+
 /**
  * Creates a deep clone of the given object using a customizer function.
  *
@@ -37,12 +77,9 @@ import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tag
  * console.log(clonedArr); // [2, 3, 4]
  * console.log(clonedArr === arr); // false
  */
-export function cloneDeepWith<T>(
-  obj: T,
-  cloneValue?: (value: any, key: PropertyKey | undefined, object: T | undefined, stack: Map<any, any>) => any
-): T {
+export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>): any | T {
   return cloneDeepWithToolkit(obj, (value, key, object, stack) => {
-    const cloned = cloneValue?.(value, key, object, stack);
+    const cloned = customizer?.(value, key as any, object, stack);
 
     if (cloned != null) {
       return cloned;

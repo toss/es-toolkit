@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { memoize as memoizeLodash } from 'lodash';
 import { memoize } from './memoize';
 import { identity, isFunction, noop, stubTrue } from '../index';
 
@@ -150,6 +151,8 @@ describe('memoize', () => {
 
       expect(count).toBe(1);
       expect(cache.get(key)).toBe(array);
+      // eslint-disable-next-line
+      // @ts-ignore
       expect(cache.__data__ instanceof Array).toBe(false);
       expect(cache.delete(key)).toBe(true);
     });
@@ -240,5 +243,9 @@ describe('memoize', () => {
     expect(memoized.cache.get('a')).toBe('a');
 
     memoize.Cache = oldCache;
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(memoize).toEqualTypeOf<typeof memoizeLodash>();
   });
 });

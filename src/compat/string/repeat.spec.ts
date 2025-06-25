@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { repeat as repeatLodash } from 'lodash';
 import { repeat } from './repeat';
 
 describe('padStart', () => {
@@ -14,5 +15,9 @@ describe('padStart', () => {
     const array = ['a', 'b', 'c'];
     const actual = array.map(repeat);
     expect(actual).toEqual(['a', 'b', 'c']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(repeat).toEqualTypeOf<typeof repeatLodash>();
   });
 });
