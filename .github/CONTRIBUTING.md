@@ -82,7 +82,7 @@ This helps keep the code more concise, eliminates unnecessary function calls, an
 
 ### 1.4 Documentation
 
-All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
+All of our functions should be documented in detail for easy reference. All functions should have the JSDoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
 
 Our primary language is English, but we strive to support documents in Korean, Japanese, and Simplified Chinese as well. If you have trouble writing documents in a foreign language, please let our contributors know, and we will help provide the necessary translations.
 
