@@ -6,9 +6,8 @@ import { pull as pullToolkit } from '../../array/pull.ts';
  * **Note:** Unlike `_.without`, this method mutates `array`.
  *
  * @template T - The type of elements in the array.
- * @template U - The type of values to remove from the array.
  * @param {T[]} array - The array to modify.
- * @param {...U[]} values - The values to remove.
+ * @param {...T[]} values - The values to remove.
  * @returns {T[]} Returns `array`.
  *
  * @example
@@ -18,7 +17,7 @@ import { pull as pullToolkit } from '../../array/pull.ts';
  * console.log(array);
  * // => [1, 1]
  */
-export function pull<T, U extends T>(array: T[], ...values: U[]): T[];
+export function pull<T>(array: T[], ...values: T[]): T[];
 
 /**
  * Removes all provided values from array using SameValueZero for equality comparisons.
@@ -46,9 +45,8 @@ export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ?
  * If you want to remove values without modifying the original array, use `difference`.
  *
  * @template T - The type of elements in the array.
- * @template U - The type of values to remove from the array.
  * @param {T[]} arr - The array to modify.
- * @param {U[]} valuesToRemove - The values to remove from the array.
+ * @param {T[]} valuesToRemove - The values to remove from the array.
  * @returns {T[]} The modified array with the specified values removed.
  *
  * @example
@@ -56,6 +54,6 @@ export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ?
  * pull(numbers, [2, 4]);
  * console.log(numbers); // [1, 3, 5]
  */
-export function pull<T, U extends T>(arr: T[], ...valuesToRemove: readonly U[]): T[] {
+export function pull<T>(arr: T[], ...valuesToRemove: readonly T[]): T[] {
   return pullToolkit(arr, valuesToRemove);
 }

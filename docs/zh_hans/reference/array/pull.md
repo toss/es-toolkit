@@ -14,7 +14,7 @@ function pull<T, U extends T>(arr: T[], valuesToRemove: readonly U[]): T[];
 ### 参数
 
 - `arr` (`T[]`): 要修改的数组。
-- `valuesToRemove` (`T[]`): 要从数组中移除的值。
+- `valuesToRemove` (`U[]`): 要从数组中移除的值。
 
 ### 返回值
 
