@@ -8,7 +8,7 @@
 ## インターフェース
 
 ```typescript
-function pull<T>(arr: T[], valuesToRemove: unknown[]): T[];
+function pull<T, U extends T>(arr: T[], valuesToRemove: readonly U[]): T[];
 ```
 
 ### パラメータ

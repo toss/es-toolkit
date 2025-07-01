@@ -8,13 +8,13 @@ If you want to remove values without modifying the original array, use [differen
 ## Signature
 
 ```typescript
-function pull<T>(arr: T[], valuesToRemove: unknown[]): T[];
+function pull<T, U extends T>(arr: T[], valuesToRemove: readonly U[]): T[];
 ```
 
 ### Parameters
 
 - `arr` (`T[]`): The array to modify.
-- `valuesToRemove` (`unknown[]`): The values to remove from the array.
+- `valuesToRemove` (`T[]`): The values to remove from the array.
 
 ### Returns
 
