@@ -40,25 +40,24 @@ export function flattenObject(object: object, { delimiter = '.' }: FlattenObject
 
 function flattenObjectImpl(object: object, prefix = '', delimiter = '.'): Record<string, any> {
   const result: Record<string, any> = {};
-  const keys = Object.keys(object);
 
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    const value = (object as any)[key];
+  for (const key in object) {
+    if (Object.hasOwn(object, key)) {
+      const value = (object as any)[key];
+      const prefixedKey = prefix ? `${prefix}${delimiter}${key}` : key;
 
-    const prefixedKey = prefix ? `${prefix}${delimiter}${key}` : key;
+      if (isPlainObject(value) && Object.keys(value).length > 0) {
+        Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+        continue;
+      }
 
-    if (isPlainObject(value) && Object.keys(value).length > 0) {
-      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
-      continue;
+      if (Array.isArray(value)) {
+        Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+        continue;
+      }
+
+      result[prefixedKey] = value;
     }
-
-    if (Array.isArray(value)) {
-      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
-      continue;
-    }
-
-    result[prefixedKey] = value;
   }
 
   return result;
