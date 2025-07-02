@@ -46,4 +46,9 @@ describe('values', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(values).toEqualTypeOf<typeof valuesLodash>();
   });
+
+  it('should return an empty array for null or undefined', () => {
+    expect(values(null)).toEqual([]);
+    expect(values(undefined)).toEqual([]);
+  });
 });
