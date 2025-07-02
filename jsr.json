@@ -1,6 +1,6 @@
 {
   "name": "@es-toolkit/es-toolkit",
-  "version": "1.39.5",
+  "version": "1.39.6",
   "exports": {
     ".": "./src/index.ts",
     "./compat": "./src/compat/index.ts"
