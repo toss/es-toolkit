@@ -1,10 +1,16 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { debounce } from './debounce';
-// adjust the import path as necessary
-import { delay } from '../promise';
+
+beforeEach(() => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 describe('debounce', () => {
-  it('should debounce function calls', async () => {
+  it('should debounce function calls', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
@@ -13,64 +19,64 @@ describe('debounce', () => {
     debouncedFunc();
     debouncedFunc();
 
-    await delay(debounceMs * 2);
+    vi.advanceTimersByTime(debounceMs * 2);
 
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should delay the function call by the specified wait time', async () => {
+  it('should delay the function call by the specified wait time', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs / 2);
+    vi.advanceTimersByTime(debounceMs / 2);
     expect(func).not.toHaveBeenCalled();
 
-    await delay(debounceMs / 2 + 1);
+    vi.advanceTimersByTime(debounceMs / 2);
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should reset the wait time if called again before wait time ends', async () => {
+  it('should reset the wait time if called again before wait time ends', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs / 2);
+    vi.advanceTimersByTime(debounceMs / 2);
     debouncedFunc();
-    await delay(debounceMs / 2);
+    vi.advanceTimersByTime(debounceMs / 2);
     debouncedFunc();
-    await delay(debounceMs / 2);
+    vi.advanceTimersByTime(debounceMs / 2);
     debouncedFunc();
 
     expect(func).not.toHaveBeenCalled();
 
-    await delay(debounceMs + 1);
+    vi.advanceTimersByTime(debounceMs);
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should cancel the debounced function call', async () => {
+  it('should cancel the debounced function call', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
     debouncedFunc.cancel();
-    await delay(debounceMs);
+    vi.advanceTimersByTime(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
   });
 
-  it('should work correctly if the debounced function is called after the wait time', async () => {
+  it('should work correctly if the debounced function is called after the wait time', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs + 1);
+    vi.advanceTimersByTime(debounceMs);
     debouncedFunc();
-    await delay(debounceMs + 1);
+    vi.advanceTimersByTime(debounceMs);
 
     expect(func).toHaveBeenCalledTimes(2);
   });
@@ -83,20 +89,20 @@ describe('debounce', () => {
     expect(() => debouncedFunc.cancel()).not.toThrow();
   });
 
-  it('should call the function with correct arguments', async () => {
+  it('should call the function with correct arguments', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc('test', 123);
 
-    await delay(debounceMs * 2);
+    vi.advanceTimersByTime(debounceMs * 2);
 
     expect(func).toHaveBeenCalledTimes(1);
     expect(func).toHaveBeenCalledWith('test', 123);
   });
 
-  it('should cancel the debounced function call if aborted via AbortSignal', async () => {
+  it('should cancel the debounced function call if aborted via AbortSignal', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const controller = new AbortController();
@@ -106,12 +112,12 @@ describe('debounce', () => {
     debouncedFunc();
     controller.abort();
 
-    await delay(debounceMs);
+    vi.advanceTimersByTime(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
   });
 
-  it('should not call the debounced function if it is already aborted by AbortSignal', async () => {
+  it('should not call the debounced function if it is already aborted by AbortSignal', () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
@@ -124,7 +130,7 @@ describe('debounce', () => {
 
     debouncedFunc();
 
-    await delay(debounceMs);
+    vi.advanceTimersByTime(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
   });
