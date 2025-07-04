@@ -1,3 +1,4 @@
+import { isNil } from '../../predicate/isNil.ts';
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
 import { eq } from '../util/eq.ts';
 
@@ -149,6 +150,10 @@ export function defaults<T extends object, S extends object>(object: T, ...sourc
   }
 
   for (let i = 0; i < length; i++) {
+    if (isNil(sources[i])) {
+      continue;
+    }
+
     const source = sources[i];
     const keys = Object.keys(source) as Array<keyof S>;
 
