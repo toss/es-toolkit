@@ -1,5 +1,14 @@
 # es-toolkit Changelog
 
+## Version v1.39.6
+
+Released on July 2th, 2025.
+
+- Fixed handling of null/undefined values in `values` function.
+- Fixed type safety in `compat/get` by adding GetFieldType utility type.
+
+We sincerely thank @raon0211, @dayongkr, @yhb-flydream, @ssi02014, @JeongHwan-dev, and @guesung for their contributions. We appreciate your great efforts!
+
 ## Version v1.39.5
 
 Released on June 24th, 2025.
