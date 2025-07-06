@@ -37,6 +37,12 @@ rangeRight(0, 21, 5);
 // Returns [-3, -2, -1, 0]
 rangeRight(0, -4, -1);
 
+// Returns an empty array if end value is negative 
+rangeRight(-4);
+rangeRight(0, -4);
+
 // Throws an error: The step value must be a non-zero integer.
 rangeRight(1, 4, 0);
+// Returns an empty array if step value is negative
+rangeRight(1, 4, -1);
 ```
