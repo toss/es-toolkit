@@ -33,7 +33,10 @@ jobs:
             }
           }
           EOF
+          cat package.json
       - name: Install dependencies
-        run: npm install
+        run: |
+          rm -rf node_modules
+          npm install
       - name: Run tests
         run: npx jest
