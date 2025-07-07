@@ -42,6 +42,9 @@ jobs:
               "@babel/preset-typescript": "^7.27.1",
               "jest": "^23"
             },
+            "scripts": {
+              "test": "jest"
+            },
             "resolutions": {
               "stack-utils": "1.0.2"
             }
@@ -56,9 +59,11 @@ jobs:
           yarn -v
           echo "npm version:"
           npm -v
+          echo "npx version:"
+          npx -v
       - name: Install dependencies
         run: |
           rm -rf node_modules
           yarn install
       - name: Run tests
-        run: npx jest
+        run: yarn run test
