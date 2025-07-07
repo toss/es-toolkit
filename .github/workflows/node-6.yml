@@ -17,14 +17,15 @@ jobs:
           cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
       - run: |
-          yarn install
-          yarn build
+          yarn install --no-immutable --no-immutable-cache
+          yarn prepack
       - uses: actions/setup-node@v4
         with:
           node-version: '6'
       - name: Install Yarn
         run: |
           npm install -g yarn
+      # stack-utils is incompatible with Node 6 from 1.0.3+
       - name: Setup Node 6 project
         run: |
           rm -f package.json yarn.lock .yarnrc.yml
