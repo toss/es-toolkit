@@ -64,4 +64,8 @@ jobs:
           rm -rf node_modules
           yarn install
       - name: Run tests
-        run: yarn run test
+        run: |
+          ls -al
+          ls -al src
+          ls -al src/compat/array
+          yarn run test
