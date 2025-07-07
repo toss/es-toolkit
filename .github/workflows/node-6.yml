@@ -1,4 +1,4 @@
-name: CI
+name: Test Compatibility Layer on Node 6
 
 on:
   push:
@@ -13,6 +13,8 @@ jobs:
         with:
           node-version: '6'
       - name: Install dependencies
-        run: npm init
+        run: |
+          npm init -y
+          npm install
       - name: Run tests
         run: yarn jest
