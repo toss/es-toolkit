@@ -16,15 +16,7 @@ jobs:
       - name: Install Yarn
         run: |
           npm install -g yarn
-      - name: Check node, npm version
-        run: |
-          echo "node version:"
-          node -v
-          echo "yarn version:"
-          yarn -v
-          echo "npm version:"
-          npm -v
-      - name: Setup package.json
+      - name: Setup Node 6 project
         run: |
           rm -f package.json yarn.lock .yarnrc.yml
           cat > package.json << 'EOF'
@@ -41,6 +33,15 @@ jobs:
           }
           EOF
           cat package.json
+      - name: Check node, npm version
+        run: |
+          echo "node version:"
+          node -v
+          echo "yarn version:"
+          yarn -v
+          echo "npm version:"
+          npm -v
+
       - name: Install dependencies
         run: |
           rm -rf node_modules
