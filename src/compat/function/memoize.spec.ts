@@ -92,7 +92,7 @@ describe('memoize', () => {
     expect(() => {
       // @ts-expect-error - Intentionally passing incorrect type to test runtime error
       memoize(noop, true);
-    }).toThrowError(TypeError);
+    }).toThrow(TypeError);
   });
 
   it('should not error if `resolver` is nullish', () => {
