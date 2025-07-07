@@ -12,9 +12,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '6'
+      - name: Check node, npm version
+        run: |
+          node -v
+          npm -v
       - name: Install dependencies
         run: |
-          npm init -y
           npm install
       - name: Run tests
-        run: yarn jest
+        run: npx jest
