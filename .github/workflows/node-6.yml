@@ -41,10 +41,9 @@ jobs:
           yarn -v
           echo "npm version:"
           npm -v
-
       - name: Install dependencies
         run: |
           rm -rf node_modules
-          yarn install
+          yarn install --verbose
       - name: Run tests
         run: npx jest
