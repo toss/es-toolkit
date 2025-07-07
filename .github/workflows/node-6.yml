@@ -17,9 +17,12 @@ jobs:
         run: |
           node -v
           npm -v
+      - name: Install Yarn
+        run: |
+          npm install -g yarn
       - name: Setup package.json
         run: |
-          rm -f package.json
+          rm -f package.json yarn.lock
           cat > package.json << 'EOF'
           {
             "name": "es-toolkit-node-6",
@@ -37,6 +40,6 @@ jobs:
       - name: Install dependencies
         run: |
           rm -rf node_modules
-          npm install
+          yarn install
       - name: Run tests
         run: npx jest
