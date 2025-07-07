@@ -3,4 +3,5 @@ module.exports = {
   moduleNameMapper: {
     '^vitest$': require.resolve('./jest.globals.js'),
   },
+  moduleFileExtensions: ['ts', 'js', 'json', 'jsx', 'node'],
 };
