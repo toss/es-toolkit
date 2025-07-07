@@ -17,8 +17,23 @@ jobs:
         run: |
           node -v
           npm -v
-      - name: Install dependencies
+      - name: Setup package.json
         run: |
-          npm install
+          rm -f package.json
+          cat > package.json << 'EOF'
+          {
+            "name": "es-toolkit-node-6",
+            "version": "1.0.0",
+            "private": true,
+            "devDependencies": {
+              "@babel/core": "^7.28.0",
+              "@babel/preset-env": "^7.28.0",
+              "@babel/preset-typescript": "^7.27.1",
+              "jest": "^24"
+            }
+          }
+          EOF
+      - name: Install dependencies
+        run: npm install
       - name: Run tests
         run: npx jest
