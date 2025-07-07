@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '8'
+          node-version: '6'
       - name: Install Yarn
         run: |
           npm install -g yarn
@@ -28,7 +28,10 @@ jobs:
               "@babel/core": "^7.28.0",
               "@babel/preset-env": "^7.28.0",
               "@babel/preset-typescript": "^7.27.1",
-              "jest": "^24"
+              "jest": "^23"
+            },
+            "resolutions": {
+              "stack-utils": "1.0.2"
             }
           }
           EOF
