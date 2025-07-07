@@ -18,9 +18,12 @@ jobs:
           npm install -g yarn
       - name: Check node, npm version
         run: |
+          echo "node version:"
           node -v
-          npm -v
+          echo "yarn version:"
           yarn -v
+          echo "npm version:"
+          npm -v
       - name: Setup package.json
         run: |
           rm -f package.json yarn.lock .yarnrc.yml
