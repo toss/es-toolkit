@@ -10,6 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+          node-version-file: '.nvmrc'
+      - run: |
+          yarn install
+          yarn build
       - uses: actions/setup-node@v4
         with:
           node-version: '6'
@@ -21,9 +30,10 @@ jobs:
           rm -f package.json yarn.lock .yarnrc.yml
           cat > package.json << 'EOF'
           {
-            "name": "es-toolkit-node-6",
+            "name": "es-toolkit",
             "version": "1.0.0",
             "private": true,
+            "main": "./dist/index.js",
             "devDependencies": {
               "@babel/core": "^7.28.0",
               "@babel/preset-env": "^7.28.0",
