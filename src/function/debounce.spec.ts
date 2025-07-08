@@ -103,6 +103,51 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledWith('test', 123);
   });
 
+  it('should execute immediately on first call when edges is set to leading', async () => {
+    const func = vi.fn();
+    const debouncedFunc = debounce(func, DEBOUNCE_MS, { edges: ['leading'] });
+
+    debouncedFunc();
+
+    expect(func).toHaveBeenCalledTimes(1);
+
+    debouncedFunc();
+
+    await delay(DEBOUNCE_MS);
+
+    expect(func).toHaveBeenCalledTimes(1);
+  });
+
+  it('should execute immediately on last call when edges is set to trailing', async () => {
+    const func = vi.fn();
+    const debouncedFunc = debounce(func, DEBOUNCE_MS, { edges: ['trailing'] });
+
+    debouncedFunc();
+
+    expect(func).not.toHaveBeenCalled();
+
+    debouncedFunc();
+
+    await delay(DEBOUNCE_MS);
+
+    expect(func).toHaveBeenCalledTimes(1);
+  });
+
+  it('should execute immediately on both edges when edges is set to both', async () => {
+    const func = vi.fn();
+    const debouncedFunc = debounce(func, DEBOUNCE_MS, { edges: ['leading', 'trailing'] });
+
+    debouncedFunc();
+
+    expect(func).toHaveBeenCalledTimes(1);
+
+    debouncedFunc();
+
+    await delay(DEBOUNCE_MS);
+
+    expect(func).toHaveBeenCalledTimes(2);
+  });
+
   it('should cancel the debounced function call if aborted via AbortSignal', async () => {
     const func = vi.fn();
     const controller = new AbortController();

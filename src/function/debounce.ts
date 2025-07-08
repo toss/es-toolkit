@@ -50,6 +50,7 @@ export interface DebouncedFunction<F extends (...args: any[]) => void> {
  * @param {number} debounceMs - The number of milliseconds to delay.
  * @param {DebounceOptions} options - The options object
  * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
+ * @param {Array<'leading' | 'trailing'>} options.edges - An optional array specifying whether the function should be invoked on the leading edge, trailing edge, or both.
  * @returns A new debounced function with a `cancel` method.
  *
  * @example
