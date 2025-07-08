@@ -13,6 +13,8 @@ describe('debounce', () => {
     debouncedFunc();
     debouncedFunc();
 
+    expect(func).not.toHaveBeenCalled();
+
     await delay(debounceMs * 2);
 
     expect(func).toHaveBeenCalledTimes(1);
@@ -60,6 +62,17 @@ describe('debounce', () => {
     await delay(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
+  });
+
+  it('should immediately invoke the delayed function when flush is called', async () => {
+    const func = vi.fn();
+    const debounceMs = 50;
+    const debouncedFunc = debounce(func, debounceMs);
+
+    debouncedFunc();
+    debouncedFunc.flush();
+
+    expect(func).toHaveBeenCalledTimes(1);
   });
 
   it('should work correctly if the debounced function is called after the wait time', async () => {
