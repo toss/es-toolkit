@@ -17,6 +17,7 @@
  * Here are some of the features es-toolkit offers:
  *
  * - **Array**: Utilities for array manipulation, such as [uniq](https://es-toolkit.dev/reference/array/uniq.html) and [difference](https://es-toolkit.dev/reference/array/difference.html).
+ * - **Color**: Tools for color manipulation, such as [rgbToHex](https://es-toolkit.dev/reference/color/rgbToHex.html).
  * - **Function**: Tools for controlling function execution, including [debounce](https://es-toolkit.dev/reference/function/debounce.html) and [throttle](https://es-toolkit.dev/reference/function/throttle.html).
  * - **Math**: Numerical utilities like [sum](https://es-toolkit.dev/reference/math/sum.html) and [round](https://es-toolkit.dev/reference/math/round.html).
  * - **Object**: Tools for manipulating JavaScript objects, such as [pick](https://es-toolkit.dev/reference/object/pick.html) and [omit](https://es-toolkit.dev/reference/object/omit.html).
@@ -55,6 +56,7 @@
  * @module
  */
 export * from './array/index.ts';
+export * from './color/index.ts';
 export * from './error/index.ts';
 export * from './function/index.ts';
 export * from './math/index.ts';
