@@ -163,13 +163,13 @@ describe('merge', () => {
 
       // eslint-disable-next-line
       // @ts-ignore
-      return globalThis[type] ? { value: array } : false;
+      return global[type] ? { value: array } : false;
     });
 
     let actual = typedArrays.map(type => {
       // eslint-disable-next-line
       // @ts-ignore
-      const Ctor = globalThis[type];
+      const Ctor = global[type];
       return Ctor ? merge({ value: new Ctor(buffer) }, { value: [1] }) : false;
     });
 
@@ -181,13 +181,13 @@ describe('merge', () => {
       array.push(1);
       // eslint-disable-next-line
       // @ts-ignore
-      return globalThis[type] ? { value: array } : false;
+      return global[type] ? { value: array } : false;
     });
 
     actual = typedArrays.map((type, index) => {
       // eslint-disable-next-line
       // @ts-ignore
-      const Ctor = globalThis[type];
+      const Ctor = global[type];
       const array = range(arrays[index].length);
 
       array.push(1);

@@ -55,5 +55,25 @@ export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ?
  * console.log(numbers); // [1, 3, 5]
  */
 export function pull<T>(arr: T[], ...valuesToRemove: readonly unknown[]): T[] {
-  return pullToolkit(arr, valuesToRemove);
+  const valuesSet = new Set(valuesToRemove);
+  let resultIndex = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (valuesSet.has(arr[i])) {
+      continue;
+    }
+
+    // For handling sparse arrays
+    // eslint-disable-next-line prefer-object-has-own
+    if (!Object.prototype.hasOwnProperty.call(arr, i)) {
+      delete arr[resultIndex++];
+      continue;
+    }
+
+    arr[resultIndex++] = arr[i];
+  }
+
+  arr.length = resultIndex;
+
+  return arr;
 }

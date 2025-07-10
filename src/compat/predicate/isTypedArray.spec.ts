@@ -12,7 +12,7 @@ import { stubFalse } from '../util/stubFalse';
 describe('isTypedArray', () => {
   it('should return `true` for typed arrays', () => {
     const actual = typedArrays.map(type => {
-      const Ctor = (globalThis as any)[type];
+      const Ctor = (global as any)[type];
       return Ctor ? isTypedArray(new Ctor(new ArrayBuffer(8))) : false;
     });
 

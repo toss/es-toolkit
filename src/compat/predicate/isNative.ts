@@ -34,7 +34,7 @@ export function isNative(value: any): value is (...args: any[]) => any {
     return false;
   }
 
-  if ((globalThis as any)?.['__core-js_shared__'] != null) {
+  if ((global as any)?.['__core-js_shared__'] != null) {
     throw new Error('Unsupported core-js use. Try https://npms.io/search?q=ponyfill.');
   }
 

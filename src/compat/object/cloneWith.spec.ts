@@ -561,7 +561,7 @@ describe('cloneWith', () => {
 
   lodashStable.each(typedArrays, type => {
     it(`should clone ${type} values when customizer returns undefined`, () => {
-      const Ctor = globalThis[type as keyof typeof globalThis] as any;
+      const Ctor = global[type as keyof typeof global] as any;
 
       if (!Ctor) {
         return;
@@ -620,7 +620,7 @@ describe('cloneWith', () => {
 
   lodashStable.each(errorTypes, type => {
     it(`should not clone ${type}s when customizer returns undefined`, () => {
-      const Ctor = globalThis[type as keyof typeof globalThis];
+      const Ctor = global[type as keyof typeof global];
       const value = new Ctor('error');
 
       const object = { a: value, b: { c: value } };

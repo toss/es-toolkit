@@ -462,7 +462,7 @@ describe('isEqual', () => {
       const CtorA =
         // eslint-disable-next-line
         // @ts-ignore
-        globalThis[type] ||
+        global[type] ||
         // eslint-disable-next-line
         // @ts-ignore
         function (n) {
@@ -473,7 +473,7 @@ describe('isEqual', () => {
       const CtorB =
         // eslint-disable-next-line
         // @ts-ignore
-        globalThis[otherType] ||
+        global[otherType] ||
         // eslint-disable-next-line
         // @ts-ignore
         function (n) {
@@ -483,13 +483,13 @@ describe('isEqual', () => {
         };
       // eslint-disable-next-line
       // @ts-ignore
-      const bufferA = globalThis[type] ? new ArrayBuffer(8) : 8;
+      const bufferA = global[type] ? new ArrayBuffer(8) : 8;
       // eslint-disable-next-line
       // @ts-ignore
-      const bufferB = globalThis[otherType] ? new ArrayBuffer(8) : 8;
+      const bufferB = global[otherType] ? new ArrayBuffer(8) : 8;
       // eslint-disable-next-line
       // @ts-ignore
-      const bufferC = globalThis[otherType] ? new ArrayBuffer(16) : 16;
+      const bufferC = global[otherType] ? new ArrayBuffer(16) : 16;
 
       return [new CtorA(bufferA), new CtorA(bufferA), new CtorB(bufferB), new CtorB(bufferC)];
     });
@@ -524,10 +524,10 @@ describe('isEqual', () => {
         const otherType = errorTypes[++index % errorTypes.length];
         // eslint-disable-next-line
         // @ts-ignore
-        const CtorA = globalThis[type];
+        const CtorA = global[type];
         // eslint-disable-next-line
         // @ts-ignore
-        const CtorB = globalThis[otherType];
+        const CtorB = global[otherType];
 
         return [new CtorA('a'), new CtorA('a'), new CtorB('a'), new CtorB('b')];
       }

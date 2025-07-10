@@ -66,7 +66,7 @@ describe('delay', () => {
 
   it('should work with mocked `setTimeout`', () => {
     let pass = false;
-    const originalSetTimeout = globalThis.setTimeout;
+    const originalSetTimeout = global.setTimeout;
 
     // @ts-expect-error invalid type
     global.setTimeout = (func: () => void) => {

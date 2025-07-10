@@ -1,3 +1,5 @@
+import { keys } from './keys';
+
 /**
  * Creates an array of the own enumerable property values of `object`.
  *
@@ -50,5 +52,5 @@ export function values(object: any): any[] {
     return [];
   }
 
-  return Object.values(object);
+  return keys(object).map(key => object[key]);
 }

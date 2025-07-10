@@ -86,14 +86,14 @@ describe('isNative', () => {
   });
 
   it('should throw an error if core-js is detected', () => {
-    (globalThis as any)['__core-js_shared__'] = {};
+    (global as any)['__core-js_shared__'] = {};
 
     try {
       expect(() => {
         isNative(noop);
       }).toThrow();
     } finally {
-      delete (globalThis as any)['__core-js_shared__'];
+      delete (global as any)['__core-js_shared__'];
     }
   });
 
