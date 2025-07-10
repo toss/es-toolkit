@@ -1,6 +1,8 @@
 import { escape } from './escape.ts';
 import { attempt } from '../function/attempt.ts';
 import { defaults } from '../object/defaults.ts';
+import { keys as keysToolkit } from '../object/keys.ts';
+import { values as valuesToolkit } from '../object/values.ts';
 import { toString } from '../util/toString.ts';
 
 // A regular expression for matching literal string in ES template string.
@@ -166,8 +168,8 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
   }
 
   const imports = defaults({ ...options.imports }, templateSettings.imports);
-  const importsKeys = Object.keys(imports);
-  const importValues = Object.values(imports);
+  const importsKeys = keysToolkit(imports);
+  const importValues = valuesToolkit(imports);
 
   const sourceURL = `//# sourceURL=${
     options.sourceURL ? String(options.sourceURL).replace(/[\r\n]/g, ' ') : `es-toolkit.templateSource[${Date.now()}]`

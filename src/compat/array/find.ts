@@ -3,6 +3,7 @@ import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ListIteratorTypeGuard } from '../_internal/ListIteratorTypeGuard.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
+import { values as valuesToolkit } from '../object/values.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
@@ -130,6 +131,6 @@ export function find<T>(
     return undefined;
   }
 
-  const values = Array.isArray(source) ? source.slice(fromIndex) : Object.values(source).slice(fromIndex);
+  const values = Array.isArray(source) ? source.slice(fromIndex) : valuesToolkit(source).slice(fromIndex);
   return values.find(doesMatch);
 }

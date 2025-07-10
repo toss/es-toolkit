@@ -1,6 +1,7 @@
 import { groupBy as groupByToolkit } from '../../array/groupBy.ts';
 import { identity } from '../../function/identity.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import { values as valuesToolkit } from '../object/values.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
@@ -86,7 +87,7 @@ export function groupBy<T, K extends PropertyKey>(
     return {} as Record<K, T[]>;
   }
 
-  const items = isArrayLike(source) ? Array.from(source) : Object.values(source);
+  const items = isArrayLike(source) ? Array.from(source) : valuesToolkit(source);
   const getKeyFromItem = createIteratee(_getKeyFromItem ?? identity);
 
   return groupByToolkit<T, K>(items, getKeyFromItem);

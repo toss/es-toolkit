@@ -1,5 +1,6 @@
 import { isFunction, isNil } from '../../predicate/index.ts';
 import { get } from '../object/get.ts';
+import { values as valuesToolkit } from '../object/values.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
@@ -56,7 +57,7 @@ export function invokeMap<T, R>(
     return [];
   }
 
-  const values = isArrayLike(collection) ? (Array.from(collection) as T[]) : (Object.values(collection) as T[]);
+  const values = isArrayLike(collection) ? (Array.from(collection) as T[]) : (valuesToolkit(collection) as T[]);
   const result: Array<R | undefined> = [];
 
   for (let i = 0; i < values.length; i++) {

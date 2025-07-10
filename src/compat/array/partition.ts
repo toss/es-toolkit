@@ -1,6 +1,7 @@
 import { identity } from '../../function/identity.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { ValueIteratorTypeGuard } from '../_internal/ValueIteratorTypeGuard.ts';
+import { values as valuesToolkit } from '../object/values.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee } from '../util/iteratee.ts';
 
@@ -89,7 +90,7 @@ export function partition<T>(
     return [[], []];
   }
 
-  const collection = isArrayLike(source) ? source : Object.values(source);
+  const collection = isArrayLike(source) ? source : valuesToolkit(source);
 
   predicate = iteratee(predicate);
 

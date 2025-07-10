@@ -1,5 +1,6 @@
 import { identity } from '../../function/identity.ts';
 import { Many } from '../_internal/Many.ts';
+import { flatten } from '../array/flatten.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
@@ -57,7 +58,7 @@ export function overArgs(
     throw new TypeError('Expected a function');
   }
 
-  const transforms = _transforms.flat();
+  const transforms = flatten(_transforms);
 
   return function (this: any, ...args: any[]) {
     const length = Math.min(args.length, transforms.length);

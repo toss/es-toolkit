@@ -1,4 +1,5 @@
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import { values } from '../object/values.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
@@ -30,7 +31,7 @@ export function countBy(collection: any, iteratee?: any): Record<string, number>
     return {} as Record<string, number>;
   }
 
-  const array = isArrayLike(collection) ? Array.from(collection) : Object.values(collection);
+  const array = isArrayLike(collection) ? Array.from(collection) : values(collection);
   const mapper = iterateeToolkit(iteratee ?? undefined) as (value: any) => any;
 
   const result = Object.create(null) as Record<string, number>;

@@ -3,6 +3,7 @@ import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ListIteratorTypeGuard } from '../_internal/ListIteratorTypeGuard.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { ObjectIteratorTypeGuard } from '../_internal/ObjectIterator.ts';
+import { values as valuesToolkit } from '../object/values.ts';
 import { iteratee } from '../util/iteratee.ts';
 import { toInteger } from '../util/toInteger.ts';
 
@@ -156,7 +157,7 @@ export function findLast<T>(
     return undefined;
   }
 
-  const values = Array.isArray(source) ? source.slice(0, fromIndex + 1) : Object.values(source).slice(0, fromIndex + 1);
+  const values = Array.isArray(source) ? source.slice(0, fromIndex + 1) : valuesToolkit(source).slice(0, fromIndex + 1);
   for (let i = values.length - 1; i >= 0; i--) {
     if (doesMatch(values[i], i, values)) {
       return values[i];

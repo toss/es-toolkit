@@ -3,6 +3,7 @@ import type { sample as sampleLodash } from 'lodash';
 import { sample } from './sample';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
+import { values as valuesToolkit } from '../object/values.ts';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/sample.spec.js
@@ -33,7 +34,7 @@ describe('sample', () => {
   it('should sample an object', () => {
     const object = { a: 1, b: 2, c: 3 };
     const actual = sample(object);
-    const values = Object.values(object);
+    const values = valuesToolkit(object);
 
     expect(values).toContain(actual);
   });

@@ -2,6 +2,7 @@ import { identity } from '../../function/identity.ts';
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
 import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
 import { property } from '../object/property.ts';
+import { values as valuesToolkit } from '../object/values.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
 
@@ -91,7 +92,7 @@ export function some<T>(
     predicate = identity;
   }
 
-  const values = Array.isArray(source) ? source : Object.values(source);
+  const values = Array.isArray(source) ? source : valuesToolkit(source);
 
   switch (typeof predicate) {
     case 'function': {

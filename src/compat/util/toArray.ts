@@ -1,3 +1,4 @@
+import { values as valuesToolkit } from '../object/values.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isMap } from '../predicate/isMap.ts';
 
@@ -59,7 +60,7 @@ export function toArray(value?: unknown): any[] {
   }
 
   if (typeof value === 'object') {
-    return Object.values(value);
+    return valuesToolkit(value);
   }
 
   return [];
