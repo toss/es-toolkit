@@ -29,8 +29,10 @@ describe('pullAllBy', () => {
 
     const actual = pullAllBy(array, [{ x: 1 }, { x: 3 }], object => object?.x);
 
-    expect(Object.hasOwn(actual, '0')).toEqual(true);
-    expect(Object.hasOwn(actual, '1')).toEqual(false);
+    // eslint-disable-next-line prefer-object-has-own
+    expect(Object.prototype.hasOwnProperty.call(actual, '0')).toEqual(true);
+    // eslint-disable-next-line prefer-object-has-own
+    expect(Object.prototype.hasOwnProperty.call(actual, '1')).toEqual(false);
   });
 
   it('should match the type of lodash', () => {
