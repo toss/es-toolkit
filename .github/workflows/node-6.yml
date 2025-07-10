@@ -40,8 +40,8 @@ jobs:
               "@babel/core": "^7.28.0",
               "@babel/preset-env": "^7.28.0",
               "@babel/preset-typescript": "^7.27.1",
-              "babel-jest": "^23",
-              "jest": "^23"
+              "babel-jest": "^24",
+              "jest": "^24"
             },
             "scripts": {
               "test": "jest"
