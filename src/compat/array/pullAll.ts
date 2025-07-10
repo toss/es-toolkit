@@ -1,4 +1,4 @@
-import { pull as pullToolkit } from '../../array/pull.ts';
+import { pull as pullToolkit } from './pull.ts';
 
 /**
  * This method is like `_.pull` except that it accepts an array of values to remove.
@@ -58,5 +58,5 @@ export function pullAll<L extends ArrayLike<any>>(
  * console.log(numbers); // [1, 3, 5]
  */
 export function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T> = []): T[] {
-  return pullToolkit(arr, Array.from(valuesToRemove));
+  return pullToolkit.call(arr, valuesToRemove) as T[];
 }

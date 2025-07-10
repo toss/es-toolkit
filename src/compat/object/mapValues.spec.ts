@@ -1,6 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { mapValues as mapValuesLodash } from 'lodash';
 import { mapValues } from './mapValues';
+import { isEqual } from '../predicate/isEqual';
 
 describe('mapValues', () => {
   const array = [1, 2];
