@@ -158,7 +158,8 @@ export function defaults<T extends object, S extends object>(object: T, ...sourc
 
       if (
         value === undefined ||
-        (!Object.hasOwn(object, key) && eq(value, objectProto[key as keyof typeof objectProto]))
+        // eslint-disable-next-line prefer-object-has-own
+        (!Object.prototype.hasOwnProperty.call(object, key) && eq(value, objectProto[key as keyof typeof objectProto]))
       ) {
         (object as any)[key] = source[key];
       }
