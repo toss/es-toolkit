@@ -1,5 +1,6 @@
 import { toPath } from './toPath.ts';
 import { toKey } from '../_internal/toKey.ts';
+import { flatten } from '../array/flatten.ts';
 import { last } from '../array/last.ts';
 import { get } from '../object/get.ts';
 
@@ -24,7 +25,7 @@ import { get } from '../object/get.ts';
  * invoke(object, ['a', 'b'], [1, 2]); // => 3
  */
 export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], ...args: any[]): any {
-  args = args.flat(1);
+  args = flatten(args);
 
   if (object == null) {
     return;

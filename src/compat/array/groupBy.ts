@@ -1,4 +1,3 @@
-import { groupBy as groupByToolkit } from '../../array/groupBy.ts';
 import { identity } from '../../function/identity.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { values as valuesToolkit } from '../object/values.ts';
@@ -90,5 +89,19 @@ export function groupBy<T, K extends PropertyKey>(
   const items = isArrayLike(source) ? Array.from(source) : valuesToolkit(source);
   const getKeyFromItem = createIteratee(_getKeyFromItem ?? identity);
 
-  return groupByToolkit<T, K>(items, getKeyFromItem);
+  const result = {} as Record<K, T[]>;
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const key = getKeyFromItem(item) as K;
+
+    // eslint-disable-next-line prefer-object-has-own
+    if (!Object.prototype.hasOwnProperty.call(result, key)) {
+      result[key] = [];
+    }
+
+    result[key].push(item);
+  }
+
+  return result;
 }
