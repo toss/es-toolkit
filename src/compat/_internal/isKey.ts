@@ -29,6 +29,6 @@ export function isKey(value?: unknown, object?: unknown): value is PropertyKey {
 
   return (
     (typeof value === 'string' && (regexIsPlainProp.test(value) || !regexIsDeepProp.test(value))) ||
-    (object != null && Object.hasOwn(object, value as PropertyKey))
+    (object != null && Object.prototype.hasOwnProperty.call(object, value as PropertyKey))
   );
 }

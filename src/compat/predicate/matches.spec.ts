@@ -3,6 +3,7 @@ import type { matches as matchesLodash } from 'lodash';
 import { matches } from './matches';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
+import { cloneDeep } from '../object/cloneDeep';
 import { stubTrue } from '../util/stubTrue';
 
 describe('matches', () => {
@@ -366,7 +367,7 @@ describe('matches', () => {
     const sources = [{ a: { b: 2, c: 3 } }, { a: 1, b: 2 }, { a: 1 }];
 
     sources.forEach((source: any, index) => {
-      const object = structuredClone(source);
+      const object = cloneDeep(source);
       const isMatch = matches(source);
 
       expect(isMatch(object)).toBe(true);

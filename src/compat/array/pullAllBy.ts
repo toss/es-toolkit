@@ -130,7 +130,8 @@ export function pullAllBy(arr: any, valuesToRemove: any, _getValue: any): any {
     }
 
     // For handling sparse arrays
-    if (!Object.hasOwn(arr, i)) {
+    // eslint-disable-next-line prefer-object-has-own
+    if (!Object.prototype.hasOwnProperty.call(arr, i)) {
       delete arr[resultIndex++];
       continue;
     }

@@ -1,3 +1,4 @@
+import { nth } from '../array/nth.ts';
 import { toInteger } from '../util/toInteger.ts';
 
 /**
@@ -38,6 +39,6 @@ export function nthArg(n?: number): (...args: any[]) => any;
  */
 export function nthArg(n = 0): (...args: any[]) => unknown {
   return function (...args: any[]) {
-    return args.at(toInteger(n));
+    return nth(args, n);
   };
 }

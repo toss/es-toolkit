@@ -42,7 +42,7 @@ function defaultsDeepRecursive(
   for (const key in source) {
     const sourceValue = source[key];
     const targetValue = target[key];
-    const targetHasKey = Object.hasOwn(target, key);
+    const targetHasKey = Object.prototype.hasOwnProperty.call(target, key);
 
     if (!targetHasKey || targetValue === undefined) {
       if (stack.has(sourceValue)) {

@@ -103,7 +103,7 @@ export function pick<T extends object, U extends keyof T>(
         continue;
       }
 
-      if (typeof key === 'string' && Object.hasOwn(obj, key)) {
+      if (typeof key === 'string' && Object.prototype.hasOwnProperty.call(obj, key)) {
         result[key] = value;
       } else {
         set(result, key, value);
