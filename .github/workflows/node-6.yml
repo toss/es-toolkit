@@ -66,8 +66,4 @@ jobs:
           yarn install
       - name: Run tests
         run: |
-          pwd
-          ls -al
-          ls -al src
-          ls -al src/compat/array
-          yarn run test
+          yarn run test --silent
