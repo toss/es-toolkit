@@ -157,5 +157,10 @@ export function findLast<T>(
   }
 
   const values = Array.isArray(source) ? source.slice(0, fromIndex + 1) : Object.values(source).slice(0, fromIndex + 1);
-  return values.findLast(doesMatch);
+  for (let i = values.length - 1; i >= 0; i--) {
+    if (doesMatch(values[i], i, values)) {
+      return values[i];
+    }
+  }
+  return undefined;
 }
