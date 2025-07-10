@@ -1,3 +1,5 @@
+import { debounce as debounceToolkit } from '../../function/debounce.ts';
+
 interface DebounceSettings {
   /**
    * If `true`, the function will be invoked on the leading edge of the timeout.
@@ -76,15 +78,15 @@ export interface DebouncedFuncLeading<T extends (...args: any[]) => any> extends
  * @returns A new debounced function with a `cancel` method.
  *
  * @example
- * const debounced = debounce(() => {
+ * const debouncedFunction = debounce(() => {
  *   console.log('Function executed');
  * }, 1000);
  *
  * // Will log 'Function executed' after 1 second if not called again in that time
- * debounced();
+ * debouncedFunction();
  *
  * // Will not log anything as the previous call is canceled
- * debounced.cancel();
+ * debouncedFunction.cancel();
  *
  * // With AbortSignal
  * const controller = new AbortController();
@@ -100,7 +102,7 @@ export interface DebouncedFuncLeading<T extends (...args: any[]) => any> extends
  */
 export function debounce<T extends (...args: any) => any>(
   func: T,
-  debounceMs: number | undefined,
+  wait: number | undefined,
   options: DebounceSettingsLeading
 ): DebouncedFuncLeading<T>;
 
@@ -128,15 +130,15 @@ export function debounce<T extends (...args: any) => any>(
  * @returns A new debounced function with a `cancel` method.
  *
  * @example
- * const debounced = debounce(() => {
+ * const debouncedFunction = debounce(() => {
  *   console.log('Function executed');
  * }, 1000);
  *
  * // Will log 'Function executed' after 1 second if not called again in that time
- * debounced();
+ * debouncedFunction();
  *
  * // Will not log anything as the previous call is canceled
- * debounced.cancel();
+ * debouncedFunction.cancel();
  *
  * // With AbortSignal
  * const controller = new AbortController();
@@ -152,7 +154,7 @@ export function debounce<T extends (...args: any) => any>(
  */
 export function debounce<T extends (...args: any) => any>(
   func: T,
-  debounceMs?: number,
+  wait?: number,
   options?: DebounceSettings
 ): DebouncedFunc<T>;
 
@@ -165,122 +167,58 @@ export function debounce<F extends (...args: any[]) => any>(
     options = {};
   }
 
-  let pendingArgs: Parameters<F> | null = null;
-  let pendingThis: ThisType<F> | null = null;
-
-  let lastCallTime: number | null = null;
-  let maxWaitStartTime = 0;
-
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
-  let lastResult: ReturnType<F> | undefined;
-
   const { leading = false, trailing = true, maxWait } = options;
-  const hasMaxWait = 'maxWait' in options;
-  const maxWaitMs = hasMaxWait ? Math.max(Number(maxWait) || 0, debounceMs) : 0;
 
-  const invoke = (time: number) => {
-    if (pendingArgs !== null) {
-      lastResult = func.apply(pendingThis, pendingArgs);
-    }
+  const edges = Array(2);
 
-    pendingArgs = pendingThis = null;
-    maxWaitStartTime = time;
+  if (leading) {
+    edges[0] = 'leading';
+  }
 
-    return lastResult;
-  };
+  if (trailing) {
+    edges[1] = 'trailing';
+  }
 
-  const handleLeading = (time: number) => {
-    maxWaitStartTime = time;
-    timeoutId = setTimeout(handleTimeout, debounceMs);
+  let result: ReturnType<F> | undefined = undefined;
+  let pendingAt: number | null = null;
 
-    if (leading && pendingArgs !== null) {
-      return invoke(time);
-    }
+  const _debounced = debounceToolkit(
+    function (this: any, ...args: Parameters<F>) {
+      result = func.apply(this, args);
+      pendingAt = null;
+    },
+    debounceMs,
+    { edges }
+  );
 
-    return lastResult;
-  };
-
-  const handleTrailing = (time: number) => {
-    timeoutId = null;
-
-    if (trailing && pendingArgs !== null) {
-      return invoke(time);
-    }
-
-    return lastResult;
-  };
-
-  const checkCanInvoke = (time: number) => {
-    if (lastCallTime === null) {
-      return true;
-    }
-
-    const timeSinceLastCall = time - lastCallTime;
-
-    const hasDebounceDelayPassed = timeSinceLastCall >= debounceMs || timeSinceLastCall < 0;
-    const hasMaxWaitPassed = hasMaxWait && time - maxWaitStartTime >= maxWaitMs;
-
-    return hasDebounceDelayPassed || hasMaxWaitPassed;
-  };
-
-  const calculateRemainingWait = (time: number) => {
-    const timeSinceLastCall = lastCallTime === null ? 0 : time - lastCallTime;
-    const remainingDebounceTime = debounceMs - timeSinceLastCall;
-    const remainingMaxWaitTime = maxWaitMs - (time - maxWaitStartTime);
-
-    return hasMaxWait ? Math.min(remainingDebounceTime, remainingMaxWaitTime) : remainingDebounceTime;
-  };
-
-  const handleTimeout = () => {
-    const currentTime = Date.now();
-
-    if (checkCanInvoke(currentTime)) {
-      return handleTrailing(currentTime);
-    }
-
-    timeoutId = setTimeout(handleTimeout, calculateRemainingWait(currentTime));
-  };
-
-  const debounced = function (this: ThisType<F>, ...args: Parameters<F>) {
-    const currentTime = Date.now();
-    const canInvoke = checkCanInvoke(currentTime);
-
-    pendingArgs = args;
-    pendingThis = this as ThisType<F>;
-
-    lastCallTime = currentTime;
-
-    if (canInvoke) {
-      if (timeoutId === null) {
-        return handleLeading(currentTime);
+  const debounced = function (this: any, ...args: Parameters<F>) {
+    if (maxWait != null) {
+      if (pendingAt === null) {
+        pendingAt = Date.now();
       }
 
-      if (hasMaxWait) {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(handleTimeout, debounceMs);
-        return invoke(currentTime);
+      if (Date.now() - pendingAt >= maxWait) {
+        result = func.apply(this, args);
+        pendingAt = Date.now();
+
+        _debounced.cancel();
+        _debounced.schedule();
+
+        return result;
       }
     }
 
-    if (timeoutId === null) {
-      timeoutId = setTimeout(handleTimeout, debounceMs);
-    }
-
-    return lastResult;
+    _debounced.apply(this, args);
+    return result;
   };
 
-  debounced.cancel = () => {
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-    }
-
-    maxWaitStartTime = 0;
-    lastCallTime = pendingArgs = pendingThis = timeoutId = null;
+  const flush = () => {
+    _debounced.flush();
+    return result;
   };
 
-  debounced.flush = () => {
-    return timeoutId === null ? lastResult : handleTrailing(Date.now());
-  };
+  debounced.cancel = _debounced.cancel;
+  debounced.flush = flush;
 
   return debounced;
 }
