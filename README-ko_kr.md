@@ -38,7 +38,7 @@ console.log(chunkedArray);
 
 커뮤니티에 있는 모든 분들에게 기여를 환영해요. 아래에 작성되어 있는 기여 가이드를 확인하세요.
 
-[CONTRIBUTING](https://github.com/toss/es-toolkit/blob/main/.github/CONTRIBUTING.md)
+[CONTRIBUTING](https://github.com/toss/es-toolkit/blob/main/.github/CONTRIBUTING-ko_kr.md)
 
 ## 라이선스
 
