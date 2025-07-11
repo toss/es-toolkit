@@ -56,4 +56,6 @@ defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
 defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
 defaults({ a: null }, { a: 1 }); // { a: null }
 defaults({ a: undefined }, { a: 1 }); // { a: 1 }
+defaults({ a: 1 }, undefined); // { a: 1 }
+defaults({ a: 1 }, null); // { a: 1 }
 ```
