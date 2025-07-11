@@ -59,16 +59,16 @@ export function unzipWith<T>(
     return [];
   }
 
-  const unziped = isArray(array) ? unzipToolkit(array) : unzipToolkit(Array.from(array, value => Array.from(value)));
+  const unzipped = isArray(array) ? unzipToolkit(array) : unzipToolkit(Array.from(array, value => Array.from(value)));
 
   if (!iteratee) {
-    return unziped;
+    return unzipped;
   }
 
-  const result: any[] = new Array(unziped.length);
+  const result: any[] = new Array(unzipped.length);
 
-  for (let i = 0; i < unziped.length; i++) {
-    const value = unziped[i];
+  for (let i = 0; i < unzipped.length; i++) {
+    const value = unzipped[i];
 
     result[i] = iteratee(...value);
   }
