@@ -1,10 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { map, unzip, unzipWith } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
 import type { unzipWith as unzipWithLodash } from 'lodash';
-import { map } from './map';
-import { unzip } from './unzip';
-import { unzipWith } from './unzipWith';
 import { slice } from '../_internal/slice';
-import { constant } from '../util/constant';
 
 describe('unzipWith', () => {
   it('should unzip arrays combining regrouped elements with `iteratee`', () => {

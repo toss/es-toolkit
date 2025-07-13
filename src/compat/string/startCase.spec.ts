@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { startCase } from 'es-toolkit/compat';
 import type { startCase as startCaseLodash } from 'lodash';
-import { startCase } from './startCase';
 
 describe('startCase', () => {
   const strings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];

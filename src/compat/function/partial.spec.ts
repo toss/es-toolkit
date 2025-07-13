@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { curry } from 'es-toolkit/compat';
+import { partial } from 'es-toolkit/compat';
 import _ from '..';
-import { curry } from './curry';
-import { partial } from './partial';
 import { identity } from '../../function';
 
 describe('partial', () => {

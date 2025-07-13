@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { xor } from 'es-toolkit/compat';
 import type { xor as xorLodash } from 'lodash';
-import { xor } from './xor';
 import { args } from '../_internal/args';
 
 /**

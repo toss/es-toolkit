@@ -1,13 +1,13 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isEqualWith } from 'es-toolkit/compat';
+import { isString } from 'es-toolkit/compat';
+import { without } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isEqualWith as isEqualWithLodash } from 'lodash';
-import { isEqualWith } from './isEqualWith';
-import { isString } from './isString';
-import { without } from '../../array/without';
-import { noop } from '../../function/noop';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { stubC } from '../_internal/stubC';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isEqualWith', () => {
   it('should provide correct `customizer` arguments', () => {

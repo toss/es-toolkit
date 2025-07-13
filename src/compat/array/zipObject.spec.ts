@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { zipObject } from 'es-toolkit/compat';
 import { each } from '..';
 import type { zipObject as zipObjectLodash } from 'lodash';
-import { zipObject } from './zipObject';
 
 describe('zipObject', () => {
   const object = { barney: 36, fred: 40 };

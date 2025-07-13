@@ -1,13 +1,13 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { has } from 'es-toolkit/compat';
+import { hasIn } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { hasIn as hasInLodash } from 'lodash';
-import { has } from './has';
-import { hasIn } from './hasIn';
-import { range } from '../../math/range';
 import { args } from '../_internal/args';
 import { symbol } from '../_internal/symbol';
 import { toArgs } from '../_internal/toArgs';
-import { stubFalse } from '../util/stubFalse';
-import { stubTrue } from '../util/stubTrue';
 
 describe('hasIn', () => {
   it(`should check for own and inherited properties`, () => {

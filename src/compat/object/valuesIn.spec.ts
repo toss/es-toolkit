@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { valuesIn } from 'es-toolkit/compat';
 import type { valuesIn as valuesInLodash } from 'lodash';
-import { valuesIn } from './valuesIn';
 import { args } from '../_internal/args';
 import { strictArgs } from '../_internal/strictArgs';
 

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { toLower } from 'es-toolkit/compat';
 import type { toLower as toLowerLodash } from 'lodash';
-import { toLower } from './toLower';
 
 describe('toLower', () => {
   it('should convert whole string to lower case', () => {

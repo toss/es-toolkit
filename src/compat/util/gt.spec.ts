@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { gt } from 'es-toolkit/compat';
 import type { gt as gtLodash } from 'lodash';
-import { gt } from './gt';
 
 describe('gt', () => {
   it('should return `true` if `value` > `other`', () => {

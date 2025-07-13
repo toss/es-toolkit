@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { some } from 'es-toolkit/compat';
+import { identity } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { some as someLodash } from 'lodash';
-import { some } from './some';
-import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
-import { stubFalse } from '../util/stubFalse';
-import { stubTrue } from '../util/stubTrue';
 
 describe('some', () => {
   it('should return `true` if `predicate` returns truthy for any element', () => {

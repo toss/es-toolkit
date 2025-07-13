@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { sortBy } from 'es-toolkit/compat';
+import { sortedLastIndex } from 'es-toolkit/compat';
 import type { sortedLastIndex as sortedLastIndexLodash } from 'lodash';
-import { sortBy } from './sortBy.ts';
-import { sortedLastIndex } from './sortedLastIndex.ts';
 
 describe('sortedLastIndex', () => {
   it(`should return the correct insert index`, () => {

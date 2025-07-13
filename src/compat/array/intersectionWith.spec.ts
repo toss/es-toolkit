@@ -1,17 +1,16 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { intersectionWith, map } from 'es-toolkit/compat';
+import { isEqual } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
+import { eq } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
+import { toString } from 'es-toolkit/compat';
 import type { intersectionWith as intersectionWithLodash } from 'lodash';
-import { intersectionWith } from './intersectionWith';
-import { map } from './map';
-import { isEqual } from '../../predicate/isEqual';
 import { args } from '../_internal/args';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 import { stubNaN } from '../_internal/stubNaN';
 import { stubZero } from '../_internal/stubZero';
-import { range } from '../math/range';
-import { constant } from '../util/constant';
-import { eq } from '../util/eq';
-import { times } from '../util/times';
-import { toString } from '../util/toString';
 
 describe('intersectionWith', () => {
   const func = intersectionWith;

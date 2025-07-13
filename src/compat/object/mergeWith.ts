@@ -1,8 +1,8 @@
 import { cloneDeep } from './cloneDeep.ts';
+import { getSymbols } from '../../_internal/getSymbols.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { clone } from '../../object/clone.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
-import { getSymbols } from '../_internal/getSymbols.ts';
 import { isArguments } from '../predicate/isArguments.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';

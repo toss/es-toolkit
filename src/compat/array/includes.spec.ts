@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { includes } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { includes as includesLodash } from 'lodash';
-import { includes } from './includes';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
 import { toArgs } from '../_internal/toArgs';
-import { stubFalse } from '../util/stubFalse';
 
 describe('includes', () => {
   it('should ignore inherited value', () => {

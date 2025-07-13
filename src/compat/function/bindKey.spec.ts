@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { bindKey } from './bindKey';
+import { bindKey } from 'es-toolkit/compat';
 
 describe('bindKey', () => {
   it('should work when the target function is overwritten', () => {

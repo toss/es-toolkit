@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { bind } from './bind';
-import { curry } from './curry';
-import { partial } from '../../function/partial';
-import { partialRight } from '../../function/partialRight';
-import { map } from '../array/map';
+import { bind } from 'es-toolkit/compat';
+import { curry } from 'es-toolkit/compat';
+import { partial } from 'es-toolkit/compat';
+import { partialRight } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
 
 describe('curry', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

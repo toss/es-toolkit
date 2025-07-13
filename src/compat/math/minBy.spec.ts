@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { minBy } from 'es-toolkit/compat';
 import type { minBy as minByLodash } from 'lodash';
-import { minBy } from './minBy';
 
 describe('minBy', () => {
   it('should work with Date objects', () => {

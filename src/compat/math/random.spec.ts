@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { random } from 'es-toolkit/compat';
+import { uniq } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import { random as randomLodash } from 'lodash';
-import { random } from './random';
-import { uniq } from '../../array/uniq';
-import { stubTrue } from '../util/stubTrue';
 
 describe('random', () => {
   const array = Array.from({ length: 100 });

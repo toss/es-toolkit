@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { over } from 'es-toolkit/compat';
 import type { over as overLodash } from 'lodash';
-import { over } from './over';
 import { slice } from '../_internal/slice';
 
 describe('over', () => {

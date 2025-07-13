@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { unzip } from 'es-toolkit/compat';
+import { zip } from 'es-toolkit/compat';
 import type { unzip as unzipLodash } from 'lodash';
-import { unzip } from './unzip';
-import { zip } from '../../array/zip';
 
 describe('unzip', () => {
   const object = {

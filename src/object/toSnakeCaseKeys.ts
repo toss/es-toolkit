@@ -1,5 +1,4 @@
-import { isArray } from '../compat/predicate/isArray.ts';
-import { isPlainObject } from '../compat/predicate/isPlainObject.ts';
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { snakeCase } from '../string/snakeCase.ts';
 
 type SnakeCase<S extends string> = S extends `${infer P1}${infer P2}`
@@ -61,7 +60,7 @@ export type ToSnakeCaseKeys<T> = T extends any[]
  * // }
  */
 export function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T> {
-  if (isArray(obj)) {
+  if (Array.isArray(obj)) {
     return obj.map(item => toSnakeCaseKeys(item)) as unknown as ToSnakeCaseKeys<T>;
   }
 

@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { constant } from 'es-toolkit/compat';
 import { each, isObject, map, noop, toString, unset, updateWith } from '..';
 import type { updateWith as updateWithLodash } from 'lodash';
 import { isKey } from '../_internal/isKey';
 import { stubFour } from '../_internal/stubFour';
 import { stubThree } from '../_internal/stubThree';
 import { symbol } from '../_internal/symbol';
-import { constant } from '../util/constant';
 
 describe('updateWith', () => {
   const oldValue = 1;

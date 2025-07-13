@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { kebabCase } from 'es-toolkit/compat';
 import type { kebabCase as kebabCaseLodash } from 'lodash';
-import { kebabCase } from './kebabCase';
 
 describe('kebabCase', () => {
   const strings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];

@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { toInteger } from 'es-toolkit/compat';
+import { flatMap } from 'es-toolkit/compat';
+import { identity } from 'es-toolkit/compat';
 import type { toInteger as toIntegerLodash } from 'lodash';
-import { toInteger } from './toInteger';
-import { flatMap } from '../../array/flatMap';
-import { identity } from '../../function/identity';
 import { falsey } from '../_internal/falsey';
 import { MAX_INTEGER } from '../_internal/MAX_INTEGER';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';

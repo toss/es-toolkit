@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { flip } from 'es-toolkit/compat';
 import type { flip as flipLodash } from 'lodash';
-import { flip } from './flip';
 
 describe('flip', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

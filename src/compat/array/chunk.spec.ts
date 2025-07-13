@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { chunk } from 'es-toolkit/compat';
 import type { chunk as chunkLodash } from 'lodash';
-import { chunk } from './chunk.ts';
 import { args } from '../_internal/args.ts';
 
 /**

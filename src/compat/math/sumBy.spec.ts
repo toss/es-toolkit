@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { sumBy } from 'es-toolkit/compat';
 import type { sumBy as sumByLodash } from 'lodash';
-import { sumBy } from './sumBy';
 import { empties } from '../_internal/empties';
 import { slice } from '../_internal/slice';
 import { stubZero } from '../_internal/stubZero';

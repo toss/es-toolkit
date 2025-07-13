@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isArrayBuffer } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isArrayBuffer as isArrayBufferLodash } from 'lodash';
-import { isArrayBuffer } from './isArrayBuffer';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isArrayBuffer', () => {
   it('should return `true` for array buffers', () => {

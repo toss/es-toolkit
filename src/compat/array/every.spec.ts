@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { every } from 'es-toolkit/compat';
+import { identity } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { every as everyLodash } from 'lodash';
-import { every } from './every';
-import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
-import { stubFalse } from '../util/stubFalse';
-import { stubTrue } from '../util/stubTrue';
 
 describe('every', () => {
   it('should return true for array with all elements passing predicate', () => {

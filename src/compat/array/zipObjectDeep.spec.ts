@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { zipObjectDeep } from 'es-toolkit/compat';
 import type { zipObjectDeep as zipObjectDeepLodash } from 'lodash';
-import { zipObjectDeep } from './zipObjectDeep.ts';
 
 describe('zipObjectDeep', () => {
   it('creates an object from two arrays of keys and values', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isKey } from './isKey';
+import { isKey } from 'es-toolkit/compat';
 
 describe('isKey', () => {
   it('should return `true` for property names', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { spread } from 'es-toolkit/compat';
 import type { spread as spreadLodash } from 'lodash';
-import { spread } from './spread';
 
 describe('spread', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { assign } from 'es-toolkit/compat';
 import type { assign as assignLodash } from 'lodash';
-import { assign } from './assign';
 import { noop } from '../../function';
 
 describe('assign', () => {

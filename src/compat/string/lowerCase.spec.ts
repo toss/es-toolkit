@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { lowerCase } from 'es-toolkit/compat';
 import type { lowerCase as lowerCaseLodash } from 'lodash';
-import { lowerCase } from './lowerCase';
 
 describe('lowerCase', () => {
   const strings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];

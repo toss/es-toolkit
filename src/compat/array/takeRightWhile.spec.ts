@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { takeRightWhile } from 'es-toolkit/compat';
 import type { takeRightWhile as takeRightWhileLodash } from 'lodash';
-import { takeRightWhile } from './takeRightWhile';
 import { slice } from '../_internal/slice';
 import { toArgs } from '../_internal/toArgs';
 

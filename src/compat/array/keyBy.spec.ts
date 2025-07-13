@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { keyBy } from 'es-toolkit/compat';
 import type { keyBy as keyByLodash } from 'lodash';
-import { keyBy } from './keyBy.ts';
 
 describe('keyBy', () => {
   const array = [

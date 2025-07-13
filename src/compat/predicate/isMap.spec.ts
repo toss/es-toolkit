@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isMap } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isMap as isMapLodash } from 'lodash';
-import { isMap } from './isMap';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
 import { weakMap } from '../_internal/weakMap';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isMap', () => {
   it('should return `true` for maps', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { min } from 'es-toolkit/compat';
 import type { min as minLodash } from 'lodash';
-import { min } from './min';
 
 describe('min', () => {
   it('should return the largest value from a collection', () => {

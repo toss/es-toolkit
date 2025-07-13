@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { split } from 'es-toolkit/compat';
 import type { split as splitLodash } from 'lodash';
-import { split } from './split';
 
 describe('split', () => {
   it('should split a string by `separator`', () => {

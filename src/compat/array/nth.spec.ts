@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { nth } from 'es-toolkit/compat';
 import type { nth as nthLodash } from 'lodash';
-import { nth } from './nth';
 import { noop } from '../../function';
 import { range } from '../../math';
 import { falsey } from '../_internal/falsey';

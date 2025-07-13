@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isIndex } from './isIndex';
+import { isIndex } from 'es-toolkit/compat';
 
 describe('isIndex', () => {
   it('should return `true` for indices', () => {

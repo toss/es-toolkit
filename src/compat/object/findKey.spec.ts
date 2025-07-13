@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { findKey } from 'es-toolkit/compat';
 import type { findKey as findKeyLodash } from 'lodash';
-import { findKey } from './findKey';
 
 describe('findKey', () => {
   const objects = [

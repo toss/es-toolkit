@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { before } from 'es-toolkit/compat';
 import type { before as beforeLodash } from 'lodash';
-import { before } from './before';
 
 describe('before', () => {
   // eslint-disable-next-line @typescript-eslint/naming-convention

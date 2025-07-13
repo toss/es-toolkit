@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { constant } from 'es-toolkit/compat';
+import { invoke } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { forEach } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
 import type { invoke as invokeLodash } from 'lodash';
-import { constant } from './constant';
-import { invoke } from './invoke';
-import { noop } from '../../function/noop';
 import { stubA } from '../_internal/stubA';
 import { stubB } from '../_internal/stubB';
-import { forEach } from '../array/forEach';
-import { map } from '../array/map';
 
 describe('invoke', () => {
   it('should invoke a method on `object`', () => {

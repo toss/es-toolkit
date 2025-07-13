@@ -1,15 +1,14 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { intersection, intersectionBy } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
+import { toString } from 'es-toolkit/compat';
 import type { intersectionBy as intersectionByLodash } from 'lodash';
-import { intersection } from './intersection';
-import { intersectionBy } from './intersectionBy';
 import { range } from '../../math';
 import { args } from '../_internal/args';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 import { slice } from '../_internal/slice';
 import { stubNaN } from '../_internal/stubNaN';
-import { constant } from '../util/constant';
-import { times } from '../util/times';
-import { toString } from '../util/toString';
 
 describe('intersectionBy', () => {
   /**

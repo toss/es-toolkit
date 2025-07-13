@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { rangeRight } from 'es-toolkit/compat';
 import { each, map } from '..';
 import type { rangeRight as rangeRightLodash } from 'lodash';
-import { rangeRight } from './rangeRight';
 import { falsey } from '../_internal/falsey';
 
 describe('rangeRight methods', () => {

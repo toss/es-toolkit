@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isNaN } from 'es-toolkit/compat';
 import type { isNaN as isNaNLodash } from 'lodash';
-import { isNaN } from './isNaN';
 
 describe('isNaN', () => {
   it('should return `true` for NaN', () => {

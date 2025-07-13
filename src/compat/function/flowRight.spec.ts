@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { ary } from 'es-toolkit/compat';
+import { flowRight } from 'es-toolkit/compat';
+import { head } from 'es-toolkit/compat';
+import { uniq } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { curry } from 'es-toolkit/compat';
 import type { flowRight as flowRightLodash } from 'lodash';
-import { ary } from './ary';
-import { flowRight } from './flowRight';
-import { head } from '../../array/head';
-import { uniq } from '../../array/uniq';
-import { map } from '../array/map';
-import { curry } from '../function/curry';
 
 const add = function (x: number, y: number) {
   return x + y;

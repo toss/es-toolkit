@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { stubArray } from 'es-toolkit/compat';
 import type { stubArray as stubArrayLodash } from 'lodash';
-import { stubArray } from './stubArray';
 
 describe('stubArray', () => {
   it('should return an empty array', () => {

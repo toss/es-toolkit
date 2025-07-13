@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { deburr } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
+import { stubString } from 'es-toolkit/compat';
 import type { deburr as deburrLodash } from 'lodash';
-import { deburr } from './deburr';
 import { burredLetters } from '../../_internal/burredLetters';
 import { comboMarks } from '../../_internal/comboMarks';
 import { deburredLetters } from '../../_internal/deburredLetters';
-import { map } from '../array/map';
-import { constant } from '../util/constant';
-import { stubString } from '../util/stubString';
 
 describe('deburr', () => {
   it('should convert Latin Unicode letters to basic Latin', () => {

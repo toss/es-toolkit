@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { after } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
 import type { after as afterLodash } from 'lodash';
-import { after } from './after';
-import { times } from '../util/times';
 
 describe('after', () => {
   function testAfter(n: number, t: number) {

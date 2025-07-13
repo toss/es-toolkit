@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { forOwnRight } from 'es-toolkit/compat';
 import type { forOwnRight as forOwnRightLodash } from 'lodash';
-import { forOwnRight } from './forOwnRight';
 
 /**
  * x@see https://github.com/lodash/lodash/blob/v5-wip/test/forOwn-methods.spec.js#L1

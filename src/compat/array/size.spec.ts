@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { size } from 'es-toolkit/compat';
 import type { size as sizeLodash } from 'lodash';
-import { size } from './size';
 import { falsey } from '../_internal/falsey';
 import { toArgs } from '../_internal/toArgs';
 

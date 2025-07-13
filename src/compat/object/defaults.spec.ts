@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { defaults } from 'es-toolkit/compat';
 import { defaults as defaultsLodash } from 'lodash';
-import { defaults } from './defaults';
 import { objectProto } from '../_internal/objectProto';
 import * as esToolkit from '../index';
 

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { startsWith } from 'es-toolkit/compat';
 import type { startsWith as startsWithLodash } from 'lodash';
-import { startsWith } from './startsWith';
 
 describe('startsWith', () => {
   it('should return true if the string starts with the target string', () => {

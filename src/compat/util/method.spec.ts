@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { constant } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { forEach } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
 import type { method as methodLodash } from 'lodash';
-import { constant } from './constant';
 import { method, method as methodToolkit } from './method';
-import { times } from './times';
-import { noop } from '../../function/noop';
 import { stubOne } from '../_internal/stubOne';
-import { forEach } from '../array/forEach';
-import { map } from '../array/map';
 
 describe('method', () => {
   it('should create a function that calls a method of a given object', () => {

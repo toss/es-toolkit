@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { defaultsDeep } from 'es-toolkit/compat';
 import type { defaultsDeep as defaultsDeepLodash } from 'lodash';
-import { defaultsDeep } from './defaultsDeep';
 import { cloneDeep, noop } from '../compat';
 
 describe('defaultsDeep', () => {
@@ -216,7 +216,7 @@ describe('defaultsDeep', () => {
 
       const result = { a: 0 };
       for (const key in fn) {
-        if (Object.prototype.hasOwnProperty.call(fn, key)) {
+        if (Object.hasOwn(fn, key)) {
           defaultsDeep(result, (fn as any)[key as any] as any);
         }
       }

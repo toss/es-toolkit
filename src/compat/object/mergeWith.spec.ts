@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { mergeWith } from 'es-toolkit/compat';
+import { last } from 'es-toolkit/compat';
+import { identity } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { mergeWith as mergeWithLodash } from 'lodash';
-import { mergeWith } from './mergeWith';
-import { last } from '../../array/last';
-import { identity } from '../../function/identity';
-import { noop } from '../../function/noop';
 
 describe('mergeWith', () => {
   it('should handle merging when `customizer` returns `undefined`', () => {

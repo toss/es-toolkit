@@ -1,16 +1,16 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { differenceWith } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
+import { eq } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
+import { toString } from 'es-toolkit/compat';
 import type { differenceWith as differenceWithLodash } from 'lodash';
-import { differenceWith } from './differenceWith';
 import { range } from '../../math';
 import { isEqual } from '../../predicate';
 import { args } from '../_internal/args';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 import { stubNaN } from '../_internal/stubNaN';
 import { stubOne } from '../_internal/stubOne';
-import { constant } from '../util/constant';
-import { eq } from '../util/eq';
-import { times } from '../util/times';
-import { toString } from '../util/toString';
 
 describe('differenceWith', () => {
   /**

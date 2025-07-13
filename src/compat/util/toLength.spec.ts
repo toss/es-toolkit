@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { toLength } from 'es-toolkit/compat';
 import type { toLength as toLengthLodash } from 'lodash';
-import { toLength } from './toLength';
 import { MAX_ARRAY_LENGTH } from '../_internal/MAX_ARRAY_LENGTH';
 import { MAX_INTEGER } from '../_internal/MAX_INTEGER';
 

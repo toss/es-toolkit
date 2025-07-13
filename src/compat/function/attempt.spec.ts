@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { attempt } from 'es-toolkit/compat';
+import { isEqual } from 'es-toolkit/compat';
 import type { attempt as attemptLodash } from 'lodash';
-import { attempt } from './attempt';
-import { isEqual } from '../../predicate/isEqual';
 
 describe('attempt', () => {
   const errors = [

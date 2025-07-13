@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { unset } from 'es-toolkit/compat';
+import { toString } from 'es-toolkit/compat';
 import type { unset as unsetLodash } from 'lodash';
-import { unset } from './unset';
 import { numberProto } from '../_internal/numberProto';
 import { stringProto } from '../_internal/stringProto';
 import { symbol } from '../_internal/symbol';
-import { toString } from '../util/toString';
 
 describe('unset', () => {
   it('should unset property values', () => {

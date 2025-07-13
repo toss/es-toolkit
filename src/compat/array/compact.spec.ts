@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { compact } from 'es-toolkit/compat';
 import type { compact as compactLodash } from 'lodash';
-import { compact } from './compact';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 

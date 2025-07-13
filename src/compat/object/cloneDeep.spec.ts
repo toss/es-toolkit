@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { cloneDeep } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { cloneDeep as cloneDeepLodash } from 'lodash';
-import { cloneDeep } from './cloneDeep';
-import { range } from '../../math/range';
 import { args } from '../_internal/args';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
-import { stubTrue } from '../util/stubTrue';
 
 describe('cloneDeep', () => {
   it('should deep clone objects with circular references', () => {

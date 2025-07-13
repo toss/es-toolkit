@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { sum } from 'es-toolkit/compat';
 import type { sum as sumLodash } from 'lodash';
-import { sum } from './sum';
 import { empties } from '../_internal/empties';
 import { stubZero } from '../_internal/stubZero';
 

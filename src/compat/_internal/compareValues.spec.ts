@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { compareValues } from './compareValues';
+import { compareValues } from 'es-toolkit/compat';
 
 describe('compareValues', () => {
   it('should return negative number', () => {

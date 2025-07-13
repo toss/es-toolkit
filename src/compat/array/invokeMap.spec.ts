@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { invokeMap } from 'es-toolkit/compat';
 import type { invokeMap as invokeMapLodash } from 'lodash';
-import { invokeMap } from './invokeMap';
 import { stubOne } from '../_internal/stubOne';
 
 describe('invokeMap', () => {

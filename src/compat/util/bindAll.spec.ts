@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { bindAll } from 'es-toolkit/compat';
+import { cloneDeep } from 'es-toolkit/compat';
 import type { bindAll as bindAllLodash } from 'lodash';
-import { bindAll } from './bindAll';
 import { toArgs } from '../_internal/toArgs';
-import { cloneDeep } from '../object/cloneDeep';
 
 interface TestObject {
   _n0: number;

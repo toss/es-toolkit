@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { conforms } from 'es-toolkit/compat';
 import type { conforms as conformsLodash } from 'lodash';
-import { conforms } from './conforms';
 
 describe('conforms', () => {
   it(`\`conforms\` should check if \`object\` conforms to \`source\``, () => {

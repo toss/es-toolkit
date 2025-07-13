@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { clamp } from 'es-toolkit/compat';
 import type { clamp as clampLodash } from 'lodash';
-import { clamp } from './clamp';
 
 describe('clamp', () => {
   it('should work with a `max`', () => {

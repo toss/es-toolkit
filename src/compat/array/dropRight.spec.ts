@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { dropRight } from 'es-toolkit/compat';
 import type { dropRight as dropRightLodash } from 'lodash';
-import { dropRight } from './dropRight';
 import { args } from '../_internal/args';
 
 /**

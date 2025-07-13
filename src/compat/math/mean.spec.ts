@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { mean } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
 import type { mean as meanLodash } from 'lodash';
-import { mean } from './mean';
 import { empties } from '../_internal/empties';
 import { stubNaN } from '../_internal/stubNaN';
-import { map } from '../array/map';
 
 describe('mean', () => {
   it('should return the mean of an array of numbers', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { stubString } from 'es-toolkit/compat';
 import type { stubString as stubStringLodash } from 'lodash';
-import { stubString } from './stubString';
 
 describe('stubString', () => {
   it('should return an empty string', () => {

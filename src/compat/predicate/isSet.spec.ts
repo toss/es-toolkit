@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isSet } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isSet as isSetLodash } from 'lodash';
-import { isSet } from './isSet';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
 import { weakSet } from '../_internal/weakSet';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isSet', () => {
   it('should return `true` for sets', () => {

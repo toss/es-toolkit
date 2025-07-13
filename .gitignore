@@ -15,6 +15,7 @@
 node_modules
 coverage
 dist
+dist-compat
 .junit
 out
 *.d.ts

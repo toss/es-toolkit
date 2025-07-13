@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isFinite } from 'es-toolkit/compat';
 import type { isFinite as isFiniteLodash } from 'lodash';
-import { isFinite } from './isFinite';
 
 describe('isFinite', () => {
   it("should return 'true' for finite values", () => {

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { identity } from 'es-toolkit/compat';
 import type { identity as identityLodash } from 'lodash';
-import { identity } from './identity';
 
 describe('identity', () => {
   it('should return the input value unchanged for a number', () => {

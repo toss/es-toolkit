@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { functions } from 'es-toolkit/compat';
+import { identity } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { functions as functionsLodash } from 'lodash';
-import { functions } from './functions';
-import { identity } from '../../function/identity';
-import { noop } from '../../function/noop';
 
 describe('functions', () => {
   it('should return the function names of an object', () => {

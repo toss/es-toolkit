@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { trimStart } from 'es-toolkit/compat';
 import type { trimStart as trimStartLodash } from 'lodash';
-import { trimStart } from './trimStart';
 import { whitespace } from '../_internal/whitespace';
 
 describe('trimStart', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { upperCase } from 'es-toolkit/compat';
 import type { upperCase as upperCaseLodash } from 'lodash';
-import { upperCase } from './upperCase';
 
 describe('upperCase', () => {
   const strings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];

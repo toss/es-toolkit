@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isFunction } from 'es-toolkit/compat';
 import type { isFunction as isFunctionLodash } from 'lodash';
-import { isFunction } from '../../predicate/isFunction';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 

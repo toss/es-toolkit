@@ -1,4 +1,3 @@
-import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { camelCase } from '../string/camelCase.ts';
 
@@ -59,7 +58,7 @@ type ToCamelCaseKeys<T> = T extends any[]
  * // }
  */
 export function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T> {
-  if (isArray(obj)) {
+  if (Array.isArray(obj)) {
     return obj.map(item => toCamelCaseKeys(item)) as ToCamelCaseKeys<T>;
   }
 

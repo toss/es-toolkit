@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { overEvery } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { overEvery as overEveryLodash } from 'lodash';
-import { overEvery } from './overEvery';
-import { stubFalse } from './stubFalse';
-import { stubTrue } from './stubTrue';
 import { slice } from '../_internal/slice';
 import { stubA } from '../_internal/stubA';
 import { stubOne } from '../_internal/stubOne';

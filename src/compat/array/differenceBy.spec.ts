@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { differenceBy } from 'es-toolkit/compat';
 import type { differenceBy as differenceByLodash } from 'lodash';
-import { differenceBy } from './differenceBy';
 import { range } from '../../math';
 import { args } from '../_internal/args';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';

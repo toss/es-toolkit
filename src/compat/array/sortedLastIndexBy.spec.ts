@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { sortedLastIndexBy } from 'es-toolkit/compat';
 import type { sortedLastIndexBy as sortedLastIndexByLodash } from 'lodash';
-import { sortedLastIndexBy } from './sortedLastIndexBy';
 
 describe('sortedLastIndexBy', () => {
   it('should provide correct `iteratee` arguments', () => {

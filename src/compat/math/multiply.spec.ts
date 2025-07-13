@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { multiply } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
 import type { multiply as multiplyLodash } from 'lodash';
-import { multiply } from './multiply';
 import { symbol } from '../_internal/symbol';
-import { map } from '../array/map';
-import { times } from '../util/times';
 
 describe('multiply', () => {
   it('should return the product of two positive numbers', () => {

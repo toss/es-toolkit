@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { lowerFirst } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { stubString } from 'es-toolkit/compat';
 import type { lowerFirst as lowerFirstLodash } from 'lodash';
-import { lowerFirst } from './lowerFirst';
-import { map } from '../array/map';
-import { stubString } from '../util/stubString';
 
 describe('lowerFirst', () => {
   it('should lowercase only the first character', () => {

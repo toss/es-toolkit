@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { take } from 'es-toolkit/compat';
 import type { take as takeLodash } from 'lodash';
-import { take } from './take.ts';
 import { args } from '../_internal/args';
 
 describe('take', () => {

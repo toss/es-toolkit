@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toDefaulted } from './toDefaulted';
+import { toDefaulted } from 'es-toolkit/compat';
 import { objectProto } from '../_internal/objectProto';
 import * as esToolkit from '../index';
 

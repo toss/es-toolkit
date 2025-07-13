@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { uniqueId } from 'es-toolkit/compat';
 import type { uniqueId as uniqueIdLodash } from 'lodash';
-import { uniqueId } from './uniqueId';
 
 describe('uniqueId', () => {
   it('should generate unique ids', () => {

@@ -1,5 +1,5 @@
-import { getSymbols } from '../compat/_internal/getSymbols.ts';
-import { getTag } from '../compat/_internal/getTag.ts';
+import { getSymbols } from '../_internal/getSymbols.ts';
+import { getTag } from '../_internal/getTag.ts';
 import {
   argumentsTag,
   arrayBufferTag,

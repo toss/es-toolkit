@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isNative } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isNative as isNativeLodash } from 'lodash';
-import { isNative } from './isNative';
-import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { symbol } from '../_internal/symbol';
-import { stubFalse } from '../util/stubFalse';
 
 /**
  * @see https://github.com/lodash/lodash/blob/main/test/isNative.spec.js

@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { overSome } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubString } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { overSome as overSomeLodash } from 'lodash';
-import { overSome } from './overSome';
-import { stubFalse } from './stubFalse';
-import { stubString } from './stubString';
-import { stubTrue } from './stubTrue';
 import { slice } from '../_internal/slice';
 import { stubA } from '../_internal/stubA';
 import { stubNull } from '../_internal/stubNull';

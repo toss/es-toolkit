@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubString } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { template as templateLodash } from 'lodash';
 import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';
 import * as esToolkit from '../index';
-import { stubFalse } from '../util/stubFalse';
-import { stubString } from '../util/stubString';
-import { stubTrue } from '../util/stubTrue';
 
 describe('template', () => {
   it('should escape values in "escape" delimiters', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { repeat } from 'es-toolkit/compat';
 import type { repeat as repeatLodash } from 'lodash';
-import { repeat } from './repeat';
 
 describe('padStart', () => {
   it('repeat abc 0', () => {

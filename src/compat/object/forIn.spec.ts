@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { forIn } from 'es-toolkit/compat';
 import type { forIn as forInLodash } from 'lodash';
-import { forIn } from './forIn';
 
 describe('forIn', () => {
   it('iterates over inherited string keyed properties', () => {

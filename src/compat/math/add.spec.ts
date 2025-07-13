@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { add } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
 import type { add as addLodash } from 'lodash';
-import { add } from './add';
 import { symbol } from '../_internal/symbol';
-import { map } from '../array/map';
-import { times } from '../util/times';
 
 describe('add', () => {
   it('should add two numbers', () => {

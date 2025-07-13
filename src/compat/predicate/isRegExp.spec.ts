@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isRegExp } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isRegExp as isRegExpLodash } from 'lodash';
-import { isRegExp } from './isRegExp';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
-import { stubFalse } from '../util/stubFalse';
 
 /**
  * https://github.com/lodash/lodash/blob/main/test/isRegExp.spec.js

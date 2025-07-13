@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { property } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { property as propertyLodash } from 'lodash';
-import { property } from './property';
-import { noop } from '../../function/noop';
 
 describe('property', () => {
   it('should create a function that plucks a property value of a given object', () => {

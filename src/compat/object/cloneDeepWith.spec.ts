@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { cloneDeepWith } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { last } from 'es-toolkit/compat';
+import { isPlainObject } from 'es-toolkit/compat';
 import type { cloneDeepWith as cloneDeepWithLodash } from 'lodash';
-import { cloneDeepWith } from './cloneDeepWith';
-import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
-import { last } from '../array/last';
-import { isPlainObject } from '../predicate/isPlainObject';
 
 describe('cloneDeepWith', function () {
   function Foo(this: any) {

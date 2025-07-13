@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { partition } from 'es-toolkit/compat';
 import type { partition as partitionLodash } from 'lodash';
-import { partition } from './partition';
 import { args } from '../_internal/args';
 
 describe('partition', () => {

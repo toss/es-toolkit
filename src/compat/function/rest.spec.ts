@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { rest } from 'es-toolkit/compat';
 import type { rest as restLodash } from 'lodash';
-import { rest } from './rest';
 
 describe('rest', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

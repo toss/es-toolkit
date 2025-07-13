@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { stubTrue } from 'es-toolkit/compat';
 import type { stubTrue as stubTrueLodash } from 'lodash';
-import { stubTrue } from './stubTrue';
 
 describe('stubTrue', () => {
   it('should return `true`', () => {

@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { inRange } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { inRange as inRangeLodash } from 'lodash';
-import { inRange } from './inRange';
 import { falsey } from '../_internal/falsey';
-import { stubTrue } from '../util/stubTrue';
 
 describe('inRange', () => {
   it('should work with an `end`', () => {

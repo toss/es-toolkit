@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isArray } from 'es-toolkit/compat';
 import type { isArray as isArrayLodash } from 'lodash';
-import { isArray } from './isArray';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 

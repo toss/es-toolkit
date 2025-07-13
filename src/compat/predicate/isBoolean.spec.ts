@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isBoolean } from 'es-toolkit/compat';
 import type { isBoolean as isBooleanLodash } from 'lodash';
-import { isBoolean } from './isBoolean';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';

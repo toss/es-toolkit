@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { rearg } from 'es-toolkit/compat';
 import type { rearg as reargLodash } from 'lodash';
-import { rearg } from './rearg';
 
 describe('rearg', () => {
   function fn() {

@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { difference } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
 import type { difference as differenceLodash } from 'lodash';
-import { difference } from './difference';
-import { range } from '../../math/range';
 import { args } from '../_internal/args';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 

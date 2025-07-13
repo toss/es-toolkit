@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { indexOf } from 'es-toolkit/compat';
 import type { indexOf as indexOfLodash } from 'lodash';
-import { indexOf } from './indexOf';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { stubZero } from '../_internal/stubZero';

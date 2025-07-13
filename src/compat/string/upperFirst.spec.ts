@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { upperFirst } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { stubString } from 'es-toolkit/compat';
 import type { upperFirst as upperFirstLodash } from 'lodash';
-import { upperFirst } from './upperFirst';
-import { map } from '../array/map';
-import { stubString } from '../util/stubString';
 
 describe('upperFirst', () => {
   it('should uppercase only the first character', () => {

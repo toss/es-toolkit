@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isSafeInteger } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { isSafeInteger as isSafeIntegerLodash } from 'lodash';
-import { isSafeInteger } from './isSafeInteger.ts';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { symbol } from '../_internal/symbol';
-import { stubFalse } from '../util/stubFalse.ts';
-import { stubTrue } from '../util/stubTrue.ts';
 
 const MAX_INTEGER = 1.7976931348623157e308;
 

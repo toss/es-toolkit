@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isNumber } from 'es-toolkit/compat';
 import type { isNumber as isNumberLodash } from 'lodash';
-import { isNumber } from './isNumber';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';

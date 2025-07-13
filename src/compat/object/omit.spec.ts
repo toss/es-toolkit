@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { omit } from 'es-toolkit/compat';
 import type { omit as omitLodash } from 'lodash';
-import { omit } from './omit';
 import { objectProto } from '../_internal/objectProto';
 import { stringProto } from '../_internal/stringProto';
 import { toArgs } from '../_internal/toArgs';

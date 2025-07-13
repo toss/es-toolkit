@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { mapKeys } from 'es-toolkit/compat';
 import type { mapKeys as mapKeysLodash } from 'lodash';
-import { mapKeys } from './mapKeys';
 
 describe('mapKeys', () => {
   const array = [1, 2];

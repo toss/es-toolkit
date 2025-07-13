@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { map } from 'es-toolkit/compat';
+import { identity } from 'es-toolkit/compat';
 import { constant, each, stubArray } from '..';
-import { map } from './map';
-import { identity } from '../../function/identity';
 import { falsey } from '../_internal/falsey';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 

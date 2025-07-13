@@ -1,6 +1,6 @@
 import { isPlainObject } from './isPlainObject.ts';
-import { getSymbols } from '../compat/_internal/getSymbols.ts';
-import { getTag } from '../compat/_internal/getTag.ts';
+import { getSymbols } from '../_internal/getSymbols.ts';
+import { getTag } from '../_internal/getTag.ts';
 import {
   argumentsTag,
   arrayBufferTag,
@@ -29,7 +29,6 @@ import {
   uint16ArrayTag,
   uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
-import { eq } from '../compat/util/eq.ts';
 
 declare let Buffer:
   | {
@@ -173,7 +172,7 @@ function areObjectsEqual(
       const x = a.valueOf();
       const y = b.valueOf();
 
-      return eq(x, y);
+      return x === y || (Number.isNaN(x) && Number.isNaN(y));
     }
 
     case booleanTag:

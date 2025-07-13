@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { ceil } from 'es-toolkit/compat';
 import type { ceil as ceilLodash } from 'lodash';
-import { ceil } from './ceil';
 
 describe('ceil', () => {
   it(`\`ceil\` should return a rounded number without a precision`, () => {

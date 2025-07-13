@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { flatten } from 'es-toolkit/compat';
 import type { flatten as flattenLodash } from 'lodash';
-import { flatten } from './flatten';
 import { args } from '../_internal/args';
 
 describe('flatten', () => {

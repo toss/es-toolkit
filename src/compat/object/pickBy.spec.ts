@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { pickBy } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { pickBy as pickByLodash } from 'lodash';
-import { pickBy } from './pickBy';
 import { symbol } from '../_internal/symbol';
-import { stubTrue } from '../util/stubTrue';
 
 describe('pickBy', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };

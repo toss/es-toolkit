@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isObjectLike } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isObjectLike as isObjectLikeLodash } from 'lodash';
-import { isObjectLike } from './isObjectLike';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isObjectLike', () => {
   it('should return `true` for objects', () => {

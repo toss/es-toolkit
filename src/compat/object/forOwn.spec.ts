@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { forOwn } from 'es-toolkit/compat';
 import type { forOwn as forOwnLodash } from 'lodash';
-import { forOwn } from './forOwn';
 
 /**
  * @see https://github.com/lodash/lodash/blob/afcd5bc1e8801867c31a17566e0e0edebb083d0e/test/forOwn-methods.spec.js#L1

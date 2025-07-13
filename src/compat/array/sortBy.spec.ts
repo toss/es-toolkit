@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { sortBy } from 'es-toolkit/compat';
+import { zipObject } from 'es-toolkit/compat';
+import { partialRight } from 'es-toolkit/compat';
 import type { sortBy as sortByLodash } from 'lodash';
-import { sortBy } from './sortBy.ts';
-import { zipObject } from '../../array/zipObject.ts';
-import { partialRight } from '../../function/partialRight.ts';
 
 describe('sortBy', () => {
   class Pair {

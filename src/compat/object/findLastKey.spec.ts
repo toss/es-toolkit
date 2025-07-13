@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { findLastKey } from 'es-toolkit/compat';
 import type { findLastKey as findLastKeyLodash } from 'lodash';
-import { findLastKey } from './findLastKey';
 
 describe('findLastKey', () => {
   const objects = [

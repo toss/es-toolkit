@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { lastIndexOf } from 'es-toolkit/compat';
 import type { lastIndexOf as lastIndexOfLodash } from 'lodash';
-import { lastIndexOf } from './lastIndexOf';
 
 /**
  * @see https://github.com/lodash/lodash/blob/v5-wip/test/findLastIndex-and-lastIndexOf.spec.js

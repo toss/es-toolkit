@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { now } from 'es-toolkit/compat';
+import { delay } from 'es-toolkit/compat';
 import type { now as nowLodash } from 'lodash';
-import { now } from './now';
-import { delay } from '../../promise/delay';
 
 describe('now', () => {
   it('should return the number of milliseconds that have elapsed since the Unix epoch', async () => {

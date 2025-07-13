@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { xorWith } from 'es-toolkit/compat';
 import type { xorWith as xorWithLodash } from 'lodash';
-import { xorWith } from './xorWith';
 import { isEqual } from '../../predicate';
 import { args } from '../_internal/args';
 

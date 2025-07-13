@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { toUpper } from 'es-toolkit/compat';
 import type { toUpper as toUpperLodash } from 'lodash';
-import { toUpper } from './toUpper';
 
 describe('toUpper', () => {
   const strings = ['foo bar', 'Foo bar', 'foo Bar', 'Foo Bar', 'FOO BAR', 'fooBar', '--foo-bar--', '__foo_bar__'];

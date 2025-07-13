@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { pad } from 'es-toolkit/compat';
 import type { pad as padLodash } from 'lodash';
-import { pad } from './pad';
 
 describe('pad', () => {
   it(`\`pad\` should not pad if string is >= \`length\``, () => {

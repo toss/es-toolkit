@@ -16,18 +16,7 @@
   "packageManager": "yarn@4.9.1",
   "react-native": "./dist/index.js",
   "exports": {
-    ".": "./src/index.ts",
-    "./array": "./src/array/index.ts",
-    "./compat": "./src/compat/index.ts",
-    "./error": "./src/error/index.ts",
-    "./function": "./src/function/index.ts",
-    "./math": "./src/math/index.ts",
-    "./object": "./src/object/index.ts",
-    "./predicate": "./src/predicate/index.ts",
-    "./promise": "./src/promise/index.ts",
-    "./string": "./src/string/index.ts",
-    "./util": "./src/util/index.ts",
-    "./package.json": "./package.json"
+    "./compat": "./src/compat/index.ts"
   },
   "files": [
     "dist",
@@ -51,26 +40,6 @@
     "types": "./dist/index.d.ts",
     "browser": "./dist/browser.global.js",
     "exports": {
-      ".": {
-        "import": {
-          "types": "./dist/index.d.mts",
-          "default": "./dist/index.mjs"
-        },
-        "require": {
-          "types": "./dist/index.d.ts",
-          "default": "./dist/index.js"
-        }
-      },
-      "./array": {
-        "import": {
-          "types": "./dist/array/index.d.mts",
-          "default": "./dist/array/index.mjs"
-        },
-        "require": {
-          "types": "./dist/array/index.d.ts",
-          "default": "./dist/array/index.js"
-        }
-      },
       "./compat": {
         "import": {
           "types": "./dist/compat/index.d.mts",
@@ -87,86 +56,6 @@
           "default": "./compat/*.js"
         }
       },
-      "./error": {
-        "import": {
-          "types": "./dist/error/index.d.mts",
-          "default": "./dist/error/index.mjs"
-        },
-        "require": {
-          "types": "./dist/error/index.d.ts",
-          "default": "./dist/error/index.js"
-        }
-      },
-      "./function": {
-        "import": {
-          "types": "./dist/function/index.d.mts",
-          "default": "./dist/function/index.mjs"
-        },
-        "require": {
-          "types": "./dist/function/index.d.ts",
-          "default": "./dist/function/index.js"
-        }
-      },
-      "./math": {
-        "import": {
-          "types": "./dist/math/index.d.mts",
-          "default": "./dist/math/index.mjs"
-        },
-        "require": {
-          "types": "./dist/math/index.d.ts",
-          "default": "./dist/math/index.js"
-        }
-      },
-      "./object": {
-        "import": {
-          "types": "./dist/object/index.d.mts",
-          "default": "./dist/object/index.mjs"
-        },
-        "require": {
-          "types": "./dist/object/index.d.ts",
-          "default": "./dist/object/index.js"
-        }
-      },
-      "./predicate": {
-        "import": {
-          "types": "./dist/predicate/index.d.mts",
-          "default": "./dist/predicate/index.mjs"
-        },
-        "require": {
-          "types": "./dist/predicate/index.d.ts",
-          "default": "./dist/predicate/index.js"
-        }
-      },
-      "./promise": {
-        "import": {
-          "types": "./dist/promise/index.d.mts",
-          "default": "./dist/promise/index.mjs"
-        },
-        "require": {
-          "types": "./dist/promise/index.d.ts",
-          "default": "./dist/promise/index.js"
-        }
-      },
-      "./string": {
-        "import": {
-          "types": "./dist/string/index.d.mts",
-          "default": "./dist/string/index.mjs"
-        },
-        "require": {
-          "types": "./dist/string/index.d.ts",
-          "default": "./dist/string/index.js"
-        }
-      },
-      "./util": {
-        "import": {
-          "types": "./dist/util/index.d.mts",
-          "default": "./dist/util/index.mjs"
-        },
-        "require": {
-          "types": "./dist/util/index.d.ts",
-          "default": "./dist/util/index.js"
-        }
-      },
       "./package.json": "./package.json"
     }
   },
@@ -178,6 +67,7 @@
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
     "@eslint/js": "^9.9.0",
+    "@oxc-project/runtime": "^0.77.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
@@ -199,6 +89,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
+    "glob": "^11.0.3",
     "globals": "^15.9.0",
     "happy-dom": "^16.7.3",
     "jscodeshift": "^17.0.0",
@@ -207,6 +98,7 @@
     "rollup": "^4.19.0",
     "rollup-plugin-dts": "^6.1.1",
     "tar": "^6",
+    "tsdown": "^0.12.9",
     "tslib": "^2.6.3",
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",

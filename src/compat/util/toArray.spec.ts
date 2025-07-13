@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { toArray } from 'es-toolkit/compat';
 import type { toArray as toArrayLodash } from 'lodash';
-import { toArray } from './toArray';
 
 describe('toArray', () => {
   it('should convert objects to arrays', () => {

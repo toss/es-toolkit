@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { findLast } from 'es-toolkit/compat';
 import type { findLast as findLastLodash } from 'lodash';
-import { findLast } from './findLast';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';

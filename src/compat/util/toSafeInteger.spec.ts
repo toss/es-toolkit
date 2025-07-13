@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { toSafeInteger } from 'es-toolkit/compat';
 import type { toSafeInteger as toSafeIntegerLodash } from 'lodash';
-import { toSafeInteger } from './toSafeInteger';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 
 describe('toSafeInteger methods', () => {

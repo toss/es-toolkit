@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { remove } from 'es-toolkit/compat';
 import type { remove as removeLodash } from 'lodash';
-import { remove } from './remove';
 
 const isEven = function (n: number) {
   // eslint-disable-next-line eqeqeq

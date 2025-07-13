@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { conformsTo } from 'es-toolkit/compat';
 import type { conformsTo as conformsToLodash } from 'lodash';
-import { conformsTo } from './conformsTo';
 
 describe('conformsTo', () => {
   function conforms(source: Record<PropertyKey, (value: any) => boolean>) {

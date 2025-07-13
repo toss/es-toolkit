@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { reverse } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
 import type { reverse as reverseLodash } from 'lodash';
-import { reverse } from './reverse';
-import { range } from '../../math/range';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
-import { times } from '../util/times';
 
 describe('reverse', () => {
   const largeArray = range(LARGE_ARRAY_SIZE).concat([null as any]);

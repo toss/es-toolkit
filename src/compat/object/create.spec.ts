@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { create } from 'es-toolkit/compat';
+import { keys } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { isObject } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { create as createLodash } from 'lodash';
-import { create } from './create';
-import { keys } from './keys';
 import { falsey } from '../_internal/falsey';
 import { primitives } from '../_internal/primitives';
-import { map } from '../array/map';
-import { isObject } from '../predicate/isObject';
-import { stubTrue } from '../util/stubTrue';
 
 describe('create', () => {
   function Shape(this: { x: number; y: number }) {

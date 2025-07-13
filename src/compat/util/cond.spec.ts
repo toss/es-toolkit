@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { cond } from 'es-toolkit/compat';
+import { property } from 'es-toolkit/compat';
+import { matches } from 'es-toolkit/compat';
+import { matchesProperty } from 'es-toolkit/compat';
 import type { cond as condLodash } from 'lodash';
-import { cond } from './cond';
 import { stubFalse, stubTrue } from '../index';
-import { property } from '../object/property';
-import { matches } from '../predicate/matches';
-import { matchesProperty } from '../predicate/matchesProperty';
 
 // Utility functions
 const stubA = () => 'a';

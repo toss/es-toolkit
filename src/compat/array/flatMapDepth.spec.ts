@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { flatMapDepth } from 'es-toolkit/compat';
 import type { flatMapDepth as flatMapDepthLodash } from 'lodash';
-import { flatMapDepth } from './flatMapDepth';
 
 describe('flatMapDepth', () => {
   const array = [1, 2, 3, 4];

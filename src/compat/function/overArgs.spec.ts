@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { overArgs } from 'es-toolkit/compat';
 import type { overArgs as overArgsLodash } from 'lodash';
-import { overArgs } from './overArgs';
 import { slice } from '../_internal/slice';
 
 describe('overArgs', () => {

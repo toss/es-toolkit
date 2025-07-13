@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { pullAllWith } from 'es-toolkit/compat';
 import type { pullAllWith as pullAllWithLodash } from 'lodash';
-import { pullAllWith } from './pullAllWith';
 import { isEqual } from '../../predicate';
 
 describe('pullAllWith', () => {

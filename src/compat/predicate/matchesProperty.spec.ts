@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { matchesProperty } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
+import { cloneDeep } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { matchesProperty as matchesPropertyLodash } from 'lodash';
-import { matchesProperty } from './matchesProperty';
-import { noop } from '../../function/noop';
-import { range } from '../../math/range';
 import { numberProto } from '../_internal/numberProto';
-import { cloneDeep } from '../object/cloneDeep';
-import { stubFalse } from '../util/stubFalse';
-import { stubTrue } from '../util/stubTrue';
 
 describe('matchesProperty', () => {
   it('should create a function that performs a deep comparison between a property value and `srcValue`', () => {

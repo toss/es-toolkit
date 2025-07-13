@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { iteratee } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { iteratee as iterateeLodash } from 'lodash';
-import { iteratee } from './iteratee';
-import { stubFalse } from './stubFalse';
 import { slice } from '../_internal/slice';
 import { partial, partialRight } from '../index';
 import * as esToolkit from '../index';

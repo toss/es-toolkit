@@ -1,14 +1,14 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { result } from 'es-toolkit/compat';
+import { forEach } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
 import type { result as resultLodash } from 'lodash';
-import { result } from './result';
 import { empties } from '../_internal/empties';
 import { numberProto } from '../_internal/numberProto';
 import { stubB } from '../_internal/stubB';
 import { symbol } from '../_internal/symbol';
-import { forEach } from '../array/forEach';
-import { map } from '../array/map';
 import { noop } from '../compat';
-import { constant } from '../util/constant';
 
 describe('result', () => {
   const object = { a: 1, b: stubB };

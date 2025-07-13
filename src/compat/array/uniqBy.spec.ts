@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { uniqBy } from 'es-toolkit/compat';
 import type { uniqBy as uniqByLodash } from 'lodash';
-import { uniqBy } from './uniqBy';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 
 /**

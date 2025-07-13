@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { merge } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
+import { isEqual } from 'es-toolkit/compat';
+import { isArguments } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { merge as mergeLodash } from 'lodash';
-import { merge } from './merge';
-import { range } from '../../math/range';
-import { isEqual } from '../../predicate/isEqual';
 import { args } from '../_internal/args';
 import { typedArrays } from '../_internal/typedArrays';
-import { isArguments } from '../predicate/isArguments';
-import { stubTrue } from '../util/stubTrue';
 
 describe('merge', () => {
   it('should merge `source` into `object`', () => {

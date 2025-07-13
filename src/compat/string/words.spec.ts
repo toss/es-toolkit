@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { words } from 'es-toolkit/compat';
 import type { words as wordsLodash } from 'lodash';
-import { words } from './words';
 
 describe('words', () => {
   it('splits a simple ASCII comma-separated string into words', () => {

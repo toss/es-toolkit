@@ -1,13 +1,13 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { intersection } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
+import { toString } from 'es-toolkit/compat';
 import type { intersection as intersectionLodash } from 'lodash';
-import { intersection } from './intersection';
 import { range } from '../../math';
 import { args } from '../_internal/args';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 import { stubNaN } from '../_internal/stubNaN';
-import { constant } from '../util/constant';
-import { times } from '../util/times';
-import { toString } from '../util/toString';
 
 /**
  * @see https://github.com/lodash/lodash/blob/afcd5bc1e8801867c31a17566e0e0edebb083d0e/test/intersection-methods.spec.js#L1

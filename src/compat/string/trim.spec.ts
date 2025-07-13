@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { trim } from 'es-toolkit/compat';
 import type { trim as trimLodash } from 'lodash';
-import { trim } from './trim';
 import { whitespace } from '../_internal/whitespace';
 
 describe('trim', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { pullAllBy } from 'es-toolkit/compat';
 import type { pullAllBy as pullAllByLodash } from 'lodash';
-import { pullAllBy } from './pullAllBy';
 
 describe('pullAllBy', () => {
   it('should accept an `iteratee`', () => {

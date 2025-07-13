@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isMatch } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { isMatch as isMatchLodash } from 'lodash';
-import { isMatch } from './isMatch';
-import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
-import { stubTrue } from '../util/stubTrue';
 
 describe('isMatch', () => {
   it('should handle null correctly', () => {

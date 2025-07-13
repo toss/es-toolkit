@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { pick } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { nthArg } from 'es-toolkit/compat';
 import type { pick as pickLodash } from 'lodash';
-import { pick } from './pick';
 import { symbol } from '../_internal/symbol';
 import { toArgs } from '../_internal/toArgs';
-import { map } from '../array/map';
-import { nthArg } from '../function/nthArg';
 
 describe('compat/pick', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };

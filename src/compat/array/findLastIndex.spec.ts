@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { findLastIndex } from 'es-toolkit/compat';
 import type { findLastIndex as findLastIndexLodash } from 'lodash';
-import { findLastIndex } from './findLastIndex';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';

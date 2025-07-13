@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { capitalize } from 'es-toolkit/compat';
 import type { capitalize as capitalizeLodash } from 'lodash';
-import { capitalize } from '../../string/capitalize';
 
 describe('capitalize', () => {
   it('should capitalize the first character of a string', () => {

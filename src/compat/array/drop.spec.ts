@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { drop } from 'es-toolkit/compat';
 import type { drop as dropLodash } from 'lodash';
-import { drop } from './drop';
 import { args } from '../_internal/args';
 
 /**

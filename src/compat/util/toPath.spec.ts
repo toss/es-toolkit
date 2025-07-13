@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { toPath } from 'es-toolkit/compat';
 import type { toPath as toPathLodash } from 'lodash';
-import { toPath } from './toPath';
 
 describe('toPath function', () => {
   it('converts dot-separated keys correctly', () => {

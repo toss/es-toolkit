@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { reject } from 'es-toolkit/compat';
 import type { reject as rejectLodash } from 'lodash';
-import { reject } from './reject';
 import { args } from '../_internal/args';
 import { isEven } from '../_internal/isEven';
 

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { camelCase } from 'es-toolkit/compat';
 import type { camelCase as camelCaseLodash } from 'lodash';
-import { camelCase } from './camelCase';
 
 describe('camelCase', () => {
   it('should work with numbers', () => {

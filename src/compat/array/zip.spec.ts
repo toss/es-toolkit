@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { zip } from 'es-toolkit/compat';
+import { unzip } from 'es-toolkit/compat';
+import { stubArray } from 'es-toolkit/compat';
 import type { zip as zipLodash } from 'lodash';
-import { zip } from './zip';
-import { unzip } from '../../array/unzip';
 import { falsey } from '../_internal/falsey';
-import { stubArray } from '../util/stubArray';
 
 describe('zip', () => {
   const object = {

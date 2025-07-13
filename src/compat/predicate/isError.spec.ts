@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isError } from 'es-toolkit/compat';
 import type { isError as isErrorLodash } from 'lodash';
-import { isError } from './isError';
 
 describe('isError', () => {
   it('should return `true` for error objects', () => {

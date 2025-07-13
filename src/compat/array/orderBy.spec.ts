@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { orderBy } from 'es-toolkit/compat';
+import { zipObject } from 'es-toolkit/compat';
+import { partialRight } from 'es-toolkit/compat';
 import type { orderBy as orderByLodash } from 'lodash';
-import { orderBy } from './orderBy.ts';
-import { zipObject } from '../../array/zipObject.ts';
-import { partialRight } from '../../function/partialRight.ts';
 import { falsey } from '../_internal/falsey.ts';
 
 describe('orderBy', () => {

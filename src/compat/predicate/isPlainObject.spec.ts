@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isPlainObject } from 'es-toolkit/compat';
 import type { isPlainObject as isPlainObjectLodash } from 'lodash';
-import { isPlainObject } from './isPlainObject';
 import { falsey } from '../_internal/falsey';
 
 describe('isPlainObject', () => {

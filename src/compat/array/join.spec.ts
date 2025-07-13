@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { join } from 'es-toolkit/compat';
 import type { join as joinLodash } from 'lodash';
-import { join } from './join';
 import { args } from '../_internal/args';
 
 describe('join', () => {

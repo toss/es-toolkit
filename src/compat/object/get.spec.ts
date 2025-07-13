@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { get } from 'es-toolkit/compat';
 import type { get as getLodash } from 'lodash';
-import { get } from './get';
 import { empties } from '../_internal/empties';
 
 describe('get', () => {

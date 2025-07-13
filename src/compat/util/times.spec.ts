@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { stubArray } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
 import type { times as timesLodash } from 'lodash';
-import { stubArray } from './stubArray';
-import { times } from './times';
 import { doubled } from '../_internal/doubled';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';

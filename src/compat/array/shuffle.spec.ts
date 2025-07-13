@@ -1,9 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { shuffle, sortBy, uniqBy } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
 import type { shuffle as shuffleLodash } from 'lodash';
-import { shuffle } from './shuffle.ts';
-import { sortBy } from './sortBy';
-import { uniqBy } from './uniqBy';
-import { times } from '../util/times';
 
 describe('shuffle', () => {
   const array = [1, 2, 3];

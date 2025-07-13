@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { unionBy } from 'es-toolkit/compat';
 import type { unionBy as unionByLodash } from 'lodash';
-import { unionBy } from './unionBy';
 import { args } from '../_internal/args';
 
 /**

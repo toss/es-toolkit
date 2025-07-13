@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { dropRightWhile } from 'es-toolkit/compat';
 import type { dropRightWhile as dropRightWhileLodash } from 'lodash';
-import { dropRightWhile } from './dropRightWhile';
 import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
 

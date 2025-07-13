@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { defer } from 'es-toolkit/compat';
 import type { defer as deferLodash } from 'lodash';
-import { defer } from './defer';
 
 describe('defer', () => {
   it('should provide additional arguments to `func`', (done: () => void) => {

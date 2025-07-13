@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { countBy } from 'es-toolkit/compat';
 import type { countBy as countByLodash } from 'lodash';
-import { countBy } from './countBy';
 
 describe('countBy', () => {
   const array = [6.1, 4.2, 6.3];

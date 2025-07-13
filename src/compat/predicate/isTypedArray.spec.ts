@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isTypedArray } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isTypedArray as isTypedArrayLodash } from 'lodash';
-import { isTypedArray } from './isTypedArray';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { typedArrays } from '../_internal/typedArrays';
-import { stubFalse } from '../util/stubFalse';
 
 /**
  * @see https://github.com/lodash/lodash/blob/main/test/isTypedArray.spec.js

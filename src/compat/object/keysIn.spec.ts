@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { keysIn } from 'es-toolkit/compat';
+import { stubArray } from 'es-toolkit/compat';
 import type { keysIn as keysInLodash } from 'lodash';
-import { keysIn } from './keysIn';
 import { args } from '../_internal/args';
 import { primitives } from '../_internal/primitives';
 import { strictArgs } from '../_internal/strictArgs';
-import { stubArray } from '../util/stubArray';
 
 describe('keys methods', () => {
   const func = keysIn;

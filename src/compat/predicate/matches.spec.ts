@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { matches } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { cloneDeep } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { matches as matchesLodash } from 'lodash';
-import { matches } from './matches';
-import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
-import { cloneDeep } from '../object/cloneDeep';
-import { stubTrue } from '../util/stubTrue';
 
 describe('matches', () => {
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {

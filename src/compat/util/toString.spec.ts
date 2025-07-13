@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { stubString } from 'es-toolkit/compat';
+import { toString } from 'es-toolkit/compat';
 import type { toString as toStringLodash } from 'lodash';
-import { stubString } from './stubString';
-import { toString } from './toString';
 import { symbol } from '../_internal/symbol';
 
 describe('toString', () => {

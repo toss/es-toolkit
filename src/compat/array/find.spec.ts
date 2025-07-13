@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { find } from 'es-toolkit/compat';
 import type { find as findLodash } from 'lodash';
-import { find } from './find';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { slice } from '../_internal/slice';

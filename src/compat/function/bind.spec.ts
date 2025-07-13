@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { bind } from './bind';
-import { isEqual } from '../../predicate/isEqual';
+import { bind } from 'es-toolkit/compat';
+import { isEqual } from 'es-toolkit/compat';
 
 // eslint-disable-next-line
 function fn(this: any, ..._: any[]) {

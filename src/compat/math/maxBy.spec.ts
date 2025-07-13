@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { maxBy } from 'es-toolkit/compat';
 import type { maxBy as maxByLodash } from 'lodash';
-import { maxBy } from './maxBy';
 
 describe('maxBy', () => {
   it('should work with Date objects', () => {

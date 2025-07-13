@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { reduceRight } from 'es-toolkit/compat';
 import type { reduceRight as reduceRightLodash } from 'lodash';
-import { reduceRight } from './reduceRight';
 import { empties } from '../_internal/empties';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 

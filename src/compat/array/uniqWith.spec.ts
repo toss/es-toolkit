@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { uniqWith } from 'es-toolkit/compat';
 import type { uniqWith as uniqWithLodash } from 'lodash';
-import { uniqWith } from './uniqWith';
 import { isEven } from '../_internal/isEven';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 

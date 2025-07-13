@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { assignInWith } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { assignInWith as assignInWithLodash } from 'lodash';
-import { assignInWith } from './assignInWith';
-import { noop } from '../../function/noop';
 
 describe('assignInWith', () => {
   it(`should work with a \`customizer\` callback`, () => {

@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { constant } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { constant as constantLodash } from 'lodash';
-import { constant } from './constant';
-import { stubTrue } from './stubTrue';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
 import * as esToolkit from '../index';

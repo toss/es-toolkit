@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { endsWith } from 'es-toolkit/compat';
 import type { endsWith as endsWithLodash } from 'lodash';
-import { endsWith } from './endsWith';
 
 describe('endsWith', () => {
   it('should return true if the string ends with the target string', () => {

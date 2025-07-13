@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { wrap } from 'es-toolkit/compat';
+import { escape } from 'es-toolkit/compat';
 import type { wrap as wrapLodash } from 'lodash';
-import { wrap } from './wrap';
 import { noop } from '../../function';
 import { slice } from '../_internal/slice';
 import { stubA } from '../_internal/stubA';
-import { escape } from '../string/escape';
 
 describe('wrap', () => {
   it('should create a wrapped function', () => {

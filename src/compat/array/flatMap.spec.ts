@@ -1,13 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { flatMap, map } from 'es-toolkit/compat';
+import { identity } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
 import type { flatMap as flatMapLodash } from 'lodash';
-import { flatMap } from './flatMap';
-import { map } from './map';
-import { identity } from '../../function/identity';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
 import { each, stubArray } from '../compat';
-import { range } from '../math/range';
-import { constant } from '../util/constant';
 
 describe('flatMap', () => {
   it('should map and flatten values', () => {

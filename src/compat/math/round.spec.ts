@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { round } from 'es-toolkit/compat';
 import type { round as roundLodash } from 'lodash';
-import { round } from './round';
 
 describe('round', () => {
   it(`\`round\` should return a rounded number without a precision`, () => {

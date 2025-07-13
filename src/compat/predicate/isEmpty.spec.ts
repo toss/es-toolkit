@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isEmpty } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { isEmpty as isEmptyLodash } from 'lodash';
-import { isEmpty } from './isEmpty';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
-import { stubTrue } from '../util/stubTrue';
 
 describe('isEmpty', () => {
   it('should return `true` for empty values', () => {

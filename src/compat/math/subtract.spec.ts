@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { subtract } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
 import type { subtract as subtractLodash } from 'lodash';
-import { subtract } from './subtract';
 import { symbol } from '../_internal/symbol';
-import { map } from '../array/map';
-import { times } from '../util/times';
 
 describe('subtract', () => {
   it('should subtract two numbers', () => {

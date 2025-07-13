@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { head } from 'es-toolkit/compat';
+import { reduce } from 'es-toolkit/compat';
+import { keys } from 'es-toolkit/compat';
 import type { reduce as reduceLodash } from 'lodash';
-import { head } from './head';
-import { reduce } from './reduce';
 import { empties } from '../_internal/empties';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
-import { keys } from '../object/keys';
 
 describe('reduce', () => {
   const array = [1, 2, 3];

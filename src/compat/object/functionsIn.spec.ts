@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { functionsIn } from 'es-toolkit/compat';
+import { identity } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { functionsIn as functionsInLodash } from 'lodash';
-import { functionsIn } from './functionsIn';
-import { identity } from '../../function/identity';
-import { noop } from '../../function/noop';
 
 describe('functionsIn', () => {
   function Foo(this: any) {

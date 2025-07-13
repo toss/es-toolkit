@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { sortBy } from 'es-toolkit/compat';
+import { sortedIndex } from 'es-toolkit/compat';
 import type { sortedIndex as sortedIndexLodash } from 'lodash';
-import { sortBy } from './sortBy.ts';
-import { sortedIndex } from './sortedIndex.ts';
 
 describe('sortedIndex', () => {
   it(`should return the correct insert index`, () => {

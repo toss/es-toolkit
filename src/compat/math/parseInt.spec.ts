@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { parseInt } from 'es-toolkit/compat';
 import type { parseInt as parseIntLodash } from 'lodash';
-import { parseInt } from './parseInt';
 
 describe('parseInt', () => {
   it('should accept a `radix`', () => {

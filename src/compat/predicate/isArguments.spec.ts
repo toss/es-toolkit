@@ -1,13 +1,13 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isArguments } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isArguments as isArgumentsLodash } from 'lodash';
-import { isArguments } from './isArguments';
 import { noop } from '../../function';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { strictArgs } from '../_internal/strictArgs';
 import { symbol } from '../_internal/symbol';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isArguments', () => {
   it('should return `true` for `arguments` objects', () => {

@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isDate } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isDate as isDateLodash } from 'lodash';
-import { isDate } from './isDate';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { symbol } from '../_internal/symbol';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isDate', () => {
   it('should return `true` for dates', () => {

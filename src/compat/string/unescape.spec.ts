@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { escape } from 'es-toolkit/compat';
+import { unescape } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { stubString } from 'es-toolkit/compat';
 import type { unescape as unescapeLodash } from 'lodash';
-import { escape } from './escape';
-import { unescape } from './unescape';
-import { map } from '../array/map';
-import { stubString } from '../util/stubString';
 
 describe('unescape', () => {
   let escaped = '&amp;&lt;&gt;&quot;&#39;/';

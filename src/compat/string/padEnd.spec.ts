@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { padEnd } from 'es-toolkit/compat';
 import type { padEnd as padEndLodash } from 'lodash';
-import { padEnd } from './padEnd';
 
 describe('padEnd', () => {
   it('should return the original string if no length and char is provided', () => {

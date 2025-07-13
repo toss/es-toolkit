@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isElement } from 'es-toolkit/compat';
 import type { isElement as isElementLodash } from 'lodash';
-import { isElement } from './isElement';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';

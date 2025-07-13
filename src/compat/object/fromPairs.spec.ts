@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { fromPairs } from 'es-toolkit/compat';
 import type { fromPairs as fromPairsLodash } from 'lodash';
-import { fromPairs } from './fromPairs';
 import { falsey } from '../_internal/falsey';
 
 describe('fromPairs', () => {

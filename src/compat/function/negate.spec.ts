@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { negate } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
+import { times } from 'es-toolkit/compat';
 import type { negate as negateLodash } from 'lodash';
-import { negate } from './negate';
-import { stubTrue } from '../util/stubTrue';
-import { times } from '../util/times';
 
 describe('negate', () => {
   function isEven(n: number) {

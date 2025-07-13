@@ -1,13 +1,13 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { at } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { reject } from 'es-toolkit/compat';
+import { isArray } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
 import type { at as atLodash } from 'lodash';
-import { at } from './at';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
-import { map } from '../array/map';
-import { reject } from '../array/reject';
-import { isArray } from '../predicate/isArray';
-import { constant } from '../util/constant';
 
 describe('at', () => {
   const array = ['a', 'b', 'c'];

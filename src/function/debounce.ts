@@ -130,7 +130,6 @@ export function debounce<F extends (...args: any[]) => void>(
   };
 
   const flush = () => {
-    cancelTimer();
     invoke();
   };
 

@@ -1,5 +1,3 @@
-import { toInteger } from '../compat/util/toInteger.ts';
-
 /**
  * Returns a new array containing the last `count` elements from the input array `arr`.
  * If `count` is greater than the length of `arr`, the entire array is returned.
@@ -22,7 +20,7 @@ import { toInteger } from '../compat/util/toInteger.ts';
  * takeRight([1, 2, 3], 5);
  */
 export function takeRight<T>(arr: readonly T[], count = 1, guard?: unknown): T[] {
-  count = guard || count === undefined ? 1 : toInteger(count);
+  count = guard || count === undefined ? 1 : Math.floor(count);
   if (count <= 0 || arr == null || arr.length === 0) {
     return [];
   }

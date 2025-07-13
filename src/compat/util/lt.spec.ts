@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { lt } from 'es-toolkit/compat';
 import type { lt as ltLodash } from 'lodash';
-import { lt } from './lt';
 
 describe('lt', () => {
   it('should return `true` if `value` is less than `other`', () => {

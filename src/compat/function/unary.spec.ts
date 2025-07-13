@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { unary } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
 import type { unary as unaryLodash } from 'lodash';
-import { unary } from './unary';
-import { map } from '../array/map';
 
 describe('unary', () => {
   function fn(...args: any[]) {

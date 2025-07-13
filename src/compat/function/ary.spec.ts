@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { ary } from 'es-toolkit/compat';
 import type { ary as aryLodash } from 'lodash';
-import { ary } from './ary';
 
 describe('ary', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

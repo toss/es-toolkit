@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { toPlainObject } from 'es-toolkit/compat';
 import type { toPlainObject as toPlainObjectLodash } from 'lodash';
-import { toPlainObject } from './toPlainObject';
 import { args } from '../_internal/args';
 
 describe('toPlainObject', () => {

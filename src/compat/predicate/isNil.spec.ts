@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isNil } from 'es-toolkit/compat';
 import type { isNil as isNilLodash } from 'lodash';
-import { isNil } from './isNil.ts';
 import { args } from '../_internal/args.ts';
 import { falsey } from '../_internal/falsey.ts';
 

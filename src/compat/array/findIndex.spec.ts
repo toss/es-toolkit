@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { findIndex } from 'es-toolkit/compat';
 import type { findIndex as findIndexLodash } from 'lodash';
-import { findIndex } from './findIndex';
 import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
 

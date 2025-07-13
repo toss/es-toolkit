@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { sortedIndexOf } from 'es-toolkit/compat';
 import type { sortedIndexOf as sortedIndexOfLodash } from 'lodash';
-import { sortedIndexOf } from './sortedIndexOf';
 import { falsey } from '../_internal/falsey';
 
 describe('sortedIndexOf', () => {

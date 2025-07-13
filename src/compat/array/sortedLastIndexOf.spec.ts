@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { sortedLastIndexOf } from 'es-toolkit/compat';
 import type { sortedLastIndexOf as sortedLastIndexOfLodash } from 'lodash';
-import { sortedLastIndexOf } from './sortedLastIndexOf';
 import { falsey } from '../_internal/falsey';
 
 describe('sortedLastIndexOf', () => {

@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { truncate } from 'es-toolkit/compat';
+import { forEach } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { constant } from 'es-toolkit/compat';
 import type { truncate as truncateLodash } from 'lodash';
-import { truncate } from './truncate.ts';
-import { forEach } from '../array/forEach.ts';
-import { map } from '../array/map.ts';
-import { constant } from '../util/constant.ts';
 
 describe('truncate', () => {
   const string = 'hi-diddly-ho there, neighborino';

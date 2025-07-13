@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { cloneWith } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { cloneWith as cloneWithLodash } from 'lodash';
-import { cloneWith } from './cloneWith';
-import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
 import { slice } from '../_internal/slice';
 import { typedArrays } from '../_internal/typedArrays';

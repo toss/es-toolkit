@@ -1,13 +1,13 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import { isMatchWith } from 'es-toolkit/compat';
+import { last } from 'es-toolkit/compat';
+import { partial } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
+import { stubTrue } from 'es-toolkit/compat';
 import type { isMatchWith as isMatchWithLodash } from 'lodash';
-import { isMatchWith } from './isMatchWith.ts';
-import { last } from '../../array/last.ts';
-import { partial } from '../../function/partial.ts';
 import { falsey } from '../_internal/falsey.ts';
 import { stubA } from '../_internal/stubA.ts';
-import { stubFalse } from '../util/stubFalse.ts';
-import { stubTrue } from '../util/stubTrue.ts';
 
 describe('isMatchWith', () => {
   it('should provide correct `customizer` arguments', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { concat } from 'es-toolkit/compat';
 import type { concat as concatLodash } from 'lodash';
-import { concat } from './concat';
 
 describe('concat', () => {
   it('should shallow clone `array`', () => {

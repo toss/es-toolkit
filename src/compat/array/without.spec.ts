@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { without } from 'es-toolkit/compat';
 import type { without as withoutLodash } from 'lodash';
-import { without } from './without';
 import { args } from '../_internal/args';
 
 /**

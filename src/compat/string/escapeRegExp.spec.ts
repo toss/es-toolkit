@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { escapeRegExp } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { stubString } from 'es-toolkit/compat';
 import type { escapeRegExp as escapeRegExpLodash } from 'lodash';
-import { escapeRegExp } from './escapeRegExp';
-import { map } from '../array/map';
-import { stubString } from '../util/stubString';
 
 describe('escapeRegExp', () => {
   const escaped = '\\^\\$\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\';

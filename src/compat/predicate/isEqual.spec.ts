@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { isEqual } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isEqual as isEqualLodash } from 'lodash';
-import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
 import { arrayViews } from '../_internal/arrayViews';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isEqual', () => {
   const symbol1 = Symbol ? Symbol('a') : true;

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { replace } from 'es-toolkit/compat';
 import type { replace as replaceLodash } from 'lodash';
-import { replace } from './replace';
 
 describe('replace', () => {
   it('should replace the matched pattern', () => {

@@ -1,7 +1,7 @@
 import { isPlainObject } from './isPlainObject.ts';
+import { getSymbols } from '../../_internal/getSymbols.ts';
+import { getTag } from '../../_internal/getTag.ts';
 import { after } from '../../function/after.ts';
-import { getSymbols } from '../_internal/getSymbols.ts';
-import { getTag } from '../_internal/getTag.ts';
 import type { IsEqualCustomizer } from '../_internal/IsEqualCustomizer.ts';
 import {
   argumentsTag,

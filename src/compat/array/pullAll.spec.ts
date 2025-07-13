@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { pullAll } from 'es-toolkit/compat';
 import type { pullAll as pullAllLodash } from 'lodash';
-import { pullAll } from './pullAll';
 
 describe('pullAll', () => {
   function pull(array: any[], values: any[]) {

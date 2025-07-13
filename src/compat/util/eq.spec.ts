@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { eq } from 'es-toolkit/compat';
 import type { eq as eqLodash } from 'lodash';
-import { eq } from './eq';
 
 describe('eq', () => {
   it('should perform a `SameValueZero` comparison of two values', () => {

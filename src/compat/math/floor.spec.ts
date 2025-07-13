@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { floor } from 'es-toolkit/compat';
 import type { floor as floorLodash } from 'lodash';
-import { floor } from './floor';
 
 describe('floor', () => {
   it(`\`floor\` should return a rounded number without a precision`, () => {

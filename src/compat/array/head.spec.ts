@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { first } from 'es-toolkit/compat';
+import { head } from 'es-toolkit/compat';
 import type { head as headLodash } from 'lodash';
-import { first } from './first';
-import { head } from './head';
 import { args } from '../_internal/args';
 
 /**

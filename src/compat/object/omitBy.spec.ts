@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { omitBy } from 'es-toolkit/compat';
+import { castArray } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { some } from 'es-toolkit/compat';
+import { isSymbol } from 'es-toolkit/compat';
+import { toString } from 'es-toolkit/compat';
 import type { omitBy as omitByLodash } from 'lodash';
-import { omitBy } from './omitBy';
 import { symbol } from '../_internal/symbol';
-import { castArray } from '../array/castArray';
-import { map } from '../array/map';
-import { some } from '../array/some';
-import { isSymbol } from '../predicate/isSymbol';
-import { toString } from '../util/toString';
 
 describe('omitBy', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };

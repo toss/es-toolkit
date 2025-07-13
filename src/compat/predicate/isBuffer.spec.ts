@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isBuffer } from 'es-toolkit/compat';
+import { map } from 'es-toolkit/compat';
+import { slice } from 'es-toolkit/compat';
+import { stubFalse } from 'es-toolkit/compat';
 import type { isBuffer as isBufferLodash } from 'lodash';
-import { isBuffer } from './isBuffer';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { symbol } from '../_internal/symbol';
-import { map } from '../array/map';
-import { slice } from '../array/slice';
-import { stubFalse } from '../util/stubFalse';
 
 describe('isBuffer', () => {
   it('should return `true` for buffers', () => {

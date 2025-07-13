@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { max } from 'es-toolkit/compat';
 import type { max as maxLodash } from 'lodash';
-import { max } from './max';
 
 describe('max', () => {
   it('should return the largest value from a collection', () => {
