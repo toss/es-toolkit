@@ -124,5 +124,8 @@
     "lint": "eslint --config eslint.config.mjs",
     "format": "prettier --write .",
     "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0"
+  },
+  "resolutions": {
+    "tsdown/rolldown": "1.0.0-beta.25"
   }
 }
