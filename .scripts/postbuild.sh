@@ -11,16 +11,8 @@ create_root_export() {
 create_compat_export() {
     local category=$1
     local name=$2
-    echo "module.exports = require('../dist/compat/$category/$name.js').$name;" > compat/$name.js
-    echo "export { $name as default } from '../dist/compat/$category/$name.js';" > compat/$name.d.ts
-}
-
-# Function to create compat reexports (for functions from main src)
-create_compat_reexport() {
-    local category=$1
-    local name=$2
-    echo "module.exports = require('../dist/$category/$name.js').$name;" > compat/$name.js
-    echo "export { $name as default } from '../dist/$category/$name.js';" > compat/$name.d.ts
+    echo "module.exports = require('../dist-compat/$category/$name.js').$name;" > compat/$name.js
+    echo "export { $name as default } from '../dist-compat/$category/$name.js';" > compat/$name.d.ts
 }
 
 # Function to create compat alias
@@ -28,14 +20,17 @@ create_compat_alias() {
     local category=$1
     local original=$2
     local alias=$3
-    echo "module.exports = require('../dist/compat/$category/$original.js').$original;" > compat/$alias.js
-    echo "export { $original as default } from '../dist/compat/$category/$original.js';" > compat/$alias.d.ts
+    echo "module.exports = require('../dist-compat/$category/$original.js').$original;" > compat/$alias.js
+    echo "export { $original as default } from '../dist-compat/$category/$original.js';" > compat/$alias.d.ts
 }
 
 # Create root exports
-for module in array error compat function math object predicate promise string util; do
+for module in array error function math object predicate promise string util; do
     create_root_export $module
 done
+
+echo "export * from './dist-compat';" > index.d.ts
+echo "module.exports = require('./dist-compat');" > compat.js
 
 # Create compat directory
 mkdir -p compat
@@ -50,11 +45,6 @@ for func in after ary attempt before bind bindKey curry curryRight debounce defe
     create_compat_export "function" "$func"
 done
 
-# Function reexports (from main src)
-for func in once unary identity noop; do
-    create_compat_reexport "function" "$func"
-done
-
 # Math functions
 for func in add ceil clamp divide floor inRange max maxBy mean meanBy min minBy multiply parseInt random range rangeRight round subtract sum sumBy; do
     create_compat_export "math" "$func"
@@ -65,29 +55,14 @@ for func in assign assignIn assignInWith assignWith at clone cloneDeep cloneDeep
     create_compat_export "object" "$func"
 done
 
-# Object reexports (from main src)
-for func in invert; do
-    create_compat_reexport "object" "$func"  
-done
-
 # String functions
 for func in camelCase deburr endsWith escape escapeRegExp kebabCase lowerCase lowerFirst pad padEnd padStart repeat replace snakeCase split startCase startsWith template templateSettings toLower toUpper trim trimEnd trimStart truncate unescape upperCase upperFirst words; do
     create_compat_export "string" "$func"
 done
 
-# String reexports (from main src)
-for func in capitalize; do
-    create_compat_reexport "string" "$func"
-done
-
 # Predicate functions
 for func in conforms conformsTo isArguments isArray isArrayBuffer isArrayLike isArrayLikeObject isBoolean isBuffer isDate isElement isEmpty isEqualWith isError isFinite isInteger isMap isMatch isMatchWith isNaN isNative isNil isNumber isObject isObjectLike isPlainObject isRegExp isSafeInteger isSet isString isSymbol isTypedArray isWeakMap isWeakSet matches matchesProperty; do
     create_compat_export "predicate" "$func"
-done
-
-# Predicate reexports (from main src)
-for func in isEqual isFunction isLength isNull isUndefined; do
-    create_compat_reexport "predicate" "$func"
 done
 
 # Util functions

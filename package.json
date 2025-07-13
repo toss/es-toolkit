@@ -118,7 +118,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "prepack": "yarn build",
-    "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
+    "build": "tsdown && ./.scripts/postbuild.sh",
     "test": "vitest --coverage --typecheck",
     "bench": "vitest bench",
     "lint": "eslint --config eslint.config.mjs",
