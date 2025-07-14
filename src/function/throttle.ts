@@ -58,11 +58,13 @@ export function throttle<F extends (...args: any[]) => void>(
   const debounced = debounce(func, throttleMs, { signal, edges });
 
   const throttled = function (...args: Parameters<F>) {
+    const now = Date.now();
+
     if (pendingAt == null) {
-      pendingAt = Date.now();
+      pendingAt = now;
     } else {
-      if (Date.now() - pendingAt >= throttleMs) {
-        pendingAt = Date.now();
+      if (now - pendingAt >= throttleMs) {
+        pendingAt = now;
         debounced.cancel();
       }
     }
