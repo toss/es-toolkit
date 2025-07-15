@@ -1,10 +1,10 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { iteratee } from 'es-toolkit/compat';
 import { stubFalse } from 'es-toolkit/compat';
+import { partial, partialRight } from 'es-toolkit/compat';
+import * as esToolkit from 'es-toolkit/compat';
 import type { iteratee as iterateeLodash } from 'lodash';
 import { slice } from '../_internal/slice';
-import { partial, partialRight } from '../index';
-import * as esToolkit from '../index';
 
 describe('iteratee', () => {
   it('should provide arguments to `func`', () => {

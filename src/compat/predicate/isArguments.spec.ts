@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { isArguments } from 'es-toolkit/compat';
 import { stubFalse } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { isArguments as isArgumentsLodash } from 'lodash';
-import { noop } from '../../function';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';

@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { cloneDeepWith } from 'es-toolkit/compat';
+import { cloneDeepWith, toPairs } from 'es-toolkit/compat';
 import { noop } from 'es-toolkit/compat';
 import { last } from 'es-toolkit/compat';
 import { isPlainObject } from 'es-toolkit/compat';
@@ -106,7 +106,7 @@ describe('cloneDeepWith', function () {
     expect(actual).toEqual({ a: { b: 'c' } });
   });
 
-  Object.entries(uncloneable).forEach(([value, key]) => {
+  toPairs(uncloneable).forEach(([value, key]) => {
     it(`\`_.${methodName}\` should work with a \`customizer\` callback and ${key}`, () => {
       const customizer = function (value: any) {
         return isPlainObject(value) ? undefined : value;

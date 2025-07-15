@@ -1,4 +1,5 @@
 import { ObjectIteratee } from '../_internal/ObjectIteratee.ts';
+import { findLast } from '../array/findLast.ts';
 import { identity } from '../function/identity.ts';
 import { isObject } from '../predicate/isObject.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
@@ -24,5 +25,5 @@ export function findLastKey<T>(obj: T | null | undefined, predicate?: ObjectIter
 
   const keys = Object.keys(obj);
 
-  return keys.findLast(key => iteratee(obj[key as keyof T], key, obj));
+  return findLast(keys, key => iteratee(obj[key as keyof T], key, obj)) as string | undefined;
 }

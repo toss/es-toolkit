@@ -21,14 +21,12 @@ describe('isArrayLike', () => {
     expect(actual).toEqual(expected);
 
     const slice = Array.prototype.slice;
-    const asyncFunc = async function () {};
     const genFunc = function* () {};
     const symbol = Symbol ? Symbol('a') : undefined;
 
     expect(isArrayLike(true)).toBe(false);
     expect(isArrayLike(new Date())).toBe(false);
     expect(isArrayLike(new Error())).toBe(false);
-    expect(isArrayLike(asyncFunc)).toBe(false);
     expect(isArrayLike(genFunc)).toBe(false);
     expect(isArrayLike(slice)).toBe(false);
     expect(isArrayLike({ a: 1 })).toBe(false);

@@ -1,3 +1,4 @@
+import { findLastIndex } from './findLastIndex.ts';
 import { identity } from '../../function/identity.ts';
 import { negate } from '../../function/negate.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
@@ -96,7 +97,7 @@ export function takeRightWhile<T>(
   }
 
   const array = toArray(_array);
-  const index = array.findLastIndex(negate(createIteratee(predicate ?? identity)));
+  const index = findLastIndex(array, negate(createIteratee(predicate ?? identity)));
 
   return array.slice(index + 1);
 }

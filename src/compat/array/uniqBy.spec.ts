@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { uniqBy } from 'es-toolkit/compat';
+import { toPairs, uniqBy } from 'es-toolkit/compat';
 import type { uniqBy as uniqByLodash } from 'lodash';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
 
@@ -63,7 +63,7 @@ describe('uniqBy', () => {
       'a string': '0',
     };
 
-    Object.entries(testCases).forEach(([key, value]) => {
+    toPairs(testCases).forEach(([key, value]) => {
       it(`should return an empty array when iteratee returns ${key}`, () => {
         const actual = uniqBy(objects, () => value);
 

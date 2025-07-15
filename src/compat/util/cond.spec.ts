@@ -3,8 +3,8 @@ import { cond } from 'es-toolkit/compat';
 import { property } from 'es-toolkit/compat';
 import { matches } from 'es-toolkit/compat';
 import { matchesProperty } from 'es-toolkit/compat';
+import { stubFalse, stubTrue } from 'es-toolkit/compat';
 import type { cond as condLodash } from 'lodash';
-import { stubFalse, stubTrue } from '../index';
 
 // Utility functions
 const stubA = () => 'a';

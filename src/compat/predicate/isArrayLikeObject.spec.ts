@@ -18,7 +18,6 @@ describe('isArrayLikeObject', () => {
     expect(isArrayLikeObject(undefined)).toBe(false);
     expect(isArrayLikeObject(null)).toBe(false);
     expect(isArrayLikeObject(Symbol())).toBe(false);
-    expect(isArrayLikeObject(1n)).toBe(false);
   });
 
   it('should return `false` for non array-like objects', () => {

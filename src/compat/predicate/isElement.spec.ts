@@ -21,7 +21,11 @@ describe('isElement', () => {
 
   it('should return `true` for non-plain objects', () => {
     class Foo {
-      nodeType = 1;
+      nodeType: number;
+
+      constructor() {
+        this.nodeType = 1;
+      }
     }
 
     expect(isElement(new Foo())).toBe(true);

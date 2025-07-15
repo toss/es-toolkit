@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { stubFalse } from 'es-toolkit/compat';
+import { stubFalse, toPairs } from 'es-toolkit/compat';
 import { stubString } from 'es-toolkit/compat';
 import { stubTrue } from 'es-toolkit/compat';
 import { template, templateSettings } from 'es-toolkit/compat';
@@ -84,7 +84,7 @@ describe('template', () => {
   });
 
   it('should support complex "interpolate" delimiters', () => {
-    Object.entries({
+    toPairs({
       '<%= a + b %>': '3',
       '<%= b - a %>': '1',
       '<%= a = b %>': '2',

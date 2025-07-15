@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { escape, unescape } from 'es-toolkit/compat';
 import type { escape as escapeLodash } from 'lodash';
-import { escape, unescape } from '../index';
 
 describe('escape', () => {
   let escaped = '&amp;&lt;&gt;&quot;&#39;/';

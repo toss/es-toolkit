@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { unzip } from 'es-toolkit/compat';
+import { toPairs, unzip } from 'es-toolkit/compat';
 import { zip } from 'es-toolkit/compat';
 import type { unzip as unzipLodash } from 'lodash';
 
@@ -29,7 +29,7 @@ describe('unzip', () => {
     ],
   };
 
-  Object.entries(object).forEach(([key, pair]) => {
+  toPairs(object).forEach(([key, pair]) => {
     it(`\`_.unzip\` should work with ${key}`, () => {
       const actual = unzip(pair[1]);
       expect(actual).toEqual(pair[0]);

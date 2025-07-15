@@ -10,11 +10,6 @@ describe('isFunction', () => {
     expect(isFunction(slice)).toBe(true);
   });
 
-  it('should return `true` for async functions', () => {
-    const asyncFunc = async function () {};
-    expect(isFunction(asyncFunc)).toBe(typeof asyncFunc === 'function');
-  });
-
   it('should return `true` for generator functions', () => {
     const genFunc = function* () {};
     expect(isFunction(genFunc)).toBe(typeof genFunc === 'function');

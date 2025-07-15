@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { includes } from 'es-toolkit/compat';
+import { includes, toPairs } from 'es-toolkit/compat';
 import { stubFalse } from 'es-toolkit/compat';
 import type { includes as includesLodash } from 'lodash';
 import { args } from '../_internal/args';
@@ -13,7 +13,7 @@ describe('includes', () => {
     expect(includes(obj, 'value')).toBe(false);
   });
 
-  Object.entries({
+  toPairs({
     'an `arguments` object': toArgs([1, 2, 3, 4]),
     'an array': [1, 2, 3, 4],
     'an object': { a: 1, b: 2, c: 3, d: 4 },
@@ -40,7 +40,7 @@ describe('includes', () => {
     // });
   });
 
-  Object.entries({
+  toPairs({
     literal: 'abc',
     object: Object('abc'),
   }).forEach(([key, collection]) => {
@@ -103,7 +103,7 @@ describe('includes', () => {
 
   const resolve = (x: unknown) => x;
 
-  Object.entries({
+  toPairs({
     'an `arguments` object': args,
     'an array': [1, 2, 3],
     'a string': '123',

@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { sample } from 'es-toolkit/compat';
 import { noop } from 'es-toolkit/compat';
+import { values as valuesToolkit } from 'es-toolkit/compat';
 import type { sample as sampleLodash } from 'lodash';
 import { empties } from '../_internal/empties';
-import { values as valuesToolkit } from '../object/values.ts';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/sample.spec.js
