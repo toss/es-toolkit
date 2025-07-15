@@ -1,6 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { zipObject } from 'es-toolkit/compat';
-import { each } from '..';
+import { each, zipObject } from 'es-toolkit/compat';
 import type { zipObject as zipObjectLodash } from 'lodash';
 
 describe('zipObject', () => {

@@ -24,4 +24,4 @@
  */
 export * from './compat.ts';
 
-// export { toolkit as default } from './toolkit.ts';
+export { toolkit as default } from './toolkit.ts';

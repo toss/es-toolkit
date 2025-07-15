@@ -1,6 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { constant } from 'es-toolkit/compat';
-import { each, isObject, map, noop, toString, unset, updateWith } from '..';
+import { constant, each, isObject, map, noop, toString, unset, updateWith } from 'es-toolkit/compat';
 import type { updateWith as updateWithLodash } from 'lodash';
 import { isKey } from '../_internal/isKey';
 import { stubFour } from '../_internal/stubFour';

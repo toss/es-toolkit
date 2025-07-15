@@ -1,6 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { times } from 'es-toolkit/compat';
-import { constant, each, map, noop } from '..';
+import { constant, each, map, noop, times } from 'es-toolkit/compat';
 import type { methodOf as methodOfLodash } from 'lodash';
 import { methodOf, methodOf as methodOfToolkit } from './methodOf';
 import { stubFour } from '../_internal/stubFour';

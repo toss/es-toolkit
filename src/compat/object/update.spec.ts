@@ -1,6 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { constant } from 'es-toolkit/compat';
-import { each, map, toString, unset, update } from '..';
+import { constant, each, map, toString, unset, update } from 'es-toolkit/compat';
 import type { update as updateLodash } from 'lodash';
 import { symbol } from '../_internal/symbol';
 

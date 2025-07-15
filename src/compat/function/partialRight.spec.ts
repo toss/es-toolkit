@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { curry } from 'es-toolkit/compat';
-import { partialRight } from 'es-toolkit/compat';
-import { identity, isObject, mergeWith } from '..';
-import _ from '../index';
+import _, { identity, isObject, mergeWith, partialRight } from 'es-toolkit/compat';
 
 describe('partialRight', () => {
   const { placeholder } = partialRight;
