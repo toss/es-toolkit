@@ -1,10 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { forEachRight, includes, map } from 'es-toolkit/compat';
-import { isArray } from 'es-toolkit/compat';
-import { stubTrue } from 'es-toolkit/compat';
+import { forEachRight, identity, includes, isArray, map, stubTrue } from 'es-toolkit/compat';
 import type { forEachRight as forEachRightLodash } from 'lodash';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
-import { identity } from '../compat';
 
 describe('forEachRight', () => {
   it(`should provide correct iteratee arguments`, () => {

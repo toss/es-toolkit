@@ -27,7 +27,7 @@ describe('fill', () => {
   });
 
   it('should work with a `start` >= `length`', () => {
-    [3, 4, 2 ** 32, Infinity].forEach(start => {
+    [3, 4, Math.pow(2, 32), Infinity].forEach(start => {
       const array = [1, 2, 3];
       expect(fill(array, 'a', start)).toEqual([1, 2, 3]);
     });
@@ -69,7 +69,7 @@ describe('fill', () => {
   });
 
   it('should work with a `end` >= `length`', () => {
-    [3, 4, 2 ** 32, Infinity].forEach(end => {
+    [3, 4, Math.pow(2, 32), Infinity].forEach(end => {
       const array = [1, 2, 3];
       expect(fill(array, 'a', 0, end)).toEqual(['a', 'a', 'a']);
     });

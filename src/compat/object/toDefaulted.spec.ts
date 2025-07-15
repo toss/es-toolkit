@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { toDefaulted } from 'es-toolkit/compat';
+import * as esToolkit from 'es-toolkit/compat';
 import { objectProto } from '../_internal/objectProto';
-import * as esToolkit from '../index';
 
 describe('toDefaulted', () => {
   it('should assign source properties if missing on `object`', () => {

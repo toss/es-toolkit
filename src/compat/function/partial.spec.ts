@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import _, { curry, partial } from 'es-toolkit/compat';
-import { identity } from '../../function';
+import { identity } from 'es-toolkit/compat';
 
 describe('partial', () => {
   const { placeholder } = partial;

@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { uniq } from 'es-toolkit/compat';
 import type { uniq as uniqLodash } from 'lodash';
 import { args } from '../_internal/args';
-import { uniq } from '../index';
 
 /**
  * @see https://github.com/lodash/lodash/blob/6a2cc1dfcf7634fea70d1bc5bd22db453df67b42/test/uniq.spec.js#L1

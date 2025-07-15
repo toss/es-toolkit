@@ -24,7 +24,7 @@ describe('takeRight', () => {
   });
 
   it('should return all elements when `n` >= `length`', () => {
-    [3, 4, 2 ** 32, Infinity].forEach(n => {
+    [3, 4, Math.pow(2, 32), Infinity].forEach(n => {
       expect(takeRight(array, n)).toEqual(array);
     });
   });

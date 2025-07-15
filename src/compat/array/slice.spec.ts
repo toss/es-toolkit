@@ -19,7 +19,7 @@ describe('slice', () => {
   });
 
   it('should work with a `start` >= `length`', () => {
-    [3, 4, 2 ** 32, Infinity].forEach(start => {
+    [3, 4, Math.pow(2, 32), Infinity].forEach(start => {
       expect(slice(array, start)).toEqual([]);
     });
   });
@@ -53,7 +53,7 @@ describe('slice', () => {
   });
 
   it('should work with a `end` >= `length`', () => {
-    [3, 4, 2 ** 32, Infinity].forEach(end => {
+    [3, 4, Math.pow(2, 32), Infinity].forEach(end => {
       expect(slice(array, 0, end)).toEqual(array);
     });
   });

@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { defaultsDeep } from 'es-toolkit/compat';
+import { cloneDeep, noop } from 'es-toolkit/compat';
 import type { defaultsDeep as defaultsDeepLodash } from 'lodash';
-import { cloneDeep, noop } from '../compat';
 
 describe('defaultsDeep', () => {
   it('should deep assign source properties if missing on `object`', () => {

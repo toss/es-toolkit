@@ -20,7 +20,7 @@ describe('dropRight', () => {
   });
 
   it('should return an empty array when `n` >= `length`', () => {
-    [3, 4, 2 ** 32, Infinity].forEach(n => {
+    [3, 4, Math.pow(2, 32), Infinity].forEach(n => {
       expect(dropRight(array, n)).toEqual([]);
     });
   });

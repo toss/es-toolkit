@@ -3,9 +3,9 @@ import { stubFalse } from 'es-toolkit/compat';
 import { stubString } from 'es-toolkit/compat';
 import { stubTrue } from 'es-toolkit/compat';
 import { template, templateSettings } from 'es-toolkit/compat';
+import * as esToolkit from 'es-toolkit/compat';
 import type { template as templateLodash } from 'lodash';
 import { numberTag } from '../_internal/numberTag';
-import * as esToolkit from '../index';
 
 describe('template', () => {
   it('should escape values in "escape" delimiters', () => {

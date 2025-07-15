@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { nthArg } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
+import { range } from 'es-toolkit/compat';
 import type { nthArg as nthArgLodash } from 'lodash';
-import { noop } from '../../function';
-import { range } from '../../math';
 import { falsey } from '../_internal/falsey';
 import { stubA } from '../_internal/stubA';
 import { stubB } from '../_internal/stubB';

@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { assignIn } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { assignIn as assignInLodash } from 'lodash';
-import { noop } from '../../function';
 
 describe('assignIn', () => {
   const func = assignIn;

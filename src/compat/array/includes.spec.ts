@@ -69,7 +69,7 @@ describe('includes', () => {
   it('should work with a string and a `fromIndex` >= `length`', () => {
     const string = '1234';
     const length = string.length;
-    const indexes = [4, 6, 2 ** 32, Infinity];
+    const indexes = [4, 6, Math.pow(2, 32), Infinity];
 
     const expected = indexes.map(index => [false, false, index === length]);
 
@@ -118,7 +118,7 @@ describe('includes', () => {
     });
 
     it(`should work with ${key} and a \`fromIndex\` >= \`length\``, () => {
-      const indexes = [4, 6, 2 ** 32, Infinity];
+      const indexes = [4, 6, Math.pow(2, 32), Infinity];
 
       const expected = indexes.map(() => {
         const result = false;

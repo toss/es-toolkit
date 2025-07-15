@@ -1,8 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { map, zip, zipWith } from 'es-toolkit/compat';
+import { identity, map, zip, zipWith } from 'es-toolkit/compat';
 import { constant } from 'es-toolkit/compat';
 import type { zipWith as zipWithLodash } from 'lodash';
-import { identity } from '../compat';
 
 describe('zipWith', () => {
   it('should zip arrays combining grouped elements with `iteratee`', () => {

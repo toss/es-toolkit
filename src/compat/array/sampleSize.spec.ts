@@ -39,7 +39,7 @@ describe('sampleSize', () => {
   });
 
   it('should return all elements when `n` >= `length`', () => {
-    lodashStable.each([3, 4, 2 ** 32, Infinity], n => {
+    lodashStable.each([3, 4, Math.pow(2, 32), Infinity], n => {
       const actual = sampleSize(array, n).sort();
       expect(actual).toEqual(array);
     });

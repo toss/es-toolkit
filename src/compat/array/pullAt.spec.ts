@@ -1,10 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { map, pullAt, reduce, reject } from 'es-toolkit/compat';
-import { isArray } from 'es-toolkit/compat';
-import { constant } from 'es-toolkit/compat';
+import { at, constant, isArray, map, noop, pullAt, reduce, reject } from 'es-toolkit/compat';
 import type { pullAt as pullAtLodash } from 'lodash';
-import { at } from '../../array';
-import { noop } from '../../function';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
 import { stubOne } from '../_internal/stubOne';

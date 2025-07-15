@@ -22,7 +22,7 @@ describe('lastIndexOf', () => {
   });
 
   it(`should work with a \`fromIndex\` >= \`length\``, () => {
-    const values = [6, 8, 2 ** 32, Infinity];
+    const values = [6, 8, Math.pow(2, 32), Infinity];
     const expected = values.map(() => [-1, 3]);
 
     const actual = values.map(fromIndex => [

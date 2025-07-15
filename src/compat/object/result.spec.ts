@@ -3,12 +3,12 @@ import { result } from 'es-toolkit/compat';
 import { forEach } from 'es-toolkit/compat';
 import { map } from 'es-toolkit/compat';
 import { constant } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { result as resultLodash } from 'lodash';
 import { empties } from '../_internal/empties';
 import { numberProto } from '../_internal/numberProto';
 import { stubB } from '../_internal/stubB';
 import { symbol } from '../_internal/symbol';
-import { noop } from '../compat';
 
 describe('result', () => {
   const object = { a: 1, b: stubB };

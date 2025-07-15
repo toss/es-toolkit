@@ -105,7 +105,7 @@ describe('findLast', () => {
       });
 
       it(`should work with ${key} and a \`fromIndex\` >= \`length\``, () => {
-        const indexes = [4, 6, 2 ** 32, Infinity];
+        const indexes = [4, 6, Math.pow(2, 32), Infinity];
 
         const expected = lodashStable.map(indexes, lodashStable.constant([values[0], undefined, undefined]));
 

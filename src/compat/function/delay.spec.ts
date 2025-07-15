@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { delay as delayToolkit } from 'es-toolkit';
 import { delay } from 'es-toolkit/compat';
 import type { delay as delayLodash } from 'lodash';
-import { delay as delayToolkit } from '../../promise';
 import { slice } from '../_internal/slice';
 
 describe('delay', () => {

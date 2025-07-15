@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { unionWith } from 'es-toolkit/compat';
+import { isEqual } from 'es-toolkit/compat';
 import type { unionWith as unionWithLodash } from 'lodash';
-import { isEqual } from '../../predicate';
 import { args } from '../_internal/args';
 
 /**

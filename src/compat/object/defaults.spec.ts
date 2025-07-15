@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { defaults } from 'es-toolkit/compat';
+import * as esToolkit from 'es-toolkit/compat';
 import { defaults as defaultsLodash } from 'lodash';
 import { objectProto } from '../_internal/objectProto';
-import * as esToolkit from '../index';
 
 describe('defaults', () => {
   it('should assign source properties if missing on `object`', () => {

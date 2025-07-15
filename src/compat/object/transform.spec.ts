@@ -10,8 +10,8 @@ import { stubFalse } from 'es-toolkit/compat';
 import { stubObject } from 'es-toolkit/compat';
 import { stubTrue } from 'es-toolkit/compat';
 import { toPlainObject } from 'es-toolkit/compat';
+import { noop } from 'es-toolkit/compat';
 import type { transform as transformLodash } from 'lodash';
-import { noop } from '../../function';
 import { falsey } from '../_internal/falsey';
 import { typedArrays } from '../_internal/typedArrays';
 
