@@ -41,9 +41,7 @@ export default () => {
       ],
       plugins: [
         babel({
-          targets,
-          presets: [['@babel/preset-env'], '@babel/preset-typescript'],
-          plugins: [['babel-plugin-polyfill-corejs3', { method: 'usage-pure', version: coreJs.version }]],
+          presets: [['@babel/preset-env', { targets }], '@babel/preset-typescript'],
           babelHelpers: 'bundled',
           extensions: ['.ts', '.js'],
         }),
