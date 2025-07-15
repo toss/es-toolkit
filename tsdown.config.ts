@@ -9,24 +9,18 @@ export default defineConfig([
     clean: true,
     unbundle: true,
   },
-  {
-    entry: [`./src/compat/index.ts`],
-    outDir: 'dist-compat',
-    format: ['cjs', 'esm'],
-    dts: true,
-    clean: true,
-    unbundle: true,
-    inputOptions: {
-      transform: {
-        target: 'node6',
-        helpers: {
-          mode: 'Runtime',
-        },
-      },
-    },
-    outputOptions: {
-      exports: 'named',
-    },
-    target: 'node6',
-  },
+  // Use this option when this error is fixed:
+  // https://github.com/rolldown/rolldown/issues/5264
+  // {
+  //   entry: [`./src/compat/index.ts`],
+  //   outDir: 'dist-compat',
+  //   format: ['cjs', 'esm'],
+  //   dts: true,
+  //   clean: true,
+  //   unbundle: true,
+  //   outputOptions: {
+  //     exports: 'named',
+  //   },
+  //   target: 'node6',
+  // },
 ]);

@@ -382,7 +382,11 @@ describe('cloneWith', () => {
 
   it('should clone prototype objects when customizer returns undefined', () => {
     class Foo {
-      b = 1;
+      b: number;
+
+      constructor() {
+        this.b = 1;
+      }
     }
     Foo.prototype.b = 2;
 

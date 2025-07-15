@@ -1,4 +1,4 @@
-import { keys } from './keys';
+import { keys } from './keys.ts';
 
 /**
  * Creates an array of the own enumerable property values of `object`.

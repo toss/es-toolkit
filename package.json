@@ -42,12 +42,12 @@
     "exports": {
       "./compat": {
         "import": {
-          "types": "./dist/compat/index.d.mts",
-          "default": "./dist/compat/index.mjs"
+          "types": "./dist-compat/index.d.mts",
+          "default": "./dist-compat/index.mjs"
         },
         "require": {
-          "types": "./dist/compat/index.d.ts",
-          "default": "./dist/compat/index.js"
+          "types": "./dist-compat/index.d.ts",
+          "default": "./dist-compat/index.js"
         }
       },
       "./compat/*": {
@@ -67,7 +67,7 @@
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
     "@eslint/js": "^9.9.0",
-    "@oxc-project/runtime": "^0.77.0",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
@@ -118,14 +118,11 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "prepack": "yarn build",
-    "build": "tsdown && ./.scripts/postbuild.sh",
+    "build": "tsdown && rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
     "test": "vitest --coverage --typecheck",
     "bench": "vitest bench",
     "lint": "eslint --config eslint.config.mjs",
     "format": "prettier --write .",
     "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0"
-  },
-  "resolutions": {
-    "tsdown/rolldown": "1.0.0-beta.25"
   }
 }
