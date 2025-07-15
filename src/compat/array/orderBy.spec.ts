@@ -81,7 +81,7 @@ describe('orderBy', () => {
     let actual;
     try {
       actual = orderBy([...objects, null, undefined], ['a', 'b']);
-    } catch {
+    } catch (e) {
       // do nothing
     }
 

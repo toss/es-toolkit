@@ -7,5 +7,6 @@ module.exports = {
     '\\.[jt]sx?$': 'babel-jest',
   },
   testMatch: ['<rootDir>/src/compat/**/*.spec.ts'],
+  testPathIgnorePatterns: ['<rootDir>/src/compat/_internal'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };

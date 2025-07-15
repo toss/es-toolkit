@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toKey } from 'es-toolkit/compat';
+import { toKey } from './toKey.ts';
 
 describe('toKey', () => {
   it("converts 0 to '0'", () => {
