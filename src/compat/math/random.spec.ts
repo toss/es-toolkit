@@ -48,8 +48,8 @@ describe('random', () => {
   });
 
   it('should support large integer values', () => {
-    const min = 2 ** 31;
-    const max = 2 ** 62;
+    const min = Math.pow(2, 31);
+    const max = Math.pow(2, 62);
 
     expect(
       array.every(() => {

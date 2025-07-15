@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { flatMapDeep } from 'es-toolkit/compat';
+import { flatMapDeep, flattenDeep } from 'es-toolkit/compat';
 import type { flatMapDeep as flatMapDeepLodash } from 'lodash';
 
 describe('flatMapDeep', () => {
@@ -11,7 +11,7 @@ describe('flatMapDeep', () => {
 
   it('should map values in array to a new flattened array', () => {
     const actual = flatMapDeep(array, duplicate);
-    const expected = array.map(duplicate).flat(Infinity);
+    const expected = flattenDeep(array.map(duplicate));
 
     expect(actual).toEqual(expected);
   });

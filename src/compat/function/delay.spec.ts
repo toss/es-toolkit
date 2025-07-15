@@ -5,8 +5,9 @@ import type { delay as delayLodash } from 'lodash';
 import { slice } from '../_internal/slice';
 
 describe('delay', () => {
-  it('should delay `func` execution', async () => {
+  it('should delay `func` execution', () => {
     let pass = false;
+
     delay(() => {
       pass = true;
     }, 32);
@@ -15,9 +16,9 @@ describe('delay', () => {
       expect(pass).toBe(false);
     }, 1);
 
-    await delayToolkit(64);
-
-    expect(pass).toBe(true);
+    return new Promise(resolve => setTimeout(resolve, 64)).then(() => {
+      expect(pass).toBe(true);
+    });
   });
 
   it('should provide additional arguments to `func`', async () => {

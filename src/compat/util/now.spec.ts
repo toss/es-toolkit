@@ -1,18 +1,17 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { now } from 'es-toolkit/compat';
-import { delay } from 'es-toolkit/compat';
 import type { now as nowLodash } from 'lodash';
 
 describe('now', () => {
-  it('should return the number of milliseconds that have elapsed since the Unix epoch', async () => {
+  it('should return the number of milliseconds that have elapsed since the Unix epoch', () => {
     const stamp = Number(new Date());
     const actual = now();
 
     expect(actual).toBeGreaterThanOrEqual(stamp);
 
-    await delay(32);
-
-    expect(now() > actual);
+    return new Promise(resolve => setTimeout(resolve, 32)).then(() => {
+      expect(now() > actual);
+    });
   });
 
   it('should match the type of lodash', () => {

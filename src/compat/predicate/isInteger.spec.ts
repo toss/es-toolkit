@@ -20,11 +20,6 @@ describe('isInteger function', () => {
     expect(result).toBe(false);
   });
 
-  it('checks if a BigInt is not an integer', () => {
-    const result = isInteger(1n);
-    expect(result).toBe(false);
-  });
-
   it('checks if a string is not an integer', () => {
     const result = isInteger('1');
     expect(result).toBe(false);

@@ -215,7 +215,11 @@ describe('memoize', () => {
 
   it('should handle cache.set() not returning a value', () => {
     class NonReturningCache {
-      data: Record<string, any> = {};
+      data: Record<string, any>;
+
+      constructor() {
+        this.data = {};
+      }
 
       get(key: any) {
         return this.data[key];

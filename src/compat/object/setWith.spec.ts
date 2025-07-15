@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { setWith } from 'es-toolkit/compat';
 import { isObject } from 'es-toolkit/compat';
+import { constant, each, map, toString, unset, update } from 'es-toolkit/compat';
 import type { setWith as setWithLodash } from 'lodash';
 import { symbol } from '../_internal/symbol.ts';
-import { constant, each, map, toString, unset, update } from '../compat.ts';
 
 describe('setWith', () => {
   it('should work with a `customizer` callback', () => {

@@ -4,8 +4,8 @@ import { times } from 'es-toolkit/compat';
 import { noop } from 'es-toolkit/compat';
 import { forEach } from 'es-toolkit/compat';
 import { map } from 'es-toolkit/compat';
+import { method, method as methodToolkit } from 'es-toolkit/compat';
 import type { method as methodLodash } from 'lodash';
-import { method, method as methodToolkit } from './method';
 import { stubOne } from '../_internal/stubOne';
 
 describe('method', () => {

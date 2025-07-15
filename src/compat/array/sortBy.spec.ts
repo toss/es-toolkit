@@ -76,7 +76,7 @@ describe('sortBy', () => {
     let actual;
     try {
       actual = sortBy([...objects, null, undefined], ['a', 'b']);
-    } catch {
+    } catch (e) {
       // do nothing
     }
 

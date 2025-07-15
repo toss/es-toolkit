@@ -27,7 +27,7 @@ describe('pullAllBy', () => {
     // eslint-disable-next-line no-sparse-arrays
     const array = [{ x: 1 }, { x: 2 }, , { x: 3 }, { x: 1 }];
 
-    const actual = pullAllBy(array, [{ x: 1 }, { x: 3 }], object => object?.x);
+    const actual = pullAllBy(array, [{ x: 1 }, { x: 3 }], object => object && object.x);
 
     // eslint-disable-next-line prefer-object-has-own
     expect(Object.prototype.hasOwnProperty.call(actual, '0')).toEqual(true);

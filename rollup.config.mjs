@@ -1,3 +1,4 @@
+import coreJs from 'core-js/package.json' with { type: 'json' };
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,6 +13,7 @@ export default () => {
   const input = 'src/compat/index.ts';
   const outDir = 'dist-compat';
   const preserveModulesRoot = 'src/compat';
+  const targets = { node: 6 };
 
   /** @type {import('rollup').RollupOptions} */
   return [
@@ -21,8 +23,11 @@ export default () => {
         {
           dir: outDir,
           format: 'cjs',
+          entryFileNames: `[name].js`,
+          chunkFileNames: `_chunk/[name]-[hash:6].js`,
           preserveModules: true,
           preserveModulesRoot,
+          exports: 'named',
         },
         {
           dir: outDir,
@@ -31,11 +36,14 @@ export default () => {
           chunkFileNames: `_chunk/[name]-[hash:6].mjs`,
           preserveModules: true,
           preserveModulesRoot,
+          exports: 'named',
         },
       ],
       plugins: [
         babel({
-          presets: [['@babel/preset-env', { targets: { node: 6 } }], '@babel/preset-typescript'],
+          targets,
+          presets: [['@babel/preset-env'], '@babel/preset-typescript'],
+          plugins: [['babel-plugin-polyfill-corejs3', { method: 'usage-pure', version: coreJs.version }]],
           babelHelpers: 'bundled',
           extensions: ['.ts', '.js'],
         }),
