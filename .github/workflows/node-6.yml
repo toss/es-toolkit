@@ -54,7 +54,8 @@ jobs:
           EOF
           cat > .babelrc << 'EOF'
           {
-            "presets": ["@babel/preset-typescript"]
+            "presets": ["@babel/preset-typescript"],
+            "plugins": ["@babel/plugin-transform-modules-commonjs"]
           }
           EOF
           cat package.json
