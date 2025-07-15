@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isDeepKey } from 'es-toolkit/compat';
+import { isDeepKey } from './isDeepKey';
 
 describe('isDeepKey function', () => {
   it('returns true for deep keys', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { flattenArrayLike } from 'es-toolkit/compat';
+import { flattenArrayLike } from './flattenArrayLike';
 
 describe('flattenArrayLike', () => {
   it('should flatten an array of array-like objects', () => {

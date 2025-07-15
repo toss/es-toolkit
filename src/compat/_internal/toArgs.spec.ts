@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toArgs } from 'es-toolkit/compat';
+import { toArgs } from './toArgs';
 
 describe('toArgs', () => {
   it('converts an array to an arguments object', () => {
