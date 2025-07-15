@@ -52,6 +52,11 @@ jobs:
             }
           }
           EOF
+          cat > .babelrc << 'EOF'
+          {
+            "presets": ["@babel/preset-typescript"]
+          }
+          EOF
           cat package.json
       - name: Check node, npm version
         run: |
