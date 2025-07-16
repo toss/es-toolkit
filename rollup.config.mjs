@@ -40,7 +40,7 @@ export default () => {
       ],
       plugins: [
         babel({
-          presets: [['@babel/preset-env', { targets }], '@babel/preset-typescript'],
+          presets: [['@babel/preset-env', { targets, modules: false }], '@babel/preset-typescript'],
           babelHelpers: 'bundled',
           extensions: ['.ts', '.js'],
         }),
