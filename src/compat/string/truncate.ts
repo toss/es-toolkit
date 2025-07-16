@@ -92,10 +92,10 @@ export function truncate(string?: string, options?: TruncateOptions): string {
   // Further truncate the string to the last separator using unicode regex
   const search = separator instanceof RegExp ? separator.source : separator;
   const flags = 'u' + (separator instanceof RegExp ? separator.flags.replace('u', '') : '');
-  const withoutSeparator = new RegExp(`(?<result>.*(?:(?!${search}).))(?:${search})`, flags).exec(base);
+  const withoutSeparator = new RegExp(`(.*(?:(?!${search}).))(?:${search})`, flags).exec(base);
 
   // Return the final truncated string with the omission string appended
-  return (!withoutSeparator?.groups ? base : withoutSeparator.groups.result) + omission;
+  return (!withoutSeparator?.[1] ? base : withoutSeparator[1]) + omission;
 }
 
 function parseLength(length: number | undefined) {

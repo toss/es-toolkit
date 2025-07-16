@@ -75,13 +75,13 @@ describe('sortBy', () => {
   it(`should not error on nullish elements`, () => {
     let actual;
     try {
-      actual = sortBy([...objects, null, undefined], ['a', 'b']);
+      actual = sortBy((objects as any).concat([null, undefined]), ['a', 'b']);
     } catch (e) {
       // do nothing
     }
 
     expect(actual).toEqual([objects[2], objects[0], objects[3], objects[1], null, undefined]);
-    expect(sortBy([...objects, null, undefined], 'a', 'b')).toEqual([
+    expect(sortBy((objects as any).concat([null, undefined]), 'a', 'b')).toEqual([
       objects[2],
       objects[0],
       objects[3],
@@ -133,9 +133,13 @@ describe('sortBy', () => {
   });
 
   it('should work with `_.property` shorthands', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    expect(sortBy({ ...objects, undefined }, 'b').map(object => object?.b)).toEqual([1, 2, 3, 4, undefined]);
+    expect(sortBy(Object.assign({}, objects, { undefined }), 'b').map(object => object?.b)).toEqual([
+      1,
+      2,
+      3,
+      4,
+      undefined,
+    ]);
   });
 
   it('should work with an object for `collection`', () => {

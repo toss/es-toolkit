@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { truncate } from 'es-toolkit/compat';
+import { padEnd, truncate } from 'es-toolkit/compat';
 import { forEach } from 'es-toolkit/compat';
 import { map } from 'es-toolkit/compat';
 import { constant } from 'es-toolkit/compat';
@@ -72,7 +72,7 @@ describe('truncate', () => {
   });
 
   const test = 'hi-diddly-ho there, neighborino';
-  const strAsciiLong = test.padEnd(500, 'A').padEnd(1000, '5').padEnd(1500, ' ').padEnd(2000, ', ');
+  const strAsciiLong = padEnd(padEnd(padEnd(padEnd(test, 500, 'A'), 1000, '5'), 1500, ' '), 2000, ', ');
 
   it('should truncate to the default 30 characters', () => {
     expect(truncate(strAsciiLong, { length: 150 })).toEqual(

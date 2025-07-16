@@ -3,10 +3,10 @@ import { flatMap, map } from 'es-toolkit/compat';
 import { identity } from 'es-toolkit/compat';
 import { range } from 'es-toolkit/compat';
 import { constant } from 'es-toolkit/compat';
+import { each, stubArray } from 'es-toolkit/compat';
 import type { flatMap as flatMapLodash } from 'lodash';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
-import { each, stubArray } from '../compat';
 
 describe('flatMap', () => {
   it('should map and flatten values', () => {
