@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { cloneDeepWith, toPairs } from 'es-toolkit/compat';
+import { attempt, cloneDeepWith, toPairs } from 'es-toolkit/compat';
 import { noop } from 'es-toolkit/compat';
 import { last } from 'es-toolkit/compat';
 import { isPlainObject } from 'es-toolkit/compat';
@@ -48,8 +48,12 @@ describe('cloneDeepWith', function () {
 
   const uncloneable: any = {
     functions: Foo,
-    'async functions': async function () {},
-    'generator functions': function* () {},
+    'async functions': attempt(function () {
+      return Function('return async () => {}');
+    }),
+    'generator functions': attempt(function () {
+      return Function('return function *() {}');
+    }),
     'the `Proxy` constructor': Proxy,
   };
 
