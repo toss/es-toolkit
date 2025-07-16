@@ -1,5 +1,3 @@
-import { trimStart as trimStartToolkit } from '../../string/trimStart.ts';
-
 /**
  * Removes leading whitespace or specified characters from a string.
  *
@@ -54,5 +52,19 @@ export function trimStart(str?: string, chars?: string | number, guard?: object)
     return str.toString().trimStart();
   }
 
-  return trimStartToolkit(str, chars.toString().split(''));
+  return trimStartImpl(str, chars.toString().split(''));
+}
+
+function trimStartImpl(str: string, chars: string[]): string {
+  if (chars === undefined) {
+    return str.trimStart();
+  }
+
+  let startIndex = 0;
+
+  while (startIndex < str.length && chars.includes(str[startIndex])) {
+    startIndex++;
+  }
+
+  return str.substring(startIndex);
 }

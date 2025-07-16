@@ -1,3 +1,4 @@
+import { repeat } from './repeat.ts';
 import { toString } from '../util/toString.ts';
 
 /**
@@ -19,5 +20,23 @@ import { toString } from '../util/toString.ts';
  */
 
 export function padEnd(str?: string, length = 0, chars = ' '): string {
-  return toString(str).padEnd(length, chars);
+  return padEndImpl(toString(str), length, chars);
+}
+
+function padEndImpl(str: string, _length: number, chars: string): string {
+  const strLength = str.length;
+  const maxLength = Math.floor(_length);
+
+  if (maxLength <= strLength || chars === '') {
+    return str;
+  }
+
+  const fillLength = maxLength - strLength;
+  let filler = repeat(chars, Math.ceil(fillLength / chars.length));
+
+  if (filler.length > fillLength) {
+    filler = filler.slice(0, fillLength);
+  }
+
+  return str + filler;
 }

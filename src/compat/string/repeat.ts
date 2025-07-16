@@ -38,5 +38,20 @@ export function repeat(str: any, n?: any, guard?: any): string {
   } else {
     n = toInteger(n);
   }
-  return toString(str).repeat(n);
+  return repeatImpl(toString(str), n);
+}
+
+function repeatImpl(str: string, n: number): string {
+  if (n < 0 || n === Infinity) {
+    throw new RangeError('Wrong number of repetitions');
+  }
+
+  n = Math.floor(n);
+  let result = '';
+
+  for (let i = 0; i < n; i++) {
+    result += str;
+  }
+
+  return result;
 }

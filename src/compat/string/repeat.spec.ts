@@ -2,7 +2,7 @@ import { describe, expect, expectTypeOf, it } from 'vitest';
 import { repeat } from 'es-toolkit/compat';
 import type { repeat as repeatLodash } from 'lodash';
 
-describe('padStart', () => {
+describe('repeat', () => {
   it('repeat abc 0', () => {
     expect(repeat('abc', 0)).toBe('');
   });

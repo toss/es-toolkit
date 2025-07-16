@@ -1,4 +1,3 @@
-import { remove as removeToolkit } from '../../array/remove.ts';
 import { identity } from '../../function/identity.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
@@ -57,5 +56,33 @@ export function remove<T>(
     | [keyof T, unknown]
     | keyof T = identity as any
 ): T[] {
-  return removeToolkit(arr as T[], iteratee(shouldRemoveElement));
+  return removeImpl(arr as T[], iteratee(shouldRemoveElement));
+}
+
+function removeImpl<T>(arr: T[], shouldRemoveElement: (value: T, index: number, array: T[]) => boolean): T[] {
+  const originalArr = arr.slice();
+  const removed = [];
+
+  let resultIndex = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (shouldRemoveElement(arr[i], i, originalArr)) {
+      removed.push(arr[i]);
+
+      continue;
+    }
+
+    // For handling sparse arrays
+    // eslint-disable-next-line prefer-object-has-own
+    if (Object.prototype.hasOwnProperty.call(arr, i)) {
+      delete arr[resultIndex++];
+      continue;
+    }
+
+    arr[resultIndex++] = arr[i];
+  }
+
+  arr.length = resultIndex;
+
+  return removed;
 }

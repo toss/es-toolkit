@@ -69,7 +69,8 @@ export function clone<T>(obj: T): T {
   if (isArray(obj)) {
     const result = Array.from(obj as any) as any;
 
-    if (obj.length > 0 && typeof obj[0] === 'string' && Object.hasOwn(obj, 'index')) {
+    // eslint-disable-next-line prefer-object-has-own
+    if (obj.length > 0 && typeof obj[0] === 'string' && Object.prototype.hasOwnProperty.call(obj, 'index')) {
       result.index = (obj as any).index;
       result.input = (obj as any).input;
     }
@@ -206,7 +207,8 @@ function isCloneableObject(object: any): boolean {
 
 function copyOwnProperties(target: any, source: any): void {
   for (const key in source) {
-    if (Object.hasOwn(source, key)) {
+    // eslint-disable-next-line prefer-object-has-own
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
       target[key] = source[key];
     }
   }
@@ -226,7 +228,11 @@ function cloneStringObjectProperties(target: any, source: any): void {
   const stringLength = source.valueOf().length;
 
   for (const key in source) {
-    if (Object.hasOwn(source, key) && (Number.isNaN(Number(key)) || Number(key) >= stringLength)) {
+    if (
+      // eslint-disable-next-line prefer-object-has-own
+      Object.prototype.hasOwnProperty.call(source, key) &&
+      (Number.isNaN(Number(key)) || Number(key) >= stringLength)
+    ) {
       target[key] = source[key];
     }
   }

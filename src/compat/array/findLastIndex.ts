@@ -71,22 +71,41 @@ export function findLastIndex<T>(
 
   switch (typeof doesMatch) {
     case 'function': {
-      return subArray.findLastIndex(doesMatch);
+      return findLastIndexImpl(subArray, doesMatch);
     }
     case 'object': {
       if (Array.isArray(doesMatch) && doesMatch.length === 2) {
         const key = doesMatch[0];
         const value = doesMatch[1];
 
-        return subArray.findLastIndex(matchesProperty(key, value));
+        return findLastIndexImpl(subArray, matchesProperty(key, value));
       } else {
-        return subArray.findLastIndex(matches(doesMatch));
+        return findLastIndexImpl(subArray, matches(doesMatch));
       }
     }
     case 'number':
     case 'symbol':
     case 'string': {
-      return subArray.findLastIndex(property(doesMatch));
+      return findLastIndexImpl(subArray, property(doesMatch));
     }
   }
+}
+
+function findLastIndexImpl<T>(
+  array: ArrayLike<T> | null | undefined,
+  predicate: (item: T, index: number, arr: any) => unknown
+): number {
+  if (!array) {
+    return -1;
+  }
+
+  let index = array.length;
+
+  while (index-- > 0) {
+    if (predicate(array[index], index, array)) {
+      return index;
+    }
+  }
+
+  return -1;
 }

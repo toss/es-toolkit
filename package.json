@@ -1,7 +1,7 @@
 {
   "name": "es-toolkit",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.39.6",
+  "version": "1.39.7",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
@@ -16,7 +16,18 @@
   "packageManager": "yarn@4.9.1",
   "react-native": "./dist/index.js",
   "exports": {
-    "./compat": "./src/compat/index.ts"
+    ".": "./src/index.ts",
+    "./array": "./src/array/index.ts",
+    "./compat": "./src/compat/index.ts",
+    "./error": "./src/error/index.ts",
+    "./function": "./src/function/index.ts",
+    "./math": "./src/math/index.ts",
+    "./object": "./src/object/index.ts",
+    "./predicate": "./src/predicate/index.ts",
+    "./promise": "./src/promise/index.ts",
+    "./string": "./src/string/index.ts",
+    "./util": "./src/util/index.ts",
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
@@ -40,20 +51,120 @@
     "types": "./dist/index.d.ts",
     "browser": "./dist/browser.global.js",
     "exports": {
-      "./compat": {
+      ".": {
         "import": {
-          "types": "./dist-compat/index.d.mts",
-          "default": "./dist-compat/index.mjs"
+          "types": "./dist/index.d.mts",
+          "default": "./dist/index.mjs"
         },
         "require": {
-          "types": "./dist-compat/index.d.ts",
-          "default": "./dist-compat/index.js"
+          "types": "./dist/index.d.ts",
+          "default": "./dist/index.js"
+        }
+      },
+      "./array": {
+        "import": {
+          "types": "./dist/array/index.d.mts",
+          "default": "./dist/array/index.mjs"
+        },
+        "require": {
+          "types": "./dist/array/index.d.ts",
+          "default": "./dist/array/index.js"
+        }
+      },
+      "./compat": {
+        "import": {
+          "types": "./dist/compat/index.d.mts",
+          "default": "./dist/compat/index.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/index.d.ts",
+          "default": "./dist/compat/index.js"
         }
       },
       "./compat/*": {
         "default": {
           "types": "./compat/*.d.ts",
           "default": "./compat/*.js"
+        }
+      },
+      "./error": {
+        "import": {
+          "types": "./dist/error/index.d.mts",
+          "default": "./dist/error/index.mjs"
+        },
+        "require": {
+          "types": "./dist/error/index.d.ts",
+          "default": "./dist/error/index.js"
+        }
+      },
+      "./function": {
+        "import": {
+          "types": "./dist/function/index.d.mts",
+          "default": "./dist/function/index.mjs"
+        },
+        "require": {
+          "types": "./dist/function/index.d.ts",
+          "default": "./dist/function/index.js"
+        }
+      },
+      "./math": {
+        "import": {
+          "types": "./dist/math/index.d.mts",
+          "default": "./dist/math/index.mjs"
+        },
+        "require": {
+          "types": "./dist/math/index.d.ts",
+          "default": "./dist/math/index.js"
+        }
+      },
+      "./object": {
+        "import": {
+          "types": "./dist/object/index.d.mts",
+          "default": "./dist/object/index.mjs"
+        },
+        "require": {
+          "types": "./dist/object/index.d.ts",
+          "default": "./dist/object/index.js"
+        }
+      },
+      "./predicate": {
+        "import": {
+          "types": "./dist/predicate/index.d.mts",
+          "default": "./dist/predicate/index.mjs"
+        },
+        "require": {
+          "types": "./dist/predicate/index.d.ts",
+          "default": "./dist/predicate/index.js"
+        }
+      },
+      "./promise": {
+        "import": {
+          "types": "./dist/promise/index.d.mts",
+          "default": "./dist/promise/index.mjs"
+        },
+        "require": {
+          "types": "./dist/promise/index.d.ts",
+          "default": "./dist/promise/index.js"
+        }
+      },
+      "./string": {
+        "import": {
+          "types": "./dist/string/index.d.mts",
+          "default": "./dist/string/index.mjs"
+        },
+        "require": {
+          "types": "./dist/string/index.d.ts",
+          "default": "./dist/string/index.js"
+        }
+      },
+      "./util": {
+        "import": {
+          "types": "./dist/util/index.d.mts",
+          "default": "./dist/util/index.mjs"
+        },
+        "require": {
+          "types": "./dist/util/index.d.ts",
+          "default": "./dist/util/index.js"
         }
       },
       "./package.json": "./package.json"
@@ -71,8 +182,6 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/babel__core": "^7",
-    "@types/babel__preset-env": "^7",
     "@types/broken-link-checker": "^0",
     "@types/eslint": "^9",
     "@types/jscodeshift": "^0.12.0",
@@ -82,16 +191,13 @@
     "@typescript-eslint/parser": "^8.26.1",
     "@vitest/coverage-istanbul": "^2.1.2",
     "@vue/compiler-sfc": "^3.5.10",
-    "babel-plugin-polyfill-corejs3": "^0.13.0",
     "broken-link-checker": "^0.7.8",
-    "core-js": "^3.44.0",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-no-for-of-array": "^0.0.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
     "execa": "^9.3.0",
-    "glob": "^11.0.3",
     "globals": "^15.9.0",
     "happy-dom": "^16.7.3",
     "jscodeshift": "^17.0.0",

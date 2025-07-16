@@ -33,7 +33,8 @@ export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], 
 
   switch (typeof path) {
     case 'string': {
-      if (typeof object === 'object' && Object.hasOwn(object, path)) {
+      // eslint-disable-next-line prefer-object-has-own
+      if (typeof object === 'object' && Object.prototype.hasOwnProperty.call(object, path)) {
         return invokeImpl(object, [path], args);
       }
       return invokeImpl(object, toPath(path), args);

@@ -1,5 +1,3 @@
-import { trimEnd as trimEndToolkit } from '../../string/trimEnd.ts';
-
 /**
  * Removes trailing whitespace or specified characters from a string.
  *
@@ -51,8 +49,22 @@ export function trimEnd(str?: string, chars?: string | number, guard?: object): 
   }
 
   if (guard != null || chars == null) {
-    return str.toString().trimEnd();
+    chars = ' ';
   }
 
-  return trimEndToolkit(str, chars.toString().split(''));
+  return trimEndImpl(str, chars.toString().split(''));
+}
+
+function trimEndImpl(str: string, chars: string[]): string {
+  if (chars === undefined) {
+    chars = [' '];
+  }
+
+  let endIndex = str.length;
+
+  while (endIndex > 0 && chars.includes(str[endIndex - 1])) {
+    endIndex--;
+  }
+
+  return str.substring(0, endIndex);
 }
