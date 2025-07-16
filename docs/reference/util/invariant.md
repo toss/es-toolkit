@@ -1,17 +1,18 @@
 # invariant
 
-Asserts that a given condition is true. If the condition is false, an error is thrown with the provided message.
+Asserts that a given condition is true. If the condition is false, an error is thrown with the provided message or error.
 
 ## Signature
 
 ```typescript
 function invariant(condition: unknown, message: string): asserts condition;
+function invariant(condition: unknown, error: Error): asserts condition;
 ```
 
 ### Parameters
 
 - `condition` (`unknown`): The condition to evaluate.
-- `message` (`string`): The error message to throw if the condition is false.
+- `message` (`string` | `Error`): The error message to throw if the condition is false.
 
 ### Returns
 
@@ -38,4 +39,16 @@ invariant(value !== null && value !== undefined, 'Value should not be null or un
 
 // Example of using invariant to check if a number is positive
 invariant(number > 0, 'Number must be positive');
+
+// Example of using invariant with an error
+invariant(false, new Error('This should throw'));
+
+// Example of using invariant with a custom error
+class CustomError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
+invariant(false, new CustomError('This should throw'));
 ```

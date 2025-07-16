@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { min as minLodash } from 'lodash';
 import { min } from './min';
 
 describe('min', () => {
@@ -8,6 +9,8 @@ describe('min', () => {
 
   it('should return `undefined` for empty collections', () => {
     expect(min([])).toBe(undefined);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(min()).toBe(undefined);
   });
 
@@ -30,5 +33,29 @@ describe('min', () => {
   it('should work when chaining on an array with only one value', () => {
     const array = [40];
     expect(min(array)).toBe(40);
+  });
+
+  it('should skip NaN values', () => {
+    expect(min([1, NaN, 2])).toBe(1);
+    expect(min([NaN, 1, 2])).toBe(1);
+  });
+
+  it('should skip symbol values', () => {
+    expect(min([1, Symbol('a'), 2])).toBe(1);
+    expect(min([Symbol('a'), 1, 2])).toBe(1);
+    expect(min([Symbol('a'), Symbol('b'), 1])).toBe(1);
+  });
+
+  it('should skip null values', () => {
+    expect(min([1, null, 2])).toBe(1);
+    expect(min([null, 1, 2])).toBe(1);
+  });
+
+  it('should return undefined when skipping all values', () => {
+    expect(min([Symbol('a'), null, NaN])).toBe(undefined);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(min).toEqualTypeOf<typeof minLodash>();
   });
 });

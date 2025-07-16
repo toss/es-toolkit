@@ -28,7 +28,7 @@
  * });
  * console.log(nonErrorResult); // Output: Error: This is a string error
  */
-export function attempt<F extends (...args: any[]) => any>(func: F, ...args: Parameters<F>): ReturnType<F> | Error {
+export function attempt<R>(func: (...args: any[]) => R, ...args: any[]): R | Error {
   try {
     return func(...args);
   } catch (e: any) {

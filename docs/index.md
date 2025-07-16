@@ -17,7 +17,7 @@ hero:
       link: /intro
     - theme: alt
       text: Reference
-      link: /reference/array/chunk
+      link: /reference/array/at
     - theme: alt
       text: Usage
       link: /usage
@@ -27,6 +27,9 @@ features:
     details: es-toolkit delivers 2-3× better performance in modern JavaScript runtimes compared to other libraries.
   - title: Small bundle footprint
     details: es-toolkit ships up to 97% less JavaScript code compared to other alternative libraries.
+  - title: Seamless Lodash replacement
+    details: es-toolkit offers a complete compatibility layer to seamlessly replace Lodash.
+    link: /compatibility
   - title: Modern implementation
     details: es-toolkit fully leverages modern JavaScript APIs for straightforward and error-free implementation.
   - title: Robust types

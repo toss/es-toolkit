@@ -19,8 +19,8 @@ import { invoke } from './invoke.ts';
  * const add = methodOf(object, 1, 2);
  * console.log(add('a.b')); // => 3
  */
-export function methodOf(object: object, ...args: any[]): (path: PropertyKey | PropertyKey[]) => any {
-  return function (path: PropertyKey | PropertyKey[]) {
+export function methodOf(object: object, ...args: any[]): (path: PropertyKey | readonly PropertyKey[]) => any {
+  return function (path: PropertyKey | readonly PropertyKey[]) {
     return invoke(object, path, args);
   };
 }

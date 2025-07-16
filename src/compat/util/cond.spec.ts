@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { cond as condLodash } from 'lodash';
 import { cond } from './cond';
 import { stubFalse, stubTrue } from '../index';
 import { property } from '../object/property';
@@ -44,6 +45,8 @@ describe('cond', () => {
       ],
     ]);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     resultFunc('a', 'b', 'c');
 
     expect(args1).toEqual(expected);
@@ -51,7 +54,7 @@ describe('cond', () => {
   });
 
   it('should work with predicate shorthands', () => {
-    const resultFunc = cond([
+    const resultFunc = (cond as any)([
       [{ a: 1 }, stubA],
       [['b', 1], stubB],
       ['c', stubC],
@@ -63,20 +66,22 @@ describe('cond', () => {
   });
 
   it('should return `undefined` when no condition is met', () => {
-    const resultFunc = cond([[stubFalse, stubA]]);
+    const resultFunc = (cond as any)([[stubFalse, stubA]]);
     expect(resultFunc({ a: 1 })).toBe(undefined);
   });
 
   it('should throw a TypeError if `pairs` is not composed of functions', () => {
     [false, true].forEach(value => {
       expect(() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         cond([[stubTrue, value]])();
       }).toThrow(TypeError);
     });
   });
 
   it('should use `this` binding of function for `pairs`', () => {
-    const resultFunc = cond([
+    const resultFunc = (cond as any)([
       [
         function (this: Record<string, unknown>, a: string) {
           return this[a];
@@ -89,5 +94,9 @@ describe('cond', () => {
 
     const object = { resultFunc, a: 1, b: 2 };
     expect(object.resultFunc('a', 'b')).toBe(2);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(cond).toEqualTypeOf<typeof condLodash>();
   });
 });

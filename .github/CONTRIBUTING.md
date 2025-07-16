@@ -8,7 +8,28 @@ We welcome contribution from everyone in the community. All communications in th
 
 Note that we value performance, simplicity of implementation, and detailed documentations. We do not aim for supporting a variety of features and options. Our goal is to provide a small set of performant and well-functioning utilities.
 
-### 1.1 Performance
+### 1.1 Development Scope
+
+#### `es-toolkit`
+
+es-toolkit is a high-quality library of utility functions commonly used in modern JavaScript projects.
+
+We focus on implementing functions that are difficult to create with JavaScript's built-in methods but are frequently needed and useful.
+
+Examples include [`delay`](https://es-toolkit.dev/reference/promise/delay.html), [`windowed`](https://es-toolkit.dev/reference/array/windowed.html), [`keyBy`](https://es-toolkit.dev/reference/array/keyBy.html), [`mapValues`](https://es-toolkit.dev/reference/object/mapValues.html), [`camelCase`](https://es-toolkit.dev/reference/string/camelCase.html), and [`toSnakeCaseKeys`](https://es-toolkit.dev/reference/object/toSnakeCaseKeys.html).
+
+We don't implement functions that can be easily replaced with modern JavaScript, such as:
+
+- `isArray` (use `Array.isArray` instead)
+- `isNaN` (use `Number.isNaN` instead)
+- `isNumber` (use `typeof value === 'number'` instead)
+- `min` (use `Math.min()` instead)
+
+#### `es-toolkit/compat`
+
+To help projects using [`lodash`](https://lodash.com/docs/4.17.15) migrate easily to es-toolkit, we implement all functions provided by `lodash`.
+
+### 1.2 Performance
 
 All functions es-toolkit provides should be more performant than or similar with that of alternative libraries provide.
 
@@ -16,7 +37,7 @@ We measure the performance of our library every time our code is edited. We are 
 
 When a new functionality is added, a benchmark code should be added. Please add screenshots of the benchmarks when opening a pull request for easy reference and history tracking.
 
-### 1.2 Simplicity
+### 1.3 Simplicity
 
 We value implementation and interface simplicity over a variety of features for performance, code readability, and easy maintenance. Our functions will not provide complex options to suit every use case.
 
@@ -59,9 +80,9 @@ This helps keep the code more concise, eliminates unnecessary function calls, an
 
 </details>
 
-### 1.3 Documentation
+### 1.4 Documentation
 
-All of our functions should be documented in detail for easy reference. All functions should have the jsdoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
+All of our functions should be documented in detail for easy reference. All functions should have the JSDoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
 
 Our primary language is English, but we strive to support documents in Korean, Japanese, and Simplified Chinese as well. If you have trouble writing documents in a foreign language, please let our contributors know, and we will help provide the necessary translations.
 
@@ -71,15 +92,15 @@ Here are the coding conventions we follow in the `es-toolkit` repository:
 
 ### 2.1 Use short names for type parameters
 
-- Use `T` for elements, like in [difference](https://es-toolkit.slash.page/reference/array/difference.html).
-- Use `E` for errors, like in [attempt](https://es-toolkit.slash.page/reference/util/attempt.html).
-- Use `K` for keys, like in [groupBy](https://es-toolkit.slash.page/reference/array/groupBy.html).
+- Use `T` for elements, like in [difference](https://es-toolkit.dev/reference/array/difference.html).
+- Use `E` for errors, like in [attempt](https://es-toolkit.dev/reference/util/attempt.html).
+- Use `K` for keys, like in [groupBy](https://es-toolkit.dev/reference/array/groupBy.html).
 
 ## 3. Issues
 
 You can contribute to es-toolkit via:
 
-- Improving our [docs](https://es-toolkit.slash.page)
+- Improving our [docs](https://es-toolkit.dev)
 - [Reporting a bug in our issues tab](https://github.com/toss/es-toolkit/issues/new/choose)
 - [Requesting a new feature or package](https://github.com/toss/es-toolkit/issues/new/choose)
 - [Having a look at our issue list](https://github.com/toss/es-toolkit/issues) to see what's to be fixed

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import { defaults as defaultsLodash } from 'lodash';
 import { defaults } from './defaults';
 import { objectProto } from '../_internal/objectProto';
 import * as esToolkit from '../index';
@@ -62,5 +63,16 @@ describe('defaults', () => {
 
     expected = esToolkit.clone(object);
     expect(defaults({}, object, source)).toEqual(expected);
+  });
+
+  it('should be used as a iteratee', () => {
+    const array = [{ b: 1 }, { c: 2 }, { d: 3 }];
+    const source = { a: 4 };
+    array.forEach((...args: any[]) => defaults(source, ...args));
+    expect(source).toEqual({ a: 4, b: 1, c: 2, d: 3 });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(defaults).toEqualTypeOf<typeof defaultsLodash>();
   });
 });

@@ -50,6 +50,36 @@ export const shared = defineConfig({
       }
     ],
     [
+      "script",
+      {
+        type: "module",
+      },
+      `
+        import * as es from "https://cdn.jsdelivr.net/npm/es-toolkit@latest/+esm";
+        import * as esCompat from "https://cdn.jsdelivr.net/npm/es-toolkit@latest/compat/+esm";
+        window.es = es;
+        window.esCompat = esCompat;
+        setTimeout(() => {
+          console.log(
+            '%cTry es-toolkit in the console! 😃',
+            'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
+          );
+          console.log(
+            '%cExample for es-toolkit',
+            'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
+          );
+          console.log('%ces.at([10, 20, 30, 40, 50], [1, 3, 4]);', 'font-weight: bold;');
+          console.log('%c// [20, 40, 50]', 'font-weight: bold;');
+          console.log(
+            '%cExample for es-toolkit/compat',
+            'background: #0064FF; color: white; padding: 2px 4px; border-radius: 3px;'
+          );
+          console.log('%cesCompat.concat([1, 2, 3], [4, 5, 6]);', 'font-weight: bold;');
+          console.log('%c// [1, 2, 3, 4, 5, 6]', 'font-weight: bold;');
+        }, 1000);
+      `
+    ],
+    [
       "meta",
       {
         property: "og:image",

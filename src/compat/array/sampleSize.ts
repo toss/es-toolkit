@@ -5,42 +5,32 @@ import { toArray } from '../util/toArray.ts';
 import { toInteger } from '../util/toInteger.ts';
 
 /**
- * Returns a sample element array of a specified `size`.
+ * Returns a sample element array of a specified size from a collection.
  *
- * This function takes an collection and a number, and returns an array containing the sampled elements using Floyd's algorithm.
- *
- * {@link https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html Floyd's algorithm}
- *
- * @template T - The type of elements in the collection.
+ * @template T
  * @param {Record<string, T> | Record<number, T> | null | undefined} collection - The collection to sample from.
- * @param {number} size - The size of sample.
+ * @param {number} [n] - The size of sample.
  * @returns {T[]} A new array with sample size applied.
  *
  * @example
- * const result = sampleSize([1, 2, 3], 2)
- * // result will be an array containing two of the elements from the collection.
- * // [1, 2] or [1, 3] or [2, 3]
+ * sampleSize([1, 2, 3], 2);
+ * // => [2, 3] (example, actual result will vary)
  */
-export function sampleSize<T>(collection: Record<string, T> | Record<number, T> | null | undefined, size?: number): T[];
+export function sampleSize<T>(collection: Record<string, T> | Record<number, T> | null | undefined, n?: number): T[];
 
 /**
- * Returns a sample element array of a specified `size`.
+ * Returns a sample element array of a specified size from an object.
  *
- * This function takes an collection and a number, and returns an array containing the sampled elements using Floyd's algorithm.
- *
- * {@link https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html Floyd's algorithm}
- *
- * @template T - The type of the collection.
- * @param {T | null | undefined} collection - The collection to sample from.
- * @param {number} size - The size of sample.
- * @returns {T[]} A new array with sample size applied.
+ * @template T
+ * @param {T | null | undefined} collection - The object to sample from.
+ * @param {number} [n] - The size of sample.
+ * @returns {Array<T[keyof T]>} A new array with sample size applied.
  *
  * @example
- * const result = sampleSize({ a: 1, b: 2, c: 3 }, 2)
- * // result will be an array containing two of the values from the collection.
- * // [1, 2] or [1, 3] or [2, 3]
+ * sampleSize({ a: 1, b: 2, c: 3 }, 2);
+ * // => [2, 3] (example, actual result will vary)
  */
-export function sampleSize<T extends object>(collection: T | null | undefined, size?: number): Array<T[keyof T]>;
+export function sampleSize<T extends object>(collection: T | null | undefined, n?: number): Array<T[keyof T]>;
 
 /**
  * Returns a sample element array of a specified `size`.
@@ -72,5 +62,7 @@ export function sampleSize<T>(
     size = clamp(toInteger(size), 0, arrayCollection.length);
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   return sampleSizeToolkit(arrayCollection, size);
 }

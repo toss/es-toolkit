@@ -23,7 +23,9 @@ import { get } from '../object/get.ts';
  * invoke(object, 'a.b', [1, 2]); // => 3
  * invoke(object, ['a', 'b'], [1, 2]); // => 3
  */
-export function invoke(object: unknown, path: PropertyKey | PropertyKey[], args: any[] = []): any {
+export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], ...args: any[]): any {
+  args = args.flat(1);
+
   if (object == null) {
     return;
   }
@@ -43,6 +45,8 @@ export function invoke(object: unknown, path: PropertyKey | PropertyKey[], args:
       if (Array.isArray(path)) {
         return invokeImpl(object, path, args);
       } else {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return invokeImpl(object, [path], args);
       }
     }

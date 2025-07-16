@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { minBy as minByLodash } from 'lodash';
 import { minBy } from './minBy';
 
 describe('minBy', () => {
@@ -40,5 +41,14 @@ describe('minBy', () => {
 
     const actual = minBy([object, { a: value }], obj => obj.a);
     expect(actual).toBe(object);
+  });
+
+  it('should handle null and undefined values', () => {
+    expect(minBy(null)).toBe(undefined);
+    expect(minBy(undefined)).toBe(undefined);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(minBy).toEqualTypeOf<typeof minByLodash>();
   });
 });

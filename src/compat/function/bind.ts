@@ -24,7 +24,7 @@
  * bound('hi');
  * // => 'hi fred!'
  */
-export function bind<F extends (...args: any[]) => any>(func: F, thisObj?: unknown, ...partialArgs: any[]): F {
+export function bind(func: (...args: any[]) => any, thisObj: any, ...partialArgs: any[]): (...args: any[]) => any {
   const bound = function (this: any, ...providedArgs: any[]) {
     const args: any[] = [];
 
@@ -55,7 +55,7 @@ export function bind<F extends (...args: any[]) => any>(func: F, thisObj?: unkno
     return func.apply(thisObj, args);
   };
 
-  return bound as any as F;
+  return bound;
 }
 
 const bindPlaceholder: unique symbol = Symbol('bind.placeholder');

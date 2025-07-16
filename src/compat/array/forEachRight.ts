@@ -1,127 +1,130 @@
 import { identity } from '../../function/identity.ts';
 import { range } from '../../math/range.ts';
+import { ArrayIterator } from '../_internal/ArrayIterator.ts';
+import { ListIterator } from '../_internal/ListIterator.ts';
+import { ObjectIterator } from '../_internal/ObjectIterator.ts';
+import { StringIterator } from '../_internal/StringIterator.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
- * Iterates over elements of 'array' from right to left and invokes 'callback' for each element.
+ * Iterates over elements of array from right to left and invokes iteratee for each element.
  *
- * @template K - The type of elements in the array.
- * @template T - The type of the array.
- * @param {T | null | undefined} array - The array to iterate over.
- * @param {(value: K, index: number, array: T) => unknown} [callback] - The function invoked for each element.
- * The callback function receives three arguments:
- *  - 'value': The current element being processed in the array.
- *  - 'index': The index of the current element being processed in the array.
- *  - 'array': The array 'forEachRight' was called upon.
- * @returns {T} Returns the original array.
+ * @template T
+ * @param {T[]} collection - The array to iterate over.
+ * @param {ArrayIterator<T, any>} [iteratee] - The function invoked per iteration.
+ * @returns {T[]} Returns array.
  *
  * @example
- * forEachRight([1, 2, 3], (value, index, array) => console.log(value, index));
- * // Output:
- * // 3 2
- * // 2 1
- * // 1 0
- *
+ * forEachRight([1, 2], value => console.log(value));
+ * // => Logs `2` then `1`.
  */
-export function forEachRight<T>(array: T[], callback?: (value: T, index: number, array: T[]) => unknown): T[];
+export function forEachRight<T>(collection: T[], iteratee?: ArrayIterator<T, any>): T[];
 
 /**
- * Iterates over elements of 'array' from right to left and invokes 'callback' for each element.
+ * Iterates over characters of string from right to left and invokes iteratee for each character.
  *
- * @template K - The type of elements in the array.
- * @template T - The type of the array.
- * @param {T | null | undefined} array - The array to iterate over.
- * @param {(value: K, index: number, array: T) => unknown} [callback] - The function invoked for each element.
- * The callback function receives three arguments:
- *  - 'value': The current element being processed in the array.
- *  - 'index': The index of the current element being processed in the array.
- *  - 'array': The array 'forEachRight' was called upon.
- * @returns {T} Returns the original array.
+ * @param {string} collection - The string to iterate over.
+ * @param {StringIterator<any>} [iteratee] - The function invoked per iteration.
+ * @returns {string} Returns string.
  *
  * @example
- * forEachRight([1, 2, 3], (value, index, array) => console.log(value, index));
- * // Output:
- * // 3 2
- * // 2 1
- * // 1 0
- *
+ * forEachRight('abc', char => console.log(char));
+ * // => Logs 'c', 'b', then 'a'.
  */
-export function forEachRight<T>(
-  array: readonly T[],
-  callback?: (value: T, index: number, array: T[]) => unknown
-): readonly T[];
+export function forEachRight(collection: string, iteratee?: StringIterator<any>): string;
 
 /**
- * Iterates over elements of 'array' from right to left and invokes 'callback' for each element.
+ * Iterates over elements of collection from right to left and invokes iteratee for each element.
  *
- * @template T - The type of string.
- * @param {T | null | undefined} string - The string to iterate over
- * @param {(value: T, index: number, string: T) => unknown} [callback] - The function invoked for each char.
- * The callback function receives three arguments:
- *  - 'char': The current char being processed in the string.
- *  - 'index': The index of the current char being processed in the string.
- *  - 'string': The string 'forEachRight' was called upon.
- * @returns {T} Returns the original string.
+ * @template T
+ * @param {ArrayLike<T>} collection - The collection to iterate over.
+ * @param {ListIterator<T, any>} [iteratee] - The function invoked per iteration.
+ * @returns {ArrayLike<T>} Returns collection.
  *
  * @example
- * forEachRight('abc', (char, index, string) => console.log(char, index));
- * // Output:
- * // 'c' 2
- * // 'b' 1
- * // 'a' 0
+ * forEachRight({ 0: 'a', 1: 'b', length: 2 }, value => console.log(value));
+ * // => Logs 'b' then 'a'.
  */
-export function forEachRight<T extends string | null | undefined>(
-  string: T,
-  callback?: (char: string, index: number, string: string) => unknown
-): T;
+export function forEachRight<T>(collection: ArrayLike<T>, iteratee?: ListIterator<T, any>): ArrayLike<T>;
 
 /**
- * Iterates over elements of 'array' from right to left and invokes 'callback' for each element.
+ * Iterates over own enumerable string keyed properties of an object from right to left and invokes iteratee for each property.
  *
- * @template T - The type of elements in the array.
- * @param { ArrayLike<T> } array - The array to iterate over.
- * @param {(value: T, index: number, array: ArrayLike<T>) => unknown} [callback] - The function invoked for each element.
- * The callback function receives three arguments:
- *  - 'value': The current element being processed in the array.
- *  - 'index': The index of the current element being processed in the array.
- *  - 'array': The array 'forEachRight' was called upon.
- * @returns {T} Returns the original array.
+ * @template T
+ * @param {T} collection - The object to iterate over.
+ * @param {ObjectIterator<T, any>} [iteratee] - The function invoked per iteration.
+ * @returns {T} Returns object.
  *
  * @example
- * forEachRight([1, 2, 3], (value, index, array) => console.log(value, index));
- * // Output:
- * // 3 2
- * // 2 1
- * // 1 0
- *
+ * forEachRight({ a: 1, b: 2 }, (value, key) => console.log(key));
+ * // => Logs 'b' then 'a'.
  */
-export function forEachRight<T>(
-  array: ArrayLike<T>,
-  callback?: (value: T, index: number, array: ArrayLike<T>) => unknown
-): ArrayLike<T>;
+export function forEachRight<T extends object>(collection: T, iteratee?: ObjectIterator<T, any>): T;
 
 /**
- * Iterates over elements of 'array' from right to left and invokes 'callback' for each element.
+ * Iterates over elements of array from right to left and invokes iteratee for each element.
  *
- * @template T - The type of object.
- * @param {T} object - The object to iterate over.
- * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} [callback] - The function invoked for each property.
- * The callback function receives three arguments:
- *  - 'value': The current property being processed in the object.
- *  - 'key': The key of the current property being processed in the object.
- *  - 'object': The object 'forEachRight' was called upon.
- * @returns {T} Returns the original object.
+ * @template T, U
+ * @param {U & (T[] | null | undefined)} collection - The array to iterate over.
+ * @param {ArrayIterator<T, any>} [iteratee] - The function invoked per iteration.
+ * @returns {U} Returns the array.
  *
  * @example
- * forEachRight({'a': 1, 'b': 2 }, (value, key, object) => console.log(value, key));
- * // Output:
- * // 2 'b'
- * // 1 'a'
+ * forEachRight([1, 2], value => console.log(value));
+ * // => Logs `2` then `1`.
  */
-export function forEachRight<T extends object | null | undefined>(
-  object: T,
-  callback?: (value: T[keyof T], key: keyof T, object: T) => unknown
-): T;
+export function forEachRight<T, U extends T[] | null | undefined>(
+  collection: U & (T[] | null | undefined),
+  iteratee?: ArrayIterator<T, any>
+): U;
+
+/**
+ * Iterates over characters of string from right to left and invokes iteratee for each character.
+ *
+ * @template T
+ * @param {T} collection - The string to iterate over.
+ * @param {StringIterator<any>} [iteratee] - The function invoked per iteration.
+ * @returns {T} Returns the string.
+ *
+ * @example
+ * forEachRight('abc', char => console.log(char));
+ * // => Logs 'c', 'b', then 'a'.
+ */
+export function forEachRight<T extends string | null | undefined>(collection: T, iteratee?: StringIterator<any>): T;
+
+/**
+ * Iterates over elements of collection from right to left and invokes iteratee for each element.
+ *
+ * @template T, L
+ * @param {L & (ArrayLike<T> | null | undefined)} collection - The collection to iterate over.
+ * @param {ListIterator<T, any>} [iteratee] - The function invoked per iteration.
+ * @returns {L} Returns the collection.
+ *
+ * @example
+ * forEachRight({ 0: 'a', 1: 'b', length: 2 }, value => console.log(value));
+ * // => Logs 'b' then 'a'.
+ */
+export function forEachRight<T, L extends ArrayLike<T> | null | undefined>(
+  collection: L & (ArrayLike<T> | null | undefined),
+  iteratee?: ListIterator<T, any>
+): L;
+
+/**
+ * Iterates over own enumerable string keyed properties of an object from right to left and invokes iteratee for each property.
+ *
+ * @template T
+ * @param {T | null | undefined} collection - The object to iterate over.
+ * @param {ObjectIterator<T, any>} [iteratee] - The function invoked per iteration.
+ * @returns {T | null | undefined} Returns the object.
+ *
+ * @example
+ * forEachRight({ a: 1, b: 2 }, (value, key) => console.log(key));
+ * // => Logs 'b' then 'a'.
+ */
+export function forEachRight<T extends object>(
+  collection: T | null | undefined,
+  iteratee?: ObjectIterator<T, any>
+): T | null | undefined;
 
 /**
  * Iterates over elements of 'array' from right to left and invokes 'callback' for each element.

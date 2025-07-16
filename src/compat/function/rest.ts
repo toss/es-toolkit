@@ -30,10 +30,7 @@ import { rest as restToolkit } from '../../function/rest.ts';
  * // With fewer arguments than the start index
  * console.log(transformedFn(1)); // [1, undefined, []]
  */
-export function rest<F extends (...args: any[]) => any>(
-  func: F,
-  start = func.length - 1
-): (...args: any[]) => ReturnType<F> {
+export function rest(func: (...args: any[]) => any, start: number = func.length - 1): (...args: any[]) => any {
   start = Number.parseInt(start as any, 10);
 
   if (Number.isNaN(start) || start < 0) {

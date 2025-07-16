@@ -1,5 +1,103 @@
 # es-toolkit Changelog
 
+## Version v1.39.7
+
+Released on July 9th, 2025.
+
+- Fixed a compatibility issue with Lodash's `debounce` and `throttle` functions.
+- Remove useless source map for reduce bundle size.
+- Fix some of the documentation issues.
+
+We sincerely thank @dayongkr, @cobocho, @raon0211, and @D-Sketon for their contributions. We appreciate your great efforts!
+
+## Version v1.39.6
+
+Released on July 2th, 2025.
+
+- Fixed handling of null/undefined values in `values` function.
+- Fixed type safety in `compat/get` by adding GetFieldType utility type.
+
+We sincerely thank @raon0211, @dayongkr, @yhb-flydream, @ssi02014, @JeongHwan-dev, and @guesung for their contributions. We appreciate your great efforts!
+
+## Version v1.39.5
+
+Released on June 24th, 2025.
+
+- Fixed type compatibility issues between `es-toolkit/compat` and `@types/lodash`.
+- Improved documentation.
+
+We thank @raon0211, @dayongkr, @sukvvon, and @yhb-flydream for their contributions.
+
+## Version v1.39.4
+
+Released on June 21st, 2025.
+
+- Fixed prototype pollution issue in es-toolkit to enhance security.
+- Enhanced build system to provide compat/\* functions in CommonJS format by default.
+
+We thank @raon0211, and @dayongkr for their contributions.
+
+## Version v1.39.3
+
+Released on June 7th, 2025.
+
+- Fixed postbuild script to ensure compat function categorization aligns with src directory structure.
+
+## Version v1.39.2
+
+Released on June 7th, 2025.
+
+- Added dual package export support for individual compat functions (e.g., `es-toolkit/compat/add`).
+
+## Version v1.39.1
+
+Released on June 6th, 2025.
+
+- Resolved mismatch between named and default exports in compat .d.ts and .js files to improve TypeScript integration.
+
+## Version v1.39.0
+
+🎉 Released on June 5th, 2025. 🎉
+
+We're thrilled to announce that `es-toolkit/compat` has achieved full compatibility with Lodash! 🎉
+
+A huge thank you to all our contributors who made this possible.
+
+- Introduced compatibility functions for [defaultsDeep](https://es-toolkit.slash.page/reference/compat/object/defaultsDeep.html), [isMatchWith](https://es-toolkit.slash.page/reference/compat/predicate/isMatchWith.html), [flatMapDepth](https://es-toolkit.slash.page/reference/compat/array/flatMapDepth.html), [flatMapDeep](https://es-toolkit.slash.page/reference/compat/array/flatMapDeep.html), [overArgs](https://es-toolkit.slash.page/reference/compat/function/overArgs.html), [findLastKey](https://es-toolkit.slash.page/reference/compat/object/findLastKey.html) and [truncate](https://es-toolkit.slash.page/reference/compat/string/truncate.html).
+- Enhanced build system to support `es-toolkit/compat/*` module imports.
+- Fixed special functions like `each` to ensure proper functionality.
+- Fixed Deno compatibility issues for `defaultsDeep` function.
+- Fixed import paths in Deno environment.
+- Added benchmark comparing es-toolkit and lodash `identity` function performance.
+- Improved documentation and test coverage for various functions.
+
+We sincerely thank @raon0211, @dayongkr, @mreiden, @hwibaski, @shren207, @jiji-hoon96, and @myungjuice for their contributions. We appreciate your great efforts!
+
+### ⭐️ Special Thanks to Our Amazing Contributors Who Made 100% Compatibility Possible ⭐️
+
+@raon0211, @dayongkr, @D-Sketon, @mass2527, @ssi02014, @shren207, @chhw130, @haejunejung, @jsparkdev, @manudeli, @jgjgill, @hyesungoh, @kaehehehe, @filipsobol, @fvsch, @wondonghwi, @seungrodotlee, @bertyhell, @minchodang, @Jeong-Rae, @kangju2000, @juno7803, @wojtekmaj, @mattiacoll, @changwoolab, @po4tion, @gyumong, @choi2021, @mancuoj, @de-novo, @eunhyulkim, @kim-sung-jee, @gs18004, @Hanna922, @Na-hyunwoo, @aken-you, @tanggd, @ho991217, @piquark6046, @jiji-hoon96, @seonghun0828, @pkovzz, @nnnnoel, @noelkim-prestolabs, @minsoo-web, @hautest, @scato3, @l2hyunwoo, @WooWan, @VVSOGI, @k-jeonghee, @knott11, @lukaszkowalik2, @moonheekim0118, @sadobass, @minjongbaek, @umsungjun, @sossost, @sunrabbit123, @Seung-wan, @cruelladevil, @iDevGon, @oror-sine, @1eeminhyeong, @benzyminzy, @BlackWhite2000, @tooooo1, @L2HYUNN, @DonghyunKim98, @dasom-jo, @guesung, @uniqueeest, @KiKoS0, @myungjuice, @seung-juv, @Collection50, @nowethan, @coding-honey, @ariandel-dev, @apeltop, @jch1223, @yhay81, @milooy, @raviqqe, @youznn, @BinskLee, @YEONDG, @shinwonse, @willmanduffy, @vjo, @touhidrahman, @T3sT3ro, @belgattitude, @WISUNGWON, @anaclumos, @hsskey, @BasixKOR, @Kyujenius, @Dohun-choi, @dngur9801, @sanginchun, @westofsky, @DONG-8, @yhmpc, @pbstar, @MoXiaoluo, @uussong, @tuhm1, @tisou1, @spookyuser, @sa02045, @Hotanya, @nia3y, @mreiden, @kms0219kms, @IkumaTadokoro, @hansolbangul, @hainan-612, @hwibaski, @jeongshin, @HoberMin, @ohprettyhak, @gweesin, @FengBuPi, @kyvg, @evan-moon, @chldmsqls34, @kimpuro, @dogagenc, @Duck-98, @redd97, @faner11, @bhollis, @jaehunn, @babay123, @beomxtone, @ankitjha420, @shan-mx, @2skydev, @StyleShit, @confidential-nt, @siddsarkar, @seongminn, @healtheloper, @pnodet, @Gaic4o, @leeminhee119, @leehj322, @kristian240, @kingston, @kim-dongho, @jungwoo3490, @joris-gallot, @jonganebski, @jiwooproity, @moshuying, @jakvbs, @therealjamesjung, @SaeWooKKang and @HyeokjaeLee
+
+## Version v1.38.0
+
+Released on May 18th, 2025.
+
+- Added compatibility functions for [bindAll](https://es-toolkit.slash.page/reference/compat/util/bindAll.html), [setWith](https://es-toolkit.slash.page/reference/compat/object/setWith.html), [memoize](https://es-toolkit.slash.page/reference/function/memoize.html), [isNative](https://es-toolkit.slash.page/reference/compat/predicate/isNative.html), [invokeMap](https://es-toolkit.slash.page/reference/compat/array/invokeMap.html), [clone](https://es-toolkit.slash.page/reference/object/clone.html), [cloneWith](https://es-toolkit.slash.page/reference/compat/object/cloneWith.html), and [sortedLastIndexOf](https://es-toolkit.slash.page/reference/compat/array/sortedLastIndexOf.html).
+- Enhanced [invariant](https://es-toolkit.slash.page/reference/util/invariant.html) function to accept Error instances and added [assert](https://es-toolkit.slash.page/reference/util/assert.html) alias.
+- Fixed type definitions and empty array handling in [maxBy](https://es-toolkit.slash.page/reference/array/maxBy.html) and [minBy](https://es-toolkit.slash.page/reference/array/minBy.html).
+- Fixed typo 'Partail' to 'Partial' in [findKey](https://es-toolkit.slash.page/reference/object/findKey.html) type annotation.
+- Enhanced [max](https://es-toolkit.slash.page/reference/math/max.html) and [min](https://es-toolkit.slash.page/reference/math/min.html) functions to skip NaN, symbol, and null values, and return undefined when all values are skipped.
+- Fixed sparse array handling in compat functions to match Lodash's behavior.
+- Improved test coverage and documentation for various functions.
+- Fixed various documentation issues and typos.
+
+We sincerely thank @myungjuice, @scato3, @uniqueeest, @YEONDG, @shren207, @hyesungoh, @kms0219kms, @minjongbaek, @kristian240, @D-Sketon, @Seung-wan, @jiji-hoon96, @raon0211, and @dayongkr for their contributions. We appreciate your great efforts!
+
+## Version v1.37.2
+
+Released on May 4th, 2025.
+
+- Fixed an issue in `es-toolkit/compat`'s `throttle` function to match Lodash's behavior by immediately invoking the throttled function when wait time is zero.
+
 ## Version v1.37.1
 
 Released on May 3rd, 2025.

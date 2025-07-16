@@ -17,6 +17,6 @@ import { toString } from '../util/toString.ts';
  * toUpper([1, 2, 3]);
  * // => '1,2,3'
  */
-export function toUpper(value?: unknown): string {
-  return toString(value).toUpperCase();
+export function toUpper<T extends string = string>(value?: T): Uppercase<T> {
+  return toString(value).toUpperCase() as Uppercase<T>;
 }

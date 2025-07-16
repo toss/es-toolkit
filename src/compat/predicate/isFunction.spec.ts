@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isFunction as isFunctionLodash } from 'lodash';
 import { isFunction } from '../../predicate/isFunction';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -63,5 +64,9 @@ describe('isFunction', () => {
     expect(isFunction(/x/)).toBe(false);
     expect(isFunction('a')).toBe(false);
     expect(isFunction(Symbol('a'))).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isFunction).toEqualTypeOf<typeof isFunctionLodash>();
   });
 });

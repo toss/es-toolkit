@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { findLastIndex as findLastIndexLodash } from 'lodash';
 import { findLastIndex } from './findLastIndex';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -13,6 +14,8 @@ describe('findLastIndex', () => {
   ];
 
   it(`should return the found value`, () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(findLastIndex(objects, object => object.a)).toEqual(2);
   });
 
@@ -40,6 +43,8 @@ describe('findLastIndex', () => {
     let args: any;
     const array = ['a'];
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     findLastIndex(array, function () {
       // eslint-disable-next-line
       args || (args = slice.call(arguments));
@@ -111,5 +116,9 @@ describe('findLastIndex', () => {
     expect(findLastIndex({ 0: 'a', 1: 'b', length: 2 }, i => i === 'b')).toBe(1);
     expect(findLastIndex('123', i => i === '2')).toBe(1);
     expect(findLastIndex(args, i => i === 2)).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(findLastIndex).toEqualTypeOf<typeof findLastIndexLodash>();
   });
 });

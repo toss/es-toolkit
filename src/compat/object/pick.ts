@@ -1,27 +1,41 @@
 import { get } from './get.ts';
 import { has } from './has.ts';
 import { set } from './set.ts';
+import { Many } from '../_internal/Many.ts';
+import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isNil } from '../predicate/isNil.ts';
 
 /**
  * Creates a new object composed of the picked object properties.
  *
- * This function takes an object and an array of keys, and returns a new object that
- * includes only the properties corresponding to the specified keys.
- *
  * @template T - The type of object.
- * @template K - The type of keys in object.
- * @param {T} obj - The object to pick keys from.
- * @param {K[]} keys - An array of keys to be picked from the object.
- * @returns {Pick<T, K>} A new object with the specified keys picked.
+ * @template U - The type of keys to pick.
+ * @param {T} object - The object to pick keys from.
+ * @param {...Array<Many<U>>} props - An array of keys to be picked from the object.
+ * @returns {Pick<T, U>} A new object with the specified keys picked.
  *
  * @example
  * const obj = { a: 1, b: 2, c: 3 };
  * const result = pick(obj, ['a', 'c']);
  * // result will be { a: 1, c: 3 }
  */
-export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: readonly K[]): Pick<T, K>;
+export function pick<T extends object, U extends keyof T>(object: T, ...props: Array<Many<U>>): Pick<T, U>;
+
+/**
+ * Creates a new object composed of the picked object properties.
+ *
+ * @template T - The type of object.
+ * @param {T | null | undefined} object - The object to pick keys from.
+ * @param {...Array<Many<PropertyPath>>} props - An array of keys to be picked from the object.
+ * @returns {Partial<T>} A new object with the specified keys picked.
+ *
+ * @example
+ * const obj = { a: 1, b: 2, c: 3 };
+ * const result = pick(obj, ['a', 'c']);
+ * // result will be { a: 1, c: 3 }
+ */
+export function pick<T>(object: T | null | undefined, ...props: Array<Many<PropertyPath>>): Partial<T>;
 
 /**
  * Creates a new object composed of the picked object properties.
@@ -30,10 +44,10 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
  * includes only the properties corresponding to the specified keys.
  *
  * @template T - The type of object.
- * @param {T | null | undefined} obj - The object to pick keys from.
- * @param {...any} keys
- * @param {PropertyKey | PropertyKey[] | PropertyKey[][]}} keys - An array of keys to be picked from the object. received keys goes through a flattening process before being used.
- * @returns {Partial<T, K>} A new object with the specified keys picked.
+ * @template U - The type of keys to pick.
+ * @param {T | any | null | undefined} object - The object to pick keys from.
+ * @param {...Array<Many<U>> | Array<Many<PropertyPath>>} props - An array of keys to be picked from the object. received keys goes through a flattening process before being used.
+ * @returns {Pick<T, U> | Partial<T>} A new object with the specified keys picked.
  *
  * @example
  * const obj = { a: 1, b: 2, c: 3 };
@@ -49,47 +63,10 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
  * const result = pick(obj, 'a.b');
  * // result will be { 'a.b': 1 }
  */
-export function pick<
-  // eslint-disable-next-line
-  T extends {},
->(
-  obj: T | null | undefined,
-  ...keys: Array<PropertyKey | readonly PropertyKey[] | ReadonlyArray<readonly PropertyKey[]>>
-): Partial<T>;
-
-/**
- * Creates a new object composed of the picked object properties.
- *
- * This function takes an object and an array of keys, and returns a new object that
- * includes only the properties corresponding to the specified keys.
- *
- * @template T - The type of object.
- * @param {T | null | undefined} obj - The object to pick keys from.
- * @param {...any} keysArr - An array of keys to be picked from the object. received keys goes through a flattening process before being used.
- * @param {PropertyKey | PropertyKey[] | PropertyKey[][]}} keys - An array of keys to be picked from the object. received keys goes through a flattening process before being used.
- * @returns {Partial<T, K>} A new object with the specified keys picked.
- *
- * @example
- * const obj = { a: 1, b: 2, c: 3 };
- * const result = pick(obj, ['a', 'c']);
- * // result will be { a: 1, c: 3 }
- *
- * // each path can be passed individually as an argument
- * const obj = { a: 1, b: 2, c: 3 };
- * const result = pick(obj, 'a', 'c');
- *
- * // pick a key over a path
- * const obj = { 'a.b': 1, a: { b: 2 } };
- * const result = pick(obj, 'a.b');
- * // result will be { 'a.b': 1 }
- */
-export function pick<
-  // eslint-disable-next-line
-  T extends {},
->(
-  obj: T | null | undefined,
-  ...keysArr: Array<PropertyKey | readonly PropertyKey[] | ReadonlyArray<readonly PropertyKey[]>>
-): Partial<T> {
+export function pick<T extends object, U extends keyof T>(
+  obj: T | any | null | undefined,
+  ...keysArr: Array<Many<U>> | Array<Many<PropertyPath>>
+): Pick<T, U> | Partial<T> {
   if (isNil(obj)) {
     return {};
   }

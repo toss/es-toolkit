@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { head as headLodash } from 'lodash';
 import { args } from '../_internal/args';
 import { first, head } from '../index';
 
@@ -42,5 +43,9 @@ describe('head', () => {
     expect(first({ 0: 1, 1: null, 2: 3, length: 3 })).toEqual(1);
     expect(first('123')).toEqual('1');
     expect(first(args)).toEqual(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(head).toEqualTypeOf<typeof headLodash>();
   });
 });

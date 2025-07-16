@@ -1,4 +1,18 @@
 /**
+ * Reverses `array` so that the first element becomes the last, the second element becomes the second to last, and so on.
+ *
+ * @template L
+ * @param {L extends readonly any[] ? never : L} array - The array to reverse.
+ * @returns {L} Returns `array`.
+ *
+ * @example
+ * const array = [1, 2, 3];
+ * reverse(array);
+ * // => [3, 2, 1]
+ */
+export function reverse<L extends ArrayLike<any>>(array: L extends readonly any[] ? never : L): L;
+
+/**
  * Reverses the elements of an array in place.
  *
  * This function takes an array and reverses its elements in place, modifying the original array.

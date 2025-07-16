@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { now as nowLodash } from 'lodash';
 import { now } from './now';
 import { delay } from '../../promise/delay';
 
@@ -12,5 +13,9 @@ describe('now', () => {
     await delay(32);
 
     expect(now() > actual);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(now).toEqualTypeOf<typeof nowLodash>();
   });
 });

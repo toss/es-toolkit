@@ -67,13 +67,13 @@ export function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T> {
 
   if (isPlainObject(obj)) {
     const result = {} as ToSnakeCaseKeys<T>;
-    const keys = Object.keys(obj);
+    const keys = Object.keys(obj as Record<PropertyKey, any>);
 
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
       const snakeKey = snakeCase(key) as keyof typeof result;
-      const snakeCaseKeys = toSnakeCaseKeys(obj[key]);
+      const snakeCaseKeys = toSnakeCaseKeys((obj as Record<PropertyKey, any>)[key]);
       result[snakeKey] = snakeCaseKeys as ToSnakeCaseKeys<T>[keyof ToSnakeCaseKeys<T>];
     }
 

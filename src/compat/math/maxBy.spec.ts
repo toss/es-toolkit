@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { maxBy as maxByLodash } from 'lodash';
 import { maxBy } from './maxBy';
 
 describe('maxBy', () => {
@@ -40,5 +41,14 @@ describe('maxBy', () => {
 
     const actual = maxBy([object, { a: value }], obj => obj.a);
     expect(actual).toBe(object);
+  });
+
+  it('should handle null and undefined values', () => {
+    expect(maxBy(null)).toBe(undefined);
+    expect(maxBy(undefined)).toBe(undefined);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(maxBy).toEqualTypeOf<typeof maxByLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { times as timesLodash } from 'lodash';
 import { stubArray } from './stubArray';
 import { times } from './times';
 import { doubled } from '../_internal/doubled';
@@ -46,6 +47,8 @@ describe('times', () => {
     const values = falsey.concat(-1, -Infinity);
     const expected = values.map(stubArray);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? times(value as any) : times()));
 
     expect(actual).toEqual(expected);
@@ -54,5 +57,9 @@ describe('times', () => {
   it('should return an empty array when `n > Number.MAX_SAFE_INTEGER`', () => {
     expect(times(Number.MAX_SAFE_INTEGER + 1)).toEqual([]);
     expect(times(Number.MAX_VALUE, doubled)).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(times).toEqualTypeOf<typeof timesLodash>();
   });
 });

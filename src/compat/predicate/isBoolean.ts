@@ -6,7 +6,7 @@
  *
  *  This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `boolean`.
  *
- * @param {unknown} value - The Value to test if it is boolean.
+ * @param {any} value - The Value to test if it is boolean.
  * @returns {value is boolean} True if the value is boolean, false otherwise.
  *
  * @example
@@ -20,6 +20,6 @@
  * console.log(isBoolean(value3)); // false
  *
  */
-export function isBoolean(value?: unknown): value is boolean {
+export function isBoolean(value?: any): value is boolean {
   return typeof value === 'boolean' || value instanceof Boolean;
 }

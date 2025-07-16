@@ -12,6 +12,6 @@ import { toString } from '../util/toString.ts';
  * const convertedStr2 = lowerCase('Fred') // returns 'fred'
  * const convertedStr3 = lowerCase('FRED') // returns 'fRED'
  */
-export function lowerFirst(str?: string): string {
-  return lowerFirstToolkit(toString(str));
+export function lowerFirst<T extends string = string>(str?: T): Uncapitalize<T> {
+  return lowerFirstToolkit(toString(str)) as Uncapitalize<T>;
 }

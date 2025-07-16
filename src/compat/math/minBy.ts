@@ -1,4 +1,6 @@
 import { minBy as minByToolkit } from '../../array/minBy.ts';
+import { identity } from '../../function/identity.ts';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
 /**
@@ -29,13 +31,10 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * minBy([{ a: 1 }, { a: 2 }], ['a', 1]); // Returns: { a: 2 }
  * minBy([{ a: 1 }, { a: 2 }], { a: 1 }); // Returns: { a: 2 }
  */
-export function minBy<T>(
-  items: ArrayLike<T> | null | undefined,
-  iteratee: ((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>
-): T | undefined {
+export function minBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): T | undefined {
   if (items == null) {
     return undefined;
   }
 
-  return minByToolkit(Array.from(items), iterateeToolkit(iteratee));
+  return minByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
 }

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { pullAllWith as pullAllWithLodash } from 'lodash';
 import { pullAllWith } from './pullAllWith';
 import { isEqual } from '../../predicate';
 
@@ -96,5 +97,16 @@ describe('pullAllWith', () => {
     expect(123 in array).toBe(true);
     expect(456 in array).toBe(false);
     expect(789 in array).toBe(false);
+  });
+
+  it('should handle null and undefined values', () => {
+    // @ts-expect-error - null is not an array
+    expect(pullAllWith(null, [1, 2, 3])).toEqual(null);
+    // @ts-expect-error - undefined is not an array
+    expect(pullAllWith(undefined, [1, 2, 3])).toEqual(undefined);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(pullAllWith).toEqualTypeOf<typeof pullAllWithLodash>();
   });
 });

@@ -1,5 +1,14 @@
 # 与 Lodash 兼容性
 
+::: tip ✅ 从1.39.3版本开始，我们确保与Lodash 100%兼容
+
+`es-toolkit/compat`在所有Lodash函数上表现相同，同时更轻更快。
+
+- 确保与Lodash的实际测试代码行为一致。
+- 被Storybook、Recharts等知名开源库使用。
+
+:::
+
 ```tsx
 // es-toolkit/compat 的目标是提供与 lodash 百分之百的功能兼容性
 import { chunk } from 'es-toolkit/compat';
@@ -26,6 +35,7 @@ chunk([1, 2, 3, 4], 0);
 
 - 作为 lodash 测试用例编写的功能。
 - 可以从 `@types/lodash` 或 `@types/lodash-es` 的类型推断出的功能。
+- 在从 `lodash` 迁移到 `es-toolkit` 的过程中发现的功能差异（请在[问题页面](https://github.com/toss/es-toolkit/issues)报告。）
 
 然而，以下内容不在 `es-toolkit/compat` 的范围之内：
 

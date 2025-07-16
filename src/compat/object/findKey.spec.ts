@@ -1,61 +1,60 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { findKey as findKeyLodash } from 'lodash';
 import { findKey } from './findKey';
 
-/**
- * @see https://lodash.com/docs/4.17.15#findKey
- */
 describe('findKey', () => {
-  const users = {
-    barney: { age: 36, active: true },
-    fred: { age: 40, active: false },
-    pebbles: { age: 1, active: true },
-  };
+  const objects = [
+    { a: 0, b: 0 },
+    { a: 1, b: 1 },
+    { a: 2, b: 2 },
+  ];
+  it('should return the found key', () => {
+    // @ts-expect-error invalid argument
+    expect(findKey(objects, object => object.a)).toBe('1');
+  });
 
-  it('should find key with a function predicate', function () {
-    const actual = findKey(users, function (o) {
-      return o.age < 40;
+  it('should return undefined if value is not found', () => {
+    // @ts-expect-error invalid argument
+    expect(findKey(objects, object => object.a === 3)).toBeUndefined();
+  });
+
+  it('should work with matches shorthand', () => {
+    expect(findKey(objects, { b: 2 })).toBe('2');
+  });
+
+  it('should work with matchesProperty shorthand', () => {
+    expect(findKey(objects, ['b', 2])).toBe('2');
+  });
+
+  it('should work with property shorthand', () => {
+    expect(findKey(objects, 'b')).toBe('1');
+  });
+
+  it('should return undefined for empty collections', () => {
+    const emptyValues = [[], {}, null, undefined, ''];
+    emptyValues.forEach(value => {
+      // @ts-expect-error invalid argument
+      expect(findKey(value, { a: 3 })).toBeUndefined();
     });
-    expect(actual).toBe('barney');
   });
 
-  it('should work with `_.matches` shorthands', function () {
-    const actual = findKey(users, { age: 1, active: true });
-    expect(actual).toBe('pebbles');
+  it('should work with an object for `collection`', () => {
+    expect(findKey({ a: 1, b: 2, c: 3 }, n => n < 3)).toBe('a');
   });
 
-  it('should work with `_.matchesProperty` shorthands', function () {
-    const actual = findKey(users, ['active', false]);
-    expect(actual).toBe('fred');
+  it('should provide correct predicate arguments for objects', () => {
+    let args;
+    const object = { a: 1 };
+
+    findKey(object, function () {
+      // eslint-disable-next-line prefer-rest-params
+      args = Array.from(arguments);
+    });
+
+    expect(args).toEqual([1, 'a', object]);
   });
 
-  it('should work with `_.property` shorthands', function () {
-    const actual = findKey(users, 'active');
-    expect(actual).toBe('barney');
-  });
-
-  it('should return undefined for an empty object', function () {
-    // @ts-expect-error - invalid argument
-    const actual = findKey({}, { age: 36 });
-    expect(actual).toBeUndefined();
-  });
-
-  it('should return undefined for null input', function () {
-    const actual = findKey(null, { age: 36 });
-    expect(actual).toBeUndefined();
-  });
-
-  it('should return undefined for undefined input', function () {
-    const actual = findKey(undefined, { age: 36 });
-    expect(actual).toBeUndefined();
-  });
-
-  it('should return undefined if no matching key is found', function () {
-    const actual = findKey(users, { age: 100 });
-    expect(actual).toBeUndefined();
-  });
-
-  it('should handle partial matches with `Partial<T[keyof T]>`', function () {
-    const actual = findKey(users, { active: true });
-    expect(actual).toBe('barney');
+  it('should match the type of lodash', () => {
+    expectTypeOf(findKey).toEqualTypeOf<typeof findKeyLodash>();
   });
 });

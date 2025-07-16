@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { countBy as countByLodash } from 'lodash';
 import { countBy } from './countBy';
 
 describe('countBy', () => {
@@ -14,6 +15,8 @@ describe('countBy', () => {
     const values = [, null, undefined]; // eslint-disable-line no-sparse-arrays
     const expected = values.map(() => ({ 4: 1, 6: 2 }));
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? countBy(array, value) : countBy(array)));
     expect(actual).toEqual(expected);
   });
@@ -49,5 +52,9 @@ describe('countBy', () => {
   it('should return empty object when collection is nullish', () => {
     expect(countBy(null)).toEqual({});
     expect(countBy(undefined)).toEqual({});
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(countBy).toEqualTypeOf<typeof countByLodash>();
   });
 });

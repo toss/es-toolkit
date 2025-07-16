@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { words as wordsLodash } from 'lodash';
 import { words } from './words';
 
 describe('words', () => {
@@ -28,6 +29,8 @@ describe('words', () => {
   });
 
   it('splits a string representation of an array', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const result = words([1, 2, 3]);
     expect(result).toEqual(['1', '2', '3']);
   });
@@ -40,5 +43,33 @@ describe('words', () => {
   it('correctly handles a string with Unicode emojis and special characters', () => {
     const result = words('example🚀with✨emojis💡and🔍special🌟characters');
     expect(result).toEqual(['example', '🚀', 'with', '✨', 'emojis', '💡', 'and', '🔍', 'special', '🌟', 'characters']);
+  });
+
+  it('should match accented letters', () => {
+    expect(words('Lunedì 18 Set')).toEqual(['Lunedì', '18', 'Set']);
+  });
+
+  it('should match Hindi characters', () => {
+    expect(words('नमस्ते नमस्ते')).toEqual(['नमस्ते', 'नमस्ते']);
+  });
+
+  it('should match ordinal numbers', () => {
+    expect(words('1st 2nd+3rd--4th@1ST*2ND-3RD_4TH')).toEqual(['1st', '2nd', '3rd', '4th', '1ST', '2ND', '3RD', '4TH']);
+  });
+
+  it('should match contractions', () => {
+    expect(words("I don't+can't-won't-DON'T*THEY'RE-I'LL")).toEqual([
+      'I',
+      "don't",
+      "can't",
+      "won't",
+      "DON'T",
+      "THEY'RE",
+      "I'LL",
+    ]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(words).toEqualTypeOf<typeof wordsLodash>();
   });
 });

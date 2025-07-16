@@ -14,7 +14,7 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const result3 = startCase('hello-world');  // result will be 'Hello World'
  * const result4 = startCase('hello_world');  // result will be 'Hello World'
  */
-export function startCase(str?: string | object): string {
+export function startCase(str?: string): string {
   const words = getWords(normalizeForCase(str).trim());
 
   let result = '';
