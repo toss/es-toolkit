@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { before as beforeLodash } from 'lodash';
 import { before } from './before';
 
 describe('before', () => {
@@ -42,5 +43,9 @@ describe('before', () => {
 
   it('should throw an error if `func` is not a function', () => {
     expect(() => before(1, 1 as any)).toThrow(TypeError);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(before).toEqualTypeOf<typeof beforeLodash>();
   });
 });

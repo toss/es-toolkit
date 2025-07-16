@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { invoke as invokeLodash } from 'lodash';
 import { constant } from './constant';
 import { invoke } from './invoke';
 import { noop } from '../../function/noop';
@@ -79,5 +80,9 @@ describe('invoke', () => {
   it('should return `undefined` when resolving deep paths on nullish values', () => {
     const object = { a: null };
     expect(invoke(object, 'a.b')).toBeUndefined();
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(invoke).toEqualTypeOf<typeof invokeLodash>();
   });
 });

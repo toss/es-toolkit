@@ -1,775 +1,720 @@
 import { partialRightImpl } from '../../function/partialRight.ts';
+import type { Toolkit } from '../toolkit.ts';
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+type __ = Placeholder | Toolkit;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with no arguments.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template R The return type of the function
+ * @param {() => R} func The function to partially apply
+ * @returns {() => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template R The return type of the function.
- * @param {() => R} func The function to invoke.
- * @returns {() => R} Returns the new function.
  * @example
- * const getValue = () => 42;
- * const getValueFunc = partialRight(getValue);
- * console.log(getValueFunc()); // => 42
+ * const greet = () => 'Hello!';
+ * const sayHello = partialRight(greet);
+ * sayHello(); // => 'Hello!'
  */
 export function partialRight<R>(func: () => R): () => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with one argument.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T The type of the argument
+ * @template R The return type of the function
+ * @param {(t1: T) => R} func The function to partially apply
+ * @returns {(t1: T) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template R The return type of the function.
- * @param {(arg1: T1) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @returns {() => R} Returns the new partially applied function.
  * @example
- * const addOne = (num: number) => num + 1;
- * const addOneFunc = partialRight(addOne, 1);
- * console.log(addOneFunc()); // => 2
+ * const greet = (name: string) => `Hello ${name}!`;
+ * const greetPerson = partialRight(greet);
+ * greetPerson('Fred'); // => 'Hello Fred!'
  */
-export function partialRight<T1, R>(func: (arg1: T1) => R, arg1: T1): () => R;
+export function partialRight<T, R>(func: (t1: T) => R): (t1: T) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with one argument pre-filled.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T The type of the argument
+ * @template R The return type of the function
+ * @param {(t1: T) => R} func The function to partially apply
+ * @param {T} arg1 The argument to pre-fill
+ * @returns {() => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template R The return type of the function.
- * @param {(arg1: T1) => R} func The function to partially apply arguments to.
- * @returns {(arg1: T1) => R} Returns the new partially applied function.
  * @example
- * const multiplyBy = (factor: number) => (num: number) => num * factor;
- * const double = partialRight(multiplyBy(2));
- * console.log(double(5)); // => 10
+ * const greet = (name: string) => `Hello ${name}!`;
+ * const greetFred = partialRight(greet, 'Fred');
+ * greetFred(); // => 'Hello Fred!'
  */
-export function partialRight<T1, R>(func: (arg1: T1) => R): (arg1: T1) => R;
+export function partialRight<T, R>(func: (t1: T) => R, arg1: T): () => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with two arguments.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2) => R} func The function to partially apply
+ * @returns {(t1: T1, t2: T2) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template R The return type of the function.
- * @param {(arg1: T1) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @returns {() => R} Returns the new partially applied function.
  * @example
- * const greet = (name: string) => `Hello, ${name}!`;
- * const greetJohn = partialRight(greet, 'John');
- * console.log(greetJohn()); // => 'Hello, John!'
+ * const greet = (greeting: string, name: string) => `${greeting} ${name}!`;
+ * const greetWithParams = partialRight(greet);
+ * greetWithParams('Hi', 'Fred'); // => 'Hi Fred!'
  */
-export function partialRight<T1, R>(func: (arg1: T1) => R, arg1: T1): () => R;
+export function partialRight<T1, T2, R>(func: (t1: T1, t2: T2) => R): (t1: T1, t2: T2) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with one argument pre-filled and a placeholder.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2) => R} func The function to partially apply
+ * @param {T1} arg1 The argument to pre-fill
+ * @param {__} plc2 The placeholder for the second argument
+ * @returns {(t2: T2) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2) => R} func The function to partially apply arguments to.
- * @returns {(arg1: T1, arg2: T2) => R} Returns the new partially applied function.
  * @example
- * const subtract = (a: number, b: number) => a - b;
- * const subtractFive = partialRight(subtract);
- * console.log(subtractFive(10, 5)); // => 5
+ * const greet = (greeting: string, name: string) => `${greeting} ${name}!`;
+ * const hiWithName = partialRight(greet, 'Hi', partialRight.placeholder);
+ * hiWithName('Fred'); // => 'Hi Fred!'
  */
-export function partialRight<T1, T2, R>(func: (arg1: T1, arg2: T2) => R): (arg1: T1, arg2: T2) => R;
+export function partialRight<T1, T2, R>(func: (t1: T1, t2: T2) => R, arg1: T1, plc2: __): (t2: T2) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with the second argument pre-filled.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2) => R} func The function to partially apply
+ * @param {T2} arg2 The argument to pre-fill
+ * @returns {(t1: T1) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @returns {(arg2: T2) => R} Returns the new partially applied function.
  * @example
- * const concat = (a: string, b: string) => a + b;
- * const concatWithHello = partialRight(concat, 'Hello', partialRight.placeholder);
- * console.log(concatWithHello(' World!')); // => 'Hello World!'
+ * const greet = (greeting: string, name: string) => `${greeting} ${name}!`;
+ * const greetFred = partialRight(greet, 'Fred');
+ * greetFred('Hi'); // => 'Hi Fred!'
  */
-export function partialRight<T1, T2, R>(func: (arg1: T1, arg2: T2) => R, arg1: T1, arg2: Placeholder): (arg2: T2) => R;
+export function partialRight<T1, T2, R>(func: (t1: T1, t2: T2) => R, arg2: T2): (t1: T1) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with both arguments pre-filled.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {T2} arg2 The second argument to pre-fill
+ * @returns {() => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2) => R} func The function to partially apply arguments to.
- * @param {T2} arg2 The second argument to be partially applied.
- * @returns {(arg1: T1) => R} Returns the new partially applied function.
  * @example
- * const divide = (a: number, b: number) => a / b;
- * const divideByTwo = partialRight(divide, 2);
- * console.log(divideByTwo(10)); // => 5
+ * const greet = (greeting: string, name: string) => `${greeting} ${name}!`;
+ * const sayHiToFred = partialRight(greet, 'Hi', 'Fred');
+ * sayHiToFred(); // => 'Hi Fred!'
  */
-export function partialRight<T1, T2, R>(func: (arg1: T1, arg2: T2) => R, arg2: T2): (arg1: T1) => R;
+export function partialRight<T1, T2, R>(func: (t1: T1, t2: T2) => R, arg1: T1, arg2: T2): () => R;
+/**
+ * Creates a function that invokes the provided function with no pre-filled arguments.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
+ * @returns {(t1: T1, t2: T2, t3: T3) => R} Returns the new partially applied function
+ *
+ * @example
+ * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
+ * const greetWithArgs = partialRight(greet);
+ * greetWithArgs('Hi', 'Fred', '!'); // => 'Hi Fred!'
+ */
+export function partialRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R): (t1: T1, t2: T2, t3: T3) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with the first argument pre-filled and placeholders for the rest.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {__} plc2 The placeholder for the second argument
+ * @param {__} plc3 The placeholder for the third argument
+ * @returns {(t2: T2, t3: T3) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {T2} arg2 The second argument to be partially applied.
- * @returns {() => R} Returns the new partially applied function.
  * @example
- * const multiply = (a: number, b: number) => a * b;
- * const multiplyByThreeAndFour = partialRight(multiply, 3, 4);
- * console.log(multiplyByThreeAndFour()); // => 12
- */
-export function partialRight<T1, T2, R>(func: (arg1: T1, arg2: T2) => R, arg1: T1, arg2: T2): () => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
- * @returns {(arg1: T1, arg2: T2, arg3: T3) => R} Returns the new partially applied function.
- * @example
- * const sumThree = (a: number, b: number, c: number) => a + b + c;
- * const sumWithFive = partialRight(sumThree);
- * console.log(sumWithFive(1, 2, 5)); // => 8
+ * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
+ * const hiWithNameAndPunc = partialRight(greet, 'Hi', partialRight.placeholder, partialRight.placeholder);
+ * hiWithNameAndPunc('Fred', '!'); // => 'Hi Fred!'
  */
 export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R
-): (arg1: T1, arg2: T2, arg3: T3) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @returns {(arg2: T2, arg3: T3) => R} Returns the new partially applied function.
- * @example
- * const formatDate = (day: number, month: number, year: number) => `${day}/${month}/${year}`;
- * const formatDateWithDay = partialRight(formatDate, 1, partialRight.placeholder, partialRight.placeholder);
- * console.log(formatDateWithDay(12, 2023)); // => '1/12/2023'
- */
-export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
+  func: (t1: T1, t2: T2, t3: T3) => R,
   arg1: T1,
-  arg2: Placeholder,
-  arg3: Placeholder
-): (arg2: T2, arg3: T3) => R;
+  plc2: __,
+  plc3: __
+): (t2: T2, t3: T3) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with the second argument pre-filled and a placeholder for the third.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {__} plc3 The placeholder for the third argument
+ * @returns {(t1: T1, t3: T3) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
- * @param {Placeholder} arg1 The placeholder for the first argument.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @returns {(arg1: T1, arg3: T3) => R} Returns a new function that takes the first and third arguments and returns the result of the original function.
  * @example
- * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
- * const greetWithPlaceholder = partialRight(greet, 'Hello', partialRight.placeholder);
- * console.log(greetWithPlaceholder('John')); // => 'Hello, John!'
+ * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
+ * const greetFredWithPunc = partialRight(greet, 'Fred', partialRight.placeholder);
+ * greetFredWithPunc('Hi', '!'); // => 'Hi Fred!'
  */
 export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  arg1: Placeholder,
+  func: (t1: T1, t2: T2, t3: T3) => R,
   arg2: T2,
-  arg3: Placeholder
-): (arg1: T1, arg3: T3) => R;
+  plc3: __
+): (t1: T1, t3: T3) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with the first two arguments pre-filled and a placeholder for the third.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {__} plc3 The placeholder for the third argument
+ * @returns {(t3: T3) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @returns {(arg1: T1, arg3: T3) => R} Returns the new partially applied function.
  * @example
- * const createUser = (name: string, age: number, country: string) => `${name}, ${age} years old from ${country}`;
- * const createUserFromUSA = partialRight(createUser, 'USA', partialRight.placeholder);
- * console.log(createUserFromUSA('John', 30)); // => 'John, 30 years old from USA'
+ * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
+ * const hiToFredWithPunc = partialRight(greet, 'Hi', 'Fred', partialRight.placeholder);
+ * hiToFredWithPunc('!'); // => 'Hi Fred!'
  */
 export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  arg2: T2,
-  arg3: Placeholder
-): (arg1: T1, arg3: T3) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @returns {(arg3: T3) => R} Returns the new partially applied function.
- * @example
- * const logMessage = (level: string, message: string, timestamp: string) => `[${level}] ${message} at ${timestamp}`;
- * const logError = partialRight(logMessage, 'ERROR', '2023-10-01');
- * console.log(logError('Something went wrong!')); // => '[ERROR] Something went wrong! at 2023-10-01'
- */
-export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
+  func: (t1: T1, t2: T2, t3: T3) => R,
   arg1: T1,
   arg2: T2,
-  arg3: Placeholder
-): (arg3: T3) => R;
+  plc3: __
+): (t3: T3) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with the third argument pre-filled.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
+ * @param {T3} arg3 The third argument to pre-fill
+ * @returns {(t1: T1, t2: T2) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
- * @param {T3} arg3 The third argument to be partially applied.
- * @returns {(arg1: T1, arg2: T2) => R} Returns the new partially applied function.
  * @example
- * const calculateArea = (length: number, width: number) => length * width;
- * const calculateAreaWithWidth = partialRight(calculateArea, 5);
- * console.log(calculateAreaWithWidth(10)); // => 50
+ * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
+ * const greetWithExclamation = partialRight(greet, '!');
+ * greetWithExclamation('Hi', 'Fred'); // => 'Hi Fred!'
+ */
+export function partialRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R, arg3: T3): (t1: T1, t2: T2) => R;
+
+/**
+ * Creates a function that invokes the provided function with the first and third arguments pre-filled.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {__} plc2 The placeholder for the second argument
+ * @param {T3} arg3 The third argument to pre-fill
+ * @returns {(t2: T2) => R} Returns the new partially applied function
+ *
+ * @example
+ * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
+ * const hiWithNameAndExclamation = partialRight(greet, 'Hi', partialRight.placeholder, '!');
+ * hiWithNameAndExclamation('Fred'); // => 'Hi Fred!'
  */
 export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
+  func: (t1: T1, t2: T2, t3: T3) => R,
+  arg1: T1,
+  plc2: __,
   arg3: T3
-): (arg1: T1, arg2: T2) => R;
+): (t2: T2) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with the second and third arguments pre-filled.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {T3} arg3 The third argument to pre-fill
+ * @returns {(t1: T1) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to be partially applied.
- * @returns {(arg2: T2) => R} Returns the new partially applied function.
  * @example
- * const formatCurrency = (amount: number, currency: string) => `${amount} ${currency}`;
- * const formatUSD = partialRight(formatCurrency, 100, partialRight.placeholder);
- * console.log(formatUSD('USD')); // => '100 USD'
+ * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
+ * const greetFredWithExclamation = partialRight(greet, 'Fred', '!');
+ * greetFredWithExclamation('Hi'); // => 'Hi Fred!'
  */
-export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  arg1: T1,
-  arg2: Placeholder,
-  arg3: T3
-): (arg2: T2) => R;
+export function partialRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R, arg2: T2, arg3: T3): (t1: T1) => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with all three arguments pre-filled.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {T3} arg3 The third argument to pre-fill
+ * @returns {() => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3) => R} func The function to partially apply arguments to.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {T3} arg3 The third argument to be partially applied.
- * @returns {(arg1: T1) => R} Returns the new partially applied function.
  * @example
- * const createProfile = (name: string, age: number, country: string) => `${name}, ${age} from ${country}`;
- * const createProfileFromCanada = partialRight(createProfile, 'Canada', 'John');
- * console.log(createProfileFromCanada(30)); // => 'John, 30 from Canada'
+ * const greet = (greeting: string, name: string, punctuation: string) => `${greeting} ${name}${punctuation}`;
+ * const sayHiToFredWithExclamation = partialRight(greet, 'Hi', 'Fred', '!');
+ * sayHiToFredWithExclamation(); // => 'Hi Fred!'
  */
-export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  arg2: T2,
-  arg3: T3
-): (arg1: T1) => R;
-
-export function partialRight<T1, T2, T3, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3) => R,
-  arg1: T1,
-  arg2: T2,
-  arg3: T3
-): () => R;
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @returns {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} Returns a new function that takes four arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R
-): (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R;
+export function partialRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R, arg1: T1, arg2: T2, arg3: T3): () => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with no pre-filled arguments.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @returns {(t1: T1, t2: T2, t3: T3, t4: T4) => R} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @param {Placeholder} arg4 The placeholder for the fourth argument.
- * @returns {(arg2: T2, arg3: T3, arg4: T4) => R} Returns a new function that takes the second, third, and fourth arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: Placeholder,
-  arg3: Placeholder,
-  arg4: Placeholder
-): (arg2: T2, arg3: T3, arg4: T4) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @param {Placeholder} arg4 The placeholder for the fourth argument.
- * @returns {(arg1: T1, arg3: T3, arg4: T4) => R} Returns a new function that takes the first, third, and fourth arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg2: T2,
-  arg3: Placeholder,
-  arg4: Placeholder
-): (arg1: T1, arg3: T3, arg4: T4) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @param {Placeholder} arg4 The placeholder for the fourth argument.
- * @returns {(arg3: T3, arg4: T4) => R} Returns a new function that takes the third and fourth arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: T2,
-  arg3: Placeholder,
-  arg4: Placeholder
-): (arg3: T3, arg4: T4) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T3} arg3 The third argument to be partially applied.
- * @param {Placeholder} arg4 The placeholder for the fourth argument.
- * @returns {(arg1: T1, arg2: T2, arg4: T4) => R} Returns a new function that takes the first, second, and fourth arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg3: T3,
-  arg4: Placeholder
-): (arg1: T1, arg2: T2, arg4: T4) => R;
-
-/**
- * Creates a function that invokes `func` with the first argument, a placeholder for the second argument,
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to be partially applied.
- * @param {Placeholder} arg4 The placeholder for the fourth argument.
- * @returns {(arg2: T2, arg4: T4) => R} Returns a new function that takes the second and fourth arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: Placeholder,
-  arg3: T3,
-  arg4: Placeholder
-): (arg2: T2, arg4: T4) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {T3} arg3 The third argument to be partially applied.
- * @param {Placeholder} arg4 The placeholder for the fourth argument.
- * @returns {(arg1: T1, arg4: T4) => R} Returns a new function that takes the first and fourth arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg2: T2,
-  arg3: T3,
-  arg4: Placeholder
-): (arg1: T1, arg4: T4) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {T3} arg3 The third argument to be partially applied.
- * @param {Placeholder} arg4 The placeholder for the fourth argument.
- * @returns {(arg4: T4) => R} Returns a new function that takes the fourth argument.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: T2,
-  arg3: T3,
-  arg4: Placeholder
-): (arg4: T4) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T4} arg4 The fourth argument to be partially applied.
- * @returns {(arg1: T1, arg2: T2, arg3: T3) => R} Returns a new function that takes the first, second, and third arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg4: T4
-): (arg1: T1, arg2: T2, arg3: T3) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @param {T4} arg4 The fourth argument to be partially applied.
- * @returns {(arg2: T2, arg3: T3) => R} Returns a new function that takes the second and third arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: Placeholder,
-  arg3: Placeholder,
-  arg4: T4
-): (arg2: T2, arg3: T3) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @param {T4} arg4 The fourth argument to be partially applied.
- * @returns {(arg1: T1, arg3: T3) => R} Returns a new function that takes the first and third arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg2: T2,
-  arg3: Placeholder,
-  arg4: T4
-): (arg1: T1, arg3: T3) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {Placeholder} arg3 The placeholder for the third argument.
- * @param {T4} arg4 The fourth argument to be partially applied.
- * @returns {(arg3: T3) => R} Returns a new function that takes the third argument.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: T2,
-  arg3: Placeholder,
-  arg4: T4
-): (arg3: T3) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T3} arg3 The third argument to be partially applied.
- * @param {T4} arg4 The fourth argument to be partially applied.
- * @returns {(arg1: T1, arg2: T2) => R} Returns a new function that takes the first and second arguments.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg3: T3,
-  arg4: T4
-): (arg1: T1, arg2: T2) => R;
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {Placeholder} arg2 The placeholder for the second argument.
- * @param {T3} arg3 The third argument to be partially applied.
- * @param {T4} arg4 The fourth argument to be partially applied.
- * @returns {(arg2: T2) => R} Returns a new function that takes the second argument.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg1: T1,
-  arg2: Placeholder,
-  arg3: T3,
-  arg4: T4
-): (arg2: T2) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {T3} arg3 The third argument to be partially applied.
- * @param {T4} arg4 The fourth argument to be partially applied.
- * @returns {(arg1: T1) => R} Returns a new function that takes the first argument.
- */
-export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
-  arg2: T2,
-  arg3: T3,
-  arg4: T4
-): (arg1: T1) => R;
-
-/**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
- *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
- *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template T1 The type of the first argument.
- * @template T2 The type of the second argument.
- * @template T3 The type of the third argument.
- * @template T4 The type of the fourth argument.
- * @template R The return type of the function.
- * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} func The function to partially apply arguments to.
- * @param {T1} arg1 The first argument to be partially applied.
- * @param {T2} arg2 The second argument to be partially applied.
- * @param {T3} arg3 The third argument to be partially applied.
- * @param {T4} arg4 The fourth argument to be partially applied.
- * @returns {() => R} Returns the new partially applied function.
  * @example
- * const concatenate = (a: string, b: string, c: string, d: string) => a + b + c + d;
- * const concatenateHelloWorld = partialRight(concatenate, 'Hello', ' ', 'World', '!');
- * console.log(concatenateHelloWorld()); // => 'Hello World!'
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const formatWithArgs = partialRight(format);
+ * formatWithArgs('Hi', 'Fred', 'morning', '!'); // => 'Hi Fred, it's morning!'
  */
 export function partialRight<T1, T2, T3, T4, R>(
-  func: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R
+): (t1: T1, t2: T2, t3: T3, t4: T4) => R;
+/**
+ * Creates a function that invokes the provided function with the first argument pre-filled and placeholders for the rest.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {__} plc2 The placeholder for the second argument
+ * @param {__} plc3 The placeholder for the third argument
+ * @param {__} plc4 The placeholder for the fourth argument
+ * @returns {(t2: T2, t3: T3, t4: T4) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const hiWithRest = partialRight(format, 'Hi', partialRight.placeholder, partialRight.placeholder, partialRight.placeholder);
+ * hiWithRest('Fred', 'morning', '!'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  plc2: __,
+  plc3: __,
+  plc4: __
+): (t2: T2, t3: T3, t4: T4) => R;
+
+/**
+ * Creates a function that invokes the provided function with the second argument pre-filled and placeholders for the rest.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {__} plc3 The placeholder for the third argument
+ * @param {__} plc4 The placeholder for the fourth argument
+ * @returns {(t1: T1, t3: T3, t4: T4) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const greetFredWithRest = partialRight(format, 'Fred', partialRight.placeholder, partialRight.placeholder);
+ * greetFredWithRest('Hi', 'morning', '!'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg2: T2,
+  plc3: __,
+  plc4: __
+): (t1: T1, t3: T3, t4: T4) => R;
+
+/**
+ * Creates a function that invokes the provided function with the first two arguments pre-filled and placeholders for the rest.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {__} plc3 The placeholder for the third argument
+ * @param {__} plc4 The placeholder for the fourth argument
+ * @returns {(t3: T3, t4: T4) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const hiToFredWithRest = partialRight(format, 'Hi', 'Fred', partialRight.placeholder, partialRight.placeholder);
+ * hiToFredWithRest('morning', '!'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  arg2: T2,
+  plc3: __,
+  plc4: __
+): (t3: T3, t4: T4) => R;
+
+/**
+ * Creates a function that invokes the provided function with the third argument pre-filled and a placeholder for the fourth.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T3} arg3 The third argument to pre-fill
+ * @param {__} plc4 The placeholder for the fourth argument
+ * @returns {(t1: T1, t2: T2, t4: T4) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const atMorningWithPunc = partialRight(format, 'morning', partialRight.placeholder);
+ * atMorningWithPunc('Hi', 'Fred', '!'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg3: T3,
+  plc4: __
+): (t1: T1, t2: T2, t4: T4) => R;
+
+/**
+ * Creates a function that invokes the provided function with the first and third arguments pre-filled and a placeholder for the fourth.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {__} plc2 The placeholder for the second argument
+ * @param {T3} arg3 The third argument to pre-fill
+ * @param {__} plc4 The placeholder for the fourth argument
+ * @returns {(t2: T2, t4: T4) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const hiAtMorningWithNameAndPunc = partialRight(format, 'Hi', partialRight.placeholder, 'morning', partialRight.placeholder);
+ * hiAtMorningWithNameAndPunc('Fred', '!'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  plc2: __,
+  arg3: T3,
+  plc4: __
+): (t2: T2, t4: T4) => R;
+
+/**
+ * Creates a function that invokes the provided function with the second and third arguments pre-filled and a placeholder for the fourth.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {T3} arg3 The third argument to pre-fill
+ * @param {__} plc4 The placeholder for the fourth argument
+ * @returns {(t1: T1, t4: T4) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const greetFredAtMorningWithPunc = partialRight(format, 'Fred', 'morning', partialRight.placeholder);
+ * greetFredAtMorningWithPunc('Hi', '!'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg2: T2,
+  arg3: T3,
+  plc4: __
+): (t1: T1, t4: T4) => R;
+
+/**
+ * Creates a function that invokes the provided function with the first three arguments pre-filled and a placeholder for the fourth.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {T3} arg3 The third argument to pre-fill
+ * @param {__} plc4 The placeholder for the fourth argument
+ * @returns {(t4: T4) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const hiToFredAtMorningWithPunc = partialRight(format, 'Hi', 'Fred', 'morning', partialRight.placeholder);
+ * hiToFredAtMorningWithPunc('!'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  arg2: T2,
+  arg3: T3,
+  plc4: __
+): (t4: T4) => R;
+
+/**
+ * Creates a function that invokes the provided function with the fourth argument pre-filled.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T4} arg4 The fourth argument to pre-fill
+ * @returns {(t1: T1, t2: T2, t3: T3) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const withExclamation = partialRight(format, '!');
+ * withExclamation('Hi', 'Fred', 'morning'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg4: T4
+): (t1: T1, t2: T2, t3: T3) => R;
+
+/**
+ * Creates a function that invokes the provided function with the first and fourth arguments pre-filled.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {__} plc2 The placeholder for the second argument
+ * @param {__} plc3 The placeholder for the third argument
+ * @param {T4} arg4 The fourth argument to pre-fill
+ * @returns {(t2: T2, t3: T3) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const hiWithExclamation = partialRight(format, 'Hi', partialRight.placeholder, partialRight.placeholder, '!');
+ * hiWithExclamation('Fred', 'morning'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  plc2: __,
+  plc3: __,
+  arg4: T4
+): (t2: T2, t3: T3) => R;
+/**
+ * Creates a function that invokes the provided function with the second and fourth arguments pre-filled and a placeholder for the third.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {__} plc3 The placeholder for the third argument
+ * @param {T4} arg4 The fourth argument to pre-fill
+ * @returns {(t1: T1, t3: T3) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const greetFredWithTime = partialRight(format, 'Fred', partialRight.placeholder, '!');
+ * greetFredWithTime('Hi', 'morning'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg2: T2,
+  plc3: __,
+  arg4: T4
+): (t1: T1, t3: T3) => R;
+
+/**
+ * Creates a function that invokes the provided function with the first, second and fourth arguments pre-filled and a placeholder for the third.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {__} plc3 The placeholder for the third argument
+ * @param {T4} arg4 The fourth argument to pre-fill
+ * @returns {(t3: T3) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const hiToFredWithTime = partialRight(format, 'Hi', 'Fred', partialRight.placeholder, '!');
+ * hiToFredWithTime('morning'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  arg2: T2,
+  plc3: __,
+  arg4: T4
+): (t3: T3) => R;
+
+/**
+ * Creates a function that invokes the provided function with the third and fourth arguments pre-filled.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T3} arg3 The third argument to pre-fill
+ * @param {T4} arg4 The fourth argument to pre-fill
+ * @returns {(t1: T1, t2: T2) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const inMorningWithExclamation = partialRight(format, 'morning', '!');
+ * inMorningWithExclamation('Hi', 'Fred'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg3: T3,
+  arg4: T4
+): (t1: T1, t2: T2) => R;
+
+/**
+ * Creates a function that invokes the provided function with the first, third and fourth arguments pre-filled.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {__} plc2 The placeholder for the second argument
+ * @param {T3} arg3 The third argument to pre-fill
+ * @param {T4} arg4 The fourth argument to pre-fill
+ * @returns {(t2: T2) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const hiInMorningWithExclamation = partialRight(format, 'Hi', partialRight.placeholder, 'morning', '!');
+ * hiInMorningWithExclamation('Fred'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg1: T1,
+  plc2: __,
+  arg3: T3,
+  arg4: T4
+): (t2: T2) => R;
+
+/**
+ * Creates a function that invokes the provided function with the second, third and fourth arguments pre-filled.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {T3} arg3 The third argument to pre-fill
+ * @param {T4} arg4 The fourth argument to pre-fill
+ * @returns {(t1: T1) => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const greetFredInMorningWithExclamation = partialRight(format, 'Fred', 'morning', '!');
+ * greetFredInMorningWithExclamation('Hi'); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+  arg2: T2,
+  arg3: T3,
+  arg4: T4
+): (t1: T1) => R;
+
+/**
+ * Creates a function that invokes the provided function with all arguments pre-filled.
+ *
+ * @template T1 The type of the first argument
+ * @template T2 The type of the second argument
+ * @template T3 The type of the third argument
+ * @template T4 The type of the fourth argument
+ * @template R The return type of the function
+ * @param {(t1: T1, t2: T2, t3: T3, t4: T4) => R} func The function to partially apply
+ * @param {T1} arg1 The first argument to pre-fill
+ * @param {T2} arg2 The second argument to pre-fill
+ * @param {T3} arg3 The third argument to pre-fill
+ * @param {T4} arg4 The fourth argument to pre-fill
+ * @returns {() => R} Returns the new partially applied function
+ *
+ * @example
+ * const format = (greeting: string, name: string, time: string, punctuation: string) =>
+ *   `${greeting} ${name}, it's ${time}${punctuation}`;
+ * const sayHiToFredInMorningWithExclamation = partialRight(format, 'Hi', 'Fred', 'morning', '!');
+ * sayHiToFredInMorningWithExclamation(); // => 'Hi Fred, it's morning!'
+ */
+export function partialRight<T1, T2, T3, T4, R>(
+  func: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
   arg1: T1,
   arg2: T2,
   arg3: T3,
@@ -777,20 +722,25 @@ export function partialRight<T1, T2, T3, T4, R>(
 ): () => R;
 
 /**
- * This method is like `partial` except that partially applied arguments are appended to the arguments it receives.
+ * Creates a function that invokes the provided function with partially applied arguments appended to the arguments it receives.
+ * The partialRight.placeholder value can be used as a placeholder for partially applied arguments.
  *
- * The partialRight.placeholder value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
+ * @template F The type of the function to partially apply
+ * @param {F} func The function to partially apply arguments to
+ * @param {...any[]} args The arguments to be partially applied
+ * @returns {(...args: any[]) => ReturnType<F>} Returns the new partially applied function
  *
- * Note: This method doesn't set the `length` property of partially applied functions.
- *
- * @template F The type of the function to partially apply.
- * @param {F} func The function to partially apply arguments to.
- * @param {...any[]} args The arguments to be partially applied.
- * @returns {function(...args: any[]): ReturnType<F>} Returns the new partially applied function.
  * @example
- * const log = (...messages: string[]) => console.log(...messages);
- * const logError = partialRight(log, 'Error:');
- * logError('Something went wrong!'); // => 'Error: Something went wrong!'
+ * function greet(greeting: string, name: string) {
+ *   return greeting + ' ' + name;
+ * }
+ *
+ * const greetFred = partialRight(greet, 'Fred');
+ * greetFred('Hi'); // => 'Hi Fred'
+ *
+ * // Using placeholders
+ * const sayHelloTo = partialRight(greet, 'Hello', partialRight.placeholder);
+ * sayHelloTo('Fred'); // => 'Hello Fred'
  */
 export function partialRight(func: (...args: any[]) => any, ...args: any[]): (...args: any[]) => any;
 

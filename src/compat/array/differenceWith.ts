@@ -147,7 +147,7 @@ export function differenceWith<T>(
   }
 
   const comparator = last(values);
-  const flattenedValues = flattenArrayLike<T>(values);
+  const flattenedValues = flattenArrayLike(values as Array<ArrayLike<T>>);
 
   if (typeof comparator === 'function') {
     return differenceWithToolkit(Array.from(array), flattenedValues, comparator);

@@ -4,7 +4,7 @@ type ToolkitFn = (value: any) => any;
 
 type Compat = typeof compat;
 
-interface Toolkit extends ToolkitFn, Compat {}
+export interface Toolkit extends ToolkitFn, Compat {}
 
 // Cast the initial function to the combined Toolkit type
 export const toolkit: Toolkit = ((value: any) => {

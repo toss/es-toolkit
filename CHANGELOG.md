@@ -1,5 +1,42 @@
 # es-toolkit Changelog
 
+## Version v1.39.7
+
+Released on July 9th, 2025.
+
+- Fixed a compatibility issue with Lodash's `debounce` and `throttle` functions.
+- Remove useless source map for reduce bundle size.
+- Fix some of the documentation issues.
+
+We sincerely thank @dayongkr, @cobocho, @raon0211, and @D-Sketon for their contributions. We appreciate your great efforts!
+
+## Version v1.39.6
+
+Released on July 2th, 2025.
+
+- Fixed handling of null/undefined values in `values` function.
+- Fixed type safety in `compat/get` by adding GetFieldType utility type.
+
+We sincerely thank @raon0211, @dayongkr, @yhb-flydream, @ssi02014, @JeongHwan-dev, and @guesung for their contributions. We appreciate your great efforts!
+
+## Version v1.39.5
+
+Released on June 24th, 2025.
+
+- Fixed type compatibility issues between `es-toolkit/compat` and `@types/lodash`.
+- Improved documentation.
+
+We thank @raon0211, @dayongkr, @sukvvon, and @yhb-flydream for their contributions.
+
+## Version v1.39.4
+
+Released on June 21st, 2025.
+
+- Fixed prototype pollution issue in es-toolkit to enhance security.
+- Enhanced build system to provide compat/\* functions in CommonJS format by default.
+
+We thank @raon0211, and @dayongkr for their contributions.
+
 ## Version v1.39.3
 
 Released on June 7th, 2025.

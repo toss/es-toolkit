@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { union as unionLodash } from 'lodash';
 import { union } from './union';
 import { args } from '../_internal/args';
 
@@ -25,5 +26,9 @@ describe('union', () => {
     expect(union(array, 3, { '0': 1 }, null)).toEqual(array);
     expect(union(null, array, null, [2, 1])).toEqual([0, 2, 1]);
     expect(union(array, null, args, null)).toEqual([0, 1, 2, 3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(union).toEqualTypeOf<typeof unionLodash>();
   });
 });

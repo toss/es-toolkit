@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { toPath as toPathLodash } from 'lodash';
 import { toPath } from './toPath';
 
 describe('toPath function', () => {
@@ -45,5 +46,9 @@ describe('toPath function', () => {
   it('handles empty brackets correctly', () => {
     const result = toPath('a[].b');
     expect(result).toEqual(['a', '', 'b']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toPath).toEqualTypeOf<typeof toPathLodash>();
   });
 });

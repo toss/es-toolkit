@@ -1,4 +1,5 @@
 import { identity } from '../../function/identity.ts';
+import { Many } from '../_internal/Many.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
@@ -48,15 +49,15 @@ import { iteratee } from '../util/iteratee.ts';
  * // => "John is 30 years old"
  * ```
  */
-export function overArgs<F extends (...args: any[]) => any, T extends any[]>(
-  func: F,
-  _transforms: T
-): (...args: any[]) => ReturnType<F> {
+export function overArgs(
+  func: (...args: any[]) => any,
+  ..._transforms: Array<Many<(...args: any[]) => any>>
+): (...args: any[]) => any {
   if (typeof func !== 'function') {
     throw new TypeError('Expected a function');
   }
 
-  const transforms = Array.isArray(_transforms) ? _transforms : [_transforms];
+  const transforms = _transforms.flat();
 
   return function (this: any, ...args: any[]) {
     const length = Math.min(args.length, transforms.length);

@@ -15,6 +15,6 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr3 = snakeCase('hyphen-text') // returns 'hyphen_text'
  * const convertedStr4 = snakeCase('HTTPRequest') // returns 'http_request'
  */
-export function snakeCase(str?: string | object): string {
+export function snakeCase(str?: string): string {
   return snakeCaseToolkit(normalizeForCase(str));
 }

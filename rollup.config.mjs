@@ -48,7 +48,7 @@ export default () => {
       inputFile: './src/compat/index.ts',
       outFile: packageJson.publishConfig.browser,
       name: '_',
-      sourcemap: true,
+      sourcemap: false,
     }),
   ];
 };
@@ -63,8 +63,6 @@ export default () => {
  * }) => import('rollup').RollupOptions}
  */
 function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) {
-  const isESM = format === 'esm';
-
   return {
     input: mapInputs(entrypoints),
     plugins: [

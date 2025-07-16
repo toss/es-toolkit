@@ -2694,6 +2694,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.17.18":
+  version: 4.17.18
+  resolution: "@types/lodash@npm:4.17.18"
+  checksum: 10c0/d25f86941990403d59dcaae42b42fc9fef55a0a7f398790517e7189300183e425a94127594cbeaf9b5fcdc4f6c2b285e34f4301fb56c92f81ccd8505a41ab5f5
+  languageName: node
+  linkType: hard
+
 "@types/markdown-it@npm:^14.1.1":
   version: 14.1.2
   resolution: "@types/markdown-it@npm:14.1.2"
@@ -5170,6 +5177,7 @@ __metadata:
     "@types/broken-link-checker": "npm:^0"
     "@types/eslint": "npm:^9"
     "@types/jscodeshift": "npm:^0.12.0"
+    "@types/lodash": "npm:^4.17.18"
     "@types/node": "npm:^22.7.4"
     "@types/tar": "npm:^6.1.13"
     "@typescript-eslint/parser": "npm:^8.26.1"

@@ -6,8 +6,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `null` or `undefined`.
  *
- * @param {unknown} x - The value to test for null or undefined.
- * @returns {boolean} `true` if the value is null or undefined, `false` otherwise.
+ * @param {any} x - The value to test for null or undefined.
+ * @returns {x is null | undefined} `true` if the value is null or undefined, `false` otherwise.
  *
  * @example
  * const value1 = null;
@@ -17,6 +17,6 @@
  * const result2 = isNil(value2); // true
  * const result3 = isNil(value3); // false
  */
-export function isNil(x?: unknown): x is null | undefined {
+export function isNil(x: any): x is null | undefined {
   return x == null;
 }

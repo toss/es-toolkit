@@ -1,6 +1,34 @@
+import { isMatch } from './isMatch.ts';
 import { isObject } from './isObject.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
+import type { IsMatchWithCustomizer } from '../_internal/IsMatchWithCustomizer.ts';
 import { eq } from '../util/eq.ts';
+
+/**
+ * Performs a deep comparison between a target value and a source pattern to determine if they match,
+ * using a custom comparison function for fine-grained control over the matching logic.
+ *
+ * @param {object} target - The value to be tested for matching
+ * @param {object} source - The pattern/template to match against
+ * @param {IsMatchWithCustomizer} compare - Custom comparison function for fine-grained control
+ * @returns {boolean} `true` if the target matches the source pattern, `false` otherwise
+ *
+ * @example
+ * // Basic matching with custom comparator
+ * const caseInsensitiveCompare = (objVal, srcVal) => {
+ *   if (typeof objVal === 'string' && typeof srcVal === 'string') {
+ *     return objVal.toLowerCase() === srcVal.toLowerCase();
+ *   }
+ *   return undefined;
+ * };
+ *
+ * isMatchWith(
+ *   { name: 'JOHN', age: 30 },
+ *   { name: 'john' },
+ *   caseInsensitiveCompare
+ * ); // true
+ */
+export function isMatchWith(target: object, source: object, compare: IsMatchWithCustomizer): boolean;
 
 /**
  * Performs a deep comparison between a target value and a source pattern to determine if they match,
@@ -23,8 +51,8 @@ import { eq } from '../util/eq.ts';
  * - `null` and `undefined` source values have specific matching rules
  * - Circular references are handled using an internal stack to prevent infinite recursion
  *
- * @param {unknown} target - The value to be tested for matching
- * @param {unknown} source - The pattern/template to match against
+ * @param {object} target - The value to be tested for matching
+ * @param {object} source - The pattern/template to match against
  * @param {function} [compare] - Optional custom comparison function that receives:
  *   - `objValue` - The value from the target at the current path
  *   - `srcValue` - The value from the source at the current path
@@ -72,17 +100,26 @@ import { eq } from '../util/eq.ts';
  * ); // true
  */
 export function isMatchWith(
-  target: unknown,
-  source: unknown,
-  compare?: (objValue: any, srcValue: any, key: PropertyKey, object: any, source: any, stack?: Map<any, any>) => unknown
+  target: object,
+  source: object,
+  compare: (
+    value: any,
+    other: any,
+    indexOrKey: PropertyKey,
+    object: object,
+    source: object,
+    stack?: Map<any, any>
+  ) => boolean | undefined
 ): boolean {
-  compare = typeof compare === 'function' ? compare : undefined;
+  if (typeof compare !== 'function') {
+    return isMatch(target, source);
+  }
 
   return isMatchWithInternal(
     target,
     source,
     function doesMatch(objValue, srcValue, key, object, source, stack): boolean | undefined {
-      const isEqual = compare?.(objValue, srcValue, key, object, source, stack);
+      const isEqual = compare(objValue, srcValue, key, object, source, stack);
 
       if (isEqual !== undefined) {
         return Boolean(isEqual);

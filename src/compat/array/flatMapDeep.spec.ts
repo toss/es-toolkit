@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { flatMapDeep as flatMapDeepLodash } from 'lodash';
 import { flatMapDeep } from './flatMapDeep';
 
 describe('flatMapDeep', () => {
@@ -70,5 +71,9 @@ describe('flatMapDeep', () => {
   it('should work with objects with non-number length properties', () => {
     const object = { length: [1, 2] };
     expect(flatMapDeep(object, value => value)).toEqual([1, 2]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(flatMapDeep).toEqualTypeOf<typeof flatMapDeepLodash>();
   });
 });

@@ -1,4 +1,5 @@
 import { isKey } from '../_internal/isKey.ts';
+import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
 import { toString } from '../util/toString.ts';
@@ -8,10 +9,12 @@ import { toString } from '../util/toString.ts';
  * If the resolved value is a function, it is invoked with the object as its `this` context.
  * If the value is `undefined`, the `defaultValue` is returned.
  *
- * @param {any} object - The object to query.
- * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to get.
- * @param {any} [defaultValue] - The value returned if the resolved value is `undefined`.
- * @returns {any} - Returns the resolved value.
+ * @template T - The type of object.
+ * @template R - The type of the value to return.
+ * @param {T} object - The object to query.
+ * @param {PropertyPath} path - The path of the property to get.
+ * @param {R | ((...args: any[]) => R)} [defaultValue] - The value returned if the resolved value is `undefined`.
+ * @returns {R} - Returns the resolved value.
  *
  * @example
  * const obj = { a: { b: { c: 3 } } };
@@ -33,11 +36,7 @@ import { toString } from '../util/toString.ts';
  * result(obj, 'a.b.d', () => 'default');
  * // => 'default'
  */
-export function result(
-  object: any,
-  path: PropertyKey | readonly PropertyKey[],
-  defaultValue?: any | ((...args: any[]) => any)
-): any {
+export function result<R>(object: any, path: PropertyPath, defaultValue?: R | ((...args: any[]) => R)): R {
   if (isKey(path, object)) {
     path = [path];
   } else if (!Array.isArray(path)) {
@@ -50,7 +49,7 @@ export function result(
     const value = object == null ? undefined : object[toKey(path[index])];
 
     if (value === undefined) {
-      return typeof defaultValue === 'function' ? defaultValue.call(object) : defaultValue;
+      return typeof defaultValue === 'function' ? (defaultValue as any).call(object) : (defaultValue as R);
     }
 
     object = typeof value === 'function' ? value.call(object) : value;

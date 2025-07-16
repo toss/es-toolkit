@@ -3,49 +3,54 @@ import { get } from '../object/get.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
- * Invokes the method at `path` of each element in `collection`, returning
- * an array of the results of each invoked method. Any additional arguments
- * are provided to each invoked method. If `path` is a function, it's invoked
- * for, and `this` bound to, each element in `collection`.
+ * Invokes the method at path of each element in collection.
  *
- * @template T The type of the elements in the collection.
- * @template R The type of the resolved values from the invoked methods.
- * @param {T[] | Record<string, T> | null | undefined} collection The collection to iterate over.
- * @param {PropertyKey | PropertyKey[] | ((this: T, ...args: unknown[]) => R)} path The path of the method to invoke (string, number, symbol, or an array of these) or the function to invoke.
- * @param {...unknown} [args] The arguments to invoke each method with.
- * @returns {Array<R | undefined>} Returns the array of results. Elements are `undefined` if the path is not found or the method invocation results in `undefined`.
+ * @param {object | null | undefined} collection - The collection to iterate over.
+ * @param {string} methodName - The name of the method to invoke.
+ * @param {...any[]} args - The arguments to invoke each method with.
+ * @returns {any[]} Returns the array of results.
  *
  * @example
- * // Invoke a method on each element
- * invokeMap(['a', 'b', 'c'], 'toUpperCase');
- * // => ['A', 'B', 'C']
- *
- * // Invoke a method with arguments
  * invokeMap([[5, 1, 7], [3, 2, 1]], 'sort');
  * // => [[1, 5, 7], [1, 2, 3]]
  *
- * // Invoke a method on each value in an object
- * invokeMap({ a: 1, b: 2, c: 3 }, 'toFixed', 1);
- * // => ['1.0', '2.0', '3.0']
+ * invokeMap([123, 456], 'toString', 2);
+ * // => ['1111011', '111001000']
+ */
+export function invokeMap(collection: object | null | undefined, methodName: string, ...args: any[]): any[];
+
+/**
+ * Invokes the method at path of each element in collection.
  *
- * // Use a function instead of a method name
- * invokeMap(
- *   ['a', 'b', 'c'],
- *   function(this: string, prefix: string, suffix: string) {
- *     return prefix + this.toUpperCase() + suffix;
- *   },
- *   '(',
- *   ')'
- * );
- * // => ['(A)', '(B)', '(C)']
+ * @template R
+ * @param {object | null | undefined} collection - The collection to iterate over.
+ * @param {(...args: any[]) => R} method - The method to invoke.
+ * @param {...any[]} args - The arguments to invoke each method with.
+ * @returns {R[]} Returns the array of results.
  *
- * invokeMap([123, 456], String.prototype.split, '');
- * // => [['1', '2', '3'], ['4', '5', '6']]
+ * @example
+ * invokeMap([5, 1, 7], Array.prototype.slice, 1);
+ * // => [[], [], []]
+ */
+export function invokeMap<R>(collection: object | null | undefined, method: (...args: any[]) => R, ...args: any[]): R[];
+
+/**
+ * Invokes the method at path of each element in collection.
+ *
+ * @template T, R
+ * @param {ArrayLike<T> | Record<string, T> | null | undefined} collection - The collection to iterate over.
+ * @param {string | ((...args: any[]) => R)} path - The path of the method to invoke or the method to invoke.
+ * @param {...any[]} args - The arguments to invoke each method with.
+ * @returns {Array<R | undefined>} Returns the array of results.
+ *
+ * @example
+ * invokeMap([[5, 1, 7], [3, 2, 1]], 'sort');
+ * // => [[1, 5, 7], [1, 2, 3]]
  */
 export function invokeMap<T, R>(
-  collection: T[] | Record<string, T> | null | undefined,
-  path: PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R),
-  ...args: unknown[]
+  collection: ArrayLike<T> | Record<string, T> | null | undefined,
+  path: string | ((...args: any[]) => R),
+  ...args: any[]
 ): Array<R | undefined> {
   if (isNil(collection)) {
     return [];

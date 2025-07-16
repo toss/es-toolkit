@@ -15,6 +15,6 @@
  * isSafeInteger(1n); // Returns: false
  * isSafeInteger('1'); // Returns: false
  */
-export function isSafeInteger(value?: unknown): value is number {
+export function isSafeInteger(value: any): boolean {
   return Number.isSafeInteger(value);
 }

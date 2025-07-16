@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { transform as transformLodash } from 'lodash';
 import { transform } from './transform';
 import { noop } from '../../function';
 import { falsey } from '../_internal/falsey';
@@ -217,5 +218,9 @@ describe('transform', () => {
     });
 
     expect(values.length).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(transform).toEqualTypeOf<typeof transformLodash>();
   });
 });

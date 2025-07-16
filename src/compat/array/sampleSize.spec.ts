@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { sampleSize as sampleSizeLodash } from 'lodash';
 import { sampleSize } from './sampleSize';
 import { empties } from '../_internal/empties';
 import { falsey } from '../_internal/falsey';
@@ -70,5 +71,9 @@ describe('sampleSize', () => {
   it('should work as an iteratee for methods like `_.map`', () => {
     const actual = lodashStable.map([['a']], sampleSize);
     expect(actual).toEqual([['a']]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(sampleSize).toEqualTypeOf<typeof sampleSizeLodash>();
   });
 });

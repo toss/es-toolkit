@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { overArgs as overArgsLodash } from 'lodash';
 import { overArgs } from './overArgs';
 import { slice } from '../_internal/slice';
 
@@ -22,17 +23,17 @@ describe('overArgs', () => {
   });
 
   it('should use identity when a predicate is nullish', () => {
-    const over = overArgs(fn, [undefined, null]);
+    const over = overArgs(fn, [undefined, null] as any[]);
     expect(over('a', 'b')).toEqual(['a', 'b']);
   });
 
   it('should work with property shorthands', () => {
-    const over = overArgs(fn, ['b', 'a']);
+    const over = overArgs(fn, ['b', 'a'] as any[]);
     expect(over({ b: 2 }, { a: 1 })).toEqual([2, 1]);
   });
 
   it('should work with matches shorthands', () => {
-    const over = overArgs(fn, [{ b: 1 }, { a: 1 }]);
+    const over = overArgs(fn, [{ b: 1 }, { a: 1 }] as any[]);
     expect(over({ b: 2 }, { a: 1 })).toEqual([false, true]);
   });
 
@@ -40,15 +41,15 @@ describe('overArgs', () => {
     const over = overArgs(fn, [
       ['b', 1],
       ['a', 1],
-    ]);
+    ] as any[]);
     expect(over({ b: 2 }, { a: 1 })).toEqual([false, true]);
   });
 
   it('should differentiate between property and matchesProperty shorthands', () => {
-    let over = overArgs(fn, ['a', 1]);
+    let over = overArgs(fn, ['a', 1] as any[]);
     expect(over({ a: 1 }, { 1: 2 })).toEqual([1, 2]);
 
-    over = overArgs(fn, [['a', 1]]);
+    over = overArgs(fn, [['a', 1]] as any[]);
     expect(over({ a: 1 })).toEqual([true]);
   });
 
@@ -141,7 +142,7 @@ describe('overArgs', () => {
   });
 
   it('should treat nullish transforms as identity function', () => {
-    const transforms = [doubled, null, undefined];
+    const transforms = [doubled, null, undefined] as any;
 
     const func = overArgs((a, b, c, d) => [a, b, c, d], transforms);
 
@@ -150,7 +151,7 @@ describe('overArgs', () => {
 
   it('should support property shorthand', () => {
     const user = { name: 'John', age: 30 };
-    const func = overArgs((name, age) => `${name} is ${age} years old`, ['name', 'age']);
+    const func = overArgs((name, age) => `${name} is ${age} years old`, ['name', 'age'] as any[]);
 
     expect(func(user, user)).toBe('John is 30 years old');
   });
@@ -166,5 +167,9 @@ describe('overArgs', () => {
     const func = overArgs((a, b) => [a, b], doubled as any);
 
     expect(func(5, 3)).toEqual([10, 3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(overArgs).toEqualTypeOf<typeof overArgsLodash>();
   });
 });
