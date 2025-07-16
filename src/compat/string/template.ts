@@ -143,29 +143,31 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
   let isEvaluated = false;
   let source = `__p += ''`;
 
-  for (const match of string.matchAll(delimitersRegExp)) {
-    const [fullMatch, escapeValue, interpolateValue, esTemplateValue, evaluateValue] = match;
-    const { index } = match;
+  string.replace(
+    delimitersRegExp,
+    (fullMatch, escapeValue, interpolateValue, esTemplateValue, evaluateValue, index) => {
+      source += ` + '${string.slice(lastIndex, index).replace(unEscapedRegExp, escapeString)}'`;
 
-    source += ` + '${string.slice(lastIndex, index).replace(unEscapedRegExp, escapeString)}'`;
+      if (escapeValue) {
+        source += ` + _.escape(${escapeValue})`;
+      }
 
-    if (escapeValue) {
-      source += ` + _.escape(${escapeValue})`;
+      if (interpolateValue) {
+        source += ` + ((${interpolateValue}) == null ? '' : ${interpolateValue})`;
+      } else if (esTemplateValue) {
+        source += ` + ((${esTemplateValue}) == null ? '' : ${esTemplateValue})`;
+      }
+
+      if (evaluateValue) {
+        source += `;\n${evaluateValue};\n __p += ''`;
+        isEvaluated = true;
+      }
+
+      lastIndex = index + fullMatch.length;
+
+      return fullMatch;
     }
-
-    if (interpolateValue) {
-      source += ` + ((${interpolateValue}) == null ? '' : ${interpolateValue})`;
-    } else if (esTemplateValue) {
-      source += ` + ((${esTemplateValue}) == null ? '' : ${esTemplateValue})`;
-    }
-
-    if (evaluateValue) {
-      source += `;\n${evaluateValue};\n __p += ''`;
-      isEvaluated = true;
-    }
-
-    lastIndex = index + fullMatch.length;
-  }
+  );
 
   const imports = defaults({ ...options.imports }, templateSettings.imports);
   const importsKeys = keysToolkit(imports);

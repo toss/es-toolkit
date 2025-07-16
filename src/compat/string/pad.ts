@@ -1,5 +1,5 @@
-import { pad as padToolkit } from '../../string/pad.ts';
-import { toString } from '../util/toString.ts';
+import { padEnd } from './padEnd.ts';
+import { padStart } from './padStart.ts';
 
 /**
  * Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length.
@@ -36,5 +36,5 @@ export function pad(str?: string, length?: number, chars?: string): string;
  *
  */
 export function pad(str: any, length?: any, chars?: any): string {
-  return padToolkit(toString(str), length, chars);
+  return padEnd(padStart(str, Math.floor((length - str.length) / 2) + str.length, chars), length, chars);
 }
