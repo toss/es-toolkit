@@ -73,5 +73,5 @@ function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
 
   const func = get(parent, lastKey as PropertyKey);
 
-  return func?.apply(parent, args);
+  return func && func.apply(parent, args);
 }
