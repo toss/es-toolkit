@@ -49,7 +49,7 @@ export function trimStart(str?: string, chars?: string | number, guard?: object)
   }
 
   if (guard != null || chars == null) {
-    return str.toString().trimStart();
+    chars = ' ';
   }
 
   return trimStartImpl(str, chars.toString().split(''));
