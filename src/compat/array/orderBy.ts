@@ -178,7 +178,8 @@ export function orderBy<T = any>(collection: any, criteria?: any, orders?: any, 
     }
 
     if (typeof criterion === 'object' && 'key' in criterion) {
-      if (Object.hasOwn(object, criterion.key)) {
+      // eslint-disable-next-line prefer-object-has-own
+      if (Object.prototype.hasOwnProperty.call(object, criterion.key)) {
         return object[criterion.key as keyof typeof object];
       }
 

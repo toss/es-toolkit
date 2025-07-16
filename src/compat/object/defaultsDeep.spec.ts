@@ -216,7 +216,8 @@ describe('defaultsDeep', () => {
 
       const result = { a: 0 };
       for (const key in fn) {
-        if (Object.hasOwn(fn, key)) {
+        // eslint-disable-next-line prefer-object-has-own
+        if (Object.prototype.hasOwnProperty.call(fn, key)) {
           defaultsDeep(result, (fn as any)[key as any] as any);
         }
       }

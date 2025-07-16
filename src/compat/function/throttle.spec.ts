@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 import { throttle } from 'es-toolkit/compat';
-import { identity } from 'es-toolkit/compat';
-import { noop } from 'es-toolkit/compat';
-import { delay } from 'es-toolkit/compat';
 import type { throttle as throttleLodash } from 'lodash';
+import { identity } from '../../function/identity';
+import { noop } from '../../function/noop';
+import { delay } from '../../promise/delay';
 
 describe('throttle', () => {
   it('should throttle a function', async () => {
