@@ -50,6 +50,7 @@ function repeatImpl(str: string, n: number): string {
   let result = '';
 
   for (let i = 0; i < n; i++) {
+    console.log(i, n);
     result += str;
   }
 

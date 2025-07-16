@@ -27,7 +27,7 @@ function padEndImpl(str: string, _length: number, chars: string): string {
   const strLength = str.length;
   const maxLength = Math.floor(_length);
 
-  if (maxLength <= strLength || chars === '') {
+  if (maxLength <= strLength || chars.length === 0) {
     return str;
   }
 
