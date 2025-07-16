@@ -1,3 +1,5 @@
+import { toString } from '../util/toString.ts';
+
 /**
  * Removes leading whitespace or specified characters from a string.
  *
@@ -52,14 +54,10 @@ export function trimStart(str?: string, chars?: string | number, guard?: object)
     chars = ' ';
   }
 
-  return trimStartImpl(str, chars.toString().split(''));
+  return trimStartImpl(toString(str), chars.toString().split(''));
 }
 
 function trimStartImpl(str: string, chars: string[]): string {
-  if (chars === undefined) {
-    return str.trimStart();
-  }
-
   let startIndex = 0;
 
   while (startIndex < str.length && chars.includes(str[startIndex])) {

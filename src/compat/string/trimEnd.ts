@@ -1,3 +1,5 @@
+import { toString } from '../util/toString.ts';
+
 /**
  * Removes trailing whitespace or specified characters from a string.
  *
@@ -52,14 +54,10 @@ export function trimEnd(str?: string, chars?: string | number, guard?: object): 
     chars = ' ';
   }
 
-  return trimEndImpl(str, chars.toString().split(''));
+  return trimEndImpl(toString(str), chars.toString().split(''));
 }
 
 function trimEndImpl(str: string, chars: string[]): string {
-  if (chars === undefined) {
-    chars = [' '];
-  }
-
   let endIndex = str.length;
 
   while (endIndex > 0 && chars.includes(str[endIndex - 1])) {
