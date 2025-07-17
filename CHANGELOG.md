@@ -1,5 +1,15 @@
 # es-toolkit Changelog
 
+## Version v1.39.7
+
+Released on July 9th, 2025.
+
+- Fixed a compatibility issue with Lodash's `debounce` and `throttle` functions.
+- Remove useless source map for reduce bundle size.
+- Fix some of the documentation issues.
+
+We sincerely thank @dayongkr, @cobocho, @raon0211, and @D-Sketon for their contributions. We appreciate your great efforts!
+
 ## Version v1.39.6
 
 Released on July 2th, 2025.
