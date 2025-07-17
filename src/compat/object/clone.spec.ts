@@ -299,7 +299,11 @@ describe('clone', () => {
 
   it('should clone prototype objects', () => {
     class Foo {
-      b = 1;
+      b: number;
+
+      constructor() {
+        this.b = 1;
+      }
     }
     Foo.prototype.b = 2;
 
