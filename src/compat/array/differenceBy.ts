@@ -2,93 +2,84 @@ import { last } from './last.ts';
 import { difference as differenceToolkit } from '../../array/difference.ts';
 import { differenceBy as differenceByToolkit } from '../../array/differenceBy.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
-type Iteratee<T> = PropertyKey | Partial<T> | ((value: T) => unknown);
-
 /**
- * Computes the difference between an array and another array using an iteratee function.
+ * Creates an array of array values not included in the other given arrays using an iteratee function.
  *
  * @template T1, T2
- * @param {ArrayLike<T1> | null | undefined} array - The primary array from which to derive the difference.
- * @param {ArrayLike<T2>} values - The array containing elements to be excluded from the primary array.
- * @param {Iteratee<T1 | T2>} iteratee - The iteratee invoked per element.
- * @returns {T1[]} A new array containing the elements that are present in the primary array but not in the values array.
- *
+ * @param {ArrayLike<T1> | null | undefined} array The array to inspect
+ * @param {ArrayLike<T2>} values The values to exclude
+ * @param {ValueIteratee<T1 | T2>} iteratee The iteratee invoked per element
+ * @returns {T1[]} Returns the new array of filtered values
  * @example
- * const result = differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
- * // result will be [1.2]
- *
- * @example
- * const result = differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], 'x');
- * // result will be [{ x: 2 }]
+ * differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor)
+ * // => [1.2]
  */
 export function differenceBy<T1, T2>(
   array: ArrayLike<T1> | null | undefined,
   values: ArrayLike<T2>,
-  iteratee: Iteratee<T1 | T2>
+  iteratee: ValueIteratee<T1 | T2>
 ): T1[];
 
 /**
- * Computes the difference between an array and two other arrays using an iteratee function.
+ * Creates an array of array values not included in the other given arrays using an iteratee function.
  *
  * @template T1, T2, T3
- * @param {ArrayLike<T1> | null | undefined} array - The primary array from which to derive the difference.
- * @param {ArrayLike<T2>} values1 - The first array containing elements to be excluded from the primary array.
- * @param {ArrayLike<T3>} values2 - The second array containing elements to be excluded from the primary array.
- * @param {Iteratee<T1 | T2 | T3>} iteratee - The iteratee invoked per element.
- * @returns {T1[]} A new array containing the elements that are present in the primary array but not in the values arrays.
- *
+ * @param {ArrayLike<T1> | null | undefined} array The array to inspect
+ * @param {ArrayLike<T2>} values1 The first array of values to exclude
+ * @param {ArrayLike<T3>} values2 The second array of values to exclude
+ * @param {ValueIteratee<T1 | T2 | T3>} iteratee The iteratee invoked per element
+ * @returns {T1[]} Returns the new array of filtered values
  * @example
- * const result = differenceBy([2.1, 1.2], [2.3, 3.4], [1.2], Math.floor);
- * // result will be []
+ * differenceBy([2.1, 1.2], [2.3], [1.4], Math.floor)
+ * // => []
  */
 export function differenceBy<T1, T2, T3>(
   array: ArrayLike<T1> | null | undefined,
   values1: ArrayLike<T2>,
   values2: ArrayLike<T3>,
-  iteratee: Iteratee<T1 | T2 | T3>
+  iteratee: ValueIteratee<T1 | T2 | T3>
 ): T1[];
 
 /**
- * Computes the difference between an array and three other arrays using an iteratee function.
+ * Creates an array of array values not included in the other given arrays using an iteratee function.
  *
  * @template T1, T2, T3, T4
- * @param {ArrayLike<T1> | null | undefined} array - The primary array from which to derive the difference.
- * @param {ArrayLike<T2>} values1 - The first array containing elements to be excluded from the primary array.
- * @param {ArrayLike<T3>} values2 - The second array containing elements to be excluded from the primary array.
- * @param {ArrayLike<T4>} values3 - The third array containing elements to be excluded from the primary array.
- * @param {Iteratee<T1 | T2 | T3 | T4>} iteratee - The iteratee invoked per element.
- * @returns {T1[]} A new array containing the elements that are present in the primary array but not in the values arrays.
- *
+ * @param {ArrayLike<T1> | null | undefined} array The array to inspect
+ * @param {ArrayLike<T2>} values1 The first array of values to exclude
+ * @param {ArrayLike<T3>} values2 The second array of values to exclude
+ * @param {ArrayLike<T4>} values3 The third array of values to exclude
+ * @param {ValueIteratee<T1 | T2 | T3 | T4>} iteratee The iteratee invoked per element
+ * @returns {T1[]} Returns the new array of filtered values
  * @example
- * const result = differenceBy([2.1, 1.2], [2.3, 3.4], [1.2], [2.1], Math.floor);
- * // result will be []
+ * differenceBy([2.1, 1.2, 3.5], [2.3], [1.4], [3.2], Math.floor)
+ * // => []
  */
 export function differenceBy<T1, T2, T3, T4>(
   array: ArrayLike<T1> | null | undefined,
   values1: ArrayLike<T2>,
   values2: ArrayLike<T3>,
   values3: ArrayLike<T4>,
-  iteratee: Iteratee<T1 | T2 | T3 | T4>
+  iteratee: ValueIteratee<T1 | T2 | T3 | T4>
 ): T1[];
 
 /**
- * Computes the difference between an array and four other arrays using an iteratee function.
+ * Creates an array of array values not included in the other given arrays using an iteratee function.
  *
  * @template T1, T2, T3, T4, T5
- * @param {ArrayLike<T1> | null | undefined} array - The primary array from which to derive the difference.
- * @param {ArrayLike<T2>} values1 - The first array containing elements to be excluded from the primary array.
- * @param {ArrayLike<T3>} values2 - The second array containing elements to be excluded from the primary array.
- * @param {ArrayLike<T4>} values3 - The third array containing elements to be excluded from the primary array.
- * @param {ArrayLike<T5>} values4 - The fourth array containing elements to be excluded from the primary array.
- * @param {Iteratee<T1 | T2 | T3 | T4 | T5>} iteratee - The iteratee invoked per element.
- * @returns {T1[]} A new array containing the elements that are present in the primary array but not in the values arrays.
- *
+ * @param {ArrayLike<T1> | null | undefined} array The array to inspect
+ * @param {ArrayLike<T2>} values1 The first array of values to exclude
+ * @param {ArrayLike<T3>} values2 The second array of values to exclude
+ * @param {ArrayLike<T4>} values3 The third array of values to exclude
+ * @param {ArrayLike<T5>} values4 The fourth array of values to exclude
+ * @param {ValueIteratee<T1 | T2 | T3 | T4 | T5>} iteratee The iteratee invoked per element
+ * @returns {T1[]} Returns the new array of filtered values
  * @example
- * const result = differenceBy([2.1, 1.2], [2.3, 3.4], [1.2], [2.1], [3.4], Math.floor);
- * // result will be []
+ * differenceBy([2.1, 1.2, 3.5, 4.8], [2.3], [1.4], [3.2], [4.1], Math.floor)
+ * // => []
  */
 export function differenceBy<T1, T2, T3, T4, T5>(
   array: ArrayLike<T1> | null | undefined,
@@ -96,20 +87,71 @@ export function differenceBy<T1, T2, T3, T4, T5>(
   values2: ArrayLike<T3>,
   values3: ArrayLike<T4>,
   values4: ArrayLike<T5>,
-  iteratee: Iteratee<T1 | T2 | T3 | T4 | T5>
+  iteratee: ValueIteratee<T1 | T2 | T3 | T4 | T5>
 ): T1[];
 
 /**
- * Computes the difference between an array and multiple arrays using an iteratee function.
+ * Creates an array of array values not included in the other given arrays using an iteratee function.
+ *
+ * @template T1, T2, T3, T4, T5, T6
+ * @param {ArrayLike<T1> | null | undefined} array The array to inspect
+ * @param {ArrayLike<T2>} values1 The first array of values to exclude
+ * @param {ArrayLike<T3>} values2 The second array of values to exclude
+ * @param {ArrayLike<T4>} values3 The third array of values to exclude
+ * @param {ArrayLike<T5>} values4 The fourth array of values to exclude
+ * @param {ArrayLike<T6>} values5 The fifth array of values to exclude
+ * @param {ValueIteratee<T1 | T2 | T3 | T4 | T5 | T6>} iteratee The iteratee invoked per element
+ * @returns {T1[]} Returns the new array of filtered values
+ * @example
+ * differenceBy([2.1, 1.2, 3.5, 4.8, 5.3], [2.3], [1.4], [3.2], [4.1], [5.8], Math.floor)
+ * // => []
+ */
+export function differenceBy<T1, T2, T3, T4, T5, T6>(
+  array: ArrayLike<T1> | null | undefined,
+  values1: ArrayLike<T2>,
+  values2: ArrayLike<T3>,
+  values3: ArrayLike<T4>,
+  values4: ArrayLike<T5>,
+  values5: ArrayLike<T6>,
+  iteratee: ValueIteratee<T1 | T2 | T3 | T4 | T5 | T6>
+): T1[];
+
+/**
+ * Creates an array of array values not included in the other given arrays using an iteratee function.
+ *
+ * @template T1, T2, T3, T4, T5, T6, T7
+ * @param {ArrayLike<T1> | null | undefined} array The array to inspect
+ * @param {ArrayLike<T2>} values1 The first array of values to exclude
+ * @param {ArrayLike<T3>} values2 The second array of values to exclude
+ * @param {ArrayLike<T4>} values3 The third array of values to exclude
+ * @param {ArrayLike<T5>} values4 The fourth array of values to exclude
+ * @param {ArrayLike<T6>} values5 The fifth array of values to exclude
+ * @param {...(ArrayLike<T7> | ValueIteratee<T1 | T2 | T3 | T4 | T5 | T6 | T7>)[]} values Additional arrays of values to exclude and iteratee
+ * @returns {T1[]} Returns the new array of filtered values
+ * @example
+ * differenceBy([2.1, 1.2, 3.5, 4.8, 5.3, 6.7], [2.3], [1.4], [3.2], [4.1], [5.8], [6.2], Math.floor)
+ * // => []
+ */
+export function differenceBy<T1, T2, T3, T4, T5, T6, T7>(
+  array: ArrayLike<T1> | null | undefined,
+  values1: ArrayLike<T2>,
+  values2: ArrayLike<T3>,
+  values3: ArrayLike<T4>,
+  values4: ArrayLike<T5>,
+  values5: ArrayLike<T6>,
+  ...values: Array<ArrayLike<T7> | ValueIteratee<T1 | T2 | T3 | T4 | T5 | T6 | T7>>
+): T1[];
+
+/**
+ * Creates an array of array values not included in the other given arrays.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The primary array from which to derive the difference.
- * @param {...Array<ArrayLike<T>>} values - Multiple arrays containing elements to be excluded from the primary array.
- * @returns {T[]} A new array containing the elements that are present in the primary array but not in the values arrays.
- *
+ * @param {ArrayLike<T> | null | undefined} array The array to inspect
+ * @param {...Array<ArrayLike<T>>} values The arrays of values to exclude
+ * @returns {T[]} Returns the new array of filtered values
  * @example
- * const result = differenceBy([2.1, 1.2], [2.3, 3.4], [1.2], [2.1], [3.4], Math.floor);
- * // result will be []
+ * differenceBy([2, 1], [2, 3])
+ * // => [1]
  */
 export function differenceBy<T>(array: ArrayLike<T> | null | undefined, ...values: Array<ArrayLike<T>>): T[];
 

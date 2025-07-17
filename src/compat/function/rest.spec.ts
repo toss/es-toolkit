@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { rest as restLodash } from 'lodash';
 import { rest } from './rest';
 
 describe('rest', () => {
@@ -46,5 +47,9 @@ describe('rest', () => {
     });
 
     expect(restFn(1, 2, 3, 4, 5)).toEqual([1, 2, 3, [4, 5]]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(rest).toEqualTypeOf<typeof restLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { unionBy as unionByLodash } from 'lodash';
 import { unionBy } from './unionBy';
 import { args } from '../_internal/args';
 
@@ -54,5 +55,9 @@ describe('unionBy', () => {
   it('should output values from the first possible array', () => {
     const actual = unionBy([{ x: 1, y: 1 }], [{ x: 1, y: 2 }], 'x');
     expect(actual).toEqual([{ x: 1, y: 1 }]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(unionBy).toEqualTypeOf<typeof unionByLodash>();
   });
 });

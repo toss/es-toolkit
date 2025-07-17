@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { floor as floorLodash } from 'lodash';
 import { floor } from './floor';
 
 describe('floor', () => {
@@ -37,6 +38,8 @@ describe('floor', () => {
     actual = floor(4.016, 2.6);
     expect(actual).toBe(expected);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = floor(4.016, '+2');
     expect(actual).toBe(expected);
   });
@@ -45,9 +48,13 @@ describe('floor', () => {
     let actual = floor(5e1, 2);
     expect(actual).toEqual(50);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = floor('5e', 1);
     expect(actual).toEqual(NaN);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = floor('5e1e1', 1);
     expect(actual).toEqual(NaN);
   });
@@ -70,5 +77,9 @@ describe('floor', () => {
     expect(floor(1.7976931348623157e308, 292)).toBe(NaN);
     expect(floor(5e-324, 323)).toBe(0);
     expect(floor(5e-324, -323)).toBe(0);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(floor).toEqualTypeOf<typeof floorLodash>();
   });
 });

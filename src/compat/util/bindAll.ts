@@ -1,4 +1,5 @@
 import { isFunction } from '../../predicate/isFunction.ts';
+import { Many } from '../_internal/Many.ts';
 import { isArray } from '../predicate/isArray.ts';
 import { isObject } from '../predicate/isObject.ts';
 import { toString } from '../util/toString.ts';
@@ -7,9 +8,10 @@ import { toString } from '../util/toString.ts';
  * Binds methods of an object to the object itself, overwriting the existing method.
  * Method names may be specified as individual arguments or as arrays of method names.
  *
- * @param {Object} object - The object to bind methods to.
- * @param {...(string|string[]|number|IArguments)} [methodNames] - The method names to bind, specified individually or in arrays.
- * @returns {Object} - Returns the object.
+ * @template T - The type of the object.
+ * @param {T} object - The object to bind methods to.
+ * @param {Array<Many<string>>} [methodNames] - The method names to bind, specified individually or in arrays.
+ * @returns {T} - Returns the object.
  *
  * @example
  * const view = {
@@ -28,7 +30,7 @@ import { toString } from '../util/toString.ts';
  * bindAll(view, 'click');
  * // => Same as above
  */
-export function bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T {
+export function bindAll<T>(object: T, ...methodNames: Array<Many<string>>): T {
   if (object == null) {
     return object;
   }

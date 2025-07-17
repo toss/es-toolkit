@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { result as resultLodash } from 'lodash';
 import { result } from './result';
 import { empties } from '../_internal/empties';
 import { numberProto } from '../_internal/numberProto';
@@ -182,5 +183,9 @@ describe('result', () => {
 
   it(`should return the default value when \`path\` is empty`, () => {
     expect(result({}, [], 'a')).toBe('a');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(result).toEqualTypeOf<typeof resultLodash>();
   });
 });

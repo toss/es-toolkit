@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isLength as isLengthLodash } from 'lodash';
 import { isLength } from '../index';
 
 /**
@@ -19,5 +20,9 @@ describe('isLength', () => {
     const actual = values.map(isLength);
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isLength).toEqualTypeOf<typeof isLengthLodash>();
   });
 });

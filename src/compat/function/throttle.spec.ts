@@ -1,4 +1,5 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, expectTypeOf, it, vi } from 'vitest';
+import type { throttle as throttleLodash } from 'lodash';
 import { throttle } from './throttle';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
@@ -347,5 +348,23 @@ describe('throttle', () => {
 
     throttled();
     expect(fn).toHaveBeenCalledTimes(4);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(throttle).toEqualTypeOf<typeof throttleLodash>();
+  });
+
+  it('should not invoke the function even after flush is called if timer is going', async () => {
+    let callCount = 0;
+    const throttled = throttle(() => ++callCount, 32);
+
+    throttled();
+    throttled.flush();
+    throttled();
+
+    expect(callCount).toBe(1);
+
+    await delay(64);
+    expect(callCount).toBe(2);
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { without as withoutLodash } from 'lodash';
 import { without } from './without';
 import { args } from '../_internal/args';
 
@@ -40,5 +41,9 @@ describe('without', () => {
     expect(without({ 0: 1, 1: 2, 2: 3, length: 3 }, 1, 2)).toEqual([3]);
     expect(without('123', '1', '2')).toEqual([]);
     expect(without(args, 1, 2)).toEqual([3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(without).toEqualTypeOf<typeof withoutLodash>();
   });
 });

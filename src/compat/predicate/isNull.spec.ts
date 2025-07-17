@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
-import { isNull } from '../../predicate';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isNull as isNullLodash } from 'lodash';
+import { isNull } from './isNull.ts';
 import { falsey } from '../_internal/falsey';
 
 /**
@@ -31,5 +32,9 @@ describe('isNull', () => {
     expect(isNull('a')).toBe(false);
     expect(isNull(Symbol('a'))).toBe(false);
     expect(isNull(undefined)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isNull).toEqualTypeOf<typeof isNullLodash>();
   });
 });

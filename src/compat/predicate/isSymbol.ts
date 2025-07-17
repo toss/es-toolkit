@@ -12,6 +12,6 @@
  * isSymbol('abc');
  * // => false
  */
-export function isSymbol(value?: unknown): value is symbol {
+export function isSymbol(value: any): value is symbol {
   return typeof value === 'symbol' || value instanceof Symbol;
 }

@@ -8,7 +8,7 @@ import { getTag } from '../_internal/getTag.ts';
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an arguments object.
  *
- * @param {unknown} value - The value to test if it is an arguments object.
+ * @param {any} value - The value to test if it is an arguments object.
  * @returns {value is IArguments} `true` if the value is an arguments, `false` otherwise.
  *
  * @example
@@ -20,6 +20,6 @@ import { getTag } from '../_internal/getTag.ts';
  * console.log(isArguments(strictArgs)); // true
  * console.log(isArguments(value)); // false
  */
-export function isArguments(value?: unknown): value is IArguments {
+export function isArguments(value?: any): value is IArguments {
   return value !== null && typeof value === 'object' && getTag(value) === '[object Arguments]';
 }

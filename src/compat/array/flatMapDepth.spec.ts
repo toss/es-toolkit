@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { flatMapDepth as flatMapDepthLodash } from 'lodash';
 import { flatMapDepth } from './flatMapDepth';
 
 describe('flatMapDepth', () => {
@@ -41,7 +42,8 @@ describe('flatMapDepth', () => {
 
     [array, object].forEach(collection => {
       const actual = values.map(value =>
-        // @ts-expect-error - invalid argument
+        // eslint-disable-next-line
+        // @ts-ignore
         value ? flatMapDepth(collection, value, 1) : flatMapDepth(collection, undefined, 1)
       );
 
@@ -88,5 +90,9 @@ describe('flatMapDepth', () => {
       [1, 2],
       [3, 4],
     ]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(flatMapDepth).toEqualTypeOf<typeof flatMapDepthLodash>();
   });
 });

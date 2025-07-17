@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { fill as fillLodash } from 'lodash';
 import { fill } from './fill.ts';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -12,6 +13,8 @@ describe('fill', () => {
 
   it('should use `undefined` for `value` if not given', () => {
     const array = [1, 2, 3];
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = fill(array);
 
     expect(actual).toEqual(Array(3));
@@ -142,5 +145,9 @@ describe('fill', () => {
     expect(fill({ 0: 1, 1: 2, length: 2 }, 3)).toEqual({ 0: 3, 1: 3, length: 2 });
     expect(fill('12', '3')).toEqual('12');
     expect(fill(args, 3)).toEqual(toArgs([3, 3, 3]));
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(fill).toEqualTypeOf<typeof fillLodash>();
   });
 });

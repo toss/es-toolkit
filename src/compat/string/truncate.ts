@@ -44,7 +44,7 @@ const regexMultiByte = /[\u200d\ud800-\udfff\u0300-\u036f\ufe20-\ufe2f\u20d0-\u2
  * const truncatedStr7 = truncate('¥§✈✉🤓', { length: 5 }) // returns '¥§✈✉🤓'
  * const truncatedStr8 = truncate('¥§✈✉🤓', { length: 4, omission: '…' }) // returns '¥§✈…'
  */
-export function truncate(string: string, options: TruncateOptions = {}): string {
+export function truncate(string?: string, options?: TruncateOptions): string {
   string = string != null ? `${string}` : '';
 
   let length = 30;
@@ -83,7 +83,7 @@ export function truncate(string: string, options: TruncateOptions = {}): string 
   let base = strArray === undefined ? string.slice(0, lengthBase) : strArray?.slice(0, lengthBase).join('');
 
   // Return truncated string with omission appended when there is no separator to check for
-  const separator = options.separator;
+  const separator = options?.separator;
   if (!separator) {
     base += omission;
     return base;

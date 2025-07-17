@@ -3,7 +3,7 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
  *
- * @param {unknown} value The value to check if it is a number.
+ * @param {any} value The value to check if it is a number.
  * @returns {value is number} Returns `true` if `value` is a number, else `false`.
  *
  * @example
@@ -15,6 +15,6 @@
  * console.log(isNumber(value2)); // false
  * console.log(isNumber(value3)); // false
  */
-export function isNumber(value?: unknown): value is number {
+export function isNumber(value?: any): value is number {
   return typeof value === 'number' || value instanceof Number;
 }

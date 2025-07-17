@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { differenceWith as differenceWithLodash } from 'lodash';
 import { differenceWith } from './differenceWith';
 import { range } from '../../math';
 import { isEqual } from '../../predicate';
@@ -117,5 +118,9 @@ describe('differenceWith', () => {
     const actual = others.map(other => differenceWith(array, other, eq).map(toString));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(differenceWith).toEqualTypeOf<typeof differenceWithLodash>();
   });
 });

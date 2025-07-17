@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { setWith as setWithLodash } from 'lodash';
 import { setWith } from './setWith.ts';
 import { symbol } from '../_internal/symbol.ts';
 import { constant, each, map, toString, unset, update } from '../compat.ts';
@@ -143,6 +144,8 @@ describe('setWith', () => {
 
     const actual = map(values, value => {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return [update(value, 'a.b', updater), update(value, ['a', 'b'], updater)];
       } catch (e: unknown) {
         return e instanceof Error ? e.message : 'unknown error';
@@ -209,10 +212,14 @@ describe('setWith', () => {
   });
 
   it('should return null when object is null', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(setWith(null, 'a.b.c', 1)).toBeNull();
   });
 
   it('should return undefined when object is undefined', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(setWith(undefined, 'a.b.c', 1)).toBeUndefined();
   });
 
@@ -230,5 +237,9 @@ describe('setWith', () => {
     const obj: unknown[] = [];
     setWith(obj, 0, 'value');
     expect(obj).toEqual(['value']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(setWith).toEqualTypeOf<typeof setWithLodash>();
   });
 });

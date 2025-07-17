@@ -35,7 +35,7 @@ export interface DebouncedFunction<F extends (...args: any[]) => void> {
 
   /**
    * Immediately invokes the debounced function if there is a pending execution.
-   * This method also cancels the current timer, ensuring that the function executes right away.
+   * This method executes the function right away if there is a pending execution.
    */
   flush: () => void;
 }
@@ -130,7 +130,6 @@ export function debounce<F extends (...args: any[]) => void>(
   };
 
   const flush = () => {
-    cancelTimer();
     invoke();
   };
 

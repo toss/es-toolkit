@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { identity, isObject, mergeWith } from '..';
-import _ from '..';
 import { curry } from './curry';
 import { partialRight } from './partialRight';
+import _ from '../index';
 
 describe('partialRight', () => {
   const { placeholder } = partialRight;
@@ -29,7 +29,7 @@ describe('partialRight', () => {
   });
 
   it('should work when there are no partially applied arguments and the created function is invoked with additional arguments', () => {
-    const par = partialRight(identity);
+    const par = partialRight(identity as <T>(x: T) => T);
     expect(par('a')).toBe('a');
   });
 
@@ -97,8 +97,8 @@ describe('partialRight', () => {
       // eslint-disable-next-line prefer-rest-params
       return Array.from(arguments);
     };
-    const curried = curry(fn);
-    const par = partialRight(curried, placeholder, 'b', placeholder, 'd');
+    const curried = curry(fn) as any;
+    const par = partialRight(curried, placeholder, 'b', placeholder, 'd') as any;
 
     expect(par('a', 'c')).toEqual(['a', 'b', 'c', 'd']);
   });
@@ -119,7 +119,7 @@ describe('partialRight', () => {
     const fn = function (a: any, b: any, c: any) {
       return a + b + c;
     };
-    const par = partialRight(fn, _, 'b', _);
+    const par = partialRight(fn, _, 'b', _) as any;
     expect(par('a', 'c')).toBe('abc');
   });
 });

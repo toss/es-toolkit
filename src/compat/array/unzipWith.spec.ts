@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { unzipWith as unzipWithLodash } from 'lodash';
 import { map } from './map';
 import { unzipWith } from './unzipWith';
 import { unzip } from '../..';
@@ -23,7 +24,11 @@ describe('unzipWith', () => {
 
     unzipWith(
       [
+        // eslint-disable-next-line
+        // @ts-ignore
         [1, 3, 5],
+        // eslint-disable-next-line
+        // @ts-ignore
         [2, 4, 6],
       ],
       function () {
@@ -44,6 +49,8 @@ describe('unzipWith', () => {
     const values = [, null, undefined];
     const expected = map(values, constant(unzip(array)));
 
+    // eslint-disable-next-line
+    // @ts-ignore
     const actual = map(values, (value, index) => (index ? unzipWith(array, value) : unzipWith(array)));
 
     expect(actual).toEqual(expected);
@@ -75,5 +82,9 @@ describe('unzipWith', () => {
   it('should return an empty array when `array` is null or undefined', () => {
     expect(unzipWith(null)).toEqual([]);
     expect(unzipWith(undefined)).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(unzipWith).toEqualTypeOf<typeof unzipWithLodash>();
   });
 });

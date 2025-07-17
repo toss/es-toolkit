@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { chunk as chunkLodash } from 'lodash';
 import { chunk } from './chunk.ts';
 import { args } from '../_internal/args.ts';
 
@@ -56,5 +57,9 @@ describe('chunk', () => {
     expect(chunk({ 0: 1, 1: 2, 2: 3, length: 3 }, 2)).toEqual([[1, 2], [3]]);
     expect(chunk('123', 2)).toEqual([['1', '2'], ['3']]);
     expect(chunk(args, 2)).toEqual([[1, 2], [3]]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(chunk).toEqualTypeOf<typeof chunkLodash>();
   });
 });

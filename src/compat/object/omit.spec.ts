@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { omit as omitLodash } from 'lodash';
 import { omit } from './omit';
 import { objectProto } from '../_internal/objectProto';
 import { stringProto } from '../_internal/stringProto';
@@ -26,6 +27,7 @@ describe('omit', () => {
 
   it('should support path arrays', () => {
     const object = { 'a.b': 1, a: { b: 2 } };
+    // @ts-expect-error - path is a string
     const actual = omit(object, [['a.b']]);
 
     expect(actual).toEqual({ a: { b: 2 } });
@@ -80,5 +82,9 @@ describe('omit', () => {
       omit(object, path);
       expect(object).toEqual({ a: { b: 2 } });
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(omit).toEqualTypeOf<typeof omitLodash>();
   });
 });
