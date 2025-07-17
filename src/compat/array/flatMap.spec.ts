@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { flatMap as flatMapLodash } from 'lodash';
 import { flatMap } from './flatMap';
 import { map } from './map';
 import { identity } from '../../function/identity';
@@ -135,5 +136,9 @@ describe('flatMap', () => {
   it(`should work with objects with non-number length properties`, () => {
     const object = { length: [1, 2] };
     expect(flatMap(object, identity)).toEqual([1, 2]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(flatMap).toEqualTypeOf<typeof flatMapLodash>();
   });
 });

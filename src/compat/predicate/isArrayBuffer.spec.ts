@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isArrayBuffer as isArrayBufferLodash } from 'lodash';
 import { isArrayBuffer } from './isArrayBuffer';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -29,5 +30,9 @@ describe('isArrayBuffer', () => {
     expect(isArrayBuffer(/x/)).toBe(false);
     expect(isArrayBuffer('a')).toBe(false);
     expect(isArrayBuffer(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isArrayBuffer).toEqualTypeOf<typeof isArrayBufferLodash>();
   });
 });

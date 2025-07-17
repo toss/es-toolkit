@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { forInRight as forInRightLodash } from 'lodash';
 import { forInRight } from './forInRight';
 
 describe('forInRight', () => {
@@ -34,5 +35,9 @@ describe('forInRight', () => {
     });
 
     expect(obj).toEqual({ a: 1, b: 3 });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(forInRight).toEqualTypeOf<typeof forInRightLodash>();
   });
 });

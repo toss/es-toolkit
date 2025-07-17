@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { at as atLodash } from 'lodash';
 import { at } from './at';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -55,7 +56,7 @@ describe('at', () => {
 
     const actual = map(falsey, object => {
       try {
-        return at(object, 0, 1, 'pop', 'push');
+        return at(object as any, 0, 1, 'pop', 'push');
       } catch (e) {
         return Array(4).fill(undefined);
       }
@@ -70,7 +71,7 @@ describe('at', () => {
   });
 
   it('should work with `arguments` object as secondary arguments', () => {
-    const actual = at([1, 2, 3, 4, 5], args);
+    const actual = at([1, 2, 3, 4, 5], args as any);
     expect(actual).toEqual([2, 3, 4]);
   });
 
@@ -119,5 +120,9 @@ describe('at', () => {
 
     expect(at(object, 'a[1]', 'b.c[2].d[2].e')).toEqual([2, 8]);
     expect(at(object, ['a[1]', 'b.c[2].d[2].e'])).toEqual([2, 8]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(at).toEqualTypeOf<typeof atLodash>();
   });
 });

@@ -107,6 +107,8 @@ describe('partial', () => {
       return a + b + c;
     };
     const par = partial(fn, _, 'b', _);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(par('a', 'c')).toBe('abc');
   });
 });

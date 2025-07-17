@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { mapKeys as mapKeysLodash } from 'lodash';
 import { mapKeys } from './mapKeys';
 
 describe('mapKeys', () => {
@@ -26,12 +27,14 @@ describe('mapKeys', () => {
     const values = [, null, undefined];
     const expected = values.map(() => ({ 1: 1, 2: 2 }));
 
-    const actual = values.map((value, index) =>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      index ? mapKeys(object, value) : mapKeys(object)
-    );
+    // eslint-disable-next-line
+    // @ts-ignore
+    const actual = values.map((value, index) => (index ? mapKeys(object, value) : mapKeys(object)));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(mapKeys).toEqualTypeOf<typeof mapKeysLodash>();
   });
 });

@@ -26,9 +26,11 @@ import { iteratee } from '../util/iteratee.ts';
  * func({ a: 1, b: 2 });
  * // => [true, true]
  */
-export function over(...iteratees: Array<Iteratee | Iteratee[]>): (...args: any[]) => unknown[] {
+export function over<T>(
+  ...iteratees: Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>
+): (...args: any[]) => T[] {
   if (iteratees.length === 1 && Array.isArray(iteratees[0])) {
-    iteratees = iteratees[0] as Iteratee[];
+    iteratees = iteratees[0];
   }
 
   const funcs = iteratees.map(item => iteratee(item as Iteratee));

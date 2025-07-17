@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isUndefined as isUndefinedLodash } from 'lodash';
 import { isUndefined } from '../../predicate';
 import { falsey } from '../_internal/falsey';
 
@@ -27,5 +28,9 @@ describe('isUndefined', () => {
     expect(isUndefined(/x/)).toBe(false);
     expect(isUndefined('a')).toBe(false);
     expect(isUndefined(Symbol('a'))).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isUndefined).toEqualTypeOf<typeof isUndefinedLodash>();
   });
 });

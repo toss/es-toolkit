@@ -19,7 +19,7 @@ import { invoke } from './invoke.ts';
  * const add = method('a.b', 1, 2);
  * console.log(add(object)); // => 3
  */
-export function method(path: PropertyKey | PropertyKey[], ...args: any[]): (object?: unknown) => any {
+export function method(path: PropertyKey | readonly PropertyKey[], ...args: any[]): (object: any) => any {
   return function (object?: unknown) {
     return invoke(object, path, args);
   };

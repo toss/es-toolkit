@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { pick as pickLodash } from 'lodash';
 import { pick } from './pick';
 import { symbol } from '../_internal/symbol';
 import { toArgs } from '../_internal/toArgs';
@@ -56,9 +57,11 @@ describe('compat/pick', () => {
       const foo = new Foo();
       const actual = pick(foo, resolve(foo, [symbol, symbol2, symbol3]));
 
+      // @ts-expect-error - symbol is a symbol
       expect(actual[symbol]).toBe(1);
+      // @ts-expect-error - symbol2 is a symbol
       expect(actual[symbol2]).toBe(2);
-
+      // @ts-expect-error - symbol3 is a symbol
       expect(actual[symbol3]).toBe(3);
     }
   });
@@ -135,5 +138,9 @@ describe('compat/pick', () => {
     const result = pick(obj, ['a', 'b']);
 
     expect(Reflect.ownKeys(result)).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(pick).toEqualTypeOf<typeof pickLodash>();
   });
 });

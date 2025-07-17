@@ -17,7 +17,8 @@ import { isFunction } from '../../predicate/isFunction.ts';
  * functionsIn(new Foo);
  * // => ['a', 'b', 'c']
  */
-export function functionsIn(object: any): string[] {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-object-type
+export function functionsIn<T extends {}>(object: any): string[] {
   if (object == null) {
     return [];
   }

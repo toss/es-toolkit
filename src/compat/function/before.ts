@@ -23,10 +23,7 @@ import { toInteger } from '../util/toInteger.ts';
  * before3(); // => 2
  * before3(); // => 2
  */
-export function before<F extends (...args: any[]) => any>(
-  n: number,
-  func: F
-): (...args: Parameters<F>) => ReturnType<F> {
+export function before<F extends (...args: any[]) => any>(n: number, func: F): F {
   if (typeof func !== 'function') {
     throw new TypeError('Expected a function');
   }
@@ -45,5 +42,5 @@ export function before<F extends (...args: any[]) => any>(
     }
 
     return result;
-  };
+  } as F;
 }

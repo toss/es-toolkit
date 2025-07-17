@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { forEachRight as forEachRightLodash } from 'lodash';
 import { forEachRight } from './forEachRight';
 import { includes } from './includes';
 import { map } from './map';
@@ -157,5 +158,9 @@ describe('forEachRight', () => {
 
     expect(resultForNull).toBe(null);
     expect(resultForUndefined).toBe(undefined);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(forEachRight).toEqualTypeOf<typeof forEachRightLodash>();
   });
 });

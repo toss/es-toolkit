@@ -1,28 +1,19 @@
-import { flatten } from './flatten.ts';
+import { flattenDepth } from './flattenDepth.ts';
+import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
 
 /**
- * Utility type for recursively unpacking nested array types to extract the type of the innermost element
+ * Recursively flattens array.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} array - The array to flatten.
+ * @returns {Array<ExtractNestedArrayType<T>>} Returns the new flattened array.
  *
  * @example
- * ExtractNestedArrayType<(number | (number | number[])[])[]>
- * // number
- *
- * ExtractNestedArrayType<(boolean | (string | number[])[])[]>
- * // string | number | boolean
+ * flattenDeep([1, [2, [3, [4]], 5]]);
+ * // => [1, 2, 3, 4, 5]
  */
-type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNestedArrayType<U> : T;
-
-/**
- * Flattens all depths of a nested array.
- *
- * @template T - The type of elements within the array.
- * @param {ArrayLike<T>} value - The value to flatten.
- * @returns {Array<ExtractNestedArrayType<T>> | []} A new array that has been flattened.
- *
- * @example
- * const value = flattenDeep([1, [2, [3]], [4, [5, 6]]]);
- * // Returns: [1, 2, 3, 4, 5, 6]
- */
-export function flattenDeep<T>(value: ArrayLike<T> | null | undefined): Array<ExtractNestedArrayType<T>> | [] {
-  return flatten(value, Infinity) as Array<ExtractNestedArrayType<T>>;
+export function flattenDeep<T>(
+  value: ListOfRecursiveArraysOrValues<T> | null | undefined
+): Array<T extends string ? T : T extends ArrayLike<any> ? never : T> {
+  return flattenDepth(value, Infinity) as any;
 }

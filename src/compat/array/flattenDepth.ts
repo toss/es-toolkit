@@ -1,24 +1,23 @@
 import { flatten } from './flatten.ts';
+import { ListOfRecursiveArraysOrValues } from '../_internal/ListOfRecursiveArraysOrValues.ts';
 
 /**
- * Flattens an array up to the specified depth.
+ * Recursively flattens array up to depth times.
  *
- * @template T - The type of elements within the array.
- * @template D - The depth to which the array should be flattened.
- * @param {ArrayLike<T> | null | undefined} value - The value to flatten.
- * @param {D} depth - The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
- * @returns {Array<FlatArray<T[], D>> | []} A new array that has been flattened.
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} array - The array to flatten.
+ * @param {number} [depth=1] - The maximum recursion depth.
+ * @returns {T[]} Returns the new flattened array.
  *
  * @example
- * const arr = flatten([1, [2, 3], [4, [5, 6]]], 1);
- * // Returns: [1, 2, 3, 4, [5, 6]]
+ * const array = [1, [2, [3, [4]], 5]];
  *
- * const arr = flatten([1, [2, 3], [4, [5, 6]]], 2);
- * // Returns: [1, 2, 3, 4, 5, 6]
+ * flattenDepth(array, 1);
+ * // => [1, 2, [3, [4]], 5]
+ *
+ * flattenDepth(array, 2);
+ * // => [1, 2, 3, [4], 5]
  */
-export function flattenDepth<T, D extends number = 1>(
-  value: ArrayLike<T> | null | undefined,
-  depth = 1 as D
-): Array<FlatArray<T[], D>> | [] {
-  return flatten(value, depth);
+export function flattenDepth<T>(array: ListOfRecursiveArraysOrValues<T> | null | undefined, depth = 1): T[] {
+  return (flatten as any)(array, depth) as T[];
 }

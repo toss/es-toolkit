@@ -26,6 +26,7 @@ const ENTRYPOINTS = [
   '.',
   './array',
   './compat',
+  './compat/*',
   './error',
   './function',
   './math',
@@ -64,6 +65,10 @@ describe(`es-toolkit's package tarball`, () => {
       await execa('npm', ['install'], { cwd: tmpdir });
 
       for (const entrypoint of ENTRYPOINTS) {
+        if (entrypoint.includes('*')) {
+          continue;
+        }
+
         const cjsScript = `
 const toolkit = require("${path.join('es-toolkit', entrypoint)}");
 

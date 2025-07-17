@@ -1,5 +1,14 @@
 # Compatibility with Lodash
 
+::: tip ✅ Starting with version 1.39.3, we ensure 100% compatibility with Lodash
+
+`es-toolkit/compat` functions exactly like all Lodash functions while being lighter and faster.
+
+- It ensures identical behavior with Lodash's actual test code.
+- It has been adopted by popular open-source projects including Storybook, Recharts, and CKEditor, and is recommended by Nuxt.
+
+:::
+
 ```tsx
 // es-toolkit/compat aims to provide 100% feature parity with lodash
 import { chunk } from 'es-toolkit/compat';
@@ -26,6 +35,7 @@ Our compatibility layer aims to achieve feature parity with 100% accuracy for:
 
 - Features that are written as a test case in lodash.
 - Features that can be inferred from types of `@types/lodash` or `@types/lodash-es`.
+- Feature differences identified while migrating code from lodash to es-toolkit (please report these to our [issues page](https://github.com/toss/es-toolkit/issues)).
 
 However, the following are out of scope for `es-toolkit/compat`:
 

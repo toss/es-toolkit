@@ -3,7 +3,7 @@ import { getTag } from '../_internal/getTag.ts';
 /**
  * Checks if `value` is an Error object.
  *
- * @param {unknown} value The value to check.
+ * @param {any} value The value to check.
  * @returns {value is Error} Returns `true` if `value` is an Error object, `false` otherwise.
  *
  * @example
@@ -13,6 +13,6 @@ import { getTag } from '../_internal/getTag.ts';
  * console.log(isError({ name: 'Error', message: '' })); // false
  * ```
  */
-export function isError(value?: unknown): value is Error {
+export function isError(value: any): value is Error {
   return getTag(value) === '[object Error]';
 }

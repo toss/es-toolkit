@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { invokeMap as invokeMapLodash } from 'lodash';
 import { invokeMap } from './invokeMap';
 import { stubOne } from '../_internal/stubOne';
 
@@ -81,6 +82,8 @@ describe('invokeMap', () => {
     const paths = ['a.b', ['a', 'b']];
 
     paths.forEach(path => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       expect(invokeMap([object], path)).toEqual([1]);
     });
   });
@@ -91,6 +94,8 @@ describe('invokeMap', () => {
         return this;
       },
     };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(invokeMap([singlePropObject], ['value'])[0]).toBe(singlePropObject);
 
     const emptyPathObject = {
@@ -98,7 +103,11 @@ describe('invokeMap', () => {
         return this;
       },
     };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(invokeMap([emptyPathObject], []).length).toBe(1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(invokeMap([emptyPathObject], [])[0]).toBeUndefined();
 
     const nestedObject = {
@@ -110,6 +119,8 @@ describe('invokeMap', () => {
         },
       },
     };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(invokeMap([nestedObject], ['a', 'b', 'c'])[0]).toBe(nestedObject.a.b);
   });
 
@@ -152,5 +163,9 @@ describe('invokeMap', () => {
 
     const aEmptyDotC = invokeMap([objectWithEmptyPart], 'a..c');
     expect(aEmptyDotC[0]).toBeUndefined();
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(invokeMap).toEqualTypeOf<typeof invokeMapLodash>();
   });
 });

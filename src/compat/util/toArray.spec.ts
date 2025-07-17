@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { toArray as toArrayLodash } from 'lodash';
 import { toArray } from './toArray';
 
 describe('toArray', () => {
@@ -39,5 +40,9 @@ describe('toArray', () => {
   it('should convert non-iterable values to empty arrays', () => {
     expect(toArray(1)).toEqual([]);
     expect(toArray(true)).toEqual([]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toArray).toEqualTypeOf<typeof toArrayLodash>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isTypedArray as isTypedArrayLodash } from 'lodash';
 import { isTypedArray } from './isTypedArray';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -21,6 +22,8 @@ describe('isTypedArray', () => {
   it('should return `false` for non typed arrays', () => {
     const expected = falsey.map(stubFalse);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = falsey.map((value, index) => (index ? isTypedArray(value) : isTypedArray()));
 
     expect(actual).toEqual(expected);
@@ -36,5 +39,9 @@ describe('isTypedArray', () => {
     expect(isTypedArray(/x/)).toBe(false);
     expect(isTypedArray('a')).toBe(false);
     expect(isTypedArray(Symbol('a'))).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isTypedArray).toEqualTypeOf<typeof isTypedArrayLodash>();
   });
 });

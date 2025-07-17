@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { pullAt as pullAtLodash } from 'lodash';
 import { map } from './map';
 import { pullAt } from './pullAt';
 import { reduce } from './reduce';
@@ -68,7 +69,7 @@ describe('pullAt', () => {
   });
 
   it('should work with non-index paths', () => {
-    const values: any[] = reject(empties, value => value === 0 || isArray(value)).concat(-1, 1.1);
+    const values: any[] = reject(empties, (value: any) => value === 0 || isArray(value)).concat(-1, 1.1);
 
     const array = reduce(
       values,
@@ -106,11 +107,15 @@ describe('pullAt', () => {
     const array: any = [];
     array.a = { b: 2 };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     let actual = pullAt(array, 'a.b');
 
     expect(actual).toEqual([2]);
     expect(array.a).toEqual({});
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = pullAt(array, 'a.b.c');
 
     expect(actual).toEqual([undefined]);
@@ -121,6 +126,8 @@ describe('pullAt', () => {
     const expected = map(values, constant(Array(4)));
 
     const actual = map(values, array => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       return pullAt(array, 0, 1, 'pop', 'push');
     });
 
@@ -139,5 +146,9 @@ describe('pullAt', () => {
 
     expect(actual).toEqual(['a', 'c']);
     expect(arrayLike).toEqual({ 0: 'b', length: 1 });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(pullAt).toEqualTypeOf<typeof pullAtLodash>();
   });
 });

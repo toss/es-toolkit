@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { startsWith as startsWithLodash } from 'lodash';
 import { startsWith } from './startsWith';
 
 describe('startsWith', () => {
@@ -64,5 +65,9 @@ describe('startsWith', () => {
 
   it('should coerce `position` to an integer', () => {
     expect(startsWith(string, 'bc', 1.2)).toBe(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(startsWith).toEqualTypeOf<typeof startsWithLodash>();
   });
 });

@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { each, map, toString, unset, update } from '..';
+import type { update as updateLodash } from 'lodash';
 import { symbol } from '../_internal/symbol';
 import { constant } from '../util/constant';
 
@@ -131,6 +132,8 @@ describe('update', () => {
 
     const actual = map(values, value => {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return [update(value, 'a.b', updater), update(value, ['a', 'b'], updater)];
       } catch (e: unknown) {
         return e instanceof Error ? e.message : 'unknown error';
@@ -189,5 +192,9 @@ describe('update', () => {
       expect(object.a[0].b.c).toBe(expected);
       object.a[0].b.c = oldValue;
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(update).toEqualTypeOf<typeof updateLodash>();
   });
 });

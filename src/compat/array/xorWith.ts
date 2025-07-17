@@ -6,109 +6,66 @@ import { windowed } from '../../array/windowed.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
 /**
- * Creates an array of unique values that is the symmetric difference of the given arrays using a custom comparator function.
+ * This method is like `xor` except that it accepts `comparator` which is
+ * invoked to compare elements of `arrays`. The comparator is invoked
+ * with two arguments: (arrVal, othVal).
  *
- * This function takes multiple arrays and a comparator function to determine equality between elements.
- * It returns a new array containing elements that are present in exactly one of the arrays
- * as determined by the comparator function.
- *
- * @template T1, T2
- * @param {ArrayLike<T1> | null | undefined} array - The first array to compare.
- * @param {ArrayLike<T2>} values - The second array to compare.
- * @param {(a: T1 | T2, b: T1 | T2) => boolean} comparator - The comparator invoked per element to determine equality.
- * @returns {Array<T1 | T2>} A new array containing elements that are present in exactly one of the arrays
- *  as determined by the comparator.
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} arrays - The arrays to inspect.
+ * @param {(a: T, b: T) => boolean} [comparator] - The comparator invoked per element.
+ * @returns {T[]} Returns the new array of values.
  *
  * @example
- * const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
- * const array2 = [{ x: 2 }, { x: 3 }, { x: 4 }];
- * const result = xorWith(array1, array2, (a, b) => a.x === b.x);
- * // result will be [{ x: 1 }, { x: 4 }] since these elements are unique to their respective arrays.
+ * const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+ * const others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+ * xorWith(objects, others, isEqual);
+ * // => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
  */
-export function xorWith<T1, T2>(
-  array: ArrayLike<T1> | null | undefined,
-  values: ArrayLike<T2>,
-  comparator: (a: T1 | T2, b: T1 | T2) => boolean
-): Array<T1 | T2>;
+export function xorWith<T>(arrays: ArrayLike<T> | null | undefined, comparator?: (a: T, b: T) => boolean): T[];
 
 /**
- * Creates an array of unique values that is the symmetric difference of the given arrays using a custom comparator function.
+ * This method is like `xor` except that it accepts `comparator` which is
+ * invoked to compare elements of `arrays`. The comparator is invoked
+ * with two arguments: (arrVal, othVal).
  *
- * This function takes multiple arrays and a comparator function to determine equality between elements.
- * It returns a new array containing elements that are present in exactly one of the arrays
- * as determined by the comparator function.
- *
- * @template T1, T2, T3
- * @param {ArrayLike<T1> | null | undefined} array - The first array to compare.
- * @param {ArrayLike<T2>} values1 - The second array to compare.
- * @param {ArrayLike<T3>} values2 - The third array to compare.
- * @param {(a: T1 | T2 | T3, b: T1 | T2 | T3) => boolean} comparator - The comparator invoked per element to determine equality.
- * @returns {Array<T1 | T2 | T3>} A new array containing elements that are present in exactly one of the arrays
- *  as determined by the comparator.
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} arrays - The first array to inspect.
+ * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
+ * @param {(a: T, b: T) => boolean} [comparator] - The comparator invoked per element.
+ * @returns {T[]} Returns the new array of values.
  *
  * @example
- * const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
- * const array2 = [{ x: 2 }, { x: 3 }];
- * const array3 = [{ x: 3 }, { x: 4 }];
- * const result = xorWith(array1, array2, array3, (a, b) => a.x === b.x);
- * // result will be [{ x: 1 }, { x: 4 }] since these elements are unique to their respective arrays.
+ * xorWith([1, 2], [2, 3], (a, b) => a === b);
+ * // => [1, 3]
  */
-export function xorWith<T1, T2, T3>(
-  array: ArrayLike<T1> | null | undefined,
-  values1: ArrayLike<T2>,
-  values2: ArrayLike<T3>,
-  comparator: (a: T1 | T2 | T3, b: T1 | T2 | T3) => boolean
-): Array<T1 | T2 | T3>;
+export function xorWith<T>(
+  arrays: ArrayLike<T> | null | undefined,
+  arrays2: ArrayLike<T> | null | undefined,
+  comparator?: (a: T, b: T) => boolean
+): T[];
 
 /**
- * Creates an array of unique values that is the symmetric difference of the given arrays using a custom comparator function.
+ * This method is like `xor` except that it accepts `comparator` which is
+ * invoked to compare elements of `arrays`. The comparator is invoked
+ * with two arguments: (arrVal, othVal).
  *
- * This function takes multiple arrays and a comparator function to determine equality between elements.
- * It returns a new array containing elements that are present in exactly one of the arrays
- * as determined by the comparator function.
- *
- * @template T1, T2, T3, T4
- * @param {ArrayLike<T1> | null | undefined} array - The first array to compare.
- * @param {ArrayLike<T2>} values1 - The second array to compare.
- * @param {ArrayLike<T3>} values2 - The third array to compare.
- * @param {...(ArrayLike<T4> | ((a: T1 | T2 | T3 | T4, b: T1 | T2 | T3 | T4) => boolean))} values - Additional arrays to compare, or the comparator function.
- * @returns {Array<T1 | T2 | T3 | T4>} A new array containing elements that are present in exactly one of the arrays
- *  as determined by the comparator.
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} arrays - The first array to inspect.
+ * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
+ * @param {ArrayLike<T> | null | undefined} arrays3 - The third array to inspect.
+ * @param {...Array<(a: T, b: T) => boolean | ArrayLike<T> | null | undefined>} comparator - The comparator invoked per element.
+ * @returns {T[]} Returns the new array of values.
  *
  * @example
- * const array1 = [{ x: 1 }, { x: 2 }];
- * const array2 = [{ x: 2 }, { x: 3 }];
- * const array3 = [{ x: 3 }, { x: 4 }];
- * const array4 = [{ x: 4 }, { x: 5 }];
- * const result = xorWith(array1, array2, array3, array4, (a, b) => a.x === b.x);
- * // result will be [{ x: 1 }, { x: 5 }] since these elements are unique to their respective arrays.
+ * xorWith([1], [2], [3], (a, b) => a === b);
+ * // => [1, 2, 3]
  */
-export function xorWith<T1, T2, T3, T4>(
-  array: ArrayLike<T1> | null | undefined,
-  values1: ArrayLike<T2>,
-  values2: ArrayLike<T3>,
-  ...values: Array<ArrayLike<T4> | ((a: T1 | T2 | T3 | T4, b: T1 | T2 | T3 | T4) => boolean)>
-): Array<T1 | T2 | T3 | T4>;
-
-/**
- * Creates an array of unique values that is the symmetric difference of the given arrays using a custom comparator function.
- *
- * The symmetric difference is the set of elements which are in either of the arrays,
- * but not in their intersection, determined by the comparator function.
- *
- * @template T - Type of elements in the input arrays.
- *
- * @param {...(ArrayLike<T> | null | undefined | ((a: T, b: T) => boolean))} values - The arrays to inspect, or the comparator function.
- * @returns {T[]} An array containing the elements that are present in exactly one of the arrays
- *  as determined by the comparator.
- *
- * @example
- * // Custom comparator function for objects with an 'id' property
- * const idComparator = (a, b) => a.id === b.id;
- * xorWith([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idComparator);
- * // Returns [{ id: 1 }, { id: 3 }]
- */
-export function xorWith<T>(...values: Array<ArrayLike<T> | null | undefined | ((a: T, b: T) => boolean)>): T[];
+export function xorWith<T>(
+  arrays: ArrayLike<T> | null | undefined,
+  arrays2: ArrayLike<T> | null | undefined,
+  arrays3: ArrayLike<T> | null | undefined,
+  ...comparator: Array<((a: T, b: T) => boolean) | ArrayLike<T> | null | undefined>
+): T[];
 
 /**
  * Creates an array of unique values that is the symmetric difference of the given arrays using a custom comparator function.
@@ -140,8 +97,12 @@ export function xorWith<T>(...values: Array<ArrayLike<T> | null | undefined | ((
 
   const arrays = values.filter(isArrayLikeObject) as T[][];
 
+  // eslint-disable-next-line
+  // @ts-ignore
   const union = unionWith(...arrays, comparator);
   const intersections = windowed(arrays, 2).map(([arr1, arr2]) => intersectionWith(arr1, arr2, comparator));
 
+  // eslint-disable-next-line
+  // @ts-ignore
   return differenceWith(union, unionWith(...intersections, comparator), comparator);
 }

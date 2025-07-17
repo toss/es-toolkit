@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { toString as toStringLodash } from 'lodash';
 import { stubString } from './stubString';
 import { toString } from './toString';
 import { symbol } from '../_internal/symbol';
@@ -9,6 +10,8 @@ describe('toString', () => {
     const values = [, null, undefined];
     const expected = values.map(stubString);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? toString(value) : toString()));
 
     expect(actual).toEqual(expected);
@@ -33,5 +36,9 @@ describe('toString', () => {
 
   it('should handle an array of symbols', () => {
     expect(toString([symbol])).toBe('Symbol(a)');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toString).toEqualTypeOf<typeof toStringLodash>();
   });
 });

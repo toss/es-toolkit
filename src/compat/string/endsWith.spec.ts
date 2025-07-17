@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { endsWith as endsWithLodash } from 'lodash';
 import { endsWith } from './endsWith';
 
 describe('endsWith', () => {
@@ -70,5 +71,9 @@ describe('endsWith', () => {
 
   it('should coerce `position` to an integer', () => {
     expect(endsWith(string, 'ab', 2.2)).toBe(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(endsWith).toEqualTypeOf<typeof endsWithLodash>();
   });
 });

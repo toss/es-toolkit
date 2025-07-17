@@ -2,7 +2,7 @@
 
 查找对象中满足所提供的测试函数的第一个元素的键。
 
-## Signature
+## 签名
 
 ```typescript
 function findKey<T extends Record<any, any>>(
@@ -11,16 +11,16 @@ function findKey<T extends Record<any, any>>(
 ): keyof T | undefined;
 ```
 
-### Parameters
+### 参数
 
 - `obj` (`T extends Record<any, any>`): 要搜索的对象。
 - `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 对对象中的每个值执行的函数。
 
-### Returns
+### 返回
 
 (`keyof T | undefined`): 对象中满足所提供的测试功能的第一个元素的键，如果没有元素通过测试，则为未定义。
 
-## Examples
+## 示例
 
 ```typescript
 const users = {
@@ -47,16 +47,18 @@ findKey(users, o => o.age > 50); // undefined
 ### 签名
 
 ```typescript
-export function findKey<T extends Record<any, any>>(
-  obj: T,
-  conditionToFind: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(obj: T, objectToFind: Partial<T[keyof T]>): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(
-  obj: T,
-  propertyToFind: [keyof T[keyof T], any]
-): keyof T | undefined;
-export function findKey<T extends Record<any, any>>(obj: T, propertyToFind: keyof T[keyof T]): keyof T | undefined;
+function findKey<T>(obj: T, conditionToFind: (value: T[keyof T], key: string, obj: T) => boolean): string | undefined;
+function findKey<T>(obj: T, objectToFind: Partial<T[keyof T]>): string | undefined;
+function findKey<T>(obj: T, propertyToFind: [PropertyKey, any]): string | undefined;
+function findKey<T>(obj: T, propertyToFind: PropertyKey): string | undefined;
+function findKey<T>(
+  obj: T | null | undefined,
+  predicate?:
+    | ((value: T[keyof T], key: string, obj: T) => unknown)
+    | PropertyKey
+    | [PropertyKey, any]
+    | Partial<T[keyof T]>
+): string | undefined;
 ```
 
 ### 示例

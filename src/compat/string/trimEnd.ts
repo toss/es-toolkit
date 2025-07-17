@@ -3,17 +3,49 @@ import { trimEnd as trimEndToolkit } from '../../string/trimEnd.ts';
 /**
  * Removes trailing whitespace or specified characters from a string.
  *
- * @param {string} str - The string from which trailing characters will be trimmed.
- * @param {string | string[]} chars - The character(s) to remove from the end of the string. Defaults to `" "`.
- * @returns {string} - The resulting string after the specified trailing character has been removed.
+ * @param {string} string - The string to trim.
+ * @param {string} chars - The characters to trim from the end of the string.
+ * @returns {string} Returns the trimmed string.
  *
  * @example
- * const trimmedStr1 = trimEnd('hello---', '-') // returns 'hello'
- * const trimmedStr2 = trimEnd('123000', '0') // returns '123'
- * const trimmedStr3 = trimEnd('abcabcabc', 'c') // returns 'abcabcab'
- * const trimmedStr4 = trimEnd('trimmedxxx', 'x') // returns 'trimmed'
+ * trimEnd('  abc  ');
+ * // => '  abc'
+ *
+ * trimEnd('-_-abc-_-', '_-');
+ * // => '-_-abc'
  */
-export function trimEnd(str: string, chars?: string | string[], guard?: unknown): string {
+export function trimEnd(string?: string, chars?: string): string;
+
+/**
+ * Removes trailing whitespace or specified characters from a string.
+ *
+ * @param {string} string - The string to trim.
+ * @param {string | number} index - The index parameter (used with guard).
+ * @param {object} guard - Enables use as an iteratee for methods like `map`.
+ * @returns {string} Returns the trimmed string.
+ *
+ * @example
+ * trimEnd('  abc  ', 0, {});
+ * // => '  abc'
+ */
+export function trimEnd(string: string, index: string | number, guard: object): string;
+
+/**
+ * Removes trailing whitespace or specified characters from a string.
+ *
+ * @param {string} str - The string from which trailing characters will be trimmed.
+ * @param {string | number} chars - The character(s) to remove from the end of the string.
+ * @param {object} guard - Enables use as an iteratee for methods like `map`.
+ * @returns {string} Returns the trimmed string.
+ *
+ * @example
+ * trimEnd('  abc  ');
+ * // => '  abc'
+ *
+ * trimEnd('-_-abc-_-', '_-');
+ * // => '-_-abc'
+ */
+export function trimEnd(str?: string, chars?: string | number, guard?: object): string {
   if (str == null) {
     return '';
   }
@@ -22,19 +54,5 @@ export function trimEnd(str: string, chars?: string | string[], guard?: unknown)
     return str.toString().trimEnd();
   }
 
-  switch (typeof chars) {
-    case 'string': {
-      return trimEndToolkit(str, chars.toString().split(''));
-    }
-    case 'object': {
-      if (Array.isArray(chars)) {
-        return trimEndToolkit(
-          str,
-          chars.flatMap(x => x.toString().split(''))
-        );
-      } else {
-        return trimEndToolkit(str, (chars as any).toString().split(''));
-      }
-    }
-  }
+  return trimEndToolkit(str, chars.toString().split(''));
 }
