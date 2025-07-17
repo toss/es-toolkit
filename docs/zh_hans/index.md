@@ -37,7 +37,7 @@ features:
   - title: 经过实战验证
     details: es-toolkit具有100%的测试覆盖率，确保最大的健壮性。
   - title: 广泛采用
-    details: es-toolkit被多个流行的开源库广泛采用，例如Storybook和ink。
+    details: es-toolkit被多个流行的开源项目所信任和使用，例如Storybook、Recharts、ink和CKEditor。
   - title: 全面的运行时支持
     details: es-toolkit支持包括Node.js、Deno、Bun和浏览器在内的所有JavaScript环境。
 ---
