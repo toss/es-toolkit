@@ -59,16 +59,16 @@ const array1 = [
   [1, 3],
   [2, 4],
 ];
-const result1 = unzipWith(array3, (a, b) => a + b);
-// result3 为 [3, 7]，因为提供了 iteratee 函数时会转换重新分组的元素。
+const result1 = unzipWith(array1, (a, b) => a + b);
+// result1 为 [3, 7]，因为提供了 iteratee 函数时会转换重新分组的元素。
 
 // iteratee 为 null 或 undefined 的情况
 const array2 = [
   [1, 3],
   [2, 4],
 ];
-const result2 = unzipWith(array1, null);
-// result1 为 [[1, 2], [3, 4]]，因为 iteratee 为 null 时会像 unzip 一样工作。
+const result2 = unzipWith(array2, null);
+// result2 为 [[1, 2], [3, 4]]，因为 iteratee 为 null 时会像 unzip 一样工作。
 
 // 输入为 null 或 undefined 的情况
 const result3 = unzipWith(null);

@@ -29,7 +29,7 @@ function attempt<T, E>(func: () => T): [null, T] | [E, null];
 ## 例
 
 ```typescript
-import { attempt } from 'es-toolkit/function';
+import { attempt } from 'es-toolkit/util';
 
 // 成功時には [null, 関数の戻り値] タプルを返します。
 const [error, result] = attempt(() => 42);
