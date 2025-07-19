@@ -5,7 +5,7 @@
 `es-toolkit/compat`在所有Lodash函数上表现相同，同时更轻更快。
 
 - 确保与Lodash的实际测试代码行为一致。
-- 被Storybook、Recharts等知名开源库使用。
+- 被Storybook、Recharts、CKEditor等知名开源库使用，并受到Nuxt的推荐。
 
 :::
 

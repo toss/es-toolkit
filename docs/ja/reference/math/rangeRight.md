@@ -37,6 +37,12 @@ rangeRight(0, 21, 5);
 // [-3, -2, -1, 0] を返します
 rangeRight(0, -4, -1);
 
-// エラーを投げます: ステップ値は0以外の整数でなければなりません。
+// end値が負の場合は [] を返します
+rangeRight(-4);
+rangeRight(0, -4);
+
+// エラーを投げます: The step value must be a non-zero integer.
 rangeRight(1, 4, 0);
+// stepの値が負の場合は [] を返します
+rangeRight(1, 4, -1);
 ```

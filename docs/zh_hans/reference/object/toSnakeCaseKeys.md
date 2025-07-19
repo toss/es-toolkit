@@ -21,20 +21,20 @@ function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T>;
 ## 示例
 
 ```typescript
-// Example with objects
+// 示例: 使用对象
 const obj = { userId: 1, firstName: 'John' };
 const result = toSnakeCaseKeys(obj);
-// result will be { user_id: 1, first_name: 'John' }
+// result 为 { user_id: 1, first_name: 'John' }
 
-// Example with arrays of objects
+// 示例: 使用对象数组
 const arr = [
   { userId: 1, firstName: 'John' },
   { userId: 2, firstName: 'Jane' },
 ];
 const arrResult = toSnakeCaseKeys(arr);
-// arrResult will be [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]
+// arrResult 为 [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]
 
-// Example with nested objects
+// 示例: 使用嵌套对象
 const nested = {
   userData: {
     userId: 1,
@@ -45,7 +45,7 @@ const nested = {
   },
 };
 const nestedResult = toSnakeCaseKeys(nested);
-// nestedResult will be:
+// nestedResult 为:
 // {
 //   user_data: {
 //     user_id: 1,
