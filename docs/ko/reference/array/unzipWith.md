@@ -59,16 +59,16 @@ const array1 = [
   [1, 3],
   [2, 4],
 ];
-const result1 = unzipWith(array3, (a, b) => a + b);
-// result3는 [3, 7]이 돼요. iteratee 함수가 제공되면 재구성된 요소들을 변환하기 때문이에요.
+const result1 = unzipWith(array1, (a, b) => a + b);
+// result1는 [3, 7]이 돼요. iteratee 함수가 제공되면 재구성된 요소들을 변환하기 때문이에요.
 
 // iteratee가 null이나 undefined인 경우
 const array2 = [
   [1, 3],
   [2, 4],
 ];
-const result2 = unzipWith(array1, null);
-// result1은 [[1, 2], [3, 4]]가 돼요. iteratee가 null이면 unzip처럼 동작하기 때문이에요.
+const result2 = unzipWith(array2, null);
+// result2은 [[1, 2], [3, 4]]가 돼요. iteratee가 null이면 unzip처럼 동작하기 때문이에요.
 
 // 입력값이 null이나 undefined인 경우
 const result3 = unzipWith(null);

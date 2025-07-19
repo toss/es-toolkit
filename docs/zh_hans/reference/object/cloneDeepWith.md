@@ -29,26 +29,26 @@ function cloneDeepWith<T>(
 ## 示例
 
 ```typescript
-// Clone a primitive value
+// 克隆一个原始值
 const num = 29;
 const clonedNum = cloneDeepWith(num);
 console.log(clonedNum); // 29
 console.log(clonedNum === num); // true
 
-// Clone an object with a customizer
+// 克隆一个对象，使用自定义函数
 const obj = { a: 1, b: 2 };
 const clonedObj = cloneDeepWith(obj, value => {
   if (typeof value === 'number') {
-    return value * 2; // Double the number
+    return value * 2; // 将数字乘以 2
   }
 });
 console.log(clonedObj); // { a: 2, b: 4 }
 console.log(clonedObj === obj); // false
 
-// Clone an array with a customizer
+// 克隆一个数组，使用自定义函数
 const arr = [1, 2, 3];
 const clonedArr = cloneDeepWith(arr, value => {
-  return value + 1; // Increment each value
+  return value + 1; // 将每个值增加 1
 });
 console.log(clonedArr); // [2, 3, 4]
 console.log(clonedArr === arr); // false
