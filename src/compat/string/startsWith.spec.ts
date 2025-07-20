@@ -70,4 +70,10 @@ describe('startsWith', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(startsWith).toEqualTypeOf<typeof startsWithLodash>();
   });
+
+  it('should return false when str or target is undefined', () => {
+    expect(startsWith(undefined, 'test')).toBe(false);
+    expect(startsWith('test', undefined)).toBe(false);
+    expect(startsWith(undefined, undefined)).toBe(false);
+  });
 });
