@@ -9,11 +9,11 @@ describe('debounce bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'debounce');
-    expect(bundleSize).toMatchInlineSnapshot(`535`);
+    expect(bundleSize).toMatchInlineSnapshot(`531`);
   });
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'debounce');
-    expect(bundleSize).toMatchInlineSnapshot(`995`);
+    expect(bundleSize).toMatchInlineSnapshot(`961`);
   });
 });

@@ -11,4 +11,9 @@ describe('camelCase bundle size', () => {
     const bundleSize = await getBundleSize('es-toolkit', 'camelCase');
     expect(bundleSize).toMatchInlineSnapshot(`370`);
   });
+
+  it('es-toolkit/compat', async () => {
+    const bundleSize = await getBundleSize('es-toolkit/compat', 'camelCase');
+    expect(bundleSize).toMatchInlineSnapshot(`650`);
+  });
 });
