@@ -22,7 +22,7 @@ import { toInteger } from '../compat/util/toInteger.ts';
  * @example
  * // Returns [1, 2, 3]
  * take([1, 2, 3], 5);
- * 
+ *
  * @example
  * // Returns [[1], [1], [1]]
  * const arr = [1, 2, 3];
