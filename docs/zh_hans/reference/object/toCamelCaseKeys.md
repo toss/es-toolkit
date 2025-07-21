@@ -21,20 +21,20 @@ function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T>;
 ## 示例
 
 ```typescript
-// Example with objects
+// 示例: 使用对象
 const obj = { user_id: 1, first_name: 'John' };
 const result = toCamelCaseKeys(obj);
-// result will be { userId: 1, firstName: 'John' }
+// result 为 { userId: 1, firstName: 'John' }
 
-// Example with arrays of objects
+// 示例: 使用对象数组
 const arr = [
   { user_id: 1, first_name: 'John' },
   { user_id: 2, first_name: 'Jane' },
 ];
 const arrResult = toCamelCaseKeys(arr);
-// arrResult will be [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
+// arrResult 为 [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
 
-// Example with nested objects
+// 示例: 使用嵌套对象
 const nested = {
   user_data: {
     user_id: 1,
@@ -45,7 +45,7 @@ const nested = {
   },
 };
 const nestedResult = toCamelCaseKeys(nested);
-// nestedResult will be:
+// nestedResult 为:
 // {
 //   userData: {
 //     userId: 1,

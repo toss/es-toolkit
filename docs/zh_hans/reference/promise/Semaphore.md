@@ -39,7 +39,7 @@ const sema = new Semaphore(2);
 async function task() {
   await sema.acquire();
   try {
-    // This code can only be executed by two tasks at the same time
+    // 这个代码段只能由两个任务同时执行
   } finally {
     sema.release();
   }
@@ -47,5 +47,5 @@ async function task() {
 
 task();
 task();
-task(); // This task will wait until one of the previous tasks releases the semaphore.
+task(); // 这个任务会等待前一个任务释放信号量。
 ```
