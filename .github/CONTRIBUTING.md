@@ -27,13 +27,13 @@ We don't implement functions that can be easily replaced with modern JavaScript,
 
 #### `es-toolkit/compat`
 
-To help projects using [`lodash`](https://lodash.com/docs/4.17.15) migrate easily to es-toolkit, we implement all functions provided by `lodash`.
+To help projects using [`Lodash`](https://lodash.com/docs/4.17.15) migrate easily to es-toolkit, we implement all functions provided by `Lodash`.
 
 ### 1.2 Performance
 
 All functions es-toolkit provides should be more performant than or similar with that of alternative libraries provide.
 
-We measure the performance of our library every time our code is edited. We are using [vitest's benchmark feature](https://vitest.dev/api/#bench). For our benchmark code, please refer to our [benchmark directory](https://github.com/toss/es-toolkit/tree/main/benchmarks).
+We measure the performance of our library every time our code is edited. We are using [Vitest's benchmark feature](https://vitest.dev/api/#bench). For our benchmark code, please refer to our [benchmark directory](https://github.com/toss/es-toolkit/tree/main/benchmarks).
 
 When a new functionality is added, a benchmark code should be added. Please add screenshots of the benchmarks when opening a pull request for easy reference and history tracking.
 
