@@ -73,6 +73,6 @@ findKey(users, ['age', 36]);
 // => 'barney'
 
 const languages = { javascript: { active: false }, typescript: { active: true } };
-findKey(users, 'active');
+findKey(languages, 'active');
 // => 'typescript'
 ```

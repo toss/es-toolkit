@@ -27,7 +27,7 @@ function attemptAsync<T, E>(func: () => Promise<T>): Promise<[null, T] | [E, nul
 ## 例
 
 ```typescript
-import { attemptAsync } from 'es-toolkit/function';
+import { attemptAsync } from 'es-toolkit/util';
 
 // 成功時には [null, 関数の戻り値] タプルを返します。
 const [error, data] = await attemptAsync(async () => {

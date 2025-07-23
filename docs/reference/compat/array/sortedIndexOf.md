@@ -8,7 +8,7 @@ When you import this function from `es-toolkit/compat`, it [behaves exactly the 
 
 Finds the index of the first occurrence of a value in a sorted array, similar to how `Array#indexOf` works, but specifically for sorted arrays.
 
-::: warn Ensure the array is sorted
+::: warning Ensure the array is sorted
 
 It's important to provide a sorted array to this function because it uses a binary search to quickly find the index.
 

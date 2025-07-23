@@ -35,7 +35,7 @@ features:
   - title: 堅牢な型定義
     details: すべての関数に対してシンプルながら堅牢な型定義を提供しています。
   - title: 幅広い採用
-    details: es-toolkitは、Storybookやinkなどの人気のオープンソースライブラリに広く採用されています。
+    details: es-toolkitは、Storybook、Recharts、ink、CKEditorなどの人気のオープンソースプロジェクトから信頼され、採用されています。
   - title: テストカバレッジ100%
     details: すべての関数とブランチに対して、綿密なテストが作成されています。
   - title: あらゆる環境で使用可能

@@ -30,7 +30,7 @@ function attempt<T, E>(func: () => T): [null, T] | [E, null];
 ## 예시
 
 ```typescript
-import { attempt } from 'es-toolkit/function';
+import { attempt } from 'es-toolkit/util';
 
 // 성공시에는 [null, 함수의 반환값] 튜플을 반환해요.
 const [error, result] = attempt(() => 42);

@@ -59,16 +59,16 @@ const array1 = [
   [1, 3],
   [2, 4],
 ];
-const result1 = unzipWith(array3, (a, b) => a + b);
-// result3 will be [3, 7] because when the iteratee is provided, the function transform regrouped elements.
+const result1 = unzipWith(array1, (a, b) => a + b);
+// result1 will be [3, 7] because when the iteratee is provided, the function transform regrouped elements.
 
 // Example with null or undefined iteratee
 const array2 = [
   [1, 3],
   [2, 4],
 ];
-const result2 = unzipWith(array1, null);
-// result1 will be [[1, 2], [3, 4]] because when the iteratee is null, the function behaves like unzip.
+const result2 = unzipWith(array2, null);
+// result2 will be [[1, 2], [3, 4]] because when the iteratee is null, the function behaves like unzip.
 
 // Example with null or undefined input
 const result3 = unzipWith(null);

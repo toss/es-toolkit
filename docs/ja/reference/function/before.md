@@ -33,19 +33,21 @@ function before<F extends (...args: any[]) => any>(
 ## 例
 
 ```typescript
-import { after } from 'es-toolkit/function';
+import { before } from 'es-toolkit/function';
 
 const mockFn = () => {
   console.log('実行されました');
 };
-const afterFn = after(3, mockFn);
+const beforeFn = before(3, mockFn);
+
+// '実行されました' がログに出力されます
+beforeFn();
+
+// '実行されました' がログに出力されます
+beforeFn();
 
 // 何もログに出力されません
-afterFn();
-// 何もログに出力されません
-afterFn();
-// '実行されました' がログに出力されます
-afterFn();
+beforeFn();
 ```
 
 ## Lodash 互換性
