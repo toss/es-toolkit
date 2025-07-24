@@ -76,4 +76,10 @@ describe('endsWith', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(endsWith).toEqualTypeOf<typeof endsWithLodash>();
   });
+
+  it('should return false when str or target is undefined', () => {
+    expect(endsWith(undefined, 'test')).toBe(false);
+    expect(endsWith('test', undefined)).toBe(false);
+    expect(endsWith(undefined, undefined)).toBe(false);
+  });
 });
