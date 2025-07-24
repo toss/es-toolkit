@@ -59,16 +59,16 @@ const array1 = [
   [1, 3],
   [2, 4],
 ];
-const result1 = unzipWith(array3, (a, b) => a + b);
-// result3は[3, 7]になります。iteratee関数が提供されると、再構成された要素を変換するためです。
+const result1 = unzipWith(array1, (a, b) => a + b);
+// result1は[3, 7]になります。iteratee関数が提供されると、再構成された要素を変換するためです。
 
 // iterateeがnullまたはundefinedの場合
 const array2 = [
   [1, 3],
   [2, 4],
 ];
-const result2 = unzipWith(array1, null);
-// result1は[[1, 2], [3, 4]]になります。iterateeがnullの場合、unzipのように動作するためです。
+const result2 = unzipWith(array2, null);
+// result2は[[1, 2], [3, 4]]になります。iterateeがnullの場合、unzipのように動作するためです。
 
 // 入力がnullまたはundefinedの場合
 const result3 = unzipWith(null);

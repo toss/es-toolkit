@@ -109,4 +109,11 @@ describe('pullAllWith', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(pullAllWith).toEqualTypeOf<typeof pullAllWithLodash>();
   });
+
+  it('should work with the same value for `array` and `values`', () => {
+    const array = [{ a: 1 }, { b: 2 }];
+    const actual = pullAllWith(array, array);
+
+    expect(actual).toEqual([]);
+  });
 });

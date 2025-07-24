@@ -11,7 +11,7 @@ es-toolkit is a state-of-the-art, high-performance JavaScript utility library wi
 - es-toolkit supports tree shaking out of the box, and [reduces JavaScript code by up to 97%](https://es-toolkit.dev/bundle-size.html) compared to other libraries.
 - es-toolkit offers a complete compatibility layer to seamlessly replace lodash, available as [es-toolkit/compat](https://es-toolkit.dev/compatibility.html).
 - es-toolkit includes built-in TypeScript support, with straightforward yet robust types. It also provides useful type guards such as [isNotNil](https://es-toolkit.dev/reference/predicate/isNotNil.html).
-- es-toolkit is utilized by several popular open-source libraries, such as [Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358) and [ink](https://github.com/vadimdemedes/ink/blob/2090ad9779be59dea71d173eb49785b7bd4495d0/package.json#L55).
+- es-toolkit is trusted and used by popular open-source projects like [Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358), Recharts, ink, and CKEditor.
 - es-toolkit is battle-tested with 100% test coverage, ensuring reliability and robustness.
 
 ## Examples

@@ -85,4 +85,8 @@ describe('toPairsIn', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(toPairsIn).toEqualTypeOf<typeof toPairsInLodash>();
   });
+
+  it('should return empty array when object is undefined', () => {
+    expect(toPairsIn(undefined)).toEqual([]);
+  });
 });
