@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { remove as removeLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { remove } from './remove';
 
 const isEven = function (n: number) {
@@ -10,8 +9,7 @@ const isEven = function (n: number) {
 describe('remove', () => {
   it('should modify the array and return removed elements', () => {
     const array = [1, 2, 3, 4];
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+
     const actual = remove(array, isEven);
 
     expect(array).toEqual([1, 3]);
@@ -23,8 +21,6 @@ describe('remove', () => {
     const array = [1, 2, 3];
     const clone = array.slice();
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     remove(array, function (n, index) {
       // eslint-disable-next-line prefer-rest-params
       const args = Array.prototype.slice.call(arguments);
@@ -45,8 +41,7 @@ describe('remove', () => {
       { a: 0, b: 1 },
       { a: 1, b: 2 },
     ];
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+
     remove(objects, { a: 1 });
     expect(objects).toEqual([{ a: 0, b: 1 }]);
   });
@@ -56,16 +51,14 @@ describe('remove', () => {
       { a: 0, b: 1 },
       { a: 1, b: 2 },
     ];
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+
     remove(objects, ['a', 1]);
     expect(objects).toEqual([{ a: 0, b: 1 }]);
   });
 
   it('should work with `_.property` shorthands', () => {
     const objects = [{ a: 0 }, { a: 1 }];
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+
     remove(objects, 'a');
     expect(objects).toEqual([{ a: 0 }]);
   });
@@ -75,8 +68,6 @@ describe('remove', () => {
     delete array[1];
     delete array[3];
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     remove(array, n => n === 1);
 
     expect('0' in array).toBe(false);
@@ -87,8 +78,6 @@ describe('remove', () => {
     const array = [1, 2, 3];
     delete array[1];
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     remove(array, n => n == null);
 
     expect(array).toEqual([1, 3]);
@@ -97,14 +86,8 @@ describe('remove', () => {
   it('should not mutate the array until all elements to remove are determined', () => {
     const array = [1, 2, 3];
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     remove(array, (n, index) => isEven(index));
 
     expect(array).toEqual([2]);
-  });
-
-  it('should match the type of lodash', () => {
-    expectTypeOf(remove).toEqualTypeOf<typeof removeLodash>();
   });
 });

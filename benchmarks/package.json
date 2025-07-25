@@ -12,7 +12,7 @@
     "vitest": "^2.1.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4",
+    "@types/lodash": "^4.17.20",
     "@types/lodash-es": "^4",
     "rfdc": "^1.4.1"
   }

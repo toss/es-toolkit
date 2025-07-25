@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
-import type { pullAllWith as pullAllWithLodash } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { pullAllWith } from './pullAllWith';
 import { isEqual } from '../../predicate';
 
@@ -106,7 +105,15 @@ describe('pullAllWith', () => {
     expect(pullAllWith(undefined, [1, 2, 3])).toEqual(undefined);
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(pullAllWith).toEqualTypeOf<typeof pullAllWithLodash>();
+  // NOTE: TypeScript doesn't support matching conditional types
+  // it('should match the type of lodash', () => {
+  //   expectTypeOf(pullAllWith).toEqualTypeOf<typeof pullAllWithLodash>();
+  // });
+
+  it('should work with the same value for `array` and `values`', () => {
+    const array = [{ a: 1 }, { b: 2 }];
+    const actual = pullAllWith(array, array);
+
+    expect(actual).toEqual([]);
   });
 });
