@@ -17,10 +17,10 @@ coverage
 dist
 .junit
 out
-*.d.ts
 *.tgz
 umd
 .env
+/*.d.ts
 .vite-node
 .vercel
 /compat
