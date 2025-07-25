@@ -1,3 +1,6 @@
+import { MutableList } from '../_internal/MutableList';
+import { RejectReadonly } from '../_internal/RejectReadonly';
+
 /**
  * Reverses `array` so that the first element becomes the last, the second element becomes the second to last, and so on.
  *
@@ -10,7 +13,7 @@
  * reverse(array);
  * // => [3, 2, 1]
  */
-export function reverse<L extends ArrayLike<any>>(array: L extends readonly any[] ? never : L): L;
+export function reverse<L extends MutableList<any>>(array: RejectReadonly<L>): L;
 
 /**
  * Reverses the elements of an array in place.

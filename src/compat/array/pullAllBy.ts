@@ -1,3 +1,5 @@
+import { MutableList } from '../_internal/MutableList';
+import { RejectReadonly } from '../_internal/RejectReadonly';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
 
@@ -29,9 +31,9 @@ export function pullAllBy<T>(array: T[], values?: ArrayLike<T>, iteratee?: Value
  * If you want to remove values without modifying the original array, use `differenceBy`.
  *
  * @template L
- * @param {L} array - The array to modify.
+ * @param {RejectReadonly<L>} array - The array to modify.
  * @param {ArrayLike<L[0]>} [values] - The values to remove.
- * @param {((value: L[0]) => unknown) | PropertyKey | [PropertyKey, any] | Partial<L[0]>} [iteratee] - The iteratee invoked per element.
+ * @param {ValueIteratee<L[0]>} [iteratee] - The iteratee invoked per element.
  * @returns {L} Returns `array`.
  *
  * @example
@@ -41,8 +43,8 @@ export function pullAllBy<T>(array: T[], values?: ArrayLike<T>, iteratee?: Value
  * console.log(array);
  * // => [{ 'x': 2 }]
  */
-export function pullAllBy<L extends ArrayLike<any>>(
-  array: L extends readonly any[] ? never : L,
+export function pullAllBy<L extends MutableList<any>>(
+  array: RejectReadonly<L>,
   values?: ArrayLike<L[0]>,
   iteratee?: ValueIteratee<L[0]>
 ): L;

@@ -1,4 +1,6 @@
 import { fill as fillToolkit } from '../../array/fill.ts';
+import { MutableList } from '../_internal/MutableList';
+import { RejectReadonly } from '../_internal/RejectReadonly';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isString } from '../predicate/isString.ts';
 
@@ -16,16 +18,16 @@ export function fill<T>(array: any[] | null | undefined, value: T): T[];
 
 /**
  * Fills an array-like object with a value.
- * @template T, U
- * @param {U extends readonly any[] ? never : U | null | undefined} array - The array-like object to fill
+ * @template T, AL
+ * @param {RejectReadonly<AL> | null | undefined} array - The array-like object to fill
  * @param {T} value - The value to fill array with
  * @returns {ArrayLike<T>} Returns the filled array-like object
  * @example
  * fill({ length: 3 }, 2)
  * // => { 0: 2, 1: 2, 2: 2, length: 3 }
  */
-export function fill<T, U extends ArrayLike<any>>(
-  array: U extends readonly any[] ? never : U | null | undefined,
+export function fill<T, AL extends MutableList<any>>(
+  array: RejectReadonly<AL> | null | undefined,
   value: T
 ): ArrayLike<T>;
 
@@ -55,8 +57,8 @@ export function fill<T, U>(array: U[] | null | undefined, value: T, start?: numb
  * fill({ 0: 1, 1: 2, 2: 3, length: 3 }, 'a', 1, 2)
  * // => { 0: 1, 1: 'a', 2: 3, length: 3 }
  */
-export function fill<T, U extends ArrayLike<any>>(
-  array: U extends readonly any[] ? never : U | null | undefined,
+export function fill<T, U extends MutableList<any>>(
+  array: RejectReadonly<U> | null | undefined,
   value: T,
   start?: number,
   end?: number

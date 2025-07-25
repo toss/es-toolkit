@@ -2687,17 +2687,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:*, @types/lodash@npm:^4":
+"@types/lodash@npm:*":
   version: 4.17.7
   resolution: "@types/lodash@npm:4.17.7"
   checksum: 10c0/40c965b5ffdcf7ff5c9105307ee08b782da228c01b5c0529122c554c64f6b7168fc8f11dc79aa7bae4e67e17efafaba685dc3a47e294dbf52a65ed2b67100561
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.17.18":
-  version: 4.17.18
-  resolution: "@types/lodash@npm:4.17.18"
-  checksum: 10c0/d25f86941990403d59dcaae42b42fc9fef55a0a7f398790517e7189300183e425a94127594cbeaf9b5fcdc4f6c2b285e34f4301fb56c92f81ccd8505a41ab5f5
+"@types/lodash@npm:^4.17.20":
+  version: 4.17.20
+  resolution: "@types/lodash@npm:4.17.20"
+  checksum: 10c0/98cdd0faae22cbb8079a01a3bb65aa8f8c41143367486c1cbf5adc83f16c9272a2a5d2c1f541f61d0d73da543c16ee1d21cf2ef86cb93cd0cc0ac3bced6dd88f
   languageName: node
   linkType: hard
 
@@ -3890,7 +3890,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "benchmarks@workspace:benchmarks"
   dependencies:
-    "@types/lodash": "npm:^4"
+    "@types/lodash": "npm:^4.17.20"
     "@types/lodash-es": "npm:^4"
     es-toolkit: "workspace:^"
     esbuild: "npm:0.23.0"
@@ -5177,7 +5177,7 @@ __metadata:
     "@types/broken-link-checker": "npm:^0"
     "@types/eslint": "npm:^9"
     "@types/jscodeshift": "npm:^0.12.0"
-    "@types/lodash": "npm:^4.17.18"
+    "@types/lodash": "npm:^4.17.20"
     "@types/node": "npm:^22.7.4"
     "@types/tar": "npm:^6.1.13"
     "@typescript-eslint/parser": "npm:^8.26.1"

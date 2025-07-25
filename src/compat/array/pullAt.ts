@@ -2,6 +2,8 @@ import { flattenDepth } from './flattenDepth.ts';
 import { isIndex } from '../_internal/isIndex.ts';
 import { isKey } from '../_internal/isKey.ts';
 import { Many } from '../_internal/Many.ts';
+import { MutableList } from '../_internal/MutableList';
+import { RejectReadonly } from '../_internal/RejectReadonly';
 import { toKey } from '../_internal/toKey.ts';
 import { at } from '../object/at.ts';
 import { unset } from '../object/unset.ts';
@@ -52,10 +54,7 @@ export function pullAt<T>(array: T[], ...indexes: Array<Many<number>>): T[];
  * console.log(evens);
  * // => [10, 20]
  */
-export function pullAt<L extends ArrayLike<any>>(
-  array: L extends readonly any[] ? never : L,
-  ...indexes: Array<Many<number>>
-): L;
+export function pullAt<L extends MutableList<any>>(array: RejectReadonly<L>, ...indexes: Array<Many<number>>): L;
 
 /**
  * Removes elements from an array at specified indices and returns the removed elements.
