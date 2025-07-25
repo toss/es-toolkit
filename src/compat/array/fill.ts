@@ -1,6 +1,6 @@
 import { fill as fillToolkit } from '../../array/fill.ts';
-import { MutableList } from '../_internal/MutableList';
-import { RejectReadonly } from '../_internal/RejectReadonly';
+import type { MutableList } from '../_internal/MutableList.d.ts';
+import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isString } from '../predicate/isString.ts';
 

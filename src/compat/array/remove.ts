@@ -1,8 +1,8 @@
 import { remove as removeToolkit } from '../../array/remove.ts';
 import { identity } from '../../function/identity.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
-import { MutableList } from '../_internal/MutableList';
-import { RejectReadonly } from '../_internal/RejectReadonly';
+import type { MutableList } from '../_internal/MutableList.d.ts';
+import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**

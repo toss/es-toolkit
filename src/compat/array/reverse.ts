@@ -1,5 +1,5 @@
-import { MutableList } from '../_internal/MutableList';
-import { RejectReadonly } from '../_internal/RejectReadonly';
+import type { MutableList } from '../_internal/MutableList.d.ts';
+import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 
 /**
  * Reverses `array` so that the first element becomes the last, the second element becomes the second to last, and so on.

@@ -1,6 +1,6 @@
 import { pull as pullToolkit } from '../../array/pull.ts';
-import { MutableList } from '../_internal/MutableList';
-import { RejectReadonly } from '../_internal/RejectReadonly';
+import type { MutableList } from '../_internal/MutableList.d.ts';
+import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 
 /**
  * This method is like `_.pull` except that it accepts an array of values to remove.

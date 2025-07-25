@@ -1,5 +1,5 @@
-import { MutableList } from '../_internal/MutableList';
-import { RejectReadonly } from '../_internal/RejectReadonly';
+import type { MutableList } from '../_internal/MutableList.d.ts';
+import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee } from '../util/iteratee.ts';
 
