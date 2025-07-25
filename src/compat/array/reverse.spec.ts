@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { reverse as reverseLodash } from 'lodash';
 import { reverse } from './reverse';
 import { range } from '../../math/range';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
@@ -12,7 +11,7 @@ describe('reverse', () => {
   it('should reverse `array`', () => {
     const array = [1, 2, 3];
 
-    const actual = reverseLodash(array);
+    const actual = reverse(array);
 
     expect(actual).toBe(array);
     expect(array).toEqual([3, 2, 1]);
