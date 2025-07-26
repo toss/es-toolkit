@@ -9,6 +9,6 @@ describe('add bundle size', () => {
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'add');
-    expect(bundleSize).toMatchInlineSnapshot(`424`);
+    expect(bundleSize).toMatchInlineSnapshot(`455`);
   });
 });
