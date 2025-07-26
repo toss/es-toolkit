@@ -1,7 +1,6 @@
 import { isPlainObject } from './isPlainObject.ts';
 import { getSymbols } from '../../_internal/getSymbols.ts';
 import { getTag } from '../../_internal/getTag.ts';
-import { after } from '../../function/after.ts';
 import type { IsEqualCustomizer } from '../_internal/IsEqualCustomizer.ts';
 import {
   argumentsTag,
@@ -73,31 +72,7 @@ export function isEqualWith(a: any, b: any, areValuesEqual?: IsEqualCustomizer):
     areValuesEqual = () => undefined;
   }
 
-  return isEqualWithImpl(a, b, undefined, undefined, undefined, undefined, (...args): boolean | void => {
-    const result = areValuesEqual(...args);
-
-    if (result !== undefined) {
-      return Boolean(result);
-    }
-
-    if (a instanceof Map && b instanceof Map) {
-      return isEqualWith(
-        Array.from(a),
-        Array.from(b),
-        // areValuesEqual should not be called for converted values
-        after(2, areValuesEqual)
-      );
-    }
-
-    if (a instanceof Set && b instanceof Set) {
-      return isEqualWith(
-        Array.from(a),
-        Array.from(b),
-        // areValuesEqual should not be called for converted values
-        after(2, areValuesEqual)
-      );
-    }
-  });
+  return isEqualWithImpl(a, b, undefined, undefined, undefined, undefined, areValuesEqual);
 }
 
 function isEqualWithImpl(
@@ -119,7 +94,7 @@ function isEqualWithImpl(
   const result = areValuesEqual(a, b, property, aParent, bParent, stack);
 
   if (result !== undefined) {
-    return result;
+    return Boolean(result);
   }
 
   if (typeof a === typeof b) {
@@ -217,39 +192,32 @@ function areObjectsEqual(
 
   try {
     switch (aTag) {
-      case mapTag: {
-        if (a.size !== b.size) {
-          return false;
-        }
-
-        for (const [key, value] of a.entries()) {
-          if (!b.has(key) || !isEqualWithImpl(value, b.get(key), key, a, b, stack, areValuesEqual)) {
-            return false;
-          }
-        }
-
-        return true;
-      }
-
+      case mapTag:
       case setTag: {
         if (a.size !== b.size) {
           return false;
         }
 
-        const aValues = Array.from(a.values());
-        const bValues = Array.from(b.values());
+        const aEntries = Array.from(a);
+        const bEntries = Array.from(b);
 
-        for (let i = 0; i < aValues.length; i++) {
-          const aValue = aValues[i];
-          const index = bValues.findIndex(bValue => {
-            return isEqualWithImpl(aValue, bValue, undefined, a, b, stack, areValuesEqual);
-          });
+        const seenIndices = new Set<number>();
 
-          if (index === -1) {
-            return false;
+        for (let i = 0; i < aEntries.length; i++) {
+          for (let j = 0; j < bEntries.length; j++) {
+            if (seenIndices.has(j)) {
+              continue;
+            }
+
+            if (isEqualWithImpl(aEntries[i], bEntries[j], i, aEntries, bEntries, stack, areValuesEqual)) {
+              seenIndices.add(j);
+              break;
+            }
           }
+        }
 
-          bValues.splice(index, 1);
+        if (seenIndices.size !== aEntries.length) {
+          return false;
         }
 
         return true;
