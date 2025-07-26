@@ -1,4 +1,4 @@
-import { pull as pullToolkit } from '../../array/pull.ts';
+import { pull } from './pull.ts';
 import type { MutableList } from '../_internal/MutableList.d.ts';
 import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 
@@ -57,5 +57,5 @@ export function pullAll<L extends MutableList<any>>(array: RejectReadonly<L>, va
  * console.log(numbers); // [1, 3, 5]
  */
 export function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T> = []): T[] {
-  return pullToolkit(arr, Array.from(valuesToRemove));
+  return pull(arr, ...Array.from(valuesToRemove));
 }

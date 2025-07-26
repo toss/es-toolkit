@@ -1,5 +1,7 @@
 import { trim as trimToolkit } from '../../string/trim.ts';
+import { whitespaces } from '../_internal/whitespaces.ts';
 import { flatMap } from '../array/flatMap.ts';
+import { toString } from '../util/toString.ts';
 
 /**
  * Removes leading and trailing whitespace or specified characters from a string.
@@ -34,8 +36,10 @@ export function trim(str: any, chars?: any, guard?: any): string {
     return '';
   }
 
+  str = toString(str);
+
   if (guard != null || chars == null) {
-    return str.toString().trim();
+    chars = whitespaces;
   }
 
   switch (typeof chars) {

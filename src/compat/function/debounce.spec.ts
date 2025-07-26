@@ -2,8 +2,8 @@ import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 import { debounce } from 'es-toolkit/compat';
 import { identity } from 'es-toolkit/compat';
 import { noop } from 'es-toolkit/compat';
-import { delay } from 'es-toolkit/compat';
 import type { debounce as debounceLodash } from 'lodash';
+import { delay } from '../../promise/delay';
 
 describe('debounce', () => {
   it('should debounce function calls', async () => {

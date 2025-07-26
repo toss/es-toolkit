@@ -1,3 +1,4 @@
+import { whitespaces } from '../_internal/whitespaces.ts';
 import { toString } from '../util/toString.ts';
 
 /**
@@ -51,7 +52,7 @@ export function trimStart(str?: string, chars?: string | number, guard?: object)
   }
 
   if (guard != null || chars == null) {
-    chars = ' ';
+    chars = whitespaces;
   }
 
   return trimStartImpl(toString(str), chars.toString().split(''));

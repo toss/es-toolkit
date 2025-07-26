@@ -76,7 +76,7 @@ function removeImpl<T>(arr: T[], shouldRemoveElement: (value: T, index: number, 
 
     // For handling sparse arrays
     // eslint-disable-next-line prefer-object-has-own
-    if (Object.prototype.hasOwnProperty.call(arr, i)) {
+    if (!Object.prototype.hasOwnProperty.call(arr, i)) {
       delete arr[resultIndex++];
       continue;
     }

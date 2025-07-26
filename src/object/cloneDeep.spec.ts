@@ -152,7 +152,6 @@ describe('cloneDeep', () => {
         return this.#b;
       }
       getThis() {
-        console.log(this);
         return this;
       }
     }

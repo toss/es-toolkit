@@ -252,15 +252,11 @@ describe('template', () => {
       const settings: any = { escape: null, evaluate: null, interpolate: null };
       settings[key] = delimiter[key];
 
-      try {
-        const expected = '1 <%- a %> <% print(a) %> <%= a %>';
-        const compiled = template(`${value} <%- a %> <% print(a) %> <%= a %>`, settings);
-        const data = { a: 1 };
+      const expected = '1 <%- a %> <% print(a) %> <%= a %>';
+      const compiled = template(`${value} <%- a %> <% print(a) %> <%= a %>`, settings);
+      const data = { a: 1 };
 
-        expect(compiled(data)).toBe(expected);
-      } catch (e) {
-        console.log(e);
-      }
+      expect(compiled(data)).toBe(expected);
     });
   });
 
