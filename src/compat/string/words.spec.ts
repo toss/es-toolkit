@@ -72,4 +72,14 @@ describe('words', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(words).toEqualTypeOf<typeof wordsLodash>();
   });
+
+  it('should use default pattern when guard is provided', () => {
+    const result = words('fred, barney, & pebbles', 'custom' as any, {});
+    expect(result).toEqual(['fred', 'barney', 'pebbles']);
+  });
+
+  it('should convert number pattern to string', () => {
+    const result = words('test123', 123 as any);
+    expect(result).toEqual(['123']);
+  });
 });

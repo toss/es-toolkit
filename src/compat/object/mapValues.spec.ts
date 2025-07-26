@@ -40,4 +40,12 @@ describe('mapValues', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(mapValues).toEqualTypeOf<typeof mapValuesLodash>();
   });
+
+  it('should return empty object when object is null', () => {
+    expect(mapValues(null)).toEqual({});
+  });
+
+  it('should return empty object when object is undefined', () => {
+    expect(mapValues(undefined)).toEqual({});
+  });
 });

@@ -1,12 +1,14 @@
 import { identity } from '../../function/identity.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
+import type { MutableList } from '../_internal/MutableList.d.ts';
+import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
  * Removes all elements from array that predicate returns truthy for and returns an array of the removed elements.
  *
  * @template L
- * @param {L extends readonly any[] ? never : L} array - The array to modify.
+ * @param {RejectReadonly<L>} array - The array to modify.
  * @param {ListIteratee<L[0]>} [predicate] - The function invoked per iteration.
  * @returns {Array<L[0]>} Returns the new array of removed elements.
  *
@@ -16,8 +18,8 @@ import { iteratee } from '../util/iteratee.ts';
  * console.log(array); // => [1, 3]
  * console.log(evens); // => [2, 4]
  */
-export function remove<L extends ArrayLike<any>>(
-  array: L extends readonly any[] ? never : L,
+export function remove<L extends MutableList<any>>(
+  array: RejectReadonly<L>,
   predicate?: ListIteratee<L[0]>
 ): Array<L[0]>;
 

@@ -6,6 +6,7 @@
  *
  * @param {T[]} arr - The array to take elements from.
  * @param {number} count - The number of elements to take.
+ * @param {unknown} guard - If truthy, ignores `count` and defaults to 1.
  * @returns {T[]} A new array containing the first `count` elements from `arr`.
  *
  * @example
@@ -19,6 +20,11 @@
  * @example
  * // Returns [1, 2, 3]
  * take([1, 2, 3], 5);
+ *
+ * @example
+ * // Returns [[1], [1], [1]]
+ * const arr = [1, 2, 3];
+ * const result = arr.map((v, i, array) => take(array, i, true));
  */
 export function take<T>(arr: readonly T[], count?: number, guard?: unknown): T[] {
   count = guard || count === undefined ? 1 : Math.floor(count);

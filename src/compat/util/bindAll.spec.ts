@@ -117,4 +117,35 @@ describe('bindAll', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(bindAll).toEqualTypeOf<typeof bindAllLodash>();
   });
+
+  it('should return the same object when object is null', () => {
+    const result = bindAll(null);
+    expect(result).toBe(null);
+  });
+
+  it('should return the same object when object is not an object', () => {
+    const result1 = bindAll('string');
+    expect(result1).toBe('string');
+
+    const result2 = bindAll(123);
+    expect(result2).toBe(123);
+
+    const result3 = bindAll(true);
+    expect(result3).toBe(true);
+
+    const result = bindAll(undefined);
+    expect(result).toBe(undefined);
+  });
+
+  it('should return the same object when no method names are provided', () => {
+    const object = cloneDeep(source);
+    const result = bindAll(object);
+    expect(result).toBe(object);
+  });
+
+  it('should return the same object when empty arrays are provided as method names', () => {
+    const object = cloneDeep(source);
+    const result = bindAll(object, [], []);
+    expect(result).toBe(object);
+  });
 });
