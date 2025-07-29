@@ -41,7 +41,7 @@ export function groupBy<T>(
 export function groupBy<T extends object>(
   collection: T | null | undefined,
   iteratee?: ValueIteratee<T[keyof T]>
-): Record<string, Array<T[keyof T]>>;
+): Partial<Record<string, Array<T[keyof T]>>;
 
 /**
  * Groups the elements of an array or object based on a provided key-generating function.
@@ -58,8 +58,9 @@ export function groupBy<T extends object>(
  *   - If a property name (string) is provided, that property of each element is used as the key.
  *   - If a property-value pair (array) is provided, elements with matching property values are used.
  *   - If a partial object is provided, elements with matching properties are used.
- * @returns {Record<K, T>} An object where each key is associated with an array of elements that
- * share that key.
+ * @returns {Partial<Record<K, T>>} An object where each key is associated with an array of elements that
+ * share that key. If a specific key exists in K but at runtime no array element groups to that specific key,
+ * then that key maps to undefined rather than T[].
  *
  * @example
  * // Using an array
@@ -81,9 +82,9 @@ export function groupBy<T, K extends PropertyKey>(
     | [keyof T, unknown]
     | PropertyKey
     | null
-): Record<K, T[]> {
+): Partial<Record<K, T[]>> {
   if (source == null) {
-    return {} as Record<K, T[]>;
+    return {} as Partial<Record<K, T[]>>;
   }
 
   const items = isArrayLike(source) ? Array.from(source) : Object.values(source);
