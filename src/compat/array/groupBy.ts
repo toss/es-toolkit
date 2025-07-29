@@ -41,7 +41,7 @@ export function groupBy<T>(
 export function groupBy<T extends object>(
   collection: T | null | undefined,
   iteratee?: ValueIteratee<T[keyof T]>
-): Partial<Record<string, Array<T[keyof T]>>;
+): Partial<Record<string, Array<T[keyof T]>>>;
 
 /**
  * Groups the elements of an array or object based on a provided key-generating function.
