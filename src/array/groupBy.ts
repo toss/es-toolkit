@@ -45,7 +45,7 @@ export function groupBy<T, K extends PropertyKey>(
       result[key] = [];
     }
 
-    result[key].push(item);
+    result[key]!.push(item);
   }
 
   return result;
