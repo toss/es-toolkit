@@ -31,7 +31,10 @@
  * //   ]
  * // }
  */
-export function groupBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Partial<Record<K, T[]>> {
+export function groupBy<T, K extends PropertyKey>(
+  arr: readonly T[],
+  getKeyFromItem: (item: T) => K
+): Partial<Record<K, T[]>> {
   const result = {} as Partial<Record<K, T[]>>;
 
   for (let i = 0; i < arr.length; i++) {
