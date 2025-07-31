@@ -27,5 +27,5 @@
  * isPrimitive([1, 2, 3]); // false
  */
 export function isPrimitive(value: unknown): value is null | undefined | string | number | boolean | symbol | bigint {
-  return value == null || (typeof value !== 'object' && typeof value !== 'function');
+  return Object(value) !== value;
 }
