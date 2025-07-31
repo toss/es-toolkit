@@ -119,6 +119,19 @@ describe('cloneDeepWith', () => {
     expect(cloned).toEqual({ a: 1, b: 42, c: 3 });
   });
 
+  it('should allow customizer to replace values with null', () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const customizer = (value: any) => {
+      if (value === 3) {
+        return null;
+      }
+    };
+
+    const cloned = cloneDeepWith(obj, customizer);
+
+    expect(cloned).toEqual({ a: 1, b: 2, c: null });
+  });
+
   it('should allow customizer to handle arrays', () => {
     const arr = [1, 2, 3];
     const customizer = (value: any) => {

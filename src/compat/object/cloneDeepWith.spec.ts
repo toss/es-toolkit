@@ -106,6 +106,11 @@ describe('cloneDeepWith', function () {
     expect(actual).toEqual({ a: { b: 'c' } });
   });
 
+  it(`\`_.${methodName}\` should handle cloning when \`customizer\` returns \`null\``, () => {
+    const actual = func({ a: 1, b: 2 }, (_value, key) => (key === 'b' ? null : undefined));
+    expect(actual).toEqual({ a: 1, b: null });
+  });
+
   Object.entries(uncloneable).forEach(([value, key]) => {
     it(`\`_.${methodName}\` should work with a \`customizer\` callback and ${key}`, () => {
       const customizer = function (value: any) {

@@ -83,7 +83,7 @@ export function cloneDeepWithImpl<T>(
 ): T {
   const cloned = cloneValue?.(valueToClone, keyToClone, objectToClone, stack);
 
-  if (cloned != null) {
+  if (cloned !== undefined) {
     return cloned;
   }
 
