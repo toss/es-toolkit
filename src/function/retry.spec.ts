@@ -111,7 +111,7 @@ describe('retry', () => {
   });
 
   it('should throw fallback error when function rejects with undefined', async () => {
-    const func = vi.fn().mockRejectedValue();
+    const func = vi.fn().mockRejectedValue(undefined);
     await expect(retry(func, { retries: 3, shouldRetry: () => false })).rejects.toThrow(
       'The retry operation was aborted due to shouldRetry returning false.'
     );
