@@ -7,7 +7,7 @@
 ```typescript
 function retry<T>(func: () => Promise<T>): Promise<T>;
 function retry<T>(func: () => Promise<T>, retries: number): Promise<T>;
-function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
+function retry<T, E>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
 ```
 
 ### パラメータ
@@ -16,8 +16,7 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 - `retries`: 再試行する回数。デフォルトは `Number.POSITIVE_INFINITY` で、成功するまで再試行します。
 - `delay`: 再試行の間隔。ミリ秒単位の数値、または現在の試行回数 (`attempts`) を受け取って遅延を動的に決定する関数。デフォルトは `0` です。
 - `signal`: 再試行をキャンセルするための `AbortSignal`。
-
-delay: 再試行の間隔。ミリ秒単位の数値、または現在の試行回数（attempts）を受け取って遅延を動的に決定する関数。デフォルトは 0 です。
+- `shouldRetry`: エラーが発生した場合に再試行するかどうかを判断する関数。`(error: E) => boolean` の形式で、エラーを受け取って `true` を返すと再試行し、`false` を返すと再試行を停止します。デフォルトは `() => true` で、すべてのエラーに対して再試行します。
 
 ### 戻り値
 
@@ -26,6 +25,8 @@ delay: 再試行の間隔。ミリ秒単位の数値、または現在の試行�
 ### エラー
 
 `retries` に達するか、`AbortSignal` によってキャンセルされた場合にエラーが発生します。
+
+また、`shouldRetry` が `false` を返した場合もエラーが発生します。
 
 ## 例
 
@@ -54,4 +55,11 @@ const controller = new AbortController();
 // `AbortSignal` を使用して再試行をキャンセルできます。
 const data5 = await retry(() => fetchData(), { signal: controller.signal });
 console.log(data5);
+
+// ネットワークエラーが発生した場合のみ再試行します
+const data6 = await retry(() => fetchData(), {
+  retries: 3,
+  shouldRetry: error => isNetworkError(error),
+});
+console.log(data6);
 ```
