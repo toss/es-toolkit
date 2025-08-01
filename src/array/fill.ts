@@ -5,10 +5,10 @@
  * start index up to the end index (non-inclusive). If the start or end indices are not provided, it defaults to filling the
  * entire array.
  *
- * @template T, U
- * @param {Array<T | U>} array - The array to fill.
- * @param {U} value - The value to fill the array with.
- * @returns {Array<T | U>} The array with the filled values.
+ * @template T - The type of the value to fill the array with.
+ * @param {unknown[]} array - The array to fill.
+ * @param {T} value - The value to fill the array with.
+ * @returns {T[]} The array with the filled values.
  *
  * @example
  * const array = [1, 2, 3];
@@ -25,6 +25,7 @@
  * // => [1, '*', 3]
  */
 export function fill<T>(array: unknown[], value: T): T[];
+
 /**
  * Fills elements of an array with a specified value from the start position up to the end of the array.
  *
@@ -32,7 +33,8 @@ export function fill<T>(array: unknown[], value: T): T[];
  * start index up to the end index (non-inclusive). If the start or end indices are not provided, it defaults to filling the
  * entire array.
  *
- * @template T, U
+ * @template T - The type of elements in the original array.
+ * @template U - The type of the value to fill the array with.
  * @param {Array<T | U>} array - The array to fill.
  * @param {U} value - The value to fill the array with.
  * @param {number} [start=0] - The start position. Defaults to 0.
@@ -53,6 +55,7 @@ export function fill<T>(array: unknown[], value: T): T[];
  * // => [1, '*', 3]
  */
 export function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
+
 /**
  * Fills elements of an array with a specified value from the start position up to, but not including, the end position.
  *
@@ -60,7 +63,8 @@ export function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<
  * start index up to the end index (non-inclusive). If the start or end indices are not provided, it defaults to filling the
  * entire array.
  *
- * @template T, U
+ * @template T - The type of elements in the original array.
+ * @template U - The type of the value to fill the array with.
  * @param {Array<T | U>} array - The array to fill.
  * @param {U} value - The value to fill the array with.
  * @param {number} [start=0] - The start position. Defaults to 0.
@@ -82,6 +86,7 @@ export function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<
  * // => [1, '*', 3]
  */
 export function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
+
 /**
  * Fills elements of an array with a specified value from the start position up to, but not including, the end position.
  *
@@ -89,7 +94,8 @@ export function fill<T, U>(array: Array<T | U>, value: U, start: number, end: nu
  * start index up to the end index (non-inclusive). If the start or end indices are not provided, it defaults to filling the
  * entire array.
  *
- * @template T, U
+ * @template T - The type of elements in the original array.
+ * @template U - The type of the value to fill the array with.
  * @param {Array<T | U>} array - The array to fill.
  * @param {U} value - The value to fill the array with.
  * @param {number} [start=0] - The start position. Defaults to 0.

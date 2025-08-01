@@ -122,15 +122,11 @@ export function throttle<F extends (...args: any[]) => any>(
   throttleMs = 0,
   options: ThrottleSettings = {}
 ): DebouncedFunc<F> {
-  if (typeof options !== 'object') {
-    options = {};
-  }
-
   const { leading = true, trailing = true } = options;
 
   return debounce(func, throttleMs, {
     leading,
-    trailing,
     maxWait: throttleMs,
+    trailing,
   });
 }

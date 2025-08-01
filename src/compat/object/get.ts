@@ -1,5 +1,5 @@
-import type { Get } from './get.types.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
+import type { GetFieldType } from '../_internal/GetFieldType.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { toKey } from '../_internal/toKey.ts';
@@ -182,25 +182,6 @@ export function get<
   object: TObject | null | undefined,
   path: [TKey1, TKey2, TKey3]
 ): NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3] | undefined;
-
-/**
- * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
- *
- * @template TObject
- * @template TKey1
- * @template TKey2
- * @template TKey3
- * @template TDefault
- * @param {TObject | null | undefined} object - The object to query.
- * @param {[TKey1, TKey2, TKey3]} path - The path of the property to get.
- * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
- * @returns {Exclude<NonNullable<NonNullable<TObject[TKey1]>[TKey2]>[TKey3], undefined> | TDefault} Returns the resolved value.
- *
- * @example
- * const object = { 'a': { 'b': { 'c': 3 } } };
- * get(object, ['a', 'b', 'c'], 'default');
- * // => 3
- */
 
 /**
  * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
@@ -403,7 +384,7 @@ export function get(object: null | undefined, path: PropertyPath): undefined;
  * @template TPath
  * @param {TObject} data - The object to query.
  * @param {TPath} path - The path of the property to get.
- * @returns {string extends TPath ? any : Get<TObject, TPath>} Returns the resolved value.
+ * @returns {string extends TPath ? any : GetFieldType<TObject, TPath>} Returns the resolved value.
  *
  * @example
  * const object = { a: { b: { c: 1 } } };
@@ -413,7 +394,7 @@ export function get(object: null | undefined, path: PropertyPath): undefined;
 export function get<TObject, TPath extends string>(
   data: TObject,
   path: TPath
-): string extends TPath ? any : Get<TObject, TPath>;
+): string extends TPath ? any : GetFieldType<TObject, TPath>;
 
 /**
  * Gets the value at path of object using type-safe path. If the resolved value is undefined, the defaultValue is returned.
@@ -424,18 +405,18 @@ export function get<TObject, TPath extends string>(
  * @param {TObject} data - The object to query.
  * @param {TPath} path - The path of the property to get.
  * @param {TDefault} defaultValue - The value returned if the resolved value is undefined.
- * @returns {Exclude<Get<TObject, TPath>, null | undefined> | TDefault} Returns the resolved value.
+ * @returns {Exclude<GetFieldType<TObject, TPath>, null | undefined> | TDefault} Returns the resolved value.
  *
  * @example
  * const object = { a: { b: { c: 1 } } };
  * get(object, 'a.b.d', 'default');
  * // => 'default'
  */
-export function get<TObject, TPath extends string, TDefault = Get<TObject, TPath>>(
+export function get<TObject, TPath extends string, TDefault = GetFieldType<TObject, TPath>>(
   data: TObject,
   path: TPath,
   defaultValue: TDefault
-): Exclude<Get<TObject, TPath>, null | undefined> | TDefault;
+): Exclude<GetFieldType<TObject, TPath>, null | undefined> | TDefault;
 
 /**
  * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned.

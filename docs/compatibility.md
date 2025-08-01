@@ -5,7 +5,7 @@
 `es-toolkit/compat` functions exactly like all Lodash functions while being lighter and faster.
 
 - It ensures identical behavior with Lodash's actual test code.
-- It is used by well-known open-source libraries like Storybook and Recharts.
+- It has been adopted by popular open-source projects including Storybook, Recharts, and CKEditor, and is recommended by Nuxt.
 
 :::
 

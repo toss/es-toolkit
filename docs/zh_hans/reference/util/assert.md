@@ -27,25 +27,25 @@ function assert(condition: unknown, error: Error): asserts condition;
 ## 示例
 
 ```typescript
-// This call will succeed without any errors
+// 这个调用不会抛出错误
 assert(true, 'This should not throw');
 
-// This call will fail and throw an error with the message 'This should throw'
+// 这个调用会抛出错误，并抛出带有消息 'This should throw' 的错误
 assert(false, 'This should throw');
 
-// Example of using assert with a condition
+// 使用 assert 检查条件
 assert(condition, 'Expected condition is false');
 
-// Ensure that the value is neither null nor undefined
+// 确保值不是 null 或 undefined
 assert(value !== null && value !== undefined, 'Value should not be null or undefined');
 
-// Example of using assert to check if a number is positive
+// 使用 assert 检查数字是否为正
 assert(number > 0, 'Number must be positive');
 
-// Example of using assert with an error
+// 使用 assert 抛出错误
 assert(false, new Error('This should throw'));
 
-// Example of using assert with a custom error
+// 使用 assert 抛出自定义错误
 class CustomError extends Error {
   constructor(message: string) {
     super(message);

@@ -27,7 +27,7 @@ function attemptAsync<T, E>(func: () => Promise<T>): Promise<[null, T] | [E, nul
 ## Examples
 
 ```typescript
-import { attemptAsync } from 'es-toolkit/function';
+import { attemptAsync } from 'es-toolkit/util';
 
 // If the function returns a value without errors, it returns [null, function return value] tuple.
 const [error, data] = await attemptAsync(async () => {

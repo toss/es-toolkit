@@ -46,5 +46,9 @@ export function values(object: any): any[];
  * values(obj); // => [1, 2, 3]
  */
 export function values(object: any): any[] {
+  if (object == null) {
+    return [];
+  }
+
   return Object.values(object);
 }
