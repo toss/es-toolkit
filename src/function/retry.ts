@@ -130,7 +130,7 @@ export async function retry<T, E>(func: () => Promise<T>, _options?: number | Re
     } catch (err) {
       error = err;
 
-      if (!shouldRetry(err as E)) {
+      if (!shouldRetry(error as E)) {
         throw error ?? new Error(`The retry operation was aborted due to shouldRetry returning false.`);
       }
 
