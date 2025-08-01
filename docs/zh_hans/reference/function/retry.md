@@ -7,7 +7,7 @@
 ```typescript
 function retry<T>(func: () => Promise<T>): Promise<T>;
 function retry<T>(func: () => Promise<T>, retries: number): Promise<T>;
-function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
+function retry<T, E>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
 ```
 
 ### 参数
@@ -16,6 +16,7 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 - `retries`: 重试的次数。默认值为 `Number.POSITIVE_INFINITY`，即会一直重试直到成功。
 - `delay`: 每次重试之间的间隔。可以是毫秒数，也可以是一个根据当前重试次数 (`attempts`) 动态计算的函数。默认值为 `0`。
 - `signal`: 一个可以用来取消重试的 `AbortSignal`。
+- `shouldRetry`: 当发生错误时判断是否应该重试的函数。形式为 `(error: E) => boolean`，接收错误并返回 `true` 时进行重试，返回 `false` 时停止重试。默认值为 `() => true`，对所有错误都进行重试。
 
 ### 返回值
 
@@ -23,7 +24,9 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 
 ### 错误
 
-如果重试次数达到 `retries` 则抛出错误
+如果重试次数达到 `retries` 或被 `AbortSignal` 取消，则抛出错误。
+
+另外，如果 `shouldRetry` 返回 `false`，也会抛出错误。
 
 ## 示例
 
@@ -51,4 +54,11 @@ console.log(data4);
 const controller = new AbortController();
 const data5 = await retry(() => fetchData(), { signal: controller.signal });
 console.log(data5);
+
+// 仅在发生网络错误时重试
+const data6 = await retry(() => fetchData(), {
+  retries: 3,
+  shouldRetry: error => isNetworkError(error),
+});
+console.log(data6);
 ```
