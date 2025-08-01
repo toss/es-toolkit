@@ -1,6 +1,6 @@
 import { delay as delayToolkit } from '../promise/delay.ts';
 
-interface RetryOptions {
+interface RetryOptions<E> {
   /**
    * Delay between retries. Can be a static number (milliseconds) or a function
    * that computes delay dynamically based on the current attempt.
@@ -21,6 +21,12 @@ interface RetryOptions {
    * An AbortSignal to cancel the retry operation.
    */
   signal?: AbortSignal;
+
+  /**
+   * A function that determines whether to retry the operation.
+   * @default () => true
+   */
+  shouldRetry?: (error: E) => boolean;
 }
 
 const DEFAULT_DELAY = 0;
@@ -29,7 +35,7 @@ const DEFAULT_RETRIES = Number.POSITIVE_INFINITY;
 /**
  * Retries a function that returns a promise until it resolves successfully.
  *
- * @template T
+ * @template T - The type of the result of the function.
  * @param {() => Promise<T>} func - The function to retry.
  * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
  *
@@ -42,7 +48,7 @@ export async function retry<T>(func: () => Promise<T>): Promise<T>;
 /**
  * Retries a function that returns a promise a specified number of times.
  *
- * @template T
+ * @template T - The type of the result of the function.
  * @param {() => Promise<T>} func - The function to retry. It should return a promise.
  * @param {number} retries - The number of retries to attempt. Default is Infinity.
  * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
@@ -56,12 +62,14 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
 /**
  * Retries a function that returns a promise with specified options.
  *
- * @template T
+ * @template T - The type of the result of the function.
+ * @template E - The type of the error thrown by the function.
  * @param {() => Promise<T>} func - The function to retry. It should return a promise.
- * @param {RetryOptions} options - Options to configure the retry behavior.
+ * @param {RetryOptions<E>} options - Options to configure the retry behavior.
  * @param {number | ((attempts: number) => number)} [options.delay=0] - Delay(milliseconds) between retries.
  * @param {number} [options.retries=Infinity] - The number of retries to attempt.
  * @param {AbortSignal} [options.signal] - An AbortSignal to cancel the retry operation.
+ * @param {(error: E) => boolean} [options.shouldRetry] - A function that determines whether to retry the operation.
  * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
  *
  * @example
@@ -82,29 +90,32 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  *   retries: 5
  * });
  */
-export async function retry<T>(func: () => Promise<T>, options: RetryOptions): Promise<T>;
+export async function retry<T, E>(func: () => Promise<T>, options: RetryOptions<E>): Promise<T>;
 
 /**
  * Retries a function that returns a promise with specified options.
  *
- * @template T
+ * @template T - The type of the value returned by the function.
  * @param {() => Promise<T>} func - The function to retry. It should return a promise.
  * @param {number | RetryOptions} [_options] - Either the number of retries or an options object.
  * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
  */
-export async function retry<T>(func: () => Promise<T>, _options?: number | RetryOptions): Promise<T> {
+export async function retry<T, E>(func: () => Promise<T>, _options?: number | RetryOptions<E>): Promise<T> {
   let delay: number | ((attempts: number) => number);
   let retries: number;
   let signal: AbortSignal | undefined;
+  let shouldRetry: (error: E) => boolean;
 
   if (typeof _options === 'number') {
     delay = DEFAULT_DELAY;
     retries = _options;
     signal = undefined;
+    shouldRetry = () => true;
   } else {
     delay = _options?.delay ?? DEFAULT_DELAY;
     retries = _options?.retries ?? DEFAULT_RETRIES;
     signal = _options?.signal;
+    shouldRetry = _options?.shouldRetry ?? (() => true);
   }
 
   let error;
@@ -118,6 +129,10 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
       return await func();
     } catch (err) {
       error = err;
+
+      if (!shouldRetry(err)) {
+        throw error ?? new Error(`The retry operation was aborted due to shouldRetry returning false.`);
+      }
 
       const currentDelay = typeof delay === 'function' ? delay(attempts) : delay;
       await delayToolkit(currentDelay);
