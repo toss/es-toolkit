@@ -75,4 +75,46 @@ describe('retry', () => {
     );
     expect(func).toHaveBeenCalledTimes(0);
   });
+
+  it('should stop retry operation when shouldRetry returns false even if retries remain', async () => {
+    const func = vi.fn().mockRejectedValue(new Error('failure'));
+    const shouldRetry = vi.fn((error: unknown) => {
+      if (error instanceof Error && error.message === 'failure') {
+        return false;
+      }
+      return true;
+    });
+
+    await expect(retry(func, { retries: 5, shouldRetry })).rejects.toThrow('failure');
+    expect(func).toHaveBeenCalledTimes(1);
+    expect(shouldRetry).toHaveBeenCalledWith(new Error('failure'));
+  });
+
+  it('should continue retrying when shouldRetry returns true', async () => {
+    const func = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('temporary failure'))
+      .mockRejectedValueOnce(new Error('temporary failure'))
+      .mockResolvedValue('success');
+
+    const shouldRetry = vi.fn((error: unknown) => {
+      if (error instanceof Error && error.message === 'temporary failure') {
+        return true;
+      }
+      return false;
+    });
+
+    const result = await retry(func, { retries: 5, shouldRetry });
+    expect(result).toBe('success');
+    expect(func).toHaveBeenCalledTimes(3);
+    expect(shouldRetry).toHaveBeenCalledTimes(2);
+  });
+
+  it('should throw fallback error when function rejects with undefined', async () => {
+    const func = vi.fn().mockRejectedValue();
+    await expect(retry(func, { retries: 3, shouldRetry: () => false })).rejects.toThrow(
+      'The retry operation was aborted due to shouldRetry returning false.'
+    );
+    expect(func).toHaveBeenCalledTimes(1);
+  });
 });
