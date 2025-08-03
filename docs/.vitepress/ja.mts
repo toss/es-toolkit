@@ -126,11 +126,6 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'predicate'),
         },
         {
-          text: 'Promise',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'promise'),
-        },
-        {
           text: '文字列',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'string'),

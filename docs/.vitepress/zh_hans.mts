@@ -127,11 +127,6 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'predicate'),
         },
         {
-          text: 'Promise 工具',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'promise'),
-        },
-        {
           text: '字符串工具',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'string'),

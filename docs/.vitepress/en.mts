@@ -127,11 +127,6 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'reference', 'compat', 'predicate'),
         },
         {
-          text: 'Promise Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'compat', 'promise'),
-        },
-        {
           text: 'String Utilities',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'reference', 'compat', 'string'),

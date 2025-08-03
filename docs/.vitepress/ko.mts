@@ -126,11 +126,6 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'predicate'),
         },
         {
-          text: 'Promise',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'promise'),
-        },
-        {
           text: '문자열',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'string'),
