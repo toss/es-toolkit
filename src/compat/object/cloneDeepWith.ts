@@ -81,7 +81,7 @@ export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>
   return cloneDeepWithToolkit(obj, (value, key, object, stack) => {
     const cloned = customizer?.(value, key as any, object, stack);
 
-    if (cloned != null) {
+    if (cloned !== undefined) {
       return cloned;
     }
 
