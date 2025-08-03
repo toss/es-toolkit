@@ -133,7 +133,7 @@ describe('sortBy', () => {
   });
 
   it('should work with `_.property` shorthands', () => {
-    expect(sortBy(Object.assign({}, objects, { undefined }), 'b').map(object => object?.b)).toEqual([
+    expect(sortBy(Object.assign({}, objects, { undefined }), 'b').map(object => object && object.b)).toEqual([
       1,
       2,
       3,

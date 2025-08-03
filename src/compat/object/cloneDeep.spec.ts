@@ -39,8 +39,13 @@ describe('cloneDeep', () => {
   });
 
   class Foo {
-    a = 1;
-    b = 1;
+    a: number;
+    b: number;
+
+    constructor() {
+      this.a = 1;
+      this.b = 1;
+    }
 
     static c = function () {};
   }
