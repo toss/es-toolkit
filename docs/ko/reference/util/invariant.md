@@ -1,18 +1,18 @@
 # invariant
 
-주어진 조건이 참임을 단언해요. 조건이 거짓이면 제공된 메시지와 함께 오류를 던져요.
+주어진 조건이 참임을 단언해요. 조건이 거짓이면 제공된 메시지나 오류 함수와 함께 오류를 던져요.
 
 ## 인터페이스
 
 ```typescript
 function invariant(condition: unknown, message: string): asserts condition;
-function invariant(condition: unknown, error: Error): asserts condition;
+function invariant(condition: unknown, error: () => Error): asserts condition;
 ```
 
 ### 파라미터
 
 - `condition` (`unknown`): 평가할 조건.
-- `message` (`string` | `Error`): 조건이 거짓일 때 발생할 오류 메시지.
+- `message` (`string` | `() => Error`): 조건이 거짓일 때 발생할 오류 메시지나 오류 함수.
 
 ### 반환 값
 
@@ -40,14 +40,14 @@ invariant(value !== null && value !== undefined, 'Value should not be null or un
 // Example of using invariant to check if a number is positive
 invariant(number > 0, 'Number must be positive');
 
-// Example of using invariant with an error
-invariant(false, new Error('This should throw'));
+// Example of using invariant with an error function
+invariant(false, () => new Error('This should throw'));
 
-// Example of using invariant with a custom error
+// Example of using invariant with a custom error function
 class CustomError extends Error {
   constructor(message: string) {
     super(message);
   }
 }
-invariant(false, new CustomError('This should throw'));
+invariant(false, () => new CustomError('This should throw'));
 ```

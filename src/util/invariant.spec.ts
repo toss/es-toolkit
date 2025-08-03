@@ -41,17 +41,17 @@ describe('invariant', () => {
     expectTypeOf(value).toEqualTypeOf<string>();
   });
 
-  it('should throw an error when the condition is false and the message is an error', () => {
-    expect(() => invariant(false, new Error('This should throw'))).toThrow('This should throw');
+  it('should throw an error when the condition is false and the message is an error function', () => {
+    expect(() => invariant(false, () => new Error('This should throw'))).toThrow('This should throw');
   });
 
-  it('should throw a custom error when the condition is false and the message is an error', () => {
+  it('should throw a custom error when the condition is false and the message is a custom error function', () => {
     class CustomError extends Error {
       constructor(message: string) {
         super(message);
       }
     }
 
-    expect(() => invariant(false, new CustomError('This should throw'))).toThrow(CustomError);
+    expect(() => invariant(false, () => new CustomError('This should throw'))).toThrow(CustomError);
   });
 });

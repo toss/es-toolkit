@@ -1,18 +1,18 @@
 # invariant
 
-断言给定条件为真。如果条件为假，则抛出提供的错误信息。
+断言给定条件为真。如果条件为假，则抛出提供的错误信息或错误函数。
 
 ## 签名
 
 ```typescript
 function invariant(condition: unknown, message: string): asserts condition;
-function invariant(condition: unknown, error: Error): asserts condition;
+function invariant(condition: unknown, error: () => Error): asserts condition;
 ```
 
 ### 参数
 
 - `condition` (`unknown`): 要评估的条件。
-- `message` (`string` | `Error`): 如果条件为假，则抛出的错误信息。
+- `message` (`string` | `() => Error`): 如果条件为假，则抛出的错误信息或错误函数。
 
 ### 返回值
 
@@ -40,14 +40,14 @@ invariant(value !== null && value !== undefined, 'Value should not be null or un
 // 使用 invariant 检查数字是否为正
 invariant(number > 0, 'Number must be positive');
 
-// 使用 invariant 抛出错误
-invariant(false, new Error('This should throw'));
+// 使用 invariant 抛出错误函数
+invariant(false, () => new Error('This should throw'));
 
-// 使用 invariant 抛出自定义错误
+// 使用 invariant 抛出自定义错误函数
 class CustomError extends Error {
   constructor(message: string) {
     super(message);
   }
 }
-invariant(false, new CustomError('This should throw'));
+invariant(false, () => new CustomError('This should throw'));
 ```
