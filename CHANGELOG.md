@@ -1,5 +1,21 @@
 # es-toolkit Changelog
 
+## Version v1.39.8
+
+Released on July 25th, 2025.
+
+- Aligned the types of `fill`, `pullAll`, `pullAllBy`, `pullAllWith`, `pullAt`, `remove`, and `reverse` in our compatibility library with the latest Lodash types (`@types/lodash` v4.17.20).
+
+## Version v1.39.7
+
+Released on July 9th, 2025.
+
+- Fixed a compatibility issue with Lodash's `debounce` and `throttle` functions.
+- Remove useless source map for reduce bundle size.
+- Fix some of the documentation issues.
+
+We sincerely thank @dayongkr, @cobocho, @raon0211, and @D-Sketon for their contributions. We appreciate your great efforts!
+
 ## Version v1.39.6
 
 Released on July 2th, 2025.
