@@ -309,7 +309,7 @@ function mergeWithDeep(
 
     const merged = merge(targetValue, sourceValue, key, target, source, stack);
 
-    if (merged != null) {
+    if (merged !== undefined) {
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
