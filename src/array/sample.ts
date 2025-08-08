@@ -12,7 +12,7 @@
  * const randomElement = sample(array);
  * // randomElement will be one of the elements from the array, selected randomly.
  */
-export function sample<T>(arr: readonly T[]): T {
+export function sample<T>(arr: readonly T[]): T | undefined {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 }
