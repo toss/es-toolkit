@@ -16,6 +16,10 @@ describe('omit', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };
   const nested = { a: 1, b: { c: 2, d: 3 } };
 
+  it('should avoid deep cloning if not omitting deep properties', () => {
+    expect(omit(nested, 'a').b).toBe(nested.b);
+  });
+
   it('should flatten `paths`', () => {
     expect(omit(object, 'a', 'c')).toEqual({ b: 2, d: 4 });
     expect(omit(object, ['a', 'd'], 'c')).toEqual({ b: 2 });

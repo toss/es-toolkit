@@ -1,6 +1,11 @@
+import { cloneDeepWith } from './cloneDeepWith.ts';
+import { keysIn } from './keysIn.ts';
 import { unset } from './unset.ts';
-import { cloneDeep } from '../../object/cloneDeep.ts';
+import { getSymbolsIn } from '../_internal/getSymbolsIn.ts';
+import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { Many } from '../_internal/Many.ts';
+import { flatten } from '../array/flatten.ts';
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
  * Creates a new object with specified keys omitted.
@@ -72,15 +77,23 @@ export function omit<T extends object>(object: T | null | undefined, ...paths: A
  * omit({ a: { b: 1, c: 2 }, d: 3 }, 'a.b', 'd');
  * // => { a: { c: 2 } }
  */
-export function omit<T extends object>(
-  obj: T | null | undefined,
-  ...keysArr: Array<Many<PropertyKey>> | Array<Many<PropertyKey[]>>
-): Partial<T> {
+export function omit<T extends object>(obj: T | null | undefined, ...keysArr: Array<Many<PropertyKey>>): Partial<T> {
   if (obj == null) {
     return {};
   }
 
-  const result = cloneDeep(obj);
+  keysArr = flatten(keysArr);
+  const isDeep = keysArr.some(key => Array.isArray(key) || isDeepKey(key as PropertyKey));
+  const copyKeys = [...keysIn(obj), ...getSymbolsIn(obj)] as Array<keyof T>;
+  const result = {} as Partial<T>;
+  for (let i = 0; i < copyKeys.length; i++) {
+    const key = copyKeys[i];
+    if (isDeep) {
+      result[key] = cloneDeepWith(obj[key], i => (isPlainObject(i) ? undefined : i));
+    } else {
+      result[key] = obj[key];
+    }
+  }
 
   for (let i = 0; i < keysArr.length; i++) {
     let keys = keysArr[i];
