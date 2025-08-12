@@ -73,8 +73,8 @@ export function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T> {
       const key = keys[i];
 
       const snakeKey = snakeCase(key) as keyof typeof result;
-      const snakeCaseKeys = toSnakeCaseKeys((obj as Record<PropertyKey, any>)[key]);
-      result[snakeKey] = snakeCaseKeys as ToSnakeCaseKeys<T>[keyof ToSnakeCaseKeys<T>];
+      const convertedValue = toSnakeCaseKeys((obj as Record<PropertyKey, any>)[key]);
+      result[snakeKey] = convertedValue as ToSnakeCaseKeys<T>[keyof ToSnakeCaseKeys<T>];
     }
 
     return result;
