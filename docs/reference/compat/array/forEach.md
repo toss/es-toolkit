@@ -19,7 +19,7 @@ function forEach<T extends object>(object: T, callback: (value: T[keyof T], key:
 ### Parameters
 
 - `object` (`T`): The object to iterate over.
-- `callback` (`(value: T[keyof T], key: T, object: T)`): The function invoked per iteration.
+- `callback` (`(value: T[keyof T], key: keyof T, object: T)`): The function invoked per iteration.
   - `value`: The current property being processed in the object.
   - `index`: The key of the current property being processed in the object.
   - `object`: The object `forEach` was called upon.
