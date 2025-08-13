@@ -43,5 +43,5 @@ each(array, value => {
   result.push(value);
 });
 
-console.log(result); // Output: [3, 2, 1];
+console.log(result); // Output: [1, 2, 3];
 ```
