@@ -33,7 +33,7 @@ function each<T extends object>(object: T, callback: (value: T[keyof T], key: ke
 ## 예시
 
 ```ts
-import { each } from 'es-toolkit/array';
+import { each } from 'es-toolkit/compat';
 
 const array = [1, 2, 3];
 const result: number[] = [];
