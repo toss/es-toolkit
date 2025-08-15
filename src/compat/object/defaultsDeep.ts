@@ -1,3 +1,4 @@
+import { isObject } from '../compat.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
@@ -34,16 +35,11 @@ export function defaultsDeep(target: any, ...sources: any[]): any {
   return target;
 }
 
-function defaultsDeepRecursive(
-  target: Record<string, any>,
-  source: Record<string, any>,
-  stack: WeakMap<any, any>
-): void {
+function defaultsDeepRecursive(target: any, source: any, stack: WeakMap<any, any>): void {
   for (const key in source) {
     const sourceValue = source[key];
     const targetValue = target[key];
     const targetHasKey = Object.hasOwn(target, key);
-
     if (!targetHasKey || targetValue === undefined) {
       if (stack.has(sourceValue)) {
         target[key] = stack.get(sourceValue);
@@ -55,11 +51,26 @@ function defaultsDeepRecursive(
       } else {
         target[key] = sourceValue;
       }
-    } else if (isPlainObject(targetValue) && isPlainObject(sourceValue)) {
+    } else {
       const inStack = stack.has(sourceValue);
       if (!inStack || (inStack && stack.get(sourceValue) !== targetValue)) {
-        stack.set(sourceValue, targetValue);
-        defaultsDeepRecursive(targetValue, sourceValue, stack);
+        if (isPlainObject(targetValue) && isPlainObject(sourceValue)) {
+          stack.set(sourceValue, targetValue);
+          defaultsDeepRecursive(targetValue, sourceValue, stack);
+        } else if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+          stack.set(sourceValue, targetValue);
+          const targetLength = targetValue.length;
+          const sourceLength = sourceValue.length;
+          const leastLength = Math.min(sourceLength, targetLength);
+          for (let i = 0; i < leastLength; i++) {
+            if (isObject(targetValue) && isObject(sourceValue)) {
+              defaultsDeepRecursive(targetValue[i], sourceValue[i], stack);
+            }
+          }
+          if (sourceLength > targetLength) {
+            targetValue.push(...sourceValue.slice(targetLength));
+          }
+        }
       }
     }
   }
