@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { pascalCase } from './pascalCase';
 
-describe('PascalCase', () => {
+describe('pascalCase', () => {
   it('should change space to pascal case', () => {
     expect(pascalCase('some whitespace')).toEqual('SomeWhitespace');
   });

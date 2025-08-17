@@ -19,7 +19,9 @@ function lowerFirst(str: string): string;
 ## 例
 
 ```typescript
-const convertedStr1 = lowerCase('fred'); // returns 'fred'
-const convertedStr2 = lowerCase('Fred'); // returns 'fred'
-const convertedStr3 = lowerCase('FRED'); // returns 'fRED'
+import { lowerFirst } from 'es-toolkit/string';
+
+lowerFirst('fred'); // 'fred' を返します
+lowerFirst('Fred'); // 'fred' を返します
+lowerFirst('FRED'); // 'fRED' を返します
 ```
