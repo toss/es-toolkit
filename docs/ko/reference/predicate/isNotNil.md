@@ -18,7 +18,7 @@ function isNotNil<T>(x: T | null | undefined): x is T;
 
 ### 반환 값
 
-(`x is T`): 값이 `null`이나 `undefined`가 아니면 `true`, 맞으면 `false`.
+(`x is T`): 값이 `null`이나 `undefined`가 아니면 `true`, 그렇지 않으면 `false`를 반환해요.
 
 ## 예시
 
