@@ -13,7 +13,7 @@ The iteration stops if the `callback` function returns `false`.
 ## Signature
 
 ```ts
-function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => unknown): T;
 ```
 
 ### Parameters
