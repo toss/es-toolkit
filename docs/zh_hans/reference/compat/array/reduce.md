@@ -49,13 +49,13 @@ function reduce<T extends object>(
 
 ### 参数
 
-- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T>`): 要迭代的集合。
-- `iteratee` (`(accumulator: U, value: T, index, collection) => any)`): 每次迭代时调用的函数。
-- `initialValue` (`U`): 初始值。
+- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): 要迭代的集合。
+- `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 每次迭代时调用的函数。
+- `initialValue` (`U`, 可选): 初始值。
 
 ### 返回值
 
-(`any`): 返回累积值。
+(`U`): 返回累积值。 如果未提供 `initialValue`，则返回集合的元素类型（`T`）。
 
 ## 示例
 
