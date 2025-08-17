@@ -23,7 +23,7 @@ function each<T extends object>(object: T, callback: (value: T[keyof T], key: ke
 - `object` (`T`): 走査するオブジェクト。配列、文字列、またはオブジェクトである可能性があります。
 - `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 各反復で呼び出される関数。
   - `value`: 配列で現在処理中の要素。
-  - `index`: 配列で現在処理中の要素のプロパティ名。
+  - `key`: 配列で現在処理中の要素のプロパティ名。
   - `object`: `each` 関数が呼び出されたオブジェクト。
 
 ### 戻り値

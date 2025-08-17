@@ -18,7 +18,7 @@ function isFunction(value: unknown): value is (...args: never[]) => unknown;
 
 ### 戻り値
 
-(`value is number`): 与えられた値が関数であれば`true`、そうでなければ`false`を返します。
+(`value is (...args: never[]) => unknown`): 与えられた値が関数であれば`true`、そうでなければ`false`を返します。
 
 ## 例
 

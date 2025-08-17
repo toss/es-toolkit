@@ -22,7 +22,7 @@ function isInteger(value?: unknown): value is number;
 
 ### 戻り値
 
-(`boolean`): `value`が整数の場合は`true`、それ以外の場合は`false`です。
+(`value is number`): `value`が整数の場合は`true`、それ以外の場合は`false`です。
 
 ## 例
 
