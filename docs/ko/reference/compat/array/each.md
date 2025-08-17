@@ -21,9 +21,9 @@ function each<T extends object>(object: T, callback: (value: T[keyof T], key: ke
 ### 파라미터
 
 - `object` (`T`): 순회할 객체. 배열, 문자열, 또는 객체일 수 있어요.
-- `callback` (`(value: T[keyof T], key: T, object: T)`): 각 반복마다 호출될 함수.
+- `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 각 반복마다 호출될 함수.
   - `value`: 배열에서 처리 중인 현재 요소.
-  - `index`: 배열에서 처리 중인 현재 요소의 프로퍼티 이름.
+  - `key`: 배열에서 처리 중인 현재 요소의 프로퍼티 이름.
   - `object`: `each` 함수가 호출된 객체.
 
 ### 반환 값
