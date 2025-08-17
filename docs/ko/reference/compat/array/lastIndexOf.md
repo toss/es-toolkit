@@ -41,6 +41,6 @@ lodash와 완전히 호환되도록 `lastIndexOf` 함수는 `array`를 다음과
 
 ```typescript
 const array = [1, 2, 3, NaN, 1];
-lastIndexOf(array, 3); // => 4
+lastIndexOf(array, 1); // => 4
 lastIndexOf(array, NaN); // => 3
 ```
