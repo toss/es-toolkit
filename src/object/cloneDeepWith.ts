@@ -83,7 +83,7 @@ export function cloneDeepWithImpl<T>(
 ): T {
   const cloned = cloneValue?.(valueToClone, keyToClone, objectToClone, stack);
 
-  if (cloned != null) {
+  if (cloned !== undefined) {
     return cloned;
   }
 
@@ -199,7 +199,8 @@ export function cloneDeepWithImpl<T>(
     return result as T;
   }
 
-  if (valueToClone instanceof Blob) {
+  // For environments that don't support Blob, like mini-programs
+  if (typeof Blob !== 'undefined' && valueToClone instanceof Blob) {
     const result = new Blob([valueToClone], { type: valueToClone.type });
     stack.set(valueToClone, result);
 

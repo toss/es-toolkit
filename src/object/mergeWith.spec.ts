@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { cloneDeep } from './cloneDeep';
 import { mergeWith } from './mergeWith';
 
 describe('mergeWith', () => {
@@ -59,5 +60,20 @@ describe('mergeWith', () => {
     });
 
     expect(result2).toEqual({ a: { c: [1, 3] }, b: [2, 4] });
+  });
+
+  it('should respect `null` returned from `customizer`', () => {
+    const obj = { prop: null };
+    const source = { prop: { foo: 'bar' } };
+
+    expect(
+      mergeWith(cloneDeep(obj), cloneDeep(source), targetValue => {
+        if (targetValue === null) {
+          return null;
+        }
+
+        return undefined;
+      })
+    ).toEqual({ prop: null });
   });
 });

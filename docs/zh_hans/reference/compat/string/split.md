@@ -24,7 +24,7 @@ function split(string: string, separator: RegExp | string, limit: number): strin
 
 ## 返回值
 
-- (`Array`): 返回分割后的字符串片段数组。
+- (`string[]`): 返回分割后的字符串片段数组。
 
 ## 示例
 

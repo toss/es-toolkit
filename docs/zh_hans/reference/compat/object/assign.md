@@ -6,9 +6,9 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-将 `source` 对象的属性值分配给 `object`。
+将多个 `source` 对象的属性分配给 `object` 对象。
 
-在 `source` 和 `object` 中具有相同值的属性将不会被覆盖。
+如果 `source` 对象中的属性与 `object` 对象中对应属性的值相等，则不会被覆盖。
 
 ## 签名
 
