@@ -24,7 +24,7 @@ function split(string: string, separator: RegExp | string, limit: number): strin
 
 ## Returns
 
-- (`Array`): Returns the string segments.
+- (`string[]`): Returns the string segments.
 
 ## Examples
 
