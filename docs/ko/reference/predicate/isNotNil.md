@@ -14,11 +14,11 @@ function isNotNil<T>(x: T | null | undefined): x is T;
 
 ### 파라미터
 
-- `x` (`T | null | undefined`): 값null이나 undefined가 아님을 확인할 값.
+- `x` (`T | null | undefined`): `null`이나 `undefined`가 아님을 확인할 값.
 
 ### 반환 값
 
-(`x is T`): 값이 null이나 undefined가 아니면 true. 맞으면 false.
+(`x is T`): 값이 `null`이나 `undefined`가 아니면 `true`, 맞으면 `false`.
 
 ## 예시
 
