@@ -13,6 +13,14 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 function isNil(x: unknown): x is null | undefined;
 ```
 
+### Parameters
+
+- `x` (`unknown`): The value to test if it is `null` or `undefined`.
+
+### Returns
+
+(`x is null | undefined`): Returns `true` if the value is `null` or `undefined`, otherwise `false`.
+
 ## Examples
 
 ```typescript
