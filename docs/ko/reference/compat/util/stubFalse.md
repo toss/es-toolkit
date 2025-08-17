@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-function stubFalse(): boolean;
+function stubFalse(): false;
 ```
 
 ### 반환 값
 
-(`boolean`): `false`.
+(`false`): 항상 `false`를 반환합니다.
 
 ## 예시
 
