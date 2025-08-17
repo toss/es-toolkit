@@ -21,7 +21,7 @@ function cond(pairs: any[][]): (...args: any[]) => unknown;
 
 ### 파라미터
 
-- `pairs` (`Array`): 조건을 검사하는 함수와 실행할 함수의 쌍.
+- `pairs` (`any[][]`): 조건을 검사하는 함수와 실행할 함수의 쌍.
 
 ### 반환 값
 

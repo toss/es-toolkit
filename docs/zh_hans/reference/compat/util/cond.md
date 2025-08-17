@@ -21,7 +21,7 @@ function cond(pairs: any[][]): (...args: any[]) => unknown;
 
 ### 参数
 
-- `pairs` (`Array`): 成对数组。每对包含一个断言函数和一个要运行的函数。
+- `pairs` (`any[][]`): 成对数组。每对包含一个断言函数和一个要运行的函数。
 
 ### 返回值
 

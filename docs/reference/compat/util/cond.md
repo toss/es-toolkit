@@ -21,7 +21,7 @@ function cond(pairs: any[][]): (...args: any[]) => unknown;
 
 ### Parameters
 
-- `pairs` (`Array`): Array of pairs. Each pair consists of a predicate function and a function to run.
+- `pairs` (`any[][]`): Array of pairs. Each pair consists of a predicate function and a function to run.
 
 ### Returns
 
