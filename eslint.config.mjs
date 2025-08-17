@@ -40,7 +40,7 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ['**/*.spec.ts*', '**/*.test.ts*', '**/*.test-d.ts*'],
+    files: ['**/*.spec.ts*'],
     plugins: { vitest },
     rules: {
       ...vitest.configs.recommended.rules,
