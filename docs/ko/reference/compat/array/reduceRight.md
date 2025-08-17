@@ -51,7 +51,7 @@ function reduceRight<T extends object>(
 
 - `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): 반복할 컬렉션.
 - `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 반복할 때 호출되는 함수.
-- `initialValue` (`any`, 선택 사항): 초기 값.
+- `initialValue` (`U`, 선택 사항): 초기 값.
 
 ### 반환 값
 
