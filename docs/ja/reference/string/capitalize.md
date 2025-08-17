@@ -14,7 +14,7 @@ function capitalize<T extends string>(str: T): Capitalize<T>;
 
 ### 戻り値
 
-(`Capitalize<string>`): 大文字に変換された文字列。
+(`Capitalize<T>`): 大文字に変換された文字列。
 
 ## 例
 

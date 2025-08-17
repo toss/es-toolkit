@@ -14,7 +14,7 @@ function capitalize<T extends string>(str: T): Capitalize<T>;
 
 ### Returns
 
-(`Capitalize<string>`): The capitalized string.
+(`Capitalize<T>`): The capitalized string.
 
 ## Examples
 
