@@ -58,7 +58,7 @@ function extendWith(object: any, ...sources: any[]): any;
 
 ```typescript
 const target = { a: 1 };
-const result = assignInWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+const result = extendWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
   return objValue === undefined ? srcValue : objValue;
 });
 console.log(result); // Output: { a: 1, b: 2, c: 3 }
