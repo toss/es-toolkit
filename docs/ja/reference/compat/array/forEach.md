@@ -40,5 +40,5 @@ forEach(array, value => {
   result.push(value);
 });
 
-console.log(result); // 出力: [3, 2, 1];
+console.log(result); // 出力: [1, 2, 3];
 ```
