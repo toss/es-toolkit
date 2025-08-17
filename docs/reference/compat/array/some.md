@@ -120,7 +120,7 @@ import { some } from 'es-toolkit/compat';
 
 // Using a predicate function
 let obj = { a: 1, b: 2, c: 3 };
-let result = some(object, value => value > 2);
+let result = some(obj, value => value > 2);
 console.log(result); // true
 
 // Using a partial value
