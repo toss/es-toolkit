@@ -22,6 +22,10 @@ function range(start: number, end: number, step: number): number[];
 
 - (`number[]`): An array of numbers from `start` to `end` with the specified `step`.
 
+### Throws
+
+- Throws an error if `step` is 0.
+
 ## Examples
 
 ```typescript
