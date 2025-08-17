@@ -16,7 +16,7 @@ function isString(value: unknown): value is string;
 
 ### 반환 값
 
-(`x is string`): 값이 문자열이면 `true`, 아니면 `false`.
+(`value is string`): 값이 문자열이면 `true`, 아니면 `false`.
 
 ## 예시
 
