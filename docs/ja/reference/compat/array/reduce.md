@@ -49,13 +49,13 @@ function reduce<T extends object>(
 
 ### パラメータ
 
-- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T>`): 反復処理を行うコレクション。
-- `iteratee` (`(accumulator: U, value: T, index, collection) => any)`): 反復ごとに呼び出される関数。
-- `initialValue` (`U`): 初期値。
+- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): 反復処理を行うコレクション。
+- `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 反復ごとに呼び出される関数。
+- `initialValue` (`U`, オプション): 初期値。
 
 ### 戻り値
 
-(`any`): 蓄積された値。
+(`U`): 蓄積された値。 `initialValue` が指定されていない場合は、コレクションの要素型（`T`）が返されます。
 
 ## 例
 
