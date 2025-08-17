@@ -1,5 +1,14 @@
 # es-toolkit Changelog
 
+## Version v1.39.10
+
+Released on August 17th, 2025.
+
+- Fixed `defaultsDeep` to properly handle deep merging of objects in arrays
+- Fixed several documentation issues and examples across multiple functions
+
+We sincerely thank @wo-o29, @thwlckd, @kilimandzharov, and @dayongkr for their contributions. We appreciate your great efforts!
+
 ## Version v1.39.9
 
 Released on August 10th, 2025.
