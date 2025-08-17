@@ -224,6 +224,24 @@ describe('defaultsDeep', () => {
     });
   });
 
+  it('should work with objects in arrays', () => {
+    const target = { a: [{ foo: 1 }] };
+    const source = { a: [{ bar: 2 }] };
+
+    const expected = { a: [{ foo: 1, bar: 2 }] };
+
+    expect(defaultsDeep(target, source)).toEqual(expected);
+  });
+
+  it('should append additional elements from the source array to the target array if the source array is longer than the target array', () => {
+    const target = { a: [{ foo: 1 }] };
+    const source = { a: [{ foo: 2 }, { some: 'hello' }] };
+
+    const expected = { a: [{ foo: 1 }, { some: 'hello' }] };
+
+    expect(defaultsDeep(target, source)).toEqual(expected);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(defaultsDeep).toEqualTypeOf<typeof defaultsDeepLodash>();
   });
