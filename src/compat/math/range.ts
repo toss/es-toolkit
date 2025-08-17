@@ -64,10 +64,6 @@ export function range(start: number, end?: PropertyKey, step?: any): number[] {
   }
   step = step === undefined ? (start < end ? 1 : -1) : toFinite(step);
 
-  if (step === 0) {
-    throw new Error('The step value must be a non-zero integer.');
-  }
-
   const length = Math.max(Math.ceil((end - start) / (step || 1)), 0);
   const result = new Array(length);
   for (let index = 0; index < length; index++) {
