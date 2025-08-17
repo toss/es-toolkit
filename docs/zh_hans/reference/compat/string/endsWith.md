@@ -14,7 +14,7 @@
 ## 签名
 
 ```typescript
-function endsWith(str: string, target: string, position: number = 0): string;
+function endsWith(str: string, target: string, position: number = 0): boolean;
 ```
 
 ### 参数
