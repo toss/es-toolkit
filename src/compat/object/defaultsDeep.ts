@@ -1,4 +1,3 @@
-import { isObject } from '../compat.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
@@ -27,8 +26,7 @@ export function defaultsDeep(target: any, ...sources: any[]): any {
   for (let i = 0; i < sources.length; i++) {
     const source = sources[i];
     if (source != null) {
-      const stack = new WeakMap();
-      defaultsDeepRecursive(target, source, stack);
+      defaultsDeepRecursive(target, source, new WeakMap());
     }
   }
 
@@ -39,39 +37,58 @@ function defaultsDeepRecursive(target: any, source: any, stack: WeakMap<any, any
   for (const key in source) {
     const sourceValue = source[key];
     const targetValue = target[key];
-    const targetHasKey = Object.hasOwn(target, key);
-    if (!targetHasKey || targetValue === undefined) {
-      if (stack.has(sourceValue)) {
-        target[key] = stack.get(sourceValue);
-      } else if (isPlainObject(sourceValue)) {
-        const newObj = {};
-        stack.set(sourceValue, newObj);
-        target[key] = newObj;
-        defaultsDeepRecursive(newObj, sourceValue, stack);
-      } else {
-        target[key] = sourceValue;
-      }
-    } else {
-      const inStack = stack.has(sourceValue);
-      if (!inStack || (inStack && stack.get(sourceValue) !== targetValue)) {
-        if (isPlainObject(targetValue) && isPlainObject(sourceValue)) {
-          stack.set(sourceValue, targetValue);
-          defaultsDeepRecursive(targetValue, sourceValue, stack);
-        } else if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
-          stack.set(sourceValue, targetValue);
-          const targetLength = targetValue.length;
-          const sourceLength = sourceValue.length;
-          const leastLength = Math.min(sourceLength, targetLength);
-          for (let i = 0; i < leastLength; i++) {
-            if (isObject(targetValue) && isObject(sourceValue)) {
-              defaultsDeepRecursive(targetValue[i], sourceValue[i], stack);
-            }
-          }
-          if (sourceLength > targetLength) {
-            targetValue.push(...sourceValue.slice(targetLength));
-          }
-        }
-      }
+
+    if (targetValue === undefined || !Object.hasOwn(target, key)) {
+      target[key] = handleMissingProperty(sourceValue, stack);
+      continue;
     }
+
+    if (stack.get(sourceValue) === targetValue) {
+      // skipping circular reference
+      continue;
+    }
+
+    handleExistingProperty(targetValue, sourceValue, stack);
+  }
+}
+
+function handleMissingProperty(sourceValue: any, stack: WeakMap<any, any>): any {
+  if (stack.has(sourceValue)) {
+    return stack.get(sourceValue);
+  }
+
+  if (isPlainObject(sourceValue)) {
+    const newObj = {};
+    stack.set(sourceValue, newObj);
+    defaultsDeepRecursive(newObj, sourceValue, stack);
+    return newObj;
+  }
+
+  return sourceValue;
+}
+
+function handleExistingProperty(targetValue: any, sourceValue: any, stack: WeakMap<any, any>): void {
+  if (isPlainObject(targetValue) && isPlainObject(sourceValue)) {
+    stack.set(sourceValue, targetValue);
+    defaultsDeepRecursive(targetValue, sourceValue, stack);
+    return;
+  }
+
+  if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+    stack.set(sourceValue, targetValue);
+    mergeArrays(targetValue, sourceValue, stack);
+  }
+}
+
+function mergeArrays(targetArray: any[], sourceArray: any[], stack: WeakMap<any, any>): void {
+  const minLength = Math.min(sourceArray.length, targetArray.length);
+
+  for (let i = 0; i < minLength; i++) {
+    if (isPlainObject(targetArray[i]) && isPlainObject(sourceArray[i])) {
+      defaultsDeepRecursive(targetArray[i], sourceArray[i], stack);
+    }
+  }
+  for (let i = minLength; i < sourceArray.length; i++) {
+    targetArray.push(sourceArray[i]);
   }
 }
