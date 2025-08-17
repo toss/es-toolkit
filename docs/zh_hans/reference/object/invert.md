@@ -9,9 +9,7 @@
 ## 签名
 
 ```typescript
-function invert<K extends string | number | symbol, V extends string | number | symbol>(
-  obj: Record<K, V>
-): { [key in V]: K };
+function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record<K, V>): Record<V, K>;
 ```
 
 ### 参数
@@ -20,7 +18,7 @@ function invert<K extends string | number | symbol, V extends string | number | 
 
 ### 返回值
 
-(`{ [key in V]: K }`): 一个键和值被反转的新对象。
+(`Record<V, K>`): 一个键和值被反转的新对象。
 
 ## 示例
 
