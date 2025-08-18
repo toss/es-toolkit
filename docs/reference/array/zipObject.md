@@ -7,7 +7,7 @@ This function takes two arrays: one containing property names and another contai
 ## Signature
 
 ```typescript
-function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+function zipObject<P extends PropertyKey, V>(keys: P[], values: V[]): Record<P, V>;
 ```
 
 ### Parameters
@@ -17,7 +17,7 @@ function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]
 
 ### Returns
 
-(`{ [K in P]: V }`): A new object composed of the given property names and values.
+(`Record<P, V>`): A new object composed of the given property names and values.
 
 ## Examples
 

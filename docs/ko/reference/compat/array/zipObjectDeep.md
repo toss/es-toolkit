@@ -13,7 +13,7 @@
 ## 인터페이스
 
 ```typescript
-function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
+function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): Record<P, V>;
 ```
 
 ### 파라미터
@@ -23,7 +23,7 @@ function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, value
 
 ### 반환 값
 
-(`{ [K in P]: V }`): 주어진 속성 이름과 값으로 구성된 새로운 객체예요.
+(`Record<P, V>`): 주어진 속성 이름과 값으로 구성된 새로운 객체예요.
 
 ## 예시
 
