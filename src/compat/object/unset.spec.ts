@@ -159,4 +159,11 @@ describe('unset', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(unset).toEqualTypeOf<typeof unsetLodash>();
   });
+
+  it('should not delete root properties from nonexistent paths', () => {
+    const object = { b: null };
+
+    expect(unset(object, 'a.b')).toBe(true);
+    expect(object).toEqual({ b: null });
+  });
 });
