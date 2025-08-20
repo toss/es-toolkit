@@ -96,11 +96,11 @@ lodash と完全に互換性があるように、`find` 関数は `object` を�
 ### 配列の場合
 
 ```typescript
-import { find } from 'es-toolkit/compat';
+import { findLast } from 'es-toolkit/compat';
 
 // 検査関数を使う場合
 const items = [1, 2, 3, 4, 5];
-const result = find(items, item => item > 3);
+const result = findLast(items, item => item > 3);
 console.log(result); // 5
 
 // 部分オブジェクトを使う場合
@@ -108,7 +108,7 @@ const items = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
-const result = find(items, { name: 'Bob' });
+const result = findLast(items, { name: 'Bob' });
 console.log(result); // { id: 2, name: 'Bob' }
 
 // プロパティ-値ペアを使う場合
@@ -116,7 +116,7 @@ const items = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
-const result = find(items, ['name', 'Alice']);
+const result = findLast(items, ['name', 'Alice']);
 console.log(result); // { id: 1, name: 'Alice' }
 
 // プロパティ名を使う場合
@@ -124,32 +124,32 @@ const items = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
-const result = find(items, 'name');
+const result = findLast(items, 'name');
 console.log(result); // { id: 2, name: 'Bob' }
 ```
 
 ### オブジェクトの場合
 
 ```typescript
-import { find } from 'es-toolkit/compat';
+import { findLast } from 'es-toolkit/compat';
 
 // 検査関数を使う場合
 const obj = { a: 1, b: 2, c: 3 };
-const result = find(obj, item => item > 2);
+const result = findLast(obj, item => item > 2);
 console.log(result); // 3
 
 // 部分オブジェクトを使う場合
 const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = find(obj, { name: 'Bob' });
+const result = findLast(obj, { name: 'Bob' });
 console.log(result); // { id: 2, name: 'Bob' }
 
 // プロパティ-値ペアを使う場合
 const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = find(items, ['name', 'Alice']);
+const result = findLast(items, ['name', 'Alice']);
 console.log(result); // { id: 1, name: 'Alice' }
 
 // プロパティ名を使う場合
 const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = find(obj, 'name');
+const result = findLast(obj, 'name');
 console.log(result); // { id: 2, name: 'Bob' }
 ```
