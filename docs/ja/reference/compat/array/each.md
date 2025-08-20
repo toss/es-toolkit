@@ -23,7 +23,7 @@ function each<T extends object>(object: T, callback: (value: T[keyof T], key: ke
 - `object` (`T`): 走査するオブジェクト。配列、文字列、またはオブジェクトである可能性があります。
 - `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 各反復で呼び出される関数。
   - `value`: 配列で現在処理中の要素。
-  - `index`: 配列で現在処理中の要素のプロパティ名。
+  - `key`: 配列で現在処理中の要素のプロパティ名。
   - `object`: `each` 関数が呼び出されたオブジェクト。
 
 ### 戻り値
@@ -33,7 +33,7 @@ function each<T extends object>(object: T, callback: (value: T[keyof T], key: ke
 ## 例
 
 ```ts
-import { each } from 'es-toolkit/array';
+import { each } from 'es-toolkit/compat';
 
 const array = [1, 2, 3];
 const result: number[] = [];
@@ -42,5 +42,5 @@ each(array, value => {
   result.push(value);
 });
 
-console.log(result); // 出力: [3, 2, 1];
+console.log(result); // 出力: [1, 2, 3];
 ```

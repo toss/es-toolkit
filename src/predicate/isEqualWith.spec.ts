@@ -38,9 +38,9 @@ describe('isEqualWith', () => {
       }
     };
 
-    const obj1 = { name: 'John', date: new Date('2023-01-01') };
+    const obj1 = { name: 'John', date: new Date('2023-02-01') };
     const obj2 = { name: 'John', date: new Date('2023-06-15') };
-    const obj3 = { name: 'John', date: new Date('2024-01-01') };
+    const obj3 = { name: 'John', date: new Date('2024-02-01') };
 
     expect(isEqualWith(obj1, obj2, customizer)).toBe(true);
     expect(isEqualWith(obj1, obj3, customizer)).toBe(false);
