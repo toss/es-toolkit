@@ -16,16 +16,17 @@
 ## インターフェース
 
 ```typescript
-function cond(pairs: any[][]): (...args: any[]) => unknown;
+function cond<R>(pairs: Array<[truthy: () => boolean, falsey: () => R]>): () => R;
+function cond<T, R>(pairs: Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>): (val: T) => R;
 ```
 
 ### パラメータ
 
-- `pairs` (`any[][]`): 条件をチェックする関数と実行する関数のペア。
+- `pairs` (`Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>`): 条件をチェックする関数と実行する関数のペア。
 
 ### 戻り値
 
-(`(...args: any[]) => unknown`): 条件をチェックして一致する関数を実行する新しい合成関数。
+(`(val: T) => R`): 条件をチェックして一致する関数を実行する新しい合成関数。
 
 ## 例
 

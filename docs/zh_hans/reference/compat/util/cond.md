@@ -16,16 +16,17 @@
 ## 签名
 
 ```typescript
-function cond(pairs: any[][]): (...args: any[]) => unknown;
+function cond<R>(pairs: Array<[truthy: () => boolean, falsey: () => R]>): () => R;
+function cond<T, R>(pairs: Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>): (val: T) => R;
 ```
 
 ### 参数
 
-- `pairs` (`any[][]`): 成对数组。每对包含一个断言函数和一个要运行的函数。
+- `pairs` (`Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>`): 成对数组。每对包含一个断言函数和一个要运行的函数。
 
 ### 返回值
 
-(`(...args: any[]) => unknown`): 一个新的复合函数，用于检查条件并运行匹配的函数。
+(`(val: T) => R`): 一个新的复合函数，用于检查条件并运行匹配的函数。
 
 ## 示例
 

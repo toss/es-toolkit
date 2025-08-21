@@ -16,16 +16,17 @@
 ## 인터페이스
 
 ```typescript
-function cond(pairs: any[][]): (...args: any[]) => unknown;
+function cond<R>(pairs: Array<[truthy: () => boolean, falsey: () => R]>): () => R;
+function cond<T, R>(pairs: Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>): (val: T) => R;
 ```
 
 ### 파라미터
 
-- `pairs` (`any[][]`): 조건을 검사하는 함수와 실행할 함수의 쌍.
+- `pairs` (`Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>`): 조건을 검사하는 함수와 실행할 함수의 쌍.
 
 ### 반환 값
 
-(`(...args: any[]) => unknown`): 조건을 확인하고 맞는 함수를 실행하는 새로운 복합 함수.
+(`(val: T) => R`): 조건을 확인하고 맞는 함수를 실행하는 새로운 복합 함수.
 
 ## 예시
 

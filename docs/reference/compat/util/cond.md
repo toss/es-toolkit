@@ -16,16 +16,17 @@ If none of the conditions are true, it returns `undefined`.
 ## Signature
 
 ```typescript
-function cond(pairs: any[][]): (...args: any[]) => unknown;
+function cond<R>(pairs: Array<[truthy: () => boolean, falsey: () => R]>): () => R;
+function cond<T, R>(pairs: Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>): (val: T) => R;
 ```
 
 ### Parameters
 
-- `pairs` (`any[][]`): Array of pairs. Each pair consists of a predicate function and a function to run.
+- `pairs` (`Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>`): Array of pairs. Each pair consists of a predicate function and a function to run.
 
 ### Returns
 
-(`(...args: any[]) => unknown`): A new composite function that checks conditions and runs the matching function.
+(`(val: T) => R`): A new composite function that checks conditions and runs the matching function.
 
 ## Examples
 
