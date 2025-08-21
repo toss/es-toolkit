@@ -9,7 +9,7 @@
 ## 签名
 
 ```typescript
-function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+function zipObject<P extends PropertyKey, V>(keys: P[], values: V[]): Record<P, V>;
 ```
 
 ### 参数
@@ -19,7 +19,7 @@ function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]
 
 ### 返回值
 
-(`{ [K in P]: V }`): 由给定的属性名称和值组成的新对象。
+(`Record<P, V>`): 由给定的属性名称和值组成的新对象。
 
 ## 示例
 

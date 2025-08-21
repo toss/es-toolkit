@@ -14,7 +14,7 @@
 ## 签名
 
 ```typescript
-function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
+function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): Record<P, V>;
 ```
 
 ### 参数
@@ -24,7 +24,7 @@ function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, value
 
 ### 返回值
 
-(`{ [K in P]: V }`): 由给定的属性名称和值组成的新对象。
+(`Record<P, V>`): 由给定的属性名称和值组成的新对象。
 
 ## 示例
 

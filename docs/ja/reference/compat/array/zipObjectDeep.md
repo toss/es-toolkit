@@ -13,7 +13,7 @@
 ## インターフェース
 
 ```typescript
-function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
+function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): Record<P, V>;
 ```
 
 ### パラメータ
@@ -23,7 +23,7 @@ function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, value
 
 ### 戻り値
 
-(`{ [K in P]: V }`): 与えられたプロパティ名と値で構成される新しいオブジェクトです。
+(`Record<P, V>`): 与えられたプロパティ名と値で構成される新しいオブジェクトです。
 
 ## 例
 

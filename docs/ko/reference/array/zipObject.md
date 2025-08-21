@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+function zipObject<P extends PropertyKey, V>(keys: P[], values: V[]): Record<P, V>;
 ```
 
 ### 파라미터
@@ -17,7 +17,7 @@ function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]
 
 ### 반환 값
 
-(`{ [K in P]: V }`): 주어진 속성 이름과 값으로 구성된 새로운 객체예요.
+(`Record<P, V>`): 주어진 속성 이름과 값으로 구성된 새로운 객체예요.
 
 ## 예시
 
