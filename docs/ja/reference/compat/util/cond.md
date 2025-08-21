@@ -21,7 +21,7 @@ function cond(pairs: any[][]): (...args: any[]) => unknown;
 
 ### パラメータ
 
-- `pairs` (`Array`): 条件をチェックする関数と実行する関数のペア。
+- `pairs` (`any[][]`): 条件をチェックする関数と実行する関数のペア。
 
 ### 戻り値
 
