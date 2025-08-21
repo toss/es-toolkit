@@ -83,17 +83,8 @@ export function omit<T extends object>(obj: T | null | undefined, ...keysArr: Ar
   }
 
   keysArr = flatten(keysArr);
-  const isDeep = keysArr.some(key => Array.isArray(key) || isDeepKey(key as PropertyKey));
-  const copyKeys = [...keysIn(obj), ...getSymbolsIn(obj)] as Array<keyof T>;
-  const result = {} as Partial<T>;
-  for (let i = 0; i < copyKeys.length; i++) {
-    const key = copyKeys[i];
-    if (isDeep) {
-      result[key] = cloneDeepWith(obj[key], i => (isPlainObject(i) ? undefined : i));
-    } else {
-      result[key] = obj[key];
-    }
-  }
+
+  const result = cloneInOmit(obj, keysArr);
 
   for (let i = 0; i < keysArr.length; i++) {
     let keys = keysArr[i];
@@ -119,6 +110,46 @@ export function omit<T extends object>(obj: T | null | undefined, ...keysArr: Ar
         break;
       }
     }
+  }
+
+  return result;
+}
+
+function cloneInOmit<T extends object>(obj: T, keys: Array<Many<PropertyKey>>): Partial<T> {
+  const hasDeepKey = keys.some(key => Array.isArray(key) || isDeepKey(key as PropertyKey));
+
+  if (hasDeepKey) {
+    return deepCloneInOmit(obj);
+  }
+
+  return shallowCloneInOmit(obj);
+}
+
+function shallowCloneInOmit<T extends object>(obj: T): Partial<T> {
+  const result = {} as Partial<T>;
+  const keysToCopy = [...keysIn(obj), ...getSymbolsIn(obj)] as Array<keyof T>;
+
+  for (let i = 0; i < keysToCopy.length; i++) {
+    const key = keysToCopy[i];
+    result[key] = obj[key];
+  }
+
+  return result;
+}
+
+function deepCloneInOmit<T extends object>(obj: T): Partial<T> {
+  const result = {} as Partial<T>;
+  const keysToCopy = [...keysIn(obj), ...getSymbolsIn(obj)] as Array<keyof T>;
+
+  for (let i = 0; i < keysToCopy.length; i++) {
+    const key = keysToCopy[i];
+    result[key] = cloneDeepWith(obj[key], valueToClone => {
+      if (isPlainObject(valueToClone)) {
+        return undefined;
+      }
+
+      return valueToClone;
+    });
   }
 
   return result;
