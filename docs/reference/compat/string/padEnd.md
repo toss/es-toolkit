@@ -25,7 +25,7 @@ function padEnd(str: string, length = 0, chars = ' '): string;
 
 ### Returns
 
-Returns a new string padded with the specified character until it reaches the specified length.
+(`string`): Returns a new string padded with the specified character until it reaches the specified length.
 
 ## Examples
 

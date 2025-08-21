@@ -25,7 +25,7 @@ function padStart(str: string, length = 0, chars = ' '): string;
 
 ### 返回值
 
-返回一个新的字符串，该字符串用指定的字符填充，直到达到指定的长度。
+(`string`): 返回一个新的字符串，该字符串用指定的字符填充，直到达到指定的长度。
 
 ## 示例
 
