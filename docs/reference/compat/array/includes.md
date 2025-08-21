@@ -8,7 +8,7 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Checks if a specified value exists within a given source, which can be an array, an object, or a string.
 
-The comparison uses SameValueZero to check for inclusion.
+The comparison uses [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) to check for inclusion.
 
 ## Signature
 
