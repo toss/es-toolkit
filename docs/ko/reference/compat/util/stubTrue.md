@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-function stubTrue(): boolean;
+function stubTrue(): true;
 ```
 
 ### 반환 값
 
-(`boolean`): `true`.
+(`true`): 항상 `true`를 반환합니다.
 
 ## 예시
 
