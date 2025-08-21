@@ -15,7 +15,7 @@
 ## インターフェース
 
 ```ts
-function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => unknown): T;
 ```
 
 ### パラメータ

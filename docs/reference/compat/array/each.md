@@ -15,7 +15,7 @@ This function is an alias for [forEach](./forEach.md).
 ## Signature
 
 ```ts
-function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => unknown): T;
 ```
 
 ### Parameters
