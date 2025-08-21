@@ -22,6 +22,10 @@ function range(start: number, end: number, step: number): number[];
 
 - (`number[]`): `start`에서 시작해서 `end` 전에 끝나는, 연속한 숫자가 `step` 만큼 차이나는 배열.
 
+### 에러
+
+- `step`이 0이면 에러를 던져요.
+
 ## 예시
 
 ```typescript
