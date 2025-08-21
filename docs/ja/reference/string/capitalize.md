@@ -10,11 +10,11 @@ function capitalize<T extends string>(str: T): Capitalize<T>;
 
 ### パラメータ
 
-`str` (`T`): 大文字に変換する文字列。
+`str` (`T`): 変換する文字列。
 
 ### 戻り値
 
-(`Capitalize<string>`): 大文字に変換された文字列。
+(`Capitalize<T>`): 最初の文字が大文字で、それ以降が小文字に変換された文字列。
 
 ## 例
 

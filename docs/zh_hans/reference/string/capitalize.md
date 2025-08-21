@@ -10,11 +10,11 @@ function capitalize<T extends string>(str: T): Capitalize<T>;
 
 ### 参数
 
-`str` (`T`): 要转换为大写的字符串。
+`str` (`T`): 需要转换的字符串。
 
 ### 返回值
 
-(`Capitalize<string>`): 转换后的大写字符串。
+(`Capitalize<T>`): 首字母大写，其他字母小写的字符串。
 
 ## 示例
 
