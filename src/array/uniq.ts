@@ -14,5 +14,5 @@
  * // result will be [1, 2, 3, 4, 5]
  */
 export function uniq<T>(arr: readonly T[]): T[] {
-  return new Array(...new Set(arr));
+  return [...new Set(arr)];
 }
