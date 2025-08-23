@@ -3,7 +3,7 @@
 ::: info
 出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](mdc:../../../compatibility.md)。
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
 创建给定对象的浅拷贝，并允许通过自定义函数来定制克隆过程。这个方法类似于 `clone`，但它接受一个自定义函数来生成克隆值。如果自定义函数返回 undefined，则会使用默认的克隆方法。

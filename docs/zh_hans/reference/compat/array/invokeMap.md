@@ -3,7 +3,7 @@
 ::: info
 出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](mdc:../../../compatibility.md)。
+从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
 调用集合中每个元素在 `path` 位置的方法，并返回所有被调用方法的结果数组。任何额外的参数都会被传递给每个被调用的方法。如果 `path` 是一个函数，它会被调用并将 `this` 绑定到集合中的每个元素。
