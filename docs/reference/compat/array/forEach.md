@@ -13,7 +13,7 @@ The iteration stops if the `callback` function returns `false`.
 ## Signature
 
 ```ts
-function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => unknown): T;
 ```
 
 ### Parameters
@@ -21,7 +21,7 @@ function forEach<T extends object>(object: T, callback: (value: T[keyof T], key:
 - `object` (`T`): The object to iterate over.
 - `callback` (`(value: T[keyof T], key: keyof T, object: T)`): The function invoked per iteration.
   - `value`: The current property being processed in the object.
-  - `index`: The key of the current property being processed in the object.
+  - `key`: The key of the current property being processed in the object.
   - `object`: The object `forEach` was called upon.
 
 ### Returns

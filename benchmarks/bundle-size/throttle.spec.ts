@@ -9,11 +9,11 @@ describe('throttle bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'throttle');
-    expect(bundleSize).toMatchInlineSnapshot(`776`);
+    expect(bundleSize).toMatchInlineSnapshot(`764`);
   });
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'throttle');
-    expect(bundleSize).toMatchInlineSnapshot(`1144`);
+    expect(bundleSize).toMatchInlineSnapshot(`1065`);
   });
 });

@@ -6,7 +6,7 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-2つの値の間で`SameValueZero`比較を行い、それらが同等であるかどうかを判定します。
+2つの値の間で[SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero)比較を行い、それらが同等であるかどうかを判定します。
 
 ## インターフェース
 

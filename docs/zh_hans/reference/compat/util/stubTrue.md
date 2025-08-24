@@ -11,12 +11,12 @@
 ## 签名
 
 ```typescript
-function stubTrue(): boolean;
+function stubTrue(): true;
 ```
 
 ### 返回值
 
-(`boolean`): true。
+(`true`): 始终返回`true`。
 
 ## 示例
 
