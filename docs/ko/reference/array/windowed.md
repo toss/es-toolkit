@@ -22,8 +22,8 @@ interface WindowedOptions {
 ### 파라미터
 
 - `arr` (`readonly T[]`): 윈도우를 생성할 입력 배열.
-- `size` (`number`): 각 윈도우의 크기에요. 자연수여야 해요.
-- `step` (`number`): 각 윈도우 시작 간의 간격. 자연수여야 해요.
+- `size` (`number`): 각 윈도우의 크기에요. 양의 정수여야 해요.
+- `step` (`number`): 각 윈도우 시작 간의 간격. 양의 정수여야 해요.
 - `options.partialWindows` (`boolean`): 배열 끝에 부분 윈도우를 포함할지 여부.
 
 ### 반환 값
