@@ -30,6 +30,11 @@ interface WindowedOptions {
 
 (`T[][]`): 입력 배열에서 생성된 윈도우(배열) 모음.
 
+### 에러
+
+- `size`가 자연수가 아니면 에러를 던져요.
+- `step`가 자연수가 아니면 에러를 던져요.
+
 ## 예시
 
 ```typescript
