@@ -82,8 +82,8 @@ function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaul
 
 ### 参数
 
-- `obj` (`object`): 要查询的对象。
-- `path` (`string` 或 `number` 或 `symbol` 或 `Array<string | number | symbol>`): 要获取属性的路径。
+- `object` (`unknown`): 要查询的对象。
+- `path` (`PropertyKey | readonly PropertyKey[]`): 要获取属性的路径。
 - `defaultValue` (`unknown`): 如果解析的值为 `undefined`，返回的值。
 
 ### 返回值
