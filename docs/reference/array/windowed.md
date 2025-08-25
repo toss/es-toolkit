@@ -29,6 +29,11 @@ interface WindowedOptions {
 
 (`T[][]`): An array of windows (sub-arrays) created from the input array.
 
+### Throws
+
+- Throws an error if `size` is not a positive integer.
+- Throws an error if `step` is not a positive integer.
+
 ## Examples
 
 ```typescript

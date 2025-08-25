@@ -30,6 +30,11 @@ interface WindowedOptions {
 
 (`T[][]`): 从输入数组创建的窗口（子数组）数组。
 
+### 抛出异常
+
+- 如果 `size` 不是正整数，则抛出错误。
+- 如果 `step` 不是正整数，则抛出错误。
+
 ## 示例
 
 ```typescript
