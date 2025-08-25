@@ -30,7 +30,7 @@ function template(string: string, options?: TemplateOptions): ((data?: object) =
 
 ### Returns
 
-(`(data?: object) => string`): Returns the compiled template function.
+(`((data?: object) => string) & { source: string }`): The returned function can be called and includes a `source` property containing the compiled template source code.
 
 ## Examples
 
