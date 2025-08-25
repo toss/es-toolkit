@@ -28,8 +28,8 @@ function isEqualWith(
 
 ### Parameters
 
-- `a` (`unknown`): The first value to compare.
-- `b` (`unknown`): The second value to compare.
+- `a` (`any`): The first value to compare.
+- `b` (`any`): The second value to compare.
 - `areValuesEqual` (`(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void`): A function to customize the comparison. If it returns a boolean, that result will be used. If it returns undefined,
   the default equality comparison will be used.
   - `x`: The value from the first object `a`.

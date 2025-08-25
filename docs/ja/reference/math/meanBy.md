@@ -7,7 +7,7 @@
 ## インターフェース
 
 ```typescript
-function meanBy<T>(items: T[], getValue: (element: T) => number): number;
+function meanBy<T>(items: T[], getValue: (item: T) => number): number;
 ```
 
 ### パラメータ

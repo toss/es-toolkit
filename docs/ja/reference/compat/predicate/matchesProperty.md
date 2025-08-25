@@ -13,12 +13,15 @@
 ## インターフェース
 
 ```typescript
-function matchesProperty(property: PropertyKey | PropertyKey[], source: unknown): (target?: unknown) => boolean;
+function matchesProperty(
+  property: PropertyKey | readonly PropertyKey[],
+  source: unknown
+): (target?: unknown) => boolean;
 ```
 
 ### パラメータ
 
-- `property` (`number | string | symbol | Array<number | string | symbol>`): オブジェクトのプロパティを表すパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
+- `property` (`PropertyKey | readonly PropertyKey[]`): オブジェクトのプロパティを表すパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
 - `source` (`unknown`): オブジェクトのプロパティと比較する値。
 
 ### 戻り値

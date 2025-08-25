@@ -15,7 +15,7 @@ function unionWith<T>(arr1: T[], arr2: T[], areItemsEqual: (item1: T, item2: T) 
 
 - `arr1` (`T[]`): 比較する最初の配列。
 - `arr2` (`T[]`): 比較する2番目の配列。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 2つの要素が一致するかどうかを判断する一致関数です。2つの要素が一致する場合は `true` を、一致しない場合は `false` を返すようにしてください。
+- `areItemsEqual` (`(item1: T, item2: T) => boolean`): 2つの要素が一致するかどうかを判断する一致関数です。2つの要素が一致する場合は `true` を、一致しない場合は `false` を返すようにしてください。
 
 ### 戻り値
 

@@ -14,12 +14,15 @@
 ## 签名
 
 ```typescript
-function matchesProperty(property: PropertyKey | PropertyKey[], source: unknown): (target?: unknown) => boolean;
+function matchesProperty(
+  property: PropertyKey | readonly PropertyKey[],
+  source: unknown
+): (target?: unknown) => boolean;
 ```
 
 ### 参数
 
-- `property` (`number | string | symbol | Array<number | string | symbol>`): 需要检查的目标对象中的属性路径。可以是单个属性键、属性键数组，或表示深层路径的字符串。
+- `property` (`PropertyKey | readonly PropertyKey[]`): 需要检查的目标对象中的属性路径。可以是单个属性键、属性键数组，或表示深层路径的字符串。
 - `source` (`unknown`): 要与目标对象中属性值进行比较的值。
 
 ### 返回值

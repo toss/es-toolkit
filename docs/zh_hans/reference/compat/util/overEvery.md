@@ -18,8 +18,8 @@ function overEvery<T, U extends T, V extends T>(
   predicate2: (value: T) => value is V
 ): (value: T) => value is U & V;
 function overEvery<T>(
-  ...predicates: Array<((...args: T[]) => boolean) | ReadonlyArray<(...args: T[]) => boolean>>
-): (...args: T[]) => boolean;
+  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
+): (...values: T[]) => boolean;
 ```
 
 ### 参数

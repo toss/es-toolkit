@@ -82,13 +82,13 @@ function get<T, P extends string, D = Get<T, P>>(
 ): Exclude<Get<T, P>, null | undefined> | D;
 
 function get(object: unknown, path: PropertyKey, defaultValue?: unknown): any;
-function get(object: unknown, path: PropertyKey | PropertyKey[], defaultValue?: unknown): any;
+function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
 ```
 
 ### パラメータ
 
-- `obj` (`object`): 検索対象のオブジェクト。
-- `path` (`string` または `number` または `symbol` または `Array<string | number | symbol>`): プロパティを取得するパス。
+- `object` (`unknown`): 検索対象のオブジェクト。
+- `path` (`PropertyKey | readonly PropertyKey[]`): プロパティを取得するパス。
 - `defaultValue` (`unknown`): 見つかった値が `undefined` の場合に返す値。
 
 ### 戻り値

@@ -17,7 +17,7 @@ function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown)
 
 ### Parameters
 
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): The path of the property to get.
+- `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to get.
 
 ### Returns
 

@@ -17,7 +17,7 @@ Determines the lowest index at which a given value should be inserted into a sor
 function sortedIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
-  iteratee: (value: T) => R,
+  iteratee: (item: T) => R,
   retHighest?: boolean
 ): number;
 ```
