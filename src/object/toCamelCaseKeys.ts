@@ -2,14 +2,19 @@ import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { camelCase } from '../string/camelCase.ts';
 
-type CamelCase<S extends string> = S extends `${infer P1}_${infer P2}${infer P3}`
-  ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
+type SnakeToCamel<S extends string> = S extends `${infer H}_${infer T}`
+  ? `${Lowercase<H>}${Capitalize<SnakeToCamel<T>>}`
   : Lowercase<S>;
+
+type PascalToCamel<S extends string> = S extends `${infer F}${infer R}` ? `${Lowercase<F>}${R}` : S;
+
+/** If it's snake_case, apply the snake_case rule; otherwise, just lowercase the first letter (including PascalCase → camelCase). */
+type AnyToCamel<S extends string> = S extends `${string}_${string}` ? SnakeToCamel<S> : PascalToCamel<S>;
 
 type ToCamelCaseKeys<T> = T extends any[]
   ? Array<ToCamelCaseKeys<T[number]>>
   : T extends Record<string, any>
-    ? { [K in keyof T as CamelCase<string & K>]: ToCamelCaseKeys<T[K]> }
+    ? { [K in keyof T as AnyToCamel<Extract<K, string>>]: ToCamelCaseKeys<T[K]> }
     : T;
 
 /**

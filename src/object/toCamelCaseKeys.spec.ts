@@ -8,6 +8,12 @@ describe('camelizeKeys', () => {
     expect(toCamelCaseKeys(input)).toEqual(expected);
   });
 
+  it('should convert PascalCase keys to camelCase in a flat object', () => {
+    const input = { UserId: 1, FirstName: 'John', LastName: 'Doe' };
+    const expected = { userId: 1, firstName: 'John', lastName: 'Doe' };
+    expect(toCamelCaseKeys(input)).toEqual(expected);
+  });
+
   it('should convert keys recursively in nested objects', () => {
     const input = {
       user_data: {
