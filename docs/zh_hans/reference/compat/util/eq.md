@@ -6,7 +6,7 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-执行 `SameValueZero` 比较，以确定两个值是否相等。
+执行 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 比较，以确定两个值是否相等。
 
 ## 签名
 

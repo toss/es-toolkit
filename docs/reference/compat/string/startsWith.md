@@ -13,7 +13,7 @@ Checks if one string startsWith another string. Optional position parameter to s
 ## Signature
 
 ```typescript
-function startsWith(str: string, target: string, position: number = 0): string;
+function startsWith(str: string, target: string, position: number = 0): boolean;
 ```
 
 ### Parameters

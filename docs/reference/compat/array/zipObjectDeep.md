@@ -15,7 +15,7 @@ Paths can be dot-separated strings or arrays of property names. If the `keys` ar
 ## Signature
 
 ```typescript
-function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
+function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): Record<P, V>;
 ```
 
 ### Parameters
@@ -25,7 +25,7 @@ function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, value
 
 ### Returns
 
-(`{ [K in P]: V }`): A new object composed of the given property names and values.
+(`Record<P, V>`): A new object composed of the given property names and values.
 
 ## Examples
 

@@ -82,60 +82,60 @@ lodash와 완벽하게 호환되도록 `every` 함수는 `object`를 다음과 �
 ### 배열의 경우
 
 ```typescript
-import { every } from 'es-toolkit/compat';
+import { some } from 'es-toolkit/compat';
 
 // 검사 함수를 쓰는 경우
-const items = [1, 2, 3, 4, 5];
-const result = every(items, item => item > 0);
+let items = [1, 2, 3, 4, 5];
+let result = some(items, item => item > 3);
 console.log(result); // true
 
 // 부분 객체를 쓰는 경우
-const items = [
+items = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
-const result = every(items, { name: 'Bob' });
-console.log(result); // false
+result = some(items, { name: 'Bob' });
+console.log(result); // true
 
 // 프로퍼티-값 쌍을 쓰는 경우
-const items = [
+items = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
-const result = every(items, ['name', 'Alice']);
-console.log(result); // false
+result = some(items, ['name', 'Bob']);
+console.log(result); // true
 
 // 프로퍼티 이름을 쓰는 경우
-const items = [
+items = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
 ];
-const result = every(items, 'name');
+result = some(items, 'name');
 console.log(result); // true
 ```
 
 ### 객체의 경우
 
 ```typescript
-import { every } from 'es-toolkit/compat';
+import { some } from 'es-toolkit/compat';
 
 // 검사 함수를 쓰는 경우
-const obj = { a: 1, b: 2, c: 3 };
-const result = every(obj, value => value > 0);
+let obj = { a: 1, b: 2, c: 3 };
+let result = some(obj, value => value > 2);
 console.log(result); // true
 
 // 부분 객체를 쓰는 경우
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, { name: 'Bob' });
-console.log(result); // false
+obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
+result = some(obj, { name: 'Bob' });
+console.log(result); // true
 
 // 프로퍼티-값 쌍을 쓰는 경우
-const obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = every(obj, ['name', 'Alice']);
-console.log(result); // false
+obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
+result = some(obj, ['name', 'Bob']);
+console.log(result); // true
 
 // 프로퍼티 이름을 쓰는 경우
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, 'name');
+obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
+result = some(obj, 'name');
 console.log(result); // true
 ```

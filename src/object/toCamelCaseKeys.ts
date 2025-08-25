@@ -71,8 +71,8 @@ export function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T> {
       const key = keys[i];
 
       const camelKey = camelCase(key) as keyof typeof result;
-      const camelCaseKeys = toCamelCaseKeys(obj[key]);
-      result[camelKey] = camelCaseKeys as ToCamelCaseKeys<T>[keyof ToCamelCaseKeys<T>];
+      const convertedValue = toCamelCaseKeys(obj[key]);
+      result[camelKey] = convertedValue as ToCamelCaseKeys<T>[keyof ToCamelCaseKeys<T>];
     }
 
     return result;

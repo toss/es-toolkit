@@ -1,4 +1,4 @@
-# constant
+# uniqueId
 
 ::: info
 This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.

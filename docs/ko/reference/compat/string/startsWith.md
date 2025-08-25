@@ -11,7 +11,7 @@
 ## 인터페이스
 
 ```typescript
-function startsWith(str: string, target: string, position: number = 0): string;
+function startsWith(str: string, target: string, position: number = 0): boolean;
 ```
 
 ### 파라미터

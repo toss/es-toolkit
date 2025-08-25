@@ -24,7 +24,7 @@ function split(string: string, separator: RegExp | string, limit: number): strin
 
 ## 반환 값
 
-- (`Array`): 분할된 문자열 세그먼트들의 배열이에요.
+- (`string[]`): 분할된 문자열 세그먼트들의 배열이에요.
 
 ## 예시
 

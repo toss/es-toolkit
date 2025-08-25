@@ -24,7 +24,7 @@ function split(string: string, separator: RegExp | string, limit: number): strin
 
 ## 戻り値
 
-- (`Array`): 分割された文字列のセグメントの配列です。
+- (`string[]`): 分割された文字列のセグメントの配列です。
 
 ## 例
 

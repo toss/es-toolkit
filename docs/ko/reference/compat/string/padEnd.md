@@ -24,7 +24,7 @@ function padEnd(str: string, length = 0, chars = ' '): string;
 
 ### 반환 값
 
-주어진 길이까지 길어진, 마지막에 글자가 추가된 문자열.
+(`string`): 주어진 길이까지 길어진, 마지막에 글자가 추가된 문자열.
 
 ## 예시
 

@@ -23,7 +23,7 @@ function repeat(str: string, n: number): string;
 
 ### 반환 값
 
-주어진 문자열이 n번째 반복된 문자열.
+(`string`): 주어진 문자열이 n번째 반복된 문자열.
 
 ## 예시
 

@@ -13,7 +13,7 @@ Checks if one string ends with another string. Optional position parameter to se
 ## Signature
 
 ```typescript
-function endsWith(str: string, target: string, position: number = 0): string;
+function endsWith(str: string, target: string, position: number = 0): boolean;
 ```
 
 ### Parameters
