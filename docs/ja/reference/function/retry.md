@@ -13,9 +13,9 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 ### パラメータ
 
 - `func` (`() => Promise<T>`): `Promise`を返す関数。
-- `retries`: 再試行する回数。デフォルトは `Number.POSITIVE_INFINITY` で、成功するまで再試行します。
-- `delay`: 再試行の間隔。ミリ秒単位の数値、または現在の試行回数 (`attempts`) を受け取って遅延を動的に決定する関数。デフォルトは `0` です。
-- `signal`: 再試行をキャンセルするための `AbortSignal`。
+- `retries` (`number`): 再試行する回数。デフォルトは `Number.POSITIVE_INFINITY` で、成功するまで再試行します。
+- `delay` (`number | ((attempts: number) => number)`): 再試行の間隔。ミリ秒単位の数値、または現在の試行回数 (`attempts`) を受け取って遅延を動的に決定する関数。デフォルトは `0` です。
+- `signal` (`AbortSignal`): 再試行をキャンセルするための `AbortSignal`。
 
 delay: 再試行の間隔。ミリ秒単位の数値、または現在の試行回数（attempts）を受け取って遅延を動的に決定する関数。デフォルトは 0 です。
 
