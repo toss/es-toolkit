@@ -7,7 +7,7 @@ Retries a function that returns a `Promise` until it succeeds. You can specify h
 ```typescript
 function retry<T>(func: () => Promise<T>): Promise<T>;
 function retry<T>(func: () => Promise<T>, retries: number): Promise<T>;
-function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
+function retry<T, E>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
 ```
 
 ### Parameters
@@ -24,6 +24,8 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 ### Errors
 
 An error occurs when the number of retries reaches `retries` or when canceled by the `AbortSignal`.
+
+Additionally, an error occurs if `shouldRetry` returns `false`.
 
 ## Examples
 
@@ -52,4 +54,11 @@ const controller = new AbortController();
 // The retry operation for `fetchData` can be canceled with the `signal`.
 const data5 = await retry(() => fetchData(), { signal: controller.signal });
 console.log(data5);
+
+// Only retry when a network error occurs
+const data6 = await retry(() => fetchData(), {
+  retries: 3,
+  shouldRetry: error => isNetworkError(error),
+});
+console.log(data6);
 ```

@@ -7,7 +7,7 @@
 ```typescript
 function retry<T>(func: () => Promise<T>): Promise<T>;
 function retry<T>(func: () => Promise<T>, retries: number): Promise<T>;
-function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
+function retry<T, E>(func: () => Promise<T>, { retries, delay, signal, shouldRetry }: RetryOptions): Promise<T>;
 ```
 
 ### 파라미터
@@ -16,6 +16,7 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 - `retries`: 재시도할 횟수. 기본값은 `Number.POSITIVE_INFINITY`로, 성공할 때까지 재시도해요.
 - `delay`: 재시도 사이 간격. 밀리세컨드(ms) 단위의 숫자이거나, 현재 재시도 횟수(`attempts`)를 기반으로 동적으로 간격을 계산하는 함수일 수 있어요. 기본값은 `0`이에요.
 - `signal`: 재시도를 취소할 수 있는 `AbortSignal`.
+- `shouldRetry`: 오류가 발생했을 경우 재시도를 할지 판단하는 함수에요. `(error: E) => boolean` 형태로, 오류를 받아서 `true`를 반환하면 재시도하고, `false`를 반환하면 재시도를 중단해요. 기본값은 `() => true`로, 모든 오류에 대해 재시도해요.
 
 ### 반환 값
 
@@ -24,6 +25,8 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 ### 오류
 
 재시도 횟수가 `retries`에 도달하거나, `AbortSignal`로 취소되는 경우 오류가 발생해요.
+
+또한 해당 오류가 `shouldRetry`에서 `false`를 반환하면 오류가 발생해요.
 
 ## 예시
 
@@ -52,4 +55,11 @@ const controller = new AbortController();
 // `fetchData`를 재시도하는 작업을 `signal`로 취소할 수 있어요.
 const data5 = await retry(() => fetchData(), { signal: controller.signal });
 console.log(data5);
+
+// 네트워크 에러가 발생했을 때만 재시도해요
+const data6 = await retry(() => fetchData(), {
+  retry: 3,
+  shouldRetry: error => isNetworkError(error),
+});
+console.log(data6);
 ```
