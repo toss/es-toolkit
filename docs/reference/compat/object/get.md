@@ -8,88 +8,15 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Retrieves the value at a given path from an object. If the resolved value is `undefined`, the `defaultValue` is returned instead.
 
-## Signature
-
 ```typescript
-function get<T, K extends keyof T>(object: T, path: K | [K]): T[K];
-function get<T, K extends keyof T>(object: T | null | undefined, path: K | [K]): T[K] | undefined;
-function get<T, K extends keyof T, D>(
-  object: T | null | undefined,
-  path: K | [K],
-  defaultValue: D
-): Exclude<T[K], undefined> | D;
-
-function get<T, K1 extends keyof T, K2 extends keyof T[K1]>(object: T, path: [K1, K2]): T[K1][K2];
-function get<T, K1 extends keyof T, K2 extends keyof T[K1]>(
-  object: T | null | undefined,
-  path: [K1, K2]
-): T[K1][K2] | undefined;
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], D>(
-  object: T | null | undefined,
-  path: [K1, K2],
-  defaultValue: D
-): Exclude<T[K1][K2], undefined> | D;
-
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T,
-  path: [K1, K2, K3]
-): T[K1][K2][K3];
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T | null | undefined,
-  path: [K1, K2, K3]
-): T[K1][K2][K3] | undefined;
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], D>(
-  object: T | null | undefined,
-  path: [K1, K2, K3],
-  defaultValue: D
-): Exclude<T[K1][K2][K3], undefined> | D;
-
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], K4 extends keyof T[K1][K2][K3]>(
-  object: T,
-  path: [K1, K2, K3, K4]
-): T[K1][K2][K3][K4];
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], K4 extends keyof T[K1][K2][K3]>(
-  object: T | null | undefined,
-  path: [K1, K2, K3, K4]
-): T[K1][K2][K3][K4] | undefined;
-function get<
-  T,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
-  D,
->(object: T | null | undefined, path: [K1, K2, K3, K4], defaultValue: D): Exclude<T[K1][K2][K3][K4], undefined> | D;
-
-function get<T>(object: Record<number, T>, path: number): T;
-function get<T>(object: Record<number, T> | null | undefined, path: number): T | undefined;
-function get<T, D>(object: Record<number, T> | null | undefined, path: number, defaultValue: D): T | D;
-
-function get<D>(object: null | undefined, path: PropertyKey, defaultValue: D): D;
-function get(object: null | undefined, path: PropertyKey): undefined;
-
-function get<T, P extends string>(data: T, path: P): string extends P ? any : Get<T, P>;
-function get<T, P extends string, D = Get<T, P>>(
-  data: T,
-  path: P,
-  defaultValue: D
-): Exclude<Get<T, P>, null | undefined> | D;
-
-function get(object: unknown, path: PropertyKey, defaultValue?: unknown): any;
-function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
+const value = get(obj, path);
 ```
 
-### Parameters
+## Reference
 
-- `obj` (`object`): The object to query.
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): The path of the property to get.
-- `defaultValue` (`unknown`): The value returned if the resolved value is undefined.
+### `get(object, deepPath, defaultValue?)`
 
-### Returns
-
-(`Get<T, P>`): The resolved value.
-
-## Examples
+Use `get` to retrieve a value from an object using deep keys like `a.b`. If the key does not exist, then `defaultValue` is returned.
 
 ```typescript
 import { get } from 'es-toolkit/compat';
@@ -101,7 +28,24 @@ const obj = {
 };
 
 get(obj, 'a.b'); // 4
-get(obj, ['a', 'b']); // 4
-get(obj, ['a', 'c']); // undefined
-get(obj, ['a', 'c'], null); // null
+```
+
+#### Parameters
+
+- `obj` (`object`): The object to query.
+- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): The path of the property to get.
+- `defaultValue` (`unknown`): The value returned if the resolved value is undefined.
+
+#### Returns
+
+(`Get<T, P>`): The resolved value.
+
+## Alternative
+
+The `get` function is often used to safely access nested properties. You can use modern optional chaining syntax as an alternative.
+
+```typescript
+var object = { a: [{ b: { c: 3 } }] };
+var result = object?.a?.[0]?.b?.c ?? 1;
+console.log(result);
 ```
