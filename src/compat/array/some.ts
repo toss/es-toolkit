@@ -87,7 +87,7 @@ export function some<T>(
     predicate = undefined;
   }
 
-  if (!predicate) {
+  if (predicate == null) {
     predicate = identity;
   }
 
