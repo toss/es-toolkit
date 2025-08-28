@@ -5,7 +5,7 @@ import { pull as pullToolkit } from '../../array/pull.ts';
  *
  * **Note:** Unlike `_.without`, this method mutates `array`.
  *
- * @template T
+ * @template T - The type of elements in the array.
  * @param {T[]} array - The array to modify.
  * @param {...T[]} values - The values to remove.
  * @returns {T[]} Returns `array`.
@@ -24,7 +24,7 @@ export function pull<T>(array: T[], ...values: T[]): T[];
  *
  * **Note:** Unlike `_.without`, this method mutates `array`.
  *
- * @template L
+ * @template L - The type of elements in the array-like object.
  * @param {L} array - The array to modify.
  * @param {...L[0][]} values - The values to remove.
  * @returns {L} Returns `array`.
@@ -44,9 +44,9 @@ export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ?
  * This function changes `arr` in place.
  * If you want to remove values without modifying the original array, use `difference`.
  *
- * @template T, U
+ * @template T - The type of elements in the array.
  * @param {T[]} arr - The array to modify.
- * @param {...unknown[]} valuesToRemove - The values to remove from the array.
+ * @param {T[]} valuesToRemove - The values to remove from the array.
  * @returns {T[]} The modified array with the specified values removed.
  *
  * @example
@@ -54,6 +54,6 @@ export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ?
  * pull(numbers, [2, 4]);
  * console.log(numbers); // [1, 3, 5]
  */
-export function pull<T>(arr: T[], ...valuesToRemove: readonly unknown[]): T[] {
+export function pull<T>(arr: T[], ...valuesToRemove: readonly T[]): T[] {
   return pullToolkit(arr, valuesToRemove);
 }
