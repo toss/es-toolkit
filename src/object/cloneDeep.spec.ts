@@ -402,4 +402,89 @@ describe('cloneDeep', () => {
     expect(clonedInstance.value).toBe(instance.value);
     expect(clonedInstance.getValue()).toBe(123);
   });
+
+  it('should clone arguments objects', () => {
+    function func() {
+      // eslint-disable-next-line prefer-rest-params
+      return cloneDeep(arguments);
+    }
+    // @ts-expect-error: arguments object allows calling with parameters despite no formal params
+    const args = func(1, 2, 3);
+    const cloned = cloneDeep(args);
+
+    expect(cloned).toEqual(args);
+    expect(cloned).not.toBe(args);
+  });
+
+  it('should clone Boolean objects', () => {
+    const boolObj = new Boolean(true);
+    const cloned = cloneDeep(boolObj);
+
+    expect(cloned).toEqual(boolObj);
+    expect(cloned).not.toBe(boolObj);
+    expect(cloned).toBeInstanceOf(Boolean);
+  });
+
+  it('should clone String objects', () => {
+    const strObj = new String('es-toolkit');
+    const cloned = cloneDeep(strObj);
+
+    expect(cloned).toEqual(strObj);
+    expect(cloned).not.toBe(strObj);
+    expect(cloned).toBeInstanceOf(String);
+  });
+
+  it('should clone Number objects', () => {
+    const numObj = new Number(42);
+    const cloned = cloneDeep(numObj);
+
+    expect(cloned).toEqual(numObj);
+    expect(cloned).not.toBe(numObj);
+    expect(cloned).toBeInstanceOf(Number);
+  });
+
+  it('should clone Float32Array', () => {
+    const arr = new Float32Array([1.1, 2.2, 3.3]);
+    const cloned = cloneDeep(arr);
+
+    expect(cloned).toEqual(arr);
+    expect(cloned).not.toBe(arr);
+    expect(cloned).toBeInstanceOf(Float32Array);
+  });
+
+  it('should clone Float64Array', () => {
+    const arr = new Float64Array([1.1, 2.2, 3.3]);
+    const cloned = cloneDeep(arr);
+
+    expect(cloned).toEqual(arr);
+    expect(cloned).not.toBe(arr);
+    expect(cloned).toBeInstanceOf(Float64Array);
+  });
+
+  it('should clone Int8Array', () => {
+    const arr = new Int8Array([1, 2, 3]);
+    const cloned = cloneDeep(arr);
+
+    expect(cloned).toEqual(arr);
+    expect(cloned).not.toBe(arr);
+    expect(cloned).toBeInstanceOf(Int8Array);
+  });
+
+  it('should clone Int16Array', () => {
+    const arr = new Int16Array([1, 2, 3]);
+    const cloned = cloneDeep(arr);
+
+    expect(cloned).toEqual(arr);
+    expect(cloned).not.toBe(arr);
+    expect(cloned).toBeInstanceOf(Int16Array);
+  });
+
+  it('should clone Int32Array', () => {
+    const arr = new Int32Array([1, 2, 3]);
+    const cloned = cloneDeep(arr);
+
+    expect(cloned).toEqual(arr);
+    expect(cloned).not.toBe(arr);
+    expect(cloned).toBeInstanceOf(Int32Array);
+  });
 });

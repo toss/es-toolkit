@@ -107,4 +107,15 @@ describe('merge', () => {
 
     expect(result).toEqual({ a: { b: { c: [2], d: 3 }, e: [4] } });
   });
+
+  it('should skip unsafe properties like __proto__', () => {
+    const target = { a: 1 };
+    const source = Object.create(null);
+    source.__proto__ = { b: 2 };
+    source.a = 2;
+    const result = merge(target, source);
+
+    expect(result).toEqual({ a: 2 });
+    expect(result.__proto__).toBe(Object.prototype);
+  });
 });
