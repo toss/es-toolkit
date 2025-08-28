@@ -7,6 +7,8 @@
 - It ensures identical behavior with Lodash's actual test code.
 - It has been adopted by popular open-source projects including Storybook, Recharts, and CKEditor, and is recommended by Nuxt.
 
+For detailed documentation of all available compat functions, check out our [Compat Reference](/reference/compat/array/castArray).
+
 :::
 
 ```tsx
