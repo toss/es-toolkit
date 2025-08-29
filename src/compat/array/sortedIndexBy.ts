@@ -1,6 +1,7 @@
 import { isNull } from '../../predicate/isNull.ts';
 import { isUndefined } from '../../predicate/isUndefined.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import { identity } from '../function/identity.ts';
 import { isNaN } from '../predicate/isNaN.ts';
 import { isNil } from '../predicate/isNil.ts';
 import { isSymbol } from '../predicate/isSymbol.ts';
@@ -52,7 +53,7 @@ export function sortedIndexBy<T>(array: ArrayLike<T> | null | undefined, value: 
 export function sortedIndexBy<T, R>(
   array: ArrayLike<T> | null | undefined,
   value: T,
-  iteratee: Iteratee<T, R> = iterateeToolkit,
+  iteratee: Iteratee<T, R> = identity,
   retHighest?: boolean
 ): number {
   let low = 0;
