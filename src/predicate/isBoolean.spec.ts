@@ -15,7 +15,7 @@ describe('isBoolean', () => {
     expect(isBoolean([1, 2, 3])).toBe(false);
   });
 
-  it('can be used with Typescript as a type predicate', () => {
+  it('can be used with TypeScript as a type predicate', () => {
     const arr = [1, 2, true, 4, false];
 
     const result = arr.filter(isBoolean);

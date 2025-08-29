@@ -30,7 +30,7 @@ function reverse<T>(array: T[]): T[];
 const array = [1, 2, 3, 4, 5];
 const reversedArray = reverse(array);
 console.log(reversedArray); // [5, 4, 3, 2, 1]
-console.log(array); // [5, 4, 3, 2, 1] (원본 배열이 수정되요)
+console.log(array); // [5, 4, 3, 2, 1] (원본 배열이 수정돼요)
 
 const emptyArray = reverse([]);
 console.log(emptyArray); // []

@@ -31,5 +31,5 @@ const result = median(arrayWithOddNumberOfElements);
 
 const arrayWithEvenNumberOfElements = [1, 2, 3, 4];
 const result = median(arrayWithEvenNumberOfElements);
-// result는 2.5가 되요.
+// result는 2.5가 되어요.
 ```
