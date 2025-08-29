@@ -7,7 +7,7 @@ If the array is empty, this function returns `NaN`.
 ## Signature
 
 ```typescript
-export function meanBy<T>(items: T[], getValue: (element: T) => number): number;
+export function meanBy<T>(items: T[], getValue: (item: T) => number): number;
 ```
 
 ### Parameters

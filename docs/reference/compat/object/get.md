@@ -81,8 +81,8 @@ function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaul
 
 ### Parameters
 
-- `obj` (`object`): The object to query.
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): The path of the property to get.
+- `object` (`unknown`): The object to query.
+- `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to get.
 - `defaultValue` (`unknown`): The value returned if the resolved value is undefined.
 
 ### Returns

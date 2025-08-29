@@ -82,13 +82,13 @@ function get<T, P extends string, D = Get<T, P>>(
 ): Exclude<Get<T, P>, null | undefined> | D;
 
 function get(object: unknown, path: PropertyKey, defaultValue?: unknown): any;
-function get(object: unknown, path: PropertyKey | PropertyKey[], defaultValue?: unknown): any;
+function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
 ```
 
 ### 파라미터
 
-- `obj` (`object`): 검색할 객체.
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): 프로퍼티를 가져올 경로.
+- `object` (`unknown`): 검색할 객체.
+- `path` (`PropertyKey | readonly PropertyKey[]`): 프로퍼티를 가져올 경로.
 - `defaultValue` (`unknown`): 찾은 값이 `undefined` 일 때 반환할 값.
 
 ### 반환 값

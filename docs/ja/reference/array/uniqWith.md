@@ -11,7 +11,7 @@ function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): 
 ### パラメータ
 
 - `arr` (`T[]`): 重複を除去する配列。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 2つの要素が一致するかどうかを判断する一致関数です。2つの要素が一致する場合は `true` を、一致しない場合は `false` を返すようにしてください。
+- `areItemsEqual` (`(item1: T, item2: T) => boolean`): 2つの要素が一致するかどうかを判断する一致関数です。2つの要素が一致する場合は `true` を、一致しない場合は `false` を返すようにしてください。
 
 ### 戻り値
 

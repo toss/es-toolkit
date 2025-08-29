@@ -17,7 +17,7 @@ function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown)
 
 ### 参数
 
-- `path` (`string` | `number` | `symbol` | `Array<string | number | symbol>`): 要获取的属性路径。
+- `path` (`PropertyKey | readonly PropertyKey[]`): 要获取的属性路径。
 
 ### 返回值
 

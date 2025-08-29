@@ -11,7 +11,7 @@ function uniqWith<T>(arr: T[], areItemsEqual: (item1: T, item2: T) => boolean): 
 ### 파라미터
 
 - `arr` (`T[]`): 중복을 제거할 배열.
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 두 요소가 일치하는지 판단하는 일치 함수예요. 두 요소가 일치한다면 `true`를, 일치하지 않는다면 `false`를 반환하게 해주세요.
+- `areItemsEqual` (`(item1: T, item2: T) => boolean`): 두 요소가 일치하는지 판단하는 일치 함수예요. 두 요소가 일치한다면 `true`를, 일치하지 않는다면 `false`를 반환하게 해주세요.
 
 ### 반환 값
 

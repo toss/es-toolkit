@@ -29,8 +29,8 @@ function isEqualWith(
 
 ### パラメータ
 
-- `a` (`unknown`): 比較する最初の値。
-- `b` (`unknown`): 比較する2番目の値。
+- `a` (`any`): 比較する最初の値。
+- `b` (`any`): 比較する2番目の値。
 - `areValuesEqual` (`(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void`): 2つの値を比較する方法を示す比較関数。2つの値が等しいかどうかを示すブール値を返すことができます。`undefined`を返すと、デフォルトの方法で2つの値を比較します。
   - `x`: 最初のオブジェクト `a` に属する値。
   - `y`: 2番目のオブジェクト `b` に属する値。
