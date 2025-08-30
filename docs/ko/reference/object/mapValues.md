@@ -5,7 +5,7 @@
 ## Signature
 
 ```typescript
-function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>(
+function mapValues<T extends object, K extends keyof T, V>(
   object: T,
   getNewValue: (value: T[K], key: K, object: T) => V
 ): Record<K, V>;
@@ -13,7 +13,7 @@ function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>
 
 ### 파라미터
 
-- `obj` (`T extends Record<PropertyKey, unknown>`): 값을 바꿀 객체.
+- `obj` (`T extends object`): 값을 바꿀 객체.
 - `getNewValue`: (`(value: T[K], key: K, object: T) => V`): 새로운 값을 생성할 함수.
 
 ### 반환 값

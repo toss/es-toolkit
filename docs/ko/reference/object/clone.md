@@ -5,7 +5,7 @@
 ## 인터페이스
 
 ```typescript
-function clone<T>(value: T): T;
+function clone<T>(obj: T): T;
 ```
 
 ### 파라미터

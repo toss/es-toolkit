@@ -17,12 +17,12 @@ It's important to provide a sorted array to this function because it uses a bina
 ## Interface
 
 ```typescript
-export function sortedIndexOf(array: ArrayLike | null | undefined, value: T): number;
+export function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
 ```
 
 ### Parameters
 
-- `array` (`ArrayLike | null | undefined`): A sorted array. If the array is null or undefined, it returns -1.
+- `array` (`ArrayLike<T> | null | undefined`): A sorted array. If the array is null or undefined, it returns -1.
 - `value` (`T`): The value to search for in the sorted array through comparison.
 
 ### Returns

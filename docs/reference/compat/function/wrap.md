@@ -14,12 +14,17 @@ If a `value` is provided instead of a function, this value is passed as the firs
 ## Signature
 
 ```typescript
-function wrap<F extends (...args: unknown[]) => unknown>(
-  func: F,
-  wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
-): F;
-function wrap<T, A extends unknown[], R>(value: T, wrapper: (value: T, ...args: A) => R): (...args: A) => R;
+function wrap<T, U, V>(value: T, wrapper: (value: T, ...args: U[]) => V): (...args: U[]) => V;
 ```
+
+### Parameters
+
+- `value` (`T`): The value to be wrapped.
+- `wrapper` (`(value: T, ...args: U[]) => V`): The function to wrap the value with.
+
+### Returns
+
+(`(...args: U[]) => V`): Returns a new function that wraps the value with the `wrapper` function.
 
 ## Examples
 

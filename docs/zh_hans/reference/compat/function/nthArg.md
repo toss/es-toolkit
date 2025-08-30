@@ -13,12 +13,12 @@
 ## 签名
 
 ```typescript
-function nthArg(n: number): (...args: any[]) => unknown;
+function nthArg(n?: number): (...args: any[]) => unknown;
 ```
 
 ### 参数
 
-- `n` (`number`): 要检索的参数的索引。
+- `n` (`number`, 可选): 要检索的参数的索引，默认为 `0`。
   如果为负，则从参数列表的末尾开始计数。
 
 ### 返回值

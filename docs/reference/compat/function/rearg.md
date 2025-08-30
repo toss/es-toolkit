@@ -11,20 +11,17 @@ Creates a function that invokes `func` with arguments arranged according to the 
 ## Signature
 
 ```typescript
-function rearg<F extends (...args: any[]) => any>(
-  func: F,
-  ...indexes: Array<number | number[]>
-): (...args: any[]) => ReturnType<F>;
+function rearg(func: (...args: any[]) => any, ...indices: Array<number | number[]>): (...args: any[]) => any;
 ```
 
 ### Parameters
 
-- `func` (`F`): The function to rearrange arguments for.
+- `func` (`(...args: any[]) => any`): The function to rearrange arguments for.
 - `indexes` (`Array<number | number[]>`): The arranged argument indexes.
 
 ### Returns
 
-(`(...args: any[]) => ReturnType<F>`): Returns the new function.
+(`(...args: any[]) => any`): Returns the new function.
 
 ## Examples
 

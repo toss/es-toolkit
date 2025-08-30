@@ -21,20 +21,20 @@
 ## 签名
 
 ```typescript
-function overArgs<F extends (...args: any[]) => any, T extends Array<any>>(
-  func: F,
-  transforms: T
-): (...args: any[]) => ReturnType<F>;
+function overArgs(
+  func: (...args: any[]) => any,
+  ...transforms: Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>
+): (...args: any[]) => any;
 ```
 
 ### 参数
 
-- `func` (`F`): 要传入转换后参数的函数。
-- `transforms` (`T`): 用于转换参数的函数数组。
+- `func` (`(...args: any[]) => any`): 要传入转换后参数的函数。
+- `transforms` (`Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>`): 用于转换参数的函数数组。
 
 ### 返回值
 
-(`(...args: any[]) => ReturnType<F>`): 返回一个新函数，该函数会先转换参数，然后将转换后的参数传给 `func`。
+(`(...args: any[]) => any`): 返回一个新函数，该函数会先转换参数，然后将转换后的参数传给 `func`。
 
 ### 错误
 

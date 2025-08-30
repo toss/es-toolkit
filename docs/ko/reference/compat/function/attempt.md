@@ -13,17 +13,17 @@
 ## 인터페이스
 
 ```typescript
-function attempt<F extends (...args: any[]) => any>(func: F, ...args: Parameters<F>): ReturnType<F> | Error;
+function attempt<R>(func: (...args: any[]) => R, ...args: any[]): R | Error;
 ```
 
 ### 파라미터
 
-- `func` (`F`): 실행할 함수.
-- `args` (`...Parameters<F>`): 함수에 전달할 인수.
+- `func` (`(...args: any[]) => R`): 실행할 함수.
+- `args` (`...any[]`): 함수에 전달할 인수.
 
 ### 반환 값
 
-(`ReturnType<F> | Error`): 성공했다면, 함수의 반환 값. 오류가 발생했다면 `Error`.
+(`R | Error`): 성공했다면, 함수의 반환 값. 오류가 발생했다면 `Error`.
 
 ## 예시
 

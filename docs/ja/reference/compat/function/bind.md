@@ -15,7 +15,7 @@ Symbol 型の `bind.placeholder` を使用すると、事前に提供した引�
 ## インターフェース
 
 ```typescript
-function bind<F extends Function>(func: F, thisObj?: unknown, ...partialArgs: any[]): F;
+function bind(func: (...args: any[]) => any, thisObj: any, ...partialArgs: any[]): (...args: any[]) => any;
 
 namespace bind {
   placeholder: symbol;
@@ -24,13 +24,13 @@ namespace bind {
 
 ### パラメータ
 
-- `func` (`F`): `this` を固定する関数。
+- `func` (`(...args: any[]) => any`): `this` を固定する関数。
 - `thisObj` (`any`, オプション): 関数に固定される `this` オブジェクト。
 - `partialArgs` (`any[]`): 事前に与えられる引数。
 
 ### 戻り値
 
-(`F`): `this` が固定された関数。
+(`(...args: any[]) => any`): `this` が固定された関数。
 
 ## 例
 

@@ -13,20 +13,17 @@
 ## インターフェース
 
 ```typescript
-function rearg<F extends (...args: any[]) => any>(
-  func: F,
-  ...indices: Array<number | number[]>
-): (...args: any[]) => ReturnType<F>;
+function rearg(func: (...args: any[]) => any, ...indices: Array<number | number[]>): (...args: any[]) => any;
 ```
 
 ### パラメータ
 
-- `func` (`F`): 引数を並べ替える関数です。
+- `func` (`(...args: any[]) => any`): 引数を並べ替える関数です。
 - `indices` (`Array<number | number[]>`): 並べ替えられた引数のインデックスです。
 
 ### 戻り値
 
-(`(...args: any[]) => ReturnType<F>`): 新しい関数を返します。
+(`(...args: any[]) => any`): 新しい関数を返します。
 
 ## 例
 

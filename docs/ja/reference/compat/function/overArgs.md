@@ -20,20 +20,20 @@
 ## インターフェース
 
 ```typescript
-function overArgs<F extends (...args: any[]) => any, T extends Array<any>>(
-  func: F,
-  transforms: T
-): (...args: any[]) => ReturnType<F>;
+function overArgs(
+  func: (...args: any[]) => any,
+  ...transforms: Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>
+): (...args: any[]) => any;
 ```
 
 ### パラメータ
 
-- `func` (`F`): 引数を変換して渡す関数。
-- `transforms` (`T`): 引数を変換する関数の配列。
+- `func` (`(...args: any[]) => any`): 引数を変換して渡す関数。
+- `transforms` (`Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>`): 引数を変換する関数の配列。
 
 ### 戻り値
 
-(`(...args: any[]) => ReturnType<F>`): 引数を変換してから `func` に渡す新しい関数を返します。
+(`(...args: any[]) => any`): 引数を変換してから `func` に渡す新しい関数を返します。
 
 ### エラー
 

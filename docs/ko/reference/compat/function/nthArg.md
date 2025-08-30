@@ -13,12 +13,12 @@
 ## 인터페이스
 
 ```typescript
-function nthArg(n: number): (...args: any[]) => unknown;
+function nthArg(n?: number): (...args: any[]) => unknown;
 ```
 
 ### 파라미터
 
-- `n` (`number`): 검색할 인수의 인덱스.
+- `n` (`number`, 선택사항): 검색할 인수의 인덱스, 기본값은 `0`.
   음수이면 인수 목록의 끝에서부터 계산해요.
 
 ### 반환 값
