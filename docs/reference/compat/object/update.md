@@ -11,22 +11,18 @@ Updates the value at the specified path of the given object using an updater fun
 ## Signature
 
 ```typescript
-function update<T extends object | null | undefined>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown
-): T;
+function update(obj: object, path: PropertyKey | PropertyKey[], updater: (value: any) => any): any;
 ```
 
 ### Parameters
 
-- `obj` (`T`): The object to modify.
-- `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to update.
-- `updater` (`(value: unknown) => unknown`): The function to produce the updated value.
+- `obj` (`object`): The object to modify.
+- `path` (`PropertyKey | PropertyKey[]`): The path of the property to update.
+- `updater` (`(value: any) => any`): The function to produce the updated value.
 
 ### Returns
 
-(`T`): The modified object.
+(`any`): The modified object.
 
 ## Examples
 

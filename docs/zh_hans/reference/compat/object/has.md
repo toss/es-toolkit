@@ -17,13 +17,19 @@
 ## 签名
 
 ```typescript
-function has(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+function has<T, K extends PropertyKey>(
+  object: T,
+  path: K
+): object is T & { [P in K]: P extends keyof T ? T[P] : Record<string, unknown> extends T ? T[keyof T] : unknown } & {
+  [key: symbol]: unknown;
+};
+function has<T>(object: T, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### 参数
 
-- `object` (`unknown`): 要查询的对象。
-- `path` (`string` 或 `number` 或 `symbol` 或 `Array<string | number | symbol>`): 要检查的路径。这可以是单个属性键、属性键数组或表示深层路径的字符串。
+- `object` (`T`): 要查询的对象。
+- `path` (`PropertyKey | PropertyKey[]`): 要检查的路径。这可以是单个属性键、属性键数组或表示深层路径的字符串。
 
 ### 返回值
 

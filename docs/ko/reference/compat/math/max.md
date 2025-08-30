@@ -13,9 +13,7 @@
 ## 인터페이스
 
 ```typescript
-function max<T>(items: [T, ...T[]]): T;
-function max(): undefined;
-function max<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
+function max<T>(items: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### 파라미터

@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-function unset(obj: unknown, path: PropertyKey | PropertyKey[]): boolean;
+function unset(obj: any, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### パラメータ
 
-- `obj` (`unknown`): 修正するオブジェクト。
+- `obj` (`any`): 修正するオブジェクト。
 - `path` (`PropertyKey | PropertyKey[]`): 削除するプロパティのパス。
 
 ### 戻り値

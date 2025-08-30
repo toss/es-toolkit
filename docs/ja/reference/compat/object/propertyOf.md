@@ -14,16 +14,16 @@
 ## インターフェース
 
 ```typescript
-function propertyOf(object: unknown): (path: PropertyKey | PropertyKey[]) => unknown;
+function propertyOf<T extends {}>(object: T): (path: PropertyKey | PropertyKey[]) => any;
 ```
 
 ### パラメータ
 
-- `object` (`unknown`): クエリするオブジェクトます。
+- `object` (`T`): クエリするオブジェクトます。
 
 ### 戻り値
 
-(`(path: PropertyKey | PropertyKey[]) => unknown`): パスを受け取り、指定されたパスのオブジェクトから値を取得する新しい関数を返します。
+(`(path: PropertyKey | PropertyKey[]) => any`): パスを受け取り、指定されたパスのオブジェクトから値を取得する新しい関数を返します。
 ます。
 
 ## 例

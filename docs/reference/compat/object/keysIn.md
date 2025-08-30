@@ -17,12 +17,12 @@ Retrieves the names of string-keyed properties from an object, including those i
 ## Signature
 
 ```typescript
-function keysIn(object?: unknown): string[];
+function keysIn(object?: any): string[];
 ```
 
 ### Parameters
 
-- `object` (`unknown`): The object to inspect for keys.
+- `object` (`any`): The object to inspect for keys.
 
 ### Returns
 

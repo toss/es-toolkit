@@ -11,11 +11,11 @@
 ## 인터페이스
 
 ```typescript
-function updateWith<T extends object | null | undefined>(
+function updateWith<T extends object>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown,
-  customizer: (value: unknown) => unknown
+  updater: (oldValue: any) => any,
+  customizer?: (value: any, key: string, object: T) => any
 ): T;
 ```
 
@@ -23,8 +23,8 @@ function updateWith<T extends object | null | undefined>(
 
 - `obj` (`T`): 수정할 객체예요.
 - `path` (`PropertyKey | readonly PropertyKey[]`): 업데이트할 속성의 경로예요.
-- `updater` (`(value: unknown) => unknown`): 업데이트된 값을 생성하는 함수예요.
-- `customizer` (`(value: unknown) => unknown`): 업데이트 프로세스를 커스터마이즈하는 함수예요.
+- `updater` (`(oldValue: any) => any`): 업데이트된 값을 생성하는 함수예요.
+- `customizer` (`(value: any, key: string, object: T) => any`, 선택 사항): 업데이트 프로세스를 커스터마이즈하는 함수예요.
 
 ### 반환 값
 

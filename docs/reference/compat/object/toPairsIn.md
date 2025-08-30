@@ -15,18 +15,17 @@ Creates an array of key-value pairs from an object, set, or map, including inher
 ## Signature
 
 ```typescript
-function toPairsIn<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairsIn<T>(set: Set<T>): Array<[T, T]>;
-function toPairsIn<K, V>(map: Map<K, V>): Array<[K, V]>;
+function toPairsIn<T>(object?: Record<string, T> | Record<number, T>): Array<[string, T]>;
+function toPairsIn(object?: object): Array<[string, any]>;
 ```
 
 ### Parameters
 
-- `object` (`Record<any, any> | Set<any> | Map<any, any>`): The object, set, or map to query.
+- `object` (`Record<string, T> | Record<number, T> | object`, optional): The object, set, or map to query.
 
 ### Returns
 
-(`Array<[key: PropertyKey, value: any]>`): Returns the array of key-value pairs.
+(`Array<[string, T]> | Array<[string, any]>`): Returns the array of key-value pairs.
 
 ## Examples
 

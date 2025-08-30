@@ -11,18 +11,17 @@
 ## 인터페이스
 
 ```typescript
-function fromPairs(pairs: any[]): Record<string, any>;
-function fromPairs<T extends PropertyKey, U>(pairs: Array<[T, U]> | Map<T, U>): Record<T, U>;
-function fromPairs<T extends PropertyKey, U>(data: Array<[T, U]> | Map<T, U>): Record<T, U>;
+function fromPairs<T>(pairs: ArrayLike<[PropertyName, T]> | null | undefined): Record<string, T>;
+function fromPairs(pairs: ArrayLike<any[]> | null | undefined): Record<string, any>;
 ```
 
 ### 파라미터
 
-- `pairs` (`Array<[T, U]>`): `PropertyKey`가 키이며 `U` 타입의 값인 키-값 쌍의 배열입니다. 배열.
+- `pairs` (`ArrayLike<[PropertyName, T]> | ArrayLike<any[]> | null | undefined`): 변환할 키-값 쌍의 배열이나 Map 타입 데이터. 2차원 배열의 각 하위 배열은 두 개의 요소를 가져야 하며, 첫 번째 요소는 키로, 두 번째 요소는 값으로 사용됩니다.
 
 ### 반환 값
 
-(`Record<T, U>`): 키가 `T` 타입이고 값이 `U` 타입인 객체입니다. 문자열.
+(`Record<string, any> | Record<string, T>`): 입력 매개변수와 동일한 키와 값을 가지는 변환된 객체.
 
 ## 예시
 

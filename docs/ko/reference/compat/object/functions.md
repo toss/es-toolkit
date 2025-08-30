@@ -13,12 +13,12 @@
 ## 인터페이스
 
 ```typescript
-function functions(object: unknown): string[];
+function functions(object: any): string[];
 ```
 
 ### 파라미터
 
-- `object` (`unknown`): 확인할 객체.
+- `object` (`any`): 확인할 객체.
 
 ### 반환 값
 

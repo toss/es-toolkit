@@ -17,12 +17,12 @@
 ## インターフェース
 
 ```typescript
-function keysIn(object?: unknown): string[];
+function keysIn(object?: any): string[];
 ```
 
 ### パラメータ
 
-- `object` (`unknown`): キーを調べるためのオブジェクト。
+- `object` (`any`): キーを調べるためのオブジェクト。
 
 ### 戻り値
 

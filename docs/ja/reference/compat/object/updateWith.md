@@ -11,11 +11,11 @@
 ## インターフェース
 
 ```typescript
-function updateWith<T extends object | null | undefined>(
+function updateWith<T extends object>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown,
-  customizer: (value: unknown) => unknown
+  updater: (oldValue: any) => any,
+  customizer?: (value: any, key: string, object: T) => any
 ): T;
 ```
 
@@ -23,8 +23,8 @@ function updateWith<T extends object | null | undefined>(
 
 - `obj` (`T`): 修正するオブジェクトです。
 - `path` (`PropertyKey | readonly PropertyKey[]`): 更新するプロパティのパスです。
-- `updater` (`(value: unknown) => unknown`): 更新された値を生成する関数です。
-- `customizer` (`(value: unknown) => unknown`): 更新プロセスをカスタマイズする関数です。
+- `updater` (`(oldValue: any) => any`): 更新された値を生成する関数です。
+- `customizer` (`(value: any, key: string, object: T) => any`, オプション): 更新プロセスをカスタマイズする関数です。
 
 ### 戻り値
 

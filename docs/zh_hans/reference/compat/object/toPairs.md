@@ -15,18 +15,17 @@
 ## 签名
 
 ```typescript
-function toPairs<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairs<T>(set: Set<T>): Array<[T, T]>;
-function toPairs<K, V>(map: Map<K, V>): Array<[K, V]>;
+function toPairs<T>(object?: Record<string, T> | Record<number, T>): Array<[string, T]>;
+function toPairs(object?: object): Array<[string, any]>;
 ```
 
 ### 参数
 
-- `object` (`Record<string | number, T> | Set<T> | Map<K, V>`): 要查询的对象、集合或映射。
+- `object` (`Record<string, T> | Record<number, T> | object`, 可选): 要查询的对象、集合或映射。
 
 ### 返回值
 
-(`Array<[key: PropertyKey, value: T]>`): 返回键值对数组。
+(`Array<[string, T]> | Array<[string, any]>`): 返回键值对数组。
 
 ## 示例
 

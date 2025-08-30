@@ -14,16 +14,16 @@
 ## 签名
 
 ```typescript
-function propertyOf(object: unknown): (path: PropertyKey | PropertyKey[]) => unknown;
+function propertyOf<T extends {}>(object: T): (path: PropertyKey | PropertyKey[]) => any;
 ```
 
 ### 参数
 
-- `object` (`unknown`): 要查询的对象。
+- `object` (`T`): 要查询的对象。
 
 ### 返回值
 
-(`(path: PropertyKey | PropertyKey[]) => unknown`): 返回一个新函数，该函数接受一个路径并从指定路径的对象中检索值。
+(`(path: PropertyKey | PropertyKey[]) => any`): 返回一个新函数，该函数接受一个路径并从指定路径的对象中检索值。
 
 ## 示例
 

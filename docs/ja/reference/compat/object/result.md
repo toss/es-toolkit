@@ -15,18 +15,18 @@
 ## インターフェース
 
 ```typescript
-function result(object: any, path: PropertyKey | PropertyKey[], defaultValue?: any | ((...args: any[]) => any)): any;
+function result<R>(object: any, path: PropertyKey | PropertyKey[], defaultValue?: R | ((...args: any[]) => R)): R;
 ```
 
 ### パラメータ
 
 - `object` (`unknown`): クエリを行うオブジェクトです。
 - `path` (`PropertyKey | PropertyKey[]`): 取得するプロパティのパスです。
-- `defaultValue` (`any`): 解決された値が`undefined`の場合に返される値です。
+- `defaultValue` (`R | ((...args: any[]) => R`, オプション): 解決された値が`undefined`の場合に返される値です。
 
 ### 戻り値
 
-(`T`): 解決された値を返します。
+(`R`): 解決された値を返します。
 
 ## 例
 

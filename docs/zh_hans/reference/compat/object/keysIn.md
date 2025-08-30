@@ -17,12 +17,12 @@
 ## 签名
 
 ```typescript
-function keysIn(object?: unknown): string[];
+function keysIn(object?: any): string[];
 ```
 
 ### 参数
 
-- `object` (`unknown`): 要检查其键的对象。
+- `object` (`any`): 要检查其键的对象。
 
 ### 返回值
 

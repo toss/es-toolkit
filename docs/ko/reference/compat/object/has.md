@@ -15,13 +15,19 @@
 ## 인터페이스
 
 ```typescript
-function has(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+function has<T, K extends PropertyKey>(
+  object: T,
+  path: K
+): object is T & { [P in K]: P extends keyof T ? T[P] : Record<string, unknown> extends T ? T[keyof T] : unknown } & {
+  [key: symbol]: unknown;
+};
+function has<T>(object: T, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### 파라미터
 
-- `object` (`unknown`): 프로퍼티가 있는지 확인할 객체.
-- `path` (`string`, `number`, `symbol`, `Array<string | number | symbol>`): 프로퍼티가 있는지 확인할 경로. 프로퍼티 이름, 프로퍼티 이름의 배열, 또는 깊은 경로를 나타내는 문자열을 쓸 수 있어요.
+- `object` (`T`): 프로퍼티가 있는지 확인할 객체.
+- `path` (`PropertyKey | PropertyKey[]`): 프로퍼티가 있는지 확인할 경로. 프로퍼티 이름, 프로퍼티 이름의 배열, 또는 깊은 경로를 나타내는 문자열을 쓸 수 있어요.
 
 ### 반환 값
 

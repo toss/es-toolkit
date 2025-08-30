@@ -11,16 +11,17 @@ Convert a two-dimensional array or Map into an object.
 ## Signature
 
 ```typescript
-function fromPairs<T extends string | number | symbol, U>(data: Array<[T, U]> | Map<T, U>): { [key in T]: U };
+function fromPairs<T>(pairs: ArrayLike<[PropertyName, T]> | null | undefined): Record<string, T>;
+function fromPairs(pairs: ArrayLike<any[]> | null | undefined): Record<string, any>;
 ```
 
 ### Parameters
 
-- `data` (`Array<[T, U]> | Map<T, U>`): The two-dimensional array or Map to be converted. Each sub-array in the two-dimensional array should have two elements, with the first element as the key and the second as the value.
+- `pairs` (`ArrayLike<[PropertyName, T]> | ArrayLike<any[]> | null | undefined`): The two-dimensional array or Map to be converted. Each sub-array in the two-dimensional array should have two elements, with the first element as the key and the second as the value.
 
 ### Returns
 
-(`{ [key in T]: U }`): The converted object with the same keys and values as the input parameters.
+(`Record<string, any> | Record<string, T>`): The converted object with the same keys and values as the input parameters.
 
 ## Examples
 

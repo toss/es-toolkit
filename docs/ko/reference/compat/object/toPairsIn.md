@@ -15,19 +15,17 @@
 ## 인터페이스
 
 ```typescript
-function toPairsIn<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairsIn<T>(set: Set<T>): Array<[T, T]>;
-function toPairsIn<K, V>(map: Map<K, V>): Array<[K, V]>;
-function toPairsIn(object: Record<any, any> | Set<any> | Map<any, any>): Array<[PropertyKey, any]>;
+function toPairsIn<T>(object?: Record<string, T> | Record<number, T>): Array<[string, T]>;
+function toPairsIn(object?: object): Array<[string, any]>;
 ```
 
 ### 파라미터
 
-- `object` (`Record<any, any> | Set<any> | Map<any, any>`): 조회할 객체, 집합 또는 맵이에요.
+- `object` (`Record<string, T> | Record<number, T> | object`, 선택 사항): 조회할 객체, 집합 또는 맵이에요.
 
 ### 반환 값
 
-(`Array<[key: PropertyKey, value: any]>`): 키-값 쌍의 배열을 반환해요.
+(`Array<[string, T]> | Array<[string, any]>`): 키-값 쌍의 배열을 반환해요.
 
 ## 예시
 

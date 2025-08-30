@@ -15,18 +15,18 @@
 ## 签名
 
 ```typescript
-function result(object: any, path: PropertyKey | PropertyKey[], defaultValue?: any | ((...args: any[]) => any)): any;
+function result<R>(object: any, path: PropertyKey | PropertyKey[], defaultValue?: R | ((...args: any[]) => R)): R;
 ```
 
 ### 参数
 
 - `object` (`any`): 要查询的对象。
 - `path` (`PropertyKey | PropertyKey[]`): 要获取的属性的路径。
-- `defaultValue` (`any`): 如果解析后的值是`undefined`，则返回的值。
+- `defaultValue` (`R | ((...args: any[]) => R`, 可选): 如果解析后的值是`undefined`，则返回的值。
 
 ### 返回值
 
-(`any`): 返回解析后的值。
+(`R`): 返回解析后的值。
 
 ## 示例
 

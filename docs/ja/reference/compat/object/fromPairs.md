@@ -11,18 +11,17 @@
 ## インターフェース
 
 ```typescript
-function fromPairs(pairs: any[]): Record<string, any>;
-function fromPairs<T extends PropertyKey, U>(pairs: Array<[T, U]> | Map<T, U>): Record<T, U>;
-function fromPairs<T extends PropertyKey, U>(data: Array<[T, U]> | Map<T, U>): Record<T, U>;
+function fromPairs<T>(pairs: ArrayLike<[PropertyName, T]> | null | undefined): Record<string, T>;
+function fromPairs(pairs: ArrayLike<any[]> | null | undefined): Record<string, any>;
 ```
 
 ### パラメータ
 
-- `pairs` (`Array<[T, U]>`): 各キーが`PropertyKey`であり、各値が型`U`であるキーと値のペアの配列です。
+- `pairs` (`ArrayLike<[PropertyName, T]> | ArrayLike<any[]> | null | undefined`): 変換するキーと値のペアの配列またはMapデータ。2次元配列の各サブ配列は、2つの要素を持ち、最初の要素をキーとし、2番目の要素を値として使用する必要があります。
 
 ### 戻り値
 
-(`Record<T, U>`): キーが型`T`であり、値が型`U`であるオブジェクトです。
+(`Record<string, any> | Record<string, T>`): 入力パラメータと同じキーと値を持つ変換されたオブジェクト。
 
 ## 例
 

@@ -12,16 +12,16 @@
 ## 签名
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
+function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
 ```
 
 ### 参数
 
-- `path` (`string` | `number` | `symbol` | `Array<string | number | symbol>`): 要获取的属性路径。
+- `path` (`PropertyKey | PropertyKey[]`): 要获取的属性路径。
 
 ### 返回值
 
-- `(object: unknown) => any`: 一个函数，接收一个对象并返回指定路径的值。
+- `(object: T) => R`: 一个函数，接收一个对象并返回指定路径的值。
 
 ## 示例
 

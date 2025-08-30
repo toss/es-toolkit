@@ -15,18 +15,18 @@ If the resolved value is `undefined`, it returns the default value. If the defau
 ## Signature
 
 ```typescript
-function result(object: any, path: PropertyKey | PropertyKey[], defaultValue?: any | ((...args: any[]) => any)): any;
+function result<R>(object: any, path: PropertyKey | PropertyKey[], defaultValue?: R | ((...args: any[]) => R)): R;
 ```
 
 ### Parameters
 
 - `object` (`any`): The object to query.
 - `path` (`PropertyKey | PropertyKey[]`): The path of the property to get.
-- `defaultValue` (`any`): The value returned if the resolved value is `undefined`.
+- `defaultValue` (`R | ((...args: any[]) => R`, optional): The value returned if the resolved value is `undefined`.
 
 ### Returns
 
-(`any`): Returns the resolved value.
+(`R`): Returns the resolved value.
 
 ## Examples
 

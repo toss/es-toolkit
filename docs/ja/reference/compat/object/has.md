@@ -15,13 +15,19 @@
 ## インターフェース
 
 ```typescript
-function has(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+function has<T, K extends PropertyKey>(
+  object: T,
+  path: K
+): object is T & { [P in K]: P extends keyof T ? T[P] : Record<string, unknown> extends T ? T[keyof T] : unknown } & {
+  [key: symbol]: unknown;
+};
+function has<T>(object: T, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### パラメータ
 
-- `object` (`unknown`): プロパティの存在を確認するオブジェクト。
-- `path` (`string`, `number`, `symbol`, `Array<string | number | symbol>`): プロパティの存在を確認するパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
+- `object` (`T`): プロパティの存在を確認するオブジェクト。
+- `path` (`PropertyKey | PropertyKey[]`): プロパティの存在を確認するパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
 
 ### 戻り値
 

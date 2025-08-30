@@ -15,18 +15,18 @@
 ## 인터페이스
 
 ```typescript
-function result(object: any, path: PropertyKey | PropertyKey[], defaultValue?: any | ((...args: any[]) => any)): any;
+function result<R>(object: any, path: PropertyKey | PropertyKey[], defaultValue?: R | ((...args: any[]) => R)): R;
 ```
 
 ### 파라미터
 
 - `object` (`any`): 검색할 객체.
 - `path` (`PropertyKey | PropertyKey[]`): 속성을 가져올 경로.
-- `defaultValue` (`any`): 찾은 값이 `undefined` 일 때 반환할 값.
+- `defaultValue` (`R | ((...args: any[]) => R`, 선택 사항): 찾은 값이 `undefined` 일 때 반환할 값.
 
 ### 반환 값
 
-(`any`): 해결된 값을 반환해요.
+(`R`): 해결된 값을 반환해요.
 
 ## 예시
 

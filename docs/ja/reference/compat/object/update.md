@@ -11,22 +11,18 @@
 ## インターフェース
 
 ```typescript
-function update<T extends object | null | undefined>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown
-): T;
+function update(obj: object, path: PropertyKey | PropertyKey[], updater: (value: any) => any): any;
 ```
 
 ### パラメータ
 
-- `obj` (`T`): 修正するオブジェクトです。
-- `path` (`PropertyKey | readonly PropertyKey[]`): 更新するプロパティのパスです。
-- `updater` (`(value: unknown) => unknown`): 更新された値を生成する関数です。
+- `obj` (`object`): 修正するオブジェクトです。
+- `path` (`PropertyKey | PropertyKey[]`): 更新するプロパティのパスです。
+- `updater` (`(value: any) => any`): 更新された値を生成する関数です。
 
 ### 戻り値
 
-(`T`): 修正されたオブジェクトです。
+(`any`): 修正されたオブジェクトです。
 
 ## 例
 

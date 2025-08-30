@@ -19,11 +19,11 @@
 ## 인터페이스
 
 ```typescript
-function setWith<T extends object | null | undefined>(
+function setWith<T extends object>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  value: unknown,
-  customizer?: (value: unknown) => unknown
+  value: any,
+  customizer?: (nsValue: any, key: string, nsObject: T) => any
 ): T;
 ```
 
@@ -31,8 +31,8 @@ function setWith<T extends object | null | undefined>(
 
 - `obj` (`T`): 값을 설정할 객체.
 - `path` (`PropertyKey | readonly PropertyKey[]`): 값을 설정할 프로퍼티 경로.
-- `value` (`unknown`): 설정할 값.
-- `customizer` (`(value: unknown) => unknown`): 경로 생성을 커스터마이즈하는 함수.
+- `value` (`any`): 설정할 값.
+- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, 선택 사항): 경로 생성을 커스터마이즈하는 함수.
 
 ### 반환 값
 

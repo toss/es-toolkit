@@ -12,16 +12,16 @@ It leverages the [`get`](./get.md) functions to obtain the value.
 ## Signature
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
+function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
 ```
 
 ### Parameters
 
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): The path of the property to get.
+- `path` (`PropertyKey | PropertyKey[]`): The path of the property to get.
 
 ### Returns
 
-(`(object: unknown) => any`): A new function that takes an object and returns the value at the specified path.
+(`(object: T) => R`): A new function that takes an object and returns the value at the specified path.
 
 ## Examples
 

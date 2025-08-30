@@ -15,18 +15,17 @@
 ## インターフェース
 
 ```typescript
-function toPairsIn<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairsIn<T>(set: Set<T>): Array<[T, T]>;
-function toPairsIn<K, V>(map: Map<K, V>): Array<[K, V]>;
+function toPairsIn<T>(object?: Record<string, T> | Record<number, T>): Array<[string, T]>;
+function toPairsIn(object?: object): Array<[string, any]>;
 ```
 
 ### パラメータ
 
-- `object` (`Record<string | number, T> | Set<T> | Map<K, V>`): クエリするオブジェクト、`Set`、または`Map`。
+- `object` (`Record<string, T> | Record<number, T> | object`, オプション): クエリするオブジェクト、`Set`、または`Map`。
 
 ### 戻り値
 
-(`Array<[key: PropertyKey, value: T]>`): キーと値のペアの配列を返します。
+(`Array<[string, T]> | Array<[string, any]>`): キーと値のペアの配列を返します。
 
 ## 例
 

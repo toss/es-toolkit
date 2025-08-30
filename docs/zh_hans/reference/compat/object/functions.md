@@ -13,12 +13,12 @@
 ## 签名
 
 ```typescript
-function functions(object: unknown): string[];
+function functions(object: any): string[];
 ```
 
 ### 参数
 
-- `object` (`unknown`): 要检查的对象。
+- `object` (`any`): 要检查的对象。
 
 ### 返回值
 

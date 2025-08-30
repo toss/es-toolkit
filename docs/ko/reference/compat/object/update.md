@@ -11,22 +11,18 @@
 ## 인터페이스
 
 ```typescript
-function update<T extends object | null | undefined>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown
-): T;
+function update(obj: object, path: PropertyKey | PropertyKey[], updater: (value: any) => any): any;
 ```
 
 ### 파라미터
 
-- `obj` (`T`): 수정할 객체.
-- `path` (`PropertyKey | readonly PropertyKey[]`): 업데이트할 속성의 경로.
-- `updater` (`(value: unknown) => unknown`): 업데이트된 값을 생성하는 함수.
+- `obj` (`object`): 수정할 객체.
+- `path` (`PropertyKey | PropertyKey[]`): 업데이트할 속성의 경로.
+- `updater` (`(value: any) => any`): 업데이트된 값을 생성하는 함수.
 
 ### 반환 값
 
-(`T`): 수정된 객체.
+(`any`): 수정된 객체.
 
 ## 예시
 
