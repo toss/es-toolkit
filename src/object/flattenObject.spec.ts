@@ -131,9 +131,12 @@ describe('flattenObject', function () {
   });
 
   it('handles arrays', () => {
-    const result = flattenObject({
-      a: [1, 2, 3],
-    });
+    const result = flattenObject(
+      {
+        a: [1, 2, 3],
+      },
+      { flattenArray: true }
+    );
 
     expect(result).toEqual({
       'a.0': 1,
@@ -143,9 +146,12 @@ describe('flattenObject', function () {
   });
 
   it('handles object arrays', () => {
-    const result = flattenObject({
-      a: [1, { b: 2 }, 3, [{ c: 4 }]],
-    });
+    const result = flattenObject(
+      {
+        a: [1, { b: 2 }, 3, [{ c: 4 }]],
+      },
+      { flattenArray: true }
+    );
 
     expect(result).toEqual({
       'a.0': 1,
@@ -166,7 +172,7 @@ describe('flattenObject', function () {
             d: [2, 3],
           },
         },
-        { delimiter: '/' }
+        { delimiter: '/', flattenArray: true }
       );
 
       expect(result).toEqual({
@@ -212,7 +218,7 @@ describe('flattenObject', function () {
             },
           },
         },
-        { delimiter: '_' }
+        { delimiter: '_', flattenArray: true }
       );
 
       expect(result).toEqual({
@@ -271,7 +277,7 @@ describe('flattenObject', function () {
             },
           },
         },
-        { delimiter: '@#$' }
+        { delimiter: '@#$', flattenArray: true }
       );
 
       expect(result).toEqual({
