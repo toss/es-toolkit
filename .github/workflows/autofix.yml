@@ -2,7 +2,7 @@ name: autofix.ci
 
 on:
   push:
-    branches: [main, beta, next, v1, v2, v3]
+    branches: [main]
   pull_request:
     types: [opened, synchronize, reopened]
 
