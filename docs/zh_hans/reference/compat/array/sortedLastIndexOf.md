@@ -17,7 +17,7 @@
 ## 签名
 
 ```typescript
-function sortedLastIndexOf(array: ArrayLike | null | undefined, value: T): number;
+function sortedLastIndexOf<T>(array: ArrayLike | null | undefined, value: T): number;
 ```
 
 ### 参数

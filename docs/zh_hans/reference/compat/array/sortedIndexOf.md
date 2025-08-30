@@ -17,7 +17,7 @@
 ## 签名
 
 ```typescript
-function sortedIndexOf(array: ArrayLike | null | undefined, value: T): number;
+function sortedIndexOf<T>(array: ArrayLike | null | undefined, value: T): number;
 ```
 
 ### 参数

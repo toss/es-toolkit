@@ -13,12 +13,12 @@
 ## インターフェース
 
 ```typescript
-function nthArg(n: number): (...args: any[]) => unknown;
+function nthArg(n?: number): (...args: any[]) => unknown;
 ```
 
 ### パラメータ
 
-- `n` (`number`): 取得する引数のインデックス。
+- `n` (`number`, オプション): 取得する引数のインデックス, デフォルトは `0`.
   負の場合、引数リストの末尾から数えます。文字列。
 
 ### 戻り値
