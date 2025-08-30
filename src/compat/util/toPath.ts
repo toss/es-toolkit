@@ -99,8 +99,3 @@ export function toPath(deepKey: any): string[] {
 
   return result;
 }
-
-/**
- * _.toPath(['a', 'b', 'c'])
- * _.toPath(null)
- */
