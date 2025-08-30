@@ -17,12 +17,12 @@
 ## 签名
 
 ```typescript
-function sortedLastIndexOf<T>(array: ArrayLike | null | undefined, value: T): number;
+function sortedLastIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
 ```
 
 ### 参数
 
-- `array` (`ArrayLike | null | undefined`): 已排序的数组。如果数组为 `null` 或 `undefined`，则返回 `-1`。
+- `array` (`ArrayLike<T> | null | undefined`): 已排序的数组。如果数组为 `null` 或 `undefined`，则返回 `-1`。
 - `value` (`T`): 要在已排序数组中通过比较查找的值。
 
 ### 返回值

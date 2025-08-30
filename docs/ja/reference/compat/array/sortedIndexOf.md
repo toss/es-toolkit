@@ -17,12 +17,12 @@
 ## インターフェース
 
 ```typescript
-function sortedIndexOf(array: ArrayLike | null | undefined, value: T): number;
+function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
 ```
 
 ### パラメータ
 
-- `array` (`ArrayLike | null | undefined`): ソートされた配列です。配列が `null` または `undefined` の場合、`-1` を返します。
+- `array` (`ArrayLike<T> | null | undefined`): ソートされた配列です。配列が `null` または `undefined` の場合、`-1` を返します。
 - `value` (`T`): ソートされた配列内で比較を通じて探す値。
 
 ### 戻り値
