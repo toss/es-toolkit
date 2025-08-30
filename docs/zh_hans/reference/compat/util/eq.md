@@ -11,13 +11,13 @@
 ## 签名
 
 ```typescript
-function eq(value?: unknown, other?: unknown): boolean;
+function eq(value: any, other: any): boolean;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要比较的值。
-- `other` (`unknown`): 要比较的另一个值。
+- `value` (`any`): 要比较的值。
+- `other` (`any`): 要比较的另一个值。
 
 ### 返回值
 

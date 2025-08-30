@@ -11,16 +11,16 @@
 ## 인터페이스
 
 ```typescript
-function toLower(value?: unknown): string;
+function toLower<T extends string = string>(value?: T): Lowercase<T>;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 변환할 값.
+- `value` (`T`): 변환할 값.
 
 ### 반환 값
 
-(`string`): 소문자로 변환된 문자열.
+(`Lowercase<T>`): 소문자로 변환된 문자열.
 
 ## 예시
 
