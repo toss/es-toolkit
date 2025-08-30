@@ -24,7 +24,7 @@ function padStart(str: string, length = 0, chars = ' '): string;
 
 ### 戻り値
 
-指定された長さまで拡張され、先頭に文字が追加された文字列。
+(`string`): 指定された長さまで拡張され、先頭に文字が追加された文字列。
 
 ## 例
 

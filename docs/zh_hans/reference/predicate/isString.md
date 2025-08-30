@@ -16,7 +16,7 @@ function isString(value: unknown): value is string;
 
 ### 返回值
 
-- (`x is string`): 如果值是字符串，则返回 `true`，否则返回 `false`。
+(`value is string`): 如果值是字符串，则返回 `true`，否则返回 `false`。
 
 ## 示例
 
