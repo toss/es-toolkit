@@ -11,9 +11,7 @@ Finds the element in an array that has the minimum value.
 ## Signature
 
 ```typescript
-function min<T>(items: [T, ...T[]]): T;
-function min(): undefined;
-function min<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
+function min<T>(items: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### Parameters
