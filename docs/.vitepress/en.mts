@@ -52,6 +52,7 @@ function sidebar(): DefaultTheme.Sidebar {
       items: sortByText([
         {
           text: 'Array Utilities',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'array'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'array'),
@@ -59,6 +60,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Function Utilities',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'function'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'function'),
@@ -66,6 +68,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Math Utilities',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'math'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'math'),
@@ -73,6 +76,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Object Utilities',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'object'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'object'),
@@ -80,6 +84,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Predicates',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'predicate'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'predicate'),
@@ -87,6 +92,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise Utilities',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'promise'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'promise'),
@@ -94,6 +100,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'String Utilities',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'string'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'string'),
@@ -101,6 +108,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Utility Functions',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'util'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'util'),
@@ -108,6 +116,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Errors',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'reference', 'error'),
             ...getSidebarItems.compat('en', docsRoot, 'reference', 'compat', 'error'),

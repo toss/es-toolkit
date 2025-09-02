@@ -51,6 +51,7 @@ function sidebar(): DefaultTheme.Sidebar {
       items: sortByText([
         {
           text: '배열',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'array'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'array'),
@@ -58,6 +59,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '함수',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'function'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'function'),
@@ -65,6 +67,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '숫자',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'math'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'math'),
@@ -72,6 +75,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '객체',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'object'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'object'),
@@ -79,6 +83,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '타입 가드',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'predicate'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'predicate'),
@@ -86,6 +91,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'promise'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'promise'),
@@ -93,6 +99,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '문자열',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'string'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'string'),
@@ -100,6 +107,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '유틸리티',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'util'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'util'),
@@ -107,6 +115,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '에러',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ko', 'reference', 'error'),
             ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'error'),

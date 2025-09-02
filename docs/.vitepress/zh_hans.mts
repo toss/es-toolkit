@@ -52,6 +52,7 @@ function sidebar(): DefaultTheme.Sidebar {
       items: sortByText([
         {
           text: '数组工具',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'array'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'array'),
@@ -59,6 +60,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '函数工具',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'function'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'function'),
@@ -66,6 +68,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '数学工具',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'math'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'math'),
@@ -73,6 +76,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '对象工具',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'object'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'object'),
@@ -80,6 +84,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '谓词',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'predicate'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'predicate'),
@@ -87,6 +92,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise 工具',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'promise'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'promise'),
@@ -94,6 +100,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '字符串工具',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'string'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'string'),
@@ -101,6 +108,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '工具函数',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'util'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'util'),
@@ -108,6 +116,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '错误',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'error'),
             ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'error'),

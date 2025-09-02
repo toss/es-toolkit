@@ -51,6 +51,7 @@ function sidebar(): DefaultTheme.Sidebar {
       items: sortByText([
         {
           text: '配列',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'array'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'array'),
@@ -58,6 +59,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '関数',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'function'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'function'),
@@ -65,6 +67,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '数学',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'math'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'math'),
@@ -72,6 +75,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'オブジェクト',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'object'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'object'),
@@ -79,6 +83,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '述語',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'predicate'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'predicate'),
@@ -86,6 +91,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'Promise',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'promise'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'promise'),
@@ -93,6 +99,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: '文字列',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'string'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'string'),
@@ -100,6 +107,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'ユーティリティ',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'util'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'util'),
@@ -107,6 +115,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: 'エラー',
+          collapsed: true,
           items: [
             ...getSidebarItems(docsRoot, 'ja', 'reference', 'error'),
             ...getSidebarItems.compat('ja', docsRoot, 'ja', 'reference', 'compat', 'error'),
