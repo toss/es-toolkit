@@ -32,7 +32,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '主页', link: '/zh_hans/' },
     { text: '简介', link: '/zh_hans/intro' },
     { text: '参考', link: '/zh_hans/reference/array/at' },
-    { text: '兼容性参考', link: '/zh_hans/reference/compat/array/castArray' },
+    { text: 'Lodash 兼容性', link: '/zh_hans/reference/compat/array/castArray' },
   ];
 }
 
