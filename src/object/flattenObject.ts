@@ -8,12 +8,23 @@ interface FlattenObjectOptions {
   delimiter?: string;
 }
 
+interface FlattenObjectMapOptions {
+  /**
+   * The delimiter to use between nested keys.
+   * @default '.'
+   */
+  delimiter?: string;
+  /**
+   * The target Map to populate with flattened key-value pairs.
+   */
+  target: Map<string, any>;
+}
 
 /**
  * Flattens a nested object into a single level object with delimiter-separated keys.
  *
  * @param {object} object - The object to flatten.
- * @param {FlattenObjectOptions | Map<string, any>} [optionsOrTarget] - Options for flattening or target Map.
+ * @param {FlattenObjectOptions | FlattenObjectMapOptions | Map<string, any>} [options] - Options for flattening.
  * @returns {Record<string, any> | Map<string, any>} - The flattened object or Map.
  *
  * @example
@@ -39,17 +50,31 @@ interface FlattenObjectOptions {
  * const map = flattenObject(nestedObject, new Map());
  * console.log(map);
  * // Output: Map { 'a.b.c' => 1, 'd.0' => 2, 'd.1' => 3 }
+ *
+ * // Or flatten into a Map with custom delimiter
+ * const customMap = flattenObject(nestedObject, { delimiter: '_', target: new Map() });
+ * console.log(customMap);
+ * // Output: Map { 'a_b_c' => 1, 'd_0' => 2, 'd_1' => 3 }
  */
 export function flattenObject(
   object: object,
-  optionsOrTarget?: FlattenObjectOptions | Map<string, any>
+  options?: FlattenObjectOptions | FlattenObjectMapOptions | Map<string, any>
 ): Record<string, any> | Map<string, any> {
-  if (optionsOrTarget instanceof Map) {
-    flattenObjectIntoMap(object, optionsOrTarget, '', '.');
-    return optionsOrTarget;
+  // Legacy support: Map as second parameter
+  if (options instanceof Map) {
+    flattenObjectIntoMap(object, options, '', '.');
+    return options;
   }
 
-  const { delimiter = '.' } = optionsOrTarget || {};
+  // New syntax: { delimiter, target }
+  if (options && 'target' in options) {
+    const { delimiter = '.', target } = options;
+    flattenObjectIntoMap(object, target, '', delimiter);
+    return target;
+  }
+
+  // Original syntax: { delimiter }
+  const { delimiter = '.' } = options || {};
   return flattenObjectImpl(object, '', delimiter);
 }
 
