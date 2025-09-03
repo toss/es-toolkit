@@ -45,7 +45,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'Installation & Usage', link: '/usage' },
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
-        { text: 'Compatibility with Lodash', link: '/compatibility' },
+        { text: 'Lodash Compatibility', link: '/compatibility' },
       ],
     },
     {

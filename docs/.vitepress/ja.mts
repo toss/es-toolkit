@@ -31,7 +31,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: 'ホーム', link: '/ja' },
     { text: '導入', link: '/ja/intro' },
     { text: 'リファレンス', link: '/ja/reference/array/at' },
-    { text: '互換性リファレンス', link: '/ja/reference/compat/array/castArray' },
+    { text: 'Lodash 互換性', link: '/ja/reference/compat/array/castArray' },
   ];
 }
 

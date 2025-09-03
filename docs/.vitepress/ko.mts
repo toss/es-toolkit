@@ -31,7 +31,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '홈', link: '/ko' },
     { text: '소개', link: '/ko/intro' },
     { text: '레퍼런스', link: '/ko/reference/array/at' },
-    { text: '호환성 레퍼런스', link: '/ko/reference/compat/array/castArray' },
+    { text: 'Lodash 호환성', link: '/ko/reference/compat/array/castArray' },
   ];
 }
 
