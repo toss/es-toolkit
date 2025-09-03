@@ -13,9 +13,9 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 ### 参数
 
 - `func` (`() => Promise<T>`): 一个返回 `Promise` 的函数。
-- `retries`: 重试的次数。默认值为 `Number.POSITIVE_INFINITY`，即会一直重试直到成功。
-- `delay`: 每次重试之间的间隔。可以是毫秒数，也可以是一个根据当前重试次数 (`attempts`) 动态计算的函数。默认值为 `0`。
-- `signal`: 一个可以用来取消重试的 `AbortSignal`。
+- `retries` (`number`): 重试的次数。默认值为 `Number.POSITIVE_INFINITY`，即会一直重试直到成功。
+- `delay` (`number | ((attempts: number) => number)`): 每次重试之间的间隔。可以是毫秒数，也可以是一个根据当前重试次数 (`attempts`) 动态计算的函数。默认值为 `0`。
+- `signal` (`AbortSignal`): 一个可以用来取消重试的 `AbortSignal`。
 
 ### 返回值
 
