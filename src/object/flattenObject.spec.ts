@@ -281,4 +281,37 @@ describe('flattenObject', function () {
       });
     });
   });
+
+  describe('Map functionality', () => {
+    it('flattens into a provided Map', () => {
+      const nestedObject = {
+        a: {
+          b: {
+            c: 1,
+          },
+        },
+        d: [2, 3],
+      };
+
+      const map = new Map();
+      const result = flattenObject(nestedObject, map);
+
+      expect(result).toBe(map);
+      expect(map.get('a.b.c')).toBe(1);
+      expect(map.get('d.0')).toBe(2);
+      expect(map.get('d.1')).toBe(3);
+      expect(map.size).toBe(3);
+    });
+
+    it('works with pre-populated Map', () => {
+      const map = new Map([['existing', 'value']]);
+
+      flattenObject({ a: { b: 1 } }, map);
+
+      expect(map.get('existing')).toBe('value');
+      expect(map.get('a.b')).toBe(1);
+      expect(map.size).toBe(2);
+    });
+
+  });
 });
