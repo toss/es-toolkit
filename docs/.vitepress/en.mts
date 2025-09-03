@@ -32,7 +32,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: 'Home', link: '/' },
     { text: 'Introduction', link: '/intro' },
     { text: 'Reference', link: '/reference/array/at' },
-    { text: 'Compat Reference', link: '/reference/compat/array/castArray' },
+    { text: 'Lodash Compatibility', link: '/reference/compat/array/castArray' },
   ];
 }
 
@@ -99,44 +99,53 @@ function sidebar(): DefaultTheme.Sidebar {
       ]),
     },
     {
-      text: 'Compat Reference',
-      items: sortByText([
+      text: 'Lodash Compatibility',
+      items: [
         {
-          text: 'Array Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'compat', 'array'),
+          text: 'Introduction',
+          link: '/compat/intro',
         },
         {
-          text: 'Function Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'compat', 'function'),
+          text: 'Reference',
+          items: sortByText([
+            {
+              text: 'Array Utilities',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'reference', 'compat', 'array'),
+            },
+            {
+              text: 'Function Utilities',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'reference', 'compat', 'function'),
+            },
+            {
+              text: 'Math Utilities',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'reference', 'compat', 'math'),
+            },
+            {
+              text: 'Object Utilities',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'reference', 'compat', 'object'),
+            },
+            {
+              text: 'Predicates',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'reference', 'compat', 'predicate'),
+            },
+            {
+              text: 'String Utilities',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'reference', 'compat', 'string'),
+            },
+            {
+              text: 'Utility Functions',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'reference', 'compat', 'util'),
+            },
+          ]),
         },
-        {
-          text: 'Math Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'compat', 'math'),
-        },
-        {
-          text: 'Object Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'compat', 'object'),
-        },
-        {
-          text: 'Predicates',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'compat', 'predicate'),
-        },
-        {
-          text: 'String Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'compat', 'string'),
-        },
-        {
-          text: 'Utility Functions',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'compat', 'util'),
-        },
-      ]),
+      ],
     },
   ];
 }

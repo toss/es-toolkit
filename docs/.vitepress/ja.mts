@@ -44,7 +44,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'インストールと使用方法', link: '/ja/usage' },
         { text: 'バンドルサイズ', link: '/ja/bundle-size' },
         { text: 'パフォーマンス', link: '/ja/performance' },
-        { text: 'Lodash との互換性', link: '/ja/compatibility' },
+        { text: 'Lodash 互換性', link: '/ja/compatibility' },
       ],
     },
     {
@@ -98,44 +98,53 @@ function sidebar(): DefaultTheme.Sidebar {
       ]),
     },
     {
-      text: '互換性リファレンス',
-      items: sortByText([
+      text: 'Lodash 互換性',
+      items: [
         {
-          text: '配列',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'array'),
+          text: '紹介',
+          link: '/ja/compat/intro',
         },
         {
-          text: '関数',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'function'),
+          text: 'リファレンス',
+          items: sortByText([
+            {
+              text: '配列',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'array'),
+            },
+            {
+              text: '関数',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'function'),
+            },
+            {
+              text: '数学',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'math'),
+            },
+            {
+              text: 'オブジェクト',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'object'),
+            },
+            {
+              text: '述語',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'predicate'),
+            },
+            {
+              text: '文字列',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'string'),
+            },
+            {
+              text: 'ユーティリティ',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'util'),
+            },
+          ]),
         },
-        {
-          text: '数学',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'math'),
-        },
-        {
-          text: 'オブジェクト',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'object'),
-        },
-        {
-          text: '述語',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'predicate'),
-        },
-        {
-          text: '文字列',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'string'),
-        },
-        {
-          text: 'ユーティリティ',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'util'),
-        },
-      ]),
+      ],
     },
   ];
 }
