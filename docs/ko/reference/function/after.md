@@ -1,17 +1,31 @@
 # after
 
-`n`번째 호출부터만 실행되는 함수를 생성해요.
-제공된 함수는 `n`번째 호출부터 실행돼요.
-
-이는 특정 수의 호출 이후에만 동작이 발생해야 하는 이벤트나 비동기 작업에 유용해요.
-
-## 인터페이스
+`n`번째 호출부터만 실행하고, 그 전까지의 호출은 무시하는 새로운 함수를 생성해요.
 
 ```typescript
-function after<F extends (...args: any[]) => any>(
-  n: number,
-  func: F
-): (...args: Parameters<F>) => ReturnType<F> | undefined;
+const newFunc = at(n, func);
+```
+
+## 레퍼런스
+
+### `after(n, func)`
+
+처음부터 몇 차례의 호출을 무시하고, `n`번째부터 함수를 호출하고 싶을 때, `after` 함수를 사용하세요.
+
+```typescript
+import { after } from 'es-toolkit';
+
+const mockFn = () => {
+  console.log('실행됨');
+};
+const afterFn = after(3, mockFn);
+
+// 아무것도 로깅하지 않아요.
+afterFn();
+// 아무것도 로깅하지 않아요.
+afterFn();
+// '실행됨'을 로깅해요.
+afterFn();
 ```
 
 ### 파라미터
@@ -30,21 +44,3 @@ function after<F extends (...args: any[]) => any>(
 ### 에러
 
 `n`이 음수일 경우 오류를 발생시켜요.
-
-## 예시
-
-```typescript
-import { after } from 'es-toolkit/function';
-
-const mockFn = () => {
-  console.log('실행됨');
-};
-const afterFn = after(3, mockFn);
-
-// 아무것도 로깅하지 않아요.
-afterFn();
-// 아무것도 로깅하지 않아요.
-afterFn();
-// '실행됨'을 로깅해요.
-afterFn();
-```
