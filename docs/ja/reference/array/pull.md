@@ -8,13 +8,13 @@
 ## インターフェース
 
 ```typescript
-function pull<T>(arr: T[], valuesToRemove: unknown[]): T[];
+function pull<T, U extends T>(arr: T[], valuesToRemove: readonly U[]): T[];
 ```
 
 ### パラメータ
 
 - `arr` (`T[]`): 変更する配列。
-- `valuesToRemove` (`unknown[]`): 配列から削除する値。
+- `valuesToRemove` (`U[]`): 配列から削除する値。
 
 ### 戻り値
 
