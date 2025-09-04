@@ -1,43 +1,22 @@
 # after
 
-创建一个仅在第 `n` 次调用后执行的函数。
-提供的函数将从第 `n` 次调用开始被调用。
-
-这对于涉及事件或异步操作的场景特别有用，其中某个操作应仅在一定数量的调用之后发生。
-
-## 签名
+创建一个从第`n`次调用开始执行，之前的调用将被忽略的新函数。
 
 ```typescript
-function after<F extends (...args: any[]) => any>(
-  n: number,
-  func: F
-): (...args: Parameters<F>) => ReturnType<F> | undefined;
+const newFunc = after(n, func);
 ```
 
-### 参数
+## 参考
 
-- `n` (`number`): 要求 `func` 执行的调用次数。
-- `func` (`F`): 要调用的函数。
+### `after(n, func)`
 
-### 返回值
-
-(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 一个新函数，它：
-
-- 跟踪调用次数。
-- 从第 `n` 次调用开始调用 `func`。
-- 如果调用次数少于 `n` 次，则返回 `undefined`。
-
-### 抛出
-
-如果 `n` 为负数，则抛出错误。
-
-## 示例
+当您想要忽略前几次调用，从第`n`次开始调用函数时，请使用`after`函数。
 
 ```typescript
-import { after } from 'es-toolkit/function';
+import { after } from 'es-toolkit';
 
 const mockFn = () => {
-  console.log('called');
+  console.log('执行了');
 };
 const afterFn = after(3, mockFn);
 
@@ -45,6 +24,23 @@ const afterFn = after(3, mockFn);
 afterFn();
 // 不会输出任何内容。
 afterFn();
-// 将输出 'called'。
+// 输出'执行了'。
 afterFn();
 ```
+
+### 参数
+
+- `n` (`number`): 执行`func`所需的调用次数。
+- `func` (`F`): 要执行的函数。
+
+### 返回值
+
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 返回一个新函数。该函数具有以下功能：
+
+- 跟踪调用次数。
+- 从第`n`次调用开始调用`func`。
+- 在调用达到`n`次之前返回`undefined`。
+
+### 错误
+
+如果`n`为负数，则会抛出错误。
