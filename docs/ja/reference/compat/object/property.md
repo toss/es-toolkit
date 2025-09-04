@@ -11,16 +11,16 @@
 ## インターフェース
 
 ```typescript
-function property(path: PropertyKey | PropertyKey[]): (object: unknown) => any;
+function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
 ```
 
 ### パラメータ
 
-- `path` (`string` または `number` または `symbol` または `Array<string | number | symbol>`): プロパティを取得するパス。
+- `path` (`PropertyKey | PropertyKey[]`): プロパティを取得するパス。
 
 ### 戻り値
 
-(`(object: unknown) => any`): オブジェクトの指定されたパスにある値を取得する関数。
+(`(object: T) => R`): オブジェクトの指定されたパスにある値を取得する関数。
 
 ## 例
 

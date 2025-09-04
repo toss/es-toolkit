@@ -14,13 +14,13 @@
 ## 签名
 
 ```typescript
-function floor(number: number | string, precision: number | string = 0): number;
+function floor(number: number, precision: number = 0): number;
 ```
 
 ### 参数
 
-- `number` (`number | string`): 要向下舍入的数字。
-- `precision` (`number | string`, 可选): 要向下舍入的精度，默认为 `0`。
+- `number` (`number`): 要向下舍入的数字。
+- `precision` (`number`, 可选): 要向下舍入的精度，默认为 `0`。
 
 ### 返回
 
