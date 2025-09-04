@@ -14,12 +14,12 @@ The sign of `-0` is preserved.
 ## Signature
 
 ```typescript
-function toString(value?: unknown): string;
+function toString(value: any): string;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to convert.
+- `value` (`any`): The value to convert.
 
 ### Returns
 

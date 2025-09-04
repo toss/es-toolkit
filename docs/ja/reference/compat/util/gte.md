@@ -11,13 +11,13 @@
 ## インターフェース
 
 ```typescript
-function gte(value: unknown, other: unknown): boolean;
+function gte(value: any, other: any): boolean;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 比較する値。
-- `other` (`unknown`): 比較する他の値。
+- `value` (`any`): 比較する値。
+- `other` (`any`): 比較する他の値。
 
 ### 戻り値
 

@@ -11,17 +11,17 @@
 
 ```typescript
 function defaultTo<T>(value: T | null | undefined, defaultValue?: T): T;
-function defaultTo(value?: unknown, defaultValue?: unknown): any;
+function defaultTo<T, D>(value: T | null | undefined, defaultValue: D): T | D;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要检查的值。
-- `defaultValue` (`unknown`): 如果值是 `null`、`undefined` 或 `NaN`，则返回的默认值。
+- `value` (`T | null | undefined`): 要检查的值。
+- `defaultValue` (`D`): 如果值是 `null`、`undefined` 或 `NaN`，则返回的默认值。
 
 ### 返回值
 
-(`unknown`): 第一个值或默认值。
+(`T | D`): 第一个值或默认值。
 
 ## 示例
 

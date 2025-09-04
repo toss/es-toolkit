@@ -11,16 +11,15 @@
 ## 인터페이스
 
 ```typescript
-function split(string: string): string[];
-function split(string: string, separator: RegExp | string): string[];
-function split(string: string, separator: RegExp | string, limit: number): string[];
+function split(string: string | null | undefined, separator?: RegExp | string, limit?: number): string[];
+function split(string: string | null | undefined, index: string | number, guard: object): string[];
 ```
 
 ## 파라미터
 
-- `string` (`string`): 분할할 문자열이에요.
-- `separator` (`RegExp|string`): 분할 기준으로 사용할 구분자 패턴이에요.
-- `limit` (`number`): 결과 배열의 최대 길이예요.
+- `string` (`string | null | undefined`): 분할할 문자열이에요.
+- `separator` (`RegExp | string`): 분할 기준으로 사용할 구분자 패턴이에요.
+- `limit` (`number`, 선택 사항): 결과 배열의 최대 길이예요.
 
 ## 반환 값
 

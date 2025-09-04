@@ -11,24 +11,17 @@ Binds methods of an object to the object itself, overwriting the existing method
 ## Signature
 
 ```typescript
-function bindAll(
-  object: Record<string, any>,
-  ...methodNames: Array<string | string[] | number | IArguments>
-): Record<string, any>;
+function bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T;
 ```
 
 ### Parameters
 
-- `object` (`Object`): The object to bind methods to.
-- `methodNames` (`...(string | string[] | number | IArguments)`): The method names to bind. Can be specified in the following formats:
-  - Individual method name strings
-  - Arrays of method names
-  - Numbers (with special handling for `-0`)
-  - Arguments objects
+- `object` (`T`): The object to bind methods to.
+- `methodNames` (`...(string | string[])`): The method names to bind.
 
 ### Returns
 
-(`Object`): The object with bound methods.
+(`T`): The object with bound methods.
 
 ## Examples
 

@@ -14,12 +14,12 @@
 ## インターフェース
 
 ```typescript
-function toString(value?: unknown): string;
+function toString(value: any): string;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 変換する値。
+- `value` (`any`): 変換する値。
 
 ### 戻り値
 
