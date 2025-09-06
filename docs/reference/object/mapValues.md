@@ -6,7 +6,7 @@ by running each own enumerable property of the object through the iteratee funct
 ## Signature
 
 ```typescript
-function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>(
+function mapValues<T extends object, K extends keyof T, V>(
   object: T,
   getNewValue: (value: T[K], key: K, object: T) => V
 ): Record<K, V>;
@@ -14,7 +14,7 @@ function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>
 
 ### Parameters
 
-- `obj` (`T extends Record<PropertyKey, unknown>`): The object to iterate over.
+- `obj` (`T extends object`): The object to iterate over.
 - `getNewValue`: (`(value: T[K], key: K, object: T) => V`): The function invoked per own enumerable property.
 
 ### Returns

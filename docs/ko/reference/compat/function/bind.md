@@ -15,7 +15,7 @@ Symbol 타입의 `bind.placeholder`를 쓰면, 미리 제공한 인자가 사용
 ## 인터페이스
 
 ```typescript
-function bind<F extends Function>(func: F, thisObj?: unknown, ...partialArgs: any[]): F;
+function bind(func: (...args: any[]) => any, thisObj: any, ...partialArgs: any[]): (...args: any[]) => any;
 
 namespace bind {
   placeholder: symbol;
@@ -24,13 +24,13 @@ namespace bind {
 
 ### 파라미터
 
-- `func` (`F`): `this` 를 고정할 함수.
+- `func` (`(...args: any[]) => any`): `this` 를 고정할 함수.
 - `thisObj` (`any`, optional): 함수에 고정될 `this` 객체.
 - `partialArgs` (`any[]`): 미리 주어질 인자.
 
 ### 반환 값
 
-(`F`): `this`가 고정된 함수.
+(`(...args: any[]) => any`): `this`가 고정된 함수.
 
 ## 예시
 

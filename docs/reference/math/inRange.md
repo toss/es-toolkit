@@ -5,8 +5,8 @@ Checks if the value is within a specified range.
 ## Signature
 
 ```typescript
-export function inRange(value: number, maximum: number): boolean;
-export function inRange(value: number, minimum: number, maximum: number): boolean;
+function inRange(value: number, maximum: number): boolean;
+function inRange(value: number, minimum: number, maximum: number): boolean;
 ```
 
 ### Parameters

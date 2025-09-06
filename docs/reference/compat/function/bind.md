@@ -15,7 +15,7 @@ Note that unlike native `Function#bind`, this method doesn't set the `length` pr
 ## Signature
 
 ```typescript
-function bind<F extends Function>(func: F, thisObj?: unknown, ...partialArgs: any[]): F;
+function bind(func: (...args: any[]) => any, thisObj: any, ...partialArgs: any[]): (...args: any[]) => any;
 
 namespace bind {
   placeholder: symbol;
@@ -24,13 +24,13 @@ namespace bind {
 
 ### Parameters
 
-- `func` (`F`): The function to bind.
+- `func` (`(...args: any[]) => any`): The function to bind.
 - `thisObj` (`any`, optional): The `this` binding of `func`.
 - `partialArgs` (`any[]`): The arguments to be partially applied.
 
 ### Returns
 
-(`F`): Returns the new bound function.
+(`(...args: any[]) => any`): Returns the new bound function.
 
 ## Examples
 

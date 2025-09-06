@@ -15,20 +15,20 @@ Only transforms arguments up to the number of transform functions provided.
 ## Signature
 
 ```typescript
-function overArgs<F extends (...args: any[]) => any, T extends Array<any>>(
-  func: F,
-  transforms: T
-): (...args: any[]) => ReturnType<F>;
+function overArgs(
+  func: (...args: any[]) => any,
+  ...transforms: Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>
+): (...args: any[]) => any;
 ```
 
 ### Parameters
 
-- `func` (`F`): The function to wrap.
-- `transforms` (`T`): The functions to transform arguments.
+- `func` (`(...args: any[]) => any`): The function to wrap.
+- `transforms` (`Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>`): The functions to transform arguments.
 
 ### Returns
 
-(`(...args: any[]) => ReturnType<F>`): Returns a new function that transforms its arguments before passing them to func.
+(`(...args: any[]) => any`): Returns a new function that transforms its arguments before passing them to func.
 
 ### Throws
 

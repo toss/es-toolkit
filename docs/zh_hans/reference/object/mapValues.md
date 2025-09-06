@@ -5,7 +5,7 @@
 ## 签名
 
 ```typescript
-function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>(
+function mapValues<T extends object, K extends keyof T, V>(
   object: T,
   getNewValue: (value: T[K], key: K, object: T) => V
 ): Record<K, V>;
@@ -13,7 +13,7 @@ function mapValues<T extends Record<PropertyKey, unknown>, K extends keyof T, V>
 
 ### 参数
 
-- `object` (`T extends Record<PropertyKey, unknown>`): 要迭代的对象。
+- `object` (`T extends object`): 要迭代的对象。
 - `getNewValue`: (`(value: T[K], key: K, object: T) => V`): 每个自身可枚举属性调用的函数。
 
 ### 返回值
