@@ -15,18 +15,17 @@
 ## 인터페이스
 
 ```typescript
-function toPairs<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairs<T>(set: Set<T>): Array<[T, T]>;
-function toPairs<K, V>(map: Map<K, V>): Array<[K, V]>;
+function toPairs<T>(object?: Record<string, T> | Record<number, T>): Array<[string, T]>;
+function toPairs(object?: object): Array<[string, any]>;
 ```
 
 ### 파라미터
 
-- `object` (`Record<string | number, T> | Set<T> | Map<K, V>`): 조회할 객체, `Set`, 또는 `Map`.
+- `object` (`Record<string, T> | Record<number, T> | object`, 선택 사항): 조회할 객체, `Set`, 또는 `Map`.
 
 ### 반환 값
 
-(`Array<[key: PropertyKey, value: T]>`): 프로퍼티-값 쌍.
+(`Array<[string, T]> | Array<[string, any]>`): 프로퍼티-값 쌍.
 
 ## 예시
 

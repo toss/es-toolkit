@@ -15,12 +15,12 @@
 ## インターフェース
 
 ```typescript
-function toSafeInteger(value?: unknown): number;
+function toSafeInteger(value: any): number;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 変換する値。
+- `value` (`any`): 変換する値。
 
 ### 戻り値
 

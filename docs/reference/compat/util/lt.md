@@ -11,13 +11,13 @@ Checks if value is less than other.
 ## Signature
 
 ```typescript
-function lt(value: unknown, other: unknown): boolean;
+function lt(value: any, other: any): boolean;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to compare.
-- `other` (`unknown`): The other value to compare.
+- `value` (`any`): The value to compare.
+- `other` (`any`): The other value to compare.
 
 ### Returns
 

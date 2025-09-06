@@ -223,6 +223,27 @@ export function cloneDeepWithImpl<T>(
     return result as T;
   }
 
+  if (valueToClone instanceof Boolean) {
+    const result = new Boolean(valueToClone.valueOf()) as T;
+    stack.set(valueToClone, result);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    return result;
+  }
+
+  if (valueToClone instanceof Number) {
+    const result = new Number(valueToClone.valueOf()) as T;
+    stack.set(valueToClone, result);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    return result;
+  }
+
+  if (valueToClone instanceof String) {
+    const result = new String(valueToClone.valueOf()) as T;
+    stack.set(valueToClone, result);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    return result;
+  }
+
   if (typeof valueToClone === 'object' && isCloneableObject(valueToClone)) {
     const result = Object.create(Object.getPrototypeOf(valueToClone));
 

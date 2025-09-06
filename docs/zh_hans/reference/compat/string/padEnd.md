@@ -14,7 +14,7 @@
 ## 签名
 
 ```typescript
-function padEnd(str: string, length = 0, chars = ' '): string;
+function padEnd(str?: string, length = 0, chars = ' '): string;
 ```
 
 ### 参数

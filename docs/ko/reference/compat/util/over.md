@@ -18,17 +18,18 @@
 ## 인터페이스
 
 ```typescript
-function over(...iteratees: Array<Iteratee | Iteratee[]>): (...args: any[]) => unknown[];
+function over<T>(
+  ...iteratees: Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>
+): (...args: any[]) => T[];
 ```
 
 ### 파라미터
 
-- `iteratees` (`Array<Iteratee | Iteratee[]>`): 호출할 반복자.
-  - `Iteratee`는 `((...args: any[]) => unknown) | symbol | number | string | object | null` 타입이에요.
+- `iteratees` (`Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>`): 호출할 반복자.
 
 ### 반환 값
 
-(`(...args: any[]) => unknown[]`): 새로운 함수를 반환해요.
+(`(...args: any[]) => T[]`): 새로운 함수를 반환해요.
 
 ## 예시
 
