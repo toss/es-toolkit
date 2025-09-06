@@ -13,7 +13,7 @@
 ## 인터페이스
 
 ```typescript
-function padStart(str: string, length = 0, chars = ' '): string;
+function padStart(str?: string, length = 0, chars = ' '): string;
 ```
 
 ### 파라미터

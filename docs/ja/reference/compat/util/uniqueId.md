@@ -16,7 +16,7 @@ function uniqueId(prefix?: string): string;
 
 ### パラメータ
 
-- `prefix` (`string`, optional): 識別子の先頭に付ける値。
+- `prefix` (`string`, オプション): 識別子の先頭に付ける値。デフォルトは `''` です。
 
 ### 戻り値
 

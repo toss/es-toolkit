@@ -19,11 +19,11 @@
 ## インターフェース
 
 ```typescript
-function setWith<T extends object | null | undefined>(
+function setWith<T extends object>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  value: unknown,
-  customizer?: (value: unknown) => unknown
+  value: any,
+  customizer?: (nsValue: any, key: string, nsObject: T) => any
 ): T;
 ```
 
@@ -31,8 +31,8 @@ function setWith<T extends object | null | undefined>(
 
 - `obj` (`T`): 変更するオブジェクト。
 - `path` (`PropertyKey | readonly PropertyKey[]`): 値を設定するプロパティのパス。
-- `value` (`unknown`): 設定する値。
-- `customizer` (`(value: unknown) => unknown`): パス作成をカスタマイズする関数。
+- `value` (`any`): 設定する値。
+- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, オプション): パス作成をカスタマイズする関数。
 
 ### 戻り値
 

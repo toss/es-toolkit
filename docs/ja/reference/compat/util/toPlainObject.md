@@ -11,7 +11,7 @@
 ## インターフェース
 
 ```typescript
-function toPlainObject(value: any): Record<string, any>;
+function toPlainObject(value?: any): any;
 ```
 
 ### パラメータ
@@ -20,7 +20,7 @@ function toPlainObject(value: any): Record<string, any>;
 
 ### 戻り値
 
-(`Record<string, any>`): 変換されたオブジェクトを返します。
+(`any`): 変換されたオブジェクトを返します。
 
 ## 例
 

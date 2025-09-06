@@ -18,17 +18,18 @@
 ## 签名
 
 ```typescript
-function over(...iteratees: Array<Iteratee | Iteratee[]>): (...args: any[]) => unknown[];
+function over<T>(
+  ...iteratees: Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>
+): (...args: any[]) => T[];
 ```
 
 ### 参数
 
-- `iteratees` (`Array<Iteratee | Iteratee[]>`): 要调用的迭代器。
-  - `Iteratee` 是 `((...args: any[]) => unknown) | symbol | number | string | object | null` 类型。
+- `iteratees` (`Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>`): 要调用的迭代器。
 
 ### 返回值
 
-(`(...args: any[]) => unknown[]`): 返回新函数。
+(`(...args: any[]) => T[]`): 返回新函数。
 
 ## 示例
 

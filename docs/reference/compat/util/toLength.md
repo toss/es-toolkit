@@ -13,12 +13,12 @@ It converts the given value to a number and floors it to an integer. If the valu
 ## Signature
 
 ```typescript
-function toLength(value?: unknown): number;
+function toLength(value: any): number;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to convert to a valid index.
+- `value` (`any`): The value to convert to a valid index.
 
 ### Returns
 

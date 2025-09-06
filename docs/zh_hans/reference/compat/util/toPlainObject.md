@@ -11,7 +11,7 @@
 ## 签名
 
 ```typescript
-function toPlainObject(value: any): Record<string, any>;
+function toPlainObject(value?: any): any;
 ```
 
 ### 参数
@@ -20,7 +20,7 @@ function toPlainObject(value: any): Record<string, any>;
 
 ### 返回值
 
-(`Record<string, any>`): 返回转换后的普通对象。
+(`any`): 返回转换后的普通对象。
 
 ## 示例
 
