@@ -116,4 +116,11 @@ describe('find', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(find).toEqualTypeOf<typeof findLodash>();
   });
+
+  it('should work with no predicate (uses identity)', () => {
+    expect(find([0, false, null, undefined, '', 1, 2, 3])).toBe(1);
+    expect(find([0, false, null, undefined, ''])).toBe(undefined);
+    expect(find({ a: 0, b: false, c: null, d: undefined, e: '', f: 1 })).toBe(1);
+    expect(find({ a: 0, b: false, c: null, d: undefined, e: '' })).toBe(undefined);
+  });
 });
