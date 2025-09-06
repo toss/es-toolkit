@@ -14,16 +14,16 @@ Unlike [`property`](./property.md), which creates a function bound to a specific
 ## Signature
 
 ```typescript
-function propertyOf(object: unknown): (path: PropertyKey | PropertyKey[]) => unknown;
+function propertyOf<T extends {}>(object: T): (path: PropertyKey | PropertyKey[]) => any;
 ```
 
 ### Parameters
 
-- `object` (`unknown`): The object to query.
+- `object` (`T`): The object to query.
 
 ### Returns
 
-(`(path: PropertyKey | PropertyKey[]) => unknown`): Returns a new function that takes a path and retrieves the value from the object at the specified path.
+(`(path: PropertyKey | PropertyKey[]) => any`): Returns a new function that takes a path and retrieves the value from the object at the specified path.
 
 ## Examples
 

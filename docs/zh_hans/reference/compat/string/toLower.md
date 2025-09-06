@@ -11,16 +11,16 @@
 ## 签名
 
 ```typescript
-function toLower(value?: unknown): string;
+function toLower<T extends string = string>(value?: T): Lowercase<T>;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要转换的值。
+- `value` (`T`): 要转换的值。
 
 ### 返回值
 
-(`string`): 返回小写的字符串.
+(`Lowercase<T>`): 返回小写的字符串.
 
 ## 示例
 

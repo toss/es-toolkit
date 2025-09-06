@@ -1,3 +1,6 @@
+import { toString } from './toString.ts';
+import { toKey } from '../_internal/toKey.ts';
+
 /**
  * Converts a deep key string into an array of path segments.
  *
@@ -16,6 +19,15 @@
  * toPath('.a[b].c.d[e]["f.g"].h') // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
  */
 export function toPath(deepKey: any): string[] {
+  if (Array.isArray(deepKey)) {
+    // @types/lodash defines this as string[], but lodash itself returns (string | symbol)[]
+    return deepKey.map(toKey) as string[];
+  }
+  if (typeof deepKey === 'symbol') {
+    // @types/lodash defines this as string[], but lodash itself returns [symbol]
+    return [deepKey as unknown as string];
+  }
+  deepKey = toString(deepKey);
   const result: string[] = [];
   const length = deepKey.length;
 

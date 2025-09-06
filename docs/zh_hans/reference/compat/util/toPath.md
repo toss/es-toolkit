@@ -13,12 +13,12 @@
 ## 签名
 
 ```typescript
-function toPath(deepKey: string): string[];
+function toPath(deepKey: any): string[];
 ```
 
 ### 参数
 
-- `deepKey` (`string`): 要转换的深层键字符串。
+- `deepKey` (`any`): 要转换的深层键字符串。
 
 ### 返回值
 

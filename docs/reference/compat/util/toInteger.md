@@ -14,12 +14,12 @@ they are removed by rounding down to the nearest whole number.
 ## Signature
 
 ```typescript
-function toInteger(value?: unknown): number;
+function toInteger(value: any): number;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to convert.
+- `value` (`any`): The value to convert.
 
 ### Returns
 

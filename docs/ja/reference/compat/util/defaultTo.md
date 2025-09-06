@@ -12,17 +12,17 @@
 
 ```typescript
 function defaultTo<T>(value: T | null | undefined, defaultValue?: T): T;
-function defaultTo(value?: unknown, defaultValue?: unknown): any;
+function defaultTo<T, D>(value: T | null | undefined, defaultValue: D): T | D;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): チェックする値。
-- `defaultValue` (`unknown`): 最初の値が `null`、`undefined`、または `NaN` の場合に返されるデフォルト値。
+- `value` (`T | null | undefined`): チェックする値。
+- `defaultValue` (`D`): 最初の値が `null`、`undefined`、または `NaN` の場合に返されるデフォルト値。
 
 ### 戻り値
 
-(`unknown`): 最初の値またはデフォルト値のいずれか。
+(`T | D`): 最初の値またはデフォルト値のいずれか。
 
 ## 例
 

@@ -22,13 +22,13 @@ or arguments object, even if the array or arguments object is sparse
 ## Signature
 
 ```typescript
-function hasIn(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+function hasIn<T>(object: T, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### Parameters
 
-- `object` (`unknown`): The object to query.
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): The path to check. This can be a single property key, an array of property keys, or a string representing a deep path.
+- `object` (`T`): The object to query.
+- `path` (`PropertyKey | PropertyKey[]`): The path to check. This can be a single property key, an array of property keys, or a string representing a deep path.
 
 ### Returns
 

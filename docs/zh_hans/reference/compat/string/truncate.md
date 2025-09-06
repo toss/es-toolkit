@@ -11,7 +11,7 @@
 
 ```typescript
 function truncate(
-  string: string,
+  string?: string,
   options?: {
     length?: number;
     separator?: string | RegExp;
