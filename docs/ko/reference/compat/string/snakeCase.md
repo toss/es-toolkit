@@ -1,23 +1,58 @@
-# snakeCase (🚧 문서 작성 중)
+# snakeCase (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `snakeCase`를 사용하세요
+
+이 `snakeCase` 함수는 `null`이나 `undefined` 처리를 위한 정규화 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [snakeCase](../../string/snakeCase.md)를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+문자열을 스네이크 케이스로 변환해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const snakeCased = snakeCase(str);
+```
 
 ## 레퍼런스
 
-### `snakeCase(...args)`
+### `snakeCase(str)`
 
-#### 인터페이스
+문자열을 스네이크 케이스(snake_case)로 변환하고 싶을 때 `snakeCase`를 사용하세요. 스네이크 케이스는 각 단어를 소문자로 쓰고 밑줄(_)로 연결하는 명명 규칙이에요.
+
+```typescript
+import { snakeCase } from 'es-toolkit/compat';
+
+// 카멜 케이스 변환
+snakeCase('camelCase');
+// Returns: 'camel_case'
+
+// 공백으로 구분된 문자열 변환
+snakeCase('some whitespace');
+// Returns: 'some_whitespace'
+
+// 하이픈으로 구분된 문자열 변환
+snakeCase('hyphen-text');
+// Returns: 'hyphen_text'
+
+// 대문자가 연속으로 나타나는 경우
+snakeCase('HTTPRequest');
+// Returns: 'http_request'
+```
+
+`null`이나 `undefined`는 빈 문자열로 처리해요.
+
+```typescript
+import { snakeCase } from 'es-toolkit/compat';
+
+snakeCase(null); // ''
+snakeCase(undefined); // ''
+```
 
 #### 파라미터
 
+- `str` (`string`, 선택): 스네이크 케이스로 변환할 문자열이에요.
+
 ### 반환 값
+
+(`string`): 스네이크 케이스로 변환된 문자열을 반환해요.

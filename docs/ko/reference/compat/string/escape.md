@@ -1,23 +1,48 @@
-# escape (🚧 문서 작성 중)
+# escape (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `escape`를 사용하세요
+
+이 `escape` 함수는 문자열이 아닌 입력값 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [escape](../../string/escape.md)를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+문자열에서 HTML 특수 문자를 HTML 엔티티로 변환해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = escape(str);
+```
 
 ## 레퍼런스
 
-### `escape(...args)`
+### `escape(str)`
 
-#### 인터페이스
+문자열에서 `&`, `<`, `>`, `"`, `'` 문자를 해당하는 HTML 엔티티로 변환해요. HTML 문서에 텍스트를 안전하게 삽입할 때 XSS 공격을 방지하는 데 유용해요.
+
+```typescript
+import { escape } from 'es-toolkit/compat';
+
+escape('This is a <div> element.'); // 'This is a &lt;div&gt; element.'
+escape('This is a "quote"'); // 'This is a &quot;quote&quot;'
+escape("This is a 'quote'"); // 'This is a &#39;quote&#39;'
+escape('This is a & symbol'); // 'This is a &amp; symbol'
+```
+
+문자열이 아닌 값도 문자열로 변환해서 처리해요.
+
+```typescript
+import { escape } from 'es-toolkit/compat';
+
+escape(123); // '123'
+escape(null); // ''
+escape(undefined); // ''
+```
 
 #### 파라미터
 
+- `str` (`string`, 선택): HTML 특수 문자를 이스케이프할 문자열이에요.
+
 ### 반환 값
+
+(`string`): HTML 특수 문자가 엔티티로 변환된 문자열을 반환해요.

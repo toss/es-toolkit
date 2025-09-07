@@ -1,23 +1,58 @@
-# startCase (🚧 문서 작성 중)
+# startCase (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `startCase`를 사용하세요
+
+이 `startCase` 함수는 `null`이나 `undefined` 처리를 위한 정규화 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [startCase](../../string/startCase.md)를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+문자열을 스타트 케이스로 변환해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const startCased = startCase(str);
+```
 
 ## 레퍼런스
 
-### `startCase(...args)`
+### `startCase(str)`
 
-#### 인터페이스
+문자열을 스타트 케이스(Start Case)로 변환하고 싶을 때 `startCase`를 사용하세요. 스타트 케이스는 각 단어의 첫 글자를 대문자로 쓰고 공백으로 구분하는 명명 규칙이에요.
+
+```typescript
+import { startCase } from 'es-toolkit/compat';
+
+// 일반 문자열 변환
+startCase('hello world');
+// Returns: 'Hello World'
+
+// 이미 대문자인 단어는 그대로 유지
+startCase('HELLO WORLD');
+// Returns: 'HELLO WORLD'
+
+// 하이픈으로 구분된 문자열 변환
+startCase('hello-world');
+// Returns: 'Hello World'
+
+// 밑줄로 구분된 문자열 변환
+startCase('hello_world');
+// Returns: 'Hello World'
+```
+
+`null`이나 `undefined`는 빈 문자열로 처리해요.
+
+```typescript
+import { startCase } from 'es-toolkit/compat';
+
+startCase(null); // ''
+startCase(undefined); // ''
+```
 
 #### 파라미터
 
+- `str` (`string`, 선택): 스타트 케이스로 변환할 문자열이에요.
+
 ### 반환 값
+
+(`string`): 스타트 케이스로 변환된 문자열을 반환해요.
