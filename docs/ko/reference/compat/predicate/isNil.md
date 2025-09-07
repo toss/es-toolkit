@@ -44,7 +44,7 @@ import { isNil } from 'es-toolkit/compat';
 
 // 거짓으로 평가되지만 null/undefined가 아닌 값들
 isNil(0); // false
-isNil(''); // false  
+isNil(''); // false
 isNil(false); // false
 isNil(NaN); // false
 
@@ -64,7 +64,7 @@ function processValue(value: string | null | undefined) {
     console.log('값이 없어요');
     return;
   }
-  
+
   // 이 블록에서 value는 string 타입이에요
   console.log(value.toUpperCase());
 }

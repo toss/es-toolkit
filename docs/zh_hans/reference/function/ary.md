@@ -35,12 +35,12 @@ ary(fn, 2)(1, 2, 3); // [1, 2]
 // parseInt接受(string, radix)两个参数，
 // 但map会传递(value, index, array)三个参数。
 
-['1', '2', '3'].map(parseInt);  
-// 结果：[1, NaN, NaN] 
+['1', '2', '3'].map(parseInt);
+// 结果：[1, NaN, NaN]
 // 因为执行了parseInt('2', 1)和parseInt('3', 2)。
 
 // 使用ary限制只传递第一个参数
-['1', '2', '3'].map(ary(parseInt, 1));  
+['1', '2', '3'].map(ary(parseInt, 1));
 // 结果：[1, 2, 3] ✅
 ```
 

@@ -85,7 +85,7 @@ function processValue(value: unknown) {
     console.log(`플래그: ${value.flags}`);
     console.log(`글로벌: ${value.global}`);
     console.log(`대소문자 무시: ${value.ignoreCase}`);
-    
+
     // 정규식 메서드들을 안전하게 사용할 수 있어요
     const testString = 'Hello World';
     console.log(`매치 결과: ${value.test(testString)}`);

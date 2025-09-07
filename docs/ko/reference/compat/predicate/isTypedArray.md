@@ -46,7 +46,7 @@ import { isTypedArray } from 'es-toolkit/compat';
 
 // 정수 타입 배열들
 isTypedArray(new Int8Array()); // true
-isTypedArray(new Int16Array()); // true  
+isTypedArray(new Int16Array()); // true
 isTypedArray(new Int32Array()); // true
 isTypedArray(new Uint8Array()); // true
 isTypedArray(new Uint16Array()); // true
@@ -89,7 +89,7 @@ function processData(data: unknown) {
     console.log(`바이트 길이: ${data.byteLength}`);
     console.log(`바이트 오프셋: ${data.byteOffset}`);
     console.log(`생성자: ${data.constructor.name}`);
-    
+
     // 첫 번째 값 출력
     if (data.length > 0) {
       console.log(`첫 번째 값: ${data[0]}`);

@@ -68,7 +68,7 @@ function processValue(value: unknown) {
     // 이 블록에서 value는 Set<any> 타입이에요
     console.log(`Set의 크기: ${value.size}`);
     value.add('newValue');
-    
+
     // Set의 모든 값을 순회
     for (const item of value) {
       console.log(item);

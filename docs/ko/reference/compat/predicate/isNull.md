@@ -55,7 +55,7 @@ function handleValue(value: string | null | undefined) {
 }
 
 handleValue(null); // "값이 명시적으로 null이에요"
-handleValue(undefined); // "값이 undefined에요"  
+handleValue(undefined); // "값이 undefined에요"
 handleValue('hello'); // "값이 있어요: hello"
 ```
 
@@ -70,7 +70,7 @@ function processValue(value: string | null) {
     console.log('null 값을 처리해요');
     return;
   }
-  
+
   // 이 블록에서 value는 string 타입이에요
   console.log(value.toUpperCase());
 }

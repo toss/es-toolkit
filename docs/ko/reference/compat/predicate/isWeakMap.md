@@ -71,7 +71,7 @@ function setupWeakReference(collection: unknown, key: object, value: any) {
     // WeakMap은 객체만 키로 사용할 수 있고, 약한 참조를 유지해요
     collection.set(key, value);
     console.log('WeakMap에 약한 참조로 저장했어요');
-    
+
     // WeakMap은 크기를 알 수 없어요
     console.log('WeakMap은 크기 정보가 없어요');
   } else {
@@ -97,11 +97,11 @@ function processValue(value: unknown) {
     // 이 블록에서 value는 WeakMap<object, any> 타입이에요
     const key = { id: 1 };
     value.set(key, 'example');
-    
+
     if (value.has(key)) {
       console.log(value.get(key));
     }
-    
+
     value.delete(key);
   }
 }

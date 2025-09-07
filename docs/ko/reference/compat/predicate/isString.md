@@ -25,7 +25,7 @@ import { isString } from 'es-toolkit/compat';
 
 // 원시 문자열
 isString('hello'); // true
-isString(''); // true  
+isString(''); // true
 isString('123'); // true
 
 // String 객체 래퍼
@@ -52,7 +52,7 @@ isString('123'); // true
 isString(123); // false
 
 // 문자열 vs 불린
-isString('true'); // true  
+isString('true'); // true
 isString(true); // false
 
 // 문자열 vs null/undefined

@@ -35,12 +35,12 @@ ary(fn, 2)(1, 2, 3); // [1, 2]
 // parseInt takes (string, radix) as arguments,
 // but map passes (value, index, array).
 
-['1', '2', '3'].map(parseInt);  
-// Result: [1, NaN, NaN] 
+['1', '2', '3'].map(parseInt);
+// Result: [1, NaN, NaN]
 // Because parseInt('2', 1) and parseInt('3', 2) are called.
 
 // Use ary to limit to only the first argument
-['1', '2', '3'].map(ary(parseInt, 1));  
+['1', '2', '3'].map(ary(parseInt, 1));
 // Result: [1, 2, 3] ✅
 ```
 

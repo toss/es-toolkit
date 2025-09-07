@@ -94,7 +94,7 @@ function processValue(value: string | undefined) {
     console.log('값이 정의되지 않았어요');
     return;
   }
-  
+
   // 이 블록에서 value는 string 타입이에요
   console.log(value.toUpperCase());
 }

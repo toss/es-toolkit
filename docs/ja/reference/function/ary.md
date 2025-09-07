@@ -35,12 +35,12 @@ ary(fn, 2)(1, 2, 3); // [1, 2]
 // parseIntは(string, radix)の2つの引数を受け取りますが、
 // mapは(value, index, array)の3つの引数を渡します。
 
-['1', '2', '3'].map(parseInt);  
-// 結果: [1, NaN, NaN] 
+['1', '2', '3'].map(parseInt);
+// 結果: [1, NaN, NaN]
 // なぜならparseInt('2', 1)、parseInt('3', 2)が実行されるからです。
 
 // aryを使用して最初の引数のみを渡すように制限
-['1', '2', '3'].map(ary(parseInt, 1));  
+['1', '2', '3'].map(ary(parseInt, 1));
 // 結果: [1, 2, 3] ✅
 ```
 

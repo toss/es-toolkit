@@ -71,7 +71,7 @@ function addWeakReference(collection: unknown, item: object) {
     // WeakSet은 객체만 저장할 수 있고, 약한 참조를 유지해요
     collection.add(item);
     console.log('WeakSet에 약한 참조로 저장했어요');
-    
+
     // WeakSet은 크기를 알 수 없고 순회할 수 없어요
     console.log('WeakSet은 크기 정보가 없고 순회할 수 없어요');
   } else {
@@ -98,7 +98,7 @@ function trackDOMElement(tracker: unknown, element: Element) {
     // DOM 요소가 제거되면 WeakSet에서도 자동으로 제거돼요
     tracker.add(element);
     console.log('DOM 요소를 추적하기 시작했어요');
-    
+
     // 나중에 추적 여부 확인
     if (tracker.has(element)) {
       console.log('이 요소는 추적 중이에요');
@@ -117,11 +117,11 @@ function processValue(value: unknown) {
     // 이 블록에서 value는 WeakSet<object> 타입이에요
     const obj = { id: 1 };
     value.add(obj);
-    
+
     if (value.has(obj)) {
       console.log('객체가 WeakSet에 있어요');
     }
-    
+
     value.delete(obj);
   }
 }

@@ -32,10 +32,10 @@ isPlainObject({ name: 'John', age: 30 }); // true
 // 순수 객체가 아닌 값들
 isPlainObject([]); // false (배열)
 isPlainObject(new Date()); // false (Date 인스턴스)
-isPlainObject(new Map()); // false (Map 인스턴스) 
+isPlainObject(new Map()); // false (Map 인스턴스)
 isPlainObject(new Set()); // false (Set 인스턴스)
 isPlainObject(/regex/); // false (정규식)
-isPlainObject(function() {}); // false (함수)
+isPlainObject(function () {}); // false (함수)
 isPlainObject(null); // false
 isPlainObject(undefined); // false
 isPlainObject('object'); // false (문자열)
@@ -86,7 +86,7 @@ function processValue(value: unknown) {
     // 이 블록에서 value는 Record<string | number | symbol, any> 타입이에요
     console.log(Object.keys(value));
     console.log(Object.values(value));
-    
+
     // 객체의 속성들을 안전하게 접근할 수 있어요
     for (const key in value) {
       console.log(`${key}: ${value[key]}`);

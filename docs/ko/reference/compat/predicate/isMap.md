@@ -45,7 +45,7 @@ import { isMap } from 'es-toolkit/compat';
 
 // Map vs Set vs WeakMap
 isMap(new Map([['key', 'value']])); // true
-isMap(new Set(['value'])); // false  
+isMap(new Set(['value'])); // false
 isMap(new WeakMap()); // false
 
 // Map vs 일반 객체

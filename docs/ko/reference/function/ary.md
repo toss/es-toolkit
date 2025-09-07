@@ -35,12 +35,12 @@ ary(fn, 2)(1, 2, 3); // [1, 2]
 // parseInt는 (string, radix) 두 개의 인자를 받지만,
 // map은 (value, index, array) 세 개의 인자를 전달해요.
 
-['1', '2', '3'].map(parseInt);  
-// 결과: [1, NaN, NaN] 
+['1', '2', '3'].map(parseInt);
+// 결과: [1, NaN, NaN]
 // 왜냐하면 parseInt('2', 1), parseInt('3', 2)가 실행되기 때문이에요.
 
 // ary를 사용해서 첫 번째 인자만 전달하도록 제한
-['1', '2', '3'].map(ary(parseInt, 1));  
+['1', '2', '3'].map(ary(parseInt, 1));
 // 결과: [1, 2, 3] ✅
 ```
 
