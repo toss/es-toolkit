@@ -1,23 +1,61 @@
-# isError (🚧 문서 작성 중)
+# isError (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `value instanceof Error`를 사용하세요
+이 `isError` 함수는 Lodash 호환성을 위한 복잡한 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `value instanceof Error` 또는 `es-toolkit`의 [isError](../../predicate/isError.md)를 사용하세요.
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+값이 Error 객체인지 확인해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = isError(value);
+```
 
 ## 레퍼런스
 
-### `isError(...args)`
+### `isError(value)`
 
-#### 인터페이스
+값이 Error 객체인지 타입 안전하게 확인하고 싶을 때 `isError`를 사용하세요. TypeScript에서 타입 가드로도 동작해요.
+
+```typescript
+import { isError } from 'es-toolkit/compat';
+
+// Error 객체 확인
+isError(new Error()); // true
+isError(new TypeError('Type error')); // true
+isError(new ReferenceError('Reference error')); // true
+
+// Error를 상속한 사용자 정의 에러
+class CustomError extends Error {}
+isError(new CustomError()); // true
+
+// 다른 타입들은 false
+isError('Error'); // false
+isError({ name: 'Error', message: 'Something went wrong' }); // false
+isError({}); // false
+isError(null); // false
+isError(undefined); // false
+```
+
+TypeScript에서 타입 가드로 사용할 수 있어요.
+
+```typescript
+import { isError } from 'es-toolkit/compat';
+
+function handleValue(value: unknown) {
+  if (isError(value)) {
+    // 이 블록에서 value는 Error 타입이에요
+    console.log(value.message);
+    console.log(value.stack);
+  }
+}
+```
 
 #### 파라미터
 
+- `value` (`unknown`): Error 객체인지 확인할 값이에요.
+
 ### 반환 값
+
+(`value is Error`): 값이 Error 객체이면 `true`, 아니면 `false`를 반환해요.

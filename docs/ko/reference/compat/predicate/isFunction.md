@@ -1,23 +1,66 @@
-# isFunction (🚧 문서 작성 중)
+# isFunction (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `typeof` 연산자를 사용하세요
+이 `isFunction` 함수는 Lodash 호환성을 위해 제공되지만, 내부적으로 `typeof value === 'function'`을 사용해요.
+
+대신 더 직접적인 `typeof value === 'function'` 또는 `es-toolkit`의 [isFunction](../../predicate/isFunction.md)를 사용하세요.
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+값이 함수인지 확인해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = isFunction(value);
+```
 
 ## 레퍼런스
 
-### `isFunction(...args)`
+### `isFunction(value)`
 
-#### 인터페이스
+값이 함수인지 타입 안전하게 확인하고 싶을 때 `isFunction`을 사용하세요. TypeScript에서 타입 가드로도 동작해요.
+
+```typescript
+import { isFunction } from 'es-toolkit/compat';
+
+// 일반 함수
+isFunction(function () {}); // true
+isFunction(() => {}); // true
+
+// 내장 함수와 생성자
+isFunction(Array.prototype.slice); // true
+isFunction(Proxy); // true
+isFunction(Int8Array); // true
+
+// 비동기 함수와 제너레이터 함수
+isFunction(async function () {}); // true
+isFunction(function* () {}); // true
+
+// 다른 타입들은 false
+isFunction('function'); // false
+isFunction({}); // false
+isFunction([]); // false
+isFunction(null); // false
+isFunction(undefined); // false
+isFunction(123); // false
+```
+
+TypeScript에서 타입 가드로 사용할 수 있어요.
+
+```typescript
+import { isFunction } from 'es-toolkit/compat';
+
+function processValue(value: unknown) {
+  if (isFunction(value)) {
+    // 이 블록에서 value는 (...args: any[]) => any 타입이에요
+    const result = value();
+    console.log(result);
+  }
+}
+```
 
 #### 파라미터
 
+- `value` (`unknown`): 함수인지 확인할 값이에요.
+
 ### 반환 값
+
+(`value is (...args: any[]) => any`): 값이 함수이면 `true`, 아니면 `false`를 반환해요.

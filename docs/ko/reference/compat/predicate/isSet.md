@@ -1,23 +1,86 @@
-# isSet (🚧 문서 작성 중)
+# isSet (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `isSet`를 사용하세요
+
+이 `isSet` 함수는 Lodash 호환성을 위한 함수이지만, 메인 라이브러리와 같은 구현이에요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [isSet](../../predicate/isSet.md)를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+값이 Set인지 확인해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = isSet(value);
+```
 
 ## 레퍼런스
 
-### `isSet(...args)`
+### `isSet(value)`
 
-#### 인터페이스
+값이 Set인지 타입 안전하게 확인하고 싶을 때 `isSet`를 사용하세요. TypeScript에서 타입 가드로도 동작해요.
+
+```typescript
+import { isSet } from 'es-toolkit/compat';
+
+// Set 확인
+const set = new Set();
+isSet(set); // true
+
+// 다른 타입들은 false
+isSet(new Map()); // false
+isSet(new WeakSet()); // false
+isSet([]); // false
+isSet({}); // false
+isSet('set'); // false
+isSet(123); // false
+isSet(null); // false
+isSet(undefined); // false
+```
+
+Set과 비슷한 다른 컬렉션들과도 구분해요.
+
+```typescript
+import { isSet } from 'es-toolkit/compat';
+
+// Set vs Map vs WeakSet
+isSet(new Set([1, 2, 3])); // true
+isSet(new Map([['key', 'value']])); // false
+isSet(new WeakSet()); // false
+
+// Set vs 배열
+isSet(new Set([1, 2, 3])); // true
+isSet([1, 2, 3]); // false
+
+// Set vs 일반 객체
+isSet(new Set()); // true
+isSet({}); // false
+isSet(Object.create(null)); // false
+```
+
+TypeScript에서 타입 가드로 사용할 수 있어요.
+
+```typescript
+import { isSet } from 'es-toolkit/compat';
+
+function processValue(value: unknown) {
+  if (isSet(value)) {
+    // 이 블록에서 value는 Set<any> 타입이에요
+    console.log(`Set의 크기: ${value.size}`);
+    value.add('newValue');
+    
+    // Set의 모든 값을 순회
+    for (const item of value) {
+      console.log(item);
+    }
+  }
+}
+```
 
 #### 파라미터
 
+- `value` (`unknown`): Set인지 확인할 값이에요.
+
 ### 반환 값
+
+(`value is Set<any>`): 값이 Set이면 `true`, 아니면 `false`를 반환해요.

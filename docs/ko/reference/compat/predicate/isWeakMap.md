@@ -1,23 +1,116 @@
-# isWeakMap (🚧 문서 작성 중)
+# isWeakMap (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `instanceof` 연산자를 사용하세요
+
+이 `isWeakMap` 함수는 Lodash 호환성을 위한 함수이지만, 단순한 타입 확인이에요.
+
+대신 더 간단하고 현대적인 `value instanceof WeakMap`을 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+값이 WeakMap인지 확인해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = isWeakMap(value);
+```
 
 ## 레퍼런스
 
-### `isWeakMap(...args)`
+### `isWeakMap(value)`
 
-#### 인터페이스
+값이 WeakMap인지 타입 안전하게 확인하고 싶을 때 `isWeakMap`을 사용하세요. TypeScript에서 타입 가드로도 동작해요.
+
+```typescript
+import { isWeakMap } from 'es-toolkit/compat';
+
+// WeakMap 확인
+const weakMap = new WeakMap();
+isWeakMap(weakMap); // true
+
+// 다른 타입들은 false
+isWeakMap(new Map()); // false
+isWeakMap(new Set()); // false
+isWeakMap(new WeakSet()); // false
+isWeakMap({}); // false
+isWeakMap([]); // false
+isWeakMap('weakmap'); // false
+isWeakMap(123); // false
+isWeakMap(null); // false
+isWeakMap(undefined); // false
+```
+
+WeakMap과 비슷한 다른 컬렉션들과도 구분해요.
+
+```typescript
+import { isWeakMap } from 'es-toolkit/compat';
+
+// WeakMap vs Map
+const obj = {};
+const weakMap = new WeakMap([[obj, 'value']]);
+const map = new Map([[obj, 'value']]);
+
+isWeakMap(weakMap); // true
+isWeakMap(map); // false
+
+// WeakMap vs WeakSet
+isWeakMap(new WeakMap()); // true
+isWeakMap(new WeakSet()); // false
+
+// WeakMap vs 일반 객체
+isWeakMap(new WeakMap()); // true
+isWeakMap({}); // false
+```
+
+WeakMap의 특별한 속성들을 활용할 때 유용해요.
+
+```typescript
+import { isWeakMap } from 'es-toolkit/compat';
+
+function setupWeakReference(collection: unknown, key: object, value: any) {
+  if (isWeakMap(collection)) {
+    // WeakMap은 객체만 키로 사용할 수 있고, 약한 참조를 유지해요
+    collection.set(key, value);
+    console.log('WeakMap에 약한 참조로 저장했어요');
+    
+    // WeakMap은 크기를 알 수 없어요
+    console.log('WeakMap은 크기 정보가 없어요');
+  } else {
+    console.log('WeakMap이 아니에요');
+  }
+}
+
+const weakMap = new WeakMap();
+const regularMap = new Map();
+const obj = { id: 1 };
+
+setupWeakReference(weakMap, obj, 'data'); // "WeakMap에 약한 참조로 저장했어요"
+setupWeakReference(regularMap, obj, 'data'); // "WeakMap이 아니에요"
+```
+
+TypeScript에서 타입 가드로 사용할 수 있어요.
+
+```typescript
+import { isWeakMap } from 'es-toolkit/compat';
+
+function processValue(value: unknown) {
+  if (isWeakMap(value)) {
+    // 이 블록에서 value는 WeakMap<object, any> 타입이에요
+    const key = { id: 1 };
+    value.set(key, 'example');
+    
+    if (value.has(key)) {
+      console.log(value.get(key));
+    }
+    
+    value.delete(key);
+  }
+}
+```
 
 #### 파라미터
 
+- `value` (`unknown`): WeakMap인지 확인할 값이에요.
+
 ### 반환 값
+
+(`value is WeakMap<object, any>`): 값이 WeakMap이면 `true`, 아니면 `false`를 반환해요.

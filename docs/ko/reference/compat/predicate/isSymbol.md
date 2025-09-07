@@ -1,23 +1,87 @@
-# isSymbol (🚧 문서 작성 중)
+# isSymbol (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `typeof` 연산자를 사용하세요
+
+이 `isSymbol` 함수는 Symbol 객체 래퍼 처리로 인해 복잡해요.
+
+대신 더 간단하고 현대적인 `typeof value === 'symbol'`을 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+값이 심볼(symbol)인지 확인해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = isSymbol(value);
+```
 
 ## 레퍼런스
 
-### `isSymbol(...args)`
+### `isSymbol(value)`
 
-#### 인터페이스
+값이 심볼인지 타입 안전하게 확인하고 싶을 때 `isSymbol`을 사용하세요. 원시 심볼과 Symbol 객체 래퍼 둘 다 확인해요. TypeScript에서 타입 가드로도 동작해요.
+
+```typescript
+import { isSymbol } from 'es-toolkit/compat';
+
+// 원시 심볼
+isSymbol(Symbol('test')); // true
+isSymbol(Symbol.for('global')); // true
+isSymbol(Symbol.iterator); // true
+
+// Symbol 객체 래퍼
+isSymbol(Object(Symbol('test'))); // true
+
+// 다른 타입들은 false
+isSymbol('symbol'); // false
+isSymbol(123); // false
+isSymbol(true); // false
+isSymbol(null); // false
+isSymbol(undefined); // false
+isSymbol({}); // false
+isSymbol([]); // false
+```
+
+다양한 내장 심볼들도 올바르게 인식해요.
+
+```typescript
+import { isSymbol } from 'es-toolkit/compat';
+
+// 잘 알려진 심볼들
+isSymbol(Symbol.iterator); // true
+isSymbol(Symbol.asyncIterator); // true
+isSymbol(Symbol.toStringTag); // true
+isSymbol(Symbol.hasInstance); // true
+isSymbol(Symbol.toPrimitive); // true
+
+// 전역 심볼
+isSymbol(Symbol.for('myGlobalSymbol')); // true
+
+// 사용자 정의 심볼
+const mySymbol = Symbol('mySymbol');
+isSymbol(mySymbol); // true
+```
+
+TypeScript에서 타입 가드로 사용할 수 있어요.
+
+```typescript
+import { isSymbol } from 'es-toolkit/compat';
+
+function processValue(value: unknown) {
+  if (isSymbol(value)) {
+    // 이 블록에서 value는 symbol 타입이에요
+    console.log(`심볼 설명: ${value.description}`);
+    console.log(`심볼 문자열: ${value.toString()}`);
+  }
+}
+
+processValue(Symbol('test')); // "심볼 설명: test"
+processValue('not a symbol'); // 아무것도 출력되지 않음
+```
 
 #### 파라미터
 
+- `value` (`unknown`): 심볼인지 확인할 값이에요.
+
 ### 반환 값
+
+(`value is symbol`): 값이 심볼이면 `true`, 아니면 `false`를 반환해요.

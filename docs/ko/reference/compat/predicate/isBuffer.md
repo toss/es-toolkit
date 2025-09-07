@@ -1,23 +1,56 @@
-# isBuffer (🚧 문서 작성 중)
+# isBuffer (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `Buffer.isBuffer`를 사용하세요
+이 `isBuffer` 함수는 Lodash 호환성을 위한 복잡한 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Buffer.isBuffer(value)` 또는 `es-toolkit`의 [isBuffer](../../predicate/isBuffer.md)를 사용하세요.
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+값이 Buffer 인스턴스인지 확인해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = isBuffer(value);
+```
 
 ## 레퍼런스
 
-### `isBuffer(...args)`
+### `isBuffer(value)`
 
-#### 인터페이스
+값이 Buffer 인스턴스인지 타입 안전하게 확인하고 싶을 때 `isBuffer`를 사용하세요. Node.js 환경에서 Buffer 객체를 다룰 때 유용해요. TypeScript에서 타입 가드로도 동작해요.
+
+```typescript
+import { isBuffer } from 'es-toolkit/compat';
+
+// Buffer 인스턴스 확인
+const buffer = Buffer.from('hello');
+isBuffer(buffer); // true
+
+// 다른 타입들은 false
+isBuffer('hello'); // false
+isBuffer([1, 2, 3]); // false
+isBuffer(new Uint8Array([1, 2, 3])); // false
+isBuffer({}); // false
+isBuffer(null); // false
+isBuffer(undefined); // false
+```
+
+TypeScript에서 타입 가드로 사용할 수 있어요.
+
+```typescript
+import { isBuffer } from 'es-toolkit/compat';
+
+function processValue(value: unknown) {
+  if (isBuffer(value)) {
+    // 이 블록에서 value는 Buffer 타입이에요
+    console.log(value.toString());
+  }
+}
+```
 
 #### 파라미터
 
+- `value` (`unknown`): Buffer 인스턴스인지 확인할 값이에요.
+
 ### 반환 값
+
+(`boolean`): 값이 Buffer 인스턴스면 `true`, 아니면 `false`를 반환해요.
