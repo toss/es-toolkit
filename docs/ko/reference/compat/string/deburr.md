@@ -24,7 +24,7 @@ const result = deburr(str);
 import { deburr } from 'es-toolkit/compat';
 
 deburr('Æthelred'); // 'Aethelred'
-deburr('München'); // 'Munchen'  
+deburr('München'); // 'Munchen'
 deburr('Crème brûlée'); // 'Creme brulee'
 ```
 

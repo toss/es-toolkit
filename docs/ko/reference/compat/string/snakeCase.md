@@ -18,7 +18,7 @@ const snakeCased = snakeCase(str);
 
 ### `snakeCase(str)`
 
-문자열을 스네이크 케이스(snake_case)로 변환하고 싶을 때 `snakeCase`를 사용하세요. 스네이크 케이스는 각 단어를 소문자로 쓰고 밑줄(_)로 연결하는 명명 규칙이에요.
+문자열을 스네이크 케이스(snake*case)로 변환하고 싶을 때 `snakeCase`를 사용하세요. 스네이크 케이스는 각 단어를 소문자로 쓰고 밑줄(*)로 연결하는 명명 규칙이에요.
 
 ```typescript
 import { snakeCase } from 'es-toolkit/compat';

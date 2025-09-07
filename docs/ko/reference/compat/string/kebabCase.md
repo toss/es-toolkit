@@ -25,7 +25,7 @@ import { kebabCase } from 'es-toolkit/compat';
 
 kebabCase('camelCase'); // 'camel-case'
 kebabCase('some whitespace'); // 'some-whitespace'
-kebabCase('hyphen-text'); // 'hyphen-text'  
+kebabCase('hyphen-text'); // 'hyphen-text'
 kebabCase('HTTPRequest'); // 'http-request'
 ```
 

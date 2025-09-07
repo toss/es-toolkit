@@ -24,7 +24,7 @@ const result = lowerFirst(str);
 import { lowerFirst } from 'es-toolkit/compat';
 
 lowerFirst('fred'); // 'fred'
-lowerFirst('Fred'); // 'fred' 
+lowerFirst('Fred'); // 'fred'
 lowerFirst('FRED'); // 'fRED'
 lowerFirst(''); // ''
 ```

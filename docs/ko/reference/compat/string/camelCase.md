@@ -24,7 +24,7 @@ const result = camelCase(str);
 import { camelCase } from 'es-toolkit/compat';
 
 camelCase('camelCase'); // 'camelCase'
-camelCase('some whitespace'); // 'someWhitespace' 
+camelCase('some whitespace'); // 'someWhitespace'
 camelCase('hyphen-text'); // 'hyphenText'
 camelCase('HTTPRequest'); // 'httpRequest'
 ```
