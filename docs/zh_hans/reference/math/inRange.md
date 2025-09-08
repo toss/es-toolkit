@@ -5,8 +5,8 @@
 ## 签名
 
 ```typescript
-export function inRange(value: number, maximum: number): boolean;
-export function inRange(value: number, minimum: number, maximum: number): boolean;
+function inRange(value: number, maximum: number): boolean;
+function inRange(value: number, minimum: number, maximum: number): boolean;
 ```
 
 ### 参数

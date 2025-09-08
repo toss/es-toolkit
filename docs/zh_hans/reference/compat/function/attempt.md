@@ -13,17 +13,17 @@
 ## 签名
 
 ```typescript
-function attempt<F extends (...args: any[]) => any>(func: F, ...args: Parameters<F>): ReturnType<F> | Error;
+function attempt<R>(func: (...args: any[]) => R, ...args: any[]): R | Error;
 ```
 
 ### 参数
 
-- `func` (`F`): 要执行的函数。
-- `args` (`...Parameters<F>`): 传递给函数的参数。
+- `func` (`(...args: any[]) => R`): 要执行的函数。
+- `args` (`...any[]`): 传递给函数的参数。
 
 ### 返回值
 
-(`ReturnType<F> | Error`): 如果成功，返回函数的返回值；如果抛出异常，返回一个Error。
+(`R | Error`): 如果成功，返回函数的返回值；如果抛出异常，返回一个Error。
 
 ## 示例
 

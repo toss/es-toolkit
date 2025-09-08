@@ -5,7 +5,7 @@ Creates a shallow clone of the given objects.
 ## Signature
 
 ```typescript
-function clone<T>(value: T): T;
+function clone<T>(obj: T): T;
 ```
 
 ### Parameters

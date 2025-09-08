@@ -12,20 +12,17 @@
 ## 签名
 
 ```typescript
-function rearg<F extends (...args: any[]) => any>(
-  func: F,
-  ...indexes: Array<number | number[]>
-): (...args: any[]) => ReturnType<F>;
+function rearg(func: (...args: any[]) => any, ...indices: Array<number | number[]>): (...args: any[]) => any;
 ```
 
 ### 参数
 
-- `func` (`F`): 用于重新排列参数的函数。
+- `func` (`(...args: any[]) => any`): 用于重新排列参数的函数。
 - `indexes` (`Array<number | number[]>`): 排列后的参数索引。
 
 ### 返回值
 
-(`(...args: any[]) => ReturnType<F>`): 返回新的函数。
+(`(...args: any[]) => any`): 返回新的函数。
 
 ## 示例
 

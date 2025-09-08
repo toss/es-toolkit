@@ -13,20 +13,17 @@
 ## 인터페이스
 
 ```typescript
-function rearg<F extends (...args: any[]) => any>(
-  func: F,
-  ...indices: Array<number | number[]>
-): (...args: any[]) => ReturnType<F>;
+function rearg(func: (...args: any[]) => any, ...indices: Array<number | number[]>): (...args: any[]) => any;
 ```
 
 ### 파라미터
 
-- `func` (`F`): 인수를 재배열할 함수예요.
+- `func` (`(...args: any[]) => any`): 인수를 재배열할 함수예요.
 - `indices` (`Array<number | number[]>`): 배열된 인수 인덱스예요.
 
 ### 반환 값
 
-(`(...args: any[]) => ReturnType<F>`): 새로운 함수를 반환해요.
+(`(...args: any[]) => any`): 새로운 함수를 반환해요.
 
 ## 예시
 

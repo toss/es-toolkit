@@ -5,7 +5,7 @@
 ## 签名
 
 ```typescript
-function clone<T>(value: T): T;
+function clone<T>(obj: T): T;
 ```
 
 ### 参数

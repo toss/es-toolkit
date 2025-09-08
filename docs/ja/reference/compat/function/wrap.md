@@ -13,12 +13,17 @@
 ## インターフェース
 
 ```typescript
-function wrap<F extends (...args: unknown[]) => unknown>(
-  func: F,
-  wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
-): F;
-function wrap<T, A extends unknown[], R>(value: T, wrapper: (value: T, ...args: A) => R): (...args: A) => R;
+function wrap<T, U, V>(value: T, wrapper: (value: T, ...args: U[]) => V): (...args: U[]) => V;
 ```
+
+### パラメータ
+
+- `value` (`T`): ラップされる値。
+- `wrapper` (`(value: T, ...args: U[]) => V`): ラップする関数。
+
+### 戻り値
+
+(`(...args: U[]) => V`): ラップされた値を返す新しい関数。
 
 ## 例
 
