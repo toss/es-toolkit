@@ -121,4 +121,9 @@ describe('findLastIndex', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(findLastIndex).toEqualTypeOf<typeof findLastIndexLodash>();
   });
+
+  it('should work with no predicate (uses identity)', () => {
+    expect(findLastIndex([0, false, null, undefined, '', 1, 2, 3])).toBe(7);
+    expect(findLastIndex([0, false, null, undefined, ''])).toBe(-1);
+  });
 });

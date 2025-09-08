@@ -90,4 +90,13 @@ describe('remove', () => {
 
     expect(array).toEqual([2]);
   });
+
+  it('should work with no predicate (uses identity)', () => {
+    const array = [0, 1, 2, null, 3, undefined, 4, false, 5, ''];
+
+    const removed = remove(array);
+
+    expect(array).toEqual([0, null, undefined, false, '']);
+    expect(removed).toEqual([1, 2, 3, 4, 5]);
+  });
 });
