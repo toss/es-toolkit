@@ -4,7 +4,6 @@ import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import dtsPlugin from 'rollup-plugin-dts';
-import terserPlugin from '@rollup/plugin-terser';
 import tsPlugin from '@rollup/plugin-typescript';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -43,12 +42,6 @@ export default () => {
     declarationOptions({
       entrypoints,
       outDir: 'dist',
-    }),
-    browserBuildConfig({
-      inputFile: './src/compat/index.ts',
-      outFile: packageJson.publishConfig.browser,
-      name: '_',
-      sourcemap: false,
     }),
   ];
 };
@@ -89,47 +82,6 @@ function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) 
       // which can make imports by JS runtimes slightly faster,
       // but makes the generated code harder to follow.
       hoistTransitiveImports: false,
-    },
-  };
-}
-
-/**
- * @type {(options: {inputFile: string; outFile: string; name: string, sourcemap: boolean}) => import('rollup').RollupOptions}
- */
-function browserBuildConfig({ inputFile, outFile, name, sourcemap }) {
-  return {
-    input: inputFile,
-    plugins: [
-      tsPlugin({
-        exclude: [...testPatterns],
-        compilerOptions: {
-          sourceMap: sourcemap,
-          inlineSources: sourcemap || undefined,
-          removeComments: true,
-          declaration: false,
-        },
-      }),
-    ],
-    output: {
-      plugins: [
-        // Minify with terser, but with a configuration that optimizes for
-        // readability in browser DevTools (after re-indenting by DevTools).
-        terserPlugin({
-          // Terser defaults to ES5 for syntax it adds or rewrites
-          ecma: 2020,
-          // Readable function names (not just in final export)
-          keep_fnames: true,
-          // Turn off compress.sequences to keep the assignments to the toolkit
-          // object readable, instead of turning them into a huge list of
-          // comma-separated expressions.
-          compress: { sequences: false },
-        }),
-      ],
-      format: 'iife',
-      name,
-      file: outFile,
-      sourcemap,
-      generatedCode: 'es2015',
     },
   };
 }
