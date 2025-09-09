@@ -14,7 +14,7 @@ the original string is returned unchanged.
 ## Signature
 
 ```typescript
-function padEnd(str: string, length = 0, chars = ' '): string;
+function padEnd(str?: string, length = 0, chars = ' '): string;
 ```
 
 ### Parameters

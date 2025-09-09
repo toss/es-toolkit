@@ -12,15 +12,16 @@
 
 ```typescript
 function replace(
-  target: string,
-  pattern: string | RegExp,
-  replacement: string | ((substring: string, ...args: any[]) => string)
+  string: string,
+  pattern: RegExp | string,
+  replacement: ((match: string, ...args: any[]) => string) | string
 ): string;
+function replace(pattern: RegExp | string, replacement: ((match: string, ...args: any[]) => string) | string): string;
 ```
 
 ### パラメータ
 
-- `target` (`string`): 対象の文字列。
+- `string` (`string`): 対象の文字列。
 - `pattern` (`string | RegExp`): 一致させるパターン。
 - `replacement` (`string | ((substring: string, ...args: any[]) => string)`): 置換文字列または置換文字列を返す関数。
 

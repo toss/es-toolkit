@@ -13,7 +13,7 @@
 ## 签名
 
 ```typescript
-function toLength(value?: unknown): number;
+function toLength(value: any): number;
 ```
 
 ### 参数

@@ -5,7 +5,7 @@ Returns the input value unchanged.
 ## Signature
 
 ```typescript
-function identity<T>(x: T);
+function identity<T>(x: T): T;
 ```
 
 ### Parameters

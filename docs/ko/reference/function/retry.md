@@ -13,9 +13,9 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 ### 파라미터
 
 - `func` (`() => Promise<T>`): `Promise`를 반환하는 함수.
-- `retries`: 재시도할 횟수. 기본값은 `Number.POSITIVE_INFINITY`로, 성공할 때까지 재시도해요.
-- `delay`: 재시도 사이 간격. 밀리세컨드(ms) 단위의 숫자이거나, 현재 재시도 횟수(`attempts`)를 기반으로 동적으로 간격을 계산하는 함수일 수 있어요. 기본값은 `0`이에요.
-- `signal`: 재시도를 취소할 수 있는 `AbortSignal`.
+- `retries` (`number`): 재시도할 횟수. 기본값은 `Number.POSITIVE_INFINITY`로, 성공할 때까지 재시도해요.
+- `delay` (`number | ((attempts: number) => number)`): 재시도 사이 간격. 밀리세컨드(ms) 단위의 숫자이거나, 현재 재시도 횟수(`attempts`)를 기반으로 동적으로 간격을 계산하는 함수일 수 있어요. 기본값은 `0`이에요.
+- `signal` (`AbortSignal`): 재시도를 취소할 수 있는 `AbortSignal`.
 
 ### 반환 값
 

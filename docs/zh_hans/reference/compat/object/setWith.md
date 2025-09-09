@@ -19,11 +19,11 @@
 ## 签名
 
 ```typescript
-function setWith<T extends object | null | undefined>(
+function setWith<T extends object>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  value: unknown,
-  customizer?: (value: unknown) => unknown
+  value: any,
+  customizer?: (nsValue: any, key: string, nsObject: T) => any
 ): T;
 ```
 
@@ -31,8 +31,8 @@ function setWith<T extends object | null | undefined>(
 
 - `obj` (`T`): 要修改的对象。
 - `path` (`PropertyKey | readonly PropertyKey[]`): 要设置的属性路径。
-- `value` (`unknown`): 要设置的值。
-- `customizer` (`(value: unknown) => unknown`): 用于自定义路径创建的函数。
+- `value` (`any`): 要设置的值。
+- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, 可选): 用于自定义路径创建的函数。
 
 ### 返回值
 

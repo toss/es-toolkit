@@ -13,12 +13,12 @@
 ## 인터페이스
 
 ```typescript
-function toNumber(value?: unknown): number;
+function toNumber(value: any): number;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 변환할 값이에요.
+- `value` (`any`): 변환할 값이에요.
 
 ### 반환 값
 
