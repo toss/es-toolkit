@@ -18,17 +18,18 @@ You can use several types of iteratees:
 ## Signature
 
 ```typescript
-function over(...iteratees: Array<Iteratee | Iteratee[]>): (...args: any[]) => unknown[];
+function over<T>(
+  ...iteratees: Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>
+): (...args: any[]) => T[];
 ```
 
 ### Parameters
 
-- `iteratees` (`Array<Iteratee | Iteratee[]>`): The iteratees to invoke.
-  - `Iteratee` is `((...args: any[]) => unknown) | symbol | number | string | object | null`.
+- `iteratees` (`Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>`): The iteratees to invoke.
 
 ### Returns
 
-(`(...args: any[]) => unknown[]`): Returns the new function.
+(`(...args: any[]) => T[]`): Returns the new function.
 
 ## Examples
 

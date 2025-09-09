@@ -13,12 +13,12 @@ Only checks for own properties with string keys. Inherited properties or propert
 ## Signature
 
 ```typescript
-function functions(object: unknown): string[];
+function functions(object: any): string[];
 ```
 
 ### Parameters
 
-- `object` (`unknown`): The object to inspect.
+- `object` (`any`): The object to inspect.
 
 ### Returns
 

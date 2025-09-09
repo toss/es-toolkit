@@ -12,7 +12,7 @@ Truncates a string if it's longer than the given maximum string length. The last
 
 ```typescript
 function truncate(
-  string: string,
+  string?: string,
   options?: {
     length?: number;
     separator?: string | RegExp;

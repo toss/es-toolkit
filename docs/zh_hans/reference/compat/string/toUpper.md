@@ -11,16 +11,16 @@
 ## 签名
 
 ```typescript
-function toUpper(value?: unknown): string;
+function toUpper<T extends string = string>(value?: T): Uppercase<T>;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要转换为大写的值。如果省略，则返回空字符串。
+- `value` (`T`): 要转换为大写的值。如果省略，则返回空字符串。
 
 ### 返回值
 
-`string`: 将输入值转换为字符串后再转换为大写的结果。
+`Uppercase<T>`: 将输入值转换为字符串后再转换为大写的结果。
 
 ## 示例
 

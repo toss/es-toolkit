@@ -12,15 +12,16 @@
 
 ```typescript
 function replace(
-  target: string,
-  pattern: string | RegExp,
-  replacement: string | ((substring: string, ...args: any[]) => string)
+  string: string,
+  pattern: RegExp | string,
+  replacement: ((match: string, ...args: any[]) => string) | string
 ): string;
+function replace(pattern: RegExp | string, replacement: ((match: string, ...args: any[]) => string) | string): string;
 ```
 
 ### 파라미터
 
-- `target` (`string`): 대상 문자열.
+- `string` (`string`): 대상 문자열.
 - `pattern` (`string | RegExp`): 일치시킬 패턴.
 - `replacement` (`string | ((substring: string, ...args: any[]) => string)`): 교체 문자열 또는 교체 문자열을 반환하는 함수.
 

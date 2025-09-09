@@ -12,15 +12,16 @@
 
 ```typescript
 function replace(
-  target: string,
-  pattern: string | RegExp,
-  replacement: string | ((substring: string, ...args: any[]) => string)
+  string: string,
+  pattern: RegExp | string,
+  replacement: ((match: string, ...args: any[]) => string) | string
 ): string;
+function replace(pattern: RegExp | string, replacement: ((match: string, ...args: any[]) => string) | string): string;
 ```
 
 ### 参数
 
-- `target` (`string`): 目标字符串。
+- `string` (`string`): 目标字符串。
 - `pattern` (`string | RegExp`): 要匹配的模式。
 - `replacement` (`string | ((substring: string, ...args: any[]) => string)`): 替换字符串或返回替换字符串的函数。
 

@@ -13,12 +13,12 @@
 ## インターフェース
 
 ```typescript
-function toLength(value?: unknown): number;
+function toLength(value: any): number;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 有効なインデックスに変換する値。
+- `value` (`any`): 有効なインデックスに変換する値。
 
 ### 戻り値
 

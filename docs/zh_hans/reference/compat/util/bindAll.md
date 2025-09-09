@@ -11,24 +11,17 @@
 ## 接口
 
 ```typescript
-function bindAll(
-  object: Record<string, any>,
-  ...methodNames: Array<string | string[] | number | IArguments>
-): Record<string, any>;
+function bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T;
 ```
 
 ### 参数
 
-- `object` (`Object`): 要绑定方法的对象
-- `methodNames` (`...(string | string[] | number | IArguments)`): 要绑定的方法名。可以使用以下格式指定:
-  - 单个方法名字符串
-  - 方法名数组
-  - 数字（`-0` 会被特殊处理）
-  - Arguments 对象
+- `object` (`T`): 要绑定方法的对象
+- `methodNames` (`...(string | string[])`): 要绑定的方法名。
 
 ### 返回值
 
-(`Object`): 方法已绑定的对象
+(`T`): 方法已绑定的对象
 
 ## 示例
 
