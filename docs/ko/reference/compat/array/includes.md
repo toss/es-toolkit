@@ -8,7 +8,7 @@
 
 값이 주어진 배열, 객체 또는 문자열에 포함되어 있는지 확인해요.
 
-비교 연산은 SameValueZero를 사용해요.
+비교 연산은 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero)를 사용해요.
 
 ## 인터페이스
 

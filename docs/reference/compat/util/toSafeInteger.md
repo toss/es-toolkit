@@ -15,12 +15,12 @@ If the value is infinite, it is converted to the maximum or minimum safe integer
 ## Signature
 
 ```typescript
-function toSafeInteger(value?: unknown): number;
+function toSafeInteger(value: any): number;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to convert.
+- `value` (`any`): The value to convert.
 
 ### Returns
 

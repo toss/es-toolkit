@@ -7,6 +7,9 @@
 ## 签名
 
 ```typescript
+function initial<T>(arr: [T]): [];
+function initial(arr: []): [];
+function initial<T, U>(arr: [...T[], U]): T[];
 function initial<T>(arr: T[]): T[];
 ```
 

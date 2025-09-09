@@ -13,12 +13,12 @@
 ## インターフェース
 
 ```typescript
-function functions(object: unknown): string[];
+function functions(object: any): string[];
 ```
 
 ### パラメータ
 
-- `object` (`unknown`): 検査するオブジェクト。
+- `object` (`any`): 検査するオブジェクト。
 
 ### 戻り値
 

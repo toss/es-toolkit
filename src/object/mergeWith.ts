@@ -68,7 +68,7 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
 
     const merged = merge(targetValue, sourceValue, key as string, target, source);
 
-    if (merged != null) {
+    if (merged !== undefined) {
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
       target[key] = mergeWith<any, S[keyof T]>(targetValue ?? [], sourceValue, merge);

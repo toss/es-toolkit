@@ -13,12 +13,12 @@ This function takes a string representing a deep key (e.g., `'a.b.c'` or `'a[b][
 ## Signature
 
 ```typescript
-function toPath(deepKey: string): string[];
+function toPath(deepKey: any): string[];
 ```
 
 ### Parameters
 
-- `deepKey` (`string`): The deep key string to convert.
+- `deepKey` (`any`): The deep key string to convert.
 
 ### Returns
 

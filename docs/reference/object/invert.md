@@ -7,9 +7,7 @@ This function takes an object and creates a new object where the keys are the va
 ## Signature
 
 ```typescript
-function invert<K extends string | number | symbol, V extends string | number | symbol>(
-  obj: Record<K, V>
-): { [key in V]: K };
+function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record<K, V>): Record<V, K>;
 ```
 
 ### Parameters
@@ -18,7 +16,7 @@ function invert<K extends string | number | symbol, V extends string | number | 
 
 ### Returns
 
-(`{ [key in V]: K }`): A new object with keys and values inverted.
+(`Record<V, K>`): A new object with keys and values inverted.
 
 ## Examples
 

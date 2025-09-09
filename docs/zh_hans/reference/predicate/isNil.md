@@ -14,6 +14,14 @@
 function isNil(x: unknown): x is null | undefined;
 ```
 
+### 参数
+
+- `x` (`unknown`): 要检查的值，判断其是否为 `null` 或 `undefined`。
+
+### 返回值
+
+(`x is null | undefined`): 如果值为 `null` 或 `undefined`，则返回 `true`，否则返回 `false`。
+
 ## 示例
 
 ```typescript

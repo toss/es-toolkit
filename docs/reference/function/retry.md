@@ -13,9 +13,9 @@ function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptio
 ### Parameters
 
 - `func` (`() => Promise<T>`): A function that returns a `Promise`.
-- `retries`: The number of times to retry. The default is `Number.POSITIVE_INFINITY`, which means it will retry until it succeeds.
-- `delay`: The interval between retries, measured in milliseconds (ms). or a function that returns a delay based on the current attempt. The default is `0`.
-- `signal`: An `AbortSignal` that can be used to cancel the retries.
+- `retries` (`number`): The number of times to retry. The default is `Number.POSITIVE_INFINITY`, which means it will retry until it succeeds.
+- `delay` (`number | ((attempts: number) => number)`): The interval between retries, measured in milliseconds (ms). or a function that returns a delay based on the current attempt. The default is `0`.
+- `signal` (`AbortSignal`): An `AbortSignal` that can be used to cancel the retries.
 
 ### Returns
 

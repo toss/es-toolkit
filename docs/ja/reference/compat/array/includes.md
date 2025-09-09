@@ -8,7 +8,7 @@
 
 指定された値が、与えられた配列、オブジェクト、または文字列に含まれているかどうかを確認します。
 
-比較演算にはSameValueZeroを使用します。
+比較演算には[SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero)を使用します。
 
 ## インターフェース
 

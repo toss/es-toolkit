@@ -18,17 +18,18 @@
 ## インターフェース
 
 ```typescript
-function over(...iteratees: Array<Iteratee | Iteratee[]>): (...args: any[]) => unknown[];
+function over<T>(
+  ...iteratees: Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>
+): (...args: any[]) => T[];
 ```
 
 ### パラメータ
 
-- `iteratees` (`Array<Iteratee | Iteratee[]>`): 呼び出す反復子。
-  - `Iteratee` は `((...args: any[]) => unknown) | symbol | number | string | object | null` 型です。
+- `iteratees` (`Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>`): 呼び出す反復子。
 
 ### 戻り値
 
-(`(...args: any[]) => unknown[]`): 新しい関数を返します。
+(`(...args: any[]) => T[]`): 新しい関数を返します。
 
 ## 例
 

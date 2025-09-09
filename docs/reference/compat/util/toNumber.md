@@ -13,12 +13,12 @@ Unlike `Number()`, this function returns `NaN` for symbols.
 ## Signature
 
 ```typescript
-function toNumber(value?: unknown): number;
+function toNumber(value: any): number;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to convert.
+- `value` (`any`): The value to convert.
 
 ### Returns
 

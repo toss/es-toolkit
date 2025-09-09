@@ -8,9 +8,7 @@ When imported from `es-toolkit/compat`, it behaves exactly like lodash and provi
 
 Assigns properties from multiple source objects to a target object.
 
-This function merges the properties of the source objects into the target object.
-If a property in the source objects is equal to the corresponding property in the target object,
-it will not be overwritten.
+If a property in the source objects is equal to the corresponding property in the target object, it will not be overwritten.
 
 ## Signature
 

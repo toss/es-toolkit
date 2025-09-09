@@ -13,12 +13,12 @@
 ## 签名
 
 ```typescript
-function toNumber(value?: unknown): number;
+function toNumber(value: any): number;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要转换的值。
+- `value` (`any`): 要转换的值。
 
 ### 返回值
 

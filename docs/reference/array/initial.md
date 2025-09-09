@@ -7,6 +7,9 @@ For an empty array or an array with a length of 1, it returns an empty array (`[
 ## Signature
 
 ```typescript
+function initial<T>(arr: [T]): [];
+function initial(arr: []): [];
+function initial<T, U>(arr: [...T[], U]): T[];
 function initial<T>(arr: T[]): T[];
 ```
 

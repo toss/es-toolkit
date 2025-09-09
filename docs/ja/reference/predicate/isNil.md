@@ -12,6 +12,14 @@ TypeScriptの型ガードとしてよく使用され、パラメータとして�
 function isNil(x: unknown): x is null | undefined;
 ```
 
+### パラメータ
+
+- `x` (`unknown`): `null` または `undefined` かどうかを確認する値。
+
+### 戻り値
+
+(`x is null | undefined`): 値が `null` または `undefined` であれば `true`、そうでなければ `false` を返します。
+
 ## 例
 
 ```typescript

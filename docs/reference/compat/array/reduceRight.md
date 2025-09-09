@@ -49,13 +49,13 @@ function reduceRight<T extends object>(
 
 ### Parameters
 
-- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T>`): The collection to iterate over.
-- `iteratee` (`(accumulator: U, value: T, index, collection) => any)`): The function invoked per iteration.
-- `initialValue` (`U`): The initial value.
+- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): The collection to iterate over.
+- `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): The function invoked per iteration.
+- `initialValue` (`U`, Optional): The initial value.
 
 ### Returns
 
-(`any`): Returns the accumulated value.
+(`U`): Returns the accumulated value. If `initialValue` is not provided, the element type (`T`) of the collection is returned.
 
 ## Examples
 

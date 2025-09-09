@@ -13,12 +13,12 @@
 ## インターフェース
 
 ```typescript
-function toNumber(value?: unknown): number;
+function toNumber(value: any): number;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 変換する値。
+- `value` (`any`): 変換する値。
 
 ### 戻り値
 

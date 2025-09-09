@@ -22,6 +22,10 @@ function range(start: number, end: number, step: number): number[];
 
 - (`number[]`): `start`から始まり`end`の前で終わる、連続する数値が`step`だけ離れている配列。
 
+### エラー
+
+- `step`が0の場合、エラーをスローします。
+
 ## 例
 
 ```typescript
