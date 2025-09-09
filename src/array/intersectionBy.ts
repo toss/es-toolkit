@@ -41,7 +41,7 @@ export function intersectionBy<T, U>(
   return firstArr.filter(item => {
     const key = mapper(item);
     if (visitedSet.has(key)) {
-      return false
+      return false;
     }
     visitedSet.add(key);
     return mappedSecondSet.has(key);
