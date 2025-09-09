@@ -11,11 +11,11 @@
 ## 签名
 
 ```typescript
-function updateWith<T extends object | null | undefined>(
+function updateWith<T extends object>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown,
-  customizer: (value: unknown) => unknown
+  updater: (oldValue: any) => any,
+  customizer?: (value: any, key: string, object: T) => any
 ): T;
 ```
 
@@ -23,8 +23,8 @@ function updateWith<T extends object | null | undefined>(
 
 - `obj` (`T`): 要修改的对象。
 - `path` (`PropertyKey | readonly PropertyKey[]`): 要更新的属性路径。
-- `updater` (`(value: unknown) => unknown`): 生成更新值的函数。
-- `customizer` (`(value: unknown) => unknown`): 定制更新过程的函数。
+- `updater` (`(oldValue: any) => any`): 生成更新值的函数。
+- `customizer` (`(value: any, key: string, object: T) => any`, 可选): 定制更新过程的函数。
 
 ### 返回值
 

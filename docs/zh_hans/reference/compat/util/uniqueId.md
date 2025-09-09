@@ -1,4 +1,4 @@
-# toString
+# uniqueId
 
 ::: info
 出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
@@ -16,7 +16,7 @@ function uniqueId(prefix?: string): string;
 
 ### 参数
 
-- `prefix` (`string`, optional): 标识符的前缀值。
+- `prefix` (`string`, 可选): 标识符的前缀值，默认为 `''`。
 
 ### 返回值
 

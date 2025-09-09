@@ -13,9 +13,7 @@
 ## 签名
 
 ```typescript
-function min<T>(items: [T, ...T[]]): T;
-function min(): undefined;
-function min<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
+function min<T>(items: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### 参数

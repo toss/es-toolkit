@@ -14,7 +14,7 @@
 ## 签名
 
 ```typescript
-function padEnd(str: string, length = 0, chars = ' '): string;
+function padEnd(str?: string, length = 0, chars = ' '): string;
 ```
 
 ### 参数
@@ -25,7 +25,7 @@ function padEnd(str: string, length = 0, chars = ' '): string;
 
 ### 返回值
 
-返回一个新的字符串，该字符串用指定的字符填充，直到达到指定的长度。
+(`string`): 返回一个新的字符串，该字符串用指定的字符填充，直到达到指定的长度。
 
 ## 示例
 

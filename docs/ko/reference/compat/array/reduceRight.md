@@ -49,13 +49,13 @@ function reduceRight<T extends object>(
 
 ### 파라미터
 
-- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 반복할 컬렉션.
-- `iteratee` (`((accumulator: any, value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 반복할 때 호출되는 함수.
-- `initialValue` (`any`): 초기 값.
+- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): 반복할 컬렉션.
+- `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 반복할 때 호출되는 함수.
+- `initialValue` (`U`, 선택 사항): 초기 값.
 
 ### 반환 값
 
-(`U`): 하나의 값으로 줄여진 값.
+(`U`): 하나의 값으로 줄여진 결과. `initialValue`를 제공하지 않은 경우 컬렉션의 원소 타입(`T`)이 반환돼요.
 
 ## 예시
 

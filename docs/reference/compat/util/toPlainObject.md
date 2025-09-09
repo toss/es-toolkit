@@ -11,7 +11,7 @@ Converts value to a plain object flattening inherited enumerable string keyed pr
 ## Signature
 
 ```typescript
-function toPlainObject(value: any): Record<string, any>;
+function toPlainObject(value?: any): any;
 ```
 
 ### Parameters
@@ -20,7 +20,7 @@ function toPlainObject(value: any): Record<string, any>;
 
 ### Returns
 
-(`Record<string, any>`): Returns the converted plain object.
+(`any`): Returns the converted plain object.
 
 ## Examples
 

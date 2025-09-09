@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { mergeWith as mergeWithLodash } from 'lodash';
+import { cloneDeep } from './cloneDeep';
 import { mergeWith } from './mergeWith';
 import { last } from '../../array/last';
 import { identity } from '../../function/identity';
@@ -142,5 +143,20 @@ describe('mergeWith', () => {
 
   it('should match the type of lodash', () => {
     expectTypeOf(mergeWith).toEqualTypeOf<typeof mergeWithLodash>();
+  });
+
+  it('should respect `null` returned from `customizer`', () => {
+    const obj = { prop: null };
+    const source = { prop: { foo: 'bar' } };
+
+    expect(
+      mergeWith(cloneDeep(obj), cloneDeep(source), targetValue => {
+        if (targetValue === null) {
+          return null;
+        }
+
+        return undefined;
+      })
+    ).toEqual({ prop: null });
   });
 });

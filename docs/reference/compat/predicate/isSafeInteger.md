@@ -30,8 +30,8 @@ function isSafeInteger(value?: unknown): boolean;
 ## Examples
 
 ```typescript
-isInteger(3); // Returns: true
-isInteger(Number.MIN_SAFE_INTEGER - 1); // Returns: false
-isInteger(1n); // Returns: false
-isInteger('1'); // Returns: false
+isSafeInteger(3); // Returns: true
+isSafeInteger(Number.MIN_SAFE_INTEGER - 1); // Returns: false
+isSafeInteger(1n); // Returns: false
+isSafeInteger('1'); // Returns: false
 ```

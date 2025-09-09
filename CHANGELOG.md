@@ -1,5 +1,24 @@
 # es-toolkit Changelog
 
+## Version v1.39.10
+
+Released on August 17th, 2025.
+
+- Fixed `defaultsDeep` to properly handle deep merging of objects in arrays
+- Fixed several documentation issues and examples across multiple functions
+
+We sincerely thank @wo-o29, @thwlckd, @kilimandzharov, and @dayongkr for their contributions. We appreciate your great efforts!
+
+## Version v1.39.9
+
+Released on August 10th, 2025.
+
+- Fixed `mergeWith` to properly handle null values returned from customizer function.
+- Fixed `cloneDeepWith` to properly handle customizer returning null values.
+- Fixed some of the documentation issues.
+
+We sincerely thank @raon0211, @joshkel, and @Najeong-Kim for their contributions. We appreciate your great efforts!
+
 ## Version v1.39.8
 
 Released on July 25th, 2025.
