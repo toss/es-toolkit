@@ -11,13 +11,13 @@
 ## 인터페이스
 
 ```typescript
-function gt(value: unknown, other: unknown): boolean;
+function gt(value: any, other: any): boolean;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 비교할 값.
-- `other` (`unknown`): 비교할 다른 값.
+- `value` (`any`): 비교할 값.
+- `other` (`any`): 비교할 다른 값.
 
 ### 반환 값
 

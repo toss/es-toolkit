@@ -13,13 +13,13 @@
 ## 인터페이스
 
 ```typescript
-function repeat(str: string, n: number): string;
+function repeat(str?: string, n?: number): string;
 ```
 
 ### 파라미터
 
 - `str` (`string`): 반복할 문자열.
-- `n` (`number`): 반복하시고 싶은 횟수.
+- `n` (`number`): 반복할 횟수.
 
 ### 반환 값
 

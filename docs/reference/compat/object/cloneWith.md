@@ -3,7 +3,7 @@
 ::: info
 This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed @here.
+When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
 Creates a shallow clone of the given object with customization. This method is like `clone` except that it accepts a customizer which is invoked to produce the cloned value. If customizer returns undefined, cloning is handled by the method instead.

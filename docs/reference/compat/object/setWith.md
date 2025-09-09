@@ -19,11 +19,11 @@ if the next path segment is a valid array index, or an object otherwise.
 ## Signature
 
 ```typescript
-function setWith<T extends object | null | undefined>(
+function setWith<T extends object>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  value: unknown,
-  customizer?: (value: unknown) => unknown
+  value: any,
+  customizer?: (nsValue: any, key: string, nsObject: T) => any
 ): T;
 ```
 
@@ -31,8 +31,8 @@ function setWith<T extends object | null | undefined>(
 
 - `obj` (`T`): The object to modify.
 - `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to set.
-- `value` (`unknown`): The value to set.
-- `customizer` (`(value: unknown) => unknown`): The function to customize path creation.
+- `value` (`any`): The value to set.
+- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, optional): The function to customize path creation.
 
 ### Returns
 
