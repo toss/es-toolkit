@@ -11,12 +11,12 @@
 ## 签名
 
 ```typescript
-function unset(obj: unknown, path: PropertyKey | PropertyKey[]): boolean;
+function unset(obj: any, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### 参数
 
-- `obj` (`unknown`): 要修改的对象。
+- `obj` (`any`): 要修改的对象。
 - `path` (`PropertyKey | PropertyKey[]`): 要取消设置的属性路径。
 
 ### 返回值

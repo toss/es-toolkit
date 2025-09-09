@@ -17,12 +17,12 @@
 ## 인터페이스
 
 ```typescript
-function keysIn(object?: unknown): string[];
+function keysIn(object?: any): string[];
 ```
 
 ### 파라미터
 
-- `object` (`unknown`): 접근할 수 있는 문자열 프로퍼티를 찾을 객체.
+- `object` (`any`): 접근할 수 있는 문자열 프로퍼티를 찾을 객체.
 
 ### 반환 값
 

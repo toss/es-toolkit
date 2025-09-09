@@ -14,12 +14,12 @@
 ## 签名
 
 ```typescript
-function toString(value?: unknown): string;
+function toString(value: any): string;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要转换的值。
+- `value` (`any`): 要转换的值。
 
 ### 返回值
 

@@ -11,7 +11,7 @@
 ## 签名
 
 ```typescript
-function toFinite(value?: unknown): number;
+function toFinite(value: any): number;
 ```
 
 ### 参数

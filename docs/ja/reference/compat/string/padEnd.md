@@ -13,7 +13,7 @@
 ## インターフェース
 
 ```typescript
-function padEnd(str: string, length = 0, chars = ' '): string;
+function padEnd(str?: string, length = 0, chars = ' '): string;
 ```
 
 ### パラメータ

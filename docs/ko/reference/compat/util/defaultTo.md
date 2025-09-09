@@ -12,17 +12,17 @@
 
 ```typescript
 function defaultTo<T>(value: T | null | undefined, defaultValue?: T): T;
-function defaultTo(value?: unknown, defaultValue?: unknown): any;
+function defaultTo<T, D>(value: T | null | undefined, defaultValue: D): T | D;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 확인할 값.
-- `defaultValue` (`unknown`): 값이 `null`, `undefined` 또는 `NaN`인 경우 반환할 기본값.
+- `value` (`T | null | undefined`): 확인할 값.
+- `defaultValue` (`D`): 값이 `null`, `undefined` 또는 `NaN`인 경우 반환할 기본값.
 
 ### 반환 값
 
-(`unknown`): 첫 번째 값 또는 기본값.
+(`T | D`): 첫 번째 값 또는 기본값.
 
 ## 예시
 
