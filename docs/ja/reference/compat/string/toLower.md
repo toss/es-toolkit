@@ -11,16 +11,16 @@
 ## インターフェース
 
 ```typescript
-function toLower(value?: unknown): string;
+function toLower<T extends string = string>(value?: T): Lowercase<T>;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 変換する値。
+- `value` (`T`): 変換する値。
 
 ### 戻り値
 
-(`string`): 小文字に変換された文字列を返します。
+(`Lowercase<T>`): 小文字に変換された文字列を返します。
 
 ## 例
 

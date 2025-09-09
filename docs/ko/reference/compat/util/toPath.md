@@ -13,12 +13,12 @@
 ## 인터페이스
 
 ```typescript
-function toPath(deepKey: string): string[];
+function toPath(deepKey: any): string[];
 ```
 
 ### 파라미터
 
-- `deepKey` (`string`): 변환할 깊은 키 문자열.
+- `deepKey` (`any`): 변환할 깊은 키 문자열.
 
 ### 반환 값
 
