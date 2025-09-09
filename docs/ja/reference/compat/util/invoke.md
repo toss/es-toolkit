@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-function invoke(object: unknown, path: PropertyKey | PropertyKey[], args: any[]): any;
+function invoke(object: any, path: PropertyKey | PropertyKey[], args: any[]): any;
 ```
 
 ### パラメータ
 
-- `object` (`unknown`): 問い合わせするオブジェクト。
+- `object` (`any`): 問い合わせするオブジェクト。
 - `path` (`PropertyKey | PropertyKey[]`): 呼び出すメソッドのパス。
 - `args` (`any[]`): メソッドを呼び出すときに使用する引数。
 

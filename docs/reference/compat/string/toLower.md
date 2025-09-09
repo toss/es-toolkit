@@ -11,16 +11,16 @@ Converts the given value to a string and transforms it to lower case. The functi
 ## Signature
 
 ```typescript
-function toLower(value?: unknown): string;
+function toLower<T extends string = string>(value?: T): Lowercase<T>;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to convert.
+- `value` (`T`): The value to convert.
 
 ### Returns
 
-(`string`): Returns the lower cased string.
+(`Lowercase<T>`): Returns the lower cased string.
 
 ## Examples
 

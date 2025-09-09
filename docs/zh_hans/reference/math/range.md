@@ -22,6 +22,10 @@ function range(start: number, end: number, step: number): number[];
 
 - (`number[]`): 从 `start` 到 `end` 的数字数组，使用指定的 `step`。
 
+### 抛出异常
+
+- 如果 `step` 为0，则抛出错误。
+
 ## 示例
 
 ```typescript

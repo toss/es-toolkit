@@ -5,7 +5,7 @@
 ## 签名
 
 ```typescript
-function identity<T>(x: T);
+function identity<T>(x: T): T;
 ```
 
 ### 参数
