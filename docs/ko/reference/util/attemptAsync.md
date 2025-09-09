@@ -27,7 +27,7 @@ function attemptAsync<T, E>(func: () => Promise<T>): Promise<[null, T] | [E, nul
 ## 예시
 
 ```typescript
-import { attemptAsync } from 'es-toolkit/function';
+import { attemptAsync } from 'es-toolkit/util';
 
 // 성공시에는 [null, 함수의 반환값] 튜플을 반환해요.
 const [error, data] = await attemptAsync(async () => {

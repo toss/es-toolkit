@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { escapeRegExp as escapeRegExpLodash } from 'lodash';
 import { escapeRegExp } from './escapeRegExp';
 import { map } from '../array/map';
 import { stubString } from '../util/stubString';
@@ -23,5 +24,9 @@ describe('escapeRegExp', () => {
     const actual = map(values, (value, index) => (index ? escapeRegExp(value as any) : escapeRegExp()));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(escapeRegExp).toEqualTypeOf<typeof escapeRegExpLodash>();
   });
 });

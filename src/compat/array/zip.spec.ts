@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { zip as zipLodash } from 'lodash';
 import { zip } from './zip';
 import { unzip } from '../../array/unzip';
 import { falsey } from '../_internal/falsey';
@@ -82,15 +83,20 @@ describe('zip', () => {
   });
 
   it(`\`_.zip\` should support consuming its return value`, () => {
-    const expected = [
+    const expected: any[][] = [
       ['barney', 'fred'],
       [36, 40],
     ];
+
     expect(unzip(zip(...unzip(zip(...expected))))).toEqual(expected);
   });
 
   it(`\`_.zip\` should work with array-like object`, () => {
     const array = { 0: 'a', 1: 'b', length: 2 };
     expect(zip(array)).toEqual([['a'], ['b']]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(zip).toEqualTypeOf<typeof zipLodash>();
   });
 });

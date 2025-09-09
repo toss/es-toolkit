@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { initial as initialLodash } from 'lodash';
 import { initial } from './initial';
 import { args } from '../_internal/args';
 
@@ -46,5 +47,9 @@ describe('initial', () => {
     expect(initial({ 0: 1, 1: null, 2: 3, length: 3 })).toEqual([1, null]);
     expect(initial('123')).toEqual(['1', '2']);
     expect(initial(args)).toEqual([1, 2]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(initial).toEqualTypeOf<typeof initialLodash>();
   });
 });

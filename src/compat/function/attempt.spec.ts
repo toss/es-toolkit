@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { attempt as attemptLodash } from 'lodash';
 import { attempt } from './attempt';
 import { isEqual } from '../../predicate/isEqual';
 
@@ -66,5 +67,9 @@ describe('attempt', () => {
       throw new CustomError('x');
     });
     expect(actual instanceof CustomError);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(attempt).toEqualTypeOf<typeof attemptLodash>();
   });
 });

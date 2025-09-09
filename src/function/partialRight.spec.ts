@@ -62,7 +62,7 @@ describe('partialRight', () => {
     const par = partialRight(Foo);
 
     // @ts-expect-error - par is a constructor
-    expect(new par() instanceof Foo);
+    expect(new par() instanceof Foo).toBe(true);
     // @ts-expect-error - par is a constructor
     expect(new par(true)).toBe(object);
   });
@@ -97,7 +97,7 @@ describe('partialRight', () => {
         return Array.from(arguments);
       },
       curried = curry(fn),
-      par = partialRight(curried, partialRight.placeholder, 'b', partialRight.placeholder, 'd');
+      par = partialRight(curried, partialRight.placeholder, 'b', partialRight.placeholder, 'd') as any;
 
     expect(par('a', 'c')).toEqual(['a', 'b', 'c', 'd']);
   });

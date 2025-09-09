@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { unescape as unescapeLodash } from 'lodash';
 import { escape } from './escape';
 import { unescape } from './unescape';
 import { map } from '../array/map';
@@ -47,5 +48,9 @@ describe('unescape', () => {
     const actual = map(values, (value, index) => (index ? unescape(value as any) : unescape()));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(unescape).toEqualTypeOf<typeof unescapeLodash>();
   });
 });

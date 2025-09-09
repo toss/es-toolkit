@@ -1,4 +1,5 @@
-import { isArray, isPlainObject } from '../compat/index.ts';
+import { isArray } from '../compat/predicate/isArray.ts';
+import { isPlainObject } from '../compat/predicate/isPlainObject.ts';
 import { snakeCase } from '../string/snakeCase.ts';
 
 type SnakeCase<S extends string> = S extends `${infer P1}${infer P2}`
@@ -66,14 +67,14 @@ export function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T> {
 
   if (isPlainObject(obj)) {
     const result = {} as ToSnakeCaseKeys<T>;
-    const keys = Object.keys(obj);
+    const keys = Object.keys(obj as Record<PropertyKey, any>);
 
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
       const snakeKey = snakeCase(key) as keyof typeof result;
-      const snakeCaseKeys = toSnakeCaseKeys(obj[key]);
-      result[snakeKey] = snakeCaseKeys as ToSnakeCaseKeys<T>[keyof ToSnakeCaseKeys<T>];
+      const convertedValue = toSnakeCaseKeys((obj as Record<PropertyKey, any>)[key]);
+      result[snakeKey] = convertedValue as ToSnakeCaseKeys<T>[keyof ToSnakeCaseKeys<T>];
     }
 
     return result;

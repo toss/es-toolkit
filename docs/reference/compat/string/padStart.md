@@ -14,7 +14,7 @@ the original string is returned unchanged.
 ## Signature
 
 ```typescript
-function padStart(str: string, length = 0, chars = ' '): string;
+function padStart(str?: string, length = 0, chars = ' '): string;
 ```
 
 ### Parameters
@@ -25,7 +25,7 @@ function padStart(str: string, length = 0, chars = ' '): string;
 
 ### Returns
 
-Returns a new string padded with the specified character until it reaches the specified length.
+(`string`): Returns a new string padded with the specified character until it reaches the specified length.
 
 ## Examples
 

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { snakeCase as snakeCaseLodash } from 'lodash';
 import { snakeCase } from './snakeCase';
 
 describe('snakeCase', () => {
@@ -40,6 +41,12 @@ describe('snakeCase', () => {
   it(`should coerce \`string\` to a string`, () => {
     const string = 'foo bar';
     expect(snakeCase(Object(string))).toBe('foo_bar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(snakeCase({ toString: () => string })).toBe('foo_bar');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(snakeCase).toEqualTypeOf<typeof snakeCaseLodash>();
   });
 });

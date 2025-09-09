@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { uniqueId as uniqueIdLodash } from 'lodash';
 import { uniqueId } from './uniqueId';
 
 describe('uniqueId', () => {
@@ -20,5 +21,9 @@ describe('uniqueId', () => {
     expect(ids[1].startsWith('2')).toBe(true);
     expect(ids[2].startsWith('1')).toBe(true);
     expect(ids[3].startsWith('true')).toBe(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(uniqueId).toEqualTypeOf<typeof uniqueIdLodash>();
   });
 });

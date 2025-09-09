@@ -5,12 +5,12 @@ Creates a function that negates the result of the predicate function.
 ## Signature
 
 ```typescript
-function negate<F extends (...args: never[]) => boolean>(func: F): F;
+function negate<F extends (...args: any[]) => boolean>(func: F): F;
 ```
 
 ### Parameters
 
-- `func` (`F extends (args: ...Parameters) => unknown`): The function to negate.
+- `func` (`F extends (...args: any[]) => boolean`): The function to negate.
 
 ### Returns
 

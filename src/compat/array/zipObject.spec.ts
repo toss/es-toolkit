@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { each } from '..';
+import type { zipObject as zipObjectLodash } from 'lodash';
 import { zipObject } from './zipObject';
 
 describe('zipObject', () => {
@@ -35,5 +36,9 @@ describe('zipObject', () => {
 
   it('should return an empty object if no keys and no values are provided', () => {
     expect(zipObject([], [])).toEqual({});
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(zipObject).toEqualTypeOf<typeof zipObjectLodash>();
   });
 });

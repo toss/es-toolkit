@@ -20,6 +20,6 @@ import { isWeakSet as isWeakSetToolkit } from '../../predicate/isWeakSet.ts';
  * console.log(isWeakSet(value2)); // false
  * console.log(isWeakSet(value3)); // false
  */
-export function isWeakSet(value?: unknown): value is WeakSet<WeakKey> {
+export function isWeakSet(value?: any): value is WeakSet<object> {
   return isWeakSetToolkit(value);
 }

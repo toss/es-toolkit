@@ -97,4 +97,23 @@ describe('pullAllWith', () => {
     expect(456 in array).toBe(false);
     expect(789 in array).toBe(false);
   });
+
+  it('should handle null and undefined values', () => {
+    // @ts-expect-error - null is not an array
+    expect(pullAllWith(null, [1, 2, 3])).toEqual(null);
+    // @ts-expect-error - undefined is not an array
+    expect(pullAllWith(undefined, [1, 2, 3])).toEqual(undefined);
+  });
+
+  // NOTE: TypeScript doesn't support matching conditional types
+  // it('should match the type of lodash', () => {
+  //   expectTypeOf(pullAllWith).toEqualTypeOf<typeof pullAllWithLodash>();
+  // });
+
+  it('should work with the same value for `array` and `values`', () => {
+    const array = [{ a: 1 }, { b: 2 }];
+    const actual = pullAllWith(array, array);
+
+    expect(actual).toEqual([]);
+  });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { split as splitLodash } from 'lodash';
 import { split } from './split';
 
 describe('split', () => {
@@ -16,6 +17,8 @@ describe('split', () => {
     const actual = values.map(value => split(value));
 
     expect(actual).toEqual(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(split()).toEqual(['']);
   });
 
@@ -29,5 +32,9 @@ describe('split', () => {
   it('should allow mixed string and array prototype methods', () => {
     const result = split('abc', 'b').join(',');
     expect(result).toBe('a,c');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(split).toEqualTypeOf<typeof splitLodash>();
   });
 });

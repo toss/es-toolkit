@@ -9,6 +9,7 @@ const isEven = function (n: number) {
 describe('remove', () => {
   it('should modify the array and return removed elements', () => {
     const array = [1, 2, 3, 4];
+
     const actual = remove(array, isEven);
 
     expect(array).toEqual([1, 3]);
@@ -40,6 +41,7 @@ describe('remove', () => {
       { a: 0, b: 1 },
       { a: 1, b: 2 },
     ];
+
     remove(objects, { a: 1 });
     expect(objects).toEqual([{ a: 0, b: 1 }]);
   });
@@ -49,12 +51,14 @@ describe('remove', () => {
       { a: 0, b: 1 },
       { a: 1, b: 2 },
     ];
+
     remove(objects, ['a', 1]);
     expect(objects).toEqual([{ a: 0, b: 1 }]);
   });
 
   it('should work with `_.property` shorthands', () => {
     const objects = [{ a: 0 }, { a: 1 }];
+
     remove(objects, 'a');
     expect(objects).toEqual([{ a: 0 }]);
   });

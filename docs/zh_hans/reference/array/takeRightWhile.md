@@ -71,11 +71,13 @@ const result3 = takeRightWhile(array3, ['id', 3]);
 
 // 使用属性名的示例
 const array4 = [{ isActive: false }, { isActive: true }, { isActive: true }];
-const result4 将是 [{ isActive: true }, { isActive: true }]，因为 isActive 属性被评估为类似 `true` 的值，并从末尾获取。
+const result4 = takeRightWhile(array4, 'isActive');
+// result4 将是 [{ isActive: true }, { isActive: true }]，因为 isActive 属性被评估为类似 `true` 的值，并从末尾获取。
 
 // 无条件时
 const array5 = [1, 2, 3];
-const result5 将是 [1, 2, 3]，因为在没有条件的情况下，默认使用 identity 函数。
+const result5 = takeRightWhile(array5);
+// result5 将是 [1, 2, 3]，因为在没有条件的情况下，默认使用 identity 函数。
 
 // null 或 undefined 数组
 const result6 = takeRightWhile(null);

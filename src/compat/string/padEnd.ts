@@ -18,6 +18,6 @@ import { toString } from '../util/toString.ts';
  * const result4 = padEnd('abc', 2);          // result will be 'abc'
  */
 
-export function padEnd(str: string, length = 0, chars = ' '): string {
+export function padEnd(str?: string, length = 0, chars = ' '): string {
   return toString(str).padEnd(length, chars);
 }

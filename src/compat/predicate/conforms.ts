@@ -1,5 +1,6 @@
 import { conformsTo } from './conformsTo.ts';
 import { cloneDeep } from '../../object/cloneDeep.ts';
+import { ConformsPredicateObject } from '../_internal/ConformsPredicateObject.ts';
 
 /**
  * Creates a function that invokes the predicate properties of `source` with the corresponding property values of a given object, returning `true` if all predicates return truthy, else `false`.
@@ -20,12 +21,10 @@ import { cloneDeep } from '../../object/cloneDeep.ts';
  * console.log(conform({ a: 2, b: 3 })); // false
  * console.log(conform({ a: 0, b: 2 })); // false
  */
-export function conforms(
-  source: Record<PropertyKey, (value: any) => boolean>
-): (object: Record<PropertyKey, any>) => boolean {
+export function conforms<T>(source: ConformsPredicateObject<T>): (value: T) => boolean {
   source = cloneDeep(source);
 
-  return function (object: Record<PropertyKey, any>) {
+  return function (object: T) {
     return conformsTo(object, source);
   };
 }

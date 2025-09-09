@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { subtract as subtractLodash } from 'lodash';
 import { subtract } from './subtract';
 import { symbol } from '../_internal/symbol';
 import { map } from '../array/map';
@@ -91,5 +92,9 @@ describe('subtract', () => {
     expect(subtract(0, symbol)).toEqual(NaN);
     // @ts-expect-error - invalid arguments
     expect(subtract(symbol, 0)).toEqual(NaN);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(subtract).toEqualTypeOf<typeof subtractLodash>();
   });
 });

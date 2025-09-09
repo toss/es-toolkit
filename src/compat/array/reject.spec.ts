@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { reject as rejectLodash } from 'lodash';
 import { reject } from './reject';
 import { args } from '../_internal/args';
 import { isEven } from '../_internal/isEven';
@@ -138,5 +139,27 @@ describe('reject', () => {
     expect(reject({ 0: 1, 1: 2, 2: 3, length: 3 }, isEven)).toEqual([1, 3]);
     expect(reject('123', value => isEven(parseInt(value)))).toEqual(['1', '3']);
     expect(reject(args, isEven)).toEqual([1, 3]);
+  });
+
+  it('should not modify the resulting value from within `predicate`', () => {
+    const actual = reject([0], (value, index, array) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      array[index] = 1;
+      return false;
+    });
+
+    expect(actual).toEqual([0]);
+  });
+
+  it('should handle sparse arrays correctly', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const sparseArray = [1, , 3, , 5] as any[];
+
+    expect(reject(sparseArray, value => value > 2)).toEqual([1, undefined, undefined]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(reject).toEqualTypeOf<typeof rejectLodash>();
   });
 });

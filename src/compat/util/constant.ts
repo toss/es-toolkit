@@ -1,11 +1,4 @@
 /**
- * Creates a new function that always returns `undefined`.
- *
- * @returns {() => undefined} Returns the new constant function.
- */
-export function constant(): () => undefined;
-
-/**
  * Creates a new function that always returns `value`.
  *
  * @template T - The type of the value to return.

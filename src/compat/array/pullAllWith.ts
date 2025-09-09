@@ -1,74 +1,103 @@
 import copyArray from '../_internal/copyArray.ts';
+import type { MutableList } from '../_internal/MutableList.d.ts';
+import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
 import { eq } from '../util/eq.ts';
 
 /**
- * Removes and returns elements from an array using a provided comparison function to determine which elements to remove.
+ * This method is like `_.pullAll` except that it accepts `comparator` which is
+ * invoked to compare elements of array to values. The comparator is invoked with
+ * two arguments: (arrVal, othVal).
+ *
+ * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
  *
  * @template T
  * @param {T[]} array - The array to modify.
- * @param {T[]} values - The values to remove from the array.
- * @param {(a: T, b: T) => boolean} comparator - The function to compare elements of `array` with elements of `values`. Should return `true` if the two elements are considered equal.
- * @returns {T[]} - The array with specified values removed.
+ * @param {ArrayLike<T>} [values] - The values to remove.
+ * @param {(a: T, b: T) => boolean} [comparator] - The comparator invoked per element.
+ * @returns {T[]} Returns `array`.
  *
  * @example
- * const array = [{ x: 1, y: 2 }, { x: 3, y: 4 }, { x: 5, y: 6 }];
- * const valuesToRemove = [{ x: 3, y: 4 }];
+ * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
  *
- * const result = pullAllWith(array, valuesToRemove, isEqual);
- *
- * console.log(result); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
+ * pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
+ * console.log(array);
+ * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
-export function pullAllWith<T>(array: T[], values?: T[], comparator?: (a: T, b: T) => boolean): T[];
-
-export function pullAllWith<T>(
-  array: ArrayLike<T>,
-  values?: ArrayLike<T>,
-  comparator?: (a: T, b: T) => boolean
-): ArrayLike<T>;
+export function pullAllWith<T>(array: T[], values?: ArrayLike<T>, comparator?: (a: T, b: T) => boolean): T[];
 
 /**
- * Removes and returns elements from an array using a provided comparison function to determine which elements to remove.
+ * This method is like `_.pullAll` except that it accepts `comparator` which is
+ * invoked to compare elements of array to values. The comparator is invoked with
+ * two arguments: (arrVal, othVal).
  *
- * @template T1
- * @template T2
- * @param {T1[]} array - The array to modify.
- * @param {ArrayLike<T2>} values - The values to remove from the array.
- * @param {(a: T1, b: T2) => boolean} comparator - The function to compare elements of `array` with elements of `values`. Should return `true` if the two elements are considered equal.
- * @returns {T1[]} - The array with specified values removed.
+ * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
+ *
+ * @template L
+ * @param {RejectReadonly<L>} array - The array to modify.
+ * @param {List<L[0]>} [values] - The values to remove.
+ * @param {Comparator<L[0]>} [comparator] - The comparator invoked per element.
+ * @returns {L} Returns `array`.
  *
  * @example
- * const array = [{ x: 1, y: 2 }, { x: 3, y: 4 }, { x: 5, y: 6 }];
- * const valuesToRemove = [{ x: 3, y: 4 }];
+ * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
  *
- * const result = pullAllWith(array, valuesToRemove, isEqual);
- *
- * console.log(result); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
+ * pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
+ * console.log(array);
+ * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
-export function pullAllWith<T1, T2>(array: T1[], values: ArrayLike<T2>, comparator: (a: T1, b: T2) => boolean): T1[];
+export function pullAllWith<L extends MutableList<any>>(
+  array: RejectReadonly<L>,
+  values?: ArrayLike<L[0]>,
+  comparator?: (a: L[0], b: L[0]) => boolean
+): L;
 
 /**
- * Removes and returns elements from an array using a provided comparison function to determine which elements to remove.
+ * This method is like `_.pullAll` except that it accepts `comparator` which is
+ * invoked to compare elements of array to values. The comparator is invoked with
+ * two arguments: (arrVal, othVal).
  *
- * @template T1
- * @template T2
- * @param {T1[]} array - The array to modify.
- * @param {ArrayLike<T2>} values - The values to remove from the array.
- * @param {(a: T1, b: T2) => boolean} comparator - The function to compare elements of `array` with elements of `values`. Should return `true` if the two elements are considered equal.
- * @returns {ArrayLike<T1>} - The array with specified values removed.
+ * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
+ *
+ * @template T, U
+ * @param {T[]} array - The array to modify.
+ * @param {ArrayLike<U>} values - The values to remove.
+ * @param {(a: T, b: U) => boolean} comparator - The comparator invoked per element.
+ * @returns {T[]} Returns `array`.
  *
  * @example
- * const array = [{ x: 1, y: 2 }, { x: 3, y: 4 }, { x: 5, y: 6 }];
- * const valuesToRemove = [{ x: 3, y: 4 }];
+ * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
  *
- * const result = pullAllWith(array, valuesToRemove, isEqual);
- *
- * console.log(result); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
+ * pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
+ * console.log(array);
+ * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
  */
-export function pullAllWith<T1, T2>(
-  array: ArrayLike<T1>,
-  values: ArrayLike<T2>,
-  comparator: (a: T1, b: T2) => boolean
-): ArrayLike<T1>;
+export function pullAllWith<T, U>(array: T[], values: ArrayLike<U>, comparator: (a: T, b: U) => boolean): T[];
+
+/**
+ * This method is like `_.pullAll` except that it accepts `comparator` which is
+ * invoked to compare elements of array to values. The comparator is invoked with
+ * two arguments: (arrVal, othVal).
+ *
+ * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
+ *
+ * @template L1, L2
+ * @param {RejectReadonly<L1>} array - The array to modify.
+ * @param {List<L2>} values - The values to remove.
+ * @param {Comparator2<L1[0], L2>} comparator - The comparator invoked per element.
+ * @returns {L1} Returns `array`.
+ *
+ * @example
+ * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
+ *
+ * pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
+ * console.log(array);
+ * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
+ */
+export function pullAllWith<L1 extends MutableList<any>, L2>(
+  array: RejectReadonly<L1>,
+  values: ArrayLike<L2>,
+  comparator: (a: L1[0], b: L2) => boolean
+): L1;
 
 /**
  * Removes and returns elements from an array using a provided comparison function to determine which elements to remove.

@@ -11,20 +11,19 @@
 ## 签名
 
 ```typescript
-function split(string: string): string[];
-function split(string: string, separator: RegExp | string): string[];
-function split(string: string, separator: RegExp | string, limit: number): string[];
+function split(string: string | null | undefined, separator?: RegExp | string, limit?: number): string[];
+function split(string: string | null | undefined, index: string | number, guard: object): string[];
 ```
 
 ## 参数
 
-- `string` (`string`): 要分割的字符串。
-- `separator` (`RegExp|string`): 用于分割的分隔符模式。
-- `limit` (`number`): 结果数组的最大长度。
+- `string` (`string | null | undefined`): 要分割的字符串。
+- `separator` (`RegExp | string`): 用于分割的分隔符模式。
+- `limit` (`number`, 可选): 结果数组的最大长度。
 
 ## 返回值
 
-- (`Array`): 返回分割后的字符串片段数组。
+- (`string[]`): 返回分割后的字符串片段数组。
 
 ## 示例
 

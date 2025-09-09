@@ -1,6 +1,6 @@
 # compact
 
-Removes falsey values (`false`, `null`, `0`, `0n`, `''`, `undefined`, `NaN`) from an array.
+Removes falsey values (`false`, `null`, `0`, `-0`, `0n`, `''`, `undefined`, `NaN`) from an array.
 
 ## Signature
 
@@ -19,6 +19,6 @@ function compact<T>(arr: T[]): Array<Exclude<T, false | null | 0 | 0n | '' | und
 ## Examples
 
 ```typescript
-compact([0, 0n, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
+compact([0, -0, 0n, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
 // Returns: [1, 2, 3, 4, 5]
 ```

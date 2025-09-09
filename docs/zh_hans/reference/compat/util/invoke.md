@@ -11,12 +11,12 @@
 ## 签名
 
 ```typescript
-function invoke(object: unknown, path: PropertyKey | PropertyKey[], args: any[]): any;
+function invoke(object: any, path: PropertyKey | PropertyKey[], args: any[]): any;
 ```
 
 ### 参数
 
-- `object` (`unknown`): 要查询的对象。
+- `object` (`any`): 要查询的对象。
 - `path` (`PropertyKey | PropertyKey[]`): 要调用的方法的路径。
 - `args` (`any[]`): 调用该方法的参数。
 

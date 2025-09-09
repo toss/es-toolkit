@@ -15,12 +15,12 @@
 ## 签名
 
 ```typescript
-function toSafeInteger(value?: unknown): number;
+function toSafeInteger(value: any): number;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要转换的值。
+- `value` (`any`): 要转换的值。
 
 ### 返回值
 

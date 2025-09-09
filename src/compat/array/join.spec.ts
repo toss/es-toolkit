@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { join as joinLodash } from 'lodash';
 import { join } from './join.js';
 import { args } from '../_internal/args';
 
@@ -25,5 +26,9 @@ describe('join', () => {
     expect(join({ 0: 1, 1: 2, length: 2 })).toBe('1,2');
     expect(join('123')).toBe('1,2,3');
     expect(join(args)).toBe('1,2,3');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(join).toEqualTypeOf<typeof joinLodash>();
   });
 });

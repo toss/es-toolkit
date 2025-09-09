@@ -17,6 +17,6 @@ import { toString } from '../util/toString.ts';
  * const result3 = padStart('abc', 3);          // result will be 'abc'
  * const result4 = padStart('abc', 2);          // result will be 'abc'
  */
-export function padStart(str: string, length = 0, chars = ' '): string {
+export function padStart(str?: string, length = 0, chars = ' '): string {
   return toString(str).padStart(length, chars);
 }

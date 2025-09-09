@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { flowRight as flowRightLodash } from 'lodash';
 import { ary } from './ary';
 import { flowRight } from './flowRight';
 import { head } from '../../array/head';
@@ -40,6 +41,8 @@ describe('flowRight', () => {
 
   it(`\`flowRight\` should work with curried functions with placeholders`, () => {
     const curried = curry(ary(map, 2), 2);
+    // eslint-disable-next-line
+    // @ts-ignore
     const getProp = curried(curried.placeholder, (value: { a: any }) => value.a);
     const objects = [{ a: 1 }, { a: 2 }, { a: 1 }];
 
@@ -61,5 +64,9 @@ describe('flowRight', () => {
     const combined = flowRight(fixed, [square, add]);
 
     expect(combined(1, 2)).toBe('9.0');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(flowRight).toEqualTypeOf<typeof flowRightLodash>();
   });
 });

@@ -11,16 +11,16 @@
 ## インターフェース
 
 ```typescript
-function toUpper(value?: unknown): string;
+function toUpper<T extends string = string>(value?: T): Uppercase<T>;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 大文字に変換する値。省略した場合は空の文字列を返します。
+- `value` (`T`): 大文字に変換する値。省略した場合は空の文字列を返します。
 
 ### 戻り値
 
-`string`: 入力値を文字列に変換した後、大文字に変換した結果。
+`Uppercase<T>`: 入力値を文字列に変換した後、大文字に変換した結果。
 
 ## 例
 

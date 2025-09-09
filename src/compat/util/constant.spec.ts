@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { constant as constantLodash } from 'lodash';
 import { constant } from './constant';
 import { stubTrue } from './stubTrue';
 import { empties } from '../_internal/empties';
@@ -27,6 +28,8 @@ describe('constant', () => {
     const expected = falsey.map(stubTrue);
 
     const actual = falsey.map((value, index) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       const _constant = index ? constant(value) : constant();
       const result = _constant();
 
@@ -42,4 +45,8 @@ describe('constant', () => {
   //   const wrapped = _(true).constant();
   //   expect(wrapped instanceof _);
   // });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(constant).toEqualTypeOf<typeof constantLodash>();
+  });
 });

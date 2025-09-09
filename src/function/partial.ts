@@ -1,5 +1,3 @@
-type Placeholder = typeof partialPlaceholder;
-
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
  *
@@ -697,26 +695,34 @@ export function partial<F extends (...args: any[]) => any>(
   func: F,
   ...partialArgs: any[]
 ): (...args: any[]) => ReturnType<F> {
-  return function (this: any, ...providedArgs: any[]) {
-    const args: any[] = [];
-
-    let startIndex = 0;
-    for (let i = 0; i < partialArgs.length; i++) {
-      const arg = partialArgs[i];
-
-      if (arg === partial.placeholder) {
-        args.push(providedArgs[startIndex++]);
-      } else {
-        args.push(arg);
-      }
-    }
-    for (let i = startIndex; i < providedArgs.length; i++) {
-      args.push(providedArgs[i]);
-    }
-
-    return func.apply(this, args);
-  } as any as F;
+  return partialImpl<F, Placeholder>(func, placeholderSymbol, ...partialArgs);
 }
 
-const partialPlaceholder: unique symbol = Symbol('partial.placeholder');
-partial.placeholder = partialPlaceholder;
+export function partialImpl<F extends (...args: any[]) => any, P>(
+  func: F,
+  placeholder: P,
+  ...partialArgs: any[]
+): (...args: any[]) => ReturnType<F> {
+  const partialed = function (this: unknown, ...providedArgs: any[]) {
+    let providedArgsIndex = 0;
+
+    const substitutedArgs: any[] = partialArgs
+      .slice()
+      .map(arg => (arg === placeholder ? providedArgs[providedArgsIndex++] : arg));
+
+    const remainingArgs = providedArgs.slice(providedArgsIndex);
+
+    return func.apply(this, substitutedArgs.concat(remainingArgs));
+  };
+
+  if (func.prototype) {
+    partialed.prototype = Object.create(func.prototype);
+  }
+
+  return partialed;
+}
+
+const placeholderSymbol: unique symbol = Symbol('partial.placeholder');
+partial.placeholder = placeholderSymbol;
+
+type Placeholder = typeof placeholderSymbol;

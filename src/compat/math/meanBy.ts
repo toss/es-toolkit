@@ -1,4 +1,6 @@
+import { identity } from '../../function/identity.ts';
 import { meanBy as meanByToolkit } from '../../math/meanBy.ts';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
 /**
@@ -9,7 +11,7 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  *
  * @template T - The type of elements in the array.
  * @param {T[]} items An array to calculate the average.
- * @param {((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>} iteratee
+ * @param {((element: T) => unknown) | PropertyKey | [PropertyKey, any] | PartialShallow<T>} iteratee
  * The criteria used to determine the maximum value.
  *  - If a **function** is provided, it extracts a numeric value from each element.
  *  - If a **string** is provided, it is treated as a key to extract values from the objects.
@@ -23,13 +25,10 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * meanBy([[2], [3], [1]], 0); // Returns: 2
  * meanBy([{ a: 2 }, { a: 3 }, { a: 1 }], 'a'); // Returns: 2
  */
-export function meanBy<T>(
-  items: ArrayLike<T> | null | undefined,
-  iteratee: ((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>
-): number {
+export function meanBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): number {
   if (items == null) {
     return NaN;
   }
 
-  return meanByToolkit(Array.from(items), iterateeToolkit(iteratee));
+  return meanByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
 }

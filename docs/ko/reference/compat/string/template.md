@@ -29,7 +29,7 @@ function template(string: string, options?: TemplateOptions): ((data?: object) =
 
 ### 반환 값
 
-(`(data?: object) => string`): 컴파일된 템플릿 함수를 반환합니다.
+(`((data?: object) => string) & { source: string }`): 반환된 함수는 호출할 수 있고, `source` 속성으로 컴파일된 템플릿 소스 코드를 포함합니다.
 
 ## 예시
 

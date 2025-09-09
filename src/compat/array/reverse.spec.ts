@@ -10,6 +10,7 @@ describe('reverse', () => {
 
   it('should reverse `array`', () => {
     const array = [1, 2, 3];
+
     const actual = reverse(array);
 
     expect(actual).toBe(array);
@@ -28,10 +29,14 @@ describe('reverse', () => {
   });
 
   it('should return null if input is null', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(reverse(null)).toBeNull();
   });
 
   it('should return undefined if input is undefined', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(reverse(undefined)).toBeUndefined();
   });
 
@@ -51,6 +56,7 @@ describe('reverse', () => {
 
   it('should handle an array with duplicate elements', () => {
     const array = [1, 2, 2, 3];
+
     const result = reverse(array);
     expect(result).toEqual([3, 2, 2, 1]);
     expect(result).toBe(array);
@@ -58,12 +64,14 @@ describe('reverse', () => {
 
   it('should modify the original array', () => {
     const array = [1, 2, 3];
+
     reverse(array);
     expect(array).toEqual([3, 2, 1]);
   });
 
   it('should work with arrays of strings', () => {
     const array = ['a', 'b', 'c'];
+
     const result = reverse(array);
     expect(result).toEqual(['c', 'b', 'a']);
     expect(result).toBe(array);
@@ -71,6 +79,7 @@ describe('reverse', () => {
 
   it('should work with mixed types', () => {
     const array = [1, 'two', 3, 'four'];
+
     const result = reverse(array);
     expect(result).toEqual(['four', 3, 'two', 1]);
     expect(result).toBe(array);

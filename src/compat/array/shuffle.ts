@@ -50,7 +50,7 @@ export function shuffle<T>(collection: ArrayLike<T> | T | null | undefined): T[]
   }
 
   if (isObjectLike(collection)) {
-    return shuffleToolkit(values(collection));
+    return shuffleToolkit(values(collection as Record<PropertyKey, T[keyof T]>));
   }
 
   return [];

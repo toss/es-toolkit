@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { toPlainObject as toPlainObjectLodash } from 'lodash';
 import { toPlainObject } from './toPlainObject';
 import { args } from '../_internal/args';
 
@@ -35,5 +36,9 @@ describe('toPlainObject', () => {
       enumerable: true,
     });
     expect(toPlainObject(object)).toEqual({ ['__proto__']: { a: 1 } });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toPlainObject).toEqualTypeOf<typeof toPlainObjectLodash>();
   });
 });

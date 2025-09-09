@@ -1,4 +1,6 @@
 import { maxBy as maxByToolkit } from '../../array/maxBy.ts';
+import { identity } from '../../function/identity.ts';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 
 /**
@@ -6,8 +8,8 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * the `iteratee` to each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items The array of elements to search.
- * @param {((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>} iteratee
+ * @param {ArrayLike<T> | null | undefined} items The array of elements to search.
+ * @param {ValueIteratee<T>} iteratee
  * The criteria used to determine the maximum value.
  *  - If a **function** is provided, it extracts a numeric value from each element.
  *  - If a **string** is provided, it is treated as a key to extract values from the objects.
@@ -29,13 +31,10 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * maxBy([{ a: 1 }, { a: 2 }], ['a', 1]); // Returns: { a: 1 }
  * maxBy([{ a: 1 }, { a: 2 }], { a: 1 }); // Returns: { a: 1 }
  */
-export function maxBy<T>(
-  items: ArrayLike<T> | null | undefined,
-  iteratee: ((element: T) => number) | keyof T | [keyof T, unknown] | Partial<T>
-): T | undefined {
+export function maxBy<T>(items: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): T | undefined {
   if (items == null) {
     return undefined;
   }
 
-  return maxByToolkit(Array.from(items), iterateeToolkit(iteratee));
+  return maxByToolkit(Array.from(items), iterateeToolkit(iteratee ?? identity));
 }

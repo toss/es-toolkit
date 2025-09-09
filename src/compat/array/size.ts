@@ -36,7 +36,9 @@ import { isNil } from '../../predicate/isNil.ts';
  * const emptyObjSize = size(emptyObj);
  * // emptyObjSize will be 0
  */
-export function size<T>(target: readonly T[] | object | string | Map<unknown, T> | Set<T> | null | undefined): number {
+export function size(collection: object | string | null | undefined): number;
+
+export function size(target: any): number {
   if (isNil(target)) {
     return 0;
   }

@@ -30,7 +30,7 @@ function attempt<T, E>(func: () => T): [null, T] | [E, null];
 ## Examples
 
 ```typescript
-import { attempt } from 'es-toolkit/function';
+import { attempt } from 'es-toolkit/util';
 
 // If the function succeeds, it returns [null, function return value] tuple.
 const [error, result] = attempt(() => 42);

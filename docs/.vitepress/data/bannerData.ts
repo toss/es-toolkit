@@ -8,7 +8,7 @@ export const KO_BANNER_DATA: Banner[] = [
   {
     title: '🛠️ frontend-fundamentals',
     description: '프론트엔드 코드를 더 잘 짜는 방법을 고민하고 있나요? 실무에서 비롯한 원칙과 예시들을 모아봤어요.',
-    link: 'https://frontend-fundamentals.com/',
+    link: 'https://frontend-fundamentals.com/code-quality',
   },
   {
     title: '🇰🇷 es-hangul',
@@ -37,7 +37,7 @@ export const EN_BANNER_DATA: Banner[] = [
   {
     title: '🛠️ frontend-fundamentals',
     description: 'Your compass for better code. Four core principles for writing easily modifiable frontend code.',
-    link: 'https://frontend-fundamentals.com/en/',
+    link: 'https://frontend-fundamentals.com/code-quality/en',
   },
   {
     title: '⏳ suspensive',

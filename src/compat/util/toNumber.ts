@@ -16,7 +16,7 @@ import { isSymbol } from '../predicate/isSymbol.ts';
  * toNumber(Symbol.iterator); // => NaN
  * toNumber(NaN); // => NaN
  */
-export function toNumber(value?: unknown): number {
+export function toNumber(value: any): number {
   if (isSymbol(value)) {
     return NaN;
   }

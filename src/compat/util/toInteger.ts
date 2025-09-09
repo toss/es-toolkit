@@ -17,7 +17,7 @@ import { toFinite } from './toFinite.ts';
  * toInteger(Symbol.iterator); // => 0
  * toInteger(NaN); // => 0
  */
-export function toInteger(value?: unknown): number {
+export function toInteger(value: any): number {
   const finite = toFinite(value);
   const remainder = finite % 1;
 

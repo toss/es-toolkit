@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { rearg as reargLodash } from 'lodash';
 import { rearg } from './rearg';
 
 describe('rearg', () => {
@@ -58,5 +59,9 @@ describe('rearg', () => {
     const rearged1 = rearg(fn, 2, 1, 0),
       rearged2 = rearg(rearged1, 1, 0, 2);
     expect(rearged2('b', 'c', 'a')).toEqual(['a', 'b', 'c']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(rearg).toEqualTypeOf<typeof reargLodash>();
   });
 });

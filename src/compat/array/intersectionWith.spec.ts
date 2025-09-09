@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { intersectionWith as intersectionWithLodash } from 'lodash';
 import { intersectionWith } from './intersectionWith';
 import { map } from './map';
 import { isEqual } from '../../predicate/isEqual';
@@ -87,7 +88,11 @@ describe('intersectionWith', () => {
     // eslint-disable-next-line
     // @ts-ignore
     expect(func(array, 3, { 0: 1 }, null)).toEqual([]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(func(null, array, null, [2, 3])).toEqual([]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(func(array, null, args, null)).toEqual([]);
   });
 
@@ -114,5 +119,9 @@ describe('intersectionWith', () => {
     const actual = map(others, other => map(intersectionWith(array, other, eq), toString));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(intersectionWith).toEqualTypeOf<typeof intersectionWithLodash>();
   });
 });

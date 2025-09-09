@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { takeRight as takeRightLodash } from 'lodash';
 import { args } from '../_internal/args';
 import { takeRight } from '../index';
 
@@ -57,5 +58,9 @@ describe('takeRight', () => {
 
   it('should work as an iteratee for methods like `_.map`', () => {
     expect([[1, 2], [3, 4], [5]].map(takeRight)).toEqual([[2], [4], [5]]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(takeRight).toEqualTypeOf<typeof takeRightLodash>();
   });
 });

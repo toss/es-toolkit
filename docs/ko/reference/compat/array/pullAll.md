@@ -19,13 +19,12 @@ function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T>): T[];
 
 ### 파라미터
 
-- `arr` (`T[]`): 수정할 배열입니다. 문자열.
-- `valuesToRemove` (`ArrayLike<T>`): 배열에서 제거할 값입니다. 문자열.
+- `arr` (`T[]`): 수정할 배열입니다.
+- `valuesToRemove` (`ArrayLike<T>`): 배열에서 제거할 값입니다.
 
 ### 반환 값
 
 (`T[]`): 지정된 값이 제거된 수정된 배열입니다.
-문자열.
 
 ## 예시
 

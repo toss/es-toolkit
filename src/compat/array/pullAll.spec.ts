@@ -45,4 +45,9 @@ describe('pullAll', () => {
 
     expect(actual).toEqual([]);
   });
+
+  // NOTE: TypeScript doesn't support matching conditional types
+  // it('should match the type of lodash', () => {
+  //   expectTypeOf(pullAll).toEqualTypeOf<typeof pullAllLodash>();
+  // });
 });

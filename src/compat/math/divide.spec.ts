@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
+import type { divide as divideLodash } from 'lodash';
 import { divide } from './divide';
 import { symbol } from '../_internal/symbol';
 
@@ -74,5 +75,9 @@ describe('divide', () => {
     // eslint-disable-next-line
     // @ts-ignore
     expect(divide(symbol, 0)).toEqual(NaN);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(divide).toEqualTypeOf<typeof divideLodash>();
   });
 });

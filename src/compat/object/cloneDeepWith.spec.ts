@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { cloneDeepWith as cloneDeepWithLodash } from 'lodash';
 import { cloneDeepWith } from './cloneDeepWith';
 import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
@@ -105,6 +106,11 @@ describe('cloneDeepWith', function () {
     expect(actual).toEqual({ a: { b: 'c' } });
   });
 
+  it(`\`_.${methodName}\` should handle cloning when \`customizer\` returns \`null\``, () => {
+    const actual = func({ a: 1, b: 2 }, (_value, key) => (key === 'b' ? null : undefined));
+    expect(actual).toEqual({ a: 1, b: null });
+  });
+
   Object.entries(uncloneable).forEach(([value, key]) => {
     it(`\`_.${methodName}\` should work with a \`customizer\` callback and ${key}`, () => {
       const customizer = function (value: any) {
@@ -120,5 +126,9 @@ describe('cloneDeepWith', function () {
       expect(actual).toEqual(object);
       expect(actual).not.toBe(object);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(cloneDeepWith).toEqualTypeOf<typeof cloneDeepWithLodash>();
   });
 });

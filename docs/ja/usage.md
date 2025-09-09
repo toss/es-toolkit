@@ -12,7 +12,7 @@ next:
 
 Node.jsやBunを使用する場合は、[npm](https://npmjs.com/package/es-toolkit)からインストールできます。Denoでは[JSR](https://jsr.io/@es-toolkit/es-toolkit)からインストールできます。
 
-ブラウザで直接使用する場合は、[CDNから取得](#ブラウザ)できます。
+ブラウザで直接使用する場合は、[CDNから取得](#ブラウザ)できます。
 
 ## Node.js
 

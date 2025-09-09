@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { last as lastLodash } from 'lodash';
 import { args } from '../_internal/args';
 import { last } from '../index';
 
@@ -45,5 +46,9 @@ describe('last', () => {
     expect(last({ 0: 1, 1: 2, 2: 3, length: 3 })).toBe(3);
     expect(last('123')).toBe('3');
     expect(last(args)).toBe(3);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(last).toEqualTypeOf<typeof lastLodash>();
   });
 });

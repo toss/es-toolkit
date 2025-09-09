@@ -18,6 +18,6 @@
  * console.log(isUndefined(value2)); // false
  * console.log(isUndefined(value3)); // false
  */
-export function isUndefined(x: unknown): x is undefined {
+export function isUndefined(x: any): x is undefined {
   return x === undefined;
 }

@@ -9,11 +9,11 @@ describe('mergeWith bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'mergeWith');
-    expect(bundleSize).toMatchInlineSnapshot(`307`);
+    expect(bundleSize).toMatchInlineSnapshot(`365`);
   });
 
   it('es-toolkit/compat', async () => {
     const bundleSize = await getBundleSize('es-toolkit/compat', 'mergeWith');
-    expect(bundleSize).toMatchInlineSnapshot(`5318`);
+    expect(bundleSize).toMatchInlineSnapshot(`5376`);
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { max as maxLodash } from 'lodash';
 import { max } from './max';
 
 describe('max', () => {
@@ -9,6 +10,7 @@ describe('max', () => {
 
   it('should return `undefined` for empty collections', () => {
     expect(max([])).toBe(undefined);
+    //@ts-expect-error - Invalid argument
     expect(max()).toBe(undefined);
   });
 
@@ -31,5 +33,29 @@ describe('max', () => {
   it('should work when chaining on an array with only one value', () => {
     const array = [40];
     expect(max(array)).toBe(40);
+  });
+
+  it('should skip NaN values', () => {
+    expect(max([1, NaN, 2])).toBe(2);
+    expect(max([NaN, 1, 2])).toBe(2);
+  });
+
+  it('should skip symbol values', () => {
+    expect(max([1, Symbol('a'), 2])).toBe(2);
+    expect(max([Symbol('a'), 1, 2])).toBe(2);
+    expect(max([Symbol('a'), Symbol('b'), 1])).toBe(1);
+  });
+
+  it('should skip null values', () => {
+    expect(max([1, null, 2])).toBe(2);
+    expect(max([null, 1, 2])).toBe(2);
+  });
+
+  it('should return undefined when skipping all values', () => {
+    expect(max([Symbol('a'), null, NaN])).toBe(undefined);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(max).toEqualTypeOf<typeof maxLodash>();
   });
 });

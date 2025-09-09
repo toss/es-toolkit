@@ -17,13 +17,13 @@
 ## インターフェース
 
 ```typescript
-function hasIn(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+function hasIn<T>(object: T, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### パラメータ
 
-- `object` (`unknown`): プロパティの存在を確認するオブジェクト。
-- `path` (`string`, `number`, `symbol`, `Array<string | number | symbol>`): プロパティの存在を確認するパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
+- `object` (`T`): プロパティの存在を確認するオブジェクト。
+- `path` (`PropertyKey | PropertyKey[]`): プロパティの存在を確認するパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
 
 ### 戻り値
 

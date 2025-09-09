@@ -11,13 +11,13 @@
 ## インターフェース
 
 ```typescript
-function ceil(number: number | string, precision: number | string): number;
+function ceil(number: number, precision: number = 0): number;
 ```
 
 ### パラメータ
 
-- `number` (`number | string`): 切り上げる数値。
-- `precision` (`number | string`): 切り上げる精度。
+- `number` (`number`): 切り上げる数値。
+- `precision` (`number`, オプション): 切り上げる精度。 デフォルトは0です。
 
 ### 戻り値
 

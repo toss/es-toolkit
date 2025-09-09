@@ -7,7 +7,7 @@ import { clamp } from '../math/clamp.ts';
  *
  * A safe integer can be compared and represented correctly.
  *
- * @param {unknown} value - The value to convert.
+ * @param {any} value - The value to convert.
  * @returns {number} Returns the value converted to a safe integer.
  *
  * @example
@@ -19,7 +19,7 @@ import { clamp } from '../math/clamp.ts';
  * toSafeInteger(null); // => 0
  * toSafeInteger(-Infinity); // => -9007199254740991
  */
-export function toSafeInteger(value?: unknown): number {
+export function toSafeInteger(value: any): number {
   if (value == null) {
     return 0;
   }

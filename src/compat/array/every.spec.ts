@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { every as everyLodash } from 'lodash';
 import { every } from './every';
 import { identity } from '../../function/identity';
 import { args } from '../_internal/args';
@@ -102,6 +103,8 @@ describe('every', () => {
 
     expect(actual).toEqual(expected);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expected = values.map(stubTrue);
     actual = values.map((value, index) => {
       const array = [1];
@@ -157,5 +160,17 @@ describe('every', () => {
     expect(every(objects, ['b', 1])).toBe(false);
     expect(every(objects, [0, 1])).toBe(false);
     expect(every(objects, [Symbol.for('c'), 1])).toBe(true);
+  });
+
+  it('should handle sparse arrays correctly', () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const sparseArray = [1, , 3, , 5] as any[];
+
+    expect(every(sparseArray, value => value > 0)).toEqual(false);
+    expect(every(sparseArray, value => value === undefined)).toEqual(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(every).toEqualTypeOf<typeof everyLodash>();
   });
 });

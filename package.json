@@ -1,20 +1,16 @@
 {
   "name": "es-toolkit",
+  "version": "1.39.10",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
-  "version": "1.35.0",
-  "homepage": "https://es-toolkit.slash.page",
+  "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/toss/es-toolkit.git"
   },
   "license": "MIT",
-  "workspaces": [
-    "docs",
-    "benchmarks"
-  ],
-  "packageManager": "yarn@4.7.0",
-  "react-native": "./dist/index.js",
+  "sideEffects": false,
+  "packageManager": "yarn@4.9.1",
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
@@ -31,14 +27,80 @@
   },
   "files": [
     "dist",
-    "*.d.ts"
+    "compat",
+    "*.d.ts",
+    "array.js",
+    "compat.js",
+    "error.js",
+    "function.js",
+    "math.js",
+    "object.js",
+    "predicate.js",
+    "promise.js",
+    "string.js",
+    "util.js"
   ],
+  "workspaces": [
+    "docs",
+    "benchmarks"
+  ],
+  "scripts": {
+    "bench": "vitest bench",
+    "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
+    "format": "prettier --write .",
+    "lint": "eslint --config eslint.config.mjs",
+    "packlint": "packlint sort -R",
+    "prepack": "yarn build",
+    "test": "vitest --coverage --typecheck",
+    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.3",
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
+    "@eslint/js": "^9.9.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/broken-link-checker": "^0",
+    "@types/eslint": "^9",
+    "@types/jscodeshift": "^0.12.0",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^22.7.4",
+    "@types/tar": "^6.1.13",
+    "@typescript-eslint/parser": "^8.26.1",
+    "@vitest/coverage-istanbul": "^2.1.2",
+    "@vitest/eslint-plugin": "^1.3.4",
+    "@vue/compiler-sfc": "^3.5.10",
+    "broken-link-checker": "^0.7.8",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-no-for-of-array": "^0.0.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-vue": "^9.28.0",
+    "execa": "^9.3.0",
+    "globals": "^15.9.0",
+    "happy-dom": "^16.7.3",
+    "jscodeshift": "^17.0.0",
+    "packlint": "^0.2.4",
+    "prettier": "^3.2.5",
+    "prettier-plugin-sort-re-exports": "^0.1.0",
+    "rollup": "^4.19.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "tar": "^6",
+    "tslib": "^2.6.3",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.6.0",
+    "vercel": "^41.4.1",
+    "vitest": "^2.1.2"
+  },
   "publishConfig": {
     "access": "public",
     "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
     "browser": "./dist/browser.global.js",
+    "module": "./dist/index.mjs",
     "exports": {
       ".": {
         "import": {
@@ -68,6 +130,12 @@
         "require": {
           "types": "./dist/compat/index.d.ts",
           "default": "./dist/compat/index.js"
+        }
+      },
+      "./compat/*": {
+        "default": {
+          "types": "./compat/*.d.ts",
+          "default": "./compat/*.js"
         }
       },
       "./error": {
@@ -151,45 +219,8 @@
         }
       },
       "./package.json": "./package.json"
-    }
-  },
-  "devDependencies": {
-    "@arethetypeswrong/cli": "^0.15.3",
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.27.1",
-    "@eslint/js": "^9.9.0",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.1.0",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/broken-link-checker": "^0",
-    "@types/eslint": "^9",
-    "@types/jscodeshift": "^0.12.0",
-    "@types/node": "^22.7.4",
-    "@types/tar": "^6.1.13",
-    "@typescript-eslint/parser": "^8.26.1",
-    "@vitest/coverage-istanbul": "^2.1.2",
-    "@vue/compiler-sfc": "^3.5.10",
-    "broken-link-checker": "^0.7.8",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-no-for-of-array": "^0.0.1",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^9.28.0",
-    "execa": "^9.3.0",
-    "globals": "^15.9.0",
-    "happy-dom": "^16.7.3",
-    "jscodeshift": "^17.0.0",
-    "prettier": "^3.2.5",
-    "prettier-plugin-sort-re-exports": "^0.1.0",
-    "rollup": "^4.19.0",
-    "rollup-plugin-dts": "^6.1.1",
-    "tar": "^6",
-    "tslib": "^2.6.3",
-    "tsx": "^4.19.0",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.6.0",
-    "vercel": "^41.4.1",
-    "vitest": "^2.1.2"
+    },
+    "types": "./dist/index.d.ts"
   },
   "dependenciesMeta": {
     "@trivago/prettier-plugin-sort-imports@4.3.0": {
@@ -199,15 +230,5 @@
       "unplugged": true
     }
   },
-  "sideEffects": false,
-  "scripts": {
-    "typecheck": "tsc --noEmit",
-    "prepack": "yarn build",
-    "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
-    "test": "vitest --coverage --typecheck",
-    "bench": "vitest bench",
-    "lint": "eslint --config eslint.config.mjs",
-    "format": "prettier --write .",
-    "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0"
-  }
+  "react-native": "./dist/index.js"
 }

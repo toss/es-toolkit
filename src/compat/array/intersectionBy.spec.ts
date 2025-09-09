@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { intersectionBy as intersectionByLodash } from 'lodash';
 import { intersection } from './intersection';
 import { intersectionBy } from './intersectionBy';
 import { range } from '../../math';
@@ -136,5 +137,9 @@ describe('intersectionBy', () => {
     expect(intersectionBy({ 0: 1.1, 1: 2.2, 2: 3.3, length: 3 }, { 0: 1.7, 1: 2.7, length: 2 }, Math.floor)).toEqual([
       1.1, 2.2,
     ]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(intersectionBy).toEqualTypeOf<typeof intersectionByLodash>();
   });
 });

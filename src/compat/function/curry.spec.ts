@@ -43,7 +43,9 @@ describe('curry', () => {
   });
 
   it('should support placeholders', () => {
-    const curried = curry(fn),
+    const curried = curry(fn) as any,
+      // eslint-disable-next-line
+      // @ts-ignore
       ph = curried.placeholder;
 
     expect(curried(1)(ph, 3)(ph, 4)(2)).toEqual([1, 2, 3, 4]);
@@ -53,7 +55,7 @@ describe('curry', () => {
   });
 
   it('should persist placeholders', () => {
-    const curried = curry(fn),
+    const curried = curry(fn) as any,
       ph = curried.placeholder,
       actual = curried(ph, ph, ph, 'd')('a')(ph)('b')('c');
 
@@ -61,7 +63,7 @@ describe('curry', () => {
   });
 
   it('should provide additional arguments after reaching the target arity', () => {
-    const curried = curry(fn, 3);
+    const curried = curry(fn, 3) as any;
     expect(curried(1)(2, 3, 4)).toEqual([1, 2, 3, 4]);
     expect(curried(1, 2)(3, 4, 5)).toEqual([1, 2, 3, 4, 5]);
     expect(curried(1, 2, 3, 4, 5, 6)).toEqual([1, 2, 3, 4, 5, 6]);
@@ -97,7 +99,7 @@ describe('curry', () => {
       return a && b && object;
     }
 
-    const curriedBar = curry(Bar);
+    const curriedBar = curry(Bar) as any;
     expect(new (curriedBar(true)(true))(object)).toBe(object);
   });
 
@@ -155,10 +157,10 @@ describe('curry', () => {
     const object = { a: fn, b: fn, c: fn };
 
     [array, object].forEach(collection => {
-      const curries = map(collection, curry as (...args: any[]) => any),
+      const curries = map(collection, curry),
         expected = map(collection, () => ['a', 'b']);
 
-      const actual = map(curries, curried => curried('a')('b'));
+      const actual = map(curries, curried => (curried as any)('a')('b'));
 
       expect(actual).toEqual(expected);
     });

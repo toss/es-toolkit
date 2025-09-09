@@ -1,30 +1,31 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { over as overLodash } from 'lodash';
 import { over } from './over';
 import { slice } from '../_internal/slice';
 
 describe('over', () => {
   it('should create a function that invokes `iteratees`', () => {
-    const func = over(Math.max, Math.min);
+    const func = (over as any)(Math.max, Math.min);
     expect(func(1, 2, 3, 4)).toEqual([4, 1]);
   });
 
   it('should use `identity` when a predicate is nullish', () => {
-    const func = over(undefined, null);
+    const func = (over as any)(undefined, null);
     expect(func('a', 'b', 'c')).toEqual(['a', 'a']);
   });
 
   it('should work with `property` shorthands', () => {
-    const func = over('b', 'a');
+    const func = (over as any)('b', 'a');
     expect(func({ a: 1, b: 2 })).toEqual([2, 1]);
   });
 
   it('should work with `matches` shorthands', () => {
-    const func = over({ b: 1 }, { a: 1 });
+    const func = (over as any)({ b: 1 }, { a: 1 });
     expect(func({ a: 1, b: 2 })).toEqual([false, true]);
   });
 
   it('should work with `matchesProperty` shorthands', () => {
-    const func = over([
+    const func = (over as any)([
       ['b', 2],
       ['a', 2],
     ]);
@@ -34,12 +35,12 @@ describe('over', () => {
   });
 
   it('should differentiate between `property` and `matchesProperty` shorthands', () => {
-    let func = over(['a', 1]);
+    let func = (over as any)(['a', 1]);
 
     expect(func({ a: 1, 1: 2 })).toEqual([1, 2]);
     expect(func({ a: 2, 1: 1 })).toEqual([2, 1]);
 
-    func = over([['a', 1]]);
+    func = (over as any)([['a', 1]]);
 
     expect(func({ a: 1 })).toEqual([true]);
     expect(func({ a: 2 })).toEqual([false]);
@@ -74,10 +75,14 @@ describe('over', () => {
   });
 
   it('should work with nested iteratees', () => {
-    const func = over([
+    const func = (over as any)([
       ['b', 'a'],
       ['c', 'd'],
     ]);
     expect(func({ a: 1, b: 2, c: 3, d: 4 })).toEqual([false, false]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(over).toEqualTypeOf<typeof overLodash>();
   });
 });

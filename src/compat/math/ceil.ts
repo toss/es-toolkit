@@ -12,6 +12,6 @@ import { decimalAdjust } from '../_internal/decimalAdjust.ts';
  * ceil(6.004, 2); // => 6.01
  * ceil(6040, -2); // => 6100
  */
-export function ceil(number: number | string, precision: number | string = 0): number {
+export function ceil(number: number, precision = 0): number {
   return decimalAdjust('ceil', number, precision);
 }

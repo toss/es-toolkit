@@ -1,4 +1,5 @@
 import { get } from './get.ts';
+import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { isDeepKey } from '../_internal/isDeepKey.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { toPath } from '../util/toPath.ts';
@@ -43,6 +44,10 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
         }
       }
 
+      if (isUnsafeProperty(path as PropertyKey)) {
+        return false;
+      }
+
       if (obj?.[path as PropertyKey] === undefined) {
         return true;
       }
@@ -59,6 +64,10 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
         return unsetWithPath(obj, toPath(path));
       }
 
+      if (isUnsafeProperty(path)) {
+        return false;
+      }
+
       try {
         delete obj[path];
         return true;
@@ -70,11 +79,15 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
 }
 
 function unsetWithPath(obj: unknown, path: readonly PropertyKey[]): boolean {
-  const parent = get(obj, path.slice(0, -1), obj);
+  const parent = path.length === 1 ? obj : get(obj, path.slice(0, -1));
   const lastKey = path[path.length - 1];
 
   if (parent?.[lastKey] === undefined) {
     return true;
+  }
+
+  if (isUnsafeProperty(lastKey)) {
+    return false;
   }
 
   try {

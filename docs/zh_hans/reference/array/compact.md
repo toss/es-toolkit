@@ -1,6 +1,6 @@
 # compact
 
-从数组中删除假值（`false`、 `null`、 `0`、 `0n`, `''`、 `undefined`、 `NaN`）。
+从数组中删除假值（`false`、 `null`、 `0`、 `-0`、 `0n`、 `''`、 `undefined`、 `NaN`）。
 
 ## 签名
 
@@ -19,6 +19,6 @@ function compact<T>(arr: T[]): Array<Exclude<T, false | null | 0 | 0n | '' | und
 ## 示例
 
 ```typescript
-compact([0, 0n, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
+compact([0, -0, 0n, 1, false, 2, '', 3, null, undefined, 4, NaN, 5]);
 // 返回: [1, 2, 3, 4, 5]
 ```

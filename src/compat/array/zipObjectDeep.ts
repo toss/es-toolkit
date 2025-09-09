@@ -1,4 +1,5 @@
 import { zip } from '../../array/zip.ts';
+import { PropertyPath } from '../_internal/PropertyPath.ts';
 import { set } from '../object/set.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
@@ -35,15 +36,15 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * const result = zipObjectDeep(paths, values);
  * // result will be { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }
  */
-export function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): Record<P, V> {
-  const result = {} as { [K in P]: V };
+export function zipObjectDeep(keys?: ArrayLike<PropertyPath>, values?: ArrayLike<any>): object {
+  const result = {};
   if (!isArrayLike(keys)) {
     return result;
   }
   if (!isArrayLike(values)) {
     values = [];
   }
-  const zipped = zip<P | P[], V>(Array.from(keys), Array.from(values));
+  const zipped = zip(Array.from(keys), Array.from(values));
 
   for (let i = 0; i < zipped.length; i++) {
     const [key, value] = zipped[i];

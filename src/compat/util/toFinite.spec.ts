@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { toFinite as toFiniteLodash } from 'lodash';
 import { toFinite } from './toFinite';
 import { flatMap } from '../../array/flatMap';
 import { identity } from '../../function/identity';
@@ -159,6 +160,8 @@ describe('toFinite', () => {
 
     const expected = values.map(() => 0);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? toFinite(value) : toFinite()));
 
     expect(actual).toEqual(expected);
@@ -190,5 +193,9 @@ describe('toFinite', () => {
     const actual = values.map(toFinite);
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toFinite).toEqualTypeOf<typeof toFiniteLodash>();
   });
 });

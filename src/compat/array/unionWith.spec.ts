@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { unionWith as unionWithLodash } from 'lodash';
 import { unionWith } from './unionWith';
 import { isEqual } from '../../predicate';
 import { args } from '../_internal/args';
@@ -28,7 +29,11 @@ describe('unionWith', () => {
     // eslint-disable-next-line
     // @ts-ignore
     expect(unionWith(array, 3, { '0': 1 }, null)).toEqual(array);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(unionWith(null, array, null, [2, 1])).toEqual([0, 2, 1]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(unionWith(array, null, args, null)).toEqual([0, 1, 2, 3]);
   });
 
@@ -53,5 +58,9 @@ describe('unionWith', () => {
     const actual = unionWith(objects, others, (a, b) => a.x === b.x);
 
     expect(actual).toEqual([{ x: 1, y: 1 }]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(unionWith).toEqualTypeOf<typeof unionWithLodash>();
   });
 });

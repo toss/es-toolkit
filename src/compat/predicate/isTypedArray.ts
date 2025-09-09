@@ -2,19 +2,8 @@ import { isTypedArray as isTypedArrayToolkit } from '../../predicate/isTypedArra
 
 /**
  * Checks if a value is a TypedArray.
- * @param {unknown} x The value to check.
- * @returns {x is
- *     Uint8Array
- *   | Uint8ClampedArray
- *   | Uint16Array
- *   | Uint32Array
- *   | BigUint64Array
- *   | Int8Array
- *   | Int16Array
- *   | Int32Array
- *   | BigInt64Array
- *   | Float32Array
- *   | Float64Array} Returns true if `x` is a TypedArray, false otherwise.
+ * @param {any} x The value to check.
+ * @returns {boolean} Returns true if `x` is a TypedArray, false otherwise.
  *
  * @example
  * const arr = new Uint8Array([1, 2, 3]);
@@ -26,19 +15,6 @@ import { isTypedArray as isTypedArrayToolkit } from '../../predicate/isTypedArra
  * const buffer = new ArrayBuffer(16);
  * isTypedArray(buffer); // false
  */
-export function isTypedArray(
-  x?: unknown
-): x is
-  | Uint8Array
-  | Uint8ClampedArray
-  | Uint16Array
-  | Uint32Array
-  | BigUint64Array
-  | Int8Array
-  | Int16Array
-  | Int32Array
-  | BigInt64Array
-  | Float32Array
-  | Float64Array {
+export function isTypedArray(x: any): boolean {
   return isTypedArrayToolkit(x);
 }

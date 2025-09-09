@@ -1,144 +1,60 @@
 import { filter } from './filter.ts';
+import { identity } from '../../function/identity.ts';
+import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
+import { ObjectIterateeCustom } from '../_internal/ObjectIteratee.ts';
+import type { StringIterator } from '../_internal/StringIterator.ts';
 import { negate } from '../function/negate.ts';
 import { iteratee } from '../util/iteratee.ts';
 
 /**
- * Rejects items from a array and returns an array of elements.
+ * Iterates over the collection and rejects elements based on the given predicate.
+ * If a function is provided, it is invoked for each element in the collection.
+ *
+ * @param {string | null | undefined} collection The string to iterate over
+ * @param {StringIterator<boolean>} [predicate] The function invoked per iteration
+ * @returns {string[]} Returns a new array of characters that do not satisfy the predicate
+ * @example
+ * reject('abc', char => char === 'b')
+ * // => ['a', 'c']
+ */
+export function reject(collection: string | null | undefined, predicate?: StringIterator<boolean>): string[];
+
+/**
+ * Iterates over the collection and rejects elements based on the given predicate.
+ * If a function is provided, it is invoked for each element in the collection.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
- * @param {(item: T, index: number, arr: T[]) => unknown} doesMatch - The function invoked per iteration.
- * @returns {T[]} - Returns a new array of elements that do not satisfy the given doesMatch function.
- *
+ * @param {ArrayLike<T> | null | undefined} collection The array-like to iterate over
+ * @param {ListIterateeCustom<T, boolean>} [predicate] The function invoked per iteration
+ * @returns {T[]} Returns a new array of elements that do not satisfy the predicate
  * @example
- * reject([1, 2, 3], n => n % 2 === 0)
+ * reject([1, 2, 3], num => num % 2 === 0)
  * // => [1, 3]
+ *
+ * reject([{ a: 1 }, { a: 2 }, { b: 1 }], 'a')
+ * // => [{ b: 1 }]
  */
-export function reject<T>(
-  arr: ArrayLike<T> | null | undefined,
-  doesMatch?: (item: T, index: number, arr: readonly T[]) => unknown
-): T[];
+export function reject<T>(collection: ArrayLike<T> | null | undefined, predicate?: ListIterateeCustom<T, boolean>): T[];
 
 /**
- * Rejects elements in a arr that match the properties of the given partial object.
+ * Iterates over the collection and rejects elements based on the given predicate.
+ * If a function is provided, it is invoked for each element in the collection.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
- * @param {Partial<T>} doesMatch - A partial object that specifies the properties to match.
- * @returns {T[]} - Returns a new array of elements that do not match the given properties.
- *
+ * @param {T | null | undefined} collection The object to iterate over
+ * @param {ObjectIterateeCustom<T, boolean>} [predicate] The function invoked per iteration
+ * @returns {Array<T[keyof T]>} Returns a new array of elements that do not satisfy the predicate
  * @example
- * const arr = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
- * reject(arr, { name: 'Bob' });
- * // => [{ id: 1, name: 'Alice' }]
+ * reject({ a: 1, b: 2, c: 3 }, value => value % 2 === 0)
+ * // => [1, 3]
+ *
+ * reject({ item1: { a: 0, b: true }, item2: { a: 1, b: true }, item3: { a: 2, b: false }}, { b: false })
+ * // => [{ a: 0, b: true }, { a: 1, b: true }]
  */
-export function reject<T>(arr: ArrayLike<T> | null | undefined, doesMatch: Partial<T>): T[];
-
-/**
- * Rejects elements in a arr that match the given key-value pair.
- *
- * @template T
- * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
- * @param {[keyof T, unknown]} doesMatchProperty - The key-value pair to match.
- * @returns {T[]} - Returns a new array of elements that do not match the given key-value pair.
- *
- * @example
- * const arr = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
- * reject(arr, ['name', 'Alice']);
- * // => [{ id: 2, name: 'Bob' }]
- */
-export function reject<T>(arr: ArrayLike<T> | null | undefined, doesMatchProperty: [keyof T, unknown]): T[];
-
-/**
- * Rejects the arr, returning elements that do not contain the given property name.
- *
- * @template T
- * @param {ArrayLike<T> | null | undefined} arr - The array to iterate over.
- * @param {PropertyKey} propertyToCheck - The property name to check.
- * @returns {T[]} - Returns a new array of elements that do not have the given property name.
- *
- * @example
- * const arr = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, age: 28 }];
- * reject(arr, 'name');
- * // => [{ id: 3, age: 28 }]
- */
-export function reject<T>(arr: ArrayLike<T> | null | undefined, propertyToCheck: PropertyKey): T[];
-
-/**
- * Rejects items from a object and returns an array of elements that match the given predicate function.
- *
- * @template T
- * @param {T | null | undefined} object - The object to iterate over.
- * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} doesMatch - The function invoked per iteration.
- * @returns {T[]} - Returns a new array of elements that do not satisfy the given predicate function.
- *
- * @example
- * const obj = { item1: { a: 0 }, item2: { a: 1 }, item3: { a: 0 } }
- * reject(obj, value => value.a)
- * // => [{ a: 0 }, { a: 0 }]
- *
- * const obj = { a: 1, b: 2, c: 3 };
- * reject(obj, value => value > 2)
- * // => [1, 2]
- */
-export function reject<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): T[];
-
-/**
- * Rejects elements in a object that match the properties of the given partial object.
- *
- * @template T
- * @param {T | null | undefined} object - The object to iterate over.
- * @param {Partial<T[keyof T]>} doesMatch - The partial object to match
- * @returns {T[]} - Returns a new array of elements that do not match the given properties.
- *
- * @example
- * const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
- * reject(obj, { name: 'Bob' });
- * // => [{ id: 1, name: 'Alice' }]
- */
-export function reject<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatch: Partial<T[keyof T]>
-): T[];
-
-/**
- * Rejects elements in a arr that match the given key-value pair.
- *
- * @template T
- * @param {T | null | undefined} object - The object to iterate over.
- * @param {[keyof T[keyof T], unknown]} doesMatchProperty - The key-value pair to match.
- * @returns {T[]} - Returns a new array of elements that do not match the given key-value pair.
- *
- * @example
- * const obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
- * reject(obj, ['name', 'Alice']);
- * // => [{ id: 2, name: 'Bob' }]
- */
-export function reject<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  doesMatchProperty: [keyof T[keyof T], unknown]
-): T[];
-
-/**
- * Rejects the object, returning elements that do not contain the given property name.
- *
- * @template T
- * @param {T | null | undefined} object - The object to iterate over.
- * @param {PropertyKey} propertyToCheck - The property name to check.
- * @returns {T[]} - Returns a new array of elements that do not have the given property name.
- *
- * @example
- * const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' }, c: { id: 3, age: 28 } };
- * reject(obj, 'name');
- * // => [{ id: 3, age: 28 }]
- */
-export function reject<T extends Record<string, unknown>>(
-  object: T | null | undefined,
-  propertyToCheck: PropertyKey
-): T[];
+export function reject<T extends object>(
+  collection: T | null | undefined,
+  predicate?: ObjectIterateeCustom<T, boolean>
+): Array<T[keyof T]>;
 
 /**
  * Iterates over the collection and rejects elements based on the given predicate.
@@ -164,7 +80,7 @@ export function reject<T extends Record<string, unknown>>(
  */
 export function reject<T>(
   source: ArrayLike<T> | Record<any, any> | null | undefined,
-  predicate?: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey
+  predicate: ((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey = identity
 ): T[] {
   return filter(source, negate(iteratee(predicate)));
 }

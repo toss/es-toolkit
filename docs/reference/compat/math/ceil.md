@@ -13,13 +13,13 @@ This function takes a number and an optional precision value, and returns the nu
 ## Signature
 
 ```typescript
-function ceil(number: number | string, precision: number | string = 0): number;
+function ceil(number: number, precision: number = 0): number;
 ```
 
 ### Parameters
 
-- `number` (`number | string`): The number to round up.
-- `precision` (`number | string`, Optional): The precision to round up to, defaults to `0`.
+- `number` (`number`): The number to round up.
+- `precision` (`number`, Optional): The precision to round up to, defaults to `0`.
 
 ### Returns
 

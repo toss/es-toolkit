@@ -5,7 +5,7 @@ import { sum } from './sum.ts';
  *
  * If the array is empty, this function returns `NaN`.
  *
- * @param {number[]} nums - An array of numbers to calculate the average.
+ * @param {ArrayLike<any> | null | undefined} nums - An array of numbers to calculate the average.
  * @returns {number} The average of all the numbers in the array.
  *
  * @example
@@ -13,7 +13,7 @@ import { sum } from './sum.ts';
  * const result = mean(numbers);
  * // result will be 3
  */
-export function mean(nums?: readonly number[]): number {
+export function mean(nums: ArrayLike<any> | null | undefined): number {
   const length = nums ? nums.length : 0;
   return length === 0 ? NaN : sum(nums) / length;
 }

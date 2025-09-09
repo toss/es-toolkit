@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { groupBy as groupByToolkit_ } from 'es-toolkit';
+import { groupBy as groupByToolkitCompat_ } from 'es-toolkit/compat';
 import { groupBy as groupByLodash_ } from 'lodash';
 
 const groupByToolkit = groupByToolkit_;
+const groupByToolkitCompat = groupByToolkitCompat_;
 const groupByLodash = groupByLodash_;
 
 describe('groupBy', () => {
@@ -16,6 +18,18 @@ describe('groupBy', () => {
     ];
 
     groupByToolkit(array, item => item.category);
+  });
+
+  bench('es-toolkit/compat/groupBy', () => {
+    const array = [
+      { category: 'fruit', name: 'apple' },
+      { category: 'fruit', name: 'banana' },
+      { category: 'vegetable', name: 'carrot' },
+      { category: 'fruit', name: 'pear' },
+      { category: 'vegetable', name: 'broccoli' },
+    ];
+
+    groupByToolkitCompat(array, item => item.category);
   });
 
   bench('lodash/groupBy', () => {

@@ -18,6 +18,6 @@ import { isMap as isMapToolKit } from '../../predicate/isMap.ts';
  * console.log(isMap(value3)); // false
  */
 
-export function isMap(value?: unknown): value is Map<any, any> {
+export function isMap(value?: any): value is Map<any, any> {
   return isMapToolKit(value);
 }
