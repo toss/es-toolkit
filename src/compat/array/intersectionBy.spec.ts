@@ -142,4 +142,8 @@ describe('intersectionBy', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(intersectionBy).toEqualTypeOf<typeof intersectionByLodash>();
   });
+
+  it('should dedupes results by the iteratee key', () => {
+    expect(intersectionBy([2.1, 2.2], [2.3, 3.4], Math.floor)).toEqual([2.1]);
+  });
 });
