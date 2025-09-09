@@ -12,17 +12,17 @@ Returns the default value for `null`, `undefined`, and `NaN`.
 
 ```typescript
 function defaultTo<T>(value: T | null | undefined, defaultValue?: T): T;
-function defaultTo(value?: unknown, defaultValue?: unknown): any;
+function defaultTo<T, D>(value: T | null | undefined, defaultValue: D): T | D;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to check.
-- `defaultValue` (`unknown`): The default value to return if the value is `null`, `undefined`, or `NaN`.
+- `value` (`T | null | undefined`): The value to check.
+- `defaultValue` (`D`): The default value to return if the value is `null`, `undefined`, or `NaN`.
 
 ### Returns
 
-(`unknown`): Returns either the first value or the default value.
+(`T | D`): Returns either the first value or the default value.
 
 ## Examples
 

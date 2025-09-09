@@ -6,18 +6,18 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-두 값이 동등한지 여부를 결정하기 위해 `SameValueZero` 비교를 수행해요.
+두 값이 동등한지 여부를 결정하기 위해 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 비교를 수행해요.
 
 ## 인터페이스
 
 ```typescript
-function eq(value?: unknown, other?: unknown): boolean;
+function eq(value: any, other: any): boolean;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 비교할 값.
-- `other` (`unknown`): 비교할 다른 값.
+- `value` (`any`): 비교할 값.
+- `other` (`any`): 비교할 다른 값.
 
 ### 반환 값
 

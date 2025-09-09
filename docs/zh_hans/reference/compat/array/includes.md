@@ -8,7 +8,7 @@
 
 检查给定的值是否包含在数组、对象或字符串中。
 
-比较运算使用 SameValueZero。
+比较运算使用 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero)。
 
 ## 签名
 

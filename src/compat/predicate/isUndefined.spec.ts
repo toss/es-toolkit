@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { isUndefined as isUndefinedLodash } from 'lodash';
-import { isUndefined } from '../../predicate';
+import { isUndefined } from './isUndefined';
 import { falsey } from '../_internal/falsey';
 
 describe('isUndefined', () => {

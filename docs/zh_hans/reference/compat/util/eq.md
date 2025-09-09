@@ -6,18 +6,18 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-执行 `SameValueZero` 比较，以确定两个值是否相等。
+执行 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 比较，以确定两个值是否相等。
 
 ## 签名
 
 ```typescript
-function eq(value?: unknown, other?: unknown): boolean;
+function eq(value: any, other: any): boolean;
 ```
 
 ### 参数
 
-- `value` (`unknown`): 要比较的值。
-- `other` (`unknown`): 要比较的另一个值。
+- `value` (`any`): 要比较的值。
+- `other` (`any`): 要比较的另一个值。
 
 ### 返回值
 

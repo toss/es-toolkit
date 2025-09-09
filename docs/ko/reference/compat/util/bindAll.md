@@ -11,24 +11,17 @@
 ## 인터페이스
 
 ```typescript
-function bindAll(
-  object: Record<string, any>,
-  ...methodNames: Array<string | string[] | number | IArguments>
-): Record<string, any>;
+function bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T;
 ```
 
 ### 파라미터
 
-- `object` (`Object`): 메서드를 바인딩할 객체.
-- `methodNames` (`...(string | string[] | number | IArguments)`): 바인딩할 메서드 이름. 다음 형식으로 지정할 수 있어요.
-  - 개별 메서드 이름 문자열
-  - 메서드 이름 배열
-  - 숫자 (`-0`는 특별히 처리)
-  - Arguments 객체
+- `object` (`T`): 메서드를 바인딩할 객체.
+- `methodNames` (`...(string | string[])`): 바인딩할 메서드 이름.
 
 ### 반환 값
 
-(`Object`): 메서드가 바인딩된 객체.
+(`T`): 메서드가 바인딩된 객체.
 
 ## 예제
 

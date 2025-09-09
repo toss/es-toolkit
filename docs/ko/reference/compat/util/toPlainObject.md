@@ -11,7 +11,7 @@
 ## 인터페이스
 
 ```typescript
-function toPlainObject(value: any): Record<string, any>;
+function toPlainObject(value?: any): any;
 ```
 
 ### 파라미터
@@ -20,7 +20,7 @@ function toPlainObject(value: any): Record<string, any>;
 
 ### 반환 값
 
-(`Record<string, any>`): 변환된 객체를 반환해요.
+(`any`): 변환된 객체를 반환해요.
 
 ## 예시
 

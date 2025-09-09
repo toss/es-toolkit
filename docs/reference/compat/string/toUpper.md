@@ -11,21 +11,21 @@ Converts the given value to a string and transforms it to upper case. The functi
 ## Signature
 
 ```typescript
-function toUpper(value?: unknown): string;
+function toUpper<T extends string = string>(value?: T): Uppercase<T>;
 ```
 
 ## Parameters
 
-- `value`(`unknown`) : The value to convert to upper case. If omitted, returns an empty string.
+- `value`(`T`) : The value to convert to upper case. If omitted, returns an empty string.
 
 ## Returns
 
-`string` : The upper case version of the input value converted to a string.
+`Uppercase<T>` : The upper case version of the input value converted to a string.
 
 ## Examples
 
 ```typescript
-import { toUpper } from 'es-toolkit';
+import { toUpper } from 'es-toolkit/compat';
 
 toUpper('--foo-bar--'); // returns '--FOO-BAR--'
 toUpper('Hello World'); // returns 'HELLO WORLD'

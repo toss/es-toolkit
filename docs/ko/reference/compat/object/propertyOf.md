@@ -14,16 +14,16 @@
 ## 인터페이스
 
 ```typescript
-function propertyOf(object: unknown): (path: PropertyKey | PropertyKey[]) => unknown;
+function propertyOf<T extends {}>(object: T): (path: PropertyKey | PropertyKey[]) => any;
 ```
 
 ### 파라미터
 
-- `object` (`unknown`): 검색할 객체.
+- `object` (`T`): 검색할 객체.
 
 ### 반환 값
 
-(`(path: PropertyKey | PropertyKey[]) => unknown`): 경로를 입력받고 지정된 경로에서 객체의 값을 검색하는 함수.
+(`(path: PropertyKey | PropertyKey[]) => any`): 경로를 입력받고 지정된 경로에서 객체의 값을 검색하는 함수.
 
 ## 예시
 

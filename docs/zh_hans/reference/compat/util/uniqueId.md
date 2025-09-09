@@ -16,7 +16,7 @@ function uniqueId(prefix?: string): string;
 
 ### 参数
 
-- `prefix` (`string`, optional): 标识符的前缀值。
+- `prefix` (`string`, 可选): 标识符的前缀值，默认为 `''`。
 
 ### 返回值
 

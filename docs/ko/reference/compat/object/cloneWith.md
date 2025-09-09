@@ -3,7 +3,7 @@
 ::: info
 이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](mdc:../../../compatibility.md)해요.
+`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
 주어진 객체의 얕은 복사본을 만들되, 사용자 정의 함수를 통해 복사 방식을 커스터마이즈할 수 있어요. 이 메서드는 `clone`과 비슷하지만, 복제된 값을 생성하기 위한 커스터마이저 함수를 받을 수 있다는 점이 달라요. 만약 커스터마이저가 undefined를 반환하면, 기본 복제 방식을 사용해요.

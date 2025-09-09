@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-function toInteger(value?: unknown): number;
+function toInteger(value: any): number;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 변환할 값.
+- `value` (`any`): 변환할 값.
 
 ### 반환 값
 

@@ -13,9 +13,7 @@ If the list is empty, returns `undefined`.
 ## Signature
 
 ```typescript
-function max<T>(items: [T, ...T[]]): T;
-function max(): undefined;
-function max<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
+function max<T>(items: ArrayLike<T> | null | undefined): T | undefined;
 ```
 
 ### Parameters

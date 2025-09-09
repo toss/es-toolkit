@@ -6,18 +6,18 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Performs a `SameValueZero` comparison between two values to determine if they are equivalent.
+Performs a [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) comparison between two values to determine if they are equivalent.
 
 ## Signature
 
 ```typescript
-function eq(value?: unknown, other?: unknown): boolean;
+function eq(value: any, other: any): boolean;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to compare.
-- `other` (`unknown`): The other value to compare.
+- `value` (`any`): The value to compare.
+- `other` (`any`): The other value to compare.
 
 ### Returns
 

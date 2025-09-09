@@ -11,7 +11,7 @@
 ## インターフェース
 
 ```typescript
-function endsWith(str: string, target: string, position: number = 0): boolean;
+function endsWith(str?: string, target?: string, position?: number): boolean;
 ```
 
 ### パラメータ

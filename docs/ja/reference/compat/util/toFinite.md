@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-function toFinite(value?: unknown): number;
+function toFinite(value: any): number;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 変換する値。
+- `value` (`any`): 変換する値。
 
 ### 戻り値
 
