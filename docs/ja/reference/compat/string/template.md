@@ -29,7 +29,7 @@ function template(string: string, options?: TemplateOptions): ((data?: object) =
 
 ### 戻り値
 
-(`(data?: object) => string`): コンパイルされたテンプレート関数を返します。
+(`((data?: object) => string) & { source: string }`): 返された関数は呼び出すことができ、`source` プロパティにコンパイル済みテンプレートのソースコードが含まれます。
 
 ## 例
 

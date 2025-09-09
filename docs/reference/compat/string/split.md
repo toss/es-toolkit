@@ -11,16 +11,15 @@ Splits the input string by the specified `separator` and returns a new array con
 ## Signature
 
 ```typescript
-function split(string: string): string[];
-function split(string: string, separator: RegExp | string): string[];
-function split(string: string, separator: RegExp | string, limit: number): string[];
+function split(string: string | null | undefined, separator?: RegExp | string, limit?: number): string[];
+function split(string: string | null | undefined, index: string | number, guard: object): string[];
 ```
 
 ## Parameters
 
-- `string` (`string`): The string to split.
-- `separator` (`RegExp|string`): The separator pattern to split by.
-- `limit` (`number`): The length to truncate results to.
+- `string` (`string | null | undefined`): The string to split.
+- `separator` (`RegExp | string`): The separator pattern to split by.
+- `limit` (`number`, optional): The length to truncate results to.
 
 ## Returns
 

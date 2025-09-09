@@ -13,12 +13,12 @@
 ## インターフェース
 
 ```typescript
-function toPath(deepKey: string): string[];
+function toPath(deepKey: any): string[];
 ```
 
 ### パラメータ
 
-- `deepKey` (`string`): 変換する深いキー文字列。
+- `deepKey` (`any`): 変換する深いキー文字列。
 
 ### 戻り値
 
