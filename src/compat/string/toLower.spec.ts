@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { toLower as toLowerLodash } from 'lodash';
 import { toLower } from './toLower';
 
 describe('toLower', () => {
@@ -40,53 +41,53 @@ describe('toLower', () => {
   });
 
   it('should handle null and undefined', () => {
-    expect(toLower(null)).toBe('');
+    expect((toLower as any)(null)).toBe('');
     expect(toLower(undefined)).toBe('');
   });
 
   it('should handle numbers including special cases', () => {
-    expect(toLower(123)).toBe('123');
-    expect(toLower(-0)).toBe('-0');
-    expect(toLower(0)).toBe('0');
-    expect(toLower(Infinity)).toBe('infinity');
-    expect(toLower(NaN)).toBe('nan');
+    expect((toLower as any)(123)).toBe('123');
+    expect((toLower as any)(-0)).toBe('-0');
+    expect((toLower as any)(0)).toBe('0');
+    expect((toLower as any)(Infinity)).toBe('infinity');
+    expect((toLower as any)(NaN)).toBe('nan');
   });
 
   it('should handle arrays', () => {
-    expect(toLower([1, 2, 3])).toBe('1,2,3');
-    expect(toLower(['a', 'b', 'c'])).toBe('a,b,c');
-    expect(toLower([1, 'b', -0])).toBe('1,b,-0');
-    expect(toLower([])).toBe('');
+    expect((toLower as any)([1, 2, 3])).toBe('1,2,3');
+    expect((toLower as any)(['a', 'b', 'c'])).toBe('a,b,c');
+    expect((toLower as any)([1, 'b', -0])).toBe('1,b,-0');
+    expect((toLower as any)([])).toBe('');
   });
 
   it('should handle nested arrays', () => {
-    expect(toLower([1, [2, 3], 4])).toBe('1,2,3,4');
-    expect(toLower([[['a']]])).toBe('a');
+    expect((toLower as any)([1, [2, 3], 4])).toBe('1,2,3,4');
+    expect((toLower as any)([[['a']]])).toBe('a');
   });
 
   it('should handle symbols', () => {
     const sym1 = Symbol('test');
     const sym2 = Symbol('');
-    expect(toLower(sym1)).toBe('symbol(test)');
-    expect(toLower(sym2)).toBe('symbol()');
-    expect(toLower([Symbol('a'), Symbol('b')])).toBe('symbol(a),symbol(b)');
+    expect((toLower as any)(sym1)).toBe('symbol(test)');
+    expect((toLower as any)(sym2)).toBe('symbol()');
+    expect((toLower as any)([Symbol('a'), Symbol('b')])).toBe('symbol(a),symbol(b)');
   });
 
   it('should handle objects', () => {
     const obj = { toString: () => 'custom' };
-    expect(toLower(obj)).toBe('custom');
-    expect(toLower({})).toBe('[object object]');
+    expect((toLower as any)(obj)).toBe('custom');
+    expect((toLower as any)({})).toBe('[object object]');
   });
 
   it('should handle mixed types in arrays', () => {
     const sym = Symbol('test');
-    expect(toLower([1, 'b', sym, null, undefined])).toBe('1,b,symbol(test),,');
+    expect((toLower as any)([1, 'b', sym, null, undefined])).toBe('1,b,symbol(test),,');
   });
 
   it('should maintain proper TypeScript types', () => {
     const result1: string = toLower('test');
-    const result2: string = toLower(123);
-    const result3: string = toLower(null);
+    const result2: string = (toLower as any)(123);
+    const result3: string = (toLower as any)(null);
     const result4: string = toLower(undefined);
 
     expect(typeof result1).toBe('string');
@@ -103,5 +104,9 @@ describe('toLower', () => {
     expect(toLower(' ')).toBe(' ');
     expect(toLower('\t')).toBe('\t');
     expect(toLower('\n')).toBe('\n');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toLower).toEqualTypeOf<typeof toLowerLodash>();
   });
 });

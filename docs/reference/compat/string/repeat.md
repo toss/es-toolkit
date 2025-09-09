@@ -13,7 +13,7 @@ If the string is empty or the count is `0`, it returns an empty string.
 ## Signature
 
 ```typescript
-function repeat(str: string, n: number): string;
+function repeat(str?: string, n?: number): string;
 ```
 
 ### Parameters

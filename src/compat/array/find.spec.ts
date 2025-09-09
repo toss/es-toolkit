@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { find as findLodash } from 'lodash';
 import { find } from './find';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
@@ -41,8 +42,8 @@ describe('find', () => {
 
     const actual = emptyValues.map(value => {
       try {
-        // eslint-disable-next-line
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return find(value, { a: 3 });
         // eslint-disable-next-line
       } catch (e) {}
@@ -73,6 +74,8 @@ describe('find', () => {
     let args: any;
     const object = { a: 1 };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     find(object, function () {
       // eslint-disable-next-line
       args || (args = slice.call(arguments));
@@ -96,9 +99,11 @@ describe('find', () => {
   });
 
   it('should return `undefined` when provided none array-like object', () => {
-    // @ts-expect-error - invalid argument
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(find(1, 'a')).toBe(undefined);
-    // @ts-expect-error - invalid argument
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(find(true, 'a')).toBe(undefined);
   });
 
@@ -106,5 +111,9 @@ describe('find', () => {
     expect(find({ 0: 1, 1: 2, 2: 3, length: 3 }, i => i === 3)).toBe(3);
     expect(find('123', i => i === '3')).toBe('3');
     expect(find(args, i => i === 3)).toBe(3);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(find).toEqualTypeOf<typeof findLodash>();
   });
 });

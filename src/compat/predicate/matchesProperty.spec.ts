@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { matchesProperty as matchesPropertyLodash } from 'lodash';
 import { matchesProperty } from './matchesProperty';
 import { noop } from '../../function/noop';
 import { range } from '../../math/range';
@@ -108,6 +109,8 @@ describe('matchesProperty', () => {
 
       const actual = values.map((value, index) => {
         try {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           return index ? matches(value) : matches();
           // eslint-disable-next-line
         } catch (e) {}
@@ -127,6 +130,8 @@ describe('matchesProperty', () => {
 
       const actual = values.map((value, index) => {
         try {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           return index ? matches(value) : matches();
           // eslint-disable-next-line
         } catch (e) {}
@@ -425,5 +430,9 @@ describe('matchesProperty', () => {
 
     expect(matches(truthy)).toBe(false);
     expect(matches(falsey)).toBe(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(matchesProperty).toEqualTypeOf<typeof matchesPropertyLodash>();
   });
 });

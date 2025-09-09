@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { now as nowLodash } from 'lodash';
 import { now } from './now';
 import { delay } from '../../promise/delay';
 
 describe('now', () => {
   it('should return the number of milliseconds that have elapsed since the Unix epoch', async () => {
-    const stamp = +new Date();
+    const stamp = Number(new Date());
     const actual = now();
 
     expect(actual).toBeGreaterThanOrEqual(stamp);
@@ -12,5 +13,9 @@ describe('now', () => {
     await delay(32);
 
     expect(now() > actual);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(now).toEqualTypeOf<typeof nowLodash>();
   });
 });

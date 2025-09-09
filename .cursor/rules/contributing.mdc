@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# commit messeage
+
+- <type>[optional scope (function name)]: <description>
+  - e.g. feat(invariant): enhance invariant function to accept Error instances and add assert alias

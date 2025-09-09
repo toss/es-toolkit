@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { at as atToolkit_ } from 'es-toolkit';
+import { at as atToolkitCompat_ } from 'es-toolkit/compat';
 import { at as atLodash_ } from 'lodash';
 
 const atToolkit = atToolkit_;
+const atToolkitCompat = atToolkitCompat_;
 const atLodash = atLodash_;
 
 describe('at', () => {
@@ -11,6 +13,10 @@ describe('at', () => {
 
   bench('es-toolkit/at', () => {
     atToolkit(data, indices);
+  });
+
+  bench('es-toolkit/compat/at', () => {
+    atToolkitCompat(data, indices);
   });
 
   bench('lodash/at', () => {
@@ -28,6 +34,10 @@ describe('at/largeArray', () => {
 
   bench('es-toolkit/at', () => {
     atToolkit(largeData, largeIndices);
+  });
+
+  bench('es-toolkit/compat/at', () => {
+    atToolkitCompat(largeData, largeIndices);
   });
 
   bench('lodash/at', () => {

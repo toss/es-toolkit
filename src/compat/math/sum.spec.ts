@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { sum as sumLodash } from 'lodash';
 import { sum } from './sum';
 import { empties } from '../_internal/empties';
 import { stubZero } from '../_internal/stubZero';
@@ -29,5 +30,9 @@ describe('sum', () => {
 
   it(`should not coerce values to numbers`, () => {
     expect(sum(['1', '2'])).toBe('12');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(sum).toEqualTypeOf<typeof sumLodash>();
   });
 });

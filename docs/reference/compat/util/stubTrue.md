@@ -11,12 +11,12 @@ Returns true.
 ## Signature
 
 ```typescript
-function stubTrue(): boolean;
+function stubTrue(): true;
 ```
 
 ### Returns
 
-(`boolean`): true.
+(`true`): Returns `true` always.
 
 ## Examples
 

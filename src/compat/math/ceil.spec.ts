@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { ceil as ceilLodash } from 'lodash';
 import { ceil } from './ceil';
 
 describe('ceil', () => {
@@ -37,6 +38,8 @@ describe('ceil', () => {
     actual = ceil(4.016, 2.6);
     expect(actual).toBe(expected);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = ceil(4.016, '+2');
     expect(actual).toBe(expected);
   });
@@ -45,9 +48,13 @@ describe('ceil', () => {
     let actual = ceil(5e1, 2);
     expect(actual).toEqual(50);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = ceil('5e', 1);
     expect(actual).toEqual(NaN);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     actual = ceil('5e1e1', 1);
     expect(actual).toEqual(NaN);
   });
@@ -70,5 +77,9 @@ describe('ceil', () => {
     expect(ceil(1.7976931348623157e308, 292)).toBe(NaN);
     expect(ceil(5e-324, 323)).toBe(1e-292);
     expect(ceil(5e-324, -323)).toBe(0);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(ceil).toEqualTypeOf<typeof ceilLodash>();
   });
 });

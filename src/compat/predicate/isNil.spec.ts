@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isNil as isNilLodash } from 'lodash';
 import { isNil } from './isNil.ts';
 import { args } from '../_internal/args.ts';
 import { falsey } from '../_internal/falsey.ts';
@@ -10,6 +11,8 @@ import { falsey } from '../_internal/falsey.ts';
 describe('isNil', () => {
   it('should return `true` for nullish values', () => {
     expect(isNil(null)).toBe(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(isNil()).toBe(true);
     expect(isNil(undefined)).toBe(true);
   });
@@ -20,6 +23,8 @@ describe('isNil', () => {
 
     const expected = falsey.map(value => value == null);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = falsey.map((value, index) => (index ? isNil(value) : isNil()));
 
     expect(actual).toEqual(expected);
@@ -35,5 +40,9 @@ describe('isNil', () => {
     expect(isNil(/x/)).toBe(false);
     expect(isNil('a')).toBe(false);
     expect(isNil(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isNil).toEqualTypeOf<typeof isNilLodash>();
   });
 });

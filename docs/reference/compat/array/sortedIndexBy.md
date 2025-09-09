@@ -50,6 +50,6 @@ sortedIndexBy(objects, { x: 25 }, o => o.x);
 // Handle custom sorting logic
 const strings = ['apple', 'banana', 'cherry'];
 sortedIndexBy(strings, 'apricot', str => str.length);
-// Return value: 1
-// Explanation: Based on the string length, 'apricot' returns index 1.
+// Return value: 3
+// Explanation: Based on the string length, 'apricot' returns index 3.
 ```

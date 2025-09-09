@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { padStart as padStartLodash } from 'lodash';
 import { padStart } from './padStart';
 
 describe('padStart', () => {
@@ -58,7 +59,6 @@ describe('padStart', () => {
       const expected = chars ? chars : '  ';
       // @ts-expect-error - invalid string
       expect(padStart(null, 2, chars)).toBe(expected);
-      // @ts-expect-error - invalid string
       expect(padStart(undefined, 2, chars)).toBe(expected);
       expect(padStart('', 2, chars)).toBe(expected);
     });
@@ -85,5 +85,9 @@ describe('padStart', () => {
     const actual = values.map(value => padStart(value, 6) === '   abc');
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(padStart).toEqualTypeOf<typeof padStartLodash>();
   });
 });

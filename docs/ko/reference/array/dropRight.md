@@ -24,5 +24,5 @@ function dropRight<T>(arr: T[], itemsCount: number): T[];
 ```typescript
 const array = [1, 2, 3, 4, 5];
 const result = dropRight(array, 2);
-// 마지막 두 개 요소가 반환되므로, 결괏값은 [1, 2, 3]이 돼요.
+// 마지막 두 개 요소가 제거되므로, 결괏값은 [1, 2, 3]이 돼요.
 ```

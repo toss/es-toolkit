@@ -1,13 +1,19 @@
 import { bench, describe } from 'vitest';
 import { partition as partitionToolkit_ } from 'es-toolkit';
+import { partition as partitionToolkitCompat_ } from 'es-toolkit/compat';
 import { partition as partitionLodash_ } from 'lodash';
 
 const partitionToolkit = partitionToolkit_;
+const partitionToolkitCompat = partitionToolkitCompat_;
 const partitionLodash = partitionLodash_;
 
 describe('partition', () => {
   bench('es-toolkit/partition', () => {
     partitionToolkit([1, 2, 3, 4, 5], x => x < 3);
+  });
+
+  bench('es-toolkit/partition/compat', () => {
+    partitionToolkitCompat([1, 2, 3, 4, 5], x => x < 3);
   });
 
   bench('lodash/partition', () => {
@@ -20,6 +26,10 @@ describe('partition/largeArray', () => {
 
   bench('es-toolkit/partition', () => {
     partitionToolkit(largeArray, x => x < 5000);
+  });
+
+  bench('es-toolkit/partition/compat', () => {
+    partitionToolkitCompat(largeArray, x => x < 5000);
   });
 
   bench('lodash/partition', () => {

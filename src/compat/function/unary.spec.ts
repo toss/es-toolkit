@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
-import { unary } from '../../function';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { unary as unaryLodash } from 'lodash';
+import { unary } from './unary';
 import { map } from '../array/map';
 
 describe('unary', () => {
@@ -14,6 +15,8 @@ describe('unary', () => {
 
   it('should not force a minimum argument count', () => {
     const capped = unary(fn);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(capped()).toEqual([]);
   });
 
@@ -24,6 +27,12 @@ describe('unary', () => {
     });
     const object = { capped: capped };
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(object.capped()).toBe(object);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(unary).toEqualTypeOf<typeof unaryLodash>();
   });
 });

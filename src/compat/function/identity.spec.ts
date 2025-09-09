@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
-import { identity } from '../../function';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { identity as identityLodash } from 'lodash';
+import { identity } from './identity';
 
 describe('identity', () => {
   it('should return the input value unchanged for a number', () => {
@@ -23,5 +24,9 @@ describe('identity', () => {
   it('should return the input value unchanged for a boolean', () => {
     expect(identity(true)).toBe(true);
     expect(identity(false)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(identity).toEqualTypeOf<typeof identityLodash>();
   });
 });

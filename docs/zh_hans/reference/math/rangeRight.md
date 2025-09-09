@@ -37,6 +37,12 @@ rangeRight(0, 21, 5);
 // 返回 [-3, -2, -1, 0]
 rangeRight(0, -4, -1);
 
-// 抛出错误：步长值必须是非零整数。
+// 如果结束值为负数，则返回 []
+rangeRight(-4);
+rangeRight(0, -4);
+
+// 抛出错误：The step value must be a non-zero integer.
 rangeRight(1, 4, 0);
+// 如果步长值为负数，则返回 []
+rangeRight(1, 4, -1);
 ```

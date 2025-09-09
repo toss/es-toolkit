@@ -6,6 +6,7 @@ describe('pull', () => {
   const func = pullToolkit;
 
   function pull(array: any[], values: any[]) {
+    // eslint-disable-next-line prefer-spread
     return func.apply(undefined, [array].concat(values) as any);
   }
 

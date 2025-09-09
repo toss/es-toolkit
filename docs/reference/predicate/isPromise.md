@@ -21,7 +21,7 @@ function isPromise(value: unknown): value is Promise<any>;
 ## Examples
 
 ```typescript
-const value1 = new Promise((resolve) => resolve());
+const value1 = new Promise(resolve => resolve());
 const value2 = {};
 const value3 = 123;
 

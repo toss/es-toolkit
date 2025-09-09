@@ -28,9 +28,9 @@ export async function translate(
 Always answer in the JSON format as given in the input, without triple backticks.
 Translate the following JSON to ${locale}.
 
-If translating in Korean, finish the sentence with 요.
-If translating in Japanese, finish the sentence with ます。
-Finish with a noun (e.g. string. 数値配列。 문자열. 배열.) if it is a document for a parameter or a return value.
+If translating in Korean, write the sentence in 해요 style.
+If translating in Japanese, finish the sentence in ます style.
+Finish with a noun if it is a explanation for a parameter or a return value.
 
 ===
 \`\`\`

@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-function invoke(object: unknown, path: PropertyKey | PropertyKey[], args: any[]): any;
+function invoke(object: any, path: PropertyKey | PropertyKey[], args: any[]): any;
 ```
 
 ### 파라미터
 
-- `object` (`unknown`): 메서드를 호출할 객체.
+- `object` (`any`): 메서드를 호출할 객체.
 - `path` (`PropertyKey | PropertyKey[]`): 호출할 메서드의 경로.
 - `args` (`any[]`): 메서드를 호출할 때 사용할 인수.
 

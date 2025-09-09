@@ -1,6 +1,9 @@
 import { bench, describe } from 'vitest';
-import { pull as pullToolkit } from 'es-toolkit/compat';
-import { pull as pullLodash } from 'lodash';
+import { pull as pullToolkit_ } from 'es-toolkit/compat';
+import { pull as pullLodash_ } from 'lodash';
+
+const pullToolkit = pullToolkit_;
+const pullLodash = pullLodash_;
 
 describe('pull array size 100', () => {
   const array = [...Array(100)].map((_, i) => i);

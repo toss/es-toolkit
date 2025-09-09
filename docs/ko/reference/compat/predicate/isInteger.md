@@ -22,7 +22,7 @@ function isInteger(value?: unknown): value is number;
 
 ### 반환 값
 
-(`boolean`): `value`가 정수면 `true`, 그렇지 않으면 `false`.
+(`value is number`): `value`가 정수면 `true`, 그렇지 않으면 `false`.
 
 ## 예시
 

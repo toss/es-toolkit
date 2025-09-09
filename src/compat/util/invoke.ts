@@ -1,4 +1,4 @@
-import { toPath } from './toPath';
+import { toPath } from './toPath.ts';
 import { toKey } from '../_internal/toKey.ts';
 import { last } from '../array/last.ts';
 import { get } from '../object/get.ts';
@@ -6,7 +6,7 @@ import { get } from '../object/get.ts';
 /**
  * Invokes the method at `path` of `object` with the given arguments.
  *
- * @param {unknown} object - The object to query.
+ * @param {any} object - The object to query.
  * @param {PropertyKey | PropertyKey[]} path - The path of the method to invoke.
  * @param {any[]} args - The arguments to invoke the method with.
  * @returns {any} - Returns the result of the invoked method.
@@ -23,7 +23,9 @@ import { get } from '../object/get.ts';
  * invoke(object, 'a.b', [1, 2]); // => 3
  * invoke(object, ['a', 'b'], [1, 2]); // => 3
  */
-export function invoke(object: unknown, path: PropertyKey | PropertyKey[], args: any[] = []): any {
+export function invoke(object: any, path: PropertyKey | readonly PropertyKey[], ...args: any[]): any {
+  args = args.flat(1);
+
   if (object == null) {
     return;
   }
@@ -43,6 +45,8 @@ export function invoke(object: unknown, path: PropertyKey | PropertyKey[], args:
       if (Array.isArray(path)) {
         return invokeImpl(object, path, args);
       } else {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return invokeImpl(object, [path], args);
       }
     }
@@ -57,7 +61,7 @@ function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
   }
 
   let lastKey = last(path);
-  let lastValue = lastKey?.valueOf();
+  const lastValue = lastKey?.valueOf();
 
   if (typeof lastValue === 'number') {
     lastKey = toKey(lastValue);
@@ -65,7 +69,7 @@ function invokeImpl(object: unknown, path: PropertyKey[], args: any[]) {
     lastKey = String(lastKey);
   }
 
-  const func = get(parent, lastKey);
+  const func = get(parent, lastKey as PropertyKey);
 
   return func?.apply(parent, args);
 }

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { toNumber as toNumberLodash } from 'lodash';
 import { toNumber } from './toNumber';
 import { flatMap } from '../../array/flatMap';
 import { identity } from '../../function/identity';
@@ -148,6 +149,8 @@ describe('toNumber', () => {
 
     const expected = values.map(value => (value !== whitespace ? Number(value) : 0));
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? toNumber(value) : toNumber()));
 
     expect(actual).toEqual(expected);
@@ -179,5 +182,9 @@ describe('toNumber', () => {
     const actual = values.map(toNumber);
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toNumber).toEqualTypeOf<typeof toNumberLodash>();
   });
 });

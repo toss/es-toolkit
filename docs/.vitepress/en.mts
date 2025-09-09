@@ -31,7 +31,7 @@ function nav(): DefaultTheme.NavItem[] {
   return [
     { text: 'Home', link: '/' },
     { text: 'Introduction', link: '/intro' },
-    { text: 'Reference', link: '/reference/array/chunk' },
+    { text: 'Reference', link: '/reference/array/at' },
   ];
 }
 

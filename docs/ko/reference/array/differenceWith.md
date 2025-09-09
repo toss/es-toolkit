@@ -44,7 +44,7 @@ const result = differenceWith(array1, array2, areItemsEqual);
 
 - `differenceWith`는 첫 번째 배열과 비교하기 위해 여러 배열을 받을 수 있어요.
 - `differenceWith`는 유사 배열 객체를 인수로 받을 수 있어요.
-- `differenceWith는` 사용자 정의 비교 함수를 생략할 수 있어요. 생략하면 기본적으로 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 알고리즘이 사용돼요.
+- `differenceWith`는 사용자 정의 비교 함수를 생략할 수 있어요. 생략하면 기본적으로 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 알고리즘이 사용돼요.
 
 ```typescript
 import { differenceWith } from 'es-toolkit/compat';

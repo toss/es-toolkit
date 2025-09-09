@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { sortedIndexBy as sortedIndexByLodash } from 'lodash';
 import { sortedIndexBy } from './sortedIndexBy';
 
 describe('sortedIndexBy', () => {
@@ -14,7 +15,7 @@ describe('sortedIndexBy', () => {
 
   it('should work with `_.property` shorthands', () => {
     const objects = [{ x: 30 }, { x: 50 }];
-    const actual = sortedIndexBy(objects, { x: 40 }, v => v.x);
+    const actual = sortedIndexBy(objects, { x: 40 }, 'x');
 
     expect(actual).toBe(1);
   });
@@ -55,5 +56,19 @@ describe('sortedIndexBy', () => {
         expect(actual).toBe(expected);
       });
     });
+  });
+
+  it('should use default iteratee (identity function) when no iteratee is provided', () => {
+    const numbers = [10, 30, 50];
+    const actual = sortedIndexBy(numbers, 40);
+    expect(actual).toBe(2);
+
+    const strings = ['apple', 'cherry'];
+    const actualString = sortedIndexBy(strings, 'banana');
+    expect(actualString).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(sortedIndexBy).toEqualTypeOf<typeof sortedIndexByLodash>();
   });
 });

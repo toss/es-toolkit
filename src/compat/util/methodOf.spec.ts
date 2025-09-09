@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { constant, each, map, noop } from '..';
-import { methodOf as methodOfToolkit } from './methodOf';
+import type { methodOf as methodOfLodash } from 'lodash';
+import { methodOf, methodOf as methodOfToolkit } from './methodOf';
 import { times } from './times';
 import { stubFour } from '../_internal/stubFour';
 import { stubOne } from '../_internal/stubOne';
@@ -150,5 +151,9 @@ describe('methodOf', () => {
     each(['a.b', ['a', 'b']], path => {
       expect(methodOf(path)).toBe(1);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(methodOf).toEqualTypeOf<typeof methodOfLodash>();
   });
 });

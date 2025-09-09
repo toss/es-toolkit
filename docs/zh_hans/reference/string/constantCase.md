@@ -1,30 +1,30 @@
 # constantCase
 
-Converts a string to constant case.
+将字符串转换为大写格式。
 
-Constant case is a naming convention where each word is written in uppercase letters and separated by an underscore (`_`). For example, `CONSTANT_CASE`.
+常量命名格式是一种命名约定，每个单词均使用大写字母，并通过下划线（`_`）分隔。例如，`CONSTANT_CASE`。
 
-## Signature
+## 签名
 
 ```typescript
 function constantCase(str: string): string;
 ```
 
-### Parameters
+### 参数
 
-- `str` (`string`): The string to convert to constant case.
+- `str` (`string`): 需要转换为常量格式的字符串。
 
-### Returns
+### 返回值
 
-(`string`) The converted constant case string.
+(`string`) 转换后的常量格式字符串。
 
-## Examples
+## 示例
 
 ```typescript
 import { constantCase } from 'es-toolkit/string';
 
-constantCase('camelCase'); // returns 'CAMEL_CASE'
-constantCase('some whitespace'); // returns 'SOME_WHITESPACE'
-constantCase('hyphen-text'); // returns 'HYPHEN_TEXT'
-constantCase('HTTPRequest'); // returns 'HTTP_REQUEST'
+constantCase('camelCase'); // 返回 'CAMEL_CASE'
+constantCase('some whitespace'); // 返回 'SOME_WHITESPACE'
+constantCase('hyphen-text'); // 返回 'HYPHEN_TEXT'
+constantCase('HTTPRequest'); // 返回 'HTTP_REQUEST'
 ```

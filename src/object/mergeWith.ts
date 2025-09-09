@@ -1,3 +1,4 @@
+import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
 import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
 
 /**
@@ -58,12 +59,16 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
 
+    if (isUnsafeProperty(key)) {
+      continue;
+    }
+
     const sourceValue = source[key];
     const targetValue = target[key];
 
     const merged = merge(targetValue, sourceValue, key as string, target, source);
 
-    if (merged != null) {
+    if (merged !== undefined) {
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
       target[key] = mergeWith<any, S[keyof T]>(targetValue ?? [], sourceValue, merge);

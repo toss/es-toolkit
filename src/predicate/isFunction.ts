@@ -1,7 +1,7 @@
 /**
  * Checks if `value` is a function.
  *
- * @param {unknown} value The value to check.
+ * @param {any} value The value to check.
  * @returns {boolean} Returns `true` if `value` is a function, else `false`.
  *
  * @example
@@ -11,6 +11,6 @@
  * isFunction(Proxy); // true
  * isFunction(Int8Array); // true
  */
-export function isFunction(value: unknown): value is (...args: unknown[]) => unknown {
+export function isFunction(value: any): value is (...args: any[]) => any {
   return typeof value === 'function';
 }

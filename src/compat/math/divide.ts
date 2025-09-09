@@ -17,8 +17,6 @@ import { toString } from '../util/toString.ts';
  * divide(NaN, NaN); // => NaN
  */
 export function divide(value: number, other: number): number {
-  console.log(value, other);
-
   if (value === undefined && other === undefined) {
     return 1;
   }

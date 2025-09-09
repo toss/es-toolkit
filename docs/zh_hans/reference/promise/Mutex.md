@@ -30,12 +30,12 @@ const mutex = new Mutex();
 async function criticalSection() {
   await mutex.acquire();
   try {
-    // This code section cannot be executed simultaneously
+    // 这个代码段不能同时执行
   } finally {
     mutex.release();
   }
 }
 
 criticalSection();
-criticalSection(); // This call will wait until the first call releases the mutex.
+criticalSection(); // 这个调用会等待第一个调用释放互斥锁。
 ```

@@ -16,7 +16,7 @@ import { clamp } from '../math/clamp.ts';
  * toLength('42') // => 42
  * toLength(null) // => 0
  */
-export function toLength(value?: unknown): number {
+export function toLength(value: any): number {
   if (value == null) {
     return 0;
   }

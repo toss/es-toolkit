@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { flip as flipLodash } from 'lodash';
 import { flip } from './flip';
 
 describe('flip', () => {
@@ -11,5 +12,9 @@ describe('flip', () => {
   it('should flip arguments provided to `func`', () => {
     const flipped = flip(fn);
     expect(flipped('a', 'b', 'c', 'd')).toEqual(['d', 'c', 'b', 'a']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(flip).toEqualTypeOf<typeof flipLodash>();
   });
 });

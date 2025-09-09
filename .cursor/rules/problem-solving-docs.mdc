@@ -1,0 +1,54 @@
+---
+description: 
+globs: **/*.md
+alwaysApply: false
+---
+---
+description: Problem-Solving Documentation Guidelines
+globs: **/*.md
+---
+
+# Problem-Solving Documentation
+
+- Define clear problem situations
+  - Distinguish between causes and symptoms
+  - Include error messages and log examples for better understanding
+- Provide immediately applicable solutions
+  - Solutions should be clear and ready to implement
+  - Include code examples, commands, and configuration methods
+  - Explain the principles behind the solution
+- Consider environmental differences
+  - Address how the same problem might appear in different environments or settings
+
+## Template
+
+```md
+# [Problem-Solving Title]
+
+## Problem Definition
+
+[Describe the problem situation readers might face.]
+
+## Prerequisites
+
+[List required environment setup or conditions. Skip if none.]
+
+## Solution
+
+### [First Solution]
+
+[Explain the first solution.]
+
+### [Second Solution]
+
+[Add alternative solutions if available.]
+
+### Verification
+
+[Explain how to verify the solution works.]
+```
+
+## Checklist
+- Did you provide sufficient background knowledge about the error, not just explain its cause?
+- Is there an immediately applicable solution included?
+- Does it consider differences across environments (OS, library versions, etc.)?

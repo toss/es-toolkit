@@ -31,7 +31,7 @@ function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '主页', link: '/zh_hans/' },
     { text: '简介', link: '/zh_hans/intro' },
-    { text: '参考', link: '/zh_hans/reference/array/chunk' },
+    { text: '参考', link: '/zh_hans/reference/array/at' },
   ];
 }
 

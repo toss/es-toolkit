@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { method as methodLodash } from 'lodash';
 import { constant } from './constant';
-import { method as methodToolkit } from './method';
+import { method, method as methodToolkit } from './method';
 import { times } from './times';
 import { noop } from '../../function/noop';
 import { stubOne } from '../_internal/stubOne';
@@ -81,12 +82,15 @@ describe('method', () => {
   });
 
   it('should return `undefined` when `object` is nullish', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = map(values, noop);
 
     forEach(['constructor', ['constructor']], path => {
       const method = methodToolkit(path);
 
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       const actual = map(values, (value, index) => (index ? method(value) : method()));
 
       expect(actual).toEqual(expected);
@@ -94,12 +98,15 @@ describe('method', () => {
   });
 
   it('should return `undefined` for deep paths when `object` is nullish', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
     const expected = map(values, noop);
 
     forEach(['constructor.prototype.valueOf', ['constructor', 'prototype', 'valueOf']], path => {
       const method = methodToolkit(path);
 
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       const actual = map(values, (value, index) => (index ? method(value) : method()));
 
       expect(actual).toEqual(expected);
@@ -118,6 +125,7 @@ describe('method', () => {
   it('should apply partial arguments to function', () => {
     const object = {
       fn: function () {
+        // eslint-disable-next-line prefer-rest-params
         return Array.prototype.slice.call(arguments);
       },
     };
@@ -142,5 +150,9 @@ describe('method', () => {
       const method = methodToolkit(path);
       expect(method(object)).toBe(1);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(method).toEqualTypeOf<typeof methodLodash>();
   });
 });

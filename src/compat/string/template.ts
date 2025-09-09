@@ -40,13 +40,20 @@ export const templateSettings = {
 };
 
 interface TemplateOptions {
-  escape?: RegExp;
-  evaluate?: RegExp;
-  interpolate?: RegExp;
-  variable?: string;
-  imports?: Record<string, unknown>;
+  escape?: RegExp | null | undefined;
+  evaluate?: RegExp | null | undefined;
+  interpolate?: RegExp | null | undefined;
+  variable?: string | undefined;
+  imports?: Record<string, any> | undefined;
   sourceURL?: string;
 }
+
+interface TemplateExecutor {
+  (data?: object): string;
+  source: string;
+}
+
+export function template(string?: string, options?: TemplateOptions): TemplateExecutor;
 
 /**
  * Compiles a template string into a function that can interpolate data properties.
@@ -57,14 +64,14 @@ interface TemplateOptions {
  *
  * @param {string} string - The template string.
  * @param {TemplateOptions} [options] - The options object.
- * @param {RegExp} [options.escape] - The regular expression for "escape" delimiter.
- * @param {RegExp} [options.evaluate] - The regular expression for "evaluate" delimiter.
- * @param {RegExp} [options.interpolate] - The regular expression for "interpolate" delimiter.
- * @param {string} [options.variable] - The data object variable name.
- * @param {Record<string, unknown>} [options.imports] - The object of imported functions.
- * @param {string} [options.sourceURL] - The source URL of the template.
- * @param {unknown} [guard] - The guard to detect if the function is called with `options`.
- * @returns {(data?: object) => string} Returns the compiled template function.
+ * @param {RegExp | null | undefined} [options.escape] - The regular expression for "escape" delimiter.
+ * @param {RegExp | null | undefined} [options.evaluate] - The regular expression for "evaluate" delimiter.
+ * @param {RegExp | null | undefined} [options.interpolate] - The regular expression for "interpolate" delimiter.
+ * @param {string | undefined} [options.variable] - The data object variable name.
+ * @param {Record<string, any> | undefined} [options.imports] - The object of imported functions.
+ * @param {string | undefined} [options.sourceURL] - The source URL of the template.
+ * @param {object} [guard] - The guard to detect if the function is called with `options`.
+ * @returns {TemplateExecutor} Returns the compiled template function.
  *
  * @example
  * // Use the "escape" delimiter to escape data properties.
@@ -110,11 +117,7 @@ interface TemplateOptions {
  * // Use the "sourceURL" option to specify the source URL of the template.
  * const compiled = template('hello <%= user %>!', { sourceURL: 'template.js' });
  */
-export function template(
-  string: string,
-  options?: TemplateOptions,
-  guard?: unknown
-): ((data?: object) => string) & { source: string } {
+export function template(string?: string, options?: TemplateOptions, guard?: object): TemplateExecutor {
   string = toString(string);
 
   if (guard) {

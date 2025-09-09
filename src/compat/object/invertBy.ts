@@ -1,5 +1,45 @@
 import { identity } from '../../function/identity.ts';
 import { isNil } from '../../predicate/isNil.ts';
+import { ValueIteratee } from '../_internal/ValueIteratee.ts';
+import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
+
+/**
+ * Creates a new object that reverses the keys and values of the given object, similar to the invert.
+ * The values of the new object are arrays of keys that correspond to the value returned by the `iteratee` function.
+ *
+ * @param {Record<string|number, T>} object - The object to iterate over
+ * @param {ValueIteratee<T>} [iteratee] - Optional function to transform values into keys
+ * @returns {Record<string, string[]>} An object with transformed values as keys and arrays of original keys as values
+ *
+ * @example
+ * const obj = { a: 1, b: 2, c: 1 };
+ * invertBy(obj); // => { '1': ['a', 'c'], '2': ['b'] }
+ *
+ * @example
+ * const obj = { a: 1, b: 2, c: 1 };
+ * invertBy(obj, value => `group${value}`); // => { 'group1': ['a', 'c'], 'group2': ['b'] }
+ */
+export function invertBy<T>(
+  object: Record<string, T> | Record<number, T> | null | undefined,
+  interatee?: ValueIteratee<T>
+): Record<string, string[]>;
+
+/**
+ * Creates a new object that reverses the keys and values of the given object, similar to the invert.
+ * The values of the new object are arrays of keys that correspond to the value returned by the `iteratee` function.
+ *
+ * @param {T} object - The object to iterate over
+ * @param {ValueIteratee<T[keyof T]>} [iteratee] - Optional function to transform values into keys
+ * @returns {Record<string, string[]>} An object with transformed values as keys and arrays of original keys as values
+ *
+ * @example
+ * const obj = { foo: { id: 1 }, bar: { id: 2 }, baz: { id: 1 } };
+ * invertBy(obj, value => String(value.id)); // => { '1': ['foo', 'baz'], '2': ['bar'] }
+ */
+export function invertBy<T extends object>(
+  object: T | null | undefined,
+  interatee?: ValueIteratee<T[keyof T]>
+): Record<string, string[]>;
 
 /**
  * Creates a new object that reverses the keys and values of the given object, similar to the invert.
@@ -25,27 +65,28 @@ import { isNil } from '../../predicate/isNil.ts';
  * const result = invertBy(obj, value => `group${value}`);
  * // result => { 'group1': ['a', 'c'], 'group2': ['b'] }
  */
-export function invertBy<K extends PropertyKey, V>(
-  object: Record<K, V>,
-  iteratee?: (value: V) => string
-): Record<string, K[]> {
-  const result = {} as Record<string, K[]>;
+export function invertBy<T extends object>(
+  object: T | null | undefined,
+  iteratee?: ValueIteratee<T[keyof T]>
+): Record<string, string[]> {
+  const result = {} as Record<string, string[]>;
 
   if (isNil(object)) {
     return result;
   }
 
   if (iteratee == null) {
-    iteratee = identity as (value: V) => string;
+    iteratee = identity as (value: T[keyof T]) => string;
   }
 
   const keys = Object.keys(object);
+  const getString = iterateeToolkit(iteratee);
 
   for (let i = 0; i < keys.length; i++) {
-    const key = keys[i] as K;
+    const key = keys[i] as string;
 
-    const value = object[key];
-    const valueStr = iteratee(value);
+    const value = (object as any)[key];
+    const valueStr = getString(value);
 
     if (Array.isArray(result[valueStr])) {
       result[valueStr].push(key);

@@ -10,6 +10,7 @@ describe('remove', () => {
   });
 
   it('should handle sparse arrays correctly', () => {
+    // eslint-disable-next-line no-sparse-arrays
     const sparseArray = [1, , 3, , 5];
     const removed = remove(sparseArray, value => value === undefined);
     expect(sparseArray).toEqual([1, 3, 5]);

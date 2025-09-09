@@ -16,7 +16,7 @@ function isString(value: unknown): value is string;
 
 ### 戻り値
 
-(`x is string`): 値が文字列であれば`true`、そうでなければ`false`。
+(`value is string`): 値が文字列であれば`true`、そうでなければ`false`。
 
 ## 例
 

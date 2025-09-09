@@ -23,7 +23,7 @@ function isPromise(value: unknown): value is Promise<any>;
 ## 예시
 
 ```typescript
-const value1 = new Promise((resolve) => resolve());
+const value1 = new Promise(resolve => resolve());
 const value2 = {};
 const value3 = 123;
 

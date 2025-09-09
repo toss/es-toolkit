@@ -17,7 +17,7 @@ module.exports = {
   importOrderCaseInsensitive: true,
   overrides: [
     {
-      files: 'src/**/index.ts',
+      files: 'src/**/{index,compat}.ts',
       options: {
         plugins: [require.resolve('prettier-plugin-sort-re-exports')],
       },

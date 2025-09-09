@@ -5,12 +5,12 @@
 ## 签名
 
 ```typescript
-function negate<F extends (...args: never[]) => boolean>(func: F): F;
+function negate<F extends (...args: any[]) => boolean>(func: F): F;
 ```
 
 ### 参数
 
-- `func` (`F extends (args: ...Parameters) => unknown`): 要否定的函数。
+- `func` (`F extends (...args: any[]) => boolean`): 要否定的函数。
 
 ### 返回值
 

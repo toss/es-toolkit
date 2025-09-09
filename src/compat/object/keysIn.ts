@@ -13,7 +13,7 @@ import { times } from '../util/times.ts';
  * - If the value is `null` or `undefined`, an empty array is returned.
  * - When handling prototype objects, the `constructor` property is excluded from the results.
  *
- * @param {unknown} [object] - The object to inspect for keys.
+ * @param {any} [object] - The object to inspect for keys.
  * @returns {string[]} An array of string keys from the object.
  *
  * @example
@@ -27,7 +27,7 @@ import { times } from '../util/times.ts';
  * Foo.prototype.a = 1;
  * console.log(keysIn(new Foo())); // ['a']
  */
-export function keysIn(object?: unknown): string[] {
+export function keysIn(object?: any): string[] {
   if (object == null) {
     return [];
   }

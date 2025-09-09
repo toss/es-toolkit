@@ -12,6 +12,6 @@ import { toString } from '../util/toString.ts';
  * const convertedStr2 = upperFirst('Fred') // returns 'Fred'
  * const convertedStr3 = upperFirst('FRED') // returns 'FRED'
  */
-export function upperFirst(str?: string): string {
-  return upperFirstToolkit(toString(str));
+export function upperFirst<T extends string = string>(str?: T): Capitalize<T> {
+  return upperFirstToolkit(toString(str)) as Capitalize<T>;
 }

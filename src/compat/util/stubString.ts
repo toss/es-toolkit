@@ -5,6 +5,8 @@
  * @example
  * stubString() // Returns ''
  */
-export function stubString(): '' {
+export function stubString(): string;
+
+export function stubString(): string {
   return '';
 }

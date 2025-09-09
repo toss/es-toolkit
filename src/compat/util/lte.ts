@@ -3,8 +3,8 @@ import { toNumber } from './toNumber.ts';
 /**
  * Checks if value is less than or equal to other.
  *
- * @param {unknown} value The value to compare.
- * @param {unknown} other The other value to compare.
+ * @param {any} value The value to compare.
+ * @param {any} other The other value to compare.
  * @returns {boolean} Returns `true` if value is less than or equal to other, else `false`.
  *
  * @example
@@ -12,7 +12,7 @@ import { toNumber } from './toNumber.ts';
  * lte(3, 3); // => true
  * lte(3, 1); // => false
  */
-export function lte(value: unknown, other: unknown): boolean {
+export function lte(value: any, other: any): boolean {
   if (typeof value === 'string' && typeof other === 'string') {
     return value <= other;
   }

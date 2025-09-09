@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { differenceWith as differenceWithLodash } from 'lodash';
 import { differenceWith } from './differenceWith';
 import { range } from '../../math';
 import { isEqual } from '../../predicate';
@@ -83,10 +84,13 @@ describe('differenceWith', () => {
   it(`should ignore values that are not array-like`, () => {
     const array = [1, null, 3];
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(differenceWith(args, 3, { 0: 1 })).toEqual([1, 2, 3]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(differenceWith(null, array, 1)).toEqual([]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     expect(differenceWith(array, args, null)).toEqual([null]);
   });
@@ -114,5 +118,9 @@ describe('differenceWith', () => {
     const actual = others.map(other => differenceWith(array, other, eq).map(toString));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(differenceWith).toEqualTypeOf<typeof differenceWithLodash>();
   });
 });

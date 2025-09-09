@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { uniq as uniqLodash } from 'lodash';
 import { args } from '../_internal/args';
 import { uniq } from '../index';
 
@@ -34,5 +35,9 @@ describe('uniq', () => {
     expect(uniq({ 0: 1, 1: 2, 2: 1, length: 3 })).toEqual([1, 2]);
     expect(uniq('112')).toEqual(['1', '2']);
     expect(uniq(args)).toEqual([1, 2, 3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(uniq).toEqualTypeOf<typeof uniqLodash>();
   });
 });

@@ -13,12 +13,12 @@
 ## 인터페이스
 
 ```typescript
-function toLength(value?: unknown): number;
+function toLength(value: any): number;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 유효한 인덱스로 변환할 값.
+- `value` (`any`): 유효한 인덱스로 변환할 값.
 
 ### 반환 값
 

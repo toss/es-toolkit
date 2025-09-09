@@ -1,8 +1,13 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { stubString as stubStringLodash } from 'lodash';
 import { stubString } from './stubString';
 
 describe('stubString', () => {
   it('should return an empty string', () => {
     expect(stubString()).toEqual('');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(stubString).toEqualTypeOf<typeof stubStringLodash>();
   });
 });

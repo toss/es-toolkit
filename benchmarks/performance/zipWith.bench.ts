@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { zipWith as zipWithToolkit_ } from 'es-toolkit';
+import { zipWith as zipWithToolkitCompat_ } from 'es-toolkit/compat';
 import { zipWith as zipWithLodash_ } from 'lodash';
 
 const zipWithToolkit = zipWithToolkit_;
+const zipWithToolkitCompat = zipWithToolkitCompat_;
 const zipWithLodash = zipWithLodash_;
 
 describe('zipWith', () => {
@@ -11,6 +13,13 @@ describe('zipWith', () => {
     const arr2 = [3, 4];
     const arr3 = [5, 6];
     zipWithToolkit(arr1, arr2, arr3, (a, b, c) => `${a}${b}${c}`);
+  });
+
+  bench('es-toolkit/compat/zipWith', () => {
+    const arr1 = [1, 2];
+    const arr2 = [3, 4];
+    const arr3 = [5, 6];
+    zipWithToolkitCompat(arr1, arr2, arr3, (a, b, c) => `${a}${b}${c}`);
   });
 
   bench('lodash/zipWith', () => {
@@ -26,6 +35,10 @@ describe('zipWith/largeArray', () => {
 
   bench('es-toolkit/zipWith', () => {
     zipWithToolkit(largeArray, largeArray, largeArray, (a, b, c) => a + b + c);
+  });
+
+  bench('es-toolkit/compat/zipWith', () => {
+    zipWithToolkitCompat(largeArray, largeArray, largeArray, (a, b, c) => a + b + c);
   });
 
   bench('lodash/zipWith', () => {
