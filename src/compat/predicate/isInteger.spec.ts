@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isInteger as isIntegerLodash } from 'lodash';
 import { isInteger } from './isInteger';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubTrue } from '../_internal/stubTrue';
 import { symbol } from '../_internal/symbol';
+import { stubFalse } from '../util/stubFalse';
+import { stubTrue } from '../util/stubTrue';
 
 const MAX_INTEGER = 1.7976931348623157e308;
 
@@ -81,5 +82,9 @@ describe('isInteger function', () => {
     expect(func(/x/)).toBe(false);
     expect(func('a')).toBe(false);
     expect(func(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isInteger).toEqualTypeOf<typeof isIntegerLodash>();
   });
 });

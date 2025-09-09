@@ -15,7 +15,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isArrayLike(value: unknown): value is ArrayLike<unknown>;
+function isArrayLike(value?: unknown): value is ArrayLike<unknown>;
 ```
 
 ### Parameters

@@ -1,6 +1,6 @@
 # round
 
-숫자를 지정된 자릿수로 반올림하는 함수에요.
+숫자를 지정된 자릿수로 반올림하는 함수예요.
 
 이 함수는 숫자와 선택적으로 자릿수 값을 받아서, 지정된 소수점 자릿수로 반올림된 숫자를 반환해요.
 
@@ -12,8 +12,8 @@ function round(value: number, precision?: number): number;
 
 ### 파라미터
 
-- `value` (`number`): 반올림할 숫자에요.
-- `precision` (`number`, optional): 반올림할 소수점 자릿수에요. 기본값은 0이에요.
+- `value` (`number`): 반올림할 숫자예요.
+- `precision` (`number`, optional): 반올림할 소수점 자릿수예요. 기본값은 0이에요.
 
 ### 반환 값
 

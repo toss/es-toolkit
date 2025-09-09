@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { orderBy as orderByLodash } from 'lodash';
 import { orderBy } from './orderBy.ts';
 import { zipObject } from '../../array/zipObject.ts';
 import { partialRight } from '../../function/partialRight.ts';
@@ -95,14 +96,23 @@ describe('orderBy', () => {
       { a: 'y', 0: 2 },
     ];
 
+    // @ts-expect-error - reduce type mismatch
     expect(['a'].reduce(orderBy, objects)).toEqual([objects[0], objects[2], objects[1], objects[3]]);
+    // @ts-expect-error - reduce type mismatch
     expect([0].reduce(orderBy, objects)).toEqual([objects[2], objects[3], objects[0], objects[1]]);
+    // @ts-expect-error - reduce type mismatch
     expect([[0]].reduce(orderBy, objects)).toEqual([objects[2], objects[3], objects[0], objects[1]]);
 
     const wrapped = partialRight(orderBy, 'bogus');
 
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(['a'].reduce(wrapped, objects)).toEqual([objects[0], objects[2], objects[1], objects[3]]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect([0].reduce(wrapped, objects)).toEqual([objects[2], objects[3], objects[0], objects[1]]);
+    // eslint-disable-next-line
+    // @ts-ignore
     expect([[0]].reduce(wrapped, objects)).toEqual([objects[2], objects[3], objects[0], objects[1]]);
   });
 
@@ -156,6 +166,7 @@ describe('orderBy', () => {
   });
 
   it('should sort by a property in ascending order when its order is not specified and the collection is falsey', () => {
+    // @ts-expect-error - type mismatch
     const actual = falsey.map((order, index) => orderBy(objects, ['a', 'b'], index ? ['desc', order] : ['desc']));
     const expected = falsey.map(() => [objects[3], objects[1], objects[2], objects[0]]);
 
@@ -183,7 +194,7 @@ describe('orderBy', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('shoud work with `deep-like` property paths', () => {
+  it('should work with `deep-like` property paths', () => {
     const objects = [{ 'a.b': 1 }, { 'a.b': 2 }, { 'a.b': 3 }, { 'a.b': 4 }];
     const actual = orderBy(objects, ['a.b'], ['desc']);
     const expected = [objects[3], objects[2], objects[1], objects[0]];
@@ -196,6 +207,7 @@ describe('orderBy', () => {
       [
         [2, 1, 3],
         [3, 2, 1],
+        // @ts-expect-error - type mismatch
       ].map(orderBy)
     ).toEqual([
       [1, 2, 3],
@@ -217,5 +229,19 @@ describe('orderBy', () => {
 
     expect(orderBy(array2)).toEqual(expected2);
     expect(orderBy(array2, [])).toEqual(expected2);
+  });
+
+  it('should compare strings with ASCII code', () => {
+    // @ts-expect-error - type mismatch
+    expect(orderBy(['A', 'a'], null, 'desc')).toEqual(['a', 'A']);
+    // @ts-expect-error - type mismatch
+    expect(orderBy(['ABC', 'abc'], null, 'desc')).toEqual(['abc', 'ABC']);
+
+    expect(orderBy(['A', 'a'])).toEqual(['A', 'a']);
+    expect(orderBy(['ABC', 'abc'])).toEqual(['ABC', 'abc']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(orderBy).toEqualTypeOf<typeof orderByLodash>();
   });
 });

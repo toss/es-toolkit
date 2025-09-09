@@ -7,7 +7,7 @@
 ## インターフェース
 
 ```typescript
-export function sampleSize<T>(array: T[], size: number): T[];
+function sampleSize<T>(array: T[], size: number): T[];
 ```
 
 ### パラメータ

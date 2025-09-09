@@ -1,6 +1,6 @@
 # medianBy
 
-`getValue` 함수를 각 요소에 적용하여, 요소 배열의 중앙값을 계산하는 함수에요.
+`getValue` 함수를 각 요소에 적용하여, 요소 배열의 중앙값을 계산하는 함수예요.
 
 [중앙값](./median.md)이란 배열을 정렬했을 때 중앙에 위치하는 요소를 말해요.
 배열이 홀수 개의 요소를 가진다면, 중앙에 있는 요소를 반환해요.
@@ -11,13 +11,13 @@
 ## 인터페이스
 
 ```typescript
-export function medianBy<T>(items: T[], getValue: (element: T) => number): number;
+function medianBy<T>(items: T[], getValue: (element: T) => number): number;
 ```
 
 ### 파라미터
 
 - `items` (`T[]`): 중앙값을 계산할 배열이에요.
-- `getValue` (`(element: T) => number`): 각 요소에서 숫자 값을 선택하는 함수에요.
+- `getValue` (`(element: T) => number`): 각 요소에서 숫자 값을 선택하는 함수예요.
 
 ### 반환 값
 

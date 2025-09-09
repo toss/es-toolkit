@@ -3,6 +3,7 @@ import { bind } from './bind';
 import { curryRight } from './curryRight';
 import { partial } from '../../function/partial';
 import { partialRight } from '../../function/partialRight';
+import { map } from '../array/map';
 
 describe('curryRight', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,7 +43,7 @@ describe('curryRight', () => {
   });
 
   it('should support placeholders', () => {
-    const curried = curryRight(fn),
+    const curried = curryRight(fn) as any,
       ph = curried.placeholder;
 
     expect(curried(4)(2, ph)(1, ph)(3)).toEqual([1, 2, 3, 4]);
@@ -52,7 +53,7 @@ describe('curryRight', () => {
   });
 
   it('should persist placeholders', () => {
-    const curried = curryRight(fn),
+    const curried = curryRight(fn) as any,
       ph = curried.placeholder,
       actual = curried('a', ph, ph, ph)('b')(ph)('c')('d');
 
@@ -60,7 +61,7 @@ describe('curryRight', () => {
   });
 
   it('should provide additional arguments after reaching the target arity', () => {
-    const curried = curryRight(fn, 3);
+    const curried = curryRight(fn, 3) as any;
     expect(curried(4)(1, 2, 3)).toEqual([1, 2, 3, 4]);
     expect(curried(4, 5)(1, 2, 3)).toEqual([1, 2, 3, 4, 5]);
     expect(curried(1, 2, 3, 4, 5, 6)).toEqual([1, 2, 3, 4, 5, 6]);
@@ -96,7 +97,7 @@ describe('curryRight', () => {
       return value && object;
     }
 
-    const curriedBar = curryRight(Bar);
+    const curriedBar = curryRight(Bar) as any;
     expect(new (curriedBar(true))(object)).toBe(object);
   });
 
@@ -128,9 +129,9 @@ describe('curryRight', () => {
       expected = [1, 2, 3, 4];
 
     const a = partialRight(curried, 4),
-      b = partialRight(a, 3),
+      b = partialRight(a, 3) as any,
       c = bind(b, null, 1),
-      d = partial(b(2), 1);
+      d = partial(b(2), 1) as any;
 
     expect(c(2)).toEqual(expected);
     expect(d()).toEqual(expected);
@@ -151,14 +152,13 @@ describe('curryRight', () => {
       return Array.from(arguments);
     }
     const array = [fn, fn, fn];
-    // TODO test object like this
-    // const object = { 'a': fn, 'b': fn, 'c': fn };
+    const object = { a: fn, b: fn, c: fn };
 
-    [array].forEach(collection => {
-      const curries = collection.map(curryRight),
-        expected = collection.map(() => ['a', 'b']);
+    [array, object].forEach(collection => {
+      const curries = map(collection, curryRight as (...args: any[]) => any),
+        expected = map(collection, () => ['a', 'b']);
 
-      const actual = curries.map(curried => curried('b')('a'));
+      const actual = map(curries, (curried: any) => curried('b')('a'));
 
       expect(actual).toEqual(expected);
     });

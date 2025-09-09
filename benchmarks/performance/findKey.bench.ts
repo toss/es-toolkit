@@ -1,6 +1,11 @@
 import { bench, describe } from 'vitest';
-import { findKey as findKeyToolkit } from 'es-toolkit';
-import { findKey as findKeyLodash } from 'lodash';
+import { findKey as findKeyToolkit_ } from 'es-toolkit';
+import { findKey as findKeyCompatToolkit_ } from 'es-toolkit/compat';
+import { findKey as findKeyLodash_ } from 'lodash';
+
+const findKeyToolkit = findKeyToolkit_;
+const findKeyCompatToolkit = findKeyCompatToolkit_;
+const findKeyLodash = findKeyLodash_;
 
 describe('findKey', () => {
   const users = {
@@ -16,6 +21,10 @@ describe('findKey', () => {
   bench('lodash/findKey', () => {
     findKeyLodash(users, o => o.age < 40);
   });
+
+  bench('es-toolkit/compat/findKey', () => {
+    findKeyCompatToolkit(users, o => o.age < 40);
+  });
 });
 
 describe('findKey/largeObject', () => {
@@ -30,5 +39,9 @@ describe('findKey/largeObject', () => {
 
   bench('lodash/findKey', () => {
     findKeyLodash(largeUsers, o => o.age === 7000);
+  });
+
+  bench('es-toolkit/compat/findKey', () => {
+    findKeyCompatToolkit(largeUsers, o => o.age === 7000);
   });
 });

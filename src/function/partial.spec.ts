@@ -14,7 +14,7 @@ describe('partial', () => {
   });
 
   it('partial creates a function that can be invoked with additional arguments', () => {
-    const fn = function (a?: string, b?: string) {
+    const fn = function (a: string, b: string) {
       return [a, b];
     };
     const par = partial(fn, 'a');
@@ -40,7 +40,7 @@ describe('partial', () => {
       // eslint-disable-next-line prefer-rest-params
       return Array.from(arguments);
     };
-    const par = partial(fn, placeholder, 'b', placeholder);
+    const par = partial(fn, placeholder, 'b', placeholder) as any;
     expect(par('a', 'c')).toEqual(['a', 'b', 'c']);
     expect(par('a')).toEqual(['a', 'b', undefined]);
     expect(par()).toEqual([undefined, 'b', undefined]);
@@ -64,13 +64,13 @@ describe('partial', () => {
     const par = partial(Foo);
 
     // @ts-expect-error - par is a constructor
-    expect(new par() instanceof Foo);
+    expect(new par() instanceof Foo).toBe(true);
     // @ts-expect-error - par is a constructor
     expect(new par(true)).toBe(object);
   });
 
   it('partial clones metadata for created functions', () => {
-    function greet(greeting?: string, name?: string) {
+    function greet(greeting: string, name: string) {
       return `${greeting} ${name}`;
     }
 

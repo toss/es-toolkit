@@ -11,16 +11,16 @@
 ## 인터페이스
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
+function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
 ```
 
 ### 파라미터
 
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): 프로퍼티를 가져올 경로.
+- `path` (`PropertyKey | PropertyKey[]`): 프로퍼티를 가져올 경로.
 
 ### 반환 값
 
-(`(object: unknown) => any`): 객체에서 주어진 경로에 있는 값을 가져오는 함수.
+(`(object: T) => R`): 객체에서 주어진 경로에 있는 값을 가져오는 함수.
 
 ## 예시
 

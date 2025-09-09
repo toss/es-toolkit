@@ -14,7 +14,7 @@ function differenceBy<T, U>(firstArr: T[], secondArr: U[], mapper: (value: T | U
 
 - `firstArr` (`T[]`): 차이를 계산할 배열이에요. 이 배열이 주 배열이고, 이 배열의 요소들이 비교되고 필터링돼요.
 - `secondArr` (`U[]`): 첫 번째 배열에서 제외할 요소들을 포함한 배열이에요.
-- `mapper` (`(value: T | U) => unknown`): 두 배열의 요소들을 매핑할 함수에요. 이 함수는 두 배열의 각 요소에 적용되며, 매핑된 값들을 기준으로 비교를 해요.
+- `mapper` (`(value: T | U) => unknown`): 두 배열의 요소들을 매핑할 함수예요. 이 함수는 두 배열의 각 요소에 적용되며, 매핑된 값들을 기준으로 비교를 해요.
 
 ### 반환 값
 

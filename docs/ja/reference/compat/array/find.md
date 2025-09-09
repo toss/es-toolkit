@@ -18,18 +18,27 @@
 ## インターフェース
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
-function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: T[], doesMatch: PropertyKey): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): T | undefined;
 
 function find<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
+  fromIndex?: number
 ): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: Partial<T[keyof T]>,
+  fromIndex?: number
+): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: [keyof T[keyof T], unknown],
+  fromIndex?: number
+): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey, fromIndex?: number): T | undefined;
 ```
 
 ### パラメータ
@@ -67,6 +76,8 @@ lodash と完全に互換性があるように、`find` 関数は `object` を�
     - **部分値** (`Partial<T[keyof T]>`): 一致させるプロパティと値を指定した部分オブジェクト。
     - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
     - **プロパティ名** (`PropertyKey`): 真と評価される値を持っているか確認するプロパティ名。
+
+- `fromIndex` (`number`): 検索を開始するインデックス。デフォルトは `0`。
 
 ### 戻り値
 

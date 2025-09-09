@@ -16,7 +16,7 @@
 ## 签名
 
 ```typescript
-function isArrayLike(value: unknown): value is ArrayLike<unknown>;
+function isArrayLike(value?: unknown): value is ArrayLike<unknown>;
 ```
 
 ### 参数

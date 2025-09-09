@@ -82,7 +82,7 @@ function get<T, P extends string, D = Get<T, P>>(
 ): Exclude<Get<T, P>, null | undefined> | D;
 
 function get(object: unknown, path: PropertyKey, defaultValue?: unknown): any;
-function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
+function get(object: unknown, path: PropertyKey | PropertyKey[], defaultValue?: unknown): any;
 ```
 
 ### 파라미터

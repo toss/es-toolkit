@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { isEqualWith } from './isEqualWith';
 import { args } from '../compat/_internal/args';
 import { arrayViews } from '../compat/_internal/arrayViews';
-import { stubFalse } from '../compat/_internal/stubFalse';
+import { stubFalse } from '../compat/util/stubFalse';
 import { noop } from '../function';
 
 describe('isEqualWith', () => {
@@ -38,9 +38,9 @@ describe('isEqualWith', () => {
       }
     };
 
-    const obj1 = { name: 'John', date: new Date('2023-01-01') };
+    const obj1 = { name: 'John', date: new Date('2023-02-01') };
     const obj2 = { name: 'John', date: new Date('2023-06-15') };
-    const obj3 = { name: 'John', date: new Date('2024-01-01') };
+    const obj3 = { name: 'John', date: new Date('2024-02-01') };
 
     expect(isEqualWith(obj1, obj2, customizer)).toBe(true);
     expect(isEqualWith(obj1, obj3, customizer)).toBe(false);
@@ -667,7 +667,18 @@ describe('isEqualWith', () => {
     expect(isEqualWith(/x/gi, /x/g, noop)).toBe(false);
     expect(isEqualWith(/x/, /y/, noop)).toBe(false);
 
-    expect(isEqualWith(/x/g, { global: true, ignoreCase: false, multiline: false, source: 'x' }, noop)).toBe(false);
+    expect(
+      isEqualWith(
+        /x/g,
+        {
+          global: true,
+          ignoreCase: false,
+          multiline: false,
+          source: 'x',
+        },
+        noop
+      )
+    ).toBe(false);
   });
 
   it('should compare sets when customizer returns undefined', () => {

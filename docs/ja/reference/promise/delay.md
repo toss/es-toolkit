@@ -49,3 +49,30 @@ async function foo() {
   }
 }
 ```
+
+## Lodash 互換性
+
+`es-toolkit/compat`から`delay`をインポートすると、Lodashと完全に互換性があります。
+
+- `delay`は一定時間後に呼び出される関数を受け取ることができます。
+- `delay`はその関数に渡される引数を受け取ることができます。
+- `delay`はタイムアウトをキャンセルできるタイマーIDを返します。
+
+```typescript
+import { delay } from 'es-toolkit/compat';
+
+// 例 1: 遅延した関数の実行
+const timerId = delay(
+  (greeting, recipient) => {
+    console.log(`${greeting}, ${recipient}!`);
+  },
+  1000,
+  'こんにちは',
+  '太郎'
+);
+// => 1秒後に 'こんにちは, 太郎!' がログに出力されます。
+
+// 例 2: 実行前にタイムアウトをクリア
+clearTimeout(timerId);
+// タイムアウトがクリアされたため、関数は実行されません。
+```

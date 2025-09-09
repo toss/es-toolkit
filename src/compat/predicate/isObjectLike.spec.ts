@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isObjectLike as isObjectLikeLodash } from 'lodash';
 import { isObjectLike } from './isObjectLike';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isObjectLike', () => {
   it('should return `true` for objects', () => {
@@ -26,5 +27,9 @@ describe('isObjectLike', () => {
     const actual = values.map(isObjectLike);
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isObjectLike).toEqualTypeOf<typeof isObjectLikeLodash>();
   });
 });

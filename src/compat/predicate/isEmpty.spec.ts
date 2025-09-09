@@ -1,11 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isEmpty as isEmptyLodash } from 'lodash';
 import { isEmpty } from './isEmpty';
 import { args } from '../_internal/args';
 import { empties } from '../_internal/empties';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { slice } from '../_internal/slice';
-import { stubTrue } from '../_internal/stubTrue';
 import { symbol } from '../_internal/symbol';
+import { stubTrue } from '../util/stubTrue';
 
 describe('isEmpty', () => {
   it('should return `true` for empty values', () => {
@@ -108,5 +109,9 @@ describe('isEmpty', () => {
     function Foo() {}
     Foo.prototype = { constructor: Foo, [Symbol('a')]: 1 };
     expect(isEmpty(Foo.prototype)).toBe(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isEmpty).toEqualTypeOf<typeof isEmptyLodash>();
   });
 });

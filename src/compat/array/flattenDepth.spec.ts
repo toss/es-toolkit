@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { flattenDepth as flattenDepthLodash } from 'lodash';
 import { flattenDepth } from './flattenDepth';
 import { args } from '../_internal/args';
 
@@ -73,5 +74,9 @@ describe('flattenDepth', () => {
     expect(flattenDepth({ 0: [1, 2, 3], length: 1 })).toEqual([1, 2, 3]);
     expect(flattenDepth('123')).toEqual(['1', '2', '3']);
     expect(flattenDepth(args)).toEqual([1, 2, 3]);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(flattenDepth).toEqualTypeOf<typeof flattenDepthLodash>();
   });
 });

@@ -1,30 +1,25 @@
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
- * Flattens an array up to the specified depth.
+ * Flattens array up to depth times.
  *
- * @template T - The type of elements within the array.
- * @template D - The depth to which the array should be flattened.
- * @param {ArrayLike<T> | null | undefined} value - The object to flatten.
- * @param {D} depth - The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
- * @returns {Array<FlatArray<T[], D>> | []} A new array that has been flattened.
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} value - The array to flatten.
+ * @param {number} depth - The maximum recursion depth.
+ * @returns {any[]} Returns the new flattened array.
  *
  * @example
- * const arr = flatten([1, [2, 3], [4, [5, 6]]], 1);
- * // Returns: [1, 2, 3, 4, [5, 6]]
- *
- * const arr = flatten([1, [2, 3], [4, [5, 6]]], 2);
- * // Returns: [1, 2, 3, 4, 5, 6]
+ * flatten([1, [2, [3, [4]], 5]], 2);
+ * // => [1, 2, 3, [4], 5]
  */
-export function flatten<T, D extends number = 1>(
-  value: ArrayLike<T> | null | undefined,
-  depth = 1 as D
-): Array<FlatArray<T[], D>> | [] {
-  const result: Array<FlatArray<T[], D>> = [];
+export function flatten<T>(value: ArrayLike<T | readonly T[]> | null | undefined): T[];
+
+export function flatten<T>(value: ArrayLike<T | readonly T[]> | null | undefined, depth = 1): T[] {
+  const result: T[] = [];
   const flooredDepth = Math.floor(depth);
 
   if (!isArrayLike(value)) {
-    return result;
+    return result as T[];
   }
 
   const recursive = (arr: readonly T[], currentDepth: number) => {
@@ -42,12 +37,12 @@ export function flatten<T, D extends number = 1>(
           recursive(Array.from(item as T[]), currentDepth + 1);
         }
       } else {
-        result.push(item as FlatArray<T[], D>);
+        result.push(item);
       }
     }
   };
 
-  recursive(Array.from(value), 0);
+  recursive(Array.from(value) as any, 0);
 
   return result;
 }

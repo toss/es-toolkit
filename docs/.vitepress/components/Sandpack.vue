@@ -32,4 +32,7 @@ const props = defineProps(sandboxProps);
 .sp-preview {
   display: none !important;
 }
+.dark {
+  color-scheme: dark;
+}
 </style>

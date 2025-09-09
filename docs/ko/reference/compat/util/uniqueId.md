@@ -16,7 +16,7 @@ function uniqueId(prefix?: string): string;
 
 ### 파라미터
 
-- `prefix` (`string`, optional): ID 앞에 붙는 접두사 문자열.
+- `prefix` (`string`, 선택 사항): ID 앞에 붙는 접두사 문자열. 디폴트는 `''` 입니다.
 
 ### 반환 값
 

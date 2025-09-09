@@ -8,12 +8,13 @@ Flattens a nested object into a single-level object with dot-separated keys.
 ## Signature
 
 ```typescript
-function flattenObject(object: object): Record<string, any>;
+function flattenObject(object: object, { delimiter = '.' }: FlattenObjectOptions = {}): Record<string, any>;
 ```
 
 ### Parameters
 
 - `object` (`object`): The object to flatten.
+- `delimiter` (`string`): The delimiter to use between nested keys. Defaults to `'.'`.
 
 ### Returns
 
@@ -38,5 +39,16 @@ console.log(flattened);
 //   'a.b.c': 1,
 //   'd.0': 2,
 //   'd.1': 3
+// }
+```
+
+```typescript
+const flattened = flattenObject(nestedObject, { delimiter: '/' });
+console.log(flattened);
+// Output:
+// {
+//   'a/b/c': 1,
+//   'd/0': 2,
+//   'd/1': 3
 // }
 ```

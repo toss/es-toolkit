@@ -11,7 +11,7 @@ Note: This method doesn't set the `length` property of partially applied functio
 ## Signature
 
 ```typescript
-function partial<F extends Function>(func: F, ...partialArgs: any[]): F;
+function partial<F extends Function>(func: F, ...partialArgs: any[]): (...args: any[]) => ReturnType<F>;
 
 namespace partial {
   placeholder: symbol;
@@ -25,7 +25,7 @@ namespace partial {
 
 ### Returns
 
-(`F`): Returns the new partially applied function.
+(`(...args: any[]) => ReturnType<F>`): Returns the new partially applied function.
 
 ## Examples
 

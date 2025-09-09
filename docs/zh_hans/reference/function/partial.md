@@ -11,7 +11,7 @@
 ## 签名
 
 ```typescript
-function partial<F extends Function>(func: F, ...partialArgs: any[]): F;
+function partial<F extends Function>(func: F, ...partialArgs: any[]): (...args: any[]) => ReturnType<F>;
 
 namespace partial {
   placeholder: symbol;
@@ -25,7 +25,7 @@ namespace partial {
 
 ### 返回值
 
-(`F`): 返回新的部分应用函数。
+(`(...args: any[]) => ReturnType<F>`): 返回新的部分应用函数。
 
 ## 示例
 

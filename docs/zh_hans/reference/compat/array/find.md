@@ -19,18 +19,27 @@
 ## 签名
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T | undefined;
-function find<T>(arr: T[], doesMatch: Partial<T>): T | undefined;
-function find<T>(arr: T[], doesMatch: [keyof T, unknown]): T | undefined;
-function find<T>(arr: T[], doesMatch: PropertyKey): T | undefined;
+function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
+function find<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): T | undefined;
 
 function find<T extends Record<string, unknown>>(
   object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown
+  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
+  fromIndex?: number
 ): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: Partial<T[keyof T]>,
+  fromIndex?: number
+): T | undefined;
+function find<T extends Record<string, unknown>>(
+  object: T,
+  doesMatch: [keyof T[keyof T], unknown],
+  fromIndex?: number
+): T | undefined;
+function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey, fromIndex?: number): T | undefined;
 ```
 
 ### 参数
@@ -68,6 +77,8 @@ function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyK
     - **部分值** (`Partial<T[keyof T]>`): 用于与对象的值进行匹配的部分值。
     - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
     - **属性名称** (`PropertyKey`): 要检查其真值的属性名称。
+
+- `fromIndex` (`number`): 搜索开始的位置。默认为 `0`。
 
 ### 返回
 

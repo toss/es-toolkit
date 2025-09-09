@@ -15,33 +15,33 @@
 ## 인터페이스
 
 ```ts
-function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => unknown): T;
 ```
 
 ### 파라미터
 
 - `object` (`T`): 순회할 객체. 배열, 문자열, 또는 객체일 수 있어요.
-- `callback` (`(value: T[keyof T], key: T, object: T)`): 각 반복마다 호출될 함수.
+- `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 각 반복마다 호출될 함수.
   - `value`: 배열에서 처리 중인 현재 요소.
-  - `index`: 배열에서 처리 중인 현재 요소의 프로퍼티 이름.
-  - `object`: `forEach` 함수가 호출된 객체.
+  - `key`: 배열에서 처리 중인 현재 요소의 프로퍼티 이름.
+  - `object`: `each` 함수가 호출된 객체.
 
 ### 반환 값
 
-(`T`): `forEach`로 순회하는 객체.
+(`T`): `each`로 순회하는 객체.
 
 ## 예시
 
 ```ts
-import { forEach } from 'es-toolkit/array';
+import { each } from 'es-toolkit/compat';
 
 const array = [1, 2, 3];
 const result: number[] = [];
 
-// forEach 함수를 사용하여 배열을 순회하며 각 요소를 결과 배열에 추가해요.
-forEach(array, value => {
+// each 함수를 사용하여 배열을 순회하며 각 요소를 결과 배열에 추가해요.
+each(array, value => {
   result.push(value);
 });
 
-console.log(result); // Output: [3, 2, 1];
+console.log(result); // Output: [1, 2, 3];
 ```

@@ -7,7 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
+function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
 ```
 
 ### 파라미터
@@ -17,7 +17,7 @@ function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
 
 ### 반환 값
 
-(`Array<T | undefined>`): 제거된 요소들의 배열.
+(`T[]`): 제거된 요소들의 배열.
 
 ## 예시
 

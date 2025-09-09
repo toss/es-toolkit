@@ -15,7 +15,7 @@
 ## 签名
 
 ```typescript
-function isFinite(value: unknown): value is number;
+function isFinite(value?: unknown): value is number;
 ```
 
 ### 参数

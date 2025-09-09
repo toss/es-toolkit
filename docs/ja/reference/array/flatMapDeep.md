@@ -7,7 +7,7 @@ JavaScriptに組み込まれている[Array#flat](https://developer.mozilla.org/
 ## インターフェース
 
 ```typescript
-function flattenDeep<T>(arr: T[]): Array<ExtractNestedArrayType<T>>;
+function flatMapDeep<T, U>(arr: T[], iteratee: (item: T) => U): Array<ExtractNestedArrayType<U>>;
 ```
 
 ### パラメータ

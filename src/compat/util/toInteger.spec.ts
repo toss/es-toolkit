@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { toInteger as toIntegerLodash } from 'lodash';
 import { toInteger } from './toInteger';
 import { flatMap } from '../../array/flatMap';
 import { identity } from '../../function/identity';
@@ -163,6 +164,8 @@ describe('toInteger', () => {
 
     const expected = values.map(() => 0);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const actual = values.map((value, index) => (index ? toInteger(value) : toInteger()));
 
     expect(actual).toEqual(expected);
@@ -199,6 +202,8 @@ describe('toInteger', () => {
   it(`should convert values to integers`, () => {
     expect(toInteger(-5.6)).toBe(-5);
     expect(toInteger('5.6')).toBe(5);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(toInteger()).toBe(0);
     expect(toInteger(NaN)).toBe(0);
 
@@ -209,5 +214,9 @@ describe('toInteger', () => {
 
   it(`should support \`value\` of \`-0\``, () => {
     expect(1 / toInteger(-0)).toBe(-Infinity);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(toInteger).toEqualTypeOf<typeof toIntegerLodash>();
   });
 });

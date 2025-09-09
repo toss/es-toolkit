@@ -6,18 +6,18 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-숫자를 지정된 자릿수로 내림하는 함수에요.
+숫자를 지정된 자릿수로 내림하는 함수예요.
 
 ## 인터페이스
 
 ```typescript
-function floor(number: number | string, precision: number | string = 0): number;
+function floor(number: number, precision: number = 0): number;
 ```
 
 ### 파라미터
 
-- `number` (`number | string`): 내림할 숫자.
-- `precision` (`number | string`, 선택 사항): 내림할 정확도. 기본값은 0이에요.
+- `number` (`number`): 내림할 숫자.
+- `precision` (`number`, 선택 사항): 내림할 정확도. 기본값은 0이에요.
 
 ### 반환 값
 

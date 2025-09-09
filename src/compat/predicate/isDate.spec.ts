@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isDate as isDateLodash } from 'lodash';
 import { isDate } from './isDate';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isDate', () => {
   it('should return `true` for dates', () => {
@@ -27,5 +28,9 @@ describe('isDate', () => {
     expect(isDate(/x/)).toBe(false);
     expect(isDate('a')).toBe(false);
     expect(isDate(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isDate).toEqualTypeOf<typeof isDateLodash>();
   });
 });

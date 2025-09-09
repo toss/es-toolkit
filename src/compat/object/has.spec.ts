@@ -1,11 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { has as hasLodash } from 'lodash';
 import { has } from './has';
 import { range } from '../../math/range';
 import { args } from '../_internal/args';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubTrue } from '../_internal/stubTrue';
 import { symbol } from '../_internal/symbol';
 import { toArgs } from '../_internal/toArgs';
+import { stubFalse } from '../util/stubFalse';
+import { stubTrue } from '../util/stubTrue';
 
 describe('has', () => {
   it(`should check for own properties`, () => {
@@ -207,5 +208,9 @@ describe('has', () => {
 
   it(`should return \`false\` for empty paths`, () => {
     expect(has({ a: null }, [])).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(has<unknown>).toEqualTypeOf<typeof hasLodash<unknown>>();
   });
 });

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { trimEnd as trimEndLodash } from 'lodash';
 import { trimEnd } from './trimEnd';
 import { whitespace } from '../_internal/whitespace';
 
@@ -28,6 +29,8 @@ describe('trimEnd', () => {
     const expected = `${'-_-'}a-b-c`;
 
     expect(func(string, '_-')).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['-', '_'])).toBe(expected);
   });
 
@@ -77,9 +80,21 @@ describe('trimEnd', () => {
     const string = 'hello world';
     const expected = 'hello wo';
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['rld'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['rl', 'd'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['d', 'lr'])).toBe(expected);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(func(string, ['d', 'l', 'r'])).toBe(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(trimEnd).toEqualTypeOf<typeof trimEndLodash>();
   });
 });

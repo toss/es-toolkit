@@ -1,10 +1,10 @@
-import jsdoc from 'eslint-plugin-jsdoc';
 import noForOfArrayPlugin from 'eslint-plugin-no-for-of-array';
 import prettier from 'eslint-plugin-prettier/recommended';
 import pluginVue from 'eslint-plugin-vue';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import pluginJs from '@eslint/js';
+import vitest from '@vitest/eslint-plugin';
 
 export default [
   {
@@ -39,8 +39,19 @@ export default [
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    files: ['**/*.spec.ts*'],
+    plugins: { vitest },
+    rules: {
+      ...vitest.configs.recommended.rules,
+      'vitest/no-commented-out-tests': 'warn',
+      'vitest/expect-expect': 'warn',
+      'vitest/valid-expect': 'warn',
+      'vitest/no-identical-title': 'warn',
+      'vitest/valid-title': 'warn',
+    },
+  },
   prettier,
-  jsdoc.configs['flat/recommended'],
   ...pluginVue.configs['flat/recommended'],
   {
     files: ['src/**/*.ts'],
@@ -62,6 +73,10 @@ export default [
       'no-for-of-array/no-for-of-array': 'error',
       'no-restricted-syntax': [
         'error',
+        {
+          selector: 'CallExpression[callee.object.name="console"]',
+          message: 'console.log() is not allowed in source code.',
+        },
         {
           selector: 'CallExpression[callee.object.name="Object"][callee.property.name="entries"]',
           message:
@@ -117,9 +132,6 @@ export default [
           ],
         },
       ],
-      'jsdoc/tag-lines': 'off',
-      'jsdoc/no-defaults': 'off',
-      'jsdoc/require-jsdoc': 'off',
       'vue/multi-word-component-names': 'off',
       'prefer-object-has-own': 'error',
     },

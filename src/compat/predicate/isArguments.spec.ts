@@ -1,12 +1,13 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isArguments as isArgumentsLodash } from 'lodash';
 import { isArguments } from './isArguments';
 import { noop } from '../../function';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
 import { strictArgs } from '../_internal/strictArgs';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isArguments', () => {
   it('should return `true` for `arguments` objects', () => {
@@ -31,5 +32,9 @@ describe('isArguments', () => {
     expect(isArguments(/x/)).toBe(false);
     expect(isArguments('a')).toBe(false);
     expect(isArguments(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isArguments).toEqualTypeOf<typeof isArgumentsLodash>();
   });
 });

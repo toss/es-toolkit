@@ -18,11 +18,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const basePath = path.resolve(__dirname, '..', '..', 'src');
 
-const openAiApiKey = Deno.env.get('OPENAI_API_KEY')!;
-
-if (openAiApiKey == null) {
-  throw new Error(`OPENAI_API_KEY is not provided.`);
-}
+const openAiApiKey = Deno.env.get('OPENAI_API_KEY');
 
 type DocumentationItems = Array<{ docPath: string; item: DocumentationItem }>;
 type DocumentationPaths = Record<Locale, string>;
@@ -66,27 +62,32 @@ async function renderDocs(docsPaths: DocumentationPaths, items: DocumentationIte
 
     if (!(await exists(koPath))) {
       console.log(`> Generating Korean docs for for: ${docPath}`);
-      const translated = await translate(item, 'ko', { openAiApiKey });
+
+      const koreanItem = openAiApiKey != null ? await translate(item, 'ko', { openAiApiKey }) : item;
       await Deno.mkdir(path.dirname(koPath), { recursive: true });
-      await Deno.writeTextFile(koPath, renderKO(translated, options));
+      await Deno.writeTextFile(koPath, renderKO(koreanItem, options));
     }
 
     const jaPath = path.join(docsPaths.ja, docPath);
 
     if (!(await exists(jaPath))) {
       console.log(`> Generating Japanese docs for for: ${docPath}`);
-      const translated = await translate(item, 'ja', { openAiApiKey });
+
+      const japaneseItem = openAiApiKey != null ? await translate(item, 'ja', { openAiApiKey }) : item;
+
       await Deno.mkdir(path.dirname(jaPath), { recursive: true });
-      await Deno.writeTextFile(jaPath, renderJA(translated, options));
+      await Deno.writeTextFile(jaPath, renderJA(japaneseItem, options));
     }
 
     const zhPath = path.join(docsPaths.zh_hans, docPath);
 
     if (!(await exists(zhPath))) {
       console.log(`> Generating Simplified Chinese docs for for: ${docPath}`);
-      const translated = await translate(item, 'zh_hans', { openAiApiKey });
+
+      const zhItem = openAiApiKey != null ? await translate(item, 'zh_hans', { openAiApiKey }) : item;
+
       await Deno.mkdir(path.dirname(zhPath), { recursive: true });
-      await Deno.writeTextFile(zhPath, renderZH(translated, options));
+      await Deno.writeTextFile(zhPath, renderZH(zhItem, options));
     }
   }
 }

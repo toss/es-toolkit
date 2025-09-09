@@ -7,7 +7,7 @@
 ## インターフェース
 
 ```typescript
-function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
+function at<T>(arr: T[], indices: number[]): T[];
 ```
 
 ### パラメータ
@@ -17,7 +17,7 @@ function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
 
 ### 戻り値
 
-(`Array<T | undefined>`): 指定されたインデックスの位置にある要素を含む新しい配列。
+(`T[]`): 指定されたインデックスの位置にある要素を含む新しい配列。
 
 ## 例
 

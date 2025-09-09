@@ -1,6 +1,6 @@
 import { after } from '../../function/after.ts';
-import { noop } from '../../function/noop.ts';
 import { isEqualWith as isEqualWithToolkit } from '../../predicate/isEqualWith.ts';
+import type { IsEqualCustomizer } from '../_internal/IsEqualCustomizer.ts';
 
 /**
  * Compares two values for equality using a custom comparison function.
@@ -37,20 +37,9 @@ import { isEqualWith as isEqualWithToolkit } from '../../predicate/isEqualWith.t
  * isEqualWith({ a: 'Hello' }, { a: 'hello' }, customizer); // true
  * isEqualWith([1, 2, 3], [1, 2, 3], customizer); // true
  */
-export function isEqualWith(
-  a: any,
-  b: any,
-  areValuesEqual: (
-    a: any,
-    b: any,
-    property?: PropertyKey,
-    aParent?: any,
-    bParent?: any,
-    stack?: Map<any, any>
-  ) => boolean | void = noop
-): boolean {
+export function isEqualWith(a: any, b: any, areValuesEqual?: IsEqualCustomizer): boolean {
   if (typeof areValuesEqual !== 'function') {
-    areValuesEqual = noop;
+    areValuesEqual = () => undefined;
   }
 
   return isEqualWithToolkit(a, b, (...args): boolean | void => {

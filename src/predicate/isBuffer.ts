@@ -23,6 +23,7 @@ declare let Buffer:
  * console.log(isBuffer(notBuffer)); // false
  */
 export function isBuffer(x: unknown): boolean {
+  // eslint-disable-next-line
   // @ts-ignore
   return typeof Buffer !== 'undefined' && Buffer.isBuffer(x);
 }

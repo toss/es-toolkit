@@ -14,7 +14,7 @@
 ## 签名
 
 ```typescript
-function endsWith(str: string, target: string, position: number = 0): string;
+function endsWith(str?: string, target?: string, position?: number): boolean;
 ```
 
 ### 参数
@@ -32,8 +32,8 @@ function endsWith(str: string, target: string, position: number = 0): string;
 ```typescript
 import { endsWith } from 'es-toolkit/compat';
 
-endsWith('fooBar', 'foo'); // 返回 true
-endsWith('fooBar', 'Bar'); // 返回 false
+endsWith('fooBar', 'foo'); // 返回 false
+endsWith('fooBar', 'Bar'); // 返回 true
 endsWith('fooBar', 'abcdef'); // 返回 false
-endsWith('fooBar', 'Bar', 3); // 返回 true
+endsWith('fooBar', 'foo', 3); // 返回 true
 ```

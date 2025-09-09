@@ -51,3 +51,30 @@ async function foo() {
   }
 }
 ```
+
+## Lodash 兼容性
+
+从 `es-toolkit/compat` 导入 `delay` 以获得与 Lodash 的完全兼容性。
+
+- `delay` 接受一个在延迟后调用的函数。
+- `delay` 接受将传递给该函数的参数。
+- `delay` 返回一个可以用来清除超时的定时器 ID。
+
+```typescript
+import { delay } from 'es-toolkit/compat';
+
+// 示例 1: 延迟函数执行
+const timerId = delay(
+  (greeting, recipient) => {
+    console.log(`${greeting}, ${recipient}!`);
+  },
+  1000,
+  '你好',
+  '小明'
+);
+// => 1秒后将日志打印 '你好, 小明!'
+
+// 示例 2: 在执行之前清除超时
+clearTimeout(timerId);
+// 因为超时已清除，函数不会被执行。
+```

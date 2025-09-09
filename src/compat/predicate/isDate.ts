@@ -3,7 +3,7 @@ import { isDate as isDateToolkit } from '../../predicate/isDate.ts';
 /**
  * Checks if `value` is a Date object.
  *
- * @param {unknown} value The value to check.
+ * @param {any} value The value to check.
  * @returns {value is Date} Returns `true` if `value` is a Date object, `false` otherwise.
  *
  * @example
@@ -13,6 +13,6 @@ import { isDate as isDateToolkit } from '../../predicate/isDate.ts';
  * console.log(isDate(value1)); // true
  * console.log(isDate(value2)); // false
  */
-export function isDate(value?: unknown): value is Date {
+export function isDate(value?: any): value is Date {
   return isDateToolkit(value);
 }

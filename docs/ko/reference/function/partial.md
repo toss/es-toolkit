@@ -11,7 +11,7 @@ Symbol 타입의 `partial.placeholder`를 쓰면, 미리 제공한 인자가 사
 ## 인터페이스
 
 ```typescript
-function partial<F extends (...args: any[]) => any>(func: F, ...partialArgs: any[]): F;
+function partial<F extends (...args: any[]) => any>(func: F, ...partialArgs: any[]): (...args: any[]) => ReturnType<F>;
 
 namespace partial {
   placeholder: symbol;
@@ -25,7 +25,7 @@ namespace partial {
 
 ### 반환 값
 
-(`F`): 미리 인자가 제공된 함수.
+(`(...args: any[]) => ReturnType<F>`): 미리 인자가 제공된 함수.
 
 ## 예시
 

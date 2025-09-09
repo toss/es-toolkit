@@ -1,3 +1,0 @@
-export function stubArray() {
-  return [];
-}

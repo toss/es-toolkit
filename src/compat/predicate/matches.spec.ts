@@ -1,8 +1,9 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { matches as matchesLodash } from 'lodash';
 import { matches } from './matches';
 import { noop } from '../../function/noop';
 import { empties } from '../_internal/empties';
-import { stubTrue } from '../_internal/stubTrue';
+import { stubTrue } from '../util/stubTrue';
 
 describe('matches', () => {
   it(`should perform a deep comparison between \`source\` and \`object\``, () => {
@@ -247,7 +248,13 @@ describe('matches', () => {
 
     expect(actual2).toEqual(expected2);
 
-    const objects3 = [{ a: { b: 2 } }, { a: { b: 2, c: 3 } }, { a: { b: 2, c: undefined } }];
+    const objects3 = [
+      { a: { b: 2 } },
+      { a: { b: 2, c: 3 } },
+      {
+        a: { b: 2, c: undefined },
+      },
+    ];
     const actual3 = objects3.map(matches({ a: { c: undefined } }));
     const expected3 = [false, false, true];
 
@@ -377,5 +384,9 @@ describe('matches', () => {
       expect(isMatch(object)).toBe(true);
       expect(isMatch(source)).toBe(false);
     });
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(matches).toEqualTypeOf<typeof matchesLodash>();
   });
 });

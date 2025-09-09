@@ -1,9 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { cloneDeep as cloneDeepLodash } from 'lodash';
 import { cloneDeep } from './cloneDeep';
 import { range } from '../../math/range';
 import { args } from '../_internal/args';
 import { LARGE_ARRAY_SIZE } from '../_internal/LARGE_ARRAY_SIZE';
-import { stubTrue } from '../_internal/stubTrue';
+import { stubTrue } from '../util/stubTrue';
 
 describe('cloneDeep', () => {
   it('should deep clone objects with circular references', () => {
@@ -263,5 +264,9 @@ describe('cloneDeep', () => {
     });
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(cloneDeep).toEqualTypeOf<typeof cloneDeepLodash>();
   });
 });

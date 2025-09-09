@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isArrayLike as isArrayLikeLodash } from 'lodash';
 import { isArrayLike } from './isArrayLike';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
@@ -34,5 +35,9 @@ describe('isArrayLike', () => {
     expect(isArrayLike(1)).toBe(false);
     expect(isArrayLike(/x/)).toBe(false);
     expect(isArrayLike(symbol)).toBe(false);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isArrayLike).toEqualTypeOf<typeof isArrayLikeLodash>();
   });
 });

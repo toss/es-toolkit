@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-function toInteger(value?: unknown): number;
+function toInteger(value: any): number;
 ```
 
 ### パラメータ
 
-- `value` (`unknown`): 変換する値。
+- `value` (`any`): 変換する値。
 
 ### 戻り値
 

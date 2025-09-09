@@ -1,11 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isSet as isSetLodash } from 'lodash';
 import { isSet } from './isSet';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
 import { weakSet } from '../_internal/weakSet';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isSet', () => {
   it('should return `true` for sets', () => {
@@ -39,5 +40,9 @@ describe('isSet', () => {
     const actual = falsey.map(value => isSet({ constructor: value }));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isSet).toEqualTypeOf<typeof isSetLodash>();
   });
 });

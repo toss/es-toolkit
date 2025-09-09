@@ -1,0 +1,55 @@
+---
+description: 
+globs: **/*.md
+alwaysApply: false
+---
+---
+description: Reference Documentation Guidelines
+globs: **/*.md
+---
+
+# Reference Documentation
+
+- Maintain consistent structure for functions, parameters, return values, and examples
+- Ensure accuracy and completeness
+  - All information must be accurate and complete
+  - Avoid technical errors and ambiguous descriptions
+- Follow the template.
+- Optimize for search and navigation
+  - Use table of contents, keywords, and anchor links
+- Include example code
+  - Provide clear examples with code snippets
+
+
+## Template
+
+```md
+# [Reference Title]
+
+## Overview
+[Explain what this element is, when to use it, and its value.]
+
+## Properties and Options
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| prop1 | string | "default" | This property... |
+
+## Signature
+
+[// Example code]
+
+## Return Value
+
+[Explain what this function/API returns.]
+
+## Usage Examples
+
+[Provide concrete examples with code snippets.]
+```
+
+## Checklist
+
+- [ ] Is the structure searchable and navigable?
+- [ ] Is the information accurate and complete?
+- [ ] Does it follow consistent structure and format?
+- [ ] Does it include practical code examples? 

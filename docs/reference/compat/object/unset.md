@@ -11,12 +11,12 @@ Removes the property at the given path of the object.
 ## Signature
 
 ```typescript
-function unset(obj: unknown, path: PropertyKey | PropertyKey[]): boolean;
+function unset(obj: any, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### Parameters
 
-- `obj` (`unknown`): The object to modify.
+- `obj` (`any`): The object to modify.
 - `path` (`PropertyKey | PropertyKey[]`): The path of the property to unset.
 
 ### Returns

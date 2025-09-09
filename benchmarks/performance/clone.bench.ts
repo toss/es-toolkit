@@ -1,8 +1,10 @@
 import { bench, describe } from 'vitest';
 import { clone as cloneToolkit_ } from 'es-toolkit';
+import { clone as cloneToolkitCompat_ } from 'es-toolkit/compat';
 import { clone as cloneLodash_ } from 'lodash';
 
 const cloneToolkit = cloneToolkit_;
+const cloneToolkitCompat = cloneToolkitCompat_;
 const cloneLodash = cloneLodash_;
 
 const obj = {
@@ -20,6 +22,11 @@ describe('clone', () => {
   bench('es-toolkit/clone', () => {
     cloneToolkit(obj);
   });
+
+  bench('es-toolkit/clone/compat', () => {
+    cloneToolkitCompat(obj);
+  });
+
   bench('lodash/clone', () => {
     cloneLodash(obj);
   });

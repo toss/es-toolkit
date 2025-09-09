@@ -1,0 +1,55 @@
+# assert
+
+断言给定条件为真。如果条件为假，则抛出提供的错误信息。
+
+这个函数是 [invariant](./invariant.md) 函数的别名。
+
+## 签名
+
+```typescript
+function assert(condition: unknown, message: string): asserts condition;
+function assert(condition: unknown, error: Error): asserts condition;
+```
+
+### 参数
+
+- `condition` (`unknown`): 要评估的条件。
+- `message` (`string` | `Error`): 如果条件为假，则抛出的错误信息。
+
+### 返回值
+
+(`void`): 如果条件为真则返回void。
+
+### 抛出异常
+
+如果条件为假，则抛出带有指定消息的错误。
+
+## 示例
+
+```typescript
+// 这个调用不会抛出错误
+assert(true, 'This should not throw');
+
+// 这个调用会抛出错误，并抛出带有消息 'This should throw' 的错误
+assert(false, 'This should throw');
+
+// 使用 assert 检查条件
+assert(condition, 'Expected condition is false');
+
+// 确保值不是 null 或 undefined
+assert(value !== null && value !== undefined, 'Value should not be null or undefined');
+
+// 使用 assert 检查数字是否为正
+assert(number > 0, 'Number must be positive');
+
+// 使用 assert 抛出错误
+assert(false, new Error('This should throw'));
+
+// 使用 assert 抛出自定义错误
+class CustomError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+assert(false, new CustomError('This should throw'));
+```

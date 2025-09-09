@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { execa } from 'execa';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -8,10 +8,8 @@ import { createTmpDir } from './utils/createTmpDir';
 import { parseTar } from './utils/parseTar';
 import { streamToBuffer } from './utils/streamToBuffer';
 
-async function getPackageJsonOfTarball() {
-  const tarball = await createPackageTarball();
-
-  for await (const entry of parseTar(await fs.promises.readFile(tarball.path))) {
+async function getPackageJsonOfTarball(tarballPath: string) {
+  for await (const entry of parseTar(await fs.promises.readFile(tarballPath))) {
     if (entry.path === 'package/package.json') {
       const json = (await streamToBuffer(entry as unknown as Readable)).toString('utf-8');
 
@@ -25,6 +23,9 @@ async function getPackageJsonOfTarball() {
 const ENTRYPOINTS = [
   '.',
   './array',
+  './compat',
+  './compat/*',
+  './error',
   './function',
   './math',
   './object',
@@ -32,25 +33,29 @@ const ENTRYPOINTS = [
   './promise',
   './string',
   './util',
-  './compat',
 ];
 
 describe(`es-toolkit's package tarball`, () => {
+  let tarball: { path: string };
+
+  beforeAll(async () => {
+    tarball = await createPackageTarball();
+  }, 300000);
+
   it(
     'configures all entrypoints correctly',
     async () => {
-      const packageJson = await getPackageJsonOfTarball();
+      const packageJson = await getPackageJsonOfTarball(tarball.path);
       const entrypoints = Object.keys(packageJson.exports);
 
       expect(entrypoints).toEqual([...ENTRYPOINTS, './package.json']);
     },
-    { timeout: 120_000 }
+    { timeout: 240_000 }
   );
 
   it(
     'exports identical functions in CJS and ESM',
     async () => {
-      const tarball = await createPackageTarball();
       const tmpdir = await createTmpDir();
 
       const packageJson = {
@@ -63,6 +68,10 @@ describe(`es-toolkit's package tarball`, () => {
       await execa('npm', ['install'], { cwd: tmpdir });
 
       for (const entrypoint of ENTRYPOINTS) {
+        if (entrypoint.includes('*')) {
+          continue;
+        }
+
         const cjsScript = `
 const toolkit = require("${path.join('es-toolkit', entrypoint)}");
 
@@ -96,6 +105,6 @@ console.log(exported);
         expect(cjsResult.stdout).toEqual(esmResult.stdout);
       }
     },
-    { timeout: 60_000 }
+    { timeout: 120_000 }
   );
 });

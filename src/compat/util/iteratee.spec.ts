@@ -1,7 +1,8 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { iteratee as iterateeLodash } from 'lodash';
 import { iteratee } from './iteratee';
+import { stubFalse } from './stubFalse';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { partial, partialRight } from '../index';
 import * as esToolkit from '../index';
 
@@ -26,6 +27,8 @@ describe('iteratee', () => {
     const expected = values.map(esToolkit.constant(object));
 
     const actual = values.map((value, index) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       const identity = index ? iteratee(value) : iteratee();
       return identity(object);
     });
@@ -133,13 +136,13 @@ describe('iteratee', () => {
     const expected = [1, 2, 3];
     const object = { a: 1, iteratee: iteratee(partial(fn, 2)) };
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(object.iteratee(3)).toEqual(expected);
 
     object.iteratee = iteratee(partialRight(fn, 3));
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+    // eslint-disable-next-line
+    // @ts-ignore
     expect(object.iteratee(2)).toEqual(expected);
   });
 
@@ -163,5 +166,9 @@ describe('iteratee', () => {
     const actual = iteratees.map(iteratee => iteratee());
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(iteratee).toEqualTypeOf<typeof iterateeLodash>();
   });
 });

@@ -7,9 +7,7 @@
 ## 인터페이스
 
 ```typescript
-function invert<K extends string | number | symbol, V extends string | number | symbol>(
-  obj: Record<K, V>
-): { [key in V]: K };
+function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record<K, V>): Record<V, K>;
 ```
 
 ### 파라미터
@@ -18,7 +16,7 @@ function invert<K extends string | number | symbol, V extends string | number | 
 
 ### 반환 값
 
-(`{ [key in V]: K }`): 키와 값이 뒤집힌 새로운 객체예요.
+(`Record<V, K>`): 키와 값이 뒤집힌 새로운 객체예요.
 
 ## 예시
 

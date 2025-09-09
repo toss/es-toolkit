@@ -1,9 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { trim as trimLodash } from 'lodash';
 import { trim } from './trim';
 import { whitespace } from '../_internal/whitespace';
 
 describe('trim', () => {
-  const func = trim;
+  const func = trim as any;
 
   it(`\`trim\` should remove trailing whitespace`, () => {
     const string = `${whitespace}a b c${whitespace}`;
@@ -81,5 +82,9 @@ describe('trim', () => {
     expect(func(string, ['rl', 'd', 'he', 'l'])).toBe(expected);
     expect(func(string, ['he', 'd', 'lr'])).toBe(expected);
     expect(func(string, ['d', 'l', 'r', 'e', 'h'])).toBe(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(trim).toEqualTypeOf<typeof trimLodash>();
   });
 });

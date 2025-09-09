@@ -18,6 +18,6 @@ import { isSet as isSetToolkit } from '../../predicate/isSet.ts';
  * console.log(isSet(value3)); // false
  */
 
-export function isSet(value?: unknown): value is Set<any> {
+export function isSet(value?: any): value is Set<any> {
   return isSetToolkit(value);
 }

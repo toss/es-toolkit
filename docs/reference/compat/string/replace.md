@@ -12,15 +12,16 @@ Replaces the matched pattern with the replacement string.
 
 ```typescript
 function replace(
-  target: string,
-  pattern: string | RegExp,
-  replacement: string | ((substring: string, ...args: any[]) => string)
+  string: string,
+  pattern: RegExp | string,
+  replacement: ((match: string, ...args: any[]) => string) | string
 ): string;
+function replace(pattern: RegExp | string, replacement: ((match: string, ...args: any[]) => string) | string): string;
 ```
 
 ### Parameters
 
-- `target` (`string`): The target string.
+- `string` (`string`): The target string.
 - `pattern` (`string | RegExp`): The pattern to match.
 - `replacement` (`string | ((substring: string, ...args: any[]) => string)`): The replacement string or a function that returns the replacement string.
 

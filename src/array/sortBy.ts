@@ -18,8 +18,8 @@ import { orderBy } from './orderBy.ts';
  * const users = [
  *  { user: 'foo', age: 24 },
  *  { user: 'bar', age: 7 },
- *  { user: 'foo ', age: 8 },
- *  { user: 'bar ', age: 29 },
+ *  { user: 'foo', age: 8 },
+ *  { user: 'bar', age: 29 },
  * ];
  *
  * sortBy(users, ['user', 'age']);

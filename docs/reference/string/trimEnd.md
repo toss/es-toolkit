@@ -2,6 +2,8 @@
 
 Removes trailing whitespace or specified characters from a string.
 
+If `chars` is a string, it should be a single character. To remove multiple characters from the start of the string, provide an array of single characters instead.
+
 ## Signature
 
 ```typescript

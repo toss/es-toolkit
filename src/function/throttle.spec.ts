@@ -19,7 +19,7 @@ describe('throttle', () => {
     const throttleMs = 500;
     const throttledFunc = throttle(func, throttleMs);
 
-    throttledFunc(); // should be excuted
+    throttledFunc(); // should be executed
     expect(func).toHaveBeenCalledTimes(1);
 
     await delay(throttleMs / 2);
@@ -31,7 +31,7 @@ describe('throttle', () => {
     await delay(throttleMs / 2 + 1);
     expect(func).toHaveBeenCalledTimes(1);
 
-    throttledFunc(); // should be excuted
+    throttledFunc(); // should be executed
     expect(func).toHaveBeenCalledTimes(2);
 
     await delay(throttleMs / 2 - 1);
@@ -116,5 +116,32 @@ describe('throttle', () => {
 
     await delay(throttleMs + 1);
     expect(func).toBeCalledTimes(1);
+  });
+
+  it('should execute on leading and trailing when called multiple times with leading and trailing', async () => {
+    const callback = vi.fn();
+    const throttleMs = 50;
+    const throttled = throttle(callback, throttleMs, { edges: ['leading', 'trailing'] });
+
+    throttled();
+
+    await delay(throttleMs + 1);
+
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    throttled();
+
+    await delay(throttleMs + 1);
+
+    expect(callback).toHaveBeenCalledTimes(2);
+
+    throttled();
+    throttled();
+
+    expect(callback).toHaveBeenCalledTimes(3);
+
+    await delay(throttleMs + 1);
+
+    expect(callback).toHaveBeenCalledTimes(4);
   });
 });

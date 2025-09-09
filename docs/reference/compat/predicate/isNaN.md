@@ -13,7 +13,7 @@ This function can also serve as a type predicate in TypeScript, narrowing the ty
 ## Signature
 
 ```typescript
-function isNaN(value: unknown): value is typeof NaN;
+function isNaN(value?: unknown): value is typeof NaN;
 ```
 
 ### Parameters

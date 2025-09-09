@@ -45,4 +45,20 @@ describe('trimEnd', () => {
   it('should trim the string without giving the second parameter, which defaults to whitespace', () => {
     expect(trimEnd('  hello world  ')).toEqual('  hello world');
   });
+
+  it('should remove trailing characters when chars is an array', () => {
+    expect(trimEnd('hello---', ['-', 'o'])).toEqual('hell');
+  });
+
+  it('should remove trailing characters from the string when multiple characters are provided in an array', () => {
+    expect(trimEnd('123000', ['0', '3'])).toEqual('12');
+  });
+
+  it('should return the string unchanged when none of the trailing characters in the array match', () => {
+    expect(trimEnd('hello', ['x', 'y', 'z'])).toEqual('hello');
+  });
+
+  it('should handle cases where multiple trailing characters in the array need removal', () => {
+    expect(trimEnd('abcabcabc', ['c', 'b'])).toEqual('abcabca');
+  });
 });

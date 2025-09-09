@@ -10,11 +10,11 @@ function capitalize<T extends string>(str: T): Capitalize<T>;
 
 ### Parameters
 
-`str` (`T`): The string to be converted to uppercase.
+`str` (`T`): The string to be transformed.
 
 ### Returns
 
-(`Capitalize<string>`): The capitalized string.
+(`Capitalize<T>`): The string with the first character capitalized and the rest in lowercase.
 
 ## Examples
 

@@ -7,8 +7,8 @@
 ## インターフェース
 
 ```typescript
-export function head<T>(arr: [T, ...T[]]): T;
-export function head<T>(arr: T[]): T | undefined;
+function head<T>(arr: [T, ...T[]]): T;
+function head<T>(arr: T[]): T | undefined;
 ```
 
 ### パラメータ

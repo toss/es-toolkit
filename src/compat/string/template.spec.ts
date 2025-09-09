@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { template as templateLodash } from 'lodash';
 import { template, templateSettings } from './template';
 import { numberTag } from '../_internal/numberTag';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubString } from '../_internal/stubString';
-import { stubTrue } from '../_internal/stubTrue';
 import * as esToolkit from '../index';
+import { stubFalse } from '../util/stubFalse';
+import { stubString } from '../util/stubString';
+import { stubTrue } from '../util/stubTrue';
 
 describe('template', () => {
   it('should escape values in "escape" delimiters', () => {
@@ -408,6 +409,8 @@ describe('template', () => {
     const data = { a: 1 };
 
     expect('a' in templateSettings).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     template('', {}, data);
     expect('a' in templateSettings).toBe(false);
   });
@@ -467,5 +470,9 @@ describe('template', () => {
     const actual = compiles.map(compiled => compiled(data));
 
     expect(actual).toEqual(['one', '&quot;two&quot;', 'three']);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(template).toEqualTypeOf<typeof templateLodash>();
   });
 });

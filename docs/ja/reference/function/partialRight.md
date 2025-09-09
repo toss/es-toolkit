@@ -11,7 +11,7 @@ Symbol型の`partialRight.placeholder`を使用すると、事前に提供した
 ## インターフェース
 
 ```typescript
-function partialRight<F extends (...args: any[] => any)>(func: F, ...partialArgs: any[]): F;
+function partialRight<F extends (...args: any[] => any)>(func: F, ...partialArgs: any[]): (...args: any[]) => ReturnType<F>;
 
 namespace partialRight {
   placeholder: symbol;
@@ -25,7 +25,7 @@ namespace partialRight {
 
 ### 戻り値
 
-(`F`): 事前に引数が提供された関数。
+(`(...args: any[]) => ReturnType<F>`): 事前に引数が提供された関数。
 
 ## 例
 

@@ -24,11 +24,11 @@ function curryRight(func: (...args: any[]) => any): (...args: any[]) => any;
 
 ### 파라미터
 
-- `func` (`(...args: any[]) => any`): 커리할 함수에요.
+- `func` (`(...args: any[]) => any`): 커리할 함수예요.
 
 ### 반환 값
 
-(`(...args: any[]) => any`): 커리된 함수에요.
+(`(...args: any[]) => any`): 커리된 함수예요.
 
 ## 예시
 

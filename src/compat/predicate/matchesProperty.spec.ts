@@ -1,11 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { matchesProperty as matchesPropertyLodash } from 'lodash';
 import { matchesProperty } from './matchesProperty';
 import { noop } from '../../function/noop';
 import { range } from '../../math/range';
 import { numberProto } from '../_internal/numberProto';
-import { stubFalse } from '../_internal/stubFalse';
-import { stubTrue } from '../_internal/stubTrue';
 import { cloneDeep } from '../object/cloneDeep';
+import { stubFalse } from '../util/stubFalse';
+import { stubTrue } from '../util/stubTrue';
 
 describe('matchesProperty', () => {
   it('should create a function that performs a deep comparison between a property value and `srcValue`', () => {
@@ -108,6 +109,8 @@ describe('matchesProperty', () => {
 
       const actual = values.map((value, index) => {
         try {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           return index ? matches(value) : matches();
           // eslint-disable-next-line
         } catch (e) {}
@@ -127,6 +130,8 @@ describe('matchesProperty', () => {
 
       const actual = values.map((value, index) => {
         try {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           return index ? matches(value) : matches();
           // eslint-disable-next-line
         } catch (e) {}
@@ -337,7 +342,13 @@ describe('matchesProperty', () => {
 
     expect(actual).toEqual(expected);
 
-    objects = [{ a: { a: 1 } }, { a: { a: 1, b: 1 } }, { a: { a: 1, b: undefined } }];
+    objects = [
+      { a: { a: 1 } },
+      { a: { a: 1, b: 1 } },
+      {
+        a: { a: 1, b: undefined },
+      },
+    ];
     actual = objects.map(matchesProperty('a', { b: undefined }));
 
     expect(actual).toEqual(expected);
@@ -419,5 +430,9 @@ describe('matchesProperty', () => {
 
     expect(matches(truthy)).toBe(false);
     expect(matches(falsey)).toBe(true);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(matchesProperty).toEqualTypeOf<typeof matchesPropertyLodash>();
   });
 });

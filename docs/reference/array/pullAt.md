@@ -7,7 +7,7 @@ This function supports negative indices, which count from the end of the array.
 ## Signature
 
 ```typescript
-function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
+function pullAt<T>(arr: T[], indicesToRemove: number[]): T[];
 ```
 
 ### Parameters
@@ -17,7 +17,7 @@ function pullAt<T>(arr: T[], indicesToRemove: number[]): Array<T | undefined>;
 
 ### Returns
 
-(`Array<T | undefined>`): An array containing the elements that were removed from the original array.
+(`T[]`): An array containing the elements that were removed from the original array.
 
 ## Examples
 

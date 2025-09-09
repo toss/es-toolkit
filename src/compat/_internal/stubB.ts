@@ -1,3 +1,3 @@
 export function stubB() {
-  return 'B';
+  return 'b';
 }

@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { mergeWith as mergeWithLodash } from 'lodash';
+import { cloneDeep } from './cloneDeep';
 import { mergeWith } from './mergeWith';
 import { last } from '../../array/last';
 import { identity } from '../../function/identity';
@@ -115,5 +117,46 @@ describe('mergeWith', () => {
     expect(mergeWith(target, null, noop)).toBe(target);
     expect(mergeWith(target, undefined, noop)).toBe(target);
     expect(mergeWith(target, 1, noop)).toBe(target);
+  });
+
+  it('should work with nullish variables', () => {
+    const source = { a: 1 };
+    expect(mergeWith(null, source, noop)).toEqual(source);
+    expect(mergeWith(undefined, source, noop)).toEqual(source);
+    expect(mergeWith(null, undefined, source, noop)).toEqual(source);
+    expect(mergeWith(null, undefined, noop)).toEqual({});
+    expect(mergeWith(undefined, null, noop)).toEqual({});
+  });
+
+  it('should merge array to a null prop', () => {
+    const target = { a: null };
+    const source = { a: ['abc', '123'] };
+    expect(mergeWith(target, source, noop)).toEqual({ a: ['abc', '123'] });
+  });
+
+  it('should return an object when the target is a primitive', () => {
+    expect(mergeWith(1, null, noop)).toEqual(Object(1));
+    expect(mergeWith('a', null, noop)).toEqual(Object('a'));
+    expect(mergeWith(true, null, noop)).toEqual(Object(true));
+    expect(mergeWith(1, { a: 1 }, noop)).toEqual(Object.assign(1, { a: 1 }));
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(mergeWith).toEqualTypeOf<typeof mergeWithLodash>();
+  });
+
+  it('should respect `null` returned from `customizer`', () => {
+    const obj = { prop: null };
+    const source = { prop: { foo: 'bar' } };
+
+    expect(
+      mergeWith(cloneDeep(obj), cloneDeep(source), targetValue => {
+        if (targetValue === null) {
+          return null;
+        }
+
+        return undefined;
+      })
+    ).toEqual({ prop: null });
   });
 });

@@ -23,9 +23,9 @@ function pad(str: string, length: number, chars = ' '): string;
 ## 示例
 
 ```typescript
-pad('abc', 8); // => ' abc '
+pad('abc', 8); // => '  abc   '
 
-pad('abc', 8, '-'); // => '-abc_-_'
+pad('abc', 8, '_-'); // => '_-abc_-_'
 
 pad('abc', 3); // => 'abc'
 ```

@@ -54,7 +54,7 @@ export function rangeRight(start: number, end: number, step: number): number[];
  * // Returns [-3, -2, -1, 0]
  * rangeRight(0, -4, -1);
  */
-export function rangeRight(start: number, end?: number, step: number = 1): number[] {
+export function rangeRight(start: number, end?: number, step = 1): number[] {
   if (end == null) {
     end = start;
     start = 0;

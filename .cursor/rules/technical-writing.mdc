@@ -1,0 +1,65 @@
+---
+description: 
+globs: **/*.md
+alwaysApply: false
+---
+---
+description: Technical writing guidelines for documentation
+globs: **/*.md
+---
+
+# Technical Writing Guidelines
+
+## Understanding Documentation Types
+
+- Classifying and selecting documentation based on goals helps design more effective information and experiences for readers.
+- Decision tree for classification:
+  - New technology, want to understand basics = Learning-focused documentation [learning-focused-docs.mdc](mdc:.cursor/rules/learning-focused-docs.mdc)
+  - Need to solve specific problems = Problem-solving documentation [problem-solving-docs.mdc](mdc:.cursor/rules/problem-solving-docs.mdc)
+  - Need to know specific feature/API usage = Reference documentation [reference-docs.mdc](mdc:.cursor/rules/reference-docs.mdc)
+  - Want deep understanding of concepts = Explanatory documentation [explanatory-docs.mdc](mdc:.cursor/rules/explanatory-docs.mdc)
+- Documentation types can be combined for more effective results.
+- Follow the template for each document type.
+
+## Information Architecture
+
+- Focus on one goal per page
+  - If heading levels exceed 4 levels, consider splitting into multiple documents
+  - For introducing multiple concepts briefly, create an overview page with links to individual documents
+- Provide value first
+  - Place additional information and details later
+  - Clearly communicate what readers can gain or what problems they can solve
+  - Avoid feature-focused explanations; prioritize value to readers
+  - Example: "This API enables real-time log data processing" instead of "This API offers various configuration options"
+- Write effective titles
+  - Titles should concisely convey the core content
+  - Create clear, searchable titles with key keywords
+  - Maintain consistency
+  - Use declarative sentences instead of exclamations or questions
+- Include an overview
+  - Summarize the key content of the document
+  - Clearly communicate the document's purpose to readers
+  - Provide essential information before technical background
+- Make content predictable
+  - Maintain consistent titles, formats, and structures
+  - Follow the same pattern for section headings
+  - Arrange information in logical order
+  - Use terminology consistently
+
+## Writing Effective Content
+
+- Clarify the subject
+  - Don't use tools, technologies, or systems as subjects of actions
+  - Focus on what developers can do after reading the document
+  - Use active voice
+- Include only necessary information
+  - Keep sentences short and concise
+  - Minimize metadiscourse
+- Write specifically
+  - Use verbs instead of nouns
+  - Prefer clear expressions over ambiguous ones
+- Write consistently
+  - Follow official technical terminology
+  - Don't express the same concept in multiple ways
+  - Spell out abbreviations before first use
+

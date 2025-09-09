@@ -30,7 +30,7 @@ function nav(): DefaultTheme.NavItem[] {
   return [
     { text: 'ホーム', link: '/ja' },
     { text: '導入', link: '/ja/intro' },
-    { text: 'リファレンス', link: '/ja/reference/array/chunk' },
+    { text: 'リファレンス', link: '/ja/reference/array/at' },
   ];
 }
 

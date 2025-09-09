@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { camelCase as camelCaseLodash } from 'lodash';
 import { camelCase } from './camelCase';
 
 describe('camelCase', () => {
@@ -41,7 +42,7 @@ describe('camelCase', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should remove constraction apostrophes', () => {
+  it('should remove contraction apostrophes', () => {
     const apostrophes = ["'", '\u2019'];
     const postfixes = ['d', 'll', 'm', 're', 's', 't', 've'];
 
@@ -58,6 +59,12 @@ describe('camelCase', () => {
 
   it('should coerce string to a string', () => {
     expect(camelCase(Object('foo bar'))).toBe('fooBar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(camelCase({ toString: () => 'foo bar' })).toBe('fooBar');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(camelCase).toEqualTypeOf<typeof camelCaseLodash>();
   });
 });

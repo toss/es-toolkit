@@ -16,7 +16,7 @@ function isString(value: unknown): value is string;
 
 ### Returns
 
-- (`x is string`): True if the value is a string, otherwise false.
+(`value is string`): True if the value is a string, otherwise false.
 
 ## Examples
 

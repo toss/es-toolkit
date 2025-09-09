@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { lowerCase as lowerCaseLodash } from 'lodash';
 import { lowerCase } from './lowerCase';
 
 describe('lowerCase', () => {
@@ -40,6 +41,12 @@ describe('lowerCase', () => {
   it(`should coerce \`string\` to a string`, () => {
     const string = 'foo bar';
     expect(lowerCase(Object(string))).toBe('foo bar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(lowerCase({ toString: () => string })).toBe('foo bar');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(lowerCase).toEqualTypeOf<typeof lowerCaseLodash>();
   });
 });

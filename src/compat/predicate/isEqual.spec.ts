@@ -1,9 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { isEqual } from 'es-toolkit/compat';
+import type { isEqual as isEqualLodash } from 'lodash';
 import { noop } from '../../function/noop';
 import { args } from '../_internal/args';
 import { arrayViews } from '../_internal/arrayViews';
-import { stubFalse } from '../_internal/stubFalse';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isEqual', () => {
   const symbol1 = Symbol ? Symbol('a') : true;
@@ -605,7 +606,14 @@ describe('isEqual', () => {
     expect(isEqual(/x/gi, /x/g)).toBe(false);
     expect(isEqual(/x/, /y/)).toBe(false);
 
-    expect(isEqual(/x/g, { global: true, ignoreCase: false, multiline: false, source: 'x' })).toBe(false);
+    expect(
+      isEqual(/x/g, {
+        global: true,
+        ignoreCase: false,
+        multiline: false,
+        source: 'x',
+      })
+    ).toBe(false);
   });
 
   it('should compare sets', () => {
@@ -690,5 +698,9 @@ describe('isEqual', () => {
     });
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isEqual).toEqualTypeOf<typeof isEqualLodash>();
   });
 });

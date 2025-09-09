@@ -1,6 +1,6 @@
 # median
 
-숫자 배열의 중앙값을 계산하는 함수에요.
+숫자 배열의 중앙값을 계산하는 함수예요.
 
 중앙값이란 배열을 정렬했을 때 중앙에 위치하는 요소를 말해요.
 배열이 홀수 개의 요소를 가진다면, 중앙에 있는 요소를 반환해요.
@@ -31,5 +31,5 @@ const result = median(arrayWithOddNumberOfElements);
 
 const arrayWithEvenNumberOfElements = [1, 2, 3, 4];
 const result = median(arrayWithEvenNumberOfElements);
-// result는 2.5가 되요.
+// result는 2.5가 되어요.
 ```

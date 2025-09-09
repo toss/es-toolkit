@@ -7,7 +7,7 @@
 ## 签名
 
 ```typescript
-function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
+function at<T>(arr: T[], indices: number[]): T[];
 ```
 
 ### 参数
@@ -17,7 +17,7 @@ function at<T>(arr: T[], indices: number[]): Array<T | undefined>;
 
 ### 返回值
 
-(`Array<T | undefined>`): 一个新数组，包含在指定索引处的元素。
+(`T[]`): 一个新数组，包含在指定索引处的元素。
 
 ## 示例
 

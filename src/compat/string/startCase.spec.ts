@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { startCase as startCaseLodash } from 'lodash';
 import { startCase } from './startCase';
 
 describe('startCase', () => {
@@ -40,6 +41,8 @@ describe('startCase', () => {
   it(`should coerce \`string\` to a string`, () => {
     const string = 'foo bar';
     expect(startCase(Object(string))).toBe('Foo Bar');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     expect(startCase({ toString: () => string })).toBe('Foo Bar');
   });
 
@@ -47,5 +50,9 @@ describe('startCase', () => {
     expect(startCase('--foo-bar--')).toBe('Foo Bar');
     expect(startCase('fooBar')).toBe('Foo Bar');
     expect(startCase('__FOO_BAR__')).toBe('FOO BAR');
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(startCase).toEqualTypeOf<typeof startCaseLodash>();
   });
 });

@@ -9,6 +9,11 @@ describe('isEqual bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'isEqual');
-    expect(bundleSize).toMatchInlineSnapshot(`2952`);
+    expect(bundleSize).toMatchInlineSnapshot(`3171`);
+  });
+
+  it('es-toolkit/compat', async () => {
+    const bundleSize = await getBundleSize('es-toolkit/compat', 'isEqual');
+    expect(bundleSize).toMatchInlineSnapshot(`3171`);
   });
 });

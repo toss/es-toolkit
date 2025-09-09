@@ -1,11 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { isMap as isMapLodash } from 'lodash';
 import { isMap } from './isMap';
 import { args } from '../_internal/args';
 import { falsey } from '../_internal/falsey';
 import { slice } from '../_internal/slice';
-import { stubFalse } from '../_internal/stubFalse';
 import { symbol } from '../_internal/symbol';
 import { weakMap } from '../_internal/weakMap';
+import { stubFalse } from '../util/stubFalse';
 
 describe('isMap', () => {
   it('should return `true` for maps', () => {
@@ -39,5 +40,9 @@ describe('isMap', () => {
     const actual = falsey.map(value => isMap({ constructor: value }));
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(isMap).toEqualTypeOf<typeof isMapLodash>();
   });
 });

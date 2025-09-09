@@ -1,8 +1,9 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, expectTypeOf, it, vi } from 'vitest';
+import type { forEach as forEachLodash } from 'lodash';
 import { forEach } from './forEach';
 import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER';
 import { slice } from '../_internal/slice';
-import { stubTrue } from '../_internal/stubTrue';
+import { stubTrue } from '../util/stubTrue';
 
 describe('forEach', () => {
   it('should iterate over array elements', () => {
@@ -103,6 +104,7 @@ describe('forEach', () => {
     const expected = [1, 0, array];
 
     func(array, function () {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions, prefer-rest-params
       args || (args = slice.call(arguments));
     });
     expect(args).toEqual(expected);
@@ -120,6 +122,7 @@ describe('forEach', () => {
 
     const argsList: any[] = [];
     func(array, function () {
+      // eslint-disable-next-line prefer-rest-params
       argsList.push(slice.call(arguments));
       return true;
     });
@@ -177,6 +180,7 @@ describe('forEach', () => {
 
     const actual = values.map(length => isIteratedAsObject({ length: length }));
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const Foo = function (a: any) {};
     Foo.a = 1;
 
@@ -239,5 +243,9 @@ describe('forEach', () => {
     });
 
     expect(values.length).toBe(1);
+  });
+
+  it('should match the type of lodash', () => {
+    expectTypeOf(forEach).toEqualTypeOf<typeof forEachLodash>();
   });
 });

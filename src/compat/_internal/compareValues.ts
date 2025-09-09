@@ -20,11 +20,6 @@ function getPriority(a: unknown): 0 | 1 | 2 | 3 | 4 {
 
 export const compareValues = <V>(a: V, b: V, order: string) => {
   if (a !== b) {
-    // If both values are strings, compare them using localeCompare.
-    if (typeof a === 'string' && typeof b === 'string') {
-      return order === 'desc' ? b.localeCompare(a) : a.localeCompare(b);
-    }
-
     const aPriority = getPriority(a);
     const bPriority = getPriority(b);
 

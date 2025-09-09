@@ -46,7 +46,7 @@ describe('bind', () => {
     expect(actual2[0] === undefined);
     expect(actual2[1]).toBe('b');
 
-    const bound3 = bind(fn);
+    const bound3 = (bind as any)(fn);
     const actual3 = bound3('b');
 
     expect(actual3[0] === undefined);
@@ -132,7 +132,7 @@ describe('bind', () => {
       return value && object;
     }
 
-    const bound = bind(Foo) as any;
+    const bound = (bind as any)(Foo) as any;
     const object = {};
 
     expect(new bound() instanceof Foo);
@@ -177,7 +177,7 @@ describe('bind', () => {
       return class A {};
     };
 
-    const bound = bind(createCtor()) as any;
+    const bound = (bind as any)(createCtor()) as any;
     expect(Boolean(new bound())).toBe(true);
     expect(Boolean(new bound(1))).toBe(true);
     expect(Boolean(new bound(1, 2))).toBe(true);

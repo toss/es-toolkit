@@ -11,7 +11,7 @@ export function flattenArrayLike<T>(values: Array<ArrayLike<T>>): T[] {
     }
 
     for (let j = 0; j < arrayLike.length; j++) {
-      result.push(arrayLike[j]);
+      result.push(arrayLike[j] as T);
     }
   }
 
