@@ -18,7 +18,7 @@ interface FlattenObjectOptions {
  *
  * @param {object} object - The object to flatten.
  * @param {string} [options.delimiter='.'] - The delimiter to use between nested keys.
- * @param {string} [options.flattenArray=false] - Flatten array values.
+ * @param {boolean} [options.flattenArray=false] - Flatten array values.
  * @returns {Record<string, any>} - The flattened object.
  *
  * @example
