@@ -1,23 +1,55 @@
-# dropRight (🚧 문서 작성 중)
+# dropRight (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `dropRight`를 사용하세요
+
+이 `dropRight` 함수는 `null`이나 `undefined` 처리, `guard` 파라미터 처리, `toInteger` 변환 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [dropRight](../../array/dropRight.md)를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+배열의 끝에서부터 지정된 개수만큼 요소를 제거한 새로운 배열을 반환해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = dropRight(array, itemsCount);
+```
 
 ## 레퍼런스
 
-### `dropRight(...args)`
+### `dropRight(array, itemsCount)`
 
-#### 인터페이스
+배열의 끝부터 특정 개수의 요소를 제거하고 나머지 요소들로 새로운 배열을 만들고 싶을 때 `dropRight`를 사용하세요.
+
+```typescript
+import { dropRight } from 'es-toolkit/compat';
+
+// 숫자 배열에서 끝의 2개 요소를 제거해요.
+dropRight([1, 2, 3, 4, 5], 2);
+// Returns: [1, 2, 3]
+
+// 문자열 배열에서 끝의 1개 요소를 제거해요.
+dropRight(['a', 'b', 'c'], 1);
+// Returns: ['a', 'b']
+
+// 제거할 개수를 지정하지 않으면 기본값 1을 사용해요.
+dropRight([1, 2, 3]);
+// Returns: [1, 2]
+```
+
+`null`이나 `undefined`는 빈 배열로 처리해요.
+
+```typescript
+import { dropRight } from 'es-toolkit/compat';
+
+dropRight(null, 2); // []
+dropRight(undefined, 2); // []
+```
 
 #### 파라미터
 
+- `array` (`ArrayLike<T> | null | undefined`): 요소를 제거할 배열이에요.
+- `itemsCount` (`number`, 선택): 배열의 끝에서부터 제거할 요소의 개수예요. 기본값은 `1`이에요.
+
 ### 반환 값
+
+(`T[]`): 끝에서부터 `itemsCount`개의 요소가 제거된 새로운 배열을 반환해요.

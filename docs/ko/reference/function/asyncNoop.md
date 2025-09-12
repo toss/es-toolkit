@@ -1,32 +1,42 @@
 # asyncNoop
 
-비동기적으로 아무것도 하지 않는 함수예요. 함수를 요구하는 곳에 빈 자리를 채우기 위해 사용하거나, 기본값으로 사용할 수 있어요.
-
-## 인터페이스
+비동기적으로 아무것도 하지 않는 함수예요.
 
 ```typescript
-function asyncNoop(): Promise<void>;
+const promise = asyncNoop();
 ```
 
-### 반환 값
+## 레퍼런스
 
-(`Promise<void>`): `undefined`로 이행하는 `Promise`.
+### `asyncNoop()`
 
-## 예시
+비동기 함수가 필요한 곳에 빈 자리를 채우거나 기본값으로 사용하고 싶을 때 `asyncNoop`을 사용하세요. `undefined`로 이행하는 `Promise`를 반환해요.
 
 ```typescript
 import { asyncNoop } from 'es-toolkit/function';
 
+// 기본값으로 사용하는 예시
 interface Props {
   fetchData?: () => Promise<void>;
 }
 
 function MyComponent({ fetchData = asyncNoop }: Props) {
   const handleFetchData = async () => {
-    // 여기서 fetchData는 undefined일 수 없어서, 자유롭게 부를 수 있어요.
+    // fetchData는 항상 함수이므로 안전하게 호출할 수 있어요
     await fetchData();
   };
 
   handleFetchData();
 }
+
+// 직접 호출하는 예시
+asyncNoop();
+// Returns: Promise<void>
+
+await asyncNoop();
+// Returns: undefined
 ```
+
+#### 반환 값
+
+(`Promise<void>`): `undefined`로 이행하는 `Promise`예요.

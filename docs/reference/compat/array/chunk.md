@@ -1,23 +1,51 @@
-# chunk (🚧 Documentation In Progress)
+# chunk (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `chunk` from `es-toolkit`
+
+This `chunk` function is slow because it needs to handle `null` and `undefined` values, default `size` values, and more.
+
+Use the faster, modern implementation from `es-toolkit`: [chunk](../../array/chunk.md).
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Splits an array into smaller arrays of a specified size.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const chunked = chunk(arr, size);
+```
 
 ## Reference
 
-### `chunk(...args)`
+### `chunk(arr, size)`
 
-#### Signature
+Use `chunk` when you want to divide a long array into multiple smaller arrays of equal size. If the array can't be divided evenly, the final array will contain the remaining elements.
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+// Split a number array into chunks of size 2.
+chunk([1, 2, 3, 4], 2);
+// Returns: [[1, 2], [3, 4]]
+
+// Split a string array into chunks of size 3.
+chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
+// Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
+```
+
+`null` and `undefined` are treated as empty arrays.
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+chunk(null, 2); // []
+chunk(undefined, 2); // []
+```
 
 #### Parameters
 
+- `arr` (`ArrayLike<T>`): The array to split.
+- `size` (`number`, optional): The size of each chunk. Must be an integer greater than 0. Defaults to `1`.
+
 ### Returns
+
+(`T[][]`): Returns a two-dimensional array split into chunks of size `size`.
