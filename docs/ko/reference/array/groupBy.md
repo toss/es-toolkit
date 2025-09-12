@@ -1,35 +1,29 @@
 # groupBy
 
-주어진 키 생성 함수에 따라서 배열의 요소를 분류해요.
-
-이 함수는 파라미터로 배열과 각 요소에서 키를 생성하는 함수를 받아요.
-키는 함수에서 생성된 키이고, 값은 그 키를 공유하는 요소끼리 묶은 배열인 객체를 반환해요.
-
-## 인터페이스
+키 생성 함수에 따라 배열의 요소들을 그룹으로 나눈 새 객체를 반환해요.
 
 ```typescript
-function groupBy<T, K extends PropertyKey>(arr: T[], getKeyFromItem: (item: T) => K): Record<K, T[]>;
+const grouped = groupBy(arr, getKeyFromItem);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `arr` (`T[]`): 요소를 분류할 배열.
-- `getKeyFromItem` (`(item: T) => K`): 요소에서 키를 생성하는 함수.
+### `groupBy(arr, getKeyFromItem)`
 
-### 반환 값
-
-(`Record<K, T[]>`): 키에 따라 요소가 분류된 객체를 반환해요.
-
-## 예시
+배열의 요소들을 특정 기준에 따라 분류하고 싶을 때 `groupBy`를 사용하세요. 각 요소에서 키를 생성하는 함수를 제공하면, 같은 키를 가진 요소들끼리 묶어서 객체로 반환해줘요. 데이터를 카테고리별로 정리하거나 그룹별 분석을 할 때 유용해요.
 
 ```typescript
-const array = [
+import { groupBy } from 'es-toolkit/array';
+
+// 객체 배열을 카테고리별로 그룹화해요.
+const items = [
   { category: 'fruit', name: 'apple' },
   { category: 'fruit', name: 'banana' },
   { category: 'vegetable', name: 'carrot' },
 ];
-const result = groupBy(array, item => item.category);
-// 결괏값:
+
+const result = groupBy(items, item => item.category);
+// 결과:
 // {
 //   fruit: [
 //     { category: 'fruit', name: 'apple' },
@@ -40,3 +34,28 @@ const result = groupBy(array, item => item.category);
 //   ]
 // }
 ```
+
+다양한 기준으로 그룹화할 수 있어요.
+
+```typescript
+import { groupBy } from 'es-toolkit/array';
+
+// 문자열 길이별로 그룹화해요.
+const words = ['one', 'two', 'three', 'four', 'five'];
+const byLength = groupBy(words, word => word.length);
+// 결과: { 3: ['one', 'two'], 4: ['four', 'five'], 5: ['three'] }
+
+// 짝수/홀수별로 그룹화해요.
+const numbers = [1, 2, 3, 4, 5, 6];
+const byParity = groupBy(numbers, num => (num % 2 === 0 ? 'even' : 'odd'));
+// 결과: { odd: [1, 3, 5], even: [2, 4, 6] }
+```
+
+#### 파라미터
+
+- `arr` (`T[]`): 그룹화할 배열이에요.
+- `getKeyFromItem` (`(item: T) => K`): 각 요소에서 키를 생성하는 함수예요.
+
+#### 반환 값
+
+(`Record<K, T[]>`): 키에 따라 요소들이 그룹화된 객체를 반환해요.

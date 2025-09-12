@@ -1,41 +1,48 @@
 # isLength
 
-주어진 값이 유효한 길이인지 확인해요.
-
-유효한 길이란, `0` 이상 `Number.MAX_SAFE_INTEGER` 미만의 정수를 말해요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `number`로 좁혀요.
-
-## 인터페이스
+값이 유효한 배열 길이인지 확인해요.
 
 ```typescript
-function isLength(value: unknown): value is number;
+const result = isLength(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): 유효한 길이인지 확인할 값.
+### `isLength(value)`
 
-### 반환 값
-
-(`value is number`): 값이 유효한 길이면 `true`, 아니면 `false`.
-
-## 예시
+값이 유효한 배열 길이인지 확인하고 싶을 때 `isLength`를 사용하세요. 유효한 길이는 0 이상이고 `Number.MAX_SAFE_INTEGER` 이하인 정수여야 해요.
 
 ```typescript
 import { isLength } from 'es-toolkit/predicate';
 
-const value1 = 0;
-const value2 = 42;
-const value3 = -1;
-const value4 = 1.5;
-const value5 = Number.MAX_SAFE_INTEGER;
-const value6 = Number.MAX_SAFE_INTEGER + 1;
+// 유효한 길이들
+console.log(isLength(0)); // true
+console.log(isLength(42)); // true
+console.log(isLength(Number.MAX_SAFE_INTEGER)); // true
 
-console.log(isLength(value1)); // true
-console.log(isLength(value2)); // true
-console.log(isLength(value3)); // false
-console.log(isLength(value4)); // false
-console.log(isLength(value5)); // true
-console.log(isLength(value6)); // false
+// 무효한 길이들
+console.log(isLength(-1)); // false (음수)
+console.log(isLength(1.5)); // false (소수)
+console.log(isLength(Number.MAX_SAFE_INTEGER + 1)); // false (안전하지 않은 정수)
+console.log(isLength('42')); // false (문자열)
+console.log(isLength(null)); // false (null)
 ```
+
+TypeScript에서 타입 가드로도 사용할 수 있어요:
+
+```typescript
+function processLength(value: unknown) {
+  if (isLength(value)) {
+    // 이제 value는 number 타입으로 좁혀져요
+    console.log(value.toFixed(2));
+  }
+}
+```
+
+#### 파라미터
+
+- `value` (`unknown`): 유효한 길이인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is number`): 값이 유효한 길이면 `true`, 그렇지 않으면 `false`를 반환해요.

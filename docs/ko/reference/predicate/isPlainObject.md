@@ -1,41 +1,63 @@
 # isPlainObject
 
-주어진 값이 순수 객체(Plain object)인지 확인해요.
-
-순수 객체는 `{}`나 `{ name: 'John', age: 30 }` 같은 단순한 JavaScript 객체를 말해요. 클래스에서 만들어지지 않고, 프로토타입은 `Object.prototype`이나 `null`이에요. `toString` 메서드를 호출해서 문자열로 변환될 때는 `[object Object]`로 나타나요.
-
-## 인터페이스
+값이 순수 객체인지 확인해요.
 
 ```typescript
-function isPlainObject(value: unknown): value is Record<PropertyKey, any>;
+const result = isPlainObject(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): 검사할 값.
+### `isPlainObject(value)`
 
-### 반환 값
-
-(`value is Record<PropertyKey, any>`): 값이 순수 객체이면 `true`.
-
-## 예시
+값이 순수 객체(plain object)인지 확인하고 싶을 때 `isPlainObject`를 사용하세요. 순수 객체는 객체 리터럴(`{}`) 또는 `Object` 생성자로 만들어진 객체를 말해요. 클래스 인스턴스, 배열, 또는 다른 특수 객체는 아니에요.
 
 ```typescript
-isPlainObject({}); // true
-isPlainObject([]); // false
-isPlainObject(Object.create(null)); // true
+import { isPlainObject } from 'es-toolkit/predicate';
 
-class Foo {}
-isPlainObject(new Foo()); // false
-isPlainObject(new Date()); // false
-isPlainObject(new Set()); // false
-isPlainObject(new Map()); // false
-isPlainObject(Buffer.from('hello, world')); // false
-isPlainObject(Math); // false
-isPlainObject(JSON); // false
-isPlainObject(null); // false
-isPlainObject(1); // false
+// 순수 객체들
+console.log(isPlainObject({})); // true
+console.log(isPlainObject({ name: 'John', age: 30 })); // true
+console.log(isPlainObject(Object.create(null))); // true
+console.log(isPlainObject(new Object())); // true
+
+// 순수 객체가 아닌 것들
+console.log(isPlainObject([])); // false (배열)
+console.log(isPlainObject(new Date())); // false (Date 객체)
+console.log(isPlainObject(new Set())); // false (Set 객체)
+console.log(isPlainObject(new Map())); // false (Map 객체)
+console.log(isPlainObject(null)); // false (null)
+console.log(isPlainObject(42)); // false (숫자)
+console.log(isPlainObject('hello')); // false (문자열)
+
+// 클래스 인스턴스
+class MyClass {}
+console.log(isPlainObject(new MyClass())); // false
 ```
+
+데이터 직렬화/역직렬화나 설정 객체 검증에 유용해요:
+
+```typescript
+function processConfig(config: unknown) {
+  if (isPlainObject(config)) {
+    // 이제 config는 Record<PropertyKey, any> 타입으로 좁혀져요
+    console.log('Valid configuration object');
+    Object.keys(config).forEach(key => {
+      console.log(`${key}: ${config[key]}`);
+    });
+  } else {
+    throw new Error('Configuration must be a plain object');
+  }
+}
+```
+
+#### 파라미터
+
+- `value` (`unknown`): 순수 객체인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is Record<PropertyKey, any>`): 값이 순수 객체면 `true`, 그렇지 않으면 `false`를 반환해요.
 
 ## 성능 비교
 

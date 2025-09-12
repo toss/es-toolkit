@@ -1,31 +1,47 @@
 # pick
 
-선택한 객체 프로퍼티들로 구성된 새로운 객체를 생성해요.
-
-이 함수는 객체와 키 배열을 받아, 지정된 키에 해당하는 프로퍼티들만 포함하는 새로운 객체를 반환해요.
-
-## 인터페이스
+지정된 키들에 해당하는 속성들만 포함한 새로운 객체를 반환해요.
 
 ```typescript
-function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
+const result = pick(obj, keys);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `obj` (`T`): 키를 선택할 객체예요.
-- `keys` (`K[]`): 객체에서 선택할 키들의 배열이에요.
+### `pick(obj, keys)`
 
-### 반환 값
-
-(`Pick<T, K>`): 지정된 키들이 선택된 새로운 객체예요.
-
-## 예시
+객체에서 특정 키들에 해당하는 속성들만 선택하고 싶을 때 `pick`을 사용하세요. 지정된 키에 해당하는 속성들만 포함한 새로운 객체를 반환해요.
 
 ```typescript
-const obj = { a: 1, b: 2, c: 3 };
+import { pick } from 'es-toolkit/object';
+
+// 특정 키들만 선택해요
+const obj = { a: 1, b: 2, c: 3, d: 4 };
 const result = pick(obj, ['a', 'c']);
-// 결과는 다음과 같아요 { a: 1, c: 3 }
+// result는 { a: 1, c: 3 }이 돼요
+
+// 존재하지 않는 키를 지정해도 무시돼요
+const safe = pick(obj, ['a', 'nonexistent']);
+// safe는 { a: 1 }이 돼요
+
+// 중첵된 객체에서도 사용할 수 있어요
+const nested = {
+  user: { name: 'John', age: 30 },
+  posts: ['post1', 'post2'],
+  settings: { theme: 'dark' }
+};
+const picked = pick(nested, ['user', 'settings']);
+// picked는 { user: { name: 'John', age: 30 }, settings: { theme: 'dark' } }가 돼요
 ```
+
+#### 파라미터
+
+- `obj` (`T extends Record<string, any>`): 속성들을 선택할 객체예요.
+- `keys` (`readonly K[]`): 객체에서 선택할 키들의 배열이에요.
+
+#### 반환 값
+
+(`Pick<T, K>`): 지정된 키들에 해당하는 속성들만 포함한 새로운 객체를 반환해요.
 
 ## Lodash와의 호환성
 

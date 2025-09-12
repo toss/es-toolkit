@@ -1,22 +1,62 @@
 # toSnakeCaseKeys
 
-객체의 프로퍼티를 [스네이크 표기법](../string/snakeCase.md)(`snake_case`)로 바꾼 새로운 객체를 만들어요.
-
-중첩된 객체 안의 프로퍼티도 모두 스네이크 표기법으로 변환돼요.
-
-## 인터페이스
+객체와 배열의 모든 키를 스네이크케이스로 변환한 새로운 객체를 반환해요.
 
 ```typescript
-function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T>;
+const snakeCased = toSnakeCaseKeys(obj);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `obj` (`T`): 키를 변환할 객체예요.
+### `toSnakeCaseKeys(obj)`
 
-### 반환 값
+객체의 모든 키를 snake_case로 변환하고 싶을 때 `toSnakeCaseKeys`를 사용하세요. 중첩된 객체와 배열 내의 객체들도 재귀적으로 변환돼요.
 
-(`ToSnakeCaseKeys<T>`): 모든 키가 스네이크 케이스로 변환된 새 객체예요.
+```typescript
+import { toSnakeCaseKeys } from 'es-toolkit/object';
+
+// 기본 객체 변환
+const obj = { userId: 1, firstName: 'John', lastName: 'Doe' };
+const result = toSnakeCaseKeys(obj);
+// result는 { user_id: 1, first_name: 'John', last_name: 'Doe' }가 돼요
+
+// 배열 내 객체들도 변환해요
+const users = [
+  { userId: 1, firstName: 'John' },
+  { userId: 2, firstName: 'Jane' }
+];
+const convertedUsers = toSnakeCaseKeys(users);
+// convertedUsers는 [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]가 돼요
+
+// 중첩된 객체도 완전히 변환돼요
+const nested = {
+  userData: {
+    userId: 1,
+    contactInfo: {
+      emailAddress: 'john@example.com',
+      phoneNumber: '123-456-7890'
+    }
+  }
+};
+const nestedResult = toSnakeCaseKeys(nested);
+// nestedResult는 {
+//   user_data: {
+//     user_id: 1,
+//     contact_info: {
+//       email_address: 'john@example.com',
+//       phone_number: '123-456-7890'
+//     }
+//   }
+// }가 돼요
+```
+
+#### 파라미터
+
+- `obj` (`T`): 키를 snake_case로 변환할 객체, 배열, 또는 원시 값이에요.
+
+#### 반환 값
+
+(`ToSnakeCaseKeys<T>`): 모든 키가 snake_case로 변환된 새로운 객체를 반환해요.
 
 ## 예시
 

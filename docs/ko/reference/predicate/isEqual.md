@@ -1,6 +1,6 @@
 # isEqual
 
-두 값이 동일한지 확인해요. `Date`, `RegExp` 같은 깊은 객체 비교도 지원해요.
+두 값이 동일한지 확인해요. `Date`, `RegExp`, 깊은 객체 비교도 지원해요.
 
 ## 인터페이스
 
@@ -8,82 +8,99 @@
 function isEqual(a: unknown, b: unknown): boolean;
 ```
 
-## 파라미터
+### 파라미터
 
-- `a` (`unknown`): 비교할 첫 번째 값.
-- `b` (`unknown`): 비교할 두 번째 값.
+- `a` (`unknown`): 비교할 첫 번째 값이에요.
+- `b` (`unknown`): 비교할 두 번째 값이에요.
 
-## 반환 값
+### 반환 값
 
-(`boolean`): 두 값이 동일하면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 두 값이 동일하면 `true`, 아니면 `false`를 반환해요.
 
 ## 예시
 
-### 예시 1: 원시 타입 값 비교
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
 
-```javascript
-isEqual(1, 1); // true
-isEqual('hello', 'hello'); // true
-isEqual(true, true); // true
-isEqual(1, 2); // false
-isEqual('hello', 'world'); // false
-isEqual(true, false); // false
-```
+// 원시 타입 비교
+console.log(isEqual(1, 1)); // true
+console.log(isEqual('hello', 'hello')); // true
+console.log(isEqual(true, true)); // true
+console.log(isEqual(1, 2)); // false
 
-### 예시 2: 특수 경우 비교
+// 특수 경우 처리
+console.log(isEqual(NaN, NaN)); // true
+console.log(isEqual(+0, -0)); // true
 
-```javascript
-isEqual(NaN, NaN); // true
-isEqual(+0, -0); // true
-```
-
-### 예시 3: 날짜 객체 비교
-
-```javascript
+// 날짜 객체 비교
 const date1 = new Date('2020-01-01');
 const date2 = new Date('2020-01-01');
-isEqual(date1, date2); // true
+console.log(isEqual(date1, date2)); // true
 
 const date3 = new Date('2021-01-01');
-isEqual(date1, date3); // false
-```
+console.log(isEqual(date1, date3)); // false
 
-### 예시 4: 정규 표현식 객체 비교
-
-```javascript
+// 정규 표현식 비교
 const regex1 = /hello/g;
 const regex2 = /hello/g;
-isEqual(regex1, regex2); // true
+console.log(isEqual(regex1, regex2)); // true
 
 const regex3 = /hello/i;
-isEqual(regex1, regex3); // false
-```
+console.log(isEqual(regex1, regex3)); // false
 
-### 예시 5: 객체 비교
+// 깊은 객체 비교
+const obj1 = { a: 1, b: { c: 2, d: [3, 4] } };
+const obj2 = { a: 1, b: { c: 2, d: [3, 4] } };
+console.log(isEqual(obj1, obj2)); // true
 
-```javascript
-const obj1 = { a: 1, b: { c: 2 } };
-const obj2 = { a: 1, b: { c: 2 } };
-isEqual(obj1, obj2); // true
+const obj3 = { a: 1, b: { c: 3, d: [3, 4] } };
+console.log(isEqual(obj1, obj3)); // false
 
-const obj3 = { a: 1, b: { c: 3 } };
-isEqual(obj1, obj3); // false
+// 배열 비교
+const arr1 = [1, 2, [3, 4]];
+const arr2 = [1, 2, [3, 4]];
+console.log(isEqual(arr1, arr2)); // true
 
-const obj4 = { a: 1, b: 2 };
-const obj5 = { a: 1, c: 2 };
-isEqual(obj4, obj5); // false
-```
+const arr3 = [1, 2, [3, 5]];
+console.log(isEqual(arr1, arr3)); // false
 
-### 예시 6: 배열 비교
+// Map과 Set 비교
+const map1 = new Map([['key', 'value']]);
+const map2 = new Map([['key', 'value']]);
+console.log(isEqual(map1, map2)); // true
 
-```javascript
-const arr1 = [1, 2, 3];
-const arr2 = [1, 2, 3];
-isEqual(arr1, arr2); // true
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2, 3]);
+console.log(isEqual(set1, set2)); // true
 
-const arr3 = [1, 2, 4];
-isEqual(arr1, arr3); // false
+// 복잡한 중첩 구조 비교
+const complex1 = {
+  users: [
+    { id: 1, name: 'Alice', roles: new Set(['admin', 'user']) },
+    { id: 2, name: 'Bob', roles: new Set(['user']) }
+  ],
+  settings: new Map([['theme', 'dark'], ['lang', 'ko']])
+};
 
-const arr4 = [1, 2];
-isEqual(arr1, arr4); // false
+const complex2 = {
+  users: [
+    { id: 1, name: 'Alice', roles: new Set(['admin', 'user']) },
+    { id: 2, name: 'Bob', roles: new Set(['user']) }
+  ],
+  settings: new Map([['theme', 'dark'], ['lang', 'ko']])
+};
+
+console.log(isEqual(complex1, complex2)); // true
+
+// 유니터 테스트에서 활용
+function testApiResponse() {
+  const expected = { status: 200, data: { message: 'success' } };
+  const actual = { status: 200, data: { message: 'success' } };
+  
+  if (isEqual(expected, actual)) {
+    console.log('테스트 통과!');
+  } else {
+    console.log('테스트 실패!');
+  }
+}
 ```

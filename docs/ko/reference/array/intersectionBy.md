@@ -1,70 +1,57 @@
 # intersectionBy
 
-`mapper` 함수가 반환하는 값을 기준으로, 두 배열의 교집합을 반환해요.
-
-이 함수는 파라미터로 두 개의 배열과 `mapper` 함수를 받아요.
-`mapper` 함수로 각 배열의 요소들을 변환했을 때, 두 배열에 모두 포함되는 요소들로 이루어진 새로운 배열을 반환해요.
-실제 구현을 살펴보면, 첫 번째 배열과 두 번째 배열을 `mapper` 가 반환하는 값을 기준으로 비교하여, 첫 번째 배열의 요소들 중 두 번째 배열에 없는 요소들을 제거해요.
-
-## 인터페이스
+변환 함수의 결과를 기준으로 두 배열의 교집합을 구한 새 배열을 반환해요.
 
 ```typescript
-function intersectionBy<T, U>(firstArr: T[], secondArr: U[], mapper: (item: T | U) => unknown): T[];
+const result = intersectionBy(firstArr, secondArr, mapper);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `firstArr` (`T[]`): 비교할 첫 번째 배열.
-- `secondArr` (`U[]`): 비교할 두 번째 배열.
-- `mapper` (`(item: T | U) => unknown`): 비교하기 위해 요소를 새로운 값으로 변환할 함수.
+### `intersectionBy(firstArr, secondArr, mapper)`
 
-### 반환 값
-
-(`T[]`): 첫 번째 배열과 두 번째 배열을 `mapper` 가 반환하는 값을 기준으로 비교하여, 두 배열 모두에 포함되는 요소들만 포함하는 새로운 배열.
-
-## 예시
+두 배열에서 특정 속성이나 변환된 값을 기준으로 공통 요소를 찾고 싶을 때 `intersectionBy`를 사용하세요. 각 요소를 변환 함수로 처리한 결과를 비교해서 교집합을 구해요. 객체 배열에서 특정 속성으로 비교하거나 복잡한 변환 로직이 필요할 때 유용해요.
 
 ```typescript
-const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const array2 = [{ id: 2 }, { id: 4 }];
-const mapper = item => item.id;
-const result = intersectionBy(array1, array2, mapper);
-// `mapper`로 변환했을 때 두 배열 모두에 포함되는 요소로 이루어진 [{ id: 2 }] 값이 반환되어요.
+import { intersectionBy } from 'es-toolkit/array';
 
-const array1 = [
-  { id: 1, name: 'jane' },
-  { id: 2, name: 'amy' },
-  { id: 3, name: 'michael' },
-];
-const array2 = [2, 4];
-const mapper = item => (typeof item === 'object' ? item.id : item);
-const result = intersectionBy(array1, array2, mapper);
-// `mapper`로 변환했을 때 두 배열 모두에 포함되는 요소로 이루어진 [{ id: 2, name: 'amy' }] 값이 반환되어요.
+// 객체의 id 속성을 기준으로 교집합을 구해요.
+const users1 = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
+const users2 = [{ id: 2, name: 'jane' }, { id: 4, name: 'alice' }];
+intersectionBy(users1, users2, user => user.id);
+// Returns: [{ id: 2, name: 'jane' }]
+
+// 서로 다른 타입의 배열도 비교할 수 있어요.
+const objects = [{ id: 1, name: 'apple' }, { id: 2, name: 'banana' }];
+const ids = [2, 3, 4];
+intersectionBy(objects, ids, item => typeof item === 'object' ? item.id : item);
+// Returns: [{ id: 2, name: 'banana' }]
 ```
 
-## Lodash와의 호환성
-
-`es-toolkit/compat`에서 `intersectionBy`를 가져오면 lodash와 호환돼요.
-
-- `intersectionBy`는 공통 요소를 찾기 위해 여러 개의 유사 배열 객체를 받을 수 있어요.
-- `intersectionBy`는 속성 키를 iteratee로 받을 수 있어요.
+복잡한 변환 로직도 적용할 수 있어요.
 
 ```typescript
-import { intersectionBy } from 'es-toolkit/compat';
+import { intersectionBy } from 'es-toolkit/array';
 
-const array1 = [1.2, 2.4, 3.6];
-const array2 = [2.5, 3.7];
-const array3 = [2.6, 3.8];
-const result = intersectionBy(array1, array2, array3, Math.floor);
-// 결과는 [2.4, 3.6]이에요. Math.floor를 적용한 후 공통 요소는 2와 3이에요.
+// 문자열을 소문자로 변환해서 비교해요.
+const words1 = ['Apple', 'Banana', 'Cherry'];
+const words2 = ['apple', 'DATE', 'elderberry'];
+intersectionBy(words1, words2, word => word.toLowerCase());
+// Returns: ['Apple']
 
-const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
-const array2 = [{ x: 2 }, { x: 3 }, { x: 4 }];
-const result = intersectionBy(array1, array2, 'x');
-// 결과는 [{ x: 2 }, { x: 3 }]이에요. 이 요소들은 동일한 `x` 속성을 가지고 있어요.
-
-const arrayLike1 = { 0: 'apple', 1: 'banana', 2: 'cherry', length: 3 };
-const arrayLike2 = { 0: 'banana', 1: 'cherry', 2: 'date', length: 3 };
-const result = intersectionBy(arrayLike1, arrayLike2);
-// 결과는 ['banana', 'cherry']예요. 이 요소들은 두 유사 배열 객체에서 공통으로 존재해요.
+// 숫자를 절댓값으로 변환해서 비교해요.
+const numbers1 = [1, -2, 3, -4];
+const numbers2 = [2, -3, 4, 5];
+intersectionBy(numbers1, numbers2, num => Math.abs(num));
+// Returns: [-2, 3, -4]
 ```
+
+#### 파라미터
+
+- `firstArr` (`readonly T[]`): 비교할 첫 번째 배열이에요.
+- `secondArr` (`readonly U[]`): 비교할 두 번째 배열이에요.
+- `mapper` (`(item: T | U) => unknown`): 각 요소를 변환해서 비교 기준을 만드는 함수예요.
+
+#### 반환 값
+
+(`T[]`): 변환 함수의 결과를 기준으로 두 배열에 공통으로 포함된 요소들로 이루어진 새 배열을 반환해요. 결과는 첫 번째 배열의 요소들로 구성돼요.

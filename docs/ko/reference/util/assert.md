@@ -1,55 +1,74 @@
 # assert
 
-주어진 조건이 참임을 단언해요. 조건이 거짓이면 제공된 메시지와 함께 오류를 던져요.
-
-이 함수는 [invariant](./invariant.md) 함수의 별칭이에요.
-
-## 인터페이스
+주어진 조건이 참임을 단언해요. 조건이 거짓이면 에러를 던져요.
 
 ```typescript
-function assert(condition: unknown, message: string): asserts condition;
-function assert(condition: unknown, error: Error): asserts condition;
+assert(condition, message);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `condition` (`unknown`): 평가할 조건.
-- `message` (`string` | `Error`): 조건이 거짓일 때 발생할 오류 메시지.
+### `assert(condition, message)`
 
-### 반환 값
+코드에서 특정 조건이 반드시 만족되어야 할 때 `assert`를 사용하세요. 조건이 거짓이면 즉시 에러를 던져서 프로그램 실행을 중단해요.
 
-(`void`): 조건이 참이면 void를 반환해요.
-
-### 에러
-
-조건이 거짓이면 주어진 메시지와 함께 에러를 던져요.
-
-## 예시
+이 함수는 `invariant` 함수의 별칭이에요. 같은 기능을 하지만 더 친숙한 이름으로 사용할 수 있어요.
 
 ```typescript
-// This call will succeed without any errors
-assert(true, 'This should not throw');
+import { assert } from 'es-toolkit/util';
 
-// This call will fail and throw an error with the message 'This should throw'
-assert(false, 'This should throw');
+// 조건이 참이면 아무것도 하지 않아요
+assert(true, '이 메시지는 나타나지 않아요');
 
-// Example of using assert with a condition
-assert(condition, 'Expected condition is false');
+// 조건이 거짓이면 에러를 던져요
+assert(false, '이 조건은 거짓이에요'); // Error: 이 조건은 거짓이에요
 
-// Ensure that the value is neither null nor undefined
-assert(value !== null && value !== undefined, 'Value should not be null or undefined');
+// 값이 null이나 undefined가 아님을 확인할 때
+const value = getValue();
+assert(value !== null && value !== undefined, '값이 null이나 undefined면 안 돼요');
+// 이제 value는 null이나 undefined가 아니라고 확신할 수 있어요
 
-// Example of using assert to check if a number is positive
-assert(number > 0, 'Number must be positive');
+// 숫자가 양수인지 확인할 때
+const number = getNumber();
+assert(number > 0, '숫자는 양수여야 해요');
+```
 
-// Example of using assert with an error
-assert(false, new Error('This should throw'));
+에러 객체를 직접 전달할 수도 있어요.
 
-// Example of using assert with a custom error
-class CustomError extends Error {
+```typescript
+import { assert } from 'es-toolkit/util';
+
+// Error 객체 전달
+assert(false, new Error('커스텀 에러 메시지'));
+
+// 커스텀 에러 클래스 사용
+class ValidationError extends Error {
   constructor(message: string) {
     super(message);
+    this.name = 'ValidationError';
   }
 }
-assert(false, new CustomError('This should throw'));
+
+assert(false, new ValidationError('검증에 실패했어요'));
 ```
+
+개발 중에 코드의 가정을 검증하거나, 함수의 입력값이 예상 범위에 있는지 확인할 때 특히 유용해요.
+
+::: info invariant와의 관계
+
+`assert`는 `invariant` 함수와 완전히 같은 기능을 해요. 단지 이름만 다를 뿐이에요. 더 자세한 내용은 [`invariant`](./invariant.md) 문서를 참고하세요.
+
+:::
+
+#### 파라미터
+
+- `condition` (`unknown`): 평가할 조건이에요. 거짓으로 평가되는 값이면 에러를 던져요.
+- `message` (`string | Error`): 조건이 거짓일 때 던질 에러 메시지나 에러 객체예요.
+
+#### 반환 값
+
+(`void`): 조건이 참이면 아무것도 반환하지 않아요.
+
+#### 에러
+
+조건이 거짓으로 평가되면 제공된 메시지나 에러 객체를 던져요.

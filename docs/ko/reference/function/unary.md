@@ -12,7 +12,7 @@ const unaryFunc = unary(func);
 
 함수가 하나의 파라미터만 받도록 제한하고 싶을 때 `unary`를 사용하세요. 추가로 전달되는 파라미터들은 모두 무시돼요.
 
-배열의 `map`, `filter`, `forEach` 같은 메서드에서 콜백 함수가 예상보다 많은 파라미터를 받는 것을 방지하거나, 함수형 프로그래밍에서 함수의 아리티(arity)를 제한하고 싶을 때 유용해요.
+배열의 `map`, `filter`, `forEach` 같은 메서드에서 콜백 함수가 예상보다 많은 파라미터를 받는 것을 방지할 때 유용해요.
 
 ```typescript
 import { unary } from 'es-toolkit/function';
@@ -45,9 +45,9 @@ function logValue(value: any, prefix: string = 'Value:', suffix: string = '') {
 const data = ['apple', 'banana', 'cherry'];
 
 // prefix와 suffix 없이 값만 출력하고 싶을 때
-data.forEach(unary(logValue)); 
+data.forEach(unary(logValue));
 // Value: apple
-// Value: banana  
+// Value: banana
 // Value: cherry
 ```
 

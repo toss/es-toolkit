@@ -1,31 +1,83 @@
 # isFile
 
-주어진 값이 `File`인지 확인해요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `File`로 좁혀요.
-
-## 시그니처
+주어진 값이 File 객체인지 확인해요.
 
 ```typescript
-function isFile(x: unknown): x is File;
+const result = isFile(value);
 ```
 
-### 매개변수
+## 레퍼런스
 
-- `x` (`unknown`): `File`인지 확인할 값.
+### `isFile(value)`
 
-### 반환값
-
-(`x is File`): 값이 File이면 `true`, 그렇지 않으면 `false`.
-
-## 예시
+값이 File 인스턴스인지 확인하고 싶을 때 `isFile`을 사용하세요. File 객체는 사용자가 업로드한 파일이나 파일 시스템에서 가져온 파일을 나타내는 웹 API의 일부예요. Blob 객체와는 달리 파일 이름과 마지막 수정 시간 등의 추가 정보를 포함해요.
 
 ```typescript
-const file = new File(['content'], 'example.txt', { type: 'text/plain' });
-const blob = new Blob(['content'], { type: 'text/plain' });
-const value = {};
+import { isFile } from 'es-toolkit/predicate';
 
+// File 객체 확인
+const file = new File(['hello'], 'example.txt', { type: 'text/plain' });
 console.log(isFile(file)); // true
+
+// Blob 객체는 File이 아니에요
+const blob = new Blob(['hello'], { type: 'text/plain' });
 console.log(isFile(blob)); // false
-console.log(isFile(value)); // false
+
+// 일반 객체들
+console.log(isFile({})); // false
+console.log(isFile([])); // false
+console.log(isFile('text')); // false
+console.log(isFile(null)); // false
+console.log(isFile(undefined)); // false
 ```
+
+파일 업로드 처리나 드래그 앤 드롭 기능에서 유용해요:
+
+```typescript
+// 파일 업로드 핸들러
+function handleFileUpload(input: unknown) {
+  if (isFile(input)) {
+    console.log(`파일명: ${input.name}`);
+    console.log(`파일 크기: ${input.size} bytes`);
+    console.log(`파일 타입: ${input.type}`);
+    console.log(`마지막 수정: ${input.lastModified}`);
+    
+    // File이 확실하므로 안전하게 파일 관련 속성에 접근 가능
+    return input;
+  }
+  
+  throw new Error('유효한 파일이 아닙니다');
+}
+
+// 드래그 앤 드롭 이벤트 처리
+function handleDrop(event: DragEvent) {
+  const items = Array.from(event.dataTransfer?.items || []);
+  
+  items.forEach(item => {
+    const file = item.getAsFile();
+    if (isFile(file)) {
+      console.log(`드롭된 파일: ${file.name}`);
+    }
+  });
+}
+```
+
+환경에서 File이 지원되지 않는 경우도 안전하게 처리해요:
+
+```typescript
+// Node.js 환경이나 File을 지원하지 않는 환경에서도 안전
+console.log(isFile(new Date())); // false
+
+// File이 정의되지 않은 환경에서도 에러가 발생하지 않음
+if (typeof File === 'undefined') {
+  console.log(isFile({})); // false
+}
+```
+
+#### 파라미터
+
+- `value` (`unknown`): File 객체인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is File`): 값이 File 객체이면 `true`, 그렇지 않으면 `false`를 반환해요.

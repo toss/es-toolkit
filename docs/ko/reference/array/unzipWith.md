@@ -1,81 +1,81 @@
 # unzipWith
 
-결합되어 있는 2차원 배열을 1차원 배열로 풀고, `iteratee` 함수로 값을 변환해서 새로운 배열을 반환해요.
-
-## 인터페이스
+묶여있는 배열들을 풀고, 변환 함수를 적용해서 새로운 배열을 반환해요.
 
 ```typescript
-function unzipWith<T, R>(target: T[][], iteratee: (...args: T[]) => R): R[];
+const transformedArray = unzipWith(target, iteratee);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `target` (`T[][]`): 결합을 풀고 변환할 배열이에요.
-- `iteratee` (`(...args: T[]) => R`): 결합이 풀린 배열을 변환할 함수예요.
+### `unzipWith(target, iteratee)`
 
-### 반환 값
-
-(`R[]`): 결합을 풀고 변환된 값들로 만들어진 새로운 배열이에요.
-
-## 예시
+여러 배열이 묶여 있는 2차원 배열에서 같은 위치의 요소들을 모아서 변환 함수를 적용한 결과를 얻고 싶을 때 `unzipWith`를 사용하세요. `unzip`과 비슷하지만 각 그룹의 요소들을 사용자 정의 함수로 변환할 수 있어요.
 
 ```typescript
-const nestedArray = [
+import { unzipWith } from 'es-toolkit/array';
+
+// 같은 위치의 숫자들을 더해요.
+const numbers = [
   [1, 2],
   [3, 4],
-  [5, 6],
+  [5, 6]
 ];
-const result = unzipWith(nestedArray, (item, item2, item3) => item + item2 + item3);
-// [9, 12]
+const sums = unzipWith(numbers, (a, b, c) => a + b + c);
+console.log(sums); // [9, 12] (1+3+5=9, 2+4+6=12)
+
+// 같은 위치의 문자열들을 연결해요.
+const words = [
+  ['hello', 'world'],
+  ['foo', 'bar'],
+  ['es', 'toolkit']
+];
+const combined = unzipWith(words, (a, b, c) => a + b + c);
+console.log(combined); // ['hellofoes', 'worldbartoolkit']
+
+// 객체 배열에서 특정 속성의 평균을 구해요.
+const scores = [
+  [{ score: 80 }, { score: 90 }],
+  [{ score: 85 }, { score: 95 }],
+  [{ score: 75 }, { score: 88 }]
+];
+const averages = unzipWith(scores, (a, b, c) => 
+  (a.score + b.score + c.score) / 3
+);
+console.log(averages); // [80, 91] (80+85+75)/3, (90+95+88)/3
 ```
 
-## Lodash와 호환성
-
-`es-toolkit/compat`에서 `unzipWith`를 가져오면 lodash와 완전히 호환돼요.
-
-호환 모드에서 다음과 같은 기능을 제공해요:
-
-- **null/undefined 처리**: 입력 배열이 null이나 undefined일 때는 빈 배열을 반환해요.
-- **유사 배열 객체**: 일반 배열 외에도 유사 배열 객체(array-like objects)를 처리할 수 있어요.
-- **iteratee 함수**: iteratee 함수는 재구성된 요소들을 인자로 받아서 원하는 타입으로 변환할 수 있어요. iteratee가 null이나 undefined인 경우에는 `unzip`처럼 동작하여 변환 없이 결합이 풀린 배열을 반환해요.
-
-### 인터페이스
+배열의 길이가 다른 경우에는 undefined가 전달돼요.
 
 ```typescript
-function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined): T[][];
-function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee?: null): T[][];
-function unzipWith<T, R>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee: (...args: T[]) => R): R[];
-function unzipWith<T>(
-  array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
-  iteratee: (...args: any[]) => unknown
-): any[];
+import { unzipWith } from 'es-toolkit/array';
+
+const mixed = [
+  [1, 4],
+  [2, 5],
+  [3] // 길이가 다름
+];
+const result = unzipWith(mixed, (a, b, c) => {
+  // c는 undefined가 될 수 있어요
+  return (a || 0) + (b || 0) + (c || 0);
+});
+console.log(result); // [6, 9] (1+2+3, 4+5+0)
 ```
 
-### 예시
+빈 배열을 전달하면 빈 배열을 반환해요.
 
 ```typescript
-// iteratee 함수를 사용하는 예시
-const array1 = [
-  [1, 3],
-  [2, 4],
-];
-const result1 = unzipWith(array1, (a, b) => a + b);
-// result1는 [3, 7]이 돼요. iteratee 함수가 제공되면 재구성된 요소들을 변환하기 때문이에요.
+import { unzipWith } from 'es-toolkit/array';
 
-// iteratee가 null이나 undefined인 경우
-const array2 = [
-  [1, 3],
-  [2, 4],
-];
-const result2 = unzipWith(array2, null);
-// result2은 [[1, 2], [3, 4]]가 돼요. iteratee가 null이면 unzip처럼 동작하기 때문이에요.
-
-// 입력값이 null이나 undefined인 경우
-const result3 = unzipWith(null);
-// result3는 []가 돼요. 입력 배열이 null이기 때문이에요.
-
-// 유사 배열 객체를 사용하는 예시
-const arrayLike = { 0: [1, 2], 1: [3, 4], length: 2 };
-const result4 = unzipWith(arrayLike, (a, b) => a + b);
-// result4는 [4, 6]이 돼요. 유사 배열 객체도 처리할 수 있기 때문이에요.
+const empty = unzipWith([], (a, b) => a + b);
+console.log(empty); // []
 ```
+
+#### 파라미터
+
+- `target` (`readonly T[][]`): 풀고 변환할 배열들이 묶여있는 2차원 배열이에요.
+- `iteratee` (`(...args: T[]) => R`): 같은 위치의 요소들을 받아서 새로운 값으로 변환하는 함수예요.
+
+#### 반환 값
+
+(`R[]`): 변환 함수를 적용한 결과들로 만들어진 새로운 배열이에요.
