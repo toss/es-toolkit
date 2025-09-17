@@ -1,28 +1,14 @@
-# toPlainObject
+# toPlainObject (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning Object.assign 사용 권장
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+객체를 일반 객체로 변환할 때는 Object.assign()이나 스프레드 연산자를 사용하는 것이 더 표준적인 방식이에요.
+
+대신 더 빠르고 현대적인 Object.assign()을 사용하세요.
+
 :::
 
-`value`를 일반 객체로 변환해요. `value`의 상속된 열거 가능한 문자열 키 속성을 일반 객체의 속성으로 평평하게 만들어요.
-
-## 인터페이스
-
-```typescript
-function toPlainObject(value: any): Record<string, any>;
-```
-
-### 파라미터
-
-- `value` (`any`): 변환할 값이에요.
-
-### 반환 값
-
-(`Record<string, any>`): 변환된 객체를 반환해요.
-
-## 예시
+값을 일반 객체로 변환해요. 상속된 열거 가능한 문자열 키 속성을 일반 객체의 속성으로 평평하게 만들어요.
 
 ```typescript
 function Foo() {
@@ -32,3 +18,17 @@ Foo.prototype.c = 3;
 
 toPlainObject(new Foo()); // => { 'b': 2, 'c': 3 }
 ```
+
+## 레퍼런스
+
+### `toPlainObject(value: any): Record<string, any>`
+
+값을 일반 객체로 변환해요.
+
+#### 파라미터
+
+- `value` (`any`): 변환할 값
+
+### 반환 값
+
+(`Record<string, any>`): 변환된 객체

@@ -1,23 +1,62 @@
-# noop (🚧 문서 작성 중)
+# noop (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning 빈 화살표 함수를 사용하세요
+
+이 `noop` 함수는 단순히 아무것도 하지 않는 함수이에요. 대부분의 경우 더 간단한 빈 화살표 함수로 대체할 수 있어요.
+
+대신 더 빠르고 현대적인 `() => {}` 또는 `() => void 0`을 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+아무것도 하지 않는 빈 함수예요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+noop();
+```
 
 ## 레퍼런스
 
 ### `noop(...args)`
 
-#### 인터페이스
+아무것도 하지 않는 플레이스홀더 함수가 필요할 때 `noop`을 사용하세요. 기본값이나 콜백 함수로 자주 사용돼요.
+
+```typescript
+import { noop } from 'es-toolkit/compat';
+
+// 기본 사용법
+noop(); // 아무것도 하지 않음
+noop(1, 2, 3); // 인수를 받지만 아무것도 하지 않음
+
+// 기본 콜백으로 사용
+function processData(data, callback = noop) {
+  // 데이터 처리
+  console.log('데이터 처리 중...', data);
+  
+  // 콜백 호출 (제공되지 않았다면 noop)
+  callback(data);
+}
+
+processData('테스트'); // 콜백이 제공되지 않았지만 오류 없이 동작
+
+// 현대적인 대안 (권장)
+function modernProcessData(data, callback = () => {}) {
+  console.log('데이터 처리 중...', data);
+  callback(data);
+}
+
+// 또는 선택적 콜백 사용
+function processDataOptional(data, callback) {
+  console.log('데이터 처리 중...', data);
+  callback?.(data); // 콜백이 제공된 경우만 호출
+}
+```
+
+기본값이나 플레이스홀더가 필요한 상황에서 유용하지만, 현대 JavaScript에서는 선택적 체이닝(`?.`)이나 기본 매개변수를 사용하는 것이 더 일반적이에요.
 
 #### 파라미터
 
+- `...args` (`any[]`): 어떤 인수들이든 받을 수 있지만 모두 무시돼요.
+
 ### 반환 값
+
+(`void`): 아무것도 반환하지 않아요.

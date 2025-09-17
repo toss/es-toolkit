@@ -1,35 +1,65 @@
-# divide
+# divide (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `/` 연산자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `divide` 함수는 추가적인 함수 호출로 인해 느리게 동작해요.
+
+대신 더 빠르고 간단한 `/` 연산자를 사용하세요.
+
 :::
 
 두 숫자를 나눠요.
 
-숫자 중 하나라도 `NaN`이면, `NaN`을 반환해요.
-
-## 인터페이스
-
 ```typescript
-function divide(value: number, other: number): number;
+const result = divide(value, other);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`number`): 나눗셈의 첫 번째 숫자.
-- `other` (`number`): 나눗셈의 두 번째 숫자.
+### `divide(value, other)`
+
+두 숫자를 나누고 싶을 때 `divide`를 사용하세요.
+
+```typescript
+import { divide } from 'es-toolkit/compat';
+
+// 기본 나눗셈
+divide(6, 3);
+// Returns: 2
+
+divide(10, 5);
+// Returns: 2
+
+// 소수 나눗셈
+divide(7, 2);
+// Returns: 3.5
+
+divide(1, 3);
+// Returns: 0.3333333333333333
+
+// 0으로 나누기
+divide(6, 0);
+// Returns: Infinity
+
+divide(-6, 0);
+// Returns: -Infinity
+
+// NaN 처리
+divide(2, NaN);
+// Returns: NaN
+
+divide(NaN, 3);
+// Returns: NaN
+
+divide(NaN, NaN);
+// Returns: NaN
+```
+
+#### 파라미터
+
+- `value` (`number`): 나눗셈의 피제수 (나누어지는 수)예요.
+- `other` (`number`): 나눗셈의 제수 (나누는 수)예요.
 
 ### 반환 값
 
-(`number`): 두 숫자를 나눈 값.
-
-## 예시
-
-```typescript
-divide(6, 3); // => 2
-divide(2, NaN); // => NaN
-divide(NaN, 3); // => NaN
-divide(NaN, NaN); // => NaN
-```
+(`number`): 첫 번째 숫자를 두 번째 숫자로 나눈 결과를 반환해요. 둘 중 하나라도 NaN이면 NaN을 반환해요.

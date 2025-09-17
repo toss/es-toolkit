@@ -1,25 +1,53 @@
-# stubFalse
+# stubFalse (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `false` 리터럴을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `stubFalse` 함수는 불필요한 함수 호출로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `false` 리터럴을 사용하세요.
+
 :::
 
-`false`를 반환해요.
-
-## 인터페이스
+항상 `false` 값을 반환해요.
 
 ```typescript
-function stubFalse(): boolean;
+const result = stubFalse();
 ```
+
+## 레퍼런스
+
+### `stubFalse()`
+
+항상 `false` 값이 필요한 콜백 함수나 기본값으로 사용할 때 `stubFalse`를 사용하세요. 배열 메서드의 필터링이나 조건부 로직에서 일관된 `false` 값을 제공할 때 유용해요.
+
+```typescript
+import { stubFalse } from 'es-toolkit/compat';
+
+// 배열에서 모든 요소를 제거하는 필터
+const items = [1, 2, 3, 4, 5];
+const emptyArray = items.filter(stubFalse);
+console.log(emptyArray); // []
+```
+
+조건부 설정에서 기본값으로도 사용할 수 있어요.
+
+```typescript
+import { stubFalse } from 'es-toolkit/compat';
+
+// 기본적으로 비활성화된 옵션들
+const defaultOptions = {
+  enableLogging: stubFalse(),
+  enableDebug: stubFalse(),
+  enableCache: stubFalse()
+};
+
+console.log(defaultOptions); // { enableLogging: false, enableDebug: false, enableCache: false }
+```
+
+#### 파라미터
+
+없음.
 
 ### 반환 값
 
-(`boolean`): `false`.
-
-## 예시
-
-```typescript
-stubFalse(); // Returns false
-```
+(`boolean`): 항상 `false`를 반환해요.

@@ -1,44 +1,51 @@
-# assign
+# assign (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.assign`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `assign` 함수는 Lodash 호환성을 위해 복잡한 처리를 포함하고 있어 상대적으로 느려요.
+
+대신 더 빠르고 현대적인 `Object.assign`을 사용하세요.
+
 :::
 
-`source` 객체가 가지고 있는 프로퍼티 값들을 `object` 객체에 할당해요. 프로토타입에서 상속된 프로퍼티도 포함돼요.
-
-`source`와 `object`이 같은 값으로 가지고 있는 프로퍼티는 덮어쓰지 않아요.
-
-## 인터페이스
+소스 객체들의 속성을 대상 객체에 할당해요.
 
 ```typescript
-function assign<O, S>(object: O, source: S): O & S;
-function assign<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function assign<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function assign<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): O & S1 & S2 & S3 & S4;
-function assign(object: any, ...sources: any[]): any;
+const result = assign(target, source1, source2);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`any`): `source`의 프로퍼티 값이 할당될 객체.
-- `sources` (`...any[]`): `object`에 할당할 값을 가지고 있는 객체들.
+### `assign(object, ...sources)`
+
+소스 객체들의 속성을 대상 객체에 복사할 때 `assign`을 사용하세요. 여러 소스 객체를 지정할 수 있어요.
+
+```typescript
+import { assign } from 'es-toolkit/compat';
+
+// 기본 사용법
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+const result = assign(target, source);
+// Returns: { a: 1, b: 3, c: 4 }
+
+// 여러 소스 객체 병합
+const target2 = { a: 1 };
+const result2 = assign(target2, { b: 2 }, { c: 3 }, { d: 4 });
+// Returns: { a: 1, b: 2, c: 3, d: 4 }
+
+// 기존 값이 같으면 덮어쓰지 않음
+const target3 = { a: 1, b: 2 };
+const source3 = { b: 2, c: 3 };
+const result3 = assign(target3, source3);
+// Returns: { a: 1, b: 2, c: 3 }
+```
+
+#### 파라미터
+
+- `object` (`any`): 속성이 할당될 대상 객체예요.
+- `...sources` (`any[]`): 속성을 복사할 소스 객체들이에요.
 
 ### 반환 값
 
-(`any`): `source`의 값이 할당된 `object` 객체.
-
-## 예시
-
-```typescript
-const target = { a: 1 };
-const result = assign(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
-```
+(`any`): 소스 객체들의 속성이 병합된 대상 객체를 반환해요.

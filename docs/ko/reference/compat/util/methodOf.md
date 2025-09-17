@@ -1,29 +1,14 @@
-# methodOf
+# methodOf (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 직접 메서드 호출 권장
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+객체의 메서드를 호출할 때는 직접 호출하거나 Function.prototype.call을 사용하는 것이 더 명확하고 표준적인 방식이에요.
+
+대신 더 빠르고 현대적인 직접 메서드 호출을 사용하세요.
+
 :::
 
-주어진 경로에 있는 객체의 메서드를 제공된 파라미터로 호출하는 함수를 만들어요.
-
-## 인터페이스
-
-```typescript
-function methodOf(object: object, ...args: any[]): (path: PropertyKey | PropertyKey[]) => any;
-```
-
-### 파라미터
-
-- `object` (`object`): 조회할 객체.
-- `args` (`...any`): 메서드를 호출할 때 사용할 인수.
-
-### 반환 값
-
-(`(path: PropertyKey | PropertyKey[]) => any`): 경로를 받아 `object`의 `path`에서 `args`로 메서드를 호출하는 새로운 함수.
-
-## 예시
+주어진 경로에 있는 객체의 메서드를 미리 정의된 파라미터로 호출하는 함수를 만들어요.
 
 ```typescript
 const object = {
@@ -37,3 +22,18 @@ const object = {
 const add = methodOf(object, 1, 2);
 console.log(add('a.b')); // => 3
 ```
+
+## 레퍼런스
+
+### `methodOf(object: object, ...args: any[]): (path: PropertyKey | PropertyKey[]) => any`
+
+객체의 메서드를 미리 정의된 파라미터로 호출하는 함수를 생성해요.
+
+#### 파라미터
+
+- `object` (`object`): 조회할 객체
+- `args` (`...any`): 메서드를 호출할 때 사용할 인수
+
+### 반환 값
+
+(`(path: PropertyKey | PropertyKey[]) => any`): 경로를 받아 메서드를 호출하는 새로운 함수

@@ -1,38 +1,74 @@
-# parseInt
+# parseInt (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `parseInt`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `parseInt` 함수는 추가적인 함수 호출로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 네이티브 `parseInt`를 사용하세요.
+
 :::
 
-문자열을 정수로 바꿔요. 기수를 `radix` 파라미터로 정의할 수 있어요.
-
-기수 `radix`가 정의되지 않았거나 0인 경우에는, 주어진 문자열의 형식에 따라서 다른 기수가 사용돼요. 문자열이 `0x20`처럼 16진수인 경우에는, 기수를 16으로 사용해요. 그렇지 않으면 기수를 10으로 사용해요.
-
-## 인터페이스
+문자열을 정수로 변환해요.
 
 ```typescript
-function parseInt(string: string, radix?: number): number;
+const result = parseInt(string, radix);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `string` (`string`): 정수로 변환할 문자열.
-- `radix` (`number`): 문자열을 정수로 변환할 때 사용할 기수. 기본값은 `0`이에요.
+### `parseInt(string, radix?)`
+
+문자열을 정수로 변환하고 싶을 때 `parseInt`를 사용하세요. 기수를 지정해서 다른 진법으로 해석할 수 있어요.
+
+```typescript
+import { parseInt } from 'es-toolkit/compat';
+
+// 기본 10진수 파싱
+parseInt('123');
+// Returns: 123
+
+parseInt('08');
+// Returns: 8
+
+// 16진수 자동 인식
+parseInt('0x20');
+// Returns: 32
+
+// 명시적 기수 지정
+parseInt('08', 10);
+// Returns: 8
+
+parseInt('0x20', 16);
+// Returns: 32
+
+parseInt('1010', 2);
+// Returns: 10
+
+// 배열에서 사용
+['6', '08', '10'].map(parseInt);
+// Returns: [6, 8, 10]
+```
+
+잘못된 형식의 문자열은 NaN을 반환해요.
+
+```typescript
+import { parseInt } from 'es-toolkit/compat';
+
+parseInt('abc');
+// Returns: NaN
+
+parseInt('');
+// Returns: NaN
+
+parseInt('123abc');
+// Returns: 123 (앞부분만 파싱)
+```
+
+#### 파라미터
+
+- `string` (`string`): 정수로 변환할 문자열이에요.
+- `radix` (`number`, 선택): 변환할 때 사용할 기수예요. 기본값은 `0`이고, 이 경우 문자열 형식에 따라 자동으로 결정돼요.
 
 ### 반환 값
 
-(`number`): 변환된 정수.
-
-## 예시
-
-```typescript
-parseInt('08'); // => 8
-parseInt('0x20'); // => 32
-
-parseInt('08', 10); // => 8
-parseInt('0x20', 16); // => 32
-
-['6', '08', '10'].map(parseInt); // => [6, 8, 10]
-```
+(`number`): 변환된 정수를 반환해요. 변환할 수 없으면 NaN을 반환해요.

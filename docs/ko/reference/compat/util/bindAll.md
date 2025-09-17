@@ -1,38 +1,28 @@
-# bindAll
+# bindAll (Lodash 호환성)
 
-::: info
-이 함수는 `es-toolkit/compat`에서만 임포트할 수 있습니다. 대체 가능한 네이티브 JavaScript API가 있거나 아직 충분히 최적화되지 않았기 때문입니다.
+::: warning `Function.prototype.bind`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 임포트하면 [lodash와 완전히 동일하게 동작](../../../compatibility.md)합니다.
+이 `bindAll` 함수는 복잡한 메서드 이름 처리와 타입 변환으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Function.prototype.bind`를 사용하세요.
+
 :::
 
-주어진 이름들에 대해서, 객체가 가지고 있는 메서드의 `this` 값을 자기 자신으로 바인딩해요. 메서드 이름은 인자로 제공할 수 있어요.
-
-## 인터페이스
+객체의 메서드들을 객체 자신에게 바인딩해요.
 
 ```typescript
-function bindAll(
-  object: Record<string, any>,
-  ...methodNames: Array<string | string[] | number | IArguments>
-): Record<string, any>;
+const boundObject = bindAll(object, methodNames);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`Object`): 메서드를 바인딩할 객체.
-- `methodNames` (`...(string | string[] | number | IArguments)`): 바인딩할 메서드 이름. 다음 형식으로 지정할 수 있어요.
-  - 개별 메서드 이름 문자열
-  - 메서드 이름 배열
-  - 숫자 (`-0`는 특별히 처리)
-  - Arguments 객체
+### `bindAll(object, ...methodNames)`
 
-### 반환 값
-
-(`Object`): 메서드가 바인딩된 객체.
-
-## 예제
+객체의 특정 메서드들의 `this` 값을 해당 객체로 고정하고 싶을 때 `bindAll`을 사용하세요. 이벤트 핸들러나 콜백 함수로 메서드를 전달할 때 `this` 컨텍스트를 유지하는 데 유용해요.
 
 ```typescript
+import { bindAll } from 'es-toolkit/compat';
+
 const view = {
   label: 'docs',
   click: function () {
@@ -40,23 +30,57 @@ const view = {
   },
 };
 
-bindAll(view, ['click']);
-jQuery(element).on('click', view.click);
-// => 클릭 시 'clicked docs' 출력
-
-// 개별 메서드 이름 사용
+// 메서드를 객체에 바인딩
 bindAll(view, 'click');
-// => 위와 동일한 결과
+document.addEventListener('click', view.click);
+// => 클릭 시 'clicked docs' 출력
+```
 
-// 숫자 키 처리
+여러 메서드를 한 번에 바인딩할 수 있어요.
+
+```typescript
+import { bindAll } from 'es-toolkit/compat';
+
+const obj = {
+  name: 'example',
+  greet() {
+    return `Hello, ${this.name}!`;
+  },
+  farewell() {
+    return `Goodbye, ${this.name}!`;
+  }
+};
+
+// 배열로 여러 메서드 바인딩
+bindAll(obj, ['greet', 'farewell']);
+
+const greet = obj.greet;
+greet(); // 'Hello, example!' (this가 올바르게 바인딩됨)
+```
+
+숫자나 특수 키도 처리할 수 있어요.
+
+```typescript
+import { bindAll } from 'es-toolkit/compat';
+
 const obj = {
   '-0': function () {
-    return -2;
+    return 'negative zero';
   },
   '0': function () {
-    return -1;
+    return 'zero';
   },
 };
+
 bindAll(obj, -0);
-obj['-0'](); // => -2
+obj['-0'](); // 'negative zero'
 ```
+
+#### 파라미터
+
+- `object` (`Object`): 메서드를 바인딩할 객체예요.
+- `methodNames` (`...(string | string[] | number | IArguments)`): 바인딩할 메서드 이름들이에요. 개별 문자열, 배열, 숫자, Arguments 객체로 지정할 수 있어요.
+
+### 반환 값
+
+(`Object`): 메서드가 바인딩된 원본 객체를 반환해요.

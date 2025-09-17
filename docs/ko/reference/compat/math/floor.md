@@ -1,32 +1,62 @@
-# floor
+# floor (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Math.floor`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `floor` 함수는 소수점 자리 계산과 내부 함수 호출로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Math.floor`을 사용하세요.
+
 :::
 
-숫자를 지정된 자릿수로 내림하는 함수예요.
-
-## 인터페이스
+숫자를 지정된 소수점 자리로 내림해요.
 
 ```typescript
-function floor(number: number | string, precision: number | string = 0): number;
+const result = floor(number, precision);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `number` (`number | string`): 내림할 숫자.
-- `precision` (`number | string`, 선택 사항): 내림할 정확도. 기본값은 0이에요.
+### `floor(number, precision?)`
+
+숫자를 특정 소수점 자리로 내림하고 싶을 때 `floor`를 사용하세요.
+
+```typescript
+import { floor } from 'es-toolkit/compat';
+
+// 기본 내림 (정수로)
+floor(4.9);
+// Returns: 4
+
+floor(4.1);
+// Returns: 4
+
+// 소수점 둘째 자리로 내림
+floor(6.994, 2);
+// Returns: 6.99
+
+floor(6.999, 2);
+// Returns: 6.99
+
+// 음수 자리로 내림 (10의 단위)
+floor(6040, -2);
+// Returns: 6000
+
+floor(1234, -2);
+// Returns: 1200
+
+// 음수도 내림
+floor(-4.1);
+// Returns: -5
+
+floor(-6.994, 2);
+// Returns: -7.00
+```
+
+#### 파라미터
+
+- `number` (`number`): 내림할 숫자예요.
+- `precision` (`number`, 선택): 내림할 소수점 자리수예요. 기본값은 `0`이에요.
 
 ### 반환 값
 
-(`number`): 내림한 숫자.
-
-## 예시
-
-```typescript
-floor(4.006); // => 4
-floor(0.046, 2); // => 0.04
-floor(4060, -2); // => 4000
-```
+(`number`): 지정된 소수점 자리로 내림된 숫자를 반환해요.

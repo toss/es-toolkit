@@ -1,23 +1,76 @@
-# mean (🚧 문서 작성 중)
+# mean (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `reduce()`를 사용하세요
+
+이 `mean` 함수는 타입 변환과 null/undefined 처리로 인해 느리게 동작해요.
+
+대신 직접 계산하세요: `array.reduce((a, b) => a + b, 0) / array.length`
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+배열의 평균값을 구해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const average = mean(array);
+```
 
 ## 레퍼런스
 
-### `mean(...args)`
+### `mean(array)`
 
-#### 인터페이스
+숫자 배열의 평균값을 계산해요.
+
+```typescript
+import { mean } from 'es-toolkit/compat';
+
+// 숫자 배열
+mean([1, 2, 3, 4, 5]);
+// Returns: 3
+
+mean([10, 20, 30]);
+// Returns: 20
+
+mean([1.5, 2.5, 3.5]);
+// Returns: 2.5
+```
+
+빈 배열은 NaN을 반환해요.
+
+```typescript
+import { mean } from 'es-toolkit/compat';
+
+mean([]);
+// Returns: NaN
+
+mean(null);
+// Returns: NaN
+
+mean(undefined);
+// Returns: NaN
+```
+
+잘못된 값들은 무시하고 계산해요.
+
+```typescript
+import { mean } from 'es-toolkit/compat';
+
+mean([1, undefined, 2, null, 3]);
+// Returns: 2 (1 + 2 + 3) / 3 = 2
+```
+
+문자열 숫자도 처리해요.
+
+```typescript
+import { mean } from 'es-toolkit/compat';
+
+mean(['1', '2', '3']);
+// Returns: 2 (문자열이 숫자로 변환됨)
+```
 
 #### 파라미터
 
+- `array` (`ArrayLike<any> | null | undefined`): 평균을 구할 숫자들이 있는 배열이에요.
+
 ### 반환 값
+
+(`number`): 배열의 평균값을 반환해요. 빈 배열이면 `NaN`을 반환해요.

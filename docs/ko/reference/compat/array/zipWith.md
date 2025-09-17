@@ -1,23 +1,47 @@
-# zipWith (🚧 문서 작성 중)
+# zipWith (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `zipWith`을 사용하세요
+
+이 `zipWith` 함수는 Lodash와의 호환성을 위해 추가적인 처리가 포함되어 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [zipWith](../../array/zipWith.md)을 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+여러 배열의 요소를 결합 함수를 사용해서 새로운 배열로 결합해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = zipWith([1, 2], [3, 4], (a, b) => a + b);
+// result는 [4, 6]이 돼요.
+```
 
 ## 레퍼런스
 
-### `zipWith(...args)`
+### `zipWith(...arrs, iteratee)`
 
-#### 인터페이스
+여러 배열을 받아서 각 인덱스의 요소들을 제공된 함수로 결합하여 새로운 배열을 만들어요. 배열의 길이가 다를 경우, 가장 긴 배열의 길이까지 처리하며 누락된 값은 `undefined`로 전달돼요.
+
+```typescript
+import { zipWith } from 'es-toolkit/compat';
+
+// 두 배열의 요소를 더하기
+const result1 = zipWith([1, 2, 3], [4, 5, 6], (a, b) => a + b);
+// Returns: [5, 7, 9]
+
+// 세 배열의 요소를 결합
+const result2 = zipWith([1, 2], [3, 4], [5, 6], (a, b, c) => a + b + c);
+// Returns: [9, 12]
+
+// 길이가 다른 배열들
+const result3 = zipWith([1, 2, 3], [4, 5], (a, b) => (a || 0) + (b || 0));
+// Returns: [5, 7, 3]
+```
 
 #### 파라미터
 
-### 반환 값
+- `...arrs` (`any[][]`): 결합할 배열들이에요.
+- `iteratee` (`Function`): 각 인덱스의 요소들을 결합하는 함수예요.
+
+#### 반환 값
+
+(`any[]`): 결합 함수를 적용한 결과로 이루어진 새로운 배열이에요.

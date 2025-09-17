@@ -1,23 +1,64 @@
-# identity (🚧 문서 작성 중)
+# identity (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `identity`를 사용하세요
+
+이 `identity` 함수는 `es-toolkit`의 메인 라이브러리에도 동일한 기능의 함수가 있어요. 단순히 입력값을 그대로 반환하는 기능이에요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [identity](../../function/identity.md)를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+입력받은 값을 닳지 않고 그대로 반환해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = identity(value);
+```
 
 ## 레퍼런스
 
-### `identity(...args)`
+### `identity(value)`
 
-#### 인터페이스
+입력받은 값을 그대로 반환하고 싶을 때 `identity`를 사용하세요. 주로 기본값이나 플레이스홀더 함수로 사용되며, 함수형 프로그래밍에서 자주 사용돴요.
+
+```typescript
+import { identity } from 'es-toolkit/compat';
+
+// 기본 사용법
+console.log(identity(5)); // 5
+console.log(identity('hello')); // 'hello'
+console.log(identity({ key: 'value' })); // { key: 'value' }
+
+// 배열의 map과 함께 사용 (값 복사)
+const numbers = [1, 2, 3, 4, 5];
+const copied = numbers.map(identity);
+console.log(copied); // [1, 2, 3, 4, 5]
+
+// 필터링에서 기본값으로 사용
+const values = [1, 0, '', 'hello', null, undefined, false, true];
+const filtered = values.filter(identity); // 참으로 평가되는 값들만 남김
+console.log(filtered); // [1, 'hello', true]
+
+// 기본 변환 함수로 사용
+function processData(data, transform = identity) {
+  return transform(data);
+}
+
+console.log(processData('hello')); // 'hello'
+console.log(processData('hello', x => x.toUpperCase())); // 'HELLO'
+```
+
+대부분의 경우 더 간단한 화살표 함수 `x => x`로 대체할 수 있어요:
+
+```typescript
+// identity 대신 화살표 함수 사용 (권장)
+const copied = numbers.map(x => x);
+const filtered = values.filter(x => x);
+```
 
 #### 파라미터
 
+- `value` (`T`): 반환할 값이에요.
+
 ### 반환 값
+
+(`T`): 입력받은 값을 그대로 반환해요.

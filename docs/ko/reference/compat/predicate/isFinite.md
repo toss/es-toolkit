@@ -1,37 +1,53 @@
-# isFinite
+# isFinite (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Number.isFinite`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `isFinite` 함수는 추가적인 타입 체크 오버헤드로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Number.isFinite`를 사용하세요.
+
 :::
 
-주어진 값이 유한한 숫자인지 확인해요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `number`로 좁혀요.
-
-## 인터페이스
+값이 유한한 숫자인지 확인해요.
 
 ```typescript
-function isFinite(value?: unknown): value is number;
+const result = isFinite(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value`(`unknown`): 유한한 숫자인지 검사할 값.
+### `isFinite(value)`
+
+주어진 값이 유한한 숫자인지 확인할 때 `isFinite`를 사용하세요. 이 함수는 TypeScript에서 타입 가드로도 작동해서, 값의 타입을 `number`로 좁혀줘요.
+
+```typescript
+import { isFinite } from 'es-toolkit/compat';
+
+// 유한한 숫자들
+isFinite(100); // true
+isFinite(-50); // true
+isFinite(3.14); // true
+isFinite(0); // true
+
+// 무한대는 false
+isFinite(Infinity); // false
+isFinite(-Infinity); // false
+
+// NaN도 false
+isFinite(NaN); // false
+
+// 다른 타입들도 false
+isFinite('100'); // false
+isFinite([]); // false
+isFinite({}); // false
+isFinite(null); // false
+isFinite(undefined); // false
+```
+
+#### 파라미터
+
+- `value` (`any`): 확인할 값이에요.
 
 ### 반환 값
 
-(`value is number`): 값이 유한한 숫자일 경우 `true`, 아니면 `false`.
-
-## 예시
-
-```typescript
-const value1 = 100;
-const value2 = Infinity;
-const value3 = '100';
-
-console.log(isFinite(value1)); // true
-console.log(isFinite(value2)); // false
-console.log(isFinite(value3)); // false
-```
+(`boolean`): 값이 유한한 숫자이면 `true`, 아니면 `false`를 반환해요.
