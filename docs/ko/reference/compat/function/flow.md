@@ -56,22 +56,22 @@ class Calculator {
   constructor(value) {
     this.value = value;
   }
-  
+
   add(n) {
     this.value += n;
     return this;
   }
-  
+
   square() {
     this.value *= this.value;
     return this;
   }
-  
+
   double() {
     this.value *= 2;
     return this;
   }
-  
+
   valueOf() {
     return this.value;
   }
@@ -79,8 +79,6 @@ class Calculator {
 
 const chainedResult = new Calculator(3).square().double().valueOf(); // 18
 ```
-
-일반적으로 함수형 프로그래밍에서 데이터 처리 파이프라인을 만들 때 사용되지만, 현대 JavaScript에서는 더 단순한 방법들이 있어요.
 
 #### 파라미터
 

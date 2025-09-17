@@ -48,19 +48,6 @@ isNumber(null);
 // Returns: false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isNumber } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isNumber(value)) {
-    // 여기서 value는 number 타입으로 좁혀져요
-    console.log(value.toFixed(2));
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): 숫자인지 확인할 값이에요.

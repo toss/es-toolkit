@@ -8,7 +8,7 @@
 
 :::
 
-입력받은 값을 닳지 않고 그대로 반환해요.
+입력받은 값을 그대로 반환해요.
 
 ```typescript
 const result = identity(value);
@@ -18,7 +18,7 @@ const result = identity(value);
 
 ### `identity(value)`
 
-입력받은 값을 그대로 반환하고 싶을 때 `identity`를 사용하세요. 주로 기본값이나 플레이스홀더 함수로 사용되며, 함수형 프로그래밍에서 자주 사용돴요.
+입력받은 값을 그대로 반환하고 싶을 때 `identity`를 사용하세요. 주로 기본값이나 플레이스홀더 함수로 사용되며, 함수형 프로그래밍에서 자주 사용돼요.
 
 ```typescript
 import { identity } from 'es-toolkit/compat';

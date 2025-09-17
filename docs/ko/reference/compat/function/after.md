@@ -8,7 +8,7 @@
 
 :::
 
-함수가 지정된 횟수 이후에만 실행되도록 제한하는 함수를 만들어요.
+함수가 지정된 호출 횟수 이후에만 실행되도록 하는 함수를 만들어요.
 
 ```typescript
 const restrictedFunction = after(n, func);
@@ -29,7 +29,7 @@ const logAfterThree = after(3, () => {
 });
 
 logAfterThree(); // 실행되지 않음
-logAfterThree(); // 실행되지 않음  
+logAfterThree(); // 실행되지 않음
 logAfterThree(); // "3번째 호출부터 실행돼요!" 출력
 logAfterThree(); // "3번째 호출부터 실행돼요!" 출력 (계속 실행됨)
 ```
@@ -62,7 +62,7 @@ const afterThree = after(3, () => console.log('실행!'));
 // 클로저 사용 (더 간단하고 빠름)
 function createAfter(count, callback) {
   let callCount = 0;
-  return function(...args) {
+  return function (...args) {
     callCount++;
     if (callCount >= count) {
       return callback.apply(this, args);
@@ -78,7 +78,7 @@ const afterThreeAlternative = createAfter(3, () => console.log('실행!'));
 ```typescript
 import { after } from 'es-toolkit/compat';
 
-const processAfterTwo = after(2, (data) => {
+const processAfterTwo = after(2, data => {
   console.log('데이터 처리:', data);
   return data * 2;
 });
@@ -97,20 +97,20 @@ class DataLoader {
   constructor() {
     this.isReady = false;
     this.data = null;
-    
+
     // 2가지 초기화 작업 후 활성화
     this.activate = after(2, () => {
       this.isReady = true;
       console.log('DataLoader가 준비되었습니다!');
     });
   }
-  
+
   loadConfig() {
     // 설정 로드
     console.log('설정 로드 완료');
     this.activate();
   }
-  
+
   loadData() {
     // 데이터 로드
     console.log('데이터 로드 완료');

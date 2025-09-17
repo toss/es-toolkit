@@ -61,23 +61,6 @@ const mySymbol = Symbol('mySymbol');
 isSymbol(mySymbol); // true
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isSymbol } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isSymbol(value)) {
-    // 이 블록에서 value는 symbol 타입이에요
-    console.log(`심볼 설명: ${value.description}`);
-    console.log(`심볼 문자열: ${value.toString()}`);
-  }
-}
-
-processValue(Symbol('test')); // "심볼 설명: test"
-processValue('not a symbol'); // 아무것도 출력되지 않음
-```
-
 #### 파라미터
 
 - `value` (`unknown`): 심볼인지 확인할 값이에요.

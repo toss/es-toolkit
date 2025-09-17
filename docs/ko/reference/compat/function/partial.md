@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit`의 `partial`을 사용하세요
 
-이 `partial` 함수는 많은 오버로드와 공용체 타입 처리로 인해 비효율적이에요. 또한 대부분의 경우 더 간단한 냄자마 함수로 대체할 수 있어요.
+이 `partial` 함수는 많은 오버로드와 공용체 타입 처리로 인해 비효율적이에요. 또한 대부분의 경우 더 간단한 화살표 함수로 대체할 수 있어요.
 
 대신 더 빠르고 현대적인 `es-toolkit`의 [partial](../../function/partial.md)을 사용하세요.
 
@@ -46,7 +46,7 @@ greetWithExclamation('Hi'); // 'Hi Alice!'
 ```typescript
 // partial 대신 화살표 함수 사용 (권장)
 const sayHello = (name, punctuation) => greet('Hello', name, punctuation);
-const greetAlice = (punctuation) => greet('Hello', 'Alice', punctuation);
+const greetAlice = punctuation => greet('Hello', 'Alice', punctuation);
 ```
 
 #### 파라미터

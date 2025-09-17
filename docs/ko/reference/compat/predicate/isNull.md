@@ -59,23 +59,6 @@ handleValue(undefined); // "값이 undefined에요"
 handleValue('hello'); // "값이 있어요: hello"
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isNull } from 'es-toolkit/compat';
-
-function processValue(value: string | null) {
-  if (isNull(value)) {
-    // 이 블록에서 value는 null 타입이에요
-    console.log('null 값을 처리해요');
-    return;
-  }
-
-  // 이 블록에서 value는 string 타입이에요
-  console.log(value.toUpperCase());
-}
-```
-
 #### 파라미터
 
 - `value` (`any`): `null`인지 확인할 값이에요.

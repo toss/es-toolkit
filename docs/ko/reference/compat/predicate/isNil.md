@@ -53,23 +53,6 @@ isNil(null); // true
 isNil(undefined); // true
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isNil } from 'es-toolkit/compat';
-
-function processValue(value: string | null | undefined) {
-  if (isNil(value)) {
-    // 이 블록에서 value는 null | undefined 타입이에요
-    console.log('값이 없어요');
-    return;
-  }
-
-  // 이 블록에서 value는 string 타입이에요
-  console.log(value.toUpperCase());
-}
-```
-
 #### 파라미터
 
 - `x` (`any`): `null` 또는 `undefined`인지 확인할 값이에요.

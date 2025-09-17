@@ -34,19 +34,6 @@ isBuffer(null); // false
 isBuffer(undefined); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isBuffer } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isBuffer(value)) {
-    // 이 블록에서 value는 Buffer 타입이에요
-    console.log(value.toString());
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): Buffer 인스턴스인지 확인할 값이에요.

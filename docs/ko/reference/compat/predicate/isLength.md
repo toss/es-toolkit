@@ -54,19 +54,6 @@ function validateArrayLength(arr: any[]) {
 validateArrayLength([1, 2, 3]); // "배열의 길이 3는 유효해요"
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isLength } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isLength(value)) {
-    // 이 블록에서 value는 number 타입이에요
-    console.log(`유효한 길이: ${value}`);
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`any`): 유효한 길이인지 확인할 값이에요.

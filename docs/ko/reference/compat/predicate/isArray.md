@@ -41,19 +41,6 @@ isArray(null);
 // Returns: false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isArray } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isArray(value)) {
-    // 여기서 value는 any[] 타입으로 좁혀져요
-    console.log(value.length);
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): 배열인지 확인할 값이에요.

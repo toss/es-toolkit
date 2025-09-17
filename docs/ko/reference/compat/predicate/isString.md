@@ -62,23 +62,6 @@ isString('undefined'); // true
 isString(undefined); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isString } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isString(value)) {
-    // 이 블록에서 value는 string 타입이에요
-    console.log(value.toUpperCase());
-    console.log(`문자열 길이: ${value.length}`);
-  }
-}
-
-processValue('hello'); // "HELLO", "문자열 길이: 5"
-processValue(123); // 아무것도 출력되지 않음
-```
-
 #### 파라미터
 
 - `value` (`unknown`): 문자열인지 확인할 값이에요.

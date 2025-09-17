@@ -51,19 +51,6 @@ isObject(123);
 // Returns: false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isObject } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isObject(value)) {
-    // 여기서 value는 object 타입으로 좁혀져요
-    console.log('값이 객체입니다');
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): 객체인지 확인할 값이에요.

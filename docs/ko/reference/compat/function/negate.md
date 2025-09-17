@@ -2,7 +2,7 @@
 
 ::: warning 논리 부정 연산자를 사용하세요
 
-이 `negate` 함수는 단순히 함수의 결과를 부정하는 기능이에요. 대부분의 경우 논리 부정 연산자(`!`)를 직접 사용하는 것이 더 간단하고 빠로요.
+이 `negate` 함수는 단순히 함수의 결과를 부정하는 기능이에요. 대부분의 경우 논리 부정 연산자(`!`)를 직접 사용하는 것이 더 간단하고 빨라요.
 
 대신 더 빠르고 현대적인 `!predicate(...args)` 또는 `(...args) => !predicate(...args)`를 사용하세요.
 
@@ -40,7 +40,7 @@ console.log(oddNumbers); // [1, 3, 5]
 // 현대적인 대안 (권장)
 const modernOddNumbers = numbers.filter(n => !isEven(n));
 // 또는
-const isOddModern = (n) => !isEven(n);
+const isOddModern = n => !isEven(n);
 const modernOddNumbers2 = numbers.filter(isOddModern);
 
 // 복잡한 예시
