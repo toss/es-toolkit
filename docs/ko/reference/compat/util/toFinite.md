@@ -1,34 +1,54 @@
-# toFinite
+# toFinite (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Number` 함수를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `toFinite` 함수는 `Number.MAX_VALUE` 변환이나 `NaN` 처리 등의 추가 로직으로 인해 복잡하고 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Number` 함수를 사용하세요.
+
 :::
 
-`value`를 유한한 숫자로 변환해요.
-
-## 인터페이스
+값을 유한한 숫자로 변환해요.
 
 ```typescript
-function toFinite(value?: unknown): number;
+const finite = toFinite(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): 변환할 값.
+### `toFinite(value)`
+
+값을 유한한 숫자로 변환하고 싶을 때 `toFinite`를 사용하세요. `Infinity`나 `-Infinity`는 `Number.MAX_VALUE`나 `-Number.MAX_VALUE`로 변환되고, `NaN`은 `0`으로 변환돼요.
+
+```typescript
+import { toFinite } from 'es-toolkit/compat';
+
+toFinite(3.2);
+// Returns: 3.2
+
+toFinite(Number.MIN_VALUE);
+// Returns: 5e-324
+
+toFinite(Infinity);
+// Returns: 1.7976931348623157e+308
+
+toFinite(-Infinity);
+// Returns: -1.7976931348623157e+308
+
+toFinite('3.2');
+// Returns: 3.2
+
+toFinite(NaN);
+// Returns: 0
+
+toFinite(Symbol.iterator);
+// Returns: 0
+```
+
+#### 파라미터
+
+- `value` (`unknown`): 변환할 값이에요.
 
 ### 반환 값
 
-(`number`): 유한한 숫자.
-
-## 예시
-
-```typescript
-toNumber(3.2); // => 3.2
-toNumber(Number.MIN_VALUE); // => 5e-324
-toNumber(Infinity); // => 1.7976931348623157e+308
-toNumber('3.2'); // => 3.2
-toNumber(Symbol.iterator); // => 0
-toNumber(NaN); // => 0
-```
+(`number`): 유한한 숫자를 반환해요.
