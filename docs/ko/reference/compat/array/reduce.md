@@ -14,59 +14,47 @@
 const result = reduce(collection, iteratee, initialValue);
 ```
 
-## 인터페이스
+## 레퍼런스
+
+### `reduce(collection, iteratee, initialValue)`
+
+배열이나 객체의 모든 요소를 하나씩 순회하면서 누적값을 계산하세요. 초기 값을 제공하면 그 값부터 시작하고, 그렇지 않으면 첫 번째 요소부터 시작해요.
 
 ```typescript
-function reduce<T, U>(
-  collection: T[],
-  iteratee: (accumulator: U, value: T, index: number, collection: T[]) => U,
-  initialValue: U
-): U;
-function reduce<T>(collection: T[], iteratee: (accumulator: T, value: T, index: number, collection: T[]) => T): T;
+import { reduce } from 'es-toolkit/compat';
 
-function reduce<T, U>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: U, value: T, index: number, collection: ArrayLike<T>) => U,
-  initialValue: U
-): U;
-function reduce<T>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: T, value: T, index: number, collection: ArrayLike<T>) => T
-): T;
+// 배열의 합계 구하기
+const numbers = [1, 2, 3, 4];
+const sum = reduce(numbers, (acc, value) => acc + value, 0);
+console.log(sum); // 10
 
-function reduce<T extends object, U>(
-  collection: T,
-  iteratee: (accumulator: U, value: T[keyof T], key: keyof T, collection: T) => U,
-  initialValue: U
-): U;
-function reduce<T extends object>(
-  collection: T,
-  iteratee: (accumulator: T[keyof T], value: T[keyof T], key: keyof T, collection: T) => T[keyof T]
-): T[keyof T];
+// 객체 값들의 합계 구하기
+const scores = { math: 95, english: 87, science: 92 };
+const totalScore = reduce(scores, (acc, value) => acc + value, 0);
+console.log(totalScore); // 274
 ```
 
-### 파라미터
+초기 값을 제공하지 않으면 첫 번째 요소가 초기 값이 되고 두 번째 요소부터 순회해요.
 
-- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 반복할 컬렉션.
-- `iteratee` (`((accumulator: any, value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 반복할 때 호출되는 함수.
-- `initialValue` (`any`): 초기 값.
+```typescript
+import { reduce } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4];
+const sum = reduce(numbers, (acc, value) => acc + value);
+console.log(sum); // 10 (1 + 2 + 3 + 4)
+
+// 빈 배열이면 undefined가 반환돼요
+const empty = [];
+const result = reduce(empty, (acc, value) => acc + value);
+console.log(result); // undefined
+```
+
+#### 파라미터
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 순회할 배열이나 객체예요.
+- `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 각 요소에 대해 호출할 함수예요. 누적값, 현재 값, 인덱스/키, 원본 배열/객체를 받아요.
+- `initialValue` (`any`, 선택): 누적값의 초기 값이에요. 제공하지 않으면 첫 번째 요소가 초기 값이 돼요.
 
 ### 반환 값
 
-(`any`): 하나의 값으로 줄여진 값.
-
-## 예시
-
-```typescript
-// Using a reducer function
-const array = [1, 2, 3];
-reduce(array, (acc, value) => acc + value, 0); // => 6
-
-// Using a reducer function with initialValue
-const array = [1, 2, 3];
-reduce(array, (acc, value) => acc + value % 2 === 0, true); // => false
-
-// Using an object as the collection
-const obj = { a: 1, b: 2, c: 3 };
-reduce(obj, (acc, value) => acc + value, 0); // => 6
-```
+(`any`): 모든 요소를 처리한 후의 최종 누적값을 반환해요.
