@@ -1,64 +1,64 @@
-# overSome
+# overSome (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.some`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `overSome` 함수는 내부 `iteratee` 함수 변환이나 복잡한 배열 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.some`을 사용하세요.
+
 :::
 
-주어진 조건 함수들 중 하나라도 제공된 값에 대해 참을 반환하는지 확인하는 함수를 생성해요.
-
-이 함수는 여러 개의 조건 함수(단일 조건 함수 또는 조건 함수 배열)를 인수로 받아, 주어진 값들에 대해 어떤 조건 함수라도 참을 반환하는지 확인하는 새로운 함수를 반환해요.
-
-## 인터페이스
+주어진 조건 함수들 중 하나라도 값에 대해 참을 반환하는지 확인하는 함수를 만들어요.
 
 ```typescript
-function overSome<T, U extends T, V extends T>(
-  predicate1: (value: T) => value is U,
-  predicate2: (value: T) => value is V
-): (value: T) => value is U | V;
-function overSome<T>(
-  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
-): (...values: T[]) => boolean;
+const checker = overSome(predicate1, predicate2);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `predicates` (`...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>`): -
-  조건 함수 또는 조건 함수 배열의 목록이에요. 각 조건 함수는 하나 이상의 `T` 타입의 값을 받아, 그 값들이 조건을 만족하는지 여부를 나타내는 불리언 값을 반환해요.
+### `overSome(...predicates)`
 
-### 반환 값
-
-(`(...values: T[]) => boolean`): 값들의 목록을 받아, 주어진 값들에 대해 어떤 조건 함수라도 참을 반환하면 `true`를, 그렇지 않으면 `false`를 반환하는 함수를 반환해요.
-
-## 예시
+여러 조건 함수 중 하나라도 만족하는지 확인하는 새로운 함수를 만들고 싶을 때 `overSome`을 사용하세요. 어떤 조건 함수든 하나만 참을 반환하면 결과가 `true`가 돼요.
 
 ```typescript
-const func = overSome(
+import { overSome } from 'es-toolkit/compat';
+
+// 문자열이거나 숫자이거나 심볼인지 확인
+const isBasicType = overSome(
   (value) => typeof value === 'string',
   (value) => typeof value === 'number',
   (value) => typeof value === 'symbol'
 );
 
-func("hello"); // true
-func(42); // true
-func(Symbol()); // true
-func([]); // false
+isBasicType("hello"); // true (문자열)
+isBasicType(42); // true (숫자)
+isBasicType(Symbol()); // true (심볼)
+isBasicType([]); // false (모든 조건에 맞지 않음)
 
-const func = overSome([
+// 배열로 조건 함수들을 전달할 수도 있어요
+const checker = overSome([
   (value) => value.a > 0,
   (value) => value.b > 0
 ]);
 
-func({ a: 0, b: 2 }); // true
-func({ a: 0, b: 0 }); // false
+checker({ a: 0, b: 2 }); // true (b가 0보다 큰 조건 만족)
+checker({ a: 0, b: 0 }); // false (모든 조건이 불만족)
 
-const func = overSome(
+// 여러 인자를 받는 함수들도 사용할 수 있어요
+const multiArgChecker = overSome(
   (a, b) => typeof a === 'string' && typeof b === 'string',
   (a, b) => a > 0 && b > 0
 );
 
-func("hello", "world"); // true
-func(1, 10); // true
-func(0, 2); // false
+multiArgChecker("hello", "world"); // true (첫 번째 조건 만족)
+multiArgChecker(1, 10); // true (두 번째 조건 만족)
+multiArgChecker(0, 2); // false (모든 조건 불만족)
 ```
+
+#### 파라미터
+
+- `predicates` (`...Array<((...args: any[]) => boolean) | ReadonlyArray<(...args: any[]) => boolean>>`): 조건 함수 또는 조건 함수 배열들이에요. 각 조건 함수는 하나 이상의 값을 받아서 참/거짓을 반환해요.
+
+### 반환 값
+
+(`(...args: any[]) => boolean`): 값들을 받아서 어떤 조건 함수라도 참을 반환하면 `true`, 모두 거짓이면 `false`를 반환하는 함수를 반환해요.

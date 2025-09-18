@@ -1,23 +1,58 @@
-# eachRight (🚧 문서 작성 중)
+# eachRight (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `Array.prototype.forEach`와 `Array.prototype.reverse`를 사용하세요
+
+이 `eachRight` 함수는 복잡한 타입 처리와 다양한 컬렉션 타입 지원으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.forEach`와 `Array.prototype.reverse`를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+배열이나 객체의 각 요소에 대해 오른쪽부터 왼쪽으로 반복 작업을 수행해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = eachRight(collection, iteratee);
+```
 
 ## 레퍼런스
 
-### `eachRight(...args)`
+### `eachRight(collection, iteratee)`
 
-#### 인터페이스
+배열, 객체, 문자열의 각 요소를 오른쪽부터 왼쪽으로 순회하면서 주어진 함수를 실행해요. 배열의 경우 마지막 인덱스부터 역순으로, 객체의 경우 열거 가능한 속성들을 역순으로 순회해요.
+
+```typescript
+import { eachRight } from 'es-toolkit/compat';
+
+// 배열 역순 순회
+eachRight([1, 2, 3], (value, index) => console.log(value, index));
+// 로그: 3 2, 2 1, 1 0
+
+// 객체 역순 순회
+eachRight({ a: 1, b: 2 }, (value, key) => console.log(key, value));
+// 로그: 'b' 2, 'a' 1
+
+// 문자열 역순 순회
+eachRight('hello', (char, index) => console.log(char, index));
+// 로그: 'o' 4, 'l' 3, 'l' 2, 'e' 1, 'h' 0
+```
+
+함수가 `false`를 반환하면 순회를 중단해요.
+
+```typescript
+import { eachRight } from 'es-toolkit/compat';
+
+eachRight([1, 2, 3, 4], (value) => {
+  console.log(value);
+  return value !== 2; // 2에서 중단
+});
+// 로그: 4, 3, 2
+```
 
 #### 파라미터
 
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요.
+- `iteratee` (`(item: any, index: any, collection: any) => unknown`, 선택): 각 요소에 대해 실행할 함수예요. 기본값은 `identity` 함수예요.
+
 ### 반환 값
+
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): 원본 컬렉션을 반환해요.

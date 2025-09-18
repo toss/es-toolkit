@@ -1,23 +1,75 @@
-# forEachRight (🚧 문서 작성 중)
+# forEachRight (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning 현대적인 JavaScript의 배열 메서드를 사용하세요
+
+이 `forEachRight` 함수는 `null`이나 `undefined` 처리, 객체 지원, 복잡한 타입 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 JavaScript의 배열 메서드들을 사용하세요. 예를 들어 `arr.reverse().forEach()` 또는 `for` 루프를 역순으로 사용하는 방법이 있어요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+배열이나 객체의 요소들을 오른쪽에서 왼쪽으로 순회하면서 각 요소에 대해 함수를 실행해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = forEachRight(collection, callback);
+```
 
 ## 레퍼런스
 
-### `forEachRight(...args)`
+### `forEachRight(collection, callback)`
 
-#### 인터페이스
+배열, 객체, 문자열을 오른쪽에서 왼쪽 순서로 순회하면서 각 요소에 대해 콜백 함수를 실행해요. 콜백이 `false`를 반환하면 순회를 중단해요.
+
+```typescript
+import { forEachRight } from 'es-toolkit/compat';
+
+// 배열을 역순으로 순회해요
+forEachRight([1, 2, 3], (value, index) => {
+  console.log(value, index);
+});
+// 출력: 3 2, 2 1, 1 0
+
+// 문자열을 역순으로 순회해요
+forEachRight('abc', (char, index) => {
+  console.log(char, index);
+});
+// 출력: 'c' 2, 'b' 1, 'a' 0
+
+// 객체를 역순으로 순회해요
+forEachRight({ a: 1, b: 2, c: 3 }, (value, key) => {
+  console.log(value, key);
+});
+// 출력: 3 'c', 2 'b', 1 'a'
+```
+
+`null`이나 `undefined`는 그대로 반환해요.
+
+```typescript
+import { forEachRight } from 'es-toolkit/compat';
+
+forEachRight(null, value => console.log(value)); // null
+forEachRight(undefined, value => console.log(value)); // undefined
+```
+
+콜백이 `false`를 반환하면 순회를 중단해요.
+
+```typescript
+import { forEachRight } from 'es-toolkit/compat';
+
+forEachRight([1, 2, 3, 4], (value) => {
+  console.log(value);
+  if (value === 2) {
+    return false; // 순회 중단
+  }
+});
+// 출력: 4, 3, 2
+```
 
 #### 파라미터
 
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요. 배열, 객체, 문자열, 또는 null/undefined일 수 있어요.
+- `callback` (`(item: any, index: any, arr: any) => unknown`, 선택): 각 요소에 대해 실행할 함수예요. `false`를 반환하면 순회를 중단해요. 기본값은 `identity` 함수예요.
+
 ### 반환 값
+
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): 원본 컬렉션을 그대로 반환해요.
