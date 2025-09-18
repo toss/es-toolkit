@@ -1,6 +1,6 @@
 # unionWith (Lodash 호환성)
 
-::: warning `es-toolkit`의 `unionWith`를 사용하세요
+::: warning `es-toolkit`의 [unionWith](../../array/unionWith.md)를 사용하세요
 
 이 `unionWith` 함수는 복잡한 처리로 인해 느리게 동작해요.
 
@@ -24,8 +24,14 @@ const result = unionWith(...arrays, comparator);
 import { unionWith } from 'es-toolkit/compat';
 
 // 커스텀 비교 함수 사용
-const objects = [{ x: 1, y: 2 }, { x: 2, y: 1 }];
-const others = [{ x: 1, y: 1 }, { x: 1, y: 2 }];
+const objects = [
+  { x: 1, y: 2 },
+  { x: 2, y: 1 },
+];
+const others = [
+  { x: 1, y: 1 },
+  { x: 1, y: 2 },
+];
 
 unionWith(objects, others, (a, b) => a.x === b.x && a.y === b.y);
 // Returns: [{ x: 1, y: 2 }, { x: 2, y: 1 }, { x: 1, y: 1 }]

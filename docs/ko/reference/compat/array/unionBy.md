@@ -1,6 +1,6 @@
 # unionBy (Lodash 호환성)
 
-::: warning `es-toolkit`의 `unionBy`를 사용하세요
+::: warning `es-toolkit`의 [unionBy](../../array/unionBy.md)를 사용하세요
 
 이 `unionBy` 함수는 복잡한 처리로 인해 느리게 동작해요.
 
@@ -32,7 +32,14 @@ unionBy([{ x: 1 }], [{ x: 2 }, { x: 1 }], 'x');
 // Returns: [{ x: 1 }, { x: 2 }]
 
 // 함수로 비교
-unionBy([{ id: 1, name: 'a' }], [{ id: 2, name: 'b' }, { id: 1, name: 'c' }], (item) => item.id);
+unionBy(
+  [{ id: 1, name: 'a' }],
+  [
+    { id: 2, name: 'b' },
+    { id: 1, name: 'c' },
+  ],
+  item => item.id
+);
 // Returns: [{ id: 1, name: 'a' }, { id: 2, name: 'b' }]
 
 // 부분 객체로 비교
@@ -49,7 +56,7 @@ unionBy([{ active: true, name: 'a' }], [{ active: false, name: 'b' }], ['active'
 ```typescript
 import { unionBy } from 'es-toolkit/compat';
 
-unionBy([1, 2], null, undefined, [3, 4], (x) => x);
+unionBy([1, 2], null, undefined, [3, 4], x => x);
 // Returns: [1, 2, 3, 4]
 ```
 

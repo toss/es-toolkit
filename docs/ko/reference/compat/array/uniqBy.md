@@ -1,6 +1,6 @@
 # uniqBy (Lodash 호환성)
 
-::: warning `es-toolkit`의 `uniqBy`를 사용하세요
+::: warning `es-toolkit`의 [uniqBy](../../array/uniqBy.md)를 사용하세요
 
 이 `uniqBy` 함수는 `null`이나 `undefined` 처리, 복잡한 인자 타입 처리 등으로 인해 느리게 동작해요.
 

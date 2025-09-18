@@ -1,6 +1,6 @@
 # uniqWith (Lodash 호환성)
 
-::: warning `es-toolkit`의 `uniqWith`를 사용하세요
+::: warning `es-toolkit`의 [uniqWith](../../array/uniqWith.md)를 사용하세요
 
 이 `uniqWith` 함수는 `null`이나 `undefined` 처리, 복잡한 인자 타입 처리 등으로 인해 느리게 동작해요.
 
@@ -32,7 +32,11 @@ uniqWith([1, 2, 3, 4], (a, b) => a % 2 === b % 2);
 // Returns: [1, 2]
 
 // 객체 배열에서 속성 기준 중복 제거
-const objects = [{ x: 1, y: 2 }, { x: 2, y: 1 }, { x: 1, y: 2 }];
+const objects = [
+  { x: 1, y: 2 },
+  { x: 2, y: 1 },
+  { x: 1, y: 2 },
+];
 uniqWith(objects, (a, b) => a.x === b.x && a.y === b.y);
 // Returns: [{ x: 1, y: 2 }, { x: 2, y: 1 }]
 ```

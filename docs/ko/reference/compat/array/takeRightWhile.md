@@ -1,10 +1,10 @@
 # takeRightWhile (Lodash 호환성)
 
-::: warning 현대적인 JavaScript API를 사용하세요
+::: warning `es-toolkit`의 [takeRightWhile](../../array/takeRightWhile.md)를 사용하세요
 
-이 `takeRightWhile` 함수는 복잡한 조건 처리로 인해 느리게 동작해요.
+이 `takeRightWhile` 함수는 `null`이나 `undefined` 처리 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 JavaScript의 `Array.prototype.findLastIndex`를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [takeRightWhile](../../array/takeRightWhile.md)를 사용하세요.
 
 :::
 
@@ -25,17 +25,17 @@ import { takeRightWhile } from 'es-toolkit/compat';
 
 // 함수 조건 사용
 const numbers = [1, 2, 3, 4, 5];
-takeRightWhile(numbers, (x) => x > 3);
+takeRightWhile(numbers, x => x > 3);
 // Returns: [4, 5]
 
 // 객체 속성 조건 사용
 const users = [
   { user: 'barney', active: true },
   { user: 'fred', active: false },
-  { user: 'pebbles', active: false }
+  { user: 'pebbles', active: false },
 ];
 
-takeRightWhile(users, (o) => !o.active);
+takeRightWhile(users, o => !o.active);
 // Returns: [{ user: 'fred', active: false }, { user: 'pebbles', active: false }]
 
 // 부분 객체로 조건 매칭
@@ -57,8 +57,8 @@ takeRightWhile(items, 'active');
 ```typescript
 import { takeRightWhile } from 'es-toolkit/compat';
 
-takeRightWhile(null, (x) => x > 0); // []
-takeRightWhile(undefined, (x) => x > 0); // []
+takeRightWhile(null, x => x > 0); // []
+takeRightWhile(undefined, x => x > 0); // []
 ```
 
 #### 파라미터

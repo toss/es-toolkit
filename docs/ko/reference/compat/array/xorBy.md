@@ -1,10 +1,10 @@
 # xorBy (Lodash 호환성)
 
-::: warning 네이티브 배열 메서드를 사용하세요
+::: warning `es-toolkit`의 [xorBy](../../array/xorBy.md)을 사용하세요
 
-이 `xorBy` 함수는 복잡한 인자 처리, 여러 배열 간의 교집합 계산 등으로 인해 느리게 동작해요.
+이 `xorBy` 함수는 `null`이나 `undefined` 처리, 복잡한 중복 계산 로직 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 네이티브 JavaScript `Set`과 배열 메서드를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [xorBy](../../array/xorBy.md)를 사용하세요.
 
 :::
 
@@ -33,7 +33,10 @@ xorBy([{ x: 1 }], [{ x: 2 }, { x: 1 }], 'x');
 
 // 함수로 대칭 차집합 계산
 const users1 = [{ name: 'John', age: 30 }];
-const users2 = [{ name: 'Jane', age: 25 }, { name: 'John', age: 30 }];
+const users2 = [
+  { name: 'Jane', age: 25 },
+  { name: 'John', age: 30 },
+];
 xorBy(users1, users2, user => user.name);
 // Returns: [{ name: 'Jane', age: 25 }]
 

@@ -1,10 +1,10 @@
 # sortBy (Lodash 호환성)
 
-::: warning 현대적인 JavaScript API를 사용하세요
+::: warning `Array.prototype.sort` 메서드를 사용하세요
 
-이 `sortBy` 함수는 복잡한 내부 처리로 인해 느리게 동작해요.
+이 `sortBy` 함수는 다양한 타입의 조건 처리와 객체 지원으로 인해 복잡하게 동작해요.
 
-대신 더 빠르고 현대적인 JavaScript의 `Array.prototype.sort`를 사용하세요.
+대신 더 빠르고 현대적인 `Array.prototype.sort` 메서드를 사용하세요.
 
 :::
 
@@ -40,7 +40,11 @@ sortBy(users, ['user']);
 // ]
 
 // 함수를 사용해서 정렬해요.
-sortBy(users, [function(o) { return o.user; }]);
+sortBy(users, [
+  function (o) {
+    return o.user;
+  },
+]);
 // Returns: [
 //   { user: 'barney', age: 34 },
 //   { user: 'barney', age: 36 },
@@ -62,7 +66,7 @@ const users = [
 ];
 
 // 이름으로 먼저 정렬하고, 그 다음 나이로 정렬해요.
-sortBy(users, ['user', (item) => item.age]);
+sortBy(users, ['user', item => item.age]);
 // Returns: [
 //   { user: 'barney', age: 34 },
 //   { user: 'barney', age: 36 },

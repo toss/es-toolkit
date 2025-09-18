@@ -1,13 +1,5 @@
 # pullAllBy (Lodash 호환성)
 
-::: warning `es-toolkit`의 `differenceBy`를 사용하세요
-
-이 `pullAllBy` 함수는 배열을 변경하고 복잡한 iteratee 처리로 인해 느리게 동작해요.
-
-대신 더 빠르고 현대적인 `es-toolkit`의 [differenceBy](../../array/differenceBy.md)를 사용하세요.
-
-:::
-
 iteratee 함수를 사용해서 지정된 값들을 배열에서 제거해요.
 
 ```typescript

@@ -1,13 +1,5 @@
 # zipObjectDeep (Lodash 호환성)
 
-::: warning 네이티브 배열 메서드를 사용하세요
-
-이 `zipObjectDeep` 함수는 복잡한 경로 처리, 객체 중첩 로직 등으로 인해 느리게 동작해요.
-
-대신 더 빠르고 현대적인 네이티브 JavaScript 객체 조작과 구조 분해 할당을 사용하세요.
-
-:::
-
 경로 배열과 값 배열을 사용하여 깊이 중첩된 객체를 만들어요.
 
 ```typescript
@@ -30,7 +22,10 @@ const result = zipObjectDeep(paths, values);
 // Returns: { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
 
 // 배열로 경로 지정
-const pathArrays = [['a', 'b', 'c'], ['d', 'e', 'f']];
+const pathArrays = [
+  ['a', 'b', 'c'],
+  ['d', 'e', 'f'],
+];
 const values2 = [1, 2];
 const result2 = zipObjectDeep(pathArrays, values2);
 // Returns: { a: { b: { c: 1 } }, d: { e: { f: 2 } } }

@@ -1,6 +1,6 @@
 # xor (Lodash 호환성)
 
-::: warning `es-toolkit`의 `xor`을 사용하세요
+::: warning `es-toolkit`의 [xor](../../array/xor.md)을 사용하세요
 
 이 `xor` 함수는 `null`이나 `undefined` 처리, 복잡한 중복 계산 로직 등으로 인해 느리게 동작해요.
 

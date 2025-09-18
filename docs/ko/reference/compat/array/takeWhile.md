@@ -1,5 +1,13 @@
 # takeWhile (Lodash 호환성)
 
+::: warning `es-toolkit`의 [takeWhile](../../array/takeWhile.md)를 사용하세요
+
+이 `takeWhile` 함수는 `null`이나 `undefined` 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [takeWhile](../../array/takeWhile.md)를 사용하세요.
+
+:::
+
 ::: warning 현대적인 JavaScript API를 사용하세요
 
 이 `takeWhile` 함수는 복잡한 조건 처리로 인해 느리게 동작해요.
@@ -25,17 +33,17 @@ import { takeWhile } from 'es-toolkit/compat';
 
 // 함수 조건 사용
 const numbers = [1, 2, 3, 4, 5];
-takeWhile(numbers, (x) => x < 3);
+takeWhile(numbers, x => x < 3);
 // Returns: [1, 2]
 
 // 객체 속성 조건 사용
 const users = [
   { user: 'barney', active: false },
   { user: 'fred', active: false },
-  { user: 'pebbles', active: true }
+  { user: 'pebbles', active: true },
 ];
 
-takeWhile(users, (o) => !o.active);
+takeWhile(users, o => !o.active);
 // Returns: [{ user: 'barney', active: false }, { user: 'fred', active: false }]
 
 // 부분 객체로 조건 매칭
@@ -57,8 +65,8 @@ takeWhile(items, 'active');
 ```typescript
 import { takeWhile } from 'es-toolkit/compat';
 
-takeWhile(null, (x) => x > 0); // []
-takeWhile(undefined, (x) => x > 0); // []
+takeWhile(null, x => x > 0); // []
+takeWhile(undefined, x => x > 0); // []
 ```
 
 #### 파라미터

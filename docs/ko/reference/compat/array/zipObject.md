@@ -1,6 +1,6 @@
 # zipObject (Lodash 호환성)
 
-::: warning `es-toolkit`의 `zipObject`를 사용하세요
+::: warning `es-toolkit`의 [zipObject](../../array/zipObject.md)를 사용하세요
 
 이 `zipObject` 함수는 Lodash와의 호환성을 위해 추가적인 처리가 포함되어 느리게 동작해요.
 

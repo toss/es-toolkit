@@ -1,6 +1,6 @@
 # takeRight (Lodash 호환성)
 
-::: warning `es-toolkit`의 `takeRight`를 사용하세요
+::: warning `es-toolkit`의 [takeRight](../../array/takeRight.md)를 사용하세요
 
 이 `takeRight` 함수는 `null`이나 `undefined` 처리 등으로 인해 느리게 동작해요.
 
