@@ -1,9 +1,11 @@
-# findIndex
+# findIndex (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.findIndex`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `findIndex` 함수는 복잡한 매개변수 처리와 타입 검사로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.findIndex`를 사용하세요.
+
 :::
 
 배열에서 조건에 맞는 첫 번째 값의 인덱스를 반환해요.

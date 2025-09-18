@@ -1,9 +1,11 @@
-# indexOf
+# indexOf (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.indexOf`나 `Array.prototype.findIndex`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `indexOf` 함수는 `NaN` 처리를 위한 추가 로직으로 인해 느리게 동작해요.
+
+`NaN`을 찾지 않는다면 더 빠른 `Array.prototype.indexOf`를, `NaN`을 포함해서 찾으려면 `Array.prototype.findIndex`와 `Number.isNaN`을 사용하세요.
+
 :::
 
 배열에서 주어진 요소가 첫 번째로 일치하는 인덱스를 찾아요.

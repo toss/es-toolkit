@@ -1,9 +1,11 @@
-# flattenDepth
+# flattenDepth (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `es-toolkit/array`의 `flatten`이나 `Array.prototype.flat`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `flattenDepth` 함수는 단순히 `flatten` 함수를 호출하는 추가 레이어로 인해 불필요한 오버헤드가 있어요.
+
+대신 더 빠른 `es-toolkit/array`의 `flatten` 함수나 `Array.prototype.flat`을 직접 사용하세요.
+
 :::
 
 배열을 지정된 깊이까지 평평하게 만듭니다.

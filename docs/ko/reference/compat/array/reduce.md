@@ -1,20 +1,18 @@
-# reduce
+# reduce (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.reduce`나 `Object.values`와 `reduce`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `reduce` 함수는 복잡한 타입 처리와 다양한 입력 형태 지원으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.reduce` 메서드나 객체의 경우 `Object.values`와 함께 사용하세요.
+
 :::
 
-리듀서 함수를 사용해서 배열 또는 객체를 하나의 값으로 줄여요.
+배열이나 객체를 하나의 값으로 줄여요.
 
-배열의 요소 또는 객체의 값을 하나씩 순회하면서, "리듀서"라고 불리는 특별한 함수를 적용해요.
-이전 단계의 결과와 현재 요소를 사용해서 계산을 수행해요.
-모든 요소를 순회한 다음 최종 결과를 반환해요.
-
-`reduce()` 함수가 시작될 때 사용할 이전 단계의 결과가 없어요.
-초기 값을 제공하면 그 값으로 시작해요.
-초기 값을 제공하지 않으면 배열의 첫 번째 요소나 객체의 첫 번째 값을 사용하고, 두 번째 요소나 값부터 계산을 시작해요.
+```typescript
+const result = reduce(collection, iteratee, initialValue);
+```
 
 ## 인터페이스
 

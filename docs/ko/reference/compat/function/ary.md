@@ -1,6 +1,6 @@
 # ary (Lodash 호환성)
 
-::: warning `es-toolkit`의 `ary`를 사용하세요
+::: warning `es-toolkit`의 [`ary`](../../function/ary.md)를 사용하세요
 
 이 `ary` 함수는 파라미터를 복잡하게 검증하고 있어서 느리게 동작해요.
 

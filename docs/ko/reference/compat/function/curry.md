@@ -2,9 +2,9 @@
 
 ::: warning `es-toolkit`의 `curry`나 수동 클로저를 사용하세요
 
-이 `curry` 함수는 복잡한 placeholder 처리, arity 검증, 인수 합성 로직으로 인해 느리게 동작해요. placeholder가 필요하지 않다면 메인 라이브러리의 `curry`가 더 빠르고 간단해요.
+이 `curry` 함수는 복잡한 placeholder 처리, arity 검증, 인수 합성 로직으로 인해 느리게 동작해요.
 
-대신 더 빠른 `es-toolkit`의 [curry](../../function/curry.md)나 간단한 클로저를 사용하세요.
+placeholder가 필요하지 않다면 대신 더 빠른 `es-toolkit`의 [`curry`](../../function/curry.md)나 간단한 클로저를 사용하세요.
 
 :::
 
@@ -84,8 +84,8 @@ const filter = curry((predicate, array) => array.filter(predicate));
 const numbers = [1, 2, 3, 4, 5];
 
 // 재사용 가능한 함수들 생성
-const double = (x) => x * 2;
-const isEven = (x) => x % 2 === 0;
+const double = x => x * 2;
+const isEven = x => x % 2 === 0;
 
 const mapDouble = map(double);
 const filterEven = filter(isEven);
@@ -94,7 +94,7 @@ console.log(mapDouble(numbers)); // [2, 4, 6, 8, 10]
 console.log(filterEven(numbers)); // [2, 4]
 
 // 함수 합성
-const processNumbers = (nums) => mapDouble(filterEven(nums));
+const processNumbers = nums => mapDouble(filterEven(nums));
 console.log(processNumbers(numbers)); // [4, 8]
 ```
 
@@ -106,7 +106,7 @@ import { curry } from 'es-toolkit/compat';
 function apiRequest(method, baseUrl, endpoint, options) {
   return fetch(`${baseUrl}${endpoint}`, {
     method,
-    ...options
+    ...options,
   });
 }
 
@@ -118,7 +118,7 @@ const apiPost = curriedApiRequest('POST', 'https://api.example.com');
 
 // 인증 헤더 포함
 const authenticatedPost = apiPost(curry.placeholder, {
-  headers: { 'Authorization': 'Bearer token123' }
+  headers: { Authorization: 'Bearer token123' },
 });
 
 // 사용
@@ -133,11 +133,16 @@ import { curry } from 'es-toolkit/compat';
 
 const calculate = curry((operation, a, b) => {
   switch (operation) {
-    case '+': return a + b;
-    case '-': return a - b;
-    case '*': return a * b;
-    case '/': return a / b;
-    default: throw new Error('지원하지 않는 연산');
+    case '+':
+      return a + b;
+    case '-':
+      return a - b;
+    case '*':
+      return a * b;
+    case '/':
+      return a / b;
+    default:
+      throw new Error('지원하지 않는 연산');
   }
 });
 
@@ -181,7 +186,7 @@ const curriedDefault = curry(variableArgsFunction); // arity = 3
 const curriedAdd = curry((a, b, c) => a + b + c);
 
 // 수동 클로저 (더 빠름)
-const manualCurry = (a) => (b) => (c) => a + b + c;
+const manualCurry = a => b => c => a + b + c;
 
 // 둘 다 같은 결과
 console.log(curriedAdd(1)(2)(3)); // 6

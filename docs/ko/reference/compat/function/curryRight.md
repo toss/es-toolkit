@@ -1,10 +1,10 @@
 # curryRight (Lodash 호환성)
 
-::: warning `es-toolkit`의 `curryRight`나 수동 클로저를 사용하세요
+::: warning `es-toolkit`의 [`curryRight`](../../function/curryRight.md)나 수동 클로저를 사용하세요
 
-이 `curryRight` 함수는 복잡한 placeholder 처리, arity 검증, 인수 합성 로직으로 인해 느리게 동작해요. placeholder가 필요하지 않다면 메인 라이브러리의 `curryRight`가 더 빠르고 간단해요.
+이 `curryRight` 함수는 복잡한 placeholder 처리, arity 검증, 인수 합성 로직으로 인해 느리게 동작해요.
 
-대신 더 빠른 `es-toolkit`의 [curryRight](../../function/curryRight.md)나 간단한 클로저를 사용하세요.
+placeholder가 필요하지 않다면 대신 더 빠른 `es-toolkit`의 [`curryRight`](../../function/curryRight.md)나 간단한 클로저를 사용하세요.
 
 :::
 
@@ -50,7 +50,7 @@ function divide(a, b, c) {
 const leftCurried = curry(divide);
 console.log(leftCurried(12)(3)(2)); // ((12 / 3) / 2) = 2
 
-// curryRight (오른쪽부터)  
+// curryRight (오른쪽부터)
 const rightCurried = curryRight(divide);
 console.log(rightCurried(2)(3)(12)); // ((12 / 3) / 2) = 2
 // 마지막에 전달한 12가 첫 번째 인수(a)가 됨
@@ -87,7 +87,7 @@ const curriedFormat = curryRight(formatMessage);
 const todayAction = curriedFormat('오늘');
 const todayLoginAction = todayAction(curryRight.placeholder, '로그인');
 
-console.log(todayLoginAction('김철수')); 
+console.log(todayLoginAction('김철수'));
 // "김철수님이 로그인을 오늘에 했습니다"
 
 // 시간을 먼저 고정
@@ -161,20 +161,13 @@ const reduceWith = curryRight((array, reducer, initial) => array.reduce(reducer,
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // 변환 함수들 정의
-const double = (x) => x * 2;
-const isEven = (x) => x % 2 === 0;
+const double = x => x * 2;
+const isEven = x => x % 2 === 0;
 const sum = (acc, val) => acc + val;
 
 // 파이프라인 구성 (오른쪽 먼저)
-const processNumbers = (nums) => {
-  return reduceWith(
-    filterWith(
-      mapWith(nums, double),
-      isEven
-    ),
-    sum,
-    0
-  );
+const processNumbers = nums => {
+  return reduceWith(filterWith(mapWith(nums, double), isEven), sum, 0);
 };
 
 console.log(processNumbers(numbers)); // 모든 수를 2배 후 짝수만 필터링해서 합계
@@ -197,7 +190,7 @@ const withJsonBody = curriedRequest(JSON.stringify({ data: 'test' }));
 // headers 추가
 const withHeaders = withJsonBody({
   'Content-Type': 'application/json',
-  'Authorization': 'Bearer token123'
+  Authorization: 'Bearer token123',
 });
 
 // POST 메서드 설정
@@ -216,7 +209,7 @@ postRequest('/api/data')
 const curriedSubtract = curryRight((a, b, c) => a - b - c);
 
 // 수동 클로저 (더 빠름, 오른쪽부터)
-const manualCurryRight = (c) => (b) => (a) => a - b - c;
+const manualCurryRight = c => b => a => a - b - c;
 
 // 둘 다 같은 결과
 console.log(curriedSubtract(1)(2)(5)); // 2

@@ -1,23 +1,64 @@
-# keyBy (🚧 문서 작성 중)
+# keyBy (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `keyBy`를 사용하세요
+
+이 `keyBy` 함수는 `null`이나 `undefined` 처리, 다양한 매개변수 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [keyBy](../../array/keyBy.md)를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+컬렉션의 요소들을 지정된 키를 기준으로 객체로 구성해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const result = keyBy(collection, iteratee);
+```
 
 ## 레퍼런스
 
-### `keyBy(...args)`
+### `keyBy(collection, iteratee)`
 
-#### 인터페이스
+배열이나 객체의 각 요소를 지정된 키 생성 함수나 속성 이름을 사용해서 객체로 구성해요. 같은 키를 가진 요소가 여러 개 있으면 마지막 요소가 사용돼요.
+
+```typescript
+import { keyBy } from 'es-toolkit/compat';
+
+// 속성 이름으로 키 생성하기
+const array = [
+  { dir: 'left', code: 97 },
+  { dir: 'right', code: 100 }
+];
+
+keyBy(array, 'dir');
+// => { left: { dir: 'left', code: 97 }, right: { dir: 'right', code: 100 } }
+
+// 함수로 키 생성하기
+keyBy(array, o => String.fromCharCode(o.code));
+// => { a: { dir: 'left', code: 97 }, d: { dir: 'right', code: 100 } }
+
+// 객체에서도 사용 가능해요
+const obj = {
+  a: { id: 1, name: 'john' },
+  b: { id: 2, name: 'jane' }
+};
+keyBy(obj, 'name');
+// => { john: { id: 1, name: 'john' }, jane: { id: 2, name: 'jane' } }
+```
+
+`null`이나 `undefined`는 빈 객체로 처리해요.
+
+```typescript
+import { keyBy } from 'es-toolkit/compat';
+
+keyBy(null, 'id'); // {}
+keyBy(undefined, 'id'); // {}
+```
 
 #### 파라미터
 
+- `collection` (`ArrayLike<T> | null | undefined`): 키로 구성할 배열이나 객체예요.
+- `iteratee` (`ValueIterateeCustom<T, PropertyKey>`, 선택): 키를 생성할 함수나 속성 이름이에요. 생략하면 요소 자체를 키로 사용해요.
+
 ### 반환 값
+
+(`Record<string, T>`): 각 요소가 생성된 키에 매핑된 새로운 객체를 반환해요.

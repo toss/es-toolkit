@@ -1,9 +1,11 @@
-# first
+# first (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `es-toolkit/array`의 `head`나 브라켓 노테이션을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `first` 함수는 `head` 함수를 감싸는 추가 레이어로 인해 불필요한 오버헤드가 있어요.
+
+대신 더 빠른 `es-toolkit/array`의 `head` 함수나 `arr[0]`을 직접 사용하세요.
+
 :::
 
 배열의 첫 번째 요소를 반환해요.
