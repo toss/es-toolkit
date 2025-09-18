@@ -1,6 +1,6 @@
 # bindKey (Lodash 호환성)
 
-::: warning `bind` 메소드나 화살표 함수를 사용하세요
+::: warning `bind` 메소드나 화살표 함수(Arrow function)를 사용하세요
 
 이 `bindKey` 함수는 동적 메소드 바인딩을 위한 복잡한 로직을 처리해요. 대부분의 경우 더 간단한 방법으로 대체할 수 있어요.
 

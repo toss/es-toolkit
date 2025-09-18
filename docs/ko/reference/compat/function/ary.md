@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit`의 `ary`를 사용하세요
 
-이 `ary` 함수는 복잡한 guard 파라미터 처리와 NaN 검증으로 인해 느리게 동작해요.
+이 `ary` 함수는 파라미터를 복잡하게 검증하고 있어서 느리게 동작해요.
 
 대신 더 빠르고 현대적인 `es-toolkit`의 [ary](../../function/ary.md)를 사용하세요.
 
@@ -34,7 +34,7 @@ console.log(limitedGreet('김철수', 30, '서울', '추가인수'));
 // 3번째 인수부터는 무시됨
 ```
 
-배열 메서드와 함께 사용할 때 유용해요:
+배열 메서드와 함께 사용할 때 콜백 함수에 불필요한 인자가 전달되지 않도록 할 수 있어요.
 
 ```typescript
 import { ary } from 'es-toolkit/compat';
@@ -49,40 +49,7 @@ console.log(numbers.map(parseInt)); // [1, NaN, NaN, NaN, NaN]
 console.log(numbers.map(ary(parseInt, 1))); // [1, 2, 3, 4, 5]
 ```
 
-콜백 함수에서 불필요한 인수 제거:
-
-```typescript
-import { ary } from 'es-toolkit/compat';
-
-const logValue = (value) => {
-  console.log('값:', value);
-};
-
-const items = ['a', 'b', 'c'];
-
-// forEach는 (value, index, array)를 전달하지만, 첫 번째만 사용
-items.forEach(ary(logValue, 1));
-// "값: a"
-// "값: b" 
-// "값: c"
-```
-
-es-toolkit 메인 라이브러리와 비교:
-
-```typescript
-// compat 버전 (복잡한 처리)
-import { ary } from 'es-toolkit/compat';
-const capped1 = ary(func, 2);
-
-// 메인 라이브러리 버전 (더 빠름)
-import { ary } from 'es-toolkit';
-const capped2 = ary(func, 2);
-
-// 또는 수동으로 구현 (가장 단순)
-const capped3 = (a, b) => func(a, b);
-```
-
-다양한 인수 개수로 제한:
+함수가 원하는 파라미터 인자 숫자만 받도록 제한할 수 있어요.
 
 ```typescript
 import { ary } from 'es-toolkit/compat';
@@ -102,21 +69,7 @@ console.log(sum2(1, 2, 3, 4, 5)); // 3 (첫 두 인수만)
 console.log(sum3(1, 2, 3, 4, 5)); // 6 (첫 세 인수만)
 ```
 
-함수의 기본 길이를 사용:
-
-```typescript
-import { ary } from 'es-toolkit/compat';
-
-function multiply(a, b, c) {
-  return a * b * (c || 1);
-}
-
-// n을 생략하면 함수의 length 속성을 사용
-const defaultAry = ary(multiply); // multiply.length = 3
-console.log(defaultAry(2, 3, 4, 5, 6)); // 24 (2 * 3 * 4, 뒤의 5, 6은 무시)
-```
-
-음수나 NaN 처리:
+음수나 `NaN`을 전달하면 0으로 처리되어 모든 인수가 무시돼요.
 
 ```typescript
 import { ary } from 'es-toolkit/compat';
@@ -130,8 +83,8 @@ console.log(ary(func, NaN)(1, 2, 3)); // [] (NaN은 0으로 처리)
 #### 파라미터
 
 - `func` (`Function`): 인수 개수를 제한할 함수예요.
-- `n` (`number`, 선택): 허용할 최대 인수 개수예요. 생략하면 함수의 length 속성을 사용해요.
+- `n` (`number`, 선택): 허용할 최대 인수 개수예요. 생략하면 함수의 `length` 속성을 사용해요.
 
 ### 반환 값
 
-(`Function`): 최대 n개의 인수만 받는 새로운 함수를 반환해요.
+(`Function`): 최대 `n`개의 인수만 받는 새로운 함수를 반환해요.

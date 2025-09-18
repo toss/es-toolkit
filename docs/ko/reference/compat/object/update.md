@@ -1,12 +1,18 @@
-# update
+# update (Lodash 호환성)
 
-::: info
-이 함수는 호환성 이유로 `es-toolkit/compat`에서만 사용할 수 있어요. 이 함수는 대체 가능한 네이티브 JavaScript API가 있거나 아직 완전히 최적화되지 않았어요.
+::: warning 직접 할당을 사용하세요
 
-`es-toolkit/compat`에서 임포트할 때, 이 함수는 lodash와 정확히 같은 방식으로 동작하며 동일한 기능을 제공해요.
+이 `update` 함수는 복잡한 경로 파싱과 중첩 객체 생성 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 직접 속성 할당이나 옵셔널 체이닝을 사용하세요.
+
 :::
 
-객체의 지정된 경로에 있는 값을 `updater` 함수가 반환한 값으로 업데이트해요. 경로의 일부가 존재하지 않으면 생성돼요.
+객체의 지정된 경로에 있는 값을 업데이터 함수로 수정해요.
+
+```typescript
+const updated = update(object, path, updater);
+```
 
 ## 인터페이스
 

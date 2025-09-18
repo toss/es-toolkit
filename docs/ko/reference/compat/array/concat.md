@@ -1,10 +1,10 @@
 # concat (Lodash 호환성)
 
-::: warning 스프레드 연산자를 사용하세요
+::: warning 스프레드 연산자 또는 [`Array#concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)를 사용하세요
 
-이 `concat` 함수는 가변 인자 처리로 인해 복잡하게 동작해요.
+이 `concat` 함수는 Lodash에서 배열을 연결하는 방식이 복잡해서 비효율적으로 동작해요.
 
-대신 더 직관적이고 현대적인 스프레드 연산자 `[...arr1, ...arr2]`를 사용하세요.
+대신 더 직관적이고 현대적인 스프레드 연산자 `[...arr1, ...arr2]`나, `Array#concat`을 활용한 `arr1.concat(arr2)`를 사용하세요.
 
 :::
 

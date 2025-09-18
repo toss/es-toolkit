@@ -1,10 +1,10 @@
 # compact (Lodash 호환성)
 
-::: warning 배열 필터링을 사용하세요
+::: warning `es-toolkit`의 [`compact`](../../array/compact.md)를 사용하세요
 
-이 `compact` 함수는 복잡한 거짓으로 평가되는 값 처리로 인해 느리게 동작해요.
+이 `compact` 함수는 `null`이나 `undefined` 처리, `size` 기본값 처리 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `array.filter(Boolean)`을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [compact](../../array/compact.md)를 사용하세요.
 
 :::
 

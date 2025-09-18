@@ -1,60 +1,68 @@
-# has
+# has (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.hasOwn` 또는 `in` 연산자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `has` 함수는 복잡한 경로 파싱과 배열 인덱스 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.hasOwn()`이나 `in` 연산자를 사용하세요.
+
 :::
 
-객체가 주어진 경로에 해당하는 프로퍼티를 가지는지 확인해요.
-
-경로로는 객체의 프로퍼티 이름, 프로퍼티 이름의 배열, 또는 깊은 경로를 나타내는 문자열을 쓸 수 있어요.
-
-만약에 경로가 인덱스를 나타내고, 객체가 배열 또는 `arguments` 객체라면, 그 인덱스가 유효한지 (0 이상이고 길이 미만인지) 확인해요. 그래서 모든 인덱스가 정의되어 있지 않은 희소 배열(Sparse array)에도 쓸 수 있어요.
-
-## 인터페이스
+객체에 지정된 경로의 속성이 존재하는지 확인해요.
 
 ```typescript
-function has(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+const exists = has(object, path);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`unknown`): 프로퍼티가 있는지 확인할 객체.
-- `path` (`string`, `number`, `symbol`, `Array<string | number | symbol>`): 프로퍼티가 있는지 확인할 경로. 프로퍼티 이름, 프로퍼티 이름의 배열, 또는 깊은 경로를 나타내는 문자열을 쓸 수 있어요.
+### `has(object, path)`
+
+객체에 특정 경로의 속성이 있는지 확인하고 싶을 때 `has`를 사용하세요. 자체 속성(own property)만 확인하고 상속된 속성은 확인하지 않아요.
+
+```typescript
+import { has } from 'es-toolkit/compat';
+
+// 단순 속성 확인
+const object = { a: 1, b: 2 };
+has(object, 'a');
+// => true
+
+// 중첩된 객체 확인
+const nested = { a: { b: { c: 3 } } };
+has(nested, 'a.b.c');
+// => true
+has(nested, ['a', 'b', 'c']);
+// => true
+
+// 존재하지 않는 속성
+has(nested, 'a.b.d');
+// => false
+
+// 배열 인덱스 확인
+const array = [1, 2, 3];
+has(array, 2);
+// => true
+has(array, 5);
+// => false
+```
+
+희소 배열(sparse array)에서도 올바르게 동작해요.
+
+```typescript
+import { has } from 'es-toolkit/compat';
+
+const sparse = [1, , 3];  // 인덱스 1이 비어있음
+has(sparse, 0);  // true
+has(sparse, 1);  // false - 실제로 값이 없음
+has(sparse, 2);  // true
+```
+
+#### 파라미터
+
+- `object` (`any`): 검사할 객체예요.
+- `path` (`PropertyPath`): 확인할 속성의 경로예요. 문자열, 숫자, 심볼, 또는 배열로 나타낼 수 있어요.
 
 ### 반환 값
 
-(`boolean`): 객체가 경로에 값을 가지고 있으면 `true`, 아니면 `false`.
-
-## 예시
-
-```typescript
-import { has } from 'es-toolkit/compat';
-
-const obj = { a: { b: { c: 3 } } };
-
-has(obj, 'a'); // true
-has(obj, ['a', 'b']); // true
-has(obj, ['a', 'b', 'c']); // true
-has(obj, 'a.b.c'); // true
-has(obj, 'a.b.d'); // false
-has(obj, ['a', 'b', 'c', 'd']); // false
-has([], 0); // false
-has([1, 2, 3], 2); // true
-has([1, 2, 3], 5); // false
-```
-
-## 데모
-
-::: sandpack
-
-```ts index.ts
-import { has } from 'es-toolkit/compat';
-
-const obj = { a: { b: { c: 3 } } };
-
-console.log(has(obj, 'a.b.c'));
-```
-
-:::
+(`boolean`): 경로의 속성이 존재하면 `true`, 그렇지 않으면 `false`를 반환해요.

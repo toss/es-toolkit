@@ -1,10 +1,10 @@
 # castArray (Lodash 호환성)
 
-::: warning `Array.from()` 또는 배열 리터럴을 사용하세요
+::: warning `Array.from()` 또는 배열 리터럴(`[value]`)을 사용하세요
 
 이 `castArray` 함수는 인자가 없을 때와 `undefined` 처리 등으로 인해 복잡하게 동작해요.
 
-대신 더 명확하고 현대적인 `Array.from()`이나 조건부 배열 생성을 사용하세요.
+대신 더 명확하고 현대적인 `Array.from()`이나 조건부 배열 생성(`Array.isArray(value) ? value : [value]`)을 사용하세요.
 
 :::
 

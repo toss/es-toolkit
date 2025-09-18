@@ -1,38 +1,85 @@
-# propertyOf
+# propertyOf (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `get` 함수를 직접 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `propertyOf` 함수는 내부적으로 `get` 함수를 호출하는 래퍼 함수로, 추가적인 함수 호출 오버헤드가 발생해요.
+
+대신 더 빠르고 현대적인 `get` 함수를 직접 사용하거나 옵셔널 체이닝(`?.`)을 사용하세요.
+
 :::
 
-객체의 주어진 경로에 있는 값을 반환하는 함수를 생성해요.
-
-[`property`](./property.md)는 특정 경로에 바인딩된 함수를 생성하여 객체로부터 값을 검색할 수 있게 하고,
-`propertyOf`는 특정 객체에 바인딩된 함수를 생성하여 경로로부터 값을 검색할 수 있게 해요.
-
-## 인터페이스
+특정 객체에서 다양한 경로의 값을 가져오는 함수를 생성해요.
 
 ```typescript
-function propertyOf(object: unknown): (path: PropertyKey | PropertyKey[]) => unknown;
+const getter = propertyOf(obj);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`unknown`): 검색할 객체.
+### `propertyOf(object)`
 
-### 반환 값
-
-(`(path: PropertyKey | PropertyKey[]) => unknown`): 경로를 입력받고 지정된 경로에서 객체의 값을 검색하는 함수.
-
-## 예시
+하나의 객체에서 여러 경로의 값을 가져오는 함수를 만들고 싶을 때 `propertyOf`를 사용하세요. `property`와 반대로, 객체를 먼저 고정하고 다양한 경로를 쿼리할 수 있어요.
 
 ```typescript
-const getValue = propertyOf({ a: { b: { c: 3 } } });
-const result = getValue('a.b.c');
-console.log(result); // => 3
+import { propertyOf } from 'es-toolkit/compat';
 
-const getValue = propertyOf({ a: { b: { c: 3 } } });
-const result = getValue(['a', 'b', 'c']);
-console.log(result); // => 3
+// 기본 사용법
+const data = { name: 'John', age: 30, city: 'New York' };
+const getValue = propertyOf(data);
+
+const name = getValue('name');
+// 결과: 'John'
+
+const age = getValue('age');
+// 결과: 30
+
+// 깊은 경로 접근
+const complexData = {
+  user: { profile: { name: 'Alice', age: 25 } },
+  settings: { theme: 'dark', lang: 'en' }
+};
+const getComplexValue = propertyOf(complexData);
+
+const userName = getComplexValue('user.profile.name');
+// 결과: 'Alice'
+
+const theme = getComplexValue('settings.theme');
+// 결과: 'dark'
+
+// 배열 경로 사용
+const arrayPath = getComplexValue(['user', 'profile', 'age']);
+// 결과: 25
+
+// 여러 경로를 배열로 처리
+const paths = ['user.profile.name', 'settings.theme', 'settings.lang'];
+const values = paths.map(getValue);
+// 결과: ['Alice', 'dark', 'en'] (각 경로의 값들)
+
+// 배열 인덱스 접근
+const arrayData = [10, 20, 30];
+const getArrayValue = propertyOf(arrayData);
+const firstItem = getArrayValue(0);
+// 결과: 10
+
+const secondItem = getArrayValue('[1]');
+// 결과: 20
 ```
+
+경로가 존재하지 않으면 `undefined`를 반환해요.
+
+```typescript
+import { propertyOf } from 'es-toolkit/compat';
+
+const data = { a: 1, b: 2 };
+const getValue = propertyOf(data);
+const missing = getValue('nonexistent.path');
+// 결과: undefined
+```
+
+#### 파라미터
+
+- `object` (`T`): 값을 가져올 대상 객체예요.
+
+#### 반환 값
+
+(`(path: PropertyPath) => any`): 주어진 경로에서 객체의 값을 반환하는 함수를 반환해요.

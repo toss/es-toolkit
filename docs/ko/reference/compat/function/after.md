@@ -1,10 +1,10 @@
 # after (Lodash 호환성)
 
-::: warning 클로저를 사용하세요
+::: warning `es-toolkit`의 [`after`](../../function/after.md)를 사용하세요
 
 이 `after` 함수는 복잡한 타입 검증과 정수 변환 처리로 인해 느리게 동작해요.
 
-대신 더 간단하고 명확한 클로저를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [after](../../function/after.md)를 사용하세요.
 
 :::
 
@@ -34,7 +34,7 @@ logAfterThree(); // "3번째 호출부터 실행돼요!" 출력
 logAfterThree(); // "3번째 호출부터 실행돼요!" 출력 (계속 실행됨)
 ```
 
-여러 비동기 작업 완료 후 콜백 실행:
+여러 비동기 작업이 모두 완료된 후에 특정 콜백을 실행할 때도 사용할 수 있어요.
 
 ```typescript
 import { after } from 'es-toolkit/compat';
@@ -53,77 +53,7 @@ tasks.forEach(task => {
 });
 ```
 
-클로저를 사용한 대안:
-
-```typescript
-// after 사용
-const afterThree = after(3, () => console.log('실행!'));
-
-// 클로저 사용 (더 간단하고 빠름)
-function createAfter(count, callback) {
-  let callCount = 0;
-  return function (...args) {
-    callCount++;
-    if (callCount >= count) {
-      return callback.apply(this, args);
-    }
-  };
-}
-
-const afterThreeAlternative = createAfter(3, () => console.log('실행!'));
-```
-
-파라미터와 반환값도 전달돼요:
-
-```typescript
-import { after } from 'es-toolkit/compat';
-
-const processAfterTwo = after(2, data => {
-  console.log('데이터 처리:', data);
-  return data * 2;
-});
-
-console.log(processAfterTwo(5)); // undefined (실행되지 않음)
-console.log(processAfterTwo(5)); // "데이터 처리: 5", 반환값: 10
-console.log(processAfterTwo(3)); // "데이터 처리: 3", 반환값: 6
-```
-
-초기화 후 활성화하기:
-
-```typescript
-import { after } from 'es-toolkit/compat';
-
-class DataLoader {
-  constructor() {
-    this.isReady = false;
-    this.data = null;
-
-    // 2가지 초기화 작업 후 활성화
-    this.activate = after(2, () => {
-      this.isReady = true;
-      console.log('DataLoader가 준비되었습니다!');
-    });
-  }
-
-  loadConfig() {
-    // 설정 로드
-    console.log('설정 로드 완료');
-    this.activate();
-  }
-
-  loadData() {
-    // 데이터 로드
-    console.log('데이터 로드 완료');
-    this.activate();
-  }
-}
-
-const loader = new DataLoader();
-loader.loadConfig(); // "설정 로드 완료"
-loader.loadData(); // "데이터 로드 완료", "DataLoader가 준비되었습니다!"
-```
-
-0 또는 음수를 전달하면 즉시 실행돼요:
+0이나 음수를 전달하면 첫 번째 호출부터 바로 실행돼요.
 
 ```typescript
 import { after } from 'es-toolkit/compat';

@@ -1,10 +1,10 @@
 # before (Lodash 호환성)
 
-::: warning 클로저를 사용하세요
+::: warning `es-toolkit`의 [`before`](../../function/before.md)를 사용하세요
 
-이 `before` 함수는 복잡한 타입 검증, 정수 변환, 가비지 컬렉션 처리로 인해 느리게 동작해요.
+이 `before` 함수는 복잡한 타입 검증과 정수 변환 처리로 인해 느리게 동작해요.
 
-대신 더 간단하고 명확한 클로저를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [before](../../function/before.md)를 사용하세요.
 
 :::
 
@@ -43,8 +43,8 @@ const beforeThree = before(3, myFunction);
 function createBefore(limit, callback) {
   let callCount = 0;
   let lastResult;
-  
-  return function(...args) {
+
+  return function (...args) {
     if (callCount < limit - 1) {
       lastResult = callback.apply(this, args);
       callCount++;
@@ -64,7 +64,7 @@ import { before } from 'es-toolkit/compat';
 class Database {
   constructor() {
     this.isInitialized = false;
-    
+
     // 초기화는 한 번만 실행
     this.initialize = before(2, () => {
       console.log('데이터베이스 초기화 중...');
@@ -73,15 +73,15 @@ class Database {
       return '초기화 완료';
     });
   }
-  
+
   setupConnection() {
     // 실제 연결 설정 로직
   }
-  
+
   query(sql) {
     const initResult = this.initialize();
     console.log(initResult); // 첫 번째 호출: "초기화 완료", 이후: 동일 결과
-    
+
     // 쿼리 실행 로직
     return `쿼리 실행: ${sql}`;
   }
@@ -98,7 +98,7 @@ API 호출 제한:
 import { before } from 'es-toolkit/compat';
 
 // API 호출을 최대 5번까지만 허용
-const limitedApiCall = before(6, (endpoint) => {
+const limitedApiCall = before(6, endpoint => {
   console.log(`API 호출: ${endpoint}`);
   return fetch(endpoint).then(res => res.json());
 });
@@ -118,7 +118,7 @@ limitedApiCall('/api/data6'); // 마지막 결과 반환 (API 호출 안 함)
 import { before } from 'es-toolkit/compat';
 
 // 클릭 이벤트를 3번까지만 처리
-const limitedClickHandler = before(4, (event) => {
+const limitedClickHandler = before(4, event => {
   console.log('클릭 처리됨:', event.target.id);
   return `처리 완료: ${Date.now()}`;
 });
@@ -168,7 +168,7 @@ console.log(onceOnly()); // undefined
 import { before } from 'es-toolkit/compat';
 
 // 함수 참조가 자동으로 정리되어 메모리 누수 방지
-const limitedProcessor = before(2, (data) => {
+const limitedProcessor = before(2, data => {
   // 복잡한 데이터 처리
   return processComplexData(data);
 });

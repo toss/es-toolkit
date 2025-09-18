@@ -1,45 +1,65 @@
-# toPairsIn
+# toPairsIn (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.entries`나 `for...in` 루프를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `toPairsIn` 함수는 상속된 속성 처리, `Map`과 `Set` 처리 등의 복잡한 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.entries()`나 상속된 속성이 필요하면 `for...in` 루프를 사용하세요.
+
 :::
 
-객체, 집합 또는 맵에서 키-값 쌍의 배열을 생성해요. 상속된 속성도 포함돼요.
-
-- 객체가 제공되면, 객체의 속성과 값으로 구성된 쌍(`[key, value]`)의 배열을 반환해요.
-- `Set`이 제공되면, `[value, value]` 형식으로 구성된 쌍의 배열을 반환해요.
-- `Map`이 제공되면, 키와 값으로 구성된 쌍(`[key, value]`)의 배열을 반환해요.
-
-## 인터페이스
+객체를 키-값 쌍의 배열로 변환하되, 상속된 속성까지 포함해요.
 
 ```typescript
-function toPairsIn<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairsIn<T>(set: Set<T>): Array<[T, T]>;
-function toPairsIn<K, V>(map: Map<K, V>): Array<[K, V]>;
-function toPairsIn(object: Record<any, any> | Set<any> | Map<any, any>): Array<[PropertyKey, any]>;
+const pairs = toPairsIn(object);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`Record<any, any> | Set<any> | Map<any, any>`): 조회할 객체, 집합 또는 맵이에요.
+### `toPairsIn(object)`
+
+객체의 모든 열거 가능한 속성들(상속된 속성 포함)을 `[키, 값]` 형태의 배열로 변환하고 싶을 때 `toPairsIn`을 사용하세요. `toPairs`와 달리 프로토타입 체인의 속성들도 함께 포함돼요.
+
+```typescript
+import { toPairsIn } from 'es-toolkit/compat';
+
+// 기본 객체 변환
+const object = { a: 1, b: 2 };
+toPairsIn(object);
+// => [['a', 1], ['b', 2]]
+
+// 상속된 속성도 포함
+function Parent() {
+  this.inherited = 'value';
+}
+Parent.prototype.proto = 'property';
+
+const child = new Parent();
+child.own = 'own';
+toPairsIn(child);
+// => [['inherited', 'value'], ['own', 'own'], ['proto', 'property']]
+```
+
+`Map`과 `Set`도 처리할 수 있어요.
+
+```typescript
+import { toPairsIn } from 'es-toolkit/compat';
+
+// Map 객체 변환
+const map = new Map([['key1', 'value1'], ['key2', 'value2']]);
+toPairsIn(map);
+// => [['key1', 'value1'], ['key2', 'value2']]
+
+// Set 객체 변환
+const set = new Set([1, 2, 3]);
+toPairsIn(set);
+// => [[1, 1], [2, 2], [3, 3]]
+```
+
+#### 파라미터
+
+- `object` (`object`): 변환할 객체, Map, 또는 Set이에요.
 
 ### 반환 값
 
-(`Array<[key: PropertyKey, value: any]>`): 키-값 쌍의 배열을 반환해요.
-
-## 예시
-
-```typescript
-const object = { a: 1, b: 2 };
-toPairsIn(object); // [['a', 1], ['b', 2]]
-
-const set = new Set([1, 2]);
-toPairsIn(set); // [[1, 1], [2, 2]]
-
-const map = new Map();
-map.set('a', 1);
-map.set('b', 2);
-toPairsIn(map); // [['a', 1], ['b', 2]]
-```
+(`Array<[string, any]>`): 키-값 쌍들의 배열을 반환해요(상속된 속성 포함).

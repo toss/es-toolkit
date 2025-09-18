@@ -1,47 +1,71 @@
-# forOwn
+# forOwn (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.keys`와 반복문을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `forOwn` 함수는 내부적으로 `keys` 함수를 호출하고 객체 변환 과정, `null`이나 `undefined` 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.keys`와 반복문을 사용하세요.
+
 :::
 
-객체를 순회하면서 각 속성에 대해 `iteratee` 함수를 호출해요.
-
-객체가 직접 소유한 속성만 순회해요. 상속받은 속성이나 `Symbol` 키를 가진 속성은 확인하지 않아요.
-
-`iteratee` 함수가 `false`를 반환하면 순회를 조기에 종료해요.
-
-## 인터페이스
+객체의 고유 속성만 반복하면서 각 속성에 대해 함수를 호출해요.
 
 ```typescript
-function forOwn<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forOwn(obj, iteratee);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`T | null | undefined`): 순회할 객체.
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 순회할 때마다 호출되는 함수. 제공되지 않으면 `identity` 함수가 사용돼요.
+### `forOwn(object, iteratee)`
 
-### 반환 값
-
-(`T | null | undefined`): 순회 완료된 객체.
-
-## 예시
+객체의 고유 속성만 반복하면서 `iteratee` 함수를 호출해요. 상속된 속성이나 `Symbol` 키는 제외하고 객체가 직접 소유한 속성만 반복해요. `iteratee` 함수가 `false`를 반환하면 반복을 중단해요.
 
 ```typescript
-function Foo() {
-  this.a = 1;
-  this.b = 2;
-}
+import { forOwn } from 'es-toolkit/compat';
 
-Foo.prototype.c = 3;
-
-forOwn(new Foo(), function (value, key) {
-  console.log(key);
+// 객체의 고유 속성만 반복
+const obj = { a: 1, b: 2 };
+forOwn(obj, (value, key) => {
+  console.log(key, value);
 });
-// => Logs 'a' then 'b' (iteration order is not guaranteed).
+// 출력: 'a' 1, 'b' 2
+
+// 상속된 속성은 제외
+function Parent() {
+  this.inherited = 'value';
+}
+Parent.prototype.protoProperty = 'proto';
+
+const child = new Parent();
+child.own = 'ownValue';
+
+forOwn(child, (value, key) => {
+  console.log(key, value);
+});
+// 출력: 'inherited' 'value', 'own' 'ownValue' (protoProperty는 제외)
+
+// 조건에 따른 조기 종료
+forOwn(obj, (value, key) => {
+  console.log(key, value);
+  return key !== 'a'; // 'a' 이후 중단
+});
+// 출력: 'a' 1
 ```
+
+`null`이나 `undefined`는 그대로 반환해요.
+
+```typescript
+import { forOwn } from 'es-toolkit/compat';
+
+forOwn(null, iteratee); // null
+forOwn(undefined, iteratee); // undefined
+```
+
+#### 파라미터
+
+- `object` (`T | null | undefined`): 반복할 객체예요.
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, 선택): 각 속성에 대해 호출할 함수예요. 기본값은 `identity` 함수예요.
+
+#### 반환 값
+
+(`T | null | undefined`): 원본 객체를 반환해요.
