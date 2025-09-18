@@ -6,13 +6,17 @@
 assert(condition, message);
 ```
 
+::: info `invariant`와의 관계
+
+`assert`는 `invariant` 함수와 완전히 같은 기능을 해요. 단지 이름만 다를 뿐이에요. 더 자세한 내용은 [`invariant`](./invariant.md) 문서를 참고하세요.
+
+:::
+
 ## 레퍼런스
 
 ### `assert(condition, message)`
 
 코드에서 특정 조건이 반드시 만족되어야 할 때 `assert`를 사용하세요. 조건이 거짓이면 즉시 에러를 던져서 프로그램 실행을 중단해요.
-
-이 함수는 `invariant` 함수의 별칭이에요. 같은 기능을 하지만 더 친숙한 이름으로 사용할 수 있어요.
 
 ```typescript
 import { assert } from 'es-toolkit/util';
@@ -53,12 +57,6 @@ assert(false, new ValidationError('검증에 실패했어요'));
 ```
 
 개발 중에 코드의 가정을 검증하거나, 함수의 입력값이 예상 범위에 있는지 확인할 때 특히 유용해요.
-
-::: info invariant와의 관계
-
-`assert`는 `invariant` 함수와 완전히 같은 기능을 해요. 단지 이름만 다를 뿐이에요. 더 자세한 내용은 [`invariant`](./invariant.md) 문서를 참고하세요.
-
-:::
 
 #### 파라미터
 

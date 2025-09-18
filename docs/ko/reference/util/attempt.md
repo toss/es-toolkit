@@ -19,7 +19,7 @@ import { attempt } from 'es-toolkit/util';
 const [error, result] = attempt(() => 42);
 // error는 null, result는 42
 
-// 에러가 발생하는 경우  
+// 에러가 발생하는 경우
 const [error, result] = attempt(() => {
   throw new Error('문제가 발생했어요');
 });
@@ -34,7 +34,7 @@ const [error, names] = attempt<string[], Error>(() => ['Alice', 'Bob']);
 
 이 함수는 비동기 함수(`Promise`를 반환하는 함수)에는 적합하지 않아요. 비동기 함수를 전달하면 `[null, Promise<T>]`가 반환되지만, Promise가 나중에 거부(reject)되더라도 오류를 포착하지 못해요.
 
-비동기 함수를 처리하려면 `attemptAsync` 함수를 대신 사용하세요.
+비동기 함수를 처리하려면 [`attemptAsync`](./attemptAsync.md) 함수를 대신 사용하세요.
 
 ```typescript
 // 잘못된 사용
