@@ -40,19 +40,6 @@ isBoolean({}); // false
 isBoolean([]); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isBoolean } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isBoolean(value)) {
-    // 이 블록에서 value는 boolean 타입이에요
-    console.log(value ? '참' : '거짓');
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): 불린 타입인지 확인할 값이에요.

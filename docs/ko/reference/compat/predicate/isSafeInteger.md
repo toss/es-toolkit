@@ -1,36 +1,59 @@
-# isSafeInteger
+# isSafeInteger (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Number.isSafeInteger`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `isSafeInteger` 함수는 추가적인 타입 체크 오버헤드로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Number.isSafeInteger`를 사용하세요.
+
 :::
 
-`value`가 안전한 정수(Safe Integer)인지 확인해요.
-
-안전한 정수란, JavaScript의 `number` 타입으로 정확하게 표현되고, 다른 정수로 반올림되지 않는 정수예요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `number`로 좁혀요.
-
-## 인터페이스
+값이 안전한 정수인지 확인해요.
 
 ```typescript
-function isSafeInteger(value?: unknown): value is number;
+const result = isSafeInteger(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): 확인할 값.
+### `isSafeInteger(value)`
+
+주어진 값이 안전한 정수인지 확인할 때 `isSafeInteger`를 사용하세요. 안전한 정수는 -(2^53 - 1)과 (2^53 - 1) 사이의 정수로, JavaScript에서 정확하게 표현할 수 있는 정수예요.
+
+```typescript
+import { isSafeInteger } from 'es-toolkit/compat';
+
+// 안전한 정수들
+isSafeInteger(3); // true
+isSafeInteger(-42); // true
+isSafeInteger(0); // true
+isSafeInteger(Number.MAX_SAFE_INTEGER); // true (9007199254740991)
+isSafeInteger(Number.MIN_SAFE_INTEGER); // true (-9007199254740991)
+
+// 안전하지 않은 정수들
+isSafeInteger(Number.MAX_SAFE_INTEGER + 1); // false
+isSafeInteger(Number.MIN_SAFE_INTEGER - 1); // false
+isSafeInteger(9007199254740992); // false
+
+// 정수가 아닌 값들
+isSafeInteger(3.14); // false
+isSafeInteger('3'); // false
+isSafeInteger(1n); // false (BigInt)
+isSafeInteger([]); // false
+isSafeInteger({}); // false
+isSafeInteger(null); // false
+isSafeInteger(undefined); // false
+
+// 무한대와 NaN
+isSafeInteger(Infinity); // false
+isSafeInteger(-Infinity); // false
+isSafeInteger(NaN); // false
+```
+
+#### 파라미터
+
+- `value` (`any`): 확인할 값이에요.
 
 ### 반환 값
 
-(`value is number`): `value`가 정수이고 안전한 값 사이에 있으면 `true`, 그렇지 않으면 `false`.
-
-## 예시
-
-```typescript
-isSafeInteger(3); // Returns: true
-isSafeInteger(Number.MIN_SAFE_INTEGER - 1); // Returns: false
-isSafeInteger(1n); // Returns: false
-isSafeInteger('1'); // Returns: false
-```
+(`boolean`): 값이 안전한 정수이면 `true`, 아니면 `false`를 반환해요.

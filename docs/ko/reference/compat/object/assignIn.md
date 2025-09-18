@@ -1,38 +1,55 @@
-# assignIn
+# assignIn (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.assign`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `assignIn` 함수는 상속된 속성까지 포함하는 복잡한 처리로 인해 상대적으로 느려요.
+
+대신 더 빠르고 현대적인 `Object.assign`을 사용하세요.
+
 :::
 
-`source` 객체가 가지고 있는 프로퍼티 값들을 `object` 객체에 할당해요. 프로토타입에서 상속된 프로퍼티도 포함돼요.
-
-`source`와 `object`이 같은 값으로 가지고 있는 프로퍼티는 덮어쓰지 않아요.
-
-## 인터페이스
+소스 객체들의 모든 속성(상속된 속성 포함)을 대상 객체에 할당해요.
 
 ```typescript
-function assignIn<O, S>(object: O, source: S): O & S;
-function assignIn<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function assignIn<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function assignIn<O, S1, S2, S3, S4>(object: O, source1: S1, source2: S2, source3: S3, source4: S4): O & S1 & S2 & S3;
-function assignIn(object: any, ...sources: any[]): any;
+const result = assignIn(target, source1, source2);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`any`): `source`의 프로퍼티 값이 할당될 객체.
-- `sources` (`...any[]`): `object`에 할당할 값을 가지고 있는 객체들.
+### `assignIn(object, ...sources)`
+
+소스 객체들의 모든 속성을 대상 객체에 복사할 때 `assignIn`을 사용하세요. 프로토타입 체인의 상속된 속성도 포함해요.
+
+```typescript
+import { assignIn } from 'es-toolkit/compat';
+
+// 기본 사용법
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+const result = assignIn(target, source);
+// Returns: { a: 1, b: 3, c: 4 }
+
+// 여러 소스 객체 병합
+const target2 = { a: 1 };
+const result2 = assignIn(target2, { b: 2 }, { c: 3 }, { d: 4 });
+// Returns: { a: 1, b: 2, c: 3, d: 4 }
+
+// 상속된 속성도 포함
+function Parent() {}
+Parent.prototype.inherited = 'value';
+const child = new Parent();
+child.own = 'ownValue';
+
+const target3 = {};
+const result3 = assignIn(target3, child);
+// Returns: { own: 'ownValue', inherited: 'value' }
+```
+
+#### 파라미터
+
+- `object` (`any`): 속성이 할당될 대상 객체예요.
+- `...sources` (`any[]`): 속성을 복사할 소스 객체들이에요.
 
 ### 반환 값
 
-(`any`): `source`의 값이 할당된 `object` 객체.
-
-## 예시
-
-```typescript
-const target = { a: 1 };
-const result = assignIn(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
-```
+(`any`): 소스 객체들의 속성(상속 속성 포함)이 병합된 대상 객체를 반환해요.

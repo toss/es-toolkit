@@ -1,9 +1,11 @@
-# bindKey
+# bindKey (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `bind` 메소드나 화살표 함수를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `bindKey` 함수는 동적 메소드 바인딩을 위한 복잡한 로직을 처리해요. 대부분의 경우 더 간단한 방법으로 대체할 수 있어요.
+
+대신 더 빠르고 현대적인 `Function.prototype.bind()`나 화살표 함수를 사용하세요.
+
 :::
 
 `object[key]` 메서드의 `this`를 고정하고, `partialArgs`로 미리 인자를 제공해요.

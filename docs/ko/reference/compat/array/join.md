@@ -1,9 +1,11 @@
-# join
+# join (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.join()`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `join` 함수는 ArrayLike 객체 처리, null/undefined 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.join()`을 사용하세요.
+
 :::
 
 배열의 요소를 문자열로 결합해요.

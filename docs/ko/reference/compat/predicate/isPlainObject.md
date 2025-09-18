@@ -76,25 +76,6 @@ const date = new Date();
 isPlainObject(date); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isPlainObject } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isPlainObject(value)) {
-    // 이 블록에서 value는 Record<string | number | symbol, any> 타입이에요
-    console.log(Object.keys(value));
-    console.log(Object.values(value));
-
-    // 객체의 속성들을 안전하게 접근할 수 있어요
-    for (const key in value) {
-      console.log(`${key}: ${value[key]}`);
-    }
-  }
-}
-```
-
 #### 파라미터
 
 - `object` (`any`): 순수 객체인지 확인할 값이에요.

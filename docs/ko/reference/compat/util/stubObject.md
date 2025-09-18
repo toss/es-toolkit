@@ -1,25 +1,58 @@
-# stubObject
+# stubObject (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 객체 리터럴 `{}`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `stubObject` 함수는 불필요한 함수 호출로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 객체 리터럴 `{}`를 사용하세요.
+
 :::
 
-빈 객체를 반환해요.
-
-## 인터페이스
+항상 새로운 빈 객체를 반환해요.
 
 ```typescript
-function stubObject(): {};
+const emptyObject = stubObject();
 ```
+
+## 레퍼런스
+
+### `stubObject()`
+
+매번 새로운 빈 객체가 필요할 때 `stubObject`를 사용하세요. 기본값으로 빈 객체를 제공하거나 콜백 함수에서 일관된 빈 객체를 반환할 때 유용해요.
+
+```typescript
+import { stubObject } from 'es-toolkit/compat';
+
+// 기본값으로 빈 객체 제공
+function processConfig(config = stubObject()) {
+  return {
+    ...config,
+    processed: true
+  };
+}
+
+processConfig(); // { processed: true }
+processConfig({ name: 'test' }); // { name: 'test', processed: true }
+```
+
+콜백 함수에서 일관된 빈 객체를 반환할 때도 사용할 수 있어요.
+
+```typescript
+import { stubObject } from 'es-toolkit/compat';
+
+// 조건에 따른 객체 반환
+const getSettings = (hasSettings: boolean) => {
+  return hasSettings ? { theme: 'dark', lang: 'ko' } : stubObject();
+};
+
+getSettings(true); // { theme: 'dark', lang: 'ko' }
+getSettings(false); // {}
+```
+
+#### 파라미터
+
+없음.
 
 ### 반환 값
 
-(`{}`): 빈 객체.
-
-## 예시
-
-```typescript
-stubObject(); // Returns {}
-```
+(`{}`): 새로운 빈 객체를 반환해요.

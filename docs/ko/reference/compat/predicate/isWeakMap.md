@@ -87,26 +87,6 @@ setupWeakReference(weakMap, obj, 'data'); // "WeakMap에 약한 참조로 저장
 setupWeakReference(regularMap, obj, 'data'); // "WeakMap이 아니에요"
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isWeakMap } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isWeakMap(value)) {
-    // 이 블록에서 value는 WeakMap<object, any> 타입이에요
-    const key = { id: 1 };
-    value.set(key, 'example');
-
-    if (value.has(key)) {
-      console.log(value.get(key));
-    }
-
-    value.delete(key);
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): WeakMap인지 확인할 값이에요.

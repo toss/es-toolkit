@@ -1,36 +1,63 @@
-# toLower
+# toLower (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning JavaScript의 `String.prototype.toLowerCase`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `toLower` 함수는 문자열이 아닌 값 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 JavaScript의 `String.prototype.toLowerCase`를 사용하세요.
+
 :::
 
-주어진 값을 문자열로 변환하고 소문자로 변환해요. 주어진 인자는 먼저 문자열로 변환돼서 처리돼요.
-
-## 인터페이스
+값을 문자열로 변환한 후 소문자로 바꿔요.
 
 ```typescript
-function toLower(value?: unknown): string;
+const lowercased = toLower(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): 변환할 값.
+### `toLower(value?)`
+
+값을 소문자 문자열로 변환하고 싶을 때 `toLower`를 사용하세요. 어떤 타입의 값이든 먼저 문자열로 변환한 다음 소문자로 만들어요.
+
+```typescript
+import { toLower } from 'es-toolkit/compat';
+
+// 문자열 소문자 변환
+toLower('--FOO-BAR--');
+// Returns: '--foo-bar--'
+
+toLower('Hello World');
+// Returns: 'hello world'
+
+// 숫자 변환
+toLower(123);
+// Returns: '123'
+
+// 배열 변환
+toLower([1, 2, 3]);
+// Returns: '1,2,3'
+```
+
+`null`이나 `undefined`는 빈 문자열로 처리해요.
+
+```typescript
+import { toLower } from 'es-toolkit/compat';
+
+toLower(null);
+// Returns: ''
+
+toLower(undefined);
+// Returns: ''
+
+toLower();
+// Returns: ''
+```
+
+#### 파라미터
+
+- `value` (`unknown`, 선택): 소문자로 변환할 값이에요.
 
 ### 반환 값
 
-(`string`): 소문자로 변환된 문자열.
-
-## 예시
-
-```typescript
-toLower('--FOO-BAR--');
-// => '--foo-bar--'
-
-toLower(null);
-// => ''
-
-toLower([1, 2, 3]);
-// => '1,2,3'
-```
+(`string`): 소문자로 변환된 문자열을 반환해요.

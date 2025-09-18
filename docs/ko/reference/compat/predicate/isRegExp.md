@@ -73,29 +73,6 @@ const regex = new RegExp(pattern, flags);
 isRegExp(regex); // true
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isRegExp } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isRegExp(value)) {
-    // 이 블록에서 value는 RegExp 타입이에요
-    console.log(`정규식 소스: ${value.source}`);
-    console.log(`플래그: ${value.flags}`);
-    console.log(`글로벌: ${value.global}`);
-    console.log(`대소문자 무시: ${value.ignoreCase}`);
-
-    // 정규식 메서드들을 안전하게 사용할 수 있어요
-    const testString = 'Hello World';
-    console.log(`매치 결과: ${value.test(testString)}`);
-  }
-}
-
-processValue(/hello/i); // 정규식 정보들이 출력됨
-processValue('/hello/i'); // 아무것도 출력되지 않음
-```
-
 #### 파라미터
 
 - `value` (`any`): 정규식인지 확인할 값이에요.

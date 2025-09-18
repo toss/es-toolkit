@@ -1,32 +1,31 @@
-# toArray
+# toArray (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning Array.from 사용 권장
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+값을 배열로 변환할 때는 Array.from()이나 스프레드 연산자를 사용하는 것이 더 표준적인 방식이에요.
+
+대신 더 빠르고 현대적인 Array.from()을 사용하세요.
+
 :::
 
-`value`를 배열로 변환해요.
-
-## 인터페이스
+값을 배열로 변환해요. 객체인 경우 값들을, 문자열인 경우 개별 문자를 배열로 만들어요.
 
 ```typescript
-function toArray(value?: unknown): any[];
+toArray({ a: 1, b: 2 }); // [1, 2]
+toArray('abc'); // ['a', 'b', 'c']
+toArray(1); // []
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): 변환할 값.
+### `toArray(value?: unknown): any[]`
+
+값을 배열로 변환해요.
+
+#### 파라미터
+
+- `value` (`unknown`): 변환할 값
 
 ### 반환 값
 
-(`any[]`): 변환된 배열.
-
-## 예시
-
-```typescript
-toArray({ a: 1, b: 2 }); // returns [1, 2]
-toArray('abc'); // returns ['a', 'b', 'c']
-toArray(1); // returns []
-toArray(null); // returns []
-```
+(`any[]`): 변환된 배열

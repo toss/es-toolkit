@@ -58,25 +58,6 @@ isSet({}); // false
 isSet(Object.create(null)); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isSet } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isSet(value)) {
-    // 이 블록에서 value는 Set<any> 타입이에요
-    console.log(`Set의 크기: ${value.size}`);
-    value.add('newValue');
-
-    // Set의 모든 값을 순회
-    for (const item of value) {
-      console.log(item);
-    }
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): Set인지 확인할 값이에요.

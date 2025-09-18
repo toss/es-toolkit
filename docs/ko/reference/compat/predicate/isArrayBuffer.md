@@ -35,19 +35,6 @@ isArrayBuffer(null); // false
 isArrayBuffer(undefined); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isArrayBuffer } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isArrayBuffer(value)) {
-    // 이 블록에서 value는 ArrayBuffer 타입이에요
-    console.log(value.byteLength);
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): ArrayBuffer인지 확인할 값이에요.

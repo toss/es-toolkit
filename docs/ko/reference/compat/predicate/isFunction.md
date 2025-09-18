@@ -43,20 +43,6 @@ isFunction(undefined); // false
 isFunction(123); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isFunction } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isFunction(value)) {
-    // 이 블록에서 value는 (...args: any[]) => any 타입이에요
-    const result = value();
-    console.log(result);
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): 함수인지 확인할 값이에요.

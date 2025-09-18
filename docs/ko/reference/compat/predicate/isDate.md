@@ -37,19 +37,6 @@ isDate(null); // false
 isDate(undefined); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isDate } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isDate(value)) {
-    // 이 블록에서 value는 Date 타입이에요
-    console.log(value.getFullYear());
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): Date 객체인지 확인할 값이에요.

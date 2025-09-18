@@ -107,26 +107,6 @@ function trackDOMElement(tracker: unknown, element: Element) {
 }
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isWeakSet } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isWeakSet(value)) {
-    // 이 블록에서 value는 WeakSet<object> 타입이에요
-    const obj = { id: 1 };
-    value.add(obj);
-
-    if (value.has(obj)) {
-      console.log('객체가 WeakSet에 있어요');
-    }
-
-    value.delete(obj);
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): WeakSet인지 확인할 값이에요.

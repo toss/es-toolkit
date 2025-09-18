@@ -54,20 +54,6 @@ isMap({ key: 'value' }); // false
 isMap(Object.create(null)); // false
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isMap } from 'es-toolkit/compat';
-
-function processValue(value: unknown) {
-  if (isMap(value)) {
-    // 이 블록에서 value는 Map<any, any> 타입이에요
-    console.log(`Map의 크기: ${value.size}`);
-    value.set('newKey', 'newValue');
-  }
-}
-```
-
 #### 파라미터
 
 - `value` (`unknown`): Map인지 확인할 값이에요.

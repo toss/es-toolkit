@@ -1,59 +1,77 @@
-# isMatch
+# isMatch (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `es-toolkit`의 `isEqual`이나 직접 비교를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `isMatch` 함수는 복잡한 부분 일치 검사와 타입별 처리로 인해 느리게 동작해요.
+
+대신 더 빠른 `es-toolkit`의 [isEqual](../../predicate/isEqual.md)이나 직접적인 프로퍼티 비교를 사용하세요.
+
 :::
 
-`target`이 `source`의 모양 및 값과 일치하는지 확인해요. 객체, 배열, `Map`, `Set`의 깊은 비교를 지원해요.
-
-## 인터페이스
+객체가 다른 객체의 모양과 값에 부분적으로 일치하는지 확인해요.
 
 ```typescript
-function isMatch(target: unknown, source: unknown): boolean;
+const result = isMatch(target, source);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `target` (`unknown`): 모양과 값이 일치하는지 확인할 값.
-- `source` (`unknown`): 확인할 모양과 값을 가진 객체.
+### `isMatch(target, source)`
+
+객체나 배열이 다른 객체의 구조와 값에 부분적으로 일치하는지 확인할 때 `isMatch`를 사용하세요. 전체가 동일할 필요는 없고, source의 모든 프로퍼티가 target에 존재하고 같은 값을 가지면 되요.
+
+```typescript
+import { isMatch } from 'es-toolkit/compat';
+
+// 객체 부분 일치
+isMatch({ a: 1, b: 2, c: 3 }, { a: 1, b: 2 }); // true (a, b가 일치)
+isMatch({ a: 1, b: 2 }, { a: 1, b: 2, c: 3 }); // false (c가 target에 없음)
+
+// 중첩 객체
+isMatch(
+  { user: { name: 'Alice', age: 25, city: 'Seoul' } },
+  { user: { name: 'Alice', age: 25 } }
+); // true
+
+// 배열 부분 일치 (순서 무관)
+isMatch([1, 2, 3, 4], [2, 4]); // true (2와 4가 배열에 있음)
+isMatch([1, 2, 3], [1, 2, 3]); // true (완전 일치)
+isMatch([1, 2], [1, 2, 3]); // false (3이 target에 없음)
+
+// Map 부분 일치
+const targetMap = new Map([['a', 1], ['b', 2], ['c', 3]]);
+const sourceMap = new Map([['a', 1], ['b', 2]]);
+isMatch(targetMap, sourceMap); // true
+
+// Set 부분 일치
+const targetSet = new Set([1, 2, 3, 4]);
+const sourceSet = new Set([2, 4]);
+isMatch(targetSet, sourceSet); // true
+
+// 빈 source는 항상 true
+isMatch({ a: 1 }, {}); // true
+isMatch([1, 2, 3], []); // true
+```
+
+더 직접적이고 빠른 방법들:
+
+```typescript
+// 완전 동등성 확인 (더 빠름)
+import { isEqual } from 'es-toolkit';
+isEqual(obj1, obj2);
+
+// 특정 프로퍼티 확인 (더 명확함)
+target.a === source.a && target.b === source.b;
+
+// 객체 구조 확인
+Object.keys(source).every(key => target[key] === source[key]);
+```
+
+#### 파라미터
+
+- `target` (`unknown`): 일치하는지 확인할 객체예요.
+- `source` (`unknown`): 일치 패턴이 되는 객체예요.
 
 ### 반환 값
 
-(`boolean`): `target`이 `source`의 모양 및 값과 일치하면 `true`. 아니면 `false`.
-
-## 예시
-
-### 객체 일치
-
-```typescript
-isMatch({ a: 1, b: 2 }, { a: 1 }); // true
-```
-
-### 배열 일치
-
-```typescript
-isMatch([1, 2, 3], [1, 2, 3]); // true
-isMatch([1, 2, 2, 3], [2, 2]); // true
-isMatch([1, 2, 3], [2, 2]); // false
-```
-
-### `Map` 일치
-
-```typescript
-const targetMap = new Map([
-  ['key1', 'value1'],
-  ['key2', 'value2'],
-]);
-const sourceMap = new Map([['key1', 'value1']]);
-isMatch(targetMap, sourceMap); // true
-```
-
-### `Set` 일치
-
-```javascript
-const targetSet = new Set([1, 2, 3]);
-const sourceSet = new Set([1, 2]);
-isMatch(targetSet, sourceSet); // true
-```
+(`boolean`): target이 source의 모양과 값에 부분적으로 일치하면 `true`, 아니면 `false`를 반환해요.

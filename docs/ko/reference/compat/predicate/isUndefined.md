@@ -83,23 +83,6 @@ greet('김철수'); // "안녕하세요, 김철수님!"
 greet('김철수', '선생'); // "안녕하세요, 김철수선생!"
 ```
 
-TypeScript에서 타입 가드로 사용할 수 있어요.
-
-```typescript
-import { isUndefined } from 'es-toolkit/compat';
-
-function processValue(value: string | undefined) {
-  if (isUndefined(value)) {
-    // 이 블록에서 value는 undefined 타입이에요
-    console.log('값이 정의되지 않았어요');
-    return;
-  }
-
-  // 이 블록에서 value는 string 타입이에요
-  console.log(value.toUpperCase());
-}
-```
-
 #### 파라미터
 
 - `x` (`any`): `undefined`인지 확인할 값이에요.

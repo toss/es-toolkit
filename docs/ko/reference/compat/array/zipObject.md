@@ -1,23 +1,53 @@
-# zipObject (🚧 문서 작성 중)
+# zipObject (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `zipObject`를 사용하세요
+
+이 `zipObject` 함수는 Lodash와의 호환성을 위해 추가적인 처리가 포함되어 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [zipObject](../../array/zipObject.md)를 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+두 배열을 사용해서 객체를 만들어요. 첫 번째 배열은 버전망을 프로퍼티 이름으로, 두 번째 배열은 해당 값으로 사용해요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const keys = ['a', 'b', 'c'];
+const values = [1, 2, 3];
+const result = zipObject(keys, values);
+// result는 { a: 1, b: 2, c: 3 }이 돼요.
+```
 
 ## 레퍼런스
 
-### `zipObject(...args)`
+### `zipObject(keys, values)`
 
-#### 인터페이스
+첫 번째 배열의 요소들을 프로퍼티 이름으로, 두 번째 배열의 요소들을 해당 값으로 사용해서 객체를 만들어요. 두 배열의 길이가 다를 경우, 짧은 배열의 길이에 맞춰서 처리해요.
+
+```typescript
+import { zipObject } from 'es-toolkit/compat';
+
+// 기본 사용법
+const keys = ['a', 'b', 'c'];
+const values = [1, 2, 3];
+const result = zipObject(keys, values);
+// Returns: { a: 1, b: 2, c: 3 }
+
+// 길이가 다른 배열들
+const keys2 = ['x', 'y', 'z'];
+const values2 = [10, 20];
+const result2 = zipObject(keys2, values2);
+// Returns: { x: 10, y: 20, z: undefined }
+
+// 빈 배열이 전달된 경우
+const result3 = zipObject([], []);
+// Returns: {}
+```
 
 #### 파라미터
 
-### 반환 값
+- `keys` (`PropertyKey[]`): 프로퍼티 이름으로 사용할 배열이에요.
+- `values` (`T[]`): 프로퍼티 값으로 사용할 배열이에요.
+
+#### 반환 값
+
+(`Record<PropertyKey, T>`): 만들어진 객체예요.
