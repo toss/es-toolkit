@@ -1,54 +1,55 @@
-# sortedIndex
+# sortedLastIndex (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 이진 탐색을 직접 구현하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `sortedLastIndex` 함수는 복잡한 이진 탐색 처리와 타입 검증으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 이진 탐색을 직접 구현하세요.
+
 :::
 
-정렬된 배열에서 특정 값을 삽입할 수 있는 가장 높은 인덱스를 찾아, 배열의 정렬 순서를 유지하도록 해요.
-
-- 배열이 정렬되어 있을 때, 새로운 값을 적절한 위치에 삽입해 정렬 순서를 유지해요.
-- 이 함수는 이진 검색 알고리즘을 사용하므로, 대규모 배열에서도 효율적으로 동작해요.
-- 더 복잡하거나 사용자 정의된 정렬 논리가 필요한 경우, [sortedLastIndexBy](./sortedLastIndexBy.md)를 사용하여 비교 로직을 커스터마이즈할 수 있어요.
-
-이 함수는 값을 삽입해야 하는 인덱스를 반환해요.
-값이 이미 배열에 존재하는 경우, 반환되는 인덱스는 해당 값의 마지막 위치 뒤예요.
-
-## 인터페이스
+정렬된 배열에서 값을 삽입할 가장 높은 인덱스를 찾아요.
 
 ```typescript
-function sortedLastIndex<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedLastIndex(array, value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `array` (`ArrayLike<T> | null | undefined`):
-  정렬된 배열. null 또는 undefined일 경우 빈 배열로 간주돼요.
-- `value` (`T`):
-  삽입 위치를 찾기 위해 평가할 값.
+### `sortedLastIndex(array, value)`
 
-### 반환 값
-
-(`number`): 배열의 정렬 순서를 유지하기 위해 값이 삽입되어야 할 인덱스.
-
-## 예시
+정렬된 배열에서 값을 삽입할 가장 높은 위치를 찾을 때 `sortedLastIndex`를 사용하세요. 중복된 값이 있을 때 마지막 위치 뒤의 인덱스를 반환해요.
 
 ```typescript
 import { sortedLastIndex } from 'es-toolkit/compat';
 
-// 숫자 배열에서 기본 사용법
-sortedLastIndex([10, 20, 20, 30, 50], 20);
-// 반환값: 3
-// 설명: 20은 정렬 순서를 유지하기 위한 가장 높은 인덱스인 3을 반환해요.
+// 중복된 값이 있는 배열에서 마지막 삽입 위치 찾기
+sortedLastIndex([4, 5, 5, 5, 6], 5);
+// 4를 반환해요 (마지막 5 뒤의 위치)
 
-// 빈 배열이나 null 배열 처리
-sortedLastIndex(null, 25);
-// 반환값: 0
-// 설명: null 또는 undefined 배열은 빈 배열로 간주되며, 0을 반환해요.
+// 새로운 값의 삽입 위치 찾기
+sortedLastIndex([10, 20, 30], 25);
+// 3을 반환해요 (25는 30 앞에 위치)
 
-// 기본 비교 로직을 사용하는 경우 (sortedLastIndexBy와의 위임 동작)
-sortedLastIndex([10, '20', 30], 25);
-// 반환값: 2
-// 설명: 기본 비교 로직을 사용하며, 2를 반환해요.
+// 값이 없는 경우
+sortedLastIndex([1, 2, 3], 0);
+// 0을 반환해요 (맨 앞에 위치)
 ```
+
+`null`이나 `undefined` 배열은 0을 반환해요.
+
+```typescript
+import { sortedLastIndex } from 'es-toolkit/compat';
+
+sortedLastIndex(null, 1); // 0
+sortedLastIndex(undefined, 1); // 0
+```
+
+#### 파라미터
+
+- `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 정렬되지 않은 배열을 사용하면 잘못된 결과를 얻을 수 있어요.
+- `value` (`T`): 삽입할 값이에요.
+
+### 반환 값
+
+(`number`): 값을 삽입할 가장 높은 인덱스를 반환해요. 배열이 `null`이나 `undefined`면 0을 반환해요.

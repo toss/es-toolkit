@@ -1,6 +1,6 @@
 # intersection (Lodash 호환성)
 
-::: warning `es-toolkit`의 `intersection`을 사용하세요
+::: warning `es-toolkit`의 [intersection](../../array/intersection.md)을 사용하세요
 
 이 `intersection` 함수는 `null`이나 `undefined` 처리, 다중 배열 지원, 중복 제거 과정으로 인해 느리게 동작해요.
 

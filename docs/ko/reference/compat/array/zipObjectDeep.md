@@ -1,57 +1,61 @@
-# zipObjectDeep
+# zipObjectDeep (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 네이티브 배열 메서드를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `zipObjectDeep` 함수는 복잡한 경로 처리, 객체 중첩 로직 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 네이티브 JavaScript 객체 조작과 구조 분해 할당을 사용하세요.
+
 :::
 
-두 배열을 하나의 객체로 결합해요. 첫 번째 배열은 프로퍼티 경로를 나타내고, 두 번째 배열은 값을 나타내요. [zipObject](../../array/zipObject.md)와 다르게, 프로퍼티로 `a.b` 와 같은 경로를 지정할 수 있어요.
-
-프로퍼티 이름을 나타내는 배열이 값을 나타내는 배열보다 길면, 값들은 `undefined`로 채워져요.
-
-## 인터페이스
+경로 배열과 값 배열을 사용하여 깊이 중첩된 객체를 만들어요.
 
 ```typescript
-function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): { [K in P]: V };
+const result = zipObjectDeep(keys, values);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `keys` (`ArrayLike<P | P[]>`): 프로퍼티 경로가 포함된 배열.
-- `values` (`ArrayLike<V>`): 값에 대응되는 값이 포함된 배열.
+### `zipObjectDeep(keys, values)`
 
-### 반환 값
-
-(`{ [K in P]: V }`): 주어진 속성 이름과 값으로 구성된 새로운 객체예요.
-
-## 예시
+첫 번째 배열의 경로와 두 번째 배열의 값을 사용하여 깊이 중첩된 객체를 생성해요. 경로는 점 표기법 문자열이나 속성 이름 배열로 제공할 수 있어요. 복잡한 중첩 구조의 데이터를 생성하거나 평면적인 키-값 쌍을 계층적 객체로 변환할 때 유용해요.
 
 ```typescript
 import { zipObjectDeep } from 'es-toolkit/compat';
 
+// 점 표기법 문자열로 경로 지정
 const paths = ['a.b.c', 'd.e.f'];
 const values = [1, 2];
 const result = zipObjectDeep(paths, values);
-// result 는 { a: { b: { c: 1 } }, d: { e: { f: 2 } } }가 돼요
+// Returns: { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
 
-const paths = [
-  ['a', 'b', 'c'],
-  ['d', 'e', 'f'],
-];
-const values = [1, 2];
-const result = zipObjectDeep(paths, values);
-// result 는 { a: { b: { c: 1 } }, d: { e: { f: 2 } } }가 돼요
+// 배열로 경로 지정
+const pathArrays = [['a', 'b', 'c'], ['d', 'e', 'f']];
+const values2 = [1, 2];
+const result2 = zipObjectDeep(pathArrays, values2);
+// Returns: { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
 
-const paths = ['a.b[0].c', 'a.b[1].d'];
-const values = [1, 2];
-const result = zipObjectDeep(paths, values);
-// result 는 { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }가 돼요
+// 배열 인덱스를 포함한 경로
+const arrayPaths = ['a.b[0].c', 'a.b[1].d'];
+const values3 = [1, 2];
+const result3 = zipObjectDeep(arrayPaths, values3);
+// Returns: { a: { b: [{ c: 1 }, { d: 2 }] } }
 ```
 
-## 성능 비교
+`null`이나 `undefined` 키 배열은 빈 객체로 처리해요.
 
-|                   | [번들 사이즈](../../../bundle-size.md) | [성능](../../../performance.md) |
-| ----------------- | -------------------------------------- | ------------------------------- |
-| es-toolkit/compat | 938 바이트 (88% 작음)                  | 1,102,767 회 (25% 빠름)         |
-| lodash-es         | 7,338 바이트                           | 1,476,660 회                    |
+```typescript
+import { zipObjectDeep } from 'es-toolkit/compat';
+
+zipObjectDeep(null, [1, 2]); // {}
+zipObjectDeep(undefined, [1, 2]); // {}
+```
+
+#### 파라미터
+
+- `keys` (`ArrayLike<PropertyPath> | null | undefined`): 속성 경로 배열이에요. 점 표기법 문자열이나 속성 이름 배열을 사용할 수 있어요.
+- `values` (`ArrayLike<any>`, 선택): 해당하는 값들의 배열이에요. 제공하지 않으면 빈 배열로 처리해요.
+
+### 반환 값
+
+(`object`): 주어진 경로와 값으로 구성된 깊이 중첩된 객체를 반환해요.

@@ -1,6 +1,6 @@
 # partition (Lodash 호환성)
 
-::: warning `es-toolkit`의 `partition`를 사용하세요
+::: warning `es-toolkit`의 [partition](../../array/partition.md)를 사용하세요
 
 이 `partition` 함수는 `null`이나 `undefined` 처리, 다양한 조건 처리 등으로 인해 느리게 동작해요.
 
@@ -31,7 +31,7 @@ partition([1, 2, 3, 4, 5, 6], n => n % 2 === 0);
 const users = [
   { name: 'john', active: true },
   { name: 'jane', active: false },
-  { name: 'bob', active: true }
+  { name: 'bob', active: true },
 ];
 
 partition(users, 'active');
@@ -63,7 +63,7 @@ import { partition } from 'es-toolkit/compat';
 const obj = {
   a: { score: 90 },
   b: { score: 40 },
-  c: { score: 80 }
+  c: { score: 80 },
 };
 
 partition(obj, item => item.score >= 80);

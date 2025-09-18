@@ -1,10 +1,10 @@
 # flatMapDeep (Lodash 호환성)
 
-::: warning `Array.prototype.flatMap`과 `Array.prototype.flat`을 사용하세요
+::: warning `es-toolkit`의 [`flatMapDeep`](../../array/flatMapDeep.md)를 사용하세요
 
 이 `flatMapDeep` 함수는 복잡한 컬렉션 타입 처리와 깊은 평면화 로직으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `Array.prototype.flatMap`과 `Array.prototype.flat(Infinity)`를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [flatMapDeep](../../array/flatMapDeep.md)를 사용하세요.
 
 :::
 
@@ -38,7 +38,7 @@ flatMapDeep(obj, (value, key) => [[[key, value]]]);
 // 문자열 속성으로 매핑 후 깊은 평면화
 const users = [
   { user: 'barney', hobbies: [['hiking', 'coding']] },
-  { user: 'fred', hobbies: [['reading']] }
+  { user: 'fred', hobbies: [['reading']] },
 ];
 flatMapDeep(users, 'hobbies');
 // 결과: ['hiking', 'coding', 'reading']
@@ -61,7 +61,7 @@ import { flatMapDeep } from 'es-toolkit/compat';
 
 const users = [
   { user: 'barney', active: [true, false] },
-  { user: 'fred', active: [false] }
+  { user: 'fred', active: [false] },
 ];
 flatMapDeep(users, { active: [false] });
 // 결과: [false] (active 배열에 [false]가 포함된 요소들의 매칭 결과)

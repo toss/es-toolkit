@@ -1,23 +1,54 @@
-# sample (🚧 문서 작성 중)
+# sample (Lodash 호환성)
 
-::: warning 구현 완료 - 문서 작성 중
-이 함수는 구현되어 있지만, 문서는 아직 작성 중이에요.
+::: warning `es-toolkit`의 `sample`을 사용하세요
+
+이 `sample` 함수는 `null`이나 `undefined` 처리, 객체 값 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `es-toolkit`의 [sample](../../array/sample.md)을 사용하세요.
+
 :::
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+배열이나 객체에서 랜덤한 요소 하나를 가져와요.
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-작성 중이에요.
+```typescript
+const randomItem = sample(collection);
+```
 
 ## 레퍼런스
 
-### `sample(...args)`
+### `sample(collection)`
 
-#### 인터페이스
+배열이나 객체에서 랜덤한 요소를 하나 선택할 때 `sample`을 사용하세요. 배열에서는 랜덤한 요소를 반환하고, 객체에서는 랜덤한 값을 반환해요.
+
+```typescript
+import { sample } from 'es-toolkit/compat';
+
+// 배열에서 랜덤한 요소 가져오기
+sample([1, 2, 3, 4, 5]);
+// 1부터 5까지 중 랜덤한 숫자 하나를 반환해요
+
+// 객체에서 랜덤한 값 가져오기
+sample({ a: 1, b: 2, c: 3 });
+// 1, 2, 3 중 랜덤한 값 하나를 반환해요
+
+// 문자열도 처리해요
+sample('hello');
+// 'h', 'e', 'l', 'l', 'o' 중 랜덤한 문자 하나를 반환해요
+```
+
+`null`이나 `undefined`는 `undefined`를 반환해요.
+
+```typescript
+import { sample } from 'es-toolkit/compat';
+
+sample(null); // undefined
+sample(undefined); // undefined
+```
 
 #### 파라미터
 
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 샘플링할 배열이나 객체예요.
+
 ### 반환 값
+
+(`T | string | undefined`): 배열이나 객체에서 랜덤하게 선택된 요소를 반환해요. 컬렉션이 비어있거나 `null`, `undefined`면 `undefined`를 반환해요.

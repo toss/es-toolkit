@@ -1,6 +1,6 @@
 # keyBy (Lodash 호환성)
 
-::: warning `es-toolkit`의 `keyBy`를 사용하세요
+::: warning `es-toolkit`의 [keyBy](../../array/keyBy.md)를 사용하세요
 
 이 `keyBy` 함수는 `null`이나 `undefined` 처리, 다양한 매개변수 처리 등으로 인해 느리게 동작해요.
 
@@ -26,7 +26,7 @@ import { keyBy } from 'es-toolkit/compat';
 // 속성 이름으로 키 생성하기
 const array = [
   { dir: 'left', code: 97 },
-  { dir: 'right', code: 100 }
+  { dir: 'right', code: 100 },
 ];
 
 keyBy(array, 'dir');
@@ -39,7 +39,7 @@ keyBy(array, o => String.fromCharCode(o.code));
 // 객체에서도 사용 가능해요
 const obj = {
   a: { id: 1, name: 'john' },
-  b: { id: 2, name: 'jane' }
+  b: { id: 2, name: 'jane' },
 };
 keyBy(obj, 'name');
 // => { john: { id: 1, name: 'john' }, jane: { id: 2, name: 'jane' } }

@@ -1,74 +1,60 @@
-# reduceRight
+# reduceRight (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.reduceRight`나 `Object.values`와 `reverse`, `reduce`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `reduceRight` 함수는 복잡한 타입 처리와 다양한 입력 형태 지원으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.reduceRight` 메서드나 객체의 경우 `Object.values`와 `reverse`, `reduce`를 함께 사용하세요.
+
 :::
 
-리듀서 함수를 사용해서 배열 또는 객체를 하나의 값으로 줄여요. [reduce](./reduce.md)와 다르게 오른쪽에서 시작해요.
-
-배열의 요소 또는 객체의 값을 하나씩 순회하면서, "리듀서"라고 불리는 특별한 함수를 적용해요.
-이전 단계의 결과와 현재 요소를 사용해서 계산을 수행해요.
-모든 요소를 순회한 다음 최종 결과를 반환해요.
-
-`reduceRight()` 함수가 시작될 때 사용할 이전 단계의 결과가 없어요.
-초기 값을 제공하면 그 값으로 시작해요.
-초기 값을 제공하지 않으면 배열의 마지막 요소나 객체의 마지막 값을 사용하고, 두 번째로 마지막 요소나 값부터 계산을 시작해요.
-
-## 인터페이스
+배열이나 객체를 오른쪽부터 순회해서 하나의 값으로 줄여요.
 
 ```typescript
-function reduceRight<T, U>(
-  collection: T[],
-  iteratee: (accumulator: U, value: T, index: number, collection: T[]) => U,
-  initialValue: U
-): U;
-function reduceRight<T>(collection: T[], iteratee: (accumulator: T, value: T, index: number, collection: T[]) => T): T;
-
-function reduceRight<T, U>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: U, value: T, index: number, collection: ArrayLike<T>) => U,
-  initialValue: U
-): U;
-function reduceRight<T>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: T, value: T, index: number, collection: ArrayLike<T>) => T
-): T;
-
-function reduceRight<T extends object, U>(
-  collection: T,
-  iteratee: (accumulator: U, value: T[keyof T], key: keyof T, collection: T) => U,
-  initialValue: U
-): U;
-function reduceRight<T extends object>(
-  collection: T,
-  iteratee: (accumulator: T[keyof T], value: T[keyof T], key: keyof T, collection: T) => T[keyof T]
-): T[keyof T];
+const result = reduceRight(collection, iteratee, initialValue);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 반복할 컬렉션.
-- `iteratee` (`((accumulator: any, value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 반복할 때 호출되는 함수.
-- `initialValue` (`any`): 초기 값.
+### `reduceRight(collection, iteratee, initialValue)`
+
+배열이나 객체의 모든 요소를 오른쪽부터 왼쪽으로 순회하면서 누적값을 계산하세요. 초기 값을 제공하면 그 값부터 시작하고, 그렇지 않으면 마지막 요소부터 시작해요.
+
+```typescript
+import { reduceRight } from 'es-toolkit/compat';
+
+// 배열을 문자열로 합치기 (오른쪽부터)
+const letters = ['a', 'b', 'c', 'd'];
+const result = reduceRight(letters, (acc, value) => acc + value, '');
+console.log(result); // 'dcba'
+
+// 객체 값들의 곱셈 (키 순서의 역순)
+const numbers = { x: 2, y: 3, z: 4 };
+const product = reduceRight(numbers, (acc, value) => acc * value, 1);
+console.log(product); // 24 (1 * 4 * 3 * 2)
+```
+
+초기 값을 제공하지 않으면 마지막 요소가 초기 값이 되고 뒤에서 두 번째 요소부터 순회해요.
+
+```typescript
+import { reduceRight } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4];
+const sum = reduceRight(numbers, (acc, value) => acc + value);
+console.log(sum); // 10 (4 + 3 + 2 + 1)
+
+// 빈 배열이면 undefined가 반환돼요
+const empty = [];
+const result = reduceRight(empty, (acc, value) => acc + value);
+console.log(result); // undefined
+```
+
+#### 파라미터
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 순회할 배열이나 객체예요.
+- `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 각 요소에 대해 호출할 함수예요. 누적값, 현재 값, 인덱스/키, 원본 배열/객체를 받아요.
+- `initialValue` (`any`, 선택): 누적값의 초기 값이에요. 제공하지 않으면 마지막 요소가 초기 값이 돼요.
 
 ### 반환 값
 
-(`U`): 하나의 값으로 줄여진 값.
-
-## 예시
-
-```typescript
-// Using a reducer function
-const array = [1, 2, 3];
-reduceRight(array, (acc, value) => acc + value, 0); // => 6
-
-// Using a reducer function with initialValue
-const array = [1, 2, 3];
-reduceRight(array, (acc, value) => acc + value % 2 === 0, true); // => false
-
-// Using an object as the collection
-const obj = { a: 1, b: 2, c: 3 };
-reduceRight(obj, (acc, value) => acc + value, 0); // => 6
-```
+(`any`): 모든 요소를 처리한 후의 최종 누적값을 반환해요.

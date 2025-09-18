@@ -1,6 +1,6 @@
 # orderBy (Lodash 호환성)
 
-::: warning `es-toolkit`의 `orderBy`를 사용하세요
+::: warning `es-toolkit`의 [orderBy](../../array/orderBy.md)를 사용하세요
 
 이 `orderBy` 함수는 `null`이나 `undefined` 처리, 복잡한 경로 탐색, 다양한 정렬 기준 처리 등으로 인해 느리게 동작해요.
 
@@ -27,7 +27,7 @@ const users = [
   { name: 'fred', age: 48 },
   { name: 'barney', age: 34 },
   { name: 'fred', age: 40 },
-  { name: 'barney', age: 36 }
+  { name: 'barney', age: 36 },
 ];
 
 // 이름 오름차순, 나이 내림차순으로 정렬
@@ -55,7 +55,7 @@ import { orderBy } from 'es-toolkit/compat';
 
 const obj = {
   a: { name: 'fred', age: 48 },
-  b: { name: 'barney', age: 34 }
+  b: { name: 'barney', age: 34 },
 };
 
 orderBy(obj, 'age', 'desc');

@@ -1,6 +1,6 @@
 # pull (Lodash 호환성)
 
-::: warning `es-toolkit`의 `pull`을 사용하세요
+::: warning `es-toolkit`의 [pull](../../array/pull.md)을 사용하세요
 
 이 `pull` 함수는 Lodash의 호환성을 위한 함수로, 더 복잡한 타입 처리와 오버로딩으로 인해 느리게 동작해요.
 

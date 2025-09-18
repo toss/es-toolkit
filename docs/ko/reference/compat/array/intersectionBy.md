@@ -1,6 +1,6 @@
 # intersectionBy (Lodash 호환성)
 
-::: warning `es-toolkit`의 `intersectionBy`를 사용하세요
+::: warning `es-toolkit`의 [intersectionBy](../../array/intersectionBy.md)를 사용하세요
 
 이 `intersectionBy` 함수는 복잡한 조건 처리, 다중 배열 지원, 프로퍼티 경로 해석 등으로 인해 느리게 동작해요.
 
@@ -32,11 +32,11 @@ const result = intersectionBy(array1, array2, Math.floor);
 // 프로퍼티로 교집합 구하기
 const users1 = [
   { id: 1, name: 'john' },
-  { id: 2, name: 'jane' }
+  { id: 2, name: 'jane' },
 ];
 const users2 = [
   { id: 2, name: 'jane' },
-  { id: 3, name: 'bob' }
+  { id: 3, name: 'bob' },
 ];
 const byId = intersectionBy(users1, users2, 'id');
 // byId는 [{ id: 2, name: 'jane' }]
@@ -70,11 +70,11 @@ import { intersectionBy } from 'es-toolkit/compat';
 
 const products1 = [
   { category: 'fruit', name: 'apple' },
-  { category: 'vegetable', name: 'carrot' }
+  { category: 'vegetable', name: 'carrot' },
 ];
 const products2 = [
   { category: 'fruit', name: 'banana' },
-  { category: 'meat', name: 'beef' }
+  { category: 'meat', name: 'beef' },
 ];
 
 // 부분 객체로 조건 지정

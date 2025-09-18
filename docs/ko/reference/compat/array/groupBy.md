@@ -1,6 +1,6 @@
 # groupBy (Lodash 호환성)
 
-::: warning `es-toolkit`의 `groupBy`를 사용하세요
+::: warning `es-toolkit`의 [groupBy](../../array/groupBy.md)를 사용하세요
 
 이 `groupBy` 함수는 `null`이나 `undefined` 처리, 객체 지원, 복잡한 타입 처리 등으로 인해 느리게 동작해요.
 
@@ -32,7 +32,7 @@ const result = groupBy(array, Math.floor);
 const users = [
   { name: 'john', age: 30 },
   { name: 'jane', age: 25 },
-  { name: 'bob', age: 30 }
+  { name: 'bob', age: 30 },
 ];
 const byAge = groupBy(users, 'age');
 // byAge는 { '25': [{ name: 'jane', age: 25 }], '30': [{ name: 'john', age: 30 }, { name: 'bob', age: 30 }] }
@@ -60,7 +60,7 @@ import { groupBy } from 'es-toolkit/compat';
 const products = [
   { category: 'fruit', name: 'apple' },
   { category: 'fruit', name: 'banana' },
-  { category: 'vegetable', name: 'carrot' }
+  { category: 'vegetable', name: 'carrot' },
 ];
 
 // 부분 객체로 그룹 나누기

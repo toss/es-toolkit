@@ -1,10 +1,10 @@
 # pullAt (Lodash 호환성)
 
-::: warning `Array.prototype.splice`나 배열 분해를 사용하세요
+::: warning `es-toolkit`의 [pullAt](../../array/pullAt.md)을 사용하세요
 
-이 `pullAt` 함수는 복잡한 인덱스 처리와 배열 변경으로 인해 느리게 동작해요.
+이 `pullAt` 함수는 Lodash의 호환성을 위한 함수로, 더 복잡한 타입 처리와 오버로딩으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `Array.prototype.splice` 메서드나 배열 분해 문법을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [pullAt](../../array/pullAt.md)을 사용하세요.
 
 :::
 

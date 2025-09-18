@@ -1,6 +1,6 @@
 # last (Lodash 호환성)
 
-::: warning `es-toolkit`의 `last`를 사용하세요
+::: warning `es-toolkit`의 [last](../../array/last.md)를 사용하세요
 
 이 `last` 함수는 `null`이나 `undefined` 처리로 인해 복잡하게 동작해요.
 
