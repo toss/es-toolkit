@@ -1,78 +1,70 @@
 # isBlob
 
-주어진 값이 `Blob` 인스턴스인지 확인해요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `Blob`으로 좁혀요.
-
-## 인터페이스
+주어진 값이 Blob 인스턴스인지 확인해요.
 
 ```typescript
-function isBlob(value: unknown): value is Blob;
+const result = isBlob(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): `Blob`인지 확인할 값이에요.
+### `isBlob(value)`
 
-### 반환 값
-
-(`value is Blob`): 값이 `Blob`이면 `true`, 아니면 `false`를 반환해요.
-
-## 예시
+값이 Blob 인스턴스인지 확인하고 싶을 때 `isBlob`을 사용하세요. 브라우저 환경에서 파일이나 바이너리 데이터를 다룰 때 유용해요.
 
 ```typescript
 import { isBlob } from 'es-toolkit/predicate';
 
-// 기본 Blob 확인
+// 기본 Blob 인스턴스들
 const blob = new Blob(['hello'], { type: 'text/plain' });
-console.log(isBlob(blob)); // true
-
-// File도 Blob을 상속하므로 true를 반환해요
 const file = new File(['content'], 'example.txt', { type: 'text/plain' });
-console.log(isBlob(file)); // true
 
-// 다른 타입들과 구분
+console.log(isBlob(blob)); // true
+console.log(isBlob(file)); // true (File은 Blob을 상속함)
+
+// Blob이 아닌 값들
 console.log(isBlob(new ArrayBuffer(8))); // false
 console.log(isBlob('text data')); // false
 console.log(isBlob({})); // false
 console.log(isBlob(null)); // false
-console.log(isBlob(undefined)); // false
+```
 
-// TypeScript에서 타입 가드로 사용
-function processFile(input: unknown) {
-  if (isBlob(input)) {
-    // input은 Blob으로 타입이 좁혀져요
-    console.log(`파일 크기: ${input.size} 바이트`);
-    console.log(`MIME 타입: ${input.type}`);
+파일 처리나 API 응답 검증에 유용해요.
+
+```typescript
+import { isBlob } from 'es-toolkit/predicate';
+
+// 파일 업로드 처리
+function processUploadedFile(file: unknown) {
+  if (isBlob(file)) {
+    // TypeScript가 file을 Blob으로 추론
+    console.log(`파일 크기: ${file.size} 바이트`);
+    console.log(`MIME 타입: ${file.type}`);
     
-    // Blob 메서드를 안전하게 사용할 수 있어요
-    input.text().then(text => console.log('내용:', text));
+    // Blob 메서드 안전하게 사용
+    file.text().then(text => console.log('내용:', text));
   } else {
-    console.log('Blob이 아니에요');
+    console.log('유효하지 않은 파일입니다');
   }
 }
 
-// 파일 업로드 처리 예시
-function handleFileUpload(files: FileList) {
-  for (const file of files) {
-    if (isBlob(file)) {
-      console.log(`업로드 파일: ${file.name} (${file.size} bytes)`);
-    }
-  }
-}
-
-// API에서 받은 데이터 처리
-async function downloadFile(url: string) {
-  const response = await fetch(url);
-  const data = await response.blob();
-  
+// 다운로드 기능 구현
+async function handleDownload(data: unknown, filename: string) {
   if (isBlob(data)) {
-    const downloadUrl = URL.createObjectURL(data);
+    const url = URL.createObjectURL(data);
     const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = 'downloaded-file';
+    link.href = url;
+    link.download = filename;
     link.click();
-    URL.revokeObjectURL(downloadUrl);
+    URL.revokeObjectURL(url);
   }
 }
 ```
+
+#### 파라미터
+
+- `value` (`unknown`): Blob 인스턴스인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is Blob`): 값이 Blob 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.
