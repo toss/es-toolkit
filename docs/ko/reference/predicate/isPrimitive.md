@@ -10,7 +10,7 @@ const result = isPrimitive(value);
 
 ### `isPrimitive(value)`
 
-값이 JavaScript의 원시 값인지 확인하고 싶을 때 `isPrimitive`를 사용하세요. JavaScript의 원시 값은 `null`, `undefined`, 문자열, 숫자, 참/거짓 값, 심볼, BigInt를 포함해요. 객체나 함수와 같은 참조 타입과 구분할 때 유용해요.
+값이 JavaScript의 원시 값인지 확인하고 싶을 때 `isPrimitive`를 사용하세요. JavaScript의 원시 값은 `null`, `undefined`, 문자열, 숫자, 참/거짓 값, 심볼, `BigInt`를 포함해요. 객체나 함수와 같은 참조 타입과 구분할 때 유용해요.
 
 ```typescript
 import { isPrimitive } from 'es-toolkit/predicate';
@@ -35,7 +35,7 @@ console.log(isPrimitive(() => {})); // false
 console.log(isPrimitive(/regex/)); // false
 ```
 
-메모리 관리나 깊은 복사 로직에서 유용해요:
+깊은 복사 로직을 구현할 때 유용해요.
 
 ```typescript
 // 원시 값과 객체를 다르게 처리
@@ -44,12 +44,12 @@ function deepClone(value: any): any {
     // 원시 값은 그대로 반환
     return value;
   }
-  
+
   // 객체는 복제 로직 수행
   if (Array.isArray(value)) {
     return value.map(deepClone);
   }
-  
+
   const result: any = {};
   for (const key in value) {
     result[key] = deepClone(value[key]);
@@ -62,7 +62,7 @@ function isEqual(a: unknown, b: unknown): boolean {
   if (isPrimitive(a) && isPrimitive(b)) {
     return a === b;
   }
-  
+
   // 복잡한 객체 비교 로직...
   return false;
 }
@@ -77,7 +77,7 @@ function safeLog(value: unknown) {
 }
 ```
 
-타입 가드로 활용해서 안전한 코드 작성:
+타입 가드로 활용해서 안전하게 코드를 작성할 수 있어요.
 
 ```typescript
 function processValue(input: unknown) {
@@ -87,7 +87,7 @@ function processValue(input: unknown) {
     console.log('원시 값:', input);
     return input;
   }
-  
+
   // 여기서 input은 객체 타입으로 추론됨
   console.log('객체 타입입니다');
   return null;
@@ -99,14 +99,14 @@ function validateApiResponse(data: unknown) {
     return {
       type: 'primitive',
       value: data,
-      serializable: true
+      serializable: true,
     };
   }
-  
+
   return {
     type: 'object',
     value: data,
-    serializable: false // 추가 검증 필요
+    serializable: false, // 추가 검증 필요
   };
 }
 
@@ -116,7 +116,7 @@ function normalizeConfigValue(value: unknown) {
     // 원시 값은 안전하게 문자열로 변환 가능
     return String(value);
   }
-  
+
   // 객체는 JSON으로 직렬화
   try {
     return JSON.stringify(value);
@@ -126,7 +126,7 @@ function normalizeConfigValue(value: unknown) {
 }
 ```
 
-래퍼 객체와 원시 값 구분:
+`String`, `Number`, `Boolean` 같은 래퍼 객체와 원시 값을 구분할 수 있어요.
 
 ```typescript
 // 래퍼 객체들은 원시 값이 아님

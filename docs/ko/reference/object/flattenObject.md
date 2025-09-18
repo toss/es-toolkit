@@ -19,11 +19,11 @@ import { flattenObject } from 'es-toolkit/object';
 const nestedObject = {
   a: {
     b: {
-      c: 1
-    }
+      c: 1,
+    },
   },
   d: [2, 3],
-  e: 'simple'
+  e: 'simple',
 };
 
 const flattened = flattenObject(nestedObject);
@@ -46,7 +46,7 @@ console.log(withCustomDelimiter);
 // }
 ```
 
-실제 사용 사례에서 유용해요:
+다음과 같이 설정 객체를 평탄화할 때 유용하게 사용할 수 있어요.
 
 ```typescript
 // 설정 객체 평탄화
@@ -56,11 +56,11 @@ const config = {
     port: 5432,
     credentials: {
       username: 'admin',
-      password: 'secret'
-    }
+      password: 'secret',
+    },
   },
   features: ['auth', 'logging'],
-  debug: true
+  debug: true,
 };
 
 const flatConfig = flattenObject(config);
@@ -74,7 +74,11 @@ console.log(flatConfig);
 //   'features.1': 'logging',
 //   'debug': true
 // }
+```
 
+`options.delimiter` 옵션을 사용하면 점(`.`)이 아니라 언더스코어(`_`) 같은 커스텀 문자로 객체를 평탄화할 수 있어요.
+
+```typescript
 // 언더스코어로 연결된 환경 변수 스타일로
 const envStyle = flattenObject(config, { delimiter: '_' });
 console.log(envStyle);
@@ -89,7 +93,7 @@ console.log(envStyle);
 // }
 ```
 
-빈 객체와 특수한 경우들도 적절히 처리해요:
+빈 객체와 특수한 경우들도 적절히 처리해요.
 
 ```typescript
 // 빈 객체나 배열
@@ -97,7 +101,7 @@ const emptyCase = {
   empty: {},
   emptyArray: [],
   nullValue: null,
-  undefinedValue: undefined
+  undefinedValue: undefined,
 };
 
 const result = flattenObject(emptyCase);

@@ -31,19 +31,19 @@ const invertedGrades = invert(grades);
 console.log(invertedGrades); // { 85: 'alice', 92: 'bob', 88: 'charlie' }
 ```
 
-다양한 타입의 키와 값으로 사용할 수 있어요:
+다양한 타입의 키와 값으로 사용할 수 있어요.
 
 ```typescript
 // 숫자 키와 문자열 값
 const statusCodes = { 200: 'OK', 404: 'Not Found', 500: 'Internal Server Error' };
 const invertedCodes = invert(statusCodes);
-console.log(invertedCodes); 
+console.log(invertedCodes);
 // { 'OK': '200', 'Not Found': '404', 'Internal Server Error': '500' }
 
 // 역방향 조회가 필요한 경우 유용해요
 const userRoles = { admin: 'administrator', user: 'regular_user', guest: 'visitor' };
 const roleToKey = invert(userRoles);
-console.log(roleToKey); 
+console.log(roleToKey);
 // { 'administrator': 'admin', 'regular_user': 'user', 'visitor': 'guest' }
 
 // 이제 값으로 키를 찾을 수 있어요
@@ -53,14 +53,14 @@ function findRoleKey(roleName: string) {
 console.log(findRoleKey('administrator')); // 'admin'
 ```
 
-열거형이나 상수 객체와 함께 사용하면 유용해요:
+열거형(Enum)이나 상수 객체와 함께 사용하면 유용해요.
 
 ```typescript
 // 색상 코드 매핑
 const colorCodes = {
   red: '#FF0000',
   green: '#00FF00',
-  blue: '#0000FF'
+  blue: '#0000FF',
 };
 
 const codeToColor = invert(colorCodes);

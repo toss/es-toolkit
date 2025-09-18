@@ -6,6 +6,12 @@
 const filled = fill(arr, value, start, end);
 ```
 
+::: info 원본 배열을 수정하지 않으려면 [`toFilled`](./toFilled.md)를 사용하세요.
+
+`toFilled`는 원본 배열을 수정하는 대신 새 배열을 반환해요.
+
+:::
+
 ## 레퍼런스
 
 ### `fill(arr, value, start?, end?)`

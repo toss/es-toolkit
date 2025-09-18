@@ -54,7 +54,7 @@ console.log(clonedCircular !== circular); // true
 console.log(clonedCircular.self === clonedCircular); // true (순환 참조 유지)
 ```
 
-접근자(getter)로 정의된 읽기 전용 속성의 경우, 복사된 객체에는 접근자의 반환 값이 일반 속성으로 저장돼요:
+접근자(getter)로 정의된 읽기 전용 속성의 경우, 복사된 객체에는 접근자의 반환 값이 일반 속성으로 저장돼요.
 
 ```typescript
 const source = {

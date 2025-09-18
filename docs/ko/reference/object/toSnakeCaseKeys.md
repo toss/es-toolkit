@@ -23,7 +23,7 @@ const result = toSnakeCaseKeys(obj);
 // 배열 내 객체들도 변환해요
 const users = [
   { userId: 1, firstName: 'John' },
-  { userId: 2, firstName: 'Jane' }
+  { userId: 2, firstName: 'Jane' },
 ];
 const convertedUsers = toSnakeCaseKeys(users);
 // convertedUsers는 [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]가 돼요
@@ -34,9 +34,9 @@ const nested = {
     userId: 1,
     contactInfo: {
       emailAddress: 'john@example.com',
-      phoneNumber: '123-456-7890'
-    }
-  }
+      phoneNumber: '123-456-7890',
+    },
+  },
 };
 const nestedResult = toSnakeCaseKeys(nested);
 // nestedResult는 {
@@ -57,42 +57,3 @@ const nestedResult = toSnakeCaseKeys(nested);
 #### 반환 값
 
 (`ToSnakeCaseKeys<T>`): 모든 키가 snake_case로 변환된 새로운 객체를 반환해요.
-
-## 예시
-
-```typescript
-// Example with objects
-const obj = { userId: 1, firstName: 'John' };
-const result = toSnakeCaseKeys(obj);
-// result will be { user_id: 1, first_name: 'John' }
-
-// Example with arrays of objects
-const arr = [
-  { userId: 1, firstName: 'John' },
-  { userId: 2, firstName: 'Jane' },
-];
-const arrResult = toSnakeCaseKeys(arr);
-// arrResult will be [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]
-
-// Example with nested objects
-const nested = {
-  userData: {
-    userId: 1,
-    userAddress: {
-      streetName: 'Main St',
-      zipCode: '12345',
-    },
-  },
-};
-const nestedResult = toSnakeCaseKeys(nested);
-// nestedResult will be:
-// {
-//   user_data: {
-//     user_id: 1,
-//     user_address: {
-//       street_name: 'Main St',
-//       zip_code: '12345'
-//     }
-//   }
-// }
-```

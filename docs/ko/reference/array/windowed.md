@@ -1,6 +1,6 @@
 # windowed
 
-배열에서 지정된 크기의 슬라이딩 윈도우들을 만든 새로운 배열을 반환해요.
+지정된 크기의 윈도우가 배열을 따라 일정하게 슬라이딩하면서 각 윈도우의 스냅샷을 담은 새 배열을 반환해요.
 
 ```typescript
 const windows = windowed(arr, size, step?, options?);
@@ -10,7 +10,9 @@ const windows = windowed(arr, size, step?, options?);
 
 ### `windowed(arr, size, step?, options?)`
 
-배열을 일정한 크기로 나누어 윈도우를 만들고 싶을 때 `windowed`를 사용하세요. 슬라이딩 윈도우 기법으로 데이터를 분석하거나 처리할 때 유용해요.
+지정된 크기의 윈도우가 배열을 따라 일정하게 슬라이딩하면서 각 윈도우의 스냅샷을 담은 배열을 반환하고 싶을 때 `windowed`를 사용하세요.
+
+시계열 데이터 분석에서 이동 평균을 계산하거나, 문자열에서 n-gram을 추출하거나, 배열에서 특정 패턴을 찾을 때 유용해요. 또한 데이터를 배치 단위로 처리하거나 슬라이딩 윈도우 알고리즘을 구현할 때도 활용할 수 있어요.
 
 ```typescript
 import { windowed } from 'es-toolkit/array';
@@ -47,7 +49,7 @@ const withPartial = windowed(numbers, 4, 3, { partialWindows: true });
 console.log(withPartial); // [[1, 2, 3, 4], [4, 5, 6]]
 ```
 
-배열이 윈도우 크기보다 작으면 빈 배열이나 부분 윈도우를 반환해요.
+각 스냅샷은 배열 형태로 제공되며, 마지막 몇 개의 배열은 지정된 크기보다 적은 요소를 가질 수 있어요.
 
 ```typescript
 import { windowed } from 'es-toolkit/array';

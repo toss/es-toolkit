@@ -31,7 +31,7 @@ console.log(isFile(null)); // false
 console.log(isFile(undefined)); // false
 ```
 
-파일 업로드 처리나 드래그 앤 드롭 기능에서 유용해요:
+주어진 인자가 유효한 파일인지 검증할 때 사용할 수 있어요.
 
 ```typescript
 // 파일 업로드 핸들러
@@ -41,28 +41,16 @@ function handleFileUpload(input: unknown) {
     console.log(`파일 크기: ${input.size} bytes`);
     console.log(`파일 타입: ${input.type}`);
     console.log(`마지막 수정: ${input.lastModified}`);
-    
+
     // File이 확실하므로 안전하게 파일 관련 속성에 접근 가능
     return input;
   }
-  
-  throw new Error('유효한 파일이 아닙니다');
-}
 
-// 드래그 앤 드롭 이벤트 처리
-function handleDrop(event: DragEvent) {
-  const items = Array.from(event.dataTransfer?.items || []);
-  
-  items.forEach(item => {
-    const file = item.getAsFile();
-    if (isFile(file)) {
-      console.log(`드롭된 파일: ${file.name}`);
-    }
-  });
+  throw new Error('유효한 파일이 아닙니다');
 }
 ```
 
-환경에서 File이 지원되지 않는 경우도 안전하게 처리해요:
+JavaScript 실행 환경에서 `File`이 지원되지 않는 경우도 안전하게 처리해요.
 
 ```typescript
 // Node.js 환경이나 File을 지원하지 않는 환경에서도 안전

@@ -3,7 +3,8 @@
 숫자를 지정된 범위 내에 고정해요.
 
 ```typescript
-const clamped = clamp(value, bound1, bound2?);
+const clamped = clamp(value, maximum);
+const clamped = clamp(value, minimum, maximum);
 ```
 
 ## 레퍼런스

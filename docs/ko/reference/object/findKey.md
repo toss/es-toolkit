@@ -19,7 +19,7 @@ import { findKey } from 'es-toolkit/object';
 const users = {
   alice: { age: 25, active: true },
   bob: { age: 30, active: false },
-  charlie: { age: 35, active: true }
+  charlie: { age: 35, active: true },
 };
 
 const youngUserKey = findKey(users, user => user.age < 30);
@@ -34,13 +34,13 @@ const seniorUserKey = findKey(users, user => user.age > 50);
 console.log(seniorUserKey); // undefined
 ```
 
-조건 함수는 현재 값, 키, 전체 객체를 받아요:
+조건 함수는 현재 값, 키, 전체 객체를 받아요.
 
 ```typescript
 const data = {
   item1: { priority: 'high', status: 'pending' },
   item2: { priority: 'low', status: 'done' },
-  item3: { priority: 'high', status: 'done' }
+  item3: { priority: 'high', status: 'done' },
 };
 
 // 키 이름과 값을 모두 고려한 검색
@@ -50,35 +50,31 @@ const result = findKey(data, (value, key, obj) => {
 console.log(result); // 'item2'
 ```
 
-복잡한 객체 구조에서도 사용할 수 있어요:
+복잡한 객체 구조에서도 사용할 수 있어요.
 
 ```typescript
 const products = {
-  laptop: { 
+  laptop: {
     specs: { ram: 16, cpu: 'Intel i7' },
     price: 1200,
-    available: true 
+    available: true,
   },
-  phone: { 
+  phone: {
     specs: { ram: 8, cpu: 'Snapdragon' },
     price: 800,
-    available: false 
+    available: false,
   },
-  tablet: { 
+  tablet: {
     specs: { ram: 12, cpu: 'Apple M1' },
     price: 1000,
-    available: true 
-  }
+    available: true,
+  },
 };
 
-const affordableKey = findKey(products, product => 
-  product.price < 1000 && product.available
-);
+const affordableKey = findKey(products, product => product.price < 1000 && product.available);
 console.log(affordableKey); // undefined (조건을 만족하는 제품 없음)
 
-const highRamKey = findKey(products, product => 
-  product.specs.ram >= 12
-);
+const highRamKey = findKey(products, product => product.specs.ram >= 12);
 console.log(highRamKey); // 'laptop'
 ```
 

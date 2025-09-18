@@ -1,6 +1,6 @@
 # timeout
 
-지정된 시간 후에 TimeoutError를 발생시키는 Promise를 반환해요.
+지정된 시간 후에 `TimeoutError`를 발생시키는 `Promise`를 반환해요.
 
 ```typescript
 await timeout(ms);
@@ -31,7 +31,7 @@ async function fetchWithTimeout(url: string) {
   try {
     const result = await Promise.race([
       fetch(url),
-      timeout(5000) // 5초 제한
+      timeout(5000), // 5초 제한
     ]);
     return result;
   } catch (error) {
@@ -43,18 +43,14 @@ async function fetchWithTimeout(url: string) {
 }
 ```
 
-여러 비동기 작업 중 하나라도 제시간에 완료되지 않으면 실패시키고 싶을 때:
+여러 비동기 작업 중 하나라도 정해진 시간 안에 완료되지 않으면 전체 작업을 실패시키고 싶을 때도 사용할 수 있어요.
 
 ```typescript
 async function multipleOperationsWithTimeout() {
   try {
     await Promise.race([
-      Promise.all([
-        fetch('/api/data1'),
-        fetch('/api/data2'),
-        fetch('/api/data3')
-      ]),
-      timeout(3000) // 전체 작업에 3초 제한
+      Promise.all([fetch('/api/data1'), fetch('/api/data2'), fetch('/api/data3')]),
+      timeout(3000), // 전체 작업에 3초 제한
     ]);
     console.log('모든 작업이 제시간에 완료되었습니다');
   } catch (error) {
@@ -65,11 +61,11 @@ async function multipleOperationsWithTimeout() {
 
 #### 파라미터
 
-- `ms` (`number`): TimeoutError가 발생하기까지의 밀리초 단위 시간이에요.
+- `ms` (`number`): `TimeoutError`가 발생하기까지의 밀리초 단위 시간이에요.
 
 #### 반환 값
 
-(`Promise<never>`): 지정된 시간 후에 TimeoutError로 거부되는 Promise를 반환해요.
+(`Promise<never>`): 지정된 시간 후에 `TimeoutError`로 거부되는 Promise를 반환해요.
 
 #### 에러
 

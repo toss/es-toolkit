@@ -1,6 +1,6 @@
 # isNil
 
-값이 null 또는 undefined인지 확인해요.
+값이 `null` 또는 `undefined`인지 확인해요.
 
 ```typescript
 const result = isNil(value);
@@ -10,7 +10,7 @@ const result = isNil(value);
 
 ### `isNil(value)`
 
-값이 null이나 undefined인지 확인하고 싶을 때 `isNil`을 사용하세요. 느슨한 비교(`==`)를 사용해서 null과 undefined를 모두 인식해요.
+값이 `null`이나 `undefined`인지 확인하고 싶을 때 `isNil`을 사용하세요.
 
 ```typescript
 import { isNil } from 'es-toolkit/predicate';
@@ -43,8 +43,8 @@ function processValue(value: string | null | undefined) {
 
 #### 파라미터
 
-- `value` (`unknown`): null 또는 undefined인지 확인할 값이에요.
+- `value` (`unknown`): `null` 또는 `undefined`인지 확인할 값이에요.
 
 #### 반환 값
 
-(`value is null | undefined`): 값이 null 또는 undefined면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`value is null | undefined`): 값이 `null` 또는 `undefined`면 `true`, 그렇지 않으면 `false`를 반환해요.

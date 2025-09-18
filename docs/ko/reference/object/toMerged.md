@@ -54,28 +54,6 @@ const result = toMerged(target, source);
 
 (`T & S`): 대상 객체와 소스 객체가 병합된 새로운 객체를 반환해요.
 
-## 예시
-
-```typescript
-const target = { a: 1, b: { x: 1, y: 2 } };
-const source = { b: { y: 3, z: 4 }, c: 5 };
-const result = toMerged(target, source);
-console.log(result);
-// 반환 값: { a: 1, b: { x: 1, y: 3, z: 4 }, c: 5 }
-
-const target = { a: [1, 2], b: { x: 1 } };
-const source = { a: [3], b: { y: 2 } };
-const result = toMerged(target, source);
-console.log(result);
-// 반환 값: { a: [3, 2], b: { x: 1, y: 2 } }
-
-const target = { a: null };
-const source = { a: [1, 2, 3] };
-const result = toMerged(target, source);
-console.log(result);
-// 반환 값: { a: [1, 2, 3] }
-```
-
 ## 데모
 
 ::: sandpack

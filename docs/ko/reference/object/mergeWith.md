@@ -58,7 +58,7 @@ mergeWith(config, updates, (targetValue, sourceValue, key) => {
 
 - `target` (`T extends Record<PropertyKey, any>`): 소스 객체를 병합할 대상 객체예요. 이 객체가 수정돼요.
 - `source` (`S extends Record<PropertyKey, any>`): 대상 객체에 병합할 소스 객체예요.
-- `merge` (`(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any`): 사용자 정의 병합 함수예요. 다음 파라미터를 받아요:
+- `merge` (`(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any`): 사용자 정의 병합 함수예요.
   - `targetValue`: 대상 객체의 현재 값
   - `sourceValue`: 소스 객체의 값
   - `key`: 병합 중인 속성의 키

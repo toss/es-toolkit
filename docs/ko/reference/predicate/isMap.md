@@ -10,7 +10,7 @@ const result = isMap(value);
 
 ### `isMap(value)`
 
-값이 Map 인스턴스인지 확인하고 싶을 때 `isMap`을 사용하세요. `instanceof` 연산자를 사용해서 Map인지 검사해요.
+값이 Map 인스턴스인지 확인하고 싶을 때 `isMap`을 사용하세요. `instanceof` 연산자를 사용해서 `Map`인지 검사해요.
 
 ```typescript
 import { isMap } from 'es-toolkit/predicate';
@@ -27,7 +27,7 @@ console.log(isMap([])); // false
 console.log(isMap(null)); // false
 ```
 
-TypeScript에서 타입 가드로도 사용할 수 있어요:
+TypeScript에서 타입 가드로도 사용할 수 있어요.
 
 ```typescript
 function processValue(value: unknown) {
@@ -41,7 +41,7 @@ function processValue(value: unknown) {
 
 #### 파라미터
 
-- `value` (`unknown`): Map인지 확인할 값이에요.
+- `value` (`unknown`): `Map`인지 확인할 값이에요.
 
 #### 반환 값
 

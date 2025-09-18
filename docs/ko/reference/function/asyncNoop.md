@@ -6,6 +6,12 @@
 const promise = asyncNoop();
 ```
 
+::: info [`noop`](./noop.md) 함수
+
+동기적으로 아무것도 하지 않는 함수가 필요하다면, 바로 `void`를 반환하는 `noop` 함수를 사용하세요.
+
+:::
+
 ## 레퍼런스
 
 ### `asyncNoop()`

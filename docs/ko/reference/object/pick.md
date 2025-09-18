@@ -28,7 +28,7 @@ const safe = pick(obj, ['a', 'nonexistent']);
 const nested = {
   user: { name: 'John', age: 30 },
   posts: ['post1', 'post2'],
-  settings: { theme: 'dark' }
+  settings: { theme: 'dark' },
 };
 const picked = pick(nested, ['user', 'settings']);
 // picked는 { user: { name: 'John', age: 30 }, settings: { theme: 'dark' } }가 돼요
@@ -42,15 +42,3 @@ const picked = pick(nested, ['user', 'settings']);
 #### 반환 값
 
 (`Pick<T, K>`): 지정된 키들에 해당하는 속성들만 포함한 새로운 객체를 반환해요.
-
-## Lodash와의 호환성
-
-`es-toolkit/compat`에서 `pick` 함수를 가져오면, 깊은 경로를 선택할 수 있어요.
-
-```typescript
-import { pick } from 'es-toolkit/compat';
-
-const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
-const result = pick(obj, ['a.b.c', 'f.g']);
-// 결괏값: { a: { b: { c: 1 } }, 'f.g': 4 }
-```

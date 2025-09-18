@@ -6,6 +6,12 @@
 noop();
 ```
 
+::: info [`asyncNoop`](./asyncNoop.md) 함수
+
+비동기적으로 아무것도 하지 않는 함수가 필요하다면, 바로 `Promise<void>`를 반환하는 `asyncNoop` 함수를 사용하세요.
+
+:::
+
 ## 레퍼런스
 
 ### `noop()`

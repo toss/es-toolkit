@@ -1,6 +1,6 @@
 # isRegExp
 
-주어진 값이 RegExp 인스턴스인지 확인해요.
+주어진 값이 `RegExp` 인스턴스인지 확인해요.
 
 ```typescript
 const result = isRegExp(value);
@@ -10,7 +10,7 @@ const result = isRegExp(value);
 
 ### `isRegExp(value)`
 
-값이 RegExp 인스턴스인지 확인하고 싶을 때 `isRegExp`를 사용하세요. 정규식 객체를 일반 문자열이나 다른 객체와 구분할 때 유용해요.
+값이 `RegExp` 인스턴스인지 확인하고 싶을 때 `isRegExp`를 사용하세요. 정규식 객체를 일반 문자열이나 다른 객체와 구분할 때 유용해요.
 
 ```typescript
 import { isRegExp } from 'es-toolkit/predicate';
@@ -41,13 +41,13 @@ function validatePattern(pattern: unknown, text: string) {
     // TypeScript가 pattern을 RegExp로 추론
     return pattern.test(text);
   }
-  
+
   // 문자열 패턴은 정규식으로 변환
   if (typeof pattern === 'string') {
     const regex = new RegExp(pattern);
     return regex.test(text);
   }
-  
+
   return false;
 }
 
@@ -61,7 +61,7 @@ function createValidator(rule: unknown) {
   if (isRegExp(rule)) {
     return (value: string) => rule.test(value);
   }
-  
+
   // 다른 타입의 규칙들...
   return () => false;
 }
@@ -84,7 +84,7 @@ function processText(input: string, processor: unknown) {
     const matches = input.match(processor);
     return matches ? matches : [];
   }
-  
+
   // 다른 처리기 타입들...
   return [input];
 }
@@ -102,28 +102,28 @@ console.log(urls); // ['https://example.com']
 // 설정 기반 텍스트 검증
 class TextValidator {
   private rules: Array<{ name: string; rule: unknown }> = [];
-  
+
   addRule(name: string, rule: unknown) {
     this.rules.push({ name, rule });
   }
-  
+
   validate(text: string) {
     const results: Array<{ rule: string; passed: boolean }> = [];
-    
+
     for (const { name, rule } of this.rules) {
       if (isRegExp(rule)) {
         results.push({
           rule: name,
-          passed: rule.test(text)
+          passed: rule.test(text),
         });
       } else {
         results.push({
           rule: name,
-          passed: false
+          passed: false,
         });
       }
     }
-    
+
     return results;
   }
 }
@@ -152,14 +152,14 @@ function searchText(content: string, query: unknown) {
     const matches = content.match(query);
     return matches ? matches.length : 0;
   }
-  
+
   if (typeof query === 'string') {
     // 일반 문자열 검색
     const regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
     const matches = content.match(regex);
     return matches ? matches.length : 0;
   }
-  
+
   return 0;
 }
 
@@ -173,7 +173,7 @@ console.log(searchText(text, /h.llo/i)); // 2 (패턴 매칭)
 // 동적 필터링
 function createFilter(patterns: unknown[]) {
   const regexPatterns = patterns.filter(isRegExp);
-  
+
   return (text: string) => {
     return regexPatterns.some(pattern => pattern.test(text));
   };
@@ -184,7 +184,7 @@ const spamPatterns = [
   /\b(광고|홍보)\b/,
   /\d{3}-\d{4}-\d{4}/, // 전화번호 패턴
   'invalid', // RegExp가 아님, 필터에서 제외
-  /\$\d+/ // 가격 패턴
+  /\$\d+/, // 가격 패턴
 ];
 
 const spamFilter = createFilter(spamPatterns);
@@ -205,10 +205,10 @@ function analyzeRegex(value: unknown) {
       ignoreCase: value.ignoreCase,
       multiline: value.multiline,
       unicode: value.unicode,
-      sticky: value.sticky
+      sticky: value.sticky,
     };
   }
-  
+
   return null;
 }
 
@@ -231,7 +231,7 @@ function cloneRegex(value: unknown) {
   if (isRegExp(value)) {
     return new RegExp(value.source, value.flags);
   }
-  
+
   return null;
 }
 

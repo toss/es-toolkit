@@ -3,7 +3,8 @@
 값이 지정된 범위 내에 있는지 확인해요.
 
 ```typescript
-const result = inRange(value, minimum, maximum?);
+const result = inRange(value, maximum);
+const result = inRange(value, minimum, maximum);
 ```
 
 ## 레퍼런스

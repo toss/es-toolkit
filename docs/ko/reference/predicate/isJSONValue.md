@@ -33,14 +33,14 @@ const complexData = {
   user: {
     name: 'Alice',
     active: true,
-    scores: [95, 87, 92]
+    scores: [95, 87, 92],
   },
-  metadata: null
+  metadata: null,
 };
 console.log(isJSONValue(complexData)); // true
 ```
 
-유효하지 않은 JSON 값들과 구분해요:
+JSON으로 직렬화할 수 없는 값들을 정확하게 구분해요. 함수, `undefined`, `Symbol`, 클래스 인스턴스 등은 JSON 명세에서 지원하지 않는 타입이므로 `false`를 반환해요:
 
 ```typescript
 // undefined는 JSON에서 지원되지 않음
@@ -48,7 +48,7 @@ console.log(isJSONValue(undefined)); // false
 
 // 함수들은 JSON으로 직렬화할 수 없음
 console.log(isJSONValue(() => {})); // false
-console.log(isJSONValue(function() {})); // false
+console.log(isJSONValue(function () {})); // false
 
 // Symbol은 JSON에서 지원되지 않음
 console.log(isJSONValue(Symbol('test'))); // false
@@ -76,7 +76,7 @@ function safeJsonStringify(data: unknown): string | null {
     // data가 유효한 JSON 값임이 보장됨
     return JSON.stringify(data);
   }
-  
+
   console.warn('데이터가 JSON 직렬화 가능하지 않습니다');
   return null;
 }
@@ -90,10 +90,10 @@ function sendApiRequest(data: unknown) {
     return fetch('/api/data', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: jsonPayload
+      body: jsonPayload,
     });
   }
-  
+
   throw new Error('API 데이터는 JSON 직렬화 가능해야 합니다');
 }
 
@@ -103,7 +103,7 @@ function saveToStorage(key: string, value: unknown) {
     localStorage.setItem(key, JSON.stringify(value));
     return true;
   }
-  
+
   console.error('localStorage에 저장할 수 없는 데이터 타입입니다');
   return false;
 }
@@ -114,19 +114,19 @@ function validateConfig(config: unknown) {
     return {
       isValid: true,
       config,
-      serialized: JSON.stringify(config)
+      serialized: JSON.stringify(config),
     };
   }
-  
+
   return {
     isValid: false,
     config: null,
-    error: 'Config must be a valid JSON value'
+    error: 'Config must be a valid JSON value',
   };
 }
 ```
 
-다른 타입 가드들과 함께 사용하기:
+다른 타입 가드들과 조합해서 사용할 수 있어요.
 
 ```typescript
 // 구체적인 JSON 타입 확인
@@ -134,7 +134,7 @@ function processJsonData(data: unknown) {
   if (!isJSONValue(data)) {
     throw new Error('Invalid JSON value');
   }
-  
+
   // 이제 data는 유효한 JSON 값임이 보장됨
   if (isJSONObject(data)) {
     console.log('JSON 객체입니다:', Object.keys(data));
@@ -148,7 +148,7 @@ function processJsonData(data: unknown) {
 // 중첩된 데이터 검증
 const testData = {
   valid: { name: 'test', values: [1, 2, 3] },
-  invalid: { name: 'test', callback: () => {} }
+  invalid: { name: 'test', callback: () => {} },
 };
 
 console.log(isJSONValue(testData.valid)); // true

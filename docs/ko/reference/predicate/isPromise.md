@@ -1,6 +1,6 @@
 # isPromise
 
-주어진 값이 Promise 인스턴스인지 확인해요.
+주어진 값이 `Promise` 인스턴스인지 확인해요.
 
 ```typescript
 const result = isPromise(value);
@@ -10,13 +10,13 @@ const result = isPromise(value);
 
 ### `isPromise(value)`
 
-값이 Promise 인스턴스인지 확인하고 싶을 때 `isPromise`를 사용하세요. 비동기 코드에서 Promise 객체를 다른 값들과 구분해야 할 때나, 조건부로 `await`를 사용해야 할 때 유용해요.
+값이 `Promise` 인스턴스인지 확인하고 싶을 때 `isPromise`를 사용하세요. 비동기 코드에서 `Promise` 객체를 다른 값들과 구분해야 할 때나, 조건부로 `await`를 사용해야 할 때 유용해요.
 
 ```typescript
 import { isPromise } from 'es-toolkit/predicate';
 
 // Promise 인스턴스들
-const promise1 = new Promise((resolve) => resolve('done'));
+const promise1 = new Promise(resolve => resolve('done'));
 const promise2 = Promise.resolve(42);
 const promise3 = Promise.reject(new Error('failed'));
 
@@ -32,7 +32,7 @@ console.log(isPromise(null)); // false
 console.log(isPromise(undefined)); // false
 ```
 
-비동기 함수에서 조건부 처리에 유용해요:
+비동기 함수에서 조건에 따라 로직을 실행할 때 유용해요.
 
 ```typescript
 // 값이 Promise인지 확인해서 적절히 처리
@@ -43,7 +43,7 @@ async function processValue(input: unknown) {
     console.log('Promise 결과:', result);
     return result;
   }
-  
+
   // Promise가 아닌 값은 바로 반환
   console.log('일반 값:', input);
   return input;
@@ -52,11 +52,9 @@ async function processValue(input: unknown) {
 // API 응답 처리
 function handleApiCall(response: unknown) {
   if (isPromise(response)) {
-    return response
-      .then(data => ({ success: true, data }))
-      .catch(error => ({ success: false, error: error.message }));
+    return response.then(data => ({ success: true, data })).catch(error => ({ success: false, error: error.message }));
   }
-  
+
   // 이미 해결된 값
   return { success: true, data: response };
 }
@@ -66,78 +64,17 @@ function toPromise<T>(value: T | Promise<T>): Promise<T> {
   if (isPromise(value)) {
     return value;
   }
-  
+
   return Promise.resolve(value);
 }
 ```
 
-동적 import나 조건부 비동기 로딩에서 사용:
-
-```typescript
-// 동적 모듈 로딩
-function loadModule(moduleOrPromise: any) {
-  if (isPromise(moduleOrPromise)) {
-    return moduleOrPromise.then(module => {
-      console.log('모듈이 비동기로 로드됨');
-      return module;
-    });
-  }
-  
-  console.log('모듈이 이미 로드됨');
-  return Promise.resolve(moduleOrPromise);
-}
-
-// 데이터 캐싱 시스템
-class DataCache {
-  private cache = new Map<string, any>();
-  
-  get(key: string, fetcher: () => any) {
-    if (this.cache.has(key)) {
-      return this.cache.get(key);
-    }
-    
-    const value = fetcher();
-    
-    if (isPromise(value)) {
-      // Promise는 해결된 값을 캐시
-      const promiseValue = value.then(result => {
-        this.cache.set(key, result);
-        return result;
-      });
-      this.cache.set(key, promiseValue);
-      return promiseValue;
-    }
-    
-    // 일반 값은 바로 캐시
-    this.cache.set(key, value);
-    return value;
-  }
-}
-
-// 배치 처리
-async function processBatch(items: Array<any | Promise<any>>) {
-  const results = [];
-  
-  for (const item of items) {
-    if (isPromise(item)) {
-      console.log('비동기 항목 처리 중...');
-      results.push(await item);
-    } else {
-      console.log('동기 항목 처리');
-      results.push(item);
-    }
-  }
-  
-  return results;
-}
-```
-
-Promise-like 객체와 구분:
+`Promise` 처럼 생긴 객체와 실제 `Promise`를 구분할 수 있어요.
 
 ```typescript
 // thenable 객체는 Promise가 아님
 const thenable = {
-  then: (resolve: Function) => resolve('not a promise')
+  then: (resolve: Function) => resolve('not a promise'),
 };
 
 console.log(isPromise(thenable)); // false
@@ -157,20 +94,20 @@ function normalFunction() {
 console.log(isPromise(normalFunction())); // false
 ```
 
-에러 핸들링에서 활용:
+오류를 핸들링할 때도 사용할 수 있어요.
 
 ```typescript
 function safeExecute(fn: () => any) {
   try {
     const result = fn();
-    
+
     if (isPromise(result)) {
       return result.catch(error => {
         console.error('비동기 함수 실행 중 에러:', error);
         return null;
       });
     }
-    
+
     return result;
   } catch (error) {
     console.error('동기 함수 실행 중 에러:', error);
@@ -183,11 +120,11 @@ function withTimeout<T>(valueOrPromise: T | Promise<T>, timeoutMs: number) {
   if (!isPromise(valueOrPromise)) {
     return valueOrPromise;
   }
-  
+
   const timeoutPromise = new Promise((_, reject) => {
     setTimeout(() => reject(new Error('Timeout')), timeoutMs);
   });
-  
+
   return Promise.race([valueOrPromise, timeoutPromise]);
 }
 ```

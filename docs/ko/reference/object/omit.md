@@ -33,15 +33,3 @@ const safe = omit(obj, ['b', 'nonexistent']);
 #### 반환 값
 
 (`Omit<T, K>`): 지정된 키들이 제외된 새로운 객체를 반환해요.
-
-## Lodash와의 호환성
-
-`es-toolkit/compat`에서 `omit` 함수를 가져오면, 깊은 경로를 제외할 수 있어요.
-
-```typescript
-import { omit } from 'es-toolkit/compat';
-
-const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
-const result = omit(obj, ['a.b.c', 'f.g']);
-// result will be { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
-```

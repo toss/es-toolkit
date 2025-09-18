@@ -20,18 +20,16 @@ console.log(isJSONArray([1, 2, 3])); // true
 console.log(isJSONArray(['hello', 'world'])); // true
 console.log(isJSONArray([true, false, null])); // true
 console.log(isJSONArray([{ name: 'John' }, { name: 'Jane' }])); // true
-console.log(isJSONArray([[1, 2], [3, 4]])); // true (중첩 배열)
+console.log(
+  isJSONArray([
+    [1, 2],
+    [3, 4],
+  ])
+); // true (중첩 배열)
 console.log(isJSONArray([])); // true (빈 배열)
 
 // 복합적인 유효한 JSON 배열
-const complexArray = [
-  42,
-  'text',
-  true,
-  null,
-  { key: 'value' },
-  [1, 2, 3]
-];
+const complexArray = [42, 'text', true, null, { key: 'value' }, [1, 2, 3]];
 console.log(isJSONArray(complexArray)); // true
 ```
 
@@ -40,7 +38,7 @@ console.log(isJSONArray(complexArray)); // true
 ```typescript
 // 함수가 포함된 배열 - 유효하지 않음
 console.log(isJSONArray([1, 2, () => {}])); // false
-console.log(isJSONArray([function() {}])); // false
+console.log(isJSONArray([function () {}])); // false
 
 // undefined가 포함된 배열 - 유효하지 않음
 console.log(isJSONArray([1, undefined, 3])); // false
@@ -58,7 +56,7 @@ console.log(isJSONArray(42)); // false
 console.log(isJSONArray(null)); // false
 ```
 
-API 응답 검증이나 데이터 직렬화 전 검증에서 유용해요:
+API 응답 검증이나 데이터 직렬화 전 검증에서 유용해요.
 
 ```typescript
 // API 응답 검증
@@ -69,7 +67,7 @@ function processApiArray(data: unknown) {
     console.log('직렬화된 배열:', jsonString);
     return data;
   }
-  
+
   throw new Error('유효한 JSON 배열이 아닙니다');
 }
 
@@ -79,7 +77,7 @@ function validateUserList(input: unknown): any[] {
     // TypeScript가 input을 any[]로 타입 추론
     return input;
   }
-  
+
   return [];
 }
 
@@ -89,30 +87,27 @@ function loadArrayConfig(config: unknown) {
     return {
       isValid: true,
       items: config,
-      count: config.length
+      count: config.length,
     };
   }
-  
+
   return {
     isValid: false,
     items: [],
-    count: 0
+    count: 0,
   };
 }
 
 // 중첩된 구조에서도 동작
-const nestedData = [
-  { users: [{ name: 'Alice' }, { name: 'Bob' }] },
-  { users: [{ name: 'Charlie' }] }
-];
+const nestedData = [{ users: [{ name: 'Alice' }, { name: 'Bob' }] }, { users: [{ name: 'Charlie' }] }];
 console.log(isJSONArray(nestedData)); // true
 ```
 
-다른 배열 유형들과의 차이점:
+함수를 요소로 가진 배열이나, `TypedArray` 객체처럼 JSON으로 직렬화할 수 없는 배열에 대해서는 `false`를 반환해요.
 
 ```typescript
 // 일반 배열 vs JSON 배열
-const regularArray = [1, 2, function() {}]; // 일반적으로는 유효한 배열
+const regularArray = [1, 2, function () {}]; // 일반적으로는 유효한 배열
 const jsonArray = [1, 2, 3]; // JSON 직렬화 가능한 배열
 
 console.log(Array.isArray(regularArray)); // true (일반 배열 검사)

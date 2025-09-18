@@ -1,6 +1,6 @@
 # shuffle
 
-Fisher-Yates 알고리즘을 사용해 배열의 요소 순서를 무작위로 섞은 새 배열을 반환해요.
+배열의 요소 순서를 무작위로 섞은 새 배열을 반환해요.
 
 ```typescript
 const shuffled = shuffle(arr);
@@ -36,7 +36,7 @@ import { shuffle } from 'es-toolkit/array';
 const users = [
   { name: 'Alice', age: 25 },
   { name: 'Bob', age: 30 },
-  { name: 'Charlie', age: 35 }
+  { name: 'Charlie', age: 35 },
 ];
 const shuffledUsers = shuffle(users);
 // Returns: 사용자 객체들이 무작위 순서로 섞인 새 배열

@@ -28,7 +28,7 @@ console.log(isLength('42')); // false (문자열)
 console.log(isLength(null)); // false (null)
 ```
 
-TypeScript에서 타입 가드로도 사용할 수 있어요:
+TypeScript에서 타입 가드로도 사용할 수 있어요.
 
 ```typescript
 function processLength(value: unknown) {

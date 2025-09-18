@@ -23,7 +23,7 @@ const result = toCamelCaseKeys(obj);
 // 배열 내 객체들도 변환해요
 const users = [
   { user_id: 1, first_name: 'John' },
-  { user_id: 2, first_name: 'Jane' }
+  { user_id: 2, first_name: 'Jane' },
 ];
 const convertedUsers = toCamelCaseKeys(users);
 // convertedUsers는 [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]가 돼요
@@ -34,9 +34,9 @@ const nested = {
     user_id: 1,
     contact_info: {
       email_address: 'john@example.com',
-      phone_number: '123-456-7890'
-    }
-  }
+      phone_number: '123-456-7890',
+    },
+  },
 };
 const nestedResult = toCamelCaseKeys(nested);
 // nestedResult는 {
@@ -57,42 +57,3 @@ const nestedResult = toCamelCaseKeys(nested);
 #### 반환 값
 
 (`ToCamelCaseKeys<T>`): 모든 키가 camelCase로 변환된 새로운 객체를 반환해요.
-
-## 예시
-
-```typescript
-// Example with objects
-const obj = { user_id: 1, first_name: 'John' };
-const result = toCamelCaseKeys(obj);
-// result will be { userId: 1, firstName: 'John' }
-
-// Example with arrays of objects
-const arr = [
-  { user_id: 1, first_name: 'John' },
-  { user_id: 2, first_name: 'Jane' },
-];
-const arrResult = toCamelCaseKeys(arr);
-// arrResult will be [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
-
-// Example with nested objects
-const nested = {
-  user_data: {
-    user_id: 1,
-    user_address: {
-      street_name: 'Main St',
-      zip_code: '12345',
-    },
-  },
-};
-const nestedResult = toCamelCaseKeys(nested);
-// nestedResult will be:
-// {
-//   userData: {
-//     userId: 1,
-//     userAddress: {
-//       streetName: 'Main St',
-//       zipCode: '12345'
-//     }
-//   }
-// }
-```

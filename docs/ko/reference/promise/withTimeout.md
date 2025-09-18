@@ -1,6 +1,6 @@
 # withTimeout
 
-비동기 함수에 시간 제한을 걸어서, 지정된 시간 내에 완료되지 않으면 TimeoutError를 발생시켜요.
+비동기 함수에 시간 제한을 걸어서, 지정된 시간 내에 완료되지 않으면 `TimeoutError`를 발생시켜요.
 
 ```typescript
 await withTimeout(run, ms);
@@ -10,7 +10,7 @@ await withTimeout(run, ms);
 
 ### `withTimeout(run, ms)`
 
-비동기 작업에 타임아웃을 설정하고 싶을 때 `withTimeout`을 사용하세요. Promise가 지정된 시간 내에 완료되지 않으면 TimeoutError로 거부되어서, 무한정 기다리는 상황을 방지할 수 있어요.
+비동기 작업에 타임아웃을 설정하고 싶을 때 `withTimeout`을 사용하세요. Promise가 지정된 시간 내에 완료되지 않으면 `TimeoutError`로 거부되어서, 무한정 기다리는 상황을 방지할 수 있어요.
 
 ```typescript
 import { withTimeout } from 'es-toolkit/promise';
@@ -31,7 +31,7 @@ try {
 }
 ```
 
-데이터베이스 쿼리에 시간 제한을 걸고 싶을 때:
+데이터베이스 쿼리에 시간 제한을 걸고 싶을 때도 사용할 수 있어요.
 
 ```typescript
 async function queryDatabase(query: string) {
@@ -50,15 +50,11 @@ try {
 }
 ```
 
-여러 API 호출 중에서 가장 빠른 응답만 받고 싶을 때:
+여러 API 호출 중에서 가장 빠른 응답만 받고 싶은 경우에도 활용할 수 있어요.
 
 ```typescript
 async function getFastestResponse() {
-  const apis = [
-    () => fetch('/api/server1'),
-    () => fetch('/api/server2'),
-    () => fetch('/api/server3')
-  ];
+  const apis = [() => fetch('/api/server1'), () => fetch('/api/server2'), () => fetch('/api/server3')];
 
   try {
     // 각 API에 2초 제한을 걸고 가장 빨리 응답하는 것만 받아요

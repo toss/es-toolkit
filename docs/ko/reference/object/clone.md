@@ -1,6 +1,6 @@
 # clone
 
-주어진 값의 얇은 복사본을 생성해요.
+주어진 값을 얕게 복사해요.
 
 ```typescript
 const cloned = clone(obj);
@@ -10,7 +10,7 @@ const cloned = clone(obj);
 
 ### `clone(obj)`
 
-객체, 배열, Date, RegExp 등의 값을 얇게 복사하고 싶을 때 `clone`을 사용하세요. 얇은 복사는 최상위 레벨의 속성들만 새로 복사되고, 중첩된 객체나 배열은 원본과 참조를 공유해요.
+객체, 배열, Date, RegExp 등의 값을 얕게 복사하고 싶을 때 `clone`을 사용하세요. 얇은 복사는 최상위 레벨의 속성들만 새로 복사되고, 중첩된 객체나 배열은 원본과 레퍼런스를 공유해요.
 
 ```typescript
 import { clone } from 'es-toolkit/object';
@@ -35,7 +35,7 @@ console.log(clonedObj === obj); // false
 console.log(clonedObj.c === obj.c); // true (얇은 복사이므로 중첩된 배열은 참조 공유)
 ```
 
-다양한 JavaScript 타입들을 지원해요:
+`Date`, `RegExp`, `Map`, `Set` 같은 다양한 JavaScript 타입들을 지원해요.
 
 ```typescript
 // Date 객체

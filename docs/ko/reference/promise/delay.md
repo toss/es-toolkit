@@ -10,7 +10,7 @@ await delay(ms, options?);
 
 ### `delay(ms, options?)`
 
-코드 실행을 특정 시간만큼 멈추고 싶을 때 `delay`를 사용하세요. async/await와 함께 사용해서 일정 시간 후에 다음 코드가 실행되도록 할 수 있어요. 필요한 경우 AbortSignal을 통해 지연을 취소할 수도 있어요.
+코드 실행을 특정 시간만큼 멈추고 싶을 때 `delay`를 사용하세요. async/await와 함께 사용해서 일정 시간 후에 다음 코드가 실행되도록 할 수 있어요. 필요한 경우 `AbortSignal`을 통해 지연을 취소할 수도 있어요.
 
 ```typescript
 import { delay } from 'es-toolkit/promise';
@@ -19,7 +19,7 @@ async function example() {
   console.log('시작');
   await delay(1000); // 1초 동안 실행을 지연해요
   console.log('1초 후 실행됩니다');
-  
+
   await delay(500); // 0.5초 더 지연해요
   console.log('추가로 0.5초 후 실행됩니다');
 }
@@ -46,7 +46,7 @@ async function cancellableDelay() {
 }
 ```
 
-테스트에서 비동기 동작을 시뮬레이션할 때도 유용해요:
+테스트에서 비동기 동작을 시뮬레이션할 때도 유용해요.
 
 ```typescript
 async function simulateNetworkRequest() {
@@ -70,30 +70,3 @@ async function simulateNetworkRequest() {
 #### 에러
 
 AbortSignal이 활성화되면 `AbortError`를 던져요.
-
-## Lodash 호환성
-
-`es-toolkit/compat`에서 `delay`를 가져오면 lodash와 호환돼요.
-
-- `delay`는 일정 시간이 지난 후 호출될 함수를 받을 수 있어요.
-- `delay`는 함수에 전달될 인수를 받을 수 있어요.
-- `delay`는 타임아웃을 취소할 수 있는 타이머 ID를 반환해요.
-
-```typescript
-import { delay } from 'es-toolkit/compat';
-
-// 예제 1: 지연된 함수 실행
-const timerId = delay(
-  (greeting, recipient) => {
-    console.log(`${greeting}, ${recipient}!`);
-  },
-  1000,
-  '안녕하세요',
-  '홍길동'
-);
-// => 1초 후 '안녕하세요, 홍길동!'이 로그로 출력돼요.
-
-// 예제 2: 실행 전에 타임아웃 취소
-clearTimeout(timerId);
-// 타임아웃이 취소되었기 때문에 함수는 실행되지 않아요.
-```

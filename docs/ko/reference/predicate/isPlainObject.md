@@ -1,6 +1,6 @@
 # isPlainObject
 
-값이 순수 객체인지 확인해요.
+값이 순수 객체(plain object)인지 확인해요.
 
 ```typescript
 const result = isPlainObject(value);
@@ -10,7 +10,7 @@ const result = isPlainObject(value);
 
 ### `isPlainObject(value)`
 
-값이 순수 객체(plain object)인지 확인하고 싶을 때 `isPlainObject`를 사용하세요. 순수 객체는 객체 리터럴(`{}`) 또는 `Object` 생성자로 만들어진 객체를 말해요. 클래스 인스턴스, 배열, 또는 다른 특수 객체는 아니에요.
+값이 순수 객체인지 확인하고 싶을 때 `isPlainObject`를 사용하세요. 순수 객체는 객체 리터럴(`{}`) 또는 `Object` 생성자로 만들어진 객체를 말해요. 클래스 인스턴스, 배열, 또는 다른 특수 객체는 순수 객체가 아니에요.
 
 ```typescript
 import { isPlainObject } from 'es-toolkit/predicate';
@@ -35,7 +35,7 @@ class MyClass {}
 console.log(isPlainObject(new MyClass())); // false
 ```
 
-데이터 직렬화/역직렬화나 설정 객체 검증에 유용해요:
+데이터를 직렬화하거나 설정 객체를 검증할 때 유용해요.
 
 ```typescript
 function processConfig(config: unknown) {

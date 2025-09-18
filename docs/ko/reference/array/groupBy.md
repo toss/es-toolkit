@@ -10,7 +10,7 @@ const grouped = groupBy(arr, getKeyFromItem);
 
 ### `groupBy(arr, getKeyFromItem)`
 
-배열의 요소들을 특정 기준에 따라 분류하고 싶을 때 `groupBy`를 사용하세요. 각 요소에서 키를 생성하는 함수를 제공하면, 같은 키를 가진 요소들끼리 묶어서 객체로 반환해줘요. 데이터를 카테고리별로 정리하거나 그룹별 분석을 할 때 유용해요.
+배열의 요소들을 특정 기준에 따라 분류하고 싶을 때 `groupBy`를 사용하세요. 각 요소에서 키를 생성하는 함수를 제공하면, 같은 키를 가진 요소들끼리 묶어서 객체로 반환해줘요. 반환되는 객체의 값은 각 그룹에 속하는 요소들의 배열이에요. 데이터를 카테고리별로 정리하거나 그룹별 분석을 할 때 유용해요.
 
 ```typescript
 import { groupBy } from 'es-toolkit/array';

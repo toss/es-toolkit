@@ -8,7 +8,7 @@ const result = flatMap(arr, iteratee, depth);
 
 ## 레퍼런스
 
-### `flatMap(arr, iteratee, depth?)`
+### `flatMap(arr, iteratee, depth = 1)`
 
 배열의 각 요소를 변환하면서 동시에 평탄화하고 싶을 때 `flatMap`을 사용하세요. 먼저 각 요소에 함수를 적용한 후, 결과 배열을 지정된 깊이까지 평탄화해요.
 

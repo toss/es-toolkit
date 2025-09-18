@@ -10,17 +10,13 @@ const result = flatMapDeep(arr, iteratee);
 
 ### `flatMapDeep(arr, iteratee)`
 
-배열의 각 요소를 변환하면서 동시에 모든 중첩 배열을 완전히 평탄화하고 싶을 때 `flatMapDeep`을 사용하세요. 먼저 각 요소에 함수를 적용한 후, 결과 배열을 모든 깊이까지 평탄화해요. 중첩 레벨이 얼마나 깊든 상관없이 모든 요소를 하나의 평면 배열로 만들어줘요.
+배열의 각 요소를 변환하면서 동시에 모든 중첩 배열을 완전히 평탄화하고 싶을 때 `flatMapDeep`을 사용하세요. 먼저 각 요소에 함수를 적용한 후, 결과 배열을 모든 깊이까지 평탄화해요.
 
 ```typescript
 import { flatMapDeep } from 'es-toolkit/array';
 
 // 각 요소를 두 번 복사한 후 완전히 평탄화해요.
 const result1 = flatMapDeep([1, 2, 3], item => [item, item]);
-// Returns: [1, 1, 2, 2, 3, 3]
-
-// 중첩 배열도 완전히 평탄화해요.
-const result2 = flatMapDeep([1, 2, 3], item => [[item, item]]);
 // Returns: [1, 1, 2, 2, 3, 3]
 ```
 
@@ -29,8 +25,12 @@ const result2 = flatMapDeep([1, 2, 3], item => [[item, item]]);
 ```typescript
 import { flatMapDeep } from 'es-toolkit/array';
 
+// 중첩 배열도 완전히 평탄화해요.
+const result = flatMapDeep([1, 2, 3], item => [[item, item]]);
+// Returns: [1, 1, 2, 2, 3, 3]
+
 // 여러 레벨의 중첩도 모두 평탄화해요.
-const result = flatMapDeep([1, 2, 3], item => [[[item, item]]]);
+const result2 = flatMapDeep([1, 2, 3], item => [[[item, item]]]);
 // Returns: [1, 1, 2, 2, 3, 3]
 ```
 

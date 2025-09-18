@@ -60,7 +60,7 @@ function processApiResponse(response: unknown) {
       console.error('파싱 실패:', error);
     }
   }
-  
+
   console.log('유효한 JSON 문자열이 아닙니다');
   return null;
 }
@@ -71,7 +71,7 @@ function validateJsonInput(input: unknown): string | null {
     // TypeScript가 input을 string으로 타입 추론
     return input;
   }
-  
+
   throw new Error('입력값은 유효한 JSON 문자열이어야 합니다');
 }
 
@@ -82,14 +82,14 @@ function loadConfig(configString: unknown) {
     return {
       isValid: true,
       config,
-      error: null
+      error: null,
     };
   }
-  
+
   return {
     isValid: false,
     config: null,
-    error: 'Invalid JSON format'
+    error: 'Invalid JSON format',
   };
 }
 ```

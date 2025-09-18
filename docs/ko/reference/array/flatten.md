@@ -8,7 +8,7 @@ const result = flatten(arr, depth);
 
 ## 레퍼런스
 
-### `flatten(arr, depth?)`
+### `flatten(arr, depth = 1)`
 
 중첩된 배열을 특정 깊이까지 평탄화하고 싶을 때 `flatten`을 사용하세요. 배열 안의 배열들을 지정된 레벨까지 풀어서 평면적인 구조로 만들어줘요.
 

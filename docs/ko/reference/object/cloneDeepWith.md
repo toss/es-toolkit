@@ -17,7 +17,7 @@ import { cloneDeepWith } from 'es-toolkit/object';
 
 // 숫자는 2배로 만들어서 복사
 const obj = { a: 1, b: { c: 2, d: 'text' } };
-const clonedObj = cloneDeepWith(obj, (value) => {
+const clonedObj = cloneDeepWith(obj, value => {
   if (typeof value === 'number') {
     return value * 2;
   }
@@ -27,7 +27,7 @@ console.log(clonedObj); // { a: 2, b: { c: 4, d: 'text' } }
 
 // 배열의 모든 요소에 1을 더해서 복사
 const arr = [1, [2, 3], { num: 4 }];
-const clonedArr = cloneDeepWith(arr, (value) => {
+const clonedArr = cloneDeepWith(arr, value => {
   if (typeof value === 'number') {
     return value + 1;
   }
@@ -35,12 +35,12 @@ const clonedArr = cloneDeepWith(arr, (value) => {
 console.log(clonedArr); // [2, [3, 4], { num: 5 }]
 ```
 
-사용자 정의 함수는 현재 값, 키, 원본 객체, 내부 스택을 인수로 받아요:
+사용자 정의 함수에게는 현재 값, 키, 원본 객체, 내부 스택 정보가 파라미터로 제공돼요.
 
 ```typescript
-const data = { 
+const data = {
   user: { name: 'Alice', age: 30 },
-  settings: { theme: 'dark', lang: 'ko' }
+  settings: { theme: 'dark', lang: 'ko' },
 };
 
 const result = cloneDeepWith(data, (value, key, obj, stack) => {
@@ -48,7 +48,7 @@ const result = cloneDeepWith(data, (value, key, obj, stack) => {
   if (key === 'user' && typeof value === 'object') {
     return { ...value, cloned: true };
   }
-  
+
   // 문자열에 prefix 추가
   if (typeof value === 'string') {
     return `cloned_${value}`;
@@ -62,16 +62,16 @@ console.log(result);
 // }
 ```
 
-Date 객체에만 특별한 처리를 할 수도 있어요:
+사용자 정의 함수를 사용하면, 객체를 복사하는 방법을 자유롭게 설정할 수 있어요. 예를 들어, 다음과 같이 `Date` 객체는 1년 뒤 시점으로 복사할 수 있어요.
 
 ```typescript
 const data = {
   created: new Date('2023-01-01'),
   updated: new Date('2023-12-31'),
-  name: 'Document'
+  name: 'Document',
 };
 
-const cloned = cloneDeepWith(data, (value) => {
+const cloned = cloneDeepWith(data, value => {
   // Date 객체는 시간을 1년 뒤로 설정
   if (value instanceof Date) {
     const newDate = new Date(value);

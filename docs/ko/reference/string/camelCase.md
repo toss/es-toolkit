@@ -1,6 +1,6 @@
 # camelCase
 
-문자열을 카멜 표기법으로 변환해요.
+문자열을 카멜 표기법(Camel case)으로 변환해요.
 
 ```typescript
 const result = camelCase(str);

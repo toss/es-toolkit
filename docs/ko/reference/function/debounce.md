@@ -75,7 +75,7 @@ controller.abort();
 
 #### 반환 값
 
-(`DebouncedFunction<F>`): 디바운스된 함수예요. 다음 메서드를 가지고 있어요:
+(`DebouncedFunction<F>`): 디바운스된 함수로, 다음 메서드를 가지고 있어요.
 
 - `cancel()`: 예정된 호출을 취소해요.
 - `flush()`: 대기 중인 함수를 즉시 실행해요.

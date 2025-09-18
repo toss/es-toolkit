@@ -1,6 +1,6 @@
 # random
 
-지정된 범위에서 무작위 소수를 생성해요.
+지정된 범위에서 무작위 숫자를 생성해요. 생성되는 숫자는 소수점을 포함하는 숫자예요.
 
 ```typescript
 const randomNumber = random(min, max);
@@ -10,7 +10,7 @@ const randomNumber = random(min, max);
 
 ### `random(maximum)` / `random(minimum, maximum)`
 
-무작위 숫자가 필요할 때 `random`을 사용하세요. 정수가 아닌 소수점이 있는 숫자를 반환해요.
+무작위 숫자가 필요할 때 `random`을 사용하세요. 소수점이 있는 숫자를 생성해요.
 
 ```typescript
 import { random } from 'es-toolkit/math';
