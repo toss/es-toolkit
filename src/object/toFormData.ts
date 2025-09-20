@@ -1,5 +1,5 @@
-import { isArray } from '../compat';
-import { isBlob, isBoolean, isDate, isFile, isNull, isSymbol, isUndefined } from '../predicate';
+import { isArray, isObject } from '../compat';
+import { isBigInt, isBlob, isBoolean, isDate, isFile, isNull, isSymbol, isUndefined } from '../predicate';
 
 const formDataOptions = {
   allowEmptyArrays: false,
@@ -39,7 +39,7 @@ export function toFormData({
   formData = new FormData(),
   config = formDataOptions,
 }: {
-  data: Record<string, any>;
+  data: unknown;
   parentKey?: string;
   formData?: FormData;
   config?: Partial<typeof formDataOptions>;
@@ -81,13 +81,13 @@ export function toFormData({
     formData.append(parentKey, data.toISOString());
   } else if ((isFile(data) || isBlob(data)) && parentKey) {
     formData.append(parentKey, data);
-  } else if (typeof data === 'bigint' && parentKey) {
-    formData.append(parentKey, (data as bigint).toString());
+  } else if (isBigInt(data) && parentKey) {
+    formData.append(parentKey, data.toString());
   } else if (isSymbol(data)) {
     throw new TypeError('Cannot serialize a symbol to FormData');
-  } else if (typeof data === 'object' && !isBlob(data)) {
+  } else if (isObject(data) && !isBlob(data)) {
     for (const key in data) {
-      const value = data[key];
+      const value = data[key as keyof typeof data];
       const formKey = parentKey
         ? config.useDotNotationForObjects
           ? `${parentKey}.${key}`
@@ -103,6 +103,12 @@ export function toFormData({
   } else if (parentKey) {
     formData.append(parentKey, String(data));
   } else {
+    if (
+      parentKey == null &&
+      (typeof data === 'string' || typeof data === 'number' || typeof data === 'boolean' || typeof data === 'bigint')
+    ) {
+      throw new TypeError('Cannot serialize value without a key (parentKey is required for primitives)');
+    }
     throw new TypeError(`Unsupported data type: ${typeof data}`);
   }
   return formData;

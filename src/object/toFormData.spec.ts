@@ -242,6 +242,7 @@ describe('toFormData', () => {
     };
     expect(() => toFormData({ data: object })).toThrow(TypeError);
   });
+
   it('should ignore null values when ignoreNullValues is true', () => {
     const data = { name: 'John', age: null, city: 'New York' };
     const formData = toFormData({
@@ -472,5 +473,26 @@ describe('toFormData', () => {
     expect(formData.has('files')).toBe(true);
     expect(formData.getAll('files').length).toBe(1);
     expect(formData.getAll('files')[0] instanceof File).toBe(true);
+  });
+
+  it('should throw a descriptive error when serializing primitives without parentKey', () => {
+    expect(() => toFormData({ data: 'text' })).toThrowError(
+      new TypeError('Cannot serialize value without a key (parentKey is required for primitives)')
+    );
+    expect(() => toFormData({ data: 123 })).toThrowError(
+      new TypeError('Cannot serialize value without a key (parentKey is required for primitives)')
+    );
+    expect(() => toFormData({ data: true })).toThrowError(
+      new TypeError('Cannot serialize value without a key (parentKey is required for primitives)')
+    );
+    expect(() => toFormData({ data: 10n })).toThrowError(
+      new TypeError('Cannot serialize value without a key (parentKey is required for primitives)')
+    );
+  });
+
+  it('should throw Unsupported data type when parentKey is empty string', () => {
+    expect(() => toFormData({ data: 'hello', parentKey: '' })).toThrowError(
+      new TypeError('Unsupported data type: string')
+    );
   });
 });
