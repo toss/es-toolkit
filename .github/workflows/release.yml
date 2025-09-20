@@ -18,12 +18,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
         with:
           deno-version: v1.x
       - if: github.ref_type == 'branch'
@@ -87,7 +87,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
