@@ -1,6 +1,6 @@
 # inRange (Lodash 호환성)
 
-::: warning `es-toolkit`의 `inRange`을 사용하세요
+::: warning `es-toolkit`의 [inRange](../../math/inRange.md)을 사용하세요
 
 이 `inRange` 함수는 복잡한 타입 변환과 null/undefined 처리로 인해 느리게 동작해요.
 

@@ -1,10 +1,10 @@
 # maxBy (Lodash 호환성)
 
-::: warning `reduce()`를 사용하세요
+::: warning es-toolkit의 [maxBy](../../array/maxBy.md)를 사용하세요
 
 이 `maxBy` 함수는 iteratee 함수 처리와 타입 변환으로 인해 느리게 동작해요.
 
-대신 직접 계산하세요: `array.reduce((max, item) => fn(item) > fn(max) ? item : max)`
+대신 더 빠르고 현대적인 `es-toolkit`의 [maxBy](../../array/maxBy.md)를 사용하세요.
 
 :::
 
@@ -27,7 +27,7 @@ import { maxBy } from 'es-toolkit/compat';
 const people = [
   { name: '홍길동', age: 25 },
   { name: '김철수', age: 30 },
-  { name: '이영희', age: 35 }
+  { name: '이영희', age: 35 },
 ];
 
 maxBy(people, person => person.age);
@@ -57,11 +57,15 @@ maxBy(numbers, x => Math.abs(x));
 ```typescript
 import { maxBy } from 'es-toolkit/compat';
 
-const arrays = [[1, 2], [3, 4], [0, 5]];
-maxBy(arrays, 0);  // 첫 번째 요소가 최대인 배열
+const arrays = [
+  [1, 2],
+  [3, 4],
+  [0, 5],
+];
+maxBy(arrays, 0); // 첫 번째 요소가 최대인 배열
 // Returns: [3, 4]
 
-maxBy(arrays, 1);  // 두 번째 요소가 최대인 배열
+maxBy(arrays, 1); // 두 번째 요소가 최대인 배열
 // Returns: [0, 5]
 ```
 
@@ -73,7 +77,7 @@ import { maxBy } from 'es-toolkit/compat';
 const users = [
   { name: '홍길동', age: 25, active: true },
   { name: '김철수', age: 30, active: false },
-  { name: '이영희', age: 35, active: true }
+  { name: '이영희', age: 35, active: true },
 ];
 
 // active가 true인 요소들 중에서 첫 번째

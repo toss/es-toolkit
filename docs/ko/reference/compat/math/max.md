@@ -2,7 +2,7 @@
 
 ::: warning `Math.max`를 사용하세요
 
-이 `max` 함수는 추가적인 함수 호출과 null/undefined 처리로 인해 느리게 동작해요.
+이 `max` 함수는 추가적인 함수 호출과 `null`/`undefined` 처리로 인해 느리게 동작해요.
 
 대신 더 빠르고 현대적인 `Math.max(...array)`를 사용하세요.
 

@@ -4,7 +4,7 @@
 
 이 `random` 함수는 복잡한 인수 처리와 타입 변환으로 인해 느리게 동작해요.
 
-대신 더 빠른 `Math.random()`을 사용하거나 `es-toolkit`의 [random](../../math/random.md)을 사용하세요.
+대신 더 빠른 `Math.random()`을 사용하세요.
 
 :::
 

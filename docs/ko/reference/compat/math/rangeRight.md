@@ -1,10 +1,10 @@
 # rangeRight (Lodash 호환성)
 
-::: warning `Array.from()`과 `reverse()`를 사용하세요
+::: warning es-toolkit의 [rangeRight](../../math/rangeRight.md)를 사용하세요
 
 이 `rangeRight` 함수는 복잡한 인수 처리와 타입 변환으로 인해 느리게 동작해요.
 
-대신 `Array.from({length: n}, (_, i) => start + i * step).reverse()`를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [rangeRight](../../math/rangeRight.md)를 사용하세요.
 
 :::
 

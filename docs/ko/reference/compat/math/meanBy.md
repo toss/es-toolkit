@@ -1,10 +1,10 @@
 # meanBy (Lodash 호환성)
 
-::: warning `reduce()`를 사용하세요
+::: warning es-toolkit의 [meanBy](../../math/meanBy.md)를 사용하세요
 
 이 `meanBy` 함수는 iteratee 함수 처리와 타입 변환으로 인해 느리게 동작해요.
 
-대신 직접 계산하세요: `array.reduce((sum, item) => sum + fn(item), 0) / array.length`
+대신 더 빠르고 현대적인 `es-toolkit`의 [meanBy](../../math/meanBy.md)를 사용하세요.
 
 :::
 
@@ -27,7 +27,7 @@ import { meanBy } from 'es-toolkit/compat';
 const people = [
   { name: '홍길동', age: 25 },
   { name: '김철수', age: 30 },
-  { name: '이영희', age: 35 }
+  { name: '이영희', age: 35 },
 ];
 
 meanBy(people, person => person.age);
@@ -58,7 +58,7 @@ meanBy(items, x => x.a);
 import { meanBy } from 'es-toolkit/compat';
 
 const arrays = [[2], [3], [1]];
-meanBy(arrays, 0);  // 첫 번째 요소들의 평균
+meanBy(arrays, 0); // 첫 번째 요소들의 평균
 // Returns: 2
 ```
 
@@ -70,7 +70,7 @@ import { meanBy } from 'es-toolkit/compat';
 const users = [
   { name: '홍길동', age: 25, active: true },
   { name: '김철수', age: 30, active: false },
-  { name: '이영희', age: 35, active: true }
+  { name: '이영희', age: 35, active: true },
 ];
 
 // active가 true인 사람들만

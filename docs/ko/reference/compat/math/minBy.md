@@ -1,10 +1,10 @@
 # minBy (Lodash 호환성)
 
-::: warning `reduce()`를 사용하세요
+::: warning es-toolkit의 [minBy](../../math/minBy.md)를 사용하세요
 
 이 `minBy` 함수는 iteratee 함수 처리와 타입 변환으로 인해 느리게 동작해요.
 
-대신 직접 계산하세요: `array.reduce((min, item) => fn(item) < fn(min) ? item : min)`
+대신 더 빠르고 현대적인 `es-toolkit`의 [minBy](../../math/minBy.md)를 사용하세요.
 
 :::
 
@@ -27,7 +27,7 @@ import { minBy } from 'es-toolkit/compat';
 const people = [
   { name: '홍길동', age: 25 },
   { name: '김철수', age: 30 },
-  { name: '이영희', age: 35 }
+  { name: '이영희', age: 35 },
 ];
 
 minBy(people, person => person.age);
@@ -57,11 +57,15 @@ minBy(numbers, x => Math.abs(x));
 ```typescript
 import { minBy } from 'es-toolkit/compat';
 
-const arrays = [[1, 2], [3, 4], [0, 5]];
-minBy(arrays, 0);  // 첫 번째 요소가 최소인 배열
+const arrays = [
+  [1, 2],
+  [3, 4],
+  [0, 5],
+];
+minBy(arrays, 0); // 첫 번째 요소가 최소인 배열
 // Returns: [0, 5]
 
-minBy(arrays, 1);  // 두 번째 요소가 최소인 배열
+minBy(arrays, 1); // 두 번째 요소가 최소인 배열
 // Returns: [1, 2]
 ```
 
@@ -73,7 +77,7 @@ import { minBy } from 'es-toolkit/compat';
 const users = [
   { name: '홍길동', age: 25, active: true },
   { name: '김철수', age: 30, active: false },
-  { name: '이영희', age: 35, active: true }
+  { name: '이영희', age: 35, active: true },
 ];
 
 // active가 true인 요소들 중에서 첫 번째가 아닌 것을 찾음

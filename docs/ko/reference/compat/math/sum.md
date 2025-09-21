@@ -1,10 +1,10 @@
 # sum (Lodash 호환성)
 
-::: warning `reduce()`를 사용하세요
+::: warning es-toolkit의 [sum](../../math/sum.md)를 사용하세요
 
 이 `sum` 함수는 타입 변환과 null/undefined 처리로 인해 느리게 동작해요.
 
-대신 `array.reduce((a, b) => a + b, 0)`를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [sum](../../math/sum.md)를 사용하세요.
 
 :::
 
