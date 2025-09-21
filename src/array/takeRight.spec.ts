@@ -22,4 +22,14 @@ describe('takeRight', () => {
   it('handles empty arrays', () => {
     expect(takeRight([], 3)).toEqual([]);
   });
+
+  it('handles negative counts', () => {
+    expect(takeRight([1, 2, 3], -1)).toEqual([]);
+    expect(takeRight([1, 2, 3], -5)).toEqual([]);
+  });
+
+  it('uses default count of 1 when count is undefined', () => {
+    expect(takeRight([1, 2, 3])).toEqual([3]);
+    expect(takeRight([1, 2, 3], undefined)).toEqual([3]);
+  });
 });
