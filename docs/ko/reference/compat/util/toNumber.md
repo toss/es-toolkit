@@ -1,63 +1,61 @@
 # toNumber (Lodash 호환성)
 
-::: warning `Number()` 함수를 사용하세요
+::: warning Number 생성자를 사용하세요
 
-이 `toNumber` 함수는 Symbol 타입 검사로 인해 느리게 동작해요.
+이 `toNumber` 함수는 심볼 타입 검증과 추가 처리로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `Number()` 함수를 사용하세요.
+대신 더 빠르고 현대적인 Number 생성자를 사용하세요.
 
 :::
 
 값을 숫자로 변환해요.
 
 ```typescript
-const result = toNumber(value);
+const number = toNumber(value);
 ```
 
 ## 레퍼런스
 
 ### `toNumber(value)`
 
-다양한 타입의 값을 숫자로 변환하고 싶을 때 `toNumber`를 사용하세요. `Number()` 함수와 거의 동일하지만, Symbol 값에 대해서는 `NaN`을 반환해요.
+값을 숫자로 변환해요. 심볼은 NaN으로 처리해요.
 
 ```typescript
 import { toNumber } from 'es-toolkit/compat';
 
-// 기본적인 숫자 변환
-toNumber(3.2); // 3.2
-toNumber('3.2'); // 3.2
-toNumber(true); // 1
-toNumber(false); // 0
+// 일반 숫자는 그대로 반환
+toNumber(3.2);
+// Returns: 3.2
+
+// 문자열 숫자를 변환
+toNumber('3.2');
+// Returns: 3.2
+
+// 무한대도 그대로 반환
+toNumber(Infinity);
+// Returns: Infinity
+
+// 매우 작은 수도 그대로 반환
+toNumber(Number.MIN_VALUE);
+// Returns: 5e-324
 ```
 
-특수한 값들도 처리할 수 있어요.
+심볼과 NaN은 NaN으로 변환해요.
 
 ```typescript
 import { toNumber } from 'es-toolkit/compat';
 
-toNumber(Number.MIN_VALUE); // 5e-324
-toNumber(Infinity); // Infinity
-toNumber(-Infinity); // -Infinity
-toNumber(NaN); // NaN
-```
+toNumber(Symbol.iterator);
+// Returns: NaN
 
-Symbol 값은 `NaN`으로 변환돼요.
-
-```typescript
-import { toNumber } from 'es-toolkit/compat';
-
-toNumber(Symbol.iterator); // NaN
-toNumber(Symbol('custom')); // NaN
-
-// Number() 함수와의 차이점
-Number(Symbol.iterator); // TypeError 발생
-toNumber(Symbol.iterator); // NaN (안전하게 처리)
+toNumber(NaN);
+// Returns: NaN
 ```
 
 #### 파라미터
 
-- `value` (`unknown`): 숫자로 변환할 값이에요.
+- `value` (`unknown`): 변환할 값이에요.
 
 ### 반환 값
 
-(`number`): 변환된 숫자 값을 반환해요. Symbol인 경우 `NaN`을 반환해요.
+(`number`): 변환된 숫자를 반환해요.

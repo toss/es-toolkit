@@ -24,7 +24,7 @@ const getter = iteratee(source);
 import { iteratee } from 'es-toolkit/compat';
 
 // 함수: 주어진 함수를 그대로 반환
-const func = iteratee((object) => object.a);
+const func = iteratee(object => object.a);
 [{ a: 1 }, { a: 2 }, { a: 3 }].map(func);
 // Returns: [1, 2, 3]
 
@@ -35,7 +35,11 @@ const getA = iteratee('a');
 
 // 객체: 주어진 객체와 일치하는지 확인하는 함수
 const matchesObj = iteratee({ a: 1 });
-[{ a: 1, b: 2 }, { a: 2, b: 3 }, { a: 1, c: 4 }].find(matchesObj);
+[
+  { a: 1, b: 2 },
+  { a: 2, b: 3 },
+  { a: 1, c: 4 },
+].find(matchesObj);
 // Returns: { a: 1, b: 2 }
 
 // 속성-값 쌍: 해당 속성이 특정 값과 일치하는지 확인하는 함수

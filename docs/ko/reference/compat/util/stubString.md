@@ -1,10 +1,10 @@
 # stubString (Lodash 호환성)
 
-::: warning 빈 문자열 리터럴 `''`을 사용하세요
+::: warning `''`를 직접 사용하세요
 
-이 `stubString` 함수는 불필요한 함수 호출로 인해 느리게 동작해요.
+이 `stubString` 함수는 단순히 빈 문자열을 반환하는 래퍼 함수로 불필요한 추상화예요.
 
-대신 더 빠르고 현대적인 빈 문자열 리터럴 `''`을 사용하세요.
+대신 더 빠르고 직접적인 `''`를 사용하세요.
 
 :::
 
@@ -18,32 +18,40 @@ const emptyString = stubString();
 
 ### `stubString()`
 
-항상 빈 문자열이 필요한 콜백 함수나 기본값으로 사용할 때 `stubString`을 사용하세요. 문자열 처리나 조건부 로직에서 일관된 빈 문자열을 제공할 때 유용해요.
+항상 빈 문자열을 반환하는 함수예요. 기본값으로 빈 문자열이 필요하거나 함수형 프로그래밍에서 일관된 반환값이 필요할 때 사용해요.
 
 ```typescript
 import { stubString } from 'es-toolkit/compat';
 
-// 기본값으로 빈 문자열 제공
-function processText(text = stubString()) {
-  return text.trim().toUpperCase();
+// 빈 문자열을 반환해요
+const emptyString = stubString();
+console.log(emptyString); // => ''
+
+// 기본값으로 사용해요
+function formatMessage(message = stubString()) {
+  return message || '기본 메시지';
 }
 
-processText(); // ''
-processText('hello'); // 'HELLO'
+console.log(formatMessage()); // => '기본 메시지'
+console.log(formatMessage('안녕하세요')); // => '안녕하세요'
+
+// 함수형 프로그래밍에서 사용해요
+const createEmpty = () => stubString();
+const str = createEmpty();
+console.log(str.length); // => 0
 ```
 
-조건부 설정에서 기본값으로도 사용할 수 있어요.
+매번 동일한 빈 문자열을 반환해요.
 
 ```typescript
 import { stubString } from 'es-toolkit/compat';
 
-// 조건에 따른 문자열 반환
-const getMessage = (hasMessage: boolean) => {
-  return hasMessage ? 'Welcome!' : stubString();
-};
+const str1 = stubString();
+const str2 = stubString();
 
-getMessage(true); // 'Welcome!'
-getMessage(false); // ''
+console.log(str1 === str2); // => true
+console.log(typeof str1); // => 'string'
+console.log(str1.length); // => 0
 ```
 
 #### 파라미터

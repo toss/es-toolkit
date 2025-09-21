@@ -2,63 +2,72 @@
 
 ::: warning `Array.some`을 사용하세요
 
-이 `overSome` 함수는 내부 `iteratee` 함수 변환이나 복잡한 배열 처리로 인해 느리게 동작해요.
+이 `overSome` 함수는 조건 함수들을 변환하고 검사하는 과정에서 추가적인 오버헤드가 발생해요.
 
-대신 더 빠르고 현대적인 `Array.some`을 사용하세요.
+대신 더 빠르고 현대적인 `Array.some` 메서드를 사용하세요.
 
 :::
 
-주어진 조건 함수들 중 하나라도 값에 대해 참을 반환하는지 확인하는 함수를 만들어요.
+조건 함수 중 하나라도 참으로 평가되는 값을 반환하는지 확인하는 함수를 만들어요.
 
 ```typescript
-const checker = overSome(predicate1, predicate2);
+const anyValidator = overSome(predicates);
 ```
 
 ## 레퍼런스
 
 ### `overSome(...predicates)`
 
-여러 조건 함수 중 하나라도 만족하는지 확인하는 새로운 함수를 만들고 싶을 때 `overSome`을 사용하세요. 어떤 조건 함수든 하나만 참을 반환하면 결과가 `true`가 돼요.
+여러 조건 함수를 받아서 주어진 값이 조건 중 하나라도 만족하는지 확인하는 함수를 생성해요. 유연한 조건 검사나 대안 검증에 유용해요.
 
 ```typescript
 import { overSome } from 'es-toolkit/compat';
 
-// 문자열이거나 숫자이거나 심볼인지 확인
-const isBasicType = overSome(
+// 문자열이나 숫자인지 확인해요
+const isStringOrNumber = overSome([
   (value) => typeof value === 'string',
-  (value) => typeof value === 'number',
-  (value) => typeof value === 'symbol'
-);
-
-isBasicType("hello"); // true (문자열)
-isBasicType(42); // true (숫자)
-isBasicType(Symbol()); // true (심볼)
-isBasicType([]); // false (모든 조건에 맞지 않음)
-
-// 배열로 조건 함수들을 전달할 수도 있어요
-const checker = overSome([
-  (value) => value.a > 0,
-  (value) => value.b > 0
+  (value) => typeof value === 'number'
 ]);
 
-checker({ a: 0, b: 2 }); // true (b가 0보다 큰 조건 만족)
-checker({ a: 0, b: 0 }); // false (모든 조건이 불만족)
+isStringOrNumber('hello'); // => true
+isStringOrNumber(42);      // => true
+isStringOrNumber(true);    // => false
 
-// 여러 인자를 받는 함수들도 사용할 수 있어요
-const multiArgChecker = overSome(
-  (a, b) => typeof a === 'string' && typeof b === 'string',
-  (a, b) => a > 0 && b > 0
-);
+// 여러 조건 중 하나라도 만족하는지 확인해요
+const hasValidProperty = overSome([
+  (obj) => obj.name && obj.name.length > 0,
+  (obj) => obj.email && obj.email.includes('@'),
+  (obj) => obj.phone && obj.phone.length >= 10
+]);
 
-multiArgChecker("hello", "world"); // true (첫 번째 조건 만족)
-multiArgChecker(1, 10); // true (두 번째 조건 만족)
-multiArgChecker(0, 2); // false (모든 조건 불만족)
+hasValidProperty({ name: 'John' });                    // => true
+hasValidProperty({ email: 'john@example.com' });       // => true
+hasValidProperty({ phone: '1234567890' });             // => true
+hasValidProperty({ age: 30 });                         // => false
+```
+
+객체 속성도 검사할 수 있어요.
+
+```typescript
+import { overSome } from 'es-toolkit/compat';
+
+// 여러 조건 중 하나라도 매칭되는지 확인해요
+const matchesAnyCondition = overSome([
+  'isActive',         // isActive 속성이 참으로 평가되는지
+  { role: 'admin' },  // role이 'admin'인지
+  ['status', 'vip']   // status가 'vip'인지
+]);
+
+matchesAnyCondition({ isActive: true });                 // => true
+matchesAnyCondition({ role: 'admin' });                  // => true
+matchesAnyCondition({ status: 'vip' });                  // => true
+matchesAnyCondition({ role: 'user', status: 'normal' }); // => false
 ```
 
 #### 파라미터
 
-- `predicates` (`...Array<((...args: any[]) => boolean) | ReadonlyArray<(...args: any[]) => boolean>>`): 조건 함수 또는 조건 함수 배열들이에요. 각 조건 함수는 하나 이상의 값을 받아서 참/거짓을 반환해요.
+- `...predicates` (`Array<Function | string | object | Array>`): 검사할 조건 함수들이에요. 함수, 속성 이름, 객체, 속성-값 쌍 등이 될 수 있어요.
 
 ### 반환 값
 
-(`(...args: any[]) => boolean`): 값들을 받아서 어떤 조건 함수라도 참을 반환하면 `true`, 모두 거짓이면 `false`를 반환하는 함수를 반환해요.
+(`(...args: any[]) => boolean`): 조건 중 하나라도 만족하면 `true`, 모두 만족하지 않으면 `false`를 반환하는 함수를 반환해요.

@@ -31,7 +31,7 @@ const alwaysHello = constant('hello');
 console.log(alwaysHello()); // "hello"
 ```
 
-배열의 map이나 다른 고차 함수와 함께 사용할 때 편리해요:
+배열의 map이나 다른 고차 함수와 함께 사용할 때 편리해요.
 
 ```typescript
 import { constant } from 'es-toolkit/compat';
@@ -48,20 +48,7 @@ console.log(defaultUser);
 // [{ role: 'user', active: true }, { role: 'user', active: true }, { role: 'user', active: true }]
 ```
 
-화살표 함수와 비교:
-
-```typescript
-// constant 사용
-const getValue = constant(42);
-
-// 화살표 함수 사용 (더 간단하고 직관적)
-const getValue = () => 42;
-
-// 또는 콜백에서 직접 사용
-numbers.map(() => 0); // constant(0) 대신
-```
-
-조건부 기본값 제공에도 활용할 수 있어요:
+조건부 기본값 제공에도 활용할 수 있어요.
 
 ```typescript
 import { constant } from 'es-toolkit/compat';
@@ -74,7 +61,7 @@ console.log(processData(null)); // "기본값"
 console.log(processData('실제 데이터')); // "실제 데이터"
 ```
 
-객체 참조를 유지해요:
+객체 참조를 유지해요.
 
 ```typescript
 import { constant } from 'es-toolkit/compat';

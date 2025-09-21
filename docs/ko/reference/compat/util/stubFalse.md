@@ -1,53 +1,60 @@
 # stubFalse (Lodash 호환성)
 
-::: warning `false` 리터럴을 사용하세요
+::: warning `false`를 직접 사용하세요
 
-이 `stubFalse` 함수는 불필요한 함수 호출로 인해 느리게 동작해요.
+이 `stubFalse` 함수는 단순히 `false`를 반환하는 래퍼 함수로 불필요한 추상화예요.
 
-대신 더 빠르고 현대적인 `false` 리터럴을 사용하세요.
+대신 더 빠르고 직접적인 `false` 값을 사용하세요.
 
 :::
 
-항상 `false` 값을 반환해요.
+항상 `false`를 반환해요.
 
 ```typescript
-const result = stubFalse();
+const falseValue = stubFalse();
 ```
 
 ## 레퍼런스
 
 ### `stubFalse()`
 
-항상 `false` 값이 필요한 콜백 함수나 기본값으로 사용할 때 `stubFalse`를 사용하세요. 배열 메서드의 필터링이나 조건부 로직에서 일관된 `false` 값을 제공할 때 유용해요.
+항상 `false`를 반환하는 함수예요. 함수형 프로그래밍에서 일관된 거짓 값이 필요하거나 조건부 콜백에서 기본값으로 사용할 때 유용해요.
 
 ```typescript
 import { stubFalse } from 'es-toolkit/compat';
 
-// 배열에서 모든 요소를 제거하는 필터
-const items = [1, 2, 3, 4, 5];
-const emptyArray = items.filter(stubFalse);
-console.log(emptyArray); // []
+// false를 반환해요
+const result = stubFalse();
+console.log(result); // => false
+
+// 배열 필터링에서 기본 조건으로 사용해요
+const numbers = [1, 2, 3, 4, 5];
+const evenNumbers = numbers.filter(stubFalse); // 모든 요소를 제거
+console.log(evenNumbers); // => []
+
+// 함수형 프로그래밍에서 사용해요
+const isValid = condition => (condition ? someValidation : stubFalse);
+const validator = isValid(false);
+console.log(validator()); // => false
 ```
 
-조건부 설정에서 기본값으로도 사용할 수 있어요.
+매번 동일한 `false` 값을 반환해요.
 
 ```typescript
 import { stubFalse } from 'es-toolkit/compat';
 
-// 기본적으로 비활성화된 옵션들
-const defaultOptions = {
-  enableLogging: stubFalse(),
-  enableDebug: stubFalse(),
-  enableCache: stubFalse()
-};
+const result1 = stubFalse();
+const result2 = stubFalse();
 
-console.log(defaultOptions); // { enableLogging: false, enableDebug: false, enableCache: false }
+console.log(result1 === result2); // => true
+console.log(typeof result1); // => 'boolean'
+console.log(result1); // => false
 ```
 
 #### 파라미터
 
-없음.
+파라미터는 없어요.
 
 ### 반환 값
 
-(`boolean`): 항상 `false`를 반환해요.
+(`false`): 항상 `false`를 반환해요.

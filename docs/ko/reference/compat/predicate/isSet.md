@@ -1,6 +1,6 @@
 # isSet (Lodash 호환성)
 
-::: warning `es-toolkit`의 `isSet`를 사용하세요
+::: warning `es-toolkit`의 [isSet](../../predicate/isSet.md)를 사용하세요
 
 이 `isSet` 함수는 Lodash 호환성을 위한 함수이지만, 메인 라이브러리와 같은 구현이에요.
 

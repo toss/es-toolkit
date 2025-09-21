@@ -25,10 +25,10 @@ import { cond } from 'es-toolkit/compat';
 
 // 기본 사용법
 const getValue = cond([
-  [(x) => x > 10, (x) => 'big'],
-  [(x) => x > 5, (x) => 'medium'],
-  [(x) => x > 0, (x) => 'small'],
-  [() => true, () => 'zero or negative']
+  [x => x > 10, x => 'big'],
+  [x => x > 5, x => 'medium'],
+  [x => x > 0, x => 'small'],
+  [() => true, () => 'zero or negative'],
 ]);
 
 console.log(getValue(15)); // "big"
@@ -37,50 +37,30 @@ console.log(getValue(3)); // "small"
 console.log(getValue(-1)); // "zero or negative"
 ```
 
-객체 패턴 매칭에도 활용할 수 있어요:
+객체 패턴 매칭에도 활용할 수 있어요.
 
 ```typescript
 import { cond } from 'es-toolkit/compat';
 
 const processUser = cond([
-  [(user) => user.role === 'admin', (user) => `관리자: ${user.name}`],
-  [(user) => user.role === 'user', (user) => `사용자: ${user.name}`],
-  [(user) => user.role === 'guest', (user) => `게스트: ${user.name}`],
-  [() => true, () => '알 수 없는 역할']
+  [user => user.role === 'admin', user => `관리자: ${user.name}`],
+  [user => user.role === 'user', user => `사용자: ${user.name}`],
+  [user => user.role === 'guest', user => `게스트: ${user.name}`],
+  [() => true, () => '알 수 없는 역할'],
 ]);
 
 console.log(processUser({ name: '김철수', role: 'admin' })); // "관리자: 김철수"
 console.log(processUser({ name: '이영희', role: 'user' })); // "사용자: 이영희"
 ```
 
-if-else 문과 비교:
-
-```typescript
-// cond 사용
-const getValue = cond([
-  [(x) => x > 10, (x) => 'big'],
-  [(x) => x > 5, (x) => 'medium'],
-  [(x) => x > 0, (x) => 'small'],
-  [() => true, () => 'zero or negative']
-]);
-
-// if-else 사용 (더 빠르고 명확함)
-function getValue(x) {
-  if (x > 10) return 'big';
-  if (x > 5) return 'medium';
-  if (x > 0) return 'small';
-  return 'zero or negative';
-}
-```
-
-첫 번째로 참인 조건만 실행되고, 모든 조건이 거짓이면 `undefined`를 반환해요:
+첫 번째로 참인 조건만 실행되고, 모든 조건이 거짓이면 `undefined`를 반환해요.
 
 ```typescript
 import { cond } from 'es-toolkit/compat';
 
 const checkValue = cond([
-  [(x) => x > 10, (x) => 'greater than 10'],
-  [(x) => x < 5, (x) => 'less than 5']
+  [x => x > 10, x => 'greater than 10'],
+  [x => x < 5, x => 'less than 5'],
 ]);
 
 console.log(checkValue(15)); // "greater than 10"

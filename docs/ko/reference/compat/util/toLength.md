@@ -1,31 +1,53 @@
 # toLength (Lodash 호환성)
 
-::: warning Math.max와 Math.floor 사용 권장
-
-유효한 배열 길이로 변환할 때는 Math.max(0, Math.floor(value))를 사용하는 것이 더 명확하고 표준적인 방식이에요.
-
-대신 더 빠르고 현대적인 JavaScript 내장 메서드를 사용하세요.
-
-:::
-
-값을 유효한 배열 인덱스로 변환해요. 0 이상 2^32 - 1 이하의 정수로 제한해요.
+값을 유효한 배열 인덱스로 변환해요.
 
 ```typescript
-toLength(3.2); // => 3
-toLength(-1); // => 0
-toLength('42'); // => 42
+const length = toLength(value);
 ```
 
 ## 레퍼런스
 
-### `toLength(value?: unknown): number`
+### `toLength(value)`
 
-값을 유효한 배열 인덱스로 변환해요.
+값을 유효한 배열 인덱스로 변환해요. 0 이상 2^32-1 이하의 정수로 제한해요.
+
+```typescript
+import { toLength } from 'es-toolkit/compat';
+
+// 소수를 정수로 변환
+toLength(3.2);
+// Returns: 3
+
+// 음수는 0으로 변환
+toLength(-1);
+// Returns: 0
+
+// 문자열 숫자를 변환
+toLength('42');
+// Returns: 42
+
+// 매우 큰 수는 제한값으로 변환
+toLength(Number.MAX_VALUE);
+// Returns: 4294967295
+```
+
+null이나 undefined는 0으로 변환해요.
+
+```typescript
+import { toLength } from 'es-toolkit/compat';
+
+toLength(null);
+// Returns: 0
+
+toLength(undefined);
+// Returns: 0
+```
 
 #### 파라미터
 
-- `value` (`unknown`): 유효한 인덱스로 변환할 값
+- `value` (`unknown`): 변환할 값이에요.
 
 ### 반환 값
 
-(`number`): 유효한 인덱스로 변환된 값
+(`number`): 0 이상 2^32-1 이하의 유효한 배열 인덱스를 반환해요.

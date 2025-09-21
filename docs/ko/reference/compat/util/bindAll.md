@@ -1,13 +1,5 @@
 # bindAll (Lodash 호환성)
 
-::: warning `Function.prototype.bind`를 사용하세요
-
-이 `bindAll` 함수는 복잡한 메서드 이름 처리와 타입 변환으로 인해 느리게 동작해요.
-
-대신 더 빠르고 현대적인 `Function.prototype.bind`를 사용하세요.
-
-:::
-
 객체의 메서드들을 객체 자신에게 바인딩해요.
 
 ```typescript
@@ -48,7 +40,7 @@ const obj = {
   },
   farewell() {
     return `Goodbye, ${this.name}!`;
-  }
+  },
 };
 
 // 배열로 여러 메서드 바인딩

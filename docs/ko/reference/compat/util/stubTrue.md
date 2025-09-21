@@ -38,7 +38,7 @@ import { stubTrue } from 'es-toolkit/compat';
 const defaultOptions = {
   enableFeatureA: stubTrue(),
   enableFeatureB: stubTrue(),
-  enableFeatureC: stubTrue()
+  enableFeatureC: stubTrue(),
 };
 
 console.log(defaultOptions); // { enableFeatureA: true, enableFeatureB: true, enableFeatureC: true }
@@ -46,7 +46,7 @@ console.log(defaultOptions); // { enableFeatureA: true, enableFeatureB: true, en
 
 #### 파라미터
 
-없음.
+파라미터는 없어요.
 
 ### 반환 값
 

@@ -1,10 +1,10 @@
 # stubArray (Lodash 호환성)
 
-::: warning 배열 리터럴 `[]`을 사용하세요
+::: warning `[]`를 직접 사용하세요
 
-이 `stubArray` 함수는 불필요한 함수 호출로 인해 느리게 동작해요.
+이 `stubArray` 함수는 단순히 빈 배열을 반환하는 래퍼 함수로 불필요한 추상화예요.
 
-대신 더 빠르고 현대적인 배열 리터럴 `[]`을 사용하세요.
+대신 더 빠르고 직접적인 `[]`를 사용하세요.
 
 :::
 
@@ -18,38 +18,43 @@ const emptyArray = stubArray();
 
 ### `stubArray()`
 
-매번 새로운 빈 배열이 필요할 때 `stubArray`를 사용하세요. 기본값으로 빈 배열을 제공하거나 콜백 함수에서 일관된 빈 배열을 반환할 때 유용해요.
+항상 새로운 빈 배열을 반환하는 함수예요. 기본값으로 빈 배열이 필요하거나 함수형 프로그래밍에서 일관된 반환값이 필요할 때 사용해요.
 
 ```typescript
 import { stubArray } from 'es-toolkit/compat';
 
-// 기본값으로 빈 배열 제공
-function processItems(items = stubArray()) {
-  return items.map(item => item.toUpperCase());
-}
+// 빈 배열을 반환해요
+const emptyArray = stubArray();
+console.log(emptyArray); // => []
 
-processItems(); // []
-processItems(['a', 'b']); // ['A', 'B']
+// 배열 메서드에서 기본값으로 사용해요
+const items = [1, 2, 3];
+const result = items.filter(x => x > 5) || stubArray();
+console.log(result); // => []
+
+// 함수형 프로그래밍에서 사용해요
+const getData = () => stubArray();
+const data = getData();
+data.push('item'); // 새로운 배열이므로 안전해요
 ```
 
-콜백 함수에서 일관된 빈 배열을 반환할 때도 사용할 수 있어요.
+매번 새로운 배열 인스턴스를 반환해요.
 
 ```typescript
 import { stubArray } from 'es-toolkit/compat';
 
-// 필터링 후 빈 결과를 위한 기본값
-const getItems = (condition: boolean) => {
-  return condition ? ['item1', 'item2'] : stubArray();
-};
+const arr1 = stubArray();
+const arr2 = stubArray();
 
-getItems(true); // ['item1', 'item2']
-getItems(false); // []
+console.log(arr1 === arr2); // => false (다른 인스턴스)
+console.log(Array.isArray(arr1)); // => true
+console.log(arr1.length); // => 0
 ```
 
 #### 파라미터
 
-없음.
+파라미터는 없어요.
 
 ### 반환 값
 
-(`[]`): 새로운 빈 배열을 반환해요.
+(`any[]`): 새로운 빈 배열을 반환해요.
