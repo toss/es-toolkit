@@ -148,4 +148,12 @@ describe('bindAll', () => {
     const result = bindAll(object, [], []);
     expect(result).toBe(object);
   });
+
+  it('should handle non-function properties', () => {
+    const object = cloneDeep(source);
+    bindAll(object, '_a', 'a');
+
+    expect(object._a).toBe(1);
+    expect(object.a()).toBe(1);
+  });
 });
