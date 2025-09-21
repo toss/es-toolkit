@@ -39,15 +39,6 @@ isElement(document.createTextNode('text')); // false
 isElement(document.createComment('comment')); // false
 ```
 
-더 정확한 검사를 위해서는 다음과 같은 현대적인 방법들을 사용하세요:
-
-```typescript
-// 더 정확한 방법들
-value instanceof HTMLElement; // HTML 요소인지 확인
-value instanceof Element; // 모든 종류의 요소인지 확인 
-value?.nodeType === 1; // 요소 노드인지 확인
-```
-
 #### 파라미터
 
 - `value` (`any`): 확인할 값이에요.

@@ -1,13 +1,5 @@
 # isEmpty (Lodash 호환성)
 
-::: warning 타입별 전용 메서드를 사용하세요
-
-이 `isEmpty` 함수는 복잡한 타입 체크와 배열 같은 객체 처리로 인해 느리게 동작해요.
-
-대신 더 빠르고 현대적인 타입별 전용 메서드들(`array.length === 0`, `Object.keys(obj).length === 0`, `map.size === 0` 등)을 사용하세요.
-
-:::
-
 주어진 값이 비어 있는지 확인해요.
 
 ```typescript

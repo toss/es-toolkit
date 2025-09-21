@@ -1,9 +1,9 @@
 # isDate (Lodash 호환성)
 
-::: warning `value instanceof Date`를 사용하세요
-이 `isDate` 함수는 Lodash 호환성을 위해 제공되지만, 내부적으로 `instanceof Date`를 사용해요.
+::: warning es-toolkit의 [isDate](../../predicate/isDate.md)를 사용하세요
+이 `isDate` 함수는 Lodash 호환성을 위한 복잡한 처리로 인해 느리게 동작해요.
 
-대신 더 직접적인 `value instanceof Date` 또는 `es-toolkit`의 [isDate](../../predicate/isDate.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [isDate](../../predicate/isDate.md)를 사용하세요.
 :::
 
 값이 Date 객체인지 확인해요.

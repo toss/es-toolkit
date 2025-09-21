@@ -1,10 +1,10 @@
 # isMap (Lodash 호환성)
 
-::: warning `es-toolkit`의 `isMap`를 사용하세요
+::: warning es-toolkit의 [isMap](../../predicate/isMap.md)를 사용하세요
 
-이 `isMap` 함수는 Lodash 호환성을 위한 함수이지만, 메인 라이브러리와 같은 구현이에요.
+이 `isMap` 함수는 Lodash 호환성을 위한 복잡한 처리로 인해 느리게 동작해요.
 
-대신 `es-toolkit`의 [isMap](../../predicate/isMap.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [isMap](../../predicate/isMap.md)를 사용하세요.
 
 :::
 

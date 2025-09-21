@@ -1,13 +1,5 @@
 # conforms (Lodash 호환성)
 
-::: warning 직접적인 조건 검사를 사용하세요
-
-이 `conforms` 함수는 복잡한 함수 생성과 딥클론 오버헤드로 인해 느리게 동작해요.
-
-대신 더 빠르고 명확한 직접적인 조건 검사(`obj.a > 0 && obj.b % 2 === 0`)를 사용하세요.
-
-:::
-
 조건 함수들을 가진 객체를 받아서, 다른 객체가 모든 조건을 만족하는지 확인하는 함수를 만들어요.
 
 ```typescript
@@ -24,15 +16,15 @@ const checker = conforms(predicates);
 import { conforms } from 'es-toolkit/compat';
 
 // 조건 함수들 정의
-const isPositive = (n) => n > 0;
-const isEven = (n) => n % 2 === 0;
-const isString = (s) => typeof s === 'string';
+const isPositive = n => n > 0;
+const isEven = n => n % 2 === 0;
+const isString = s => typeof s === 'string';
 
 // 여러 조건을 포함한 검증 함수 생성
 const validator = conforms({
   a: isPositive,
   b: isEven,
-  c: isString
+  c: isString,
 });
 
 // 객체들 검증
@@ -45,28 +37,16 @@ validator({ a: 2, b: 4, c: 123 }); // false (c가 문자열이 아님)
 const users = [
   { age: 25, score: 80, name: 'Alice' },
   { age: 17, score: 95, name: 'Bob' },
-  { age: 30, score: 75, name: 'Charlie' }
+  { age: 30, score: 75, name: 'Charlie' },
 ];
 
 const adultHighScorer = conforms({
-  age: (n) => n >= 18,
-  score: (n) => n >= 80
+  age: n => n >= 18,
+  score: n => n >= 80,
 });
 
 const filteredUsers = users.filter(adultHighScorer);
 // [{ age: 25, score: 80, name: 'Alice' }, { age: 30, score: 75, name: 'Charlie' }]
-```
-
-더 직접적이고 빠른 방법:
-
-```typescript
-// 더 명확하고 빠른 방법
-function validateObject(obj) {
-  return obj.a > 0 && obj.b % 2 === 0 && typeof obj.c === 'string';
-}
-
-// 또는 배열 필터링에서
-const filteredUsers = users.filter(user => user.age >= 18 && user.score >= 80);
 ```
 
 #### 파라미터

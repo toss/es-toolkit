@@ -1,10 +1,10 @@
 # isNull (Lodash 호환성)
 
-::: warning `es-toolkit`의 `isNull`을 사용하세요
+::: warning es-toolkit의 [isNull](../../predicate/isNull.md)를 사용하세요
 
 이 `isNull` 함수는 Lodash 호환성을 위한 함수이지만, 메인 라이브러리와 같은 구현이에요.
 
-대신 `es-toolkit`의 [isNull](../../predicate/isNull.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [isNull](../../predicate/isNull.md)를 사용하세요.
 
 :::
 

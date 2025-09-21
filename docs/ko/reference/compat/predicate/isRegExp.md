@@ -1,10 +1,10 @@
 # isRegExp (Lodash 호환성)
 
-::: warning `instanceof` 연산자를 사용하세요
+::: warning es-toolkit의 [isRegExp](../../predicate/isRegExp.md)를 사용하세요
 
 이 `isRegExp` 함수는 Lodash 호환성을 위한 함수이지만, 단순한 타입 확인이에요.
 
-대신 더 간단하고 현대적인 `value instanceof RegExp`를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [isRegExp](../../predicate/isRegExp.md)를 사용하세요.
 
 :::
 

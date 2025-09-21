@@ -1,13 +1,5 @@
 # isArrayLikeObject (Lodash 호환성)
 
-::: warning `Array.isArray`나 구체적인 타입 확인을 사용하세요
-
-이 `isArrayLikeObject` 함수는 이중 검증과 복잡한 타입 체크로 인해 느리게 동작해요.
-
-대신 더 빠르고 명확한 `Array.isArray(value)` 또는 구체적인 객체 타입 검사를 사용하세요.
-
-:::
-
 값이 원시값이 아닌 배열 같은 객체인지 확인해요.
 
 ```typescript
@@ -47,16 +39,6 @@ isArrayLikeObject({}); // false
 isArrayLikeObject(null); // false
 isArrayLikeObject(undefined); // false
 isArrayLikeObject(() => {}); // false
-```
-
-더 구체적인 확인을 위해서는 다음과 같은 현대적인 방법들을 사용하세요:
-
-```typescript
-// 더 명확한 방법들
-Array.isArray(value); // 실제 배열인지 확인
-value instanceof HTMLCollection; // HTMLCollection인지 확인
-value instanceof NodeList; // NodeList인지 확인
-value && typeof value === 'object' && typeof value.length === 'number'; // 배열 같은 객체인지 확인
 ```
 
 #### 파라미터

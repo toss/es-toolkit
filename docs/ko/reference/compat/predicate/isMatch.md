@@ -1,13 +1,5 @@
 # isMatch (Lodash 호환성)
 
-::: warning `es-toolkit`의 `isEqual`이나 직접 비교를 사용하세요
-
-이 `isMatch` 함수는 복잡한 부분 일치 검사와 타입별 처리로 인해 느리게 동작해요.
-
-대신 더 빠른 `es-toolkit`의 [isEqual](../../predicate/isEqual.md)이나 직접적인 프로퍼티 비교를 사용하세요.
-
-:::
-
 객체가 다른 객체의 모양과 값에 부분적으로 일치하는지 확인해요.
 
 ```typescript
@@ -28,10 +20,7 @@ isMatch({ a: 1, b: 2, c: 3 }, { a: 1, b: 2 }); // true (a, b가 일치)
 isMatch({ a: 1, b: 2 }, { a: 1, b: 2, c: 3 }); // false (c가 target에 없음)
 
 // 중첩 객체
-isMatch(
-  { user: { name: 'Alice', age: 25, city: 'Seoul' } },
-  { user: { name: 'Alice', age: 25 } }
-); // true
+isMatch({ user: { name: 'Alice', age: 25, city: 'Seoul' } }, { user: { name: 'Alice', age: 25 } }); // true
 
 // 배열 부분 일치 (순서 무관)
 isMatch([1, 2, 3, 4], [2, 4]); // true (2와 4가 배열에 있음)
@@ -39,8 +28,15 @@ isMatch([1, 2, 3], [1, 2, 3]); // true (완전 일치)
 isMatch([1, 2], [1, 2, 3]); // false (3이 target에 없음)
 
 // Map 부분 일치
-const targetMap = new Map([['a', 1], ['b', 2], ['c', 3]]);
-const sourceMap = new Map([['a', 1], ['b', 2]]);
+const targetMap = new Map([
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+]);
+const sourceMap = new Map([
+  ['a', 1],
+  ['b', 2],
+]);
 isMatch(targetMap, sourceMap); // true
 
 // Set 부분 일치
@@ -58,6 +54,7 @@ isMatch([1, 2, 3], []); // true
 ```typescript
 // 완전 동등성 확인 (더 빠름)
 import { isEqual } from 'es-toolkit';
+
 isEqual(obj1, obj2);
 
 // 특정 프로퍼티 확인 (더 명확함)

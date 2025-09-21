@@ -1,9 +1,9 @@
 # isLength (Lodash 호환성)
 
-::: warning `es-toolkit`의 `isLength`를 사용하세요
-이 `isLength` 함수는 Lodash 호환성을 위한 함수이지만, 메인 라이브러리와 같은 구현이에요.
+::: warning es-toolkit의 [isLength](../../predicate/isLength.md)를 사용하세요
+이 `isLength` 함수는 Lodash 호환성을 위한 복잡한 처리로 인해 느리게 동작해요.
 
-대신 `es-toolkit`의 [isLength](../../predicate/isLength.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [isLength](../../predicate/isLength.md)를 사용하세요.
 :::
 
 값이 유효한 길이인지 확인해요.

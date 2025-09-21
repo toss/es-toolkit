@@ -1,13 +1,5 @@
 # matches (Lodash 호환성)
 
-::: warning 직접적인 검사 함수를 사용하세요
-
-이 `matches` 함수는 복잡한 함수 생성과 부분 일치 검사로 인해 느리게 동작해요.
-
-대신 더 빠르고 명확한 직접적인 검사 함수(`obj => obj.a === target.a && obj.b === target.b`)를 사용하세요.
-
-:::
-
 주어진 패턴과 부분적으로 일치하는지 확인하는 함수를 만들어요.
 
 ```typescript
@@ -29,22 +21,22 @@ const userMatcher = matches({ age: 25, department: 'Engineering' });
 const users = [
   { name: 'Alice', age: 25, department: 'Engineering' },
   { name: 'Bob', age: 30, department: 'Marketing' },
-  { name: 'Charlie', age: 25, department: 'Engineering' }
+  { name: 'Charlie', age: 25, department: 'Engineering' },
 ];
 
 const engineeringUsers = users.filter(userMatcher);
-// [{ name: 'Alice', age: 25, department: 'Engineering' }, 
+// [{ name: 'Alice', age: 25, department: 'Engineering' },
 //  { name: 'Charlie', age: 25, department: 'Engineering' }]
 
 // 중첩된 객체 패턴
 const profileMatcher = matches({
-  profile: { city: 'Seoul', verified: true }
+  profile: { city: 'Seoul', verified: true },
 });
 
 const profiles = [
   { name: 'Kim', profile: { city: 'Seoul', verified: true, score: 100 } },
   { name: 'Lee', profile: { city: 'Busan', verified: true } },
-  { name: 'Park', profile: { city: 'Seoul', verified: false } }
+  { name: 'Park', profile: { city: 'Seoul', verified: false } },
 ];
 
 const seoulVerifiedUsers = profiles.filter(profileMatcher);
@@ -52,7 +44,11 @@ const seoulVerifiedUsers = profiles.filter(profileMatcher);
 
 // 배열 패턴 매칭
 const arrayMatcher = matches([2, 4]);
-const arrays = [[1, 2, 3, 4, 5], [2, 4, 6], [1, 3, 5]];
+const arrays = [
+  [1, 2, 3, 4, 5],
+  [2, 4, 6],
+  [1, 3, 5],
+];
 const matchingArrays = arrays.filter(arrayMatcher);
 // [[1, 2, 3, 4, 5], [2, 4, 6]]
 
@@ -61,30 +57,6 @@ const emptyMatcher = matches({});
 emptyMatcher({ anything: 'value' }); // true
 emptyMatcher([]); // true
 emptyMatcher(null); // true
-```
-
-더 직접적이고 빠른 방법들:
-
-```typescript
-// 직접적인 필터 함수 (더 빠름)
-const engineeringUsers = users.filter(user => 
-  user.age === 25 && user.department === 'Engineering'
-);
-
-// 구조 분해를 사용한 검사
-const seoulVerifiedUsers = profiles.filter(({ profile }) =>
-  profile?.city === 'Seoul' && profile?.verified === true
-);
-
-// 배열 검사
-const matchingArrays = arrays.filter(arr =>
-  arr.includes(2) && arr.includes(4)
-);
-
-// 함수형 접근법
-function createMatcher(pattern) {
-  return (obj) => Object.keys(pattern).every(key => obj[key] === pattern[key]);
-}
 ```
 
 #### 파라미터
