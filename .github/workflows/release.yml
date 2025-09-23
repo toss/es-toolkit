@@ -23,6 +23,8 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+      - name: Update npm
+        run: npm install -g npm@11.5.1
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
@@ -68,8 +70,6 @@ jobs:
           (github.ref_type == 'tag' || github.ref == 'refs/heads/main')
         run: |
           set -ex
-          npm config set //registry.npmjs.org/:_authToken "$NPM_AUTH_TOKEN"
-          npm whoami
           if [[ "$GITHUB_REF_TYPE" = "tag" ]]; then
             npm publish --provenance --access public *.tgz
           else
