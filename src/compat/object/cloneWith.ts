@@ -77,7 +77,7 @@ export function cloneWith<T>(value: T): T;
  * const num = 29;
  * const clonedNum = cloneWith(num);
  * console.log(clonedNum); // 29
- * console.log(clonedNum === num) ; // true
+ * console.log(clonedNum === num); // true
  *
  * @example
  * // Clone an array
