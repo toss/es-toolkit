@@ -3,7 +3,8 @@ name: Release
 on:
   push:
     branches:
-      - '*'
+      - main
+      - add-ci
     tags:
       - 'v*.*.*'
 
@@ -71,8 +72,7 @@ jobs:
           files: out/*.tgz
       - name: Publish to registry
         if: |
-          github.event_name == 'push' &&
-          (github.ref_type == 'tag' || github.ref == 'refs/heads/main')
+          github.event_name == 'push'
         run: |
           set -ex
           if [[ "$GITHUB_REF_TYPE" = "tag" ]]; then
