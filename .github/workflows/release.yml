@@ -76,9 +76,9 @@ jobs:
         run: |
           set -ex
           if [[ "$GITHUB_REF_TYPE" = "tag" ]]; then
-            npm publish --provenance --access public *.tgz
+            npm publish --provenance --access public *.tgz --loglevel=silly
           else
-            npm publish --provenance --access public --tag dev *.tgz
+            npm publish --provenance --access public --tag dev *.tgz --loglevel=silly
           fi
           deno publish --allow-dirty --unstable-sloppy-imports
         working-directory: ${{ github.workspace }}/out/
