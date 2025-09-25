@@ -40,14 +40,3 @@ zip([1, 2], ['a', 'b', 'c', 'd']);
 #### 반환 값
 
 (`T[][]`): 각 입력 배열의 해당 인덱스 요소들을 튜플로 묶은 새 배열을 반환해요.
-
-## Lodash 호환성
-
-`es-toolkit/compat`에서 `zip`을 가져오면 Lodash와 완전히 호환돼요.
-
-```typescript
-import { zip } from 'es-toolkit/compat';
-
-const result = zip([1, 2], ['a', 'b'], [true, false]);
-// 결과: [[1, 'a', true], [2, 'b', false]]
-```

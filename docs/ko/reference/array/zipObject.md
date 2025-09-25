@@ -41,14 +41,3 @@ zipObject(['a', 'b'], [1, 2, 3, 4]);
 #### 반환 값
 
 (`Record<P, V>`): 키와 값이 결합된 새 객체를 반환해요.
-
-## Lodash 호환성
-
-`es-toolkit/compat`에서 `zipObject`를 가져오면 Lodash와 완전히 호환돼요.
-
-```typescript
-import { zipObject } from 'es-toolkit/compat';
-
-const result = zipObject(['a', 'b', 'c'], [1, 2, 3]);
-// 결과: { a: 1, b: 2, c: 3 }
-```

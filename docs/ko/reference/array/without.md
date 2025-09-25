@@ -41,15 +41,3 @@ without([1, NaN, 3, NaN, 5], NaN);
 #### 반환 값
 
 (`T[]`): 지정된 값들이 제거된 새 배열을 반환해요.
-
-## Lodash 호환성
-
-`es-toolkit/compat`에서 `without`을 가져오면 Lodash와 완전히 호환돼요.
-
-```typescript
-import { without } from 'es-toolkit/compat';
-
-const array = [1, 2, 3, 2];
-const result = without(array, 2);
-// 결과: [1, 3]
-```

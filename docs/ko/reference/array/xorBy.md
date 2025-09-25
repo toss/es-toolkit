@@ -42,14 +42,3 @@ xorBy([1, 2, 3, 4], [3, 4, 5, 6], n => n % 3);
 #### 반환 값
 
 (`T[]`): 매핑 함수의 결과를 기준으로 계산된 대칭 차집합을 나타내는 새 배열을 반환해요.
-
-## Lodash 호환성
-
-`es-toolkit/compat`에서 `xorBy`를 가져오면 Lodash와 완전히 호환돼요.
-
-```typescript
-import { xorBy } from 'es-toolkit/compat';
-
-const result = xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], 'id');
-// 결과: [{ id: 1 }, { id: 3 }]
-```

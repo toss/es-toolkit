@@ -41,16 +41,3 @@ xor([1, 2, 2, 3], [3, 4, 4, 5]);
 #### 반환 값
 
 (`T[]`): 두 배열의 대칭 차집합을 나타내는 새 배열을 반환해요.
-
-## Lodash 호환성
-
-## Lodash 호환성
-
-`es-toolkit/compat`에서 `xor`을 가져오면 Lodash와 완전히 호환돼요.
-
-```typescript
-import { xor } from 'es-toolkit/compat';
-
-const result = xor([1, 2, 3], [2, 3, 4]);
-// 결과: [1, 4]
-```

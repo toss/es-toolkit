@@ -17,16 +17,20 @@ import { xorWith } from 'es-toolkit/array';
 
 // 객체의 id로 비교해요.
 xorWith(
-  [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }],
-  [{ id: 2, name: 'Bobby' }, { id: 3, name: 'Charlie' }],
+  [
+    { id: 1, name: 'Alice' },
+    { id: 2, name: 'Bob' },
+  ],
+  [
+    { id: 2, name: 'Bobby' },
+    { id: 3, name: 'Charlie' },
+  ],
   (a, b) => a.id === b.id
 );
 // Returns: [{ id: 1, name: 'Alice' }, { id: 3, name: 'Charlie' }]
 
 // 대소문자를 무시하고 비교해요.
-xorWith(['Apple', 'Banana'], ['APPLE', 'Cherry'],
-  (a, b) => a.toLowerCase() === b.toLowerCase()
-);
+xorWith(['Apple', 'Banana'], ['APPLE', 'Cherry'], (a, b) => a.toLowerCase() === b.toLowerCase());
 // Returns: ['Banana', 'Cherry']
 ```
 
@@ -57,18 +61,3 @@ xorWith(
 #### 반환 값
 
 (`T[]`): 사용자 정의 동등성 함수를 기준으로 계산된 대칭 차집합을 나타내는 새 배열을 반환해요.
-
-## Lodash 호환성
-
-`es-toolkit/compat`에서 `xorWith`를 가져오면 Lodash와 완전히 호환돼요.
-
-```typescript
-import { xorWith } from 'es-toolkit/compat';
-
-const result = xorWith(
-  [{ id: 1 }, { id: 2 }],
-  [{ id: 2 }, { id: 3 }],
-  (a, b) => a.id === b.id
-);
-// 결과: [{ id: 1 }, { id: 3 }]
-```

@@ -41,14 +41,3 @@ zipWith([1, 2], [10, 20, 30], (a, b) => (a ?? 0) + (b ?? 0));
 #### 반환 값
 
 (`R[]`): 결합 함수를 적용한 결과로 구성된 새 배열을 반환해요.
-
-## Lodash 호환성
-
-`es-toolkit/compat`에서 `zipWith`를 가져오면 Lodash와 완전히 호환돼요.
-
-```typescript
-import { zipWith } from 'es-toolkit/compat';
-
-const result = zipWith([1, 2], [3, 4], [5, 6], (a, b, c) => a + b + c);
-// 결과: [9, 12]
-```
