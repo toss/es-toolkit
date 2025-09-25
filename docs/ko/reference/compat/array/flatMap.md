@@ -1,10 +1,10 @@
 # flatMap (Lodash 호환성)
 
-::: warning `Array.prototype.flatMap`을 사용하세요
+::: warning `es-toolkit`의 `flatMap`을 사용하세요
 
-이 `flatMap` 함수는 복잡한 컬렉션 타입 처리와 반복자 로직으로 인해 느리게 동작해요.
+이 `flatMap` 함수는 `null`이나 `undefined` 처리, `ArrayLike` 타입 처리, 다양한 조건 함수 형태 지원 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `Array.prototype.flatMap`을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [flatMap](../../array/flatMap.md)을 사용하세요.
 
 :::
 
@@ -38,7 +38,7 @@ flatMap(obj, (value, key) => [key, value]);
 // 문자열 속성으로 매핑
 const users = [
   { user: 'barney', hobbies: ['hiking', 'coding'] },
-  { user: 'fred', hobbies: ['reading'] }
+  { user: 'fred', hobbies: ['reading'] },
 ];
 flatMap(users, 'hobbies');
 // 결과: ['hiking', 'coding', 'reading']
@@ -61,7 +61,7 @@ import { flatMap } from 'es-toolkit/compat';
 
 const users = [
   { user: 'barney', age: 36, active: true },
-  { user: 'fred', age: 40, active: false }
+  { user: 'fred', age: 40, active: false },
 ];
 flatMap(users, { active: false });
 // 결과: [false] (active가 false인 요소들의 매칭 결과)

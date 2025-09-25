@@ -1,10 +1,10 @@
 # first (Lodash 호환성)
 
-::: warning `es-toolkit/array`의 `head`나 인덱스에 접근하는 문법(`value[0]`)을 사용하세요
+::: warning `es-toolkit/array`의 [`head`](../../array/head.md)나 인덱스에 접근하는 문법(`value[0]`)을 사용하세요
 
-이 `first` 함수는 `head` 함수를 감싸는 추가 레이어로 인해 불필요한 오버헤드가 있어요.
+이 `first` 함수는 [`head`](../../array/head.md) 함수를 감싸는 추가 레이어로 인해 불필요한 오버헤드가 있어요.
 
-대신 더 빠른 `es-toolkit/array`의 `head` 함수나 `arr[0]`을 직접 사용하세요.
+대신 더 빠른 `es-toolkit/array`의 [`head`](../../array/head.md) 함수나 `arr[0]`을 직접 사용하세요.
 
 :::
 

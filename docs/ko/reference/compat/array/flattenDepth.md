@@ -1,10 +1,10 @@
 # flattenDepth (Lodash 호환성)
 
-::: warning `es-toolkit/array`의 `flatten`이나 `Array.prototype.flat`을 사용하세요
+::: warning `es-toolkit`의 `flatten`을 사용하세요
 
-이 `flattenDepth` 함수는 단순히 `flatten` 함수를 호출하는 추가 레이어로 인해 불필요한 오버헤드가 있어요.
+이 `flattenDepth` 함수는 `null`이나 `undefined` 처리, `ArrayLike` 타입 처리, 다양한 조건 함수 형태 지원 등으로 인해 느리게 동작해요.
 
-대신 더 빠른 `es-toolkit/array`의 `flatten` 함수나 `Array.prototype.flat`을 직접 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [flatten](../../array/flatten.md)을 사용하세요.
 
 :::
 

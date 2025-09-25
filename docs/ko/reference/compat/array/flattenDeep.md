@@ -1,10 +1,10 @@
 # flattenDeep (Lodash 호환성)
 
-::: warning `Array.prototype.flat`을 사용하세요
+::: warning `es-toolkit`의 `flattenDeep`을 사용하세요
 
-이 `flattenDeep` 함수는 복잡한 타입 처리와 재귀 로직으로 인해 느리게 동작해요.
+이 `flattenDeep` 함수는 `null`이나 `undefined` 처리, `ArrayLike` 타입 처리, 다양한 조건 함수 형태 지원 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `Array.prototype.flat(Infinity)`를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [flattenDeep](../../array/flattenDeep.md)을 사용하세요.
 
 :::
 
@@ -41,9 +41,9 @@ flattenDeep(['a', ['b', ['c', [['d']]]]]);
 ```typescript
 import { flattenDeep } from 'es-toolkit/compat';
 
-flattenDeep(null);      // []
+flattenDeep(null); // []
 flattenDeep(undefined); // []
-flattenDeep([]);        // []
+flattenDeep([]); // []
 ```
 
 이미 평면화된 배열은 그대로 복사돼요.

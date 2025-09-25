@@ -1,10 +1,10 @@
 # flatten (Lodash 호환성)
 
-::: warning `Array.prototype.flat`을 사용하세요
+::: warning `es-toolkit`의 `flatten`을 사용하세요
 
-이 `flatten` 함수는 복잡한 타입 처리와 특별한 객체 지원으로 인해 느리게 동작해요.
+이 `flatten` 함수는 `null`이나 `undefined` 처리, `ArrayLike` 타입 처리, 다양한 조건 함수 형태 지원 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `Array.prototype.flat(1)`을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [flatten](../../array/flatten.md)을 사용하세요.
 
 :::
 
@@ -44,9 +44,9 @@ example(1, [2, 3], [[4]]);
 ```typescript
 import { flatten } from 'es-toolkit/compat';
 
-flatten(null);      // []
+flatten(null); // []
 flatten(undefined); // []
-flatten([]);        // []
+flatten([]); // []
 ```
 
 Symbol.isConcatSpreadable을 가진 객체도 배열처럼 평면화돼요.

@@ -1,10 +1,10 @@
 # forEachRight (Lodash 호환성)
 
-::: warning 현대적인 JavaScript의 배열 메서드를 사용하세요
+::: warning `es-toolkit`의 `forEachRight`을 사용하세요
 
-이 `forEachRight` 함수는 `null`이나 `undefined` 처리, 객체 지원, 복잡한 타입 처리 등으로 인해 느리게 동작해요.
+이 `forEachRight` 함수는 `null`이나 `undefined` 처리, `ArrayLike` 타입 처리, 다양한 조건 함수 형태 지원 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 JavaScript의 배열 메서드들을 사용하세요. 예를 들어 `arr.reverse().forEach()` 또는 `for` 루프를 역순으로 사용하는 방법이 있어요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [forEachRight](../../array/forEachRight.md)을 사용하세요.
 
 :::
 
@@ -56,7 +56,7 @@ forEachRight(undefined, value => console.log(value)); // undefined
 ```typescript
 import { forEachRight } from 'es-toolkit/compat';
 
-forEachRight([1, 2, 3, 4], (value) => {
+forEachRight([1, 2, 3, 4], value => {
   console.log(value);
   if (value === 2) {
     return false; // 순회 중단
