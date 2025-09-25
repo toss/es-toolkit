@@ -59,6 +59,6 @@ keyBy(undefined, 'id'); // {}
 - `collection` (`ArrayLike<T> | null | undefined`): 키로 구성할 배열이나 객체예요.
 - `iteratee` (`ValueIterateeCustom<T, PropertyKey>`, 선택): 키를 생성할 함수나 속성 이름이에요. 생략하면 요소 자체를 키로 사용해요.
 
-### 반환 값
+#### 반환 값
 
 (`Record<string, T>`): 각 요소가 생성된 키에 매핑된 새로운 객체를 반환해요.

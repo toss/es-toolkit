@@ -11,7 +11,7 @@
 배열이나 객체의 요소들을 오른쪽에서 왼쪽으로 순회하면서 각 요소에 대해 함수를 실행해요.
 
 ```typescript
-const result = forEachRight(collection, callback);
+forEachRight(collection, callback);
 ```
 
 ## 레퍼런스
@@ -70,6 +70,6 @@ forEachRight([1, 2, 3, 4], value => {
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요. 배열, 객체, 문자열, 또는 null/undefined일 수 있어요.
 - `callback` (`(item: any, index: any, arr: any) => unknown`, 선택): 각 요소에 대해 실행할 함수예요. `false`를 반환하면 순회를 중단해요. 기본값은 `identity` 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 원본 컬렉션을 그대로 반환해요.

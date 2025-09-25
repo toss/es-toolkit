@@ -50,6 +50,6 @@ uniqBy(undefined, 'x'); // []
 - `array` (`ArrayLike<T> | null | undefined`): 중복을 제거할 배열이에요.
 - `iteratee` (`ValueIteratee<T>`): 각 요소에 적용할 변환 함수예요. 함수, 속성 이름, 부분 객체 등을 사용할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 변환 함수 결과를 기준으로 중복이 제거된 새 배열을 반환해요.

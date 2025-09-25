@@ -63,6 +63,6 @@ split(undefined);
 - `separator` (`RegExp | string`, 선택): 나누는 기준이 되는 구분자예요.
 - `limit` (`number`, 선택): 결과 배열의 최대 길이예요.
 
-### 반환 값
+#### 반환 값
 
 (`string[]`): 구분자로 나누어진 문자열 배열을 반환해요.

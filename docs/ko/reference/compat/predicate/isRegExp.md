@@ -77,6 +77,6 @@ isRegExp(regex); // true
 
 - `value` (`any`): 정규식인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is RegExp`): 값이 정규식이면 `true`, 아니면 `false`를 반환해요.

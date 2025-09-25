@@ -56,6 +56,6 @@ console.log(original); // => [3, 2, 1] (원본이 수정됨)
 
 - `array` (`T[] | null | undefined`): 반전할 배열이에요. `null`이나 `undefined`인 경우 그대로 반환해요.
 
-### 반환 값
+#### 반환 값
 
 (`T[] | null | undefined`): 반전된 배열을 반환해요. 입력이 `null`이나 `undefined`인 경우 그 값을 그대로 반환해요.

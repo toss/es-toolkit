@@ -11,17 +11,14 @@
 두 배열을 사용해서 객체를 만들어요. 첫 번째 배열은 버전망을 프로퍼티 이름으로, 두 번째 배열은 해당 값으로 사용해요.
 
 ```typescript
-const keys = ['a', 'b', 'c'];
-const values = [1, 2, 3];
 const result = zipObject(keys, values);
-// result는 { a: 1, b: 2, c: 3 }이 돼요.
 ```
 
 ## 레퍼런스
 
 ### `zipObject(keys, values)`
 
-첫 번째 배열의 요소들을 프로퍼티 이름으로, 두 번째 배열의 요소들을 해당 값으로 사용해서 객체를 만들어요. 두 배열의 길이가 다를 경우, 짧은 배열의 길이에 맞춰서 처리해요.
+키 배열과 값 배열을 받아서 하나의 객체로 만들고 싶을 때 `zipObject`를 사용하세요. 첫 번째 배열의 요소들을 프로퍼티 이름으로, 두 번째 배열의 요소들을 해당 값으로 사용해서 객체를 만들어요. API 응답을 처리하거나 데이터를 변환할 때 특히 유용해요.
 
 ```typescript
 import { zipObject } from 'es-toolkit/compat';

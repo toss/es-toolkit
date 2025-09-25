@@ -49,7 +49,6 @@ sortedLastIndexBy(undefined, { x: 1 }, 'x'); // 0
 - `value` (`T`): 삽입할 값이에요.
 - `iteratee` (선택): 각 요소와 값에 적용할 변환 함수, 속성 이름, 또는 속성-값 배열이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 값을 삽입할 가장 높은 인덱스를 반환해요. 배열이 `null`이나 `undefined`면 0을 반환해요.
-

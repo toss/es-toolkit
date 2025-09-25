@@ -55,6 +55,6 @@ console.log(result); // undefined
 - `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 각 요소에 대해 호출할 함수예요. 누적값, 현재 값, 인덱스/키, 원본 배열/객체를 받아요.
 - `initialValue` (`any`, 선택): 누적값의 초기 값이에요. 제공하지 않으면 첫 번째 요소가 초기 값이 돼요.
 
-### 반환 값
+#### 반환 값
 
 (`any`): 모든 요소를 처리한 후의 최종 누적값을 반환해요.

@@ -72,6 +72,6 @@ const admins = accounts.filter(checkRole);
 - `property` (`PropertyKey | PropertyKey[]`): 확인할 프로퍼티의 경로예요. 문자열, 배열, 또는 점으로 구분된 경로를 사용할 수 있어요.
 - `source` (`unknown`): 프로퍼티 값과 비교할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`(target: unknown) => boolean`): 주어진 객체의 프로퍼티가 값과 일치하는지 확인하는 함수를 반환해요.

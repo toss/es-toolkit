@@ -39,6 +39,6 @@ isArrayBuffer(undefined); // false
 
 - `value` (`unknown`): ArrayBuffer인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is ArrayBuffer`): 값이 ArrayBuffer이면 `true`, 아니면 `false`를 반환해요.

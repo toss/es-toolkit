@@ -1,99 +1,86 @@
 # map (Lodash 호환성)
 
-::: warning `Array.prototype.map()`을 사용하세요
+::: warning `Array.prototype.map`을 사용하세요
 
-이 `map` 함수는 복잡한 객체 처리, 다양한 iteratee 유형 처리 등으로 인해 느리게 동작해요.
+이 `map` 함수는 `null`이나 `undefined` 처리, 객체 순회, 속성 추출 등 추가 기능으로 인해 느리게 동작해요. 배열을 변환할 때는 JavaScript의 기본 `Array.prototype.map` 메소드가 더 빠르고 간단해요.
 
-대신 더 빠르고 현대적인 `Array.prototype.map()`을 사용하세요.
+대신 더 빠르고 현대적인 `Array.prototype.map`을 사용하세요.
 
 :::
 
-배열의 각 요소를 변환해서 새로운 배열을 반환해요.
-
-각 요소를 변환하는 방법은 [iteratee](../util/iteratee.md) 함수의 동작에 따라 명시할 수 있어요.
-
-- **변환 함수**: 각 요소에 대해 주어진 함수를 실행해서, 그 결괏값으로 변환해요.
-- **프로퍼티 이름**: 각 요소에서 주어진 프로퍼티 이름을 선택해요.
-- **프로퍼티-값 쌍**: 각 요소의 프로퍼티가 주어진 값과 일치하는지에 대한 참/거짓 값으로 변환해요.
-- **부분 객체**: 각 요소가 부분 객체의 프로퍼티와 값에 일치하는지에 대한 참/거짓 값으로 변환해요.
-
-## 인터페이스
+배열이나 객체의 각 요소를 변환하여 새로운 배열을 만들어요.
 
 ```typescript
-function map<T, U>(arr: T[], iteratee: (value: T, index: number, arr: T[]) => U): U[];
-function map<T>(arr: T[], iteratee: Partial<T>): boolean[];
-function map<T>(arr: T[], iteratee: [keyof T, unknown]): boolean[];
-function map<T, K extends keyof T>(arr: T[], iteratee: K): Array<T[K]>;
-function map<T>(arr: T[], iteratee?: null | undefined): T[];
-
-function map<T extends object, U>(object: T, iteratee: (value: T[keyof T], key: string, object: T) => U): U[];
-function map<T>(object: T, iteratee: Partial<T[keyof T]>): boolean[];
-function map<T>(object: T, iteratee: [keyof T[keyof T], unknown]): boolean[];
-function map<T, K extends keyof T[keyof T]>(object: T, iteratee: K): Array<T[keyof T][K]>;
-function map<T extends object, U>(object: T, iteratee?: null | undefined): U[];
+const mapped = map(collection, iteratee);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `arr` (`T[]`) 또는 `object` (`T`): 변환할 배열이나 객체.
+### `map(collection, iteratee)`
 
-::: info `arr`는 `ArrayLike<T>`일 수도 있고, `null` 또는 `undefined`일 수도 있어요
-
-lodash와 완벽하게 호환되도록 `map` 함수는 `arr`을 다음과 같이 처리해요:
-
-- `arr`가 `ArrayLike<T>`인 경우 `Array.from(...)`을 사용하여 배열로 변환해요.
-- `arr`가 `null` 또는 `undefined`인 경우 빈 배열로 간주돼요.
-
-:::
-
-::: info `object`는 `null` 또는 `undefined`일 수도 있어요
-
-lodash와 완벽하게 호환되도록 `map` 함수는 `object`를 다음과 같이 처리해요:
-
-- `object`가 `null` 또는 `undefined`인 경우 빈 객체로 변환돼요.
-
-:::
-
-- `iteratee`:
-
-  - 배열의 경우:
-
-    - **변환 함수** (`(value: T, index: number, arr: T[]) => U`): 배열의 각 요소를 변환할 함수.
-    - **프로퍼티 이름** (`keyof T`): 각 요소에서 선택할 프로퍼티 이름.
-    - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-    - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
-
-  - 객체의 경우:
-
-    - **변환 함수** (`(item: T[keyof T], index: number, object: T) => unknown`): 객체의 각 값을 변환할 함수.
-    - **프로퍼티 이름** (`keyof T[keyof T]`): 객체의 각 값에서 선택할 프로퍼티 이름.
-    - **프로퍼티-값 쌍** (`[keyof T[keyof T], unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-    - **부분 객체** (`Partial<T[keyof T]>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
-
-### 반환 값
-
-(`any[]`): 변환된 값의 새 배열.
-
-### 예시
+배열, 객체, 또는 배열 형태의 객체의 각 요소를 변환하고 싶을 때 `map`을 사용하세요. 각 요소에 대해 반복 함수를 실행하고 결과를 새 배열로 반환해요.
 
 ```typescript
-// 변환 함수 사용
-const array = [1, 2, 3];
-map(array, value => value * 2); // => [2, 4, 6]
+import { map } from 'es-toolkit/compat';
 
-// 이터레이터로 속성 키 사용
-const objects = [{ a: 1 }, { a: 2 }, { a: 3 }];
-map(objects, 'a'); // => [1, 2, 3]
+// 배열의 각 요소를 두 배로 만들어요.
+map([1, 2, 3], x => x * 2);
+// Returns: [2, 4, 6]
 
-// 이터레이터로 객체 사용
-const objects = [{ a: 1 }, { a: 2 }, { a: 3 }];
-map(objects, { a: 1 }); // => [true, false, false]
+// 객체의 값들을 변환해요.
+const obj = { a: 1, b: 2 };
+map(obj, (value, key) => `${key}:${value}`);
+// Returns: ['a:1', 'b:2']
 
-// 이터레이터 없음
-const numbers = [1, 2, 3];
-map(numbers); // => [1, 2, 3]
-
-// 객체로 컬렉션 사용
-const obj = { a: 1, b: 2, c: 3 };
-map(obj, (value, key) => `${key}: ${value}`); // => ['a: 1', 'b: 2', 'c: 3']
+// 속성을 추출해요.
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 },
+];
+map(users, 'name');
+// Returns: ['John', 'Jane']
 ```
+
+`null`이나 `undefined`는 빈 배열로 처리해요.
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+map(null, x => x); // []
+map(undefined, x => x); // []
+```
+
+문자열로 속성 경로를 지정하면 중첩된 속성도 추출할 수 있어요.
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+const users = [{ info: { name: 'John' } }, { info: { name: 'Jane' } }];
+map(users, 'info.name');
+// Returns: ['John', 'Jane']
+```
+
+객체를 전달하면 각 요소가 그 객체와 일치하는지 확인해요.
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 },
+];
+map(users, { age: 30 });
+// Returns: [true, false]
+```
+
+#### 파라미터
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 순회할 배열이나 객체예요.
+- `iteratee` (`function | string | object`, 선택): 각 요소에 대해 실행할 함수나 속성 경로, 또는 일치시킬 객체예요. 제공하지 않으면 각 요소를 그대로 반환해요.
+  - 함수인 경우 `(value, key, collection)` 형태로 호출돼요.
+  - 문자열인 경우 해당 속성을 추출해요.
+  - 객체인 경우 각 요소가 객체와 일치하는지 확인해요.
+
+#### 반환 값
+
+(`U[]`): 변환된 값들의 새로운 배열을 반환해요.

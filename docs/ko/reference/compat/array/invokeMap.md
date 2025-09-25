@@ -72,6 +72,6 @@ invokeMap(undefined, 'toString'); // []
 - `method` (`string | ((...args: any[]) => R)`): 호출할 메서드 이름이나 함수예요.
 - `...args` (`any[]`): 각 메서드 호출 시 전달할 추가 인자들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`Array<R | undefined>`): 각 메서드 호출 결과를 담은 새로운 배열을 반환해요.

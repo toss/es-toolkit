@@ -8,7 +8,7 @@
 
 :::
 
-배열을 한 단계 평면화해요.
+배열을 한 단계 평탄화해요.
 
 ```typescript
 const result = flatten(array, depth);
@@ -18,12 +18,12 @@ const result = flatten(array, depth);
 
 ### `flatten(value, depth)`
 
-중첩 배열을 지정된 깊이만큼 평면화해요. 기본적으로 한 단계만 평면화하며, Arguments 객체나 Symbol.isConcatSpreadable을 가진 객체도 지원해요.
+중첩 배열을 지정된 깊이만큼 평탄화해요. 기본적으로 한 단계만 평탄화하며, Arguments 객체나 Symbol.isConcatSpreadable을 가진 객체도 지원해요.
 
 ```typescript
 import { flatten } from 'es-toolkit/compat';
 
-// 기본 평면화 (한 단계)
+// 기본 평탄화 (한 단계)
 flatten([1, [2, [3, [4]], 5]]);
 // 결과: [1, 2, [3, [4]], 5]
 
@@ -49,7 +49,7 @@ flatten(undefined); // []
 flatten([]); // []
 ```
 
-Symbol.isConcatSpreadable을 가진 객체도 배열처럼 평면화돼요.
+Symbol.isConcatSpreadable을 가진 객체도 배열처럼 평탄화돼요.
 
 ```typescript
 import { flatten } from 'es-toolkit/compat';
@@ -61,9 +61,9 @@ flatten([1, spreadable, 3]);
 
 #### 파라미터
 
-- `value` (`ArrayLike<T> | null | undefined`): 평면화할 배열이에요.
-- `depth` (`number`, 선택): 평면화할 최대 깊이예요. 기본값은 `1`이에요.
+- `value` (`ArrayLike<T> | null | undefined`): 평탄화할 배열이에요.
+- `depth` (`number`, 선택): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
 
-### 반환 값
+#### 반환 값
 
-(`T[]`): 평면화된 새 배열을 반환해요.
+(`T[]`): 평탄화된 새 배열을 반환해요.

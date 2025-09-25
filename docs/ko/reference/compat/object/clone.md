@@ -50,7 +50,10 @@ const clonedRegex = clone(regex);
 // Returns: /hello/gi with lastIndex = 3
 
 // Map 복사
-const map = new Map([['a', 1], ['b', 2]]);
+const map = new Map([
+  ['a', 1],
+  ['b', 2],
+]);
 const clonedMap = clone(map);
 // Returns: new Map([['a', 1], ['b', 2]])
 
@@ -65,11 +68,11 @@ const clonedSet = clone(set);
 ```typescript
 import { clone } from 'es-toolkit/compat';
 
-const nested = { 
-  a: 1, 
-  b: { 
-    c: 2 
-  } 
+const nested = {
+  a: 1,
+  b: {
+    c: 2,
+  },
 };
 const clonedNested = clone(nested);
 
@@ -81,6 +84,6 @@ console.log(clonedNested.b === nested.b); // true (중첩 객체는 같은 참�
 
 - `value` (`T`): 복사할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T`): 복사된 값을 반환해요.

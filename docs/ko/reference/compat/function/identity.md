@@ -59,6 +59,6 @@ const filtered = values.filter(x => x);
 
 - `value` (`T`): 반환할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T`): 입력받은 값을 그대로 반환해요.

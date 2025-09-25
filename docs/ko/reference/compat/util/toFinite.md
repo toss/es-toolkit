@@ -50,6 +50,6 @@ toFinite(null);
 
 - `value` (`unknown`): 변환할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 변환된 유한한 숫자를 반환해요.

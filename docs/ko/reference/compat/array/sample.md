@@ -49,6 +49,6 @@ sample(undefined); // undefined
 
 - `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 샘플링할 배열이나 객체예요.
 
-### 반환 값
+#### 반환 값
 
 (`T | string | undefined`): 배열이나 객체에서 랜덤하게 선택된 요소를 반환해요. 컬렉션이 비어있거나 `null`, `undefined`면 `undefined`를 반환해요.

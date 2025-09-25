@@ -74,6 +74,6 @@ flatMapDepth(undefined, n => [n], 1); // => []
 - `iteratee` (`((value: T, index: number, collection: any) => any) | string | object`, 선택): 각 요소에 대해 실행할 변환 함수나 속성명이에요. 기본값은 `identity`예요.
 - `depth` (`number`, 선택): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): iteratee로 변환된 후 지정된 깊이까지 평탄화된 새 배열을 반환해요.

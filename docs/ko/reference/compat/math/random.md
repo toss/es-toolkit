@@ -94,6 +94,6 @@ random(5, 5, guard);
 - `index` (`string | number`): guard 객체에서 확인할 키예요.
 - `guard` (`object`): 파라미터를 검증하는 guard 객체예요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 지정된 범위 내의 랜덤한 숫자를 반환해요.

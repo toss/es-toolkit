@@ -83,6 +83,6 @@ countBy(undefined);
 - `collection` (`ArrayLike<T> | object | null | undefined`): 처리할 배열이나 객체예요.
 - `iteratee` (`ValueIteratee<T>`, 선택): 각 요소를 그룹화할 기준을 정하는 함수예요. 함수, 프로퍼티 이름, 또는 부분 객체를 사용할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`Record<string, number>`): 각 그룹의 키와 해당 그룹의 요소 개수를 가진 객체를 반환해요.

@@ -60,6 +60,6 @@ get(undefined, ['a', 'b'], 'default');
 - `path` (`PropertyPath`): 가져올 속성의 경로예요. 문자열, 숫자, 심볼, 또는 배열로 나타낼 수 있어요.
 - `defaultValue` (`any`, 선택): 값이 `undefined`일 때 반환할 기본값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`any`): 해결된 값이나 기본값을 반환해요.

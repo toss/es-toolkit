@@ -53,6 +53,6 @@ startsWith('test', null);
 - `target` (`string`, 선택): 시작 부분에 있는지 찾을 문자열이에요.
 - `position` (`number`, 선택): 검색을 시작할 위치예요. 기본값은 `0`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 문자열이 지정된 문자열로 시작하면 `true`, 아니면 `false`를 반환해요.

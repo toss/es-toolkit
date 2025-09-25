@@ -57,6 +57,6 @@ getUserName(obj); // => 'Mr. John'
 - `path` (`PropertyKey | PropertyKey[]`): 호출할 메서드의 경로예요.
 - `...args` (`any[]`): 메서드에 전달할 인자들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`(object: any) => any`): 객체를 받아서 지정된 경로의 메서드를 인자와 함께 호출하는 함수를 반환해요.

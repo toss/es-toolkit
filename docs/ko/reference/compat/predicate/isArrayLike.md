@@ -42,6 +42,6 @@ isArrayLike(123); // false
 
 - `value` (`any`): 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 값이 배열 같은 객체이면 `true`, 아니면 `false`를 반환해요.

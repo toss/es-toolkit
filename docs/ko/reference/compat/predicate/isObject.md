@@ -55,6 +55,6 @@ isObject(123);
 
 - `value` (`unknown`): 객체인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is object`): 값이 객체면 `true`, 아니면 `false`를 반환해요.

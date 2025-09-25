@@ -24,26 +24,23 @@ const anyValidator = overSome(predicates);
 import { overSome } from 'es-toolkit/compat';
 
 // 문자열이나 숫자인지 확인해요
-const isStringOrNumber = overSome([
-  (value) => typeof value === 'string',
-  (value) => typeof value === 'number'
-]);
+const isStringOrNumber = overSome([value => typeof value === 'string', value => typeof value === 'number']);
 
 isStringOrNumber('hello'); // => true
-isStringOrNumber(42);      // => true
-isStringOrNumber(true);    // => false
+isStringOrNumber(42); // => true
+isStringOrNumber(true); // => false
 
 // 여러 조건 중 하나라도 만족하는지 확인해요
 const hasValidProperty = overSome([
-  (obj) => obj.name && obj.name.length > 0,
-  (obj) => obj.email && obj.email.includes('@'),
-  (obj) => obj.phone && obj.phone.length >= 10
+  obj => obj.name && obj.name.length > 0,
+  obj => obj.email && obj.email.includes('@'),
+  obj => obj.phone && obj.phone.length >= 10,
 ]);
 
-hasValidProperty({ name: 'John' });                    // => true
-hasValidProperty({ email: 'john@example.com' });       // => true
-hasValidProperty({ phone: '1234567890' });             // => true
-hasValidProperty({ age: 30 });                         // => false
+hasValidProperty({ name: 'John' }); // => true
+hasValidProperty({ email: 'john@example.com' }); // => true
+hasValidProperty({ phone: '1234567890' }); // => true
+hasValidProperty({ age: 30 }); // => false
 ```
 
 객체 속성도 검사할 수 있어요.
@@ -53,14 +50,14 @@ import { overSome } from 'es-toolkit/compat';
 
 // 여러 조건 중 하나라도 매칭되는지 확인해요
 const matchesAnyCondition = overSome([
-  'isActive',         // isActive 속성이 참으로 평가되는지
-  { role: 'admin' },  // role이 'admin'인지
-  ['status', 'vip']   // status가 'vip'인지
+  'isActive', // isActive 속성이 참으로 평가되는지
+  { role: 'admin' }, // role이 'admin'인지
+  ['status', 'vip'], // status가 'vip'인지
 ]);
 
-matchesAnyCondition({ isActive: true });                 // => true
-matchesAnyCondition({ role: 'admin' });                  // => true
-matchesAnyCondition({ status: 'vip' });                  // => true
+matchesAnyCondition({ isActive: true }); // => true
+matchesAnyCondition({ role: 'admin' }); // => true
+matchesAnyCondition({ status: 'vip' }); // => true
 matchesAnyCondition({ role: 'user', status: 'normal' }); // => false
 ```
 
@@ -68,6 +65,6 @@ matchesAnyCondition({ role: 'user', status: 'normal' }); // => false
 
 - `...predicates` (`Array<Function | string | object | Array>`): 검사할 조건 함수들이에요. 함수, 속성 이름, 객체, 속성-값 쌍 등이 될 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`(...args: any[]) => boolean`): 조건 중 하나라도 만족하면 `true`, 모두 만족하지 않으면 `false`를 반환하는 함수를 반환해요.

@@ -69,6 +69,6 @@ isMatchWith({ user: { id: 123, status: 'active' } }, { user: { special: 123 }, s
 - `source` (`unknown`): 일치 패턴이 되는 객체예요.
 - `customizer` (`function`, 선택): 비교 로직을 커스터마이징하는 함수예요. `true`, `false`, 또는 `undefined`를 반환해야 해요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): target이 source에 커스텀 로직으로 부분적으로 일치하면 `true`, 아니면 `false`를 반환해요.

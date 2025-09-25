@@ -66,6 +66,6 @@ takeRightWhile(undefined, x => x > 0); // []
 - `array` (`ArrayLike<T> | null | undefined`): 처리할 배열이에요.
 - `predicate` (`ListIteratee<T>`, 선택): 각 요소에 대해 실행할 조건이에요. 함수, 부분 객체, 속성-값 배열, 속성명을 사용할 수 있어요. 기본값은 항등 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 조건을 만족하는 동안 배열의 뒤에서부터 가져온 요소들의 새로운 배열을 반환해요.

@@ -55,6 +55,6 @@ const result3 = assignWith(target3, { b: 2 }, { c: 3 }, (objValue, srcValue) => 
 - `...sources` (`any[]`): 속성을 복사할 소스 객체들이에요.
 - `customizer` (`function`): 할당할 값을 결정하는 함수예요. `(objValue, srcValue, key, object, source) => any` 형태예요.
 
-### 반환 값
+#### 반환 값
 
 (`any`): 커스터마이저 함수에 의해 결정된 값들이 할당된 대상 객체를 반환해요.

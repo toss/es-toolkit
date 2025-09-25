@@ -50,6 +50,6 @@ sortedLastIndex(undefined, 1); // 0
 - `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 정렬되지 않은 배열을 사용하면 잘못된 결과를 얻을 수 있어요.
 - `value` (`T`): 삽입할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 값을 삽입할 가장 높은 인덱스를 반환해요. 배열이 `null`이나 `undefined`면 0을 반환해요.

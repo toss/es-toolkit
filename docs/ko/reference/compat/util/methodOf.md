@@ -66,6 +66,6 @@ userFinder('users.findByName'); // => 'Found john'
 - `object` (`object`): 메서드를 호출할 객체예요.
 - `...args` (`any[]`): 메서드에 전달할 인자들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`(path: PropertyKey | PropertyKey[]) => any`): 경로를 받아서 지정된 객체의 메서드를 인자와 함께 호출하는 함수를 반환해요.

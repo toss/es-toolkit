@@ -53,6 +53,6 @@ eachRight([1, 2, 3, 4], value => {
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요.
 - `iteratee` (`(item: any, index: any, collection: any) => unknown`, 선택): 각 요소에 대해 실행할 함수예요. 기본값은 `identity` 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 원본 컬렉션을 반환해요.

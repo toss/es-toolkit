@@ -31,7 +31,7 @@ every(numbers, x => x % 2 === 0);
 // 프로퍼티 이름 사용
 const users = [
   { name: 'Alice', active: true },
-  { name: 'Bob', active: true }
+  { name: 'Bob', active: true },
 ];
 every(users, 'active');
 // Returns: true
@@ -72,6 +72,6 @@ every(undefined);
 - `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 검사할 배열이나 객체예요.
 - `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 검사 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요. 기본값은 `identity` 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 모든 요소가 조건을 만족하면 `true`, 그렇지 않으면 `false`를 반환해요.

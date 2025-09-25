@@ -58,6 +58,6 @@ takeRight(undefined, 2); // []
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 가져올 배열이에요.
 - `count` (`number`, 선택): 가져올 요소의 개수예요. 기본값은 `1`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 뒤에서부터 지정된 개수만큼의 요소를 포함하는 새로운 배열을 반환해요.

@@ -57,6 +57,6 @@ isNil(undefined); // true
 
 - `x` (`any`): `null` 또는 `undefined`인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`x is null | undefined`): 값이 `null` 또는 `undefined`이면 `true`, 아니면 `false`를 반환해요.

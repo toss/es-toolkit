@@ -56,11 +56,10 @@ console.log(inputId); // => 'input_6'
 console.log(labelId); // => 'label_7'
 ```
 
-
 #### 파라미터
 
 - `prefix` (`string`, 선택): ID 앞에 붙는 접두사 문자열. 제공하지 않으면 숫자만 반환해요.
 
-### 반환 값
+#### 반환 값
 
 (`string`): 고유 식별자 문자열. 접두사가 있으면 `접두사 + 번호` 형태, 없으면 번호만 반환해요.

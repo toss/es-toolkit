@@ -87,6 +87,6 @@ greet('김철수', '선생'); // "안녕하세요, 김철수선생!"
 
 - `x` (`any`): `undefined`인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`x is undefined`): 값이 `undefined`이면 `true`, 아니면 `false`를 반환해요.

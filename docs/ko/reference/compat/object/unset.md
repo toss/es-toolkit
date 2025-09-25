@@ -25,7 +25,7 @@ function unset(obj: unknown, path: PropertyKey | PropertyKey[]): boolean;
 - `obj` (`unknown`): 수정할 객체예요.
 - `path` (`PropertyKey | PropertyKey[]`): 제거할 속성의 경로예요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 속성이 삭제되면 true를 반환하고, 그렇지 않으면 false를 반환해요.
 문자열.

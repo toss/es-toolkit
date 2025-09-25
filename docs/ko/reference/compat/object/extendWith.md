@@ -46,12 +46,7 @@ extendWith(obj1, obj2, (objValue, srcValue) => {
 ```typescript
 import { extendWith } from 'es-toolkit/compat';
 
-extendWith(
-  { a: 1 },
-  { b: 2 },
-  { c: 3 },
-  (objValue, srcValue) => srcValue * 2
-);
+extendWith({ a: 1 }, { b: 2 }, { c: 3 }, (objValue, srcValue) => srcValue * 2);
 // 반환값: { a: 1, b: 4, c: 6 }
 ```
 
@@ -61,6 +56,6 @@ extendWith(
 - `...sources` (`any[]`): 속성을 제공하는 소스 객체들이에요.
 - `customizer` (`function`): 각 속성에 대해 할당할 값을 결정하는 함수예요. `(objValue, srcValue, key, object, source)`를 받아요.
 
-### 반환 값
+#### 반환 값
 
 (`any`): 속성이 복사된 객체를 반환해요. 첫 번째 인수인 `object`가 수정돼요.

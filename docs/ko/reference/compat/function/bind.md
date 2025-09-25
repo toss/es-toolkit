@@ -40,6 +40,7 @@ console.log(boundGreet('~')); // "안녕하세요 김철수~"
 ```typescript
 // bind 사용
 import { bind } from 'es-toolkit/compat';
+
 const boundFn1 = bind(func, thisObj, 'arg1');
 
 // 네이티브 bind 사용 (더 빠름)
@@ -59,12 +60,12 @@ function calculate(operation, a, b, suffix) {
 
 // placeholder로 특정 위치의 인수를 나중에 제공
 const calcWithSuffix = bind(
-  calculate, 
-  null, 
-  bind.placeholder,  // operation은 나중에 제공
-  bind.placeholder,  // a는 나중에 제공
-  bind.placeholder,  // b는 나중에 제공
-  '점'               // suffix는 미리 제공
+  calculate,
+  null,
+  bind.placeholder, // operation은 나중에 제공
+  bind.placeholder, // a는 나중에 제공
+  bind.placeholder, // b는 나중에 제공
+  '점' // suffix는 미리 제공
 );
 
 console.log(calcWithSuffix('+', 5, 3)); // "5 + 3 = 8점"
@@ -86,17 +87,17 @@ function apiRequest(method, url, options, callback) {
 const postRequest = bind(
   apiRequest,
   null,
-  'POST',              // method 고정
-  bind.placeholder,    // url은 나중에 제공
+  'POST', // method 고정
+  bind.placeholder, // url은 나중에 제공
   { 'Content-Type': 'application/json' }, // options 고정
-  bind.placeholder     // callback은 나중에 제공
+  bind.placeholder // callback은 나중에 제공
 );
 
-postRequest('/api/users', (result) => {
+postRequest('/api/users', result => {
   console.log(result); // "POST 요청 완료"
 });
 
-postRequest('/api/products', (result) => {
+postRequest('/api/products', result => {
   console.log(result); // "POST 요청 완료"
 });
 ```
@@ -110,7 +111,7 @@ class Logger {
   constructor(prefix) {
     this.prefix = prefix;
   }
-  
+
   log(level, message) {
     console.log(`[${this.prefix}] ${level}: ${message}`);
   }
@@ -137,7 +138,7 @@ class ButtonHandler {
     this.name = name;
     this.clickCount = 0;
   }
-  
+
   handleClick(event, customData) {
     this.clickCount++;
     console.log(`${this.name} 버튼 클릭 #${this.clickCount}`);
@@ -150,10 +151,10 @@ const handler = new ButtonHandler('메뉴');
 
 // 커스텀 데이터는 미리 제공하고, 이벤트는 나중에 전달
 const boundHandler = bind(
-  handler.handleClick, 
-  handler, 
+  handler.handleClick,
+  handler,
   bind.placeholder, // event는 나중에
-  '메뉴 선택됨'      // customData는 미리 제공
+  '메뉴 선택됨' // customData는 미리 제공
 );
 
 // DOM 이벤트에 연결 (event가 자동으로 첫 번째 인수로 전달됨)
@@ -205,6 +206,6 @@ const problematic = ['1', '2', '3'].map(parseInt); // [1, NaN, NaN]
 - `thisObj` (`any`, 선택): 함수에 바인딩할 `this` 값이에요.
 - `partialArgs` (`...any[]`): 미리 제공할 인수들이에요. `bind.placeholder`를 사용해서 나중에 제공할 위치를 지정할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`Function`): `this`가 고정되고 일부 인수가 미리 적용된 새로운 함수를 반환해요.

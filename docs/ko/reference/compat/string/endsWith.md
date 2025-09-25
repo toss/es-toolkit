@@ -27,7 +27,7 @@ import { endsWith } from 'es-toolkit/compat';
 endsWith('fooBar', 'Bar');
 // Returns: true
 
-endsWith('fooBar', 'foo'); 
+endsWith('fooBar', 'foo');
 // Returns: false
 
 // 특정 위치까지만 확인
@@ -53,6 +53,6 @@ endsWith('test', null);
 - `target` (`string`, 선택): 끝에 있는지 찾을 문자열이에요.
 - `position` (`number`, 선택): 검색을 끝낼 위치예요. 기본값은 문자열 전체 길이예요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 문자열이 지정된 문자열로 끝나면 `true`, 아니면 `false`를 반환해요.

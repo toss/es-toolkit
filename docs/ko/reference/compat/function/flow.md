@@ -84,6 +84,6 @@ const chainedResult = new Calculator(3).square().double().valueOf(); // 18
 
 - `...functions` (`Array<Function | Function[]>`): 왼쪽부터 오른쪽으로 실행할 함수들이에요. 배열로 전달할 수도 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`Function`): 모든 함수를 왼쪽부터 오른쪽으로 순차적으로 실행하는 새로운 합성 함수를 반환해요.

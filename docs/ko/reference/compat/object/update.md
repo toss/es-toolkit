@@ -30,7 +30,7 @@ function update<T extends object | null | undefined>(
 - `path` (`PropertyKey | readonly PropertyKey[]`): 업데이트할 속성의 경로.
 - `updater` (`(value: unknown) => unknown`): 업데이트된 값을 생성하는 함수.
 
-### 반환 값
+#### 반환 값
 
 (`T`): 수정된 객체.
 

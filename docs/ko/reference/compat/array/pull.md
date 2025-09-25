@@ -39,6 +39,6 @@ console.log(fruits); // ['banana', 'cherry']
 - `array` (`T[]`): 수정할 배열이에요.
 - `...valuesToRemove` (`T[]`): 배열에서 제거할 값들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 수정된 원본 배열을 반환해요.

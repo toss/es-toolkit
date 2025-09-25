@@ -74,6 +74,6 @@ const byName = groupBy(products, ['name', 'apple']);
 - `collection` (`ArrayLike<T> | Record<any, T> | null | undefined`): 그룹으로 나눌 배열이나 객체예요.
 - `iteratee` (`Function | PropertyKey | Array | Object`, 선택): 그룹을 나누는 조건이에요. 함수, 프로퍼티 이름, 프로퍼티-값 쌍, 또는 부분 객체일 수 있어요. 기본값은 `identity` 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`Record<string, T[]>`): 각 키가 그룹의 조건값이고, 값이 해당 그룹에 속하는 요소들의 배열인 객체를 반환해요.

@@ -1,13 +1,5 @@
 # pullAllWith (Lodash 호환성)
 
-::: warning `es-toolkit`의 `differenceWith`를 사용하세요
-
-이 `pullAllWith` 함수는 배열을 변경하고 복잡한 비교 함수 처리로 인해 느리게 동작해요.
-
-대신 더 빠르고 현대적인 `es-toolkit`의 [differenceWith](../../array/differenceWith.md)를 사용하세요.
-
-:::
-
 비교 함수를 사용해서 지정된 값들을 배열에서 제거해요.
 
 ```typescript
@@ -24,7 +16,11 @@ const modified = pullAllWith(array, valuesToRemove, comparator);
 import { pullAllWith } from 'es-toolkit/compat';
 
 // 객체 비교로 제거해요
-const array = [{ x: 1, y: 2 }, { x: 3, y: 4 }, { x: 5, y: 6 }];
+const array = [
+  { x: 1, y: 2 },
+  { x: 3, y: 4 },
+  { x: 5, y: 6 },
+];
 pullAllWith(array, [{ x: 3, y: 4 }], (a, b) => a.x === b.x && a.y === b.y);
 console.log(array); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
 
@@ -49,6 +45,6 @@ pullAllWith(null as any, [1], (a, b) => a === b); // null
 - `values` (`ArrayLike<T>`, 선택): 제거할 값들의 배열이에요.
 - `comparator` (`(a: T, b: T) => boolean`, 선택): 두 요소를 비교하는 함수예요. 두 요소가 같다고 판단되면 `true`를 반환해야 해요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 지정된 값들이 제거된 원본 배열을 반환해요.

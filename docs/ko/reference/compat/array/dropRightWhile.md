@@ -27,7 +27,7 @@ import { dropRightWhile } from 'es-toolkit/compat';
 const users = [
   { user: 'barney', active: true },
   { user: 'fred', active: false },
-  { user: 'pebbles', active: false }
+  { user: 'pebbles', active: false },
 ];
 
 dropRightWhile(users, user => !user.active);
@@ -60,6 +60,6 @@ dropRightWhile(undefined, x => x > 0); // []
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 제거할 배열이에요.
 - `predicate` (`ListIteratee<T>`, 선택): 각 요소에 적용할 조건 함수예요. 함수, 객체 패턴, 배열 패턴, 또는 속성 이름을 받을 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 조건을 만족하지 않는 첫 번째 요소부터의 새로운 배열을 반환해요.

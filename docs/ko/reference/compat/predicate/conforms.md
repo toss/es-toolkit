@@ -53,6 +53,6 @@ const filteredUsers = users.filter(adultHighScorer);
 
 - `source` (`Record<PropertyKey, (value: any) => boolean>`): 프로퍼티별 조건 함수들을 가진 객체예요.
 
-### 반환 값
+#### 반환 값
 
 (`(object: Record<PropertyKey, any>) => boolean`): 주어진 객체가 모든 조건을 만족하는지 확인하는 함수를 반환해요.

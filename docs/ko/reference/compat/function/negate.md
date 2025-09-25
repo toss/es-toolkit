@@ -60,6 +60,6 @@ console.log(validMessages); // ['hello', 'world']
 
 - `predicate` (`Function`): 결과를 부정할 함수예요. 반드시 불리언 값을 반환해야 해요.
 
-### 반환 값
+#### 반환 값
 
 (`Function`): 원본 함수의 결과를 부정한 값을 반환하는 새로운 함수를 반환해요.

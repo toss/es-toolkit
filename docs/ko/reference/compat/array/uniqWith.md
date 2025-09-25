@@ -55,6 +55,6 @@ uniqWith(undefined); // []
 - `array` (`ArrayLike<T> | null | undefined`): 중복을 제거할 배열이에요.
 - `comparator` (`(a: T, b: T) => boolean`, 선택): 두 요소가 같은지 비교할 함수예요. `true`를 반환하면 같다고 판단해요. 기본값은 얕은 동등성 비교예요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 비교 함수 결과를 기준으로 중복이 제거된 새 배열을 반환해요.

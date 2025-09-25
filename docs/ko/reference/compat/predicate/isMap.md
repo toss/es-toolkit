@@ -58,6 +58,6 @@ isMap(Object.create(null)); // false
 
 - `value` (`unknown`): Map인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is Map<any, any>`): 값이 Map이면 `true`, 아니면 `false`를 반환해요.

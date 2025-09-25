@@ -72,6 +72,6 @@ invertBy(undefined);
 - `object` (`object`): 뒤바꿀 객체예요.
 - `iteratee` (`ValueIteratee`, 선택): 값을 변환하는 함수예요. 기본값은 값 자체를 그대로 사용하는 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`Record<string, string[]>`): 변환된 값들을 키로 하고, 원래 키들의 배열을 값으로 하는 새로운 객체를 반환해요.

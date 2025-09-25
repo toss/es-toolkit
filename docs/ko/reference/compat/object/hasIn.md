@@ -54,11 +54,11 @@ import { hasIn } from 'es-toolkit/compat';
 
 // 프로토타입 체인의 속성 확인
 function Rectangle() {}
-Rectangle.prototype.area = function() {};
+Rectangle.prototype.area = function () {};
 
 const rect = new Rectangle();
-hasIn(rect, 'area');  // true - 상속된 속성도 찾음
-has(rect, 'area');    // false - has는 자체 속성만 확인
+hasIn(rect, 'area'); // true - 상속된 속성도 찾음
+has(rect, 'area'); // false - has는 자체 속성만 확인
 ```
 
 `null`이나 `undefined`를 안전하게 처리해요.
@@ -78,6 +78,6 @@ hasIn(undefined, 'b');
 - `object` (`any`): 검사할 객체예요.
 - `path` (`PropertyPath`): 확인할 속성의 경로예요. 문자열, 숫자, 심볼, 또는 배열로 나타낼 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 경로의 속성이 존재하면(자체 속성이든 상속된 속성이든) `true`, 그렇지 않으면 `false`를 반환해요.

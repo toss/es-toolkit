@@ -89,6 +89,6 @@ sortBy(undefined, ['key']); // []
 - `collection` (`ArrayLike<T> | object | null | undefined`): 정렬할 배열이나 객체예요.
 - `...iteratees` (`Array<Many<ListIteratee<T> | ObjectIteratee<T>>>`): 정렬 기준을 정하는 함수들이나 속성 이름들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 오름차순으로 정렬된 새로운 배열을 반환해요.

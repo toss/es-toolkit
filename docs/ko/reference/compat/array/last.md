@@ -74,6 +74,6 @@ last('hello');
 
 - `array` (`ArrayLike<T> | null | undefined`): 마지막 요소를 가져올 배열이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T | undefined`): 배열의 마지막 요소를 반환하고, 배열이 비어있거나 `null`, `undefined`이면 `undefined`를 반환해요.

@@ -89,6 +89,6 @@ difference(arrayLike1, arrayLike2);
 - `arr` (`ArrayLike<T> | null | undefined`): 차집합을 구할 기준 배열이에요.
 - `values` (`...ArrayLike<T>[]`): 제외할 값들을 포함한 배열들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 첫 번째 배열에서 다른 배열들의 값들을 제외한 새 배열을 반환해요.

@@ -68,6 +68,6 @@ toPairs(undefined);
 
 - `object` (`object`): 변환할 객체, Map, 또는 Set이에요.
 
-### 반환 값
+#### 반환 값
 
 (`Array<[string, any]>`): 키-값 쌍들의 배열을 반환해요.

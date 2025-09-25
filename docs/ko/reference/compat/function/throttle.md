@@ -30,8 +30,8 @@ const throttledLog = throttle(() => {
 
 // 옵션을 사용한 예시
 const throttledScroll = throttle(handleScroll, 100, {
-  leading: true,  // 처음에 바로 실행
-  trailing: false // 마지막에 실행하지 않음
+  leading: true, // 처음에 바로 실행
+  trailing: false, // 마지막에 실행하지 않음
 });
 
 window.addEventListener('scroll', throttledScroll);
@@ -47,6 +47,6 @@ window.addEventListener('scroll', throttledScroll);
   - `leading` (`boolean`): 첫 번째 호출에서 바로 실행할지 여부예요. 기본값은 `true`예요.
   - `trailing` (`boolean`): 마지막 호출 후에 실행할지 여부예요. 기본값은 `true`예요.
 
-### 반환 값
+#### 반환 값
 
 (`DebouncedFunc`): 스로틀링된 함수를 반환해요. `cancel()` 메소드로 대기 중인 실행을 취소할 수 있어요.

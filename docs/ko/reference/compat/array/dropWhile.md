@@ -31,7 +31,7 @@ dropWhile([1, 2, 3, 4, 5], n => n < 3);
 const users = [
   { name: 'alice', active: false },
   { name: 'bob', active: false },
-  { name: 'charlie', active: true }
+  { name: 'charlie', active: true },
 ];
 
 dropWhile(users, { active: false });
@@ -42,11 +42,7 @@ dropWhile(users, ['active', false]);
 // Returns: [{ name: 'charlie', active: true }]
 
 // 속성 이름으로 조건을 확인해요.
-const items = [
-  { visible: false },
-  { visible: false },
-  { visible: true }
-];
+const items = [{ visible: false }, { visible: false }, { visible: true }];
 
 dropWhile(items, 'visible');
 // Returns: [{ visible: false }, { visible: false }, { visible: true }]
@@ -66,6 +62,6 @@ dropWhile(undefined, x => x > 0); // []
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 제거할 배열이에요.
 - `predicate` (`ListIteratee<T>`, 선택): 각 요소에 적용할 조건 함수예요. 함수, 객체 패턴, 배열 패턴, 또는 속성 이름을 받을 수 있어요. 기본값은 `identity`예요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 조건을 만족하지 않는 첫 번째 요소부터의 새로운 배열을 반환해요.

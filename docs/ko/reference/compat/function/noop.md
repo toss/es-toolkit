@@ -1,8 +1,8 @@
 # noop (Lodash 호환성)
 
-::: warning 빈 화살표 함수를 사용하세요
+::: warning `es-toolkit`의 `noop`을 사용하세요
 
-이 `noop` 함수는 단순히 아무것도 하지 않는 함수이에요. 대부분의 경우 더 간단한 빈 화살표 함수로 대체할 수 있어요.
+`es-toolkit`에도 동일한 동작을 하는 [noop](../../function/noop.md) 함수가 있어요.
 
 :::
 
@@ -55,6 +55,6 @@ function processDataOptional(data, callback) {
 
 - `...args` (`any[]`): 어떤 인수들이든 받을 수 있지만 모두 무시돼요.
 
-### 반환 값
+#### 반환 값
 
 (`void`): 아무것도 반환하지 않아요.

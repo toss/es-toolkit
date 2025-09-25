@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit`의 [pullAt](../../array/pullAt.md)을 사용하세요
 
-이 `pullAt` 함수는 Lodash의 호환성을 위한 함수로, 더 복잡한 타입 처리와 오버로딩으로 인해 느리게 동작해요.
+이 `pullAt` 함수는 복잡한 타입 처리와 오버로딩으로 인해 느리게 동작해요.
 
 대신 더 빠르고 현대적인 `es-toolkit`의 [pullAt](../../array/pullAt.md)을 사용하세요.
 
@@ -52,6 +52,6 @@ console.log(removed); // [20, undefined]
 - `array` (`ArrayLike<T>`): 변경할 배열이에요.
 - `...indexes` (`Array<number | number[]>`): 제거할 요소들의 인덱스예요. 개별 숫자나 숫자 배열로 전달할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`ArrayLike<T>`): 제거된 요소들의 배열을 반환해요.

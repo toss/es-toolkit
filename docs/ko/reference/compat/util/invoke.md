@@ -27,8 +27,8 @@ const object = {
   a: {
     b: function (x, y) {
       return x + y;
-    }
-  }
+    },
+  },
 };
 
 // 점 표기법으로 경로 지정
@@ -46,13 +46,13 @@ invoke(object, 'a.c.d', [1, 2]);
 // 다양한 타입의 인자들
 const obj = {
   calculate: {
-    sum: function(...numbers) {
+    sum: function (...numbers) {
       return numbers.reduce((a, b) => a + b, 0);
     },
-    multiply: function(a, b) {
+    multiply: function (a, b) {
       return a * b;
-    }
-  }
+    },
+  },
 };
 
 invoke(obj, 'calculate.sum', [1, 2, 3, 4]);
@@ -68,6 +68,6 @@ invoke(obj, ['calculate', 'multiply'], [5, 6]);
 - `path` (`PropertyKey | PropertyKey[]`): 호출할 메서드의 경로예요. 문자열, 심볼, 숫자나 이들의 배열이 될 수 있어요.
 - `args` (`any[]`): 메서드를 호출할 때 사용할 인수 배열이에요.
 
-### 반환 값
+#### 반환 값
 
 (`any`): 호출된 메서드의 결과를 반환해요. 메서드가 존재하지 않으면 `undefined`를 반환해요.

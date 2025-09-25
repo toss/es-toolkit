@@ -94,6 +94,6 @@ import { rangeRight } from 'es-toolkit/compat';
 - `end` (`number`, 선택): 범위의 끝값이에요 (포함되지 않음).
 - `step` (`number`, 선택): 증가폭이에요. 기본값은 1 또는 -1이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number[]`): 지정된 범위의 숫자 배열을 역순으로 반환해요.

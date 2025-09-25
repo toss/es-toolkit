@@ -111,6 +111,6 @@ function trackDOMElement(tracker: unknown, element: Element) {
 
 - `value` (`unknown`): WeakSet인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is WeakSet<object>`): 값이 WeakSet이면 `true`, 아니면 `false`를 반환해요.

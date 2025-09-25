@@ -87,6 +87,6 @@ console.log(1 / toSafeInteger(-0)); // => -Infinity
 
 - `value` (`unknown`): 변환할 값. 어떤 타입이든 받을 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 변환된 안전한 정수. `Number.MIN_SAFE_INTEGER`와 `Number.MAX_SAFE_INTEGER` 범위 내의 정수 값이에요.

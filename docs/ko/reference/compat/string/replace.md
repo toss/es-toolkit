@@ -38,11 +38,11 @@ replace('abcde', /[bd]/g, '-');
 import { replace } from 'es-toolkit/compat';
 
 // 함수로 교체 내용 결정
-replace('abcde', 'de', (match) => match.toUpperCase());
+replace('abcde', 'de', match => match.toUpperCase());
 // Returns: 'abcDE'
 
 // 정규식과 함수 조합
-replace('abcde', /[bd]/g, (match) => match.toUpperCase());
+replace('abcde', /[bd]/g, match => match.toUpperCase());
 // Returns: 'aBcDe'
 ```
 
@@ -64,6 +64,6 @@ replace(undefined, /test/g, 'replaced');
 - `pattern` (`string | RegExp`): 찾을 패턴이에요.
 - `replacement` (`string | Function`): 교체할 내용이에요. 함수인 경우 매치된 문자열을 받아서 교체할 문자열을 반환해야 해요.
 
-### 반환 값
+#### 반환 값
 
 (`string`): 패턴이 교체된 새로운 문자열을 반환해요.

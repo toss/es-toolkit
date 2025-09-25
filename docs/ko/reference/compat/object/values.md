@@ -26,7 +26,7 @@ function values<T extends object>(object: T | null | undefined): Array<T[keyof T
 
 - `object` (`Record<PropertyKey, T> | ArrayLike<T>`): 프로퍼티 값들을 구할 객체.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 프로퍼티 값의 배열.
 

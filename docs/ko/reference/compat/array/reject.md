@@ -4,11 +4,11 @@
 
 이 `reject` 함수는 Lodash와의 호환성을 위해 여러 형태의 predicate를 지원하므로 복잡하게 구현되어 있어요. 간단한 함수 predicate를 사용하는 경우에는 `Array.filter()`가 더 간단하고 빠르게 동작해요.
 
-대신 더 빠르고 현대적인 `Array.filter()`를 사용하세요.
+대신 더 빠르고 현대적인 `Array.filter()`를 사용하세요. 예를 들어, `reject(arr, func)` 는 `arr.filter(item => !func(item))`으로 바꿔쓸 수 있어요.
 
 :::
 
-컬렉션을 순회하며 predicate에 맞지 않는 요소들을 새 배열로 반환해요.
+컬렉션을 순회하며 조건 함수에 맞지 않는 요소들을 새 배열로 반환해요.
 
 ```typescript
 const filtered = reject(collection, predicate);
@@ -63,6 +63,6 @@ reject(users, 'premium');
 - `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요.
 - `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 각 요소에 대해 실행할 조건이에요. 기본값은 `identity`예요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): predicate 조건에 맞지 않는 요소들로 구성된 새 배열을 반환해요.

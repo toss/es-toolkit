@@ -77,6 +77,6 @@ orderBy(undefined, 'age'); // []
 - `criteria` (`Criterion<T> | Array<Criterion<T>>`, 선택): 정렬 기준이에요. 속성 이름, 속성 경로, 함수 등을 사용할 수 있어요. 기본값은 `[null]`이에요.
 - `orders` (`unknown | unknown[]`, 선택): 각 기준의 정렬 순서예요. `'asc'`(오름차순), `'desc'`(내림차순), `true`(오름차순), `false`(내림차순)를 사용할 수 있어요. 기본값은 `[]`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 정렬된 새로운 배열을 반환해요.

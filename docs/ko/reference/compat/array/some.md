@@ -59,6 +59,6 @@ some(null); // false (빈 배열로 처리됨)
 - `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 확인할 배열이나 객체예요.
 - `predicate` (선택): 조건을 확인할 함수, 부분 객체, 속성-값 쌍, 또는 속성 이름이에요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 조건을 만족하는 요소가 하나라도 있으면 `true`, 없으면 `false`를 반환해요.

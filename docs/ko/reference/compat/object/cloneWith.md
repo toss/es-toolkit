@@ -30,7 +30,7 @@ const cloned = cloneWith(obj);
 
 // 숫자 값 변환
 const obj2 = { a: 1, b: 2, c: 'text' };
-const cloned2 = cloneWith(obj2, (value) => {
+const cloned2 = cloneWith(obj2, value => {
   if (typeof value === 'number') {
     return value * 2;
   }
@@ -40,7 +40,7 @@ const cloned2 = cloneWith(obj2, (value) => {
 
 // 배열 요소 변환
 const arr = [1, 2, 3];
-const clonedArr = cloneWith(arr, (value) => {
+const clonedArr = cloneWith(arr, value => {
   if (typeof value === 'number') {
     return value + 10;
   }
@@ -51,9 +51,9 @@ const clonedArr = cloneWith(arr, (value) => {
 const complex = {
   date: new Date('2023-01-01'),
   number: 42,
-  text: 'hello'
+  text: 'hello',
 };
-const clonedComplex = cloneWith(complex, (value) => {
+const clonedComplex = cloneWith(complex, value => {
   if (value instanceof Date) {
     // Date를 ISO 문자열로 변환
     return value.toISOString();
@@ -72,7 +72,7 @@ const clonedComplex = cloneWith(complex, (value) => {
 import { cloneWith } from 'es-toolkit/compat';
 
 const obj = { a: 1, b: { c: 2 } };
-const cloned = cloneWith(obj, (value) => {
+const cloned = cloneWith(obj, value => {
   // 모든 값에 대해 undefined 반환 = 기본 복사
   return undefined;
 });
@@ -84,6 +84,6 @@ const cloned = cloneWith(obj, (value) => {
 - `value` (`T`): 복사할 값이에요.
 - `customizer` (`function`, 선택적): 복사 방식을 결정하는 함수예요. `(value: any) => any` 형태예요.
 
-### 반환 값
+#### 반환 값
 
 (`T`): 커스터마이저에 의해 처리된 얕은 복사본을 반환해요.

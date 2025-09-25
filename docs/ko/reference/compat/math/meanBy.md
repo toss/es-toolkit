@@ -98,6 +98,6 @@ meanBy(undefined);
 - `array` (`ArrayLike<T> | null | undefined`): 처리할 배열이에요.
 - `iteratee` (`ValueIteratee<T>`, 선택): 각 요소에 적용할 함수, 속성명, 또는 조건이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 조건에 맞는 값들의 평균을 반환해요. 빈 배열이면 `NaN`을 반환해요.

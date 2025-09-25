@@ -42,6 +42,6 @@ isError(undefined); // false
 
 - `value` (`unknown`): Error 객체인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is Error`): 값이 Error 객체이면 `true`, 아니면 `false`를 반환해요.

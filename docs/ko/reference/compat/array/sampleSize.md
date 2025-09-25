@@ -49,6 +49,6 @@ sampleSize(undefined, 2);
 - `collection` (`Record<string, T> | Record<number, T> | T | null | undefined`): 샘플링할 배열이나 객체예요.
 - `size` (`number`, 선택): 선택할 요소의 개수예요. 기본값은 `1`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 무작위로 선택된 요소들로 구성된 새로운 배열을 반환해요.

@@ -60,6 +60,6 @@ initial(undefined); // []
 
 - `array` (`ArrayLike<T> | null | undefined`): 마지막 요소를 제외할 배열이나 배열 형태 객체예요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 마지막 요소를 제외한 새 배열을 반환해요.

@@ -32,7 +32,10 @@ toArray('abc');
 // Returns: ['a', 'b', 'c']
 
 // Map을 값들의 배열로 변환
-const map = new Map([['a', 1], ['b', 2]]);
+const map = new Map([
+  ['a', 1],
+  ['b', 2],
+]);
 toArray(map);
 // Returns: [['a', 1], ['b', 2]]
 ```
@@ -53,6 +56,6 @@ toArray(undefined);
 
 - `value` (`unknown`): 배열로 변환할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`any[]`): 변환된 배열을 반환해요.

@@ -59,6 +59,6 @@ intersectionWith([1, 2], undefined, (a, b) => a === b); // []
 - `...otherArrays` (`Array<ArrayLike<U> | ((a: T, b: T | U) => boolean)>`): 비교할 나머지 배열들과 마지막 요소로 비교 함수예요.
 - `comparator` (`(a: T, b: T | U) => boolean`): 두 요소가 같은지 판단하는 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 모든 배열에서 공통으로 찾은 요소들의 새로운 배열을 반환해요.

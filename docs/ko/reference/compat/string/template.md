@@ -57,8 +57,8 @@ listTemplate({ users: ['철수', '영희', '민수'] });
 ```typescript
 import { template } from 'es-toolkit/compat';
 
-const compiled = template('<%= data.name %>님의 나이는 <%= data.age %>세예요', { 
-  variable: 'data' 
+const compiled = template('<%= data.name %>님의 나이는 <%= data.age %>세예요', {
+  variable: 'data',
 });
 compiled({ name: '철수', age: 25 });
 // Returns: '철수님의 나이는 25세예요'
@@ -70,7 +70,7 @@ compiled({ name: '철수', age: 25 });
 import { template } from 'es-toolkit/compat';
 
 const compiled = template('<%= _.toUpper(message) %>', {
-  imports: { _: { toUpper: (str) => str.toUpperCase() } }
+  imports: { _: { toUpper: str => str.toUpperCase() } },
 });
 compiled({ message: 'hello world' });
 // Returns: 'HELLO WORLD'
@@ -83,14 +83,14 @@ import { template } from 'es-toolkit/compat';
 
 // 사용자 정의 구분자로 값 넣기
 const compiled = template('{{ message }}', {
-  interpolate: /\{\{([\s\S]+?)\}\}/g
+  interpolate: /\{\{([\s\S]+?)\}\}/g,
 });
 compiled({ message: '안녕하세요!' });
 // Returns: '안녕하세요!'
 
 // 사용자 정의 구분자로 이스케이프
 const safeCompiled = template('[- html -]', {
-  escape: /\[-([\s\S]+?)-\]/g
+  escape: /\[-([\s\S]+?)-\]/g,
 });
 safeCompiled({ html: '<div>내용</div>' });
 // Returns: '&lt;div&gt;내용&lt;/div&gt;'
@@ -107,6 +107,6 @@ safeCompiled({ html: '<div>내용</div>' });
   - `options.imports` (`object`, 선택): 템플릿에서 사용할 함수들이에요.
   - `options.sourceURL` (`string`, 선택): 디버깅용 소스 URL이에요.
 
-### 반환 값
+#### 반환 값
 
 (`TemplateExecutor`): 데이터 객체를 받아서 완성된 문자열을 반환하는 함수예요. `source` 속성으로 생성된 함수 코드도 확인할 수 있어요.

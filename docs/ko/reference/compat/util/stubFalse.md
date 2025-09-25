@@ -55,6 +55,6 @@ console.log(result1); // => false
 
 파라미터는 없어요.
 
-### 반환 값
+#### 반환 값
 
 (`false`): 항상 `false`를 반환해요.

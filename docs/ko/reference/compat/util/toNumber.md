@@ -56,6 +56,6 @@ toNumber(NaN);
 
 - `value` (`unknown`): 변환할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 변환된 숫자를 반환해요.

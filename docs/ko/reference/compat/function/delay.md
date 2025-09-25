@@ -159,6 +159,6 @@ window.addEventListener('beforeunload', () => {
 - `wait` (`number`): 지연할 밀리초 수예요.
 - `args` (`...any[]`): 함수 실행 시 전달할 인수들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 타이머 ID를 반환해요. `clearTimeout()`으로 취소할 수 있어요.

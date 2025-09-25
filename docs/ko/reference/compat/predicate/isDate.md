@@ -41,6 +41,6 @@ isDate(undefined); // false
 
 - `value` (`unknown`): Date 객체인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is Date`): 값이 Date 객체이면 `true`, 아니면 `false`를 반환해요.

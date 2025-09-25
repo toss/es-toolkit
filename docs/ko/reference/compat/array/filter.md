@@ -32,7 +32,7 @@ filter(numbers, x => x % 2 === 0);
 const users = [
   { name: 'Alice', active: true },
   { name: 'Bob', active: false },
-  { name: 'Charlie', active: true }
+  { name: 'Charlie', active: true },
 ];
 filter(users, 'active');
 // Returns: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
@@ -73,6 +73,6 @@ filter(undefined, x => x > 0);
 - `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 필터링할 배열이나 객체예요.
 - `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 필터링 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 조건을 만족하는 요소들로 이루어진 새로운 배열을 반환해요.

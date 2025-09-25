@@ -72,6 +72,6 @@ compact(undefined);
 
 - `arr` (`ArrayLike<T> | null | undefined`): 압축할 배열이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 거짓으로 평가되는 값들이 제거된 새로운 배열을 반환해요.

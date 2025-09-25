@@ -72,6 +72,6 @@ console.log(checkValue(7)); // undefined (조건에 맞지 않음)
 
 - `pairs` (`Array<[predicate, func]>`): 조건 함수와 실행할 함수의 쌍들로 이루어진 배열이에요.
 
-### 반환 값
+#### 반환 값
 
 (`(...args: any[]) => unknown`): 조건을 확인하고 첫 번째로 참인 조건에 해당하는 함수를 실행하는 새로운 함수를 반환해요.

@@ -27,7 +27,7 @@ import { findKey } from 'es-toolkit/compat';
 const users = {
   alice: { age: 25, active: true },
   bob: { age: 30, active: false },
-  charlie: { age: 35, active: true }
+  charlie: { age: 35, active: true },
 };
 
 findKey(users, user => user.age > 30);
@@ -56,6 +56,6 @@ findKey({ a: 1, b: 2 }, value => value > 5);
 - `obj` (`T | null | undefined`): 검색할 객체예요.
 - `predicate` (`ObjectIteratee<T>`, 선택): 각 요소에 적용할 조건이에요. 함수, 객체, 배열, 문자열이 될 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`string | undefined`): 조건에 맞는 첫 번째 요소의 키를 반환해요. 없으면 `undefined`를 반환해요.

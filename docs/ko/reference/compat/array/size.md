@@ -36,7 +36,12 @@ size({ a: 1, b: 2, c: 3 });
 // 3을 반환해요
 
 // Map의 요소 개수
-size(new Map([['a', 1], ['b', 2]]));
+size(
+  new Map([
+    ['a', 1],
+    ['b', 2],
+  ])
+);
 // 2를 반환해요
 
 // Set의 요소 개수
@@ -59,6 +64,6 @@ size([]); // 0
 
 - `collection` (`object | string | null | undefined`): 크기를 확인할 배열, 문자열, 객체, Map, Set이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 컬렉션의 크기를 반환해요. `null`이나 `undefined`면 0을 반환해요.

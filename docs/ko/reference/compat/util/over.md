@@ -40,8 +40,8 @@ getProperties({ name: 'John', age: 30 });
 
 // 조건을 검사해요
 const validators = over([
-  { name: 'John' },  // 객체 매칭
-  { age: 30 }
+  { name: 'John' }, // 객체 매칭
+  { age: 30 },
 ]);
 validators({ name: 'John', age: 30 });
 // => [true, true]
@@ -54,7 +54,7 @@ import { over } from 'es-toolkit/compat';
 
 const data = {
   user: { name: 'John', profile: { age: 30 } },
-  settings: { theme: 'dark' }
+  settings: { theme: 'dark' },
 };
 
 const getInfo = over(['user.name', 'user.profile.age', 'settings.theme']);
@@ -66,6 +66,6 @@ getInfo(data);
 
 - `...iteratees` (`Array<Function | string | object | Array>`): 호출할 함수들이나 속성 경로들이에요. 배열로 전달하거나 개별 인자로 전달할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`(...args: any[]) => any[]`): 인자를 받아서 각 함수의 결과를 배열로 반환하는 함수를 반환해요.

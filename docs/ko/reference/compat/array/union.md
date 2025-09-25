@@ -57,6 +57,6 @@ union([1, 2], null, undefined, [3, 4]);
 
 - `...arrays` (`Array<ArrayLike<T> | null | undefined>`): 합칠 배열들이에요. 배열이 아닌 값들은 무시돼요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 모든 배열의 고유한 값들을 포함하는 새로운 배열을 반환해요.

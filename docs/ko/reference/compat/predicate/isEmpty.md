@@ -58,6 +58,6 @@ isEmpty('text'); // false (문자열은 길이로 판단)
 
 - `value` (`unknown`, 선택): 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 값이 비어 있으면 `true`, 아니면 `false`를 반환해요.

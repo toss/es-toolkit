@@ -87,6 +87,6 @@ isEqualWith(set1, set2, customizer); // true
   - `yParent`: 두 번째 값 `y`의 부모 객체
   - `stack`: 순환 참조를 처리하는 내부 스택 (Map)
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 사용자 정의 함수에 따라 두 값이 같으면 `true`, 다르면 `false`를 반환해요.

@@ -62,6 +62,6 @@ const chainedCalculate = (x, y) => [x, y]
 
 - `...functions` (`Array<Function | Function[]>`): 오른쪽부터 왼쪽으로 실행할 함수들이에요. 배열로 전달할 수도 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`Function`): 모든 함수를 오른쪽부터 왼쪽으로 순차적으로 실행하는 새로운 합성 함수를 반환해요.

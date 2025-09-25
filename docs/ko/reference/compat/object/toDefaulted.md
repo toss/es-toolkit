@@ -45,13 +45,13 @@ import { toDefaulted } from 'es-toolkit/compat';
 const data = {
   name: undefined,
   age: null,
-  active: false
+  active: false,
 };
 const defaults = {
   name: 'Default',
   age: 18,
   active: true,
-  role: 'user'
+  role: 'user',
 };
 
 toDefaulted(data, defaults);
@@ -67,7 +67,7 @@ const original = { a: 1 };
 const result = toDefaulted(original, { a: 2, b: 3 });
 
 console.log(original); // { a: 1 } (변경되지 않음)
-console.log(result);   // { a: 1, b: 3 } (새로운 객체)
+console.log(result); // { a: 1, b: 3 } (새로운 객체)
 ```
 
 #### 파라미터
@@ -75,6 +75,6 @@ console.log(result);   // { a: 1, b: 3 } (새로운 객체)
 - `object` (`object`): 기본값을 적용받을 대상 객체예요.
 - `sources` (`object[]`): 기본값을 제공하는 소스 객체들이에요. 왼쪽에서 오른쪽 순서로 적용돼요.
 
-### 반환 값
+#### 반환 값
 
 (`object`): 기본값이 적용된 새로운 객체를 반환해요.

@@ -98,6 +98,6 @@ sumBy(undefined);
 - `array` (`ArrayLike<T> | null | undefined`): 처리할 배열이에요.
 - `iteratee` (`((value: T) => number) | string`, 선택): 각 요소에 적용할 함수나 속성명이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 조건에 맞는 값들을 더한 총합을 반환해요.

@@ -58,6 +58,6 @@ console.log(Object.keys(obj1).length); // => 0
 
 파라미터는 없어요.
 
-### 반환 값
+#### 반환 값
 
 (`any`): 새로운 빈 객체를 반환해요.

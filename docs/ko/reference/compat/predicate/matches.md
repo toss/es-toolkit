@@ -63,6 +63,6 @@ emptyMatcher(null); // true
 
 - `source` (`unknown`): 일치 패턴이 되는 객체나 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`(target: unknown) => boolean`): 주어진 값이 패턴과 부분적으로 일치하는지 확인하는 함수를 반환해요.

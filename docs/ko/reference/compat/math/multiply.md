@@ -57,6 +57,6 @@ multiply(NaN, NaN);
 - `value` (`number`): 곱셈의 첫 번째 숫자예요.
 - `other` (`number`): 곱셈의 두 번째 숫자예요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 두 숫자를 곱한 결과를 반환해요. 둘 중 하나라도 NaN이면 NaN을 반환해요.

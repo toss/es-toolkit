@@ -48,6 +48,6 @@ toLength(undefined);
 
 - `value` (`unknown`): 변환할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 0 이상 2^32-1 이하의 유효한 배열 인덱스를 반환해요.

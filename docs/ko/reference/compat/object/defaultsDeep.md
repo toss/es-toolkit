@@ -41,11 +41,7 @@ defaultsDeep({ a: null }, { a: { b: 1 } });
 ```typescript
 import { defaultsDeep } from 'es-toolkit/compat';
 
-defaultsDeep(
-  { a: { b: 2 } },
-  { a: { c: 3 } },
-  { a: { d: 4 }, e: 5 }
-);
+defaultsDeep({ a: { b: 2 } }, { a: { c: 3 } }, { a: { d: 4 }, e: 5 });
 // 반환값: { a: { b: 2, c: 3, d: 4 }, e: 5 }
 ```
 
@@ -54,6 +50,6 @@ defaultsDeep(
 - `target` (`any`): 기본값을 설정할 대상 객체예요.
 - `...sources` (`any[]`): 기본값을 제공하는 소스 객체들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`any`): 기본값이 재귀적으로 설정된 객체를 반환해요. 첫 번째 인수인 `target`이 수정돼요.

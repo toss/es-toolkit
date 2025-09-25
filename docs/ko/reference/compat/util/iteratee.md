@@ -65,6 +65,6 @@ const identity = iteratee();
 
 - `value` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`, 선택): 반복자로 변환할 값이에요. 기본값은 `null`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`(...args: any[]) => any`): 새로운 반복자 함수를 반환해요.

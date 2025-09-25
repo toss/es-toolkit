@@ -43,15 +43,15 @@ const animal = {
   type: 'animal',
   makeSound() {
     console.log('Some generic sound');
-  }
+  },
 };
 
-const dog = create(animal, { 
+const dog = create(animal, {
   breed: 'Golden Retriever',
   name: 'Buddy',
   makeSound() {
     console.log('Woof!');
-  }
+  },
 });
 
 console.log(dog.type); // 'animal' (상속됨)
@@ -73,15 +73,15 @@ console.log(Object.getPrototypeOf(empty)); // {} (빈 객체)
 import { create } from 'es-toolkit/compat';
 
 const proto = { inherited: true };
-const props = { 
+const props = {
   visible: 'yes',
-  [Symbol('hidden')]: 'no' // Symbol 키는 복사되지 않음
+  [Symbol('hidden')]: 'no', // Symbol 키는 복사되지 않음
 };
 
 // non-enumerable 속성 추가
 Object.defineProperty(props, 'hidden', {
   value: 'secret',
-  enumerable: false
+  enumerable: false,
 });
 
 const obj = create(proto, props);
@@ -96,6 +96,6 @@ console.log(obj.inherited); // true (상속됨)
 - `prototype` (`T extends object`): 상속할 프로토타입 객체예요.
 - `properties` (`U extends object`, 선택적): 새 객체에 추가할 속성들이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T & U`): 프로토타입을 상속하고 지정된 속성을 가진 새로운 객체를 반환해요.

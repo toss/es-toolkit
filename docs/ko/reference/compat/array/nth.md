@@ -58,6 +58,6 @@ nth(undefined, 0); // undefined
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 가져올 배열이에요.
 - `index` (`number`, 선택): 가져올 요소의 인덱스예요. 음수면 끝에서부터 계산해요. 기본값은 `0`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T | undefined`): 지정한 인덱스의 요소를 반환해요. 인덱스가 범위를 벗어나면 `undefined`를 반환해요.

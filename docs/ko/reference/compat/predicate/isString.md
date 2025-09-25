@@ -66,6 +66,6 @@ isString(undefined); // false
 
 - `value` (`unknown`): 문자열인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is string`): 값이 문자열이면 `true`, 아니면 `false`를 반환해요.

@@ -59,6 +59,6 @@ unionWith([1, 2], null, undefined, [3, 4], (a, b) => a === b);
 - `...arrays` (`Array<ArrayLike<T> | null | undefined>`): 합칠 배열들이에요.
 - `comparator` (`(a: T, b: T) => boolean`): 두 값이 같은지 판단하는 비교 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 비교 함수로 중복을 제거한 고유한 값들을 포함하는 새로운 배열을 반환해요.

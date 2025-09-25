@@ -75,6 +75,6 @@ const result = intersection(array1, array2);
 
 - `...arrays` (`Array<ArrayLike<T> | null | undefined>`): 교집합을 구할 배열들이에요. 배열 형태 객체나 null/undefined도 허용해요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 모든 배열에 공통으로 존재하는 요소들의 새 배열을 반환해요. 중복은 제거되고 첫 번째 배열의 순서를 따라요.

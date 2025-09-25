@@ -69,6 +69,6 @@ Object.keys(source).every(key => target[key] === source[key]);
 - `target` (`unknown`): 일치하는지 확인할 객체예요.
 - `source` (`unknown`): 일치 패턴이 되는 객체예요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): target이 source의 모양과 값에 부분적으로 일치하면 `true`, 아니면 `false`를 반환해요.

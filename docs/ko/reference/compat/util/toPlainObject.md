@@ -18,7 +18,7 @@ const plainObj = toPlainObject(value);
 
 ### `toPlainObject(value)`
 
-값을 일반 객체로 변환해요. 상속받은 열거 가능한 문자열 키 속성들을 자체 속성으로 평면화해요.
+값을 일반 객체로 변환해요. 상속받은 열거 가능한 문자열 키 속성들을 자체 속성으로 평탄화해요.
 
 ```typescript
 import { toPlainObject } from 'es-toolkit/compat';
@@ -57,6 +57,6 @@ toPlainObject(obj);
 
 - `value` (`any`): 변환할 값이에요.
 
-### 반환 값
+#### 반환 값
 
-(`any`): 상속받은 열거 가능한 속성들이 자체 속성으로 평면화된 일반 객체를 반환해요.
+(`any`): 상속받은 열거 가능한 속성들이 자체 속성으로 평탄화된 일반 객체를 반환해요.

@@ -65,6 +65,6 @@ unionBy([1, 2], null, undefined, [3, 4], x => x);
 - `...arrays` (`Array<ArrayLike<T> | null | undefined>`): 합칠 배열들이에요.
 - `iteratee` (`ValueIteratee<T>`): 고유성을 결정할 기준이에요. 함수, 속성 이름, 부분 객체, 속성-값 배열을 사용할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 지정한 기준으로 중복을 제거한 고유한 값들을 포함하는 새로운 배열을 반환해요.

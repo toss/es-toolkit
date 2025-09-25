@@ -52,10 +52,10 @@ has(array, 5);
 ```typescript
 import { has } from 'es-toolkit/compat';
 
-const sparse = [1, , 3];  // 인덱스 1이 비어있음
-has(sparse, 0);  // true
-has(sparse, 1);  // false - 실제로 값이 없음
-has(sparse, 2);  // true
+const sparse = [1, , 3]; // 인덱스 1이 비어있음
+has(sparse, 0); // true
+has(sparse, 1); // false - 실제로 값이 없음
+has(sparse, 2); // true
 ```
 
 #### 파라미터
@@ -63,6 +63,6 @@ has(sparse, 2);  // true
 - `object` (`any`): 검사할 객체예요.
 - `path` (`PropertyPath`): 확인할 속성의 경로예요. 문자열, 숫자, 심볼, 또는 배열로 나타낼 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 경로의 속성이 존재하면 `true`, 그렇지 않으면 `false`를 반환해요.

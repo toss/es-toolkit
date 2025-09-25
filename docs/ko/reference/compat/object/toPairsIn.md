@@ -46,7 +46,10 @@ toPairsIn(child);
 import { toPairsIn } from 'es-toolkit/compat';
 
 // Map 객체 변환
-const map = new Map([['key1', 'value1'], ['key2', 'value2']]);
+const map = new Map([
+  ['key1', 'value1'],
+  ['key2', 'value2'],
+]);
 toPairsIn(map);
 // => [['key1', 'value1'], ['key2', 'value2']]
 
@@ -60,6 +63,6 @@ toPairsIn(set);
 
 - `object` (`object`): 변환할 객체, Map, 또는 Set이에요.
 
-### 반환 값
+#### 반환 값
 
 (`Array<[string, any]>`): 키-값 쌍들의 배열을 반환해요(상속된 속성 포함).

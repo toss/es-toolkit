@@ -42,16 +42,16 @@ truncate('hi-diddly-ho there, neighborino', { omission: ' [...]' });
 import { truncate } from 'es-toolkit/compat';
 
 // 공백 구분자로 단어 단위로 자르기
-truncate('hi-diddly-ho there, neighborino', { 
-  length: 24, 
-  separator: ' ' 
+truncate('hi-diddly-ho there, neighborino', {
+  length: 24,
+  separator: ' ',
 });
 // Returns: 'hi-diddly-ho there,...'
 
 // 정규식으로 구분자 지정
-truncate('hi-diddly-ho there, neighborino', { 
-  length: 24, 
-  separator: /,? +/ 
+truncate('hi-diddly-ho there, neighborino', {
+  length: 24,
+  separator: /,? +/,
 });
 // Returns: 'hi-diddly-ho there...'
 ```
@@ -76,6 +76,6 @@ truncate('¥§✈✉🤓', { length: 4, omission: '…' });
   - `options.omission` (`string`, 선택): 생략을 나타내는 문자열이에요. 기본값은 `'...'`이에요.
   - `options.separator` (`RegExp | string`, 선택): 자를 위치를 결정하는 구분자예요.
 
-### 반환 값
+#### 반환 값
 
 (`string`): 잘린 문자열을 반환해요.

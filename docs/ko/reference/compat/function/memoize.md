@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit`의 `memoize`를 사용하세요
 
-이 `memoize` 함수는 Lodash 호환성을 위해 구현되었지만, `es-toolkit`의 메인 라이브러리에도 동일한 기능의 `memoize` 함수가 있어요.
+이 `memoize` 함수는 `resolver` 함수의 `null` 체크, `MapCache` 인터페이스의 복잡한 타입 처리, 그리고 Lodash 호환성을 위한 추가적인 오버헤드로 인해 느리게 동작해요.
 
 대신 더 빠르고 현대적인 `es-toolkit`의 [memoize](../../function/memoize.md)를 사용하세요.
 
@@ -46,8 +46,8 @@ const memoizedFetch = memoize(fetchUserData, (userId, includeProfile) => {
   return `${userId}_${includeProfile}`;
 });
 
-memoizedFetch(1, true);  // '사용자 데이터 가져오는 중... 1 true'
-memoizedFetch(1, true);  // 캐시된 결과 사용
+memoizedFetch(1, true); // '사용자 데이터 가져오는 중... 1 true'
+memoizedFetch(1, true); // 캐시된 결과 사용
 memoizedFetch(1, false); // '사용자 데이터 가져오는 중... 1 false' (다른 캐시 키)
 
 // 캐시 접근 및 수정
@@ -63,6 +63,6 @@ console.log(memoizedCalc(7)); // 49 (계산하지 않고 캐시된 값 사용)
 - `func` (`Function`): 메모이제이션할 함수예요.
 - `resolver` (`Function`, 선택): 캐시 키를 결정하는 함수예요. 제공되지 않으면 첫 번째 인수를 키로 사용해요.
 
-### 반환 값
+#### 반환 값
 
 (`Function & { cache: MapCache }`): 메모이제이션된 함수를 반환해요. 반환된 함수에는 `cache` 프로퍼티가 있어서 캐시에 직접 접근할 수 있어요.

@@ -49,6 +49,6 @@ restProcess('update', 'user', 'name', 'John', 'age', 25);
 - `func` (`Function`): 변환할 함수예요.
 - `start` (`number`, 선택): 배열로 그룹화를 시작할 인덱스예요. 기본값은 `func.length - 1`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`Function`): 지정된 인덱스부터 나머지 인수들을 배열로 그룹화하는 새로운 함수를 반환해요.

@@ -55,6 +55,6 @@ lastIndexOf(undefined, 1); // -1
 - `searchElement` (`T`): 찾을 요소예요.
 - `fromIndex` (`true | number`, 선택): 검색을 시작할 인덱스예요. `true`를 전달하면 배열 끝부터 검색해요. 기본값은 `array.length - 1`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 마지막으로 일치하는 요소의 인덱스를 반환해요. 찾을 수 없으면 `-1`을 반환해요.

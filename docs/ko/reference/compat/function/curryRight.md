@@ -237,6 +237,6 @@ console.log(curriedFixed(3)(2)(1)); // { a: 1, b: 2, c: 3, rest: [] }
 - `func` (`Function`): 오른쪽부터 커링할 함수예요.
 - `arity` (`number`, 선택): 함수의 arity(인수 개수)예요. 생략하면 `func.length`를 사용해요.
 
-### 반환 값
+#### 반환 값
 
 (`Function & { placeholder: symbol }`): 오른쪽부터 커링된 함수를 반환해요. `placeholder` 속성으로 인수 위치를 제어할 수 있어요.

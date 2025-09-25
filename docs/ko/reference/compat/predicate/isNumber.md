@@ -52,6 +52,6 @@ isNumber(null);
 
 - `value` (`unknown`): 숫자인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is number`): 값이 숫자면 `true`, 아니면 `false`를 반환해요.

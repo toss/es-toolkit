@@ -64,6 +64,6 @@ max([0, -2, 5, -10]);
 
 - `items` (`ArrayLike<T> | null | undefined`, 선택): 최댓값을 찾을 배열이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T | undefined`): 배열에서 가장 큰 값을 반환해요. 배열이 비어있거나 null/undefined면 undefined를 반환해요.

@@ -29,13 +29,13 @@ const result = at(object, 'a', 'c');
 // Returns: [1, 3]
 
 // 중첩된 객체
-const nested = { 
-  a: { 
-    b: { 
-      c: 4 
-    } 
-  }, 
-  x: [1, 2, 3] 
+const nested = {
+  a: {
+    b: {
+      c: 4,
+    },
+  },
+  x: [1, 2, 3],
 };
 const result2 = at(nested, 'a.b.c', 'x[1]');
 // Returns: [4, 2]
@@ -64,6 +64,6 @@ at(undefined, 'a', 'b'); // []
 - `object` (`T | null | undefined`): 값을 가져올 객체예요.
 - `...paths` (`Array<PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>>`): 가져올 값의 경로들이에요. 개별 인수로 전달하거나 배열로 전달할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`unknown[]`): 지정된 경로들에 해당하는 값들의 배열을 반환해요.

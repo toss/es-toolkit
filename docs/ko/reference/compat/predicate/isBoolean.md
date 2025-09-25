@@ -44,6 +44,6 @@ isBoolean([]); // false
 
 - `value` (`unknown`): 불린 타입인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is boolean`): 값이 불린 타입이면 `true`, 아니면 `false`를 반환해요.

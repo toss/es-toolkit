@@ -1,44 +1,24 @@
 # bindKey (Lodash 호환성)
 
-::: warning `bind` 메소드나 화살표 함수(Arrow function)를 사용하세요
+::: warning 화살표 함수나 `bind` 메소드를 사용하세요
 
-이 `bindKey` 함수는 동적 메소드 바인딩을 위한 복잡한 로직을 처리해요. 대부분의 경우 더 간단한 방법으로 대체할 수 있어요.
+이 `bindKey` 함수는 동적 메소드 바인딩과 플레이스홀더 처리로 인해 복잡하고 느리게 동작해요. JavaScript의 기본 `bind` 메소드나 화살표 함수를 사용하면 더 간단하고 성능이 좋아요.
 
-대신 더 빠르고 현대적인 `Function.prototype.bind()`나 화살표 함수를 사용하세요.
+대신 더 빠르고 현대적인 화살표 함수나 `Function.prototype.bind`를 사용하세요.
 
 :::
 
-`object[key]` 메서드의 `this`를 고정하고, `partialArgs`로 미리 인자를 제공해요.
-
-Symbol 타입의 `bindKey.placeholder`를 쓰면, 미리 제공한 인자가 사용될 위치를 결정할 수 있어요.
-
-[`bind`](./bind.md) 함수와는 다르게, 고정된 함수가 아직 정의되지 않거나 재정의된 메서드를 참조하게 할 수 있어요.
-
-## 인터페이스
+객체의 메소드를 바인딩하되, 나중에 재정의될 수 있는 메소드를 참조할 수 있게 해요.
 
 ```typescript
-function bindKey<T extends Record<PropertyKey, any>, K extends keyof T>(
-  object: T,
-  key: K,
-  ...partialArgs: any[]
-): T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never;
-
-namespace bindKey {
-  placeholder: symbol;
-}
+const bound = bindKey(object, key, ...partialArgs);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`T`): `this` 를 고정하고 메서드를 호출할 객체.
-- `key` (`K`): 고정할 메서드의 키.
-- `partialArgs` (`any[]`): 미리 주어질 인자.
+### `bindKey(object, key, ...partialArgs)`
 
-### 반환 값
-
-(`T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never`): `this`가 고정된 함수.
-
-## 예시
+객체의 메소드를 바인딩하면서도 메소드가 나중에 변경될 수 있게 하고 싶을 때 `bindKey`를 사용하세요. 일반적인 `bind`와 달리 메소드를 호출할 때마다 최신 메소드를 참조해요.
 
 ```typescript
 import { bindKey } from 'es-toolkit/compat';
@@ -50,19 +30,62 @@ const object = {
   },
 };
 
+// 메소드를 바인딩해요.
 let bound = bindKey(object, 'greet', 'hi');
 bound('!');
-// => 'hi fred!'
+// Returns: 'hi fred!'
 
+// 메소드를 재정의해요.
 object.greet = function (greeting, punctuation) {
   return greeting + 'ya ' + this.user + punctuation;
 };
 
+// 바인딩된 함수가 새로운 메소드를 호출해요.
 bound('!');
-// => 'hiya fred!'
-
-// Bound with placeholders.
-bound = bindKey(object, 'greet', bindKey.placeholder, '!');
-bound('hi');
-// => 'hiya fred!'
+// Returns: 'hiya fred!'
 ```
+
+플레이스홀더를 사용하여 인자의 위치를 예약할 수 있어요.
+
+```typescript
+import { bindKey } from 'es-toolkit/compat';
+
+const object = {
+  user: 'fred',
+  greet: function (greeting, punctuation) {
+    return greeting + ' ' + this.user + punctuation;
+  },
+};
+
+// 플레이스홀더를 사용해요.
+const bound = bindKey(object, 'greet', bindKey.placeholder, '!');
+bound('hi');
+// Returns: 'hi fred!'
+```
+
+부분 적용된 인자들이 먼저 전달되고, 그 다음에 호출 시 전달된 인자가 추가돼요.
+
+```typescript
+import { bindKey } from 'es-toolkit/compat';
+
+const object = {
+  add: function (a, b, c) {
+    return a + b + c;
+  },
+};
+
+// 첫 번째 인자를 미리 설정해요.
+const bound = bindKey(object, 'add', 10);
+bound(20, 30);
+// Returns: 60 (10 + 20 + 30)
+```
+
+#### 파라미터
+
+- `object` (`object`): 메소드를 호출할 객체예요.
+- `key` (`string`): 호출할 메소드의 키예요.
+- `...partialArgs` (`any[]`, 선택): 메소드에 미리 전달할 인자들이에요. `bindKey.placeholder`를 사용하여 인자 위치를 예약할 수 있어요.
+
+#### 반환 값
+
+(`(...args: any[]) => any`): 바인딩된 새로운 함수를 반환해요. 이 함수는 호출될 때마다 객체의 최신 메소드를 참조해요.

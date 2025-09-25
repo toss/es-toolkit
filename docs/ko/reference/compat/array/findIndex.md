@@ -28,7 +28,7 @@ import { findIndex } from 'es-toolkit/compat';
 const users = [
   { id: 1, name: 'Alice', active: false },
   { id: 2, name: 'Bob', active: true },
-  { id: 3, name: 'Charlie', active: true }
+  { id: 3, name: 'Charlie', active: true },
 ];
 
 // 함수로 조건 지정
@@ -95,6 +95,6 @@ findIndex(undefined, 'active'); // -1
 - `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 일치 조건이에요. 함수, 부분 객체, 키-값 쌍, 또는 속성 이름이 될 수 있어요.
 - `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 기본값은 `0`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 조건에 맞는 첫 번째 요소의 인덱스를 반환해요. 조건에 맞는 요소가 없으면 `-1`을 반환해요.

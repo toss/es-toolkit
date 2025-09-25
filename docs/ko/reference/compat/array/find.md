@@ -32,7 +32,7 @@ find(numbers, x => x > 3);
 const users = [
   { name: 'Alice', active: false },
   { name: 'Bob', active: true },
-  { name: 'Charlie', active: true }
+  { name: 'Charlie', active: true },
 ];
 find(users, 'active');
 // Returns: { name: 'Bob', active: true }
@@ -84,6 +84,6 @@ find(undefined, x => x > 0);
 - `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 검색 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요.
 - `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 기본값은 `0`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T | undefined`): 조건을 만족하는 첫 번째 요소를 반환해요. 찾지 못하면 `undefined`를 반환해요.

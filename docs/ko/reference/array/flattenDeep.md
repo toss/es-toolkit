@@ -23,7 +23,7 @@ const result = flattenDeep(array);
 // Returns: [1, 2, 3, 4, 5, 6]
 ```
 
-아무리 복잡한 중첩 구조도 완전히 평면화해요.
+아무리 복잡한 중첩 구조도 완전히 평탄화해요.
 
 ```typescript
 import { flattenDeep } from 'es-toolkit/array';

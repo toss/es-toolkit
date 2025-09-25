@@ -56,6 +56,6 @@ head(undefined); // undefined
 
 - `array` (`ArrayLike<T> | null | undefined`): 첫 번째 요소를 가져올 배열이나 배열 형태 객체예요.
 
-### 반환 값
+#### 반환 값
 
 (`T | undefined`): 배열의 첫 번째 요소를 반환하고, 배열이 비어있거나 유효하지 않으면 `undefined`를 반환해요.

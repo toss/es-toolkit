@@ -55,6 +55,6 @@ invert(object);
 
 - `object` (`object`): 뒤바꿀 객체예요.
 
-### 반환 값
+#### 반환 값
 
 (`Record<string, string>`): 키와 값이 뒤바뀐 새로운 객체를 반환해요.

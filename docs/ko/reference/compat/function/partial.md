@@ -54,6 +54,6 @@ const greetAlice = punctuation => greet('Hello', 'Alice', punctuation);
 - `func` (`Function`): 부분 적용할 함수예요.
 - `...args` (`any[]`): 미리 채울 인수들이에요. `partial.placeholder`를 사용해서 인수 순서를 조절할 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`Function`): 인수가 미리 채워진 새로운 함수를 반환해요.

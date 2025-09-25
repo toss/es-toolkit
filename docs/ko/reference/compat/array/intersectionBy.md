@@ -88,6 +88,6 @@ const byCategoryPair = intersectionBy(products1, products2, ['category', 'fruit'
 - `...arrays` (`Array<ArrayLike<T> | null | undefined>`): 교집합을 구할 배열들이에요.
 - `iteratee` (`Function | PropertyKey | Array | Object`): 각 요소를 변환할 조건이에요. 함수, 프로퍼티 이름, 프로퍼티-값 쌍, 또는 부분 객체일 수 있어요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 변환된 값을 기준으로 모든 배열에 공통으로 존재하는 요소들의 새 배열을 반환해요.

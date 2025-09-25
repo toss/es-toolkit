@@ -68,6 +68,6 @@ sum(undefined);
 
 - `array` (`ArrayLike<any> | null | undefined`): 더할 값들이 있는 배열이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 모든 값을 더한 총합을 반환해요.

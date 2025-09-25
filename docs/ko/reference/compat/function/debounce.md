@@ -259,6 +259,6 @@ window.addEventListener('beforeunload', () => {
   - `trailing` (`boolean`): `true`이면 지연 종료 시점에 함수를 실행해요. 기본값은 `true`예요.
   - `maxWait` (`number`): 함수 실행이 지연될 수 있는 최대 시간이에요. 기본값은 `Infinity`예요.
 
-### 반환 값
+#### 반환 값
 
 (`DebouncedFunc`): 디바운스된 함수를 반환해요. `cancel()`과 `flush()` 메서드가 포함되어 있어요.

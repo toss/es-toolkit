@@ -58,7 +58,7 @@ import { differenceWith } from 'es-toolkit/compat';
 const users = [
   { name: 'alice', age: 25 },
   { name: 'bob', age: 30 },
-  { name: 'charlie', age: 35 }
+  { name: 'charlie', age: 35 },
 ];
 const excludeUsers = [{ name: 'bob', age: 25 }]; // 다른 나이
 
@@ -74,6 +74,6 @@ differenceWith(users, excludeUsers, compareByName);
 - `array` (`ArrayLike<T> | null | undefined`): 차이를 구할 기준 배열이에요.
 - `...values` (`Array<ArrayLike<T>>` + `(a: T, b: T) => boolean`): 제외할 요소들이 포함된 배열들과 마지막에 비교 함수예요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 비교 함수를 사용해서 첫 번째 배열에서 나머지 배열들의 요소를 제거한 새로운 배열을 반환해요.

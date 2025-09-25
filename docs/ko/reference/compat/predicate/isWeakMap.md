@@ -91,6 +91,6 @@ setupWeakReference(regularMap, obj, 'data'); // "WeakMap이 아니에요"
 
 - `value` (`unknown`): WeakMap인지 확인할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`value is WeakMap<object, any>`): 값이 WeakMap이면 `true`, 아니면 `false`를 반환해요.

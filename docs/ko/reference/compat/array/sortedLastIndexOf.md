@@ -55,6 +55,6 @@ sortedLastIndexOf(undefined, 1); // -1
 - `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 정렬되지 않은 배열을 사용하면 잘못된 결과를 얻을 수 있어요.
 - `value` (`T`): 찾을 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`number`): 값이 마지막으로 나타나는 인덱스를 반환해요. 값이 없으면 -1을 반환해요.

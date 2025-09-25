@@ -65,6 +65,6 @@ console.log(defaultTo({}, { default: true })); // {} (빈 객체이지만 유효
 - `value` (`T | null | undefined`): 확인할 값이에요.
 - `defaultValue` (`D`): 값이 `null`, `undefined` 또는 `NaN`인 경우 반환할 기본값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T | D`): 값이 유효하면 원래 값을, 그렇지 않으면 기본값을 반환해요.

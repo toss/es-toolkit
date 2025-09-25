@@ -8,7 +8,7 @@
 
 :::
 
-각 요소에 함수를 적용한 후 결과를 평면화해요.
+각 요소에 함수를 적용한 후 결과를 평탄화해요.
 
 ```typescript
 const result = flatMap(collection, iteratee);
@@ -18,7 +18,7 @@ const result = flatMap(collection, iteratee);
 
 ### `flatMap(collection, iteratee)`
 
-컬렉션의 각 요소에 반복자 함수를 적용한 후 한 단계 평면화한 배열을 반환해요. 배열, 객체, 문자열을 지원하며 다양한 형태의 반복자를 사용할 수 있어요.
+컬렉션의 각 요소에 반복자 함수를 적용한 후 한 단계 평탄화한 배열을 반환해요. 배열, 객체, 문자열을 지원하며 다양한 형태의 반복자를 사용할 수 있어요.
 
 ```typescript
 import { flatMap } from 'es-toolkit/compat';
@@ -44,7 +44,7 @@ flatMap(users, 'hobbies');
 // 결과: ['hiking', 'coding', 'reading']
 ```
 
-반복자 없이 사용하면 값들을 한 단계 평면화해요.
+반복자 없이 사용하면 값들을 한 단계 평탄화해요.
 
 ```typescript
 import { flatMap } from 'es-toolkit/compat';
@@ -72,6 +72,6 @@ flatMap(users, { active: false });
 - `collection` (`object | null | undefined`): 순회할 컬렉션이에요. 배열, 객체, 문자열이 될 수 있어요.
 - `iteratee` (`ListIterator | ObjectIterator | string | object`, 선택): 각 요소에 적용할 반복자예요. 함수, 속성 이름, 또는 부분 객체가 될 수 있어요.
 
-### 반환 값
+#### 반환 값
 
-(`any[]`): 매핑 후 한 단계 평면화된 새 배열을 반환해요.
+(`any[]`): 매핑 후 한 단계 평탄화된 새 배열을 반환해요.

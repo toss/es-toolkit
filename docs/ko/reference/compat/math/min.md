@@ -64,6 +64,6 @@ min([-1, -5, -3]);
 
 - `items` (`ArrayLike<T> | null | undefined`, 선택): 최솟값을 찾을 배열이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T | undefined`): 배열에서 가장 작은 값을 반환해요. 배열이 비어있거나 null/undefined면 undefined를 반환해요.

@@ -67,6 +67,6 @@ toString([Symbol('a'), Symbol('b')]);
 
 - `value` (`any`): 변환할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`string`): 변환된 문자열을 반환해요. null과 undefined는 빈 문자열을 반환해요.

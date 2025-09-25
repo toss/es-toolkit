@@ -48,6 +48,6 @@ console.log(defaultOptions); // { enableFeatureA: true, enableFeatureB: true, en
 
 파라미터는 없어요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 항상 `true`를 반환해요.

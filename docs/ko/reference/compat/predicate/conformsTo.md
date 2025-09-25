@@ -58,6 +58,6 @@ conformsTo(incompleteObject, strictConditions); // false (b 프로퍼티가 없�
 - `target` (`Record<PropertyKey, any>`): 검사할 객체예요.
 - `source` (`Record<PropertyKey, (value: any) => boolean>`): 프로퍼티별 조건 함수들을 가진 객체예요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 객체가 모든 조건을 만족하면 `true`, 아니면 `false`를 반환해요.

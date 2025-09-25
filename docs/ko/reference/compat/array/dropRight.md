@@ -50,6 +50,6 @@ dropRight(undefined, 2); // []
 - `array` (`ArrayLike<T> | null | undefined`): 요소를 제거할 배열이에요.
 - `itemsCount` (`number`, 선택): 배열의 끝에서부터 제거할 요소의 개수예요. 기본값은 `1`이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T[]`): 끝에서부터 `itemsCount`개의 요소가 제거된 새로운 배열을 반환해요.

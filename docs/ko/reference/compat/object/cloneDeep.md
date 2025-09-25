@@ -41,9 +41,9 @@ const obj = {
   b: {
     c: 2,
     d: {
-      e: 3
-    }
-  }
+      e: 3,
+    },
+  },
 };
 const clonedObj = cloneDeep(obj);
 clonedObj.b.d.e = 99;
@@ -60,7 +60,7 @@ const complex = {
   arr: [1, { nested: true }],
   map: new Map([['key', { value: 1 }]]),
   set: new Set([{ item: 1 }]),
-  date: new Date()
+  date: new Date(),
 };
 const clonedComplex = cloneDeep(complex);
 // 모든 중첩된 객체들이 완전히 새로운 인스턴스로 복사됨
@@ -83,6 +83,6 @@ console.log(cloned.self === cloned); // true (순환 참조 유지)
 
 - `value` (`T`): 깊은 복사할 값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`T`): 깊은 복사된 값을 반환해요.
