@@ -26,7 +26,7 @@ function set<T extends object>(
 
 ### 반환 값
 
-(`T`): 수정된 객체를 반환해요. T를 지정하지 않으면 unknown이에요.
+(`T`): 수정된 객체를 반환해요. T를 지정하지 않으면 object이에요.
 
 ## 예시
 

@@ -26,7 +26,7 @@ function set<T extends object>(
 
 ### 戻り値
 
-(`T`): 修正されたオブジェクトを返します。T を指定しない場合は unknown です。
+(`T`): 修正されたオブジェクトを返します。T を指定しない場合は object です。
 
 ## 例
 

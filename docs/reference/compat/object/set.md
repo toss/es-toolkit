@@ -26,7 +26,7 @@ function set<T extends object>(
 
 ### Returns
 
-(`T`): Returns the modified object. If T is not specified, it defaults to unknown.
+(`T`): Returns the modified object. If T is not specified, it defaults to object.
 
 ## Examples
 

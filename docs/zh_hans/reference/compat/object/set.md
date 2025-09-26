@@ -27,7 +27,7 @@ function set<T extends object>(
 
 ### 返回值
 
-(`T`): 返回修改后的对象。如果未指定 T，默认值为 unknown。
+(`T`): 返回修改后的对象。如果未指定 T，默认值为 object。
 
 ## 示例
 
