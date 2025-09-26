@@ -14,7 +14,7 @@
 function set<T extends object>(
   obj: T,
   path: string | number | symbol | Array<string | number | symbol>,
-  value: unknown
+  value: any
 ): T;
 ```
 
@@ -22,7 +22,7 @@ function set<T extends object>(
 
 - `obj` (`T`): 값을 설정할 객체.
 - `path` (`string | number | symbol | Array<string | number | symbol>`): 값을 설정할 프로퍼티 경로.
-- `value` (`unknown`): 설정할 값.
+- `value` (`any`): 설정할 값.
 
 ### 반환 값
 

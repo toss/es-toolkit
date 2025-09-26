@@ -15,7 +15,7 @@
 function set<T extends object>(
   obj: T,
   path: string | number | symbol | Array<string | number | symbol>,
-  value: unknown
+  value: any
 ): T;
 ```
 
@@ -23,7 +23,7 @@ function set<T extends object>(
 
 - `obj` (`T`): 要修改的对象。
 - `path` (`string | number | symbol | Array<string | number | symbol>`): 要设置的属性路径。
-- `value` (`unknown`): 要设置的值。
+- `value` (`any`): 要设置的值。
 
 ### 返回值
 

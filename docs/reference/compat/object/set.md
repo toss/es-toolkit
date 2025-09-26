@@ -14,7 +14,7 @@ Sets the given value at the specified path of the object. If any part of the pat
 function set<T extends object>(
   obj: T,
   path: string | number | symbol | Array<string | number | symbol>,
-  value: unknown
+  value: any
 ): T;
 ```
 
@@ -22,7 +22,7 @@ function set<T extends object>(
 
 - `obj` (`T`): The object to modify.
 - `path` (`string | number | symbol | Array<string | number | symbol>`): The path of the property to set.
-- `value` (`unknown`): The value to set.
+- `value` (`any`): The value to set.
 
 ### Returns
 

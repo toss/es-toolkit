@@ -14,7 +14,7 @@
 function set<T extends object>(
   obj: T,
   path: string | number | symbol | Array<string | number | symbol>,
-  value: unknown
+  value: any
 ): T;
 ```
 
@@ -22,7 +22,7 @@ function set<T extends object>(
 
 - `obj` (`T`): 値を設定するオブジェクト。
 - `path` (`string | number | symbol | Array<string | number | symbol>`): 値を設定するプロパティのパス。
-- `value` (`unknown`): 設定する値。
+- `value` (`any`): 設定する値。
 
 ### 戻り値
 
