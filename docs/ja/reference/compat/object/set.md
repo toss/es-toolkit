@@ -11,11 +11,7 @@
 ## インターフェース
 
 ```typescript
-function set<T extends object>(
-  obj: T,
-  path: string | number | symbol | Array<string | number | symbol>,
-  value: any
-): T;
+function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: any): T;
 ```
 
 ### パラメータ
