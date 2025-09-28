@@ -1,36 +1,58 @@
-# subtract
+# subtract (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `-` operator
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `subtract` function works slowly due to additional function calls.
+
+Use the faster and simpler `-` operator instead.
+
 :::
 
-Subtract two numbers.
-
-If either number is `NaN`, the function returns `NaN`.
-
-## Signature
+Subtracts two numbers.
 
 ```typescript
-function subtract(value: number, other: number): number;
+const result = subtract(value, other);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`number`): The base number.
-- `other` (`number`): The number to subtract from the base number.
+### `subtract(value, other)`
 
-### Returns
-
-(`number`): Subtraction of two numbers. If either argument is `NaN`, the function returns `NaN`.
-
-## Examples
+Use `subtract` when you want to subtract two numbers.
 
 ```typescript
-subtract(6, 4); // Returns 2.
-subtract(-6, 4); // Returns -10.
-subtract(NaN, 4); // Since value is NaN, it returns NaN.
-subtract(6, NaN); // Since other is NaN, it returns NaN.
-subtract(NaN, NaN); // Since both arguments are NaN, it returns NaN.
+import { subtract } from 'es-toolkit/compat';
+
+// Basic subtraction
+subtract(6, 4);
+// Returns: 2
+
+subtract(10, 3);
+// Returns: 7
+
+// Negative number handling
+subtract(-6, 4);
+// Returns: -10
+
+subtract(6, -4);
+// Returns: 10
+
+// NaN handling
+subtract(NaN, 4);
+// Returns: NaN
+
+subtract(6, NaN);
+// Returns: NaN
+
+subtract(NaN, NaN);
+// Returns: NaN
 ```
+
+#### Parameters
+
+- `value` (`number`): The base number for subtraction.
+- `other` (`number`): The number to subtract.
+
+#### Returns
+
+(`number`): Returns the result of subtracting the second number from the first. If either is NaN, returns NaN.

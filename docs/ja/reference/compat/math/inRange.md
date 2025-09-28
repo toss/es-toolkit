@@ -1,23 +1,101 @@
-# inRange (🚧 ドキュメント作成中)
+# inRange (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit`の[inRange](../../math/inRange.md)を使用してください
+
+この `inRange` 関数は複雑な型変換とnull/undefined処理により動作が遅くなります。
+
+代わりに、より高速で現代的な `es-toolkit` の [inRange](../../math/inRange.md) を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+数値が指定された範囲内にあるかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = inRange(value, minimum, maximum);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `inRange(value, minimum, maximum?)`
 
-### `inRange(...args)`
+数値が特定の範囲内にあるかを確認したい場合は `inRange` を使用してください。最小値は含まれ、最大値は含まれません。
 
-#### インターフェース
+```typescript
+import { inRange } from 'es-toolkit/compat';
+
+// 基本的な使用法
+inRange(3, 2, 4);
+// Returns: true (2 ≤ 3 < 4)
+
+inRange(1, 2, 5);
+// Returns: false (1 < 2)
+
+inRange(5, 2, 5);
+// Returns: false (5は含まれない)
+
+// 範囲境界値
+inRange(2, 2, 4);
+// Returns: true (最小値は含まれる)
+
+inRange(4, 2, 4);
+// Returns: false (最大値は含まれない)
+```
+
+### `inRange(value, maximum)`
+
+2つの引数のみを提供すると、0からmaximumまでの範囲として処理されます。
+
+```typescript
+import { inRange } from 'es-toolkit/compat';
+
+inRange(3, 5);
+// Returns: true (0 ≤ 3 < 5)
+
+inRange(-1, 5);
+// Returns: false (-1 < 0)
+
+inRange(0, 5);
+// Returns: true (0 ≤ 0 < 5)
+
+inRange(5, 5);
+// Returns: false (5は含まれない)
+```
+
+最小値が最大値より大きい場合は自動的に交換されます。
+
+```typescript
+import { inRange } from 'es-toolkit/compat';
+
+inRange(3, 5, 2);
+// Returns: true (範囲が2〜5に変更され、2 ≤ 3 < 5)
+
+inRange(1, 5, 2);
+// Returns: false (1 < 2)
+```
+
+不正な値は適切に変換されます。
+
+```typescript
+import { inRange } from 'es-toolkit/compat';
+
+// 文字列数値変換
+inRange(3, '2', '4');
+// Returns: true
+
+// falsy値は0として処理
+inRange(1, null, 5);
+// Returns: true (nullが0として処理され、0〜5の範囲)
+
+inRange(3, false, 5);
+// Returns: true (falseが0として処理)
+```
 
 #### パラメータ
 
-### 戻り値
+- `value` (`number`): 範囲内にあるかを確認する数値です。
+- `minimum` (`number`): 範囲の最小値です（含まれる）。`maximum`がない場合、この値が最大値になります。
+- `maximum` (`number`, オプション): 範囲の最大値です（含まれない）。
+
+#### 戻り値
+
+(`boolean`): 値が指定された範囲内にある場合は `true`、そうでなければ `false` を返します。

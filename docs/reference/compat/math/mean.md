@@ -1,23 +1,76 @@
-# mean (🚧 Documentation In Progress)
+# mean (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use [mean](../../math/mean.md) from es-toolkit
+
+This `mean` function works slowly due to type conversion and null/undefined handling.
+
+Use the faster and more modern [mean](../../math/mean.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Calculates the average value of an array.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const average = mean(array);
+```
 
 ## Reference
 
-### `mean(...args)`
+### `mean(array)`
 
-#### Signature
+Calculates the average value of a number array.
+
+```typescript
+import { mean } from 'es-toolkit/compat';
+
+// Number array
+mean([1, 2, 3, 4, 5]);
+// Returns: 3
+
+mean([10, 20, 30]);
+// Returns: 20
+
+mean([1.5, 2.5, 3.5]);
+// Returns: 2.5
+```
+
+Empty arrays return NaN.
+
+```typescript
+import { mean } from 'es-toolkit/compat';
+
+mean([]);
+// Returns: NaN
+
+mean(null);
+// Returns: NaN
+
+mean(undefined);
+// Returns: NaN
+```
+
+Invalid values are ignored in the calculation.
+
+```typescript
+import { mean } from 'es-toolkit/compat';
+
+mean([1, undefined, 2, null, 3]);
+// Returns: 2 (1 + 2 + 3) / 3 = 2
+```
+
+String numbers are also handled.
+
+```typescript
+import { mean } from 'es-toolkit/compat';
+
+mean(['1', '2', '3']);
+// Returns: 2 (strings are converted to numbers)
+```
 
 #### Parameters
 
-### Returns
+- `array` (`ArrayLike<any> | null | undefined`): The array containing numbers to calculate the average from.
+
+#### Returns
+
+(`number`): Returns the average value of the array. Returns `NaN` if the array is empty.

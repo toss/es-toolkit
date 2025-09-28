@@ -1,40 +1,74 @@
-# parseInt
+# parseInt (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `parseInt`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `parseInt` 函数由于额外的函数调用会运行较慢。
+
+请使用更快、更现代的原生 `parseInt`。
 
 :::
 
-将 `string` 转换为指定基数的整数。如果 `radix` 未定义或为 0，则使用基数 10，除非 `string` 是十六进制，此时使用基数 16。
-
-## 签名
+将字符串转换为整数。
 
 ```typescript
-function parseInt(string: string, radix?: number, guard?: unknown): number;
+const result = parseInt(string, radix);
 ```
 
-## 参数
+## 参考
 
-- `string` (`string`): 要转换为整数的字符串。
-- `radix` (`number`, 可选): 在将字符串转换为整数时要使用的基数。默认为 `0`。
-- `guard` (`unknown`, 可选): 启用作为 `Array#map` 等方法的迭代器。
+### `parseInt(string, radix?)`
 
-## 返回值
+当您想要将字符串转换为整数时，请使用 `parseInt`。可以指定基数来解析不同进制。
 
-(`number`): 转换后的整数。
-
-## 示例
-
-```javascript
+```typescript
 import { parseInt } from 'es-toolkit/compat';
 
-parseInt('08'); // => 8
-parseInt('0x20'); // => 32
+// 基本十进制解析
+parseInt('123');
+// Returns: 123
 
-parseInt('08', 10); // => 8
-parseInt('0x20', 16); // => 32
+parseInt('08');
+// Returns: 8
 
-['6', '08', '10'].map(parseInt); // => [6, 8, 10]
+// 十六进制自动识别
+parseInt('0x20');
+// Returns: 32
+
+// 明确指定基数
+parseInt('08', 10);
+// Returns: 8
+
+parseInt('0x20', 16);
+// Returns: 32
+
+parseInt('1010', 2);
+// Returns: 10
+
+// 在数组中使用
+['6', '08', '10'].map(parseInt);
+// Returns: [6, 8, 10]
 ```
+
+格式错误的字符串返回 NaN。
+
+```typescript
+import { parseInt } from 'es-toolkit/compat';
+
+parseInt('abc');
+// Returns: NaN
+
+parseInt('');
+// Returns: NaN
+
+parseInt('123abc');
+// Returns: 123 (只解析前面部分)
+```
+
+#### 参数
+
+- `string` (`string`): 要转换为整数的字符串。
+- `radix` (`number`, 可选): 转换时使用的基数。默认值为 `0`，此时根据字符串格式自动确定。
+
+#### 返回值
+
+(`number`): 返回转换后的整数。如果无法转换则返回 NaN。

@@ -1,36 +1,62 @@
-# ceil
+# ceil (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Math.ceil`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `ceil` function operates slowly due to decimal place calculations and internal function calls.
+
+Use the faster and more modern `Math.ceil` instead.
+
 :::
 
-Computes number rounded up to precision.
-
-This function takes a number and an optional precision value, and returns the number rounded up to the specified number of decimal places.
-
-## Signature
+Rounds a number up to the specified decimal places.
 
 ```typescript
-function ceil(number: number | string, precision: number | string = 0): number;
+const result = ceil(number, precision);
 ```
 
-### Parameters
+## Reference
 
-- `number` (`number | string`): The number to round up.
-- `precision` (`number | string`, Optional): The precision to round up to, defaults to `0`.
+### `ceil(number, precision?)`
 
-### Returns
-
-(`number`): The rounded up number.
-
-### Example
+Use `ceil` when you want to round a number up to a specific decimal place.
 
 ```typescript
 import { ceil } from 'es-toolkit/compat';
 
-ceil(4.006); // => 5
-ceil(6.004, 2); // => 6.01
-ceil(6040, -2); // => 6100
+// Basic ceiling (to integer)
+ceil(4.006);
+// Returns: 5
+
+ceil(4.1);
+// Returns: 5
+
+// Ceiling to 2 decimal places
+ceil(6.004, 2);
+// Returns: 6.01
+
+ceil(6.001, 2);
+// Returns: 6.01
+
+// Ceiling with negative precision (units of 10)
+ceil(6040, -2);
+// Returns: 6100
+
+ceil(1234, -2);
+// Returns: 1300
+
+// Negative numbers are also rounded up
+ceil(-4.1);
+// Returns: -4
+
+ceil(-6.004, 2);
+// Returns: -6.00
 ```
+
+#### Parameters
+
+- `number` (`number`): The number to round up.
+- `precision` (`number`, optional): The number of decimal places to round up to. Defaults to `0`.
+
+#### Returns
+
+(`number`): Returns the number rounded up to the specified decimal places.

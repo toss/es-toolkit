@@ -1,35 +1,65 @@
-# divide
+# divide (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use the `/` operator
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `divide` function operates slowly due to additional function calls.
+
+Use the faster and simpler `/` operator instead.
+
 :::
 
-Divide two numbers.
-
-If either of the numbers is `NaN`, the function returns `NaN`.
-
-## Signature
+Divides two numbers.
 
 ```typescript
-function divide(value: number, other: number): number;
+const result = divide(value, other);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`number`): The first number in a division.
-- `other` (`number`): The second number in a division.
+### `divide(value, other)`
 
-### Returns
-
-(`number`): The quotient of value and other.
-
-## Examples
+Use `divide` when you want to divide two numbers.
 
 ```typescript
-divide(6, 3); // => 2
-divide(2, NaN); // => NaN
-divide(NaN, 3); // => NaN
-divide(NaN, NaN); // => NaN
+import { divide } from 'es-toolkit/compat';
+
+// Basic division
+divide(6, 3);
+// Returns: 2
+
+divide(10, 5);
+// Returns: 2
+
+// Decimal division
+divide(7, 2);
+// Returns: 3.5
+
+divide(1, 3);
+// Returns: 0.3333333333333333
+
+// Division by zero
+divide(6, 0);
+// Returns: Infinity
+
+divide(-6, 0);
+// Returns: -Infinity
+
+// NaN handling
+divide(2, NaN);
+// Returns: NaN
+
+divide(NaN, 3);
+// Returns: NaN
+
+divide(NaN, NaN);
+// Returns: NaN
 ```
+
+#### Parameters
+
+- `value` (`number`): The dividend (number being divided).
+- `other` (`number`): The divisor (number dividing by).
+
+#### Returns
+
+(`number`): Returns the result of dividing the first number by the second. If either value is NaN, returns NaN.

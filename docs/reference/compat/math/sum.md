@@ -1,23 +1,73 @@
-# sum (🚧 Documentation In Progress)
+# sum (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use [sum](../../math/sum.md) from es-toolkit
+
+This `sum` function works slowly due to type conversion and null/undefined handling.
+
+Use the faster and more modern [sum](../../math/sum.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Adds all values in an array.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const total = sum(array);
+```
 
 ## Reference
 
-### `sum(...args)`
+### `sum(array)`
 
-#### Signature
+Adds all numbers in an array to get the total sum.
+
+```typescript
+import { sum } from 'es-toolkit/compat';
+
+// Number array
+sum([1, 2, 3]);
+// Returns: 6
+
+sum([1.5, 2.5, 3]);
+// Returns: 7
+
+// Empty array
+sum([]);
+// Returns: 0
+```
+
+Handles BigInt and strings as well.
+
+```typescript
+import { sum } from 'es-toolkit/compat';
+
+// BigInt array
+sum([1n, 2n, 3n]);
+// Returns: 6n
+
+// String array (concatenated)
+sum(['1', '2']);
+// Returns: '12'
+```
+
+Invalid values are ignored.
+
+```typescript
+import { sum } from 'es-toolkit/compat';
+
+sum([1, undefined, 2]);
+// Returns: 3 (undefined ignored)
+
+sum(null);
+// Returns: 0
+
+sum(undefined);
+// Returns: 0
+```
 
 #### Parameters
 
-### Returns
+- `array` (`ArrayLike<any> | null | undefined`): The array containing values to add.
+
+#### Returns
+
+(`number`): Returns the total sum of all values.

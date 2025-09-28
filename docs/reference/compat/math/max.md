@@ -1,34 +1,69 @@
-# max
+# max (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Math.max`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `max` function works slowly due to additional function calls and `null`/`undefined` handling.
+
+Use the faster and more modern `Math.max(...array)` instead.
+
 :::
 
-Finds the element in an array that has the maximum value.
-
-If the list is empty, returns `undefined`.
-
-## Signature
+Finds the maximum value in an array.
 
 ```typescript
-function max<T>(items: [T, ...T[]]): T;
-function max(): undefined;
-function max<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
+const result = max(items);
 ```
 
-### Parameters
+## Reference
 
-- `items` (`ArrayLike<T> | null | undefined`): The array of elements to search.
+### `max(items?)`
 
-### Returns
-
-(`T | undefined`): The element with the maximum value, or `undefined` if the array is empty, `null`, or `undefined`.
-
-### Example
+Use `max` when you want to find the largest value in an array.
 
 ```typescript
-max([1, 2, 3]); // Returns: 3
-max(['a', 'b']); // Returns: 'b'
+import { max } from 'es-toolkit/compat';
+
+// Maximum value in number array
+max([1, 2, 3]);
+// Returns: 3
+
+max([10, 5, 8, 20]);
+// Returns: 20
+
+// Maximum value in string array (lexicographical order)
+max(['a', 'b', 'c']);
+// Returns: 'c'
+
+max(['apple', 'banana', 'cherry']);
+// Returns: 'cherry'
+
+// Empty array or null/undefined
+max([]);
+// Returns: undefined
+
+max(null);
+// Returns: undefined
+
+max(undefined);
+// Returns: undefined
 ```
+
+Negative numbers are also handled correctly.
+
+```typescript
+import { max } from 'es-toolkit/compat';
+
+max([-1, -5, -3]);
+// Returns: -1
+
+max([0, -2, 5, -10]);
+// Returns: 5
+```
+
+#### Parameters
+
+- `items` (`ArrayLike<T> | null | undefined`, optional): The array to find the maximum value from.
+
+#### Returns
+
+(`T | undefined`): Returns the largest value in the array. If the array is empty or null/undefined, returns undefined.

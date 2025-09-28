@@ -1,23 +1,103 @@
-# meanBy (🚧 Documentation In Progress)
+# meanBy (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use [meanBy](../../math/meanBy.md) from es-toolkit
+
+This `meanBy` function works slowly due to iteratee function processing and type conversion.
+
+Use the faster and more modern [meanBy](../../math/meanBy.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Calculates the average of values that meet a condition.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const average = meanBy(array, iteratee);
+```
 
 ## Reference
 
-### `meanBy(...args)`
+### `meanBy(array, iteratee)`
 
-#### Signature
+Calculates the average of the results of applying a function to each element in an array.
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+// Average of specific property in object array
+const people = [
+  { name: 'John', age: 25 },
+  { name: 'Jane', age: 30 },
+  { name: 'Bob', age: 35 },
+];
+
+meanBy(people, person => person.age);
+// Returns: 30
+
+// Can also use property name
+meanBy(people, 'age');
+// Returns: 30
+```
+
+Transform values with a function to calculate the average.
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+const numbers = [1.5, 2.7, 3.2, 4.8];
+meanBy(numbers, x => Math.floor(x));
+// Returns: 2.5 (1 + 2 + 3 + 4) / 4
+
+const items = [{ a: 1 }, { a: 2 }, { a: 3 }];
+meanBy(items, x => x.a);
+// Returns: 2
+```
+
+Access array elements by index.
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+const arrays = [[2], [3], [1]];
+meanBy(arrays, 0); // Average of first elements
+// Returns: 2
+```
+
+Calculate only for elements matching specific property values.
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+const users = [
+  { name: 'John', age: 25, active: true },
+  { name: 'Jane', age: 30, active: false },
+  { name: 'Bob', age: 35, active: true },
+];
+
+// Only active users
+meanBy(users, { active: true });
+// Returns: 30 (25 + 35) / 2
+```
+
+Empty arrays return NaN.
+
+```typescript
+import { meanBy } from 'es-toolkit/compat';
+
+meanBy([], x => x.a);
+// Returns: NaN
+
+meanBy(null);
+// Returns: NaN
+
+meanBy(undefined);
+// Returns: NaN
+```
 
 #### Parameters
 
-### Returns
+- `array` (`ArrayLike<T> | null | undefined`): The array to process.
+- `iteratee` (`ValueIteratee<T>`, optional): The function, property name, or condition to apply to each element.
+
+#### Returns
+
+(`number`): Returns the average of values that meet the condition. Returns `NaN` if the array is empty.

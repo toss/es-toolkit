@@ -1,32 +1,69 @@
-# min
+# min (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Math.min`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `min` function works slowly due to additional function calls and null/undefined handling.
+
+Use the faster and more modern `Math.min(...array)` instead.
+
 :::
 
-Finds the element in an array that has the minimum value.
-
-## Signature
+Finds the minimum value in an array.
 
 ```typescript
-function min<T>(items: [T, ...T[]]): T;
-function min(): undefined;
-function min<T>(items?: ArrayLike<T> | null | undefined): T | undefined;
+const result = min(items);
 ```
 
-### Parameters
+## Reference
 
-- `items` (`ArrayLike<T> | null | undefined`): The array of elements to search.
+### `min(items?)`
 
-### Returns
-
-(`T | undefined`): The element with the minimum value, or `undefined` if the array is empty, `null`, or `undefined`.
-
-### Example
+Use `min` when you want to find the smallest value in an array.
 
 ```typescript
-min([1, 2, 3]); // Returns: 1
-min(['a', 'b']); // Returns: 'a'
+import { min } from 'es-toolkit/compat';
+
+// Minimum value in number array
+min([3, 1, 4, 1, 5, 9]);
+// Returns: 1
+
+min([10, 5, 8, 20]);
+// Returns: 5
+
+// Minimum value in string array (lexicographical order)
+min(['c', 'a', 'b']);
+// Returns: 'a'
+
+min(['cherry', 'apple', 'banana']);
+// Returns: 'apple'
+
+// Empty array or null/undefined
+min([]);
+// Returns: undefined
+
+min(null);
+// Returns: undefined
+
+min(undefined);
+// Returns: undefined
 ```
+
+Negative numbers are also handled correctly.
+
+```typescript
+import { min } from 'es-toolkit/compat';
+
+min([0, -3, 2, 8, 7]);
+// Returns: -3
+
+min([-1, -5, -3]);
+// Returns: -5
+```
+
+#### Parameters
+
+- `items` (`ArrayLike<T> | null | undefined`, optional): The array to find the minimum value from.
+
+#### Returns
+
+(`T | undefined`): Returns the smallest value in the array. If the array is empty or null/undefined, returns undefined.
