@@ -1,34 +1,62 @@
-# toPlainObject
+# toPlainObject (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 Object.assign 或扩展运算符
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `toPlainObject` 函数由于复杂的原型处理和键枚举而运行缓慢。
+
+改为使用更快、更现代的 Object.assign({}, obj) 或 {...obj}。
+
 :::
 
-将 `value` 转换为一个普通对象，将 `value` 的继承的可枚举字符串键属性展平到普通对象的自有属性中。
-
-## 签名
+将值转换为普通对象。
 
 ```typescript
-function toPlainObject(value: any): Record<string, any>;
+const plainObj = toPlainObject(value);
 ```
 
-### 参数
+## 参考
 
-- `value` (`any`): 要转换的值。
+### `toPlainObject(value)`
 
-### 返回值
-
-(`Record<string, any>`): 返回转换后的普通对象。
-
-## 示例
+将值转换为普通对象。将继承的可枚举字符串键属性扁平化为自身属性。
 
 ```typescript
+import { toPlainObject } from 'es-toolkit/compat';
+
+// 构造函数和原型
 function Foo() {
   this.b = 2;
 }
 Foo.prototype.c = 3;
 
-toPlainObject(new Foo()); // => { 'b': 2, 'c': 3 }
+const foo = new Foo();
+toPlainObject(foo);
+// Returns: { b: 2, c: 3 }
+
+// 将数组转换为对象
+toPlainObject([1, 2, 3]);
+// Returns: { 0: 1, 1: 2, 2: 3 }
 ```
+
+处理各种对象类型。
+
+```typescript
+import { toPlainObject } from 'es-toolkit/compat';
+
+// 将字符串转换为对象
+toPlainObject('abc');
+// Returns: { 0: 'a', 1: 'b', 2: 'c' }
+
+// 已经是普通对象的情况
+const obj = { a: 1, b: 2 };
+toPlainObject(obj);
+// Returns: { a: 1, b: 2 }
+```
+
+#### 参数
+
+- `value` (`any`): 要转换的值。
+
+#### 返回值
+
+(`any`): 返回普通对象，继承的可枚举属性扁平化为自身属性。

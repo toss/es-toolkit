@@ -1,36 +1,61 @@
-# toNumber
+# toNumber (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use Number constructor instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `toNumber` function performs slowly due to symbol type validation and additional processing.
+
+Use the faster and more modern Number constructor instead.
+
 :::
 
-Converts `value` to a number.
-
-Unlike `Number()`, this function returns `NaN` for symbols.
-
-## Signature
+Converts a value to a number.
 
 ```typescript
-function toNumber(value?: unknown): number;
+const number = toNumber(value);
 ```
 
-### Parameters
+## Reference
+
+### `toNumber(value)`
+
+Converts a value to a number. Symbols are treated as NaN.
+
+```typescript
+import { toNumber } from 'es-toolkit/compat';
+
+// Regular numbers are returned as is
+toNumber(3.2);
+// Returns: 3.2
+
+// Convert string numbers
+toNumber('3.2');
+// Returns: 3.2
+
+// Infinity is also returned as is
+toNumber(Infinity);
+// Returns: Infinity
+
+// Very small numbers are also returned as is
+toNumber(Number.MIN_VALUE);
+// Returns: 5e-324
+```
+
+Symbols and NaN are converted to NaN.
+
+```typescript
+import { toNumber } from 'es-toolkit/compat';
+
+toNumber(Symbol.iterator);
+// Returns: NaN
+
+toNumber(NaN);
+// Returns: NaN
+```
+
+#### Parameters
 
 - `value` (`unknown`): The value to convert.
 
-### Returns
+#### Returns
 
-(`number`): The converted number.
-
-## Examples
-
-```typescript
-toNumber(3.2); // => 3.2
-toNumber(Number.MIN_VALUE); // => 5e-324
-toNumber(Infinity); // => Infinity
-toNumber('3.2'); // => 3.2
-toNumber(Symbol.iterator); // => NaN
-toNumber(NaN); // => NaN
-```
+(`number`): Returns the converted number.

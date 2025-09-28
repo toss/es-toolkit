@@ -1,47 +1,77 @@
-# cond
+# cond (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 if-else 语句或 switch 语句
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于复杂的 iteratee 处理、数组转换和函数验证等原因，这个 `cond` 函数运行缓慢。
+
+请使用更快、更清晰的 if-else 语句或 switch 语句。
+
 :::
 
-创建一个函数，该函数按顺序检查条件并运行匹配的函数。
-
-每个对由一个条件（谓词）和一个要运行的函数组成。
-该函数按顺序检查每个条件，直到找到一个返回 `true` 的条件。
-当找到一个返回 `true` 的条件时，它会运行相应的函数并返回其结果。
-如果所有条件都不为真，则返回 `undefined`。
-
-## 签名
+接收条件和函数对的数组，创建一个按顺序检查条件并执行第一个为真的条件对应函数的函数。
 
 ```typescript
-function cond(pairs: any[][]): (...args: any[]) => unknown;
+const conditionFunction = cond(pairs);
 ```
 
-### 参数
+## 参考
 
-- `pairs` (`Array`): 成对数组。每对包含一个断言函数和一个要运行的函数。
+### `cond(pairs)`
 
-### 返回值
-
-(`(...args: any[]) => unknown`): 一个新的复合函数，用于检查条件并运行匹配的函数。
-
-## 示例
+当您想要按顺序检查多个条件并执行第一个为真的条件对应的函数时，请使用 `cond`。在以函数式方式表达复杂条件逻辑时很有用。
 
 ```typescript
-const func = cond([
-  [matches({ a: 1 }), constant('matches A')],
-  [conforms({ b: isNumber }), constant('matches B')],
-  [stubTrue, constant('no match')],
+import { cond } from 'es-toolkit/compat';
+
+// 基本用法
+const getValue = cond([
+  [x => x > 10, x => 'big'],
+  [x => x > 5, x => 'medium'],
+  [x => x > 0, x => 'small'],
+  [() => true, () => 'zero or negative'],
 ]);
 
-func({ a: 1, b: 2 });
-// => 'matches A'
-
-func({ a: 0, b: 1 });
-// => 'matches B'
-
-func({ a: '1', b: '2' });
-// => 'no match'
+console.log(getValue(15)); // "big"
+console.log(getValue(8)); // "medium"
+console.log(getValue(3)); // "small"
+console.log(getValue(-1)); // "zero or negative"
 ```
+
+也可以用于对象模式匹配。
+
+```typescript
+import { cond } from 'es-toolkit/compat';
+
+const processUser = cond([
+  [user => user.role === 'admin', user => `管理员: ${user.name}`],
+  [user => user.role === 'user', user => `用户: ${user.name}`],
+  [user => user.role === 'guest', user => `访客: ${user.name}`],
+  [() => true, () => '未知角色'],
+]);
+
+console.log(processUser({ name: '张三', role: 'admin' })); // "管理员: 张三"
+console.log(processUser({ name: '李四', role: 'user' })); // "用户: 李四"
+```
+
+只执行第一个为真的条件，如果所有条件都为假，则返回 `undefined`。
+
+```typescript
+import { cond } from 'es-toolkit/compat';
+
+const checkValue = cond([
+  [x => x > 10, x => 'greater than 10'],
+  [x => x < 5, x => 'less than 5'],
+]);
+
+console.log(checkValue(15)); // "greater than 10"
+console.log(checkValue(3)); // "less than 5"
+console.log(checkValue(7)); // undefined (不符合条件)
+```
+
+#### 参数
+
+- `pairs` (`Array<[predicate, func]>`): 由条件函数和要执行的函数对组成的数组。
+
+#### 返回值
+
+(`(...args: any[]) => unknown`): 返回一个新函数，检查条件并执行第一个为真的条件对应的函数。

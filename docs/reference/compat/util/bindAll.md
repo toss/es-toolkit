@@ -1,38 +1,20 @@
-# bindAll
+# bindAll (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Binds methods of an object to the object itself, overwriting the existing method. Method names can be provided as arguments.
-
-## Signature
+Binds methods of an object to the object itself.
 
 ```typescript
-function bindAll(
-  object: Record<string, any>,
-  ...methodNames: Array<string | string[] | number | IArguments>
-): Record<string, any>;
+const boundObject = bindAll(object, methodNames);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`Object`): The object to bind methods to.
-- `methodNames` (`...(string | string[] | number | IArguments)`): The method names to bind. Can be specified in the following formats:
-  - Individual method name strings
-  - Arrays of method names
-  - Numbers (with special handling for `-0`)
-  - Arguments objects
+### `bindAll(object, ...methodNames)`
 
-### Returns
-
-(`Object`): The object with bound methods.
-
-## Examples
+Use `bindAll` when you want to fix the `this` value of specific methods to the object itself. This is useful for maintaining the `this` context when passing methods as event handlers or callbacks.
 
 ```typescript
+import { bindAll } from 'es-toolkit/compat';
+
 const view = {
   label: 'docs',
   click: function () {
@@ -40,23 +22,57 @@ const view = {
   },
 };
 
-bindAll(view, ['click']);
-jQuery(element).on('click', view.click);
-// => 클릭 시 'clicked docs' 출력
-
-// 개별 메서드 이름 사용
+// Bind method to object
 bindAll(view, 'click');
-// => 위와 동일한 결과
+document.addEventListener('click', view.click);
+// => Logs 'clicked docs' when clicked
+```
 
-// 숫자 키 처리
+You can bind multiple methods at once.
+
+```typescript
+import { bindAll } from 'es-toolkit/compat';
+
 const obj = {
-  '-0': function () {
-    return -2;
+  name: 'example',
+  greet() {
+    return `Hello, ${this.name}!`;
   },
-  '0': function () {
-    return -1;
+  farewell() {
+    return `Goodbye, ${this.name}!`;
   },
 };
-bindAll(obj, -0);
-obj['-0'](); // => -2
+
+// Bind multiple methods with array
+bindAll(obj, ['greet', 'farewell']);
+
+const greet = obj.greet;
+greet(); // 'Hello, example!' (this is correctly bound)
 ```
+
+It can handle numeric and special keys.
+
+```typescript
+import { bindAll } from 'es-toolkit/compat';
+
+const obj = {
+  '-0': function () {
+    return 'negative zero';
+  },
+  '0': function () {
+    return 'zero';
+  },
+};
+
+bindAll(obj, -0);
+obj['-0'](); // 'negative zero'
+```
+
+#### Parameters
+
+- `object` (`Object`): The object to bind methods to.
+- `methodNames` (`...(string | string[] | number | IArguments)`): The method names to bind. Can be specified as individual strings, arrays, numbers, or Arguments objects.
+
+#### Returns
+
+(`Object`): Returns the original object with bound methods.

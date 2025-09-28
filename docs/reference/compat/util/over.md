@@ -1,54 +1,71 @@
-# over
+# over (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use array methods directly instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `over` function incurs additional overhead in the process of mapping functions to arrays.
+
+Use the faster and more modern array `map` method instead.
+
 :::
 
-Creates a function that invokes given functions and returns their results as an array.
-
-You can use several types of iteratees:
-
-- **Functions**: Each function is called with the same arguments and the results are collected.
-- **Property names**: Each property name is used to extract values from the provided object.
-- **Objects**: Each object is used to check if the provided object matches its properties.
-- **Property-value pairs**: Each pair checks if the specified property of the provided object matches the value.
-
-## Signature
+Creates a function that passes the same arguments to given functions and returns the results as an array.
 
 ```typescript
-function over(...iteratees: Array<Iteratee | Iteratee[]>): (...args: any[]) => unknown[];
+const multiCall = over(funcs);
 ```
 
-### Parameters
+## Reference
 
-- `iteratees` (`Array<Iteratee | Iteratee[]>`): The iteratees to invoke.
-  - `Iteratee` is `((...args: any[]) => unknown) | symbol | number | string | object | null`.
+### `over(...iteratees)`
 
-### Returns
-
-(`(...args: any[]) => unknown[]`): Returns the new function.
-
-## Examples
+Takes multiple functions and creates a function that calls each with the same arguments and returns the results as an array. This is useful for performing multiple calculations on the same data.
 
 ```typescript
-const func = over([Math.max, Math.min]);
-const func2 = over(Math.max, Math.min);
-func(1, 2, 3, 4);
+import { over } from 'es-toolkit/compat';
+
+// Use math functions together
+const mathOperations = over([Math.max, Math.min]);
+mathOperations(1, 2, 3, 4);
 // => [4, 1]
-func2(1, 2, 3, 4);
+
+// Can also pass individual functions
+const operations = over(Math.max, Math.min);
+operations(1, 2, 3, 4);
 // => [4, 1]
 
-const func = over(['a', 'b']);
-func({ a: 1, b: 2 });
-// => [1, 2]
+// Extract object properties
+const getProperties = over(['name', 'age']);
+getProperties({ name: 'John', age: 30 });
+// => ['John', 30]
 
-const func = over([{ a: 1 }, { b: 2 }]);
-func({ a: 1, b: 2 });
-// => [true, false]
-
-const func = over([['a', 1], ['b', 2]]);
-func({ a: 1, b: 2 });
+// Check conditions
+const validators = over([
+  { name: 'John' }, // Object matching
+  { age: 30 },
+]);
+validators({ name: 'John', age: 30 });
 // => [true, true]
 ```
+
+It can also handle nested paths.
+
+```typescript
+import { over } from 'es-toolkit/compat';
+
+const data = {
+  user: { name: 'John', profile: { age: 30 } },
+  settings: { theme: 'dark' },
+};
+
+const getInfo = over(['user.name', 'user.profile.age', 'settings.theme']);
+getInfo(data);
+// => ['John', 30, 'dark']
+```
+
+#### Parameters
+
+- `...iteratees` (`Array<Function | string | object | Array>`): The functions to call or property paths. Can be passed as an array or individual arguments.
+
+#### Returns
+
+(`(...args: any[]) => any[]`): Returns a function that takes arguments and returns an array of results from each function.

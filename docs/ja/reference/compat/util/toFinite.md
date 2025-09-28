@@ -1,34 +1,55 @@
-# toFinite
+# toFinite (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-`value` を有限の数値に変換します。
-
-## インターフェース
+値を有限な数値に変換します。
 
 ```typescript
-function toFinite(value?: unknown): number;
+const finite = toFinite(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 変換する値。
+### `toFinite(value)`
 
-### 戻り値
-
-(`number`): 有限の数値。
-
-## 例
+値を有限な数値に変換します。無限大はNumber.MAX_VALUEに、NaNは0に処理します。
 
 ```typescript
-toNumber(3.2); // => 3.2
-toNumber(Number.MIN_VALUE); // => 5e-324
-toNumber(Infinity); // => 1.7976931348623157e+308
-toNumber('3.2'); // => 3.2
-toNumber(Symbol.iterator); // => 0
-toNumber(NaN); // => 0
+import { toFinite } from 'es-toolkit/compat';
+
+// 通常の数値はそのまま返す
+toFinite(3.2);
+// Returns: 3.2
+
+// 無限大はMAX_VALUEに変換
+toFinite(Infinity);
+// Returns: 1.7976931348623157e+308
+
+toFinite(-Infinity);
+// Returns: -1.7976931348623157e+308
+
+// 文字列数値は数値に変換
+toFinite('3.2');
+// Returns: 3.2
 ```
+
+無効な値は0に変換します。
+
+```typescript
+import { toFinite } from 'es-toolkit/compat';
+
+toFinite(NaN);
+// Returns: 0
+
+toFinite(Symbol.iterator);
+// Returns: 0
+
+toFinite(null);
+// Returns: 0
+```
+
+#### パラメータ
+
+- `value` (`unknown`): 変換する値です。
+
+#### 戻り値
+
+(`number`): 変換された有限な数値を返します。

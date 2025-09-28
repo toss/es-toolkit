@@ -1,35 +1,53 @@
-# toLength
+# toLength (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-値を有効なインデックスに変換します。有効なインデックスとは、`0`以上`2^32 - 1`以下の整数を指します。
-
-与えられた値を数値に変換し、整数に切り捨てます。値が0未満の場合は`0`を返し、値が`2^32 - 1`を超える場合は`2^32 - 1`を返します。
-
-## インターフェース
+値を有効な配列インデックスに変換します。
 
 ```typescript
-function toLength(value?: unknown): number;
+const length = toLength(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 有効なインデックスに変換する値。
+### `toLength(value)`
 
-### 戻り値
-
-(`number`): 変換された有効なインデックスの値。
-
-## 例
+値を有効な配列インデックスに変換します。0以上2^32-1以下の整数に制限します。
 
 ```typescript
-toLength(3.2); // => 3
-toLength(-1); // => 0
-toLength(1.9); // => 1
-toLength('42'); // => 42
-toLength(null); // => 0
+import { toLength } from 'es-toolkit/compat';
+
+// 小数を整数に変換
+toLength(3.2);
+// Returns: 3
+
+// 負数は0に変換
+toLength(-1);
+// Returns: 0
+
+// 文字列数値を変換
+toLength('42');
+// Returns: 42
+
+// 非常に大きい数は制限値に変換
+toLength(Number.MAX_VALUE);
+// Returns: 4294967295
 ```
+
+nullやundefinedは0に変換します。
+
+```typescript
+import { toLength } from 'es-toolkit/compat';
+
+toLength(null);
+// Returns: 0
+
+toLength(undefined);
+// Returns: 0
+```
+
+#### パラメータ
+
+- `value` (`unknown`): 変換する値です。
+
+#### 戻り値
+
+(`number`): 0以上2^32-1以下の有効な配列インデックスを返します。

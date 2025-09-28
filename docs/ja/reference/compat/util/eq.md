@@ -1,33 +1,49 @@
-# eq
+# eq (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-2つの値の間で`SameValueZero`比較を行い、それらが同等であるかどうかを判定します。
-
-## インターフェース
+二つの値がSameValueZero比較方式で同等かどうかを確認します。
 
 ```typescript
-function eq(value?: unknown, other?: unknown): boolean;
+const isEqual = eq(value, other);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 比較する値。
-- `other` (`unknown`): 比較するもう一方の値。
+### `eq(value, other)`
 
-### 戻り値
-
-(`boolean`): 値が同等であれば`true`を返し、そうでなければ`false`を返します。
-
-## 例
+二つの値が同等かどうかを確認したい時に`eq`を使用してください。一般的な`===`比較とは異なり、`NaN`同士の比較で`true`を返します。
 
 ```typescript
-eq(1, 1); // true
-eq(0, -0); // true
-eq(NaN, NaN); // true
-eq('a', Object('a')); // false
+import { eq } from 'es-toolkit/compat';
+
+// 基本使用法
+console.log(eq(1, 1)); // true
+console.log(eq(0, -0)); // true (SameValueZeroでは0と-0を同じとみなす)
+console.log(eq(NaN, NaN)); // true
+console.log(eq('a', 'a')); // true
+console.log(eq('a', 'b')); // false
 ```
+
+`Object.is()`とは異なって動作します。
+
+```typescript
+// eq 使用
+console.log(eq(NaN, NaN)); // true
+console.log(eq(0, -0)); // true
+
+// Object.is 使用 (より高速)
+console.log(Object.is(NaN, NaN)); // true
+console.log(Object.is(0, -0)); // false (Object.isは0と-0を異なるとみなす)
+
+// === 使用
+console.log(NaN === NaN); // false
+console.log(0 === -0); // true
+```
+
+#### パラメータ
+
+- `value` (`any`): 比較する最初の値です。
+- `other` (`any`): 比較する二番目の値です。
+
+#### 戻り値
+
+(`boolean`): 二つの値が同等であれば`true`を、そうでなければ`false`を返します。

@@ -1,35 +1,53 @@
-# toLength
+# toLength (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将值转换为有效的索引。有效的索引是一个大于或等于 `0` 且小于或等于 `2^32 - 1` 的整数。
-
-它将给定的值转换为数字并向下取整为整数。如果值小于 `0`，则返回 `0`。如果值超过 `2^32 - 1`，则返回 `2^32 - 1`。
-
-## 签名
+将值转换为有效的数组索引。
 
 ```typescript
-function toLength(value?: unknown): number;
+const length = toLength(value);
 ```
 
-### 参数
+## 参考
 
-- `value` (`unknown`): 要转换为有效索引的值。
+### `toLength(value)`
 
-### 返回值
-
-(`number`): 转换为有效索引的值。
-
-## 示例
+将值转换为有效的数组索引。限制为 0 以上 2^32-1 以下的整数。
 
 ```typescript
-toLength(3.2); // => 3
-toLength(-1); // => 0
-toLength(1.9); // => 1
-toLength('42'); // => 42
-toLength(null); // => 0
+import { toLength } from 'es-toolkit/compat';
+
+// 将小数转换为整数
+toLength(3.2);
+// Returns: 3
+
+// 负数转换为 0
+toLength(-1);
+// Returns: 0
+
+// 字符串数字进行转换
+toLength('42');
+// Returns: 42
+
+// 非常大的数转换为限制值
+toLength(Number.MAX_VALUE);
+// Returns: 4294967295
 ```
+
+null 或 undefined 转换为 0。
+
+```typescript
+import { toLength } from 'es-toolkit/compat';
+
+toLength(null);
+// Returns: 0
+
+toLength(undefined);
+// Returns: 0
+```
+
+#### 参数
+
+- `value` (`unknown`): 要转换的值。
+
+#### 返回值
+
+(`number`): 返回 0 以上 2^32-1 以下的有效数组索引。

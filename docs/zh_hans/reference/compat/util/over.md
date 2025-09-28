@@ -1,54 +1,71 @@
-# over
+# over (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 直接使用数组方法
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `over` 函数在将函数映射到数组的过程中会产生额外的开销。
+
+改为使用更快、更现代的数组 `map` 方法。
+
 :::
 
-创建一个函数，调用给定的函数并以数组形式返回它们的结果。
-
-你可以使用多种类型的迭代器：
-
-- **函数**：每个函数都使用相同的参数调用，并收集结果。
-- **属性名**：每个属性名用于从提供的对象中提取值。
-- **对象**：每个对象用于检查提供的对象是否匹配其属性。
-- **属性-值对**：每个对用于检查提供的对象的指定属性是否匹配该值。
-
-## 签名
+创建一个函数，该函数使用相同的参数调用给定的函数并返回每个函数的结果数组。
 
 ```typescript
-function over(...iteratees: Array<Iteratee | Iteratee[]>): (...args: any[]) => unknown[];
+const multiCall = over(funcs);
 ```
 
-### 参数
+## 参考
 
-- `iteratees` (`Array<Iteratee | Iteratee[]>`): 要调用的迭代器。
-  - `Iteratee` 是 `((...args: any[]) => unknown) | symbol | number | string | object | null` 类型。
+### `over(...iteratees)`
 
-### 返回值
-
-(`(...args: any[]) => unknown[]`): 返回新函数。
-
-## 示例
+接收多个函数，创建一个函数，该函数使用相同的参数调用每个函数并返回结果数组。当需要用相同的数据进行多种计算时很有用。
 
 ```typescript
-const func = over([Math.max, Math.min]);
-const func2 = over(Math.max, Math.min);
-func(1, 2, 3, 4);
+import { over } from 'es-toolkit/compat';
+
+// 一起使用数学函数
+const mathOperations = over([Math.max, Math.min]);
+mathOperations(1, 2, 3, 4);
 // => [4, 1]
-func2(1, 2, 3, 4);
+
+// 也可以作为单独的函数传递
+const operations = over(Math.max, Math.min);
+operations(1, 2, 3, 4);
 // => [4, 1]
 
-const func = over(['a', 'b']);
-func({ a: 1, b: 2 });
-// => [1, 2]
+// 提取对象属性
+const getProperties = over(['name', 'age']);
+getProperties({ name: 'John', age: 30 });
+// => ['John', 30]
 
-const func = over([{ a: 1 }, { b: 2 }]);
-func({ a: 1, b: 2 });
-// => [true, false]
-
-const func = over([['a', 1], ['b', 2]]);
-func({ a: 1, b: 2 });
+// 检查条件
+const validators = over([
+  { name: 'John' }, // 对象匹配
+  { age: 30 },
+]);
+validators({ name: 'John', age: 30 });
 // => [true, true]
 ```
+
+也可以处理嵌套路径。
+
+```typescript
+import { over } from 'es-toolkit/compat';
+
+const data = {
+  user: { name: 'John', profile: { age: 30 } },
+  settings: { theme: 'dark' },
+};
+
+const getInfo = over(['user.name', 'user.profile.age', 'settings.theme']);
+getInfo(data);
+// => ['John', 30, 'dark']
+```
+
+#### 参数
+
+- `...iteratees` (`Array<Function | string | object | Array>`): 要调用的函数或属性路径。可以作为数组传递或作为单独的参数传递。
+
+#### 返回值
+
+(`(...args: any[]) => any[]`): 返回一个函数，该函数接受参数并返回每个函数结果的数组。

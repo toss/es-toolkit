@@ -1,31 +1,55 @@
-# now
+# now (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Date.now()`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `now` 関数は単純に`Date.now()`を呼び出すラッパー関数で不要な抽象化です。
+
+代わりに、より高速で直接的な`Date.now()`を使用してください。
+
 :::
 
-1970年1月1日00:00:00 UTCから経過したミリ秒数を返します。
-
-## インターフェース
-
-```typescript
-function now(): number;
-```
-
-### 戻り値
-
-(`number`): 1970年1月1日00:00:00 UTC以降に経過したミリ秒。
-
-## 例
+現在時刻をミリ秒単位で返します。
 
 ```typescript
 const currentTime = now();
-console.log(currentTime); // Outputs the current time in milliseconds
-
-const startTime = now();
-// Some time-consuming operation
-const endTime = now();
-console.log(`Operation took ${endTime - startTime} milliseconds`);
 ```
+
+## 参照
+
+### `now()`
+
+1970年1月1日00:00:00 UTCから経過したミリ秒数を返します。時間測定やタイムスタンプ生成に便利です。
+
+```typescript
+import { now } from 'es-toolkit/compat';
+
+// 現在時刻を取得する
+const currentTime = now();
+console.log(currentTime); // => 1703925600000 (例)
+
+// 実行時間を測定する
+const startTime = now();
+// 時間がかかる作業
+const endTime = now();
+console.log(`作業時間: ${endTime - startTime}ms`);
+
+// タイムスタンプとして使用する
+const timestamp = now();
+const logMessage = `[${timestamp}] 作業完了`;
+```
+
+`Date.now()`と同じ結果を返します。
+
+```typescript
+import { now } from 'es-toolkit/compat';
+
+console.log(now() === Date.now()); // => true (同じ時点で呼び出された場合)
+```
+
+#### パラメータ
+
+パラメータはありません。
+
+#### 戻り値
+
+(`number`): 1970年1月1日00:00:00 UTCから現在までのミリ秒数を返します。

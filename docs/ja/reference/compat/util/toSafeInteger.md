@@ -1,39 +1,75 @@
-# toSafeInteger
+# toSafeInteger (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-`value` を安全な整数(Safe Integer)に変換します。
-
-安全な整数とは、JavaScriptの`number`型で正確に表現され、他の整数に丸められない整数です。
-
-値が無限の場合、最大または最小の安全な整数に変換されます。小数点は値を切り捨てて削除されます。
-
-## インターフェース
+値を安全な整数に変換します。
 
 ```typescript
-function toSafeInteger(value?: unknown): number;
+const result = toSafeInteger(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 変換する値。
+### `toSafeInteger(value)`
 
-### 戻り値
-
-(`number`): 変換された安全な整数。
-
-## 例
+値を安全な整数に変換したいときに`toSafeInteger`を使用します。安全な整数はJavaScriptで正確に表現可能な整数で、`Number.MIN_SAFE_INTEGER`と`Number.MAX_SAFE_INTEGER`の範囲内の値です。
 
 ```typescript
-toSafeInteger(3.2); // => 3
-toSafeInteger(Number.MAX_VALUE); // => 9007199254740991
-toSafeInteger(Infinity); // => 9007199254740991
-toSafeInteger('3.2'); // => 3
-toSafeInteger(NaN); // => 0
-toSafeInteger(null); // => 0
-toSafeInteger(-Infinity); // => -9007199254740991
+import { toSafeInteger } from 'es-toolkit/compat';
+
+toSafeInteger(3.2);
+// Returns: 3
+
+toSafeInteger(Infinity);
+// Returns: 9007199254740991
+
+toSafeInteger('3.2');
+// Returns: 3
+
+// 文字列変換
+toSafeInteger('abc');
+// Returns: 0
+
+// 特殊値処理
+toSafeInteger(NaN);
+// Returns: 0
+
+toSafeInteger(null);
+// Returns: 0
+
+toSafeInteger(undefined);
+// Returns: 0
 ```
+
+無限大値も安全な範囲に制限します。
+
+```typescript
+import { toSafeInteger } from 'es-toolkit/compat';
+
+toSafeInteger(-Infinity);
+// Returns: -9007199254740991 (Number.MIN_SAFE_INTEGER)
+
+toSafeInteger(Number.MAX_VALUE);
+// Returns: 9007199254740991
+```
+
+配列インデックスやID値として使用するときに便利です。
+
+```typescript
+import { toSafeInteger } from 'es-toolkit/compat';
+
+function getArrayItem(arr: any[], index: any) {
+  const safeIndex = toSafeInteger(index);
+  return arr[safeIndex];
+}
+
+const items = ['a', 'b', 'c', 'd', 'e'];
+console.log(getArrayItem(items, '2.7')); // 'c' (インデックス2)
+console.log(getArrayItem(items, Infinity)); // undefined (範囲外)
+```
+
+#### パラメータ
+
+- `value` (`unknown`): 変換する値です。
+
+#### 戻り値
+
+(`number`): 変換された安全な整数を返します。

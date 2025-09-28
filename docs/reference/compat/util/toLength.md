@@ -1,35 +1,53 @@
-# toLength
+# toLength (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Converts the value to a valid index. A valid index is an integer that is greater than or equal to `0` and less than or equal to `2^32 - 1`.
-
-It converts the given value to a number and floors it to an integer. If the value is less than `0`, it returns `0`. If the value exceeds `2^32 - 1`, it returns `2^32 - 1`.
-
-## Signature
+Converts a value to a valid array index.
 
 ```typescript
-function toLength(value?: unknown): number;
+const length = toLength(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to convert to a valid index.
+### `toLength(value)`
 
-### Returns
-
-(`number`): The converted value.
-
-## Examples
+Converts a value to a valid array index. Limits to an integer between 0 and 2^32-1.
 
 ```typescript
-toLength(3.2); // => 3
-toLength(-1); // => 0
-toLength(1.9); // => 1
-toLength('42'); // => 42
-toLength(null); // => 0
+import { toLength } from 'es-toolkit/compat';
+
+// Convert decimal to integer
+toLength(3.2);
+// Returns: 3
+
+// Negative numbers become 0
+toLength(-1);
+// Returns: 0
+
+// Convert string numbers
+toLength('42');
+// Returns: 42
+
+// Very large numbers are limited to the maximum value
+toLength(Number.MAX_VALUE);
+// Returns: 4294967295
 ```
+
+null or undefined are converted to 0.
+
+```typescript
+import { toLength } from 'es-toolkit/compat';
+
+toLength(null);
+// Returns: 0
+
+toLength(undefined);
+// Returns: 0
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to convert.
+
+#### Returns
+
+(`number`): Returns a valid array index between 0 and 2^32-1.

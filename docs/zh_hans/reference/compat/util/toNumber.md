@@ -1,36 +1,61 @@
-# toNumber
+# toNumber (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 Number 构造函数
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `toNumber` 函数由于符号类型检验和额外处理而运行缓慢。
+
+改为使用更快、更现代的 Number 构造函数。
+
 :::
 
-将 `value` 转换为数字。
-
-与 `Number()` 不同，此函数对符号返回 `NaN`。
-
-## 签名
+将值转换为数字。
 
 ```typescript
-function toNumber(value?: unknown): number;
+const number = toNumber(value);
 ```
 
-### 参数
+## 参考
+
+### `toNumber(value)`
+
+将值转换为数字。符号处理为 NaN。
+
+```typescript
+import { toNumber } from 'es-toolkit/compat';
+
+// 普通数字原样返回
+toNumber(3.2);
+// Returns: 3.2
+
+// 字符串数字进行转换
+toNumber('3.2');
+// Returns: 3.2
+
+// 无穷大也原样返回
+toNumber(Infinity);
+// Returns: Infinity
+
+// 非常小的数也原样返回
+toNumber(Number.MIN_VALUE);
+// Returns: 5e-324
+```
+
+符号和 NaN 转换为 NaN。
+
+```typescript
+import { toNumber } from 'es-toolkit/compat';
+
+toNumber(Symbol.iterator);
+// Returns: NaN
+
+toNumber(NaN);
+// Returns: NaN
+```
+
+#### 参数
 
 - `value` (`unknown`): 要转换的值。
 
-### 返回值
+#### 返回值
 
-(`number`): 返回数字。
-
-## 示例
-
-```typescript
-toNumber(3.2); // => 3.2
-toNumber(Number.MIN_VALUE); // => 5e-324
-toNumber(Infinity); // => Infinity
-toNumber('3.2'); // => 3.2
-toNumber(Symbol.iterator); // => NaN
-toNumber(NaN); // => NaN
-```
+(`number`): 返回转换后的数字。
