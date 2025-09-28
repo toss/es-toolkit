@@ -1,23 +1,52 @@
-# isFunction (🚧 Documentation In Progress)
+# isFunction (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s [isFunction](../../predicate/isFunction.md) instead
+This `isFunction` function operates slowly due to complex handling for Lodash compatibility.
+
+Use the faster and more modern `es-toolkit`'s [isFunction](../../predicate/isFunction.md) instead.
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is a function.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isFunction(value);
+```
 
 ## Reference
 
-### `isFunction(...args)`
+### `isFunction(value)`
 
-#### Signature
+Use `isFunction` when you want to type-safely check if a value is a function. It also works as a type guard in TypeScript.
+
+```typescript
+import { isFunction } from 'es-toolkit/compat';
+
+// Regular functions
+isFunction(function () {}); // true
+isFunction(() => {}); // true
+
+// Built-in functions and constructors
+isFunction(Array.prototype.slice); // true
+isFunction(Proxy); // true
+isFunction(Int8Array); // true
+
+// Async functions and generator functions
+isFunction(async function () {}); // true
+isFunction(function* () {}); // true
+
+// Other types return false
+isFunction('function'); // false
+isFunction({}); // false
+isFunction([]); // false
+isFunction(null); // false
+isFunction(undefined); // false
+isFunction(123); // false
+```
 
 #### Parameters
 
-### Returns
+- `value` (`unknown`): The value to check if it's a function.
+
+#### Returns
+
+(`value is (...args: any[]) => any`): Returns `true` if the value is a function, `false` otherwise.

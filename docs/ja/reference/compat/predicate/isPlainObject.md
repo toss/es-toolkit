@@ -1,23 +1,85 @@
-# isPlainObject (🚧 ドキュメント作成中)
+# isPlainObject (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning es-toolkitの [isPlainObject](../../predicate/isPlainObject.md)を使用してください
+
+この `isPlainObject` 関数はLodash互換性のための複雑な処理により遅く動作します。
+
+代わりにより高速で現代的な `es-toolkit` の [isPlainObject](../../predicate/isPlainObject.md) を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値がプレーンオブジェクトかどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isPlainObject(object);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isPlainObject(object)`
 
-### `isPlainObject(...args)`
+値がプレーンオブジェクトかどうかを確認したい場合に `isPlainObject` を使用してください。プレーンオブジェクトは `{}` リテラル、`new Object()`、または `Object.create(null)` で生成されたオブジェクトです。TypeScript で型ガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isPlainObject } from 'es-toolkit/compat';
+
+// プレーンオブジェクト
+isPlainObject({}); // true
+isPlainObject(new Object()); // true
+isPlainObject(Object.create(null)); // true
+isPlainObject({ name: 'John', age: 30 }); // true
+
+// プレーンオブジェクトでない値
+isPlainObject([]); // false (配列)
+isPlainObject(new Date()); // false (Date インスタンス)
+isPlainObject(new Map()); // false (Map インスタンス)
+isPlainObject(new Set()); // false (Set インスタンス)
+isPlainObject(/regex/); // false (正規表現)
+isPlainObject(function () {}); // false (関数)
+isPlainObject(null); // false
+isPlainObject(undefined); // false
+isPlainObject('object'); // false (文字列)
+isPlainObject(42); // false (数値)
+```
+
+クラスインスタンスとプレーンオブジェクトを区別します。
+
+```typescript
+import { isPlainObject } from 'es-toolkit/compat';
+
+class Person {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+const person = new Person('John');
+const plainObj = { name: 'John' };
+
+isPlainObject(person); // false (クラスインスタンス)
+isPlainObject(plainObj); // true (プレーンオブジェクト)
+```
+
+カスタム `Symbol.toStringTag` プロパティも正しく処理します。
+
+```typescript
+import { isPlainObject } from 'es-toolkit/compat';
+
+// 書き込み可能な Symbol.toStringTag
+const obj1 = {};
+obj1[Symbol.toStringTag] = 'CustomObject';
+isPlainObject(obj1); // true
+
+// 読み取り専用 Symbol.toStringTag（内蔵オブジェクト）
+const date = new Date();
+isPlainObject(date); // false
+```
 
 #### パラメータ
 
-### 戻り値
+- `object` (`any`): プレーンオブジェクトかどうかを確認する値です。
+
+#### 戻り値
+
+(`boolean`): 値がプレーンオブジェクトの場合は `true`、そうでなければ `false` を返します。

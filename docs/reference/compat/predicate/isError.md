@@ -1,23 +1,47 @@
-# isError (🚧 Documentation In Progress)
+# isError (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s [isError](../../predicate/isError.md) instead
+This `isError` function operates slowly due to complex handling for Lodash compatibility.
+
+Use the faster and more modern `es-toolkit`'s [isError](../../predicate/isError.md) instead.
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is an Error object.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isError(value);
+```
 
 ## Reference
 
-### `isError(...args)`
+### `isError(value)`
 
-#### Signature
+Use `isError` when you want to type-safely check if a value is an Error object. It also works as a type guard in TypeScript.
+
+```typescript
+import { isError } from 'es-toolkit/compat';
+
+// Error object checking
+isError(new Error()); // true
+isError(new TypeError('Type error')); // true
+isError(new ReferenceError('Reference error')); // true
+
+// Custom errors that inherit from Error
+class CustomError extends Error {}
+isError(new CustomError()); // true
+
+// Other types return false
+isError('Error'); // false
+isError({ name: 'Error', message: 'Something went wrong' }); // false
+isError({}); // false
+isError(null); // false
+isError(undefined); // false
+```
 
 #### Parameters
 
-### Returns
+- `value` (`unknown`): The value to check if it's an Error object.
+
+#### Returns
+
+(`value is Error`): Returns `true` if the value is an Error object, `false` otherwise.

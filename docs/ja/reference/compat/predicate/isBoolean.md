@@ -1,23 +1,49 @@
-# isBoolean (🚧 ドキュメント作成中)
+# isBoolean (Lodash互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `typeof`演算子を使用してください
+この`isBoolean`関数はBooleanオブジェクトラッパーの処理により複雑になります。
+
+代わりに、よりシンプルで現代的な`typeof value === 'boolean'`を使用してください。
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値がboolean型かどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isBoolean(value);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isBoolean(value)`
 
-### `isBoolean(...args)`
+値がboolean型かどうかを型安全に確認したい場合は`isBoolean`を使用してください。プリミティブのboolean値とBooleanオブジェクトラッパーの両方を確認します。TypeScriptでタイプガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isBoolean } from 'es-toolkit/compat';
+
+// プリミティブboolean値
+isBoolean(true); // true
+isBoolean(false); // true
+
+// Booleanオブジェクトラッパー
+isBoolean(new Boolean(true)); // true
+isBoolean(new Boolean(false)); // true
+
+// 他の型はfalse
+isBoolean(0); // false
+isBoolean(1); // false
+isBoolean('true'); // false
+isBoolean('false'); // false
+isBoolean(null); // false
+isBoolean(undefined); // false
+isBoolean({}); // false
+isBoolean([]); // false
+```
 
 #### パラメータ
 
-### 戻り値
+- `value` (`unknown`): boolean型かどうかを確認する値です。
+
+#### 戻り値
+
+(`value is boolean`): 値がboolean型の場合は`true`、そうでない場合は`false`を返します。

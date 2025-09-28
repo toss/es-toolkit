@@ -1,23 +1,85 @@
-# isPlainObject (🚧 Documentation In Progress)
+# isPlainObject (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s [isPlainObject](../../predicate/isPlainObject.md) instead
+
+This `isPlainObject` function operates slowly due to complex handling for Lodash compatibility.
+
+Use the faster and more modern `es-toolkit`'s [isPlainObject](../../predicate/isPlainObject.md) instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is a plain object.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isPlainObject(object);
+```
 
 ## Reference
 
-### `isPlainObject(...args)`
+### `isPlainObject(object)`
 
-#### Signature
+Use `isPlainObject` when you want to check if a value is a plain object. A plain object is an object created by the `{}` literal, `new Object()`, or `Object.create(null)`. It also works as a type guard in TypeScript.
+
+```typescript
+import { isPlainObject } from 'es-toolkit/compat';
+
+// Plain objects
+isPlainObject({}); // true
+isPlainObject(new Object()); // true
+isPlainObject(Object.create(null)); // true
+isPlainObject({ name: 'John', age: 30 }); // true
+
+// Not plain objects
+isPlainObject([]); // false (array)
+isPlainObject(new Date()); // false (Date instance)
+isPlainObject(new Map()); // false (Map instance)
+isPlainObject(new Set()); // false (Set instance)
+isPlainObject(/regex/); // false (regular expression)
+isPlainObject(function () {}); // false (function)
+isPlainObject(null); // false
+isPlainObject(undefined); // false
+isPlainObject('object'); // false (string)
+isPlainObject(42); // false (number)
+```
+
+It distinguishes between class instances and plain objects.
+
+```typescript
+import { isPlainObject } from 'es-toolkit/compat';
+
+class Person {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+const person = new Person('John');
+const plainObj = { name: 'John' };
+
+isPlainObject(person); // false (class instance)
+isPlainObject(plainObj); // true (plain object)
+```
+
+It also correctly handles custom `Symbol.toStringTag` properties.
+
+```typescript
+import { isPlainObject } from 'es-toolkit/compat';
+
+// Writable Symbol.toStringTag
+const obj1 = {};
+obj1[Symbol.toStringTag] = 'CustomObject';
+isPlainObject(obj1); // true
+
+// Read-only Symbol.toStringTag (built-in objects)
+const date = new Date();
+isPlainObject(date); // false
+```
 
 #### Parameters
 
-### Returns
+- `object` (`any`): The value to check if it's a plain object.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is a plain object, `false` otherwise.

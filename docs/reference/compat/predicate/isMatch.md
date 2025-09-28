@@ -1,60 +1,74 @@
-# isMatch
+# isMatch (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Checks if the target matches the source by comparing their structures and values.
-This function supports deep comparison for objects, arrays, maps, and sets.
-
-## Signature
+Checks if an object partially matches another object's shape and values.
 
 ```typescript
-function isMatch(target: unknown, source: unknown): boolean;
+const result = isMatch(target, source);
 ```
 
-### Parameters
+## Reference
 
-- `target` (`unknown`): The target value to match against.
-- `source` (`unknown`): The source value to match with.
+### `isMatch(target, source)`
 
-### Returns
-
-(`boolean`): Returns `true` if the target matches the source, otherwise `false`.
-
-## Examples
-
-### Basic usage
+Use `isMatch` when you need to check if an object or array partially matches another object's structure and values. They don't need to be completely identical - all properties of source must exist in target with the same values.
 
 ```typescript
-isMatch({ a: 1, b: 2 }, { a: 1 }); // true
-```
+import { isMatch } from 'es-toolkit/compat';
 
-### Matching arrays
+// Object partial matching
+isMatch({ a: 1, b: 2, c: 3 }, { a: 1, b: 2 }); // true (a, b match)
+isMatch({ a: 1, b: 2 }, { a: 1, b: 2, c: 3 }); // false (c is not in target)
 
-```typescript
-isMatch([1, 2, 3], [1, 2, 3]); // true
-isMatch([1, 2, 2, 3], [2, 2]); // true
-isMatch([1, 2, 3], [2, 2]); // false
-```
+// Nested objects
+isMatch({ user: { name: 'Alice', age: 25, city: 'Seoul' } }, { user: { name: 'Alice', age: 25 } }); // true
 
-### Matching maps
+// Array partial matching (order independent)
+isMatch([1, 2, 3, 4], [2, 4]); // true (2 and 4 are in the array)
+isMatch([1, 2, 3], [1, 2, 3]); // true (complete match)
+isMatch([1, 2], [1, 2, 3]); // false (3 is not in target)
 
-```typescript
+// Map partial matching
 const targetMap = new Map([
-  ['key1', 'value1'],
-  ['key2', 'value2'],
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
 ]);
-const sourceMap = new Map([['key1', 'value1']]);
+const sourceMap = new Map([
+  ['a', 1],
+  ['b', 2],
+]);
 isMatch(targetMap, sourceMap); // true
-```
 
-### Matching sets
-
-```javascript
-const targetSet = new Set([1, 2, 3]);
-const sourceSet = new Set([1, 2]);
+// Set partial matching
+const targetSet = new Set([1, 2, 3, 4]);
+const sourceSet = new Set([2, 4]);
 isMatch(targetSet, sourceSet); // true
+
+// Empty source always returns true
+isMatch({ a: 1 }, {}); // true
+isMatch([1, 2, 3], []); // true
 ```
+
+More direct and faster alternatives:
+
+```typescript
+// Complete equality check (faster)
+import { isEqual } from 'es-toolkit';
+
+isEqual(obj1, obj2);
+
+// Specific property checks (clearer)
+target.a === source.a && target.b === source.b;
+
+// Object structure check
+Object.keys(source).every(key => target[key] === source[key]);
+```
+
+#### Parameters
+
+- `target` (`unknown`): The object to check for matching.
+- `source` (`unknown`): The object serving as the match pattern.
+
+#### Returns
+
+(`boolean`): Returns `true` if target partially matches source's shape and values, else `false`.

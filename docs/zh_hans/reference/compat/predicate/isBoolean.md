@@ -1,23 +1,49 @@
-# isBoolean (🚧 文档写作中)
+# isBoolean (Lodash 兼容性)
 
-::: warning 实现完成 - 文档写作中
-这个函数已经完全实现，可以使用了，但是文档还在写作中。
+::: warning 请使用 `typeof` 运算符
+此 `isBoolean` 函数由于 Boolean 对象包装器处理而变得复杂。
+
+请改用更简单的现代化 `typeof value === 'boolean'`。
 :::
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+检查值是否为布尔（boolean）类型。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将写作.
+```typescript
+const result = isBoolean(value);
+```
 
 ## 参考
 
-### `isBoolean(...args)`
+### `isBoolean(value)`
 
-#### 接口
+当您想要类型安全地检查值是否为布尔类型时，请使用 `isBoolean`。检查原始布尔值和 Boolean 对象包装器。在 TypeScript 中也作为类型守卫工作。
+
+```typescript
+import { isBoolean } from 'es-toolkit/compat';
+
+// 原始布尔值
+isBoolean(true); // true
+isBoolean(false); // true
+
+// Boolean 对象包装器
+isBoolean(new Boolean(true)); // true
+isBoolean(new Boolean(false)); // true
+
+// 其他类型返回 false
+isBoolean(0); // false
+isBoolean(1); // false
+isBoolean('true'); // false
+isBoolean('false'); // false
+isBoolean(null); // false
+isBoolean(undefined); // false
+isBoolean({}); // false
+isBoolean([]); // false
+```
 
 #### 参数
 
-### 返回值
+- `value` (`unknown`): 要检查是否为布尔类型的值。
+
+#### 返回值
+
+(`value is boolean`): 如果值是布尔类型则返回 `true`，否则返回 `false`。

@@ -1,23 +1,46 @@
-# isDate (🚧 Documentation In Progress)
+# isDate (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use es-toolkit's [isDate](../../predicate/isDate.md) instead
+This `isDate` function operates slowly due to complex processing for Lodash compatibility.
+
+Use the faster and more modern `es-toolkit`'s [isDate](../../predicate/isDate.md) instead.
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is a Date object.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isDate(value);
+```
 
 ## Reference
 
-### `isDate(...args)`
+### `isDate(value)`
 
-#### Signature
+Use `isDate` when you want to type-safely check if a value is a Date object. It also works as a type guard in TypeScript.
+
+```typescript
+import { isDate } from 'es-toolkit/compat';
+
+// Check Date object
+const date = new Date();
+isDate(date); // true
+
+// Invalid Date is also recognized as a Date object
+const invalidDate = new Date('invalid');
+isDate(invalidDate); // true
+
+// Other types return false
+isDate('2024-01-01'); // false
+isDate(1640995200000); // false
+isDate({}); // false
+isDate(null); // false
+isDate(undefined); // false
+```
 
 #### Parameters
 
-### Returns
+- `value` (`unknown`): The value to check if it's a Date object.
+
+#### Returns
+
+(`value is Date`): Returns `true` if the value is a Date object, `false` otherwise.

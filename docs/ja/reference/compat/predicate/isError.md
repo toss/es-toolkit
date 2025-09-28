@@ -1,23 +1,47 @@
-# isError (🚧 ドキュメント作成中)
+# isError (Lodash互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning es-toolkitの[isError](../../predicate/isError.md)を使用してください
+この`isError`関数はLodash互換性のための複雑な処理により動作が遅くなります。
+
+代わりに、より速く現代的な`es-toolkit`の[isError](../../predicate/isError.md)を使用してください。
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値がErrorオブジェクトかどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isError(value);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isError(value)`
 
-### `isError(...args)`
+値がErrorオブジェクトかどうかを型安全に確認したい場合は`isError`を使用してください。TypeScriptでタイプガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isError } from 'es-toolkit/compat';
+
+// Errorオブジェクトの確認
+isError(new Error()); // true
+isError(new TypeError('Type error')); // true
+isError(new ReferenceError('Reference error')); // true
+
+// Errorを継承したカスタムエラー
+class CustomError extends Error {}
+isError(new CustomError()); // true
+
+// 他の型はfalse
+isError('Error'); // false
+isError({ name: 'Error', message: 'Something went wrong' }); // false
+isError({}); // false
+isError(null); // false
+isError(undefined); // false
+```
 
 #### パラメータ
 
-### 戻り値
+- `value` (`unknown`): Errorオブジェクトかどうかを確認する値です。
+
+#### 戻り値
+
+(`value is Error`): 値がErrorオブジェクトの場合は`true`、そうでない場合は`false`を返します。

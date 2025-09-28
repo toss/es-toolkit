@@ -1,23 +1,67 @@
-# isSet (🚧 Documentation In Progress)
+# isSet (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s [isSet](../../predicate/isSet.md) instead
+
+This `isSet` function is a Lodash compatibility function, but has the same implementation as the main library.
+
+Use the faster and more modern `es-toolkit`'s [isSet](../../predicate/isSet.md) instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is a Set.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isSet(value);
+```
 
 ## Reference
 
-### `isSet(...args)`
+### `isSet(value)`
 
-#### Signature
+Use `isSet` when you want to type-safely check if a value is a Set. It also works as a type guard in TypeScript.
+
+```typescript
+import { isSet } from 'es-toolkit/compat';
+
+// Set checking
+const set = new Set();
+isSet(set); // true
+
+// Other types return false
+isSet(new Map()); // false
+isSet(new WeakSet()); // false
+isSet([]); // false
+isSet({}); // false
+isSet('set'); // false
+isSet(123); // false
+isSet(null); // false
+isSet(undefined); // false
+```
+
+It also distinguishes from other similar collections.
+
+```typescript
+import { isSet } from 'es-toolkit/compat';
+
+// Set vs Map vs WeakSet
+isSet(new Set([1, 2, 3])); // true
+isSet(new Map([['key', 'value']])); // false
+isSet(new WeakSet()); // false
+
+// Set vs array
+isSet(new Set([1, 2, 3])); // true
+isSet([1, 2, 3]); // false
+
+// Set vs regular objects
+isSet(new Set()); // true
+isSet({}); // false
+isSet(Object.create(null)); // false
+```
 
 #### Parameters
 
-### Returns
+- `value` (`unknown`): The value to check if it's a Set.
+
+#### Returns
+
+(`value is Set<any>`): Returns `true` if the value is a Set, `false` otherwise.

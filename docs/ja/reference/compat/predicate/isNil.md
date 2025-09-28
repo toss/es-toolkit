@@ -1,23 +1,62 @@
-# isNil (🚧 ドキュメント作成中)
+# isNil (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning es-toolkitの [isNil](../../predicate/isNil.md)を使用してください
+
+この `isNil` 関数はLodash互換性のための複雑な処理により遅く動作します。
+
+代わりにより高速で現代的な `es-toolkit` の [isNil](../../predicate/isNil.md) を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値が `null` または `undefined` かどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isNil(value);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isNil(x)`
 
-### `isNil(...args)`
+値が `null` または `undefined` かどうかを型安全に確認したい場合に `isNil` を使用してください。TypeScript で型ガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isNil } from 'es-toolkit/compat';
+
+// nullとundefinedはtrue
+isNil(null); // true
+isNil(undefined); // true
+
+// その他すべての値はfalse
+isNil(0); // false
+isNil(''); // false
+isNil(false); // false
+isNil([]); // false
+isNil({}); // false
+isNil('hello'); // false
+isNil(42); // false
+```
+
+falsy として評価されるが `null` や `undefined` でない値と区別します。
+
+```typescript
+import { isNil } from 'es-toolkit/compat';
+
+// falsyとして評価されるがnull/undefinedでない値
+isNil(0); // false
+isNil(''); // false
+isNil(false); // false
+isNil(NaN); // false
+
+// nullとundefinedのみtrue
+isNil(null); // true
+isNil(undefined); // true
+```
 
 #### パラメータ
 
-### 戻り値
+- `x` (`any`): `null` または `undefined` かどうかを確認する値です。
+
+#### 戻り値
+
+(`x is null | undefined`): 値が `null` または `undefined` の場合は `true`、そうでなければ `false` を返します。

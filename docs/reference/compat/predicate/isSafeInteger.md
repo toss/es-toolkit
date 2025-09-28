@@ -1,37 +1,59 @@
-# isSafeInteger
+# isSafeInteger (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Number.isSafeInteger`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `isSafeInteger` function operates slowly due to additional type checking overhead.
+
+Instead, use the faster and modern `Number.isSafeInteger`.
+
 :::
 
-Checks if `value` is a safe integer (between -(2^53 – 1) and (2^53 – 1), inclusive).
-
-A safe integer is an integer that can be exactly represented as a double precision number,
-and no other integer rounds to it under any IEEE-754 rounding mode.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
-
-## Signature
+Checks if a value is a safe integer.
 
 ```typescript
-function isSafeInteger(value?: unknown): boolean;
+const result = isSafeInteger(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to check
+### `isSafeInteger(value)`
 
-### Returns
-
-(`boolean`): `true` if `value` is an integer and between the safe values, otherwise `false`
-
-## Examples
+Use `isSafeInteger` when you need to check if a given value is a safe integer. A safe integer is an integer between -(2^53 - 1) and (2^53 - 1), which can be accurately represented in JavaScript.
 
 ```typescript
-isInteger(3); // Returns: true
-isInteger(Number.MIN_SAFE_INTEGER - 1); // Returns: false
-isInteger(1n); // Returns: false
-isInteger('1'); // Returns: false
+import { isSafeInteger } from 'es-toolkit/compat';
+
+// Safe integers
+isSafeInteger(3); // true
+isSafeInteger(-42); // true
+isSafeInteger(0); // true
+isSafeInteger(Number.MAX_SAFE_INTEGER); // true (9007199254740991)
+isSafeInteger(Number.MIN_SAFE_INTEGER); // true (-9007199254740991)
+
+// Unsafe integers
+isSafeInteger(Number.MAX_SAFE_INTEGER + 1); // false
+isSafeInteger(Number.MIN_SAFE_INTEGER - 1); // false
+isSafeInteger(9007199254740992); // false
+
+// Non-integer values
+isSafeInteger(3.14); // false
+isSafeInteger('3'); // false
+isSafeInteger(1n); // false (BigInt)
+isSafeInteger([]); // false
+isSafeInteger({}); // false
+isSafeInteger(null); // false
+isSafeInteger(undefined); // false
+
+// Infinity and NaN
+isSafeInteger(Infinity); // false
+isSafeInteger(-Infinity); // false
+isSafeInteger(NaN); // false
 ```
+
+#### Parameters
+
+- `value` (`any`): The value to check.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is a safe integer, otherwise `false`.

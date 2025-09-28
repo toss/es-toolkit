@@ -1,23 +1,46 @@
-# isDate (🚧 ドキュメント作成中)
+# isDate (Lodash互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning es-toolkitの[isDate](../../predicate/isDate.md)を使用してください
+この`isDate`関数はLodash互換性のための複雑な処理により動作が遅くなります。
+
+代わりに、より速く現代的な`es-toolkit`の[isDate](../../predicate/isDate.md)を使用してください。
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値がDateオブジェクトかどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isDate(value);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isDate(value)`
 
-### `isDate(...args)`
+値がDateオブジェクトかどうかを型安全に確認したい場合は`isDate`を使用してください。TypeScriptでタイプガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isDate } from 'es-toolkit/compat';
+
+// Dateオブジェクトの確認
+const date = new Date();
+isDate(date); // true
+
+// 無効なDateもDateオブジェクトとして認識します
+const invalidDate = new Date('invalid');
+isDate(invalidDate); // true
+
+// 他の型はfalse
+isDate('2024-01-01'); // false
+isDate(1640995200000); // false
+isDate({}); // false
+isDate(null); // false
+isDate(undefined); // false
+```
 
 #### パラメータ
 
-### 戻り値
+- `value` (`unknown`): Dateオブジェクトかどうかを確認する値です。
+
+#### 戻り値
+
+(`value is Date`): 値がDateオブジェクトの場合は`true`、そうでない場合は`false`を返します。

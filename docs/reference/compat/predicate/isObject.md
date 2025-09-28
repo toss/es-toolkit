@@ -1,44 +1,60 @@
-# isObject
+# isObject (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use es-toolkit's [isObject](../../predicate/isObject.md)
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `isObject` function operates slowly due to null checks and complex object determination.
+
+Instead, use the faster and modern [isObject](../../predicate/isObject.md) from `es-toolkit`.
+
 :::
 
-Checks if the given value is an object. An object is a value that is not a primitive type (string, number, boolean, symbol, null, or undefined).
-
-This function tests whether the provided value is an object or not.
-It returns `true` if the value is an object, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object value.
-
-## Signature
+Checks if a value is an object.
 
 ```typescript
-function isObject(value?: unknown): value is object;
+const result = isObject(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to check if it is an object.
+### `isObject(value)`
 
-### Returns
-
-(`value is object`): Returns `true` if the value is an object, `false` otherwise.
-
-## Examples
+Use `isObject` when you want to check if a value is an object. In JavaScript, arrays, functions, objects, regular expressions, dates, etc. are all treated as objects.
 
 ```typescript
 import { isObject } from 'es-toolkit/compat';
 
-const value1 = {};
-const value2 = [1, 2, 3];
-const value3 = () => {};
-const value4 = null;
+// Plain objects
+isObject({});
+// Returns: true
 
-console.log(isObject(value1)); // true
-console.log(isObject(value2)); // true
-console.log(isObject(value3)); // true
-console.log(isObject(value4)); // false
+// Arrays are also objects
+isObject([1, 2, 3]);
+// Returns: true
+
+// Functions are also objects
+isObject(() => {});
+// Returns: true
+
+// Dates are also objects
+isObject(new Date());
+// Returns: true
+
+// null is not an object
+isObject(null);
+// Returns: false
+
+// Primitive types are not objects
+isObject('string');
+// Returns: false
+
+isObject(123);
+// Returns: false
 ```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's an object.
+
+#### Returns
+
+(`value is object`): Returns `true` if the value is an object, otherwise `false`.

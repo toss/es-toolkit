@@ -1,23 +1,68 @@
-# isNull (🚧 ドキュメント作成中)
+# isNull (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning es-toolkitの [isNull](../../predicate/isNull.md)を使用してください
+
+この `isNull` 関数はLodash互換性のための関数ですが、メインライブラリと同じ実装です。
+
+代わりにより高速で現代的な `es-toolkit` の [isNull](../../predicate/isNull.md) を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値が `null` かどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isNull(value);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isNull(value)`
 
-### `isNull(...args)`
+値が正確に `null` かどうかを型安全に確認したい場合に `isNull` を使用してください。TypeScript で型ガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isNull } from 'es-toolkit/compat';
+
+// nullのみtrue
+isNull(null); // true
+
+// undefinedもfalse
+isNull(undefined); // false
+
+// その他すべての値もfalse
+isNull(0); // false
+isNull(''); // false
+isNull(false); // false
+isNull([]); // false
+isNull({}); // false
+isNull('null'); // false
+isNull(NaN); // false
+```
+
+`null` と `undefined` を区別して確認することができます。
+
+```typescript
+import { isNull } from 'es-toolkit/compat';
+
+function handleValue(value: string | null | undefined) {
+  if (isNull(value)) {
+    console.log('値が明示的にnullです');
+  } else if (value === undefined) {
+    console.log('値がundefinedです');
+  } else {
+    console.log(`値があります: ${value}`);
+  }
+}
+
+handleValue(null); // "値が明示的にnullです"
+handleValue(undefined); // "値がundefinedです"
+handleValue('hello'); // "値があります: hello"
+```
 
 #### パラメータ
 
-### 戻り値
+- `value` (`any`): `null` かどうかを確認する値です。
+
+#### 戻り値
+
+(`value is null`): 値が `null` の場合は `true`、そうでなければ `false` を返します。

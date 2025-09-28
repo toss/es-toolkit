@@ -1,23 +1,43 @@
-# isBuffer (🚧 ドキュメント作成中)
+# isBuffer (Lodash互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning es-toolkitの[isBuffer](../../predicate/isBuffer.md)を使用してください
+この`isBuffer`関数はLodash互換性のための複雑な処理により動作が遅くなります。
+
+代わりに、より速く現代的な`es-toolkit`の[isBuffer](../../predicate/isBuffer.md)を使用してください。
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値がBufferインスタンスかどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isBuffer(value);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isBuffer(value)`
 
-### `isBuffer(...args)`
+値がBufferインスタンスかどうかを型安全に確認したい場合は`isBuffer`を使用してください。Node.js環境でBufferオブジェクトを扱う際に便利です。TypeScriptでタイプガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isBuffer } from 'es-toolkit/compat';
+
+// Bufferインスタンスの確認
+const buffer = Buffer.from('hello');
+isBuffer(buffer); // true
+
+// 他の型はfalse
+isBuffer('hello'); // false
+isBuffer([1, 2, 3]); // false
+isBuffer(new Uint8Array([1, 2, 3])); // false
+isBuffer({}); // false
+isBuffer(null); // false
+isBuffer(undefined); // false
+```
 
 #### パラメータ
 
-### 戻り値
+- `value` (`unknown`): Bufferインスタンスかどうかを確認する値です。
+
+#### 戻り値
+
+(`boolean`): 値がBufferインスタンスの場合は`true`、そうでない場合は`false`を返します。

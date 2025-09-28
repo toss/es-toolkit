@@ -1,38 +1,50 @@
-# isArrayLikeObject
+# isArrayLikeObject (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Check if a value is a non-primitive, array-like object.
-
-An array-like object is an object that is not `null` or `undefined` or a function, and has a `length` property that is a valid length.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `ArrayLike<unknown> & object`.
-
-## Signature
+Checks if a value is an array-like object that is not a primitive.
 
 ```typescript
-function isArrayLikeObject(value?: unknown): value is ArrayLike<unknown> & object;
+const result = isArrayLikeObject(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to check if it is a non-primitive, array-like object.
+### `isArrayLikeObject(value)`
 
-### Returns
-
-(`value is ArrayLike<unknown> & object`): Returns `true` if the value is a non-primitive, array-like object, otherwise `false`.
-
-## Examples
+Use `isArrayLikeObject` when you need to check if a given value is an array-like object that is not a primitive. This includes arrays, arguments objects, NodeLists, etc., but excludes strings since they are primitive values.
 
 ```typescript
 import { isArrayLikeObject } from 'es-toolkit/compat';
 
-console.log(isArrayLikeObject([1, 2, 3])); // true
-console.log(isArrayLikeObject({ 0: 'a', length: 1 })); // true
-console.log(isArrayLikeObject('abc')); // false
-console.log(isArrayLikeObject(() => {})); // false
+// Array-like objects (not primitives)
+isArrayLikeObject([1, 2, 3]); // true
+isArrayLikeObject({ 0: 'a', 1: 'b', length: 2 }); // true
+isArrayLikeObject({ length: 0 }); // true
+
+// arguments object
+function example() {
+  return isArrayLikeObject(arguments); // true
+}
+
+// NodeList or HTMLCollection (in browsers)
+isArrayLikeObject(document.querySelectorAll('div')); // true
+
+// Primitives are false (including strings)
+isArrayLikeObject('abc'); // false
+isArrayLikeObject(''); // false
+isArrayLikeObject(123); // false
+isArrayLikeObject(true); // false
+
+// Other objects
+isArrayLikeObject({}); // false
+isArrayLikeObject(null); // false
+isArrayLikeObject(undefined); // false
+isArrayLikeObject(() => {}); // false
 ```
+
+#### Parameters
+
+- `value` (`any`): The value to check.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is an array-like object that is not a primitive, otherwise `false`.

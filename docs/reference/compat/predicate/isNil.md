@@ -1,23 +1,62 @@
-# isNil (🚧 Documentation In Progress)
+# isNil (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s [isNil](../../predicate/isNil.md) instead
+
+This `isNil` function operates slowly due to complex handling for Lodash compatibility.
+
+Use the faster and more modern `es-toolkit`'s [isNil](../../predicate/isNil.md) instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is `null` or `undefined`.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isNil(value);
+```
 
 ## Reference
 
-### `isNil(...args)`
+### `isNil(x)`
 
-#### Signature
+Use `isNil` when you want to type-safely check if a value is `null` or `undefined`. It also works as a type guard in TypeScript.
+
+```typescript
+import { isNil } from 'es-toolkit/compat';
+
+// null and undefined return true
+isNil(null); // true
+isNil(undefined); // true
+
+// All other values return false
+isNil(0); // false
+isNil(''); // false
+isNil(false); // false
+isNil([]); // false
+isNil({}); // false
+isNil('hello'); // false
+isNil(42); // false
+```
+
+It distinguishes from values that are truthy but not `null` or `undefined`.
+
+```typescript
+import { isNil } from 'es-toolkit/compat';
+
+// Values that are falsy but not null/undefined
+isNil(0); // false
+isNil(''); // false
+isNil(false); // false
+isNil(NaN); // false
+
+// Only null and undefined return true
+isNil(null); // true
+isNil(undefined); // true
+```
 
 #### Parameters
 
-### Returns
+- `x` (`any`): The value to check if it's `null` or `undefined`.
+
+#### Returns
+
+(`x is null | undefined`): Returns `true` if the value is `null` or `undefined`, `false` otherwise.

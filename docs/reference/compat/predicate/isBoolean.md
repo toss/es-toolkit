@@ -1,23 +1,51 @@
-# isBoolean (🚧 Documentation In Progress)
+# isBoolean (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `typeof` operator
+
+This `isBoolean` function is complex due to handling Boolean object wrappers.
+
+Instead, use the simpler and modern `typeof value === 'boolean'`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is of boolean type.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isBoolean(value);
+```
 
 ## Reference
 
-### `isBoolean(...args)`
+### `isBoolean(value)`
 
-#### Signature
+Use `isBoolean` when you want to type-safely check if a value is of boolean type. It checks both primitive boolean values and Boolean object wrappers. It also works as a type guard in TypeScript.
+
+```typescript
+import { isBoolean } from 'es-toolkit/compat';
+
+// Primitive boolean values
+isBoolean(true); // true
+isBoolean(false); // true
+
+// Boolean object wrappers
+isBoolean(new Boolean(true)); // true
+isBoolean(new Boolean(false)); // true
+
+// Other types return false
+isBoolean(0); // false
+isBoolean(1); // false
+isBoolean('true'); // false
+isBoolean('false'); // false
+isBoolean(null); // false
+isBoolean(undefined); // false
+isBoolean({}); // false
+isBoolean([]); // false
+```
 
 #### Parameters
 
-### Returns
+- `value` (`unknown`): The value to check if it's of boolean type.
+
+#### Returns
+
+(`value is boolean`): Returns `true` if the value is of boolean type, otherwise `false`.

@@ -1,23 +1,43 @@
-# isBuffer (🚧 Documentation In Progress)
+# isBuffer (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use es-toolkit's [isBuffer](../../predicate/isBuffer.md) instead
+This `isBuffer` function operates slowly due to complex processing for Lodash compatibility.
+
+Use the faster and more modern `es-toolkit`'s [isBuffer](../../predicate/isBuffer.md) instead.
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is a Buffer instance.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isBuffer(value);
+```
 
 ## Reference
 
-### `isBuffer(...args)`
+### `isBuffer(value)`
 
-#### Signature
+Use `isBuffer` when you want to type-safely check if a value is a Buffer instance. It's useful when working with Buffer objects in Node.js environments. It also works as a type guard in TypeScript.
+
+```typescript
+import { isBuffer } from 'es-toolkit/compat';
+
+// Check Buffer instance
+const buffer = Buffer.from('hello');
+isBuffer(buffer); // true
+
+// Other types return false
+isBuffer('hello'); // false
+isBuffer([1, 2, 3]); // false
+isBuffer(new Uint8Array([1, 2, 3])); // false
+isBuffer({}); // false
+isBuffer(null); // false
+isBuffer(undefined); // false
+```
 
 #### Parameters
 
-### Returns
+- `value` (`unknown`): The value to check if it's a Buffer instance.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is a Buffer instance, `false` otherwise.

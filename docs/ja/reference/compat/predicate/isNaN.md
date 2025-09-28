@@ -1,33 +1,53 @@
-# isNaN
+# isNaN (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
+::: warning `Number.isNaN`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `isNaN` 関数は追加の関数呼び出しにより遅く動作します。
+
+代わりにより高速で現代的な `Number.isNaN` を使用してください。
+
 :::
 
-値が`NaN`かどうかを確認します。
-
-## インターフェース
+値が `NaN` かどうかを確認します。
 
 ```typescript
-function isNaN(value?: unknown): value is typeof NaN;
+const result = isNaN(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): `NaN`かどうか確認する値。
+### `isNaN(value)`
 
-### 戻り値
-
-(`value is typeof NaN`): 値がNaNの場合は`true`、それ以外の場合は`false`。
-数値配列。
-
-## 例
+値が `NaN` かどうかを確認したい場合に `isNaN` を使用してください。
 
 ```typescript
-isNaN(NaN); // true
-isNaN(0); // false
-isNaN('NaN'); // false
-isNaN(undefined); // false
+import { isNaN } from 'es-toolkit/compat';
+
+// NaN確認
+isNaN(NaN);
+// Returns: true
+
+isNaN(Number.NaN);
+// Returns: true
+
+// その他の値
+isNaN(undefined);
+// Returns: false
+
+isNaN(null);
+// Returns: false
+
+isNaN(0);
+// Returns: false
+
+isNaN('NaN');
+// Returns: false
 ```
+
+#### パラメータ
+
+- `value` (`unknown`): NaNかどうかを確認する値です。
+
+#### 戻り値
+
+(`boolean`): 値がNaNの場合は `true`、そうでなければ `false` を返します。

@@ -1,30 +1,48 @@
-# isElement
+# isElement (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `instanceof HTMLElement`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `isElement` 函数由于结构性检查导致准确性较低且性能较慢。
+
+建议使用更准确、更现代的 `instanceof HTMLElement` 或 `element.nodeType === 1` 检查。
+
 :::
 
-检查 `value` 是否是 DOM 元素。由于是结构性检查，结果可能不准确。
-
-## 签名
+检查值是否为 DOM 元素。
 
 ```typescript
-function isElement(value?: any): boolean;
+const result = isElement(value);
 ```
 
-### 参数
+## 参考
+
+### `isElement(value)`
+
+当需要检查给定值是否为 DOM 元素时使用 `isElement`。由于此函数使用结构性检查，结果可能不完全准确。
+
+```typescript
+import { isElement } from 'es-toolkit/compat';
+
+// DOM 元素
+isElement(document.body); // true
+isElement(document.createElement('div')); // true
+isElement(document.querySelector('p')); // true (如果元素存在)
+
+// 非 DOM 元素的值
+isElement('<body>'); // false
+isElement({}); // false
+isElement(null); // false
+isElement(undefined); // false
+
+// 文本节点或其他节点类型
+isElement(document.createTextNode('text')); // false
+isElement(document.createComment('comment')); // false
+```
+
+#### 参数
 
 - `value` (`any`): 要检查的值。
 
-### 返回值
+#### 返回值
 
-(`boolean`): 如果 `value` 是 DOM 元素，则返回 `true`，否则返回 `false`。
-
-## 示例
-
-```typescript
-console.log(isElement(document.body)); // true
-console.log(isElement('<body>')); // false
-```
+(`boolean`): 如果值看起来像 DOM 元素则返回 `true`，否则返回 `false`。

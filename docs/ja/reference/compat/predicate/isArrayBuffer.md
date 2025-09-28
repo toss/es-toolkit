@@ -1,23 +1,44 @@
-# isArrayBuffer (🚧 ドキュメント作成中)
+# isArrayBuffer (Lodash互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning es-toolkitの[isArrayBuffer](../../predicate/isArrayBuffer.md)を使用してください
+この`isArrayBuffer`関数はLodash互換性のための複雑な処理により動作が遅くなります。
+
+代わりに、より速く現代的な`es-toolkit`の[isArrayBuffer](../../predicate/isArrayBuffer.md)を使用してください。
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値がArrayBufferかどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isArrayBuffer(value);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isArrayBuffer(value)`
 
-### `isArrayBuffer(...args)`
+値がArrayBufferかどうかを型安全に確認したい場合は`isArrayBuffer`を使用してください。TypeScriptでタイプガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isArrayBuffer } from 'es-toolkit/compat';
+
+// ArrayBufferの確認
+const buffer = new ArrayBuffer(16);
+isArrayBuffer(buffer); // true
+
+// 他の型はfalse
+isArrayBuffer(new Array()); // false
+isArrayBuffer(new Map()); // false
+isArrayBuffer({}); // false
+isArrayBuffer('hello'); // false
+isArrayBuffer(123); // false
+isArrayBuffer(null); // false
+isArrayBuffer(undefined); // false
+```
 
 #### パラメータ
 
-### 戻り値
+- `value` (`unknown`): ArrayBufferかどうかを確認する値です。
+
+#### 戻り値
+
+(`value is ArrayBuffer`): 値がArrayBufferの場合は`true`、そうでない場合は`false`を返します。

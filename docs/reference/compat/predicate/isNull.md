@@ -1,23 +1,68 @@
-# isNull (🚧 Documentation In Progress)
+# isNull (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s [isNull](../../predicate/isNull.md) instead
+
+This `isNull` function is a Lodash compatibility function, but has the same implementation as the main library.
+
+Use the faster and more modern `es-toolkit`'s [isNull](../../predicate/isNull.md) instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Checks if a value is `null`.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = isNull(value);
+```
 
 ## Reference
 
-### `isNull(...args)`
+### `isNull(value)`
 
-#### Signature
+Use `isNull` when you want to type-safely check if a value is exactly `null`. It also works as a type guard in TypeScript.
+
+```typescript
+import { isNull } from 'es-toolkit/compat';
+
+// Only null returns true
+isNull(null); // true
+
+// undefined also returns false
+isNull(undefined); // false
+
+// All other values also return false
+isNull(0); // false
+isNull(''); // false
+isNull(false); // false
+isNull([]); // false
+isNull({}); // false
+isNull('null'); // false
+isNull(NaN); // false
+```
+
+You can distinguish between `null` and `undefined`.
+
+```typescript
+import { isNull } from 'es-toolkit/compat';
+
+function handleValue(value: string | null | undefined) {
+  if (isNull(value)) {
+    console.log('Value is explicitly null');
+  } else if (value === undefined) {
+    console.log('Value is undefined');
+  } else {
+    console.log(`Value exists: ${value}`);
+  }
+}
+
+handleValue(null); // "Value is explicitly null"
+handleValue(undefined); // "Value is undefined"
+handleValue('hello'); // "Value exists: hello"
+```
 
 #### Parameters
 
-### Returns
+- `value` (`any`): The value to check if it's `null`.
+
+#### Returns
+
+(`value is null`): Returns `true` if the value is `null`, `false` otherwise.

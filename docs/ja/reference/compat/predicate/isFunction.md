@@ -1,23 +1,52 @@
-# isFunction (🚧 ドキュメント作成中)
+# isFunction (Lodash互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning es-toolkitの[isFunction](../../predicate/isFunction.md)を使用してください
+この`isFunction`関数はLodash互換性のための複雑な処理により動作が遅くなります。
+
+代わりに、より速く現代的な`es-toolkit`の[isFunction](../../predicate/isFunction.md)を使用してください。
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+値が関数かどうかを確認します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = isFunction(value);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `isFunction(value)`
 
-### `isFunction(...args)`
+値が関数かどうかを型安全に確認したい場合は`isFunction`を使用してください。TypeScriptでタイプガードとしても動作します。
 
-#### インターフェース
+```typescript
+import { isFunction } from 'es-toolkit/compat';
+
+// 通常の関数
+isFunction(function () {}); // true
+isFunction(() => {}); // true
+
+// 内蔵関数とコンストラクタ
+isFunction(Array.prototype.slice); // true
+isFunction(Proxy); // true
+isFunction(Int8Array); // true
+
+// 非同期関数とジェネレータ関数
+isFunction(async function () {}); // true
+isFunction(function* () {}); // true
+
+// 他の型はfalse
+isFunction('function'); // false
+isFunction({}); // false
+isFunction([]); // false
+isFunction(null); // false
+isFunction(undefined); // false
+isFunction(123); // false
+```
 
 #### パラメータ
 
-### 戻り値
+- `value` (`unknown`): 関数かどうかを確認する値です。
+
+#### 戻り値
+
+(`value is (...args: any[]) => any`): 値が関数の場合は`true`、そうでない場合は`false`を返します。

@@ -1,39 +1,58 @@
-# conforms
+# conforms (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Creates a function that invokes the predicate properties of `source` with the corresponding property values of a given object, returning `true` if all predicates return truthy, else `false`.
-
-Note: The created function is equivalent to `conformsTo` with source partially applied.
-
-## Signature
+Creates a function that checks if an object satisfies all the conditions defined in the given predicate object.
 
 ```typescript
-function conforms(source: Record<PropertyKey, (value: any) => boolean>): (object: Record<PropertyKey, any>) => boolean;
+const checker = conforms(predicates);
 ```
 
-### Parameters
+## Reference
 
-- `source` (`Record<PropertyKey, (value: any) => boolean>`): The object of property predicates to conform to.
+### `conforms(source)`
 
-### Returns
-
-(`(object: Record<PropertyKey, any>) => boolean`): Returns the new spec function.
-
-## Examples
+Use `conforms` when you need to check multiple properties against their respective conditions at once. This function generates a validation function that's useful for testing multiple objects later.
 
 ```typescript
+import { conforms } from 'es-toolkit/compat';
+
+// Define condition functions
 const isPositive = n => n > 0;
 const isEven = n => n % 2 === 0;
-const predicates = { a: isPositive, b: isEven };
-const conform = conforms(predicates);
+const isString = s => typeof s === 'string';
 
-console.log(conform({ a: 2, b: 4 })); // true
-console.log(conform({ a: -1, b: 4 })); // false
-console.log(conform({ a: 2, b: 3 })); // false
-console.log(conform({ a: 0, b: 2 })); // false
+// Create a validator with multiple conditions
+const validator = conforms({
+  a: isPositive,
+  b: isEven,
+  c: isString,
+});
+
+// Validate objects
+validator({ a: 2, b: 4, c: 'hello' }); // true (all conditions met)
+validator({ a: -1, b: 4, c: 'hello' }); // false (a is not positive)
+validator({ a: 2, b: 3, c: 'hello' }); // false (b is not even)
+validator({ a: 2, b: 4, c: 123 }); // false (c is not a string)
+
+// Use in array filtering
+const users = [
+  { age: 25, score: 80, name: 'Alice' },
+  { age: 17, score: 95, name: 'Bob' },
+  { age: 30, score: 75, name: 'Charlie' },
+];
+
+const adultHighScorer = conforms({
+  age: n => n >= 18,
+  score: n => n >= 80,
+});
+
+const filteredUsers = users.filter(adultHighScorer);
+// [{ age: 25, score: 80, name: 'Alice' }, { age: 30, score: 75, name: 'Charlie' }]
 ```
+
+#### Parameters
+
+- `source` (`Record<PropertyKey, (value: any) => boolean>`): An object containing predicate functions for each property.
+
+#### Returns
+
+(`(object: Record<PropertyKey, any>) => boolean`): Returns a function that checks if a given object satisfies all the conditions.

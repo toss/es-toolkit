@@ -1,34 +1,51 @@
-# isInteger
+# isInteger (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Number.isInteger`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`isInteger`関数は追加の型チェックオーバーヘッドにより動作が遅くなります。
+
+代わりに、より速く現代的な`Number.isInteger`を使用してください。
+
 :::
 
-`value`が整数であるかどうかを確認します。
-
-この関数はTypeScriptの型述語としても機能し、引数の型を`number`に絞り込みます。
-
-## インターフェース
+値が整数かどうかを確認します。
 
 ```typescript
-function isInteger(value?: unknown): value is number;
+const result = isInteger(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 確認する値。
+### `isInteger(value)`
 
-### 戻り値
-
-(`boolean`): `value`が整数の場合は`true`、それ以外の場合は`false`です。
-
-## 例
+指定された値が整数かどうかを確認したい場合は`isInteger`を使用してください。この関数はTypeScriptでタイプガードとしても動作し、値の型を`number`に絞り込みます。
 
 ```typescript
-isInteger(3); // Returns: true
-isInteger(Infinity); // Returns: false
-isInteger('3'); // Returns: false
-isInteger([]); // Returns: false
+import { isInteger } from 'es-toolkit/compat';
+
+// 整数値の確認
+isInteger(3); // true
+isInteger(-5); // true
+isInteger(0); // true
+
+// 小数値はfalse
+isInteger(3.14); // false
+isInteger(-2.5); // false
+
+// 無限大はfalse
+isInteger(Infinity); // false
+isInteger(-Infinity); // false
+
+// 他の型もfalse
+isInteger('3'); // false
+isInteger([]); // false
+isInteger({}); // false
 ```
+
+#### パラメータ
+
+- `value` (`any`): 確認する値です。
+
+#### 戻り値
+
+(`boolean`): 値が整数の場合は`true`、そうでない場合は`false`を返します。

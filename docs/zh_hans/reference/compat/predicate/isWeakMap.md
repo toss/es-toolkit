@@ -1,23 +1,94 @@
-# isWeakMap (🚧 文档写作中)
+# isWeakMap (Lodash 兼容性)
 
-::: warning 实现完成 - 文档写作中
-这个函数已经完全实现，可以使用了，但是文档还在写作中。
+::: warning 使用 `instanceof` 运算符
+这个 `isWeakMap` 函数是 Lodash 兼容性的函数，但是简单的类型检查。
+
+请使用更简单且现代的 `value instanceof WeakMap`。
 :::
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+检查值是否为 WeakMap。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将写作.
+```typescript
+const result = isWeakMap(value);
+```
 
 ## 参考
 
-### `isWeakMap(...args)`
+### `isWeakMap(value)`
 
-#### 接口
+当您想类型安全地检查值是否为 WeakMap 时使用 `isWeakMap`。在 TypeScript 中也可以作为类型守卫使用。
+
+```typescript
+import { isWeakMap } from 'es-toolkit/compat';
+
+// WeakMap 检查
+const weakMap = new WeakMap();
+isWeakMap(weakMap); // true
+
+// 其他类型返回 false
+isWeakMap(new Map()); // false
+isWeakMap(new Set()); // false
+isWeakMap(new WeakSet()); // false
+isWeakMap({}); // false
+isWeakMap([]); // false
+isWeakMap('weakmap'); // false
+isWeakMap(123); // false
+isWeakMap(null); // false
+isWeakMap(undefined); // false
+```
+
+也与其他类似的集合进行区分。
+
+```typescript
+import { isWeakMap } from 'es-toolkit/compat';
+
+// WeakMap vs Map
+const obj = {};
+const weakMap = new WeakMap([[obj, 'value']]);
+const map = new Map([[obj, 'value']]);
+
+isWeakMap(weakMap); // true
+isWeakMap(map); // false
+
+// WeakMap vs WeakSet
+isWeakMap(new WeakMap()); // true
+isWeakMap(new WeakSet()); // false
+
+// WeakMap vs 普通对象
+isWeakMap(new WeakMap()); // true
+isWeakMap({}); // false
+```
+
+在利用 WeakMap 的特殊属性时很有用。
+
+```typescript
+import { isWeakMap } from 'es-toolkit/compat';
+
+function setupWeakReference(collection: unknown, key: object, value: any) {
+  if (isWeakMap(collection)) {
+    // WeakMap 只能使用对象作为键，并维护弱引用
+    collection.set(key, value);
+    console.log('已存储到 WeakMap 中作为弱引用');
+
+    // WeakMap 没有大小信息
+    console.log('WeakMap 没有大小信息');
+  } else {
+    console.log('不是 WeakMap');
+  }
+}
+
+const weakMap = new WeakMap();
+const regularMap = new Map();
+const obj = { id: 1 };
+
+setupWeakReference(weakMap, obj, 'data'); // "已存储到 WeakMap 中作为弱引用"
+setupWeakReference(regularMap, obj, 'data'); // "不是 WeakMap"
+```
 
 #### 参数
 
-### 返回值
+- `value` (`unknown`): 要检查是否为 WeakMap 的值。
+
+#### 返回值
+
+(`value is WeakMap<object, any>`): 如果值为 WeakMap 则返回 `true`，否则返回 `false`。

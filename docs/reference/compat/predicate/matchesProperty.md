@@ -1,46 +1,77 @@
-# matchesProperty
+# matchesProperty (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Creates a function that checks if a given source object matches a specific property value.
-
-The returned function takes a source object and determines if the property at the
-specified path within the source object is equal to the given value.
-
-## Signature
+Creates a function that checks if a specific property matches a given value.
 
 ```typescript
-function matchesProperty(property: PropertyKey | PropertyKey[], source: unknown): (target?: unknown) => boolean;
+const checker = matchesProperty(path, value);
 ```
 
-### Parameters
+## Reference
 
-- `property` (`number | string | symbol | Array<number | string | symbol>`): The property path to check within the target object. This can be a single property key, an array of property keys, or a string representing a deep path.
-- `source` (`unknown`): The value to compare against the property value in the target object.
+### `matchesProperty(property, source)`
 
-### Returns
-
-(`(target: unknown) => boolean`): A function that takes a target object and returns `true` if the property value at the given path in the target object matches the provided value, otherwise returns `false`.
-
-## Examples
+Use `matchesProperty` when you need to create a function that checks if an object's specific property matches a given value. Useful for array filtering or object searching.
 
 ```typescript
-// Using a single property key
+import { matchesProperty } from 'es-toolkit/compat';
+
+// Simple property check
 const checkName = matchesProperty('name', 'Alice');
-console.log(checkName({ name: 'Alice' })); // true
-console.log(checkName({ name: 'Bob' })); // false
 
-// Using an array of property keys
-const checkNested = matchesProperty(['address', 'city'], 'New York');
-console.log(checkNested({ address: { city: 'New York' } })); // true
-console.log(checkNested({ address: { city: 'Los Angeles' } })); // false
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Alice', age: 35 },
+];
 
-// Using a deep path
-const checkNested = matchesProperty('address.city', 'New York');
-console.log(checkNested({ address: { city: 'New York' } })); // true
-console.log(checkNested({ address: { city: 'Los Angeles' } })); // false
+const aliceUsers = users.filter(checkName);
+// [{ name: 'Alice', age: 25 }, { name: 'Alice', age: 35 }]
+
+// Nested property check (array path)
+const checkCity = matchesProperty(['address', 'city'], 'Seoul');
+
+const profiles = [
+  { name: 'Kim', address: { city: 'Seoul', district: 'Gangnam' } },
+  { name: 'Lee', address: { city: 'Busan', district: 'Haeundae' } },
+  { name: 'Park', address: { city: 'Seoul', district: 'Mapo' } },
+];
+
+const seoulUsers = profiles.filter(checkCity);
+// [{ name: 'Kim', address: { city: 'Seoul', district: 'Gangnam' } },
+//  { name: 'Park', address: { city: 'Seoul', district: 'Mapo' } }]
+
+// Deep path as string
+const checkScore = matchesProperty('stats.game.score', 100);
+
+const players = [
+  { name: 'Player1', stats: { game: { score: 100, level: 5 } } },
+  { name: 'Player2', stats: { game: { score: 95, level: 4 } } },
+  { name: 'Player3', stats: { game: { score: 100, level: 6 } } },
+];
+
+const perfectScorers = players.filter(checkScore);
+// [{ name: 'Player1', stats: { game: { score: 100, level: 5 } } },
+//  { name: 'Player3', stats: { game: { score: 100, level: 6 } } }]
+
+// Matching with complex objects
+const checkRole = matchesProperty('role', { type: 'admin', permissions: ['read', 'write'] });
+
+const accounts = [
+  { user: 'Alice', role: { type: 'admin', permissions: ['read', 'write'] } },
+  { user: 'Bob', role: { type: 'user', permissions: ['read'] } },
+  { user: 'Charlie', role: { type: 'admin', permissions: ['read', 'write'] } },
+];
+
+const admins = accounts.filter(checkRole);
+// [{ user: 'Alice', role: { type: 'admin', permissions: ['read', 'write'] } },
+//  { user: 'Charlie', role: { type: 'admin', permissions: ['read', 'write'] } }]
 ```
+
+#### Parameters
+
+- `property` (`PropertyKey | PropertyKey[]`): The property path to check. Can be a string, array, or dot-separated path.
+- `source` (`unknown`): The value to compare against the property value.
+
+#### Returns
+
+(`(target: unknown) => boolean`): Returns a function that checks if the given object's property matches the value.
