@@ -41,3 +41,5 @@ export function differenceBy<T, U>(
     return !mappedSecondSet.has(mapper(item));
   });
 }
+
+export default differenceBy;

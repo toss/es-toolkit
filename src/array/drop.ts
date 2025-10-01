@@ -19,3 +19,5 @@ export function drop<T>(arr: readonly T[], itemsCount: number): T[] {
 
   return arr.slice(itemsCount);
 }
+
+export default drop;

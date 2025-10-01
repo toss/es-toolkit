@@ -25,3 +25,5 @@ export function difference<T>(firstArr: readonly T[], secondArr: readonly T[]): 
 
   return firstArr.filter(item => !secondSet.has(item));
 }
+
+export default difference;

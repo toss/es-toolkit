@@ -41,3 +41,5 @@ export function rest<F extends (...args: any[]) => any>(
     return func.apply(this, [...params, rest]);
   };
 }
+
+export default rest;

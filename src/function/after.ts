@@ -43,3 +43,5 @@ export function after<F extends (...args: any[]) => any>(
     return undefined;
   };
 }
+
+export default after;

@@ -18,3 +18,5 @@ import { noop } from '../function/noop.ts';
 export function isEqual(a: any, b: any): boolean {
   return isEqualWith(a, b, noop);
 }
+
+export default isEqual;

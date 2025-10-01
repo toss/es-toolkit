@@ -127,3 +127,5 @@ export function fill<T, U>(array: Array<T | U>, value: U, start = 0, end = array
 
   return array;
 }
+
+export default fill;

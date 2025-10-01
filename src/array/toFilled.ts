@@ -116,3 +116,5 @@ export function toFilled<T, U>(arr: readonly T[], value: U, start = 0, end = arr
 
   return newArr;
 }
+
+export default toFilled;

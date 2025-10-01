@@ -19,3 +19,5 @@
 export function isSet(value: unknown): value is Set<any> {
   return value instanceof Set;
 }
+
+export default isSet;

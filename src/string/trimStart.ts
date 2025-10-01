@@ -37,3 +37,5 @@ export function trimStart(str: string, chars?: string | string[]): string {
 
   return str.substring(startIndex);
 }
+
+export default trimStart;

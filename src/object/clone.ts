@@ -83,3 +83,5 @@ export function clone<T>(obj: T): T {
 
   return obj;
 }
+
+export default clone;

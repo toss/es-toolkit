@@ -44,3 +44,5 @@ export function attempt<T, E>(func: () => T): [null, T] | [E, null] {
     return [error as E, null];
   }
 }
+
+export default attempt;

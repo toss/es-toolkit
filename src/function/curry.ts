@@ -177,3 +177,5 @@ function makeCurry<F extends (...args: any) => any>(origin: F, argsLength: numbe
     return next as any;
   }
 }
+
+export default curry;

@@ -41,3 +41,5 @@ export function trimEnd(str: string, chars?: string | string[]): string {
 
   return str.substring(0, endIndex);
 }
+
+export default trimEnd;

@@ -14,3 +14,5 @@
 export function reverseString(value: string): string {
   return [...value].reverse().join('');
 }
+
+export default reverseString;

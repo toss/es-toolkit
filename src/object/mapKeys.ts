@@ -31,3 +31,5 @@ export function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKe
 
   return result;
 }
+
+export default mapKeys;

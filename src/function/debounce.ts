@@ -159,3 +159,5 @@ export function debounce<F extends (...args: any[]) => void>(
 
   return debounced;
 }
+
+export default debounce;

@@ -49,3 +49,5 @@ import { cloneDeepWithImpl } from './cloneDeepWith.ts';
 export function cloneDeep<T>(obj: T): T {
   return cloneDeepWithImpl(obj, undefined, obj, new Map(), undefined);
 }
+
+export default cloneDeep;

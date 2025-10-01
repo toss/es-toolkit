@@ -38,3 +38,5 @@ export function uniqBy<T, U>(arr: readonly T[], mapper: (item: T) => U): T[] {
 
   return Array.from(map.values());
 }
+
+export default uniqBy;

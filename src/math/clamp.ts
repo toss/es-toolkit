@@ -54,3 +54,5 @@ export function clamp(value: number, bound1: number, bound2?: number): number {
 
   return Math.min(Math.max(value, bound1), bound2);
 }
+
+export default clamp;

@@ -43,3 +43,5 @@ export function randomInt(minimum: number, maximum: number): number;
 export function randomInt(minimum: number, maximum?: number): number {
   return Math.floor(random(minimum, maximum!));
 }
+
+export default randomInt;

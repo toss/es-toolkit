@@ -70,3 +70,5 @@ export function initial<T>(arr: readonly T[]): T[];
 export function initial<T>(arr: readonly T[]): T[] {
   return arr.slice(0, -1);
 }
+
+export default initial;

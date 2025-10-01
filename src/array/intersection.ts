@@ -23,3 +23,5 @@ export function intersection<T>(firstArr: readonly T[], secondArr: readonly T[])
     return secondSet.has(item);
   });
 }
+
+export default intersection;

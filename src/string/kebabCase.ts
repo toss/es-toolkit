@@ -19,3 +19,5 @@ export function kebabCase(str: string): string {
   const words = getWords(str);
   return words.map(word => word.toLowerCase()).join('-');
 }
+
+export default kebabCase;

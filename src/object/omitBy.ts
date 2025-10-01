@@ -36,3 +36,5 @@ export function omitBy<T extends Record<string, any>>(
 
   return result;
 }
+
+export default omitBy;

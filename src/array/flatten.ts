@@ -32,3 +32,5 @@ export function flatten<T, D extends number = 1>(arr: readonly T[], depth = 1 as
   recursive(arr, 0);
   return result;
 }
+
+export default flatten;

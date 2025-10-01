@@ -27,3 +27,5 @@ import { difference } from '../array/difference.ts';
 export function isSubset<T>(superset: readonly T[], subset: readonly T[]): boolean {
   return difference(subset, superset).length === 0;
 }
+
+export default isSubset;

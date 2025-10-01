@@ -73,3 +73,5 @@ export function rangeRight(start: number, end?: number, step = 1): number[] {
 
   return result;
 }
+
+export default rangeRight;

@@ -51,3 +51,5 @@ export function inRange(value: number, minimum: number, maximum?: number): boole
 
   return minimum <= value && value < maximum;
 }
+
+export default inRange;

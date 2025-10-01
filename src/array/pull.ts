@@ -36,3 +36,5 @@ export function pull<T>(arr: T[], valuesToRemove: readonly unknown[]): T[] {
 
   return arr;
 }
+
+export default pull;

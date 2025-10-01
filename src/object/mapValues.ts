@@ -32,3 +32,5 @@ export function mapValues<T extends object, K extends keyof T, V>(
 
   return result;
 }
+
+export default mapValues;

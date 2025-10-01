@@ -26,3 +26,5 @@ export function startCase(str: string): string {
   }
   return result;
 }
+
+export default startCase;

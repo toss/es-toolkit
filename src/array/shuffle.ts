@@ -25,3 +25,5 @@ export function shuffle<T>(arr: readonly T[]): T[] {
 
   return result;
 }
+
+export default shuffle;

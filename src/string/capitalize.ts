@@ -15,3 +15,5 @@ export function capitalize<T extends string>(str: T): Capitalize<T> {
 }
 
 type Capitalize<T extends string> = T extends `${infer F}${infer R}` ? `${Uppercase<F>}${Lowercase<R>}` : T;
+
+export default capitalize;

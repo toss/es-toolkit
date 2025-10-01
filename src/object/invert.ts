@@ -29,3 +29,5 @@ export function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record
 
   return result;
 }
+
+export default invert;

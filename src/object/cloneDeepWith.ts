@@ -307,3 +307,5 @@ function isCloneableObject(object: object) {
     }
   }
 }
+
+export default cloneDeepWith;

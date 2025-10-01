@@ -27,3 +27,5 @@ export function uniqWith<T>(arr: readonly T[], areItemsEqual: (item1: T, item2: 
 
   return result;
 }
+
+export default uniqWith;

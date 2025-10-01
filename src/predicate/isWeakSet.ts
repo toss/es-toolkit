@@ -21,3 +21,5 @@
 export function isWeakSet(value: unknown): value is WeakSet<WeakKey> {
   return value instanceof WeakSet;
 }
+
+export default isWeakSet;

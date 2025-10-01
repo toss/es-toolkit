@@ -73,3 +73,5 @@ export function invariant(condition: unknown, message: string | Error): asserts 
 
   throw message;
 }
+
+export default invariant;

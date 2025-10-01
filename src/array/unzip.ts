@@ -35,3 +35,5 @@ export function unzip<T extends unknown[]>(zipped: ReadonlyArray<[...T]>): Unzip
 }
 
 type Unzip<K extends unknown[]> = { [I in keyof K]: Array<K[I]> };
+
+export default unzip;

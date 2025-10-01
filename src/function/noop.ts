@@ -8,3 +8,5 @@
  * @returns {void} This function does not return anything.
  */
 export function noop(): void {}
+
+export default noop;

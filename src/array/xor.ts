@@ -22,3 +22,5 @@ import { union } from './union.ts';
 export function xor<T>(arr1: readonly T[], arr2: readonly T[]): T[] {
   return difference(union(arr1, arr2), intersection(arr1, arr2));
 }
+
+export default xor;

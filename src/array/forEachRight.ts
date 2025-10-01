@@ -76,3 +76,5 @@ export function forEachRight<T>(arr: readonly T[], callback: (value: T, index: n
     callback(element, i, arr as T[]);
   }
 }
+
+export default forEachRight;

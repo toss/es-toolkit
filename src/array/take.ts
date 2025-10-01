@@ -32,3 +32,5 @@ export function take<T>(arr: readonly T[], count?: number, guard?: unknown): T[]
   count = guard || count === undefined ? 1 : toInteger(count);
   return arr.slice(0, count);
 }
+
+export default take;

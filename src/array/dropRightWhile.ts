@@ -28,3 +28,5 @@ export function dropRightWhile<T>(
 
   return [];
 }
+
+export default dropRightWhile;

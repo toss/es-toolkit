@@ -27,3 +27,5 @@ export function isBuffer(x: unknown): boolean {
   // @ts-ignore
   return typeof Buffer !== 'undefined' && Buffer.isBuffer(x);
 }
+
+export default isBuffer;

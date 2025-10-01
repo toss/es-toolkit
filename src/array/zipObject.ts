@@ -37,3 +37,5 @@ export function zipObject<P extends PropertyKey, V>(keys: readonly P[], values: 
 
   return result;
 }
+
+export default zipObject;

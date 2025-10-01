@@ -19,3 +19,5 @@
 export function isMap(value: unknown): value is Map<any, any> {
   return value instanceof Map;
 }
+
+export default isMap;

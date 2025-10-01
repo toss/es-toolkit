@@ -21,3 +21,5 @@
 export function isWeakMap(value: unknown): value is WeakMap<WeakKey, any> {
   return value instanceof WeakMap;
 }
+
+export default isWeakMap;

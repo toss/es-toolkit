@@ -76,3 +76,5 @@ export function merge<T extends Record<PropertyKey, any>, S extends Record<Prope
 
   return target;
 }
+
+export default merge;

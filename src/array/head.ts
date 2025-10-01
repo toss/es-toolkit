@@ -50,3 +50,5 @@ export function head<T>(arr: readonly T[]): T | undefined;
 export function head<T>(arr: readonly T[]): T | undefined {
   return arr[0];
 }
+
+export default head;

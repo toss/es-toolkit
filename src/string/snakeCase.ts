@@ -19,3 +19,5 @@ export function snakeCase(str: string): string {
   const words = getWords(str);
   return words.map(word => word.toLowerCase()).join('_');
 }
+
+export default snakeCase;

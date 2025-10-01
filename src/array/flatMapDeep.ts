@@ -16,3 +16,5 @@ import { type ExtractNestedArrayType, flattenDeep } from './flattenDeep.ts';
 export function flatMapDeep<T, U>(arr: readonly T[], iteratee: (item: T) => U): Array<ExtractNestedArrayType<U>> {
   return flattenDeep(arr.map((item: T) => iteratee(item)));
 }
+
+export default flatMapDeep;

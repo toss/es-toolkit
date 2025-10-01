@@ -30,3 +30,5 @@ export function xorWith<T>(
 
   return differenceWith(union, intersection, areElementsEqual);
 }
+
+export default xorWith;

@@ -85,3 +85,5 @@ export function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T> {
 
   return obj as ToCamelCaseKeys<T>;
 }
+
+export default toCamelCaseKeys;

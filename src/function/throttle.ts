@@ -75,3 +75,5 @@ export function throttle<F extends (...args: any[]) => void>(
 
   return throttled;
 }
+
+export default throttle;

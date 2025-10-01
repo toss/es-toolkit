@@ -22,3 +22,5 @@ export function sumBy<T>(items: readonly T[], getValue: (element: T) => number):
 
   return result;
 }
+
+export default sumBy;

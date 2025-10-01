@@ -44,3 +44,5 @@ export function once<F extends (() => any) | ((...args: any[]) => void)>(func: F
     return cache;
   } as F;
 }
+
+export default once;

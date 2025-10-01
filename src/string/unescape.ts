@@ -22,3 +22,5 @@ const htmlUnescapes: Record<string, string> = {
 export function unescape(str: string): string {
   return str.replace(/&(?:amp|lt|gt|quot|#(0+)?39);/g, match => htmlUnescapes[match] || "'");
 }
+
+export default unescape;

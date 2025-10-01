@@ -22,3 +22,5 @@ export function isBlob(x: unknown): x is Blob {
 
   return x instanceof Blob;
 }
+
+export default isBlob;

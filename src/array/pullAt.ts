@@ -26,3 +26,5 @@ export function pullAt<T>(arr: T[], indicesToRemove: number[]): T[] {
 
   return removed;
 }
+
+export default pullAt;

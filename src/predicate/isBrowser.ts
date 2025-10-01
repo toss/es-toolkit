@@ -21,3 +21,5 @@ declare let window:
 export function isBrowser(): boolean {
   return typeof window !== 'undefined' && window?.document != null;
 }
+
+export default isBrowser;

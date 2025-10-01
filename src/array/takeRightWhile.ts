@@ -24,3 +24,5 @@ export function takeRightWhile<T>(arr: readonly T[], shouldContinueTaking: (item
 
   return arr.slice();
 }
+
+export default takeRightWhile;

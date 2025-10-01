@@ -20,3 +20,5 @@ export function trim(str: string, chars?: string | string[]): string {
 
   return trimStart(trimEnd(str, chars), chars);
 }
+
+export default trim;

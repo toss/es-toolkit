@@ -17,3 +17,5 @@ import { ary } from './ary.ts';
 export function unary<F extends (...args: any[]) => any>(func: F): (...args: any[]) => ReturnType<F> {
   return ary(func, 1);
 }
+
+export default unary;

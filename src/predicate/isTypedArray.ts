@@ -40,3 +40,5 @@ export function isTypedArray(
   | Float64Array {
   return ArrayBuffer.isView(x) && !(x instanceof DataView);
 }
+
+export default isTypedArray;

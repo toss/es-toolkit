@@ -37,3 +37,5 @@ export function differenceWith<T, U>(
     });
   });
 }
+
+export default differenceWith;

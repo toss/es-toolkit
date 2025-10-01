@@ -23,3 +23,5 @@ import { difference } from './difference.ts';
 export function without<T>(array: readonly T[], ...values: T[]): T[] {
   return difference(array, values);
 }
+
+export default without;
