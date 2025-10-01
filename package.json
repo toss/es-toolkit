@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "sideEffects": false,
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@4.10.2",
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
