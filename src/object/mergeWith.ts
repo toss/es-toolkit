@@ -81,5 +81,3 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
 
   return target;
 }
-
-export default mergeWith;

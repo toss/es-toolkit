@@ -30,5 +30,3 @@ export function takeWhile<T>(arr: readonly T[], shouldContinueTaking: (element: 
 
   return result;
 }
-
-export default takeWhile;

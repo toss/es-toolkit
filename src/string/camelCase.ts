@@ -28,5 +28,3 @@ export function camelCase(str: string): string {
 
   return `${first.toLowerCase()}${rest.map(word => capitalize(word)).join('')}`;
 }
-
-export default camelCase;

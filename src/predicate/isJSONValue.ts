@@ -101,5 +101,3 @@ export function isJSONObject(obj: unknown): obj is Record<string, any> {
 
   return true;
 }
-
-export default isJSONValue;

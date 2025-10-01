@@ -69,5 +69,3 @@ export function deburr(str: string): string {
 
   return result;
 }
-
-export default deburr;

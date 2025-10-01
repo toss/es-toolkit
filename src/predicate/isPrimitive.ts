@@ -29,5 +29,3 @@
 export function isPrimitive(value: unknown): value is null | undefined | string | number | boolean | symbol | bigint {
   return value == null || (typeof value !== 'object' && typeof value !== 'function');
 }
-
-export default isPrimitive;

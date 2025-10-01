@@ -27,5 +27,3 @@ export function xorBy<T, U>(arr1: readonly T[], arr2: readonly T[], mapper: (ite
 
   return differenceBy(union, intersection, mapper);
 }
-
-export default xorBy;

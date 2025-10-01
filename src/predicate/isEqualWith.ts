@@ -334,5 +334,3 @@ function areObjectsEqual(
     stack.delete(b);
   }
 }
-
-export default isEqualWith;

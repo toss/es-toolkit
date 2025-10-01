@@ -82,5 +82,3 @@ export function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T> {
 
   return obj as ToSnakeCaseKeys<T>;
 }
-
-export default toSnakeCaseKeys;

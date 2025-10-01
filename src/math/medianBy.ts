@@ -25,5 +25,3 @@ export function medianBy<T>(items: readonly T[], getValue: (element: T) => numbe
 
   return median(nums);
 }
-
-export default medianBy;

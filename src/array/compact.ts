@@ -23,5 +23,3 @@ export function compact<T>(arr: readonly T[]): Array<NotFalsey<T>> {
 
   return result;
 }
-
-export default compact;

@@ -69,5 +69,3 @@ export function windowed<T>(
 
   return result;
 }
-
-export default windowed;

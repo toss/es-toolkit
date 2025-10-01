@@ -827,5 +827,3 @@ const placeholderSymbol: unique symbol = Symbol('partialRight.placeholder');
 partialRight.placeholder = placeholderSymbol;
 
 type Placeholder = typeof placeholderSymbol;
-
-export default partialRight;

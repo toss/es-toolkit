@@ -19,5 +19,3 @@ export function constantCase(str: string): string {
   const words = getWords(str);
   return words.map(word => word.toUpperCase()).join('_');
 }
-
-export default constantCase;

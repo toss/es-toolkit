@@ -30,5 +30,3 @@ export function flatMap<T, U, D extends number = 1>(
     depth
   );
 }
-
-export default flatMap;

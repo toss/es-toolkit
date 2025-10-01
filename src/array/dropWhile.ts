@@ -28,5 +28,3 @@ export function dropWhile<T>(
 
   return arr.slice(dropEndIndex);
 }
-
-export default dropWhile;

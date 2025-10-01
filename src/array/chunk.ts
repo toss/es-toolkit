@@ -38,5 +38,3 @@ export function chunk<T>(arr: readonly T[], size: number): T[][] {
 
   return result;
 }
-
-export default chunk;

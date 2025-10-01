@@ -31,5 +31,3 @@ export function at<T>(arr: readonly T[], indices: number[]): T[] {
 
   return result;
 }
-
-export default at;

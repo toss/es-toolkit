@@ -46,5 +46,3 @@ export function groupBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromI
 
   return result;
 }
-
-export default groupBy;

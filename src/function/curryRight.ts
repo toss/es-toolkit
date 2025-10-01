@@ -185,5 +185,3 @@ function makeCurryRight<F extends (...args: any) => any>(origin: F, argsLength: 
     return next as any;
   }
 }
-
-export default curryRight;

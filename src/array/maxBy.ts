@@ -81,5 +81,3 @@ export function maxBy<T>(items: readonly T[], getValue: (element: T) => number):
 
   return maxElement;
 }
-
-export default maxBy;

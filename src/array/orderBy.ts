@@ -60,5 +60,3 @@ export function orderBy<T extends object>(
     return 0;
   });
 }
-
-export default orderBy;

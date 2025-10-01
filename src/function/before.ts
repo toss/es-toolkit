@@ -45,5 +45,3 @@ export function before<F extends (...args: any[]) => any>(
     return undefined;
   };
 }
-
-export default before;

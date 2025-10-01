@@ -22,5 +22,3 @@ const htmlEscapes: Record<string, string> = {
 export function escape(str: string): string {
   return str.replace(/[&<>"']/g, match => htmlEscapes[match]);
 }
-
-export default escape;

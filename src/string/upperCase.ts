@@ -28,5 +28,3 @@ export function upperCase(str: string): string {
 
   return result;
 }
-
-export default upperCase;

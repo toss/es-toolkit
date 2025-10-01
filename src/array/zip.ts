@@ -153,5 +153,3 @@ export function zip<T>(...arrs: Array<readonly T[]>): T[][] {
   }
   return result;
 }
-
-export default zip;

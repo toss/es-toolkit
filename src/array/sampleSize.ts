@@ -40,5 +40,3 @@ export function sampleSize<T>(array: readonly T[], size: number): T[] {
 
   return result;
 }
-
-export default sampleSize;

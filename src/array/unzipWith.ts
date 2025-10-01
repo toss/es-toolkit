@@ -28,5 +28,3 @@ export function unzipWith<T, R>(target: readonly T[][], iteratee: (...args: T[])
 
   return result;
 }
-
-export default unzipWith;

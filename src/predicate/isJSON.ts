@@ -38,5 +38,3 @@ export function isJSON(value: unknown): value is string {
     return false;
   }
 }
-
-export default isJSON;

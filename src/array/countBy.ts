@@ -37,5 +37,3 @@ export function countBy<T, K extends PropertyKey>(arr: readonly T[], mapper: (it
 
   return result;
 }
-
-export default countBy;

@@ -16,5 +16,3 @@ import { sum } from './sum.ts';
 export function mean(nums: readonly number[]): number {
   return sum(nums) / nums.length;
 }
-
-export default mean;

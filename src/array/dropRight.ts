@@ -23,5 +23,3 @@ export function dropRight<T>(arr: readonly T[], itemsCount: number): T[] {
 
   return arr.slice(0, itemsCount);
 }
-
-export default dropRight;

@@ -40,5 +40,3 @@ export function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: numbe
 
   return removed;
 }
-
-export default remove;

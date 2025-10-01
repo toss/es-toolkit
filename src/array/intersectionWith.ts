@@ -43,5 +43,3 @@ export function intersectionWith<T, U>(
     });
   });
 }
-
-export default intersectionWith;

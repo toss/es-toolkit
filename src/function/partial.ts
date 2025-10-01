@@ -726,5 +726,3 @@ const placeholderSymbol: unique symbol = Symbol('partial.placeholder');
 partial.placeholder = placeholderSymbol;
 
 type Placeholder = typeof placeholderSymbol;
-
-export default partial;

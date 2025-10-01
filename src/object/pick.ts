@@ -28,5 +28,3 @@ export function pick<T extends Record<string, any>, K extends keyof T>(obj: T, k
 
   return result;
 }
-
-export default pick;

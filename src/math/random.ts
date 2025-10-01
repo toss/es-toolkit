@@ -53,5 +53,3 @@ export function random(minimum: number, maximum?: number): number {
 
   return Math.random() * (maximum - minimum) + minimum;
 }
-
-export default random;

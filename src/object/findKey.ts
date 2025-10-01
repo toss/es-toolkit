@@ -24,5 +24,3 @@ export function findKey<T extends Record<any, any>>(
 
   return keys.find(key => predicate(obj[key], key, obj));
 }
-
-export default findKey;

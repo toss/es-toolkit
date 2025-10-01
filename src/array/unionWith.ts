@@ -27,5 +27,3 @@ export function unionWith<T>(
 ): T[] {
   return uniqWith(arr1.concat(arr2), areItemsEqual);
 }
-
-export default unionWith;

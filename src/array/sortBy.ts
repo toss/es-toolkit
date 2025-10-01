@@ -35,5 +35,3 @@ import { orderBy } from './orderBy.ts';
 export function sortBy<T extends object>(arr: readonly T[], criteria: Array<((item: T) => unknown) | keyof T>): T[] {
   return orderBy(arr, criteria, ['asc']);
 }
-
-export default sortBy;

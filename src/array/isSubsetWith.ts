@@ -37,5 +37,3 @@ export function isSubsetWith<T>(
 ): boolean {
   return differenceWith(subset, superset, areItemsEqual).length === 0;
 }
-
-export default isSubsetWith;

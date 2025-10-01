@@ -21,5 +21,3 @@ export function ary<F extends (...args: any[]) => any>(func: F, n: number): (...
     return func.apply(this, args.slice(0, n));
   };
 }
-
-export default ary;

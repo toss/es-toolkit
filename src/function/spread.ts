@@ -19,5 +19,3 @@ export function spread<F extends (...args: any[]) => any>(func: F): (argsArr: Pa
     return func.apply(this, argsArr);
   };
 }
-
-export default spread;

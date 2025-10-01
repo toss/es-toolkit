@@ -81,5 +81,3 @@ export function minBy<T>(items: readonly T[], getValue: (element: T) => number):
 
   return minElement;
 }
-
-export default minBy;

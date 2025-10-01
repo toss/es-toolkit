@@ -20,5 +20,3 @@ export function sum(nums: readonly number[]): number {
 
   return result;
 }
-
-export default sum;

@@ -177,5 +177,3 @@ export function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: a
 export function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any {
   return flow(...funcs.reverse());
 }
-
-export default flowRight;

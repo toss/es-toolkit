@@ -28,5 +28,3 @@ export function takeRight<T>(arr: readonly T[], count = 1, guard?: unknown): T[]
   }
   return arr.slice(-count);
 }
-
-export default takeRight;

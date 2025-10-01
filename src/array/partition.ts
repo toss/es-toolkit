@@ -35,5 +35,3 @@ export function partition<T>(arr: readonly T[], isInTruthy: (value: T) => boolea
 
   return [truthy, falsy];
 }
-
-export default partition;

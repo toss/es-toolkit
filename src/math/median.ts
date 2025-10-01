@@ -34,5 +34,3 @@ export function median(nums: readonly number[]): number {
     return sorted[middleIndex];
   }
 }
-
-export default median;

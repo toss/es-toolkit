@@ -20,5 +20,3 @@ export function meanBy<T>(items: readonly T[], getValue: (element: T) => number)
 
   return mean(nums);
 }
-
-export default meanBy;

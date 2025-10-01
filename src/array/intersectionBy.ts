@@ -39,5 +39,3 @@ export function intersectionBy<T, U>(
   const mappedSecondSet = new Set(secondArr.map(mapper));
   return firstArr.filter(item => mappedSecondSet.has(mapper(item)));
 }
-
-export default intersectionBy;

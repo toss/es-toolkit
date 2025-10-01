@@ -19,5 +19,3 @@ export function pascalCase(str: string): string {
   const words = getWords(str);
   return words.map(word => capitalize(word)).join('');
 }
-
-export default pascalCase;

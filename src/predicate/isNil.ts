@@ -20,5 +20,3 @@
 export function isNil(x: unknown): x is null | undefined {
   return x == null;
 }
-
-export default isNil;

@@ -147,5 +147,3 @@ export interface MemoizeCache<K, V> {
    */
   size: number;
 }
-
-export default memoize;

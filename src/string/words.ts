@@ -38,5 +38,3 @@ export const CASE_SPLIT_PATTERN =
 export function words(str: string): string[] {
   return Array.from(str.match(CASE_SPLIT_PATTERN) ?? []);
 }
-
-export default words;

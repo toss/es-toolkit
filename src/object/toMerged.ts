@@ -49,5 +49,3 @@ export function toMerged<T extends Record<PropertyKey, any>, S extends Record<Pr
 ): T & S {
   return merge(cloneDeep(target), source);
 }
-
-export default toMerged;

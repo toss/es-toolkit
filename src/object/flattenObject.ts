@@ -63,5 +63,3 @@ function flattenObjectImpl(object: object, prefix = '', delimiter = '.'): Record
 
   return result;
 }
-
-export default flattenObject;

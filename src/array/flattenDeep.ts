@@ -26,5 +26,3 @@ export type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? Extra
 export function flattenDeep<T>(arr: readonly T[]): Array<ExtractNestedArrayType<T>> {
   return flatten(arr, Infinity) as Array<ExtractNestedArrayType<T>>;
 }
-
-export default flattenDeep;

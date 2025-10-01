@@ -136,6 +136,10 @@
         "default": {
           "types": "./compat/*.d.ts",
           "default": "./compat/*.js"
+        },
+        "import": {
+         "types": "./compat/*.d.mts",
+         "default": "./compat/*.mjs"
         }
       },
       "./error": {

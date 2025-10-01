@@ -20,5 +20,3 @@ import { uniq } from './uniq.ts';
 export function union<T>(arr1: readonly T[], arr2: readonly T[]): T[] {
   return uniq(arr1.concat(arr2));
 }
-
-export default union;

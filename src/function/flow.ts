@@ -169,5 +169,3 @@ export function flow(...funcs: Array<(...args: any[]) => any>): (...args: any[])
     return result;
   };
 }
-
-export default flow;

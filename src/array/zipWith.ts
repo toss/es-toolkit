@@ -115,5 +115,3 @@ export function zipWith<T, R>(arr1: readonly T[], ...rest: any[]): R[] {
 
   return result;
 }
-
-export default zipWith;

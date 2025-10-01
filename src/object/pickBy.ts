@@ -35,5 +35,3 @@ export function pickBy<T extends Record<string, any>>(
 
   return result;
 }
-
-export default pickBy;

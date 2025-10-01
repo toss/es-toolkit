@@ -22,5 +22,3 @@
 export function isLength(value?: any): boolean {
   return Number.isSafeInteger(value) && (value as number) >= 0;
 }
-
-export default isLength;

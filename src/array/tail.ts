@@ -94,5 +94,3 @@ export function tail<T>(arr: readonly T[]): T[];
 export function tail<T>(arr: readonly T[]): T[] {
   return arr.slice(1);
 }
-
-export default tail;

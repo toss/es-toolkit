@@ -26,5 +26,3 @@ export function isFile(x: unknown): x is File {
 
   return isBlob(x) && x instanceof File;
 }
-
-export default isFile;
