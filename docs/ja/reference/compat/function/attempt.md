@@ -14,17 +14,17 @@
 ## インターフェース
 
 ```typescript
-function attempt<F extends (...args: any[]) => any>(func: F, ...args: Parameters<F>): ReturnType<F> | Error;
+function attempt<R>(func: (...args: any[]) => R, ...args: any[]): R | Error;
 ```
 
 ### パラメータ
 
-- `func` (`F`): 実行される関数。
-- `args` (`...Parameters<F>`): 関数に渡す引数。
+- `func` (`(...args: any[]) => R`): 実行される関数。
+- `args` (`...any[]`): 関数に渡す引数。
 
 ### 戻り値
 
-(`ReturnType<F> | Error`): 成功した場合は関数の戻り値、または例外がスローされた場合はエラー。
+(`R | Error`): 成功した場合は関数の戻り値、または例外がスローされた場合はエラー。
 
 ## 例
 

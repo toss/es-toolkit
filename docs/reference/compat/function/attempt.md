@@ -14,17 +14,17 @@ If the caught error is not an instance of `Error`, it wraps it in a new `Error`.
 ## Signature
 
 ```typescript
-function attempt<F extends (...args: any[]) => any>(func: F, ...args: Parameters<F>): ReturnType<F> | Error;
+function attempt<R>(func: (...args: any[]) => R, ...args: any[]): R | Error;
 ```
 
 ### Parameters
 
-- `func` (`F`): The function to be executed.
-- `args` (`...Parameters<F>`): The arguments to pass to the function.
+- `func` (`(...args: any[]) => R`): The function to be executed.
+- `args` (`...any[]`): The arguments to pass to the function.
 
 ### Returns
 
-(`ReturnType<F> | Error`): The return value of the function if successful, or an Error if an exception is thrown.
+(`R | Error`): The return value of the function if successful, or an Error if an exception is thrown.
 
 ## Examples
 
