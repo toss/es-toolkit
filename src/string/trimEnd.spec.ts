@@ -61,4 +61,8 @@ describe('trimEnd', () => {
   it('should handle cases where multiple trailing characters in the array need removal', () => {
     expect(trimEnd('abcabcabc', ['c', 'b'])).toEqual('abcabca');
   });
+
+  it('should throw an error when chars is a string with multiple characters', () => {
+    expect(() => trimEnd('hello', 'ab')).toThrow(`The 'chars' parameter should be a single character string.`);
+  });
 });
