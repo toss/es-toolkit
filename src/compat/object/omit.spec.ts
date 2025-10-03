@@ -88,6 +88,16 @@ describe('omit', () => {
     });
   });
 
+  it('should handle array-like objects as keys', () => {
+    const object = { a: 1, b: 2, c: 3 };
+    const keys = { 0: 'a', 1: 'c', length: 2 };
+    // eslint-disable-next-line
+    // @ts-ignore
+    const result = omit(object, keys);
+
+    expect(result).toEqual({ b: 2 });
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(omit).toEqualTypeOf<typeof omitLodash>();
   });
