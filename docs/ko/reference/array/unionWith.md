@@ -15,7 +15,7 @@ function unionWith<T>(arr1: T[], arr2: T[], areItemsEqual: (item1: T, item2: T) 
 
 - `arr1` (`T[]`): 비교할 첫 번째 배열.
 - `arr2` (`T[]`): 비교할 두 번째 배열.
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 두 요소가 일치하는지 판단하는 일치 함수예요. 두 요소가 일치한다면 `true`를, 일치하지 않는다면 `false`를 반환하게 해주세요.
+- `areItemsEqual` (`(item1: T, item2: T) => boolean`): 두 요소가 일치하는지 판단하는 일치 함수예요. 두 요소가 일치한다면 `true`를, 일치하지 않는다면 `false`를 반환하게 해주세요.
 
 ### 반환 값
 

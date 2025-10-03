@@ -29,8 +29,8 @@ function isEqualWith(
 
 ### 파라미터
 
-- `a` (`unknown`): 비교할 첫 번째 값.
-- `b` (`unknown`): 비교할 두 번째 값.
+- `a` (`any`): 비교할 첫 번째 값.
+- `b` (`any`): 비교할 두 번째 값.
 - `areValuesEqual` (`(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void`): 두 값을 비교하는 방법을 나타내는 비교 함수. 두 값이 같은지를 나타내는 불리언 값을 반환할 수 있어요. `undefined`를 반환하면, 기본 방법으로 두 값을 비교해요.
   - `x`: 첫 번째 객체 `a`에 속한 값.
   - `y`: 두 번째 객체 `b`에 속한 값.
