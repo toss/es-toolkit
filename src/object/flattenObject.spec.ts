@@ -281,4 +281,65 @@ describe('flattenObject', function () {
       });
     });
   });
+
+  describe('Map functionality', () => {
+    it('flattens into a provided Map', () => {
+      const nestedObject = {
+        a: {
+          b: {
+            c: 1,
+          },
+        },
+        d: [2, 3],
+      };
+
+      const map = new Map();
+      const result = flattenObject(nestedObject, map);
+
+      expect(result).toBe(map);
+      expect(map.get('a.b.c')).toBe(1);
+      expect(map.get('d.0')).toBe(2);
+      expect(map.get('d.1')).toBe(3);
+      expect(map.size).toBe(3);
+    });
+
+    it('works with pre-populated Map', () => {
+      const map = new Map([['existing', 'value']]);
+
+      flattenObject({ a: { b: 1 } }, map);
+
+      expect(map.get('existing')).toBe('value');
+      expect(map.get('a.b')).toBe(1);
+      expect(map.size).toBe(2);
+    });
+
+    it('supports custom delimiter with Map using new syntax', () => {
+      const nestedObject = {
+        a: {
+          b: {
+            c: 1,
+          },
+        },
+        d: [2, 3],
+      };
+
+      const map = new Map();
+      const result = flattenObject(nestedObject, { delimiter: '_', target: map });
+
+      expect(result).toBe(map);
+      expect(map.get('a_b_c')).toBe(1);
+      expect(map.get('d_0')).toBe(2);
+      expect(map.get('d_1')).toBe(3);
+    });
+
+    it('supports custom delimiter with Map using forward slash', () => {
+      const map = flattenObject(
+        { user: { profile: { name: 'John' }, settings: { theme: 'dark' } } },
+        { delimiter: '/', target: new Map() }
+      );
+
+      expect(map.get('user/profile/name')).toBe('John');
+      expect(map.get('user/settings/theme')).toBe('dark');
+    });
+  });
 });
