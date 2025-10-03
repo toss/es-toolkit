@@ -20,9 +20,8 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v5
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+          cache: 'yarn'
       - name: Update npm
         run: npm install -g npm@11.5.1
       - uses: denoland/setup-deno@v2
@@ -92,9 +91,8 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v5
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn install
       - name: Deploy a docs site
