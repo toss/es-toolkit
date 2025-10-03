@@ -11,12 +11,12 @@
 ## 인터페이스
 
 ```typescript
-function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
+function property<T, R>(path: PropertyKey | readonly PropertyKey[]): (object: T) => R;
 ```
 
 ### 파라미터
 
-- `path` (`PropertyKey | PropertyKey[]`): 프로퍼티를 가져올 경로.
+- `path` (`PropertyKey | readonly PropertyKey[]`): 프로퍼티를 가져올 경로.
 
 ### 반환 값
 
