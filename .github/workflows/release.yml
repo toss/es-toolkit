@@ -9,6 +9,7 @@ on:
 
 jobs:
   release:
+    if: github.repository == 'toss/es-toolkit'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -84,7 +85,7 @@ jobs:
         working-directory: ${{ github.workspace }}/out/
 
   deploy-docs:
-    if: github.event_name == 'push' && github.ref_type == 'tag'
+    if: github.repository == 'toss/es-toolkit' && github.event_name == 'push' && github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
