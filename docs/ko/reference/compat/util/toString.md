@@ -13,12 +13,12 @@
 ## 인터페이스
 
 ```typescript
-function toString(value?: unknown): string;
+function toString(value: any): string;
 ```
 
 ### 파라미터
 
-- `value` (`unknown`): 변환할 값.
+- `value` (`any`): 변환할 값.
 
 ### 반환 값
 

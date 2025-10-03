@@ -11,12 +11,12 @@ Converts `value` to a finite number.
 ## Signature
 
 ```typescript
-function toFinite(value?: unknown): number;
+function toFinite(value: any): number;
 ```
 
 ### Parameters
 
-- `value` (`unknown`): The value to convert.
+- `value` (`any`): The value to convert.
 
 ### Returns
 

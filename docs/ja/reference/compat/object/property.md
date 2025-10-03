@@ -11,7 +11,7 @@
 ## インターフェース
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
+function property<T, R>(path: PropertyKey | readonly PropertyKey[]): (object: T) => R;
 ```
 
 ### パラメータ
@@ -20,7 +20,7 @@ function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown)
 
 ### 戻り値
 
-(`(object: unknown) => any`): オブジェクトの指定されたパスにある値を取得する関数。
+(`(object: T) => R`): オブジェクトの指定されたパスにある値を取得する関数。
 
 ## 例
 

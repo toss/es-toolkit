@@ -29,7 +29,7 @@ function template(string: string, options?: TemplateOptions): ((data?: object) =
 
 ### 返回值
 
-(`(data?: object) => string`): 返回编译的模板函数。
+(`((data?: object) => string) & { source: string }`): 返回的函数可以被调用，并包含一个 `source` 属性，里面包含编译后的模板源代码。
 
 ## 示例
 

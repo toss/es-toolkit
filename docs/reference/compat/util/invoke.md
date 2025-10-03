@@ -11,12 +11,12 @@ Invokes the method at `path` of `object` with the given arguments.
 ## Signature
 
 ```typescript
-function invoke(object: unknown, path: PropertyKey | PropertyKey[], args: any[]): any;
+function invoke(object: any, path: PropertyKey | PropertyKey[], args: any[]): any;
 ```
 
 ### Parameters
 
-- `object` (`unknown`): The object to query.
+- `object` (`any`): The object to query.
 - `path` (`PropertyKey | PropertyKey[]`): The path of the method to invoke.
 - `args` (`any[]`): The arguments to invoke the method with.
 

@@ -14,12 +14,17 @@
 ## 签名
 
 ```typescript
-function wrap<F extends (...args: unknown[]) => unknown>(
-  func: F,
-  wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
-): F;
-function wrap<T, A extends unknown[], R>(value: T, wrapper: (value: T, ...args: A) => R): (...args: A) => R;
+function wrap<T, U, V>(value: T, wrapper: (value: T, ...args: U[]) => V): (...args: U[]) => V;
 ```
+
+### 参数
+
+- `value` (`T`): 要包装的值。
+- `wrapper` (`(value: T, ...args: U[]) => V`): 包装函数。
+
+### 返回值
+
+(`(...args: U[]) => V`): 返回一个新的函数，该函数包装了给定的值，并应用了 `wrapper` 函数。
 
 ## 示例
 

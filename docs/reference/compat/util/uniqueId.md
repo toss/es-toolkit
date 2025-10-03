@@ -16,7 +16,7 @@ function uniqueId(prefix?: string): string;
 
 ### Parameters
 
-- `prefix` (`string`, optional): The value to prefix the ID with.
+- `prefix` (`string`, optional): The value to prefix the ID with. Default is `''`.
 
 ### Returns
 

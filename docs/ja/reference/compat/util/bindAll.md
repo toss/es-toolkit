@@ -11,24 +11,17 @@
 ## インターフェース
 
 ```typescript
-function bindAll(
-  object: Record<string, any>,
-  ...methodNames: Array<string | string[] | number | IArguments>
-): Record<string, any>;
+function bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T;
 ```
 
 ### パラメータ
 
-- `object` (`Object`): メソッドをバインドするオブジェクト
-- `methodNames` (`...(string | string[] | number | IArguments)`): バインドするメソッド名。以下の形式で指定可能:
-  - 個別のメソッド名の文字列
-  - メソッド名の配列
-  - 数値（`-0`は特別に処理）
-  - Arguments オブジェクト
+- `object` (`T`): メソッドをバインドするオブジェクト
+- `methodNames` (`...(string | string[])`): バインドするメソッド名。
 
 ### 戻り値
 
-(`Object`): メソッドがバインドされたオブジェクト
+(`T`): メソッドがバインドされたオブジェクト
 
 ## 例
 

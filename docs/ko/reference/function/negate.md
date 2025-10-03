@@ -5,12 +5,12 @@
 ## 인터페이스
 
 ```typescript
-function negate<F extends (...args: never[]) => boolean>(func: F): F;
+function negate<F extends (...args: any[]) => boolean>(func: F): F;
 ```
 
 ### 파라미터
 
-- `func` (`F extends (args: ...Parameters) => unknown`): 반환 값을 반대로 바꿀 함수.
+- `func` (`F extends (...args: any[]) => boolean`): 반환 값을 반대로 바꿀 함수.
 
 ### 반환 값
 

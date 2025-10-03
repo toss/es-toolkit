@@ -16,7 +16,7 @@
 ## 签名
 
 ```typescript
-function bind<F extends Function>(func: F, thisObj?: unknown, ...partialArgs: any[]): F;
+function bind(func: (...args: any[]) => any, thisObj: any, ...partialArgs: any[]): (...args: any[]) => any;
 
 namespace bind {
   placeholder: symbol;
@@ -25,13 +25,13 @@ namespace bind {
 
 ### 参数
 
-- `fn` (`F`): 绑定的函数。
-- `thisObj` (`any`, optional): `func` 绑定的 `this` 对象。
+- `fn` (`(...args: any[]) => any`): 绑定的函数。
+- `thisObj` (`any`): `func` 绑定的 `this` 对象。
 - `partialArgs` (`any[]`): 附加的部分参数。
 
 ### Returns
 
-(`F`): 返回新的绑定函数。
+(`(...args: any[]) => any`): 返回新的绑定函数。
 
 ## 示例
 

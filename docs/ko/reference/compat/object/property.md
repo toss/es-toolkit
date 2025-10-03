@@ -11,7 +11,7 @@
 ## 인터페이스
 
 ```typescript
-function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown) => any;
+function property<T, R>(path: PropertyKey | readonly PropertyKey[]): (object: T) => R;
 ```
 
 ### 파라미터
@@ -20,7 +20,7 @@ function property(path: PropertyKey | readonly PropertyKey[]): (object: unknown)
 
 ### 반환 값
 
-(`(object: unknown) => any`): 객체에서 주어진 경로에 있는 값을 가져오는 함수.
+(`(object: T) => R`): 객체에서 주어진 경로에 있는 값을 가져오는 함수.
 
 ## 예시
 
