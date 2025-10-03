@@ -14,12 +14,17 @@
 ## 인터페이스
 
 ```typescript
-function wrap<F extends (...args: unknown[]) => unknown>(
-  func: F,
-  wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
-): F;
-function wrap<T, A extends unknown[], R>(value: T, wrapper: (value: T, ...args: A) => R): (...args: A) => R;
+function wrap<T, U, V>(value: T, wrapper: (value: T, ...args: U[]) => V): (...args: U[]) => V;
 ```
+
+### 파라미터
+
+- `value` (`T`): 감싸려고 하는 값.
+- `wrapper` (`(value: T, ...args: U[]) => V`): 감싸는 함수.
+
+### 반환 값
+
+(`(...args: U[]) => V`): 감싼 값을 반환하는 새로운 함수.
 
 ## 예시
 

@@ -50,6 +50,11 @@ describe('drop', () => {
     expect([[1, 2], [3, 4], [5]].map(drop)).toEqual([[2], [4], []]);
   });
 
+  it('should use default count of 1 when count is undefined', () => {
+    expect(drop([1, 2, 3])).toEqual([2, 3]);
+    expect(drop([1, 2, 3], undefined)).toEqual([2, 3]);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(drop).toEqualTypeOf<typeof dropLodash>();
   });

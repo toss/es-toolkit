@@ -21,20 +21,20 @@
 ## 인터페이스
 
 ```typescript
-function overArgs<F extends (...args: any[]) => any, T extends Array<any>>(
-  func: F,
-  transforms: T
-): (...args: any[]) => ReturnType<F>;
+function overArgs(
+  func: (...args: any[]) => any,
+  ...transforms: Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>
+): (...args: any[]) => any;
 ```
 
 ### 파라미터
 
-- `func` (`F`): 인자를 변환해서 전달할 함수예요.
-- `transforms` (`T`): 인자를 변환할 함수들의 배열이에요.
+- `func` (`(...args: any[]) => any`): 인자를 변환해서 전달할 함수예요.
+- `transforms` (`Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>`): 인자를 변환할 함수들의 배열이에요.
 
 ### 반환 값
 
-(`(...args: any[]) => ReturnType<F>`): 인자들을 변환한 다음 `func`에 전달하는 새로운 함수를 반환해요.
+(`(...args: any[]) => any`): 인자들을 변환한 다음 `func`에 전달하는 새로운 함수를 반환해요.
 
 ### 오류
 

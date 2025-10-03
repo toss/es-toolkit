@@ -48,6 +48,12 @@ describe('minBy', () => {
     expect(minBy(undefined)).toBe(undefined);
   });
 
+  it('should work without iteratee parameter (default to identity)', () => {
+    const numbers = [3, 1, 2];
+
+    expect(minBy(numbers)).toBe(1);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(minBy).toEqualTypeOf<typeof minByLodash>();
   });

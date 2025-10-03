@@ -11,22 +11,18 @@
 ## インターフェース
 
 ```typescript
-function set<T extends object>(
-  obj: T,
-  path: string | number | symbol | Array<string | number | symbol>,
-  value: unknown
-): T;
+function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: any): T;
 ```
 
 ### パラメータ
 
 - `obj` (`T`): 値を設定するオブジェクト。
 - `path` (`string | number | symbol | Array<string | number | symbol>`): 値を設定するプロパティのパス。
-- `value` (`unknown`): 設定する値。
+- `value` (`any`): 設定する値。
 
 ### 戻り値
 
-(`T`): 修正されたオブジェクトを返します。T を指定しない場合は unknown です。
+(`T`): 修正されたオブジェクトを返します。T を指定しない場合は object です。
 
 ## 例
 

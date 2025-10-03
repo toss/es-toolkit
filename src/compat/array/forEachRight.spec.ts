@@ -160,6 +160,18 @@ describe('forEachRight', () => {
     expect(resultForUndefined).toBe(undefined);
   });
 
+  it('should use identity function when no callback is provided', () => {
+    const array = [1, 2, 3];
+    const result = forEachRight(array);
+
+    expect(result).toBe(array);
+
+    const object = { a: 1, b: 2 };
+    const objectResult = forEachRight(object);
+
+    expect(objectResult).toBe(object);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(forEachRight).toEqualTypeOf<typeof forEachRightLodash>();
   });
