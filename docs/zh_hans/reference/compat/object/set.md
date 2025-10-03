@@ -12,22 +12,18 @@
 ## 签名
 
 ```typescript
-function set<T extends object>(
-  obj: T,
-  path: string | number | symbol | Array<string | number | symbol>,
-  value: unknown
-): T;
+function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: any): T;
 ```
 
 ### 参数
 
 - `obj` (`T`): 要修改的对象。
 - `path` (`string | number | symbol | Array<string | number | symbol>`): 要设置的属性路径。
-- `value` (`unknown`): 要设置的值。
+- `value` (`any`): 要设置的值。
 
 ### 返回值
 
-(`T`): 返回修改后的对象。如果未指定 T，默认值为 unknown。
+(`T`): 返回修改后的对象。如果未指定 T，默认值为 object。
 
 ## 示例
 
