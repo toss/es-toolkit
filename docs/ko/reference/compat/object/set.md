@@ -11,22 +11,18 @@
 ## 인터페이스
 
 ```typescript
-function set<T extends object>(
-  obj: T,
-  path: string | number | symbol | Array<string | number | symbol>,
-  value: unknown
-): T;
+function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: any): T;
 ```
 
 ### 파라미터
 
 - `obj` (`T`): 값을 설정할 객체.
 - `path` (`string | number | symbol | Array<string | number | symbol>`): 값을 설정할 프로퍼티 경로.
-- `value` (`unknown`): 설정할 값.
+- `value` (`any`): 설정할 값.
 
 ### 반환 값
 
-(`T`): 수정된 객체를 반환해요. T를 지정하지 않으면 unknown이에요.
+(`T`): 수정된 객체를 반환해요. T를 지정하지 않으면 object이에요.
 
 ## 예시
 
