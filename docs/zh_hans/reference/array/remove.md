@@ -18,7 +18,7 @@ function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: number, arra
 
 ### 返回值
 
-(`T[]`): 削除された要素の配列。
+(`T[]`): 被删除的元素数组。
 
 ## 示例
 
