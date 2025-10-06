@@ -12,12 +12,12 @@ It leverages the [`get`](./get.md) functions to obtain the value.
 ## Signature
 
 ```typescript
-function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
+function property<T, R>(path: PropertyKey | readonly PropertyKey[]): (object: T) => R;
 ```
 
 ### Parameters
 
-- `path` (`PropertyKey | PropertyKey[]`): The path of the property to get.
+- `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to get.
 
 ### Returns
 

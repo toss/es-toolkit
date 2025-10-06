@@ -11,12 +11,12 @@
 ## インターフェース
 
 ```typescript
-function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
+function property<T, R>(path: PropertyKey | readonly PropertyKey[]): (object: T) => R;
 ```
 
 ### パラメータ
 
-- `path` (`PropertyKey | PropertyKey[]`): プロパティを取得するパス。
+- `path` (`PropertyKey | readonly PropertyKey[]`): プロパティを取得するパス。
 
 ### 戻り値
 

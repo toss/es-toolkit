@@ -5,7 +5,7 @@
 ## シグネチャ
 
 ```typescript
-function clone<T>(value: T): T;
+function clone<T>(obj: T): T;
 ```
 
 ### パラメータ

@@ -13,12 +13,15 @@
 ## 인터페이스
 
 ```typescript
-function matchesProperty(property: PropertyKey | PropertyKey[], source: unknown): (target?: unknown) => boolean;
+function matchesProperty(
+  property: PropertyKey | readonly PropertyKey[],
+  source: unknown
+): (target?: unknown) => boolean;
 ```
 
 ### 파라미터
 
-- `property` (`number | string | symbol | Array<number | string | symbol>`): 객체의 프로퍼티를 나타내는 경로. 프로퍼티 이름, 프로퍼티 이름의 배열, 또는 깊은 경로를 나타내는 문자열을 쓸 수 있어요.
+- `property` (`PropertyKey | readonly PropertyKey[]`): 객체의 프로퍼티를 나타내는 경로. 프로퍼티 이름, 프로퍼티 이름의 배열, 또는 깊은 경로를 나타내는 문자열을 쓸 수 있어요.
 - `source` (`unknown`): 객체의 프로퍼티와 비교할 값.
 
 ### 반환 값

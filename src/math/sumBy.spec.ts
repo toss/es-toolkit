@@ -20,4 +20,9 @@ describe('sumBy function', () => {
 
     expect(sumBy(array1, x => x.a) + sumBy(array2, x => x.a)).toBe(sumBy([...array1, ...array2], x => x.a));
   });
+
+  it('can access its zero‑based index in the array.', () => {
+    const result = sumBy([{ a: 1 }, { a: 2 }, { a: 3 }], (x, i) => x.a * i);
+    expect(result).toBe(8);
+  });
 });

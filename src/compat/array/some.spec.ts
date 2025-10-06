@@ -127,6 +127,7 @@ describe('some', () => {
     expect(some(objects, 'b')).toBe(true);
 
     expect(some(objects, 0)).toBe(true);
+    expect(some(objects, '')).toBe(false);
     expect(some(objects, Symbol.for('a'))).toBe(true);
   });
 
