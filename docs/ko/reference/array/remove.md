@@ -18,7 +18,7 @@ function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: number, arra
 
 ### 반환 값
 
-(`T[]`): 지정된 요소가 제거된 수정된 배열.
+(`T[]`): 제거된 요소들의 배열.
 
 ## 예시
 
