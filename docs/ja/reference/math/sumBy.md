@@ -12,7 +12,7 @@ function sumBy<T>(items: T[], getValue: (element: T) => number): number;
 
 ### パラメータ
 
-- `items` (`T[]`): 合計を計算する数値配列です。
+- `items` (`T[]`): 平均を計算する配列です。
 - `getValue` (`(item: T) => number`): 各要素から数値を選択する関数です。
 
 ### 戻り値
