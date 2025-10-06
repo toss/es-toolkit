@@ -25,5 +25,3 @@ function meanBy<T>(items: T[], getValue: (item: T) => number): number;
 meanBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 2를 반환해요.
 meanBy([], x => x.a); // NaN을 반환해요.
 ```
-
-d
