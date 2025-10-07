@@ -1,3 +1,4 @@
+import type { NonPlainObject } from './toSnakeCaseKeys.ts';
 import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { camelCase } from '../string/camelCase.ts';
@@ -11,11 +12,13 @@ type PascalToCamel<S extends string> = S extends `${infer F}${infer R}` ? `${Low
 /** If it's snake_case, apply the snake_case rule; otherwise, just lowercase the first letter (including PascalCase → camelCase). */
 type AnyToCamel<S extends string> = S extends `${string}_${string}` ? SnakeToCamel<S> : PascalToCamel<S>;
 
-type ToCamelCaseKeys<T> = T extends any[]
-  ? Array<ToCamelCaseKeys<T[number]>>
-  : T extends Record<string, any>
-    ? { [K in keyof T as AnyToCamel<Extract<K, string>>]: ToCamelCaseKeys<T[K]> }
-    : T;
+type ToCamelCaseKeys<T> = T extends NonPlainObject
+  ? T
+  : T extends any[]
+    ? Array<ToCamelCaseKeys<T[number]>>
+    : T extends Record<string, any>
+      ? { [K in keyof T as AnyToCamel<Extract<K, string>>]: ToCamelCaseKeys<T[K]> }
+      : T;
 
 /**
  * Creates a new object composed of the properties with keys converted to camelCase.
