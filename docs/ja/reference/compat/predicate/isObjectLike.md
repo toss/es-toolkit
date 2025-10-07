@@ -10,12 +10,10 @@
 
 オブジェクトのような値とは、`typeof` 演算の結果が `'object'` で、`null` ではない値のことを指します。
 
-TypeScript の型ガードとして使用できます。パラメータとして与えられた値の型をオブジェクトのような値に絞り込みます。
-
 ## インターフェース
 
 ```typescript
-function isObjectLike(value?: unknown): value is object;
+function isObjectLike(value?: unknown): boolean;
 ```
 
 ### パラメータ
@@ -24,7 +22,7 @@ function isObjectLike(value?: unknown): value is object;
 
 ### 戻り値
 
-(`value is object`): 与えられた値がオブジェクトのようであれば `true`、そうでなければ `false` を返します。
+(`boolean`): 与えられた値がオブジェクトのようであれば `true`、そうでなければ `false` を返します。
 
 ## 例
 

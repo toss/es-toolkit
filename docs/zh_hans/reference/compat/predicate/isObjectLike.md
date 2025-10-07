@@ -11,12 +11,10 @@
 
 如果一个值的类型是对象并且它不为 `null`，那么它就是类似对象的。
 
-这个函数还可以在 TypeScript 中用作类型谓词，将参数的类型缩小到类似对象的值。
-
 ## 签名
 
 ```typescript
-function isObjectLike(value?: unknown): value is object;
+function isObjectLike(value?: unknown): boolean;
 ```
 
 ### 参数
@@ -25,7 +23,7 @@ function isObjectLike(value?: unknown): value is object;
 
 ### 返回值
 
-(`value is object`): 如果该值是类对象，则返回 `true`，否则返回 `false`。
+(`boolean`): 如果该值是类对象，则返回 `true`，否则返回 `false`。
 
 ## 示例
 
