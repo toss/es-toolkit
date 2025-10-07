@@ -1,4 +1,3 @@
-import type { NonPlainObject } from './toSnakeCaseKeys.ts';
 import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { camelCase } from '../string/camelCase.ts';
@@ -11,6 +10,31 @@ type PascalToCamel<S extends string> = S extends `${infer F}${infer R}` ? `${Low
 
 /** If it's snake_case, apply the snake_case rule; otherwise, just lowercase the first letter (including PascalCase → camelCase). */
 type AnyToCamel<S extends string> = S extends `${string}_${string}` ? SnakeToCamel<S> : PascalToCamel<S>;
+
+type NonPlainObject =
+  | Date
+  | RegExp
+  | Map<any, any>
+  | Set<any>
+  | WeakMap<any, any>
+  | WeakSet<any>
+  | Promise<any>
+  | Error
+  | ArrayBuffer
+  | DataView
+  | Int8Array
+  | Uint8Array
+  | Uint8ClampedArray
+  | Int16Array
+  | Uint16Array
+  | Int32Array
+  | Uint32Array
+  | Float32Array
+  | Float64Array
+  | BigInt64Array
+  | BigUint64Array
+  | ((...args: any[]) => any)
+  | typeof globalThis;
 
 type ToCamelCaseKeys<T> = T extends NonPlainObject
   ? T

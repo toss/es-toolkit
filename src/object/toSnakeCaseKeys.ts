@@ -8,7 +8,7 @@ type SnakeCase<S extends string> = S extends `${infer P1}${infer P2}`
     : `${Lowercase<P1>}_${SnakeCase<Uncapitalize<P2>>}`
   : Lowercase<S>;
 
-export type NonPlainObject =
+type NonPlainObject =
   | Date
   | RegExp
   | Map<any, any>
