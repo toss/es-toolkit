@@ -1,4 +1,3 @@
-import { isMatch } from './isMatch.ts';
 import { isObject } from './isObject.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import type { IsMatchWithCustomizer } from '../_internal/IsMatchWithCustomizer.ts';
@@ -112,7 +111,7 @@ export function isMatchWith(
   ) => boolean | undefined
 ): boolean {
   if (typeof compare !== 'function') {
-    return isMatch(target, source);
+    return isMatchWith(target, source, () => undefined);
   }
 
   return isMatchWithInternal(
