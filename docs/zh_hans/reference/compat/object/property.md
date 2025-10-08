@@ -17,7 +17,7 @@ function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
 
 ### 参数
 
-- `path` (`PropertyKey | PropertyKey[]`): 要获取的属性路径。
+- `path` (`PropertyKey | readonly PropertyKey[]`): 要获取的属性路径。
 
 ### 返回值
 

@@ -13,12 +13,12 @@ If `n` is negative, the nth argument from the end is returned.
 ## Signature
 
 ```typescript
-function nthArg(n: number): (...args: any[]) => unknown;
+function nthArg(n?: number): (...args: any[]) => unknown;
 ```
 
 ### Parameters
 
-- `n` (`number`): The index of the argument to retrieve.
+- `n` (`number`, optional): The index of the argument to retrieve, default to `0`.
   If negative, counts from the end of the arguments list.
 
 ### Returns

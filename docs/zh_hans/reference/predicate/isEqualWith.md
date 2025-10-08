@@ -36,11 +36,15 @@ function isEqualWith(
 
 ### 参数
 
-- `a` (`unknown`): 要比较的第一个值。
-- `b` (`unknown`): 要比较的第二个值。
-- `areValuesEqual` (`Function`): 自定义比较函数。
-  如果它返回布尔值，该结果将被使用。如果它返回undefined，
-  将使用默认的相等比较。
+- `a` (`any`): 要比较的第一个值。
+- `b` (`any`): 要比较的第二个值。
+- `areValuesEqual` (`(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void`): 用于表示如何比较两个值的比较函数。它可以返回一个布尔值，表示两个值是否相等。如果返回 `undefined`，则使用默认方法进行比较。
+  - `x`: 属于第一个对象 `a` 的值。
+  - `y`: 属于第二个对象 `b` 的值。
+  - `property`: 用于获取 `x` 和 `y` 的属性键。
+  - `xParent`: 第一个值 `x` 的父级。
+  - `yParent`: 第二个值 `y` 的父级。
+  - `stack`: 用于处理循环引用的内部栈（`Map`）。
 
 ### 返回值
 
