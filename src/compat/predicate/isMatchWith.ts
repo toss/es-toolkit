@@ -211,7 +211,14 @@ function isObjectMatch(
   }
 
   if (keys.length === 0) {
+    if (stack && stack.size > 0 && !isObject(target)) {
+      return false;
+    }
     return true;
+  }
+
+  if (!isObject(target)) {
+    return false;
   }
 
   if (stack && stack.has(source)) {
