@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.39.10",
+  "version": "1.40.0",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "sideEffects": false,
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@4.10.2",
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
