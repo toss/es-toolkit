@@ -112,6 +112,13 @@ describe('truncate', () => {
     expect(truncate('¥§✈✉🤓', { length: 4, omission: '…' })).toEqual('¥§✈…');
   });
 
+  it('should handle null and undefined strings', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(truncate(null)).toBe('');
+    expect(truncate(undefined)).toBe('');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(truncate).toEqualTypeOf<typeof truncateLodash>();
   });
