@@ -21,7 +21,7 @@ import { toInteger } from '../compat/util/toInteger.ts';
  * // Returns [1, 2, 3]
  * takeRight([1, 2, 3], 5);
  */
-export function takeRight<T>(arr: readonly T[], count: number, guard?: unknown): T[] {
+export function takeRight<T>(arr: readonly T[], count?: number, guard?: unknown): T[] {
   count = guard || count === undefined ? 1 : toInteger(count);
   if (count <= 0 || arr.length === 0) {
     return [];
