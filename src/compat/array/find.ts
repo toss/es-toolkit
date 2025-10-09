@@ -115,7 +115,7 @@ export function find<T>(
   }
 
   const doesMatch = iteratee(_doesMatch);
-  if (typeof doesMatch === 'function' && !Array.isArray(source)) {
+  if (!Array.isArray(source)) {
     const keys = Object.keys(source) as Array<keyof T>;
 
     for (let i = fromIndex; i < keys.length; i++) {
@@ -130,6 +130,5 @@ export function find<T>(
     return undefined;
   }
 
-  const values = Array.isArray(source) ? source.slice(fromIndex) : Object.values(source).slice(fromIndex);
-  return values.find(doesMatch);
+  return source.slice(fromIndex).find(doesMatch);
 }

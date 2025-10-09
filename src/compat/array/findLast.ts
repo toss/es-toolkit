@@ -141,7 +141,7 @@ export function findLast<T>(
 
   const doesMatch = iteratee(_doesMatch);
 
-  if (typeof doesMatch === 'function' && !Array.isArray(source)) {
+  if (!Array.isArray(source)) {
     const keys = Object.keys(source) as Array<keyof T>;
 
     for (let i = fromIndex; i >= 0; i--) {
@@ -156,6 +156,5 @@ export function findLast<T>(
     return undefined;
   }
 
-  const values = Array.isArray(source) ? source.slice(0, fromIndex + 1) : Object.values(source).slice(0, fromIndex + 1);
-  return values.findLast(doesMatch);
+  return source.slice(0, fromIndex + 1).findLast(doesMatch);
 }
