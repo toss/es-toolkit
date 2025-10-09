@@ -10,12 +10,10 @@ Check if a value is an object-like.
 
 A value is object-like if its type is object and it is not null.
 
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object-like value.
-
 ## Signature
 
 ```typescript
-function isObjectLike(value?: unknown): value is object;
+function isObjectLike(value?: unknown): boolean;
 ```
 
 ### Parameters
@@ -24,7 +22,7 @@ function isObjectLike(value?: unknown): value is object;
 
 ### Returns
 
-(`value is object`): Returns `true` if the value is an object-like, `false` otherwise.
+(`boolean`): Returns `true` if the value is an object-like, `false` otherwise.
 
 ## Examples
 

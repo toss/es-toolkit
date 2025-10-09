@@ -10,12 +10,10 @@
 
 객체 같은 값이란, `typeof` 연산의 결과가 `'object'` 이고 `null`이 아닌 값을 말해요.
 
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 객체 같은 값으로 좁혀요.
-
 ## 인터페이스
 
 ```typescript
-function isObjectLike(value?: unknown): value is object;
+function isObjectLike(value?: unknown): boolean;
 ```
 
 ### 파라미터
@@ -24,7 +22,7 @@ function isObjectLike(value?: unknown): value is object;
 
 ### 반환 값
 
-(`value is object`): 주어진 값이 객체 같으면 `true`, 아니면 `false`를 반환해요.
+(`boolean`): 주어진 값이 객체 같으면 `true`, 아니면 `false`를 반환해요.
 
 ## 예시
 
