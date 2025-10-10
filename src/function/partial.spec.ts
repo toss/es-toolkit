@@ -103,4 +103,12 @@ describe('partial', () => {
 
     expect(par('a', 'c')).toEqual(['a', 'b', 'c', 'd']);
   });
+
+  it('should create partialed function without copying prototype from arrow function', () => {
+    const arrowFn = (a: number, b: number) => a + b;
+    const partialed = partial(arrowFn, 10);
+
+    expect(partialed(5)).toBe(15);
+    expect(typeof partialed.prototype).toBe('object');
+  });
 });
