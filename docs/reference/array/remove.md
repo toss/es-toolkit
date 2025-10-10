@@ -18,7 +18,7 @@ function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: number, arra
 
 ### Returns
 
-(`T[]`): The modified array with the specified elements removed.
+(`T[]`): Array of removed elements.
 
 ## Examples
 
