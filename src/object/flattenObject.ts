@@ -38,7 +38,7 @@ export function flattenObject(object: object, { delimiter = '.' }: FlattenObject
   return flattenObjectImpl(object, '', delimiter);
 }
 
-function flattenObjectImpl(object: object, prefix = '', delimiter = '.'): Record<string, any> {
+function flattenObjectImpl(object: object, prefix: string, delimiter: string): Record<string, any> {
   const result: Record<string, any> = {};
   const keys = Object.keys(object);
 
