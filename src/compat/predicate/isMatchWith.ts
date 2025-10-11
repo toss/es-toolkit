@@ -186,7 +186,7 @@ function isObjectMatch(
     source: any,
     stack?: Map<any, any>
   ) => boolean | undefined,
-  stack: Map<any, any> | undefined
+  stack?: Map<any, any>
 ): boolean {
   if (source == null) {
     return true;
@@ -214,13 +214,11 @@ function isObjectMatch(
     return true;
   }
 
-  if (stack && stack.has(source)) {
+  if (stack?.has(source)) {
     return stack.get(source) === target;
   }
 
-  if (stack) {
-    stack.set(source, target);
-  }
+  stack?.set(source, target);
 
   try {
     for (let i = 0; i < keys.length; i++) {
@@ -247,9 +245,7 @@ function isObjectMatch(
 
     return true;
   } finally {
-    if (stack) {
-      stack.delete(source);
-    }
+    stack?.delete(source);
   }
 }
 
@@ -264,7 +260,7 @@ function isMapMatch(
     source: any,
     stack?: Map<any, any>
   ) => boolean | undefined,
-  stack: Map<any, any> | undefined
+  stack?: Map<any, any>
 ): boolean {
   if (source.size === 0) {
     return true;
@@ -298,7 +294,7 @@ function isArrayMatch(
     source: any,
     stack?: Map<any, any>
   ) => boolean | undefined,
-  stack: Map<any, any> | undefined
+  stack?: Map<any, any>
 ): boolean {
   if (source.length === 0) {
     return true;
