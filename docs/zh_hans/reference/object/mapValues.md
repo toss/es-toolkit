@@ -18,7 +18,7 @@ function mapValues<T extends object, K extends keyof T, V>(
 
 ### 返回值
 
-(`Record<K, V>`): 新映射的对象。
+(`Record<K, V>`): 由 `getNewValue` 函数返回的值转换后的新对象。
 
 ## 示例
 

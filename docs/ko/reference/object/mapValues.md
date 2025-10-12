@@ -18,7 +18,7 @@ function mapValues<T extends object, K extends keyof T, V>(
 
 ### 반환 값
 
-(`Record<K, V>`): The new mapped object.
+(`Record<K, V>`): `getNewValue` 함수가 반환한 값으로 바꾼 새로운 객체
 
 ## 예시
 
