@@ -2,7 +2,7 @@
 
 값을 `getNewValue` 함수가 반환한 값으로 바꾼 새로운 객체를 반환해요. 키는 원래 객체의 키와 동일해요.
 
-## Signature
+## 인터페이스
 
 ```typescript
 function mapValues<T extends object, K extends keyof T, V>(
