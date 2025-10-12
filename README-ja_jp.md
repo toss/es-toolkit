@@ -11,7 +11,7 @@ es-toolkitは、最先端のJavaScriptユーティリティライブラリであ
 - es-toolkitはツリーシェイキングをサポートしており、他のライブラリと比較してJavaScriptコードを最大[97%削減](https://es-toolkit.dev/bundle-size.html)します。
 - es-toolkitは、lodashを簡単に置き換えることができる完全な互換性レイヤー、[es-toolkit/compat](https://es-toolkit.dev/compatibility.html)を提供します。
 - es-toolkitには組み込みのTypeScriptサポートが含まれており、直感的で堅牢な型を提供します。また、[isNotNil](https://es-toolkit.dev/reference/predicate/isNotNil.html)などの便利な型ガードも提供します。
-- es-toolkitは、[Material UI](https://github.com/mui/material-ui/blob/b26d4746a5866f12deab1fbc599380807018ac2b/package.json#L144)、[Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358)、Recharts、ink、CKEditorなど、信頼性の高い人気のオープンソースプロジェクトで利用されています。
+- es-toolkitは、MUI([Material UI](https://github.com/mui/material-ui/blob/b26d4746a5866f12deab1fbc599380807018ac2b/package.json#L144)、[Base UI](https://github.com/mui/base-ui/blob/519aee0960c09ceccebc351ef46f97895667a2ca/package.json#L90)、[MUI X](https://github.com/mui/mui-x/blob/4d3950c1c72789186c780d682052fa05aa5cce3d/package.json#L113))、[Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358)、Recharts、ink、CKEditorなど、信頼性の高い人気のオープンソースプロジェクトで利用されています。
 - es-toolkitは100%のテストカバレッジを持ち、信頼性と堅牢性を確保しています。
 
 ## 例

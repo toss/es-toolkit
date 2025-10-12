@@ -5,7 +5,7 @@
 `es-toolkit/compat`はLodashのすべての関数と同じように動作しながら、より軽量で高速です。
 
 - Lodashの実際のテストコードと同じ動作を保証します。
-- Material UI、Storybook、Recharts、CKEditorなどの有名なオープンソースライブラリで使用され、Nuxtから推奨されています。
+- MUI(Material UI、Base UI、MUI X)、Storybook、Recharts、CKEditorなどの有名なオープンソースライブラリで使用され、Nuxtから推奨されています。
 
 :::
 

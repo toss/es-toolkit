@@ -11,7 +11,7 @@ es-toolkit is a state-of-the-art, high-performance JavaScript utility library wi
 - es-toolkit supports tree shaking out of the box, and [reduces JavaScript code by up to 97%](https://es-toolkit.dev/bundle-size.html) compared to other libraries.
 - es-toolkit offers a complete compatibility layer to seamlessly replace lodash, available as [es-toolkit/compat](https://es-toolkit.dev/compatibility.html).
 - es-toolkit includes built-in TypeScript support, with straightforward yet robust types. It also provides useful type guards such as [isNotNil](https://es-toolkit.dev/reference/predicate/isNotNil.html).
-- es-toolkit is trusted and used by popular open-source projects like [Material UI](https://github.com/mui/material-ui/blob/b26d4746a5866f12deab1fbc599380807018ac2b/package.json#L144), [Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358), Recharts, ink, and CKEditor.
+- es-toolkit is trusted and used by popular open-source projects like MUI([Material UI](https://github.com/mui/material-ui/blob/b26d4746a5866f12deab1fbc599380807018ac2b/package.json#L144), [Base UI](https://github.com/mui/base-ui/blob/519aee0960c09ceccebc351ef46f97895667a2ca/package.json#L90), [MUI X](https://github.com/mui/mui-x/blob/4d3950c1c72789186c780d682052fa05aa5cce3d/package.json#L113)), [Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358), Recharts, ink, and CKEditor.
 - es-toolkit is battle-tested with 100% test coverage, ensuring reliability and robustness.
 
 ## Examples
