@@ -6,9 +6,11 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-주어진 비교 함수를 사용해서 `target`과 `source`을 깊은 비교로 일치하는지 확인해요. 비교 함수로 값의 일치 여부를 세밀하게 제어할 수 있어요.
+주어진 비교 함수를 사용해서 `target`이 `source`의 모양 및 값을 포함하는지 확인해요. 비교 함수로 값의 일치 여부를 세밀하게 제어할 수 있어요.
 
 이 함수는 두 값을 재귀적으로 순회하면서 각 프로퍼티-값 쌍마다 커스텀 비교 함수를 호출해요. 비교 함수가 불리언 값을 반환하면 그 결과를 직접 사용하고, `undefined`를 반환하면 [isMatch](./isMatch.md)에서 사용하는 기본 비교 함수를 사용해요.
+
+`source`의 모든 속성/요소가 `target`에 존재하고 일치하면 `true`를 반환해요. `target`이 `source`보다 더 많은 속성/요소를 가지고 있어도 괜찮아요.
 
 데이터 타입에 따라 값을 비교하는 방법이 달라져요.
 
@@ -36,8 +38,8 @@ function isMatchWith(
 
 ### 파라미터
 
-- `target` (`unknown`): 일치하는지 검사할 값.
-- `source` (`unknown`): 일치하는지 비교할 패턴/템플릿.
+- `target` (`unknown`): 검사할 대상 값.
+- `source` (`unknown`): 대상에 포함되어야 할 모양과 값을 가진 패턴.
 - `compare` (`function`, 옵셔널): 선택적인 커스텀 비교 함수. 다음 인자들을 받아요:
   - `objValue`: 현재 경로의 target 값
   - `srcValue`: 현재 경로의 source 값
@@ -49,7 +51,7 @@ function isMatchWith(
 
 ### 반환 값
 
-(`boolean`): 객체가 일치하면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): `target`이 `source`의 모든 속성/요소를 포함하면 `true`, 그렇지 않으면 `false`를 반환해요.
 
 ## 예시
 
