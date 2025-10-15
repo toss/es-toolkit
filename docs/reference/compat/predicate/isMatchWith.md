@@ -6,9 +6,11 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Performs a deep comparison between a target value and a source pattern to determine if they match, using a custom comparison function for fine-grained control over the matching logic.
+Checks if the target contains all properties and values from the source by performing a partial deep comparison, using a custom comparison function for fine-grained control over the matching logic.
 
 This function recursively traverses both values, calling the custom compare function for each property/element pair. If the compare function returns a boolean, that result is used directly. If it returns undefined, the default matching behavior continues recursively.
+
+Returns `true` if all properties/elements in the source exist in the target and match. The target may have additional properties/elements beyond those in the source.
 
 The matching behavior varies by data type:
 
@@ -36,8 +38,8 @@ function isMatchWith(
 
 ### Parameters
 
-- `target` (`unknown`): The value to be tested for matching
-- `source` (`unknown`): The pattern/template to match against
+- `target` (`unknown`): The target value to inspect
+- `source` (`unknown`): The source pattern containing properties/values that should exist in the target
 - `compare` (`function`, optional): Optional custom comparison function that receives:
   - `objValue`: The value from the target at the current path
   - `srcValue`: The value from the source at the current path
@@ -49,7 +51,7 @@ function isMatchWith(
 
 ### Returns
 
-(`boolean`): `true` if the target matches the source pattern, `false` otherwise
+(`boolean`): Returns `true` if the target contains all properties/elements from the source, otherwise `false`
 
 ## Examples
 
