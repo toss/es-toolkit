@@ -45,7 +45,7 @@ describe('partition', () => {
     expect(evens).toEqual([2, 4]);
     expect(odds).toEqual([1, 3, 5]);
 
-    expectTypeOf(evens).toEqualTypeOf<Array<1 | 2 | 3 | 4 | 5>>();
+    expectTypeOf(evens).toEqualTypeOf<Array<2 | 4>>();
     expectTypeOf(odds).toEqualTypeOf<Array<1 | 3 | 5>>();
   });
 });
