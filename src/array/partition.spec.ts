@@ -36,4 +36,16 @@ describe('partition', () => {
     expectTypeOf(evens).toEqualTypeOf<Array<1 | 2 | 3 | 4 | 5>>();
     expectTypeOf(odds).toEqualTypeOf<Array<1 | 2 | 3 | 4 | 5>>();
   });
+
+  it('should correctly infer type of a narrow array with a type guard', () => {
+    const arr = [1, 2, 3, 4, 5] as const;
+    const isOdd = (num: number): num is 1 | 3 | 5 => num % 2 === 1;
+    const [odds, evens] = partition(arr, isOdd);
+
+    expect(evens).toEqual([2, 4]);
+    expect(odds).toEqual([1, 3, 5]);
+
+    expectTypeOf(evens).toEqualTypeOf<Array<1 | 2 | 3 | 4 | 5>>();
+    expectTypeOf(odds).toEqualTypeOf<Array<1 | 3 | 5>>();
+  });
 });
