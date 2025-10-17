@@ -6,8 +6,10 @@ This function is only available in `es-toolkit/compat` for compatibility reasons
 When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
 :::
 
-Checks if the target matches the source by comparing their structures and values.
+Checks if the target contains all properties and values from the source by performing a partial deep comparison.
 This function supports deep comparison for objects, arrays, maps, and sets.
+
+Returns `true` if all properties/elements in the source exist in the target and match. The target may have additional properties/elements beyond those in the source.
 
 ## Signature
 
@@ -17,12 +19,12 @@ function isMatch(target: unknown, source: unknown): boolean;
 
 ### Parameters
 
-- `target` (`unknown`): The target value to match against.
-- `source` (`unknown`): The source value to match with.
+- `target` (`unknown`): The target value to inspect.
+- `source` (`unknown`): The source pattern containing properties/values that should exist in the target.
 
 ### Returns
 
-(`boolean`): Returns `true` if the target matches the source, otherwise `false`.
+(`boolean`): Returns `true` if the target contains all properties/elements from the source, otherwise `false`.
 
 ## Examples
 
