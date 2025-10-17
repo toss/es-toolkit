@@ -16,8 +16,14 @@ const unified = unionWith(arr1, arr2, areItemsEqual);
 import { unionWith } from 'es-toolkit/array';
 
 // オブジェクトのidを基準に和集合を求めます。
-const array1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
-const array2 = [{ id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }];
+const array1 = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const array2 = [
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' },
+];
 const areItemsEqual = (a, b) => a.id === b.id;
 unionWith(array1, array2, areItemsEqual);
 // Returns: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
@@ -31,11 +37,11 @@ import { unionWith } from 'es-toolkit/array';
 // 座標を基準に和集合を求めます。
 const points1 = [
   { x: 1, y: 2 },
-  { x: 3, y: 4 }
+  { x: 3, y: 4 },
 ];
 const points2 = [
   { x: 3, y: 4 },
-  { x: 5, y: 6 }
+  { x: 5, y: 6 },
 ];
 const arePointsEqual = (p1, p2) => p1.x === p2.x && p1.y === p2.y;
 unionWith(points1, points2, arePointsEqual);

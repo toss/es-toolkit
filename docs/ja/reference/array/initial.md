@@ -42,7 +42,11 @@ initial(empty);
 // Returns: []
 
 // ネストされた配列も処理できる
-const nested = [[1, 2], [3, 4], [5, 6]];
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
 initial(nested);
 // Returns: [[1, 2], [3, 4]]
 ```

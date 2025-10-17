@@ -38,6 +38,11 @@ describe('zipObject', () => {
     expect(zipObject([], [])).toEqual({});
   });
 
+  it('should handle undefined parameters with default values', () => {
+    expect(zipObject()).toEqual({});
+    expect(zipObject(undefined)).toEqual({});
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(zipObject).toEqualTypeOf<typeof zipObjectLodash>();
   });

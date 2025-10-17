@@ -1,5 +1,45 @@
 # es-toolkit Changelog
 
+## Version v1.40.0
+
+Released on October 8th, 2025.
+
+- Enhanced `sumBy` to pass the element index to the `getValue` callback function.
+- Improved performance for `uniq` function.
+- Fixed `cloneDeepWith` to handle runtime errors in environments without Blob support and correctly clone Boolean, Number, and String objects.
+- Fixed `omit` to avoid unnecessary deep cloning, improving performance.
+- Fixed `toCamelCaseKeys` to properly handle PascalCase type conversion.
+- Fixed `toPath` to correctly handle arrays and non-string inputs.
+- Fixed `repeat` to validate and handle invalid repeat counts.
+- Fixed `sortedIndexBy` to properly handle default iteratee.
+- Fixed `some` predicate check to correctly handle null and undefined cases.
+- Fixed compatibility issue in `compat/unset` with nonexistent paths.
+- Fixed several JSDoc issues across multiple functions including return types, parameter descriptions, and method names.
+- Improved documentation clarity and consistency across multiple functions.
+- Enhanced test coverage with additional test cases for compat functions and edge cases.
+- Updated build configuration and CI workflows.
+
+We sincerely thank @wo-o29, @D-Sketon, @HidenLee, @yoouung, @manudeli, @dayongkr, @Li13, @nicklemmon, @sen2y, @miinhho, @raon0211, @joshkel, @jgjgill, @mlnwns, @Dohun-choi, @PinkChampagne17, @sukvvon, @YOUNGHO8762, @caseBread, @Jeongeun-Choi, @artechventure and hoyyChoi for their contributions. We appreciate your great efforts!
+
+## Version v1.39.10
+
+Released on August 17th, 2025.
+
+- Fixed `defaultsDeep` to properly handle deep merging of objects in arrays
+- Fixed several documentation issues and examples across multiple functions
+
+We sincerely thank @wo-o29, @thwlckd, @kilimandzharov, and @dayongkr for their contributions. We appreciate your great efforts!
+
+## Version v1.39.9
+
+Released on August 10th, 2025.
+
+- Fixed `mergeWith` to properly handle null values returned from customizer function.
+- Fixed `cloneDeepWith` to properly handle customizer returning null values.
+- Fixed some of the documentation issues.
+
+We sincerely thank @raon0211, @joshkel, and @Najeong-Kim for their contributions. We appreciate your great efforts!
+
 ## Version v1.39.8
 
 Released on July 25th, 2025.

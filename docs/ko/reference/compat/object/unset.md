@@ -17,12 +17,12 @@ const success = unset(object, path);
 ## 인터페이스
 
 ```typescript
-function unset(obj: unknown, path: PropertyKey | PropertyKey[]): boolean;
+function unset(obj: any, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### 파라미터
 
-- `obj` (`unknown`): 수정할 객체예요.
+- `obj` (`any`): 수정할 객체예요.
 - `path` (`PropertyKey | PropertyKey[]`): 제거할 속성의 경로예요.
 
 #### 반환 값

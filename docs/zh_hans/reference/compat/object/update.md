@@ -17,22 +17,18 @@ const updated = update(object, path, updater);
 ## 签名
 
 ```typescript
-function update<T extends object | null | undefined>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown
-): T;
+function update(obj: object, path: PropertyKey | PropertyKey[], updater: (value: any) => any): any;
 ```
 
 ### 参数
 
-- `obj` (`T`): 要修改的对象。
-- `path` (`PropertyKey | readonly PropertyKey[]`): 要更新的属性路径。
-- `updater` (`(value: unknown) => unknown`): 生成更新值的函数。
+- `obj` (`object`): 要修改的对象。
+- `path` (`PropertyKey | PropertyKey[]`): 要更新的属性路径。
+- `updater` (`(value: any) => any`): 生成更新值的函数。
 
 ### 返回值
 
-(`T`): 修改后的对象。
+(`any`): 修改后的对象。
 
 ## 示例
 

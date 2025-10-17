@@ -16,6 +16,10 @@ describe('omit', () => {
   const object = { a: 1, b: 2, c: 3, d: 4 };
   const nested = { a: 1, b: { c: 2, d: 3 } };
 
+  it('should avoid deep cloning if not omitting deep properties', () => {
+    expect(omit(nested, 'a').b).toBe(nested.b);
+  });
+
   it('should flatten `paths`', () => {
     expect(omit(object, 'a', 'c')).toEqual({ b: 2, d: 4 });
     expect(omit(object, ['a', 'd'], 'c')).toEqual({ b: 2 });
@@ -82,6 +86,16 @@ describe('omit', () => {
       omit(object, path);
       expect(object).toEqual({ a: { b: 2 } });
     });
+  });
+
+  it('should handle array-like objects as keys', () => {
+    const object = { a: 1, b: 2, c: 3 };
+    const keys = { 0: 'a', 1: 'c', length: 2 };
+    // eslint-disable-next-line
+    // @ts-ignore
+    const result = omit(object, keys);
+
+    expect(result).toEqual({ b: 2 });
   });
 
   it('should match the type of lodash', () => {

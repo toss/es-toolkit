@@ -3,12 +3,13 @@ name: Release
 on:
   push:
     branches:
-      - '*'
+      - main
     tags:
       - 'v*.*.*'
 
 jobs:
   release:
+    if: github.repository == 'toss/es-toolkit'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -16,16 +17,22 @@ jobs:
       deployments: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
-      - uses: denoland/setup-deno@v1
+          cache: 'yarn'
+      - name: Update npm
+        run: npm install -g npm@11.5.1
+      - uses: denoland/setup-deno@v2
         with:
           deno-version: v1.x
+      - name: Check environment
+        run: |
+          node -v
+          npm -v
+          yarn -v
       - if: github.ref_type == 'branch'
         run: |
           jq \
@@ -68,30 +75,25 @@ jobs:
           (github.ref_type == 'tag' || github.ref == 'refs/heads/main')
         run: |
           set -ex
-          npm config set //registry.npmjs.org/:_authToken "$NPM_AUTH_TOKEN"
-          npm whoami
           if [[ "$GITHUB_REF_TYPE" = "tag" ]]; then
             npm publish --provenance --access public *.tgz
           else
             npm publish --provenance --access public --tag dev *.tgz
           fi
           deno publish --allow-dirty --unstable-sloppy-imports
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         working-directory: ${{ github.workspace }}/out/
 
   deploy-docs:
-    if: github.event_name == 'push' && github.ref_type == 'tag'
+    if: github.repository == 'toss/es-toolkit' && github.event_name == 'push' && github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn install
       - name: Deploy a docs site

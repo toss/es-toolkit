@@ -24,7 +24,7 @@ console.log(result); // [1.2, 3.2, 5.7, 7.19]
 const users = [
   { id: 1, name: 'John', age: 30 },
   { id: 2, name: 'Jane', age: 30 },
-  { id: 3, name: 'Bob', age: 25 }
+  { id: 3, name: 'Bob', age: 25 },
 ];
 const uniqueByAge = uniqWith(users, (a, b) => a.age === b.age);
 console.log(uniqueByAge);
@@ -45,13 +45,11 @@ const products = [
   { name: 'iPhone', brand: 'Apple', price: 1000 },
   { name: 'Galaxy', brand: 'Samsung', price: 900 },
   { name: 'iPhone', brand: 'Apple', price: 1100 }, // 同じnameとbrand
-  { name: 'Pixel', brand: 'Google', price: 800 }
+  { name: 'Pixel', brand: 'Google', price: 800 },
 ];
 
 // 名前とブランドがどちらも同じ場合、重複と判断します。
-const uniqueProducts = uniqWith(products, (a, b) =>
-  a.name === b.name && a.brand === b.brand
-);
+const uniqueProducts = uniqWith(products, (a, b) => a.name === b.name && a.brand === b.brand);
 console.log(uniqueProducts);
 // [
 //   { name: 'iPhone', brand: 'Apple', price: 1000 },

@@ -19,7 +19,7 @@ import { sortBy } from 'es-toolkit/array';
 const users = [
   { name: 'john', age: 30 },
   { name: 'jane', age: 25 },
-  { name: 'bob', age: 35 }
+  { name: 'bob', age: 35 },
 ];
 const byAge = sortBy(users, ['age']);
 // Returns: [{ name: 'jane', age: 25 }, { name: 'john', age: 30 }, { name: 'bob', age: 35 }]
@@ -29,7 +29,7 @@ const employees = [
   { name: 'john', department: 'engineering', age: 30 },
   { name: 'jane', department: 'hr', age: 25 },
   { name: 'bob', department: 'engineering', age: 35 },
-  { name: 'alice', department: 'engineering', age: 25 }
+  { name: 'alice', department: 'engineering', age: 25 },
 ];
 const sorted = sortBy(employees, ['department', 'age']);
 // Returns: 部署が最初、次に年齢順でソート
@@ -50,18 +50,21 @@ import { sortBy } from 'es-toolkit/array';
 const products = [
   { name: 'laptop', price: 1000, category: 'electronics' },
   { name: 'shirt', price: 50, category: 'clothing' },
-  { name: 'phone', price: 800, category: 'electronics' }
+  { name: 'phone', price: 800, category: 'electronics' },
 ];
 
 const sorted = sortBy(products, [
   'category',
-  item => -item.price // 価格は降順で
+  item => -item.price, // 価格は降順で
 ]);
 // Returns: カテゴリが最初、次に価格の高い順でソート
 
 // 計算された値でソートします。
 const words = ['hello', 'a', 'wonderful', 'world'];
-const byLength = sortBy(words.map(word => ({ word, length: word.length })), ['length']);
+const byLength = sortBy(
+  words.map(word => ({ word, length: word.length })),
+  ['length']
+);
 // Returns: 文字列の長さ順でソートされたオブジェクト配列
 ```
 

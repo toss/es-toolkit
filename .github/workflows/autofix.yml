@@ -1,26 +1,29 @@
-name: CI
+name: autofix.ci
 
 on:
   push:
     branches: [main]
   pull_request:
     types: [opened, synchronize, reopened]
+
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
-  codecov:
+  autofix:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - run: corepack enable
       - uses: actions/setup-node@v5
         with:
-          node-version-file: .nvmrc
+          node-version-file: '.nvmrc'
           cache: 'yarn'
       - run: yarn install
-      - run: yarn test
-      - uses: codecov/codecov-action@v5
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - run: yarn prettier --write .
+      - run: yarn run packlint
+      - uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27

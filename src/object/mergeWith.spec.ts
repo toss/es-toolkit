@@ -76,4 +76,35 @@ describe('mergeWith', () => {
       })
     ).toEqual({ prop: null });
   });
+
+  it('should skip unsafe properties like __proto__', () => {
+    const target = { a: 1 };
+    const source = Object.create(null);
+    source.__proto__ = { b: 2 };
+    source.a = 2;
+    const result = mergeWith(target, source, (targetValue, sourceValue) => {
+      return sourceValue;
+    });
+
+    expect(result).toEqual({ a: 2 });
+    expect(result.__proto__).toBe(Object.prototype);
+  });
+
+  it('should merge arrays when targetValue is undefined and merge function returns undefined', () => {
+    const target: { a?: number[] } = {};
+    const source = { a: [1, 2, 3] };
+
+    const result = mergeWith(target, source, () => undefined);
+
+    expect(result).toEqual({ a: [1, 2, 3] });
+  });
+
+  it('should not overwrite targetValue when sourceValue is undefined and merge function returns undefined', () => {
+    const target = { a: 1, b: 2 };
+    const source = { a: 3, b: undefined };
+
+    const result = mergeWith(target, source, () => undefined);
+
+    expect(result).toEqual({ a: 3, b: 2 });
+  });
 });

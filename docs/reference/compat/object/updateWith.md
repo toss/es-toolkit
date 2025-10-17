@@ -17,11 +17,11 @@ const updated = updateWith(object, path, updater, customizer);
 ## Interface
 
 ```typescript
-function updateWith<T extends object | null | undefined>(
+function updateWith<T extends object>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown,
-  customizer: (value: unknown) => unknown
+  updater: (oldValue: any) => any,
+  customizer?: (value: any, key: string, object: T) => any
 ): T;
 ```
 
@@ -29,8 +29,8 @@ function updateWith<T extends object | null | undefined>(
 
 - `obj` (`T`): The object to modify.
 - `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to update.
-- `updater` (`(value: unknown) => unknown`): The function to produce the updated value.
-- `customizer` (`(value: unknown) => unknown`): The function to customize the update process.
+- `updater` (`(oldValue: any) => any`): The function to produce the updated value.
+- `customizer` (`(value: any, key: string, object: T) => any`, optional): The function to customize the update process.
 
 ### Returns
 
