@@ -11,6 +11,6 @@
  * const result = array.filter(negate(isEven));
  * // result will be [1, 3, 5]
  */
-export function negate<F extends (...args: any[]) => boolean>(func: F): F {
-  return ((...args: any[]) => !func(...args)) as F;
+export function negate<F extends (...args: any[]) => boolean>(func: F): (...args: any[]) => boolean {
+  return (...args: any[]) => !func(...args);
 }
