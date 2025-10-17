@@ -19,7 +19,7 @@ function mapValues<T extends object, K extends keyof T, V>(
 
 ### Returns
 
-(`Record<K, V>`): The new mapped object.
+(`Record<K, V>`): A new object with values transformed by the `getNewValue` function.
 
 ## Examples
 
