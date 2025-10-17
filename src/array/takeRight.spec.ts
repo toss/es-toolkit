@@ -32,4 +32,15 @@ describe('takeRight', () => {
     expect(takeRight([1, 2, 3])).toEqual([3]);
     expect(takeRight([1, 2, 3], undefined)).toEqual([3]);
   });
+
+  it('should work as an iteratee for methods like `map`', () => {
+    const array = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ];
+    const actual = array.map(takeRight);
+
+    expect(actual).toEqual([[3], [6], [9]]);
+  });
 });
