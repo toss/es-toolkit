@@ -6,7 +6,9 @@
 `es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
 :::
 
-`target`이 `source`의 모양 및 값과 일치하는지 확인해요. 객체, 배열, `Map`, `Set`의 깊은 비교를 지원해요.
+`target`이 `source`의 모양 및 값을 포함하는지 확인해요. 객체, 배열, `Map`, `Set`의 깊은 비교를 지원해요.
+
+`source`의 모든 속성/요소가 `target`에 존재하고 일치하면 `true`를 반환해요. `target`이 `source`보다 더 많은 속성/요소를 가지고 있어도 괜찮아요.
 
 ## 인터페이스
 
@@ -16,12 +18,12 @@ function isMatch(target: unknown, source: unknown): boolean;
 
 ### 파라미터
 
-- `target` (`unknown`): 모양과 값이 일치하는지 확인할 값.
-- `source` (`unknown`): 확인할 모양과 값을 가진 객체.
+- `target` (`unknown`): 검사할 대상 값.
+- `source` (`unknown`): 대상에 포함되어야 할 모양과 값을 가진 패턴.
 
 ### 반환 값
 
-(`boolean`): `target`이 `source`의 모양 및 값과 일치하면 `true`. 아니면 `false`.
+(`boolean`): `target`이 `source`의 모든 속성/요소를 포함하면 `true`. 아니면 `false`.
 
 ## 예시
 
