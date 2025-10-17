@@ -21,9 +21,8 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v5
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+          cache: 'yarn'
       - run: yarn install
       - run: yarn prettier --write .
       - run: yarn run packlint
