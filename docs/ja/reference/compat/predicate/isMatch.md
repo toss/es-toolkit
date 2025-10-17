@@ -6,7 +6,9 @@
 `es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
 :::
 
-`target` が `source` の形状と値に一致するかどうかを確認します。オブジェクト、配列、`Map`、`Set` の深い比較をサポートしています。
+`target` が `source` のすべてのプロパティと値を含んでいるかどうかを部分的な深い比較で確認します。オブジェクト、配列、`Map`、`Set` の深い比較をサポートしています。
+
+`source` のすべてのプロパティ/要素が `target` に存在し一致する場合に `true` を返します。`target` は `source` より多くのプロパティ/要素を持っていても構いません。
 
 ## インターフェース
 
@@ -16,12 +18,12 @@ function isMatch(target: unknown, source: unknown): boolean;
 
 ### パラメータ
 
-- `target` (`unknown`): 形状と値が一致するかどうかを確認する値。
-- `source` (`unknown`): 確認する形状と値を持つオブジェクト。
+- `target` (`unknown`): 検査する対象の値。
+- `source` (`unknown`): 対象に含まれるべき形状と値を持つパターン。
 
 ### 戻り値
 
-(`boolean`): `target` が `source` の形状と値に一致する場合は `true`。そうでない場合は `false`。
+(`boolean`): `target` が `source` のすべてのプロパティ/要素を含む場合は `true`。そうでない場合は `false`。
 
 ## 例
 

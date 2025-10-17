@@ -68,6 +68,11 @@ describe('sortedIndexBy', () => {
     expect(actualString).toBe(1);
   });
 
+  it('should return 0 when array is null or undefined', () => {
+    expect(sortedIndexBy(null, 1)).toBe(0);
+    expect(sortedIndexBy(undefined, 1)).toBe(0);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(sortedIndexBy).toEqualTypeOf<typeof sortedIndexByLodash>();
   });

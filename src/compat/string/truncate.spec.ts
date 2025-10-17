@@ -119,6 +119,10 @@ describe('truncate', () => {
     expect(truncate(undefined)).toBe('');
   });
 
+  it('should return base string with omission when separator is not found in truncated string', () => {
+    expect(truncate('hello world test', { length: 10, separator: 'xyz' })).toEqual('hello w...');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(truncate).toEqualTypeOf<typeof truncateLodash>();
   });
