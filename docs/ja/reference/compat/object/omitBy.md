@@ -25,12 +25,12 @@ import { omitBy } from 'es-toolkit/compat';
 
 // 特定の型の値を削除
 const data = { a: 1, b: 'remove', c: 3, d: 'keep' };
-const numbers = omitBy(data, (value) => typeof value === 'string');
+const numbers = omitBy(data, value => typeof value === 'string');
 // 結果: { a: 1, c: 3 }
 
 // 条件に基づいてプロパティを削除
 const user = { id: 1, name: 'John', age: 0, active: false, email: '' };
-const validData = omitBy(user, (value) => !value);
+const validData = omitBy(user, value => !value);
 // 結果: { id: 1, name: 'John' } (偽値を削除)
 
 // キー名でフィルタリング
@@ -40,12 +40,12 @@ const userOnly = omitBy(settings, (value, key) => key.startsWith('admin'));
 
 // 数値プロパティのみ削除
 const mixed = { str: 'hello', num1: 42, bool: true, num2: 0, obj: {} };
-const noNumbers = omitBy(mixed, (value) => typeof value === 'number');
+const noNumbers = omitBy(mixed, value => typeof value === 'number');
 // 結果: { str: 'hello', bool: true, obj: {} }
 
 // 配列でも使用可能
 const arr = [1, 2, 3, 4, 5];
-const filtered = omitBy(arr, (value) => value % 2 === 0);
+const filtered = omitBy(arr, value => value % 2 === 0);
 // 結果: { '0': 1, '2': 3, '4': 5 } (偶数インデックスの奇数値)
 
 // 値、キー、元のオブジェクトをすべて活用

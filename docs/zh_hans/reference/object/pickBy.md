@@ -17,12 +17,12 @@ import { pickBy } from 'es-toolkit/object';
 
 // 仅选择具有字符串值的属性
 const obj = { a: 1, b: 'select', c: 3, d: 'also select' };
-const result = pickBy(obj, (value) => typeof value === 'string');
+const result = pickBy(obj, value => typeof value === 'string');
 // result 是 { b: 'select', d: 'also select' }
 
 // 仅选择偶数值
 const numbers = { a: 1, b: 2, c: 3, d: 4 };
-const evens = pickBy(numbers, (value) => value % 2 === 0);
+const evens = pickBy(numbers, value => value % 2 === 0);
 // evens 是 { b: 2, d: 4 }
 
 // 同时使用键和值

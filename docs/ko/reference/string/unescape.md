@@ -19,7 +19,7 @@ import { unescape } from 'es-toolkit/string';
 unescape('This is a &lt;div&gt; element.');
 // 반환 값: 'This is a <div> element.'
 
-// 따옴표 엔티티를 원래 문자로 변환해요  
+// 따옴표 엔티티를 원래 문자로 변환해요
 unescape('This is a &quot;quote&quot;');
 // 반환 값: 'This is a "quote"'
 

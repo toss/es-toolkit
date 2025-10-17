@@ -30,20 +30,26 @@ const data2 = await retry(async () => {
 }, 3);
 
 // 再試行間隔の設定 (100ms)
-const data3 = await retry(async () => {
-  return await fetchData();
-}, {
-  retries: 3,
-  delay: 100
-});
+const data3 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 3,
+    delay: 100,
+  }
+);
 
 // 動的な再試行間隔 (指数バックオフ)
-const data4 = await retry(async () => {
-  return await fetchData();
-}, {
-  retries: 5,
-  delay: (attempts) => Math.min(100 * Math.pow(2, attempts), 5000)
-});
+const data4 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 5,
+    delay: attempts => Math.min(100 * Math.pow(2, attempts), 5000),
+  }
+);
 ```
 
 AbortSignal を使用して再試行をキャンセルすることもできます。
@@ -57,13 +63,16 @@ const controller = new AbortController();
 setTimeout(() => controller.abort(), 5000);
 
 try {
-  const data = await retry(async () => {
-    return await fetchData();
-  }, {
-    retries: 10,
-    delay: 1000,
-    signal: controller.signal
-  });
+  const data = await retry(
+    async () => {
+      return await fetchData();
+    },
+    {
+      retries: 10,
+      delay: 1000,
+      signal: controller.signal,
+    }
+  );
   console.log(data);
 } catch (error) {
   console.log('再試行がキャンセルされたか失敗しました:', error);

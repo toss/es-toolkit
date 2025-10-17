@@ -25,7 +25,7 @@ console.log(removedNumbers); // [2, 4] (被移除的元素)
 const users = [
   { name: 'john', age: 25 },
   { name: 'jane', age: 17 },
-  { name: 'bob', age: 30 }
+  { name: 'bob', age: 30 },
 ];
 const minors = remove(users, user => user.age < 18);
 console.log(users); // [{ name: 'john', age: 25 }, { name: 'bob', age: 30 }]

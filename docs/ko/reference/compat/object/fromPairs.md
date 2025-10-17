@@ -24,7 +24,11 @@ const result = fromPairs(pairs);
 import { fromPairs } from 'es-toolkit/compat';
 
 // 기본 키-값 쌍 변환
-const pairs = [['a', 1], ['b', 2], ['c', 3]];
+const pairs = [
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+];
 const result = fromPairs(pairs);
 // 결과: { a: 1, b: 2, c: 3 }
 
@@ -32,13 +36,16 @@ const result = fromPairs(pairs);
 const mixedPairs = [
   ['name', 'John'],
   ['age', 30],
-  ['active', true]
+  ['active', true],
 ];
 const user = fromPairs(mixedPairs);
 // 결과: { name: 'John', age: 30, active: true }
 
 // Map에서 변환
-const map = new Map([['x', 10], ['y', 20]]);
+const map = new Map([
+  ['x', 10],
+  ['y', 20],
+]);
 const coords = fromPairs(map);
 // 결과: { x: 10, y: 20 }
 ```

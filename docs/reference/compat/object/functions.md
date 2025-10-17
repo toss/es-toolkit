@@ -28,7 +28,9 @@ const obj = {
   name: 'John',
   age: 30,
   greet: () => 'Hello',
-  calculate: function(x, y) { return x + y; }
+  calculate: function (x, y) {
+    return x + y;
+  },
 };
 
 const functionNames = functions(obj);
@@ -38,13 +40,19 @@ const functionNames = functions(obj);
 class Calculator {
   constructor() {
     this.value = 0;
-    this.add = function(n) { this.value += n; };
+    this.add = function (n) {
+      this.value += n;
+    };
   }
 
-  multiply(n) { this.value *= n; }
+  multiply(n) {
+    this.value *= n;
+  }
 }
 
-Calculator.prototype.divide = function(n) { this.value /= n; };
+Calculator.prototype.divide = function (n) {
+  this.value /= n;
+};
 
 const calc = new Calculator();
 const methods = functions(calc);

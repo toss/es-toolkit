@@ -17,12 +17,12 @@ import { pickBy } from 'es-toolkit/object';
 
 // 文字列の値を持つプロパティのみを選択
 const obj = { a: 1, b: 'select', c: 3, d: 'also select' };
-const result = pickBy(obj, (value) => typeof value === 'string');
+const result = pickBy(obj, value => typeof value === 'string');
 // resultは{ b: 'select', d: 'also select' }になります
 
 // 偶数の値のみを選択
 const numbers = { a: 1, b: 2, c: 3, d: 4 };
-const evens = pickBy(numbers, (value) => value % 2 === 0);
+const evens = pickBy(numbers, value => value % 2 === 0);
 // evensは{ b: 2, d: 4 }になります
 
 // キーと値の両方を活用

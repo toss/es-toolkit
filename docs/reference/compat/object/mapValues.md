@@ -25,17 +25,17 @@ import { mapValues } from 'es-toolkit/compat';
 
 // Transform object values
 const obj = { a: 1, b: 2, c: 3 };
-const doubled = mapValues(obj, (value) => value * 2);
+const doubled = mapValues(obj, value => value * 2);
 // Result: { a: 2, b: 4, c: 6 }
 
 // Convert strings to uppercase
 const names = { first: 'john', last: 'doe' };
-const uppercased = mapValues(names, (value) => value.toUpperCase());
+const uppercased = mapValues(names, value => value.toUpperCase());
 // Result: { first: 'JOHN', last: 'DOE' }
 
 // Transform each character in a string
 const str = 'abc';
-const charMap = mapValues(str, (char) => char.toUpperCase());
+const charMap = mapValues(str, char => char.toUpperCase());
 // Result: { '0': 'A', '1': 'B', '2': 'C' }
 
 // Convert array to object
@@ -46,7 +46,7 @@ const arrMap = mapValues(arr, (value, index) => value + index);
 // Extract values using property path
 const users = {
   user1: { profile: { name: 'Alice' } },
-  user2: { profile: { name: 'Bob' } }
+  user2: { profile: { name: 'Bob' } },
 };
 const userNames = mapValues(users, 'profile.name');
 // Result: { user1: 'Alice', user2: 'Bob' }

@@ -25,12 +25,12 @@ import { pickBy } from 'es-toolkit/compat';
 
 // 仅选择特定类型的值
 const data = { a: 1, b: 'keep', c: 3, d: 'select' };
-const strings = pickBy(data, (value) => typeof value === 'string');
+const strings = pickBy(data, value => typeof value === 'string');
 // 结果: { b: 'keep', d: 'select' }
 
 // 根据条件选择属性
 const user = { id: 1, name: 'John', age: 0, active: true, email: '' };
-const validData = pickBy(user, (value) => Boolean(value));
+const validData = pickBy(user, value => Boolean(value));
 // 结果: { id: 1, name: 'John', active: true } (仅真值)
 
 // 按键名过滤
@@ -40,12 +40,12 @@ const userOnly = pickBy(settings, (value, key) => key.startsWith('user'));
 
 // 仅选择数字属性
 const mixed = { str: 'hello', num1: 42, bool: true, num2: 0, obj: {} };
-const numbersOnly = pickBy(mixed, (value) => typeof value === 'number');
+const numbersOnly = pickBy(mixed, value => typeof value === 'number');
 // 结果: { num1: 42, num2: 0 }
 
 // 也可用于数组
 const arr = [1, 2, 3, 4, 5];
-const evens = pickBy(arr, (value) => value % 2 === 0);
+const evens = pickBy(arr, value => value % 2 === 0);
 // 结果: { '1': 2, '3': 4 } (偶数的索引和值)
 
 // 利用值、键和原始对象

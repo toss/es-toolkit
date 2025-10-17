@@ -17,12 +17,12 @@ import { omitBy } from 'es-toolkit/object';
 
 // 排除具有字符串值的属性
 const obj = { a: 1, b: 'remove', c: 3, d: 'also remove' };
-const result = omitBy(obj, (value) => typeof value === 'string');
+const result = omitBy(obj, value => typeof value === 'string');
 // result 是 { a: 1, c: 3 }
 
 // 仅排除偶数值
 const numbers = { a: 1, b: 2, c: 3, d: 4 };
-const odds = omitBy(numbers, (value) => value % 2 === 0);
+const odds = omitBy(numbers, value => value % 2 === 0);
 // odds 是 { a: 1, c: 3 }
 
 // 同时使用键和值

@@ -16,13 +16,23 @@ Use `isSubsetWith` when you want to verify a subset relationship using a user-de
 import { isSubsetWith } from 'es-toolkit/array';
 
 // Check subset by object's id
-const users = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
-const targetUsers = [{ id: 2, name: 'jane' }, { id: 1, name: 'john' }];
+const users = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
+const targetUsers = [
+  { id: 2, name: 'jane' },
+  { id: 1, name: 'john' },
+];
 isSubsetWith(users, targetUsers, (a, b) => a.id === b.id);
 // Returns: true
 
 // When it's not a subset
-const allUsers = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }];
+const allUsers = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+];
 const someUsers = [{ id: 3, name: 'bob' }];
 isSubsetWith(allUsers, someUsers, (a, b) => a.id === b.id);
 // Returns: false

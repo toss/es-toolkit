@@ -19,7 +19,7 @@ import { minBy } from 'es-toolkit/array';
 const people = [
   { name: 'john', age: 30 },
   { name: 'jane', age: 28 },
-  { name: 'joe', age: 26 }
+  { name: 'joe', age: 26 },
 ];
 minBy(people, person => person.age);
 // Returns: { name: 'joe', age: 26 }

@@ -35,7 +35,7 @@ const result2 = pick(obj, 'a', 'c');
 // 选择深层路径
 const nested = {
   user: { profile: { name: 'John', age: 30 }, settings: { theme: 'dark' } },
-  admin: true
+  admin: true,
 };
 const userInfo = pick(nested, 'user.profile.name', 'admin');
 // 结果: { user: { profile: { name: 'John' } }, admin: true }
@@ -47,8 +47,8 @@ const selected = pick(mixed, ['a', 'b'], 'c', 'd.e');
 
 // 区分点表示法键和实际带点的键
 const ambiguous = {
-  'a.b': 1,           // 实际键 'a.b'
-  a: { b: 2, c: 3 }   // 嵌套对象
+  'a.b': 1, // 实际键 'a.b'
+  a: { b: 2, c: 3 }, // 嵌套对象
 };
 const dotKey = pick(ambiguous, 'a.b');
 // 结果: { 'a.b': 1 } (实际键优先)

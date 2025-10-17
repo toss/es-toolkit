@@ -27,7 +27,7 @@ throw new AbortError('文件上传已取消');
 与 AbortSignal 一起使用的示例。
 
 ```typescript
-import { delay, AbortError } from 'es-toolkit';
+import { AbortError, delay } from 'es-toolkit';
 
 async function fetchData(signal: AbortSignal) {
   try {

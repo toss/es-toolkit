@@ -53,12 +53,18 @@ last(maybeEmptyArray);
 import { last } from 'es-toolkit/array';
 
 // 性能已优化
-const largeArray = Array(1000000).fill(0).map((_, i) => i);
+const largeArray = Array(1000000)
+  .fill(0)
+  .map((_, i) => i);
 last(largeArray);
 // Returns: 999999 (快速访问)
 
 // 也可以处理嵌套数组
-const nested = [[1, 2], [3, 4], [5, 6]];
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
 last(nested);
 // Returns: [5, 6]
 ```

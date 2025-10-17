@@ -19,7 +19,7 @@ import { sumBy } from 'es-toolkit/math';
 const products = [
   { name: 'laptop', price: 1000 },
   { name: 'mouse', price: 25 },
-  { name: 'keyboard', price: 75 }
+  { name: 'keyboard', price: 75 },
 ];
 const totalPrice = sumBy(products, item => item.price);
 console.log(totalPrice); // 1100
@@ -28,7 +28,7 @@ console.log(totalPrice); // 1100
 const users = [
   { name: 'Alice', age: 25 },
   { name: 'Bob', age: 30 },
-  { name: 'Charlie', age: 35 }
+  { name: 'Charlie', age: 35 },
 ];
 const totalAge = sumBy(users, user => user.age);
 console.log(totalAge); // 90
@@ -48,7 +48,7 @@ import { sumBy } from 'es-toolkit/math';
 const scores = [
   { subject: 'math', score: 90, weight: 0.3 },
   { subject: 'english', score: 85, weight: 0.2 },
-  { subject: 'science', score: 95, weight: 0.5 }
+  { subject: 'science', score: 95, weight: 0.5 },
 ];
 const weightedSum = sumBy(scores, item => item.score * item.weight);
 console.log(weightedSum); // 91
@@ -62,11 +62,9 @@ console.log(totalElements); // 6
 const orders = [
   { id: 1, amount: 100, status: 'completed' },
   { id: 2, amount: 200, status: 'pending' },
-  { id: 3, amount: 150, status: 'completed' }
+  { id: 3, amount: 150, status: 'completed' },
 ];
-const completedTotal = sumBy(orders, order => 
-  order.status === 'completed' ? order.amount : 0
-);
+const completedTotal = sumBy(orders, order => (order.status === 'completed' ? order.amount : 0));
 console.log(completedTotal); // 250
 ```
 
@@ -79,7 +77,7 @@ import { sumBy } from 'es-toolkit/math';
 const monthlyReports = [
   { month: 'January', sales: 12000, expenses: 8000 },
   { month: 'February', sales: 15000, expenses: 9000 },
-  { month: 'March', sales: 18000, expenses: 11000 }
+  { month: 'March', sales: 18000, expenses: 11000 },
 ];
 const totalSales = sumBy(monthlyReports, report => report.sales);
 const totalExpenses = sumBy(monthlyReports, report => report.expenses);
@@ -92,11 +90,9 @@ console.log(totalProfit); // 17000
 const students = [
   { name: 'Alice', tests: [85, 90, 88] },
   { name: 'Bob', tests: [92, 87, 95] },
-  { name: 'Charlie', tests: [78, 85, 82] }
+  { name: 'Charlie', tests: [78, 85, 82] },
 ];
-const totalTestScores = sumBy(students, student => 
-  student.tests.reduce((sum, score) => sum + score, 0)
-);
+const totalTestScores = sumBy(students, student => student.tests.reduce((sum, score) => sum + score, 0));
 console.log(totalTestScores); // 762
 ```
 

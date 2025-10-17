@@ -33,7 +33,7 @@ const users = [
   { name: 'Alice', age: 25 },
   { name: 'Bob', age: 30 },
   { name: 'Charlie', age: 35 },
-  { name: 'David', age: 40 }
+  { name: 'David', age: 40 },
 ];
 
 // 只获取30岁以下的用户。

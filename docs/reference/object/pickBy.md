@@ -17,12 +17,12 @@ import { pickBy } from 'es-toolkit/object';
 
 // Pick only properties with string values
 const obj = { a: 1, b: 'select', c: 3, d: 'also select' };
-const result = pickBy(obj, (value) => typeof value === 'string');
+const result = pickBy(obj, value => typeof value === 'string');
 // result is { b: 'select', d: 'also select' }
 
 // Pick only even values
 const numbers = { a: 1, b: 2, c: 3, d: 4 };
-const evens = pickBy(numbers, (value) => value % 2 === 0);
+const evens = pickBy(numbers, value => value % 2 === 0);
 // evens is { b: 2, d: 4 }
 
 // Use both key and value

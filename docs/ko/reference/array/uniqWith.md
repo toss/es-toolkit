@@ -24,10 +24,10 @@ console.log(result); // [1.2, 3.2, 5.7, 7.19]
 const users = [
   { id: 1, name: 'John', age: 30 },
   { id: 2, name: 'Jane', age: 30 },
-  { id: 3, name: 'Bob', age: 25 }
+  { id: 3, name: 'Bob', age: 25 },
 ];
 const uniqueByAge = uniqWith(users, (a, b) => a.age === b.age);
-console.log(uniqueByAge); 
+console.log(uniqueByAge);
 // [{ id: 1, name: 'John', age: 30 }, { id: 3, name: 'Bob', age: 25 }]
 
 // 문자열을 대소문자 구분 없이 비교해서 중복 제거해요.
@@ -45,13 +45,11 @@ const products = [
   { name: 'iPhone', brand: 'Apple', price: 1000 },
   { name: 'Galaxy', brand: 'Samsung', price: 900 },
   { name: 'iPhone', brand: 'Apple', price: 1100 }, // 같은 name과 brand
-  { name: 'Pixel', brand: 'Google', price: 800 }
+  { name: 'Pixel', brand: 'Google', price: 800 },
 ];
 
 // 이름과 브랜드가 모두 같은 경우 중복으로 판단해요.
-const uniqueProducts = uniqWith(products, (a, b) => 
-  a.name === b.name && a.brand === b.brand
-);
+const uniqueProducts = uniqWith(products, (a, b) => a.name === b.name && a.brand === b.brand);
 console.log(uniqueProducts);
 // [
 //   { name: 'iPhone', brand: 'Apple', price: 1000 },

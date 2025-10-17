@@ -25,12 +25,12 @@ import { omitBy } from 'es-toolkit/compat';
 
 // Remove values of specific type
 const data = { a: 1, b: 'remove', c: 3, d: 'keep' };
-const numbers = omitBy(data, (value) => typeof value === 'string');
+const numbers = omitBy(data, value => typeof value === 'string');
 // Result: { a: 1, c: 3 }
 
 // Remove properties based on condition
 const user = { id: 1, name: 'John', age: 0, active: false, email: '' };
-const validData = omitBy(user, (value) => !value);
+const validData = omitBy(user, value => !value);
 // Result: { id: 1, name: 'John' } (removes falsy values)
 
 // Filter by key name
@@ -40,12 +40,12 @@ const userOnly = omitBy(settings, (value, key) => key.startsWith('admin'));
 
 // Remove only number properties
 const mixed = { str: 'hello', num1: 42, bool: true, num2: 0, obj: {} };
-const noNumbers = omitBy(mixed, (value) => typeof value === 'number');
+const noNumbers = omitBy(mixed, value => typeof value === 'number');
 // Result: { str: 'hello', bool: true, obj: {} }
 
 // Can also be used with arrays
 const arr = [1, 2, 3, 4, 5];
-const filtered = omitBy(arr, (value) => value % 2 === 0);
+const filtered = omitBy(arr, value => value % 2 === 0);
 // Result: { '0': 1, '2': 3, '4': 5 } (odd values at even indices)
 
 // Utilize value, key, and original object

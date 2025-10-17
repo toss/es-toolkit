@@ -10,7 +10,7 @@ const converted = snakeCase(str);
 
 ### `snakeCase(str)`
 
-文字列をスネークケースに変換したい場合は `snakeCase` を使用してください。スネークケースは、各単語を小文字で記述し、単語間をアンダースコア(_)で接続する命名規則です。
+文字列をスネークケースに変換したい場合は `snakeCase` を使用してください。スネークケースは、各単語を小文字で記述し、単語間をアンダースコア(\_)で接続する命名規則です。
 
 ```typescript
 import { snakeCase } from 'es-toolkit/string';

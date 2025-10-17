@@ -16,12 +16,12 @@ Use `isFunction` when you want to check if a value is a function. Can detect all
 import { isFunction } from 'es-toolkit/predicate';
 
 // Regular functions
-console.log(isFunction(function() {})); // true
+console.log(isFunction(function () {})); // true
 console.log(isFunction(() => {})); // true
 console.log(isFunction(Array.prototype.slice)); // true
 
 // Async functions
-console.log(isFunction(async function() {})); // true
+console.log(isFunction(async function () {})); // true
 console.log(isFunction(async () => {})); // true
 
 // Generator functions
@@ -65,7 +65,7 @@ console.log(isFunction(null)); // false
 console.log(isFunction(undefined)); // false
 
 // Function-like but not functions
-console.log(isFunction({ call: function() {} })); // false
+console.log(isFunction({ call: function () {} })); // false
 ```
 
 Useful for callback function validation or dynamic function invocation:
@@ -101,7 +101,7 @@ const utils = {
       this.data = this.data.map(fn);
     }
     return this;
-  }
+  },
 };
 ```
 

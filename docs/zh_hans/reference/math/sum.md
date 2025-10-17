@@ -21,7 +21,7 @@ const total = sum(numbers);
 console.log(total); // 15
 
 // 小数求和
-const prices = [19.99, 25.50, 3.75];
+const prices = [19.99, 25.5, 3.75];
 const totalPrice = sum(prices);
 console.log(totalPrice); // 49.24
 
@@ -58,7 +58,7 @@ const totalSales = sum(monthlySales);
 console.log(totalSales); // 75000
 
 // 计算购物车总金额
-const cartItems = [29.99, 15.50, 8.75, 42.00];
+const cartItems = [29.99, 15.5, 8.75, 42.0];
 const cartTotal = sum(cartItems);
 console.log(cartTotal); // 96.24
 ```

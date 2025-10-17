@@ -10,7 +10,7 @@ const converted = snakeCase(str);
 
 ### `snakeCase(str)`
 
-문자열을 스네이크 표기법으로 변환하고 싶을 때 `snakeCase`를 사용하세요. 스네이크 표기법은 각 단어를 소문자로 작성하고 단어 사이를 밑줄(_)로 연결하는 명명 규칙이에요.
+문자열을 스네이크 표기법으로 변환하고 싶을 때 `snakeCase`를 사용하세요. 스네이크 표기법은 각 단어를 소문자로 작성하고 단어 사이를 밑줄(\_)로 연결하는 명명 규칙이에요.
 
 ```typescript
 import { snakeCase } from 'es-toolkit/string';

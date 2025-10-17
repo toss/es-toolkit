@@ -16,8 +16,14 @@ Use `unionBy` when you want to remove duplicates based on a specific property fr
 import { unionBy } from 'es-toolkit/array';
 
 // Get the union of objects based on id.
-const users1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
-const users2 = [{ id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }];
+const users1 = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const users2 = [
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' },
+];
 unionBy(users1, users2, user => user.id);
 // Returns: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
 
@@ -37,11 +43,11 @@ import { unionBy } from 'es-toolkit/array';
 
 const products1 = [
   { category: 'electronics', price: 100 },
-  { category: 'books', price: 20 }
+  { category: 'books', price: 20 },
 ];
 const products2 = [
   { category: 'electronics', price: 150 },
-  { category: 'toys', price: 30 }
+  { category: 'toys', price: 30 },
 ];
 
 // Get the union based on category.

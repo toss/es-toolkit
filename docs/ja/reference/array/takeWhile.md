@@ -33,7 +33,7 @@ const users = [
   { name: 'Alice', age: 25 },
   { name: 'Bob', age: 30 },
   { name: 'Charlie', age: 35 },
-  { name: 'David', age: 40 }
+  { name: 'David', age: 40 },
 ];
 
 // 30歳未満のユーザーだけを取得します。

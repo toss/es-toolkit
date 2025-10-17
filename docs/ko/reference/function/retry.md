@@ -30,20 +30,26 @@ const data2 = await retry(async () => {
 }, 3);
 
 // 재시도 간격 설정 (100ms)
-const data3 = await retry(async () => {
-  return await fetchData();
-}, { 
-  retries: 3, 
-  delay: 100 
-});
+const data3 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 3,
+    delay: 100,
+  }
+);
 
 // 동적 재시도 간격 (지수 백오프)
-const data4 = await retry(async () => {
-  return await fetchData();
-}, {
-  retries: 5,
-  delay: (attempts) => Math.min(100 * Math.pow(2, attempts), 5000)
-});
+const data4 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 5,
+    delay: attempts => Math.min(100 * Math.pow(2, attempts), 5000),
+  }
+);
 ```
 
 AbortSignal을 사용해서 재시도를 취소할 수도 있어요.
@@ -57,13 +63,16 @@ const controller = new AbortController();
 setTimeout(() => controller.abort(), 5000);
 
 try {
-  const data = await retry(async () => {
-    return await fetchData();
-  }, {
-    retries: 10,
-    delay: 1000,
-    signal: controller.signal
-  });
+  const data = await retry(
+    async () => {
+      return await fetchData();
+    },
+    {
+      retries: 10,
+      delay: 1000,
+      signal: controller.signal,
+    }
+  );
   console.log(data);
 } catch (error) {
   console.log('재시도가 취소되거나 실패했습니다:', error);

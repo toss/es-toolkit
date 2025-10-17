@@ -25,17 +25,17 @@ import { mapValues } from 'es-toolkit/compat';
 
 // 转换对象值
 const obj = { a: 1, b: 2, c: 3 };
-const doubled = mapValues(obj, (value) => value * 2);
+const doubled = mapValues(obj, value => value * 2);
 // 结果: { a: 2, b: 4, c: 6 }
 
 // 将字符串转换为大写
 const names = { first: 'john', last: 'doe' };
-const uppercased = mapValues(names, (value) => value.toUpperCase());
+const uppercased = mapValues(names, value => value.toUpperCase());
 // 结果: { first: 'JOHN', last: 'DOE' }
 
 // 转换字符串中的每个字符
 const str = 'abc';
-const charMap = mapValues(str, (char) => char.toUpperCase());
+const charMap = mapValues(str, char => char.toUpperCase());
 // 结果: { '0': 'A', '1': 'B', '2': 'C' }
 
 // 将数组转换为对象
@@ -46,7 +46,7 @@ const arrMap = mapValues(arr, (value, index) => value + index);
 // 使用属性路径提取值
 const users = {
   user1: { profile: { name: 'Alice' } },
-  user2: { profile: { name: 'Bob' } }
+  user2: { profile: { name: 'Bob' } },
 };
 const userNames = mapValues(users, 'profile.name');
 // 结果: { user1: 'Alice', user2: 'Bob' }

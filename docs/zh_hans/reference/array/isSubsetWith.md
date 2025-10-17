@@ -16,13 +16,23 @@ const result = isSubsetWith(superset, subset, areItemsEqual);
 import { isSubsetWith } from 'es-toolkit/array';
 
 // 根据对象的 id 检查子集
-const users = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
-const targetUsers = [{ id: 2, name: 'jane' }, { id: 1, name: 'john' }];
+const users = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
+const targetUsers = [
+  { id: 2, name: 'jane' },
+  { id: 1, name: 'john' },
+];
 isSubsetWith(users, targetUsers, (a, b) => a.id === b.id);
 // Returns: true
 
 // 不是子集的情况
-const allUsers = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }];
+const allUsers = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+];
 const someUsers = [{ id: 3, name: 'bob' }];
 isSubsetWith(allUsers, someUsers, (a, b) => a.id === b.id);
 // Returns: false

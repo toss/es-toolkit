@@ -18,7 +18,7 @@ const snakeCased = snakeCase(str);
 
 ### `snakeCase(str)`
 
-当您想将字符串转换为蛇形命名法 (snake_case) 时,请使用 `snakeCase`。蛇形命名法是一种命名约定,其中每个单词都以小写字母书写,并用下划线 (_) 连接。
+当您想将字符串转换为蛇形命名法 (snake*case) 时,请使用 `snakeCase`。蛇形命名法是一种命名约定,其中每个单词都以小写字母书写,并用下划线 (*) 连接。
 
 ```typescript
 import { snakeCase } from 'es-toolkit/compat';

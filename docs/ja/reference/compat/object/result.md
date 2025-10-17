@@ -31,14 +31,16 @@ const value = result(obj, 'a.b.c');
 // 自動関数呼び出し
 const objWithFunc = {
   compute: () => ({ value: 42 }),
-  getValue: function() { return this.compute().value; }
+  getValue: function () {
+    return this.compute().value;
+  },
 };
 const computed = result(objWithFunc, 'getValue');
 // 結果: 42 (getValue 関数が呼び出される)
 
 // パス上の関数呼び出し
 const nested = {
-  data: () => ({ user: { getName: () => 'John' } })
+  data: () => ({ user: { getName: () => 'John' } }),
 };
 const name = result(nested, 'data.user.getName');
 // 結果: 'John' (data() と getName() の両方が呼び出される)
@@ -57,7 +59,7 @@ const arrayPath = result(objWithFunc, ['getValue']);
 // 結果: 42
 
 // 動的デフォルト値
-const dynamic = result(incomplete, 'missing.path', function() {
+const dynamic = result(incomplete, 'missing.path', function () {
   return `Generated at ${new Date().toISOString()}`;
 });
 // 結果: 現在時刻を含む文字列
@@ -70,7 +72,9 @@ import { result } from 'es-toolkit/compat';
 
 const calculator = {
   multiplier: 2,
-  compute: function() { return 10 * this.multiplier; }
+  compute: function () {
+    return 10 * this.multiplier;
+  },
 };
 
 const calculatedValue = result(calculator, 'compute');

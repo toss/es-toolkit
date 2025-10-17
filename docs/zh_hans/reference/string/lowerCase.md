@@ -45,9 +45,9 @@ import { lowerCase } from 'es-toolkit/string';
 
 // 显示设置菜单
 const settings = {
-  'enableNotifications': true,
-  'darkModeEnabled': false,
-  'autoSaveInterval': 300
+  enableNotifications: true,
+  darkModeEnabled: false,
+  autoSaveInterval: 300,
 };
 
 for (const [key, value] of Object.entries(settings)) {

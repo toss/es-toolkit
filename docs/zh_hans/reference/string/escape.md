@@ -62,7 +62,7 @@ const html = renderComment('I love <coding> & "programming"!', 'John Doe');
 ```typescript
 import { escape } from 'es-toolkit/string';
 
-const data = { message: "Hello & \"welcome\"" };
+const data = { message: 'Hello & "welcome"' };
 const jsonString = JSON.stringify(data);
 const htmlAttribute = `<div data-info="${escape(jsonString)}"></div>`;
 // returns '<div data-info="{&quot;message&quot;:&quot;Hello &amp; \\&quot;welcome\\&quot;&quot;}"></div>'

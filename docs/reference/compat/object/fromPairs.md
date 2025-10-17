@@ -24,7 +24,11 @@ Takes an array of key-value pairs and converts them into an object. Each key-val
 import { fromPairs } from 'es-toolkit/compat';
 
 // Basic key-value pair conversion
-const pairs = [['a', 1], ['b', 2], ['c', 3]];
+const pairs = [
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+];
 const result = fromPairs(pairs);
 // Result: { a: 1, b: 2, c: 3 }
 
@@ -32,13 +36,16 @@ const result = fromPairs(pairs);
 const mixedPairs = [
   ['name', 'John'],
   ['age', 30],
-  ['active', true]
+  ['active', true],
 ];
 const user = fromPairs(mixedPairs);
 // Result: { name: 'John', age: 30, active: true }
 
 // Converting from Map
-const map = new Map([['x', 10], ['y', 20]]);
+const map = new Map([
+  ['x', 10],
+  ['y', 20],
+]);
 const coords = fromPairs(map);
 // Result: { x: 10, y: 20 }
 ```

@@ -17,12 +17,12 @@ import { pickBy } from 'es-toolkit/object';
 
 // 문자열 값을 가진 속성들만 선택해요
 const obj = { a: 1, b: 'select', c: 3, d: 'also select' };
-const result = pickBy(obj, (value) => typeof value === 'string');
+const result = pickBy(obj, value => typeof value === 'string');
 // result는 { b: 'select', d: 'also select' }이 돼요
 
 // 짝수 값들만 선택해요
 const numbers = { a: 1, b: 2, c: 3, d: 4 };
-const evens = pickBy(numbers, (value) => value % 2 === 0);
+const evens = pickBy(numbers, value => value % 2 === 0);
 // evens는 { b: 2, d: 4 }가 돼요
 
 // 키와 값을 모두 활용해요

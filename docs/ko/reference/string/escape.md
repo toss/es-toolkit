@@ -62,7 +62,7 @@ JSON 문자열을 HTML 속성에 넣을 때도 유용해요.
 ```typescript
 import { escape } from 'es-toolkit/string';
 
-const data = { message: "Hello & \"welcome\"" };
+const data = { message: 'Hello & "welcome"' };
 const jsonString = JSON.stringify(data);
 const htmlAttribute = `<div data-info="${escape(jsonString)}"></div>`;
 // returns '<div data-info="{&quot;message&quot;:&quot;Hello &amp; \\&quot;welcome\\&quot;&quot;}"></div>'

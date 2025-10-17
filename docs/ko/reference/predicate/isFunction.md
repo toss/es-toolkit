@@ -16,12 +16,12 @@ const result = isFunction(value);
 import { isFunction } from 'es-toolkit/predicate';
 
 // 일반 함수들
-console.log(isFunction(function() {})); // true
+console.log(isFunction(function () {})); // true
 console.log(isFunction(() => {})); // true
 console.log(isFunction(Array.prototype.slice)); // true
 
 // 비동기 함수
-console.log(isFunction(async function() {})); // true
+console.log(isFunction(async function () {})); // true
 console.log(isFunction(async () => {})); // true
 
 // 제너레이터 함수
@@ -65,7 +65,7 @@ console.log(isFunction(null)); // false
 console.log(isFunction(undefined)); // false
 
 // 함수처럼 보이지만 함수가 아닌 것들
-console.log(isFunction({ call: function() {} })); // false
+console.log(isFunction({ call: function () {} })); // false
 ```
 
 콜백 함수 검증이나 동적 함수 호출에서 유용해요:
@@ -74,12 +74,12 @@ console.log(isFunction({ call: function() {} })); // false
 // 콜백 함수 검증
 function processData(data: any[], callback?: unknown) {
   const result = data.map(item => item * 2);
-  
+
   if (isFunction(callback)) {
     // callback이 함수임이 확실하므로 안전하게 호출 가능
     callback(result);
   }
-  
+
   return result;
 }
 
@@ -88,7 +88,7 @@ function executeIfFunction(fn: unknown, ...args: any[]) {
   if (isFunction(fn)) {
     return fn(...args);
   }
-  
+
   console.log('주어진 값이 함수가 아닙니다');
   return null;
 }
@@ -101,7 +101,7 @@ const utils = {
       this.data = this.data.map(fn);
     }
     return this;
-  }
+  },
 };
 ```
 

@@ -25,17 +25,17 @@ import { mapValues } from 'es-toolkit/compat';
 
 // 객체의 값을 변환
 const obj = { a: 1, b: 2, c: 3 };
-const doubled = mapValues(obj, (value) => value * 2);
+const doubled = mapValues(obj, value => value * 2);
 // 결과: { a: 2, b: 4, c: 6 }
 
 // 문자열을 대문자로 변환
 const names = { first: 'john', last: 'doe' };
-const uppercased = mapValues(names, (value) => value.toUpperCase());
+const uppercased = mapValues(names, value => value.toUpperCase());
 // 결과: { first: 'JOHN', last: 'DOE' }
 
 // 문자열의 각 문자 변환
 const str = 'abc';
-const charMap = mapValues(str, (char) => char.toUpperCase());
+const charMap = mapValues(str, char => char.toUpperCase());
 // 결과: { '0': 'A', '1': 'B', '2': 'C' }
 
 // 배열을 객체로 변환
@@ -46,7 +46,7 @@ const arrMap = mapValues(arr, (value, index) => value + index);
 // 속성 경로로 값 추출
 const users = {
   user1: { profile: { name: 'Alice' } },
-  user2: { profile: { name: 'Bob' } }
+  user2: { profile: { name: 'Bob' } },
 };
 const userNames = mapValues(users, 'profile.name');
 // 결과: { user1: 'Alice', user2: 'Bob' }

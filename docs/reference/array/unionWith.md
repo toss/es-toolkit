@@ -16,8 +16,14 @@ Use `unionWith` when you want to determine element equality by complex condition
 import { unionWith } from 'es-toolkit/array';
 
 // Get the union based on object id.
-const array1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
-const array2 = [{ id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }];
+const array1 = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const array2 = [
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' },
+];
 const areItemsEqual = (a, b) => a.id === b.id;
 unionWith(array1, array2, areItemsEqual);
 // Returns: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
@@ -31,11 +37,11 @@ import { unionWith } from 'es-toolkit/array';
 // Get the union based on coordinates.
 const points1 = [
   { x: 1, y: 2 },
-  { x: 3, y: 4 }
+  { x: 3, y: 4 },
 ];
 const points2 = [
   { x: 3, y: 4 },
-  { x: 5, y: 6 }
+  { x: 5, y: 6 },
 ];
 const arePointsEqual = (p1, p2) => p1.x === p2.x && p1.y === p2.y;
 unionWith(points1, points2, arePointsEqual);

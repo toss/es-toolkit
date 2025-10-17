@@ -17,12 +17,12 @@ import { omitBy } from 'es-toolkit/object';
 
 // 文字列の値を持つプロパティを除外
 const obj = { a: 1, b: 'remove', c: 3, d: 'also remove' };
-const result = omitBy(obj, (value) => typeof value === 'string');
+const result = omitBy(obj, value => typeof value === 'string');
 // resultは{ a: 1, c: 3 }になります
 
 // 偶数の値のみを除外
 const numbers = { a: 1, b: 2, c: 3, d: 4 };
-const odds = omitBy(numbers, (value) => value % 2 === 0);
+const odds = omitBy(numbers, value => value % 2 === 0);
 // oddsは{ a: 1, c: 3 }になります
 
 // キーと値の両方を活用

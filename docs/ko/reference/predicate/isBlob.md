@@ -40,7 +40,7 @@ function processUploadedFile(file: unknown) {
     // TypeScript가 file을 Blob으로 추론
     console.log(`파일 크기: ${file.size} 바이트`);
     console.log(`MIME 타입: ${file.type}`);
-    
+
     // Blob 메서드 안전하게 사용
     file.text().then(text => console.log('내용:', text));
   } else {

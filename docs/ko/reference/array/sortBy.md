@@ -19,7 +19,7 @@ import { sortBy } from 'es-toolkit/array';
 const users = [
   { name: 'john', age: 30 },
   { name: 'jane', age: 25 },
-  { name: 'bob', age: 35 }
+  { name: 'bob', age: 35 },
 ];
 const byAge = sortBy(users, ['age']);
 // Returns: [{ name: 'jane', age: 25 }, { name: 'john', age: 30 }, { name: 'bob', age: 35 }]
@@ -29,7 +29,7 @@ const employees = [
   { name: 'john', department: 'engineering', age: 30 },
   { name: 'jane', department: 'hr', age: 25 },
   { name: 'bob', department: 'engineering', age: 35 },
-  { name: 'alice', department: 'engineering', age: 25 }
+  { name: 'alice', department: 'engineering', age: 25 },
 ];
 const sorted = sortBy(employees, ['department', 'age']);
 // Returns: 부서 먼저, 그 다음 나이 순으로 정렬
@@ -50,18 +50,21 @@ import { sortBy } from 'es-toolkit/array';
 const products = [
   { name: 'laptop', price: 1000, category: 'electronics' },
   { name: 'shirt', price: 50, category: 'clothing' },
-  { name: 'phone', price: 800, category: 'electronics' }
+  { name: 'phone', price: 800, category: 'electronics' },
 ];
 
 const sorted = sortBy(products, [
-  'category', 
-  item => -item.price // 가격은 내림차순으로
+  'category',
+  item => -item.price, // 가격은 내림차순으로
 ]);
 // Returns: 카테고리 먼저, 그 다음 가격 높은 순으로 정렬
 
 // 계산된 값으로 정렬해요.
 const words = ['hello', 'a', 'wonderful', 'world'];
-const byLength = sortBy(words.map(word => ({ word, length: word.length })), ['length']);
+const byLength = sortBy(
+  words.map(word => ({ word, length: word.length })),
+  ['length']
+);
 // Returns: 문자열 길이 순으로 정렬된 객체 배열
 ```
 

@@ -16,15 +16,25 @@ Use `intersectionBy` when you want to find common elements in two arrays based o
 import { intersectionBy } from 'es-toolkit/array';
 
 // Find intersection based on object's id property
-const users1 = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
-const users2 = [{ id: 2, name: 'jane' }, { id: 4, name: 'alice' }];
+const users1 = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
+const users2 = [
+  { id: 2, name: 'jane' },
+  { id: 4, name: 'alice' },
+];
 intersectionBy(users1, users2, user => user.id);
 // Returns: [{ id: 2, name: 'jane' }]
 
 // Can also compare arrays of different types
-const objects = [{ id: 1, name: 'apple' }, { id: 2, name: 'banana' }];
+const objects = [
+  { id: 1, name: 'apple' },
+  { id: 2, name: 'banana' },
+];
 const ids = [2, 3, 4];
-intersectionBy(objects, ids, item => typeof item === 'object' ? item.id : item);
+intersectionBy(objects, ids, item => (typeof item === 'object' ? item.id : item));
 // Returns: [{ id: 2, name: 'banana' }]
 ```
 

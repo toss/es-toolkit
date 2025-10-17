@@ -25,12 +25,12 @@ import { pickBy } from 'es-toolkit/compat';
 
 // 特定の型の値のみを選択
 const data = { a: 1, b: 'keep', c: 3, d: 'select' };
-const strings = pickBy(data, (value) => typeof value === 'string');
+const strings = pickBy(data, value => typeof value === 'string');
 // 結果: { b: 'keep', d: 'select' }
 
 // 条件に基づいてプロパティを選択
 const user = { id: 1, name: 'John', age: 0, active: true, email: '' };
-const validData = pickBy(user, (value) => Boolean(value));
+const validData = pickBy(user, value => Boolean(value));
 // 結果: { id: 1, name: 'John', active: true } (真値のみ)
 
 // キー名でフィルタリング
@@ -40,12 +40,12 @@ const userOnly = pickBy(settings, (value, key) => key.startsWith('user'));
 
 // 数値プロパティのみを選択
 const mixed = { str: 'hello', num1: 42, bool: true, num2: 0, obj: {} };
-const numbersOnly = pickBy(mixed, (value) => typeof value === 'number');
+const numbersOnly = pickBy(mixed, value => typeof value === 'number');
 // 結果: { num1: 42, num2: 0 }
 
 // 配列でも使用可能
 const arr = [1, 2, 3, 4, 5];
-const evens = pickBy(arr, (value) => value % 2 === 0);
+const evens = pickBy(arr, value => value % 2 === 0);
 // 結果: { '1': 2, '3': 4 } (偶数のインデックスと値)
 
 // 値、キー、元のオブジェクトをすべて活用

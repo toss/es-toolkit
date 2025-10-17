@@ -35,7 +35,7 @@ const result2 = pick(obj, 'a', 'c');
 // 깊은 경로 선택
 const nested = {
   user: { profile: { name: 'John', age: 30 }, settings: { theme: 'dark' } },
-  admin: true
+  admin: true,
 };
 const userInfo = pick(nested, 'user.profile.name', 'admin');
 // 결과: { user: { profile: { name: 'John' } }, admin: true }
@@ -47,8 +47,8 @@ const selected = pick(mixed, ['a', 'b'], 'c', 'd.e');
 
 // 점 표기법 키와 실제 점이 있는 키 구분
 const ambiguous = {
-  'a.b': 1,           // 실제로 'a.b'라는 키
-  a: { b: 2, c: 3 }   // 중첩된 객체
+  'a.b': 1, // 실제로 'a.b'라는 키
+  a: { b: 2, c: 3 }, // 중첩된 객체
 };
 const dotKey = pick(ambiguous, 'a.b');
 // 결과: { 'a.b': 1 } (실제 키를 우선 선택)

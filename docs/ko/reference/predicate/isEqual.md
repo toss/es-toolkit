@@ -74,7 +74,7 @@ import { isEqual } from 'es-toolkit/predicate';
 function testApiResponse() {
   const expected = { status: 200, data: { message: 'success' } };
   const actual = { status: 200, data: { message: 'success' } };
-  
+
   if (isEqual(expected, actual)) {
     console.log('테스트 통과!');
   } else {
@@ -91,4 +91,3 @@ function testApiResponse() {
 #### 반환 값
 
 (`boolean`): 두 값이 깊게 동일하면 `true`, 그렇지 않으면 `false`를 반환해요.
-

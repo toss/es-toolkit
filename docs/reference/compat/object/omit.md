@@ -36,7 +36,7 @@ const filtered = omit(data, ['a', 'c']);
 // Remove deep key paths
 const nested = {
   user: { profile: { name: 'John', age: 30 }, settings: { theme: 'dark' } },
-  admin: true
+  admin: true,
 };
 const result = omit(nested, 'user.profile.age', 'admin');
 // Result: { user: { profile: { name: 'John' }, settings: { theme: 'dark' } } }
@@ -55,7 +55,7 @@ import { omit } from 'es-toolkit/compat';
 const config = {
   api: { url: 'https://api.example.com', key: 'secret', timeout: 5000 },
   ui: { theme: 'dark', language: 'en' },
-  debug: true
+  debug: true,
 };
 
 // Specify keys in multiple ways

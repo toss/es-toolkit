@@ -46,11 +46,11 @@ const combined = merge(base, ext1, ext2, ext3);
 // 嵌套对象合并
 const config = {
   api: { url: 'https://api.example.com', timeout: 5000 },
-  features: { auth: true }
+  features: { auth: true },
 };
 const overrides = {
   api: { timeout: 10000, retries: 3 },
-  features: { analytics: true }
+  features: { analytics: true },
 };
 const finalConfig = merge(config, overrides);
 // 结果: {

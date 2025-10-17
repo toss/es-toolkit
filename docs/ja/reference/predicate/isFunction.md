@@ -16,12 +16,12 @@ const result = isFunction(value);
 import { isFunction } from 'es-toolkit/predicate';
 
 // 一般的な関数
-console.log(isFunction(function() {})); // true
+console.log(isFunction(function () {})); // true
 console.log(isFunction(() => {})); // true
 console.log(isFunction(Array.prototype.slice)); // true
 
 // 非同期関数
-console.log(isFunction(async function() {})); // true
+console.log(isFunction(async function () {})); // true
 console.log(isFunction(async () => {})); // true
 
 // ジェネレーター関数
@@ -65,7 +65,7 @@ console.log(isFunction(null)); // false
 console.log(isFunction(undefined)); // false
 
 // 関数のように見えても関数でないもの
-console.log(isFunction({ call: function() {} })); // false
+console.log(isFunction({ call: function () {} })); // false
 ```
 
 コールバック関数の検証や動的な関数呼び出しで便利です。
@@ -101,7 +101,7 @@ const utils = {
       this.data = this.data.map(fn);
     }
     return this;
-  }
+  },
 };
 ```
 

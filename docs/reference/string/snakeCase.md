@@ -10,7 +10,7 @@ const converted = snakeCase(str);
 
 ### `snakeCase(str)`
 
-Use `snakeCase` when you want to convert a string to snake case. Snake case is a naming convention where each word is written in lowercase and words are connected with underscores (_).
+Use `snakeCase` when you want to convert a string to snake case. Snake case is a naming convention where each word is written in lowercase and words are connected with underscores (\_).
 
 ```typescript
 import { snakeCase } from 'es-toolkit/string';

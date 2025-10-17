@@ -16,13 +16,23 @@ const result = isSubsetWith(superset, subset, areItemsEqual);
 import { isSubsetWith } from 'es-toolkit/array';
 
 // 객체의 id로 부분집합 확인
-const users = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
-const targetUsers = [{ id: 2, name: 'jane' }, { id: 1, name: 'john' }];
+const users = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
+const targetUsers = [
+  { id: 2, name: 'jane' },
+  { id: 1, name: 'john' },
+];
 isSubsetWith(users, targetUsers, (a, b) => a.id === b.id);
 // Returns: true
 
 // 부분집합이 아닌 경우
-const allUsers = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }];
+const allUsers = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+];
 const someUsers = [{ id: 3, name: 'bob' }];
 isSubsetWith(allUsers, someUsers, (a, b) => a.id === b.id);
 // Returns: false

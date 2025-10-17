@@ -42,7 +42,11 @@ initial(empty);
 // Returns: []
 
 // 也可以处理嵌套数组
-const nested = [[1, 2], [3, 4], [5, 6]];
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
 initial(nested);
 // Returns: [[1, 2], [3, 4]]
 ```

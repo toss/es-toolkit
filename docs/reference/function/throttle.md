@@ -56,18 +56,10 @@ You can adjust the leading and trailing options.
 import { throttle } from 'es-toolkit/function';
 
 // Enable only leading (execute only at start)
-const leadingOnly = throttle(
-  () => console.log('Leading only'),
-  1000,
-  { edges: ['leading'] }
-);
+const leadingOnly = throttle(() => console.log('Leading only'), 1000, { edges: ['leading'] });
 
 // Enable only trailing (execute only at end)
-const trailingOnly = throttle(
-  () => console.log('Trailing only'),
-  1000,
-  { edges: ['trailing'] }
-);
+const trailingOnly = throttle(() => console.log('Trailing only'), 1000, { edges: ['trailing'] });
 
 leadingOnly(); // Executes immediately
 leadingOnly(); // Ignored
@@ -83,10 +75,7 @@ You can also control it manually.
 ```typescript
 import { throttle } from 'es-toolkit/function';
 
-const throttledFunc = throttle(
-  () => console.log('executed'),
-  1000
-);
+const throttledFunc = throttle(() => console.log('executed'), 1000);
 
 throttledFunc(); // Executes immediately
 throttledFunc(); // Waiting

@@ -35,7 +35,7 @@ const result2 = pick(obj, 'a', 'c');
 // Select deep paths
 const nested = {
   user: { profile: { name: 'John', age: 30 }, settings: { theme: 'dark' } },
-  admin: true
+  admin: true,
 };
 const userInfo = pick(nested, 'user.profile.name', 'admin');
 // Result: { user: { profile: { name: 'John' } }, admin: true }
@@ -47,8 +47,8 @@ const selected = pick(mixed, ['a', 'b'], 'c', 'd.e');
 
 // Distinguish between dot notation keys and actual dotted keys
 const ambiguous = {
-  'a.b': 1,           // Actual key 'a.b'
-  a: { b: 2, c: 3 }   // Nested object
+  'a.b': 1, // Actual key 'a.b'
+  a: { b: 2, c: 3 }, // Nested object
 };
 const dotKey = pick(ambiguous, 'a.b');
 // Result: { 'a.b': 1 } (actual key takes priority)

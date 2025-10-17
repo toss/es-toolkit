@@ -19,7 +19,7 @@ import { unzip } from 'es-toolkit/array';
 const zipped = [
   ['a', true, 1],
   ['b', false, 2],
-  ['c', true, 3]
+  ['c', true, 3],
 ];
 const result = unzip(zipped);
 console.log(result);
@@ -29,7 +29,7 @@ console.log(result);
 const users = [
   ['john', 30, 'engineer'],
   ['jane', 25, 'designer'],
-  ['bob', 35, 'manager']
+  ['bob', 35, 'manager'],
 ];
 const [names, ages, roles] = unzip(users);
 console.log(names); // ['john', 'jane', 'bob']
@@ -42,11 +42,7 @@ It can also handle arrays of different lengths. For shorter arrays, empty positi
 ```typescript
 import { unzip } from 'es-toolkit/array';
 
-const mixed = [
-  [1, 'a'],
-  [2, 'b', true],
-  [3]
-];
+const mixed = [[1, 'a'], [2, 'b', true], [3]];
 const result = unzip(mixed);
 console.log(result);
 // [[1, 2, 3], ['a', 'b', undefined], [undefined, true, undefined]]

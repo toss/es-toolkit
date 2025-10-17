@@ -31,14 +31,16 @@ const value = result(obj, 'a.b.c');
 // 自动函数调用
 const objWithFunc = {
   compute: () => ({ value: 42 }),
-  getValue: function() { return this.compute().value; }
+  getValue: function () {
+    return this.compute().value;
+  },
 };
 const computed = result(objWithFunc, 'getValue');
 // 结果: 42 (调用 getValue 函数)
 
 // 路径上的函数调用
 const nested = {
-  data: () => ({ user: { getName: () => 'John' } })
+  data: () => ({ user: { getName: () => 'John' } }),
 };
 const name = result(nested, 'data.user.getName');
 // 结果: 'John' (data() 和 getName() 都被调用)
@@ -57,7 +59,7 @@ const arrayPath = result(objWithFunc, ['getValue']);
 // 结果: 42
 
 // 动态默认值
-const dynamic = result(incomplete, 'missing.path', function() {
+const dynamic = result(incomplete, 'missing.path', function () {
   return `Generated at ${new Date().toISOString()}`;
 });
 // 结果: 包含当前时间的字符串
@@ -70,7 +72,9 @@ import { result } from 'es-toolkit/compat';
 
 const calculator = {
   multiplier: 2,
-  compute: function() { return 10 * this.multiplier; }
+  compute: function () {
+    return 10 * this.multiplier;
+  },
 };
 
 const calculatedValue = result(calculator, 'compute');

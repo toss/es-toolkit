@@ -48,9 +48,9 @@ console.log(spreadMin(numbers)); // 1
 import { spread } from 'es-toolkit/function';
 
 const calculator = {
-  multiply: function(a: number, b: number, c: number) {
+  multiply: function (a: number, b: number, c: number) {
     return a * b * c;
-  }
+  },
 };
 
 const spreadMultiply = spread(calculator.multiply);

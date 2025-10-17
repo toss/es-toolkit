@@ -25,7 +25,7 @@ const [evens, odds] = partition(numbers, x => x % 2 === 0);
 const users = [
   { name: 'Alice', active: true },
   { name: 'Bob', active: false },
-  { name: 'Charlie', active: true }
+  { name: 'Charlie', active: true },
 ];
 const [activeUsers, inactiveUsers] = partition(users, user => user.active);
 // activeUsers: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
