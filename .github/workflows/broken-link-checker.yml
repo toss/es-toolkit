@@ -8,6 +8,7 @@ on:
 
 jobs:
   broken-link-checker:
+    if: github.repository == 'toss/es-toolkit'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
