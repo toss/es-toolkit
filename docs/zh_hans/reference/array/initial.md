@@ -1,49 +1,56 @@
 # initial
 
-返回一个新数组，包含输入数组中除最后一个元素外的所有元素。
-
-对于空数组或长度为1的数组，它返回一个空数组(`[]`)。
-
-## 签名
+返回一个由除最后一个元素外的所有元素组成的新数组。
 
 ```typescript
-function initial<T>(arr: T[]): T[];
+const result = initial(arr);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`): 要从中返回除最后一个元素外所有元素的数组。
+### `initial(arr)`
 
-### 返回值
-
-(`T[]`): 一个新数组，包含输入数组中除最后一个元素外的所有元素。对于空数组或长度为1的数组，它返回一个空数组(`[]`)。
-
-## 示例
+当您想获取除最后一个元素外的所有元素时,请使用 `initial`。如果数组为空或只有一个元素,则返回空数组。在需要排除数组末尾进行处理时很有用。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = initial(arr1);
-// result 是 [1, 2]
+import { initial } from 'es-toolkit/array';
 
-const arr2: number[] = [];
-const result = initial(arr2);
-// result 是 []
+// 从数字数组中排除最后一个元素
+const numbers = [1, 2, 3, 4, 5];
+initial(numbers);
+// Returns: [1, 2, 3, 4]
 
-const arr3: number[] = [1];
-const result = initial(arr3);
-// result 是 []
+// 从字符串数组中排除最后一个元素
+const strings = ['a', 'b', 'c'];
+initial(strings);
+// Returns: ['a', 'b']
 
-const largeArray = Array(1000)
-.fill(0)
-.map((\_, i) => i);
-const result = initial(largeArray);
-// result 是 [0, 1, 2 ..., 998]
-
-const nestedArray = [
-[3, 1],
-[3, 2],
-[3, 3],
-];
-const result = initial(nestedArray);
-// result 是 [[3, 1], [3, 2]]
+// 只有一个元素的数组返回空数组
+const single = [42];
+initial(single);
+// Returns: []
 ```
+
+空数组或特殊情况也能安全处理。
+
+```typescript
+import { initial } from 'es-toolkit/array';
+
+// 空数组返回空数组
+const empty: number[] = [];
+initial(empty);
+// Returns: []
+
+// 也可以处理嵌套数组
+const nested = [[1, 2], [3, 4], [5, 6]];
+initial(nested);
+// Returns: [[1, 2], [3, 4]]
+```
+
+#### 参数
+
+- `arr` (`readonly T[]`): 要排除最后一个元素的数组。
+
+#### 返回值
+
+(`T[]`): 返回排除最后一个元素的新数组。如果输入数组为空或只有一个元素,则返回空数组。

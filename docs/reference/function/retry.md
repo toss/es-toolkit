@@ -1,55 +1,87 @@
 # retry
 
-Retries a function that returns a `Promise` until it succeeds. You can specify how many times to retry and the delay between each attempt.
-
-## Signature
+Retries a Promise-returning function until it succeeds.
 
 ```typescript
-function retry<T>(func: () => Promise<T>): Promise<T>;
-function retry<T>(func: () => Promise<T>, retries: number): Promise<T>;
-function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
+const result = await retry(asyncFunc, options);
 ```
 
-### Parameters
+## Reference
 
-- `func` (`() => Promise<T>`): A function that returns a `Promise`.
-- `retries`: The number of times to retry. The default is `Number.POSITIVE_INFINITY`, which means it will retry until it succeeds.
-- `delay`: The interval between retries, measured in milliseconds (ms). or a function that returns a delay based on the current attempt. The default is `0`.
-- `signal`: An `AbortSignal` that can be used to cancel the retries.
+### `retry(func, options?)`
 
-### Returns
+Use `retry` when you want to automatically retry an asynchronous function that fails. This is useful for operations that can temporarily fail, such as API calls or network requests.
 
-(`Promise<T>`): The value returned by the `func` function.
-
-### Errors
-
-An error occurs when the number of retries reaches `retries` or when canceled by the `AbortSignal`.
-
-## Examples
+You can configure the number of retries, retry interval, and cancellation signal. The retry interval can be a fixed value or a function that dynamically calculates based on the retry count.
 
 ```typescript
-// Retry indefinitely until `fetchData` succeeds.
-const data1 = await retry(() => fetchData());
-console.log(data1);
+import { retry } from 'es-toolkit/function';
 
-// Retry only 3 times until `fetchData` succeeds.
-const data2 = await retry(() => fetchData(), 3);
-console.log(data2);
-
-// Retry only 3 times until `fetchData` succeeds, with a 100ms interval in between.
-const data3 = await retry(() => fetchData(), { retries: 3, delay: 100 });
-console.log(data3);
-
-// Retry 5 times with a linearly increasing delay
-const data4 = await retry(() => fetchData(), {
-  retries: 5,
-  delay: attempts => attempts * 50,
+// Basic usage (infinite retries)
+const data1 = await retry(async () => {
+  const response = await fetch('/api/data');
+  if (!response.ok) throw new Error('Failed to fetch');
+  return response.json();
 });
-console.log(data4);
+
+// Limit retry count
+const data2 = await retry(async () => {
+  return await fetchData();
+}, 3);
+
+// Set retry interval (100ms)
+const data3 = await retry(async () => {
+  return await fetchData();
+}, {
+  retries: 3,
+  delay: 100
+});
+
+// Dynamic retry interval (exponential backoff)
+const data4 = await retry(async () => {
+  return await fetchData();
+}, {
+  retries: 5,
+  delay: (attempts) => Math.min(100 * Math.pow(2, attempts), 5000)
+});
+```
+
+You can also cancel retries using AbortSignal.
+
+```typescript
+import { retry } from 'es-toolkit/function';
 
 const controller = new AbortController();
 
-// The retry operation for `fetchData` can be canceled with the `signal`.
-const data5 = await retry(() => fetchData(), { signal: controller.signal });
-console.log(data5);
+// Cancel retry after 5 seconds
+setTimeout(() => controller.abort(), 5000);
+
+try {
+  const data = await retry(async () => {
+    return await fetchData();
+  }, {
+    retries: 10,
+    delay: 1000,
+    signal: controller.signal
+  });
+  console.log(data);
+} catch (error) {
+  console.log('Retry was canceled or failed:', error);
+}
 ```
+
+#### Parameters
+
+- `func` (`() => Promise<T>`): The asynchronous function to retry.
+- `options` (`number | RetryOptions`, optional): The number of retries or options object.
+  - `retries` (`number`, optional): The number of times to retry. Defaults to `Infinity` for infinite retries.
+  - `delay` (`number | (attempts: number) => number`, optional): The retry interval (in milliseconds). Can be a number or a function. Defaults to `0`.
+  - `signal` (`AbortSignal`, optional): A signal that can cancel retries.
+
+#### Returns
+
+(`Promise<T>`): Returns the result of the successfully executed function.
+
+#### Throws
+
+Throws the last error when the retry count is exceeded or when canceled by AbortSignal.

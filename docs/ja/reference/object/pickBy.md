@@ -1,32 +1,41 @@
 # pickBy
 
-条件関数に合致するプロパティで構成された新しいオブジェクトを生成します。
-
-この関数はオブジェクトと条件関数を受け取り、条件関数がtrueを返すプロパティのみを含む新しいオブジェクトを返します。
-
-## インターフェース
+条件関数を満たすプロパティのみを含む新しいオブジェクトを返します。
 
 ```typescript
-function pickBy<T extends Record<string, any>>(
-  obj: T,
-  shouldPick: (value: T[keyof T], key: keyof T) => boolean
-): Partial<T>;
-```
-
-### パラメータ
-
-- `obj` (`T`): プロパティを選択するオブジェクトです。
-- `shouldPick` (`(value: T[keyof T], key: keyof T) => boolean`): プロパティを選択するかどうかを決定する条件関数です。この関数はプロパティのキーと値を引数として受け取り、プロパティを選択する場合はtrue、そうでない場合はfalseを返します。
-
-### 戻り値
-
-(`Partial<T>`): 条件関数に合致するプロパティで構成された新しいオブジェクトです。
-
-## 例
-
-```typescript
-const obj = { a: 1, b: 'pick', c: 3 };
-const shouldPick = (value, key) => typeof value === 'string';
 const result = pickBy(obj, shouldPick);
-// 結果は次のようになります { b: 'pick' }
 ```
+
+## 参照
+
+### `pickBy(obj, shouldPick)`
+
+条件関数を基にオブジェクトのプロパティを選択的に選択したい時に`pickBy`を使用してください。条件関数が`true`を返すプロパティのみが含まれた新しいオブジェクトを返します。
+
+```typescript
+import { pickBy } from 'es-toolkit/object';
+
+// 文字列の値を持つプロパティのみを選択
+const obj = { a: 1, b: 'select', c: 3, d: 'also select' };
+const result = pickBy(obj, (value) => typeof value === 'string');
+// resultは{ b: 'select', d: 'also select' }になります
+
+// 偶数の値のみを選択
+const numbers = { a: 1, b: 2, c: 3, d: 4 };
+const evens = pickBy(numbers, (value) => value % 2 === 0);
+// evensは{ b: 2, d: 4 }になります
+
+// キーと値の両方を活用
+const data = { user1: 25, user2: 17, admin1: 30, admin2: 28 };
+const admins = pickBy(data, (value, key) => key.startsWith('admin') && value > 25);
+// adminsは{ admin1: 30, admin2: 28 }になります
+```
+
+#### パラメータ
+
+- `obj` (`T extends Record<string, any>`): プロパティをフィルタリングするオブジェクトです。
+- `shouldPick` (`(value: T[keyof T], key: keyof T) => boolean`): プロパティを選択するかを決定する条件関数です。値とキーを受け取り、選択する場合は`true`、除外する場合は`false`を返します。
+
+#### 戻り値
+
+(`Partial<T>`): 条件関数を満たすプロパティのみを含む新しいオブジェクトを返します。

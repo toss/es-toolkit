@@ -1,47 +1,59 @@
 # fill
 
-配列の要素を指定された値で埋めます。開始位置から終了位置までの要素を提供された値で置き換えます。
-
-この関数は元の配列を変更し、提供された値で開始インデックスから終了インデックスまでの要素を置き換えます。
-開始または終了インデックスを提供しない場合、配列全体を埋めます。
-
-負のインデックスを使用することもできます。この場合、配列の末尾からインデックスを計算します。
-
-## インターフェース
+配列の要素を指定された値で埋めます。元の配列を直接変更します。
 
 ```typescript
-function fill<T>(array: unknown[], value: T): T[];
-function fill<T, U>(array: T[], value: T, start: number): Array<T | U>;
-function fill<T, U>(array: T[], value: T, start: number, end: number): Array<T | U>;
+const filled = fill(arr, value, start, end);
 ```
 
-### パラメータ
+::: info 元の配列を変更したくない場合は、[`toFilled`](./toFilled.md)を使用してください。
 
-- `array` (`Array<T | U>`): 埋める配列です。
-- `value` (`U`): 配列を埋める値です。
-- `start` (`number`, デフォルト = 0): 開始位置です。デフォルトは0です。
-- `end` (`number`, デフォルト = array.length): 終了位置です。デフォルトは配列の長さです。
+`toFilled`は元の配列を変更する代わりに新しい配列を返します。
 
-### 戻り値
+:::
 
-(`Array<T | U>`): 埋められた値がある配列を返します。
+## 参照
 
-## 例
+### `fill(arr, value, start?, end?)`
+
+配列の特定の範囲を指定された値で埋めたい場合は `fill` を使用してください。開始位置から終了位置の直前までの要素を提供された値で置き換えます。開始または終了位置を指定しない場合、配列全体を埋めます。
 
 ```typescript
+import { fill } from 'es-toolkit/array';
+
+// 配列全体を'a'で埋めます。
 const array1 = [1, 2, 3];
-const result1 = fill(array1, 'a');
-// result1は ['a', 'a', 'a'] になります。
+fill(array1, 'a');
+// Returns: ['a', 'a', 'a']
 
+// 空の配列を2で埋めます。
 const array2 = Array(3);
-const result2 = fill(array2, 2);
-// result2は [2, 2, 2] になります。
+fill(array2, 2);
+// Returns: [2, 2, 2]
 
+// インデックス1から3の直前まで'*'で埋めます。
 const array3 = [4, 6, 8, 10];
-const result3 = fill(array3, '*', 1, 3);
-// result3は [4, '*', '*', 10] になります。
-
-const array4 = [1, 2, 3];
-const result4 = fill(array4, '*', -2, -1);
-// result4は [1, '*', 3] になります。
+fill(array3, '*', 1, 3);
+// Returns: [4, '*', '*', 10]
 ```
+
+負のインデックスも使用できます。負のインデックスは配列の末尾から計算されます。
+
+```typescript
+import { fill } from 'es-toolkit/array';
+
+const array = [1, 2, 3];
+fill(array, '*', -2, -1);
+// Returns: [1, '*', 3]
+```
+
+#### パラメータ
+
+- `arr` (`Array<T | U>`): 埋める配列です。
+- `value` (`U`): 配列を埋める値です。
+- `start` (`number`, オプション): 開始位置です。デフォルト値は `0` です。
+- `end` (`number`, オプション): 終了位置です。デフォルト値は配列の長さです。
+
+#### 戻り値
+
+(`Array<T | U>`): 値で埋められた元の配列を返します。

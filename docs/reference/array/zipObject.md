@@ -1,39 +1,43 @@
 # zipObject
 
-Combines two arrays, one of property names and one of corresponding values, into a single object.
-
-This function takes two arrays: one containing property names and another containing corresponding values. It returns a new object where the property names from the first array are keys, and the corresponding elements from the second array are values. If the `keys` array is longer than the `values` array, the remaining keys will have `undefined` as their values.
-
-## Signature
+Creates a single object from a keys array and a values array.
 
 ```typescript
-function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+const object = zipObject(keys, values);
 ```
 
-### Parameters
+## Reference
 
-- `keys` (`P[]`): An array of property names.
-- `values` (`V[]`): An array of values corresponding to the property names.
+### `zipObject(keys, values)`
 
-### Returns
-
-(`{ [K in P]: V }`): A new object composed of the given property names and values.
-
-## Examples
+Use `zipObject` when you want to combine two arrays into a single object. It returns a new object where elements from the first array become keys and elements from the second array become values.
 
 ```typescript
-const keys = ['a', 'b', 'c'];
-const values = [1, 2, 3];
-const result = zipObject(keys, values);
-// result will be { a: 1, b: 2, c: 3 }
+import { zipObject } from 'es-toolkit/array';
 
-const keys2 = ['a', 'b', 'c'];
-const values2 = [1, 2];
-const result2 = zipObject(keys2, values2);
-// result2 will be { a: 1, b: 2, c: undefined }
+// Create an object from keys and values.
+zipObject(['a', 'b', 'c'], [1, 2, 3]);
+// Returns: { a: 1, b: 2, c: 3 }
 
-const keys3 = ['a', 'b'];
-const values3 = [1, 2, 3];
-const result3 = zipObject(keys3, values3);
-// result3 will be { a: 1, b: 2 }
+// If there are more keys, undefined becomes the value.
+zipObject(['a', 'b', 'c', 'd'], [1, 2, 3]);
+// Returns: { a: 1, b: 2, c: 3, d: undefined }
 ```
+
+If the values array is longer, excess values are ignored.
+
+```typescript
+import { zipObject } from 'es-toolkit/array';
+
+zipObject(['a', 'b'], [1, 2, 3, 4]);
+// Returns: { a: 1, b: 2 }
+```
+
+#### Parameters
+
+- `keys` (`readonly P[]`): The array that will become the object's keys.
+- `values` (`readonly V[]`): The array of values corresponding to each key.
+
+#### Returns
+
+(`Record<P, V>`): Returns a new object with keys and values combined.

@@ -1,43 +1,57 @@
 # intersectionWith
 
-返回基于自定义相等函数的两个数组的交集。
-
-该函数接受两个数组和一个自定义相等函数。它返回一个新数组，该数组包含从第一个数组中选取的元素，这些元素在使用提供的自定义相等函数进行比较时，在第二个数组中有匹配的元素。
-
-它有效地过滤掉第一个数组中根据相等函数没有在第二个数组中具有对应匹配的元素。
-
-## 签名
+根据自定义比较函数为标准求两个数组的交集,返回一个新数组。
 
 ```typescript
-function intersectionWith<T, U>(firstArr: T[], secondArr: U[], areItemsEqual: (x: T, y: U) => boolean): T[];
+const result = intersectionWith(firstArr, secondArr, areItemsEqual);
 ```
 
-### 参数
+## 参考
 
-- `firstArr` (`T[]`): 要比较的第一个数组。
-- `secondArr` (`U[]`): 要比较的第二个数组。
-- `areItemsEqual` (`(x: T, y: U) => boolean`): 一个自定义函数，用于确定两个元素是否相等。该函数接受两个参数，分别来自每个数组，如果这两个元素被认为相等，则返回 `true`，否则返回 `false`。
+### `intersectionWith(firstArr, secondArr, areItemsEqual)`
 
-### 返回值
-
-(`T[]`) 包含第一个数组中具有第二个数组中对应匹配的元素的新数组。
-
-## 示例
+当您想用自定义的比较函数查找两个数组的共同元素时,请使用 `intersectionWith`。在单纯的值比较难以处理的复杂对象或需要特殊比较逻辑的情况下很有用。
 
 ```typescript
-const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const array2 = [{ id: 2 }, { id: 4 }];
-const areItemsEqual = (a, b) => a.id === b.id;
-const result = intersectionWith(array1, array2, areItemsEqual);
-// 结果将是 [{ id: 2 }] 因为这个元素在两个数组中具有匹配的 id。
+import { intersectionWith } from 'es-toolkit/array';
 
-const array1 = [
-  { id: 1, name: 'jane' },
-  { id: 2, name: 'amy' },
-  { id: 3, name: 'michael' },
-];
-const array2 = [2, 4];
-const areItemsEqual = (a, b) => a.id === b;
-const result = intersectionWith(array1, array2, areItemsEqual);
-// 结果将是 [{ id: 2, name: 'amy' }] 因为该元素的 id 与第二个数组中的元素匹配。
+// 按对象的 id 属性比较
+const users1 = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }];
+const users2 = [{ id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
+intersectionWith(users1, users2, (a, b) => a.id === b.id);
+// Returns: [{ id: 2, name: 'jane' }]
+
+// 也可以比较不同类型
+const objects = [{ id: 1, name: 'apple' }, { id: 2, name: 'banana' }];
+const ids = [2, 3];
+intersectionWith(objects, ids, (obj, id) => obj.id === id);
+// Returns: [{ id: 2, name: 'banana' }]
 ```
+
+也可以实现复杂的比较逻辑。
+
+```typescript
+import { intersectionWith } from 'es-toolkit/array';
+
+// 不区分大小写的字符串比较
+const words1 = ['Apple', 'Banana'];
+const words2 = ['apple', 'cherry'];
+intersectionWith(words1, words2, (a, b) => a.toLowerCase() === b.toLowerCase());
+// Returns: ['Apple']
+
+// 范围内的数字比较
+const numbers1 = [1.1, 2.3, 3.7];
+const numbers2 = [1.0, 2.5, 4.0];
+intersectionWith(numbers1, numbers2, (a, b) => Math.abs(a - b) < 0.5);
+// Returns: [1.1] (1.1 和 1.0 的差小于 0.5)
+```
+
+#### 参数
+
+- `firstArr` (`readonly T[]`): 要比较的第一个数组。
+- `secondArr` (`readonly U[]`): 要比较的第二个数组。
+- `areItemsEqual` (`(x: T, y: U) => boolean`): 判断两个元素是否相同的函数。相同时应返回 `true`,不同时返回 `false`。
+
+#### 返回值
+
+(`T[]`): 返回根据自定义比较函数为标准,由两个数组共同包含的元素组成的新数组。结果由第一个数组的元素组成。

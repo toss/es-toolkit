@@ -1,36 +1,48 @@
 # minBy
 
-找到数组中通过将 `getValue` 函数应用于每个元素后具有最小值的元素。
-
-如果列表为空，则返回 `undefined`。
-
-## 签名
+根据转换函数返回的值,返回数组中具有最小值的元素。
 
 ```typescript
-function minBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T;
-function minBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
+const min = minBy(items, getValue);
 ```
 
-### 参数
+## 参考
 
-- `items` (`T[]`): 要搜索的元素数组。
-- `getValue` (`(item: T) => number`): 从每个元素中选择数值的函数。
+### `minBy(items, getValue)`
 
-### 返回值
-
-(`T`) 由 `getValue` 函数确定的具有最小值的元素。如果数组为空，则返回 `undefined`。
-
-## 示例
+当您想用转换函数将数组元素转换为数值,并找到具有最小值的原始元素时,请使用 `minBy`。对于空数组返回 `undefined`。
 
 ```typescript
-minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 返回: { a: 1 }
-minBy([], x => x.a); // 返回: undefined
-minBy(
-  [
-    { name: 'john', age: 30 },
-    { name: 'jane', age: 28 },
-    { name: 'joe', age: 26 },
-  ],
-  x => x.age
-); // 返回: { name: 'joe', age: 26 }
+import { minBy } from 'es-toolkit/array';
+
+// 从对象数组中找到特定属性具有最小值的元素
+const people = [
+  { name: 'john', age: 30 },
+  { name: 'jane', age: 28 },
+  { name: 'joe', age: 26 }
+];
+minBy(people, person => person.age);
+// Returns: { name: 'joe', age: 26 }
+
+// 从数字数组中找到绝对值最小的元素
+const numbers = [-10, -5, 0, 5, 15];
+minBy(numbers, x => Math.abs(x));
+// Returns: 0
 ```
+
+对于空数组返回 `undefined`。
+
+```typescript
+import { minBy } from 'es-toolkit/array';
+
+minBy([], x => x.value); // undefined
+```
+
+#### 参数
+
+- `items` (`T[]`): 要查找具有最小值的元素的数组。
+- `getValue` (`(element: T) => number`): 将每个元素转换为数字的函数。
+
+#### 返回值
+
+(`T | undefined`): 转换函数返回的值中具有最小值的元素。如果数组为空,则返回 `undefined`。

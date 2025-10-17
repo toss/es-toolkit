@@ -1,81 +1,81 @@
 # unzipWith
 
-Unzips an array of arrays, applying an `iteratee` function to regrouped elements.
-
-## Signature
+Unpacks grouped arrays and applies a transformation function to return a new array.
 
 ```typescript
-function unzipWith<T, R>(target: T[][], iteratee: (...args: T[]) => R): R[];
+const transformedArray = unzipWith(target, iteratee);
 ```
 
-### Parameters
+## Reference
 
-- `target`(`T[][]`): The nested array to unzip. This is an array of arrays, where each inner array contains elements to be unzipped.
-- `iteratee` (`(...args: T[]) => R`): A function to transform the unzipped elements.
+### `unzipWith(target, iteratee)`
 
-### Returns
-
-(`R[]`): A new array of unzipped and transformed elements.
-
-## Examples
+Use `unzipWith` when you want to collect elements at the same position from a 2D array where multiple arrays are grouped together and apply a transformation function to get the result. It's similar to `unzip` but allows you to transform the elements in each group with a custom function.
 
 ```typescript
-const nestedArray = [
+import { unzipWith } from 'es-toolkit/array';
+
+// Add numbers at the same position.
+const numbers = [
   [1, 2],
   [3, 4],
-  [5, 6],
+  [5, 6]
 ];
-const result = unzipWith(nestedArray, (item, item2, item3) => item + item2 + item3);
-// [9, 12]
+const sums = unzipWith(numbers, (a, b, c) => a + b + c);
+console.log(sums); // [9, 12] (1+3+5=9, 2+4+6=12)
+
+// Concatenate strings at the same position.
+const words = [
+  ['hello', 'world'],
+  ['foo', 'bar'],
+  ['es', 'toolkit']
+];
+const combined = unzipWith(words, (a, b, c) => a + b + c);
+console.log(combined); // ['hellofoes', 'worldbartoolkit']
+
+// Calculate average of specific property from object array.
+const scores = [
+  [{ score: 80 }, { score: 90 }],
+  [{ score: 85 }, { score: 95 }],
+  [{ score: 75 }, { score: 88 }]
+];
+const averages = unzipWith(scores, (a, b, c) =>
+  (a.score + b.score + c.score) / 3
+);
+console.log(averages); // [80, 91] (80+85+75)/3, (90+95+88)/3
 ```
 
-## Compatibility with Lodash
-
-Import `unzipWith` from `es-toolkit/compat` for full compatibility with Lodash.
-
-The function supports the following features in compatibility mode:
-
-- **Null/Undefined Handling**: When the input array is null or undefined, it returns an empty array.
-- **Array-like Objects**: The function can work with array-like objects in addition to regular arrays.
-- **Iteratee Function**: The iteratee function receives the regrouped elements as arguments and can transform them into any type. When the iteratee is null or undefined, the function behaves like `unzip`, returning the unzipped array without any transformation.
-
-### Signature
+If arrays have different lengths, undefined is passed.
 
 ```typescript
-function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined): T[][];
-function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee?: null): T[][];
-function unzipWith<T, R>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined, iteratee: (...args: T[]) => R): R[];
-function unzipWith<T>(
-  array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined,
-  iteratee: (...args: any[]) => unknown
-): any[];
+import { unzipWith } from 'es-toolkit/array';
+
+const mixed = [
+  [1, 4],
+  [2, 5],
+  [3] // Different length
+];
+const result = unzipWith(mixed, (a, b, c) => {
+  // c can be undefined
+  return (a || 0) + (b || 0) + (c || 0);
+});
+console.log(result); // [6, 9] (1+2+3, 4+5+0)
 ```
 
-### Examples
+Passing an empty array returns an empty array.
 
 ```typescript
-// Example using iteratee
-const array1 = [
-  [1, 3],
-  [2, 4],
-];
-const result1 = unzipWith(array1, (a, b) => a + b);
-// result1 will be [3, 7] because when the iteratee is provided, the function transform regrouped elements.
+import { unzipWith } from 'es-toolkit/array';
 
-// Example with null or undefined iteratee
-const array2 = [
-  [1, 3],
-  [2, 4],
-];
-const result2 = unzipWith(array2, null);
-// result2 will be [[1, 2], [3, 4]] because when the iteratee is null, the function behaves like unzip.
-
-// Example with null or undefined input
-const result3 = unzipWith(null);
-// result3 will be [] since the input array is null.
-
-// Example with array-like object
-const arrayLike = { 0: [1, 2], 1: [3, 4], length: 2 };
-const result4 = unzipWith(arrayLike, (a, b) => a + b);
-// result4 will be [4, 6] since it works with array-like objects.
+const empty = unzipWith([], (a, b) => a + b);
+console.log(empty); // []
 ```
+
+#### Parameters
+
+- `target` (`readonly T[][]`): A 2D array where multiple arrays are grouped together to be unpacked and transformed.
+- `iteratee` (`(...args: T[]) => R`): A function that receives elements at the same position and transforms them into a new value.
+
+#### Returns
+
+(`R[]`): A new array created by applying the transformation function to the results.

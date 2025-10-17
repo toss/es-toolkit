@@ -1,27 +1,60 @@
 # sample
 
-返回数组中的随机元素。
-
-该函数接受一个数组，并从数组中随机选择一个元素。
-
-## 签名
+从数组中随机返回一个元素。
 
 ```typescript
-function sample<T>(arr: T[]): T;
+const randomElement = sample(arr);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`): 要从中取样的数组。
+### `sample(arr)`
 
-### 返回值
-
-(`T`): 数组中的一个随机元素。
-
-## 示例
+当您想从数组中随机获取一个元素时,请使用 `sample`。在游戏中选择随机道具、随机获取测试数据或进行抽签时非常有用。
 
 ```typescript
-const array = [1, 2, 3, 4, 5];
-const randomElement = sample(array);
-// randomElement 将会是数组中的某个随机元素。
+import { sample } from 'es-toolkit/array';
+
+// 从数字数组中随机选择一个
+const numbers = [1, 2, 3, 4, 5];
+const randomNumber = sample(numbers);
+// Returns: 1, 2, 3, 4, 5 中的一个
+
+// 从字符串数组中随机选择一个
+const fruits = ['apple', 'banana', 'cherry', 'date'];
+const randomFruit = sample(fruits);
+// Returns: 'apple', 'banana', 'cherry', 'date' 中的一个
+
+// 从对象数组中随机选择一个
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 35 }
+];
+const randomUser = sample(users);
+// Returns: 三个用户中随机选择一个
 ```
+
+也可以用于各种类型的数组。
+
+```typescript
+import { sample } from 'es-toolkit/array';
+
+// 布尔数组
+const booleans = [true, false];
+const randomBoolean = sample(booleans);
+// Returns: true 或 false
+
+// 混合类型数组
+const mixed = [1, 'hello', { key: 'value' }, [1, 2, 3]];
+const randomItem = sample(mixed);
+// Returns: 数组中的任意元素
+```
+
+#### 参数
+
+- `arr` (`readonly T[]`): 要随机选择元素的数组。
+
+#### 返回值
+
+(`T`): 从数组中随机选择的元素。

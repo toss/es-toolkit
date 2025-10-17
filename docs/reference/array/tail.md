@@ -1,38 +1,65 @@
 # tail
 
-Returns a new array with all elements except for the first.
-
-This function takes an array and returns a new array containing all the elements except for the first one. If the input array is empty or has only one element, an empty array is returned.
-
-## Signature
+Returns a new array consisting of all elements except the first.
 
 ```typescript
-function tail<T>(arr: [T]): [];
-function tail(arr: []): [];
-function tail<T, U>(arr: [T, ...U[]]): U[];
-function tail<T>(arr: T[]): T[];
+const result = tail(arr);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array to get the tail of.
+### `tail(arr)`
 
-### Returns
-
-(`T[]`): A new array containing all elements of the input array except for the first one.
-
-## Examples
+Use `tail` when you want to get all elements except the first from an array. If the array is empty or has only one element, it returns an empty array. It's useful when processing all elements except the first in a stack or queue.
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = tail(arr1);
-// result will be [2, 3]
+import { tail } from 'es-toolkit/array';
 
-const arr2 = [1];
-const result2 = tail(arr2);
-// result2 will be []
+// Exclude the first element from a number array.
+const numbers = [1, 2, 3, 4, 5];
+tail(numbers);
+// Returns: [2, 3, 4, 5]
 
-const arr3 = [];
-const result3 = tail(arr3);
-// result3 will be []
+// Exclude the first element from a string array.
+const strings = ['first', 'second', 'third'];
+tail(strings);
+// Returns: ['second', 'third']
+
+// An array with only one element returns an empty array.
+const single = [42];
+tail(single);
+// Returns: []
 ```
+
+It safely handles empty arrays and special cases.
+
+```typescript
+import { tail } from 'es-toolkit/array';
+
+// An empty array returns an empty array.
+const empty: number[] = [];
+tail(empty);
+// Returns: []
+
+// It can also handle nested arrays.
+const nested = [[1, 2], [3, 4], [5, 6]];
+tail(nested);
+// Returns: [[3, 4], [5, 6]]
+
+// It can also handle object arrays.
+const users = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' }
+];
+tail(users);
+// Returns: [{ id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
+```
+
+#### Parameters
+
+- `arr` (`readonly T[]`): The array from which to exclude the first element.
+
+#### Returns
+
+(`T[]`): Returns a new array excluding the first element. If the input array is empty or has only one element, it returns an empty array.

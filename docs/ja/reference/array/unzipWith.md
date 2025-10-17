@@ -1,33 +1,84 @@
 # unzipWith
 
-結合された2次元配列を1次元配列に解き、`iteratee`関数で値を変換して新しい配列を返します。
-
-## インターフェース
+結合されている配列を解いて、変換関数を適用した新しい配列を返します。
 
 ```typescript
-function unzipWith<T, R>(target: T[][], iteratee: (...args: T[]) => R): R[];
+const transformedArray = unzipWith(target, iteratee);
 ```
 
-### パラメータ
+## 参照
 
-- `target` (`T[][]`): 結合を解いて変換する配列です。
-- `iteratee` (`(...args: T[]) => R`): 結合が解かれた配列を変換する関数です。
+### `unzipWith(target, iteratee)`
 
-### 戻り値
-
-(`R[]`): 結合を解いて変換された値で作られた新しい配列です。
-
-## 例
+複数の配列が結合されている2次元配列から同じ位置の要素を集めて変換関数を適用した結果を得たい場合は `unzipWith` を使用してください。`unzip` と似ていますが、各グループの要素をカスタム関数で変換できます。
 
 ```typescript
-const nestedArray = [
+import { unzipWith } from 'es-toolkit/array';
+
+// 同じ位置の数値を足します。
+const numbers = [
   [1, 2],
   [3, 4],
-  [5, 6],
+  [5, 6]
 ];
-const result = unzipWith(nestedArray, (item, item2, item3) => item + item2 + item3);
-// [9, 12]
+const sums = unzipWith(numbers, (a, b, c) => a + b + c);
+console.log(sums); // [9, 12] (1+3+5=9, 2+4+6=12)
+
+// 同じ位置の文字列を連結します。
+const words = [
+  ['hello', 'world'],
+  ['foo', 'bar'],
+  ['es', 'toolkit']
+];
+const combined = unzipWith(words, (a, b, c) => a + b + c);
+console.log(combined); // ['hellofoes', 'worldbartoolkit']
+
+// オブジェクト配列から特定のプロパティの平均を求めます。
+const scores = [
+  [{ score: 80 }, { score: 90 }],
+  [{ score: 85 }, { score: 95 }],
+  [{ score: 75 }, { score: 88 }]
+];
+const averages = unzipWith(scores, (a, b, c) =>
+  (a.score + b.score + c.score) / 3
+);
+console.log(averages); // [80, 91] (80+85+75)/3, (90+95+88)/3
 ```
+
+配列の長さが異なる場合はundefinedが渡されます。
+
+```typescript
+import { unzipWith } from 'es-toolkit/array';
+
+const mixed = [
+  [1, 4],
+  [2, 5],
+  [3] // 長さが異なる
+];
+const result = unzipWith(mixed, (a, b, c) => {
+  // cはundefinedになる可能性があります
+  return (a || 0) + (b || 0) + (c || 0);
+});
+console.log(result); // [6, 9] (1+2+3, 4+5+0)
+```
+
+空の配列を渡すと空の配列を返します。
+
+```typescript
+import { unzipWith } from 'es-toolkit/array';
+
+const empty = unzipWith([], (a, b) => a + b);
+console.log(empty); // []
+```
+
+#### パラメータ
+
+- `target` (`readonly T[][]`): 解いて変換する配列が結合されている2次元配列です。
+- `iteratee` (`(...args: T[]) => R`): 同じ位置の要素を受け取って新しい値に変換する関数です。
+
+#### 戻り値
+
+(`R[]`): 変換関数を適用した結果で作られた新しい配列です。
 
 ## Lodashとの互換性
 

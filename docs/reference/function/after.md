@@ -1,46 +1,43 @@
 # after
 
-Creates a function that only executes from the `n`-th call onwards, ignoring any previous calls.
+Creates a new function that invokes the original function starting from the `n`-th call.
 
 ```typescript
-const newFunc = after(n, func);
+const afterFunc = after(n, func);
 ```
 
 ## Reference
 
 ### `after(n, func)`
 
-When you want to ignore the first few calls and have the function execute starting from the `n`-th call, use the `after` function.
+Use `after` when you want to ignore the first few calls and execute the function starting from the `n`-th call. This is useful when you need to perform an action only after a specific number of occurrences in events or asynchronous operations.
 
 ```typescript
-import { after } from 'es-toolkit';
+import { after } from 'es-toolkit/function';
 
-const mockFn = () => {
-  console.log('called');
-};
-const afterFn = after(3, mockFn);
+const afterFn = after(3, () => {
+  console.log('executed');
+});
 
-// Will not log anything.
+// logs nothing
 afterFn();
-// Will not log anything.
+// logs nothing
 afterFn();
-// Will log 'called'.
+// logs 'executed'
+afterFn();
+// logs 'executed'
 afterFn();
 ```
 
-### Parameters
+#### Parameters
 
-- `n` (`number`): The number of calls required for `func` to execute.
-- `func` (`F`): The function to be invoked.
+- `n` (`number`): The number of calls required before `func` is executed.
+- `func` (`F`): The function to be executed.
 
-### Returns
+#### Returns
 
-(`(...args: Parameters<F>) => ReturnType<F> | undefined`): A new function that:
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): A new function that tracks the number of calls and executes `func` starting from the `n`-th call. Returns `undefined` for calls before the `n`-th call.
 
-- Tracks the number of calls.
-- Invokes `func` starting from the `n`-th call.
-- Returns `undefined` until the number of calls reaches `n`.
+#### Throws
 
-### Errors
-
-Throws an error if `n` is negative.
+Throws an error when `n` is not an integer or is negative.
