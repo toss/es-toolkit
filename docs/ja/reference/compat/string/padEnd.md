@@ -1,35 +1,59 @@
-# padEnd
+# padEnd (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
+::: warning JavaScript の `String.prototype.padEnd` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `padEnd` 関数は、文字列以外の値の処理により、動作が遅くなります。
+
+代わりに、より高速で現代的な JavaScript の `String.prototype.padEnd` を使用してください。
+
 :::
 
-文字列を指定された長さになるまで末尾に文字を追加して拡張します。
-
-すでに文字列が十分に長いか、末尾に追加する文字が空文字列の場合、何も動作しません。
-
-## インターフェース
+文字列の後ろにパディングを追加して、指定された長さまで伸ばします。
 
 ```typescript
-function padEnd(str: string, length = 0, chars = ' '): string;
+const padded = padEnd(str, length, chars);
 ```
 
-### パラメータ
+## 参照
 
-- `str` (`string`): 長さを拡張する文字列。
-- `length` (`number`): 拡張したい長さ。デフォルト値は `0`。
-- `char` (`string`): 長さを拡張する際に追加する文字。デフォルト値は `' '`。
+### `padEnd(str, length?, chars?)`
 
-### 戻り値
+文字列が希望する長さより短い場合に、後ろにパディング文字を追加して長さを合わせたい場合は `padEnd` を使用してください。
 
-指定された長さまで拡張され、末尾に文字が追加された文字列。
+```typescript
+import { padEnd } from 'es-toolkit/compat';
 
-## 例
+// 空白でパディング
+padEnd('abc', 6);
+// Returns: 'abc   '
 
-```javascript
-padEnd('hello', 10, 'a'); // 'helloaaaaa'
-padEnd('hello', 3, 'a'); // 'hello'
-padEnd('hello', 5, ''); // 'hello'
+// 特定の文字でパディング
+padEnd('abc', 6, '_-');
+// Returns: 'abc_-_'
+
+// 元の長さがより長い場合はそのまま返す
+padEnd('abc', 3);
+// Returns: 'abc'
 ```
+
+`null` や `undefined` は空文字列として処理されます。
+
+```typescript
+import { padEnd } from 'es-toolkit/compat';
+
+padEnd(null, 5, '*');
+// Returns: '*****'
+
+padEnd(undefined, 3);
+// Returns: '   '
+```
+
+#### パラメータ
+
+- `str` (`string`,オプション): パディングを追加する文字列です。
+- `length` (`number`,オプション): 希望する最終的な文字列の長さです。デフォルトは `0` です。
+- `chars` (`string`,オプション): パディングに使用する文字です。デフォルトは `' '`(空白)です。
+
+#### 戻り値
+
+(`string`): 後ろにパディングが追加された文字列を返します。

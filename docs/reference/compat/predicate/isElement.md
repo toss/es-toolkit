@@ -1,4 +1,4 @@
-# isElement (Lodash compatibility)
+# isElement (Lodash Compatibility)
 
 ::: warning Use `instanceof HTMLElement`
 

@@ -1,4 +1,4 @@
-# isArrayLike (Lodash compatibility)
+# isArrayLike (Lodash Compatibility)
 
 Checks if a value is an array-like object.
 

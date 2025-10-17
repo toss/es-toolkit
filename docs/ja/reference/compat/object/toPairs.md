@@ -1,44 +1,73 @@
-# toPairs
+# toPairs (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.entries` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `toPairs` 関数は `Map` と `Set` の処理、配列風オブジェクトの処理などの複雑なロジックにより遅く動作します。
+
+代わりに、より高速で現代的な `Object.entries()` を使用してください。
+
 :::
 
-オブジェクト、`Set`、または `Map` からプロパティと値をペアにした要素の配列を作成します。
-
-- オブジェクトが提供されると、オブジェクトのプロパティと値をペアにした要素（`[key, value]`）の配列を返します。
-- `Set` が提供されると、要素を `[value, value]` 形式でペアにした配列を返します。
-- `Map` が提供されると、キーと値をペアにした要素（`[key, value]`）の配列を返します。
-
-## インターフェース
+オブジェクトをキー値ペアの配列に変換します。
 
 ```typescript
-function toPairs<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairs<T>(set: Set<T>): Array<[T, T]>;
-function toPairs<K, V>(map: Map<K, V>): Array<[K, V]>;
+const pairs = toPairs(object);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`Record<string | number, T> | Set<T> | Map<K, V>`): クエリするオブジェクト、`Set`、または`Map`。
+### `toPairs(object)`
 
-### 戻り値
-
-(`Array<[key: PropertyKey, value: T]>`): キーと値のペアの配列を返します。
-
-## 例
+オブジェクトの自身の列挙可能なプロパティを `[キー, 値]` 形式の配列に変換したい場合は、`toPairs` を使用してください。継承されたプロパティは含まれません。
 
 ```typescript
-const object = { a: 1, b: 2 };
-toPairs(object); // [['a', 1], ['b', 2]]
+import { toPairs } from 'es-toolkit/compat';
 
-const set = new Set([1, 2]);
-toPairs(set); // [[1, 1], [2, 2]]
+// 基本的なオブジェクトの変換
+const object = { a: 1, b: 2, c: 3 };
+toPairs(object);
+// => [['a', 1], ['b', 2], ['c', 3]]
 
+// 数値キーを持つオブジェクト
+const numbers = { 0: 'zero', 1: 'one', 2: 'two' };
+toPairs(numbers);
+// => [['0', 'zero'], ['1', 'one'], ['2', 'two']]
+```
+
+`Map` と `Set` も処理できます。
+
+```typescript
+import { toPairs } from 'es-toolkit/compat';
+
+// Map オブジェクトの変換
 const map = new Map();
-map.set('a', 1);
-map.set('b', 2);
-toPairs(map); // [['a', 1], ['b', 2]]
+map.set('name', 'John');
+map.set('age', 30);
+toPairs(map);
+// => [['name', 'John'], ['age', 30]]
+
+// Set オブジェクトの変換(値がキーと同じ)
+const set = new Set([1, 2, 3]);
+toPairs(set);
+// => [[1, 1], [2, 2], [3, 3]]
 ```
+
+`null` または `undefined` を安全に処理します。
+
+```typescript
+import { toPairs } from 'es-toolkit/compat';
+
+toPairs(null);
+// => []
+
+toPairs(undefined);
+// => []
+```
+
+#### パラメータ
+
+- `object` (`object`): 変換するオブジェクト、Map、または Set。
+
+#### 戻り値
+
+(`Array<[string, any]>`): キー値ペアの配列を返します。

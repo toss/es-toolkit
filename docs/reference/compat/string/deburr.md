@@ -1,23 +1,47 @@
-# deburr (🚧 Documentation In Progress)
+# deburr (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `deburr` from `es-toolkit`
+
+This `deburr` function operates slower due to handling non-string input values.
+
+Instead, use the faster and more modern [deburr](../../string/deburr.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Converts special characters and diacritical marks in a string to ASCII characters.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = deburr(str);
+```
 
 ## Reference
 
-### `deburr(...args)`
+### `deburr(str)`
 
-#### Signature
+Converts special characters and diacritical marks in a string to ASCII characters. This is useful for making multilingual text easier to search or sort.
+
+```typescript
+import { deburr } from 'es-toolkit/compat';
+
+deburr('Æthelred'); // 'Aethelred'
+deburr('München'); // 'Munchen'
+deburr('Crème brûlée'); // 'Creme brulee'
+```
+
+Non-string values are also converted to strings before processing.
+
+```typescript
+import { deburr } from 'es-toolkit/compat';
+
+deburr(123); // '123'
+deburr(null); // ''
+deburr(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to remove special characters from.
+
+#### Returns
+
+(`string`): Returns the string with special characters and diacritical marks converted to ASCII characters.

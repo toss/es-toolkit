@@ -1,23 +1,48 @@
-# lowerCase (🚧 文档写作中)
+# lowerCase (Lodash 兼容性)
 
-::: warning 实现完成 - 文档写作中
-这个函数已经完全实现，可以使用了，但是文档还在写作中。
+::: warning 请使用 `es-toolkit` 的 `lowerCase`
+
+由于处理非字符串输入值和删除缩写撇号等原因,此 `lowerCase` 函数运行较慢。
+
+请改用更快、更现代的 `es-toolkit` 的 [lowerCase](../../string/lowerCase.md)。
+
 :::
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+将字符串转换为小写单词并用空格分隔。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将写作.
+```typescript
+const result = lowerCase(str);
+```
 
 ## 参考
 
-### `lowerCase(...args)`
+### `lowerCase(str)`
 
-#### 接口
+将字符串转换为小写单词并用空格分隔。每个单词都转换为小写并用空格字符连接。这对于创建人类可读的文本形式很有用。
+
+```typescript
+import { lowerCase } from 'es-toolkit/compat';
+
+lowerCase('camelCase'); // 'camel case'
+lowerCase('some whitespace'); // 'some whitespace'
+lowerCase('hyphen-text'); // 'hyphen text'
+lowerCase('HTTPRequest'); // 'http request'
+```
+
+非字符串值也会在处理前转换为字符串。
+
+```typescript
+import { lowerCase } from 'es-toolkit/compat';
+
+lowerCase(123); // '123'
+lowerCase(null); // ''
+lowerCase(undefined); // ''
+```
 
 #### 参数
 
-### 返回值
+- `str` (`string | object`,可选): 要转换为小写格式的值。
+
+#### 返回值
+
+(`string`): 返回小写单词用空格分隔的字符串。

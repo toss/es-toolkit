@@ -1,4 +1,4 @@
-# isString (Lodash compatibility)
+# isString (Lodash Compatibility)
 
 ::: warning Use `typeof` operator instead
 

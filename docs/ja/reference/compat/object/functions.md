@@ -1,39 +1,74 @@
-# functions
+# functions (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.keys` と `typeof` チェックを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `functions` 関数は内部的に `keys` 関数とフィルタリング処理を経由するため、動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.keys` と `typeof` チェックを使用してください。
+
 :::
 
-オブジェクトのプロパティのうち、値が関数であるプロパティの名前から構成される配列を作成します。
-
-直接所有するプロパティと文字列キーを持つプロパティのみを確認します。継承されたプロパティや`Symbol`キーを持つプロパティは確認しません。
-
-## インターフェース
+オブジェクトの固有プロパティのうち、関数であるプロパティの名前を配列として返します。
 
 ```typescript
-function functions(object: unknown): string[];
+const functionNames = functions(obj);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`unknown`): 検査するオブジェクト。
+### `functions(object)`
 
-### 戻り値
-
-(`string[]`): 関数名を含む文字列の配列。
-
-## 例
+オブジェクトの固有プロパティを確認し、関数であるプロパティの名前のみを配列として返します。継承されたプロパティや `Symbol` キーを除外し、オブジェクトが直接所有する文字列キープロパティのみを確認します。オブジェクトのメソッドを見つけたり、関数プロパティのみを個別に処理したりする際に便利です。
 
 ```typescript
-function Foo() {
-  this.a = () => 'a';
-  this.b = () => 'b';
+import { functions } from 'es-toolkit/compat';
+
+// 基本的な使い方
+const obj = {
+  name: 'John',
+  age: 30,
+  greet: () => 'Hello',
+  calculate: function(x, y) { return x + y; }
+};
+
+const functionNames = functions(obj);
+// 結果: ['greet', 'calculate']
+
+// クラスインスタンスで関数を探す
+class Calculator {
+  constructor() {
+    this.value = 0;
+    this.add = function(n) { this.value += n; };
+  }
+
+  multiply(n) { this.value *= n; }
 }
 
-Foo.prototype.c = () => 'c';
+Calculator.prototype.divide = function(n) { this.value /= n; };
 
-functions(new Foo());
-// => ['a', 'b']
+const calc = new Calculator();
+const methods = functions(calc);
+// 結果: ['add'] (継承された multiply、divide は除外)
+
+// 関数がないオブジェクト
+const data = { x: 1, y: 2, z: 'text' };
+const noFunctions = functions(data);
+// 結果: []
 ```
+
+`null` または `undefined` は空の配列として処理されます。
+
+```typescript
+import { functions } from 'es-toolkit/compat';
+
+functions(null); // []
+functions(undefined); // []
+```
+
+#### パラメータ
+
+- `object` (`any`): 確認するオブジェクトです。
+
+#### 戻り値
+
+(`string[]`): 関数であるプロパティの名前で構成された配列を返します。

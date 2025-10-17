@@ -1,4 +1,4 @@
-# random (Lodash compatibility)
+# random (Lodash Compatibility)
 
 ::: warning Use `Math.random()`
 

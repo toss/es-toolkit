@@ -1,4 +1,4 @@
-# rangeRight (Lodash compatibility)
+# rangeRight (Lodash Compatibility)
 
 ::: warning Use [rangeRight](../../math/rangeRight.md) from es-toolkit
 

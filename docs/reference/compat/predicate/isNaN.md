@@ -1,4 +1,4 @@
-# isNaN (Lodash compatibility)
+# isNaN (Lodash Compatibility)
 
 ::: warning Use `Number.isNaN`
 

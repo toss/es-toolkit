@@ -1,23 +1,71 @@
-# takeWhile (🚧 Documentation In Progress)
+# takeWhile (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Please use [takeWhile](../../array/takeWhile.md) from `es-toolkit`
+
+This `takeWhile` function operates slowly due to handling `null` or `undefined`.
+
+Please use the faster and modern [takeWhile](../../array/takeWhile.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Takes elements from the beginning of an array while the condition is satisfied.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = takeWhile(array, predicate);
+```
 
 ## Reference
 
-### `takeWhile(...args)`
+### `takeWhile(array, predicate)`
 
-#### Signature
+Use `takeWhile` when you want to create a new array by taking elements from the beginning of an array while the condition is satisfied. It stops when the condition evaluates to false.
+
+```typescript
+import { takeWhile } from 'es-toolkit/compat';
+
+// Using function condition
+const numbers = [1, 2, 3, 4, 5];
+takeWhile(numbers, x => x < 3);
+// Returns: [1, 2]
+
+// Using object property condition
+const users = [
+  { user: 'barney', active: false },
+  { user: 'fred', active: false },
+  { user: 'pebbles', active: true },
+];
+
+takeWhile(users, o => !o.active);
+// Returns: [{ user: 'barney', active: false }, { user: 'fred', active: false }]
+
+// Matching with partial object
+takeWhile(users, { active: false });
+// Returns: [{ user: 'barney', active: false }]
+
+// Matching with property-value array
+takeWhile(users, ['active', false]);
+// Returns: [{ user: 'barney', active: false }, { user: 'fred', active: false }]
+
+// Checking for truthy value by property name
+const items = [{ active: true }, { active: true }, { active: false }];
+takeWhile(items, 'active');
+// Returns: [{ active: true }, { active: true }]
+```
+
+`null` or `undefined` is treated as an empty array.
+
+```typescript
+import { takeWhile } from 'es-toolkit/compat';
+
+takeWhile(null, x => x > 0); // []
+takeWhile(undefined, x => x > 0); // []
+```
 
 #### Parameters
 
-### Returns
+- `array` (`ArrayLike<T> | null | undefined`): The array to process.
+- `predicate` (`ListIteratee<T>`, optional): The condition to run for each element. Can be a function, partial object, property-value array, or property name. Default is the identity function.
+
+#### Returns
+
+(`T[]`): Returns a new array of elements taken from the beginning while the condition is satisfied.

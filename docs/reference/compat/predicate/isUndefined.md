@@ -1,4 +1,4 @@
-# isUndefined (Lodash compatibility)
+# isUndefined (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isUndefined](../../predicate/isUndefined.md) instead
 

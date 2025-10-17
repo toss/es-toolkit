@@ -1,23 +1,48 @@
-# lowerFirst (🚧 Documentation In Progress)
+# lowerFirst (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `lowerFirst` from `es-toolkit`
+
+This `lowerFirst` function operates slower due to handling non-string input values.
+
+Instead, use the faster and more modern [lowerFirst](../../string/lowerFirst.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Converts the first character of a string to lowercase.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = lowerFirst(str);
+```
 
 ## Reference
 
-### `lowerFirst(...args)`
+### `lowerFirst(str)`
 
-#### Signature
+Converts the first character of a string to lowercase. The remaining characters are kept as is. This is useful for creating camelCase variable names or when you only want to lowercase the first character.
+
+```typescript
+import { lowerFirst } from 'es-toolkit/compat';
+
+lowerFirst('fred'); // 'fred'
+lowerFirst('Fred'); // 'fred'
+lowerFirst('FRED'); // 'fRED'
+lowerFirst(''); // ''
+```
+
+Non-string values are also converted to strings before processing.
+
+```typescript
+import { lowerFirst } from 'es-toolkit/compat';
+
+lowerFirst(123); // '123'
+lowerFirst(null); // ''
+lowerFirst(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to convert the first character to lowercase.
+
+#### Returns
+
+(`string`): Returns the string with the first character converted to lowercase.

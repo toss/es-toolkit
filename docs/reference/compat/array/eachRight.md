@@ -1,23 +1,58 @@
-# eachRight (🚧 Documentation In Progress)
+# eachRight (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `forEachRight` from `es-toolkit`
+
+This `eachRight` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, support for various predicate function formats, etc.
+
+Instead, use the faster and more modern [`forEachRight`](../../array/forEachRight.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Performs an iteration operation from right to left on each element of an array or object.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = eachRight(collection, iteratee);
+```
 
 ## Reference
 
-### `eachRight(...args)`
+### `eachRight(collection, iteratee)`
 
-#### Signature
+Iterates through each element of an array, object, or string from right to left and executes the given function. For arrays, it iterates in reverse order from the last index; for objects, it iterates through enumerable properties in reverse order.
+
+```typescript
+import { eachRight } from 'es-toolkit/compat';
+
+// Iterate array in reverse order
+eachRight([1, 2, 3], (value, index) => console.log(value, index));
+// Logs: 3 2, 2 1, 1 0
+
+// Iterate object in reverse order
+eachRight({ a: 1, b: 2 }, (value, key) => console.log(key, value));
+// Logs: 'b' 2, 'a' 1
+
+// Iterate string in reverse order
+eachRight('hello', (char, index) => console.log(char, index));
+// Logs: 'o' 4, 'l' 3, 'l' 2, 'e' 1, 'h' 0
+```
+
+If the function returns `false`, iteration stops.
+
+```typescript
+import { eachRight } from 'es-toolkit/compat';
+
+eachRight([1, 2, 3, 4], value => {
+  console.log(value);
+  return value !== 2; // Stop at 2
+});
+// Logs: 4, 3, 2
+```
 
 #### Parameters
 
-### Returns
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): The collection to iterate over.
+- `iteratee` (`(item: any, index: any, collection: any) => unknown`, optional): The function to execute for each element. Default is the `identity` function.
+
+#### Returns
+
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): Returns the original collection.

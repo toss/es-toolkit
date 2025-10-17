@@ -1,23 +1,55 @@
-# defaultsDeep (🚧 ドキュメント作成中)
+# defaultsDeep (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning 分割代入と `Object.assign()` を使用してください
+
+この `defaultsDeep` 関数は、ネストされたオブジェクトの再帰的なマージと循環参照の処理により、複雑で遅く動作します。
+
+代わりに、より高速で現代的な分割代入と `Object.assign()` を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+ネストされたオブジェクトに再帰的にデフォルト値を設定します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = defaultsDeep(target, ...sources);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `defaultsDeep(target, ...sources)`
 
-### `defaultsDeep(...args)`
+ネストされたオブジェクトの `undefined` プロパティに再帰的にデフォルト値を設定したい場合は、`defaultsDeep` を使用してください。`defaults` と似ていますが、ネストされたオブジェクトもマージします。
 
-#### インターフェース
+```typescript
+import { defaultsDeep } from 'es-toolkit/compat';
+
+// ネストされたオブジェクトのデフォルト値設定
+defaultsDeep({ a: { b: 2 } }, { a: { b: 3, c: 3 }, d: 4 });
+// 戻り値: { a: { b: 2, c: 3 }, d: 4 }
+
+// undefined プロパティのみがデフォルト値で埋められます
+defaultsDeep({ a: { b: undefined } }, { a: { b: 1 } });
+// 戻り値: { a: { b: 1 } }
+
+// null 値はそのまま保持されます
+defaultsDeep({ a: null }, { a: { b: 1 } });
+// 戻り値: { a: null }
+```
+
+複数のソースオブジェクトを渡して、デフォルト値を段階的に適用できます。
+
+```typescript
+import { defaultsDeep } from 'es-toolkit/compat';
+
+defaultsDeep({ a: { b: 2 } }, { a: { c: 3 } }, { a: { d: 4 }, e: 5 });
+// 戻り値: { a: { b: 2, c: 3, d: 4 }, e: 5 }
+```
 
 #### パラメータ
 
-### 戻り値
+- `target` (`any`): デフォルト値を設定する対象オブジェクトです。
+- `...sources` (`any[]`): デフォルト値を提供するソースオブジェクトです。
+
+#### 戻り値
+
+(`any`): デフォルト値が再帰的に設定されたオブジェクトを返します。最初の引数 `target` が変更されます。

@@ -1,4 +1,4 @@
-# isEmpty (Lodash compatibility)
+# isEmpty (Lodash Compatibility)
 
 Checks if a given value is empty.
 

@@ -1,4 +1,4 @@
-# min (Lodash compatibility)
+# min (Lodash Compatibility)
 
 ::: warning Use `Math.min`
 

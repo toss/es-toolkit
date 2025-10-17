@@ -1,23 +1,68 @@
-# unzip (🚧 Documentation In Progress)
+# unzip (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use [unzip](../../array/unzip.md) from `es-toolkit`
+
+This `unzip` function operates slowly due to handling of `null` or `undefined`, filtering of non-array values, etc.
+
+Instead, use the faster and more modern [unzip](../../array/unzip.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Collects elements at the same positions in grouped arrays into new arrays.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = unzip(array);
+```
 
 ## Reference
 
-### `unzip(...args)`
+### `unzip(array)`
 
-#### Signature
+Collects elements at the same index in nested arrays and returns them as a new array. Performs the opposite operation of the `zip` function. This is useful when transposing matrices or reorganizing structured data.
+
+```typescript
+import { unzip } from 'es-toolkit/compat';
+
+// Unzip arrays with mixed strings, booleans, and numbers
+const zipped = [
+  ['a', true, 1],
+  ['b', false, 2],
+];
+const result = unzip(zipped);
+// Returns: [['a', 'b'], [true, false], [1, 2]]
+
+// Unzip number arrays
+const numbers = [
+  [1, 4],
+  [2, 5],
+  [3, 6],
+];
+unzip(numbers);
+// Returns: [[1, 2, 3], [4, 5, 6]]
+
+// Handle arrays with different lengths
+const uneven = [
+  ['a', 1],
+  ['b', 2, true],
+];
+unzip(uneven);
+// Returns: [['a', 'b'], [1, 2], [undefined, true]]
+```
+
+`null`, `undefined`, or empty arrays are treated as empty arrays.
+
+```typescript
+import { unzip } from 'es-toolkit/compat';
+
+unzip(null); // []
+unzip(undefined); // []
+unzip([]); // []
+```
 
 #### Parameters
 
-### Returns
+- `array` (`T[][] | ArrayLike<ArrayLike<T>> | null | undefined`): The nested array to unzip. Elements at the same position in each inner array are collected together.
+
+#### Returns
+
+(`T[][]`): Returns a new array with elements at the same positions collected together.

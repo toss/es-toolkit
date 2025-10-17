@@ -1,14 +1,20 @@
-# update
+# update (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use direct assignment instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed @here.
+This `update` function operates slowly due to complex path parsing and nested object creation logic.
+
+Use faster and more modern direct property assignment or optional chaining instead.
+
 :::
 
-Updates the value at the specified path of the given object using an updater function. If any part of the path doesn't exist, it will be created.
+Updates the value at the specified path of the object with an updater function.
 
-## Signature
+```typescript
+const updated = update(object, path, updater);
+```
+
+## Interface
 
 ```typescript
 function update<T extends object | null | undefined>(

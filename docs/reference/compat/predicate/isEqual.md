@@ -1,4 +1,4 @@
-# isEqual (Lodash compatibility)
+# isEqual (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isEqual](../../predicate/isEqual.md)
 

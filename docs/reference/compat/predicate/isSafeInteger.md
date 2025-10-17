@@ -1,4 +1,4 @@
-# isSafeInteger (Lodash compatibility)
+# isSafeInteger (Lodash Compatibility)
 
 ::: warning Use `Number.isSafeInteger`
 

@@ -1,9 +1,10 @@
-# indexOf
+# indexOf (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Array.prototype.indexOf` 或 `Array.prototype.findIndex`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `indexOf` 函数由于处理 `NaN` 的额外逻辑而运行缓慢。
+
+如果不查找 `NaN`，请使用更快的 `Array.prototype.indexOf`。要查找 `NaN`，请使用 `Array.prototype.findIndex` 和 `Number.isNaN`。
 
 :::
 
@@ -22,7 +23,7 @@ function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 
 - `array` (`T[]`): 要搜索的数组。
 
-::: info `array` 可以是 `ArrayLike<T>` 或 `null` 或 `undefined` 。
+::: info `array` 可以是 `ArrayLike<T>` 或 `null` 或 `undefined`
 
 为了确保与 lodash 的完全兼容性，`indexOf` 函数会按照以下方式处理 `array`：
 
@@ -32,9 +33,9 @@ function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 :::
 
 - `searchElement` (`T`): 要搜索的值。
-- `fromIndex` (`number`, 可选): 开始搜索的索引。
+- `fromIndex` (`number`, 选择): 开始搜索的索引。
 
-### 返回
+#### 返回值
 
 (`number`): 数组中第一个出现的值的索引（以零为基准），如果未找到该值，则返回 `-1`。
 

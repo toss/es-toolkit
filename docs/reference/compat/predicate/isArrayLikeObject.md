@@ -1,4 +1,4 @@
-# isArrayLikeObject (Lodash compatibility)
+# isArrayLikeObject (Lodash Compatibility)
 
 Checks if a value is an array-like object that is not a primitive.
 

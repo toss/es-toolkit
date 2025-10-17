@@ -1,23 +1,64 @@
-# unionWith (🚧 ドキュメント作成中)
+# unionWith (Lodash互換)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit`の[unionWith](../../array/unionWith.md)を使用してください
+
+この`unionWith`関数は複雑な処理により動作が遅くなります。
+
+代わりに、より高速で現代的な`es-toolkit`の[unionWith](../../array/unionWith.md)を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+複数の配列をマージし、比較関数を使用してユニークな値のみを残します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = unionWith(...arrays, comparator);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `unionWith(...arrays, comparator)`
 
-### `unionWith(...args)`
+複数の配列をマージし、カスタム比較関数を使用して重複を削除し、ユニークな値のみを含む新しい配列を作成したい場合は`unionWith`を使用してください。各値が最初に出現する順序を保持します。
 
-#### インターフェース
+```typescript
+import { unionWith } from 'es-toolkit/compat';
+
+// カスタム比較関数を使用
+const objects = [
+  { x: 1, y: 2 },
+  { x: 2, y: 1 },
+];
+const others = [
+  { x: 1, y: 1 },
+  { x: 1, y: 2 },
+];
+
+unionWith(objects, others, (a, b) => a.x === b.x && a.y === b.y);
+// 戻り値: [{ x: 1, y: 2 }, { x: 2, y: 1 }, { x: 1, y: 1 }]
+
+// 単純な等価比較
+unionWith([1, 2], [2, 3], (a, b) => a === b);
+// 戻り値: [1, 2, 3]
+
+// 文字列の長さで比較
+unionWith(['ab', 'cd'], ['ef', 'gh', 'ab'], (a, b) => a.length === b.length);
+// 戻り値: ['ab', 'ef']
+```
+
+`null`または`undefined`配列は無視されます。
+
+```typescript
+import { unionWith } from 'es-toolkit/compat';
+
+unionWith([1, 2], null, undefined, [3, 4], (a, b) => a === b);
+// 戻り値: [1, 2, 3, 4]
+```
 
 #### パラメータ
 
-### 戻り値
+- `...arrays` (`Array<ArrayLike<T> | null | undefined>`): マージする配列。
+- `comparator` (`(a: T, b: T) => boolean`): 2つの値が等しいかどうかを判断する比較関数。
+
+#### 戻り値
+
+(`T[]`): 比較関数を使用して重複を削除したユニークな値を含む新しい配列を返します。

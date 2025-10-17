@@ -1,23 +1,49 @@
-# without (🚧 ドキュメント作成中)
+# without (Lodash互換)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit`の[without](../../array/without.md)を使用してください
+
+この`without`関数はLodash互換性のための追加処理により動作が遅くなります。
+
+代わりに、より高速で現代的な`es-toolkit`の[without](../../array/without.md)を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+配列から指定された値を除外した新しい配列を作成します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = without([1, 2, 3, 4, 5], 2, 4);
+// resultは[1, 3, 5]になります。
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `without(array, ...values)`
 
-### `without(...args)`
+配列から指定された値を削除した新しい配列を返します。元の配列は変更されません。
 
-#### インターフェース
+```typescript
+import { without } from 'es-toolkit/compat';
+
+// 数値配列から複数の値を削除
+const numbers = [1, 2, 3, 4, 5, 2, 4];
+const result1 = without(numbers, 2, 4);
+// 戻り値: [1, 3, 5]
+
+// 文字列配列から値を削除
+const fruits = ['apple', 'banana', 'cherry', 'banana'];
+const result2 = without(fruits, 'banana');
+// 戻り値: ['apple', 'cherry']
+
+// 空配列を処理
+const result3 = without([], 1, 2, 3);
+// 戻り値: []
+```
 
 #### パラメータ
 
-### 戻り値
+- `array` (`T[]`): 処理する元の配列。
+- `...values` (`T[]`): 削除する値。
+
+#### 戻り値
+
+(`T[]`): 指定された値を削除した新しい配列。

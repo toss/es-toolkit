@@ -1,4 +1,4 @@
-# isDate (Lodash compatibility)
+# isDate (Lodash Compatibility)
 
 ::: warning Use es-toolkit's [isDate](../../predicate/isDate.md) instead
 This `isDate` function operates slowly due to complex processing for Lodash compatibility.

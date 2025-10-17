@@ -1,4 +1,4 @@
-# isInteger (Lodash compatibility)
+# isInteger (Lodash Compatibility)
 
 ::: warning Use `Number.isInteger`
 

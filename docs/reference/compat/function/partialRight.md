@@ -1,23 +1,59 @@
-# partialRight (🚧 Documentation In Progress)
+# partialRight (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s `partialRight`
+
+This `partialRight` function is inefficient due to many overloads and union type handling. In most cases, it can be replaced with a simpler arrow function.
+
+Instead, use the faster and more modern [`partialRight`](../../function/partialRight.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Creates a partially applied function by pre-filling arguments from the right.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const partialFunc = partialRight(func, ...args);
+```
 
 ## Reference
 
-### `partialRight(...args)`
+### `partialRight(func, ...args)`
 
-#### Signature
+Use `partialRight` when you want to create a partially applied function by pre-filling arguments from the right. It's mainly useful for fixing the last arguments when argument order matters.
+
+```typescript
+import { partialRight } from 'es-toolkit/compat';
+
+// Basic usage
+function greet(greeting, name, punctuation) {
+  return `${greeting} ${name}${punctuation}`;
+}
+
+// Pre-set the last argument
+const greetWithExclamation = partialRight(greet, '!');
+greetWithExclamation('Hello', 'Alice'); // 'Hello Alice!'
+
+// Pre-set multiple arguments
+const sayHiToAlice = partialRight(greet, 'Alice', '!');
+sayHiToAlice('Hi'); // 'Hi Alice!'
+
+// Use placeholder to control argument order
+const greetAliceWithCustom = partialRight(greet, 'Alice', partialRight.placeholder);
+greetAliceWithCustom('Hello', '?'); // 'Hello Alice?'
+```
+
+In most cases, it can be replaced with arrow functions:
+
+```typescript
+// Use arrow functions instead of partialRight (recommended)
+const greetWithExclamation = (greeting, name) => greet(greeting, name, '!');
+const sayHiToAlice = greeting => greet(greeting, 'Alice', '!');
+```
 
 #### Parameters
 
-### Returns
+- `func` (`Function`): The function to partially apply.
+- `...args` (`any[]`): The arguments to pre-fill. Use `partialRight.placeholder` to control argument order.
+
+#### Returns
+
+(`Function`): Returns a new function with arguments pre-filled from the right.

@@ -1,4 +1,4 @@
-# isBoolean (Lodash compatibility)
+# isBoolean (Lodash Compatibility)
 
 ::: warning Use `typeof` operator
 

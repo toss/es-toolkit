@@ -1,23 +1,59 @@
-# partial (🚧 Documentation In Progress)
+# partial (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s `partial`
+
+This `partial` function is inefficient due to many overloads and union type handling. In most cases, it can be replaced with a simpler arrow function.
+
+Instead, use the faster and more modern [`partial`](../../function/partial.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Creates a partially applied function by pre-filling some arguments.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const partialFunc = partial(func, ...args);
+```
 
 ## Reference
 
-### `partial(...args)`
+### `partial(func, ...args)`
 
-#### Signature
+Use `partial` when you want to create a partially applied function by pre-filling some arguments. It's mainly useful for fixing the first arguments when argument order matters.
+
+```typescript
+import { partial } from 'es-toolkit/compat';
+
+// Basic usage
+function greet(greeting, name, punctuation) {
+  return `${greeting} ${name}${punctuation}`;
+}
+
+// Pre-set the first argument
+const sayHello = partial(greet, 'Hello');
+sayHello('Alice', '!'); // 'Hello Alice!'
+
+// Pre-set multiple arguments
+const greetAlice = partial(greet, 'Hello', 'Alice');
+greetAlice('!'); // 'Hello Alice!'
+
+// Use placeholder to control argument order
+const greetWithExclamation = partial(greet, partial.placeholder, 'Alice', '!');
+greetWithExclamation('Hi'); // 'Hi Alice!'
+```
+
+In most cases, it can be replaced with arrow functions:
+
+```typescript
+// Use arrow functions instead of partial (recommended)
+const sayHello = (name, punctuation) => greet('Hello', name, punctuation);
+const greetAlice = punctuation => greet('Hello', 'Alice', punctuation);
+```
 
 #### Parameters
 
-### Returns
+- `func` (`Function`): The function to partially apply.
+- `...args` (`any[]`): The arguments to pre-fill. Use `partial.placeholder` to control argument order.
+
+#### Returns
+
+(`Function`): Returns a new function with pre-filled arguments.

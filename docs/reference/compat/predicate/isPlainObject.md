@@ -1,4 +1,4 @@
-# isPlainObject (Lodash compatibility)
+# isPlainObject (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isPlainObject](../../predicate/isPlainObject.md) instead
 

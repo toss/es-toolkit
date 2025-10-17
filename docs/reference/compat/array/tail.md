@@ -1,23 +1,58 @@
-# tail (🚧 Documentation In Progress)
+# tail (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Please use [tail](../../array/tail.md) from `es-toolkit`
+
+This `tail` function operates slowly due to handling `null` or `undefined`.
+
+Please use the faster and modern [tail](../../array/tail.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Returns all elements of an array except the first one.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = tail(array);
+```
 
 ## Reference
 
-### `tail(...args)`
+### `tail(array)`
 
-#### Signature
+Use `tail` when you want to create a new array containing all elements except the first one from the input array. If the input array is empty or has only one element, it returns an empty array.
+
+```typescript
+import { tail } from 'es-toolkit/compat';
+
+// Remove the first element from a number array.
+tail([1, 2, 3]);
+// Returns: [2, 3]
+
+// Remove the first element from a string array.
+tail(['a', 'b', 'c']);
+// Returns: ['b', 'c']
+
+// Array with only one element.
+tail([1]);
+// Returns: []
+
+// Empty array.
+tail([]);
+// Returns: []
+```
+
+`null` or `undefined` is treated as an empty array.
+
+```typescript
+import { tail } from 'es-toolkit/compat';
+
+tail(null); // []
+tail(undefined); // []
+```
 
 #### Parameters
 
-### Returns
+- `array` (`ArrayLike<T> | null | undefined`): The array to remove the first element from.
+
+#### Returns
+
+(`T[]`): Returns a new array containing all elements except the first one.

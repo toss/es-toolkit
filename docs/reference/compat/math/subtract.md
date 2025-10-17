@@ -1,4 +1,4 @@
-# subtract (Lodash compatibility)
+# subtract (Lodash Compatibility)
 
 ::: warning Use `-` operator
 

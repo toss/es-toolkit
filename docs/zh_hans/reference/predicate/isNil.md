@@ -1,28 +1,50 @@
 # isNil
 
-检查给定的值是否为 `null` 或 `undefined`。
-
-该函数测试提供的值是否为 `null` 或 `undefined`。
-
-如果值为 `null` 或 `undefined`，则返回 `true`；否则返回 `false`。
-
-该函数在 TypeScript 中还可以作为类型谓词，将参数的类型缩小为 `null` 或 `undefined`。
-
-## 签名
+检查值是否为 `null` 或 `undefined`。
 
 ```typescript
-function isNil(x: unknown): x is null | undefined;
+const result = isNil(value);
 ```
 
-## 示例
+## 参考
+
+### `isNil(value)`
+
+当您想检查值是否为 `null` 或 `undefined` 时，请使用 `isNil`。
 
 ```typescript
 import { isNil } from 'es-toolkit/predicate';
 
-const value1 = null;
-const value2 = undefined;
-const value3 = 42;
-const result1 = isNil(value1); // true
-const result2 = isNil(value2); // true
-const result3 = isNil(value3); // false
+// null 或 undefined 值
+console.log(isNil(null)); // true
+console.log(isNil(undefined)); // true
+
+// 其他值
+console.log(isNil(0)); // false
+console.log(isNil('')); // false
+console.log(isNil(false)); // false
+console.log(isNil([])); // false
+console.log(isNil({})); // false
 ```
+
+它也可以在 TypeScript 中用作类型守卫：
+
+```typescript
+function processValue(value: string | null | undefined) {
+  if (isNil(value)) {
+    // value 现在被缩小为 null | undefined 类型
+    console.log('值为空');
+  } else {
+    // value 被缩小为 string 类型
+    console.log(value.toUpperCase());
+  }
+}
+```
+
+#### 参数
+
+- `value` (`unknown`): 要检查是否为 `null` 或 `undefined` 的值。
+
+#### 返回值
+
+(`value is null | undefined`): 如果值为 `null` 或 `undefined` 则返回 `true`，否则返回 `false`。

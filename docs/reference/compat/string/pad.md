@@ -1,23 +1,60 @@
-# pad (🚧 Documentation In Progress)
+# pad (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `pad` from `es-toolkit`
+
+This `pad` function operates slower due to handling `null` or `undefined`.
+
+Instead, use the faster and more modern [pad](../../string/pad.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Pads a string on both sides with padding characters to reach the specified length.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const padded = pad(str, length, chars);
+```
 
 ## Reference
 
-### `pad(...args)`
+### `pad(str, length, chars)`
 
-#### Signature
+Use `pad` when you want to pad a string on both sides to match a desired length. If the padding characters don't divide evenly, extra characters are placed on the right.
+
+```typescript
+import { pad } from 'es-toolkit/compat';
+
+// Pad with default spaces
+pad('abc', 8);
+// Returns: '  abc   '
+
+// Pad with specified characters
+pad('abc', 8, '_-');
+// Returns: '_-abc_-_'
+
+// Return as is if already long enough
+pad('abc', 3);
+// Returns: 'abc'
+
+// Return as is if length is shorter
+pad('abc', 2);
+// Returns: 'abc'
+```
+
+`null` or `undefined` are treated as empty strings.
+
+```typescript
+import { pad } from 'es-toolkit/compat';
+
+pad(null, 5); // '     '
+pad(undefined, 3, '*'); // '***'
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to pad.
+- `length` (`number`, optional): The target length. Defaults to `0`.
+- `chars` (`string`, optional): The characters to use for padding. Defaults to space `' '`.
+
+#### Returns
+
+(`string`): Returns the string padded to the specified length.

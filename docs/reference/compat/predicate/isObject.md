@@ -1,4 +1,4 @@
-# isObject (Lodash compatibility)
+# isObject (Lodash Compatibility)
 
 ::: warning Use es-toolkit's [isObject](../../predicate/isObject.md)
 

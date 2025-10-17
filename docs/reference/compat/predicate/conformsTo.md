@@ -1,4 +1,4 @@
-# conformsTo (Lodash compatibility)
+# conformsTo (Lodash Compatibility)
 
 Checks if an object satisfies all given condition functions.
 

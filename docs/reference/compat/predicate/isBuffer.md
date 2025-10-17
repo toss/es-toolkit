@@ -1,4 +1,4 @@
-# isBuffer (Lodash compatibility)
+# isBuffer (Lodash Compatibility)
 
 ::: warning Use es-toolkit's [isBuffer](../../predicate/isBuffer.md) instead
 This `isBuffer` function operates slowly due to complex processing for Lodash compatibility.

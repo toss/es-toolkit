@@ -1,23 +1,68 @@
-# unzip (🚧 ドキュメント作成中)
+# unzip (Lodash互換)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit`の[unzip](../../array/unzip.md)を使用してください
+
+この`unzip`関数は`null`または`undefined`の処理、配列でない値のフィルタリングなどにより動作が遅くなります。
+
+代わりに、より高速で現代的な`es-toolkit`の[unzip](../../array/unzip.md)を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+グループ化された配列の同じ位置にある要素を集めて新しい配列を作成します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = unzip(array);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `unzip(array)`
 
-### `unzip(...args)`
+ネストした配列の同じインデックスにある要素を集めて新しい配列として返します。`zip`関数の逆の操作を実行します。行列を転置したり構造化データを再編成するときに便利です。
 
-#### インターフェース
+```typescript
+import { uniqWith } from 'es-toolkit/compat';
+
+// 文字列、ブール値、数値が混在した配列をアンジップ
+const zipped = [
+  ['a', true, 1],
+  ['b', false, 2],
+];
+const result = unzip(zipped);
+// 戻り値: [['a', 'b'], [true, false], [1, 2]]
+
+// 数値配列をアンジップ
+const numbers = [
+  [1, 4],
+  [2, 5],
+  [3, 6],
+];
+unzip(numbers);
+// 戻り値: [[1, 2, 3], [4, 5, 6]]
+
+// 長さが異なる配列も処理
+const uneven = [
+  ['a', 1],
+  ['b', 2, true],
+];
+unzip(uneven);
+// 戻り値: [['a', 'b'], [1, 2], [undefined, true]]
+```
+
+`null`、`undefined`、または空配列は空配列として扱われます。
+
+```typescript
+import { unzip } from 'es-toolkit/compat';
+
+unzip(null); // []
+unzip(undefined); // []
+unzip([]); // []
+```
 
 #### パラメータ
 
-### 戻り値
+- `array` (`T[][] | ArrayLike<ArrayLike<T>> | null | undefined`): アンジップするネストした配列。各内部配列の同じ位置の要素が集められます。
+
+#### 戻り値
+
+(`T[][]`): 同じ位置の要素が集められた新しい配列を返します。

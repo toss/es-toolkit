@@ -1,4 +1,4 @@
-# range (Lodash compatibility)
+# range (Lodash Compatibility)
 
 ::: warning Use [range](../../math/range.md) from es-toolkit
 

@@ -1,74 +1,60 @@
-# reduceRight
+# reduceRight (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.reduceRight` or `Object.values` with `reduceRight`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `reduceRight` function operates slowly due to complex type handling and support for various input formats.
+
+Instead, use the faster and more modern `Array.prototype.reduceRight` method, or for objects, use `reduceRight` together with `Object.values`.
+
 :::
 
-Reduces an array or object to a single value using an iteratee function, starting from the right.
-
-The `reduceRight()` function goes through each element in an array or values of an object from right to left and applies a special function (called a "reducer") to them, one by one.
-This function takes the result of the previous step and the current element to perform a calculation.
-After going through all the elements, the function gives you one final result.
-
-When the `reduceRight()` function starts, there's no previous result to use.
-If you provide an initial value, it starts with that.
-If not, it uses the last element of the array or the last value of the object and begins with the second to last element or value for the calculation.
-
-## Signature
+Reduces an array or object to a single value by iterating from right to left.
 
 ```typescript
-function reduceRight<T, U>(
-  collection: T[],
-  iteratee: (accumulator: U, value: T, index: number, collection: T[]) => U,
-  initialValue: U
-): U;
-function reduceRight<T>(collection: T[], iteratee: (accumulator: T, value: T, index: number, collection: T[]) => T): T;
-
-function reduceRight<T, U>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: U, value: T, index: number, collection: ArrayLike<T>) => U,
-  initialValue: U
-): U;
-function reduceRight<T>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: T, value: T, index: number, collection: ArrayLike<T>) => T
-): T;
-
-function reduceRight<T extends object, U>(
-  collection: T,
-  iteratee: (accumulator: U, value: T[keyof T], key: keyof T, collection: T) => U,
-  initialValue: U
-): U;
-function reduceRight<T extends object>(
-  collection: T,
-  iteratee: (accumulator: T[keyof T], value: T[keyof T], key: keyof T, collection: T) => T[keyof T]
-): T[keyof T];
+const result = reduceRight(collection, iteratee, initialValue);
 ```
 
-### Parameters
+## Reference
 
-- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T>`): The collection to iterate over.
-- `iteratee` (`(accumulator: U, value: T, index, collection) => any)`): The function invoked per iteration.
-- `initialValue` (`U`): The initial value.
+### `reduceRight(collection, iteratee, initialValue)`
 
-### Returns
-
-(`any`): Returns the accumulated value.
-
-## Examples
+Iterates through all elements of an array or object from right to left to calculate an accumulated value. If an initial value is provided, it starts with that value; otherwise, it starts with the last element.
 
 ```typescript
-// Using a reducer function
-const array = [1, 2, 3];
-reduceRight(array, (acc, value) => acc + value, 0); // => 6
+import { reduceRight } from 'es-toolkit/compat';
 
-// Using a reducer function with initialValue
-const array = [1, 2, 3];
-reduceRight(array, (acc, value) => acc + value % 2 === 0, true); // => false
+// Concatenate array to string (from right)
+const letters = ['a', 'b', 'c', 'd'];
+const result = reduceRight(letters, (acc, value) => acc + value, '');
+console.log(result); // 'dcba'
 
-// Using an object as the collection
-const obj = { a: 1, b: 2, c: 3 };
-reduceRight(obj, (acc, value) => acc + value, 0); // => 6
+// Multiply object values (reverse of key order)
+const numbers = { x: 2, y: 3, z: 4 };
+const product = reduceRight(numbers, (acc, value) => acc * value, 1);
+console.log(product); // 24 (1 * 4 * 3 * 2)
 ```
+
+If no initial value is provided, the last element becomes the initial value and iteration starts from the second to last element.
+
+```typescript
+import { reduceRight } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4];
+const sum = reduceRight(numbers, (acc, value) => acc + value);
+console.log(sum); // 10 (4 + 3 + 2 + 1)
+
+// Empty array returns undefined
+const empty = [];
+const result = reduceRight(empty, (acc, value) => acc + value);
+console.log(result); // undefined
+```
+
+#### Parameters
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to iterate over.
+- `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): The function to call for each element. It receives the accumulated value, current value, index/key, and the original array/object.
+- `initialValue` (`any`, optional): The initial value for the accumulator. If not provided, the last element becomes the initial value.
+
+#### Returns
+
+(`any`): Returns the final accumulated value after processing all elements.

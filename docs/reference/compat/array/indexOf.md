@@ -1,17 +1,19 @@
-# indexOf
+# indexOf (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.indexOf` or `Array.prototype.findIndex`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `indexOf` function operates slowly due to additional logic for handling `NaN`.
+
+If you're not looking for `NaN`, use the faster `Array.prototype.indexOf`. To find `NaN`, use `Array.prototype.findIndex` with `Number.isNaN`.
+
 :::
 
-Finds the index of the first occurrence of a value in an array.
+Finds the index of the first occurrence of a given element in an array.
 
-This method is similar to `Array.prototype.indexOf`, but it also finds `NaN` values.
-It uses strict equality (`===`) to compare elements other than `NaN`.
+Works almost the same as `Array.prototype.indexOf`, but can find `NaN` values.
+Uses strict equality (`===`) when comparing elements other than `NaN`.
 
-## Signature
+## Interface
 
 ```typescript
 function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
@@ -21,23 +23,23 @@ function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 
 - `array` (`T[]`): The array to search.
 
-::: info `array` can be `ArrayLike<T>` or `null` or `undefined`
+::: info `array` can be `ArrayLike<T>`, `null`, or `undefined`
 
-To ensure full compatibility with lodash, the `indexOf` function processes `array` as follows:
+To ensure full compatibility with lodash, the `indexOf` function handles `array` as follows:
 
-- If `array` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
-- If `array` is `null` or `undefined`, it is treated as an empty array.
+- If `array` is `ArrayLike<T>`, it uses `Array.from(...)` to convert it to an array.
+- If `array` is `null` or `undefined`, it's treated as an empty array.
 
 :::
 
-- `searchElement` (`T`): The value to search for.
-- `fromIndex` (`number`, optional): The index to start the search at.
+- `searchElement` (`T`): The value to find.
+- `fromIndex` (`number`, optional): The index to start searching from.
 
-### Returns
+#### Returns
 
-(`number`): The index (zero-based) of the first occurrence of the value in the array, or `-1` if the value is not found.
+(`number`): The index of the first element in the array that matches the given value. Returns `-1` if no matching element is found.
 
-## Example
+## Examples
 
 ```typescript
 const array = [1, 2, 3, NaN];

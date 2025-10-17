@@ -1,4 +1,4 @@
-# isMatch (Lodash compatibility)
+# isMatch (Lodash Compatibility)
 
 Checks if an object partially matches another object's shape and values.
 

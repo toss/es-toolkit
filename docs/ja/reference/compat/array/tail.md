@@ -1,23 +1,58 @@
-# tail (🚧 ドキュメント作成中)
+# tail (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit`の[tail](../../array/tail.md)を使用してください
+
+この`tail`関数は、`null`や`undefined`の処理などにより遅く動作します。
+
+代わりに、より高速で現代的な`es-toolkit`の[tail](../../array/tail.md)を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+配列の最初の要素を除いた残りの要素を返します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = tail(array);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `tail(array)`
 
-### `tail(...args)`
+配列の最初の要素を除いたすべての要素を含む新しい配列を作成したい場合は`tail`を使用してください。入力配列が空または要素が1つだけの場合は空の配列を返します。
 
-#### インターフェース
+```typescript
+import { tail } from 'es-toolkit/compat';
+
+// 数値配列から最初の要素を削除します。
+tail([1, 2, 3]);
+// Returns: [2, 3]
+
+// 文字列配列から最初の要素を削除します。
+tail(['a', 'b', 'c']);
+// Returns: ['b', 'c']
+
+// 要素が1つだけの配列です。
+tail([1]);
+// Returns: []
+
+// 空の配列です。
+tail([]);
+// Returns: []
+```
+
+`null`や`undefined`は空の配列として扱われます。
+
+```typescript
+import { tail } from 'es-toolkit/compat';
+
+tail(null); // []
+tail(undefined); // []
+```
 
 #### パラメータ
 
-### 戻り値
+- `array` (`ArrayLike<T> | null | undefined`): 最初の要素を削除する配列です。
+
+#### 戻り値
+
+(`T[]`): 最初の要素を除いた残りの要素を含む新しい配列を返します。

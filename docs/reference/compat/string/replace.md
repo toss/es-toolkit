@@ -1,38 +1,69 @@
-# replace
+# replace (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use JavaScript's `String.prototype.replace`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `replace` function operates slower due to handling non-string values.
+
+Instead, use the faster and more modern JavaScript's `String.prototype.replace`.
+
 :::
 
-Replaces the matched pattern with the replacement string.
-
-## Signature
+Replaces matching patterns in a string with another string.
 
 ```typescript
-function replace(
-  target: string,
-  pattern: string | RegExp,
-  replacement: string | ((substring: string, ...args: any[]) => string)
-): string;
+const replaced = replace(target, pattern, replacement);
 ```
 
-### Parameters
+## Reference
 
-- `target` (`string`): The target string.
-- `pattern` (`string | RegExp`): The pattern to match.
-- `replacement` (`string | ((substring: string, ...args: any[]) => string)`): The replacement string or a function that returns the replacement string.
+### `replace(target, pattern, replacement)`
 
-### Returns
-
-(`string`): The new string with the matched pattern replaced.
-
-## Examples
+Use `replace` when you want to find a specific pattern in a string and replace it with another string. You can use a string or regular expression pattern, and the replacement can be specified as a string or function.
 
 ```typescript
-replace('abcde', 'de', '123'); // 'abc123'
-replace('abcde', /[bd]/g, '-'); // 'a-c-e'
-replace('abcde', 'de', substring => substring.toUpperCase()); // 'abcDE'
-replace('abcde', /[bd]/g, substring => substring.toUpperCase()); // 'aBcDe'
+import { replace } from 'es-toolkit/compat';
+
+// Replace with string pattern
+replace('abcde', 'de', '123');
+// Returns: 'abc123'
+
+// Replace with regular expression pattern
+replace('abcde', /[bd]/g, '-');
+// Returns: 'a-c-e'
 ```
+
+You can also use a function to dynamically decide the replacement.
+
+```typescript
+import { replace } from 'es-toolkit/compat';
+
+// Decide replacement content with function
+replace('abcde', 'de', match => match.toUpperCase());
+// Returns: 'abcDE'
+
+// Combination of regular expression and function
+replace('abcde', /[bd]/g, match => match.toUpperCase());
+// Returns: 'aBcDe'
+```
+
+`null` or `undefined` targets are treated as empty strings.
+
+```typescript
+import { replace } from 'es-toolkit/compat';
+
+replace(null, 'test', 'replaced');
+// Returns: ''
+
+replace(undefined, /test/g, 'replaced');
+// Returns: ''
+```
+
+#### Parameters
+
+- `target` (`string`): The target string to replace.
+- `pattern` (`string | RegExp`): The pattern to find.
+- `replacement` (`string | Function`): The replacement content. If a function, it receives the matched string and should return the replacement string.
+
+#### Returns
+
+(`string`): Returns a new string with the pattern replaced.

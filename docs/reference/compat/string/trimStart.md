@@ -1,23 +1,55 @@
-# trimStart (🚧 Documentation In Progress)
+# trimStart (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `trimStart` from `es-toolkit`
+
+This `trimStart` function operates slowly due to handling `null` or `undefined` and parameter order changes.
+
+Use the faster and more modern [trimStart](../../string/trimStart.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Removes leading whitespace or specified characters from a string.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const trimmed = trimStart(str, chars);
+```
 
 ## Reference
 
-### `trimStart(...args)`
+### `trimStart(str, chars)`
 
-#### Signature
+Use `trimStart` when you want to remove whitespace or specific characters from the beginning of a string. If `chars` is not specified, only leading whitespace will be removed.
+
+```typescript
+import { trimStart } from 'es-toolkit/compat';
+
+// Remove leading whitespace
+trimStart('  abc  ');
+// Returns: 'abc  '
+
+// Remove specified characters
+trimStart('-_-abc-_-', '_-');
+// Returns: 'abc-_-'
+
+// Only applies to the beginning of the string
+trimStart('abc', 'c');
+// Returns: 'abc'
+```
+
+`null` or `undefined` is treated as an empty string.
+
+```typescript
+import { trimStart } from 'es-toolkit/compat';
+
+trimStart(null); // ''
+trimStart(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to trim from the beginning.
+- `chars` (`string`, optional): The characters to remove. If not specified, whitespace will be removed.
+
+#### Returns
+
+(`string`): Returns the string with specified characters removed from the beginning.

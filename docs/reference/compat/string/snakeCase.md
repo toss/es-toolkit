@@ -1,23 +1,58 @@
-# snakeCase (🚧 Documentation In Progress)
+# snakeCase (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `snakeCase` from `es-toolkit`
+
+This `snakeCase` function operates slowly due to normalization logic for handling `null` or `undefined`.
+
+Instead, use the faster and more modern [snakeCase](../../string/snakeCase.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Converts a string to snake case.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const snakeCased = snakeCase(str);
+```
 
 ## Reference
 
-### `snakeCase(...args)`
+### `snakeCase(str)`
 
-#### Signature
+Use `snakeCase` when you want to convert a string to snake_case. Snake case is a naming convention where each word is written in lowercase and connected with underscores (_).
+
+```typescript
+import { snakeCase } from 'es-toolkit/compat';
+
+// Convert camel case
+snakeCase('camelCase');
+// Returns: 'camel_case'
+
+// Convert space-separated string
+snakeCase('some whitespace');
+// Returns: 'some_whitespace'
+
+// Convert hyphen-separated string
+snakeCase('hyphen-text');
+// Returns: 'hyphen_text'
+
+// Handle consecutive uppercase letters
+snakeCase('HTTPRequest');
+// Returns: 'http_request'
+```
+
+`null` or `undefined` are treated as empty strings.
+
+```typescript
+import { snakeCase } from 'es-toolkit/compat';
+
+snakeCase(null); // ''
+snakeCase(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to convert to snake case.
+
+#### Returns
+
+(`string`): Returns the converted string in snake case.

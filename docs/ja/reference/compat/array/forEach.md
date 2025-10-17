@@ -1,44 +1,86 @@
-# forEach
+# forEach (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.forEach()`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`forEach`関数は、複雑なオブジェクト処理、早期終了ロジックなどにより、動作が遅くなります。
+
+代わりに、より高速でモダンな`Array.prototype.forEach()`を使用してください。
+
 :::
 
-配列 (`arr`) の要素を左から右に順に走査し、各要素に対して `callback` 関数を呼び出します。
+配列またはオブジェクトの各要素に対して関数を実行します。
 
-`callback` 関数が `false` を返すと、走査を停止します。
-
-## インターフェース
-
-```ts
-function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+```typescript
+forEach(collection, callback);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`T`): 走査するオブジェクト。配列、文字列、またはオブジェクトである可能性があります。
-- `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 各反復で呼び出される関数。
-  - `value`: 配列で現在処理中の要素。
-  - `index`: 配列で現在処理中の要素のプロパティ名。
-  - `object`: `forEach` 関数が呼び出されたオブジェクト。
+### `forEach(collection, callback)`
 
-### 戻り値
+配列またはオブジェクトのすべての要素を走査し、各要素に対してコールバック関数を実行したい場合は`forEach`を使用してください。コールバックが`false`を返すと走査を中断します。
 
-(`T`): `forEach`で走査するオブジェクト。
+```typescript
+import { forEach } from 'es-toolkit/compat';
 
-## 例
+// 配列の走査
+const numbers = [1, 2, 3, 4, 5];
+const results: number[] = [];
 
-```ts
-import { forEach } from 'es-toolkit/array';
+forEach(numbers, value => {
+  results.push(value * 2);
+});
+// resultsは[2, 4, 6, 8, 10]
 
-const array = [1, 2, 3];
-const result: number[] = [];
-// forEach関数を使用して配列を走査し、各要素を結果配列に追加します。
-forEach(array, value => {
-  result.push(value);
+// 早期終了
+const numbers2 = [1, 2, 3, 4, 5];
+const results2: number[] = [];
+
+forEach(numbers2, value => {
+  if (value > 3) {
+    return false; // 走査を中断
+  }
+  results2.push(value);
+});
+// results2は[1, 2, 3]
+```
+
+オブジェクトに対しても同様に動作します。
+
+```typescript
+import { forEach } from 'es-toolkit/compat';
+
+const obj = { a: 1, b: 2, c: 3 };
+const keys: string[] = [];
+const values: number[] = [];
+
+forEach(obj, (value, key) => {
+  keys.push(key);
+  values.push(value);
+});
+// keysは['a', 'b', 'c']
+// valuesは[1, 2, 3]
+```
+
+`null`または`undefined`は空のコレクションとして扱われます。
+
+```typescript
+import { forEach } from 'es-toolkit/compat';
+
+forEach(null, value => {
+  console.log(value); // 実行されません
 });
 
-console.log(result); // 出力: [3, 2, 1];
+forEach(undefined, value => {
+  console.log(value); // 実行されません
+});
 ```
+
+#### パラメータ
+
+- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 走査する配列またはオブジェクトです。
+- `callback` (`(value: T, index: number | string, collection: any) => void | false`): 各要素に対して実行する関数です。`false`を返すと走査を中断します。
+
+#### 戻り値
+
+(`T`): 走査した元のコレクションを返します。

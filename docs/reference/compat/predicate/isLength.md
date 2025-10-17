@@ -1,4 +1,4 @@
-# isLength (Lodash compatibility)
+# isLength (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isLength](../../predicate/isLength.md) instead
 This `isLength` function operates slowly due to complex handling for Lodash compatibility.

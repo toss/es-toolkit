@@ -1,23 +1,77 @@
-# flatMapDeep (🚧 Documentation In Progress)
+# flatMapDeep (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use [`flatMapDeep`](../../array/flatMapDeep.md) from `es-toolkit`
+
+This `flatMapDeep` function operates slowly due to complex collection type handling and deep flattening logic.
+
+Use the faster and more modern [flatMapDeep](../../array/flatMapDeep.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Applies a function to each element and recursively flattens the result.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = flatMapDeep(collection, iteratee);
+```
 
 ## Reference
 
-### `flatMapDeep(...args)`
+### `flatMapDeep(collection, iteratee)`
 
-#### Signature
+Applies an iteratee function to each element of a collection and returns an array flattened to infinite depth. All nested array structures are flattened into a one-dimensional array.
+
+```typescript
+import { flatMapDeep } from 'es-toolkit/compat';
+
+// Apply a function to an array and deeply flatten
+function duplicate(n) {
+  return [[[n, n]]];
+}
+flatMapDeep([1, 2], duplicate);
+// Result: [1, 1, 2, 2]
+
+// Apply a function to an object and deeply flatten
+const obj = { a: 1, b: 2 };
+flatMapDeep(obj, (value, key) => [[[key, value]]]);
+// Result: ['a', 1, 'b', 2]
+
+// Map with a string property and deeply flatten
+const users = [
+  { user: 'barney', hobbies: [['hiking', 'coding']] },
+  { user: 'fred', hobbies: [['reading']] },
+];
+flatMapDeep(users, 'hobbies');
+// Result: ['hiking', 'coding', 'reading']
+```
+
+Using without an iteratee recursively flattens the values.
+
+```typescript
+import { flatMapDeep } from 'es-toolkit/compat';
+
+const obj = { a: [[1, 2]], b: [[[3]]] };
+flatMapDeep(obj);
+// Result: [1, 2, 3]
+```
+
+Conditional mapping with a partial object is also possible.
+
+```typescript
+import { flatMapDeep } from 'es-toolkit/compat';
+
+const users = [
+  { user: 'barney', active: [true, false] },
+  { user: 'fred', active: [false] },
+];
+flatMapDeep(users, { active: [false] });
+// Result: [false] (matching result of elements with active array containing [false])
+```
 
 #### Parameters
 
-### Returns
+- `collection` (`object | null | undefined`): The collection to iterate over. Can be an array, object, or string.
+- `iteratee` (`ListIterator | ObjectIterator | string | object`, optional): The iteratee to apply to each element. Can be a function, property name, or partial object.
+
+#### Returns
+
+(`any[]`): Returns a new array recursively flattened after mapping.

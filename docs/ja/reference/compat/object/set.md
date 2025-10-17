@@ -1,58 +1,92 @@
-# set
+# set (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
+::: warning 直接代入を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `set` 関数は内部的に `updateWith` 関数を呼び出し、複雑なパス処理とオブジェクト作成ロジックにより遅く動作します。
+
+代わりに、より高速で現代的な直接代入や分割代入を使用してください。
+
 :::
 
-指定されたパスに与えられた値を設定します。パスの一部が存在しない場合は作成されます。
-
-## インターフェース
+オブジェクトの指定されたパスに値を設定します。
 
 ```typescript
-function set<T extends object>(
-  obj: T,
-  path: string | number | symbol | Array<string | number | symbol>,
-  value: unknown
-): T;
+const result = set(obj, path, value);
 ```
 
-### パラメータ
+## 参照
 
-- `obj` (`T`): 値を設定するオブジェクト。
-- `path` (`string | number | symbol | Array<string | number | symbol>`): 値を設定するプロパティのパス。
-- `value` (`unknown`): 設定する値。
+### `set(object, path, value)`
 
-### 戻り値
-
-(`T`): 修正されたオブジェクトを返します。T を指定しない場合は unknown です。
-
-## 例
+オブジェクトの特定のパスに値を設定したい場合は、`set` を使用してください。パスの一部が存在しない場合は自動的に作成されます。ネストされたオブジェクトや配列を扱う際に便利です。
 
 ```typescript
 import { set } from 'es-toolkit/compat';
 
-// ネストされたオブジェクトに値を設定
+// 基本的な使い方
 const obj = { a: { b: { c: 3 } } };
 set(obj, 'a.b.c', 4);
 console.log(obj.a.b.c); // 4
 
 // 配列に値を設定
 const arr = [1, 2, 3];
-set(arr, 1, 4);
+set(arr, '1', 4);
 console.log(arr[1]); // 4
 
-// 存在しないパスを作成して値を設定
-const obj2 = {};
-set(obj2, 'a.b.c', 4);
-console.log(obj2); // { a: { b: { c: 4 } } }
+// 存在しないパスを作成
+const empty = {};
+set(empty, 'user.profile.name', 'John');
+console.log(empty);
+// 結果: { user: { profile: { name: 'John' } } }
 
-// インターフェースの使用
-interface O {
-  a: number;
-}
-const obj3 = {};
-const result = set<O>(obj3, 'a', 1); // result の型 = { a: number }
-console.log(result); // { a: 1 }
+// 配列パスを使用
+const data = {};
+set(data, ['nested', 'array', 0], 'first item');
+console.log(data);
+// 結果: { nested: { array: ['first item'] } }
+
+// 配列インデックスを自動作成
+const list = {};
+set(list, 'items[0]', 'first');
+set(list, 'items[2]', 'third');
+console.log(list);
+// 結果: { items: ['first', undefined, 'third'] }
+
+// ネストされたオブジェクトと配列の混合
+const complex = {};
+set(complex, 'users[0].profile.settings.theme', 'dark');
+console.log(complex);
+// 結果: { users: [{ profile: { settings: { theme: 'dark' } } }] }
+
+// 数値キーの処理
+const numeric = {};
+set(numeric, 123, 'number key');
+console.log(numeric[123]); // 'number key'
+
+// 既存の値を上書き
+const existing = { a: { b: 'old' } };
+set(existing, 'a.b', 'new');
+console.log(existing.a.b); // 'new'
 ```
+
+元のオブジェクトが直接変更されて返されます。
+
+```typescript
+import { set } from 'es-toolkit/compat';
+
+const original = { x: 1 };
+const result = set(original, 'y', 2);
+
+console.log(original === result); // true
+console.log(original); // { x: 1, y: 2 }
+```
+
+#### パラメータ
+
+- `object` (`T`): 値を設定するオブジェクト。
+- `path` (`PropertyPath`): 値を設定するプロパティのパス。文字列、配列、またはキーの配列にすることができます。
+- `value` (`any`): 設定する値。
+
+#### 戻り値
+
+(`T`): 変更されたオブジェクトを返します(元のオブジェクトと同じ)。

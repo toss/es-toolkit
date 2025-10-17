@@ -1,4 +1,4 @@
-# isEqualWith (Lodash compatibility)
+# isEqualWith (Lodash Compatibility)
 
 ::: warning Use es-toolkit's [isEqualWith](../../predicate/isEqualWith.md) instead
 This `isEqualWith` function operates slowly due to complex processing for Lodash compatibility.

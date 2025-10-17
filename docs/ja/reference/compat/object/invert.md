@@ -1,23 +1,60 @@
-# invert (🚧 ドキュメント作成中)
+# invert (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit`の`invert`を使用してください
+
+この`invert`関数はLodash互換性のための複雑な処理により動作が遅くなります。
+
+代わりに、より高速で現代的な`es-toolkit`の[`invert`](../../object/invert.md)を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+オブジェクトのキーと値を入れ替えます。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const inverted = invert(object);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `invert(object)`
 
-### `invert(...args)`
+オブジェクトのキーと値を入れ替えたい場合は`invert`を使用してください。元のオブジェクトのキーは新しいオブジェクトの値になり、元のオブジェクトの値は新しいオブジェクトのキーになります。
 
-#### インターフェース
+```typescript
+import { invert } from 'es-toolkit/compat';
+
+// 基本的なキー・値の入れ替え
+const object = { a: 1, b: 2, c: 3 };
+invert(object);
+// => { '1': 'a', '2': 'b', '3': 'c' }
+
+// 文字列値の入れ替え
+const colors = { red: '#ff0000', green: '#00ff00', blue: '#0000ff' };
+invert(colors);
+// => { '#ff0000': 'red', '#00ff00': 'green', '#0000ff': 'blue' }
+
+// 混合キーと値のタイプ
+const mixed = { a: 1, 2: 'b', c: 3, 4: 'd' };
+invert(mixed);
+// => { '1': 'a', 'b': '2', '3': 'c', 'd': '4' }
+```
+
+重複した値がある場合、最後のキーが使用されます。
+
+```typescript
+import { invert } from 'es-toolkit/compat';
+
+// 重複した値がある場合
+const object = { a: 1, b: 1, c: 2 };
+invert(object);
+// => { '1': 'b', '2': 'c' }
+// 'a'は上書きされて失われます
+```
 
 #### パラメータ
 
-### 戻り値
+- `object` (`object`): 入れ替えるオブジェクトです。
+
+#### 戻り値
+
+(`Record<string, string>`): キーと値が入れ替わった新しいオブジェクトを返します。

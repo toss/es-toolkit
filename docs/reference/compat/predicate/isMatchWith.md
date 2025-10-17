@@ -1,4 +1,4 @@
-# isMatchWith (Lodash compatibility)
+# isMatchWith (Lodash Compatibility)
 
 Checks if an object partially matches using a custom comparison function.
 

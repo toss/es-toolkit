@@ -1,23 +1,58 @@
-# unescape (🚧 Documentation In Progress)
+# unescape (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `unescape` from `es-toolkit`
+
+This `unescape` function operates slowly due to conversion logic for handling `null` or `undefined`.
+
+Use the faster and more modern [unescape](../../string/unescape.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Converts HTML entities to their original characters.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const unescaped = unescape(str);
+```
 
 ## Reference
 
-### `unescape(...args)`
+### `unescape(str)`
 
-#### Signature
+Use `unescape` when you want to convert HTML entities `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#39;` back to their original characters. This is the reverse operation of the `escape` function.
+
+```typescript
+import { unescape } from 'es-toolkit/compat';
+
+// Unescape HTML tags
+unescape('This is a &lt;div&gt; element.');
+// Returns: 'This is a <div> element.'
+
+// Unescape quotes
+unescape('This is a &quot;quote&quot;');
+// Returns: 'This is a "quote"'
+
+// Unescape apostrophes
+unescape('This is a &#39;quote&#39;');
+// Returns: 'This is a 'quote''
+
+// Unescape ampersands
+unescape('This is a &amp; symbol');
+// Returns: 'This is a & symbol'
+```
+
+`null` or `undefined` is treated as an empty string.
+
+```typescript
+import { unescape } from 'es-toolkit/compat';
+
+unescape(null); // ''
+unescape(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to unescape.
+
+#### Returns
+
+(`string`): Returns the string with HTML entities converted to their original characters.

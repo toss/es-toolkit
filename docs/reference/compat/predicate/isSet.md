@@ -1,4 +1,4 @@
-# isSet (Lodash compatibility)
+# isSet (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isSet](../../predicate/isSet.md) instead
 

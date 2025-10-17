@@ -1,23 +1,58 @@
-# startCase (🚧 文档写作中)
+# startCase (Lodash 兼容性)
 
-::: warning 实现完成 - 文档写作中
-这个函数已经完全实现，可以使用了，但是文档还在写作中。
+::: warning 请使用 `es-toolkit` 的 `startCase`
+
+由于处理 `null` 或 `undefined` 的规范化逻辑,此 `startCase` 函数运行速度较慢。
+
+请改用更快、更现代的 `es-toolkit` 的 [startCase](../../string/startCase.md)。
+
 :::
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+将字符串转换为 start case。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将写作.
+```typescript
+const startCased = startCase(str);
+```
 
 ## 参考
 
-### `startCase(...args)`
+### `startCase(str)`
 
-#### 接口
+当您想将字符串转换为 Start Case 时,请使用 `startCase`。Start Case 是一种命名约定,每个单词的首字母大写并用空格分隔。
+
+```typescript
+import { startCase } from 'es-toolkit/compat';
+
+// 转换普通字符串
+startCase('hello world');
+// 返回值: 'Hello World'
+
+// 已经大写的单词保持不变
+startCase('HELLO WORLD');
+// 返回值: 'HELLO WORLD'
+
+// 转换连字符分隔的字符串
+startCase('hello-world');
+// 返回值: 'Hello World'
+
+// 转换下划线分隔的字符串
+startCase('hello_world');
+// 返回值: 'Hello World'
+```
+
+`null` 或 `undefined` 被视为空字符串。
+
+```typescript
+import { startCase } from 'es-toolkit/compat';
+
+startCase(null); // ''
+startCase(undefined); // ''
+```
 
 #### 参数
 
-### 返回值
+- `str` (`string`, 可选): 要转换为 start case 的字符串。
+
+#### 返回值
+
+(`string`): 返回转换为 start case 的字符串。

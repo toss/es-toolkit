@@ -1,23 +1,48 @@
-# lowerFirst (🚧 ドキュメント作成中)
+# lowerFirst (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit` の `lowerFirst` を使用してください
+
+この `lowerFirst` 関数は、文字列以外の入力値の処理により、動作が遅くなります。
+
+代わりに、より高速で現代的な `es-toolkit` の [lowerFirst](../../string/lowerFirst.md) を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+文字列の最初の文字を小文字に変換します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = lowerFirst(str);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `lowerFirst(str)`
 
-### `lowerFirst(...args)`
+文字列の最初の文字を小文字に変換します。残りの文字はそのまま維持されます。camelCase変数名を作成したり、最初の文字だけ小文字にしたい場合に便利です。
 
-#### インターフェース
+```typescript
+import { lowerFirst } from 'es-toolkit/compat';
+
+lowerFirst('fred'); // 'fred'
+lowerFirst('Fred'); // 'fred'
+lowerFirst('FRED'); // 'fRED'
+lowerFirst(''); // ''
+```
+
+文字列以外の値も文字列に変換して処理します。
+
+```typescript
+import { lowerFirst } from 'es-toolkit/compat';
+
+lowerFirst(123); // '123'
+lowerFirst(null); // ''
+lowerFirst(undefined); // ''
+```
 
 #### パラメータ
 
-### 戻り値
+- `str` (`string`,オプション): 最初の文字を小文字に変換する文字列です。
+
+#### 戻り値
+
+(`string`): 最初の文字が小文字に変換された文字列を返します。

@@ -1,23 +1,54 @@
-# sample (🚧 Documentation In Progress)
+# sample (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s [sample](../../array/sample.md)
+
+This `sample` function operates slowly due to `null` or `undefined` handling, object value processing, etc.
+
+Instead, use the faster and more modern `es-toolkit`'s [sample](../../array/sample.md).
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Gets a random element from an array or object.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const randomItem = sample(collection);
+```
 
 ## Reference
 
-### `sample(...args)`
+### `sample(collection)`
 
-#### Signature
+Use `sample` to select a random element from an array or object. For arrays, it returns a random element, and for objects, it returns a random value.
+
+```typescript
+import { sample } from 'es-toolkit/compat';
+
+// Get a random element from an array
+sample([1, 2, 3, 4, 5]);
+// Returns a random number between 1 and 5
+
+// Get a random value from an object
+sample({ a: 1, b: 2, c: 3 });
+// Returns a random value among 1, 2, 3
+
+// Handles strings as well
+sample('hello');
+// Returns a random character among 'h', 'e', 'l', 'l', 'o'
+```
+
+`null` or `undefined` returns `undefined`.
+
+```typescript
+import { sample } from 'es-toolkit/compat';
+
+sample(null); // undefined
+sample(undefined); // undefined
+```
 
 #### Parameters
 
-### Returns
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to sample from.
+
+#### Returns
+
+(`T | string | undefined`): Returns a randomly selected element from the array or object. Returns `undefined` if the collection is empty or `null`, `undefined`.

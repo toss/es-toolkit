@@ -1,4 +1,4 @@
-# mean (Lodash compatibility)
+# mean (Lodash Compatibility)
 
 ::: warning Use [mean](../../math/mean.md) from es-toolkit
 

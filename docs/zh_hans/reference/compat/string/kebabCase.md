@@ -1,23 +1,48 @@
-# kebabCase (🚧 文档写作中)
+# kebabCase (Lodash 兼容性)
 
-::: warning 实现完成 - 文档写作中
-这个函数已经完全实现，可以使用了，但是文档还在写作中。
+::: warning 请使用 `es-toolkit` 的 `kebabCase`
+
+由于处理非字符串输入值和删除缩写撇号等原因,此 `kebabCase` 函数运行较慢。
+
+请改用更快、更现代的 `es-toolkit` 的 [kebabCase](../../string/kebabCase.md)。
+
 :::
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+将字符串转换为短横线命名法。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将写作.
+```typescript
+const result = kebabCase(str);
+```
 
 ## 参考
 
-### `kebabCase(...args)`
+### `kebabCase(str)`
 
-#### 接口
+将字符串转换为短横线命名法。短横线命名法是一种命名约定,每个单词以小写字母书写,并用短横线(-)字符连接。它通常用于URL和CSS类名。
+
+```typescript
+import { kebabCase } from 'es-toolkit/compat';
+
+kebabCase('camelCase'); // 'camel-case'
+kebabCase('some whitespace'); // 'some-whitespace'
+kebabCase('hyphen-text'); // 'hyphen-text'
+kebabCase('HTTPRequest'); // 'http-request'
+```
+
+非字符串值也会在处理前转换为字符串。
+
+```typescript
+import { kebabCase } from 'es-toolkit/compat';
+
+kebabCase(123); // '123'
+kebabCase(null); // ''
+kebabCase(undefined); // ''
+```
 
 #### 参数
 
-### 返回值
+- `str` (`string | object`,可选): 要转换为短横线命名法的值。
+
+#### 返回值
+
+(`string`): 返回转换为短横线命名法的字符串。

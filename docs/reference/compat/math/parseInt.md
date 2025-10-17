@@ -1,4 +1,4 @@
-# parseInt (Lodash compatibility)
+# parseInt (Lodash Compatibility)
 
 ::: warning Use `parseInt`
 

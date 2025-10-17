@@ -1,23 +1,54 @@
-# sample (🚧 ドキュメント作成中)
+# sample（Lodash 互換性）
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit` の [sample](../../array/sample.md) を使用してください
+
+この `sample` 関数は、`null` や `undefined` の処理、オブジェクト値の処理などにより、遅く動作します。
+
+より高速でモダンな `es-toolkit` の [sample](../../array/sample.md) を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+配列またはオブジェクトからランダムな要素を1つ取得します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const randomItem = sample(collection);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `sample(collection)`
 
-### `sample(...args)`
+配列またはオブジェクトからランダムな要素を1つ選択する場合は `sample` を使用します。配列ではランダムな要素を返し、オブジェクトではランダムな値を返します。
 
-#### インターフェース
+```typescript
+import { sample } from 'es-toolkit/compat';
+
+// 配列からランダムな要素を取得
+sample([1, 2, 3, 4, 5]);
+// 1から5の中からランダムな数値を1つ返します
+
+// オブジェクトからランダムな値を取得
+sample({ a: 1, b: 2, c: 3 });
+// 1、2、3の中からランダムな値を1つ返します
+
+// 文字列も処理します
+sample('hello');
+// 'h'、'e'、'l'、'l'、'o'の中からランダムな文字を1つ返します
+```
+
+`null` や `undefined` は `undefined` を返します。
+
+```typescript
+import { sample } from 'es-toolkit/compat';
+
+sample(null); // undefined
+sample(undefined); // undefined
+```
 
 #### パラメータ
 
-### 戻り値
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): サンプリングする配列またはオブジェクト。
+
+#### 戻り値
+
+(`T | string | undefined`): 配列またはオブジェクトからランダムに選択された要素を返します。コレクションが空であるか `null`、`undefined` の場合は `undefined` を返します。

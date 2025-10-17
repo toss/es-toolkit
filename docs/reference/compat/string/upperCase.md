@@ -1,23 +1,58 @@
-# upperCase (🚧 Documentation In Progress)
+# upperCase (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `upperCase` from `es-toolkit`
+
+This `upperCase` function operates slowly due to normalization logic for handling `null` or `undefined`.
+
+Use the faster and more modern [upperCase](../../string/upperCase.md) from `es-toolkit` instead.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Converts a string to upper case.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const upperCased = upperCase(str);
+```
 
 ## Reference
 
-### `upperCase(...args)`
+### `upperCase(str)`
 
-#### Signature
+Use `upperCase` when you want to convert a string to upper case (UPPER CASE). Upper case is a naming convention where each word is written in uppercase and connected with spaces.
+
+```typescript
+import { upperCase } from 'es-toolkit/compat';
+
+// Convert camel case
+upperCase('camelCase');
+// Returns: 'CAMEL CASE'
+
+// Convert space-separated string
+upperCase('some whitespace');
+// Returns: 'SOME WHITESPACE'
+
+// Convert hyphen-separated string
+upperCase('hyphen-text');
+// Returns: 'HYPHEN TEXT'
+
+// When uppercase letters appear consecutively
+upperCase('HTTPRequest');
+// Returns: 'HTTP REQUEST'
+```
+
+`null` or `undefined` is treated as an empty string.
+
+```typescript
+import { upperCase } from 'es-toolkit/compat';
+
+upperCase(null); // ''
+upperCase(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to convert to upper case.
+
+#### Returns
+
+(`string`): Returns the string converted to upper case.

@@ -1,4 +1,4 @@
-# isArrayBuffer (Lodash compatibility)
+# isArrayBuffer (Lodash Compatibility)
 
 ::: warning Use es-toolkit's [isArrayBuffer](../../predicate/isArrayBuffer.md)
 

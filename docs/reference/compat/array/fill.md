@@ -1,23 +1,82 @@
-# fill (🚧 Documentation In Progress)
+# fill (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `fill` from `es-toolkit`
+
+This `fill` function operates with complex behavior due to handling `null` or `undefined`, support for array-like objects, etc.
+
+Instead, use the faster and more modern [`fill`](../../array/fill.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Fills the elements of an array with a specified value.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = fill(array, value, start, end);
+```
 
 ## Reference
 
-### `fill(...args)`
+### `fill(array, value, start?, end?)`
 
-#### Signature
+Use `fill` when you want to fill a specific range or the entire array with the same value. It modifies the original array directly.
+
+```typescript
+import { fill } from 'es-toolkit/compat';
+
+// Fill entire array
+const arr1 = [1, 2, 3];
+fill(arr1, 'a');
+// Returns: ['a', 'a', 'a']
+
+// Fill specific range
+const arr2 = [1, 2, 3, 4, 5];
+fill(arr2, '*', 1, 4);
+// Returns: [1, '*', '*', '*', 5]
+
+// Use negative indices
+const arr3 = [1, 2, 3, 4, 5];
+fill(arr3, 'x', -3, -1);
+// Returns: [1, 2, 'x', 'x', 5]
+```
+
+Array-like objects are also supported.
+
+```typescript
+import { fill } from 'es-toolkit/compat';
+
+const arrayLike = { 0: 1, 1: 2, 2: 3, length: 3 };
+fill(arrayLike, 'a', 1, 2);
+// Returns: { 0: 1, 1: 'a', 2: 3, length: 3 }
+```
+
+`null` or `undefined` arrays are treated as empty arrays.
+
+```typescript
+import { fill } from 'es-toolkit/compat';
+
+fill(null, 'a');
+// Returns: []
+
+fill(undefined, 'a');
+// Returns: []
+```
+
+Strings are read-only, so they are returned as is.
+
+```typescript
+import { fill } from 'es-toolkit/compat';
+
+fill('abc', 'x');
+// Returns: 'abc' (not modified)
+```
 
 #### Parameters
 
-### Returns
+- `array` (`ArrayLike<T> | null | undefined`): The array to fill.
+- `value` (`U`): The value to fill the array with.
+- `start` (`number`, optional): The start position. Defaults to `0`.
+- `end` (`number`, optional): The end position (not included). Defaults to `array.length`.
+
+#### Returns
+
+(`ArrayLike<T | U>`): Returns the array filled with the value.

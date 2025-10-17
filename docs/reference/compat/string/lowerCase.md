@@ -1,23 +1,48 @@
-# lowerCase (🚧 Documentation In Progress)
+# lowerCase (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `lowerCase` from `es-toolkit`
+
+This `lowerCase` function operates slower due to handling non-string input values and removing contracted apostrophes.
+
+Instead, use the faster and more modern [lowerCase](../../string/lowerCase.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Converts a string to lowercase words separated by spaces.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = lowerCase(str);
+```
 
 ## Reference
 
-### `lowerCase(...args)`
+### `lowerCase(str)`
 
-#### Signature
+Converts a string to lowercase words separated by spaces. Each word is converted to lowercase and connected with space characters. This is useful for creating human-readable text.
+
+```typescript
+import { lowerCase } from 'es-toolkit/compat';
+
+lowerCase('camelCase'); // 'camel case'
+lowerCase('some whitespace'); // 'some whitespace'
+lowerCase('hyphen-text'); // 'hyphen text'
+lowerCase('HTTPRequest'); // 'http request'
+```
+
+Non-string values are also converted to strings before processing.
+
+```typescript
+import { lowerCase } from 'es-toolkit/compat';
+
+lowerCase(123); // '123'
+lowerCase(null); // ''
+lowerCase(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string | object`, optional): The value to convert to lowercase format.
+
+#### Returns
+
+(`string`): Returns the string with lowercase words separated by spaces.

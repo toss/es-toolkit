@@ -1,61 +1,107 @@
-# setWith
+# setWith (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use direct assignment instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `setWith` function internally calls the `updateWith` function and operates slowly due to complex path processing and customizer logic.
+
+Use faster and more modern direct assignment or destructuring assignment instead.
+
 :::
 
-Sets the value at the specified path of the given object using a `customizer` function.
-If any part of the path does not exist, it will be created based on the `customizer`'s result.
-
-This method is similar to [set](./set.md) except that it accepts a `customizer` for creating nested objects.
-
-The `customizer` is invoked to produce the objects of the path. If the `customizer` returns
-a value, that value is used for the current path segment. If the `customizer` returns
-`undefined`, the method will create an appropriate object based on the path - an array
-if the next path segment is a valid array index, or an object otherwise.
-
-## Signature
+Sets a value at the specified path while controlling how objects are created with a customizer function.
 
 ```typescript
-function setWith<T extends object | null | undefined>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  value: unknown,
-  customizer?: (value: unknown) => unknown
-): T;
+const result = setWith(obj, path, value, customizer);
 ```
 
-### Parameters
+## Reference
 
-- `obj` (`T`): The object to modify.
-- `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to set.
-- `value` (`unknown`): The value to set.
-- `customizer` (`(value: unknown) => unknown`): The function to customize path creation.
+### `setWith(object, path, value, customizer)`
 
-### Returns
-
-(`T`): Returns the modified object.
-
-## Examples
+Use `setWith` when you want to set a value at a specific path in an object while controlling the type of intermediate objects created with a customizer function. If the customizer returns `undefined`, the default logic (array for array indices, object otherwise) is used.
 
 ```typescript
 import { setWith } from 'es-toolkit/compat';
-import { isObject } from 'es-toolkit/compat';
 
-// Set a value in a nested array with a customizer
-const object = {};
-setWith(object, '[0][1][2]', 3, value => (isObject(value) ? undefined : {}));
-console.log(object); // => { '0': { '1': { '2': 3 } } }
+// Basic usage (no customizer)
+const obj1 = {};
+setWith(obj1, 'a.b.c', 4);
+console.log(obj1);
+// Result: { a: { b: { c: 4 } } }
 
-// Using Object as a customizer to create objects for arrays
+// Customizer forcing array creation
 const obj2 = {};
-setWith(obj2, 'a[0].b.c', 4, Object);
-console.log(obj2); // => { a: [{ b: { c: 4 } }] }
+setWith(obj2, '[0][1]', 'value', () => []);
+console.log(obj2);
+// Result: { '0': [undefined, 'value'] }
 
-// Path creation without a customizer (same as using set)
+// Customize only under specific conditions
 const obj3 = {};
-setWith(obj3, 'a.b.c', 4);
-console.log(obj3); // => { a: { b: { c: 4 } } }
+setWith(obj3, 'a[0].b.c', 'nested', (value, key) => {
+  // Return empty object only for numeric keys (array indices)
+  return typeof key === 'string' && /^\d+$/.test(key) ? {} : undefined;
+});
+console.log(obj3);
+// Result: { a: { '0': { b: { c: 'nested' } } } }
+
+// Use Object constructor as customizer
+const obj4 = {};
+setWith(obj4, 'x[0].y', 42, Object);
+console.log(obj4);
+// Result: { x: [{ y: 42 }] }
+
+// Complex customizer logic
+const obj5 = {};
+setWith(obj5, 'data.items[0].props.config', 'value', (value, key, object) => {
+  console.log('Creating:', key, 'in', object);
+
+  // Use Map for specific keys
+  if (key === 'props') {
+    return new Map();
+  }
+
+  // Array for numeric keys
+  if (typeof key === 'string' && /^\d+$/.test(key)) {
+    return [];
+  }
+
+  // Regular object by default
+  return {};
+});
+
+// Use WeakMap as intermediate object
+const obj6 = {};
+setWith(obj6, 'cache.user.profile', 'data', (value, key) => {
+  if (key === 'cache') {
+    return new WeakMap();
+  }
+  return undefined; // Use default behavior
+});
 ```
+
+The customizer function receives three parameters.
+
+```typescript
+import { setWith } from 'es-toolkit/compat';
+
+const obj = {};
+setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
+  console.log('nsValue:', nsValue);     // Current value (usually undefined)
+  console.log('key:', key);             // Key to create
+  console.log('nsObject:', nsObject);   // Parent object
+
+  // Return different object types based on specific conditions
+  return key === 'b' ? [] : {};
+});
+```
+
+#### Parameters
+
+- `object` (`T`): The object to set the value in.
+- `path` (`PropertyPath`): The path of the property to set.
+- `value` (`any`): The value to set.
+- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, optional): Function to customize the creation of intermediate objects.
+
+#### Returns
+
+(`T | R`): Returns the modified object.

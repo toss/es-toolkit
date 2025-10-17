@@ -1,44 +1,73 @@
-# toPairs
+# toPairs (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.entries` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `toPairs` function operates slowly due to complex logic for handling `Map` and `Set`, array-like object processing, etc.
+
+Use faster and more modern `Object.entries()` instead.
+
 :::
 
-Creates an array of key-value pairs from an object, set, or map.
-
-- When an object is provided, it returns an array of elements paired with the object's properties and values (`[key, value]`).
-- When a `Set` is provided, it returns an array of elements paired in the format `[value, value]`.
-- When a `Map` is provided, it returns an array of elements paired with keys and values (`[key, value]`).
-
-## Signature
+Converts an object to an array of key-value pairs.
 
 ```typescript
-function toPairs<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairs<T>(set: Set<T>): Array<[T, T]>;
-function toPairs<K, V>(map: Map<K, V>): Array<[K, V]>;
+const pairs = toPairs(object);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`Record<string | number, T> | Set<T> | Map<K, V>`): The object, `Set`, or `Map` to query.
+### `toPairs(object)`
 
-### Returns
-
-(`Array<[key: PropertyKey, value: T]>`): Array of property-value pairs.
-
-## Examples
+Use `toPairs` when you want to convert an object's own enumerable properties to an array of `[key, value]` pairs. Inherited properties are not included.
 
 ```typescript
-const object = { a: 1, b: 2 };
-toPairs(object); // [['a', 1], ['b', 2]]
+import { toPairs } from 'es-toolkit/compat';
 
-const set = new Set([1, 2]);
-toPairs(set); // [[1, 1], [2, 2]]
+// Basic object conversion
+const object = { a: 1, b: 2, c: 3 };
+toPairs(object);
+// => [['a', 1], ['b', 2], ['c', 3]]
 
+// Object with numeric keys
+const numbers = { 0: 'zero', 1: 'one', 2: 'two' };
+toPairs(numbers);
+// => [['0', 'zero'], ['1', 'one'], ['2', 'two']]
+```
+
+Can also handle `Map` and `Set`.
+
+```typescript
+import { toPairs } from 'es-toolkit/compat';
+
+// Map object conversion
 const map = new Map();
-map.set('a', 1);
-map.set('b', 2);
-toPairs(map); // [['a', 1], ['b', 2]]
+map.set('name', 'John');
+map.set('age', 30);
+toPairs(map);
+// => [['name', 'John'], ['age', 30]]
+
+// Set object conversion (value is the same as key)
+const set = new Set([1, 2, 3]);
+toPairs(set);
+// => [[1, 1], [2, 2], [3, 3]]
 ```
+
+Safely handles `null` or `undefined`.
+
+```typescript
+import { toPairs } from 'es-toolkit/compat';
+
+toPairs(null);
+// => []
+
+toPairs(undefined);
+// => []
+```
+
+#### Parameters
+
+- `object` (`object`): The object, Map, or Set to convert.
+
+#### Returns
+
+(`Array<[string, any]>`): Returns an array of key-value pairs.

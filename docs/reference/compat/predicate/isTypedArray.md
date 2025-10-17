@@ -1,4 +1,4 @@
-# isTypedArray (Lodash compatibility)
+# isTypedArray (Lodash Compatibility)
 
 ::: warning Use `ArrayBuffer.isView()` or `instanceof` operator instead
 

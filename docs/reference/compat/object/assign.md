@@ -1,47 +1,58 @@
-# assign
+# assign (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.assign` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `assign` function operates slowly due to additional logic that checks whether values are equal.
+
+Use the faster and more modern `Object.assign` instead.
+
 :::
 
-Assigns properties from multiple source objects to a target object.
-
-This function merges the properties of the source objects into the target object.
-If a property in the source objects is equal to the corresponding property in the target object,
-it will not be overwritten.
-
-## Signature
+Assigns properties from source objects to a target object.
 
 ```typescript
-function assign<O, S>(object: O, source: S): O & S;
-function assign<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function assign<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function assign<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): O & S1 & S2 & S3 & S4;
-function assign(object: any, ...sources: any[]): any;
-function assign(object: any, ...sources: any[]): any;
+const result = assign(target, ...sources);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`any`): The target object to which properties will be assigned.
-- `sources` (`...any[]`): The source objects whose properties will be assigned to the target object.
+### `assign(target, ...sources)`
 
-### Returns
-
-(`any`): The updated target object with properties from the source objects assigned.
-
-## Examples
+Use `assign` when you want to copy properties from one or more source objects to a target object. If there are duplicate keys, values from later sources will overwrite earlier ones.
 
 ```typescript
-const target = { a: 1 };
-const result = assign(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+import { assign } from 'es-toolkit/compat';
+
+// Basic usage
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+const result = assign(target, source);
+// Result: { a: 1, b: 3, c: 4 }
+console.log(target === result); // true (target object is modified)
+
+// Merging multiple source objects
+const target2 = { a: 1 };
+const source1 = { b: 2 };
+const source2 = { c: 3 };
+const source3 = { d: 4 };
+assign(target2, source1, source2, source3);
+// Result: { a: 1, b: 2, c: 3, d: 4 }
+
+// Overwriting properties
+const target3 = { x: 1, y: 2 };
+const source4 = { y: 3, z: 4 };
+const source5 = { y: 5 };
+assign(target3, source4, source5);
+// Result: { x: 1, y: 5, z: 4 } (y is overwritten with the last value)
 ```
+
+This function only copies own properties of objects, not inherited properties. It also has an optimization that doesn't overwrite if values are the same.
+
+#### Parameters
+
+- `target` (`any`): The target object to which properties will be copied.
+- `...sources` (`any[]`): The source objects from which properties will be copied.
+
+#### Returns
+
+(`any`): Returns the modified target object. The target object itself is modified and returned.

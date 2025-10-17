@@ -1,4 +1,4 @@
-# multiply (Lodash compatibility)
+# multiply (Lodash Compatibility)
 
 ::: warning Use `*` operator
 

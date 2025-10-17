@@ -1,23 +1,58 @@
-# startCase (🚧 Documentation In Progress)
+# startCase (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `startCase` from `es-toolkit`
+
+This `startCase` function runs slower due to normalization logic for handling `null` or `undefined`.
+
+Instead, use the faster and more modern [startCase](../../string/startCase.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Converts a string to start case.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const startCased = startCase(str);
+```
 
 ## Reference
 
-### `startCase(...args)`
+### `startCase(str)`
 
-#### Signature
+Use `startCase` when you want to convert a string to Start Case. Start Case is a naming convention where the first letter of each word is capitalized and separated by spaces.
+
+```typescript
+import { startCase } from 'es-toolkit/compat';
+
+// Convert regular string
+startCase('hello world');
+// Returns: 'Hello World'
+
+// Keep words that are already uppercase
+startCase('HELLO WORLD');
+// Returns: 'HELLO WORLD'
+
+// Convert hyphen-separated string
+startCase('hello-world');
+// Returns: 'Hello World'
+
+// Convert underscore-separated string
+startCase('hello_world');
+// Returns: 'Hello World'
+```
+
+`null` or `undefined` are treated as empty strings.
+
+```typescript
+import { startCase } from 'es-toolkit/compat';
+
+startCase(null); // ''
+startCase(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to convert to start case.
+
+#### Returns
+
+(`string`): Returns the start case converted string.

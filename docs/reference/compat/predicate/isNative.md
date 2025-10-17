@@ -1,4 +1,4 @@
-# isNative (Lodash compatibility)
+# isNative (Lodash Compatibility)
 
 Checks if a value is a native function of the JavaScript engine.
 

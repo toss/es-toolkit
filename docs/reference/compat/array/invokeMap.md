@@ -1,43 +1,31 @@
-# invokeMap
+# invokeMap (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use `Array.map` and `Object.values(...).map`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed @here.
+This `invokeMap` function is slow due to handling `null` or `undefined`, method lookups, etc.
+
+Use the faster and more modern `Array.map` and `Object.values(...).map` instead.
+
+For example, `invokeMap([1, 2, 3], 'toString')` can be written as `[1, 2, 3].map(x => x.toString())`.
+
 :::
 
-Invokes the method at `path` of each element in `collection`, returning an array of the results of each invoked method. Any additional arguments are provided to each invoked method. If `path` is a function, it's invoked for, and `this` bound to, each element in `collection`.
-
-## Signature
+Invokes the specified method on each element in the array or object and returns an array of results.
 
 ```typescript
-function invokeMap<T, R>(
-  collection: T[] | Record<string, T> | null | undefined,
-  path: PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R),
-  ...args: unknown[]
-): Array<R | undefined>;
+const result = invokeMap(collection, method, ...args);
 ```
 
-### Parameters
+## Reference
 
-- `collection` (`T[] | Record<string, T> | null | undefined`): The collection to iterate over.
-- `path` (`PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R)`): The path of the method to invoke (string, number, symbol, or an array of these) or the function to invoke.
-- `args` (`...unknown[]`): The arguments to invoke each method with.
+### `invokeMap(collection, method, ...args)`
 
-### Returns
-
-(`Array<R | undefined>`): Returns the array of results. Elements are `undefined` if the path is not found or the method invocation results in `undefined`.
-
-## Examples
+Invokes the specified method on each element in the array or object. You can pass the method name as a string or pass a function directly. Additional arguments are passed to each method invocation.
 
 ```typescript
 import { invokeMap } from 'es-toolkit/compat';
 
-// Invoke a method on each element
-invokeMap(['a', 'b', 'c'], 'toUpperCase');
-// => ['A', 'B', 'C']
-
-// Invoke a method with arguments
+// Invoke method on each element of the array
 invokeMap(
   [
     [5, 1, 7],
@@ -45,23 +33,45 @@ invokeMap(
   ],
   'sort'
 );
+// => [[5, 1, 7].sort(), [3, 2, 1].sort()]
 // => [[1, 5, 7], [1, 2, 3]]
 
-// Invoke a method on each value in an object
-invokeMap({ a: 1, b: 2, c: 3 }, 'toFixed', 1);
-// => ['1.0', '2.0', '3.0']
+// Invoke method with arguments
+invokeMap([123, 456], 'toString', 2);
+// => [(123).toString(2), (456).toString(2)]
+// => ['1111011', '111001000']
 
-// Use a function instead of a method name
-invokeMap(
-  ['a', 'b', 'c'],
-  function (this: string, prefix: string, suffix: string) {
-    return prefix + this.toUpperCase() + suffix;
-  },
-  '(',
-  ')'
-);
-// => ['(A)', '(B)', '(C)']
-
-invokeMap([123, 456], String.prototype.split, '');
-// => [['1', '2', '3'], ['4', '5', '6']]
+// Pass a function directly
+invokeMap(['a', 'b', 'c'], String.prototype.toUpperCase);
+// => [String.prototype.toUpperCase('a'), String.prototype.toUpperCase('b'), String.prototype.toUpperCase('c')]
+// => ['A', 'B', 'C']
 ```
+
+For objects, the method is invoked on each value.
+
+```typescript
+import { invokeMap } from 'es-toolkit/compat';
+
+const obj = { a: 1.1, b: 2.2, c: 3.3 };
+invokeMap(obj, 'toFixed', 1);
+// => ['1.1', '2.2', '3.3']
+```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { invokeMap } from 'es-toolkit/compat';
+
+invokeMap(null, 'toString'); // []
+invokeMap(undefined, 'toString'); // []
+```
+
+#### Parameters
+
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to invoke the method on.
+- `method` (`string | ((...args: any[]) => R)`): The method name or function to invoke.
+- `...args` (`any[]`): Additional arguments to pass to each method invocation.
+
+#### Returns
+
+(`Array<R | undefined>`): Returns a new array containing the results of each method invocation.

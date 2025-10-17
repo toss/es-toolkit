@@ -1,4 +1,4 @@
-# isFinite (Lodash compatibility)
+# isFinite (Lodash Compatibility)
 
 ::: warning Use `Number.isFinite`
 

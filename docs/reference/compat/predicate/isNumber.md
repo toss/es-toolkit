@@ -1,4 +1,4 @@
-# isNumber (Lodash compatibility)
+# isNumber (Lodash Compatibility)
 
 ::: warning Use `typeof` operator
 

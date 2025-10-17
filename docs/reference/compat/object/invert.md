@@ -1,23 +1,60 @@
-# invert (🚧 Documentation In Progress)
+# invert (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `invert` from `es-toolkit`
+
+This `invert` function operates slower due to the complex processing required for Lodash compatibility.
+
+Instead, use the faster and more modern [`invert`](../../object/invert.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Inverts the keys and values of an object.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const inverted = invert(object);
+```
 
 ## Reference
 
-### `invert(...args)`
+### `invert(object)`
 
-#### Signature
+Use `invert` when you want to swap the keys and values of an object. The original object's keys become the values in the new object, and the original object's values become the keys in the new object.
+
+```typescript
+import { invert } from 'es-toolkit/compat';
+
+// Basic key-value inversion
+const object = { a: 1, b: 2, c: 3 };
+invert(object);
+// => { '1': 'a', '2': 'b', '3': 'c' }
+
+// Inverting string values
+const colors = { red: '#ff0000', green: '#00ff00', blue: '#0000ff' };
+invert(colors);
+// => { '#ff0000': 'red', '#00ff00': 'green', '#0000ff': 'blue' }
+
+// Mixed key and value types
+const mixed = { a: 1, 2: 'b', c: 3, 4: 'd' };
+invert(mixed);
+// => { '1': 'a', 'b': '2', '3': 'c', 'd': '4' }
+```
+
+When there are duplicate values, the last key is used.
+
+```typescript
+import { invert } from 'es-toolkit/compat';
+
+// Case with duplicate values
+const object = { a: 1, b: 1, c: 2 };
+invert(object);
+// => { '1': 'b', '2': 'c' }
+// 'a' is overwritten and lost
+```
 
 #### Parameters
 
-### Returns
+- `object` (`object`): The object to invert.
+
+#### Returns
+
+(`Record<string, string>`): Returns a new object with keys and values inverted.

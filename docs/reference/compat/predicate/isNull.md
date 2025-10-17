@@ -1,4 +1,4 @@
-# isNull (Lodash compatibility)
+# isNull (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isNull](../../predicate/isNull.md) instead
 

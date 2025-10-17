@@ -1,36 +1,62 @@
-# fromPairs
+# fromPairs (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.fromEntries`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `fromPairs` 関数は、配列様オブジェクトのチェックと反復処理により動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.fromEntries` を使用してください。
+
 :::
 
 キーと値のペアの配列をオブジェクトに変換します。
 
-## インターフェース
-
 ```typescript
-function fromPairs(pairs: any[]): Record<string, any>;
-function fromPairs<T extends PropertyKey, U>(pairs: Array<[T, U]> | Map<T, U>): Record<T, U>;
-function fromPairs<T extends PropertyKey, U>(data: Array<[T, U]> | Map<T, U>): Record<T, U>;
-```
-
-### パラメータ
-
-- `pairs` (`Array<[T, U]>`): 各キーが`PropertyKey`であり、各値が型`U`であるキーと値のペアの配列です。
-
-### 戻り値
-
-(`Record<T, U>`): キーが型`T`であり、値が型`U`であるオブジェクトです。
-
-## 例
-
-```typescript
-const pairs = [
-  ['a', 1],
-  ['b', 2],
-];
 const result = fromPairs(pairs);
-// result will be: { a: 1, b: 2 }
 ```
+
+## 参照
+
+### `fromPairs(pairs)`
+
+キーと値のペアからなる配列を受け取り、オブジェクトに変換します。各キーと値のペアは2つの要素を持つ配列である必要があります。最初の要素がキーになり、2番目の要素が値になります。データを整理または変換する際に便利です。
+
+```typescript
+import { fromPairs } from 'es-toolkit/compat';
+
+// 基本的なキーと値のペアの変換
+const pairs = [['a', 1], ['b', 2], ['c', 3]];
+const result = fromPairs(pairs);
+// 結果: { a: 1, b: 2, c: 3 }
+
+// 様々な値の型を処理
+const mixedPairs = [
+  ['name', 'John'],
+  ['age', 30],
+  ['active', true]
+];
+const user = fromPairs(mixedPairs);
+// 結果: { name: 'John', age: 30, active: true }
+
+// Mapから変換
+const map = new Map([['x', 10], ['y', 20]]);
+const coords = fromPairs(map);
+// 結果: { x: 10, y: 20 }
+```
+
+`null`、`undefined`、または配列様オブジェクトでない値は空のオブジェクトとして処理されます。
+
+```typescript
+import { fromPairs } from 'es-toolkit/compat';
+
+fromPairs(null); // {}
+fromPairs(undefined); // {}
+fromPairs('invalid'); // {}
+```
+
+#### パラメータ
+
+- `pairs` (`ArrayLike<[PropertyName, T]> | ArrayLike<any[]> | null | undefined`): オブジェクトに変換するキーと値のペアの配列です。
+
+#### 戻り値
+
+(`Record<string, any> | Record<string, T>`): キーと値のペアから生成されたオブジェクトを返します。

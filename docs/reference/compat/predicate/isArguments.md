@@ -1,4 +1,4 @@
-# isArguments (Lodash compatibility)
+# isArguments (Lodash Compatibility)
 
 Checks if a value is an arguments object.
 

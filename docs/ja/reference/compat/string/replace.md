@@ -1,38 +1,69 @@
-# replace
+# replace (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning JavaScript の `String.prototype.replace` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `replace` 関数は、文字列以外の値の処理により、動作が遅くなります。
+
+代わりに、より高速で現代的な JavaScript の `String.prototype.replace` を使用してください。
+
 :::
 
-文字列内の一致するパターンを別の文字列に置き換えます。
-
-## インターフェース
+文字列内の一致するパターンを他の文字列に置き換えます。
 
 ```typescript
-function replace(
-  target: string,
-  pattern: string | RegExp,
-  replacement: string | ((substring: string, ...args: any[]) => string)
-): string;
+const replaced = replace(target, pattern, replacement);
 ```
 
-### パラメータ
+## 参照
 
-- `target` (`string`): 対象の文字列。
-- `pattern` (`string | RegExp`): 一致させるパターン。
-- `replacement` (`string | ((substring: string, ...args: any[]) => string)`): 置換文字列または置換文字列を返す関数。
+### `replace(target, pattern, replacement)`
 
-### 戻り値
-
-(`string`): 一致したパターンが置き換えられた新しい文字列。
-
-## 例
+文字列内の特定のパターンを見つけて他の文字列に置き換えたい場合は `replace` を使用してください。文字列または正規表現パターンを使用でき、置換内容は文字列または関数で指定できます。
 
 ```typescript
-replace('abcde', 'de', '123'); // 'abc123'
-replace('abcde', /[bd]/g, '-'); // 'a-c-e'
-replace('abcde', 'de', substring => substring.toUpperCase()); // 'abcDE'
-replace('abcde', /[bd]/g, substring => substring.toUpperCase()); // 'aBcDe'
+import { replace } from 'es-toolkit/compat';
+
+// 文字列パターンで置換
+replace('abcde', 'de', '123');
+// Returns: 'abc123'
+
+// 正規表現パターンで置換
+replace('abcde', /[bd]/g, '-');
+// Returns: 'a-c-e'
 ```
+
+関数を使用して動的に置換内容を決定することもできます。
+
+```typescript
+import { replace } from 'es-toolkit/compat';
+
+// 関数で置換内容を決定
+replace('abcde', 'de', match => match.toUpperCase());
+// Returns: 'abcDE'
+
+// 正規表現と関数の組み合わせ
+replace('abcde', /[bd]/g, match => match.toUpperCase());
+// Returns: 'aBcDe'
+```
+
+`null` や `undefined` の対象は空文字列として処理されます。
+
+```typescript
+import { replace } from 'es-toolkit/compat';
+
+replace(null, 'test', 'replaced');
+// Returns: ''
+
+replace(undefined, /test/g, 'replaced');
+// Returns: ''
+```
+
+#### パラメータ
+
+- `target` (`string`): 置換する対象の文字列です。
+- `pattern` (`string | RegExp`): 探すパターンです。
+- `replacement` (`string | Function`): 置換内容です。関数の場合、マッチした文字列を受け取って置換文字列を返す必要があります。
+
+#### 戻り値
+
+(`string`): パターンが置き換えられた新しい文字列を返します。

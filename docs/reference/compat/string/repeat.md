@@ -1,33 +1,66 @@
-# repeat
+# repeat (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use JavaScript's `String.prototype.repeat`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `repeat` function operates slower due to handling non-string values and integer conversion.
+
+Instead, use the faster and more modern JavaScript's `String.prototype.repeat`.
+
 :::
 
-Returns the given string repeated a specified number of times.
-
-If the string is empty or the count is `0`, it returns an empty string.
-
-## Signature
+Repeats a string a specified number of times.
 
 ```typescript
-function repeat(str: string, n: number): string;
+const repeated = repeat(str, n);
 ```
 
-### Parameters
+## Reference
 
-- `str` (`string`): The string to repeat.
-- `n` (`number`): The number of times you want to repeat.
+### `repeat(str, n?)`
 
-### Returns
+Use `repeat` when you want to repeat a string multiple times to create a new string. If the repeat count is less than 1, it returns an empty string.
 
-(`string`): The string repeated for the nth time.
+```typescript
+import { repeat } from 'es-toolkit/compat';
 
-## Examples
+// Repeat string
+repeat('abc', 2);
+// Returns: 'abcabc'
 
-```javascript
-repeat('abc', 0); // ''
-repeat('abc', 2); // 'abcabc'
+repeat('hello', 3);
+// Returns: 'hellohellohello'
+
+// Repeating 0 times returns empty string
+repeat('abc', 0);
+// Returns: ''
 ```
+
+`null` or `undefined` are treated as empty strings.
+
+```typescript
+import { repeat } from 'es-toolkit/compat';
+
+repeat(null, 3);
+// Returns: ''
+
+repeat(undefined, 2);
+// Returns: ''
+```
+
+If you don't specify the repeat count, it repeats once.
+
+```typescript
+import { repeat } from 'es-toolkit/compat';
+
+repeat('abc');
+// Returns: 'abc'
+```
+
+#### Parameters
+
+- `str` (`string`, optional): The string to repeat.
+- `n` (`number`, optional): The number of times to repeat. Defaults to `1`.
+
+#### Returns
+
+(`string`): Returns the string repeated the specified number of times.

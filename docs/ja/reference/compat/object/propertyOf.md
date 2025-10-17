@@ -1,39 +1,85 @@
-# propertyOf
+# propertyOf (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `get`関数を直接使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `propertyOf` 関数は内部的に `get` 関数を呼び出すラッパー関数で、追加の関数呼び出しオーバーヘッドが発生します。
+
+代わりに、より高速で現代的な `get` 関数を直接使用するか、オプショナルチェーニング(`?.`)を使用してください。
+
 :::
 
-オブジェクトの指定されたパスで値を返す関数を作成します。
-
-`property` は特定のパスにバインドされた関数を作成し、異なるオブジェクトをクエリすることができますが、
-`propertyOf` は特定のオブジェクトにバインドされた関数を作成し、そのオブジェクト内の異なるパスをクエリすることができますます。
-
-## インターフェース
+特定のオブジェクトから様々なパスの値を取得する関数を作成します。
 
 ```typescript
-function propertyOf(object: unknown): (path: PropertyKey | PropertyKey[]) => unknown;
+const getter = propertyOf(obj);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`unknown`): クエリするオブジェクトます。
+### `propertyOf(object)`
 
-### 戻り値
-
-(`(path: PropertyKey | PropertyKey[]) => unknown`): パスを受け取り、指定されたパスのオブジェクトから値を取得する新しい関数を返します。
-ます。
-
-## 例
+1つのオブジェクトから複数のパスの値を取得する関数を作りたい場合は`propertyOf`を使用してください。`property`とは逆に、オブジェクトを先に固定し、様々なパスをクエリできます。
 
 ```typescript
-const getValue = propertyOf({ a: { b: { c: 3 } } });
-const result = getValue('a.b.c');
-console.log(result); // => 3
+import { propertyOf } from 'es-toolkit/compat';
 
-const getValue = propertyOf({ a: { b: { c: 3 } } });
-const result = getValue(['a', 'b', 'c']);
-console.log(result); // => 3
+// 基本的な使用法
+const data = { name: 'John', age: 30, city: 'New York' };
+const getValue = propertyOf(data);
+
+const name = getValue('name');
+// 結果: 'John'
+
+const age = getValue('age');
+// 結果: 30
+
+// 深いパスへのアクセス
+const complexData = {
+  user: { profile: { name: 'Alice', age: 25 } },
+  settings: { theme: 'dark', lang: 'en' }
+};
+const getComplexValue = propertyOf(complexData);
+
+const userName = getComplexValue('user.profile.name');
+// 結果: 'Alice'
+
+const theme = getComplexValue('settings.theme');
+// 結果: 'dark'
+
+// 配列パスを使用
+const arrayPath = getComplexValue(['user', 'profile', 'age']);
+// 結果: 25
+
+// 複数のパスを配列で処理
+const paths = ['user.profile.name', 'settings.theme', 'settings.lang'];
+const values = paths.map(getValue);
+// 結果: ['Alice', 'dark', 'en'] (各パスの値)
+
+// 配列インデックスアクセス
+const arrayData = [10, 20, 30];
+const getArrayValue = propertyOf(arrayData);
+const firstItem = getArrayValue(0);
+// 結果: 10
+
+const secondItem = getArrayValue('[1]');
+// 結果: 20
 ```
+
+パスが存在しない場合は`undefined`を返します。
+
+```typescript
+import { propertyOf } from 'es-toolkit/compat';
+
+const data = { a: 1, b: 2 };
+const getValue = propertyOf(data);
+const missing = getValue('nonexistent.path');
+// 結果: undefined
+```
+
+#### パラメータ
+
+- `object` (`T`): 値を取得する対象のオブジェクトです。
+
+#### 戻り値
+
+(`(path: PropertyPath) => any`): 与えられたパスでオブジェクトの値を返す関数を返します。

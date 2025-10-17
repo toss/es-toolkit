@@ -1,43 +1,104 @@
-# keysIn
+# keysIn (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `for...in` loop or `Object.keys`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `keysIn` function operates slowly due to complex logic such as handling array-like objects and traversing the prototype chain.
+
+Use the faster and more modern `for...in` loop or `Object.keys()` as needed instead.
+
 :::
 
-Retrieves the names of string-keyed properties from an object, including those inherited from its prototype.
-
-- If the value is not an object, it is converted to an object.
-- Array-like objects are treated like arrays.
-- Sparse arrays with some missing indices are treated like dense arrays.
-- If the value is `null` or `undefined`, an empty array is returned.
-- When handling prototype objects, the `constructor` property is excluded from the results.
-
-## Signature
+Returns an array of all enumerable property names of an object, including inherited properties.
 
 ```typescript
-function keysIn(object?: unknown): string[];
+const allKeys = keysIn(object);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`unknown`): The object to inspect for keys.
+### `keysIn(object)`
 
-### Returns
-
-(`string[]`): An array of string keys from the object.
-
-## Examples
+Use `keysIn` when you want to get all property names of an object including inherited properties. Unlike `keys`, it also returns properties from the prototype chain.
 
 ```typescript
-const obj = { a: 1, b: 2 };
-console.log(keysIn(obj)); // ['a', 'b']
+import { keysIn } from 'es-toolkit/compat';
 
-const arr = [1, 2, 3];
-console.log(keysIn(arr)); // ['0', '1', '2']
+// Keys of a basic object
+const object = { a: 1, b: 2 };
+keysIn(object);
+// => ['a', 'b']
 
-function Foo() {}
-Foo.prototype.a = 1;
-console.log(keysIn(new Foo())); // ['a']
+// Indices of an array
+const array = [1, 2, 3];
+keysIn(array);
+// => ['0', '1', '2']
+
+// Indices of a string
+keysIn('hello');
+// => ['0', '1', '2', '3', '4']
 ```
+
+It also includes inherited properties.
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+Foo.prototype.c = 3;
+
+keysIn(new Foo());
+// => ['a', 'b', 'c'] (includes prototype property 'c')
+
+// constructor is excluded
+class MyClass {
+  constructor() {
+    this.prop = 1;
+  }
+  method() {}
+}
+MyClass.prototype.inherited = 2;
+
+keysIn(new MyClass());
+// => ['prop', 'method', 'inherited'] (constructor is excluded)
+```
+
+It specially handles array-like objects.
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+// TypedArray
+const typedArray = new Uint8Array([1, 2, 3]);
+keysIn(typedArray);
+// => ['0', '1', '2'] (excludes buffer, byteLength, etc.)
+
+// arguments object
+function example() {
+  return keysIn(arguments);
+}
+example('a', 'b', 'c');
+// => ['0', '1', '2']
+```
+
+It safely handles `null` or `undefined`.
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+keysIn(null);
+// => []
+
+keysIn(undefined);
+// => []
+```
+
+#### Parameters
+
+- `object` (`any`): The object to get keys from.
+
+#### Returns
+
+(`string[]`): Returns an array of all enumerable property names (including both own and inherited properties) of the object.

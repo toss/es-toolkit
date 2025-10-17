@@ -1,4 +1,4 @@
-# conforms (Lodash compatibility)
+# conforms (Lodash Compatibility)
 
 Creates a function that checks if an object satisfies all the conditions defined in the given predicate object.
 

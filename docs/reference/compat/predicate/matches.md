@@ -1,4 +1,4 @@
-# matches (Lodash compatibility)
+# matches (Lodash Compatibility)
 
 Creates a function that checks for partial matching with a given pattern.
 

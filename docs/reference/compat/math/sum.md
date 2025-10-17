@@ -1,4 +1,4 @@
-# sum (Lodash compatibility)
+# sum (Lodash Compatibility)
 
 ::: warning Use [sum](../../math/sum.md) from es-toolkit
 

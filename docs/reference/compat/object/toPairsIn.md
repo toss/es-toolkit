@@ -1,44 +1,68 @@
-# toPairsIn
+# toPairsIn (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.entries` or `for...in` loop instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `toPairsIn` function operates slowly due to complex logic for handling inherited properties, `Map` and `Set` processing, etc.
+
+Use faster and more modern `Object.entries()` or a `for...in` loop if you need inherited properties.
+
 :::
 
-Creates an array of key-value pairs from an object, set, or map, including inherited properties.
-
-- When an object is provided, it returns an array of elements paired with the object's properties and values (`[key, value]`).
-- When a `Set` is provided, it returns an array of elements paired in the format `[value, value]`.
-- When a `Map` is provided, it returns an array of elements paired with keys and values (`[key, value]`).
-
-## Signature
+Converts an object to an array of key-value pairs, including inherited properties.
 
 ```typescript
-function toPairsIn<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairsIn<T>(set: Set<T>): Array<[T, T]>;
-function toPairsIn<K, V>(map: Map<K, V>): Array<[K, V]>;
+const pairs = toPairsIn(object);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`Record<any, any> | Set<any> | Map<any, any>`): The object, set, or map to query.
+### `toPairsIn(object)`
 
-### Returns
-
-(`Array<[key: PropertyKey, value: any]>`): Returns the array of key-value pairs.
-
-## Examples
+Use `toPairsIn` when you want to convert all enumerable properties of an object (including inherited properties) to an array of `[key, value]` pairs. Unlike `toPairs`, properties in the prototype chain are also included.
 
 ```typescript
+import { toPairsIn } from 'es-toolkit/compat';
+
+// Basic object conversion
 const object = { a: 1, b: 2 };
-toPairsIn(object); // [['a', 1], ['b', 2]]
+toPairsIn(object);
+// => [['a', 1], ['b', 2]]
 
-const set = new Set([1, 2]);
-toPairsIn(set); // [[1, 1], [2, 2]]
+// Include inherited properties
+function Parent() {
+  this.inherited = 'value';
+}
+Parent.prototype.proto = 'property';
 
-const map = new Map();
-map.set('a', 1);
-map.set('b', 2);
-toPairsIn(map); // [['a', 1], ['b', 2]]
+const child = new Parent();
+child.own = 'own';
+toPairsIn(child);
+// => [['inherited', 'value'], ['own', 'own'], ['proto', 'property']]
 ```
+
+Can also handle `Map` and `Set`.
+
+```typescript
+import { toPairsIn } from 'es-toolkit/compat';
+
+// Map object conversion
+const map = new Map([
+  ['key1', 'value1'],
+  ['key2', 'value2'],
+]);
+toPairsIn(map);
+// => [['key1', 'value1'], ['key2', 'value2']]
+
+// Set object conversion
+const set = new Set([1, 2, 3]);
+toPairsIn(set);
+// => [[1, 1], [2, 2], [3, 3]]
+```
+
+#### Parameters
+
+- `object` (`object`): The object, Map, or Set to convert.
+
+#### Returns
+
+(`Array<[string, any]>`): Returns an array of key-value pairs (including inherited properties).

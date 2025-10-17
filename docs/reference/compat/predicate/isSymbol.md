@@ -1,4 +1,4 @@
-# isSymbol (Lodash compatibility)
+# isSymbol (Lodash Compatibility)
 
 ::: warning Use `typeof` operator instead
 

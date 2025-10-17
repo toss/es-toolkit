@@ -1,4 +1,4 @@
-# isNil (Lodash compatibility)
+# isNil (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isNil](../../predicate/isNil.md) instead
 

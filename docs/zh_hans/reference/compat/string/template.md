@@ -1,71 +1,112 @@
-# template
+# template (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 JavaScript 模板字面量
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于复杂的字符串处理,这个 `template` 函数运行较慢。
+
+请使用更快、更现代的 JavaScript 模板字面量。
+
 :::
 
-将模板字符串编译为一个可以插入数据属性的函数。
-
-此函数允许您创建一个具有自定义定界符的模板，用于转义、评估和插入值。它还可以处理自定义变量名和导入的函数。
-
-## 签名
+创建一个函数,将值插入字符串模板以生成新字符串。
 
 ```typescript
-function template(string: string, options?: TemplateOptions): ((data?: object) => string) & { source: string };
+const compiled = template(templateString);
 ```
 
-### 参数
+## 参考
+
+### `template(string, options?)`
+
+当您想要将数据插入字符串模板以创建完整字符串时,请使用 `template`。您可以安全地转义值、按原样插入值或执行 JavaScript 代码。
+
+基本用法允许您插入或转义值。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// 按原样插入值
+const compiled = template('<%= value %>');
+compiled({ value: 'Hello, World!' });
+// 返回: 'Hello, World!'
+
+// 安全转义 HTML
+const safeCompiled = template('<%- value %>');
+safeCompiled({ value: '<script>alert("xss")</script>' });
+// 返回: '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
+```
+
+您也可以执行 JavaScript 代码。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// 使用条件语句
+const compiled = template('<% if (user) { %>你好 <%= user %>!<% } %>');
+compiled({ user: 'es-toolkit' });
+// 返回: '你好 es-toolkit!'
+
+// 使用循环
+const listTemplate = template('<% users.forEach(function(user) { %><li><%= user %></li><% }); %>');
+listTemplate({ users: ['小明', '小红', '小刚'] });
+// 返回: '<li>小明</li><li>小红</li><li>小刚</li>'
+```
+
+您可以指定变量名以更安全地使用。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+const compiled = template('<%= data.name %> 今年 <%= data.age %> 岁', {
+  variable: 'data',
+});
+compiled({ name: '小明', age: 25 });
+// 返回: '小明 今年 25 岁'
+```
+
+您可以导入和使用外部函数。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+const compiled = template('<%= _.toUpper(message) %>', {
+  imports: { _: { toUpper: str => str.toUpperCase() } },
+});
+compiled({ message: 'hello world' });
+// 返回: 'HELLO WORLD'
+```
+
+您也可以创建自定义分隔符。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// 使用自定义分隔符插入值
+const compiled = template('{{ message }}', {
+  interpolate: /\{\{([\s\S]+?)\}\}/g,
+});
+compiled({ message: '你好!' });
+// 返回: '你好!'
+
+// 使用自定义分隔符转义
+const safeCompiled = template('[- html -]', {
+  escape: /\[-([\s\S]+?)-\]/g,
+});
+safeCompiled({ html: '<div>内容</div>' });
+// 返回: '&lt;div&gt;内容&lt;/div&gt;'
+```
+
+#### 参数
 
 - `string` (`string`): 模板字符串。
-- `options.escape` (`RegExp`): "escape" 定界符的正则表达式。
-- `options.evaluate` (`RegExp`): "evaluate" 定界符的正则表达式。
-- `options.interpolate` (`RegExp`): "interpolate" 定界符的正则表达式。
-- `options.variable` (`string`): 数据对象的变量名。
-- `options.imports` (`Record<string, unknown>`): 导入函数的对象。
-- `options.sourceURL` (`string`): 模板的源 URL。
-- `guard` (`unknown`): 检测函数是否使用 `options` 调用的保护。
+- `options` (`object`, 可选): 配置对象。
+  - `options.escape` (`RegExp`, 可选): 用于 HTML 转义的正则表达式分隔符。默认为 `<%-([\s\S]+?)%>`。
+  - `options.evaluate` (`RegExp`, 可选): 用于执行 JavaScript 代码的正则表达式分隔符。默认为 `<%([\s\S]+?)%>`。
+  - `options.interpolate` (`RegExp`, 可选): 用于值插入的正则表达式分隔符。默认为 `<%=([\s\S]+?)%>`。
+  - `options.variable` (`string`, 可选): 数据对象的变量名。
+  - `options.imports` (`object`, 可选): 模板中使用的函数。
+  - `options.sourceURL` (`string`, 可选): 用于调试的源 URL。
 
-### 返回值
+#### 返回值
 
-(`(data?: object) => string`): 返回编译的模板函数。
-
-## 示例
-
-```typescript
-// 使用 "escape" 定界符来转义数据属性。
-const compiled = template('<%- value %>');
-compiled({ value: '<div>' }); // 返回 '&lt;div&gt;'
-
-// 使用 "interpolate" 定界符来插入数据属性。
-const compiled = template('<%= value %>');
-compiled({ value: '你好，世界！' }); // 返回 '你好，世界！'
-
-// 使用 "evaluate" 定界符来评估 JavaScript 代码。
-const compiled = template('<% if (value) { %>是<% } else { %>否<% } %>');
-compiled({ value: true }); // 返回 '是'
-
-// 使用 "variable" 选项来指定数据对象的变量名。
-const compiled = template('<%= data.value %>', { variable: 'data' });
-compiled({ value: '你好，世界！' }); // 返回 '你好，世界！'
-
-// 使用 "imports" 选项来导入函数。
-const compiled = template('<%= _.toUpper(value) %>', { imports: { _: { toUpper } } });
-compiled({ value: 'hello, world!' }); // 返回 'HELLO, WORLD!'
-
-// 使用自定义 "escape" 定界符。
-const compiled = template('<@ value @>', { escape: /<@([\s\S]+?)@>/g });
-compiled({ value: '<div>' }); // 返回 '&lt;div&gt;'
-
-// 使用自定义 "evaluate" 定界符。
-const compiled = template('<# if (value) { #>是<# } else { #>否<# } #>', { evaluate: /<#([\s\S]+?)#>/g });
-compiled({ value: true }); // 返回 '是'
-
-// 使用自定义 "interpolate" 定界符。
-const compiled = template('<$ value $>', { interpolate: /<\$([\s\S]+?)\$>/g });
-compiled({ value: '你好，世界！' }); // 返回 '你好，世界！'
-
-// 使用 "sourceURL" 选项来指定模板的源 URL。
-const compiled = template('你好 <%= user %>!', { sourceURL: 'template.js' });
-```
+(`TemplateExecutor`): 一个接收数据对象并返回完整字符串的函数。生成的函数代码也可以通过 `source` 属性访问。

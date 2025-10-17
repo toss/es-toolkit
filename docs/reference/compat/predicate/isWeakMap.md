@@ -1,4 +1,4 @@
-# isWeakMap (Lodash compatibility)
+# isWeakMap (Lodash Compatibility)
 
 ::: warning Use `instanceof` operator instead
 

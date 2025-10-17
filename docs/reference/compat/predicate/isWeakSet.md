@@ -1,4 +1,4 @@
-# isWeakSet (Lodash compatibility)
+# isWeakSet (Lodash Compatibility)
 
 ::: warning Use `instanceof` operator instead
 

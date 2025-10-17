@@ -1,4 +1,4 @@
-# isArray (Lodash compatibility)
+# isArray (Lodash Compatibility)
 
 ::: warning Use `Array.isArray`
 

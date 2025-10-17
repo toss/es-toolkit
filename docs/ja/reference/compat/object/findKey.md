@@ -1,23 +1,61 @@
-# findKey (🚧 ドキュメント作成中)
+# findKey (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit`の`findKey`を使用してください
+
+この`findKey`関数は、さまざまな条件タイプの処理と互換性ロジックにより、複雑に動作します。
+
+代わりに、より高速で現代的な`es-toolkit`の[findKey](../../object/findKey.md)を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+条件に一致する最初の要素のキーを検索します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const key = findKey(obj, predicate);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `findKey(obj, predicate)`
 
-### `findKey(...args)`
+オブジェクト内で条件に一致する最初の要素のキーを検索するには`findKey`を使用してください。関数、オブジェクト、配列、文字列など、さまざまな形式の条件を使用できます。
 
-#### インターフェース
+```typescript
+import { findKey } from 'es-toolkit/compat';
+
+// 関数条件でキーを検索
+const users = {
+  alice: { age: 25, active: true },
+  bob: { age: 30, active: false },
+  charlie: { age: 35, active: true },
+};
+
+findKey(users, user => user.age > 30);
+// 戻り値: 'charlie'
+
+// オブジェクト条件でキーを検索
+findKey(users, { active: false });
+// 戻り値: 'bob'
+
+// プロパティパスでキーを検索
+findKey(users, 'active');
+// 戻り値: 'alice'
+```
+
+条件に一致する要素がない場合は`undefined`を返します。
+
+```typescript
+import { findKey } from 'es-toolkit/compat';
+
+findKey({ a: 1, b: 2 }, value => value > 5);
+// 戻り値: undefined
+```
 
 #### パラメータ
 
-### 戻り値
+- `obj` (`T | null | undefined`): 検索するオブジェクトです。
+- `predicate` (`ObjectIteratee<T>`, オプション): 各要素に適用する条件です。関数、オブジェクト、配列、文字列を指定できます。
+
+#### 戻り値
+
+(`string | undefined`): 条件に一致する最初の要素のキーを返します。一致するものがない場合は`undefined`を返します。

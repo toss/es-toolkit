@@ -1,4 +1,4 @@
-# meanBy (Lodash compatibility)
+# meanBy (Lodash Compatibility)
 
 ::: warning Use [meanBy](../../math/meanBy.md) from es-toolkit
 

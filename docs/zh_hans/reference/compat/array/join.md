@@ -1,9 +1,10 @@
-# join
+# join (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.prototype.join()`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于需要处理 ArrayLike 对象、null/undefined 等,这个 `join` 函数运行缓慢。
+
+请改用更快、更现代的 `Array.prototype.join()`。
 
 :::
 
@@ -21,23 +22,23 @@ function join<T>(array: T[], separator?: string): string;
 
 ::: info `array` 可以是 `ArrayLike<T>` 或 `null` 或 `undefined`
 
-为了确保与 lodash 的完全兼容性，`join` 函数会按照以下方式处理 `array`：
+为了确保与 lodash 的完全兼容性,`join` 函数会按照以下方式处理 `array`:
 
-- 如果 `array` 是 `ArrayLike<T>`，它会使用 `Array.from(...)` 将其转换为数组。
-- 如果 `array` 是 `null` 或 `undefined`，它会被视为一个空数组。
+- 如果 `array` 是 `ArrayLike<T>`,它会使用 `Array.from(...)` 将其转换为数组。
+- 如果 `array` 是 `null` 或 `undefined`,它会被视为一个空数组。
 
 :::
 
-- `separator` (`string`) - 用于分隔元素的分隔符，默认是常用分隔符`,`。
+- `separator` (`string`) - 用于连接元素的分隔符,默认是逗号 (,)。
 
-### 返回值
+#### 返回值
 
-(`string`): - 返回一个包含所有通过指定分隔符连接的数组元素的字符串。
+(`string`): 返回一个包含所有通过指定分隔符连接的数组元素的字符串。
 
 ## 示例
 
 ```typescript
-const arr = ["a","b","c"];
-const result = join(arr, "~");
+const arr = ['a', 'b', 'c'];
+const result = join(arr, '~');
 console.log(result); // Output: "a~b~c"
 ```

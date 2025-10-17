@@ -1,23 +1,58 @@
-# upperCase (🚧 文档写作中)
+# upperCase (Lodash 兼容性)
 
-::: warning 实现完成 - 文档写作中
-这个函数已经完全实现，可以使用了，但是文档还在写作中。
+::: warning 请使用 `es-toolkit` 的 `upperCase`
+
+由于需要处理 `null` 或 `undefined` 的规范化逻辑,此 `upperCase` 函数运行较慢。
+
+请改用更快、更现代的 `es-toolkit` 的 [upperCase](../../string/upperCase.md)。
+
 :::
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+将字符串转换为大写形式。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将写作.
+```typescript
+const upperCased = upperCase(str);
+```
 
 ## 参考
 
-### `upperCase(...args)`
+### `upperCase(str)`
 
-#### 接口
+当您想要将字符串转换为大写形式 (UPPER CASE) 时,请使用 `upperCase`。大写是一种命名约定,每个单词都用大写字母书写并用空格连接。
+
+```typescript
+import { upperCase } from 'es-toolkit/compat';
+
+// 转换驼峰命名
+upperCase('camelCase');
+// 返回: 'CAMEL CASE'
+
+// 转换空格分隔的字符串
+upperCase('some whitespace');
+// 返回: 'SOME WHITESPACE'
+
+// 转换连字符分隔的字符串
+upperCase('hyphen-text');
+// 返回: 'HYPHEN TEXT'
+
+// 当大写字母连续出现时
+upperCase('HTTPRequest');
+// 返回: 'HTTP REQUEST'
+```
+
+`null` 或 `undefined` 被视为空字符串。
+
+```typescript
+import { upperCase } from 'es-toolkit/compat';
+
+upperCase(null); // ''
+upperCase(undefined); // ''
+```
 
 #### 参数
 
-### 返回值
+- `str` (`string`, 可选): 要转换为大写形式的字符串。
+
+#### 返回值
+
+(`string`): 返回转换为大写形式的字符串。

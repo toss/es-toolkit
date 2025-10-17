@@ -1,23 +1,47 @@
-# zipWith (🚧 Documentation In Progress)
+# zipWith (Lodash Compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use [zipWith](../../array/zipWith.md) from `es-toolkit`
+
+This `zipWith` function operates slowly due to additional processing for Lodash compatibility.
+
+Instead, use the faster and more modern [zipWith](../../array/zipWith.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Combines elements from multiple arrays using a combining function into a new array.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = zipWith([1, 2], [3, 4], (a, b) => a + b);
+// result is [4, 6].
+```
 
 ## Reference
 
-### `zipWith(...args)`
+### `zipWith(...arrs, iteratee)`
 
-#### Signature
+Takes multiple arrays and combines elements at each index using a provided function to create a new array. If arrays have different lengths, it processes up to the length of the longest array, passing `undefined` for missing values.
+
+```typescript
+import { zipWith } from 'es-toolkit/compat';
+
+// Add elements from two arrays
+const result1 = zipWith([1, 2, 3], [4, 5, 6], (a, b) => a + b);
+// Returns: [5, 7, 9]
+
+// Combine elements from three arrays
+const result2 = zipWith([1, 2], [3, 4], [5, 6], (a, b, c) => a + b + c);
+// Returns: [9, 12]
+
+// Arrays with different lengths
+const result3 = zipWith([1, 2, 3], [4, 5], (a, b) => (a || 0) + (b || 0));
+// Returns: [5, 7, 3]
+```
 
 #### Parameters
 
-### Returns
+- `...arrs` (`any[][]`): The arrays to combine.
+- `iteratee` (`Function`): The function to combine elements at each index.
+
+#### Returns
+
+(`any[]`): A new array of results from applying the combining function.

@@ -1,4 +1,4 @@
-# max (Lodash compatibility)
+# max (Lodash Compatibility)
 
 ::: warning Use `Math.max`
 

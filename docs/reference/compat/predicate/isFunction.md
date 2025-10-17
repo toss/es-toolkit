@@ -1,4 +1,4 @@
-# isFunction (Lodash compatibility)
+# isFunction (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isFunction](../../predicate/isFunction.md) instead
 This `isFunction` function operates slowly due to complex handling for Lodash compatibility.

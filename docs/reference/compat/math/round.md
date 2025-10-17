@@ -1,4 +1,4 @@
-# round (Lodash compatibility)
+# round (Lodash Compatibility)
 
 ::: warning Use `Math.round()`
 

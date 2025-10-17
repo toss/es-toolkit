@@ -1,23 +1,79 @@
-# last (🚧 Documentation In Progress)
+# last (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `es-toolkit`'s [last](../../array/last.md)
+
+This `last` function behaves complexly due to handling `null` or `undefined`.
+
+Instead, use the faster and more modern `es-toolkit`'s [last](../../array/last.md).
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Returns the last element of an array.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const lastElement = last(array);
+```
 
 ## Reference
 
-### `last(...args)`
+### `last(array)`
 
-#### Signature
+Use `last` when you want to get the last element of an array. Returns `undefined` if the array is empty.
+
+```typescript
+import { last } from 'es-toolkit/compat';
+
+// Last element of a number array
+last([1, 2, 3, 4, 5]);
+// Returns: 5
+
+// Last element of a string array
+last(['a', 'b', 'c']);
+// Returns: 'c'
+
+// Last element of an object array
+const users = [{ name: 'Alice' }, { name: 'Bob' }];
+last(users);
+// Returns: { name: 'Bob' }
+```
+
+Empty arrays or `null`, `undefined` return `undefined`.
+
+```typescript
+import { last } from 'es-toolkit/compat';
+
+// Empty array
+last([]);
+// Returns: undefined
+
+// null array
+last(null);
+// Returns: undefined
+
+// undefined array
+last(undefined);
+// Returns: undefined
+```
+
+Array-like objects are also supported.
+
+```typescript
+import { last } from 'es-toolkit/compat';
+
+// Array-like object
+const arrayLike = { 0: 'first', 1: 'second', length: 2 };
+last(arrayLike);
+// Returns: 'second'
+
+// Strings are also array-like objects
+last('hello');
+// Returns: 'o'
+```
 
 #### Parameters
 
-### Returns
+- `array` (`ArrayLike<T> | null | undefined`): The array to get the last element from.
+
+#### Returns
+
+(`T | undefined`): Returns the last element of the array, or `undefined` if the array is empty, `null`, or `undefined`.

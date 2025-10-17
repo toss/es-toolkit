@@ -1,4 +1,4 @@
-# inRange (Lodash compatibility)
+# inRange (Lodash Compatibility)
 
 ::: warning Use [inRange](../../math/inRange.md) from `es-toolkit`
 

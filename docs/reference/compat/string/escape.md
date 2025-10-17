@@ -1,23 +1,48 @@
-# escape (🚧 Documentation In Progress)
+# escape (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use `escape` from `es-toolkit`
+
+This `escape` function operates slower due to handling non-string input values.
+
+Instead, use the faster and more modern [escape](../../string/escape.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Converts HTML special characters in a string to HTML entities.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = escape(str);
+```
 
 ## Reference
 
-### `escape(...args)`
+### `escape(str)`
 
-#### Signature
+Converts the characters `&`, `<`, `>`, `"`, `'` in a string to their corresponding HTML entities. This is useful for preventing XSS attacks when inserting text into HTML documents.
+
+```typescript
+import { escape } from 'es-toolkit/compat';
+
+escape('This is a <div> element.'); // 'This is a &lt;div&gt; element.'
+escape('This is a "quote"'); // 'This is a &quot;quote&quot;'
+escape("This is a 'quote'"); // 'This is a &#39;quote&#39;'
+escape('This is a & symbol'); // 'This is a &amp; symbol'
+```
+
+Non-string values are also converted to strings before processing.
+
+```typescript
+import { escape } from 'es-toolkit/compat';
+
+escape(123); // '123'
+escape(null); // ''
+escape(undefined); // ''
+```
 
 #### Parameters
 
-### Returns
+- `str` (`string`, optional): The string to escape HTML special characters.
+
+#### Returns
+
+(`string`): Returns the string with HTML special characters converted to entities.

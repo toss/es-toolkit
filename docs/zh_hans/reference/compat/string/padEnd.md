@@ -1,36 +1,59 @@
-# padEnd
+# padEnd (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 JavaScript 的 `String.prototype.padEnd`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于处理非字符串值,此 `padEnd` 函数运行较慢。
+
+请改用更快、更现代的 JavaScript 的 `String.prototype.padEnd`。
 
 :::
 
-在字符串的末尾使用给定的字符进行填充，直到它达到指定的长度。
-
-如果指定的长度小于或等于原字符串的长度，或者填充字符为空字符串，则返回原字符串不变。
-
-## 签名
+在字符串末尾添加填充以扩展到指定的长度。
 
 ```typescript
-function padEnd(str: string, length = 0, chars = ' '): string;
+const padded = padEnd(str, length, chars);
 ```
 
-### 参数
+## 参考
 
-- `str` (`string`): 要填充的字符串。
-- `length` (`number`): 填充后的字符串长度。默认值为 `0`。
-- `char` (`string`): 用于填充字符串的字符。默认值为 `' '`。
+### `padEnd(str, length?, chars?)`
 
-### 返回值
+当您想在字符串末尾添加填充以匹配所需长度时,请使用 `padEnd`。
 
-返回一个新的字符串，该字符串用指定的字符填充，直到达到指定的长度。
+```typescript
+import { padEnd } from 'es-toolkit/compat';
 
-## 示例
+// 用空格填充
+padEnd('abc', 6);
+// Returns: 'abc   '
 
-```javascript
-padEnd('hello', 10, 'a'); // 'helloaaaaa'
-padEnd('hello', 3, 'a'); // 'hello'
-padEnd('hello', 5, ''); // 'hello'
+// 用特定字符填充
+padEnd('abc', 6, '_-');
+// Returns: 'abc_-_'
+
+// 如果原始长度更长则原样返回
+padEnd('abc', 3);
+// Returns: 'abc'
 ```
+
+`null` 或 `undefined` 被视为空字符串。
+
+```typescript
+import { padEnd } from 'es-toolkit/compat';
+
+padEnd(null, 5, '*');
+// Returns: '*****'
+
+padEnd(undefined, 3);
+// Returns: '   '
+```
+
+#### 参数
+
+- `str` (`string`,可选): 要添加填充的字符串。
+- `length` (`number`,可选): 希望的最终字符串长度。默认为 `0`。
+- `chars` (`string`,可选): 用于填充的字符。默认为 `' '`(空格)。
+
+#### 返回值
+
+(`string`): 返回在末尾添加了填充的字符串。

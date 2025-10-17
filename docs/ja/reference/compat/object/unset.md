@@ -1,12 +1,18 @@
-# unset
+# unset (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `delete` 演算子を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `unset` 関数は複雑なパス解析とネストされたオブジェクト処理により遅く動作します。
+
+代わりに、より高速で現代的な `delete` 演算子を直接使用してください。
+
 :::
 
-指定されたパスのプロパティをオブジェクトから削除します。
+オブジェクトの指定されたパスにあるプロパティを削除します。
+
+```typescript
+const success = unset(object, path);
+```
 
 ## インターフェース
 
@@ -16,12 +22,13 @@ function unset(obj: unknown, path: PropertyKey | PropertyKey[]): boolean;
 
 ### パラメータ
 
-- `obj` (`unknown`): 修正するオブジェクト。
+- `obj` (`unknown`): 変更するオブジェクト。
 - `path` (`PropertyKey | PropertyKey[]`): 削除するプロパティのパス。
 
 ### 戻り値
 
-(`boolean`): プロパティが削除された場合は`true`を、それ以外の場合は`false`を返します。
+(`boolean`): プロパティが削除された場合は true を返し、それ以外の場合は false を返します。
+文字列。
 
 ## 例
 

@@ -1,44 +1,68 @@
-# toPairsIn
+# toPairsIn (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.entries` 或 `for...in` 循环
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `toPairsIn` 函数由于处理继承属性、`Map` 和 `Set` 处理等复杂逻辑而运行缓慢。
+
+请使用更快、更现代的 `Object.entries()`,或者如果需要继承属性,请使用 `for...in` 循环。
+
 :::
 
-从对象、集合或映射创建键值对数组，包括继承属性。
-
-- 当提供对象时，它返回一个与对象的属性和值配对的元素数组（`[key, value]`）。
-- 当提供 `Set` 时，它返回一个以 `[value, value]` 格式配对的元素数组。
-- 当提供 `Map` 时，它返回一个与键和值配对的元素数组（`[key, value]`）。
-
-## 签名
+将对象转换为键值对数组,包括继承的属性。
 
 ```typescript
-function toPairsIn<T>(object: Record<string | number, T>): Array<[string, T]>;
-function toPairsIn<T>(set: Set<T>): Array<[T, T]>;
-function toPairsIn<K, V>(map: Map<K, V>): Array<[K, V]>;
+const pairs = toPairsIn(object);
 ```
 
-### 参数
+## 参考
 
-- `object` (`Record<string | number, T> | Set<T> | Map<K, V>`): 要查询的对象、集合或映射。
+### `toPairsIn(object)`
 
-### 返回值
-
-(`Array<[key: PropertyKey, value: T]>`): 返回键值对数组。
-
-## 示例
+当您想将对象的所有可枚举属性(包括继承的属性)转换为 `[键, 值]` 形式的数组时,请使用 `toPairsIn`。与 `toPairs` 不同,原型链中的属性也会被包含。
 
 ```typescript
+import { toPairsIn } from 'es-toolkit/compat';
+
+// 基本对象转换
 const object = { a: 1, b: 2 };
-toPairsIn(object); // [['a', 1], ['b', 2]]
+toPairsIn(object);
+// => [['a', 1], ['b', 2]]
 
-const set = new Set([1, 2]);
-toPairsIn(set); // [[1, 1], [2, 2]]
+// 包括继承的属性
+function Parent() {
+  this.inherited = 'value';
+}
+Parent.prototype.proto = 'property';
 
-const map = new Map();
-map.set('a', 1);
-map.set('b', 2);
-toPairsIn(map); // [['a', 1], ['b', 2]]
+const child = new Parent();
+child.own = 'own';
+toPairsIn(child);
+// => [['inherited', 'value'], ['own', 'own'], ['proto', 'property']]
 ```
+
+也可以处理 `Map` 和 `Set`。
+
+```typescript
+import { toPairsIn } from 'es-toolkit/compat';
+
+// Map 对象转换
+const map = new Map([
+  ['key1', 'value1'],
+  ['key2', 'value2'],
+]);
+toPairsIn(map);
+// => [['key1', 'value1'], ['key2', 'value2']]
+
+// Set 对象转换
+const set = new Set([1, 2, 3]);
+toPairsIn(set);
+// => [[1, 1], [2, 2], [3, 3]]
+```
+
+#### 参数
+
+- `object` (`object`): 要转换的对象、Map 或 Set。
+
+#### 返回值
+
+(`Array<[string, any]>`): 返回键值对数组(包括继承的属性)。

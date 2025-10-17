@@ -1,4 +1,4 @@
-# sumBy (Lodash compatibility)
+# sumBy (Lodash Compatibility)
 
 ::: warning Use [sumBy](../../math/sumBy.md) from es-toolkit
 

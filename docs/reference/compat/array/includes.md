@@ -1,38 +1,96 @@
-# includes
+# includes (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.includes`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `includes` function operates slowly due to object iteration and SameValueZero comparison processing. For arrays, JavaScript's native `Array.prototype.includes` method is faster and more standardized.
+
+Instead, use the faster and more modern `Array.prototype.includes`.
+
 :::
 
-Checks if a specified value exists within a given source, which can be an array, an object, or a string.
-
-The comparison uses SameValueZero to check for inclusion.
-
-## Signature
+Checks if a specific value is included in an array, object, or string.
 
 ```typescript
-function includes<T>(arr: T[], item: T, fromIndex?: number): boolean;
-function includes<T extends Record<string, any>>(obj: T, value: T[keyof T], fromIndex?: number): boolean;
-function includes(str: string, substr: string, fromIndex?: number): boolean;
+const hasValue = includes(collection, target, fromIndex);
 ```
 
-### Parameters
+## Reference
 
-- `source` (`T[] | Record<string, any> | string`): The source to search in. It can be an array, an object, or a string.
-- `target` (`T`): The value to search for in the source.
-- `fromIndex` (`number`): The index to start searching from. If negative, it is treated as an offset from the end of the source.
+### `includes(collection, target, fromIndex)`
 
-### Returns
-
-(`boolean`): `true` if the value is found in the source, `false` otherwise.
-
-## Examples
+Use `includes` when you want to check if a specific value exists in an array, object, or string. It compares values using the SameValueZero method.
 
 ```typescript
-includes([1, 2, 3], 2); // true
-includes({ a: 1, b: 'a', c: NaN }, 'a'); // true
-includes('hello world', 'world'); // true
-includes('hello world', 'test'); // false
+import { includes } from 'es-toolkit/compat';
+
+// Find value in array
+includes([1, 2, 3], 2);
+// Returns: true
+
+// Find in object values
+includes({ a: 1, b: 'a', c: NaN }, 'a');
+// Returns: true
+
+// Find substring in string
+includes('hello world', 'world');
+// Returns: true
 ```
+
+You can start searching from a specific index.
+
+```typescript
+import { includes } from 'es-toolkit/compat';
+
+// Search from index 2
+includes([1, 2, 3, 2], 2, 2);
+// Returns: true (found at index 3)
+
+// Negative index counts from the end
+includes([1, 2, 3], 2, -2);
+// Returns: true
+```
+
+`null` or `undefined` always return `false`.
+
+```typescript
+import { includes } from 'es-toolkit/compat';
+
+includes(null, 1); // false
+includes(undefined, 1); // false
+```
+
+You can also search for substrings in strings.
+
+```typescript
+import { includes } from 'es-toolkit/compat';
+
+// Search from beginning
+includes('hello', 'e');
+// Returns: true
+
+// Search from specific position
+includes('hello', 'e', 2);
+// Returns: false (no 'e' after index 2)
+```
+
+It can correctly find `NaN` values.
+
+```typescript
+import { includes } from 'es-toolkit/compat';
+
+includes([1, 2, NaN], NaN);
+// Returns: true
+
+includes({ a: 1, b: NaN }, NaN);
+// Returns: true
+```
+
+#### Parameters
+
+- `collection` (`Array | Record<string, any> | string | null | undefined`): The array, object, or string to search.
+- `target` (`any`): The value to find.
+- `fromIndex` (`number`, optional): The index to start searching from. Negative values count from the end. Default is `0`.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value exists, `false` otherwise.

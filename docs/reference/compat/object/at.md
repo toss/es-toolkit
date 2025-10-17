@@ -1,23 +1,69 @@
-# at (🚧 Documentation In Progress)
+# at (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use destructuring assignment instead
+
+This `at` function is relatively slow due to complex path processing and handling of various argument types.
+
+Instead, use destructuring assignment or direct property access.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Returns values at specified paths of an object as an array.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = at(object, ...paths);
+```
 
 ## Reference
 
-### `at(...args)`
+### `at(object, ...paths)`
 
-#### Signature
+Use `at` when you want to retrieve values from multiple paths in an object at once. It returns the values corresponding to each path as an array.
+
+```typescript
+import { at } from 'es-toolkit/compat';
+
+// Basic usage
+const object = { a: 1, b: 2, c: 3 };
+const result = at(object, 'a', 'c');
+// Returns: [1, 3]
+
+// Nested objects
+const nested = {
+  a: {
+    b: {
+      c: 4,
+    },
+  },
+  x: [1, 2, 3],
+};
+const result2 = at(nested, 'a.b.c', 'x[1]');
+// Returns: [4, 2]
+
+// Passing paths as an array
+const paths = ['a', 'c'];
+const result3 = at(object, paths);
+// Returns: [1, 3]
+
+// Non-existent paths
+const result4 = at(object, 'nonexistent', 'a');
+// Returns: [undefined, 1]
+```
+
+`null` or `undefined` objects return an empty array.
+
+```typescript
+import { at } from 'es-toolkit/compat';
+
+at(null, 'a', 'b'); // []
+at(undefined, 'a', 'b'); // []
+```
 
 #### Parameters
 
-### Returns
+- `object` (`T | null | undefined`): The object from which to retrieve values.
+- `...paths` (`Array<PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>>`): The paths of values to retrieve. Can be passed as individual arguments or as arrays.
+
+#### Returns
+
+(`unknown[]`): Returns an array of values corresponding to the specified paths.

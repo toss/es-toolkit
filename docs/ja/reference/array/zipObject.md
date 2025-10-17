@@ -1,39 +1,43 @@
 # zipObject
 
-2つの配列を1つのオブジェクトに結合します。最初の配列はプロパティ名を表し、2番目の配列は値を表します。
-
-プロパティ名を表す配列が値を表す配列よりも長い場合、値は`undefined`で埋められます。
-
-## インターフェース
+キー配列と値配列を受け取って1つのオブジェクトを作成します。
 
 ```typescript
-function zipObject<P extends string | number | symbol, V>(keys: P[], values: V[]): { [K in P]: V };
+const object = zipObject(keys, values);
 ```
 
-### パラメータ
+## 参照
 
-- `keys` (`P[]`): プロパティ名が含まれる配列です。
-- `values` (`V[]`): プロパティ名に対応する値が含まれる配列です。
+### `zipObject(keys, values)`
 
-### 戻り値
-
-(`{ [K in P]: V }`): 与えられたプロパティ名と値で構成される新しいオブジェクトです。
-
-## 例
+2つの配列を1つのオブジェクトに結合したい場合は `zipObject` を使用してください。最初の配列の要素がキーとなり、2番目の配列の要素が値となる新しいオブジェクトを返します。
 
 ```typescript
-const keys = ['a', 'b', 'c'];
-const values = [1, 2, 3];
-const result = zipObject(keys, values);
-// resultは { a: 1, b: 2, c: 3 } になります。
+import { zipObject } from 'es-toolkit/array';
 
-const keys2 = ['a', 'b', 'c'];
-const values2 = [1, 2];
-const result2 = zipObject(keys2, values2);
-// result2は { a: 1, b: 2, c: undefined } になります。
+// キーと値をオブジェクトにします。
+zipObject(['a', 'b', 'c'], [1, 2, 3]);
+// Returns: { a: 1, b: 2, c: 3 }
 
-const keys3 = ['a', 'b'];
-const values3 = [1, 2, 3];
-const result3 = zipObject(keys3, values3);
-// result3は { a: 1, b: 2 } になります。
+// キーの方が多い場合、undefinedが値になります。
+zipObject(['a', 'b', 'c', 'd'], [1, 2, 3]);
+// Returns: { a: 1, b: 2, c: 3, d: undefined }
 ```
+
+値配列の方が長い場合、余分な値は無視されます。
+
+```typescript
+import { zipObject } from 'es-toolkit/array';
+
+zipObject(['a', 'b'], [1, 2, 3, 4]);
+// Returns: { a: 1, b: 2 }
+```
+
+#### パラメータ
+
+- `keys` (`readonly P[]`): オブジェクトのキーとなる配列です。
+- `values` (`readonly V[]`): 各キーに対応する値の配列です。
+
+#### 戻り値
+
+(`Record<P, V>`): キーと値が結合された新しいオブジェクトを返します。

@@ -1,43 +1,58 @@
-# each
+# each (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.forEach`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `each` function operates slowly due to complex type processing and support for various collection types.
+
+Instead, use the faster and more modern `Array.prototype.forEach`.
+
 :::
 
-Iterates over properties of `object` invokes `callback` for each property.
+Performs an iteration operation on each element of an array or object.
 
-The iteration stops if the `callback` function returns `false`.
-
-This function is an alias for [forEach](./forEach.md).
-
-## Signature
-
-```ts
-function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => void): T;
+```typescript
+const result = each(collection, iteratee);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`T`): The object to iterate over.
-- `callback` (`(value: T[keyof T], key: T, object: T)`): The function invoked per iteration.
-  - `value`: The current property being processed in the object.
-  - `index`: The key of the current property being processed in the object.
-  - `object`: The object `each` was called upon.
+### `each(collection, iteratee)`
 
-### Returns
+Iterates through each element of an array, object, or string and executes the given function. For arrays, it iterates in index order; for objects, it iterates through enumerable properties.
 
-(`T`): The object `each` was called upon.
-
-## Examples
-
-```ts
+```typescript
 import { each } from 'es-toolkit/compat';
 
-const object = { a: 1, b: 2 };
-each(object, (value, key, object) => console.log(value, key));
-// Output:
-// 1 'a'
-// 2 'b'
+// Iterate array
+each([1, 2, 3], (value, index) => console.log(value, index));
+// Logs: 1 0, 2 1, 3 2
+
+// Iterate object
+each({ a: 1, b: 2 }, (value, key) => console.log(key, value));
+// Logs: 'a' 1, 'b' 2
+
+// Iterate string
+each('hello', (char, index) => console.log(char, index));
+// Logs: 'h' 0, 'e' 1, 'l' 2, 'l' 3, 'o' 4
 ```
+
+If the function returns `false`, iteration stops.
+
+```typescript
+import { each } from 'es-toolkit/compat';
+
+each([1, 2, 3, 4], value => {
+  console.log(value);
+  return value !== 2; // Stop at 2
+});
+// Logs: 1, 2
+```
+
+#### Parameters
+
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): The collection to iterate over.
+- `iteratee` (`(item: any, index: any, collection: any) => unknown`, optional): The function to execute for each element. Default is the `identity` function.
+
+#### Returns
+
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): Returns the original collection.

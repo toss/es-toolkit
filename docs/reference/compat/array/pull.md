@@ -1,23 +1,44 @@
-# pull (🚧 Documentation In Progress)
+# pull (Lodash compatibility)
 
-::: warning Implementation Complete - Documentation Coming Soon
-This function is fully implemented and ready to use, but documentation is still being written.
+::: warning Use [pull](../../array/pull.md) from `es-toolkit`
+
+This `pull` function is for Lodash compatibility and operates slower due to more complex type handling and overloading.
+
+Instead, use the faster and more modern [pull](../../array/pull.md) from `es-toolkit`.
+
 :::
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+Removes all specified values from the array.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Will be written.
+```typescript
+const result = pull(array, ...valuesToRemove);
+```
 
 ## Reference
 
-### `pull(...args)`
+### `pull(array, ...valuesToRemove)`
 
-#### Signature
+Removes all specified values from the array and modifies the original array. It directly modifies the original array without copying, which can save memory.
+
+```typescript
+import { pull } from 'es-toolkit/compat';
+
+// Remove specific values from number array
+const numbers = [1, 2, 3, 2, 4, 2, 5];
+pull(numbers, 2, 3);
+console.log(numbers); // [1, 4, 5]
+
+// Remove specific values from string array
+const fruits = ['apple', 'banana', 'apple', 'cherry'];
+pull(fruits, 'apple');
+console.log(fruits); // ['banana', 'cherry']
+```
 
 #### Parameters
 
-### Returns
+- `array` (`T[]`): The array to modify.
+- `...valuesToRemove` (`T[]`): The values to remove from the array.
+
+#### Returns
+
+(`T[]`): Returns the modified original array.

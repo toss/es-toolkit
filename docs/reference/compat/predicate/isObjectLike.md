@@ -1,4 +1,4 @@
-# isObjectLike (Lodash compatibility)
+# isObjectLike (Lodash Compatibility)
 
 Checks if a value is object-like.
 

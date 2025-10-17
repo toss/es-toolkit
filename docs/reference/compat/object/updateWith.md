@@ -1,14 +1,20 @@
-# updateWith
+# updateWith (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use direct assignment instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities.
+This `updateWith` function operates slowly due to complex path parsing and customizer handling.
+
+Use faster and more modern direct property assignment or optional chaining instead.
+
 :::
 
-Updates the value at the specified path of an object with the value returned by the `updater` function. If parts of the path don’t exist, you can use the `customizer` function to define how new objects should be created.
+Updates the value at the specified path of the object with an updater function, while controlling path creation with a customizer.
 
-## Signature
+```typescript
+const updated = updateWith(object, path, updater, customizer);
+```
+
+## Interface
 
 ```typescript
 function updateWith<T extends object | null | undefined>(
@@ -35,16 +41,22 @@ function updateWith<T extends object | null | undefined>(
 ```typescript
 import { updateWith } from 'es-toolkit/compat';
 
-const object = { a: [{ b: { c: 3 } }] };
+const object = {};
 
 // Use a customizer function to create custom path structures
-updateWith(object, '[0].a.b.c', n => (n as number) + 1, customizer);
-// => { '0': { a: { b: { c: 4 } } }, a: [{ b: { c: 3 } }] }
+updateWith(object, '[0][1]', () => 'a', Object);
+// => { '0': { '1': 'a' } }
 
-function customizer(value: unknown) {
-  if (value == null) {
-    return {};
+// Customize path creation
+updateWith(
+  object,
+  '[0][2]',
+  () => 'b',
+  value => {
+    if (typeof value === 'number') {
+      return [];
+    }
   }
-  return value;
-}
+);
+// => { '0': { '1': 'a', '2': 'b' } }
 ```

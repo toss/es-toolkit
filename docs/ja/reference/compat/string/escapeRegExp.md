@@ -1,23 +1,49 @@
-# escapeRegExp (🚧 ドキュメント作成中)
+# escapeRegExp (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit` の `escapeRegExp` を使用してください
+
+この `escapeRegExp` 関数は、文字列以外の入力値の処理により、動作が遅くなります。
+
+代わりに、より高速で現代的な `es-toolkit` の [escapeRegExp](../../string/escapeRegExp.md) を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+文字列内の正規表現特殊文字をエスケープします。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = escapeRegExp(str);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `escapeRegExp(str)`
 
-### `escapeRegExp(...args)`
+文字列内の正規表現特殊文字 `^`、`$`、`\`、`.`、`*`、`+`、`?`、`(`、`)`、`[`、`]`、`{`、`}`、`|` をエスケープします。動的に正規表現を生成する際に文字列を文字通り処理したい場合に便利です。
 
-#### インターフェース
+```typescript
+import { escapeRegExp } from 'es-toolkit/compat';
+
+escapeRegExp('[es-toolkit](https://es-toolkit.dev/)');
+// '\\[es-toolkit\\]\\(https://es-toolkit\\.dev/\\)'
+
+escapeRegExp('$^{}.+*?()[]|\\');
+// '\\$\\^\\{\\}\\.\\+\\*\\?\\(\\)\\[\\]\\|\\\\'
+```
+
+文字列以外の値も文字列に変換して処理します。
+
+```typescript
+import { escapeRegExp } from 'es-toolkit/compat';
+
+escapeRegExp(123); // '123'
+escapeRegExp(null); // ''
+escapeRegExp(undefined); // ''
+```
 
 #### パラメータ
 
-### 戻り値
+- `str` (`string`,オプション): 正規表現特殊文字をエスケープする文字列です。
+
+#### 戻り値
+
+(`string`): 正規表現特殊文字がエスケープされた文字列を返します。

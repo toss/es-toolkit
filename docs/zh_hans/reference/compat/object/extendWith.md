@@ -1,65 +1,61 @@
-# extendWith
+# extendWith (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.assign()` 和自定义函数
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `extendWith` 函数由于处理原型链中的继承属性和自定义合并逻辑,运行复杂且缓慢。
+
+请使用更快、更现代的 `Object.assign()` 和自定义函数。
+
 :::
 
-将 `source` 对象的属性值分配给 `object`。它还包括从原型链继承的属性。您可以提供 `getValueToAssign` 函数来决定每个属性应该分配什么值。
-
-在 `source` 和 `object` 中具有相同值的属性将不会被覆盖。
-
-您可以使用 `getValueToAssign` 函数来决定要分配给 `object` 的值。函数返回的值将被分配。如果未提供该函数，则默认使用 `identity` 函数。
-
-## 签名
+使用自定义函数将对象的自有属性和继承属性复制到另一个对象。
 
 ```typescript
-function extendWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function extendWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function extendWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function extendWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function extendWith(object: any, ...sources: any[]): any;
+const result = extendWith(object, source, customizer);
 ```
 
-### 参数
+## 参考
 
-- `object` (`any`): 将要分配属性的目标对象。
-- `sources` (`...any[]`): 其属性将被分配到目标对象的源对象。
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): 用于确定每个属性应分配什么值的函数。该函数返回的值将被分配给相应的属性。
+### `extendWith(object, ...sources, customizer)`
 
-### 返回值
-
-(`any`): 更新后的目标对象，其中包含源对象分配的属性。
-
-## 示例
+使用 `extendWith` 通过自定义逻辑合并对象属性。它类似于 `extend`,但允许您决定如何合并每个属性。此函数是 `assignInWith` 的别名。
 
 ```typescript
-const target = { a: 1 };
-const result = assignInWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { extendWith } from 'es-toolkit/compat';
+
+// 使用自定义合并逻辑复制属性
+const target = { a: 1, b: 2 };
+extendWith(target, { b: 3, c: 4 }, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// 返回值: { a: 1, b: 2, c: 4 }
+
+// 连接数组的自定义合并
+const obj1 = { a: [1, 2] };
+const obj2 = { a: [3, 4], b: [5, 6] };
+extendWith(obj1, obj2, (objValue, srcValue) => {
+  if (Array.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
+// 返回值: { a: [1, 2, 3, 4], b: [5, 6] }
 ```
+
+可以使用多个源对象。
+
+```typescript
+import { extendWith } from 'es-toolkit/compat';
+
+extendWith({ a: 1 }, { b: 2 }, { c: 3 }, (objValue, srcValue) => srcValue * 2);
+// 返回值: { a: 1, b: 4, c: 6 }
+```
+
+#### 参数
+
+- `object` (`any`): 接收属性的目标对象。
+- `...sources` (`any[]`): 提供属性的源对象。
+- `customizer` (`function`): 确定每个属性要分配的值的函数。它接收 `(objValue, srcValue, key, object, source)`。
+
+#### 返回值
+
+(`any`): 返回复制了属性的对象。第一个参数 `object` 会被修改。

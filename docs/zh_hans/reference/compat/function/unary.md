@@ -1,23 +1,46 @@
-# unary (🚧 文档写作中)
+# unary (Lodash 兼容性)
 
-::: warning 实现完成 - 文档写作中
-这个函数已经完全实现，可以使用了，但是文档还在写作中。
+::: warning 请使用 `es-toolkit` 的 `ary`
+
+此 `unary` 函数是作为 `ary` 函数的特殊情况实现的。如果您需要更多控制,直接使用 `es-toolkit` 的 [ary](../../function/ary.md) 会更高效。
+
+请改用更快、更现代的 `es-toolkit` 的 [ary](../../function/ary.md)。
+
 :::
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+限制函数最多接受一个参数。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将写作.
+```typescript
+const limitedFunc = unary(func);
+```
 
 ## 参考
 
-### `unary(...args)`
+### `unary(func)`
 
-#### 接口
+当您想限制函数最多接受一个参数时,请使用 `unary`。传递的任何额外参数都将被忽略。
+
+```typescript
+import { unary } from 'es-toolkit/compat';
+
+function greet(name, greeting, punctuation) {
+  return `${greeting} ${name}${punctuation}`;
+}
+
+// 转换为只接受第一个参数的函数
+const greetOne = unary(greet);
+greetOne('Alice', 'Hello', '!'); // 与 greet('Alice') 相同
+
+// 与数组的 map 函数一起使用时很有用
+const numbers = ['1', '2', '3'];
+numbers.map(parseInt); // [1, NaN, NaN] - 意外结果
+numbers.map(unary(parseInt)); // [1, 2, 3] - 正确结果
+```
 
 #### 参数
 
-### 返回值
+- `func` (`(...args: any[]) => any`): 要限制参数的函数。
+
+#### 返回值
+
+(`(...args: any[]) => any`): 返回最多接受一个参数的新函数。

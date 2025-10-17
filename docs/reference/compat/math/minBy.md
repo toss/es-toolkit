@@ -1,4 +1,4 @@
-# minBy (Lodash compatibility)
+# minBy (Lodash Compatibility)
 
 ::: warning Use [minBy](../../array/minBy.md) from es-toolkit
 

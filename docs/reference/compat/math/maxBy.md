@@ -1,4 +1,4 @@
-# maxBy (Lodash compatibility)
+# maxBy (Lodash Compatibility)
 
 ::: warning Use [maxBy](../../array/maxBy.md) from es-toolkit
 

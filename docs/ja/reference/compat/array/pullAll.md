@@ -1,35 +1,49 @@
-# pullAll
+# pullAll (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-配列から指定された値をすべて削除します。
-
-この関数は`arr`をその場で変更します。
-元の配列を変更せずに値を削除したい場合は、`difference`を使用します。
-
-## インターフェース
+指定された値を含む配列のすべての値を配列から削除します。
 
 ```typescript
-function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T>): T[];
+const result = pullAll(array, valuesToRemove);
 ```
 
-### パラメータ
+## 参照
 
-- `arr` (`T[]`): 変更する配列。
-- `valuesToRemove` (`ArrayLike<T>`): 配列から削除する値。
+### `pullAll(array, valuesToRemove)`
 
-### 戻り値
-
-(`T[]`): 指定された値が削除された修正済み配列。
-
-## 例
+`valuesToRemove` 配列に含まれるすべての値を配列から削除し、元の配列を変更します。`pull` 関数と似ていますが、削除する値を配列として受け取ります。
 
 ```typescript
-const numbers = [1, 2, 3, 4, 5, 2, 4];
-pullAll(numbers, [2, 4]);
-console.log(numbers); // [1, 3, 5]
+import { pullAll } from 'es-toolkit/compat';
+
+// 数値配列から特定の値を削除
+const numbers = [1, 2, 3, 2, 4, 2, 5];
+pullAll(numbers, [2, 3]);
+console.log(numbers); // [1, 4, 5]
+
+// 文字列配列から特定の値を削除
+const fruits = ['apple', 'banana', 'apple', 'cherry', 'banana'];
+pullAll(fruits, ['apple', 'banana']);
+console.log(fruits); // ['cherry']
 ```
+
+空の配列、`null`、または `undefined` を渡すと、何も削除されません。
+
+```typescript
+import { pullAll } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3];
+pullAll(numbers, []);
+console.log(numbers); // [1, 2, 3]
+
+pullAll(numbers, null);
+console.log(numbers); // [1, 2, 3]
+```
+
+#### パラメータ
+
+- `array` (`T[]`): 変更する配列です。
+- `valuesToRemove` (`ArrayLike<T>`, オプション): 配列から削除する値を含む配列です。デフォルトは `[]` です。
+
+#### 戻り値
+
+(`T[]`): 変更された元の配列を返します。

@@ -1,64 +1,68 @@
-# has
+# has (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.hasOwn` or `in` operator instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `has` function is slow due to complex path parsing and array index handling.
+
+Instead, use the faster and more modern `Object.hasOwn()` or the `in` operator.
+
 :::
 
-Checks if a given path exists within an object.
-
-You can provide the path as a single property key, an array of property keys,
-or a string representing a deep path.
-
-If the path is an index and the object is an array or an arguments object,
-the function will verify if the index is valid and within the bounds of the array
-or arguments object, even if the array or arguments object is sparse
-(i.e., not all indexes are defined).
-
-## Signature
+Checks if a property at the specified path exists in an object.
 
 ```typescript
-function has(object: unknown, path: string | number | symbol | Array<string | number | symbol>): boolean;
+const exists = has(object, path);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`unknown`): The object to query.
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): The path to check. This can be a single property key, an array of property keys, or a string representing a deep path.
+### `has(object, path)`
 
-### Returns
-
-(`boolean`): Returns `true` if the path exists in the object, `false` otherwise.
-
-## Examples
+Use `has` to check if an object has a property at a specific path. It only checks own properties and does not check inherited properties.
 
 ```typescript
 import { has } from 'es-toolkit/compat';
 
-const obj = { a: { b: { c: 3 } } };
+// Simple property check
+const object = { a: 1, b: 2 };
+has(object, 'a');
+// => true
 
-has(obj, 'a'); // true
-has(obj, ['a', 'b']); // true
-has(obj, ['a', 'b', 'c']); // true
-has(obj, 'a.b.c'); // true
-has(obj, 'a.b.d'); // false
-has(obj, ['a', 'b', 'c', 'd']); // false
-has([], 0); // false
-has([1, 2, 3], 2); // true
-has([1, 2, 3], 5); // false
+// Nested object check
+const nested = { a: { b: { c: 3 } } };
+has(nested, 'a.b.c');
+// => true
+has(nested, ['a', 'b', 'c']);
+// => true
+
+// Non-existent property
+has(nested, 'a.b.d');
+// => false
+
+// Array index check
+const array = [1, 2, 3];
+has(array, 2);
+// => true
+has(array, 5);
+// => false
 ```
 
-## Demo
+It works correctly with sparse arrays too.
 
-::: sandpack
-
-```ts index.ts
+```typescript
 import { has } from 'es-toolkit/compat';
 
-const obj = { a: { b: { c: 3 } } };
-
-console.log(has(obj, 'a.b.c'));
+const sparse = [1, , 3]; // index 1 is empty
+has(sparse, 0); // true
+has(sparse, 1); // false - no actual value
+has(sparse, 2); // true
 ```
 
-:::
+#### Parameters
+
+- `object` (`any`): The object to query.
+- `path` (`PropertyPath`): The path of the property to check. Can be represented as a string, number, symbol, or array.
+
+#### Returns
+
+(`boolean`): Returns `true` if the property exists at the path, otherwise `false`.

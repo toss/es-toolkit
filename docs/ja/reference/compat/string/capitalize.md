@@ -1,23 +1,48 @@
-# capitalize (🚧 ドキュメント作成中)
+# capitalize (Lodash 互換性)
 
-::: warning 実装完了 - ドキュメント作成中
-この関数は完全に実装されており、使用可能ですが、ドキュメントはまだ作成中です。
+::: warning `es-toolkit` の `capitalize` を使用してください
+
+この `capitalize` 関数は、文字列以外の入力値の処理により、動作が遅くなります。
+
+代わりに、より高速で現代的な `es-toolkit` の [capitalize](../../string/capitalize.md) を使用してください。
+
 :::
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+文字列の最初の文字を大文字に、残りの文字を小文字に変換します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+```typescript
+const result = capitalize(str);
+```
 
-作成中です。
+## 参照
 
-## レファレンス
+### `capitalize(str)`
 
-### `capitalize(...args)`
+文字列の最初の文字を大文字に、残りの文字を小文字に変換します。単語の第一印象を良くしたり、タイトル形式にする際に便利です。
 
-#### インターフェース
+```typescript
+import { capitalize } from 'es-toolkit/compat';
+
+capitalize('fred'); // 'Fred'
+capitalize('FRED'); // 'Fred'
+capitalize('fRED'); // 'Fred'
+```
+
+空文字列や文字列以外の値も処理できます。
+
+```typescript
+import { capitalize } from 'es-toolkit/compat';
+
+capitalize(''); // ''
+capitalize(123); // '123'
+capitalize(null); // ''
+capitalize(undefined); // ''
+```
 
 #### パラメータ
 
-### 戻り値
+- `str` (`string`,オプション): 最初の文字を大文字に変換する文字列です。
+
+#### 戻り値
+
+(`string`): 最初の文字が大文字で残りが小文字の文字列を返します。

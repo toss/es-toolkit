@@ -1,4 +1,4 @@
-# isRegExp (Lodash compatibility)
+# isRegExp (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isRegExp](../../predicate/isRegExp.md) instead
 

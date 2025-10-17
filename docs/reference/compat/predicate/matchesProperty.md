@@ -1,4 +1,4 @@
-# matchesProperty (Lodash compatibility)
+# matchesProperty (Lodash Compatibility)
 
 Creates a function that checks if a specific property matches a given value.
 

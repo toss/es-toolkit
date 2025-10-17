@@ -1,4 +1,4 @@
-# isError (Lodash compatibility)
+# isError (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isError](../../predicate/isError.md) instead
 This `isError` function operates slowly due to complex handling for Lodash compatibility.

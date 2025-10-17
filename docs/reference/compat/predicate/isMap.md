@@ -1,4 +1,4 @@
-# isMap (Lodash compatibility)
+# isMap (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [isMap](../../predicate/isMap.md) instead
 
