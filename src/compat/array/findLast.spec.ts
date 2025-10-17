@@ -165,9 +165,9 @@ describe('findLast', () => {
     expect(() => findLast({ a: 1, b: 2, c: 3 }, true)).toThrow('doesMatch is not a function');
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    expect(() => findLast({ a: 1, b: 2, c: 3 }, false)).toThrow('undefined is not a function');
-    expect(() => findLast([1, 2, 3], true)).toThrow('undefined is not a function');
-    expect(() => findLast([1, 2, 3], false)).toThrow('undefined is not a function');
+    expect(() => findLast({ a: 1, b: 2, c: 3 }, false)).toThrow('doesMatch is not a function');
+    expect(() => findLast([1, 2, 3], true)).toThrow('doesMatch is not a function');
+    expect(() => findLast([1, 2, 3], false)).toThrow('doesMatch is not a function');
   });
 
   it('should match the type of lodash', () => {
