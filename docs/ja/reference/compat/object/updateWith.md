@@ -11,52 +11,78 @@
 オブジェクトの指定されたパスにある値を更新関数で変更し、カスタマイザーでパスの作成を制御します。
 
 ```typescript
-const updated = updateWith(object, path, updater, customizer);
+const updated = updateWith(obj, path, updater, customizer);
 ```
 
-## インターフェース
+## 参照
+
+### `updateWith(obj, path, updater, customizer?)`
+
+`update` と似ていますが、パスが存在しない場合に作成される中間オブジェクトの形状をカスタマイザー関数で制御できます。
 
 ```typescript
-function updateWith<T extends object | null | undefined>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown,
-  customizer: (value: unknown) => unknown
-): T;
+import { updateWith } from 'es-toolkit/compat';
+
+// 基本動作（update と同じ）
+const object = { a: [{ b: { c: 3 } }] };
+updateWith(object, 'a[0].b.c', n => n * n);
+// => { a: [{ b: { c: 9 } }] }
+
+// 配列パスで更新
+updateWith(object, ['a', 0, 'b', 'c'], n => n + 10);
+// => { a: [{ b: { c: 13 } }] }
 ```
 
-### パラメータ
-
-- `obj` (`T`): 変更するオブジェクト。
-- `path` (`PropertyKey | readonly PropertyKey[]`): 更新するプロパティのパス。
-- `updater` (`(value: unknown) => unknown`): 更新された値を生成する関数。
-- `customizer` (`(value: unknown) => unknown`): 更新プロセスをカスタマイズする関数。
-
-### 戻り値
-
-(`T`): 変更されたオブジェクト。
-
-## 例
+カスタマイザーを使用して作成される中間オブジェクトの形状を制御できます。
 
 ```typescript
 import { updateWith } from 'es-toolkit/compat';
 
 const object = {};
 
-// カスタマイザー関数を使用してカスタムパス構造を作成
+// Object コンストラクタをカスタマイザーとして使用（配列の代わりにオブジェクトを作成）
 updateWith(object, '[0][1]', () => 'a', Object);
 // => { '0': { '1': 'a' } }
-
-// パス作成をカスタマイズ
-updateWith(
-  object,
-  '[0][2]',
-  () => 'b',
-  value => {
-    if (typeof value === 'number') {
-      return [];
-    }
-  }
-);
-// => { '0': { '1': 'a', '2': 'b' } }
+// （デフォルトの動作では { '0': ['a'] } になります）
 ```
+
+カスタマイザーは作成する値、キー、オブジェクトを引数として受け取ります。
+
+```typescript
+import { updateWith } from 'es-toolkit/compat';
+
+const customizer = (value: any, key: string, object: any) => {
+  // 数値キーの場合は配列ではなくオブジェクトを作成
+  if (!isNaN(Number(key))) {
+    return {};
+  }
+};
+
+const result = {};
+updateWith(result, '[0][1]', () => 'value', customizer);
+// => { '0': { '1': 'value' } }
+```
+
+パスが既に存在する場合、カスタマイザーは呼び出されません。
+
+```typescript
+import { updateWith } from 'es-toolkit/compat';
+
+const object = { a: { b: 1 } };
+updateWith(object, 'a.b', n => n * 2, () => {
+  console.log('Not called'); // 呼び出されません
+  return {};
+});
+// => { a: { b: 2 } }
+```
+
+#### パラメータ
+
+- `obj` (`T`): 変更するオブジェクトです。
+- `path` (`PropertyKey | readonly PropertyKey[]`): 更新するプロパティのパスです。文字列または配列で指定できます。
+- `updater` (`(oldValue: any) => any`): 既存の値を受け取って新しい値を返す関数です。
+- `customizer` (`(value: any, key: string, object: T) => any`, オプション): パスが存在しない場合に作成する中間オブジェクトを返す関数です。`undefined` を返すとデフォルトの動作を使用します。
+
+#### 戻り値
+
+(`T`): 変更されたオブジェクトを返します。

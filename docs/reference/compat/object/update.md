@@ -11,41 +11,58 @@ Use faster and more modern direct property assignment or optional chaining inste
 Updates the value at the specified path of the object with an updater function.
 
 ```typescript
-const updated = update(object, path, updater);
+const updated = update(obj, path, updater);
 ```
 
-## Interface
+## Reference
 
-```typescript
-function update<T extends object | null | undefined>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  updater: (value: unknown) => unknown
-): T;
-```
+### `update(obj, path, updater)`
 
-### Parameters
-
-- `obj` (`T`): The object to modify.
-- `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to update.
-- `updater` (`(value: unknown) => unknown`): The function to produce the updated value.
-
-### Returns
-
-(`T`): The modified object.
-
-## Examples
+Use `update` when you want to transform a value at a specific path in a nested object with a function. If the path doesn't exist, it will be created automatically.
 
 ```typescript
 import { update } from 'es-toolkit/compat';
 
+// Transform nested property value
 const object = { a: [{ b: { c: 3 } }] };
-
-// Update a value using an updater function
 update(object, 'a[0].b.c', n => (n as number) * 2);
 // => { a: [{ b: { c: 6 } }] }
 
-// Create a value if the path doesn't exist
-update({}, 'a.b[0]', () => 'c');
-// => { a: { b: ['c'] } }
+// Update with array path
+update(object, ['a', 0, 'b', 'c'], n => (n as number) + 10);
+// => { a: [{ b: { c: 13 } }] }
 ```
+
+If the path doesn't exist, the necessary nested structure is created automatically.
+
+```typescript
+import { update } from 'es-toolkit/compat';
+
+// Create nested structure in empty object
+update({}, 'a.b.c', () => 'hello');
+// => { a: { b: { c: 'hello' } } }
+
+// Arrays are also created automatically
+update({}, 'a.b[0]', () => 'value');
+// => { a: { b: ['value'] } }
+```
+
+You can calculate new values based on existing values.
+
+```typescript
+import { update } from 'es-toolkit/compat';
+
+const stats = { score: 100 };
+update(stats, 'score', score => score * 1.1); // Increase by 10%
+// => { score: 110 }
+```
+
+#### Parameters
+
+- `obj` (`object`): The object to modify.
+- `path` (`PropertyKey | PropertyKey[]`): The path of the property to update. Can be specified as a string or array.
+- `updater` (`(value: any) => any`): A function that receives the existing value and returns the new value.
+
+#### Returns
+
+(`any`): Returns the modified object.

@@ -10,16 +10,47 @@ If you're not looking for `NaN`, use the faster `Array.prototype.indexOf`. To fi
 
 Finds the index of the first occurrence of a given element in an array.
 
-Works almost the same as `Array.prototype.indexOf`, but can find `NaN` values.
-Uses strict equality (`===`) when comparing elements other than `NaN`.
-
-## Interface
-
 ```typescript
-function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
+const index = indexOf(array, searchElement, fromIndex);
 ```
 
-### Parameters
+## Reference
+
+### `indexOf(array, searchElement, fromIndex?)`
+
+Works almost the same as `Array.prototype.indexOf`, but can find `NaN` values. Use this when you need to find the position of a specific value in an array.
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+// Find element in number array
+const array = [1, 2, 3, 4];
+indexOf(array, 3); // => 2
+
+// Find NaN value (Array.prototype.indexOf cannot find it)
+const arrayWithNaN = [1, 2, NaN, 4];
+indexOf(arrayWithNaN, NaN); // => 2
+```
+
+You can start searching from a specific index.
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+const array = [1, 2, 3, 1, 2, 3];
+indexOf(array, 2, 2); // => 4 (start searching from index 2)
+```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+indexOf(null, 1); // => -1
+indexOf(undefined, 1); // => -1
+```
+
+#### Parameters
 
 - `array` (`T[]`): The array to search.
 
@@ -33,16 +64,8 @@ To ensure full compatibility with lodash, the `indexOf` function handles `array`
 :::
 
 - `searchElement` (`T`): The value to find.
-- `fromIndex` (`number`, optional): The index to start searching from.
+- `fromIndex` (`number`, optional): The index to start searching from. If negative, it's calculated from the end of the array. Defaults to `0`.
 
 #### Returns
 
-(`number`): The index of the first element in the array that matches the given value. Returns `-1` if no matching element is found.
-
-## Examples
-
-```typescript
-const array = [1, 2, 3, NaN];
-indexOf(array, 3); // => 2
-indexOf(array, NaN); // => 3
-```
+(`number`): Returns the index of the first element in the array that matches the given value. Returns `-1` if no matching element is found.

@@ -10,13 +10,46 @@ Use the faster and more modern `Array.prototype.join()` instead.
 
 Joins the elements of an array into a string.
 
-## Interface
-
 ```typescript
-function join<T>(array: T[], separator?: string): string;
+const result = join(array, separator);
 ```
 
-### Parameters
+## Reference
+
+### `join(array, separator?)`
+
+Use `join` to combine all elements of an array into a single string. It connects each element with a separator.
+
+```typescript
+import { join } from 'es-toolkit/compat';
+
+// Join string array
+const arr = ['a', 'b', 'c'];
+join(arr, '~'); // => "a~b~c"
+
+// Join number array
+const numbers = [1, 2, 3];
+join(numbers, '-'); // => "1-2-3"
+```
+
+If you omit the separator, comma (`,`) is used by default.
+
+```typescript
+import { join } from 'es-toolkit/compat';
+
+join(['a', 'b', 'c']); // => "a,b,c"
+```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { join } from 'es-toolkit/compat';
+
+join(null, '-'); // => ""
+join(undefined, '-'); // => ""
+```
+
+#### Parameters
 
 - `array` (`T[]`) - The array to join.
 
@@ -29,16 +62,8 @@ To ensure full compatibility with lodash, the `join` function processes `array` 
 
 :::
 
-- `separator` (`string`) - The separator used to join the elements. Defaults to `,`.
+- `separator` (`string`, optional) - The separator used to join the elements. Defaults to `,`.
 
 #### Returns
 
-(`string`): A string containing all elements of the array joined by the specified separator.
-
-## Examples
-
-```typescript
-const arr = ['a', 'b', 'c'];
-const result = join(arr, '~');
-console.log(result); // Output: "a~b~c"
-```
+(`string`): Returns a string containing all elements of the array joined by the specified separator.

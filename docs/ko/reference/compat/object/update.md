@@ -11,37 +11,58 @@
 객체의 지정된 경로에 있는 값을 업데이터 함수로 수정해요.
 
 ```typescript
-const updated = update(object, path, updater);
+const updated = update(obj, path, updater);
 ```
 
-## 인터페이스
+## 레퍼런스
 
-```typescript
-function update(obj: object, path: PropertyKey | PropertyKey[], updater: (value: any) => any): any;
-```
+### `update(obj, path, updater)`
 
-### 파라미터
-
-- `obj` (`object`): 수정할 객체.
-- `path` (`PropertyKey | PropertyKey[]`): 업데이트할 속성의 경로.
-- `updater` (`(value: any) => any`): 업데이트된 값을 생성하는 함수.
-
-#### 반환 값
-
-(`any`): 수정된 객체.
-
-## 예시
+중첩된 객체의 특정 경로에 있는 값을 함수로 변환하고 싶을 때 `update`를 사용하세요. 경로가 존재하지 않으면 자동으로 생성돼요.
 
 ```typescript
 import { update } from 'es-toolkit/compat';
 
+// 중첩 속성 값 변환
 const object = { a: [{ b: { c: 3 } }] };
-
-// 업데이터 함수를 사용하여 값 업데이트하기
 update(object, 'a[0].b.c', n => (n as number) * 2);
 // => { a: [{ b: { c: 6 } }] }
 
-// 경로가 존재하지 않는 경우 값 생성하기
-update({}, 'a.b[0]', () => 'c');
-// => { a: { b: ['c'] } }
+// 배열 경로로 업데이트
+update(object, ['a', 0, 'b', 'c'], n => (n as number) + 10);
+// => { a: [{ b: { c: 13 } }] }
 ```
+
+경로가 존재하지 않으면 필요한 중첩 구조를 자동으로 생성해요.
+
+```typescript
+import { update } from 'es-toolkit/compat';
+
+// 빈 객체에서 중첩 구조 생성
+update({}, 'a.b.c', () => 'hello');
+// => { a: { b: { c: 'hello' } } }
+
+// 배열도 자동 생성
+update({}, 'a.b[0]', () => 'value');
+// => { a: { b: ['value'] } }
+```
+
+기존 값을 기반으로 새로운 값을 계산할 수 있어요.
+
+```typescript
+import { update } from 'es-toolkit/compat';
+
+const stats = { score: 100 };
+update(stats, 'score', score => score * 1.1); // 10% 증가
+// => { score: 110 }
+```
+
+#### 파라미터
+
+- `obj` (`object`): 수정할 객체예요.
+- `path` (`PropertyKey | PropertyKey[]`): 업데이트할 속성의 경로예요. 문자열이나 배열로 지정할 수 있어요.
+- `updater` (`(value: any) => any`): 기존 값을 받아서 새로운 값을 반환하는 함수예요.
+
+#### 반환 값
+
+(`any`): 수정된 객체를 반환해요.

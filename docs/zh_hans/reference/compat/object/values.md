@@ -11,28 +11,68 @@
 返回对象自身可枚举属性值的数组。
 
 ```typescript
-const valueArray = values(object);
+const valueArray = values(obj);
 ```
 
-## 签名
+## 参考
+
+### `values(obj)`
+
+当您想要将对象的所有属性值作为数组获取时，使用 `values`。它与 `Object.values` 相同，但可以安全地处理 `null` 或 `undefined`。
 
 ```typescript
-function values<T>(object: Record<PropertyKey, T> | null | undefined): T[];
-function values<T>(arr: ArrayLike<T>): T[];
-function values<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
-```
+import { values } from 'es-toolkit/compat';
 
-### 参数
-
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): 要查询属性值的对象。
-
-### 返回值
-
-(`T[]`): 属性值的数组。
-
-## 示例
-
-```typescript
+// 获取对象值
 const obj = { a: 1, b: 2, c: 3 };
 values(obj); // => [1, 2, 3]
+
+// 具有数字键的对象
+const numberKeyObj = { 0: 'a', 1: 'b', 2: 'c' };
+values(numberKeyObj); // => ['a', 'b', 'c']
 ```
+
+也可以处理数组或类数组对象。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+// 数组
+values([1, 2, 3]); // => [1, 2, 3]
+
+// 字符串（类数组对象）
+values('hello'); // => ['h', 'e', 'l', 'l', 'o']
+```
+
+`null` 或 `undefined` 会被视为空数组。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+values(null); // => []
+values(undefined); // => []
+```
+
+仅返回可枚举属性。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+const obj = Object.create(
+  { inherited: 'not included' },
+  {
+    own: { value: 'included', enumerable: true },
+    nonEnum: { value: 'not included', enumerable: false }
+  }
+);
+
+values(obj); // => ['included']
+```
+
+#### 参数
+
+- `obj` (`Record<PropertyKey, T> | ArrayLike<T> | null | undefined`): 要获取属性值的对象。
+
+#### 返回值
+
+(`T[]`): 返回对象的可枚举属性值数组。

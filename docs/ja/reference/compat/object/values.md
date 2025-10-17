@@ -11,28 +11,68 @@
 オブジェクトの自身の列挙可能なプロパティ値の配列を返します。
 
 ```typescript
-const valueArray = values(object);
+const valueArray = values(obj);
 ```
 
-## インターフェース
+## 参照
+
+### `values(obj)`
+
+オブジェクトのすべてのプロパティ値を配列として取得したい場合に `values` を使用してください。`Object.values` と同じように動作しますが、`null` または `undefined` を安全に処理します。
 
 ```typescript
-function values<T>(object: Record<PropertyKey, T> | null | undefined): T[];
-function values<T>(arr: ArrayLike<T>): T[];
-function values<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
-```
+import { values } from 'es-toolkit/compat';
 
-### パラメータ
-
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): プロパティ値を取得するオブジェクト。
-
-### 戻り値
-
-(`T[]`): プロパティ値の配列。
-
-## 例
-
-```typescript
+// オブジェクトの値を取得
 const obj = { a: 1, b: 2, c: 3 };
 values(obj); // => [1, 2, 3]
+
+// 数値キーを持つオブジェクト
+const numberKeyObj = { 0: 'a', 1: 'b', 2: 'c' };
+values(numberKeyObj); // => ['a', 'b', 'c']
 ```
+
+配列や配列風のオブジェクトも処理できます。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+// 配列
+values([1, 2, 3]); // => [1, 2, 3]
+
+// 文字列（配列風のオブジェクト）
+values('hello'); // => ['h', 'e', 'l', 'l', 'o']
+```
+
+`null` または `undefined` は空の配列として処理されます。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+values(null); // => []
+values(undefined); // => []
+```
+
+列挙可能なプロパティのみが返されます。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+const obj = Object.create(
+  { inherited: 'not included' },
+  {
+    own: { value: 'included', enumerable: true },
+    nonEnum: { value: 'not included', enumerable: false }
+  }
+);
+
+values(obj); // => ['included']
+```
+
+#### パラメータ
+
+- `obj` (`Record<PropertyKey, T> | ArrayLike<T> | null | undefined`): プロパティ値を取得するオブジェクトです。
+
+#### 戻り値
+
+(`T[]`): オブジェクトの列挙可能なプロパティ値の配列を返します。
