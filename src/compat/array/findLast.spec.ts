@@ -169,7 +169,7 @@ describe('findLast', () => {
     expect(findLast('123')).toBe('3');
     expect(findLast(args)).toBe(3);
   });
-  
+
   it('should throw error when boolean predicate is used', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
