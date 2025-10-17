@@ -6,9 +6,11 @@
 从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
 :::
 
-使用给定的比较函数对 `target` 和 `source` 进行深度比较以确定它们是否匹配。比较函数可以用来精细控制匹配逻辑。
+使用给定的比较函数通过执行部分深度比较来检查目标是否包含源中的所有属性和值。比较函数可以用来精细控制匹配逻辑。
 
 该函数会递归遍历两个值，对每个属性-值对调用自定义比较函数。如果比较函数返回布尔值，则直接使用该结果；如果返回 `undefined`，则使用 [isMatch](./isMatch.md) 中的默认比较函数。
+
+当源中的所有属性/元素都存在于目标中且匹配时返回 `true`。目标可以拥有比源更多的属性/元素。
 
 不同数据类型的比较方式如下：
 
@@ -36,8 +38,8 @@ function isMatchWith(
 
 ### 参数
 
-- `target` (`unknown`): 要检查匹配的值
-- `source` (`unknown`): 要匹配的模式/模板
+- `target` (`unknown`): 要检查的目标值
+- `source` (`unknown`): 包含应存在于目标中的属性/值的源模式
 - `compare` (`function`, 可选): 可选的自定义比较函数。接收以下参数:
   - `objValue`: 当前路径的 target 值
   - `srcValue`: 当前路径的 source 值
@@ -49,7 +51,7 @@ function isMatchWith(
 
 ### 返回值
 
-(`boolean`): 如果对象匹配则返回 `true`，否则返回 `false`。
+(`boolean`): 如果目标包含源中的所有属性/元素，则返回 `true`，否则返回 `false`。
 
 ## 示例
 
