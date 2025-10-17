@@ -25,17 +25,17 @@ import { mapValues } from 'es-toolkit/compat';
 
 // オブジェクトの値を変換
 const obj = { a: 1, b: 2, c: 3 };
-const doubled = mapValues(obj, (value) => value * 2);
+const doubled = mapValues(obj, value => value * 2);
 // 結果: { a: 2, b: 4, c: 6 }
 
 // 文字列を大文字に変換
 const names = { first: 'john', last: 'doe' };
-const uppercased = mapValues(names, (value) => value.toUpperCase());
+const uppercased = mapValues(names, value => value.toUpperCase());
 // 結果: { first: 'JOHN', last: 'DOE' }
 
 // 文字列の各文字を変換
 const str = 'abc';
-const charMap = mapValues(str, (char) => char.toUpperCase());
+const charMap = mapValues(str, char => char.toUpperCase());
 // 結果: { '0': 'A', '1': 'B', '2': 'C' }
 
 // 配列をオブジェクトに変換
@@ -46,7 +46,7 @@ const arrMap = mapValues(arr, (value, index) => value + index);
 // プロパティパスで値を抽出
 const users = {
   user1: { profile: { name: 'Alice' } },
-  user2: { profile: { name: 'Bob' } }
+  user2: { profile: { name: 'Bob' } },
 };
 const userNames = mapValues(users, 'profile.name');
 // 結果: { user1: 'Alice', user2: 'Bob' }

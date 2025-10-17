@@ -17,12 +17,12 @@ import { omitBy } from 'es-toolkit/object';
 
 // Exclude properties with string values
 const obj = { a: 1, b: 'remove', c: 3, d: 'also remove' };
-const result = omitBy(obj, (value) => typeof value === 'string');
+const result = omitBy(obj, value => typeof value === 'string');
 // result is { a: 1, c: 3 }
 
 // Exclude only even values
 const numbers = { a: 1, b: 2, c: 3, d: 4 };
-const odds = omitBy(numbers, (value) => value % 2 === 0);
+const odds = omitBy(numbers, value => value % 2 === 0);
 // odds is { a: 1, c: 3 }
 
 // Use both key and value

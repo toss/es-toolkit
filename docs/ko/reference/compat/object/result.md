@@ -31,14 +31,16 @@ const value = result(obj, 'a.b.c');
 // 함수 자동 호출
 const objWithFunc = {
   compute: () => ({ value: 42 }),
-  getValue: function() { return this.compute().value; }
+  getValue: function () {
+    return this.compute().value;
+  },
 };
 const computed = result(objWithFunc, 'getValue');
 // 결과: 42 (getValue 함수가 호출됨)
 
 // 경로상의 함수 호출
 const nested = {
-  data: () => ({ user: { getName: () => 'John' } })
+  data: () => ({ user: { getName: () => 'John' } }),
 };
 const name = result(nested, 'data.user.getName');
 // 결과: 'John' (data()와 getName() 모두 호출됨)
@@ -57,7 +59,7 @@ const arrayPath = result(objWithFunc, ['getValue']);
 // 결과: 42
 
 // 동적 기본값
-const dynamic = result(incomplete, 'missing.path', function() {
+const dynamic = result(incomplete, 'missing.path', function () {
   return `Generated at ${new Date().toISOString()}`;
 });
 // 결과: 현재 시간이 포함된 문자열
@@ -70,7 +72,9 @@ import { result } from 'es-toolkit/compat';
 
 const calculator = {
   multiplier: 2,
-  compute: function() { return 10 * this.multiplier; }
+  compute: function () {
+    return 10 * this.multiplier;
+  },
 };
 
 const calculatedValue = result(calculator, 'compute');

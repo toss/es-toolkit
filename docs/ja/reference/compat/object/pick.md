@@ -35,7 +35,7 @@ const result2 = pick(obj, 'a', 'c');
 // 深いパスを選択
 const nested = {
   user: { profile: { name: 'John', age: 30 }, settings: { theme: 'dark' } },
-  admin: true
+  admin: true,
 };
 const userInfo = pick(nested, 'user.profile.name', 'admin');
 // 結果: { user: { profile: { name: 'John' } }, admin: true }
@@ -47,8 +47,8 @@ const selected = pick(mixed, ['a', 'b'], 'c', 'd.e');
 
 // ドット表記キーと実際のドット付きキーを区別
 const ambiguous = {
-  'a.b': 1,           // 実際のキー 'a.b'
-  a: { b: 2, c: 3 }   // ネストされたオブジェクト
+  'a.b': 1, // 実際のキー 'a.b'
+  a: { b: 2, c: 3 }, // ネストされたオブジェクト
 };
 const dotKey = pick(ambiguous, 'a.b');
 // 結果: { 'a.b': 1 } (実際のキーが優先)

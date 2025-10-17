@@ -27,7 +27,7 @@ throw new AbortError('File upload was canceled');
 An example of using it with AbortSignal.
 
 ```typescript
-import { delay, AbortError } from 'es-toolkit';
+import { AbortError, delay } from 'es-toolkit';
 
 async function fetchData(signal: AbortSignal) {
   try {

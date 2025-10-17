@@ -35,12 +35,12 @@ function getEnvironmentInfo() {
     return {
       platform: process.platform,
       nodeVersion: process.version,
-      environment: 'Node.js'
+      environment: 'Node.js',
     };
   } else {
     return {
       userAgent: navigator.userAgent,
-      environment: 'Browser'
+      environment: 'Browser',
     };
   }
 }

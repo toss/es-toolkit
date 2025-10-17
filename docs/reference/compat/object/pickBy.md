@@ -25,12 +25,12 @@ import { pickBy } from 'es-toolkit/compat';
 
 // Select only values of specific type
 const data = { a: 1, b: 'keep', c: 3, d: 'select' };
-const strings = pickBy(data, (value) => typeof value === 'string');
+const strings = pickBy(data, value => typeof value === 'string');
 // Result: { b: 'keep', d: 'select' }
 
 // Select properties based on condition
 const user = { id: 1, name: 'John', age: 0, active: true, email: '' };
-const validData = pickBy(user, (value) => Boolean(value));
+const validData = pickBy(user, value => Boolean(value));
 // Result: { id: 1, name: 'John', active: true } (only truthy values)
 
 // Filter by key name
@@ -40,12 +40,12 @@ const userOnly = pickBy(settings, (value, key) => key.startsWith('user'));
 
 // Select only number properties
 const mixed = { str: 'hello', num1: 42, bool: true, num2: 0, obj: {} };
-const numbersOnly = pickBy(mixed, (value) => typeof value === 'number');
+const numbersOnly = pickBy(mixed, value => typeof value === 'number');
 // Result: { num1: 42, num2: 0 }
 
 // Can also be used with arrays
 const arr = [1, 2, 3, 4, 5];
-const evens = pickBy(arr, (value) => value % 2 === 0);
+const evens = pickBy(arr, value => value % 2 === 0);
 // Result: { '1': 2, '3': 4 } (indices and values of even numbers)
 
 // Utilize value, key, and original object

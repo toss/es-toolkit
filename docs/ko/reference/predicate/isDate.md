@@ -56,7 +56,7 @@ function validateBirthDate(value: unknown): boolean {
   if (isDate(value)) {
     const now = new Date();
     const minAge = new Date(now.getFullYear() - 150, now.getMonth(), now.getDate());
-    
+
     return value <= now && value >= minAge;
   }
   return false;
@@ -70,4 +70,3 @@ function validateBirthDate(value: unknown): boolean {
 #### 반환 값
 
 (`value is Date`): 값이 Date 객체이면 `true`, 그렇지 않으면 `false`를 반환해요.
-

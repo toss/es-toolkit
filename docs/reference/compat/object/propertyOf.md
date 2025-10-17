@@ -36,7 +36,7 @@ const age = getValue('age');
 // Deep path access
 const complexData = {
   user: { profile: { name: 'Alice', age: 25 } },
-  settings: { theme: 'dark', lang: 'en' }
+  settings: { theme: 'dark', lang: 'en' },
 };
 const getComplexValue = propertyOf(complexData);
 

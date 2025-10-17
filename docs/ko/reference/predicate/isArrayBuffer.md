@@ -48,10 +48,10 @@ import { isArrayBuffer } from 'es-toolkit/predicate';
 // 파일 읽기 결과 처리
 async function processFileData(file: File) {
   const result = await file.arrayBuffer();
-  
+
   if (isArrayBuffer(result)) {
     console.log(`파일 크기: ${result.byteLength} 바이트`);
-    
+
     // 바이너리 데이터 처리
     const view = new DataView(result);
     const header = view.getUint32(0, true);

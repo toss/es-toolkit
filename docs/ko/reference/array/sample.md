@@ -29,7 +29,7 @@ const randomFruit = sample(fruits);
 const users = [
   { name: 'Alice', age: 25 },
   { name: 'Bob', age: 30 },
-  { name: 'Charlie', age: 35 }
+  { name: 'Charlie', age: 35 },
 ];
 const randomUser = sample(users);
 // Returns: 세 명의 사용자 중 무작위로 하나

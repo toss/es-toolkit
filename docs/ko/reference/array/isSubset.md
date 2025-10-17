@@ -21,7 +21,7 @@ const subset = [2, 3, 4];
 isSubset(numbers, subset);
 // Returns: true
 
-// 문자열 배열에서 부분집합 확인  
+// 문자열 배열에서 부분집합 확인
 const permissions = ['read', 'write', 'delete', 'admin'];
 const userPermissions = ['read', 'write'];
 isSubset(permissions, userPermissions);

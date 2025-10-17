@@ -24,7 +24,11 @@ const result = fromPairs(pairs);
 import { fromPairs } from 'es-toolkit/compat';
 
 // 基本的なキーと値のペアの変換
-const pairs = [['a', 1], ['b', 2], ['c', 3]];
+const pairs = [
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+];
 const result = fromPairs(pairs);
 // 結果: { a: 1, b: 2, c: 3 }
 
@@ -32,13 +36,16 @@ const result = fromPairs(pairs);
 const mixedPairs = [
   ['name', 'John'],
   ['age', 30],
-  ['active', true]
+  ['active', true],
 ];
 const user = fromPairs(mixedPairs);
 // 結果: { name: 'John', age: 30, active: true }
 
 // Mapから変換
-const map = new Map([['x', 10], ['y', 20]]);
+const map = new Map([
+  ['x', 10],
+  ['y', 20],
+]);
 const coords = fromPairs(map);
 // 結果: { x: 10, y: 20 }
 ```

@@ -16,12 +16,12 @@ const result = isFunction(value);
 import { isFunction } from 'es-toolkit/predicate';
 
 // 一般函数
-console.log(isFunction(function() {})); // true
+console.log(isFunction(function () {})); // true
 console.log(isFunction(() => {})); // true
 console.log(isFunction(Array.prototype.slice)); // true
 
 // 异步函数
-console.log(isFunction(async function() {})); // true
+console.log(isFunction(async function () {})); // true
 console.log(isFunction(async () => {})); // true
 
 // 生成器函数
@@ -65,7 +65,7 @@ console.log(isFunction(null)); // false
 console.log(isFunction(undefined)); // false
 
 // 看起来像函数但不是函数的值
-console.log(isFunction({ call: function() {} })); // false
+console.log(isFunction({ call: function () {} })); // false
 ```
 
 在回调函数验证或动态函数调用中很有用：
@@ -101,7 +101,7 @@ const utils = {
       this.data = this.data.map(fn);
     }
     return this;
-  }
+  },
 };
 ```
 

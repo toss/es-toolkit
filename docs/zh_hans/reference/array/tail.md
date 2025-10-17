@@ -42,7 +42,11 @@ tail(empty);
 // Returns: []
 
 // 也可以处理嵌套数组。
-const nested = [[1, 2], [3, 4], [5, 6]];
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
 tail(nested);
 // Returns: [[3, 4], [5, 6]]
 
@@ -50,7 +54,7 @@ tail(nested);
 const users = [
   { id: 1, name: 'Alice' },
   { id: 2, name: 'Bob' },
-  { id: 3, name: 'Charlie' }
+  { id: 3, name: 'Charlie' },
 ];
 tail(users);
 // Returns: [{ id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]

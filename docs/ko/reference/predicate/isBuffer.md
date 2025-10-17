@@ -35,7 +35,7 @@ function processData(data: unknown) {
     // data는 Buffer로 타입이 좁혀져요
     console.log(`Buffer 크기: ${data.length} 바이트`);
     console.log(`Buffer 내용: ${data.toString('utf8')}`);
-    
+
     // Buffer 메서드를 안전하게 사용할 수 있어요
     const slice = data.slice(0, 10);
   }
@@ -74,4 +74,3 @@ function handleNetworkData(chunk: unknown) {
 #### 반환 값
 
 (`boolean`): 값이 Buffer 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.
-

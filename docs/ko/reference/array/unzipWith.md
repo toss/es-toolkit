@@ -19,7 +19,7 @@ import { unzipWith } from 'es-toolkit/array';
 const numbers = [
   [1, 2],
   [3, 4],
-  [5, 6]
+  [5, 6],
 ];
 const sums = unzipWith(numbers, (a, b, c) => a + b + c);
 console.log(sums); // [9, 12] (1+3+5=9, 2+4+6=12)
@@ -28,7 +28,7 @@ console.log(sums); // [9, 12] (1+3+5=9, 2+4+6=12)
 const words = [
   ['hello', 'world'],
   ['foo', 'bar'],
-  ['es', 'toolkit']
+  ['es', 'toolkit'],
 ];
 const combined = unzipWith(words, (a, b, c) => a + b + c);
 console.log(combined); // ['hellofoes', 'worldbartoolkit']
@@ -37,11 +37,9 @@ console.log(combined); // ['hellofoes', 'worldbartoolkit']
 const scores = [
   [{ score: 80 }, { score: 90 }],
   [{ score: 85 }, { score: 95 }],
-  [{ score: 75 }, { score: 88 }]
+  [{ score: 75 }, { score: 88 }],
 ];
-const averages = unzipWith(scores, (a, b, c) => 
-  (a.score + b.score + c.score) / 3
-);
+const averages = unzipWith(scores, (a, b, c) => (a.score + b.score + c.score) / 3);
 console.log(averages); // [80, 91] (80+85+75)/3, (90+95+88)/3
 ```
 
@@ -53,7 +51,7 @@ import { unzipWith } from 'es-toolkit/array';
 const mixed = [
   [1, 4],
   [2, 5],
-  [3] // 길이가 다름
+  [3], // 길이가 다름
 ];
 const result = unzipWith(mixed, (a, b, c) => {
   // c는 undefined가 될 수 있어요

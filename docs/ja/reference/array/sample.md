@@ -29,7 +29,7 @@ const randomFruit = sample(fruits);
 const users = [
   { name: 'Alice', age: 25 },
   { name: 'Bob', age: 30 },
-  { name: 'Charlie', age: 35 }
+  { name: 'Charlie', age: 35 },
 ];
 const randomUser = sample(users);
 // Returns: 3人のユーザーから無作為に1人

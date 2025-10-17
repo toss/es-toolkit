@@ -39,11 +39,11 @@ import { differenceWith } from 'es-toolkit/array';
 const users1 = [
   { name: 'Alice', age: 30 },
   { name: 'Bob', age: 25 },
-  { name: 'Charlie', age: 35 }
+  { name: 'Charlie', age: 35 },
 ];
 const users2 = [
   { name: 'Alice', age: 31 }, // 나이가 달라도 이름이 같으면 같은 사용자
-  { name: 'David', age: 25 }
+  { name: 'David', age: 25 },
 ];
 
 const areUsersEqual = (a, b) => a.name === b.name;

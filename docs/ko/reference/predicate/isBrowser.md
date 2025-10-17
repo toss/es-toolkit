@@ -72,4 +72,3 @@ function getStoredValue(key: string) {
 #### 반환 값
 
 (`boolean`): 현재 환경이 브라우저이면 `true`, 그렇지 않으면 `false`를 반환해요.
-

@@ -44,4 +44,3 @@ function handleError(value: unknown) {
 #### 반환 값
 
 (`value is Error`): 값이 `Error` 객체이면 `true`, 아니면 `false`를 반환해요.
-

@@ -27,7 +27,7 @@ throw new AbortError('파일 업로드가 취소되었어요');
 AbortSignal과 함께 사용하는 예시예요.
 
 ```typescript
-import { delay, AbortError } from 'es-toolkit';
+import { AbortError, delay } from 'es-toolkit';
 
 async function fetchData(signal: AbortSignal) {
   try {

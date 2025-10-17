@@ -56,18 +56,10 @@ leading と trailing オプションを調整できます。
 import { throttle } from 'es-toolkit/function';
 
 // leading のみ有効 (開始時のみ実行)
-const leadingOnly = throttle(
-  () => console.log('Leading only'),
-  1000,
-  { edges: ['leading'] }
-);
+const leadingOnly = throttle(() => console.log('Leading only'), 1000, { edges: ['leading'] });
 
 // trailing のみ有効 (終了時のみ実行)
-const trailingOnly = throttle(
-  () => console.log('Trailing only'),
-  1000,
-  { edges: ['trailing'] }
-);
+const trailingOnly = throttle(() => console.log('Trailing only'), 1000, { edges: ['trailing'] });
 
 leadingOnly(); // 即座に実行
 leadingOnly(); // 無視されます
@@ -83,10 +75,7 @@ trailingOnly(); // 1秒後に実行されます
 ```typescript
 import { throttle } from 'es-toolkit/function';
 
-const throttledFunc = throttle(
-  () => console.log('実行されました'),
-  1000
-);
+const throttledFunc = throttle(() => console.log('実行されました'), 1000);
 
 throttledFunc(); // 即座に実行
 throttledFunc(); // 待機中

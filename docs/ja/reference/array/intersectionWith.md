@@ -16,13 +16,22 @@ const result = intersectionWith(firstArr, secondArr, areItemsEqual);
 import { intersectionWith } from 'es-toolkit/array';
 
 // オブジェクトのidプロパティで比較します。
-const users1 = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }];
-const users2 = [{ id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
+const users1 = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+];
+const users2 = [
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
 intersectionWith(users1, users2, (a, b) => a.id === b.id);
 // Returns: [{ id: 2, name: 'jane' }]
 
 // 異なる型同士も比較できます。
-const objects = [{ id: 1, name: 'apple' }, { id: 2, name: 'banana' }];
+const objects = [
+  { id: 1, name: 'apple' },
+  { id: 2, name: 'banana' },
+];
 const ids = [2, 3];
 intersectionWith(objects, ids, (obj, id) => obj.id === id);
 // Returns: [{ id: 2, name: 'banana' }]

@@ -44,7 +44,7 @@ const arrayResult = getByArray(data);
 const users = [
   { user: { profile: { name: 'John' } } },
   { user: { profile: { name: 'Jane' } } },
-  { user: { profile: { name: 'Bob' } } }
+  { user: { profile: { name: 'Bob' } } },
 ];
 const names = users.map(property('user.profile.name'));
 // Result: ['John', 'Jane', 'Bob']

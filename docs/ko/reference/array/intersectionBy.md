@@ -16,15 +16,25 @@ const result = intersectionBy(firstArr, secondArr, mapper);
 import { intersectionBy } from 'es-toolkit/array';
 
 // 객체의 id 속성을 기준으로 교집합을 구해요.
-const users1 = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
-const users2 = [{ id: 2, name: 'jane' }, { id: 4, name: 'alice' }];
+const users1 = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
+const users2 = [
+  { id: 2, name: 'jane' },
+  { id: 4, name: 'alice' },
+];
 intersectionBy(users1, users2, user => user.id);
 // Returns: [{ id: 2, name: 'jane' }]
 
 // 서로 다른 타입의 배열도 비교할 수 있어요.
-const objects = [{ id: 1, name: 'apple' }, { id: 2, name: 'banana' }];
+const objects = [
+  { id: 1, name: 'apple' },
+  { id: 2, name: 'banana' },
+];
 const ids = [2, 3, 4];
-intersectionBy(objects, ids, item => typeof item === 'object' ? item.id : item);
+intersectionBy(objects, ids, item => (typeof item === 'object' ? item.id : item));
 // Returns: [{ id: 2, name: 'banana' }]
 ```
 

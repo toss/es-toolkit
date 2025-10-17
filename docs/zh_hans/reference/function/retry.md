@@ -30,20 +30,26 @@ const data2 = await retry(async () => {
 }, 3);
 
 // 设置重试间隔 (100ms)
-const data3 = await retry(async () => {
-  return await fetchData();
-}, {
-  retries: 3,
-  delay: 100
-});
+const data3 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 3,
+    delay: 100,
+  }
+);
 
 // 动态重试间隔 (指数退避)
-const data4 = await retry(async () => {
-  return await fetchData();
-}, {
-  retries: 5,
-  delay: (attempts) => Math.min(100 * Math.pow(2, attempts), 5000)
-});
+const data4 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 5,
+    delay: attempts => Math.min(100 * Math.pow(2, attempts), 5000),
+  }
+);
 ```
 
 也可以使用 AbortSignal 取消重试。
@@ -57,13 +63,16 @@ const controller = new AbortController();
 setTimeout(() => controller.abort(), 5000);
 
 try {
-  const data = await retry(async () => {
-    return await fetchData();
-  }, {
-    retries: 10,
-    delay: 1000,
-    signal: controller.signal
-  });
+  const data = await retry(
+    async () => {
+      return await fetchData();
+    },
+    {
+      retries: 10,
+      delay: 1000,
+      signal: controller.signal,
+    }
+  );
   console.log(data);
 } catch (error) {
   console.log('重试被取消或失败:', error);

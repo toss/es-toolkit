@@ -25,12 +25,12 @@ import { omitBy } from 'es-toolkit/compat';
 
 // 특정 타입의 값 제거
 const data = { a: 1, b: 'remove', c: 3, d: 'keep' };
-const numbers = omitBy(data, (value) => typeof value === 'string');
+const numbers = omitBy(data, value => typeof value === 'string');
 // 결과: { a: 1, c: 3 }
 
 // 조건에 따른 속성 제거
 const user = { id: 1, name: 'John', age: 0, active: false, email: '' };
-const validData = omitBy(user, (value) => !value);
+const validData = omitBy(user, value => !value);
 // 결과: { id: 1, name: 'John' } (falsy 값들 제거)
 
 // 키 이름으로 필터링
@@ -40,12 +40,12 @@ const userOnly = omitBy(settings, (value, key) => key.startsWith('admin'));
 
 // 숫자 속성만 제거
 const mixed = { str: 'hello', num1: 42, bool: true, num2: 0, obj: {} };
-const noNumbers = omitBy(mixed, (value) => typeof value === 'number');
+const noNumbers = omitBy(mixed, value => typeof value === 'number');
 // 결과: { str: 'hello', bool: true, obj: {} }
 
 // 배열에서도 사용 가능
 const arr = [1, 2, 3, 4, 5];
-const filtered = omitBy(arr, (value) => value % 2 === 0);
+const filtered = omitBy(arr, value => value % 2 === 0);
 // 결과: { '0': 1, '2': 3, '4': 5 } (짝수 인덱스의 홀수 값들)
 
 // 객체와 키, 원본 객체 모두 활용

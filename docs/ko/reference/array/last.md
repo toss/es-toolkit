@@ -53,12 +53,18 @@ last(maybeEmptyArray);
 import { last } from 'es-toolkit/array';
 
 // 성능상 최적화되어 있어요.
-const largeArray = Array(1000000).fill(0).map((_, i) => i);
+const largeArray = Array(1000000)
+  .fill(0)
+  .map((_, i) => i);
 last(largeArray);
 // Returns: 999999 (빠른 접근)
 
 // 중첩 배열도 처리할 수 있어요.
-const nested = [[1, 2], [3, 4], [5, 6]];
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
 last(nested);
 // Returns: [5, 6]
 ```

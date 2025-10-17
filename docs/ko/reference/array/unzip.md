@@ -19,21 +19,21 @@ import { unzip } from 'es-toolkit/array';
 const zipped = [
   ['a', true, 1],
   ['b', false, 2],
-  ['c', true, 3]
+  ['c', true, 3],
 ];
 const result = unzip(zipped);
-console.log(result); 
+console.log(result);
 // [['a', 'b', 'c'], [true, false, true], [1, 2, 3]]
 
 // 사용자 정보가 묶인 배열을 풀어요.
 const users = [
   ['john', 30, 'engineer'],
-  ['jane', 25, 'designer'], 
-  ['bob', 35, 'manager']
+  ['jane', 25, 'designer'],
+  ['bob', 35, 'manager'],
 ];
 const [names, ages, roles] = unzip(users);
 console.log(names); // ['john', 'jane', 'bob']
-console.log(ages); // [30, 25, 35] 
+console.log(ages); // [30, 25, 35]
 console.log(roles); // ['engineer', 'designer', 'manager']
 ```
 
@@ -42,13 +42,9 @@ console.log(roles); // ['engineer', 'designer', 'manager']
 ```typescript
 import { unzip } from 'es-toolkit/array';
 
-const mixed = [
-  [1, 'a'],
-  [2, 'b', true],
-  [3]
-];
+const mixed = [[1, 'a'], [2, 'b', true], [3]];
 const result = unzip(mixed);
-console.log(result); 
+console.log(result);
 // [[1, 2, 3], ['a', 'b', undefined], [undefined, true, undefined]]
 ```
 

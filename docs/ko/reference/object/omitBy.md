@@ -17,12 +17,12 @@ import { omitBy } from 'es-toolkit/object';
 
 // 문자열 값을 가진 속성들을 제외해요
 const obj = { a: 1, b: 'remove', c: 3, d: 'also remove' };
-const result = omitBy(obj, (value) => typeof value === 'string');
+const result = omitBy(obj, value => typeof value === 'string');
 // result는 { a: 1, c: 3 }이 돼요
 
 // 짝수 값들만 제외해요
 const numbers = { a: 1, b: 2, c: 3, d: 4 };
-const odds = omitBy(numbers, (value) => value % 2 === 0);
+const odds = omitBy(numbers, value => value % 2 === 0);
 // odds는 { a: 1, c: 3 }이 돼요
 
 // 키와 값을 모두 활용해요

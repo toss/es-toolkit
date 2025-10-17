@@ -47,7 +47,7 @@ import { shuffle } from 'es-toolkit/compat';
 shuffle(null);
 // Returns: []
 
-shuffle(undefined);  
+shuffle(undefined);
 // Returns: []
 ```
 

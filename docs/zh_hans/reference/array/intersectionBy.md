@@ -16,15 +16,25 @@ const result = intersectionBy(firstArr, secondArr, mapper);
 import { intersectionBy } from 'es-toolkit/array';
 
 // 根据对象的 id 属性求交集
-const users1 = [{ id: 1, name: 'john' }, { id: 2, name: 'jane' }, { id: 3, name: 'bob' }];
-const users2 = [{ id: 2, name: 'jane' }, { id: 4, name: 'alice' }];
+const users1 = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
+const users2 = [
+  { id: 2, name: 'jane' },
+  { id: 4, name: 'alice' },
+];
 intersectionBy(users1, users2, user => user.id);
 // Returns: [{ id: 2, name: 'jane' }]
 
 // 也可以比较不同类型的数组
-const objects = [{ id: 1, name: 'apple' }, { id: 2, name: 'banana' }];
+const objects = [
+  { id: 1, name: 'apple' },
+  { id: 2, name: 'banana' },
+];
 const ids = [2, 3, 4];
-intersectionBy(objects, ids, item => typeof item === 'object' ? item.id : item);
+intersectionBy(objects, ids, item => (typeof item === 'object' ? item.id : item));
 // Returns: [{ id: 2, name: 'banana' }]
 ```
 

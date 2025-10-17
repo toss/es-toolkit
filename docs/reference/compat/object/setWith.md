@@ -86,9 +86,9 @@ import { setWith } from 'es-toolkit/compat';
 
 const obj = {};
 setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
-  console.log('nsValue:', nsValue);     // Current value (usually undefined)
-  console.log('key:', key);             // Key to create
-  console.log('nsObject:', nsObject);   // Parent object
+  console.log('nsValue:', nsValue); // Current value (usually undefined)
+  console.log('key:', key); // Key to create
+  console.log('nsObject:', nsObject); // Parent object
 
   // Return different object types based on specific conditions
   return key === 'b' ? [] : {};

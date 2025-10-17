@@ -31,14 +31,16 @@ const value = result(obj, 'a.b.c');
 // Automatic function invocation
 const objWithFunc = {
   compute: () => ({ value: 42 }),
-  getValue: function() { return this.compute().value; }
+  getValue: function () {
+    return this.compute().value;
+  },
 };
 const computed = result(objWithFunc, 'getValue');
 // Result: 42 (getValue function is called)
 
 // Function invocation along the path
 const nested = {
-  data: () => ({ user: { getName: () => 'John' } })
+  data: () => ({ user: { getName: () => 'John' } }),
 };
 const name = result(nested, 'data.user.getName');
 // Result: 'John' (both data() and getName() are called)
@@ -57,7 +59,7 @@ const arrayPath = result(objWithFunc, ['getValue']);
 // Result: 42
 
 // Dynamic default value
-const dynamic = result(incomplete, 'missing.path', function() {
+const dynamic = result(incomplete, 'missing.path', function () {
   return `Generated at ${new Date().toISOString()}`;
 });
 // Result: string with current time
@@ -70,7 +72,9 @@ import { result } from 'es-toolkit/compat';
 
 const calculator = {
   multiplier: 2,
-  compute: function() { return 10 * this.multiplier; }
+  compute: function () {
+    return 10 * this.multiplier;
+  },
 };
 
 const calculatedValue = result(calculator, 'compute');

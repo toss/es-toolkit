@@ -28,7 +28,9 @@ const obj = {
   name: 'John',
   age: 30,
   greet: () => 'Hello',
-  calculate: function(x, y) { return x + y; }
+  calculate: function (x, y) {
+    return x + y;
+  },
 };
 
 const functionNames = functionsIn(obj);
@@ -38,13 +40,19 @@ const functionNames = functionsIn(obj);
 class Calculator {
   constructor() {
     this.value = 0;
-    this.add = function(n) { this.value += n; };
+    this.add = function (n) {
+      this.value += n;
+    };
   }
 
-  multiply(n) { this.value *= n; }
+  multiply(n) {
+    this.value *= n;
+  }
 }
 
-Calculator.prototype.divide = function(n) { this.value /= n; };
+Calculator.prototype.divide = function (n) {
+  this.value /= n;
+};
 
 const calc = new Calculator();
 const allMethods = functionsIn(calc);
@@ -52,13 +60,19 @@ const allMethods = functionsIn(calc);
 
 // Inheritance through prototype chain
 function Parent() {
-  this.parentMethod = function() { return 'parent'; };
+  this.parentMethod = function () {
+    return 'parent';
+  };
 }
-Parent.prototype.protoMethod = function() { return 'proto'; };
+Parent.prototype.protoMethod = function () {
+  return 'proto';
+};
 
 function Child() {
   Parent.call(this);
-  this.childMethod = function() { return 'child'; };
+  this.childMethod = function () {
+    return 'child';
+  };
 }
 Child.prototype = Object.create(Parent.prototype);
 

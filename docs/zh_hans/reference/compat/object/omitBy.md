@@ -25,12 +25,12 @@ import { omitBy } from 'es-toolkit/compat';
 
 // 删除特定类型的值
 const data = { a: 1, b: 'remove', c: 3, d: 'keep' };
-const numbers = omitBy(data, (value) => typeof value === 'string');
+const numbers = omitBy(data, value => typeof value === 'string');
 // 结果: { a: 1, c: 3 }
 
 // 根据条件删除属性
 const user = { id: 1, name: 'John', age: 0, active: false, email: '' };
-const validData = omitBy(user, (value) => !value);
+const validData = omitBy(user, value => !value);
 // 结果: { id: 1, name: 'John' } (删除假值)
 
 // 按键名过滤
@@ -40,12 +40,12 @@ const userOnly = omitBy(settings, (value, key) => key.startsWith('admin'));
 
 // 仅删除数字属性
 const mixed = { str: 'hello', num1: 42, bool: true, num2: 0, obj: {} };
-const noNumbers = omitBy(mixed, (value) => typeof value === 'number');
+const noNumbers = omitBy(mixed, value => typeof value === 'number');
 // 结果: { str: 'hello', bool: true, obj: {} }
 
 // 也可用于数组
 const arr = [1, 2, 3, 4, 5];
-const filtered = omitBy(arr, (value) => value % 2 === 0);
+const filtered = omitBy(arr, value => value % 2 === 0);
 // 结果: { '0': 1, '2': 3, '4': 5 } (偶数索引处的奇数值)
 
 // 利用值、键和原始对象

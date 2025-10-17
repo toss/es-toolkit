@@ -25,10 +25,10 @@ const users = [
   { id: 1, name: 'john', age: 30 },
   { id: 2, name: 'jane', age: 30 },
   { id: 3, name: 'joe', age: 25 },
-  { id: 4, name: 'jenny', age: 25 }
+  { id: 4, name: 'jenny', age: 25 },
 ];
 const uniqueByAge = uniqBy(users, user => user.age);
-console.log(uniqueByAge); 
+console.log(uniqueByAge);
 // [{ id: 1, name: 'john', age: 30 }, { id: 3, name: 'joe', age: 25 }]
 
 // 문자열 길이를 기준으로 중복 제거해요.
@@ -46,13 +46,13 @@ const products = [
   { category: 'fruit', name: 'apple' },
   { category: 'fruit', name: 'banana' },
   { category: 'vegetable', name: 'carrot' },
-  { category: 'fruit', name: 'grape' }
+  { category: 'fruit', name: 'grape' },
 ];
 
 // 카테고리를 기준으로 중복 제거해요.
 const uniqueByCategory = uniqBy(products, item => item.category);
 console.log(uniqueByCategory.length); // 2
-console.log(uniqueByCategory); 
+console.log(uniqueByCategory);
 // [{ category: 'fruit', name: 'apple' }, { category: 'vegetable', name: 'carrot' }]
 ```
 

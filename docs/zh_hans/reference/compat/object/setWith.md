@@ -86,9 +86,9 @@ import { setWith } from 'es-toolkit/compat';
 
 const obj = {};
 setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
-  console.log('nsValue:', nsValue);     // 当前值(通常为 undefined)
-  console.log('key:', key);             // 要创建的键
-  console.log('nsObject:', nsObject);   // 父对象
+  console.log('nsValue:', nsValue); // 当前值(通常为 undefined)
+  console.log('key:', key); // 要创建的键
+  console.log('nsObject:', nsObject); // 父对象
 
   // 根据特定条件返回不同的对象类型
   return key === 'b' ? [] : {};

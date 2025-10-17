@@ -20,7 +20,7 @@ const users = [
   { user: 'fred', age: 48 },
   { user: 'barney', age: 34 },
   { user: 'fred', age: 40 },
-  { user: 'barney', age: 36 }
+  { user: 'barney', age: 36 },
 ];
 
 orderBy(users, [obj => obj.user, 'age'], ['asc', 'desc']);
@@ -36,7 +36,7 @@ orderBy(users, [obj => obj.user, 'age'], ['asc', 'desc']);
 const products = [
   { name: 'Apple', category: 'fruit', price: 1.5 },
   { name: 'Banana', category: 'fruit', price: 0.8 },
-  { name: 'Broccoli', category: 'vegetable', price: 2.0 }
+  { name: 'Broccoli', category: 'vegetable', price: 2.0 },
 ];
 
 orderBy(products, ['category', product => product.name.length], ['asc', 'desc']);
@@ -51,7 +51,7 @@ import { orderBy } from 'es-toolkit/array';
 const data = [
   { a: 1, b: 1, c: 1 },
   { a: 1, b: 2, c: 2 },
-  { a: 2, b: 1, c: 1 }
+  { a: 2, b: 1, c: 1 },
 ];
 
 orderBy(data, ['a', 'b', 'c'], ['asc', 'desc']);

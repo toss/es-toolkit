@@ -19,7 +19,7 @@ import { keyBy } from 'es-toolkit/array';
 const users = [
   { id: 1, name: 'john' },
   { id: 2, name: 'jane' },
-  { id: 3, name: 'bob' }
+  { id: 3, name: 'bob' },
 ];
 keyBy(users, user => user.id);
 // Returns: {
@@ -32,7 +32,7 @@ keyBy(users, user => user.id);
 const products = [
   { category: 'fruit', name: 'apple' },
   { category: 'fruit', name: 'banana' },
-  { category: 'vegetable', name: 'carrot' }
+  { category: 'vegetable', name: 'carrot' },
 ];
 keyBy(products, item => item.category);
 // Returns: {
@@ -50,7 +50,7 @@ import { keyBy } from 'es-toolkit/array';
 const orders = [
   { date: '2023-01-01', customerId: 1, amount: 100 },
   { date: '2023-01-01', customerId: 2, amount: 200 },
-  { date: '2023-01-02', customerId: 1, amount: 150 }
+  { date: '2023-01-02', customerId: 1, amount: 150 },
 ];
 keyBy(orders, order => `${order.date}-${order.customerId}`);
 // Returns: {

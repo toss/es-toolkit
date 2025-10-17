@@ -56,18 +56,10 @@ searchThrottled('hello world');
 import { throttle } from 'es-toolkit/function';
 
 // 只启用 leading (只在开始时执行)
-const leadingOnly = throttle(
-  () => console.log('Leading only'),
-  1000,
-  { edges: ['leading'] }
-);
+const leadingOnly = throttle(() => console.log('Leading only'), 1000, { edges: ['leading'] });
 
 // 只启用 trailing (只在结束时执行)
-const trailingOnly = throttle(
-  () => console.log('Trailing only'),
-  1000,
-  { edges: ['trailing'] }
-);
+const trailingOnly = throttle(() => console.log('Trailing only'), 1000, { edges: ['trailing'] });
 
 leadingOnly(); // 立即执行
 leadingOnly(); // 被忽略
@@ -83,10 +75,7 @@ trailingOnly(); // 1 秒后执行
 ```typescript
 import { throttle } from 'es-toolkit/function';
 
-const throttledFunc = throttle(
-  () => console.log('执行了'),
-  1000
-);
+const throttledFunc = throttle(() => console.log('执行了'), 1000);
 
 throttledFunc(); // 立即执行
 throttledFunc(); // 等待中

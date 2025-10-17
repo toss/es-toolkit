@@ -25,12 +25,12 @@ import { pickBy } from 'es-toolkit/compat';
 
 // 특정 타입의 값만 선택
 const data = { a: 1, b: 'keep', c: 3, d: 'select' };
-const strings = pickBy(data, (value) => typeof value === 'string');
+const strings = pickBy(data, value => typeof value === 'string');
 // 결과: { b: 'keep', d: 'select' }
 
 // 조건에 따른 속성 선택
 const user = { id: 1, name: 'John', age: 0, active: true, email: '' };
-const validData = pickBy(user, (value) => Boolean(value));
+const validData = pickBy(user, value => Boolean(value));
 // 결과: { id: 1, name: 'John', active: true } (참으로 평가되는 값들만)
 
 // 키 이름으로 필터링
@@ -40,12 +40,12 @@ const userOnly = pickBy(settings, (value, key) => key.startsWith('user'));
 
 // 숫자 속성만 선택
 const mixed = { str: 'hello', num1: 42, bool: true, num2: 0, obj: {} };
-const numbersOnly = pickBy(mixed, (value) => typeof value === 'number');
+const numbersOnly = pickBy(mixed, value => typeof value === 'number');
 // 결과: { num1: 42, num2: 0 }
 
 // 배열에서도 사용 가능
 const arr = [1, 2, 3, 4, 5];
-const evens = pickBy(arr, (value) => value % 2 === 0);
+const evens = pickBy(arr, value => value % 2 === 0);
 // 결과: { '1': 2, '3': 4 } (짝수 값들의 인덱스와 값)
 
 // 객체와 키, 원본 객체 모두 활용

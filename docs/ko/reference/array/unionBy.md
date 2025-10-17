@@ -16,8 +16,14 @@ const unified = unionBy(arr1, arr2, mapper);
 import { unionBy } from 'es-toolkit/array';
 
 // id를 기준으로 객체들의 합집합을 구해요.
-const users1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
-const users2 = [{ id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }];
+const users1 = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const users2 = [
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' },
+];
 unionBy(users1, users2, user => user.id);
 // Returns: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
 
@@ -37,11 +43,11 @@ import { unionBy } from 'es-toolkit/array';
 
 const products1 = [
   { category: 'electronics', price: 100 },
-  { category: 'books', price: 20 }
+  { category: 'books', price: 20 },
 ];
 const products2 = [
   { category: 'electronics', price: 150 },
-  { category: 'toys', price: 30 }
+  { category: 'toys', price: 30 },
 ];
 
 // 카테고리를 기준으로 합집합을 구해요.
