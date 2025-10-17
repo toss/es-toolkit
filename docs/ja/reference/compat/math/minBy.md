@@ -1,13 +1,5 @@
 # minBy (Lodash 互換性)
 
-::: warning es-toolkitの[minBy](../../math/minBy.md)を使用してください
-
-この `minBy` 関数はiteratee関数の処理と型変換により動作が遅くなります。
-
-代わりに、より高速で現代的な `es-toolkit` の [minBy](../../math/minBy.md) を使用してください。
-
-:::
-
 条件に合致する値の中で最小値要素を見つけます。
 
 ```typescript

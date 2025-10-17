@@ -1,13 +1,5 @@
 # isObject (Lodash Compatibility)
 
-::: warning Use es-toolkit's [isObject](../../predicate/isObject.md)
-
-This `isObject` function operates slowly due to null checks and complex object determination.
-
-Instead, use the faster and modern [isObject](../../predicate/isObject.md) from `es-toolkit`.
-
-:::
-
 Checks if a value is an object.
 
 ```typescript

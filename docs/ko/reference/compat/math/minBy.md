@@ -1,13 +1,5 @@
 # minBy (Lodash 호환성)
 
-::: warning es-toolkit의 [minBy](../../math/minBy.md)를 사용하세요
-
-이 `minBy` 함수는 iteratee 함수 처리와 타입 변환으로 인해 느리게 동작해요.
-
-대신 더 빠르고 현대적인 `es-toolkit`의 [minBy](../../math/minBy.md)를 사용하세요.
-
-:::
-
 조건에 맞는 값 중에서 최솟값 요소를 찾아요.
 
 ```typescript

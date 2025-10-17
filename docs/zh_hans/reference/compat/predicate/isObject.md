@@ -1,11 +1,5 @@
 # isObject (Lodash 兼容性)
 
-::: warning 使用 es-toolkit 的 [isObject](../../predicate/isObject.md)
-这个 `isObject` 函数由于 null 检查和复杂的对象判断而运行较慢。
-
-请使用更快且现代的 es-toolkit 的 [isObject](../../predicate/isObject.md)。
-:::
-
 检查值是否为对象。
 
 ```typescript

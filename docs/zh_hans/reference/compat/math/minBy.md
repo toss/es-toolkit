@@ -1,13 +1,5 @@
 # minBy（Lodash 兼容性）
 
-::: warning 请使用 es-toolkit 的 [minBy](../../math/minBy.md)
-
-这个 `minBy` 函数由于 iteratee 函数处理和类型转换而运行缓慢。
-
-请使用更快更现代的 `es-toolkit` 的 [minBy](../../math/minBy.md)。
-
-:::
-
 在满足条件的值中找到最小值元素。
 
 ```typescript

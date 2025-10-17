@@ -1,13 +1,5 @@
 # isObject (Lodash 호환성)
 
-::: warning es-toolkit의 [isObject](../../predicate/isObject.md)를 사용하세요
-
-이 `isObject` 함수는 null 체크와 복잡한 객체 판별로 인해 느리게 동작해요.
-
-대신 더 빠르고 현대적인 `es-toolkit`의 [isObject](../../predicate/isObject.md)를 사용하세요.
-
-:::
-
 값이 객체인지 확인해요.
 
 ```typescript
