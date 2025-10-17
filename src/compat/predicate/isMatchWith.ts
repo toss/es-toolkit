@@ -186,7 +186,7 @@ function isObjectMatch(
     source: any,
     stack?: Map<any, any>
   ) => boolean | undefined,
-  stack?: Map<any, any>
+  stack: Map<any, any> | undefined
 ): boolean {
   if (source == null) {
     return true;
