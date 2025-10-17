@@ -102,10 +102,6 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Lodash Compatibility',
       items: [
         {
-          text: 'Introduction',
-          link: '/compat/intro',
-        },
-        {
           text: 'Reference',
           items: sortByText([
             {

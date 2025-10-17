@@ -101,10 +101,6 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Lodash 互換性',
       items: [
         {
-          text: '紹介',
-          link: '/ja/compat/intro',
-        },
-        {
           text: 'リファレンス',
           items: sortByText([
             {

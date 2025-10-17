@@ -102,10 +102,6 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Lodash 兼容性',
       items: [
         {
-          text: '简介',
-          link: '/zh_hans/compat/intro',
-        },
-        {
           text: '参考',
           items: sortByText([
             {

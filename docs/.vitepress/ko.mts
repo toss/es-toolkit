@@ -101,10 +101,6 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Lodash 호환성',
       items: [
         {
-          text: '소개',
-          link: '/ko/compat/intro',
-        },
-        {
           text: '레퍼런스',
           items: sortByText([
             {
