@@ -1,14 +1,16 @@
-# join
+# join (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.join()`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `join` function is slow due to handling ArrayLike objects, null/undefined, etc.
+
+Use the faster and more modern `Array.prototype.join()` instead.
+
 :::
 
-Joins elements of an array into a string.
+Joins the elements of an array into a string.
 
-## Signature
+## Interface
 
 ```typescript
 function join<T>(array: T[], separator?: string): string;
@@ -29,7 +31,7 @@ To ensure full compatibility with lodash, the `join` function processes `array` 
 
 - `separator` (`string`) - The separator used to join the elements. Defaults to `,`.
 
-### Returns
+#### Returns
 
 (`string`): A string containing all elements of the array joined by the specified separator.
 

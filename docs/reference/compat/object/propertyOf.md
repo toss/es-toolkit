@@ -1,38 +1,85 @@
-# propertyOf
+# propertyOf (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `get` function directly
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `propertyOf` function is a wrapper function that internally calls the `get` function, causing additional function call overhead.
+
+Use the faster and more modern `get` function directly or use optional chaining (`?.`) instead.
+
 :::
 
-Creates a function that returns the value at a given path of an object.
-
-Unlike [`property`](./property.md), which creates a function bound to a specific path and allows you to query different objects,
-`propertyOf` creates a function bound to a specific object and allows you to query different paths within that object.
-
-## Signature
+Creates a function that retrieves values from various paths in a specific object.
 
 ```typescript
-function propertyOf<T extends {}>(object: T): (path: PropertyKey | PropertyKey[]) => any;
+const getter = propertyOf(obj);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`T`): The object to query.
+### `propertyOf(object)`
 
-### Returns
-
-(`(path: PropertyKey | PropertyKey[]) => any`): Returns a new function that takes a path and retrieves the value from the object at the specified path.
-
-## Examples
+Use `propertyOf` when you want to create a function that retrieves values from multiple paths in a single object. Unlike `property`, it fixes the object first and allows you to query various paths.
 
 ```typescript
-const getValue = propertyOf({ a: { b: { c: 3 } } });
-const result = getValue('a.b.c');
-console.log(result); // => 3
+import { propertyOf } from 'es-toolkit/compat';
 
-const getValue = propertyOf({ a: { b: { c: 3 } } });
-const result = getValue(['a', 'b', 'c']);
-console.log(result); // => 3
+// Basic usage
+const data = { name: 'John', age: 30, city: 'New York' };
+const getValue = propertyOf(data);
+
+const name = getValue('name');
+// Result: 'John'
+
+const age = getValue('age');
+// Result: 30
+
+// Deep path access
+const complexData = {
+  user: { profile: { name: 'Alice', age: 25 } },
+  settings: { theme: 'dark', lang: 'en' },
+};
+const getComplexValue = propertyOf(complexData);
+
+const userName = getComplexValue('user.profile.name');
+// Result: 'Alice'
+
+const theme = getComplexValue('settings.theme');
+// Result: 'dark'
+
+// Using array path
+const arrayPath = getComplexValue(['user', 'profile', 'age']);
+// Result: 25
+
+// Process multiple paths as array
+const paths = ['user.profile.name', 'settings.theme', 'settings.lang'];
+const values = paths.map(getValue);
+// Result: ['Alice', 'dark', 'en'] (values from each path)
+
+// Array index access
+const arrayData = [10, 20, 30];
+const getArrayValue = propertyOf(arrayData);
+const firstItem = getArrayValue(0);
+// Result: 10
+
+const secondItem = getArrayValue('[1]');
+// Result: 20
 ```
+
+Returns `undefined` if the path doesn't exist.
+
+```typescript
+import { propertyOf } from 'es-toolkit/compat';
+
+const data = { a: 1, b: 2 };
+const getValue = propertyOf(data);
+const missing = getValue('nonexistent.path');
+// Result: undefined
+```
+
+#### Parameters
+
+- `object` (`T`): The target object to retrieve values from.
+
+#### Returns
+
+(`(path: PropertyPath) => any`): Returns a function that returns the object's value at a given path.

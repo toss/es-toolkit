@@ -1,12 +1,18 @@
-# update
+# update (Lodash 兼容性)
 
-::: info
-此函数仅在 `es-toolkit/compat` 中可用，原因是出于兼容性考虑。它要么有替代的原生 JavaScript API，要么尚未完全优化。
+::: warning 请使用直接赋值
 
-从 `es-toolkit/compat` 导入时，此函数的行为与 lodash 完全相同，并提供相同的功能。
+此 `update` 函数由于复杂的路径解析和嵌套对象创建逻辑而运行缓慢。
+
+请使用更快、更现代的直接属性赋值或可选链。
+
 :::
 
-使用更新函数更新指定对象路径上的值。如果路径的某部分不存在，则会创建它。
+使用更新函数更新对象指定路径的值。
+
+```typescript
+const updated = update(object, path, updater);
+```
 
 ## 签名
 

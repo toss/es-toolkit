@@ -1,31 +1,63 @@
-# nth
+# nth (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 배열 인덱스 접근을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `nth` 함수는 `null`이나 `undefined` 처리, 정수 변환 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 배열 인덱스 접근 (`array[index]` 또는 `array.at(index)`)을 사용하세요.
+
 :::
 
-배열에서 인덱스 `n`에 해당하는 요소를 가져와요. `n`이 음수라면 끝에서부터 계산된 요소를 반환해요.
-
-## 인터페이스
+배열에서 지정한 인덱스의 요소를 가져와요.
 
 ```typescript
-function nth<T>(array: ArrayLike<T> | null | undefined, n: number): T | undefined;
+const element = nth(array, index);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `array` (`ArrayLike<T> | null | undefined`): 조회할 배열.
-- `n` (`number`): 반환할 요소의 인덱스.
+### `nth(array, index)`
 
-### 반환 값
-
-(`T | undefined`): `array`의 n번째 요소.
-
-## 예시
+배열에서 지정한 인덱스의 요소를 반환해요. 음수 인덱스를 사용하면 배열 끝에서부터 계산해요. 인덱스가 범위를 벗어나면 `undefined`를 반환해요.
 
 ```typescript
-nth([1, 2, 3], 1); // => 2
-nth([1, 2, 3], -1); // => 3
+import { nth } from 'es-toolkit/compat';
+
+const array = [1, 2, 3, 4, 5];
+
+// 양수 인덱스
+nth(array, 1);
+// => 2
+
+// 음수 인덱스 (끝에서부터)
+nth(array, -1);
+// => 5
+
+nth(array, -2);
+// => 4
+
+// 범위를 벗어난 인덱스
+nth(array, 10);
+// => undefined
+
+nth(array, -10);
+// => undefined
 ```
+
+`null`이나 `undefined`는 `undefined`로 처리해요.
+
+```typescript
+import { nth } from 'es-toolkit/compat';
+
+nth(null, 0); // undefined
+nth(undefined, 0); // undefined
+```
+
+#### 파라미터
+
+- `array` (`ArrayLike<T> | null | undefined`): 요소를 가져올 배열이에요.
+- `index` (`number`, 선택): 가져올 요소의 인덱스예요. 음수면 끝에서부터 계산해요. 기본값은 `0`이에요.
+
+#### 반환 값
+
+(`T | undefined`): 지정한 인덱스의 요소를 반환해요. 인덱스가 범위를 벗어나면 `undefined`를 반환해요.

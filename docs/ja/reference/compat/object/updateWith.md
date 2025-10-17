@@ -1,50 +1,62 @@
-# updateWith
+# updateWith (Lodash 互換性)
 
-::: info
-この関数は互換性のために`es-toolkit/compat`でのみ利用可能です。代替のネイティブJavaScript APIが存在するか、まだ完全に最適化されていません。
+::: warning 直接代入を使用してください
 
-`es-toolkit/compat`からインポートする場合、この関数はlodashと全く同じように動作し、同じ機能を提供します。
+この `updateWith` 関数は複雑なパス解析とカスタマイザー処理により遅く動作します。
+
+代わりに、より高速で現代的な直接プロパティ代入またはオプショナルチェーンを使用してください。
+
 :::
 
-オブジェクトの指定されたパスにある値を`updater`関数が返す値で更新します。パスの一部が存在しない場合、`customizer`関数を使用して新しいオブジェクトをどのように作成するかを指定できます。
+オブジェクトの指定されたパスにある値を更新関数で変更し、カスタマイザーでパスの作成を制御します。
+
+```typescript
+const updated = updateWith(object, path, updater, customizer);
+```
 
 ## インターフェース
 
 ```typescript
-function updateWith<T extends object>(
+function updateWith<T extends object | null | undefined>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  updater: (oldValue: any) => any,
-  customizer?: (value: any, key: string, object: T) => any
+  updater: (value: unknown) => unknown,
+  customizer: (value: unknown) => unknown
 ): T;
 ```
 
 ### パラメータ
 
-- `obj` (`T`): 修正するオブジェクトです。
-- `path` (`PropertyKey | readonly PropertyKey[]`): 更新するプロパティのパスです。
-- `updater` (`(oldValue: any) => any`): 更新された値を生成する関数です。
-- `customizer` (`(value: any, key: string, object: T) => any`, オプション): 更新プロセスをカスタマイズする関数です。
+- `obj` (`T`): 変更するオブジェクト。
+- `path` (`PropertyKey | readonly PropertyKey[]`): 更新するプロパティのパス。
+- `updater` (`(value: unknown) => unknown`): 更新された値を生成する関数。
+- `customizer` (`(value: unknown) => unknown`): 更新プロセスをカスタマイズする関数。
 
 ### 戻り値
 
-(`T`): 修正されたオブジェクトです。
+(`T`): 変更されたオブジェクト。
 
 ## 例
 
 ```typescript
 import { updateWith } from 'es-toolkit/compat';
 
-const object = { a: [{ b: { c: 3 } }] };
+const object = {};
 
-// カスタマイザー関数を使用してカスタムパス構造を作成する
-updateWith(object, '[0].a.b.c', n => (n as number) + 1, customizer);
-// => { '0': { a: { b: { c: 4 } } }, a: [{ b: { c: 3 } }] }
+// カスタマイザー関数を使用してカスタムパス構造を作成
+updateWith(object, '[0][1]', () => 'a', Object);
+// => { '0': { '1': 'a' } }
 
-function customizer(value: unknown) {
-  if (value == null) {
-    return {};
+// パス作成をカスタマイズ
+updateWith(
+  object,
+  '[0][2]',
+  () => 'b',
+  value => {
+    if (typeof value === 'number') {
+      return [];
+    }
   }
-  return value;
-}
+);
+// => { '0': { '1': 'a', '2': 'b' } }
 ```

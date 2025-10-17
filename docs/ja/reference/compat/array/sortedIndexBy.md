@@ -1,54 +1,59 @@
-# sortedIndexBy
+# sortedIndexBy (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning バイナリ検索と変換関数を直接実装してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `sortedIndexBy` 関数は、複雑なiteratee処理と型変換により遅く動作します。
+
+代わりに、より高速で現代的なバイナリ検索と変換関数を直接実装してください。
+
 :::
 
-ソートされた配列から特定の値を挿入できる最下位インデックスを探し、配列のソート順を維持するようにします。
-[sortedIndex](./sortedIndex.md)とは異なり、この関数は比較に使用する値を抽出するためにカスタムiteratee関数を指定することができます。
-
-- iteratee関数は、配列の各要素と挿入する値に対して呼び出されます。
-- オブジェクトやユーザー定義のデータ型を含む配列で、特定の属性や計算された値に基づいて並べ替えを行いたいときに便利です。
-
-## インターフェース
+ソートされた配列に変換関数を適用した後、値を挿入すべき最も低いインデックスを見つけます。
 
 ```typescript
-function sortedIndexBy<T, R>(
-  array: ArrayLike<T> | null | undefined,
-  value: T,
-  iteratee: (item: T) => R,
-  retHighest?: boolean
-): number;
+const index = sortedIndexBy(array, value, iteratee);
 ```
 
-### パラメータ
+## 参照
 
-- `array` (`ArrayLike<T> | null | undefined`): 整列された配列。nullまたはundefinedの場合、空の配列とみなされます。
-- `value` (`T`): 挿入位置を見つけるために評価する値。
-- `iteratee` (`(item: T) => R`): 配列の要素と挿入する値を変換する関数。この関数の戻り値を基準にソート順を決定します。
-- `retHighest` (`boolean, オプション`): 配列に同じ値が存在する場合、最後の位置を返す場合はtrueに設定します。 (デフォルト: false)。
+### `sortedIndexBy(array, value, iteratee)`
 
-### 戻り値
-
-(`number`): ソート順を維持するために値を挿入するインデックスです。
-
-## 例
+ソートされた配列に変換関数を適用した後、値の挿入位置を見つけるときに `sortedIndexBy` を使用してください。各要素と探す値に変換関数を適用して比較します。
 
 ```typescript
-import { sortedIndexBy } from 'es-toolkit/compat'；
+import { sortedIndexBy } from 'es-toolkit/compat';
 
-const objects = [{ x: 10 }, { x: 20 }, { x: 30 }]；
+// プロパティでソートされたオブジェクト配列で挿入位置を見つける
+const objects = [{ x: 4 }, { x: 5 }];
+sortedIndexBy(objects, { x: 4 }, 'x');
+// 0を返します
 
-// 比較のため `x` 属性を抽出する iteratee を使います。
-sortedIndexBy(objects, { x: 25 }, o => o.x)；
-// 戻り値： 2
-// 説明: `x` 属性を基準にして `{ x： 25 }` はインデックス 2 を返します。
+// 関数を使用して変換
+const numbers = [10, 20, 30];
+sortedIndexBy(numbers, 25, n => n);
+// 2を返します
 
-// ユーザー定義のソートロジック処理
-const strings = ['apple', 'banana', 'cherry']；
-sortedIndexBy(strings, 'apricot', str => str.length)；
-// 戻り値: 3
-// 説明: 文字列の長さを基準に'apricot'はインデックス3を返します。
+// プロパティ-値配列で変換
+const users = [{ name: 'alice' }, { name: 'bob' }];
+sortedIndexBy(users, { name: 'ann' }, ['name']);
+// 1を返します
 ```
+
+`null` または `undefined` 配列は0を返します。
+
+```typescript
+import { sortedIndexBy } from 'es-toolkit/compat';
+
+sortedIndexBy(null, { x: 1 }, 'x'); // 0
+sortedIndexBy(undefined, { x: 1 }, 'x'); // 0
+```
+
+#### パラメータ
+
+- `array` (`ArrayLike<T> | null | undefined`): ソートされた配列です。ソートされていない配列を使用すると、誤った結果が得られる可能性があります。
+- `value` (`T`): 挿入する値です。
+- `iteratee` (オプション): 各要素と値に適用する変換関数、プロパティ名、またはプロパティ-値配列です。
+
+#### 戻り値
+
+(`number`): 値を挿入すべき最も低いインデックスを返します。配列が `null` または `undefined` の場合は0を返します。

@@ -7,6 +7,8 @@
 - Lodash의 실제 테스트 코드로 동일하게 동작하는 것을 보장해요.
 - Storybook, Recharts, CKEditor 등 유명 오픈소스 라이브러리들이 사용하고 있고, Nuxt에서도 추천하고 있어요.
 
+모든 호환성 함수들의 자세한 문서는 [호환성 레퍼런스](/ko/reference/compat/array/castArray)에서 확인할 수 있어요.
+
 :::
 
 ```tsx

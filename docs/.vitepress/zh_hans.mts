@@ -32,6 +32,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '主页', link: '/zh_hans/' },
     { text: '简介', link: '/zh_hans/intro' },
     { text: '参考', link: '/zh_hans/reference/array/at' },
+    { text: 'Lodash 兼容性', link: '/zh_hans/reference/compat/array/castArray' },
   ];
 }
 
@@ -44,7 +45,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: '安装和使用', link: '/zh_hans/usage' },
         { text: '包体积影响', link: '/zh_hans/bundle-size' },
         { text: '性能', link: '/zh_hans/performance' },
-        { text: '与 Lodash 兼容性', link: '/zh_hans/compatibility' },
+        { text: 'Lodash 兼容性', link: '/zh_hans/compatibility' },
       ],
     },
     {
@@ -52,68 +53,99 @@ function sidebar(): DefaultTheme.Sidebar {
       items: sortByText([
         {
           text: '数组工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'array'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'array'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'array'),
         },
         {
           text: '函数工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'function'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'function'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'function'),
         },
         {
           text: '数学工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'math'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'math'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'math'),
         },
         {
           text: '对象工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'object'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'object'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'object'),
         },
         {
           text: '谓词',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'predicate'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'predicate'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'predicate'),
         },
         {
           text: 'Promise 工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'promise'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'promise'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'promise'),
         },
         {
           text: '字符串工具',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'string'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'string'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'string'),
         },
         {
           text: '工具函数',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'util'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'util'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'util'),
         },
         {
           text: '错误',
-          items: [
-            ...getSidebarItems(docsRoot, 'zh_hans', 'reference', 'error'),
-            ...getSidebarItems.compat('zh_hans', docsRoot, 'zh_hans', 'reference', 'compat', 'error'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'error'),
         },
       ]),
+    },
+    {
+      text: 'Lodash 兼容性',
+      items: [
+        {
+          text: '简介',
+          link: '/zh_hans/compat/intro',
+        },
+        {
+          text: '参考',
+          items: sortByText([
+            {
+              text: '数组工具',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'array'),
+            },
+            {
+              text: '函数工具',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'function'),
+            },
+            {
+              text: '数学工具',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'math'),
+            },
+            {
+              text: '对象工具',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'object'),
+            },
+            {
+              text: '谓词',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'predicate'),
+            },
+            {
+              text: '字符串工具',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'string'),
+            },
+            {
+              text: '工具函数',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'compat', 'util'),
+            },
+          ]),
+        },
+      ],
     },
   ];
 }

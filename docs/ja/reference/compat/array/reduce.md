@@ -1,74 +1,60 @@
-# reduce
+# reduce (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.reduce`または`Object.values`と`reduce`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`reduce`関数は、複雑な型処理と様々な入力形式のサポートにより、動作が遅くなります。
+
+代わりに、より高速で現代的な`Array.prototype.reduce`メソッド、またはオブジェクトの場合は`Object.values`と一緒に使用してください。
+
 :::
 
-リデューサー関数を使用して、配列またはオブジェクトを単一の値に減らします。
-
-配列の要素またはオブジェクトの値を1つずつ繰り返し、「リデューサー」と呼ばれる特別な関数を適用します。
-前のステップの結果と現在の要素を使用して計算を実行します。
-すべての要素を繰り返した後、最終結果を返します。
-
-`reduce()` 関数が開始されるとき、使用する前のステップの結果はありません。
-初期値を提供すると、その値から開始します。
-初期値を提供しない場合、配列の最初の要素またはオブジェクトの最初の値を使用し、2番目の要素または値から計算を開始します。
-
-## インターフェース
+配列またはオブジェクトを1つの値に縮小します。
 
 ```typescript
-function reduce<T, U>(
-  collection: T[],
-  iteratee: (accumulator: U, value: T, index: number, collection: T[]) => U,
-  initialValue: U
-): U;
-function reduce<T>(collection: T[], iteratee: (accumulator: T, value: T, index: number, collection: T[]) => T): T;
-
-function reduce<T, U>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: U, value: T, index: number, collection: ArrayLike<T>) => U,
-  initialValue: U
-): U;
-function reduce<T>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: T, value: T, index: number, collection: ArrayLike<T>) => T
-): T;
-
-function reduce<T extends object, U>(
-  collection: T,
-  iteratee: (accumulator: U, value: T[keyof T], key: keyof T, collection: T) => U,
-  initialValue: U
-): U;
-function reduce<T extends object>(
-  collection: T,
-  iteratee: (accumulator: T[keyof T], value: T[keyof T], key: keyof T, collection: T) => T[keyof T]
-): T[keyof T];
+const result = reduce(collection, iteratee, initialValue);
 ```
 
-### パラメータ
+## 参照
 
-- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): 反復処理を行うコレクション。
-- `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 反復ごとに呼び出される関数。
-- `initialValue` (`U`, オプション): 初期値。
+### `reduce(collection, iteratee, initialValue)`
 
-### 戻り値
-
-(`U`): 蓄積された値。 `initialValue` が指定されていない場合は、コレクションの要素型（`T`）が返されます。
-
-## 例
+配列またはオブジェクトのすべての要素を1つずつ反復処理しながら累積値を計算します。初期値を提供するとその値から始まり、そうでない場合は最初の要素から始まります。
 
 ```typescript
-// Using a reducer function
-const array = [1, 2, 3];
-reduce(array, (acc, value) => acc + value, 0); // => 6
+import { reduce } from 'es-toolkit/compat';
 
-// Using a reducer function with initialValue
-const array = [1, 2, 3];
-reduce(array, (acc, value) => acc + value % 2 === 0, true); // => false
+// 配列の合計を計算
+const numbers = [1, 2, 3, 4];
+const sum = reduce(numbers, (acc, value) => acc + value, 0);
+console.log(sum); // 10
 
-// Using an object as the collection
-const obj = { a: 1, b: 2, c: 3 };
-reduce(obj, (acc, value) => acc + value, 0); // => 6
+// オブジェクト値の合計を計算
+const scores = { math: 95, english: 87, science: 92 };
+const totalScore = reduce(scores, (acc, value) => acc + value, 0);
+console.log(totalScore); // 274
 ```
+
+初期値を提供しない場合、最初の要素が初期値となり、2番目の要素から反復処理を開始します。
+
+```typescript
+import { reduce } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4];
+const sum = reduce(numbers, (acc, value) => acc + value);
+console.log(sum); // 10 (1 + 2 + 3 + 4)
+
+// 空の配列はundefinedを返します
+const empty = [];
+const result = reduce(empty, (acc, value) => acc + value);
+console.log(result); // undefined
+```
+
+#### パラメータ
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 反復処理する配列またはオブジェクトです。
+- `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 各要素に対して呼び出す関数です。累積値、現在の値、インデックス/キー、元の配列/オブジェクトを受け取ります。
+- `initialValue` (`any`, オプション): 累積値の初期値です。提供しない場合、最初の要素が初期値になります。
+
+#### 戻り値
+
+(`any`): すべての要素を処理した後の最終累積値を返します。

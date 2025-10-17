@@ -1,44 +1,55 @@
-# flattenDepth
+# flattenDepth (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `es-toolkit`의 `flatten`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
+이 `flattenDepth` 함수는 `null`이나 `undefined` 처리 등으로 인해 느리게 동작해요. `es-toolkit`의 `flatten` 함수는 이러한 추가 처리 없이 더 빠르고 간단하게 동작해요.
 
-배열을 지정된 깊이까지 평평하게 만듭니다.
-
-## 인터페이스
-
-```typescript
-function flattenDepth<T, D extends number = 1>(value: T[], depth: D): Array<FlatArray<T[], D>> | [];
-```
-
-### 파라미터
-
-- `value` (`T[]`): 평평하게 할 값이에요.
-
-::: info `value`는 `ArrayLike<T>`, `null`, 또는 `undefined`가 될 수 있어요.
-
-lodash와 완전한 호환성을 보장하기 위해, `flattenDepth` 함수는 `value`를 다음과 같이 처리해요.
-
-- `value`가 `ArrayLike<T>`인 경우, `Array.from(...)`을 사용하여 배열로 변환돼요.
-- `value`가 `null` 또는 `undefined`인 경우, 빈 배열로 처리돼요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [flatten](../../array/flatten.md)를 사용하세요.
 
 :::
 
-- `depth` (`D`): 중첩 배열 구조가 얼마나 깊게 평평해져야 하는지 지정하는 깊이 수준이에요. 기본값은 1이에요.
-
-### 반환 값
-
-(`Array<FlatArray<T[], D>> | []`): 평평해진 새로운 배열이에요.
-
-## 예시
+배열을 지정한 깊이까지 평탄화해요.
 
 ```typescript
-const arr = flattenDepth([1, [2, 3], [4, [5, 6]]], 1);
-// Returns: [1, 2, 3, 4, [5, 6]]
-
-const arr = flattenDepth([1, [2, 3], [4, [5, 6]]], 2);
-// Returns: [1, 2, 3, 4, 5, 6]
+const flattened = flattenDepth(array, depth);
 ```
+
+## 레퍼런스
+
+### `flattenDepth(array, depth)`
+
+중첩된 배열을 원하는 깊이까지 평탄화하고 싶을 때 `flattenDepth`를 사용하세요. 깊이를 지정하면 그 깊이까지만 중첩된 배열을 평탄화해요.
+
+```typescript
+import { flattenDepth } from 'es-toolkit/compat';
+
+// 깊이 1까지 평탄화해요.
+flattenDepth([1, [2, [3, [4]], 5]], 1);
+// Returns: [1, 2, [3, [4]], 5]
+
+// 깊이 2까지 평탄화해요.
+flattenDepth([1, [2, [3, [4]], 5]], 2);
+// Returns: [1, 2, 3, [4], 5]
+
+// 깊이를 지정하지 않으면 기본값 1로 평탄화해요.
+flattenDepth([1, [2, [3, [4]], 5]]);
+// Returns: [1, 2, [3, [4]], 5]
+```
+
+`null`이나 `undefined`는 빈 배열로 처리해요.
+
+```typescript
+import { flattenDepth } from 'es-toolkit/compat';
+
+flattenDepth(null, 2); // []
+flattenDepth(undefined, 2); // []
+```
+
+#### 파라미터
+
+- `array` (`ArrayLike<T> | null | undefined`): 평탄화할 배열이에요.
+- `depth` (`number`, 선택): 평탄화할 최대 깊이예요. 기본값은 `1`이에요.
+
+#### 반환 값
+
+(`T[]`): 지정한 깊이까지 평탄화된 새로운 배열을 반환해요.

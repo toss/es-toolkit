@@ -1,9 +1,11 @@
-# indexOf
+# indexOf (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.indexOf` または `Array.prototype.findIndex` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`indexOf`関数は、`NaN`処理のための追加ロジックにより、動作が遅くなります。
+
+`NaN`を探していない場合は、より高速な`Array.prototype.indexOf`を使用してください。`NaN`を見つける場合は、`Array.prototype.findIndex`と`Number.isNaN`を使用してください。
+
 :::
 
 配列内で指定された要素が最初に一致するインデックスを見つけます。
@@ -23,7 +25,7 @@ function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 
 ::: info `array` は `ArrayLike<T>` または `null` または `undefined` である可能性があります
 
-lodash と完全に互換性があるように、`join` 関数は `array` を次のように処理します。
+lodash と完全に互換性があるように、`indexOf` 関数は `array` を次のように処理します。
 
 - `array` が `ArrayLike<T>` の場合、配列に変換するために `Array.from(...)` を使用します。
 - `array` が `null` または `undefined` の場合、空の配列と見なされます。
@@ -31,9 +33,9 @@ lodash と完全に互換性があるように、`join` 関数は `array` を次
 :::
 
 - `searchElement` (`T`): 検索する値。
-- `fromIndex` (`number`, オプション): 検索を開始するインデックス。
+- `fromIndex` (`number`, 選択): 検索を開始するインデックス。
 
-### 戻り値
+#### 戻り値
 
 (`number`): 配列内で指定された値と最初に一致する要素のインデックス。一致する要素が見つからない場合は `-1` を返します。
 

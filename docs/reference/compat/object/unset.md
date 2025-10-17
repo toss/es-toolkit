@@ -1,27 +1,34 @@
-# unset
+# unset (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use the `delete` operator instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `unset` function operates slowly due to complex path parsing and nested object handling.
+
+Use the faster and more modern `delete` operator directly instead.
+
 :::
 
-Removes the property at the given path of the object.
-
-## Signature
+Removes the property at the specified path of the object.
 
 ```typescript
-function unset(obj: any, path: PropertyKey | PropertyKey[]): boolean;
+const success = unset(object, path);
+```
+
+## Interface
+
+```typescript
+function unset(obj: unknown, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### Parameters
 
-- `obj` (`any`): The object to modify.
-- `path` (`PropertyKey | PropertyKey[]`): The path of the property to unset.
+- `obj` (`unknown`): The object to modify.
+- `path` (`PropertyKey | PropertyKey[]`): The path of the property to remove.
 
 ### Returns
 
 (`boolean`): Returns true if the property is deleted, else false.
+string.
 
 ## Examples
 

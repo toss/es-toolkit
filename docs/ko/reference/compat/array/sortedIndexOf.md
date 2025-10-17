@@ -1,57 +1,60 @@
-# sortedIndexOf
+# sortedIndexOf (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 이진 탐색을 직접 구현하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
+이 `sortedIndexOf` 함수는 복잡한 이진 탐색 처리와 타입 검증으로 인해 느리게 동작해요.
 
-정렬된 배열에서 값이 처음으로 나타나는 인덱스를 찾아요. `Array#indexOf`와 유사하게 작동하지만, 정렬된 배열에 특화되어 있어요.
-
-::: warning 정렬된 배열을 인자로 제공하세요
-
-이 함수는 이진 검색(Binary search)을 사용하여 인덱스를 빠르게 찾기 때문에, 정렬된 배열을 제공하지 않으면 올바르게 동작하지 않아요.
+대신 더 빠르고 현대적인 이진 탐색을 직접 구현하거나 `Array.prototype.indexOf()`를 사용하세요.
 
 :::
 
-## 인터페이스
+정렬된 배열에서 값이 처음으로 나타나는 인덱스를 찾아요.
 
 ```typescript
-function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedIndexOf(array, value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 배열이 null 또는 undefined일 경우 `-1`을 리턴해요.
-- `value` (`T`): 정렬된 배열 속 비교를 통해 찾으려는 값.
+### `sortedIndexOf(array, value)`
 
-### 반환 값
-
-(`number`): 정렬 순서를 유지하기 위해 값을 삽입할 인덱스이에요.
-
-## 예시
+정렬된 배열에서 특정 값이 처음으로 나타나는 인덱스를 찾을 때 `sortedIndexOf`를 사용하세요. 이진 탐색을 사용해서 빠르게 값을 찾아요.
 
 ```typescript
 import { sortedIndexOf } from 'es-toolkit/compat';
 
-const numbers = [11, 22, 33, 44, 55];
-sortedIndexOf(numbers, 11); // 반환 값: 0
-sortedIndexOf(numbers, 30); // 반환 값: -1
+// 숫자 배열에서 값 찾기
+sortedIndexOf([11, 22, 33, 44, 55], 33);
+// 2를 반환해요
 
-// 값이 중복된 경우, 첫 번째 값의 인덱스를 반환합니다.
-const duplicateNumbers = [1, 2, 2, 3, 3, 3, 4];
-sortedIndexOf(duplicateNumbers, 3); // 반환 값: 3
+// 값이 없는 경우
+sortedIndexOf([11, 22, 33, 44, 55], 30);
+// -1을 반환해요
 
-// 배열이 정렬되지 않은 경우, 잘못된 인덱스를 반환할 수 있습니다.
-const unSortedArray = [55, 33, 22, 11, 44];
-sortedIndexOf(unSortedArray, 11); // 반환 값: -1
+// 중복된 값이 있는 경우 첫 번째 인덱스 반환
+sortedIndexOf([1, 2, 2, 3, 3, 3, 4], 3);
+// 3을 반환해요 (첫 번째 3의 위치)
 
-// -0과 0은 동일하게 취급됩니다.
-const mixedZeroArray = [-0, 0];
-sortedIndexOf(mixedZeroArray, 0); // 반환 값: 0
-sortedIndexOf(mixedZeroArray, -0); // 반환 값: 0
-
-// 배열과 유사한 객체에서도 작동합니다.
-const arrayLike = { length: 3, 0: 10, 1: 20, 2: 30 };
-sortedIndexOf(arrayLike, 20); // 반환 값: 1
+// 0과 -0은 같게 처리해요
+sortedIndexOf([-0, 0], 0);
+// 0을 반환해요
 ```
+
+빈 배열이나 `null`, `undefined`는 -1을 반환해요.
+
+```typescript
+import { sortedIndexOf } from 'es-toolkit/compat';
+
+sortedIndexOf([], 1); // -1
+sortedIndexOf(null, 1); // -1
+sortedIndexOf(undefined, 1); // -1
+```
+
+#### 파라미터
+
+- `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 정렬되지 않은 배열을 사용하면 잘못된 결과를 얻을 수 있어요.
+- `value` (`T`): 찾을 값이에요.
+
+#### 반환 값
+
+(`number`): 값이 처음 나타나는 인덱스를 반환해요. 값이 없으면 -1을 반환해요.

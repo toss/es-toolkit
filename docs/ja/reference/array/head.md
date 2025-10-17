@@ -2,43 +2,55 @@
 
 配列の最初の要素を返します。
 
-この関数は、配列を入力として受け取り、配列の最初の要素を返します。配列が空の場合、関数は`undefined`を返します。
-
-## インターフェース
-
 ```typescript
-function head<T>(arr: [T, ...T[]]): T;
-function head<T>(arr: T[]): T | undefined;
+const firstElement = head(arr);
 ```
 
-### パラメータ
+## 参照
 
-- `arr` (`T[]`): 最初の要素を取得する配列です。
+### `head(arr)`
 
-### 戻り値
-
-(`T | undefined`): 配列の最初の要素、配列が空の場合`undefined`を返します。
-
-## 例
+配列の最初の要素を取得したい場合は `head` を使用してください。配列が空の場合は `undefined` を返します。配列の先頭にあるデータにアクセスする際に便利です。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const firstElement1 = head(arr1);
-// firstElement1は1です。
+import { head } from 'es-toolkit/array';
 
-const arr2: string[] = [];
-const firstElement2 = head(arr2);
-// firstElement2はundefinedです。
+// 数値配列の最初の要素を取得します。
+const numbers = [1, 2, 3, 4, 5];
+head(numbers);
+// Returns: 1
 
-const arr3 = ['a', 'b', 'c'];
-const firstElement3 = head(arr3);
-// firstElement3は'a'です。
+// 文字列配列の最初の要素を取得します。
+const strings = ['a', 'b', 'c'];
+head(strings);
+// Returns: 'a'
 
-const arr4 = [true, false, true];
-const firstElement4 = head(arr4);
-// firstElement4はtrueです。
-
-const arr5: [number, string, boolean] = [1, 'a', true];
-const firstElement5 = head(arr5);
-// firstElement5は1です。
+// 空の配列はundefinedを返します。
+const emptyArray: number[] = [];
+head(emptyArray);
+// Returns: undefined
 ```
+
+型安全に処理されます。
+
+```typescript
+import { head } from 'es-toolkit/array';
+
+// 空でない配列の場合、型が確実です。
+const nonEmptyArray = [1, 2, 3] as const;
+head(nonEmptyArray);
+// Returns: 1 (型: 1)
+
+// 通常の配列の場合、undefined の可能性があります。
+const maybeEmptyArray = [1, 2, 3];
+head(maybeEmptyArray);
+// Returns: 1 | undefined (型: number | undefined)
+```
+
+#### パラメータ
+
+- `arr` (`readonly T[]`): 最初の要素を取得する配列です。
+
+#### 戻り値
+
+(`T | undefined`): 配列の最初の要素です。配列が空の場合は `undefined` を返します。

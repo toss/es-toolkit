@@ -1,28 +1,38 @@
-# update
+# update (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use direct assignment instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `update` function operates slowly due to complex path parsing and nested object creation logic.
+
+Use faster and more modern direct property assignment or optional chaining instead.
+
 :::
 
-Updates the value at the specified path of the given object using an updater function. If any part of the path doesn't exist, it will be created.
-
-## Signature
+Updates the value at the specified path of the object with an updater function.
 
 ```typescript
-function update(obj: object, path: PropertyKey | PropertyKey[], updater: (value: any) => any): any;
+const updated = update(object, path, updater);
+```
+
+## Interface
+
+```typescript
+function update<T extends object | null | undefined>(
+  obj: T,
+  path: PropertyKey | readonly PropertyKey[],
+  updater: (value: unknown) => unknown
+): T;
 ```
 
 ### Parameters
 
-- `obj` (`object`): The object to modify.
-- `path` (`PropertyKey | PropertyKey[]`): The path of the property to update.
-- `updater` (`(value: any) => any`): The function to produce the updated value.
+- `obj` (`T`): The object to modify.
+- `path` (`PropertyKey | readonly PropertyKey[]`): The path of the property to update.
+- `updater` (`(value: unknown) => unknown`): The function to produce the updated value.
 
 ### Returns
 
-(`any`): The modified object.
+(`T`): The modified object.
 
 ## Examples
 

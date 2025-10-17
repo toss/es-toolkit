@@ -1,53 +1,69 @@
-# size
+# size（Lodash 兼容性）
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `.length` 属性
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `size` 函数由于 `null`、`undefined` 处理和多种类型支持而运行复杂。
+
+请使用更快、更现代的 `.length` 属性或 `Object.keys().length`。
+
 :::
 
-返回数组、字符串或对象的大小。
-
-此函数接收一个数组、字符串或对象并返回其大小。对于数组和字符串，它分别返回元素或字符的数量。对于对象，它返回可枚举属性的数量。
-
-## 签名
+返回数组、字符串、对象的大小。
 
 ```typescript
-function size<T>(value: T[] | object | string | Map<unknown, T> | Set<T> | null | undefined): number;
+const length = size(collection);
 ```
 
-### 参数
+## 参考
 
-- value (`T`): 要确定大小的数组、字符串或对象。
+### `size(collection)`
 
-### 返回值
-
-(`number`): 输入值的大小。
-
-## 示例
+当需要检查数组、字符串、对象、Map、Set 的大小时，使用 `size`。它为各种类型的集合提供一致的大小信息。
 
 ```typescript
-const arr = [1, 2, 3];
-const arrSize = size(arr);
-// arrSize will be 3
+import { size } from 'es-toolkit/compat';
 
-const str = 'hello';
-const strSize = size(str);
-// strSize will be 5
+// 数组的元素个数
+size([1, 2, 3]);
+// 返回 3
 
-const obj = { a: 1, b: 2, c: 3 };
-const objSize = size(obj);
-// objSize will be 3
+// 字符串的字符个数
+size('hello');
+// 返回 5
 
-const emptyArr = [];
-const emptyArrSize = size(emptyArr);
-// emptyArrSize will be 0
+// 对象的可枚举属性个数
+size({ a: 1, b: 2, c: 3 });
+// 返回 3
 
-const emptyStr = '';
-const emptyStrSize = size(emptyStr);
-// emptyStrSize will be 0
+// Map 的元素个数
+size(
+  new Map([
+    ['a', 1],
+    ['b', 2],
+  ])
+);
+// 返回 2
 
-const emptyObj = {};
-const emptyObjSize = size(emptyObj);
-// emptyObjSize will be 0
+// Set 的元素个数
+size(new Set([1, 2, 3]));
+// 返回 3
 ```
+
+`null` 或 `undefined` 返回 0。
+
+```typescript
+import { size } from 'es-toolkit/compat';
+
+size(null); // 0
+size(undefined); // 0
+size({}); // 0
+size([]); // 0
+```
+
+#### 参数
+
+- `collection` (`object | string | null | undefined`)：要检查大小的数组、字符串、对象、Map、Set。
+
+#### 返回值
+
+(`number`)：返回集合的大小。如果是 `null` 或 `undefined`，则返回 0。

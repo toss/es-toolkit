@@ -1,14 +1,20 @@
-# values
+# values (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.values` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `values` function simply calls `Object.values` with unnecessary overhead.
+
+Use the faster and more modern `Object.values()` directly instead.
+
 :::
 
-Creates an array of the own enumerable property values of `object`.
+Returns an array of the object's own enumerable property values.
 
-## Signature
+```typescript
+const valueArray = values(object);
+```
+
+## Interface
 
 ```typescript
 function values<T>(object: Record<PropertyKey, T> | null | undefined): T[];
@@ -22,7 +28,7 @@ function values<T extends object>(object: T | null | undefined): Array<T[keyof T
 
 ### Returns
 
-(`T[]`): Returns an array of property values.
+(`T[]`): An array of property values.
 
 ## Examples
 

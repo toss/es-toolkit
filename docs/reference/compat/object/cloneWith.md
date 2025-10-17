@@ -1,54 +1,89 @@
-# cloneWith
+# cloneWith (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Implementing custom logic is recommended
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `cloneWith` function is relatively slow due to complex customizer function processing.
+
+Instead, use `clone` and implement custom logic directly.
+
 :::
 
-Creates a shallow clone of the given object with customization. This method is like `clone` except that it accepts a customizer which is invoked to produce the cloned value. If customizer returns undefined, cloning is handled by the method instead.
-
-If no customizer is provided, it behaves like `clone`.
-
-## Signature
+Creates a shallow copy of an object using a customizer function.
 
 ```typescript
-function cloneWith<T>(value: T, customizer?: (value: any) => any): T;
+const cloned = cloneWith(value, customizer);
 ```
 
-### Parameters
+## Reference
+
+### `cloneWith(value, customizer?)`
+
+Use `cloneWith` when you want to customize how copying works. The customizer function controls how specific values are copied.
+
+```typescript
+import { cloneWith } from 'es-toolkit/compat';
+
+// Basic usage (without customizer)
+const obj = { a: 1, b: 'hello' };
+const cloned = cloneWith(obj);
+// Returns: { a: 1, b: 'hello' } (new object instance)
+
+// Transforming number values
+const obj2 = { a: 1, b: 2, c: 'text' };
+const cloned2 = cloneWith(obj2, value => {
+  if (typeof value === 'number') {
+    return value * 2;
+  }
+  // Returning undefined uses default copy behavior
+});
+// Returns: { a: 2, b: 4, c: 'text' }
+
+// Transforming array elements
+const arr = [1, 2, 3];
+const clonedArr = cloneWith(arr, value => {
+  if (typeof value === 'number') {
+    return value + 10;
+  }
+});
+// Returns: [11, 12, 13]
+
+// Handling specific types
+const complex = {
+  date: new Date('2023-01-01'),
+  number: 42,
+  text: 'hello',
+};
+const clonedComplex = cloneWith(complex, value => {
+  if (value instanceof Date) {
+    // Convert Date to ISO string
+    return value.toISOString();
+  }
+  if (typeof value === 'string') {
+    return value.toUpperCase();
+  }
+  // Use default copy for other types
+});
+// Returns: { date: '2023-01-01T00:00:00.000Z', number: 42, text: 'HELLO' }
+```
+
+If the customizer returns `undefined`, the default copy behavior is used.
+
+```typescript
+import { cloneWith } from 'es-toolkit/compat';
+
+const obj = { a: 1, b: { c: 2 } };
+const cloned = cloneWith(obj, value => {
+  // Return undefined for all values = use default copy
+  return undefined;
+});
+// Returns: { a: 1, b: { c: 2 } } (same result as clone)
+```
+
+#### Parameters
 
 - `value` (`T`): The value to clone.
-- `customizer` (`Function`): Optional. The function to customize cloning.
+- `customizer` (`function`, optional): A function that determines how to copy. In the form `(value: any) => any`.
 
-### Returns
+#### Returns
 
-(`T`): A shallow clone of the given object.
-
-## Examples
-
-```typescript
-const num = 29;
-const clonedNum = cloneWith(num);
-console.log(clonedNum); // 29
-console.log(clonedNum === num); // true
-
-const arr = [1, 2, 3];
-const clonedArr = cloneWith(arr);
-console.log(clonedArr); // [1, 2, 3]
-console.log(clonedArr === arr); // false
-
-const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3] };
-const clonedObj = cloneWith(obj);
-console.log(clonedObj); // { a: 1, b: 'es-toolkit', c: [1, 2, 3] }
-console.log(clonedObj === obj); // false
-
-const obj2 = { a: 1, b: 2 };
-const clonedObjWithCustomizer = cloneWith(obj2, value => {
-  if (typeof value === 'number') {
-    return value * 2; // Double the number
-  }
-  // Returning undefined uses the default cloning
-});
-console.log(clonedObjWithCustomizer); // { a: 2, b: 4 }
-```
+(`T`): Returns the shallow copy processed by the customizer.

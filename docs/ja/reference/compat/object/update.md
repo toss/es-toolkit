@@ -1,28 +1,38 @@
-# update
+# update (Lodash 互換性)
 
-::: info
-この関数は互換性のために`es-toolkit/compat`でのみ利用可能です。代替のネイティブJavaScript APIが存在するか、まだ完全に最適化されていません。
+::: warning 直接代入を使用してください
 
-`es-toolkit/compat`からインポートする場合、この関数はlodashと全く同じように動作し、同じ機能を提供します。
+この `update` 関数は複雑なパス解析とネストされたオブジェクト作成ロジックにより遅く動作します。
+
+代わりに、より高速で現代的な直接プロパティ代入またはオプショナルチェーンを使用してください。
+
 :::
 
-指定されたパスのオブジェクトの値をアップデーター関数を使用して更新します。パスの一部が存在しない場合は自動的に作成されます。
+オブジェクトの指定されたパスにある値を更新関数で変更します。
+
+```typescript
+const updated = update(object, path, updater);
+```
 
 ## インターフェース
 
 ```typescript
-function update(obj: object, path: PropertyKey | PropertyKey[], updater: (value: any) => any): any;
+function update<T extends object | null | undefined>(
+  obj: T,
+  path: PropertyKey | readonly PropertyKey[],
+  updater: (value: unknown) => unknown
+): T;
 ```
 
 ### パラメータ
 
-- `obj` (`object`): 修正するオブジェクトです。
-- `path` (`PropertyKey | PropertyKey[]`): 更新するプロパティのパスです。
-- `updater` (`(value: any) => any`): 更新された値を生成する関数です。
+- `obj` (`T`): 変更するオブジェクト。
+- `path` (`PropertyKey | readonly PropertyKey[]`): 更新するプロパティのパス。
+- `updater` (`(value: unknown) => unknown`): 更新された値を生成する関数。
 
 ### 戻り値
 
-(`any`): 修正されたオブジェクトです。
+(`T`): 変更されたオブジェクト。
 
 ## 例
 
@@ -31,11 +41,11 @@ import { update } from 'es-toolkit/compat';
 
 const object = { a: [{ b: { c: 3 } }] };
 
-// パスにある値を更新する
-update(object, 'a[0].b.c', n => (n as number) + 1);
-// => { a: [{ b: { c: 4 } }] }
+// 更新関数を使用して値を更新
+update(object, 'a[0].b.c', n => (n as number) * 2);
+// => { a: [{ b: { c: 6 } }] }
 
-// 存在しないパスを更新すると自動的に作成される
-update(object, 'x.y.z', () => 'created');
-// => { a: [{ b: { c: 3 } }], x: { y: { z: 'created' } } }
+// パスが存在しない場合は値を作成
+update({}, 'a.b[0]', () => 'c');
+// => { a: { b: ['c'] } }
 ```

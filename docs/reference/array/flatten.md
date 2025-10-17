@@ -1,35 +1,53 @@
 # flatten
 
-Flattens the nested array given as an argument to the desired depth.
-
-It works the same as [Array.prototype.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) provided by default in JavaScript and returns the same type. However, its performance is superior.
-
-## Signature
+Returns a new array that is flattened to the specified depth.
 
 ```typescript
-function flatten<T, D extends number = 1>(arr: T[], depth?: D): Array<FlatArray<T[], D>>;
+const result = flatten(arr, depth);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array to flatten.
-- `depth` (`D`): The depth to flatten, which defaults to 1.
+### `flatten(arr, depth = 1)`
 
-### Returns
+Use `flatten` when you want to flatten a nested array to a specific depth. It unwinds arrays within arrays to the specified level, creating a flatter structure.
 
-(`Array<FlatArray<T[], D>>`) A new array that has been flattened.
-
-## Examples
+It works identically to the [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) included in the JavaScript language, but it's faster.
 
 ```typescript
+import { flatten } from 'es-toolkit/array';
+
+// Flatten with default depth of 1
+const array = [1, [2, 3], [4, [5, 6]]];
+flatten(array);
+// Returns: [1, 2, 3, 4, [5, 6]]
+
+// Flatten with depth of 2
+flatten(array, 2);
+// Returns: [1, 2, 3, 4, 5, 6]
+```
+
+You can control the depth to flatten only to the desired level.
+
+```typescript
+import { flatten } from 'es-toolkit/array';
+
 const array = [1, [2, 3], [4, [5, 6]]];
 
-const result1 = flatten(array);
-// Return [1, 2, 3, 4, [5, 6]]
+// Flatten with depth of 1 (default)
+const result1 = flatten(array, 1);
+// Returns: [1, 2, 3, 4, [5, 6]]
 
-const result2 = flatten(array, 1);
-// Return [1, 2, 3, 4, [5, 6]]
-
-const result3 = flatten(array, 2);
-// Return [1, 2, 3, 4, 5, 6]
+// Flatten with depth of 2
+const result2 = flatten(array, 2);
+// Returns: [1, 2, 3, 4, 5, 6]
 ```
+
+#### Parameters
+
+- `arr` (`T[]`): The nested array to flatten.
+- `depth` (`D`, optional): The depth to flatten. Defaults to `1`.
+
+#### Returns
+
+(`Array<FlatArray<T[], D>>`): Returns a new array flattened to the specified depth.

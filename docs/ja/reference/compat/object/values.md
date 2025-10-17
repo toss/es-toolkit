@@ -1,14 +1,18 @@
-# values
+# values (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.values` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `values` 関数は単に `Object.values` を呼び出すだけで、不必要なオーバーヘッドがあります。
+
+代わりに、より高速で現代的な `Object.values()` を直接使用してください。
+
 :::
 
-`object` の列挙可能なプロパティ値を返します。
+オブジェクトの自身の列挙可能なプロパティ値の配列を返します。
 
-オブジェクトではない値はオブジェクトに変換されます。
+```typescript
+const valueArray = values(object);
+```
 
 ## インターフェース
 
@@ -20,7 +24,7 @@ function values<T extends object>(object: T | null | undefined): Array<T[keyof T
 
 ### パラメータ
 
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): 問い合わせるオブジェクト。
+- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): プロパティ値を取得するオブジェクト。
 
 ### 戻り値
 

@@ -1,137 +1,77 @@
-# every
+# every (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.every()` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `every` 関数は、複雑なオブジェクト処理、様々な条件形式のサポートなどにより遅く動作します。
+
+代わりに、より高速で現代的な `Array.prototype.every()` を使用してください。
+
 :::
 
-配列やオブジェクトのすべての要素が指定された条件を満たすかどうかを確認します。
-
-条件は複数の方法で指定できます。
-
-- **検査関数**: 各要素に対して検査する関数を実行します。すべての要素が `true` を返す場合、結果は `true` になります。
-- **部分オブジェクト**: 与えられたオブジェクトとすべてのプロパティが一致する場合にのみ `true` を返します。
-- **プロパティ-値ペア**: 該当プロパティに対してすべての要素が値が一致する場合に `true` を返します。
-- **プロパティ名**: 該当プロパティに対してすべての要素が真と評価される値を持つ場合に `true` を返します。
-
-## インターフェース
+配列またはオブジェクトのすべての値が与えられた条件に合うかを返します。
 
 ```typescript
-function every<T>(arr: T[]): boolean;
-function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
-function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
-function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: PropertyKey): boolean;
-
-function every<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): boolean;
+const result = every(collection, predicate);
 ```
 
-### パラメータ
+## 参照
 
-- `arr` (`T[]`) または `object` (`T`): 検索する配列またはオブジェクト。
+### `every(collection, predicate?)`
 
-::: info `arr` は `ArrayLike<T>`、`null` または `undefined` である可能性があります
-
-lodash と完全に互換性があるように、`every` 関数は `arr` を次のように処理します:
-
-- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換されます。
-- `arr` が `null` または `undefined` の場合、空の配列として扱われます。
-
-:::
-
-::: info `object` は `null` または `undefined` である可能性があります
-
-lodash と完全に互換性があるように、`every` 関数は `object` を次のように処理します:
-
-- `object` が `null` または `undefined` の場合、空のオブジェクトに変換されます。
-
-:::
-
-- `doesMatch`:
-
-  - 配列の場合:
-
-    - **検査関数** (`(item: T, index: number, arr: T[]) => unknown`): 条件を満たすかどうかを確認する関数。すべての要素が条件を満たす場合、結果は `true` になります。
-    - **部分オブジェクト** (`Partial<T>`): 与えられた部分オブジェクトのプロパティと値に一致する場合、すべての要素が条件を満たす必要があります。
-    - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。すべての要素がこの条件を満たす場合、結果は `true` になります。
-    - **プロパティ名** (`PropertyKey`): 指定されたプロパティがすべての要素に対して真と評価される場合、結果は `true` になります。
-
-  - オブジェクトの場合:
-    - **検査関数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 条件を満たすかどうかを確認する関数。すべての要素が条件を満たす場合、結果は `true` になります。
-    - **部分値** (`Partial<T[keyof T]>`): 与えられた部分値に一致する場合、すべての要素が条件を満たす必要があります。
-    - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。すべての要素がこの条件を満たす場合、結果は `true` になります。
-    - **プロパティ名** (`PropertyKey`): 指定されたプロパティがすべての要素に対して真と評価される場合、結果は `true` になります。
-
-### 戻り値
-
-(`boolean`): 与えられた条件を満たすすべての要素がある場合は `true`、そうでない場合は `false` を返します。
-
-## 例
-
-### 配列の場合
+配列またはオブジェクトのすべての要素が特定の条件を満たすか確認したい場合に `every` を使用します。条件は関数、部分オブジェクト、プロパティ-値ペア、プロパティ名など、様々な形式で指定できます。
 
 ```typescript
 import { every } from 'es-toolkit/compat';
 
-// 検査関数を使う場合
-const items = [1, 2, 3, 4, 5];
-const result = every(items, item => item > 0);
-console.log(result); // true
+// 検査関数を使用
+const numbers = [2, 4, 6, 8];
+every(numbers, x => x % 2 === 0);
+// 戻り値: true
 
-// 部分オブジェクトを使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+// プロパティ名を使用
+const users = [
+  { name: 'Alice', active: true },
+  { name: 'Bob', active: true },
 ];
-const result = every(items, { name: 'Bob' });
-console.log(result); // false
+every(users, 'active');
+// 戻り値: true
 
-// プロパティ-値ペアを使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, ['name', 'Alice']);
-console.log(result); // false
+// 部分オブジェクトを使用
+every(users, { active: true });
+// 戻り値: true
 
-// プロパティ名を使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, 'name');
-console.log(result); // true
+// プロパティ-値ペアを使用
+every(users, ['active', true]);
+// 戻り値: true
 ```
 
-### オブジェクトの場合
+オブジェクトに対しても同じように動作します。
 
 ```typescript
 import { every } from 'es-toolkit/compat';
 
-// 検査関数を使う場合
-const obj = { a: 1, b: 2, c: 3 };
-const result = every(obj, value => value > 0);
-console.log(result); // true
-
-// 部分オブジェクトを使う場合
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, { name: 'Bob' });
-console.log(result); // false
-
-// プロパティ-値ペアを使う場合
-const obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = every(obj, ['name', 'Alice']);
-console.log(result); // false
-
-// プロパティ名を使う場合
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, 'name');
-console.log(result); // true
+const scores = { math: 90, english: 85, science: 92 };
+every(scores, score => score >= 80);
+// 戻り値: true
 ```
+
+`null` または `undefined` は空のコレクションとして処理され `true` を返します。
+
+```typescript
+import { every } from 'es-toolkit/compat';
+
+every(null);
+// 戻り値: true
+
+every(undefined);
+// 戻り値: true
+```
+
+#### パラメータ
+
+- `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 検査する配列またはオブジェクトです。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 検査条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。デフォルトは `identity` 関数です。
+
+#### 戻り値
+
+(`boolean`): すべての要素が条件を満たせば `true`、そうでなければ `false` を返します。

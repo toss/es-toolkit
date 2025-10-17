@@ -1,21 +1,27 @@
-# updateWith
+# updateWith (Lodash 兼容性)
 
-::: info
-此函数仅在 `es-toolkit/compat` 中可用，原因是出于兼容性考虑。它要么有替代的原生 JavaScript API，要么尚未完全优化。
+::: warning 请使用直接赋值
 
-从 `es-toolkit/compat` 导入时，此函数的行为与 lodash 完全相同，并提供相同的功能。
+此 `updateWith` 函数由于复杂的路径解析和自定义函数处理而运行缓慢。
+
+请使用更快、更现代的直接属性赋值或可选链。
+
 :::
 
-使用 `updater` 函数返回的值更新对象指定路径上的值。当路径的某部分不存在时，可以通过 `customizer` 函数指定如何创建新对象。
+使用更新函数更新对象指定路径的值,同时使用自定义函数控制路径创建。
+
+```typescript
+const updated = updateWith(object, path, updater, customizer);
+```
 
 ## 签名
 
 ```typescript
-function updateWith<T extends object>(
+function updateWith<T extends object | null | undefined>(
   obj: T,
   path: PropertyKey | readonly PropertyKey[],
-  updater: (oldValue: any) => any,
-  customizer?: (value: any, key: string, object: T) => any
+  updater: (value: unknown) => unknown,
+  customizer: (value: unknown) => unknown
 ): T;
 ```
 
@@ -23,8 +29,8 @@ function updateWith<T extends object>(
 
 - `obj` (`T`): 要修改的对象。
 - `path` (`PropertyKey | readonly PropertyKey[]`): 要更新的属性路径。
-- `updater` (`(oldValue: any) => any`): 生成更新值的函数。
-- `customizer` (`(value: any, key: string, object: T) => any`, 可选): 定制更新过程的函数。
+- `updater` (`(value: unknown) => unknown`): 生成更新值的函数。
+- `customizer` (`(value: unknown) => unknown`): 自定义更新过程的函数。
 
 ### 返回值
 
@@ -35,16 +41,22 @@ function updateWith<T extends object>(
 ```typescript
 import { updateWith } from 'es-toolkit/compat';
 
-const object = { a: [{ b: { c: 3 } }] };
+const object = {};
 
-// 使用定制器函数创建自定义路径结构
-updateWith(object, '[0].a.b.c', n => (n as number) + 1, customizer);
-// => { '0': { a: { b: { c: 4 } } }, a: [{ b: { c: 3 } }] }
+// 使用自定义函数创建自定义路径结构
+updateWith(object, '[0][1]', () => 'a', Object);
+// => { '0': { '1': 'a' } }
 
-function customizer(value: unknown) {
-  if (value == null) {
-    return {};
+// 自定义路径创建
+updateWith(
+  object,
+  '[0][2]',
+  () => 'b',
+  value => {
+    if (typeof value === 'number') {
+      return [];
+    }
   }
-  return value;
-}
+);
+// => { '0': { '1': 'a', '2': 'b' } }
 ```

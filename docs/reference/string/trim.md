@@ -1,26 +1,52 @@
 # trim
 
-Removes leading and trailing whitespace or specified characters from a string.
-
-## Signature
+Removes whitespace or specified characters from the beginning and end of a string.
 
 ```typescript
-function trim(str: string, chars?: string | string[]): string;
+const trimmed = trim(str, chars);
 ```
 
-### Parameters
+## Reference
 
-- `str` (`string`): The string from which characters will be trimmed.
-- `chars` (`string | string[]`): The character(s) to remove from the string. Can be a single character or an array of characters.
+### `trim(str, chars?)`
 
-### Returns
-
-(`string`): The resulting string after the specified characters have been removed.
-
-## Examples
+Use `trim` when you want to remove unnecessary characters from the start and end of a string. If no specific characters are specified, it removes whitespace characters.
 
 ```typescript
-trim('  hello  '); // "hello"
-trim('--hello--', '-'); // "hello"
-trim('##hello##', ['#', 'o']); // "hell"
+import { trim } from 'es-toolkit/string';
+
+// Basic whitespace removal
+trim('  hello  '); // 'hello'
+trim('\t\n  hello  \r\n'); // 'hello'
+
+// Removing specific characters
+trim('--hello--', '-'); // 'hello'
+trim('***hello***', '*'); // 'hello'
+
+// Removing if any of multiple characters match
+trim('##hello##world##', ['#', 'd']); // 'hello##worl'
 ```
+
+When you specify multiple characters as an array, all characters that match any of them are removed.
+
+```typescript
+import { trim } from 'es-toolkit/string';
+
+// Specifying multiple characters as an array
+trim('!!@@hello@@!!', ['!', '@']); // 'hello'
+
+// Removing numbers and special characters
+trim('123abc123', ['1', '2', '3']); // 'abc'
+
+// Removing characters and spaces together
+trim('  __hello__  ', ['_', ' ']); // 'hello'
+```
+
+#### Parameters
+
+- `str` (`string`): The string to remove characters from the beginning and end.
+- `chars` (`string | string[]`, optional): The characters to remove. Can use a string or character array. Defaults to whitespace characters.
+
+#### Returns
+
+(`string`): Returns a new string with the specified characters removed from the beginning and end.

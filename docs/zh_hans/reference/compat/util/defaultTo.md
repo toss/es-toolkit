@@ -1,34 +1,70 @@
-# defaultTo
+# defaultTo (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-返回 `null`、`undefined` 和 `NaN` 的默认值。
-
-## 签名
+对于 `null`、`undefined`、`NaN` 的值返回默认值。
 
 ```typescript
-function defaultTo<T>(value: T | null | undefined, defaultValue?: T): T;
-function defaultTo<T, D>(value: T | null | undefined, defaultValue: D): T | D;
+const result = defaultTo(value, defaultValue);
 ```
 
-### 参数
+## 参考
+
+### `defaultTo(value, defaultValue)`
+
+当值为 `null`、`undefined` 或 `NaN` 时，您想要提供默认值时，请使用 `defaultTo`。在处理 API 响应或用户输入中的无效值时很有用。
+
+```typescript
+import { defaultTo } from 'es-toolkit/compat';
+
+// 基本用法
+console.log(defaultTo(null, 'default')); // 'default'
+console.log(defaultTo(undefined, 'default')); // 'default'
+console.log(defaultTo(NaN, 0)); // 0
+console.log(defaultTo('actual', 'default')); // 'actual'
+console.log(defaultTo(123, 0)); // 123
+```
+
+可以用于处理 API 响应。
+
+```typescript
+import { defaultTo } from 'es-toolkit/compat';
+
+function processUserData(response) {
+  return {
+    name: defaultTo(response.name, '无名称'),
+    age: defaultTo(response.age, 0),
+    score: defaultTo(response.score, 0), // 包括 NaN 处理
+  };
+}
+
+// 当 API 返回不完整数据时
+const userData = processUserData({
+  name: null,
+  age: undefined,
+  score: NaN,
+});
+
+console.log(userData);
+// { name: '无名称', age: 0, score: 0 }
+```
+
+也可以用于数组或对象。
+
+```typescript
+import { defaultTo } from 'es-toolkit/compat';
+
+const users = defaultTo(response.users, []);
+const metadata = defaultTo(response.metadata, {});
+
+// 只处理 null/undefined/NaN，不处理空数组或对象
+console.log(defaultTo([], ['default'])); // [] (空数组但是有效值)
+console.log(defaultTo({}, { default: true })); // {} (空对象但是有效值)
+```
+
+#### 参数
 
 - `value` (`T | null | undefined`): 要检查的值。
-- `defaultValue` (`D`): 如果值是 `null`、`undefined` 或 `NaN`，则返回的默认值。
+- `defaultValue` (`D`): 当值为 `null`、`undefined` 或 `NaN` 时要返回的默认值。
 
-### 返回值
+#### 返回值
 
-(`T | D`): 第一个值或默认值。
-
-## 示例
-
-```typescript
-defaultTo(null, 'default'); // returns 'default'
-defaultTo(undefined, 42); // returns 42
-defaultTo(NaN, 0); // returns 0
-defaultTo('actual', 'default'); // returns 'actual'
-defaultTo(123, 0); // returns 123
-```
+(`T | D`): 如果值有效则返回原始值，否则返回默认值。

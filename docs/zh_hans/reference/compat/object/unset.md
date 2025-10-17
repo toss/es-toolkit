@@ -1,27 +1,34 @@
-# unset
+# unset (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `delete` 运算符
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `unset` 函数由于复杂的路径解析和嵌套对象处理而运行缓慢。
+
+请直接使用更快、更现代的 `delete` 运算符。
+
 :::
 
-删除对象中指定路径的属性。
+删除对象指定路径的属性。
+
+```typescript
+const success = unset(object, path);
+```
 
 ## 签名
 
 ```typescript
-function unset(obj: any, path: PropertyKey | PropertyKey[]): boolean;
+function unset(obj: unknown, path: PropertyKey | PropertyKey[]): boolean;
 ```
 
 ### 参数
 
-- `obj` (`any`): 要修改的对象。
-- `path` (`PropertyKey | PropertyKey[]`): 要取消设置的属性路径。
+- `obj` (`unknown`): 要修改的对象。
+- `path` (`PropertyKey | PropertyKey[]`): 要删除的属性路径。
 
 ### 返回值
 
-(`boolean`): 如果属性被删除则返回true，否则返回false。
+(`boolean`): 如果属性被删除则返回 true,否则返回 false。
+字符串。
 
 ## 示例
 

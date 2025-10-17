@@ -1,12 +1,18 @@
-# unset
+# unset (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `delete` 연산자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `unset` 함수는 복잡한 경로 파싱과 중첩 객체 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `delete` 연산자를 직접 사용하세요.
+
 :::
 
-주어진 경로에 있는 객체의 속성을 제거해요.
+객체의 지정된 경로에 있는 속성을 제거해요.
+
+```typescript
+const success = unset(object, path);
+```
 
 ## 인터페이스
 
@@ -19,7 +25,7 @@ function unset(obj: any, path: PropertyKey | PropertyKey[]): boolean;
 - `obj` (`any`): 수정할 객체예요.
 - `path` (`PropertyKey | PropertyKey[]`): 제거할 속성의 경로예요.
 
-### 반환 값
+#### 반환 값
 
 (`boolean`): 속성이 삭제되면 true를 반환하고, 그렇지 않으면 false를 반환해요.
 문자열.

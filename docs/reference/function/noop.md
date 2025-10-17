@@ -1,28 +1,66 @@
 # noop
 
-A no-operation function that does nothing. This can be used as a placeholder or default function.
-
-## Signature
+An empty function that does nothing.
 
 ```typescript
-function noop(): void;
+noop();
 ```
 
-### Returns
+::: info [`asyncNoop`](./asyncNoop.md) function
 
-(`void`): This function does not return anything.
+If you need a function that asynchronously does nothing, use the `asyncNoop` function which immediately returns a `Promise<void>`.
 
-## Examples
+:::
+
+## Reference
+
+### `noop()`
+
+Use `noop` when you need a function that performs no operation.
+
+This is useful as a default value where a function is required or when you want to disable a callback function. It's frequently used as a placeholder or during initialization.
 
 ```typescript
 import { noop } from 'es-toolkit/function';
 
-interface Props {
-  onChange?: () => void;
+// Using as a default value for optional callbacks
+interface EventHandlers {
+  onSuccess?: () => void;
+  onError?: () => void;
 }
 
-function MyComponent({ onChange = noop }: Props) {
-  // Here onChange is guaranteed to be a function, so it's safe to call.
-  onChange();
+function processData({ onSuccess = noop, onError = noop }: EventHandlers = {}) {
+  try {
+    // Data processing logic
+    console.log('Data processing complete');
+    onSuccess(); // Safe to call
+  } catch (error) {
+    onError(); // Safe to call
+  }
 }
+
+// Safe to use without undefined checks
+processData({
+  onSuccess: () => console.log('Success!'),
+  // onError is handled as noop by default
+});
 ```
+
+It can also be used with array methods.
+
+```typescript
+import { noop } from 'es-toolkit/function';
+
+// Conditionally execute functions
+const operations = [
+  () => console.log('First task'),
+  shouldRunSecond ? () => console.log('Second task') : noop,
+  () => console.log('Third task'),
+];
+
+operations.forEach(op => op()); // Execute all operations safely
+```
+
+#### Returns
+
+(`void`): Returns nothing.

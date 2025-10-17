@@ -1,85 +1,31 @@
-# isMatchWith
+# isMatchWith (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-使用给定的比较函数通过执行部分深度比较来检查目标是否包含源中的所有属性和值。比较函数可以用来精细控制匹配逻辑。
-
-该函数会递归遍历两个值，对每个属性-值对调用自定义比较函数。如果比较函数返回布尔值，则直接使用该结果；如果返回 `undefined`，则使用 [isMatch](./isMatch.md) 中的默认比较函数。
-
-当源中的所有属性/元素都存在于目标中且匹配时返回 `true`。目标可以拥有比源更多的属性/元素。
-
-不同数据类型的比较方式如下：
-
-- **对象**: 当 `source` 的所有属性都存在于 `target` 中且匹配时返回 `true`
-- **数组**: 当 `source` 数组的所有元素都能在 `target` 数组中找到时返回 `true`（与顺序无关）
-- **Map**: 当 `source` Map 中的所有键值对都存在于 `target` Map 中且匹配时返回 `true`
-- **Set**: 当 `source` Set 中的所有元素都能在 `target` Set 中找到时返回 `true`
-- **函数**: 使用严格相等（`===`）比较，如果函数有属性则按对象方式比较
-- **原始值**: 使用严格相等（`===`）比较
-
-特殊情况：
-
-- 当 `source` 是空对象、空数组、空 Map 或空 Set 时，对任何 `target` 都返回 `true`
-- 使用内部栈处理循环引用对象以防止无限递归
-
-## 签名
+使用自定义比较函数检查对象是否部分匹配。
 
 ```typescript
-function isMatchWith(
-  target: unknown,
-  source: unknown,
-  compare?: (objValue: any, srcValue: any, key: PropertyKey, object: any, source: any, stack?: Map<any, any>) => unknown
-): boolean;
+const result = isMatchWith(target, source, customizer);
 ```
 
-### 参数
+## 参考
 
-- `target` (`unknown`): 要检查的目标值
-- `source` (`unknown`): 包含应存在于目标中的属性/值的源模式
-- `compare` (`function`, 可选): 可选的自定义比较函数。接收以下参数:
-  - `objValue`: 当前路径的 target 值
-  - `srcValue`: 当前路径的 source 值
-  - `key`: 正在比较的属性键或数组索引
-  - `object`: target 的父对象/数组
-  - `source`: source 的父对象/数组
-  - `stack`: 用于检测循环引用的内部 Map
-    匹配时返回 `true`，不匹配时返回 `false`，要继续使用默认行为时返回 `undefined`
+### `isMatchWith(target, source, customizer)`
 
-### 返回值
-
-(`boolean`): 如果目标包含源中的所有属性/元素，则返回 `true`，否则返回 `false`。
-
-## 示例
-
-### 基本比较（不使用比较函数）
+当需要自定义比较逻辑时使用 `isMatchWith`。您可以直接控制每个属性的比较。
 
 ```typescript
-// Basic matching without custom comparator
-isMatchWith({ a: 1, b: 2 }, { a: 1 }); // true
-isMatchWith([1, 2, 3], [1, 3]); // true
-```
+import { isMatchWith } from 'es-toolkit/compat';
 
-### 不区分大小写的字符串比较
-
-```typescript
+// 不区分大小写的字符串比较
 const caseInsensitiveCompare = (objVal, srcVal) => {
   if (typeof objVal === 'string' && typeof srcVal === 'string') {
     return objVal.toLowerCase() === srcVal.toLowerCase();
   }
-  return undefined; // Use default behavior for non-strings
+  return undefined; // 使用默认行为
 };
 
-isMatchWith({ name: 'JOHN', age: 30 }, { name: 'john' }, caseInsensitiveCompare); // true
-```
+isMatchWith({ name: 'ALICE', age: 25 }, { name: 'alice' }, caseInsensitiveCompare); // true
 
-### 使用自定义比较函数进行数值范围比较
-
-```typescript
-// Custom comparison for range matching
+// 数字范围比较
 const rangeCompare = (objVal, srcVal, key) => {
   if (key === 'age' && typeof srcVal === 'object' && srcVal.min !== undefined) {
     return objVal >= srcVal.min && objVal <= srcVal.max;
@@ -88,4 +34,41 @@ const rangeCompare = (objVal, srcVal, key) => {
 };
 
 isMatchWith({ name: 'John', age: 25 }, { age: { min: 18, max: 30 } }, rangeCompare); // true
+
+// 数组长度比较
+const lengthCompare = (objVal, srcVal, key) => {
+  if (key === 'items' && Array.isArray(objVal) && typeof srcVal === 'number') {
+    return objVal.length === srcVal;
+  }
+  return undefined;
+};
+
+isMatchWith({ items: ['a', 'b', 'c'], count: 3 }, { items: 3 }, lengthCompare); // true
+
+// 复杂的条件比较
+const conditionalCompare = (objVal, srcVal, key, object, source) => {
+  // 仅在特定键上应用特殊逻辑
+  if (key === 'status') {
+    return objVal === 'active' || srcVal === 'any';
+  }
+
+  // 嵌套对象中的特殊处理
+  if (typeof objVal === 'object' && objVal !== null && srcVal?.special) {
+    return objVal.id === srcVal.special;
+  }
+
+  return undefined; // 默认行为
+};
+
+isMatchWith({ user: { id: 123, status: 'active' } }, { user: { special: 123 }, status: 'any' }, conditionalCompare); // true
 ```
+
+#### 参数
+
+- `target` (`unknown`): 要检查是否匹配的对象。
+- `source` (`unknown`): 作为匹配模式的对象。
+- `customizer` (`function`, 可选): 自定义比较逻辑的函数。应该返回 `true`、`false` 或 `undefined`。
+
+#### 返回值
+
+(`boolean`): 如果 target 通过自定义逻辑部分匹配 source，则返回 `true`，否则返回 `false`。
