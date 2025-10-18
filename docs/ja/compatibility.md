@@ -5,7 +5,7 @@
 `es-toolkit/compat`はLodashのすべての関数と同じように動作しながら、より軽量で高速です。
 
 - Lodashの実際のテストコードと同じ動作を保証します。
-- Storybook、Recharts、CKEditorなどの有名なオープンソースライブラリで使用され、Nuxtから推奨されています。
+- MUI(Material UI、Base UI、MUI X)、Storybook、Recharts、CKEditorなどの有名なオープンソースライブラリで使用され、Nuxtから推奨されています。
 
 すべての互換性関数の詳細なドキュメントは[互換性リファレンス](/ja/reference/compat/array/castArray)でご確認いただけます。
 

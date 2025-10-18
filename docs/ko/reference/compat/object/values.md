@@ -62,7 +62,7 @@ const obj = Object.create(
   { inherited: 'not included' },
   {
     own: { value: 'included', enumerable: true },
-    nonEnum: { value: 'not included', enumerable: false }
+    nonEnum: { value: 'not included', enumerable: false },
   }
 );
 
