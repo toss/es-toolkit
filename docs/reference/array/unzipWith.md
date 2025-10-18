@@ -31,7 +31,7 @@ const words = [
   ['es', 'toolkit'],
 ];
 const combined = unzipWith(words, (a, b, c) => a + b + c);
-console.log(combined); // ['hellofoes', 'worldbartoolkit']
+console.log(combined); // ['hellofooes', 'worldbartoolkit']
 
 // Calculate average of specific property from object array.
 const scores = [

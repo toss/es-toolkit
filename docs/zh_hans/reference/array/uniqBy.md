@@ -34,7 +34,7 @@ console.log(uniqueByAge);
 // 根据字符串长度去除重复项。
 const words = ['apple', 'pie', 'banana', 'cat', 'dog'];
 const uniqueByLength = uniqBy(words, word => word.length);
-console.log(uniqueByLength); // ['apple', 'pie', 'cat']
+console.log(uniqueByLength); // ['apple', 'pie', 'banana']
 ```
 
 对于复杂对象也可以根据特定字段的组合进行去重。

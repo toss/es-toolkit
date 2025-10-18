@@ -31,7 +31,7 @@ const words = [
   ['es', 'toolkit'],
 ];
 const combined = unzipWith(words, (a, b, c) => a + b + c);
-console.log(combined); // ['hellofoes', 'worldbartoolkit']
+console.log(combined); // ['hellofooes', 'worldbartoolkit']
 
 // オブジェクト配列から特定のプロパティの平均を求めます。
 const scores = [

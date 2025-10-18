@@ -31,7 +31,7 @@ const words = [
   ['es', 'toolkit'],
 ];
 const combined = unzipWith(words, (a, b, c) => a + b + c);
-console.log(combined); // ['hellofoes', 'worldbartoolkit']
+console.log(combined); // ['hellofooes', 'worldbartoolkit']
 
 // 객체 배열에서 특정 속성의 평균을 구해요.
 const scores = [
