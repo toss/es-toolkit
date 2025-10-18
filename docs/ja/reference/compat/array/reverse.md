@@ -1,40 +1,61 @@
-# reverse
+# reverse（Lodash 互換性）
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.reverse()` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `reverse` 関数は、Lodash との互換性のために `null` や `undefined` の処理を含んでいます。単純な配列の逆順だけが必要な場合は、ネイティブ JavaScript の `Array.prototype.reverse()` メソッドがより直感的で高速に動作します。
+
+より高速でモダンな `Array.prototype.reverse()` を使用してください。
+
 :::
 
 配列の要素をその場で反転します。
 
-この関数は配列の要素をその場で反転し、元の配列を直接変更します。入力が`null`または`undefined`の場合、その値をそのまま返します。
-
-## インターフェース
-
 ```typescript
-function reverse<T>(array: T[]): T[];
+const reversed = reverse(array);
 ```
 
-### パラメータ
+## 参照
 
-- - `array` (`T[]`): 反転する配列。
+### `reverse(array)`
 
-### 戻り値
-
-(`T[]`): 反転された配列。
-
-## ## 例
+配列の順序を逆にして、最初の要素が最後に、最後の要素が最初になるようにします。元の配列を直接変更し、変更された配列を返します。
 
 ```typescript
-const array = [1, 2, 3, 4, 5];
-const reversedArray = reverse(array);
-console.log(reversedArray); // [5, 4, 3, 2, 1]
-console.log(array); // [5, 4, 3, 2, 1] （元の配列が変更されます）
+import { reverse } from 'es-toolkit/compat';
 
-const emptyArray = reverse([]);
-console.log(emptyArray); // []
+// 数値配列を反転
+const numbers = [1, 2, 3, 4, 5];
+const reversed = reverse(numbers);
+console.log(numbers); // => [5, 4, 3, 2, 1]
+console.log(reversed); // => [5, 4, 3, 2, 1]
 
-const nullArray = reverse(null);
-console.log(nullArray); // null
+// 文字列配列を反転
+const words = ['apple', 'banana', 'cherry'];
+reverse(words);
+console.log(words); // => ['cherry', 'banana', 'apple']
+
+// 空の配列や null/undefined はそのまま返される
+reverse([]); // => []
+reverse(null); // => null
+reverse(undefined); // => undefined
 ```
+
+この関数は元の配列を直接変更する点に注意が必要です。
+
+```typescript
+import { reverse } from 'es-toolkit/compat';
+
+const original = [1, 2, 3];
+const result = reverse(original);
+
+console.log(original === result); // => true（同じ配列オブジェクト）
+console.log(original); // => [3, 2, 1]（元が変更される）
+```
+
+#### パラメータ
+
+- `array` (`T[] | null | undefined`): 反転する配列。`null` や `undefined` の場合はそのまま返します。
+
+#### 戻り値
+
+(`T[] | null | undefined`): 反転された配列を返します。入力が `null` や `undefined` の場合、その値をそのまま返します。

@@ -2,31 +2,51 @@
 
 文字列を反転します。
 
-この関数は文字列を入力として受け取り、その文字列を反転した形で返します。
-
-## インターフェース
-
 ```typescript
-function reverseString(value: string): string;
+const reversed = reverseString(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`string`): 反転する文字列。
+### `reverseString(value)`
 
-### 戻り値
-
-(`string`): 反転された文字列。
-
-## 例
+文字列の文字順序を反転したいときは `reverseString` を使用してください。Unicode文字と絵文字も正しく処理します。
 
 ```typescript
 import { reverseString } from 'es-toolkit/string';
 
-const reversedStr1 = reverseString('hello'); // returns 'olleh'
-const reversedStr2 = reverseString('PascalCase'); // returns 'esaClacsaP'
-const reversedStr3 = reverseString('foo 😄 bar'); // returns 'rab 😄 oof'
+// 基本的な文字列反転
+reverseString('hello'); // 'olleh'
+reverseString('world'); // 'dlrow'
+
+// 大文字小文字が混在した文字列
+reverseString('PascalCase'); // 'esaClacsaP'
+
+// 空白を含む文字列
+reverseString('hello world'); // 'dlrow olleh'
 ```
+
+絵文字と特殊文字も正確に処理します。
+
+```typescript
+import { reverseString } from 'es-toolkit/string';
+
+// 絵文字を含む文字列
+reverseString('foo 😄 bar'); // 'rab 😄 oof'
+reverseString('안녕하세요'); // '요세하녕안'
+
+// 数字と特殊文字
+reverseString('12345'); // '54321'
+reverseString('a-b-c'); // 'c-b-a'
+```
+
+#### パラメータ
+
+- `value` (`string`): 反転する文字列です。
+
+#### 戻り値
+
+(`string`): 文字順序が反転した新しい文字列を返します。
 
 ## デモ
 

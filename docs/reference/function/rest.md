@@ -1,43 +1,79 @@
 # rest
 
-Creates a function that transforms the arguments of the provided function `func`.
-The transformed arguments are passed to `func` such that the arguments starting from a specified index
-are grouped into an array, while the previous arguments are passed as individual elements.
-
-## Signature
+Creates a new function that bundles parameters from a specific index into an array and passes them to the function.
 
 ```typescript
-function rest<F extends (...args: any[]) => any>(func: F, startIndex: number): (...args: any[]) => ReturnType<F>;
+const restFunc = rest(func, startIndex);
 ```
 
-### Parameters
+## Reference
 
-- `func` (`F`): The function whose arguments are to be transformed.
-- `startIndex` (`number`, optional): The index from which to start grouping the remaining arguments into an array. Defaults to `func.length - 1`, grouping all arguments after the last parameter.
+### `rest(func, startIndex?)`
 
-### Returns
+Use `rest` when you want to bundle the remaining parameters into an array. Parameters before the specific index are passed individually, and parameters after are bundled into an array.
 
-(`(...args: any[]) => ReturnType<F>`): A new function that, when called, returns the result of calling `func` with the transformed arguments.
-
-- The transformed arguments are:
-  - The first `start` arguments as individual elements.
-  - The remaining arguments from index `start` onward grouped into an array.
-
-## Examples
+This is useful for creating functions that accept variable parameters or when you want to change how existing functions handle parameters.
 
 ```typescript
-function fn(a, b, c) {
-  return Array.from(arguments);
+import { rest } from 'es-toolkit/function';
+
+// Basic usage (bundle from the last parameter into an array)
+function sum(a: number, b: number, numbers: number[]) {
+  return a + b + numbers.reduce((sum, n) => sum + n, 0);
 }
 
-// Using default start index (func.length - 1, which is 2 in this case)
-const func1 = rest(fn);
-console.log(func1(1, 2, 3, 4)); // [1, 2, [3, 4]]
+const restSum = rest(sum); // startIndex defaults to func.length - 1 (2)
+console.log(restSum(1, 2, 3, 4, 5)); // 1 + 2 + (3 + 4 + 5) = 15
+// The sum function is called with [1, 2, [3, 4, 5]]
 
-// Using start index 1
-const func2 = rest(fn, 1);
-console.log(func2(1, 2, 3, 4)); // [1, [2, 3, 4]]
+// Bundle into an array starting from a different index
+function logMessage(level: string, messages: string[]) {
+  console.log(`[${level}] ${messages.join(' ')}`);
+}
 
-// With fewer arguments than the start index
-console.log(func1(1)); // [1, undefined, []]
+const restLog = rest(logMessage, 1); // Bundle from index 1
+restLog('INFO', 'Application', 'started', 'successfully');
+// Called as logMessage('INFO', ['Application', 'started', 'successfully'])
+
+// Practical example: first parameter individual, rest as an array
+function format(template: string, values: any[]) {
+  return values.reduce((result, value, index) => {
+    return result.replace(`{${index}}`, value);
+  }, template);
+}
+
+const restFormat = rest(format, 1);
+console.log(restFormat('Hello {0}, welcome to {1}!', 'John', 'our site'));
+// 'Hello John, welcome to our site!'
 ```
+
+It also handles cases where there are fewer parameters.
+
+```typescript
+import { rest } from 'es-toolkit/function';
+
+function greet(greeting: string, name: string, extras: string[]) {
+  const extraText = extras.length > 0 ? ` ${extras.join(' ')}` : '';
+  return `${greeting} ${name}!${extraText}`;
+}
+
+const restGreet = rest(greet);
+
+console.log(restGreet('Hello', 'Alice', 'Have a great day!'));
+// 'Hello Alice! Have a great day!'
+
+console.log(restGreet('Hi', 'Bob'));
+// 'Hi Bob!' (extras becomes an empty array)
+
+console.log(restGreet('Hey'));
+// 'Hey undefined!' (name is undefined, extras is an empty array)
+```
+
+#### Parameters
+
+- `func` (`F`): The function to change parameter handling.
+- `startIndex` (`number`, optional): The index from which to start bundling into an array. Defaults to `func.length - 1`, bundling from the last parameter.
+
+#### Returns
+
+(`(...args: any[]) => ReturnType<F>`): Returns a new function that bundles parameters from a specific index into an array and passes them to the original function.

@@ -1,33 +1,43 @@
-# times
+# times (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-调用函数 `n` 次，每次调用时将索引作为第一个参数传入，并返回一个由结果组成的数组。
-
-## 签名
+给定次数执行函数并将结果作为数组返回。
 
 ```typescript
-function times<R = number>(n?: number, getValue?: (index: number) => R): R[];
+const result = times(n, iteratee);
 ```
 
-### 参数
+## 参考
 
-- `n` (`number`): 调用函数的次数。
-- `getValue` (`(index: number) => R`): 每次迭代调用的函数。
-  - 如果未提供，则返回一个从 `0` 到 `n-1` 的数组。
+### `times(n, iteratee)`
 
-### 返回值
-
-(`R[]`): 结果的数组。
-
-## 示例
+执行给定次数的迭代函数并将结果作为数组返回。每次迭代时将当前索引传递给函数。
 
 ```typescript
-times(3, doubled); // => [0, 2, 4]
-times(4); // => [0, 1, 2, 3]
-times(2, () => 'es-toolkit'); // => ['es-toolkit', 'es-toolkit']
+import { times } from 'es-toolkit/compat';
+
+// 从0到2的索引乘以2的值数组
+times(3, i => i * 2);
+// 返回：[0, 2, 4]
+
+// 多次生成相同值
+times(2, () => 'es-toolkit');
+// 返回：['es-toolkit', 'es-toolkit']
 ```
+
+如果不传递函数，则返回索引数组。
+
+```typescript
+import { times } from 'es-toolkit/compat';
+
+times(3);
+// 返回：[0, 1, 2]
+```
+
+#### 参数
+
+- `n` (`number`): 要迭代的次数。转换为整数，如果小于1或不是安全整数则返回空数组。
+- `iteratee` (`(num: number) => T`, 可选): 每次迭代时执行的函数。接受索引作为参数。如果不提供，则直接返回索引。
+
+#### 返回值
+
+(`T[]`): 返回由每次迭代执行函数的结果组成的数组。

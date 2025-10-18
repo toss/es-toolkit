@@ -7,6 +7,8 @@
 - 确保与Lodash的实际测试代码行为一致。
 - 被Storybook、Recharts、CKEditor等知名开源库使用，并受到Nuxt的推荐。
 
+所有兼容性函数的详细文档可以在[兼容性参考](/zh_hans/reference/compat/array/castArray)中查看。
+
 :::
 
 ```tsx

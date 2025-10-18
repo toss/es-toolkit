@@ -1,36 +1,62 @@
-# multiply
+# multiply (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `*` 연산자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `multiply` 함수는 추가적인 함수 호출로 인해 느리게 동작해요.
+
+대신 더 빠르고 간단한 `*` 연산자를 사용하세요.
+
 :::
 
-두 숫자를 곱하는 함수예요.
-
-둘 중 하나라도 `NaN`이면 `NaN`을 반환해요.
-
-## 인터페이스
+두 숫자를 곱해요.
 
 ```typescript
-function multiply(value: number, other: number): number;
+const result = multiply(value, other);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`number`): 곱셈에서 첫 번째 숫자예요.
-- `other` (`number`): 곱셈에서 두 번째 숫자예요.
+### `multiply(value, other)`
 
-### 반환 값
-
-(`number`): `value`와 `other`를 곱한 값을 반환해요. 둘 중 하나라도 `NaN`이면 `NaN`을 반환해요.
-
-## 예시
+두 숫자를 곱하고 싶을 때 `multiply`를 사용하세요.
 
 ```typescript
-multiply(2, 3); // 6를 반환해요.
-multiply(2, -3); // -6을 반환해요.
-multiply(NaN, 3); // value가 NaN이기 때문에 NaN을 반환해요.
-multiply(2, NaN); // other이 NaN이기 때문에 NaN을 반환해요.
-multiply(NaN, NaN); // 인수가 모두 NaN이기 때문에 NaN을 반환해요.
+import { multiply } from 'es-toolkit/compat';
+
+// 기본 곱셈
+multiply(2, 3);
+// Returns: 6
+
+multiply(4, 5);
+// Returns: 20
+
+// 음수 처리
+multiply(2, -3);
+// Returns: -6
+
+multiply(-4, -5);
+// Returns: 20
+
+// 소수 처리
+multiply(2.5, 4);
+// Returns: 10
+
+// NaN 처리
+multiply(NaN, 3);
+// Returns: NaN
+
+multiply(2, NaN);
+// Returns: NaN
+
+multiply(NaN, NaN);
+// Returns: NaN
 ```
+
+#### 파라미터
+
+- `value` (`number`): 곱셈의 첫 번째 숫자예요.
+- `other` (`number`): 곱셈의 두 번째 숫자예요.
+
+#### 반환 값
+
+(`number`): 두 숫자를 곱한 결과를 반환해요. 둘 중 하나라도 NaN이면 NaN을 반환해요.

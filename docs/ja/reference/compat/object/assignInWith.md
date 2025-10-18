@@ -1,65 +1,71 @@
-# assignInWith
+# assignInWith (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning カスタムロジックの実装を推奨します
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `assignInWith` 関数は、継承されたプロパティの処理とカスタマイザー関数の呼び出しにより、複雑で動作が遅くなります。
+
+代わりに、`Object.assign` とカスタムロジックを直接実装する方法を使用してください。
+
 :::
 
-`source`が持っているプロパティの値を`object`オブジェクトに割り当てます。プロトタイプから継承されたプロパティも含まれます。各プロパティに割り当てる値を決定するために `getValueToAssign` 関数を提供できます。
-
-`source`と`object`が同じ値を持っているプロパティは上書きされません。
-
-`getValueToAssign` 関数を使用して `object` オブジェクトに割り当てる値を決定できます。この関数が返す値が割り当てられます。値が提供されない場合は、`identity` 関数がデフォルトとして使用されます。
-
-## インターフェース
+カスタマイザー関数を使用して、ソースオブジェクトのすべてのプロパティ(継承プロパティを含む)をターゲットオブジェクトに割り当てます。
 
 ```typescript
-function assignInWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function assignInWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function assignInWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function assignInWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function assignInWith(object: any, ...sources: any[]): any;
+const result = assignInWith(target, ...sources, customizer);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`any`): `source`のプロパティ値が割り当てられるオブジェクト。
-- `sources` (`...any[]`): `object`に割り当てる値を持つオブジェクトたち。
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): 各プロパティに割り当てる値を決定する関数。この関数が返す値が対応するプロパティに割り当てられます。
+### `assignInWith(target, ...sources, customizer)`
 
-### 戻り値
-
-(`any`): `source`の値が割り当てられた`object`オブジェクト。
-
-## 例
+継承されたプロパティを含めながらプロパティの割り当て方法をカスタマイズしたい場合は、`assignInWith`を使用してください。カスタマイザー関数が各プロパティの最終値を決定します。
 
 ```typescript
-const target = { a: 1 };
-const result = assignInWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { assignInWith } from 'es-toolkit/compat';
+
+// 基本的な使用法 - undefinedの場合のみ割り当て
+const target = { a: 1, b: undefined };
+const source = { b: 2, c: 3 };
+const result = assignInWith(target, source, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// 結果: { a: 1, b: 2, c: 3 }
+
+// 配列の値をマージするカスタマイザー
+const target2 = { numbers: [1, 2] };
+const source2 = { numbers: [3, 4], name: 'test' };
+assignInWith(target2, source2, (objValue, srcValue) => {
+  if (Array.isArray(objValue) && Array.isArray(srcValue)) {
+    return objValue.concat(srcValue);
+  }
+  return srcValue;
+});
+// 結果: { numbers: [1, 2, 3, 4], name: 'test' }
+
+// 継承されたプロパティも含めて処理
+function Parent() {}
+Parent.prototype.inherited = 'value';
+const child = Object.create(Parent.prototype);
+child.own = 'ownValue';
+
+const target3 = { existing: 'data' };
+assignInWith(target3, child, (objValue, srcValue, key) => {
+  if (objValue === undefined) {
+    return `processed_${srcValue}`;
+  }
+  return objValue;
+});
+// 結果: { existing: 'data', own: 'processed_ownValue', inherited: 'processed_value' }
 ```
+
+カスタマイザー関数が `undefined` を返す場合、デフォルトの割り当て動作が使用されます。この関数は、`assignIn`とは異なり、各プロパティにカスタムロジックを適用できます。
+
+#### パラメータ
+
+- `target` (`any`): プロパティがコピーされるターゲットオブジェクトです。
+- `...sources` (`any[]`): プロパティをコピーするソースオブジェクトです。固有のプロパティと継承されたプロパティの両方がコピーされます。
+- `customizer` (`function`): 割り当てる値を決定する関数です。`(objValue, srcValue, key, object, source) => any` の形式で、`undefined` を返すとデフォルトの割り当て動作を使用します。
+
+#### 戻り値
+
+(`any`): 修正されたターゲットオブジェクトを返します。ターゲットオブジェクト自体が変更されて返されます。

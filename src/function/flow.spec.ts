@@ -49,4 +49,22 @@ describe('flow', () => {
 
     expect(combined(objects)).toEqual([1, 2]);
   });
+
+  it(`\`flow\` should return the first argument when no functions are provided`, () => {
+    const combined = flow();
+
+    expect(combined(42)).toBe(42);
+  });
+
+  it(`\`flow\` should preserve \`this\` context`, () => {
+    const obj = {
+      multiplier: 2,
+      multiply: function (x: number, y: number) {
+        return add(x, y) * this.multiplier;
+      },
+    };
+    const combined = flow(obj.multiply, square);
+
+    expect(combined.call(obj, 1, 2)).toBe(36);
+  });
 });

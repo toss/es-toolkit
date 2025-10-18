@@ -1,61 +1,107 @@
-# setWith
+# setWith (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用直接赋值
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `setWith` 函数内部调用 `updateWith` 函数,由于复杂的路径处理和自定义函数逻辑而运行缓慢。
+
+请使用更快、更现代的直接赋值或解构赋值。
+
 :::
 
-使用 `customizer` 函数在指定对象的特定路径上设置值。
-如果路径的某部分不存在，将根据 `customizer` 的结果创建它。
-
-这个方法与 [set](./set.md) 类似，但不同之处在于它接受一个 `customizer` 来创建嵌套对象。
-
-`customizer` 被调用来生成路径的对象。
-如果 `customizer` 返回一个值，该值将用于当前路径段。
-如果 `customizer` 返回 `undefined`，该方法将根据路径创建适当的对象。
-如果下一个路径段是有效的数组索引，则创建数组，否则创建对象。
-
-## 签名
+在指定路径设置值,同时通过自定义函数控制对象的创建方式。
 
 ```typescript
-function setWith<T extends object>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  value: any,
-  customizer?: (nsValue: any, key: string, nsObject: T) => any
-): T;
+const result = setWith(obj, path, value, customizer);
 ```
 
-### 参数
+## 参考
 
-- `obj` (`T`): 要修改的对象。
-- `path` (`PropertyKey | readonly PropertyKey[]`): 要设置的属性路径。
-- `value` (`any`): 要设置的值。
-- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, 可选): 用于自定义路径创建的函数。
+### `setWith(object, path, value, customizer)`
 
-### 返回值
-
-(`T`): 返回修改后的对象。
-
-## 示例
+当您想在对象的特定路径设置值,同时使用自定义函数控制中间对象的类型时,请使用 `setWith`。如果自定义函数返回 `undefined`,则使用默认逻辑(数组索引使用数组,否则使用对象)。
 
 ```typescript
 import { setWith } from 'es-toolkit/compat';
-import { isObject } from 'es-toolkit/compat';
 
-// 使用定制器在嵌套数组中设置值
-const object = {};
-setWith(object, '[0][1][2]', 3, value => (isObject(value) ? undefined : {}));
-console.log(object); // => { '0': { '1': { '2': 3 } } }
+// 基本用法(无自定义函数)
+const obj1 = {};
+setWith(obj1, 'a.b.c', 4);
+console.log(obj1);
+// 结果: { a: { b: { c: 4 } } }
 
-// 使用 Object 作为定制器为数组创建对象
+// 强制创建数组的自定义函数
 const obj2 = {};
-setWith(obj2, 'a[0].b.c', 4, Object);
-console.log(obj2); // => { a: [{ b: { c: 4 } }] }
+setWith(obj2, '[0][1]', 'value', () => []);
+console.log(obj2);
+// 结果: { '0': [undefined, 'value'] }
 
-// 不使用定制器创建路径（与使用 set 相同）
+// 仅在特定条件下自定义
 const obj3 = {};
-setWith(obj3, 'a.b.c', 4);
-console.log(obj3); // => { a: { b: { c: 4 } } }
+setWith(obj3, 'a[0].b.c', 'nested', (value, key) => {
+  // 仅对数字键(数组索引)返回空对象
+  return typeof key === 'string' && /^\d+$/.test(key) ? {} : undefined;
+});
+console.log(obj3);
+// 结果: { a: { '0': { b: { c: 'nested' } } } }
+
+// 使用 Object 构造函数作为自定义函数
+const obj4 = {};
+setWith(obj4, 'x[0].y', 42, Object);
+console.log(obj4);
+// 结果: { x: [{ y: 42 }] }
+
+// 复杂的自定义函数逻辑
+const obj5 = {};
+setWith(obj5, 'data.items[0].props.config', 'value', (value, key, object) => {
+  console.log('Creating:', key, 'in', object);
+
+  // 对特定键使用 Map
+  if (key === 'props') {
+    return new Map();
+  }
+
+  // 对数字键使用数组
+  if (typeof key === 'string' && /^\d+$/.test(key)) {
+    return [];
+  }
+
+  // 默认使用普通对象
+  return {};
+});
+
+// 使用 WeakMap 作为中间对象
+const obj6 = {};
+setWith(obj6, 'cache.user.profile', 'data', (value, key) => {
+  if (key === 'cache') {
+    return new WeakMap();
+  }
+  return undefined; // 使用默认行为
+});
 ```
+
+自定义函数接收三个参数。
+
+```typescript
+import { setWith } from 'es-toolkit/compat';
+
+const obj = {};
+setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
+  console.log('nsValue:', nsValue); // 当前值(通常为 undefined)
+  console.log('key:', key); // 要创建的键
+  console.log('nsObject:', nsObject); // 父对象
+
+  // 根据特定条件返回不同的对象类型
+  return key === 'b' ? [] : {};
+});
+```
+
+#### 参数
+
+- `object` (`T`): 要设置值的对象。
+- `path` (`PropertyPath`): 要设置的属性路径。
+- `value` (`any`): 要设置的值。
+- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, 可选): 自定义中间对象创建的函数。
+
+#### 返回值
+
+(`T | R`): 返回修改后的对象。

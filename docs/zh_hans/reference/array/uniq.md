@@ -1,27 +1,52 @@
 # uniq
 
-创建一个数组的无重复版本。
-
-该函数接受一个数组，并返回一个新数组，其中仅包含原始数组中的唯一值，保留首次出现的顺序。
-
-## 签名
+返回去除数组中重复元素后的新数组。
 
 ```typescript
-function uniq<T>(arr: T[]): T[];
+const uniqueArray = uniq(arr);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`): 要处理的数组。
+### `uniq(arr)`
 
-### 返回值
-
-(`T[]`): 一个新数组，仅包含原始数组中的唯一值。
-
-## 示例
+当您想去除数组中的重复值,只保留唯一值时,请使用 `uniq`。它会保持原数组中首次出现的顺序。
 
 ```typescript
-const array = [1, 2, 2, 3, 4, 4, 5];
-const result = uniq(array);
-// result 将会是 [1, 2, 3, 4, 5]
+import { uniq } from 'es-toolkit/array';
+
+// 从数字数组中去除重复项。
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueNumbers = uniq(numbers);
+console.log(uniqueNumbers); // [1, 2, 3, 4, 5]
+
+// 从字符串数组中去除重复项。
+const words = ['apple', 'banana', 'apple', 'cherry', 'banana'];
+const uniqueWords = uniq(words);
+console.log(uniqueWords); // ['apple', 'banana', 'cherry']
+
+// 从对象数组中去除引用相同的对象。
+const obj1 = { id: 1 };
+const obj2 = { id: 2 };
+const obj3 = { id: 3 };
+const objects = [obj1, obj2, obj1, obj3, obj2];
+const uniqueObjects = uniq(objects);
+console.log(uniqueObjects); // [{ id: 1 }, { id: 2 }, { id: 3 }]
 ```
+
+对于空数组返回空数组。
+
+```typescript
+import { uniq } from 'es-toolkit/array';
+
+const emptyArray = uniq([]);
+console.log(emptyArray); // []
+```
+
+#### 参数
+
+- `arr` (`readonly T[]`): 要去除重复项的数组。
+
+#### 返回值
+
+(`T[]`): 去除重复项后的新数组。保持原数组中首次出现的顺序。

@@ -1,39 +1,43 @@
 # zipObject
 
-두 배열을 하나의 객체로 결합해요. 첫 번째 배열은 프로퍼티 이름을 나타내고, 두 번째 배열은 값을 나타내요.
-
-프로퍼티 이름을 나타내는 배열이 값을 나타내는 배열보다 길면, 값들은 `undefined`로 채워져요.
-
-## 인터페이스
+키 배열과 값 배열을 받아서 하나의 객체로 만들어요.
 
 ```typescript
-function zipObject<P extends PropertyKey, V>(keys: P[], values: V[]): Record<P, V>;
+const object = zipObject(keys, values);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `keys` (`P[]`): 속성 이름이 포함된 배열이에요.
-- `values` (`V[]`): 속성 이름에 대응되는 값이 포함된 배열이에요.
+### `zipObject(keys, values)`
 
-### 반환 값
-
-(`Record<P, V>`): 주어진 속성 이름과 값으로 구성된 새로운 객체예요.
-
-## 예시
+배열 두 개를 하나의 객체로 합치고 싶을 때 `zipObject`를 사용하세요. 첫 번째 배열의 요소가 키가 되고, 두 번째 배열의 요소가 값이 되는 새 객체를 반환해요.
 
 ```typescript
-const keys = ['a', 'b', 'c'];
-const values = [1, 2, 3];
-const result = zipObject(keys, values);
-// result는 { a: 1, b: 2, c: 3 }가 돼요.
+import { zipObject } from 'es-toolkit/array';
 
-const keys2 = ['a', 'b', 'c'];
-const values2 = [1, 2];
-const result2 = zipObject(keys2, values2);
-// result2는 { a: 1, b: 2, c: undefined }가 돼요.
+// 키와 값을 객체로 만들어요.
+zipObject(['a', 'b', 'c'], [1, 2, 3]);
+// Returns: { a: 1, b: 2, c: 3 }
 
-const keys3 = ['a', 'b'];
-const values3 = [1, 2, 3];
-const result3 = zipObject(keys3, values3);
-// result3는 { a: 1, b: 2 }가 돼요.
+// 키가 더 많으면 undefined가 값이 돼요.
+zipObject(['a', 'b', 'c', 'd'], [1, 2, 3]);
+// Returns: { a: 1, b: 2, c: 3, d: undefined }
 ```
+
+값 배열이 더 길면 초과하는 값들은 무시돼요.
+
+```typescript
+import { zipObject } from 'es-toolkit/array';
+
+zipObject(['a', 'b'], [1, 2, 3, 4]);
+// Returns: { a: 1, b: 2 }
+```
+
+#### 파라미터
+
+- `keys` (`readonly P[]`): 객체의 키가 될 배열이에요.
+- `values` (`readonly V[]`): 각 키에 대응하는 값 배열이에요.
+
+#### 반환 값
+
+(`Record<P, V>`): 키와 값이 결합된 새 객체를 반환해요.

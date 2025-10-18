@@ -1,32 +1,78 @@
-# values
+# values (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.values` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `values` function simply calls `Object.values` with unnecessary overhead.
+
+Use the faster and more modern `Object.values()` directly instead.
+
 :::
 
-Creates an array of the own enumerable property values of `object`.
-
-## Signature
+Returns an array of the object's own enumerable property values.
 
 ```typescript
-function values<T>(object: Record<PropertyKey, T> | null | undefined): T[];
-function values<T>(arr: ArrayLike<T>): T[];
-function values<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
+const valueArray = values(obj);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): The object to query.
+### `values(obj)`
 
-### Returns
-
-(`T[]`): Returns an array of property values.
-
-## Examples
+Use `values` when you want to get all property values of an object as an array. It works the same as `Object.values` but safely handles `null` or `undefined`.
 
 ```typescript
+import { values } from 'es-toolkit/compat';
+
+// Get object values
 const obj = { a: 1, b: 2, c: 3 };
 values(obj); // => [1, 2, 3]
+
+// Object with numeric keys
+const numberKeyObj = { 0: 'a', 1: 'b', 2: 'c' };
+values(numberKeyObj); // => ['a', 'b', 'c']
 ```
+
+Can also handle arrays or array-like objects.
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+// Array
+values([1, 2, 3]); // => [1, 2, 3]
+
+// String (array-like object)
+values('hello'); // => ['h', 'e', 'l', 'l', 'o']
+```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+values(null); // => []
+values(undefined); // => []
+```
+
+Only enumerable properties are returned.
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+const obj = Object.create(
+  { inherited: 'not included' },
+  {
+    own: { value: 'included', enumerable: true },
+    nonEnum: { value: 'not included', enumerable: false }
+  }
+);
+
+values(obj); // => ['included']
+```
+
+#### Parameters
+
+- `obj` (`Record<PropertyKey, T> | ArrayLike<T> | null | undefined`): The object to get property values from.
+
+#### Returns
+
+(`T[]`): Returns an array of the object's enumerable property values.

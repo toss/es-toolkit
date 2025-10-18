@@ -1,57 +1,60 @@
-# sortedIndexOf
+# sortedIndexOf (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。これは、代替可能なネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
+::: warning バイナリ検索を直接実装してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+この `sortedIndexOf` 関数は、複雑なバイナリ検索処理と型検証により遅く動作します。
 
-ソートされた配列で値が最初に現れるインデックスを見つけます。`Array#indexOf`と似ていますが、ソートされた配列に特化しています。
-
-::: warning ソートされた配列を引数として提供してください
-
-この関数はバイナリ検索（Binary search）を使用してインデックスを迅速に見つけるため、ソートされた配列を提供しないと正しく動作しません。
+代わりに、より高速で現代的なバイナリ検索を直接実装するか、`Array.prototype.indexOf()` を使用してください。
 
 :::
 
-## インターフェース
+ソートされた配列で値が最初に現れるインデックスを見つけます。
 
 ```typescript
-function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedIndexOf(array, value);
 ```
 
-### パラメータ
+## 参照
 
-- `array` (`ArrayLike<T> | null | undefined`): ソートされた配列です。配列が `null` または `undefined` の場合、`-1` を返します。
-- `value` (`T`): ソートされた配列内で比較を通じて探す値。
+### `sortedIndexOf(array, value)`
 
-### 戻り値
-
-(`number`): ソート順序を維持するために値を挿入すべきインデックス。
-
-## 例
+ソートされた配列で特定の値が最初に現れるインデックスを見つけるときに `sortedIndexOf` を使用してください。バイナリ検索を使用して高速に値を見つけます。
 
 ```typescript
 import { sortedIndexOf } from 'es-toolkit/compat';
 
-const numbers = [11, 22, 33, 44, 55];
-sortedIndexOf(numbers, 11); // 戻り値: 0
-sortedIndexOf(numbers, 30); // 戻り値: -1
+// 数値配列で値を見つける
+sortedIndexOf([11, 22, 33, 44, 55], 33);
+// 2を返します
 
-// 値が重複している場合、最初の値のインデックスを返します。
-const duplicateNumbers = [1, 2, 2, 3, 3, 3, 4];
-sortedIndexOf(duplicateNumbers, 3); // 戻り値: 3
+// 値が存在しない場合
+sortedIndexOf([11, 22, 33, 44, 55], 30);
+// -1を返します
 
-// 配列がソートされていない場合、間違ったインデックスを返すことがあります。
-const unSortedArray = [55, 33, 22, 11, 44];
-sortedIndexOf(unSortedArray, 11); // 戻り値: -1
+// 重複した値がある場合、最初のインデックスを返します
+sortedIndexOf([1, 2, 2, 3, 3, 3, 4], 3);
+// 3を返します（最初の3の位置）
 
-// -0 と 0 は同じように扱われます。
-const mixedZeroArray = [-0, 0];
-sortedIndexOf(mixedZeroArray, 0); // 戻り値: 0
-sortedIndexOf(mixedZeroArray, -0); // 戻り値: 0
-
-// 配列のようなオブジェクトでも動作します。
-const arrayLike = { length: 3, 0: 10, 1: 20, 2: 30 };
-sortedIndexOf(arrayLike, 20); // 戻り値: 1
+// 0と-0は同じように扱われます
+sortedIndexOf([-0, 0], 0);
+// 0を返します
 ```
+
+空の配列、`null`、または `undefined` は-1を返します。
+
+```typescript
+import { sortedIndexOf } from 'es-toolkit/compat';
+
+sortedIndexOf([], 1); // -1
+sortedIndexOf(null, 1); // -1
+sortedIndexOf(undefined, 1); // -1
+```
+
+#### パラメータ
+
+- `array` (`ArrayLike<T> | null | undefined`): ソートされた配列です。ソートされていない配列を使用すると、誤った結果が得られる可能性があります。
+- `value` (`T`): 探す値です。
+
+#### 戻り値
+
+(`number`): 値が最初に現れるインデックスを返します。値が存在しない場合は-1を返します。

@@ -1,40 +1,50 @@
-# isArray
+# isArray (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
+::: warning `Array.isArray`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`isArray`関数は追加の関数呼び出しにより動作が遅くなります。
+
+代わりに、より速く現代的な`Array.isArray`を使用してください。
+
 :::
 
-与えられた値が配列かどうかを確認します。
-
-この関数は、与えられた値が配列かどうかを確認します。
-値が配列であれば `true`、そうでなければ `false` を返します。
-
-TypeScript の型ガードとしてよく使用され、パラメータとして与えられた値を配列型に絞り込むことができます。
-
-## インターフェース
+値が配列かどうかを確認します。
 
 ```typescript
-function isArray(value?: unknown): value is any[];
+const result = isArray(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 配列かどうかを確認する値。
+### `isArray(value)`
 
-### 戻り値
-
-(`value is any[]`): 値が配列であれば `true`、そうでなければ `false`。
-
-## 例
+値が配列かどうかを確認したい場合は`isArray`を使用してください。この関数はTypeScriptでタイプガードとしても使用できます。
 
 ```typescript
-const value1 = [1, 2, 3];
-const value2 = 'abc';
-const value3 = () => {};
+import { isArray } from 'es-toolkit/compat';
 
-console.log(isArray(value1)); // true
-console.log(isArray(value2)); // false
-console.log(isArray(value3)); // false
+// 配列の確認
+isArray([1, 2, 3]);
+// Returns: true
+
+isArray('abc');
+// Returns: false
+
+isArray(() => {});
+// Returns: false
+
+// オブジェクトとの区別
+isArray({ 0: 'a', 1: 'b', length: 2 });
+// Returns: false
+
+isArray(null);
+// Returns: false
 ```
+
+#### パラメータ
+
+- `value` (`unknown`): 配列かどうかを確認する値です。
+
+#### 戻り値
+
+(`value is any[]`): 値が配列の場合は`true`、そうでない場合は`false`を返します。

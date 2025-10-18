@@ -1,39 +1,53 @@
-# isFinite
+# isFinite (Lodash 兼容性)
 
-::: info
+::: warning 请使用 `Number.isFinite`
 
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+这个 `isFinite` 函数由于额外的类型检查开销而性能较慢。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+建议使用更快、更现代的 `Number.isFinite`。
 
 :::
 
-检查给定的值是否是有限的数字。
-
-此函数在 TypeScript 中也可以用作类型谓词，能够将参数的类型缩小为 `number`。
-
-## 签名
+检查值是否为有限数字。
 
 ```typescript
-function isFinite(value?: unknown): value is number;
+const result = isFinite(value);
 ```
 
-### 参数
+## 参考
 
-- `value`(`unknown`): 需要检查是否为有限数字的值。
+### `isFinite(value)`
 
-### 返回值
-
-(`value is number`): 如果值是有限的数字，返回 `true`，否则返回 `false`。
-
-## 示例
+当需要检查给定值是否为有限数字时使用 `isFinite`。此函数在 TypeScript 中也可以作为类型守卫使用，将值的类型缩小为 `number`。
 
 ```typescript
-const value1 = 100;
-const value2 = Infinity;
-const value3 = '100';
+import { isFinite } from 'es-toolkit/compat';
 
-console.log(isFinite(value1)); // true
-console.log(isFinite(value2)); // false
-console.log(isFinite(value3)); // false
+// 有限数字
+isFinite(100); // true
+isFinite(-50); // true
+isFinite(3.14); // true
+isFinite(0); // true
+
+// 无穷大返回 false
+isFinite(Infinity); // false
+isFinite(-Infinity); // false
+
+// NaN 也返回 false
+isFinite(NaN); // false
+
+// 其他类型也返回 false
+isFinite('100'); // false
+isFinite([]); // false
+isFinite({}); // false
+isFinite(null); // false
+isFinite(undefined); // false
 ```
+
+#### 参数
+
+- `value` (`any`): 要检查的值。
+
+#### 返回值
+
+(`boolean`): 如果值是有限数字则返回 `true`，否则返回 `false`。

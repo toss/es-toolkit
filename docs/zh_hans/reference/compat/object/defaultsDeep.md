@@ -1,63 +1,55 @@
-# defaultsDeep
+# defaultsDeep (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用解构赋值和 `Object.assign()` 代替
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `defaultsDeep` 函数由于嵌套对象的递归合并和循环引用处理而运行缓慢且复杂。
+
+请改用更快、更现代的解构赋值和 `Object.assign()`。
+
 :::
 
-类似于 [defaults](./defaults.md) 函数，但递归地为嵌套对象分配默认值。
-
-> 注意：此函数会修改第一个参数 `object`。
-
-## 签名
+对嵌套对象递归设置默认值。
 
 ```typescript
-function defaultsDeep<T extends object>(object: T): NonNullable<T>;
-function defaultsDeep<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function defaultsDeep<T extends object, S1 extends object, S2 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2
-): NonNullable<T & S1 & S2>;
-function defaultsDeep<T extends object, S extends object>(object: T, ...sources: S[]): object;
+const result = defaultsDeep(target, ...sources);
 ```
 
-### 参数
+## 参考
 
-- `object` (`T`): 接收默认值的目标对象。
-- `sources` (`S[]`): 提供默认值的一个或多个源对象。
+### `defaultsDeep(target, ...sources)`
 
-### 返回值
-
-(`object`): 应用了默认值的目标对象。
-
-## 示例
+当您想对嵌套对象中的 `undefined` 属性递归设置默认值时,请使用 `defaultsDeep`。与 `defaults` 类似,但它也会合并嵌套对象。
 
 ```typescript
-// 基本用法
-defaultsDeep({ a: 1 }, { a: 2, b: 2 }); // { a: 1, b: 2 }
+import { defaultsDeep } from 'es-toolkit/compat';
 
-// 嵌套对象合并
+// 在嵌套对象中设置默认值
 defaultsDeep({ a: { b: 2 } }, { a: { b: 3, c: 3 }, d: 4 });
-// { a: { b: 2, c: 3 }, d: 4 }
+// 返回值: { a: { b: 2, c: 3 }, d: 4 }
 
-// null值不会被覆盖
-defaultsDeep({ a: { b: null } }, { a: { b: 2 } }); // { a: { b: null } }
+// 只有 undefined 属性会用默认值填充
+defaultsDeep({ a: { b: undefined } }, { a: { b: 1 } });
+// 返回值: { a: { b: 1 } }
 
-// undefined值会被覆盖
-defaultsDeep({ a: { b: undefined } }, { a: { b: 2 } }); // { a: { b: 2 } }
-
-// 使用多个源对象
-defaultsDeep({ a: { b: 2 } }, { a: { c: 3 } }, { d: 4 });
-// { a: { b: 2, c: 3 }, d: 4 }
-
-// 处理循环引用
-const obj1 = { foo: { b: { c: { d: {} } } }, bar: { a: 2 } };
-const obj2 = { foo: { b: { c: { d: {} } } }, bar: {} };
-obj1.foo.b.c.d = obj1; // 创建循环引用
-obj2.foo.b.c.d = obj2; // 创建循环引用
-obj2.bar.b = obj2.foo.b; // 交叉引用
-const result = defaultsDeep(obj1, obj2);
-// 循环引用和引用结构被正确维护
+// null 值保持不变
+defaultsDeep({ a: null }, { a: { b: 1 } });
+// 返回值: { a: null }
 ```
+
+您可以传递多个源对象以分阶段应用默认值。
+
+```typescript
+import { defaultsDeep } from 'es-toolkit/compat';
+
+defaultsDeep({ a: { b: 2 } }, { a: { c: 3 } }, { a: { d: 4 }, e: 5 });
+// 返回值: { a: { b: 2, c: 3, d: 4 }, e: 5 }
+```
+
+#### 参数
+
+- `target` (`any`): 要设置默认值的目标对象。
+- `...sources` (`any[]`): 提供默认值的源对象。
+
+#### 返回值
+
+(`any`): 返回递归设置了默认值的对象。第一个参数 `target` 会被修改。

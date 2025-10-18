@@ -1,35 +1,69 @@
-# fromPairs
+# fromPairs (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.fromEntries`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `fromPairs` 함수는 배열 유사 객체 체크와 반복 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.fromEntries`를 사용하세요.
+
 :::
 
-키-값 쌍의 배열을 객체로 변환합니다.
-
-## 인터페이스
+키-값 쌍의 배열을 객체로 변환해요.
 
 ```typescript
-function fromPairs<T>(pairs: ArrayLike<[PropertyName, T]> | null | undefined): Record<string, T>;
-function fromPairs(pairs: ArrayLike<any[]> | null | undefined): Record<string, any>;
+const result = fromPairs(pairs);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `pairs` (`ArrayLike<[PropertyName, T]> | ArrayLike<any[]> | null | undefined`): 변환할 키-값 쌍의 배열이나 Map 타입 데이터. 2차원 배열의 각 하위 배열은 두 개의 요소를 가져야 하며, 첫 번째 요소는 키로, 두 번째 요소는 값으로 사용됩니다.
+### `fromPairs(pairs)`
 
-### 반환 값
-
-(`Record<string, any> | Record<string, T>`): 입력 매개변수와 동일한 키와 값을 가지는 변환된 객체.
-
-## 예시
+키-값 쌍으로 이루어진 배열을 받아서 객체로 변환해요. 각 키-값 쌍은 2개 요소를 가진 배열이어야 해요. 첫 번째 요소는 키가 되고, 두 번째 요소는 값이 돼요. 데이터를 정리하거나 변환할 때 유용해요.
 
 ```typescript
+import { fromPairs } from 'es-toolkit/compat';
+
+// 기본 키-값 쌍 변환
 const pairs = [
   ['a', 1],
   ['b', 2],
+  ['c', 3],
 ];
 const result = fromPairs(pairs);
-// result will be: { a: 1, b: 2 }
+// 결과: { a: 1, b: 2, c: 3 }
+
+// 다양한 값 타입 처리
+const mixedPairs = [
+  ['name', 'John'],
+  ['age', 30],
+  ['active', true],
+];
+const user = fromPairs(mixedPairs);
+// 결과: { name: 'John', age: 30, active: true }
+
+// Map에서 변환
+const map = new Map([
+  ['x', 10],
+  ['y', 20],
+]);
+const coords = fromPairs(map);
+// 결과: { x: 10, y: 20 }
 ```
+
+`null`이나 `undefined`, 배열 유사 객체가 아닌 값은 빈 객체로 처리해요.
+
+```typescript
+import { fromPairs } from 'es-toolkit/compat';
+
+fromPairs(null); // {}
+fromPairs(undefined); // {}
+fromPairs('invalid'); // {}
+```
+
+#### 파라미터
+
+- `pairs` (`ArrayLike<[PropertyName, T]> | ArrayLike<any[]> | null | undefined`): 객체로 변환할 키-값 쌍의 배열이에요.
+
+#### 반환 값
+
+(`Record<string, any> | Record<string, T>`): 키-값 쌍으로부터 생성된 객체를 반환해요.

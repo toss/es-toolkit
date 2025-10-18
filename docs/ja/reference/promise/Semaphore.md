@@ -1,51 +1,66 @@
 # Semaphore
 
-同時に実行される非同期タスクの数を制限するために使用できるセマフォです。
-
-- `acquire` メソッドを実行すると、許可を得て非同期タスクを実行するか、許可が得られるまで待機します。
-- `release` メソッドを実行すると、待機中の次のタスクが実行できるようになります。
-
-このセマフォは、`acquire` を実行した順序に従って、先着順で非同期タスクを実行します。
-
-## インターフェース
+同時に実行される非同期タスクの数を制限します。
 
 ```typescript
-class Semaphore {
-  public capacity: number;
-  public available: number;
-
-  constructor(capacity: number);
-
-  acquire(): Promise<void>;
-  release(): void;
-}
+const semaphore = new Semaphore(capacity);
 ```
 
-## プロパティ
+## 参照
 
-- `capacity` (`number`): 同時に実行できるタスクの最大数。
-- `available` (`number`): 現在残っている実行可能なタスクの数。
+### `Semaphore(capacity)`
 
-## メソッド
-
-- `acquire` (`() => Promise<void>`): 許可を取得して非同期タスクを実行するか、許可が得られるまで待機します。
-- `release` (`() => void`): 待機中の次のタスクが実行できるようになります。
-
-## 例
+同時に実行できる非同期タスクの数を制限したい場合に`Semaphore`を使用します。特にデータベース接続プール、API呼び出し制限、ファイルダウンロード制限など、リソース使用量を制御する必要がある状況で便利です。
 
 ```typescript
-const sema = new Semaphore(2);
+import { Semaphore } from 'es-toolkit';
 
-async function task() {
-  await sema.acquire();
+const semaphore = new Semaphore(3);
+
+// API呼び出し制限の例(最大3つまで同時実行)
+async function callAPI(id: number) {
+  await semaphore.acquire();
   try {
-    // This code can only be executed by two tasks at the same time
+    console.log(`API呼び出し開始: ${id}`);
+    const response = await fetch(`/api/data/${id}`);
+    return response.json();
   } finally {
-    sema.release();
+    semaphore.release();
+    console.log(`API呼び出し完了: ${id}`);
   }
 }
 
-task();
-task();
-task(); // This task will wait until one of the previous tasks releases the semaphore.
+// ファイルダウンロード制限の例
+async function downloadFile(url: string) {
+  await semaphore.acquire();
+  try {
+    console.log(`ダウンロード開始: ${url}`);
+    // ファイルダウンロードロジック
+    await fetch(url);
+  } finally {
+    semaphore.release();
+    console.log(`ダウンロード完了: ${url}`);
+  }
+}
+
+// 5つのタスクを同時に呼び出しても最大3つまでしか同時実行されない
+callAPI(1);
+callAPI(2);
+callAPI(3);
+callAPI(4); // 前のタスクのいずれかが終わるまで待機
+callAPI(5); // 前のタスクのいずれかが終わるまで待機
 ```
+
+#### パラメータ
+
+- `capacity` (`number`): 同時に実行できるタスクの最大数です。1より大きい整数である必要があります。
+
+#### プロパティ
+
+- `capacity` (`number`): 同時に実行できるタスクの最大数です。
+- `available` (`number`): 現在利用可能な許可の数です。`0`の場合、すべての許可が使用中であることを意味します。
+
+#### メソッド
+
+- `acquire` (`() => Promise<void>`): 許可を得て非同期タスクを実行するか、許可を得られるまで待機します。
+- `release` (`() => void`): 許可を返却して、待機中の次のタスクが実行できるようにします。

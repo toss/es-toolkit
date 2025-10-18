@@ -2,43 +2,55 @@
 
 Returns the first element of an array.
 
-This function takes an array and returns the first element of the array. If the array is empty, the function returns `undefined`.
-
-## Signature
-
 ```typescript
-export function head<T>(arr: [T, ...T[]]): T;
-export function head<T>(arr: T[]): T | undefined;
+const firstElement = head(arr);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array from which to get the first element.
+### `head(arr)`
 
-### Returns
-
-(`T | undefined`): The first element of the array, or `undefined` if the array is empty.
-
-## Examples
+Use `head` when you want to get the first element of an array. If the array is empty, it returns `undefined`. This is useful when accessing data at the beginning of an array.
 
 ```typescript
-const arr1 = [1, 2, 3];
-const firstElement1 = head(arr1);
-// firstElement1 will be 1
+import { head } from 'es-toolkit/array';
 
-const arr2: string[] = [];
-const firstElement2 = head(arr2);
-// firstElement2 will be undefined
+// Get the first element of a number array
+const numbers = [1, 2, 3, 4, 5];
+head(numbers);
+// Returns: 1
 
-const arr3 = ['a', 'b', 'c'];
-const firstElement3 = head(arr3);
-// firstElement3 will be 'a'
+// Get the first element of a string array
+const strings = ['a', 'b', 'c'];
+head(strings);
+// Returns: 'a'
 
-const arr4 = [true, false, true];
-const firstElement4 = head(arr4);
-// firstElement4 will be true
-
-const arr5: [number, string, boolean] = [1, 'a', true];
-const firstElement5 = head(arr5);
-// firstElement5 will be 1
+// Empty array returns undefined
+const emptyArray: number[] = [];
+head(emptyArray);
+// Returns: undefined
 ```
+
+Type handling is safe.
+
+```typescript
+import { head } from 'es-toolkit/array';
+
+// For non-empty arrays, the type is certain
+const nonEmptyArray = [1, 2, 3] as const;
+head(nonEmptyArray);
+// Returns: 1 (type: 1)
+
+// For regular arrays, undefined is possible
+const maybeEmptyArray = [1, 2, 3];
+head(maybeEmptyArray);
+// Returns: 1 | undefined (type: number | undefined)
+```
+
+#### Parameters
+
+- `arr` (`readonly T[]`): The array from which to get the first element.
+
+#### Returns
+
+(`T | undefined`): The first element of the array. Returns `undefined` if the array is empty.

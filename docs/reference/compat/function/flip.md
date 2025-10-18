@@ -1,28 +1,38 @@
-# flip
+# flip (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use direct argument reversal
+This `flip` function simply reverses the order of function arguments. In most cases, it can be replaced with simpler approaches.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+Instead, use the faster and more modern `(...args) => func(...args.reverse())` or direct argument passing.
 :::
 
-Reverses the order of arguments for a given function.
-
-## Signature
+Creates a function that reverses the order of arguments for the given function.
 
 ```typescript
-function flip<F extends (...args: any[]) => any>(func: F): (...args: Reversed<Parameters<F>>) => ReturnType<F>;
+const flippedFunc = flip(func);
 ```
 
-### Parameters
+## Reference
 
-- `func` (`F`): The function whose arguments will be reversed.
+### `flip(func)`
 
-### Returns
+Use `flip` when you want to create a new function by reversing the order of arguments. It changes the function to receive arguments from the last one first instead of the original order from the first one.
 
-(`(...args: Reversed<Parameters<F>>) => ReturnType<F>`): A new function that takes the reversed arguments and returns the result of calling `func`.
+```typescript
+import { flip } from 'es-toolkit/compat';
 
-## Example
+function greet(greeting: string, name: string) {
+  return `${greeting}, ${name}!`;
+}
+
+const flipped = flip(greet);
+flipped('John', 'Hello'); // 'Hello, John!'
+
+// The original function takes (greeting, name) order
+// But the flipped function takes (name, greeting) order
+```
+
+For functions that accept multiple arguments, all arguments are reversed.
 
 ```typescript
 import { flip } from 'es-toolkit/compat';
@@ -32,5 +42,13 @@ function fn(a: string, b: string, c: string, d: string) {
 }
 
 const flipped = flip(fn);
-flipped(1, 2, 3, 4); // => [4, 3, 2, 1]
+flipped('1', '2', '3', '4'); // ['4', '3', '2', '1']
 ```
+
+#### Parameters
+
+- `func` (`F`): The function to reverse arguments for.
+
+#### Returns
+
+(`(...args: Reversed<Parameters<F>>) => ReturnType<F>`): Returns a new function with reversed arguments.

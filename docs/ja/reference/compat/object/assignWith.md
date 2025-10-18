@@ -1,65 +1,60 @@
-# assignWith
+# assignWith (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning カスタムロジックの実装を推奨します
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `assignWith` 関数は、複雑なカスタマイザー関数の処理により相対的に遅くなります。
+
+代わりに、`Object.assign` とカスタムロジックを直接実装する方法を使用してください。
+
 :::
 
-`source`が持っているプロパティの値を`object`オブジェクトに割り当てます。各プロパティに割り当てる値を決定するために `getValueToAssign` 関数を提供できます。
-
-`source`と`object`が同じ値を持っているプロパティは上書きされません。
-
-`getValueToAssign` 関数を使用して `object` オブジェクトに割り当てる値を決定できます。この関数が返す値が割り当てられます。値が提供されない場合は、`identity` 関数がデフォルトとして使用されます。
-
-## インターフェース
+カスタマイザー関数を使用して、ソースオブジェクトのプロパティをターゲットオブジェクトに割り当てます。
 
 ```typescript
-function assignWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function assignWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function assignWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function assignWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function assignWith(object: any, ...sources: any[]): any;
+const result = assignWith(target, source1, source2, customizer);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`any`): `source`のプロパティ値が割り当てられるオブジェクト。
-- `sources` (`...any[]`): `object`に割り当てる値を持つオブジェクトたち。
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): 各プロパティに割り当てる値を決定する関数。この関数が返す値が対応するプロパティに割り当てられます。
+### `assignWith(object, ...sources, customizer)`
 
-### 戻り値
-
-(`any`): `source`の値が割り当てられた`object`オブジェクト。
-
-## 例
+プロパティの割り当て方法をカスタマイズしたい場合は、`assignWith`を使用してください。カスタマイザー関数が各プロパティの最終値を決定します。
 
 ```typescript
-const target = { a: 1 };
-const result = assignWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { assignWith } from 'es-toolkit/compat';
+
+// 基本的な使用法 - undefinedの場合のみ割り当て
+const target = { a: 1, b: undefined };
+const source = { b: 2, c: 3 };
+const result = assignWith(target, source, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// Returns: { a: 1, b: 2, c: 3 }
+
+// 配列のマージ
+const target2 = { users: ['alice'] };
+const source2 = { users: ['bob', 'charlie'] };
+const result2 = assignWith(target2, source2, (objValue, srcValue) => {
+  if (Array.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
+// Returns: { users: ['alice', 'bob', 'charlie'] }
+
+// 複数のソースとカスタマイザー
+const target3 = { a: 1 };
+const result3 = assignWith(target3, { b: 2 }, { c: 3 }, (objValue, srcValue) => {
+  return objValue === undefined ? srcValue : objValue;
+});
+// Returns: { a: 1, b: 2, c: 3 }
 ```
+
+#### パラメータ
+
+- `object` (`any`): プロパティが割り当てられるターゲットオブジェクトです。
+- `...sources` (`any[]`): プロパティをコピーするソースオブジェクトです。
+- `customizer` (`function`): 割り当てる値を決定する関数です。`(objValue, srcValue, key, object, source) => any` の形式です。
+
+#### 戻り値
+
+(`any`): カスタマイザー関数によって決定された値が割り当てられたターゲットオブジェクトを返します。

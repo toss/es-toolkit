@@ -1,65 +1,66 @@
 # spread
 
-Creates a new function that spreads elements of an array argument into individual arguments for the original function.
-
-## Signature
+Creates a new function that spreads a parameter array into individual parameters of the function.
 
 ```typescript
-function spread<F extends (...args: any[]) => any>(func: F): (argsArr: Parameters<F>) => ReturnType<F>;
+const spreadFunc = spread(func);
 ```
 
-### Parameters
+## Reference
 
-- `func` (`F`): The function to be transformed. It can be any function with any number of arguments.
+### `spread(func)`
 
-### Returns
+Use `spread` when you want to spread an array-form parameter into individual parameters to pass to a function.
 
-(`(args: Parameters<F>) => ReturnType<F>`): A new function that takes an array of arguments and returns the result of calling the original function with those arguments.
-
-## Examples
+This plays a similar role to JavaScript's spread operator (`...`), but it transforms the function to accept an array instead. This is useful in situations where you frequently use the `apply` method.
 
 ```typescript
 import { spread } from 'es-toolkit/function';
 
-function add(a, b) {
+// Basic usage
+function add(a: number, b: number) {
   return a + b;
 }
+
 const spreadAdd = spread(add);
-console.log(spreadAdd([1, 2])); // Output: 3
+console.log(spreadAdd([5, 3])); // 8
 
-// Example function to spread arguments over
-// Create a new function that uses `spread` to combine arguments
-const spreadAdd = spread(add, 1);
-// Calling `spreadAdd` with an array as the second argument
-console.log(spreadAdd(1, [2])); // Output: 3
-
-// Function with default arguments
-function greet(name, greeting = 'Hello') {
-  return `${greeting}, ${name}!`;
+// Function with multiple parameters
+function greet(greeting: string, name: string, punctuation: string) {
+  return `${greeting}, ${name}${punctuation}`;
 }
-// Create a new function that uses `spread` to position the argument array at index 0
-const spreadGreet = spread(greet, 0);
-// Calling `spreadGreet` with an array of arguments
-console.log(spreadGreet(['Alice'])); // Output: Hello, Alice!
-console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
+
+const spreadGreet = spread(greet);
+console.log(spreadGreet(['Hello', 'World', '!'])); // 'Hello, World!'
+
+// Using with Math functions
+const numbers = [1, 2, 3, 4, 5];
+const spreadMax = spread(Math.max);
+console.log(spreadMax(numbers)); // 5
+
+const spreadMin = spread(Math.min);
+console.log(spreadMin(numbers)); // 1
 ```
 
-## Lodash Compatibility
-
-Import `spread` from `es-toolkit/compat` for full compatibility with lodash.
-
-- `spread` accepts an additional numeric parameter, `argsIndex`, which specifies the position at which the argument array is positioned among the preceding parameters.
-  - If `argsIndex` is negative or `NaN`, it defaults to `0`. If it's a fractional number, it is rounded down to the nearest integer.
+The `this` context is also maintained.
 
 ```typescript
-import { spread } from 'es-toolkit/compat';
+import { spread } from 'es-toolkit/function';
 
-function fn(a: unknown, b: unknown, c: unknown) {
-  return Array.from(arguments);
-}
+const calculator = {
+  multiply: function (a: number, b: number, c: number) {
+    return a * b * c;
+  },
+};
 
-spread(fn, -1)([1, 2]); // Returns [1, 2]
-spread(fn, NaN)([1, 2]); // Returns [1, 2]
-spread(fn, 'a')([1, 2]); // Returns [1, 2]
-spread(fn, 1.6)(1, [2, 3]); // Returns [1, 2, 3]
+const spreadMultiply = spread(calculator.multiply);
+console.log(spreadMultiply.call(calculator, [2, 3, 4])); // 24
 ```
+
+#### Parameters
+
+- `func` (`F`): The function to accept a parameter array spread into individual parameters.
+
+#### Returns
+
+(`(args: Parameters<F>) => ReturnType<F>`): Returns a new function that accepts a parameter array and passes it to the original function in spread form.
