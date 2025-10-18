@@ -1,35 +1,50 @@
 # isNil
 
-Checks if a given value is null or undefined.
-
-This function tests whether the provided value is either `null` or `undefined`.
-It returns `true` if the value is `null` or `undefined`, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `null` or `undefined`.
-
-## Signature
+Checks if a value is `null` or `undefined`.
 
 ```typescript
-function isNil(x: unknown): x is null | undefined;
+const result = isNil(value);
 ```
 
-### Parameters
+## Reference
 
-- `x` (`unknown`): The value to test if it is `null` or `undefined`.
+### `isNil(value)`
 
-### Returns
-
-(`x is null | undefined`): Returns `true` if the value is `null` or `undefined`, otherwise `false`.
-
-## Examples
+Use `isNil` when you want to check if a value is `null` or `undefined`.
 
 ```typescript
 import { isNil } from 'es-toolkit/predicate';
 
-const value1 = null;
-const value2 = undefined;
-const value3 = 42;
-const result1 = isNil(value1); // true
-const result2 = isNil(value2); // true
-const result3 = isNil(value3); // false
+// null or undefined values
+console.log(isNil(null)); // true
+console.log(isNil(undefined)); // true
+
+// Other values
+console.log(isNil(0)); // false
+console.log(isNil('')); // false
+console.log(isNil(false)); // false
+console.log(isNil([])); // false
+console.log(isNil({})); // false
 ```
+
+It can also be used as a type guard in TypeScript:
+
+```typescript
+function processValue(value: string | null | undefined) {
+  if (isNil(value)) {
+    // value is now narrowed to null | undefined
+    console.log('Value is empty');
+  } else {
+    // value is narrowed to string
+    console.log(value.toUpperCase());
+  }
+}
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's `null` or `undefined`.
+
+#### Returns
+
+(`value is null | undefined`): Returns `true` if the value is `null` or `undefined`, `false` otherwise.

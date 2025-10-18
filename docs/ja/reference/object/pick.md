@@ -1,40 +1,44 @@
 # pick
 
-選択したオブジェクトプロパティで構成される新しいオブジェクトを生成します。
-
-この関数はオブジェクトとキーの配列を受け取り、指定されたキーに対応するプロパティのみを含む新しいオブジェクトを返します。
-
-## インターフェース
+指定されたキーに対応するプロパティのみを含む新しいオブジェクトを返します。
 
 ```typescript
-function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
+const result = pick(obj, keys);
 ```
 
-### パラメータ
+## 参照
 
-- `obj` (`T`): キーを選択するオブジェクトです。
-- `keys` (`K[]`): オブジェクトから選択するキーの配列です。
+### `pick(obj, keys)`
 
-### 戻り値
-
-(`Pick<T, K>`): 指定されたキーが選択された新しいオブジェクトです。
-
-## 例
+オブジェクトから特定のキーに対応するプロパティのみを選択したい時に`pick`を使用してください。指定されたキーに対応するプロパティのみを含む新しいオブジェクトを返します。
 
 ```typescript
-const obj = { a: 1, b: 2, c: 3 };
+import { pick } from 'es-toolkit/object';
+
+// 特定のキーのみを選択
+const obj = { a: 1, b: 2, c: 3, d: 4 };
 const result = pick(obj, ['a', 'c']);
-// 結果は次のようになります { a: 1, c: 3 }
+// resultは{ a: 1, c: 3 }になります
+
+// 存在しないキーを指定しても無視されます
+const safe = pick(obj, ['a', 'nonexistent']);
+// safeは{ a: 1 }になります
+
+// ネストされたオブジェクトでも使用できます
+const nested = {
+  user: { name: 'John', age: 30 },
+  posts: ['post1', 'post2'],
+  settings: { theme: 'dark' },
+};
+const picked = pick(nested, ['user', 'settings']);
+// pickedは{ user: { name: 'John', age: 30 }, settings: { theme: 'dark' } }になります
 ```
 
-## Lodashとの互換性
+#### パラメータ
 
-`es-toolkit/compat`から`pick`関数をインポートすると、深いパスを選択することができます。
+- `obj` (`T extends Record<string, any>`): プロパティを選択するオブジェクトです。
+- `keys` (`readonly K[]`): オブジェクトから選択するキーの配列です。
 
-```typescript
-import { pick } from 'es-toolkit/compat';
+#### 戻り値
 
-const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
-const result = pick(obj, ['a.b.c', 'f.g']);
-// 結果は次のようになります { a: { b: { c: 1 } }, 'f.g': 4 }
-```
+(`Pick<T, K>`): 指定されたキーに対応するプロパティのみを含む新しいオブジェクトを返します。

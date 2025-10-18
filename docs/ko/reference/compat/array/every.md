@@ -1,137 +1,77 @@
-# every
+# every (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.every()`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `every` 함수는 복잡한 객체 처리, 다양한 조건 형태 지원 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.every()`를 사용하세요.
+
 :::
 
 배열이나 객체의 모든 값이 주어진 조건에 맞는지 반환해요.
 
-조건은 여러 방법들로 명시할 수 있어요.
-
-- **검사 함수**: 각각의 요소에 대해서 검사하는 함수를 실행해요. 모든 요소가 `true`를 반환해야 결과가 `true`가 돼요.
-- **부분 객체**: 주어진 객체와 모든 프로퍼티가 일치하는 경우에만 `true`를 반환해요.
-- **프로퍼티-값 쌍**: 해당 프로퍼티에 대해서 모든 요소가 값이 일치해야 `true`를 반환해요.
-- **프로퍼티 이름**: 해당 프로퍼티에 대해서 모든 요소가 참으로 평가되는 값을 가져야 `true`를 반환해요.
-
-## 인터페이스
-
 ```typescript
-function every<T>(arr: T[]): boolean;
-function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
-function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
-function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: PropertyKey): boolean;
-
-function every<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): boolean;
+const result = every(collection, predicate);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `arr` (`T[]`) 또는 `object` (`T`): 검색할 배열이나 객체.
+### `every(collection, predicate?)`
 
-::: info `arr`는 `ArrayLike<T>`일 수도 있고, `null` 또는 `undefined`일 수도 있어요
-
-lodash와 완벽하게 호환되도록 `every` 함수는 `arr`을 다음과 같이 처리해요:
-
-- `arr`가 `ArrayLike<T>`인 경우 `Array.from(...)`을 사용하여 배열로 변환해요.
-- `arr`가 `null` 또는 `undefined`인 경우 빈 배열로 간주돼요.
-
-:::
-
-::: info `object`는 `null` 또는 `undefined`일 수도 있어요
-
-lodash와 완벽하게 호환되도록 `every` 함수는 `object`를 다음과 같이 처리해요:
-
-- `object`가 `null` 또는 `undefined`인 경우 빈 객체로 변환돼요.
-
-:::
-
-- `doesMatch`:
-
-  - 배열의 경우:
-
-    - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 모든 요소가 조건을 만족하는지 확인하는 함수.
-    - **부분 객체** (`Partial<T>`): 모든 요소가 주어진 부분 객체의 프로퍼티와 값에 일치해야 `true`를 반환하는 객체.
-    - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플로, 모든 요소가 이 조건을 만족해야 `true`를 반환.
-    - **프로퍼티 이름** (`PropertyKey`): 모든 요소가 해당 프로퍼티에 대해 참으로 평가되는 값을 가져야 `true`를 반환.
-
-  - 객체의 경우:
-    - **검사 함수** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 모든 요소가 조건을 만족하는지 확인하는 함수.
-    - **Partial value** (`Partial<T[keyof T]>`): 모든 요소가 주어진 부분 값에 일치해야 `true`를 반환하는 객체.
-    - **Property-value pair** (`[keyof T[keyof T], unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플로, 모든 요소가 이 조건을 만족해야 `true`를 반환.
-    - **Property name** (`PropertyKey`): 모든 요소가 해당 프로퍼티에 대해 참으로 평가되는 값을 가져야 `true`를 반환.
-
-### 반환 값
-
-(`boolean`): 주어진 조건을 만족하는 모든 요소가 있을 경우 `true`, 그렇지 않으면 `false`를 반환.
-
-## 예시
-
-### 배열의 경우
+배열이나 객체의 모든 요소가 특정 조건을 만족하는지 확인하고 싶을 때 `every`를 사용하세요. 조건은 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름 등 다양한 형태로 지정할 수 있어요.
 
 ```typescript
 import { every } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-const items = [1, 2, 3, 4, 5];
-const result = every(items, item => item > 0);
-console.log(result); // true
+// 검사 함수 사용
+const numbers = [2, 4, 6, 8];
+every(numbers, x => x % 2 === 0);
+// Returns: true
 
-// 부분 객체를 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+// 프로퍼티 이름 사용
+const users = [
+  { name: 'Alice', active: true },
+  { name: 'Bob', active: true },
 ];
-const result = every(items, { name: 'Bob' });
-console.log(result); // false
+every(users, 'active');
+// Returns: true
 
-// 프로퍼티-값 쌍을 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, ['name', 'Alice']);
-console.log(result); // false
+// 부분 객체 사용
+every(users, { active: true });
+// Returns: true
 
-// 프로퍼티 이름을 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, 'name');
-console.log(result); // true
+// 프로퍼티-값 쌍 사용
+every(users, ['active', true]);
+// Returns: true
 ```
 
-### 객체의 경우
+객체에 대해서도 동일하게 동작해요.
 
 ```typescript
 import { every } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-const obj = { a: 1, b: 2, c: 3 };
-const result = every(obj, value => value > 0);
-console.log(result); // true
-
-// 부분 객체를 쓰는 경우
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, { name: 'Bob' });
-console.log(result); // false
-
-// 프로퍼티-값 쌍을 쓰는 경우
-const obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = every(obj, ['name', 'Alice']);
-console.log(result); // false
-
-// 프로퍼티 이름을 쓰는 경우
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, 'name');
-console.log(result); // true
+const scores = { math: 90, english: 85, science: 92 };
+every(scores, score => score >= 80);
+// Returns: true
 ```
+
+`null`이나 `undefined`는 빈 컬렉션으로 처리하여 `true`를 반환해요.
+
+```typescript
+import { every } from 'es-toolkit/compat';
+
+every(null);
+// Returns: true
+
+every(undefined);
+// Returns: true
+```
+
+#### 파라미터
+
+- `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 검사할 배열이나 객체예요.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 검사 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요. 기본값은 `identity` 함수예요.
+
+#### 반환 값
+
+(`boolean`): 모든 요소가 조건을 만족하면 `true`, 그렇지 않으면 `false`를 반환해요.

@@ -1,36 +1,58 @@
-# endsWith
+# endsWith (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning JavaScript의 `String.prototype.endsWith`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `endsWith` 함수는 `null`이나 `undefined` 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 JavaScript의 `String.prototype.endsWith`를 사용하세요.
+
 :::
 
-문자열이 주어진 문자열로 끝나는지 확인해요. 검색을 마칠 인덱스를 지정할 수 있어요.
-
-## 인터페이스
+문자열이 지정된 문자열로 끝나는지 확인해요.
 
 ```typescript
-function endsWith(str?: string, target?: string, position?: number): boolean;
+const result = endsWith(str, target);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `str` (`string`): 검색할 문자열.
-- `target` (`string`): 끝날 때 일치해야 할 문자열.
-- `position` (`number`, 선택): 검색을 마칠 인덱스.
+### `endsWith(str, target, position?)`
 
-### 반환 값
-
-(`boolean`): 문자열이 주어진 문자열로 끝나는지 여부.
-
-## 예시
+문자열이 특정 문자열로 끝나는지 확인하고 싶을 때 `endsWith`를 사용하세요. 검색할 위치도 지정할 수 있어요.
 
 ```typescript
 import { endsWith } from 'es-toolkit/compat';
 
-endsWith('fooBar', 'foo'); // returns false
-endsWith('fooBar', 'Bar'); // returns true
-endsWith('fooBar', 'abcdef'); // returns false
-endsWith('fooBar', 'foo', 3); // returns true
+// 문자열 끝 확인
+endsWith('fooBar', 'Bar');
+// Returns: true
+
+endsWith('fooBar', 'foo');
+// Returns: false
+
+// 특정 위치까지만 확인
+endsWith('fooBar', 'foo', 3);
+// Returns: true (처음 3글자 'foo'에서 'foo'로 끝나는지 확인)
 ```
+
+`null`이나 `undefined`는 `false`를 반환해요.
+
+```typescript
+import { endsWith } from 'es-toolkit/compat';
+
+endsWith(null, 'test');
+// Returns: false
+
+endsWith('test', null);
+// Returns: false
+```
+
+#### 파라미터
+
+- `str` (`string`, 선택): 확인할 문자열이에요.
+- `target` (`string`, 선택): 끝에 있는지 찾을 문자열이에요.
+- `position` (`number`, 선택): 검색을 끝낼 위치예요. 기본값은 문자열 전체 길이예요.
+
+#### 반환 값
+
+(`boolean`): 문자열이 지정된 문자열로 끝나면 `true`, 아니면 `false`를 반환해요.

@@ -1,138 +1,77 @@
-# every
+# every (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Array.prototype.every()`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `every` 函数由于复杂的对象处理、支持各种条件格式等原因而运行缓慢。
+
+请改用更快、更现代的 `Array.prototype.every()`。
 
 :::
 
-检查数组或对象的所有元素是否满足指定条件。
-
-您可以通过以下几种方式指定条件：
-
-- **检查函数**：如果提供一个检查函数，该函数将应用于每一项。所有项都返回 `true` 时，结果为 `true`。
-- **部分对象**：如果提供一个部分对象，该函数将返回 `true`，如果所有项匹配部分对象的属性。
-- **属性-值对**：如果提供一个属性-值对，该函数将返回 `true`，如果所有项匹配该属性和值。
-- **属性名称**：如果提供一个属性名称，该函数将返回 `true`，如果所有项具有指定属性且其值为真。
-
-## 签名
+检查数组或对象的所有值是否满足给定条件。
 
 ```typescript
-function every<T>(arr: T[]): boolean;
-function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
-function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
-function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: PropertyKey): boolean;
-
-function every<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): boolean;
+const result = every(collection, predicate);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`) 或 `object` (`T`): 要搜索的数组或对象。
+### `every(collection, predicate?)`
 
-::: info `arr` 可以是 `ArrayLike<T>`、`null` 或 `undefined`
-
-为了确保与 lodash 的完全兼容性，`every` 函数会按照以下方式处理 `arr`：
-
-- 如果 `arr` 是 `ArrayLike<T>`，它将使用 `Array.from(...)` 转换为数组。
-- 如果 `arr` 是 `null` 或 `undefined`，它将被视为一个空数组。
-
-:::
-
-::: info `object` 可以是 `null` 或 `undefined`
-
-为了确保与 lodash 的完全兼容性，`every` 函数会按照以下方式处理 `object`：
-
-- 如果 `object` 是 `null` 或 `undefined`，它将被转换为一个空对象。
-
-:::
-
-- `doesMatch`:
-
-  - 对于数组的 `every` 重载：
-
-    - **检查函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个函数，接受项、其索引和数组，如果所有项都符合条件则返回 `true`。
-    - **部分对象** (`Partial<T>`): 指定要匹配的属性的部分对象，所有项必须匹配这些属性。
-    - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值，所有项必须匹配该属性和值。
-    - **属性名称** (`PropertyKey`): 要检查其真值的属性名称，所有项必须具有该属性且其值为真。
-
-  - 对于对象的 `every` 重载：
-    - **检查函数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 一个函数，接受项、其键和对象，如果所有项都符合条件则返回 `true`。
-    - **部分值** (`Partial<T[keyof T]>`): 用于与对象的值进行匹配的部分值，所有项必须匹配这些值。
-    - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值，所有项必须匹配该属性和值。
-    - **属性名称** (`PropertyKey`): 要检查其真值的属性名称，所有项必须具有该属性且其值为真。
-
-### 返回
-
-(`boolean`): 如果所有项都满足指定条件，则返回 `true`，否则返回 `false`。
-
-## 示例
-
-### 数组
+当您想检查数组或对象的所有元素是否满足特定条件时,使用 `every`。条件可以以各种格式指定,如函数、部分对象、属性-值对、属性名称等。
 
 ```typescript
 import { every } from 'es-toolkit/compat';
 
-// 使用谓词函数
-const items = [1, 2, 3, 4, 5];
-const result = every(items, item => item > 0);
-console.log(result); // true
-
-// 使用部分对象
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, { name: 'Bob' });
-console.log(result); // false
-
-// 使用属性-值对
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, ['name', 'Alice']);
-console.log(result); // false
+// 使用检查函数
+const numbers = [2, 4, 6, 8];
+every(numbers, x => x % 2 === 0);
+// 返回: true
 
 // 使用属性名称
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+const users = [
+  { name: 'Alice', active: true },
+  { name: 'Bob', active: true },
 ];
-const result = every(items, 'name');
-console.log(result); // true
+every(users, 'active');
+// 返回: true
+
+// 使用部分对象
+every(users, { active: true });
+// 返回: true
+
+// 使用属性-值对
+every(users, ['active', true]);
+// 返回: true
 ```
 
-### 对象
+对象的操作方式相同。
 
 ```typescript
 import { every } from 'es-toolkit/compat';
 
-// 使用谓词函数
-const obj = { a: 1, b: 2, c: 3 };
-const result = every(obj, value => value > 0);
-console.log(result); // true
-
-// 使用部分对象
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, { name: 'Bob' });
-console.log(result); // false
-
-// 使用属性-值对
-const obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = every(obj, ['name', 'Alice']);
-console.log(result); // false
-
-// 使用属性名称
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, 'name');
-console.log(result); // true
+const scores = { math: 90, english: 85, science: 92 };
+every(scores, score => score >= 80);
+// 返回: true
 ```
+
+`null` 或 `undefined` 被视为空集合并返回 `true`。
+
+```typescript
+import { every } from 'es-toolkit/compat';
+
+every(null);
+// 返回: true
+
+every(undefined);
+// 返回: true
+```
+
+#### 参数
+
+- `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): 要检查的数组或对象。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 检查条件。可以使用函数、部分对象、属性-值对或属性名称。默认为 `identity` 函数。
+
+#### 返回值
+
+(`boolean`): 如果所有元素满足条件则返回 `true`,否则返回 `false`。

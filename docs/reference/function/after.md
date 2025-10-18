@@ -1,50 +1,43 @@
 # after
 
-Creates a function that only executes starting from the `n`-th call.
-The provided function will be invoked starting from the `n`-th call.
-
-The is particularly useful for scenarios involving events or asynchronous operations where an action should occur only after a certain number of invocations.
-
-## Signature
+Creates a new function that invokes the original function starting from the `n`-th call.
 
 ```typescript
-function after<F extends (...args: any[]) => any>(
-  n: number,
-  func: F
-): (...args: Parameters<F>) => ReturnType<F> | undefined;
+const afterFunc = after(n, func);
 ```
 
-### Parameters
+## Reference
 
-- `n` (`number`): The number of calls required for `func` to execute.
-- `func` (`F`): The function to be invoked.
+### `after(n, func)`
 
-### Returns
-
-(`(...args: Parameters<F>) => ReturnType<F> | undefined`): A new function that:
-
-- Tracks the number of calls.
-- Invokes `func` starting from the `n`-th call.
-- Returns `undefined` if fewer than `n` calls have been made.
-
-### Throws
-
-Throws an error if `n` is negative.
-
-## Examples
+Use `after` when you want to ignore the first few calls and execute the function starting from the `n`-th call. This is useful when you need to perform an action only after a specific number of occurrences in events or asynchronous operations.
 
 ```typescript
 import { after } from 'es-toolkit/function';
 
-const mockFn = () => {
-  console.log('called');
-};
-const afterFn = after(3, mockFn);
+const afterFn = after(3, () => {
+  console.log('executed');
+});
 
-// Will not log anything.
+// logs nothing
 afterFn();
-// Will not log anything.
+// logs nothing
 afterFn();
-// Will log 'called'.
+// logs 'executed'
+afterFn();
+// logs 'executed'
 afterFn();
 ```
+
+#### Parameters
+
+- `n` (`number`): The number of calls required before `func` is executed.
+- `func` (`F`): The function to be executed.
+
+#### Returns
+
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): A new function that tracks the number of calls and executes `func` starting from the `n`-th call. Returns `undefined` for calls before the `n`-th call.
+
+#### Throws
+
+Throws an error when `n` is not an integer or is negative.

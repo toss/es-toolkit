@@ -1,41 +1,52 @@
-# isObject
+# isObject (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-检查给定的值是否为对象。对象是不属于原始类型（字符串、数字、布尔值、符号、null 或未定义）的值。
-
-此函数测试提供的值是否为对象。如果该值是一个对象，则返回 `true`，否则返回 `false`。
-
-此函数还可以作为 TypeScript 中的类型谓词，将参数的类型缩小到对象值。
-
-## 签名
+检查值是否为对象。
 
 ```typescript
-function isObject(value?: unknown): value is object;
+const result = isObject(value);
 ```
 
-### 参数
+## 参考
+
+### `isObject(value)`
+
+当您想检查值是否为对象时使用 `isObject`。在 JavaScript 中，数组、函数、对象、正则表达式、Date 等都被视为对象。
+
+```typescript
+import { isObject } from 'es-toolkit/compat';
+
+// 普通对象
+isObject({});
+// 返回: true
+
+// 数组也是对象
+isObject([1, 2, 3]);
+// 返回: true
+
+// 函数也是对象
+isObject(() => {});
+// 返回: true
+
+// Date 也是对象
+isObject(new Date());
+// 返回: true
+
+// null 不是对象
+isObject(null);
+// 返回: false
+
+// 原始类型不是对象
+isObject('string');
+// 返回: false
+
+isObject(123);
+// 返回: false
+```
+
+#### 参数
 
 - `value` (`unknown`): 要检查是否为对象的值。
 
-### 返回值
+#### 返回值
 
-(`value is object`): 如果该值是对象类型，则返回 `true`，否则返回 `false`。
-
-## 示例
-
-```typescript
-const value1 = {};
-const value2 = [1, 2, 3];
-const value3 = () => {};
-const value4 = null;
-
-console.log(isObject(value1)); // true
-console.log(isObject(value2)); // true
-console.log(isObject(value3)); // true
-console.log(isObject(value4)); // false
-```
+(`value is object`): 如果值为对象则返回 `true`，否则返回 `false`。

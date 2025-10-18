@@ -1,31 +1,42 @@
 # flattenDeep
 
-展开嵌套数组的所有深度。
-
-此函数的工作方式与在 JavaScript 语言中调用 [Array#flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 时使用 `flat(Infinity)` 相同，但速度更快。
-
-## 签名
+完全扁平化嵌套数组的所有深度,返回一个新数组。
 
 ```typescript
-// 用于递归解包嵌套数组类型，以提取最内层元素的类型。
-type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNestedArrayType<U> : T;
-
-function flattenDeep<T>(arr: T[]): Array<ExtractNestedArrayType<T>>;
+const result = flattenDeep(arr);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`): 要展开的数组。
+### `flattenDeep(arr)`
 
-### 返回值
+当您想完全扁平化嵌套数组,无论嵌套多深时,请使用 `flattenDeep`。它将数组内的所有嵌套数组展开,形成一个平面结构。
 
-(`Array<ExtractNestedArrayType<T>>`): 展开所有深度后的新数组。
-
-## 示例
+与 JavaScript 内置的 [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 调用 `flat(Infinity)` 的效果相同,但速度更快。
 
 ```typescript
+import { flattenDeep } from 'es-toolkit/array';
+
+// 扁平化所有嵌套级别
 const array = [1, [2, [3]], [4, [5, 6]]];
-
 const result = flattenDeep(array);
-// 返回 [1, 2, 3, 4, 5, 6]
+// Returns: [1, 2, 3, 4, 5, 6]
 ```
+
+无论多复杂的嵌套结构都会完全扁平化。
+
+```typescript
+import { flattenDeep } from 'es-toolkit/array';
+
+const complexArray = [1, [2, [3, [4, [5]]]], 6];
+const result = flattenDeep(complexArray);
+// Returns: [1, 2, 3, 4, 5, 6]
+```
+
+#### 参数
+
+- `arr` (`T[]`): 要扁平化的嵌套数组。
+
+#### 返回值
+
+(`Array<ExtractNestedArrayType<T>>`): 返回完全扁平化所有深度的新数组。

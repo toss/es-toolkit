@@ -1,67 +1,70 @@
-# overSome
+# overSome (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.some`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`overSome`関数は、条件関数を変換して検査する過程で追加のオーバーヘッドが発生します。
+
+代わりに、より高速で現代的な`Array.some`メソッドを使用してください。
+
 :::
 
-提供された値に対して、与えられた述語のいずれかが真を返すかどうかをチェックする関数を作成します。
-
-この関数は、個々の述語関数、または述語の配列のいずれかを取る複数の述語を受け取り、
-提供された値で呼び出されたときにいずれかの述語が真を返すかどうかをチェックする新しい関数を返します。ます。
-
-## インターフェース
+条件関数のうち一つでも真と評価される値を返すかどうかを確認する関数を作成します。
 
 ```typescript
-function overSome<T, U extends T, V extends T>(
-  predicate1: (value: T) => value is U,
-  predicate2: (value: T) => value is V
-): (value: T) => value is U | V;
-function overSome<T>(
-  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
-): (...values: T[]) => boolean;
+const anyValidator = overSome(predicates);
 ```
 
-### パラメータ
+## 参照
 
-- `predicates` (`...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>`): -
-  述語または述語の配列のリストです。各述語は、型 `T` の1つ以上の値を取り、その値に対して条件が満たされているかどうかを示すブール値を返す関数です。
-  数値配列。
+### `overSome(...predicates)`
 
-### 戻り値
-
-(`(...values: T[]) => boolean`): 値のリストを取り、提供された値に対していずれかの述語が真を返すときに `true` を返し、そうでない場合は `false` を返す関数。
-数値配列。
-
-## 例
+複数の条件関数を受け取って与えられた値が条件のうち一つでも満たすかどうかを確認する関数を生成します。柔軟な条件検査や代替検証に便利です。
 
 ```typescript
-const func = overSome(
-  (value) => typeof value === 'string',
-  (value) => typeof value === 'number',
-  (value) => typeof value === 'symbol'
-);
+import { overSome } from 'es-toolkit/compat';
 
-func("hello"); // true
-func(42); // true
-func(Symbol()); // true
-func([]); // false
+// 文字列または数値かどうかを確認します
+const isStringOrNumber = overSome([value => typeof value === 'string', value => typeof value === 'number']);
 
-const func = overSome([
-  (value) => value.a > 0,
-  (value) => value.b > 0
+isStringOrNumber('hello'); // => true
+isStringOrNumber(42); // => true
+isStringOrNumber(true); // => false
+
+// 複数の条件のうち一つでも満たすかどうかを確認します
+const hasValidProperty = overSome([
+  obj => obj.name && obj.name.length > 0,
+  obj => obj.email && obj.email.includes('@'),
+  obj => obj.phone && obj.phone.length >= 10,
 ]);
 
-func({ a: 0, b: 2 }); // true
-func({ a: 0, b: 0 }); // false
-
-const func = overSome(
-  (a, b) => typeof a === 'string' && typeof b === 'string',
-  (a, b) => a > 0 && b > 0
-);
-
-func("hello", "world"); // true
-func(1, 10); // true
-func(0, 2); // false
+hasValidProperty({ name: 'John' }); // => true
+hasValidProperty({ email: 'john@example.com' }); // => true
+hasValidProperty({ phone: '1234567890' }); // => true
+hasValidProperty({ age: 30 }); // => false
 ```
+
+オブジェクトのプロパティも検査できます。
+
+```typescript
+import { overSome } from 'es-toolkit/compat';
+
+// 複数の条件のうち一つでもマッチするかどうかを確認します
+const matchesAnyCondition = overSome([
+  'isActive', // isActiveプロパティが真と評価されるか
+  { role: 'admin' }, // roleが'admin'か
+  ['status', 'vip'], // statusが'vip'か
+]);
+
+matchesAnyCondition({ isActive: true }); // => true
+matchesAnyCondition({ role: 'admin' }); // => true
+matchesAnyCondition({ status: 'vip' }); // => true
+matchesAnyCondition({ role: 'user', status: 'normal' }); // => false
+```
+
+#### パラメータ
+
+- `...predicates` (`Array<Function | string | object | Array>`): 検査する条件関数です。関数、プロパティ名、オブジェクト、プロパティ-値ペアなどになります。
+
+#### 戻り値
+
+(`(...args: any[]) => boolean`): 条件のうち一つでも満たせば`true`、すべて満たさなければ`false`を返す関数を返します。

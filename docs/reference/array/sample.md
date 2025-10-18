@@ -1,27 +1,60 @@
 # sample
 
-Returns a random element from an array.
-
-This function takes an array and returns a single element selected randomly from the array.
-
-## Signature
+Returns a randomly selected element from an array.
 
 ```typescript
-function sample<T>(arr: T[]): T;
+const randomElement = sample(arr);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array to sample from.
+### `sample(arr)`
 
-### Returns
-
-(`T`): A random element from the array.
-
-## Examples
+Use `sample` when you want to randomly select one element from an array. It's useful for selecting random items in games, randomly fetching test data, or conducting draws.
 
 ```typescript
-const array = [1, 2, 3, 4, 5];
-const randomElement = sample(array);
-// randomElement will be one of the elements from the array, selected randomly.
+import { sample } from 'es-toolkit/array';
+
+// Randomly select one from a number array.
+const numbers = [1, 2, 3, 4, 5];
+const randomNumber = sample(numbers);
+// Returns: one of 1, 2, 3, 4, 5
+
+// Randomly select one from a string array.
+const fruits = ['apple', 'banana', 'cherry', 'date'];
+const randomFruit = sample(fruits);
+// Returns: one of 'apple', 'banana', 'cherry', 'date'
+
+// Randomly select one from an object array.
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 35 },
+];
+const randomUser = sample(users);
+// Returns: one of the three users randomly
 ```
+
+It can also be used with various types of arrays.
+
+```typescript
+import { sample } from 'es-toolkit/array';
+
+// Boolean array
+const booleans = [true, false];
+const randomBoolean = sample(booleans);
+// Returns: true or false
+
+// Mixed type array
+const mixed = [1, 'hello', { key: 'value' }, [1, 2, 3]];
+const randomItem = sample(mixed);
+// Returns: any of the elements in the array
+```
+
+#### Parameters
+
+- `arr` (`readonly T[]`): The array from which to randomly select an element.
+
+#### Returns
+
+(`T`): A randomly selected element from the array.

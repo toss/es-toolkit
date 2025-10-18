@@ -1,30 +1,46 @@
 # countBy
 
-Count the occurrences of each item in an array based on a `mapper` function.
-
-## Signature
+Categorizes the elements of an array based on a transformation function result and returns an object with counts.
 
 ```typescript
-function countBy<T, K extends PropertyKey>(arr: T[], mapper: (item: T) => K): Record<K, number>;
+const counted = countBy(arr, mapper);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The input array to count occurrences.
-- `mapper` (`(item: T) => K`): The transformation function that maps each item to a key.
+### `countBy(arr, mapper)`
 
-### Returns
+Use `countBy` when you want to categorize array elements by a specific criterion and count each group. It groups elements using the value returned by the transformation function as a key and calculates the number of elements in each group.
 
-(`Record<K, number>`) An object containing the count of each item based on the transformation function.
-
-## Examples
-
-```javascript
+```typescript
 import { countBy } from 'es-toolkit/array';
 
-const array = [1, 2, 3, 4, 5, 6];
-const result = countBy(array, x => (x % 2 === 0 ? 'even' : 'odd'));
-
-console.log(result);
-// Output: { 'odd': 3, 'even': 3 }
+// Count numbers by odd/even categorization.
+countBy([1, 2, 3, 4, 5], item => (item % 2 === 0 ? 'even' : 'odd'));
+// Returns: { odd: 3, even: 2 }
 ```
+
+You can also count based on a specific property of an object array.
+
+```typescript
+import { countBy } from 'es-toolkit/array';
+
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 25 },
+  { name: 'David', age: 30 },
+];
+
+countBy(users, user => user.age);
+// Returns: { '25': 2, '30': 2 }
+```
+
+#### Parameters
+
+- `arr` (`T[]`): The array to count elements from.
+- `mapper` (`(item: T) => K`): A function that returns the value to use as the categorization criterion.
+
+#### Returns
+
+(`Record<K, number>`): An object representing how many elements exist for each categorization criterion.

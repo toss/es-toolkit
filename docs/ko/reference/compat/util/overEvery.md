@@ -1,65 +1,73 @@
-# overEvery
+# overEvery (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.every`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `overEvery` 함수는 조건 함수들을 변환하고 검사하는 과정에서 추가적인 오버헤드가 발생해요.
+
+대신 더 빠르고 현대적인 `Array.every` 메서드를 사용하세요.
+
 :::
 
-주어진 모든 조건 함수들에 대해 제공된 값들이 참을 반환하는지 확인하는 함수를 생성해요.
-
-이 함수는 여러 개의 조건 함수를 받아요. 이 조건 함수들은 개별적인 함수일 수도 있고, 조건 함수들의 배열로도 이루어질 수 있어요.
-제공된 값들에 대해 호출되었을 때 모든 조건 함수가 참을 반환하는지 확인하는 새로운 함수를 반환해요.
-
-## 인터페이스
+모든 조건 함수가 참으로 평가되는 값을 반환하는지 확인하는 함수를 만들어요.
 
 ```typescript
-function overEvery<T, U extends T, V extends T>(
-  predicate1: (value: T) => value is U,
-  predicate2: (value: T) => value is V
-): (value: T) => value is U & V;
-function overEvery<T>(
-  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
-): (...values: T[]) => boolean;
+const allValidator = overEvery(predicates);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `predicates` (`...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>`): -
-  조건 함수 또는 조건 함수 배열의 목록이에요. 각 조건 함수는 하나 이상의 값 `T` 타입을 받아들이고,
-  그 값들이 조건을 만족하는지 여부를 나타내는 boolean을 반환하는 함수에요.
+### `overEvery(...predicates)`
 
-### 반환 값
-
-(`(...values: T[]) => boolean`): 값의 리스트를 받아 제공된 값들에 대해 모든 조건 함수가 참을 반환하면 `true`를,
-그렇지 않으면 `false`를 반환하는 함수에요.
-
-## 예시
+여러 조건 함수를 받아서 주어진 값이 모든 조건을 만족하는지 확인하는 함수를 생성해요. 복합 조건 검사나 데이터 검증에 유용해요.
 
 ```typescript
-const func = overEvery(
-  (value) => typeof value === 'string',
-  (value) => value.length > 3
-);
+import { overEvery } from 'es-toolkit/compat';
 
-func("hello"); // true
-func("hi"); // false
-func(42); // false
-
-const func = overEvery([
-  (value) => value.a > 0,
-  (value) => value.b > 0
+// 문자열 조건들을 검사해요
+const isValidString = overEvery([
+  value => typeof value === 'string',
+  value => value.length > 3,
+  value => value.includes('o'),
 ]);
 
-func({ a: 1, b: 2 }); // true
-func({ a: 0, b: 2 }); // false
+isValidString('hello'); // => true
+isValidString('hi'); // => false (길이가 3 이하)
+isValidString('test'); // => false ('o'가 없음)
 
-const func = overEvery(
-  (a, b) => typeof a === 'string' && typeof b === 'string',
-  (a, b) => a.length > 3 && b.length > 3
-);
+// 숫자 범위를 검사해요
+const isInRange = overEvery([
+  num => num >= 0,
+  num => num <= 100,
+  num => num % 1 === 0, // 정수인지 확인
+]);
 
-func("hello", "world"); // true
-func("hi", "world"); // false
-func(1, 10); // false
+isInRange(50); // => true
+isInRange(-5); // => false (0 미만)
+isInRange(150); // => false (100 초과)
+isInRange(50.5); // => false (정수가 아님)
 ```
+
+객체 속성도 검사할 수 있어요.
+
+```typescript
+import { overEvery } from 'es-toolkit/compat';
+
+// 객체 속성을 검사해요
+const isValidUser = overEvery([
+  'name', // name 속성이 참으로 평가되는지
+  { age: 30 }, // age가 30인지
+  ['active', true], // active가 true인지
+]);
+
+isValidUser({ name: 'John', age: 30, active: true }); // => true
+isValidUser({ name: '', age: 30, active: true }); // => false (name이 빈 문자열)
+isValidUser({ name: 'John', age: 25, active: true }); // => false (age가 다름)
+```
+
+#### 파라미터
+
+- `...predicates` (`Array<Function | string | object | Array>`): 검사할 조건 함수들이에요. 함수, 속성 이름, 객체, 속성-값 쌍 등이 될 수 있어요.
+
+#### 반환 값
+
+(`(...args: any[]) => boolean`): 모든 조건을 만족하면 `true`, 하나라도 만족하지 않으면 `false`를 반환하는 함수를 반환해요.

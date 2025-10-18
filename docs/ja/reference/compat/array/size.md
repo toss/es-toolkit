@@ -1,53 +1,69 @@
-# size
+# size（Lodash 互換性）
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `.length` プロパティを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `size` 関数は、`null`、`undefined` の処理と様々な型のサポートにより、複雑に動作します。
+
+より高速でモダンな `.length` プロパティまたは `Object.keys().length` を使用してください。
+
 :::
 
-与えられた引数のサイズを返します。
-
-配列、文字列、数値のサイズを計算します。配列は含まれる要素の数を、文字列は文字の数を、オブジェクトは列挙可能なプロパティの数を返します。
-
-## インターフェース
+配列、文字列、オブジェクトのサイズを返します。
 
 ```typescript
-function size<T>(value: T[] | object | string | Map<unknown, T> | Set<T> | null | undefined): number;
+const length = size(collection);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`T`): サイズを確認する配列、文字列、またはオブジェクト。
+### `size(collection)`
 
-### 戻り値
-
-(`number`): 入力値のサイズ。
-
-## 例
+配列、文字列、オブジェクト、Map、Set のサイズを確認する場合は `size` を使用します。様々な型のコレクションに対して一貫したサイズ情報を提供します。
 
 ```typescript
-const arr = [1, 2, 3];
-const arrSize = size(arr);
-// arrSize は 3 です。
+import { size } from 'es-toolkit/compat';
 
-const str = 'hello';
-const strSize = size(str);
-// strSize は 5 です。
+// 配列の要素数
+size([1, 2, 3]);
+// 3を返します
 
-const obj = { a: 1, b: 2, c: 3 };
-const objSize = size(obj);
-// objSize は 3 です。
+// 文字列の文字数
+size('hello');
+// 5を返します
 
-const emptyArr = [];
-const emptyArrSize = size(emptyArr);
-// emptyArrSize は 0 です。
+// オブジェクトの列挙可能なプロパティ数
+size({ a: 1, b: 2, c: 3 });
+// 3を返します
 
-const emptyStr = '';
-const emptyStrSize = size(emptyStr);
-// emptyStrSize は 0 です。
+// Map の要素数
+size(
+  new Map([
+    ['a', 1],
+    ['b', 2],
+  ])
+);
+// 2を返します
 
-const emptyObj = {};
-const emptyObjSize = size(emptyObj);
-// emptyObjSize は 0 です。
+// Set の要素数
+size(new Set([1, 2, 3]));
+// 3を返します
 ```
+
+`null` や `undefined` は 0 を返します。
+
+```typescript
+import { size } from 'es-toolkit/compat';
+
+size(null); // 0
+size(undefined); // 0
+size({}); // 0
+size([]); // 0
+```
+
+#### パラメータ
+
+- `collection` (`object | string | null | undefined`): サイズを確認する配列、文字列、オブジェクト、Map、Set。
+
+#### 戻り値
+
+(`number`)：コレクションのサイズを返します。`null` や `undefined` の場合は 0 を返します。

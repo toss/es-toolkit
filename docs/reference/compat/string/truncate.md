@@ -1,64 +1,81 @@
-# truncate
+# truncate (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use JavaScript's `String.prototype.slice`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `truncate` function operates slowly due to complex Unicode handling and regex checking.
+
+Use the faster and more modern JavaScript's `String.prototype.slice` instead.
+
 :::
 
-Truncates a string if it's longer than the given maximum string length. The last characters of the truncated string are replaced with the omission string which defaults to "...".
-
-## Signature
+Truncates a string if it's longer than the specified maximum length and appends an omission string.
 
 ```typescript
-function truncate(
-  string?: string,
-  options?: {
-    length?: number;
-    separator?: string | RegExp;
-    omission?: string;
-  }
-): string;
+const truncated = truncate(str, options);
 ```
 
-### Parameters
+## Reference
 
-- `string` (`string`): The string to truncate.
-- `options` (`Object`, optional): The options object.
-  - `length` (`number`, optional): The maximum string length. Defaults to `30`.
-  - `omission` (`string`, optional): The string to indicate text is omitted. Defaults to `'...'`.
-  - `separator` (`RegExp|string`, optional): The separator pattern to truncate to.
+### `truncate(string, options?)`
 
-### Returns
-
-(`string`): The truncated string.
-
-## Examples
+Use `truncate` when you want to cut a long string to a specified length. The truncated part is replaced with an omission string (default: `"..."`).
 
 ```typescript
-const test = 'hi-diddly-ho there, neighborino';
+import { truncate } from 'es-toolkit/compat';
 
-truncate(test);
-// => 'hi-diddly-ho there, neighbo...'
+// Basic usage (max 30 characters)
+truncate('hi-diddly-ho there, neighborino');
+// Returns: 'hi-diddly-ho there, neighbo...'
 
-truncate(test, { length: 24, separator: ' ' });
-// => 'hi-diddly-ho there,...'
+// Specify length
+truncate('hi-diddly-ho there, neighborino', { length: 24 });
+// Returns: 'hi-diddly-ho there, neig...'
 
-truncate(test, { length: 24, separator: /,? +/ });
-// => 'hi-diddly-ho there...'
+// Change omission string
+truncate('hi-diddly-ho there, neighborino', { omission: ' [...]' });
+// Returns: 'hi-diddly-ho there, neig [...]'
+```
 
-truncate(test, { omission: ' [...]' });
-// => 'hi-diddly-ho there, neig [...]'
+You can specify a separator to truncate at that position.
 
-truncate('ABC', { length: 3 });
-// => 'ABC'
+```typescript
+import { truncate } from 'es-toolkit/compat';
 
-truncate('ABC', { length: 2 });
-// => '...'
+// Truncate at word boundaries with space separator
+truncate('hi-diddly-ho there, neighborino', {
+  length: 24,
+  separator: ' ',
+});
+// Returns: 'hi-diddly-ho there,...'
+
+// Specify separator with regex
+truncate('hi-diddly-ho there, neighborino', {
+  length: 24,
+  separator: /,? +/,
+});
+// Returns: 'hi-diddly-ho there...'
+```
+
+Unicode characters are also handled correctly.
+
+```typescript
+import { truncate } from 'es-toolkit/compat';
 
 truncate('¥§✈✉🤓', { length: 5 });
-// => '¥§✈✉🤓'
+// Returns: '¥§✈✉🤓'
 
 truncate('¥§✈✉🤓', { length: 4, omission: '…' });
-// => '¥§✈…'
+// Returns: '¥§✈…'
 ```
+
+#### Parameters
+
+- `string` (`string`, optional): The string to truncate.
+- `options` (`object`, optional): The options object.
+  - `options.length` (`number`, optional): The maximum string length. Defaults to `30`.
+  - `options.omission` (`string`, optional): The string to indicate text is omitted. Defaults to `'...'`.
+  - `options.separator` (`RegExp | string`, optional): The separator pattern to truncate to.
+
+#### Returns
+
+(`string`): Returns the truncated string.

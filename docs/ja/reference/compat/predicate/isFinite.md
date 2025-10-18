@@ -1,37 +1,53 @@
-# isFinite
+# isFinite (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替となるネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
+::: warning `Number.isFinite`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`isFinite`関数は追加の型チェックオーバーヘッドにより動作が遅くなります。
+
+代わりに、より速く現代的な`Number.isFinite`を使用してください。
+
 :::
 
-与えられた値が有限の数値かどうかを確認します。
-
-この関数は、TypeScriptにおいて型を判別するための述語関数としても使用でき、引数の型を `number` に絞り込むことができます。
-
-## インターフェース
+値が有限な数値かどうかを確認します。
 
 ```typescript
-function isFinite(value?: unknown): value is number;
+const result = isFinite(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 有限の数値かどうかを確認する値。
+### `isFinite(value)`
 
-### 戻り値
-
-(`value is number`): 値が有限の数値であれば `true`、そうでなければ `false` を返します。
-
-## 例
+指定された値が有限な数値かどうかを確認したい場合は`isFinite`を使用してください。この関数はTypeScriptでタイプガードとしても動作し、値の型を`number`に絞り込みます。
 
 ```typescript
-const value1 = 100;
-const value2 = Infinity;
-const value3 = '100';
+import { isFinite } from 'es-toolkit/compat';
 
-console.log(isFinite(value1)); // true
-console.log(isFinite(value2)); // false
-console.log(isFinite(value3)); // false
+// 有限な数値
+isFinite(100); // true
+isFinite(-50); // true
+isFinite(3.14); // true
+isFinite(0); // true
+
+// 無限大はfalse
+isFinite(Infinity); // false
+isFinite(-Infinity); // false
+
+// NaNもfalse
+isFinite(NaN); // false
+
+// 他の型もfalse
+isFinite('100'); // false
+isFinite([]); // false
+isFinite({}); // false
+isFinite(null); // false
+isFinite(undefined); // false
 ```
+
+#### パラメータ
+
+- `value` (`any`): 確認する値です。
+
+#### 戻り値
+
+(`boolean`): 値が有限な数値の場合は`true`、そうでない場合は`false`を返します。

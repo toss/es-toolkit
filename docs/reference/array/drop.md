@@ -1,29 +1,43 @@
 # drop
 
-Removes a specified number of elements from the beginning of an array and returns the rest.
-
-This function takes an array and a number, and returns a new array with the specified number
-of elements removed from the start.
-
-## Signature
+Returns a new array with the specified number of elements removed from the beginning.
 
 ```typescript
-function drop<T>(arr: T[], itemsCount: number): T[];
+const dropped = drop(arr, itemsCount);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array from which to drop elements.
-- `itemsCount` (`number`): The number of elements to drop from the beginning of the array.
+### `drop(arr, itemsCount)`
 
-### Returns
-
-(`T[]`) A new array with the specified number of elements removed from the start.
-
-## Examples
+Use `drop` when you want to remove some elements from the beginning of an array. It removes the specified number of elements from the start and returns a new array with the remaining elements.
 
 ```typescript
-const array = [1, 2, 3, 4, 5];
-const result = drop(array, 2);
-// result will be [3, 4, 5] since the first two elements are dropped.
+import { drop } from 'es-toolkit/array';
+
+// Remove the first 2 elements from the array.
+drop([1, 2, 3, 4, 5], 2);
+// Returns: [3, 4, 5]
+
+// If the count is greater than the array length, it returns an empty array.
+drop([1, 2, 3], 5);
+// Returns: []
 ```
+
+If you pass a negative number or 0, it returns a new array with the same elements as the original.
+
+```typescript
+import { drop } from 'es-toolkit/array';
+
+drop([1, 2, 3], 0); // [1, 2, 3]
+drop([1, 2, 3], -2); // [1, 2, 3]
+```
+
+#### Parameters
+
+- `arr` (`T[]`): The array to remove elements from.
+- `itemsCount` (`number`): The number of elements to remove from the beginning of the array.
+
+#### Returns
+
+(`T[]`): A new array with the specified number of elements removed from the beginning.

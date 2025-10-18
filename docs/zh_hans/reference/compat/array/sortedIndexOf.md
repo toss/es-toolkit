@@ -1,100 +1,60 @@
-# sortedIndexOf
+# sortedIndexOf (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请直接实现二分查找
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
+这个 `sortedIndexOf` 函数由于复杂的二分查找处理和类型验证而运行缓慢。
 
-在已排序的数组中找到值首次出现的索引。它的工作方式类似于 `Array#indexOf`，但专门用于已排序的数组。
-
-::: warning 请提供已排序的数组作为参数
-
-此函数使用二分查找（Binary search）快速找到索引，因此如果不提供已排序的数组，它将无法正常工作。
+相反，请直接实现更快、更现代的二分查找或使用 `Array.prototype.indexOf()`。
 
 :::
 
-## 签名
+查找值在已排序数组中首次出现的索引。
 
 ```typescript
-function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedIndexOf(array, value);
 ```
 
-### 参数
+## 参考
 
-- `array` (`ArrayLike<T> | null | undefined`): 已排序的数组。如果数组为 `null` 或 `undefined`，则返回 `-1`。
-- `value` (`T`): 要在已排序数组中通过比较查找的值。
+### `sortedIndexOf(array, value)`
 
-### 返回值
-
-(`number`): 为保持排序顺序应插入值的索引。
-
-## 示例
+在已排序数组中查找特定值首次出现的索引时，请使用 `sortedIndexOf`。它使用二分查找快速找到值。
 
 ```typescript
 import { sortedIndexOf } from 'es-toolkit/compat';
 
-const numbers = [11, 22, 33, 44, 55];
-const unSortedArray = [55, 33, 22, 11, 44];
-const duplicateArray = [1, 2, 2, 3, 3, 3, 4];
-const emptyArray = [];
-const zeroMinusArray = [-0];
-const zeroPlusArray = [0];
-const floatingArray = [1.1, 2.2, 3.3];
-const arrayLike = { length: 3, 0: 10, 1: 20, 2: 30 };
+// 在数字数组中查找值
+sortedIndexOf([11, 22, 33, 44, 55], 33);
+// 返回 2
 
-// 常规情况
-sortedIndexOf(numbers, 11);
-// 返回值: 0
-// 解释: 数组numbers中值11的位置是0。
+// 当值不存在时
+sortedIndexOf([11, 22, 33, 44, 55], 30);
+// 返回 -1
 
-// 重复值
-sortedIndexOf(duplicateArray, 3);
-// 返回值: 3
-// 解释: 值3的第一次出现索引是3。
+// 当存在重复值时，返回第一个索引
+sortedIndexOf([1, 2, 2, 3, 3, 3, 4], 3);
+// 返回 3（第一个3的位置）
 
-// 不存在的值
-sortedIndexOf(numbers, 30);
-// 返回值: -1
-// 解释: 30在数组中不存在，所以返回-1。
-
-// 额外参数
-sortedIndexOf(numbers, 22, true);
-// 返回值: 1
-// 解释: 如果添加更多参数，它们将被忽略。
-
-// 浮点值
-sortedIndexOf(floatingArray, 2.2);
-// 返回值: 1
-// 解释: 数组中值2.2的位置是1。
-
-// 空数组
-sortedIndexOf(emptyArray, 30);
-// 返回值: -1
-// 解释: 在空数组中搜索值时，返回-1。
-
-// 空数组与undefined
-sortedIndexOf(emptyArray, undefined);
-// 返回值: -1
-// 解释: 在空数组中搜索值时，即使是undefined也总是返回-1。
-
-// 未排序数组
-sortedIndexOf(unSortedArray, 11);
-// 返回值: -1
-// 解释: 使用未排序的数组时，返回-1。
-
-// -0和0被视为相同
-sortedIndexOf(zeroMinusArray, 0);
-// 返回值: 0
-// 解释: 在JavaScript中，-0和0被视为相等。
-
-// -0和0被视为相同
-sortedIndexOf(zeroPlusArray, -0);
-// 返回值: 0
-// 解释: 在JavaScript中，-0和0被视为相等。
-
-// 类数组对象
-sortedIndexOf(arrayLike, 20);
-// 返回值: 1
-// 解释: 也适用于类数组对象。
+// 0和-0被视为相等
+sortedIndexOf([-0, 0], 0);
+// 返回 0
 ```
+
+空数组、`null` 或 `undefined` 返回 -1。
+
+```typescript
+import { sortedIndexOf } from 'es-toolkit/compat';
+
+sortedIndexOf([], 1); // -1
+sortedIndexOf(null, 1); // -1
+sortedIndexOf(undefined, 1); // -1
+```
+
+#### 参数
+
+- `array` (`ArrayLike<T> | null | undefined`): 已排序的数组。使用未排序的数组可能会产生错误的结果。
+- `value` (`T`): 要查找的值。
+
+#### 返回值
+
+(`number`): 返回值首次出现的索引。如果值不存在，则返回 -1。

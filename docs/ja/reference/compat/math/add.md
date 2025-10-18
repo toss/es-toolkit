@@ -1,32 +1,78 @@
-# add
+# add (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `+` 演算子を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `add` 関数は複雑な型変換と文字列処理により動作が遅くなります。
+
+代わりに、より高速でシンプルな `+` 演算子を使用してください。
+
 :::
 
-2つの数値を加算します。
-
-## インターフェース
+2つの値を加算します。
 
 ```typescript
-function add(value: number, other: number): number;
+const result = add(value, other);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`number`): 足し算する最初の数値です。
-- `other` (`number`): 足し算する2番目の数値です。
+### `add(value, other)`
 
-### 戻り値
-
-(`number`): 2つの数値の合計を返します。どちらか一方でもNaNの場合は、`NaN`を返します。
-
-## 例
+2つの値を加算したい場合は `add` を使用してください。数値だけでなく文字列も処理できます。
 
 ```typescript
-const result1 = add(2, 3); // 2つの値はnumber型なので、result1は5になります。
-const result2 = add(NaN, 5); // valueがNaNのため、result2はNaNになります。
-const result3 = add(10, NaN); // otherがNaNのため、result3はNaNになります。
+import { add } from 'es-toolkit/compat';
+
+// 数値の加算
+add(2, 3);
+// Returns: 5
+
+add(1.5, 2.5);
+// Returns: 4
+
+// NaN の処理
+add(NaN, 5);
+// Returns: NaN
+
+add(10, NaN);
+// Returns: NaN
 ```
+
+文字列が含まれる場合は文字列連結として動作します。
+
+```typescript
+import { add } from 'es-toolkit/compat';
+
+add('2', 3);
+// Returns: '23'
+
+add(1, '5');
+// Returns: '15'
+
+add('hello', 'world');
+// Returns: 'helloworld'
+```
+
+`undefined` 値は特別に処理されます。
+
+```typescript
+import { add } from 'es-toolkit/compat';
+
+add(undefined, undefined);
+// Returns: 0
+
+add(5, undefined);
+// Returns: 5
+
+add(undefined, 3);
+// Returns: 3
+```
+
+#### パラメータ
+
+- `value` (`number`): 加算する最初の値です。
+- `other` (`number`): 加算する2番目の値です。
+
+#### 戻り値
+
+(`number | string`): 2つの値の合計を返します。文字列が含まれる場合は文字列を返し、そうでなければ数値を返します。

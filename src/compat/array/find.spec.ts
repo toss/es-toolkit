@@ -116,10 +116,10 @@ describe('find', () => {
   it('should throw error when boolean predicate is used', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    expect(() => find({ a: 1, b: 2, c: 3 }, true)).toThrow('undefined is not a function');
+    expect(() => find({ a: 1, b: 2, c: 3 }, true)).toThrow('doesMatch is not a function');
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    expect(() => find({ a: 1, b: 2, c: 3 }, false)).toThrow('undefined is not a function');
+    expect(() => find({ a: 1, b: 2, c: 3 }, false)).toThrow('doesMatch is not a function');
     expect(() => find([1, 2, 3], true)).toThrow('undefined is not a function');
     expect(() => find([1, 2, 3], false)).toThrow('undefined is not a function');
   });

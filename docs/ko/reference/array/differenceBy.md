@@ -1,39 +1,52 @@
 # differenceBy
 
-제공된 함수로 요소들을 매핑한 후 두 배열의 차이를 계산해요.
-
-이 함수는 두 배열과 매퍼 함수를 받아, 매퍼 함수로 계산된 결과를 기준으로 첫 번째 배열에 있지만 두 번째 배열에는 없는 요소들을 포함한 새로운 배열을 반환해요. 즉, 매핑된 값이 두 번째 배열의 매핑된 값과 일치하는 첫 번째 배열의 요소들을 제외한 나머지 요소들로 구성된 배열을 만들어줘요.
-
-## 인터페이스
+두 배열의 요소를 변환 함수로 바꾸고, 차집합을 구해 새 배열을 반환해요.
 
 ```typescript
-function differenceBy<T, U>(firstArr: T[], secondArr: U[], mapper: (value: T | U) => unknown): T[];
+const result = differenceBy(firstArr, secondArr, mapper);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `firstArr` (`T[]`): 차이를 계산할 배열이에요. 이 배열이 주 배열이고, 이 배열의 요소들이 비교되고 필터링돼요.
-- `secondArr` (`U[]`): 첫 번째 배열에서 제외할 요소들을 포함한 배열이에요.
-- `mapper` (`(value: T | U) => unknown`): 두 배열의 요소들을 매핑할 함수예요. 이 함수는 두 배열의 각 요소에 적용되며, 매핑된 값들을 기준으로 비교를 해요.
+### `differenceBy(firstArr, secondArr, mapper)`
 
-### 반환 값
-
-(`T[]`): 첫 번째 배열에는 있지만 매핑된 값이 두 번째 배열의 매핑된 값과 일치하지 않는 요소들이 담긴 새로운 배열이에요.
-
-## 예시
+두 배열의 요소를 특정 기준으로 비교해서 차집합을 구하고 싶을 때 `differenceBy`를 사용하세요. 각 요소를 변환 함수로 바꾼 값을 기준으로 비교해서, 첫 번째 배열에만 있는 요소들을 반환해요.
 
 ```typescript
 import { differenceBy } from 'es-toolkit/array';
 
-const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
-const array2 = [{ id: 2 }, { id: 4 }];
-const mapper = item => item.id;
-const result = differenceBy(array1, array2, mapper);
-// result는 [{ id: 1 }, { id: 3 }, { id: 5 }]가 돼요. id가 2인 요소들은 두 배열 모두에 있어서 결과에서 제외돼요.
-
+// 객체 배열에서 id를 기준으로 차집합을 구해요.
 const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const array2 = [2, 4];
-const mapper = item => (typeof item === 'object' ? item.id : item);
-const result = differenceBy(array1, array2, mapper);
-// result는 [{ id: 1 }, { id: 3 }]가 돼요. 매핑 결과가 2인 요소들은 두 배열 모두에 있어서 결과에서 제외돼요.
+const array2 = [{ id: 2 }, { id: 4 }];
+differenceBy(array1, array2, item => item.id);
+// Returns: [{ id: 1 }, { id: 3 }]
+// id가 2인 요소는 두 배열에 모두 있어서 제외돼요.
+
+// 서로 다른 타입의 배열도 비교할 수 있어요.
+const objects = [{ id: 1 }, { id: 2 }, { id: 3 }];
+const numbers = [2, 4];
+differenceBy(objects, numbers, item => (typeof item === 'object' ? item.id : item));
+// Returns: [{ id: 1 }, { id: 3 }]
 ```
+
+문자열 길이를 기준으로 차집합을 구할 수도 있어요.
+
+```typescript
+import { differenceBy } from 'es-toolkit/array';
+
+const words1 = ['apple', 'banana', 'cherry'];
+const words2 = ['kiwi', 'pear'];
+differenceBy(words1, words2, word => word.length);
+// Returns: ['banana', 'cherry']
+// 'apple'은 'kiwi'나 'pear'와 길이가 같아서 제외돼요.
+```
+
+#### 파라미터
+
+- `firstArr` (`T[]`): 차집합을 구할 기준 배열이에요.
+- `secondArr` (`U[]`): 첫 번째 배열에서 제외할 요소들을 포함한 배열이에요.
+- `mapper` (`(value: T | U) => unknown`): 두 배열의 요소를 매핑하는 함수예요. 이 함수가 반환한 값을 기준으로 요소를 비교해요.
+
+#### 반환 값
+
+(`T[]`): 변환된 값을 기준으로 첫 번째 배열에만 있는 요소들로 이루어진 새 배열이에요.

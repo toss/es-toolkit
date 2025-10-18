@@ -1,53 +1,66 @@
 # invariant
 
-与えられた条件が真であることを主張します。条件が偽の場合は、指定されたメッセージでエラーが投げられますます。
-
-## インターフェース
+与えられた条件が真であることを断言します。条件が偽の場合、エラーを投げます。
 
 ```typescript
-function invariant(condition: unknown, message: string): asserts condition;
-function invariant(condition: unknown, error: Error): asserts condition;
+invariant(condition, message);
 ```
 
-### パラメータ
+## 参照
 
-- `condition` (`unknown`): 評価する条件。
-- `message` (`string` | `Error`): 条件が偽である場合に投げるエラーメッセージ。
+### `invariant(condition, message)`
 
-### 戻り値
-
-(`void`): 条件が真の場合、voidを返します。
-
-### エラー
-
-条件が偽の場合、指定されたメッセージでエラーが投げられます。
-
-## 例
+コードで特定の条件が必ず満たされなければならない場合に `invariant` を使用してください。条件が偽の場合、即座にエラーを投げてプログラムの実行を中断します。
 
 ```typescript
-// This call will succeed without any errors
-invariant(true, 'This should not throw');
+import { invariant } from 'es-toolkit/util';
 
-// This call will fail and throw an error with the message 'This should throw'
-invariant(false, 'This should throw');
+// 条件が真の場合、何もしません
+invariant(true, 'このメッセージは表示されません');
 
-// Example of using invariant with a condition
-invariant(condition, 'Expected condition is false');
+// 条件が偽の場合、エラーを投げます
+invariant(false, 'この条件は偽です'); // Error: この条件は偽です
 
-// Ensure that the value is neither null nor undefined
-invariant(value !== null && value !== undefined, 'Value should not be null or undefined');
+// 値が null や undefined でないことを確認する場合
+const value = getValue();
+invariant(value !== null && value !== undefined, '値は null や undefined であってはなりません');
+// これで value が null や undefined でないことを確信できます
 
-// Example of using invariant to check if a number is positive
-invariant(number > 0, 'Number must be positive');
+// 数値が正であることを確認する場合
+const number = getNumber();
+invariant(number > 0, '数値は正でなければなりません');
+```
 
-// Example of using invariant with an error
-invariant(false, new Error('This should throw'));
+エラーオブジェクトを直接渡すこともできます。
 
-// Example of using invariant with a custom error
-class CustomError extends Error {
+```typescript
+import { invariant } from 'es-toolkit/util';
+
+// Error オブジェクトを渡す
+invariant(false, new Error('カスタムエラーメッセージ'));
+
+// カスタムエラークラスを使用
+class ValidationError extends Error {
   constructor(message: string) {
     super(message);
+    this.name = 'ValidationError';
   }
 }
-invariant(false, new CustomError('This should throw'));
+
+invariant(false, new ValidationError('検証に失敗しました'));
 ```
+
+開発中にコードの仮定を検証したり、関数の入力値が期待される範囲にあることを確認する際に特に便利です。
+
+#### パラメータ
+
+- `condition` (`unknown`): 評価する条件です。偽と評価される値の場合、エラーを投げます。
+- `message` (`string | Error`): 条件が偽の場合に投げるエラーメッセージまたはエラーオブジェクトです。
+
+#### 戻り値
+
+(`void`): 条件が真の場合、何も返しません。
+
+#### エラー
+
+条件が偽と評価された場合、提供されたメッセージまたはエラーオブジェクトを投げます。

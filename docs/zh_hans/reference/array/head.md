@@ -2,43 +2,55 @@
 
 返回数组的第一个元素。
 
-该函数接受一个数组，并返回数组的第一个元素。如果数组为空，则函数返回 `undefined`。
-
-## 签名
-
 ```typescript
-export function head<T>(arr: [T, ...T[]]): T;
-export function head<T>(arr: T[]): T | undefined;
+const firstElement = head(arr);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`): 要获取第一个元素的数组。
+### `head(arr)`
 
-### 返回值
-
-(`T | undefined`): 数组的第一个元素，如果数组为空则返回 `undefined`。
-
-## 示例
+当您想获取数组的第一个元素时,请使用 `head`。如果数组为空,则返回 `undefined`。在访问数组开头的数据时很有用。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const firstElement1 = head(arr1);
-// firstElement1 将是 1
+import { head } from 'es-toolkit/array';
 
-const arr2: string[] = [];
-const firstElement2 = head(arr2);
-// firstElement2 将是 undefined
+// 获取数字数组的第一个元素
+const numbers = [1, 2, 3, 4, 5];
+head(numbers);
+// Returns: 1
 
-const arr3 = ['a', 'b', 'c'];
-const firstElement3 = head(arr3);
-// firstElement3 将是 'a'
+// 获取字符串数组的第一个元素
+const strings = ['a', 'b', 'c'];
+head(strings);
+// Returns: 'a'
 
-const arr4 = [true, false, true];
-const firstElement4 = head(arr4);
-// firstElement4 将是 true
-
-const arr5: [number, string, boolean] = [1, 'a', true];
-const firstElement5 = head(arr5);
-// firstElement5 将是 1
+// 空数组返回 undefined
+const emptyArray: number[] = [];
+head(emptyArray);
+// Returns: undefined
 ```
+
+类型处理很安全。
+
+```typescript
+import { head } from 'es-toolkit/array';
+
+// 非空数组的情况下类型明确
+const nonEmptyArray = [1, 2, 3] as const;
+head(nonEmptyArray);
+// Returns: 1 (类型: 1)
+
+// 普通数组的情况下可能为 undefined
+const maybeEmptyArray = [1, 2, 3];
+head(maybeEmptyArray);
+// Returns: 1 | undefined (类型: number | undefined)
+```
+
+#### 参数
+
+- `arr` (`readonly T[]`): 要获取第一个元素的数组。
+
+#### 返回值
+
+(`T | undefined`): 数组的第一个元素。如果数组为空,则返回 `undefined`。
