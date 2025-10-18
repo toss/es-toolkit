@@ -40,7 +40,7 @@ isNative(null); // false
 
 // 绑定函数
 const boundFunction = Array.prototype.push.bind([]);
-isNative(boundFunction); // false (绑定函数不是原生的)
+isNative(boundFunction); // true (绑定函数是原生的)
 
 // 方法
 const obj = { method: Array.prototype.push };
