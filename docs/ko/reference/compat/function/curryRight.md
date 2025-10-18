@@ -33,8 +33,8 @@ const curriedSubtract = curryRight(subtract);
 // 오른쪽부터(마지막 인수부터) 커링
 console.log(curriedSubtract(1)(2)(5)); // 5 - 2 - 1 = 2
 console.log(curriedSubtract(1, 2)(5)); // 5 - 2 - 1 = 2
-console.log(curriedSubtract(1)(2, 5)); // 5 - 2 - 1 = 2
-console.log(curriedSubtract(1, 2, 5)); // 5 - 2 - 1 = 2
+console.log(curriedSubtract(1)(2, 5)); // 2 - 5 - 1 = -4
+console.log(curriedSubtract(1, 2, 5)); // 1 - 2 - 5 = -6
 ```
 
 `curry`와 `curryRight` 차이점:

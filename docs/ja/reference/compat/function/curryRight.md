@@ -33,8 +33,8 @@ const curriedSubtract = curryRight(subtract);
 // 右から(最後の引数から)カリー化
 console.log(curriedSubtract(1)(2)(5)); // 5 - 2 - 1 = 2
 console.log(curriedSubtract(1, 2)(5)); // 5 - 2 - 1 = 2
-console.log(curriedSubtract(1)(2, 5)); // 5 - 2 - 1 = 2
-console.log(curriedSubtract(1, 2, 5)); // 5 - 2 - 1 = 2
+console.log(curriedSubtract(1)(2, 5)); // 2 - 5 - 1 = -4
+console.log(curriedSubtract(1, 2, 5)); // 1 - 2 - 5 = -6
 ```
 
 `curry` と `curryRight` の違い:

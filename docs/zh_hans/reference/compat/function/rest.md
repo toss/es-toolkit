@@ -30,7 +30,7 @@ function logMessage(level, message, ...details) {
 
 const restLogger = rest(logMessage, 2);
 restLogger('ERROR', '发生错误', '详细信息 1', '详细信息 2');
-// 内部调用 logMessage('ERROR', '发生错误', ['详细信息 1', '详细信息 2'])
+// 内部调用 logMessage('ERROR', '发生错误', [['详细信息 1', '详细信息 2']])
 
 // 不同索引的示例
 function process(action, target, ...args) {
@@ -39,7 +39,7 @@ function process(action, target, ...args) {
 
 const restProcess = rest(process, 1);
 restProcess('update', 'user', 'name', 'John', 'age', 25);
-// { action: 'update', target: ['user', 'name', 'John', 'age', 25], args: undefined }
+// { action: 'update', target: ['user', 'name', 'John', 'age', 25], args: [] }
 ```
 
 当您想将函数的最后参数作为数组接收时使用它。在现代 JavaScript 中,使用剩余参数语法(`...args`)更为常见。

@@ -30,7 +30,7 @@ function logMessage(level, message, ...details) {
 
 const restLogger = rest(logMessage, 2);
 restLogger('ERROR', 'Error occurred', 'Detail 1', 'Detail 2');
-// Internally calls logMessage('ERROR', 'Error occurred', ['Detail 1', 'Detail 2'])
+// Internally calls logMessage('ERROR', 'Error occurred', [['Detail 1', 'Detail 2']])
 
 // Different index example
 function process(action, target, ...args) {
@@ -39,7 +39,7 @@ function process(action, target, ...args) {
 
 const restProcess = rest(process, 1);
 restProcess('update', 'user', 'name', 'John', 'age', 25);
-// { action: 'update', target: ['user', 'name', 'John', 'age', 25], args: undefined }
+// { action: 'update', target: ['user', 'name', 'John', 'age', 25], args: [] }
 ```
 
 Use this when you want the last arguments of a function to be received as an array. In modern JavaScript, it's more common to use rest parameter syntax (`...args`).

@@ -33,8 +33,8 @@ const curriedSubtract = curryRight(subtract);
 // 从右开始柯里化(从最后一个参数开始)
 console.log(curriedSubtract(1)(2)(5)); // 5 - 2 - 1 = 2
 console.log(curriedSubtract(1, 2)(5)); // 5 - 2 - 1 = 2
-console.log(curriedSubtract(1)(2, 5)); // 5 - 2 - 1 = 2
-console.log(curriedSubtract(1, 2, 5)); // 5 - 2 - 1 = 2
+console.log(curriedSubtract(1)(2, 5)); // 2 - 5 - 1 = -4
+console.log(curriedSubtract(1, 2, 5)); // 1 - 2 - 5 = -6
 ```
 
 `curry` 和 `curryRight` 的区别:
