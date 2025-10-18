@@ -35,8 +35,8 @@ sortedIndexBy(numbers, 25, n => n);
 
 // Transform with property-value array
 const users = [{ name: 'alice' }, { name: 'bob' }];
-sortedIndexBy(users, { name: 'ann' }, ['name']);
-// Returns 0
+sortedIndexBy(users, { name: 'bob' }, ['name', 'bob']);
+// Returns 1 (equivalent to inserting true into [false, true])
 ```
 
 For `null` or `undefined` arrays, returns 0.
