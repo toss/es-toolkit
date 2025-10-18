@@ -28,8 +28,8 @@ differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
 // Returns: [1.2] (Math.floor(2.1) === Math.floor(2.3)のため2.1を除外)
 
 // 文字列の長さで比較
-differenceBy(['one', 'two', 'three'], ['four', 'five'], 'length');
-// Returns: ['one', 'two'] (lengthが4、5のものを除外、threeもlengthが5なので除外)
+differenceBy(['one', 'two', 'three'], ['four', 'eight'], 'length');
+// Returns: ['one', 'two'] (threeとeightは長さが同じためthreeを除外)
 
 // オブジェクトのプロパティで比較
 const users1 = [

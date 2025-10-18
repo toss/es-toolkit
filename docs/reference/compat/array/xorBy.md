@@ -42,7 +42,7 @@ xorBy(users1, users2, user => user.name);
 
 // Symmetric difference of three arrays
 xorBy([1.2, 2.3], [3.4, 4.5], [5.6, 6.7], Math.floor);
-// Returns: [1.2, 3.4, 5.6]
+// Returns: [1.2, 2.3, 3.4, 4.5, 5.6, 6.7]
 ```
 
 `null` or `undefined` are ignored.

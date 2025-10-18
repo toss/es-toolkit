@@ -42,7 +42,7 @@ unionWith([1, 2], [2, 3], (a, b) => a === b);
 
 // 按字符串长度比较
 unionWith(['ab', 'cd'], ['ef', 'gh', 'ab'], (a, b) => a.length === b.length);
-// 返回: ['ab', 'ef']
+// 返回: ['ab']
 ```
 
 `null` 或 `undefined` 数组会被忽略。

@@ -64,7 +64,7 @@ const users = [
   { user: 'fred', age: 40, active: false },
 ];
 flatMap(users, { active: false });
-// 結果: [false] (activeがfalseの要素のマッチング結果)
+// 結果: [false, true] (activeがfalseの要素のマッチング結果)
 ```
 
 #### パラメータ

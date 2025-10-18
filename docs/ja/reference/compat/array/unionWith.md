@@ -42,7 +42,7 @@ unionWith([1, 2], [2, 3], (a, b) => a === b);
 
 // 文字列の長さで比較
 unionWith(['ab', 'cd'], ['ef', 'gh', 'ab'], (a, b) => a.length === b.length);
-// 戻り値: ['ab', 'ef']
+// 戻り値: ['ab']
 ```
 
 `null`または`undefined`配列は無視されます。

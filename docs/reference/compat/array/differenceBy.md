@@ -28,8 +28,8 @@ differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
 // Returns: [1.2] (2.1 is excluded because Math.floor(2.1) === Math.floor(2.3))
 
 // Compare by string length
-differenceBy(['one', 'two', 'three'], ['four', 'five'], 'length');
-// Returns: ['one', 'two'] (excludes items with length 4 and 5, three is also excluded as its length is 5)
+differenceBy(['one', 'two', 'three'], ['four', 'eight'], 'length');
+// Returns: ['one', 'two'] (three is excluded because it has the same length as eight)
 
 // Compare objects by property
 const users1 = [

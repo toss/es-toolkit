@@ -56,7 +56,7 @@ flatMapDepth(objects, 'items', 2);
 // オブジェクトの部分一致
 const users = [{ active: [[true], [false]] }, { active: [[false]] }];
 flatMapDepth(users, { active: [[false]] }, 2);
-// => [false]
+// => [true, true]
 ```
 
 `null`または`undefined`は空の配列として処理されます。

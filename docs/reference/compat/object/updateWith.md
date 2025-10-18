@@ -69,10 +69,15 @@ The customizer is not called if the path already exists.
 import { updateWith } from 'es-toolkit/compat';
 
 const object = { a: { b: 1 } };
-updateWith(object, 'a.b', n => n * 2, () => {
-  console.log('Not called'); // Not called
-  return {};
-});
+updateWith(
+  object,
+  'a.b',
+  n => n * 2,
+  () => {
+    console.log('Not called'); // Not called
+    return {};
+  }
+);
 // => { a: { b: 2 } }
 ```
 

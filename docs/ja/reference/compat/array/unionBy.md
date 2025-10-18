@@ -45,10 +45,6 @@ unionBy(
 // 部分オブジェクトで比較
 unionBy([{ x: 1, y: 1 }], [{ x: 1, y: 2 }], { x: 1 });
 // 戻り値: [{ x: 1, y: 1 }]
-
-// プロパティ-値配列で比較
-unionBy([{ active: true, name: 'a' }], [{ active: false, name: 'b' }], ['active', true]);
-// 戻り値: [{ active: true, name: 'a' }, { active: false, name: 'b' }]
 ```
 
 `null`または`undefined`配列は無視されます。

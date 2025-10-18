@@ -45,7 +45,7 @@ xorWith([1], [2], [3], (a, b) => a === b);
 
 // 문자열 길이로 비교
 xorWith(['hello'], ['world', 'hi'], (a, b) => a.length === b.length);
-// Returns: ['hello', 'world']
+// Returns: ['hi']
 ```
 
 비교 함수를 제공하지 않으면 기본적으로 얕은 동등성 비교를 사용해요.

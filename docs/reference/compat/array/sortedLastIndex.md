@@ -29,7 +29,7 @@ sortedLastIndex([4, 5, 5, 5, 6], 5);
 
 // Find insertion position for new value
 sortedLastIndex([10, 20, 30], 25);
-// Returns 3 (25 is positioned before 30)
+// Returns 2 (25 is positioned before 30)
 
 // When value doesn't exist
 sortedLastIndex([1, 2, 3], 0);

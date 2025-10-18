@@ -64,7 +64,7 @@ const users = [
   { user: 'fred', active: [false] },
 ];
 flatMapDeep(users, { active: [false] });
-// 結果: [false] (active配列に[false]が含まれる要素のマッチング結果)
+// 結果: [true, true] (active配列に[false]が含まれる要素のマッチング結果)
 ```
 
 #### パラメータ

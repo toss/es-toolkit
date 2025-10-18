@@ -42,7 +42,7 @@ xorBy(users1, users2, user => user.name);
 
 // 세 배열의 대칭 차집합
 xorBy([1.2, 2.3], [3.4, 4.5], [5.6, 6.7], Math.floor);
-// Returns: [1.2, 3.4, 5.6]
+// Returns: [1.2, 2.3, 3.4, 4.5, 5.6, 6.7]
 ```
 
 `null`이나 `undefined`는 무시돼요.

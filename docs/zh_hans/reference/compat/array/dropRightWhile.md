@@ -43,7 +43,7 @@ dropRightWhile(users, ['active', false]);
 
 // 通过属性名检查条件。
 dropRightWhile(users, 'active');
-// 返回: [{ user: 'barney', active: true }]
+// 返回: [{ user: 'barney', active: true }, { user: 'fred', active: false }, { user: 'pebbles', active: false }]
 ```
 
 `null` 或 `undefined` 被视为空数组。

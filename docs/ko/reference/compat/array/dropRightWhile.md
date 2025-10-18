@@ -43,7 +43,7 @@ dropRightWhile(users, ['active', false]);
 
 // 속성 이름으로 조건을 확인해요.
 dropRightWhile(users, 'active');
-// Returns: [{ user: 'barney', active: true }]
+// Returns: [{ user: 'barney', active: true }, { user: 'fred', active: false }, { user: 'pebbles', active: false }]
 ```
 
 `null`이나 `undefined`는 빈 배열로 처리해요.

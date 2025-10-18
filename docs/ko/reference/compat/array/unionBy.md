@@ -45,10 +45,6 @@ unionBy(
 // 부분 객체로 비교
 unionBy([{ x: 1, y: 1 }], [{ x: 1, y: 2 }], { x: 1 });
 // Returns: [{ x: 1, y: 1 }]
-
-// 속성-값 배열로 비교
-unionBy([{ active: true, name: 'a' }], [{ active: false, name: 'b' }], ['active', true]);
-// Returns: [{ active: true, name: 'a' }, { active: false, name: 'b' }]
 ```
 
 `null`이나 `undefined` 배열은 무시해요.

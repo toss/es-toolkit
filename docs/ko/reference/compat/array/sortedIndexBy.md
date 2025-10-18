@@ -35,8 +35,8 @@ sortedIndexBy(numbers, 25, n => n);
 
 // 속성-값 배열로 변환
 const users = [{ name: 'alice' }, { name: 'bob' }];
-sortedIndexBy(users, { name: 'ann' }, ['name']);
-// 1을 반환해요
+sortedIndexBy(users, { name: 'bob' }, ['name', 'bob']);
+// 1을 반환해요 (이는 [false, true]에 true를 삽입하는 것과 같아요)
 ```
 
 `null`이나 `undefined` 배열은 0을 반환해요.

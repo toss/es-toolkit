@@ -45,7 +45,7 @@ xorWith([1], [2], [3], (a, b) => a === b);
 
 // Compare by string length
 xorWith(['hello'], ['world', 'hi'], (a, b) => a.length === b.length);
-// Returns: ['hello', 'world']
+// Returns: ['hi']
 ```
 
 If no comparison function is provided, it uses shallow equality comparison by default.

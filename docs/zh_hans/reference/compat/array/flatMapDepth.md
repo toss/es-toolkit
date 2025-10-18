@@ -56,7 +56,7 @@ flatMapDepth(objects, 'items', 2);
 // 使用对象部分匹配
 const users = [{ active: [[true], [false]] }, { active: [[false]] }];
 flatMapDepth(users, { active: [[false]] }, 2);
-// => [false]
+// => [true, true]
 ```
 
 `null` 或 `undefined` 被视为空数组。

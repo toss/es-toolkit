@@ -43,7 +43,7 @@ dropRightWhile(users, ['active', false]);
 
 // Checking condition by property name.
 dropRightWhile(users, 'active');
-// Returns: [{ user: 'barney', active: true }]
+// Returns: [{ user: 'barney', active: true }, { user: 'fred', active: false }, { user: 'pebbles', active: false }]
 ```
 
 `null` or `undefined` are treated as empty arrays.

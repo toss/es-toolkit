@@ -45,7 +45,7 @@ xorWith([1], [2], [3], (a, b) => a === b);
 
 // 按字符串长度比较
 xorWith(['hello'], ['world', 'hi'], (a, b) => a.length === b.length);
-// 返回: ['hello', 'world']
+// 返回: ['hi']
 ```
 
 如果未提供比较函数,默认使用浅相等性比较。

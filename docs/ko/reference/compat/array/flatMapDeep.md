@@ -64,7 +64,7 @@ const users = [
   { user: 'fred', active: [false] },
 ];
 flatMapDeep(users, { active: [false] });
-// 결과: [false] (active 배열에 [false]가 포함된 요소들의 매칭 결과)
+// 결과: [true, true] (active 배열에 [false]가 포함된 요소들의 매칭 결과)
 ```
 
 #### 파라미터

@@ -35,8 +35,8 @@ sortBy(users, ['user']);
 // Returns: [
 //   { user: 'barney', age: 34 },
 //   { user: 'barney', age: 36 },
-//   { user: 'fred', age: 40 },
 //   { user: 'fred', age: 48 },
+//   { user: 'fred', age: 40 },
 // ]
 
 // 함수를 사용해서 정렬해요.
@@ -48,8 +48,8 @@ sortBy(users, [
 // Returns: [
 //   { user: 'barney', age: 34 },
 //   { user: 'barney', age: 36 },
-//   { user: 'fred', age: 40 },
 //   { user: 'fred', age: 48 },
+//   { user: 'fred', age: 40 },
 // ]
 ```
 

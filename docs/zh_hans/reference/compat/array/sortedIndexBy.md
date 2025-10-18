@@ -35,8 +35,8 @@ sortedIndexBy(numbers, 25, n => n);
 
 // 使用属性值数组进行转换
 const users = [{ name: 'alice' }, { name: 'bob' }];
-sortedIndexBy(users, { name: 'ann' }, ['name']);
-// 返回 1
+sortedIndexBy(users, { name: 'bob' }, ['name', 'bob']);
+// 返回 1 (等价于向 [false, true] 中插入 true)
 ```
 
 对于 `null` 或 `undefined` 数组，返回 0。
