@@ -56,7 +56,7 @@ Calculator.prototype.divide = function (n) {
 
 const calc = new Calculator();
 const allMethods = functionsIn(calc);
-// 결과: ['add', 'multiply', 'divide'] (상속된 메서드도 포함)
+// 결과: ['add', 'divide'] (`multiply`는 비열거형)
 
 // 프로토타입 체인을 통한 상속
 function Parent() {

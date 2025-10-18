@@ -40,14 +40,6 @@ const mixedPairs = [
 ];
 const user = fromPairs(mixedPairs);
 // Result: { name: 'John', age: 30, active: true }
-
-// Converting from Map
-const map = new Map([
-  ['x', 10],
-  ['y', 20],
-]);
-const coords = fromPairs(map);
-// Result: { x: 10, y: 20 }
 ```
 
 Values that are `null`, `undefined`, or not array-like objects are treated as empty objects.

@@ -40,14 +40,6 @@ const mixedPairs = [
 ];
 const user = fromPairs(mixedPairs);
 // 結果: { name: 'John', age: 30, active: true }
-
-// Mapから変換
-const map = new Map([
-  ['x', 10],
-  ['y', 20],
-]);
-const coords = fromPairs(map);
-// 結果: { x: 10, y: 20 }
 ```
 
 `null`、`undefined`、または配列様オブジェクトでない値は空のオブジェクトとして処理されます。

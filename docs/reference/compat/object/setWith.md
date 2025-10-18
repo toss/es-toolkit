@@ -48,7 +48,7 @@ console.log(obj3);
 const obj4 = {};
 setWith(obj4, 'x[0].y', 42, Object);
 console.log(obj4);
-// Result: { x: [{ y: 42 }] }
+// Result: { x: { '0': { y: 42 } } }
 
 // Complex customizer logic
 const obj5 = {};
