@@ -49,22 +49,22 @@ mean(undefined);
 // Returns: NaN
 ```
 
-不正な値は無視して計算されます。
+無効な値は0として扱われ、計算に含まれます。
 
 ```typescript
 import { mean } from 'es-toolkit/compat';
 
 mean([1, undefined, 2, null, 3]);
-// Returns: 2 (1 + 2 + 3) / 3 = 2
+// Returns: 1.2 (1 + 2 + 3) / 5 = 1.2
 ```
 
-文字列数値も処理されます。
+文字列は連結されます。
 
 ```typescript
 import { mean } from 'es-toolkit/compat';
 
 mean(['1', '2', '3']);
-// Returns: 2 (文字列が数値に変換される)
+// Returns: 41 (123 / 3 = 41)
 ```
 
 #### パラメータ

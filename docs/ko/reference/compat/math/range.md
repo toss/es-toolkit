@@ -64,7 +64,7 @@ range(0, -4, -1);
 // Returns: [0, -1, -2, -3]
 
 range(1, 4, 0);
-// Returns: [] (step이 0이면 빈 배열)
+// Returns: [1, 1, 1]
 ```
 
 소수 step도 가능해요.

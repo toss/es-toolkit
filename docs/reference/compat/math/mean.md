@@ -49,22 +49,22 @@ mean(undefined);
 // Returns: NaN
 ```
 
-Invalid values are ignored in the calculation.
+Invalid values are treated as 0 and included in the calculation.
 
 ```typescript
 import { mean } from 'es-toolkit/compat';
 
 mean([1, undefined, 2, null, 3]);
-// Returns: 2 (1 + 2 + 3) / 3 = 2
+// Returns: 1.2 (1 + 2 + 3) / 5 = 1.2
 ```
 
-String numbers are also handled.
+Strings will be concatenated.
 
 ```typescript
 import { mean } from 'es-toolkit/compat';
 
 mean(['1', '2', '3']);
-// Returns: 2 (strings are converted to numbers)
+// Returns: 41 (123 / 3 = 41)
 ```
 
 #### Parameters

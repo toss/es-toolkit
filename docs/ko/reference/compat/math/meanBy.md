@@ -75,7 +75,7 @@ const users = [
 
 // active가 true인 사람들만
 meanBy(users, { active: true });
-// Returns: 30 (25 + 35) / 2
+// Returns: 0.6666666 (active 가 true 인 사람의 비율)
 ```
 
 빈 배열은 NaN을 반환해요.

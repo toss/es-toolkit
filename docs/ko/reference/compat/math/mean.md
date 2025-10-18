@@ -49,22 +49,22 @@ mean(undefined);
 // Returns: NaN
 ```
 
-잘못된 값들은 무시하고 계산해요.
+유효하지 않은 값은 0으로 간주되어 계산에 포함돼요.
 
 ```typescript
 import { mean } from 'es-toolkit/compat';
 
 mean([1, undefined, 2, null, 3]);
-// Returns: 2 (1 + 2 + 3) / 3 = 2
+// Returns: 1.2 (1 + 2 + 3) / 5 = 1.2
 ```
 
-문자열 숫자도 처리해요.
+문자열 숫자도 처리돼요.
 
 ```typescript
 import { mean } from 'es-toolkit/compat';
 
 mean(['1', '2', '3']);
-// Returns: 2 (문자열이 숫자로 변환됨)
+// Returns: 41 (123 / 3 = 41)
 ```
 
 #### 파라미터

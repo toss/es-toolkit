@@ -64,7 +64,7 @@ rangeRight(0, -4, -1);
 // Returns: [-3, -2, -1, 0]
 
 rangeRight(1, 4, 0);
-// Returns: [] (stepが0の場合は空の配列)
+// Returns: [1, 1, 1]
 ```
 
 小数のstepも可能です。

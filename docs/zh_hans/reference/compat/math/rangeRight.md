@@ -64,7 +64,7 @@ rangeRight(0, -4, -1);
 // Returns: [-3, -2, -1, 0]
 
 rangeRight(1, 4, 0);
-// Returns: [] (step 为 0 时返回空数组)
+// Returns: [1, 1, 1]
 ```
 
 小数 step 也可以使用。

@@ -75,7 +75,7 @@ const users = [
 
 // Only active users
 meanBy(users, { active: true });
-// Returns: 30 (25 + 35) / 2
+// Returns: 0.6666666 (2 out of 3 users are active)
 ```
 
 Empty arrays return NaN.
