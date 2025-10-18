@@ -47,7 +47,7 @@ words('hello world', /\w+/g);
 
 // 文字列パターンを使用
 words('one-two-three', '-');
-// 戻り値: ['-', '-']
+// 戻り値: ['-']
 ```
 
 `null` または `undefined` は空の配列として扱われます。

@@ -47,7 +47,7 @@ words('hello world', /\w+/g);
 
 // 使用字符串模式
 words('one-two-three', '-');
-// 返回: ['-', '-']
+// 返回: ['-']
 ```
 
 `null` 或 `undefined` 被视为空数组。

@@ -47,7 +47,7 @@ words('hello world', /\w+/g);
 
 // Use string pattern
 words('one-two-three', '-');
-// Returns: ['-', '-']
+// Returns: ['-']
 ```
 
 `null` or `undefined` is treated as an empty array.

@@ -29,7 +29,7 @@ truncate('hi-diddly-ho there, neighborino');
 
 // 指定长度
 truncate('hi-diddly-ho there, neighborino', { length: 24 });
-// 返回: 'hi-diddly-ho there, neig...'
+// 返回: 'hi-diddly-ho there, n...'
 
 // 更改省略字符串
 truncate('hi-diddly-ho there, neighborino', { omission: ' [...]' });

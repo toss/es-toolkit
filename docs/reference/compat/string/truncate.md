@@ -29,7 +29,7 @@ truncate('hi-diddly-ho there, neighborino');
 
 // Specify length
 truncate('hi-diddly-ho there, neighborino', { length: 24 });
-// Returns: 'hi-diddly-ho there, neig...'
+// Returns: 'hi-diddly-ho there, n...'
 
 // Change omission string
 truncate('hi-diddly-ho there, neighborino', { omission: ' [...]' });

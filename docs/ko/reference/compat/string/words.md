@@ -47,7 +47,7 @@ words('hello world', /\w+/g);
 
 // 문자열 패턴 사용
 words('one-two-three', '-');
-// Returns: ['-', '-']
+// Returns: ['-']
 ```
 
 `null`이나 `undefined`는 빈 배열로 처리해요.

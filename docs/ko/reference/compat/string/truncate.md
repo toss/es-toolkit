@@ -29,7 +29,7 @@ truncate('hi-diddly-ho there, neighborino');
 
 // 길이 지정
 truncate('hi-diddly-ho there, neighborino', { length: 24 });
-// Returns: 'hi-diddly-ho there, neig...'
+// Returns: 'hi-diddly-ho there, n...'
 
 // 생략 문자 변경
 truncate('hi-diddly-ho there, neighborino', { omission: ' [...]' });
