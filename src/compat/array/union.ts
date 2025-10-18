@@ -1,4 +1,4 @@
-import { flattenDepth } from './flattenDepth.ts';
+import { flatMapDepth } from './flatMapDepth.ts';
 import { uniq } from '../../array/uniq.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 
@@ -61,7 +61,7 @@ export function union<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[]
 export function union<T>(...arrays: Array<ArrayLike<T> | null | undefined>): T[] {
   const validArrays = arrays.filter(isArrayLikeObject);
 
-  const flattened = flattenDepth(validArrays as any, 1);
+  const flattened = flatMapDepth(validArrays as any, v => Array.from(v), 1);
 
   return uniq(flattened) as T[];
 }
