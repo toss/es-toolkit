@@ -75,7 +75,7 @@ const users = [
 
 // activeがtrueの人のみ
 meanBy(users, { active: true });
-// Returns: 30 (25 + 35) / 2
+// Returns: 0.6666666 (active が true の人の割合)
 ```
 
 空の配列はNaNを返します。
