@@ -1,55 +1,46 @@
-# pullAllBy
+# pullAllBy (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-提供された関数で要素をマッピングした後、配列から指定されたすべての値を削除します。
-要素をマッピングする方法はいくつかの方法で指定できます。
-
-- **関数**: 要素を比較する前に、各要素を与えられた関数でマッピングします。各要素に対して関数が実行され、その戻り値で要素を比較します。
-- **プロパティ名**: 指定されたプロパティの値で要素を比較します。
-- **部分オブジェクト**: 両方の要素が与えられた部分オブジェクトのすべてのプロパティと値に一致するかどうかを基準に比較します。
-- **プロパティ-値のペア**: 両方の要素が指定されたプロパティと値に一致するかどうかを基準に比較します。
-
-この関数は`arr`をその場で変更します。
-元の配列を変更せずに値を削除したい場合は、[differenceBy](../../array/differenceBy.md)を使用してください。
-
-## インターフェース
+iterateeで変換された値を基準に指定された値を配列から削除します。
 
 ```typescript
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: (value: T) => unknown): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: Partial<T>): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: [keyof T, unknown]): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: keyof T): T[];
+const modified = pullAllBy(array, valuesToRemove, iteratee);
 ```
 
-### パラメータ
+## 参照
 
-- `arr` (`T[]`): 変更する配列。
-- `valuesToRemove` (`ArrayLike<T>`): 配列から削除する値。
-- `getValue`:
-  - **関数** (`(value: T) => unknown`): 要素を比較する前に、各要素を与えられた関数でマッピングします。各要素に対して関数が実行され、その戻り値で要素を比較します。
-  - **プロパティ名** (`keyof T`): 指定されたプロパティの値で要素を比較します。
-  - **部分オブジェクト** (`Partial<T>`): 両方の要素が与えられた部分オブジェクトのすべてのプロパティと値に一致するかどうかを基準に比較します。
-  - **プロパティ-値のペア** (`[keyof T, unknown]`): 両方の要素が指定されたプロパティと値に一致するかどうかを基準に比較します。
+### `pullAllBy(array, values, iteratee)`
 
-### 戻り値
-
-(`T[]`): 指定された値が削除された修正済み配列。
-
-## 例
+提供されたiteratee関数を通じて各要素を変換した値を基準に配列から指定された値を削除します。元の配列が変更され、変更された配列が返されます。
 
 ```typescript
-// Using a iteratee function
-const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
-const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], obj => obj.value);
-console.log(result); // [{ value: 2 }]
+import { pullAllBy } from 'es-toolkit/compat';
 
-// Using a property name
-const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
-const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], 'value');
-console.log(result); // [{ value: 2 }]
+// プロパティ値で比較して削除
+const array = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }];
+pullAllBy(array, [{ x: 1 }, { x: 3 }], 'x');
+console.log(array); // [{ x: 2 }]
+
+// 関数で値を変換して比較
+const numbers = [1, 2, 3, 4, 5];
+pullAllBy(numbers, [2, 4], n => n % 2);
+console.log(numbers); // [1, 3, 5] (奇数のみ残る)
 ```
+
+配列が空、`null`、または `undefined` の場合、元の配列をそのまま返します。
+
+```typescript
+import { pullAllBy } from 'es-toolkit/compat';
+
+pullAllBy([], [1, 2], x => x); // []
+pullAllBy(null as any, [1, 2], x => x); // null
+```
+
+#### パラメータ
+
+- `array` (`T[]`): 変更する配列です。
+- `values` (`ArrayLike<T>`, オプション): 削除する値の配列です。
+- `iteratee` (`ValueIteratee<T>`, オプション): 各要素に適用するiteratee関数です。プロパティ名、部分オブジェクト、または関数を使用できます。
+
+#### 戻り値
+
+(`T[]`): 指定された値が削除された元の配列を返します。

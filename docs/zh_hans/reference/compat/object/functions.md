@@ -1,39 +1,82 @@
-# functions
+# functions (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.keys` 和 `typeof` 检查
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `functions` 函数内部会经过 `keys` 函数和过滤过程,因此运行缓慢。
+
+请使用更快、更现代的 `Object.keys` 和 `typeof` 检查。
+
 :::
 
-创建一个数组，由对象中那些值为函数的属性名称组成。
-
-只检查对象自身拥有的、具有字符串键的属性。继承的属性或带有`Symbol`键的属性不包括在内。
-
-## 签名
+返回对象自有属性中函数属性的名称数组。
 
 ```typescript
-function functions(object: any): string[];
+const functionNames = functions(obj);
 ```
 
-### 参数
+## 参考
+
+### `functions(object)`
+
+检查对象的自有属性,仅返回函数属性的名称数组。排除继承的属性和 `Symbol` 键,只检查对象直接拥有的字符串键属性。在查找对象的方法或单独处理函数属性时很有用。
+
+```typescript
+import { functions } from 'es-toolkit/compat';
+
+// 基本用法
+const obj = {
+  name: 'John',
+  age: 30,
+  greet: () => 'Hello',
+  calculate: function (x, y) {
+    return x + y;
+  },
+};
+
+const functionNames = functions(obj);
+// 结果: ['greet', 'calculate']
+
+// 在类实例中查找函数
+class Calculator {
+  constructor() {
+    this.value = 0;
+    this.add = function (n) {
+      this.value += n;
+    };
+  }
+
+  multiply(n) {
+    this.value *= n;
+  }
+}
+
+Calculator.prototype.divide = function (n) {
+  this.value /= n;
+};
+
+const calc = new Calculator();
+const methods = functions(calc);
+// 结果: ['add'] (排除继承的 multiply、divide)
+
+// 没有函数的对象
+const data = { x: 1, y: 2, z: 'text' };
+const noFunctions = functions(data);
+// 结果: []
+```
+
+`null` 或 `undefined` 会被处理为空数组。
+
+```typescript
+import { functions } from 'es-toolkit/compat';
+
+functions(null); // []
+functions(undefined); // []
+```
+
+#### 参数
 
 - `object` (`any`): 要检查的对象。
 
-### 返回值
+#### 返回值
 
-(`string[]`): 返回函数名称。
-
-## 示例
-
-```typescript
-function Foo() {
-  this.a = () => 'a';
-  this.b = () => 'b';
-}
-
-Foo.prototype.c = () => 'c';
-
-functions(new Foo());
-// => ['a', 'b']
-```
+(`string[]`): 返回由函数属性名称组成的数组。

@@ -1,40 +1,92 @@
-# keys
+# keys (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.keys`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `keys` function operates slowly due to complex logic for handling array-like objects, prototype objects, etc.
+
+Instead, use the faster and more modern `Object.keys()`.
+
 :::
 
-Creates an array of the own enumerable property names of `object`.
-
-Non-object values are coerced to objects.
-
-## Signature
+Returns an array of the object's own enumerable property names.
 
 ```typescript
-function keys(object?: any): string[];
+const keyArray = keys(object);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`object`): The object to query.
+### `keys(object)`
 
-### Returns
-
-(`string[]`): Returns the array of property names.
-
-## Examples
+Use `keys` when you want to get the object's own property names. It returns only own properties, excluding inherited properties.
 
 ```typescript
+import { keys } from 'es-toolkit/compat';
+
+// Keys of a basic object
+const object = { a: 1, b: 2, c: 3 };
+keys(object);
+// => ['a', 'b', 'c']
+
+// Indices of an array
+const array = [1, 2, 3];
+keys(array);
+// => ['0', '1', '2']
+
+// Indices of a string
+keys('hello');
+// => ['0', '1', '2', '3', '4']
+```
+
+Properties inherited from functions or constructors are excluded.
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
 function Foo() {
   this.a = 1;
   this.b = 2;
 }
 Foo.prototype.c = 3;
-keys(new Foo()); // ['a', 'b'] (iteration order is not guaranteed)
 
-keys('hi'); // ['0', '1']
-keys([1, 2, 3]); // ['0', '1', '2']
-keys({ a: 1, b: 2 }); // ['a', 'b']
+keys(new Foo());
+// => ['a', 'b'] ('c' is excluded as it's a prototype property)
 ```
+
+Array-like objects are handled specially.
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
+// TypedArray
+const typedArray = new Uint8Array([1, 2, 3]);
+keys(typedArray);
+// => ['0', '1', '2']
+
+// arguments object
+function example() {
+  return keys(arguments);
+}
+example('a', 'b', 'c');
+// => ['0', '1', '2']
+```
+
+Handles `null` and `undefined` safely.
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
+keys(null);
+// => []
+
+keys(undefined);
+// => []
+```
+
+#### Parameters
+
+- `object` (`any`): The object to get keys from.
+
+#### Returns
+
+(`string[]`): Returns an array of the object's own enumerable property names.

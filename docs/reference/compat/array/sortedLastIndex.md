@@ -1,51 +1,55 @@
-# sortedIndex
+# sortedLastIndex (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Implement binary search directly
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `sortedLastIndex` function operates slowly due to complex binary search handling and type validation.
+
+Instead, implement faster, more modern binary search directly.
+
 :::
 
-Finds the highest index at which a given value should be inserted into a sorted array to maintain its sort order.
-
-- If the array is already sorted, sortedIndex ensures that the new value is inserted in the correct position without disrupting the order.
-- The search is performed using a binary search algorithm, making it efficient for large arrays.
-- For more complex or custom sorting logic, it delegates to [sortedLastIndexBy](./sortedLastIndexBy.md), which allows specifying an iteratee function to customize how elements are compared.
-
-The function returns the index at which the value should be inserted. If the value already exists in the array, the returned index will be after the last occurrence of the value.
-
-## Signature
+Finds the highest index at which a value should be inserted into a sorted array.
 
 ```typescript
-function sortedLastIndex<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedLastIndex(array, value);
 ```
 
-### Parameters
+## Reference
 
-- `array` (`ArrayLike<T> | null | undefined`): The sorted array to inspect. Can be null or undefined, in which case it is treated as an empty array.
-- `value` (`T`): The value to evaluate and find the appropriate index for insertion
+### `sortedLastIndex(array, value)`
 
-### Returns
-
-(`number`): The index at which the value should be inserted to maintain the sort order.
-
-## Examples
+Use `sortedLastIndex` to find the highest position to insert a value in a sorted array. When duplicate values exist, it returns the index after the last position.
 
 ```typescript
 import { sortedLastIndex } from 'es-toolkit/compat';
 
-// Basic usage with a number array
-sortedLastIndex([10, 20, 20, 30, 50], 20);
-// Return value: 3
-// Explanation: 20 returns index 3, which is the highest index to maintain the sort order.
+// Find last insertion position in array with duplicate values
+sortedLastIndex([4, 5, 5, 5, 6], 5);
+// Returns 4 (position after the last 5)
 
-// Handling an empty or null array
-sortedLastIndex(null, 25);
-// Return value: 0
-// Explanation: Null or undefined arrays are treated as empty, so 0 is returned.
+// Find insertion position for new value
+sortedLastIndex([10, 20, 30], 25);
+// Returns 3 (25 is positioned before 30)
 
-// Using default comparison logic (delegated behavior with sortedIndexBy)
-sortedLastIndex([10, '20', 30], 25);
-// Return value: 2
-// Explanation: Using default comparison logic, it returns index 2.
+// When value doesn't exist
+sortedLastIndex([1, 2, 3], 0);
+// Returns 0 (positioned at the front)
 ```
+
+For `null` or `undefined` arrays, returns 0.
+
+```typescript
+import { sortedLastIndex } from 'es-toolkit/compat';
+
+sortedLastIndex(null, 1); // 0
+sortedLastIndex(undefined, 1); // 0
+```
+
+#### Parameters
+
+- `array` (`ArrayLike<T> | null | undefined`): The sorted array. Using an unsorted array can produce incorrect results.
+- `value` (`T`): The value to insert.
+
+#### Returns
+
+(`number`): Returns the highest index to insert the value. If the array is `null` or `undefined`, returns 0.

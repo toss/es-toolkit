@@ -1,48 +1,77 @@
-# cond
+# cond (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use if-else or switch statements instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `cond` function performs slowly due to complex iteratee processing, array transformations, and function validation.
+
+Use faster and clearer if-else or switch statements instead.
+
 :::
 
-Creates a function that checks conditions one by one and runs the matching function.
-
-Each pair consists of a condition (predicate) and a function to run.
-The function goes through each condition in order until it finds one that's `true`.
-When it finds a `true` condition, it runs the corresponding function and returns its result.
-If none of the conditions are true, it returns `undefined`.
-
-## Signature
+Creates a function that iterates through condition-function pairs, checking conditions in order and executing the first matching function.
 
 ```typescript
-function cond<R>(pairs: Array<[truthy: () => boolean, falsey: () => R]>): () => R;
-function cond<T, R>(pairs: Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>): (val: T) => R;
+const conditionFunction = cond(pairs);
 ```
 
-### Parameters
+## Reference
 
-- `pairs` (`Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>`): Array of pairs. Each pair consists of a predicate function and a function to run.
+### `cond(pairs)`
 
-### Returns
-
-(`(val: T) => R`): A new composite function that checks conditions and runs the matching function.
-
-## Examples
+Use `cond` when you want to check multiple conditions in order and execute the function corresponding to the first true condition. This is useful for expressing complex conditional logic in a functional style.
 
 ```typescript
-const func = cond([
-  [matches({ a: 1 }), constant('matches A')],
-  [conforms({ b: isNumber }), constant('matches B')],
-  [stubTrue, constant('no match')],
+import { cond } from 'es-toolkit/compat';
+
+// Basic usage
+const getValue = cond([
+  [x => x > 10, x => 'big'],
+  [x => x > 5, x => 'medium'],
+  [x => x > 0, x => 'small'],
+  [() => true, () => 'zero or negative'],
 ]);
 
-func({ a: 1, b: 2 });
-// => 'matches A'
-
-func({ a: 0, b: 1 });
-// => 'matches B'
-
-func({ a: '1', b: '2' });
-// => 'no match'
+console.log(getValue(15)); // "big"
+console.log(getValue(8)); // "medium"
+console.log(getValue(3)); // "small"
+console.log(getValue(-1)); // "zero or negative"
 ```
+
+You can also use it for object pattern matching.
+
+```typescript
+import { cond } from 'es-toolkit/compat';
+
+const processUser = cond([
+  [user => user.role === 'admin', user => `Admin: ${user.name}`],
+  [user => user.role === 'user', user => `User: ${user.name}`],
+  [user => user.role === 'guest', user => `Guest: ${user.name}`],
+  [() => true, () => 'Unknown role'],
+]);
+
+console.log(processUser({ name: 'John', role: 'admin' })); // "Admin: John"
+console.log(processUser({ name: 'Jane', role: 'user' })); // "User: Jane"
+```
+
+Only the first true condition is executed. If all conditions are false, it returns `undefined`.
+
+```typescript
+import { cond } from 'es-toolkit/compat';
+
+const checkValue = cond([
+  [x => x > 10, x => 'greater than 10'],
+  [x => x < 5, x => 'less than 5'],
+]);
+
+console.log(checkValue(15)); // "greater than 10"
+console.log(checkValue(3)); // "less than 5"
+console.log(checkValue(7)); // undefined (no matching condition)
+```
+
+#### Parameters
+
+- `pairs` (`Array<[predicate, func]>`): An array of pairs consisting of condition functions and functions to execute.
+
+#### Returns
+
+(`(...args: any[]) => unknown`): Returns a new function that checks conditions and executes the first matching function.

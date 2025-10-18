@@ -9,6 +9,7 @@ on:
 
 jobs:
   release:
+    if: github.repository == 'toss/es-toolkit'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -20,9 +21,8 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v5
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+          cache: 'yarn'
       - name: Update npm
         run: npm install -g npm@11.5.1
       - uses: denoland/setup-deno@v2
@@ -84,7 +84,7 @@ jobs:
         working-directory: ${{ github.workspace }}/out/
 
   deploy-docs:
-    if: github.event_name == 'push' && github.ref_type == 'tag'
+    if: github.repository == 'toss/es-toolkit' && github.event_name == 'push' && github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -92,9 +92,8 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v5
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn install
       - name: Deploy a docs site

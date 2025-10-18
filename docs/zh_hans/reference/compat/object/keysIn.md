@@ -1,43 +1,104 @@
-# keysIn
+# keysIn (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `for...in` 循环或 `Object.keys`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `keysIn` 函数由于处理类数组对象和遍历原型链等复杂逻辑而运行缓慢。
+
+请改用更快、更现代的 `for...in` 循环或根据需要使用 `Object.keys()`。
+
 :::
 
-此函数检索对象中字符串键属性的名称，包括从其原型继承的属性。
-
-- 如果值不是对象，则会将其转换为对象。
-- 类数组对象被视为数组。
-- 稀疏数组中缺少某些索引的情况被视为密集数组。
-- 如果值为 `null` 或 `undefined`，则返回一个空数组。
-- 在处理原型对象时，`constructor` 属性会从结果中排除。
-
-## 签名
+返回对象的所有可枚举属性名称的数组,包括继承的属性。
 
 ```typescript
-function keysIn(object?: any): string[];
+const allKeys = keysIn(object);
 ```
 
-### 参数
+## 参考
 
-- `object` (`any`): 要检查其键的对象。
+### `keysIn(object)`
 
-### 返回值
-
-(`string[]`): 对象中的字符串键数组。
-
-## 示例
+当您想要获取对象的所有属性名称(包括继承的属性)时,请使用 `keysIn`。与 `keys` 不同,它还返回原型链中的属性。
 
 ```typescript
-const obj = { a: 1, b: 2 };
-console.log(keysIn(obj)); // ['a', 'b']
+import { keysIn } from 'es-toolkit/compat';
 
-const arr = [1, 2, 3];
-console.log(keysIn(arr)); // ['0', '1', '2']
+// 基本对象的键
+const object = { a: 1, b: 2 };
+keysIn(object);
+// => ['a', 'b']
 
-function Foo() {}
-Foo.prototype.a = 1;
-console.log(keysIn(new Foo())); // ['a']
+// 数组的索引
+const array = [1, 2, 3];
+keysIn(array);
+// => ['0', '1', '2']
+
+// 字符串的索引
+keysIn('hello');
+// => ['0', '1', '2', '3', '4']
 ```
+
+它也包括继承的属性。
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+Foo.prototype.c = 3;
+
+keysIn(new Foo());
+// => ['a', 'b', 'c'] (包括原型属性 'c')
+
+// 排除 constructor
+class MyClass {
+  constructor() {
+    this.prop = 1;
+  }
+  method() {}
+}
+MyClass.prototype.inherited = 2;
+
+keysIn(new MyClass());
+// => ['prop', 'method', 'inherited'] (排除了 constructor)
+```
+
+它特殊处理类数组对象。
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+// TypedArray
+const typedArray = new Uint8Array([1, 2, 3]);
+keysIn(typedArray);
+// => ['0', '1', '2'] (排除 buffer、byteLength 等)
+
+// arguments 对象
+function example() {
+  return keysIn(arguments);
+}
+example('a', 'b', 'c');
+// => ['0', '1', '2']
+```
+
+它安全地处理 `null` 或 `undefined`。
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+keysIn(null);
+// => []
+
+keysIn(undefined);
+// => []
+```
+
+#### 参数
+
+- `object` (`any`): 要获取键的对象。
+
+#### 返回值
+
+(`string[]`): 返回对象的所有可枚举属性名称(包括自有属性和继承属性)的数组。

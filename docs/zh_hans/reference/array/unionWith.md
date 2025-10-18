@@ -1,31 +1,72 @@
 # unionWith
 
-根据自定义相等性函数，从两个给定的数组创建一个唯一值数组。
-
-此函数接受两个数组和一个自定义相等性函数，合并这两个数组，并返回一个新数组，该数组仅包含根据自定义相等性函数确定的唯一值。
-
-## 签名
+根据自定义相等函数,创建一个包含两个数组唯一元素的新数组。
 
 ```typescript
-function unionWith<T>(arr1: T[], arr2: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[];
+const unified = unionWith(arr1, arr2, areItemsEqual);
 ```
 
-### 参数
+## 参考
 
-- `arr1` (`T[]`): 第一个数组，用于合并和筛选唯一值。
-- `arr2` (`T[]`): 第二个数组，用于合并和筛选唯一值。
-- `areItemsEqual` (`(item1: T, item2: T) => boolean`): 自定义函数，用于确定两个元素是否相等。它接受两个参数，如果元素被视为相等则返回 `true`，否则返回 `false`。
+### `unionWith(arr1, arr2, areItemsEqual)`
 
-### 返回值
-
-(`T[]`): 基于自定义相等性函数的新唯一值数组。
-
-## 示例
+当您想根据复杂条件判断元素是否相等时,请使用 `unionWith`。如果提供的函数返回真,则将两个元素判断为相同并去除重复。
 
 ```typescript
-const array1 = [{ id: 1 }, { id: 2 }];
-const array2 = [{ id: 2 }, { id: 3 }];
+import { unionWith } from 'es-toolkit/array';
+
+// 根据对象的id求并集。
+const array1 = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const array2 = [
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' },
+];
 const areItemsEqual = (a, b) => a.id === b.id;
-const result = unionWith(array1, array2, areItemsEqual);
-// result 将是 [{ id: 1 }, { id: 2 }, { id: 3 }] 因为 { id: 2 } 在两个数组中被视为相等
+unionWith(array1, array2, areItemsEqual);
+// Returns: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
 ```
+
+也可以使用更复杂的比较逻辑。
+
+```typescript
+import { unionWith } from 'es-toolkit/array';
+
+// 根据坐标求并集。
+const points1 = [
+  { x: 1, y: 2 },
+  { x: 3, y: 4 },
+];
+const points2 = [
+  { x: 3, y: 4 },
+  { x: 5, y: 6 },
+];
+const arePointsEqual = (p1, p2) => p1.x === p2.x && p1.y === p2.y;
+unionWith(points1, points2, arePointsEqual);
+// Returns: [{ x: 1, y: 2 }, { x: 3, y: 4 }, { x: 5, y: 6 }]
+```
+
+忽略大小写的字符串比较示例。
+
+```typescript
+import { unionWith } from 'es-toolkit/array';
+
+const words1 = ['Apple', 'banana'];
+const words2 = ['BANANA', 'orange'];
+const areWordsEqual = (a, b) => a.toLowerCase() === b.toLowerCase();
+unionWith(words1, words2, areWordsEqual);
+// Returns: ['Apple', 'orange']
+// 'banana'和'BANANA'被判断为相同,因此只保留第一个数组的'Apple'。
+```
+
+#### 参数
+
+- `arr1` (`T[]`): 要合并的第一个数组。
+- `arr2` (`T[]`): 要合并的第二个数组。
+- `areItemsEqual` (`(item1: T, item2: T) => boolean`): 判断两个元素是否相同的函数。如果判断为相同则应返回 `true`,否则返回 `false`。
+
+#### 返回值
+
+(`T[]`): 返回根据自定义相等函数去除重复后的两个数组的并集。

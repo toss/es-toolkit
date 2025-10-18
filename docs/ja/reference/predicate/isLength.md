@@ -1,41 +1,48 @@
 # isLength
 
-与えられた値が有効な長さかどうかを確認します。
-
-有効な長さとは、`0`以上`Number.MAX_SAFE_INTEGER`未満の整数を指します。
-
-TypeScriptの型ガードとして使用できます。パラメータとして与えられた値の型を`number`に絞り込みます。
-
-## インターフェース
+値が有効な配列の長さかどうかを確認します。
 
 ```typescript
-function isLength(value: unknown): value is number;
+const result = isLength(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 有効な長さかどうかを確認する値。
+### `isLength(value)`
 
-### 戻り値
-
-(`value is number`): 値が有効な長さであれば`true`、そうでなければ`false`。
-
-## 例
+値が有効な配列の長さかどうかを確認したい場合に `isLength` を使用してください。有効な長さは 0 以上で `Number.MAX_SAFE_INTEGER` 以下の整数である必要があります。
 
 ```typescript
 import { isLength } from 'es-toolkit/predicate';
 
-const value1 = 0;
-const value2 = 42;
-const value3 = -1;
-const value4 = 1.5;
-const value5 = Number.MAX_SAFE_INTEGER;
-const value6 = Number.MAX_SAFE_INTEGER + 1;
+// 有効な長さ
+console.log(isLength(0)); // true
+console.log(isLength(42)); // true
+console.log(isLength(Number.MAX_SAFE_INTEGER)); // true
 
-console.log(isLength(value1)); // true
-console.log(isLength(value2)); // true
-console.log(isLength(value3)); // false
-console.log(isLength(value4)); // false
-console.log(isLength(value5)); // true
-console.log(isLength(value6)); // false
+// 無効な長さ
+console.log(isLength(-1)); // false (負の数)
+console.log(isLength(1.5)); // false (小数)
+console.log(isLength(Number.MAX_SAFE_INTEGER + 1)); // false (安全でない整数)
+console.log(isLength('42')); // false (文字列)
+console.log(isLength(null)); // false (null)
 ```
+
+TypeScript で型ガードとしても使用できます。
+
+```typescript
+function processLength(value: unknown) {
+  if (isLength(value)) {
+    // これで value は number 型に絞り込まれます
+    console.log(value.toFixed(2));
+  }
+}
+```
+
+#### パラメータ
+
+- `value` (`unknown`): 有効な長さかどうかを確認する値です。
+
+#### 戻り値
+
+(`value is number`): 値が有効な長さの場合は `true`、そうでなければ `false` を返します。

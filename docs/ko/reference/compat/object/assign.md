@@ -1,44 +1,58 @@
-# assign
+# assign (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.assign`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `assign` 함수는 값이 같은지 비교하는 추가 검사 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.assign`을 사용하세요.
+
 :::
 
-`source` 객체가 가지고 있는 프로퍼티 값들을 `object` 객체에 할당해요.
-
-`source` 객체의 프로퍼티가 `object` 객체의 해당 프로퍼티와 같은 값이면 덮어쓰지 않아요.
-
-## 인터페이스
+소스 객체들의 속성을 대상 객체에 할당해요.
 
 ```typescript
-function assign<O, S>(object: O, source: S): O & S;
-function assign<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function assign<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function assign<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): O & S1 & S2 & S3 & S4;
-function assign(object: any, ...sources: any[]): any;
+const result = assign(target, ...sources);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`any`): `source`의 프로퍼티 값이 할당될 객체.
-- `sources` (`...any[]`): `object`에 할당할 값을 가지고 있는 객체들.
+### `assign(target, ...sources)`
 
-### 반환 값
-
-(`any`): `source`의 값이 할당된 `object` 객체.
-
-## 예시
+하나 이상의 소스 객체의 속성을 대상 객체에 복사하고 싶을 때 `assign`을 사용하세요. 동일한 키가 있으면 나중에 오는 소스의 값이 이전 값을 덮어써요.
 
 ```typescript
-const target = { a: 1 };
-const result = assign(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+import { assign } from 'es-toolkit/compat';
+
+// 기본 사용법
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+const result = assign(target, source);
+// 결과: { a: 1, b: 3, c: 4 }
+console.log(target === result); // true (대상 객체가 변경됨)
+
+// 여러 소스 객체 병합
+const target2 = { a: 1 };
+const source1 = { b: 2 };
+const source2 = { c: 3 };
+const source3 = { d: 4 };
+assign(target2, source1, source2, source3);
+// 결과: { a: 1, b: 2, c: 3, d: 4 }
+
+// 속성 덮어쓰기
+const target3 = { x: 1, y: 2 };
+const source4 = { y: 3, z: 4 };
+const source5 = { y: 5 };
+assign(target3, source4, source5);
+// 결과: { x: 1, y: 5, z: 4 } (y는 가장 마지막 값으로 덮어써짐)
 ```
+
+이 함수는 객체의 고유 속성만 복사하고, 상속된 속성은 복사하지 않아요. 또한 값이 같으면 덮어쓰지 않는 최적화가 있어요.
+
+#### 파라미터
+
+- `target` (`any`): 속성을 복사받을 대상 객체예요.
+- `...sources` (`any[]`): 속성을 복사할 소스 객체들이에요.
+
+#### 반환 값
+
+(`any`): 수정된 대상 객체를 반환해요. 대상 객체 자체가 변경되어 반환돼요.

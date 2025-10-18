@@ -1,33 +1,66 @@
-# repeat
+# repeat (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning JavaScript の `String.prototype.repeat` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `repeat` 関数は、文字列以外の値の処理と整数変換により、動作が遅くなります。
+
+代わりに、より高速で現代的な JavaScript の `String.prototype.repeat` を使用してください。
+
 :::
 
-指定された回数だけ、与えられた文字列を繰り返して返します。
-
-文字列が空であるか、カウントが0の場合、空の文字列を返します。
-
-## インターフェース
+文字列を指定された回数だけ繰り返します。
 
 ```typescript
-function repeat(str?: string, n?: number): string;
+const repeated = repeat(str, n);
 ```
 
-### パラメータ
+## 参照
 
-- `str` (`string`): 繰り返す文字列。
-- `n` (`number`): 繰り返したい回数。
+### `repeat(str, n?)`
 
-### 戻り値
+文字列を複数回繰り返して新しい文字列を作成したい場合は `repeat` を使用してください。繰り返し回数が1未満の場合は空文字列を返します。
 
-(`string`): `n`回繰り返された文字列。
+```typescript
+import { repeat } from 'es-toolkit/compat';
 
-## 例
+// 文字列を繰り返す
+repeat('abc', 2);
+// Returns: 'abcabc'
 
-```javascript
-repeat('abc', 0); // ''
-repeat('abc', 2); // 'abcabc'
+repeat('hello', 3);
+// Returns: 'hellohellohello'
+
+// 0回繰り返すと空文字列
+repeat('abc', 0);
+// Returns: ''
 ```
+
+`null` や `undefined` は空文字列として処理されます。
+
+```typescript
+import { repeat } from 'es-toolkit/compat';
+
+repeat(null, 3);
+// Returns: ''
+
+repeat(undefined, 2);
+// Returns: ''
+```
+
+繰り返し回数を指定しない場合は1回繰り返します。
+
+```typescript
+import { repeat } from 'es-toolkit/compat';
+
+repeat('abc');
+// Returns: 'abc'
+```
+
+#### パラメータ
+
+- `str` (`string`,オプション): 繰り返す文字列です。
+- `n` (`number`,オプション): 繰り返す回数です。デフォルトは `1` です。
+
+#### 戻り値
+
+(`string`): 指定された回数だけ繰り返された文字列を返します。

@@ -2,30 +2,54 @@
 
 Converts a string to camel case.
 
-Camel case is a naming convention in which the first word is in lower case and each subsequent word is capitalized. For example, `camelCase`.
-
-## Signature
-
 ```typescript
-function camelCase(str: string): string;
+const result = camelCase(str);
 ```
 
-### Parameters
+## Reference
 
-- `str` (`string`): The string that is to be changed to camel case.
+### `camelCase(str)`
 
-### Returns
-
-(`string`) The converted string to camel case.
-
-## Examples
+Use `camelCase` when you want to convert a string to camel case. Camel case is a naming convention where the first word is lowercase and the first letter of each subsequent word is capitalized.
 
 ```typescript
 import { camelCase } from 'es-toolkit/string';
 
-camelCase('camelCase'); // returns 'camelCase'
-camelCase('some whitespace'); // returns 'someWhitespace'
-camelCase('hyphen-text'); // returns 'hyphenText'
-camelCase('HTTPRequest'); // returns 'httpRequest'
-camelCase('Keep unicode 😅'); // returns 'keepUnicode😅'
+// Convert various string formats to camel case
+camelCase('hello world'); // returns 'helloWorld'
+camelCase('some-hyphen-text'); // returns 'someHyphenText'
+camelCase('CONSTANT_CASE'); // returns 'constantCase'
+camelCase('PascalCase'); // returns 'pascalCase'
+camelCase('mixed   SpAcE'); // returns 'mixedSpace'
 ```
+
+It converts strings with special characters, spaces, hyphens, and other separators into a format suitable for JavaScript variable names or object property names.
+
+```typescript
+import { camelCase } from 'es-toolkit/string';
+
+// Convert keys from API responses
+const apiKey = 'user_first_name';
+const jsKey = camelCase(apiKey); // 'userFirstName'
+
+// Convert HTML attributes to JavaScript properties
+const cssProperty = 'background-color';
+const jsProperty = camelCase(cssProperty); // 'backgroundColor'
+```
+
+It also preserves Unicode characters.
+
+```typescript
+import { camelCase } from 'es-toolkit/string';
+
+camelCase('keep unicode 😅'); // returns 'keepUnicode😅'
+camelCase('한글-테스트'); // returns '한글테스트'
+```
+
+#### Parameters
+
+- `str` (`string`): The string to convert to camel case.
+
+#### Returns
+
+(`string`): Returns a new string converted to camel case.

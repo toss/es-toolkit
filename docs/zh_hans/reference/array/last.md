@@ -2,45 +2,77 @@
 
 返回数组的最后一个元素。
 
-该函数接受一个数组，并返回该数组的最后一个元素。如果数组为空，则函数返回 `undefined`。
-
-## 签名
-
 ```typescript
-function last<T>(arr: [...T[], T]): T;
-function last<T>(arr: T[]): T | undefined;
+const lastElement = last(arr);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`): 要获取最后一个元素的数组。
+### `last(arr)`
 
-### 返回值
-
-(`T | undefined`): 数组的最后一个元素，如果数组为空则返回 `undefined`。
-
-## 示例
+当您想获取数组的最后一个元素时,请使用 `last`。如果数组为空,则返回 `undefined`。在访问数组末尾的数据时很有用。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = last(arr1);
-// result 将会是 3
+import { last } from 'es-toolkit/array';
 
-const arr2: number[] = [];
-const result = last(arr2);
-// result 将会是 undefined
+// 获取数字数组的最后一个元素
+const numbers = [1, 2, 3, 4, 5];
+last(numbers);
+// Returns: 5
 
-const largeArray = Array(1000)
+// 获取字符串数组的最后一个元素
+const strings = ['a', 'b', 'c'];
+last(strings);
+// Returns: 'c'
+
+// 空数组返回 undefined
+const emptyArray: number[] = [];
+last(emptyArray);
+// Returns: undefined
+```
+
+类型处理很安全。
+
+```typescript
+import { last } from 'es-toolkit/array';
+
+// 非空数组的情况下类型明确
+const nonEmptyArray = [1, 2, 3] as const;
+last(nonEmptyArray);
+// Returns: 3 (类型: 3)
+
+// 普通数组的情况下可能为 undefined
+const maybeEmptyArray = [1, 2, 3];
+last(maybeEmptyArray);
+// Returns: 3 | undefined (类型: number | undefined)
+```
+
+在大数组中也能高效工作。
+
+```typescript
+import { last } from 'es-toolkit/array';
+
+// 性能已优化
+const largeArray = Array(1000000)
   .fill(0)
   .map((_, i) => i);
-const result = last(largeArray);
-// result 将会是 999
+last(largeArray);
+// Returns: 999999 (快速访问)
 
-const nestedArray = [
-  [3, 1],
-  [3, 2],
-  [3, 3],
+// 也可以处理嵌套数组
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
 ];
-const result = last(nestedArray);
-// result 将会是 [3,3]
+last(nested);
+// Returns: [5, 6]
 ```
+
+#### 参数
+
+- `arr` (`readonly T[]`): 要获取最后一个元素的数组。
+
+#### 返回值
+
+(`T | undefined`): 数组的最后一个元素。如果数组为空,则返回 `undefined`。

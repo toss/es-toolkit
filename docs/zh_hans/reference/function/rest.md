@@ -1,42 +1,79 @@
 # rest
 
-创建一个函数，该函数会转换提供的函数 `func` 的参数。
-转换后的参数会传递给 `func`，使得从指定索引开始的参数被分组到一个数组中，而之前的参数则作为单独的元素传递。
-
-## 签名
+创建一个将从特定索引开始的参数打包成数组后传递给函数的新函数。
 
 ```typescript
-function rest<F extends (...args: any[]) => any>(func: F, startIndex: number): (...args: any[]) => ReturnType<F>;
+const restFunc = rest(func, startIndex);
 ```
 
-### 参数
+## 参考
 
-- `func` (`F`): 需要转换参数的函数。
-- `startIndex` (`number`, 可选):从哪个索引开始将剩余的参数分组到数组中。默认为 `func.length - 1`，即将最后一个参数后的所有参数分组。
+### `rest(func, startIndex?)`
 
-### 返回值
+当您想要将函数的其余参数打包成数组传递时,请使用 `rest`。特定索引之前的参数单独传递,之后的参数打包成数组传递。
 
-(`(...args: any[]) => ReturnType<F>`): 一个新函数，当被调用时，返回使用转换后的参数调用 `func` 的结果。
-
-- 转换后的参数为：
-  - 前 `start` 个参数作为单独的元素。
-  - 从索引 `start` 开始的剩余参数被分组到一个数组中。
-
-## 示例
+这在创建接收可变参数的函数或更改现有函数的参数处理方式时很有用。
 
 ```typescript
-function fn(a, b, c) {
-  return Array.from(arguments);
+import { rest } from 'es-toolkit/function';
+
+// 基本用法 (从最后一个参数开始打包成数组)
+function sum(a: number, b: number, numbers: number[]) {
+  return a + b + numbers.reduce((sum, n) => sum + n, 0);
 }
 
-// 使用默认起始索引 (func.length - 1，即在此例中为 2)
-const func1 = rest(fn);
-console.log(func1(1, 2, 3, 4)); // [1, 2, [3, 4]]
+const restSum = rest(sum); // startIndex 默认为 func.length - 1 (2)
+console.log(restSum(1, 2, 3, 4, 5)); // 1 + 2 + (3 + 4 + 5) = 15
+// sum 函数以 [1, 2, [3, 4, 5]] 的形式调用
 
-// 使用起始索引 1
-const func2 = rest(fn, 1);
-console.log(func2(1, 2, 3, 4)); // [1, [2, 3, 4]]
+// 从其他索引开始打包成数组
+function logMessage(level: string, messages: string[]) {
+  console.log(`[${level}] ${messages.join(' ')}`);
+}
 
-// 参数少于起始索引
-console.log(func1(1)); // [1, undefined, []]
+const restLog = rest(logMessage, 1); // 从索引 1 开始打包成数组
+restLog('INFO', 'Application', 'started', 'successfully');
+// 以 logMessage('INFO', ['Application', 'started', 'successfully']) 的形式调用
+
+// 实用示例: 第一个参数单独传递,其余打包成数组
+function format(template: string, values: any[]) {
+  return values.reduce((result, value, index) => {
+    return result.replace(`{${index}}`, value);
+  }, template);
+}
+
+const restFormat = rest(format, 1);
+console.log(restFormat('Hello {0}, welcome to {1}!', 'John', 'our site'));
+// 'Hello John, welcome to our site!'
 ```
+
+参数不足的情况也会自动处理。
+
+```typescript
+import { rest } from 'es-toolkit/function';
+
+function greet(greeting: string, name: string, extras: string[]) {
+  const extraText = extras.length > 0 ? ` ${extras.join(' ')}` : '';
+  return `${greeting} ${name}!${extraText}`;
+}
+
+const restGreet = rest(greet);
+
+console.log(restGreet('Hello', 'Alice', 'Have a great day!'));
+// 'Hello Alice! Have a great day!'
+
+console.log(restGreet('Hi', 'Bob'));
+// 'Hi Bob!' (extras 为空数组)
+
+console.log(restGreet('Hey'));
+// 'Hey undefined!' (name 为 undefined, extras 为空数组)
+```
+
+#### 参数
+
+- `func` (`F`): 要更改参数处理方式的函数。
+- `startIndex` (`number`, 可选): 开始打包成数组的索引。默认值为 `func.length - 1`,从最后一个参数开始打包成数组。
+
+#### 返回值
+
+(`(...args: any[]) => ReturnType<F>`): 返回一个将从特定索引开始的参数打包成数组后传递给原始函数的新函数。

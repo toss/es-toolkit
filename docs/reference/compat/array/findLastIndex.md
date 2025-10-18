@@ -1,90 +1,84 @@
-# findLastIndex
+# findLastIndex (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.findLastIndex`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `findLastIndex` function operates slowly due to additional features such as handling `null` or `undefined`, partial object matching, and property name matching.
+
+Use the faster and more modern `Array.prototype.findLastIndex` instead.
+
 :::
 
-Similar to `findIndex`, `findLastIndex` returns the index of the first element that matches the condition, but it starts searching from the right.
-
-You can specify the condition in several ways:
-
-- **Predicate function**: If you provide a predicate function, the function will be applied to each item. The first item that makes the predicate function return `true` will be selected.
-- **Partial object**: If you provide a partial object, the function will return the first item that matches the properties of the partial object.
-- **Property-value pair**: If you provide a property-value pair, the function will return the first item that matches the property and value from the pair.
-- **Property name**: If you provide a property name, the function will return the first item where the specified property has a truthy value.
-
-## Signature
+Finds the index of the last element in an array that satisfies a condition.
 
 ```typescript
-function findLastIndex<T>(
-  arr: T[],
-  doesMatch: (item: T, index: number, arr: T[]) => unknown,
-  fromIndex?: number
-): number;
-function findLastIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
+const lastIndex = findLastIndex(array, predicate, fromIndex);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array to search through.
+### `findLastIndex(array, predicate, fromIndex)`
 
-::: info `arr` can be `ArrayLike<T>` or `null` or `undefined`
+Use `findLastIndex` when you want to find the index of the first element that matches a given condition starting from the end of the array. Returns `-1` if no element satisfies the condition.
 
-To ensure full compatibility with lodash, the `findLastIndex` function processes `arr` as follows:
-
-- If `arr` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
-- If `arr` is `null` or `undefined`, it is treated as an empty array.
-
-:::
-
-- `doesMatch`:
-
-  - **Predicate function** (`(item: T, index: number, arr: readonly T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
-  - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
-  - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
-  - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
-
-- `fromIndex` (`number`): The index to start the search from, defaults to the last index of the array (`arr.length - 1`).
-
-### Returns
-
-(`number`): The index of the first item that has the specified property value, or `-1` if no match is found.
-
-## Examples
+This function can specify the condition in various ways. When you pass a function, it executes the function for each element. When you pass a partial object, it checks if the element has those properties. When you pass an array-formatted key-value pair, it checks if a specific property matches the given value. When you pass a string, it checks if that property evaluates to a truthy value.
 
 ```typescript
 import { findLastIndex } from 'es-toolkit/compat';
 
-// Using a predicate function
-const items = [1, 2, 3, 4, 5];
-const result = findLastIndex(items, item => item > 3);
-console.log(result); // 4
-
-// Using a partial object
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+const users = [
+  { user: 'barney', active: true },
+  { user: 'fred', active: false },
+  { user: 'pebbles', active: false },
 ];
-const result = findLastIndex(items, { name: 'Bob' });
-console.log(result); // 1
 
-// Using a property-value pair
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLastIndex(items, ['name', 'Alice']);
-console.log(result); // 0
+// Specify the condition using a function
+findLastIndex(users, o => o.user === 'pebbles');
+// Returns: 2
 
-// Using a property name
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLastIndex(items, 'name');
-console.log(result); // 1
+// Find a matching element using a partial object
+findLastIndex(users, { user: 'barney', active: true });
+// Returns: 0
+
+// Find a matching element using a property-value pair
+findLastIndex(users, ['active', false]);
+// Returns: 2
+
+// Find an element with a truthy value using a property name
+findLastIndex(users, 'active');
+// Returns: 0
 ```
+
+You can also specify a starting position for the search. If `fromIndex` is negative, it's calculated from the end of the array.
+
+```typescript
+import { findLastIndex } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4, 5];
+
+// Search in reverse from index 3
+findLastIndex(numbers, n => n < 4, 2);
+// Returns: 2
+
+// If you use a negative index, it's calculated from the end
+findLastIndex(numbers, n => n > 2, -2);
+// Returns: 3
+```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { findLastIndex } from 'es-toolkit/compat';
+
+findLastIndex(null, n => n > 0); // -1
+findLastIndex(undefined, n => n > 0); // -1
+```
+
+#### Parameters
+
+- `array` (`ArrayLike<T> | null | undefined`): The array to search.
+- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to test each element. Can be a function, partial object, property-value pair, or property name. Default is the identity function.
+- `fromIndex` (`number`, optional): The index to start the search from. If negative, it's calculated from the end of the array. Default is `array.length - 1`.
+
+#### Returns
+
+(`number`): Returns the index of the last element that satisfies the condition. Returns `-1` if no element satisfies the condition.

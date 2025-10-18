@@ -1,35 +1,48 @@
 # maxBy
 
-関数が返す値を基準に、配列の中で最大値を持つ要素を返します。
-
-配列が空の場合は、`undefined`を返します。
-
-## インターフェース
+変換関数が返す値を基準に、配列で最大値を持つ要素を返します。
 
 ```typescript
-function maxBy<T>(items: T[], getValue: (element: T) => number): T;
+const max = maxBy(items, getValue);
 ```
 
-### パラメータ
+## 参照
 
-- `items` (`T[]`): 最大値を持つ要素を探す配列。
-- `getValue` (`(element: T) => number`): 要素に対応する数値を計算する関数。
+### `maxBy(items, getValue)`
 
-### 戻り値
-
-(`T`): `getValue`関数を基準に、配列の中で最大値を持つ要素。配列が空の場合は`undefined`を返します。
-
-## 例
+配列の要素を変換関数で数値に変換し、最も大きな値を持つ元の要素を見つけたい場合は `maxBy` を使用してください。空の配列の場合は `undefined` を返します。
 
 ```typescript
-maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 戻り値: { a: 3 }
-maxBy([], x => x.a); // 戻り値: undefined
-maxBy(
-  [
-    { name: 'john', age: 30 },
-    { name: 'jane', age: 28 },
-    { name: 'joe', age: 26 },
-  ],
-  x => x.age
-); // 戻り値: { name: 'john', age: 30 }
+import { maxBy } from 'es-toolkit/array';
+
+// オブジェクト配列で特定のプロパティの最大値を持つ要素を見つけます。
+const people = [
+  { name: 'john', age: 30 },
+  { name: 'jane', age: 28 },
+  { name: 'joe', age: 26 },
+];
+maxBy(people, person => person.age);
+// Returns: { name: 'john', age: 30 }
+
+// 数値配列で絶対値が最も大きい要素を見つけます。
+const numbers = [-10, -5, 0, 5, 15];
+maxBy(numbers, x => Math.abs(x));
+// Returns: 15
 ```
+
+空の配列の場合は `undefined` を返します。
+
+```typescript
+import { maxBy } from 'es-toolkit/array';
+
+maxBy([], x => x.value); // undefined
+```
+
+#### パラメータ
+
+- `items` (`T[]`): 最大値を持つ要素を探す配列です。
+- `getValue` (`(element: T) => number`): 各要素を数値に変換する関数です。
+
+#### 戻り値
+
+(`T | undefined`): 変換関数が返した値の中で最も大きな値を持つ要素です。配列が空の場合は `undefined` を返します。

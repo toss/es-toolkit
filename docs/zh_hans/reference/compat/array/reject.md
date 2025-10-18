@@ -1,139 +1,68 @@
-# reject
+# reject (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.filter()`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `reject` 函数为了与 Lodash 兼容而支持多种形式的 predicate，因此实现较为复杂。对于简单的函数 predicate，使用 `Array.filter()` 会更简单和更快。
+
+请使用更快、更现代的 `Array.filter()`。例如，`reject(arr, func)` 可以替换为 `arr.filter(item => !func(item))`。
 
 :::
 
-返回不满足提供条件的元素新数组。
-
-条件可以通过多种方式指定：
-
-- **谓词函数**: 对每个元素执行一个函数，选择不满足条件的元素。
-- **部分对象**: 选择与提供的对象部分不匹配的元素。
-- **属性-值对**: 选择指定键与给定值不匹配的元素。
-- **属性名称**: 选择不存在指定属性名的元素。
-
-## 签名
+遍历集合并返回一个由不符合条件函数的元素组成的新数组。
 
 ```typescript
-function reject<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function reject<T>(arr: T[], doesMatch: Partial<T>): T[];
-function reject<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function reject<T>(arr: T[], doesMatch: PropertyKey): T[];
-
-function reject<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): T[];
-function reject<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function reject<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T[];
-function reject<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T[];
+const filtered = reject(collection, predicate);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`) 或 `object` (`T`): 要迭代的数组或对象。
+### `reject(collection, predicate)`
 
-::: info `arr` 可以是 `ArrayLike<T>`、`null` 或 `undefined`
-
-为了确保与 lodash 的完全兼容性，`reject` 函数会按照以下方式处理 `arr`：
-
-- 如果 `arr` 是 `ArrayLike<T>`，它将使用 `Array.from(...)` 转换为数组。
-- 如果 `arr` 是 `null` 或 `undefined`，它将被视为一个空数组。
-
-:::
-
-- `doesMatch`:
-
-  - 对于数组的第一个 `reject` 重载：
-
-    - **谓词函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个检查元素是否不满足条件的函数。
-    - **部分对象** (`Partial<T>`): 用于检查元素的属性和值是否不匹配的部分对象。
-    - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要不匹配的值。
-    - **属性名称** (`PropertyKey`): 用于检查元素中不存在的属性名称。
-
-  - 对于对象的 `reject` 重载：
-    - **谓词函数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 一个函数，接收一个值、其键和对象，如果该项不符合条件，则返回一个真值。
-    - **部分值** (`Partial<T[keyof T]>`): 用于检查对象的值是否不匹配的部分值。
-    - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个数组，第一个元素是属性键，第二个元素是要不匹配的值。
-    - **属性名称** (`PropertyKey`): 用于检查不存在的属性名称。
-
-### 返回
-
-(`T[]`): 不满足条件的元素数组。如果没有，返回空数组。 (`[]`)
-
-## 示例
-
-### 数组
+从数组、对象或字符串中选出不符合给定条件的元素，并返回一个新数组。执行与 `filter` 相反的操作。
 
 ```typescript
 import { reject } from 'es-toolkit/compat';
 
-// 使用谓词函数
-reject([1, 2, 3], n => n % 2 === 0);
-// => [1, 3]
+// 过滤出不是偶数的数字
+reject([1, 2, 3, 4, 5], n => n % 2 === 0);
+// => [1, 3, 5]
 
-// 使用部分对象
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-reject(arr, { name: 'Bob' });
-// => [{ id: 1, name: 'Alice' }]
+// 过滤出不具有特定属性的对象
+reject([{ a: 1 }, { a: 2 }, { b: 1 }], 'a');
+// => [{ b: 1 }]
 
-// 使用属性-值对
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-reject(arr, ['name', 'Alice']);
-// => [{ id: 2, name: 'Bob' }]
+// 过滤出不具有特定属性值的对象
+reject([{ a: 1 }, { a: 2 }, { a: 3 }], { a: 2 });
+// => [{ a: 1 }, { a: 3 }]
 
-// 使用属性名称
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-  { id: 3, age: 28 },
-];
-reject(arr, 'name');
-// => [{ id: 3, age: 28 }]
+// 从字符串中过滤出不是特定字符的字符
+reject('abc', char => char === 'b');
+// => ['a', 'c']
 ```
 
-### 对象
+此函数支持多种形式的 predicate。
 
 ```typescript
 import { reject } from 'es-toolkit/compat';
 
-// 使用谓词函数
-const obj = { a: 1, b: 2, c: 3 };
-reject(obj, item => item > 2);
-// => [1, 2]
+// 使用函数条件
+reject(users, user => user.age < 18);
 
-// 使用部分对象
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-};
-reject(obj, { name: 'Bob' });
-// => [{ id: 1, name: 'Alice' }]
+// 对象的部分匹配
+reject(users, { active: false });
 
-// 使用属性-值对
-const obj = {
-  alice: { id: 1, name: 'Alice' },
-  bob: { id: 2, name: 'Bob' },
-};
-reject(obj, ['name', 'Alice']);
-// => [{ id: 2, name: 'Bob' }]
+// 属性-值数组
+reject(users, ['status', 'pending']);
 
-// 使用属性名称
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-  c: { id: 3, age: 28 },
-};
-reject(obj, 'name');
-// => [{ id: 3, age: 28 }]
+// 通过属性名检查 truthy 值
+reject(users, 'premium');
 ```
+
+#### 参数
+
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 要遍历的集合。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 对每个元素执行的条件。默认值为 `identity`。
+
+#### 返回值
+
+(`T[]`): 返回一个由不符合 predicate 条件的元素组成的新数组。

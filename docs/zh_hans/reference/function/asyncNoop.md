@@ -1,32 +1,48 @@
 # asyncNoop
 
-一个非同步的空函数。 可以用来在函数需要的地方填充空白，或者作为默认值使用。
-
-## 接口
+异步地什么都不做的函数。
 
 ```typescript
-function asyncNoop(): Promise<void>;
+const promise = asyncNoop();
 ```
 
-### 返回值
+::: info [`noop`](./noop.md) 函数
 
-(`Promise<void>`): 一个`Promise`，它将解析为`undefined`。
+如果需要同步地什么都不做的函数,请使用直接返回 `void` 的 `noop` 函数。
 
-## 示例
+:::
+
+## 参考
+
+### `asyncNoop()`
+
+当您想在需要异步函数的地方填充空位或用作默认值时,请使用 `asyncNoop`。它返回一个解析为 `undefined` 的 `Promise`。
 
 ```typescript
 import { asyncNoop } from 'es-toolkit/function';
 
+// 用作默认值的示例
 interface Props {
   fetchData?: () => Promise<void>;
 }
 
 function MyComponent({ fetchData = asyncNoop }: Props) {
   const handleFetchData = async () => {
-    // 这里fetchData是函数，所以可以安全地调用。
+    // fetchData 始终是一个函数,因此可以安全调用
     await fetchData();
   };
 
   handleFetchData();
 }
+
+// 直接调用的示例
+asyncNoop();
+// Returns: Promise<void>
+
+await asyncNoop();
+// Returns: undefined
 ```
+
+#### 返回值
+
+(`Promise<void>`): 解析为 `undefined` 的 `Promise`。

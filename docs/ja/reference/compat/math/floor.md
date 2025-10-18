@@ -1,32 +1,62 @@
-# floor
+# floor (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Math.floor`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `floor` 関数は小数点桁数の計算と内部関数呼び出しにより動作が遅くなります。
+
+代わりに、より高速で現代的な `Math.floor` を使用してください。
+
 :::
 
-数値を指定された桁数で切り捨てます。
-
-## インターフェース
+数値を指定された小数点桁数で切り捨てます。
 
 ```typescript
-function floor(number: number, precision: number = 0): number;
+const result = floor(number, precision);
 ```
 
-### パラメータ
+## 参照
 
-- `number` (`number`): 切り捨てたい数値。
-- `precision` (`number`, オプション): 切り捨てたい精度。デフォルトは`0`です。
+### `floor(number, precision?)`
 
-### 戻り値
-
-(`number`): 切り捨てられた数値。
-
-## 例
+数値を特定の小数点桁数で切り捨てたい場合は `floor` を使用してください。
 
 ```typescript
-floor(4.006); // => 4
-floor(0.046, 2); // => 0.04
-floor(4060, -2); // => 4000
+import { floor } from 'es-toolkit/compat';
+
+// 基本的な切り捨て（整数へ）
+floor(4.9);
+// Returns: 4
+
+floor(4.1);
+// Returns: 4
+
+// 小数点第2位で切り捨て
+floor(6.994, 2);
+// Returns: 6.99
+
+floor(6.999, 2);
+// Returns: 6.99
+
+// 負の桁数で切り捨て（10の単位）
+floor(6040, -2);
+// Returns: 6000
+
+floor(1234, -2);
+// Returns: 1200
+
+// 負の数も切り捨て
+floor(-4.1);
+// Returns: -5
+
+floor(-6.994, 2);
+// Returns: -7.00
 ```
+
+#### パラメータ
+
+- `number` (`number`): 切り捨てる数値です。
+- `precision` (`number`, オプション): 切り捨てる小数点桁数です。デフォルトは `0` です。
+
+#### 戻り値
+
+(`number`): 指定された小数点桁数で切り捨てられた数値を返します。

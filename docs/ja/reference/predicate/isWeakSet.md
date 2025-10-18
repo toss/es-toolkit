@@ -1,33 +1,41 @@
 # isWeakSet
 
-与えられた値が `WeakSet` であるかどうかを確認します。
-
-この関数は、提供された値が `WeakSet` のインスタンスであるかどうかをテストします。 値が `WeakSet` の場合は true を、それ以外の場合は false を返します。
-
-この関数は、TypeScriptにおける型述語としても機能し、引数の型を `WeakSet` に絞り込むことができます。
-
-## インターフェース
+与えられた値が `WeakSet` インスタンスかどうかを確認します。
 
 ```typescript
-function isWeakSet(value: unknown): value is WeakSet<WeakKey>;
+const result = isWeakSet(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): `WeakSet` であるかどうかをテストする値。
+### `isWeakSet(value)`
 
-### 戻り値
-
-(`value is WeakSet<WeakKey>`): 値が `WeakSet` の場合は `true`、それ以外の場合は `false`。
-
-## 例
+値が WeakSet インスタンスかどうかを確認したい場合は `isWeakSet` を使用してください。
 
 ```typescript
-const value1 = new WeakSet();
-const value2 = new Map();
-const value3 = new Set();
+import { isWeakSet } from 'es-toolkit/predicate';
 
-console.log(isWeakSet(value1)); // true
-console.log(isWeakSet(value2)); // false
-console.log(isWeakSet(value3)); // false
+// WeakSet インスタンス
+const weakSet1 = new WeakSet();
+const weakSet2 = new WeakSet([{}, []]);
+
+console.log(isWeakSet(weakSet1)); // true
+console.log(isWeakSet(weakSet2)); // true
+
+// WeakSet でない値
+console.log(isWeakSet(new Set())); // false
+console.log(isWeakSet(new Map())); // false
+console.log(isWeakSet(new WeakMap())); // false
+console.log(isWeakSet([])); // false
+console.log(isWeakSet({})); // false
+console.log(isWeakSet(null)); // false
+console.log(isWeakSet(undefined)); // false
 ```
+
+#### パラメータ
+
+- `value` (`unknown`): WeakSet インスタンスかどうかを確認する値です。
+
+#### 戻り値
+
+(`value is WeakSet<WeakKey>`): 値が WeakSet インスタンスの場合は `true`、それ以外の場合は `false` を返します。

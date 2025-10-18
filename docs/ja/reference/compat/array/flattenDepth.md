@@ -1,44 +1,55 @@
-# flattenDepth
+# flattenDepth (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `es-toolkit`の`flatten`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+この`flattenDepth`関数は、`null`や`undefined`の処理などにより、動作が遅くなります。`es-toolkit`の`flatten`関数は、これらの追加処理なしで、より高速かつシンプルに動作します。
 
-配列を指定された深さまでフラット化します。
-
-## インターフェース
-
-```typescript
-function flattenDepth<T, D extends number = 1>(value: T[], depth: D): Array<FlatArray<T[], D>> | [];
-```
-
-### パラメータ
-
-- `value` (`T[]`): フラット化する値。
-
-::: info `value` は `ArrayLike<T>`、`null`、または `undefined` になります。
-
-lodash との完全な互換性を確保するため、`flattenDepth` 関数は `value` を次のように処理します。
-
-- `value` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換されます。
-- `value` が `null` または `undefined` の場合、空の配列として扱われます。
+代わりに、より高速で現代的な`es-toolkit`の[flatten](../../array/flatten.md)を使用してください。
 
 :::
 
-- `depth` (`D`): ネストされた配列構造をどの深さまでフラット化するかを指定する深さレベル。デフォルトは1です。
-
-### 戻り値
-
-(`Array<FlatArray<T[], D>> | []`): フラット化された新しい配列。
-
-## 例
+配列を指定した深さまで平坦化します。
 
 ```typescript
-const arr = flattenDepth([1, [2, 3], [4, [5, 6]]], 1);
-// Returns: [1, 2, 3, 4, [5, 6]]
-
-const arr = flattenDepth([1, [2, 3], [4, [5, 6]]], 2);
-// Returns: [1, 2, 3, 4, 5, 6]
+const flattened = flattenDepth(array, depth);
 ```
+
+## 参照
+
+### `flattenDepth(array, depth)`
+
+ネストされた配列を望む深さまで平坦化したい場合は`flattenDepth`を使用してください。深さを指定すると、その深さまでのみネストされた配列を平坦化します。
+
+```typescript
+import { flattenDepth } from 'es-toolkit/compat';
+
+// 深さ1まで平坦化します
+flattenDepth([1, [2, [3, [4]], 5]], 1);
+// Returns: [1, 2, [3, [4]], 5]
+
+// 深さ2まで平坦化します
+flattenDepth([1, [2, [3, [4]], 5]], 2);
+// Returns: [1, 2, 3, [4], 5]
+
+// 深さを指定しない場合、デフォルト値1で平坦化します
+flattenDepth([1, [2, [3, [4]], 5]]);
+// Returns: [1, 2, [3, [4]], 5]
+```
+
+`null`または`undefined`は空の配列として処理されます。
+
+```typescript
+import { flattenDepth } from 'es-toolkit/compat';
+
+flattenDepth(null, 2); // []
+flattenDepth(undefined, 2); // []
+```
+
+#### パラメータ
+
+- `array` (`ArrayLike<T> | null | undefined`): 平坦化する配列です。
+- `depth` (`number`, オプション): 平坦化する最大深さです。デフォルトは`1`です。
+
+#### 戻り値
+
+(`T[]`): 指定した深さまで平坦化された新しい配列を返します。

@@ -1,40 +1,44 @@
 # pick
 
-创建一个由指定属性组成的新对象。
-
-该函数接受一个对象和一个键数组，并返回一个新对象，该对象仅包含与指定键对应的属性。
-
-## 签名
+返回一个仅包含指定键对应属性的新对象。
 
 ```typescript
-function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
+const result = pick(obj, keys);
 ```
 
-### 参数
+## 参考
 
-- `obj` (`T`): 要提取属性的对象。
-- `keys` (`K[]`): 要从对象中提取的键数组。
+### `pick(obj, keys)`
 
-### 返回值
-
-(`Pick<T, K>`): 一个包含了指定键的新对象。
-
-## 示例
+当您想从对象中仅选择特定键对应的属性时,请使用 `pick`。它返回一个仅包含指定键对应属性的新对象。
 
 ```typescript
-const obj = { a: 1, b: 2, c: 3 };
+import { pick } from 'es-toolkit/object';
+
+// 仅选择特定键
+const obj = { a: 1, b: 2, c: 3, d: 4 };
 const result = pick(obj, ['a', 'c']);
-// result 将会是 { a: 1, c: 3 }
+// result 是 { a: 1, c: 3 }
+
+// 即使指定不存在的键也会被忽略
+const safe = pick(obj, ['a', 'nonexistent']);
+// safe 是 { a: 1 }
+
+// 也可以用于嵌套对象
+const nested = {
+  user: { name: 'John', age: 30 },
+  posts: ['post1', 'post2'],
+  settings: { theme: 'dark' },
+};
+const picked = pick(nested, ['user', 'settings']);
+// picked 是 { user: { name: 'John', age: 30 }, settings: { theme: 'dark' } }
 ```
 
-## 与 Lodash 的兼容性
+#### 参数
 
-`es-toolkit/compat` 中的 `pick` 函数可以处理深路径选择。
+- `obj` (`T extends Record<string, any>`): 要选择属性的对象。
+- `keys` (`readonly K[]`): 要从对象中选择的键的数组。
 
-```typescript
-import { pick } from 'es-toolkit/compat';
+#### 返回值
 
-const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
-const result = pick(obj, ['a.b.c', 'f.g']);
-// result 将会是 { a: { b: { c: 1 } }, 'f.g': 4 }
-```
+(`Pick<T, K>`): 返回一个仅包含指定键对应属性的新对象。

@@ -1,33 +1,49 @@
-# eq
+# eq (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-执行 [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) 比较，以确定两个值是否相等。
-
-## 签名
+检查两个值是否使用 SameValueZero 比较方式相等。
 
 ```typescript
-function eq(value: any, other: any): boolean;
+const isEqual = eq(value, other);
 ```
 
-### 参数
+## 参考
 
-- `value` (`any`): 要比较的值。
-- `other` (`any`): 要比较的另一个值。
+### `eq(value, other)`
 
-### 返回值
-
-(`boolean`): 如果值相等，则返回 `true`，否则返回 `false`。
-
-## 示例
+当您想要检查两个值是否相等时，请使用 `eq`。与常规的 `===` 比较不同，它在 `NaN` 之间的比较中返回 `true`。
 
 ```typescript
-eq(1, 1); // true
-eq(0, -0); // true
-eq(NaN, NaN); // true
-eq('a', Object('a')); // false
+import { eq } from 'es-toolkit/compat';
+
+// 基本用法
+console.log(eq(1, 1)); // true
+console.log(eq(0, -0)); // true (SameValueZero 中 0 和 -0 被视为相等)
+console.log(eq(NaN, NaN)); // true
+console.log(eq('a', 'a')); // true
+console.log(eq('a', 'b')); // false
 ```
+
+与 `Object.is()` 的不同行为。
+
+```typescript
+// 使用 eq
+console.log(eq(NaN, NaN)); // true
+console.log(eq(0, -0)); // true
+
+// 使用 Object.is (更快)
+console.log(Object.is(NaN, NaN)); // true
+console.log(Object.is(0, -0)); // false (Object.is 将 0 和 -0 视为不同)
+
+// 使用 ===
+console.log(NaN === NaN); // false
+console.log(0 === -0); // true
+```
+
+#### 参数
+
+- `value` (`any`): 要比较的第一个值。
+- `other` (`any`): 要比较的第二个值。
+
+#### 返回值
+
+(`boolean`): 如果两个值相等则返回 `true`，否则返回 `false`。

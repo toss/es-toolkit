@@ -1,43 +1,104 @@
-# keysIn
+# keysIn (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `for...in` 루프나 `Object.keys`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `keysIn` 함수는 배열형 객체 처리, 프로토타입 체인 순회 등의 복잡한 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `for...in` 루프나 필요에 따라 `Object.keys()`를 사용하세요.
+
 :::
 
-객체에서 접근할 수 있는 모든 문자열 프로퍼티 이름을 반환해요. 프로토타입에서 상속된 속성도 포함돼요.
-
-- 값이 객체가 아닌 경우, 객체로 변환돼요.
-- [배열 같은 객체](../predicate/isArrayLike.md)는 배열처럼 다뤄요.
-- 일부 인덱스가 빠져 있는 희소 배열은 밀집 배열처럼 다뤄요.
-- 값이 `null` 또는 `undefined`이면, 빈 배열을 반환해요.
-- 프로토타입 객체를 처리할 때는 `constructor` 프로퍼티를 결과에서 제외해요.
-
-## 인터페이스
+객체의 모든 열거 가능한 속성 이름들을 상속된 속성까지 포함해서 배열로 반환해요.
 
 ```typescript
-function keysIn(object?: any): string[];
+const allKeys = keysIn(object);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`any`): 접근할 수 있는 문자열 프로퍼티를 찾을 객체.
+### `keysIn(object)`
 
-### 반환 값
-
-(`string[]`): 문자열 프로퍼티의 배열.
-
-## 예시
+객체의 모든 속성 이름들을 상속된 속성까지 포함해서 가져오고 싶을 때 `keysIn`을 사용하세요. `keys`와 달리 프로토타입 체인의 속성들도 함께 반환해요.
 
 ```typescript
-const obj = { a: 1, b: 2 };
-console.log(keysIn(obj)); // ['a', 'b']
+import { keysIn } from 'es-toolkit/compat';
 
-const arr = [1, 2, 3];
-console.log(keysIn(arr)); // ['0', '1', '2']
+// 기본 객체의 키들
+const object = { a: 1, b: 2 };
+keysIn(object);
+// => ['a', 'b']
 
-function Foo() {}
-Foo.prototype.a = 1;
-console.log(keysIn(new Foo())); // ['a']
+// 배열의 인덱스들
+const array = [1, 2, 3];
+keysIn(array);
+// => ['0', '1', '2']
+
+// 문자열의 인덱스들
+keysIn('hello');
+// => ['0', '1', '2', '3', '4']
 ```
+
+상속된 속성들도 포함해요.
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+Foo.prototype.c = 3;
+
+keysIn(new Foo());
+// => ['a', 'b', 'c'] (프로토타입 속성 'c'도 포함)
+
+// constructor는 제외해요
+class MyClass {
+  constructor() {
+    this.prop = 1;
+  }
+  method() {}
+}
+MyClass.prototype.inherited = 2;
+
+keysIn(new MyClass());
+// => ['prop', 'method', 'inherited'] (constructor는 제외됨)
+```
+
+배열형 객체들을 특별히 처리해요.
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+// TypedArray
+const typedArray = new Uint8Array([1, 2, 3]);
+keysIn(typedArray);
+// => ['0', '1', '2'] (buffer, byteLength 등은 제외)
+
+// arguments 객체
+function example() {
+  return keysIn(arguments);
+}
+example('a', 'b', 'c');
+// => ['0', '1', '2']
+```
+
+`null`이나 `undefined`를 안전하게 처리해요.
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+keysIn(null);
+// => []
+
+keysIn(undefined);
+// => []
+```
+
+#### 파라미터
+
+- `object` (`any`): 키를 가져올 객체예요.
+
+#### 반환 값
+
+(`string[]`): 객체의 모든 열거 가능한 속성 이름들(자체 속성과 상속된 속성 모두 포함)의 배열을 반환해요.

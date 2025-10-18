@@ -1,42 +1,73 @@
 # mergeWith
 
-将源对象的属性合并到目标对象中。
-
-您可以提供自定义的 `merge` 函数来控制属性的合并方式。`merge` 函数应返回要在目标对象中设置的值。
-
-如果返回 `undefined`，则会对数组和对象应用默认的深度合并：
-
-- 如果源对象中的属性是数组或对象，而目标对象中对应的属性也是数组或对象，它们将被合并。
-- 如果源对象中的属性是 `undefined`，它不会覆盖目标对象中已定义的属性。
-
-有关默认深度合并的详细信息，请参见 [merge](./merge.md)。
-
-此函数会修改目标对象。
-
-## 签名
+使用自定义合并函数将源对象深度合并到目标对象中并修改目标对象。
 
 ```typescript
-function mergeWith<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
-  target: T,
-  source: S,
-  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
-): T & S;
+const result = mergeWith(target, source, mergeFunction);
 ```
 
-### 参数
+## 参考
 
-- `target` (`T`): 目标对象，源对象的属性将合并到此对象中。该对象会被就地修改。
-- `source` (`S`): 源对象，其属性将合并到目标对象中。
-- `merge` (`(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any`): 自定义合并函数，用于定义属性如何组合。它接收以下参数：
-  - `targetValue`: 目标对象中属性的当前值。
-  - `sourceValue`: 源对象中属性的值。
-  - `key`: 被合并的属性的键。
-  - `target`: 目标对象。
-  - `source`: 源对象。
+### `mergeWith(target, source, merge)`
 
-### 返回值
+当您想要合并两个对象并对每个属性应用自定义合并逻辑时,请使用 `mergeWith`。如果合并函数返回 `undefined`,则使用默认的深度合并逻辑。
 
-(`T & S`): 合并了源对象属性的更新后的目标对象。
+```typescript
+import { mergeWith } from 'es-toolkit/object';
+
+// 将数字值相加合并
+const target = { a: 1, b: 2, c: { x: 10 } };
+const source = { b: 3, c: { x: 20, y: 30 }, d: 4 };
+
+const result = mergeWith(target, source, (targetValue, sourceValue, key) => {
+  if (typeof targetValue === 'number' && typeof sourceValue === 'number') {
+    return targetValue + sourceValue; // 数字相加
+  }
+  // 返回 undefined 则使用默认合并逻辑
+});
+// result 和 target 都是 { a: 1, b: 5, c: { x: 30, y: 30 }, d: 4 }
+
+// 连接数组合并
+const arrayTarget = { items: [1, 2], metadata: { count: 2 } };
+const arraySource = { items: [3, 4], metadata: { count: 2 } };
+
+mergeWith(arrayTarget, arraySource, (targetValue, sourceValue) => {
+  if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+    return targetValue.concat(sourceValue);
+  }
+});
+// arrayTarget 是 { items: [1, 2, 3, 4], metadata: { count: 2 } }
+
+// 根据键应用不同的合并逻辑
+const config = { timeout: 1000, retries: 3, features: { featureA: true } };
+const updates = { timeout: 2000, retries: 5, features: { featureB: false } };
+
+mergeWith(config, updates, (targetValue, sourceValue, key) => {
+  if (key === 'timeout') {
+    return Math.max(targetValue, sourceValue); // timeout 选择较大值
+  }
+  if (key === 'retries') {
+    return Math.min(targetValue, sourceValue); // retries 选择较小值
+  }
+  // 其他属性使用默认合并逻辑
+});
+// config 是 { timeout: 2000, retries: 3, features: { featureA: true, featureB: false } }
+```
+
+#### 参数
+
+- `target` (`T extends Record<PropertyKey, any>`): 要合并源对象的目标对象。此对象会被修改。
+- `source` (`S extends Record<PropertyKey, any>`): 要合并到目标对象的源对象。
+- `merge` (`(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any`): 自定义合并函数。
+  - `targetValue`: 目标对象的当前值
+  - `sourceValue`: 源对象的值
+  - `key`: 正在合并的属性的键
+  - `target`: 目标对象
+  - `source`: 源对象
+
+#### 返回值
+
+(`T & S`): 返回已合并源对象的目标对象。
 
 ## 示例
 
@@ -49,7 +80,7 @@ mergeWith(target, source, (targetValue, sourceValue) => {
     return targetValue + sourceValue;
   }
 });
-// 返回 { a: 1, b: 5, c: 4 }
+// 返回值: { a: 1, b: 5, c: 4 }
 
 const target = { a: [1], b: [2] };
 const source = { a: [3], b: [4] };
@@ -59,8 +90,7 @@ const result = mergeWith(target, source, (objValue, srcValue) => {
     return objValue.concat(srcValue);
   }
 });
-
-// 返回 { a: [1, 3], b: [2, 4] })
+// 返回值: { a: [1, 3], b: [2, 4] })
 ```
 
 ## 演示
@@ -78,7 +108,6 @@ const result = mergeWith(target, source, (targetValue, sourceValue) => {
     return targetValue + sourceValue;
   }
 });
-
 console.log(result);
 ```
 
