@@ -60,13 +60,13 @@ const result = unzipWith(mixed, (a, b, c) => {
 console.log(result); // [6, 9] (1+2+3, 4+5+0)
 ```
 
-空の配列を渡すと空の配列を返します。
+空の配列を渡すとエラーが発生します。
 
 ```typescript
 import { unzipWith } from 'es-toolkit/array';
 
 const empty = unzipWith([], (a, b) => a + b);
-console.log(empty); // []
+console.log(empty); // throws Error
 ```
 
 #### パラメータ

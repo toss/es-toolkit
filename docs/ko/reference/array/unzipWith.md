@@ -60,13 +60,13 @@ const result = unzipWith(mixed, (a, b, c) => {
 console.log(result); // [6, 9] (1+2+3, 4+5+0)
 ```
 
-빈 배열을 전달하면 빈 배열을 반환해요.
+빈 배열을 전달하면 오류가 발생합니다.
 
 ```typescript
 import { unzipWith } from 'es-toolkit/array';
 
 const empty = unzipWith([], (a, b) => a + b);
-console.log(empty); // []
+console.log(empty); // throws Error
 ```
 
 #### 파라미터
