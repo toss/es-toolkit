@@ -69,10 +69,15 @@ updateWith(result, '[0][1]', () => 'value', customizer);
 import { updateWith } from 'es-toolkit/compat';
 
 const object = { a: { b: 1 } };
-updateWith(object, 'a.b', n => n * 2, () => {
-  console.log('Not called'); // 呼び出されません
-  return {};
-});
+updateWith(
+  object,
+  'a.b',
+  n => n * 2,
+  () => {
+    console.log('Not called'); // 呼び出されません
+    return {};
+  }
+);
 // => { a: { b: 2 } }
 ```
 

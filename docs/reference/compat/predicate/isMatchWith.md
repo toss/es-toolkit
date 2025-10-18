@@ -49,18 +49,18 @@ isMatchWith({ items: ['a', 'b', 'c'], count: 3 }, { items: 3 }, lengthCompare); 
 const conditionalCompare = (objVal, srcVal, key, object, source) => {
   // Apply special logic only to specific keys
   if (key === 'status') {
-    return objVal === 'active' || srcVal === 'any';
+    return srcVal === 'active' || objVal === 'any';
   }
 
   // Special handling in nested objects
-  if (typeof objVal === 'object' && objVal !== null && srcVal?.special) {
-    return objVal.id === srcVal.special;
+  if (typeof srcVal === 'object' && srcVal !== null && objVal?.special) {
+    return srcVal.id === objVal.special;
   }
 
   return undefined; // Default behavior
 };
 
-isMatchWith({ user: { id: 123, status: 'active' } }, { user: { special: 123 }, status: 'any' }, conditionalCompare); // true
+isMatchWith({ user: { special: 123 }, status: 'any' }, { user: { id: 123, status: 'active' } }, conditionalCompare); // true
 ```
 
 #### Parameters

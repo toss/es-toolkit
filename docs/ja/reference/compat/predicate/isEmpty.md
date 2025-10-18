@@ -40,7 +40,7 @@ isEmpty(); // true
 
 // 配列のようなオブジェクト
 isEmpty({ 0: 'a', length: 1 }); // false
-isEmpty({ length: 0 }); // true (実際の配列ではないのでfalse)
+isEmpty({ length: 0 }); // false
 ```
 
 プリミティブ値はすべて空の値として処理されます:

@@ -49,18 +49,18 @@ isMatchWith({ items: ['a', 'b', 'c'], count: 3 }, { items: 3 }, lengthCompare); 
 const conditionalCompare = (objVal, srcVal, key, object, source) => {
   // 仅在特定键上应用特殊逻辑
   if (key === 'status') {
-    return objVal === 'active' || srcVal === 'any';
+    return srcVal === 'active' || objVal === 'any';
   }
 
   // 嵌套对象中的特殊处理
-  if (typeof objVal === 'object' && objVal !== null && srcVal?.special) {
-    return objVal.id === srcVal.special;
+  if (typeof srcVal === 'object' && srcVal !== null && objVal?.special) {
+    return srcVal.id === objVal.special;
   }
 
   return undefined; // 默认行为
 };
 
-isMatchWith({ user: { id: 123, status: 'active' } }, { user: { special: 123 }, status: 'any' }, conditionalCompare); // true
+isMatchWith({ user: { special: 123 }, status: 'any' }, { user: { id: 123, status: 'active' } }, conditionalCompare); // true
 ```
 
 #### 参数
