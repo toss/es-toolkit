@@ -1,47 +1,58 @@
-# each
+# each (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.forEach`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `each` 함수는 복잡한 타입 처리와 다양한 컬렉션 타입 지원으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.forEach`를 사용하세요.
+
 :::
 
-배열 (`arr`)의 요소들을 왼쪽에서 오른쪽으로 순회하며 각 요소에 대해 `callback` 함수를 호출해요.
+배열이나 객체의 각 요소에 대해 반복 작업을 수행해요.
 
-`callback` 함수가 `false`를 반환하면 순회를 멈춰요.
-
-[forEach](./forEach.md) 함수의 다른 이름이에요.
-
-## 인터페이스
-
-```ts
-function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => unknown): T;
+```typescript
+const result = each(collection, iteratee);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`T`): 순회할 객체. 배열, 문자열, 또는 객체일 수 있어요.
-- `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 각 반복마다 호출될 함수.
-  - `value`: 배열에서 처리 중인 현재 요소.
-  - `key`: 배열에서 처리 중인 현재 요소의 프로퍼티 이름.
-  - `object`: `each` 함수가 호출된 객체.
+### `each(collection, iteratee)`
 
-### 반환 값
+배열, 객체, 문자열의 각 요소를 순회하면서 주어진 함수를 실행해요. 배열의 경우 인덱스 순서대로, 객체의 경우 열거 가능한 속성들을 순회해요.
 
-(`T`): `each`로 순회하는 객체.
-
-## 예시
-
-```ts
+```typescript
 import { each } from 'es-toolkit/compat';
 
-const array = [1, 2, 3];
-const result: number[] = [];
+// 배열 순회
+each([1, 2, 3], (value, index) => console.log(value, index));
+// 로그: 1 0, 2 1, 3 2
 
-// each 함수를 사용하여 배열을 순회하며 각 요소를 결과 배열에 추가해요.
-each(array, value => {
-  result.push(value);
-});
+// 객체 순회
+each({ a: 1, b: 2 }, (value, key) => console.log(key, value));
+// 로그: 'a' 1, 'b' 2
 
-console.log(result); // Output: [1, 2, 3];
+// 문자열 순회
+each('hello', (char, index) => console.log(char, index));
+// 로그: 'h' 0, 'e' 1, 'l' 2, 'l' 3, 'o' 4
 ```
+
+함수가 `false`를 반환하면 순회를 중단해요.
+
+```typescript
+import { each } from 'es-toolkit/compat';
+
+each([1, 2, 3, 4], value => {
+  console.log(value);
+  return value !== 2; // 2에서 중단
+});
+// 로그: 1, 2
+```
+
+#### 파라미터
+
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요.
+- `iteratee` (`(item: any, index: any, collection: any) => unknown`, 선택): 각 요소에 대해 실행할 함수예요. 기본값은 `identity` 함수예요.
+
+#### 반환 값
+
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): 원본 컬렉션을 반환해요.

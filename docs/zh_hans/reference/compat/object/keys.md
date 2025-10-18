@@ -1,40 +1,92 @@
-# keys
+# keys (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.keys`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于处理类数组对象、原型对象等复杂逻辑,此 `keys` 函数运行较慢。
+
+建议使用更快、更现代的 `Object.keys()`。
+
 :::
 
-创建一个包含`object`自身可枚举属性名的数组。
-
-非对象值将被强制转换为对象。
-
-## 签名
+返回对象自身可枚举属性名称的数组。
 
 ```typescript
-function keys(object?: any): string[];
+const keyArray = keys(object);
 ```
 
-### 参数
+## 参考
 
-- `object` (`object`): 要查询的对象。
+### `keys(object)`
 
-### 返回值
-
-(`string[]`): 返回属性名数组。
-
-## 示例
+当您想要获取对象的自身属性名称时,使用 `keys`。它只返回自身属性,不包括继承的属性。
 
 ```typescript
+import { keys } from 'es-toolkit/compat';
+
+// 基本对象的键
+const object = { a: 1, b: 2, c: 3 };
+keys(object);
+// => ['a', 'b', 'c']
+
+// 数组的索引
+const array = [1, 2, 3];
+keys(array);
+// => ['0', '1', '2']
+
+// 字符串的索引
+keys('hello');
+// => ['0', '1', '2', '3', '4']
+```
+
+从函数或构造函数继承的属性会被排除。
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
 function Foo() {
   this.a = 1;
   this.b = 2;
 }
 Foo.prototype.c = 3;
-keys(new Foo()); // ['a', 'b'] (iteration order is not guaranteed)
 
-keys('hi'); // ['0', '1']
-keys([1, 2, 3]); // ['0', '1', '2']
-keys({ a: 1, b: 2 }); // ['a', 'b']
+keys(new Foo());
+// => ['a', 'b'] ('c' 被排除,因为它是原型属性)
 ```
+
+类数组对象会被特殊处理。
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
+// TypedArray
+const typedArray = new Uint8Array([1, 2, 3]);
+keys(typedArray);
+// => ['0', '1', '2']
+
+// arguments 对象
+function example() {
+  return keys(arguments);
+}
+example('a', 'b', 'c');
+// => ['0', '1', '2']
+```
+
+安全处理 `null` 和 `undefined`。
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
+keys(null);
+// => []
+
+keys(undefined);
+// => []
+```
+
+#### 参数
+
+- `object` (`any`): 要获取键的对象。
+
+#### 返回值
+
+(`string[]`): 返回对象自身可枚举属性名称的数组。

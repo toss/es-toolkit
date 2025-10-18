@@ -1,78 +1,88 @@
 # findKey
 
-提供されたテスト関数を満たすオブジェクト内の最初の要素のキーを検索します。
-
-## インターフェース
+与えられた条件を満たす最初の要素のキーを見つけます。
 
 ```typescript
-function findKey<T extends Record<any, any>>(
-  obj: T,
-  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined;
+const key = findKey(obj, predicate);
 ```
 
-### パラメータ
+## 参照
 
-- `obj` (`T extends Record<any, any>`): 検索するオブジェクト。
-- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): オブジェクト内の各値に対して実行する関数。
+### `findKey(obj, predicate)`
 
-### 戻り値
-
-(`keyof T | undefined`): 指定されたテスト関数を満たすオブジェクト内の最初の要素のキー。テストに合格する要素がない場合は未定義です。
-
-## 例
+オブジェクトで特定の条件を満たす最初の要素のキーを見つけたい時に`findKey`を使用してください。条件関数が`true`を返す最初の値のキーを返します。
 
 ```typescript
+import { findKey } from 'es-toolkit/object';
+
+// 年齢が30未満の最初のユーザーを見つける
 const users = {
-  pebbles: { age: 24, active: true },
-  barney: { age: 36, active: true },
-  fred: { age: 40, active: false },
+  alice: { age: 25, active: true },
+  bob: { age: 30, active: false },
+  charlie: { age: 35, active: true },
 };
 
-findKey(users, o => o.age < 40); // 'pebbles'
-findKey(users, o => o.age > 50); // undefined
+const youngUserKey = findKey(users, user => user.age < 30);
+console.log(youngUserKey); // 'alice'
+
+// 非アクティブユーザーを見つける
+const inactiveUserKey = findKey(users, user => !user.active);
+console.log(inactiveUserKey); // 'bob'
+
+// 条件を満たす要素がない場合
+const seniorUserKey = findKey(users, user => user.age > 50);
+console.log(seniorUserKey); // undefined
 ```
 
-## Lodash 互換性
-
-`es-toolkit/compat` から `findKey` をインポートすると、Lodash と互換になります。
-キーを検索する条件を、さまざまな方法で指定できます。
-
-- **検査関数**: 各要素に対して検査する関数を実行します。最初に `true` を返す要素のキーを返します。
-- **部分オブジェクト**: 指定されたオブジェクトと部分的に一致する要素のキーを返します。
-- **プロパティ-値ペア**: 指定されたプロパティと値が一致する要素のキーを返します。
-- **プロパティ名**: 指定されたプロパティに対して真と評価される要素のキーを返します。
-
-### インターフェース
+条件関数は現在の値、キー、全体のオブジェクトを受け取ります。
 
 ```typescript
-function findKey<T>(obj: T, conditionToFind: (value: T[keyof T], key: string, obj: T) => boolean): string | undefined;
-function findKey<T>(obj: T, objectToFind: Partial<T[keyof T]>): string | undefined;
-function findKey<T>(obj: T, propertyToFind: [PropertyKey, any]): string | undefined;
-function findKey<T>(obj: T, propertyToFind: PropertyKey): string | undefined;
-function findKey<T>(
-  obj: T | null | undefined,
-  predicate?:
-    | ((value: T[keyof T], key: string, obj: T) => unknown)
-    | PropertyKey
-    | [PropertyKey, any]
-    | Partial<T[keyof T]>
-): string | undefined;
+const data = {
+  item1: { priority: 'high', status: 'pending' },
+  item2: { priority: 'low', status: 'done' },
+  item3: { priority: 'high', status: 'done' },
+};
+
+// キー名と値の両方を考慮した検索
+const result = findKey(data, (value, key, obj) => {
+  return key.includes('2') && value.status === 'done';
+});
+console.log(result); // 'item2'
 ```
 
-### 例
+複雑なオブジェクト構造でも使用できます。
 
 ```typescript
-const users = { barney: { age: 36 }, fred: { age: 40 } };
+const products = {
+  laptop: {
+    specs: { ram: 16, cpu: 'Intel i7' },
+    price: 1200,
+    available: true,
+  },
+  phone: {
+    specs: { ram: 8, cpu: 'Snapdragon' },
+    price: 800,
+    available: false,
+  },
+  tablet: {
+    specs: { ram: 12, cpu: 'Apple M1' },
+    price: 1000,
+    available: true,
+  },
+};
 
-findKey(users, o => o.age < 40);
-// => 'barney'
-findKey(users, { age: 36 });
-// => 'barney'
-findKey(users, ['age', 36]);
-// => 'barney'
+const affordableKey = findKey(products, product => product.price < 1000 && product.available);
+console.log(affordableKey); // undefined (条件を満たす製品なし)
 
-const languages = { javascript: { active: false }, typescript: { active: true } };
-findKey(languages, 'active');
-// => 'typescript'
+const highRamKey = findKey(products, product => product.specs.ram >= 12);
+console.log(highRamKey); // 'laptop'
 ```
+
+#### パラメータ
+
+- `obj` (`T extends Record<any, any>`): 検索するオブジェクトです。
+- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 各要素に対して実行する条件関数です。`true`を返す最初の要素のキーを見つけます。
+
+#### 戻り値
+
+(`keyof T | undefined`): 条件を満たす最初の要素のキーです。条件を満たす要素がない場合は`undefined`を返します。

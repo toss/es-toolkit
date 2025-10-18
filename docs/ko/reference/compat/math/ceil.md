@@ -1,32 +1,62 @@
-# ceil
+# ceil (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Math.ceil`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `ceil` 함수는 소수점 자리 계산과 내부 함수 호출로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Math.ceil`을 사용하세요.
+
 :::
 
-숫자를 지정된 자릿수로 올림하는 함수예요.
-
-## 인터페이스
+숫자를 지정된 소수점 자리로 올림해요.
 
 ```typescript
-function ceil(number: number, precision: number = 0): number;
+const result = ceil(number, precision);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `number` (`number`): 반올림할 숫자.
-- `precision` (`number`, 선택 사항): 반올림할 자릿수. 기본값은 0이에요.
+### `ceil(number, precision?)`
 
-### 반환 값
-
-(`number`): 반올림된 숫자.
-
-## 예시
+숫자를 특정 소수점 자리로 올림하고 싶을 때 `ceil`을 사용하세요.
 
 ```typescript
-ceil(4.006); // => 5
-ceil(6.004, 2); // => 6.01
-ceil(6040, -2); // => 6100
+import { ceil } from 'es-toolkit/compat';
+
+// 기본 올림 (정수로)
+ceil(4.006);
+// Returns: 5
+
+ceil(4.1);
+// Returns: 5
+
+// 소수점 둘째 자리로 올림
+ceil(6.004, 2);
+// Returns: 6.01
+
+ceil(6.001, 2);
+// Returns: 6.01
+
+// 음수 자리로 올림 (10의 단위)
+ceil(6040, -2);
+// Returns: 6100
+
+ceil(1234, -2);
+// Returns: 1300
+
+// 음수도 올림
+ceil(-4.1);
+// Returns: -4
+
+ceil(-6.004, 2);
+// Returns: -6.00
 ```
+
+#### 파라미터
+
+- `number` (`number`): 올림할 숫자예요.
+- `precision` (`number`, 선택): 올림할 소수점 자리수예요. 기본값은 `0`이에요.
+
+#### 반환 값
+
+(`number`): 지정된 소수점 자리로 올림된 숫자를 반환해요.

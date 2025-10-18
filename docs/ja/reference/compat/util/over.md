@@ -1,55 +1,71 @@
-# over
+# over (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning 配列メソッドを直接使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`over`関数は、関数を配列にマッピングする過程で追加のオーバーヘッドが発生します。
+
+代わりに、より高速で現代的な配列の`map`メソッドを使用してください。
+
 :::
 
-与えられた関数を呼び出し、その結果を配列として返す関数を作成します。
-
-以下のような様々なタイプのイテレータを使用できます：
-
-- **関数**: 各関数は同じ引数で呼び出され、結果が収集されます。
-- **プロパティ名**: 各プロパティ名は、提供されたオブジェクトから値を抽出するために使用されます。
-- **オブジェクト**: 各オブジェクトは、提供されたオブジェクトがそのプロパティと一致するかを確認するために使用されます。
-- **プロパティ-値ペア**: 各ペアは、提供されたオブジェクトの特定のプロパティが値と一致するかを確認します。
-
-## インターフェース
+与えられた関数に同じ引数を渡してそれぞれの結果を配列として返す関数を作成します。
 
 ```typescript
-function over<T>(
-  ...iteratees: Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>
-): (...args: any[]) => T[];
+const multiCall = over(funcs);
 ```
 
-### パラメータ
+## 参照
 
-- `iteratees` (`Array<((...args: any[]) => T) | ReadonlyArray<(...args: any[]) => T>>`): 呼び出す反復子。
+### `over(...iteratees)`
 
-### 戻り値
-
-(`(...args: any[]) => T[]`): 新しい関数を返します。
-
-## 例
+複数の関数を受け取って同じ引数でそれぞれを呼び出し、結果を配列として返す関数を生成します。同じデータで複数の計算を実行する場合に便利です。
 
 ```typescript
-const func = over([Math.max, Math.min]);
-const func2 = over(Math.max, Math.min);
-func(1, 2, 3, 4);
+import { over } from 'es-toolkit/compat';
+
+// 数学関数を一緒に使用します
+const mathOperations = over([Math.max, Math.min]);
+mathOperations(1, 2, 3, 4);
 // => [4, 1]
-func2(1, 2, 3, 4);
+
+// 個別の関数として渡すこともできます
+const operations = over(Math.max, Math.min);
+operations(1, 2, 3, 4);
 // => [4, 1]
 
-const func = over(['a', 'b']);
-func({ a: 1, b: 2 });
-// => [1, 2]
+// オブジェクトのプロパティを抽出します
+const getProperties = over(['name', 'age']);
+getProperties({ name: 'John', age: 30 });
+// => ['John', 30]
 
-const func = over([{ a: 1 }, { b: 2 }]);
-func({ a: 1, b: 2 });
-// => [true, false]
-
-const func = over([['a', 1], ['b', 2]]);
-func({ a: 1, b: 2 });
+// 条件を検査します
+const validators = over([
+  { name: 'John' }, // オブジェクトマッチング
+  { age: 30 },
+]);
+validators({ name: 'John', age: 30 });
 // => [true, true]
 ```
+
+ネストされたパスも処理できます。
+
+```typescript
+import { over } from 'es-toolkit/compat';
+
+const data = {
+  user: { name: 'John', profile: { age: 30 } },
+  settings: { theme: 'dark' },
+};
+
+const getInfo = over(['user.name', 'user.profile.age', 'settings.theme']);
+getInfo(data);
+// => ['John', 30, 'dark']
+```
+
+#### パラメータ
+
+- `...iteratees` (`Array<Function | string | object | Array>`): 呼び出す関数またはプロパティパスです。配列として渡すか、個別の引数として渡すことができます。
+
+#### 戻り値
+
+(`(...args: any[]) => any[]`): 引数を受け取って各関数の結果を配列として返す関数を返します。

@@ -1,61 +1,107 @@
-# setWith
+# setWith (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 직접 할당을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `setWith` 함수는 내부적으로 `updateWith` 함수를 호출하여 복잡한 경로 처리와 커스터마이저 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 직접 할당이나 구조 분해 할당을 사용하세요.
+
 :::
 
-`customizer` 함수를 사용하여 주어진 객체의 지정된 경로에 값을 설정해요.
-경로의 일부가 존재하지 않으면, `customizer`의 결과에 따라 생성돼요.
-
-[set](./set.md) 함수와 비슷하지만, 중첩된 객체를 생성하기 위한 `customizer`를 설정할 수 있다는 점에서 달라요.
-
-`customizer`는 경로의 객체를 생성하기 위해 호출돼요.
-`customizer`가 값을 반환하면, 그 값이 현재 경로 세그먼트에 사용돼요.
-`customizer`가 `undefined`를 반환하면, 메서드는 경로에 따라 적절한 객체를 생성해요.
-다음 경로 세그먼트가 유효한 배열 인덱스면 배열을, 그렇지 않으면 객체를 생성해요.
-
-## 인터페이스
+커스터마이저 함수로 객체 생성 방식을 제어하면서 지정된 경로에 값을 설정해요.
 
 ```typescript
-function setWith<T extends object>(
-  obj: T,
-  path: PropertyKey | readonly PropertyKey[],
-  value: any,
-  customizer?: (nsValue: any, key: string, nsObject: T) => any
-): T;
+const result = setWith(obj, path, value, customizer);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `obj` (`T`): 값을 설정할 객체.
-- `path` (`PropertyKey | readonly PropertyKey[]`): 값을 설정할 프로퍼티 경로.
-- `value` (`any`): 설정할 값.
-- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, 선택 사항): 경로 생성을 커스터마이즈하는 함수.
+### `setWith(object, path, value, customizer)`
 
-### 반환 값
-
-(`T`): 수정된 객체를 반환해요.
-
-## 예시
+객체의 특정 경로에 값을 설정하되, 중간에 생성되는 객체의 타입을 커스터마이저 함수로 제어하고 싶을 때 `setWith`를 사용하세요. 커스터마이저가 `undefined`를 반환하면 기본 로직(배열 인덱스면 배열, 아니면 객체)이 사용돼요.
 
 ```typescript
 import { setWith } from 'es-toolkit/compat';
-import { isObject } from 'es-toolkit/compat';
 
-// 커스터마이저를 사용하여 중첩된 배열에 값 설정
-const object = {};
-setWith(object, '[0][1][2]', 3, value => (isObject(value) ? undefined : {}));
-console.log(object); // => { '0': { '1': { '2': 3 } } }
+// 기본 사용법 (커스터마이저 없음)
+const obj1 = {};
+setWith(obj1, 'a.b.c', 4);
+console.log(obj1);
+// 결과: { a: { b: { c: 4 } } }
 
-// 배열용 객체를 생성하기 위해 Object를 커스터마이저로 사용
+// 배열 생성을 강제하는 커스터마이저
 const obj2 = {};
-setWith(obj2, 'a[0].b.c', 4, Object);
-console.log(obj2); // => { a: [{ b: { c: 4 } }] }
+setWith(obj2, '[0][1]', 'value', () => []);
+console.log(obj2);
+// 결과: { '0': [undefined, 'value'] }
 
-// 커스터마이저 없이 경로 생성 (set 사용과 동일)
+// 특정 조건에서만 커스터마이징
 const obj3 = {};
-setWith(obj3, 'a.b.c', 4);
-console.log(obj3); // => { a: { b: { c: 4 } } }
+setWith(obj3, 'a[0].b.c', 'nested', (value, key) => {
+  // 숫자 키(배열 인덱스)일 때만 빈 객체 반환
+  return typeof key === 'string' && /^\d+$/.test(key) ? {} : undefined;
+});
+console.log(obj3);
+// 결과: { a: { '0': { b: { c: 'nested' } } } }
+
+// Object 생성자를 커스터마이저로 사용
+const obj4 = {};
+setWith(obj4, 'x[0].y', 42, Object);
+console.log(obj4);
+// 결과: { x: [{ y: 42 }] }
+
+// 복잡한 커스터마이저 로직
+const obj5 = {};
+setWith(obj5, 'data.items[0].props.config', 'value', (value, key, object) => {
+  console.log('Creating:', key, 'in', object);
+
+  // 특정 키에서는 Map 사용
+  if (key === 'props') {
+    return new Map();
+  }
+
+  // 숫자 키면 배열
+  if (typeof key === 'string' && /^\d+$/.test(key)) {
+    return [];
+  }
+
+  // 기본적으로는 일반 객체
+  return {};
+});
+
+// WeakMap을 중간 객체로 사용
+const obj6 = {};
+setWith(obj6, 'cache.user.profile', 'data', (value, key) => {
+  if (key === 'cache') {
+    return new WeakMap();
+  }
+  return undefined; // 기본 동작 사용
+});
 ```
+
+커스터마이저 함수는 세 개의 매개변수를 받아요.
+
+```typescript
+import { setWith } from 'es-toolkit/compat';
+
+const obj = {};
+setWith(obj, 'a.b[0].c', 'value', (nsValue, key, nsObject) => {
+  console.log('nsValue:', nsValue); // 현재 값 (보통 undefined)
+  console.log('key:', key); // 생성할 키
+  console.log('nsObject:', nsObject); // 부모 객체
+
+  // 특정 조건에 따라 다른 객체 타입 반환
+  return key === 'b' ? [] : {};
+});
+```
+
+#### 파라미터
+
+- `object` (`T`): 값을 설정할 객체예요.
+- `path` (`PropertyPath`): 값을 설정할 속성의 경로예요.
+- `value` (`any`): 설정할 값이에요.
+- `customizer` (`(nsValue: any, key: string, nsObject: T) => any`, 선택): 중간 객체 생성을 커스터마이즈하는 함수예요.
+
+#### 반환 값
+
+(`T | R`): 수정된 객체를 반환해요.

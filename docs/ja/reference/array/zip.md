@@ -1,36 +1,42 @@
 # zip
 
-複数の配列を単一のタプルの配列に結合します。
-
-この関数は複数の配列を入力として受け取り、各要素が入力配列の対応する要素を含むタプルである新しい配列を返します。入力配列の長さが異なる場合、結果の配列の長さは最も長い入力配列の長さになり、不足している要素は`undefined`で埋められます。
-
-## インターフェース
+複数の配列を、各配列の同じインデックスの要素をまとめたタプルの配列に変換します。
 
 ```typescript
-function zip<T>(arr1: T[]): [T][];
-function zip<T, U>(arr1: T[], arr2: U[]): [T, U][];
-function zip<T, U, V>(arr1: T[], arr2: U[], arr3: V[]): [T, U, V][];
-function zip<T, U, V, W>(arr1: T[], arr2: U[], arr3: V[], arr4: W[]): [T, U, V, W][];
-function zip<T>(...arrs: T[][]): T[][];
+const zipped = zip(...arrs);
 ```
 
-### パラメータ
+## 参照
 
-- `...arrs` (`T[][]`): 結合する配列です。
+### `zip(...arrs)`
 
-### 戻り値
-
-(`T[][]`): 入力配列の要素を含むタプルからなる新しい配列です。
-
-## 例
+複数の配列の同じ位置にある要素を1つにまとめたい場合は `zip` を使用してください。各配列の同じインデックスにある要素をタプルにまとめて新しい配列を返します。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const arr2 = ['a', 'b', 'c'];
-const result = zip(arr1, arr2);
-// resultは [[1, 'a'], [2, 'b'], [3, 'c']] になります。
+import { zip } from 'es-toolkit/array';
 
-const arr3 = [true, false];
-const result2 = zip(arr1, arr2, arr3);
-// result2は [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]] になります。
+// 2つの配列をまとめます。
+zip([1, 2, 3], ['a', 'b', 'c']);
+// Returns: [[1, 'a'], [2, 'b'], [3, 'c']]
+
+// 3つの配列をまとめます。
+zip([1, 2], ['a', 'b', 'c'], [true, false]);
+// Returns: [[1, 'a', true], [2, 'b', false], [undefined, 'c', undefined]]
 ```
+
+配列の長さが異なる場合、最も長い配列の長さに合わせられます。短い配列の空の位置は `undefined` で埋められます。
+
+```typescript
+import { zip } from 'es-toolkit/array';
+
+zip([1, 2], ['a', 'b', 'c', 'd']);
+// Returns: [[1, 'a'], [2, 'b'], [undefined, 'c'], [undefined, 'd']]
+```
+
+#### パラメータ
+
+- `arrs` (`Array<readonly T[]>`): まとめる配列です。
+
+#### 戻り値
+
+(`T[][]`): 各入力配列の対応するインデックスの要素をタプルにまとめた新しい配列を返します。

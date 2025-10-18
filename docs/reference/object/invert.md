@@ -1,27 +1,83 @@
 # invert
 
-Creates a new object by swapping the keys and values of the given object.
-
-This function takes an object and creates a new object where the keys are the values and the values are the keys of the original object. If there are duplicate values in the input object, the key that appears last will be used as the new key.
-
-## Signature
+Creates a new object with keys and values swapped.
 
 ```typescript
-function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record<K, V>): Record<V, K>;
+const inverted = invert(obj);
 ```
 
-### Parameters
+## Reference
 
-- `obj` (`Record<K, V>`): The object to invert.
+### `invert(obj)`
 
-### Returns
-
-(`Record<V, K>`): A new object with keys and values inverted.
-
-## Examples
+Use `invert` when you want to create a new object with keys and values swapped. The keys of the original object become the values of the new object, and the values of the original object become the keys of the new object. If there are duplicate values, the key that appears later will be used.
 
 ```typescript
-const obj = { a: 1, b: 1, c: 2 };
-const result = invert(obj);
-// result will be { 1: 'b', 2: 'c' }
+import { invert } from 'es-toolkit/object';
+
+// Basic usage
+const original = { a: 1, b: 2, c: 3 };
+const inverted = invert(original);
+console.log(inverted); // { 1: 'a', 2: 'b', 3: 'c' }
+
+// When there are duplicate values
+const withDuplicates = { a: 1, b: 1, c: 2 };
+const result = invert(withDuplicates);
+console.log(result); // { 1: 'b', 2: 'c' } (later appearing 'b' is used as the value for key 1)
+
+// String keys and number values
+const grades = { alice: 85, bob: 92, charlie: 88 };
+const invertedGrades = invert(grades);
+console.log(invertedGrades); // { 85: 'alice', 92: 'bob', 88: 'charlie' }
 ```
+
+Can be used with various types of keys and values.
+
+```typescript
+// Number keys and string values
+const statusCodes = { 200: 'OK', 404: 'Not Found', 500: 'Internal Server Error' };
+const invertedCodes = invert(statusCodes);
+console.log(invertedCodes);
+// { 'OK': '200', 'Not Found': '404', 'Internal Server Error': '500' }
+
+// Useful when reverse lookup is needed
+const userRoles = { admin: 'administrator', user: 'regular_user', guest: 'visitor' };
+const roleToKey = invert(userRoles);
+console.log(roleToKey);
+// { 'administrator': 'admin', 'regular_user': 'user', 'visitor': 'guest' }
+
+// Now you can find keys by values
+function findRoleKey(roleName: string) {
+  return roleToKey[roleName];
+}
+console.log(findRoleKey('administrator')); // 'admin'
+```
+
+Useful when used with enums or constant objects.
+
+```typescript
+// Color code mapping
+const colorCodes = {
+  red: '#FF0000',
+  green: '#00FF00',
+  blue: '#0000FF',
+};
+
+const codeToColor = invert(colorCodes);
+console.log(codeToColor);
+// { '#FF0000': 'red', '#00FF00': 'green', '#0000FF': 'blue' }
+
+// Now you can find color names by color codes
+function getColorName(code: string) {
+  return codeToColor[code] || 'unknown';
+}
+console.log(getColorName('#FF0000')); // 'red'
+```
+
+#### Parameters
+
+- `obj` (`Record<K, V>`): The object to swap keys and values. Both keys and values must be strings, numbers, or symbols.
+
+#### Returns
+
+(`Record<V, K>`): A new object with the keys and values of the original object swapped.

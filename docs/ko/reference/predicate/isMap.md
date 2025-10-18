@@ -1,33 +1,48 @@
 # isMap
 
-주어진 값이 `Map`의 인스턴스인지 확인해요.
-
-값이 `Map`이면 `true`, 아니면 `false`를 반환해요.
-
-TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 `Map`인 타입으로 좁힐 수 있어요.
-
-## 인터페이스
+값이 Map인지 확인해요.
 
 ```typescript
-function isMap(value: unknown): value is Map<any, any>;
+const result = isMap(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): `Map`인지 확인할 값.
+### `isMap(value)`
 
-### 반환 값
-
-(`value is Map<any, any>`): 값이 `Map`이면 `true`, 아니면 `false`.
-
-## 예시
+값이 Map 인스턴스인지 확인하고 싶을 때 `isMap`을 사용하세요. `instanceof` 연산자를 사용해서 `Map`인지 검사해요.
 
 ```typescript
-const value1 = new Map();
-const value2 = new Set();
-const value3 = new WeakMap();
+import { isMap } from 'es-toolkit/predicate';
 
-console.log(isMap(value1)); // true
-console.log(isMap(value2)); // false
-console.log(isMap(value3)); // false
+// Map 인스턴스
+const map = new Map([['key', 'value']]);
+console.log(isMap(map)); // true
+
+// Map이 아닌 값들
+console.log(isMap(new Set())); // false
+console.log(isMap(new WeakMap())); // false
+console.log(isMap({})); // false
+console.log(isMap([])); // false
+console.log(isMap(null)); // false
 ```
+
+TypeScript에서 타입 가드로도 사용할 수 있어요.
+
+```typescript
+function processValue(value: unknown) {
+  if (isMap(value)) {
+    // 이제 value는 Map<any, any> 타입으로 좁혀져요
+    console.log(value.size);
+    value.set('new-key', 'new-value');
+  }
+}
+```
+
+#### 파라미터
+
+- `value` (`unknown`): `Map`인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is Map<any, any>`): 값이 Map이면 `true`, 그렇지 않으면 `false`를 반환해요.

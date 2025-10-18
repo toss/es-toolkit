@@ -1,34 +1,41 @@
 # isWeakSet
 
-Checks if the given value is a `WeakSet`.
-
-This function tests whether the provided value is an instance of `WeakSet`.
-It returns `true` if the value is a `WeakSet`, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `WeakSet`.
-
-## Signature
+Checks if a given value is a `WeakSet` instance.
 
 ```typescript
-function isWeakSet(value: unknown): value is WeakSet<WeakKey>;
+const result = isWeakSet(value);
 ```
 
-### Parameters
+## Reference
 
-`value` (`unknown`): The value to test if it is a `WeakSet`.
+### `isWeakSet(value)`
 
-### Returns
-
-(`value is WeakSet<WeakKey>`): true if the value is a `WeakSet`, false otherwise.
-
-## Examples
+Use `isWeakSet` when you want to check if a value is a WeakSet instance.
 
 ```typescript
-const value1 = new WeakSet();
-const value2 = new Map();
-const value3 = new Set();
+import { isWeakSet } from 'es-toolkit/predicate';
 
-console.log(isWeakSet(value1)); // true
-console.log(isWeakSet(value2)); // false
-console.log(isWeakSet(value3)); // false
+// WeakSet instances
+const weakSet1 = new WeakSet();
+const weakSet2 = new WeakSet([{}, []]);
+
+console.log(isWeakSet(weakSet1)); // true
+console.log(isWeakSet(weakSet2)); // true
+
+// Non-WeakSet values
+console.log(isWeakSet(new Set())); // false
+console.log(isWeakSet(new Map())); // false
+console.log(isWeakSet(new WeakMap())); // false
+console.log(isWeakSet([])); // false
+console.log(isWeakSet({})); // false
+console.log(isWeakSet(null)); // false
+console.log(isWeakSet(undefined)); // false
 ```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's a WeakSet instance.
+
+#### Returns
+
+(`value is WeakSet<WeakKey>`): Returns `true` if the value is a WeakSet instance, `false` otherwise.

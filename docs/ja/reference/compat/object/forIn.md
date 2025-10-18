@@ -1,69 +1,71 @@
-# forIn
+# forIn (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.keys` と `for...in` ループを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `forIn` 関数は、`null` や `undefined` の処理、デフォルトの `iteratee` 設定などにより、動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.keys` と `for...in` ループを使用してください。
+
 :::
 
-オブジェクトを反復処理し、各プロパティに対して `iteratee` 関数を呼び出します。
-
-継承されたプロパティを含む、文字列キーのプロパティを反復処理します。
-
-`iteratee` 関数が `false` を返すと、反復処理は早期に終了します。
-
-## インターフェース
+オブジェクトのすべてのプロパティ(継承されたプロパティを含む)を反復処理し、各プロパティに対して関数を呼び出します。
 
 ```typescript
-function forIn<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
-function forIn<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forIn(obj, iteratee);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`T | null | undefined`): 反復処理するオブジェクト
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 各反復で呼び出される関数。デフォルトは `identity` 関数
+### `forIn(object, iteratee)`
 
-### 戻り値
-
-(`T | null | undefined`): `object` を返します
-
-## 例
+オブジェクトのすべてのプロパティを反復処理し、`iteratee` 関数を呼び出します。オブジェクトの固有プロパティだけでなく、プロトタイプチェーンを通じて継承されたプロパティもすべて反復処理します。`iteratee` 関数が `false` を返すと、反復処理を停止します。
 
 ```typescript
 import { forIn } from 'es-toolkit/compat';
 
-function Shape() {
-  this.x = 0;
-  this.y = 0;
+// オブジェクトのすべてのプロパティを反復処理
+const obj = { a: 1, b: 2 };
+forIn(obj, (value, key) => {
+  console.log(key, value);
+});
+// 出力: 'a' 1, 'b' 2
+
+// 継承されたプロパティも含めて反復処理
+function Parent() {
+  this.inherited = 'value';
 }
+Parent.prototype.protoProperty = 'proto';
 
-Shape.prototype.move = function (x, y) {
-  this.x += x;
-  this.y += y;
-};
+const child = new Parent();
+child.own = 'ownValue';
 
-// Shapeのインスタンスを作成
-const square = new Shape();
-
-// すべての列挙可能なプロパティ（継承されたプロパティを含む）に対して反復処理
-forIn(square, function (value, key) {
+forIn(child, (value, key) => {
   console.log(key, value);
 });
-// 出力:
-// 'x', 0
-// 'y', 0
-// 'move', [Function]
+// 出力: 'inherited' 'value', 'own' 'ownValue', 'protoProperty' 'proto'
 
-// iteratee関数がfalseを返すと、反復処理は早期に終了
-forIn(square, function (value, key) {
+// 条件による早期終了
+forIn(obj, (value, key) => {
   console.log(key, value);
-  return key !== 'y'; // 'y'で停止
+  return key !== 'a'; // 'a' の後で停止
 });
-// 出力:
-// 'x', 0
-// 'y', 0
+// 出力: 'a' 1
 ```
+
+`null` または `undefined` はそのまま返されます。
+
+```typescript
+import { forIn } from 'es-toolkit/compat';
+
+forIn(null, iteratee); // null
+forIn(undefined, iteratee); // undefined
+```
+
+#### パラメータ
+
+- `object` (`T | null | undefined`): 反復処理するオブジェクトです。
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, オプション): 各プロパティに対して呼び出す関数です。デフォルトは `identity` 関数です。
+
+#### 戻り値
+
+(`T | null | undefined`): 元のオブジェクトを返します。

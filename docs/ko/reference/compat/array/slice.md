@@ -1,44 +1,76 @@
-# slice
+# slice (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.slice`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
+이 `slice` 함수는 `null`이나 `undefined` 처리와 희소 배열의 특별한 처리로 인해 느리게 동작해요. JavaScript의 기본 `Array.prototype.slice` 메소드는 더 빠르고 표준화되어 있어요.
 
-인덱스 `start`부터 인덱스 `end`까지 `array`의 부분 배열을 만들어요. 부분 배열에서 `end`는 포함하지 않아요.
-
-기본 `Array.prototype.slice`와 다르게, 희소 배열(Sparse array)에 대해 밀집 배열(Dense array)을 반환하지 않아요.
-
-## 인터페이스
-
-```typescript
-function slice<T>(array: T[], start?: number, end?: number): T[];
-```
-
-### 파라미터
-
-- `array` (`T[]`): 부분 배열을 만들 배열.
-
-::: info `array`는 `ArrayLike<T>`, `null`, 또는 `undefined`가 될 수 있어요.
-
-lodash와 완전한 호환성을 보장하기 위해, `slice` 함수는 `array`를 다음과 같이 처리해요.
-
-- `array`가 `ArrayLike<T>`인 경우, `Array.from(...)`을 사용하여 배열로 변환돼요.
-- `array`가 `null` 또는 `undefined`인 경우, 빈 배열로 처리돼요.
+대신 더 빠르고 현대적인 `Array.prototype.slice`를 사용하세요.
 
 :::
 
-- `start` (`number`): 시작 위치. 기본값은 `0`이에요.
-- `end` (`number`): 끝 위치. 기본값은 `array.length`예요.
-
-### 반환 값
-
-(`T[]`): `array`의 `start`부터 `end`까지의 부분 배열.
-
-## 예시
+배열의 일부분을 잘라서 새로운 배열을 만들어요.
 
 ```typescript
-slice([1, 2, 3], 1, 2); // => [2]
-slice(new Array(3)); // => [undefined, undefined, undefined]
+const sliced = slice(array, start, end);
 ```
+
+## 레퍼런스
+
+### `slice(array, start, end)`
+
+배열의 특정 부분만 필요할 때 `slice`를 사용하세요. 시작 위치부터 끝 위치 바로 전까지의 요소들을 포함하는 새 배열을 만들어요.
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+// 인덱스 1부터 2까지 자르기
+slice([1, 2, 3, 4], 1, 3);
+// Returns: [2, 3]
+
+// 음수 인덱스 사용
+slice([1, 2, 3, 4], -2);
+// Returns: [3, 4]
+
+// 시작 위치만 지정
+slice([1, 2, 3, 4], 2);
+// Returns: [3, 4]
+```
+
+`null`이나 `undefined`는 빈 배열로 처리해요.
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+slice(null); // []
+slice(undefined); // []
+```
+
+희소 배열을 처리할 때 빈 슬롯을 `undefined`로 채워요.
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+const sparse = new Array(3);
+sparse[1] = 'b';
+slice(sparse);
+// Returns: [undefined, 'b', undefined]
+```
+
+음수 인덱스를 사용하면 배열의 끝에서부터 계산해요.
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+slice([1, 2, 3, 4, 5], -3, -1);
+// Returns: [3, 4]
+```
+
+#### 파라미터
+
+- `array` (`ArrayLike<T> | null | undefined`): 자를 배열이에요.
+- `start` (`number`, 선택): 시작 위치예요. 음수 값은 끝에서부터 계산해요. 기본값은 `0`이에요.
+- `end` (`number`, 선택): 끝 위치예요 (포함하지 않음). 음수 값은 끝에서부터 계산해요. 기본값은 배열의 길이예요.
+
+#### 반환 값
+
+(`T[]`): `start`부터 `end` 바로 전까지의 요소들을 포함하는 새로운 배열을 반환해요.

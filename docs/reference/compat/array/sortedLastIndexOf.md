@@ -1,57 +1,60 @@
-# sortedLastIndexOf
+# sortedLastIndexOf (Lodash compatibility)
 
-::: info
-This function can only be imported from `es-toolkit/compat` for compatibility reasons. This is because there are native JavaScript APIs that can replace it, or it hasn't been sufficiently optimized yet.
+::: warning Implement binary search directly
 
-When you import this function from `es-toolkit/compat` , it [behaves exactly the same as lodash](../../../compatibility.md).
-:::
+This `sortedLastIndexOf` function operates slowly due to complex binary search handling and type validation.
 
-Finds the index of the last occurrence of a value in a sorted array, similar to how `Array#lastIndexOf` works, but specifically for sorted arrays.
-
-::: warning Ensure the array is sorted
-
-It's important to provide a sorted array to this function because it uses a binary search to quickly find the index.
+Instead, implement faster, more modern binary search directly or use `Array.prototype.lastIndexOf()`.
 
 :::
 
-## Interface
+Finds the index where a value last appears in a sorted array.
 
 ```typescript
-export function sortedLastIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedLastIndexOf(array, value);
 ```
 
-### Parameters
+## Reference
 
-- `array` (`ArrayLike<T> | null | undefined`): A sorted array. If the array is null or undefined, it returns -1.
-- `value` (`T`): The value to search for in the sorted array through comparison.
+### `sortedLastIndexOf(array, value)`
 
-### Returns
-
-( `number` ): Returns the index of the last matched value, else -1.
-
-## Examples
+Use `sortedLastIndexOf` to find the index where a specific value last appears in a sorted array. It uses binary search to find the value quickly.
 
 ```typescript
 import { sortedLastIndexOf } from 'es-toolkit/compat';
 
-const numbers = [1, 2, 3, 4, 5];
-sortedLastIndexOf(numbers, 3); // Return value: 2
-sortedLastIndexOf(numbers, 6); // Return value: -1
+// Find value in number array
+sortedLastIndexOf([1, 2, 3, 4, 5], 3);
+// Returns 2
 
-// If the value is duplicated, it returns the last index of the value.
-const duplicateNumbers = [1, 2, 2, 3, 3, 3, 4];
-sortedLastIndexOf(duplicateNumbers, 3); // Return value: 5
+// When value doesn't exist
+sortedLastIndexOf([1, 2, 3, 4, 5], 6);
+// Returns -1
 
-// If the array is unsorted, it can return the wrong index.
-const unSortedArray = [55, 33, 22, 11, 44];
-sortedLastIndexOf(unSortedArray, 11); // Return value: -1
+// When duplicate values exist, returns the last index
+sortedLastIndexOf([1, 2, 2, 3, 3, 3, 4], 3);
+// Returns 5 (position of the last 3)
 
-// -0 and 0 are treated the same
-const mixedZeroArray = [-0, 0];
-sortedLastIndexOf(mixedZeroArray, 0); // Return value: 1
-sortedLastIndexOf(mixedZeroArray, -0); // Return value: 1
-
-// It works with array-like objects
-const arrayLike = { length: 3, 0: 10, 1: 20, 2: 20 };
-sortedLastIndexOf(arrayLike, 20); // Return value: 2
+// 0 and -0 are treated as equal
+sortedLastIndexOf([-0, 0], 0);
+// Returns 1
 ```
+
+Empty arrays, `null`, or `undefined` return -1.
+
+```typescript
+import { sortedLastIndexOf } from 'es-toolkit/compat';
+
+sortedLastIndexOf([], 1); // -1
+sortedLastIndexOf(null, 1); // -1
+sortedLastIndexOf(undefined, 1); // -1
+```
+
+#### Parameters
+
+- `array` (`ArrayLike<T> | null | undefined`): The sorted array. Using an unsorted array can produce incorrect results.
+- `value` (`T`): The value to find.
+
+#### Returns
+
+(`number`): Returns the index where the value last appears. If the value doesn't exist, returns -1.

@@ -1,40 +1,50 @@
-# isArrayLikeObject
+# isArrayLikeObject (Lodash 兼容性)
 
-::: info
-
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-
-:::
-
-检查一个值是否是非原始的、类似数组的对象。
-
-类似数组的对象是一个既不是 `null` 或 `undefined` 也不是函数，并且具有有效 `length` 属性的对象。
-
-这个函数也可以作为 TypeScript 中的类型谓词，将参数的类型缩小为 `ArrayLike<unknown> & object`。
-
-## 签名
+检查值是否为非原始值的类数组对象。
 
 ```typescript
-function isArrayLikeObject(value?: unknown): value is ArrayLike<unknown> & object;
+const result = isArrayLikeObject(value);
 ```
 
-### 参数
+## 参考
 
-- `value` (`unknown`): 要检查是否为非原始的、类似数组的对象的值。
+### `isArrayLikeObject(value)`
 
-### 返回值
-
-(`value is ArrayLike<unknown> & object`): 如果值是非原始的、类似数组的对象，则返回 true，否则返回 false。
-
-## 示例
+当您需要检查给定值是否为非原始值的类数组对象时，请使用 `isArrayLikeObject`。数组、arguments 对象、NodeList 等属于此类，但字符串由于是原始值而被排除。
 
 ```typescript
 import { isArrayLikeObject } from 'es-toolkit/compat';
 
-console.log(isArrayLikeObject([1, 2, 3])); // true
-console.log(isArrayLikeObject({ 0: 'a', length: 1 })); // true
-console.log(isArrayLikeObject('abc')); // false
-console.log(isArrayLikeObject(() => {})); // false
+// 类数组对象（非原始值）
+isArrayLikeObject([1, 2, 3]); // true
+isArrayLikeObject({ 0: 'a', 1: 'b', length: 2 }); // true
+isArrayLikeObject({ length: 0 }); // true
+
+// arguments 对象
+function example() {
+  return isArrayLikeObject(arguments); // true
+}
+
+// NodeList 或 HTMLCollection（在浏览器中）
+isArrayLikeObject(document.querySelectorAll('div')); // true
+
+// 原始值返回 false（包括字符串）
+isArrayLikeObject('abc'); // false
+isArrayLikeObject(''); // false
+isArrayLikeObject(123); // false
+isArrayLikeObject(true); // false
+
+// 其他对象
+isArrayLikeObject({}); // false
+isArrayLikeObject(null); // false
+isArrayLikeObject(undefined); // false
+isArrayLikeObject(() => {}); // false
 ```
+
+#### 参数
+
+- `value` (`any`): 要检查的值。
+
+#### 返回值
+
+(`boolean`): 如果值是非原始值的类数组对象则返回 `true`，否则返回 `false`。

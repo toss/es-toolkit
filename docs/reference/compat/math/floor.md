@@ -1,36 +1,62 @@
-# floor
+# floor (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Math.floor`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `floor` function operates slowly due to decimal place calculations and internal function calls.
+
+Use the faster and more modern `Math.floor` instead.
+
 :::
 
-Computes number rounded down to precision.
-
-This function takes a number and an optional precision value, and returns the number rounded down to the specified number of decimal places.
-
-## Signature
+Rounds a number down to the specified decimal places.
 
 ```typescript
-function floor(number: number, precision: number = 0): number;
+const result = floor(number, precision);
 ```
 
-### Parameters
+## Reference
 
-- `number` (`number`): The number to round down.
-- `precision` (`number`, Optional): The precision to round down to, defaults to `0`.
+### `floor(number, precision?)`
 
-### Returns
-
-(`number`): The rounded down number.
-
-### Example
+Use `floor` when you want to round a number down to a specific decimal place.
 
 ```typescript
 import { floor } from 'es-toolkit/compat';
 
-floor(4.006); // => 4
-floor(0.046, 2); // => 0.04
-floor(4060, -2); // => 4000
+// Basic floor (to integer)
+floor(4.9);
+// Returns: 4
+
+floor(4.1);
+// Returns: 4
+
+// Floor to 2 decimal places
+floor(6.994, 2);
+// Returns: 6.99
+
+floor(6.999, 2);
+// Returns: 6.99
+
+// Floor with negative precision (units of 10)
+floor(6040, -2);
+// Returns: 6000
+
+floor(1234, -2);
+// Returns: 1200
+
+// Negative numbers are also floored
+floor(-4.1);
+// Returns: -5
+
+floor(-6.994, 2);
+// Returns: -7.00
 ```
+
+#### Parameters
+
+- `number` (`number`): The number to round down.
+- `precision` (`number`, optional): The number of decimal places to round down to. Defaults to `0`.
+
+#### Returns
+
+(`number`): Returns the number rounded down to the specified decimal places.

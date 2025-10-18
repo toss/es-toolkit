@@ -1,45 +1,44 @@
 # isTypedArray
 
-값이 [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray)인지 확인해요.
-
-## 인터페이스
+주어진 값이 `TypedArray` 인스턴스인지 확인해요.
 
 ```typescript
-function isTypedArray(
-  x: unknown
-): x is
-  | Uint8Array
-  | Uint8ClampedArray
-  | Uint16Array
-  | Uint32Array
-  | BigUint64Array
-  | Int8Array
-  | Int16Array
-  | Int32Array
-  | BigInt64Array
-  | Float32Array
-  | Float64Array;
+const result = isTypedArray(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `x` (`unknown`): 확인할 값.
+### `isTypedArray(value)`
 
-### 반환 값
-
-(`x is Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | BigUint64Array | Int8Array | Int16Array | Int32Array | BigInt64Array | Float32Array | Float64Array`): 값이 TypedArray이면 `true`, 아니면 `false`.
-
-## 예시
+값이 [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) 인스턴스인지 확인하고 싶을 때 `isTypedArray`를 사용하세요.
 
 ```typescript
 import { isTypedArray } from 'es-toolkit/predicate';
 
-const arr = new Uint8Array([1, 2, 3]);
-isTypedArray(arr); // true
+// TypedArray 인스턴스들
+const uint8 = new Uint8Array([1, 2, 3]);
+const int16 = new Int16Array([1000, 2000]);
+const float32 = new Float32Array([1.5, 2.5]);
+const bigUint64 = new BigUint64Array([1n, 2n]);
 
-const regularArray = [1, 2, 3];
-isTypedArray(regularArray); // false
+console.log(isTypedArray(uint8)); // true
+console.log(isTypedArray(int16)); // true
+console.log(isTypedArray(float32)); // true
+console.log(isTypedArray(bigUint64)); // true
 
-const buffer = new ArrayBuffer(16);
-isTypedArray(buffer); // false
+// TypedArray가 아닌 값들
+console.log(isTypedArray([1, 2, 3])); // false (일반 배열)
+console.log(isTypedArray(new ArrayBuffer(8))); // false (ArrayBuffer)
+console.log(isTypedArray(new DataView(new ArrayBuffer(8)))); // false (DataView)
+console.log(isTypedArray({})); // false
+console.log(isTypedArray(null)); // false
+console.log(isTypedArray(undefined)); // false
 ```
+
+#### 파라미터
+
+- `value` (`unknown`): TypedArray 인스턴스인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | BigUint64Array | Int8Array | Int16Array | Int32Array | BigInt64Array | Float32Array | Float64Array`): 값이 TypedArray 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.

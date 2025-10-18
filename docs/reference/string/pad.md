@@ -1,34 +1,54 @@
 # pad
 
-Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length.
-
-If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged.
-
-## Signature
+Pads a string on both sides to reach a specified length.
 
 ```typescript
-function pad(str: string, length: number, chars = ' '): string;
+const padded = pad(str, length, chars);
 ```
 
-### Parameters
+## Reference
 
-- `str` (`string`): The string to pad.
-- `length` (`number`): The length of the resulting string.
-- `char` (`string`): The character to pad the string with. Defaults to `' '`.
+### `pad(str, length, chars?)`
 
-### Returns
+Use `pad` when you want to pad both sides of a string with characters to match a specified length when the string is shorter than the target length. If the padding cannot be evenly distributed on both sides, the right side will have one more character.
 
-(`string`): Returns the padded string.
+```typescript
+import { pad } from 'es-toolkit/string';
 
-## Example
-
-```javascript
+// Padding with default whitespace
 pad('abc', 8);
 // => '  abc   '
 
+// Padding with custom characters
 pad('abc', 8, '_-');
 // => '_-abc_-_'
 
+// When the string is already longer than or equal to the target length
 pad('abc', 3);
 // => 'abc'
+
+pad('abcdef', 3);
+// => 'abcdef'
 ```
+
+When padding characters cannot be evenly distributed to the target length, the right side will be longer.
+
+```typescript
+import { pad } from 'es-toolkit/string';
+
+pad('abc', 9, '123');
+// => '123abc123' (left 3 characters, right 3 characters)
+
+pad('abc', 10, '123');
+// => '123abc1231' (left 3 characters, right 4 characters)
+```
+
+#### Parameters
+
+- `str` (`string`): The string to pad.
+- `length` (`number`): The target length.
+- `chars` (`string`, optional): The characters to use for padding. Defaults to `' '`.
+
+#### Returns
+
+(`string`): Returns the padded string.

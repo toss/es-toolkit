@@ -2,29 +2,51 @@
 
 Converts a string to snake case.
 
-Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (\_) character. For example, `snake_case`.
-
-## Signature
-
 ```typescript
-function snakeCase(str: string): string;
+const converted = snakeCase(str);
 ```
 
-### Parameters
+## Reference
 
-- `str` (`string`): The string that is to be changed to snake case.
+### `snakeCase(str)`
 
-### Returns
-
-(`string`) The converted string to snake case.
-
-## Examples
+Use `snakeCase` when you want to convert a string to snake case. Snake case is a naming convention where each word is written in lowercase and words are connected with underscores (\_).
 
 ```typescript
 import { snakeCase } from 'es-toolkit/string';
 
-snakeCase('camelCase'); // returns 'camel_case'
-snakeCase('some whitespace'); // returns 'some_whitespace'
-snakeCase('hyphen-text'); // returns 'hyphen_text'
-snakeCase('HTTPRequest'); // returns 'http_request'
+// Basic usage
+snakeCase('camelCase'); // 'camel_case'
+snakeCase('some whitespace'); // 'some_whitespace'
+
+// Words connected with hyphens or other separators
+snakeCase('hyphen-text'); // 'hyphen_text'
+snakeCase('PascalCase'); // 'pascal_case'
+
+// Handling consecutive uppercase letters
+snakeCase('HTTPRequest'); // 'http_request'
+snakeCase('XMLHttpRequest'); // 'xml_http_request'
 ```
+
+It also correctly handles strings with various separators.
+
+```typescript
+import { snakeCase } from 'es-toolkit/string';
+
+// Mixed separators
+snakeCase('camelCase-with_mixed.separators'); // 'camel_case_with_mixed_separators'
+
+// With numbers
+snakeCase('version2.1.0'); // 'version_2_1_0'
+
+// With special characters
+snakeCase('user@email.com'); // 'user_email_com'
+```
+
+#### Parameters
+
+- `str` (`string`): The string to convert to snake case.
+
+#### Returns
+
+(`string`): Returns a new string converted to snake case.

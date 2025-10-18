@@ -1,74 +1,60 @@
-# reduceRight
+# reduceRight (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.prototype.reduceRight` 或 `Object.values` 与 `reduceRight`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `reduceRight` 函数由于复杂的类型处理和支持各种输入格式而运行较慢。
+
+请改用更快、更现代的 `Array.prototype.reduceRight` 方法,或对于对象,将 `reduceRight` 与 `Object.values` 一起使用。
+
 :::
 
-使用迭代函数将数组或对象减少为单个值。[reduce](./reduce.md)与之不同的是，它是从右侧开始的。
-
-`reduceRight()` 函数遍历数组中的每个元素或对象的值，并逐个应用一个特殊函数（称为“reducer”）。
-此函数使用上一步的结果和当前元素来执行计算。
-遍历所有元素后，该函数会给出一个最终结果。
-
-当 `reduceRight()` 函数开始时，没有可用的上一步结果。
-如果提供了初始值，则从该值开始。
-如果没有，则使用数组的第一个元素或对象的第一个值，并从第二个元素或值开始计算。
-
-## 签名
+通过从右到左迭代将数组或对象归约为单个值。
 
 ```typescript
-function reduceRight<T, U>(
-  collection: T[],
-  iteratee: (accumulator: U, value: T, index: number, collection: T[]) => U,
-  initialValue: U
-): U;
-function reduceRight<T>(collection: T[], iteratee: (accumulator: T, value: T, index: number, collection: T[]) => T): T;
-
-function reduceRight<T, U>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: U, value: T, index: number, collection: ArrayLike<T>) => U,
-  initialValue: U
-): U;
-function reduceRight<T>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: T, value: T, index: number, collection: ArrayLike<T>) => T
-): T;
-
-function reduceRight<T extends object, U>(
-  collection: T,
-  iteratee: (accumulator: U, value: T[keyof T], key: keyof T, collection: T) => U,
-  initialValue: U
-): U;
-function reduceRight<T extends object>(
-  collection: T,
-  iteratee: (accumulator: T[keyof T], value: T[keyof T], key: keyof T, collection: T) => T[keyof T]
-): T[keyof T];
+const result = reduceRight(collection, iteratee, initialValue);
 ```
 
-### 参数
+## 参考
 
-- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): 要迭代的集合。
-- `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 每次迭代时调用的函数。
-- `initialValue` (`U`, 可选): 初始值。
+### `reduceRight(collection, iteratee, initialValue)`
 
-### 返回值
-
-(`U`): 返回累积值。 如果未提供 `initialValue`，则返回集合的元素类型（`T`）。
-
-## 示例
+从右到左遍历数组或对象的所有元素以计算累积值。如果提供初始值,则从该值开始;否则从最后一个元素开始。
 
 ```typescript
-// Using a reducer function
-const array = [1, 2, 3];
-reduceRight(array, (acc, value) => acc + value, 0); // => 6
+import { reduceRight } from 'es-toolkit/compat';
 
-// Using a reducer function with initialValue
-const array = [1, 2, 3];
-reduceRight(array, (acc, value) => acc + value % 2 === 0, true); // => false
+// 将数组连接成字符串(从右侧)
+const letters = ['a', 'b', 'c', 'd'];
+const result = reduceRight(letters, (acc, value) => acc + value, '');
+console.log(result); // 'dcba'
 
-// Using an object as the collection
-const obj = { a: 1, b: 2, c: 3 };
-reduceRight(obj, (acc, value) => acc + value, 0); // => 6
+// 对象值的乘法(键顺序的逆序)
+const numbers = { x: 2, y: 3, z: 4 };
+const product = reduceRight(numbers, (acc, value) => acc * value, 1);
+console.log(product); // 24 (1 * 4 * 3 * 2)
 ```
+
+如果不提供初始值,最后一个元素将成为初始值,并从倒数第二个元素开始迭代。
+
+```typescript
+import { reduceRight } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4];
+const sum = reduceRight(numbers, (acc, value) => acc + value);
+console.log(sum); // 10 (4 + 3 + 2 + 1)
+
+// 空数组返回 undefined
+const empty = [];
+const result = reduceRight(empty, (acc, value) => acc + value);
+console.log(result); // undefined
+```
+
+#### 参数
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 要迭代的数组或对象。
+- `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 对每个元素调用的函数。它接收累积值、当前值、索引/键和原始数组/对象。
+- `initialValue` (`any`, 可选): 累加器的初始值。如果未提供,最后一个元素将成为初始值。
+
+#### 返回值
+
+(`any`): 返回处理所有元素后的最终累积值。

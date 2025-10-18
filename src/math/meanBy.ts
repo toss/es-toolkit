@@ -1,4 +1,4 @@
-import { mean } from './mean.ts';
+import { sumBy } from './sumBy';
 
 /**
  * Calculates the average of an array of numbers when applying
@@ -16,7 +16,5 @@ import { mean } from './mean.ts';
  * meanBy([], x => x.a); // Returns: NaN
  */
 export function meanBy<T>(items: readonly T[], getValue: (element: T) => number): number {
-  const nums = items.map(x => getValue(x));
-
-  return mean(nums);
+  return sumBy(items, item => getValue(item)) / items.length;
 }

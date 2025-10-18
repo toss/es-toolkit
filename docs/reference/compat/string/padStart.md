@@ -1,36 +1,59 @@
-# padStart
+# padStart (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use JavaScript's `String.prototype.padStart`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `padStart` function operates slower due to handling non-string values.
+
+Instead, use the faster and more modern JavaScript's `String.prototype.padStart`.
+
 :::
 
-Pads the start of a string with a given character until it reaches the specified length.
-
-If the length is less than or equal to the original string's length, or if the padding character is an empty string,
-the original string is returned unchanged.
-
-## Signature
+Pads the start of a string to extend it to the specified length.
 
 ```typescript
-function padStart(str?: string, length = 0, chars = ' '): string;
+const padded = padStart(str, length, chars);
 ```
 
-### Parameters
+## Reference
 
-- `str` (`string`): The string to pad.
-- `length` (`number`): The length of the resulting string. Defaults to `0`.
-- `char` (`string`): The character to pad the string with. Defaults to `' '`.
+### `padStart(str, length?, chars?)`
 
-### Returns
+Use `padStart` when you want to pad the start of a string to match a desired length.
 
-(`string`): Returns a new string padded with the specified character until it reaches the specified length.
+```typescript
+import { padStart } from 'es-toolkit/compat';
 
-## Examples
+// Pad with spaces
+padStart('abc', 6);
+// Returns: '   abc'
 
-```javascript
-padStart('hello', 10, 'a'); // 'aaaaahello'
-padStart('hello', 3, 'a'); // 'hello'
-padStart('hello', 5, ''); // 'hello'
+// Pad with specific characters
+padStart('abc', 6, '_-');
+// Returns: '_-_abc'
+
+// Return as is if original length is longer
+padStart('abc', 3);
+// Returns: 'abc'
 ```
+
+`null` or `undefined` are treated as empty strings.
+
+```typescript
+import { padStart } from 'es-toolkit/compat';
+
+padStart(null, 5, '*');
+// Returns: '*****'
+
+padStart(undefined, 3);
+// Returns: '   '
+```
+
+#### Parameters
+
+- `str` (`string`, optional): The string to add padding to.
+- `length` (`number`, optional): The desired final string length. Defaults to `0`.
+- `chars` (`string`, optional): The character to use for padding. Defaults to `' '` (space).
+
+#### Returns
+
+(`string`): Returns the string with padding added to the start.
