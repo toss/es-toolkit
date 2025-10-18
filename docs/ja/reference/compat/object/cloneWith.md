@@ -31,19 +31,23 @@ const cloned = cloneWith(obj);
 // 数値の変換
 const obj2 = { a: 1, b: 2, c: 'text' };
 const cloned2 = cloneWith(obj2, value => {
-  if (typeof value === 'number') {
-    return value * 2;
+  const obj = {};
+  for (const key in value) {
+    const val = value[key];
+    if (typeof val === 'number') {
+      obj[key] = val * 2;
+    } else {
+      obj[key] = val;
+    }
   }
-  // undefinedを返すとデフォルトのコピー動作を使用
+  return obj;
 });
 // Returns: { a: 2, b: 4, c: 'text' }
 
 // 配列要素の変換
 const arr = [1, 2, 3];
 const clonedArr = cloneWith(arr, value => {
-  if (typeof value === 'number') {
-    return value + 10;
-  }
+  return value.map(x => x + 10);
 });
 // Returns: [11, 12, 13]
 
@@ -54,14 +58,18 @@ const complex = {
   text: 'hello',
 };
 const clonedComplex = cloneWith(complex, value => {
-  if (value instanceof Date) {
-    // DateをISO文字列に変換
-    return value.toISOString();
+  const obj = {};
+  for (const key in value) {
+    const val = value[key];
+    if (val instanceof Date) {
+      obj[key] = val.toISOString();
+    } else if (typeof val === 'string') {
+      obj[key] = val.toUpperCase();
+    } else {
+      obj[key] = val;
+    }
   }
-  if (typeof value === 'string') {
-    return value.toUpperCase();
-  }
-  // 他のタイプにはデフォルトのコピーを使用
+  return obj;
 });
 // Returns: { date: '2023-01-01T00:00:00.000Z', number: 42, text: 'HELLO' }
 ```

@@ -48,7 +48,7 @@ console.log(obj3);
 const obj4 = {};
 setWith(obj4, 'x[0].y', 42, Object);
 console.log(obj4);
-// 结果: { x: [{ y: 42 }] }
+// 结果: { x: { '0': { y: 42 } } }
 
 // 复杂的自定义函数逻辑
 const obj5 = {};

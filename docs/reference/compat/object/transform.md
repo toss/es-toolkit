@@ -83,18 +83,18 @@ const result = transform(
 // Returns: [2, 4, 6] (4 and 5 are not processed)
 ```
 
-If the `iteratee` function is omitted, it copies the original.
+If the `iteratee` function is omitted, it returns an empty object or array.
 
 ```typescript
 import { transform } from 'es-toolkit/compat';
 
 const array = [1, 2, 3];
 const copy1 = transform(array);
-// Returns: [1, 2, 3]
+// Returns: []
 
 const obj = { a: 1, b: 2 };
 const copy2 = transform(obj);
-// Returns: { a: 1, b: 2 }
+// Returns: {}
 ```
 
 #### Parameters

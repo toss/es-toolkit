@@ -83,18 +83,18 @@ const result = transform(
 // 返値: [2, 4, 6] (4と5は処理されない)
 ```
 
-`iteratee` 関数を省略すると、元の値をコピーします。
+`iteratee` 関数を省略すると、空のオブジェクトまたは配列が返されます。
 
 ```typescript
 import { transform } from 'es-toolkit/compat';
 
 const array = [1, 2, 3];
 const copy1 = transform(array);
-// 返値: [1, 2, 3]
+// 返値: []
 
 const obj = { a: 1, b: 2 };
 const copy2 = transform(obj);
-// 返値: { a: 1, b: 2 }
+// 返値: {}
 ```
 
 #### パラメータ

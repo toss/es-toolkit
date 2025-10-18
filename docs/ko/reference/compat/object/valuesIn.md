@@ -48,7 +48,7 @@ Child.prototype = Object.create(Parent.prototype);
 Child.prototype.childProp = 'childValue';
 
 const obj = new Child();
-valuesIn(obj); // [1, 2, 'fromParent', 'childValue'] (constructor 제외)
+valuesIn(obj); // [1, 2, 'childValue', 'fromParent'] (constructor 제외)
 ```
 
 `null`이나 `undefined`는 빈 배열로 처리해요.

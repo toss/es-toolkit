@@ -50,13 +50,13 @@ const result4 = at(object, 'nonexistent', 'a');
 // Returns: [undefined, 1]
 ```
 
-`null` または `undefined` のオブジェクトは空の配列を返します。
+`null` または `undefined` オブジェクトは、`undefined` の配列を返します。
 
 ```typescript
 import { at } from 'es-toolkit/compat';
 
-at(null, 'a', 'b'); // []
-at(undefined, 'a', 'b'); // []
+at(null, 'a', 'b'); // [undefined, undefined]
+at(undefined, 'a', 'b'); // [undefined, undefined]
 ```
 
 #### パラメータ

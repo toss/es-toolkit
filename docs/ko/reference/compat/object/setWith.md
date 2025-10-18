@@ -48,7 +48,7 @@ console.log(obj3);
 const obj4 = {};
 setWith(obj4, 'x[0].y', 42, Object);
 console.log(obj4);
-// 결과: { x: [{ y: 42 }] }
+// 결과: { x: { '0': { y: 42 } } }
 
 // 복잡한 커스터마이저 로직
 const obj5 = {};

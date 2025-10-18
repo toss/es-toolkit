@@ -60,7 +60,7 @@ dog.makeSound(); // 'Woof!' (オーバーライドされたメソッド)
 
 // nullプロトタイプ
 const cleanObj = create(null, { data: 'value' });
-console.log(cleanObj.toString); // undefined (Object.prototypeメソッドがない)
+console.log(cleanObj.toString); // ƒ toString() { [native code] } (nullは{}と同等)
 
 // 空のオブジェクトの継承
 const empty = create({});

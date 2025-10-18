@@ -48,7 +48,7 @@ console.log(obj3);
 const obj4 = {};
 setWith(obj4, 'x[0].y', 42, Object);
 console.log(obj4);
-// 結果: { x: [{ y: 42 }] }
+// 結果: { x: { '0': { y: 42 } } }
 
 // 複雑なカスタマイザーロジック
 const obj5 = {};

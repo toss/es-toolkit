@@ -52,7 +52,7 @@ const arrayPath = getComplexValue(['user', 'profile', 'age']);
 
 // Process multiple paths as array
 const paths = ['user.profile.name', 'settings.theme', 'settings.lang'];
-const values = paths.map(getValue);
+const values = paths.map(getComplexValue);
 // Result: ['Alice', 'dark', 'en'] (values from each path)
 
 // Array index access

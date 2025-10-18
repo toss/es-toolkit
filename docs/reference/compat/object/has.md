@@ -54,7 +54,7 @@ import { has } from 'es-toolkit/compat';
 
 const sparse = [1, , 3]; // index 1 is empty
 has(sparse, 0); // true
-has(sparse, 1); // false - no actual value
+has(sparse, 1); // true - actually exists, but value is undefined
 has(sparse, 2); // true
 ```
 

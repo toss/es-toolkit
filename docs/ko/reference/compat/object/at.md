@@ -50,13 +50,13 @@ const result4 = at(object, 'nonexistent', 'a');
 // Returns: [undefined, 1]
 ```
 
-`null`이나 `undefined` 객체는 빈 배열을 반환해요.
+`null`이나 `undefined` 객체는 `undefined` 배열을 반환해요.
 
 ```typescript
 import { at } from 'es-toolkit/compat';
 
-at(null, 'a', 'b'); // []
-at(undefined, 'a', 'b'); // []
+at(null, 'a', 'b'); // [undefined, undefined]
+at(undefined, 'a', 'b'); // [undefined, undefined]
 ```
 
 #### 파라미터

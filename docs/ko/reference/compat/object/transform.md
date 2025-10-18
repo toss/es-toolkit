@@ -83,18 +83,18 @@ const result = transform(
 // Returns: [2, 4, 6] (4와 5는 처리되지 않음)
 ```
 
-`iteratee` 함수를 생략하면 원본을 복사해요.
+`iteratee` 함수를 생략하면 빈 객체나 빈 배열을 반환해요.
 
 ```typescript
 import { transform } from 'es-toolkit/compat';
 
 const array = [1, 2, 3];
 const copy1 = transform(array);
-// Returns: [1, 2, 3]
+// Returns: []
 
 const obj = { a: 1, b: 2 };
 const copy2 = transform(obj);
-// Returns: { a: 1, b: 2 }
+// Returns: {}
 ```
 
 #### 파라미터

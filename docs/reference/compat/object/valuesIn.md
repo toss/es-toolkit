@@ -48,7 +48,7 @@ Child.prototype = Object.create(Parent.prototype);
 Child.prototype.childProp = 'childValue';
 
 const obj = new Child();
-valuesIn(obj); // [1, 2, 'fromParent', 'childValue'] (constructor excluded)
+valuesIn(obj); // [1, 2, 'childValue', 'fromParent'] (constructor excluded)
 ```
 
 Handles `null` or `undefined` as empty arrays.

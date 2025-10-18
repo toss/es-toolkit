@@ -60,7 +60,7 @@ dog.makeSound(); // 'Woof!' (overridden method)
 
 // null prototype
 const cleanObj = create(null, { data: 'value' });
-console.log(cleanObj.toString); // undefined (no Object.prototype methods)
+console.log(cleanObj.toString); // ƒ toString() { [native code] } (null is equivalent to {})
 
 // Inheriting empty object
 const empty = create({});

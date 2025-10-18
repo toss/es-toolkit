@@ -52,7 +52,7 @@ const arrayPath = getComplexValue(['user', 'profile', 'age']);
 
 // 複数のパスを配列で処理
 const paths = ['user.profile.name', 'settings.theme', 'settings.lang'];
-const values = paths.map(getValue);
+const values = paths.map(getComplexValue);
 // 結果: ['Alice', 'dark', 'en'] (各パスの値)
 
 // 配列インデックスアクセス

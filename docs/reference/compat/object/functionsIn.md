@@ -56,7 +56,7 @@ Calculator.prototype.divide = function (n) {
 
 const calc = new Calculator();
 const allMethods = functionsIn(calc);
-// Result: ['add', 'multiply', 'divide'] (including inherited methods)
+// Result: ['add', 'divide'] (`multiply` is non-enumerable)
 
 // Inheritance through prototype chain
 function Parent() {

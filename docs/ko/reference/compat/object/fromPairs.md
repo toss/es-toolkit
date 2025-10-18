@@ -40,14 +40,6 @@ const mixedPairs = [
 ];
 const user = fromPairs(mixedPairs);
 // 결과: { name: 'John', age: 30, active: true }
-
-// Map에서 변환
-const map = new Map([
-  ['x', 10],
-  ['y', 20],
-]);
-const coords = fromPairs(map);
-// 결과: { x: 10, y: 20 }
 ```
 
 `null`이나 `undefined`, 배열 유사 객체가 아닌 값은 빈 객체로 처리해요.

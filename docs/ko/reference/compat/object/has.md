@@ -54,7 +54,7 @@ import { has } from 'es-toolkit/compat';
 
 const sparse = [1, , 3]; // 인덱스 1이 비어있음
 has(sparse, 0); // true
-has(sparse, 1); // false - 실제로 값이 없음
+has(sparse, 1); // true - 실제로 존재하지만 값은 undefined
 has(sparse, 2); // true
 ```
 

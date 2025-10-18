@@ -60,7 +60,7 @@ dog.makeSound(); // 'Woof!' (덮어쓴 메서드)
 
 // null 프로토타입
 const cleanObj = create(null, { data: 'value' });
-console.log(cleanObj.toString); // undefined (Object.prototype 메서드 없음)
+console.log(cleanObj.toString); // ƒ toString() { [native code] } (null은 {}와 동일)
 
 // 빈 객체 상속
 const empty = create({});

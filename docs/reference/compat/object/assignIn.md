@@ -52,7 +52,7 @@ const arr = [1, 2, 3];
 arr.customProp = 'custom';
 const target4 = {};
 assignIn(target4, arr);
-// Result: { '0': 1, '1': 2, '2': 3, customProp: 'custom', length: 3 }
+// Result: { '0': 1, '1': 2, '2': 3, customProp: 'custom' }
 ```
 
 Unlike `assign`, this function copies inherited properties as well. It also has an optimization that doesn't overwrite if values are the same.

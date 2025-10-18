@@ -48,7 +48,7 @@ Child.prototype = Object.create(Parent.prototype);
 Child.prototype.childProp = 'childValue';
 
 const obj = new Child();
-valuesIn(obj); // [1, 2, 'fromParent', 'childValue'] (排除 constructor)
+valuesIn(obj); // [1, 2, 'childValue', 'fromParent'] (排除 constructor)
 ```
 
 将 `null` 或 `undefined` 处理为空数组。
