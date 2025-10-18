@@ -52,12 +52,12 @@ const numbers3 = rangeRight(0, 20, 5);
 console.log(numbers3); // [15, 10, 5, 0]
 
 // 也可以向负方向移动。
-const numbers4 = rangeRight(0, -5, -1);
-console.log(numbers4); // [-4, -3, -2, -1, 0]
+const numbers4 = rangeRight(-5, 0, 1);
+console.log(numbers4); // [-1, -2, -3, -4, -5]
 
 // 也可以从小数到大数。
-const numbers5 = rangeRight(0, 5, -1);
-console.log(numbers5); // [1, 2, 3, 4]
+const numbers5 = rangeRight(5, 0, -1);
+console.log(numbers5); // [1, 2, 3, 4, 5]
 ```
 
 在需要倒计时或分页中的反向顺序时很有用。

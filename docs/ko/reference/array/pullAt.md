@@ -21,16 +21,10 @@ const removed = pullAt(numbers, [1, 3, 4]);
 console.log(removed); // [20, 40, 50]
 console.log(numbers); // [10, 30]
 
-// 음수 인덱스를 사용해서 뒤에서부터 제거해요.
-const letters = ['a', 'b', 'c', 'd', 'e'];
-const removedLetters = pullAt(letters, [-1, -3]);
-console.log(removedLetters); // ['e', 'c']
-console.log(letters); // ['a', 'b', 'd']
-
 // 중복된 인덱스가 있어도 안전하게 처리해요.
 const fruits = ['apple', 'banana', 'cherry', 'date'];
 const removedFruits = pullAt(fruits, [1, 2, 1]);
-console.log(removedFruits); // ['banana', 'cherry', undefined]
+console.log(removedFruits); // ['banana', 'cherry', 'banana']
 console.log(fruits); // ['apple', 'date']
 ```
 

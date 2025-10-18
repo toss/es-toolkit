@@ -57,8 +57,8 @@ const words1 = ['Apple', 'banana'];
 const words2 = ['BANANA', 'orange'];
 const areWordsEqual = (a, b) => a.toLowerCase() === b.toLowerCase();
 unionWith(words1, words2, areWordsEqual);
-// Returns: ['Apple', 'orange']
-// 'banana'와 'BANANA'는 같은 것으로 판단되어 첫 번째 배열의 'Apple'만 남아요.
+// Returns: ['Apple', 'banana', 'orange']
+// 'banana'와 'BANANA'는 같은 것으로 판단되어 첫 번째 것만 유지돼요.
 ```
 
 #### 파라미터

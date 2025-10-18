@@ -20,7 +20,7 @@ camelCase('hello world'); // returns 'helloWorld'
 camelCase('some-hyphen-text'); // returns 'someHyphenText'
 camelCase('CONSTANT_CASE'); // returns 'constantCase'
 camelCase('PascalCase'); // returns 'pascalCase'
-camelCase('mixed   SpAcE'); // returns 'mixedSpace'
+camelCase('mixed   SpAcE'); // returns 'mixedSpAcE'
 ```
 
 특수 문자나 공백, 하이픈 같은 구분자가 있는 문자열을 자바스크립트 변수명이나 객체 프로퍼티명으로 사용하기 좋은 형태로 바꿔줘요.

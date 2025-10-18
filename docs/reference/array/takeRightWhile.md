@@ -25,7 +25,7 @@ takeRightWhile([1, 2, 3], n => n > 3);
 
 // Take elements with string length <= 5
 takeRightWhile(['hello', 'world', 'foo', 'bar'], str => str.length <= 5);
-// Result: ['world', 'foo', 'bar']
+// Result: ['hello', 'world', 'foo', 'bar']
 ```
 
 #### Parameters

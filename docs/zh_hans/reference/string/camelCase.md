@@ -20,7 +20,7 @@ camelCase('hello world'); // returns 'helloWorld'
 camelCase('some-hyphen-text'); // returns 'someHyphenText'
 camelCase('CONSTANT_CASE'); // returns 'constantCase'
 camelCase('PascalCase'); // returns 'pascalCase'
-camelCase('mixed   SpAcE'); // returns 'mixedSpace'
+camelCase('mixed   SpAcE'); // returns 'mixedSpAcE'
 ```
 
 将包含特殊字符、空格、连字符等分隔符的字符串转换为适合用作JavaScript变量名或对象属性名的形式。

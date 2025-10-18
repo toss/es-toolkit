@@ -21,16 +21,10 @@ const removed = pullAt(numbers, [1, 3, 4]);
 console.log(removed); // [20, 40, 50]
 console.log(numbers); // [10, 30]
 
-// 負のインデックスを使用して後ろから削除します。
-const letters = ['a', 'b', 'c', 'd', 'e'];
-const removedLetters = pullAt(letters, [-1, -3]);
-console.log(removedLetters); // ['e', 'c']
-console.log(letters); // ['a', 'b', 'd']
-
 // 重複したインデックスがあっても安全に処理します。
 const fruits = ['apple', 'banana', 'cherry', 'date'];
 const removedFruits = pullAt(fruits, [1, 2, 1]);
-console.log(removedFruits); // ['banana', 'cherry', undefined]
+console.log(removedFruits); // ['banana', 'cherry', 'banana']
 console.log(fruits); // ['apple', 'date']
 ```
 

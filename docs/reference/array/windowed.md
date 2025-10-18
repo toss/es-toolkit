@@ -58,7 +58,7 @@ const small = [1, 2];
 
 // When window is larger than array
 console.log(windowed(small, 5)); // []
-console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2]]
+console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
 ```
 
 #### Parameters

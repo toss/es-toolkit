@@ -34,7 +34,7 @@ console.log(uniqueByAge);
 // 문자열 길이를 기준으로 중복 제거해요.
 const words = ['apple', 'pie', 'banana', 'cat', 'dog'];
 const uniqueByLength = uniqBy(words, word => word.length);
-console.log(uniqueByLength); // ['apple', 'pie', 'cat']
+console.log(uniqueByLength); // ['apple', 'pie', 'banana']
 ```
 
 복잡한 객체에서도 특정 필드의 조합을 기준으로 할 수 있어요.

@@ -57,8 +57,8 @@ const words1 = ['Apple', 'banana'];
 const words2 = ['BANANA', 'orange'];
 const areWordsEqual = (a, b) => a.toLowerCase() === b.toLowerCase();
 unionWith(words1, words2, areWordsEqual);
-// Returns: ['Apple', 'orange']
-// 'banana'和'BANANA'被判断为相同,因此只保留第一个数组的'Apple'。
+// Returns: ['Apple', 'banana', 'orange']
+// 'banana'和'BANANA'被判断为相同,因此只保留第一个。
 ```
 
 #### 参数

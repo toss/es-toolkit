@@ -58,7 +58,7 @@ const small = [1, 2];
 
 // ウィンドウが配列より大きい場合
 console.log(windowed(small, 5)); // []
-console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2]]
+console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
 ```
 
 #### パラメータ

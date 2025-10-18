@@ -43,7 +43,7 @@ startCase('_abc_123_def'); // 'Abc 123 Def'
 
 // 空字符串或只有无意义分隔符的情况
 startCase('_-_-_-_'); // ''
-startCase('12abc 12ABC'); // '12 Abc 12 ABC'
+startCase('12abc 12ABC'); // '12 Abc 12 Abc'
 ```
 
 #### 参数

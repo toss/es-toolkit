@@ -25,7 +25,7 @@ takeRightWhile([1, 2, 3], n => n > 3);
 
 // 文字列の長さが5以下の要素を取得します
 takeRightWhile(['hello', 'world', 'foo', 'bar'], str => str.length <= 5);
-// 結果: ['world', 'foo', 'bar']
+// 結果: ['hello', 'world', 'foo', 'bar']
 ```
 
 #### パラメータ
