@@ -36,7 +36,7 @@ sortedIndexBy(numbers, 25, n => n);
 // Transform with property-value array
 const users = [{ name: 'alice' }, { name: 'bob' }];
 sortedIndexBy(users, { name: 'ann' }, ['name']);
-// Returns 1
+// Returns 0
 ```
 
 For `null` or `undefined` arrays, returns 0.
