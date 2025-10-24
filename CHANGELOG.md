@@ -1,5 +1,29 @@
 # es-toolkit Changelog
 
+## Version v1.41.0
+
+Released on October 24th, 2025.
+
+- Enhanced `throttle` to preserve `this` context when called as a method.
+- Added type guard support for `partition` function.
+- Fixed `omit` to support runtime-determined key arrays with proper overloads.
+- Fixed `defaults` in compatibility layer to properly handle undefined and null sources.
+- Fixed `toSnakeCaseKeys` and `toCamelCaseKeys` to correctly return types for non-plain objects.
+- Fixed `toMerged` and `mergeWith` to properly handle shared objects in merge logic.
+- Fixed `compat/union` to support array-like objects.
+- Fixed `compat/updateWith` to use `get` for value retrieval in updater function.
+- Fixed circular import between `isMatch` and `isMatchWith`.
+- Fixed `find` and `findLast` by simplifying logic and removing unnecessary checks.
+- Fixed `takeRight` by improving test coverage and removing redundant checks.
+- Fixed `curry` and `curryRight` by removing unnecessary type assertions.
+- Fixed `isEqualWith` and `mapKeys` by removing unnecessary type assertions.
+- Improved performance for `meanBy` by removing intermediate array creation.
+- Updated build system to use UMD format instead of IIFE for browser builds.
+- Fixed numerous documentation examples across compat modules.
+- Improved test coverage with additional test cases for edge cases and compatibility.
+
+We sincerely thank @the5thbeatle, @wo-o29, @hwibaski, @manudeli, @raon0211, @dayongkr, @D-Sketon, @yoouungyoung, @Dohun-choi, @sukvvon, @zoulou00, and @sen2y for their contributions. We appreciate your great efforts!
+
 ## Version v1.40.0
 
 Released on October 8th, 2025.
