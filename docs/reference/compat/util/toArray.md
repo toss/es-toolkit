@@ -1,32 +1,61 @@
-# toArray
+# toArray (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use Object.values and Array.from instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `toArray` function performs slowly due to complex type validation and handling of various inputs.
+
+Instead, use faster and more modern Object.values or Array.from.
+
 :::
 
-Converts value into an array.
-
-## Signature
+Converts a value to an array.
 
 ```typescript
-function toArray(value?: unknown): any[];
+const array = toArray(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to convert.
+### `toArray(value)`
 
-### Returns
+Converts various values to arrays. Objects are converted to arrays of their values, array-like objects are converted to arrays, and everything else becomes an empty array.
+
+```typescript
+import { toArray } from 'es-toolkit/compat';
+
+// Convert object to array of values
+toArray({ a: 1, b: 2 });
+// Returns: [1, 2]
+
+// Convert string to array of characters
+toArray('abc');
+// Returns: ['a', 'b', 'c']
+
+// Convert Map to array of values
+const map = new Map([
+  ['a', 1],
+  ['b', 2],
+]);
+toArray(map);
+// Returns: [['a', 1], ['b', 2]]
+```
+
+null or undefined are converted to empty arrays.
+
+```typescript
+import { toArray } from 'es-toolkit/compat';
+
+toArray(null);
+// Returns: []
+
+toArray(undefined);
+// Returns: []
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to convert to an array.
+
+#### Returns
 
 (`any[]`): Returns the converted array.
-
-## Examples
-
-```typescript
-toArray({ a: 1, b: 2 }); // returns [1, 2]
-toArray('abc'); // returns ['a', 'b', 'c']
-toArray(1); // returns []
-toArray(null); // returns []
-```

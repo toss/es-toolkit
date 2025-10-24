@@ -1,38 +1,69 @@
-# valuesIn
+# valuesIn (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.values`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `valuesIn` 함수는 프로토타입 속성까지 포함해서 처리하는 복잡한 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.values`를 사용하세요.
+
 :::
 
-객체에서 접근할 수 있는 모든 프로퍼티 값을 반환해요. 프로토타입에서 상속된 속성도 포함돼요.
-
-- 값이 객체가 아닌 경우, 객체로 변환돼요.
-- [배열 같은 객체](../predicate/isArrayLike.md)는 배열처럼 다뤄요.
-- 일부 인덱스가 빠져 있는 희소 배열은 밀집 배열처럼 다뤄요.
-- 값이 `null` 또는 `undefined`이면, 빈 배열을 반환해요.
-- 프로토타입 객체를 처리할 때는 `constructor` 프로퍼티를 결과에서 제외해요.
-
-## 인터페이스
+객체의 모든 속성 값들을 배열로 반환하며, 상속된 프로토타입 속성도 포함해요.
 
 ```typescript
-function valuesIn<T>(object: Record<PropertyKey, T> | null | undefined): T[];
-function valuesIn<T>(arr: ArrayLike<T>): T[];
-function valuesIn<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
+const values = valuesIn(obj);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): 프로퍼티 값을 찾을 객체.
+### `valuesIn(object)`
 
-### 반환 값
-
-(`T[]`): 프로퍼티 값의 배열.
-
-## 예시
+객체의 모든 속성 값들을 배열로 가져오고 싶을 때 `valuesIn`을 사용하세요. 일반적인 `Object.values`와는 다르게 프로토타입 체인에서 상속된 속성의 값들도 함께 포함해요.
 
 ```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
 const obj = { a: 1, b: 2, c: 3 };
-valuesIn(obj); // => [1, 2, 3]
+valuesIn(obj); // [1, 2, 3]
+
+// 배열도 처리해요
+valuesIn([1, 2, 3]); // [1, 2, 3]
 ```
+
+프로토타입에서 상속된 속성도 포함해요.
+
+```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
+function Parent() {
+  this.a = 1;
+}
+Parent.prototype.inherited = 'fromParent';
+
+function Child() {
+  Parent.call(this);
+  this.b = 2;
+}
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.childProp = 'childValue';
+
+const obj = new Child();
+valuesIn(obj); // [1, 2, 'childValue', 'fromParent'] (constructor 제외)
+```
+
+`null`이나 `undefined`는 빈 배열로 처리해요.
+
+```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
+valuesIn(null); // []
+valuesIn(undefined); // []
+```
+
+#### 파라미터
+
+- `object` (`any`): 값들을 가져올 객체예요.
+
+#### 반환 값
+
+(`any[]`): 객체의 모든 속성 값들을 포함한 배열을 반환해요. 상속된 프로토타입 속성의 값들도 포함돼요.

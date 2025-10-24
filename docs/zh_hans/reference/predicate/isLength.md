@@ -1,41 +1,48 @@
 # isLength
 
-检查给定的值是否是一个有效的长度。
-
-该函数测试提供的值是否为 `number` 类型，是非负整数，并且小于或等于 JavaScript 的最大安全整数 (`Number.MAX_SAFE_INTEGER`)。如果该值是一个有效的长度，则返回 `true`，否则返回 `false`。
-
-此函数还可以作为 TypeScript 中的类型预测器，将参数的类型缩小为有效的长度 (`number`)。
-
-## 签名
+检查值是否为有效的数组长度。
 
 ```typescript
-function isLength(value: unknown): value is number;
+const result = isLength(value);
 ```
 
-### 参数
+## 参考
 
-- `value` (`unknown`): 要检查是否为有效长度的值。
+### `isLength(value)`
 
-### 返回值
-
-(`value is number`): 如果值是有效长度，则返回 `true`，否则返回 `false`。
-
-## 示例
+当您想确认某个值是否为有效的数组长度时，请使用 `isLength`。有效的长度必须是大于等于 0 且小于等于 `Number.MAX_SAFE_INTEGER` 的整数。
 
 ```typescript
 import { isLength } from 'es-toolkit/predicate';
 
-const value1 = 0;
-const value2 = 42;
-const value3 = -1;
-const value4 = 1.5;
-const value5 = Number.MAX_SAFE_INTEGER;
-const value6 = Number.MAX_SAFE_INTEGER + 1;
+// 有效的长度
+console.log(isLength(0)); // true
+console.log(isLength(42)); // true
+console.log(isLength(Number.MAX_SAFE_INTEGER)); // true
 
-console.log(isLength(value1)); // true
-console.log(isLength(value2)); // true
-console.log(isLength(value3)); // false
-console.log(isLength(value4)); // false
-console.log(isLength(value5)); // true
-console.log(isLength(value6)); // false
+// 无效的长度
+console.log(isLength(-1)); // false (负数)
+console.log(isLength(1.5)); // false (小数)
+console.log(isLength(Number.MAX_SAFE_INTEGER + 1)); // false (不安全的整数)
+console.log(isLength('42')); // false (字符串)
+console.log(isLength(null)); // false (null)
 ```
+
+在 TypeScript 中也可以用作类型守卫。
+
+```typescript
+function processLength(value: unknown) {
+  if (isLength(value)) {
+    // 现在 value 类型被缩小为 number
+    console.log(value.toFixed(2));
+  }
+}
+```
+
+#### 参数
+
+- `value` (`unknown`): 要检查是否为有效长度的值。
+
+#### 返回值
+
+(`value is number`): 如果值为有效长度则返回 `true`，否则返回 `false`。

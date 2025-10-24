@@ -1,33 +1,61 @@
-# toArray
+# toArray (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning Object.valuesとArray.fromを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`toArray`関数は複雑な型検証と様々な入力処理により遅く動作します。
+
+代わりにより高速で現代的なObject.valuesやArray.fromを使用してください。
+
 :::
 
 値を配列に変換します。
 
-## インターフェース
-
 ```typescript
-function toArray(value?: unknown): any[];
+const array = toArray(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 変換する値です。
+### `toArray(value)`
 
-### 戻り値
+様々な値を配列に変換します。オブジェクトは値の配列に、配列のようなオブジェクトは配列に、その他は空の配列に変換します。
+
+```typescript
+import { toArray } from 'es-toolkit/compat';
+
+// オブジェクトを値の配列に変換
+toArray({ a: 1, b: 2 });
+// Returns: [1, 2]
+
+// 文字列を文字配列に変換
+toArray('abc');
+// Returns: ['a', 'b', 'c']
+
+// Mapを値の配列に変換
+const map = new Map([
+  ['a', 1],
+  ['b', 2],
+]);
+toArray(map);
+// Returns: [['a', 1], ['b', 2]]
+```
+
+nullやundefinedは空の配列に変換します。
+
+```typescript
+import { toArray } from 'es-toolkit/compat';
+
+toArray(null);
+// Returns: []
+
+toArray(undefined);
+// Returns: []
+```
+
+#### パラメータ
+
+- `value` (`unknown`): 配列に変換する値です。
+
+#### 戻り値
 
 (`any[]`): 変換された配列を返します。
-数値配列。
-
-## 例
-
-```typescript
-toArray({ a: 1, b: 2 }); // => returns [1,2]
-toArray('abc'); // => returns ['a', 'b', 'c']
-toArray(1); // => returns []
-toArray(null); // => returns []
-```

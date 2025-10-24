@@ -1,45 +1,44 @@
-# isObjectLike
+# isObjectLike (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Check if a value is an object-like.
-
-A value is object-like if its type is object and it is not null.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an object-like value.
-
-## Signature
+Checks if a value is object-like.
 
 ```typescript
-function isObjectLike(value?: unknown): value is object;
+const result = isObjectLike(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to test if it is an object-like.
+### `isObjectLike(value)`
 
-### Returns
-
-(`value is object`): Returns `true` if the value is an object-like, `false` otherwise.
-
-## Examples
+Use `isObjectLike` when you need to check if a given value is object-like. An object-like value is a value where the result of the `typeof` operation is `'object'` and is not `null`.
 
 ```typescript
 import { isObjectLike } from 'es-toolkit/compat';
 
-const value1 = { a: 1 };
-const value2 = [1, 2, 3];
-const value3 = 'abc';
-const value4 = () => {};
-const value5 = null;
+// Object-like values
+isObjectLike({ a: 1 }); // true
+isObjectLike([1, 2, 3]); // true
+isObjectLike(new Date()); // true
+isObjectLike(/regex/); // true
+isObjectLike(new Map()); // true
+isObjectLike(new Set()); // true
 
-console.log(isObjectLike(value1)); // true
-console.log(isObjectLike(value2)); // true
-console.log(isObjectLike(value3)); // false
-console.log(isObjectLike(value4)); // false
-console.log(isObjectLike(value5)); // false
+// Non object-like values
+isObjectLike('abc'); // false
+isObjectLike(123); // false
+isObjectLike(true); // false
+isObjectLike(() => {}); // false
+isObjectLike(Symbol('sym')); // false
+
+// Special cases
+isObjectLike(null); // false (null has typeof 'object' but is not object-like)
+isObjectLike(undefined); // false
 ```
+
+#### Parameters
+
+- `value` (`any`): The value to check.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is object-like, otherwise `false`.

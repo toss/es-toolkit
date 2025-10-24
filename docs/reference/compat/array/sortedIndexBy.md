@@ -1,55 +1,59 @@
-# sortedIndexBy
+# sortedIndexBy (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Implement binary search and transformation function directly
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `sortedIndexBy` function operates slowly due to complex iteratee handling and type conversion.
+
+Instead, implement faster, more modern binary search and transformation functions directly.
+
 :::
 
-Determines the lowest index at which a given value should be inserted into a sorted array to maintain its sort order. Unlike [sortedIndex](./sortedIndex.md), this function allows you to specify a custom iteratee function to extract the value for comparison.
-
-- The iteratee is invoked for both the array elements and the value being inserted.
-- This is particularly useful for arrays containing objects or custom data types where the sort order is based on specific properties or computed values.
-
-## Signature
+Finds the lowest index at which a value should be inserted into a sorted array after applying a transformation function.
 
 ```typescript
-function sortedIndexBy<T, R>(
-  array: ArrayLike<T> | null | undefined,
-  value: T,
-  iteratee: (item: T) => R,
-  retHighest?: boolean
-): number;
+const index = sortedIndexBy(array, value, iteratee);
 ```
 
-### Parameters
+## Reference
 
-- `array` (`ArrayLike<T> | null | undefined`):
-  The sorted array to inspect. Can be null or undefined, in which case it is treated as an empty array.
-- `value` (`T`):
-  The value to evaluate and find the appropriate index for insertion.
-- `iteratee` (`(item: T) => R`):
-  A function that transforms the elements of the array and the value to be inserted. This function determines the sort order by returning the value used for comparison.
+### `sortedIndexBy(array, value, iteratee)`
 
-### Returns
-
-(`number`): The index at which the value should be inserted to maintain the sort order.
-
-## Example
+Use `sortedIndexBy` to find the insertion position of a value in a sorted array after applying a transformation function. It applies the transformation function to each element and the value to compare.
 
 ```typescript
 import { sortedIndexBy } from 'es-toolkit/compat';
 
-const objects = [{ x: 10 }, { x: 20 }, { x: 30 }];
+// Find insertion position in object array sorted by property
+const objects = [{ x: 4 }, { x: 5 }];
+sortedIndexBy(objects, { x: 4 }, 'x');
+// Returns 0
 
-// Use an iteratee to extract the `x` property for comparison
-sortedIndexBy(objects, { x: 25 }, o => o.x);
-// Return value: 2
-// Explanation: Based on the `x` property, `{ x: 25 }` returns index 2.
+// Transform using function
+const numbers = [10, 20, 30];
+sortedIndexBy(numbers, 25, n => n);
+// Returns 2
 
-// Handle custom sorting logic
-const strings = ['apple', 'banana', 'cherry'];
-sortedIndexBy(strings, 'apricot', str => str.length);
-// Return value: 3
-// Explanation: Based on the string length, 'apricot' returns index 3.
+// Transform with property-value array
+const users = [{ name: 'alice' }, { name: 'bob' }];
+sortedIndexBy(users, { name: 'bob' }, ['name', 'bob']);
+// Returns 1 (equivalent to inserting true into [false, true])
 ```
+
+For `null` or `undefined` arrays, returns 0.
+
+```typescript
+import { sortedIndexBy } from 'es-toolkit/compat';
+
+sortedIndexBy(null, { x: 1 }, 'x'); // 0
+sortedIndexBy(undefined, { x: 1 }, 'x'); // 0
+```
+
+#### Parameters
+
+- `array` (`ArrayLike<T> | null | undefined`): The sorted array. Using an unsorted array can produce incorrect results.
+- `value` (`T`): The value to insert.
+- `iteratee` (optional): The transformation function, property name, or property-value array to apply to each element and value.
+
+#### Returns
+
+(`number`): Returns the lowest index to insert the value. If the array is `null` or `undefined`, returns 0.

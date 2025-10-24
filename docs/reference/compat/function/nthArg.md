@@ -1,38 +1,74 @@
-# nthArg
+# nthArg (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use arrow functions
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `nthArg` function simply creates a wrapper function that returns the argument at a specific index. You can implement the same functionality more concisely and clearly using arrow functions.
+
+Instead, use the faster and more modern arrow functions.
+
 :::
 
-Creates a function that retrieves the argument at the specified index `n`.
-
-If `n` is negative, the nth argument from the end is returned.
-
-## Signature
+Creates a function that returns the argument at the specified index.
 
 ```typescript
-function nthArg(n?: number): (...args: any[]) => unknown;
+const getNthArg = nthArg(n);
 ```
 
-### Parameters
+## Reference
 
-- `n` (`number`, optional): The index of the argument to retrieve, default to `0`.
-  If negative, counts from the end of the arguments list.
+### `nthArg(n)`
 
-### Returns
-
-(`(args: any[]) => unknown`): A new function that returns the argument at the specified index.
-
-## Examples
+Use `nthArg` when you need only the argument at a specific position of a function. If you use a negative index, it counts from the end.
 
 ```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// Create a function to get the second argument
 const getSecondArg = nthArg(1);
-const result = getSecondArg('a', 'b', 'c');
-console.log(result); // => 'b'
+getSecondArg('a', 'b', 'c', 'd');
+// Returns: 'b'
 
-const getLastArg = nthArg(-1);
-const result = getLastArg('a', 'b', 'c');
-console.log(result); // => 'c'
+// Create a function to get the penultimate argument
+const getPenultimateArg = nthArg(-2);
+getPenultimateArg('a', 'b', 'c', 'd');
+// Returns: 'c'
+
+// Create a function to get the first argument (default)
+const getFirstArg = nthArg();
+getFirstArg('a', 'b', 'c');
+// Returns: 'a'
 ```
+
+It's useful when used with array methods.
+
+```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// Extract only the second element from each array
+const arrays = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+arrays.map(nthArg(1));
+// Returns: [2, 5, 8]
+```
+
+Negative indices count from the end.
+
+```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// Function to get the last argument
+const getLastArg = nthArg(-1);
+getLastArg('first', 'middle', 'last');
+// Returns: 'last'
+```
+
+#### Parameters
+
+- `n` (`number`, optional): The index of the argument to return. Negative values count from the end. Default is `0`.
+
+#### Returns
+
+(`(...args: any[]) => any`): Returns a new function that returns the argument at the specified index.

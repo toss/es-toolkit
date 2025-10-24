@@ -1,30 +1,48 @@
-# isElement
+# isElement (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `instanceof HTMLElement`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`isElement`関数は構造的検査により正確性が低下し、動作が遅くなります。
+
+代わりに、より正確で現代的な`instanceof HTMLElement`または`element.nodeType === 1`検査を使用してください。
+
 :::
 
-`value`がDOM要素であるかどうかを確認します。構造的に確認するため、結果が正確でない場合があります。
-
-## インターフェース
+値がDOM要素かどうかを確認します。
 
 ```typescript
-function isElement(value?: any): boolean;
+const result = isElement(value);
 ```
 
-### パラメータ
+## 参照
+
+### `isElement(value)`
+
+指定された値がDOM要素かどうかを確認したい場合は`isElement`を使用してください。この関数は構造的に確認するため、結果が完全に正確でない場合があります。
+
+```typescript
+import { isElement } from 'es-toolkit/compat';
+
+// DOM要素
+исElement(document.body); // true
+isElement(document.createElement('div')); // true
+isElement(document.querySelector('p')); // true (要素が存在する場合)
+
+// DOM要素でない値
+isElement('<body>'); // false
+isElement({}); // false
+isElement(null); // false
+isElement(undefined); // false
+
+// テキストノードや他のノードタイプ
+isElement(document.createTextNode('text')); // false
+isElement(document.createComment('comment')); // false
+```
+
+#### パラメータ
 
 - `value` (`any`): 確認する値です。
 
-### 戻り値
+#### 戻り値
 
-(`boolean`): `value`がDOM要素であれば`true`を返し、それ以外の場合は`false`を返します。
-
-## 例
-
-```typescript
-console.log(isElement(document.body)); // true
-console.log(isElement('<body>')); // false
-```
+(`boolean`): 値がDOM要素として認識される場合は`true`、そうでない場合は`false`を返します。

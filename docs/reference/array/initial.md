@@ -1,52 +1,60 @@
 # initial
 
-Returns a new array containing all elements except the last one from the input array.
-
-For an empty array or an array with a length of 1, it returns an empty array (`[]`).
-
-## Signature
+Returns a new array containing all elements except the last one.
 
 ```typescript
-function initial<T>(arr: [T]): [];
-function initial(arr: []): [];
-function initial<T, U>(arr: [...T[], U]): T[];
-function initial<T>(arr: T[]): T[];
+const result = initial(arr);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array from which to return all elements except the last one.
+### `initial(arr)`
 
-### Returns
-
-(`T[]`): A new array containing all elements except the last one from the input array. For an empty array or an array with a length of 1, it returns an empty array (`[]`).
-
-## Examples
+Use `initial` when you want to get all elements except the last one from an array. If the array is empty or has only one element, it returns an empty array. This is useful when processing while excluding the end of the array.
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = initial(arr1);
-// result is [1, 2].
+import { initial } from 'es-toolkit/array';
 
-const arr2: number[] = [];
-const result = initial(arr2);
-// result is [].
+// Exclude the last element from a number array
+const numbers = [1, 2, 3, 4, 5];
+initial(numbers);
+// Returns: [1, 2, 3, 4]
 
-const arr3: number[] = [1];
-const result = initial(arr3);
-// result is [].
+// Exclude the last element from a string array
+const strings = ['a', 'b', 'c'];
+initial(strings);
+// Returns: ['a', 'b']
 
-const largeArray = Array(1000)
-  .fill(0)
-  .map((_, i) => i);
-const result = initial(largeArray);
-// result is [0, 1, 2 ..., 998].
+// An array with only one element returns an empty array
+const single = [42];
+initial(single);
+// Returns: []
+```
 
-const nestedArray = [
-  [3, 1],
-  [3, 2],
-  [3, 3],
+It safely handles empty arrays and special cases.
+
+```typescript
+import { initial } from 'es-toolkit/array';
+
+// An empty array returns an empty array
+const empty: number[] = [];
+initial(empty);
+// Returns: []
+
+// It can also handle nested arrays
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
 ];
-const result = initial(nestedArray);
-// result is [[3, 1], [3, 2]].
+initial(nested);
+// Returns: [[1, 2], [3, 4]]
 ```
+
+#### Parameters
+
+- `arr` (`readonly T[]`): The array from which to exclude the last element.
+
+#### Returns
+
+(`T[]`): Returns a new array excluding the last element. If the input array is empty or has only one element, it returns an empty array.

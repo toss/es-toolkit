@@ -163,7 +163,7 @@ export function curry(func: (...args: any[]) => any): (...args: any[]) => any {
 
   return function (arg: any) {
     return makeCurry(func, func.length, [arg]);
-  } as any;
+  };
 }
 
 function makeCurry<F extends (...args: any) => any>(origin: F, argsLength: number, args: any[]) {
@@ -174,6 +174,6 @@ function makeCurry<F extends (...args: any) => any>(origin: F, argsLength: numbe
       return makeCurry(origin, argsLength, [...args, arg]);
     };
 
-    return next as any;
+    return next;
   }
 }

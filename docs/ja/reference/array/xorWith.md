@@ -1,29 +1,63 @@
 # xorWith
 
-2つの要素が一致するかどうかを判断するカスタム関数を基準に、2つの配列の対称差集合を返します。
-
-この関数は、パラメータとして2つの配列とカスタム一致関数を受け取ります。
-この関数は2つの配列を結合した後、カスタム一致関数の戻り値を基準に、どちらか一方にのみ含まれる要素で構成される新しい配列を返します。
-
-## インターフェース
+与えられた比較関数を使用して、2つの配列のいずれか一方にのみ存在する要素で新しい配列を作成します。
 
 ```typescript
-function xorWith<T>(arr1: T[], arr2: T[], areElementsEqual: (item1: T, item2: T) => boolean): T[];
+const result = xorWith(arr1, arr2, areElementsEqual);
 ```
 
-### パラメータ
+## 参照
 
-- `arr1` (`T[]`): 1つ目の配列です。
-- `arr2` (`T[]`): 2つ目の配列です。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 2つの要素が一致するかどうかを判断する一致関数です。2つの要素が一致する場合は `true` を、一致しない場合は `false` を返すようにしてください。
+### `xorWith(arr1, arr2, areElementsEqual)`
 
-### 戻り値
-
-(`T[]`): カスタム一致関数の戻り値を基準に、2つの配列の対称差集合を表す新しい配列。
-
-## 例
+複雑なオブジェクトや特別な比較条件で対称差集合を求めたい場合は `xorWith` を使用してください。ユーザー定義の等価性関数で要素を比較し、2つの配列のいずれか一方にのみ存在する要素で新しい配列を作成します。
 
 ```typescript
-xorWith([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id);
-// [{ id: 1 }, { id: 3 }] を返します。
+import { xorWith } from 'es-toolkit/array';
+
+// オブジェクトのidで比較します。
+xorWith(
+  [
+    { id: 1, name: 'Alice' },
+    { id: 2, name: 'Bob' },
+  ],
+  [
+    { id: 2, name: 'Bobby' },
+    { id: 3, name: 'Charlie' },
+  ],
+  (a, b) => a.id === b.id
+);
+// Returns: [{ id: 1, name: 'Alice' }, { id: 3, name: 'Charlie' }]
+
+// 大文字小文字を無視して比較します。
+xorWith(['Apple', 'Banana'], ['APPLE', 'Cherry'], (a, b) => a.toLowerCase() === b.toLowerCase());
+// Returns: ['Banana', 'Cherry']
 ```
+
+より複雑な比較も可能です。
+
+```typescript
+import { xorWith } from 'es-toolkit/array';
+
+// 絶対値で比較します。
+xorWith([-1, -2, 3], [1, 2, -4], (a, b) => Math.abs(a) === Math.abs(b));
+// Returns: [3, -4]
+
+// 深いオブジェクト比較を行います。
+xorWith(
+  [{ specs: { ram: 8, storage: 256 } }],
+  [{ specs: { ram: 8, storage: 256 } }],
+  (a, b) => a.specs.ram === b.specs.ram && a.specs.storage === b.specs.storage
+);
+// Returns: []
+```
+
+#### パラメータ
+
+- `arr1` (`readonly T[]`): 比較する最初の配列です。
+- `arr2` (`readonly T[]`): 比較する2番目の配列です。
+- `areElementsEqual` (`(item1: T, item2: T) => boolean`): 2つの要素が等しいかどうかを判断する関数です。等しい場合は `true`、異なる場合は `false` を返す必要があります。
+
+#### 戻り値
+
+(`T[]`): ユーザー定義の等価性関数を基準に計算された対称差集合を表す新しい配列を返します。

@@ -96,6 +96,10 @@ export const shared = defineConfig({
 
     siteTitle: false,
 
+    outline: {
+      level: [2, 3],
+    },
+
     search: {
       provider: 'local',
       options: {

@@ -1,28 +1,56 @@
 # merge
 
-将源对象的属性合并到目标对象中。
-
-此函数执行深度合并，意味着嵌套的对象和数组会递归地合并。
-
-- 如果源对象中的属性是数组或对象，而目标对象中的相应属性也是数组或对象，它们将被合并。
-- 如果源对象中的属性是未定义的，它不会覆盖目标对象中已定义的属性。
-
-与 [toMerged](./toMerged.md) 不同，此函数会修改目标对象。
-
-## 签名
+将源对象深度合并到目标对象中并修改目标对象。
 
 ```typescript
-function merge<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(target: T, source: S): T & S;
+const result = merge(target, source);
 ```
 
-### 参数
+## 参考
 
-- `target` (`T`): 目标对象，源对象的属性将被合并到这个对象中。这个对象会被原地修改。
-- `source` (`S`): 源对象，其属性将被合并到目标对象中。
+### `merge(target, source)`
 
-### 返回值
+当您想要深度合并两个对象时,请使用 `merge`。嵌套的对象和数组也会递归合并。与 [toMerged](./toMerged.md) 不同,它会修改原始 `target` 对象。
 
-(`T & S`): 更新后的目标对象，其中包含了源对象的合并属性。
+```typescript
+import { merge } from 'es-toolkit/object';
+
+// 基本对象合并
+const target = { a: 1, b: { x: 1, y: 2 } };
+const source = { b: { y: 3, z: 4 }, c: 5 };
+const result = merge(target, source);
+// result 和 target 都是 { a: 1, b: { x: 1, y: 3, z: 4 }, c: 5 }
+
+// 数组也会被合并
+const arrayTarget = { a: [1, 2], b: { x: 1 } };
+const arraySource = { a: [3], b: { y: 2 } };
+merge(arrayTarget, arraySource);
+// arrayTarget 是 { a: [3, 2], b: { x: 1, y: 2 } }
+
+// null 值也会被适当处理
+const nullTarget = { a: null };
+const nullSource = { a: [1, 2, 3] };
+merge(nullTarget, nullSource);
+// nullTarget 是 { a: [1, 2, 3] }
+```
+
+`undefined` 值不会覆盖现有值。
+
+```typescript
+const target = { a: 1, b: 2 };
+const source = { b: undefined, c: 3 };
+merge(target, source);
+// target 是 { a: 1, b: 2, c: 3 } (b 未被覆盖)
+```
+
+#### 参数
+
+- `target` (`T extends Record<PropertyKey, any>`): 要合并源对象的目标对象。此对象会被修改。
+- `source` (`S extends Record<PropertyKey, any>`): 要合并到目标对象的源对象。
+
+#### 返回值
+
+(`T & S`): 返回已合并源对象的目标对象。
 
 ## 示例
 
@@ -31,19 +59,19 @@ const target = { a: 1, b: { x: 1, y: 2 } };
 const source = { b: { y: 3, z: 4 }, c: 5 };
 const result = merge(target, source);
 console.log(result);
-// 输出: { a: 1, b: { x: 1, y: 3, z: 4 }, c: 5 }
+// 返回值: { a: 1, b: { x: 1, y: 3, z: 4 }, c: 5 }
 
 const target = { a: [1, 2], b: { x: 1 } };
 const source = { a: [3], b: { y: 2 } };
 const result = merge(target, source);
 console.log(result);
-// 输出: { a: [3, 2], b: { x: 1, y: 2 } }
+// 返回值: { a: [3, 2], b: { x: 1, y: 2 } }
 
 const target = { a: null };
 const source = { a: [1, 2, 3] };
 const result = merge(target, source);
 console.log(result);
-// 输出: { a: [1, 2, 3] }
+// 返回值: { a: [1, 2, 3] }
 ```
 
 ## 演示
@@ -65,6 +93,6 @@ console.log(result);
 
 |                   | [包大小](../../bundle-size.md) | [性能](../../performance.md) |
 | ----------------- | ------------------------------ | ---------------------------- |
-| es-toolkit        | 271 字节 (小 92.4%)            | 1,952,436 次 (快 3.65×)      |
-| es-toolkit/compat | 4,381 字节 (小 90.2%)          | 706,558 次 (快 1.32×)        |
+| es-toolkit        | 271 字节 (小 97.8%)            | 1,952,436 次 (快 3.65×)      |
+| es-toolkit/compat | 4,381 字节 (小 64.9%)          | 706,558 次 (快 1.32×)        |
 | lodash-es         | 12,483 字节                    | 533,484 次                   |

@@ -1,37 +1,53 @@
-# isFinite
+# isFinite (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Number.isFinite`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `isFinite` function operates slowly due to additional type checking overhead.
+
+Instead, use the faster and modern `Number.isFinite`.
+
 :::
 
-Check if the given value is a finite number.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
-
-## Signature
+Checks if a value is a finite number.
 
 ```typescript
-function isFinite(value?: unknown): value is number;
+const result = isFinite(value);
 ```
 
-### Parameters
+## Reference
 
-- `value`(`unknown`): The value to test if it is a finite number.
+### `isFinite(value)`
 
-### Returns
-
-(`value is number`): True if the value is a finite number, otherwise false.
-
-## Examples
+Use `isFinite` when you need to check if a given value is a finite number. This function also works as a type guard in TypeScript, narrowing the type of the value to `number`.
 
 ```typescript
-const value1 = 100;
-const value2 = Infinity;
-const value3 = '100';
+import { isFinite } from 'es-toolkit/compat';
 
-console.log(isFinite(value1)); // true
-console.log(isFinite(value2)); // false
-console.log(isFinite(value3)); // false
+// Finite numbers
+isFinite(100); // true
+isFinite(-50); // true
+isFinite(3.14); // true
+isFinite(0); // true
+
+// Infinity is false
+isFinite(Infinity); // false
+isFinite(-Infinity); // false
+
+// NaN is also false
+isFinite(NaN); // false
+
+// Other types are also false
+isFinite('100'); // false
+isFinite([]); // false
+isFinite({}); // false
+isFinite(null); // false
+isFinite(undefined); // false
 ```
+
+#### Parameters
+
+- `value` (`any`): The value to check.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is a finite number, otherwise `false`.

@@ -1,4 +1,3 @@
-import { isMatch } from './isMatch.ts';
 import { isObject } from './isObject.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import type { IsMatchWithCustomizer } from '../_internal/IsMatchWithCustomizer.ts';
@@ -112,7 +111,7 @@ export function isMatchWith(
   ) => boolean | undefined
 ): boolean {
   if (typeof compare !== 'function') {
-    return isMatch(target, source);
+    return isMatchWith(target, source, () => undefined);
   }
 
   return isMatchWithInternal(
@@ -214,13 +213,11 @@ function isObjectMatch(
     return true;
   }
 
-  if (stack && stack.has(source)) {
+  if (stack?.has(source)) {
     return stack.get(source) === target;
   }
 
-  if (stack) {
-    stack.set(source, target);
-  }
+  stack?.set(source, target);
 
   try {
     for (let i = 0; i < keys.length; i++) {
@@ -247,9 +244,7 @@ function isObjectMatch(
 
     return true;
   } finally {
-    if (stack) {
-      stack.delete(source);
-    }
+    stack?.delete(source);
   }
 }
 

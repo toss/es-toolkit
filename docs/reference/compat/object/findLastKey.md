@@ -1,76 +1,65 @@
-# findLastKey
+# findLastKey (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use `Array.findLast()` and `Object.keys()` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `findLastKey` function operates in a complex manner due to various condition type handling and compatibility logic.
+
+Instead, use the faster and more modern `Array.findLast()` and `Object.keys()`.
+
 :::
 
-Returns the key of the last element that satisfies the provided predicate.
-
-Unlike `findKey` which searches from the beginning, `findLastKey` searches from the end of the object.
-
-## Signature
+Finds the key of the last element matching a predicate, searching from the end.
 
 ```typescript
-function findLastKey<T>(
-  obj: T | null | undefined,
-  conditionToFind: (value: T[keyof T], key: string, obj: T) => unknown
-): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, objectToFind: Partial<T[keyof T]>): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, propertyToFind: [PropertyKey, any]): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, propertyToFind: PropertyKey): string | undefined;
-
-function findLastKey<T>(
-  obj: T | null | undefined,
-  predicate?:
-    | ((value: T[keyof T], key: string, obj: T) => unknown)
-    | PropertyKey
-    | [PropertyKey, any]
-    | Partial<T[keyof T]>
-): string | undefined;
+const key = findLastKey(obj, predicate);
 ```
 
-### Parameters
+## Reference
 
-- `obj` (`T | null | undefined`): The object to inspect.
-- `predicate`: The function invoked per iteration. Can be one of:
-  - `(value, key, obj) => unknown` - The function executed for each element.
-  - `Partial<T[keyof T]>` - Matches elements that have matching properties.
-  - `[PropertyKey, any]` - Matches elements with the specified property and value.
-  - `PropertyKey` - Matches elements with truthy values for the specified property.
+### `findLastKey(obj, predicate)`
 
-### Returns
-
-(`string | undefined`): Returns the key of the matched element, else `undefined`.
-
-## Examples
+Use `findLastKey` to find the key of the last element matching a predicate in an object. Unlike `findKey`, it searches from the end. You can use various forms of predicates including functions, objects, arrays, and strings.
 
 ```typescript
 import { findLastKey } from 'es-toolkit/compat';
 
+// Find key using a function predicate
 const users = {
-  barney: { age: 36, active: true },
-  fred: { age: 40, active: false },
-  pebbles: { age: 1, active: true },
+  alice: { age: 25, active: true },
+  bob: { age: 30, active: false },
+  charlie: { age: 35, active: true },
 };
 
-// Using a function predicate
-findLastKey(users, o => o.age < 40);
-// => 'pebbles'
+findLastKey(users, user => user.active);
+// Returns: 'charlie' (first active: true found from the end)
 
-// Using a partial object
+// Find key using an object predicate
 findLastKey(users, { active: true });
-// => 'pebbles'
+// Returns: 'charlie'
 
-// Using a property-value pair
-findLastKey(users, ['active', false]);
-// => 'fred'
-
-// Using a property name (truthy)
+// Find key using a property path
 findLastKey(users, 'active');
-// => 'pebbles'
+// Returns: 'charlie'
+
+// Find key using a property-value array
+findLastKey(users, ['active', false]);
+// Returns: 'bob'
 ```
+
+If no element matches the predicate, it returns `undefined`.
+
+```typescript
+import { findLastKey } from 'es-toolkit/compat';
+
+findLastKey({ a: 1, b: 2 }, value => value > 5);
+// Returns: undefined
+```
+
+#### Parameters
+
+- `obj` (`T | null | undefined`): The object to search.
+- `predicate` (`ObjectIteratee<T>`, optional): The predicate to apply to each element. Can be a function, object, array, or string.
+
+#### Returns
+
+(`string | undefined`): Returns the key of the last element matching the predicate. Returns `undefined` if none found.

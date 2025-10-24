@@ -1,42 +1,52 @@
-# isObject
+# isObject (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-与えられた値がオブジェクトかどうかをチェックします。オブジェクトはプリミティブ型（文字列、数値、真偽値、シンボル、`null`、または`undefined`）ではない値です。
-
-この関数は提供された値がオブジェクトかどうかをテストします。
-値がオブジェクトであれば`true`を返し、それ以外の場合は`false`を返します。
-
-この関数はTypeScriptの型述語としても機能し、引数の型をオブジェクト値に絞り込みます。
-
-## インターフェース
+値がオブジェクトかどうかを確認します。
 
 ```typescript
-function isObject(value?: unknown): value is object;
+const result = isObject(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): それがオブジェクトかどうかを確認する値。
+### `isObject(value)`
 
-### 戻り値
-
-(`value is object`): 値がオブジェクトの言語型である場合は`true`、それ以外の場合は`false`。
-
-## 例
+値がオブジェクトかどうかを確認したい場合に `isObject` を使用してください。JavaScript では配列、関数、オブジェクト、正規表現、Date などがすべてオブジェクトとして扱われます。
 
 ```typescript
-const value1 = {};
-const value2 = [1, 2, 3];
-const value3 = () => {};
-const value4 = null;
+import { isObject } from 'es-toolkit/compat';
 
-console.log(isObject(value1)); // true
-console.log(isObject(value2)); // true
-console.log(isObject(value3)); // true
-console.log(isObject(value4)); // false
+// 一般オブジェクト
+isObject({});
+// Returns: true
+
+// 配列もオブジェクト
+isObject([1, 2, 3]);
+// Returns: true
+
+// 関数もオブジェクト
+isObject(() => {});
+// Returns: true
+
+// Dateもオブジェクト
+isObject(new Date());
+// Returns: true
+
+// nullはオブジェクトでない
+isObject(null);
+// Returns: false
+
+// プリミティブ型はオブジェクトでない
+isObject('string');
+// Returns: false
+
+isObject(123);
+// Returns: false
 ```
+
+#### パラメータ
+
+- `value` (`unknown`): オブジェクトかどうかを確認する値です。
+
+#### 戻り値
+
+(`value is object`): 値がオブジェクトの場合は `true`、そうでなければ `false` を返します。

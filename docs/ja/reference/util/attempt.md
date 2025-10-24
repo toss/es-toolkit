@@ -1,47 +1,61 @@
 # attempt
 
-::: info
-重要: この関数は非同期関数（`Promise`を返す関数）には適していません。
-非同期関数を渡すと、`[null, Promise<T>]`を返しますが、Promiseが後で拒否された場合でもエラーをキャッチしません。
-
-非同期関数を処理するには、代わりに`attemptAsync`関数を使用することをお勧めします。
-:::
-
-関数を実行し、結果またはエラーを含むタプルを返します。
-
-## インターフェース
+関数を実行し、結果またはエラーをタプルとして返します。
 
 ```typescript
-function attempt<T, E>(func: () => T): [null, T] | [E, null];
+const [error, result] = attempt(func);
 ```
 
-### パラメータ
+## 参照
 
-- `func` (`() => T`): 実行を試みる関数です。
+### `attempt(func)`
 
-### 戻り値
-
-(`[null, T] | [E, null]`): 以下のようなタプルを返します:
-
-- 成功時: `[null, T]` - 最初の要素は`null`、2番目は結果です。
-- エラー発生時: `[E, null]` - 最初の要素はキャッチされたエラー、2番目は`null`です。
-
-## 例
+関数を安全に実行したい場合は `attempt` を使用してください。try-catch ブロックでラップせずにエラーを処理できます。
 
 ```typescript
 import { attempt } from 'es-toolkit/util';
 
-// 成功時には [null, 関数の戻り値] タプルを返します。
+// 成功する場合
 const [error, result] = attempt(() => 42);
-// [null, 42]
+// error は null、result は 42
 
-// エラーが発生すると [関数がスローしたエラー, null] タプルを返します。
+// エラーが発生する場合
 const [error, result] = attempt(() => {
   throw new Error('問題が発生しました');
 });
-// [Error, null]
+// error は Error オブジェクト、result は null
 
-// ジェネリック型を使用すると、関数がスローするエラーと戻り値の型を指定できます。
+// 型を明示することもできます
 const [error, names] = attempt<string[], Error>(() => ['Alice', 'Bob']);
-// `error`は`Error`型として、`names`は`string[]`型として推論されます。
+// names は string[] 型として推論されます
 ```
+
+::: warning 非同期関数には使用しないでください
+
+この関数は非同期関数(`Promise` を返す関数)には適していません。非同期関数を渡すと `[null, Promise<T>]` が返されますが、Promise が後で拒否(reject)されてもエラーをキャッチできません。
+
+非同期関数を処理するには、代わりに [`attemptAsync`](./attemptAsync.md) 関数を使用してください。
+
+```typescript
+// 誤った使用法
+const [error, promise] = attempt(async () => {
+  const response = await fetch('https://api.example.com/data');
+  return response.json();
+});
+
+// 正しい使用法
+const [error, data] = await attemptAsync(async () => {
+  const response = await fetch('https://api.example.com/data');
+  return response.json();
+});
+```
+
+:::
+
+#### パラメータ
+
+- `func` (`() => T`):実行する関数です。
+
+#### 戻り値
+
+(`[null, T] | [E, null]`):成功した場合は `[null, 結果値]`、エラーが発生した場合は `[エラー, null]` タプルを返します。

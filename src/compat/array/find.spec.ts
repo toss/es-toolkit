@@ -113,6 +113,17 @@ describe('find', () => {
     expect(find(args, i => i === 3)).toBe(3);
   });
 
+  it('should throw error when boolean predicate is used', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(() => find({ a: 1, b: 2, c: 3 }, true)).toThrow('doesMatch is not a function');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(() => find({ a: 1, b: 2, c: 3 }, false)).toThrow('doesMatch is not a function');
+    expect(() => find([1, 2, 3], true)).toThrow('undefined is not a function');
+    expect(() => find([1, 2, 3], false)).toThrow('undefined is not a function');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(find).toEqualTypeOf<typeof findLodash>();
   });

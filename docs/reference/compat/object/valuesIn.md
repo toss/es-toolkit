@@ -1,38 +1,69 @@
-# valuesIn
+# valuesIn (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.values` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `valuesIn` function operates slowly due to complex logic for processing prototype properties.
+
+Use the faster and more modern `Object.values` instead.
+
 :::
 
-Retrieves the values from an object, including those inherited from its prototype.
-
-- If the value is not an object, it is converted to an object.
-- Array-like objects are treated like arrays.
-- Sparse arrays with some missing indices are treated like dense arrays.
-- If the value is `null` or `undefined`, an empty array is returned.
-- When handling prototype objects, the `constructor` property is excluded from the results.
-
-## Signature
+Returns an array of all property values from the object, including inherited prototype properties.
 
 ```typescript
-function valuesIn<T>(object: Record<PropertyKey, T> | null | undefined): T[];
-function valuesIn<T>(arr: ArrayLike<T>): T[];
-function valuesIn<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
+const values = valuesIn(obj);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): The object to query.
+### `valuesIn(object)`
 
-### Returns
-
-(`T[]`): Returns an array of property values.
-
-## Examples
+Use `valuesIn` when you want to get all property values as an array from an object. Unlike regular `Object.values`, it also includes values of properties inherited from the prototype chain.
 
 ```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
 const obj = { a: 1, b: 2, c: 3 };
-valuesIn(obj); // => [1, 2, 3]
+valuesIn(obj); // [1, 2, 3]
+
+// Also handles arrays
+valuesIn([1, 2, 3]); // [1, 2, 3]
 ```
+
+Includes properties inherited from the prototype.
+
+```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
+function Parent() {
+  this.a = 1;
+}
+Parent.prototype.inherited = 'fromParent';
+
+function Child() {
+  Parent.call(this);
+  this.b = 2;
+}
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.childProp = 'childValue';
+
+const obj = new Child();
+valuesIn(obj); // [1, 2, 'childValue', 'fromParent'] (constructor excluded)
+```
+
+Handles `null` or `undefined` as empty arrays.
+
+```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
+valuesIn(null); // []
+valuesIn(undefined); // []
+```
+
+#### Parameters
+
+- `object` (`any`): The object to query for values.
+
+#### Returns
+
+(`any[]`): Returns an array containing all property values from the object. Includes values of inherited prototype properties.
