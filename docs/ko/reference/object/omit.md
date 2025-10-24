@@ -24,7 +24,7 @@ const result = omit(obj, ['b', 'c']);
 const safe = omit(obj, ['b', 'nonexistent']);
 // safe는 { a: 1, c: 3, d: 4 }가 돼요
 
-// 동적 문자열 배열도 사용할 수 있어요
+// 동적 배열도 사용할 수 있어요
 const keysToOmit = Object.keys({ b: true, c: true });
 const dynamic = omit(obj, keysToOmit);
 // dynamic은 { a: 1, d: 4 }가 돼요
@@ -32,11 +32,11 @@ const dynamic = omit(obj, keysToOmit);
 
 #### 파라미터
 
-- `obj` (`T extends Record<string, any>`): 키를 제외할 객체예요.
-- `keys` (`readonly K[]` 또는 `readonly string[]`): 객체에서 제외할 키들의 배열이에요.
+- `obj` (`T extends Record<PropertyKey, any>`): 키를 제외할 객체예요.
+- `keys` (`readonly K[]` (`K extends keyof T`) 또는 `readonly PropertyKey[]`): 객체에서 제외할 키들의 배열이에요.
 
 #### 반환 값
 
 - `Omit<T, K>` 또는 `Partial<T>` - 지정된 키들이 제외된 새로운 객체를 반환해요.
   - `keys`가 `readonly K[]` 인 경우: `Omit<T, K>` 로 좀 더 엄격한 타입이 반환돼요.
-  - `keys`가 `readonly string[]` 인 경우: `Partial<T>` 로 반환돼요.
+  - `keys`가 `readonly PropertyKey[]` 인 경우: `Partial<T>` 로 반환돼요. 런타임에 결정되는 동적 키 배열에 유용해요.
