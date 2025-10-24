@@ -83,18 +83,18 @@ const result = transform(
 // 返回: [2, 4, 6] (4 和 5 未处理)
 ```
 
-如果省略 `iteratee` 函数,则复制原始值。
+如果省略 `iteratee` 函数,则返回一个空对象或空数组。
 
 ```typescript
 import { transform } from 'es-toolkit/compat';
 
 const array = [1, 2, 3];
 const copy1 = transform(array);
-// 返回: [1, 2, 3]
+// 返回: []
 
 const obj = { a: 1, b: 2 };
 const copy2 = transform(obj);
-// 返回: { a: 1, b: 2 }
+// 返回: {}
 ```
 
 #### 参数

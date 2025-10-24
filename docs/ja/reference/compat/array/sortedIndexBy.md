@@ -35,8 +35,8 @@ sortedIndexBy(numbers, 25, n => n);
 
 // プロパティ-値配列で変換
 const users = [{ name: 'alice' }, { name: 'bob' }];
-sortedIndexBy(users, { name: 'ann' }, ['name']);
-// 1を返します
+sortedIndexBy(users, { name: 'bob' }, ['name', 'bob']);
+// 1を返します (これは [false, true] に true を挿入するのと同等です)
 ```
 
 `null` または `undefined` 配列は0を返します。

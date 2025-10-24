@@ -56,11 +56,12 @@ export function sortedIndexBy<T, R>(
   iteratee: Iteratee<T, R> = identity,
   retHighest?: boolean
 ): number {
-  let low = 0;
-  let high = array == null ? 0 : array.length;
-  if (high === 0 || isNil(array)) {
+  if (isNil(array) || array.length === 0) {
     return 0;
   }
+
+  let low = 0;
+  let high = array.length;
 
   const iterateeFunction = iterateeToolkit(iteratee);
   const transformedValue = iterateeFunction(value);

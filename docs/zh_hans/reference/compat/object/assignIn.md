@@ -52,7 +52,7 @@ const arr = [1, 2, 3];
 arr.customProp = 'custom';
 const target4 = {};
 assignIn(target4, arr);
-// 结果: { '0': 1, '1': 2, '2': 3, customProp: 'custom', length: 3 }
+// 结果: { '0': 1, '1': 2, '2': 3, customProp: 'custom' }
 ```
 
 与 `assign` 不同,此函数也复制继承的属性。如果值相同,它还会进行优化,不会覆盖。
