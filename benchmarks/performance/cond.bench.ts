@@ -6,9 +6,9 @@ const condToolkitCompat = condToolkitCompat_;
 const condLodash = condLodash_;
 
 describe('cond', () => {
-  const isA = obj => obj && obj.a === 1;
-  const isB = obj => obj && obj.b === 1;
-  const isC = obj => obj && obj.c;
+  const isA = (obj: { a: number }) => obj && obj.a === 1;
+  const isB = (obj: { b: number }) => obj && obj.b === 1;
+  const isC = (obj: { c: number }) => obj && obj.c;
 
   const returnA = () => 'a';
   const returnB = () => 'b';

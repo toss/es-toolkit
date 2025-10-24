@@ -5,7 +5,7 @@ import { isMatchWith as isMatchWithLodash_ } from 'lodash';
 const isMatchWithToolkitCompat = isMatchWithToolkitCompat_;
 const isMatchWithLodash = isMatchWithLodash_;
 
-const customizer = (objValue, srcValue) => {
+const customizer = (objValue: unknown, srcValue: unknown) => {
   if (typeof objValue === 'string' && typeof srcValue === 'string') {
     return objValue.toLowerCase() === srcValue.toLowerCase();
   }

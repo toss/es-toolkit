@@ -23,7 +23,6 @@ describe('includes (object)', () => {
     includesToolkitCompat(object, undefined);
     includesToolkitCompat(object, null);
     includesToolkitCompat(object, Infinity);
-    includesToolkitCompat(object, Symbol('sym1'));
     includesToolkitCompat(object, -0);
     includesToolkitCompat(object, 1, -1);
   });
@@ -35,9 +34,6 @@ describe('includes (object)', () => {
     includesLodash(object, undefined);
     includesLodash(object, null);
     includesLodash(object, Infinity);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    includesLodash(object, Symbol('sym1'));
     includesLodash(object, -0);
     includesLodash(object, 1, -1);
   });

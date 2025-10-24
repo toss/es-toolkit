@@ -34,10 +34,11 @@ describe('hasIn', () => {
 
   // 상속된 속성 테스트 (문자열)
   describe('with inherited property (string)', () => {
-    function Rectangle() {}
-    Rectangle.prototype.area = function () {
-      return 0;
-    };
+    class Rectangle {
+      area() {
+        return 0;
+      }
+    }
     const rect = new Rectangle();
 
     bench('es-toolkit/hasIn', () => {
@@ -51,8 +52,9 @@ describe('hasIn', () => {
 
   // 상속된 중첩 속성 테스트 (배열)
   describe('with inherited nested property (array)', () => {
-    function Rectangle() {}
-    Rectangle.prototype.dimensions = { width: 10, height: 5 };
+    class Rectangle {
+      dimensions = { width: 10, height: 5 };
+    }
     const rect = new Rectangle();
 
     bench('es-toolkit/hasIn', () => {
@@ -79,14 +81,13 @@ describe('hasIn', () => {
 
   // 깊은 상속 체인 테스트
   describe('with deep inheritance chain', () => {
-    function GrandParent() {}
-    GrandParent.prototype.method = function () {};
+    class GrandParent {
+      method() {}
+    }
 
-    function Parent() {}
-    Parent.prototype = Object.create(GrandParent.prototype);
+    class Parent extends GrandParent {}
 
-    function Child() {}
-    Child.prototype = Object.create(Parent.prototype);
+    class Child extends Parent {}
 
     const child = new Child();
 
