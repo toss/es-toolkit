@@ -75,7 +75,7 @@ const users = [
 
 // 只有 active 为 true 的人
 meanBy(users, { active: true });
-// Returns: 30 (25 + 35) / 2
+// Returns: 0.6666666 (active 为 true 的人占总人数的比例)
 ```
 
 空数组返回 NaN。
