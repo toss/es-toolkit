@@ -23,13 +23,20 @@ const result = omit(obj, ['b', 'c']);
 // 指定不存在的键不会导致错误
 const safe = omit(obj, ['b', 'nonexistent']);
 // safe 是 { a: 1, c: 3, d: 4 }
+
+// 也可以使用动态字符串数组
+const keysToOmit = Object.keys({ b: true, c: true });
+const dynamic = omit(obj, keysToOmit);
+// dynamic 是 { a: 1, d: 4 }
 ```
 
 #### 参数
 
 - `obj` (`T extends Record<string, any>`):要排除键的对象。
-- `keys` (`readonly K[]`):要从对象中排除的键的数组。
+- `keys` (`readonly K[]` 或 `readonly string[]`):要从对象中排除的键的数组。
 
 #### 返回值
 
-(`Omit<T, K>`):排除了指定键的新对象。
+- `Omit<T, K>` 或 `Partial<T>` - 返回排除了指定键的新对象。
+  - 当 `keys` 为 `readonly K[]` 时: 返回 `Omit<T, K>`,类型更严格。
+  - 当 `keys` 为 `readonly string[]` 时: 返回 `Partial<T>`。
