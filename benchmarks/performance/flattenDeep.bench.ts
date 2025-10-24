@@ -7,7 +7,7 @@ const flattenDeepToolkit = flattenDeepToolkit_;
 const flattenDeepToolkitCompat = flattenDeepToolkitCompat_;
 const flattenDeepLodash = flattenDeepLodash_;
 
-const createNestedArray = (values: number[]) => {
+const createNestedArray = (values: number[]): any[] => {
   if (values.length === 0) {
     return [];
   }

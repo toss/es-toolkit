@@ -15,7 +15,7 @@ describe('spread', () => {
   }
 
   bench('es-toolkit/spread', () => {
-    spreadToolkit(fn, 1);
+    spreadToolkit(fn);
   });
 
   bench('es-toolkit/compat/spread', () => {
