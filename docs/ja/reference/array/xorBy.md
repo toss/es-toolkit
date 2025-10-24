@@ -21,7 +21,7 @@ xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], obj => obj.id);
 
 // 文字列の長さで対称差集合を求めます。
 xorBy(['apple', 'banana'], ['grape', 'cherry', 'apple'], str => str.length);
-// Returns: ['banana', 'cherry'] (長さ6の要素)
+// Returns: [] (すべての長さが重複)
 ```
 
 マッピング関数の結果が同じ要素は1つとして扱われます。
@@ -30,7 +30,7 @@ xorBy(['apple', 'banana'], ['grape', 'cherry', 'apple'], str => str.length);
 import { xorBy } from 'es-toolkit/array';
 
 xorBy([1, 2, 3, 4], [3, 4, 5, 6], n => n % 3);
-// Returns: [2, 5] (3で割った余りが2の要素)
+// Returns: [] (すべての余りが重複)
 ```
 
 #### パラメータ

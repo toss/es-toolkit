@@ -40,7 +40,7 @@ isNative(null); // false
 
 // Bound functions
 const boundFunction = Array.prototype.push.bind([]);
-isNative(boundFunction); // false (bound functions are not native)
+isNative(boundFunction); // true (bound functions are native)
 
 // Methods
 const obj = { method: Array.prototype.push };

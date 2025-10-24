@@ -21,7 +21,7 @@ xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], obj => obj.id);
 
 // Get symmetric difference by string length.
 xorBy(['apple', 'banana'], ['grape', 'cherry', 'apple'], str => str.length);
-// Returns: ['banana', 'cherry'] (elements with length 6)
+// Returns: [] (elements with lengths that are all duplicated)
 ```
 
 Elements with the same result from the mapping function are treated as one.
@@ -30,7 +30,7 @@ Elements with the same result from the mapping function are treated as one.
 import { xorBy } from 'es-toolkit/array';
 
 xorBy([1, 2, 3, 4], [3, 4, 5, 6], n => n % 3);
-// Returns: [2, 5] (elements with remainder 2 when divided by 3)
+// Returns: [] (elements with remainders that are all duplicated)
 ```
 
 #### Parameters
