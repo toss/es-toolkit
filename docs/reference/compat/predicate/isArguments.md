@@ -1,46 +1,50 @@
-# isArguments
+# isArguments (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Check if a value is an arguments object.
-
-It returns `true` if the value is an arguments object, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an arguments object.
-
-## Signature
+Checks if a value is an arguments object.
 
 ```typescript
-function isArguments(value: unknown): value is IArguments;
+const result = isArguments(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to test if it is an arguments object.
+### `isArguments(value)`
 
-### Returns
-
-(`value is IArguments`): Returns `true` if the value is an arguments, `false` otherwise.
-
-## Examples
+Use `isArguments` when you need to check if a given value is a function's arguments object. This function also works as a type guard in TypeScript, narrowing the type of the value to `IArguments`.
 
 ```typescript
 import { isArguments } from 'es-toolkit/compat';
 
-const args = (function () {
-  return arguments;
-})();
-const strictArgs = (function () {
-  'use strict';
-  return arguments;
-})();
-const value = [1, 2, 3];
+// In regular functions
+function normalFunction() {
+  return isArguments(arguments); // true
+}
 
-console.log(isArguments(args)); // true
-console.log(isArguments(strictArgs)); // true
-console.log(isArguments(value)); // false
+// In strict mode
+function strictFunction() {
+  'use strict';
+  return isArguments(arguments); // true
+}
+
+// Non-arguments values
+isArguments([1, 2, 3]); // false
+isArguments({ 0: 'a', 1: 'b', length: 2 }); // false
+isArguments(null); // false
+isArguments(undefined); // false
+
+// Practical usage example
+function example() {
+  if (isArguments(arguments)) {
+    console.log('This is an arguments object');
+    console.log('Length:', arguments.length);
+  }
+}
 ```
+
+#### Parameters
+
+- `value` (`any`): The value to check.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is an arguments object, otherwise `false`.

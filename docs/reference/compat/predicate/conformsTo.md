@@ -1,45 +1,63 @@
-# conformsTo
+# conformsTo (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Checks if `object` conforms to `source` by invoking the predicate properties of `source` with the corresponding property values of `object`.
-
-Note: This method is equivalent to `conforms` when source is partially applied.
-
-## Signature
+Checks if an object satisfies all given condition functions.
 
 ```typescript
-function conformsTo(target: Record<PropertyKey, any>, source: Record<PropertyKey, (value: any) => boolean>): boolean;
+const result = conformsTo(target, source);
 ```
 
-### Parameters
+## Reference
 
-- `target` (`Record<PropertyKey, any>`): The object to inspect.
-- `source` (`Record<PropertyKey, (value: any) => boolean>`): The object of property predicates to conform to.
+### `conformsTo(target, source)`
 
-### Returns
-
-(`boolean`): Returns `true` if `object` conforms, else `false`.
-
-## Examples
+Use `conformsTo` when you need to check if an object's properties satisfy all specified conditions. It applies each condition function to the corresponding property to check the results.
 
 ```typescript
+import { conformsTo } from 'es-toolkit/compat';
+
+// Basic usage
 const object = { a: 1, b: 2 };
-const source = {
+const conditions = {
   a: n => n > 0,
   b: n => n > 1,
 };
 
-console.log(conformsTo(object, source)); // => true
+conformsTo(object, conditions); // true (all conditions satisfied)
 
-const source2 = {
-  a: n => n > 1,
-  b: n => n > 1,
+// Various conditions
+const user = { name: 'Alice', age: 25, active: true };
+const userValidation = {
+  name: s => typeof s === 'string' && s.length > 0,
+  age: n => typeof n === 'number' && n >= 18,
+  active: b => typeof b === 'boolean',
 };
 
-console.log(conformsTo(object, source2)); // => false
+conformsTo(user, userValidation); // true
+
+// When conditions are not satisfied
+const invalidUser = { name: '', age: 15, active: 'yes' };
+conformsTo(invalidUser, userValidation); // false
+
+// Partial condition checking
+const partialConditions = {
+  age: n => n >= 21,
+};
+conformsTo(user, partialConditions); // true (only checks age)
+
+// When property is missing
+const incompleteObject = { a: 1 }; // no b property
+const strictConditions = {
+  a: n => n > 0,
+  b: n => n > 0,
+};
+conformsTo(incompleteObject, strictConditions); // false (b property is missing)
 ```
+
+#### Parameters
+
+- `target` (`Record<PropertyKey, any>`): The object to inspect.
+- `source` (`Record<PropertyKey, (value: any) => boolean>`): An object with condition functions for each property.
+
+#### Returns
+
+(`boolean`): Returns `true` if the object satisfies all conditions, otherwise `false`.

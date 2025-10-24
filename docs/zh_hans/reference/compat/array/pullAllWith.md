@@ -1,44 +1,50 @@
-# pullAllWith
+# pullAllWith (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-使用提供的比较函数来确定要移除的元素，并从数组中移除并返回。
-
-它使用比较函数（`comparator`）来比较原始数组（`array`）中的元素和比较数组（`values`）中的元素，并从原始数组中移除比较结果为 `true` 的元素。
-
-## 接口
+使用比较函数从数组中删除指定的值。
 
 ```typescript
-function pullAllWith<T>(array: T[], values: T[], comparator: (a: T, b: T) => boolean): T[];
+const modified = pullAllWith(array, valuesToRemove, comparator);
 ```
 
-### 参数
+## 参考
 
-- `array` (`T[]`): 要修改的数组。
-- `values` (`T[]`): 要从数组中移除的值。
-- `comparator` (`(a: T, b: T) => boolean`): 用于比较 `array` 中的元素和 `values` 中的元素的函数。如果两个元素相等，应返回 `true`。
+### `pullAllWith(array, values, comparator)`
 
-### 返回值
-
-(`T[]`): 移除了指定值的数组。
-
-## 示例
+使用提供的比较函数从数组中删除指定的值。原始数组会被修改，并返回修改后的数组。
 
 ```typescript
-import { pullAllWith } from 'es-toolkit/array';
+import { pullAllWith } from 'es-toolkit/compat';
 
+// 通过对象比较删除
 const array = [
   { x: 1, y: 2 },
   { x: 3, y: 4 },
   { x: 5, y: 6 },
 ];
+pullAllWith(array, [{ x: 3, y: 4 }], (a, b) => a.x === b.x && a.y === b.y);
+console.log(array); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
 
-const removed = pullAllWith(array, [{ x: 3, y: 4 }], (a, b) => JSON.stringify(a) === JSON.stringify(b));
-
-console.log(removed); // [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
-console.log(array); // [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
+// 通过字符串长度比较删除
+const words = ['hello', 'world', 'test', 'code'];
+pullAllWith(words, ['hi'], (a, b) => a.length === b.length);
+console.log(words); // ['hello', 'world', 'code'] ('test' 因与 'hi' 长度相同而被删除)
 ```
+
+如果数组为空或为 `null`、`undefined`，则按原样返回原始数组。
+
+```typescript
+import { pullAllWith } from 'es-toolkit/compat';
+
+pullAllWith([], [1], (a, b) => a === b); // []
+pullAllWith(null as any, [1], (a, b) => a === b); // null
+```
+
+#### 参数
+
+- `array` (`T[]`): 要修改的数组。
+- `values` (`ArrayLike<T>`, 可选): 要删除的值的数组。
+- `comparator` (`(a: T, b: T) => boolean`, 可选): 比较两个元素的函数。如果认为两个元素相等，应返回 `true`。
+
+#### 返回值
+
+(`T[]`): 返回删除了指定值的原始数组。

@@ -1,33 +1,49 @@
-# eq
+# eq (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Performs a [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero) comparison between two values to determine if they are equivalent.
-
-## Signature
+Checks if two values are equivalent using SameValueZero comparison.
 
 ```typescript
-function eq(value: any, other: any): boolean;
+const isEqual = eq(value, other);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`any`): The value to compare.
-- `other` (`any`): The other value to compare.
+### `eq(value, other)`
 
-### Returns
-
-(`boolean`): Returns `true` if the values are equivalent, else `false`.
-
-## Examples
+Use `eq` when you want to check if two values are equivalent. Unlike regular `===` comparison, it returns `true` when comparing `NaN` with `NaN`.
 
 ```typescript
-eq(1, 1); // true
-eq(0, -0); // true
-eq(NaN, NaN); // true
-eq('a', Object('a')); // false
+import { eq } from 'es-toolkit/compat';
+
+// Basic usage
+console.log(eq(1, 1)); // true
+console.log(eq(0, -0)); // true (SameValueZero considers 0 and -0 equal)
+console.log(eq(NaN, NaN)); // true
+console.log(eq('a', 'a')); // true
+console.log(eq('a', 'b')); // false
 ```
+
+Behaves differently from `Object.is()`.
+
+```typescript
+// Using eq
+console.log(eq(NaN, NaN)); // true
+console.log(eq(0, -0)); // true
+
+// Using Object.is (faster)
+console.log(Object.is(NaN, NaN)); // true
+console.log(Object.is(0, -0)); // false (Object.is considers 0 and -0 different)
+
+// Using ===
+console.log(NaN === NaN); // false
+console.log(0 === -0); // true
+```
+
+#### Parameters
+
+- `value` (`any`): The first value to compare.
+- `other` (`any`): The second value to compare.
+
+#### Returns
+
+(`boolean`): Returns `true` if the values are equivalent, `false` otherwise.

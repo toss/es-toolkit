@@ -1,36 +1,56 @@
-# isNative
+# isNative (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-`value`がネイティブ関数かどうかを確認します。
-
-ネイティブ関数とは、JavaScriptエンジン自体に実装されている関数を意味します。例えば、`Array.prototype.map`、`Object.keys`、`Function.prototype.bind`などがあります。
-
-## インターフェース
+値がJavaScript エンジンのネイティブ関数かどうかを確認します。
 
 ```typescript
-function isNative(value: unknown): boolean;
+const result = isNative(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 確認する値
+### `isNative(value)`
 
-### 戻り値
-
-(`boolean`): `value`がネイティブ関数の場合は`true`、そうでない場合は`false`を返します。
-
-## 例
+与えられた値がJavaScript エンジンで実装されたネイティブ関数かどうかを確認する際に `isNative` を使用してください。ブラウザやNode.jsで提供される内蔵関数を区別することができます。
 
 ```typescript
 import { isNative } from 'es-toolkit/compat';
 
-console.log(isNative(Array.prototype.push)); // => true
-console.log(isNative(function () {})); // => false
-console.log(isNative(Math.max)); // => true
-console.log(isNative(() => {})); // => false
+// ネイティブ関数
+isNative(Array.prototype.push); // true
+isNative(Object.keys); // true
+isNative(Math.max); // true
+isNative(JSON.parse); // true
+isNative(console.log); // true（ブラウザ/Node.js環境で）
+
+// ユーザー定義関数
+isNative(function () {}); // false
+isNative(() => {}); // false
+isNative(function customFunction() {}); // false
+
+// ライブラリ関数
+isNative(require('lodash').map); // false
+isNative(require('es-toolkit').chunk); // false
+
+// 関数でない値
+isNative({}); // false
+isNative([]); // false
+isNative('function'); // false
+isNative(123); // false
+isNative(null); // false
+
+// バインドされた関数
+const boundFunction = Array.prototype.push.bind([]);
+isNative(boundFunction); // true（バインドされた関数はネイティブです）
+
+// メソッド
+const obj = { method: Array.prototype.push };
+isNative(obj.method); // true（依然としてネイティブ関数）
 ```
+
+#### パラメータ
+
+- `value` (`any`): 確認する値です。
+
+#### 戻り値
+
+(`boolean`): 値がネイティブ関数と見える場合は `true`、そうでなければ `false` を返します。

@@ -1,56 +1,59 @@
-# sortedIndexBy
+# sortedIndexBy (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 이진 탐색과 변환 함수를 직접 구현하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `sortedIndexBy` 함수는 복잡한 iteratee 처리와 타입 변환으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 이진 탐색과 변환 함수를 직접 구현하세요.
+
 :::
 
-정렬된 배열에서 특정 값을 삽입할 수 있는 가장 낮은 인덱스를 찾아, 배열의 정렬 순서를 유지하도록 해요.
-[sortedIndex](./sortedIndex.md)와 달리, 이 함수는 비교에 사용할 값을 추출하기 위해 커스텀 iteratee 함수를 지정할 수 있어요.
-
-- iteratee 함수는 배열의 각 요소와 삽입할 값에 대해 호출돼요.
-- 객체나 사용자 정의 데이터 타입을 포함한 배열에서 특정 속성이나 계산된 값에 따라 정렬 순서를 정하고 싶을 때 유용해요.
-
-## 인터페이스
+정렬된 배열에서 변환 함수를 적용한 후 값을 삽입할 가장 낮은 인덱스를 찾아요.
 
 ```typescript
-function sortedIndexBy<T, R>(
-  array: ArrayLike<T> | null | undefined,
-  value: T,
-  iteratee: (value: T) => R,
-  retHighest?: boolean
-): number;
+const index = sortedIndexBy(array, value, iteratee);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열. null 또는 undefined일 경우 빈 배열로 간주돼요.
-- `value` (`T`): 삽입 위치를 찾기 위해 평가할 값.
-- `iteratee` (`(item: T) => R`):
-  배열의 요소와 삽입할 값을 변환하는 함수. 이 함수의 반환값을 기준으로 정렬 순서를 결정해요.
-- `retHighest` (`boolean, 선택 사항`):
-  동일한 값이 배열에 존재하는 경우, 마지막 위치를 반환하려면 true로 설정해요. (기본값: false)
+### `sortedIndexBy(array, value, iteratee)`
 
-### 반환 값
-
-(`number`): 정렬 순서를 유지하기 위해 값을 삽입할 인덱스입니다.
-
-## 예시
+정렬된 배열에서 변환 함수를 적용한 후 값의 삽입 위치를 찾을 때 `sortedIndexBy`를 사용하세요. 각 요소와 찾을 값에 변환 함수를 적용해서 비교해요.
 
 ```typescript
 import { sortedIndexBy } from 'es-toolkit/compat';
 
-const objects = [{ x: 10 }, { x: 20 }, { x: 30 }];
+// 속성으로 정렬된 객체 배열에서 삽입 위치 찾기
+const objects = [{ x: 4 }, { x: 5 }];
+sortedIndexBy(objects, { x: 4 }, 'x');
+// 0을 반환해요
 
-// 비교를 위해 `x` 속성을 추출하는 iteratee 사용
-sortedIndexBy(objects, { x: 25 }, o => o.x);
-// 반환값: 2
-// 설명: `x` 속성을 기준으로 `{ x: 25 }`는 인덱스 2를 반환해요.
+// 함수를 사용해서 변환
+const numbers = [10, 20, 30];
+sortedIndexBy(numbers, 25, n => n);
+// 2를 반환해요
 
-// 사용자 정의 정렬 로직 처리
-const strings = ['apple', 'banana', 'cherry'];
-sortedIndexBy(strings, 'apricot', str => str.length);
-// 반환값: 3
-// 설명: 문자열의 길이를 기준으로 'apricot'은 인덱스 3을 반환해요.
+// 속성-값 배열로 변환
+const users = [{ name: 'alice' }, { name: 'bob' }];
+sortedIndexBy(users, { name: 'bob' }, ['name', 'bob']);
+// 1을 반환해요 (이는 [false, true]에 true를 삽입하는 것과 같아요)
 ```
+
+`null`이나 `undefined` 배열은 0을 반환해요.
+
+```typescript
+import { sortedIndexBy } from 'es-toolkit/compat';
+
+sortedIndexBy(null, { x: 1 }, 'x'); // 0
+sortedIndexBy(undefined, { x: 1 }, 'x'); // 0
+```
+
+#### 파라미터
+
+- `array` (`ArrayLike<T> | null | undefined`): 정렬된 배열이에요. 정렬되지 않은 배열을 사용하면 잘못된 결과를 얻을 수 있어요.
+- `value` (`T`): 삽입할 값이에요.
+- `iteratee` (선택): 각 요소와 값에 적용할 변환 함수, 속성 이름, 또는 속성-값 배열이에요.
+
+#### 반환 값
+
+(`number`): 값을 삽입할 가장 낮은 인덱스를 반환해요. 배열이 `null`이나 `undefined`면 0을 반환해요.

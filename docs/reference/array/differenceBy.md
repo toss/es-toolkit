@@ -1,42 +1,52 @@
 # differenceBy
 
-Computes the difference between two arrays after mapping their elements through a provided function.
-
-This function takes two arrays and a mapper function. It returns a new array containing the elements
-that are present in the first array but not in the second array, based on the identity calculated
-by the mapper function. Essentially, it filters out any elements from the first array that, when
-mapped, match an element in the mapped version of the second array.
-
-## Signature
+Transforms elements of two arrays with a conversion function, computes their difference, and returns a new array.
 
 ```typescript
-function differenceBy<T, U>(firstArr: T[], secondArr: U[], mapper: (value: T | U) => unknown): T[];
+const result = differenceBy(firstArr, secondArr, mapper);
 ```
 
-### Parameters
+## Reference
 
-- `firstArr` (`T[]`): The primary array from which to derive the difference.
-- `secondArr` (`U[]`): The array containing elements to be excluded from the first array.
-- `mapper` (`(value: T | U) => unknown`): The function to map the elements of both arrays. This function is applied to each element in both arrays, and the comparison is made based on the mapped values.
+### `differenceBy(firstArr, secondArr, mapper)`
 
-### Returns
-
-(`T[]`) A new array containing the elements from the first array that do not have a corresponding mapped identity in the second array.
-
-## Examples
+Use `differenceBy` when you want to compute the difference between two arrays based on a specific criterion. It compares each element after transforming it with the conversion function, and returns the elements that exist only in the first array.
 
 ```typescript
 import { differenceBy } from 'es-toolkit/array';
 
-const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
-const array2 = [{ id: 2 }, { id: 4 }];
-const mapper = item => item.id;
-const result = differenceBy(array1, array2, mapper);
-// result will be [{ id: 1 }, { id: 3 }, { id: 5 }] since the elements with id 2 are in both arrays and are excluded from the result.
-
+// Compute the difference based on the id in object arrays.
 const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const array2 = [2, 4];
-const mapper = item => (typeof item === 'object' ? item.id : item);
-const result = differenceBy(array1, array2, mapper);
-// result will be [{ id: 1 }, { id: 3 }] since 2 is present in both arrays after mapping, and is excluded from the result.
+const array2 = [{ id: 2 }, { id: 4 }];
+differenceBy(array1, array2, item => item.id);
+// Returns: [{ id: 1 }, { id: 3 }]
+// Elements with id 2 exist in both arrays and are excluded.
+
+// You can compare arrays of different types.
+const objects = [{ id: 1 }, { id: 2 }, { id: 3 }];
+const numbers = [2, 4];
+differenceBy(objects, numbers, item => (typeof item === 'object' ? item.id : item));
+// Returns: [{ id: 1 }, { id: 3 }]
 ```
+
+You can also compute the difference based on string length.
+
+```typescript
+import { differenceBy } from 'es-toolkit/array';
+
+const words1 = ['apple', 'banana', 'cherry'];
+const words2 = ['kiwi', 'pear'];
+differenceBy(words1, words2, word => word.length);
+// Returns: ['banana', 'cherry']
+// 'apple' is excluded because it has the same length as 'kiwi' or 'pear'.
+```
+
+#### Parameters
+
+- `firstArr` (`T[]`): The base array to compute the difference from.
+- `secondArr` (`U[]`): The array containing elements to exclude from the first array.
+- `mapper` (`(value: T | U) => unknown`): The function that maps elements of both arrays. Elements are compared based on the values returned by this function.
+
+#### Returns
+
+(`T[]`): A new array containing elements that exist only in the first array, based on the transformed values.

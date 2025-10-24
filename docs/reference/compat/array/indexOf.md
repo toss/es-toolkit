@@ -1,46 +1,71 @@
-# indexOf
+# indexOf (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.indexOf` or `Array.prototype.findIndex`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `indexOf` function operates slowly due to additional logic for handling `NaN`.
+
+If you're not looking for `NaN`, use the faster `Array.prototype.indexOf`. To find `NaN`, use `Array.prototype.findIndex` with `Number.isNaN`.
+
 :::
 
-Finds the index of the first occurrence of a value in an array.
-
-This method is similar to `Array.prototype.indexOf`, but it also finds `NaN` values.
-It uses strict equality (`===`) to compare elements other than `NaN`.
-
-## Signature
+Finds the index of the first occurrence of a given element in an array.
 
 ```typescript
-function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
+const index = indexOf(array, searchElement, fromIndex);
 ```
 
-### Parameters
+## Reference
+
+### `indexOf(array, searchElement, fromIndex?)`
+
+Works almost the same as `Array.prototype.indexOf`, but can find `NaN` values. Use this when you need to find the position of a specific value in an array.
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+// Find element in number array
+const array = [1, 2, 3, 4];
+indexOf(array, 3); // => 2
+
+// Find NaN value (Array.prototype.indexOf cannot find it)
+const arrayWithNaN = [1, 2, NaN, 4];
+indexOf(arrayWithNaN, NaN); // => 2
+```
+
+You can start searching from a specific index.
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+const array = [1, 2, 3, 1, 2, 3];
+indexOf(array, 2, 2); // => 4 (start searching from index 2)
+```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+indexOf(null, 1); // => -1
+indexOf(undefined, 1); // => -1
+```
+
+#### Parameters
 
 - `array` (`T[]`): The array to search.
 
-::: info `array` can be `ArrayLike<T>` or `null` or `undefined`
+::: info `array` can be `ArrayLike<T>`, `null`, or `undefined`
 
-To ensure full compatibility with lodash, the `indexOf` function processes `array` as follows:
+To ensure full compatibility with lodash, the `indexOf` function handles `array` as follows:
 
-- If `array` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
-- If `array` is `null` or `undefined`, it is treated as an empty array.
+- If `array` is `ArrayLike<T>`, it uses `Array.from(...)` to convert it to an array.
+- If `array` is `null` or `undefined`, it's treated as an empty array.
 
 :::
 
-- `searchElement` (`T`): The value to search for.
-- `fromIndex` (`number`, optional): The index to start the search at.
+- `searchElement` (`T`): The value to find.
+- `fromIndex` (`number`, optional): The index to start searching from. If negative, it's calculated from the end of the array. Defaults to `0`.
 
-### Returns
+#### Returns
 
-(`number`): The index (zero-based) of the first occurrence of the value in the array, or `-1` if the value is not found.
-
-## Example
-
-```typescript
-const array = [1, 2, 3, NaN];
-indexOf(array, 3); // => 2
-indexOf(array, NaN); // => 3
-```
+(`number`): Returns the index of the first element in the array that matches the given value. Returns `-1` if no matching element is found.

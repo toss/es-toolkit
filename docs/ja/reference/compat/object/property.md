@@ -1,37 +1,81 @@
-# property
+# property (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `get`関数を直接使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `property` 関数は内部的に `get` 関数を呼び出すラッパー関数で、追加の関数呼び出しオーバーヘッドが発生します。
+
+代わりに、より高速で現代的な `get` 関数を直接使用するか、オプショナルチェーニング(`?.`)を使用してください。
+
 :::
 
-オブジェクトの指定されたパスにある値を取得する関数を作成します。値を取得するには [`get`](./get.md) 関数を使用します。
-
-## インターフェース
+指定されたパスの値を取得する関数を作成します。
 
 ```typescript
-function property<T, R>(path: PropertyKey | PropertyKey[]): (object: T) => R;
+const getter = property(path);
 ```
 
-### パラメータ
+## 参照
 
-- `path` (`PropertyKey | PropertyKey[]`): プロパティを取得するパス。
+### `property(path)`
 
-### 戻り値
-
-(`(object: T) => R`): オブジェクトの指定されたパスにある値を取得する関数。
-
-## 例
+特定のパスから値を取得する関数を作成したい場合は`property`を使用してください。作成された関数は複数のオブジェクトで再利用でき、配列メソッドと一緒に使用するのに便利です。
 
 ```typescript
 import { property } from 'es-toolkit/compat';
 
-const getObjectValue = property('a.b.c');
-const result = getObjectValue({ a: { b: { c: 3 } } });
-console.log(result); // => 3
+// 基本的な使用法
+const getName = property('name');
+const user = { name: 'John', age: 30 };
+const result = getName(user);
+// 結果: 'John'
 
-const getObjectValue = property(['a', 'b', 'c']);
-const result = getObjectValue({ a: { b: { c: 3 } } });
-console.log(result); // => 3
+// 深いパスへのアクセス
+const getNestedValue = property('user.profile.name');
+const data = { user: { profile: { name: 'Alice', age: 25 } } };
+const nestedResult = getNestedValue(data);
+// 結果: 'Alice'
+
+// 配列パスを使用
+const getByArray = property(['user', 'profile', 'name']);
+const arrayResult = getByArray(data);
+// 結果: 'Alice'
+
+// 配列メソッドと一緒に使用
+const users = [
+  { user: { profile: { name: 'John' } } },
+  { user: { profile: { name: 'Jane' } } },
+  { user: { profile: { name: 'Bob' } } },
+];
+const names = users.map(property('user.profile.name'));
+// 結果: ['John', 'Jane', 'Bob']
+
+// 配列インデックスアクセス
+const getFirstItem = property('[0]');
+const items = ['first', 'second', 'third'];
+const firstItem = getFirstItem(items);
+// 結果: 'first'
+
+// 数値キーアクセス
+const getIndex = property(1);
+const arr = ['a', 'b', 'c'];
+const secondItem = getIndex(arr);
+// 結果: 'b'
 ```
+
+パスが存在しない場合は`undefined`を返します。
+
+```typescript
+import { property } from 'es-toolkit/compat';
+
+const getMissing = property('nonexistent.path');
+const result = getMissing({ some: 'data' });
+// 結果: undefined
+```
+
+#### パラメータ
+
+- `path` (`PropertyPath`): 値を取得するパスです。文字列、数値、シンボル、またはこれらの配列を指定できます。
+
+#### 戻り値
+
+(`(object: T) => R`): 与えられたオブジェクトから指定されたパスの値を返す関数を返します。

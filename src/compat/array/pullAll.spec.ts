@@ -46,6 +46,14 @@ describe('pullAll', () => {
     expect(actual).toEqual([]);
   });
 
+  it('should use empty array as default when no values provided', () => {
+    const array = [1, 2, 3];
+    const result = pullAll(array);
+
+    expect(result).toBe(array);
+    expect(array).toEqual([1, 2, 3]);
+  });
+
   // NOTE: TypeScript doesn't support matching conditional types
   // it('should match the type of lodash', () => {
   //   expectTypeOf(pullAll).toEqualTypeOf<typeof pullAllLodash>();

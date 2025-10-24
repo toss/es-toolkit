@@ -1,46 +1,58 @@
-# each
+# each (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.forEach` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `each` 関数は、複雑な型処理と様々なコレクション型のサポートにより遅く動作します。
+
+代わりに、より高速で現代的な `Array.prototype.forEach` を使用してください。
+
 :::
 
-配列 (`arr`) の要素を左から右に順に走査し、各要素に対して `callback` 関数を呼び出します。
+配列またはオブジェクトの各要素に対して反復操作を実行します。
 
-`callback` 関数が `false` を返すと、走査を停止します。
-
-[forEach](./forEach.md) の別名です。
-
-## インターフェース
-
-```ts
-function each<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => unknown): T;
+```typescript
+const result = each(collection, iteratee);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`T`): 走査するオブジェクト。配列、文字列、またはオブジェクトである可能性があります。
-- `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 各反復で呼び出される関数。
-  - `value`: 配列で現在処理中の要素。
-  - `key`: 配列で現在処理中の要素のプロパティ名。
-  - `object`: `each` 関数が呼び出されたオブジェクト。
+### `each(collection, iteratee)`
 
-### 戻り値
+配列、オブジェクト、文字列の各要素を順回しながら与えられた関数を実行します。配列の場合はインデックス順に、オブジェクトの場合は列挙可能なプロパティを順回します。
 
-(`T`): `each`で走査するオブジェクト。
-
-## 例
-
-```ts
+```typescript
 import { each } from 'es-toolkit/compat';
 
-const array = [1, 2, 3];
-const result: number[] = [];
-// each関数を使用して配列を走査し、各要素を結果配列に追加します。
-each(array, value => {
-  result.push(value);
-});
+// 配列を順回
+each([1, 2, 3], (value, index) => console.log(value, index));
+// ログ: 1 0, 2 1, 3 2
 
-console.log(result); // 出力: [1, 2, 3];
+// オブジェクトを順回
+each({ a: 1, b: 2 }, (value, key) => console.log(key, value));
+// ログ: 'a' 1, 'b' 2
+
+// 文字列を順回
+each('hello', (char, index) => console.log(char, index));
+// ログ: 'h' 0, 'e' 1, 'l' 2, 'l' 3, 'o' 4
 ```
+
+関数が `false` を返すと順回を中断します。
+
+```typescript
+import { each } from 'es-toolkit/compat';
+
+each([1, 2, 3, 4], value => {
+  console.log(value);
+  return value !== 2; // 2で中断
+});
+// ログ: 1, 2
+```
+
+#### パラメータ
+
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 順回するコレクションです。
+- `iteratee` (`(item: any, index: any, collection: any) => unknown`, オプション): 各要素に対して実行する関数です。デフォルトは `identity` 関数です。
+
+#### 戻り値
+
+(`ArrayLike<T> | Record<any, any> | string | null | undefined`): 元のコレクションを返します。

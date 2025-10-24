@@ -1,31 +1,20 @@
-# bindAll
+# bindAll (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-オブジェクトのメソッドを、指定された名前に基づいてオブジェクト自身に紐付けます。メソッド名は引数として提供できます。
-
-## インターフェース
+オブジェクトのメソッドをオブジェクト自身にバインドします。
 
 ```typescript
-function bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T;
+const boundObject = bindAll(object, methodNames);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`T`): メソッドをバインドするオブジェクト
-- `methodNames` (`...(string | string[])`): バインドするメソッド名。
+### `bindAll(object, ...methodNames)`
 
-### 戻り値
-
-(`T`): メソッドがバインドされたオブジェクト
-
-## 例
+オブジェクトの特定のメソッドの`this`値を該当オブジェクトに固定したい時に`bindAll`を使用してください。イベントハンドラーやコールバック関数としてメソッドを渡す際に`this`コンテキストを維持するのに役立ちます。
 
 ```typescript
+import { bindAll } from 'es-toolkit/compat';
+
 const view = {
   label: 'docs',
   click: function () {
@@ -33,23 +22,57 @@ const view = {
   },
 };
 
-bindAll(view, ['click']);
-jQuery(element).on('click', view.click);
-// => クリック時に 'clicked docs' がログ出力される
-
-// 個別のメソッド名を使用
+// メソッドをオブジェクトにバインド
 bindAll(view, 'click');
-// => 上記と同じ結果
+document.addEventListener('click', view.click);
+// => クリック時 'clicked docs' 出力
+```
 
-// 数値キーの処理
+複数のメソッドを一度にバインドできます。
+
+```typescript
+import { bindAll } from 'es-toolkit/compat';
+
 const obj = {
-  '-0': function () {
-    return -2;
+  name: 'example',
+  greet() {
+    return `Hello, ${this.name}!`;
   },
-  '0': function () {
-    return -1;
+  farewell() {
+    return `Goodbye, ${this.name}!`;
   },
 };
-bindAll(obj, -0);
-obj['-0'](); // => -2
+
+// 配列で複数のメソッドをバインド
+bindAll(obj, ['greet', 'farewell']);
+
+const greet = obj.greet;
+greet(); // 'Hello, example!' (thisが正しくバインドされました)
 ```
+
+数値や特殊キーも処理できます。
+
+```typescript
+import { bindAll } from 'es-toolkit/compat';
+
+const obj = {
+  '-0': function () {
+    return 'negative zero';
+  },
+  '0': function () {
+    return 'zero';
+  },
+};
+
+bindAll(obj, -0);
+obj['-0'](); // 'negative zero'
+```
+
+#### パラメータ
+
+- `object` (`Object`): メソッドをバインドするオブジェクトです。
+- `methodNames` (`...(string | string[] | number | IArguments)`): バインドするメソッド名です。個別の文字列、配列、数値、Arguments オブジェクトで指定できます。
+
+#### 戻り値
+
+(`Object`): メソッドがバインドされた元のオブジェクトを返します。

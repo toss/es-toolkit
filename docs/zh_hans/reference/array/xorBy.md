@@ -1,28 +1,45 @@
 # xorBy
 
-使用自定义映射函数计算两个数组之间的对称差异。
-
-对称差异是指在任一数组中存在，但不在它们的交集中的元素集合，根据映射函数返回的值确定。
-
-## 签名
+根据给定函数转换每个元素后的值,创建一个只包含两个数组中的一个数组中存在的元素的新数组。
 
 ```typescript
-function xorBy<T, U>(arr1: T[], arr2: T[], mapper: (item: T) => U): T[];
+const result = xorBy(arr1, arr2, mapper);
 ```
 
-### 参数
+## 参考
 
-- `arr1` (`T[]`): 第一个数组。
-- `arr2` (`T[]`): 第二个数组。
-- `mapper` (`(item: T) => U`): 将数组元素映射为比较值的函数。
+### `xorBy(arr1, arr2, mapper)`
 
-### 返回值
-
-(`T[]`): 包含在 `arr1` 或 `arr2` 中存在但不同时存在于两者中的元素的数组，基于映射函数返回的值。
-
-## 示例
+当您想根据特定标准比较两个数组的元素并求对称差集时,请使用 `xorBy`。用映射函数转换每个元素后,创建一个只存在于两个数组之一的元素的新数组。
 
 ```typescript
-// 返回 [{ id: 1 }, { id: 3 }]
-xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], x => x.id);
+import { xorBy } from 'es-toolkit/array';
+
+// 根据对象的id求对称差集。
+xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], obj => obj.id);
+// Returns: [{ id: 1 }, { id: 3 }]
+
+// 根据字符串长度求对称差集。
+xorBy(['apple', 'banana'], ['grape', 'cherry', 'apple'], str => str.length);
+// Returns: [] (所有长度都重复)
 ```
+
+映射函数结果相同的元素被视为一个。
+
+```typescript
+import { xorBy } from 'es-toolkit/array';
+
+// 映射函数结果相同的元素被视为一个。
+xorBy([1, 2, 3, 4], [3, 4, 5, 6], n => n % 3);
+// Returns: [] (所有余数都重复)
+```
+
+#### 参数
+
+- `arr1` (`readonly T[]`): 要比较的第一个数组。
+- `arr2` (`readonly T[]`): 要比较的第二个数组。
+- `mapper` (`(item: T) => U`): 将每个元素转换为可比较值的函数。
+
+#### 返回值
+
+(`T[]`): 返回根据映射函数的结果计算的对称差集的新数组。

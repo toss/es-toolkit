@@ -1,34 +1,55 @@
-# toFinite
+# toFinite (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Converts `value` to a finite number.
-
-## Signature
+Converts a value to a finite number.
 
 ```typescript
-function toFinite(value: any): number;
+const finite = toFinite(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`any`): The value to convert.
+### `toFinite(value)`
 
-### Returns
-
-(`number`): The finite number.
-
-## Examples
+Converts a value to a finite number. Infinity values are converted to Number.MAX_VALUE, and NaN is treated as 0.
 
 ```typescript
-toFinite(3.2); // => 3.2
-toFinite(Number.MIN_VALUE); // => 5e-324
-toFinite(Infinity); // => 1.7976931348623157e+308
-toFinite('3.2'); // => 3.2
-toFinite(Symbol.iterator); // => 0
-toFinite(NaN); // => 0
+import { toFinite } from 'es-toolkit/compat';
+
+// Regular numbers are returned as is
+toFinite(3.2);
+// Returns: 3.2
+
+// Infinity is converted to MAX_VALUE
+toFinite(Infinity);
+// Returns: 1.7976931348623157e+308
+
+toFinite(-Infinity);
+// Returns: -1.7976931348623157e+308
+
+// String numbers are converted to numbers
+toFinite('3.2');
+// Returns: 3.2
 ```
+
+Invalid values are converted to 0.
+
+```typescript
+import { toFinite } from 'es-toolkit/compat';
+
+toFinite(NaN);
+// Returns: 0
+
+toFinite(Symbol.iterator);
+// Returns: 0
+
+toFinite(null);
+// Returns: 0
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to convert.
+
+#### Returns
+
+(`number`): Returns the converted finite number.

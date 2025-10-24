@@ -310,13 +310,13 @@ function areObjectsEqual(
 
         for (let i = 0; i < aKeys.length; i++) {
           const propKey = aKeys[i];
-          const aProp = (a as any)[propKey];
+          const aProp = a[propKey];
 
           if (!Object.hasOwn(b, propKey)) {
             return false;
           }
 
-          const bProp = (b as any)[propKey];
+          const bProp = b[propKey];
 
           if (!isEqualWithImpl(aProp, bProp, propKey, a, b, stack, areValuesEqual)) {
             return false;

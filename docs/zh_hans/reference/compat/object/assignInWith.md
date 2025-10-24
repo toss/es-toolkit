@@ -1,65 +1,71 @@
-# assignInWith
+# assignInWith (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 建议实现自定义逻辑
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `assignInWith` 函数由于继承属性处理和自定义函数调用而以复杂且缓慢的方式运行。
+
+请改用 `Object.assign` 并直接实现自定义逻辑。
+
 :::
 
-将 `source` 对象的属性值分配给 `object`。它还包括从原型链继承的属性。您可以提供 `getValueToAssign` 函数来决定每个属性应该分配什么值。
-
-在 `source` 和 `object` 中具有相同值的属性将不会被覆盖。
-
-您可以使用 `getValueToAssign` 函数来决定要分配给 `object` 的值。函数返回的值将被分配。如果未提供该函数，则默认使用 `identity` 函数。
-
-## 签名
+使用自定义函数将源对象的所有属性(包括继承属性)分配给目标对象。
 
 ```typescript
-function assignInWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function assignInWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function assignInWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function assignInWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function assignInWith(object: any, ...sources: any[]): any;
+const result = assignInWith(target, ...sources, customizer);
 ```
 
-### 参数
+## 参考
 
-- `object` (`any`): 将要分配属性的目标对象。
-- `sources` (`...any[]`): 其属性将被分配到目标对象的源对象。
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): 用于确定每个属性应分配什么值的函数。该函数返回的值将被分配给相应的属性。
+### `assignInWith(target, ...sources, customizer)`
 
-### 返回值
-
-(`any`): 更新后的目标对象，其中包含源对象分配的属性。
-
-## 示例
+当您想要在包含继承属性的同时自定义属性分配方式时,请使用 `assignInWith`。自定义函数决定每个属性的最终值。
 
 ```typescript
-const target = { a: 1 };
-const result = assignInWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { assignInWith } from 'es-toolkit/compat';
+
+// 基本用法 - 仅在undefined时分配
+const target = { a: 1, b: undefined };
+const source = { b: 2, c: 3 };
+const result = assignInWith(target, source, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// 结果: { a: 1, b: 2, c: 3 }
+
+// 合并数组值的自定义函数
+const target2 = { numbers: [1, 2] };
+const source2 = { numbers: [3, 4], name: 'test' };
+assignInWith(target2, source2, (objValue, srcValue) => {
+  if (Array.isArray(objValue) && Array.isArray(srcValue)) {
+    return objValue.concat(srcValue);
+  }
+  return srcValue;
+});
+// 结果: { numbers: [1, 2, 3, 4], name: 'test' }
+
+// 也处理继承的属性
+function Parent() {}
+Parent.prototype.inherited = 'value';
+const child = Object.create(Parent.prototype);
+child.own = 'ownValue';
+
+const target3 = { existing: 'data' };
+assignInWith(target3, child, (objValue, srcValue, key) => {
+  if (objValue === undefined) {
+    return `processed_${srcValue}`;
+  }
+  return objValue;
+});
+// 结果: { existing: 'data', own: 'processed_ownValue', inherited: 'processed_value' }
 ```
+
+如果自定义函数返回 `undefined`,则使用默认的分配行为。与 `assignIn` 不同,此函数允许您对每个属性应用自定义逻辑。
+
+#### 参数
+
+- `target` (`any`): 将接收属性的目标对象。
+- `...sources` (`any[]`): 要复制属性的源对象。自有属性和继承属性都会被复制。
+- `customizer` (`function`): 决定要分配的值的函数。格式为 `(objValue, srcValue, key, object, source) => any`。如果返回 `undefined`,则使用默认的分配行为。
+
+#### 返回值
+
+(`any`): 返回修改后的目标对象。目标对象本身被修改并返回。

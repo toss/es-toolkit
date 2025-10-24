@@ -1,68 +1,51 @@
 # flow
 
-주어진 함수들을 연속해서 실행하는 새로운 함수를 만들어요. 이전 함수의 결괏값은 다음 함수의 인자로 주어져요.
-
-반환된 함수에게 주어진 `this`는 파라미터로 주어진 함수들에게도 전달돼요.
-
-## 인터페이스
+여러 함수를 순서대로 실행하는 새로운 함수를 만들어요.
 
 ```typescript
-function flow<R>(f: () => R): () => R;
-function flow<A extends any[], R>(f1: (...args: A) => R): (...args: A) => R;
-function flow<A extends any[], R1, R2>(f1: (...args: A) => R1, f2: (a: R1) => R2): (...args: A) => R2;
-function flow<A extends any[], R1, R2, R3>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3
-): (...args: A) => R3;
-function flow<A extends any[], R1, R2, R3, R4>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3,
-  f4: (a: R3) => R4
-): (...args: A) => R4;
-function flow<A extends any[], R1, R2, R3, R4, R5>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3,
-  f4: (a: R3) => R4,
-  f5: (a: R4) => R5
-): (...args: A) => R5;
-function flow(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
+const combinedFunc = flow(func1, func2, func3);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `funcs` (`Array<(...args: any[]) => any>`): 호출할 함수들.
+### `flow(...funcs)`
 
-### 반환 값
-
-(`(...args: any[]) => any`): 주어진 함수들을 연속해서 실행하는 새로운 함수.
-
-## 예시
+함수들을 연결해서 파이프라인을 만들고 싶을 때 `flow`를 사용하세요. 이전 함수의 결과가 다음 함수의 입력이 돼요. 데이터를 여러 단계로 변환할 때 유용해요.
 
 ```typescript
-const add = (x: number, y: number) => x + y;
-const square = (n: number) => n * n;
-
-const combined = flow(add, square);
-console.log(combined(1, 2)); // 9
-```
-
-## Lodash와 호환성
-
-`es-toolkit/compat`에서 `flow`를 가져오면 lodash와 완전히 호환돼요.
-
-- `flow`는 파라미터로 개별 함수뿐만 아니라 함수들의 배열도 받을 수 있어요.
-- 파라미터로 함수가 아닌 값이 주어지면 `flow`는 오류를 발생시켜요.
-
-```typescript
-import { flow } from 'es-toolkit/compat';
+import { flow } from 'es-toolkit/function';
 
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 const double = (n: number) => n * 2;
 
-const combined = flow([add, square], double);
-console.log(combined(1, 2)); // => 18
+const combined = flow(add, square, double);
+
+// 먼저 add(1, 2) = 3
+// 그 다음 square(3) = 9
+// 마지막으로 double(9) = 18
+combined(1, 2);
+// Returns: 18
 ```
+
+데이터 변환 파이프라인을 만들 때 특히 유용해요.
+
+```typescript
+const processData = flow(
+  (text: string) => text.trim(),
+  (text: string) => text.toLowerCase(),
+  (text: string) => text.split(' '),
+  (words: string[]) => words.filter(word => word.length > 3)
+);
+
+processData('  Hello World JavaScript  ');
+// Returns: ['hello', 'world', 'javascript']
+```
+
+#### 파라미터
+
+- `funcs` (`Array<(...args: any[]) => any>`): 순서대로 실행할 함수들이에요.
+
+#### 반환 값
+
+(`(...args: any[]) => any`): 주어진 함수들을 순서대로 실행하는 새로운 함수예요. 첫 번째 함수는 여러 인자를 받을 수 있고, 나머지 함수들은 이전 함수의 결과를 받아요.

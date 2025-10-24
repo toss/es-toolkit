@@ -1,74 +1,63 @@
 # before
 
-指定された関数（`func`）の呼び出し回数を制限する新しい関数を生成します。
-
-## インターフェース
+関数の呼び出し回数を制限する新しい関数を作成します。
 
 ```typescript
-function before<F extends (...args: any[]) => any>(
-  n: number,
-  func: F
-): (...args: Parameters<F>) => ReturnType<F> | undefined;
+const limitedFunc = before(n, func);
 ```
 
-### パラメータ
+## 参照
 
-- `n` (`number`): 返される関数が `func` を呼び出すまでに許可される呼び出し回数です。
-  - `n` が 0 の場合、`func` は呼び出されません。
-  - `n` が正の整数の場合、`func` は最大 `n-1` 回呼び出されます。
-- `func` (`F`): 呼び出し回数制限が適用される関数です。
+### `before(n, func)`
 
-### 戻り値
-
-(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 新しい関数を返します。この関数は以下の機能を持ちます：
-
-- 呼び出し回数を追跡します。
-- `n-1` 回目の呼び出しまで `func` を呼び出します。
-- 呼び出し回数が `n` に達するか超えると、`undefined` を返して関数呼び出しを停止します。
-
-### エラー
-
-`n` が負の数の場合、エラーが発生します。
-
-## 例
+関数が特定の回数まで実行されるように制限したいときに`before`を使用してください。`n-1`回目の呼び出しまで関数が実行され、`n`回目からは実行されなくなります。
 
 ```typescript
 import { before } from 'es-toolkit/function';
 
-const mockFn = () => {
+const beforeFn = before(3, () => {
   console.log('実行されました');
-};
-const beforeFn = before(3, mockFn);
-
-// '実行されました' がログに出力されます
-beforeFn();
-
-// '実行されました' がログに出力されます
-beforeFn();
-
-// 何もログに出力されません
-beforeFn();
-```
-
-## Lodash 互換性
-
-`es-toolkit/compat` から `before` をインポートすると、Lodash と互換になります。
-
-- `n` が負の場合でもエラーをスローしません。
-- `func` が関数でない場合はエラーをスローします。
-- 呼び出し回数が `n` に達するか、それ以上になると、`func` の最後の結果を返します。
-
-```typescript
-import { before } from 'es-toolkit/compat';
-
-let count = 0;
-
-const before3 = before(3, () => {
-  console.log('カウントを増やします...');
-  return ++count;
 });
 
-console.log(before3()); // カウントを増やします... => 1
-console.log(before3()); // カウントを増やします... => 2
-console.log(before3()); //                    => 2
+// '実行されました'をログ出力します
+beforeFn();
+
+// '実行されました'をログ出力します
+beforeFn();
+
+// 何もログ出力しません
+beforeFn();
+
+// 何もログ出力しません
+beforeFn();
 ```
+
+初期化や設定のように一度だけ実行されるべき作業に便利です。
+
+```typescript
+let initialized = false;
+
+const initialize = before(2, () => {
+  console.log('初期化中...');
+  initialized = true;
+});
+
+// '初期化中...'をログ出力して初期化を実行します
+initialize();
+
+// すでに初期化されているので何もしません
+initialize();
+```
+
+#### パラメータ
+
+- `n` (`number`): 返される関数が`func`を呼び出せる最大回数です。`n`が0の場合、`func`は呼び出されません。正の整数の場合、最大`n-1`回呼び出されます。
+- `func` (`F`): 呼び出し回数が制限される関数です。
+
+#### 戻り値
+
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 呼び出し回数を追跡し、`n-1`回目まで`func`を実行する新しい関数です。`n`回目以降の呼び出しでは`undefined`を返します。
+
+#### エラー
+
+`n`が整数でない場合や負数の場合はエラーを発生させます。

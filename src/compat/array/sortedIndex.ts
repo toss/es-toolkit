@@ -54,8 +54,9 @@ export function sortedIndex<T>(array: ArrayLike<T> | null | undefined, value: T)
   if (isNil(array)) {
     return 0;
   }
-  let low = 0,
-    high = isNil(array) ? low : array.length;
+
+  let low = 0;
+  let high = array.length;
 
   if (isNumber(value) && value === value && high <= HALF_MAX_ARRAY_LENGTH) {
     while (low < high) {

@@ -2,29 +2,42 @@
 
 문자열을 케밥 표기법으로 변환해요.
 
-케밥 표기법은 여러 단어로 구성된 식별자의 각 단어를 소문자로 쓰고 단어를 대시(\-)로 연결하는 명명 규칙이에요. 예를 들어 `kebab-case`와 같이 작성해요.
-
-## 인터페이스
-
 ```typescript
-function kebabCase(str: string): string;
+const result = kebabCase(str);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `str` (`string`): 케밥 대소문자로 변환할 문자열입니다.
+### `kebabCase(str)`
 
-### 반환 값
-
-(`string`) 케밥 대소문자로 변환된 문자열입니다.
-
-## 예시
+문자열을 케밥 표기법으로 변환하고 싶을 때 `kebabCase`를 사용하세요. 케밥 표기법은 각 단어를 소문자로 쓰고 단어 사이를 대시(-)로 연결하는 명명 규칙이에요.
 
 ```typescript
 import { kebabCase } from 'es-toolkit/string';
 
-kebabCase('camelCase'); // returns 'camel-case'
-kebabCase('some whitespace'); // returns 'some-whitespace'
-kebabCase('hyphen-text'); // returns 'hyphen-text'
-kebabCase('HTTPRequest'); // returns 'http-request'
+// 카멜 케이스를 케밥 케이스로 변환해요
+kebabCase('camelCase');
+// 결과: 'camel-case'
+
+// 공백이 있는 문자열을 변환해요
+kebabCase('some whitespace');
+// 결과: 'some-whitespace'
+
+// 이미 케밥 케이스인 문자열은 그대로 유지해요
+kebabCase('hyphen-text');
+// 결과: 'hyphen-text'
+
+// 대문자로 된 문자열을 변환해요
+kebabCase('HTTPRequest');
+// 결과: 'http-request'
 ```
+
+이 함수는 API 엔드포인트나 CSS 클래스 이름, HTML 속성 등을 만들 때 유용해요.
+
+#### 파라미터
+
+- `str` (`string`): 케밥 표기법으로 변환할 문자열이에요.
+
+#### 반환 값
+
+(`string`): 케밥 표기법으로 변환된 문자열이에요.

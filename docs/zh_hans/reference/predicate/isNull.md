@@ -1,35 +1,59 @@
 # isNull
 
-检查给定的值是否为 `null`。
-
-该函数测试提供的值是否严格相等于 `null`。
-
-如果值为 `null`，则返回 `true`；否则返回 `false`。
-
-在 TypeScript 中，该函数还可以作为类型谓词，将参数的类型缩小为 `null`。
-
-## 签名
+检查值是否为 `null`。
 
 ```typescript
-function isNull(x: unknown): x is null;
+const result = isNull(value);
 ```
 
-### 参数
+## 参考
 
-- `x` (`unknown`): 要检查是否为 null 的值
+### `isNull(value)`
 
-### 返回值
-
-(`x is null`): 如果值为 null，则返回 `true`；否则返回 `false`。
-
-## 示例
+当您想检查值是否正好是 `null` 时，请使用 `isNull`。它使用严格相等（`===`）仅识别 `null` 而不识别 undefined。
 
 ```typescript
-const value1 = null;
-const value2 = undefined;
-const value3 = 42;
+import { isNull } from 'es-toolkit/predicate';
 
-console.log(isNull(value1)); // true
-console.log(isNull(value2)); // false
-console.log(isNull(value3)); // false
+// null 值
+console.log(isNull(null)); // true
+
+// 非 null 值
+console.log(isNull(undefined)); // false
+console.log(isNull(0)); // false
+console.log(isNull('')); // false
+console.log(isNull(false)); // false
+console.log(isNull([])); // false
+console.log(isNull({})); // false
 ```
+
+它也可以在 TypeScript 中用作类型守卫。
+
+```typescript
+function processValue(value: string | null | undefined) {
+  if (isNull(value)) {
+    // value 现在被缩小为 null 类型
+    console.log('值为 null');
+  } else {
+    // value 被缩小为 string | undefined 类型
+    console.log('值不是 null：', value);
+  }
+}
+```
+
+`isNull` 与 [`isNil`](./isNil.md) 不同，它将 `undefined` 视为 `false`。
+
+```typescript
+import { isNil, isNull } from 'es-toolkit/predicate';
+
+console.log(isNull(undefined)); // false
+console.log(isNil(undefined)); // true
+```
+
+#### 参数
+
+- `value` (`unknown`): 要检查是否为 `null` 的值。
+
+#### 返回值
+
+(`value is null`): 如果值为 `null` 则返回 `true`，否则返回 `false`。

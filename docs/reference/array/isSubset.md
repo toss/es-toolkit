@@ -1,34 +1,67 @@
 # isSubset
 
-Checks if the `subset` array is entirely contained within the `superset` array.
-
-## Signature
+Checks if one array is a subset of another array.
 
 ```typescript
-function isSubset<T>(superset: T[], subset: T[]): boolean;
+const result = isSubset(superset, subset);
 ```
 
-### Parameters
+## Reference
 
-- `superset` (`T[]`): The array that may contain all elements of the subset.
-- `subset` (`T[]`): The array to check against the superset.
+### `isSubset(superset, subset)`
 
-### Returns
-
-(`boolean`): Returns `true` if all elements of the `subset` are present in the `superset`, otherwise returns `false`.
-
-## Examples
+Use `isSubset` when you want to check if all elements of one array are contained in another array. This is useful for verifying subset relationships or checking if permissions, features, tags, etc., are within the allowed range.
 
 ```typescript
-const superset1 = [1, 2, 3, 4, 5];
-const subset1 = [2, 3, 4];
+import { isSubset } from 'es-toolkit/array';
 
-isSubset(superset1, subset1);
-// Return true
+// Check subset in number arrays
+const numbers = [1, 2, 3, 4, 5];
+const subset = [2, 3, 4];
+isSubset(numbers, subset);
+// Returns: true
 
-const superset2 = ['a', 'b', 'c'];
-const subset2 = ['a', 'd'];
+// Check subset in string arrays
+const permissions = ['read', 'write', 'delete', 'admin'];
+const userPermissions = ['read', 'write'];
+isSubset(permissions, userPermissions);
+// Returns: true
 
-isSubset(superset2, subset2);
-// Return false
+// When it's not a subset
+const colors = ['red', 'blue', 'green'];
+const invalidColors = ['red', 'yellow'];
+isSubset(colors, invalidColors);
+// Returns: false
 ```
+
+Special cases are also handled correctly.
+
+```typescript
+import { isSubset } from 'es-toolkit/array';
+
+// An empty array is always a subset
+const anyArray = [1, 2, 3];
+const emptyArray: number[] = [];
+isSubset(anyArray, emptyArray);
+// Returns: true
+
+// The same array is a subset of itself
+const same = ['a', 'b', 'c'];
+isSubset(same, same);
+// Returns: true
+
+// Works correctly even with duplicate elements
+const withDuplicates = [1, 2, 2, 3];
+const duplicateSubset = [2, 2];
+isSubset(withDuplicates, duplicateSubset);
+// Returns: true
+```
+
+#### Parameters
+
+- `superset` (`readonly T[]`): The superset array that may contain all elements of the subset.
+- `subset` (`readonly T[]`): The subset array to check if it's contained in the superset.
+
+#### Returns
+
+(`boolean`): Returns `true` if all elements of the subset are contained in the superset, otherwise returns `false`.

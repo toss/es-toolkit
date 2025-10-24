@@ -13,7 +13,7 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
  * const num = 29;
  * const clonedNum = clone(num);
  * console.log(clonedNum); // 29
- * console.log(clonedNum === num) ; // true
+ * console.log(clonedNum === num); // true
  *
  * @example
  * // Clone an array

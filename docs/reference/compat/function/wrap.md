@@ -1,35 +1,77 @@
-# wrap
+# wrap (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use higher-order functions instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `wrap` function simply wraps a function. In most cases, it's clearer to use simpler higher-order functions or closures.
+
+Use faster, more modern closures or direct function definitions instead.
+
 :::
 
-Creates a new function that wraps the given function `func`.
-In this process, you can apply additional logic defined in the `wrapper` function before and after the execution of the original function.
-
-If a `value` is provided instead of a function, this value is passed as the first argument to the `wrapper` function.
-
-## Signature
+Creates a new function that wraps the given value or function.
 
 ```typescript
-function wrap<F extends (...args: unknown[]) => unknown>(
-  func: F,
-  wrapper: (value: F, ...args: Parameters<F>) => ReturnType<F>
-): F;
-function wrap<T, A extends unknown[], R>(value: T, wrapper: (value: T, ...args: A) => R): (...args: A) => R;
+const wrappedFunc = wrap(value, wrapper);
 ```
 
-## Examples
+## Reference
+
+### `wrap(value, wrapper)`
+
+Use `wrap` when you want to apply additional logic to a value or function. You can define new behavior through a wrapper function that receives the original value as its first argument.
 
 ```typescript
-// Wrap a function
+import { wrap } from 'es-toolkit/compat';
+
+// Wrap a function to add logging functionality
 const greet = (name: string) => `Hi, ${name}`;
-const wrapped = wrap(greet, (value, name) => `[LOG] ${value(name)}`);
-wrapped('Bob'); // => "[LOG] Hi, Bob"
+const loggedGreet = wrap(greet, (originalFunc, name) => {
+  const result = originalFunc(name);
+  console.log(`[LOG] ${result}`);
+  return result;
+});
 
-// Wrap a primitive value
-const wrapped = wrap('value', v => `<p>${v}</p>`);
-wrapped(); // => "<p>value</p>"
+loggedGreet('Alice'); // Logs "[LOG] Hi, Alice" to console and returns "Hi, Alice"
 ```
+
+You can also wrap non-function values. The value is passed as the first argument to the wrapper function.
+
+```typescript
+import { wrap } from 'es-toolkit/compat';
+
+// Create a function that wraps a string in HTML tags
+const htmlWrapper = wrap('Hello World', (text, tag) => `<${tag}>${text}</${tag}>`);
+console.log(htmlWrapper('h1')); // "<h1>Hello World</h1>"
+
+// Create a function that uses a number in calculations
+const calculate = wrap(10, (baseValue, multiplier) => baseValue * multiplier);
+console.log(calculate(5)); // 50
+```
+
+Here's a more complex function wrapping example.
+
+```typescript
+import { wrap } from 'es-toolkit/compat';
+
+const add = (a: number, b: number) => a + b;
+
+// Create a function with performance measurement
+const timedAdd = wrap(add, (originalAdd, a, b) => {
+  const start = Date.now();
+  const result = originalAdd(a, b);
+  const end = Date.now();
+  console.log(`Execution time: ${end - start}ms`);
+  return result;
+});
+
+timedAdd(3, 7); // Logs execution time to console and returns 10
+```
+
+#### Parameters
+
+- `value` (`T`): The value or function to wrap.
+- `wrapper` (`(value: T, ...args: U[]) => V`): The function that receives the original value as its first argument and applies additional logic.
+
+#### Returns
+
+(`(...args: U[]) => V`): Returns a new function with the wrapper function applied.

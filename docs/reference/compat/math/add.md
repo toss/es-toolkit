@@ -1,32 +1,78 @@
-# add
+# add (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use the `+` operator
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `add` function operates slowly due to complex type conversion and string handling.
+
+Use the faster and simpler `+` operator instead.
+
 :::
 
-Adds two numbers.
-
-## Signature
+Adds two values.
 
 ```typescript
-function add(value: number, other: number): number;
+const result = add(value, other);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`number`): The first number to add.
-- `other` (`number`): The second number to add.
+### `add(value, other)`
 
-### Returns
-
-(`number`): Returns the sum of the two numbers. If either value is `NaN`, it returns `NaN`.
-
-## Examples
+Use `add` when you want to add two values. It can handle not only numbers but also strings.
 
 ```typescript
-const result1 = add(2, 3); // Both values are of type number, so result1 is 5.
-const result2 = add(NaN, 5); // Since value is NaN, result2 is NaN.
-const result3 = add(10, NaN); // Since other is NaN, result3 is NaN.
+import { add } from 'es-toolkit/compat';
+
+// Adding numbers
+add(2, 3);
+// Returns: 5
+
+add(1.5, 2.5);
+// Returns: 4
+
+// Handling NaN
+add(NaN, 5);
+// Returns: NaN
+
+add(10, NaN);
+// Returns: NaN
 ```
+
+When strings are included, it operates as string concatenation.
+
+```typescript
+import { add } from 'es-toolkit/compat';
+
+add('2', 3);
+// Returns: '23'
+
+add(1, '5');
+// Returns: '15'
+
+add('hello', 'world');
+// Returns: 'helloworld'
+```
+
+`undefined` values are handled specially.
+
+```typescript
+import { add } from 'es-toolkit/compat';
+
+add(undefined, undefined);
+// Returns: 0
+
+add(5, undefined);
+// Returns: 5
+
+add(undefined, 3);
+// Returns: 3
+```
+
+#### Parameters
+
+- `value` (`number`): The first value to add.
+- `other` (`number`): The second value to add.
+
+#### Returns
+
+(`number | string`): Returns the sum of two values. Returns a string if strings are included, otherwise returns a number.
