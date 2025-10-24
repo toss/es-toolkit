@@ -56,7 +56,7 @@ flatMapDepth(objects, 'items', 2);
 // Partial matching with an object
 const users = [{ active: [[true], [false]] }, { active: [[false]] }];
 flatMapDepth(users, { active: [[false]] }, 2);
-// => [false]
+// => [true, true]
 ```
 
 `null` or `undefined` are treated as empty arrays.

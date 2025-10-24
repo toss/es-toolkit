@@ -40,7 +40,7 @@ isEmpty(); // true
 
 // 배열 같은 객체
 isEmpty({ 0: 'a', length: 1 }); // false
-isEmpty({ length: 0 }); // true (실제 배열이 아니므로 false)
+isEmpty({ length: 0 }); // false
 ```
 
 원시 값들은 모두 빈 값으로 처리돼요:

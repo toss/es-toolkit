@@ -52,12 +52,12 @@ const numbers3 = rangeRight(0, 20, 5);
 console.log(numbers3); // [15, 10, 5, 0]
 
 // Can also go in the negative direction.
-const numbers4 = rangeRight(0, -5, -1);
-console.log(numbers4); // [-4, -3, -2, -1, 0]
+const numbers4 = rangeRight(-5, 0, 1);
+console.log(numbers4); // [-1, -2, -3, -4, -5]
 
 // Can go from smaller to larger numbers.
-const numbers5 = rangeRight(0, 5, -1);
-console.log(numbers5); // [1, 2, 3, 4]
+const numbers5 = rangeRight(5, 0, -1);
+console.log(numbers5); // [1, 2, 3, 4, 5]
 ```
 
 Useful when you need reverse order for countdowns or pagination.

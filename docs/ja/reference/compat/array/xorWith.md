@@ -45,7 +45,7 @@ xorWith([1], [2], [3], (a, b) => a === b);
 
 // 文字列の長さで比較
 xorWith(['hello'], ['world', 'hi'], (a, b) => a.length === b.length);
-// 戻り値: ['hello', 'world']
+// 戻り値: ['hi']
 ```
 
 比較関数を提供しない場合、デフォルトで浅い等価比較を使用します。

@@ -31,7 +31,7 @@ const words = [
   ['es', 'toolkit'],
 ];
 const combined = unzipWith(words, (a, b, c) => a + b + c);
-console.log(combined); // ['hellofoes', 'worldbartoolkit']
+console.log(combined); // ['hellofooes', 'worldbartoolkit']
 
 // 计算对象数组中特定属性的平均值。
 const scores = [
@@ -60,13 +60,13 @@ const result = unzipWith(mixed, (a, b, c) => {
 console.log(result); // [6, 9] (1+2+3, 4+5+0)
 ```
 
-传入空数组返回空数组。
+传入空数组将会抛出异常。
 
 ```typescript
 import { unzipWith } from 'es-toolkit/array';
 
 const empty = unzipWith([], (a, b) => a + b);
-console.log(empty); // []
+console.log(empty); // 抛出异常
 ```
 
 #### 参数

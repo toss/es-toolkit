@@ -43,7 +43,7 @@ startCase('_abc_123_def'); // 'Abc 123 Def'
 
 // 空文字や意味のない区切り文字のみの場合
 startCase('_-_-_-_'); // ''
-startCase('12abc 12ABC'); // '12 Abc 12 ABC'
+startCase('12abc 12ABC'); // '12 Abc 12 Abc'
 ```
 
 #### パラメータ

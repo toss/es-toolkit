@@ -42,7 +42,7 @@ unionWith([1, 2], [2, 3], (a, b) => a === b);
 
 // Compare by string length
 unionWith(['ab', 'cd'], ['ef', 'gh', 'ab'], (a, b) => a.length === b.length);
-// Returns: ['ab', 'ef']
+// Returns: ['ab']
 ```
 
 `null` or `undefined` arrays are ignored.

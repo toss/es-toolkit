@@ -52,7 +52,7 @@ const arr = [1, 2, 3];
 arr.customProp = 'custom';
 const target4 = {};
 assignIn(target4, arr);
-// 結果: { '0': 1, '1': 2, '2': 3, customProp: 'custom', length: 3 }
+// 結果: { '0': 1, '1': 2, '2': 3, customProp: 'custom' }
 ```
 
 この関数は、`assign`とは異なり、継承されたプロパティも含めてコピーします。値が同じ場合は上書きしない最適化もあります。
