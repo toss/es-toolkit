@@ -8,15 +8,15 @@ on:
 
 jobs:
   broken-link-checker:
+    if: github.repository == 'toss/es-toolkit'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
           node-version-file: '.nvmrc'
+          cache: 'yarn'
       - run: yarn install
       - name: Check broken link
         env:

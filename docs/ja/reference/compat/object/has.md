@@ -1,66 +1,68 @@
-# has
+# has (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.hasOwn` または `in` 演算子を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `has` 関数は、複雑なパス解析や配列インデックス処理により動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.hasOwn()` または `in` 演算子を使用してください。
+
 :::
 
-オブジェクトが指定されたパスに対応するプロパティを持っているかどうかを確認します。
-
-パスとしては、オブジェクトのプロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
-
-パスがインデックスを表し、オブジェクトが配列または `arguments` オブジェクトの場合、そのインデックスが有効か（0以上で長さ未満か）を確認します。そのため、すべてのインデックスが定義されていないスパース配列（Sparse array）にも使用できます。
-
-## インターフェース
+オブジェクトに指定されたパスのプロパティが存在するかどうかを確認します。
 
 ```typescript
-function has<T, K extends PropertyKey>(
-  object: T,
-  path: K
-): object is T & { [P in K]: P extends keyof T ? T[P] : Record<string, unknown> extends T ? T[keyof T] : unknown } & {
-  [key: symbol]: unknown;
-};
-function has<T>(object: T, path: PropertyKey | PropertyKey[]): boolean;
+const exists = has(object, path);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`T`): プロパティの存在を確認するオブジェクト。
-- `path` (`PropertyKey | PropertyKey[]`): プロパティの存在を確認するパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
+### `has(object, path)`
 
-### 戻り値
-
-(`boolean`): オブジェクトがパスに値を持っている場合は `true`、そうでない場合は `false`。
-
-## 例
+オブジェクトに特定のパスのプロパティがあるかどうかを確認したい場合は、`has` を使用してください。自身のプロパティ(own property)のみを確認し、継承されたプロパティは確認しません。
 
 ```typescript
 import { has } from 'es-toolkit/compat';
 
-const obj = { a: { b: { c: 3 } } };
+// 単純なプロパティの確認
+const object = { a: 1, b: 2 };
+has(object, 'a');
+// => true
 
-has(obj, 'a'); // true
-has(obj, ['a', 'b']); // true
-has(obj, ['a', 'b', 'c']); // true
-has(obj, 'a.b.c'); // true
-has(obj, 'a.b.d'); // false
-has(obj, ['a', 'b', 'c', 'd']); // false
-has([], 0); // false
-has([1, 2, 3], 2); // true
-has([1, 2, 3], 5); // false
+// ネストされたオブジェクトの確認
+const nested = { a: { b: { c: 3 } } };
+has(nested, 'a.b.c');
+// => true
+has(nested, ['a', 'b', 'c']);
+// => true
+
+// 存在しないプロパティ
+has(nested, 'a.b.d');
+// => false
+
+// 配列インデックスの確認
+const array = [1, 2, 3];
+has(array, 2);
+// => true
+has(array, 5);
+// => false
 ```
 
-## デモ
+疎配列(sparse array)でも正しく動作します。
 
-::: sandpack
-
-```ts index.ts
+```typescript
 import { has } from 'es-toolkit/compat';
 
-const obj = { a: { b: { c: 3 } } };
-
-console.log(has(obj, 'a.b.c'));
+const sparse = [1, , 3]; // インデックス1が空
+has(sparse, 0); // true
+has(sparse, 1); // true - 実際には存在しますが、値はundefined
+has(sparse, 2); // true
 ```
 
-:::
+#### パラメータ
+
+- `object` (`any`): 検査するオブジェクト。
+- `path` (`PropertyPath`): 確認するプロパティのパス。文字列、数値、シンボル、または配列で表すことができます。
+
+#### 戻り値
+
+(`boolean`): パスのプロパティが存在する場合は `true`、そうでない場合は `false` を返します。

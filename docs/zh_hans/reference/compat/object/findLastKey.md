@@ -1,76 +1,65 @@
-# findLastKey
+# findLastKey (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Array.findLast()` 和 `Object.keys()`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `findLastKey` 函数由于需要处理各种条件类型和兼容性逻辑而变得复杂。
+
+建议使用更快、更现代的 `Array.findLast()` 和 `Object.keys()`。
+
 :::
 
-返回对象中满足指定条件的最后一个元素的键。
-
-与从头开始搜索的 `findKey` 不同，`findLastKey` 从对象的末尾开始搜索。
-
-## 签名
+从末尾开始查找符合条件的最后一个元素的键。
 
 ```typescript
-function findLastKey<T>(
-  obj: T | null | undefined,
-  conditionToFind: (value: T[keyof T], key: string, obj: T) => unknown
-): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, objectToFind: Partial<T[keyof T]>): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, propertyToFind: [PropertyKey, any]): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, propertyToFind: PropertyKey): string | undefined;
-
-function findLastKey<T>(
-  obj: T | null | undefined,
-  predicate?:
-    | ((value: T[keyof T], key: string, obj: T) => unknown)
-    | PropertyKey
-    | [PropertyKey, any]
-    | Partial<T[keyof T]>
-): string | undefined;
+const key = findLastKey(obj, predicate);
 ```
 
-### 参数
+## 参考
 
-- `obj` (`T | null | undefined`): 要检查的对象。
-- `predicate`: 每次迭代调用的函数。可以是以下之一：
-  - `(value, key, obj) => unknown` - 为每个元素执行的函数。
-  - `Partial<T[keyof T]>` - 匹配具有相同属性的元素。
-  - `[PropertyKey, any]` - 匹配具有指定属性和值的元素。
-  - `PropertyKey` - 匹配指定属性为真值的元素。
+### `findLastKey(obj, predicate)`
 
-### 返回
-
-(`string | undefined`): 返回匹配元素的键，如果没有匹配的元素则返回 `undefined`。
-
-### 示例
+使用 `findLastKey` 在对象中查找符合条件的最后一个元素的键。与 `findKey` 相反,它从末尾开始搜索。可以使用函数、对象、数组、字符串等各种形式的条件。
 
 ```typescript
 import { findLastKey } from 'es-toolkit/compat';
 
+// 使用函数条件查找键
 const users = {
-  barney: { age: 36, active: true },
-  fred: { age: 40, active: false },
-  pebbles: { age: 1, active: true },
+  alice: { age: 25, active: true },
+  bob: { age: 30, active: false },
+  charlie: { age: 35, active: true },
 };
 
-// 使用函数谓词
-findLastKey(users, o => o.age < 40);
-// => 'pebbles'
+findLastKey(users, user => user.active);
+// 返回值: 'charlie' (从末尾找到的第一个 active: true)
 
-// 使用部分对象
+// 使用对象条件查找键
 findLastKey(users, { active: true });
-// => 'pebbles'
+// 返回值: 'charlie'
 
-// 使用属性-值对
-findLastKey(users, ['active', false]);
-// => 'fred'
-
-// 使用属性名（真值检查）
+// 使用属性路径查找键
 findLastKey(users, 'active');
-// => 'pebbles'
+// 返回值: 'charlie'
+
+// 使用属性-值数组查找键
+findLastKey(users, ['active', false]);
+// 返回值: 'bob'
 ```
+
+如果没有符合条件的元素,则返回 `undefined`。
+
+```typescript
+import { findLastKey } from 'es-toolkit/compat';
+
+findLastKey({ a: 1, b: 2 }, value => value > 5);
+// 返回值: undefined
+```
+
+#### 参数
+
+- `obj` (`T | null | undefined`): 要搜索的对象。
+- `predicate` (`ObjectIteratee<T>`, 可选): 应用于每个元素的条件。可以是函数、对象、数组或字符串。
+
+#### 返回值
+
+(`string | undefined`): 返回符合条件的最后一个元素的键。如果没有找到则返回 `undefined`。

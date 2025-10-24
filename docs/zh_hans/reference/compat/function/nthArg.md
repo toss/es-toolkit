@@ -1,38 +1,74 @@
-# nthArg
+# nthArg (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用箭头函数
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `nthArg` 函数只是创建一个返回特定索引参数的包装函数。使用箭头函数可以更简洁清晰地实现相同的功能。
+
+建议使用更快且更现代的箭头函数。
+
 :::
 
-创建一个函数，用于检索指定索引 `n` 处的参数。
-
-如果 `n` 为负数，则返回从末尾开始的第 n 个参数。
-
-## 签名
+创建一个返回指定索引参数的函数。
 
 ```typescript
-function nthArg(n: number): (...args: any[]) => unknown;
+const getNthArg = nthArg(n);
 ```
 
-### 参数
+## 参考
 
-- `n` (`number`): 要检索的参数的索引。
-  如果为负，则从参数列表的末尾开始计数。
+### `nthArg(n)`
 
-### 返回值
-
-(`(args: any[]) => unknown`): 一个新函数，返回指定索引处的参数。
-
-## 示例
+当您只需要函数特定位置的参数时,使用 `nthArg`。如果使用负索引,则从末尾开始计数。
 
 ```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// 创建一个获取第二个参数的函数
 const getSecondArg = nthArg(1);
-const result = getSecondArg('a', 'b', 'c');
-console.log(result); // => 'b'
+getSecondArg('a', 'b', 'c', 'd');
+// Returns: 'b'
 
-const getLastArg = nthArg(-1);
-const result = getLastArg('a', 'b', 'c');
-console.log(result); // => 'c'
+// 创建一个获取倒数第二个参数的函数
+const getPenultimateArg = nthArg(-2);
+getPenultimateArg('a', 'b', 'c', 'd');
+// Returns: 'c'
+
+// 创建一个获取第一个参数的函数(默认)
+const getFirstArg = nthArg();
+getFirstArg('a', 'b', 'c');
+// Returns: 'a'
 ```
+
+与数组方法一起使用时很有用。
+
+```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// 从每个数组中只提取第二个元素
+const arrays = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+arrays.map(nthArg(1));
+// Returns: [2, 5, 8]
+```
+
+负索引从末尾开始计数。
+
+```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// 获取最后一个参数的函数
+const getLastArg = nthArg(-1);
+getLastArg('first', 'middle', 'last');
+// Returns: 'last'
+```
+
+#### 参数
+
+- `n` (`number`, 可选): 要返回的参数的索引。负值从末尾开始计数。默认值为 `0`。
+
+#### 返回值
+
+(`(...args: any[]) => any`): 返回一个新函数,该函数返回指定索引处的参数。

@@ -1,44 +1,78 @@
 # sortBy
 
-根据给定的 `criteria` 对对象数组进行排序。
-
-- 如果提供的是键，它将根据这些键的值对对象进行排序。
-- 如果提供的是函数，它将根据这些函数返回的值进行排序。
-
-该函数返回按升序排列的对象数组。如果两个对象在当前标准下具有相同的值，它将使用下一个标准来确定它们的顺序。
-
-## 签名
+根据给定的标准对对象数组进行升序排序,返回一个新数组。
 
 ```typescript
-function sortBy<T extends object>(arr: T[], criteria: Array<((item: T) => unknown) | keyof T>): T[];
+const sorted = sortBy(arr, criteria);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`): 要排序的对象数组。
-- `criteria` (`Array<keyof T | ((item: T) => unknown)>`): 排序标准。可以是对象键的数组或返回用于排序的值的函数数组。
+### `sortBy(arr, criteria)`
 
-### 返回值
-
-(`T[]`): 按升序排序的对象数组。
-
-## 示例
+当您想根据多个属性或计算值对对象数组进行排序时,请使用 `sortBy`。提供属性名或转换函数的数组,会按照该顺序设置优先级并进行升序排序。在对表格数据排序或需要复杂排序逻辑时非常有用。
 
 ```typescript
-const users = [
-  { user: 'foo', age: 24 },
-  { user: 'bar', age: 7 },
-  { user: 'foo', age: 8 },
-  { user: 'bar', age: 29 },
-];
+import { sortBy } from 'es-toolkit/array';
 
-sortBy(users, ['user', 'age']);
-sortBy(users, [obj => obj.user, obj => obj.age]);
-// 结果为：
+// 按单个属性排序
+const users = [
+  { name: 'john', age: 30 },
+  { name: 'jane', age: 25 },
+  { name: 'bob', age: 35 },
+];
+const byAge = sortBy(users, ['age']);
+// Returns: [{ name: 'jane', age: 25 }, { name: 'john', age: 30 }, { name: 'bob', age: 35 }]
+
+// 按多个属性排序
+const employees = [
+  { name: 'john', department: 'engineering', age: 30 },
+  { name: 'jane', department: 'hr', age: 25 },
+  { name: 'bob', department: 'engineering', age: 35 },
+  { name: 'alice', department: 'engineering', age: 25 },
+];
+const sorted = sortBy(employees, ['department', 'age']);
+// Returns: 先按部门排序,然后按年龄排序
 // [
-//   { user : 'bar', age: 7 },
-//   { user : 'bar', age: 29 },
-//   { user : 'foo', age: 8 },
-//   { user : 'foo', age: 24 },
+//   { name: 'alice', department: 'engineering', age: 25 },
+//   { name: 'john', department: 'engineering', age: 30 },
+//   { name: 'bob', department: 'engineering', age: 35 },
+//   { name: 'jane', department: 'hr', age: 25 }
 // ]
 ```
+
+可以使用函数创建复杂的排序标准。
+
+```typescript
+import { sortBy } from 'es-toolkit/array';
+
+// 混合使用函数和属性
+const products = [
+  { name: 'laptop', price: 1000, category: 'electronics' },
+  { name: 'shirt', price: 50, category: 'clothing' },
+  { name: 'phone', price: 800, category: 'electronics' },
+];
+
+const sorted = sortBy(products, [
+  'category',
+  item => -item.price, // 价格按降序排序
+]);
+// Returns: 先按类别排序,然后按价格从高到低排序
+
+// 按计算值排序
+const words = ['hello', 'a', 'wonderful', 'world'];
+const byLength = sortBy(
+  words.map(word => ({ word, length: word.length })),
+  ['length']
+);
+// Returns: 按字符串长度排序的对象数组
+```
+
+#### 参数
+
+- `arr` (`readonly T[]`): 要排序的对象数组。
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 排序标准。可以是对象属性名或转换函数的数组,前面的标准优先级更高。
+
+#### 返回值
+
+(`T[]`): 返回根据指定标准按升序排序的新数组。

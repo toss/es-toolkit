@@ -1,37 +1,75 @@
-# toSafeInteger
+# toSafeInteger (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
-
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-`value`를 안전한 정수로 변환해요. 안전한 정수란, JavaScript의 `number` 타입으로 정확하게 표현되고, 다른 정수로 반올림되지 않는 정수예요.
-
-무한한 값인 경우, 최대 또는 최소인 안전한 정수로 변환돼요. 소숫점 아래 숫자는 버려요.
-
-## 인터페이스
+값을 안전한 정수로 변환해요.
 
 ```typescript
-function toSafeInteger(value: any): number;
+const result = toSafeInteger(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`any`): 변환할 값.
+### `toSafeInteger(value)`
 
-### 반환 값
-
-(`number`): 변환된 안전한 정수.
-
-## 예시
+값을 안전한 정수로 변환하고 싶을 때 `toSafeInteger`를 사용하세요. 안전한 정수는 JavaScript에서 정확하게 표현 가능한 정수로, `Number.MIN_SAFE_INTEGER`와 `Number.MAX_SAFE_INTEGER` 범위 내의 값이에요.
 
 ```typescript
-toSafeInteger(3.2); // => 3
-toSafeInteger(Number.MAX_VALUE); // => 9007199254740991
-toSafeInteger(Infinity); // => 9007199254740991
-toSafeInteger('3.2'); // => 3
-toSafeInteger(NaN); // => 0
-toSafeInteger(null); // => 0
-toSafeInteger(-Infinity); // => -9007199254740991
+import { toSafeInteger } from 'es-toolkit/compat';
+
+toSafeInteger(3.2);
+// Returns: 3
+
+toSafeInteger(Infinity);
+// Returns: 9007199254740991
+
+toSafeInteger('3.2');
+// Returns: 3
+
+// 문자열 변환
+toSafeInteger('abc');
+// Returns: 0
+
+// 특수값 처리
+toSafeInteger(NaN);
+// Returns: 0
+
+toSafeInteger(null);
+// Returns: 0
+
+toSafeInteger(undefined);
+// Returns: 0
 ```
+
+무한대 값도 안전한 범위로 제한해요.
+
+```typescript
+import { toSafeInteger } from 'es-toolkit/compat';
+
+toSafeInteger(-Infinity);
+// Returns: -9007199254740991 (Number.MIN_SAFE_INTEGER)
+
+toSafeInteger(Number.MAX_VALUE);
+// Returns: 9007199254740991
+```
+
+배열 인덱스나 ID 값으로 사용할 때 유용해요.
+
+```typescript
+import { toSafeInteger } from 'es-toolkit/compat';
+
+function getArrayItem(arr: any[], index: any) {
+  const safeIndex = toSafeInteger(index);
+  return arr[safeIndex];
+}
+
+const items = ['a', 'b', 'c', 'd', 'e'];
+console.log(getArrayItem(items, '2.7')); // 'c' (인덱스 2)
+console.log(getArrayItem(items, Infinity)); // undefined (범위를 벗어남)
+```
+
+#### 파라미터
+
+- `value` (`unknown`): 변환할 값이에요.
+
+#### 반환 값
+
+(`number`): 변환된 안전한 정수를 반환해요.

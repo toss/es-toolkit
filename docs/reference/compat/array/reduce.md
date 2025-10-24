@@ -1,74 +1,60 @@
-# reduce
+# reduce (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.reduce` or `Object.values` with `reduce`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `reduce` function operates slowly due to complex type handling and support for various input formats.
+
+Instead, use the faster and more modern `Array.prototype.reduce` method, or for objects, use it together with `Object.values`.
+
 :::
 
-Reduces an array or object to a single value using an iteratee function
-
-The `reduce()` function goes through each element in an array or values of an object and applies a special function (called a "reducer") to them, one by one.
-This function takes the result of the previous step and the current element to perform a calculation.
-After going through all the elements, the function gives you one final result.
-
-When the `reduce()` function starts, there's no previous result to use.
-If you provide an initial value, it starts with that.
-If not, it uses the first element of the array or the first value of the object and begins with the second element or value for the calculation.
-
-## Signature
+Reduces an array or object to a single value.
 
 ```typescript
-function reduce<T, U>(
-  collection: T[],
-  iteratee: (accumulator: U, value: T, index: number, collection: T[]) => U,
-  initialValue: U
-): U;
-function reduce<T>(collection: T[], iteratee: (accumulator: T, value: T, index: number, collection: T[]) => T): T;
-
-function reduce<T, U>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: U, value: T, index: number, collection: ArrayLike<T>) => U,
-  initialValue: U
-): U;
-function reduce<T>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: T, value: T, index: number, collection: ArrayLike<T>) => T
-): T;
-
-function reduce<T extends object, U>(
-  collection: T,
-  iteratee: (accumulator: U, value: T[keyof T], key: keyof T, collection: T) => U,
-  initialValue: U
-): U;
-function reduce<T extends object>(
-  collection: T,
-  iteratee: (accumulator: T[keyof T], value: T[keyof T], key: keyof T, collection: T) => T[keyof T]
-): T[keyof T];
+const result = reduce(collection, iteratee, initialValue);
 ```
 
-### Parameters
+## Reference
 
-- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): The collection to iterate over.
-- `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): The function invoked per iteration.
-- `initialValue` (`U`, Optional): The initial value.
+### `reduce(collection, iteratee, initialValue)`
 
-### Returns
-
-(`U`): Returns the accumulated value. If `initialValue` is not provided, the element type (`T`) of the collection is returned.
-
-## Examples
+Iterates through all elements of an array or object to calculate an accumulated value. If an initial value is provided, it starts with that value; otherwise, it starts with the first element.
 
 ```typescript
-// Using a reducer function
-const array = [1, 2, 3];
-reduce(array, (acc, value) => acc + value, 0); // => 6
+import { reduce } from 'es-toolkit/compat';
 
-// Using a reducer function with initialValue
-const array = [1, 2, 3];
-reduce(array, (acc, value) => acc + value % 2 === 0, true); // => false
+// Calculate sum of array
+const numbers = [1, 2, 3, 4];
+const sum = reduce(numbers, (acc, value) => acc + value, 0);
+console.log(sum); // 10
 
-// Using an object as the collection
-const obj = { a: 1, b: 2, c: 3 };
-reduce(obj, (acc, value) => acc + value, 0); // => 6
+// Calculate sum of object values
+const scores = { math: 95, english: 87, science: 92 };
+const totalScore = reduce(scores, (acc, value) => acc + value, 0);
+console.log(totalScore); // 274
 ```
+
+If no initial value is provided, the first element becomes the initial value and iteration starts from the second element.
+
+```typescript
+import { reduce } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4];
+const sum = reduce(numbers, (acc, value) => acc + value);
+console.log(sum); // 10 (1 + 2 + 3 + 4)
+
+// Empty array returns undefined
+const empty = [];
+const result = reduce(empty, (acc, value) => acc + value);
+console.log(result); // undefined
+```
+
+#### Parameters
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to iterate over.
+- `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): The function to call for each element. It receives the accumulated value, current value, index/key, and the original array/object.
+- `initialValue` (`any`, optional): The initial value for the accumulator. If not provided, the first element becomes the initial value.
+
+#### Returns
+
+(`any`): Returns the final accumulated value after processing all elements.

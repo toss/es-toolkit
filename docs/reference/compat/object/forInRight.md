@@ -1,69 +1,71 @@
-# forInRight
+# forInRight (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use `Object.keys` and `for...in` loops instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `forInRight` function performs slowly due to creating key arrays, reverse iteration, and handling `null` or `undefined`.
+
+Instead, use the faster and more modern `Object.keys` and `for...in` loops.
+
 :::
 
-Iterates over an object in reverse order and invokes the `iteratee` function for each property.
-
-Iterates over string keyed properties including inherited properties in reverse order.
-
-The iteration is terminated early if the `iteratee` function returns `false`.
-
-## Signature
+Iterates over all properties of an object (including inherited properties) in reverse order, calling a function for each property.
 
 ```typescript
-function forInRight<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
-function forInRight<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forInRight(obj, iteratee);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`T | null | undefined`): The object to iterate over
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): The function invoked per iteration. Default is the `identity` function
+### `forInRight(object, iteratee)`
 
-### Returns
-
-(`T | null | undefined`): Returns `object`
-
-## Examples
+Iterates over all properties of the object in reverse order, calling the `iteratee` function. It iterates not only over the object's own properties but also over properties inherited through the prototype chain. Since it collects keys into an array and then iterates in reverse order, it's slower than normal iteration. If the `iteratee` function returns `false`, the iteration stops.
 
 ```typescript
 import { forInRight } from 'es-toolkit/compat';
 
-function Shape() {
-  this.x = 0;
-  this.y = 0;
+// Iterate over all properties in reverse order
+const obj = { a: 1, b: 2 };
+forInRight(obj, (value, key) => {
+  console.log(key, value);
+});
+// Output: 'b' 2, 'a' 1
+
+// Iterate in reverse order including inherited properties
+function Parent() {
+  this.inherited = 'value';
 }
+Parent.prototype.protoProperty = 'proto';
 
-Shape.prototype.move = function (x, y) {
-  this.x += x;
-  this.y += y;
-};
+const child = new Parent();
+child.own = 'ownValue';
 
-// Create an instance of Shape
-const square = new Shape();
-
-// Iterate over all enumerable properties (including inherited ones) in reverse order
-forInRight(square, function (value, key) {
+forInRight(child, (value, key) => {
   console.log(key, value);
 });
-// Output in reverse order:
-// 'move', [Function]
-// 'y', 0
-// 'x', 0
+// Output: 'protoProperty' 'proto', 'own' 'ownValue', 'inherited' 'value'
 
-// The iteration is terminated early if the iteratee returns false
-forInRight(square, function (value, key) {
+// Early termination based on condition
+forInRight(obj, (value, key) => {
   console.log(key, value);
-  return key !== 'y'; // stop at 'y'
+  return key !== 'a'; // Stop at 'a'
 });
-// Output:
-// 'move', [Function]
-// 'y', 0
+// Output: 'b' 2, 'a' 1
 ```
+
+`null` or `undefined` is returned as is.
+
+```typescript
+import { forInRight } from 'es-toolkit/compat';
+
+forInRight(null, iteratee); // null
+forInRight(undefined, iteratee); // undefined
+```
+
+#### Parameters
+
+- `object` (`T | null | undefined`): The object to iterate over.
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, optional): The function to call for each property. Defaults to the `identity` function.
+
+#### Returns
+
+(`T | null | undefined`): Returns the original object.

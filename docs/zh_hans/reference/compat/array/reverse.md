@@ -1,41 +1,61 @@
-# reverse
+# reverse（Lodash 兼容性）
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.prototype.reverse()`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `reverse` 函数为了与 Lodash 兼容而包含 `null` 和 `undefined` 处理。如果只需要简单的数组反转，原生 JavaScript 的 `Array.prototype.reverse()` 方法更直观、更快。
+
+请使用更快、更现代的 `Array.prototype.reverse()`。
 
 :::
 
-在原位置反转数组的元素。
-
-此函数在原位置反转数组的元素，直接修改原数组。如果输入为 `null` 或 `undefined`，则返回该输入值。
-
-## 签名
+就地反转数组元素。
 
 ```typescript
-function reverse<T>(array: T[]): T[];
+const reversed = reverse(array);
 ```
 
-### 参数
+## 参考
 
-- `array` (`T[]`): 要反转的数组。
+### `reverse(array)`
 
-### 返回值
-
-(`T[]`): 反转后的数组。
-
-## 示例
+反转数组的顺序，使第一个元素成为最后一个，最后一个元素成为第一个。它直接修改原始数组并返回修改后的数组。
 
 ```typescript
-const array = [1, 2, 3, 4, 5];
-const reversedArray = reverse(array);
-console.log(reversedArray); // [5, 4, 3, 2, 1]
-console.log(array); // [5, 4, 3, 2, 1] （原数组已被修改）
+import { reverse } from 'es-toolkit/compat';
 
-const emptyArray = reverse([]);
-console.log(emptyArray); // []
+// 反转数字数组
+const numbers = [1, 2, 3, 4, 5];
+const reversed = reverse(numbers);
+console.log(numbers); // => [5, 4, 3, 2, 1]
+console.log(reversed); // => [5, 4, 3, 2, 1]
 
-const nullArray = reverse(null);
-console.log(nullArray); // null
+// 反转字符串数组
+const words = ['apple', 'banana', 'cherry'];
+reverse(words);
+console.log(words); // => ['cherry', 'banana', 'apple']
+
+// 空数组或 null/undefined 原样返回
+reverse([]); // => []
+reverse(null); // => null
+reverse(undefined); // => undefined
 ```
+
+请注意，此函数会直接修改原始数组。
+
+```typescript
+import { reverse } from 'es-toolkit/compat';
+
+const original = [1, 2, 3];
+const result = reverse(original);
+
+console.log(original === result); // => true（同一个数组对象）
+console.log(original); // => [3, 2, 1]（原数组被修改）
+```
+
+#### 参数
+
+- `array` (`T[] | null | undefined`)：要反转的数组。如果是 `null` 或 `undefined`，则原样返回。
+
+#### 返回值
+
+(`T[] | null | undefined`)：返回反转后的数组。如果输入是 `null` 或 `undefined`，则原样返回该值。

@@ -1,46 +1,44 @@
-# isObjectLike
+# isObjectLike (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-
-:::
-
-检查一个值是否类似对象。
-
-如果一个值的类型是对象并且它不为 `null`，那么它就是类似对象的。
-
-这个函数还可以在 TypeScript 中用作类型谓词，将参数的类型缩小到类似对象的值。
-
-## 签名
+检查值是否类似对象。
 
 ```typescript
-function isObjectLike(value?: unknown): value is object;
+const result = isObjectLike(value);
 ```
 
-### 参数
+## 参考
 
-- `value` (`unknown`): 要检查是否为类对象的值。
+### `isObjectLike(value)`
 
-### 返回值
-
-(`value is object`): 如果该值是类对象，则返回 `true`，否则返回 `false`。
-
-## 示例
+当您想检查给定值是否为类似对象的值时使用 `isObjectLike`。类似对象的值是 `typeof` 运算符的结果为 `'object'` 且不为 `null` 的值。
 
 ```typescript
 import { isObjectLike } from 'es-toolkit/compat';
 
-const value1 = { a: 1 };
-const value2 = [1, 2, 3];
-const value3 = 'abc';
-const value4 = () => {};
-const value5 = null;
+// 类似对象的值
+isObjectLike({ a: 1 }); // true
+isObjectLike([1, 2, 3]); // true
+isObjectLike(new Date()); // true
+isObjectLike(/regex/); // true
+isObjectLike(new Map()); // true
+isObjectLike(new Set()); // true
 
-console.log(isObjectLike(value1)); // true
-console.log(isObjectLike(value2)); // true
-console.log(isObjectLike(value3)); // false
-console.log(isObjectLike(value4)); // false
-console.log(isObjectLike(value5)); // false
+// 不类似对象的值
+isObjectLike('abc'); // false
+isObjectLike(123); // false
+isObjectLike(true); // false
+isObjectLike(() => {}); // false
+isObjectLike(Symbol('sym')); // false
+
+// 特殊情况
+isObjectLike(null); // false (null 的 typeof 为 'object' 但不是类似对象)
+isObjectLike(undefined); // false
 ```
+
+#### 参数
+
+- `value` (`any`): 要检查的值。
+
+#### 返回值
+
+(`boolean`): 如果值类似对象则返回 `true`，否则返回 `false`。

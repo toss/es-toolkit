@@ -1,44 +1,55 @@
-# flattenDepth
+# flattenDepth (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `es-toolkit` 的 `flatten`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
+此 `flattenDepth` 函数由于处理 `null` 或 `undefined` 而运行较慢。`es-toolkit` 的 `flatten` 函数没有这些额外处理,运行更快、更简单。
 
-将数组展平到指定的深度。
-
-## 签名
-
-```typescript
-function flattenDepth<T, D extends number = 1>(value: T[], depth: D): Array<FlatArray<T[], D>> | [];
-```
-
-### 参数
-
-- `value` (`T[]`): 要展平的值。
-
-::: info `value` 可以是 `ArrayLike<T>`、`null` 或 `undefined`。
-
-为了确保与 lodash 的完全兼容性，`flattenDepth` 函数以以下方式处理 `value`：
-
-- 如果 `value` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
-- 如果 `value` 是 `null` 或 `undefined`，则会将其视为一个空数组。
+请改用更快、更现代的 `es-toolkit` 的 [flatten](../../array/flatten.md)。
 
 :::
 
-- `depth` (`D`): 指定嵌套数组结构展平深度的级别。默认值为1。
-
-### 返回值
-
-(`Array<FlatArray<T[], D>> | []`): 展平后的新数组。
-
-## 示例
+将数组展平到指定深度。
 
 ```typescript
-const arr = flattenDepth([1, [2, 3], [4, [5, 6]]], 1);
-// Returns: [1, 2, 3, 4, [5, 6]]
-
-const arr = flattenDepth([1, [2, 3], [4, [5, 6]]], 2);
-// Returns: [1, 2, 3, 4, 5, 6]
+const flattened = flattenDepth(array, depth);
 ```
+
+## 参考
+
+### `flattenDepth(array, depth)`
+
+当您想将嵌套数组展平到所需深度时使用 `flattenDepth`。指定深度后,它只会将嵌套数组展平到该深度。
+
+```typescript
+import { flattenDepth } from 'es-toolkit/compat';
+
+// 展平到深度1
+flattenDepth([1, [2, [3, [4]], 5]], 1);
+// Returns: [1, 2, [3, [4]], 5]
+
+// 展平到深度2
+flattenDepth([1, [2, [3, [4]], 5]], 2);
+// Returns: [1, 2, 3, [4], 5]
+
+// 如果未指定深度,默认为1
+flattenDepth([1, [2, [3, [4]], 5]]);
+// Returns: [1, 2, [3, [4]], 5]
+```
+
+`null` 或 `undefined` 被视为空数组。
+
+```typescript
+import { flattenDepth } from 'es-toolkit/compat';
+
+flattenDepth(null, 2); // []
+flattenDepth(undefined, 2); // []
+```
+
+#### 参数
+
+- `array` (`ArrayLike<T> | null | undefined`): 要展平的数组。
+- `depth` (`number`, 可选): 要展平的最大深度。默认为 `1`。
+
+#### 返回值
+
+(`T[]`): 返回展平到指定深度的新数组。

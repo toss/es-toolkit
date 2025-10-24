@@ -1,36 +1,63 @@
-# toLower
+# toLower (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 JavaScript 的 `String.prototype.toLowerCase`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `toLower` 函数由于处理非字符串值而运行缓慢。
+
+请使用更快、更现代的 JavaScript 的 `String.prototype.toLowerCase`。
+
 :::
 
-将给定的值转换为字符串并转换为小写。给定的输入首先会被转换为字符串。
-
-## 签名
+将值转换为字符串后再转换为小写。
 
 ```typescript
-function toLower<T extends string = string>(value?: T): Lowercase<T>;
+const lowercased = toLower(value);
 ```
 
-### 参数
+## 参考
 
-- `value` (`T`): 要转换的值。
+### `toLower(value?)`
 
-### 返回值
-
-(`Lowercase<T>`): 返回小写的字符串.
-
-## 示例
+当您想将值转换为小写字符串时,请使用 `toLower`。它首先将任何类型的值转换为字符串,然后转换为小写。
 
 ```typescript
+import { toLower } from 'es-toolkit/compat';
+
+// 将字符串转换为小写
 toLower('--FOO-BAR--');
-// => '--foo-bar--'
+// Returns: '--foo-bar--'
+
+toLower('Hello World');
+// Returns: 'hello world'
+
+// 转换数字
+toLower(123);
+// Returns: '123'
+
+// 转换数组
+toLower([1, 2, 3]);
+// Returns: '1,2,3'
+```
+
+`null` 或 `undefined` 被视为空字符串。
+
+```typescript
+import { toLower } from 'es-toolkit/compat';
 
 toLower(null);
-// => ''
+// Returns: ''
 
-toLower([1, 2, 3]);
-// => '1,2,3'
+toLower(undefined);
+// Returns: ''
+
+toLower();
+// Returns: ''
 ```
+
+#### 参数
+
+- `value` (`unknown`,可选): 要转换为小写的值。
+
+#### 返回值
+
+(`string`): 返回转换为小写的字符串。

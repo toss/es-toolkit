@@ -1,32 +1,60 @@
 # sampleSize
 
-Returns a sample element array of a specified `size`.
-
-This function takes an array and a number, and returns an array containing the sampled elements using [Floyd's algorithm](https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html).
-
-## Signature
+Returns a new array of randomly selected elements with the specified size.
 
 ```typescript
-export function sampleSize<T>(array: T[], size: number): T[];
+const sampled = sampleSize(array, size);
 ```
 
-### Parameters
+## Reference
 
-- `array` (`T[]`): The array to sample from.
-- `size` (`number`): The size of sample.
+### `sampleSize(array, size)`
 
-### Returns
-
-(`T[]`): A new array with sample size applied.
-
-### Throws
-
-Throws an error if `size` is greater than the length of `array`.
-
-## Examples
+Use `sampleSize` when you want to randomly sample multiple elements from an array. It uses Floyd's algorithm to efficiently generate random samples without duplicates. It's useful for extracting samples in surveys or randomly selecting multiple items in games.
 
 ```typescript
-const result = sampleSize([1, 2, 3], 2);
-// result will be an array containing two of the elements from the array.
-// [1, 2] or [1, 3] or [2, 3]
+import { sampleSize } from 'es-toolkit/array';
+
+// Randomly select 3 from a number array.
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const randomNumbers = sampleSize(numbers, 3);
+// Returns: [2, 7, 9] (example, actually random)
+
+// Randomly select 2 from a string array.
+const fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry'];
+const randomFruits = sampleSize(fruits, 2);
+// Returns: ['cherry', 'apple'] (example, actually random)
 ```
+
+You can sample with various sizes.
+
+```typescript
+import { sampleSize } from 'es-toolkit/array';
+
+const items = ['a', 'b', 'c', 'd', 'e'];
+
+// Select 1 element
+const single = sampleSize(items, 1);
+// Returns: ['c'] (example)
+
+// Select same as entire array size (shuffle effect)
+const all = sampleSize(items, 5);
+// Returns: ['b', 'd', 'a', 'e', 'c'] (example)
+
+// Select empty array
+const none = sampleSize(items, 0);
+// Returns: []
+```
+
+#### Parameters
+
+- `array` (`readonly T[]`): The array to sample from.
+- `size` (`number`): The number of elements to select.
+
+#### Returns
+
+(`T[]`): Returns a new array consisting of randomly selected elements.
+
+#### Throws
+
+Throws an error if `size` is greater than the length of the array.

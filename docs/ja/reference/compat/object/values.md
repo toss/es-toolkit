@@ -1,34 +1,78 @@
-# values
+# values (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.values` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `values` 関数は単に `Object.values` を呼び出すだけで、不必要なオーバーヘッドがあります。
+
+代わりに、より高速で現代的な `Object.values()` を直接使用してください。
+
 :::
 
-`object` の列挙可能なプロパティ値を返します。
-
-オブジェクトではない値はオブジェクトに変換されます。
-
-## インターフェース
+オブジェクトの自身の列挙可能なプロパティ値の配列を返します。
 
 ```typescript
-function values<T>(object: Record<PropertyKey, T> | null | undefined): T[];
-function values<T>(arr: ArrayLike<T>): T[];
-function values<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
+const valueArray = values(obj);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): 問い合わせるオブジェクト。
+### `values(obj)`
 
-### 戻り値
-
-(`T[]`): プロパティ値の配列。
-
-## 例
+オブジェクトのすべてのプロパティ値を配列として取得したい場合に `values` を使用してください。`Object.values` と同じように動作しますが、`null` または `undefined` を安全に処理します。
 
 ```typescript
+import { values } from 'es-toolkit/compat';
+
+// オブジェクトの値を取得
 const obj = { a: 1, b: 2, c: 3 };
 values(obj); // => [1, 2, 3]
+
+// 数値キーを持つオブジェクト
+const numberKeyObj = { 0: 'a', 1: 'b', 2: 'c' };
+values(numberKeyObj); // => ['a', 'b', 'c']
 ```
+
+配列や配列風のオブジェクトも処理できます。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+// 配列
+values([1, 2, 3]); // => [1, 2, 3]
+
+// 文字列（配列風のオブジェクト）
+values('hello'); // => ['h', 'e', 'l', 'l', 'o']
+```
+
+`null` または `undefined` は空の配列として処理されます。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+values(null); // => []
+values(undefined); // => []
+```
+
+列挙可能なプロパティのみが返されます。
+
+```typescript
+import { values } from 'es-toolkit/compat';
+
+const obj = Object.create(
+  { inherited: 'not included' },
+  {
+    own: { value: 'included', enumerable: true },
+    nonEnum: { value: 'not included', enumerable: false },
+  }
+);
+
+values(obj); // => ['included']
+```
+
+#### パラメータ
+
+- `obj` (`Record<PropertyKey, T> | ArrayLike<T> | null | undefined`): プロパティ値を取得するオブジェクトです。
+
+#### 戻り値
+
+(`T[]`): オブジェクトの列挙可能なプロパティ値の配列を返します。

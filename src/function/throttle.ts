@@ -57,7 +57,7 @@ export function throttle<F extends (...args: any[]) => void>(
 
   const debounced = debounce(func, throttleMs, { signal, edges });
 
-  const throttled = function (...args: Parameters<F>) {
+  const throttled = function (this: any, ...args: Parameters<F>) {
     if (pendingAt == null) {
       pendingAt = Date.now();
     } else {
@@ -67,7 +67,7 @@ export function throttle<F extends (...args: any[]) => void>(
       }
     }
 
-    debounced(...args);
+    debounced.apply(this, args);
   };
 
   throttled.cancel = debounced.cancel;

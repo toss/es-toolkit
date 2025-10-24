@@ -1,43 +1,31 @@
-# invokeMap
+# invokeMap (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.map` 和 `Object.values(...).map`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于需要处理 `null` 或 `undefined`、方法查找等,这个 `invokeMap` 函数运行缓慢。
+
+请改用更快、更现代的 `Array.map` 和 `Object.values(...).map`。
+
+例如,`invokeMap([1, 2, 3], 'toString')` 可以写成 `[1, 2, 3].map(x => x.toString())`。
+
 :::
 
-调用集合中每个元素在 `path` 位置的方法，并返回所有被调用方法的结果数组。任何额外的参数都会被传递给每个被调用的方法。如果 `path` 是一个函数，它会被调用并将 `this` 绑定到集合中的每个元素。
-
-## 签名
+在数组或对象的每个元素上调用指定的方法,并返回结果数组。
 
 ```typescript
-function invokeMap<T, R>(
-  collection: T[] | Record<string, T> | null | undefined,
-  path: PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R),
-  ...args: unknown[]
-): Array<R | undefined>;
+const result = invokeMap(collection, method, ...args);
 ```
 
-### 参数
+## 参考
 
-- `collection` (`T[] | Record<string, T> | null | undefined`): 要遍历的集合。
-- `path` (`PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R)`): 要调用的方法的路径（字符串、数字、符号或这些的数组）或要调用的函数。
-- `args` (`...unknown[]`): 调用每个方法时要传入的参数。
+### `invokeMap(collection, method, ...args)`
 
-### 返回值
-
-(`Array<R | undefined>`): 返回结果数组。如果找不到路径或方法调用结果为 `undefined`，则相应元素为 `undefined`。
-
-## 示例
+在数组或对象的每个元素上调用指定的方法。可以将方法名作为字符串传递,也可以直接传递函数。额外的参数会传递给每次方法调用。
 
 ```typescript
 import { invokeMap } from 'es-toolkit/compat';
 
-// 调用每个元素的方法
-invokeMap(['a', 'b', 'c'], 'toUpperCase');
-// => ['A', 'B', 'C']
-
-// 使用参数调用方法
+// 在数组的每个元素上调用方法
 invokeMap(
   [
     [5, 1, 7],
@@ -45,23 +33,45 @@ invokeMap(
   ],
   'sort'
 );
+// => [[5, 1, 7].sort(), [3, 2, 1].sort()]
 // => [[1, 5, 7], [1, 2, 3]]
 
-// 调用对象中每个值的方法
-invokeMap({ a: 1, b: 2, c: 3 }, 'toFixed', 1);
-// => ['1.0', '2.0', '3.0']
+// 使用参数调用方法
+invokeMap([123, 456], 'toString', 2);
+// => [(123).toString(2), (456).toString(2)]
+// => ['1111011', '111001000']
 
-// 使用函数替代方法名
-invokeMap(
-  ['a', 'b', 'c'],
-  function (this: string, prefix: string, suffix: string) {
-    return prefix + this.toUpperCase() + suffix;
-  },
-  '(',
-  ')'
-);
-// => ['(A)', '(B)', '(C)']
-
-invokeMap([123, 456], String.prototype.split, '');
-// => [['1', '2', '3'], ['4', '5', '6']]
+// 直接传递函数
+invokeMap(['a', 'b', 'c'], String.prototype.toUpperCase);
+// => [String.prototype.toUpperCase('a'), String.prototype.toUpperCase('b'), String.prototype.toUpperCase('c')]
+// => ['A', 'B', 'C']
 ```
+
+对于对象,在每个值上调用方法。
+
+```typescript
+import { invokeMap } from 'es-toolkit/compat';
+
+const obj = { a: 1.1, b: 2.2, c: 3.3 };
+invokeMap(obj, 'toFixed', 1);
+// => ['1.1', '2.2', '3.3']
+```
+
+`null` 或 `undefined` 被视为空数组。
+
+```typescript
+import { invokeMap } from 'es-toolkit/compat';
+
+invokeMap(null, 'toString'); // []
+invokeMap(undefined, 'toString'); // []
+```
+
+#### 参数
+
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 要调用方法的数组或对象。
+- `method` (`string | ((...args: any[]) => R)`): 要调用的方法名或函数。
+- `...args` (`any[]`): 传递给每次方法调用的额外参数。
+
+#### 返回值
+
+(`Array<R | undefined>`): 返回包含每次方法调用结果的新数组。

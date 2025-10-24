@@ -1,39 +1,75 @@
-# toSafeInteger
+# toSafeInteger (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Converts `value` to a safe integer.
-
-A safe integer is an integer that can be exactly represented as a double precision number, and no other integer rounds to it under any IEEE-754 rounding mode.
-
-If the value is infinite, it is converted to the maximum or minimum safe integer. Any decimal points are removed by truncating the value.
-
-## Signature
+Converts a value to a safe integer.
 
 ```typescript
-function toSafeInteger(value: any): number;
+const result = toSafeInteger(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`any`): The value to convert.
+### `toSafeInteger(value)`
 
-### Returns
-
-(`number`): The converted safe integer.
-
-## Examples
+Use `toSafeInteger` when you want to convert a value to a safe integer. A safe integer is an integer that can be accurately represented in JavaScript, within the range of `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER`.
 
 ```typescript
-toSafeInteger(3.2); // => 3
-toSafeInteger(Number.MAX_VALUE); // => 9007199254740991
-toSafeInteger(Infinity); // => 9007199254740991
-toSafeInteger('3.2'); // => 3
-toSafeInteger(NaN); // => 0
-toSafeInteger(null); // => 0
-toSafeInteger(-Infinity); // => -9007199254740991
+import { toSafeInteger } from 'es-toolkit/compat';
+
+toSafeInteger(3.2);
+// Returns: 3
+
+toSafeInteger(Infinity);
+// Returns: 9007199254740991
+
+toSafeInteger('3.2');
+// Returns: 3
+
+// String conversion
+toSafeInteger('abc');
+// Returns: 0
+
+// Handle special values
+toSafeInteger(NaN);
+// Returns: 0
+
+toSafeInteger(null);
+// Returns: 0
+
+toSafeInteger(undefined);
+// Returns: 0
 ```
+
+Infinity values are also limited to the safe range.
+
+```typescript
+import { toSafeInteger } from 'es-toolkit/compat';
+
+toSafeInteger(-Infinity);
+// Returns: -9007199254740991 (Number.MIN_SAFE_INTEGER)
+
+toSafeInteger(Number.MAX_VALUE);
+// Returns: 9007199254740991
+```
+
+Useful when using as array indices or ID values.
+
+```typescript
+import { toSafeInteger } from 'es-toolkit/compat';
+
+function getArrayItem(arr: any[], index: any) {
+  const safeIndex = toSafeInteger(index);
+  return arr[safeIndex];
+}
+
+const items = ['a', 'b', 'c', 'd', 'e'];
+console.log(getArrayItem(items, '2.7')); // 'c' (index 2)
+console.log(getArrayItem(items, Infinity)); // undefined (out of range)
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to convert.
+
+#### Returns
+
+(`number`): Returns the converted safe integer.

@@ -1,38 +1,69 @@
 # tail
 
-最初の要素を除いたすべての要素を含む新しい配列を返します。
-
-この関数は配列を入力として受け取り、最初の要素を除いたすべての要素を含む新しい配列を返します。入力配列が空であるか、要素が1つしかない場合は空の配列を返します。
-
-## インターフェース
+配列の最初の要素を除いたすべての要素で構成される新しい配列を返します。
 
 ```typescript
-function tail<T>(arr: [T]): [];
-function tail(arr: []): [];
-function tail<T, U>(arr: [T, ...U[]]): U[];
-function tail<T>(arr: T[]): T[];
+const result = tail(arr);
 ```
 
-### パラメータ
+## 参照
 
-- `arr` (`T[]`): 最初の要素を除く配列です。
+### `tail(arr)`
 
-### 戻り値
-
-(`T[]`): 入力配列の最初の要素を除いたすべての要素を含む新しい配列です。
-
-## 例
+配列から最初の要素だけを除いて残りのすべての要素を取得したい場合は `tail` を使用してください。配列が空であるか要素が1つだけの場合は空の配列を返します。スタックやキューで最初の要素を除いた残りを処理するときに便利です。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = tail(arr1);
-// resultは[2, 3]になります。
+import { tail } from 'es-toolkit/array';
 
-const arr2 = [1];
-const result2 = tail(arr2);
-// result2は[]になります。
+// 数値配列から最初の要素を除きます。
+const numbers = [1, 2, 3, 4, 5];
+tail(numbers);
+// Returns: [2, 3, 4, 5]
 
-const arr3 = [];
-const result3 = tail(arr3);
-// result3は[]になります。
+// 文字列配列から最初の要素を除きます。
+const strings = ['first', 'second', 'third'];
+tail(strings);
+// Returns: ['second', 'third']
+
+// 要素が1つだけの配列は空の配列を返します。
+const single = [42];
+tail(single);
+// Returns: []
 ```
+
+空の配列や特殊なケースも安全に処理します。
+
+```typescript
+import { tail } from 'es-toolkit/array';
+
+// 空の配列は空の配列を返します。
+const empty: number[] = [];
+tail(empty);
+// Returns: []
+
+// 入れ子配列も処理できます。
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
+tail(nested);
+// Returns: [[3, 4], [5, 6]]
+
+// オブジェクト配列も処理できます。
+const users = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' },
+];
+tail(users);
+// Returns: [{ id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
+```
+
+#### パラメータ
+
+- `arr` (`readonly T[]`): 最初の要素を除く配列です。
+
+#### 戻り値
+
+(`T[]`): 最初の要素を除いた新しい配列を返します。入力配列が空であるか要素が1つだけの場合は空の配列を返します。

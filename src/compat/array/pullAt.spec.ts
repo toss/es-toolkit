@@ -147,6 +147,18 @@ describe('pullAt', () => {
     expect(arrayLike).toEqual({ 0: 'b', length: 1 });
   });
 
+  it('should support array paths for nested properties', () => {
+    const array: any = [];
+    array.a = { b: { c: 3 } };
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const actual = pullAt(array, [['a', 'b', 'c']]);
+
+    expect(actual).toEqual([3]);
+    expect(array.a.b).toEqual({});
+  });
+
   // NOTE: TypeScript doesn't support matching conditional types
   // it('should match the type of lodash', () => {
   //   expectTypeOf(pullAt).toEqualTypeOf<typeof pullAtLodash>();

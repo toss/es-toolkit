@@ -1,39 +1,42 @@
 # zip
 
-Combines multiple arrays into a single array of tuples.
-
-This function takes multiple arrays and returns a new array where each element is a tuple
-containing the corresponding elements from the input arrays. If the input arrays are of
-different lengths, the resulting array will have the length of the longest input array,
-with `undefined` values for missing elements.
-
-## Signature
+Creates an array of tuples by bundling elements at the same index from multiple arrays.
 
 ```typescript
-function zip<T>(arr1: T[]): [T][];
-function zip<T, U>(arr1: T[], arr2: U[]): [T, U][];
-function zip<T, U, V>(arr1: T[], arr2: U[], arr3: V[]): [T, U, V][];
-function zip<T, U, V, W>(arr1: T[], arr2: U[], arr3: V[], arr4: W[]): [T, U, V, W][];
-function zip<T>(...arrs: T[][]): T[][];
+const zipped = zip(...arrs);
 ```
 
-### Parameters
+## Reference
 
-- `...arrs` (`T[][]`): The arrays to zip together.
+### `zip(...arrs)`
 
-### Returns
-
-(`T[][]`): A new array of tuples containing the corresponding elements from the input arrays.
-
-## Examples
+Use `zip` when you want to bundle elements at the same position from multiple arrays together. It returns a new array where elements at the same index from each array are bundled into tuples.
 
 ```typescript
-const arr1 = [1, 2, 3];
-const arr2 = ['a', 'b', 'c'];
-const result = zip(arr1, arr2);
-// result will be [[1, 'a'], [2, 'b'], [3, 'c']]
+import { zip } from 'es-toolkit/array';
 
-const arr3 = [true, false];
-const result2 = zip(arr1, arr2, arr3);
-// result2 will be [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
+// Bundle two arrays.
+zip([1, 2, 3], ['a', 'b', 'c']);
+// Returns: [[1, 'a'], [2, 'b'], [3, 'c']]
+
+// Bundle three arrays.
+zip([1, 2], ['a', 'b', 'c'], [true, false]);
+// Returns: [[1, 'a', true], [2, 'b', false], [undefined, 'c', undefined]]
 ```
+
+If the arrays have different lengths, it adjusts to the longest array's length. Empty positions in shorter arrays are filled with `undefined`.
+
+```typescript
+import { zip } from 'es-toolkit/array';
+
+zip([1, 2], ['a', 'b', 'c', 'd']);
+// Returns: [[1, 'a'], [2, 'b'], [undefined, 'c'], [undefined, 'd']]
+```
+
+#### Parameters
+
+- `arrs` (`Array<readonly T[]>`): The arrays to bundle.
+
+#### Returns
+
+(`T[][]`): Returns a new array where elements at the same index from each input array are bundled into tuples.

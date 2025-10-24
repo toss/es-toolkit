@@ -159,6 +159,28 @@ describe('findLast', () => {
     }
   );
 
+  it('should use identity when no _doesMatch is provided', () => {
+    expect(findLast([0, 1, 2])).toBe(2);
+    expect(findLast([false, true, false])).toBe(true);
+    expect(findLast(['', 'hello', ''])).toBe('hello');
+    expect(findLast({ a: 0, b: 1, c: 2 })).toBe(2);
+    expect(findLast({ a: false, b: true, c: false })).toBe(true);
+    expect(findLast({ a: '', b: 'hello', c: '' })).toBe('hello');
+    expect(findLast('123')).toBe('3');
+    expect(findLast(args)).toBe(3);
+  });
+
+  it('should throw error when boolean predicate is used', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(() => findLast({ a: 1, b: 2, c: 3 }, true)).toThrow('doesMatch is not a function');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(() => findLast({ a: 1, b: 2, c: 3 }, false)).toThrow('doesMatch is not a function');
+    expect(() => findLast([1, 2, 3], true)).toThrow('undefined is not a function');
+    expect(() => findLast([1, 2, 3], false)).toThrow('undefined is not a function');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(findLast).toEqualTypeOf<typeof findLastLodash>();
   });

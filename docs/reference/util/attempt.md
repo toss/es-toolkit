@@ -1,48 +1,61 @@
 # attempt
 
-::: info
-Important: This function is not suitable for async functions (functions that return a `Promise`).
-When passing an async function, it will return `[null, Promise<T>]`, but won't catch any
-errors if the Promise is rejected later.
-
-For handling async functions, it is recommended to use the `attemptAsync` function instead.
-:::
-
-Attempts to execute a function and returns a tuple containing either the result or an error.
-
-## Signature
+Executes a function and returns the result or error as a tuple.
 
 ```typescript
-function attempt<T, E>(func: () => T): [null, T] | [E, null];
+const [error, result] = attempt(func);
 ```
 
-### Parameters
+## Reference
 
-- `func` (`() => T`): The function to attempt to execute.
+### `attempt(func)`
 
-### Returns
-
-(`[null, T] | [E, null]`): A tuple where:
-
-- On success: `[null, T]` - First element is `null`, second is the result.
-- On error: `[E, null]` - First element is the caught error, second is `null`.
-
-## Examples
+Use `attempt` when you want to safely execute a function. It allows you to handle errors without wrapping code in try-catch blocks.
 
 ```typescript
 import { attempt } from 'es-toolkit/util';
 
-// If the function succeeds, it returns [null, function return value] tuple.
+// Success case
 const [error, result] = attempt(() => 42);
-// [null, 42]
+// error is null, result is 42
 
-// If an error occurs, it returns [error thrown by the function, null] tuple.
+// Error case
 const [error, result] = attempt(() => {
   throw new Error('Something went wrong');
 });
-// [Error, null]
+// error is an Error object, result is null
 
-// Using generic types lets you specify the type of the error and return value.
+// You can also specify types
 const [error, names] = attempt<string[], Error>(() => ['Alice', 'Bob']);
-// `error` is inferred as `Error` type, `names` is inferred as `string[]` type.
+// names is inferred as string[] type
 ```
+
+::: warning Do not use with async functions
+
+This function is not suitable for async functions (functions that return a `Promise`). If you pass an async function, it will return `[null, Promise<T>]`, but it won't catch the error even if the Promise is rejected later.
+
+For async functions, use the [`attemptAsync`](./attemptAsync.md) function instead.
+
+```typescript
+// Incorrect usage
+const [error, promise] = attempt(async () => {
+  const response = await fetch('https://api.example.com/data');
+  return response.json();
+});
+
+// Correct usage
+const [error, data] = await attemptAsync(async () => {
+  const response = await fetch('https://api.example.com/data');
+  return response.json();
+});
+```
+
+:::
+
+#### Parameters
+
+- `func` (`() => T`): The function to execute.
+
+#### Returns
+
+(`[null, T] | [E, null]`): Returns `[null, result]` tuple on success, or `[error, null]` tuple on error.

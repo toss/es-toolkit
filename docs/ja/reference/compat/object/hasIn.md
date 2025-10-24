@@ -1,78 +1,83 @@
-# hasIn
+# hasIn (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `in` 演算子を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `hasIn` 関数は、複雑なパス解析とプロトタイプチェーンのチェックにより動作が遅くなります。
+
+代わりに、より高速でモダンな `in` 演算子または `Object.hasOwn()` 関数を使用してください。
+
 :::
 
-オブジェクトが指定されたパスに対応するプロパティを持っているかどうかを確認します。継承されたプロパティも含めて確認します。
-
-パスとしては、オブジェクトのプロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
-
-`has` 関数はオブジェクト自身のプロパティのみを確認しますが、`hasIn` はプロトタイプチェーンのプロパティも確認します。
-
-パスがインデックスを表し、オブジェクトが配列または `arguments` オブジェクトの場合、そのインデックスが有効か（0以上で長さ未満か）を確認します。そのため、すべてのインデックスが定義されていないスパース配列（Sparse array）にも使用できます。
-
-## インターフェース
+オブジェクトに指定されたパスのプロパティが存在するか、継承されたプロパティも含めて確認します。
 
 ```typescript
-function hasIn<T>(object: T, path: PropertyKey | PropertyKey[]): boolean;
+const exists = hasIn(object, path);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`T`): プロパティの存在を確認するオブジェクト。
-- `path` (`PropertyKey | PropertyKey[]`): プロパティの存在を確認するパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
+### `hasIn(object, path)`
 
-### 戻り値
-
-(`boolean`): オブジェクトがパスに値を持っている場合（自身のプロパティであれ継承されたプロパティであれ）は `true`、そうでない場合は `false`。
-
-## 例
+オブジェクトに特定のパスのプロパティがあるか確認したい場合は `hasIn` を使用します。`has` とは異なり、継承されたプロパティ(プロトタイプチェーンのプロパティ)も一緒に確認します。
 
 ```typescript
-import { has, hasIn } from 'es-toolkit/compat';
+import { hasIn } from 'es-toolkit/compat';
 
-const obj = { a: { b: { c: 3 } } };
+// 自身のプロパティを確認
+const object = { a: 1, b: 2 };
+hasIn(object, 'a');
+// => true
 
-hasIn(obj, 'a'); // true
-hasIn(obj, ['a', 'b']); // true
-hasIn(obj, ['a', 'b', 'c']); // true
-hasIn(obj, 'a.b.c'); // true
-hasIn(obj, 'a.b.d'); // false
-hasIn(obj, ['a', 'b', 'c', 'd']); // false
+// ネストされたオブジェクトを確認
+const nested = { a: { b: { c: 3 } } };
+hasIn(nested, 'a.b.c');
+// => true
+hasIn(nested, ['a', 'b', 'c']);
+// => true
 
-// 継承されたプロパティの例:
+// 存在しないプロパティ
+hasIn(nested, 'a.b.d');
+// => false
+
+// 配列のインデックスを確認
+const array = [1, 2, 3];
+hasIn(array, 2);
+// => true
+hasIn(array, 5);
+// => false
+```
+
+継承されたプロパティも確認します。
+
+```typescript
+import { hasIn } from 'es-toolkit/compat';
+
+// プロトタイプチェーンのプロパティを確認
 function Rectangle() {}
 Rectangle.prototype.area = function () {};
 
 const rect = new Rectangle();
-hasIn(rect, 'area'); // true - hasInは継承されたプロパティも確認します
-has(rect, 'area'); // false - hasは自身のプロパティのみを確認します
+hasIn(rect, 'area'); // true - 継承されたプロパティも見つかる
+has(rect, 'area'); // false - has は自身のプロパティのみ確認
 ```
 
-## デモ
+`null` や `undefined` を安全に処理します。
 
-::: sandpack
+```typescript
+import { hasIn } from 'es-toolkit/compat';
 
-```ts index.ts
-import { has, hasIn } from 'es-toolkit/compat';
+hasIn(null, 'a');
+// => false
 
-// 継承されたプロパティの例
-function Rectangle() {
-  this.width = 10;
-  this.height = 5;
-}
-Rectangle.prototype.area = function () {
-  return this.width * this.height;
-};
-
-const rect = new Rectangle();
-
-console.log('hasIn(rect, "area"):', hasIn(rect, 'area')); // true - 継承されたプロパティも確認します
-console.log('has(rect, "area"):', has(rect, 'area')); // false - 自身のプロパティのみを確認します
-console.log('hasIn(rect, "width"):', hasIn(rect, 'width')); // true - 自身のプロパティ
+hasIn(undefined, 'b');
+// => false
 ```
 
-:::
+#### パラメータ
+
+- `object` (`any`): 検査するオブジェクトです。
+- `path` (`PropertyPath`): 確認するプロパティのパスです。文字列、数値、シンボル、または配列で表すことができます。
+
+#### 戻り値
+
+(`boolean`): パスのプロパティが存在する場合(自身のプロパティでも継承されたプロパティでも) `true`、そうでなければ `false` を返します。

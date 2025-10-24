@@ -1,53 +1,69 @@
-# size
+# size (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `.length` property
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `size` function operates complexly due to `null`, `undefined` handling and support for various types.
+
+Instead, use the faster and more modern `.length` property or `Object.keys().length`.
+
 :::
 
-Returns the size of an array, string, or object.
-
-This function takes an array, string, or object and returns its size. For arrays and strings, it returns the number of elements or characters, respectively. For objects, it returns the number of enumerable properties.
-
-## Signature
+Returns the size of arrays, strings, and objects.
 
 ```typescript
-function size<T>(value: T[] | object | string | Map<unknown, T> | Set<T> | null | undefined): number;
+const length = size(collection);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`T`): The array, string, or object whose size is to be determined.
+### `size(collection)`
 
-### Returns
-
-(`number`): The size of the input value.
-
-## Examples
+Use `size` to check the size of arrays, strings, objects, Maps, and Sets. It provides consistent size information for various types of collections.
 
 ```typescript
-const arr = [1, 2, 3];
-const arrSize = size(arr);
-// arrSize will be 3
+import { size } from 'es-toolkit/compat';
 
-const str = 'hello';
-const strSize = size(str);
-// strSize will be 5
+// Number of elements in an array
+size([1, 2, 3]);
+// Returns 3
 
-const obj = { a: 1, b: 2, c: 3 };
-const objSize = size(obj);
-// objSize will be 3
+// Number of characters in a string
+size('hello');
+// Returns 5
 
-const emptyArr = [];
-const emptyArrSize = size(emptyArr);
-// emptyArrSize will be 0
+// Number of enumerable properties in an object
+size({ a: 1, b: 2, c: 3 });
+// Returns 3
 
-const emptyStr = '';
-const emptyStrSize = size(emptyStr);
-// emptyStrSize will be 0
+// Number of elements in a Map
+size(
+  new Map([
+    ['a', 1],
+    ['b', 2],
+  ])
+);
+// Returns 2
 
-const emptyObj = {};
-const emptyObjSize = size(emptyObj);
-// emptyObjSize will be 0
+// Number of elements in a Set
+size(new Set([1, 2, 3]));
+// Returns 3
 ```
+
+`null` or `undefined` returns 0.
+
+```typescript
+import { size } from 'es-toolkit/compat';
+
+size(null); // 0
+size(undefined); // 0
+size({}); // 0
+size([]); // 0
+```
+
+#### Parameters
+
+- `collection` (`object | string | null | undefined`): The array, string, object, Map, or Set to check the size of.
+
+#### Returns
+
+(`number`): Returns the size of the collection. Returns 0 if `null` or `undefined`.

@@ -1,58 +1,61 @@
 # toSnakeCaseKeys
 
-创建一个新对象，将对象的属性转换为[蛇形命名法](../string/snakeCase.md)（`snake_case`）。
+返回一个将对象和数组的所有键转换为蛇形命名法的新对象。
 
-嵌套对象中的所有属性也会被转换为蛇形命名法。
-
-## 签名
+蛇形命名法是一种将多个单词组成的标识符中每个单词小写,并用下划线(`_`)连接的命名规范。例如 `snake_case`。
 
 ```typescript
-function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T>;
+const snakeCased = toSnakeCaseKeys(obj);
 ```
 
-### 参数
+## 参考
 
-- `obj` (`T`): 要转换键的对象。
+### `toSnakeCaseKeys(obj)`
 
-### 返回值
-
-(`ToSnakeCaseKeys<T>`): 一个新的对象，其中所有键均转换为 snake_case。
-
-## 示例
+当您想要将对象的所有键转换为 snake_case 时,请使用 `toSnakeCaseKeys`。嵌套对象和数组中的对象也会递归转换。
 
 ```typescript
-// 示例: 使用对象
-const obj = { userId: 1, firstName: 'John' };
-const result = toSnakeCaseKeys(obj);
-// result 为 { user_id: 1, first_name: 'John' }
+import { toSnakeCaseKeys } from 'es-toolkit/object';
 
-// 示例: 使用对象数组
-const arr = [
+// 基本对象转换
+const obj = { userId: 1, firstName: 'John', lastName: 'Doe' };
+const result = toSnakeCaseKeys(obj);
+// result 是 { user_id: 1, first_name: 'John', last_name: 'Doe' }
+
+// 数组中的对象也会转换
+const users = [
   { userId: 1, firstName: 'John' },
   { userId: 2, firstName: 'Jane' },
 ];
-const arrResult = toSnakeCaseKeys(arr);
-// arrResult 为 [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]
+const convertedUsers = toSnakeCaseKeys(users);
+// convertedUsers 是 [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]
 
-// 示例: 使用嵌套对象
+// 嵌套对象也会完全转换
 const nested = {
   userData: {
     userId: 1,
-    userAddress: {
-      streetName: 'Main St',
-      zipCode: '12345',
+    contactInfo: {
+      emailAddress: 'john@example.com',
+      phoneNumber: '123-456-7890',
     },
   },
 };
 const nestedResult = toSnakeCaseKeys(nested);
-// nestedResult 为:
-// {
+// nestedResult 是 {
 //   user_data: {
 //     user_id: 1,
-//     user_address: {
-//       street_name: 'Main St',
-//       zip_code: '12345'
+//     contact_info: {
+//       email_address: 'john@example.com',
+//       phone_number: '123-456-7890'
 //     }
 //   }
 // }
 ```
+
+#### 参数
+
+- `obj` (`T`): 要将键转换为 snake_case 的对象、数组或原始值。
+
+#### 返回值
+
+(`ToSnakeCaseKeys<T>`): 返回所有键都已转换为 snake_case 的新对象。

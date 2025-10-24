@@ -1,34 +1,50 @@
 # isNil
 
-주어진 값이 null이나 undefined인지 확인해요.
-
-값이 `null` 이나 `undefined` 이면 `true` 를 반환하고, 아니면 `false` 를 반환해요.
-
-TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 `null` 이나 `undefined` 타입으로 좁힐 수 있어요.
-
-## 인터페이스
+값이 `null` 또는 `undefined`인지 확인해요.
 
 ```typescript
-function isNil(x: unknown): x is null | undefined;
+const result = isNil(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `x` (`unknown`): `null`이나 `undefined`인지 확인할 값.
+### `isNil(value)`
 
-### 반환 값
-
-(`x is null | undefined`): 값이 `null`이나 `undefined`이면 `true`, 아니면 `false`.
-
-## 예시
+값이 `null`이나 `undefined`인지 확인하고 싶을 때 `isNil`을 사용하세요.
 
 ```typescript
 import { isNil } from 'es-toolkit/predicate';
 
-const value1 = null;
-const value2 = undefined;
-const value3 = 42;
-const result1 = isNil(value1); // true
-const result2 = isNil(value2); // true
-const result3 = isNil(value3); // false
+// null 또는 undefined 값들
+console.log(isNil(null)); // true
+console.log(isNil(undefined)); // true
+
+// 다른 값들
+console.log(isNil(0)); // false
+console.log(isNil('')); // false
+console.log(isNil(false)); // false
+console.log(isNil([])); // false
+console.log(isNil({})); // false
 ```
+
+TypeScript에서 타입 가드로도 사용할 수 있어요:
+
+```typescript
+function processValue(value: string | null | undefined) {
+  if (isNil(value)) {
+    // 이제 value는 null | undefined 타입으로 좁혀져요
+    console.log('값이 비어있습니다');
+  } else {
+    // value는 string 타입으로 좁혀져요
+    console.log(value.toUpperCase());
+  }
+}
+```
+
+#### 파라미터
+
+- `value` (`unknown`): `null` 또는 `undefined`인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is null | undefined`): 값이 `null` 또는 `undefined`면 `true`, 그렇지 않으면 `false`를 반환해요.

@@ -113,6 +113,28 @@ describe('find', () => {
     expect(find(args, i => i === 3)).toBe(3);
   });
 
+  it('should use identity when no _doesMatch is provided', () => {
+    expect(find([0, 1, 2])).toBe(1);
+    expect(find([false, true, false])).toBe(true);
+    expect(find(['', 'hello', ''])).toBe('hello');
+    expect(find({ a: 0, b: 1, c: 2 })).toBe(1);
+    expect(find({ a: false, b: true, c: false })).toBe(true);
+    expect(find({ a: '', b: 'hello', c: '' })).toBe('hello');
+    expect(find('123')).toBe('1');
+    expect(find(args)).toBe(1);
+  });
+
+  it('should throw error when boolean predicate is used', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(() => find({ a: 1, b: 2, c: 3 }, true)).toThrow('doesMatch is not a function');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(() => find({ a: 1, b: 2, c: 3 }, false)).toThrow('doesMatch is not a function');
+    expect(() => find([1, 2, 3], true)).toThrow('undefined is not a function');
+    expect(() => find([1, 2, 3], false)).toThrow('undefined is not a function');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(find).toEqualTypeOf<typeof findLodash>();
   });
