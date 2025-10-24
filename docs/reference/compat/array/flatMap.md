@@ -64,7 +64,7 @@ const users = [
   { user: 'fred', age: 40, active: false },
 ];
 flatMap(users, { active: false });
-// Result: [false] (matching result of elements where active is false)
+// Result: [false, true] (matching result of elements where active is false)
 ```
 
 #### Parameters

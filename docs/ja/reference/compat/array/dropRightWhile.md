@@ -43,7 +43,7 @@ dropRightWhile(users, ['active', false]);
 
 // プロパティ名で条件を確認します。
 dropRightWhile(users, 'active');
-// 戻り値: [{ user: 'barney', active: true }]
+// 戻り値: [{ user: 'barney', active: true }, { user: 'fred', active: false }, { user: 'pebbles', active: false }]
 ```
 
 `null` または `undefined` は空の配列として処理されます。
