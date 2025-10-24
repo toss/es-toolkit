@@ -33,8 +33,8 @@ const curriedSubtract = curryRight(subtract);
 // Currying from right (starting from last argument)
 console.log(curriedSubtract(1)(2)(5)); // 5 - 2 - 1 = 2
 console.log(curriedSubtract(1, 2)(5)); // 5 - 2 - 1 = 2
-console.log(curriedSubtract(1)(2, 5)); // 5 - 2 - 1 = 2
-console.log(curriedSubtract(1, 2, 5)); // 5 - 2 - 1 = 2
+console.log(curriedSubtract(1)(2, 5)); // 2 - 5 - 1 = -4
+console.log(curriedSubtract(1, 2, 5)); // 1 - 2 - 5 = -6
 ```
 
 Difference between `curry` and `curryRight`:
