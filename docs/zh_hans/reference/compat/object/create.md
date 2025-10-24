@@ -60,7 +60,7 @@ dog.makeSound(); // 'Woof!' (覆盖的方法)
 
 // null原型
 const cleanObj = create(null, { data: 'value' });
-console.log(cleanObj.toString); // undefined (没有Object.prototype方法)
+console.log(cleanObj.toString); // ƒ toString() { [native code] } (null 等价于 {})
 
 // 继承空对象
 const empty = create({});
