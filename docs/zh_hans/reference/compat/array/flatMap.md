@@ -64,7 +64,7 @@ const users = [
   { user: 'fred', age: 40, active: false },
 ];
 flatMap(users, { active: false });
-// 结果: [false] (active 为 false 的元素的匹配结果)
+// 结果: [false, true] (active 为 false 的元素的匹配结果)
 ```
 
 #### 参数

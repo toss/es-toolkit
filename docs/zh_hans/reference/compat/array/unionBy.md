@@ -45,10 +45,6 @@ unionBy(
 // 使用部分对象比较
 unionBy([{ x: 1, y: 1 }], [{ x: 1, y: 2 }], { x: 1 });
 // 返回: [{ x: 1, y: 1 }]
-
-// 使用属性-值数组比较
-unionBy([{ active: true, name: 'a' }], [{ active: false, name: 'b' }], ['active', true]);
-// 返回: [{ active: true, name: 'a' }, { active: false, name: 'b' }]
 ```
 
 `null` 或 `undefined` 数组会被忽略。

@@ -30,7 +30,7 @@ function logMessage(level, message, ...details) {
 
 const restLogger = rest(logMessage, 2);
 restLogger('ERROR', 'エラーが発生しました', '詳細情報 1', '詳細情報 2');
-// 内部的に logMessage('ERROR', 'エラーが発生しました', ['詳細情報 1', '詳細情報 2']) として呼び出されます
+// 内部的に logMessage('ERROR', 'エラーが発生しました', [['詳細情報 1', '詳細情報 2']]) として呼び出されます
 
 // 別のインデックスの例
 function process(action, target, ...args) {
@@ -39,7 +39,7 @@ function process(action, target, ...args) {
 
 const restProcess = rest(process, 1);
 restProcess('update', 'user', 'name', 'John', 'age', 25);
-// { action: 'update', target: ['user', 'name', 'John', 'age', 25], args: undefined }
+// { action: 'update', target: ['user', 'name', 'John', 'age', 25], args: [] }
 ```
 
 関数の最後の引数を配列として受け取りたい場合に使用します。現代の JavaScript では、残余パラメータ構文(`...args`)を使用するのがより一般的です。

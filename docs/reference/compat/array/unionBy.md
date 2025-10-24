@@ -45,10 +45,6 @@ unionBy(
 // Compare with partial object
 unionBy([{ x: 1, y: 1 }], [{ x: 1, y: 2 }], { x: 1 });
 // Returns: [{ x: 1, y: 1 }]
-
-// Compare with property-value array
-unionBy([{ active: true, name: 'a' }], [{ active: false, name: 'b' }], ['active', true]);
-// Returns: [{ active: true, name: 'a' }, { active: false, name: 'b' }]
 ```
 
 `null` or `undefined` arrays are ignored.
