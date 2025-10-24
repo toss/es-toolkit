@@ -139,6 +139,14 @@ describe('intersectionBy', () => {
     ]);
   });
 
+  it('should handle non-function, non-string, non-array iteratee', () => {
+    const array1 = [1, 2, 3];
+    const array2 = [2, 3, 4];
+
+    const actual = intersectionBy(array1, array2, 123);
+    expect(actual).toEqual([1, 2, 3]);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(intersectionBy).toEqualTypeOf<typeof intersectionByLodash>();
   });
