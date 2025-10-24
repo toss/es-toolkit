@@ -40,7 +40,7 @@ isNative(null); // false
 
 // 바인딩된 함수들
 const boundFunction = Array.prototype.push.bind([]);
-isNative(boundFunction); // false (바인딩된 함수는 네이티브가 아님)
+isNative(boundFunction); // true (바인딩된 함수들은 네이티브임)
 
 // 메서드들
 const obj = { method: Array.prototype.push };

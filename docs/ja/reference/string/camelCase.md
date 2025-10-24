@@ -20,7 +20,7 @@ camelCase('hello world'); // returns 'helloWorld'
 camelCase('some-hyphen-text'); // returns 'someHyphenText'
 camelCase('CONSTANT_CASE'); // returns 'constantCase'
 camelCase('PascalCase'); // returns 'pascalCase'
-camelCase('mixed   SpAcE'); // returns 'mixedSpace'
+camelCase('mixed   SpAcE'); // returns 'mixedSpAcE'
 ```
 
 特殊文字や空白、ハイフンのような区切り文字がある文字列をJavaScriptの変数名やオブジェクトのプロパティ名として使用しやすい形式に変換します。

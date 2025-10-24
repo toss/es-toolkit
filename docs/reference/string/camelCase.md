@@ -20,7 +20,7 @@ camelCase('hello world'); // returns 'helloWorld'
 camelCase('some-hyphen-text'); // returns 'someHyphenText'
 camelCase('CONSTANT_CASE'); // returns 'constantCase'
 camelCase('PascalCase'); // returns 'pascalCase'
-camelCase('mixed   SpAcE'); // returns 'mixedSpace'
+camelCase('mixed   SpAcE'); // returns 'mixedSpAcE'
 ```
 
 It converts strings with special characters, spaces, hyphens, and other separators into a format suitable for JavaScript variable names or object property names.

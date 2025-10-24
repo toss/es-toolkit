@@ -58,7 +58,7 @@ const small = [1, 2];
 
 // 当窗口大于数组时
 console.log(windowed(small, 5)); // []
-console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2]]
+console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
 ```
 
 #### 参数
