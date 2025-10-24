@@ -57,8 +57,8 @@ const words1 = ['Apple', 'banana'];
 const words2 = ['BANANA', 'orange'];
 const areWordsEqual = (a, b) => a.toLowerCase() === b.toLowerCase();
 unionWith(words1, words2, areWordsEqual);
-// Returns: ['Apple', 'orange']
-// 'banana' and 'BANANA' are considered the same, so only 'Apple' from the first array remains.
+// Returns: ['Apple', 'banana', 'orange']
+// 'banana' and 'BANANA' are considered the same, so only the first one is kept.
 ```
 
 #### Parameters

@@ -52,12 +52,12 @@ const numbers3 = rangeRight(0, 20, 5);
 console.log(numbers3); // [15, 10, 5, 0]
 
 // 음수 방향으로도 만들 수 있어요.
-const numbers4 = rangeRight(0, -5, -1);
-console.log(numbers4); // [-4, -3, -2, -1, 0]
+const numbers4 = rangeRight(-5, 0, 1);
+console.log(numbers4); // [-1, -2, -3, -4, -5]
 
 // 큰 숫자에서 작은 숫자로 갈 때도 가능해요.
-const numbers5 = rangeRight(0, 5, -1);
-console.log(numbers5); // [1, 2, 3, 4]
+const numbers5 = rangeRight(5, 0, -1);
+console.log(numbers5); // [1, 2, 3, 4, 5]
 ```
 
 카운트다운이나 페이지네이션에서 역순이 필요할 때 유용해요.

@@ -21,7 +21,7 @@ xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], obj => obj.id);
 
 // 根据字符串长度求对称差集。
 xorBy(['apple', 'banana'], ['grape', 'cherry', 'apple'], str => str.length);
-// Returns: ['banana', 'cherry'] (长度为6的元素)
+// Returns: [] (所有长度都重复)
 ```
 
 映射函数结果相同的元素被视为一个。
@@ -29,8 +29,9 @@ xorBy(['apple', 'banana'], ['grape', 'cherry', 'apple'], str => str.length);
 ```typescript
 import { xorBy } from 'es-toolkit/array';
 
+// 映射函数结果相同的元素被视为一个。
 xorBy([1, 2, 3, 4], [3, 4, 5, 6], n => n % 3);
-// Returns: [2, 5] (除以3余数为2的元素)
+// Returns: [] (所有余数都重复)
 ```
 
 #### 参数

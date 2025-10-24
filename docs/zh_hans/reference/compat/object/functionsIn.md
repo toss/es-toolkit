@@ -56,7 +56,7 @@ Calculator.prototype.divide = function (n) {
 
 const calc = new Calculator();
 const allMethods = functionsIn(calc);
-// 结果: ['add', 'multiply', 'divide'] (包括继承的方法)
+// 结果: ['add', 'divide'] (`multiply` 不可枚举)
 
 // 通过原型链继承
 function Parent() {

@@ -40,7 +40,7 @@ isEmpty(); // true
 
 // 类数组对象
 isEmpty({ 0: 'a', length: 1 }); // false
-isEmpty({ length: 0 }); // true (不是真正的数组，所以为 false)
+isEmpty({ length: 0 }); // false
 ```
 
 原始值都被视为空值：

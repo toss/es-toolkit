@@ -34,7 +34,7 @@ console.log(uniqueByAge);
 // Remove duplicates based on string length.
 const words = ['apple', 'pie', 'banana', 'cat', 'dog'];
 const uniqueByLength = uniqBy(words, word => word.length);
-console.log(uniqueByLength); // ['apple', 'pie', 'cat']
+console.log(uniqueByLength); // ['apple', 'pie', 'banana']
 ```
 
 You can also base it on a combination of specific fields in complex objects.
