@@ -1,34 +1,51 @@
-# isNaN
+# isNaN (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Number.isNaN`
+这个 `isNaN` 函数由于额外的函数调用而运行较慢。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+请使用更快且现代的 `Number.isNaN`。
 :::
 
-检查值是否为`NaN`。
-
-此函数还可以作为 TypeScript 中的类型谓词，将参数的类型缩小到`NaN`。
-
-## 签名
+检查值是否为 `NaN`。
 
 ```typescript
-function isNaN(value?: unknown): value is typeof NaN;
+const result = isNaN(value);
 ```
 
-### 参数
+## 参考
 
-- `value` (`unknown`): 要检查的值。
+### `isNaN(value)`
 
-### 返回值
-
-(`value is typeof NaN`): 如果值是NaN，则为`true`，否则为`false`。
-
-## 示例
+当您想检查值是否为 `NaN` 时使用 `isNaN`。
 
 ```typescript
-isNaN(NaN); // true
-isNaN(0); // false
-isNaN('NaN'); // false
-isNaN(undefined); // false
+import { isNaN } from 'es-toolkit/compat';
+
+// NaN 检查
+isNaN(NaN);
+// 返回: true
+
+isNaN(Number.NaN);
+// 返回: true
+
+// 其他值
+isNaN(undefined);
+// 返回: false
+
+isNaN(null);
+// 返回: false
+
+isNaN(0);
+// 返回: false
+
+isNaN('NaN');
+// 返回: false
 ```
+
+#### 参数
+
+- `value` (`unknown`): 要检查是否为 NaN 的值。
+
+#### 返回值
+
+(`boolean`): 如果值为 NaN 则返回 `true`，否则返回 `false`。

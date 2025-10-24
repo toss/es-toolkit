@@ -1,34 +1,48 @@
 # maxBy
 
-Finds the element in an array that has the maximum value when applying the `getValue` function to each element.
-
-## Signature
+Returns the element with the maximum value from the array based on the value returned by the transformation function.
 
 ```typescript
-function maxBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T;
-function maxBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
+const max = maxBy(items, getValue);
 ```
 
-### Parameters
+## Reference
 
-- `items` (`T[]`): The array of elements to search.
-- `getValue` (`(item: T) => number`): A function that selects a numeric value from each element.
+### `maxBy(items, getValue)`
 
-### Returns
-
-(`T`): The element with the maximum value as determined by the `getValue` function.
-
-## Example
+Use `maxBy` when you want to transform elements in an array to numeric values using a transformation function and find the original element with the largest value. It returns `undefined` for an empty array.
 
 ```typescript
-maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
-maxBy([], x => x.a); // Returns: undefined
-maxBy(
-  [
-    { name: 'john', age: 30 },
-    { name: 'jane', age: 28 },
-    { name: 'joe', age: 26 },
-  ],
-  x => x.age
-); // Returns: { name: 'john', age: 30 }
+import { maxBy } from 'es-toolkit/array';
+
+// Find the element with the maximum value for a specific property in an object array.
+const people = [
+  { name: 'john', age: 30 },
+  { name: 'jane', age: 28 },
+  { name: 'joe', age: 26 },
+];
+maxBy(people, person => person.age);
+// Returns: { name: 'john', age: 30 }
+
+// Find the element with the largest absolute value in a number array.
+const numbers = [-10, -5, 0, 5, 15];
+maxBy(numbers, x => Math.abs(x));
+// Returns: 15
 ```
+
+It returns `undefined` for an empty array.
+
+```typescript
+import { maxBy } from 'es-toolkit/array';
+
+maxBy([], x => x.value); // undefined
+```
+
+#### Parameters
+
+- `items` (`T[]`): The array to find the element with the maximum value.
+- `getValue` (`(element: T) => number`): A function that transforms each element into a number.
+
+#### Returns
+
+(`T | undefined`): The element with the largest value returned by the transformation function. Returns `undefined` if the array is empty.

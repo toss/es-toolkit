@@ -1,51 +1,55 @@
-# sortedIndex
+# sortedIndex (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Implement binary search directly
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `sortedIndex` function operates with complexity due to handling `null`, `undefined`, and various type support.
+
+Instead, implement a faster, more modern binary search directly or use a dedicated library.
+
 :::
 
-Finds the lowest index at which a given value should be inserted into a sorted array to maintain its sort order.
-
-- If the array is already sorted, sortedIndex ensures that the new value is inserted in the correct position without disrupting the order.
-- The search is performed using a binary search algorithm, making it efficient for large arrays.
-- For more complex or custom sorting logic, it delegates to [sortedIndexBy](./sortedIndexBy.md), which allows specifying an iteratee function to customize how elements are compared.
-
-The function returns the index at which the value should be inserted. If the value already exists in the array, the returned index will be before the first occurrence of the value.
-
-## Signature
+Finds the lowest index at which a value should be inserted into a sorted array.
 
 ```typescript
-function sortedIndex<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedIndex(array, value);
 ```
 
-### Parameters
+## Reference
 
-- `array` (`ArrayLike<T> | null | undefined`): The sorted array to inspect. Can be null or undefined, in which case it is treated as an empty array.
-- `value` (`T`): The value to evaluate and find the appropriate index for insertion
+### `sortedIndex(array, value)`
 
-### Returns
-
-(`number`): The index at which the value should be inserted to maintain the sort order.
-
-## Examples
+Use `sortedIndex` to find the position to insert a value in a sorted array. It uses binary search to find the position quickly.
 
 ```typescript
 import { sortedIndex } from 'es-toolkit/compat';
 
-// Basic usage with a number array
-sortedIndex([10, 20, 30, 50], 40);
-// Return value: 3
-// Explanation: 40 returns index 3 to maintain the sort order.
+// Find insertion position in number array
+sortedIndex([30, 50], 40);
+// Returns 1 (40 is positioned between 30 and 50)
 
-// Handling an empty or null array
-sortedIndex(null, 25);
-// Return value: 0
-// Explanation: Null or undefined arrays are treated as empty, so 0 is returned.
+// Find insertion position in string array
+sortedIndex(['a', 'c'], 'b');
+// Returns 1 ('b' is positioned between 'a' and 'c')
 
-// Using default comparison logic (delegated behavior with sortedIndexBy)
-sortedIndex([10, '20', 30], 25);
-// Return value: 2
-// Explanation: Using default comparison logic, it returns index 2.
+// When the same value exists, returns the first position
+sortedIndex([1, 2, 2, 3], 2);
+// Returns 1 (position of the first 2)
 ```
+
+For `null` or `undefined` arrays, returns 0.
+
+```typescript
+import { sortedIndex } from 'es-toolkit/compat';
+
+sortedIndex(null, 1); // 0
+sortedIndex(undefined, 1); // 0
+```
+
+#### Parameters
+
+- `array` (`ArrayLike<T> | null | undefined`): The sorted array. Using an unsorted array can produce incorrect results.
+- `value` (`T`): The value to insert.
+
+#### Returns
+
+(`number`): Returns the lowest index to insert the value. If the array is `null` or `undefined`, returns 0.

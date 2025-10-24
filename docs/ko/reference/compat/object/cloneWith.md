@@ -1,54 +1,97 @@
-# cloneWith
+# cloneWith (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 커스텀 로직 구현을 권장해요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `cloneWith` 함수는 복잡한 커스터마이저 함수 처리로 인해 상대적으로 느려요.
+
+대신 `clone`과 커스텀 로직을 직접 구현하는 방식을 사용하세요.
+
 :::
 
-주어진 객체의 얕은 복사본을 만들되, 사용자 정의 함수를 통해 복사 방식을 커스터마이즈할 수 있어요. 이 메서드는 `clone`과 비슷하지만, 복제된 값을 생성하기 위한 커스터마이저 함수를 받을 수 있다는 점이 달라요. 만약 커스터마이저가 undefined를 반환하면, 기본 복제 방식을 사용해요.
-
-커스터마이저를 제공하지 않으면 `clone`과 동일하게 동작해요.
-
-## 인터페이스
+커스터마이저 함수를 사용해서 객체의 얕은 복사본을 만들어요.
 
 ```typescript
-function cloneWith<T>(value: T, customizer?: (value: any) => any): T;
+const cloned = cloneWith(value, customizer);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`T`): 복제할 값이에요.
-- `customizer` (`Function`): 선택사항이에요. 복제 방식을 커스터마이즈하는 함수예요.
+### `cloneWith(value, customizer?)`
 
-### 반환 값
-
-(`T`): 주어진 객체의 얕은 복사본을 반환해요.
-
-## 예시
+복사 방식을 커스터마이징하고 싶을 때 `cloneWith`를 사용하세요. 커스터마이저 함수로 특정 값들의 복사 방식을 제어할 수 있어요.
 
 ```typescript
-const num = 29;
-const clonedNum = cloneWith(num);
-console.log(clonedNum); // 29
-console.log(clonedNum === num); // true
+import { cloneWith } from 'es-toolkit/compat';
 
-const arr = [1, 2, 3];
-const clonedArr = cloneWith(arr);
-console.log(clonedArr); // [1, 2, 3]
-console.log(clonedArr === arr); // false
+// 기본 사용법 (커스터마이저 없음)
+const obj = { a: 1, b: 'hello' };
+const cloned = cloneWith(obj);
+// Returns: { a: 1, b: 'hello' } (새로운 객체 인스턴스)
 
-const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3] };
-const clonedObj = cloneWith(obj);
-console.log(clonedObj); // { a: 1, b: 'es-toolkit', c: [1, 2, 3] }
-console.log(clonedObj === obj); // false
-
-const obj2 = { a: 1, b: 2 };
-const clonedObjWithCustomizer = cloneWith(obj2, value => {
-  if (typeof value === 'number') {
-    return value * 2; // 숫자를 2배로 만들기
+// 숫자 값 변환
+const obj2 = { a: 1, b: 2, c: 'text' };
+const cloned2 = cloneWith(obj2, value => {
+  const obj = {};
+  for (const key in value) {
+    const val = value[key];
+    if (typeof val === 'number') {
+      obj[key] = val * 2;
+    } else {
+      obj[key] = val;
+    }
   }
-  // undefined를 반환하면 기본 복제 방식을 사용해요
+  return obj;
 });
-console.log(clonedObjWithCustomizer); // { a: 2, b: 4 }
+// Returns: { a: 2, b: 4, c: 'text' }
+
+// 배열 요소 변환
+const arr = [1, 2, 3];
+const clonedArr = cloneWith(arr, value => {
+  return value.map(x => x + 10);
+});
+// Returns: [11, 12, 13]
+
+// 특정 타입 처리
+const complex = {
+  date: new Date('2023-01-01'),
+  number: 42,
+  text: 'hello',
+};
+const clonedComplex = cloneWith(complex, value => {
+  const obj = {};
+  for (const key in value) {
+    const val = value[key];
+    if (val instanceof Date) {
+      obj[key] = val.toISOString();
+    } else if (typeof val === 'string') {
+      obj[key] = val.toUpperCase();
+    } else {
+      obj[key] = val;
+    }
+  }
+  return obj;
+});
+// Returns: { date: '2023-01-01T00:00:00.000Z', number: 42, text: 'HELLO' }
 ```
+
+커스터마이저가 `undefined`를 반환하면 기본 복사 방식을 사용해요.
+
+```typescript
+import { cloneWith } from 'es-toolkit/compat';
+
+const obj = { a: 1, b: { c: 2 } };
+const cloned = cloneWith(obj, value => {
+  // 모든 값에 대해 undefined 반환 = 기본 복사
+  return undefined;
+});
+// Returns: { a: 1, b: { c: 2 } } (clone과 동일한 결과)
+```
+
+#### 파라미터
+
+- `value` (`T`): 복사할 값이에요.
+- `customizer` (`function`, 선택적): 복사 방식을 결정하는 함수예요. `(value: any) => any` 형태예요.
+
+#### 반환 값
+
+(`T`): 커스터마이저에 의해 처리된 얕은 복사본을 반환해요.

@@ -1,36 +1,58 @@
-# subtract
+# subtract (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `-` 演算子を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `subtract` 関数は追加の関数呼び出しにより動作が遅くなります。
+
+代わりに、より高速でシンプルな `-` 演算子を使用してください。
+
 :::
 
-二つの数字の差を返す関数です。
-
-どちらかが `NaN` の場合 `NaN` を返します。
-
-## インターフェース
+2つの数値を減算します。
 
 ```typescript
-function subtract(value: number, other: number): number;
+const result = subtract(value, other);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`number`): 基準となる数字です。
-- `other` (`number`): `value` から引く数字です。
+### `subtract(value, other)`
 
-### 戻り値
-
-(`number`): `value` から `other` を引いた値を返します。どちらかが `NaN` の場合、`NaN`を返します。
-
-## 例
+2つの数値を減算したい場合は `subtract` を使用してください。
 
 ```typescript
-subtract(6, 4); // 2を返します。
-subtract(-6, 4); // -10を返します。
-subtract(NaN, 4); // valueがNaNのためNaNを返します。
-subtract(6, NaN); // otherがNaNのためNaNを返します。
-subtract(NaN, NaN); // 両方の引数がNaNのためNaNを返します。
+import { subtract } from 'es-toolkit/compat';
+
+// 基本的な減算
+subtract(6, 4);
+// Returns: 2
+
+subtract(10, 3);
+// Returns: 7
+
+// 負の数の処理
+subtract(-6, 4);
+// Returns: -10
+
+subtract(6, -4);
+// Returns: 10
+
+// NaN の処理
+subtract(NaN, 4);
+// Returns: NaN
+
+subtract(6, NaN);
+// Returns: NaN
+
+subtract(NaN, NaN);
+// Returns: NaN
 ```
+
+#### パラメータ
+
+- `value` (`number`): 減算の基準となる最初の数値です。
+- `other` (`number`): 減算する2番目の数値です。
+
+#### 戻り値
+
+(`number`): 最初の数値から2番目の数値を減算した結果を返します。どちらか一方でもNaNの場合はNaNを返します。

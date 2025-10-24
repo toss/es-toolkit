@@ -1,47 +1,70 @@
-# forOwnRight
+# forOwnRight (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.keys` とループを使用してください
+この `forOwnRight` 関数は、内部的に `keys` 関数を呼び出し、オブジェクト変換プロセスや逆順走査などにより遅く動作します。
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+代わりに、より速く、より現代的な `Object.keys` とループを使用してください。
+
 :::
 
-オブジェクトのプロパティを逆順に順次処理し、各プロパティに対して `iteratee` 関数を呼び出します。
-
-オブジェクトが直接所有するプロパティのみを処理し、継承されたプロパティや `Symbol` キーを持つプロパティは含まれません。
-
-`iteratee` 関数が `false` を返すことで、順次処理を早期に終了することができます。
-
-## インターフェース
+オブジェクトの固有プロパティのみを逆順で反復処理し、各プロパティに対して関数を呼び出します。
 
 ```typescript
-function forOwnRight<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forOwnRight(obj, iteratee);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`T | null | undefined`): 反復するためのオブジェクトです。
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 各反復で呼び出される関数です。提供されていない場合は、同一関数が使用されます。
+### `forOwnRight(object, iteratee)`
 
-### 戻り値
-
-(`T | null | undefined`): オブジェクトを返します。
-
-## 例
+オブジェクトの固有プロパティのみを逆順で反復処理し、`iteratee` 関数を呼び出します。継承されたプロパティや `Symbol` キーを除外し、オブジェクトが直接所有するプロパティのみを逆順で反復処理します。キーを配列に収集してから逆順で走査するため、通常の走査よりも遅くなります。`iteratee` 関数が `false` を返すと、反復処理が停止します。
 
 ```typescript
-function Foo() {
-  this.a = 1;
-  this.b = 2;
-}
+import { forOwnRight } from 'es-toolkit/compat';
 
-Foo.prototype.c = 3;
-
-forOwnRight(new Foo(), function (value, key) {
-  console.log(key);
+// オブジェクトの固有プロパティのみを逆順で反復処理
+const obj = { a: 1, b: 2 };
+forOwnRight(obj, (value, key) => {
+  console.log(key, value);
 });
-// => 'b' と 'a' を出力します (順序は保証されません)。
+// 出力: 'b' 2, 'a' 1
+
+// 継承されたプロパティを除外して逆順で反復処理
+function Parent() {
+  this.inherited = 'value';
+}
+Parent.prototype.protoProperty = 'proto';
+
+const child = new Parent();
+child.own = 'ownValue';
+
+forOwnRight(child, (value, key) => {
+  console.log(key, value);
+});
+// 出力: 'own' 'ownValue', 'inherited' 'value' (protoProperty は除外)
+
+// 条件に基づく早期終了
+forOwnRight(obj, (value, key) => {
+  console.log(key, value);
+  return key !== 'a'; // 'a' で停止
+});
+// 出力: 'b' 2, 'a' 1
 ```
+
+`null` または `undefined` はそのまま返されます。
+
+```typescript
+import { forOwnRight } from 'es-toolkit/compat';
+
+forOwnRight(null, iteratee); // null
+forOwnRight(undefined, iteratee); // undefined
+```
+
+#### パラメータ
+
+- `object` (`T | null | undefined`): 反復処理するオブジェクトです。
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, オプション): 各プロパティに対して呼び出す関数です。デフォルトは `identity` 関数です。
+
+#### 戻り値
+
+(`T | null | undefined`): 元のオブジェクトを返します。

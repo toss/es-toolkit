@@ -129,4 +129,13 @@ describe('camelizeKeys', () => {
       }>;
     }>();
   });
+
+  it('should have correct TypeScript types for non-plain objects', () => {
+    const input = { a: new Date(), b: /test/, c: new Map() };
+    const result = toCamelCaseKeys(input);
+
+    expectTypeOf(result.a).toEqualTypeOf<Date>();
+    expectTypeOf(result.b).toEqualTypeOf<RegExp>();
+    expectTypeOf(result.c).toEqualTypeOf<Map<any, any>>();
+  });
 });

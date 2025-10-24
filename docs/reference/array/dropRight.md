@@ -1,29 +1,43 @@
 # dropRight
 
-Removes a specified number of elements from the end of an array and returns the rest.
-
-This function takes an array and a number, and returns a new array with the specified number
-of elements removed from the end.
-
-## Signature
+Returns a new array with the specified number of elements removed from the end.
 
 ```typescript
-function dropRight<T>(arr: T[], itemsCount: number): T[];
+const dropped = dropRight(arr, itemsCount);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array from which to drop elements.
-- `itemsCount` (`number`): The number of elements to drop from the end of the array.
+### `dropRight(arr, itemsCount)`
 
-### Returns
-
-(`T[]`) A new array with the specified number of elements removed from the end.
-
-## Examples
+Use `dropRight` when you want to remove some elements from the end of an array. It removes the specified number of elements from the end and returns a new array with the remaining elements.
 
 ```typescript
-const array = [1, 2, 3, 4, 5];
-const result = dropRight(array, 2);
-// result will be [1, 2, 3] since the last two elements are dropped.
+import { dropRight } from 'es-toolkit/array';
+
+// Remove the last 2 elements from the array.
+dropRight([1, 2, 3, 4, 5], 2);
+// Returns: [1, 2, 3]
+
+// If the count is greater than the array length, it returns an empty array.
+dropRight([1, 2, 3], 5);
+// Returns: []
 ```
+
+If you pass a negative number or 0, it returns a new array with the same elements as the original.
+
+```typescript
+import { dropRight } from 'es-toolkit/array';
+
+dropRight([1, 2, 3], 0); // [1, 2, 3]
+dropRight([1, 2, 3], -2); // [1, 2, 3]
+```
+
+#### Parameters
+
+- `arr` (`T[]`): The array to remove elements from.
+- `itemsCount` (`number`): The number of elements to remove from the end of the array.
+
+#### Returns
+
+(`T[]`): A new array with the specified number of elements removed from the end.

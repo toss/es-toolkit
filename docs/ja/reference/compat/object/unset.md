@@ -1,36 +1,72 @@
-# unset
+# unset (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `delete` 演算子を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `unset` 関数は複雑なパス解析とネストされたオブジェクト処理により遅く動作します。
+
+代わりに、より高速で現代的な `delete` 演算子を直接使用してください。
+
 :::
 
-指定されたパスのプロパティをオブジェクトから削除します。
-
-## インターフェース
+オブジェクトの指定されたパスにあるプロパティを削除します。
 
 ```typescript
-function unset(obj: any, path: PropertyKey | PropertyKey[]): boolean;
+const success = unset(obj, path);
 ```
 
-### パラメータ
+## 参照
 
-- `obj` (`any`): 修正するオブジェクト。
-- `path` (`PropertyKey | PropertyKey[]`): 削除するプロパティのパス。
+### `unset(obj, path)`
 
-### 戻り値
-
-(`boolean`): プロパティが削除された場合は`true`を、それ以外の場合は`false`を返します。
-
-## 例
+ネストされたオブジェクトから特定のパスのプロパティを削除したい場合に `unset` を使用してください。パスは文字列または配列で指定できます。
 
 ```typescript
+import { unset } from 'es-toolkit/compat';
+
+// 文字列パスでネストされたプロパティを削除
 const obj = { a: { b: { c: 42 } } };
-unset(obj, 'a.b.c'); // true
+unset(obj, 'a.b.c'); // => true
 console.log(obj); // { a: { b: {} } }
 
-const obj = { a: { b: { c: 42 } } };
-unset(obj, ['a', 'b', 'c']); // true
-console.log(obj); // { a: { b: {} } }
+// 配列パスでネストされたプロパティを削除
+const obj2 = { a: { b: { c: 42 } } };
+unset(obj2, ['a', 'b', 'c']); // => true
+console.log(obj2); // { a: { b: {} } }
 ```
+
+配列のインデックスで要素を削除することもできます。
+
+```typescript
+import { unset } from 'es-toolkit/compat';
+
+const arr = [1, 2, 3, 4];
+unset(arr, 1); // => true
+console.log(arr); // [1, undefined, 3, 4]（要素が削除され undefined になります）
+```
+
+プロパティが存在しない場合や既に削除されている場合でも `true` を返します。
+
+```typescript
+import { unset } from 'es-toolkit/compat';
+
+const obj = { a: { b: 1 } };
+unset(obj, 'a.c'); // => true（存在しないプロパティ）
+```
+
+`null` または `undefined` のオブジェクトは安全に処理されます。
+
+```typescript
+import { unset } from 'es-toolkit/compat';
+
+unset(null, 'a.b'); // => true
+unset(undefined, 'a.b'); // => true
+```
+
+#### パラメータ
+
+- `obj` (`any`): 変更するオブジェクトです。
+- `path` (`PropertyKey | PropertyKey[]`): 削除するプロパティのパスです。
+
+#### 戻り値
+
+(`boolean`): プロパティが削除された場合は `true` を返し、それ以外の場合は `false` を返します。

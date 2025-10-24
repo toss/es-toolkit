@@ -1,56 +1,72 @@
 # assert
 
-Asserts that a given condition is true. If the condition is false, an error is thrown with the provided message or error.
-
-This function is an alias for the [invariant](./invariant.md) function.
-
-## Signature
+Asserts that a given condition is true. If the condition is false, it throws an error.
 
 ```typescript
-function assert(condition: unknown, message: string): asserts condition;
-function assert(condition: unknown, error: Error): asserts condition;
+assert(condition, message);
 ```
 
-### Parameters
+::: info Relationship with `invariant`
 
-- `condition` (`unknown`): The condition to evaluate.
-- `message` (`string` | `Error`): The error message to throw if the condition is false.
+`assert` has exactly the same functionality as the `invariant` function. The only difference is the name. For more details, see the [`invariant`](./invariant.md) documentation.
 
-### Returns
+:::
 
-(`void`): Returns void if the condition is true.
+## Reference
 
-### Throws
+### `assert(condition, message)`
 
-Throws an error with the specified message if the condition evaluates to false.
-
-## Examples
+Use `assert` when a specific condition must be satisfied in your code. If the condition is false, it immediately throws an error and stops program execution.
 
 ```typescript
-// This call will succeed without any errors
-assert(true, 'This should not throw');
+import { assert } from 'es-toolkit/util';
 
-// This call will fail and throw an error with the message 'This should throw'
-assert(false, 'This should throw');
+// If the condition is true, nothing happens
+assert(true, 'This message will not appear');
 
-// Example of using assert with a condition
-assert(condition, 'Expected condition is false');
+// If the condition is false, it throws an error
+assert(false, 'This condition is false'); // Error: This condition is false
 
-// Ensure that the value is neither null nor undefined
-assert(value !== null && value !== undefined, 'Value should not be null or undefined');
+// When checking that a value is not null or undefined
+const value = getValue();
+assert(value !== null && value !== undefined, 'Value must not be null or undefined');
+// Now you can be sure that value is neither null nor undefined
 
-// Example of using assert to check if a number is positive
+// When checking if a number is positive
+const number = getNumber();
 assert(number > 0, 'Number must be positive');
+```
 
-// Example of using assert with an error
-assert(false, new Error('This should throw'));
+You can also pass an error object directly.
 
-// Example of using assert with a custom error
-class CustomError extends Error {
+```typescript
+import { assert } from 'es-toolkit/util';
+
+// Passing an Error object
+assert(false, new Error('Custom error message'));
+
+// Using a custom error class
+class ValidationError extends Error {
   constructor(message: string) {
     super(message);
+    this.name = 'ValidationError';
   }
 }
 
-assert(false, new CustomError('This should throw'));
+assert(false, new ValidationError('Validation failed'));
 ```
+
+It's especially useful for verifying code assumptions during development or checking that function inputs are within expected ranges.
+
+#### Parameters
+
+- `condition` (`unknown`): The condition to evaluate. If it evaluates to a falsy value, an error is thrown.
+- `message` (`string | Error`): The error message or error object to throw when the condition is false.
+
+#### Returns
+
+(`void`): Returns nothing if the condition is true.
+
+#### Throws
+
+Throws the provided message or error object if the condition evaluates to false.

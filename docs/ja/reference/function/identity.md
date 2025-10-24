@@ -1,30 +1,44 @@
 # identity
 
-入力された値を変更せずに返します。
-
-## インターフェース
+入力された値をそのまま返します。
 
 ```typescript
-function identity<T>(x: T): T;
+const result = identity(value);
 ```
 
-### パラメータ
+## 参照
 
-- `x` (`T`): 返される値。
+### `identity(value)`
 
-### 戻り値
+ある値を変更せずにそのまま返したいときに`identity`を使用してください。
 
-(`T`): 入力値。
-
-## 例
+引数として与えられる関数のデフォルト値として使用するときに便利です。配列の`map`や`filter`で値自体を返したり、関数型プログラミングでプレースホルダーの役割として使用します。
 
 ```typescript
-// Returns 5
-identity(5);
+import { identity } from 'es-toolkit/function';
 
-// Returns 'hello'
-identity('hello');
+// 数値をそのまま返します
+const num = identity(5);
+console.log(num); // 5
 
-// Returns { key: 'value' }
-identity({ key: 'value' });
+// 文字列をそのまま返します
+const str = identity('hello');
+console.log(str); // 'hello'
+
+// オブジェクトをそのまま返します
+const obj = identity({ key: 'value' });
+console.log(obj); // { key: 'value' }
+
+// 配列で使用する例
+const numbers = [1, 2, 3, 4, 5];
+const same = numbers.map(identity);
+console.log(same); // [1, 2, 3, 4, 5]
 ```
+
+#### パラメータ
+
+- `value` (`T`): 返す値です。
+
+#### 戻り値
+
+(`T`): 入力された値をそのまま返します。

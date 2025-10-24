@@ -1,59 +1,55 @@
-# defaults
+# defaults (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.assign()` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `defaults` function operates slowly due to complex logic that handles `undefined` and properties inherited from `Object.prototype` specially.
+
+Use faster, more modern `Object.assign()` instead.
+
 :::
 
-Assigns default values to an `object`, ensuring that certain properties do not remain `undefined`. It sets default values for properties that are either `undefined` or inherited from `Object.prototype`.
-
-You can pass in multiple objects to define these default values, and they will be applied in order from left to right. Once a property has been assigned a value, any subsequent values for that property will be ignored.
-
-Note: This function modifies the first argument, `object`. If you want to keep `object` unchanged, consider using [toDefaulted](./toDefaulted.md) instead.
-
-## Signature
+Fills in `undefined` properties in an object by setting default values.
 
 ```typescript
-function defaults<T extends object>(object: T): NonNullable<T>;
-function defaults<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function defaults<T extends object, S1 extends object, S2 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2
-): NonNullable<T & S1 & S2>;
-function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3
-): NonNullable<T & S1 & S2 & S3>;
-function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): NonNullable<T & S1 & S2 & S3 & S4>;
-function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object;
+const result = defaults(object, source);
 ```
 
-### Parameters
+## Reference
 
-- `object` (`T`): The target object that will receive default values.
-- `sources` (`S[]`): The objects that specifies the default values to apply.
+### `defaults(object, ...sources)`
 
-### Returns
-
-(`object`): The `object` that has been updated with default values from `sources`, ensuring that all properties are defined and none are left as `undefined`.
-
-## Examples
+Use `defaults` when you want to set default values for `undefined` properties or properties inherited from `Object.prototype` in an object. You can pass multiple default value objects, and they are applied in order from left to right.
 
 ```typescript
-defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-defaults({ a: null }, { a: 1 }); // { a: null }
-defaults({ a: undefined }, { a: 1 }); // { a: 1 }
-defaults({ a: 1 }, undefined); // { a: 1 }
-defaults({ a: 1 }, null); // { a: 1 }
+import { defaults } from 'es-toolkit/compat';
+
+// Fill undefined properties with default values
+defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 });
+// Returns: { a: 1, b: 2, c: 3 }
+
+// Only undefined properties are filled with default values
+defaults({ a: undefined }, { a: 1 });
+// Returns: { a: 1 }
+
+// null values are preserved
+defaults({ a: null }, { a: 1 });
+// Returns: { a: null }
 ```
+
+If a property already has a value, it won't be overwritten with the default value.
+
+```typescript
+import { defaults } from 'es-toolkit/compat';
+
+defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 });
+// Returns: { a: 1, b: 2, c: 3 }
+```
+
+#### Parameters
+
+- `object` (`any`): The target object to set default values on.
+- `...sources` (`any[]`): The source objects that provide default values.
+
+#### Returns
+
+(`any`): Returns the object with default values set. The first argument `object` is modified.

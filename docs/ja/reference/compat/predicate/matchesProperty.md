@@ -1,45 +1,77 @@
-# matchesProperty
+# matchesProperty (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-与えられたオブジェクトのプロパティが `source` の形状と値に一致するかどうかを確認する関数を作成します。
-
-返される関数は `target` オブジェクトを受け取り、指定されたプロパティの値が `source` と一致するかどうかを確認します。
-
-## インターフェース
+特定のプロパティが与えられた値と一致するかどうかを確認する関数を作成します。
 
 ```typescript
-function matchesProperty(property: PropertyKey | PropertyKey[], source: unknown): (target?: unknown) => boolean;
+const checker = matchesProperty(path, value);
 ```
 
-### パラメータ
+## 参照
 
-- `property` (`number | string | symbol | Array<number | string | symbol>`): オブジェクトのプロパティを表すパス。プロパティ名、プロパティ名の配列、または深いパスを表す文字列を使用できます。
-- `source` (`unknown`): オブジェクトのプロパティと比較する値。
+### `matchesProperty(property, source)`
 
-### 戻り値
-
-(`(target: unknown) => boolean`): `target` オブジェクトを受け取り、指定されたプロパティの値を取得し、`source` と一致するかどうかを確認する関数。一致する場合は `true`、そうでない場合は `false` を返します。
-
-## 例
+オブジェクトの特定のプロパティが与えられた値と一致するかどうかを確認する関数を作成する際に `matchesProperty` を使用してください。配列のフィルタリングやオブジェクト検索で便利です。
 
 ```typescript
-// 単純なプロパティ名
+import { matchesProperty } from 'es-toolkit/compat';
+
+// 単純なプロパティ確認
 const checkName = matchesProperty('name', 'Alice');
-console.log(checkName({ name: 'Alice' })); // true
-console.log(checkName({ name: 'Bob' })); // false
 
-// プロパティの配列
-const checkNested = matchesProperty(['address', 'city'], '東京');
-console.log(checkNested({ address: { city: '東京' } })); // true
-console.log(checkNested({ address: { city: '大阪' } })); // false
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Alice', age: 35 },
+];
 
-// 深いパス
-const checkNested = matchesProperty('address.city', '東京');
-console.log(checkNested({ address: { city: '東京' } })); // true
-console.log(checkNested({ address: { city: '大阪' } })); // false
+const aliceUsers = users.filter(checkName);
+// [{ name: 'Alice', age: 25 }, { name: 'Alice', age: 35 }]
+
+// ネストしたプロパティ確認（配列パス）
+const checkCity = matchesProperty(['address', 'city'], 'Seoul');
+
+const profiles = [
+  { name: 'Kim', address: { city: 'Seoul', district: 'Gangnam' } },
+  { name: 'Lee', address: { city: 'Busan', district: 'Haeundae' } },
+  { name: 'Park', address: { city: 'Seoul', district: 'Mapo' } },
+];
+
+const seoulUsers = profiles.filter(checkCity);
+// [{ name: 'Kim', address: { city: 'Seoul', district: 'Gangnam' } },
+//  { name: 'Park', address: { city: 'Seoul', district: 'Mapo' } }]
+
+// 深いパスを文字列で表現
+const checkScore = matchesProperty('stats.game.score', 100);
+
+const players = [
+  { name: 'Player1', stats: { game: { score: 100, level: 5 } } },
+  { name: 'Player2', stats: { game: { score: 95, level: 4 } } },
+  { name: 'Player3', stats: { game: { score: 100, level: 6 } } },
+];
+
+const perfectScorers = players.filter(checkScore);
+// [{ name: 'Player1', stats: { game: { score: 100, level: 5 } } },
+//  { name: 'Player3', stats: { game: { score: 100, level: 6 } } }]
+
+// 複雑なオブジェクトとマッチング
+const checkRole = matchesProperty('role', { type: 'admin', permissions: ['read', 'write'] });
+
+const accounts = [
+  { user: 'Alice', role: { type: 'admin', permissions: ['read', 'write'] } },
+  { user: 'Bob', role: { type: 'user', permissions: ['read'] } },
+  { user: 'Charlie', role: { type: 'admin', permissions: ['read', 'write'] } },
+];
+
+const admins = accounts.filter(checkRole);
+// [{ user: 'Alice', role: { type: 'admin', permissions: ['read', 'write'] } },
+//  { user: 'Charlie', role: { type: 'admin', permissions: ['read', 'write'] } }]
 ```
+
+#### パラメータ
+
+- `property` (`PropertyKey | PropertyKey[]`): 確認するプロパティのパスです。文字列、配列、またはドットで区切られたパスを使用できます。
+- `source` (`unknown`): プロパティ値と比較する値です。
+
+#### 戻り値
+
+(`(target: unknown) => boolean`): 与えられたオブジェクトのプロパティが値と一致するかどうかを確認する関数を返します。

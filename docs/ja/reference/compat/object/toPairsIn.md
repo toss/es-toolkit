@@ -1,43 +1,68 @@
-# toPairsIn
+# toPairsIn (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.entries` または `for...in` ループを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `toPairsIn` 関数は継承されたプロパティの処理、`Map` と `Set` の処理などの複雑なロジックにより遅く動作します。
+
+代わりに、より高速で現代的な `Object.entries()` を使用するか、継承されたプロパティが必要な場合は `for...in` ループを使用してください。
+
 :::
 
-オブジェクト、`Set`、または `Map` からプロパティと値をペアにした要素の配列を作成します。継承されたプロパティも含まれます。
-
-- オブジェクトが提供されると、オブジェクトのプロパティと値をペアにした要素（`[key, value]`）の配列を返します。
-- `Set` が提供されると、要素を `[value, value]` 形式でペアにした配列を返します。
-- `Map` が提供されると、キーと値をペアにした要素（`[key, value]`）の配列を返します。
-
-## インターフェース
+オブジェクトをキー値ペアの配列に変換し、継承されたプロパティも含めます。
 
 ```typescript
-function toPairsIn<T>(object?: Record<string, T> | Record<number, T>): Array<[string, T]>;
-function toPairsIn(object?: object): Array<[string, any]>;
+const pairs = toPairsIn(object);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`Record<string, T> | Record<number, T> | object`, オプション): クエリするオブジェクト、`Set`、または`Map`。
+### `toPairsIn(object)`
 
-### 戻り値
-
-(`Array<[string, T]> | Array<[string, any]>`): キーと値のペアの配列を返します。
-
-## 例
+オブジェクトのすべての列挙可能なプロパティ(継承されたプロパティを含む)を `[キー, 値]` 形式の配列に変換したい場合は、`toPairsIn` を使用してください。`toPairs` とは異なり、プロトタイプチェーンのプロパティも一緒に含まれます。
 
 ```typescript
+import { toPairsIn } from 'es-toolkit/compat';
+
+// 基本的なオブジェクトの変換
 const object = { a: 1, b: 2 };
-toPairsIn(object); // [['a', 1], ['b', 2]]
+toPairsIn(object);
+// => [['a', 1], ['b', 2]]
 
-const set = new Set([1, 2]);
-toPairsIn(set); // [[1, 1], [2, 2]]
+// 継承されたプロパティも含む
+function Parent() {
+  this.inherited = 'value';
+}
+Parent.prototype.proto = 'property';
 
-const map = new Map();
-map.set('a', 1);
-map.set('b', 2);
-toPairsIn(map); // [['a', 1], ['b', 2]]
+const child = new Parent();
+child.own = 'own';
+toPairsIn(child);
+// => [['inherited', 'value'], ['own', 'own'], ['proto', 'property']]
 ```
+
+`Map` と `Set` も処理できます。
+
+```typescript
+import { toPairsIn } from 'es-toolkit/compat';
+
+// Map オブジェクトの変換
+const map = new Map([
+  ['key1', 'value1'],
+  ['key2', 'value2'],
+]);
+toPairsIn(map);
+// => [['key1', 'value1'], ['key2', 'value2']]
+
+// Set オブジェクトの変換
+const set = new Set([1, 2, 3]);
+toPairsIn(set);
+// => [[1, 1], [2, 2], [3, 3]]
+```
+
+#### パラメータ
+
+- `object` (`object`): 変換するオブジェクト、Map、または Set。
+
+#### 戻り値
+
+(`Array<[string, any]>`): キー値ペアの配列を返します(継承されたプロパティを含む)。

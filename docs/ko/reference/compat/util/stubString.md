@@ -1,25 +1,63 @@
-# stubString
+# stubString (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `''`를 직접 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `stubString` 함수는 단순히 빈 문자열을 반환하는 래퍼 함수로 불필요한 추상화예요.
+
+대신 더 빠르고 직접적인 `''`를 사용하세요.
+
 :::
 
-빈 문자열을 반환해요.
-
-## 인터페이스
+항상 빈 문자열을 반환해요.
 
 ```typescript
-function stubString(): '';
+const emptyString = stubString();
 ```
 
-### 반환 값
+## 레퍼런스
 
-(`''`): 빈 문자열.
+### `stubString()`
 
-## 예시
+항상 빈 문자열을 반환하는 함수예요. 기본값으로 빈 문자열이 필요하거나 함수형 프로그래밍에서 일관된 반환값이 필요할 때 사용해요.
 
 ```typescript
-stubString(); // Returns ''
+import { stubString } from 'es-toolkit/compat';
+
+// 빈 문자열을 반환해요
+const emptyString = stubString();
+console.log(emptyString); // => ''
+
+// 기본값으로 사용해요
+function formatMessage(message = stubString()) {
+  return message || '기본 메시지';
+}
+
+console.log(formatMessage()); // => '기본 메시지'
+console.log(formatMessage('안녕하세요')); // => '안녕하세요'
+
+// 함수형 프로그래밍에서 사용해요
+const createEmpty = () => stubString();
+const str = createEmpty();
+console.log(str.length); // => 0
 ```
+
+매번 동일한 빈 문자열을 반환해요.
+
+```typescript
+import { stubString } from 'es-toolkit/compat';
+
+const str1 = stubString();
+const str2 = stubString();
+
+console.log(str1 === str2); // => true
+console.log(typeof str1); // => 'string'
+console.log(str1.length); // => 0
+```
+
+#### 파라미터
+
+없음.
+
+#### 반환 값
+
+(`string`): 항상 빈 문자열을 반환해요.

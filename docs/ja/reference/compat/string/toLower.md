@@ -1,36 +1,63 @@
-# toLower
+# toLower (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning JavaScriptの `String.prototype.toLowerCase` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `toLower` 関数は、文字列以外の値の処理により動作が遅くなります。
+
+代わりに、より高速で現代的なJavaScriptの `String.prototype.toLowerCase` を使用してください。
+
 :::
 
-与えられた値を文字列に変換し、小文字に変換します。与えられた入力は最初に文字列に変換されます。
-
-## インターフェース
+値を文字列に変換した後、小文字に変換します。
 
 ```typescript
-function toLower<T extends string = string>(value?: T): Lowercase<T>;
+const lowercased = toLower(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`T`): 変換する値。
+### `toLower(value?)`
 
-### 戻り値
-
-(`Lowercase<T>`): 小文字に変換された文字列を返します。
-
-## 例
+値を小文字の文字列に変換したい場合は `toLower` を使用してください。任意の型の値をまず文字列に変換してから小文字にします。
 
 ```typescript
+import { toLower } from 'es-toolkit/compat';
+
+// 文字列を小文字に変換
 toLower('--FOO-BAR--');
-// => '--foo-bar--'
+// Returns: '--foo-bar--'
+
+toLower('Hello World');
+// Returns: 'hello world'
+
+// 数値を変換
+toLower(123);
+// Returns: '123'
+
+// 配列を変換
+toLower([1, 2, 3]);
+// Returns: '1,2,3'
+```
+
+`null` または `undefined` は空文字列として扱われます。
+
+```typescript
+import { toLower } from 'es-toolkit/compat';
 
 toLower(null);
-// => ''
+// Returns: ''
 
-toLower([1, 2, 3]);
-// => '1,2,3'
+toLower(undefined);
+// Returns: ''
+
+toLower();
+// Returns: ''
 ```
+
+#### パラメータ
+
+- `value` (`unknown`, オプション): 小文字に変換する値です。
+
+#### 戻り値
+
+(`string`): 小文字に変換された文字列を返します。

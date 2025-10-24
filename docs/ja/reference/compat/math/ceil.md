@@ -1,32 +1,62 @@
-# ceil
+# ceil (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Math.ceil`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `ceil` 関数は小数点桁数の計算と内部関数呼び出しにより動作が遅くなります。
+
+代わりに、より高速で現代的な `Math.ceil` を使用してください。
+
 :::
 
-数値を指定された桁数で切り上げる関数です。
-
-## インターフェース
+数値を指定された小数点桁数で切り上げます。
 
 ```typescript
-function ceil(number: number, precision: number = 0): number;
+const result = ceil(number, precision);
 ```
 
-### パラメータ
+## 参照
 
-- `number` (`number`): 切り上げる数値。
-- `precision` (`number`, オプション): 切り上げる精度。 デフォルトは0です。
+### `ceil(number, precision?)`
 
-### 戻り値
-
-(`number`): 切り上げられた数値。
-
-## 例
+数値を特定の小数点桁数で切り上げたい場合は `ceil` を使用してください。
 
 ```typescript
-ceil(4.006); // => 5
-ceil(6.004, 2); // => 6.01
-ceil(6040, -2); // => 6100
+import { ceil } from 'es-toolkit/compat';
+
+// 基本的な切り上げ（整数へ）
+ceil(4.006);
+// Returns: 5
+
+ceil(4.1);
+// Returns: 5
+
+// 小数点第2位で切り上げ
+ceil(6.004, 2);
+// Returns: 6.01
+
+ceil(6.001, 2);
+// Returns: 6.01
+
+// 負の桁数で切り上げ（10の単位）
+ceil(6040, -2);
+// Returns: 6100
+
+ceil(1234, -2);
+// Returns: 1300
+
+// 負の数も切り上げ
+ceil(-4.1);
+// Returns: -4
+
+ceil(-6.004, 2);
+// Returns: -6.00
 ```
+
+#### パラメータ
+
+- `number` (`number`): 切り上げる数値です。
+- `precision` (`number`, オプション): 切り上げる小数点桁数です。デフォルトは `0` です。
+
+#### 戻り値
+
+(`number`): 指定された小数点桁数で切り上げられた数値を返します。

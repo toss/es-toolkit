@@ -1,113 +1,65 @@
-# get
+# get (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 점 표기법이나 대괄호 표기법을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `get` 함수는 복잡한 경로 파싱, `null`이나 `undefined` 처리, 기본값 처리 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 점 표기법(`.`)이나 대괄호 표기법(`[]`) 또는 옵셔널 체이닝(`?.`)을 사용하세요.
+
 :::
 
-객체에서 주어진 경로에 있는 값을 가져와요. 그 값이 `undefined` 라면, 기본값을 반환해요.
-
-## 인터페이스
+객체의 지정된 경로에 있는 값을 가져와요.
 
 ```typescript
-function get<T extends object, K extends keyof T>(object: T, path: K | [K]): T[K];
-function get<T extends object, K extends keyof T>(object: T | null | undefined, path: K | [K]): T[K] | undefined;
-function get<T extends object, K extends keyof T, D>(
-  object: T | null | undefined,
-  path: K | [K],
-  defaultValue: D
-): Exclude<T[K], undefined> | D;
-
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(object: T, path: [K1, K2]): T[K1][K2];
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(
-  object: T | null | undefined,
-  path: [K1, K2]
-): T[K1][K2] | undefined;
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], D>(
-  object: T | null | undefined,
-  path: [K1, K2],
-  defaultValue: D
-): Exclude<T[K1][K2], undefined> | D;
-
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T,
-  path: [K1, K2, K3]
-): T[K1][K2][K3];
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T | null | undefined,
-  path: [K1, K2, K3]
-): T[K1][K2][K3] | undefined;
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], D>(
-  object: T | null | undefined,
-  path: [K1, K2, K3],
-  defaultValue: D
-): Exclude<T[K1][K2][K3], undefined> | D;
-
-function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
->(object: T, path: [K1, K2, K3, K4]): T[K1][K2][K3][K4];
-function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
->(object: T | null | undefined, path: [K1, K2, K3, K4]): T[K1][K2][K3][K4] | undefined;
-function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
-  D,
->(object: T | null | undefined, path: [K1, K2, K3, K4], defaultValue: D): Exclude<T[K1][K2][K3][K4], undefined> | D;
-
-function get<T>(object: Record<number, T>, path: number): T;
-function get<T>(object: Record<number, T> | null | undefined, path: number): T | undefined;
-function get<T, D>(object: Record<number, T> | null | undefined, path: number, defaultValue: D): T | D;
-
-function get<D>(object: null | undefined, path: PropertyKey, defaultValue: D): D;
-function get(object: null | undefined, path: PropertyKey): undefined;
-
-function get<T, P extends string>(data: T, path: P): string extends P ? any : Get<T, P>;
-function get<T, P extends string, D = Get<T, P>>(
-  data: T,
-  path: P,
-  defaultValue: D
-): Exclude<Get<T, P>, null | undefined> | D;
-
-function get(object: unknown, path: PropertyKey, defaultValue?: unknown): any;
-function get(object: unknown, path: PropertyKey | PropertyKey[], defaultValue?: unknown): any;
+const value = get(object, path, defaultValue);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `obj` (`object`): 검색할 객체.
-- `path` (`string` or `number` or `symbol` or `Array<string | number | symbol>`): 프로퍼티를 가져올 경로.
-- `defaultValue` (`unknown`): 찾은 값이 `undefined` 일 때 반환할 값.
+### `get(object, path, defaultValue?)`
 
-### 반환 값
-
-(`Get<T, P>`): 찾은 값.
-
-## 예시
+객체의 경로에서 값을 안전하게 가져올 때 `get`을 사용하세요. 경로가 존재하지 않거나 값이 `undefined`일 때는 기본값을 반환해요.
 
 ```typescript
 import { get } from 'es-toolkit/compat';
 
-const obj = {
-  a: {
-    b: 4,
-  },
-};
+// 점 표기법으로 중첩된 객체에 접근
+const object = { a: { b: { c: 3 } } };
+get(object, 'a.b.c');
+// => 3
 
-get(obj, 'a.b'); // 4
-get(obj, ['a', 'b']); // 4
-get(obj, ['a', 'c']); // undefined
-get(obj, ['a', 'c'], null); // null
+// 배열 표기법으로 접근
+get(object, ['a', 'b', 'c']);
+// => 3
+
+// 존재하지 않는 경로에 기본값 제공
+get(object, 'a.b.d', 'default');
+// => 'default'
+
+// 배열 인덱스를 포함한 경로
+const arrayObject = { users: [{ name: 'john' }, { name: 'jane' }] };
+get(arrayObject, 'users[0].name');
+// => 'john'
 ```
+
+`null`이나 `undefined` 객체에 안전하게 접근해요.
+
+```typescript
+import { get } from 'es-toolkit/compat';
+
+get(null, 'a.b.c', 'default');
+// => 'default'
+
+get(undefined, ['a', 'b'], 'default');
+// => 'default'
+```
+
+#### 파라미터
+
+- `object` (`any`): 조회할 객체예요.
+- `path` (`PropertyPath`): 가져올 속성의 경로예요. 문자열, 숫자, 심볼, 또는 배열로 나타낼 수 있어요.
+- `defaultValue` (`any`, 선택): 값이 `undefined`일 때 반환할 기본값이에요.
+
+#### 반환 값
+
+(`any`): 해결된 값이나 기본값을 반환해요.

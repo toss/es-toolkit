@@ -1,48 +1,77 @@
 # windowed
 
-Creates an array of sub-arrays (windows) from the input array, each of the specified size.
-The windows can overlap depending on the step size provided.
-
-By default, only full windows are included in the result, and any leftover elements that can't form a full window are ignored.
-
-If the `partialWindows` option is set to true in the options object, the function will also include partial windows at the end of the result.
-Partial windows are smaller sub-arrays created when there aren't enough elements left in the input array to form a full window.
-
-## Signature
+Returns a new array containing snapshots of each window as a window of specified size slides regularly along the array.
 
 ```typescript
-function windowed<T>(arr: T[], size: number, step: number, { partialWindows = false }: WindowedOptions): T[][];
-
-interface WindowedOptions {
-  partialWindows?: boolean;
-}
+const windows = windowed(arr, size, step?, options?);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`readonly T[]`): The input array to create windows from.
-- `size` (`number`): The size of each window. Must be a positive integer.
-- `step` (`number`): The step size between the start of each window. Must be a positive integer.
-- `options.partialWindows` (`boolean`): Whether to include partial windows at the end of the array.
+### `windowed(arr, size, step?, options?)`
 
-### Returns
+Use `windowed` when you want to return an array containing snapshots as a window of specified size slides regularly along an array.
 
-(`T[][]`): An array of windows (sub-arrays) created from the input array.
-
-### Throws
-
-- Throws an error if `size` is not a positive integer.
-- Throws an error if `step` is not a positive integer.
-
-## Examples
+It's useful for calculating moving averages in time series data analysis, extracting n-grams from strings, or finding specific patterns in arrays. It can also be used for processing data in batch units or implementing sliding window algorithms.
 
 ```typescript
-windowed([1, 2, 3, 4], 2);
-// => [[1, 2], [2, 3], [3, 4]]
+import { windowed } from 'es-toolkit/array';
 
-windowed([1, 2, 3, 4, 5, 6], 3, 2);
-// => [[1, 2, 3], [3, 4, 5]]
+// Basic usage - create windows of size 3.
+const numbers = [1, 2, 3, 4, 5];
+const result = windowed(numbers, 3);
+console.log(result); // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
 
-windowed([1, 2, 3, 4, 5, 6], 3, 2, { partialWindows: true });
-// => [[1, 2, 3], [3, 4, 5], [5, 6]]
+// Adjust window spacing by specifying step.
+const data = [1, 2, 3, 4, 5, 6, 7, 8];
+const stepped = windowed(data, 3, 2);
+console.log(stepped); // [[1, 2, 3], [3, 4, 5], [5, 6, 7]]
+
+// Can also be used with string arrays.
+const words = ['a', 'b', 'c', 'd', 'e'];
+const wordWindows = windowed(words, 2);
+console.log(wordWindows); // [['a', 'b'], ['b', 'c'], ['c', 'd'], ['d', 'e']]
 ```
+
+Use the `partialWindows` option if you want to include partial windows.
+
+```typescript
+import { windowed } from 'es-toolkit/array';
+
+const numbers = [1, 2, 3, 4, 5, 6];
+
+// Without partial windows (default)
+const complete = windowed(numbers, 4, 3);
+console.log(complete); // [[1, 2, 3, 4]]
+
+// With partial windows
+const withPartial = windowed(numbers, 4, 3, { partialWindows: true });
+console.log(withPartial); // [[1, 2, 3, 4], [4, 5, 6]]
+```
+
+Each snapshot is provided in array form, and the last few arrays may have fewer elements than the specified size.
+
+```typescript
+import { windowed } from 'es-toolkit/array';
+
+const small = [1, 2];
+
+// When window is larger than array
+console.log(windowed(small, 5)); // []
+console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
+```
+
+#### Parameters
+
+- `arr` (`readonly T[]`): The array to create windows from.
+- `size` (`number`): The size of each window. Must be an integer greater than 1.
+- `step` (`number`, optional): The spacing between windows. Must be an integer greater than 1. Default is `1`.
+- `options.partialWindows` (`boolean`, optional): Whether to include incomplete windows at the end of the array. Default is `false`.
+
+#### Returns
+
+(`T[][]`): An array of windows created with the specified size and spacing.
+
+#### Throws
+
+Throws an error if `size` or `step` is not a positive integer.

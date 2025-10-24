@@ -1,36 +1,61 @@
-# fromPairs
+# fromPairs (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.fromEntries`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `fromPairs` function operates slowly due to array-like object checks and iteration processing.
+
+Use the faster and more modern `Object.fromEntries` instead.
+
 :::
 
-Convert a two-dimensional array or Map into an object.
-
-## Signature
+Converts an array of key-value pairs into an object.
 
 ```typescript
-function fromPairs<T>(pairs: ArrayLike<[PropertyName, T]> | null | undefined): Record<string, T>;
-function fromPairs(pairs: ArrayLike<any[]> | null | undefined): Record<string, any>;
+const result = fromPairs(pairs);
 ```
 
-### Parameters
+## Reference
 
-- `pairs` (`ArrayLike<[PropertyName, T]> | ArrayLike<any[]> | null | undefined`): The two-dimensional array or Map to be converted. Each sub-array in the two-dimensional array should have two elements, with the first element as the key and the second as the value.
+### `fromPairs(pairs)`
 
-### Returns
-
-(`Record<string, any> | Record<string, T>`): The converted object with the same keys and values as the input parameters.
-
-## Examples
+Takes an array of key-value pairs and converts them into an object. Each key-value pair must be an array with 2 elements. The first element becomes the key, and the second element becomes the value. This is useful when organizing or transforming data.
 
 ```typescript
-const data = [
+import { fromPairs } from 'es-toolkit/compat';
+
+// Basic key-value pair conversion
+const pairs = [
   ['a', 1],
   ['b', 2],
   ['c', 3],
 ];
-const result = fromPairs(data);
-// result will be { a: 1, b: 2, c: 3 }
+const result = fromPairs(pairs);
+// Result: { a: 1, b: 2, c: 3 }
+
+// Handling various value types
+const mixedPairs = [
+  ['name', 'John'],
+  ['age', 30],
+  ['active', true],
+];
+const user = fromPairs(mixedPairs);
+// Result: { name: 'John', age: 30, active: true }
 ```
+
+Values that are `null`, `undefined`, or not array-like objects are treated as empty objects.
+
+```typescript
+import { fromPairs } from 'es-toolkit/compat';
+
+fromPairs(null); // {}
+fromPairs(undefined); // {}
+fromPairs('invalid'); // {}
+```
+
+#### Parameters
+
+- `pairs` (`ArrayLike<[PropertyName, T]> | ArrayLike<any[]> | null | undefined`): An array of key-value pairs to convert into an object.
+
+#### Returns
+
+(`Record<string, any> | Record<string, T>`): Returns an object created from the key-value pairs.

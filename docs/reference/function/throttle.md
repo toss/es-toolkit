@@ -1,138 +1,100 @@
 # throttle
 
-Creates a throttled function that only invokes the provided function at most once
-per every `throttleMs` milliseconds. Subsequent calls to the throttled function
-within the wait time will not trigger the execution of the original function.
-
-## Signature
+Limits a function to be executed at most once per specified time interval.
 
 ```typescript
-function throttle<F extends (...args: any[]) => void>(
-  func: F,
-  throttleMs: number,
-  options?: ThrottleOptions
-): ((...args: Parameters<F>) => void) & {
-  cancel: () => void;
-  flush: () => void;
-};
+const throttledFunc = throttle(func, throttleMs, options);
 ```
 
-### Parameters
+## Reference
 
-- `func` (`F`): The function to throttle.
-- `throttleMs`(`number`): The number of milliseconds to throttle executions to.
-- `options` (`ThrottleOptions`, optional): An options object.
-  - `signal` (`AbortSignal`, optional): An optional `AbortSignal` to cancel the throttled function.
-  - `edges` (`Array<'leading' | 'trailing'>`, optional): An array specifying when the function should be called. Defaults to `['leading', 'trailing']`.
-    - `'leading'`: If included, the function will be called immediately on the first call.
-    - `'trailing'`: If included, the function will be called after `throttleMs` milliseconds have passed since the last call.
-    - If both `'leading'` and `'trailing'` are included, the function will be called at both the start and end of the delay period. However, it must be called at least twice within `throttleMs` milliseconds for this to happen, as one throttled function call cannot trigger the function twice.
+### `throttle(func, throttleMs, options?)`
 
-### Returns
+Use `throttle` when you want to limit function calls to a specific time interval. This is useful for optimizing performance when handling frequently occurring events like scrolling, resizing, or mouse movement.
 
-(`((...args: Parameters<F>) => void) & { cancel: () => void; flush: () => void; }`): A new throttled function with methods to manage execution.
-
-- `cancel` (`() => void`): Cancels any pending execution of the throttled function.
-- `flush` (`() => void`): Immediately invokes the throttled function, executing any pending calls.
-
-## Examples
-
-### Basic usage
+Unlike `debounce`, throttle ensures the function is executed at least once during the specified time period.
 
 ```typescript
-const throttledFunction = throttle(() => {
-  console.log('Function executed');
+import { throttle } from 'es-toolkit/function';
+
+// Basic usage (execute at most once per second)
+const throttledLog = throttle(() => {
+  console.log('Function executed!');
 }, 1000);
 
-// Will log 'Function executed' immediately
-throttledFunction(); // First call triggers execution immediately
+// First call: executes immediately
+throttledLog(); // Logs 'Function executed!'
 
-// Will log 'Function executed' after 1 second
-throttledFunction(); // Second call is within the throttle period but triggers after 1 second due to trailing edge behavior
+// Additional calls within 1 second: ignored
+throttledLog();
+throttledLog();
 
-// After 2 seconds
-setTimeout(() => {
-  throttledFunction(); // Will log 'Function executed' again
-}, 2000); // This will log because the throttle period has passed
+// After 1 second, the last call executes as trailing
+
+// Scroll event optimization
+const handleScroll = throttle(() => {
+  console.log('Scroll position:', window.scrollY);
+}, 100); // At most once per 100ms
+
+window.addEventListener('scroll', handleScroll);
+
+// API call optimization
+const searchThrottled = throttle(async (query: string) => {
+  const results = await fetch(`/api/search?q=${query}`);
+  console.log('Search results:', await results.json());
+}, 300);
+
+// Even if called on every input, actual search executes only every 300ms
+searchThrottled('hello');
+searchThrottled('hello w');
+searchThrottled('hello world');
 ```
 
-### Usage with window events
+You can adjust the leading and trailing options.
 
 ```typescript
-// Example function to throttle
-const logResize = () => {
-  console.log('Window resized at', new Date().toISOString());
-};
+import { throttle } from 'es-toolkit/function';
 
-// Create a throttled version of the logResize function
-const throttledResizeHandler = throttle(logResize, 1000);
+// Enable only leading (execute only at start)
+const leadingOnly = throttle(() => console.log('Leading only'), 1000, { edges: ['leading'] });
 
-// Attach the throttled function to the window resize event
-window.addEventListener('resize', throttledResizeHandler);
+// Enable only trailing (execute only at end)
+const trailingOnly = throttle(() => console.log('Trailing only'), 1000, { edges: ['trailing'] });
 
-// Optional: Clean up the event listener when no longer needed
-const cleanup = () => {
-  window.removeEventListener('resize', throttledResizeHandler);
-};
+leadingOnly(); // Executes immediately
+leadingOnly(); // Ignored
+leadingOnly(); // Ignored
 
-// Example: Clean up after 10 seconds
-setTimeout(cleanup, 10000);
+trailingOnly(); // Does not execute immediately
+trailingOnly(); // Ignored
+trailingOnly(); // Executes after 1 second
 ```
 
-## Compatibility with Lodash
-
-Import `throttle` from `es-toolkit/compat` for full compatibility with lodash.
-
-- The `throttle` function accepts `leading` and `trailing` options:
-
-  - `leading`: If true, the function runs immediately on the first call. (defaults to `true`)
-  - `trailing`: If true, the function runs after `throttleMs` milliseconds have passed since the last call. (defaults to `true`)
-
-- By default, the `throttleMs` option is set to `0`, meaning the function execution is only delayed until the next tick.
-
-::: info `leading` and `trailing` options in `throttle`
-
-By default, both `leading` and `trailing` are set to `true`, so specifying `{ leading: true }` or `{ trailing: true }` won't change anything.
-
-:::
+You can also control it manually.
 
 ```typescript
-// Example with the leading option
-const leadingFn = throttle(
-  () => {
-    console.log('Leading function executed');
-  },
-  1000,
-  { leading: true }
-);
+import { throttle } from 'es-toolkit/function';
 
-// Logs 'Leading function executed' immediately.
-// Even if called repeatedly, it logs 'Leading function executed' every 1 second.
-leadingFn();
+const throttledFunc = throttle(() => console.log('executed'), 1000);
 
-// Example with the trailing option
-const trailingFn = throttle(
-  () => {
-    console.log('Trailing function executed');
-  },
-  1000,
-  { trailing: true }
-);
+throttledFunc(); // Executes immediately
+throttledFunc(); // Waiting
 
-// Logs 'Trailing function executed' immediately.
-// Even if called repeatedly, it logs 'Trailing function executed' every 1 second.
-trailingFn();
+// Immediately process pending execution
+throttledFunc.flush();
 
-// Example with the leading: false, trailing: true option
-const trailingOnlyFn = throttle(
-  () => {
-    console.log('Trailing-only function executed');
-  },
-  1000,
-  { leading: false, trailing: true }
-);
-
-// 'Trailing-only function executed' does not log initially.
-// Even if called repeatedly, it logs 'Trailing-only function executed' every 1 second.
-trailingOnlyFn();
+// Cancel pending execution
+throttledFunc.cancel();
 ```
+
+#### Parameters
+
+- `func` (`F`): The function to throttle.
+- `throttleMs` (`number`): The time interval (in milliseconds) to throttle execution.
+- `options` (`ThrottleOptions`, optional): Additional options.
+  - `signal` (`AbortSignal`, optional): A signal that can cancel function execution.
+  - `edges` (`Array<'leading' | 'trailing'>`, optional): Determines when to execute the function. Defaults to `['leading', 'trailing']`.
+
+#### Returns
+
+(`ThrottledFunction<F>`): Returns a new throttled function with `cancel` and `flush` methods.

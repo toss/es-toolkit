@@ -1,32 +1,78 @@
-# add
+# add (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `+` 연산자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `add` 함수는 복잡한 타입 변환과 문자열 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 간단한 `+` 연산자를 사용하세요.
+
 :::
 
-두 숫자를 더해요.
-
-## 인터페이스
+두 값을 더해요.
 
 ```typescript
-function add(value: number, other: number): number;
+const result = add(value, other);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`number`): 더할 첫 번째 숫자예요.
-- `other` (`number`): 더할 두 번째 숫자예요.
+### `add(value, other)`
 
-### 반환 값
-
-(`number`): 두 숫자의 합.
-
-## 예시
+두 값을 더하고 싶을 때 `add`를 사용하세요. 숫자뿐만 아니라 문자열도 처리할 수 있어요.
 
 ```typescript
-const result1 = add(2, 3); // 두 값은 number 타입이기 때문에 result1은 5가 돼요.
-const result2 = add(NaN, 5); // value가 NaN이기 때문에 result2는 NaN이 돼요.
-const result3 = add(10, NaN); // other가 NaN이기 때문에 result2는 NaN이 돼요
+import { add } from 'es-toolkit/compat';
+
+// 숫자 더하기
+add(2, 3);
+// Returns: 5
+
+add(1.5, 2.5);
+// Returns: 4
+
+// NaN 처리
+add(NaN, 5);
+// Returns: NaN
+
+add(10, NaN);
+// Returns: NaN
 ```
+
+문자열이 포함되면 문자열 연결로 동작해요.
+
+```typescript
+import { add } from 'es-toolkit/compat';
+
+add('2', 3);
+// Returns: '23'
+
+add(1, '5');
+// Returns: '15'
+
+add('hello', 'world');
+// Returns: 'helloworld'
+```
+
+`undefined` 값은 특별하게 처리해요.
+
+```typescript
+import { add } from 'es-toolkit/compat';
+
+add(undefined, undefined);
+// Returns: 0
+
+add(5, undefined);
+// Returns: 5
+
+add(undefined, 3);
+// Returns: 3
+```
+
+#### 파라미터
+
+- `value` (`number`): 더할 첫 번째 값이에요.
+- `other` (`number`): 더할 두 번째 값이에요.
+
+#### 반환 값
+
+(`number | string`): 두 값의 합을 반환해요. 문자열이 포함되면 문자열을 반환하고, 그렇지 않으면 숫자를 반환해요.

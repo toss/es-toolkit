@@ -1,32 +1,72 @@
 # unionWith
 
-2つの要素が一致するかどうかを判断するカスタム関数を基準に、2つの配列の和集合を返します。
-
-この関数は、パラメータとして2つの配列とカスタム一致関数を受け取ります。
-この関数は、2つの配列を結合した後、カスタム一致関数の戻り値を基準に重複した要素を除去した新しい配列を返します。
-
-## インターフェース
+カスタム等価関数を基準に、2つの配列の一意な要素を含む新しい配列を作ります。
 
 ```typescript
-function unionWith<T>(arr1: T[], arr2: T[], areItemsEqual: (item1: T, item2: T) => boolean): T[];
+const unified = unionWith(arr1, arr2, areItemsEqual);
 ```
 
-### パラメータ
+## 参照
 
-- `arr1` (`T[]`): 比較する最初の配列。
-- `arr2` (`T[]`): 比較する2番目の配列。
-- `areItemsEqual` (`(x: T, y: T) => boolean`): 2つの要素が一致するかどうかを判断する一致関数です。2つの要素が一致する場合は `true` を、一致しない場合は `false` を返すようにしてください。
+### `unionWith(arr1, arr2, areItemsEqual)`
 
-### 戻り値
-
-(`T[]`): カスタム一致関数の戻り値を基準に、2つの配列の和集合を表す新しい配列。
-
-## 例
+複雑な条件で要素の等価性を判断したい場合は `unionWith` を使用してください。提供された関数が真を返すと2つの要素を同じものと判断して重複を除きます。
 
 ```typescript
-const array1 = [{ id: 1 }, { id: 2 }];
-const array2 = [{ id: 2 }, { id: 3 }];
+import { unionWith } from 'es-toolkit/array';
+
+// オブジェクトのidを基準に和集合を求めます。
+const array1 = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+const array2 = [
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' },
+];
 const areItemsEqual = (a, b) => a.id === b.id;
-const result = unionWith(array1, array2, areItemsEqual);
-// 結果は [{ id: 1 }, { id: 2 }, { id: 3 }] になります。{ id: 2 } は両方の配列に含まれているためです。
+unionWith(array1, array2, areItemsEqual);
+// Returns: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
 ```
+
+より複雑な比較ロジックも使用できます。
+
+```typescript
+import { unionWith } from 'es-toolkit/array';
+
+// 座標を基準に和集合を求めます。
+const points1 = [
+  { x: 1, y: 2 },
+  { x: 3, y: 4 },
+];
+const points2 = [
+  { x: 3, y: 4 },
+  { x: 5, y: 6 },
+];
+const arePointsEqual = (p1, p2) => p1.x === p2.x && p1.y === p2.y;
+unionWith(points1, points2, arePointsEqual);
+// Returns: [{ x: 1, y: 2 }, { x: 3, y: 4 }, { x: 5, y: 6 }]
+```
+
+大文字小文字を無視した文字列比較の例です。
+
+```typescript
+import { unionWith } from 'es-toolkit/array';
+
+const words1 = ['Apple', 'banana'];
+const words2 = ['BANANA', 'orange'];
+const areWordsEqual = (a, b) => a.toLowerCase() === b.toLowerCase();
+unionWith(words1, words2, areWordsEqual);
+// Returns: ['Apple', 'banana', 'orange']
+// 'banana'と'BANANA'は同じものと判断されるため、最初のものだけが保持されます。
+```
+
+#### パラメータ
+
+- `arr1` (`T[]`): 結合する最初の配列です。
+- `arr2` (`T[]`): 結合する2番目の配列です。
+- `areItemsEqual` (`(item1: T, item2: T) => boolean`): 2つの要素が同じかを判断する関数です。同じと判断されれば `true` を、そうでなければ `false` を返す必要があります。
+
+#### 戻り値
+
+(`T[]`): カスタム等価関数を基準に重複が除かれた2つの配列の和集合を返します。

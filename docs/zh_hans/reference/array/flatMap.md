@@ -1,36 +1,54 @@
 # flatMap
 
-将嵌套数组的每个元素映射到给定的迭代函数，然后将其展平到所需的深度。
-
-其工作方式与在 JavaScript 语言中调用 [Array#flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 和 [Array#map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 时相同，即 `map(iteratee).flat(depth)`，但速度更快。
-
-## 签名
+将数组的每个元素转换为函数返回的值,然后扁平化到指定深度,返回一个新数组。
 
 ```typescript
-function flatMap<T, U, D extends number = 1>(arr: T[], iteratee: (item: T) => U, depth?: D): Array<FlatArray<U[], D>>;
+const result = flatMap(arr, iteratee, depth);
 ```
 
-### 参数
+## 参考
 
-- `arr` (`T[]`): 要展平的数组。
-- `iteratee` (`T[]`): 映射每个数组元素的函数。
-- `depth` (`D`): 要展平的深度，默认为 1。
+### `flatMap(arr, iteratee, depth = 1)`
 
-### 返回值
+当您想在转换数组的每个元素的同时进行扁平化时,请使用 `flatMap`。首先对每个元素应用函数,然后将结果数组扁平化到指定深度。
 
-(`Array<FlatArray<U[], D>>`): 一个新数组，其中每个元素都已映射并展平到所需的深度。
-
-## 示例
+与 JavaScript 内置的 [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 和 [Array#map](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 组合调用 `map(iteratee).flat(depth)` 的效果相同,但速度更快。
 
 ```typescript
-const array = [1, 2, 3];
+import { flatMap } from 'es-toolkit/array';
 
-const result1 = flatMap(array, item => [item, item], 1);
-// 返回 [1, 1, 2, 2, 3, 3]
+// 将数字数组的每个元素复制两次
+const arr = [1, 2, 3];
+flatMap(arr, item => [item, item]);
+// Returns: [1, 1, 2, 2, 3, 3]
 
-const result2 = flatMap(array, item => [[item, item]], 2);
-// 返回 [1, 1, 2, 2, 3, 3]
-
-const result3 = flatMap(array, item => [[[item, item]]], 3);
-// 返回 [1, 1, 2, 2, 3, 3]
+// 扁平化深度为 2
+flatMap(arr, item => [[item, item]], 2);
+// Returns: [1, 1, 2, 2, 3, 3]
 ```
+
+可以使用不同的深度进行扁平化。
+
+```typescript
+import { flatMap } from 'es-toolkit/array';
+
+const arr = [1, 2, 3];
+
+// 使用默认深度 1 进行扁平化
+flatMap(arr, item => [item, item]);
+// Returns: [1, 1, 2, 2, 3, 3]
+
+// 使用深度 3 进行扁平化
+flatMap(arr, item => [[[item, item]]], 3);
+// Returns: [1, 1, 2, 2, 3, 3]
+```
+
+#### 参数
+
+- `arr` (`T[]`): 要转换的数组。
+- `iteratee` (`(item: T) => U`): 转换每个数组元素的函数。
+- `depth` (`D`, 可选): 扁平化的深度。默认值为 `1`。
+
+#### 返回值
+
+(`Array<FlatArray<U[], D>>`): 返回每个元素被转换并扁平化到指定深度的新数组。

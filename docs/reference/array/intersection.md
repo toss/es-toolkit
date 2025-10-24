@@ -1,53 +1,56 @@
 # intersection
 
-Returns the intersection of two arrays.
-
-This function takes two arrays and returns a new array containing the elements that are
-present in both arrays. It effectively filters out any elements from the first array that
-are not found in the second array.
-
-## Signature
+Returns a new array containing elements that are commonly included in both arrays.
 
 ```typescript
-function intersection<T>(firstArr: T[], secondArr: T[]): T[];
+const result = intersection(firstArr, secondArr);
 ```
 
-### Parameters
+## Reference
 
-- `firstArr` (`T[]`): The first array to compare.
-- `secondArr` (`T[]`): The second array to compare.
+### `intersection(firstArr, secondArr)`
 
-### Returns
-
-(`T[]`) A new array containing the elements that are present in both arrays.
-
-## Examples
+Use `intersection` when you want to find only common elements in two arrays. It returns a new array containing only elements from the first array that also exist in the second array. This is useful for finding the intersection of two data sets.
 
 ```typescript
-const array1 = [1, 2, 3, 4, 5];
-const array2 = [3, 4, 5, 6, 7];
-const result = intersection(array1, array2);
-// result will be [3, 4, 5] since these elements are in both arrays.
+import { intersection } from 'es-toolkit/array';
+
+// Find the intersection of number arrays
+const numbers1 = [1, 2, 3, 4, 5];
+const numbers2 = [3, 4, 5, 6, 7];
+intersection(numbers1, numbers2);
+// Returns: [3, 4, 5]
+
+// Find the intersection of string arrays
+const strings1 = ['apple', 'banana', 'cherry'];
+const strings2 = ['banana', 'cherry', 'date'];
+intersection(strings1, strings2);
+// Returns: ['banana', 'cherry']
 ```
 
-## Lodash Compatibility
-
-Import `intersection` from `es-toolkit/compat` for full compatibility with lodash.
-
-- `intersection` can accept multiple array-like objects to find common elements.
-- `intersection` returns only unique elements
+It also handles cases with no intersection or special cases.
 
 ```typescript
-import { intersection } from 'es-toolkit/compat';
+import { intersection } from 'es-toolkit/array';
 
-const array1 = [1, 2, 3, 4, 4, 5];
-const array2 = [2, 4];
-const array3 = [4, 6];
-const result = intersection(array1, array2, array3);
-// The result is [4] because this only element is present in every array.
+// Returns an empty array when there's no intersection
+const noCommon1 = [1, 2, 3];
+const noCommon2 = [4, 5, 6];
+intersection(noCommon1, noCommon2);
+// Returns: []
 
-const arrayLike1 = { 0: 1, 1: 2, 2: 3, length: 3 };
-const arrayLike2 = { 0: 2, 1: 3, length: 2 };
-const result2 = intersection(arrayLike1, arrayLike2);
-// The result2 is [2, 3] because these elements are present in both array-like objects.
+// Also returns an empty array when one side is empty
+const numbers = [1, 2, 3];
+const empty: number[] = [];
+intersection(numbers, empty);
+// Returns: []
 ```
+
+#### Parameters
+
+- `firstArr` (`readonly T[]`): The first array to compare.
+- `secondArr` (`readonly T[]`): The second array to compare.
+
+#### Returns
+
+(`T[]`): Returns a new array containing elements commonly included in both arrays.

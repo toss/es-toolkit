@@ -1,53 +1,63 @@
-# isEmpty
-
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
+# isEmpty (Lodash Compatibility)
 
 Checks if a given value is empty.
 
-- If the given value is a string, checks if it is an empty string.
-- If the given value is an array, `Map`, or `Set`, checks if its size is 0.
-- If the given value is an [array-like object](../predicate/isArrayLike.md), checks if its length is 0.
-- If the given value is an object, checks if it is an empty object with no properties.
-- Primitive values (strings, booleans, numbers, or bigints) are considered empty.
-
-## Signature
-
 ```typescript
-function isEmpty(value: string): value is '';
-function isEmpty(value: Map<any, any>): boolean;
-function isEmpty(value: Set<any>): boolean;
-function isEmpty(value: any[]): value is [];
-function isEmpty<T extends Record<any, any>>(
-  value: T | null | undefined
-): value is Record<keyof T, never> | null | undefined;
-function isEmpty(value: unknown): boolean;
+const result = isEmpty(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to check.
+### `isEmpty(value)`
 
-### Returns
-
-(`boolean`): `true` if the value is empty, `false` otherwise.
-
-## Examples
+Use `isEmpty` when you want to check if various types of values are empty. It can handle strings, arrays, objects, Maps, Sets, and more.
 
 ```typescript
-isEmpty(); // true
-isEmpty(null); // true
+import { isEmpty } from 'es-toolkit/compat';
+
+// String checks
 isEmpty(''); // true
+isEmpty('hello'); // false
+
+// Array checks
 isEmpty([]); // true
+isEmpty([1, 2, 3]); // false
+
+// Object checks
 isEmpty({}); // true
+isEmpty({ a: 1 }); // false
+
+// Map and Set checks
 isEmpty(new Map()); // true
 isEmpty(new Set()); // true
-isEmpty('hello'); // false
-isEmpty([1, 2, 3]); // false
-isEmpty({ a: 1 }); // false
 isEmpty(new Map([['key', 'value']])); // false
 isEmpty(new Set([1, 2, 3])); // false
+
+// null and undefined
+isEmpty(null); // true
+isEmpty(undefined); // true
+isEmpty(); // true
+
+// Array-like objects
+isEmpty({ 0: 'a', length: 1 }); // false
+isEmpty({ length: 0 }); // false
 ```
+
+All primitive values are treated as empty:
+
+```typescript
+import { isEmpty } from 'es-toolkit/compat';
+
+isEmpty(0); // true
+isEmpty(false); // true
+isEmpty(123); // true
+isEmpty('text'); // false (strings are judged by length)
+```
+
+#### Parameters
+
+- `value` (`unknown`, optional): The value to check.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is empty, otherwise `false`.

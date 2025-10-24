@@ -1,61 +1,55 @@
-# defaults
+# defaults (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.assign()`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `defaults` 함수는 `undefined`와 `Object.prototype`에서 상속된 속성들을 특별히 처리하는 복잡한 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.assign()`을 사용하세요.
+
 :::
 
-객체 `object`가 특정 프로퍼티들에 대해서 `undefined`를 반환하지 않도록 기본값을 설정해요.
-`undefined`이거나 `Object.prototype`에서 상속받은 값에 대해서 기본값을 설정해요.
-
-기본값을 설정하기 위해서 여러 객체를 파라미터로 제공할 수 있어요. 이 객체들은 왼쪽에서 오른쪽 순서대로 적용돼요.
-어떤 프로퍼티에 값이 지정되면, 같은 프로퍼티에 대해서 이후 값들은 무시돼요.
-
-주의: 이 함수는 첫 번째 파라미터 `object`를 수정해요. 수정하고 싶지 않다면 [toDefaulted](./toDefaulted.md) 함수를 사용하세요.
-
-## 인터페이스
+객체에 기본값을 설정해서 `undefined` 속성을 채워요.
 
 ```typescript
-function defaults<T extends object>(object: T): NonNullable<T>;
-function defaults<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function defaults<T extends object, S1 extends object, S2 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2
-): NonNullable<T & S1 & S2>;
-function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3
-): NonNullable<T & S1 & S2 & S3>;
-function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): NonNullable<T & S1 & S2 & S3 & S4>;
-function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object;
+const result = defaults(object, source);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`T`): 대상 객체.
-- `sources` (`S[]`): 기본값을 나타내는 객체.
+### `defaults(object, ...sources)`
 
-### 반환 값
-
-(`object`): `sources`가 지정하는 기본값을 가지도록 값을 채운 대상 객체.
-
-## 예시
+객체의 `undefined` 속성이나 `Object.prototype`에서 상속된 속성에 기본값을 설정할 때 `defaults`를 사용하세요. 여러 개의 기본값 객체를 전달할 수 있고, 왼쪽에서 오른쪽 순서로 적용돼요.
 
 ```typescript
-defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-defaults({ a: null }, { a: 1 }); // { a: null }
-defaults({ a: undefined }, { a: 1 }); // { a: 1 }
-defaults({ a: 1 }, undefined); // { a: 1 }
-defaults({ a: 1 }, null); // { a: 1 }
+import { defaults } from 'es-toolkit/compat';
+
+// 기본값으로 undefined 속성 채우기
+defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 });
+// 반환값: { a: 1, b: 2, c: 3 }
+
+// undefined 속성만 기본값으로 채워져요
+defaults({ a: undefined }, { a: 1 });
+// 반환값: { a: 1 }
+
+// null 값은 그대로 유지해요
+defaults({ a: null }, { a: 1 });
+// 반환값: { a: null }
 ```
+
+속성이 이미 값을 가지고 있다면 기본값으로 덮어쓰지 않아요.
+
+```typescript
+import { defaults } from 'es-toolkit/compat';
+
+defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 });
+// 반환값: { a: 1, b: 2, c: 3 }
+```
+
+#### 파라미터
+
+- `object` (`any`): 기본값을 설정할 대상 객체예요.
+- `...sources` (`any[]`): 기본값을 제공하는 소스 객체들이에요.
+
+#### 반환 값
+
+(`any`): 기본값이 설정된 객체를 반환해요. 첫 번째 인수인 `object`가 수정돼요.

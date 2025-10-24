@@ -1,59 +1,80 @@
-# toDefaulted
+# toDefaulted (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用展开运算符或 `Object.assign`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `toDefaulted` 函数由于深度克隆和复杂的默认值处理而运行缓慢。
+
+请使用更快、更现代的展开运算符(`...`)或 `Object.assign()`。
+
 :::
 
-根据提供的`object`创建一个新对象，从`sources`中应用默认值以确保没有属性被留作`undefined`。
-它为`undefined`或者来自`Object.prototype`的属性分配默认值。
-
-您可以提供多个源对象来设置这些默认值，
-它们将按照给定的顺序从左到右应用。
-一旦属性被设置，任何后来的属性值将被忽略。
-
-## 签名
+通过向对象应用默认值来创建新对象。
 
 ```typescript
-function toDefaulted<T extends object>(object: T): NonNullable<T>;
-function toDefaulted<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function toDefaulted<T extends object, S1 extends object, S2 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2
-): NonNullable<T & S1 & S2>;
-function toDefaulted<T extends object, S1 extends object, S2 extends object, S3 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3
-): NonNullable<T & S1 & S2 & S3>;
-function toDefaulted<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): NonNullable<T & S1 & S2 & S3 & S4>;
-function toDefaulted<T extends object, S extends object>(object: T, ...sources: S[]): object;
-function toDefaulted<T extends object, S extends object>(object: T, ...sources: S[]): object;
+const defaulted = toDefaulted(object, ...sources);
 ```
 
-### 参数
+## 参考
 
-- `object` (`T`): 目标对象，将接收默认值。
-- `sources` (`S[]`): 指定要应用的默认值的对象。
+### `toDefaulted(object, ...sources)`
 
-### 返回值
-
-(`object`): 一个新对象，结合了目标值和默认值，确保没有属性留作未定义。
-
-## 示例
+当您想通过将一个或多个源对象的默认值应用到目标对象来创建新对象时,请使用 `toDefaulted`。仅为 `undefined` 的属性或来自 `Object.prototype` 的属性设置默认值。
 
 ```typescript
-toDefaulted({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-toDefaulted({ a: 1, b: 2 }, { b: 3 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-toDefaulted({ a: null }, { a: 1 }); // { a: null }
-toDefaulted({ a: undefined }, { a: 1 }); // { a: 1 }
+import { toDefaulted } from 'es-toolkit/compat';
+
+// 基本默认值分配
+const user = { name: 'John' };
+const defaults = { name: 'Anonymous', age: 25, role: 'user' };
+toDefaulted(user, defaults);
+// => { name: 'John', age: 25, role: 'user' }
+
+// 从多个源应用默认值
+const config = { theme: 'dark' };
+const defaults1 = { theme: 'light', lang: 'en' };
+const defaults2 = { lang: 'ko', region: 'Asia' };
+toDefaulted(config, defaults1, defaults2);
+// => { theme: 'dark', lang: 'en', region: 'Asia' }
 ```
+
+只有 `undefined` 值会被默认值替换,`null` 值会保留。
+
+```typescript
+import { toDefaulted } from 'es-toolkit/compat';
+
+const data = {
+  name: undefined,
+  age: null,
+  active: false,
+};
+const defaults = {
+  name: 'Default',
+  age: 18,
+  active: true,
+  role: 'user',
+};
+
+toDefaulted(data, defaults);
+// => { name: 'Default', age: null, active: false, role: 'user' }
+```
+
+原始对象不会被修改;返回一个新对象。
+
+```typescript
+import { toDefaulted } from 'es-toolkit/compat';
+
+const original = { a: 1 };
+const result = toDefaulted(original, { a: 2, b: 3 });
+
+console.log(original); // { a: 1 } (未修改)
+console.log(result); // { a: 1, b: 3 } (新对象)
+```
+
+#### 参数
+
+- `object` (`object`): 将接收默认值的目标对象。
+- `sources` (`object[]`): 提供默认值的源对象。从左到右的顺序应用。
+
+#### 返回值
+
+(`object`): 返回应用了默认值的新对象。

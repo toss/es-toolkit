@@ -1,29 +1,57 @@
 # remove
 
-与えられた条件関数に従って配列から要素を削除します。
-
-この関数は `arr` を直接変更します。
-元の配列を変更せずに要素を削除するには、[Array.prototype.filter](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) を使用してください。
-
-## インターフェース
+条件関数に従って配列から要素を削除し、削除された要素を新しい配列として返します。元の配列を直接変更します。
 
 ```typescript
-function remove<T>(arr: T[], shouldRemoveElement: (value: T, index: number, array: T[]) => boolean): T[];
+const removed = remove(arr, shouldRemoveElement);
 ```
 
-### パラメータ
+## 参照
+
+### `remove(arr, shouldRemoveElement)`
+
+配列から特定の条件に合う要素を削除し、削除された要素を確認したい場合は `remove` を使用してください。この関数は元の配列を変更しながら、削除された要素を別の配列として返します。元の配列を保持したい場合は `filter` メソッドを使用してください。
+
+```typescript
+import { remove } from 'es-toolkit/array';
+
+// 偶数を削除します。
+const numbers = [1, 2, 3, 4, 5];
+const removedNumbers = remove(numbers, value => value % 2 === 0);
+console.log(numbers); // [1, 3, 5] (元の配列が変更されます)
+console.log(removedNumbers); // [2, 4] (削除された要素)
+
+// 特定の条件のオブジェクトを削除します。
+const users = [
+  { name: 'john', age: 25 },
+  { name: 'jane', age: 17 },
+  { name: 'bob', age: 30 },
+];
+const minors = remove(users, user => user.age < 18);
+console.log(users); // [{ name: 'john', age: 25 }, { name: 'bob', age: 30 }]
+console.log(minors); // [{ name: 'jane', age: 17 }]
+```
+
+インデックスと元の配列情報も使用できます。
+
+```typescript
+import { remove } from 'es-toolkit/array';
+
+// インデックスに基づいて要素を削除します。
+const items = ['a', 'b', 'c', 'd', 'e'];
+const removedAtEvenIndex = remove(items, (value, index) => index % 2 === 0);
+console.log(items); // ['b', 'd']
+console.log(removedAtEvenIndex); // ['a', 'c', 'e']
+```
+
+#### パラメータ
 
 - `arr` (`T[]`): 変更する配列です。
-- `shouldRemoveElement` (`(value: T, index: number, array: T[]) => boolean`): 要素を削除するかどうかを決定するために、各反復で呼び出される関数です。
+- `shouldRemoveElement` (`(value: T, index: number, array: T[]) => boolean`): 各要素に対して呼び出される条件関数です。`true` を返すと要素が削除されます。
+  - `value`: 現在処理中の要素です。
+  - `index`: 現在の要素のインデックスです。
+  - `array`: 元の配列です。
 
-### 戻り値
+#### 戻り値
 
-(`T[]`): 指定された要素が削除された修正済み配列です。
-
-## 例
-
-```typescript
-const numbers = [1, 2, 3, 4, 5];
-remove(numbers, value => value % 2 === 0);
-console.log(numbers); // [1, 3, 5]
-```
+(`T[]`): 削除された要素で構成される新しい配列を返します。
