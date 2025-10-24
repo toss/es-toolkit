@@ -40,7 +40,7 @@ isEmpty(); // true
 
 // Array-like objects
 isEmpty({ 0: 'a', length: 1 }); // false
-isEmpty({ length: 0 }); // true (not an actual array, so false)
+isEmpty({ length: 0 }); // false
 ```
 
 All primitive values are treated as empty:

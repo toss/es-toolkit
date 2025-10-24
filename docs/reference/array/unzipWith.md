@@ -31,7 +31,7 @@ const words = [
   ['es', 'toolkit'],
 ];
 const combined = unzipWith(words, (a, b, c) => a + b + c);
-console.log(combined); // ['hellofoes', 'worldbartoolkit']
+console.log(combined); // ['hellofooes', 'worldbartoolkit']
 
 // Calculate average of specific property from object array.
 const scores = [
@@ -60,13 +60,13 @@ const result = unzipWith(mixed, (a, b, c) => {
 console.log(result); // [6, 9] (1+2+3, 4+5+0)
 ```
 
-Passing an empty array returns an empty array.
+Passing an empty array will throw an error.
 
 ```typescript
 import { unzipWith } from 'es-toolkit/array';
 
 const empty = unzipWith([], (a, b) => a + b);
-console.log(empty); // []
+console.log(empty); // throws Error
 ```
 
 #### Parameters

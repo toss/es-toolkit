@@ -40,7 +40,7 @@ isNative(null); // false
 
 // バインドされた関数
 const boundFunction = Array.prototype.push.bind([]);
-isNative(boundFunction); // false（バインドされた関数はネイティブでない）
+isNative(boundFunction); // true（バインドされた関数はネイティブです）
 
 // メソッド
 const obj = { method: Array.prototype.push };
