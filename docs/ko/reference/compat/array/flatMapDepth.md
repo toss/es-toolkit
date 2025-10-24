@@ -56,7 +56,7 @@ flatMapDepth(objects, 'items', 2);
 // 객체의 부분 매칭
 const users = [{ active: [[true], [false]] }, { active: [[false]] }];
 flatMapDepth(users, { active: [[false]] }, 2);
-// => [false]
+// => [true, true]
 ```
 
 `null`이나 `undefined`는 빈 배열로 처리해요.

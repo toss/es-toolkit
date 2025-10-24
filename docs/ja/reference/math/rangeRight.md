@@ -52,12 +52,12 @@ const numbers3 = rangeRight(0, 20, 5);
 console.log(numbers3); // [15, 10, 5, 0]
 
 // 負の方向にも作成できます。
-const numbers4 = rangeRight(0, -5, -1);
-console.log(numbers4); // [-4, -3, -2, -1, 0]
+const numbers4 = rangeRight(-5, 0, 1);
+console.log(numbers4); // [-1, -2, -3, -4, -5]
 
 // 小さい数から大きい数へも可能です。
-const numbers5 = rangeRight(0, 5, -1);
-console.log(numbers5); // [1, 2, 3, 4]
+const numbers5 = rangeRight(5, 0, -1);
+console.log(numbers5); // [1, 2, 3, 4, 5]
 ```
 
 カウントダウンやページネーションで逆順が必要な場合に便利です。

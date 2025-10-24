@@ -64,7 +64,7 @@ const users = [
   { user: 'fred', active: [false] },
 ];
 flatMapDeep(users, { active: [false] });
-// 结果: [false] (active 数组包含 [false] 的元素的匹配结果)
+// 结果: [true, true] (active 数组包含 [false] 的元素的匹配结果)
 ```
 
 #### 参数

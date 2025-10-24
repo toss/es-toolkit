@@ -21,7 +21,7 @@ xorBy([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], obj => obj.id);
 
 // 문자열의 길이로 대칭 차집합을 구해요.
 xorBy(['apple', 'banana'], ['grape', 'cherry', 'apple'], str => str.length);
-// Returns: ['banana', 'cherry'] (길이 6인 요소들)
+// Returns: [] (모든 길이가 중복된 요소들)
 ```
 
 매핑 함수의 결과가 같은 요소는 하나로 취급해요.
@@ -30,7 +30,7 @@ xorBy(['apple', 'banana'], ['grape', 'cherry', 'apple'], str => str.length);
 import { xorBy } from 'es-toolkit/array';
 
 xorBy([1, 2, 3, 4], [3, 4, 5, 6], n => n % 3);
-// Returns: [2, 5] (3으로 나눈 나머지가 2인 요소들)
+// Returns: [] (모든 나머지가 중복된 요소들)
 ```
 
 #### 파라미터
