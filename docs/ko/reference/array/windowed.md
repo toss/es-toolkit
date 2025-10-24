@@ -58,7 +58,7 @@ const small = [1, 2];
 
 // 윈도우가 배열보다 큰 경우
 console.log(windowed(small, 5)); // []
-console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2]]
+console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
 ```
 
 #### 파라미터

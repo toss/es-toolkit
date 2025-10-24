@@ -25,7 +25,7 @@ takeRightWhile([1, 2, 3], n => n > 3);
 
 // 获取字符串长度小于等于5的元素
 takeRightWhile(['hello', 'world', 'foo', 'bar'], str => str.length <= 5);
-// 结果: ['world', 'foo', 'bar']
+// 结果: ['hello', 'world', 'foo', 'bar']
 ```
 
 #### 参数
