@@ -56,7 +56,7 @@ Calculator.prototype.divide = function (n) {
 
 const calc = new Calculator();
 const allMethods = functionsIn(calc);
-// 結果: ['add', 'multiply', 'divide'] (継承されたメソッドも含む)
+// 結果: ['add', 'divide'] (`multiply` は非列挙型)
 
 // プロトタイプチェーンを通じた継承
 function Parent() {

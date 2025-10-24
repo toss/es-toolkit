@@ -29,7 +29,7 @@ truncate('hi-diddly-ho there, neighborino');
 
 // 長さを指定
 truncate('hi-diddly-ho there, neighborino', { length: 24 });
-// 戻り値: 'hi-diddly-ho there, neig...'
+// 戻り値: 'hi-diddly-ho there, n...'
 
 // 省略文字列を変更
 truncate('hi-diddly-ho there, neighborino', { omission: ' [...]' });

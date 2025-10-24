@@ -54,7 +54,7 @@ import { has } from 'es-toolkit/compat';
 
 const sparse = [1, , 3]; // 索引 1 为空
 has(sparse, 0); // true
-has(sparse, 1); // false - 实际上没有值
+has(sparse, 1); // true - 实际上存在,但值为 undefined
 has(sparse, 2); // true
 ```
 

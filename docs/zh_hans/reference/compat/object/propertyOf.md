@@ -52,7 +52,7 @@ const arrayPath = getComplexValue(['user', 'profile', 'age']);
 
 // 将多个路径作为数组处理
 const paths = ['user.profile.name', 'settings.theme', 'settings.lang'];
-const values = paths.map(getValue);
+const values = paths.map(getComplexValue);
 // 结果: ['Alice', 'dark', 'en'] (每个路径的值)
 
 // 数组索引访问
