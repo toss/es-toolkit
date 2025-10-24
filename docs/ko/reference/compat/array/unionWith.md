@@ -42,7 +42,7 @@ unionWith([1, 2], [2, 3], (a, b) => a === b);
 
 // 문자열 길이로 비교
 unionWith(['ab', 'cd'], ['ef', 'gh', 'ab'], (a, b) => a.length === b.length);
-// Returns: ['ab', 'ef']
+// Returns: ['ab']
 ```
 
 `null`이나 `undefined` 배열은 무시해요.

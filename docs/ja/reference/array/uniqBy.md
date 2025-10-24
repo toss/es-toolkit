@@ -34,7 +34,7 @@ console.log(uniqueByAge);
 // 文字列の長さを基準に重複を除きます。
 const words = ['apple', 'pie', 'banana', 'cat', 'dog'];
 const uniqueByLength = uniqBy(words, word => word.length);
-console.log(uniqueByLength); // ['apple', 'pie', 'cat']
+console.log(uniqueByLength); // ['apple', 'pie', 'banana']
 ```
 
 複雑なオブジェクトでも特定のフィールドの組み合わせを基準にできます。

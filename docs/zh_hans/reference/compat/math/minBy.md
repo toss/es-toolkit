@@ -1,5 +1,13 @@
 # minBy（Lodash 兼容性）
 
+::: warning 请使用 es-toolkit 的 [minBy](../../array/minBy.md)
+
+这个 `minBy` 函数由于 iteratee 函数处理和类型转换会运行较慢。
+
+请使用更快、更现代的 `es-toolkit` 的 [minBy](../../array/minBy.md)。
+
+:::
+
 在满足条件的值中找到最小值元素。
 
 ```typescript
@@ -17,17 +25,17 @@ import { minBy } from 'es-toolkit/compat';
 
 // 对象数组中特定属性最小的元素
 const people = [
-  { name: '홍길동', age: 25 },
-  { name: '김철수', age: 30 },
-  { name: '이영희', age: 35 },
+  { name: '张三', age: 25 },
+  { name: '李四', age: 30 },
+  { name: '王五', age: 35 },
 ];
 
 minBy(people, person => person.age);
-// Returns: { name: '홍길동', age: 25 }
+// Returns: { name: '张三', age: 25 }
 
 // 也可以使用属性名
 minBy(people, 'age');
-// Returns: { name: '홍길동', age: 25 }
+// Returns: { name: '张三', age: 25 }
 ```
 
 通过函数转换值来找到最小值。
@@ -67,18 +75,18 @@ minBy(arrays, 1); // 第二个元素最小的数组
 import { minBy } from 'es-toolkit/compat';
 
 const users = [
-  { name: '홍길동', age: 25, active: true },
-  { name: '김철수', age: 30, active: false },
-  { name: '이영희', age: 35, active: true },
+  { name: '张三', age: 25, active: true },
+  { name: '李四', age: 30, active: false },
+  { name: '王五', age: 35, active: true },
 ];
 
 // 在 active 为 true 的元素中找到不是第一个的元素
 minBy(users, ['active', true]);
-// Returns: { name: '김철수', age: 30, active: false }
+// Returns: { name: '李四', age: 30, active: false }
 
 // 使用对象指定条件
 minBy(users, { active: true });
-// Returns: { name: '김철수', age: 30, active: false }
+// Returns: { name: '李四', age: 30, active: false }
 ```
 
 空数组返回 undefined。

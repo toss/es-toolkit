@@ -48,7 +48,7 @@ Child.prototype = Object.create(Parent.prototype);
 Child.prototype.childProp = 'childValue';
 
 const obj = new Child();
-valuesIn(obj); // [1, 2, 'fromParent', 'childValue'] (constructor は除外)
+valuesIn(obj); // [1, 2, 'childValue', 'fromParent'] (constructor は除外)
 ```
 
 `null` または `undefined` は空配列として処理されます。
