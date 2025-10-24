@@ -55,9 +55,9 @@ sumBy([1n, 2n, 3n]);
 import { sumBy } from 'es-toolkit/compat';
 
 const people = [
-  { name: '홍길동', age: 25 },
-  { name: '김철수', age: 30 },
-  { name: '이영희', age: 35 },
+  { name: '张三', age: 25 },
+  { name: '李四', age: 30 },
+  { name: '王五', age: 35 },
 ];
 
 sumBy(people, person => person.age);

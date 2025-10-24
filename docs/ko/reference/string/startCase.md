@@ -43,7 +43,7 @@ startCase('_abc_123_def'); // 'Abc 123 Def'
 
 // 빈 문자나 의미 없는 구분자만 있는 경우
 startCase('_-_-_-_'); // ''
-startCase('12abc 12ABC'); // '12 Abc 12 ABC'
+startCase('12abc 12ABC'); // '12 Abc 12 Abc'
 ```
 
 #### 파라미터

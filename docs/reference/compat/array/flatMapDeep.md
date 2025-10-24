@@ -64,7 +64,7 @@ const users = [
   { user: 'fred', active: [false] },
 ];
 flatMapDeep(users, { active: [false] });
-// Result: [false] (matching result of elements with active array containing [false])
+// Result: [true, true] (matching result of elements with active array containing [false])
 ```
 
 #### Parameters

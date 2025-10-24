@@ -28,8 +28,8 @@ differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
 // Returns: [1.2] (因为Math.floor(2.1) === Math.floor(2.3),所以排除2.1)
 
 // 按字符串长度比较
-differenceBy(['one', 'two', 'three'], ['four', 'five'], 'length');
-// Returns: ['one', 'two'] (排除length为4、5的,three的length也是5所以被排除)
+differenceBy(['one', 'two', 'three'], ['four', 'eight'], 'length');
+// Returns: ['one', 'two'] (因为three和eight长度相同,所以排除three)
 
 // 按对象属性比较
 const users1 = [

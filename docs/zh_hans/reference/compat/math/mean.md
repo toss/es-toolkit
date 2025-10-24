@@ -49,22 +49,22 @@ mean(undefined);
 // Returns: NaN
 ```
 
-无效值会被忽略并计算。
+无效值会被视作 0 并计算。
 
 ```typescript
 import { mean } from 'es-toolkit/compat';
 
 mean([1, undefined, 2, null, 3]);
-// Returns: 2 (1 + 2 + 3) / 3 = 2
+// Returns: 1.2 (1 + 2 + 3) / 5 = 1.2
 ```
 
-字符串数字也能处理。
+字符串将会被拼接。
 
 ```typescript
 import { mean } from 'es-toolkit/compat';
 
 mean(['1', '2', '3']);
-// Returns: 2 (字符串转换为数字)
+// Returns: 41 (123 / 3 = 41)
 ```
 
 #### 参数

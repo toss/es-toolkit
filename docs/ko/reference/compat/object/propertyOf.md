@@ -52,7 +52,7 @@ const arrayPath = getComplexValue(['user', 'profile', 'age']);
 
 // 여러 경로를 배열로 처리
 const paths = ['user.profile.name', 'settings.theme', 'settings.lang'];
-const values = paths.map(getValue);
+const values = paths.map(getComplexValue);
 // 결과: ['Alice', 'dark', 'en'] (각 경로의 값들)
 
 // 배열 인덱스 접근

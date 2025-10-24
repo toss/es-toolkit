@@ -50,13 +50,13 @@ const result4 = at(object, 'nonexistent', 'a');
 // Returns: [undefined, 1]
 ```
 
-`null` 或 `undefined` 对象返回空数组。
+`null` 或 `undefined` 对象返回 `undefined` 数组。
 
 ```typescript
 import { at } from 'es-toolkit/compat';
 
-at(null, 'a', 'b'); // []
-at(undefined, 'a', 'b'); // []
+at(null, 'a', 'b'); // [undefined, undefined]
+at(undefined, 'a', 'b'); // [undefined, undefined]
 ```
 
 #### 参数

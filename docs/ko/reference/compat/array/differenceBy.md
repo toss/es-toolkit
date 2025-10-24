@@ -28,8 +28,8 @@ differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
 // Returns: [1.2] (Math.floor(2.1) === Math.floor(2.3)이므로 2.1 제외)
 
 // 문자열 길이로 비교
-differenceBy(['one', 'two', 'three'], ['four', 'five'], 'length');
-// Returns: ['one', 'two'] (length가 4, 5인 것들 제외, three도 length가 5라 제외)
+differenceBy(['one', 'two', 'three'], ['four', 'eight'], 'length');
+// Returns: ['one', 'two'] (three와 eight은 길이가 같으므로 three 제외)
 
 // 객체의 프로퍼티로 비교
 const users1 = [
