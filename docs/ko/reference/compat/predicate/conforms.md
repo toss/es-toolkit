@@ -46,7 +46,7 @@ const adultHighScorer = conforms({
 });
 
 const filteredUsers = users.filter(adultHighScorer);
-// [{ age: 25, score: 80, name: 'Alice' }, { age: 30, score: 75, name: 'Charlie' }]
+// [{ age: 25, score: 80, name: 'Alice' }]
 ```
 
 #### 파라미터
