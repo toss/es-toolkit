@@ -125,7 +125,7 @@ function browserBuildConfig({ inputFile, outFile, name, sourcemap }) {
           compress: { sequences: false },
         }),
       ],
-      format: 'iife',
+      format: 'umd',
       name,
       file: outFile,
       sourcemap,
