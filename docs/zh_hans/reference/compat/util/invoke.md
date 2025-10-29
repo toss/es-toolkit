@@ -1,32 +1,28 @@
-# invoke
+# invoke (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请直接调用方法
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于路径解析、对象遍历、`get` 函数调用等复杂处理，这个 `invoke` 函数运行缓慢。
+
+请使用更快、更现代的直接方法调用。
+
 :::
 
-使用给定的参数在`object`的`path`处调用方法。
-
-## 签名
+使用给定的参数调用对象路径上的方法。
 
 ```typescript
-function invoke(object: any, path: PropertyKey | PropertyKey[], args: any[]): any;
+const result = invoke(object, path, args);
 ```
 
-### 参数
+## 参考
 
-- `object` (`any`): 要查询的对象。
-- `path` (`PropertyKey | PropertyKey[]`): 要调用的方法的路径。
-- `args` (`any[]`): 调用该方法的参数。
+### `invoke(object, path, args)`
 
-### 返回值
-
-(`any`): 返回被调用方法的结果。
-
-## 示例
+当您想要用参数调用对象特定路径上的方法时，请使用 `invoke`。路径可以指定为点表示法字符串或属性键数组。
 
 ```typescript
+import { invoke } from 'es-toolkit/compat';
+
 const object = {
   a: {
     b: function (x, y) {
@@ -35,6 +31,43 @@ const object = {
   },
 };
 
-invoke(object, 'a.b', [1, 2]); // => 3
-invoke(object, ['a', 'b'], [1, 2]); // => 3
+// 使用点表示法指定路径
+invoke(object, 'a.b', [1, 2]);
+// Returns: 3
+
+// 使用数组指定路径
+invoke(object, ['a', 'b'], [1, 2]);
+// Returns: 3
+
+// 不存在的路径
+invoke(object, 'a.c.d', [1, 2]);
+// Returns: undefined
+
+// 各种类型的参数
+const obj = {
+  calculate: {
+    sum: function (...numbers) {
+      return numbers.reduce((a, b) => a + b, 0);
+    },
+    multiply: function (a, b) {
+      return a * b;
+    },
+  },
+};
+
+invoke(obj, 'calculate.sum', [1, 2, 3, 4]);
+// Returns: 10
+
+invoke(obj, ['calculate', 'multiply'], [5, 6]);
+// Returns: 30
 ```
+
+#### 参数
+
+- `object` (`unknown`): 要调用方法的对象。
+- `path` (`PropertyKey | PropertyKey[]`): 要调用的方法的路径。可以是字符串、符号、数字或它们的数组。
+- `args` (`any[]`): 调用方法时使用的参数数组。
+
+#### 返回值
+
+(`any`): 返回被调用方法的结果。如果方法不存在则返回 `undefined`。

@@ -1,50 +1,78 @@
-# first
+# first (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `es-toolkit`の`head`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`first`関数は、`null`や`undefined`の処理と配列のようなオブジェクトの変換により、動作が遅くなります。`es-toolkit`の`head`関数は、これらの追加処理なしで、より高速かつシンプルに動作します。
+
+代わりに、より高速で現代的な`es-toolkit`の[head](../../array/head.md)を使用してください。
+
 :::
 
-配列の最初の要素を返します。配列が空の場合は`undefined`を返します。
-
-この関数は配列を受け取り、配列の最初の要素を返します。
-配列が空の場合、関数は`undefined`を返します。
-
-## インターフェース
+配列の最初の要素を返します。
 
 ```typescript
-function first<T>(arr: ArrayLike<T> | undefined | null): T | undefined;
+const firstElement = first(array);
 ```
 
-### パラメータ
+## 参照
 
-- `arr` (`ArrayLike<T> | undefined | null`): 最初の要素を取得するための配列です。
+### `first(array)`
 
-### 戻り値
-
-(`T | undefined`): 配列の最初の要素、または配列が空の場合は`undefined`です。
-
-## 例
+配列の最初の要素を取得したい場合は`first`を使用してください。配列が空であるか、`null`、`undefined`の場合は`undefined`を返します。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const firstElement1 = first(arr1);
-// firstElement1は1です。
+import { first } from 'es-toolkit/compat';
 
-const arr2: string[] = [];
-const firstElement2 = first(arr2);
-// firstElement2はundefinedです。
+// 通常の配列から最初の要素を取得
+first([1, 2, 3]);
+// Returns: 1
 
-const arr3 = ['a', 'b', 'c'];
-const firstElement3 = first(arr3);
-// firstElement3は'a'です。
+// 文字列配列から最初の要素を取得
+first(['a', 'b', 'c']);
+// Returns: 'a'
 
-const arr4 = [true, false, true];
-const firstElement4 = first(arr4);
-// firstElement4はtrueです。
-
-const arr5: [number, string, boolean] = [1, 'a', true];
-const firstElement5 = first(arr5);
-// firstElement5は1です。
+// 空の配列
+first([]);
+// Returns: undefined
 ```
+
+`null`または`undefined`は`undefined`を返します。
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+first(null); // undefined
+first(undefined); // undefined
+```
+
+配列のようなオブジェクトでも使用できます。
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+const arrayLike = { 0: 'a', 1: 'b', 2: 'c', length: 3 };
+first(arrayLike);
+// Returns: 'a'
+
+// 文字列も配列のように処理されます
+first('hello');
+// Returns: 'h'
+```
+
+型が保証されたタプルでは、正確な型を返します。
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+const tuple = [1, 'two', true] as const;
+first(tuple);
+// Returns: 1 (型は1と推論されます)
+```
+
+#### パラメータ
+
+- `array` (`ArrayLike<T> | null | undefined`): 最初の要素を取得する配列です。
+
+#### 戻り値
+
+(`T | undefined`): 配列の最初の要素を返します。配列が空または無効な場合は`undefined`を返します。

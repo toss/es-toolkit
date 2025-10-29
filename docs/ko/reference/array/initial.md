@@ -1,52 +1,60 @@
 # initial
 
-배열의 마지막 요소를 제외한 나머지 요소들로 구성된 새로운 배열을 반환해요.
-
-빈 배열이나 길이가 1인 배열의 경우, 빈 배열(`[]`)을 반환해요.
-
-## 인터페이스
+배열의 마지막 요소를 제외한 모든 요소로 이루어진 새 배열을 반환해요.
 
 ```typescript
-function initial<T>(arr: [T]): [];
-function initial(arr: []): [];
-function initial<T, U>(arr: [...T[], U]): T[];
-function initial<T>(arr: T[]): T[];
+const result = initial(arr);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `arr`(`T[]`): 마지막 요소를 제외할 배열.
+### `initial(arr)`
 
-### 반환 값
-
-(`T[]`): 배열의 마지막 요소를 제외한 나머지 배열. 빈 배열이나 길이가 1인 배열의 경우, 빈 배열(`[]`)을 반환해요.
-
-## 예시
+배열에서 마지막 요소만 제외하고 나머지 모든 요소를 가져오고 싶을 때 `initial`을 사용하세요. 배열이 비어있거나 요소가 하나뿐이면 빈 배열을 반환해요. 배열의 끝 부분을 제외하고 처리할 때 유용해요.
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = initial(arr1);
-// result는 [1, 2]에요.
+import { initial } from 'es-toolkit/array';
 
-const arr2: number[] = [];
-const result = initial(arr2);
-// result는 []에요.
+// 숫자 배열에서 마지막 요소를 제외해요.
+const numbers = [1, 2, 3, 4, 5];
+initial(numbers);
+// Returns: [1, 2, 3, 4]
 
-const arr3: number[] = [1];
-const result = initial(arr3);
-// result는 []에요.
+// 문자열 배열에서 마지막 요소를 제외해요.
+const strings = ['a', 'b', 'c'];
+initial(strings);
+// Returns: ['a', 'b']
 
-const largeArray = Array(1000)
-  .fill(0)
-  .map((_, i) => i);
-const result = initial(largeArray);
-// result는 [0, 1, 2 ..., 998]에요.
+// 요소가 하나뿐인 배열은 빈 배열을 반환해요.
+const single = [42];
+initial(single);
+// Returns: []
+```
 
-const nestedArray = [
-  [3, 1],
-  [3, 2],
-  [3, 3],
+빈 배열이나 특수한 경우도 안전하게 처리해요.
+
+```typescript
+import { initial } from 'es-toolkit/array';
+
+// 빈 배열은 빈 배열을 반환해요.
+const empty: number[] = [];
+initial(empty);
+// Returns: []
+
+// 중첩 배열도 처리할 수 있어요.
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
 ];
-const result = initial(nestedArray);
-// result는 [[3, 1], [3, 2]]에요.
+initial(nested);
+// Returns: [[1, 2], [3, 4]]
 ```
+
+#### 파라미터
+
+- `arr` (`readonly T[]`): 마지막 요소를 제외할 배열이에요.
+
+#### 반환 값
+
+(`T[]`): 마지막 요소를 제외한 새 배열을 반환해요. 입력 배열이 비어있거나 요소가 하나뿐이면 빈 배열을 반환해요.

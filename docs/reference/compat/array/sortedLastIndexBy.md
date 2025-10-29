@@ -1,55 +1,54 @@
-# sortedIndexBy
+# sortedLastIndexBy (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Implement binary search and transformation function directly
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `sortedLastIndexBy` function operates slowly due to complex iteratee handling and type conversion.
+
+Instead, implement faster, more modern binary search and transformation functions directly.
+
 :::
 
-Determines the highest index at which a given value should be inserted into a sorted array to maintain its sort order. Unlike [sortedLastIndex](./sortedLastIndex.md), this function allows you to specify a custom iteratee function to extract the value for comparison.
-
-- The iteratee is invoked for both the array elements and the value being inserted.
-- This is particularly useful for arrays containing objects or custom data types where the sort order is based on specific properties or computed values.
-
-## Signature
+Finds the highest index at which a value should be inserted into a sorted array after applying a transformation function.
 
 ```typescript
-function sortedLastIndexBy<T, R>(
-  array: ArrayLike<T> | null | undefined,
-  value: T,
-  iteratee: (value: T) => R,
-  retHighest?: boolean
-): number;
+const index = sortedLastIndexBy(array, value, iteratee);
 ```
 
-### Parameters
+## Reference
 
-- `array` (`ArrayLike<T> | null | undefined`):
-  The sorted array to inspect. Can be null or undefined, in which case it is treated as an empty array.
-- `value` (`T`):
-  The value to evaluate and find the appropriate index for insertion.
-- `iteratee` (`(item: T) => R`):
-  A function that transforms the elements of the array and the value to be inserted. This function determines the sort order by returning the value used for comparison.
+### `sortedLastIndexBy(array, value, iteratee)`
 
-### Returns
-
-(`number`): The index at which the value should be inserted to maintain the sort order.
-
-## Example
+Use `sortedLastIndexBy` to find the highest insertion position of a value in a sorted array after applying a transformation function. When duplicate values exist, it returns the index after the last value.
 
 ```typescript
 import { sortedLastIndexBy } from 'es-toolkit/compat';
 
-const objects = [{ x: 10 }, { x: 20 }, { x: 20 }, { x: 30 }];
+// Find last insertion position in object array sorted by property
+const objects = [{ x: 4 }, { x: 5 }, { x: 5 }];
+sortedLastIndexBy(objects, { x: 5 }, 'x');
+// Returns 3 (position after the last x: 5)
 
-// Use an iteratee to extract the `x` property for comparison
-sortedLastIndexBy(objects, { x: 20 }, o => o.x);
-// Return value: 3
-// Explanation: Based on the `x` property, `{ x: 20 }` returns index 3.
-
-// Handle custom sorting logic
-const strings = ['apple', 'banana', 'cherry'];
-sortedLastIndexBy(strings, 'apricot', str => str.length);
-// Return value: 3
-// Explanation: Based on the string length, 'apricot' returns index 3.
+// Transform using function
+const numbers = [10, 20, 20, 30];
+sortedLastIndexBy(numbers, 20, n => n);
+// Returns 3
 ```
+
+For `null` or `undefined` arrays, returns 0.
+
+```typescript
+import { sortedLastIndexBy } from 'es-toolkit/compat';
+
+sortedLastIndexBy(null, { x: 1 }, 'x'); // 0
+sortedLastIndexBy(undefined, { x: 1 }, 'x'); // 0
+```
+
+#### Parameters
+
+- `array` (`ArrayLike<T> | null | undefined`): The sorted array. Using an unsorted array can produce incorrect results.
+- `value` (`T`): The value to insert.
+- `iteratee` (optional): The transformation function, property name, or property-value array to apply to each element and value.
+
+#### Returns
+
+(`number`): Returns the highest index to insert the value. If the array is `null` or `undefined`, returns 0.

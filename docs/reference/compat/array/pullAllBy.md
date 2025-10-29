@@ -1,56 +1,46 @@
-# pullAllBy
+# pullAllBy (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Removes all specified values from an array after mapping their elements through a provided function.
-
-You can specify the mapper function in several ways:
-
-- **Iteratee function**: If you provide a function, it will be used to map each element before comparison. The function will be called with each element and should return a value to use for comparison.
-- **Property name**: If you provide a property name (string, symbol, or number), elements will be compared based on the value of that property.
-- **Partial object**: If you provide a partial object, elements will be compared based on whether they match all the properties and values in that object.
-- **Property-value pair**: If you provide a tuple of [property, value], elements will be compared based on whether the specified property matches the given value.
-
-This function changes `arr` in place.
-If you want to remove values without modifying the original array, use [differenceBy](../../array/differenceBy.md).
-
-## Signature
+Removes specified values from the array based on values transformed by an iteratee.
 
 ```typescript
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: (value: T) => unknown): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: Partial<T>): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: [keyof T, unknown]): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: keyof T): T[];
+const modified = pullAllBy(array, valuesToRemove, iteratee);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`): The array to modify.
-- `valuesToRemove` (`ArrayLike<T>`): The values to remove from the array.
-- `getValue`:
-  - **Iteratee function** (`(value: T) => unknown`): If you provide a function, it will be used to map each element before comparison. The function will be called with each element and should return a value to use for comparison.
-  - **Property name** (`keyof T`): If you provide a property name (string, symbol, or number), elements will be compared based on the value of that property.
-  - **Partial object** (`Partial<T>`): If you provide a partial object, elements will be compared based on whether they match all the properties and values in that object.
-  - **Property-value pair** (`[keyof T, unknown]`): If you provide a tuple of [property, value], elements will be compared based on whether the specified property matches the given value.
+### `pullAllBy(array, values, iteratee)`
 
-### Returns
-
-(`T[]`): The modified array with the specified values removed.
-
-## Examples
+Removes specified values from the array based on values transformed through the provided iteratee function. The original array is modified and the modified array is returned.
 
 ```typescript
-// Using a iteratee function
-const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
-const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], obj => obj.value);
-console.log(result); // [{ value: 2 }]
+import { pullAllBy } from 'es-toolkit/compat';
 
-// Using a property name
-const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
-const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], 'value');
-console.log(result); // [{ value: 2 }]
+// Remove by comparing property values
+const array = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }];
+pullAllBy(array, [{ x: 1 }, { x: 3 }], 'x');
+console.log(array); // [{ x: 2 }]
+
+// Compare by transforming values with a function
+const numbers = [1, 2, 3, 4, 5];
+pullAllBy(numbers, [2, 4], n => n % 2);
+console.log(numbers); // [1, 3, 5] (only odd numbers remain)
 ```
+
+If the array is empty, `null`, or `undefined`, it returns the original array as is.
+
+```typescript
+import { pullAllBy } from 'es-toolkit/compat';
+
+pullAllBy([], [1, 2], x => x); // []
+pullAllBy(null as any, [1, 2], x => x); // null
+```
+
+#### Parameters
+
+- `array` (`T[]`): The array to modify.
+- `values` (`ArrayLike<T>`, optional): The array of values to remove.
+- `iteratee` (`ValueIteratee<T>`, optional): The iteratee function to apply to each element. You can use a property name, partial object, or function.
+
+#### Returns
+
+(`T[]`): Returns the original array with the specified values removed.

@@ -75,4 +75,16 @@ describe('defaults', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(defaults).toEqualTypeOf<typeof defaultsLodash>();
   });
+
+  it('should not throw an error when a source is `undefined`', () => {
+    const source = undefined;
+    const actual = defaults({ a: 1 }, source);
+    expect(actual).toEqual({ a: 1 });
+  });
+
+  it('should not throw an error when a source is `null`', () => {
+    const source = null;
+    const actual = defaults({ a: 1 }, source);
+    expect(actual).toEqual({ a: 1 });
+  });
 });

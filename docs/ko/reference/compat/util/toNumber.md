@@ -1,36 +1,61 @@
-# toNumber
+# toNumber (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning Number 생성자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `toNumber` 함수는 심볼 타입 검증과 추가 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 Number 생성자를 사용하세요.
+
 :::
 
-`value`를 숫자로 변환해요.
-
-`Number()`와 달리, 이 함수는 Symbol에 대해 `NaN`을 반환해요.
-
-## 인터페이스
+값을 숫자로 변환해요.
 
 ```typescript
-function toNumber(value: any): number;
+const number = toNumber(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`any`): 변환할 값이에요.
+### `toNumber(value)`
 
-### 반환 값
-
-(`number`): 숫자를 반환해요.
-
-## 예시
+값을 숫자로 변환해요. 심볼은 NaN으로 처리해요.
 
 ```typescript
-toNumber(3.2); // => 3.2
-toNumber(Number.MIN_VALUE); // => 5e-324
-toNumber(Infinity); // => Infinity
-toNumber('3.2'); // => 3.2
-toNumber(Symbol.iterator); // => NaN
-toNumber(NaN); // => NaN
+import { toNumber } from 'es-toolkit/compat';
+
+// 일반 숫자는 그대로 반환
+toNumber(3.2);
+// Returns: 3.2
+
+// 문자열 숫자를 변환
+toNumber('3.2');
+// Returns: 3.2
+
+// 무한대도 그대로 반환
+toNumber(Infinity);
+// Returns: Infinity
+
+// 매우 작은 수도 그대로 반환
+toNumber(Number.MIN_VALUE);
+// Returns: 5e-324
 ```
+
+심볼과 NaN은 NaN으로 변환해요.
+
+```typescript
+import { toNumber } from 'es-toolkit/compat';
+
+toNumber(Symbol.iterator);
+// Returns: NaN
+
+toNumber(NaN);
+// Returns: NaN
+```
+
+#### 파라미터
+
+- `value` (`unknown`): 변환할 값이에요.
+
+#### 반환 값
+
+(`number`): 변환된 숫자를 반환해요.

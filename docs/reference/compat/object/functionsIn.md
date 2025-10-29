@@ -1,68 +1,99 @@
-# functionsIn
+# functionsIn (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use `for...in` loop and `typeof` check instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `functionsIn` function operates slowly due to the `for...in` loop and function checking process.
+
+Instead, use the faster and more modern `for...in` loop and `typeof` check.
+
 :::
 
-Returns an array of property names whose values are functions, including inherited properties.
-
-## Signature
+Returns an array of the names of all properties (including inherited properties) of an object that are functions.
 
 ```typescript
-// When object is any type
-function functionsIn(object: any): string[];
+const functionNames = functionsIn(obj);
 ```
 
-### Parameters
+## Reference
 
-- `object`: The object to inspect.
+### `functionsIn(object)`
 
-### Returns
-
-(`string[]`): Returns the array of function property names from both own and inherited enumerable properties of the object.
-
-## Examples
+Checks all properties of an object and returns an array of only the names of properties that are functions. It checks not only the object's own properties but also all properties inherited through the prototype chain. This is useful for finding all methods (including inherited methods) of an object.
 
 ```typescript
 import { functionsIn } from 'es-toolkit/compat';
 
-function Foo() {
-  this.a = function () {
-    return 'a';
-  };
-  this.b = function () {
-    return 'b';
-  };
+// Basic usage
+const obj = {
+  name: 'John',
+  age: 30,
+  greet: () => 'Hello',
+  calculate: function (x, y) {
+    return x + y;
+  },
+};
+
+const functionNames = functionsIn(obj);
+// Result: ['greet', 'calculate']
+
+// Including inherited functions
+class Calculator {
+  constructor() {
+    this.value = 0;
+    this.add = function (n) {
+      this.value += n;
+    };
+  }
+
+  multiply(n) {
+    this.value *= n;
+  }
 }
 
-Foo.prototype.c = function () {
-  return 'c';
+Calculator.prototype.divide = function (n) {
+  this.value /= n;
 };
 
-// Get function property names including inherited ones
-functionsIn(new Foo());
-// => ['a', 'b', 'c']
+const calc = new Calculator();
+const allMethods = functionsIn(calc);
+// Result: ['add', 'divide'] (`multiply` is non-enumerable)
 
-// Works with plain objects
-const object = {
-  a: function () {
-    return 'a';
-  },
-  b: function () {
-    return 'b';
-  },
+// Inheritance through prototype chain
+function Parent() {
+  this.parentMethod = function () {
+    return 'parent';
+  };
+}
+Parent.prototype.protoMethod = function () {
+  return 'proto';
 };
 
-functionsIn(object);
-// => ['a', 'b']
+function Child() {
+  Parent.call(this);
+  this.childMethod = function () {
+    return 'child';
+  };
+}
+Child.prototype = Object.create(Parent.prototype);
 
-// Returns empty array for non-objects
-functionsIn(null);
-// => []
-functionsIn(undefined);
-// => []
-functionsIn(1);
-// => []
+const child = new Child();
+const inheritedFunctions = functionsIn(child);
+// Result: ['parentMethod', 'childMethod', 'protoMethod']
 ```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { functionsIn } from 'es-toolkit/compat';
+
+functionsIn(null); // []
+functionsIn(undefined); // []
+```
+
+#### Parameters
+
+- `object` (`any`): The object to inspect.
+
+#### Returns
+
+(`string[]`): Returns an array of the names of properties that are functions (including inherited functions).

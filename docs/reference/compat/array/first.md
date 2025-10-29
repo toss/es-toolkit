@@ -1,50 +1,78 @@
-# first
+# first (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `head` from `es-toolkit`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `first` function operates slowly due to handling `null` or `undefined` and array-like object conversion. The `head` function from `es-toolkit` operates faster and simpler without this additional processing.
+
+Use the faster and more modern [head](../../array/head.md) from `es-toolkit` instead.
+
 :::
 
-Returns the first element of an array or `undefined` if the array is empty.
-
-This function takes an array and returns the first element of the array.
-If the array is empty, the function returns `undefined`.
-
-## Signature
+Returns the first element of an array.
 
 ```typescript
-function first<T>(arr: ArrayLike<T> | undefined | null): T | undefined;
+const firstElement = first(array);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`ArrayLike<T> | undefined | null`): The array from which to get the first element.
+### `first(array)`
 
-### Returns
-
-(`T | undefined`): The first element of the array, or `undefined` if the array is empty.
-
-## Examples
+Use `first` when you want to get the first element of an array. Returns `undefined` if the array is empty or is `null` or `undefined`.
 
 ```typescript
-const arr1 = [1, 2, 3];
-const firstElement1 = first(arr1);
-// firstElement1 will be 1
+import { first } from 'es-toolkit/compat';
 
-const arr2: string[] = [];
-const firstElement2 = first(arr2);
-// firstElement2 will be undefined
+// Get the first element from a regular array
+first([1, 2, 3]);
+// Returns: 1
 
-const arr3 = ['a', 'b', 'c'];
-const firstElement3 = first(arr3);
-// firstElement3 will be 'a'
+// Get the first element from a string array
+first(['a', 'b', 'c']);
+// Returns: 'a'
 
-const arr4 = [true, false, true];
-const firstElement4 = first(arr4);
-// firstElement4 will be true
-
-const arr5: [number, string, boolean] = [1, 'a', true];
-const firstElement5 = first(arr5);
-// firstElement5 will be 1
+// Empty array
+first([]);
+// Returns: undefined
 ```
+
+`null` or `undefined` returns `undefined`.
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+first(null); // undefined
+first(undefined); // undefined
+```
+
+Can be used with array-like objects.
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+const arrayLike = { 0: 'a', 1: 'b', 2: 'c', length: 3 };
+first(arrayLike);
+// Returns: 'a'
+
+// Strings are also treated like arrays
+first('hello');
+// Returns: 'h'
+```
+
+For type-guaranteed tuples, returns the exact type.
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+const tuple = [1, 'two', true] as const;
+first(tuple);
+// Returns: 1 (type is inferred as 1)
+```
+
+#### Parameters
+
+- `array` (`ArrayLike<T> | null | undefined`): The array to get the first element from.
+
+#### Returns
+
+(`T | undefined`): Returns the first element of the array. Returns `undefined` if the array is empty or invalid.

@@ -1,63 +1,55 @@
-# defaultsDeep
+# defaultsDeep (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 구조 분해 할당과 `Object.assign()`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `defaultsDeep` 함수는 중첩 객체의 재귀적 병합과 순환 참조 처리로 인해 복잡하고 느리게 동작해요.
+
+대신 더 빠르고 현대적인 구조 분해 할당과 `Object.assign()`을 사용하세요.
+
 :::
 
-[defaults](./defaults.md) 함수와 비슷하지만 프로퍼티가 중첩된 객체에 대해서도 재귀적으로 기본값을 할당해요.
-
-> 주의: 이 함수는 첫 번째 파라미터 `object`를 수정해요.
-
-## 인터페이스
+중첩된 객체에 재귀적으로 기본값을 설정해요.
 
 ```typescript
-function defaultsDeep<T extends object>(object: T): NonNullable<T>;
-function defaultsDeep<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function defaultsDeep<T extends object, S1 extends object, S2 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2
-): NonNullable<T & S1 & S2>;
-function defaultsDeep<T extends object, S extends object>(object: T, ...sources: S[]): object;
+const result = defaultsDeep(target, ...sources);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`T`): 기본값을 받을 대상 객체.
-- `sources` (`S[]`): 기본값을 제공할 하나 이상의 소스 객체.
+### `defaultsDeep(target, ...sources)`
 
-### 반환 값
-
-(`object`): 기본값이 적용된 대상 객체.
-
-## 예시
+중첩된 객체의 `undefined` 속성에 기본값을 재귀적으로 설정할 때 `defaultsDeep`을 사용하세요. `defaults`와 비슷하지만 중첩된 객체도 병합해요.
 
 ```typescript
-// 기본 사용법
-defaultsDeep({ a: 1 }, { a: 2, b: 2 }); // { a: 1, b: 2 }
+import { defaultsDeep } from 'es-toolkit/compat';
 
-// 중첩 객체 병합
+// 중첩 객체의 기본값 설정
 defaultsDeep({ a: { b: 2 } }, { a: { b: 3, c: 3 }, d: 4 });
-// { a: { b: 2, c: 3 }, d: 4 }
+// 반환값: { a: { b: 2, c: 3 }, d: 4 }
 
-// null 값은 덮어쓰지 않음
-defaultsDeep({ a: { b: null } }, { a: { b: 2 } }); // { a: { b: null } }
+// undefined 속성만 기본값으로 채워져요
+defaultsDeep({ a: { b: undefined } }, { a: { b: 1 } });
+// 반환값: { a: { b: 1 } }
 
-// undefined 값은 덮어씀
-defaultsDeep({ a: { b: undefined } }, { a: { b: 2 } }); // { a: { b: 2 } }
-
-// 여러 소스 객체 사용
-defaultsDeep({ a: { b: 2 } }, { a: { c: 3 } }, { d: 4 });
-// { a: { b: 2, c: 3 }, d: 4 }
-
-// 순환 참조 처리
-const obj1 = { foo: { b: { c: { d: {} } } }, bar: { a: 2 } };
-const obj2 = { foo: { b: { c: { d: {} } } }, bar: {} };
-obj1.foo.b.c.d = obj1; // 순환 참조 생성
-obj2.foo.b.c.d = obj2; // 순환 참조 생성
-obj2.bar.b = obj2.foo.b; // 교차 참조
-const result = defaultsDeep(obj1, obj2);
-// 순환 참조와 참조 구조가 올바르게 유지됨
+// null 값은 그대로 유지해요
+defaultsDeep({ a: null }, { a: { b: 1 } });
+// 반환값: { a: null }
 ```
+
+여러 소스 객체를 전달해서 기본값을 단계적으로 적용할 수 있어요.
+
+```typescript
+import { defaultsDeep } from 'es-toolkit/compat';
+
+defaultsDeep({ a: { b: 2 } }, { a: { c: 3 } }, { a: { d: 4 }, e: 5 });
+// 반환값: { a: { b: 2, c: 3, d: 4 }, e: 5 }
+```
+
+#### 파라미터
+
+- `target` (`any`): 기본값을 설정할 대상 객체예요.
+- `...sources` (`any[]`): 기본값을 제공하는 소스 객체들이에요.
+
+#### 반환 값
+
+(`any`): 기본값이 재귀적으로 설정된 객체를 반환해요. 첫 번째 인수인 `target`이 수정돼요.

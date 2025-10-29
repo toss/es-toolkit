@@ -1,34 +1,40 @@
 # isUndefined
 
-Checks if the given value is `undefined`.
-
-This function tests whether the provided value is strictly equal to `undefined`.
-It returns `true` if the value is `undefined`, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `undefined`.
-
-## Signature
+Checks if a given value is `undefined`.
 
 ```typescript
-function isUndefined(x: unknown): x is undefined;
+const result = isUndefined(value);
 ```
 
-### Parameters
+## Reference
 
-- `x` (`unknown`): The value to test if it is `undefined`.
+### `isUndefined(value)`
 
-### Returns
-
-(`x is undefined`): `true` if the value is `undefined`, `false` otherwise.
-
-## Examples
+Use `isUndefined` when you want to check if a value is `undefined`. It's useful for checking whether a variable is initialized or whether an optional property exists.
 
 ```typescript
-const value1 = undefined;
-const value2 = null;
-const value3 = 42;
+import { isUndefined } from 'es-toolkit/predicate';
 
-console.log(isUndefined(value1)); // true
-console.log(isUndefined(value2)); // false
-console.log(isUndefined(value3)); // false
+// undefined values
+console.log(isUndefined(undefined)); // true
+console.log(isUndefined(void 0)); // true
+
+let uninitialized: string;
+console.log(isUndefined(uninitialized)); // true
+
+// Non-undefined values
+console.log(isUndefined(null)); // false
+console.log(isUndefined('')); // false
+console.log(isUndefined(0)); // false
+console.log(isUndefined(false)); // false
+console.log(isUndefined({})); // false
+console.log(isUndefined([])); // false
 ```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's undefined.
+
+#### Returns
+
+(`value is undefined`): Returns `true` if the value is undefined, `false` otherwise.

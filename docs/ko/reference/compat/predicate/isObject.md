@@ -1,43 +1,52 @@
-# isObject
+# isObject (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
-
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-주어진 값이 객체인지 확인해요.
-
-객체란, `typeof` 연산의 결과가 `object`, `function` 이고 `null`이 아닌 값을 말해요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `object`로 좁혀요.
-
-## 인터페이스
+값이 객체인지 확인해요.
 
 ```typescript
-function isObject(value?: unknown): value is object;
+const result = isObject(value);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `value` (`unknown`): 객체인지 확인할 값.
+### `isObject(value)`
 
-### 반환 값
-
-(`value is object`): 주어진 값이 객체이면 `true`, 아니면 `false`.
-
-## 예시
+값이 객체인지 확인하고 싶을 때 `isObject`를 사용하세요. JavaScript에서는 배열, 함수, 객체, 정규식, Date 등이 모두 객체로 취급돼요.
 
 ```typescript
 import { isObject } from 'es-toolkit/compat';
 
-const value1 = {};
-const value2 = [1, 2, 3];
-const value3 = () => {};
-const value4 = null;
+// 일반 객체
+isObject({});
+// Returns: true
 
-console.log(isObject(value1)); // true
-console.log(isObject(value2)); // true
-console.log(isObject(value3)); // true
-console.log(isObject(value4)); // false
+// 배열도 객체
+isObject([1, 2, 3]);
+// Returns: true
+
+// 함수도 객체
+isObject(() => {});
+// Returns: true
+
+// Date도 객체
+isObject(new Date());
+// Returns: true
+
+// null은 객체가 아님
+isObject(null);
+// Returns: false
+
+// 원시 타입은 객체가 아님
+isObject('string');
+// Returns: false
+
+isObject(123);
+// Returns: false
 ```
+
+#### 파라미터
+
+- `value` (`unknown`): 객체인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is object`): 값이 객체면 `true`, 아니면 `false`를 반환해요.

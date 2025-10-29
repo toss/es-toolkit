@@ -1,44 +1,50 @@
-# pullAllWith
+# pullAllWith (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Removes and returns elements from an array using a provided comparison function to determine which elements to remove.
-
-It compares elements of the original `array` with elements of the comparison array (`values`) using the comparison function (`comparator`), and removes elements from the original array for which the comparison returns `true`.
-
-## Interface
+Removes specified values from an array using a comparison function.
 
 ```typescript
-function pullAllWith<T>(array: T[], values: T[], comparator: (a: T, b: T) => boolean): T[];
+const modified = pullAllWith(array, valuesToRemove, comparator);
 ```
 
-### Parameters
+## Reference
 
-- `array` (`T[]`): The array to modify.
-- `values` (`T[]`): The values to remove from the array.
-- `comparator` (`(a: T, b: T) => boolean`): The function to compare elements of `array` with elements of `values`. Should return `true` if the two elements are considered equal.
+### `pullAllWith(array, values, comparator)`
 
-### Return Value
-
-(`T[]`): The array with specified values removed.
-
-## Example
+Removes specified values from an array using the provided comparison function. The original array is modified and the modified array is returned.
 
 ```typescript
-import { pullAllWith } from 'es-toolkit/array';
+import { pullAllWith } from 'es-toolkit/compat';
 
+// Remove with object comparison
 const array = [
   { x: 1, y: 2 },
   { x: 3, y: 4 },
   { x: 5, y: 6 },
 ];
+pullAllWith(array, [{ x: 3, y: 4 }], (a, b) => a.x === b.x && a.y === b.y);
+console.log(array); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
 
-const removed = pullAllWith(array, [{ x: 3, y: 4 }], (a, b) => JSON.stringify(a) === JSON.stringify(b));
-
-console.log(removed); // [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
-console.log(array); // [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
+// Remove by comparing string length
+const words = ['hello', 'world', 'test', 'code'];
+pullAllWith(words, ['hi'], (a, b) => a.length === b.length);
+console.log(words); // ['hello', 'world', 'code'] ('test' removed as it has same length as 'hi')
 ```
+
+If the array is empty or `null`, `undefined`, the original array is returned as is.
+
+```typescript
+import { pullAllWith } from 'es-toolkit/compat';
+
+pullAllWith([], [1], (a, b) => a === b); // []
+pullAllWith(null as any, [1], (a, b) => a === b); // null
+```
+
+#### Parameters
+
+- `array` (`T[]`): The array to modify.
+- `values` (`ArrayLike<T>`, optional): The array of values to remove.
+- `comparator` (`(a: T, b: T) => boolean`, optional): The function to compare two elements. Should return `true` if the two elements are considered equal.
+
+#### Returns
+
+(`T[]`): Returns the original array with the specified values removed.

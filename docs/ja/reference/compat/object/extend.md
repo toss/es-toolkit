@@ -1,40 +1,58 @@
-# extend
+# extend (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.assign()` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `extend` 関数は、プロトタイプチェーンから継承されたプロパティを処理する複雑なロジックにより、動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.assign()` を使用してください。
+
 :::
 
-`source`が持っているプロパティの値を`object`オブジェクトに割り当てます。プロトタイプから継承されたプロパティも含まれます。
-
-`source`と`object`が同じ値を持っているプロパティは上書きされません。
-
-[assignIn](./assignIn.md)の別名です。
-
-## インターフェース
+オブジェクトの固有プロパティと継承されたプロパティを別のオブジェクトにコピーします。
 
 ```typescript
-function extend<O, S>(object: O, source: S): O & S;
-function extend<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function extend<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function extend<O, S1, S2, S3, S4>(object: O, source1: S1, source2: S2, source3: S3, source4: S4): O & S1 & S2 & S3;
-function extend(object: any, ...sources: any[]): any;
+const result = extend(object, source);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`any`): `source`のプロパティ値が割り当てられるオブジェクト。
-- `sources` (`...any[]`): `object`に割り当てる値を持つオブジェクトたち。
+### `extend(object, ...sources)`
 
-### 戻り値
-
-(`any`): `source`の値が割り当てられた`object`オブジェクト。
-
-## 例
+あるオブジェクトから別のオブジェクトにプロパティをコピーするには、`extend` を使用してください。`Object.assign()` と似ていますが、継承されたプロパティもコピーします。この関数は `assignIn` のエイリアスです。
 
 ```typescript
+import { extend } from 'es-toolkit/compat';
+
+// 基本的なプロパティのコピー
 const target = { a: 1 };
-const result = extend(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+extend(target, { b: 2 }, { c: 3 });
+// 戻り値: { a: 1, b: 2, c: 3 }
+
+// 継承されたプロパティもコピーします
+function Parent() {
+  this.a = 1;
+}
+Parent.prototype.b = 2;
+
+const source = new Parent();
+extend({}, source);
+// 戻り値: { a: 1, b: 2 }
 ```
+
+同じプロパティが存在する場合、後のソースオブジェクトの値で上書きされます。
+
+```typescript
+import { extend } from 'es-toolkit/compat';
+
+extend({ a: 1, b: 2 }, { b: 3 }, { c: 4 });
+// 戻り値: { a: 1, b: 3, c: 4 }
+```
+
+#### パラメータ
+
+- `object` (`any`): プロパティをコピーされる対象オブジェクトです。
+- `...sources` (`any[]`): プロパティを提供するソースオブジェクトです。
+
+#### 戻り値
+
+(`any`): プロパティがコピーされたオブジェクトを返します。最初の引数である `object` が変更されます。

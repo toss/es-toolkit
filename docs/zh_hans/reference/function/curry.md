@@ -1,101 +1,57 @@
 # curry
 
-将一个函数柯里化，允许它每次只用一个参数调用，并返回一个接受下一个参数的新函数。这个过程会继续，直到所有参数都已提供，此时将使用所有累积的参数调用原始函数。
-
-## 签名
+对函数进行柯里化,使其可以一次接收一个参数进行调用。
 
 ```typescript
-function curry<R>(func: () => R): () => R;
-function curry<P, R>(func: (p: P) => R): (p: P) => R;
-function curry<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P1) => (p2: P2) => R;
-function curry<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: P1) => (p2: P2) => (p3: P3) => R;
-function curry<P1, P2, P3, P4, R>(
-  func: (p1: P1, p2: P2, p3: P3, p4: P4) => R
-): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => R;
-function curry<P1, P2, P3, P4, P5, R>(
-  func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
-): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => (p5: P5) => R;
-function curry(func: (...args: any[]) => any): (...args: any[]) => any;
+const curriedFunc = curry(func);
 ```
 
-### 参数
+## 参考
 
-- `func` (`(...args: any[]) => any`): 要进行柯里化的函数。
+### `curry(func)`
 
-### 返回值
-
-(`(...args: any[]) => any`): 一个可以每次调用一个参数的柯里化函数。
-
-## 示例
+当您想要部分应用函数时,请使用 `curry`。柯里化后的函数会在收到所有必需参数之前返回新函数。一旦提供了所有参数,就会执行原始函数。
 
 ```typescript
+import { curry } from 'es-toolkit/function';
+
 function sum(a: number, b: number, c: number) {
   return a + b + c;
 }
 
 const curriedSum = curry(sum);
 
-// 参数 `a` 应该被赋值为 `10`。
+// 为参数 `a` 提供值 `10`
 const sum10 = curriedSum(10);
 
-// 参数 `b` 应该被赋值为 `15`。
+// 为参数 `b` 提供值 `15`
 const sum25 = sum10(15);
 
-// 参数 `c` 应该被赋值为 `5`。函数 'sum' 已经接收到了所有参数，现在将返回一个值。
+// 为参数 `c` 提供值 `5`
+// 已收到所有参数,现在返回值
 const result = sum25(5);
+// Returns: 30
 ```
 
-## Lodash 兼容性
-
-从 `es-toolkit/compat` 中导入 `curry` 以实现与 lodash 的完全兼容。
-
-### 签名
+这在创建可重用函数时很有用。
 
 ```typescript
-function curry(
-  func: (...args: any[]) => any,
-  arity: number = func.length,
-  guard?: unknown
-): ((...args: any[]) => any) & { placeholder: typeof curry.placeholder };
-
-namespace curry {
-  placeholder: symbol;
+function multiply(a: number, b: number) {
+  return a * b;
 }
+
+const curriedMultiply = curry(multiply);
+const double = curriedMultiply(2);
+const triple = curriedMultiply(3);
+
+double(5); // Returns: 10
+triple(5); // Returns: 15
 ```
 
-- `curry` 接受一个额外的数值参数 `arity`，该参数指定了函数的参数数量。
-  - 默认为 `func.length`，如果 `arity` 为负数或 `NaN`，则会被转换为 `0`。如果它是一个小数，则会被向下取整到最接近的整数。
-- `guard` 使其可以用作 `Array#map` 等方法的迭代器。
-- `curry.placeholder` 值默认为一个 `symbol`，可以用作部分应用参数的占位符。
-- 不像原生的 `curry`，这个方法允许每次使用多个参数调用，并返回一个接受剩余参数的新函数。
+#### 参数
 
-### 示例
+- `func` (`(...args: any[]) => any`): 要柯里化的函数。
 
-```typescript
-import { curry } from 'es-toolkit/compat';
+#### 返回值
 
-const abc = function (a, b, c) {
-  return Array.from(arguments);
-};
-
-let curried = curry(abc);
-
-curried(1)(2)(3);
-// => [1, 2, 3]
-
-curried(1, 2)(3);
-// => [1, 2, 3]
-
-curried(1, 2, 3);
-// => [1, 2, 3]
-
-// 使用占位符进行柯里化
-curried(1)(curry.placeholder, 3)(2);
-// => [1, 2, 3]
-
-// 指定参数数量
-curried = curry(abc, 2);
-
-curried(1)(2);
-// => [1, 2]
-```
+(`(...args: any[]) => any`): 可以一次接收一个参数进行调用的柯里化函数。

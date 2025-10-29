@@ -1,52 +1,60 @@
 # initial
 
-配列の最後の要素を除いた残りの要素で構成される新しい配列を返します。
-
-空の配列や長さが1の配列の場合、空の配列（`[]`）を返します。
-
-## インターフェース
+配列の最後の要素を除いたすべての要素からなる新しい配列を返します。
 
 ```typescript
-function initial<T>(arr: [T]): [];
-function initial(arr: []): [];
-function initial<T, U>(arr: [...T[], U]): T[];
-function initial<T>(arr: T[]): T[];
+const result = initial(arr);
 ```
 
-### パラメータ
+## 参照
 
-- `arr`（`T[]`）：最後の要素を除く配列。
+### `initial(arr)`
 
-### 戻り値
-
-（`T[]`）：配列の最後の要素を除いた残りの配列。空の配列や長さが1の配列の場合、空の配列（`[]`）を返します。
-
-## 例
+配列から最後の要素だけ除いて残りのすべての要素を取得したい場合は `initial` を使用してください。配列が空であるか要素が一つだけの場合は空の配列を返します。配列の末尾を除いて処理する際に便利です。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = initial(arr1);
-// resultは[1, 2]です。
+import { initial } from 'es-toolkit/array';
 
-const arr2: number[] = [];
-const result = initial(arr2);
-// resultは[]です。
+// 数値配列から最後の要素を除く
+const numbers = [1, 2, 3, 4, 5];
+initial(numbers);
+// Returns: [1, 2, 3, 4]
 
-const arr3: number[] = [1];
-const result = initial(arr3);
-// resultは[]です。
+// 文字列配列から最後の要素を除く
+const strings = ['a', 'b', 'c'];
+initial(strings);
+// Returns: ['a', 'b']
 
-const largeArray = Array(1000)
-  .fill(0)
-  .map((_, i) => i);
-const result = initial(largeArray);
-// resultは[0, 1, 2 ..., 998]です。
+// 要素が一つだけの配列は空の配列を返す
+const single = [42];
+initial(single);
+// Returns: []
+```
 
-const nestedArray = [
-  [3, 1],
-  [3, 2],
-  [3, 3],
+空の配列や特殊なケースも安全に処理します。
+
+```typescript
+import { initial } from 'es-toolkit/array';
+
+// 空の配列は空の配列を返す
+const empty: number[] = [];
+initial(empty);
+// Returns: []
+
+// ネストされた配列も処理できる
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
 ];
-const result = initial(nestedArray);
-// resultは[[3, 1], [3, 2]]です。
+initial(nested);
+// Returns: [[1, 2], [3, 4]]
 ```
+
+#### パラメータ
+
+- `arr` (`readonly T[]`): 最後の要素を除く配列。
+
+#### 戻り値
+
+(`T[]`): 最後の要素を除いた新しい配列を返します。入力配列が空であるか要素が一つだけの場合は空の配列を返します。

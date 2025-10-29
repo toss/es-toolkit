@@ -1,41 +1,42 @@
 # omit
 
-Creates a new object with specified keys omitted.
-
-This function takes an object and an array of keys, and returns a new object that
-excludes the properties corresponding to the specified keys.
-
-## Signature
+Returns a new object excluding the specified keys.
 
 ```typescript
-function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
+const result = omit(obj, keys);
 ```
 
-### Parameters
+## Reference
 
-- `obj` (`T`): The object to omit keys from.
-- `keys` (`K[]`): An array of keys to be omitted from the object.
+### `omit(obj, keys)`
 
-### Returns
-
-(`Omit<T, K>`): A new object with the specified keys omitted.
-
-## Examples
+Use `omit` when you want to exclude specific keys from an object. It returns a new object with the properties corresponding to the specified keys removed.
 
 ```typescript
-const obj = { a: 1, b: 2, c: 3 };
+import { omit } from 'es-toolkit/object';
+
+// Exclude specific keys
+const obj = { a: 1, b: 2, c: 3, d: 4 };
 const result = omit(obj, ['b', 'c']);
-// result will be { a: 1 }
+// result is { a: 1, d: 4 }
+
+// Specifying non-existent keys doesn't cause an error
+const safe = omit(obj, ['b', 'nonexistent']);
+// safe is { a: 1, c: 3, d: 4 }
+
+// Works with dynamic arrays
+const keysToOmit = Object.keys({ b: true, c: true });
+const dynamic = omit(obj, keysToOmit);
+// dynamic is { a: 1, d: 4 }
 ```
 
-## Compatibility with Lodash
+#### Parameters
 
-The `omit` function from `es-toolkit/compat` allows you to exclude deep properties from an object.
+- `obj` (`T extends Record<PropertyKey, any>`): The object to exclude keys from.
+- `keys` (`readonly K[]` (`K extends keyof T`) or `readonly PropertyKey[]`): An array of keys to exclude from the object.
 
-```typescript
-import { omit } from 'es-toolkit/compat';
+#### Returns
 
-const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
-const result = omit(obj, ['a.b.c', 'f.g']);
-// result will be { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
-```
+- `Omit<T, K>` or `Partial<T>` - A new object with the specified keys excluded.
+  - When `keys` is `readonly K[]`: Returns `Omit<T, K>` with stricter typing.
+  - When `keys` is `readonly PropertyKey[]`: Returns `Partial<T>`. Useful for dynamic key arrays determined at runtime.

@@ -1,37 +1,62 @@
-# floor
+# floor (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Math.floor`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `floor` 函数由于小数位计算和内部函数调用会运行较慢。
+
+请使用更快、更现代的 `Math.floor`。
 
 :::
 
-将一个数字向下舍入到指定的精度。
-
-该函数接受一个数字和一个可选的精度值，返回将数字向下舍入到指定小数位数的结果。
-
-## 签名
+将数字向下舍入到指定的小数位数。
 
 ```typescript
-function floor(number: number, precision: number = 0): number;
+const result = floor(number, precision);
 ```
 
-### 参数
+## 参考
 
-- `number` (`number`): 要向下舍入的数字。
-- `precision` (`number`, 可选): 要向下舍入的精度，默认为 `0`。
+### `floor(number, precision?)`
 
-### 返回
-
-(`number`): 向下舍入的数字。
-
-### 示例
+当您想要将数字向下舍入到特定小数位数时，请使用 `floor`。
 
 ```typescript
 import { floor } from 'es-toolkit/compat';
 
-floor(4.006); // => 4
-floor(0.046, 2); // => 0.04
-floor(4060, -2); // => 4000
+// 基本向下舍入（到整数）
+floor(4.9);
+// Returns: 4
+
+floor(4.1);
+// Returns: 4
+
+// 向下舍入到小数点后两位
+floor(6.994, 2);
+// Returns: 6.99
+
+floor(6.999, 2);
+// Returns: 6.99
+
+// 向下舍入到负数位（十位数）
+floor(6040, -2);
+// Returns: 6000
+
+floor(1234, -2);
+// Returns: 1200
+
+// 负数也向下舍入
+floor(-4.1);
+// Returns: -5
+
+floor(-6.994, 2);
+// Returns: -7.00
 ```
+
+#### 参数
+
+- `number` (`number`): 要向下舍入的数字。
+- `precision` (`number`, 可选): 要向下舍入的小数位数。默认值为 `0`。
+
+#### 返回值
+
+(`number`): 返回向下舍入到指定小数位数的数字。

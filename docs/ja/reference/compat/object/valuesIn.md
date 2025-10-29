@@ -1,38 +1,69 @@
-# valuesIn
+# valuesIn (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.values` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `valuesIn` 関数はプロトタイププロパティを処理する複雑なロジックにより遅く動作します。
+
+代わりに、より高速で現代的な `Object.values` を使用してください。
+
 :::
 
-オブジェクトから値を取得します。プロトタイプから継承されたものも含みます。
-
-- 値がオブジェクトでない場合、オブジェクトに変換されます。
-- [配列のようなオブジェクト](../predicate/isArrayLike.md)は配列のように扱われます。
-- 一部のインデックスが欠けている疎な配列は密な配列のように扱われます。
-- 値が `null` または `undefined` の場合、空の配列を返します。
-- プロトタイプオブジェクトを処理する際には、`constructor` プロパティは結果から除外されます。
-
-## インターフェース
+オブジェクトのすべてのプロパティ値を配列として返し、継承されたプロトタイププロパティも含めます。
 
 ```typescript
-function valuesIn<T>(object: Record<PropertyKey, T> | null | undefined): T[];
-function valuesIn<T>(arr: ArrayLike<T>): T[];
-function valuesIn<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
+const values = valuesIn(obj);
 ```
 
-### パラメータ
+## 参照
 
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): 値を調べるためのオブジェクト。
+### `valuesIn(object)`
 
-### 戻り値
-
-(`T[]`): プロパティ値の配列。
-
-## 例
+オブジェクトからすべてのプロパティ値を配列として取得したい場合は、`valuesIn` を使用してください。通常の `Object.values` とは異なり、プロトタイプチェーンから継承されたプロパティの値も一緒に含まれます。
 
 ```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
 const obj = { a: 1, b: 2, c: 3 };
-valuesIn(obj); // => [1, 2, 3]
+valuesIn(obj); // [1, 2, 3]
+
+// 配列も処理できる
+valuesIn([1, 2, 3]); // [1, 2, 3]
 ```
+
+プロトタイプから継承されたプロパティも含まれます。
+
+```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
+function Parent() {
+  this.a = 1;
+}
+Parent.prototype.inherited = 'fromParent';
+
+function Child() {
+  Parent.call(this);
+  this.b = 2;
+}
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.childProp = 'childValue';
+
+const obj = new Child();
+valuesIn(obj); // [1, 2, 'childValue', 'fromParent'] (constructor は除外)
+```
+
+`null` または `undefined` は空配列として処理されます。
+
+```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
+valuesIn(null); // []
+valuesIn(undefined); // []
+```
+
+#### パラメータ
+
+- `object` (`any`): 値を取得するオブジェクト。
+
+#### 戻り値
+
+(`any[]`): オブジェクトのすべてのプロパティ値を含む配列を返します。継承されたプロトタイププロパティの値も含まれます。

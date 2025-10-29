@@ -1,58 +1,61 @@
 # toCamelCaseKeys
 
-オブジェクトのプロパティを[キャメルケース](../string/camelCase.md)（`camelCase`）に変換した新しいオブジェクトを作成します。
+オブジェクトと配列のすべてのキーをキャメルケース表記に変換した新しいオブジェクトを返します。
 
-ネストされたオブジェクト内のプロパティもすべてキャメルケースに変換されます。
-
-## インターフェース
+キャメルケース表記は、複数の単語で構成される識別子の最初の単語を小文字で書き、続く単語の最初の文字を大文字で連結する命名規則です。例えば`camelCase`のように書きます。
 
 ```typescript
-function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T>;
+const camelCased = toCamelCaseKeys(obj);
 ```
 
-### パラメータ
+## 参照
 
-- `obj` (`T`): キーを変換するオブジェクト.
+### `toCamelCaseKeys(obj)`
 
-### 戻り値
-
-(`ToCamelCaseKeys<T>`): すべてのキーがキャメルケースに変換された新しいオブジェクト。
-
-## 例
+オブジェクトのすべてのキーをキャメルケースに変換したい時に`toCamelCaseKeys`を使用してください。ネストされたオブジェクトと配列内のオブジェクトも再帰的に変換されます。
 
 ```typescript
-// Example with objects
-const obj = { user_id: 1, first_name: 'John' };
-const result = toCamelCaseKeys(obj);
-// result will be { userId: 1, firstName: 'John' }
+import { toCamelCaseKeys } from 'es-toolkit/object';
 
-// Example with arrays of objects
-const arr = [
+// 基本的なオブジェクト変換
+const obj = { user_id: 1, first_name: 'John', last_name: 'Doe' };
+const result = toCamelCaseKeys(obj);
+// resultは{ userId: 1, firstName: 'John', lastName: 'Doe' }になります
+
+// 配列内のオブジェクトも変換
+const users = [
   { user_id: 1, first_name: 'John' },
   { user_id: 2, first_name: 'Jane' },
 ];
-const arrResult = toCamelCaseKeys(arr);
-// arrResult will be [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
+const convertedUsers = toCamelCaseKeys(users);
+// convertedUsersは[{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]になります
 
-// Example with nested objects
+// ネストされたオブジェクトも完全に変換
 const nested = {
   user_data: {
     user_id: 1,
-    user_address: {
-      street_name: 'Main St',
-      zip_code: '12345',
+    contact_info: {
+      email_address: 'john@example.com',
+      phone_number: '123-456-7890',
     },
   },
 };
 const nestedResult = toCamelCaseKeys(nested);
-// nestedResult will be:
-// {
+// nestedResultは{
 //   userData: {
 //     userId: 1,
-//     userAddress: {
-//       streetName: 'Main St',
-//       zipCode: '12345'
+//     contactInfo: {
+//       emailAddress: 'john@example.com',
+//       phoneNumber: '123-456-7890'
 //     }
 //   }
-// }
+// }になります
 ```
+
+#### パラメータ
+
+- `obj` (`T`): キーをcamelCaseに変換するオブジェクト、配列、またはプリミティブ値です。
+
+#### 戻り値
+
+(`ToCamelCaseKeys<T>`): すべてのキーがcamelCaseに変換された新しいオブジェクトを返します。

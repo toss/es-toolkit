@@ -1,47 +1,59 @@
 # fill
 
-배열의 요소를 지정된 값으로 채워요. 시작 위치부터 끝 위치까지의 요소들을 제공된 값으로 대체해요.
-
-이 함수는 원본 배열을 변경하고, 제공된 값으로 시작 인덱스부터 끝 인덱스까지의 요소를 대체해요.
-시작 또는 끝 인덱스를 제공하지 않으면 배열 전체를 채워요.
-
-음수 인덱스를 사용할 수도 있어요. 이 경우 배열의 끝에서부터 인덱스를 계산해요.
-
-## 인터페이스
+배열의 요소를 지정된 값으로 채워요. 원본 배열을 직접 수정해요.
 
 ```typescript
-function fill<T>(array: unknown[], value: T): T[];
-function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
-function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
+const filled = fill(arr, value, start, end);
 ```
 
-### 파라미터
+::: info 원본 배열을 수정하지 않으려면 [`toFilled`](./toFilled.md)를 사용하세요.
 
-- `array` (`Array<T | U>`): 채울 배열이에요.
-- `value` (`U`): 배열을 채울 값이에요.
-- `start` (`number`, 기본값 = 0): 시작 위치예요. 기본값은 0이에요.
-- `end` (`number`, 기본값 = array.length): 끝 위치예요. 기본값은 배열의 길이예요.
+`toFilled`는 원본 배열을 수정하는 대신 새 배열을 반환해요.
 
-### 반환 값
+:::
 
-(`Array<T | U>`): 채워진 값이 있는 배열을 반환해요.
+## 레퍼런스
 
-## 예시
+### `fill(arr, value, start?, end?)`
+
+배열의 특정 범위를 지정된 값으로 채우고 싶을 때 `fill`을 사용하세요. 시작 위치부터 끝 위치 직전까지의 요소들을 제공된 값으로 대체해요. 시작이나 끝 위치를 지정하지 않으면 배열 전체를 채워요.
 
 ```typescript
+import { fill } from 'es-toolkit/array';
+
+// 배열 전체를 'a'로 채워요.
 const array1 = [1, 2, 3];
-const result1 = fill(array1, 'a');
-// result1는 ['a', 'a', 'a']가 돼요.
+fill(array1, 'a');
+// Returns: ['a', 'a', 'a']
 
+// 빈 배열을 2로 채워요.
 const array2 = Array(3);
-const result2 = fill(array2, 2);
-// result2는 [2, 2, 2]가 돼요.
+fill(array2, 2);
+// Returns: [2, 2, 2]
 
+// 인덱스 1부터 3 직전까지 '*'로 채워요.
 const array3 = [4, 6, 8, 10];
-const result3 = fill(array3, '*', 1, 3);
-// result3는 [4, '*', '*', 10]가 돼요.
-
-const array4 = [1, 2, 3];
-const result4 = fill(array4, '*', -2, -1);
-// result4는 [1, '*', 3]가 돼요.
+fill(array3, '*', 1, 3);
+// Returns: [4, '*', '*', 10]
 ```
+
+음수 인덱스를 사용할 수도 있어요. 음수 인덱스는 배열의 끝에서부터 계산해요.
+
+```typescript
+import { fill } from 'es-toolkit/array';
+
+const array = [1, 2, 3];
+fill(array, '*', -2, -1);
+// Returns: [1, '*', 3]
+```
+
+#### 파라미터
+
+- `arr` (`Array<T | U>`): 채울 배열이에요.
+- `value` (`U`): 배열을 채울 값이에요.
+- `start` (`number`, 선택): 시작 위치예요. 기본값은 `0`이에요.
+- `end` (`number`, 선택): 끝 위치예요. 기본값은 배열의 길이예요.
+
+#### 반환 값
+
+(`Array<T | U>`): 값으로 채워진 원본 배열을 반환해요.

@@ -1,89 +1,93 @@
 # isEqual
 
-두 값이 동일한지 확인해요. `Date`, `RegExp` 같은 깊은 객체 비교도 지원해요.
-
-## 인터페이스
+두 값이 깊게 동일한지 확인해요.
 
 ```typescript
-function isEqual(a: unknown, b: unknown): boolean;
+const result = isEqual(a, b);
 ```
 
-## 파라미터
+## 레퍼런스
 
-- `a` (`unknown`): 비교할 첫 번째 값.
-- `b` (`unknown`): 비교할 두 번째 값.
+### `isEqual(a, b)`
 
-## 반환 값
+객체, 배열, Date, RegExp 등을 포함해서 두 값이 깊게 동일한지 확인하고 싶을 때 `isEqual`을 사용하세요. 참조가 다르더라도 내용이 같으면 `true`를 반환해요. 단위 테스트나 데이터 비교에 유용해요.
 
-(`boolean`): 두 값이 동일하면 `true`, 그렇지 않으면 `false`를 반환해요.
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
 
-## 예시
-
-### 예시 1: 원시 타입 값 비교
-
-```javascript
+// 원시 타입 비교
 isEqual(1, 1); // true
 isEqual('hello', 'hello'); // true
 isEqual(true, true); // true
-isEqual(1, 2); // false
-isEqual('hello', 'world'); // false
-isEqual(true, false); // false
-```
 
-### 예시 2: 특수 경우 비교
-
-```javascript
+// 특수 값 처리
 isEqual(NaN, NaN); // true
 isEqual(+0, -0); // true
 ```
 
-### 예시 3: 날짜 객체 비교
+객체와 배열의 깊은 비교를 지원해요.
 
-```javascript
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
+
+// 깊은 객체 비교
+const obj1 = { a: 1, b: { c: 2, d: [3, 4] } };
+const obj2 = { a: 1, b: { c: 2, d: [3, 4] } };
+isEqual(obj1, obj2); // true
+
+// 배열 비교
+const arr1 = [1, 2, [3, 4]];
+const arr2 = [1, 2, [3, 4]];
+isEqual(arr1, arr2); // true
+```
+
+Date, RegExp, Map, Set 같은 객체들도 비교할 수 있어요.
+
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
+
+// 날짜 비교
 const date1 = new Date('2020-01-01');
 const date2 = new Date('2020-01-01');
 isEqual(date1, date2); // true
 
-const date3 = new Date('2021-01-01');
-isEqual(date1, date3); // false
-```
-
-### 예시 4: 정규 표현식 객체 비교
-
-```javascript
+// 정규식 비교
 const regex1 = /hello/g;
 const regex2 = /hello/g;
 isEqual(regex1, regex2); // true
 
-const regex3 = /hello/i;
-isEqual(regex1, regex3); // false
+// Map과 Set 비교
+const map1 = new Map([['key', 'value']]);
+const map2 = new Map([['key', 'value']]);
+isEqual(map1, map2); // true
+
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2, 3]);
+isEqual(set1, set2); // true
 ```
 
-### 예시 5: 객체 비교
+단위 테스트에서 자주 사용돼요.
 
-```javascript
-const obj1 = { a: 1, b: { c: 2 } };
-const obj2 = { a: 1, b: { c: 2 } };
-isEqual(obj1, obj2); // true
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
 
-const obj3 = { a: 1, b: { c: 3 } };
-isEqual(obj1, obj3); // false
+function testApiResponse() {
+  const expected = { status: 200, data: { message: 'success' } };
+  const actual = { status: 200, data: { message: 'success' } };
 
-const obj4 = { a: 1, b: 2 };
-const obj5 = { a: 1, c: 2 };
-isEqual(obj4, obj5); // false
+  if (isEqual(expected, actual)) {
+    console.log('테스트 통과!');
+  } else {
+    console.log('테스트 실패!');
+  }
+}
 ```
 
-### 예시 6: 배열 비교
+#### 파라미터
 
-```javascript
-const arr1 = [1, 2, 3];
-const arr2 = [1, 2, 3];
-isEqual(arr1, arr2); // true
+- `a` (`unknown`): 비교할 첫 번째 값이에요.
+- `b` (`unknown`): 비교할 두 번째 값이에요.
 
-const arr3 = [1, 2, 4];
-isEqual(arr1, arr3); // false
+#### 반환 값
 
-const arr4 = [1, 2];
-isEqual(arr1, arr4); // false
-```
+(`boolean`): 두 값이 깊게 동일하면 `true`, 그렇지 않으면 `false`를 반환해요.

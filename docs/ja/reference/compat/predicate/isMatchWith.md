@@ -1,83 +1,31 @@
-# isMatchWith
+# isMatchWith (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-与えられた比較関数を使用して、`target` と `source` の深い比較による一致を確認します。比較関数を使用して値の一致を細かく制御できます。
-
-この関数は2つの値を再帰的に走査し、各プロパティ-値のペアごとにカスタム比較関数を呼び出します。比較関数がブール値を返す場合はその結果を直接使用し、`undefined` を返す場合は [isMatch](./isMatch.md) で使用される既定の比較関数を使用します。
-
-データ型によって値の比較方法が異なります：
-
-- **オブジェクト**: `source` のすべてのプロパティが `target` に存在し一致する場合は `true`
-- **配列**: `source` 配列のすべての要素が `target` 配列で見つかる場合は `true` (順序は関係なし)
-- **Map**: `source` Map のすべてのキー-値ペアが `target` Map に存在し一致する場合は `true`
-- **Set**: `source` Set のすべての要素が `target` Set で見つかる場合は `true`
-- **関数**: 厳密等価演算子(`===`)で比較し、関数にプロパティがある場合はオブジェクトとして比較
-- **プリミティブ値**: 厳密等価演算子(`===`)で比較
-
-特別なケース：
-
-- `source` が空のオブジェクト、配列、Map、Set の場合、常にどの `target` に対しても `true` を返します
-- 自己参照オブジェクトは内部スタックを使用して無限再帰を防ぎます
-
-## インターフェース
+カスタム比較関数を使用してオブジェクトが部分的に一致するかどうかを確認します。
 
 ```typescript
-function isMatchWith(
-  target: unknown,
-  source: unknown,
-  compare?: (objValue: any, srcValue: any, key: PropertyKey, object: any, source: any, stack?: Map<any, any>) => unknown
-): boolean;
+const result = isMatchWith(target, source, customizer);
 ```
 
-### パラメータ
+## 参照
 
-- `target` (`unknown`): 一致を確認する値
-- `source` (`unknown`): 一致を比較するパターン/テンプレート
-- `compare` (`function`, オプション): オプションのカスタム比較関数。以下の引数を受け取ります:
-  - `objValue`: 現在のパスの target 値
-  - `srcValue`: 現在のパスの source 値
-  - `key`: 比較中のプロパティキーまたは配列インデックス
-  - `object`: target の親オブジェクト/配列
-  - `source`: source の親オブジェクト/配列
-  - `stack`: 循環参照検出に使用される内部 Map
-    一致する場合は `true`、一致しない場合は `false`、デフォルトの動作を継続する場合は `undefined` を返す必要があります
+### `isMatchWith(target, source, customizer)`
 
-### 戻り値
-
-(`boolean`): オブジェクトが一致する場合は `true`、そうでなければ `false` を返します。
-
-## 例
-
-### カスタム比較関数なしの比較
+カスタム比較ロジックが必要な場合に `isMatchWith` を使用してください。各プロパティの比較について直接制御することができます。
 
 ```typescript
-// Basic matching without custom comparator
-isMatchWith({ a: 1, b: 2 }, { a: 1 }); // true
-isMatchWith([1, 2, 3], [1, 3]); // true
-```
+import { isMatchWith } from 'es-toolkit/compat';
 
-### 大文字小文字を区別しない文字列の比較
-
-```typescript
+// 大文字小文字を区別しない文字列比較
 const caseInsensitiveCompare = (objVal, srcVal) => {
   if (typeof objVal === 'string' && typeof srcVal === 'string') {
     return objVal.toLowerCase() === srcVal.toLowerCase();
   }
-  return undefined; // Use default behavior for non-strings
+  return undefined; // デフォルト動作を使用
 };
 
-isMatchWith({ name: 'JOHN', age: 30 }, { name: 'john' }, caseInsensitiveCompare); // true
-```
+isMatchWith({ name: 'ALICE', age: 25 }, { name: 'alice' }, caseInsensitiveCompare); // true
 
-### 数値範囲を比較するカスタム比較関数の定義
-
-```typescript
-// Custom comparison for range matching
+// 数値範囲比較
 const rangeCompare = (objVal, srcVal, key) => {
   if (key === 'age' && typeof srcVal === 'object' && srcVal.min !== undefined) {
     return objVal >= srcVal.min && objVal <= srcVal.max;
@@ -86,4 +34,41 @@ const rangeCompare = (objVal, srcVal, key) => {
 };
 
 isMatchWith({ name: 'John', age: 25 }, { age: { min: 18, max: 30 } }, rangeCompare); // true
+
+// 配列長比較
+const lengthCompare = (objVal, srcVal, key) => {
+  if (key === 'items' && Array.isArray(objVal) && typeof srcVal === 'number') {
+    return objVal.length === srcVal;
+  }
+  return undefined;
+};
+
+isMatchWith({ items: ['a', 'b', 'c'], count: 3 }, { items: 3 }, lengthCompare); // true
+
+// 複雑な条件付き比較
+const conditionalCompare = (objVal, srcVal, key, object, source) => {
+  // 特定のキーでのみ特別なロジックを適用
+  if (key === 'status') {
+    return srcVal === 'active' || objVal === 'any';
+  }
+
+  // ネストしたオブジェクトでの特別な処理
+  if (typeof srcVal === 'object' && srcVal !== null && objVal?.special) {
+    return srcVal.id === objVal.special;
+  }
+
+  return undefined; // デフォルト動作
+};
+
+isMatchWith({ user: { special: 123 }, status: 'any' }, { user: { id: 123, status: 'active' } }, conditionalCompare); // true
 ```
+
+#### パラメータ
+
+- `target` (`unknown`): 一致するかどうかを確認するオブジェクトです。
+- `source` (`unknown`): 一致パターンとなるオブジェクトです。
+- `customizer` (`function`, オプション): 比較ロジックをカスタマイズする関数です。`true`、`false`、または `undefined` を返す必要があります。
+
+#### 戻り値
+
+(`boolean`): targetがsourceにカスタムロジックで部分的に一致する場合は `true`、そうでなければ `false` を返します。

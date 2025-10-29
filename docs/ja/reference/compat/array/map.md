@@ -1,96 +1,86 @@
-# map
+# map (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.map`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`map`関数は`null`や`undefined`の処理、オブジェクトの反復処理、プロパティ抽出などの追加機能により遅く動作します。配列を変換する場合、JavaScriptの組み込み`Array.prototype.map`メソッドの方が高速でシンプルです。
+
+代わりに、より高速でモダンな`Array.prototype.map`を使用してください。
+
 :::
-配列の各要素を変換して新しい配列を返します。
 
-各要素を変換する方法は [iteratee](../util/iteratee.md) 関数の動作に従って指定できます。
-
-- **変換関数**: 各要素に対して指定された関数を実行し、その結果に変換します。
-- **プロパティ名**: 各要素から指定されたプロパティ名を選択します。
-- **プロパティ-値ペア**: 各要素のプロパティが指定された値と一致するかどうかを真偽値で返します。
-- **部分オブジェクト**: 各要素が部分オブジェクトのプロパティと値に一致するかどうかを真偽値で返します。
-
-## インターフェース
+配列またはオブジェクトの各要素を変換して新しい配列を作成します。
 
 ```typescript
-function map<T, U>(arr: T[], iteratee: (value: T, index: number, arr: T[]) => U): U[];
-function map<T>(arr: T[], iteratee: Partial<T>): boolean[];
-function map<T>(arr: T[], iteratee: [keyof T, unknown]): boolean[];
-function map<T, K extends keyof T>(arr: T[], iteratee: K): Array<T[K]>;
-function map<T>(arr: T[], iteratee?: null | undefined): T[];
-
-function map<T extends object, U>(object: T, iteratee: (value: T[keyof T], key: string, object: T) => U): U[];
-function map<T>(object: T, iteratee: Partial<T[keyof T]>): boolean[];
-function map<T>(object: T, iteratee: [keyof T[keyof T], unknown]): boolean[];
-function map<T, K extends keyof T[keyof T]>(object: T, iteratee: K): Array<T[keyof T][K]>;
-function map<T extends object, U>(object: T, iteratee?: null | undefined): U[];
+const mapped = map(collection, iteratee);
 ```
 
-### パラメータ
+## 参照
 
-- `arr` (`T[]`) または `object` (`T`): 変換する配列またはオブジェクト。
+### `map(collection, iteratee)`
 
-::: info `arr` は `ArrayLike<T>` であるか、`null` または `undefined` である可能性があります
-
-lodash と完全に互換性があるように、`map` 関数は `arr` を次のように処理します:
-
-- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
-- `arr` が `null` または `undefined` の場合、空の配列と見なされます。
-
-:::
-
-::: info `object` は `null` または `undefined` である可能性があります
-
-lodash と完全に互換性があるように、`map` 関数は `object` を次のように処理します:
-
-- `object` が `null` または `undefined` の場合、空のオブジェクトに変換されます。
-
-:::
-
-- `iteratee`:
-
-  - 配列の場合:
-
-    - **変換関数** (`(value: T, index: number, arr: T[]) => U`): 配列の各要素を変換する関数。
-    - **プロパティ名** (`keyof T`): 各要素から選択するプロパティ名。
-    - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
-    - **部分オブジェクト** (`Partial<T>`): 一致させるプロパティと値を指定した部分オブジェクト。
-
-  - オブジェクトの場合:
-
-    - **変換関数** (`(item: T[keyof T], index: number, object: T) => unknown`): オブジェクトの各値を変換する関数。
-    - **プロパティ名** (`keyof T[keyof T]`): オブジェクトの各値から選択するプロパティ名。
-    - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
-    - **部分オブジェクト** (`Partial<T[keyof T]>`): 一致させるプロパティと値を指定した部分オブジェクト。
-
-### 戻り値
-
-(`any[]`): 変換された値の新しい配列。
-
-## 使用例
+配列、オブジェクト、または配列風オブジェクトの各要素を変換したいときに`map`を使用してください。各要素に対して反復関数を実行し、結果を新しい配列として返します。
 
 ```typescript
-// 変換関数使用
-const array = [1, 2, 3];
-map(array, value => value * 2); // => [2, 4, 6]
+import { map } from 'es-toolkit/compat';
 
-// イテレータでプロパティキーを使用
-const objects = [{ a: 1 }, { a: 2 }, { a: 3 }];
-map(objects, 'a'); // => [1, 2, 3]
+// 配列の各要素を2倍にする
+map([1, 2, 3], x => x * 2);
+// Returns: [2, 4, 6]
 
-// イテレータでオブジェクトを使用
-const objects = [{ a: 1 }, { a: 2 }, { a: 3 }];
-map(objects, { a: 1 }); // => [true, false, false]
+// オブジェクトの値を変換する
+const obj = { a: 1, b: 2 };
+map(obj, (value, key) => `${key}:${value}`);
+// Returns: ['a:1', 'b:2']
 
-// イテレータなし
-const numbers = [1, 2, 3];
-map(numbers); // => [1, 2, 3]
-
-// オブジェクトでコレクションを使用
-const obj = { a: 1, b: 2, c: 3 };
-map(obj, (value, key) => `${key}: ${value}`); // => ['a: 1', 'b: 2', 'c: 3']
+// プロパティを抽出する
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 },
+];
+map(users, 'name');
+// Returns: ['John', 'Jane']
 ```
+
+`null`や`undefined`は空の配列として扱われます。
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+map(null, x => x); // []
+map(undefined, x => x); // []
+```
+
+文字列でプロパティパスを指定すると、ネストされたプロパティも抽出できます。
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+const users = [{ info: { name: 'John' } }, { info: { name: 'Jane' } }];
+map(users, 'info.name');
+// Returns: ['John', 'Jane']
+```
+
+オブジェクトを渡すと、各要素がそのオブジェクトと一致するかを確認します。
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 },
+];
+map(users, { age: 30 });
+// Returns: [true, false]
+```
+
+#### パラメータ
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 反復処理する配列またはオブジェクトです。
+- `iteratee` (`function | string | object`, オプション): 各要素に対して実行する関数、プロパティパス、または一致させるオブジェクトです。提供しない場合、各要素をそのまま返します。
+  - 関数の場合、`(value, key, collection)`の形式で呼び出されます。
+  - 文字列の場合、そのプロパティを抽出します。
+  - オブジェクトの場合、各要素がオブジェクトと一致するかを確認します。
+
+#### 戻り値
+
+(`U[]`): 変換された値の新しい配列を返します。

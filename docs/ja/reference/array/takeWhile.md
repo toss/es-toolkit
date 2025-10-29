@@ -1,32 +1,54 @@
 # takeWhile
 
-与えられた条件関数が`true`を返す先頭の要素を含む新しい配列を返します。
-条件を満たさない要素が現れると停止します。
-
-## インターフェース
+条件関数が真を返す間、配列の最初から要素を取得して新しい配列を作ります。
 
 ```typescript
-function takeWhile<T>(arr: T[], shouldContinueTaking: (element: T) => boolean): T[];
+const taken = takeWhile(arr, predicate);
 ```
 
-### パラメータ
+## 参照
+
+### `takeWhile(arr, predicate)`
+
+配列の最初から特定の条件を満たす要素だけが必要な場合は `takeWhile` を使用してください。条件を満たさない最初の要素に出会うと取得を停止します。
+
+```typescript
+import { takeWhile } from 'es-toolkit/array';
+
+// 3より小さい要素だけを取得します。
+takeWhile([1, 2, 3, 4], x => x < 3);
+// Returns: [1, 2]
+
+// 3より大きい要素は最初からないので空の配列を返します。
+takeWhile([1, 2, 3, 4], x => x > 3);
+// Returns: []
+```
+
+オブジェクト配列でも使用できます。
+
+```typescript
+import { takeWhile } from 'es-toolkit/array';
+
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 35 },
+  { name: 'David', age: 40 },
+];
+
+// 30歳未満のユーザーだけを取得します。
+takeWhile(users, user => user.age < 30);
+// Returns: [{ name: 'Alice', age: 25 }]
+```
+
+#### パラメータ
 
 - `arr` (`T[]`): 要素を取得する配列です。
-- `shouldContinueTaking` (`(item: T) => boolean`) 各要素と共に呼び出される条件関数です。この関数が`true`を返す間、要素が結果に含まれます。
+- `predicate` (`(element: T) => boolean`): 各要素に対して呼び出される条件関数です。この関数が真を返す間、要素を取得します。
 
-### 戻り値
+#### 戻り値
 
-(`T[]`) 条件関数が`true`を返す間、先頭から取得した要素を含む新しい配列です。
-
-## 例
-
-```typescript
-// [1, 2] を返します
-takeWhile([1, 2, 3, 4], x => x < 3);
-
-// [] を返します
-takeWhile([1, 2, 3, 4], x => x > 3);
-```
+(`T[]`): 条件関数が真を返す間、最初から取得した要素を含む新しい配列を返します。
 
 ## Lodash 互換性
 

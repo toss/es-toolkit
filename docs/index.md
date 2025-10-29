@@ -35,7 +35,7 @@ features:
   - title: Robust types
     details: es-toolkit offers simple yet robust types for all functions.
   - title: Widely adopted
-    details: es-toolkit is trusted and used by popular open-source projects like Storybook, Recharts, ink, and CKEditor.
+    details: es-toolkit is trusted and used by popular open-source projects like Storybook, Recharts, ink, MUI, and CKEditor.
   - title: Battle-tested
     details: es-toolkit has 100% test coverage, ensuring maximum robustness.
   - title: Comprehensive runtime support

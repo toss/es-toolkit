@@ -1,32 +1,57 @@
-# gt
+# gt (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `>` 演算子を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `gt` 関数は `toNumber` 関数呼び出しと文字列型確認などの追加処理により遅く動作します。
+
+代わりに、より高速で現代的な `>` 演算子を使用してください。
+
 :::
 
 値が他の値より大きいかどうかを確認します。
 
-## インターフェース
-
 ```typescript
-function gt(value: any, other: any): boolean;
+const result = gt(value, other);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`any`): 比較する値。
-- `other` (`any`): 比較するもう一方の値。
+### `gt(value, other)`
 
-### 戻り値
-
-(`boolean`): 値が他の値より大きい場合は `true`、それ以外の場合は `false`。
-
-## 例
+二つの値を比較して最初の値が二番目の値より大きいかどうかを確認したい時に`gt`を使用してください。文字列同士は辞書順で比較し、他の型は数値に変換して比較します。
 
 ```typescript
-gt(3, 1); // true
-gt(3, 3); // false
-gt(1, 3); // false
+import { gt } from 'es-toolkit/compat';
+
+gt(3, 1);
+// Returns: true
+
+gt(3, 3);
+// Returns: false
+
+gt(1, 3);
+// Returns: false
+
+// 文字列比較 (辞書順)
+gt('def', 'abc');
+// Returns: true
+
+gt('abc', 'def');
+// Returns: false
+
+// 他の型は数値に変換されて比較
+gt('10', 5);
+// Returns: true (10 > 5)
+
+gt(1, null);
+// Returns: true (1 > 0)
 ```
+
+#### パラメータ
+
+- `value` (`unknown`): 比較する最初の値です。
+- `other` (`unknown`): 比較する二番目の値です。
+
+#### 戻り値
+
+(`boolean`): 最初の値が二番目の値より大きければ`true`、そうでなければ`false`を返します。
