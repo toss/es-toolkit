@@ -170,7 +170,7 @@ describe('throttle', () => {
     obj.logWithThrottle();
     obj.logWithThrottle();
 
-    await delay(throttleMs + 1);
+    vi.advanceTimersByTime(throttleMs + 1);
     expect(capturedMsg).toBe('hello world');
   });
 });
