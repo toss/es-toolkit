@@ -1,69 +1,71 @@
-# forIn
+# forIn (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.keys`와 `for...in` 반복문을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `forIn` 함수는 `null`이나 `undefined` 처리, 기본 `iteratee` 설정 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.keys`와 `for...in` 반복문을 사용하세요.
+
 :::
 
-객체를 순회하면서 각 속성에 대해 `iteratee` 함수를 호출해요.
-
-상속 받은 속성을 포함한 문자열 키를 가진 속성을 순회해요.
-
-`iteratee` 함수가 `false`를 반환하면 순회를 조기에 종료해요.
-
-## 인터페이스
+객체의 모든 속성(상속된 속성 포함)을 반복하면서 각 속성에 대해 함수를 호출해요.
 
 ```typescript
-function forIn<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
-function forIn<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forIn(obj, iteratee);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `object` (`T | null | undefined`): 순회할 객체
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 각 속성마다 호출될 함수. 기본값은 `identity` 함수
+### `forIn(object, iteratee)`
 
-### 반환 값
-
-(`T | null | undefined`): `object`를 반환해요.
-
-## 예시
+객체의 모든 속성을 반복하면서 `iteratee` 함수를 호출해요. 객체의 고유 속성뿐만 아니라 프로토타입 체인을 통해 상속된 속성까지 모두 반복해요. `iteratee` 함수가 `false`를 반환하면 반복을 중단해요.
 
 ```typescript
 import { forIn } from 'es-toolkit/compat';
 
-function Shape() {
-  this.x = 0;
-  this.y = 0;
+// 객체의 모든 속성 반복
+const obj = { a: 1, b: 2 };
+forIn(obj, (value, key) => {
+  console.log(key, value);
+});
+// 출력: 'a' 1, 'b' 2
+
+// 상속된 속성도 포함하여 반복
+function Parent() {
+  this.inherited = 'value';
 }
+Parent.prototype.protoProperty = 'proto';
 
-Shape.prototype.move = function (x, y) {
-  this.x += x;
-  this.y += y;
-};
+const child = new Parent();
+child.own = 'ownValue';
 
-// Shape의 인스턴스 생성
-const square = new Shape();
-
-// 객체의 모든 열거 가능한 속성(상속된 속성 포함)에 대해 반복
-forIn(square, function (value, key) {
+forIn(child, (value, key) => {
   console.log(key, value);
 });
-// 출력:
-// 'x', 0
-// 'y', 0
-// 'move', [Function]
+// 출력: 'inherited' 'value', 'own' 'ownValue', 'protoProperty' 'proto'
 
-// 반복자 함수가 false를 반환하면 반복이 중단됨
-forIn(square, function (value, key) {
+// 조건에 따른 조기 종료
+forIn(obj, (value, key) => {
   console.log(key, value);
-  return key !== 'y'; // 'y'를 만나면 중단
+  return key !== 'a'; // 'a' 이후 중단
 });
-// 출력:
-// 'x', 0
-// 'y', 0
+// 출력: 'a' 1
 ```
+
+`null`이나 `undefined`는 그대로 반환해요.
+
+```typescript
+import { forIn } from 'es-toolkit/compat';
+
+forIn(null, iteratee); // null
+forIn(undefined, iteratee); // undefined
+```
+
+#### 파라미터
+
+- `object` (`T | null | undefined`): 반복할 객체예요.
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, 선택): 각 속성에 대해 호출할 함수예요. 기본값은 `identity` 함수예요.
+
+#### 반환 값
+
+(`T | null | undefined`): 원본 객체를 반환해요.

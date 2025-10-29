@@ -1,34 +1,48 @@
 # isMap
 
-Checks if the given value is a `Map`.
-
-This function tests whether the provided value is an instance of `Map`.
-It returns `true` if the value is a `Map`, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Map`.
-
-## Signature
+Checks if a value is a Map.
 
 ```typescript
-function isMap(value: unknown): value is Map<any, any>;
+const result = isMap(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to check if it is a `Map`.
+### `isMap(value)`
 
-### Returns
-
-(`value is Map<any, any>`): true if the value is a `Map`, false otherwise.
-
-## Examples
+Use `isMap` when you want to check if a value is a Map instance. It uses the `instanceof` operator to check if it's a `Map`.
 
 ```typescript
-const value1 = new Map();
-const value2 = new Set();
-const value3 = new WeakMap();
+import { isMap } from 'es-toolkit/predicate';
 
-console.log(isMap(value1)); // true
-console.log(isMap(value2)); // false
-console.log(isMap(value3)); // false
+// Map instance
+const map = new Map([['key', 'value']]);
+console.log(isMap(map)); // true
+
+// Non-Map values
+console.log(isMap(new Set())); // false
+console.log(isMap(new WeakMap())); // false
+console.log(isMap({})); // false
+console.log(isMap([])); // false
+console.log(isMap(null)); // false
 ```
+
+It can also be used as a type guard in TypeScript.
+
+```typescript
+function processValue(value: unknown) {
+  if (isMap(value)) {
+    // Now value is narrowed to Map<any, any> type
+    console.log(value.size);
+    value.set('new-key', 'new-value');
+  }
+}
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's a `Map`.
+
+#### Returns
+
+(`value is Map<any, any>`): Returns `true` if the value is a Map, `false` otherwise.

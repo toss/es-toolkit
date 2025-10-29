@@ -1,37 +1,57 @@
-# isNumber
+# isNumber (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `typeof` 演算子を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `isNumber` 関数はNumber オブジェクトラッパーの処理により複雑です。
+
+代わりにより簡単で現代的な `typeof value === 'number'` を使用してください。
+
 :::
 
-与えられた値が数値かどうかをチェックします。
-
-この関数はTypeScriptで型述語としても機能し、引数の型を `number` に狭めます。
-
-## インターフェース
+値が数値かどうかを確認します。
 
 ```typescript
-function isNumber(value?: unknown): value is number;
+const result = isNumber(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): 数値かどうかをチェックする値。
+### `isNumber(value)`
 
-### 戻り値
-
-(`value is number`): `value` が数値の場合は `true` を、それ以外の場合は `false` を返します。
-
-## 例
+値が数値かどうかを確認したい場合に `isNumber` を使用してください。この関数はプリミティブ数値とNumberオブジェクトの両方を数値として認識します。
 
 ```typescript
-const value1 = 123;
-const value2 = 'abc';
-const value3 = true;
+import { isNumber } from 'es-toolkit/compat';
 
-console.log(isNumber(value1)); // true
-console.log(isNumber(value2)); // false
-console.log(isNumber(value3)); // false
+// プリミティブ数値
+isNumber(123);
+// Returns: true
+
+isNumber(3.14);
+// Returns: true
+
+isNumber(NaN);
+// Returns: true
+
+// Number オブジェクト
+isNumber(new Number(42));
+// Returns: true
+
+// その他の型
+isNumber('123');
+// Returns: false
+
+isNumber(true);
+// Returns: false
+
+isNumber(null);
+// Returns: false
 ```
+
+#### パラメータ
+
+- `value` (`unknown`): 数値かどうかを確認する値です。
+
+#### 戻り値
+
+(`value is number`): 値が数値の場合は `true`、そうでなければ `false` を返します。

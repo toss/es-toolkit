@@ -1,40 +1,50 @@
-# isArray
+# isArray (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.isArray`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `isArray` function operates slowly due to additional function calls.
+
+Instead, use the faster and modern `Array.isArray`.
+
 :::
 
-Checks if the given value is an array.
-
-This function tests whether the provided value is an array or not.
-It returns `true` if the value is an array, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to an array.
-
-## Signature
+Checks if a value is an array.
 
 ```typescript
-function isArray(value?: unknown): value is any[];
+const result = isArray(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to test if it is an array.
+### `isArray(value)`
 
-### Returns
-
-(`value is any[]`): `true` if the value is an array, `false` otherwise.
-
-## Examples
+Use `isArray` when you want to check if a value is an array. This function also works as a type guard in TypeScript.
 
 ```typescript
-const value1 = [1, 2, 3];
-const value2 = 'abc';
-const value3 = () => {};
+import { isArray } from 'es-toolkit/compat';
 
-console.log(isArray(value1)); // true
-console.log(isArray(value2)); // false
-console.log(isArray(value3)); // false
+// Array check
+isArray([1, 2, 3]);
+// Returns: true
+
+isArray('abc');
+// Returns: false
+
+isArray(() => {});
+// Returns: false
+
+// Distinguish from objects
+isArray({ 0: 'a', 1: 'b', length: 2 });
+// Returns: false
+
+isArray(null);
+// Returns: false
 ```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's an array.
+
+#### Returns
+
+(`value is any[]`): Returns `true` if the value is an array, otherwise `false`.

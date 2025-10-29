@@ -1,65 +1,73 @@
-# overEvery
+# overEvery (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.every` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `overEvery` function incurs additional overhead in the process of converting and checking predicate functions.
+
+Use the faster and more modern `Array.every` method instead.
+
 :::
 
-Creates a function that checks if all of the given predicates return truthy for the provided values.
-
-This function takes multiple predicates, which can either be individual predicate functions or arrays of predicates,
-and returns a new function that checks if all of the predicates return truthy when called with the provided values.
-
-## Signature
+Creates a function that checks if all predicate functions return truthy for the given value.
 
 ```typescript
-function overEvery<T, U extends T, V extends T>(
-  predicate1: (value: T) => value is U,
-  predicate2: (value: T) => value is V
-): (value: T) => value is U & V;
-function overEvery<T>(
-  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
-): (...values: T[]) => boolean;
+const allValidator = overEvery(predicates);
 ```
 
-### Parameters
+## Reference
 
-- `predicates` (`...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>`): -
-  A list of predicates or arrays of predicates. Each predicate is a function that takes one or more values of
-  type `T` and returns a boolean indicating whether the condition is satisfied for those values.
+### `overEvery(...predicates)`
 
-### Returns
-
-(`(...values: T[]) => boolean`): A function that takes a list of values and returns `true` if all of the
-predicates return truthy for the provided values, and `false` otherwise.
-
-## Examples
+Takes multiple predicate functions and creates a function that checks if the given value satisfies all conditions. This is useful for compound condition checking or data validation.
 
 ```typescript
-const func = overEvery(
-  (value) => typeof value === 'string',
-  (value) => value.length > 3
-);
+import { overEvery } from 'es-toolkit/compat';
 
-func("hello"); // true
-func("hi"); // false
-func(42); // false
-
-const func = overEvery([
-  (value) => value.a > 0,
-  (value) => value.b > 0
+// Check string conditions
+const isValidString = overEvery([
+  value => typeof value === 'string',
+  value => value.length > 3,
+  value => value.includes('o'),
 ]);
 
-func({ a: 1, b: 2 }); // true
-func({ a: 0, b: 2 }); // false
+isValidString('hello'); // => true
+isValidString('hi'); // => false (length is 3 or less)
+isValidString('test'); // => false (no 'o')
 
-const func = overEvery(
-  (a, b) => typeof a === 'string' && typeof b === 'string',
-  (a, b) => a.length > 3 && b.length > 3
-);
+// Check number range
+const isInRange = overEvery([
+  num => num >= 0,
+  num => num <= 100,
+  num => num % 1 === 0, // Check if integer
+]);
 
-func("hello", "world"); // true
-func("hi", "world"); // false
-func(1, 10); // false
+isInRange(50); // => true
+isInRange(-5); // => false (less than 0)
+isInRange(150); // => false (greater than 100)
+isInRange(50.5); // => false (not an integer)
 ```
+
+You can also check object properties.
+
+```typescript
+import { overEvery } from 'es-toolkit/compat';
+
+// Check object properties
+const isValidUser = overEvery([
+  'name', // Check if name property is truthy
+  { age: 30 }, // Check if age is 30
+  ['active', true], // Check if active is true
+]);
+
+isValidUser({ name: 'John', age: 30, active: true }); // => true
+isValidUser({ name: '', age: 30, active: true }); // => false (name is empty string)
+isValidUser({ name: 'John', age: 25, active: true }); // => false (age is different)
+```
+
+#### Parameters
+
+- `...predicates` (`Array<Function | string | object | Array>`): The predicate functions to check. Can be functions, property names, objects, or property-value pairs.
+
+#### Returns
+
+(`(...args: any[]) => boolean`): Returns a function that returns `true` if all conditions are satisfied, `false` if any condition is not satisfied.

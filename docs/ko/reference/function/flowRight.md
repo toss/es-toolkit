@@ -1,70 +1,60 @@
 # flowRight
 
-주어진 함수들을 오른쪽에서 왼쪽으로 순서대로 실행하는 새로운 함수를 생성해요. 이전 함수의 결괏값은 다음 함수의 파라미터로 주어져요.
-
-반환된 함수에게 주어진 `this`는 파라미터로 주어진 함수들에게도 전달돼요.
-
-이 메서드는 `flow`와 비슷하지만, 주어진 함수들을 오른쪽에서 왼쪽으로 호출하는 함수를 생성해요.
-
-## 인터페이스
+주어진 함수들을 오른쪽에서 왼쪽으로 순서대로 실행하는 새로운 함수를 만들어요.
 
 ```typescript
-function flowRight<R>(f: () => R): () => R;
-function flowRight<A extends any[], R>(f1: (...args: A) => R): (...args: A) => R;
-function flowRight<A extends any[], R1, R2>(f2: (a: R1) => R2, f1: (...args: A) => R1): (...args: A) => R2;
-function flowRight<A extends any[], R1, R2, R3>(
-  f3: (a: R2) => R3,
-  f2: (a: R1) => R2,
-  f1: (...args: A) => R1
-): (...args: A) => R3;
-function flowRight<A extends any[], R1, R2, R3, R4>(
-  f4: (a: R3) => R4,
-  f3: (a: R2) => R3,
-  f2: (a: R1) => R2,
-  f1: (...args: A) => R1
-): (...args: A) => R4;
-function flowRight<A extends any[], R1, R2, R3, R4, R5>(
-  f5: (a: R4) => R5,
-  f4: (a: R3) => R4,
-  f3: (a: R2) => R3,
-  f2: (a: R1) => R2,
-  f1: (...args: A) => R1
-): (...args: A) => R5;
-function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
+const combined = flowRight(func1, func2, func3);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `funcs` (`(...args: any[]) => any`): 호출할 함수들.
+### `flowRight(...funcs)`
 
-### 반환 값
+여러 함수를 오른쪽에서 왼쪽으로 순서대로 실행하는 새로운 함수를 만들고 싶을 때 `flowRight`를 사용하세요. 이전 함수의 반환 값이 다음 함수의 파라미터로 전달돼요.
 
-(`(...args: any[]) => any`): 주어진 함수들을 오른쪽에서 왼쪽으로 순서대로 실행하는 새로운 함수.
-
-## 예시
+함수를 역순으로 조합하여 데이터 변환 파이프라인을 만들 때 유용해요. `flow`와 반대 방향으로 함수를 실행해요.
 
 ```typescript
-const add = (x: number, y: number) => x + y;
-const square = (n: number) => n * n;
-
-const combined = flowRight(square, add);
-console.log(combined(1, 2)); // 9
-```
-
-## Lodash와 호환성
-
-`es-toolkit/compat`에서 `flowRight`를 가져오면 lodash와 완전히 호환돼요.
-
-- `flowRight`는 파라미터로 개별 함수뿐만 아니라 함수들의 배열도 받을 수 있어요.
-- 제공된 파라미터 중 하나라도 함수가 아니면 `flowRight `는 오류를 발생시켜요.
-
-```typescript
-import { flowRight } from 'es-toolkit/compat';
+import { flowRight } from 'es-toolkit/function';
 
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 const double = (n: number) => n * 2;
 
-const combined = flowRight(double, [square, add]);
-console.log(combined(1, 2)); // => 18
+// 오른쪽에서 왼쪽으로 실행: double -> square -> add
+const combined = flowRight(double, square, add);
+console.log(combined(1, 2)); // 18
+// 실행 순서: add(1, 2) = 3, square(3) = 9, double(9) = 18
+
+// 단일 함수로도 사용 가능해요
+const single = flowRight((x: number) => x + 1);
+console.log(single(5)); // 6
 ```
+
+`this` 컨텍스트도 함수들에게 전달돼요.
+
+```typescript
+import { flowRight } from 'es-toolkit/function';
+
+const context = {
+  multiplier: 3,
+};
+
+function multiply(this: typeof context, x: number) {
+  return x * this.multiplier;
+}
+
+const add = (x: number) => x + 10;
+
+const combined = flowRight(multiply, add).bind(context);
+console.log(combined(5)); // 45
+// 실행 순서: add(5) = 15, multiply(15) = 45
+```
+
+#### 파라미터
+
+- `funcs` (`(...args: any[]) => any`): 조합할 함수들이에요.
+
+#### 반환 값
+
+(`(...args: any[]) => any`): 주어진 함수들을 오른쪽에서 왼쪽으로 순서대로 실행하는 새로운 함수를 반환해요.

@@ -1,34 +1,59 @@
 # isNull
 
-与えられた値がnullかどうかを確認します。
-
-この関数は、与えられた値が`null`かどうかを厳密等価演算子（===）を使用して確認します。
-値が`null`の場合は`true`を、そうでない場合は`false`を返します。
-
-TypeScriptの型ガードとしてよく使用され、パラメータとして与えられた値を`null`型に絞り込むことができます。
-
-## インターフェース
+値が`null`であるかを確認します。
 
 ```typescript
-function isNull(x: unknown): x is null;
+const result = isNull(value);
 ```
 
-### パラメータ
+## 参照
 
-- `x` (`unknown`): nullかどうかを確認する値。
+### `isNull(value)`
 
-### 戻り値
-
-(`x is null`): 値がnullの場合はtrue、そうでない場合はfalse。
-
-## 例
+値が正確に`null`であるかを確認したい場合は、`isNull`を使用してください。厳密等価（`===`）を使用して`null`のみを認識し、undefinedは認識しません。
 
 ```typescript
-const value1 = null;
-const value2 = undefined;
-const value3 = 42;
+import { isNull } from 'es-toolkit/predicate';
 
-console.log(isNull(value1)); // true
-console.log(isNull(value2)); // false
-console.log(isNull(value3)); // false
+// null値
+console.log(isNull(null)); // true
+
+// null以外の値
+console.log(isNull(undefined)); // false
+console.log(isNull(0)); // false
+console.log(isNull('')); // false
+console.log(isNull(false)); // false
+console.log(isNull([])); // false
+console.log(isNull({})); // false
 ```
+
+TypeScriptの型ガードとしても使用できます。
+
+```typescript
+function processValue(value: string | null | undefined) {
+  if (isNull(value)) {
+    // valueはnull型に絞り込まれます
+    console.log('値がnullです');
+  } else {
+    // valueはstring | undefined型に絞り込まれます
+    console.log('値がnullではありません：', value);
+  }
+}
+```
+
+`isNull`は[`isNil`](./isNil.md)と異なり、`undefined`を`false`として扱います。
+
+```typescript
+import { isNil, isNull } from 'es-toolkit/predicate';
+
+console.log(isNull(undefined)); // false
+console.log(isNil(undefined)); // true
+```
+
+#### パラメータ
+
+- `value` (`unknown`): `null`であるかを確認する値です。
+
+#### 戻り値
+
+(`value is null`): 値が`null`の場合は`true`、そうでない場合は`false`を返します。

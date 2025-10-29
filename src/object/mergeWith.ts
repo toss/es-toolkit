@@ -1,5 +1,5 @@
 import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
-import { isObjectLike } from '../compat/predicate/isObjectLike.ts';
+import { isPlainObject } from '../predicate/isPlainObject.ts';
 
 /**
  * Merges the properties of the source object into the target object.
@@ -71,9 +71,17 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
     if (merged !== undefined) {
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
-      target[key] = mergeWith<any, S[keyof T]>(targetValue ?? [], sourceValue, merge);
-    } else if (isObjectLike(targetValue) && isObjectLike(sourceValue)) {
-      target[key] = mergeWith<any, S[keyof T]>(targetValue ?? {}, sourceValue, merge);
+      if (Array.isArray(targetValue)) {
+        target[key] = mergeWith<any, S[keyof T]>(targetValue ?? [], sourceValue, merge);
+      } else {
+        target[key] = mergeWith<any, S[keyof T]>([], sourceValue, merge);
+      }
+    } else if (isPlainObject(sourceValue)) {
+      if (isPlainObject(targetValue)) {
+        target[key] = mergeWith<any, S[keyof T]>(targetValue, sourceValue, merge);
+      } else {
+        target[key] = mergeWith<any, S[keyof T]>({}, sourceValue, merge);
+      }
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
     }

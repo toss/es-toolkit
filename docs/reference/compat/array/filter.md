@@ -1,138 +1,78 @@
-# filter
+# filter (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.filter()`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `filter` function operates slowly due to complex object processing, support for various condition formats, etc.
+
+Instead, use the faster and more modern `Array.prototype.filter()`.
+
 :::
 
-Returns a new array of elements that satisfy the provided condition.
-
-The condition can be specified in several ways:
-
-- **Predicate function**: Runs a function for each element, selecting elements that satisfy the condition.
-- **Partial object**: Selects elements that partially match the provided object.
-- **Property-value pair**: Selects elements where a specified key matches a given value.
-- **Property name**: Selects elements where the specified property name exists.
-
-## Signature
+Creates a new array with elements that satisfy the given condition.
 
 ```typescript
-function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
-function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: T[], doesMatch: PropertyKey): T[];
-
-function filter<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T[];
+const result = filter(collection, predicate);
 ```
 
-### Parameters
+## Reference
 
-- `arr` (`T[]`) or `object` (`T`): The array or object to iterate over.
+### `filter(collection, predicate)`
 
-::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
-
-To ensure full compatibility with lodash, the `filter` function handles `arr` in this way:
-
-- If `arr` is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
-- If `arr` is `null` or `undefined`, it will be treated as an empty array.
-
-:::
-
-- `doesMatch`:
-
-  - For the first `filter` overload with arrays:
-
-    - **Predicate function** (`(item: T, index: number, arr: T[]) => unknown`): A function to check if an element satisfies a condition.
-    - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
-    - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`PropertyKey`): The name of the property to check for in the elements.
-
-  - For the `filter` overloads with objects:
-    - **Predicate function** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): A function that takes an value, its key, and the object, and returns a truthy value if the item matches the criteria.
-    - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
-    - **Property-value pair** (`[keyof T[keyof T], unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
-
-### Returns
-
-(`T[]`): An array of elements that satisfy the condition. If none, an empty array. (`[]`)
-
-## Examples
-
-### Array
+Use `filter` when you want to filter out only elements that satisfy a specific condition from an array or object. The condition can be specified in various formats such as a function, partial object, property-value pair, property name, etc.
 
 ```typescript
 import { filter } from 'es-toolkit/compat';
 
-// Using a predicate function
-filter([1, 2, 3], n => n % 2 === 0);
-// => [2]
-
-// Using a partial object
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-filter(arr, { name: 'Bob' });
-// => [{ id: 2, name: 'Bob' }]
-
-// Using a property-value pair
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-filter(arr, ['name', 'Alice']);
-// => [{ id: 1, name: 'Alice' }]
+// Using a test function
+const numbers = [1, 2, 3, 4, 5];
+filter(numbers, x => x % 2 === 0);
+// Returns: [2, 4]
 
 // Using a property name
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-  { id: 3, age: 28 },
+const users = [
+  { name: 'Alice', active: true },
+  { name: 'Bob', active: false },
+  { name: 'Charlie', active: true },
 ];
-filter(arr, 'name');
-// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+filter(users, 'active');
+// Returns: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
+
+// Using a partial object
+filter(users, { active: true });
+// Returns: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
+
+// Using a property-value pair
+filter(users, ['active', true]);
+// Returns: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
 ```
 
-### Object
+It works the same way for objects, returning an array of values that satisfy the condition.
 
 ```typescript
 import { filter } from 'es-toolkit/compat';
 
-// Using a predicate function
-const obj = { a: 1, b: 2, c: 3 };
-filter(obj, item => item > 2);
-// => [3]
-
-// Using a partial object
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-};
-filter(obj, { name: 'Bob' });
-// => [{ id: 2, name: 'Bob' }]
-
-// Using a property-value pair
-const obj = {
-  alice: { id: 1, name: 'Alice' },
-  bob: { id: 2, name: 'Bob' },
-};
-filter(obj, ['name', 'Alice']);
-// => [{ id: 1, name: 'Alice' }]
-
-// Using a property name
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-  c: { id: 3, age: 28 },
-};
-filter(obj, 'name');
-// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+const scores = { math: 90, english: 75, science: 85 };
+filter(scores, score => score >= 80);
+// Returns: [90, 85]
 ```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { filter } from 'es-toolkit/compat';
+
+filter(null, x => x > 0);
+// Returns: []
+
+filter(undefined, x => x > 0);
+// Returns: []
+```
+
+#### Parameters
+
+- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): The array or object to filter.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): The filtering condition. Can use a function, partial object, property-value pair, or property name.
+
+#### Returns
+
+(`T[]`): Returns a new array consisting of elements that satisfy the condition.

@@ -1,46 +1,50 @@
-# isArguments
+# isArguments (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-与えられた値が `arguments` オブジェクトかどうかを確認します。
-
-この関数は、与えられた値が `arguments` オブジェクトであれば `true`、そうでなければ `false` を返します。
-
-TypeScript の型ガードとして使用できます。パラメータとして与えられた値の型を `IArguments` に絞り込みます。
-
-## インターフェース
+値がargumentsオブジェクトかどうかを確認します。
 
 ```typescript
-function isArguments(value?: unknown): value is IArguments;
+const result = isArguments(value);
 ```
 
-### パラメータ
+## 参照
 
-- `value` (`unknown`): `arguments` オブジェクトかどうかを確認する値です。
+### `isArguments(value)`
 
-### 戻り値
-
-(`value is IArguments`): 与えられた値が `arguments` オブジェクトであれば `true`、そうでなければ `false` を返します。
-
-## 例
+指定された値が関数のargumentsオブジェクトかどうかを確認したい場合は`isArguments`を使用してください。この関数はTypeScriptでタイプガードとしても動作し、値の型を`IArguments`に絞り込みます。
 
 ```typescript
 import { isArguments } from 'es-toolkit/compat';
 
-const args = (function () {
-  return arguments;
-})();
-const strictArgs = (function () {
-  'use strict';
-  return arguments;
-})();
-const value = [1, 2, 3];
+// 通常の関数で
+function normalFunction() {
+  return isArguments(arguments); // true
+}
 
-console.log(isArguments(args)); // true
-console.log(isArguments(strictArgs)); // true
-console.log(isArguments(value)); // false
+// 厳密モードで
+function strictFunction() {
+  'use strict';
+  return isArguments(arguments); // true
+}
+
+// argumentsではない値
+isArguments([1, 2, 3]); // false
+isArguments({ 0: 'a', 1: 'b', length: 2 }); // false
+isArguments(null); // false
+isArguments(undefined); // false
+
+// 実際の使用例
+function example() {
+  if (isArguments(arguments)) {
+    console.log('This is an arguments object');
+    console.log('Length:', arguments.length);
+  }
+}
 ```
+
+#### パラメータ
+
+- `value` (`any`): 確認する値です。
+
+#### 戻り値
+
+(`boolean`): 値がargumentsオブジェクトの場合は`true`、そうでない場合は`false`を返します。

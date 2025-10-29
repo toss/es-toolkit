@@ -1,33 +1,55 @@
 # pascalCase
 
-Converts a string to Pascal case.
-
-Pascal case is the naming convention in which each word is capitalized and concatenated without any separator characters. For example, `PascalCase`.
-
-## Signature
+Converts a string to pascal case.
 
 ```typescript
-function pascalCase(str: string): string;
+const converted = pascalCase(str);
 ```
 
-### Parameters
+## Reference
 
-- `str` (`string`): The string that is to be changed to Pascal case.
+### `pascalCase(str)`
 
-### Returns
-
-(`string`) The converted string to Pascal case.
-
-## Examples
+Use `pascalCase` when you want to convert a string to pascal case. Pascal case is a naming convention where the first letter of each word is capitalized and words are joined without separators.
 
 ```typescript
 import { pascalCase } from 'es-toolkit/string';
 
-const convertedStr1 = pascalCase('pascalCase'); // returns 'PascalCase'
-const convertedStr2 = pascalCase('some whitespace'); // returns 'SomeWhitespace'
-const convertedStr3 = pascalCase('hyphen-text'); // returns 'HyphenText'
-const convertedStr4 = pascalCase('HTTPRequest'); // returns 'HttpRequest'
+// Basic usage
+pascalCase('pascalCase'); // 'PascalCase'
+pascalCase('some whitespace'); // 'SomeWhitespace'
+
+// Words connected with hyphens or underscores
+pascalCase('hyphen-text'); // 'HyphenText'
+pascalCase('snake_case'); // 'SnakeCase'
+
+// Handling consecutive uppercase letters
+pascalCase('HTTPRequest'); // 'HttpRequest'
+pascalCase('XMLHttpRequest'); // 'XmlHttpRequest'
 ```
+
+It also correctly handles strings with various separators.
+
+```typescript
+import { pascalCase } from 'es-toolkit/string';
+
+// Mixed separators
+pascalCase('camelCase-with_mixed.separators'); // 'CamelCaseWithMixedSeparators'
+
+// With numbers
+pascalCase('version2.1.0'); // 'Version210'
+
+// With special characters
+pascalCase('user@email.com'); // 'UserEmailCom'
+```
+
+#### Parameters
+
+- `str` (`string`): The string to convert to pascal case.
+
+#### Returns
+
+(`string`): Returns a new string converted to pascal case.
 
 ## Demo
 

@@ -1,139 +1,78 @@
-# filter
+# filter (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.filter()`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `filter` 함수는 복잡한 객체 처리, 다양한 조건 형태 지원 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.filter()`를 사용하세요.
+
 :::
 
-주어진 조건을 만족하는 요소를 갖는 새로운 배열을 반환해요.
-
-조건은 여러 방법들로 명시할 수 있어요.
-
-- **검사 함수**: 각각의 요소에 대해서 검사하는 함수를 실행해요. 조건에 맞는 요소들을 선택해요.
-- **부분 객체**: 주어진 객체와 부분적으로 일치하는 요소들을 선택해요.
-- **프로퍼티-값 쌍**: 해당 프로퍼티에 대해서 키와 값이 일치하는 요소들을 선택해요.
-- **프로퍼티 이름**: 해당 프로퍼티 이름이 일치하는 요소들을 선택해요.
-
-## 인터페이스
+주어진 조건을 만족하는 요소들로 새로운 배열을 만들어요.
 
 ```typescript
-function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
-function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: T[], doesMatch: PropertyKey): T[];
-
-function filter<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T[];
+const result = filter(collection, predicate);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `arr` (`T[]`) or `object` (`T`): 반복할 배열이나 객체.
+### `filter(collection, predicate)`
 
-::: info `arr`는 `ArrayLike<T>`일 수도 있고, `null` 또는 `undefined`일 수도 있어요
-
-lodash와 완벽하게 호환되도록 `filter` 함수는 `arr`을 다음과 같이 처리해요:
-
-- `arr`가 `ArrayLike<T>`인 경우 `Array.from(...)`을 사용하여 배열로 변환해요.
-- `arr`가 `null` 또는 `undefined`인 경우 빈 배열로 간주돼요.
-
-:::
-
-- `doesMatch`:
-
-  - 배열의 경우:
-
-    - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 각 요소가 조건을 만족하는지 확인하는 함수.
-    - **부분 객체** (`Partial<T>`): 요소의 속성과 값과 일치하는지 확인할 부분 객체.
-    - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 찾는 프로퍼티, 두 번째가 찾는 값을 나타내는 튜플.
-    - **프로퍼티 이름** (`PropertyKey`): 특정 속성을 가지고 있는지 확인할 프로퍼티 이름.
-
-  - 객체의 경우:
-
-    - **검사 함수** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 각 요소가 조건을 만족하는지 확인하는 함수.
-    - **부분 객체** (`Partial<T[keyof T]>`): 요소의 속성과 값과 일치하는지 확인할 부분 객체.
-    - **프로퍼티-값 쌍** (`[keyof T[keyof T], unknown]`): 첫 번째가 찾는 프로퍼티, 두 번째가 찾는 값을 나타내는 튜플.
-    - **프로퍼티 이름** (`PropertyKey`): 특정 속성을 가지고 있는지 확인할 프로퍼티 이름.
-
-### 반환 값
-
-(`T[]`): 조건을 만족하는 요소 배열. 없으면 (`[]`)
-
-## 예시
-
-### 배열의 경우
+배열이나 객체에서 특정 조건을 만족하는 요소들만 걸러내고 싶을 때 `filter`를 사용하세요. 조건은 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름 등 다양한 형태로 지정할 수 있어요.
 
 ```typescript
 import { filter } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-filter([1, 2, 3], n => n % 2 === 0);
-// => [2]
+// 검사 함수 사용
+const numbers = [1, 2, 3, 4, 5];
+filter(numbers, x => x % 2 === 0);
+// Returns: [2, 4]
 
-// 부분 객체를 쓰는 경우
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+// 프로퍼티 이름 사용
+const users = [
+  { name: 'Alice', active: true },
+  { name: 'Bob', active: false },
+  { name: 'Charlie', active: true },
 ];
-filter(arr, { name: 'Bob' });
-// => [{ id: 2, name: 'Bob' }]
+filter(users, 'active');
+// Returns: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
 
-// 프로퍼티-값 쌍을 쓰는 경우
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-filter(arr, ['name', 'Alice']);
-// => [{ id: 1, name: 'Alice' }]
+// 부분 객체 사용
+filter(users, { active: true });
+// Returns: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
 
-// 프로퍼티 이름을 쓰는 경우
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-  { id: 3, age: 28 },
-];
-filter(arr, 'name');
-// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+// 프로퍼티-값 쌍 사용
+filter(users, ['active', true]);
+// Returns: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
 ```
 
-### 객체의 경우
+객체에 대해서도 동일하게 동작해서 조건을 만족하는 값들의 배열을 반환해요.
 
 ```typescript
 import { filter } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-const obj = { a: 1, b: 2, c: 3 };
-filter(obj, item => item > 2);
-// => [3]
-
-// 부분 객체를 쓰는 경우
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-};
-filter(obj, { name: 'Bob' });
-// => [{ id: 2, name: 'Bob' }]
-
-// 프로퍼티-값 쌍을 쓰는 경우
-const obj = {
-  alice: { id: 1, name: 'Alice' },
-  bob: { id: 2, name: 'Bob' },
-};
-filter(obj, ['name', 'Alice']);
-// => [{ id: 1, name: 'Alice' }]
-
-// 프로퍼티 이름을 쓰는 경우
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-  c: { id: 3, age: 28 },
-};
-filter(obj, 'name');
-// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+const scores = { math: 90, english: 75, science: 85 };
+filter(scores, score => score >= 80);
+// Returns: [90, 85]
 ```
+
+`null`이나 `undefined`는 빈 배열로 처리해요.
+
+```typescript
+import { filter } from 'es-toolkit/compat';
+
+filter(null, x => x > 0);
+// Returns: []
+
+filter(undefined, x => x > 0);
+// Returns: []
+```
+
+#### 파라미터
+
+- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 필터링할 배열이나 객체예요.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 필터링 조건이에요. 함수, 부분 객체, 프로퍼티-값 쌍, 프로퍼티 이름을 사용할 수 있어요.
+
+#### 반환 값
+
+(`T[]`): 조건을 만족하는 요소들로 이루어진 새로운 배열을 반환해요.

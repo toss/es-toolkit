@@ -151,4 +151,26 @@ describe('throttle', () => {
 
     expect(callback).toHaveBeenCalledTimes(4);
   });
+
+  it('should preserve this context when called as a method', async () => {
+    const throttleMs = 50;
+    let capturedMsg: string | undefined;
+
+    const obj = {
+      msg: 'hello world',
+      logWithThrottle: throttle(function (this: any) {
+        capturedMsg = this?.msg;
+      }, throttleMs),
+    };
+
+    obj.logWithThrottle();
+    expect(capturedMsg).toBe('hello world');
+
+    capturedMsg = undefined;
+    obj.logWithThrottle();
+    obj.logWithThrottle();
+
+    await delay(throttleMs + 1);
+    expect(capturedMsg).toBe('hello world');
+  });
 });

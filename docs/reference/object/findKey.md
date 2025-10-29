@@ -1,79 +1,88 @@
 # findKey
 
-Finds the key of the first element in the object that satisfies the provided testing function.
-
-## Signature
+Finds the key of the first element that satisfies the given condition.
 
 ```typescript
-function findKey<T extends Record<any, any>>(
-  obj: T,
-  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined;
+const key = findKey(obj, predicate);
 ```
 
-### Parameters
+## Reference
 
-- `obj` (`T extends Record<any, any>`): The object to search.
-- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): The function to execute on each value in the object.
+### `findKey(obj, predicate)`
 
-### Returns
-
-(`keyof T | undefined`): The key of the first element in the object that satisfies the provided testing function, or undefined if no element passes the test.
-
-## Examples
+Use `findKey` when you want to find the key of the first element in an object that satisfies a specific condition. It returns the key for the first value where the condition function returns `true`.
 
 ```typescript
+import { findKey } from 'es-toolkit/object';
+
+// Find the first user under 30 years old
 const users = {
-  pebbles: { age: 24, active: true },
-  barney: { age: 36, active: true },
-  fred: { age: 40, active: false },
+  alice: { age: 25, active: true },
+  bob: { age: 30, active: false },
+  charlie: { age: 35, active: true },
 };
 
-findKey(users, o => o.age < 40); // 'pebbles'
-findKey(users, o => o.age > 50); // undefined
+const youngUserKey = findKey(users, user => user.age < 30);
+console.log(youngUserKey); // 'alice'
+
+// Find an inactive user
+const inactiveUserKey = findKey(users, user => !user.active);
+console.log(inactiveUserKey); // 'bob'
+
+// When no element satisfies the condition
+const seniorUserKey = findKey(users, user => user.age > 50);
+console.log(seniorUserKey); // undefined
 ```
 
-## Compatibility with Lodash
-
-Import `findKey` from `es-toolkit/compat` for full compatibility with lodash.
-
-You can specify the condition for finding keys in several ways:
-
-- **Predicate function**: You can provide a predicate function that will be applied to each value in the object. The function should return `true` for elements that match the criteria. The search continues until the predicate returns `true` for the first time.
-- **Partial object**: You can also provide a partial object, and the function will return the key of the first element in the object that matches the properties of the provided object.
-- **Property-value pair**: Alternatively, you can specify a property-value pair, where the function will return the key of the first element that has the specified property matching the given value.
-- **Property name**: Lastly, you can provide a property name, and the function will return the key of the first element where the specified property has a truthy value.
-
-### Signature
+The condition function receives the current value, key, and the entire object.
 
 ```typescript
-function findKey<T>(obj: T, conditionToFind: (value: T[keyof T], key: string, obj: T) => boolean): string | undefined;
-function findKey<T>(obj: T, objectToFind: Partial<T[keyof T]>): string | undefined;
-function findKey<T>(obj: T, propertyToFind: [PropertyKey, any]): string | undefined;
-function findKey<T>(obj: T, propertyToFind: PropertyKey): string | undefined;
-function findKey<T>(
-  obj: T | null | undefined,
-  predicate?:
-    | ((value: T[keyof T], key: string, obj: T) => unknown)
-    | PropertyKey
-    | [PropertyKey, any]
-    | Partial<T[keyof T]>
-): string | undefined;
+const data = {
+  item1: { priority: 'high', status: 'pending' },
+  item2: { priority: 'low', status: 'done' },
+  item3: { priority: 'high', status: 'done' },
+};
+
+// Search considering both key name and value
+const result = findKey(data, (value, key, obj) => {
+  return key.includes('2') && value.status === 'done';
+});
+console.log(result); // 'item2'
 ```
 
-### Examples
+Can also be used with complex object structures.
 
 ```typescript
-const users = { barney: { age: 36 }, fred: { age: 40 } };
+const products = {
+  laptop: {
+    specs: { ram: 16, cpu: 'Intel i7' },
+    price: 1200,
+    available: true,
+  },
+  phone: {
+    specs: { ram: 8, cpu: 'Snapdragon' },
+    price: 800,
+    available: false,
+  },
+  tablet: {
+    specs: { ram: 12, cpu: 'Apple M1' },
+    price: 1000,
+    available: true,
+  },
+};
 
-findKey(users, o => o.age < 40);
-// => 'barney'
-findKey(users, { age: 36 });
-// => 'barney'
-findKey(users, ['age', 36]);
-// => 'barney'
+const affordableKey = findKey(products, product => product.price < 1000 && product.available);
+console.log(affordableKey); // undefined (no product satisfies the condition)
 
-const languages = { javascript: { active: false }, typescript: { active: true } };
-findKey(languages, 'active');
-// => 'typescript'
+const highRamKey = findKey(products, product => product.specs.ram >= 12);
+console.log(highRamKey); // 'laptop'
 ```
+
+#### Parameters
+
+- `obj` (`T extends Record<any, any>`): The object to search.
+- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): A condition function to execute for each element. Finds the key of the first element that returns `true`.
+
+#### Returns
+
+(`keyof T | undefined`): The key of the first element that satisfies the condition. Returns `undefined` if no element satisfies the condition.

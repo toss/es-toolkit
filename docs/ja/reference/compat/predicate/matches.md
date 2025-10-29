@@ -1,53 +1,68 @@
-# matches
+# matches (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-`source` の形と値と一致するかどうかを確認する関数を作成します。
-オブジェクト、配列、`Map`、`Set` との深い比較をサポートします。
-
-この関数の動作は [isMatch](./isMatch.md) と同じで、呼び出し方法のみが異なります。
-
-## インターフェース
+与えられたパターンと部分的に一致するかどうかを確認する関数を作成します。
 
 ```typescript
-function matches(source: unknown): (target: unknown) => boolean;
+const matcher = matches(pattern);
 ```
 
-## パラメータ
+## 参照
 
-- `source` (`unknown`): 確認する関数が参照するオブジェクト。
+### `matches(source)`
 
-## 戻り値
-
-- (`(target: unknown) => boolean`): `source` の形と値と一致するかどうかを確認する関数。`target` が `source` と一致すると `true`、さもなくば `false` を返します。
-
-## 例
-
-### オブジェクトの一致
+オブジェクトや配列の構造と値が特定のパターンと一致するかどうかを確認する関数を作成する際に `matches` を使用してください。配列のフィルタリングやオブジェクト検索で便利です。
 
 ```typescript
-const matcher = matches({ a: 1, b: 2 });
-matcher({ a: 1, b: 2, c: 3 }); // true
-matcher({ a: 1, c: 3 }); // false
+import { matches } from 'es-toolkit/compat';
+
+// オブジェクトパターンマッチング
+const userMatcher = matches({ age: 25, department: 'Engineering' });
+
+const users = [
+  { name: 'Alice', age: 25, department: 'Engineering' },
+  { name: 'Bob', age: 30, department: 'Marketing' },
+  { name: 'Charlie', age: 25, department: 'Engineering' },
+];
+
+const engineeringUsers = users.filter(userMatcher);
+// [{ name: 'Alice', age: 25, department: 'Engineering' },
+//  { name: 'Charlie', age: 25, department: 'Engineering' }]
+
+// ネストしたオブジェクトパターン
+const profileMatcher = matches({
+  profile: { city: 'Seoul', verified: true },
+});
+
+const profiles = [
+  { name: 'Kim', profile: { city: 'Seoul', verified: true, score: 100 } },
+  { name: 'Lee', profile: { city: 'Busan', verified: true } },
+  { name: 'Park', profile: { city: 'Seoul', verified: false } },
+];
+
+const seoulVerifiedUsers = profiles.filter(profileMatcher);
+// [{ name: 'Kim', profile: { city: 'Seoul', verified: true, score: 100 } }]
+
+// 配列パターンマッチング
+const arrayMatcher = matches([2, 4]);
+const arrays = [
+  [1, 2, 3, 4, 5],
+  [2, 4, 6],
+  [1, 3, 5],
+];
+const matchingArrays = arrays.filter(arrayMatcher);
+// [[1, 2, 3, 4, 5], [2, 4, 6]]
+
+// 空のパターンはすべての値とマッチ
+const emptyMatcher = matches({});
+emptyMatcher({ anything: 'value' }); // true
+emptyMatcher([]); // true
+emptyMatcher(null); // true
 ```
 
-### 配列の一致
+#### パラメータ
 
-```typescript
-const arrayMatcher = matches([1, 2, 3]);
-arrayMatcher([1, 2, 3, 4]); // true
-arrayMatcher([4, 5, 6]); // false
-```
+- `source` (`unknown`): 一致パターンとなるオブジェクトや値です。
 
-### ネストされた構造の一致
+#### 戻り値
 
-```typescript
-// Matching objects with nested structures
-const nestedMatcher = matches({ a: { b: 2 } });
-nestedMatcher({ a: { b: 2, c: 3 } }); // true
-nestedMatcher({ a: { c: 3 } }); // false
-```
+(`(target: unknown) => boolean`): 与えられた値がパターンと部分的に一致するかどうかを確認する関数を返します。

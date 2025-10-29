@@ -1,47 +1,71 @@
-# forOwn
+# forOwn (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.keys` 和循环代替
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `forOwn` 函数由于内部调用 `keys` 函数、对象转换过程以及 `null` 或 `undefined` 处理等原因,运行速度较慢。
+
+请使用更快、更现代的 `Object.keys` 和循环代替。
+
 :::
 
-遍历对象的属性并为每个属性调用 `iteratee` 函数。
-
-它只遍历对象自身的属性，不包括继承的属性或带有 `Symbol` 键的属性。
-
-`iteratee` 函数可以通过返回 `false` 提前结束遍历。
-
-## 签名
+仅迭代对象的自有属性,并对每个属性调用函数。
 
 ```typescript
-function forOwn<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forOwn(obj, iteratee);
 ```
 
-### 参数
+## 参考
 
-- `object` (`T | null | undefined`): 要遍历的对象。
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 每次迭代调用的函数。如果未提供，将使用身份函数。
+### `forOwn(object, iteratee)`
 
-### 返回值
-
-(`T | null | undefined`): 返回对象。
-
-## 示例
+仅迭代对象的自有属性,调用 `iteratee` 函数。它只迭代对象直接拥有的属性,排除继承的属性和 `Symbol` 键。如果 `iteratee` 函数返回 `false`,则停止迭代。
 
 ```typescript
-function Foo() {
-  this.a = 1;
-  this.b = 2;
-}
+import { forOwn } from 'es-toolkit/compat';
 
-Foo.prototype.c = 3;
-
-forOwn(new Foo(), function (value, key) {
-  console.log(key);
+// 仅迭代对象的自有属性
+const obj = { a: 1, b: 2 };
+forOwn(obj, (value, key) => {
+  console.log(key, value);
 });
-// => Logs 'a' then 'b' (iteration order is not guaranteed).
+// 输出: 'a' 1, 'b' 2
+
+// 排除继承的属性
+function Parent() {
+  this.inherited = 'value';
+}
+Parent.prototype.protoProperty = 'proto';
+
+const child = new Parent();
+child.own = 'ownValue';
+
+forOwn(child, (value, key) => {
+  console.log(key, value);
+});
+// 输出: 'inherited' 'value', 'own' 'ownValue' (protoProperty 被排除)
+
+// 根据条件提前终止
+forOwn(obj, (value, key) => {
+  console.log(key, value);
+  return key !== 'a'; // 在 'a' 之后停止
+});
+// 输出: 'a' 1
 ```
+
+`null` 或 `undefined` 按原样返回。
+
+```typescript
+import { forOwn } from 'es-toolkit/compat';
+
+forOwn(null, iteratee); // null
+forOwn(undefined, iteratee); // undefined
+```
+
+#### 参数
+
+- `object` (`T | null | undefined`): 要迭代的对象。
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, 可选): 为每个属性调用的函数。默认值为 `identity` 函数。
+
+#### 返回值
+
+(`T | null | undefined`): 返回原始对象。

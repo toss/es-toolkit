@@ -1,34 +1,81 @@
 # isArrayBuffer
 
-Checks if the given value is a `ArrayBuffer`.
-
-This function tests whether the provided value is an instance of `ArrayBuffer`.
-It returns `true` if the value is a `ArrayBuffer`, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `ArrayBuffer`.
-
-## Signature
+Checks if a value is an `ArrayBuffer` instance.
 
 ```typescript
-function isArrayBuffer(value: unknown): value is ArrayBuffer;
+const result = isArrayBuffer(value);
 ```
 
-### Parameters
+## Reference
 
-- `value` (`unknown`): The value to check if it is a `ArrayBuffer`.
+### `isArrayBuffer(value)`
 
-### Returns
-
-(`value is ArrayBuffer`): true if the value is a `ArrayBuffer`, false otherwise.
-
-## Examples
+Use `isArrayBuffer` when you want to check if a value is an `ArrayBuffer`. It can also be used as a type guard in TypeScript.
 
 ```typescript
-const value1 = new ArrayBuffer();
-const value2 = new Array();
-const value3 = new Map();
+import { isArrayBuffer } from 'es-toolkit/predicate';
 
-console.log(isArrayBuffer(value1)); // true
-console.log(isArrayBuffer(value2)); // false
-console.log(isArrayBuffer(value3)); // false
+// Checking ArrayBuffer instances
+const buffer = new ArrayBuffer(16);
+const notBuffer = new Array(16);
+
+console.log(isArrayBuffer(buffer)); // true
+console.log(isArrayBuffer(notBuffer)); // false
+
+// Useful when processing binary data
+const data: unknown = getDataFromAPI();
+if (isArrayBuffer(data)) {
+  // In TypeScript, data is narrowed to ArrayBuffer
+  const uint8View = new Uint8Array(data);
+  console.log(`Buffer size: ${data.byteLength} bytes`);
+}
+
+// Comparison with various types
+console.log(isArrayBuffer(new ArrayBuffer(8))); // true
+console.log(isArrayBuffer(new Uint8Array(8))); // false
+console.log(isArrayBuffer(new DataView(new ArrayBuffer(8)))); // false
+console.log(isArrayBuffer([])); // false
+console.log(isArrayBuffer({})); // false
+console.log(isArrayBuffer(null)); // false
+console.log(isArrayBuffer(undefined)); // false
 ```
+
+Frequently used in file processing and network communication.
+
+```typescript
+import { isArrayBuffer } from 'es-toolkit/predicate';
+
+// Processing file read results
+async function processFileData(file: File) {
+  const result = await file.arrayBuffer();
+
+  if (isArrayBuffer(result)) {
+    console.log(`File size: ${result.byteLength} bytes`);
+
+    // Process binary data
+    const view = new DataView(result);
+    const header = view.getUint32(0, true);
+    console.log(`File header: ${header.toString(16)}`);
+  }
+}
+
+// Checking data received from WebSocket
+function handleWebSocketMessage(data: unknown) {
+  if (isArrayBuffer(data)) {
+    console.log('Received binary message');
+    const bytes = new Uint8Array(data);
+    // Process byte data
+  } else if (typeof data === 'string') {
+    console.log('Received text message');
+    // Process string data
+  }
+}
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's an `ArrayBuffer`.
+
+#### Returns
+
+(`value is ArrayBuffer`): Returns `true` if the value is an `ArrayBuffer`, `false` otherwise.

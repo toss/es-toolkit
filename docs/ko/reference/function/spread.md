@@ -1,48 +1,69 @@
 # spread
 
-인자의 배열을 펼쳐서, 원래 함수의 개별 인자로 제공하는 새로운 함수를 만들어요.
-
-## 인터페이스
+파라미터 배열을 펼쳐서 함수의 개별 파라미터로 전달하는 새로운 함수를 만들어요.
 
 ```typescript
-function spread<F extends (...args: any[]) => any>(func: F): (argsArr: Parameters<F>) => ReturnType<F>;
+const spreadFunc = spread(func);
 ```
 
-### 파라미터
+## 레퍼런스
 
-- `func` (`F`): 인자 배열을 개별 인자로 펼쳐서 받을 함수.
+### `spread(func)`
 
-### 반환 값
+배열 형태의 파라미터를 개별 파라미터로 펼쳐서 함수에 전달하고 싶을 때 `spread`를 사용하세요.
 
-(`(args: Parameters<F>) => ReturnType<F>`): 인자의 배열을 펼쳐서, 원래 함수의 개별 인자로 제공하는 새로운 함수.
-
-## 예시
+JavaScript의 스프레드 연산자(`...`)와 비슷한 역할을 하지만, 함수를 변환해서 배열을 받도록 만드는 방식이에요. `apply` 메서드를 자주 사용하는 상황에서 유용해요.
 
 ```typescript
 import { spread } from 'es-toolkit/function';
 
-function add(a, b) {
+// 기본 사용법
+function add(a: number, b: number) {
   return a + b;
 }
+
 const spreadAdd = spread(add);
-console.log(spreadAdd([1, 2])); // Output: 3
+console.log(spreadAdd([5, 3])); // 8
 
-// Example function to spread arguments over
-// Create a new function that uses `spread` to combine arguments
-const spreadAdd = spread(add, 1);
-// Calling `spreadAdd` with an array as the second argument
-console.log(spreadAdd(1, [2])); // Output: 3
-
-// Function with default arguments
-function greet(name, greeting = 'Hello') {
-  return `${greeting}, ${name}!`;
+// 여러 파라미터가 있는 함수
+function greet(greeting: string, name: string, punctuation: string) {
+  return `${greeting}, ${name}${punctuation}`;
 }
-// Create a new function that uses `spread` to position the argument array at index 0
-const spreadGreet = spread(greet, 0);
-// Calling `spreadGreet` with an array of arguments
-console.log(spreadGreet(['Alice'])); // Output: Hello, Alice!
-console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
+
+const spreadGreet = spread(greet);
+console.log(spreadGreet(['Hello', 'World', '!'])); // 'Hello, World!'
+
+// Math 함수와 함께 사용
+const numbers = [1, 2, 3, 4, 5];
+const spreadMax = spread(Math.max);
+console.log(spreadMax(numbers)); // 5
+
+const spreadMin = spread(Math.min);
+console.log(spreadMin(numbers)); // 1
 ```
+
+`this` 컨텍스트도 유지돼요.
+
+```typescript
+import { spread } from 'es-toolkit/function';
+
+const calculator = {
+  multiply: function (a: number, b: number, c: number) {
+    return a * b * c;
+  },
+};
+
+const spreadMultiply = spread(calculator.multiply);
+console.log(spreadMultiply.call(calculator, [2, 3, 4])); // 24
+```
+
+#### 파라미터
+
+- `func` (`F`): 배열을 개별 파라미터로 펼쳐서 받을 함수예요.
+
+#### 반환 값
+
+(`(args: Parameters<F>) => ReturnType<F>`): 파라미터 배열을 받아서 펼쳐진 형태로 원래 함수에 전달하는 새로운 함수를 반환해요.
 
 ## Lodash와의 호환성
 

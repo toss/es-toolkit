@@ -1,38 +1,42 @@
 # zip
 
-将多个数组组合成一个元组数组。
-
-该函数接受多个数组作为输入，并返回一个新数组，其中每个元素都是一个元组，包含来自输入数组的对应元素。
-
-如果输入数组的长度不同，结果数组的长度将取决于最长的输入数组，缺失的元素将用 `undefined` 值填充。
-
-## 签名
+将多个数组转换为每个数组相同索引元素组成的元组数组。
 
 ```typescript
-function zip<T>(arr1: T[]): [T][];
-function zip<T, U>(arr1: T[], arr2: U[]): [T, U][];
-function zip<T, U, V>(arr1: T[], arr2: U[], arr3: V[]): [T, U, V][];
-function zip<T, U, V, W>(arr1: T[], arr2: U[], arr3: V[], arr4: W[]): [T, U, V, W][];
-function zip<T>(...arrs: T[][]): T[][];
+const zipped = zip(...arrs);
 ```
 
-### 参数
+## 参考
 
-- `...arrs` (`T[][]`): 要合并的数组。
+### `zip(...arrs)`
 
-### 返回值
-
-(`T[][]`): 包含来自输入数组的对应元素的新数组，每个元素都是一个元组。
-
-## 示例
+当您想将多个数组中相同位置的元素绑定在一起时,请使用 `zip`。返回一个将每个数组相同索引的元素组成元组的新数组。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const arr2 = ['a', 'b', 'c'];
-const result = zip(arr1, arr2);
-// result 将会是 [[1, 'a'], [2, 'b'], [3, 'c']]
+import { zip } from 'es-toolkit/array';
 
-const arr3 = [true, false];
-const result2 = zip(arr1, arr2, arr3);
-// result2 将会是 [[1, 'a', true], [2, 'b', false], [3, 'c', undefined]]
+// 绑定两个数组。
+zip([1, 2, 3], ['a', 'b', 'c']);
+// Returns: [[1, 'a'], [2, 'b'], [3, 'c']]
+
+// 绑定三个数组。
+zip([1, 2], ['a', 'b', 'c'], [true, false]);
+// Returns: [[1, 'a', true], [2, 'b', false], [undefined, 'c', undefined]]
 ```
+
+如果数组长度不同,会按最长数组的长度对齐。较短数组的空位会用 `undefined` 填充。
+
+```typescript
+import { zip } from 'es-toolkit/array';
+
+zip([1, 2], ['a', 'b', 'c', 'd']);
+// Returns: [[1, 'a'], [2, 'b'], [undefined, 'c'], [undefined, 'd']]
+```
+
+#### 参数
+
+- `arrs` (`Array<readonly T[]>`): 要绑定的数组。
+
+#### 返回值
+
+(`T[][]`): 返回将每个输入数组对应索引元素组成元组的新数组。
