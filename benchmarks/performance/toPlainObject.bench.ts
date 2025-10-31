@@ -6,11 +6,10 @@ const toPlainObjectCompatToolkit = toPlainObjectCompatToolkit_;
 const toPlainObjectLodash = toPlainObjectLodash_;
 
 describe('toPlainObject', () => {
-  function Foo() {
-    this.b = 2;
+  class Foo {
+    b = 2;
   }
-
-  Foo.prototype.c = 3;
+  (Foo.prototype as any).c = 3;
   const foo = new Foo();
 
   bench('es-toolkit/compat/toPlainObject', () => {
