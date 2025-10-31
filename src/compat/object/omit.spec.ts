@@ -98,6 +98,19 @@ describe('omit', () => {
     expect(result).toEqual({ b: 2 });
   });
 
+  it('should not add any keys after omitting', () => {
+    const obj = { a: 1, b: 2, c: 3, length: 5 };
+
+    const result = omit(obj, 'a', 'c');
+
+    expect(result).toEqual({ b: 2, length: 5 });
+    expect('0' in result).toBe(false);
+    expect('1' in result).toBe(false);
+    expect('2' in result).toBe(false);
+    expect('3' in result).toBe(false);
+    expect('4' in result).toBe(false);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(omit).toEqualTypeOf<typeof omitLodash>();
   });
