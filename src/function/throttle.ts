@@ -1,8 +1,8 @@
 import { debounce } from './debounce.ts';
 
-interface ThrottleOptions {
+export interface ThrottleOptions {
   /**
-   * An optional AbortSignal to cancel the debounced function.
+   * An optional AbortSignal to cancel the throttled function.
    */
   signal?: AbortSignal;
 
