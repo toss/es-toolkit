@@ -14,7 +14,7 @@
 const firstElement = head(array);
 ```
 
-## 参考
+## 用法
 
 ### `head(array)`
 

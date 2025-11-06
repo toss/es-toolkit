@@ -6,7 +6,7 @@
 const result = isWeakMap(value);
 ```
 
-## 参考
+## 用法
 
 ### `isWeakMap(value)`
 

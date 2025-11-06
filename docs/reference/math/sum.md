@@ -6,7 +6,7 @@ Returns the sum of all elements in an array of numbers.
 const total = sum(numbers);
 ```
 
-## Reference
+## Usage
 
 ### `sum(nums)`
 

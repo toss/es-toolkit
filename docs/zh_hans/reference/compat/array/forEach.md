@@ -14,7 +14,7 @@
 forEach(collection, callback);
 ```
 
-## 参考
+## 用法
 
 ### `forEach(collection, callback)`
 

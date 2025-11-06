@@ -14,7 +14,7 @@ Returns the last element of an array.
 const lastElement = last(array);
 ```
 
-## Reference
+## Usage
 
 ### `last(array)`
 

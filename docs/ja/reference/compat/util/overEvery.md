@@ -14,7 +14,7 @@
 const allValidator = overEvery(predicates);
 ```
 
-## 参照
+## 使用法
 
 ### `overEvery(...predicates)`
 

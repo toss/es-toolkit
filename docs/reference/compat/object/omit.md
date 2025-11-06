@@ -14,7 +14,7 @@ Creates a new object excluding specified keys from an object.
 const result = omit(obj, ...keys);
 ```
 
-## Reference
+## Usage
 
 ### `omit(object, ...paths)`
 

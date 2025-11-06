@@ -6,7 +6,7 @@ Creates a new function with some parameters pre-applied from the right.
 const partialRightFunc = partialRight(func, arg1, arg2);
 ```
 
-## Reference
+## Usage
 
 ### `partialRight(func, ...args)`
 

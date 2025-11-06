@@ -8,7 +8,7 @@
 const camelCased = toCamelCaseKeys(obj);
 ```
 
-## 参考
+## 用法
 
 ### `toCamelCaseKeys(obj)`
 

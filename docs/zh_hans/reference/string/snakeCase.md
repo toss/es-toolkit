@@ -6,7 +6,7 @@
 const converted = snakeCase(str);
 ```
 
-## 参考
+## 用法
 
 ### `snakeCase(str)`
 

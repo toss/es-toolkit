@@ -14,7 +14,7 @@ Organizes collection elements into an object based on the specified key.
 const result = keyBy(collection, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `keyBy(collection, iteratee)`
 

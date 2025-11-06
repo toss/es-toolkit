@@ -6,7 +6,7 @@ Checks if a given value is a `Set` instance.
 const result = isSet(value);
 ```
 
-## Reference
+## Usage
 
 ### `isSet(value)`
 

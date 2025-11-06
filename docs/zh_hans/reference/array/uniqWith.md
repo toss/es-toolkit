@@ -6,7 +6,7 @@
 const uniqueArray = uniqWith(arr, areItemsEqual);
 ```
 
-## 参考
+## 用法
 
 ### `uniqWith(arr, areItemsEqual)`
 

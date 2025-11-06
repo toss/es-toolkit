@@ -6,7 +6,7 @@
 const result = isPromise(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isPromise(value)`
 

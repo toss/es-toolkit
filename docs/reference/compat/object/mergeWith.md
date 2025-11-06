@@ -14,7 +14,7 @@ Deeply merges multiple objects while controlling the merge behavior with a custo
 const result = mergeWith(target, ...sources, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `mergeWith(object, ...sources, customizer)`
 

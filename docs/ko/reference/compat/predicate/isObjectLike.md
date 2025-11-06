@@ -6,7 +6,7 @@
 const result = isObjectLike(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isObjectLike(value)`
 

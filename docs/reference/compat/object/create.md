@@ -14,7 +14,7 @@ Creates a new object that inherits from the given prototype.
 const obj = create(prototype, properties);
 ```
 
-## Reference
+## Usage
 
 ### `create(prototype, properties?)`
 

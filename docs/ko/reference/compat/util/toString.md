@@ -14,7 +14,7 @@
 const str = toString(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toString(value)`
 

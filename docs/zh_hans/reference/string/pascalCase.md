@@ -6,7 +6,7 @@
 const converted = pascalCase(str);
 ```
 
-## 参考
+## 用法
 
 ### `pascalCase(str)`
 

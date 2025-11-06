@@ -14,7 +14,7 @@ Sets the value at the specified path of the object.
 const result = set(obj, path, value);
 ```
 
-## Reference
+## Usage
 
 ### `set(object, path, value)`
 

@@ -6,7 +6,7 @@ Caches function results so it runs faster when called again with the same argume
 const memoizedFunc = memoize(func, options);
 ```
 
-## Reference
+## Usage
 
 ### `memoize(func, options?)`
 

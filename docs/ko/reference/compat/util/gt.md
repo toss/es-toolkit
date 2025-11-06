@@ -14,7 +14,7 @@
 const result = gt(value, other);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `gt(value, other)`
 

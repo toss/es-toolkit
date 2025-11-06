@@ -14,7 +14,7 @@
 const element = nth(array, index);
 ```
 
-## 参照
+## 使用法
 
 ### `nth(array, index)`
 

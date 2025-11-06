@@ -14,7 +14,7 @@
 const result = isSafeInteger(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isSafeInteger(value)`
 

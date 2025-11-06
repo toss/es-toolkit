@@ -6,7 +6,7 @@ Converts a string to constant case.
 const result = constantCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `constantCase(str)`
 

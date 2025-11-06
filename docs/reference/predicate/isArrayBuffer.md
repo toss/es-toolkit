@@ -6,7 +6,7 @@ Checks if a value is an `ArrayBuffer` instance.
 const result = isArrayBuffer(value);
 ```
 
-## Reference
+## Usage
 
 ### `isArrayBuffer(value)`
 

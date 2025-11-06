@@ -14,7 +14,7 @@
 const reversed = reverse(array);
 ```
 
-## 参照
+## 使用法
 
 ### `reverse(array)`
 

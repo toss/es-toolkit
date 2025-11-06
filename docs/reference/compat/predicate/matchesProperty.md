@@ -6,7 +6,7 @@ Creates a function that checks if a specific property matches a given value.
 const checker = matchesProperty(path, value);
 ```
 
-## Reference
+## Usage
 
 ### `matchesProperty(property, source)`
 

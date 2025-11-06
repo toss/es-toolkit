@@ -6,7 +6,7 @@ Calculates the median of an array of numbers.
 const middle = median(nums);
 ```
 
-## Reference
+## Usage
 
 ### `median(nums)`
 

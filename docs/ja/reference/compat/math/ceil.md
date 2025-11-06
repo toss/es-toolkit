@@ -14,7 +14,7 @@
 const result = ceil(number, precision);
 ```
 
-## 参照
+## 使用法
 
 ### `ceil(number, precision?)`
 

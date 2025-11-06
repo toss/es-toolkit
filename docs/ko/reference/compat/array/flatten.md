@@ -14,7 +14,7 @@
 const result = flatten(array, depth);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `flatten(value, depth)`
 

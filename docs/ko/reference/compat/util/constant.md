@@ -14,7 +14,7 @@
 const constantFunction = constant(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `constant(value)`
 

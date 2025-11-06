@@ -14,7 +14,7 @@ Converts the first character of a string to uppercase and the remaining characte
 const result = capitalize(str);
 ```
 
-## Reference
+## Usage
 
 ### `capitalize(str)`
 

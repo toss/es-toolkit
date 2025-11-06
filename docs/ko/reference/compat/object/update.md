@@ -14,7 +14,7 @@
 const updated = update(obj, path, updater);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `update(obj, path, updater)`
 

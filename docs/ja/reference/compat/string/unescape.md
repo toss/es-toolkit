@@ -14,7 +14,7 @@ HTML エンティティを元の文字に変換します。
 const unescaped = unescape(str);
 ```
 
-## 参照
+## 使用法
 
 ### `unescape(str)`
 

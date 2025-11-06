@@ -14,7 +14,7 @@
 const result = tail(array);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `tail(array)`
 

@@ -14,7 +14,7 @@ Converts a value to an array if it's not already an array.
 const result = castArray(value);
 ```
 
-## Reference
+## Usage
 
 ### `castArray(value?)`
 

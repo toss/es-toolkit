@@ -6,7 +6,7 @@ Checks if a value is a valid JSON object.
 const result = isJSONObject(value);
 ```
 
-## Reference
+## Usage
 
 ### `isJSONObject(value)`
 

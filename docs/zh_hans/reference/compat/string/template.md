@@ -14,7 +14,7 @@
 const compiled = template(templateString);
 ```
 
-## 参考
+## 用法
 
 ### `template(string, options?)`
 

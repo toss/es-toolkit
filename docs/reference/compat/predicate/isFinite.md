@@ -14,7 +14,7 @@ Checks if a value is a finite number.
 const result = isFinite(value);
 ```
 
-## Reference
+## Usage
 
 ### `isFinite(value)`
 

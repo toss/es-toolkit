@@ -14,7 +14,7 @@ Removes elements at specified indexes from an array and returns the removed elem
 const removed = pullAt(array, ...indexes);
 ```
 
-## Reference
+## Usage
 
 ### `pullAt(array, ...indexes)`
 

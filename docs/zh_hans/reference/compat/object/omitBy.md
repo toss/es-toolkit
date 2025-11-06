@@ -14,7 +14,7 @@
 const result = omitBy(obj, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `omitBy(object, predicate)`
 

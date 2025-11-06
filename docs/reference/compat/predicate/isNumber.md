@@ -14,7 +14,7 @@ Checks if a value is a number.
 const result = isNumber(value);
 ```
 
-## Reference
+## Usage
 
 ### `isNumber(value)`
 

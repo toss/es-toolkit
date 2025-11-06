@@ -14,7 +14,7 @@
 const array = toArray(value);
 ```
 
-## 参考
+## 用法
 
 ### `toArray(value)`
 

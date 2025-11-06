@@ -14,7 +14,7 @@ Removes leading whitespace or specified characters from a string.
 const trimmed = trimStart(str, chars);
 ```
 
-## Reference
+## Usage
 
 ### `trimStart(str, chars)`
 

@@ -14,7 +14,7 @@
 const result = pick(obj, ...keys);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `pick(object, ...props)`
 

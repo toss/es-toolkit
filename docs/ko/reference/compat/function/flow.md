@@ -14,7 +14,7 @@
 const combinedFunc = flow(...functions);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `flow(...functions)`
 

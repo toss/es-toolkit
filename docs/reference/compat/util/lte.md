@@ -14,7 +14,7 @@ Checks if value is less than or equal to other.
 const result = lte(value, other);
 ```
 
-## Reference
+## Usage
 
 ### `lte(value, other)`
 

@@ -14,7 +14,7 @@ Returns an array of the object's own enumerable property values.
 const valueArray = values(obj);
 ```
 
-## Reference
+## Usage
 
 ### `values(obj)`
 

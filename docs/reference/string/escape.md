@@ -6,7 +6,7 @@ Converts characters with special meaning in HTML to safe entities.
 const result = escape(str);
 ```
 
-## Reference
+## Usage
 
 ### `escape(str)`
 

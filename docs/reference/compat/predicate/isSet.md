@@ -14,7 +14,7 @@ Checks if a value is a Set.
 const result = isSet(value);
 ```
 
-## Reference
+## Usage
 
 ### `isSet(value)`
 

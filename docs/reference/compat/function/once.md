@@ -12,7 +12,7 @@ Restricts a function to be called only once.
 const limitedFunc = once(func);
 ```
 
-## Reference
+## Usage
 
 ### `once(func)`
 

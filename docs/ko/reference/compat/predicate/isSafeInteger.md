@@ -14,7 +14,7 @@
 const result = isSafeInteger(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isSafeInteger(value)`
 

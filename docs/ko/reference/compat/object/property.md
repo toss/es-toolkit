@@ -14,7 +14,7 @@
 const getter = property(path);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `property(path)`
 

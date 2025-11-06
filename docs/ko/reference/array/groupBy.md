@@ -6,7 +6,7 @@
 const grouped = groupBy(arr, getKeyFromItem);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `groupBy(arr, getKeyFromItem)`
 

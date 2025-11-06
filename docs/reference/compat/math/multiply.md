@@ -14,7 +14,7 @@ Multiplies two numbers.
 const result = multiply(value, other);
 ```
 
-## Reference
+## Usage
 
 ### `multiply(value, other)`
 

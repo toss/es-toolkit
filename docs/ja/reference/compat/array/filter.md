@@ -14,7 +14,7 @@
 const result = filter(collection, predicate);
 ```
 
-## 参照
+## 使用法
 
 ### `filter(collection, predicate)`
 

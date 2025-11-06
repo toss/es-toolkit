@@ -6,7 +6,7 @@ Returns a new array with elements removed from the beginning while a condition i
 const result = dropWhile(arr, canContinueDropping);
 ```
 
-## Reference
+## Usage
 
 ### `dropWhile(arr, canContinueDropping)`
 

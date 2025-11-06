@@ -14,7 +14,7 @@ Creates a new array of elements that exist in exactly one of the multiple arrays
 const result = xorBy(...arrays, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `xorBy(...arrays, iteratee)`
 

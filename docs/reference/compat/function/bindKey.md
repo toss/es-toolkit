@@ -12,7 +12,7 @@ Binds a method of an object, allowing it to reference methods that may be redefi
 const bound = bindKey(object, key, ...partialArgs);
 ```
 
-## Reference
+## Usage
 
 ### `bindKey(object, key, ...partialArgs)`
 

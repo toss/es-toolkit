@@ -14,7 +14,7 @@
 const result = zipObject(keys, values);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `zipObject(keys, values)`
 

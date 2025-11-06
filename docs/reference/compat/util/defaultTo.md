@@ -6,7 +6,7 @@ Returns the default value for values that are `null`, `undefined`, or `NaN`.
 const result = defaultTo(value, defaultValue);
 ```
 
-## Reference
+## Usage
 
 ### `defaultTo(value, defaultValue)`
 

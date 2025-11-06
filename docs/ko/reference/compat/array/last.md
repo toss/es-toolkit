@@ -14,7 +14,7 @@
 const lastElement = last(array);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `last(array)`
 

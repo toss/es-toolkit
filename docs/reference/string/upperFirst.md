@@ -6,7 +6,7 @@ Converts the first character of a string to uppercase.
 const result = upperFirst(str);
 ```
 
-## Reference
+## Usage
 
 ### `upperFirst(str)`
 

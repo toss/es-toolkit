@@ -14,7 +14,7 @@ Iterates over a collection and returns a new array of elements that do not match
 const filtered = reject(collection, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `reject(collection, predicate)`
 

@@ -6,7 +6,7 @@
 const result = zipWith(...arrs, combine);
 ```
 
-## 参考
+## 用法
 
 ### `zipWith(...arrs, combine)`
 

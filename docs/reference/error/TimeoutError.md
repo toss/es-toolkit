@@ -6,7 +6,7 @@ An error class representing an operation that has timed out.
 const error = new TimeoutError(message);
 ```
 
-## Reference
+## Usage
 
 ### `new TimeoutError(message?)`
 

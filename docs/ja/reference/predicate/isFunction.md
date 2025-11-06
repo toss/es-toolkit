@@ -6,7 +6,7 @@
 const result = isFunction(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isFunction(value)`
 

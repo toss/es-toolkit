@@ -14,7 +14,7 @@ Creates a new array containing only unique values from multiple arrays.
 const result = union(...arrays);
 ```
 
-## Reference
+## Usage
 
 ### `union(...arrays)`
 

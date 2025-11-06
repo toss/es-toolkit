@@ -14,7 +14,7 @@
 const timerId = defer(func, ...args);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `defer(func, ...args)`
 

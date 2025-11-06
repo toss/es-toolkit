@@ -14,7 +14,7 @@
 const result = defaults(object, source);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `defaults(object, ...sources)`
 

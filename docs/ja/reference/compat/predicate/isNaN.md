@@ -14,7 +14,7 @@
 const result = isNaN(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isNaN(value)`
 

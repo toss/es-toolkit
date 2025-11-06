@@ -6,7 +6,7 @@
 const sorted = orderBy(arr, criteria, orders);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `orderBy(arr, criteria, orders)`
 

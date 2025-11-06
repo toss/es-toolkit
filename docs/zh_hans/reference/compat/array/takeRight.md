@@ -14,7 +14,7 @@
 const result = takeRight(array, count);
 ```
 
-## 参考
+## 用法
 
 ### `takeRight(array, count)`
 

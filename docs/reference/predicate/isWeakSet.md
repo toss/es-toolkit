@@ -6,7 +6,7 @@ Checks if a given value is a `WeakSet` instance.
 const result = isWeakSet(value);
 ```
 
-## Reference
+## Usage
 
 ### `isWeakSet(value)`
 

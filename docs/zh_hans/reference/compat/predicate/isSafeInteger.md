@@ -12,7 +12,7 @@
 const result = isSafeInteger(value);
 ```
 
-## 参考
+## 用法
 
 ### `isSafeInteger(value)`
 

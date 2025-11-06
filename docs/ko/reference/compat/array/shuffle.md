@@ -14,7 +14,7 @@
 const result = shuffle(collection);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `shuffle(collection)`
 

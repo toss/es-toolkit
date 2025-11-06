@@ -6,7 +6,7 @@
 const result = isBlob(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isBlob(value)`
 

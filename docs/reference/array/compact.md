@@ -6,7 +6,7 @@ Returns a new array with falsy values removed.
 const compacted = compact(arr);
 ```
 
-## Reference
+## Usage
 
 ### `compact(arr)`
 

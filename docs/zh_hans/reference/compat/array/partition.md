@@ -14,7 +14,7 @@
 const [truthy, falsy] = partition(collection, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `partition(collection, predicate)`
 

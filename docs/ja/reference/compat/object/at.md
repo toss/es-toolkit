@@ -14,7 +14,7 @@
 const result = at(object, ...paths);
 ```
 
-## 参照
+## 使用法
 
 ### `at(object, ...paths)`
 

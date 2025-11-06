@@ -14,7 +14,7 @@
 const result = mergeWith(target, ...sources, customizer);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `mergeWith(object, ...sources, customizer)`
 

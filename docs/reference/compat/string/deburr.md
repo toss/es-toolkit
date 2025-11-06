@@ -14,7 +14,7 @@ Converts special characters and diacritical marks in a string to ASCII character
 const result = deburr(str);
 ```
 
-## Reference
+## Usage
 
 ### `deburr(str)`
 

@@ -14,7 +14,7 @@ Creates a new function that spreads array arguments into individual arguments wh
 const spreadFunc = spread(func, argsIndex);
 ```
 
-## Reference
+## Usage
 
 ### `spread(func, argsIndex)`
 

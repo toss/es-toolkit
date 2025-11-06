@@ -6,7 +6,7 @@
 await delay(ms, options?);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `delay(ms, options?)`
 

@@ -14,7 +14,7 @@
 const result = isNil(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isNil(x)`
 

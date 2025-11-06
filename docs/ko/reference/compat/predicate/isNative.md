@@ -6,7 +6,7 @@
 const result = isNative(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isNative(value)`
 

@@ -6,7 +6,7 @@
 const result = isSubsetWith(superset, subset, areItemsEqual);
 ```
 
-## 参考
+## 用法
 
 ### `isSubsetWith(superset, subset, areItemsEqual)`
 

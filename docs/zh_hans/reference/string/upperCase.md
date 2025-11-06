@@ -6,7 +6,7 @@
 const result = upperCase(str);
 ```
 
-## 参考
+## 用法
 
 ### `upperCase(str)`
 

@@ -6,7 +6,7 @@ Creates a new function that inverts the return value of a function that returns 
 const negatedFunc = negate(booleanFunc);
 ```
 
-## Reference
+## Usage
 
 ### `negate(func)`
 

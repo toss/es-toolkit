@@ -6,7 +6,7 @@
 const result = isMatchWith(target, source, customizer);
 ```
 
-## 参考
+## 用法
 
 ### `isMatchWith(target, source, customizer)`
 

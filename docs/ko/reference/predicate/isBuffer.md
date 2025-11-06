@@ -6,7 +6,7 @@
 const result = isBuffer(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isBuffer(value)`
 

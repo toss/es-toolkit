@@ -6,7 +6,7 @@ Checks if a value is object-like.
 const result = isObjectLike(value);
 ```
 
-## Reference
+## Usage
 
 ### `isObjectLike(value)`
 

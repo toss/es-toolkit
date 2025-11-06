@@ -14,7 +14,7 @@ Rounds a number down to the specified decimal places.
 const result = floor(number, precision);
 ```
 
-## Reference
+## Usage
 
 ### `floor(number, precision?)`
 

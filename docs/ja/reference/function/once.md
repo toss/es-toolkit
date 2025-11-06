@@ -6,7 +6,7 @@
 const onceFunc = once(func);
 ```
 
-## 参照
+## 使用法
 
 ### `once(func)`
 

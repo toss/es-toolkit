@@ -14,7 +14,7 @@ Creates a function that groups the remaining arguments from a specified index in
 const restFunc = rest(func, start);
 ```
 
-## Reference
+## Usage
 
 ### `rest(func, start)`
 

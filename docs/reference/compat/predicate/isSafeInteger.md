@@ -14,7 +14,7 @@ Checks if a value is a safe integer.
 const result = isSafeInteger(value);
 ```
 
-## Reference
+## Usage
 
 ### `isSafeInteger(value)`
 

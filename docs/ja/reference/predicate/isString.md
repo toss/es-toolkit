@@ -6,7 +6,7 @@
 const result = isString(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isString(value)`
 

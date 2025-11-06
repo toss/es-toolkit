@@ -6,7 +6,7 @@
 const result = xor(arr1, arr2);
 ```
 
-## 参考
+## 用法
 
 ### `xor(arr1, arr2)`
 

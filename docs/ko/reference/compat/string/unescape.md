@@ -14,7 +14,7 @@ HTML 엔터티를 원래 문자로 변환해요.
 const unescaped = unescape(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `unescape(str)`
 

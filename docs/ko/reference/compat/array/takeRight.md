@@ -14,7 +14,7 @@
 const result = takeRight(array, count);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `takeRight(array, count)`
 

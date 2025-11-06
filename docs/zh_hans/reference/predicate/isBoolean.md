@@ -6,7 +6,7 @@
 const result = isBoolean(value);
 ```
 
-## 参考
+## 用法
 
 ### `isBoolean(value)`
 

@@ -6,7 +6,7 @@ Checks if an object satisfies all given condition functions.
 const result = conformsTo(target, source);
 ```
 
-## Reference
+## Usage
 
 ### `conformsTo(target, source)`
 

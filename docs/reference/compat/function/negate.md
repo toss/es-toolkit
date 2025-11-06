@@ -14,7 +14,7 @@ Creates a new function that negates the result of the given function.
 const negatedFunc = negate(predicate);
 ```
 
-## Reference
+## Usage
 
 ### `negate(predicate)`
 

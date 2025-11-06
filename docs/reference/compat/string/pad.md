@@ -14,7 +14,7 @@ Pads a string on both sides with padding characters to reach the specified lengt
 const padded = pad(str, length, chars);
 ```
 
-## Reference
+## Usage
 
 ### `pad(str, length, chars)`
 

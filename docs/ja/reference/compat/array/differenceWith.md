@@ -14,7 +14,7 @@
 const result = differenceWith(array, ...values, comparator);
 ```
 
-## 参照
+## 使用法
 
 ### `differenceWith(array, ...values, comparator)`
 

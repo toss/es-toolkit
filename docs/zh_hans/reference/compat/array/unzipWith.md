@@ -14,7 +14,7 @@
 const result = unzipWith(array, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `unzipWith(array, iteratee)`
 

@@ -6,7 +6,7 @@ Converts HTML entity characters to their original characters.
 const result = unescape(str);
 ```
 
-## Reference
+## Usage
 
 ### `unescape(str)`
 

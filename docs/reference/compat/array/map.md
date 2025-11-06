@@ -14,7 +14,7 @@ Transforms each element of an array or object to create a new array.
 const mapped = map(collection, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `map(collection, iteratee)`
 

@@ -14,7 +14,7 @@
 const conditionFunction = cond(pairs);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `cond(pairs)`
 

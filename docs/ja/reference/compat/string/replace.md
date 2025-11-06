@@ -14,7 +14,7 @@
 const replaced = replace(target, pattern, replacement);
 ```
 
-## 参照
+## 使用法
 
 ### `replace(target, pattern, replacement)`
 

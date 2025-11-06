@@ -6,7 +6,7 @@
 await delay(ms, options?);
 ```
 
-## 参照
+## 使用法
 
 ### `delay(ms, options?)`
 

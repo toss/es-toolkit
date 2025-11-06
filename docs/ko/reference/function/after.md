@@ -6,7 +6,7 @@
 const afterFunc = after(n, func);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `after(n, func)`
 

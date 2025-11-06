@@ -12,7 +12,7 @@
 const combinedFunc = flowRight(...functions);
 ```
 
-## 参考
+## 用法
 
 ### `flowRight(...functions)`
 

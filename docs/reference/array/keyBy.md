@@ -6,7 +6,7 @@ Returns a new object with array elements converted to key-value pairs using a ke
 const result = keyBy(arr, getKeyFromItem);
 ```
 
-## Reference
+## Usage
 
 ### `keyBy(arr, getKeyFromItem)`
 

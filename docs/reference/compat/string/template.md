@@ -14,7 +14,7 @@ Creates a function that interpolates values into a string template to generate a
 const compiled = template(templateString);
 ```
 
-## Reference
+## Usage
 
 ### `template(string, options?)`
 

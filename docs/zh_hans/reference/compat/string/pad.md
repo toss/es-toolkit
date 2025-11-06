@@ -14,7 +14,7 @@
 const padded = pad(str, length, chars);
 ```
 
-## 参考
+## 用法
 
 ### `pad(str, length, chars)`
 

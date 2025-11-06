@@ -15,7 +15,7 @@ const result = without([1, 2, 3, 4, 5], 2, 4);
 // result 是 [1, 3, 5]。
 ```
 
-## 参考
+## 用法
 
 ### `without(array, ...values)`
 

@@ -6,7 +6,7 @@
 const result = initial(arr);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `initial(arr)`
 

@@ -14,7 +14,7 @@ Takes elements from the end of an array while the condition is satisfied.
 const result = takeRightWhile(array, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `takeRightWhile(array, predicate)`
 

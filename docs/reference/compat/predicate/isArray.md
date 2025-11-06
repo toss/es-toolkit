@@ -14,7 +14,7 @@ Checks if a value is an array.
 const result = isArray(value);
 ```
 
-## Reference
+## Usage
 
 ### `isArray(value)`
 

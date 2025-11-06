@@ -14,7 +14,7 @@
 const result = isFinite(value);
 ```
 
-## 参考
+## 用法
 
 ### `isFinite(value)`
 

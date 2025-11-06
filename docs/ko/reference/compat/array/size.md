@@ -14,7 +14,7 @@
 const length = size(collection);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `size(collection)`
 

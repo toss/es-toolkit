@@ -14,7 +14,7 @@
 forEachRight(collection, callback);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `forEachRight(collection, callback)`
 

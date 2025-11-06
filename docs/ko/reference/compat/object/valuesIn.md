@@ -14,7 +14,7 @@
 const values = valuesIn(obj);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `valuesIn(object)`
 

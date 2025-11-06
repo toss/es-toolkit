@@ -14,7 +14,7 @@
 const randomItem = sample(collection);
 ```
 
-## 参照
+## 使用法
 
 ### `sample(collection)`
 

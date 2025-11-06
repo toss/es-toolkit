@@ -14,7 +14,7 @@ Removes elements from the beginning of an array based on a predicate function.
 const result = dropWhile(array, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `dropWhile(array, predicate)`
 

@@ -14,7 +14,7 @@
 const hasMatch = some(collection, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `some(collection, predicate)`
 

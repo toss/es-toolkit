@@ -14,7 +14,7 @@
 const wrappedFunc = wrap(value, wrapper);
 ```
 
-## 参照
+## 使用法
 
 ### `wrap(value, wrapper)`
 

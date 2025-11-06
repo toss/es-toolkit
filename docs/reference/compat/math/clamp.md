@@ -14,7 +14,7 @@ Clamps a number within the specified range.
 const clamped = clamp(number, lower, upper);
 ```
 
-## Reference
+## Usage
 
 ### `clamp(number, lower, upper)`
 

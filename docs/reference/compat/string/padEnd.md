@@ -14,7 +14,7 @@ Pads the end of a string to extend it to the specified length.
 const padded = padEnd(str, length, chars);
 ```
 
-## Reference
+## Usage
 
 ### `padEnd(str, length?, chars?)`
 

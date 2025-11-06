@@ -14,7 +14,7 @@
 const functionNames = functionsIn(obj);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `functionsIn(object)`
 

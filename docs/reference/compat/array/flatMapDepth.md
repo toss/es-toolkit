@@ -14,7 +14,7 @@ Transforms each element of an array with an iteratee function and flattens to th
 const result = flatMapDepth(collection, iteratee, depth);
 ```
 
-## Reference
+## Usage
 
 ### `flatMapDepth(collection, iteratee, depth)`
 

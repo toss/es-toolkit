@@ -6,7 +6,7 @@
 const result = isFile(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isFile(value)`
 

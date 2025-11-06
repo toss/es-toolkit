@@ -6,7 +6,7 @@ Returns the last element of an array.
 const lastElement = last(arr);
 ```
 
-## Reference
+## Usage
 
 ### `last(arr)`
 

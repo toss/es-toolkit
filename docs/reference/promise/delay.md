@@ -6,7 +6,7 @@ Delays code execution for a specified amount of time.
 await delay(ms, options?);
 ```
 
-## Reference
+## Usage
 
 ### `delay(ms, options?)`
 

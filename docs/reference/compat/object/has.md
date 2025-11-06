@@ -14,7 +14,7 @@ Checks if a property at the specified path exists in an object.
 const exists = has(object, path);
 ```
 
-## Reference
+## Usage
 
 ### `has(object, path)`
 

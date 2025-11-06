@@ -6,7 +6,7 @@
 const result = isNotNil(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isNotNil(value)`
 

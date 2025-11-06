@@ -14,7 +14,7 @@ Reverses array elements in place.
 const reversed = reverse(array);
 ```
 
-## Reference
+## Usage
 
 ### `reverse(array)`
 

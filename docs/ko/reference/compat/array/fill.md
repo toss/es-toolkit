@@ -14,7 +14,7 @@
 const result = fill(array, value, start, end);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `fill(array, value, start?, end?)`
 

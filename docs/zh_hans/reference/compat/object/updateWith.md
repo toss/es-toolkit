@@ -14,7 +14,7 @@
 const updated = updateWith(obj, path, updater, customizer);
 ```
 
-## 参考
+## 用法
 
 ### `updateWith(obj, path, updater, customizer?)`
 

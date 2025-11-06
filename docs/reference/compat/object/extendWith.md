@@ -14,7 +14,7 @@ Copies own and inherited properties of objects to another object with custom log
 const result = extendWith(object, source, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `extendWith(object, ...sources, customizer)`
 

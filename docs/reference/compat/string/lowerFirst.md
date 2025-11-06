@@ -14,7 +14,7 @@ Converts the first character of a string to lowercase.
 const result = lowerFirst(str);
 ```
 
-## Reference
+## Usage
 
 ### `lowerFirst(str)`
 

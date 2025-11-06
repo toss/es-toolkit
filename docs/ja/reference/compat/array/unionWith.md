@@ -14,7 +14,7 @@
 const result = unionWith(...arrays, comparator);
 ```
 
-## 参照
+## 使用法
 
 ### `unionWith(...arrays, comparator)`
 

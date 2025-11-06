@@ -6,7 +6,7 @@
 const result = isArguments(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isArguments(value)`
 

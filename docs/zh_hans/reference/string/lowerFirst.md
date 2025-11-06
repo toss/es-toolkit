@@ -6,7 +6,7 @@
 const result = lowerFirst(str);
 ```
 
-## 参考
+## 用法
 
 ### `lowerFirst(str)`
 

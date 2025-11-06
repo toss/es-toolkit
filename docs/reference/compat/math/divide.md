@@ -14,7 +14,7 @@ Divides two numbers.
 const result = divide(value, other);
 ```
 
-## Reference
+## Usage
 
 ### `divide(value, other)`
 

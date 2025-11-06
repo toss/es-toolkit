@@ -14,7 +14,7 @@
 const result = forInRight(obj, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `forInRight(object, iteratee)`
 

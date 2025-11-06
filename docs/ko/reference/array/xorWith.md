@@ -6,7 +6,7 @@
 const result = xorWith(arr1, arr2, areElementsEqual);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `xorWith(arr1, arr2, areElementsEqual)`
 

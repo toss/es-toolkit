@@ -14,7 +14,7 @@ Converts a string to start case.
 const startCased = startCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `startCase(str)`
 

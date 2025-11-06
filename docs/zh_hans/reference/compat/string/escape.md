@@ -14,7 +14,7 @@
 const result = escape(str);
 ```
 
-## 参考
+## 用法
 
 ### `escape(str)`
 

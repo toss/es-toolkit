@@ -6,7 +6,7 @@
 const finite = toFinite(value);
 ```
 
-## 参照
+## 使用法
 
 ### `toFinite(value)`
 

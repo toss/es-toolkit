@@ -14,7 +14,7 @@
 const result = lte(value, other);
 ```
 
-## 参照
+## 使用法
 
 ### `lte(value, other)`
 

@@ -14,7 +14,7 @@
 const result = isFinite(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isFinite(value)`
 

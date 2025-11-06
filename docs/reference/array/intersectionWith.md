@@ -6,7 +6,7 @@ Returns a new array containing the intersection of two arrays based on a custom 
 const result = intersectionWith(firstArr, secondArr, areItemsEqual);
 ```
 
-## Reference
+## Usage
 
 ### `intersectionWith(firstArr, secondArr, areItemsEqual)`
 

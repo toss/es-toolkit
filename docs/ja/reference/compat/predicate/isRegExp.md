@@ -14,7 +14,7 @@
 const result = isRegExp(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isRegExp(value)`
 

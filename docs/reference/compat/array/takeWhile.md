@@ -14,7 +14,7 @@ Takes elements from the beginning of an array while the condition is satisfied.
 const result = takeWhile(array, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `takeWhile(array, predicate)`
 

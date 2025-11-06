@@ -14,7 +14,7 @@
 const cloned = cloneDeepWith(value, customizer);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `cloneDeepWith(value, customizer?)`
 

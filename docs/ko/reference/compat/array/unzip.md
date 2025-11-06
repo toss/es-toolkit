@@ -14,7 +14,7 @@
 const result = unzip(array);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `unzip(array)`
 

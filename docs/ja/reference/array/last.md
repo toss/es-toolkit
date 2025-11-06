@@ -6,7 +6,7 @@
 const lastElement = last(arr);
 ```
 
-## 参照
+## 使用法
 
 ### `last(arr)`
 

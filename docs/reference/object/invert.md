@@ -6,7 +6,7 @@ Creates a new object with keys and values swapped.
 const inverted = invert(obj);
 ```
 
-## Reference
+## Usage
 
 ### `invert(obj)`
 

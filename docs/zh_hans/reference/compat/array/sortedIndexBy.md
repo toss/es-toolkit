@@ -14,7 +14,7 @@
 const index = sortedIndexBy(array, value, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `sortedIndexBy(array, value, iteratee)`
 

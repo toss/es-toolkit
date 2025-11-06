@@ -6,7 +6,7 @@ Transforms elements of two arrays with a conversion function, computes their dif
 const result = differenceBy(firstArr, secondArr, mapper);
 ```
 
-## Reference
+## Usage
 
 ### `differenceBy(firstArr, secondArr, mapper)`
 

@@ -14,7 +14,7 @@
 const result = divide(value, other);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `divide(value, other)`
 

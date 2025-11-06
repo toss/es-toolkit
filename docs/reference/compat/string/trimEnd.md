@@ -14,7 +14,7 @@ Removes trailing whitespace or specified characters from a string.
 const trimmed = trimEnd(str, chars);
 ```
 
-## Reference
+## Usage
 
 ### `trimEnd(str, chars)`
 

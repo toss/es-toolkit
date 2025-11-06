@@ -14,7 +14,7 @@ Shuffles the elements of an array or object randomly and returns a new array.
 const result = shuffle(collection);
 ```
 
-## Reference
+## Usage
 
 ### `shuffle(collection)`
 

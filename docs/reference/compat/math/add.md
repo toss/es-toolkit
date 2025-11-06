@@ -14,7 +14,7 @@ Adds two values.
 const result = add(value, other);
 ```
 
-## Reference
+## Usage
 
 ### `add(value, other)`
 

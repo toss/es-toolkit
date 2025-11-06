@@ -14,7 +14,7 @@ Creates an array of common elements found in all arrays using a custom compariso
 const result = intersectionWith(array, ...otherArrays, comparator);
 ```
 
-## Reference
+## Usage
 
 ### `intersectionWith(array, ...otherArrays, comparator)`
 

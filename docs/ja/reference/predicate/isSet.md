@@ -6,7 +6,7 @@
 const result = isSet(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isSet(value)`
 

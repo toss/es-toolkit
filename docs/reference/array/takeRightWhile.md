@@ -6,7 +6,7 @@ Returns a new array by taking elements from the end of the array while the condi
 const result = takeRightWhile(arr, shouldContinueTaking);
 ```
 
-## Reference
+## Usage
 
 ### `takeRightWhile(arr, shouldContinueTaking)`
 

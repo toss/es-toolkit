@@ -14,7 +14,7 @@ Executes a function for each element of an array or object.
 forEach(collection, callback);
 ```
 
-## Reference
+## Usage
 
 ### `forEach(collection, callback)`
 

@@ -14,7 +14,7 @@ Checks if a value is a plain object.
 const result = isPlainObject(object);
 ```
 
-## Reference
+## Usage
 
 ### `isPlainObject(object)`
 

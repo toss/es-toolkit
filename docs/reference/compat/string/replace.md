@@ -14,7 +14,7 @@ Replaces matching patterns in a string with another string.
 const replaced = replace(target, pattern, replacement);
 ```
 
-## Reference
+## Usage
 
 ### `replace(target, pattern, replacement)`
 

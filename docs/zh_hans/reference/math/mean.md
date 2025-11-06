@@ -6,7 +6,7 @@
 const average = mean(nums);
 ```
 
-## 参考
+## 用法
 
 ### `mean(nums)`
 

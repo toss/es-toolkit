@@ -6,7 +6,7 @@
 const result = upperFirst(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `upperFirst(str)`
 

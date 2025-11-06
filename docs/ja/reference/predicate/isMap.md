@@ -6,7 +6,7 @@
 const result = isMap(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isMap(value)`
 

@@ -14,7 +14,7 @@
 const chunked = chunk(arr, size);
 ```
 
-## 参照
+## 使用法
 
 ### `chunk(arr, size?)`
 

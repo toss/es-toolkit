@@ -14,7 +14,7 @@ Creates a shallow copy of an object.
 const cloned = clone(value);
 ```
 
-## Reference
+## Usage
 
 ### `clone(value)`
 

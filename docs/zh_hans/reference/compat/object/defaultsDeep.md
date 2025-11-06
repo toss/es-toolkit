@@ -14,7 +14,7 @@
 const result = defaultsDeep(target, ...sources);
 ```
 
-## 参考
+## 用法
 
 ### `defaultsDeep(target, ...sources)`
 

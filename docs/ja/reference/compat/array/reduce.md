@@ -14,7 +14,7 @@
 const result = reduce(collection, iteratee, initialValue);
 ```
 
-## 参照
+## 使用法
 
 ### `reduce(collection, iteratee, initialValue)`
 

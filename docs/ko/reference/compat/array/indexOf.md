@@ -14,7 +14,7 @@
 const index = indexOf(array, searchElement, fromIndex);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `indexOf(array, searchElement, fromIndex?)`
 

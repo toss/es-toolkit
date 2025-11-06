@@ -6,7 +6,7 @@
 const taken = takeRight(arr, count);
 ```
 
-## 参考
+## 用法
 
 ### `takeRight(arr, count?)`
 

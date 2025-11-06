@@ -14,7 +14,7 @@ Creates an object using two arrays. The first array is used as property names, a
 const result = zipObject(keys, values);
 ```
 
-## Reference
+## Usage
 
 ### `zipObject(keys, values)`
 

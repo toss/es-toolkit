@@ -14,7 +14,7 @@ Performs an iteration operation from right to left on each element of an array o
 const result = eachRight(collection, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `eachRight(collection, iteratee)`
 

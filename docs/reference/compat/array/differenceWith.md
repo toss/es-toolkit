@@ -14,7 +14,7 @@ Removes elements from the first array that are present in the other arrays using
 const result = differenceWith(array, ...values, comparator);
 ```
 
-## Reference
+## Usage
 
 ### `differenceWith(array, ...values, comparator)`
 

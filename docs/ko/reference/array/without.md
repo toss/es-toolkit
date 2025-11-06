@@ -6,7 +6,7 @@
 const filtered = without(arr, ...values);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `without(arr, ...values)`
 

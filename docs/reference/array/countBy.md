@@ -6,7 +6,7 @@ Categorizes the elements of an array based on a transformation function result a
 const counted = countBy(arr, mapper);
 ```
 
-## Reference
+## Usage
 
 ### `countBy(arr, mapper)`
 

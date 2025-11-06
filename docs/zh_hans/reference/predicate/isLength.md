@@ -6,7 +6,7 @@
 const result = isLength(value);
 ```
 
-## 参考
+## 用法
 
 ### `isLength(value)`
 

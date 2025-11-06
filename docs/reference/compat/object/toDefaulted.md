@@ -14,7 +14,7 @@ Creates a new object by applying default values to an object.
 const defaulted = toDefaulted(object, ...sources);
 ```
 
-## Reference
+## Usage
 
 ### `toDefaulted(object, ...sources)`
 

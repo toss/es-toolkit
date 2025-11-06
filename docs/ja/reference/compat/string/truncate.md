@@ -14,7 +14,7 @@
 const truncated = truncate(str, options);
 ```
 
-## 参照
+## 使用法
 
 ### `truncate(string, options?)`
 

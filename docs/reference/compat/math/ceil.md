@@ -14,7 +14,7 @@ Rounds a number up to the specified decimal places.
 const result = ceil(number, precision);
 ```
 
-## Reference
+## Usage
 
 ### `ceil(number, precision?)`
 

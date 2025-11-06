@@ -6,7 +6,7 @@
 const result = times(n, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `times(n, iteratee)`
 

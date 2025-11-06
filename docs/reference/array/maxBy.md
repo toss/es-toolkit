@@ -6,7 +6,7 @@ Returns the element with the maximum value from the array based on the value ret
 const max = maxBy(items, getValue);
 ```
 
-## Reference
+## Usage
 
 ### `maxBy(items, getValue)`
 

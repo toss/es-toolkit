@@ -14,7 +14,7 @@
 const result = castArray(value);
 ```
 
-## 参照
+## 使用法
 
 ### `castArray(value?)`
 

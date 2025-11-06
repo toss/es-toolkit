@@ -6,7 +6,7 @@ Removes whitespace or specified characters from the start of a string.
 const trimmed = trimStart(str, chars);
 ```
 
-## Reference
+## Usage
 
 ### `trimStart(str, chars?)`
 

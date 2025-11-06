@@ -14,7 +14,7 @@ Creates a new array of unique elements by removing duplicates using a comparison
 const result = uniqWith(array, comparator);
 ```
 
-## Reference
+## Usage
 
 ### `uniqWith(array, comparator)`
 

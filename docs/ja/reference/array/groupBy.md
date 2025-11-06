@@ -6,7 +6,7 @@
 const grouped = groupBy(arr, getKeyFromItem);
 ```
 
-## 参照
+## 使用法
 
 ### `groupBy(arr, getKeyFromItem)`
 

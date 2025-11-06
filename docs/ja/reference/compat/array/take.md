@@ -15,7 +15,7 @@ const result = take([1, 2, 3, 4, 5], 3);
 // resultは[1, 2, 3]になります。
 ```
 
-## 参照
+## 使用法
 
 ### `take(array, count)`
 

@@ -6,7 +6,7 @@ Converts a nested object into a flat object.
 const flattened = flattenObject(object, options?);
 ```
 
-## Reference
+## Usage
 
 ### `flattenObject(object, options?)`
 

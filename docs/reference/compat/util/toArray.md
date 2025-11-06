@@ -14,7 +14,7 @@ Converts a value to an array.
 const array = toArray(value);
 ```
 
-## Reference
+## Usage
 
 ### `toArray(value)`
 

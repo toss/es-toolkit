@@ -14,7 +14,7 @@ Computes the difference between the first array and the other arrays, excluding 
 const result = difference(arr, ...values);
 ```
 
-## Reference
+## Usage
 
 ### `difference(arr, ...values)`
 

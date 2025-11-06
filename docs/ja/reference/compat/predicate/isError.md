@@ -12,7 +12,7 @@
 const result = isError(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isError(value)`
 

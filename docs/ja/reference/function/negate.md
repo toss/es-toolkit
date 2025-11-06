@@ -6,7 +6,7 @@
 const negatedFunc = negate(booleanFunc);
 ```
 
-## 参照
+## 使用法
 
 ### `negate(func)`
 

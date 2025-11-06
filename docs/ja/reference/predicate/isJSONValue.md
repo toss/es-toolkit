@@ -6,7 +6,7 @@
 const result = isJSONValue(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isJSONValue(value)`
 

@@ -6,7 +6,7 @@ Creates a new array with elements that exist in only one of two arrays.
 const result = xor(arr1, arr2);
 ```
 
-## Reference
+## Usage
 
 ### `xor(arr1, arr2)`
 

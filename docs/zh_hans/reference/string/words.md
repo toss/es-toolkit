@@ -6,7 +6,7 @@
 const result = words(str);
 ```
 
-## 参考
+## 用法
 
 ### `words(str)`
 

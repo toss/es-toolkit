@@ -6,7 +6,7 @@
 const combined = flowRight(func1, func2, func3);
 ```
 
-## 参照
+## 使用法
 
 ### `flowRight(...funcs)`
 

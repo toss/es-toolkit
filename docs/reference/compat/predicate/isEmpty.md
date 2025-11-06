@@ -6,7 +6,7 @@ Checks if a given value is empty.
 const result = isEmpty(value);
 ```
 
-## Reference
+## Usage
 
 ### `isEmpty(value)`
 

@@ -6,7 +6,7 @@ Deeply clones the given value with a custom cloning function.
 const customCloned = cloneDeepWith(obj, cloneValue);
 ```
 
-## Reference
+## Usage
 
 ### `cloneDeepWith(obj, cloneValue)`
 

@@ -14,7 +14,7 @@ Calculates the average value of an array.
 const average = mean(array);
 ```
 
-## Reference
+## Usage
 
 ### `mean(array)`
 

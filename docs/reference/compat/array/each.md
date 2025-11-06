@@ -14,7 +14,7 @@ Performs an iteration operation on each element of an array or object.
 const result = each(collection, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `each(collection, iteratee)`
 

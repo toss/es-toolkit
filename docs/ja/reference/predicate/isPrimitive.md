@@ -6,7 +6,7 @@
 const result = isPrimitive(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isPrimitive(value)`
 

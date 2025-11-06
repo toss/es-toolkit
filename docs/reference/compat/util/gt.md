@@ -14,7 +14,7 @@ Checks if value is greater than other.
 const result = gt(value, other);
 ```
 
-## Reference
+## Usage
 
 ### `gt(value, other)`
 

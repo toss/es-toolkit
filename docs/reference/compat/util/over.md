@@ -14,7 +14,7 @@ Creates a function that passes the same arguments to given functions and returns
 const multiCall = over(funcs);
 ```
 
-## Reference
+## Usage
 
 ### `over(...iteratees)`
 

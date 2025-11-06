@@ -6,7 +6,7 @@
 const result = isJSONArray(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isJSONArray(value)`
 

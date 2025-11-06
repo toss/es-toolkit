@@ -6,7 +6,7 @@ HTMLで特別な意味を持つ文字を安全なエンティティに変換し�
 const result = escape(str);
 ```
 
-## 参照
+## 使用法
 
 ### `escape(str)`
 

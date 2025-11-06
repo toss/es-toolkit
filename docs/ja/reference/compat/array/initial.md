@@ -14,7 +14,7 @@
 const result = initial(array);
 ```
 
-## 参照
+## 使用法
 
 ### `initial(array)`
 
