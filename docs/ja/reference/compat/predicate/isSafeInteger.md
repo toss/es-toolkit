@@ -60,5 +60,5 @@ isSafeInteger(NaN); // false
 `true` を返す場合、TypeScript は `value` の型を `number` に絞り込みます。
 
 > 🧠 **TypeScript 注記:**  
-> この関数は **型 predicate** として機能します。つまり、`true` を返す場合、  
+> この関数は **型ガード** として機能します。つまり、`true` を返す場合、  
 > TypeScript は引数の型を `number` に絞り込みます。
