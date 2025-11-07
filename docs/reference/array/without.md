@@ -13,7 +13,7 @@ const filtered = without(arr, ...values);
 Use `without` when you want to remove unwanted specific values from an array. The original array is not modified, and a new array with the specified values removed is returned.
 
 The function also provides enhanced TypeScript type inference —
-when literal values are passed, the return type automatically narrows using `Exclude<T, V>.`
+when literal values are passed, the return type automatically narrows using `Exclude<T, V>`.
 
 ```
 import { without } from 'es-toolkit/array';
