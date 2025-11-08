@@ -23,5 +23,5 @@
  * ```
  */
 export function isFinite(value: unknown): value is number {
-  return typeof value === 'number' && Number.isFinite(value);
+  return Number.isFinite(value);
 }
