@@ -50,4 +50,9 @@ isFinite(undefined); // false
 
 #### 戻り値
 
-(`boolean`): 値が有限な数値の場合は`true`、そうでない場合は`false`を返します。
+(`value is number`): 値が有限な数値の場合は`true`、そうでない場合は`false`を返します。  
+`true`を返す場合、TypeScriptは`value`の型を`number`に絞り込みます。
+
+> 🧠 **TypeScript メモ:**  
+> この関数は**型ガード**として動作します。`true`を返す場合、  
+> TypeScriptは引数の型を自動的に`number`に絞り込みます。
