@@ -1,6 +1,7 @@
 import { createRequire } from 'module';
 import path from 'path';
 import { defineConfig } from 'vitepress';
+import llmstxt from 'vitepress-plugin-llms';
 import { search as koSearch } from './ko.mts';
 import { search as zh_hansSearch } from './zh_hans.mts';
 
@@ -143,5 +144,17 @@ export const shared = defineConfig({
         ),
       },
     },
+    plugins: [
+      llmstxt({
+        ignoreFiles: ['public/**/*', 'ja/**/*', 'ko/**/*', 'zh_hans/**/*', 'zh_hans/*', 'index.md', 'team.md'],
+        description: 'State-of-the-art JavaScript utility library',
+        details: `\
+es-toolkit is a modern JavaScript utility library that offers a collection of powerful functions for everyday use.
+
+Compared to alternatives like lodash, es-toolkit provides a significantly smaller bundle size (up to 97% less) and 2-3 times faster runtime performance. This is achieved through a modern implementation that leverages the latest JavaScript features.
+
+es-toolkit comes with built-in TypeScript types and has been rigorously tested, ensuring 100% test coverage for maximum reliability.`,
+      }),
+    ],
   },
 });
