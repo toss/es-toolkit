@@ -146,7 +146,7 @@ export const shared = defineConfig({
     },
     plugins: [
       llmstxt({
-        ignoreFiles: ['public/**/*', 'ja/**/*', 'ko/**/*', 'zh_hans/**/*', 'zh_hans/*', 'index.md', 'team.md'],
+        ignoreFiles: ['public/**/*', 'ja/**/*', 'ko/**/*', 'zh_hans/**/*', 'index.md', 'team.md'],
         description: 'State-of-the-art JavaScript utility library',
         details: `\
 es-toolkit is a modern JavaScript utility library that offers a collection of powerful functions for everyday use.
