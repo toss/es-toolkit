@@ -52,7 +52,3 @@ isFinite(undefined); // false
 
 (`value is number`): Returns `true` if the value is a finite number, otherwise `false`.  
 When `true`, TypeScript narrows the type of `value` to `number`.
-
-> 🧠 **TypeScript note:**  
-> This function acts as a **type predicate**, meaning that when it returns `true`,  
-> TypeScript automatically narrows the argument’s type to `number`.
