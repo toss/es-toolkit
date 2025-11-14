@@ -17,18 +17,14 @@ import { forEachAsync } from 'es-toolkit/array';
 
 // 更新所有用户信息。
 const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
-await forEachAsync(users, async (user) => {
+await forEachAsync(users, async user => {
   await updateUser(user.id);
 });
 // 所有用户更新已完成。
 
 // 限制并发数。
 const items = [1, 2, 3, 4, 5];
-await forEachAsync(
-  items,
-  async (item) => await processItem(item),
-  { concurrency: 2 }
-);
+await forEachAsync(items, async item => await processItem(item), { concurrency: 2 });
 // 最多同时处理 2 个项目。
 ```
 
@@ -39,11 +35,7 @@ import { forEachAsync } from 'es-toolkit/array';
 
 // 顺序上传文件。
 const files = ['file1.txt', 'file2.txt', 'file3.txt'];
-await forEachAsync(
-  files,
-  async (file) => await uploadFile(file),
-  { concurrency: 1 }
-);
+await forEachAsync(files, async file => await uploadFile(file), { concurrency: 1 });
 // 一次只上传一个文件。
 ```
 

@@ -17,18 +17,14 @@ import { mapAsync } from 'es-toolkit/array';
 
 // Fetch detailed information for each user.
 const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const userDetails = await mapAsync(users, async (user) => {
+const userDetails = await mapAsync(users, async user => {
   return await fetchUserDetails(user.id);
 });
 // Returns: [{ id: 1, name: '...' }, { id: 2, name: '...' }, { id: 3, name: '...' }]
 
 // Limit concurrency.
 const numbers = [1, 2, 3, 4, 5];
-const results = await mapAsync(
-  numbers,
-  async (n) => await slowOperation(n),
-  { concurrency: 2 }
-);
+const results = await mapAsync(numbers, async n => await slowOperation(n), { concurrency: 2 });
 // Only 2 operations run concurrently at most.
 ```
 

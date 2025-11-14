@@ -17,18 +17,14 @@ import { forEachAsync } from 'es-toolkit/array';
 
 // Update all user information.
 const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
-await forEachAsync(users, async (user) => {
+await forEachAsync(users, async user => {
   await updateUser(user.id);
 });
 // All user updates completed.
 
 // Limit concurrency.
 const items = [1, 2, 3, 4, 5];
-await forEachAsync(
-  items,
-  async (item) => await processItem(item),
-  { concurrency: 2 }
-);
+await forEachAsync(items, async item => await processItem(item), { concurrency: 2 });
 // Only 2 items are processed concurrently at most.
 ```
 
@@ -39,11 +35,7 @@ import { forEachAsync } from 'es-toolkit/array';
 
 // Upload files sequentially.
 const files = ['file1.txt', 'file2.txt', 'file3.txt'];
-await forEachAsync(
-  files,
-  async (file) => await uploadFile(file),
-  { concurrency: 1 }
-);
+await forEachAsync(files, async file => await uploadFile(file), { concurrency: 1 });
 // Only one file is uploaded at a time.
 ```
 

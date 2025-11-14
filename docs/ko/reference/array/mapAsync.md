@@ -17,18 +17,14 @@ import { mapAsync } from 'es-toolkit/array';
 
 // 각 사용자의 상세 정보를 가져와요.
 const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const userDetails = await mapAsync(users, async (user) => {
+const userDetails = await mapAsync(users, async user => {
   return await fetchUserDetails(user.id);
 });
 // 반환: [{ id: 1, name: '...' }, { id: 2, name: '...' }, { id: 3, name: '...' }]
 
 // 동시 실행 수를 제한할 수 있어요.
 const numbers = [1, 2, 3, 4, 5];
-const results = await mapAsync(
-  numbers,
-  async (n) => await slowOperation(n),
-  { concurrency: 2 }
-);
+const results = await mapAsync(numbers, async n => await slowOperation(n), { concurrency: 2 });
 // 최대 2개의 작업만 동시에 실행돼요.
 ```
 
