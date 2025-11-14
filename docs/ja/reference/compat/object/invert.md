@@ -14,7 +14,7 @@
 const inverted = invert(object);
 ```
 
-## 参照
+## 使用法
 
 ### `invert(object)`
 

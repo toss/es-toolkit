@@ -6,7 +6,7 @@
 const total = sum(numbers);
 ```
 
-## 参照
+## 使用法
 
 ### `sum(nums)`
 

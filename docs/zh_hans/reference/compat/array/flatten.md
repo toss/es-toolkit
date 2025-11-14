@@ -14,7 +14,7 @@
 const result = flatten(array, depth);
 ```
 
-## 参考
+## 用法
 
 ### `flatten(value, depth)`
 

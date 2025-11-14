@@ -14,7 +14,7 @@
 const success = unset(obj, path);
 ```
 
-## 参照
+## 使用法
 
 ### `unset(obj, path)`
 

@@ -33,6 +33,14 @@ describe('keys methods', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('`keysIn` should only include indices for arrays', () => {
+    expect(func([1, 2, 3])).toEqual(['0', '1', '2']);
+  });
+
+  it('`keysIn` should include `length` property for array-like objects', () => {
+    expect(func({ 0: 'a', length: 1 })).toEqual(['0', 'length']);
+  });
+
   it(`\`keysIn\` should treat sparse arrays as dense`, () => {
     const array = [1];
     array[2] = 3;

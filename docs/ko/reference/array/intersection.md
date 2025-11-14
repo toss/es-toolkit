@@ -6,7 +6,7 @@
 const result = intersection(firstArr, secondArr);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `intersection(firstArr, secondArr)`
 

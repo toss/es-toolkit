@@ -14,7 +14,7 @@ Checks if a value is a Map.
 const result = isMap(value);
 ```
 
-## Reference
+## Usage
 
 ### `isMap(value)`
 

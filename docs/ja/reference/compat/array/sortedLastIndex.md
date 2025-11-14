@@ -14,7 +14,7 @@
 const index = sortedLastIndex(array, value);
 ```
 
-## 参照
+## 使用法
 
 ### `sortedLastIndex(array, value)`
 

@@ -6,7 +6,7 @@ Checks if a given value is a JavaScript primitive.
 const result = isPrimitive(value);
 ```
 
-## Reference
+## Usage
 
 ### `isPrimitive(value)`
 

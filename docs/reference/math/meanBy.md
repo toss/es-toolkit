@@ -6,7 +6,7 @@ Calculates the average of an array by applying the `getValue` function to each e
 const average = meanBy(items, getValue);
 ```
 
-## Reference
+## Usage
 
 ### `meanBy(items, getValue)`
 

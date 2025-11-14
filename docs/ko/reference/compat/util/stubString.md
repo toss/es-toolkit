@@ -14,7 +14,7 @@
 const emptyString = stubString();
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `stubString()`
 

@@ -6,7 +6,7 @@ Creates a new array excluding specific values from the array.
 const filtered = without(arr, ...values);
 ```
 
-## Reference
+## Usage
 
 ### `without(arr, ...values)`
 

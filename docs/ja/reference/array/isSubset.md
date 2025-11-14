@@ -6,7 +6,7 @@
 const result = isSubset(superset, subset);
 ```
 
-## 参照
+## 使用法
 
 ### `isSubset(superset, subset)`
 

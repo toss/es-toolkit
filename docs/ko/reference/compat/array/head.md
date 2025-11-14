@@ -14,7 +14,7 @@
 const firstElement = head(array);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `head(array)`
 

@@ -14,7 +14,7 @@
 const grouped = groupBy(collection, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `groupBy(collection, iteratee)`
 

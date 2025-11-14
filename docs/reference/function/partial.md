@@ -6,7 +6,7 @@ Creates a new function with some arguments pre-applied.
 const partialFunc = partial(func, arg1, arg2);
 ```
 
-## Reference
+## Usage
 
 ### `partial(func, ...args)`
 

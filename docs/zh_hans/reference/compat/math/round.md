@@ -14,7 +14,7 @@
 const rounded = round(number, precision);
 ```
 
-## 参考
+## 用法
 
 ### `round(number, precision?)`
 

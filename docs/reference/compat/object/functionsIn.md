@@ -14,7 +14,7 @@ Returns an array of the names of all properties (including inherited properties)
 const functionNames = functionsIn(obj);
 ```
 
-## Reference
+## Usage
 
 ### `functionsIn(object)`
 

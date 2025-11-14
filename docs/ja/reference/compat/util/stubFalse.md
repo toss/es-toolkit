@@ -14,7 +14,7 @@
 const falseValue = stubFalse();
 ```
 
-## 参照
+## 使用法
 
 ### `stubFalse()`
 

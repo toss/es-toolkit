@@ -12,7 +12,7 @@ Returns the received value as is.
 const result = identity(value);
 ```
 
-## Reference
+## Usage
 
 ### `identity(value)`
 

@@ -14,7 +14,7 @@
 const result = xor(...arrays);
 ```
 
-## 参考
+## 用法
 
 ### `xor(...arrays)`
 

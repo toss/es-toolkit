@@ -14,7 +14,7 @@
 const trimmed = trimEnd(str, chars);
 ```
 
-## 参照
+## 使用法
 
 ### `trimEnd(str, chars)`
 

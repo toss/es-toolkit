@@ -14,7 +14,7 @@ Finds the last index at which a given element appears in an array.
 const index = lastIndexOf(array, searchElement, fromIndex);
 ```
 
-## Reference
+## Usage
 
 ### `lastIndexOf(array, searchElement, fromIndex)`
 

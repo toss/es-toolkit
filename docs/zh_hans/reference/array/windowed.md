@@ -6,7 +6,7 @@
 const windows = windowed(arr, size, step?, options?);
 ```
 
-## 参考
+## 用法
 
 ### `windowed(arr, size, step?, options?)`
 

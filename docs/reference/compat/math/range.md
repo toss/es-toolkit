@@ -14,7 +14,7 @@ Creates an array of numbers in a range.
 const numbers = range(start, end, step);
 ```
 
-## Reference
+## Usage
 
 ### `range(end)`
 

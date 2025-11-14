@@ -14,7 +14,7 @@ Finds the key of the first element that matches the predicate.
 const key = findKey(obj, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `findKey(obj, predicate)`
 

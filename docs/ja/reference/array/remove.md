@@ -6,7 +6,7 @@
 const removed = remove(arr, shouldRemoveElement);
 ```
 
-## 参照
+## 使用法
 
 ### `remove(arr, shouldRemoveElement)`
 

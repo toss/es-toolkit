@@ -16,7 +16,7 @@
 const result = invokeMap(collection, method, ...args);
 ```
 
-## 参照
+## 使用法
 
 ### `invokeMap(collection, method, ...args)`
 

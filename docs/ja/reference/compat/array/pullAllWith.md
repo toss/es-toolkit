@@ -6,7 +6,7 @@
 const modified = pullAllWith(array, valuesToRemove, comparator);
 ```
 
-## 参照
+## 使用法
 
 ### `pullAllWith(array, values, comparator)`
 

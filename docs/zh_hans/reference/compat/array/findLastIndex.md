@@ -14,7 +14,7 @@
 const lastIndex = findLastIndex(array, predicate, fromIndex);
 ```
 
-## 参考
+## 用法
 
 ### `findLastIndex(array, predicate, fromIndex)`
 

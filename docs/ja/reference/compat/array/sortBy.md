@@ -14,7 +14,7 @@
 const sorted = sortBy(collection, ...iteratees);
 ```
 
-## 参照
+## 使用法
 
 ### `sortBy(collection, ...iteratees)`
 

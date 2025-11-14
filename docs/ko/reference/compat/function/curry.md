@@ -14,7 +14,7 @@ placeholder가 필요하지 않다면 대신 더 빠른 `es-toolkit`의 [`curry`
 const curriedFunction = curry(func, arity);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `curry(func, arity)`
 

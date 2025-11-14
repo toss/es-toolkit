@@ -6,7 +6,7 @@
 const boundObject = bindAll(object, methodNames);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `bindAll(object, ...methodNames)`
 

@@ -6,7 +6,7 @@ Creates an array of tuples by bundling elements at the same index from multiple 
 const zipped = zip(...arrs);
 ```
 
-## Reference
+## Usage
 
 ### `zip(...arrs)`
 

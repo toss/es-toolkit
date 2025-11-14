@@ -6,7 +6,7 @@
 invariant(condition, message);
 ```
 
-## 参考
+## 用法
 
 ### `invariant(condition, message)`
 

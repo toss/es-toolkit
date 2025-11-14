@@ -14,7 +14,7 @@
 const result = parseInt(string, radix);
 ```
 
-## 参考
+## 用法
 
 ### `parseInt(string, radix?)`
 

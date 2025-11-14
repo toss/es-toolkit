@@ -14,7 +14,7 @@ Creates a new array of unique elements by removing duplicates based on the value
 const result = uniqBy(array, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `uniqBy(array, iteratee)`
 

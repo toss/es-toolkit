@@ -14,7 +14,7 @@
 const result = concat(...values);
 ```
 
-## 参考
+## 用法
 
 ### `concat(...values)`
 

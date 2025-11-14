@@ -6,7 +6,7 @@ Returns a new object excluding the specified keys.
 const result = omit(obj, keys);
 ```
 
-## Reference
+## Usage
 
 ### `omit(obj, keys)`
 

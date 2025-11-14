@@ -6,7 +6,7 @@ Returns a new object containing only the properties that do not satisfy the cond
 const result = omitBy(obj, shouldOmit);
 ```
 
-## Reference
+## Usage
 
 ### `omitBy(obj, shouldOmit)`
 

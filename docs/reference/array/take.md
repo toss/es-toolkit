@@ -6,7 +6,7 @@ Creates a new array by taking the specified number of elements from the beginnin
 const taken = take(arr, count);
 ```
 
-## Reference
+## Usage
 
 ### `take(arr, count?)`
 

@@ -14,7 +14,7 @@ Truncates a string if it's longer than the specified maximum length and appends 
 const truncated = truncate(str, options);
 ```
 
-## Reference
+## Usage
 
 ### `truncate(string, options?)`
 

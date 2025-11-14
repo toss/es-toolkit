@@ -14,7 +14,7 @@
 const snakeCased = snakeCase(str);
 ```
 
-## 参照
+## 使用法
 
 ### `snakeCase(str)`
 

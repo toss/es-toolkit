@@ -6,7 +6,7 @@
 const key = findKey(obj, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `findKey(obj, predicate)`
 

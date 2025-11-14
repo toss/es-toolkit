@@ -14,7 +14,7 @@
 const emptyObject = stubObject();
 ```
 
-## 参照
+## 使用法
 
 ### `stubObject()`
 

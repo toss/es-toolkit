@@ -6,7 +6,7 @@
 const taken = takeWhile(arr, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `takeWhile(arr, predicate)`
 

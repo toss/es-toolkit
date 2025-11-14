@@ -6,7 +6,7 @@ HTML에서 특별한 의미를 가진 문자들을 안전한 엔티티로 바꿔
 const result = escape(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `escape(str)`
 

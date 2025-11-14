@@ -14,7 +14,7 @@ Returns an array of the object's own enumerable property names.
 const keyArray = keys(object);
 ```
 
-## Reference
+## Usage
 
 ### `keys(object)`
 

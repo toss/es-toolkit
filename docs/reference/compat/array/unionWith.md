@@ -14,7 +14,7 @@ Merges multiple arrays and keeps only unique values using a comparison function.
 const result = unionWith(...arrays, comparator);
 ```
 
-## Reference
+## Usage
 
 ### `unionWith(...arrays, comparator)`
 

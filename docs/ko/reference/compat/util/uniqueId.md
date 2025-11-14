@@ -14,7 +14,7 @@
 const result = uniqueId('contact_');
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `uniqueId(prefix?: string): string`
 

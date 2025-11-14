@@ -6,7 +6,7 @@ Deeply merges the source object into the target object, modifying the target obj
 const result = merge(target, source);
 ```
 
-## Reference
+## Usage
 
 ### `merge(target, source)`
 

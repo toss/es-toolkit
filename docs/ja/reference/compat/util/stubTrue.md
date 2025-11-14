@@ -14,7 +14,7 @@
 const result = stubTrue();
 ```
 
-## 参照
+## 使用法
 
 ### `stubTrue()`
 

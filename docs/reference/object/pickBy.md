@@ -6,7 +6,7 @@ Returns a new object containing only the properties that satisfy the condition f
 const result = pickBy(obj, shouldPick);
 ```
 
-## Reference
+## Usage
 
 ### `pickBy(obj, shouldPick)`
 

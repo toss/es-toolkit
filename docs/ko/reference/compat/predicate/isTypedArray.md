@@ -14,7 +14,7 @@
 const result = isTypedArray(x);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isTypedArray(x)`
 

@@ -14,7 +14,7 @@
 const element = nth(array, index);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `nth(array, index)`
 

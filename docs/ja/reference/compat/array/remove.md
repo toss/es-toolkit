@@ -14,7 +14,7 @@
 const removedElements = remove(array, predicate);
 ```
 
-## 参照
+## 使用法
 
 ### `remove(array, predicate)`
 

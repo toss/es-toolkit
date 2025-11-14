@@ -14,7 +14,7 @@ Recursively sets default values on nested objects.
 const result = defaultsDeep(target, ...sources);
 ```
 
-## Reference
+## Usage
 
 ### `defaultsDeep(target, ...sources)`
 

@@ -14,7 +14,7 @@ Splits a string into an array of words.
 const wordArray = words(str, pattern);
 ```
 
-## Reference
+## Usage
 
 ### `words(str, pattern)`
 

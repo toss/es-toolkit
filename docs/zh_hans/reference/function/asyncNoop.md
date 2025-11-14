@@ -12,7 +12,7 @@ const promise = asyncNoop();
 
 :::
 
-## 参考
+## 用法
 
 ### `asyncNoop()`
 

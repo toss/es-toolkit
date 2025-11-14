@@ -14,7 +14,7 @@
 const result = keyBy(collection, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `keyBy(collection, iteratee)`
 

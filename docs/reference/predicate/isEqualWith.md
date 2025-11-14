@@ -6,7 +6,7 @@ Checks if two values are equal using a custom comparison function.
 const result = isEqualWith(a, b, areValuesEqual);
 ```
 
-## Reference
+## Usage
 
 ### `isEqualWith(a, b, areValuesEqual)`
 

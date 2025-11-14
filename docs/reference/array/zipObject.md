@@ -6,7 +6,7 @@ Creates a single object from a keys array and a values array.
 const object = zipObject(keys, values);
 ```
 
-## Reference
+## Usage
 
 ### `zipObject(keys, values)`
 

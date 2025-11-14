@@ -6,7 +6,7 @@
 const restFunc = rest(func, startIndex);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `rest(func, startIndex?)`
 

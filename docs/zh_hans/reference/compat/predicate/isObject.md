@@ -6,7 +6,7 @@
 const result = isObject(value);
 ```
 
-## 参考
+## 用法
 
 ### `isObject(value)`
 

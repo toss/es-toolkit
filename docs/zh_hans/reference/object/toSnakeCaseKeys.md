@@ -8,7 +8,7 @@
 const snakeCased = toSnakeCaseKeys(obj);
 ```
 
-## 参考
+## 用法
 
 ### `toSnakeCaseKeys(obj)`
 

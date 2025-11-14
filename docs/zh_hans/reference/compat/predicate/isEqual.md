@@ -12,7 +12,7 @@
 const result = isEqual(value1, value2);
 ```
 
-## 参考
+## 用法
 
 ### `isEqual(a, b)`
 

@@ -6,7 +6,7 @@
 const lastElement = last(arr);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `last(arr)`
 

@@ -14,7 +14,7 @@ Checks if a value is a TypedArray.
 const result = isTypedArray(x);
 ```
 
-## Reference
+## Usage
 
 ### `isTypedArray(x)`
 

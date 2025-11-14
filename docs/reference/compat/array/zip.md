@@ -15,7 +15,7 @@ const result = zip([1, 2], ['a', 'b']);
 // result is [[1, 'a'], [2, 'b']].
 ```
 
-## Reference
+## Usage
 
 ### `zip(...arrs)`
 

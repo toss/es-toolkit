@@ -14,7 +14,7 @@
 const number = toNumber(value);
 ```
 
-## 参考
+## 用法
 
 ### `toNumber(value)`
 

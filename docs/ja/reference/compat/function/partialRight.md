@@ -14,7 +14,7 @@
 const partialFunc = partialRight(func, ...args);
 ```
 
-## 参照
+## 使用法
 
 ### `partialRight(func, ...args)`
 

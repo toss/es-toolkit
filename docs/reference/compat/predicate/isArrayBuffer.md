@@ -14,7 +14,7 @@ Checks if a value is an ArrayBuffer.
 const result = isArrayBuffer(value);
 ```
 
-## Reference
+## Usage
 
 ### `isArrayBuffer(value)`
 

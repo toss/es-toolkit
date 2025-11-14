@@ -6,7 +6,7 @@
 const result = unescape(str);
 ```
 
-## 参考
+## 用法
 
 ### `unescape(str)`
 

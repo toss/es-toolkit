@@ -14,7 +14,7 @@ Escapes regular expression special characters in a string.
 const result = escapeRegExp(str);
 ```
 
-## Reference
+## Usage
 
 ### `escapeRegExp(str)`
 

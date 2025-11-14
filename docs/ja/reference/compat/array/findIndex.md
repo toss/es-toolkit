@@ -14,7 +14,7 @@
 const index = findIndex(arr, doesMatch, fromIndex);
 ```
 
-## 参照
+## 使用法
 
 ### `findIndex(arr, doesMatch, fromIndex)`
 

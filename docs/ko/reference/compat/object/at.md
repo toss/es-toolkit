@@ -14,7 +14,7 @@
 const result = at(object, ...paths);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `at(object, ...paths)`
 

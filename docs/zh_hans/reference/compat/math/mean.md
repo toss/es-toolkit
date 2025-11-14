@@ -14,7 +14,7 @@
 const average = mean(array);
 ```
 
-## 参考
+## 用法
 
 ### `mean(array)`
 

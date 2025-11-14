@@ -14,7 +14,7 @@
 const clamped = clamp(number, lower, upper);
 ```
 
-## 参考
+## 用法
 
 ### `clamp(number, lower, upper)`
 

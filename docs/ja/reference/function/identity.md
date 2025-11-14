@@ -6,7 +6,7 @@
 const result = identity(value);
 ```
 
-## 参照
+## 使用法
 
 ### `identity(value)`
 

@@ -13,7 +13,7 @@
 const result = forOwnRight(obj, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `forOwnRight(object, iteratee)`
 

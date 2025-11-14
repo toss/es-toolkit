@@ -6,7 +6,7 @@
 forEachRight(arr, callback);
 ```
 
-## 参考
+## 用法
 
 ### `forEachRight(arr, callback)`
 

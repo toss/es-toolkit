@@ -14,7 +14,7 @@
 const exists = hasIn(object, path);
 ```
 
-## 参照
+## 使用法
 
 ### `hasIn(object, path)`
 

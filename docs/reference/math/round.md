@@ -6,7 +6,7 @@ Rounds a number to a specified number of decimal places.
 const rounded = round(value, precision?);
 ```
 
-## Reference
+## Usage
 
 ### `round(value, precision?)`
 

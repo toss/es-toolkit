@@ -14,7 +14,7 @@
 const uppercased = toUpper(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toUpper(value?)`
 

@@ -12,7 +12,7 @@
 const result = isWeakSet(value);
 ```
 
-## 参考
+## 用法
 
 ### `isWeakSet(value)`
 

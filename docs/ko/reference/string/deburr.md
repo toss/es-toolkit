@@ -6,7 +6,7 @@
 const result = deburr(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `deburr(str)`
 

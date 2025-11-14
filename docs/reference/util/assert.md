@@ -12,7 +12,7 @@ assert(condition, message);
 
 :::
 
-## Reference
+## Usage
 
 ### `assert(condition, message)`
 

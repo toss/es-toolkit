@@ -6,7 +6,7 @@ Checks if the current runtime environment is Node.js.
 const result = isNode();
 ```
 
-## Reference
+## Usage
 
 ### `isNode()`
 

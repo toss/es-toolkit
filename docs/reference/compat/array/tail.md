@@ -14,7 +14,7 @@ Returns all elements of an array except the first one.
 const result = tail(array);
 ```
 
-## Reference
+## Usage
 
 ### `tail(array)`
 

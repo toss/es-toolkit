@@ -14,7 +14,7 @@ Creates a function that returns the argument at the specified index.
 const getNthArg = nthArg(n);
 ```
 
-## Reference
+## Usage
 
 ### `nthArg(n)`
 

@@ -6,7 +6,7 @@ Splits an array into smaller arrays of a specified size.
 const chunked = chunk(arr, size);
 ```
 
-## Reference
+## Usage
 
 ### `chunk(arr, size)`
 

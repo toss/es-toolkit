@@ -14,7 +14,7 @@ Concatenates multiple arrays and values into a single array.
 const result = concat(...values);
 ```
 
-## Reference
+## Usage
 
 ### `concat(...values)`
 

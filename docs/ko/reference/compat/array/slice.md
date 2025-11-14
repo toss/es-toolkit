@@ -14,7 +14,7 @@
 const sliced = slice(array, start, end);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `slice(array, start, end)`
 

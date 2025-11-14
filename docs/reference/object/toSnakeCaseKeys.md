@@ -8,7 +8,7 @@ Snake case is a naming convention where each word in an identifier is written in
 const snakeCased = toSnakeCaseKeys(obj);
 ```
 
-## Reference
+## Usage
 
 ### `toSnakeCaseKeys(obj)`
 

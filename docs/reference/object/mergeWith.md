@@ -6,7 +6,7 @@ Deeply merges the source object into the target object using a custom merge func
 const result = mergeWith(target, source, mergeFunction);
 ```
 
-## Reference
+## Usage
 
 ### `mergeWith(target, source, merge)`
 

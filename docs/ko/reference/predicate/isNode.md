@@ -6,7 +6,7 @@
 const result = isNode();
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isNode()`
 

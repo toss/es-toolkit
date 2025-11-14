@@ -12,7 +12,7 @@ Creates a new function that executes the given functions from right to left sequ
 const combinedFunc = flowRight(...functions);
 ```
 
-## Reference
+## Usage
 
 ### `flowRight(...functions)`
 

@@ -6,7 +6,7 @@
 const reversed = reverseString(value);
 ```
 
-## 参照
+## 使用法
 
 ### `reverseString(value)`
 

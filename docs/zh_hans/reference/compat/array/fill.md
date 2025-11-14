@@ -14,7 +14,7 @@
 const result = fill(array, value, start, end);
 ```
 
-## 参考
+## 用法
 
 ### `fill(array, value, start?, end?)`
 

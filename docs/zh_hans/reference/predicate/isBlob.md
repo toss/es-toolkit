@@ -6,7 +6,7 @@
 const result = isBlob(value);
 ```
 
-## 参考
+## 用法
 
 ### `isBlob(value)`
 

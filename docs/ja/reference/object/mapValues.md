@@ -6,7 +6,7 @@
 const newObj = mapValues(object, getNewValue);
 ```
 
-## 参照
+## 使用法
 
 ### `mapValues(object, getNewValue)`
 

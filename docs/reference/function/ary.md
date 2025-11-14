@@ -6,7 +6,7 @@ Creates a new function that limits the number of arguments a function can accept
 const limitedFunc = ary(func, n);
 ```
 
-## Reference
+## Usage
 
 ### `ary(func, n)`
 

@@ -12,7 +12,7 @@
 const result = isNumber(value);
 ```
 
-## 参考
+## 用法
 
 ### `isNumber(value)`
 

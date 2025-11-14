@@ -6,7 +6,7 @@
 const zipped = zip(...arrs);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `zip(...arrs)`
 

@@ -6,7 +6,7 @@
 const taken = takeWhile(arr, predicate);
 ```
 
-## 参照
+## 使用法
 
 ### `takeWhile(arr, predicate)`
 
@@ -61,7 +61,7 @@ takeWhile(users, user => user.age < 30);
 - **プロパティ-値ペア**: プロパティと値を指定することもできます。指定されたプロパティが値と一致する要素を取得します。
 - **プロパティ名**: 最後にプロパティ名を指定することもできます。そのプロパティが真のような値と評価される要素を取得します。
 
-### インターフェース
+### 使用法
 
 ```typescript
 function takeWhile<T>(array: ArrayLike<T> | null | undefined): T[];

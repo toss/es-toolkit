@@ -16,7 +16,7 @@
 const result = invokeMap(collection, method, ...args);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `invokeMap(collection, method, ...args)`
 

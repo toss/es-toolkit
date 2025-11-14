@@ -6,7 +6,7 @@
 const result = isPromise(value);
 ```
 
-## 参考
+## 用法
 
 ### `isPromise(value)`
 

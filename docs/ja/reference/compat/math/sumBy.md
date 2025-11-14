@@ -14,7 +14,7 @@
 const total = sumBy(array, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `sumBy(array, iteratee)`
 

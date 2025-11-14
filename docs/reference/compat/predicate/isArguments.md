@@ -6,7 +6,7 @@ Checks if a value is an arguments object.
 const result = isArguments(value);
 ```
 
-## Reference
+## Usage
 
 ### `isArguments(value)`
 

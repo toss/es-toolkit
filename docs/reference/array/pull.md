@@ -6,7 +6,7 @@ Removes all specified values from an array.
 const result = pull(arr, valuesToRemove);
 ```
 
-## Reference
+## Usage
 
 ### `pull(arr, valuesToRemove)`
 

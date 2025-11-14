@@ -14,7 +14,7 @@
 const rearranged = rearg(func, ...indices);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `rearg(func, ...indices)`
 

@@ -14,7 +14,7 @@
 const result = isInteger(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isInteger(value)`
 

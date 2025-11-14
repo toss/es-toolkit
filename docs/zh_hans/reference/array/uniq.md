@@ -6,7 +6,7 @@
 const uniqueArray = uniq(arr);
 ```
 
-## 参考
+## 用法
 
 ### `uniq(arr)`
 

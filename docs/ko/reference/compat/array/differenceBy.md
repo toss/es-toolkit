@@ -14,7 +14,7 @@
 const result = differenceBy(array, ...values, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `differenceBy(array, ...values, iteratee)`
 

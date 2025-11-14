@@ -14,7 +14,7 @@ Returns values at specified paths of an object as an array.
 const result = at(object, ...paths);
 ```
 
-## Reference
+## Usage
 
 ### `at(object, ...paths)`
 

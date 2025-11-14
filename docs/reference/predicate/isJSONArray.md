@@ -6,7 +6,7 @@ Checks if a value is a valid JSON array.
 const result = isJSONArray(value);
 ```
 
-## Reference
+## Usage
 
 ### `isJSONArray(value)`
 

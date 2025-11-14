@@ -14,7 +14,7 @@
 const result = orderBy(collection, criteria, orders);
 ```
 
-## 参照
+## 使用法
 
 ### `orderBy(collection, criteria, orders)`
 

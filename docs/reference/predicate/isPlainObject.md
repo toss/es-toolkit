@@ -6,7 +6,7 @@ Checks if a value is a plain object.
 const result = isPlainObject(value);
 ```
 
-## Reference
+## Usage
 
 ### `isPlainObject(value)`
 

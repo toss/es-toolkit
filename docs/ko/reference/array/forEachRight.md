@@ -6,7 +6,7 @@
 forEachRight(arr, callback);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `forEachRight(arr, callback)`
 

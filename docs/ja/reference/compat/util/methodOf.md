@@ -6,7 +6,7 @@
 const pathInvoker = methodOf(object, ...args);
 ```
 
-## 参照
+## 使用法
 
 ### `methodOf(object, ...args)`
 

@@ -6,7 +6,7 @@ Removes all values from the array that are contained in the array of specified v
 const result = pullAll(array, valuesToRemove);
 ```
 
-## Reference
+## Usage
 
 ### `pullAll(array, valuesToRemove)`
 

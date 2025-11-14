@@ -14,7 +14,7 @@ Deeply merges multiple objects into a single object.
 const result = merge(target, ...sources);
 ```
 
-## Reference
+## Usage
 
 ### `merge(object, ...sources)`
 

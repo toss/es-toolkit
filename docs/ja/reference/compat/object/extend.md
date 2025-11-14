@@ -14,7 +14,7 @@
 const result = extend(object, source);
 ```
 
-## 参照
+## 使用法
 
 ### `extend(object, ...sources)`
 

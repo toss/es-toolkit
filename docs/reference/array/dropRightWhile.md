@@ -6,7 +6,7 @@ Returns a new array with elements removed from the end while a condition is sati
 const result = dropRightWhile(arr, canContinueDropping);
 ```
 
-## Reference
+## Usage
 
 ### `dropRightWhile(arr, canContinueDropping)`
 

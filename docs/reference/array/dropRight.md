@@ -6,7 +6,7 @@ Returns a new array with the specified number of elements removed from the end.
 const dropped = dropRight(arr, itemsCount);
 ```
 
-## Reference
+## Usage
 
 ### `dropRight(arr, itemsCount)`
 

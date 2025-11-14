@@ -14,7 +14,7 @@
 const mapped = map(collection, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `map(collection, iteratee)`
 

@@ -15,7 +15,7 @@ const result = without([1, 2, 3, 4, 5], 2, 4);
 // result는 [1, 3, 5]가 돼요.
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `without(array, ...values)`
 

@@ -14,7 +14,7 @@ Fills in `undefined` properties in an object by setting default values.
 const result = defaults(object, source);
 ```
 
-## Reference
+## Usage
 
 ### `defaults(object, ...sources)`
 

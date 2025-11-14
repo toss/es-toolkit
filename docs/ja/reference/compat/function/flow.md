@@ -12,7 +12,7 @@
 const combinedFunc = flow(...functions);
 ```
 
-## 参照
+## 使用法
 
 ### `flow(...functions)`
 

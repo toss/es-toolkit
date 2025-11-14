@@ -6,7 +6,7 @@
 const result = conformsTo(target, source);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `conformsTo(target, source)`
 

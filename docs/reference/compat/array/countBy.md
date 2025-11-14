@@ -14,7 +14,7 @@ Counts the occurrences of elements in an array or object, grouped by a criterion
 const counts = countBy(collection, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `countBy(collection, iteratee?)`
 

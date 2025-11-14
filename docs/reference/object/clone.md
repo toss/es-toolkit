@@ -6,7 +6,7 @@ Creates a shallow copy of the given value.
 const cloned = clone(obj);
 ```
 
-## Reference
+## Usage
 
 ### `clone(obj)`
 

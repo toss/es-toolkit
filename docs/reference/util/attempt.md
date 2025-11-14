@@ -6,7 +6,7 @@ Executes a function and returns the result or error as a tuple.
 const [error, result] = attempt(func);
 ```
 
-## Reference
+## Usage
 
 ### `attempt(func)`
 

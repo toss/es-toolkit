@@ -14,7 +14,7 @@
 const result = drop(array, n);
 ```
 
-## 参照
+## 使用法
 
 ### `drop(array, n?)`
 

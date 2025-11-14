@@ -6,7 +6,7 @@ Returns a new array containing elements that are commonly included in both array
 const result = intersection(firstArr, secondArr);
 ```
 
-## Reference
+## Usage
 
 ### `intersection(firstArr, secondArr)`
 

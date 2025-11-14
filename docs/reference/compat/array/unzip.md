@@ -14,7 +14,7 @@ Collects elements at the same positions in grouped arrays into new arrays.
 const result = unzip(array);
 ```
 
-## Reference
+## Usage
 
 ### `unzip(array)`
 

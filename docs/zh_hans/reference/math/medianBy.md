@@ -6,7 +6,7 @@
 const middle = medianBy(items, getValue);
 ```
 
-## 参考
+## 用法
 
 ### `medianBy(items, getValue)`
 

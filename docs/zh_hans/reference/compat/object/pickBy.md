@@ -14,7 +14,7 @@
 const result = pickBy(obj, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `pickBy(object, predicate)`
 

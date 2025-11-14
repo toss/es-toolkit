@@ -6,7 +6,7 @@ Converts a deep key string to a path array.
 const path = toPath(deepKey);
 ```
 
-## Reference
+## Usage
 
 ### `toPath(deepKey)`
 

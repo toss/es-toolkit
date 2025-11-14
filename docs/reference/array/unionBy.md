@@ -6,7 +6,7 @@ Creates a new array containing unique elements from two arrays based on values t
 const unified = unionBy(arr1, arr2, mapper);
 ```
 
-## Reference
+## Usage
 
 ### `unionBy(arr1, arr2, mapper)`
 

@@ -12,7 +12,7 @@
 const result = isLength(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isLength(value)`
 

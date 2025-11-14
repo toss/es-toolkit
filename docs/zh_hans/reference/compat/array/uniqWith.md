@@ -14,7 +14,7 @@
 const result = uniqWith(array, comparator);
 ```
 
-## 参考
+## 用法
 
 ### `uniqWith(array, comparator)`
 

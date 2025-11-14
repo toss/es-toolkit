@@ -14,7 +14,7 @@ Assigns all properties (including inherited properties) from source objects to a
 const result = assignInWith(target, ...sources, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `assignInWith(target, ...sources, customizer)`
 

@@ -14,7 +14,7 @@
 const result = min(items);
 ```
 
-## 参考
+## 用法
 
 ### `min(items?)`
 

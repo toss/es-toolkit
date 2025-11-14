@@ -14,7 +14,7 @@ Limits a function to accept at most one argument.
 const limitedFunc = unary(func);
 ```
 
-## Reference
+## Usage
 
 ### `unary(func)`
 

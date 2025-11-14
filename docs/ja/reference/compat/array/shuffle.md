@@ -14,7 +14,7 @@
 const result = shuffle(collection);
 ```
 
-## 参照
+## 使用法
 
 ### `shuffle(collection)`
 

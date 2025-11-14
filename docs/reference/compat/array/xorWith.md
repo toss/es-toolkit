@@ -14,7 +14,7 @@ Creates a new array of elements that exist in exactly one of the multiple arrays
 const result = xorWith(...arrays, comparator);
 ```
 
-## Reference
+## Usage
 
 ### `xorWith(...arrays, comparator)`
 

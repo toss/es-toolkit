@@ -6,7 +6,7 @@
 await withTimeout(run, ms);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `withTimeout(run, ms)`
 

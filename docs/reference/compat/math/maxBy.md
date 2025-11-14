@@ -14,7 +14,7 @@ Finds the element with the maximum value based on a condition.
 const maxItem = maxBy(array, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `maxBy(array, iteratee)`
 

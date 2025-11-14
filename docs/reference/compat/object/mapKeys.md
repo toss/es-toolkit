@@ -14,7 +14,7 @@ Creates a new object by transforming keys while keeping values the same.
 const result = mapKeys(obj, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `mapKeys(object, iteratee)`
 

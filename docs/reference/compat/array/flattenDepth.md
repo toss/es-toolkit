@@ -14,7 +14,7 @@ Flattens an array to the specified depth.
 const flattened = flattenDepth(array, depth);
 ```
 
-## Reference
+## Usage
 
 ### `flattenDepth(array, depth)`
 

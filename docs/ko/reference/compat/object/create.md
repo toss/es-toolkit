@@ -14,7 +14,7 @@
 const obj = create(prototype, properties);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `create(prototype, properties?)`
 

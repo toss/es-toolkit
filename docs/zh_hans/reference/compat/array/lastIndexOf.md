@@ -14,7 +14,7 @@
 const index = lastIndexOf(array, searchElement, fromIndex);
 ```
 
-## 参考
+## 用法
 
 ### `lastIndexOf(array, searchElement, fromIndex)`
 

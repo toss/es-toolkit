@@ -12,7 +12,7 @@
 const result = isBuffer(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isBuffer(value)`
 

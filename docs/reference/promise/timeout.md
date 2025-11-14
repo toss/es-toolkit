@@ -6,7 +6,7 @@ Returns a `Promise` that throws a `TimeoutError` after the specified time.
 await timeout(ms);
 ```
 
-## Reference
+## Usage
 
 ### `timeout(ms)`
 

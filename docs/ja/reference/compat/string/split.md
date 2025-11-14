@@ -14,7 +14,7 @@
 const segments = split(str, separator);
 ```
 
-## 参照
+## 使用法
 
 ### `split(string, separator?, limit?)`
 

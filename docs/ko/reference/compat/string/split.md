@@ -14,7 +14,7 @@
 const segments = split(str, separator);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `split(string, separator?, limit?)`
 

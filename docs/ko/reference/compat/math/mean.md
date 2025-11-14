@@ -14,7 +14,7 @@
 const average = mean(array);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `mean(array)`
 

@@ -6,7 +6,7 @@
 const result = isPlainObject(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isPlainObject(value)`
 

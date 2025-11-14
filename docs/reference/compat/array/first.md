@@ -14,7 +14,7 @@ Returns the first element of an array.
 const firstElement = first(array);
 ```
 
-## Reference
+## Usage
 
 ### `first(array)`
 

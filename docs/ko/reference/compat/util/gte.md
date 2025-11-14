@@ -14,7 +14,7 @@
 const result = gte(value, other);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `gte(value, other)`
 

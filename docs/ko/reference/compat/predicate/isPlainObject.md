@@ -14,7 +14,7 @@
 const result = isPlainObject(object);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isPlainObject(object)`
 

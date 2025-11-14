@@ -14,7 +14,7 @@ Removes a specified number of elements from the beginning of an array.
 const result = drop(array, n);
 ```
 
-## Reference
+## Usage
 
 ### `drop(array, n?)`
 

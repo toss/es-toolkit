@@ -6,7 +6,7 @@ Checks if a given value is a `symbol`.
 const result = isSymbol(value);
 ```
 
-## Reference
+## Usage
 
 ### `isSymbol(value)`
 

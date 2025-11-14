@@ -6,7 +6,7 @@
 const randomElement = sample(arr);
 ```
 
-## 参照
+## 使用法
 
 ### `sample(arr)`
 

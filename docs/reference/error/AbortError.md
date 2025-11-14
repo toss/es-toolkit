@@ -6,7 +6,7 @@ An error class representing an aborted or canceled operation.
 const error = new AbortError(message);
 ```
 
-## Reference
+## Usage
 
 ### `new AbortError(message?)`
 

@@ -12,7 +12,7 @@
 const result = isSet(value);
 ```
 
-## 参考
+## 用法
 
 ### `isSet(value)`
 

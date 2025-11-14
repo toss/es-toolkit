@@ -6,7 +6,7 @@
 const result = takeRightWhile(arr, shouldContinueTaking);
 ```
 
-## 参照
+## 使用法
 
 ### `takeRightWhile(arr, shouldContinueTaking)`
 
@@ -48,7 +48,7 @@ takeRightWhile(['hello', 'world', 'foo', 'bar'], str => str.length <= 5);
 - **プロパティ-値ペア**: プロパティと値を指定することもできます。指定されたプロパティが値と一致する要素を取得します。
 - **プロパティ名**: 最後にプロパティ名を指定することもできます。そのプロパティが真のような値と評価される要素を取得します。
 
-### インターフェース
+### 使用法
 
 ```typescript
 function takeRightWhile<T>(array: ArrayLike<T> | null | undefined): T[];

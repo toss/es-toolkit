@@ -14,7 +14,7 @@ Creates a new object selecting only properties for which the predicate function 
 const result = pickBy(obj, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `pickBy(object, predicate)`
 

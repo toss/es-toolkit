@@ -6,7 +6,7 @@
 const result = mergeWith(target, source, mergeFunction);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `mergeWith(target, source, merge)`
 

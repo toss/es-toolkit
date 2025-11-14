@@ -14,7 +14,7 @@
 const allKeys = keysIn(object);
 ```
 
-## 参考
+## 用法
 
 ### `keysIn(object)`
 

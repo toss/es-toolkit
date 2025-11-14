@@ -14,7 +14,7 @@
 const upperCased = upperFirst(str);
 ```
 
-## 参考
+## 用法
 
 ### `upperFirst(str)`
 

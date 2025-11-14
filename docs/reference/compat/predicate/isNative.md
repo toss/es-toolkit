@@ -6,7 +6,7 @@ Checks if a value is a native function of the JavaScript engine.
 const result = isNative(value);
 ```
 
-## Reference
+## Usage
 
 ### `isNative(value)`
 

@@ -14,7 +14,7 @@
 const valueArray = values(obj);
 ```
 
-## 参照
+## 使用法
 
 ### `values(obj)`
 

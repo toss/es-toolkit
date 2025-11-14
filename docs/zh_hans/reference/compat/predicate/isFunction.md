@@ -12,7 +12,7 @@
 const result = isFunction(value);
 ```
 
-## 参考
+## 用法
 
 ### `isFunction(value)`
 

@@ -14,7 +14,7 @@
 const getter = propertyOf(obj);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `propertyOf(object)`
 

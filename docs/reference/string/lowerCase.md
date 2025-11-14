@@ -6,7 +6,7 @@ Converts a string to lower case format.
 const result = lowerCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `lowerCase(str)`
 

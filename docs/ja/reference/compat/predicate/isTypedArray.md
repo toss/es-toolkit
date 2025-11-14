@@ -14,7 +14,7 @@
 const result = isTypedArray(x);
 ```
 
-## 参照
+## 使用法
 
 ### `isTypedArray(x)`
 

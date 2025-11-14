@@ -6,7 +6,7 @@ Returns a new array containing snapshots of each window as a window of specified
 const windows = windowed(arr, size, step?, options?);
 ```
 
-## Reference
+## Usage
 
 ### `windowed(arr, size, step?, options?)`
 

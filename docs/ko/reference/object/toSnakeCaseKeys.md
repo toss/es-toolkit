@@ -8,7 +8,7 @@
 const snakeCased = toSnakeCaseKeys(obj);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toSnakeCaseKeys(obj)`
 

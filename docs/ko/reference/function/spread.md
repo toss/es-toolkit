@@ -6,7 +6,7 @@
 const spreadFunc = spread(func);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `spread(func)`
 

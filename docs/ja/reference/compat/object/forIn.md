@@ -14,7 +14,7 @@
 const result = forIn(obj, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `forIn(object, iteratee)`
 

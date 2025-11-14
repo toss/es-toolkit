@@ -6,7 +6,7 @@ Performs a deep comparison to check if two values are equal.
 const result = isEqual(a, b);
 ```
 
-## Reference
+## Usage
 
 ### `isEqual(a, b)`
 

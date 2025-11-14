@@ -14,7 +14,7 @@
 const wordArray = words(str, pattern);
 ```
 
-## 参考
+## 用法
 
 ### `words(str, pattern)`
 

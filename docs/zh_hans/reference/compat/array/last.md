@@ -14,7 +14,7 @@
 const lastElement = last(array);
 ```
 
-## 参考
+## 用法
 
 ### `last(array)`
 

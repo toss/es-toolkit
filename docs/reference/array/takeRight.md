@@ -6,7 +6,7 @@ Creates a new array by taking the specified number of elements from the end of t
 const taken = takeRight(arr, count);
 ```
 
-## Reference
+## Usage
 
 ### `takeRight(arr, count?)`
 

@@ -14,7 +14,7 @@
 const boundFunction = bind(func, thisObj, ...partialArgs);
 ```
 
-## 参考
+## 用法
 
 ### `bind(func, thisObj, ...partialArgs)`
 

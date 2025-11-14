@@ -14,7 +14,7 @@ Applies a function to each element and recursively flattens the result.
 const result = flatMapDeep(collection, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `flatMapDeep(collection, iteratee)`
 

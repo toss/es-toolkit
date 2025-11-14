@@ -14,7 +14,7 @@
 const result = isElement(value);
 ```
 
-## 参考
+## 用法
 
 ### `isElement(value)`
 

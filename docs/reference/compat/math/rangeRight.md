@@ -14,7 +14,7 @@ Creates an array of numbers in a range in reverse order.
 const numbers = rangeRight(start, end, step);
 ```
 
-## Reference
+## Usage
 
 ### `rangeRight(end)`
 

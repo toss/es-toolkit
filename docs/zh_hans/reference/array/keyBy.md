@@ -6,7 +6,7 @@
 const result = keyBy(arr, getKeyFromItem);
 ```
 
-## 参考
+## 用法
 
 ### `keyBy(arr, getKeyFromItem)`
 

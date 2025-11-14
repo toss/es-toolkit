@@ -8,7 +8,7 @@ Camel case is a naming convention where the first word is lowercase and the firs
 const camelCased = toCamelCaseKeys(obj);
 ```
 
-## Reference
+## Usage
 
 ### `toCamelCaseKeys(obj)`
 

@@ -14,7 +14,7 @@
 const memoizedFunc = memoize(func, resolver);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `memoize(func, resolver)`
 

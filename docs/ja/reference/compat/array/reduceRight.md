@@ -14,7 +14,7 @@
 const result = reduceRight(collection, iteratee, initialValue);
 ```
 
-## 参照
+## 使用法
 
 ### `reduceRight(collection, iteratee, initialValue)`
 

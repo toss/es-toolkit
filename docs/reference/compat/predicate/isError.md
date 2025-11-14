@@ -12,7 +12,7 @@ Checks if a value is an Error object.
 const result = isError(value);
 ```
 
-## Reference
+## Usage
 
 ### `isError(value)`
 

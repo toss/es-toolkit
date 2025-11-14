@@ -6,7 +6,7 @@
 const object = zipObject(keys, values);
 ```
 
-## 参考
+## 用法
 
 ### `zipObject(keys, values)`
 

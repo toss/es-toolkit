@@ -12,7 +12,7 @@ Caches function results to improve performance when called with the same argumen
 const memoizedFunc = memoize(func, resolver);
 ```
 
-## Reference
+## Usage
 
 ### `memoize(func, resolver)`
 

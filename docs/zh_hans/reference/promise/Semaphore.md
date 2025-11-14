@@ -6,7 +6,7 @@
 const semaphore = new Semaphore(capacity);
 ```
 
-## 参考
+## 用法
 
 ### `Semaphore(capacity)`
 

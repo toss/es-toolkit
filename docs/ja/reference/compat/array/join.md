@@ -14,7 +14,7 @@
 const result = join(array, separator);
 ```
 
-## 参照
+## 使用法
 
 ### `join(array, separator?)`
 

@@ -6,7 +6,7 @@
 const result = deburr(str);
 ```
 
-## 参照
+## 使用法
 
 ### `deburr(str)`
 

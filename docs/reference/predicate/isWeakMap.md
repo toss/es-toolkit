@@ -6,7 +6,7 @@ Checks if a given value is a `WeakMap` instance.
 const result = isWeakMap(value);
 ```
 
-## Reference
+## Usage
 
 ### `isWeakMap(value)`
 

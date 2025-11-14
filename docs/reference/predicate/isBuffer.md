@@ -6,7 +6,7 @@ Checks if a value is a Buffer instance.
 const result = isBuffer(value);
 ```
 
-## Reference
+## Usage
 
 ### `isBuffer(value)`
 

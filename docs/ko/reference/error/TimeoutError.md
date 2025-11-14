@@ -6,7 +6,7 @@
 const error = new TimeoutError(message);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `new TimeoutError(message?)`
 

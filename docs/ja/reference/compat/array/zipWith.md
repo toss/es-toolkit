@@ -15,7 +15,7 @@ const result = zipWith([1, 2], [3, 4], (a, b) => a + b);
 // resultは[4, 6]になります。
 ```
 
-## 参照
+## 使用法
 
 ### `zipWith(...arrs, iteratee)`
 

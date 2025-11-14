@@ -6,7 +6,7 @@ Returns a new object with array elements grouped according to a key-generating f
 const grouped = groupBy(arr, getKeyFromItem);
 ```
 
-## Reference
+## Usage
 
 ### `groupBy(arr, getKeyFromItem)`
 
