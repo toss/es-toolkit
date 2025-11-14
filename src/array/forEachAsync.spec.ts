@@ -5,7 +5,7 @@ import { delay } from '../promise/delay';
 describe('forEachAsync', () => {
   it('executes callback for each element asynchronously', async () => {
     const arr = [1, 2, 3];
-    const callback = vi.fn(async (n: number) => {
+    const callback = vi.fn(async () => {
       await delay(10);
     });
 
@@ -19,7 +19,7 @@ describe('forEachAsync', () => {
 
   it('handles empty array', async () => {
     const arr: number[] = [];
-    const callback = vi.fn(async (n: number) => {});
+    const callback = vi.fn(async () => {});
 
     await forEachAsync(arr, callback);
     expect(callback).toHaveBeenCalledTimes(0);
@@ -41,7 +41,7 @@ describe('forEachAsync', () => {
     let running = 0;
     let maxRunning = 0;
 
-    const fn = vi.fn(async (item: number) => {
+    const fn = vi.fn(async () => {
       running++;
 
       if (running > maxRunning) {
@@ -65,7 +65,7 @@ describe('forEachAsync', () => {
     let running = 0;
     let maxRunning = 0;
 
-    const fn = async (item: number) => {
+    const fn = async () => {
       running++;
       if (running > maxRunning) {
         maxRunning = running;

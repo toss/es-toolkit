@@ -19,7 +19,7 @@ describe('filterAsync', () => {
 
   it('returns empty array if given empty array', async () => {
     const arr: number[] = [];
-    const predicate = vi.fn(async (n: number) => true);
+    const predicate = vi.fn(async () => true);
 
     const result = await filterAsync(arr, predicate);
     expect(result).toEqual([]);
