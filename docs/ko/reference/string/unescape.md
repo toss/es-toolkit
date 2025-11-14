@@ -6,7 +6,7 @@ HTML 엔티티 문자를 원래 문자로 변환해요.
 const result = unescape(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `unescape(str)`
 

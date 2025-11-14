@@ -14,7 +14,7 @@
 const result = every(collection, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `every(collection, predicate?)`
 

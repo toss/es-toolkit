@@ -6,7 +6,7 @@ Returns a tuple that splits an array into two groups based on a condition.
 const [truthy, falsy] = partition(arr, isInTruthy);
 ```
 
-## Reference
+## Usage
 
 ### `partition(arr, isInTruthy)`
 

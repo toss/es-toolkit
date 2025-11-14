@@ -14,7 +14,7 @@ Creates a function that fixes the `this` context and provides some arguments in 
 const boundFunction = bind(func, thisObj, ...partialArgs);
 ```
 
-## Reference
+## Usage
 
 ### `bind(func, thisObj, ...partialArgs)`
 

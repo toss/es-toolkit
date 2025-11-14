@@ -14,7 +14,7 @@
 const total = sum(array);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `sum(array)`
 

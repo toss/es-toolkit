@@ -14,7 +14,7 @@ Returns the current time in milliseconds.
 const currentTime = now();
 ```
 
-## Reference
+## Usage
 
 ### `now()`
 

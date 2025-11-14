@@ -14,7 +14,7 @@ Converts a string to an integer.
 const result = parseInt(string, radix);
 ```
 
-## Reference
+## Usage
 
 ### `parseInt(string, radix?)`
 

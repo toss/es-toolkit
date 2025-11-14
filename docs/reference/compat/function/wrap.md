@@ -14,7 +14,7 @@ Creates a new function that wraps the given value or function.
 const wrappedFunc = wrap(value, wrapper);
 ```
 
-## Reference
+## Usage
 
 ### `wrap(value, wrapper)`
 

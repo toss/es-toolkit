@@ -14,7 +14,7 @@
 const obj = create(prototype, properties);
 ```
 
-## 参照
+## 使用法
 
 ### `create(prototype, properties?)`
 

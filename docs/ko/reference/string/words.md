@@ -6,7 +6,7 @@
 const result = words(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `words(str)`
 

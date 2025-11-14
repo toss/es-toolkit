@@ -14,7 +14,7 @@ Finds the element with the minimum value based on a condition.
 const minItem = minBy(array, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `minBy(array, iteratee)`
 

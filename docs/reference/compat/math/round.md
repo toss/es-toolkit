@@ -14,7 +14,7 @@ Rounds a number.
 const rounded = round(number, precision);
 ```
 
-## Reference
+## Usage
 
 ### `round(number, precision?)`
 

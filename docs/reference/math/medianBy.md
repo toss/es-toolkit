@@ -6,7 +6,7 @@ Calculates the median of an array by applying the `getValue` function to each el
 const middle = medianBy(items, getValue);
 ```
 
-## Reference
+## Usage
 
 ### `medianBy(items, getValue)`
 

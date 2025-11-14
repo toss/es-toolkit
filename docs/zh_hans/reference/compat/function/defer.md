@@ -14,7 +14,7 @@
 const timerId = defer(func, ...args);
 ```
 
-## 参考
+## 用法
 
 ### `defer(func, ...args)`
 

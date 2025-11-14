@@ -14,7 +14,7 @@
 const defaulted = toDefaulted(object, ...sources);
 ```
 
-## 参考
+## 用法
 
 ### `toDefaulted(object, ...sources)`
 

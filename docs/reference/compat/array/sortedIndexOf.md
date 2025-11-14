@@ -14,7 +14,7 @@ Finds the index where a value first appears in a sorted array.
 const index = sortedIndexOf(array, value);
 ```
 
-## Reference
+## Usage
 
 ### `sortedIndexOf(array, value)`
 

@@ -14,7 +14,7 @@ Performs a deep comparison between two values to determine if they are equal.
 const result = isEqual(value1, value2);
 ```
 
-## Reference
+## Usage
 
 ### `isEqual(a, b)`
 

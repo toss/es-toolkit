@@ -14,7 +14,7 @@
 const result = isRegExp(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isRegExp(value)`
 

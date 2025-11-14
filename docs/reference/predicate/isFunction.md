@@ -6,7 +6,7 @@ Checks if a value is a function.
 const result = isFunction(value);
 ```
 
-## Reference
+## Usage
 
 ### `isFunction(value)`
 

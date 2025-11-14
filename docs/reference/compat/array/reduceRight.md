@@ -14,7 +14,7 @@ Reduces an array or object to a single value by iterating from right to left.
 const result = reduceRight(collection, iteratee, initialValue);
 ```
 
-## Reference
+## Usage
 
 ### `reduceRight(collection, iteratee, initialValue)`
 

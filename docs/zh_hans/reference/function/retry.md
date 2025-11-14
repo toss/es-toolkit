@@ -6,7 +6,7 @@
 const result = await retry(asyncFunc, options);
 ```
 
-## 参考
+## 用法
 
 ### `retry(func, options?)`
 

@@ -14,7 +14,7 @@ Checks if a value is a string.
 const result = isString(value);
 ```
 
-## Reference
+## Usage
 
 ### `isString(value)`
 

@@ -12,7 +12,7 @@ Curries a function so it can accept arguments one at a time or multiple at once.
 const curriedFunction = curry(func, arity);
 ```
 
-## Reference
+## Usage
 
 ### `curry(func, arity)`
 

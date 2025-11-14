@@ -6,7 +6,7 @@
 const result = differenceBy(firstArr, secondArr, mapper);
 ```
 
-## 参照
+## 使用法
 
 ### `differenceBy(firstArr, secondArr, mapper)`
 

@@ -6,7 +6,7 @@
 const memoizedFunc = memoize(func, options);
 ```
 
-## 参照
+## 使用法
 
 ### `memoize(func, options?)`
 

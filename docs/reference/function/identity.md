@@ -6,7 +6,7 @@ Returns the input value as is.
 const result = identity(value);
 ```
 
-## Reference
+## Usage
 
 ### `identity(value)`
 

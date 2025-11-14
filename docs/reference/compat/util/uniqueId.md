@@ -14,7 +14,7 @@ Generates a unique string identifier.
 const result = uniqueId('contact_');
 ```
 
-## Reference
+## Usage
 
 ### `uniqueId(prefix?: string): string`
 

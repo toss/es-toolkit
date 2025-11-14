@@ -14,7 +14,7 @@ Creates a deep copy of an object.
 const cloned = cloneDeep(value);
 ```
 
-## Reference
+## Usage
 
 ### `cloneDeep(value)`
 

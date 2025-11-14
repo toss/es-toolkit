@@ -14,7 +14,7 @@
 const result = random(min, max, floating);
 ```
 
-## 参照
+## 使用法
 
 ### `random(floating?)`
 

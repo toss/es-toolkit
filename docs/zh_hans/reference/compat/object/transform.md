@@ -14,7 +14,7 @@
 const result = transform(object, iteratee, accumulator);
 ```
 
-## 参考
+## 用法
 
 ### `transform(object, iteratee, accumulator)`
 

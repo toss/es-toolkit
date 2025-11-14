@@ -14,7 +14,7 @@ Iterates over all properties of an object (including inherited properties) and i
 const result = forIn(obj, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `forIn(object, iteratee)`
 

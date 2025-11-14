@@ -14,7 +14,7 @@
 const result = pull(array, ...valuesToRemove);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `pull(array, ...valuesToRemove)`
 

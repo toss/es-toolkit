@@ -14,7 +14,7 @@ Groups elements of an array or object based on a given condition.
 const grouped = groupBy(collection, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `groupBy(collection, iteratee)`
 

@@ -14,7 +14,7 @@
 const result = add(value, other);
 ```
 
-## 参照
+## 使用法
 
 ### `add(value, other)`
 

@@ -14,7 +14,7 @@
 const negatedFunc = negate(predicate);
 ```
 
-## 参考
+## 用法
 
 ### `negate(predicate)`
 

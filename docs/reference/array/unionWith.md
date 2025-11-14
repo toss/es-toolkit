@@ -6,7 +6,7 @@ Creates a new array containing unique elements from two arrays based on a custom
 const unified = unionWith(arr1, arr2, areItemsEqual);
 ```
 
-## Reference
+## Usage
 
 ### `unionWith(arr1, arr2, areItemsEqual)`
 

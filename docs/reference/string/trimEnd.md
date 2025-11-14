@@ -6,7 +6,7 @@ Removes whitespace or specified characters from the end of a string.
 const trimmed = trimEnd(str, chars);
 ```
 
-## Reference
+## Usage
 
 ### `trimEnd(str, chars?)`
 

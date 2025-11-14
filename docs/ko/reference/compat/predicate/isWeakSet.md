@@ -14,7 +14,7 @@
 const result = isWeakSet(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isWeakSet(value)`
 

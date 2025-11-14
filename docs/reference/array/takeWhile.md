@@ -6,7 +6,7 @@ Creates a new array by taking elements from the beginning of the array while the
 const taken = takeWhile(arr, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `takeWhile(arr, predicate)`
 

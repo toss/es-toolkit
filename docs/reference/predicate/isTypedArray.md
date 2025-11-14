@@ -6,7 +6,7 @@ Checks if a given value is a `TypedArray` instance.
 const result = isTypedArray(value);
 ```
 
-## Reference
+## Usage
 
 ### `isTypedArray(value)`
 

@@ -14,7 +14,7 @@
 const functionNames = functions(obj);
 ```
 
-## 参照
+## 使用法
 
 ### `functions(object)`
 

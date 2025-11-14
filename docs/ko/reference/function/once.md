@@ -6,7 +6,7 @@
 const onceFunc = once(func);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `once(func)`
 

@@ -6,7 +6,7 @@
 const cloned = clone(obj);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `clone(obj)`
 

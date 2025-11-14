@@ -14,7 +14,7 @@
 const result = setWith(obj, path, value, customizer);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `setWith(object, path, value, customizer)`
 

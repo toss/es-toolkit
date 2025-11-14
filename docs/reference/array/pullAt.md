@@ -6,7 +6,7 @@ Removes elements at specified indices from an array and returns the removed elem
 const removed = pullAt(arr, indices);
 ```
 
-## Reference
+## Usage
 
 ### `pullAt(arr, indicesToRemove)`
 

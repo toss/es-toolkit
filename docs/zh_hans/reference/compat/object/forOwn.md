@@ -14,7 +14,7 @@
 const result = forOwn(obj, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `forOwn(object, iteratee)`
 

@@ -6,7 +6,7 @@ Returns a new object with the source object deeply merged into a copy of the tar
 const result = toMerged(target, source);
 ```
 
-## Reference
+## Usage
 
 ### `toMerged(target, source)`
 

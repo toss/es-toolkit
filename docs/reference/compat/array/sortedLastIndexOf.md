@@ -14,7 +14,7 @@ Finds the index where a value last appears in a sorted array.
 const index = sortedLastIndexOf(array, value);
 ```
 
-## Reference
+## Usage
 
 ### `sortedLastIndexOf(array, value)`
 

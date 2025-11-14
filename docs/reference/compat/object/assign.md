@@ -14,7 +14,7 @@ Assigns properties from source objects to a target object.
 const result = assign(target, ...sources);
 ```
 
-## Reference
+## Usage
 
 ### `assign(target, ...sources)`
 

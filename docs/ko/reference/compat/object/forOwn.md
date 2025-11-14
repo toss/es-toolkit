@@ -14,7 +14,7 @@
 const result = forOwn(obj, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `forOwn(object, iteratee)`
 

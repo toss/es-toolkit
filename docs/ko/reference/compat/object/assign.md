@@ -14,7 +14,7 @@
 const result = assign(target, ...sources);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `assign(target, ...sources)`
 

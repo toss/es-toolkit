@@ -6,7 +6,7 @@
 invariant(condition, message);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `invariant(condition, message)`
 

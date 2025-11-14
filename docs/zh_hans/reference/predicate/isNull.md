@@ -6,7 +6,7 @@
 const result = isNull(value);
 ```
 
-## 参考
+## 用法
 
 ### `isNull(value)`
 

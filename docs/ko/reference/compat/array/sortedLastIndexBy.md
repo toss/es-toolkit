@@ -14,7 +14,7 @@
 const index = sortedLastIndexBy(array, value, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `sortedLastIndexBy(array, value, iteratee)`
 

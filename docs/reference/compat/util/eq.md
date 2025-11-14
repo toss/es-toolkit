@@ -6,7 +6,7 @@ Checks if two values are equivalent using SameValueZero comparison.
 const isEqual = eq(value, other);
 ```
 
-## Reference
+## Usage
 
 ### `eq(value, other)`
 

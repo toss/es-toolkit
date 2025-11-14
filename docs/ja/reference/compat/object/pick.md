@@ -14,7 +14,7 @@
 const result = pick(obj, ...keys);
 ```
 
-## 参照
+## 使用法
 
 ### `pick(object, ...props)`
 

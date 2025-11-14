@@ -14,7 +14,7 @@
 const startCased = startCase(str);
 ```
 
-## 参照
+## 使用法
 
 ### `startCase(str)`
 

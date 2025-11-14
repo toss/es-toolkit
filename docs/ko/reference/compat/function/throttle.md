@@ -14,7 +14,7 @@
 const throttledFunc = throttle(func, wait, options);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `throttle(func, wait, options)`
 

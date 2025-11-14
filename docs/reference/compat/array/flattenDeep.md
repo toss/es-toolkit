@@ -14,7 +14,7 @@ Completely flattens an array.
 const result = flattenDeep(array);
 ```
 
-## Reference
+## Usage
 
 ### `flattenDeep(value)`
 

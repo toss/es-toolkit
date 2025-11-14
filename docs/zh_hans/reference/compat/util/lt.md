@@ -14,7 +14,7 @@
 const result = lt(value, other);
 ```
 
-## 参考
+## 用法
 
 ### `lt(value, other)`
 

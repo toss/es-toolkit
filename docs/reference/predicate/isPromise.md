@@ -6,7 +6,7 @@ Checks if a given value is a `Promise` instance.
 const result = isPromise(value);
 ```
 
-## Reference
+## Usage
 
 ### `isPromise(value)`
 

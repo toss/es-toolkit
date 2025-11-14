@@ -14,7 +14,7 @@ Creates a new function that transforms each argument of a function with the corr
 const wrapped = overArgs(func, transforms);
 ```
 
-## Reference
+## Usage
 
 ### `overArgs(func, ...transforms)`
 

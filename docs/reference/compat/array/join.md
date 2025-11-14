@@ -14,7 +14,7 @@ Joins the elements of an array into a string.
 const result = join(array, separator);
 ```
 
-## Reference
+## Usage
 
 ### `join(array, separator?)`
 

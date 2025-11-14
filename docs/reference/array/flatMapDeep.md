@@ -6,7 +6,7 @@ Transforms each element of an array with a function's return value, then flatten
 const result = flatMapDeep(arr, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `flatMapDeep(arr, iteratee)`
 

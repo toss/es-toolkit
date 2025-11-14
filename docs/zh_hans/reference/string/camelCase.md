@@ -6,7 +6,7 @@
 const result = camelCase(str);
 ```
 
-## 参考
+## 用法
 
 ### `camelCase(str)`
 

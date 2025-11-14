@@ -14,7 +14,7 @@ Removes all specified values from the array.
 const result = pull(array, ...valuesToRemove);
 ```
 
-## Reference
+## Usage
 
 ### `pull(array, ...valuesToRemove)`
 

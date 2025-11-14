@@ -6,7 +6,7 @@
 const customCloned = cloneDeepWith(obj, cloneValue);
 ```
 
-## 参考
+## 用法
 
 ### `cloneDeepWith(obj, cloneValue)`
 

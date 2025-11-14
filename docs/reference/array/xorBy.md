@@ -6,7 +6,7 @@ Creates a new array with elements that exist in only one of two arrays, based on
 const result = xorBy(arr1, arr2, mapper);
 ```
 
-## Reference
+## Usage
 
 ### `xorBy(arr1, arr2, mapper)`
 

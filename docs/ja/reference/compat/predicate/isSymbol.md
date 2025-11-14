@@ -14,7 +14,7 @@
 const result = isSymbol(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isSymbol(value)`
 

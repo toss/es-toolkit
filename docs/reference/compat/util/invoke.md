@@ -14,7 +14,7 @@ Invokes the method at the path of the object with the given arguments.
 const result = invoke(object, path, args);
 ```
 
-## Reference
+## Usage
 
 ### `invoke(object, path, args)`
 

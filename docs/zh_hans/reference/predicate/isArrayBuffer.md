@@ -6,7 +6,7 @@
 const result = isArrayBuffer(value);
 ```
 
-## 参考
+## 用法
 
 ### `isArrayBuffer(value)`
 

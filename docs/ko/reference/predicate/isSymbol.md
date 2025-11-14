@@ -6,7 +6,7 @@
 const result = isSymbol(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isSymbol(value)`
 

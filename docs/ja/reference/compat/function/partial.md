@@ -14,7 +14,7 @@
 const partialFunc = partial(func, ...args);
 ```
 
-## 参照
+## 使用法
 
 ### `partial(func, ...args)`
 

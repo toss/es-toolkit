@@ -14,7 +14,7 @@
 const limitedFunc = unary(func);
 ```
 
-## 参考
+## 用法
 
 ### `unary(func)`
 

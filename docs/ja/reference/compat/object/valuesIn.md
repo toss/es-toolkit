@@ -14,7 +14,7 @@
 const values = valuesIn(obj);
 ```
 
-## 参照
+## 使用法
 
 ### `valuesIn(object)`
 

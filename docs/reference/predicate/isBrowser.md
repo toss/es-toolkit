@@ -6,7 +6,7 @@ Checks if the current execution environment is a browser.
 const result = isBrowser();
 ```
 
-## Reference
+## Usage
 
 ### `isBrowser()`
 

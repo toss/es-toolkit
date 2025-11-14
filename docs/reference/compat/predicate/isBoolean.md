@@ -14,7 +14,7 @@ Checks if a value is of boolean type.
 const result = isBoolean(value);
 ```
 
-## Reference
+## Usage
 
 ### `isBoolean(value)`
 

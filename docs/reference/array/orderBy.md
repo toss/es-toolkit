@@ -6,7 +6,7 @@ Returns a new array sorted by multiple criteria and sort directions.
 const sorted = orderBy(arr, criteria, orders);
 ```
 
-## Reference
+## Usage
 
 ### `orderBy(arr, criteria, orders)`
 

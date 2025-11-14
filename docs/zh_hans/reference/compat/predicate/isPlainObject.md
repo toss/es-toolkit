@@ -12,7 +12,7 @@
 const result = isPlainObject(object);
 ```
 
-## 参考
+## 用法
 
 ### `isPlainObject(object)`
 

@@ -14,7 +14,7 @@
 const result = isSet(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isSet(value)`
 

@@ -6,7 +6,7 @@ Unpacks grouped arrays and creates new arrays by gathering elements at the same 
 const unzippedArrays = unzip(zipped);
 ```
 
-## Reference
+## Usage
 
 ### `unzip(zipped)`
 

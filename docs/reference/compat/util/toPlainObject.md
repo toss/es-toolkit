@@ -14,7 +14,7 @@ Converts a value to a plain object.
 const plainObj = toPlainObject(value);
 ```
 
-## Reference
+## Usage
 
 ### `toPlainObject(value)`
 

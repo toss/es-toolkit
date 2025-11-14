@@ -6,7 +6,7 @@
 const result = toMerged(target, source);
 ```
 
-## 参考
+## 用法
 
 ### `toMerged(target, source)`
 

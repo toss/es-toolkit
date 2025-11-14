@@ -6,7 +6,7 @@
 const partialFunc = partial(func, arg1, arg2);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `partial(func, ...args)`
 

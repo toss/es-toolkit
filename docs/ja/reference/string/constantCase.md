@@ -6,7 +6,7 @@
 const result = constantCase(str);
 ```
 
-## 参照
+## 使用法
 
 ### `constantCase(str)`
 

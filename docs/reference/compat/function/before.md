@@ -14,7 +14,7 @@ Creates a function that executes the original function up to a specified number 
 const limitedFunction = before(n, func);
 ```
 
-## Reference
+## Usage
 
 ### `before(n, func)`
 

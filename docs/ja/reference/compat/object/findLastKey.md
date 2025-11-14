@@ -14,7 +14,7 @@
 const key = findLastKey(obj, predicate);
 ```
 
-## 参照
+## 使用法
 
 ### `findLastKey(obj, predicate)`
 

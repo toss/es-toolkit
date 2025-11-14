@@ -6,7 +6,7 @@ Returns a new array with duplicate elements removed.
 const uniqueArray = uniq(arr);
 ```
 
-## Reference
+## Usage
 
 ### `uniq(arr)`
 

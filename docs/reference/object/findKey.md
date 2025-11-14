@@ -6,7 +6,7 @@ Finds the key of the first element that satisfies the given condition.
 const key = findKey(obj, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `findKey(obj, predicate)`
 

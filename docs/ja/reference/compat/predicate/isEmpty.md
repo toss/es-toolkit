@@ -6,7 +6,7 @@
 const result = isEmpty(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isEmpty(value)`
 

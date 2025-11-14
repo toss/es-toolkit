@@ -6,7 +6,7 @@
 const average = meanBy(items, getValue);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `meanBy(items, getValue)`
 

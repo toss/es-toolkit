@@ -6,7 +6,7 @@
 const result = isObject(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isObject(value)`
 

@@ -6,7 +6,7 @@ Converts the first letter of each word in a string to uppercase.
 const converted = startCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `startCase(str)`
 

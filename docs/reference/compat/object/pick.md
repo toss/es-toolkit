@@ -14,7 +14,7 @@ Creates a new object by selecting only specified properties from an object.
 const result = pick(obj, ...keys);
 ```
 
-## Reference
+## Usage
 
 ### `pick(object, ...props)`
 

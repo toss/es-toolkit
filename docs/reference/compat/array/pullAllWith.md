@@ -6,7 +6,7 @@ Removes specified values from an array using a comparison function.
 const modified = pullAllWith(array, valuesToRemove, comparator);
 ```
 
-## Reference
+## Usage
 
 ### `pullAllWith(array, values, comparator)`
 

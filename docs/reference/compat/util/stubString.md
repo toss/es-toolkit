@@ -14,7 +14,7 @@ Always returns an empty string.
 const emptyString = stubString();
 ```
 
-## Reference
+## Usage
 
 ### `stubString()`
 

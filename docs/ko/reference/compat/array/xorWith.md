@@ -14,7 +14,7 @@
 const result = xorWith(...arrays, comparator);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `xorWith(...arrays, comparator)`
 

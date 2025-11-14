@@ -14,7 +14,7 @@ Creates a function that always returns the given value.
 const constantFunction = constant(value);
 ```
 
-## Reference
+## Usage
 
 ### `constant(value)`
 

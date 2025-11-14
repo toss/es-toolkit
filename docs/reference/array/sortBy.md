@@ -6,7 +6,7 @@ Returns a new array sorted in ascending order by the given criteria.
 const sorted = sortBy(arr, criteria);
 ```
 
-## Reference
+## Usage
 
 ### `sortBy(arr, criteria)`
 

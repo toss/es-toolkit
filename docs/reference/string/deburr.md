@@ -6,7 +6,7 @@ Converts special characters and diacritics to ASCII characters.
 const result = deburr(str);
 ```
 
-## Reference
+## Usage
 
 ### `deburr(str)`
 

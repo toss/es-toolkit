@@ -6,7 +6,7 @@
 const result = kebabCase(str);
 ```
 
-## 参照
+## 使用法
 
 ### `kebabCase(str)`
 

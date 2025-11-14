@@ -6,7 +6,7 @@
 const result = isMap(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isMap(value)`
 

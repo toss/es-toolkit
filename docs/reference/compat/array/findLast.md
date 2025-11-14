@@ -14,7 +14,7 @@ Finds the last element in an array or object that satisfies a condition.
 const lastEven = findLast(array, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `findLast(collection, predicate?, fromIndex?)`
 

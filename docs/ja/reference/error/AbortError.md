@@ -6,7 +6,7 @@
 const error = new AbortError(message);
 ```
 
-## 参照
+## 使用法
 
 ### `new AbortError(message?)`
 

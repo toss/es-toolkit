@@ -6,7 +6,7 @@ Creates a new function that invokes the original function starting from the `n`-
 const afterFunc = after(n, func);
 ```
 
-## Reference
+## Usage
 
 ### `after(n, func)`
 

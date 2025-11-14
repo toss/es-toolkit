@@ -14,7 +14,7 @@
 const constantFunction = constant(value);
 ```
 
-## 参考
+## 用法
 
 ### `constant(value)`
 

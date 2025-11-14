@@ -14,7 +14,7 @@ Finds the maximum value in an array.
 const result = max(items);
 ```
 
-## Reference
+## Usage
 
 ### `max(items?)`
 

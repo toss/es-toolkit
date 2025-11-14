@@ -15,7 +15,7 @@ const result = take([1, 2, 3, 4, 5], 3);
 // result는 [1, 2, 3]이 돼요.
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `take(array, count)`
 

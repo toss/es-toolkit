@@ -6,7 +6,7 @@
 const restFunc = rest(func, startIndex);
 ```
 
-## 参考
+## 用法
 
 ### `rest(func, startIndex?)`
 

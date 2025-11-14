@@ -14,7 +14,7 @@
 const wrapped = overArgs(func, transforms);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `overArgs(func, ...transforms)`
 

@@ -6,7 +6,7 @@ Returns a new array with duplicate elements removed based on values returned by 
 const uniqueArray = uniqBy(arr, mapper);
 ```
 
-## Reference
+## Usage
 
 ### `uniqBy(arr, mapper)`
 

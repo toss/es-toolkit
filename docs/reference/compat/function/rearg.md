@@ -14,7 +14,7 @@ Creates a new function that rearranges the arguments of the original function in
 const rearranged = rearg(func, ...indices);
 ```
 
-## Reference
+## Usage
 
 ### `rearg(func, ...indices)`
 

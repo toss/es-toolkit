@@ -14,7 +14,7 @@ Finds the highest index at which a value should be inserted into a sorted array.
 const index = sortedLastIndex(array, value);
 ```
 
-## Reference
+## Usage
 
 ### `sortedLastIndex(array, value)`
 

@@ -6,7 +6,7 @@
 const path = toPath(deepKey);
 ```
 
-## 参考
+## 用法
 
 ### `toPath(deepKey)`
 

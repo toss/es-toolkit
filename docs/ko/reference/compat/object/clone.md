@@ -14,7 +14,7 @@
 const cloned = clone(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `clone(value)`
 

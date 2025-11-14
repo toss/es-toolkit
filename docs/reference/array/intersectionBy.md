@@ -6,7 +6,7 @@ Returns a new array containing the intersection of two arrays based on the resul
 const result = intersectionBy(firstArr, secondArr, mapper);
 ```
 
-## Reference
+## Usage
 
 ### `intersectionBy(firstArr, secondArr, mapper)`
 

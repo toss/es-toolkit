@@ -6,7 +6,7 @@
 const partialFunc = partial(func, arg1, arg2);
 ```
 
-## 参考
+## 用法
 
 ### `partial(func, ...args)`
 

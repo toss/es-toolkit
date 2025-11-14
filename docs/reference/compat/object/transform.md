@@ -14,7 +14,7 @@ Iterates over an array or object, accumulating values in an accumulator to creat
 const result = transform(object, iteratee, accumulator);
 ```
 
-## Reference
+## Usage
 
 ### `transform(object, iteratee, accumulator)`
 

@@ -14,7 +14,7 @@ Curries a function from right to left, creating a function that accepts argument
 const curriedFunction = curryRight(func, arity);
 ```
 
-## Reference
+## Usage
 
 ### `curryRight(func, arity)`
 

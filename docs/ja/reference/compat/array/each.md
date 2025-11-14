@@ -14,7 +14,7 @@
 const result = each(collection, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `each(collection, iteratee)`
 

@@ -6,7 +6,7 @@
 const result = upperFirst(str);
 ```
 
-## 参考
+## 用法
 
 ### `upperFirst(str)`
 

@@ -14,7 +14,7 @@
 const result = lowerFirst(str);
 ```
 
-## 参照
+## 使用法
 
 ### `lowerFirst(str)`
 

@@ -14,7 +14,7 @@ Gets the value at the specified path of an object.
 const value = get(object, path, defaultValue);
 ```
 
-## Reference
+## Usage
 
 ### `get(object, path, defaultValue?)`
 

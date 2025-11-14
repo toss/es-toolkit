@@ -12,7 +12,7 @@ An empty function that does nothing.
 noop();
 ```
 
-## Reference
+## Usage
 
 ### `noop(...args)`
 

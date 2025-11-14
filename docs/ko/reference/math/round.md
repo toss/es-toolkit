@@ -6,7 +6,7 @@
 const rounded = round(value, precision?);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `round(value, precision?)`
 

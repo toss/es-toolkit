@@ -14,7 +14,7 @@ Checks if a value is a symbol.
 const result = isSymbol(value);
 ```
 
-## Reference
+## Usage
 
 ### `isSymbol(value)`
 

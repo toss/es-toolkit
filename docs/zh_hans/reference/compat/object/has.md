@@ -14,7 +14,7 @@
 const exists = has(object, path);
 ```
 
-## 参考
+## 用法
 
 ### `has(object, path)`
 

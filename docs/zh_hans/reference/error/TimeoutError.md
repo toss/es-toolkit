@@ -6,7 +6,7 @@
 const error = new TimeoutError(message);
 ```
 
-## 参考
+## 用法
 
 ### `new TimeoutError(message?)`
 

@@ -6,7 +6,7 @@ Converts a string to snake case.
 const converted = snakeCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `snakeCase(str)`
 

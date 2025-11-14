@@ -14,7 +14,7 @@
 const result = dropWhile(array, predicate);
 ```
 
-## 参照
+## 使用法
 
 ### `dropWhile(array, predicate)`
 

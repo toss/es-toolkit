@@ -12,7 +12,7 @@ Checks if two values are equal using a custom comparison function.
 const result = isEqualWith(a, b, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `isEqualWith(a, b, areValuesEqual?)`
 

@@ -6,7 +6,7 @@ Creates a new array by combining multiple arrays using a custom function.
 const result = zipWith(...arrs, combine);
 ```
 
-## Reference
+## Usage
 
 ### `zipWith(...arrs, combine)`
 

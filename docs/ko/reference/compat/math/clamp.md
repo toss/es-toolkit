@@ -14,7 +14,7 @@
 const clamped = clamp(number, lower, upper);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `clamp(number, lower, upper)`
 

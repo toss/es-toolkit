@@ -14,7 +14,7 @@
 const success = unset(obj, path);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `unset(obj, path)`
 

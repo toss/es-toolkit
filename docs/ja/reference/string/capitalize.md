@@ -6,7 +6,7 @@
 const result = capitalize(str);
 ```
 
-## 参照
+## 使用法
 
 ### `capitalize(str)`
 

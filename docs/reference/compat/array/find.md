@@ -14,7 +14,7 @@ Finds the first element in an array or object that matches the condition.
 const result = find(collection, predicate, fromIndex);
 ```
 
-## Reference
+## Usage
 
 ### `find(collection, predicate, fromIndex?)`
 

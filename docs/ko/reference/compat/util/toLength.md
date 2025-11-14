@@ -6,7 +6,7 @@
 const length = toLength(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toLength(value)`
 

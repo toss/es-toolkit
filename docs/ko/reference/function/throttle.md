@@ -6,7 +6,7 @@
 const throttledFunc = throttle(func, throttleMs, options);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `throttle(func, throttleMs, options?)`
 

@@ -14,7 +14,7 @@
 const result = transform(object, iteratee, accumulator);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `transform(object, iteratee, accumulator)`
 

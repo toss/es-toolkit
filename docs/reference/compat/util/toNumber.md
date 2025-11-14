@@ -14,7 +14,7 @@ Converts a value to a number.
 const number = toNumber(value);
 ```
 
-## Reference
+## Usage
 
 ### `toNumber(value)`
 

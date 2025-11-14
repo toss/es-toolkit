@@ -14,7 +14,7 @@
 const result = lt(value, other);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `lt(value, other)`
 

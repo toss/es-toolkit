@@ -12,7 +12,7 @@ If you need a function that synchronously does nothing, use the `noop` function 
 
 :::
 
-## Reference
+## Usage
 
 ### `asyncNoop()`
 

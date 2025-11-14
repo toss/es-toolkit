@@ -14,7 +14,7 @@ Adds values that meet a condition.
 const total = sumBy(array, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `sumBy(array, iteratee)`
 

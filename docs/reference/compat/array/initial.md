@@ -14,7 +14,7 @@ Returns a new array with all elements except the last one from an array.
 const result = initial(array);
 ```
 
-## Reference
+## Usage
 
 ### `initial(array)`
 

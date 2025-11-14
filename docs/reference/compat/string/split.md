@@ -14,7 +14,7 @@ Splits a string into an array using a separator.
 const segments = split(str, separator);
 ```
 
-## Reference
+## Usage
 
 ### `split(string, separator?, limit?)`
 

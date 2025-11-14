@@ -14,7 +14,7 @@
 const length = size(collection);
 ```
 
-## 参考
+## 用法
 
 ### `size(collection)`
 

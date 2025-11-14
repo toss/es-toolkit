@@ -6,7 +6,7 @@ Returns a new array excluding elements from the first array that are in the seco
 const result = difference(firstArr, secondArr);
 ```
 
-## Reference
+## Usage
 
 ### `difference(firstArr, secondArr)`
 

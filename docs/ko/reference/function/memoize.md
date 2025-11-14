@@ -6,7 +6,7 @@
 const memoizedFunc = memoize(func, options);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `memoize(func, options?)`
 

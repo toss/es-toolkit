@@ -6,7 +6,7 @@
 const filled = toFilled(arr, value, start?, end?);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toFilled(arr, value, start?, end?)`
 

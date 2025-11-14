@@ -7,7 +7,7 @@ const clamped = clamp(value, maximum);
 const clamped = clamp(value, minimum, maximum);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `clamp(value, maximum)`
 

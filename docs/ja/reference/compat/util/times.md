@@ -6,7 +6,7 @@
 const result = times(n, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `times(n, iteratee)`
 

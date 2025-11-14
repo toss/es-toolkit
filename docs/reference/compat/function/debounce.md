@@ -14,7 +14,7 @@ Creates a debounced function that delays invoking the provided function until af
 const debouncedFunction = debounce(func, wait, options);
 ```
 
-## Reference
+## Usage
 
 ### `debounce(func, wait, options)`
 

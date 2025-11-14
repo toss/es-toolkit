@@ -6,7 +6,7 @@ Creates a new array with elements that exist in only one of two arrays using a g
 const result = xorWith(arr1, arr2, areElementsEqual);
 ```
 
-## Reference
+## Usage
 
 ### `xorWith(arr1, arr2, areElementsEqual)`
 

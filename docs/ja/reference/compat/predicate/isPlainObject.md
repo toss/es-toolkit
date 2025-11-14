@@ -14,7 +14,7 @@
 const result = isPlainObject(object);
 ```
 
-## 参照
+## 使用法
 
 ### `isPlainObject(object)`
 

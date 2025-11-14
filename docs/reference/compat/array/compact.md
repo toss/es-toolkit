@@ -14,7 +14,7 @@ Removes falsy values from an array.
 const compacted = compact(arr);
 ```
 
-## Reference
+## Usage
 
 ### `compact(arr)`
 

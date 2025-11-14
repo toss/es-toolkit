@@ -14,7 +14,7 @@ Reduces an array or object to a single value.
 const result = reduce(collection, iteratee, initialValue);
 ```
 
-## Reference
+## Usage
 
 ### `reduce(collection, iteratee, initialValue)`
 

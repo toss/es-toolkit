@@ -14,7 +14,7 @@
 const removed = pullAt(array, ...indexes);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `pullAt(array, ...indexes)`
 

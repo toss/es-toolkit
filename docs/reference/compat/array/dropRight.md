@@ -14,7 +14,7 @@ Returns a new array with a specified number of elements removed from the end.
 const result = dropRight(array, itemsCount);
 ```
 
-## Reference
+## Usage
 
 ### `dropRight(array, itemsCount)`
 

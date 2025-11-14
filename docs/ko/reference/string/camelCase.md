@@ -6,7 +6,7 @@
 const result = camelCase(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `camelCase(str)`
 

@@ -6,7 +6,7 @@
 const unified = union(arr1, arr2);
 ```
 
-## 参考
+## 用法
 
 ### `union(arr1, arr2)`
 

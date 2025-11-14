@@ -6,7 +6,7 @@ Curries a function from right to left so it can be called with one argument at a
 const curriedFunc = curryRight(func);
 ```
 
-## Reference
+## Usage
 
 ### `curryRight(func)`
 

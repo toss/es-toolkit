@@ -6,7 +6,7 @@
 const matcher = matches(pattern);
 ```
 
-## 参考
+## 用法
 
 ### `matches(source)`
 

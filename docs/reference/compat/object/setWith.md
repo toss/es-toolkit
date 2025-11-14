@@ -14,7 +14,7 @@ Sets a value at the specified path while controlling how objects are created wit
 const result = setWith(obj, path, value, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `setWith(object, path, value, customizer)`
 

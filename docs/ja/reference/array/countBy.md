@@ -6,7 +6,7 @@
 const counted = countBy(arr, mapper);
 ```
 
-## 参照
+## 使用法
 
 ### `countBy(arr, mapper)`
 

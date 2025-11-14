@@ -6,7 +6,7 @@ Creates a new array containing all unique elements from two arrays.
 const unified = union(arr1, arr2);
 ```
 
-## Reference
+## Usage
 
 ### `union(arr1, arr2)`
 

@@ -14,7 +14,7 @@
 const lastEven = findLast(array, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `findLast(collection, predicate?, fromIndex?)`
 

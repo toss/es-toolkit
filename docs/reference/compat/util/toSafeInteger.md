@@ -6,7 +6,7 @@ Converts a value to a safe integer.
 const result = toSafeInteger(value);
 ```
 
-## Reference
+## Usage
 
 ### `toSafeInteger(value)`
 

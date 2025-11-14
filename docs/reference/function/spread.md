@@ -6,7 +6,7 @@ Creates a new function that spreads a parameter array into individual parameters
 const spreadFunc = spread(func);
 ```
 
-## Reference
+## Usage
 
 ### `spread(func)`
 

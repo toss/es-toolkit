@@ -14,7 +14,7 @@ Checks if a value is a safe integer.
 const result = isSafeInteger(value);
 ```
 
-## Reference
+## Usage
 
 ### `isSafeInteger(value)`
 
@@ -56,4 +56,5 @@ isSafeInteger(NaN); // false
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a safe integer, otherwise `false`.
+(`value is number`) Returns `true` if the value is a safe integer, otherwise `false`.  
+When `true`, TypeScript narrows the type of `value` to `number`.

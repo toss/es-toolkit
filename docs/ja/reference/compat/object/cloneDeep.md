@@ -14,7 +14,7 @@
 const cloned = cloneDeep(value);
 ```
 
-## 参照
+## 使用法
 
 ### `cloneDeep(value)`
 

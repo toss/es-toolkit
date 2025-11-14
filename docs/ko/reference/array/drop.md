@@ -6,7 +6,7 @@
 const dropped = drop(arr, itemsCount);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `drop(arr, itemsCount)`
 

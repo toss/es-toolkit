@@ -6,7 +6,7 @@ Reverses a string.
 const reversed = reverseString(value);
 ```
 
-## Reference
+## Usage
 
 ### `reverseString(value)`
 
