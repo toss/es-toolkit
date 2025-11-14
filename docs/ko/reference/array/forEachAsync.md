@@ -17,18 +17,14 @@ import { forEachAsync } from 'es-toolkit/array';
 
 // 모든 사용자 정보를 업데이트해요.
 const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
-await forEachAsync(users, async (user) => {
+await forEachAsync(users, async user => {
   await updateUser(user.id);
 });
 // 모든 사용자 업데이트가 완료되었어요.
 
 // 동시 실행 수를 제한할 수 있어요.
 const items = [1, 2, 3, 4, 5];
-await forEachAsync(
-  items,
-  async (item) => await processItem(item),
-  { concurrency: 2 }
-);
+await forEachAsync(items, async item => await processItem(item), { concurrency: 2 });
 // 최대 2개의 항목만 동시에 처리돼요.
 ```
 
@@ -39,11 +35,7 @@ import { forEachAsync } from 'es-toolkit/array';
 
 // 파일을 순차적으로 업로드해요.
 const files = ['file1.txt', 'file2.txt', 'file3.txt'];
-await forEachAsync(
-  files,
-  async (file) => await uploadFile(file),
-  { concurrency: 1 }
-);
+await forEachAsync(files, async file => await uploadFile(file), { concurrency: 1 });
 // 한 번에 하나씩만 업로드돼요.
 ```
 

@@ -17,18 +17,14 @@ import { filterAsync } from 'es-toolkit/array';
 
 // 通过 API 检查用户状态，过滤出活跃用户。
 const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const activeUsers = await filterAsync(users, async (user) => {
+const activeUsers = await filterAsync(users, async user => {
   return await checkUserStatus(user.id);
 });
 // 返回：仅包含活跃用户的数组
 
 // 限制并发数以减少服务器负载。
 const numbers = [1, 2, 3, 4, 5];
-const evenNumbers = await filterAsync(
-  numbers,
-  async (n) => await isEvenAsync(n),
-  { concurrency: 2 }
-);
+const evenNumbers = await filterAsync(numbers, async n => await isEvenAsync(n), { concurrency: 2 });
 // 最多同时执行 2 个操作。
 ```
 
@@ -38,11 +34,7 @@ const evenNumbers = await filterAsync(
 import { filterAsync } from 'es-toolkit/array';
 
 // 最多同时执行 3 个 API 调用。
-const items = await filterAsync(
-  largeArray,
-  async (item) => await validateItem(item),
-  { concurrency: 3 }
-);
+const items = await filterAsync(largeArray, async item => await validateItem(item), { concurrency: 3 });
 ```
 
 #### 参数
