@@ -17,18 +17,14 @@ import { filterAsync } from 'es-toolkit/array';
 
 // 사용자 상태를 API로 확인해서 활성 사용자만 필터링해요.
 const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const activeUsers = await filterAsync(users, async (user) => {
+const activeUsers = await filterAsync(users, async user => {
   return await checkUserStatus(user.id);
 });
 // 반환: 활성 상태인 사용자들만 포함된 배열
 
 // 동시 실행 수를 제한해서 서버 부하를 줄일 수 있어요.
 const numbers = [1, 2, 3, 4, 5];
-const evenNumbers = await filterAsync(
-  numbers,
-  async (n) => await isEvenAsync(n),
-  { concurrency: 2 }
-);
+const evenNumbers = await filterAsync(numbers, async n => await isEvenAsync(n), { concurrency: 2 });
 // 최대 2개의 작업만 동시에 실행돼요.
 ```
 
@@ -38,11 +34,7 @@ const evenNumbers = await filterAsync(
 import { filterAsync } from 'es-toolkit/array';
 
 // 동시에 최대 3개의 API 호출만 실행해요.
-const items = await filterAsync(
-  largeArray,
-  async (item) => await validateItem(item),
-  { concurrency: 3 }
-);
+const items = await filterAsync(largeArray, async item => await validateItem(item), { concurrency: 3 });
 ```
 
 #### 파라미터

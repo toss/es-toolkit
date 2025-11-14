@@ -17,18 +17,14 @@ import { filterAsync } from 'es-toolkit/array';
 
 // Filter for active users by checking their status via API.
 const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const activeUsers = await filterAsync(users, async (user) => {
+const activeUsers = await filterAsync(users, async user => {
   return await checkUserStatus(user.id);
 });
 // Returns: Array containing only active users
 
 // Limit concurrency to reduce server load.
 const numbers = [1, 2, 3, 4, 5];
-const evenNumbers = await filterAsync(
-  numbers,
-  async (n) => await isEvenAsync(n),
-  { concurrency: 2 }
-);
+const evenNumbers = await filterAsync(numbers, async n => await isEvenAsync(n), { concurrency: 2 });
 // Only 2 operations run concurrently at most.
 ```
 
@@ -38,11 +34,7 @@ The `concurrency` option helps limit external API calls or manage system resourc
 import { filterAsync } from 'es-toolkit/array';
 
 // Execute at most 3 API calls concurrently.
-const items = await filterAsync(
-  largeArray,
-  async (item) => await validateItem(item),
-  { concurrency: 3 }
-);
+const items = await filterAsync(largeArray, async item => await validateItem(item), { concurrency: 3 });
 ```
 
 #### Parameters
