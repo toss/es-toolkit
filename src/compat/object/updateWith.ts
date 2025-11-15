@@ -86,10 +86,8 @@ export function updateWith<T extends object, R>(
   if (isKey(path, obj)) {
     resolvedPath = [path];
   } else if (Array.isArray(path)) {
-    // Nested Keys - Array
     resolvedPath = path;
   } else {
-    // Nested Keys - String
     resolvedPath = toPath(path);
   }
 
