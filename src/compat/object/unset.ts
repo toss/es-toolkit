@@ -44,10 +44,6 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
         }
       }
 
-      if (isUnsafeProperty(path as PropertyKey)) {
-        return false;
-      }
-
       if (obj?.[path as PropertyKey] === undefined) {
         return true;
       }

@@ -166,4 +166,9 @@ describe('unset', () => {
     expect(unset(object, 'a.b')).toBe(true);
     expect(object).toEqual({ b: null });
   });
+
+  it('should prevent prototype pollution by rejecting __proto__ deletion', () => {
+    expect(unset({ ['__proto__']: {} }, '__proto__')).toBe(false);
+    expect(unset({ ['__proto__']: {} }, ['__proto__'])).toBe(false);
+  });
 });
