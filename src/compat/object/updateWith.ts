@@ -82,13 +82,17 @@ export function updateWith<T extends object, R>(
     return obj;
   }
 
-  const resolvedPath = isKey(path, obj)
-    ? [path]
-    : Array.isArray(path)
-      ? path
-      : typeof path === 'string'
-        ? toPath(path)
-        : [path];
+  let resolvedPath: PropertyKey[];
+  if (isKey(path, obj)) {
+    resolvedPath = [path];
+  } else if (Array.isArray(path)) {
+    // Nested Keys - Array
+    resolvedPath = path;
+  } else {
+    // Nested Keys - String
+    resolvedPath = toPath(path);
+  }
+
   const updateValue = updater(get(obj, resolvedPath));
 
   let current: any = obj;
