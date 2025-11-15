@@ -161,8 +161,12 @@ describe('mergeWith', () => {
   });
 
   it('should prevent prototype pollution by skipping __proto__ from source', () => {
-    const result = mergeWith({ a: 0, ['__proto__']: 0 }, { a: 1, ['__proto__']: 1 }, noop);
-    expect(result).toEqual({ a: 1, ['__proto__']: 0 });
+    const result = mergeWith(
+      { a: 0, ['__proto__']: { polluted: 'no' } },
+      { a: 1, ['__proto__']: { polluted: 'yes' } },
+      noop
+    );
+    expect(result).toEqual({ a: 1, ['__proto__']: { polluted: 'no' } });
   });
 
   it('should handle circular references in source object', () => {
