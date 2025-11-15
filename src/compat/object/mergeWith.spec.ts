@@ -179,7 +179,9 @@ describe('mergeWith', () => {
   });
 
   it('should handle Arguments objects in both source and target', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function getArgs(..._arg: unknown[]) {
+      // eslint-disable-next-line prefer-rest-params
       return arguments;
     }
     const args = getArgs(1, 2, 3);
