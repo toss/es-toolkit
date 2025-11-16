@@ -72,7 +72,7 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
       if (Array.isArray(targetValue)) {
-        target[key] = mergeWith<any, S[keyof T]>(targetValue ?? [], sourceValue, merge);
+        target[key] = mergeWith<any, S[keyof T]>(targetValue, sourceValue, merge);
       } else {
         target[key] = mergeWith<any, S[keyof T]>([], sourceValue, merge);
       }
