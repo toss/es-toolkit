@@ -14,6 +14,7 @@ export { noop } from './noop.ts';
 export { once } from './once.ts';
 export { partial } from './partial.ts';
 export { partialRight } from './partialRight.ts';
+export { pipe } from './pipe.ts';
 export { rest } from './rest.ts';
 export { retry } from './retry.ts';
 export { spread } from './spread.ts';
