@@ -1,5 +1,21 @@
 # es-toolkit Changelog
 
+## Version v1.42.0
+
+Released on November 17th, 2025.
+
+- Added new async utilities: `filterAsync`, `flatMapAsync`, `forEachAsync`, `mapAsync`, `reduceAsync`, and `limitAsync` for handling asynchronous operations.
+- Exported `ThrottleOptions` and `DebounceOptions` interfaces for better type support.
+- Fixed `isFinite` to implement type predicate to narrow type to number.
+- Fixed `isSafeInteger` to implement type predicate to narrow type to number.
+- Fixed `omit` to prevent adding index properties to array-like objects.
+- Fixed `mergeWith` to remove unnecessary nullish coalescing for 100% branch coverage.
+- Fixed `compat/updateWith` to remove unreachable code and add prototype pollution test.
+- Updated documentation headings for consistency.
+- Improved test coverage for `compat/mergeWith`, `compat/unset`, `get`, `toMerged`, `mergeWith`, and `compat/intersectionBy` with additional edge cases and security tests.
+
+We sincerely thank @Debbl, @wo-o29, @raon0211, @Yeom-JinHo, @sukvvon, and @D-Sketon for their contributions. We appreciate your great efforts!
+
 ## Version v1.41.0
 
 Released on October 24th, 2025.
