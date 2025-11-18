@@ -50,6 +50,6 @@ await fetchData(controller.signal); // AbortErrorをスロー
 
 - `message` (`string`, オプション): エラーメッセージです。デフォルト値は`'The operation was aborted'`です。
 
-### 戻り値
+#### 戻り値
 
 (`AbortError`): 中断された操作を表すエラーインスタンスを返します。`Error`を継承しており、`name`プロパティは`'AbortError'`です。

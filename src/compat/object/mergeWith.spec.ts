@@ -159,4 +159,73 @@ describe('mergeWith', () => {
       })
     ).toEqual({ prop: null });
   });
+
+  it('should prevent prototype pollution by skipping __proto__ from source', () => {
+    const result = mergeWith(
+      { a: 0, ['__proto__']: { polluted: 'no' } },
+      { a: 1, ['__proto__']: { polluted: 'yes' } },
+      noop
+    );
+    expect(result).toEqual({ a: 1, ['__proto__']: { polluted: 'no' } });
+  });
+
+  it('should handle circular references in source object', () => {
+    const source: any = { a: 1 };
+    source.circular = source;
+
+    const target = { b: 2 };
+    const result = mergeWith(target, source, noop);
+
+    expect(result.a).toBe(1);
+    expect(result.b).toBe(2);
+    expect(result.circular).toBeDefined();
+    expect(result.circular.a).toBe(1);
+  });
+
+  it('should handle Arguments objects in both source and target', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    function getArgs(..._arg: unknown[]) {
+      // eslint-disable-next-line prefer-rest-params
+      return arguments;
+    }
+    const args = getArgs(1, 2, 3);
+
+    // If the source has an Arguments object
+    let result = mergeWith({ a: { b: 1 } }, { a: args }, noop);
+    expect(result.a).toEqual({ 0: 1, 1: 2, 2: 3, b: 1 });
+
+    // If the target has an Arguments object
+    result = mergeWith({ a: args }, { a: { b: 4 } }, noop);
+    expect(result.a).toEqual({ 0: 1, 1: 2, 2: 3, b: 4 });
+  });
+
+  it('should clone Buffer objects from source', () => {
+    if (typeof Buffer === 'undefined') {
+      return;
+    }
+
+    const buffer = Buffer.from([1, 2, 3]);
+    const result = mergeWith({ a: 1 }, { b: buffer }, noop);
+
+    expect(result.b).toBeInstanceOf(Buffer);
+    expect(result.b).not.toBe(buffer);
+    expect(result.b).toEqual(buffer);
+  });
+
+  it('should clone TypedArray from source', () => {
+    const typedArray = new Uint8Array([1, 2, 3]);
+    const result = mergeWith({ a: 1 }, { b: typedArray }, noop);
+
+    expect(result.b).toBeInstanceOf(Uint8Array);
+    expect(result.b).not.toBe(typedArray);
+    expect(Array.from(result.b)).toEqual([1, 2, 3]);
+  });
+
+  it('should assign source value when target is undefined and preserve target value when source is undefined', () => {
+    let result = mergeWith({}, { a: 1 }, noop);
+    expect(result.a).toBe(1);
+
+    result = mergeWith({ a: 1 }, { a: undefined }, noop);
+    expect(result.a).toBe(1);
+  });
 });

@@ -50,6 +50,6 @@ await fetchData(controller.signal); // 抛出 AbortError
 
 - `message` (`string`, 可选): 错误消息。默认为 `'The operation was aborted'`。
 
-### 返回值
+#### 返回值
 
 (`AbortError`): 返回表示已中止操作的错误实例。它继承自 `Error`,`name` 属性为 `'AbortError'`。
