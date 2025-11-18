@@ -46,6 +46,6 @@ await Promise.all(items.map(item => limitedProcess(item)));
 - `callback` (`F extends (...args: any[]) => Promise<any>`)：並行実行数を制限する非同期関数です。
 - `concurrency` (`number`)：同時に実行できる最大操作数です。
 
-### 戻り値
+#### 戻り値
 
 (`F`)：並行実行制限が適用された新しい関数を返します。元の関数と同じインターフェースを持ちます。

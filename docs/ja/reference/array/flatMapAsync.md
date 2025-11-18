@@ -46,6 +46,6 @@ const products = await flatMapAsync(categories, async category => await fetchPro
 - `options` (`FlatMapAsyncOptions`, オプショナル)：並行実行を制御するオプションです。
   - `concurrency` (`number`, オプショナル)：同時に実行できる最大操作数です。指定しない場合、すべての操作が同時に実行されます。
 
-### 戻り値
+#### 戻り値
 
 (`Promise<R[]>`)：1レベル平坦化された変換値の配列のPromiseを返します。

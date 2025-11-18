@@ -46,6 +46,6 @@ await forEachAsync(files, async file => await uploadFile(file), { concurrency: 1
 - `options` (`ForEachAsyncOptions`, オプショナル)：並行実行を制御するオプションです。
   - `concurrency` (`number`, オプショナル)：同時に実行できる最大操作数です。指定しない場合、すべての操作が同時に実行されます。
 
-### 戻り値
+#### 戻り値
 
 (`Promise<void>`)：すべての操作が完了したときに解決されるPromiseを返します。

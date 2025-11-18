@@ -44,6 +44,6 @@ const items = await filterAsync(largeArray, async item => await validateItem(ite
 - `options` (`FilterAsyncOptions`, optional): Options to control concurrency.
   - `concurrency` (`number`, optional): Maximum number of concurrent operations. If not specified, all operations run concurrently.
 
-### Returns
+#### Returns
 
 (`Promise<T[]>`): A promise that resolves to a new array containing only the elements for which the predicate function returned a truthy value.

@@ -46,6 +46,6 @@ await Promise.all(items.map(item => limitedProcess(item)));
 - `callback` (`F extends (...args: any[]) => Promise<any>`): The async function to limit concurrent executions for.
 - `concurrency` (`number`): Maximum number of concurrent operations.
 
-### Returns
+#### Returns
 
 (`F`): A new function with concurrency limiting applied. It has the same interface as the original function.

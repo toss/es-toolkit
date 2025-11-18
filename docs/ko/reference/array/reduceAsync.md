@@ -42,7 +42,7 @@ const userMap = await reduceAsync(
 - `reducer` (`(accumulator: U, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<U>`): 각 요소를 처리하는 비동기 함수예요. 누적된 값과 현재 값을 받아서 새로운 누적 값을 반환해요.
 - `initialValue` (`U`): 누적 값의 초기값이에요.
 
-### 반환 값
+#### 반환 값
 
 (`Promise<U>`): 최종 누적 값의 프로미스를 반환해요.
 
@@ -73,6 +73,6 @@ const result = await reduceAsync(emptyArray, async (acc, n) => acc + n);
 - `array` (`readonly T[]`): 합칠 배열이에요.
 - `reducer` (`(accumulator: T, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<T>`): 각 요소를 처리하는 비동기 함수예요. 누적된 값과 현재 값을 받아서 새로운 누적 값을 반환해요.
 
-### 반환 값
+#### 반환 값
 
 (`Promise<T | undefined>`): 최종 누적 값의 프로미스를 반환해요. 배열이 비어있으면 `undefined`를 반환해요.

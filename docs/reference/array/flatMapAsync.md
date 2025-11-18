@@ -46,6 +46,6 @@ const products = await flatMapAsync(categories, async category => await fetchPro
 - `options` (`FlatMapAsyncOptions`, optional): Options to control concurrency.
   - `concurrency` (`number`, optional): Maximum number of concurrent operations. If not specified, all operations run concurrently.
 
-### Returns
+#### Returns
 
 (`Promise<R[]>`): A promise that resolves to an array of transformed values flattened by one level.

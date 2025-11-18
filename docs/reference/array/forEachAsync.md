@@ -46,6 +46,6 @@ await forEachAsync(files, async file => await uploadFile(file), { concurrency: 1
 - `options` (`ForEachAsyncOptions`, optional): Options to control concurrency.
   - `concurrency` (`number`, optional): Maximum number of concurrent operations. If not specified, all operations run concurrently.
 
-### Returns
+#### Returns
 
 (`Promise<void>`): A promise that resolves when all operations complete.

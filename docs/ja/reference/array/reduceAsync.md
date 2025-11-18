@@ -42,7 +42,7 @@ const userMap = await reduceAsync(
 - `reducer` (`(accumulator: U, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<U>`)：各要素を処理する非同期関数です。累積値と現在の値を受け取り、新しい累積値を返します。
 - `initialValue` (`U`)：アキュムレーターの初期値です。
 
-### 戻り値
+#### 戻り値
 
 (`Promise<U>`)：最終的な累積値のPromiseを返します。
 
@@ -73,6 +73,6 @@ const result = await reduceAsync(emptyArray, async (acc, n) => acc + n);
 - `array` (`readonly T[]`)：縮約する配列です。
 - `reducer` (`(accumulator: T, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<T>`)：各要素を処理する非同期関数です。累積値と現在の値を受け取り、新しい累積値を返します。
 
-### 戻り値
+#### 戻り値
 
 (`Promise<T | undefined>`)：最終的な累積値のPromiseを返します。配列が空の場合は`undefined`を返します。

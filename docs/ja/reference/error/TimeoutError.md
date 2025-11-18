@@ -49,6 +49,6 @@ await fetchWithTimeout('https://example.com/api/slow');
 
 - `message` (`string`, オプション): エラーメッセージです。デフォルト値は`'The operation was timed out'`です。
 
-### 戻り値
+#### 戻り値
 
 (`TimeoutError`): タイムアウトした操作を表すエラーインスタンスを返します。`Error`を継承しており、`name`プロパティは`'TimeoutError'`です。

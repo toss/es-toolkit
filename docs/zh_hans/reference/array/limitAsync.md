@@ -46,6 +46,6 @@ await Promise.all(items.map(item => limitedProcess(item)));
 - `callback` (`F extends (...args: any[]) => Promise<any>`)：要限制并发执行的异步函数。
 - `concurrency` (`number`)：最大并发操作数。
 
-### 返回值
+#### 返回值
 
 (`F`)：一个应用了并发限制的新函数。它与原始函数具有相同的接口。

@@ -50,6 +50,6 @@ const processedImages = await mapAsync(
 - `options` (`MapAsyncOptions`, optional): Options to control concurrency.
   - `concurrency` (`number`, optional): Maximum number of concurrent operations. If not specified, all operations run concurrently.
 
-### Returns
+#### Returns
 
 (`Promise<R[]>`): A promise that resolves to a new array of transformed values.

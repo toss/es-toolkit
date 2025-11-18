@@ -49,6 +49,6 @@ await fetchWithTimeout('https://example.com/api/slow');
 
 - `message` (`string`, 可选): 错误消息。默认为 `'The operation was timed out'`。
 
-### 返回值
+#### 返回值
 
 (`TimeoutError`): 返回表示已超时操作的错误实例。它继承自 `Error`,`name` 属性为 `'TimeoutError'`。

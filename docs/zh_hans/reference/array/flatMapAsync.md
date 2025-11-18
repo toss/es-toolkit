@@ -46,6 +46,6 @@ const products = await flatMapAsync(categories, async category => await fetchPro
 - `options` (`FlatMapAsyncOptions`, 可选)：控制并发的选项。
   - `concurrency` (`number`, 可选)：最大并发操作数。如果未指定，所有操作将并发执行。
 
-### 返回值
+#### 返回值
 
 (`Promise<R[]>`)：一个 Promise，解析为展平一层的转换值数组。

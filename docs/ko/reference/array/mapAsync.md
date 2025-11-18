@@ -50,6 +50,6 @@ const processedImages = await mapAsync(
 - `options` (`MapAsyncOptions`, 선택): 동시 실행을 제어하는 옵션이에요.
   - `concurrency` (`number`, 선택): 동시에 실행할 수 있는 최대 작업 수예요. 지정하지 않으면 모든 작업이 동시에 실행돼요.
 
-### 반환 값
+#### 반환 값
 
 (`Promise<R[]>`): 변환된 값들로 이루어진 새로운 배열의 프로미스를 반환해요.

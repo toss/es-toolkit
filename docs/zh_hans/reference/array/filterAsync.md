@@ -44,6 +44,6 @@ const items = await filterAsync(largeArray, async item => await validateItem(ite
 - `options` (`FilterAsyncOptions`, 可选)：控制并发的选项。
   - `concurrency` (`number`, 可选)：最大并发操作数。如果未指定，所有操作将并发执行。
 
-### 返回值
+#### 返回值
 
 (`Promise<T[]>`)：一个 Promise，解析为仅包含条件函数返回真值的元素的新数组。

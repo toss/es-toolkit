@@ -44,6 +44,6 @@ const items = await filterAsync(largeArray, async item => await validateItem(ite
 - `options` (`FilterAsyncOptions`, 선택): 동시 실행을 제어하는 옵션이에요.
   - `concurrency` (`number`, 선택): 동시에 실행할 수 있는 최대 작업 수예요. 지정하지 않으면 모든 작업이 동시에 실행돼요.
 
-### 반환 값
+#### 반환 값
 
 (`Promise<T[]>`): 조건 함수가 참으로 평가되는 값을 반환한 요소들만 포함하는 새로운 배열의 프로미스를 반환해요.

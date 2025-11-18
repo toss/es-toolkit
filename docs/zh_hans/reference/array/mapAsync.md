@@ -50,6 +50,6 @@ const processedImages = await mapAsync(
 - `options` (`MapAsyncOptions`, 可选)：控制并发的选项。
   - `concurrency` (`number`, 可选)：最大并发操作数。如果未指定，所有操作将并发执行。
 
-### 返回值
+#### 返回值
 
 (`Promise<R[]>`)：一个 Promise，解析为转换值的新数组。

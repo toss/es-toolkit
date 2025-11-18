@@ -42,7 +42,7 @@ Unlike other async array methods, `reduceAsync` must process elements sequential
 - `reducer` (`(accumulator: U, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<U>`): An async function that processes each element. It receives the accumulated value and current value, and returns the new accumulated value.
 - `initialValue` (`U`): The initial value of the accumulator.
 
-### Returns
+#### Returns
 
 (`Promise<U>`): A promise that resolves to the final accumulated value.
 
@@ -73,6 +73,6 @@ Calling `reduceAsync` on an empty array without an initial value returns `undefi
 - `array` (`readonly T[]`): The array to reduce.
 - `reducer` (`(accumulator: T, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<T>`): An async function that processes each element. It receives the accumulated value and current value, and returns the new accumulated value.
 
-### Returns
+#### Returns
 
 (`Promise<T | undefined>`): A promise that resolves to the final accumulated value. Returns `undefined` if the array is empty.

@@ -42,7 +42,7 @@ const userMap = await reduceAsync(
 - `reducer` (`(accumulator: U, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<U>`)：处理每个元素的异步函数。它接收累积值和当前值，并返回新的累积值。
 - `initialValue` (`U`)：累加器的初始值。
 
-### 返回值
+#### 返回值
 
 (`Promise<U>`)：一个解析为最终累积值的 Promise。
 
@@ -73,6 +73,6 @@ const result = await reduceAsync(emptyArray, async (acc, n) => acc + n);
 - `array` (`readonly T[]`)：要归约的数组。
 - `reducer` (`(accumulator: T, currentValue: T, currentIndex: number, array: readonly T[]) => Promise<T>`)：处理每个元素的异步函数。它接收累积值和当前值，并返回新的累积值。
 
-### 返回值
+#### 返回值
 
 (`Promise<T | undefined>`)：一个解析为最终累积值的 Promise。如果数组为空，则返回 `undefined`。

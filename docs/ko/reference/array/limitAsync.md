@@ -46,6 +46,6 @@ await Promise.all(items.map(item => limitedProcess(item)));
 - `callback` (`F extends (...args: any[]) => Promise<any>`): 동시 실행 수를 제한할 비동기 함수예요.
 - `concurrency` (`number`): 동시에 실행할 수 있는 최대 작업 수예요.
 
-### 반환 값
+#### 반환 값
 
 (`F`): 동시 실행 제한이 적용된 새로운 함수를 반환해요. 원본 함수와 같은 인터페이스를 가지고 있어요.
