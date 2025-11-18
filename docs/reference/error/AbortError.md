@@ -50,6 +50,6 @@ await fetchData(controller.signal); // Throws AbortError
 
 - `message` (`string`, optional): The error message. Defaults to `'The operation was aborted'`.
 
-### Returns
+#### Returns
 
 (`AbortError`): Returns an error instance representing an aborted operation. It inherits from `Error` and the `name` property is `'AbortError'`.

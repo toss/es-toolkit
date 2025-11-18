@@ -21,6 +21,13 @@ describe('updateWith', () => {
     });
   });
 
+  it('should prevent prototype pollution by skipping __proto__ in path', () => {
+    const object = { a: [{ ['__proto__']: { b: 3 } }] };
+    const result = updateWith(object, 'a[0][__proto__].b', n => n * n);
+    expect(result).toBe(object);
+    expect(object.a[0]['__proto__'].b).toBe(3);
+  });
+
   it('should preserve the sign of `0`', () => {
     const props = [-0, Object(-0), 0, Object(0)];
     const expected = map(props, constant(value));
