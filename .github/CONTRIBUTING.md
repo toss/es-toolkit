@@ -4,6 +4,16 @@ We welcome contribution from everyone in the community. All communications in th
 
 > Every contributor to es-toolkit should adhere to our Code of Conduct. Please read the [full text](./CODE_OF_CONDUCT.md) to understand what actions will and will not be tolerated.
 
+## Package Manager
+
+This project uses **Yarn 4** as its package manager. The correct version is automatically installed via Corepack when you run `yarn install`.
+
+To get started:
+
+1. Make sure you have Node.js installed (see `.nvmrc` for the required version)
+2. Enable Corepack: `corepack enable`
+3. Install dependencies: `yarn install`
+
 ## 1. Our Design Principles
 
 Note that we value performance, simplicity of implementation, and detailed documentations. We do not aim for supporting a variety of features and options. Our goal is to provide a small set of performant and well-functioning utilities.
