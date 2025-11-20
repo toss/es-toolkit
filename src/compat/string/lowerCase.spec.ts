@@ -13,6 +13,16 @@ describe('lowerCase', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should convert string to lower case, identical to lodash', () => {
+    expect(lowerCase('åäöÅÄÖ')).toBe('aao aao');
+    expect(lowerCase('helloÅäöWorld')).toBe('hello aao world');
+    expect(lowerCase('café')).toBe('cafe');
+    expect(lowerCase('naïve')).toBe('naive');
+    expect(lowerCase('Zürich')).toBe('zurich');
+    expect(lowerCase('São Paulo')).toBe('sao paulo');
+    expect(lowerCase('Москва')).toBe('москва');
+  });
+
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => lowerCase(lowerCase(string)));
 

@@ -1,3 +1,4 @@
+import { deburr } from './deburr.ts';
 import { lowerCase as lowerCaseToolkit } from '../../string/lowerCase.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
@@ -16,5 +17,5 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const convertedStr4 = lowerCase('HTTPRequest') // returns 'http request'
  */
 export function lowerCase(str?: string): string {
-  return lowerCaseToolkit(normalizeForCase(str));
+  return lowerCaseToolkit(normalizeForCase(deburr(str)));
 }

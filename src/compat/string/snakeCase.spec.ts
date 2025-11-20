@@ -13,6 +13,16 @@ describe('snakeCase', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should convert string to snake case, identical to lodash', () => {
+    expect(snakeCase('åäöÅÄÖ')).toBe('aao_aao');
+    expect(snakeCase('helloÅäöWorld')).toBe('hello_aao_world');
+    expect(snakeCase('café')).toBe('cafe');
+    expect(snakeCase('naïve')).toBe('naive');
+    expect(snakeCase('Zürich')).toBe('zurich');
+    expect(snakeCase('São Paulo')).toBe('sao_paulo');
+    expect(snakeCase('Москва')).toBe('москва');
+  });
+
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => snakeCase(snakeCase(string)));
 
