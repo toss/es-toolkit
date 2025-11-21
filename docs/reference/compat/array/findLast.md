@@ -1,155 +1,75 @@
-# findLast
+# findLast (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.findLast`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `findLast` function is complex and slow due to handling various types and special conditions.
+
+Use the faster and more modern `Array.prototype.findLast` instead.
+
 :::
 
-Finds the last item in an array or object that meets the specified condition.
-
-You can specify the condition in several ways:
-
-- **Predicate function**: If you provide a predicate function, the function will be applied to each item. The last item that makes the predicate function return `true` will be selected.
-- **Partial object**: If you provide a partial object, the function will return the last item that matches the properties of the partial object.
-- **Property-value pair**: If you provide a property-value pair, the function will return the last item that matches the property and value from the pair.
-- **Property name**: If you provide a property name, the function will return the last item where the specified property has a truthy value.
-
-## Signature
+Finds the last element in an array or object that satisfies a condition.
 
 ```typescript
-function findLast<T>(
-  arr: T[],
-  doesMatch: (item: T, index: number, arr: T[]) => unknown,
-  fromIndex?: number
-): T | undefined;
-function findLast<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
-function findLast<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
-function findLast<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): T | undefined;
-
-function findLast<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
-  fromIndex?: number
-): T | undefined;
-function findLast<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: Partial<T[keyof T]>,
-  fromIndex?: number
-): T | undefined;
-function findLast<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: [keyof T[keyof T], unknown],
-  fromIndex?: number
-): T | undefined;
-function findLast<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: PropertyKey,
-  fromIndex?: number
-): T | undefined;
+const lastEven = findLast(array, predicate);
 ```
 
-### Parameters
+## Usage
 
-- `arr` (`T[]`) or `object` (`T`): The array or object to search through.
+### `findLast(collection, predicate?, fromIndex?)`
 
-::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
-
-To ensure full compatibility with lodash, the `find` function handles `arr` in this way:
-
-- If `arr` is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
-- If `arr` is `null` or `undefined`, it will be treated as an empty array.
-
-:::
-
-::: info `object` can be `null` or `undefined`
-
-To ensure full compatibility with lodash, the `find` function handles `object` in this way:
-
-- If `object` is `null` or `undefined`, it will be converted into an empty object.
-
-:::
-
-- `doesMatch`:
-
-  - For the first `find` overload with arrays:
-
-    - **Predicate function** (`(item: T, index: number, arr: T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
-    - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
-    - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
-
-  - For the `find` overloads with objects:
-    - **Predicate function** (`(item: T[keyof T], index: number, object: T) => unknown`): A function that takes an item, its key, and the object, and returns a truthy value if the item matches the criteria.
-    - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
-    - **Property-value pair** (`[keyof T[keyof T], unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
-
-- `fromIndex` (`number`): The index to start the search from, defaults to `0`.
-
-### Returns
-
-(`T | undefined`): The last item that has the specified property value, or `undefined` if no match is found.
-
-## Examples
-
-### Arrays
+Finds the last element in an array or object that satisfies the given condition. Searches in reverse order from the end of the array and returns the first element that satisfies the condition.
 
 ```typescript
 import { findLast } from 'es-toolkit/compat';
 
-// Using a predicate function
-const items = [1, 2, 3, 4, 5];
-const result = findLast(items, item => item > 3);
-console.log(result); // 5
-
-// Using a partial object
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+// Specify condition with a function
+const users = [
+  { user: 'barney', age: 36 },
+  { user: 'fred', age: 40 },
+  { user: 'pebbles', age: 18 },
 ];
-const result = findLast(items, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
+findLast(users, o => o.age < 40);
+// => { user: 'pebbles', age: 18 }
 
-// Using a property-value pair
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLast(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
+// Specify condition with an object
+findLast(users, { age: 36 });
+// => { user: 'barney', age: 36 }
 
-// Using a property name
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLast(items, 'name');
-console.log(result); // { id: 2, name: 'Bob' }
+// Specify condition with a key-value pair
+findLast(users, ['age', 18]);
+// => { user: 'pebbles', age: 18 }
+
+// Specify condition with a property name (last element with truthy value)
+findLast(users, 'age');
+// => { user: 'fred', age: 40 }
 ```
 
-### Objects
+You can also specify a starting index for the search.
 
 ```typescript
 import { findLast } from 'es-toolkit/compat';
 
-// Using a predicate function
-const obj = { a: 1, b: 2, c: 3 };
-const result = findLast(obj, item => item > 2);
-console.log(result); // 3
-
-// Using a partial value
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = findLast(obj, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
-
-// Using a property-value pair
-const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = findLast(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
-
-// Using a property name
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = findLast(obj, 'name');
-console.log(result); // { id: 2, name: 'Bob' }
+const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+findLast(numbers, n => n > 3, 6); // Search in reverse from index 6
+// => 4
 ```
+
+`null` or `undefined` returns empty results.
+
+```typescript
+import { findLast } from 'es-toolkit/compat';
+
+findLast(null, x => x > 0); // undefined
+findLast(undefined, x => x > 0); // undefined
+```
+
+#### Parameters
+
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): The array or object to search.
+- `predicate` (`ListIterateeCustom<T, boolean>`, optional): The condition to apply to each element. Can be a function, object, key-value pair, or property name. Default is the `identity` function.
+- `fromIndex` (`number`, optional): The index to start the search from. If negative, it's calculated from the end. Default is the last index of the array.
+
+#### Returns
+
+(`T | undefined`): Returns the last element that satisfies the condition. Returns `undefined` if no element satisfies the condition.

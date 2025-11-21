@@ -1,33 +1,41 @@
 # isWeakMap
 
-检查给定的值是否为 `WeakMap`。
-
-此函数测试提供的值是否为 `WeakMap` 的实例。 如果值是 `WeakMap`，则返回 `true`，否则返回 `false`。
-
-此函数还可以作为 TypeScript 中的类型谓词，将参数的类型缩小为 `WeakMap`。
-
-## 签名
+检查给定值是否为 `WeakMap` 实例。
 
 ```typescript
-function isWeakMap(value: unknown): value is WeakMap<WeakKey, any>;
+const result = isWeakMap(value);
 ```
 
-### 参数
+## 用法
 
-- `value` (`unknown`): 需要测试是否为 `WeakMap` 的值。
+### `isWeakMap(value)`
 
-### 返回值
-
-(`value is WeakMap<WeakKey, any>`): 如果值是 `WeakMap`，则返回 `true`，否则返回 `false`。
-
-## 示例
+当您想检查值是否为 `WeakMap` 实例时,请使用 `isWeakMap`。`WeakMap` 是一个以对象作为键的键值存储,使用弱引用,有助于防止内存泄漏。
 
 ```typescript
-const value1 = new WeakMap();
-const value2 = new Map();
-const value3 = new Set();
+import { isWeakMap } from 'es-toolkit/predicate';
 
-console.log(isWeakMap(value1)); // true
-console.log(isWeakMap(value2)); // false
-console.log(isWeakMap(value3)); // false
+// WeakMap 实例
+const weakMap1 = new WeakMap();
+const weakMap2 = new WeakMap([[{}, 'value']]);
+
+console.log(isWeakMap(weakMap1)); // true
+console.log(isWeakMap(weakMap2)); // true
+
+// 非 WeakMap 值
+console.log(isWeakMap(new Map())); // false
+console.log(isWeakMap(new Set())); // false
+console.log(isWeakMap(new WeakSet())); // false
+console.log(isWeakMap({})); // false
+console.log(isWeakMap([])); // false
+console.log(isWeakMap(null)); // false
+console.log(isWeakMap(undefined)); // false
 ```
+
+#### 参数
+
+- `value` (`unknown`): 要检查是否为 WeakMap 实例的值。
+
+#### 返回值
+
+(`value is WeakMap<WeakKey, any>`): 如果值是 WeakMap 实例,则返回 `true`,否则返回 `false`。

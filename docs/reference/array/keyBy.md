@@ -1,38 +1,70 @@
 # keyBy
 
-Maps each element of an array based on a provided key-generating function.
-
-This function takes an array and a function that generates a key from each element. It returns
-an object where the keys are the generated keys and the values are the corresponding elements.
-If there are multiple elements generating the same key, the last element among them is used as the value.
-
-## Signature
+Returns a new object with array elements converted to key-value pairs using a key-generating function.
 
 ```typescript
-function keyBy<T, K extends PropertyKey>(arr: T[], getKeyFromItem: (item: T) => K): Record<K, T>;
+const result = keyBy(arr, getKeyFromItem);
 ```
 
-### Parameters
+## Usage
 
-- `arr` (`T[]`): The array of elements to be mapped.
-- `getKeyFromItem` (`(item: T) => K`): A function that generates a key from an element.
+### `keyBy(arr, getKeyFromItem)`
 
-### Returns
-
-(`Record<K, T>`) An object where keys are mapped to each element of an array.
-
-## Examples
+Use `keyBy` when you want to create a key-indexed object for quick lookup of each element in an array. By providing a function that generates a unique key from each element, it creates an object where you can access elements using that key. If multiple elements generate the same key, the last element is used.
 
 ```typescript
-const array = [
+import { keyBy } from 'es-toolkit/array';
+
+// Use object's id property as key
+const users = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
+];
+keyBy(users, user => user.id);
+// Returns: {
+//   1: { id: 1, name: 'john' },
+//   2: { id: 2, name: 'jane' },
+//   3: { id: 3, name: 'bob' }
+// }
+
+// Use string property as key
+const products = [
   { category: 'fruit', name: 'apple' },
   { category: 'fruit', name: 'banana' },
   { category: 'vegetable', name: 'carrot' },
 ];
-const result = keyBy(array, item => item.category);
-// result will be:
-// {
-//   fruit: { category: 'fruit', name: 'banana' },
+keyBy(products, item => item.category);
+// Returns: {
+//   fruit: { category: 'fruit', name: 'banana' }, // Last fruit element
 //   vegetable: { category: 'vegetable', name: 'carrot' }
 // }
 ```
+
+Complex key generation logic can also be used.
+
+```typescript
+import { keyBy } from 'es-toolkit/array';
+
+// Combine multiple properties to create a key
+const orders = [
+  { date: '2023-01-01', customerId: 1, amount: 100 },
+  { date: '2023-01-01', customerId: 2, amount: 200 },
+  { date: '2023-01-02', customerId: 1, amount: 150 },
+];
+keyBy(orders, order => `${order.date}-${order.customerId}`);
+// Returns: {
+//   '2023-01-01-1': { date: '2023-01-01', customerId: 1, amount: 100 },
+//   '2023-01-01-2': { date: '2023-01-01', customerId: 2, amount: 200 },
+//   '2023-01-02-1': { date: '2023-01-02', customerId: 1, amount: 150 }
+// }
+```
+
+#### Parameters
+
+- `arr` (`readonly T[]`): The array to convert to an object.
+- `getKeyFromItem` (`(item: T) => K`): A function that generates a key from each element.
+
+#### Returns
+
+(`Record<K, T>`): Returns an object with the generated keys as property names and the corresponding elements as values. If multiple elements generate the same key, the last element is used as the value.

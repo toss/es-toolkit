@@ -1,57 +1,60 @@
-# sortedIndexOf
+# sortedIndexOf (Lodash compatibility)
 
-::: info
-This function can only be imported from `es-toolkit/compat` for compatibility reasons. This is because there are native JavaScript APIs that can replace it, or it hasn't been sufficiently optimized yet.
+::: warning Implement binary search directly
 
-When you import this function from `es-toolkit/compat`, it [behaves exactly the same as lodash](../../../compatibility.md).
-:::
+This `sortedIndexOf` function operates slowly due to complex binary search handling and type validation.
 
-Finds the index of the first occurrence of a value in a sorted array, similar to how `Array#indexOf` works, but specifically for sorted arrays.
-
-::: warning Ensure the array is sorted
-
-It's important to provide a sorted array to this function because it uses a binary search to quickly find the index.
+Instead, implement faster, more modern binary search directly or use `Array.prototype.indexOf()`.
 
 :::
 
-## Interface
+Finds the index where a value first appears in a sorted array.
 
 ```typescript
-export function sortedIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedIndexOf(array, value);
 ```
 
-### Parameters
+## Usage
 
-- `array` (`ArrayLike<T> | null | undefined`): A sorted array. If the array is null or undefined, it returns -1.
-- `value` (`T`): The value to search for in the sorted array through comparison.
+### `sortedIndexOf(array, value)`
 
-### Returns
-
-(`number`): The index at which the value should be inserted to maintain the sort order.
-
-## Examples
+Use `sortedIndexOf` to find the index where a specific value first appears in a sorted array. It uses binary search to find the value quickly.
 
 ```typescript
 import { sortedIndexOf } from 'es-toolkit/compat';
 
-const numbers = [11, 22, 33, 44, 55];
-sortedIndexOf(numbers, 11); // Return value: 0
-sortedIndexOf(numbers, 30); // Return value: -1
+// Find value in number array
+sortedIndexOf([11, 22, 33, 44, 55], 33);
+// Returns 2
 
-// If the value is duplicated, it returns the first index of the value.
-const duplicateNumbers = [1, 2, 2, 3, 3, 3, 4];
-sortedIndexOf(duplicateNumbers, 3); // Return value: 3
+// When value doesn't exist
+sortedIndexOf([11, 22, 33, 44, 55], 30);
+// Returns -1
 
-// If the array is unsorted, it can return the wrong index.
-const unSortedArray = [55, 33, 22, 11, 44];
-sortedIndexOf(unSortedArray, 11); // Return value: -1
+// When duplicate values exist, returns the first index
+sortedIndexOf([1, 2, 2, 3, 3, 3, 4], 3);
+// Returns 3 (position of the first 3)
 
-// -0 and 0 are treated the same
-const mixedZeroArray = [-0, 0];
-sortedIndexOf(mixedZeroArray, 0); // Return value: 0
-sortedIndexOf(mixedZeroArray, -0); // Return value: 0
-
-// It works with array-like objects
-const arrayLike = { length: 3, 0: 10, 1: 20, 2: 30 };
-sortedIndexOf(arrayLike, 20); // Return value: 1
+// 0 and -0 are treated as equal
+sortedIndexOf([-0, 0], 0);
+// Returns 0
 ```
+
+Empty arrays, `null`, or `undefined` return -1.
+
+```typescript
+import { sortedIndexOf } from 'es-toolkit/compat';
+
+sortedIndexOf([], 1); // -1
+sortedIndexOf(null, 1); // -1
+sortedIndexOf(undefined, 1); // -1
+```
+
+#### Parameters
+
+- `array` (`ArrayLike<T> | null | undefined`): The sorted array. Using an unsorted array can produce incorrect results.
+- `value` (`T`): The value to find.
+
+#### Returns
+
+(`number`): Returns the index where the value first appears. If the value doesn't exist, returns -1.

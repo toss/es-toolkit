@@ -1,55 +1,92 @@
-# set
+# set (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用直接赋值
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `set` 函数内部调用 `updateWith` 函数,由于复杂的路径处理和对象创建逻辑而运行缓慢。
+
+请使用更快、更现代的直接赋值或解构赋值。
 
 :::
 
-在对象的指定路径设置给定值。如果路径的任何部分不存在，将会创建它。
-
-## 签名
+在对象的指定路径设置值。
 
 ```typescript
-function set<T extends object>(obj: T, path: string | number | symbol | Array<string | number | symbol>, value: any): T;
+const result = set(obj, path, value);
 ```
 
-### 参数
+## 用法
 
-- `obj` (`T`): 要修改的对象。
-- `path` (`string | number | symbol | Array<string | number | symbol>`): 要设置的属性路径。
-- `value` (`any`): 要设置的值。
+### `set(object, path, value)`
 
-### 返回值
-
-(`T`): 返回修改后的对象。如果未指定 T，默认值为 object。
-
-## 示例
+当您想在对象的特定路径设置值时,请使用 `set`。如果路径的任何部分不存在,将自动创建。在处理嵌套对象或数组时很有用。
 
 ```typescript
 import { set } from 'es-toolkit/compat';
 
-// Set a value in a nested object
+// 基本用法
 const obj = { a: { b: { c: 3 } } };
 set(obj, 'a.b.c', 4);
 console.log(obj.a.b.c); // 4
 
-// Set a value in an array
+// 在数组中设置值
 const arr = [1, 2, 3];
-set(arr, 1, 4);
+set(arr, '1', 4);
 console.log(arr[1]); // 4
 
-// Create non-existent path and set value
-const obj2 = {};
-set(obj2, 'a.b.c', 4);
-console.log(obj2); // { a: { b: { c: 4 } } }
+// 创建不存在的路径
+const empty = {};
+set(empty, 'user.profile.name', 'John');
+console.log(empty);
+// 结果: { user: { profile: { name: 'John' } } }
 
-// Use with interface
-interface O {
-  a: number;
-}
-const obj3 = {};
-const result = set<O>(obj3, 'a', 1); // typeof result = { a: number }
-console.log(result); // { a: 1 }
+// 使用数组路径
+const data = {};
+set(data, ['nested', 'array', 0], 'first item');
+console.log(data);
+// 结果: { nested: { array: ['first item'] } }
+
+// 自动创建数组索引
+const list = {};
+set(list, 'items[0]', 'first');
+set(list, 'items[2]', 'third');
+console.log(list);
+// 结果: { items: ['first', undefined, 'third'] }
+
+// 混合嵌套对象和数组
+const complex = {};
+set(complex, 'users[0].profile.settings.theme', 'dark');
+console.log(complex);
+// 结果: { users: [{ profile: { settings: { theme: 'dark' } } }] }
+
+// 处理数字键
+const numeric = {};
+set(numeric, 123, 'number key');
+console.log(numeric[123]); // 'number key'
+
+// 覆盖现有值
+const existing = { a: { b: 'old' } };
+set(existing, 'a.b', 'new');
+console.log(existing.a.b); // 'new'
 ```
+
+原始对象被直接修改并返回。
+
+```typescript
+import { set } from 'es-toolkit/compat';
+
+const original = { x: 1 };
+const result = set(original, 'y', 2);
+
+console.log(original === result); // true
+console.log(original); // { x: 1, y: 2 }
+```
+
+#### 参数
+
+- `object` (`T`): 要设置值的对象。
+- `path` (`PropertyPath`): 要设置的属性路径。可以是字符串、数组或键的数组。
+- `value` (`any`): 要设置的值。
+
+#### 返回值
+
+(`T`): 返回修改后的对象(与原始对象相同)。

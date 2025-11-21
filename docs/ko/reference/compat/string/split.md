@@ -1,46 +1,68 @@
-# split
+# split (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning JavaScript의 `String.prototype.split`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `split` 함수는 `null`이나 `undefined` 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 JavaScript의 `String.prototype.split`을 사용하세요.
+
 :::
 
-주어진 문자열을 구분자(`separator`) 기준으로 나누어서 배열을 만들어요.
-
-## 인터페이스
+문자열을 구분자로 나누어서 배열을 만들어요.
 
 ```typescript
-function split(string: string | null | undefined, separator?: RegExp | string, limit?: number): string[];
-function split(string: string | null | undefined, index: string | number, guard: object): string[];
+const segments = split(str, separator);
 ```
 
-## 파라미터
+## 사용법
 
-- `string` (`string | null | undefined`): 분할할 문자열이에요.
-- `separator` (`RegExp | string`): 분할 기준으로 사용할 구분자 패턴이에요.
-- `limit` (`number`, 선택 사항): 결과 배열의 최대 길이예요.
+### `split(string, separator?, limit?)`
 
-## 반환 값
+문자열을 특정 구분자로 나누어서 배열로 만들고 싶을 때 `split`을 사용하세요. 결과 배열의 최대 길이도 제한할 수 있어요.
 
-- (`string[]`): 분할된 문자열 세그먼트들의 배열이에요.
+```typescript
+import { split } from 'es-toolkit/compat';
 
-## 예시
-
-```js
-// 문자를 기준으로 문자열 분할하기
+// 하이픈으로 나누기
 split('a-b-c', '-');
-// => ['a', 'b', 'c']
+// Returns: ['a', 'b', 'c']
 
-// 최대 길이 제한을 사용하여 분할하기
-split('a-b-c', '-', 2);
-// => ['a', 'b']
+// 결과 개수 제한하기
+split('a-b-c-d', '-', 2);
+// Returns: ['a', 'b']
 
-// 정규표현식 패턴으로 분할하기
-split('abcde', /[bd]/);
-// => ['a', 'c', 'e']
-
-// 문자열을 개별 문자로 분할하기
-split('abc', '');
-// => ['a', 'b', 'c']
+// 정규식으로 나누기
+split('hello world', /\s/);
+// Returns: ['hello', 'world']
 ```
+
+구분자를 지정하지 않으면 문자열 전체가 배열의 첫 번째 요소가 돼요.
+
+```typescript
+import { split } from 'es-toolkit/compat';
+
+split('hello');
+// Returns: ['hello']
+```
+
+`null`이나 `undefined`는 빈 문자열로 처리해요.
+
+```typescript
+import { split } from 'es-toolkit/compat';
+
+split(null);
+// Returns: ['']
+
+split(undefined);
+// Returns: ['']
+```
+
+#### 파라미터
+
+- `string` (`string`, 선택): 나눌 문자열이에요. 기본값은 빈 문자열이에요.
+- `separator` (`RegExp | string`, 선택): 나누는 기준이 되는 구분자예요.
+- `limit` (`number`, 선택): 결과 배열의 최대 길이예요.
+
+#### 반환 값
+
+(`string[]`): 구분자로 나누어진 문자열 배열을 반환해요.

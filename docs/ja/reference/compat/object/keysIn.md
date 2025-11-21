@@ -1,43 +1,104 @@
-# keysIn
+# keysIn (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `for...in` ループまたは `Object.keys` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `keysIn` 関数は、配列のようなオブジェクトの処理やプロトタイプチェーンの走査などの複雑なロジックにより、動作が遅くなります。
+
+代わりに、より高速で現代的な `for...in` ループまたは必要に応じて `Object.keys()` を使用してください。
+
 :::
 
-オブジェクトから文字列キーであるプロパティの名前を取得します。プロトタイプから継承されたものも含みます。
-
-- 値がオブジェクトでない場合、オブジェクトに変換されます。
-- [配列のようなオブジェクト](../predicate/isArrayLike.md)は配列のように扱われます。
-- 一部のインデックスが欠けている疎な配列は密な配列のように扱われます。
-- 値が `null` または `undefined` の場合、空の配列を返します。
-- プロトタイプオブジェクトを処理する際には、`constructor` プロパティは結果から除外されます。
-
-## インターフェース
+オブジェクトのすべての列挙可能なプロパティ名を継承されたプロパティも含めて配列で返します。
 
 ```typescript
-function keysIn(object?: any): string[];
+const allKeys = keysIn(object);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`any`): キーを調べるためのオブジェクト。
+### `keysIn(object)`
 
-### 戻り値
-
-(`string[]`): オブジェクトから取得した文字列キーの配列。
-
-## 例
+オブジェクトのすべてのプロパティ名を継承されたプロパティも含めて取得したい場合は `keysIn` を使用してください。`keys` とは異なり、プロトタイプチェーンのプロパティも一緒に返します。
 
 ```typescript
-const obj = { a: 1, b: 2 };
-console.log(keysIn(obj)); // ['a', 'b']
+import { keysIn } from 'es-toolkit/compat';
 
-const arr = [1, 2, 3];
-console.log(keysIn(arr)); // ['0', '1', '2']
+// 基本オブジェクトのキー
+const object = { a: 1, b: 2 };
+keysIn(object);
+// => ['a', 'b']
 
-function Foo() {}
-Foo.prototype.a = 1;
-console.log(keysIn(new Foo())); // ['a']
+// 配列のインデックス
+const array = [1, 2, 3];
+keysIn(array);
+// => ['0', '1', '2']
+
+// 文字列のインデックス
+keysIn('hello');
+// => ['0', '1', '2', '3', '4']
 ```
+
+継承されたプロパティも含まれます。
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+Foo.prototype.c = 3;
+
+keysIn(new Foo());
+// => ['a', 'b', 'c'] (プロトタイプのプロパティ 'c' も含む)
+
+// constructor は除外されます
+class MyClass {
+  constructor() {
+    this.prop = 1;
+  }
+  method() {}
+}
+MyClass.prototype.inherited = 2;
+
+keysIn(new MyClass());
+// => ['prop', 'method', 'inherited'] (constructor は除外される)
+```
+
+配列のようなオブジェクトを特別に処理します。
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+// TypedArray
+const typedArray = new Uint8Array([1, 2, 3]);
+keysIn(typedArray);
+// => ['0', '1', '2'] (buffer、byteLength などは除外)
+
+// arguments オブジェクト
+function example() {
+  return keysIn(arguments);
+}
+example('a', 'b', 'c');
+// => ['0', '1', '2']
+```
+
+`null` または `undefined` を安全に処理します。
+
+```typescript
+import { keysIn } from 'es-toolkit/compat';
+
+keysIn(null);
+// => []
+
+keysIn(undefined);
+// => []
+```
+
+#### パラメータ
+
+- `object` (`any`): キーを取得するオブジェクトです。
+
+#### 戻り値
+
+(`string[]`): オブジェクトのすべての列挙可能なプロパティ名(自身のプロパティと継承されたプロパティの両方を含む)の配列を返します。

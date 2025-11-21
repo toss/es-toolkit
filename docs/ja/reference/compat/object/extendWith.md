@@ -1,65 +1,61 @@
-# extendWith
+# extendWith (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning 代わりに `Object.assign()` とカスタム関数を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `extendWith` 関数は、プロトタイプチェーンから継承されたプロパティの処理とカスタムマージロジックにより、複雑で遅く動作します。
+
+代わりに、より高速で現代的な `Object.assign()` とカスタム関数を使用してください。
+
 :::
 
-`source`が持っているプロパティの値を`object`オブジェクトに割り当てます。プロトタイプから継承されたプロパティも含まれます。各プロパティに割り当てる値を決定するために `getValueToAssign` 関数を提供できます。
-
-`source`と`object`が同じ値を持っているプロパティは上書きされません。
-
-`getValueToAssign` 関数を使用して `object` オブジェクトに割り当てる値を決定できます。この関数が返す値が割り当てられます。値が提供されない場合は、`identity` 関数がデフォルトとして使用されます。
-
-## インターフェース
+オブジェクトの固有プロパティと継承されたプロパティをカスタム関数で処理して、他のオブジェクトにコピーします。
 
 ```typescript
-function extendWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function extendWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function extendWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function extendWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function extendWith(object: any, ...sources: any[]): any;
+const result = extendWith(object, source, customizer);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`any`): `source`のプロパティ値が割り当てられるオブジェクト。
-- `sources` (`...any[]`): `object`に割り当てる値を持つオブジェクトたち。
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): 各プロパティに割り当てる値を決定する関数。この関数が返す値が対応するプロパティに割り当てられます。
+### `extendWith(object, ...sources, customizer)`
 
-### 戻り値
-
-(`any`): `source`の値が割り当てられた`object`オブジェクト。
-
-## 例
+オブジェクトのプロパティをカスタムロジックでマージする場合は `extendWith` を使用してください。`extend` と似ていますが、各プロパティをどのようにマージするかを自分で決定できます。この関数は `assignInWith` のエイリアスです。
 
 ```typescript
-const target = { a: 1 };
-const result = extendWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { extendWith } from 'es-toolkit/compat';
+
+// カスタムマージロジックでプロパティをコピー
+const target = { a: 1, b: 2 };
+extendWith(target, { b: 3, c: 4 }, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// 戻り値: { a: 1, b: 2, c: 4 }
+
+// 配列を連結するカスタムマージ
+const obj1 = { a: [1, 2] };
+const obj2 = { a: [3, 4], b: [5, 6] };
+extendWith(obj1, obj2, (objValue, srcValue) => {
+  if (Array.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
+// 戻り値: { a: [1, 2, 3, 4], b: [5, 6] }
 ```
+
+複数のソースオブジェクトを使用できます。
+
+```typescript
+import { extendWith } from 'es-toolkit/compat';
+
+extendWith({ a: 1 }, { b: 2 }, { c: 3 }, (objValue, srcValue) => srcValue * 2);
+// 戻り値: { a: 1, b: 4, c: 6 }
+```
+
+#### パラメータ
+
+- `object` (`any`): プロパティをコピーされるターゲットオブジェクトです。
+- `...sources` (`any[]`): プロパティを提供するソースオブジェクトです。
+- `customizer` (`function`): 各プロパティに割り当てる値を決定する関数です。`(objValue, srcValue, key, object, source)` を受け取ります。
+
+#### 戻り値
+
+(`any`): プロパティがコピーされたオブジェクトを返します。最初の引数である `object` が変更されます。

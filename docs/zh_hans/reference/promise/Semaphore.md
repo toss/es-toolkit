@@ -1,51 +1,66 @@
 # Semaphore
 
-信号量可以用来限制同时执行的异步任务的数量。
-
-- 执行 `acquire` 方法时，会获取许可并执行异步任务，或者等待直到获得许可。
-- 执行 `release` 方法时，会允许下一个等待中的任务执行。
-
-此信号量按照 `acquire` 执行的顺序，先到先得地执行异步任务。
-
-## 签名
+限制同时执行的异步任务数量。
 
 ```typescript
-class Semaphore {
-  public capacity: number;
-  public available: number;
-
-  constructor(capacity: number);
-
-  acquire(): Promise<void>;
-  release(): void;
-}
+const semaphore = new Semaphore(capacity);
 ```
 
-## 属性
+## 用法
 
-- `capacity` (`number`): 同时可以执行的最大任务数。
-- `available` (`number`): 当前剩余的可执行任务数。
+### `Semaphore(capacity)`
 
-## 方法
-
-- `acquire` (`() => Promise<void>`): 获取许可并执行异步任务，或者等待直到获得许可。
-- `release` (`() => void`): 允许下一个等待中的任务执行。
-
-## 示例
+当您想要限制可以同时执行的异步任务数量时,可以使用 `Semaphore`。在需要控制资源使用量的情况下特别有用,例如数据库连接池、API 调用限制、文件下载限制等。
 
 ```typescript
-const sema = new Semaphore(2);
+import { Semaphore } from 'es-toolkit';
 
-async function task() {
-  await sema.acquire();
+const semaphore = new Semaphore(3);
+
+// API 调用限制示例(最多同时执行 3 个)
+async function callAPI(id: number) {
+  await semaphore.acquire();
   try {
-    // 这个代码段只能由两个任务同时执行
+    console.log(`开始 API 调用: ${id}`);
+    const response = await fetch(`/api/data/${id}`);
+    return response.json();
   } finally {
-    sema.release();
+    semaphore.release();
+    console.log(`API 调用完成: ${id}`);
   }
 }
 
-task();
-task();
-task(); // 这个任务会等待前一个任务释放信号量。
+// 文件下载限制示例
+async function downloadFile(url: string) {
+  await semaphore.acquire();
+  try {
+    console.log(`开始下载: ${url}`);
+    // 文件下载逻辑
+    await fetch(url);
+  } finally {
+    semaphore.release();
+    console.log(`下载完成: ${url}`);
+  }
+}
+
+// 即使同时调用 5 个任务,也最多只能同时执行 3 个
+callAPI(1);
+callAPI(2);
+callAPI(3);
+callAPI(4); // 等待前面的任务之一完成
+callAPI(5); // 等待前面的任务之一完成
 ```
+
+#### 参数
+
+- `capacity` (`number`): 可以同时执行的任务的最大数量。必须是大于 1 的整数。
+
+#### 属性
+
+- `capacity` (`number`): 可以同时执行的任务的最大数量。
+- `available` (`number`): 当前可用的许可数量。如果为 `0`,表示所有许可都在使用中。
+
+#### 方法
+
+- `acquire` (`() => Promise<void>`): 获取许可并执行异步任务,或等待直到获得许可。
+- `release` (`() => void`): 归还许可,使等待中的下一个任务可以执行。

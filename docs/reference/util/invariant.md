@@ -1,54 +1,66 @@
 # invariant
 
-Asserts that a given condition is true. If the condition is false, an error is thrown with the provided message or error.
-
-## Signature
+Asserts that a given condition is true. If the condition is false, it throws an error.
 
 ```typescript
-function invariant(condition: unknown, message: string): asserts condition;
-function invariant(condition: unknown, error: Error): asserts condition;
+invariant(condition, message);
 ```
 
-### Parameters
+## Usage
 
-- `condition` (`unknown`): The condition to evaluate.
-- `message` (`string` | `Error`): The error message to throw if the condition is false.
+### `invariant(condition, message)`
 
-### Returns
-
-(`void`): Returns void if the condition is true.
-
-### Throws
-
-Throws an error with the specified message if the condition evaluates to false.
-
-## Examples
+Use `invariant` when a specific condition must be satisfied in your code. If the condition is false, it immediately throws an error to stop program execution.
 
 ```typescript
-// This call will succeed without any errors
-invariant(true, 'This should not throw');
+import { invariant } from 'es-toolkit/util';
 
-// This call will fail and throw an error with the message 'This should throw'
-invariant(false, 'This should throw');
+// If the condition is true, nothing happens
+invariant(true, 'This message will not appear');
 
-// Example of using invariant with a condition
-invariant(condition, 'Expected condition is false');
+// If the condition is false, it throws an error
+invariant(false, 'This condition is false'); // Error: This condition is false
 
-// Ensure that the value is neither null nor undefined
-invariant(value !== null && value !== undefined, 'Value should not be null or undefined');
+// When checking that a value is not null or undefined
+const value = getValue();
+invariant(value !== null && value !== undefined, 'Value must not be null or undefined');
+// Now you can be sure that value is neither null nor undefined
 
-// Example of using invariant to check if a number is positive
+// When checking if a number is positive
+const number = getNumber();
 invariant(number > 0, 'Number must be positive');
+```
 
-// Example of using invariant with an error
-invariant(false, new Error('This should throw'));
+You can also pass an error object directly.
 
-// Example of using invariant with a custom error
-class CustomError extends Error {
+```typescript
+import { invariant } from 'es-toolkit/util';
+
+// Passing an Error object
+invariant(false, new Error('Custom error message'));
+
+// Using a custom error class
+class ValidationError extends Error {
   constructor(message: string) {
     super(message);
+    this.name = 'ValidationError';
   }
 }
 
-invariant(false, new CustomError('This should throw'));
+invariant(false, new ValidationError('Validation failed'));
 ```
+
+It is particularly useful for validating code assumptions during development or ensuring that function inputs are within expected ranges.
+
+#### Parameters
+
+- `condition` (`unknown`): The condition to evaluate. If it evaluates to a falsy value, an error is thrown.
+- `message` (`string | Error`): The error message or error object to throw when the condition is false.
+
+#### Returns
+
+(`void`): Returns nothing if the condition is true.
+
+#### Errors
+
+Throws the provided message or error object if the condition evaluates to false.

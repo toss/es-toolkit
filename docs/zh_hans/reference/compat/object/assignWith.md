@@ -1,65 +1,60 @@
-# assignWith
+# assignWith (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 建议实现自定义逻辑
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `assignWith` 函数由于复杂的自定义函数处理而相对较慢。
+
+请改用 `Object.assign` 并直接实现自定义逻辑。
+
 :::
 
-将 `source` 对象的属性值分配给 `object`。您可以提供 `getValueToAssign` 函数来决定每个属性应该分配什么值。
-
-在 `source` 和 `object` 中具有相同值的属性将不会被覆盖。
-
-您可以使用 `getValueToAssign` 函数来决定要分配给 `object` 的值。函数返回的值将被分配。如果未提供该函数，则默认使用 `identity` 函数。
-
-## 签名
+使用自定义函数将源对象的属性分配给目标对象。
 
 ```typescript
-function assignWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function assignWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function assignWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function assignWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function assignWith(object: any, ...sources: any[]): any;
+const result = assignWith(target, source1, source2, customizer);
 ```
 
-### 参数
+## 用法
 
-- `object` (`any`): 将要分配属性的目标对象。
-- `sources` (`...any[]`): 其属性将被分配到目标对象的源对象。
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): 用于确定每个属性应分配什么值的函数。该函数返回的值将被分配给相应的属性。
+### `assignWith(object, ...sources, customizer)`
 
-### 返回值
-
-(`any`): 更新后的目标对象，分配了来自源对象的属性。
-
-## 示例
+当您想要自定义属性分配方式时,请使用 `assignWith`。自定义函数决定每个属性的最终值。
 
 ```typescript
-const target = { a: 1 };
-const result = assignWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { assignWith } from 'es-toolkit/compat';
+
+// 基本用法 - 仅在undefined时分配
+const target = { a: 1, b: undefined };
+const source = { b: 2, c: 3 };
+const result = assignWith(target, source, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// Returns: { a: 1, b: 2, c: 3 }
+
+// 数组合并
+const target2 = { users: ['alice'] };
+const source2 = { users: ['bob', 'charlie'] };
+const result2 = assignWith(target2, source2, (objValue, srcValue) => {
+  if (Array.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
+// Returns: { users: ['alice', 'bob', 'charlie'] }
+
+// 多个源与自定义函数
+const target3 = { a: 1 };
+const result3 = assignWith(target3, { b: 2 }, { c: 3 }, (objValue, srcValue) => {
+  return objValue === undefined ? srcValue : objValue;
+});
+// Returns: { a: 1, b: 2, c: 3 }
 ```
+
+#### 参数
+
+- `object` (`any`): 将被分配属性的目标对象。
+- `...sources` (`any[]`): 要复制属性的源对象。
+- `customizer` (`function`): 决定要分配的值的函数。格式为 `(objValue, srcValue, key, object, source) => any`。
+
+#### 返回值
+
+(`any`): 返回由自定义函数决定值的目标对象。

@@ -1,57 +1,56 @@
-# zipObjectDeep
+# zipObjectDeep (Lodash互換)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替となるネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-2つの配列を1つのオブジェクトに結合します。最初の配列はプロパティパスを表し、2番目の配列は値を表します。[zipObject](../../array/zipObject.md) とは異なり、プロパティとして `a.b` のようなパスを指定できます。
-
-プロパティ名を表す配列が値を表す配列よりも長い場合、値は `undefined` で埋められます。
-
-## インターフェース
+パス配列と値配列を使用して深くネストしたオブジェクトを作成します。
 
 ```typescript
-function zipObjectDeep<P extends PropertyKey, V>(keys: ArrayLike<P | P[]>, values: ArrayLike<V>): Record<P, V>;
+const result = zipObjectDeep(keys, values);
 ```
 
-### パラメータ
+## 使用法
 
-- `keys` (`ArrayLike<P | P[]>`): プロパティパスを含む配列。
-- `values` (`ArrayLike<V>`): 対応する値を含む配列。
+### `zipObjectDeep(keys, values)`
 
-### 戻り値
-
-(`Record<P, V>`): 与えられたプロパティ名と値で構成される新しいオブジェクトです。
-
-## 例
+最初の配列のパスと2番目の配列の値を使用して深くネストしたオブジェクトを生成します。パスはドット表記文字列またはプロパティ名の配列として提供できます。複雑なネストしたデータ構造を生成したり、フラットなキー値ペアを階層オブジェクトに変換するときに便利です。
 
 ```typescript
 import { zipObjectDeep } from 'es-toolkit/compat';
 
+// パスをドット表記文字列として指定
 const paths = ['a.b.c', 'd.e.f'];
 const values = [1, 2];
 const result = zipObjectDeep(paths, values);
-// result は { a: { b: { c: 1 } }, d: { e: { f: 2 } } } になります
+// 戻り値: { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
 
-const paths = [
+// パスを配列として指定
+const pathArrays = [
   ['a', 'b', 'c'],
   ['d', 'e', 'f'],
 ];
-const values = [1, 2];
-const result = zipObjectDeep(paths, values);
-// result は { a: { b: { c: 1 } }, d: { e: { f: 2 } } } になります
+const values2 = [1, 2];
+const result2 = zipObjectDeep(pathArrays, values2);
+// 戻り値: { a: { b: { c: 1 } }, d: { e: { f: 2 } } }
 
-const paths = ['a.b[0].c', 'a.b[1].d'];
-const values = [1, 2];
-const result = zipObjectDeep(paths, values);
-// result は { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } } になります
+// 配列インデックスを含むパス
+const arrayPaths = ['a.b[0].c', 'a.b[1].d'];
+const values3 = [1, 2];
+const result3 = zipObjectDeep(arrayPaths, values3);
+// 戻り値: { a: { b: [{ c: 1 }, { d: 2 }] } }
 ```
 
-## パフォーマンス比較
+`null`または`undefined`のキー配列は空オブジェクトとして扱われます。
 
-|                   | [Bundle Size](../../../bundle-size.md) | [Performance](../../../performance.md) |
-| ----------------- | -------------------------------------- | -------------------------------------- |
-| es-toolkit/compat | 938 bytes (88% smaller)                | 1,102,767 times (25% slower)           |
-| lodash-es         | 7,338 bytes                            | 1,476,660 times                        |
+```typescript
+import { zipObjectDeep } from 'es-toolkit/compat';
+
+zipObjectDeep(null, [1, 2]); // {}
+zipObjectDeep(undefined, [1, 2]); // {}
+```
+
+#### パラメータ
+
+- `keys` (`ArrayLike<PropertyPath> | null | undefined`): プロパティパスの配列。ドット表記文字列またはプロパティ名の配列を使用できます。
+- `values` (`ArrayLike<any>`, 選択): 対応する値の配列。提供しない場合、空配列として扱われます。
+
+#### 戻り値
+
+(`object`): 与えられたパスと値で構成された深くネストしたオブジェクトを返します。

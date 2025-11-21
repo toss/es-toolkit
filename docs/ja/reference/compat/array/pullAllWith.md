@@ -1,44 +1,50 @@
-# pullAllWith
+# pullAllWith (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-提供された比較関数を使用して、配列から削除する要素を判断し、削除して返します。
-
-比較対象の配列（`values`）の要素と比較関数（`comparator`）を使用して元の配列（`array`）の要素を比較し、比較結果が `true` となる要素を元の配列から削除します。
-
-## インターフェース
+比較関数を使用して、指定された値を配列から削除します。
 
 ```typescript
-function pullAllWith<T>(array: T[], values: T[], comparator: (a: T, b: T) => boolean): T[];
+const modified = pullAllWith(array, valuesToRemove, comparator);
 ```
 
-### パラメータ
+## 使用法
 
-- `array` (`T[]`): 変更する配列。
-- `values` (`T[]`): 配列から削除する値。
-- `comparator` (`(a: T, b: T) => boolean`): `array` の要素と `values` の要素を比較する関数。二つの要素が等しい場合は `true` を返す必要があります。
+### `pullAllWith(array, values, comparator)`
 
-### 戻り値
-
-(`T[]`): 指定された値が削除された配列。
-
-## 例
+提供された比較関数を使用して、配列から指定された値を削除します。元の配列が変更され、変更された配列が返されます。
 
 ```typescript
-import { pullAllWith } from 'es-toolkit/array';
+import { pullAllWith } from 'es-toolkit/compat';
 
+// オブジェクトの比較で削除
 const array = [
   { x: 1, y: 2 },
   { x: 3, y: 4 },
   { x: 5, y: 6 },
 ];
+pullAllWith(array, [{ x: 3, y: 4 }], (a, b) => a.x === b.x && a.y === b.y);
+console.log(array); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
 
-const removed = pullAllWith(array, [{ x: 3, y: 4 }], (a, b) => JSON.stringify(a) === JSON.stringify(b));
-
-console.log(removed); // [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
-console.log(array); // [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
+// 文字列の長さで比較して削除
+const words = ['hello', 'world', 'test', 'code'];
+pullAllWith(words, ['hi'], (a, b) => a.length === b.length);
+console.log(words); // ['hello', 'world', 'code'] ('test'が'hi'と同じ長さのため削除される)
 ```
+
+配列が空または `null`、`undefined` の場合、元の配列がそのまま返されます。
+
+```typescript
+import { pullAllWith } from 'es-toolkit/compat';
+
+pullAllWith([], [1], (a, b) => a === b); // []
+pullAllWith(null as any, [1], (a, b) => a === b); // null
+```
+
+#### パラメータ
+
+- `array` (`T[]`): 変更する配列です。
+- `values` (`ArrayLike<T>`, オプション): 削除する値の配列です。
+- `comparator` (`(a: T, b: T) => boolean`, オプション): 2つの要素を比較する関数です。2つの要素が等しいと判断される場合は `true` を返す必要があります。
+
+#### 戻り値
+
+(`T[]`): 指定された値が削除された元の配列を返します。

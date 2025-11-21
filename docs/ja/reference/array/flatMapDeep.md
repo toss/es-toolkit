@@ -1,35 +1,44 @@
 # flatMapDeep
 
-ネストされた配列の各要素を与えられたイテレータ関数でマッピングし、すべての深さを展開して平坦化します。
-
-JavaScriptに組み込まれている[Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)を[Array#map](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/map)と組み合わせて`map(iteratee).flat(Infinity)`として呼び出した場合と同じように動作しますが、より高速です。
-
-## インターフェース
+配列の各要素を関数が返す値に置き換えた後、すべての深さを平坦化した新しい配列を返します。
 
 ```typescript
-function flatMapDeep<T, U>(arr: T[], iteratee: (item: T) => U): Array<ExtractNestedArrayType<U>>;
+const result = flatMapDeep(arr, iteratee);
 ```
 
-### パラメータ
+## 使用法
 
-- `arr` (`T[]`): 平坦化するネストされた配列です。
-- `iteratee` (`T[]`): 各配列要素をマッピングする関数です。
+### `flatMapDeep(arr, iteratee)`
 
-### 戻り値
-
-(`Array<ExtractNestedArrayType<T>>`): 各要素がマッピングされ、指定された深さまで平坦化された新しい配列です。
-
-## 例
+配列の各要素を変換しながら同時にすべてのネストされた配列を完全に平坦化したい場合は `flatMapDeep` を使用してください。まず各要素に関数を適用した後、結果配列をすべての深さまで平坦化します。
 
 ```typescript
-const array = [1, 2, 3];
+import { flatMapDeep } from 'es-toolkit/array';
 
-const result1 = flatMapDeep(array, item => [item, item]);
-// Return [1, 1, 2, 2, 3, 3]
-
-const result2 = flatMapDeep(array, item => [[item, item]]);
-// Return [1, 1, 2, 2, 3, 3]
-
-const result3 = flatMapDeep(array, item => [[[item, item]]]);
-// Return [1, 1, 2, 2, 3, 3]
+// 各要素を2回コピーした後、完全に平坦化します。
+const result1 = flatMapDeep([1, 2, 3], item => [item, item]);
+// Returns: [1, 1, 2, 2, 3, 3]
 ```
+
+どれほど深くネストされた配列でもすべての深さを平坦化します。
+
+```typescript
+import { flatMapDeep } from 'es-toolkit/array';
+
+// ネストされた配列も完全に平坦化します。
+const result = flatMapDeep([1, 2, 3], item => [[item, item]]);
+// Returns: [1, 1, 2, 2, 3, 3]
+
+// 複数レベルのネストもすべて平坦化します。
+const result2 = flatMapDeep([1, 2, 3], item => [[[item, item]]]);
+// Returns: [1, 1, 2, 2, 3, 3]
+```
+
+#### パラメータ
+
+- `arr` (`T[]`): 変換する配列です。
+- `iteratee` (`(item: T) => U`): 各配列要素を変換する関数です。
+
+#### 戻り値
+
+(`Array<ExtractNestedArrayType<U>>`): 各要素が変換され、すべての深さが平坦化された新しい配列を返します。

@@ -1,40 +1,42 @@
 # omit
 
-特定のキーを省略した新しいオブジェクトを生成します。
-
-この関数はオブジェクトとキーの配列を受け取り、指定されたキーに対応するプロパティを除いた新しいオブジェクトを返します。
-
-## インターフェース
+指定されたキーを除外した新しいオブジェクトを返します。
 
 ```typescript
-function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
+const result = omit(obj, keys);
 ```
 
-### パラメータ
+## 使用法
 
-- `obj` (`T`): キーを省略するオブジェクトです。
-- `keys` (`K[]`): オブジェクトから省略するキーの配列です。
+### `omit(obj, keys)`
 
-### 戻り値
-
-(`Omit<T, K>`): 指定されたキーが省略された新しいオブジェクトです。
-
-## 例
+オブジェクトから特定のキーだけを除外したい時に`omit`を使用してください。指定されたキーに対応するプロパティを削除した新しいオブジェクトを返します。
 
 ```typescript
-const obj = { a: 1, b: 2, c: 3 };
+import { omit } from 'es-toolkit/object';
+
+// 特定のキーを除外
+const obj = { a: 1, b: 2, c: 3, d: 4 };
 const result = omit(obj, ['b', 'c']);
-// 結果は次のようになります { a: 1 }
+// resultは{ a: 1, d: 4 }になります
+
+// 存在しないキーを指定してもエラーは発生しません
+const safe = omit(obj, ['b', 'nonexistent']);
+// safeは{ a: 1, c: 3, d: 4 }になります
+
+// 動的な配列も使用できます
+const keysToOmit = Object.keys({ b: true, c: true });
+const dynamic = omit(obj, keysToOmit);
+// dynamicは{ a: 1, d: 4 }になります
 ```
 
-## Lodashとの互換性
+#### パラメータ
 
-`es-toolkit/compat`から`omit`関数をインポートすると、深いパスを省略することができます。
+- `obj` (`T extends Record<PropertyKey, any>`): キーを除外するオブジェクトです。
+- `keys` (`readonly K[]` (`K extends keyof T`) または `readonly PropertyKey[]`): オブジェクトから除外するキーの配列です。
 
-```typescript
-import { omit } from 'es-toolkit/compat';
+#### 戻り値
 
-const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
-const result = omit(obj, ['a.b.c', 'f.g']);
-// result will be { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
-```
+- `Omit<T, K>` または `Partial<T>` - 指定されたキーが除外された新しいオブジェクトを返します。
+  - `keys`が `readonly K[]` の場合: `Omit<T, K>` でより厳密な型が返されます。
+  - `keys`が `readonly PropertyKey[]` の場合: `Partial<T>` が返されます。ランタイムで決定される動的なキー配列に便利です。

@@ -1,46 +1,66 @@
-# attempt
+# attempt (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `es-toolkit` 的 [`attempt`](../../util/attempt.md) 函数或 try-catch 块
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `attempt` 函数可能会让人困惑，因为它不区分地返回错误和返回值。
+
+请改用更直接和清晰的 [`attempt`](../../util/attempt.md) 函数或 try-catch 块。
+
 :::
 
-尝试使用提供的参数执行一个函数。
-如果函数抛出错误，它会捕捉错误并返回错误。
-如果捕获的错误不是Error实例，它会将其包装在一个新的Error中。
-
-## 签名
+执行函数并在发生错误时返回错误对象的函数。
 
 ```typescript
-function attempt<R>(func: (...args: any[]) => R, ...args: any[]): R | Error;
+const result = attempt(func, ...args);
 ```
 
-### 参数
+## 用法
 
-- `func` (`(...args: any[]) => R`): 要执行的函数。
-- `args` (`...any[]`): 传递给函数的参数。
+### `attempt(func, ...args)`
 
-### 返回值
-
-(`R | Error`): 如果成功，返回函数的返回值；如果抛出异常，返回一个Error。
-
-## 示例
+当您想安全地执行函数时使用 `attempt`。在执行可能抛出错误的函数时，它很有用，可以防止程序崩溃并将错误作为返回值处理。
 
 ```typescript
-// Example 1: Successful execution
+import { attempt } from 'es-toolkit/compat';
+
+// 基本用法 - 成功的情况
 const result = attempt((x, y) => x + y, 2, 3);
-console.log(result); // Output: 5
+console.log(result); // 5
 
-// Example 2: Function throws an error
+// 错误情况
 const errorResult = attempt(() => {
-  throw new Error('Something went wrong');
+  throw new Error('出错了');
 });
-console.log(errorResult); // Output: Error: Something went wrong
-
-// Example 3: Non-Error thrown
-const nonErrorResult = attempt(() => {
-  throw 'This is a string error';
-});
-console.log(nonErrorResult); // Output: Error: This is a string error
+console.log(errorResult); // Error: 出错了
 ```
+
+以下是与使用 try-catch 块的区别。
+
+```typescript
+// 使用 attempt
+import { attempt } from 'es-toolkit/compat';
+
+const result = attempt(riskyFunction, arg1, arg2);
+if (result instanceof Error) {
+  console.log('发生错误:', result.message);
+} else {
+  console.log('结果:', result);
+}
+
+// 使用 try-catch (更直接)
+try {
+  const result = riskyFunction(arg1, arg2);
+  console.log('结果:', result);
+} catch (error) {
+  console.log('发生错误:', error.message);
+}
+```
+
+#### 参数
+
+- `func` (`Function`): 要执行的函数。
+- `args` (`...any[]`): 要传递给函数的参数。
+
+#### 返回值
+
+(`ReturnType<F> | Error`): 如果函数成功则返回返回值，如果发生错误则返回 Error 对象。

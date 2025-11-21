@@ -158,6 +158,15 @@ describe('partition', () => {
     expect(partition(args, isEven)).toEqual([[2], [1, 3]]);
   });
 
+  it('should use identity function when no predicate is provided', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(partition([0, 1, 2, false, true, '', 'hello'])).toEqual([
+      [1, 2, true, 'hello'],
+      [0, false, ''],
+    ]);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(partition).toEqualTypeOf<typeof partitionLodash>();
   });

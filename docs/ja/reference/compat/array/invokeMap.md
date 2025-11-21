@@ -1,43 +1,31 @@
-# invokeMap
+# invokeMap (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.map` と `Object.values(...).map` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `invokeMap` 関数は、`null` や `undefined` の処理、メソッド検索などにより動作が遅くなります。
+
+代わりに、より高速で現代的な `Array.map` と `Object.values(...).map` を使用してください。
+
+例えば、`invokeMap([1, 2, 3], 'toString')` は `[1, 2, 3].map(x => x.toString())` のように書けます。
+
 :::
 
-コレクションの各要素の `path` にあるメソッドを呼び出し、呼び出された各メソッドの結果を配列として返します。追加の引数は、呼び出される各メソッドに渡されます。`path` が関数の場合、コレクションの各要素に対して呼び出され、`this` が各要素にバインドされます。
-
-## インターフェース
+配列またはオブジェクトの各要素で指定されたメソッドを呼び出し、結果の配列を返します。
 
 ```typescript
-function invokeMap<T, R>(
-  collection: T[] | Record<string, T> | null | undefined,
-  path: PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R),
-  ...args: unknown[]
-): Array<R | undefined>;
+const result = invokeMap(collection, method, ...args);
 ```
 
-### パラメータ
+## 使用法
 
-- `collection` (`T[] | Record<string, T> | null | undefined`): 反復処理するコレクションです。
-- `path` (`PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R)`): 呼び出すメソッドのパス（文字列、数値、シンボル、またはこれらの配列）または呼び出す関数です。
-- `args` (`...unknown[]`): 各メソッドを呼び出す際に渡す引数です。
+### `invokeMap(collection, method, ...args)`
 
-### 戻り値
-
-(`Array<R | undefined>`): 結果の配列を返します。パスが見つからないか、メソッドの呼び出し結果が `undefined` の場合、その要素は `undefined` となります。
-
-## 例
+配列またはオブジェクトの各要素で指定されたメソッドを呼び出します。メソッド名を文字列として渡すか、関数を直接渡すことができます。追加の引数は各メソッド呼び出しに渡されます。
 
 ```typescript
 import { invokeMap } from 'es-toolkit/compat';
 
-// 各要素のメソッドを呼び出す
-invokeMap(['a', 'b', 'c'], 'toUpperCase');
-// => ['A', 'B', 'C']
-
-// 引数付きでメソッドを呼び出す
+// 配列の各要素でメソッドを呼び出す
 invokeMap(
   [
     [5, 1, 7],
@@ -45,23 +33,45 @@ invokeMap(
   ],
   'sort'
 );
+// => [[5, 1, 7].sort(), [3, 2, 1].sort()]
 // => [[1, 5, 7], [1, 2, 3]]
 
-// オブジェクトの各値に対してメソッドを呼び出す
-invokeMap({ a: 1, b: 2, c: 3 }, 'toFixed', 1);
-// => ['1.0', '2.0', '3.0']
+// 引数を使用してメソッドを呼び出す
+invokeMap([123, 456], 'toString', 2);
+// => [(123).toString(2), (456).toString(2)]
+// => ['1111011', '111001000']
 
-// メソッド名の代わりに関数を使用する
-invokeMap(
-  ['a', 'b', 'c'],
-  function (this: string, prefix: string, suffix: string) {
-    return prefix + this.toUpperCase() + suffix;
-  },
-  '(',
-  ')'
-);
-// => ['(A)', '(B)', '(C)']
-
-invokeMap([123, 456], String.prototype.split, '');
-// => [['1', '2', '3'], ['4', '5', '6']]
+// 関数を直接渡す
+invokeMap(['a', 'b', 'c'], String.prototype.toUpperCase);
+// => [String.prototype.toUpperCase('a'), String.prototype.toUpperCase('b'), String.prototype.toUpperCase('c')]
+// => ['A', 'B', 'C']
 ```
+
+オブジェクトの場合、各値でメソッドを呼び出します。
+
+```typescript
+import { invokeMap } from 'es-toolkit/compat';
+
+const obj = { a: 1.1, b: 2.2, c: 3.3 };
+invokeMap(obj, 'toFixed', 1);
+// => ['1.1', '2.2', '3.3']
+```
+
+`null` または `undefined` は空の配列として扱われます。
+
+```typescript
+import { invokeMap } from 'es-toolkit/compat';
+
+invokeMap(null, 'toString'); // []
+invokeMap(undefined, 'toString'); // []
+```
+
+#### パラメータ
+
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): メソッドを呼び出す配列またはオブジェクトです。
+- `method` (`string | ((...args: any[]) => R)`): 呼び出すメソッド名または関数です。
+- `...args` (`any[]`): 各メソッド呼び出しに渡す追加の引数です。
+
+#### 戻り値
+
+(`Array<R | undefined>`): 各メソッド呼び出しの結果を含む新しい配列を返します。

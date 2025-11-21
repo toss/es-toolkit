@@ -1,73 +1,60 @@
-# sortedLastIndexOf
+# sortedLastIndexOf (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请直接实现二分查找
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
+这个 `sortedLastIndexOf` 函数由于复杂的二分查找处理和类型验证而运行缓慢。
 
-在已排序的数组中找到值最后一次出现的索引。它的工作方式类似于 `Array#lastIndexOf` ，但专门用于已排序的数组。
-
-::: warning 请提供已排序的数组作为参数
-
-此函数使用二分查找（Binary search）快速找到索引，因此如果不提供已排序的数组，它将无法正常工作。
+相反，请直接实现更快、更现代的二分查找或使用 `Array.prototype.lastIndexOf()`。
 
 :::
 
-## 签名
+查找值在已排序数组中最后一次出现的索引。
 
 ```typescript
-function sortedLastIndexOf<T>(array: ArrayLike<T> | null | undefined, value: T): number;
+const index = sortedLastIndexOf(array, value);
 ```
 
-### 参数
+## 用法
 
-- `array` (`ArrayLike<T> | null | undefined`): 已排序的数组。如果数组为 `null` 或 `undefined`，则返回 `-1`。
-- `value` (`T`): 要在已排序数组中通过比较查找的值。
+### `sortedLastIndexOf(array, value)`
 
-### 返回值
-
-( `number` ): 返回最后一个匹配值的索引，如果没有找到则返回 -1。
-
-## 示例
+在已排序数组中查找特定值最后一次出现的索引时，请使用 `sortedLastIndexOf`。它使用二分查找快速找到值。
 
 ```typescript
 import { sortedLastIndexOf } from 'es-toolkit/compat';
 
-const numbers = [1, 2, 3, 4, 5];
-sortedLastIndexOf(numbers, 3);
-// 返回值: 2
-// 解释: 数组numbers中值3的位置是2。
+// 在数字数组中查找值
+sortedLastIndexOf([1, 2, 3, 4, 5], 3);
+// 返回 2
 
-sortedLastIndexOf(numbers, 6);
-// 返回值: -1
-// 解释: 6在数组中不存在，所以返回-1。
+// 当值不存在时
+sortedLastIndexOf([1, 2, 3, 4, 5], 6);
+// 返回 -1
 
-// 当值重复出现时，返回最后一个匹配值的索引
-const duplicateNumbers = [1, 2, 2, 3, 3, 3, 4];
-sortedLastIndexOf(duplicateNumbers, 3);
-// 返回值: 5
-// 解释: 值3的最后一次出现索引是5。
+// 当存在重复值时，返回最后一个索引
+sortedLastIndexOf([1, 2, 2, 3, 3, 3, 4], 3);
+// 返回 5（最后一个3的位置）
 
-// 如果数组未排序，可能会返回错误的索引
-const unSortedArray = [55, 33, 22, 11, 44];
-sortedLastIndexOf(unSortedArray, 11);
-// 返回值: -1
-// 解释: 使用未排序的数组时，可能返回错误结果。
-
-// -0和0被视为相同
-const mixedZeroArray = [-0, 0];
-sortedLastIndexOf(mixedZeroArray, 0);
-// 返回值: 1
-// 解释: 在JavaScript中，-0和0被视为相等。
-
-sortedLastIndexOf(mixedZeroArray, -0);
-// 返回值: 1
-// 解释: 在JavaScript中，-0和0被视为相等。
-
-// 类数组对象
-const arrayLike = { length: 3, 0: 10, 1: 20, 2: 20 };
-sortedLastIndexOf(arrayLike, 20);
-// 返回值: 2
-// 解释: 也适用于类数组对象，返回最后一个20的索引。
+// 0和-0被视为相等
+sortedLastIndexOf([-0, 0], 0);
+// 返回 1
 ```
+
+空数组、`null` 或 `undefined` 返回 -1。
+
+```typescript
+import { sortedLastIndexOf } from 'es-toolkit/compat';
+
+sortedLastIndexOf([], 1); // -1
+sortedLastIndexOf(null, 1); // -1
+sortedLastIndexOf(undefined, 1); // -1
+```
+
+#### 参数
+
+- `array` (`ArrayLike<T> | null | undefined`): 已排序的数组。使用未排序的数组可能会产生错误的结果。
+- `value` (`T`): 要查找的值。
+
+#### 返回值
+
+(`number`): 返回值最后一次出现的索引。如果值不存在，则返回 -1。

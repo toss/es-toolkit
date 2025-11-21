@@ -1,41 +1,48 @@
 # isLength
 
-Checks if a given value is a valid length.
-
-A valid length is of type `number`, is a non-negative integer, and is less than or equal to JavaScript's maximum safe integer (`Number.MAX_SAFE_INTEGER`). It returns `true` if the value is a valid length, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to a valid length (`number`).
-
-## Signature
+Checks if a value is a valid array length.
 
 ```typescript
-function isLength(value: unknown): value is number;
+const result = isLength(value);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`unknown`): The value to check if it is a valid length.
+### `isLength(value)`
 
-### Returns
-
-(`value is number`): Returns `true` if the value is a valid length, otherwise `false`.
-
-## Examples
+Use `isLength` when you want to check if a value is a valid array length. A valid length must be an integer between 0 and `Number.MAX_SAFE_INTEGER`.
 
 ```typescript
 import { isLength } from 'es-toolkit/predicate';
 
-const value1 = 0;
-const value2 = 42;
-const value3 = -1;
-const value4 = 1.5;
-const value5 = Number.MAX_SAFE_INTEGER;
-const value6 = Number.MAX_SAFE_INTEGER + 1;
+// Valid lengths
+console.log(isLength(0)); // true
+console.log(isLength(42)); // true
+console.log(isLength(Number.MAX_SAFE_INTEGER)); // true
 
-console.log(isLength(value1)); // true
-console.log(isLength(value2)); // true
-console.log(isLength(value3)); // false
-console.log(isLength(value4)); // false
-console.log(isLength(value5)); // true
-console.log(isLength(value6)); // false
+// Invalid lengths
+console.log(isLength(-1)); // false (negative)
+console.log(isLength(1.5)); // false (decimal)
+console.log(isLength(Number.MAX_SAFE_INTEGER + 1)); // false (unsafe integer)
+console.log(isLength('42')); // false (string)
+console.log(isLength(null)); // false (null)
 ```
+
+Can also be used as a type guard in TypeScript.
+
+```typescript
+function processLength(value: unknown) {
+  if (isLength(value)) {
+    // Now value is narrowed to number type
+    console.log(value.toFixed(2));
+  }
+}
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's a valid length.
+
+#### Returns
+
+(`value is number`): Returns `true` if the value is a valid length, `false` otherwise.

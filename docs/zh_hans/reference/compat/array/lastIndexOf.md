@@ -1,46 +1,60 @@
-# lastIndexOf
+# lastIndexOf (Lodash兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用`Array.lastIndexOf`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
+此`lastIndexOf`函数由于处理`null`或`undefined`、搜索`NaN`值等原因运行缓慢。
 
-查找数组中最后一个出现的值的索引。
-
-此方法类似于 `Array.prototype.lastIndexOf`，但也能找到 `NaN` 值。
-它使用严格相等 (===) 来比较 `NaN` 以外的元素。
-
-## 签名
-
-```typescript
-function lastIndexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
-```
-
-### 参数
-
-- `array` (`T[]`): 要搜索的数组。
-
-::: info `array` 可以是 `ArrayLike<T>` 或 `null` 或 `undefined` 。
-
-为了确保与 lodash 的完全兼容性，`lastIndexOf` 函数会按照以下方式处理 `array`：
-
-- 如果 `array` 是 `ArrayLike<T>`，它会使用 `Array.from(...)` 将其转换为数组。
-- 如果 `array` 是 `null` 或 `undefined`，它会被视为一个空数组。
+请使用更快、更现代的`Array.lastIndexOf`。
 
 :::
 
-- `searchElement` (`T`): 要搜索的值。
-- `fromIndex` (`number`, 可选): 开始搜索的索引。
-
-### 返回
-
-(`number`): 数组中最后一个出现的值的索引（以零为基准），如果未找到该值，则返回 `-1`。
-
-## 示例
+查找数组中指定元素最后出现的索引。
 
 ```typescript
-const array = [1, 2, 3, NaN, 1];
-lastIndexOf(array, 1); // => 4
-lastIndexOf(array, NaN); // => 3
+const index = lastIndexOf(array, searchElement, fromIndex);
 ```
+
+## 用法
+
+### `lastIndexOf(array, searchElement, fromIndex)`
+
+返回数组中指定元素最后出现的索引。与原生`Array.lastIndexOf`类似，但也可以找到`NaN`值。
+
+```typescript
+import { lastIndexOf } from 'es-toolkit/compat';
+
+// 基本用法
+lastIndexOf([1, 2, 1, 2], 2);
+// => 3
+
+// 指定起始索引
+lastIndexOf([1, 2, 1, 2], 2, 2);
+// => 1
+
+// 查找NaN值（原生lastIndexOf无法找到NaN）
+lastIndexOf([1, 2, NaN, 4, NaN], NaN);
+// => 4
+
+// 使用负索引
+lastIndexOf([1, 2, 3, 4], 3, -2);
+// => 2
+```
+
+`null`或`undefined`被视为空数组。
+
+```typescript
+import { lastIndexOf } from 'es-toolkit/compat';
+
+lastIndexOf(null, 1); // -1
+lastIndexOf(undefined, 1); // -1
+```
+
+#### 参数
+
+- `array` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
+- `searchElement` (`T`): 要查找的元素。
+- `fromIndex` (`true | number`, 可选): 开始搜索的索引。传递`true`从数组末尾开始搜索。默认值为`array.length - 1`。
+
+#### 返回值
+
+(`number`): 返回最后一个匹配元素的索引。如果找不到则返回`-1`。

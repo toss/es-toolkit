@@ -1,62 +1,73 @@
-# overEvery
+# overEvery (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.every`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `overEvery` 函数在转换和检查条件函数的过程中会产生额外的开销。
+
+改为使用更快、更现代的 `Array.every` 方法。
+
 :::
 
-创建一个函数来检查所有给定的谓词是否对提供的值返回真值。
-
-此函数接收多个谓词，可以是单个谓词函数或谓词数组，并返回一个新函数，该函数检查当调用提供的值时，所有谓词是否返回真值。
-
-## 签名
+创建一个函数，该函数检查所有条件函数是否都返回真值。
 
 ```typescript
-function overEvery<T, U extends T, V extends T>(
-  predicate1: (value: T) => value is U,
-  predicate2: (value: T) => value is V
-): (value: T) => value is U & V;
-function overEvery<T>(
-  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
-): (...values: T[]) => boolean;
+const allValidator = overEvery(predicates);
 ```
 
-### 参数
+## 用法
 
-- `predicates` (`...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>`): -
-  一个谓词或谓词数组的列表。每个谓词是一个函数，它接受一个或多个类型为`T`的值，并返回一个布尔值，指示这些值是否满足条件。
+### `overEvery(...predicates)`
 
-### 返回值
-
-(`(...values: T[]) => boolean`): 一个函数，该函数接收一个值列表，如果所有谓词对提供的值返回真值，则返回`true`，否则返回`false`。
-
-## 示例
+接收多个条件函数，创建一个函数，该函数检查给定值是否满足所有条件。对复合条件检查或数据验证很有用。
 
 ```typescript
-const func = overEvery(
-  (value) => typeof value === 'string',
-  (value) => value.length > 3
-);
+import { overEvery } from 'es-toolkit/compat';
 
-func("hello"); // true
-func("hi"); // false
-func(42); // false
-
-const func = overEvery([
-  (value) => value.a > 0,
-  (value) => value.b > 0
+// 检查字符串条件
+const isValidString = overEvery([
+  value => typeof value === 'string',
+  value => value.length > 3,
+  value => value.includes('o'),
 ]);
 
-func({ a: 1, b: 2 }); // true
-func({ a: 0, b: 2 }); // false
+isValidString('hello'); // => true
+isValidString('hi'); // => false (长度为3以下)
+isValidString('test'); // => false (没有'o')
 
-const func = overEvery(
-  (a, b) => typeof a === 'string' && typeof b === 'string',
-  (a, b) => a.length > 3 && b.length > 3
-);
+// 检查数字范围
+const isInRange = overEvery([
+  num => num >= 0,
+  num => num <= 100,
+  num => num % 1 === 0, // 检查是否为整数
+]);
 
-func("hello", "world"); // true
-func("hi", "world"); // false
-func(1, 10); // false
+isInRange(50); // => true
+isInRange(-5); // => false (小于0)
+isInRange(150); // => false (超过100)
+isInRange(50.5); // => false (不是整数)
 ```
+
+也可以检查对象属性。
+
+```typescript
+import { overEvery } from 'es-toolkit/compat';
+
+// 检查对象属性
+const isValidUser = overEvery([
+  'name', // name属性是否为真值
+  { age: 30 }, // age是否为30
+  ['active', true], // active是否为true
+]);
+
+isValidUser({ name: 'John', age: 30, active: true }); // => true
+isValidUser({ name: '', age: 30, active: true }); // => false (name为空字符串)
+isValidUser({ name: 'John', age: 25, active: true }); // => false (age不同)
+```
+
+#### 参数
+
+- `...predicates` (`Array<Function | string | object | Array>`): 要检查的条件函数。可以是函数、属性名、对象、属性-值对等。
+
+#### 返回值
+
+(`(...args: any[]) => boolean`): 返回一个函数，如果满足所有条件则返回 `true`，否则返回 `false`。

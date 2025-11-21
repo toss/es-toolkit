@@ -1,32 +1,69 @@
-# max
+# max (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Math.max`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `max` 함수는 추가적인 함수 호출과 `null`/`undefined` 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Math.max(...array)`를 사용하세요.
+
 :::
 
-배열에서 최댓값을 가지는 요소를 반환해요.
-
-배열이 비어 있다면, `undefined`를 반환해요.
-
-## 인터페이스
+배열에서 최댓값을 찾아요.
 
 ```typescript
-function max<T>(items: ArrayLike<T> | null | undefined): T | undefined;
+const result = max(items);
 ```
 
-### 파라미터
+## 사용법
 
-- `items` (`ArrayLike<T> | null | undefined`): 최댓값을 가지는 요소를 찾을 배열이에요.
+### `max(items?)`
 
-### 반환 값
-
-(`T | undefined`): 배열에서 최댓값을 가지는 요소. 배열이 비어 있거나, `null`, 또는 `undefined`인 경우 `undefined`를 반환해요.
-
-## 예시
+배열에서 가장 큰 값을 찾고 싶을 때 `max`를 사용하세요.
 
 ```typescript
-max([1, 2, 3]); // Returns: 3
-max(['a', 'b']); // Returns: 'b'
+import { max } from 'es-toolkit/compat';
+
+// 숫자 배열에서 최댓값
+max([1, 2, 3]);
+// Returns: 3
+
+max([10, 5, 8, 20]);
+// Returns: 20
+
+// 문자열 배열에서 최댓값 (사전순)
+max(['a', 'b', 'c']);
+// Returns: 'c'
+
+max(['apple', 'banana', 'cherry']);
+// Returns: 'cherry'
+
+// 빈 배열이나 null/undefined
+max([]);
+// Returns: undefined
+
+max(null);
+// Returns: undefined
+
+max(undefined);
+// Returns: undefined
 ```
+
+음수도 올바르게 처리해요.
+
+```typescript
+import { max } from 'es-toolkit/compat';
+
+max([-1, -5, -3]);
+// Returns: -1
+
+max([0, -2, 5, -10]);
+// Returns: 5
+```
+
+#### 파라미터
+
+- `items` (`ArrayLike<T> | null | undefined`, 선택): 최댓값을 찾을 배열이에요.
+
+#### 반환 값
+
+(`T | undefined`): 배열에서 가장 큰 값을 반환해요. 배열이 비어있거나 null/undefined면 undefined를 반환해요.

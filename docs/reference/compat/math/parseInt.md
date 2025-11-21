@@ -1,39 +1,74 @@
-# parseInt
+# parseInt (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `parseInt`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `parseInt` function works slowly due to additional function calls.
+
+Use the faster and more modern native `parseInt` instead.
+
 :::
 
-Converts `string` to an integer of the specified radix. If `radix` is undefined or 0, a `radix` of 10 is used unless `string` is a hexadecimal, in which case a `radix` of 16 is used.
-
-## Signature
+Converts a string to an integer.
 
 ```typescript
-function parseInt(string: string, radix?: number, guard?: unknown): number;
+const result = parseInt(string, radix);
 ```
 
-## Parameters
+## Usage
 
-- `string` (`string`): The string to convert to an integer.
-- `radix` (`number`, Optional): The radix to use when converting the string to an integer. Defaults to `0`.
-- `guard` (`unknown`, Optional): Enables use as an iteratee for methods like `Array#map`.
+### `parseInt(string, radix?)`
 
-## Returns
+Use `parseInt` when you want to convert a string to an integer. You can specify a radix to interpret it in a different base.
 
-(`number`): The converted integer.
-
-## Examples
-
-```javascript
+```typescript
 import { parseInt } from 'es-toolkit/compat';
 
-parseInt('08'); // => 8
-parseInt('0x20'); // => 32
+// Basic decimal parsing
+parseInt('123');
+// Returns: 123
 
-parseInt('08', 10); // => 8
-parseInt('0x20', 16); // => 32
+parseInt('08');
+// Returns: 8
 
-['6', '08', '10'].map(parseInt); // => [6, 8, 10]
+// Automatic hexadecimal recognition
+parseInt('0x20');
+// Returns: 32
+
+// Explicit radix specification
+parseInt('08', 10);
+// Returns: 8
+
+parseInt('0x20', 16);
+// Returns: 32
+
+parseInt('1010', 2);
+// Returns: 10
+
+// Use in arrays
+['6', '08', '10'].map(parseInt);
+// Returns: [6, 8, 10]
 ```
+
+Invalid format strings return NaN.
+
+```typescript
+import { parseInt } from 'es-toolkit/compat';
+
+parseInt('abc');
+// Returns: NaN
+
+parseInt('');
+// Returns: NaN
+
+parseInt('123abc');
+// Returns: 123 (parses only the beginning)
+```
+
+#### Parameters
+
+- `string` (`string`): The string to convert to an integer.
+- `radix` (`number`, optional): The radix to use for conversion. Default is `0`, which automatically determines based on string format.
+
+#### Returns
+
+(`number`): Returns the converted integer. Returns NaN if conversion is not possible.

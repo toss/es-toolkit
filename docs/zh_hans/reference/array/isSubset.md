@@ -1,34 +1,67 @@
 # isSubset
 
-检查 `subset` 数组是否完全包含在 `superset` 数组中。
-
-## 签名
+检查一个数组是否是另一个数组的子集。
 
 ```typescript
-function isSubset<T>(superset: T[], subset: T[]): boolean;
+const result = isSubset(superset, subset);
 ```
 
-### 参数
+## 用法
 
-- `superset` (`T[]`): 可能包含子集所有元素的数组。
-- `subset` (`T[]`): 要与超集进行检查的数组。
+### `isSubset(superset, subset)`
 
-### 返回值
-
-(`boolean`): 如果 `subset` 中的所有元素都存在于 `superset` 中，则返回 `true`，否则返回 `false`。
-
-## 示例
+当您想确认一个数组的所有元素是否都包含在另一个数组中时,请使用 `isSubset`。在确认子集关系或检查权限、功能、标签等是否在允许范围内时很有用。
 
 ```typescript
-const superset1 = [1, 2, 3, 4, 5];
-const subset1 = [2, 3, 4];
+import { isSubset } from 'es-toolkit/array';
 
-isSubset(superset1, subset1);
-// 返回 true
+// 检查数字数组的子集
+const numbers = [1, 2, 3, 4, 5];
+const subset = [2, 3, 4];
+isSubset(numbers, subset);
+// Returns: true
 
-const superset2 = ['a', 'b', 'c'];
-const subset2 = ['a', 'd'];
+// 检查字符串数组的子集
+const permissions = ['read', 'write', 'delete', 'admin'];
+const userPermissions = ['read', 'write'];
+isSubset(permissions, userPermissions);
+// Returns: true
 
-isSubset(superset2, subset2);
-// 返回 false
+// 不是子集的情况
+const colors = ['red', 'blue', 'green'];
+const invalidColors = ['red', 'yellow'];
+isSubset(colors, invalidColors);
+// Returns: false
 ```
+
+特殊情况也能正确处理。
+
+```typescript
+import { isSubset } from 'es-toolkit/array';
+
+// 空数组始终是子集
+const anyArray = [1, 2, 3];
+const emptyArray: number[] = [];
+isSubset(anyArray, emptyArray);
+// Returns: true
+
+// 相同的数组是自己的子集
+const same = ['a', 'b', 'c'];
+isSubset(same, same);
+// Returns: true
+
+// 即使有重复元素也能正常工作
+const withDuplicates = [1, 2, 2, 3];
+const duplicateSubset = [2, 2];
+isSubset(withDuplicates, duplicateSubset);
+// Returns: true
+```
+
+#### 参数
+
+- `superset` (`readonly T[]`): 可以包含子集所有元素的超集数组。
+- `subset` (`readonly T[]`): 要确认是否包含在超集中的子集数组。
+
+#### 返回值
+
+(`boolean`): 如果子集的所有元素都包含在超集中,则返回 `true`,否则返回 `false`。

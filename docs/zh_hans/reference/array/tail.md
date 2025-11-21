@@ -1,40 +1,69 @@
 # tail
 
-返回一个新数组，其中除了第一个元素外，包含所有元素。
-
-该函数接受一个数组作为参数，并返回一个新数组，该数组包含除第一个元素外的所有元素。
-
-如果输入数组为空或只有一个元素，则返回一个空数组。
-
-## 签名
+返回一个新数组,包含除第一个元素外的所有元素。
 
 ```typescript
-function tail<T>(arr: [T]): [];
-function tail(arr: []): [];
-function tail<T, U>(arr: [T, ...U[]]): U[];
-function tail<T>(arr: T[]): T[];
+const result = tail(arr);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`): 要获取尾部的数组。
+### `tail(arr)`
 
-### 返回值
-
-(`T[]`): 一个新数组，包含除输入数组第一个元素外的所有元素。
-
-## 示例
+当您想要获取数组中除第一个元素外的所有元素时,请使用 `tail`。如果数组为空或只有一个元素,则返回空数组。这在处理栈或队列中除第一个元素外的其余元素时很有用。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = tail(arr1);
-// result 将会是 [2, 3]
+import { tail } from 'es-toolkit/array';
 
-const arr2 = [1];
-const result2 = tail(arr2);
-// result2 将会是 []
+// 从数字数组中排除第一个元素。
+const numbers = [1, 2, 3, 4, 5];
+tail(numbers);
+// Returns: [2, 3, 4, 5]
 
-const arr3 = [];
-const result3 = tail(arr3);
-// result3 将会是 []
+// 从字符串数组中排除第一个元素。
+const strings = ['first', 'second', 'third'];
+tail(strings);
+// Returns: ['second', 'third']
+
+// 只有一个元素的数组返回空数组。
+const single = [42];
+tail(single);
+// Returns: []
 ```
+
+它可以安全地处理空数组和特殊情况。
+
+```typescript
+import { tail } from 'es-toolkit/array';
+
+// 空数组返回空数组。
+const empty: number[] = [];
+tail(empty);
+// Returns: []
+
+// 也可以处理嵌套数组。
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
+tail(nested);
+// Returns: [[3, 4], [5, 6]]
+
+// 也可以处理对象数组。
+const users = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' },
+];
+tail(users);
+// Returns: [{ id: 2, name: 'Bob' }, { id: 3, name: 'Charlie' }]
+```
+
+#### 参数
+
+- `arr` (`readonly T[]`): 要排除第一个元素的数组。
+
+#### 返回值
+
+(`T[]`): 返回排除第一个元素的新数组。如果输入数组为空或只有一个元素,则返回空数组。

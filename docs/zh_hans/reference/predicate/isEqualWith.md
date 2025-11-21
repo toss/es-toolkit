@@ -1,64 +1,95 @@
 # isEqualWith
 
-使用自定义比较函数比较两个值是否相等。
-
-自定义函数允许对比较过程进行细致的控制。如果它返回布尔值，则该结果决定相等性。如果返回 `undefined`，则该函数将回退到[isEqual](./isEqual.md)中的默认相等比较。
-
-此函数还使用自定义相等函数比较对象、数组、`Map`、`Set`和其他复杂结构中的值，确保进行深度比较。
-
-这种方法在处理复杂比较时提供了灵活性，同时保持了对简单情况的高效默认行为。
-
-自定义比较函数最多可以接受六个参数：
-
-- `x`: 第一个对象`a`中的值。
-- `y`: 第二个对象`b`中的值。
-- `property`: 属性键（如果适用）。
-- `xParent`: 第一个值的父对象。
-- `yParent`: 第二个值的父对象。
-- `stack`: 用于处理循环引用的内部堆栈（映射）。
-
-## 签名
+使用自定义比较函数检查两个值是否相等。
 
 ```typescript
-function isEqualWith(
-  a: any,
-  b: any,
-  areValuesEqual: (
-    x: any,
-    y: any,
-    property?: PropertyKey,
-    xParent?: any,
-    yParent?: any,
-    stack?: Map<any, any>
-  ) => boolean | void
-): boolean;
+const result = isEqualWith(a, b, areValuesEqual);
 ```
 
-### 参数
+## 用法
 
-- `a` (`any`): 要比较的第一个值。
-- `b` (`any`): 要比较的第二个值。
-- `areValuesEqual` (`(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void`): 用于表示如何比较两个值的比较函数。它可以返回一个布尔值，表示两个值是否相等。如果返回 `undefined`，则使用默认方法进行比较。
-  - `x`: 属于第一个对象 `a` 的值。
-  - `y`: 属于第二个对象 `b` 的值。
-  - `property`: 用于获取 `x` 和 `y` 的属性键。
-  - `xParent`: 第一个值 `x` 的父级。
-  - `yParent`: 第二个值 `y` 的父级。
-  - `stack`: 用于处理循环引用的内部栈（`Map`）。
+### `isEqualWith(a, b, areValuesEqual)`
 
-### 返回值
-
-(`boolean`): `true`如果根据自定义比较器值相等，否则为`false`。
-
-## 示例
+当需要特殊比较逻辑时，请使用 `isEqualWith`。如果自定义函数返回 `true` 或 `false`，则使用该结果；如果返回 `undefined`，则使用默认比较方式。对于忽略大小写、排除特定属性、近似值比较等场景很有用。
 
 ```typescript
-const customizer = (a, b) => {
+import { isEqualWith } from 'es-toolkit/predicate';
+
+// 不区分大小写的字符串比较
+const caseInsensitiveCompare = (a, b) => {
   if (typeof a === 'string' && typeof b === 'string') {
     return a.toLowerCase() === b.toLowerCase();
   }
 };
-isEqualWith('Hello', 'hello', customizer); // true
-isEqualWith({ a: 'Hello' }, { a: 'hello' }, customizer); // true
-isEqualWith([1, 2, 3], [1, 2, 3], customizer); // true
+
+isEqualWith('Hello', 'hello', caseInsensitiveCompare); // true
+isEqualWith({ name: 'Alice' }, { name: 'ALICE' }, caseInsensitiveCompare); // true
 ```
+
+也可以用于数字的近似值比较。
+
+```typescript
+import { isEqualWith } from 'es-toolkit/predicate';
+
+// 允许浮点数误差的比较
+const approximateCompare = (a, b) => {
+  if (typeof a === 'number' && typeof b === 'number') {
+    return Math.abs(a - b) < 0.01; // 将 0.01 以下的差异视为相等
+  }
+};
+
+isEqualWith(0.1 + 0.2, 0.3, approximateCompare); // true
+isEqualWith({ price: 10.01 }, { price: 10.02 }, approximateCompare); // true
+```
+
+在想要忽略特定属性进行比较时也很有用。
+
+```typescript
+import { isEqualWith } from 'es-toolkit/predicate';
+
+// 忽略特定属性的比较
+const ignoreTimestamp = (a, b, property) => {
+  if (property === 'timestamp') {
+    return true; // 将 timestamp 属性始终视为相等
+  }
+};
+
+const obj1 = { id: 1, name: 'Test', timestamp: 1000 };
+const obj2 = { id: 1, name: 'Test', timestamp: 2000 };
+isEqualWith(obj1, obj2, ignoreTimestamp); // true
+```
+
+也可以实现复杂的自定义比较逻辑。
+
+```typescript
+import { isEqualWith } from 'es-toolkit/predicate';
+
+const areValuesEqual = (a, b, property) => {
+  // 忽略 ID
+  if (property === 'id') {
+    return true;
+  }
+
+  // 不区分大小写比较名称
+  if (property === 'name' && typeof a === 'string' && typeof b === 'string') {
+    return a.toLowerCase() === b.toLowerCase();
+  }
+
+  // 对其余使用默认比较方式
+  return undefined;
+};
+
+const user1 = { id: 1, name: 'Alice', age: 25 };
+const user2 = { id: 999, name: 'ALICE', age: 25 };
+isEqualWith(user1, user2, areValuesEqual); // true
+```
+
+#### 参数
+
+- `a` (`unknown`): 要比较的第一个值。
+- `b` (`unknown`): 要比较的第二个值。
+- `areValuesEqual` (`(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void`): 自定义比较函数。如果返回 `true` 或 `false`，则使用该结果；如果返回 `undefined`，则使用默认比较方式。
+
+#### 返回值
+
+(`boolean`): 根据自定义标准，如果两个值相等则返回 `true`，否则返回 `false`。

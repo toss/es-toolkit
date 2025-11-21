@@ -1,34 +1,51 @@
-# isInteger
+# isInteger (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Number.isInteger`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `isInteger` function operates slowly due to additional type checking overhead.
+
+Instead, use the faster and modern `Number.isInteger`.
+
 :::
 
-Checks if `value` is an integer.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
-
-## Signature
+Checks if a value is an integer.
 
 ```typescript
-function isInteger(value?: unknown): value is number;
+const result = isInteger(value);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`unknown`): The value to check.
+### `isInteger(value)`
 
-### Returns
-
-(`value is number`): `true` if `value` is integer, otherwise `false`.
-
-## Examples
+Use `isInteger` when you need to check if a given value is an integer. This function also works as a type guard in TypeScript, narrowing the type of the value to `number`.
 
 ```typescript
-isInteger(3); // Returns: true
-isInteger(Infinity); // Returns: false
-isInteger('3'); // Returns: false
-isInteger([]); // Returns: false
+import { isInteger } from 'es-toolkit/compat';
+
+// Integer value checks
+isInteger(3); // true
+isInteger(-5); // true
+isInteger(0); // true
+
+// Decimal values are false
+isInteger(3.14); // false
+isInteger(-2.5); // false
+
+// Infinity is false
+isInteger(Infinity); // false
+isInteger(-Infinity); // false
+
+// Other types are also false
+isInteger('3'); // false
+isInteger([]); // false
+isInteger({}); // false
 ```
+
+#### Parameters
+
+- `value` (`any`): The value to check.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is an integer, otherwise `false`.

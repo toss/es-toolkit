@@ -1,49 +1,92 @@
-# result
+# result (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `get` 関数またはオプショナルチェイニングを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `result` 関数は複雑なパス処理と関数呼び出しロジックにより動作が遅くなります。
+
+代わりに、より高速で現代的な `get` 関数またはオプショナルチェイニング(`?.`)を使用してください。
+
 :::
 
-オブジェクトの指定されたパスから値を取得します。
-
-[get](./get.md) 関数と基本的な動作は同じですが、値を探す過程で関数に遭遇した場合、その関数を呼び出しながら進みます。
-
-見つかった値が`undefined`の場合、デフォルト値を返し、デフォルト値が関数であればその関数を呼び出します。
-
-## インターフェース
+オブジェクトのパスから値を取得しますが、関数に遭遇した場合は呼び出して結果を返します。
 
 ```typescript
-function result<R>(object: any, path: PropertyKey | PropertyKey[], defaultValue?: R | ((...args: any[]) => R)): R;
+const result = result(obj, path, defaultValue);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`unknown`): クエリを行うオブジェクトです。
-- `path` (`PropertyKey | PropertyKey[]`): 取得するプロパティのパスです。
-- `defaultValue` (`R | ((...args: any[]) => R`, オプション): 解決された値が`undefined`の場合に返される値です。
+### `result(object, path, defaultValue)`
 
-### 戻り値
-
-(`R`): 解決された値を返します。
-
-## 例
+オブジェクトのパスから値を取得し、パス上の関数を自動的に呼び出したい場合は `result` を使用してください。`get` 関数と似ていますが、遭遇した関数を実行し、最終値も関数であれば呼び出して結果を返します。
 
 ```typescript
+import { result } from 'es-toolkit/compat';
+
+// 基本的な使用法(通常の値)
 const obj = { a: { b: { c: 3 } } };
-result(obj, 'a.b.c');
-// => 3
+const value = result(obj, 'a.b.c');
+// 結果: 3
 
-const obj = { a: () => 5 };
-result(obj, 'a');
-// => 5 (calls the function `a` and returns its result)
+// 自動関数呼び出し
+const objWithFunc = {
+  compute: () => ({ value: 42 }),
+  getValue: function () {
+    return this.compute().value;
+  },
+};
+const computed = result(objWithFunc, 'getValue');
+// 結果: 42 (getValue 関数が呼び出される)
 
-const obj = { a: { b: null } };
-result(obj, 'a.b.c', 'default');
-// => 'default'
+// パス上の関数呼び出し
+const nested = {
+  data: () => ({ user: { getName: () => 'John' } }),
+};
+const name = result(nested, 'data.user.getName');
+// 結果: 'John' (data() と getName() の両方が呼び出される)
 
-const obj = { a: { b: { c: 3 } } };
-result(obj, 'a.b.d', () => 'default');
-// => 'default'
+// デフォルト値の使用
+const incomplete = { a: { b: null } };
+const withDefault = result(incomplete, 'a.b.c', 'default value');
+// 結果: 'default value'
+
+// デフォルト値が関数の場合
+const withFuncDefault = result(incomplete, 'a.b.c', () => 'computed default');
+// 結果: 'computed default' (デフォルト値の関数が呼び出される)
+
+// 配列パスの使用
+const arrayPath = result(objWithFunc, ['getValue']);
+// 結果: 42
+
+// 動的デフォルト値
+const dynamic = result(incomplete, 'missing.path', function () {
+  return `Generated at ${new Date().toISOString()}`;
+});
+// 結果: 現在時刻を含む文字列
 ```
+
+関数呼び出し時に `this` コンテキストが保持されます。
+
+```typescript
+import { result } from 'es-toolkit/compat';
+
+const calculator = {
+  multiplier: 2,
+  compute: function () {
+    return 10 * this.multiplier;
+  },
+};
+
+const calculatedValue = result(calculator, 'compute');
+// 結果: 20 (this.multiplier が正しく参照される)
+```
+
+#### パラメータ
+
+- `object` (`any`): クエリを実行するオブジェクトです。
+- `path` (`PropertyPath`): 取得するプロパティのパスです。文字列、配列、またはキーの配列を指定できます。
+- `defaultValue` (`R | ((...args: any[]) => R)`, オプション): 値が `undefined` の場合に返すデフォルト値です。関数の場合は呼び出して結果を返します。
+
+#### 戻り値
+
+(`R`): 解決された値を返します。パス上の関数が呼び出され、最終値も関数であれば呼び出した結果を返します。

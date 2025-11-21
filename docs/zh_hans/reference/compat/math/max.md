@@ -1,33 +1,69 @@
-# max
+# max (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Math.max`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `max` 函数由于额外的函数调用和 `null`/`undefined` 处理会运行较慢。
+
+请使用更快、更现代的 `Math.max(...array)`。
 
 :::
 
-找到数组中具有最大值的元素。
-
-如果列表为空，则返回 `undefined`。
-
-## 签名
+在数组中查找最大值。
 
 ```typescript
-function max<T>(items: ArrayLike<T> | null | undefined): T | undefined;
+const result = max(items);
 ```
 
-### 参数
+## 用法
 
-- `items` (`ArrayLike<T> | null | undefined`): 要搜索的元素数组。
+### `max(items?)`
 
-### 返回
-
-(`T | undefined`): 具有最大值的元素。如果数组为空、`null` 或 `undefined`，则返回 `undefined`。
-
-### 示例
+当您想要在数组中查找最大值时，请使用 `max`。
 
 ```typescript
-max([1, 2, 3]); // Returns: 3
-max(['a', 'b']); // Returns: 'b'
+import { max } from 'es-toolkit/compat';
+
+// 数字数组中的最大值
+max([1, 2, 3]);
+// Returns: 3
+
+max([10, 5, 8, 20]);
+// Returns: 20
+
+// 字符串数组中的最大值（按字典序）
+max(['a', 'b', 'c']);
+// Returns: 'c'
+
+max(['apple', 'banana', 'cherry']);
+// Returns: 'cherry'
+
+// 空数组或 null/undefined
+max([]);
+// Returns: undefined
+
+max(null);
+// Returns: undefined
+
+max(undefined);
+// Returns: undefined
 ```
+
+负数也能正确处理。
+
+```typescript
+import { max } from 'es-toolkit/compat';
+
+max([-1, -5, -3]);
+// Returns: -1
+
+max([0, -2, 5, -10]);
+// Returns: 5
+```
+
+#### 参数
+
+- `items` (`ArrayLike<T> | null | undefined`, 可选): 要查找最大值的数组。
+
+#### 返回值
+
+(`T | undefined`): 返回数组中的最大值。如果数组为空或为 null/undefined，则返回 undefined。

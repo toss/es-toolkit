@@ -1,40 +1,77 @@
-# invertBy
+# invertBy (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning 現代的な JavaScript API を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `invertBy` 関数は、複雑なイテレータ処理とグループ化ロジックにより、動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.entries()` と `reduce()` または `Map` を使用してください。
+
 :::
 
-与えられたオブジェクトのキーと値を [invert](../../object/invert.md) 関数のように反転させた新しいオブジェクトを生成します。
-
-値がどのようにキーに反転されるかを `iteratee` 関数で指定します。`iteratee` 関数が与えられない場合、値はそのままキーとして使用されます。
-
-新しいオブジェクトの値は、`iteratee` 関数が返した値が同じキーの配列になります。
-
-## インターフェース
+オブジェクトのキーと値を反転し、同じ値を配列にグループ化します。
 
 ```typescript
-function invertBy<K extends PropertyKey, V>(object: Record<K, V>, iteratee?: (value: V) => string): Record<string, K[]>;
+const inverted = invertBy(object, iteratee);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`Record<K, V>`): 反転するオブジェクト。
-- `iteratee` (`(value: V) => string`): オブジェクトのキーとして反転される値を別の文字列に変換する方法を指定する関数。提供されない場合、値はそのままキーとして反転されます。
+### `invertBy(object, iteratee?)`
 
-### 戻り値
-
-(`Record<string, K[]>`): キーと値が反転したオブジェクト。キーは `iteratee` 関数で変換された値になり、値は `iteratee` 関数が返した値が同じキーの配列です。
-
-## 例
+オブジェクトのキーと値を反転し、同じ値を持つキーを配列にグループ化したい場合は、`invertBy` を使用してください。オプションでイテレータ関数を提供して値を変換できます。
 
 ```typescript
-const obj = { a: 1, b: 2, c: 1 };
-const result = invertBy(obj);
-// result => { '1': ['a', 'c'], '2': ['b'] }
+import { invertBy } from 'es-toolkit/compat';
 
-const obj = { a: 1, b: 2, c: 1 };
-const result = invertBy(obj, value => `group${value}`);
-// result => { 'group1': ['a', 'c'], 'group2': ['b'] }
+// 基本的なキーと値の反転(同じ値が配列にグループ化されます)
+const object = { a: 1, b: 2, c: 1 };
+invertBy(object);
+// => { '1': ['a', 'c'], '2': ['b'] }
+
+// イテレータ関数を使用した値の変換
+const ages = { john: 25, jane: 30, bob: 25 };
+invertBy(ages, age => `age_${age}`);
+// => { 'age_25': ['john', 'bob'], 'age_30': ['jane'] }
+
+// 文字列の長さでグループ化
+const words = { a: 'hello', b: 'world', c: 'hi', d: 'test' };
+invertBy(words, word => word.length);
+// => { '5': ['a', 'b'], '2': ['c'], '4': ['d'] }
 ```
+
+オブジェクトのプロパティでグループ化することもできます。
+
+```typescript
+import { invertBy } from 'es-toolkit/compat';
+
+// オブジェクトのプロパティでグループ化
+const users = {
+  user1: { department: 'IT', age: 30 },
+  user2: { department: 'HR', age: 25 },
+  user3: { department: 'IT', age: 35 },
+};
+
+invertBy(users, user => user.department);
+// => { 'IT': ['user1', 'user3'], 'HR': ['user2'] }
+```
+
+`null` または `undefined` を安全に処理します。
+
+```typescript
+import { invertBy } from 'es-toolkit/compat';
+
+invertBy(null);
+// => {}
+
+invertBy(undefined);
+// => {}
+```
+
+#### パラメータ
+
+- `object` (`object`): 反転するオブジェクトです。
+- `iteratee` (`ValueIteratee`, オプション): 値を変換する関数です。デフォルトは値をそのまま使用する関数です。
+
+#### 戻り値
+
+(`Record<string, string[]>`): 変換された値をキーとし、元のキーの配列を値とする新しいオブジェクトを返します。

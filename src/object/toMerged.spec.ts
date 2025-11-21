@@ -5,6 +5,7 @@ describe('toMerged', () => {
   it('should merge properties from source object into target object', () => {
     const target = { a: 1, b: 2 };
     const source = { b: 3, c: 4 };
+
     const result = toMerged(target, source);
 
     expect(result).toEqual({ a: 1, b: 3, c: 4 });
@@ -49,6 +50,85 @@ describe('toMerged', () => {
     expect(target2).toEqual({ a: [1, 2], b: { x: 1 } });
   });
 
+  it('should deeply merge nested objects if they are shared', () => {
+    const lightTypography = {
+      secondaryBold: {
+        fontSize: '16px',
+      },
+      tertiaryBold: {
+        fontSize: '14px',
+      },
+    };
+
+    const lightComponents = {
+      button: {
+        sm: {
+          generic: {
+            textLabel: lightTypography.tertiaryBold,
+          },
+        },
+      },
+      calendarPicker: {
+        inputPlaceholder: lightTypography.secondaryBold,
+      },
+    };
+
+    const darkTypography = {
+      tertiaryBold: {
+        fontSize: '14px',
+      },
+    };
+
+    const darkComponents = {
+      button: {
+        sm: {
+          generic: {
+            textLabel: darkTypography.tertiaryBold,
+          },
+        },
+      },
+      calendarPicker: {
+        inputPlaceholder: darkTypography.tertiaryBold,
+      },
+    };
+
+    expect(toMerged(darkComponents, lightComponents)).toEqual({
+      button: {
+        sm: {
+          generic: {
+            textLabel: {
+              fontSize: '14px',
+            },
+          },
+        },
+      },
+      calendarPicker: {
+        inputPlaceholder: {
+          fontSize: '16px',
+        },
+      },
+    });
+
+    expect(darkComponents).toMatchInlineSnapshot(`
+      {
+        "button": {
+          "sm": {
+            "generic": {
+              "textLabel": {
+                "fontSize": "14px",
+              },
+            },
+          },
+        },
+        "calendarPicker": {
+          "inputPlaceholder": {
+            "fontSize": "14px",
+          },
+        },
+      }
+    `);
+  });
+
   it('should merge arrays deeply', () => {
     const target = { a: [1, 2] };
     const source = { a: [3, 4] };
@@ -61,6 +141,7 @@ describe('toMerged', () => {
   it('should handle merging with null values', () => {
     const target = { a: null };
     const source = { a: [1, 2, 3] };
+
     const result = toMerged(target, source);
 
     expect(result).toEqual({ a: [1, 2, 3] });
@@ -83,5 +164,23 @@ describe('toMerged', () => {
 
     expect(result).toEqual({ a: { b: { c: [2], d: 3 }, e: [4] } });
     expect(target).toEqual({ a: { b: { c: [1] } } });
+  });
+
+  it('should replace non-plain-object target value with plain object from source', () => {
+    const target = { a: 'string', b: 123, c: true };
+    const source = { a: { x: 1 }, b: { y: 2 }, c: { z: 3 } };
+    const result = toMerged(target, source);
+
+    expect(result).toEqual({ a: { x: 1 }, b: { y: 2 }, c: { z: 3 } });
+    expect(target).toEqual({ a: 'string', b: 123, c: true });
+  });
+
+  it('should handle nested case where non-plain-object is replaced with plain object', () => {
+    const target = { a: { b: null, c: undefined, d: 'text' } };
+    const source = { a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } };
+    const result = toMerged(target, source);
+
+    expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
+    expect(target).toEqual({ a: { b: null, c: undefined, d: 'text' } });
   });
 });

@@ -1,20 +1,55 @@
-# join
+# join (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.join()` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `join` 関数は、ArrayLike オブジェクトの処理、null/undefined の処理などにより動作が遅くなります。
+
+代わりに、より高速で現代的な `Array.prototype.join()` を使用してください。
+
 :::
 
 配列の要素を文字列に結合します。
 
-## インターフェース
-
 ```typescript
-function join<T>(array: T[], separator?: string): string;
+const result = join(array, separator);
 ```
 
-### パラメータ
+## 使用法
+
+### `join(array, separator?)`
+
+`join` を使用して、配列のすべての要素を1つの文字列に結合します。各要素の間にセパレータを挿入して連結します。
+
+```typescript
+import { join } from 'es-toolkit/compat';
+
+// 文字列配列を結合
+const arr = ['a', 'b', 'c'];
+join(arr, '~'); // => "a~b~c"
+
+// 数値配列を結合
+const numbers = [1, 2, 3];
+join(numbers, '-'); // => "1-2-3"
+```
+
+セパレータを省略すると、デフォルトでカンマ（`,`）が使用されます。
+
+```typescript
+import { join } from 'es-toolkit/compat';
+
+join(['a', 'b', 'c']); // => "a,b,c"
+```
+
+`null` または `undefined` は空の配列として処理されます。
+
+```typescript
+import { join } from 'es-toolkit/compat';
+
+join(null, '-'); // => ""
+join(undefined, '-'); // => ""
+```
+
+#### パラメータ
 
 - `array` (`T[]`) - 結合する配列です。
 
@@ -27,16 +62,8 @@ lodash と完全に互換性があるように、`join` 関数は `array` を次
 
 :::
 
-- `separator` (`string`) - 要素を結合するために用いるセパレータ、デフォルトは一般的なセパレータ `,` です。
+- `separator` (`string`, オプション) - 要素を結合するために使用するセパレータです。デフォルト値は `,` です。
 
-### 戻り値
+#### 戻り値
 
-(`string`): - 指定されたセパレータで結合された配列のすべての要素を含む文字列を返します。
-
-## 例
-
-```typescript
-const arr = ['a', 'b', 'c'];
-const result = join(arr, '~');
-console.log(result); // Output: "a~b~c"
-```
+(`string`): 指定されたセパレータで結合された配列のすべての要素を含む文字列を返します。

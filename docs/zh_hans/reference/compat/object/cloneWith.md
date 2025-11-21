@@ -1,54 +1,97 @@
-# cloneWith
+# cloneWith (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 建议实现自定义逻辑
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `cloneWith` 函数由于复杂的自定义函数处理而相对较慢。
+
+请改用 `clone` 并直接实现自定义逻辑。
+
 :::
 
-创建给定对象的浅拷贝，并允许通过自定义函数来定制克隆过程。这个方法类似于 `clone`，但它接受一个自定义函数来生成克隆值。如果自定义函数返回 undefined，则会使用默认的克隆方法。
-
-如果没有提供自定义函数，它的行为与 `clone` 完全相同。
-
-## 签名
+使用自定义函数创建对象的浅拷贝。
 
 ```typescript
-function cloneWith<T>(value: T, customizer?: (value: any) => any): T;
+const cloned = cloneWith(value, customizer);
 ```
 
-### 参数
+## 用法
 
-- `value` (`T`): 要克隆的值。
-- `customizer` (`Function`): 可选。用于自定义克隆过程的函数。
+### `cloneWith(value, customizer?)`
 
-### 返回值
-
-(`T`): 返回给定对象的浅拷贝。
-
-## 示例
+当您想要自定义复制工作方式时,请使用 `cloneWith`。自定义函数控制特定值的复制方式。
 
 ```typescript
-const num = 29;
-const clonedNum = cloneWith(num);
-console.log(clonedNum); // 29
-console.log(clonedNum === num); // true
+import { cloneWith } from 'es-toolkit/compat';
 
-const arr = [1, 2, 3];
-const clonedArr = cloneWith(arr);
-console.log(clonedArr); // [1, 2, 3]
-console.log(clonedArr === arr); // false
+// 基本用法(没有自定义函数)
+const obj = { a: 1, b: 'hello' };
+const cloned = cloneWith(obj);
+// Returns: { a: 1, b: 'hello' } (新的对象实例)
 
-const obj = { a: 1, b: 'es-toolkit', c: [1, 2, 3] };
-const clonedObj = cloneWith(obj);
-console.log(clonedObj); // { a: 1, b: 'es-toolkit', c: [1, 2, 3] }
-console.log(clonedObj === obj); // false
-
-const obj2 = { a: 1, b: 2 };
-const clonedObjWithCustomizer = cloneWith(obj2, value => {
-  if (typeof value === 'number') {
-    return value * 2; // 将数字值翻倍
+// 转换数字值
+const obj2 = { a: 1, b: 2, c: 'text' };
+const cloned2 = cloneWith(obj2, value => {
+  const obj = {};
+  for (const key in value) {
+    const val = value[key];
+    if (typeof val === 'number') {
+      obj[key] = val * 2;
+    } else {
+      obj[key] = val;
+    }
   }
-  // 返回 undefined 时使用默认克隆方法
+  return obj;
 });
-console.log(clonedObjWithCustomizer); // { a: 2, b: 4 }
+// Returns: { a: 2, b: 4, c: 'text' }
+
+// 转换数组元素
+const arr = [1, 2, 3];
+const clonedArr = cloneWith(arr, value => {
+  return value.map(x => x + 10);
+});
+// Returns: [11, 12, 13]
+
+// 处理特定类型
+const complex = {
+  date: new Date('2023-01-01'),
+  number: 42,
+  text: 'hello',
+};
+const clonedComplex = cloneWith(complex, value => {
+  const obj = {};
+  for (const key in value) {
+    const val = value[key];
+    if (val instanceof Date) {
+      obj[key] = val.toISOString();
+    } else if (typeof val === 'string') {
+      obj[key] = val.toUpperCase();
+    } else {
+      obj[key] = val;
+    }
+  }
+  return obj;
+});
+// Returns: { date: '2023-01-01T00:00:00.000Z', number: 42, text: 'HELLO' }
 ```
+
+如果自定义函数返回 `undefined`,则使用默认的复制行为。
+
+```typescript
+import { cloneWith } from 'es-toolkit/compat';
+
+const obj = { a: 1, b: { c: 2 } };
+const cloned = cloneWith(obj, value => {
+  // 对所有值返回undefined = 使用默认复制
+  return undefined;
+});
+// Returns: { a: 1, b: { c: 2 } } (与clone相同的结果)
+```
+
+#### 参数
+
+- `value` (`T`): 要复制的值。
+- `customizer` (`function`, 可选): 决定复制方式的函数。格式为 `(value: any) => any`。
+
+#### 返回值
+
+(`T`): 返回由自定义函数处理的浅拷贝。

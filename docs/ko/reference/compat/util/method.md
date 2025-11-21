@@ -1,31 +1,20 @@
-# method
+# method (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
-
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-주어진 객체의 `path`에 있는 메서드를 제공된 인자로 호출하는 함수를 생성해요.
-
-## 인터페이스
+지정된 경로의 메서드를 인자와 함께 호출하는 함수를 만들어요.
 
 ```typescript
-function method(path: PropertyKey | PropertyKey[], ...args: any[]): (object?: unknown) => any;
+const methodFunc = method(path, ...args);
 ```
 
-### 파라미터
+## 사용법
 
-- `path` (`PropertyKey | PropertyKey[]`): 호출할 메서드의 경로.
-- `args` (`...any`): 메서드를 호출할 때 사용할 인수.
+### `method(path, ...args)`
 
-### 반환 값
-
-(`(object?: unknown) => any`): 객체를 받아서 `args`로 `path`에 있는 메서드를 호출하는 새 함수.
-
-## 예시
+객체에서 특정 경로의 메서드를 미리 정의된 인자와 함께 호출하는 함수를 생성해요. 함수형 프로그래밍에서 메서드 호출을 재사용하거나 배열의 `map` 등에서 유용해요.
 
 ```typescript
+import { method } from 'es-toolkit/compat';
+
 const object = {
   a: {
     b: function (x, y) {
@@ -34,6 +23,40 @@ const object = {
   },
 };
 
+// 메서드 호출 함수를 만들어요
 const add = method('a.b', 1, 2);
 console.log(add(object)); // => 3
+
+// 배열에서 각 객체의 메서드를 호출해요
+const objects = [{ calc: { sum: (a, b) => a + b } }, { calc: { sum: (a, b) => a * b } }];
+
+const calculate = method('calc.sum', 5, 3);
+objects.map(calculate); // => [8, 15]
 ```
+
+중첩된 경로도 처리할 수 있어요.
+
+```typescript
+import { method } from 'es-toolkit/compat';
+
+const obj = {
+  users: {
+    getName: function (prefix) {
+      return prefix + this.name;
+    },
+    name: 'John',
+  },
+};
+
+const getUserName = method('users.getName', 'Mr. ');
+getUserName(obj); // => 'Mr. John'
+```
+
+#### 파라미터
+
+- `path` (`PropertyKey | PropertyKey[]`): 호출할 메서드의 경로예요.
+- `...args` (`any[]`): 메서드에 전달할 인자들이에요.
+
+#### 반환 값
+
+(`(object: any) => any`): 객체를 받아서 지정된 경로의 메서드를 인자와 함께 호출하는 함수를 반환해요.

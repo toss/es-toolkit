@@ -1,46 +1,59 @@
 # fill
 
-填充数组中从起始位置到结束位置（不包括结束位置）的元素为指定值。
-
-该函数会修改原始数组，并用提供的值替换从指定的起始索引到结束索引（不包括结束索引）的元素。如果未提供起始或结束索引，则默认填充整个数组。
-
-还可以使用负索引，此时索引从数组末尾开始计数。
-
-## 签名
+用指定的值填充数组的元素。直接修改原数组。
 
 ```typescript
-function fill<T>(array: unknown[], value: T): T[];
-function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
-function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
+const filled = fill(arr, value, start, end);
 ```
 
-### 参数
+::: info 如果不想修改原数组,请使用 [`toFilled`](./toFilled.md)。
 
-- `array` (`Array<T | U>`): 要填充的数组。
-- `value` (`U`): 用来填充数组的值。
-- `start` (`number`, 默认值为 0): 起始位置。默认为 0。
-- `end` (`number`, 默认值为 array.length): 结束位置。默认为数组的长度。
+`toFilled` 返回一个新数组,而不是修改原数组。
 
-### 返回值
+:::
 
-(`Array<T | U>`): 填充后的数组。
+## 用法
 
-## 示例
+### `fill(arr, value, start?, end?)`
+
+当您想用指定的值填充数组的特定范围时,请使用 `fill`。从开始位置到结束位置之前的元素将被替换为提供的值。如果不指定开始或结束位置,将填充整个数组。
 
 ```typescript
+import { fill } from 'es-toolkit/array';
+
+// 用 'a' 填充整个数组
 const array1 = [1, 2, 3];
-const result1 = fill(array1, 'a');
-// result1 => ['a', 'a', 'a']
+fill(array1, 'a');
+// Returns: ['a', 'a', 'a']
 
+// 用 2 填充空数组
 const array2 = Array(3);
-const result2 = fill(array2, 2);
-// result2 => [2, 2, 2]
+fill(array2, 2);
+// Returns: [2, 2, 2]
 
+// 用 '*' 填充索引 1 到 3 之前的位置
 const array3 = [4, 6, 8, 10];
-const result3 = fill(array3, '*', 1, 3);
-// result3 => [4, '*', '*', 10]
-
-const array4 = [1, 2, 3];
-const result4 = fill(array4, '*', -2, -1);
-// result4 => [1, '*', 3]
+fill(array3, '*', 1, 3);
+// Returns: [4, '*', '*', 10]
 ```
+
+也可以使用负数索引。负数索引从数组末尾开始计算。
+
+```typescript
+import { fill } from 'es-toolkit/array';
+
+const array = [1, 2, 3];
+fill(array, '*', -2, -1);
+// Returns: [1, '*', 3]
+```
+
+#### 参数
+
+- `arr` (`Array<T | U>`): 要填充的数组。
+- `value` (`U`): 用于填充数组的值。
+- `start` (`number`, 可选): 开始位置。默认值为 `0`。
+- `end` (`number`, 可选): 结束位置。默认值为数组的长度。
+
+#### 返回值
+
+(`Array<T | U>`): 返回用值填充的原数组。

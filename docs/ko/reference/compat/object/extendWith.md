@@ -1,65 +1,61 @@
-# extendWith
+# extendWith (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.assign()`과 사용자 정의 함수를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `extendWith` 함수는 프로토타입 체인에서 상속된 속성 처리와 사용자 정의 병합 로직으로 인해 복잡하고 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.assign()`과 사용자 정의 함수를 사용하세요.
+
 :::
 
-`source` 객체가 가지고 있는 프로퍼티 값들을 `object` 객체에 할당해요. 각 속성에 대해 어떤 값이 할당될지를 결정하는 `getValueToAssign` 함수를 제공할 수 있어요.
-
-이미 `source`가 가지고 있는 값과 같은 값은 덮어쓰지 않아요.
-
-`getValueToAssign` 함수로 `object` 객체에 할당할 값을 결정할 수 있어요. 함수가 반환하는 값이 할당돼요. 값이 주어지지 않으면, `identity` 함수가 기본값으로 사용돼요.
-
-## 인터페이스
+객체의 고유 속성과 상속된 속성을 사용자 정의 함수로 처리하여 다른 객체에 복사해요.
 
 ```typescript
-function extendWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function extendWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function extendWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function extendWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function extendWith(object: any, ...sources: any[]): any;
+const result = extendWith(object, source, customizer);
 ```
 
-### 파라미터
+## 사용법
 
-- `object` (`any`): `source`의 프로퍼티 값이 할당될 객체.
-- `sources` (`...any[]`): `object`에 할당할 값을 가지고 있는 객체들.
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): 각 속성에 대해 할당할 값을 결정하는 함수. 함수가 반환하는 값이 해당 속성에 할당돼요.
+### `extendWith(object, ...sources, customizer)`
 
-### 반환 값
-
-(`any`): 새로운 값이 할당된 `object` 객체.
-
-## 예시
+객체의 속성을 사용자 정의 로직으로 병합할 때 `extendWith`를 사용하세요. `extend`와 비슷하지만 각 속성을 어떻게 병합할지 직접 결정할 수 있어요. 이 함수는 `assignInWith`의 별칭이에요.
 
 ```typescript
-const target = { a: 1 };
-const result = extendWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { extendWith } from 'es-toolkit/compat';
+
+// 사용자 정의 병합 로직으로 속성 복사
+const target = { a: 1, b: 2 };
+extendWith(target, { b: 3, c: 4 }, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// 반환값: { a: 1, b: 2, c: 4 }
+
+// 배열을 연결하는 사용자 정의 병합
+const obj1 = { a: [1, 2] };
+const obj2 = { a: [3, 4], b: [5, 6] };
+extendWith(obj1, obj2, (objValue, srcValue) => {
+  if (Array.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
+// 반환값: { a: [1, 2, 3, 4], b: [5, 6] }
 ```
+
+여러 소스 객체를 사용할 수 있어요.
+
+```typescript
+import { extendWith } from 'es-toolkit/compat';
+
+extendWith({ a: 1 }, { b: 2 }, { c: 3 }, (objValue, srcValue) => srcValue * 2);
+// 반환값: { a: 1, b: 4, c: 6 }
+```
+
+#### 파라미터
+
+- `object` (`any`): 속성을 복사받을 대상 객체예요.
+- `...sources` (`any[]`): 속성을 제공하는 소스 객체들이에요.
+- `customizer` (`function`): 각 속성에 대해 할당할 값을 결정하는 함수예요. `(objValue, srcValue, key, object, source)`를 받아요.
+
+#### 반환 값
+
+(`any`): 속성이 복사된 객체를 반환해요. 첫 번째 인수인 `object`가 수정돼요.

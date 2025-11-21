@@ -1,147 +1,89 @@
-# find
+# find (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.find()` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `find` 関数は、複雑なオブジェクト処理、様々な条件形式のサポートなどにより遅く動作します。
+
+代わりに、より高速で現代的な `Array.prototype.find()` を使用してください。
+
 :::
 
-配列やオブジェクトから条件に合う最初の値を見つけます。
-
-条件は複数の方法で指定できます。
-
-- **検査関数**: 各要素に対して検査する関数を実行します。最初に `true` を返す値が選択されます。
-- **部分オブジェクト**: 与えられたオブジェクトと部分的に一致する最初の要素が選択されます。
-- **プロパティ-値ペア**: 該当プロパティに対して値が一致する最初の要素が選択されます。
-- **プロパティ名**: 該当プロパティに対して真と評価される値を持つ最初の要素が選択されます。
-
-## インターフェース
+配列またはオブジェクトから条件に合う最初の要素を探します。
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): T | undefined;
-function find<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
-function find<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
-function find<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): T | undefined;
-
-function find<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
-  fromIndex?: number
-): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: Partial<T[keyof T]>,
-  fromIndex?: number
-): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: [keyof T[keyof T], unknown],
-  fromIndex?: number
-): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey, fromIndex?: number): T | undefined;
+const result = find(collection, predicate, fromIndex);
 ```
 
-### パラメータ
+## 使用法
 
-- `arr` (`T[]`) または `object` (`T`): 検索する配列またはオブジェクト。
+### `find(collection, predicate, fromIndex?)`
 
-::: info `arr` は `ArrayLike<T>` であるか、`null` または `undefined` である可能性があります
-
-lodash と完全に互換性があるように、`find` 関数は `arr` を次のように処理します。
-
-- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
-- `arr` が `null` または `undefined` の場合、空の配列と見なされます。
-
-:::
-
-::: info `object` は `null` または `undefined` である可能性があります
-
-lodash と完全に互換性があるように、`find` 関数は `object` を次のように処理します。
-
-- `object` が `null` または `undefined` の場合、空のオブジェクトに変換されます。
-
-:::
-
-- `doesMatch`:
-
-  - 配列の場合:
-
-    - **検査関数** (`(item: T, index: number, arr: T[]) => unknown`): 探している要素かどうかを返す関数。
-    - **部分オブジェクト** (`Partial<T>`): 一致させるプロパティと値を指定した部分オブジェクト。
-    - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
-    - **プロパティ名** (`PropertyKey`): 真と評価される値を持っているか確認するプロパティ名。
-
-  - オブジェクトの場合:
-    - **検査関数** (`(item: T[keyof T], index: number, object: T) => unknown`): 探している要素かどうかを返す関数。
-    - **部分値** (`Partial<T[keyof T]>`): 一致させるプロパティと値を指定した部分オブジェクト。
-    - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
-    - **プロパティ名** (`PropertyKey`): 真と評価される値を持っているか確認するプロパティ名。
-
-- `fromIndex` (`number`): 検索を開始するインデックス。デフォルトは `0`。
-
-### 戻り値
-
-(`T | undefined`): 与えられた条件を満たす最初の要素。ない場合は `undefined`。
-
-## 例
-
-### 配列の場合
+配列またはオブジェクトから特定の条件を満たす最初の要素を探したい場合に `find` を使用します。条件は関数、部分オブジェクト、プロパティ-値ペア、プロパティ名など、様々な形式で指定できます。
 
 ```typescript
 import { find } from 'es-toolkit/compat';
 
-// 検査関数を使う場合
-const items = [1, 2, 3, 4, 5];
-const result = find(items, item => item > 3);
-console.log(result); // 4
+// 検査関数を使用
+const numbers = [1, 2, 3, 4, 5];
+find(numbers, x => x > 3);
+// 戻り値: 4
 
-// 部分オブジェクトを使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+// プロパティ名を使用
+const users = [
+  { name: 'Alice', active: false },
+  { name: 'Bob', active: true },
+  { name: 'Charlie', active: true },
 ];
-const result = find(items, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
+find(users, 'active');
+// 戻り値: { name: 'Bob', active: true }
 
-// プロパティ-値ペアを使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = find(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
+// 部分オブジェクトを使用
+find(users, { active: true });
+// 戻り値: { name: 'Bob', active: true }
 
-// プロパティ名を使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = find(items, 'name');
-console.log(result); // { id: 1, name: 'Alice' }
+// プロパティ-値ペアを使用
+find(users, ['name', 'Charlie']);
+// 戻り値: { name: 'Charlie', active: true }
 ```
 
-### オブジェクトの場合
+開始インデックスを指定できます。
 
 ```typescript
 import { find } from 'es-toolkit/compat';
 
-// 検査関数を使う場合
-const obj = { a: 1, b: 2, c: 3 };
-const result = find(obj, item => item > 2);
-console.log(result); // 3
-
-// 部分オブジェクトを使う場合
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = find(obj, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
-
-// プロパティ-値ペアを使う場合
-const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = find(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
-
-// プロパティ名を使う場合
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = find(obj, 'name');
-console.log(result); // { id: 1, name: 'Alice' }
+const numbers = [1, 2, 3, 4, 5];
+find(numbers, x => x > 2, 2);
+// 戻り値: 3 (インデックス2から検索開始)
 ```
+
+オブジェクトに対しても同じように動作します。
+
+```typescript
+import { find } from 'es-toolkit/compat';
+
+const scores = { math: 90, english: 75, science: 85 };
+find(scores, score => score >= 80);
+// 戻り値: 90
+```
+
+`null` または `undefined` は空のコレクションとして処理され `undefined` を返します。
+
+```typescript
+import { find } from 'es-toolkit/compat';
+
+find(null, x => x > 0);
+// 戻り値: undefined
+
+find(undefined, x => x > 0);
+// 戻り値: undefined
+```
+
+#### パラメータ
+
+- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 検索する配列またはオブジェクトです。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 検索条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。
+- `fromIndex` (`number`, オプション): 検索を開始するインデックスです。デフォルトは `0` です。
+
+#### 戻り値
+
+(`T | undefined`): 条件を満たす最初の要素を返します。見つからなければ `undefined` を返します。

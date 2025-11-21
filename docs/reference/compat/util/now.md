@@ -1,31 +1,55 @@
-# now
+# now (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Date.now()` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `now` function is a simple wrapper that calls `Date.now()` and represents unnecessary abstraction.
+
+Use the faster and more direct `Date.now()` instead.
+
 :::
 
-Returns the number of milliseconds elapsed since January 1, 1970 00:00:00 UTC.
-
-## Signature
-
-```typescript
-function now(): number;
-```
-
-### Returns
-
-(`number`): The current time in milliseconds.
-
-## Examples
+Returns the current time in milliseconds.
 
 ```typescript
 const currentTime = now();
-console.log(currentTime); // Outputs the current time in milliseconds
+```
 
+## Usage
+
+### `now()`
+
+Returns the number of milliseconds elapsed since January 1, 1970 00:00:00 UTC. This is useful for time measurement and timestamp generation.
+
+```typescript
+import { now } from 'es-toolkit/compat';
+
+// Get the current time
+const currentTime = now();
+console.log(currentTime); // => 1703925600000 (example)
+
+// Measure execution time
 const startTime = now();
 // Some time-consuming operation
 const endTime = now();
-console.log(`Operation took ${endTime - startTime} milliseconds`);
+console.log(`Operation time: ${endTime - startTime}ms`);
+
+// Use as timestamp
+const timestamp = now();
+const logMessage = `[${timestamp}] Operation completed`;
 ```
+
+Returns the same result as `Date.now()`.
+
+```typescript
+import { now } from 'es-toolkit/compat';
+
+console.log(now() === Date.now()); // => true (when called at the same time)
+```
+
+#### Parameters
+
+None.
+
+#### Returns
+
+(`number`): Returns the number of milliseconds elapsed since January 1, 1970 00:00:00 UTC to the present.

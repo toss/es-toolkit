@@ -1,64 +1,70 @@
-# overSome
+# overSome (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.some`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `overSome` 函数在转换和检查条件函数的过程中会产生额外的开销。
+
+改为使用更快、更现代的 `Array.some` 方法。
+
 :::
 
-创建一个函数，用于检查给定的谓词是否有任何一个为所提供的值返回 truthy。
-
-此函数接受多个谓词，可以是单个谓词函数或谓词数组，并返回一个新函数，该新函数检查谓词在调用提供的值时是否有任何为 truthy 返回。
-
-## 签名
+创建一个函数，该函数检查条件函数中是否有任意一个返回真值。
 
 ```typescript
-function overSome<T, U extends T, V extends T>(
-  predicate1: (value: T) => value is U,
-  predicate2: (value: T) => value is V
-): (value: T) => value is U | V;
-function overSome<T>(
-  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
-): (...values: T[]) => boolean;
+const anyValidator = overSome(predicates);
 ```
 
-### 参数
+## 用法
 
-- `predicates` (`...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>`): -
-  谓词或谓词数组的列表。每个谓词都是一个函数，它接受一个或多个 `T` 类型的值，并返回一个布尔值指示这些值是否满足条件。
+### `overSome(...predicates)`
 
-### 返回值
-
-(`(...values: T[]) => boolean`): 一个函数，该函数接受一个值列表，如果谓词对提供的值返回 truthy，则返回 `true`，否则返回 `false`。
-
-## 示例
+接收多个条件函数，创建一个函数，该函数检查给定值是否满足任意一个条件。对灵活的条件检查或替代验证很有用。
 
 ```typescript
-const func = overSome(
-  (value) => typeof value === 'string',
-  (value) => typeof value === 'number',
-  (value) => typeof value === 'symbol'
-);
+import { overSome } from 'es-toolkit/compat';
 
-func("hello"); // true
-func(42); // true
-func(Symbol()); // true
-func([]); // false
+// 检查是否为字符串或数字
+const isStringOrNumber = overSome([value => typeof value === 'string', value => typeof value === 'number']);
 
-const func = overSome([
-  (value) => value.a > 0,
-  (value) => value.b > 0
+isStringOrNumber('hello'); // => true
+isStringOrNumber(42); // => true
+isStringOrNumber(true); // => false
+
+// 检查多个条件中是否有任意一个满足
+const hasValidProperty = overSome([
+  obj => obj.name && obj.name.length > 0,
+  obj => obj.email && obj.email.includes('@'),
+  obj => obj.phone && obj.phone.length >= 10,
 ]);
 
-func({ a: 0, b: 2 }); // true
-func({ a: 0, b: 0 }); // false
-
-const func = overSome(
-  (a, b) => typeof a === 'string' && typeof b === 'string',
-  (a, b) => a > 0 && b > 0
-);
-
-func("hello", "world"); // true
-func(1, 10); // true
-func(0, 2); // false
+hasValidProperty({ name: 'John' }); // => true
+hasValidProperty({ email: 'john@example.com' }); // => true
+hasValidProperty({ phone: '1234567890' }); // => true
+hasValidProperty({ age: 30 }); // => false
 ```
+
+也可以检查对象属性。
+
+```typescript
+import { overSome } from 'es-toolkit/compat';
+
+// 检查多个条件中是否有任意一个匹配
+const matchesAnyCondition = overSome([
+  'isActive', // isActive属性是否为真值
+  { role: 'admin' }, // role是否为'admin'
+  ['status', 'vip'], // status是否为'vip'
+]);
+
+matchesAnyCondition({ isActive: true }); // => true
+matchesAnyCondition({ role: 'admin' }); // => true
+matchesAnyCondition({ status: 'vip' }); // => true
+matchesAnyCondition({ role: 'user', status: 'normal' }); // => false
+```
+
+#### 参数
+
+- `...predicates` (`Array<Function | string | object | Array>`): 要检查的条件函数。可以是函数、属性名、对象、属性-值对等。
+
+#### 返回值
+
+(`(...args: any[]) => boolean`): 返回一个函数，如果任意一个条件满足则返回 `true`，否则全部不满足则返回 `false`。

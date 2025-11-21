@@ -1,31 +1,42 @@
 # flattenDeep
 
-ネストされた配列のすべての深さを展開して平坦化します。
-
-JavaScript言語に含まれる[Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)を`flat(Infinity)`で呼び出した時と同じように動作しますが、より高速です。
-
-## インターフェース
+ネストされた配列のすべての深さを平坦化した新しい配列を返します。
 
 ```typescript
-// ネストされた配列を再帰的に展開して、最も内部の要素の型を抽出するユーティリティ型です。
-type ExtractNestedArrayType<T> = T extends ReadonlyArray<infer U> ? ExtractNestedArrayType<U> : T;
-
-function flattenDeep<T>(arr: T[]): Array<ExtractNestedArrayType<T>>;
+const result = flattenDeep(arr);
 ```
 
-### パラメータ
+## 使用法
+
+### `flattenDeep(arr)`
+
+どれほど深くネストされた配列でも完全に平坦化したい場合は `flattenDeep` を使用してください。配列内のすべてのネストされた配列を展開し、一つの平面的な構造にします。
+
+JavaScript言語に含まれた[Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)を`flat(Infinity)`として呼び出したときと同じように動作しますが、より高速です。
+
+```typescript
+import { flattenDeep } from 'es-toolkit/array';
+
+// すべてのネストレベルを平坦化します。
+const array = [1, [2, [3]], [4, [5, 6]]];
+const result = flattenDeep(array);
+// Returns: [1, 2, 3, 4, 5, 6]
+```
+
+どれほど複雑なネスト構造でも完全に平坦化します。
+
+```typescript
+import { flattenDeep } from 'es-toolkit/array';
+
+const complexArray = [1, [2, [3, [4, [5]]]], 6];
+const result = flattenDeep(complexArray);
+// Returns: [1, 2, 3, 4, 5, 6]
+```
+
+#### パラメータ
 
 - `arr` (`T[]`): 平坦化するネストされた配列です。
 
-### 戻り値
+#### 戻り値
 
-(`Array<ExtractNestedArrayType<T>>`): すべての深さが平坦化された新しい配列です。
-
-## 例
-
-```typescript
-const array = [1, [2, [3]], [4, [5, 6]]];
-
-const result = flattenDeep(array);
-// [1, 2, 3, 4, 5, 6]を返します。
-```
+(`Array<ExtractNestedArrayType<T>>`): すべての深さが平坦化された新しい配列を返します。

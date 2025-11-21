@@ -1,43 +1,73 @@
-# toPairs
+# toPairs (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.entries`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `toPairs` 函数由于处理 `Map` 和 `Set`、数组类对象处理等复杂逻辑而运行缓慢。
+
+请使用更快、更现代的 `Object.entries()`。
+
 :::
 
-从对象、集合或映射创建键值对数组。
-
-- 当提供对象时，它返回一个与对象的属性和值配对的元素数组（`[key, value]`）。
-- 当提供 `Set` 时，它返回一个以 `[value, value]` 格式配对的元素数组。
-- 当提供 `Map` 时，它返回一个与键和值配对的元素数组（`[key, value]`）。
-
-## 签名
+将对象转换为键值对数组。
 
 ```typescript
-function toPairs<T>(object?: Record<string, T> | Record<number, T>): Array<[string, T]>;
-function toPairs(object?: object): Array<[string, any]>;
+const pairs = toPairs(object);
 ```
 
-### 参数
+## 用法
 
-- `object` (`Record<string, T> | Record<number, T> | object`, 可选): 要查询的对象、集合或映射。
+### `toPairs(object)`
 
-### 返回值
-
-(`Array<[string, T]> | Array<[string, any]>`): 返回键值对数组。
-
-## 示例
+当您想将对象自身的可枚举属性转换为 `[键, 值]` 形式的数组时,请使用 `toPairs`。不包括继承的属性。
 
 ```typescript
-const object = { a: 1, b: 2 };
-toPairs(object); // [['a', 1], ['b', 2]]
+import { toPairs } from 'es-toolkit/compat';
 
-const set = new Set([1, 2]);
-toPairs(set); // [[1, 1], [2, 2]]
+// 基本对象转换
+const object = { a: 1, b: 2, c: 3 };
+toPairs(object);
+// => [['a', 1], ['b', 2], ['c', 3]]
 
+// 具有数字键的对象
+const numbers = { 0: 'zero', 1: 'one', 2: 'two' };
+toPairs(numbers);
+// => [['0', 'zero'], ['1', 'one'], ['2', 'two']]
+```
+
+也可以处理 `Map` 和 `Set`。
+
+```typescript
+import { toPairs } from 'es-toolkit/compat';
+
+// Map 对象转换
 const map = new Map();
-map.set('a', 1);
-map.set('b', 2);
-toPairs(map); // [['a', 1], ['b', 2]]
+map.set('name', 'John');
+map.set('age', 30);
+toPairs(map);
+// => [['name', 'John'], ['age', 30]]
+
+// Set 对象转换(值与键相同)
+const set = new Set([1, 2, 3]);
+toPairs(set);
+// => [[1, 1], [2, 2], [3, 3]]
 ```
+
+安全处理 `null` 或 `undefined`。
+
+```typescript
+import { toPairs } from 'es-toolkit/compat';
+
+toPairs(null);
+// => []
+
+toPairs(undefined);
+// => []
+```
+
+#### 参数
+
+- `object` (`object`): 要转换的对象、Map 或 Set。
+
+#### 返回值
+
+(`Array<[string, any]>`): 返回键值对数组。

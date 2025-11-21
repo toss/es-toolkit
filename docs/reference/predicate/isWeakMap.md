@@ -1,34 +1,41 @@
 # isWeakMap
 
-Checks if the given value is a `WeakMap`.
-
-This function tests whether the provided value is an instance of `WeakMap`.
-It returns `true` if the value is a `WeakMap`, and `false` otherwise.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `WeakMap`.
-
-## Signature
+Checks if a given value is a `WeakMap` instance.
 
 ```typescript
-function isWeakMap(value: unknown): value is WeakMap<WeakKey, any>;
+const result = isWeakMap(value);
 ```
 
-### Parameters
+## Usage
 
-`value` (`unknown`): The value to test if it is a `WeakMap`.
+### `isWeakMap(value)`
 
-### Returns
-
-(`value is WeakMap<WeakKey, any>`): true if the value is a `WeakMap`, false otherwise.
-
-## Examples
+Use `isWeakMap` when you want to check if a value is a `WeakMap` instance. `WeakMap` is a key-value store with weak references to objects as keys, useful for preventing memory leaks.
 
 ```typescript
-const value1 = new WeakMap();
-const value2 = new Map();
-const value3 = new Set();
+import { isWeakMap } from 'es-toolkit/predicate';
 
-console.log(isWeakMap(value1)); // true
-console.log(isWeakMap(value2)); // false
-console.log(isWeakMap(value3)); // false
+// WeakMap instances
+const weakMap1 = new WeakMap();
+const weakMap2 = new WeakMap([[{}, 'value']]);
+
+console.log(isWeakMap(weakMap1)); // true
+console.log(isWeakMap(weakMap2)); // true
+
+// Non-WeakMap values
+console.log(isWeakMap(new Map())); // false
+console.log(isWeakMap(new Set())); // false
+console.log(isWeakMap(new WeakSet())); // false
+console.log(isWeakMap({})); // false
+console.log(isWeakMap([])); // false
+console.log(isWeakMap(null)); // false
+console.log(isWeakMap(undefined)); // false
 ```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's a WeakMap instance.
+
+#### Returns
+
+(`value is WeakMap<WeakKey, any>`): Returns `true` if the value is a WeakMap instance, `false` otherwise.

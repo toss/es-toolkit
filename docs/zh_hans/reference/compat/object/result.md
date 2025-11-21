@@ -1,49 +1,92 @@
-# result
+# result (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `get` 函数或可选链
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `result` 函数由于复杂的路径处理和函数调用逻辑而性能缓慢。
+
+建议使用更快且更现代的 `get` 函数或可选链(`?.`)。
+
 :::
 
-从对象的给定路径获取值。
-
-与[get](./get.md)函数的基本操作相同，但如果在查找值的过程中遇到函数，则会调用该函数并继续。
-
-如果找到的值为`undefined`，则返回默认值，如果默认值是函数，则调用该函数。
-
-## 签名
+从对象的路径中获取值,但如果遇到函数则调用它并返回结果。
 
 ```typescript
-function result<R>(object: any, path: PropertyKey | PropertyKey[], defaultValue?: R | ((...args: any[]) => R)): R;
+const result = result(obj, path, defaultValue);
 ```
 
-### 参数
+## 用法
+
+### `result(object, path, defaultValue)`
+
+当您想从对象的路径中获取值并自动调用路径上的函数时,使用 `result`。它与 `get` 函数类似,但会执行遇到的函数,如果最终值也是函数则调用并返回结果。
+
+```typescript
+import { result } from 'es-toolkit/compat';
+
+// 基本用法(普通值)
+const obj = { a: { b: { c: 3 } } };
+const value = result(obj, 'a.b.c');
+// 结果: 3
+
+// 自动函数调用
+const objWithFunc = {
+  compute: () => ({ value: 42 }),
+  getValue: function () {
+    return this.compute().value;
+  },
+};
+const computed = result(objWithFunc, 'getValue');
+// 结果: 42 (调用 getValue 函数)
+
+// 路径上的函数调用
+const nested = {
+  data: () => ({ user: { getName: () => 'John' } }),
+};
+const name = result(nested, 'data.user.getName');
+// 结果: 'John' (data() 和 getName() 都被调用)
+
+// 使用默认值
+const incomplete = { a: { b: null } };
+const withDefault = result(incomplete, 'a.b.c', 'default value');
+// 结果: 'default value'
+
+// 默认值是函数的情况
+const withFuncDefault = result(incomplete, 'a.b.c', () => 'computed default');
+// 结果: 'computed default' (调用默认值函数)
+
+// 使用数组路径
+const arrayPath = result(objWithFunc, ['getValue']);
+// 结果: 42
+
+// 动态默认值
+const dynamic = result(incomplete, 'missing.path', function () {
+  return `Generated at ${new Date().toISOString()}`;
+});
+// 结果: 包含当前时间的字符串
+```
+
+调用函数时 `this` 上下文会被保留。
+
+```typescript
+import { result } from 'es-toolkit/compat';
+
+const calculator = {
+  multiplier: 2,
+  compute: function () {
+    return 10 * this.multiplier;
+  },
+};
+
+const calculatedValue = result(calculator, 'compute');
+// 结果: 20 (this.multiplier 被正确引用)
+```
+
+#### 参数
 
 - `object` (`any`): 要查询的对象。
-- `path` (`PropertyKey | PropertyKey[]`): 要获取的属性的路径。
-- `defaultValue` (`R | ((...args: any[]) => R`, 可选): 如果解析后的值是`undefined`，则返回的值。
+- `path` (`PropertyPath`): 要获取的属性路径。可以是字符串、数组或键的数组。
+- `defaultValue` (`R | ((...args: any[]) => R)`, 可选): 当值为 `undefined` 时返回的默认值。如果是函数,则调用并返回结果。
 
-### 返回值
+#### 返回值
 
-(`R`): 返回解析后的值。
-
-## 示例
-
-```typescript
-const obj = { a: { b: { c: 3 } } };
-result(obj, 'a.b.c');
-// => 3
-
-const obj = { a: () => 5 };
-result(obj, 'a');
-// => 5 (calls the function `a` and returns its result)
-
-const obj = { a: { b: null } };
-result(obj, 'a.b.c', 'default');
-// => 'default'
-
-const obj = { a: { b: { c: 3 } } };
-result(obj, 'a.b.d', () => 'default');
-// => 'default'
-```
+(`R`): 返回解析的值。路径上的函数会被调用,如果最终值也是函数,则返回调用后的结果。

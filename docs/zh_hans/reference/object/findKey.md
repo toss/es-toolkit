@@ -1,79 +1,88 @@
 # findKey
 
-查找对象中满足所提供的测试函数的第一个元素的键。
-
-## 签名
+查找满足给定条件的第一个元素的键。
 
 ```typescript
-function findKey<T extends Record<any, any>>(
-  obj: T,
-  predicate: (value: T[keyof T], key: keyof T, obj: T) => boolean
-): keyof T | undefined;
+const key = findKey(obj, predicate);
 ```
 
-### 参数
+## 用法
 
-- `obj` (`T extends Record<any, any>`): 要搜索的对象。
-- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 对对象中的每个值执行的函数。
+### `findKey(obj, predicate)`
 
-### 返回
-
-(`keyof T | undefined`): 对象中满足所提供的测试功能的第一个元素的键，如果没有元素通过测试，则为未定义。
-
-## 示例
+当您想在对象中查找满足特定条件的第一个元素的键时,请使用 `findKey`。它返回条件函数返回 `true` 的第一个值的键。
 
 ```typescript
+import { findKey } from 'es-toolkit/object';
+
+// 查找年龄小于 30 的第一个用户
 const users = {
-  pebbles: { age: 24, active: true },
-  barney: { age: 36, active: true },
-  fred: { age: 40, active: false },
+  alice: { age: 25, active: true },
+  bob: { age: 30, active: false },
+  charlie: { age: 35, active: true },
 };
 
-findKey(users, o => o.age < 40); // 'pebbles'
-findKey(users, o => o.age > 50); // undefined
+const youngUserKey = findKey(users, user => user.age < 30);
+console.log(youngUserKey); // 'alice'
+
+// 查找非活跃用户
+const inactiveUserKey = findKey(users, user => !user.active);
+console.log(inactiveUserKey); // 'bob'
+
+// 没有满足条件的元素
+const seniorUserKey = findKey(users, user => user.age > 50);
+console.log(seniorUserKey); // undefined
 ```
 
-## Lodash 兼容性
-
-从 `es-toolkit/compat` 导入 `findKey` 以实现与 lodash 的完全兼容。
-
-您可以通过多种方式指定查找键的条件。
-
-- **谓词函数**：对每个元素执行谓词函数。返回第一个返回 `true` 的元素的键。
-- **部分对象**：返回与给定对象部分匹配的元素的键。
-- **属性-值对**：返回具有指定属性和值匹配的元素的键。
-- **属性名**：返回指定属性评估为真的元素的键。
-
-### 签名
+条件函数接收当前值、键和整个对象。
 
 ```typescript
-function findKey<T>(obj: T, conditionToFind: (value: T[keyof T], key: string, obj: T) => boolean): string | undefined;
-function findKey<T>(obj: T, objectToFind: Partial<T[keyof T]>): string | undefined;
-function findKey<T>(obj: T, propertyToFind: [PropertyKey, any]): string | undefined;
-function findKey<T>(obj: T, propertyToFind: PropertyKey): string | undefined;
-function findKey<T>(
-  obj: T | null | undefined,
-  predicate?:
-    | ((value: T[keyof T], key: string, obj: T) => unknown)
-    | PropertyKey
-    | [PropertyKey, any]
-    | Partial<T[keyof T]>
-): string | undefined;
+const data = {
+  item1: { priority: 'high', status: 'pending' },
+  item2: { priority: 'low', status: 'done' },
+  item3: { priority: 'high', status: 'done' },
+};
+
+// 同时考虑键名和值的搜索
+const result = findKey(data, (value, key, obj) => {
+  return key.includes('2') && value.status === 'done';
+});
+console.log(result); // 'item2'
 ```
 
-### 示例
+也可以用于复杂的对象结构。
 
 ```typescript
-const users = { barney: { age: 36 }, fred: { age: 40 } };
+const products = {
+  laptop: {
+    specs: { ram: 16, cpu: 'Intel i7' },
+    price: 1200,
+    available: true,
+  },
+  phone: {
+    specs: { ram: 8, cpu: 'Snapdragon' },
+    price: 800,
+    available: false,
+  },
+  tablet: {
+    specs: { ram: 12, cpu: 'Apple M1' },
+    price: 1000,
+    available: true,
+  },
+};
 
-findKey(users, o => o.age < 40);
-// => 'barney'
-findKey(users, { age: 36 });
-// => 'barney'
-findKey(users, ['age', 36]);
-// => 'barney'
+const affordableKey = findKey(products, product => product.price < 1000 && product.available);
+console.log(affordableKey); // undefined (没有满足条件的产品)
 
-const languages = { javascript: { active: false }, typescript: { active: true } };
-findKey(languages, 'active');
-// => 'typescript'
+const highRamKey = findKey(products, product => product.specs.ram >= 12);
+console.log(highRamKey); // 'laptop'
 ```
+
+#### 参数
+
+- `obj` (`T extends Record<any, any>`): 要搜索的对象。
+- `predicate` (`(value: T[keyof T], key: keyof T, obj: T) => boolean`): 对每个元素执行的条件函数。查找返回 `true` 的第一个元素的键。
+
+#### 返回值
+
+(`keyof T | undefined`): 满足条件的第一个元素的键。如果没有满足条件的元素,则返回 `undefined`。

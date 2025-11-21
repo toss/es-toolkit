@@ -1,39 +1,58 @@
-# endsWith
+# endsWith (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 JavaScript 的 `String.prototype.endsWith`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于处理 `null` 或 `undefined`,此 `endsWith` 函数运行较慢。
+
+请改用更快、更现代的 JavaScript 的 `String.prototype.endsWith`。
 
 :::
 
-检查字符串是否在其末尾包含另一个字符串。
-
-检查一个字符串是否以另一个字符串结尾。可以选择一个可选的位置参数在这个位置之前进行搜索。
-
-## 签名
+检查字符串是否以指定的字符串结尾。
 
 ```typescript
-function endsWith(str?: string, target?: string, position?: number): boolean;
+const result = endsWith(str, target);
 ```
 
-### 参数
+## 用法
 
-- `str` (`string`): 要搜索的字符串。
-- `target` (`string`): 应该包含在末尾的字符串。
-- `position` (`number`, 可选): 搜索到这个字符位置。
+### `endsWith(str, target, position?)`
 
-### 返回值
-
-(`boolean`): `str` 字符串是否以 `target` 字符串结尾。
-
-## 示例
+当您想检查字符串是否以特定字符串结尾时,请使用 `endsWith`。您还可以指定搜索的位置。
 
 ```typescript
 import { endsWith } from 'es-toolkit/compat';
 
-endsWith('fooBar', 'foo'); // 返回 false
-endsWith('fooBar', 'Bar'); // 返回 true
-endsWith('fooBar', 'abcdef'); // 返回 false
-endsWith('fooBar', 'foo', 3); // 返回 true
+// 检查字符串结尾
+endsWith('fooBar', 'Bar');
+// Returns: true
+
+endsWith('fooBar', 'foo');
+// Returns: false
+
+// 检查到特定位置
+endsWith('fooBar', 'foo', 3);
+// Returns: true (检查前3个字符'foo'是否以'foo'结尾)
 ```
+
+`null` 或 `undefined` 返回 `false`。
+
+```typescript
+import { endsWith } from 'es-toolkit/compat';
+
+endsWith(null, 'test');
+// Returns: false
+
+endsWith('test', null);
+// Returns: false
+```
+
+#### 参数
+
+- `str` (`string`,可选): 要搜索的字符串。
+- `target` (`string`,可选): 要在末尾查找的字符串。
+- `position` (`number`,可选): 结束搜索的位置。默认为字符串的完整长度。
+
+#### 返回值
+
+(`boolean`): 如果字符串以指定字符串结尾则返回 `true`,否则返回 `false`。

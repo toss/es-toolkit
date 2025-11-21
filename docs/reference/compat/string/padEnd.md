@@ -1,36 +1,59 @@
-# padEnd
+# padEnd (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use JavaScript's `String.prototype.padEnd`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `padEnd` function operates slower due to handling non-string values.
+
+Instead, use the faster and more modern JavaScript's `String.prototype.padEnd`.
+
 :::
 
-Pads the end of a string with a given character until it reaches the specified length.
-
-If the length is less than or equal to the original string's length, or if the padding character is an empty string,
-the original string is returned unchanged.
-
-## Signature
+Pads the end of a string to extend it to the specified length.
 
 ```typescript
-function padEnd(str?: string, length = 0, chars = ' '): string;
+const padded = padEnd(str, length, chars);
 ```
 
-### Parameters
+## Usage
 
-- `str` (`string`): The string to pad.
-- `length` (`number`): The length of the resulting string. Defaults to `0`.
-- `char` (`string`): The character to pad the string with. Defaults to `' '`.
+### `padEnd(str, length?, chars?)`
 
-### Returns
+Use `padEnd` when you want to pad the end of a string to match a desired length.
 
-(`string`): Returns a new string padded with the specified character until it reaches the specified length.
+```typescript
+import { padEnd } from 'es-toolkit/compat';
 
-## Examples
+// Pad with spaces
+padEnd('abc', 6);
+// Returns: 'abc   '
 
-```javascript
-padEnd('hello', 10, 'a'); // 'helloaaaaa'
-padEnd('hello', 3, 'a'); // 'hello'
-padEnd('hello', 5, ''); // 'hello'
+// Pad with specific characters
+padEnd('abc', 6, '_-');
+// Returns: 'abc_-_'
+
+// Return as is if original length is longer
+padEnd('abc', 3);
+// Returns: 'abc'
 ```
+
+`null` or `undefined` are treated as empty strings.
+
+```typescript
+import { padEnd } from 'es-toolkit/compat';
+
+padEnd(null, 5, '*');
+// Returns: '*****'
+
+padEnd(undefined, 3);
+// Returns: '   '
+```
+
+#### Parameters
+
+- `str` (`string`, optional): The string to add padding to.
+- `length` (`number`, optional): The desired final string length. Defaults to `0`.
+- `chars` (`string`, optional): The character to use for padding. Defaults to `' '` (space).
+
+#### Returns
+
+(`string`): Returns the string with padding added to the end.

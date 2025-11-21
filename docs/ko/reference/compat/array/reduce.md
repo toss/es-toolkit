@@ -1,74 +1,60 @@
-# reduce
+# reduce (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.reduce`나 `Object.values`와 `reduce`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `reduce` 함수는 복잡한 타입 처리와 다양한 입력 형태 지원으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.reduce` 메서드나 객체의 경우 `Object.values`와 함께 사용하세요.
+
 :::
 
-리듀서 함수를 사용해서 배열 또는 객체를 하나의 값으로 줄여요.
-
-배열의 요소 또는 객체의 값을 하나씩 순회하면서, "리듀서"라고 불리는 특별한 함수를 적용해요.
-이전 단계의 결과와 현재 요소를 사용해서 계산을 수행해요.
-모든 요소를 순회한 다음 최종 결과를 반환해요.
-
-`reduce()` 함수가 시작될 때 사용할 이전 단계의 결과가 없어요.
-초기 값을 제공하면 그 값으로 시작해요.
-초기 값을 제공하지 않으면 배열의 첫 번째 요소나 객체의 첫 번째 값을 사용하고, 두 번째 요소나 값부터 계산을 시작해요.
-
-## 인터페이스
+배열이나 객체를 하나의 값으로 줄여요.
 
 ```typescript
-function reduce<T, U>(
-  collection: T[],
-  iteratee: (accumulator: U, value: T, index: number, collection: T[]) => U,
-  initialValue: U
-): U;
-function reduce<T>(collection: T[], iteratee: (accumulator: T, value: T, index: number, collection: T[]) => T): T;
-
-function reduce<T, U>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: U, value: T, index: number, collection: ArrayLike<T>) => U,
-  initialValue: U
-): U;
-function reduce<T>(
-  collection: ArrayLike<T>,
-  iteratee: (accumulator: T, value: T, index: number, collection: ArrayLike<T>) => T
-): T;
-
-function reduce<T extends object, U>(
-  collection: T,
-  iteratee: (accumulator: U, value: T[keyof T], key: keyof T, collection: T) => U,
-  initialValue: U
-): U;
-function reduce<T extends object>(
-  collection: T,
-  iteratee: (accumulator: T[keyof T], value: T[keyof T], key: keyof T, collection: T) => T[keyof T]
-): T[keyof T];
+const result = reduce(collection, iteratee, initialValue);
 ```
 
-### 파라미터
+## 사용법
 
-- `collection` (`T[] | ArrayLike<T> | Record<PropertyKey, T> | null | undefined`): 반복할 컬렉션.
-- `iteratee` (`((accumulator: U, value: T, index: PropertyKey, collection: any) => any) | PropertyKey | object`): 반복할 때 호출되는 함수.
-- `initialValue` (`U`, 선택 사항): 초기 값.
+### `reduce(collection, iteratee, initialValue)`
 
-### 반환 값
-
-(`U`): 하나의 값으로 줄여진 결과. `initialValue`를 제공하지 않은 경우 컬렉션의 원소 타입(`T`)이 반환돼요.
-
-## 예시
+배열이나 객체의 모든 요소를 하나씩 순회하면서 누적값을 계산하세요. 초기 값을 제공하면 그 값부터 시작하고, 그렇지 않으면 첫 번째 요소부터 시작해요.
 
 ```typescript
-// Using a reducer function
-const array = [1, 2, 3];
-reduce(array, (acc, value) => acc + value, 0); // => 6
+import { reduce } from 'es-toolkit/compat';
 
-// Using a reducer function with initialValue
-const array = [1, 2, 3];
-reduce(array, (acc, value) => acc + value % 2 === 0, true); // => false
+// 배열의 합계 구하기
+const numbers = [1, 2, 3, 4];
+const sum = reduce(numbers, (acc, value) => acc + value, 0);
+console.log(sum); // 10
 
-// Using an object as the collection
-const obj = { a: 1, b: 2, c: 3 };
-reduce(obj, (acc, value) => acc + value, 0); // => 6
+// 객체 값들의 합계 구하기
+const scores = { math: 95, english: 87, science: 92 };
+const totalScore = reduce(scores, (acc, value) => acc + value, 0);
+console.log(totalScore); // 274
 ```
+
+초기 값을 제공하지 않으면 첫 번째 요소가 초기 값이 되고 두 번째 요소부터 순회해요.
+
+```typescript
+import { reduce } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4];
+const sum = reduce(numbers, (acc, value) => acc + value);
+console.log(sum); // 10 (1 + 2 + 3 + 4)
+
+// 빈 배열이면 undefined가 반환돼요
+const empty = [];
+const result = reduce(empty, (acc, value) => acc + value);
+console.log(result); // undefined
+```
+
+#### 파라미터
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 순회할 배열이나 객체예요.
+- `iteratee` (`(accumulator: any, value: any, index: PropertyKey, collection: any) => any`): 각 요소에 대해 호출할 함수예요. 누적값, 현재 값, 인덱스/키, 원본 배열/객체를 받아요.
+- `initialValue` (`any`, 선택): 누적값의 초기 값이에요. 제공하지 않으면 첫 번째 요소가 초기 값이 돼요.
+
+#### 반환 값
+
+(`any`): 모든 요소를 처리한 후의 최종 누적값을 반환해요.

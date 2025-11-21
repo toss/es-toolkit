@@ -1,35 +1,44 @@
 # flatMapDeep
 
-将嵌套数组的每个元素映射到给定的迭代函数，然后展开并平铺所有层级。
-
-其工作方式与在 JavaScript 语言中调用 [Array#flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) 和 [Array#map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 时相同，即 `map(iteratee).flat(Infinity)`，但速度更快。
-
-## 签名
+将数组的每个元素转换为函数返回的值,然后完全扁平化所有深度,返回一个新数组。
 
 ```typescript
-function flattenDeep<T>(arr: T[]): Array<ExtractNestedArrayType<T>>;
+const result = flatMapDeep(arr, iteratee);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`): 要展平的数组。
-- `iteratee` (`T[]`): 映射每个数组元素的函数。
+### `flatMapDeep(arr, iteratee)`
 
-### 返回值
-
-(`Array<ExtractNestedArrayType<T>>`): 一个新数组，其中每个元素都已映射并展平到所需的深度。
-
-## 示例
+当您想在转换数组的每个元素的同时完全扁平化所有嵌套数组时,请使用 `flatMapDeep`。首先对每个元素应用函数,然后将结果数组扁平化到所有深度。
 
 ```typescript
-const array = [1, 2, 3];
+import { flatMapDeep } from 'es-toolkit/array';
 
-const result1 = flatMapDeep(array, item => [item, item]);
-// Return [1, 1, 2, 2, 3, 3]
-
-const result2 = flatMapDeep(array, item => [[item, item]]);
-// Return [1, 1, 2, 2, 3, 3]
-
-const result3 = flatMapDeep(array, item => [[[item, item]]]);
-// Return [1, 1, 2, 2, 3, 3]
+// 将每个元素复制两次后完全扁平化
+const result1 = flatMapDeep([1, 2, 3], item => [item, item]);
+// Returns: [1, 1, 2, 2, 3, 3]
 ```
+
+无论嵌套多深的数组都会完全扁平化。
+
+```typescript
+import { flatMapDeep } from 'es-toolkit/array';
+
+// 嵌套数组也会完全扁平化
+const result = flatMapDeep([1, 2, 3], item => [[item, item]]);
+// Returns: [1, 1, 2, 2, 3, 3]
+
+// 多层嵌套也会全部扁平化
+const result2 = flatMapDeep([1, 2, 3], item => [[[item, item]]]);
+// Returns: [1, 1, 2, 2, 3, 3]
+```
+
+#### 参数
+
+- `arr` (`T[]`): 要转换的数组。
+- `iteratee` (`(item: T) => U`): 转换每个数组元素的函数。
+
+#### 返回值
+
+(`Array<ExtractNestedArrayType<U>>`): 返回每个元素被转换并完全扁平化所有深度的新数组。

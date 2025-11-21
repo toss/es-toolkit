@@ -1,36 +1,62 @@
-# multiply
+# multiply (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `*` operator
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `multiply` function works slowly due to additional function calls.
+
+Use the faster and simpler `*` operator instead.
+
 :::
 
-Multiply two numbers.
-
-If either value is `NaN`, it returns `NaN`.
-
-## Signature
+Multiplies two numbers.
 
 ```typescript
-function multiply(value: number, other: number): number;
+const result = multiply(value, other);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`number`): The first number in a multiplication.
-- `other` (`number`): The second number in a multiplication.
+### `multiply(value, other)`
 
-### Returns
-
-(`number`): Returns the product of `value` and `other`. If either parameter is `NaN`, it returns `NaN`.
-
-## Examples
+Use `multiply` when you want to multiply two numbers.
 
 ```typescript
-multiply(2, 3); // Returns 6.
-multiply(2, -3); // Returns -6.
-multiply(NaN, 3); // Returns NaN because value is NaN.
-multiply(2, NaN); // Returns NaN because other is NaN.
-multiply(NaN, NaN); // Returns NaN because both arguments are NaN.
+import { multiply } from 'es-toolkit/compat';
+
+// Basic multiplication
+multiply(2, 3);
+// Returns: 6
+
+multiply(4, 5);
+// Returns: 20
+
+// Negative number handling
+multiply(2, -3);
+// Returns: -6
+
+multiply(-4, -5);
+// Returns: 20
+
+// Decimal number handling
+multiply(2.5, 4);
+// Returns: 10
+
+// NaN handling
+multiply(NaN, 3);
+// Returns: NaN
+
+multiply(2, NaN);
+// Returns: NaN
+
+multiply(NaN, NaN);
+// Returns: NaN
 ```
+
+#### Parameters
+
+- `value` (`number`): The first number in the multiplication.
+- `other` (`number`): The second number in the multiplication.
+
+#### Returns
+
+(`number`): Returns the result of multiplying the two numbers. If either is NaN, returns NaN.

@@ -31,6 +31,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '홈', link: '/ko' },
     { text: '소개', link: '/ko/intro' },
     { text: '레퍼런스', link: '/ko/reference/array/at' },
+    { text: 'Lodash 호환성', link: '/ko/reference/compat/array/castArray' },
   ];
 }
 
@@ -43,7 +44,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: '설치 및 사용 방법', link: '/ko/usage' },
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
-        { text: 'Lodash와 호환성', link: '/ko/compatibility' },
+        { text: 'Lodash 호환성', link: '/ko/compatibility' },
       ],
     },
     {
@@ -51,68 +52,95 @@ function sidebar(): DefaultTheme.Sidebar {
       items: sortByText([
         {
           text: '배열',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'array'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'array'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'array'),
         },
         {
           text: '함수',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'function'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'function'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'function'),
         },
         {
           text: '숫자',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'math'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'math'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'math'),
         },
         {
           text: '객체',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'object'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'object'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'object'),
         },
         {
           text: '타입 가드',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'predicate'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'predicate'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'predicate'),
         },
         {
           text: 'Promise',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'promise'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'promise'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'promise'),
         },
         {
           text: '문자열',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'string'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'string'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'string'),
         },
         {
           text: '유틸리티',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'util'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'util'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'util'),
         },
         {
           text: '에러',
-          items: [
-            ...getSidebarItems(docsRoot, 'ko', 'reference', 'error'),
-            ...getSidebarItems.compat('ko', docsRoot, 'ko', 'reference', 'compat', 'error'),
-          ],
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'error'),
         },
       ]),
+    },
+    {
+      text: 'Lodash 호환성',
+      items: [
+        {
+          text: '레퍼런스',
+          items: sortByText([
+            {
+              text: '배열',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'array'),
+            },
+            {
+              text: '함수',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'function'),
+            },
+            {
+              text: '숫자',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'math'),
+            },
+            {
+              text: '객체',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'object'),
+            },
+            {
+              text: '타입 가드',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'predicate'),
+            },
+            {
+              text: '문자열',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'string'),
+            },
+            {
+              text: '유틸리티',
+              collapsed: true,
+              items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'util'),
+            },
+          ]),
+        },
+      ],
     },
   ];
 }

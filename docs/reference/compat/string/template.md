@@ -1,72 +1,112 @@
-# template
+# template (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use JavaScript template literals
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `template` function operates slowly due to complex string processing.
+
+Use faster and more modern JavaScript template literals instead.
+
 :::
 
-Compiles a template string into a function that can interpolate data properties.
-
-This function allows you to create a template with custom delimiters for escaping,
-evaluating, and interpolating values. It can also handle custom variable names and
-imported functions.
-
-## Signature
+Creates a function that interpolates values into a string template to generate a new string.
 
 ```typescript
-function template(string: string, options?: TemplateOptions): ((data?: object) => string) & { source: string };
+const compiled = template(templateString);
 ```
 
-### Parameters
+## Usage
+
+### `template(string, options?)`
+
+Use `template` when you want to interpolate data into a string template to create a completed string. You can safely escape values, interpolate them as-is, or execute JavaScript code.
+
+Basic usage allows you to interpolate or escape values.
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// Interpolate values as-is
+const compiled = template('<%= value %>');
+compiled({ value: 'Hello, World!' });
+// Returns: 'Hello, World!'
+
+// Safely escape HTML
+const safeCompiled = template('<%- value %>');
+safeCompiled({ value: '<script>alert("xss")</script>' });
+// Returns: '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
+```
+
+You can also execute JavaScript code.
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// Using conditional statements
+const compiled = template('<% if (user) { %>Hello <%= user %>!<% } %>');
+compiled({ user: 'es-toolkit' });
+// Returns: 'Hello es-toolkit!'
+
+// Using loops
+const listTemplate = template('<% users.forEach(function(user) { %><li><%= user %></li><% }); %>');
+listTemplate({ users: ['Alice', 'Bob', 'Charlie'] });
+// Returns: '<li>Alice</li><li>Bob</li><li>Charlie</li>'
+```
+
+You can specify variable names for safer usage.
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+const compiled = template('<%= data.name %> is <%= data.age %> years old', {
+  variable: 'data',
+});
+compiled({ name: 'Alice', age: 25 });
+// Returns: 'Alice is 25 years old'
+```
+
+You can import and use external functions.
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+const compiled = template('<%= _.toUpper(message) %>', {
+  imports: { _: { toUpper: str => str.toUpperCase() } },
+});
+compiled({ message: 'hello world' });
+// Returns: 'HELLO WORLD'
+```
+
+You can also create custom delimiters.
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// Interpolate with custom delimiters
+const compiled = template('{{ message }}', {
+  interpolate: /\{\{([\s\S]+?)\}\}/g,
+});
+compiled({ message: 'Hello!' });
+// Returns: 'Hello!'
+
+// Escape with custom delimiters
+const safeCompiled = template('[- html -]', {
+  escape: /\[-([\s\S]+?)-\]/g,
+});
+safeCompiled({ html: '<div>content</div>' });
+// Returns: '&lt;div&gt;content&lt;/div&gt;'
+```
+
+#### Parameters
 
 - `string` (`string`): The template string.
-- `options.escape` (`RegExp`): The regular expression for "escape" delimiter.
-- `options.evaluate` (`RegExp`): The regular expression for "evaluate" delimiter.
-- `options.interpolate` (`RegExp`): The regular expression for "interpolate" delimiter.
-- `options.variable` (`string`): The data object variable name.
-- `options.imports` (`Record<string, unknown>`): The object of imported functions.
-- `options.sourceURL` (`string`): The source URL of the template.
+- `options` (`object`, optional): Configuration object.
+  - `options.escape` (`RegExp`, optional): Regular expression delimiter for HTML escaping. Default is `<%-([\s\S]+?)%>`.
+  - `options.evaluate` (`RegExp`, optional): Regular expression delimiter for executing JavaScript code. Default is `<%([\s\S]+?)%>`.
+  - `options.interpolate` (`RegExp`, optional): Regular expression delimiter for value interpolation. Default is `<%=([\s\S]+?)%>`.
+  - `options.variable` (`string`, optional): Variable name for the data object.
+  - `options.imports` (`object`, optional): Functions to be used in the template.
+  - `options.sourceURL` (`string`, optional): Source URL for debugging purposes.
 
-### Returns
+#### Returns
 
-(`((data?: object) => string) & { source: string }`): The returned function can be called and includes a `source` property containing the compiled template source code.
-
-## Examples
-
-```typescript
-// Use the "escape" delimiter to escape data properties.
-const compiled = template('<%- value %>');
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
-
-// Use the "interpolate" delimiter to interpolate data properties.
-const compiled = template('<%= value %>');
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
-
-// Use the "evaluate" delimiter to evaluate JavaScript code.
-const compiled = template('<% if (value) { %>Yes<% } else { %>No<% } %>');
-compiled({ value: true }); // returns 'Yes'
-
-// Use the "variable" option to specify the data object variable name.
-const compiled = template('<%= data.value %>', { variable: 'data' });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
-
-// Use the "imports" option to import functions.
-const compiled = template('<%= _.toUpper(value) %>', { imports: { _: { toUpper } } });
-compiled({ value: 'hello, world!' }); // returns 'HELLO, WORLD!'
-
-// Use the custom "escape" delimiter.
-const compiled = template('<@ value @>', { escape: /<@([\s\S]+?)@>/g });
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
-
-// Use the custom "evaluate" delimiter.
-const compiled = template('<# if (value) { #>Yes<# } else { #>No<# } #>', { evaluate: /<#([\s\S]+?)#>/g });
-compiled({ value: true }); // returns 'Yes'
-
-// Use the custom "interpolate" delimiter.
-const compiled = template('<$ value $>', { interpolate: /<\$([\s\S]+?)\$>/g });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
-
-// Use the "sourceURL" option to specify the source URL of the template.
-const compiled = template('hello <%= user %>!', { sourceURL: 'template.js' });
-```
+(`TemplateExecutor`): A function that takes a data object and returns the completed string. The generated function code can also be accessed via the `source` property.

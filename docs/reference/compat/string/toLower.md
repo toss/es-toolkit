@@ -1,36 +1,63 @@
-# toLower
+# toLower (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use JavaScript's `String.prototype.toLowerCase`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `toLower` function operates slowly due to handling non-string values.
+
+Use JavaScript's `String.prototype.toLowerCase` instead, which is faster and more modern.
+
 :::
 
-Converts the given value to a string and transforms it to lower case. The function can handle various input types by first converting them to strings.
-
-## Signature
+Converts a value to a string and then transforms it to lowercase.
 
 ```typescript
-function toLower<T extends string = string>(value?: T): Lowercase<T>;
+const lowercased = toLower(value);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`T`): The value to convert.
+### `toLower(value?)`
 
-### Returns
-
-(`Lowercase<T>`): Returns the lower cased string.
-
-## Examples
+Use `toLower` when you want to convert a value to a lowercase string. It first converts any type of value to a string and then transforms it to lowercase.
 
 ```typescript
+import { toLower } from 'es-toolkit/compat';
+
+// Convert string to lowercase
 toLower('--FOO-BAR--');
-// => '--foo-bar--'
+// Returns: '--foo-bar--'
+
+toLower('Hello World');
+// Returns: 'hello world'
+
+// Convert number
+toLower(123);
+// Returns: '123'
+
+// Convert array
+toLower([1, 2, 3]);
+// Returns: '1,2,3'
+```
+
+`null` or `undefined` are treated as empty strings.
+
+```typescript
+import { toLower } from 'es-toolkit/compat';
 
 toLower(null);
-// => ''
+// Returns: ''
 
-toLower([1, 2, 3]);
-// => '1,2,3'
+toLower(undefined);
+// Returns: ''
+
+toLower();
+// Returns: ''
 ```
+
+#### Parameters
+
+- `value` (`unknown`, optional): The value to convert to lowercase.
+
+#### Returns
+
+(`string`): Returns the lowercased string.

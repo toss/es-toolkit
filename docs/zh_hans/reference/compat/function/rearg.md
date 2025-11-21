@@ -1,35 +1,97 @@
-# rearg
+# rearg (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用箭头函数
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `rearg` 函数创建了一个复杂的包装器来重新排列参数顺序,这可能会导致性能下降。通过使用箭头函数直接重新排列参数顺序,您可以编写更清晰、更快的代码。
+
+请改用更快、更现代的箭头函数。
 
 :::
 
-创建一个函数，该函数根据指定的 `indexes` 重新排列参数来调用 `func`，其中第一个索引位置的参数值作为第一个参数，第二个索引位置的参数值作为第二个参数，依此类推。
-
-## 签名
+创建一个新函数,按指定顺序重新排列原函数的参数。
 
 ```typescript
-function rearg(func: (...args: any[]) => any, ...indices: Array<number | number[]>): (...args: any[]) => any;
+const rearranged = rearg(func, ...indices);
 ```
 
-### 参数
+## 用法
 
-- `func` (`(...args: any[]) => any`): 用于重新排列参数的函数。
-- `indexes` (`Array<number | number[]>`): 排列后的参数索引。
+### `rearg(func, ...indices)`
 
-### 返回值
-
-(`(...args: any[]) => any`): 返回新的函数。
-
-## 示例
+当您想在调用函数时更改参数顺序时,请使用 `rearg`。它会按照指定的索引顺序重新排列参数,然后调用原函数。
 
 ```typescript
 import { rearg } from 'es-toolkit/compat';
 
-const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
+const greet = (greeting, name) => `${greeting}, ${name}!`;
+
+// 交换参数顺序(第1个,第0个)
 const rearrangedGreet = rearg(greet, 1, 0);
-console.log(rearrangedGreet('World', 'Hello')); // Output: "Hello, World!"
+rearrangedGreet('World', 'Hello');
+// 返回值: "Hello, World!"
+
+// 原函数保持不变
+greet('Hello', 'World');
+// 返回值: "Hello, World!"
 ```
+
+您也可以将索引作为数组传递。
+
+```typescript
+import { rearg } from 'es-toolkit/compat';
+
+const fn = (a, b, c) => [a, b, c];
+
+// 使用数组指定索引
+const rearranged = rearg(fn, [2, 0, 1]);
+rearranged('a', 'b', 'c');
+// 返回值: ['c', 'a', 'b']
+```
+
+您可以只重新排列部分参数,其余参数保持原样。
+
+```typescript
+import { rearg } from 'es-toolkit/compat';
+
+const fn = (a, b, c, d) => [a, b, c, d];
+
+// 只重新排列前两个参数
+const rearranged = rearg(fn, 1, 0);
+rearranged('first', 'second', 'third', 'fourth');
+// 返回值: ['second', 'first', 'third', 'fourth']
+```
+
+不存在的索引会被处理为 `undefined`。
+
+```typescript
+import { rearg } from 'es-toolkit/compat';
+
+const fn = (a, b, c) => [a, b, c];
+
+// 包含不存在的索引 5
+const rearranged = rearg(fn, 5, 1, 0);
+rearranged('a', 'b', 'c');
+// 返回值: [undefined, 'b', 'a']
+```
+
+嵌套数组也会被展平处理。
+
+```typescript
+import { rearg } from 'es-toolkit/compat';
+
+const fn = (a, b, c, d) => [a, b, c, d];
+
+// 嵌套数组索引
+const rearranged = rearg(fn, [1, [2, 0]], 3);
+rearranged('a', 'b', 'c', 'd');
+// 返回值: ['b', 'c', 'a', 'd']
+```
+
+#### 参数
+
+- `func` (`(...args: any[]) => any`): 要重新排列参数的函数。
+- `...indices` (`Array<number | number[]>`): 要重新排列的参数索引。也支持嵌套数组。
+
+#### 返回值
+
+(`(...args: any[]) => any`): 返回参数已重新排列的新函数。

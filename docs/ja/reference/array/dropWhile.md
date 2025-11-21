@@ -1,75 +1,51 @@
 # dropWhile
 
-配列の先頭から始めて、条件関数が`false`を返すまで要素を削除します。
-
-この関数は配列の各要素を順に処理し、配列の先頭から条件関数が`false`を返すまで要素を削除します。
-残りの要素で構成される新しい配列を返します。
-
-## インターフェース
+配列の先頭から条件を満たす間、要素を除去した新しい配列を返します。
 
 ```typescript
-function dropWhile<T>(arr: T[], canContinueDropping: (item: T, index: number, arr: T[]) => boolean): T[];
+const result = dropWhile(arr, canContinueDropping);
 ```
 
-### パラメータ
+## 使用法
 
-- `arr` (`T[]`): 要素を削除する配列。
-- `canContinueDropping` (`(item: T, index: number, arr: T[]) => boolean`): 要素の削除を続けるかどうかを返す条件関数です。各要素、そのインデックス、および配列とともに呼び出され、`true`を返す間は要素を削除します。
+### `dropWhile(arr, canContinueDropping)`
 
-### 戻り値
-
-(`T[]`): 条件関数が`false`を返すまでの残りの要素で構成される新しい配列。
-
-## 例
+配列の先頭から特定の条件を満たす要素を除去したい場合は `dropWhile` を使用してください。配列の先頭から条件関数が `true` を返す間、要素を除去し、条件関数が `false` を返すと停止します。
 
 ```typescript
-const array = [1, 2, 3, 2, 4, 5];
-const result = dropWhile(array, x => x < 3);
-// 3未満の要素が見つかるまで要素を削除するので、結果は[3, 2, 4, 5]になります。
+import { dropWhile } from 'es-toolkit/array';
+
+// 先頭から3より小さい要素を除去します。
+const numbers = [1, 2, 3, 4, 2, 5];
+dropWhile(numbers, x => x < 3);
+// Returns: [3, 4, 2, 5]
+// 1と2が条件を満たして除去され、3で条件がfalseになって停止します。
+
+// オブジェクト配列から特定条件の要素を除去します。
+const users = [
+  { name: 'Alice', active: false },
+  { name: 'Bob', active: false },
+  { name: 'Charlie', active: true },
+  { name: 'David', active: true },
+];
+dropWhile(users, user => !user.active);
+// Returns: [{ name: 'Charlie', active: true }, { name: 'David', active: true }]
 ```
 
-## Lodash 互換性
-
-`es-toolkit/compat` から `dropWhile` をインポートすると、Lodash と互換になります。
-配列から要素を削除する条件を、さまざまな方法で指定できます。
-
-- **検査関数**: 各要素に対して検査する関数を実行します。最初に`false`を返す要素が見つかるまで要素を削除します。
-- **部分オブジェクト**: 指定されたオブジェクトと部分的に一致しない要素が見つかるまで要素を削除します。
-- **プロパティ-値ペア**: 指定されたプロパティと値が一致しない要素が見つかるまで要素を削除します。
-- **プロパティ名**: 指定されたプロパティに対して偽と評価される値が見つかるまで要素を削除します。
-
-### インターフェース
+空の配列または条件を満たす要素がない場合、元の配列と同じ新しい配列を返します。
 
 ```typescript
-function dropWhile<T>(
-  arr: ArrayLike<T> | null | undefined,
-  canContinueDropping: (item: T, index: number, arr: T[]) => unknown
-): T[];
-function dropWhile<T>(arr: ArrayLike<T> | null | undefined, objectToDrop: Partial<T>): T[];
-function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: [keyof T, unknown]): T[];
-function dropWhile<T>(arr: ArrayLike<T> | null | undefined, propertyToDrop: PropertyKey): T[];
+import { dropWhile } from 'es-toolkit/array';
+
+dropWhile([1, 2, 3], x => x > 5); // [1, 2, 3]
+dropWhile([], x => true); // []
 ```
 
-### 例
+#### パラメータ
 
-```typescript
-// 検査関数を使用した例
-const array1 = [1, 2, 3, 4, 5];
-const result1 = dropWhile(array1, x => x < 3);
-// result1 は [3, 4, 5] になります。3未満の要素が削除されるためです。
+- `arr` (`T[]`): 要素を除去する配列です。
+- `canContinueDropping` (`(item: T, index: number, arr: T[]) => boolean`): 要素を除去し続けるかを決定する条件関数です。配列の各要素とインデックス、配列全体を受け取り、真または偽を返します。
 
-// 部分オブジェクトを使用した例
-const array2 = [{ a: 1 }, { a: 2 }, { a: 3 }];
-const result2 = dropWhile(array2, { a: 1 });
-// result2 は [{ a: 2 }, { a: 3 }] になります。最初のオブジェクトが提供されたオブジェクトのプロパティと一致するためです。
+#### 戻り値
 
-// プロパティ-値ペアを使用した例
-const array3 = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const result3 = dropWhile(array3, ['id', 1]);
-// result3 は [{ id: 2 }, { id: 3 }] になります。最初のオブジェクトが id プロパティの値 1 と一致するためです。
-
-// プロパティ名を使用した例
-const array4 = [{ isActive: true }, { isActive: true }, { isActive: false }];
-const result4 = dropWhile(array4, 'isActive');
-// result4 は [{ isActive: false }] になります。偽の isActive プロパティを持つ要素が見つかるまで要素が削除されるためです。
-```
+(`T[]`): 条件を満たさない要素から配列の末尾までを含む新しい配列です。

@@ -1,41 +1,86 @@
-# forEach
+# forEach (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Array.prototype.forEach()`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `forEach` 函数由于复杂的对象处理、提前终止逻辑等原因运行缓慢。
+
+请使用更快、更现代的 `Array.prototype.forEach()`。
+
 :::
 
-从右到左迭代 `arr` 数组的每个元素，并对每个元素调用 `callback` 函数。
+对数组或对象的每个元素执行函数。
 
-如果 `callback` 函数返回 `false`，则停止迭代。
-
-### 参数
-
-```ts
-function forEach<T extends object>(object: T, callback: (value: T[keyof T], key: keyof T, object: T) => unknown): T;
+```typescript
+forEach(collection, callback);
 ```
 
-### 参数
+## 用法
 
-- `object` (`T`): 要迭代的对象。
-- `callback` (`(value: T[keyof T], key: keyof T, object: T)`): 每次迭代调用的函数。
-  - `value`: 当前正在处理的对象属性的值。
-  - `key`: 当前正在处理的对象属性的键。
-  - `object`: 调用 `forEach` 的对象。
+### `forEach(collection, callback)`
 
-### 返回值
+当您想遍历数组或对象的所有元素并对每个元素执行回调函数时，请使用 `forEach`。如果回调返回 `false`，则停止遍历。
 
-(`T`): 调用 `forEach` 的对象。
-
-## 示例
-
-```ts
+```typescript
 import { forEach } from 'es-toolkit/compat';
 
-const object = { a: 1, b: 2 };
-forEach(object, (value, key, object) => console.log(value, key));
-// Output:
-// 1 'a'
-// 2 'b'
+// 遍历数组
+const numbers = [1, 2, 3, 4, 5];
+const results: number[] = [];
+
+forEach(numbers, value => {
+  results.push(value * 2);
+});
+// results 为 [2, 4, 6, 8, 10]
+
+// 提前终止
+const numbers2 = [1, 2, 3, 4, 5];
+const results2: number[] = [];
+
+forEach(numbers2, value => {
+  if (value > 3) {
+    return false; // 停止遍历
+  }
+  results2.push(value);
+});
+// results2 为 [1, 2, 3]
 ```
+
+对象的工作方式相同。
+
+```typescript
+import { forEach } from 'es-toolkit/compat';
+
+const obj = { a: 1, b: 2, c: 3 };
+const keys: string[] = [];
+const values: number[] = [];
+
+forEach(obj, (value, key) => {
+  keys.push(key);
+  values.push(value);
+});
+// keys 为 ['a', 'b', 'c']
+// values 为 [1, 2, 3]
+```
+
+`null` 或 `undefined` 被视为空集合。
+
+```typescript
+import { forEach } from 'es-toolkit/compat';
+
+forEach(null, value => {
+  console.log(value); // 不会执行
+});
+
+forEach(undefined, value => {
+  console.log(value); // 不会执行
+});
+```
+
+#### 参数
+
+- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 要遍历的数组或对象。
+- `callback` (`(value: T, index: number | string, collection: any) => void | false`): 对每个元素执行的函数。返回 `false` 以停止遍历。
+
+#### 返回值
+
+(`T`): 返回遍历的原始集合。

@@ -1,36 +1,61 @@
-# toNumber
+# toNumber (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning Numberコンストラクタを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`toNumber`関数はシンボル型検証と追加処理により遅く動作します。
+
+代わりにより高速で現代的なNumberコンストラクタを使用してください。
+
 :::
 
-`value`を数値に変換します。
-
-`Number()`とは異なり、この関数はシンボルに対して`NaN`を返します。
-
-## インターフェース
+値を数値に変換します。
 
 ```typescript
-function toNumber(value: any): number;
+const number = toNumber(value);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`any`): 変換する値。
+### `toNumber(value)`
 
-### 戻り値
-
-(`number`): 変換された数値。
-
-## 例
+値を数値に変換します。シンボルはNaNとして処理します。
 
 ```typescript
-toNumber(3.2); // => 3.2
-toNumber(Number.MIN_VALUE); // => 5e-324
-toNumber(Infinity); // => Infinity
-toNumber('3.2'); // => 3.2
-toNumber(Symbol.iterator); // => NaN
-toNumber(NaN); // => NaN
+import { toNumber } from 'es-toolkit/compat';
+
+// 通常の数値はそのまま返す
+toNumber(3.2);
+// Returns: 3.2
+
+// 文字列数値を変換
+toNumber('3.2');
+// Returns: 3.2
+
+// 無限大もそのまま返す
+toNumber(Infinity);
+// Returns: Infinity
+
+// 非常に小さい数もそのまま返す
+toNumber(Number.MIN_VALUE);
+// Returns: 5e-324
 ```
+
+シンボルとNaNはNaNに変換します。
+
+```typescript
+import { toNumber } from 'es-toolkit/compat';
+
+toNumber(Symbol.iterator);
+// Returns: NaN
+
+toNumber(NaN);
+// Returns: NaN
+```
+
+#### パラメータ
+
+- `value` (`unknown`): 変換する値です。
+
+#### 戻り値
+
+(`number`): 変換された数値を返します。

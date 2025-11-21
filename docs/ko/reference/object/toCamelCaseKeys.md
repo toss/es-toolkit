@@ -1,58 +1,61 @@
 # toCamelCaseKeys
 
-객체의 프로퍼티를 [카멜 표기법](../string/camelCase.md)(`camelCase`)로 바꾼 새로운 객체를 만들어요.
+객체와 배열의 모든 키를 카멜 표기법으로 변환한 새로운 객체를 반환해요.
 
-중첩된 객체 안의 프로퍼티도 모두 카멜 표기법으로 변환돼요.
-
-## 인터페이스
+카멜 표기법은 여러 단어로 구성된 식별자의 첫 단어를 소문자로 쓰고, 이어지는 단어의 첫 문자를 대문자로 연결하는 명명 규칙이에요. 예를 들어 `camelCase`와 같이 작성해요.
 
 ```typescript
-function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T>;
+const camelCased = toCamelCaseKeys(obj);
 ```
 
-### 파라미터
+## 사용법
 
-- `obj` (`T`): 키를 변환할 객체.
+### `toCamelCaseKeys(obj)`
 
-### 반환 값
-
-(`ToCamelCaseKeys<T>`): 모든 키가 camelCase로 변환된 새 객체.
-
-## 예시
+객체의 모든 키를 카멜 케이스로 변환하고 싶을 때 `toCamelCaseKeys`를 사용하세요. 중첩된 객체와 배열 내의 객체들도 재귀적으로 변환돼요.
 
 ```typescript
-// Example with objects
-const obj = { user_id: 1, first_name: 'John' };
-const result = toCamelCaseKeys(obj);
-// result will be { userId: 1, firstName: 'John' }
+import { toCamelCaseKeys } from 'es-toolkit/object';
 
-// Example with arrays of objects
-const arr = [
+// 기본 객체 변환
+const obj = { user_id: 1, first_name: 'John', last_name: 'Doe' };
+const result = toCamelCaseKeys(obj);
+// result는 { userId: 1, firstName: 'John', lastName: 'Doe' }가 돼요
+
+// 배열 내 객체들도 변환해요
+const users = [
   { user_id: 1, first_name: 'John' },
   { user_id: 2, first_name: 'Jane' },
 ];
-const arrResult = toCamelCaseKeys(arr);
-// arrResult will be [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
+const convertedUsers = toCamelCaseKeys(users);
+// convertedUsers는 [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]가 돼요
 
-// Example with nested objects
+// 중첩된 객체도 완전히 변환돼요
 const nested = {
   user_data: {
     user_id: 1,
-    user_address: {
-      street_name: 'Main St',
-      zip_code: '12345',
+    contact_info: {
+      email_address: 'john@example.com',
+      phone_number: '123-456-7890',
     },
   },
 };
 const nestedResult = toCamelCaseKeys(nested);
-// nestedResult will be:
-// {
+// nestedResult는 {
 //   userData: {
 //     userId: 1,
-//     userAddress: {
-//       streetName: 'Main St',
-//       zipCode: '12345'
+//     contactInfo: {
+//       emailAddress: 'john@example.com',
+//       phoneNumber: '123-456-7890'
 //     }
 //   }
-// }
+// }가 돼요
 ```
+
+#### 파라미터
+
+- `obj` (`T`): 키를 camelCase로 변환할 객체, 배열, 또는 원시 값이에요.
+
+#### 반환 값
+
+(`ToCamelCaseKeys<T>`): 모든 키가 camelCase로 변환된 새로운 객체를 반환해요.

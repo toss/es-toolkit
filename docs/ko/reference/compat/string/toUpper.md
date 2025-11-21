@@ -1,36 +1,63 @@
-# toUpper
+# toUpper (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning JavaScript의 `String.prototype.toUpperCase`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `toUpper` 함수는 문자열이 아닌 값 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 JavaScript의 `String.prototype.toUpperCase`를 사용하세요.
+
 :::
 
-주어진 값을 문자열로 변환한 후, 대문자로 변환해요. 다양한 타입의 입력 값을 처리하며, 먼저 문자열로 변환한 다음 작업을 수행해요.
-
-## 인터페이스
+값을 문자열로 변환한 후 대문자로 바꿔요.
 
 ```typescript
-function toUpper<T extends string = string>(value?: T): Uppercase<T>;
+const uppercased = toUpper(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`T`): 대문자로 변환할 값. 생략하면 빈 문자열을 반환해요.
+### `toUpper(value?)`
 
-### 반환 값
-
-`Uppercase<T>`: 입력 값을 문자열로 변환한 후 대문자로 변환한 결과.
-
-## 예시
+값을 대문자 문자열로 변환하고 싶을 때 `toUpper`를 사용하세요. 어떤 타입의 값이든 먼저 문자열로 변환한 다음 대문자로 만들어요.
 
 ```typescript
 import { toUpper } from 'es-toolkit/compat';
 
-toUpper('--foo-bar--'); // '--FOO-BAR--' 반환
-toUpper('Hello World'); // 'HELLO WORLD' 반환
-toUpper(null); // '' 반환
-toUpper([1, 2, 3]); // '1,2,3' 반환
-toUpper(123); // '123' 반환
-toUpper(); // '' 반환
+// 문자열 대문자 변환
+toUpper('--foo-bar--');
+// Returns: '--FOO-BAR--'
+
+toUpper('Hello World');
+// Returns: 'HELLO WORLD'
+
+// 숫자 변환
+toUpper(123);
+// Returns: '123'
+
+// 배열 변환
+toUpper([1, 2, 3]);
+// Returns: '1,2,3'
 ```
+
+`null`이나 `undefined`는 빈 문자열로 처리해요.
+
+```typescript
+import { toUpper } from 'es-toolkit/compat';
+
+toUpper(null);
+// Returns: ''
+
+toUpper(undefined);
+// Returns: ''
+
+toUpper();
+// Returns: ''
+```
+
+#### 파라미터
+
+- `value` (`unknown`, 선택): 대문자로 변환할 값이에요.
+
+#### 반환 값
+
+(`string`): 대문자로 변환된 문자열을 반환해요.

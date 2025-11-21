@@ -1,46 +1,68 @@
-# split
+# split (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning JavaScriptの`String.prototype.split`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`split`関数は、`null`または`undefined`の処理により動作が遅くなります。
+
+代わりに、より高速で現代的なJavaScriptの`String.prototype.split`を使用してください。
+
 :::
 
-指定された文字列を区切り文字（`separator`）に基づいて分割し、分割された部分を要素とする配列を作成します。
-
-## インターフェース
+区切り文字を使用して文字列を配列に分割します。
 
 ```typescript
-function split(string: string | null | undefined, separator?: RegExp | string, limit?: number): string[];
-function split(string: string | null | undefined, index: string | number, guard: object): string[];
+const segments = split(str, separator);
 ```
 
-## パラメータ
+## 使用法
 
-- `string` (`string | null | undefined`): 分割する文字列です。
-- `separator` (`RegExp | string`): 分割の基準となる区切りパターンです。
+### `split(string, separator?, limit?)`
+
+特定の区切り文字を使用して文字列を配列に分割したい場合は、`split`を使用してください。結果配列の最大長を制限することもできます。
+
+```typescript
+import { split } from 'es-toolkit/compat';
+
+// ハイフンで分割
+split('a-b-c', '-');
+// 戻り値: ['a', 'b', 'c']
+
+// 結果の数を制限
+split('a-b-c-d', '-', 2);
+// 戻り値: ['a', 'b']
+
+// 正規表現で分割
+split('hello world', /\s/);
+// 戻り値: ['hello', 'world']
+```
+
+区切り文字を指定しない場合、文字列全体が配列の最初の要素になります。
+
+```typescript
+import { split } from 'es-toolkit/compat';
+
+split('hello');
+// 戻り値: ['hello']
+```
+
+`null`または`undefined`は空文字列として扱われます。
+
+```typescript
+import { split } from 'es-toolkit/compat';
+
+split(null);
+// 戻り値: ['']
+
+split(undefined);
+// 戻り値: ['']
+```
+
+#### パラメータ
+
+- `string` (`string`, オプション): 分割する文字列です。デフォルトは空文字列です。
+- `separator` (`RegExp | string`, オプション): 分割の基準となる区切り文字です。
 - `limit` (`number`, オプション): 結果配列の最大長です。
 
-## 戻り値
+#### 戻り値
 
-- (`string[]`): 分割された文字列のセグメントの配列です。
-
-## 例
-
-```js
-// 文字で文字列を分割する
-split('a-b-c', '-');
-// => ['a', 'b', 'c']
-
-// 最大長制限を使用して分割する
-split('a-b-c', '-', 2);
-// => ['a', 'b']
-
-// 正規表現パターンで分割する
-split('abcde', /[bd]/);
-// => ['a', 'c', 'e']
-
-// 文字列を個々の文字に分割する
-split('abc', '');
-// => ['a', 'b', 'c']
-```
+(`string[]`): 区切り文字で分割された文字列配列を返します。

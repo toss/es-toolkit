@@ -1,38 +1,21 @@
 # orderBy
 
-Sorts an array of objects based on the given `criteria` and their corresponding order directions.
-
-- If you provide keys, it sorts the objects by the values of those keys.
-- If you provide functions, it sorts based on the values returned by those functions.
-
-The function returns the array of objects sorted in corresponding order directions.
-If two objects have the same value for the current criterion, it uses the next criterion to determine their order.
-If the number of orders is less than the number of criteria, it uses the last order for the remaining criteria.
-
-## Signature
+Returns a new array sorted by multiple criteria and sort directions.
 
 ```typescript
-function orderBy<T extends object>(
-  arr: T[],
-  criteria: Array<((item: T) => unknown) | keyof T>,
-  orders: Array<'asc' | 'desc'>
-): T[];
+const sorted = orderBy(arr, criteria, orders);
 ```
 
-### Parameters
+## Usage
 
-- `arr` (`T[]`): The array of objects to be sorted.
-- `criteria` (`Array<keyof T | ((item: T) => unknown)>`): The criteria for sorting. This can be an array of object keys or functions that return values used for sorting.
-- `orders` (`Array<'asc' | 'desc'>)`): An array of order directions ('asc' for ascending or 'desc' for descending).
+### `orderBy(arr, criteria, orders)`
 
-### Returns
-
-(`T[]`) The sorted array.
-
-## Examples
+Use `orderBy` when you want to perform compound sorting on an array of objects with multiple conditions. You can specify ascending or descending order for each criterion, and if values are the same for the first criterion, it sorts by the next criterion.
 
 ```typescript
-// Sort an array of objects by 'user' in ascending order and 'age' in descending order.
+import { orderBy } from 'es-toolkit/array';
+
+// Sort a user array by multiple criteria.
 const users = [
   { user: 'fred', age: 48 },
   { user: 'barney', age: 34 },
@@ -40,12 +23,47 @@ const users = [
   { user: 'barney', age: 36 },
 ];
 
-const result = orderBy(users, [obj => obj.user, 'age'], ['asc', 'desc']);
-// result will be:
+orderBy(users, [obj => obj.user, 'age'], ['asc', 'desc']);
+// Returns:
 // [
 //   { user: 'barney', age: 36 },
 //   { user: 'barney', age: 34 },
 //   { user: 'fred', age: 48 },
-//   { user: 'fred', age: 40 },
+//   { user: 'fred', age: 40 }
 // ]
+
+// You can mix property names and functions.
+const products = [
+  { name: 'Apple', category: 'fruit', price: 1.5 },
+  { name: 'Banana', category: 'fruit', price: 0.8 },
+  { name: 'Broccoli', category: 'vegetable', price: 2.0 },
+];
+
+orderBy(products, ['category', product => product.name.length], ['asc', 'desc']);
+// Returns: Sort by category first, then by name length in descending order within the same category
 ```
+
+If the number of sort directions is less than the number of criteria, the last direction is repeated.
+
+```typescript
+import { orderBy } from 'es-toolkit/array';
+
+const data = [
+  { a: 1, b: 1, c: 1 },
+  { a: 1, b: 2, c: 2 },
+  { a: 2, b: 1, c: 1 },
+];
+
+orderBy(data, ['a', 'b', 'c'], ['asc', 'desc']);
+// 'a' is sorted in ascending order, 'b' and 'c' are sorted in descending order.
+```
+
+#### Parameters
+
+- `arr` (`T[]`): The array of objects to sort.
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`): The criteria to sort by. You can use property names of objects or functions that return values.
+- `orders` (`Array<'asc' | 'desc'>`): An array of sort directions for each criterion. `'asc'` means ascending order, `'desc'` means descending order.
+
+#### Returns
+
+(`T[]`): A new array sorted by the specified criteria and directions.

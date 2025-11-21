@@ -1,46 +1,59 @@
 # fill
 
-Fills elements of an array with a specified value from the start position up to, but not including, the end position.
-
-This function mutates the original array and replaces its elements with the provided value, starting from the specified start index up to the end index (non-inclusive). If the start or end indices are not provided, it defaults to filling the entire array.
-
-Negative indices can also be used, in which case they are calculated from the end of the array.
-
-## Signature
+Fills array elements with a specified value. Modifies the original array directly.
 
 ```typescript
-function fill<T>(array: unknown[], value: T): T[];
-function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
-function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
+const filled = fill(arr, value, start, end);
 ```
 
-### Parameters
+::: info If you don't want to modify the original array, use [`toFilled`](./toFilled.md).
 
-- `array` (`Array<T | U>`): The array to fill.
-- `value` (`U`): The value to fill the array with.
-- `start` (`number`, default = 0): The start position. Defaults to 0.
-- `end` (`number`, default = array.length): The end position. Defaults to the array's length.
+`toFilled` returns a new array instead of modifying the original.
 
-### Returns
+:::
 
-(`Array<T | U>`): The array with the filled values.
+## Usage
 
-## Examples
+### `fill(arr, value, start?, end?)`
+
+Use `fill` when you want to fill a specific range of an array with a specified value. It replaces elements from the start position to just before the end position with the provided value. If you don't specify start or end positions, it fills the entire array.
 
 ```typescript
+import { fill } from 'es-toolkit/array';
+
+// Fill the entire array with 'a'.
 const array1 = [1, 2, 3];
-const result1 = fill(array1, 'a');
-// result1 => ['a', 'a', 'a']
+fill(array1, 'a');
+// Returns: ['a', 'a', 'a']
 
+// Fill an empty array with 2.
 const array2 = Array(3);
-const result2 = fill(array2, 2);
-// result2 => [2, 2, 2]
+fill(array2, 2);
+// Returns: [2, 2, 2]
 
+// Fill from index 1 to just before 3 with '*'.
 const array3 = [4, 6, 8, 10];
-const result3 = fill(array3, '*', 1, 3);
-// result3 => [4, '*', '*', 10]
-
-const array4 = [1, 2, 3];
-const result4 = fill(array4, '*', -2, -1);
-// result4 => [1, '*', 3]
+fill(array3, '*', 1, 3);
+// Returns: [4, '*', '*', 10]
 ```
+
+You can also use negative indices. Negative indices count from the end of the array.
+
+```typescript
+import { fill } from 'es-toolkit/array';
+
+const array = [1, 2, 3];
+fill(array, '*', -2, -1);
+// Returns: [1, '*', 3]
+```
+
+#### Parameters
+
+- `arr` (`Array<T | U>`): The array to fill.
+- `value` (`U`): The value to fill the array with.
+- `start` (`number`, optional): The start position. Default is `0`.
+- `end` (`number`, optional): The end position. Default is the array length.
+
+#### Returns
+
+(`Array<T | U>`): Returns the original array filled with values.

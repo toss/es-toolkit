@@ -2,45 +2,77 @@
 
 Returns the last element of an array.
 
-This function takes an array and returns the last element of the array. If the array is empty, the function returns `undefined`.
-
-## Signature
-
 ```typescript
-function last<T>(arr: [...T[], T]): T;
-function last<T>(arr: T[]): T | undefined;
+const lastElement = last(arr);
 ```
 
-### Parameters
+## Usage
 
-- `arr`(`T[]`): The array from which to get the last element.
+### `last(arr)`
 
-### Returns
-
-(`T | undefined`): The last element of the array, or `undefined` if the array is empty.
-
-## Example
+Use `last` when you want to get the last element of an array. If the array is empty, it returns `undefined`. This is useful when accessing data at the end of an array.
 
 ```typescript
-const arr1 = [1, 2, 3];
-const result = last(arr1);
-// result will be 3
+import { last } from 'es-toolkit/array';
 
-const arr2: number[] = [];
-const result = last(arr2);
-// result will be undefined
+// Get the last element of a number array
+const numbers = [1, 2, 3, 4, 5];
+last(numbers);
+// Returns: 5
 
-const largeArray = Array(1000)
+// Get the last element of a string array
+const strings = ['a', 'b', 'c'];
+last(strings);
+// Returns: 'c'
+
+// Empty array returns undefined
+const emptyArray: number[] = [];
+last(emptyArray);
+// Returns: undefined
+```
+
+Type handling is safe.
+
+```typescript
+import { last } from 'es-toolkit/array';
+
+// For non-empty arrays, the type is certain
+const nonEmptyArray = [1, 2, 3] as const;
+last(nonEmptyArray);
+// Returns: 3 (type: 3)
+
+// For regular arrays, undefined is possible
+const maybeEmptyArray = [1, 2, 3];
+last(maybeEmptyArray);
+// Returns: 3 | undefined (type: number | undefined)
+```
+
+It works efficiently even with large arrays.
+
+```typescript
+import { last } from 'es-toolkit/array';
+
+// Performance optimized
+const largeArray = Array(1000000)
   .fill(0)
   .map((_, i) => i);
-const result = last(largeArray);
-// result will be 999
+last(largeArray);
+// Returns: 999999 (fast access)
 
-const nestedArray = [
-  [3, 1],
-  [3, 2],
-  [3, 3],
+// It can also handle nested arrays
+const nested = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
 ];
-const result = last(nestedArray);
-// result will be [3,3]
+last(nested);
+// Returns: [5, 6]
 ```
+
+#### Parameters
+
+- `arr` (`readonly T[]`): The array from which to get the last element.
+
+#### Returns
+
+(`T | undefined`): The last element of the array. Returns `undefined` if the array is empty.

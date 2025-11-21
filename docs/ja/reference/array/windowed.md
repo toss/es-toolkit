@@ -1,49 +1,77 @@
 # windowed
 
-与えられた入力配列から指定されたサイズの小さな部分配列（ウィンドウ）を作成します。
-ウィンドウは指定された `step` のサイズに応じて重なることがあります。
-
-デフォルトでは、結果には `size` の長さを持つ完全なウィンドウのみが含まれます。
-完全なウィンドウを形成できない残りの要素は無視されます。
-
-オプションオブジェクトの `partialWindows` が `true` に設定されている場合、`size` より小さい部分ウィンドウも結果に含まれます。
-部分ウィンドウは、入力配列に完全なウィンドウを作成するのに十分な要素が残っていない場合に作成されます。
-
-## インターフェース
+指定されたサイズのウィンドウが配列に沿って一定にスライドしながら、各ウィンドウのスナップショットを含む新しい配列を返します。
 
 ```typescript
-function windowed<T>(arr: T[], size: number, step: number, { partialWindows = false }: WindowedOptions): T[][];
-
-interface WindowedOptions {
-  partialWindows?: boolean;
-}
+const windows = windowed(arr, size, step?, options?);
 ```
 
-### パラメータ
+## 使用法
 
-- `arr` (`readonly T[]`): ウィンドウを作成するための入力配列。
-- `size` (`number`): 各ウィンドウのサイズ。正の整数でなければなりません。
-- `step` (`number`): 各ウィンドウの開始間隔。正の整数でなければなりません。
-- `options.partialWindows` (`boolean`): 配列の末尾に部分ウィンドウを含めるかどうか。
+### `windowed(arr, size, step?, options?)`
 
-### 戻り値
+指定されたサイズのウィンドウが配列に沿って一定にスライドしながら、各ウィンドウのスナップショットを含む配列を返したい場合は `windowed` を使用してください。
 
-(`T[][]`): 入力配列から作成されたウィンドウ（部分配列）の配列。
-
-### エラー
-
-- `size` が正の整数でない場合、エラーを投げます。
-- `step` が正の整数でない場合、エラーを投げます。
-
-## 例
+時系列データ分析で移動平均を計算したり、文字列からn-gramを抽出したり、配列から特定のパターンを見つけるときに便利です。また、データをバッチ単位で処理したり、スライディングウィンドウアルゴリズムを実装するときにも活用できます。
 
 ```typescript
-windowed([1, 2, 3, 4], 2);
-// => [[1, 2], [2, 3], [3, 4]]
+import { windowed } from 'es-toolkit/array';
 
-windowed([1, 2, 3, 4, 5, 6], 3, 2);
-// => [[1, 2, 3], [3, 4, 5]]
+// 基本的な使い方 - サイズ3のウィンドウを作ります。
+const numbers = [1, 2, 3, 4, 5];
+const result = windowed(numbers, 3);
+console.log(result); // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
 
-windowed([1, 2, 3, 4, 5, 6], 3, 2, { partialWindows: true });
-// => [[1, 2, 3], [3, 4, 5], [5, 6]]
+// stepを指定してウィンドウ間隔を調整します。
+const data = [1, 2, 3, 4, 5, 6, 7, 8];
+const stepped = windowed(data, 3, 2);
+console.log(stepped); // [[1, 2, 3], [3, 4, 5], [5, 6, 7]]
+
+// 文字列配列でも使用できます。
+const words = ['a', 'b', 'c', 'd', 'e'];
+const wordWindows = windowed(words, 2);
+console.log(wordWindows); // [['a', 'b'], ['b', 'c'], ['c', 'd'], ['d', 'e']]
 ```
+
+部分ウィンドウを含めたい場合は `partialWindows` オプションを使用してください。
+
+```typescript
+import { windowed } from 'es-toolkit/array';
+
+const numbers = [1, 2, 3, 4, 5, 6];
+
+// 部分ウィンドウなし（デフォルト）
+const complete = windowed(numbers, 4, 3);
+console.log(complete); // [[1, 2, 3, 4]]
+
+// 部分ウィンドウを含む
+const withPartial = windowed(numbers, 4, 3, { partialWindows: true });
+console.log(withPartial); // [[1, 2, 3, 4], [4, 5, 6]]
+```
+
+各スナップショットは配列形式で提供され、最後のいくつかの配列は指定されたサイズより少ない要素を持つ可能性があります。
+
+```typescript
+import { windowed } from 'es-toolkit/array';
+
+const small = [1, 2];
+
+// ウィンドウが配列より大きい場合
+console.log(windowed(small, 5)); // []
+console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
+```
+
+#### パラメータ
+
+- `arr` (`readonly T[]`): ウィンドウを作る配列です。
+- `size` (`number`): 各ウィンドウのサイズです。1より大きい整数である必要があります。
+- `step` (`number`, オプション): ウィンドウ間の間隔です。1より大きい整数である必要があり、デフォルト値は `1` です。
+- `options.partialWindows` (`boolean`, オプション): 配列の最後で完全でないウィンドウも含めるかどうかです。デフォルト値は `false` です。
+
+#### 戻り値
+
+(`T[][]`): 指定されたサイズと間隔で作られたウィンドウの配列です。
+
+#### エラー
+
+- `size` または `step` が正の整数でない場合、エラーをスローします。

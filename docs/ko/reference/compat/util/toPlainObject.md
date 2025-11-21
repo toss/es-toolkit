@@ -1,34 +1,62 @@
-# toPlainObject
+# toPlainObject (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning Object.assign이나 스프레드 연산자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `toPlainObject` 함수는 복잡한 프로토타입 처리와 키 열거로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 Object.assign({}, obj)나 {...obj}를 사용하세요.
+
 :::
 
-`value`를 일반 객체로 변환해요. `value`의 상속된 열거 가능한 문자열 키 속성을 일반 객체의 속성으로 평평하게 만들어요.
-
-## 인터페이스
+값을 일반 객체로 변환해요.
 
 ```typescript
-function toPlainObject(value?: any): any;
+const plainObj = toPlainObject(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`any`): 변환할 값이에요.
+### `toPlainObject(value)`
 
-### 반환 값
-
-(`any`): 변환된 객체를 반환해요.
-
-## 예시
+값을 일반 객체로 변환해요. 상속받은 열거 가능한 문자열 키 속성들을 자체 속성으로 평탄화해요.
 
 ```typescript
+import { toPlainObject } from 'es-toolkit/compat';
+
+// 생성자 함수와 프로토타입
 function Foo() {
   this.b = 2;
 }
 Foo.prototype.c = 3;
 
-toPlainObject(new Foo()); // => { 'b': 2, 'c': 3 }
+const foo = new Foo();
+toPlainObject(foo);
+// Returns: { b: 2, c: 3 }
+
+// 배열을 객체로 변환
+toPlainObject([1, 2, 3]);
+// Returns: { 0: 1, 1: 2, 2: 3 }
 ```
+
+다양한 객체 타입을 처리해요.
+
+```typescript
+import { toPlainObject } from 'es-toolkit/compat';
+
+// 문자열을 객체로 변환
+toPlainObject('abc');
+// Returns: { 0: 'a', 1: 'b', 2: 'c' }
+
+// 이미 일반 객체인 경우
+const obj = { a: 1, b: 2 };
+toPlainObject(obj);
+// Returns: { a: 1, b: 2 }
+```
+
+#### 파라미터
+
+- `value` (`any`): 변환할 값이에요.
+
+#### 반환 값
+
+(`any`): 상속받은 열거 가능한 속성들이 자체 속성으로 평탄화된 일반 객체를 반환해요.

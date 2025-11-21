@@ -1,33 +1,69 @@
-# min
+# min (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Math.min`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `min` 함수는 추가적인 함수 호출과 null/undefined 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Math.min(...array)`를 사용하세요.
+
 :::
 
-배열에서 최솟값을 가진 요소를 찾아요.
-
-## 인터페이스
+배열에서 최솟값을 찾아요.
 
 ```typescript
-function min<T>(items: ArrayLike<T> | null | undefined): T | undefined;
+const result = min(items);
 ```
 
-### 파라미터
+## 사용법
 
-- `items` (`readonly [T, ...T[]]` 또는 `ArrayLike<T> | null | undefined`): 검색할 요소의 배열.
+### `min(items?)`
 
-### 반환 값
-
-(`T | undefined`): 배열에서 최솟값을 가지는 요소. 배열이 비어 있거나, `null`, 또는 `undefined`인 경우 `undefined`를 반환해요.
-
-## 예시
+배열에서 가장 작은 값을 찾고 싶을 때 `min`을 사용하세요.
 
 ```typescript
-// Returns 1
+import { min } from 'es-toolkit/compat';
+
+// 숫자 배열에서 최솟값
 min([3, 1, 4, 1, 5, 9]);
+// Returns: 1
 
-// Returns -3
-min([0, -3, 2, 8, 7]);
+min([10, 5, 8, 20]);
+// Returns: 5
+
+// 문자열 배열에서 최솟값 (사전순)
+min(['c', 'a', 'b']);
+// Returns: 'a'
+
+min(['cherry', 'apple', 'banana']);
+// Returns: 'apple'
+
+// 빈 배열이나 null/undefined
+min([]);
+// Returns: undefined
+
+min(null);
+// Returns: undefined
+
+min(undefined);
+// Returns: undefined
 ```
+
+음수도 올바르게 처리해요.
+
+```typescript
+import { min } from 'es-toolkit/compat';
+
+min([0, -3, 2, 8, 7]);
+// Returns: -3
+
+min([-1, -5, -3]);
+// Returns: -5
+```
+
+#### 파라미터
+
+- `items` (`ArrayLike<T> | null | undefined`, 선택): 최솟값을 찾을 배열이에요.
+
+#### 반환 값
+
+(`T | undefined`): 배열에서 가장 작은 값을 반환해요. 배열이 비어있거나 null/undefined면 undefined를 반환해요.

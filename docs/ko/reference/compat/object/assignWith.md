@@ -1,65 +1,60 @@
-# assignWith
+# assignWith (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning 커스텀 로직 구현을 권장해요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `assignWith` 함수는 복잡한 커스터마이저 함수 처리로 인해 상대적으로 느려요.
+
+대신 `Object.assign`과 커스텀 로직을 직접 구현하는 방식을 사용하세요.
+
 :::
 
-`source` 객체가 가지고 있는 프로퍼티 값들을 `object` 객체에 할당해요. 각 속성에 대해 어떤 값이 할당될지를 결정하는 `getValueToAssign` 함수를 제공할 수 있어요.
-
-이미 `source`가 가지고 있는 값과 같은 값은 덮어쓰지 않아요.
-
-`getValueToAssign` 함수로 `object` 객체에 할당할 값을 결정할 수 있어요. 함수가 반환하는 값이 할당돼요. 값이 주어지지 않으면, `identity` 함수가 기본값으로 사용돼요.
-
-## 인터페이스
+커스터마이저 함수를 사용해서 소스 객체들의 속성을 대상 객체에 할당해요.
 
 ```typescript
-function assignWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function assignWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function assignWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function assignWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function assignWith(object: any, ...sources: any[]): any;
+const result = assignWith(target, source1, source2, customizer);
 ```
 
-### 파라미터
+## 사용법
 
-- `object` (`any`): `source`의 프로퍼티 값이 할당될 객체.
-- `sources` (`...any[]`): `object`에 할당할 값을 가지고 있는 객체들.
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): 각 속성에 대해 할당할 값을 결정하는 함수. 함수가 반환하는 값이 해당 속성에 할당돼요.
+### `assignWith(object, ...sources, customizer)`
 
-### 반환 값
-
-(`any`): 새로운 값이 할당된 `object` 객체.
-
-## 예시
+속성 할당 방식을 커스터마이징할 때 `assignWith`를 사용하세요. 커스터마이저 함수로 각 속성의 최종 값을 결정할 수 있어요.
 
 ```typescript
-const target = { a: 1 };
-const result = assignWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { assignWith } from 'es-toolkit/compat';
+
+// 기본 사용법 - undefined일 때만 할당
+const target = { a: 1, b: undefined };
+const source = { b: 2, c: 3 };
+const result = assignWith(target, source, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// Returns: { a: 1, b: 2, c: 3 }
+
+// 배열 병합
+const target2 = { users: ['alice'] };
+const source2 = { users: ['bob', 'charlie'] };
+const result2 = assignWith(target2, source2, (objValue, srcValue) => {
+  if (Array.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
+// Returns: { users: ['alice', 'bob', 'charlie'] }
+
+// 여러 소스와 커스터마이저
+const target3 = { a: 1 };
+const result3 = assignWith(target3, { b: 2 }, { c: 3 }, (objValue, srcValue) => {
+  return objValue === undefined ? srcValue : objValue;
+});
+// Returns: { a: 1, b: 2, c: 3 }
 ```
+
+#### 파라미터
+
+- `object` (`any`): 속성이 할당될 대상 객체예요.
+- `...sources` (`any[]`): 속성을 복사할 소스 객체들이에요.
+- `customizer` (`function`): 할당할 값을 결정하는 함수예요. `(objValue, srcValue, key, object, source) => any` 형태예요.
+
+#### 반환 값
+
+(`any`): 커스터마이저 함수에 의해 결정된 값들이 할당된 대상 객체를 반환해요.

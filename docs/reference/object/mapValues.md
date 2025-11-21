@@ -1,30 +1,41 @@
 # mapValues
 
-Creates a new object with the same keys as the given object, but with values generated
-by running each own enumerable property of the object through the iteratee function.
-
-## Signature
+Returns a new object with values transformed through a function.
 
 ```typescript
-function mapValues<T extends object, K extends keyof T, V>(
-  object: T,
-  getNewValue: (value: T[K], key: K, object: T) => V
-): Record<K, V>;
+const newObj = mapValues(object, getNewValue);
 ```
 
-### Parameters
+## Usage
 
-- `obj` (`T extends object`): The object to iterate over.
-- `getNewValue`: (`(value: T[K], key: K, object: T) => V`): The function invoked per own enumerable property.
+### `mapValues(object, getNewValue)`
 
-### Returns
-
-(`Record<K, V>`): The new mapped object.
-
-## Examples
+Use `mapValues` when you want to create a new object by transforming each value. Keys remain the same, and only the values are changed to the results of the `getNewValue` function.
 
 ```typescript
-const obj = { a: 1, b: 2 };
-const result = mapValues(obj, value => value * 2);
-console.log(result); // { a: 2, b: 4 }
+import { mapValues } from 'es-toolkit/object';
+
+// Double all values
+const numbers = { a: 1, b: 2, c: 3 };
+const doubled = mapValues(numbers, value => value * 2);
+// doubled becomes { a: 2, b: 4, c: 6 }
+
+// Convert string values to uppercase
+const strings = { first: 'hello', second: 'world' };
+const uppercased = mapValues(strings, value => value.toUpperCase());
+// uppercased becomes { first: 'HELLO', second: 'WORLD' }
+
+// Use both key and value
+const scores = { alice: 85, bob: 90, charlie: 95 };
+const grades = mapValues(scores, (value, key) => `${key}: ${value >= 90 ? 'A' : 'B'}`);
+// grades becomes { alice: 'alice: B', bob: 'bob: A', charlie: 'charlie: A' }
 ```
+
+#### Parameters
+
+- `object` (`T extends object`): The object to transform values from.
+- `getNewValue` (`(value: T[K], key: K, object: T) => V`): A function that generates new values. Receives value, key, and the entire object as parameters.
+
+#### Returns
+
+(`Record<K, V>`): Returns a new object with transformed values.

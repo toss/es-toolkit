@@ -1,36 +1,48 @@
 # maxBy
 
-找出应用 `getValue` 函数到每个元素后具有最大值的元素。
-
-如果列表为空，则返回 `undefined`。
-
-## 签名
+根据转换函数返回的值,返回数组中具有最大值的元素。
 
 ```typescript
-function maxBy<T>(items: [T, ...T[]], getValue: (element: T) => number): T;
-function maxBy<T>(items: T[], getValue: (element: T) => number): T | undefined;
+const max = maxBy(items, getValue);
 ```
 
-### 参数
+## 用法
 
-- `items` (`T[]`): 要搜索的元素数组。
-- `getValue` (`(item: T) => number`): 从每个元素中选择数值的函数。
+### `maxBy(items, getValue)`
 
-### 返回值
-
-(`T`) 由 `getValue` 函数确定的具有最大值的元素。如果数组为空，则返回 `undefined`。
-
-## 示例
+当您想用转换函数将数组元素转换为数值,并找到具有最大值的原始元素时,请使用 `maxBy`。对于空数组返回 `undefined`。
 
 ```typescript
-maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 返回: { a: 3 }
-maxBy([], x => x.a); // 返回: undefined
-maxBy(
-  [
-    { name: 'john', age: 30 },
-    { name: 'jane', age: 28 },
-    { name: 'joe', age: 26 },
-  ],
-  x => x.age
-); // 返回: { name: 'john', age: 30 }
+import { maxBy } from 'es-toolkit/array';
+
+// 从对象数组中找到特定属性具有最大值的元素
+const people = [
+  { name: 'john', age: 30 },
+  { name: 'jane', age: 28 },
+  { name: 'joe', age: 26 },
+];
+maxBy(people, person => person.age);
+// Returns: { name: 'john', age: 30 }
+
+// 从数字数组中找到绝对值最大的元素
+const numbers = [-10, -5, 0, 5, 15];
+maxBy(numbers, x => Math.abs(x));
+// Returns: 15
 ```
+
+对于空数组返回 `undefined`。
+
+```typescript
+import { maxBy } from 'es-toolkit/array';
+
+maxBy([], x => x.value); // undefined
+```
+
+#### 参数
+
+- `items` (`T[]`): 要查找具有最大值的元素的数组。
+- `getValue` (`(element: T) => number`): 将每个元素转换为数字的函数。
+
+#### 返回值
+
+(`T | undefined`): 转换函数返回的值中具有最大值的元素。如果数组为空,则返回 `undefined`。

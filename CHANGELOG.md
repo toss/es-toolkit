@@ -1,5 +1,66 @@
 # es-toolkit Changelog
 
+## Version v1.42.0
+
+Released on November 17th, 2025.
+
+- Added new async utilities: `filterAsync`, `flatMapAsync`, `forEachAsync`, `mapAsync`, `reduceAsync`, and `limitAsync` for handling asynchronous operations.
+- Exported `ThrottleOptions` and `DebounceOptions` interfaces for better type support.
+- Fixed `isFinite` to implement type predicate to narrow type to number.
+- Fixed `isSafeInteger` to implement type predicate to narrow type to number.
+- Fixed `omit` to prevent adding index properties to array-like objects.
+- Fixed `mergeWith` to remove unnecessary nullish coalescing for 100% branch coverage.
+- Fixed `compat/updateWith` to remove unreachable code and add prototype pollution test.
+- Updated documentation headings for consistency.
+- Improved test coverage for `compat/mergeWith`, `compat/unset`, `get`, `toMerged`, `mergeWith`, and `compat/intersectionBy` with additional edge cases and security tests.
+
+We sincerely thank @Debbl, @wo-o29, @raon0211, @Yeom-JinHo, @sukvvon, and @D-Sketon for their contributions. We appreciate your great efforts!
+
+## Version v1.41.0
+
+Released on October 24th, 2025.
+
+- Enhanced `throttle` to preserve `this` context when called as a method.
+- Added type guard support for `partition` function.
+- Fixed `omit` to support runtime-determined key arrays with proper overloads.
+- Fixed `defaults` in compatibility layer to properly handle undefined and null sources.
+- Fixed `toSnakeCaseKeys` and `toCamelCaseKeys` to correctly return types for non-plain objects.
+- Fixed `toMerged` and `mergeWith` to properly handle shared objects in merge logic.
+- Fixed `compat/union` to support array-like objects.
+- Fixed `compat/updateWith` to use `get` for value retrieval in updater function.
+- Fixed circular import between `isMatch` and `isMatchWith`.
+- Fixed `find` and `findLast` by simplifying logic and removing unnecessary checks.
+- Fixed `takeRight` by improving test coverage and removing redundant checks.
+- Fixed `curry` and `curryRight` by removing unnecessary type assertions.
+- Fixed `isEqualWith` and `mapKeys` by removing unnecessary type assertions.
+- Improved performance for `meanBy` by removing intermediate array creation.
+- Updated build system to use UMD format instead of IIFE for browser builds.
+- Fixed numerous documentation examples across compat modules.
+- Improved test coverage with additional test cases for edge cases and compatibility.
+
+We sincerely thank @the5thbeatle, @wo-o29, @hwibaski, @manudeli, @raon0211, @dayongkr, @D-Sketon, @yoouungyoung, @Dohun-choi, @sukvvon, @zoulou00, and @sen2y for their contributions. We appreciate your great efforts!
+
+## Version v1.40.0
+
+Released on October 8th, 2025.
+
+- Enhanced `sumBy` to pass the element index to the `getValue` callback function.
+- Improved performance for `uniq` function.
+- Fixed `cloneDeepWith` to handle runtime errors in environments without Blob support and correctly clone Boolean, Number, and String objects.
+- Fixed `omit` to avoid unnecessary deep cloning, improving performance.
+- Fixed `toCamelCaseKeys` to properly handle PascalCase type conversion.
+- Fixed `toPath` to correctly handle arrays and non-string inputs.
+- Fixed `repeat` to validate and handle invalid repeat counts.
+- Fixed `sortedIndexBy` to properly handle default iteratee.
+- Fixed `some` predicate check to correctly handle null and undefined cases.
+- Fixed compatibility issue in `compat/unset` with nonexistent paths.
+- Fixed several JSDoc issues across multiple functions including return types, parameter descriptions, and method names.
+- Improved documentation clarity and consistency across multiple functions.
+- Enhanced test coverage with additional test cases for compat functions and edge cases.
+- Updated build configuration and CI workflows.
+
+We sincerely thank @wo-o29, @D-Sketon, @HidenLee, @yoouung, @manudeli, @dayongkr, @Li13, @nicklemmon, @sen2y, @miinhho, @raon0211, @joshkel, @jgjgill, @mlnwns, @Dohun-choi, @PinkChampagne17, @sukvvon, @YOUNGHO8762, @caseBread, @Jeongeun-Choi, @artechventure and hoyyChoi for their contributions. We appreciate your great efforts!
+
 ## Version v1.39.10
 
 Released on August 17th, 2025.

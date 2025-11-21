@@ -1,45 +1,78 @@
-# castArray
+# castArray（Lodash 互換性）
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.from()` または配列リテラル（`[value]`）を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `castArray` 関数は引数なしの処理と `undefined` 処理などにより、複雑な動作をします。
+
+より明確でモダンな `Array.from()` または条件付き配列作成（`Array.isArray(value) ? value : [value]`）を使用してください。
+
 :::
 
-値が配列でない場合、配列としてキャストします。
-
-## インターフェース
+値が配列でない場合、配列に変換して返します。
 
 ```typescript
-function castArray<T>(value?: T | T[]): T[];
+const result = castArray(value);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`T | T[]`): 配列にキャストされる値。
+### `castArray(value?)`
 
-### 戻り値
-
-(`T[]`): 入力値が配列でない場合はその値を含む配列、元々配列の場合はその配列。
-
-## 例
+任意の値を確実に配列にしたい場合は `castArray` を使用します。値がすでに配列の場合はそのまま返し、そうでない場合はその値を含む新しい配列を作成します。
 
 ```typescript
-const arr1 = castArray(1);
-// Returns: [1]
+import { castArray } from 'es-toolkit/compat';
 
-const arr2 = castArray([1]);
-// Returns: [1]
+// 数値を配列に変換
+castArray(1);
+// 戻り値: [1]
 
-const arr3 = castArray({ a: 1 });
-// Returns: [{'a': 1}]
+// 文字列を配列に変換
+castArray('hello');
+// 戻り値: ['hello']
 
-const arr4 = castArray(null);
-// Returns: [null]
-
-const arr5 = castArray(undefined);
-// Returns: [undefined]
-
-const arr6 = castArray();
-// Returns: []
+// オブジェクトを配列に変換
+castArray({ a: 1 });
+// 戻り値: [{ a: 1 }]
 ```
+
+すでに配列である値はそのまま返されます。
+
+```typescript
+import { castArray } from 'es-toolkit/compat';
+
+castArray([1, 2, 3]);
+// 戻り値: [1, 2, 3]
+
+castArray(['a', 'b']);
+// 戻り値: ['a', 'b']
+```
+
+`null` と `undefined` も配列に変換されます。
+
+```typescript
+import { castArray } from 'es-toolkit/compat';
+
+castArray(null);
+// 戻り値: [null]
+
+castArray(undefined);
+// 戻り値: [undefined]
+```
+
+引数なしで呼び出すと、空の配列を返します。
+
+```typescript
+import { castArray } from 'es-toolkit/compat';
+
+castArray();
+// 戻り値: []
+```
+
+#### パラメータ
+
+- `value` (`T | readonly T[]`、オプション): 配列に変換する値。引数が提供されない場合は、空の配列を返します。
+
+#### 戻り値
+
+(`T[]`): 入力がすでに配列の場合はその配列を、そうでない場合は入力値を含む新しい配列を返します。

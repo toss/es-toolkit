@@ -1,70 +1,108 @@
-# transform
+# transform (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `reduce` 或 `Object.entries`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，详情请见 [这里](../../../compatibility.md)。
+此 `transform` 函数由于复杂的内部逻辑而运行缓慢。在大多数情况下,可以使用 JavaScript 的内置方法更简单地实现。
+
+请使用更快、更现代的 `reduce` 或 `Object.entries`。
+
 :::
 
-遍历对象的值，按照期望的形式累积并创建新对象。
-
-如果不提供 `accumulator` 的初始值，将创建一个具有相同原型的新数组或对象。
-
-当 `iteratee` 函数返回 `false` 时，将中断遍历。
-
-## 接口
+遍历数组或对象,使用累加器累积值以创建新值。
 
 ```typescript
-export function transform<T, U>(
-  object: readonly T[],
-  iteratee?: (acc: U, curr: T, index: number, arr: readonly T[]) => void,
-  accumulator?: U
-): U;
-
-export function transform<T, U>(
-  object: Record<string, T>,
-  iteratee?: (acc: U, curr: T, key: string, dict: Record<string, T>) => void,
-  accumulator?: U
-): U;
-
-export function transform<T extends object, U>(
-  object: T,
-  iteratee?: (acc: U, curr: T[keyof T], key: keyof T, dict: Record<keyof T, T[keyof T]>) => void,
-  accumulator?: U
-): U;
+const result = transform(object, iteratee, accumulator);
 ```
 
-### 参数
+## 用法
 
-- `object` (`readonly T[] | T`): 要处理的对象。
-- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: T[] | T) => unknown`): 每次处理时调用的函数。
-- `accumulator` (`U`): 初始值。
+### `transform(object, iteratee, accumulator)`
 
-### 返回值
-
-(`U | undefined | null`): 返回累积的值。
-
-## 示例
+当您想遍历数组或对象的每个元素,在累加器中累积值时,请使用 `transform`。当 `iteratee` 函数返回 `false` 时,迭代停止。
 
 ```typescript
-// Transform an array
-const array = [2, 3, 4];
-transform(
-  array,
-  (acc, value) => {
-    acc += value;
-    return value % 2 === 0;
-  },
-  0
-); // => 5
+import { transform } from 'es-toolkit/compat';
 
-// Transform an object
+// 转换数组
+const numbers = [2, 3, 4];
+const doubled = transform(
+  numbers,
+  (acc, value) => {
+    acc.push(value * 2);
+  },
+  []
+);
+// 返回: [4, 6, 8]
+
+// 转换对象
 const obj = { a: 1, b: 2, c: 1 };
-transform(
+const grouped = transform(
   obj,
   (result, value, key) => {
     (result[value] || (result[value] = [])).push(key);
   },
   {}
-); // => { '1': ['a', 'c'], '2': ['b'] }
+);
+// 返回: { '1': ['a', 'c'], '2': ['b'] }
 ```
+
+如果省略累加器,将自动创建空数组或空对象。
+
+```typescript
+import { transform } from 'es-toolkit/compat';
+
+// 对于数组会创建空数组
+const result1 = transform([1, 2, 3], (acc, value) => {
+  acc.push(value * 2);
+});
+// 返回: [2, 4, 6]
+
+// 对于对象会创建空对象
+const result2 = transform({ a: 1, b: 2 }, (acc, value, key) => {
+  acc[key] = value * 2;
+});
+// 返回: { a: 2, b: 4 }
+```
+
+可以通过在 `iteratee` 函数中返回 `false` 来停止迭代。
+
+```typescript
+import { transform } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4, 5];
+const result = transform(
+  numbers,
+  (acc, value) => {
+    if (value > 3) {
+      return false; // 停止迭代
+    }
+    acc.push(value * 2);
+  },
+  []
+);
+// 返回: [2, 4, 6] (4 和 5 未处理)
+```
+
+如果省略 `iteratee` 函数,则返回一个空对象或空数组。
+
+```typescript
+import { transform } from 'es-toolkit/compat';
+
+const array = [1, 2, 3];
+const copy1 = transform(array);
+// 返回: []
+
+const obj = { a: 1, b: 2 };
+const copy2 = transform(obj);
+// 返回: {}
+```
+
+#### 参数
+
+- `object` (`readonly T[] | T`, 可选): 要迭代的数组或对象。
+- `iteratee` (`(accumulator: U, value: T | T[keyof T], key: any, object: readonly T[] | T) => unknown`, 可选): 为每个元素执行的函数。返回 `false` 会停止迭代。默认为 `identity` 函数。
+- `accumulator` (`U`, 可选): 初始值。如果省略,数组会创建空数组,对象会创建空对象。
+
+#### 返回值
+
+(`U | any[] | Record<string, any>`): 返回累积的结果。

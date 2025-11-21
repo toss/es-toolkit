@@ -1,38 +1,74 @@
-# nthArg
+# nthArg (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning アロー関数を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `nthArg` 関数は単に特定のインデックスの引数を返すラッパー関数を作成するだけです。アロー関数を使用すれば、より簡潔で明確に同じ機能を実装できます。
+
+代わりに、より高速で現代的なアロー関数を使用してください。
+
 :::
 
-指定されたインデックス `n` にある引数を取得する関数を作成します。
-
-`n` が負の場合、末尾から数えて n 番目の引数が返ります。文字列。
-
-## インターフェース
+指定したインデックスの引数を返す関数を生成します。
 
 ```typescript
-function nthArg(n?: number): (...args: any[]) => unknown;
+const getNthArg = nthArg(n);
 ```
 
-### パラメータ
+## 使用法
 
-- `n` (`number`, オプション): 取得する引数のインデックス, デフォルトは `0`.
-  負の場合、引数リストの末尾から数えます。文字列。
+### `nthArg(n)`
 
-### 戻り値
-
-(`(args: any[]) => unknown`): 指定されたインデックスの引数を返す新しい関数です。文字列。
-
-## 例
+関数の特定の位置にある引数だけが必要な場合は `nthArg` を使用してください。負のインデックスを使用すると、末尾から計算します。
 
 ```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// 2番目の引数を取得する関数を生成
 const getSecondArg = nthArg(1);
-const result = getSecondArg('a', 'b', 'c');
-console.log(result); // => 'b'
+getSecondArg('a', 'b', 'c', 'd');
+// Returns: 'b'
 
-const getLastArg = nthArg(-1);
-const result = getLastArg('a', 'b', 'c');
-console.log(result); // => 'c'
+// 最後から2番目の引数を取得する関数を生成
+const getPenultimateArg = nthArg(-2);
+getPenultimateArg('a', 'b', 'c', 'd');
+// Returns: 'c'
+
+// 最初の引数を取得する関数を生成(デフォルト)
+const getFirstArg = nthArg();
+getFirstArg('a', 'b', 'c');
+// Returns: 'a'
 ```
+
+配列メソッドと一緒に使用すると便利です。
+
+```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// 各配列の2番目の要素のみを抽出
+const arrays = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+arrays.map(nthArg(1));
+// Returns: [2, 5, 8]
+```
+
+負のインデックスは末尾から計算します。
+
+```typescript
+import { nthArg } from 'es-toolkit/compat';
+
+// 最後の引数を取得する関数
+const getLastArg = nthArg(-1);
+getLastArg('first', 'middle', 'last');
+// Returns: 'last'
+```
+
+#### パラメータ
+
+- `n` (`number`, オプション): 返す引数のインデックスです。負の値は末尾から計算します。デフォルト値は `0` です。
+
+#### 戻り値
+
+(`(...args: any[]) => any`): 指定したインデックスの引数を返す新しい関数を返します。

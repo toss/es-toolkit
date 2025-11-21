@@ -1,37 +1,56 @@
-# toInteger
+# toInteger (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Converts `value` to an integer.
-
-This function first converts `value` to a finite number. If the result has any decimal places,
-they are removed by rounding down to the nearest whole number.
-
-## Signature
+Converts a value to an integer.
 
 ```typescript
-function toInteger(value: any): number;
+const integer = toInteger(value);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`any`): The value to convert.
+### `toInteger(value)`
 
-### Returns
-
-(`number`): The converted integer.
-
-## Examples
+Converts a value to an integer. The decimal part is discarded, leaving only the integer part.
 
 ```typescript
-toInteger(3.2); // => 3
-toInteger(Number.MIN_VALUE); // => 0
-toInteger(Infinity); // => 1.7976931348623157e+308
-toInteger('3.2'); // => 3
-toInteger(Symbol.iterator); // => 0
-toInteger(NaN); // => 0
+import { toInteger } from 'es-toolkit/compat';
+
+// Convert decimal to integer
+toInteger(3.2);
+// Returns: 3
+
+// Convert string number to integer
+toInteger('3.2');
+// Returns: 3
+
+// Very small numbers become 0
+toInteger(Number.MIN_VALUE);
+// Returns: 0
+
+// Infinity becomes MAX_VALUE
+toInteger(Infinity);
+// Returns: 1.7976931348623157e+308
 ```
+
+Invalid values are converted to 0.
+
+```typescript
+import { toInteger } from 'es-toolkit/compat';
+
+toInteger(NaN);
+// Returns: 0
+
+toInteger(Symbol.iterator);
+// Returns: 0
+
+toInteger(null);
+// Returns: 0
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to convert.
+
+#### Returns
+
+(`number`): Returns the converted integer.

@@ -1,86 +1,100 @@
-# findIndex
+# findIndex (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.findIndex`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `findIndex` 함수는 다양한 조건 형식 처리, `fromIndex` 처리 등의 추가 기능으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.findIndex`를 사용하세요.
+
 :::
 
-배열에서 조건에 맞는 첫 번째 값의 인덱스를 반환해요.
-
-조건은 여러 방법들로 명시할 수 있어요.
-
-- **검사 함수**: 각각의 요소에 대해서 검사하는 함수를 실행해요. 처음으로 `true`를 반환하게 하는 값이 선택돼요.
-- **부분 객체**: 주어진 객체와 부분적으로 일치하는 첫 번째 요소가 선택돼요.
-- **프로퍼티-값 쌍**: 해당 프로퍼티에 대해서 값이 일치하는 첫 번째 요소가 선택돼요.
-- **프로퍼티 이름**: 해당 프로퍼티에 대해서 참으로 평가되는 값을 가지는 첫 번째 요소가 선택돼요.
-
-## 인터페이스
+배열에서 조건에 맞는 첫 번째 요소의 인덱스를 찾아요.
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
+const index = findIndex(arr, doesMatch, fromIndex);
 ```
 
-### 파라미터
+## 사용법
 
-- `arr` (`T[]`): 검색할 배열.
+### `findIndex(arr, doesMatch, fromIndex)`
 
-::: info `arr`는 `ArrayLike<T>`이거나 `null` 또는 `undefined`일 수 있어요
+배열에서 특정 조건에 맞는 첫 번째 요소의 위치를 찾고 싶을 때 `findIndex`를 사용하세요. 다양한 방식으로 조건을 지정할 수 있어요. 조건에 맞는 요소가 없으면 `-1`을 반환해요.
 
-lodash와 완전히 호환되도록 `findIndex` 함수는 `arr`를 다음과 같이 처리해요.
-
-- `arr`가 `ArrayLike<T>`인 경우, 배열로 변환하기 위해 `Array.from(...)`을 사용해요.
-- `arr`가 `null` 또는 `undefined`인 경우, 빈 배열로 간주돼요.
-
-:::
-
-- `doesMatch`:
-
-  - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
-  - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
-  - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-  - **프로퍼티 이름** (`PropertyKey`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
-
-- `fromIndex` (`number`): 검색을 시작할 인덱스. 기본값은 `0`.
-
-### 반환 값
-
-(`number`): 주어진 조건을 만족하는 첫 번째 요소의 인덱스. 없으면 `-1`.
-
-## 예시
+함수로 조건을 지정하면 각 요소에 대해 함수를 실행하고 참을 반환하는 첫 번째 요소의 인덱스를 반환해요.
 
 ```typescript
 import { findIndex } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-const items = [1, 2, 3, 4, 5];
-const result = findIndex(items, item => item > 3);
-console.log(result); // 3
-
-// 부분 객체를 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+const users = [
+  { id: 1, name: 'Alice', active: false },
+  { id: 2, name: 'Bob', active: true },
+  { id: 3, name: 'Charlie', active: true },
 ];
-const result = findIndex(items, { name: 'Bob' });
-console.log(result); // 0
 
-// 프로퍼티-값 쌍을 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findIndex(items, ['name', 'Alice']);
-console.log(result); // 0
-
-// 프로퍼티 이름을 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findIndex(items, 'name');
-console.log(result); // 0
+// 함수로 조건 지정
+findIndex(users, user => user.active);
+// Returns: 1
 ```
+
+부분 객체로 조건을 지정하면 해당 속성들이 일치하는 첫 번째 요소의 인덱스를 반환해요.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// 부분 객체로 조건 지정
+findIndex(users, { name: 'Bob', active: true });
+// Returns: 1
+```
+
+속성 이름과 값의 배열로 조건을 지정하면 해당 속성이 그 값과 일치하는 첫 번째 요소의 인덱스를 반환해요.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// [속성명, 값] 배열로 조건 지정
+findIndex(users, ['active', true]);
+// Returns: 1
+```
+
+속성 이름만 지정하면 해당 속성이 참으로 평가되는 첫 번째 요소의 인덱스를 반환해요.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// 속성 이름으로 조건 지정
+findIndex(users, 'active');
+// Returns: 1
+```
+
+`fromIndex`를 지정하면 해당 인덱스부터 검색을 시작해요. 음수 값을 사용하면 배열 끝에서부터 계산해요.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// 인덱스 2부터 검색 시작
+findIndex(users, user => user.active, 2);
+// Returns: 2
+
+// 배열 끝에서 두 번째부터 검색
+findIndex(users, user => user.active, -2);
+// Returns: 1
+```
+
+`null`이나 `undefined`는 빈 배열로 처리해요.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+findIndex(null, user => user.active); // -1
+findIndex(undefined, 'active'); // -1
+```
+
+#### 파라미터
+
+- `arr` (`ArrayLike<T> | null | undefined`): 검색할 배열이에요.
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 일치 조건이에요. 함수, 부분 객체, 키-값 쌍, 또는 속성 이름이 될 수 있어요.
+- `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 기본값은 `0`이에요.
+
+#### 반환 값
+
+(`number`): 조건에 맞는 첫 번째 요소의 인덱스를 반환해요. 조건에 맞는 요소가 없으면 `-1`을 반환해요.

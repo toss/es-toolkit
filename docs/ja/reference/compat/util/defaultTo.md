@@ -1,35 +1,70 @@
-# defaultTo
+# defaultTo (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-`null`、`undefined`、`NaN` に対してデフォルト値を返します。
-
-## インターフェース
+`null`、`undefined`、`NaN`の値に対してデフォルト値を返します。
 
 ```typescript
-function defaultTo<T>(value: T | null | undefined, defaultValue?: T): T;
-function defaultTo<T, D>(value: T | null | undefined, defaultValue: D): T | D;
+const result = defaultTo(value, defaultValue);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`T | null | undefined`): チェックする値。
-- `defaultValue` (`D`): 最初の値が `null`、`undefined`、または `NaN` の場合に返されるデフォルト値。
+### `defaultTo(value, defaultValue)`
 
-### 戻り値
-
-(`T | D`): 最初の値またはデフォルト値のいずれか。
-
-## 例
+値が`null`、`undefined`、または`NaN`の時にデフォルト値を提供したい時に`defaultTo`を使用してください。APIレスポンスやユーザー入力で無効な値を処理する際に役立ちます。
 
 ```typescript
-defaultTo(null, 'default'); // returns 'default'
-defaultTo(undefined, 42); // returns 42
-defaultTo(NaN, 0); // returns 0
-defaultTo('actual', 'default'); // returns 'actual'
-defaultTo(123, 0); // returns 123
+import { defaultTo } from 'es-toolkit/compat';
+
+// 基本的な使用法
+console.log(defaultTo(null, 'default')); // 'default'
+console.log(defaultTo(undefined, 'default')); // 'default'
+console.log(defaultTo(NaN, 0)); // 0
+console.log(defaultTo('actual', 'default')); // 'actual'
+console.log(defaultTo(123, 0)); // 123
 ```
+
+APIレスポンス処理に活用できます。
+
+```typescript
+import { defaultTo } from 'es-toolkit/compat';
+
+function processUserData(response) {
+  return {
+    name: defaultTo(response.name, '名前なし'),
+    age: defaultTo(response.age, 0),
+    score: defaultTo(response.score, 0), // NaN処理も含む
+  };
+}
+
+// APIが不完全なデータを返す場合
+const userData = processUserData({
+  name: null,
+  age: undefined,
+  score: NaN,
+});
+
+console.log(userData);
+// { name: '名前なし', age: 0, score: 0 }
+```
+
+配列やオブジェクトにも使用できます。
+
+```typescript
+import { defaultTo } from 'es-toolkit/compat';
+
+const users = defaultTo(response.users, []);
+const metadata = defaultTo(response.metadata, {});
+
+// 空の配列やオブジェクトではなくnull/undefined/NaNのみを処理します
+console.log(defaultTo([], ['default'])); // [] (空の配列ですが有効な値)
+console.log(defaultTo({}, { default: true })); // {} (空のオブジェクトですが有効な値)
+```
+
+#### パラメータ
+
+- `value` (`T | null | undefined`): 確認する値です。
+- `defaultValue` (`D`): 値が`null`、`undefined`または`NaN`の場合に返すデフォルト値です。
+
+#### 戻り値
+
+(`T | D`): 値が有効であれば元の値を、そうでなければデフォルト値を返します。

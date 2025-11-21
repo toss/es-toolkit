@@ -1,50 +1,58 @@
 # toMerged
 
-`source`が持つ値を`target`オブジェクトにマージします。
-
-この関数は深いマージを実行し、ネストされたオブジェクトや配列も再帰的にマージされます。
-
-- `source`と`target`のプロパティが両方ともオブジェクトまたは配列の場合、2つのオブジェクトと配列はマージされます。
-- `source`のプロパティが`undefined`の場合、`target`のプロパティは上書きされません。
-
-[merge](./merge.md)とは異なり、この関数は`target`オブジェクトを変更しません。
-
-## インターフェース
+ターゲットオブジェクトのコピーにソースオブジェクトを深くマージした新しいオブジェクトを返します。
 
 ```typescript
-function toMerged<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(target: T, source: S): T & S;
+const result = toMerged(target, source);
 ```
 
-### パラメータ
+## 使用法
 
-- `target` (`T`): `source`オブジェクトのプロパティをマージする対象のオブジェクト。
-- `source` (`S`): `target`オブジェクトにプロパティをマージするオブジェクト。
+### `toMerged(target, source)`
 
-### 戻り値
-
-(`T & S`): `source`と`target`オブジェクトのプロパティがマージされた新しいオブジェクト
-
-## 例
+2つのオブジェクトを深くマージするが元のオブジェクトを修正したくない時に`toMerged`を使用してください。[merge](./merge.md)とは異なり、元の`target`オブジェクトは修正されず、新しいオブジェクトが返されます。
 
 ```typescript
+import { toMerged } from 'es-toolkit/object';
+
+// 基本的なオブジェクトマージ
 const target = { a: 1, b: { x: 1, y: 2 } };
 const source = { b: { y: 3, z: 4 }, c: 5 };
 const result = toMerged(target, source);
-console.log(result);
-// 戻り値: { a: 1, b: { x: 1, y: 3, z: 4 }, c: 5 }
+// resultは{ a: 1, b: { x: 1, y: 3, z: 4 }, c: 5 }になります
+// targetはそのまま{ a: 1, b: { x: 1, y: 2 } }で維持されます
 
-const target = { a: [1, 2], b: { x: 1 } };
-const source = { a: [3], b: { y: 2 } };
-const result = toMerged(target, source);
-console.log(result);
-// 戻り値: { a: [3, 2], b: { x: 1, y: 2 } }
+// 配列もマージされます
+const arrayTarget = { a: [1, 2], b: { x: 1 } };
+const arraySource = { a: [3], b: { y: 2 } };
+const arrayResult = toMerged(arrayTarget, arraySource);
+// arrayResultは{ a: [3, 2], b: { x: 1, y: 2 } }になります
+// arrayTargetは変更されません
 
-const target = { a: null };
-const source = { a: [1, 2, 3] };
-const result = toMerged(target, source);
-console.log(result);
-// 戻り値: { a: [1, 2, 3] }
+// null値も適切に処理します
+const nullTarget = { a: null };
+const nullSource = { a: [1, 2, 3] };
+const nullResult = toMerged(nullTarget, nullSource);
+// nullResultは{ a: [1, 2, 3] }になります
 ```
+
+`undefined`値は既存の値を上書きしません。
+
+```typescript
+const target = { a: 1, b: 2 };
+const source = { b: undefined, c: 3 };
+const result = toMerged(target, source);
+// resultは{ a: 1, b: 2, c: 3 }になります (bは上書きされません)
+```
+
+#### パラメータ
+
+- `target` (`T extends Record<PropertyKey, any>`): マージされるターゲットオブジェクトです。このオブジェクトは修正されません。
+- `source` (`S extends Record<PropertyKey, any>`): ターゲットオブジェクトにマージするソースオブジェクトです。
+
+#### 戻り値
+
+(`T & S`): ターゲットオブジェクトとソースオブジェクトがマージされた新しいオブジェクトを返します。
 
 ## デモ
 

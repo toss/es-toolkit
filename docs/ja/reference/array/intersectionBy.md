@@ -1,70 +1,67 @@
 # intersectionBy
 
-`mapper` 関数が返す値を基準に、2つの配列の共通部分を返します。
-
-この関数は、パラメータとして2つの配列と `mapper` 関数を受け取ります。
-`mapper` 関数で各配列の要素を変換したとき、両方の配列に含まれる要素からなる新しい配列を返します。
-実際の実装を見ると、最初の配列と2番目の配列を `mapper` が返す値を基準に比較し、最初の配列の要素のうち2番目の配列にない要素を除去します。
-
-## インターフェース
+変換関数の結果を基準に、2つの配列の交集合を求めた新しい配列を返します。
 
 ```typescript
-function intersectionBy<T, U>(firstArr: T[], secondArr: U[], mapper: (item: T | U) => unknown): T[];
+const result = intersectionBy(firstArr, secondArr, mapper);
 ```
 
-### パラメータ
+## 使用法
 
-- `firstArr` (`T[]`): 比較する最初の配列。
-- `secondArr` (`U[]`): 比較する2番目の配列。
-- `mapper` (`(item: T | U) => unknown`): 比較するために要素を新しい値に変換する関数。
+### `intersectionBy(firstArr, secondArr, mapper)`
 
-### 戻り値
-
-(`T[]`): 最初の配列と2番目の配列を `mapper` が返す値を基準に比較し、両方の配列に含まれる要素のみを含む新しい配列。
-
-## 例
+2つの配列で特定の属性や変換された値を基準に共通の要素を見つけたい場合は `intersectionBy` を使用してください。各要素を変換関数で処理した結果を比較して交集合を求めます。オブジェクト配列で特定のプロパティで比較したり、複雑な変換ロジックが必要な場合に便利です。
 
 ```typescript
-const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const array2 = [{ id: 2 }, { id: 4 }];
-const mapper = item => item.id;
-const result = intersectionBy(array1, array2, mapper);
-// `mapper`で変換したとき、両方の配列に含まれる要素からなる [{ id: 2 }] 値が返されます。
+import { intersectionBy } from 'es-toolkit/array';
 
-const array1 = [
-  { id: 1, name: 'jane' },
-  { id: 2, name: 'amy' },
-  { id: 3, name: 'michael' },
+// オブジェクトのidプロパティを基準に交集合を求めます。
+const users1 = [
+  { id: 1, name: 'john' },
+  { id: 2, name: 'jane' },
+  { id: 3, name: 'bob' },
 ];
-const array2 = [2, 4];
-const mapper = item => (typeof item === 'object' ? item.id : item);
-const result = intersectionBy(array1, array2, mapper);
-// `mapper`で変換したとき、両方の配列に含まれる要素からなる [{ id: 2, name: 'amy' }] 値が返されます。
+const users2 = [
+  { id: 2, name: 'jane' },
+  { id: 4, name: 'alice' },
+];
+intersectionBy(users1, users2, user => user.id);
+// Returns: [{ id: 2, name: 'jane' }]
+
+// 異なる型の配列も比較できます。
+const objects = [
+  { id: 1, name: 'apple' },
+  { id: 2, name: 'banana' },
+];
+const ids = [2, 3, 4];
+intersectionBy(objects, ids, item => (typeof item === 'object' ? item.id : item));
+// Returns: [{ id: 2, name: 'banana' }]
 ```
 
-## Lodashとの互換性
-
-`es-toolkit/compat`から`intersectionBy`をインポートすると、lodashと互換性があります。
-
-- `intersectionBy`は共通要素を見つけるために複数の配列風オブジェクト(Array-like object)を受け入れます。
-- `intersectionBy`はプロパティキーをiterateeとして受け入れます。
+複雑な変換ロジックも適用できます。
 
 ```typescript
-import { intersectionBy } from 'es-toolkit/compat';
+import { intersectionBy } from 'es-toolkit/array';
 
-const array1 = [1.2, 2.4, 3.6];
-const array2 = [2.5, 3.7];
-const array3 = [2.6, 3.8];
-const result = intersectionBy(array1, array2, array3, Math.floor);
-// 結果は [2.4, 3.6] です。Math.floorを適用した後、共通要素は2と3です。
+// 文字列を小文字に変換して比較します。
+const words1 = ['Apple', 'Banana', 'Cherry'];
+const words2 = ['apple', 'DATE', 'elderberry'];
+intersectionBy(words1, words2, word => word.toLowerCase());
+// Returns: ['Apple']
 
-const array1 = [{ x: 1 }, { x: 2 }, { x: 3 }];
-const array2 = [{ x: 2 }, { x: 3 }, { x: 4 }];
-const result = intersectionBy(array1, array2, 'x');
-// 結果は [{ x: 2 }, { x: 3 }] です。これらの要素は同じ`x`プロパティを持っています。
-
-const arrayLike1 = { 0: 'apple', 1: 'banana', 2: 'cherry', length: 3 };
-const arrayLike2 = { 0: 'banana', 1: 'cherry', 2: 'date', length: 3 };
-const result = intersectionBy(arrayLike1, arrayLike2);
-// 結果は ['banana', 'cherry'] です。これらの要素は両方の配列風オブジェクトに共通しています。
+// 数値を絶対値に変換して比較します。
+const numbers1 = [1, -2, 3, -4];
+const numbers2 = [2, -3, 4, 5];
+intersectionBy(numbers1, numbers2, num => Math.abs(num));
+// Returns: [-2, 3, -4]
 ```
+
+#### パラメータ
+
+- `firstArr` (`readonly T[]`): 比較する最初の配列です。
+- `secondArr` (`readonly U[]`): 比較する2番目の配列です。
+- `mapper` (`(item: T | U) => unknown`): 各要素を変換して比較基準を作成する関数です。
+
+#### 戻り値
+
+(`T[]`): 変換関数の結果を基準に、両方の配列に共通して含まれる要素からなる新しい配列を返します。結果は最初の配列の要素で構成されます。

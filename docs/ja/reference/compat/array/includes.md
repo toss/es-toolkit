@@ -1,38 +1,96 @@
-# includes
+# includes (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.includes`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`includes`関数は、オブジェクトの走査とSameValueZero比較処理により、動作が遅くなります。配列の場合、JavaScriptのネイティブ`Array.prototype.includes`メソッドの方が高速で標準化されています。
+
+代わりに、より高速でモダンな`Array.prototype.includes`を使用してください。
+
 :::
 
-指定された値が、与えられた配列、オブジェクト、または文字列に含まれているかどうかを確認します。
-
-比較演算には[SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero)を使用します。
-
-## インターフェース
+配列、オブジェクト、または文字列に特定の値が含まれているかを確認します。
 
 ```typescript
-function includes<T>(arr: T[], item: T, fromIndex?: number): boolean;
-function includes<T extends Record<string, any>>(obj: T, value: T[keyof T], fromIndex?: number): boolean;
-function includes(str: string, substr: string, fromIndex?: number): boolean;
+const hasValue = includes(collection, target, fromIndex);
 ```
 
-### パラメータ
+## 使用法
 
-- `source` (`T[] | Record<string, any> | string`): 検索する配列、オブジェクト、または文字列。
-- `target` (`T`): 検索する値。
-- `fromIndex` (`number`): 検索を開始するインデックス。負の値の場合は `source` の末尾からの位置。
+### `includes(collection, target, fromIndex)`
 
-### 戻り値
-
-(`boolean`): 検索する値が `source` に含まれていれば `true`、そうでなければ `false`。
-
-## 例
+配列、オブジェクト、文字列に特定の値が存在するかを確認したい場合は`includes`を使用してください。SameValueZero方式で値を比較します。
 
 ```typescript
-includes([1, 2, 3], 2); // true
-includes({ a: 1, b: 'a', c: NaN }, 'a'); // true
-includes('hello world', 'world'); // true
-includes('hello world', 'test'); // false
+import { includes } from 'es-toolkit/compat';
+
+// 配列で値を検索
+includes([1, 2, 3], 2);
+// Returns: true
+
+// オブジェクトの値から検索
+includes({ a: 1, b: 'a', c: NaN }, 'a');
+// Returns: true
+
+// 文字列で部分文字列を検索
+includes('hello world', 'world');
+// Returns: true
 ```
+
+特定のインデックスから検索を開始できます。
+
+```typescript
+import { includes } from 'es-toolkit/compat';
+
+// インデックス2から検索
+includes([1, 2, 3, 2], 2, 2);
+// Returns: true (インデックス3にあります)
+
+// 負のインデックスは末尾から計算
+includes([1, 2, 3], 2, -2);
+// Returns: true
+```
+
+`null`または`undefined`は常に`false`を返します。
+
+```typescript
+import { includes } from 'es-toolkit/compat';
+
+includes(null, 1); // false
+includes(undefined, 1); // false
+```
+
+文字列で部分文字列を検索することもできます。
+
+```typescript
+import { includes } from 'es-toolkit/compat';
+
+// 最初から検索
+includes('hello', 'e');
+// Returns: true
+
+// 特定の位置から検索
+includes('hello', 'e', 2);
+// Returns: false (インデックス2以降に'e'はありません)
+```
+
+`NaN`値も正しく見つけることができます。
+
+```typescript
+import { includes } from 'es-toolkit/compat';
+
+includes([1, 2, NaN], NaN);
+// Returns: true
+
+includes({ a: 1, b: NaN }, NaN);
+// Returns: true
+```
+
+#### パラメータ
+
+- `collection` (`Array | Record<string, any> | string | null | undefined`): 検索する配列、オブジェクト、または文字列です。
+- `target` (`any`): 見つける値です。
+- `fromIndex` (`number`, 選択): 検索を開始するインデックスです。負の値は末尾から計算します。デフォルトは`0`です。
+
+#### 戻り値
+
+(`boolean`): 値が存在する場合は`true`、そうでない場合は`false`を返します。

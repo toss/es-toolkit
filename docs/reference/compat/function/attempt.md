@@ -1,47 +1,66 @@
-# attempt
+# attempt (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `es-toolkit`'s [`attempt`](../../util/attempt.md) function or try-catch blocks instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `attempt` function can be confusing because it returns both errors and return values without distinction.
+
+Instead, use the more direct and clear [`attempt`](../../util/attempt.md) function or try-catch blocks.
+
 :::
 
-Attempts to execute a function with the provided arguments.
-If the function throws an error, it catches the error and returns it.
-
-If the caught error is not an instance of `Error`, it wraps it in a new `Error`.
-
-## Signature
+A function that executes a function and returns an error object if an error occurs.
 
 ```typescript
-function attempt<R>(func: (...args: any[]) => R, ...args: any[]): R | Error;
+const result = attempt(func, ...args);
 ```
 
-### Parameters
+## Usage
 
-- `func` (`(...args: any[]) => R`): The function to be executed.
-- `args` (`...any[]`): The arguments to pass to the function.
+### `attempt(func, ...args)`
 
-### Returns
-
-(`R | Error`): The return value of the function if successful, or an Error if an exception is thrown.
-
-## Examples
+Use `attempt` when you want to safely execute a function. It's useful when executing a function that may throw errors, preventing the program from crashing and handling errors as return values.
 
 ```typescript
-// Example 1: Successful execution
-const result = attempt((x, y) => x + y, 2, 3);
-console.log(result); // Output: 5
+import { attempt } from 'es-toolkit/compat';
 
-// Example 2: Function throws an error
+// Basic usage - successful case
+const result = attempt((x, y) => x + y, 2, 3);
+console.log(result); // 5
+
+// Error case
 const errorResult = attempt(() => {
   throw new Error('Something went wrong');
 });
-console.log(errorResult); // Output: Error: Something went wrong
-
-// Example 3: Non-Error thrown
-const nonErrorResult = attempt(() => {
-  throw 'This is a string error';
-});
-console.log(nonErrorResult); // Output: Error: This is a string error
+console.log(errorResult); // Error: Something went wrong
 ```
+
+Here's the difference compared to using try-catch blocks.
+
+```typescript
+// Using attempt
+import { attempt } from 'es-toolkit/compat';
+
+const result = attempt(riskyFunction, arg1, arg2);
+if (result instanceof Error) {
+  console.log('Error occurred:', result.message);
+} else {
+  console.log('Result:', result);
+}
+
+// Using try-catch (more direct)
+try {
+  const result = riskyFunction(arg1, arg2);
+  console.log('Result:', result);
+} catch (error) {
+  console.log('Error occurred:', error.message);
+}
+```
+
+#### Parameters
+
+- `func` (`Function`): The function to execute.
+- `args` (`...any[]`): The arguments to pass to the function.
+
+#### Returns
+
+(`ReturnType<F> | Error`): Returns the return value if the function succeeds, or an Error object if an error occurs.

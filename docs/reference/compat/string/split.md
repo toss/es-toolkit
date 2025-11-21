@@ -1,46 +1,68 @@
-# split
+# split (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use JavaScript's `String.prototype.split`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `split` function operates slowly due to handling `null` or `undefined`.
+
+Instead, use the faster and more modern JavaScript's `String.prototype.split`.
+
 :::
 
-Splits the input string by the specified `separator` and returns a new array containing the split segments.
-
-## Signature
+Splits a string into an array using a separator.
 
 ```typescript
-function split(string: string | null | undefined, separator?: RegExp | string, limit?: number): string[];
-function split(string: string | null | undefined, index: string | number, guard: object): string[];
+const segments = split(str, separator);
 ```
 
-## Parameters
+## Usage
 
-- `string` (`string | null | undefined`): The string to split.
-- `separator` (`RegExp | string`): The separator pattern to split by.
-- `limit` (`number`, optional): The length to truncate results to.
+### `split(string, separator?, limit?)`
 
-## Returns
+Use `split` when you want to divide a string into an array using a specific separator. You can also limit the maximum length of the resulting array.
 
-- (`string[]`): Returns the string segments.
+```typescript
+import { split } from 'es-toolkit/compat';
 
-## Examples
-
-```js
-// Split a string by a character
+// Split by hyphen
 split('a-b-c', '-');
-// => ['a', 'b', 'c']
+// Returns: ['a', 'b', 'c']
 
-// Split a string with a limit
-split('a-b-c', '-', 2);
-// => ['a', 'b']
+// Limit the number of results
+split('a-b-c-d', '-', 2);
+// Returns: ['a', 'b']
 
-// Split a string by a regex pattern
-split('abcde', /[bd]/);
-// => ['a', 'c', 'e']
-
-// Split a string into individual characters
-split('abc', '');
-// => ['a', 'b', 'c']
+// Split by regular expression
+split('hello world', /\s/);
+// Returns: ['hello', 'world']
 ```
+
+If no separator is specified, the entire string becomes the first element of the array.
+
+```typescript
+import { split } from 'es-toolkit/compat';
+
+split('hello');
+// Returns: ['hello']
+```
+
+`null` or `undefined` are treated as empty strings.
+
+```typescript
+import { split } from 'es-toolkit/compat';
+
+split(null);
+// Returns: ['']
+
+split(undefined);
+// Returns: ['']
+```
+
+#### Parameters
+
+- `string` (`string`, optional): The string to split. Defaults to an empty string.
+- `separator` (`RegExp | string`, optional): The separator to use for splitting.
+- `limit` (`number`, optional): The maximum length of the resulting array.
+
+#### Returns
+
+(`string[]`): Returns an array of strings split by the separator.

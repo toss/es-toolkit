@@ -1,72 +1,60 @@
-# assignWith
+# assignWith (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Implementing custom logic is recommended
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `assignWith` function is relatively slow due to complex customizer function processing.
+
+Instead, use `Object.assign` and implement custom logic directly.
+
 :::
 
-Assigns properties from multiple source objects to a target object.
-You can provide a `getValueToAssign` function to determine what value will be assigned for each property.
-
-This function merges the properties of the source objects into the target object.
-If a property in the source objects is equal to the corresponding property in the target object,
-it will not be overwritten.
-
-Unlike `assign`, this method accepts a `getValueToAssign` function that determines
-the final value to be assigned to each property in the target object. The return value
-of this function will be directly assigned to the corresponding property. This allows for
-more precise control over how properties are merged between objects. If not provided,
-the default behavior is equivalent to using the identity function (returning the source value).
-
-## Signature
+Assigns properties from source objects to a target object using a customizer function.
 
 ```typescript
-function assignWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function assignWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function assignWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function assignWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function assignWith(object: any, ...sources: any[]): any;
+const result = assignWith(target, source1, source2, customizer);
 ```
 
-### Parameters
+## Usage
 
-- `object` (`any`): The target object to which properties will be assigned.
-- `sources` (`...any[]`): The source objects whose properties will be assigned to the target object.
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): A function that determines the value to be assigned for each property. The value returned by this function will be assigned to the corresponding property.
+### `assignWith(object, ...sources, customizer)`
 
-### Returns
-
-(`any`): The updated target object with properties from the source objects assigned.
-
-## Examples
+Use `assignWith` when you want to customize how properties are assigned. The customizer function determines the final value for each property.
 
 ```typescript
-const target = { a: 1 };
-const result = assignWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { assignWith } from 'es-toolkit/compat';
+
+// Basic usage - assign only when undefined
+const target = { a: 1, b: undefined };
+const source = { b: 2, c: 3 };
+const result = assignWith(target, source, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// Returns: { a: 1, b: 2, c: 3 }
+
+// Array merging
+const target2 = { users: ['alice'] };
+const source2 = { users: ['bob', 'charlie'] };
+const result2 = assignWith(target2, source2, (objValue, srcValue) => {
+  if (Array.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
+// Returns: { users: ['alice', 'bob', 'charlie'] }
+
+// Multiple sources with customizer
+const target3 = { a: 1 };
+const result3 = assignWith(target3, { b: 2 }, { c: 3 }, (objValue, srcValue) => {
+  return objValue === undefined ? srcValue : objValue;
+});
+// Returns: { a: 1, b: 2, c: 3 }
 ```
+
+#### Parameters
+
+- `object` (`any`): The target object to which properties will be assigned.
+- `...sources` (`any[]`): The source objects from which properties will be copied.
+- `customizer` (`function`): A function that determines the value to assign. In the form `(objValue, srcValue, key, object, source) => any`.
+
+#### Returns
+
+(`any`): Returns the target object with values determined by the customizer function.

@@ -1,35 +1,49 @@
-# pullAll
+# pullAll (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Removes all specified values from an array.
-
-This function changes `arr` in place.
-If you want to remove values without modifying the original array, use `difference`.
-
-## Signature
+Removes all values from the array that are contained in the array of specified values.
 
 ```typescript
-function pullAll<T>(arr: T[], valuesToRemove: ArrayLike<T>): T[];
+const result = pullAll(array, valuesToRemove);
 ```
 
-### Parameters
+## Usage
 
-- `arr` (`T[]`): The array to modify.
-- `valuesToRemove` (`ArrayLike<T>`): The values to remove from the array.
+### `pullAll(array, valuesToRemove)`
 
-### Returns
-
-(`T[]`): The modified array with the specified values removed.
-
-## Examples
+Removes all values contained in the `valuesToRemove` array from the array and modifies the original array. Similar to the `pull` function, but accepts values to remove as an array.
 
 ```typescript
-const numbers = [1, 2, 3, 4, 5, 2, 4];
-pullAll(numbers, [2, 4]);
-console.log(numbers); // [1, 3, 5]
+import { pullAll } from 'es-toolkit/compat';
+
+// Remove specific values from number array
+const numbers = [1, 2, 3, 2, 4, 2, 5];
+pullAll(numbers, [2, 3]);
+console.log(numbers); // [1, 4, 5]
+
+// Remove specific values from string array
+const fruits = ['apple', 'banana', 'apple', 'cherry', 'banana'];
+pullAll(fruits, ['apple', 'banana']);
+console.log(fruits); // ['cherry']
 ```
+
+If you pass an empty array, `null`, or `undefined`, nothing will be removed.
+
+```typescript
+import { pullAll } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3];
+pullAll(numbers, []);
+console.log(numbers); // [1, 2, 3]
+
+pullAll(numbers, null);
+console.log(numbers); // [1, 2, 3]
+```
+
+#### Parameters
+
+- `array` (`T[]`): The array to modify.
+- `valuesToRemove` (`ArrayLike<T>`, optional): The array containing values to remove from the array. Defaults to `[]`.
+
+#### Returns
+
+(`T[]`): Returns the modified original array.

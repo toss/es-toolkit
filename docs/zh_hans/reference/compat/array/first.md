@@ -1,50 +1,78 @@
-# first
+# first (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `es-toolkit` 的 `head`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `first` 函数由于处理 `null` 或 `undefined` 和类数组对象转换而运行较慢。`es-toolkit` 的 `head` 函数没有这些额外处理,运行更快、更简单。
+
+请改用更快、更现代的 `es-toolkit` 的 [head](../../array/head.md)。
+
 :::
 
-返回数组的第一个元素，如果数组为空，则返回`undefined`。
-
-此函数接受一个数组并返回数组的第一个元素。
-如果数组为空，函数将返回`undefined`。
-
-## 签名
+返回数组的第一个元素。
 
 ```typescript
-function first<T>(arr: ArrayLike<T> | undefined | null): T | undefined;
+const firstElement = first(array);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`ArrayLike<T> | undefined | null`): 获取第一个元素的数组。
+### `first(array)`
 
-### 返回值
-
-(`T | undefined`): 数组的第一个元素，如果数组为空，则为`undefined`。
-
-## 示例
+当您想要获取数组的第一个元素时使用 `first`。如果数组为空或为 `null` 或 `undefined`,则返回 `undefined`。
 
 ```typescript
-const arr1 = [1, 2, 3];
-const firstElement1 = first(arr1);
-// firstElement1 将是 1
+import { first } from 'es-toolkit/compat';
 
-const arr2: string[] = [];
-const firstElement2 = first(arr2);
-// firstElement2 将是 undefined
+// 从常规数组获取第一个元素
+first([1, 2, 3]);
+// Returns: 1
 
-const arr3 = ['a', 'b', 'c'];
-const firstElement3 = first(arr3);
-// firstElement3 将是 'a'
+// 从字符串数组获取第一个元素
+first(['a', 'b', 'c']);
+// Returns: 'a'
 
-const arr4 = [true, false, true];
-const firstElement4 = first(arr4);
-// firstElement4 将是 true
-
-const arr5: [number, string, boolean] = [1, 'a', true];
-const firstElement5 = first(arr5);
-// firstElement5 将是 1
+// 空数组
+first([]);
+// Returns: undefined
 ```
+
+`null` 或 `undefined` 返回 `undefined`。
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+first(null); // undefined
+first(undefined); // undefined
+```
+
+可用于类数组对象。
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+const arrayLike = { 0: 'a', 1: 'b', 2: 'c', length: 3 };
+first(arrayLike);
+// Returns: 'a'
+
+// 字符串也被视为数组
+first('hello');
+// Returns: 'h'
+```
+
+对于类型保证的元组,返回确切的类型。
+
+```typescript
+import { first } from 'es-toolkit/compat';
+
+const tuple = [1, 'two', true] as const;
+first(tuple);
+// Returns: 1 (类型推断为 1)
+```
+
+#### 参数
+
+- `array` (`ArrayLike<T> | null | undefined`): 要获取第一个元素的数组。
+
+#### 返回值
+
+(`T | undefined`): 返回数组的第一个元素。如果数组为空或无效,则返回 `undefined`。

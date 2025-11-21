@@ -1,69 +1,71 @@
-# forInRight
+# forInRight (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.keys` と `for...in` ループを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `forInRight` 関数は、キー配列の生成、逆順の走査、`null` や `undefined` の処理などにより、パフォーマンスが遅くなります。
+
+代わりに、より高速で現代的な `Object.keys` と `for...in` ループを使用してください。
+
 :::
 
-オブジェクトを逆順に反復処理し、各プロパティに対して `iteratee` 関数を呼び出します。
-
-継承されたプロパティを含む、文字列キーのプロパティを逆順に反復処理します。
-
-`iteratee` 関数が `false` を返すと、反復処理は早期に終了します。
-
-## インターフェース
+オブジェクトのすべてのプロパティ(継承されたプロパティを含む)を逆順で反復し、各プロパティに対して関数を呼び出します。
 
 ```typescript
-function forInRight<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
-function forInRight<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forInRight(obj, iteratee);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`T | null | undefined`): 反復処理するオブジェクト
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 各反復で呼び出される関数。デフォルトは `identity` 関数
+### `forInRight(object, iteratee)`
 
-### 戻り値
-
-(`T | null | undefined`): `object` を返します
-
-## 例
+オブジェクトのすべてのプロパティを逆順で反復し、`iteratee` 関数を呼び出します。オブジェクトの固有プロパティだけでなく、プロトタイプチェーンを通じて継承されたプロパティも反復します。キーを配列に収集してから逆順で走査するため、通常の反復よりも遅くなります。`iteratee` 関数が `false` を返すと、反復を停止します。
 
 ```typescript
 import { forInRight } from 'es-toolkit/compat';
 
-function Shape() {
-  this.x = 0;
-  this.y = 0;
+// すべてのプロパティを逆順で反復
+const obj = { a: 1, b: 2 };
+forInRight(obj, (value, key) => {
+  console.log(key, value);
+});
+// 出力: 'b' 2, 'a' 1
+
+// 継承されたプロパティも含めて逆順で反復
+function Parent() {
+  this.inherited = 'value';
 }
+Parent.prototype.protoProperty = 'proto';
 
-Shape.prototype.move = function (x, y) {
-  this.x += x;
-  this.y += y;
-};
+const child = new Parent();
+child.own = 'ownValue';
 
-// Shapeのインスタンスを作成
-const square = new Shape();
-
-// すべての列挙可能なプロパティ（継承されたプロパティを含む）に対して逆順に反復処理
-forInRight(square, function (value, key) {
+forInRight(child, (value, key) => {
   console.log(key, value);
 });
-// 出力（逆順）:
-// 'move', [Function]
-// 'y', 0
-// 'x', 0
+// 出力: 'protoProperty' 'proto', 'own' 'ownValue', 'inherited' 'value'
 
-// iteratee関数がfalseを返すと、反復処理は早期に終了
-forInRight(square, function (value, key) {
+// 条件に基づく早期終了
+forInRight(obj, (value, key) => {
   console.log(key, value);
-  return key !== 'y'; // 'y'で停止
+  return key !== 'a'; // 'a' で停止
 });
-// 出力:
-// 'move', [Function]
-// 'y', 0
+// 出力: 'b' 2, 'a' 1
 ```
+
+`null` または `undefined` はそのまま返されます。
+
+```typescript
+import { forInRight } from 'es-toolkit/compat';
+
+forInRight(null, iteratee); // null
+forInRight(undefined, iteratee); // undefined
+```
+
+#### パラメータ
+
+- `object` (`T | null | undefined`): 反復するオブジェクト。
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, オプション): 各プロパティに対して呼び出す関数。デフォルトは `identity` 関数です。
+
+#### 戻り値
+
+(`T | null | undefined`): 元のオブジェクトを返します。

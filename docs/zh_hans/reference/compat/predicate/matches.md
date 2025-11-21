@@ -1,53 +1,68 @@
-# matches
+# matches (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-
-:::
-
-创建一个函数来对给定的目标对象和源对象进行深度比较。
-
-这个函数产生与[isMatch](./isMatch.md)函数相同的结果，但提供了不同的调用方式。
-
-## 签名
+创建一个函数来检查给定模式的部分匹配。
 
 ```typescript
-function matches(source: unknown): (target: unknown) => boolean;
+const matcher = matches(pattern);
 ```
 
-## 参数
+## 用法
 
-- `source` (`unknown`): 用于创建匹配器的源对象。
+### `matches(source)`
 
-## 返回值
-
-- (`(target: unknown) => boolean`): 返回一个函数，该函数接收一个目标对象，如果目标对象与源对象匹配则返回`true`，否则返回`false`。
-
-## 示例
-
-### 基本用法
+当您想创建一个函数来检查对象或数组的结构和值是否与特定模式匹配时使用 `matches`。在数组过滤或对象搜索中很有用。
 
 ```typescript
-const matcher = matches({ a: 1, b: 2 });
-matcher({ a: 1, b: 2, c: 3 }); // true
-matcher({ a: 1, c: 3 }); // false
+import { matches } from 'es-toolkit/compat';
+
+// 对象模式匹配
+const userMatcher = matches({ age: 25, department: 'Engineering' });
+
+const users = [
+  { name: 'Alice', age: 25, department: 'Engineering' },
+  { name: 'Bob', age: 30, department: 'Marketing' },
+  { name: 'Charlie', age: 25, department: 'Engineering' },
+];
+
+const engineeringUsers = users.filter(userMatcher);
+// [{ name: 'Alice', age: 25, department: 'Engineering' },
+//  { name: 'Charlie', age: 25, department: 'Engineering' }]
+
+// 嵌套对象模式
+const profileMatcher = matches({
+  profile: { city: 'Seoul', verified: true },
+});
+
+const profiles = [
+  { name: 'Kim', profile: { city: 'Seoul', verified: true, score: 100 } },
+  { name: 'Lee', profile: { city: 'Busan', verified: true } },
+  { name: 'Park', profile: { city: 'Seoul', verified: false } },
+];
+
+const seoulVerifiedUsers = profiles.filter(profileMatcher);
+// [{ name: 'Kim', profile: { city: 'Seoul', verified: true, score: 100 } }]
+
+// 数组模式匹配
+const arrayMatcher = matches([2, 4]);
+const arrays = [
+  [1, 2, 3, 4, 5],
+  [2, 4, 6],
+  [1, 3, 5],
+];
+const matchingArrays = arrays.filter(arrayMatcher);
+// [[1, 2, 3, 4, 5], [2, 4, 6]]
+
+// 空模式匹配所有值
+const emptyMatcher = matches({});
+emptyMatcher({ anything: 'value' }); // true
+emptyMatcher([]); // true
+emptyMatcher(null); // true
 ```
 
-### 匹配数组
+#### 参数
 
-```typescript
-const arrayMatcher = matches([1, 2, 3]);
-arrayMatcher([1, 2, 3, 4]); // true
-arrayMatcher([4, 5, 6]); // false
-```
+- `source` (`unknown`): 作为匹配模式的对象或值。
 
-### 匹配嵌套结构
+#### 返回值
 
-```typescript
-// Matching objects with nested structures
-const nestedMatcher = matches({ a: { b: 2 } });
-nestedMatcher({ a: { b: 2, c: 3 } }); // true
-nestedMatcher({ a: { c: 3 } }); // false
-```
+(`(target: unknown) => boolean`): 返回一个函数，用于检查给定值是否与模式部分匹配。

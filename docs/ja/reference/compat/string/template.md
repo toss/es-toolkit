@@ -1,71 +1,112 @@
-# template
+# template (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning JavaScript テンプレートリテラルを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `template` 関数は複雑な文字列処理のため、動作が遅くなります。
+
+代わりに、より高速で現代的な JavaScript テンプレートリテラルを使用してください。
+
 :::
 
-テンプレート文字列をレンダリングする関数を作成します。
-
-返された関数は、値を安全にエスケープしたり、値を評価したり、値を結合して文字列を作成するために使用できます。変数名や関数呼び出しなどのJavaScript式を評価することができます。
-
-## インターフェース
+文字列テンプレートに値を挿入して新しい文字列を生成する関数を作成します。
 
 ```typescript
-function template(string: string, options?: TemplateOptions): ((data?: object) => string) & { source: string };
+const compiled = template(templateString);
 ```
 
-### パラメータ
+## 使用法
+
+### `template(string, options?)`
+
+文字列テンプレートにデータを挿入して完成した文字列を作成したい場合は、`template` を使用してください。値を安全にエスケープしたり、そのまま挿入したり、JavaScript コードを実行したりできます。
+
+基本的な使い方で値を挿入またはエスケープできます。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// 値をそのまま挿入
+const compiled = template('<%= value %>');
+compiled({ value: 'Hello, World!' });
+// 戻り値: 'Hello, World!'
+
+// HTML を安全にエスケープ
+const safeCompiled = template('<%- value %>');
+safeCompiled({ value: '<script>alert("xss")</script>' });
+// 戻り値: '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
+```
+
+JavaScript コードを実行することもできます。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// 条件文を使用
+const compiled = template('<% if (user) { %>こんにちは <%= user %>さん!<% } %>');
+compiled({ user: 'es-toolkit' });
+// 戻り値: 'こんにちは es-toolkitさん!'
+
+// ループを使用
+const listTemplate = template('<% users.forEach(function(user) { %><li><%= user %></li><% }); %>');
+listTemplate({ users: ['太郎', '花子', '次郎'] });
+// 戻り値: '<li>太郎</li><li>花子</li><li>次郎</li>'
+```
+
+変数名を指定して安全に使用できます。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+const compiled = template('<%= data.name %>さんの年齢は <%= data.age %>歳です', {
+  variable: 'data',
+});
+compiled({ name: '太郎', age: 25 });
+// 戻り値: '太郎さんの年齢は 25歳です'
+```
+
+外部関数をインポートして使用できます。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+const compiled = template('<%= _.toUpper(message) %>', {
+  imports: { _: { toUpper: str => str.toUpperCase() } },
+});
+compiled({ message: 'hello world' });
+// 戻り値: 'HELLO WORLD'
+```
+
+カスタム区切り文字も作成できます。
+
+```typescript
+import { template } from 'es-toolkit/compat';
+
+// カスタム区切り文字で値を挿入
+const compiled = template('{{ message }}', {
+  interpolate: /\{\{([\s\S]+?)\}\}/g,
+});
+compiled({ message: 'こんにちは!' });
+// 戻り値: 'こんにちは!'
+
+// カスタム区切り文字でエスケープ
+const safeCompiled = template('[- html -]', {
+  escape: /\[-([\s\S]+?)-\]/g,
+});
+safeCompiled({ html: '<div>内容</div>' });
+// 戻り値: '&lt;div&gt;内容&lt;/div&gt;'
+```
+
+#### パラメータ
 
 - `string` (`string`): テンプレート文字列です。
-- `options.escape` (`RegExp`): 「escape」デリミタの正規表現です。
-- `options.evaluate` (`RegExp`): 「evaluate」デリミタの正規表現です。
-- `options.interpolate` (`RegExp`): 「interpolate」デリミタの正規表現です。
-- `options.variable` (`string`): データオブジェクトの変数名です。
-- `options.imports` (`Record<string, unknown>`): インポートされた関数のオブジェクトです。
-- `options.sourceURL` (`string`): テンプレートのソースURLです。
-- `guard` (`unknown`): 関数が`options`付きで呼び出されたかどうかを検出するガードです。
+- `options` (`object`, オプション): 設定オブジェクトです。
+  - `options.escape` (`RegExp`, オプション): HTML をエスケープする区切り文字の正規表現です。デフォルトは `<%-([\s\S]+?)%>` です。
+  - `options.evaluate` (`RegExp`, オプション): JavaScript コードを実行する区切り文字の正規表現です。デフォルトは `<%([\s\S]+?)%>` です。
+  - `options.interpolate` (`RegExp`, オプション): 値を挿入する区切り文字の正規表現です。デフォルトは `<%=([\s\S]+?)%>` です。
+  - `options.variable` (`string`, オプション): データオブジェクトの変数名です。
+  - `options.imports` (`object`, オプション): テンプレートで使用する関数です。
+  - `options.sourceURL` (`string`, オプション): デバッグ用のソース URL です。
 
-### 戻り値
+#### 戻り値
 
-(`((data?: object) => string) & { source: string }`): 返された関数は呼び出すことができ、`source` プロパティにコンパイル済みテンプレートのソースコードが含まれます。
-
-## 例
-
-```typescript
-// Use the "escape" delimiter to escape data properties.
-const compiled = template('<%- value %>');
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
-
-// Use the "interpolate" delimiter to interpolate data properties.
-const compiled = template('<%= value %>');
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
-
-// Use the "evaluate" delimiter to evaluate JavaScript code.
-const compiled = template('<% if (value) { %>Yes<% } else { %>No<% } %>');
-compiled({ value: true }); // returns 'Yes'
-
-// Use the "variable" option to specify the data object variable name.
-const compiled = template('<%= data.value %>', { variable: 'data' });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
-
-// Use the "imports" option to import functions.
-const compiled = template('<%= _.toUpper(value) %>', { imports: { _: { toUpper } } });
-compiled({ value: 'hello, world!' }); // returns 'HELLO, WORLD!'
-
-// Use the custom "escape" delimiter.
-const compiled = template('<@ value @>', { escape: /<@([\s\S]+?)@>/g });
-compiled({ value: '<div>' }); // returns '&lt;div&gt;'
-
-// Use the custom "evaluate" delimiter.
-const compiled = template('<# if (value) { #>Yes<# } else { #>No<# } #>', { evaluate: /<#([\s\S]+?)#>/g });
-compiled({ value: true }); // returns 'Yes'
-
-// Use the custom "interpolate" delimiter.
-const compiled = template('<$ value $>', { interpolate: /<\$([\s\S]+?)\$>/g });
-compiled({ value: 'Hello, World!' }); // returns 'Hello, World!'
-
-// Use the "sourceURL" option to specify the source URL of the template.
-const compiled = template('hello <%= user %>!', { sourceURL: 'template.js' });
-```
+(`TemplateExecutor`): データオブジェクトを受け取って完成した文字列を返す関数です。生成された関数コードは `source` プロパティで確認できます。

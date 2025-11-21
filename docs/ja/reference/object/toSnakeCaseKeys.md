@@ -1,58 +1,61 @@
 # toSnakeCaseKeys
 
-オブジェクトのプロパティを[スネークケース](../string/snakeCase.md)（`snake_case`）に変換した新しいオブジェクトを作成します。
+オブジェクトと配列のすべてのキーをスネークケース表記に変換した新しいオブジェクトを返します。
 
-ネストされたオブジェクト内のプロパティもすべてスネークケースに変換されます。
-
-## インターフェース
+スネークケース表記は、複数の単語で構成される識別子の各単語を小文字で書き、単語の間をアンダースコア(`_`)で連結する命名規則です。例えば`snake_case`のように書きます。
 
 ```typescript
-function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T>;
+const snakeCased = toSnakeCaseKeys(obj);
 ```
 
-### パラメータ
+## 使用法
 
-- `obj` (`T`): キーを変換するオブジェクトです。
+### `toSnakeCaseKeys(obj)`
 
-### 戻り値
-
-(`ToSnakeCaseKeys<T>`): すべてのキーがスネークケースに変換された新しいオブジェクトです。
-
-## 例
+オブジェクトのすべてのキーをsnake_caseに変換したい時に`toSnakeCaseKeys`を使用してください。ネストされたオブジェクトと配列内のオブジェクトも再帰的に変換されます。
 
 ```typescript
-// Example with objects
-const obj = { userId: 1, firstName: 'John' };
-const result = toSnakeCaseKeys(obj);
-// result will be { user_id: 1, first_name: 'John' }
+import { toSnakeCaseKeys } from 'es-toolkit/object';
 
-// Example with arrays of objects
-const arr = [
+// 基本的なオブジェクト変換
+const obj = { userId: 1, firstName: 'John', lastName: 'Doe' };
+const result = toSnakeCaseKeys(obj);
+// resultは{ user_id: 1, first_name: 'John', last_name: 'Doe' }になります
+
+// 配列内のオブジェクトも変換
+const users = [
   { userId: 1, firstName: 'John' },
   { userId: 2, firstName: 'Jane' },
 ];
-const arrResult = toSnakeCaseKeys(arr);
-// arrResult will be [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]
+const convertedUsers = toSnakeCaseKeys(users);
+// convertedUsersは[{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]になります
 
-// Example with nested objects
+// ネストされたオブジェクトも完全に変換
 const nested = {
   userData: {
     userId: 1,
-    userAddress: {
-      streetName: 'Main St',
-      zipCode: '12345',
+    contactInfo: {
+      emailAddress: 'john@example.com',
+      phoneNumber: '123-456-7890',
     },
   },
 };
 const nestedResult = toSnakeCaseKeys(nested);
-// nestedResult will be:
-// {
+// nestedResultは{
 //   user_data: {
 //     user_id: 1,
-//     user_address: {
-//       street_name: 'Main St',
-//       zip_code: '12345'
+//     contact_info: {
+//       email_address: 'john@example.com',
+//       phone_number: '123-456-7890'
 //     }
 //   }
-// }
+// }になります
 ```
+
+#### パラメータ
+
+- `obj` (`T`): キーをsnake_caseに変換するオブジェクト、配列、またはプリミティブ値です。
+
+#### 戻り値
+
+(`ToSnakeCaseKeys<T>`): すべてのキーがsnake_caseに変換された新しいオブジェクトを返します。

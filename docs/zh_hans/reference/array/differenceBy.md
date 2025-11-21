@@ -1,41 +1,52 @@
 # differenceBy
 
-计算经过提供的函数映射后的两个数组之间的差异。
-
-该函数接受两个数组和一个映射函数作为参数。它返回一个新数组，其中包含仅存在于第一个数组中但不在第二个数组中的元素，基于映射函数计算的标识。
-
-本质上，它过滤掉第一个数组中任何映射后与第二个数组中映射版本的元素匹配的部分。
-
-## 签名
+将两个数组的元素通过转换函数转换后求差集,返回一个新数组。
 
 ```typescript
-function differenceBy<T, U>(firstArr: T[], secondArr: U[], mapper: (value: T | U) => unknown): T[];
+const result = differenceBy(firstArr, secondArr, mapper);
 ```
 
-### 参数
+## 用法
 
-- `firstArr` (`T[]`): 主要的数组，从中计算差异。
-- `secondArr` (`U[]`): 包含要从第一个数组中排除的元素的数组。
-- `mapper` (`(value: T | U) => unknown`): 用于映射两个数组元素的函数。该函数应用于两个数组中的每个元素，并基于映射后的值进行比较。
+### `differenceBy(firstArr, secondArr, mapper)`
 
-### 返回值
-
-(`T[]`) 包含第一个数组中没有对应映射标识的元素的新数组。
-
-## 示例
+当您想根据特定标准比较两个数组的元素并求差集时,请使用 `differenceBy`。根据转换函数转换每个元素后的值进行比较,返回只在第一个数组中存在的元素。
 
 ```typescript
 import { differenceBy } from 'es-toolkit/array';
 
-const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
-const array2 = [{ id: 2 }, { id: 4 }];
-const mapper = item => item.id;
-const result = differenceBy(array1, array2, mapper);
-// 结果将是 [{ id: 1 }, { id: 3 }, { id: 5 }] 因为具有 id 为 2 的元素在两个数组中都存在，所以它们被排除在结果之外。
-
+// 根据 id 对对象数组求差集。
 const array1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const array2 = [2, 4];
-const mapper = item => (typeof item === 'object' ? item.id : item);
-const result = differenceBy(array1, array2, mapper);
-// 结果将是 [{ id: 1 }, { id: 3 }] 因为 2 在映射后存在于两个数组中，所以它被排除在结果之外。
+const array2 = [{ id: 2 }, { id: 4 }];
+differenceBy(array1, array2, item => item.id);
+// 返回: [{ id: 1 }, { id: 3 }]
+// id 为 2 的元素在两个数组中都存在,所以被排除。
+
+// 也可以比较不同类型的数组。
+const objects = [{ id: 1 }, { id: 2 }, { id: 3 }];
+const numbers = [2, 4];
+differenceBy(objects, numbers, item => (typeof item === 'object' ? item.id : item));
+// 返回: [{ id: 1 }, { id: 3 }]
 ```
+
+也可以根据字符串长度求差集。
+
+```typescript
+import { differenceBy } from 'es-toolkit/array';
+
+const words1 = ['apple', 'banana', 'cherry'];
+const words2 = ['kiwi', 'pear'];
+differenceBy(words1, words2, word => word.length);
+// 返回: ['banana', 'cherry']
+// 'apple' 与 'kiwi' 或 'pear' 长度相同,所以被排除。
+```
+
+#### 参数
+
+- `firstArr` (`T[]`): 作为差集基准的数组。
+- `secondArr` (`U[]`): 包含要从第一个数组中排除的元素的数组。
+- `mapper` (`(value: T | U) => unknown`): 映射两个数组元素的函数。根据此函数返回的值比较元素。
+
+#### 返回值
+
+(`T[]`): 根据转换后的值,包含只在第一个数组中存在的元素的新数组。

@@ -1,32 +1,69 @@
-# min
+# min (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Math.min`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `min` 函数由于额外的函数调用和 null/undefined 处理会运行较慢。
+
+请使用更快、更现代的 `Math.min(...array)`。
+
 :::
 
-找到数组中具有最小值的元素。
-
-如果列表为空，则返回 `undefined`。
-
-## 签名
+在数组中查找最小值。
 
 ```typescript
-function min<T>(items: ArrayLike<T> | null | undefined): T | undefined;
+const result = min(items);
 ```
 
-### 参数
+## 用法
 
-- `items` (`ArrayLike<T> | null | undefined`): 要搜索的元素数组。
+### `min(items?)`
 
-### 返回
-
-(`T | undefined`): 具有最小值的元素。如果数组为空、`null` 或 `undefined`，则返回 `undefined`。
-
-### 示例
+当您想要在数组中查找最小值时，请使用 `min`。
 
 ```typescript
-min([1, 2, 3]); // Returns: 1
-min(['a', 'b']); // Returns: 'a'
+import { min } from 'es-toolkit/compat';
+
+// 数字数组中的最小值
+min([3, 1, 4, 1, 5, 9]);
+// Returns: 1
+
+min([10, 5, 8, 20]);
+// Returns: 5
+
+// 字符串数组中的最小值（按字典序）
+min(['c', 'a', 'b']);
+// Returns: 'a'
+
+min(['cherry', 'apple', 'banana']);
+// Returns: 'apple'
+
+// 空数组或 null/undefined
+min([]);
+// Returns: undefined
+
+min(null);
+// Returns: undefined
+
+min(undefined);
+// Returns: undefined
 ```
+
+负数也能正确处理。
+
+```typescript
+import { min } from 'es-toolkit/compat';
+
+min([0, -3, 2, 8, 7]);
+// Returns: -3
+
+min([-1, -5, -3]);
+// Returns: -5
+```
+
+#### 参数
+
+- `items` (`ArrayLike<T> | null | undefined`, 可选): 要查找最小值的数组。
+
+#### 返回值
+
+(`T | undefined`): 返回数组中的最小值。如果数组为空或为 null/undefined，则返回 undefined。

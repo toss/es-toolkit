@@ -1,33 +1,43 @@
-# times
+# times (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-インデックスを最初のパラメータとして関数を`n`回実行し、その結果からなる配列を返します。
-
-## インターフェース
+指定された回数だけ関数を実行し、結果を配列として返します。
 
 ```typescript
-function times<R = number>(n?: number, getValue?: (index: number) => R): R[];
+const result = times(n, iteratee);
 ```
 
-### パラメータ
+## 使用法
 
-- `n` (`number`): 関数を呼び出す回数。
-- `iteratee` (`(index: number) => R`): 各反復で呼び出される関数。
-  - 提供されない場合、`0`以上`n-1`未満の配列。
+### `times(n, iteratee)`
 
-### 戻り値
-
-(`R[]`): 結果の配列。
-
-## 例
+指定された回数だけ反復関数を実行し、結果を配列として返します。各反復で現在のインデックスを関数に渡します。
 
 ```typescript
-times(3, doubled); // => [0, 2, 4]
-times(4); // => [0, 1, 2, 3]
-times(2, () => 'es-toolkit'); // => ['es-toolkit', 'es-toolkit']
+import { times } from 'es-toolkit/compat';
+
+// 0から2までのインデックスに2を掛けた値の配列
+times(3, i => i * 2);
+// Returns: [0, 2, 4]
+
+// 同じ値を複数回生成
+times(2, () => 'es-toolkit');
+// Returns: ['es-toolkit', 'es-toolkit']
 ```
+
+関数を渡さない場合、インデックス配列を返します。
+
+```typescript
+import { times } from 'es-toolkit/compat';
+
+times(3);
+// Returns: [0, 1, 2]
+```
+
+#### パラメータ
+
+- `n` (`number`): 反復する回数です。整数に変換され、1より小さいか安全でない整数の場合は空の配列を返します。
+- `iteratee` (`(num: number) => T`, オプション): 各反復で実行する関数です。インデックスを引数として受け取ります。提供しない場合はインデックスをそのまま返します。
+
+#### 戻り値
+
+(`T[]`): 各反復で実行した関数の結果からなる配列を返します。

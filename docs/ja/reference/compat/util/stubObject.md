@@ -1,25 +1,63 @@
-# stubObject
+# stubObject (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `{}`を直接使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `stubObject` 関数は単純に空のオブジェクトを返すラッパー関数で不要な抽象化です。
+
+代わりに、より高速で直接的な`{}`を使用してください。
+
 :::
 
-空のオブジェクトを返します。
-
-## インターフェース
+常に新しい空のオブジェクトを返します。
 
 ```typescript
-function stubObject(): {};
+const emptyObject = stubObject();
 ```
 
-### 戻り値
+## 使用法
 
-(`Object`): 空のオブジェクト。
+### `stubObject()`
 
-## 例
+常に新しい空のオブジェクトを返す関数です。デフォルト値として空のオブジェクトが必要な時や関数型プログラミングで一貫した戻り値が必要な時に使用します。
 
 ```typescript
-stubObject(); // Returns {}
+import { stubObject } from 'es-toolkit/compat';
+
+// 空のオブジェクトを返す
+const emptyObject = stubObject();
+console.log(emptyObject); // => {}
+
+// デフォルト値として使用する
+function processData(data = stubObject()) {
+  return { ...data, processed: true };
+}
+
+console.log(processData()); // => { processed: true }
+console.log(processData({ name: 'John' })); // => { name: 'John', processed: true }
+
+// 関数型プログラミングで使用する
+const createEmpty = () => stubObject();
+const obj = createEmpty();
+obj.newProperty = 'value'; // 新しいオブジェクトなので安全
 ```
+
+毎回新しいオブジェクトインスタンスを返します。
+
+```typescript
+import { stubObject } from 'es-toolkit/compat';
+
+const obj1 = stubObject();
+const obj2 = stubObject();
+
+console.log(obj1 === obj2); // => false (異なるインスタンス)
+console.log(typeof obj1); // => 'object'
+console.log(Object.keys(obj1).length); // => 0
+```
+
+#### パラメータ
+
+パラメータはありません。
+
+#### 戻り値
+
+(`any`): 新しい空のオブジェクトを返します。

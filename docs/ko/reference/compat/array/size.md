@@ -1,53 +1,69 @@
-# size
+# size (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `.length` 속성을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `size` 함수는 `null`, `undefined` 처리 및 다양한 타입 지원으로 인해 복잡하게 동작해요.
+
+대신 더 빠르고 현대적인 `.length` 속성이나 `Object.keys().length`를 사용하세요.
+
 :::
 
-주어진 인자의 크기를 반환해요.
-
-배열, 문자열, 숫자의 크기를 계산하는데요, 배열은 포함된 요소의 숫자를, 문자열은 문자의 숫자를, 객체는 열거 가능한 프로퍼티의 숫자를 반환해요.
-
-## 인터페이스
+배열, 문자열, 객체의 크기를 반환해요.
 
 ```typescript
-function size<T>(value: T[] | object | string | Map<unknown, T> | Set<T> | null | undefined): number;
+const length = size(collection);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`T`): 크기를 확인할 배열, 문자열 또는 객체.
+### `size(collection)`
 
-### 반환 값
-
-(`number`): 입력 값의 크기.
-
-## 예시
+배열, 문자열, 객체, Map, Set의 크기를 확인할 때 `size`를 사용하세요. 다양한 타입의 컬렉션에 대해 일관된 크기 정보를 제공해요.
 
 ```typescript
-const arr = [1, 2, 3];
-const arrSize = size(arr);
-// arrSize는 3이에요.
+import { size } from 'es-toolkit/compat';
 
-const str = 'hello';
-const strSize = size(str);
-// strSize는 5이에요.
+// 배열의 요소 개수
+size([1, 2, 3]);
+// 3을 반환해요
 
-const obj = { a: 1, b: 2, c: 3 };
-const objSize = size(obj);
-// objSize는 3이에요.
+// 문자열의 문자 개수
+size('hello');
+// 5를 반환해요
 
-const emptyArr = [];
-const emptyArrSize = size(emptyArr);
-// emptyArrSize는 0이에요.
+// 객체의 열거 가능한 속성 개수
+size({ a: 1, b: 2, c: 3 });
+// 3을 반환해요
 
-const emptyStr = '';
-const emptyStrSize = size(emptyStr);
-// emptyStrSize는 0이에요.
+// Map의 요소 개수
+size(
+  new Map([
+    ['a', 1],
+    ['b', 2],
+  ])
+);
+// 2를 반환해요
 
-const emptyObj = {};
-const emptyObjSize = size(emptyObj);
-// emptyObjSize는 0이에요.
+// Set의 요소 개수
+size(new Set([1, 2, 3]));
+// 3을 반환해요
 ```
+
+`null`이나 `undefined`는 0을 반환해요.
+
+```typescript
+import { size } from 'es-toolkit/compat';
+
+size(null); // 0
+size(undefined); // 0
+size({}); // 0
+size([]); // 0
+```
+
+#### 파라미터
+
+- `collection` (`object | string | null | undefined`): 크기를 확인할 배열, 문자열, 객체, Map, Set이에요.
+
+#### 반환 값
+
+(`number`): 컬렉션의 크기를 반환해요. `null`이나 `undefined`면 0을 반환해요.

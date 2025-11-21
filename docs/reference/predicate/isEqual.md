@@ -1,89 +1,93 @@
 # isEqual
 
-The `isEqual` function checks if two values are equal, including support for `Date`, `RegExp`, and deep object comparison.
-
-## Signature
+Performs a deep comparison to check if two values are equal.
 
 ```typescript
-function isEqual(a: unknown, b: unknown): boolean;
+const result = isEqual(a, b);
 ```
 
-## Parameters
+## Usage
 
-- **`a`**: `unknown` - The first value to compare.
-- **`b`**: `unknown` - The second value to compare.
+### `isEqual(a, b)`
 
-## Returns
+Use `isEqual` when you want to check if two values are deeply equal, including objects, arrays, Date, RegExp, etc. Returns `true` if the contents are the same even if the references are different. Useful for unit testing and data comparison.
 
-- **`boolean`** - Returns `true` if the values are equal, otherwise `false`.
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
 
-## Examples
-
-### Example 1: Comparing Primitive Values
-
-```javascript
+// Primitive type comparison
 isEqual(1, 1); // true
 isEqual('hello', 'hello'); // true
 isEqual(true, true); // true
-isEqual(1, 2); // false
-isEqual('hello', 'world'); // false
-isEqual(true, false); // false
-```
 
-### Example 2: Comparing Special Cases
-
-```javascript
+// Special value handling
 isEqual(NaN, NaN); // true
 isEqual(+0, -0); // true
 ```
 
-### Example 3: Comparing Date Objects
+Supports deep comparison of objects and arrays.
 
-```javascript
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
+
+// Deep object comparison
+const obj1 = { a: 1, b: { c: 2, d: [3, 4] } };
+const obj2 = { a: 1, b: { c: 2, d: [3, 4] } };
+isEqual(obj1, obj2); // true
+
+// Array comparison
+const arr1 = [1, 2, [3, 4]];
+const arr2 = [1, 2, [3, 4]];
+isEqual(arr1, arr2); // true
+```
+
+Can also compare objects like Date, RegExp, Map, Set.
+
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
+
+// Date comparison
 const date1 = new Date('2020-01-01');
 const date2 = new Date('2020-01-01');
 isEqual(date1, date2); // true
 
-const date3 = new Date('2021-01-01');
-isEqual(date1, date3); // false
-```
-
-### Example 4: Comparing RegExp Objects
-
-```javascript
+// RegExp comparison
 const regex1 = /hello/g;
 const regex2 = /hello/g;
 isEqual(regex1, regex2); // true
 
-const regex3 = /hello/i;
-isEqual(regex1, regex3); // false
+// Map and Set comparison
+const map1 = new Map([['key', 'value']]);
+const map2 = new Map([['key', 'value']]);
+isEqual(map1, map2); // true
+
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2, 3]);
+isEqual(set1, set2); // true
 ```
 
-### Example 5: Comparing Objects
+Frequently used in unit testing.
 
-```javascript
-const obj1 = { a: 1, b: { c: 2 } };
-const obj2 = { a: 1, b: { c: 2 } };
-isEqual(obj1, obj2); // true
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
 
-const obj3 = { a: 1, b: { c: 3 } };
-isEqual(obj1, obj3); // false
+function testApiResponse() {
+  const expected = { status: 200, data: { message: 'success' } };
+  const actual = { status: 200, data: { message: 'success' } };
 
-const obj4 = { a: 1, b: 2 };
-const obj5 = { a: 1, c: 2 };
-isEqual(obj4, obj5); // false
+  if (isEqual(expected, actual)) {
+    console.log('Test passed!');
+  } else {
+    console.log('Test failed!');
+  }
+}
 ```
 
-### Example 6: Comparing Arrays
+#### Parameters
 
-```javascript
-const arr1 = [1, 2, 3];
-const arr2 = [1, 2, 3];
-isEqual(arr1, arr2); // true
+- `a` (`unknown`): The first value to compare.
+- `b` (`unknown`): The second value to compare.
 
-const arr3 = [1, 2, 4];
-isEqual(arr1, arr3); // false
+#### Returns
 
-const arr4 = [1, 2];
-isEqual(arr1, arr4); // false
-```
+(`boolean`): Returns `true` if the two values are deeply equal, `false` otherwise.

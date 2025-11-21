@@ -1,44 +1,76 @@
-# slice
+# slice（Lodash 互換性）
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.slice` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
+この `slice` 関数は、`null` や `undefined` の処理とスパース配列の特別な処理により、遅く動作します。JavaScript のネイティブ `Array.prototype.slice` メソッドはより高速で標準化されています。
 
-インデックス `start` からインデックス `end` までの `array` の部分配列を作成します。部分配列には `end` は含まれません。
-
-基本の `Array.prototype.slice` と異なり、スパース配列に対して密な配列を返しません。
-
-## インターフェース
-
-```typescript
-function slice<T>(array: T[], start?: number, end?: number): T[];
-```
-
-### パラメータ
-
-- `array` (`T[]`): 部分配列を作成する配列。
-
-::: info `array` は `ArrayLike<T>`、`null`、または `undefined` になります。
-
-lodash との完全な互換性を確保するため、`slice` 関数は `array` を次のように処理します。
-
-- `array` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換されます。
-- `array` が `null` または `undefined` の場合、空の配列として扱われます。
+より高速でモダンな `Array.prototype.slice` を使用してください。
 
 :::
 
-- `start` (`number`): 開始位置。デフォルトは `0` です。
-- `end` (`number`): 終了位置。デフォルトは `array.length` です。
-
-### 戻り値
-
-(`T[]`): `array` の `start` から `end` までの部分配列。
-
-## 例
+配列の一部を切り取って新しい配列を作成します。
 
 ```typescript
-slice([1, 2, 3], 1, 2); // => [2]
-slice(new Array(3)); // => [undefined, undefined, undefined]
+const sliced = slice(array, start, end);
 ```
+
+## 使用法
+
+### `slice(array, start, end)`
+
+配列の特定の部分だけが必要な場合は `slice` を使用します。開始位置から終了位置の直前までの要素を含む新しい配列を作成します。
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+// インデックス1から2まで切り取り
+slice([1, 2, 3, 4], 1, 3);
+// 戻り値：[2, 3]
+
+// 負のインデックスを使用
+slice([1, 2, 3, 4], -2);
+// 戻り値：[3, 4]
+
+// 開始位置のみ指定
+slice([1, 2, 3, 4], 2);
+// 戻り値：[3, 4]
+```
+
+`null` や `undefined` は空の配列として処理します。
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+slice(null); // []
+slice(undefined); // []
+```
+
+スパース配列を処理する場合、空のスロットは `undefined` で埋められます。
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+const sparse = new Array(3);
+sparse[1] = 'b';
+slice(sparse);
+// 戻り値：[undefined, 'b', undefined]
+```
+
+負のインデックスを使用すると配列の末尾から計算します。
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+slice([1, 2, 3, 4, 5], -3, -1);
+// 戻り値：[3, 4]
+```
+
+#### パラメータ
+
+- `array` (`ArrayLike<T> | null | undefined`): 切り取る配列。
+- `start` (`number`、オプション): 開始位置。負の値は末尾から計算します。デフォルトは `0` です。
+- `end` (`number`、オプション): 終了位置（含まない）。負の値は末尾から計算します。デフォルトは配列の長さです。
+
+#### 戻り値
+
+(`T[]`)：`start` から `end` の直前までの要素を含む新しい配列を返します。

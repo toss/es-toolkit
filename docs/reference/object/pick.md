@@ -1,41 +1,44 @@
 # pick
 
-Creates a new object composed of the picked object properties.
-
-This function takes an object and an array of keys, and returns a new object that
-includes only the properties corresponding to the specified keys.
-
-## Signature
+Returns a new object containing only the properties corresponding to the specified keys.
 
 ```typescript
-function pick<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
+const result = pick(obj, keys);
 ```
 
-### Parameters
+## Usage
 
-- `obj` (`T`): The object to pick keys from.
-- `keys` (`K[]`): An array of keys to be picked from the object.
+### `pick(obj, keys)`
 
-### Returns
-
-(`Pick<T, K>`): A new object with the specified keys picked.
-
-## Examples
+Use `pick` when you want to select only specific keys from an object. It returns a new object containing only the properties corresponding to the specified keys.
 
 ```typescript
-const obj = { a: 1, b: 2, c: 3 };
+import { pick } from 'es-toolkit/object';
+
+// Select specific keys
+const obj = { a: 1, b: 2, c: 3, d: 4 };
 const result = pick(obj, ['a', 'c']);
-// result will be { a: 1, c: 3 }
+// result is { a: 1, c: 3 }
+
+// Non-existent keys are ignored
+const safe = pick(obj, ['a', 'nonexistent']);
+// safe is { a: 1 }
+
+// Can be used with nested objects
+const nested = {
+  user: { name: 'John', age: 30 },
+  posts: ['post1', 'post2'],
+  settings: { theme: 'dark' },
+};
+const picked = pick(nested, ['user', 'settings']);
+// picked is { user: { name: 'John', age: 30 }, settings: { theme: 'dark' } }
 ```
 
-## Compatibility with Lodash
+#### Parameters
 
-The `pick` function from `es-toolkit/compat` allows you to select deep properties from an object.
+- `obj` (`T extends Record<string, any>`): The object to select properties from.
+- `keys` (`readonly K[]`): An array of keys to select from the object.
 
-```typescript
-import { pick } from 'es-toolkit/compat';
+#### Returns
 
-const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
-const result = pick(obj, ['a.b.c', 'f.g']);
-// result will be { a: { b: { c: 1 } }, 'f.g': 4 }
-```
+(`Pick<T, K>`): A new object containing only the properties corresponding to the specified keys.

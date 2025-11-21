@@ -1,33 +1,52 @@
 # take
 
-返回一个新数组，其中包含从输入数组 `arr` 中获取的前 `count` 个元素。
-
-如果 `count` 大于 `arr` 的长度，则返回整个数组。
-
-## 签名
+从数组的开头获取指定数量的元素,创建一个新数组。
 
 ```typescript
-function take<T>(arr: T[], count: number): T[];
+const taken = take(arr, count);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`): 要提取元素的数组。
-- `count` (`number`): 要提取的元素数量。
+### `take(arr, count?)`
 
-### 返回值
-
-(`T[]`): 包含从 `arr` 中取出的前 `count` 个元素的新数组。
-
-## 示例
+当您只需要数组前面的几个元素时,请使用 `take`。如果请求的数量大于数组长度,则返回整个数组。
 
 ```typescript
-// 返回 [1, 2, 3]
+import { take } from 'es-toolkit/array';
+
+// 获取前3个元素。
 take([1, 2, 3, 4, 5], 3);
+// Returns: [1, 2, 3]
 
-// 返回 ['a', 'b']
+// 获取前2个元素。
 take(['a', 'b', 'c'], 2);
-
-// 返回 [1, 2, 3]
-take([1, 2, 3], 5);
+// Returns: ['a', 'b']
 ```
+
+如果请求的数量多于数组的元素,则返回整个数组。
+
+```typescript
+import { take } from 'es-toolkit/array';
+
+take([1, 2, 3], 5);
+// Returns: [1, 2, 3]
+```
+
+如果省略 `count`,则只获取第一个元素。
+
+```typescript
+import { take } from 'es-toolkit/array';
+
+take([1, 2, 3]);
+// Returns: [1]
+```
+
+#### 参数
+
+- `arr` (`T[]`): 要获取元素的数组。
+- `count` (`number`, 可选): 要获取的元素数量。默认值为 `1`。
+
+#### 返回值
+
+(`T[]`): 返回包含从数组开头开始的 `count` 个元素的新数组。

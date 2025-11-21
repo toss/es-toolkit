@@ -1,65 +1,73 @@
-# overEvery
+# overEvery (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.every`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`overEvery`関数は、条件関数を変換して検査する過程で追加のオーバーヘッドが発生します。
+
+代わりに、より高速で現代的な`Array.every`メソッドを使用してください。
+
 :::
 
-提供された値に対して、すべての指定された述語が真を返すかどうかを確認する関数を作成します。
-
-この関数は、複数の述語を受け取ります。これは個別の述語関数や述語の配列のいずれかであり、
-提供された値に対してすべての述語が真を返すかどうかを確認する新しい関数を返します。
-
-## インターフェース
+すべての条件関数が真と評価される値を返すかどうかを確認する関数を作成します。
 
 ```typescript
-function overEvery<T, U extends T, V extends T>(
-  predicate1: (value: T) => value is U,
-  predicate2: (value: T) => value is V
-): (value: T) => value is U & V;
-function overEvery<T>(
-  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
-): (...values: T[]) => boolean;
+const allValidator = overEvery(predicates);
 ```
 
-### パラメータ
+## 使用法
 
-- `predicates` (`...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>`): -
-  述語または述語の配列のリストです。各述語は、型 `T` の1つ以上の値を受け取り、
-  その値に対して条件が満たされるかどうかを示すブール値を返す関数です。
+### `overEvery(...predicates)`
 
-### 戻り値
-
-(`(...values: T[]) => boolean`): 値のリストを取り、提供された値に対してすべての述語が真を返す場合は `true` を、
-そうでない場合は `false` を返す関数です。
-
-## 例
+複数の条件関数を受け取って与えられた値がすべての条件を満たすかどうかを確認する関数を生成します。複合条件検査やデータ検証に便利です。
 
 ```typescript
-const func = overEvery(
-  (value) => typeof value === 'string',
-  (value) => value.length > 3
-);
+import { overEvery } from 'es-toolkit/compat';
 
-func("hello"); // true
-func("hi"); // false
-func(42); // false
-
-const func = overEvery([
-  (value) => value.a > 0,
-  (value) => value.b > 0
+// 文字列の条件を検査します
+const isValidString = overEvery([
+  value => typeof value === 'string',
+  value => value.length > 3,
+  value => value.includes('o'),
 ]);
 
-func({ a: 1, b: 2 }); // true
-func({ a: 0, b: 2 }); // false
+isValidString('hello'); // => true
+isValidString('hi'); // => false (長さが3以下)
+isValidString('test'); // => false ('o'がない)
 
-const func = overEvery(
-  (a, b) => typeof a === 'string' && typeof b === 'string',
-  (a, b) => a.length > 3 && b.length > 3
-);
+// 数値範囲を検査します
+const isInRange = overEvery([
+  num => num >= 0,
+  num => num <= 100,
+  num => num % 1 === 0, // 整数かどうかを確認
+]);
 
-func("hello", "world"); // true
-func("hi", "world"); // false
-func(1, 10); // false
+isInRange(50); // => true
+isInRange(-5); // => false (0未満)
+isInRange(150); // => false (100超過)
+isInRange(50.5); // => false (整数ではない)
 ```
+
+オブジェクトのプロパティも検査できます。
+
+```typescript
+import { overEvery } from 'es-toolkit/compat';
+
+// オブジェクトのプロパティを検査します
+const isValidUser = overEvery([
+  'name', // nameプロパティが真と評価されるか
+  { age: 30 }, // ageが30か
+  ['active', true], // activeがtrueか
+]);
+
+isValidUser({ name: 'John', age: 30, active: true }); // => true
+isValidUser({ name: '', age: 30, active: true }); // => false (nameが空文字列)
+isValidUser({ name: 'John', age: 25, active: true }); // => false (ageが異なる)
+```
+
+#### パラメータ
+
+- `...predicates` (`Array<Function | string | object | Array>`): 検査する条件関数です。関数、プロパティ名、オブジェクト、プロパティ-値ペアなどになります。
+
+#### 戻り値
+
+(`(...args: any[]) => boolean`): すべての条件を満たせば`true`、一つでも満たさなければ`false`を返す関数を返します。

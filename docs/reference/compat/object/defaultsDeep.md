@@ -1,63 +1,55 @@
-# defaultsDeep
+# defaultsDeep (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use destructuring assignment and `Object.assign()` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `defaultsDeep` function operates slowly and complexly due to recursive merging of nested objects and circular reference handling.
+
+Use faster, more modern destructuring assignment and `Object.assign()` instead.
+
 :::
 
-Similar to the [defaults](./defaults.md) function but recursively assigns default values to nested objects.
-
-> Note: This function modifies the first parameter `object`.
-
-## Signature
+Recursively sets default values on nested objects.
 
 ```typescript
-function defaultsDeep<T extends object>(object: T): NonNullable<T>;
-function defaultsDeep<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function defaultsDeep<T extends object, S1 extends object, S2 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2
-): NonNullable<T & S1 & S2>;
-function defaultsDeep<T extends object, S extends object>(object: T, ...sources: S[]): object;
+const result = defaultsDeep(target, ...sources);
 ```
 
-### Parameters
+## Usage
 
-- `object` (`T`): The target object that will receive default values.
-- `sources` (`S[]`): One or more source objects that provide default values.
+### `defaultsDeep(target, ...sources)`
 
-### Returns
-
-(`object`): The target object with default values applied.
-
-## Examples
+Use `defaultsDeep` when you want to recursively set default values for `undefined` properties in nested objects. Similar to `defaults`, but it also merges nested objects.
 
 ```typescript
-// Basic usage
-defaultsDeep({ a: 1 }, { a: 2, b: 2 }); // { a: 1, b: 2 }
+import { defaultsDeep } from 'es-toolkit/compat';
 
-// Nested object merging
+// Setting default values in nested objects
 defaultsDeep({ a: { b: 2 } }, { a: { b: 3, c: 3 }, d: 4 });
-// { a: { b: 2, c: 3 }, d: 4 }
+// Returns: { a: { b: 2, c: 3 }, d: 4 }
 
-// Null values are not overwritten
-defaultsDeep({ a: { b: null } }, { a: { b: 2 } }); // { a: { b: null } }
+// Only undefined properties are filled with default values
+defaultsDeep({ a: { b: undefined } }, { a: { b: 1 } });
+// Returns: { a: { b: 1 } }
 
-// Undefined values are overwritten
-defaultsDeep({ a: { b: undefined } }, { a: { b: 2 } }); // { a: { b: 2 } }
-
-// Using multiple source objects
-defaultsDeep({ a: { b: 2 } }, { a: { c: 3 } }, { d: 4 });
-// { a: { b: 2, c: 3 }, d: 4 }
-
-// Handling circular references
-const obj1 = { foo: { b: { c: { d: {} } } }, bar: { a: 2 } };
-const obj2 = { foo: { b: { c: { d: {} } } }, bar: {} };
-obj1.foo.b.c.d = obj1; // Creating circular reference
-obj2.foo.b.c.d = obj2; // Creating circular reference
-obj2.bar.b = obj2.foo.b; // Cross-reference
-const result = defaultsDeep(obj1, obj2);
-// Circular references and reference structures are correctly maintained
+// null values are preserved
+defaultsDeep({ a: null }, { a: { b: 1 } });
+// Returns: { a: null }
 ```
+
+You can pass multiple source objects to apply default values in stages.
+
+```typescript
+import { defaultsDeep } from 'es-toolkit/compat';
+
+defaultsDeep({ a: { b: 2 } }, { a: { c: 3 } }, { a: { d: 4 }, e: 5 });
+// Returns: { a: { b: 2, c: 3, d: 4 }, e: 5 }
+```
+
+#### Parameters
+
+- `target` (`any`): The target object to set default values on.
+- `...sources` (`any[]`): The source objects that provide default values.
+
+#### Returns
+
+(`any`): Returns the object with default values recursively set. The first argument `target` is modified.

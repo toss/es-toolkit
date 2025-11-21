@@ -1,71 +1,96 @@
-# overArgs
+# overArgs (Lodash Compatibility)
 
-Creates a function that invokes `func` with its arguments transformed by corresponding transform functions.
+::: warning Use arrow functions and direct transformation
 
-Transform functions can be:
+This `overArgs` function creates a complex wrapper that transforms each argument, resulting in slow performance. Using arrow functions to transform arguments directly results in clearer and faster code.
 
-- Functions that accept and return a value
-- Property names (strings) to get a property value from each argument
-- Objects to check if arguments match the object properties
-- Arrays of [property, value] to check if argument properties match values
+Instead, use the faster and more modern arrow functions and direct transformation.
 
-If a transform is nullish, the identity function is used instead.
-Only transforms arguments up to the number of transform functions provided.
+:::
 
-## Signature
+Creates a new function that transforms each argument of a function with the corresponding transform function and then executes it.
 
 ```typescript
-function overArgs(
-  func: (...args: any[]) => any,
-  ...transforms: Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>
-): (...args: any[]) => any;
+const wrapped = overArgs(func, transforms);
 ```
 
-### Parameters
+## Usage
 
-- `func` (`(...args: any[]) => any`): The function to wrap.
-- `transforms` (`Array<((...args: any[]) => any) | ((...args: any[]) => any)[]>`): The functions to transform arguments.
+### `overArgs(func, ...transforms)`
 
-### Returns
-
-(`(...args: any[]) => any`): Returns a new function that transforms its arguments before passing them to func.
-
-### Throws
-
-Throws a TypeError if func is not a function.
-
-## Examples
+Use `overArgs` when you want to transform each argument before calling a function. Each argument is processed by the corresponding transform function.
 
 ```typescript
 import { overArgs } from 'es-toolkit/compat';
 
-// With function transforms
-function doubled(n: number) {
+function doubled(n) {
   return n * 2;
 }
 
-function square(n: number) {
+function square(n) {
   return n * n;
 }
 
+// First argument is doubled, second argument is squared
 const func = overArgs((x, y) => [x, y], [doubled, square]);
-
 func(5, 3);
-// => [10, 9]
-
-func(10, 5);
-// => [20, 25]
-
-// With property shorthand
-const user = { name: 'John', age: 30 };
-const getUserInfo = overArgs((name, age) => `${name} is ${age} years old`, ['name', 'age']);
-
-getUserInfo(user, user);
-// => "John is 30 years old"
-
-// Only transform specific arguments
-const partial = overArgs((a, b, c) => [a, b, c], [doubled]);
-
-partial(5, 3, 2);
-// => [10, 3, 2]
+// Returns: [10, 9]
 ```
+
+You can also extract properties using strings.
+
+```typescript
+import { overArgs } from 'es-toolkit/compat';
+
+const user1 = { name: 'John', age: 30 };
+const user2 = { name: 'Jane', age: 25 };
+
+// Extract properties from each object
+const getUserInfo = overArgs((name, age) => `${name} is ${age} years old`, ['name', 'age']);
+getUserInfo(user1, user2);
+// Returns: "John is 25 years old"
+```
+
+If a transform function is not provided or is `null`/`undefined`, the argument is passed as is.
+
+```typescript
+import { overArgs } from 'es-toolkit/compat';
+
+const func = overArgs((a, b, c) => [a, b, c], [n => n * 2, null, n => n * 3]);
+func(5, 10, 15);
+// Returns: [10, 10, 45]
+```
+
+Arguments that exceed the number of transform functions are passed as is.
+
+```typescript
+import { overArgs } from 'es-toolkit/compat';
+
+const func = overArgs((a, b, c) => [a, b, c], [n => n * 2]);
+func(5, 10, 15);
+// Returns: [10, 10, 15]
+```
+
+You can also check if arguments match objects.
+
+```typescript
+import { overArgs } from 'es-toolkit/compat';
+
+const func = overArgs((match1, match2) => [match1, match2], [{ age: 30 }, { active: true }]);
+
+func({ name: 'John', age: 30 }, { active: true, status: 'online' });
+// Returns: [true, true]
+```
+
+#### Parameters
+
+- `func` (`(...args: any[]) => any`): The function to wrap.
+- `...transforms` (`Array<(...args: any[]) => any | string | object | array>`): The functions to transform arguments. Each transform can be one of the following:
+  - A function that accepts and returns a value
+  - A string to get a property value (e.g., 'name' gets the name property)
+  - An object to check if the argument matches the properties
+  - A [property, value] array to check property matching
+
+#### Returns
+
+(`(...args: any[]) => any`): Returns a new function that transforms the arguments and then calls the original function.

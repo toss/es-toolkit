@@ -1,36 +1,59 @@
-# toPath
+# toPath (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Converts a deep key string into an array of path segments.
-
-This function takes a string representing a deep key (e.g., `'a.b.c'` or `'a[b][c]'`) and breaks it down into an array of strings, each representing a segment of the path.
-
-## Signature
+Converts a deep key string to a path array.
 
 ```typescript
-function toPath(deepKey: any): string[];
+const path = toPath(deepKey);
 ```
 
-### Parameters
+## Usage
 
-- `deepKey` (`any`): The deep key string to convert.
+### `toPath(deepKey)`
 
-### Returns
-
-(`string[]`): An array of strings, each representing a segment of the path.
-
-## Examples
+Converts a deep key string to a path array. Supports both dot notation and bracket notation.
 
 ```typescript
-toPath('a.b.c'); // Returns ['a', 'b', 'c']
-toPath('a[b][c]'); // Returns ['a', 'b', 'c']
-toPath('.a.b.c'); // Returns ['', 'a', 'b', 'c']
-toPath('a["b.c"].d'); // Returns ['a', 'b.c', 'd']
-toPath(''); // Returns []
-toPath('.a[b].c.d[e]["f.g"].h'); // Returns ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
+import { toPath } from 'es-toolkit/compat';
+
+// Dot notation
+toPath('a.b.c');
+// Returns: ['a', 'b', 'c']
+
+// Bracket notation
+toPath('a[b][c]');
+// Returns: ['a', 'b', 'c']
+
+// Mixed notation
+toPath('a.b[c].d');
+// Returns: ['a', 'b', 'c', 'd']
+
+// Quoted keys
+toPath('a["b.c"].d');
+// Returns: ['a', 'b.c', 'd']
 ```
+
+It also handles leading dots and empty keys.
+
+```typescript
+import { toPath } from 'es-toolkit/compat';
+
+// Leading dot
+toPath('.a.b.c');
+// Returns: ['', 'a', 'b', 'c']
+
+// Empty string
+toPath('');
+// Returns: []
+
+// Complex path
+toPath('.a[b].c.d[e]["f.g"].h');
+// Returns: ['', 'a', 'b', 'c', 'd', 'e', 'f.g', 'h']
+```
+
+#### Parameters
+
+- `deepKey` (`any`): The deep key string to convert to a path array.
+
+#### Returns
+
+(`string[]`): Returns an array of strings representing each part of the path.

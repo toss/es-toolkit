@@ -1,49 +1,77 @@
-# matchesProperty
+# matchesProperty (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-
-:::
-
-创建一个函数，用于检查给定的源对象是否匹配特定的属性值。
-
-返回的函数接受一个源对象，并确定源对象中指定路径的属性是否等于给定的值。
-
-## 签名
+创建一个函数来检查特定属性是否与给定值匹配。
 
 ```typescript
-function matchesProperty(
-  property: PropertyKey | readonly PropertyKey[],
-  source: unknown
-): (target?: unknown) => boolean;
+const checker = matchesProperty(path, value);
 ```
 
-### 参数
+## 用法
 
-- `property` (`PropertyKey | readonly PropertyKey[]`): 需要检查的目标对象中的属性路径。可以是单个属性键、属性键数组，或表示深层路径的字符串。
-- `source` (`unknown`): 要与目标对象中属性值进行比较的值。
+### `matchesProperty(property, source)`
 
-### 返回值
-
-(`(target: unknown) => boolean`): 一个函数，接受一个目标对象，如果目标对象中指定路径的属性值与提供的值匹配，则返回 `true`，否则返回 `false`。
-
-## 示例
+当您想创建一个函数来检查对象的特定属性是否与给定值匹配时使用 `matchesProperty`。在数组过滤或对象搜索中很有用。
 
 ```typescript
-// 使用单个属性键
+import { matchesProperty } from 'es-toolkit/compat';
+
+// 简单属性检查
 const checkName = matchesProperty('name', 'Alice');
-console.log(checkName({ name: 'Alice' })); // true
-console.log(checkName({ name: 'Bob' })); // false
 
-// 使用属性键数组
-const checkNested = matchesProperty(['address', 'city'], 'New York');
-console.log(checkNested({ address: { city: 'New York' } })); // true
-console.log(checkNested({ address: { city: 'Los Angeles' } })); // false
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Alice', age: 35 },
+];
 
-// 使用深层路径
-const checkNested = matchesProperty('address.city', 'New York');
-console.log(checkNested({ address: { city: 'New York' } })); // true
-console.log(checkNested({ address: { city: 'Los Angeles' } })); // false
+const aliceUsers = users.filter(checkName);
+// [{ name: 'Alice', age: 25 }, { name: 'Alice', age: 35 }]
+
+// 嵌套属性检查（数组路径）
+const checkCity = matchesProperty(['address', 'city'], 'Seoul');
+
+const profiles = [
+  { name: 'Kim', address: { city: 'Seoul', district: 'Gangnam' } },
+  { name: 'Lee', address: { city: 'Busan', district: 'Haeundae' } },
+  { name: 'Park', address: { city: 'Seoul', district: 'Mapo' } },
+];
+
+const seoulUsers = profiles.filter(checkCity);
+// [{ name: 'Kim', address: { city: 'Seoul', district: 'Gangnam' } },
+//  { name: 'Park', address: { city: 'Seoul', district: 'Mapo' } }]
+
+// 用字符串表示深层路径
+const checkScore = matchesProperty('stats.game.score', 100);
+
+const players = [
+  { name: 'Player1', stats: { game: { score: 100, level: 5 } } },
+  { name: 'Player2', stats: { game: { score: 95, level: 4 } } },
+  { name: 'Player3', stats: { game: { score: 100, level: 6 } } },
+];
+
+const perfectScorers = players.filter(checkScore);
+// [{ name: 'Player1', stats: { game: { score: 100, level: 5 } } },
+//  { name: 'Player3', stats: { game: { score: 100, level: 6 } } }]
+
+// 与复杂对象匹配
+const checkRole = matchesProperty('role', { type: 'admin', permissions: ['read', 'write'] });
+
+const accounts = [
+  { user: 'Alice', role: { type: 'admin', permissions: ['read', 'write'] } },
+  { user: 'Bob', role: { type: 'user', permissions: ['read'] } },
+  { user: 'Charlie', role: { type: 'admin', permissions: ['read', 'write'] } },
+];
+
+const admins = accounts.filter(checkRole);
+// [{ user: 'Alice', role: { type: 'admin', permissions: ['read', 'write'] } },
+//  { user: 'Charlie', role: { type: 'admin', permissions: ['read', 'write'] } }]
 ```
+
+#### 参数
+
+- `property` (`PropertyKey | PropertyKey[]`): 要检查的属性路径。可以使用字符串、数组或点分隔路径。
+- `source` (`unknown`): 要与属性值比较的值。
+
+#### 返回值
+
+(`(target: unknown) => boolean`): 返回一个函数，用于检查给定对象的属性是否与值匹配。

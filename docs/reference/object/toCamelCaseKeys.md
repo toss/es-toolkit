@@ -1,59 +1,61 @@
 # toCamelCaseKeys
 
-Creates a new object composed of the properties with keys converted to camel case (`camelCase`).
+Returns a new object with all keys in objects and arrays converted to camelCase.
 
-This function takes an object and returns a new object that includes the same properties,
-but with all keys converted to camel case format.
-
-## Signature
+Camel case is a naming convention where the first word is lowercase and the first letter of subsequent words is capitalized and concatenated. For example, it's written as `camelCase`.
 
 ```typescript
-function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T>;
+const camelCased = toCamelCaseKeys(obj);
 ```
 
-### Parameters
+## Usage
 
-- `obj` (`T`): The object to convert keys from.
+### `toCamelCaseKeys(obj)`
 
-### Returns
-
-(`ToCamelCaseKeys<T>`): A new object with all keys converted to camel case.
-
-## Examples
+Use `toCamelCaseKeys` when you want to convert all keys of an object to camel case. Nested objects and objects within arrays are also converted recursively.
 
 ```typescript
-// Example with objects
-const obj = { user_id: 1, first_name: 'John' };
-const result = toCamelCaseKeys(obj);
-// result will be { userId: 1, firstName: 'John' }
+import { toCamelCaseKeys } from 'es-toolkit/object';
 
-// Example with arrays of objects
-const arr = [
+// Basic object conversion
+const obj = { user_id: 1, first_name: 'John', last_name: 'Doe' };
+const result = toCamelCaseKeys(obj);
+// result is { userId: 1, firstName: 'John', lastName: 'Doe' }
+
+// Objects within arrays are also converted
+const users = [
   { user_id: 1, first_name: 'John' },
   { user_id: 2, first_name: 'Jane' },
 ];
-const arrResult = toCamelCaseKeys(arr);
-// arrResult will be [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
+const convertedUsers = toCamelCaseKeys(users);
+// convertedUsers is [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
 
-// Example with nested objects
+// Nested objects are fully converted
 const nested = {
   user_data: {
     user_id: 1,
-    user_address: {
-      street_name: 'Main St',
-      zip_code: '12345',
+    contact_info: {
+      email_address: 'john@example.com',
+      phone_number: '123-456-7890',
     },
   },
 };
 const nestedResult = toCamelCaseKeys(nested);
-// nestedResult will be:
-// {
+// nestedResult is {
 //   userData: {
 //     userId: 1,
-//     userAddress: {
-//       streetName: 'Main St',
-//       zipCode: '12345'
+//     contactInfo: {
+//       emailAddress: 'john@example.com',
+//       phoneNumber: '123-456-7890'
 //     }
 //   }
 // }
 ```
+
+#### Parameters
+
+- `obj` (`T`): The object, array, or primitive value to convert keys to camelCase.
+
+#### Returns
+
+(`ToCamelCaseKeys<T>`): Returns a new object with all keys converted to camelCase.

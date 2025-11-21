@@ -1,52 +1,55 @@
-# sortedIndex
+# sortedIndex (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请直接实现二分查找
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `sortedIndex` 函数由于处理 `null`、`undefined` 和各种类型支持而具有复杂性。
+
+相反，请直接实现更快、更现代的二分查找或使用专用库。
+
 :::
 
-查找应将给定值插入排序数组以保持其排序顺序的最低索引。
-
-- 如果数组已经排序，则 sortedIndex 将确保新值插入正确的位置，而不会打乱顺序。
-- 搜索采用二进制搜索算法，因此对大型数组而言效率很高。
-- 对于更复杂或自定义的排序逻辑，它将委托给 [sortedIndexBy](./sortedIndexBy.md)，后者允许指定一个 iteratee 函数来自定义元素的比较方式。
-
-该函数返回应插入值的索引。如果数组中已经存在该值，返回的索引将位于该值第一次出现之前。
-
-## 签名
+查找应将值插入已排序数组的最低索引。
 
 ```typescript
-function sortedIndex<T>(array: ArrayLike<T> | null | undefined, value: T): number；
+const index = sortedIndex(array, value);
 ```
 
-### 参数
+## 用法
 
-- `array` (`ArrayLike<T> | null | undefined`)： 要检查的排序数组。可以是 null 或 undefined，在这种情况下，它将被视为空数组。
-- `value` (`T`)： 要评估的值，并为插入找到合适的索引
+### `sortedIndex(array, value)`
 
-### 返回值
-
-(`number`)： 应插入值的索引
-
-## 示例
+在已排序数组中查找插入值的位置时，请使用 `sortedIndex`。它使用二分查找快速找到位置。
 
 ```typescript
+import { sortedIndex } from 'es-toolkit/compat';
 
-import { sortedIndex } from 'es-toolkit/compat'；
+// 在数字数组中查找插入位置
+sortedIndex([30, 50], 40);
+// 返回 1（40位于30和50之间）
 
-// 数字数组的基本用法
-sortedIndex([10, 20, 30, 50], 40)；
-// 返回值： 3
-// 解释： 40 返回索引 3 以保持排序顺序。
+// 在字符串数组中查找插入位置
+sortedIndex(['a', 'c'], 'b');
+// 返回 1（'b'位于'a'和'c'之间）
 
-// 处理空数组或 null 数组
-sortedIndex(null, 25)；
-// 返回值：0
-// 说明 空数组或未定义数组被视为空数组，因此返回 0。
-
-// 使用默认比较逻辑（使用 sortedIndexBy 的委托行为）
-sortedIndex([10, '20', 30], 25)；
-// 返回值：2
-// 解释： 使用默认比较逻辑，返回索引 2。
+// 当存在相同值时，返回第一个位置
+sortedIndex([1, 2, 2, 3], 2);
+// 返回 1（第一个2的位置）
 ```
+
+对于 `null` 或 `undefined` 数组，返回 0。
+
+```typescript
+import { sortedIndex } from 'es-toolkit/compat';
+
+sortedIndex(null, 1); // 0
+sortedIndex(undefined, 1); // 0
+```
+
+#### 参数
+
+- `array` (`ArrayLike<T> | null | undefined`): 已排序的数组。使用未排序的数组可能会产生错误的结果。
+- `value` (`T`): 要插入的值。
+
+#### 返回值
+
+(`number`): 返回应插入值的最低索引。如果数组为 `null` 或 `undefined`，则返回 0。

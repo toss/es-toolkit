@@ -1,113 +1,65 @@
-# get
+# get (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning ドット表記法またはブラケット表記法を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `get` 関数は、複雑なパス解析、`null` または `undefined` の処理、デフォルト値の処理により、動作が遅くなります。
+
+代わりに、より高速で現代的なドット表記法 (`.`)、ブラケット表記法 (`[]`)、またはオプショナルチェイニング (`?.`) を使用してください。
+
 :::
 
-オブジェクトから指定されたパスにある値を取得します。その値が `undefined` の場合、デフォルト値を返します。
-
-## インターフェース
+オブジェクトの指定されたパスにある値を取得します。
 
 ```typescript
-function get<T extends object, K extends keyof T>(object: T, path: K | [K]): T[K];
-function get<T extends object, K extends keyof T>(object: T | null | undefined, path: K | [K]): T[K] | undefined;
-function get<T extends object, K extends keyof T, D>(
-  object: T | null | undefined,
-  path: K | [K],
-  defaultValue: D
-): Exclude<T[K], undefined> | D;
-
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(object: T, path: [K1, K2]): T[K1][K2];
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1]>(
-  object: T | null | undefined,
-  path: [K1, K2]
-): T[K1][K2] | undefined;
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], D>(
-  object: T | null | undefined,
-  path: [K1, K2],
-  defaultValue: D
-): Exclude<T[K1][K2], undefined> | D;
-
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T,
-  path: [K1, K2, K3]
-): T[K1][K2][K3];
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T | null | undefined,
-  path: [K1, K2, K3]
-): T[K1][K2][K3] | undefined;
-function get<T extends object, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], D>(
-  object: T | null | undefined,
-  path: [K1, K2, K3],
-  defaultValue: D
-): Exclude<T[K1][K2][K3], undefined> | D;
-
-function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
->(object: T, path: [K1, K2, K3, K4]): T[K1][K2][K3][K4];
-function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
->(object: T | null | undefined, path: [K1, K2, K3, K4]): T[K1][K2][K3][K4] | undefined;
-function get<
-  T extends object,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
-  D,
->(object: T | null | undefined, path: [K1, K2, K3, K4], defaultValue: D): Exclude<T[K1][K2][K3][K4], undefined> | D;
-
-function get<T>(object: Record<number, T>, path: number): T;
-function get<T>(object: Record<number, T> | null | undefined, path: number): T | undefined;
-function get<T, D>(object: Record<number, T> | null | undefined, path: number, defaultValue: D): T | D;
-
-function get<D>(object: null | undefined, path: PropertyKey, defaultValue: D): D;
-function get(object: null | undefined, path: PropertyKey): undefined;
-
-function get<T, P extends string>(data: T, path: P): string extends P ? any : Get<T, P>;
-function get<T, P extends string, D = Get<T, P>>(
-  data: T,
-  path: P,
-  defaultValue: D
-): Exclude<Get<T, P>, null | undefined> | D;
-
-function get(object: unknown, path: PropertyKey, defaultValue?: unknown): any;
-function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
+const value = get(object, path, defaultValue);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`unknown`): 検索対象のオブジェクト。
-- `path` (`PropertyKey | readonly PropertyKey[]`): プロパティを取得するパス。
-- `defaultValue` (`unknown`): 見つかった値が `undefined` の場合に返す値。
+### `get(object, path, defaultValue?)`
 
-### 戻り値
-
-(`Get<T, P>`): 見つかった値。
-
-## 例
+オブジェクトのパスから安全に値を取得するには `get` を使用してください。パスが存在しない場合や値が `undefined` の場合は、デフォルト値を返します。
 
 ```typescript
 import { get } from 'es-toolkit/compat';
 
-const obj = {
-  a: {
-    b: 4,
-  },
-};
+// ドット表記法でネストされたオブジェクトにアクセス
+const object = { a: { b: { c: 3 } } };
+get(object, 'a.b.c');
+// => 3
 
-get(obj, 'a.b'); // 4
-get(obj, ['a', 'b']); // 4
-get(obj, ['a', 'c']); // undefined
-get(obj, ['a', 'c'], null); // null
+// 配列表記法でアクセス
+get(object, ['a', 'b', 'c']);
+// => 3
+
+// 存在しないパスにデフォルト値を提供
+get(object, 'a.b.d', 'default');
+// => 'default'
+
+// 配列インデックスを含むパス
+const arrayObject = { users: [{ name: 'john' }, { name: 'jane' }] };
+get(arrayObject, 'users[0].name');
+// => 'john'
 ```
+
+`null` または `undefined` のオブジェクトに安全にアクセスします。
+
+```typescript
+import { get } from 'es-toolkit/compat';
+
+get(null, 'a.b.c', 'default');
+// => 'default'
+
+get(undefined, ['a', 'b'], 'default');
+// => 'default'
+```
+
+#### パラメータ
+
+- `object` (`any`): 照会するオブジェクトです。
+- `path` (`PropertyPath`): 取得するプロパティのパスです。文字列、数値、シンボル、または配列で表すことができます。
+- `defaultValue` (`any`, オプション): 値が `undefined` のときに返すデフォルト値です。
+
+#### 戻り値
+
+(`any`): 解決された値またはデフォルト値を返します。

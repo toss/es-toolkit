@@ -1,29 +1,50 @@
 # trimStart
 
-Removes leading whitespace or specified characters from a string.
-
-If `chars` is a string, it should be a single character. To remove multiple characters from the start of the string, provide an array of single characters instead.
-
-## Signature
+Removes whitespace or specified characters from the start of a string.
 
 ```typescript
-function trimStart(str: string, chars?: string | string[]): string;
+const trimmed = trimStart(str, chars);
 ```
 
-### Parameters
+## Usage
 
-- `str` (`string`): The string from which leading characters will be trimmed.
-- `chars` (`string | string[]`): The character(s) to remove from the start of the string.
+### `trimStart(str, chars?)`
 
-### Returns
-
-(`string`): The resulting string after the specified leading character has been removed.
-
-## Examples
+Use `trimStart` when you want to remove unnecessary characters from the beginning of a string. If no specific characters are specified, it removes whitespace characters.
 
 ```typescript
-const trimmedStr1 = trimStart('---hello', '-'); // returns 'hello'
-const trimmedStr2 = trimStart('000123', '0'); // returns '123'
-const trimmedStr3 = trimStart('abcabcabc', 'a'); // returns 'bcabcabc'
-const trimmedStr4 = trimStart('xxxtrimmed', 'x'); // returns 'trimmed'
+import { trimStart } from 'es-toolkit/string';
+
+// Remove default whitespace
+trimStart('  hello'); // 'hello'
+trimStart('\t\n  hello'); // 'hello'
+
+// Remove specific characters
+trimStart('---hello', '-'); // 'hello'
+trimStart('000123', '0'); // '123'
+trimStart('abcabcabc', 'a'); // 'bcabcabc'
 ```
+
+If you specify multiple characters as an array, all characters matching any of them will be removed.
+
+```typescript
+import { trimStart } from 'es-toolkit/string';
+
+// Specify multiple characters as an array
+trimStart('!!@@hello', ['!', '@']); // 'hello'
+
+// Remove numbers and special characters
+trimStart('123abc', ['1', '2', '3']); // 'abc'
+
+// Remove characters and whitespace together
+trimStart('  __hello', ['_', ' ']); // 'hello'
+```
+
+#### Parameters
+
+- `str` (`string`): The string to remove characters from the start.
+- `chars` (`string | string[]`, optional): The characters to remove. Can be a string or an array of characters. Defaults to whitespace characters.
+
+#### Returns
+
+(`string`): Returns a new string with the specified characters removed from the start.

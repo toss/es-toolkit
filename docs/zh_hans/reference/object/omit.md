@@ -1,40 +1,42 @@
 # omit
 
-创建一个省略指定键的新对象。
-
-该函数接受一个对象和一个键数组，返回一个新对象，该对象排除了与指定键对应的属性。
-
-## 签名
+返回一个排除指定键的新对象。
 
 ```typescript
-function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K>;
+const result = omit(obj, keys);
 ```
 
-### 参数
+## 用法
 
-- `obj` (`T`): 要从中省略键的对象。
-- `keys` (`K[]`): 要从对象中省略的键的数组。
+### `omit(obj, keys)`
 
-### 返回值
-
-(`Omit<T, K>`): 一个省略了指定键的新对象。
-
-## 示例
+当您想要从对象中排除特定键时使用 `omit`。它返回一个新对象,其中删除了与指定键对应的属性。
 
 ```typescript
-const obj = { a: 1, b: 2, c: 3 };
+import { omit } from 'es-toolkit/object';
+
+// 排除特定键
+const obj = { a: 1, b: 2, c: 3, d: 4 };
 const result = omit(obj, ['b', 'c']);
-// result 将会是 { a: 1 }
+// result 是 { a: 1, d: 4 }
+
+// 指定不存在的键不会导致错误
+const safe = omit(obj, ['b', 'nonexistent']);
+// safe 是 { a: 1, c: 3, d: 4 }
+
+// 也可以使用动态键数组
+const keysToOmit = Object.keys({ b: true, c: true });
+const dynamic = omit(obj, keysToOmit);
+// dynamic 是 { a: 1, d: 4 }
 ```
 
-## 与 Lodash 的兼容性
+#### 参数
 
-`es-toolkit/compat` 中的 `omit` 函数可以省略深层路径的属性。
+- `obj` (`T extends Record<PropertyKey, any>`):要排除键的对象。
+- `keys` (`readonly K[]` (`K extends keyof T`) 或 `readonly PropertyKey[]`):要从对象中排除的键的数组。
 
-```typescript
-import { omit } from 'es-toolkit/compat';
+#### 返回值
 
-const obj = { a: { b: { c: 1 } }, d: { e: 2 }, f: { g: 3 }, 'f.g': 4 };
-const result = omit(obj, ['a.b.c', 'f.g']);
-// result 将会是 { a: { b: {} }, d: { e: 2 }, f: { g: 3 } }
-```
+- `Omit<T, K>` 或 `Partial<T>` - 返回排除了指定键的新对象。
+  - 当 `keys` 为 `readonly K[]` 时: 返回 `Omit<T, K>`,类型更严格。
+  - 当 `keys` 为 `readonly PropertyKey[]` 时: 返回 `Partial<T>`。对于在运行时确定的动态键数组很有用。

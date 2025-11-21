@@ -1,35 +1,44 @@
 # flatMapDeep
 
-Map each element of a nested array to the given iteratee function, then unpack and flatten all depths.
-
-It works the same as if you called [Array#flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) with [Array#map](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map) as `map(iteratee).flat(Infinity)` in the JavaScript language, but it's faster.
-
-## Signature
+Transforms each element of an array with a function's return value, then flattens all depths and returns a new array.
 
 ```typescript
-function flattenDeep<T>(arr: T[]): Array<ExtractNestedArrayType<T>>;
+const result = flatMapDeep(arr, iteratee);
 ```
 
-### Parameters
+## Usage
 
-- `arr` (`T[]`): The array to flatten.
-- `iteratee` (`T[]`): A function that maps each array element.
+### `flatMapDeep(arr, iteratee)`
 
-### Returns
-
-(`Array<ExtractNestedArrayType<T>>`): A new array with each element mapped and all depths flattened.
-
-## Examples
+Use `flatMapDeep` when you want to transform an array while completely flattening all nested arrays. First, it applies a function to each element, then flattens the resulting array to all depths.
 
 ```typescript
-const array = [1, 2, 3];
+import { flatMapDeep } from 'es-toolkit/array';
 
-const result1 = flatMapDeep(array, item => [item, item]);
-// Return [1, 1, 2, 2, 3, 3]
-
-const result2 = flatMapDeep(array, item => [[item, item]]);
-// Return [1, 1, 2, 2, 3, 3]
-
-const result3 = flatMapDeep(array, item => [[[item, item]]]);
-// Return [1, 1, 2, 2, 3, 3]
+// Duplicate each element twice and flatten completely.
+const result1 = flatMapDeep([1, 2, 3], item => [item, item]);
+// Returns: [1, 1, 2, 2, 3, 3]
 ```
+
+It flattens all depths no matter how deeply nested.
+
+```typescript
+import { flatMapDeep } from 'es-toolkit/array';
+
+// Flatten nested arrays completely.
+const result = flatMapDeep([1, 2, 3], item => [[item, item]]);
+// Returns: [1, 1, 2, 2, 3, 3]
+
+// Flatten multiple levels of nesting.
+const result2 = flatMapDeep([1, 2, 3], item => [[[item, item]]]);
+// Returns: [1, 1, 2, 2, 3, 3]
+```
+
+#### Parameters
+
+- `arr` (`T[]`): The array to transform.
+- `iteratee` (`(item: T) => U`): The function that transforms each array element.
+
+#### Returns
+
+(`Array<ExtractNestedArrayType<U>>`): Returns a new array where each element is transformed and all depths are flattened.

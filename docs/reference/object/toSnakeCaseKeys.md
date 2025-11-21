@@ -1,59 +1,61 @@
 # toSnakeCaseKeys
 
-Creates a new object composed of the properties with keys converted to snake case (`snake_case`).
+Returns a new object with all keys in objects and arrays converted to snake_case.
 
-This function takes an object and returns a new object that includes the same properties,
-but with all keys converted to snake case format.
-
-## Signature
+Snake case is a naming convention where each word in an identifier is written in lowercase and connected with underscores (`_`). For example, it's written as `snake_case`.
 
 ```typescript
-function toSnakeCaseKeys<T>(obj: T): ToSnakeCaseKeys<T>;
+const snakeCased = toSnakeCaseKeys(obj);
 ```
 
-### Parameters
+## Usage
 
-- `obj` (`T`): The object to convert keys from.
+### `toSnakeCaseKeys(obj)`
 
-### Returns
-
-(`ToSnakeCaseKeys<T>`): A new object with all keys converted to snake case.
-
-## Examples
+Use `toSnakeCaseKeys` when you want to convert all keys of an object to snake_case. Nested objects and objects within arrays are also converted recursively.
 
 ```typescript
-// Example with objects
-const obj = { userId: 1, firstName: 'John' };
-const result = toSnakeCaseKeys(obj);
-// result will be { user_id: 1, first_name: 'John' }
+import { toSnakeCaseKeys } from 'es-toolkit/object';
 
-// Example with arrays of objects
-const arr = [
+// Basic object conversion
+const obj = { userId: 1, firstName: 'John', lastName: 'Doe' };
+const result = toSnakeCaseKeys(obj);
+// result is { user_id: 1, first_name: 'John', last_name: 'Doe' }
+
+// Objects within arrays are also converted
+const users = [
   { userId: 1, firstName: 'John' },
   { userId: 2, firstName: 'Jane' },
 ];
-const arrResult = toSnakeCaseKeys(arr);
-// arrResult will be [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]
+const convertedUsers = toSnakeCaseKeys(users);
+// convertedUsers is [{ user_id: 1, first_name: 'John' }, { user_id: 2, first_name: 'Jane' }]
 
-// Example with nested objects
+// Nested objects are fully converted
 const nested = {
   userData: {
     userId: 1,
-    userAddress: {
-      streetName: 'Main St',
-      zipCode: '12345',
+    contactInfo: {
+      emailAddress: 'john@example.com',
+      phoneNumber: '123-456-7890',
     },
   },
 };
 const nestedResult = toSnakeCaseKeys(nested);
-// nestedResult will be:
-// {
+// nestedResult is {
 //   user_data: {
 //     user_id: 1,
-//     user_address: {
-//       street_name: 'Main St',
-//       zip_code: '12345'
+//     contact_info: {
+//       email_address: 'john@example.com',
+//       phone_number: '123-456-7890'
 //     }
 //   }
 // }
 ```
+
+#### Parameters
+
+- `obj` (`T`): The object, array, or primitive value to convert keys to snake_case.
+
+#### Returns
+
+(`ToSnakeCaseKeys<T>`): Returns a new object with all keys converted to snake_case.

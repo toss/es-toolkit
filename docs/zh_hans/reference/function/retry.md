@@ -1,54 +1,96 @@
 # retry
 
-`Promise`返回的函数会在成功之前进行重试。您可以设置重试次数和每次重试之间的间隔。
-
-## 签名
+重复执行返回 Promise 的函数直到成功。
 
 ```typescript
-function retry<T>(func: () => Promise<T>): Promise<T>;
-function retry<T>(func: () => Promise<T>, retries: number): Promise<T>;
-function retry<T>(func: () => Promise<T>, { retries, delay, signal }: RetryOptions): Promise<T>;
+const result = await retry(asyncFunc, options);
 ```
 
-### 参数
+## 用法
 
-- `func` (`() => Promise<T>`): 一个返回 `Promise` 的函数。
-- `retries` (`number`): 重试的次数。默认值为 `Number.POSITIVE_INFINITY`，即会一直重试直到成功。
-- `delay` (`number | ((attempts: number) => number)`): 每次重试之间的间隔。可以是毫秒数，也可以是一个根据当前重试次数 (`attempts`) 动态计算的函数。默认值为 `0`。
-- `signal` (`AbortSignal`): 一个可以用来取消重试的 `AbortSignal`。
+### `retry(func, options?)`
 
-### 返回值
+当异步函数失败时想要自动重试时,请使用 `retry`。这对于可能暂时失败的操作(如 API 调用或网络请求)很有用。
 
-(`Promise<T>`): `func` 返回的值。
-
-### 错误
-
-如果重试次数达到 `retries` 则抛出错误
-
-## 示例
+可以设置重试次数、重试间隔和取消信号。重试间隔可以是固定值,也可以是根据重试次数动态计算的函数。
 
 ```typescript
-// 一直重试直到 fetchData 成功
-const data1 = await retry(() => fetchData());
-console.log(data1);
+import { retry } from 'es-toolkit/function';
 
-// 最多重试 3 次
-const data2 = await retry(() => fetchData(), 3);
-console.log(data2);
-
-// 每次重试之间间隔 100 毫秒，最多重试 3 次
-const data3 = await retry(() => fetchData(), { retries: 3, delay: 100 });
-console.log(data3);
-
-// 使用函数动态设置重试间隔（例如每次增加 50ms）
-const data4 = await retry(() => fetchData(), {
-  retries: 5,
-  delay: attempts => attempts * 50,
+// 基本用法 (无限重试)
+const data1 = await retry(async () => {
+  const response = await fetch('/api/data');
+  if (!response.ok) throw new Error('Failed to fetch');
+  return response.json();
 });
-console.log(data4);
 
-// 可通过 AbortSignal 取消重试
-const controller = new AbortController();
-const data5 = await retry(() => fetchData(), { signal: controller.signal });
-console.log(data5);
+// 限制重试次数
+const data2 = await retry(async () => {
+  return await fetchData();
+}, 3);
+
+// 设置重试间隔 (100ms)
+const data3 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 3,
+    delay: 100,
+  }
+);
+
+// 动态重试间隔 (指数退避)
+const data4 = await retry(
+  async () => {
+    return await fetchData();
+  },
+  {
+    retries: 5,
+    delay: attempts => Math.min(100 * Math.pow(2, attempts), 5000),
+  }
+);
 ```
+
+也可以使用 AbortSignal 取消重试。
+
+```typescript
+import { retry } from 'es-toolkit/function';
+
+const controller = new AbortController();
+
+// 5 秒后取消重试
+setTimeout(() => controller.abort(), 5000);
+
+try {
+  const data = await retry(
+    async () => {
+      return await fetchData();
+    },
+    {
+      retries: 10,
+      delay: 1000,
+      signal: controller.signal,
+    }
+  );
+  console.log(data);
+} catch (error) {
+  console.log('重试被取消或失败:', error);
+}
+```
+
+#### 参数
+
+- `func` (`() => Promise<T>`): 要重试的异步函数。
+- `options` (`number | RetryOptions`, 可选): 重试次数或选项对象。
+  - `retries` (`number`, 可选): 重试次数。默认值为 `Infinity`,无限重试。
+  - `delay` (`number | (attempts: number) => number`, 可选): 重试间隔(毫秒)。可以使用数字或函数。默认值为 `0`。
+  - `signal` (`AbortSignal`, 可选): 可以取消重试的信号。
+
+#### 返回值
+
+(`Promise<T>`): 返回函数成功执行的结果值。
+
+#### 错误
+
+当重试次数超过或被 AbortSignal 取消时抛出最后的错误。

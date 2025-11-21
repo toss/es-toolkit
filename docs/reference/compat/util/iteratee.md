@@ -1,53 +1,70 @@
-# iteratee
+# iteratee (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use direct functions or property access instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `iteratee` function performs slowly due to complex type conversions and handling of various cases.
+
+Instead, use faster and more modern direct functions or property access.
+
 :::
 
-Creates a function that returns a value from an element in a collection.
+Creates a function that returns a value from an element.
 
-You can call `iteratee` with the following types of arguments:
+```typescript
+const getter = iteratee(source);
+```
 
-- **Function**: Returns the function as-is, which will be called with the element from the collection.
-- **Property name**: Returns the value of the specified property from the element.
+## Usage
+
+### `iteratee(value?)`
+
+Use `iteratee` when you want to create a function that extracts values from collection elements or checks conditions. It performs different actions based on the type of argument provided.
+
+```typescript
+import { iteratee } from 'es-toolkit/compat';
+
+// Function: Returns the given function as-is
+const func = iteratee(object => object.a);
+[{ a: 1 }, { a: 2 }, { a: 3 }].map(func);
+// Returns: [1, 2, 3]
+
+// Property name: Function that returns the value of that property
+const getA = iteratee('a');
+[{ a: 1 }, { a: 2 }, { a: 3 }].map(getA);
+// Returns: [1, 2, 3]
+
+// Object: Function that checks if it matches the given object
+const matchesObj = iteratee({ a: 1 });
+[
+  { a: 1, b: 2 },
+  { a: 2, b: 3 },
+  { a: 1, c: 4 },
+].find(matchesObj);
+// Returns: { a: 1, b: 2 }
+
+// Property-value pair: Function that checks if the property matches a specific value
+const matchesProperty = iteratee(['a', 1]);
+[{ a: 1 }, { a: 2 }, { a: 3 }].find(matchesProperty);
+// Returns: { a: 1 }
+
+// null or no argument: Function that returns the element as-is
+const identity = iteratee();
+[{ a: 1 }, { a: 2 }, { a: 3 }].map(identity);
+// Returns: [{ a: 1 }, { a: 2 }, { a: 3 }]
+```
+
+Actions based on argument type:
+
+- **Function**: Returns the given function as-is.
+- **Property name**: Returns the value of the given property from the element.
 - **Property-value pair**: Returns a boolean indicating whether the element's property matches the given value.
-- **Partial object**: Returns a boolean indicating whether the element matches the properties of the partial object.
+- **Partial object**: Returns a boolean indicating whether the element matches the partial object's properties and values.
+- **null or no argument**: Returns a function that returns the element as-is.
 
-If you don't provide any arguments or pass `null`, this function will return a [function that simply returns its input unchanged](../../function/identity.md).
+#### Parameters
 
-## Signature
+- `value` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`, optional): The value to convert to an iteratee. Default is `null`.
 
-```typescript
-function iteratee(value?: null): <T>(value: T) => T;
-function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
-function iteratee(value: symbol | number | string | object | null): (...args: any[]) => any;
-```
+#### Returns
 
-### Parameters
-
-- `value` (`symbol | number | string | object | null | ((...args: any[]) => any)`): The value to convert to an iteratee.
-
-### Returns
-
-(`(...args: any[]) => unknown`): Returns the new iteratee function.
-
-## Examples
-
-```typescript
-const func = iteratee();
-[{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [{ a: 1 }, { a: 2 }, { a: 3 }]
-
-const func = iteratee((object) => object.a);
-[{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
-
-const func = iteratee('a');
-[{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
-
-const func = iteratee({ a: 1 });
-[{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
-
-const func = iteratee(['a', 1]);
-[{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
-```
+(`(...args: any[]) => any`): Returns the new iteratee function.

@@ -1,43 +1,73 @@
-# toPairs
+# toPairs (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.entries`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `toPairs` 함수는 `Map`과 `Set` 처리, 배열형 객체 처리 등의 복잡한 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.entries()`를 사용하세요.
+
 :::
 
-객체, `Set`, 또는 `Map`에서 프로퍼티와 값을 쌍으로 묶은 요소의 배열을 만들어요.
-
-- 객체가 주어지면, 객체의 프로퍼티와 값을 쌍으로 묶은 요소(`[key, value]`)들의 배열을 반환해요.
-- `Set`이 주어지면, 요소를 `[value, value]` 형식으로 쌍으로 만든 배열을 반환을 반환해요.
-- `Map`이 주어지면, 키와 값을 쌍으로 묶은 요소(`[key, value]`)들의 배열을 반환해요.
-
-## 인터페이스
+객체를 키-값 쌍의 배열로 변환해요.
 
 ```typescript
-function toPairs<T>(object?: Record<string, T> | Record<number, T>): Array<[string, T]>;
-function toPairs(object?: object): Array<[string, any]>;
+const pairs = toPairs(object);
 ```
 
-### 파라미터
+## 사용법
 
-- `object` (`Record<string, T> | Record<number, T> | object`, 선택 사항): 조회할 객체, `Set`, 또는 `Map`.
+### `toPairs(object)`
 
-### 반환 값
-
-(`Array<[string, T]> | Array<[string, any]>`): 프로퍼티-값 쌍.
-
-## 예시
+객체의 자체 열거 가능한 속성들을 `[키, 값]` 형태의 배열로 변환하고 싶을 때 `toPairs`를 사용하세요. 상속된 속성은 포함되지 않아요.
 
 ```typescript
-const object = { a: 1, b: 2 };
-toPairs(object); // [['a', 1], ['b', 2]]
+import { toPairs } from 'es-toolkit/compat';
 
-const set = new Set([1, 2]);
-toPairs(set); // [[1, 1], [2, 2]]
+// 기본 객체 변환
+const object = { a: 1, b: 2, c: 3 };
+toPairs(object);
+// => [['a', 1], ['b', 2], ['c', 3]]
 
+// 숫자 키를 가진 객체
+const numbers = { 0: 'zero', 1: 'one', 2: 'two' };
+toPairs(numbers);
+// => [['0', 'zero'], ['1', 'one'], ['2', 'two']]
+```
+
+`Map`과 `Set`도 처리할 수 있어요.
+
+```typescript
+import { toPairs } from 'es-toolkit/compat';
+
+// Map 객체 변환
 const map = new Map();
-map.set('a', 1);
-map.set('b', 2);
-toPairs(map); // [['a', 1], ['b', 2]]
+map.set('name', 'John');
+map.set('age', 30);
+toPairs(map);
+// => [['name', 'John'], ['age', 30]]
+
+// Set 객체 변환 (값이 키와 동일)
+const set = new Set([1, 2, 3]);
+toPairs(set);
+// => [[1, 1], [2, 2], [3, 3]]
 ```
+
+`null`이나 `undefined`를 안전하게 처리해요.
+
+```typescript
+import { toPairs } from 'es-toolkit/compat';
+
+toPairs(null);
+// => []
+
+toPairs(undefined);
+// => []
+```
+
+#### 파라미터
+
+- `object` (`object`): 변환할 객체, Map, 또는 Set이에요.
+
+#### 반환 값
+
+(`Array<[string, any]>`): 키-값 쌍들의 배열을 반환해요.

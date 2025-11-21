@@ -1,32 +1,48 @@
 # asyncNoop
 
-An asynchronous no-operation function that does nothing. This can be used as a placeholder or default function.
-
-## Signature
+A function that asynchronously does nothing.
 
 ```typescript
-function asyncNoop(): Promise<void>;
+const promise = asyncNoop();
 ```
 
-### Returns
+::: info [`noop`](./noop.md) function
 
-(`Promise<void>`): A Promise that resolves to undefined.
+If you need a function that synchronously does nothing, use the `noop` function which immediately returns `void`.
 
-## Examples
+:::
+
+## Usage
+
+### `asyncNoop()`
+
+Use `asyncNoop` when you need to fill a placeholder or use as a default value where an asynchronous function is required. It returns a `Promise` that resolves to `undefined`.
 
 ```typescript
 import { asyncNoop } from 'es-toolkit/function';
 
+// Example using as a default value
 interface Props {
   fetchData?: () => Promise<void>;
 }
 
 function MyComponent({ fetchData = asyncNoop }: Props) {
   const handleFetchData = async () => {
-    // Here fetchData is guaranteed to be a function, so it's safe to call.
+    // fetchData is always a function, so it's safe to call
     await fetchData();
   };
 
   handleFetchData();
 }
+
+// Example of direct invocation
+asyncNoop();
+// Returns: Promise<void>
+
+await asyncNoop();
+// Returns: undefined
 ```
+
+#### Returns
+
+(`Promise<void>`): A `Promise` that resolves to `undefined`.

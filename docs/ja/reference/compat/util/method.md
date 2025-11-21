@@ -1,31 +1,20 @@
-# method
+# method (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-指定されたオブジェクトの`path`でメソッドを、提供された引数で呼び出す関数を作成します。
-
-## インターフェース
+指定されたパスのメソッドを引数と一緒に呼び出す関数を作ります。
 
 ```typescript
-function method(path: PropertyKey | PropertyKey[], ...args: any[]): (object?: unknown) => any;
+const methodFunc = method(path, ...args);
 ```
 
-### パラメータ
+## 使用法
 
-- `path` (`PropertyKey | PropertyKey[]`): 呼び出すメソッドのパス。
-- `args` (`...any`): メソッドを呼び出す引数。
+### `method(path, ...args)`
 
-### 戻り値
-
-(`(object?: unknown) => any`): オブジェクトを受け取り、その`path`でメソッドを`args`で呼び出す新しい関数。
-
-## 例
+オブジェクトで特定のパスのメソッドを事前に定義された引数と一緒に呼び出す関数を生成します。関数型プログラミングでメソッド呼び出しを再利用したり配列の`map`などで便利です。
 
 ```typescript
+import { method } from 'es-toolkit/compat';
+
 const object = {
   a: {
     b: function (x, y) {
@@ -34,6 +23,40 @@ const object = {
   },
 };
 
+// メソッド呼び出し関数を作る
 const add = method('a.b', 1, 2);
 console.log(add(object)); // => 3
+
+// 配列で各オブジェクトのメソッドを呼び出す
+const objects = [{ calc: { sum: (a, b) => a + b } }, { calc: { sum: (a, b) => a * b } }];
+
+const calculate = method('calc.sum', 5, 3);
+objects.map(calculate); // => [8, 15]
 ```
+
+ネストしたパスも処理できます。
+
+```typescript
+import { method } from 'es-toolkit/compat';
+
+const obj = {
+  users: {
+    getName: function (prefix) {
+      return prefix + this.name;
+    },
+    name: 'John',
+  },
+};
+
+const getUserName = method('users.getName', 'Mr. ');
+getUserName(obj); // => 'Mr. John'
+```
+
+#### パラメータ
+
+- `path` (`PropertyKey | PropertyKey[]`): 呼び出すメソッドのパスです。
+- `...args` (`any[]`): メソッドに渡す引数です。
+
+#### 戻り値
+
+(`(object: any) => any`): オブジェクトを受け取って指定されたパスのメソッドを引数と一緒に呼び出す関数を返します。

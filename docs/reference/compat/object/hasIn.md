@@ -1,83 +1,83 @@
-# hasIn
+# hasIn (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use the `in` operator instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `hasIn` function performs slowly due to complex path parsing and prototype chain checking.
+
+Instead, use the faster and more modern `in` operator or `Object.hasOwn()` function.
+
 :::
 
-Checks if a given path exists in an object, including inherited properties.
-
-You can provide the path as a single property key, an array of property keys,
-or a string representing a deep path.
-
-Unlike `has`, which only checks for own properties, `hasIn` also checks for properties
-in the prototype chain.
-
-If the path is an index and the object is an array or an arguments object,
-the function will verify if the index is valid and within the bounds of the array
-or arguments object, even if the array or arguments object is sparse
-(i.e., not all indexes are defined).
-
-## Signature
+Checks if a property at the specified path exists in the object, including inherited properties.
 
 ```typescript
-function hasIn<T>(object: T, path: PropertyKey | PropertyKey[]): boolean;
+const exists = hasIn(object, path);
 ```
 
-### Parameters
+## Usage
 
-- `object` (`T`): The object to query.
-- `path` (`PropertyKey | PropertyKey[]`): The path to check. This can be a single property key, an array of property keys, or a string representing a deep path.
+### `hasIn(object, path)`
 
-### Returns
-
-(`boolean`): Returns `true` if the path exists (own or inherited) in the object, `false` otherwise.
-
-## Examples
+Use `hasIn` when you want to check if an object has a property at a specific path. Unlike `has`, it also checks inherited properties (properties in the prototype chain).
 
 ```typescript
-import { has, hasIn } from 'es-toolkit/compat';
+import { hasIn } from 'es-toolkit/compat';
 
-const obj = { a: { b: { c: 3 } } };
+// Check own properties
+const object = { a: 1, b: 2 };
+hasIn(object, 'a');
+// => true
 
-hasIn(obj, 'a'); // true
-hasIn(obj, ['a', 'b']); // true
-hasIn(obj, ['a', 'b', 'c']); // true
-hasIn(obj, 'a.b.c'); // true
-hasIn(obj, 'a.b.d'); // false
-hasIn(obj, ['a', 'b', 'c', 'd']); // false
+// Check nested objects
+const nested = { a: { b: { c: 3 } } };
+hasIn(nested, 'a.b.c');
+// => true
+hasIn(nested, ['a', 'b', 'c']);
+// => true
 
-// Example with inherited properties:
+// Non-existent property
+hasIn(nested, 'a.b.d');
+// => false
+
+// Check array indices
+const array = [1, 2, 3];
+hasIn(array, 2);
+// => true
+hasIn(array, 5);
+// => false
+```
+
+It also checks inherited properties.
+
+```typescript
+import { hasIn } from 'es-toolkit/compat';
+
+// Check properties in the prototype chain
 function Rectangle() {}
 Rectangle.prototype.area = function () {};
 
 const rect = new Rectangle();
-hasIn(rect, 'area'); // true - hasIn checks both own and inherited properties
+hasIn(rect, 'area'); // true - finds inherited properties too
 has(rect, 'area'); // false - has only checks own properties
 ```
 
-## Demo
+Safely handles `null` and `undefined`.
 
-::: sandpack
+```typescript
+import { hasIn } from 'es-toolkit/compat';
 
-```ts index.ts
-import { has, hasIn } from 'es-toolkit/compat';
+hasIn(null, 'a');
+// => false
 
-// Example with inherited properties
-function Rectangle() {
-  this.width = 10;
-  this.height = 5;
-}
-Rectangle.prototype.area = function () {
-  return this.width * this.height;
-};
-
-const rect = new Rectangle();
-
-console.log('hasIn(rect, "area"):', hasIn(rect, 'area')); // true - checks inherited properties
-console.log('has(rect, "area"):', has(rect, 'area')); // false - only checks own properties
-console.log('hasIn(rect, "width"):', hasIn(rect, 'width')); // true - own property
+hasIn(undefined, 'b');
+// => false
 ```
 
-:::
+#### Parameters
+
+- `object` (`any`): The object to inspect.
+- `path` (`PropertyPath`): The path of the property to check. This can be represented as a string, number, symbol, or array.
+
+#### Returns
+
+(`boolean`): Returns `true` if the property at the path exists (whether it's an own property or inherited property), otherwise `false`.

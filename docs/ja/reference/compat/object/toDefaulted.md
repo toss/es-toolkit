@@ -1,60 +1,80 @@
-# toDefaulted
+# toDefaulted (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning スプレッド演算子または `Object.assign` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `toDefaulted` 関数は深いクローンと複雑なデフォルト値処理により遅く動作します。
+
+代わりに、より高速で現代的なスプレッド演算子(`...`)または `Object.assign()` を使用してください。
+
 :::
 
-指定された`object`をもとに、特定のプロパティに対して`undefined`を返さないようにデフォルト値を設定した新しいオブジェクトを返します。
-`undefined`または`Object.prototype`から継承された値に対してデフォルト値が設定されます。
-
-デフォルト値を設定するために、複数のオブジェクトをパラメータとして提供できます。これらのオブジェクトは左から右の順に適用されます。
-あるプロパティに値が指定されると、同じプロパティに対する後の値は無視されます。
-
-注意: この関数は新しいオブジェクトを生成します。`object`を修正したい場合は、[defaults](./defaults.md)関数を使用してください。
-
-## インターフェース
+オブジェクトにデフォルト値を適用した新しいオブジェクトを作成します。
 
 ```typescript
-function toDefaulted<T extends object>(object: T): NonNullable<T>;
-function toDefaulted<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function toDefaulted<T extends object, S1 extends object, S2 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2
-): NonNullable<T & S1 & S2>;
-function toDefaulted<T extends object, S1 extends object, S2 extends object, S3 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3
-): NonNullable<T & S1 & S2 & S3>;
-function toDefaulted<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): NonNullable<T & S1 & S2 & S3 & S4>;
-function toDefaulted<T extends object, S extends object>(object: T, ...sources: S[]): object;
-function toDefaulted<T extends object, S extends object>(object: T, ...sources: S[]): object;
+const defaulted = toDefaulted(object, ...sources);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`T`): デフォルト値を指定するオブジェクト。
-- `sources` (`S[]`): ソースオブジェクト。
+### `toDefaulted(object, ...sources)`
 
-### 戻り値
-
-(`object`): `sources` で指定されたデフォルト値を持つ新しく生成されたオブジェクト。
-
-## 例
+対象オブジェクトに1つ以上のソースオブジェクトからデフォルト値を適用した新しいオブジェクトを作成したい場合は、`toDefaulted` を使用してください。`undefined` であるプロパティまたは `Object.prototype` から継承されるプロパティにのみデフォルト値が設定されます。
 
 ```typescript
-toDefaulted({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-toDefaulted({ a: 1, b: 2 }, { b: 3 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-toDefaulted({ a: null }, { a: 1 }); // { a: null }
-toDefaulted({ a: undefined }, { a: 1 }); // { a: 1 }
+import { toDefaulted } from 'es-toolkit/compat';
+
+// 基本的なデフォルト値の設定
+const user = { name: 'John' };
+const defaults = { name: 'Anonymous', age: 25, role: 'user' };
+toDefaulted(user, defaults);
+// => { name: 'John', age: 25, role: 'user' }
+
+// 複数のソースからデフォルト値を適用
+const config = { theme: 'dark' };
+const defaults1 = { theme: 'light', lang: 'en' };
+const defaults2 = { lang: 'ko', region: 'Asia' };
+toDefaulted(config, defaults1, defaults2);
+// => { theme: 'dark', lang: 'en', region: 'Asia' }
 ```
+
+`undefined` 値のみがデフォルト値で置き換えられ、`null` 値は維持されます。
+
+```typescript
+import { toDefaulted } from 'es-toolkit/compat';
+
+const data = {
+  name: undefined,
+  age: null,
+  active: false,
+};
+const defaults = {
+  name: 'Default',
+  age: 18,
+  active: true,
+  role: 'user',
+};
+
+toDefaulted(data, defaults);
+// => { name: 'Default', age: null, active: false, role: 'user' }
+```
+
+元のオブジェクトは変更されず、新しいオブジェクトが返されます。
+
+```typescript
+import { toDefaulted } from 'es-toolkit/compat';
+
+const original = { a: 1 };
+const result = toDefaulted(original, { a: 2, b: 3 });
+
+console.log(original); // { a: 1 } (変更されない)
+console.log(result); // { a: 1, b: 3 } (新しいオブジェクト)
+```
+
+#### パラメータ
+
+- `object` (`object`): デフォルト値を受け取る対象オブジェクト。
+- `sources` (`object[]`): デフォルト値を提供するソースオブジェクト。左から右の順序で適用されます。
+
+#### 戻り値
+
+(`object`): デフォルト値が適用された新しいオブジェクトを返します。

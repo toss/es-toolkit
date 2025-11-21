@@ -1,37 +1,56 @@
-# toInteger
+# toInteger (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-将 `value` 转换为整数。
-
-此函数首先将 `value` 转换为有限数。如果结果有任何小数位，
-它们会被向下舍入到最接近的整数。
-
-## 签名
+将值转换为整数。
 
 ```typescript
-function toInteger(value: any): number;
+const integer = toInteger(value);
 ```
 
-### 参数
+## 用法
 
-- `value` (`any`): 要转换的值。
+### `toInteger(value)`
 
-### 返回值
-
-(`number`): 返回数字。
-
-## 示例
+将值转换为整数。小数部分被舍弃，只保留整数部分。
 
 ```typescript
-toInteger(3.2); // => 3
-toInteger(Number.MIN_VALUE); // => 0
-toInteger(Infinity); // => 1.7976931348623157e+308
-toInteger('3.2'); // => 3
-toInteger(Symbol.iterator); // => 0
-toInteger(NaN); // => 0
+import { toInteger } from 'es-toolkit/compat';
+
+// 将小数转换为整数
+toInteger(3.2);
+// Returns: 3
+
+// 将字符串数字转换为整数
+toInteger('3.2');
+// Returns: 3
+
+// 非常小的数变为 0
+toInteger(Number.MIN_VALUE);
+// Returns: 0
+
+// 无穷大变为 MAX_VALUE
+toInteger(Infinity);
+// Returns: 1.7976931348623157e+308
 ```
+
+无效值转换为 0。
+
+```typescript
+import { toInteger } from 'es-toolkit/compat';
+
+toInteger(NaN);
+// Returns: 0
+
+toInteger(Symbol.iterator);
+// Returns: 0
+
+toInteger(null);
+// Returns: 0
+```
+
+#### 参数
+
+- `value` (`unknown`): 要转换的值。
+
+#### 返回值
+
+(`number`): 返回转换后的整数。

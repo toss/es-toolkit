@@ -1,32 +1,69 @@
-# max
+# max (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Math.max`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `max` 関数は追加の関数呼び出しと `null`/`undefined` 処理により動作が遅くなります。
+
+代わりに、より高速で現代的な `Math.max(...array)` を使用してください。
+
 :::
 
-配列から最大値を持つ要素を返します。
-
-配列が空の場合は、`undefined` を返します。
-
-## インターフェース
+配列から最大値を見つけます。
 
 ```typescript
-function max<T>(items: ArrayLike<T> | null | undefined): T | undefined;
+const result = max(items);
 ```
 
-### パラメータ
+## 使用法
 
-- `items` (`ArrayLike<T> | null | undefined`): 最大値を持つ要素を探す配列。
+### `max(items?)`
 
-### 戻り値
-
-(`T | undefined`): 配列から最大値を持つ要素。配列が空の場合、`null`、または `undefined` の場合は `undefined` を返します。
-
-### 例
+配列から最も大きい値を見つけたい場合は `max` を使用してください。
 
 ```typescript
-max([1, 2, 3]); // 戻り値: 3
-max(['a', 'b']); // 戻り値: 'b'
+import { max } from 'es-toolkit/compat';
+
+// 数値配列から最大値
+max([1, 2, 3]);
+// Returns: 3
+
+max([10, 5, 8, 20]);
+// Returns: 20
+
+// 文字列配列から最大値（辞書順）
+max(['a', 'b', 'c']);
+// Returns: 'c'
+
+max(['apple', 'banana', 'cherry']);
+// Returns: 'cherry'
+
+// 空の配列やnull/undefined
+max([]);
+// Returns: undefined
+
+max(null);
+// Returns: undefined
+
+max(undefined);
+// Returns: undefined
 ```
+
+負の数も正しく処理されます。
+
+```typescript
+import { max } from 'es-toolkit/compat';
+
+max([-1, -5, -3]);
+// Returns: -1
+
+max([0, -2, 5, -10]);
+// Returns: 5
+```
+
+#### パラメータ
+
+- `items` (`ArrayLike<T> | null | undefined`, オプション): 最大値を見つける配列です。
+
+#### 戻り値
+
+(`T | undefined`): 配列から最も大きい値を返します。配列が空またはnull/undefinedの場合はundefinedを返します。

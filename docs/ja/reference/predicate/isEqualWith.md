@@ -1,57 +1,95 @@
 # isEqualWith
 
-二つの値が与えられた比較関数を使って等しいかどうかを比較します。
-
-比較関数を提供することで、二つの値が等しいかどうかを検証する方法を細かく調整できます。
-与えられた比較関数が `true` を返すと、二つの値は等しいと見なされます。 `false` を返すと、二つの値は異なると見なされます。
-`undefined` を返すと、[isEqual](./isEqual.md) が提供するデフォルトの方法で二つの値を比較します。
-
-オブジェクト、配列、`Map`、`Set` のように複数の要素を持つ場合でも、与えられた比較関数を使って要素間の値を比較します。
-
-基本的な比較方法の上に、複雑な比較を処理するための方法を定義できるため、柔軟に二つの値を比較できます。
-
-## インターフェース
+カスタム比較関数を使用して二つの値が等しいかどうかを確認します。
 
 ```typescript
-function isEqualWith(
-  a: any,
-  b: any,
-  areValuesEqual: (
-    x: any,
-    y: any,
-    property?: PropertyKey,
-    xParent?: any,
-    yParent?: any,
-    stack?: Map<any, any>
-  ) => boolean | void
-): boolean;
+const result = isEqualWith(a, b, areValuesEqual);
 ```
 
-### パラメータ
+## 使用法
 
-- `a` (`any`): 比較する最初の値。
-- `b` (`any`): 比較する2番目の値。
-- `areValuesEqual` (`(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void`): 2つの値を比較する方法を示す比較関数。2つの値が等しいかどうかを示すブール値を返すことができます。`undefined`を返すと、デフォルトの方法で2つの値を比較します。
-  - `x`: 最初のオブジェクト `a` に属する値。
-  - `y`: 2番目のオブジェクト `b` に属する値。
-  - `property`: `x` と `y` を取得するために使用されたプロパティキー。
-  - `xParent`: 最初の値 `x` の親。
-  - `yParent`: 2番目の値 `y` の親。
-  - `stack`: 循環参照を処理するための内部スタック（`Map`）。
+### `isEqualWith(a, b, areValuesEqual)`
 
-### 戻り値
-
-(`boolean`): 値がカスタマイザーに従って等しい場合は `true`、それ以外の場合は `false`。
-
-## 例
+特別な比較ロジックが必要な場合に `isEqualWith` を使用してください。カスタム関数が `true` または `false` を返す場合はその結果を使用し、`undefined` を返す場合はデフォルトの比較方式を使用します。大文字小文字の無視、特定のプロパティの除外、近似値の比較などに便利です。
 
 ```typescript
-const customizer = (a, b) => {
+import { isEqualWith } from 'es-toolkit/predicate';
+
+// 大文字小文字を区別しない文字列比較
+const caseInsensitiveCompare = (a, b) => {
   if (typeof a === 'string' && typeof b === 'string') {
     return a.toLowerCase() === b.toLowerCase();
   }
 };
-isEqualWith('Hello', 'hello', customizer); // true
-isEqualWith({ a: 'Hello' }, { a: 'hello' }, customizer); // true
-isEqualWith([1, 2, 3], [1, 2, 3], customizer); // true
+
+isEqualWith('Hello', 'hello', caseInsensitiveCompare); // true
+isEqualWith({ name: 'Alice' }, { name: 'ALICE' }, caseInsensitiveCompare); // true
 ```
+
+数値の近似値比較にも活用できます。
+
+```typescript
+import { isEqualWith } from 'es-toolkit/predicate';
+
+// 浮動小数点の誤差を許容する比較
+const approximateCompare = (a, b) => {
+  if (typeof a === 'number' && typeof b === 'number') {
+    return Math.abs(a - b) < 0.01; // 0.01 以下の差は等しいとして扱う
+  }
+};
+
+isEqualWith(0.1 + 0.2, 0.3, approximateCompare); // true
+isEqualWith({ price: 10.01 }, { price: 10.02 }, approximateCompare); // true
+```
+
+特定のプロパティを無視して比較したい場合にも便利です。
+
+```typescript
+import { isEqualWith } from 'es-toolkit/predicate';
+
+// 特定のプロパティを無視して比較
+const ignoreTimestamp = (a, b, property) => {
+  if (property === 'timestamp') {
+    return true; // timestamp プロパティは常に等しいとして扱う
+  }
+};
+
+const obj1 = { id: 1, name: 'Test', timestamp: 1000 };
+const obj2 = { id: 1, name: 'Test', timestamp: 2000 };
+isEqualWith(obj1, obj2, ignoreTimestamp); // true
+```
+
+複雑なカスタム比較ロジックも実装できます。
+
+```typescript
+import { isEqualWith } from 'es-toolkit/predicate';
+
+const areValuesEqual = (a, b, property) => {
+  // ID は無視
+  if (property === 'id') {
+    return true;
+  }
+
+  // 名前は大文字小文字を区別せずに比較
+  if (property === 'name' && typeof a === 'string' && typeof b === 'string') {
+    return a.toLowerCase() === b.toLowerCase();
+  }
+
+  // それ以外はデフォルトの比較方式を使用
+  return undefined;
+};
+
+const user1 = { id: 1, name: 'Alice', age: 25 };
+const user2 = { id: 999, name: 'ALICE', age: 25 };
+isEqualWith(user1, user2, areValuesEqual); // true
+```
+
+#### パラメータ
+
+- `a` (`unknown`): 比較する最初の値です。
+- `b` (`unknown`): 比較する2番目の値です。
+- `areValuesEqual` (`(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void`): カスタム比較関数です。`true` または `false` を返す場合はその結果を使用し、`undefined` を返す場合はデフォルトの比較方式を使用します。
+
+#### 戻り値
+
+(`boolean`): カスタム基準に従って二つの値が等しい場合は `true`、そうでなければ `false` を返します。

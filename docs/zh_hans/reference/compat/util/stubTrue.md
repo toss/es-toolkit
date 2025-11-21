@@ -1,25 +1,53 @@
-# stubTrue
+# stubTrue (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `true` 字面量
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `stubTrue` 函数由于不必要的函数调用而运行缓慢。
+
+改为使用更快、更现代的 `true` 字面量。
+
 :::
 
-返回 `true`。
-
-## 签名
+始终返回 `true` 值。
 
 ```typescript
-function stubTrue(): true;
+const result = stubTrue();
 ```
 
-### 返回值
+## 用法
 
-(`true`): 始终返回`true`。
+### `stubTrue()`
 
-## 示例
+当需要始终返回 `true` 值的回调函数或默认值时，使用 `stubTrue`。在数组方法的过滤或条件逻辑中提供一致的 `true` 值时很有用。
 
 ```typescript
-stubTrue(); // Returns true
+import { stubTrue } from 'es-toolkit/compat';
+
+// 保留数组中所有元素的过滤器
+const items = [1, 2, 3, 4, 5];
+const allItems = items.filter(stubTrue);
+console.log(allItems); // [1, 2, 3, 4, 5]
 ```
+
+也可以在条件设置中作为默认值使用。
+
+```typescript
+import { stubTrue } from 'es-toolkit/compat';
+
+// 默认启用的选项
+const defaultOptions = {
+  enableFeatureA: stubTrue(),
+  enableFeatureB: stubTrue(),
+  enableFeatureC: stubTrue(),
+};
+
+console.log(defaultOptions); // { enableFeatureA: true, enableFeatureB: true, enableFeatureC: true }
+```
+
+#### 参数
+
+无参数。
+
+#### 返回值
+
+(`boolean`): 始终返回 `true`。

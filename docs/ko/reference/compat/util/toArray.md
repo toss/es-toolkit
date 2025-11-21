@@ -1,32 +1,61 @@
-# toArray
+# toArray (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning Object.values와 Array.from을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `toArray` 함수는 복잡한 타입 검증과 다양한 입력 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 Object.values나 Array.from을 사용하세요.
+
 :::
 
-`value`를 배열로 변환해요.
-
-## 인터페이스
+값을 배열로 변환해요.
 
 ```typescript
-function toArray(value?: unknown): any[];
+const array = toArray(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`unknown`): 변환할 값.
+### `toArray(value)`
 
-### 반환 값
-
-(`any[]`): 변환된 배열.
-
-## 예시
+다양한 값을 배열로 변환해요. 객체는 값들의 배열로, 배열과 유사한 객체는 배열로, 그 외는 빈 배열로 변환해요.
 
 ```typescript
-toArray({ a: 1, b: 2 }); // returns [1, 2]
-toArray('abc'); // returns ['a', 'b', 'c']
-toArray(1); // returns []
-toArray(null); // returns []
+import { toArray } from 'es-toolkit/compat';
+
+// 객체를 값들의 배열로 변환
+toArray({ a: 1, b: 2 });
+// Returns: [1, 2]
+
+// 문자열을 문자 배열로 변환
+toArray('abc');
+// Returns: ['a', 'b', 'c']
+
+// Map을 값들의 배열로 변환
+const map = new Map([
+  ['a', 1],
+  ['b', 2],
+]);
+toArray(map);
+// Returns: [['a', 1], ['b', 2]]
 ```
+
+null이나 undefined는 빈 배열로 변환해요.
+
+```typescript
+import { toArray } from 'es-toolkit/compat';
+
+toArray(null);
+// Returns: []
+
+toArray(undefined);
+// Returns: []
+```
+
+#### 파라미터
+
+- `value` (`unknown`): 배열로 변환할 값이에요.
+
+#### 반환 값
+
+(`any[]`): 변환된 배열을 반환해요.

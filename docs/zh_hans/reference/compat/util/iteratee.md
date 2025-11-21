@@ -1,52 +1,70 @@
-# iteratee
+# iteratee (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用直接的函数或属性访问
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于复杂的类型转换和各种情况处理，这个 `iteratee` 函数运行缓慢。
+
+请使用更快、更现代的直接函数或属性访问。
+
 :::
-创建一个函数，该函数从集合中的元素返回一个值。
 
-你可以使用以下类型的参数调用 `iteratee`：
-
-- **函数**: 返回原样的函数，该函数将使用集合中的元素进行调用。
-- **属性名**: 返回元素中指定属性的值。
-- **属性-值对**: 返回一个布尔值，指示元素的属性是否与给定值匹配。
-- **部分对象**: 返回一个布尔值，指示元素是否与部分对象的属性匹配。
-
-如果你不提供任何参数或传递 `null`，此函数将返回一个[简单返回其输入的函数](../../function/identity.md)。
-
-## 签名
+创建一个从元素中返回值的函数。
 
 ```typescript
-function iteratee(value?: null): (value: T) => T;
-function iteratee<F extends (...args: any[]) => unknown>(func: F): F;
-function iteratee(value: symbol | number | string | object | null): (...args: any[]) => any;
+const getter = iteratee(source);
 ```
 
-### 参数
+## 用法
 
-- `value` (`symbol | number | string | object | null | ((...args: any[]) => any)`): 将要转换为迭代器的值。
+### `iteratee(value?)`
 
-### 返回值
-
-(`(...args: any[]) => unknown`): 返回新的迭代器函数。
-
-## 示例
+当您想要创建一个从集合元素中提取值或检查条件的函数时，请使用 `iteratee`。根据提供的参数类型执行不同的操作。
 
 ```typescript
-const func = iteratee();
-[{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [{ a: 1 }, { a: 2 }, { a: 3 }]
+import { iteratee } from 'es-toolkit/compat';
 
-const func = iteratee((object) => object.a);
-[{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
+// 函数: 返回给定的函数本身
+const func = iteratee(object => object.a);
+[{ a: 1 }, { a: 2 }, { a: 3 }].map(func);
+// Returns: [1, 2, 3]
 
-const func = iteratee('a');
-[{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [1, 2, 3]
+// 属性名: 返回该属性值的函数
+const getA = iteratee('a');
+[{ a: 1 }, { a: 2 }, { a: 3 }].map(getA);
+// Returns: [1, 2, 3]
 
-const func = iteratee({ a: 1 });
-[{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
+// 对象: 检查是否与给定对象匹配的函数
+const matchesObj = iteratee({ a: 1 });
+[
+  { a: 1, b: 2 },
+  { a: 2, b: 3 },
+  { a: 1, c: 4 },
+].find(matchesObj);
+// Returns: { a: 1, b: 2 }
 
-const func = iteratee(['a', 1]);
-[{ a: 1 }, { a: 2 }, { a: 3 }].find(func) // => { a: 1 }
+// 属性-值对: 检查该属性是否与特定值匹配的函数
+const matchesProperty = iteratee(['a', 1]);
+[{ a: 1 }, { a: 2 }, { a: 3 }].find(matchesProperty);
+// Returns: { a: 1 }
+
+// null 或无参数: 返回元素本身的函数
+const identity = iteratee();
+[{ a: 1 }, { a: 2 }, { a: 3 }].map(identity);
+// Returns: [{ a: 1 }, { a: 2 }, { a: 3 }]
 ```
+
+根据参数类型的操作:
+
+- **函数**: 原样返回给定的函数。
+- **属性名**: 从元素中返回给定属性的值。
+- **属性-值对**: 返回表示元素的属性是否与给定值匹配的真/假值。
+- **部分对象**: 返回表示元素是否与部分对象的属性和值匹配的真/假值。
+- **null 或无参数**: 返回原样返回元素的函数。
+
+#### 参数
+
+- `value` (`symbol | number | string | object | null | ((...args: any[]) => unknown)`, 可选): 要转换为迭代器的值。默认值为 `null`。
+
+#### 返回值
+
+(`(...args: any[]) => any`): 返回一个新的迭代器函数。

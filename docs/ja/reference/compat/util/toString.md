@@ -1,37 +1,72 @@
-# toString
+# toString (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning Stringコンストラクタを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`toString`関数は複雑な配列処理と-0特殊ケース処理により遅く動作します。
+
+代わりにより高速で現代的なString(value)を使用してください。
+
 :::
 
-`value` を文字列に変換します。
-
-`null` および `undefined` の場合は空の文字列が返されます。
-`-0` の符号は保持されます。
-
-## インターフェース
+値を文字列に変換します。
 
 ```typescript
-function toString(value: any): string;
+const str = toString(value);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`any`): 変換する値。
+### `toString(value)`
 
-### 戻り値
-
-(`string`): 変換された文字列を返します。
-文字列。
-
-## 例
+値を文字列に変換します。nullとundefinedは空の文字列に、-0の符号は保存します。
 
 ```typescript
-toString(null); // returns ''
-toString(undefined); // returns ''
-toString(-0); // returns '-0'
-toString([1, 2, -0]); // returns '1,2,-0'
-toString([Symbol('a'), Symbol('b')]); // returns 'Symbol(a),Symbol(b)'
+import { toString } from 'es-toolkit/compat';
+
+// 基本型
+toString(null);
+// Returns: ''
+
+toString(undefined);
+// Returns: ''
+
+toString('hello');
+// Returns: 'hello'
+
+toString(123);
+// Returns: '123'
+
+// -0の符号保存
+toString(-0);
+// Returns: '-0'
 ```
+
+配列は再帰的に変換します。
+
+```typescript
+import { toString } from 'es-toolkit/compat';
+
+// 配列を文字列に変換
+toString([1, 2, 3]);
+// Returns: '1,2,3'
+
+// ネストした配列
+toString([1, [2, 3], 4]);
+// Returns: '1,2,3,4'
+
+// -0を含む配列
+toString([1, 2, -0]);
+// Returns: '1,2,-0'
+
+// シンボルを含む配列
+toString([Symbol('a'), Symbol('b')]);
+// Returns: 'Symbol(a),Symbol(b)'
+```
+
+#### パラメータ
+
+- `value` (`any`): 変換する値です。
+
+#### 戻り値
+
+(`string`): 変換された文字列を返します。nullとundefinedは空の文字列を返します。

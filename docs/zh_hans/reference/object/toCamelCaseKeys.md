@@ -1,58 +1,61 @@
 # toCamelCaseKeys
 
-创建一个新对象，将对象的属性转换为[驼峰命名法](../string/camelCase.md)（`camelCase`）。
+返回一个将对象和数组的所有键转换为驼峰命名法的新对象。
 
-嵌套对象中的所有属性也会被转换为驼峰命名法。
-
-## 签名
+驼峰命名法是一种将多个单词组成的标识符的首个单词小写,后续单词首字母大写的命名规范。例如 `camelCase`。
 
 ```typescript
-function toCamelCaseKeys<T>(obj: T): ToCamelCaseKeys<T>;
+const camelCased = toCamelCaseKeys(obj);
 ```
 
-### 参数
+## 用法
 
-- `obj` (`T`): 要转换键的对象。
+### `toCamelCaseKeys(obj)`
 
-### 返回值
-
-(`ToCamelCaseKeys<T>`): 一个新对象，其中所有键均转换为camelCase格式。
-
-## 示例
+当您想要将对象的所有键转换为驼峰命名法时,请使用 `toCamelCaseKeys`。嵌套对象和数组中的对象也会递归转换。
 
 ```typescript
-// 示例: 使用对象
-const obj = { user_id: 1, first_name: 'John' };
-const result = toCamelCaseKeys(obj);
-// result 为 { userId: 1, firstName: 'John' }
+import { toCamelCaseKeys } from 'es-toolkit/object';
 
-// 示例: 使用对象数组
-const arr = [
+// 基本对象转换
+const obj = { user_id: 1, first_name: 'John', last_name: 'Doe' };
+const result = toCamelCaseKeys(obj);
+// result 是 { userId: 1, firstName: 'John', lastName: 'Doe' }
+
+// 数组中的对象也会转换
+const users = [
   { user_id: 1, first_name: 'John' },
   { user_id: 2, first_name: 'Jane' },
 ];
-const arrResult = toCamelCaseKeys(arr);
-// arrResult 为 [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
+const convertedUsers = toCamelCaseKeys(users);
+// convertedUsers 是 [{ userId: 1, firstName: 'John' }, { userId: 2, firstName: 'Jane' }]
 
-// 示例: 使用嵌套对象
+// 嵌套对象也会完全转换
 const nested = {
   user_data: {
     user_id: 1,
-    user_address: {
-      street_name: 'Main St',
-      zip_code: '12345',
+    contact_info: {
+      email_address: 'john@example.com',
+      phone_number: '123-456-7890',
     },
   },
 };
 const nestedResult = toCamelCaseKeys(nested);
-// nestedResult 为:
-// {
+// nestedResult 是 {
 //   userData: {
 //     userId: 1,
-//     userAddress: {
-//       streetName: 'Main St',
-//       zipCode: '12345'
+//     contactInfo: {
+//       emailAddress: 'john@example.com',
+//       phoneNumber: '123-456-7890'
 //     }
 //   }
 // }
 ```
+
+#### 参数
+
+- `obj` (`T`): 要将键转换为 camelCase 的对象、数组或原始值。
+
+#### 返回值
+
+(`ToCamelCaseKeys<T>`): 返回所有键都已转换为 camelCase 的新对象。

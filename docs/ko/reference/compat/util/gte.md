@@ -1,32 +1,57 @@
-# gte
+# gte (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `>=` 연산자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `gte` 함수는 `toNumber` 함수 호출과 문자열 타입 확인 등의 추가 처리로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `>=` 연산자를 사용하세요.
+
 :::
 
 값이 다른 값보다 크거나 같은지 확인해요.
 
-## 인터페이스
-
 ```typescript
-function gte(value: any, other: any): boolean;
+const result = gte(value, other);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`any`): 비교할 값.
-- `other` (`any`): 비교할 다른 값.
+### `gte(value, other)`
 
-### 반환 값
-
-(`boolean`): 값이 다른 값보다 크거나 같으면 `true`, 그렇지 않으면 `false`.
-
-## 예시
+두 값을 비교해서 첫 번째 값이 두 번째 값보다 크거나 같은지 확인하고 싶을 때 `gte`를 사용하세요. 문자열끼리는 사전순으로 비교하고, 다른 타입들은 숫자로 변환해서 비교해요.
 
 ```typescript
-gte(3, 1); // => true
-gte(3, 3); // => true
-gte(1, 3); // => false
+import { gte } from 'es-toolkit/compat';
+
+gte(3, 1);
+// Returns: true
+
+gte(3, 3);
+// Returns: true
+
+gte(1, 3);
+// Returns: false
+
+// 문자열 비교 (사전순)
+gte('def', 'abc');
+// Returns: true
+
+gte('abc', 'def');
+// Returns: false
+
+// 다른 타입들은 숫자로 변환되어 비교
+gte('10', 5);
+// Returns: true (10 >= 5)
+
+gte(1, null);
+// Returns: true (1 >= 0)
 ```
+
+#### 파라미터
+
+- `value` (`unknown`): 비교할 첫 번째 값이에요.
+- `other` (`unknown`): 비교할 두 번째 값이에요.
+
+#### 반환 값
+
+(`boolean`): 첫 번째 값이 두 번째 값보다 크거나 같으면 `true`, 그렇지 않으면 `false`를 반환해요.

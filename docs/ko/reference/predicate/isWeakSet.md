@@ -1,32 +1,41 @@
 # isWeakSet
 
-이 함수는 주어진 값이 `WeakSet`의 인스턴스인지 확인해요.
-값이 `WeakSet`이면 `true`, 아니면 `false`를 반환해요.
-
-TypeScript의 타입 가드로 주로 사용되는데요, 파라미터로 주어진 값을 `WeakSet`인 타입으로 좁힐 수 있어요.
-
-## 인터페이스
+주어진 값이 `WeakSet` 인스턴스인지 확인해요.
 
 ```typescript
-function isWeakSet(value: unknown): value is WeakSet<WeakKey>;
+const result = isWeakSet(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`unknown`): `WeakSet`인지 확인할 값.
+### `isWeakSet(value)`
 
-### 반환 값
-
-(`value is WeakSet<WeakKey>`): 값이 `WeakSet`이면 `true`, 아니면 `false`.
-
-## 예시
+값이 WeakSet 인스턴스인지 확인하고 싶을 때 `isWeakSet`을 사용하세요.
 
 ```typescript
-const value1 = new WeakSet();
-const value2 = new Map();
-const value3 = new Set();
+import { isWeakSet } from 'es-toolkit/predicate';
 
-console.log(isWeakSet(value1)); // true
-console.log(isWeakSet(value2)); // false
-console.log(isWeakSet(value3)); // false
+// WeakSet 인스턴스들
+const weakSet1 = new WeakSet();
+const weakSet2 = new WeakSet([{}, []]);
+
+console.log(isWeakSet(weakSet1)); // true
+console.log(isWeakSet(weakSet2)); // true
+
+// WeakSet이 아닌 값들
+console.log(isWeakSet(new Set())); // false
+console.log(isWeakSet(new Map())); // false
+console.log(isWeakSet(new WeakMap())); // false
+console.log(isWeakSet([])); // false
+console.log(isWeakSet({})); // false
+console.log(isWeakSet(null)); // false
+console.log(isWeakSet(undefined)); // false
 ```
+
+#### 파라미터
+
+- `value` (`unknown`): WeakSet 인스턴스인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is WeakSet<WeakKey>`): 값이 WeakSet 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.

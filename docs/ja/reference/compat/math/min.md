@@ -1,30 +1,69 @@
-# min
+# min (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Math.min`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `min` 関数は追加の関数呼び出しとnull/undefined処理により動作が遅くなります。
+
+代わりに、より高速で現代的な `Math.min(...array)` を使用してください。
+
 :::
 
-配列の中で最小値を持つ要素を見つけます。
-
-## インターフェース
+配列から最小値を見つけます。
 
 ```typescript
-function min<T>(items: ArrayLike<T> | null | undefined): T | undefined;
+const result = min(items);
 ```
 
-### パラメータ
+## 使用法
 
-- `items` (`ArrayLike<T> | null | undefined`): 検索する要素の配列。
+### `min(items?)`
 
-### 戻り値
-
-(`T | undefined`): 最小値を持つ要素です。配列が空の場合、`null`、または `undefined` の場合は `undefined` を返します。
-
-### 例
+配列から最も小さい値を見つけたい場合は `min` を使用してください。
 
 ```typescript
-min([1, 2, 3]); // 戻り値: 1
-min(['a', 'b']); // 戻り値: 'a'
+import { min } from 'es-toolkit/compat';
+
+// 数値配列から最小値
+min([3, 1, 4, 1, 5, 9]);
+// Returns: 1
+
+min([10, 5, 8, 20]);
+// Returns: 5
+
+// 文字列配列から最小値（辞書順）
+min(['c', 'a', 'b']);
+// Returns: 'a'
+
+min(['cherry', 'apple', 'banana']);
+// Returns: 'apple'
+
+// 空の配列やnull/undefined
+min([]);
+// Returns: undefined
+
+min(null);
+// Returns: undefined
+
+min(undefined);
+// Returns: undefined
 ```
+
+負の数も正しく処理されます。
+
+```typescript
+import { min } from 'es-toolkit/compat';
+
+min([0, -3, 2, 8, 7]);
+// Returns: -3
+
+min([-1, -5, -3]);
+// Returns: -5
+```
+
+#### パラメータ
+
+- `items` (`ArrayLike<T> | null | undefined`, オプション): 最小値を見つける配列です。
+
+#### 戻り値
+
+(`T | undefined`): 配列から最も小さい値を返します。配列が空またはnull/undefinedの場合はundefinedを返します。

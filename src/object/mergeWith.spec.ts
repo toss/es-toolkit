@@ -89,4 +89,40 @@ describe('mergeWith', () => {
     expect(result).toEqual({ a: 2 });
     expect(result.__proto__).toBe(Object.prototype);
   });
+
+  it('should merge arrays when targetValue is undefined and merge function returns undefined', () => {
+    const target: { a?: number[] } = {};
+    const source = { a: [1, 2, 3] };
+
+    const result = mergeWith(target, source, () => undefined);
+
+    expect(result).toEqual({ a: [1, 2, 3] });
+  });
+
+  it('should not overwrite targetValue when sourceValue is undefined and merge function returns undefined', () => {
+    const target = { a: 1, b: 2 };
+    const source = { a: 3, b: undefined };
+
+    const result = mergeWith(target, source, () => undefined);
+
+    expect(result).toEqual({ a: 3, b: 2 });
+  });
+
+  it('should replace non-plain-object target value with plain object from source when merge returns undefined', () => {
+    const target = { a: 'string', b: 123, c: true };
+    const source = { a: { x: 1 }, b: { y: 2 }, c: { z: 3 } };
+
+    const result = mergeWith(target, source, () => undefined);
+
+    expect(result).toEqual({ a: { x: 1 }, b: { y: 2 }, c: { z: 3 } });
+  });
+
+  it('should handle nested case where non-plain-object is replaced with plain object when merge returns undefined', () => {
+    const target = { a: { b: null, c: undefined, d: 'text' } };
+    const source = { a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } };
+
+    const result = mergeWith(target, source, () => undefined);
+
+    expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
+  });
 });

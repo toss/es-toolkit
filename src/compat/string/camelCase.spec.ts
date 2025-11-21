@@ -36,6 +36,16 @@ describe('camelCase', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should convert string to camel case, identical to lodash', () => {
+    expect(camelCase('åäöÅÄÖ')).toBe('aaoAao');
+    expect(camelCase('helloÅäöWorld')).toBe('helloAaoWorld');
+    expect(camelCase('café')).toBe('cafe');
+    expect(camelCase('naïve')).toBe('naive');
+    expect(camelCase('Zürich')).toBe('zurich');
+    expect(camelCase('São Paulo')).toBe('saoPaulo');
+    expect(camelCase('Москва')).toBe('москва');
+  });
+
   it('should handle double-converting strings', () => {
     const actual = strings.map(str => camelCase(camelCase(str)));
     const expected = strings.map(() => 'fooBar');

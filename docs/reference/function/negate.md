@@ -1,26 +1,63 @@
 # negate
 
-Creates a function that negates the result of the predicate function.
-
-## Signature
+Creates a new function that inverts the return value of a function that returns true or false.
 
 ```typescript
-function negate<F extends (...args: any[]) => boolean>(func: F): F;
+const negatedFunc = negate(booleanFunc);
 ```
 
-### Parameters
+## Usage
 
-- `func` (`F extends (...args: any[]) => boolean`): The function to negate.
+### `negate(func)`
 
-### Returns
+Use `negate` when you want to invert the result of a function that returns true or false.
 
-- (`F`): Returns the new negated function.
-
-## Examples
+This is useful for inverting conditional functions or filtering logic. For example, you can turn a function that finds even numbers into a function that finds odd numbers.
 
 ```typescript
 import { negate } from 'es-toolkit/function';
 
-negate(() => true)(); // returns 'false'
-negate(() => false)(); // returns 'true'
+// Basic usage
+const isEven = (n: number) => n % 2 === 0;
+const isOdd = negate(isEven);
+
+console.log(isEven(2)); // true
+console.log(isOdd(2)); // false
+
+console.log(isEven(3)); // false
+console.log(isOdd(3)); // true
+
+// Using in array filtering
+const numbers = [1, 2, 3, 4, 5, 6];
+
+const evenNumbers = numbers.filter(isEven);
+console.log(evenNumbers); // [2, 4, 6]
+
+const oddNumbers = numbers.filter(negate(isEven));
+console.log(oddNumbers); // [1, 3, 5]
 ```
+
+You can also invert complex conditional functions.
+
+```typescript
+import { negate } from 'es-toolkit/function';
+
+const isLongString = (str: string) => str.length > 5;
+const isShortString = negate(isLongString);
+
+const words = ['hi', 'hello', 'world', 'javascript'];
+
+const longWords = words.filter(isLongString);
+console.log(longWords); // ['hello', 'javascript']
+
+const shortWords = words.filter(isShortString);
+console.log(shortWords); // ['hi', 'world']
+```
+
+#### Parameters
+
+- `func` (`F`): A function that returns a boolean value.
+
+#### Returns
+
+(`F`): Returns a new function that accepts the same arguments as the original function but returns the opposite boolean value.

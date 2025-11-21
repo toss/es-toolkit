@@ -1,34 +1,51 @@
-# isInteger
+# isInteger (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Number.isInteger`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `isInteger` 함수는 추가적인 타입 체크 오버헤드로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Number.isInteger`를 사용하세요.
+
 :::
 
-`value`가 정수인지 확인해요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `number`로 좁혀요.
-
-## 인터페이스
+값이 정수인지 확인해요.
 
 ```typescript
-function isInteger(value?: unknown): value is number;
+const result = isInteger(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`unknown`): 정수인지 확인할 값.
+### `isInteger(value)`
 
-### 반환 값
-
-(`value is number`): `value`가 정수면 `true`, 그렇지 않으면 `false`.
-
-## 예시
+주어진 값이 정수인지 확인할 때 `isInteger`를 사용하세요. 이 함수는 TypeScript에서 타입 가드로도 작동해서, 값의 타입을 `number`로 좁혀줘요.
 
 ```typescript
-isInteger(3); // Returns: true
-isInteger(Infinity); // Returns: false
-isInteger('3'); // Returns: false
-isInteger([]); // Returns: false
+import { isInteger } from 'es-toolkit/compat';
+
+// 정수 값 확인
+isInteger(3); // true
+isInteger(-5); // true
+isInteger(0); // true
+
+// 소수 값은 false
+isInteger(3.14); // false
+isInteger(-2.5); // false
+
+// 무한대는 false
+isInteger(Infinity); // false
+isInteger(-Infinity); // false
+
+// 다른 타입들도 false
+isInteger('3'); // false
+isInteger([]); // false
+isInteger({}); // false
 ```
+
+#### 파라미터
+
+- `value` (`any`): 확인할 값이에요.
+
+#### 반환 값
+
+(`boolean`): 값이 정수이면 `true`, 아니면 `false`를 반환해요.

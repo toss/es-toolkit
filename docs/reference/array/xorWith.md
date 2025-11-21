@@ -1,28 +1,63 @@
 # xorWith
 
-Computes the symmetric difference between two arrays using a custom equality function.
-The symmetric difference is the set of elements which are in either of the arrays,
-but not in their intersection.
-
-## Signature
+Creates a new array with elements that exist in only one of two arrays using a given comparison function.
 
 ```typescript
-function xorWith<T>(arr1: T[], arr2: T[], areElementsEqual: (item1: T, item2: T) => boolean): T[];
+const result = xorWith(arr1, arr2, areElementsEqual);
 ```
 
-### Parameters
+## Usage
 
-- `arr1` (`T[]`): The first array.
-- `arr2` (`T[]`): The second array.
-- `areElementsEqual` (`(item1: T, item2: T) => boolean`): The custom equality function to compare elements.
+### `xorWith(arr1, arr2, areElementsEqual)`
 
-### Returns
-
-(`T[]`): An array containing the elements that are present in either `arr1` or `arr2` but not in both, based on the custom equality function.
-
-## Examples
+Use `xorWith` when you want to find the symmetric difference with complex objects or special comparison conditions. It creates a new array with elements that exist in only one of the two arrays by comparing elements with a user-defined equality function.
 
 ```typescript
-// Returns [{ id: 1 }, { id: 3 }]
-xorWith([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], (a, b) => a.id === b.id);
+import { xorWith } from 'es-toolkit/array';
+
+// Compare by object id.
+xorWith(
+  [
+    { id: 1, name: 'Alice' },
+    { id: 2, name: 'Bob' },
+  ],
+  [
+    { id: 2, name: 'Bobby' },
+    { id: 3, name: 'Charlie' },
+  ],
+  (a, b) => a.id === b.id
+);
+// Returns: [{ id: 1, name: 'Alice' }, { id: 3, name: 'Charlie' }]
+
+// Compare case-insensitively.
+xorWith(['Apple', 'Banana'], ['APPLE', 'Cherry'], (a, b) => a.toLowerCase() === b.toLowerCase());
+// Returns: ['Banana', 'Cherry']
 ```
+
+More complex comparisons are also possible.
+
+```typescript
+import { xorWith } from 'es-toolkit/array';
+
+// Compare by absolute value.
+xorWith([-1, -2, 3], [1, 2, -4], (a, b) => Math.abs(a) === Math.abs(b));
+// Returns: [3, -4]
+
+// Deep object comparison.
+xorWith(
+  [{ specs: { ram: 8, storage: 256 } }],
+  [{ specs: { ram: 8, storage: 256 } }],
+  (a, b) => a.specs.ram === b.specs.ram && a.specs.storage === b.specs.storage
+);
+// Returns: []
+```
+
+#### Parameters
+
+- `arr1` (`readonly T[]`): The first array to compare.
+- `arr2` (`readonly T[]`): The second array to compare.
+- `areElementsEqual` (`(item1: T, item2: T) => boolean`): A function that determines if two elements are equal. It should return `true` if they are the same, and `false` otherwise.
+
+#### Returns
+
+(`T[]`): Returns a new array representing the symmetric difference calculated based on the custom equality function.

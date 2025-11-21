@@ -1,80 +1,72 @@
 # delay
 
-延迟执行代码指定的毫秒数。
-
-该函数返回一个 Promise，在指定的延迟后解析，可以与 async/await 结合使用来暂停执行。
-
-它还支持一个可选的 AbortSignal 来取消延迟。
-
-## 签名
+延迟代码执行指定的时间。
 
 ```typescript
-function delay(ms: number, options?: DelayOptions): Promise<void>;
+await delay(ms, options?);
 ```
 
-### 参数
+## 用法
 
-- `ms` (`number`): 要延迟的毫秒数。
-- `options` (`DelayOptions`, 可选): 一个选项对象。
-  - `signal` (`AbortSignal`, 可选): 用于取消延迟的可选 `AbortSignal`。
+### `delay(ms, options?)`
 
-### 返回值
-
-(`Promise<void>`): 在指定延迟后解析的 Promise。
-
-## 示例
-
-### 基本用法
+当您想要暂停代码执行一定时间时,可以使用 `delay`。它可以与 async/await 一起使用,使下一段代码在一定时间后执行。如有必要,还可以通过 `AbortSignal` 取消延迟。
 
 ```typescript
-async function foo() {
-  console.log('Start');
-  await delay(1000); // 延迟执行 1 秒钟
-  console.log('End');
+import { delay } from 'es-toolkit/promise';
+
+async function example() {
+  console.log('开始');
+  await delay(1000); // 延迟执行 1 秒
+  console.log('1秒后执行');
+
+  await delay(500); // 再延迟 0.5 秒
+  console.log('额外 0.5 秒后执行');
 }
 
-foo();
+example();
 ```
 
-### 使用 AbortSignal
+您也可以使用 AbortSignal 取消延迟:
 
 ```typescript
-async function foo() {
+async function cancellableDelay() {
   const controller = new AbortController();
-  const signal = controller.signal;
+  const { signal } = controller;
 
-  setTimeout(() => controller.abort(), 50); // 在 50 毫秒后取消延迟
+  // 50ms 后取消延迟
+  setTimeout(() => controller.abort(), 50);
+
   try {
     await delay(1000, { signal });
+    console.log('1秒已过'); // 此代码不会执行
   } catch (error) {
-    console.log(error); // 将会输出 'The operation was aborted'
+    console.log('延迟已取消'); // 抛出 AbortError
   }
 }
 ```
 
-## Lodash 兼容性
-
-从 `es-toolkit/compat` 导入 `delay` 以获得与 Lodash 的完全兼容性。
-
-- `delay` 接受一个在延迟后调用的函数。
-- `delay` 接受将传递给该函数的参数。
-- `delay` 返回一个可以用来清除超时的定时器 ID。
+在测试中模拟异步行为时也很有用。
 
 ```typescript
-import { delay } from 'es-toolkit/compat';
-
-// 示例 1: 延迟函数执行
-const timerId = delay(
-  (greeting, recipient) => {
-    console.log(`${greeting}, ${recipient}!`);
-  },
-  1000,
-  '你好',
-  '小明'
-);
-// => 1秒后将日志打印 '你好, 小明!'
-
-// 示例 2: 在执行之前清除超时
-clearTimeout(timerId);
-// 因为超时已清除，函数不会被执行。
+async function simulateNetworkRequest() {
+  console.log('开始网络请求...');
+  await delay(2000); // 模拟 2 秒的网络延迟
+  console.log('收到响应!');
+  return { data: 'test' };
+}
 ```
+
+#### 参数
+
+- `ms` (`number`): 要延迟的毫秒数。
+- `options` (`DelayOptions`, 可选): 延迟选项。
+  - `signal` (`AbortSignal`, 可选): 可以取消延迟的 AbortSignal。
+
+#### 返回值
+
+(`Promise<void>`): 返回一个在指定时间后完成的 Promise。
+
+#### 错误
+
+当 AbortSignal 激活时,抛出 `AbortError`。

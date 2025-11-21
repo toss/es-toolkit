@@ -1,108 +1,65 @@
-# get
+# get (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用点表示法或方括号表示法
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `get` 函数由于复杂的路径解析、处理 `null` 或 `undefined` 以及默认值处理而性能较慢。
+
+请使用更快、更现代的点表示法 (`.`)、方括号表示法 (`[]`) 或可选链 (`?.`)。
 
 :::
 
-从对象中获取给定路径的值。如果解析的值为 `undefined`，则返回 `defaultValue`。
-
-## 签名
+获取对象指定路径的值。
 
 ```typescript
-function get<T, K extends keyof T>(object: T, path: K | [K]): T[K];
-function get<T, K extends keyof T>(object: T | null | undefined, path: K | [K]): T[K] | undefined;
-function get<T, K extends keyof T, D>(
-  object: T | null | undefined,
-  path: K | [K],
-  defaultValue: D
-): Exclude<T[K], undefined> | D;
-
-function get<T, K1 extends keyof T, K2 extends keyof T[K1]>(object: T, path: [K1, K2]): T[K1][K2];
-function get<T, K1 extends keyof T, K2 extends keyof T[K1]>(
-  object: T | null | undefined,
-  path: [K1, K2]
-): T[K1][K2] | undefined;
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], D>(
-  object: T | null | undefined,
-  path: [K1, K2],
-  defaultValue: D
-): Exclude<T[K1][K2], undefined> | D;
-
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T,
-  path: [K1, K2, K3]
-): T[K1][K2][K3];
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2]>(
-  object: T | null | undefined,
-  path: [K1, K2, K3]
-): T[K1][K2][K3] | undefined;
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], D>(
-  object: T | null | undefined,
-  path: [K1, K2, K3],
-  defaultValue: D
-): Exclude<T[K1][K2][K3], undefined> | D;
-
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], K4 extends keyof T[K1][K2][K3]>(
-  object: T,
-  path: [K1, K2, K3, K4]
-): T[K1][K2][K3][K4];
-function get<T, K1 extends keyof T, K2 extends keyof T[K1], K3 extends keyof T[K1][K2], K4 extends keyof T[K1][K2][K3]>(
-  object: T | null | undefined,
-  path: [K1, K2, K3, K4]
-): T[K1][K2][K3][K4] | undefined;
-function get<
-  T,
-  K1 extends keyof T,
-  K2 extends keyof T[K1],
-  K3 extends keyof T[K1][K2],
-  K4 extends keyof T[K1][K2][K3],
-  D,
->(object: T | null | undefined, path: [K1, K2, K3, K4], defaultValue: D): Exclude<T[K1][K2][K3][K4], undefined> | D;
-
-function get<T>(object: Record<number, T>, path: number): T;
-function get<T>(object: Record<number, T> | null | undefined, path: number): T | undefined;
-function get<T, D>(object: Record<number, T> | null | undefined, path: number, defaultValue: D): T | D;
-
-function get<D>(object: null | undefined, path: PropertyKey, defaultValue: D): D;
-function get(object: null | undefined, path: PropertyKey): undefined;
-
-function get<T, P extends string>(data: T, path: P): string extends P ? any : Get<T, P>;
-function get<T, P extends string, D = Get<T, P>>(
-  data: T,
-  path: P,
-  defaultValue: D
-): Exclude<Get<T, P>, null | undefined> | D;
-
-function get(object: unknown, path: PropertyKey, defaultValue?: unknown): any;
-function get(object: unknown, path: PropertyKey | readonly PropertyKey[], defaultValue?: unknown): any;
+const value = get(object, path, defaultValue);
 ```
 
-### 参数
+## 用法
 
-- `object` (`unknown`): 要查询的对象。
-- `path` (`PropertyKey | readonly PropertyKey[]`): 要获取属性的路径。
-- `defaultValue` (`unknown`): 如果解析的值为 `undefined`，返回的值。
+### `get(object, path, defaultValue?)`
 
-### 返回值
-
-(`Get<T, P>`): 解析后的值。
-
-## 示例
+使用 `get` 安全地从对象路径获取值。当路径不存在或值为 `undefined` 时,返回默认值。
 
 ```typescript
 import { get } from 'es-toolkit/compat';
 
-const obj = {
-  a: {
-    b: 4,
-  },
-};
+// 使用点表示法访问嵌套对象
+const object = { a: { b: { c: 3 } } };
+get(object, 'a.b.c');
+// => 3
 
-get(obj, 'a.b'); // 4
-get(obj, ['a', 'b']); // 4
-get(obj, ['a', 'c']); // undefined
-get(obj, ['a', 'c'], null); // null
+// 使用数组表示法访问
+get(object, ['a', 'b', 'c']);
+// => 3
+
+// 为不存在的路径提供默认值
+get(object, 'a.b.d', 'default');
+// => 'default'
+
+// 包含数组索引的路径
+const arrayObject = { users: [{ name: 'john' }, { name: 'jane' }] };
+get(arrayObject, 'users[0].name');
+// => 'john'
 ```
+
+安全地访问 `null` 或 `undefined` 对象。
+
+```typescript
+import { get } from 'es-toolkit/compat';
+
+get(null, 'a.b.c', 'default');
+// => 'default'
+
+get(undefined, ['a', 'b'], 'default');
+// => 'default'
+```
+
+#### 参数
+
+- `object` (`any`): 要查询的对象。
+- `path` (`PropertyPath`): 要获取的属性路径。可以表示为字符串、数字、符号或数组。
+- `defaultValue` (`any`, 可选): 当值为 `undefined` 时返回的默认值。
+
+#### 返回值
+
+(`any`): 返回解析的值或默认值。

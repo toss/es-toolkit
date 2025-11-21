@@ -1,31 +1,71 @@
 # isBoolean
 
-与えられた値が真偽値（boolean）であるかどうかを確認します。
-
-TypeScriptの型ガードとしてよく使用され、パラメータとして与えられた値を`boolean`型に絞り込むことができます。
-
-## インターフェース
+与えられた値が真偽値かどうかを確認します。
 
 ```typescript
-function isBoolean(x: unknown): x is boolean;
+const result = isBoolean(value);
 ```
 
-### パラメータ
+## 使用法
 
-- `x` (`unknown`): 真偽値かどうかをテストする値。
+### `isBoolean(value)`
 
-### 戻り値
-
-(`x is boolean`): 値がbooleanの場合はtrue、そうでない場合はfalse。
-
-## 例
+値が正確に `true` または `false` かどうかを確認したい場合に `isBoolean` を使用してください。TypeScript で型ガードとして動作し、値の型を `boolean` に絞り込みます。
 
 ```typescript
-const value1 = true;
-const value2 = 0;
-const value3 = 'abc';
+import { isBoolean } from 'es-toolkit/predicate';
 
-console.log(isBoolean(value1)); // true
-console.log(isBoolean(value2)); // false
-console.log(isBoolean(value3)); // false
+// 基本的な真偽値の確認
+isBoolean(true); // true
+isBoolean(false); // true
+
+// 他の型との区別
+isBoolean(1); // false
+isBoolean(0); // false
+isBoolean('true'); // false
+isBoolean('false'); // false
 ```
+
+TypeScript で型ガードとして使用する場合に特に便利です。
+
+```typescript
+import { isBoolean } from 'es-toolkit/predicate';
+
+function processValue(value: unknown) {
+  if (isBoolean(value)) {
+    // value は boolean に型が絞り込まれます
+    console.log(value ? '真です' : '偽です');
+  } else {
+    console.log('真偽値ではありません');
+  }
+}
+```
+
+API レスポンスやユーザー入力の検証にも活用できます。
+
+```typescript
+import { isBoolean } from 'es-toolkit/predicate';
+
+// API レスポンスの検証
+interface APIResponse {
+  success: unknown;
+  data: any;
+}
+
+function validateResponse(response: APIResponse) {
+  if (isBoolean(response.success)) {
+    console.log(`API 呼び出し ${response.success ? '成功' : '失敗'}`);
+    return response.success;
+  }
+  console.log('不正なレスポンス形式です');
+  return false;
+}
+```
+
+#### パラメータ
+
+- `value` (`unknown`): 真偽値かどうかを確認する値です。
+
+#### 戻り値
+
+(`value is boolean`): 値が `true` または `false` の場合は `true`、そうでなければ `false` を返します。

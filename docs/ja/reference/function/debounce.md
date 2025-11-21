@@ -1,24 +1,68 @@
 # debounce
 
 提供された関数の呼び出しを遅延させるデバウンスされた関数を生成します。
-デバウンスされた関数は、最後に呼び出されてから `debounceMs` ミリ秒が経過した後に呼び出されます。
-デバウンスされた関数は、保留中の実行をキャンセルする `cancel` メソッドも持っています。
-
-## インターフェース
 
 ```typescript
-function debounce<F extends (...args: any[]) => void>(
-  func: F,
-  debounceMs: number,
-  options?: DebounceOptions
-): ((...args: Parameters<F>) => void) & {
-  cancel: () => void;
-  flush: () => void;
-  schedule: () => void;
-};
+const debouncedFunc = debounce(func, debounceMs, options);
 ```
 
-### パラメータ
+## 使用法
+
+### `debounce(func, debounceMs, options)`
+
+連続した呼び出しを1つにまとめたいときに `debounce` を使用してください。デバウンスされた関数は、最後の呼び出し後、指定された時間が経過してから実行されます。検索入力やウィンドウサイズ変更のような高速なイベント処理に便利です。
+
+```typescript
+import { debounce } from 'es-toolkit/function';
+
+const debouncedFunction = debounce(() => {
+  console.log('実行されました');
+}, 1000);
+
+// 1秒以内に再度呼び出されなければ、'実行されました'をログに記録します
+debouncedFunction();
+
+// 前回の呼び出しをキャンセルします
+debouncedFunction.cancel();
+
+// 待機中の関数を即座に実行します
+debouncedFunction.flush();
+```
+
+ユーザー入力に応じて検索のような重い API を呼び出す場合に便利です。
+
+```typescript
+const searchInput = document.getElementById('search');
+const searchResults = debounce(async (query: string) => {
+  const results = await fetchSearchResults(query);
+  displayResults(results);
+}, 300);
+
+searchInput.addEventListener('input', e => {
+  searchResults(e.target.value);
+});
+```
+
+[`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) を使用してデバウンスされた関数の呼び出しをキャンセルできます。
+
+```typescript
+const controller = new AbortController();
+const debouncedWithSignalFunction = debounce(
+  () => {
+    console.log('Function executed');
+  },
+  1000,
+  { signal: controller.signal }
+);
+
+// 1秒以内に再度呼び出されなければ、'実行されました'をログに記録します
+debouncedWithSignalFunction();
+
+// debounce 関数の呼び出しをキャンセルします
+controller.abort();
+```
+
+#### パラメータ
 
 - `func` (`F`): デバウンスされた関数を作成する関数。
 - `debounceMs`(`number`): デバウンスで遅延させるミリ秒。
@@ -29,13 +73,13 @@ function debounce<F extends (...args: any[]) => void>(
     - `'trailing'` が含まれている場合、最後のデバウンスされた関数の呼び出しから `debounceMs` ミリ秒が経過した後に元の関数を実行します。
     - `'leading'` と `'trailing'` の両方が含まれている場合、元の関数は遅延の開始時と終了時の両方で呼び出されます。ただし、両方の時点で呼び出されるためには、デバウンスされた関数が `debounceMs` ミリ秒の間に少なくとも2回呼び出される必要があります。デバウンスされた関数を1回呼び出して元の関数を2回呼び出すことはできません。
 
-### 戻り値
+#### 戻り値
 
-(`((...args: Parameters<F>) => void) & { cancel: () => void; flush: () => void; schedule: () => void; }`): デバウンスされた関数。デバウンス動作を制御するための追加のメソッドを持っています。
+(`DebouncedFunction<F>`): デバウンスされた関数で、次のメソッドを持っています。
 
-- `cancel` (`() => void`): 保留中のデバウンス呼び出しをキャンセルします。
-- `flush` (`() => void`): 保留中のデバウンス呼び出しを即座に実行します。
-- `schedule` (`() => void`): デバウンス呼び出しが少なくとも `debounceMs` 後に実行されるようにスケジュールします。
+- `cancel()`: 予定された呼び出しをキャンセルします。
+- `flush()`: 待機中の関数を即座に実行します。
+- `schedule()`: 関数の実行を再スケジュールします。
 
 ## 例
 

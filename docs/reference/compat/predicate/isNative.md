@@ -1,36 +1,56 @@
-# isNative
+# isNative (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Checks if `value` is a native function.
-
-A native function is a function that is implemented in the JavaScript engine itself, such as `Array.prototype.map`, `Object.keys`, or `Function.prototype.bind`.
-
-## Signature
+Checks if a value is a native function of the JavaScript engine.
 
 ```typescript
-function isNative(value: unknown): boolean;
+const result = isNative(value);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`unknown`): The value to check.
+### `isNative(value)`
 
-### Returns
-
-(`boolean`): Returns `true` if `value` is a native function, else `false`.
-
-## Examples
+Use `isNative` when you need to check if a given value is a native function implemented in the JavaScript engine. You can distinguish built-in functions provided by browsers or Node.js.
 
 ```typescript
 import { isNative } from 'es-toolkit/compat';
 
-console.log(isNative(Array.prototype.push)); // => true
-console.log(isNative(function () {})); // => false
-console.log(isNative(Math.max)); // => true
-console.log(isNative(() => {})); // => false
+// Native functions
+isNative(Array.prototype.push); // true
+isNative(Object.keys); // true
+isNative(Math.max); // true
+isNative(JSON.parse); // true
+isNative(console.log); // true (in browser/Node.js environment)
+
+// User-defined functions
+isNative(function () {}); // false
+isNative(() => {}); // false
+isNative(function customFunction() {}); // false
+
+// Library functions
+isNative(require('lodash').map); // false
+isNative(require('es-toolkit').chunk); // false
+
+// Non-function values
+isNative({}); // false
+isNative([]); // false
+isNative('function'); // false
+isNative(123); // false
+isNative(null); // false
+
+// Bound functions
+const boundFunction = Array.prototype.push.bind([]);
+isNative(boundFunction); // true (bound functions are native)
+
+// Methods
+const obj = { method: Array.prototype.push };
+isNative(obj.method); // true (still a native function)
 ```
+
+#### Parameters
+
+- `value` (`any`): The value to check.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value appears to be a native function, otherwise `false`.

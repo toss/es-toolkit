@@ -1,44 +1,58 @@
-# assign
+# assign (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.assign`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `assign` 関数は、値が等しいかどうかをチェックする追加ロジックにより動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.assign` を使用してください。
+
 :::
 
-複数の`source`オブジェクトのプロパティを`object`オブジェクトに割り当てます。
-
-`source`オブジェクトのプロパティが`object`オブジェクトの対応するプロパティと同じ値の場合、上書きされません。
-
-## インターフェース
+ソースオブジェクトのプロパティをターゲットオブジェクトに割り当てます。
 
 ```typescript
-function assign<O, S>(object: O, source: S): O & S;
-function assign<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function assign<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function assign<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): O & S1 & S2 & S3 & S4;
-function assign(object: any, ...sources: any[]): any;
+const result = assign(target, ...sources);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`any`): `source`のプロパティ値が割り当てられるオブジェクト。
-- `sources` (`...any[]`): `object`に割り当てる値を持つオブジェクトたち。
+### `assign(target, ...sources)`
 
-### 戻り値
-
-(`any`): `source`の値が割り当てられた`object`オブジェクト。
-
-## 例
+1つ以上のソースオブジェクトのプロパティをターゲットオブジェクトにコピーしたい場合は、`assign`を使用してください。同じキーがある場合、後のソースの値が前の値を上書きします。
 
 ```typescript
-const target = { a: 1 };
-const result = assign(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+import { assign } from 'es-toolkit/compat';
+
+// 基本的な使用法
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+const result = assign(target, source);
+// 結果: { a: 1, b: 3, c: 4 }
+console.log(target === result); // true (ターゲットオブジェクトが変更される)
+
+// 複数のソースオブジェクトをマージ
+const target2 = { a: 1 };
+const source1 = { b: 2 };
+const source2 = { c: 3 };
+const source3 = { d: 4 };
+assign(target2, source1, source2, source3);
+// 結果: { a: 1, b: 2, c: 3, d: 4 }
+
+// プロパティの上書き
+const target3 = { x: 1, y: 2 };
+const source4 = { y: 3, z: 4 };
+const source5 = { y: 5 };
+assign(target3, source4, source5);
+// 結果: { x: 1, y: 5, z: 4 } (yは最後の値で上書きされます)
 ```
+
+この関数は、オブジェクトの固有のプロパティのみをコピーし、継承されたプロパティはコピーしません。また、値が同じ場合は上書きしない最適化があります。
+
+#### パラメータ
+
+- `target` (`any`): プロパティがコピーされるターゲットオブジェクトです。
+- `...sources` (`any[]`): プロパティをコピーするソースオブジェクトです。
+
+#### 戻り値
+
+(`any`): 修正されたターゲットオブジェクトを返します。ターゲットオブジェクト自体が変更されて返されます。

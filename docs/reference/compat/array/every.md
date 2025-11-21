@@ -1,137 +1,77 @@
-# every
+# every (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.every()`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `every` function operates slowly due to complex object processing, support for various condition formats, etc.
+
+Instead, use the faster and more modern `Array.prototype.every()`.
+
 :::
 
-Checks if all elements in an array or object meet the specified condition.
-
-You can specify the condition in several ways:
-
-- **Predicate function**: If you provide a predicate function, the function will be applied to each item. If the predicate function returns `true` for all items, the result will be `true`.
-- **Partial object**: If you provide a partial object, the function will return `true` if all items match the properties of the partial object.
-- **Property-value pair**: If you provide a property-value pair, the function will return `true` if all items match the property and value from the pair.
-- **Property name**: If you provide a property name, the function will return `true` if all items have the specified property with a truthy value.
-
-## Signature
+Checks if all values in an array or object meet the given condition.
 
 ```typescript
-function every<T>(arr: T[]): boolean;
-function every<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): boolean;
-function every<T>(arr: T[], doesMatch: Partial<T>): boolean;
-function every<T>(arr: T[], doesMatch: [keyof T, unknown]): boolean;
-function every<T>(arr: T[], doesMatch: PropertyKey): boolean;
-
-function every<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): boolean;
-function every<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): boolean;
+const result = every(collection, predicate);
 ```
 
-### Parameters
+## Usage
 
-- `arr` (`T[]`) or `object` (`T`): The array or object to search through.
+### `every(collection, predicate?)`
 
-::: info `arr` can be `ArrayLike<T>`, `null`, or `undefined`
-
-To ensure full compatibility with lodash, the every function handles `arr` in this way:
-
-- If arr is an `ArrayLike<T>`, it gets converted into an array using `Array.from(...)`.
-- If arr is `null` or `undefined`, it will be treated as an empty array.
-
-:::
-
-::: info `object` can be `null` or `undefined`
-
-To ensure full compatibility with lodash, the every function handles `object` in this way:
-
-- If `object` is `null` or `undefined`, it will be converted into an empty object.
-
-:::
-
-- `doesMatch`:
-
-  - For the first `every` overload with arrays:
-
-    - **Predicate function** (`(item: T, index: number, arr: T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
-    - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
-    - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
-
-  - For the `every` overloads with objects:
-    - **Predicate function** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): A function that takes an value, its key, and the object, and returns a truthy value if the item matches the criteria.
-    - **Partial value** (`Partial<T[keyof T]>`): A partial value to match against the values of the object.
-    - **Property-value pair** (`[keyof T[keyof T], unknown]`): An array where the first element is the property key and the second element is the value to match.
-    - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
-
-### Returns
-
-(`boolean`): Returns `true` if all items match the specified condition, or `false` if any item does not match.
-
-## Examples
-
-### Arrays
+Use `every` when you want to check if all elements in an array or object satisfy a specific condition. The condition can be specified in various formats such as a function, partial object, property-value pair, property name, etc.
 
 ```typescript
 import { every } from 'es-toolkit/compat';
 
-// Using a predicate function
-const items = [1, 2, 3, 4, 5];
-const result = every(items, item => item > 0);
-console.log(result); // true
+// Using a test function
+const numbers = [2, 4, 6, 8];
+every(numbers, x => x % 2 === 0);
+// Returns: true
+
+// Using a property name
+const users = [
+  { name: 'Alice', active: true },
+  { name: 'Bob', active: true },
+];
+every(users, 'active');
+// Returns: true
 
 // Using a partial object
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, { name: 'Bob' });
-console.log(result); // false
+every(users, { active: true });
+// Returns: true
 
 // Using a property-value pair
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, ['name', 'Alice']);
-console.log(result); // false
-
-// Using a property name
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = every(items, 'name');
-console.log(result); // true
+every(users, ['active', true]);
+// Returns: true
 ```
 
-### Objects
+It works the same way for objects.
 
 ```typescript
 import { every } from 'es-toolkit/compat';
 
-// Using a predicate function
-const obj = { a: 1, b: 2, c: 3 };
-const result = every(obj, value => value > 0);
-console.log(result); // true
-
-// Using a partial value
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, { name: 'Bob' });
-console.log(result); // false
-
-// Using a property-value pair
-const obj = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = every(obj, ['name', 'Alice']);
-console.log(result); // false
-
-// Using a property name
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = every(obj, 'name');
-console.log(result); // true
+const scores = { math: 90, english: 85, science: 92 };
+every(scores, score => score >= 80);
+// Returns: true
 ```
+
+`null` or `undefined` are treated as empty collections and return `true`.
+
+```typescript
+import { every } from 'es-toolkit/compat';
+
+every(null);
+// Returns: true
+
+every(undefined);
+// Returns: true
+```
+
+#### Parameters
+
+- `collection` (`ArrayLike<T> | Record<any, any> | null | undefined`): The array or object to check.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The condition to check. Can use a function, partial object, property-value pair, or property name. Defaults to the `identity` function.
+
+#### Returns
+
+(`boolean`): Returns `true` if all elements satisfy the condition, otherwise `false`.

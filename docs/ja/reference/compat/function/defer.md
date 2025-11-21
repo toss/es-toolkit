@@ -1,33 +1,56 @@
-# defer
+# defer (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `setTimeout`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `defer` 関数は、内部的に `setTimeout(func, 1, ...args)` を呼び出す単純なラッパー関数です。
+
+代わりに、より直接的で現代的な `setTimeout` を使用してください。
+
 :::
 
-`func`を呼び出しを、現在のコールスタックがクリアされるまで遅延します。追加の引数は、呼び出されたときに`func`に提供されます。
-
-## インターフェース
+関数を次のイベントループで実行するように遅延させます。
 
 ```typescript
-function defer<F extends (...args: any[]) => any>(func: F, ...args: Parameters<F>): number;
+const timerId = defer(func, ...args);
 ```
 
-### パラメータ
+## 使用法
 
-- `func` (`F`): 遅延する関数。
-- `args` (`Parameters<F>`): `func`を呼び出すための引数。
+### `defer(func, ...args)`
 
-### 戻り値
-
-(`number`): タイマーID。
-
-## 例
+現在のコールスタックが終了した後に関数を実行したい場合は、`defer`を使用してください。関数の実行を次のイベントループに遅らせながら、追加の引数を関数に渡すことができます。
 
 ```typescript
-defer(text => {
-  console.log(text);
-}, 'deferred');
-// => Logs 'deferred' after the current call stack has cleared.
+import { defer } from 'es-toolkit/compat';
+
+// コンソール出力を遅延させます
+defer(console.log, 'deferred message');
+// 現在のコールスタックが終了した後に 'deferred message' を出力します
+
+// 関数と引数を一緒に遅延実行します
+const greet = (name: string, greeting: string) => {
+  console.log(`${greeting}, ${name}!`);
+};
+
+defer(greet, 'John', 'Hello');
+// 現在のコールスタックが終了した後に 'Hello, John!' を出力します
 ```
+
+内部的に `setTimeout(func, 1, ...args)` を使用して、1ミリ秒後に関数を実行します。
+
+```typescript
+import { defer } from 'es-toolkit/compat';
+
+// 次の2つのコードは同じように動作します
+defer(console.log, 'message');
+setTimeout(console.log, 1, 'message');
+```
+
+#### パラメータ
+
+- `func` (`(...args: any[]) => any`): 遅延実行する関数です。
+- `...args` (`any[]`): 関数に渡す引数です。
+
+#### 戻り値
+
+(`number`): `setTimeout`から返されたタイマーIDを返します。`clearTimeout`で実行をキャンセルできます。

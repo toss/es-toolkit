@@ -1,43 +1,31 @@
-# invokeMap
+# invokeMap (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.map`과 `Object.values(...).map`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `invokeMap` 함수는 `null`이나 `undefined` 처리, 메서드 탐색 등으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.map`과 `Object.values(...).map`를 사용하세요.
+
+예를 들어, `invokeMap([1, 2, 3], 'toString')` 은 `[1, 2, 3].map(x => x.toString())`처럼 쓸 수 있어요.
+
 :::
 
-컬렉션의 각 요소에서 `path`에 해당하는 메서드를 호출하고, 호출된 각 메서드의 결과를 배열로 반환해요. 추가 인자들은 각각의 호출되는 메서드에 전달돼요. 만약 `path`가 함수라면, 컬렉션의 각 요소에 대해 호출되며 `this`가 각 요소에 바인딩돼요.
-
-## 인터페이스
+배열이나 객체의 각 요소에서 지정한 메서드를 호출하고, 결과를 배열로 반환해요.
 
 ```typescript
-function invokeMap<T, R>(
-  collection: T[] | Record<string, T> | null | undefined,
-  path: PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R),
-  ...args: unknown[]
-): Array<R | undefined>;
+const result = invokeMap(collection, method, ...args);
 ```
 
-### 파라미터
+## 사용법
 
-- `collection` (`T[] | Record<string, T> | null | undefined`): 순회할 컬렉션이에요.
-- `path` (`PropertyKey | PropertyKey[] | ((this: T, ...args: any[]) => R)`): 호출할 메서드의 경로(문자열, 숫자, 심볼, 또는 이들의 배열)나 호출할 함수예요.
-- `args` (`...unknown[]`): 각 메서드를 호출할 때 전달할 인자들이에요.
+### `invokeMap(collection, method, ...args)`
 
-### 반환 값
-
-(`Array<R | undefined>`): 결과 배열을 반환해요. 경로를 찾을 수 없거나 메서드 호출 결과가 `undefined`인 경우 해당 요소는 `undefined`가 돼요.
-
-## 예시
+배열이나 객체의 각 요소에서 지정한 메서드를 호출해요. 메서드 이름을 문자열로 전달하거나 직접 함수를 전달할 수 있어요. 추가 인자들은 각 메서드 호출 시 전달돼요.
 
 ```typescript
 import { invokeMap } from 'es-toolkit/compat';
 
-// 각 요소의 메서드 호출하기
-invokeMap(['a', 'b', 'c'], 'toUpperCase');
-// => ['A', 'B', 'C']
-
-// 인자와 함께 메서드 호출하기
+// 배열의 각 요소에서 메서드 호출하기
 invokeMap(
   [
     [5, 1, 7],
@@ -45,23 +33,45 @@ invokeMap(
   ],
   'sort'
 );
+// => [[5, 1, 7].sort(), [3, 2, 1].sort()]
 // => [[1, 5, 7], [1, 2, 3]]
 
-// 객체의 각 값에 대해 메서드 호출하기
-invokeMap({ a: 1, b: 2, c: 3 }, 'toFixed', 1);
-// => ['1.0', '2.0', '3.0']
+// 인자와 함께 메서드 호출하기
+invokeMap([123, 456], 'toString', 2);
+// => [(123).toString(2), (456).toString(2)]
+// => ['1111011', '111001000']
 
-// 메서드 이름 대신 함수 사용하기
-invokeMap(
-  ['a', 'b', 'c'],
-  function (this: string, prefix: string, suffix: string) {
-    return prefix + this.toUpperCase() + suffix;
-  },
-  '(',
-  ')'
-);
-// => ['(A)', '(B)', '(C)']
-
-invokeMap([123, 456], String.prototype.split, '');
-// => [['1', '2', '3'], ['4', '5', '6']]
+// 함수를 직접 전달하기
+invokeMap(['a', 'b', 'c'], String.prototype.toUpperCase);
+// => [String.prototype.toUpperCase('a'), String.prototype.toUpperCase('b'), String.prototype.toUpperCase('c')]
+// => ['A', 'B', 'C']
 ```
+
+객체의 경우 각 값에서 메서드를 호출해요.
+
+```typescript
+import { invokeMap } from 'es-toolkit/compat';
+
+const obj = { a: 1.1, b: 2.2, c: 3.3 };
+invokeMap(obj, 'toFixed', 1);
+// => ['1.1', '2.2', '3.3']
+```
+
+`null`이나 `undefined`는 빈 배열로 처리해요.
+
+```typescript
+import { invokeMap } from 'es-toolkit/compat';
+
+invokeMap(null, 'toString'); // []
+invokeMap(undefined, 'toString'); // []
+```
+
+#### 파라미터
+
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 메서드를 호출할 배열이나 객체예요.
+- `method` (`string | ((...args: any[]) => R)`): 호출할 메서드 이름이나 함수예요.
+- `...args` (`any[]`): 각 메서드 호출 시 전달할 추가 인자들이에요.
+
+#### 반환 값
+
+(`Array<R | undefined>`): 각 메서드 호출 결과를 담은 새로운 배열을 반환해요.

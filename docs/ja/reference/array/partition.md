@@ -1,31 +1,52 @@
 # partition
 
-配列を2つに分割するのに使用できる関数です。
-
-この関数は、パラメータとして配列と`true`/`false`を返す関数を受け取ります。
-この関数は2つの配列からなるタプルを返します。最初の配列は関数が`true`を返す要素で構成されます。
-2番目の配列は関数が`false`を返す要素で構成されます。
-
-## インターフェース
+条件に従って配列を2つのグループに分けたタプルを返します。
 
 ```typescript
-function partition<T>(arr: T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]];
+const [truthy, falsy] = partition(arr, isInTruthy);
 ```
 
-### パラメータ
+## 使用法
 
-- `arr` (`T[]`): 2つに分割する配列。
-- `isInTruthy` (`(value: T) => boolean`): 配列の要素が最初の配列に含まれるか、2番目の配列に含まれるかを決定する関数。`true`を返すと最初の配列に、`false`を返すと2番目の配列に含まれます。
+### `partition(arr, isInTruthy)`
 
-### 戻り値
-
-(`[T[], T[]]`): 2つの配列で構成されるタプル。最初の配列は`isInTruthy`が`true`を返した要素で、2番目の配列は`false`を返した要素で構成されます。
-
-## 例
+配列の要素を特定の条件に従って2つのグループに分けたい場合は `partition` を使用してください。条件関数が `true` を返す要素と `false` を返す要素をそれぞれ異なる配列に分けます。
 
 ```typescript
-const array = [1, 2, 3, 4, 5];
-const is偶数 = x => x % 2 === 0;
-const [偶数, 奇数] = partition(array, is偶数);
-// 偶数は[2, 4]、奇数は[1, 3, 5]になります。
+import { partition } from 'es-toolkit/array';
+
+// 数値配列を偶数と奇数に分けます。
+const numbers = [1, 2, 3, 4, 5, 6];
+const [evens, odds] = partition(numbers, x => x % 2 === 0);
+// evens: [2, 4, 6]
+// odds: [1, 3, 5]
+
+// オブジェクト配列を特定の条件で分けます。
+const users = [
+  { name: 'Alice', active: true },
+  { name: 'Bob', active: false },
+  { name: 'Charlie', active: true },
+];
+const [activeUsers, inactiveUsers] = partition(users, user => user.active);
+// activeUsers: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
+// inactiveUsers: [{ name: 'Bob', active: false }]
 ```
+
+空の配列の場合は2つの空の配列を返します。
+
+```typescript
+import { partition } from 'es-toolkit/array';
+
+const [truthy, falsy] = partition([], x => x > 0);
+// truthy: []
+// falsy: []
+```
+
+#### パラメータ
+
+- `arr` (`T[]`): 2つのグループに分ける配列です。
+- `isInTruthy` (`(value: T) => boolean`): 各要素が最初の配列(truthy)に含まれるか、2番目の配列(falsy)に含まれるかを決定する条件関数です。
+
+#### 戻り値
+
+(`[truthy: T[], falsy: T[]]`): 2つの配列で構成されるタプルです。最初の配列は条件が `true` の要素、2番目の配列は条件が `false` の要素を含みます。

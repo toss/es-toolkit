@@ -1,43 +1,22 @@
-# bindKey
+# bindKey (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用箭头函数或 `bind` 方法
+这个 `bindKey` 函数由于动态方法绑定和占位符处理而变得复杂和缓慢。使用 JavaScript 的原生 `bind` 方法或箭头函数更简单，性能更好。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-
+请使用更快、更现代的箭头函数或 `Function.prototype.bind`。
 :::
 
-创建一个函数，该函数调用 `object[key]` 上的方法，并将 `partialArgs` 作为其接收的参数的前置参数。
-
-此方法与 [`bind`](./bind.md) 不同，它允许绑定的函数引用可能被重新定义或尚不存在的方法。
-
-`bindKey.placeholder` 的值默认是一个 `symbol`，可以用作附加的部分参数的占位符。
-
-## 签名
+绑定对象的方法，允许引用可能在以后被重新定义的方法。
 
 ```typescript
-function bindKey<T extends Record<PropertyKey, any>, K extends keyof T>(
-  object: T,
-  key: K,
-  ...partialArgs: any[]
-): T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never;
-
-namespace bindKey {
-  placeholder: symbol;
-}
+const bound = bindKey(object, key, ...partialArgs);
 ```
 
-### 参数
+## 用法
 
-- `object` (`T`): 需要绑定并调用方法的对象。
-- `key` (`K`): 要绑定的方法的键。
-- `partialArgs` (`any[]`): 要部分应用的参数。
+### `bindKey(object, key, ...partialArgs)`
 
-### 返回值
-
-(`T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never`): 返回新的绑定函数。
-
-## 示例
+当您想绑定对象的方法，同时允许该方法在以后被更改时，请使用 `bindKey`。与普通的 `bind` 不同，它每次调用时都会引用最新的方法。
 
 ```typescript
 import { bindKey } from 'es-toolkit/compat';
@@ -49,19 +28,62 @@ const object = {
   },
 };
 
+// 绑定方法。
 let bound = bindKey(object, 'greet', 'hi');
 bound('!');
-// => 'hi fred!'
+// 返回: 'hi fred!'
 
+// 重新定义方法。
 object.greet = function (greeting, punctuation) {
   return greeting + 'ya ' + this.user + punctuation;
 };
 
+// 绑定的函数调用新方法。
 bound('!');
-// => 'hiya fred!'
-
-// 使用 placeholders 绑定
-bound = bindKey(object, 'greet', bindKey.placeholder, '!');
-bound('hi');
-// => 'hiya fred!'
+// 返回: 'hiya fred!'
 ```
+
+您可以使用占位符来保留参数位置。
+
+```typescript
+import { bindKey } from 'es-toolkit/compat';
+
+const object = {
+  user: 'fred',
+  greet: function (greeting, punctuation) {
+    return greeting + ' ' + this.user + punctuation;
+  },
+};
+
+// 使用占位符。
+const bound = bindKey(object, 'greet', bindKey.placeholder, '!');
+bound('hi');
+// 返回: 'hi fred!'
+```
+
+部分应用的参数会首先传递，然后是调用时提供的参数。
+
+```typescript
+import { bindKey } from 'es-toolkit/compat';
+
+const object = {
+  add: function (a, b, c) {
+    return a + b + c;
+  },
+};
+
+// 预先设置第一个参数。
+const bound = bindKey(object, 'add', 10);
+bound(20, 30);
+// 返回: 60 (10 + 20 + 30)
+```
+
+#### 参数
+
+- `object` (`object`): 要调用方法的对象。
+- `key` (`string`): 要调用的方法的键。
+- `...partialArgs` (`any[]`, 可选): 要部分应用到方法的参数。您可以使用 `bindKey.placeholder` 来保留参数位置。
+
+#### 返回值
+
+(`(...args: any[]) => any`): 返回一个新的绑定函数。此函数每次调用时都会引用对象的最新方法。

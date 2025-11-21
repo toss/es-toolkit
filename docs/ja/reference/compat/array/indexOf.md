@@ -1,46 +1,71 @@
-# indexOf
+# indexOf (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.indexOf` または `Array.prototype.findIndex` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`indexOf`関数は、`NaN`処理のための追加ロジックにより、動作が遅くなります。
+
+`NaN`を探していない場合は、より高速な`Array.prototype.indexOf`を使用してください。`NaN`を見つける場合は、`Array.prototype.findIndex`と`Number.isNaN`を使用してください。
+
 :::
 
 配列内で指定された要素が最初に一致するインデックスを見つけます。
 
-`Array.prototype.indexOf` とほぼ同じように動作しますが、`NaN` 値を見つけることができます。
-`NaN` 以外の要素を比較する際は、厳密等価演算子（`===`）を使用します。
-
-## インターフェース
-
 ```typescript
-function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
+const index = indexOf(array, searchElement, fromIndex);
 ```
 
-### パラメータ
+## 使用法
+
+### `indexOf(array, searchElement, fromIndex?)`
+
+`Array.prototype.indexOf` とほぼ同じように動作しますが、`NaN` 値を見つけることができます。配列内の特定の値の位置を知る必要がある場合に使用してください。
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+// 数値配列で要素を検索
+const array = [1, 2, 3, 4];
+indexOf(array, 3); // => 2
+
+// NaN 値を検索（Array.prototype.indexOf では見つけられません）
+const arrayWithNaN = [1, 2, NaN, 4];
+indexOf(arrayWithNaN, NaN); // => 2
+```
+
+特定のインデックスから検索を開始できます。
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+const array = [1, 2, 3, 1, 2, 3];
+indexOf(array, 2, 2); // => 4（インデックス 2 から検索開始）
+```
+
+`null` または `undefined` は空の配列として処理されます。
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+indexOf(null, 1); // => -1
+indexOf(undefined, 1); // => -1
+```
+
+#### パラメータ
 
 - `array` (`T[]`): 検索対象の配列。
 
 ::: info `array` は `ArrayLike<T>` または `null` または `undefined` である可能性があります
 
-lodash と完全に互換性があるように、`join` 関数は `array` を次のように処理します。
+lodash と完全に互換性があるように、`indexOf` 関数は `array` を次のように処理します。
 
 - `array` が `ArrayLike<T>` の場合、配列に変換するために `Array.from(...)` を使用します。
 - `array` が `null` または `undefined` の場合、空の配列と見なされます。
 
 :::
 
-- `searchElement` (`T`): 検索する値。
-- `fromIndex` (`number`, オプション): 検索を開始するインデックス。
+- `searchElement` (`T`): 検索する値です。
+- `fromIndex` (`number`, オプション): 検索を開始するインデックスです。負の数の場合、配列の末尾から計算されます。デフォルト値は `0` です。
 
-### 戻り値
+#### 戻り値
 
-(`number`): 配列内で指定された値と最初に一致する要素のインデックス。一致する要素が見つからない場合は `-1` を返します。
-
-## 例
-
-```typescript
-const array = [1, 2, 3, NaN];
-indexOf(array, 3); // => 2
-indexOf(array, NaN); // => 3
-```
+(`number`): 配列内で指定された値と最初に一致する要素のインデックスを返します。一致する要素が見つからない場合は `-1` を返します。

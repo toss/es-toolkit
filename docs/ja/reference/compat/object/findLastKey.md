@@ -1,76 +1,65 @@
-# findLastKey
+# findLastKey (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.findLast()`と`Object.keys()`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `findLastKey` 関数は、様々な条件タイプの処理と互換性ロジックにより複雑に動作します。
+
+代わりに、より高速で現代的な `Array.findLast()` と `Object.keys()` を使用してください。
+
 :::
 
-指定された条件を満たす最後の要素のキーを返します。
-
-`findKey` は先頭から検索するのに対し、`findLastKey` はオブジェクトの末尾から検索します。
-
-## インターフェース
+条件に一致する最後の要素のキーを末尾から探します。
 
 ```typescript
-function findLastKey<T>(
-  obj: T | null | undefined,
-  conditionToFind: (value: T[keyof T], key: string, obj: T) => unknown
-): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, objectToFind: Partial<T[keyof T]>): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, propertyToFind: [PropertyKey, any]): string | undefined;
-
-function findLastKey<T>(obj: T | null | undefined, propertyToFind: PropertyKey): string | undefined;
-
-function findLastKey<T>(
-  obj: T | null | undefined,
-  predicate?:
-    | ((value: T[keyof T], key: string, obj: T) => unknown)
-    | PropertyKey
-    | [PropertyKey, any]
-    | Partial<T[keyof T]>
-): string | undefined;
+const key = findLastKey(obj, predicate);
 ```
 
-### パラメータ
+## 使用法
 
-- `obj` (`T | null | undefined`): 検査するオブジェクトです。
-- `predicate`: 反復ごとに呼び出される関数です。以下のいずれかの形式を取ります：
-  - `(value, key, obj) => unknown` - 各要素に対して実行される関数です。
-  - `Partial<T[keyof T]>` - 一致するプロパティを持つ要素に一致します。
-  - `[PropertyKey, any]` - 指定されたプロパティと値を持つ要素に一致します。
-  - `PropertyKey` - 指定されたプロパティの真値を持つ要素に一致します。
+### `findLastKey(obj, predicate)`
 
-### 戻り値
-
-(`string | undefined`): 一致した要素のキーを返します。一致する要素がない場合は `undefined` を返します。
-
-### 例
+オブジェクトで条件に一致する最後の要素のキーを見つけるために `findLastKey` を使用してください。`findKey` とは逆に、末尾から検索します。関数、オブジェクト、配列、文字列など、様々な形式の条件を使用できます。
 
 ```typescript
 import { findLastKey } from 'es-toolkit/compat';
 
+// 関数条件でキーを見つける
 const users = {
-  barney: { age: 36, active: true },
-  fred: { age: 40, active: false },
-  pebbles: { age: 1, active: true },
+  alice: { age: 25, active: true },
+  bob: { age: 30, active: false },
+  charlie: { age: 35, active: true },
 };
 
-// 関数を使用する場合
-findLastKey(users, o => o.age < 40);
-// => 'pebbles'
+findLastKey(users, user => user.active);
+// 戻り値: 'charlie' (末尾から見つけた最初の active: true)
 
-// 部分オブジェクトを使用する場合
+// オブジェクト条件でキーを見つける
 findLastKey(users, { active: true });
-// => 'pebbles'
+// 戻り値: 'charlie'
 
-// プロパティと値のペアを使用する場合
-findLastKey(users, ['active', false]);
-// => 'fred'
-
-// プロパティ名を使用する場合（真値チェック）
+// プロパティパスでキーを見つける
 findLastKey(users, 'active');
-// => 'pebbles'
+// 戻り値: 'charlie'
+
+// プロパティ-値配列でキーを見つける
+findLastKey(users, ['active', false]);
+// 戻り値: 'bob'
 ```
+
+条件に一致する要素がない場合は `undefined` を返します。
+
+```typescript
+import { findLastKey } from 'es-toolkit/compat';
+
+findLastKey({ a: 1, b: 2 }, value => value > 5);
+// 戻り値: undefined
+```
+
+#### パラメータ
+
+- `obj` (`T | null | undefined`): 検索するオブジェクトです。
+- `predicate` (`ObjectIteratee<T>`, オプション): 各要素に適用する条件です。関数、オブジェクト、配列、文字列が使用できます。
+
+#### 戻り値
+
+(`string | undefined`): 条件に一致する最後の要素のキーを返します。見つからない場合は `undefined` を返します。

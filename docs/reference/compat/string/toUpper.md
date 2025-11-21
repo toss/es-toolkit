@@ -1,36 +1,63 @@
-# toUpper
+# toUpper (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use JavaScript's `String.prototype.toUpperCase`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `toUpper` function performs slower due to handling non-string values.
+
+Instead, use the faster and more modern JavaScript's `String.prototype.toUpperCase`.
+
 :::
 
-Converts the given value to a string and transforms it to upper case. The function can handle various input types by first converting them to strings.
-
-## Signature
+Converts a value to a string and then to uppercase.
 
 ```typescript
-function toUpper<T extends string = string>(value?: T): Uppercase<T>;
+const uppercased = toUpper(value);
 ```
 
-## Parameters
+## Usage
 
-- `value`(`T`) : The value to convert to upper case. If omitted, returns an empty string.
+### `toUpper(value?)`
 
-## Returns
-
-`Uppercase<T>` : The upper case version of the input value converted to a string.
-
-## Examples
+Use `toUpper` when you want to convert a value to an uppercase string. It first converts any type of value to a string, then converts it to uppercase.
 
 ```typescript
 import { toUpper } from 'es-toolkit/compat';
 
-toUpper('--foo-bar--'); // returns '--FOO-BAR--'
-toUpper('Hello World'); // returns 'HELLO WORLD'
-toUpper(null); // returns ''
-toUpper([1, 2, 3]); // returns '1,2,3'
-toUpper(123); // returns '123'
-toUpper(); // returns ''
+// Convert string to uppercase
+toUpper('--foo-bar--');
+// Returns: '--FOO-BAR--'
+
+toUpper('Hello World');
+// Returns: 'HELLO WORLD'
+
+// Convert number
+toUpper(123);
+// Returns: '123'
+
+// Convert array
+toUpper([1, 2, 3]);
+// Returns: '1,2,3'
 ```
+
+`null` and `undefined` are treated as empty strings.
+
+```typescript
+import { toUpper } from 'es-toolkit/compat';
+
+toUpper(null);
+// Returns: ''
+
+toUpper(undefined);
+// Returns: ''
+
+toUpper();
+// Returns: ''
+```
+
+#### Parameters
+
+- `value` (`unknown`, optional): The value to convert to uppercase.
+
+#### Returns
+
+(`string`): Returns the uppercase string.

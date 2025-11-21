@@ -34,6 +34,14 @@ yarn add es-toolkit
 
 :::
 
+es-toolkitの関数を使うには、以下のように`import`して使用できます。
+
+```typescript
+import { sum } from 'es-toolkit';
+
+sum([1, 2, 3]);
+```
+
 ## Deno
 
 es-toolkitはDenoでも使用できます。[JSR](https://jsr.io/@es-toolkit/es-toolkit)から以下のコマンドでインストールしてください。

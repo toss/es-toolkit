@@ -1,32 +1,54 @@
 # clamp
 
-数値を最小値と最大値の範囲内に制限する関数です。
-
-この関数は数値と2つの境界値を受け取り、指定された範囲内に制限された数値を返します。
-1つの境界値のみが提供された場合、値と境界値の最小値を返します。
-
-## インターフェース
+数値を指定された範囲内に固定します。
 
 ```typescript
-function clamp(value: number, maximum: number): number;
-function clamp(value: number, minimum: number, maximum: number): number;
+const clamped = clamp(value, maximum);
+const clamped = clamp(value, minimum, maximum);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`number`): 制限する数値です。
-- `minimum` (`number`): 数値を制限する最小値です。
-- `maximum` (`number`): 数値を制限する最大値です。
+### `clamp(value, maximum)`
 
-### 戻り値
-
-(`number`): 指定された範囲内に制限された数値を返します。
-
-## 例
+数値を与えられた最大値以下に制限したい場合は`clamp`を使用してください。値が最大値を超える場合は最大値に固定され、そうでない場合は元の値を返します。
 
 ```typescript
-const result1 = clamp(10, 5); // 範囲が5に制限されるため、result1は5になります。
-const result2 = clamp(10, 5, 15); // 10は5と15の範囲内にあるため、result2は10になります。
-const result3 = clamp(2, 5, 15); // 最小値が5のため、result3は5になります。
-const result4 = clamp(20, 5, 15); // 最大値が15のため、result4は15になります。
+import { clamp } from 'es-toolkit/math';
+
+// 最大値で制限
+const result1 = clamp(10, 5); // result1 は 5 になります (10が最大値5に制限される)
+const result2 = clamp(3, 5); // result2 は 3 になります (5より小さいのでそのまま)
 ```
+
+#### パラメータ
+
+- `value` (`number`): 固定する数値です。
+- `maximum` (`number`): 最大値です。
+
+#### 戻り値
+
+(`number`): 最大値以下に固定された数値を返します。
+
+### `clamp(value, minimum, maximum)`
+
+数値を与えられた最小値と最大値の範囲内に固定したい場合は`clamp`を使用してください。値が範囲を外れる場合は、最も近い境界値に制限されます。
+
+```typescript
+import { clamp } from 'es-toolkit/math';
+
+// 最小値と最大値の範囲内に固定
+const result1 = clamp(10, 5, 15); // result1 は 10 になります (5と15の範囲内)
+const result2 = clamp(2, 5, 15); // result2 は 5 になります (最小値5に制限される)
+const result3 = clamp(20, 5, 15); // result3 は 15 になります (最大値15に制限される)
+```
+
+#### パラメータ
+
+- `value` (`number`): 固定する数値です。
+- `minimum` (`number`): 最小値です。
+- `maximum` (`number`): 最大値です。
+
+#### 戻り値
+
+(`number`): 指定された範囲内で固定された数値を返します。

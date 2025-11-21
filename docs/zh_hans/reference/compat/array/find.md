@@ -1,148 +1,89 @@
-# find
+# find (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Array.prototype.find()`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `find` 函数由于复杂的对象处理、支持各种条件格式等原因而运行缓慢。
+
+请改用更快、更现代的 `Array.prototype.find()`。
 
 :::
 
-查找数组或对象中第一个符合指定条件的项。
-
-您可以通过以下几种方式指定条件：
-
-- **谓词函数**：如果提供一个谓词函数，该函数将应用于每一项。返回 `true` 的第一个项将被选中。
-- **部分对象**：如果提供一个部分对象，该函数将返回第一个匹配部分对象属性的项。
-- **属性-值对**：如果提供一个属性-值对，该函数将返回第一个匹配该属性和值的项。
-- **属性名称**：如果提供一个属性名称，该函数将返回第一个指定属性具有真值的项。
-
-## 签名
+在数组或对象中查找满足条件的第一个元素。
 
 ```typescript
-function find<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): T | undefined;
-function find<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
-function find<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
-function find<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): T | undefined;
-
-function find<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
-  fromIndex?: number
-): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: Partial<T[keyof T]>,
-  fromIndex?: number
-): T | undefined;
-function find<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: [keyof T[keyof T], unknown],
-  fromIndex?: number
-): T | undefined;
-function find<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey, fromIndex?: number): T | undefined;
+const result = find(collection, predicate, fromIndex);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`) 或 `object` (`T`): 要搜索的数组或对象。
+### `find(collection, predicate, fromIndex?)`
 
-::: info `arr` 可以是 `ArrayLike<T>`、`null` 或 `undefined`
-
-为了确保与 lodash 的完全兼容性，`find` 函数会按照以下方式处理 `arr`：
-
-- 如果 `arr` 是 `ArrayLike<T>`，它将使用 `Array.from(...)` 转换为数组。
-- 如果 `arr` 是 `null` 或 `undefined`，它将被视为一个空数组。
-
-:::
-
-::: info `object` 可以是 `null` 或 `undefined`
-
-为了确保与 lodash 的完全兼容性，`find` 函数会按照以下方式处理 `object`：
-
-- 如果 `object` 是 `null` 或 `undefined`，它将被转换为一个空对象。
-
-:::
-
-- `doesMatch`:
-
-  - 对于数组的 `find` 重载：
-
-    - **谓词函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个函数，接受项、其索引和数组，如果项符合条件则返回真值。
-    - **部分对象** (`Partial<T>`): 指定要匹配的属性的部分对象。
-    - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
-    - **属性名称** (`PropertyKey`): 要检查其真值的属性名称。
-
-  - 对于对象的 `find` 重载：
-    - **谓词函数** (`(item: T[keyof T], index: number, object: T) => unknown`): 一个函数，接受项、其键和对象，如果项符合条件则返回真值。
-    - **部分值** (`Partial<T[keyof T]>`): 用于与对象的值进行匹配的部分值。
-    - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
-    - **属性名称** (`PropertyKey`): 要检查其真值的属性名称。
-
-- `fromIndex` (`number`): 搜索开始的位置。默认为 `0`。
-
-### 返回
-
-(`T | undefined`): 第一个具有指定属性值的项，如果没有找到匹配项，则返回 `undefined`。
-
-## 示例
-
-### 数组
+当您想在数组或对象中查找满足特定条件的第一个元素时,使用 `find`。条件可以以各种格式指定,如函数、部分对象、属性-值对、属性名称等。
 
 ```typescript
 import { find } from 'es-toolkit/compat';
 
-// 使用谓词函数
-const items = [1, 2, 3, 4, 5];
-const result = find(items, item => item > 3);
-console.log(result); // 4
-
-// 使用部分对象
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = find(items, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
-
-// 使用属性-值对
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = find(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
+// 使用检查函数
+const numbers = [1, 2, 3, 4, 5];
+find(numbers, x => x > 3);
+// 返回: 4
 
 // 使用属性名称
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+const users = [
+  { name: 'Alice', active: false },
+  { name: 'Bob', active: true },
+  { name: 'Charlie', active: true },
 ];
-const result = find(items, 'name');
-console.log(result); // { id: 1, name: 'Alice' }
+find(users, 'active');
+// 返回: { name: 'Bob', active: true }
+
+// 使用部分对象
+find(users, { active: true });
+// 返回: { name: 'Bob', active: true }
+
+// 使用属性-值对
+find(users, ['name', 'Charlie']);
+// 返回: { name: 'Charlie', active: true }
 ```
 
-### 对象
+可以指定起始索引。
 
 ```typescript
 import { find } from 'es-toolkit/compat';
 
-// 使用谓词函数
-const obj = { a: 1, b: 2, c: 3 };
-const result = find(obj, item => item > 2);
-console.log(result); // 3
-
-// 使用部分对象
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = find(obj, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
-
-// 使用属性-值对
-const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = find(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
-
-// 使用属性名称
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = find(obj, 'name');
-console.log(result); // { id: 1, name: 'Alice' }
+const numbers = [1, 2, 3, 4, 5];
+find(numbers, x => x > 2, 2);
+// 返回: 3 (从索引 2 开始搜索)
 ```
+
+对象的操作方式相同。
+
+```typescript
+import { find } from 'es-toolkit/compat';
+
+const scores = { math: 90, english: 75, science: 85 };
+find(scores, score => score >= 80);
+// 返回: 90
+```
+
+`null` 或 `undefined` 被视为空集合并返回 `undefined`。
+
+```typescript
+import { find } from 'es-toolkit/compat';
+
+find(null, x => x > 0);
+// 返回: undefined
+
+find(undefined, x => x > 0);
+// 返回: undefined
+```
+
+#### 参数
+
+- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): 要搜索的数组或对象。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): 搜索条件。可以使用函数、部分对象、属性-值对或属性名称。
+- `fromIndex` (`number`, 可选): 开始搜索的索引。默认为 `0`。
+
+#### 返回值
+
+(`T | undefined`): 返回满足条件的第一个元素。如果未找到则返回 `undefined`。

@@ -1,28 +1,60 @@
-# indexOf
+# indexOf (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Array.prototype.indexOf` 或 `Array.prototype.findIndex`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `indexOf` 函数由于处理 `NaN` 的额外逻辑而运行缓慢。
+
+如果不查找 `NaN`，请使用更快的 `Array.prototype.indexOf`。要查找 `NaN`，请使用 `Array.prototype.findIndex` 和 `Number.isNaN`。
 
 :::
 
 查找数组中第一个出现的值的索引。
 
-此方法类似于 `Array.prototype.indexOf`，但也能找到 `NaN` 值。
-它使用严格相等 (===) 来比较 `NaN` 以外的元素。
-
-## 签名
-
 ```typescript
-function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
+const index = indexOf(array, searchElement, fromIndex);
 ```
 
-### 参数
+## 用法
+
+### `indexOf(array, searchElement, fromIndex?)`
+
+与 `Array.prototype.indexOf` 几乎相同，但可以找到 `NaN` 值。当您需要在数组中查找特定值的位置时使用此方法。
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+// 在数字数组中查找元素
+const array = [1, 2, 3, 4];
+indexOf(array, 3); // => 2
+
+// 查找 NaN 值（Array.prototype.indexOf 无法找到）
+const arrayWithNaN = [1, 2, NaN, 4];
+indexOf(arrayWithNaN, NaN); // => 2
+```
+
+可以从特定索引开始搜索。
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+const array = [1, 2, 3, 1, 2, 3];
+indexOf(array, 2, 2); // => 4（从索引 2 开始搜索）
+```
+
+`null` 或 `undefined` 会被视为空数组。
+
+```typescript
+import { indexOf } from 'es-toolkit/compat';
+
+indexOf(null, 1); // => -1
+indexOf(undefined, 1); // => -1
+```
+
+#### 参数
 
 - `array` (`T[]`): 要搜索的数组。
 
-::: info `array` 可以是 `ArrayLike<T>` 或 `null` 或 `undefined` 。
+::: info `array` 可以是 `ArrayLike<T>` 或 `null` 或 `undefined`
 
 为了确保与 lodash 的完全兼容性，`indexOf` 函数会按照以下方式处理 `array`：
 
@@ -31,17 +63,9 @@ function indexOf<T>(array: T[], searchElement: T, fromIndex?: number): number;
 
 :::
 
-- `searchElement` (`T`): 要搜索的值。
-- `fromIndex` (`number`, 可选): 开始搜索的索引。
+- `searchElement` (`T`): 要查找的值。
+- `fromIndex` (`number`, 可选): 开始搜索的索引。如果为负数，则从数组末尾开始计算。默认值为 `0`。
 
-### 返回
+#### 返回值
 
-(`number`): 数组中第一个出现的值的索引（以零为基准），如果未找到该值，则返回 `-1`。
-
-## 示例
-
-```typescript
-const array = [1, 2, 3, NaN];
-indexOf(array, 3); // => 2
-indexOf(array, NaN); // => 3
-```
+(`number`): 返回数组中第一个匹配给定值的元素的索引。如果未找到匹配元素，则返回 `-1`。

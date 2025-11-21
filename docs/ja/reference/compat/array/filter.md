@@ -1,139 +1,78 @@
-# filter
+# filter (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.filter()` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `filter` 関数は、複雑なオブジェクト処理、様々な条件形式のサポートなどにより遅く動作します。
+
+代わりに、より高速で現代的な `Array.prototype.filter()` を使用してください。
+
 :::
 
-与えられた条件を満たす要素を持つ新しい配列を返します。
-
-条件はいくつかの方法で指定できます。
-
-- **検査関数**: 各要素に対して検査する関数を実行します。条件に合う要素を選択します。
-- **部分オブジェクト**: 指定されたオブジェクトと部分的に一致する要素を選択します。
-- **プロパティ-値ペア**: 指定されたプロパティに対してキーと値が一致する要素を選択します。
-- **プロパティ名**: 指定されたプロパティ名が存在する要素を選択します。
-
-## インターフェース
+与えられた条件を満たす要素で新しい配列を作ります。
 
 ```typescript
-function filter<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function filter<T>(arr: T[], doesMatch: Partial<T>): T[];
-function filter<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function filter<T>(arr: T[], doesMatch: PropertyKey): T[];
-
-function filter<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T[];
-function filter<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T[];
+const result = filter(collection, predicate);
 ```
 
-### パラメータ
+## 使用法
 
-- `arr` (`T[]`) または `object` (`T`): 繰り返し処理する配列やオブジェクト。
+### `filter(collection, predicate)`
 
-::: info `arr` は `ArrayLike<T>`、`null` または `undefined` になります
-
-lodash と完全に互換性を保つため、`filter` 関数は `arr` を次のように処理します。
-
-- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
-- `arr` が `null` または `undefined` の場合、空の配列として扱います。
-
-:::
-
-- `doesMatch`:
-
-  - 配列の場合:
-
-    - **検査関数** (`(item: T, index: number, arr: T[]) => unknown`): 各要素が条件を満たしているか確認する関数。
-    - **部分オブジェクト** (`Partial<T>`): 要素の属性と値が一致するか確認する部分オブジェクト。
-    - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初の要素が対象プロパティ、2番目が対象値を示すタプル。
-    - **プロパティ名** (`PropertyKey`): 特定の属性を持っているか確認するプロパティ名。
-
-  - オブジェクトの場合:
-
-    - **検査関数** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 各要素が条件を満たしているか確認する関数。
-    - **部分値** (`Partial<T[keyof T]>`): 要素の属性と値が一致するか確認する部分オブジェクト。
-    - **プロパティ-値ペア** (`[keyof T[keyof T], unknown]`): 最初の要素が対象プロパティ、2番目が対象値を示すタプル。
-    - **プロパティ名** (`PropertyKey`): 特定の属性を持っているか確認するプロパティ名。
-
-### 戻り値
-
-(`T[]`): 条件を満たす要素の配列。該当する要素がなければ (`[]`)
-
-## 例
-
-### 配列の場合
+配列またはオブジェクトから特定の条件を満たす要素だけをフィルタリングしたい場合に `filter` を使用します。条件は関数、部分オブジェクト、プロパティ-値ペア、プロパティ名など、様々な形式で指定できます。
 
 ```typescript
 import { filter } from 'es-toolkit/compat';
 
-// 検査関数を使う場合
-filter([1, 2, 3], n => n % 2 === 0);
-// => [2]
+// 検査関数を使用
+const numbers = [1, 2, 3, 4, 5];
+filter(numbers, x => x % 2 === 0);
+// 戻り値: [2, 4]
 
-// 部分オブジェクトを使う場合
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+// プロパティ名を使用
+const users = [
+  { name: 'Alice', active: true },
+  { name: 'Bob', active: false },
+  { name: 'Charlie', active: true },
 ];
-filter(arr, { name: 'Bob' });
-// => [{ id: 2, name: 'Bob' }]
+filter(users, 'active');
+// 戻り値: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
 
-// プロパティ-値ペアを使う場合
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-filter(arr, ['name', 'Alice']);
-// => [{ id: 1, name: 'Alice' }]
+// 部分オブジェクトを使用
+filter(users, { active: true });
+// 戻り値: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
 
-// プロパティ名を使う場合
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-  { id: 3, age: 28 },
-];
-filter(arr, 'name');
-// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+// プロパティ-値ペアを使用
+filter(users, ['active', true]);
+// 戻り値: [{ name: 'Alice', active: true }, { name: 'Charlie', active: true }]
 ```
 
-### オブジェクトの場合
+オブジェクトに対しても同じように動作し、条件を満たす値の配列を返します。
 
 ```typescript
 import { filter } from 'es-toolkit/compat';
 
-// 検査関数を使う場合
-const obj = { a: 1, b: 2, c: 3 };
-filter(obj, item => item > 2);
-// => [3]
-
-// 部分オブジェクトを使う場合
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-};
-filter(obj, { name: 'Bob' });
-// => [{ id: 2, name: 'Bob' }]
-
-// プロパティ-値ペアを使う場合
-const obj = {
-  alice: { id: 1, name: 'Alice' },
-  bob: { id: 2, name: 'Bob' },
-};
-filter(obj, ['name', 'Alice']);
-// => [{ id: 1, name: 'Alice' }]
-
-// プロパティ名を使う場合
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-  c: { id: 3, age: 28 },
-};
-filter(obj, 'name');
-// => [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+const scores = { math: 90, english: 75, science: 85 };
+filter(scores, score => score >= 80);
+// 戻り値: [90, 85]
 ```
+
+`null` または `undefined` は空の配列として処理されます。
+
+```typescript
+import { filter } from 'es-toolkit/compat';
+
+filter(null, x => x > 0);
+// 戻り値: []
+
+filter(undefined, x => x > 0);
+// 戻り値: []
+```
+
+#### パラメータ
+
+- `collection` (`ArrayLike<T> | Record<string, unknown> | null | undefined`): フィルタリングする配列またはオブジェクトです。
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`): フィルタリング条件です。関数、部分オブジェクト、プロパティ-値ペア、プロパティ名を使用できます。
+
+#### 戻り値
+
+(`T[]`): 条件を満たす要素で構成された新しい配列を返します。

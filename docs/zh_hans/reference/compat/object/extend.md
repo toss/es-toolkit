@@ -1,40 +1,58 @@
-# extend
+# extend (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.assign()`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `extend` 函数由于处理从原型链继承的属性的复杂逻辑而运行较慢。
+
+请使用更快、更现代的 `Object.assign()`。
+
 :::
 
-将 `source` 对象的属性值分配给 `object`。它还包括从原型链继承的属性。
-
-在 `source` 和 `object` 中具有相同值的属性将不会被覆盖。
-
-它是 [assignIn](./assignIn.md) 的别名。
-
-## 签名
+将对象的自有属性和继承属性复制到另一个对象。
 
 ```typescript
-function extend<O, S>(object: O, source: S): O & S;
-function extend<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function extend<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function extend<O, S1, S2, S3, S4>(object: O, source1: S1, source2: S2, source3: S3, source4: S4): O & S1 & S2 & S3;
-function extend(object: any, ...sources: any[]): any;
+const result = extend(object, source);
 ```
 
-### 参数
+## 用法
 
-- `object` (`any`): 将属性分配给目标对象。
-- `sources` (`...any[]`): 其属性将分配给目标对象的源对象。
+### `extend(object, ...sources)`
 
-### 返回值
-
-(`any`): 分配了源对象属性的更新目标对象。
-
-## 示例
+使用 `extend` 将属性从一个对象复制到另一个对象。类似于 `Object.assign()`,但也会复制继承的属性。此函数是 `assignIn` 的别名。
 
 ```typescript
+import { extend } from 'es-toolkit/compat';
+
+// 复制基本属性
 const target = { a: 1 };
-const result = extend(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+extend(target, { b: 2 }, { c: 3 });
+// 返回值: { a: 1, b: 2, c: 3 }
+
+// 也会复制继承的属性
+function Parent() {
+  this.a = 1;
+}
+Parent.prototype.b = 2;
+
+const source = new Parent();
+extend({}, source);
+// 返回值: { a: 1, b: 2 }
 ```
+
+当存在相同属性时,后面的源对象的值会覆盖前面的。
+
+```typescript
+import { extend } from 'es-toolkit/compat';
+
+extend({ a: 1, b: 2 }, { b: 3 }, { c: 4 });
+// 返回值: { a: 1, b: 3, c: 4 }
+```
+
+#### 参数
+
+- `object` (`any`): 接收属性的目标对象。
+- `...sources` (`any[]`): 提供属性的源对象。
+
+#### 返回值
+
+(`any`): 返回复制了属性的对象。第一个参数 `object` 会被修改。
