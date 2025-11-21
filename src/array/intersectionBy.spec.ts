@@ -24,4 +24,34 @@ describe('intersectionBy', () => {
     const result = intersectionBy(array1, array2, value => value.id);
     expect(result).toEqual([{ id: 2, csv: 1 }]);
   });
+
+  it('should return the intersection of three arrays with `mapper`', () => {
+    expect(intersectionBy([1.2, 2.1, 3.3], [1.4, 2.3], [2.5, 3.1], Math.floor)).toStrictEqual([2.1]);
+    expect(
+      intersectionBy(
+        [{ foo: 1 }, { foo: 2 }, { foo: 3 }],
+        [{ foo: 2 }, { foo: 3 }],
+        [{ foo: 2 }, { foo: 4 }],
+        x => x.foo
+      )
+    ).toStrictEqual([{ foo: 2 }]);
+  });
+
+  it('should return the intersection of four or more arrays with `mapper`', () => {
+    expect(intersectionBy([1, 2, 3, 4], [2, 3, 4], [3, 4, 5], [3, 4, 6], x => x)).toStrictEqual([3, 4]);
+    expect(
+      intersectionBy(
+        [{ id: 1 }, { id: 2 }, { id: 3 }],
+        [{ id: 2 }, { id: 3 }],
+        [{ id: 2 }, { id: 3 }],
+        [{ id: 2 }, { id: 4 }],
+        x => x.id
+      )
+    ).toStrictEqual([{ id: 2 }]);
+  });
+
+  it('should return empty array when no common elements exist across all arrays', () => {
+    expect(intersectionBy([1, 2], [3, 4], [5, 6], x => x)).toStrictEqual([]);
+    expect(intersectionBy([{ foo: 1 }], [{ foo: 2 }], [{ foo: 3 }], x => x.foo)).toStrictEqual([]);
+  });
 });
