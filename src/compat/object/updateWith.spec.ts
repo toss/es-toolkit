@@ -182,7 +182,7 @@ describe('updateWith', () => {
       });
 
       updateWith(object, 'a', updater, noop);
-      expect(pass);
+      expect(pass).toBe(true);
     });
   });
 

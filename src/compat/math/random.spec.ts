@@ -56,9 +56,9 @@ describe('random', () => {
         const result = random(min, max);
         return result >= min && result <= max;
       })
-    ).toBeTruthy();
+    ).toBe(true);
 
-    expect(array.some(() => random(Number.MAX_SAFE_INTEGER)));
+    expect(array.some(() => random(Number.MAX_SAFE_INTEGER))).toBe(true);
   });
 
   it('should coerce arguments to finite numbers', () => {
