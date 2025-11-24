@@ -12,7 +12,7 @@ describe('now', () => {
 
     await delay(32);
 
-    expect(now() > actual);
+    expect(now()).toBeGreaterThan(actual);
   });
 
   it('should match the type of lodash', () => {

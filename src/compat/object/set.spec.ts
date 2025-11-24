@@ -254,7 +254,7 @@ describe('set', () => {
       });
 
       set(object, 'a', updater);
-      expect(pass);
+      expect(pass).toBe(true);
     });
   });
 
