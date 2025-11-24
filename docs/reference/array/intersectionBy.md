@@ -1,16 +1,16 @@
 # intersectionBy
 
-Returns the intersection of two or more arrays based on a mapping function.
+Returns a new array containing the intersection of two arrays based on the result of a transformation function.
 
 ```typescript
-const result = intersectionBy(firstArr, secondArr, ...otherArr, mapper);
+const result = intersectionBy(firstArr, secondArr, mapper);
 ```
 
 ## Usage
 
-### `intersectionBy(firstArr, secondArr, ...otherArr?, mapper)`
+### `intersectionBy(firstArr, secondArr, mapper)`
 
-Use `intersectionBy` when you want to find common elements across two or more arrays based on a specific property or transformed value. It compares the results of applying a transformation function to each element to compute the intersection. This is useful when comparing object arrays by a specific property or when complex transformation logic is needed.
+Use `intersectionBy` when you want to find common elements in two arrays based on a specific attribute or transformed value. It compares the results of processing each element with a transformation function to find the intersection. This is useful when comparing by a specific property in object arrays or when complex transformation logic is needed.
 
 ```typescript
 import { intersectionBy } from 'es-toolkit/array';
@@ -56,26 +56,12 @@ intersectionBy(numbers1, numbers2, num => Math.abs(num));
 // Returns: [-2, 3, -4]
 ```
 
-You can also compare three or more arrays.
-
-```typescript
-import { intersectionBy } from 'es-toolkit/array';
-
-// Find elements that exist in all three arrays
-const arr1 = [{ id: 1 }, { id: 2 }, { id: 3 }];
-const arr2 = [{ id: 2 }, { id: 3 }];
-const arr3 = [{ id: 2 }, { id: 4 }];
-intersectionBy(arr1, arr2, arr3, item => item.id);
-// Returns: [{ id: 2 }, { id: 3 }]
-```
-
 #### Parameters
 
 - `firstArr` (`readonly T[]`): The first array to compare.
 - `secondArr` (`readonly U[]`): The second array to compare.
-- `...otherArr` (`readonly U[]`, optional): Additional arrays to compare.
 - `mapper` (`(item: T | U) => unknown`): A function that transforms each element to create comparison criteria.
 
 #### Returns
 
-(`T[]`): Returns a new array containing elements from the first array that are present in all other arrays based on the transformed values. The result consists of elements from the first array.
+(`T[]`): Returns a new array containing elements commonly included in both arrays based on the result of the transformation function. The result consists of elements from the first array.
