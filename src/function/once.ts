@@ -31,7 +31,9 @@ export function once<F extends (...args: any[]) => any>(func: F): F;
  * initialize(); // Logs: 'Initialized!' and returns true
  * initialize(); // Returns true without logging
  */
-export function once<F extends (() => any) | ((...args: any[]) => void)>(func: F): F {
+export function once<F extends (() => any) | ((...args: any[]) => void)>(
+  func: F
+): (...args: Parameters<F>) => ReturnType<F> {
   let called = false;
   let cache: ReturnType<F>;
 
@@ -42,5 +44,5 @@ export function once<F extends (() => any) | ((...args: any[]) => void)>(func: F
     }
 
     return cache;
-  } as F;
+  };
 }
