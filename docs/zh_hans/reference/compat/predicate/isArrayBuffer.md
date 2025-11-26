@@ -41,4 +41,4 @@ isArrayBuffer(undefined); // false
 
 #### 返回值
 
-(`value is ArrayBuffer`): 如果值是 ArrayBuffer 则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值是 ArrayBuffer 则返回 `true`，否则返回 `false`。

@@ -68,4 +68,4 @@ isString(undefined); // false
 
 #### 반환 값
 
-(`value is string`): 값이 문자열이면 `true`, 아니면 `false`를 반환해요.
+(`boolean`): 값이 문자열이면 `true`, 아니면 `false`를 반환해요.

@@ -150,4 +150,4 @@ console.log(isPrimitive(strObj.valueOf())); // true
 
 #### 戻り値
 
-(`value is null | undefined | string | number | boolean | symbol | bigint`): 値が原始値の場合は`true`、そうでない場合は`false`を返します。
+(`boolean`): 値が原始値の場合は`true`、そうでない場合は`false`を返します。

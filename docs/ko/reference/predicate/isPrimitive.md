@@ -150,4 +150,4 @@ console.log(isPrimitive(strObj.valueOf())); // true
 
 #### 반환 값
 
-(`value is null | undefined | string | number | boolean | symbol | bigint`): 값이 원시 값이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 원시 값이면 `true`, 그렇지 않으면 `false`를 반환해요.

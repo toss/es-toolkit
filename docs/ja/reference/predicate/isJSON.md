@@ -128,4 +128,4 @@ console.log(isJSON("{ 'name': 'John' }")); // false (single quotes)
 
 #### 戻り値
 
-(`value is string`): 値が有効な JSON 文字列の場合は `true`、そうでなければ `false` を返します。
+(`boolean`): 値が有効な JSON 文字列の場合は `true`、そうでなければ `false` を返します。

@@ -67,4 +67,4 @@ isSymbol(mySymbol); // true
 
 #### 반환 값
 
-(`value is symbol`): 값이 심볼이면 `true`, 아니면 `false`를 반환해요.
+(`boolean`): 값이 심볼이면 `true`, 아니면 `false`를 반환해요.

@@ -89,4 +89,4 @@ greet('김철수', '선생'); // "안녕하세요, 김철수선생!"
 
 #### 반환 값
 
-(`x is undefined`): 값이 `undefined`이면 `true`, 아니면 `false`를 반환해요.
+(`boolean`): 값이 `undefined`이면 `true`, 아니면 `false`를 반환해요.

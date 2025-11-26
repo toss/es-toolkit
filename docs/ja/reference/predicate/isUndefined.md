@@ -37,4 +37,4 @@ console.log(isUndefined([])); // false
 
 #### 戻り値
 
-(`value is undefined`): 値が undefined の場合は `true`、それ以外の場合は `false` を返します。
+(`boolean`): 値が undefined の場合は `true`、それ以外の場合は `false` を返します。

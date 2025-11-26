@@ -150,4 +150,4 @@ console.log(isPrimitive(strObj.valueOf())); // true
 
 #### 返回值
 
-(`value is null | undefined | string | number | boolean | symbol | bigint`): 如果值为原始值则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为原始值则返回 `true`，否则返回 `false`。

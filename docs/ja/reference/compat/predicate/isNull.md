@@ -65,4 +65,4 @@ handleValue('hello'); // "値があります: hello"
 
 #### 戻り値
 
-(`value is null`): 値が `null` の場合は `true`、そうでなければ `false` を返します。
+(`boolean`): 値が `null` の場合は `true`、そうでなければ `false` を返します。

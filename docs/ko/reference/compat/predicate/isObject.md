@@ -49,4 +49,4 @@ isObject(123);
 
 #### 반환 값
 
-(`value is object`): 값이 객체면 `true`, 아니면 `false`를 반환해요.
+(`boolean`): 값이 객체면 `true`, 아니면 `false`를 반환해요.

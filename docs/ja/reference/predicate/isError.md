@@ -43,4 +43,4 @@ function handleError(value: unknown) {
 
 #### 戻り値
 
-(`value is Error`): 値が `Error` オブジェクトの場合は `true`、そうでなければ `false` を返します。
+(`boolean`): 値が `Error` オブジェクトの場合は `true`、そうでなければ `false` を返します。

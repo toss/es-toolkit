@@ -89,4 +89,4 @@ greet('Kim', 'Dr.'); // "Hello, Dr. Kim!"
 
 #### Returns
 
-(`x is undefined`): Returns `true` if the value is `undefined`, `false` otherwise.
+(`boolean`): Returns `true` if the value is `undefined`, `false` otherwise.

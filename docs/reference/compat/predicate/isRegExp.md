@@ -79,4 +79,4 @@ isRegExp(regex); // true
 
 #### Returns
 
-(`value is RegExp`): Returns `true` if the value is a regular expression, `false` otherwise.
+(`boolean`): Returns `true` if the value is a regular expression, `false` otherwise.

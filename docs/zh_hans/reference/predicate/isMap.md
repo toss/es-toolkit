@@ -45,4 +45,4 @@ function processValue(value: unknown) {
 
 #### 返回值
 
-(`value is Map<any, any>`): 如果值为Map则返回`true`，否则返回`false`。
+(`boolean`): 如果值为Map则返回`true`，否则返回`false`。

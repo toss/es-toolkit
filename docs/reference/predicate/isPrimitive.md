@@ -150,4 +150,4 @@ console.log(isPrimitive(strObj.valueOf())); // true
 
 #### Returns
 
-(`value is null | undefined | string | number | boolean | symbol | bigint`): Returns `true` if the value is a primitive, `false` otherwise.
+(`boolean`): Returns `true` if the value is a primitive, `false` otherwise.

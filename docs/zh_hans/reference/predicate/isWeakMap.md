@@ -38,4 +38,4 @@ console.log(isWeakMap(undefined)); // false
 
 #### 返回值
 
-(`value is WeakMap<WeakKey, any>`): 如果值是 WeakMap 实例,则返回 `true`,否则返回 `false`。
+(`boolean`): 如果值是 WeakMap 实例,则返回 `true`,否则返回 `false`。

@@ -68,4 +68,4 @@ if (typeof File === 'undefined') {
 
 #### 返回值
 
-(`value is File`): 如果值为 File 对象则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为 File 对象则返回 `true`，否则返回 `false`。

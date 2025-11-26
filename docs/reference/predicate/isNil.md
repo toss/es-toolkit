@@ -47,4 +47,4 @@ function processValue(value: string | null | undefined) {
 
 #### Returns
 
-(`value is null | undefined`): Returns `true` if the value is `null` or `undefined`, `false` otherwise.
+(`boolean`): Returns `true` if the value is `null` or `undefined`, `false` otherwise.

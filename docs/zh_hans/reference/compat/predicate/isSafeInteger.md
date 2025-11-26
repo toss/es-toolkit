@@ -54,5 +54,5 @@ isSafeInteger(NaN); // false
 
 #### 返回值
 
-(`value is number`): 如果值为安全整数则返回 `true`，否则返回 `false`。  
+(`boolean`): 如果值为安全整数则返回 `true`，否则返回 `false`。  
 当返回 `true` 时，TypeScript 会将 `value` 的类型缩小为 `number`。

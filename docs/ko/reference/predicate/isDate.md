@@ -69,4 +69,4 @@ function validateBirthDate(value: unknown): boolean {
 
 #### 반환 값
 
-(`value is Date`): 값이 Date 객체이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 Date 객체이면 `true`, 그렇지 않으면 `false`를 반환해요.

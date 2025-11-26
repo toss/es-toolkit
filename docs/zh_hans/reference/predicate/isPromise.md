@@ -135,4 +135,4 @@ function withTimeout<T>(valueOrPromise: T | Promise<T>, timeoutMs: number) {
 
 #### 返回值
 
-(`value is Promise<any>`): 如果值是 Promise 实例，则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值是 Promise 实例，则返回 `true`，否则返回 `false`。

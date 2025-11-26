@@ -43,4 +43,4 @@ function handleError(value: unknown) {
 
 #### 返回值
 
-(`value is Error`): 如果值为 `Error` 对象则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为 `Error` 对象则返回 `true`，否则返回 `false`。

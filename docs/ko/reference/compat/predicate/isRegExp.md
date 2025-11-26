@@ -79,4 +79,4 @@ isRegExp(regex); // true
 
 #### 반환 값
 
-(`value is RegExp`): 값이 정규식이면 `true`, 아니면 `false`를 반환해요.
+(`boolean`): 값이 정규식이면 `true`, 아니면 `false`를 반환해요.

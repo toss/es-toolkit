@@ -54,4 +54,4 @@ isNumber(null);
 
 #### 戻り値
 
-(`value is number`): 値が数値の場合は `true`、そうでなければ `false` を返します。
+(`boolean`): 値が数値の場合は `true`、そうでなければ `false` を返します。

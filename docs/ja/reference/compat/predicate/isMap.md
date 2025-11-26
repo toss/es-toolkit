@@ -60,4 +60,4 @@ isMap(Object.create(null)); // false
 
 #### 戻り値
 
-(`value is Map<any, any>`): 値がMapの場合は`true`、そうでない場合は`false`を返します。
+(`boolean`): 値がMapの場合は`true`、そうでない場合は`false`を返します。

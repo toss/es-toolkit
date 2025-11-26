@@ -41,4 +41,4 @@ console.log(isTypedArray(undefined)); // false
 
 #### Returns
 
-(`value is Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | BigUint64Array | Int8Array | Int16Array | Int32Array | BigInt64Array | Float32Array | Float64Array`): Returns `true` if the value is a TypedArray instance, `false` otherwise.
+(`boolean`): Returns `true` if the value is a TypedArray instance, `false` otherwise.

@@ -128,4 +128,4 @@ console.log(isJSONArray(typedArray)); // false
 
 #### 戻り値
 
-(`value is any[]`): 値が有効な JSON 配列の場合は `true`、そうでなければ `false` を返します。
+(`boolean`): 値が有効な JSON 配列の場合は `true`、そうでなければ `false` を返します。

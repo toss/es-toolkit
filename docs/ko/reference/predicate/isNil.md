@@ -47,4 +47,4 @@ function processValue(value: string | null | undefined) {
 
 #### 반환 값
 
-(`value is null | undefined`): 값이 `null` 또는 `undefined`면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 `null` 또는 `undefined`면 `true`, 그렇지 않으면 `false`를 반환해요.

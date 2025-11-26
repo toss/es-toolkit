@@ -67,4 +67,4 @@ async function handleDownload(data: unknown, filename: string) {
 
 #### 반환 값
 
-(`value is Blob`): 값이 Blob 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 Blob 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.

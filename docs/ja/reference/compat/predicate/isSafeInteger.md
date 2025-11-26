@@ -56,5 +56,5 @@ isSafeInteger(NaN); // false
 
 #### 戻り値
 
-(`value is number`): 値が安全な整数の場合は `true`、そうでなければ `false` を返します。  
+(`boolean`): 値が安全な整数の場合は `true`、そうでなければ `false` を返します。  
 `true` を返す場合、TypeScript は `value` の型を `number` に絞り込みます。

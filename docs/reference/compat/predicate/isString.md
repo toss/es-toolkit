@@ -68,4 +68,4 @@ isString(undefined); // false
 
 #### Returns
 
-(`value is string`): Returns `true` if the value is a string, `false` otherwise.
+(`boolean`): Returns `true` if the value is a string, `false` otherwise.

@@ -68,4 +68,4 @@ function validateResponse(response: APIResponse) {
 
 #### 반환 값
 
-(`value is boolean`): 값이 `true` 또는 `false`이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 `true` 또는 `false`이면 `true`, 그렇지 않으면 `false`를 반환해요.

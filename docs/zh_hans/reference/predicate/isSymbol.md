@@ -108,4 +108,4 @@ console.log(manager.hasMetadata(versionSymbol)); // true
 
 #### 返回值
 
-(`value is symbol`): 如果值是 symbol,则返回 `true`,否则返回 `false`。
+(`boolean`): 如果值是 symbol,则返回 `true`,否则返回 `false`。

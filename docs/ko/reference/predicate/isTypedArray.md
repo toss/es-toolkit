@@ -41,4 +41,4 @@ console.log(isTypedArray(undefined)); // false
 
 #### 반환 값
 
-(`value is Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | BigUint64Array | Int8Array | Int16Array | Int32Array | BigInt64Array | Float32Array | Float64Array`): 값이 TypedArray 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 TypedArray 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.

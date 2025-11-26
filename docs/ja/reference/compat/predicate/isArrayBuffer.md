@@ -41,4 +41,4 @@ isArrayBuffer(undefined); // false
 
 #### 戻り値
 
-(`value is ArrayBuffer`): 値がArrayBufferの場合は`true`、そうでない場合は`false`を返します。
+(`boolean`): 値がArrayBufferの場合は`true`、そうでない場合は`false`を返します。

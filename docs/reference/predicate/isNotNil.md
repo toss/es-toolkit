@@ -50,4 +50,4 @@ function processItems(items: (string | null | undefined)[]) {
 
 #### Returns
 
-(`value is T`): Returns `true` if the value is neither `null` nor `undefined`, `false` otherwise.
+(`boolean`): Returns `true` if the value is neither `null` nor `undefined`, `false` otherwise.

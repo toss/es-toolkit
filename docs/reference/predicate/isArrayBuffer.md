@@ -78,4 +78,4 @@ function handleWebSocketMessage(data: unknown) {
 
 #### Returns
 
-(`value is ArrayBuffer`): Returns `true` if the value is an `ArrayBuffer`, `false` otherwise.
+(`boolean`): Returns `true` if the value is an `ArrayBuffer`, `false` otherwise.

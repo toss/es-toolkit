@@ -135,4 +135,4 @@ function withTimeout<T>(valueOrPromise: T | Promise<T>, timeoutMs: number) {
 
 #### 戻り値
 
-(`value is Promise<any>`): 値が Promise インスタンスの場合は `true`、それ以外の場合は `false` を返します。
+(`boolean`): 値が Promise インスタンスの場合は `true`、それ以外の場合は `false` を返します。

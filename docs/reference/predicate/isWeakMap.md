@@ -38,4 +38,4 @@ console.log(isWeakMap(undefined)); // false
 
 #### Returns
 
-(`value is WeakMap<WeakKey, any>`): Returns `true` if the value is a WeakMap instance, `false` otherwise.
+(`boolean`): Returns `true` if the value is a WeakMap instance, `false` otherwise.

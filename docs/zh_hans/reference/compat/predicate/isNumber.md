@@ -52,4 +52,4 @@ isNumber(null);
 
 #### 返回值
 
-(`value is number`): 如果值为数字则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为数字则返回 `true`，否则返回 `false`。

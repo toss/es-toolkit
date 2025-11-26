@@ -175,4 +175,4 @@ console.log(isJSONObject([])); // false (数组是 JSON 值但不是 JSON "对�
 
 #### 返回值
 
-(`value is Record<string, any>`): 如果值为有效的 JSON 对象则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为有效的 JSON 对象则返回 `true`，否则返回 `false`。

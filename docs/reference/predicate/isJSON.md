@@ -128,4 +128,4 @@ console.log(isJSON("{ 'name': 'John' }")); // false (single quotes)
 
 #### Returns
 
-(`value is string`): Returns `true` if the value is a valid JSON string, `false` otherwise.
+(`boolean`): Returns `true` if the value is a valid JSON string, `false` otherwise.

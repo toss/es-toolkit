@@ -180,4 +180,4 @@ console.log(isJSONValue(obj)); // true (treated as plain object)
 
 #### Returns
 
-(`value is Record<string, any> | any[] | string | number | boolean | null`): Returns `true` if the value is a valid JSON value, `false` otherwise.
+(`boolean`): Returns `true` if the value is a valid JSON value, `false` otherwise.

@@ -49,4 +49,4 @@ isFunction(123); // false
 
 #### 返回值
 
-(`value is (...args: any[]) => any`): 如果值是函数则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值是函数则返回 `true`，否则返回 `false`。

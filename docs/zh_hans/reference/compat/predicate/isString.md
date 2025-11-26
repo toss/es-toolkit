@@ -66,4 +66,4 @@ isString(undefined); // false
 
 #### 返回值
 
-(`value is string`): 如果值为字符串则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为字符串则返回 `true`，否则返回 `false`。

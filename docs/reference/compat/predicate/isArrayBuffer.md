@@ -43,4 +43,4 @@ isArrayBuffer(undefined); // false
 
 #### Returns
 
-(`value is ArrayBuffer`): Returns `true` if the value is an ArrayBuffer, otherwise `false`.
+(`boolean`): Returns `true` if the value is an ArrayBuffer, otherwise `false`.

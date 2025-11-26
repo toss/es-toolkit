@@ -47,4 +47,4 @@ isArray(null);
 
 #### 返回值
 
-(`value is any[]`): 如果值是数组则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值是数组则返回 `true`，否则返回 `false`。

@@ -180,4 +180,4 @@ console.log(isJSONValue(obj)); // true (순수 객체로 처리)
 
 #### 반환 값
 
-(`value is Record<string, any> | any[] | string | number | boolean | null`): 값이 유효한 JSON 값이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 유효한 JSON 값이면 `true`, 그렇지 않으면 `false`를 반환해요.

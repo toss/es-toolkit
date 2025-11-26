@@ -246,4 +246,4 @@ console.log(clonedRegex?.test('TEST')); // true
 
 #### Returns
 
-(`value is RegExp`): Returns `true` if the value is a RegExp instance, `false` otherwise.
+(`boolean`): Returns `true` if the value is a RegExp instance, `false` otherwise.

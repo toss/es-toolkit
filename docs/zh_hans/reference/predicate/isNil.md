@@ -47,4 +47,4 @@ function processValue(value: string | null | undefined) {
 
 #### 返回值
 
-(`value is null | undefined`): 如果值为 `null` 或 `undefined` 则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为 `null` 或 `undefined` 则返回 `true`，否则返回 `false`。

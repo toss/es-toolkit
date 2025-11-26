@@ -60,4 +60,4 @@ isMap(Object.create(null)); // false
 
 #### Returns
 
-(`value is Map<any, any>`): Returns `true` if the value is a Map, `false` otherwise.
+(`boolean`): Returns `true` if the value is a Map, `false` otherwise.

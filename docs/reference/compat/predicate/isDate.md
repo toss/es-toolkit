@@ -43,4 +43,4 @@ isDate(undefined); // false
 
 #### Returns
 
-(`value is Date`): Returns `true` if the value is a Date object, `false` otherwise.
+(`boolean`): Returns `true` if the value is a Date object, `false` otherwise.

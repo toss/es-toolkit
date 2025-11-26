@@ -111,4 +111,4 @@ const utils = {
 
 #### Returns
 
-(`value is (...args: any[]) => any`): Returns `true` if the value is a function, `false` otherwise.
+(`boolean`): Returns `true` if the value is a function, `false` otherwise.

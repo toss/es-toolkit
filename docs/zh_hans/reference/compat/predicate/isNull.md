@@ -63,4 +63,4 @@ handleValue('hello'); // "有值: hello"
 
 #### 返回值
 
-(`value is null`): 如果值为 `null` 则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为 `null` 则返回 `true`，否则返回 `false`。

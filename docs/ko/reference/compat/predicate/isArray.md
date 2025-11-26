@@ -47,4 +47,4 @@ isArray(null);
 
 #### 반환 값
 
-(`value is any[]`): 값이 배열이면 `true`, 아니면 `false`를 반환해요.
+(`boolean`): 값이 배열이면 `true`, 아니면 `false`를 반환해요.

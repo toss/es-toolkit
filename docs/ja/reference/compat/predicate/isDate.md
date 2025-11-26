@@ -43,4 +43,4 @@ isDate(undefined); // false
 
 #### 戻り値
 
-(`value is Date`): 値がDateオブジェクトの場合は`true`、そうでない場合は`false`を返します。
+(`boolean`): 値がDateオブジェクトの場合は`true`、そうでない場合は`false`を返します。

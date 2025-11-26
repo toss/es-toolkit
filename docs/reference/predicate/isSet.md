@@ -144,4 +144,4 @@ console.log(intersection); // Set { 3, 4 }
 
 #### Returns
 
-(`value is Set<any>`): Returns `true` if the value is a Set instance, `false` otherwise.
+(`boolean`): Returns `true` if the value is a Set instance, `false` otherwise.

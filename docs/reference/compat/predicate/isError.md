@@ -44,4 +44,4 @@ isError(undefined); // false
 
 #### Returns
 
-(`value is Error`): Returns `true` if the value is an Error object, `false` otherwise.
+(`boolean`): Returns `true` if the value is an Error object, `false` otherwise.

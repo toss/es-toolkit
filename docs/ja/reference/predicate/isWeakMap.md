@@ -38,4 +38,4 @@ console.log(isWeakMap(undefined)); // false
 
 #### 戻り値
 
-(`value is WeakMap<WeakKey, any>`): 値が WeakMap インスタンスの場合は `true`、それ以外の場合は `false` を返します。
+(`boolean`): 値が WeakMap インスタンスの場合は `true`、それ以外の場合は `false` を返します。

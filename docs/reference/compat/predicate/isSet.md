@@ -64,4 +64,4 @@ isSet(Object.create(null)); // false
 
 #### Returns
 
-(`value is Set<any>`): Returns `true` if the value is a Set, `false` otherwise.
+(`boolean`): Returns `true` if the value is a Set, `false` otherwise.

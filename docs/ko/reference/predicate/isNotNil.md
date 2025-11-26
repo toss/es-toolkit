@@ -50,4 +50,4 @@ function processItems(items: (string | null | undefined)[]) {
 
 #### 반환 값
 
-(`value is T`): 값이 `null`도 `undefined`도 아니면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 `null`도 `undefined`도 아니면 `true`, 그렇지 않으면 `false`를 반환해요.

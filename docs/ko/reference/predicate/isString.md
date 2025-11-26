@@ -83,4 +83,4 @@ console.log(validateForm({ name: 123, email: 'invalid-email' }));
 
 #### 반환 값
 
-(`value is string`): 값이 문자열이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 문자열이면 `true`, 그렇지 않으면 `false`를 반환해요.

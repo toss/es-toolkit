@@ -47,4 +47,4 @@ isArray(null);
 
 #### Returns
 
-(`value is any[]`): Returns `true` if the value is an array, otherwise `false`.
+(`boolean`): Returns `true` if the value is an array, otherwise `false`.

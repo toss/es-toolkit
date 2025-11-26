@@ -49,4 +49,4 @@ isObject(123);
 
 #### Returns
 
-(`value is object`): Returns `true` if the value is an object, otherwise `false`.
+(`boolean`): Returns `true` if the value is an object, otherwise `false`.

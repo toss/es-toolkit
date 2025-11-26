@@ -91,4 +91,4 @@ setupWeakReference(regularMap, obj, 'data'); // "不是 WeakMap"
 
 #### 返回值
 
-(`value is WeakMap<object, any>`): 如果值为 WeakMap 则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为 WeakMap 则返回 `true`，否则返回 `false`。

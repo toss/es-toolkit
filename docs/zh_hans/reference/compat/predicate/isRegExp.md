@@ -77,4 +77,4 @@ isRegExp(regex); // true
 
 #### 返回值
 
-(`value is RegExp`): 如果值为正则表达式则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为正则表达式则返回 `true`，否则返回 `false`。
