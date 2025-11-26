@@ -167,12 +167,12 @@ describe('camelizeKeys', () => {
     const result = toCamelCaseKeys(input);
 
     expect(result).toEqual({
-      userID: 1,
+      userId: 1,
       apiToken: 'xxx',
     });
 
     expectTypeOf(result).toEqualTypeOf<{
-      userID: number;
+      userId: number;
       apiToken: string;
     }>();
   });
