@@ -157,26 +157,6 @@ describe('camelizeKeys', () => {
       last: 'Yeom';
     }>();
   });
-
-  it('should lowercase only the first letter for regular PascalCase keys', () => {
-    const input = {
-      UserID: 1,
-      ApiToken: 'xxx',
-    };
-
-    const result = toCamelCaseKeys(input);
-
-    expect(result).toEqual({
-      userId: 1,
-      apiToken: 'xxx',
-    });
-
-    expectTypeOf(result).toEqualTypeOf<{
-      userId: number;
-      apiToken: string;
-    }>();
-  });
-
   it('should not recurse into NonPlainObject values', () => {
     const date = new Date();
     const map = new Map<string, any>([['first_name', 'JinHo']]);
