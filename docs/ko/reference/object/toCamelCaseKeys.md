@@ -16,7 +16,7 @@ const camelCased = toCamelCaseKeys(obj);
 
 - `snake_case` → `camelCase` (예: `user_id` → `userId`)
 - `PascalCase` → `camelCase` (예: `UserId` → `userId`)
-- `ALL_CAPS` → `camelCase` (예: `FIRST_NAME` → `firstName`, `LAST` → `last`)
+- `uppercase keys` → `camelCase` (예: `FIRST_NAME` → `firstName`, `LAST` → `last`)
 
 ```typescript
 import { toCamelCaseKeys } from 'es-toolkit/object';
@@ -55,7 +55,7 @@ const nestedResult = toCamelCaseKeys(nested);
 //   }
 // }가 돼요
 
-// PascalCase와 ALL_CAPS 키도 변환돼요
+// PascalCase와 uppercase keys 키도 변환돼요
 const raw = { UserId: 1, FIRST_NAME: 'JinHo', LAST: 'Yeom' };
 const converted = toCamelCaseKeys(raw);
 // converted는 { userId: 1, firstName: 'JinHo', last: 'Yeom' }가 돼요

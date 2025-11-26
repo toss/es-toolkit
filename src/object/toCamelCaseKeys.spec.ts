@@ -139,7 +139,7 @@ describe('camelizeKeys', () => {
     expectTypeOf(result.c).toEqualTypeOf<Map<any, any>>();
   });
 
-  it('should convert ALL_CAPS keys to camelCase at both runtime and type level', () => {
+  it('should convert uppercase keys keys to camelCase at both runtime and type level', () => {
     const input = {
       FIRST_NAME: 'JinHo',
       LAST: 'Yeom',

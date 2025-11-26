@@ -16,7 +16,7 @@ const camelCased = toCamelCaseKeys(obj);
 
 - `snake_case` → `camelCase`（例: `user_id` → `userId`）
 - `PascalCase` → `camelCase`（例: `UserId` → `userId`）
-- `ALL_CAPS` → `camelCase`（例: `FIRST_NAME` → `firstName`, `LAST` → `last`）
+- `uppercase keys` → `camelCase`（例: `FIRST_NAME` → `firstName`, `LAST` → `last`）
 
 ```typescript
 import { toCamelCaseKeys } from 'es-toolkit/object';
@@ -55,7 +55,7 @@ const nestedResult = toCamelCaseKeys(nested);
 //   }
 // }になります
 
-// PascalCase と ALL_CAPS のキーも変換されます
+// PascalCase と uppercase keys のキーも変換されます
 const raw = { UserId: 1, FIRST_NAME: 'JinHo', LAST: 'Yeom' };
 const converted = toCamelCaseKeys(raw);
 // converted は { userId: 1, firstName: 'JinHo', last: 'Yeom' } になります

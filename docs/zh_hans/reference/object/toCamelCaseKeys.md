@@ -16,7 +16,7 @@ const camelCased = toCamelCaseKeys(obj);
 
 - `snake_case` → `camelCase`（例如 `user_id` → `userId`）
 - `PascalCase` → `camelCase`（例如 `UserId` → `userId`）
-- `ALL_CAPS` → `camelCase`（例如 `FIRST_NAME` → `firstName`, `LAST` → `last`）
+- `uppercase keys` → `camelCase`（例如 `FIRST_NAME` → `firstName`, `LAST` → `last`）
 
 ```typescript
 import { toCamelCaseKeys } from 'es-toolkit/object';
@@ -55,7 +55,7 @@ const nestedResult = toCamelCaseKeys(nested);
 //   }
 // }
 
-// PascalCase 和 ALL_CAPS 的键也会被转换
+// PascalCase 和 uppercase keys 的键也会被转换
 const raw = { UserId: 1, FIRST_NAME: 'JinHo', LAST: 'Yeom' };
 const converted = toCamelCaseKeys(raw);
 // converted 是 { userId: 1, firstName: 'JinHo', last: 'Yeom' }
