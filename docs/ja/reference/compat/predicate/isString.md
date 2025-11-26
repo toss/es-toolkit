@@ -68,4 +68,4 @@ isString(undefined); // false
 
 #### 戻り値
 
-(`boolean`): 値が文字列の場合は `true`、そうでなければ `false` を返します。
+(`value is string`): 値が文字列の場合は `true`、そうでなければ `false` を返します。

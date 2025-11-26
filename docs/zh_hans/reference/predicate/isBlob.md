@@ -67,4 +67,4 @@ async function handleDownload(data: unknown, filename: string) {
 
 #### 返回值
 
-(`boolean`): 如果值为 Blob 实例则返回 `true`，否则返回 `false`。
+(`value is Blob`): 如果值为 Blob 实例则返回 `true`，否则返回 `false`。

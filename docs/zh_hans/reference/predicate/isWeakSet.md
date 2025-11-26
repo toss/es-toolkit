@@ -38,4 +38,4 @@ console.log(isWeakSet(undefined)); // false
 
 #### 返回值
 
-(`boolean`): 如果值是 WeakSet 实例,则返回 `true`,否则返回 `false`。
+(`value is WeakSet<WeakKey>`): 如果值是 WeakSet 实例,则返回 `true`,否则返回 `false`。

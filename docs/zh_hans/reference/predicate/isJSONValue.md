@@ -180,4 +180,4 @@ console.log(isJSONValue(obj)); // true (视为纯对象)
 
 #### 返回值
 
-(`boolean`): 如果值为有效的 JSON 值则返回 `true`，否则返回 `false`。
+(`value is Record<string, any> | any[] | string | number | boolean | null`): 如果值为有效的 JSON 值则返回 `true`，否则返回 `false`。

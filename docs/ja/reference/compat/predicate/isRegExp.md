@@ -79,4 +79,4 @@ isRegExp(regex); // true
 
 #### 戻り値
 
-(`boolean`): 値が正規表現の場合は `true`、そうでなければ `false` を返します。
+(`value is RegExp`): 値が正規表現の場合は `true`、そうでなければ `false` を返します。

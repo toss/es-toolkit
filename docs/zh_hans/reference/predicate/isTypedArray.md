@@ -41,4 +41,4 @@ console.log(isTypedArray(undefined)); // false
 
 #### 返回值
 
-(`boolean`): 如果值是 TypedArray 实例,则返回 `true`,否则返回 `false`。
+(`value is Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | BigUint64Array | Int8Array | Int16Array | Int32Array | BigInt64Array | Float32Array | Float64Array`): 如果值是 TypedArray 实例,则返回 `true`,否则返回 `false`。

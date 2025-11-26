@@ -48,4 +48,4 @@ isBoolean([]); // false
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is of boolean type, otherwise `false`.
+(`value is boolean`): Returns `true` if the value is of boolean type, otherwise `false`.

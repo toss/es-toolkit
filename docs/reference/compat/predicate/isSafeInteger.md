@@ -56,5 +56,5 @@ isSafeInteger(NaN); // false
 
 #### Returns
 
-(`boolean`) Returns `true` if the value is a safe integer, otherwise `false`.  
+(`value is number`) Returns `true` if the value is a safe integer, otherwise `false`.  
 When `true`, TypeScript narrows the type of `value` to `number`.

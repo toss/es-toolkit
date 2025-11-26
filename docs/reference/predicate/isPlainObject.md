@@ -57,7 +57,7 @@ function processConfig(config: unknown) {
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a plain object, `false` otherwise.
+(`value is Record<PropertyKey, any>`): Returns `true` if the value is a plain object, `false` otherwise.
 
 ## Performance Comparison
 

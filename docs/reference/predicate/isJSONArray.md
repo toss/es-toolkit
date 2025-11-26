@@ -128,4 +128,4 @@ console.log(isJSONArray(typedArray)); // false
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a valid JSON array, `false` otherwise.
+(`value is any[]`): Returns `true` if the value is a valid JSON array, `false` otherwise.

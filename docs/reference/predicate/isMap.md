@@ -45,4 +45,4 @@ function processValue(value: unknown) {
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a Map, `false` otherwise.
+(`value is Map<any, any>`): Returns `true` if the value is a Map, `false` otherwise.

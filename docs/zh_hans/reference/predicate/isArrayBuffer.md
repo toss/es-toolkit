@@ -78,4 +78,4 @@ function handleWebSocketMessage(data: unknown) {
 
 #### 返回值
 
-(`boolean`): 如果值为 `ArrayBuffer` 则返回 `true`，否则返回 `false`。
+(`value is ArrayBuffer`): 如果值为 `ArrayBuffer` 则返回 `true`，否则返回 `false`。

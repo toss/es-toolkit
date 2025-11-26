@@ -175,4 +175,4 @@ console.log(isJSONObject([])); // false (配列は JSON 値ですが JSON "オ�
 
 #### 戻り値
 
-(`boolean`): 値が有効な JSON オブジェクトの場合は `true`、そうでなければ `false` を返します。
+(`value is Record<string, any>`): 値が有効な JSON オブジェクトの場合は `true`、そうでなければ `false` を返します。

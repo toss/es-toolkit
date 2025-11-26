@@ -44,4 +44,4 @@ isError(undefined); // false
 
 #### 戻り値
 
-(`boolean`): 値がErrorオブジェクトの場合は`true`、そうでない場合は`false`を返します。
+(`value is Error`): 値がErrorオブジェクトの場合は`true`、そうでない場合は`false`を返します。

@@ -111,4 +111,4 @@ const utils = {
 
 #### 戻り値
 
-(`boolean`): 値が関数の場合は `true`、そうでなければ `false` を返します。
+(`value is (...args: any[]) => any`): 値が関数の場合は `true`、そうでなければ `false` を返します。

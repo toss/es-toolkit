@@ -144,4 +144,4 @@ console.log(intersection); // Set { 3, 4 }
 
 #### 返回值
 
-(`boolean`): 如果值是 Set 实例,则返回 `true`,否则返回 `false`。
+(`value is Set<any>`): 如果值是 Set 实例,则返回 `true`,否则返回 `false`。

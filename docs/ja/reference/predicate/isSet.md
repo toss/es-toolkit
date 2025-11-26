@@ -144,4 +144,4 @@ console.log(intersection); // Set { 3, 4 }
 
 #### 戻り値
 
-(`boolean`): 値が Set インスタンスの場合は `true`、それ以外の場合は `false` を返します。
+(`value is Set<any>`): 値が Set インスタンスの場合は `true`、それ以外の場合は `false` を返します。

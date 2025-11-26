@@ -135,4 +135,4 @@ function withTimeout<T>(valueOrPromise: T | Promise<T>, timeoutMs: number) {
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a Promise instance, `false` otherwise.
+(`value is Promise<any>`): Returns `true` if the value is a Promise instance, `false` otherwise.

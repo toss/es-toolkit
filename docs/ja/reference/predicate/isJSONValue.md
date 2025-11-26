@@ -180,4 +180,4 @@ console.log(isJSONValue(obj)); // true (プレーンオブジェクトとして�
 
 #### 戻り値
 
-(`boolean`): 値が有効な JSON 値の場合は `true`、そうでなければ `false` を返します。
+(`value is Record<string, any> | any[] | string | number | boolean | null`): 値が有効な JSON 値の場合は `true`、そうでなければ `false` を返します。

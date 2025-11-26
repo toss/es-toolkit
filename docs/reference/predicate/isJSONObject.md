@@ -175,4 +175,4 @@ console.log(isJSONObject([])); // false (arrays are JSON values but not JSON "ob
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a valid JSON object, `false` otherwise.
+(`value is Record<string, any>`): Returns `true` if the value is a valid JSON object, `false` otherwise.

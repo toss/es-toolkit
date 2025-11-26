@@ -46,4 +46,4 @@ isBoolean([]); // false
 
 #### 戻り値
 
-(`boolean`): 値がboolean型の場合は`true`、そうでない場合は`false`を返します。
+(`value is boolean`): 値がboolean型の場合は`true`、そうでない場合は`false`を返します。

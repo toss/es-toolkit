@@ -65,4 +65,4 @@ handleValue('hello'); // "Value exists: hello"
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is `null`, `false` otherwise.
+(`value is null`): Returns `true` if the value is `null`, `false` otherwise.

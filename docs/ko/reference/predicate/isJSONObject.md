@@ -175,4 +175,4 @@ console.log(isJSONObject([])); // false (배열은 JSON 값이지만 JSON "객�
 
 #### 반환 값
 
-(`boolean`): 값이 유효한 JSON 객체이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`value is Record<string, any>`): 값이 유효한 JSON 객체이면 `true`, 그렇지 않으면 `false`를 반환해요.

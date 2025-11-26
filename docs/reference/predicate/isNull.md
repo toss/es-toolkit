@@ -56,4 +56,4 @@ console.log(isNil(undefined)); // true
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is `null`, `false` otherwise.
+(`value is null`): Returns `true` if the value is `null`, `false` otherwise.

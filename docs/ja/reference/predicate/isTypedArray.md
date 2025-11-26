@@ -41,4 +41,4 @@ console.log(isTypedArray(undefined)); // false
 
 #### 戻り値
 
-(`boolean`): 値が TypedArray インスタンスの場合は `true`、それ以外の場合は `false` を返します。
+(`value is Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | BigUint64Array | Int8Array | Int16Array | Int32Array | BigInt64Array | Float32Array | Float64Array`): 値が TypedArray インスタンスの場合は `true`、それ以外の場合は `false` を返します。

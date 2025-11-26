@@ -57,7 +57,7 @@ function processConfig(config: unknown) {
 
 #### 반환 값
 
-(`boolean`): 값이 순수 객체면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`value is Record<PropertyKey, any>`): 값이 순수 객체면 `true`, 그렇지 않으면 `false`를 반환해요.
 
 ## 성능 비교
 

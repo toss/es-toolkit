@@ -46,4 +46,4 @@ isBoolean([]); // false
 
 #### 返回值
 
-(`boolean`): 如果值是布尔类型则返回 `true`，否则返回 `false`。
+(`value is boolean`): 如果值是布尔类型则返回 `true`，否则返回 `false`。

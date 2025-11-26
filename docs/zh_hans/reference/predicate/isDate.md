@@ -69,4 +69,4 @@ function validateBirthDate(value: unknown): boolean {
 
 #### 返回值
 
-(`boolean`): 如果值为 Date 对象则返回 `true`，否则返回 `false`。
+(`value is Date`): 如果值为 Date 对象则返回 `true`，否则返回 `false`。

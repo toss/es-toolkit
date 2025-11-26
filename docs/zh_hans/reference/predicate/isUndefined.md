@@ -37,4 +37,4 @@ console.log(isUndefined([])); // false
 
 #### 返回值
 
-(`boolean`): 如果值是 undefined,则返回 `true`,否则返回 `false`。
+(`value is undefined`): 如果值是 undefined,则返回 `true`,否则返回 `false`。

@@ -49,4 +49,4 @@ isFunction(123); // false
 
 #### 반환 값
 
-(`boolean`): 값이 함수이면 `true`, 아니면 `false`를 반환해요.
+(`value is (...args: any[]) => any`): 값이 함수이면 `true`, 아니면 `false`를 반환해요.

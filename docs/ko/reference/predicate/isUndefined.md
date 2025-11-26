@@ -37,4 +37,4 @@ console.log(isUndefined([])); // false
 
 #### 반환 값
 
-(`boolean`): 값이 undefined이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`value is undefined`): 값이 undefined이면 `true`, 그렇지 않으면 `false`를 반환해요.

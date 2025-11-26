@@ -50,5 +50,5 @@ isFinite(undefined); // false
 
 #### 返回值
 
-(`boolean`): 如果值是有限数字则返回 `true`，否则返回 `false`。  
+(`value is number`): 如果值是有限数字则返回 `true`，否则返回 `false`。  
 当返回 `true` 时，TypeScript 会将 `value` 的类型缩小为 `number`。

@@ -38,4 +38,4 @@ console.log(isWeakSet(undefined)); // false
 
 #### 반환 값
 
-(`boolean`): 값이 WeakSet 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`value is WeakSet<WeakKey>`): 값이 WeakSet 인스턴스이면 `true`, 그렇지 않으면 `false`를 반환해요.

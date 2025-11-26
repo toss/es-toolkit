@@ -47,4 +47,4 @@ isArray(null);
 
 #### 戻り値
 
-(`boolean`): 値が配列の場合は`true`、そうでない場合は`false`を返します。
+(`value is any[]`): 値が配列の場合は`true`、そうでない場合は`false`を返します。

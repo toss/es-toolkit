@@ -128,4 +128,4 @@ console.log(isJSONArray(typedArray)); // false
 
 #### 返回值
 
-(`boolean`): 如果值为有效的 JSON 数组则返回 `true`，否则返回 `false`。
+(`value is any[]`): 如果值为有效的 JSON 数组则返回 `true`，否则返回 `false`。

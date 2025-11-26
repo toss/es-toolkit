@@ -67,4 +67,4 @@ async function handleDownload(data: unknown, filename: string) {
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a Blob instance, `false` otherwise.
+(`value is Blob`): Returns `true` if the value is a Blob instance, `false` otherwise.

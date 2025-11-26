@@ -68,4 +68,4 @@ if (typeof File === 'undefined') {
 
 #### 戻り値
 
-(`boolean`): 値が File オブジェクトの場合は `true`、そうでなければ `false` を返します。
+(`value is File`): 値が File オブジェクトの場合は `true`、そうでなければ `false` を返します。

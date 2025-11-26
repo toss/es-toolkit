@@ -128,4 +128,4 @@ console.log(isJSON("{ 'name': 'John' }")); // false (single quotes)
 
 #### 返回值
 
-(`boolean`): 如果值为有效的 JSON 字符串则返回 `true`，否则返回 `false`。
+(`value is string`): 如果值为有效的 JSON 字符串则返回 `true`，否则返回 `false`。

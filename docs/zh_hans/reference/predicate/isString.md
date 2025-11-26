@@ -83,4 +83,4 @@ console.log(validateForm({ name: 123, email: 'invalid-email' }));
 
 #### 返回值
 
-(`boolean`): 如果值是字符串,则返回 `true`,否则返回 `false`。
+(`value is string`): 如果值是字符串,则返回 `true`,否则返回 `false`。

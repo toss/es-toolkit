@@ -83,4 +83,4 @@ console.log(validateForm({ name: 123, email: 'invalid-email' }));
 
 #### 戻り値
 
-(`boolean`): 値が文字列の場合は `true`、それ以外の場合は `false` を返します。
+(`value is string`): 値が文字列の場合は `true`、それ以外の場合は `false` を返します。

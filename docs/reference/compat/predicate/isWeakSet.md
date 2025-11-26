@@ -113,4 +113,4 @@ function trackDOMElement(tracker: unknown, element: Element) {
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a WeakSet, `false` otherwise.
+(`value is WeakSet<object>`): Returns `true` if the value is a WeakSet, `false` otherwise.

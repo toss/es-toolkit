@@ -37,4 +37,4 @@ console.log(isUndefined([])); // false
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is undefined, `false` otherwise.
+(`value is undefined`): Returns `true` if the value is undefined, `false` otherwise.

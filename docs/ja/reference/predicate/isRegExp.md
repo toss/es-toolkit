@@ -246,4 +246,4 @@ console.log(clonedRegex?.test('TEST')); // true
 
 #### 戻り値
 
-(`boolean`): 値が RegExp インスタンスの場合は `true`、それ以外の場合は `false` を返します。
+(`value is RegExp`): 値が RegExp インスタンスの場合は `true`、それ以外の場合は `false` を返します。

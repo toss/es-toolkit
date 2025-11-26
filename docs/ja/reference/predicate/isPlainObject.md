@@ -57,7 +57,7 @@ function processConfig(config: unknown) {
 
 #### 戻り値
 
-(`boolean`): 値が純粋なオブジェクトの場合は`true`、そうでない場合は`false`を返します。
+(`value is Record<PropertyKey, any>`): 値が純粋なオブジェクトの場合は`true`、そうでない場合は`false`を返します。
 
 ## パフォーマンス比較
 

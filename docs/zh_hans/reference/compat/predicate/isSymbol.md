@@ -65,4 +65,4 @@ isSymbol(mySymbol); // true
 
 #### 返回值
 
-(`boolean`): 如果值为符号则返回 `true`，否则返回 `false`。
+(`value is symbol`): 如果值为符号则返回 `true`，否则返回 `false`。

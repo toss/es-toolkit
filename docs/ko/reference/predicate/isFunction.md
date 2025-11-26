@@ -111,4 +111,4 @@ const utils = {
 
 #### 반환 값
 
-(`boolean`): 값이 함수이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`value is (...args: any[]) => any`): 값이 함수이면 `true`, 그렇지 않으면 `false`를 반환해요.

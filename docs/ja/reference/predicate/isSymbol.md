@@ -108,4 +108,4 @@ console.log(manager.hasMetadata(versionSymbol)); // true
 
 #### 戻り値
 
-(`boolean`): 値が symbol の場合は `true`、それ以外の場合は `false` を返します。
+(`value is symbol`): 値が symbol の場合は `true`、それ以外の場合は `false` を返します。

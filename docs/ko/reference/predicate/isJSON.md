@@ -128,4 +128,4 @@ console.log(isJSON("{ 'name': 'John' }")); // false (single quotes)
 
 #### 반환 값
 
-(`boolean`): 값이 유효한 JSON 문자열이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`value is string`): 값이 유효한 JSON 문자열이면 `true`, 그렇지 않으면 `false`를 반환해요.

@@ -83,4 +83,4 @@ console.log(validateForm({ name: 123, email: 'invalid-email' }));
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a string, `false` otherwise.
+(`value is string`): Returns `true` if the value is a string, `false` otherwise.

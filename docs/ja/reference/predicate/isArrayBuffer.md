@@ -78,4 +78,4 @@ function handleWebSocketMessage(data: unknown) {
 
 #### 戻り値
 
-(`boolean`): 値が `ArrayBuffer` の場合は `true`、そうでなければ `false` を返します。
+(`value is ArrayBuffer`): 値が `ArrayBuffer` の場合は `true`、そうでなければ `false` を返します。

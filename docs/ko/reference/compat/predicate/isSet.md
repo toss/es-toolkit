@@ -64,4 +64,4 @@ isSet(Object.create(null)); // false
 
 #### 반환 값
 
-(`boolean`): 값이 Set이면 `true`, 아니면 `false`를 반환해요.
+(`value is Set<any>`): 값이 Set이면 `true`, 아니면 `false`를 반환해요.

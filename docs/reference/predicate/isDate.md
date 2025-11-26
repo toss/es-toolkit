@@ -69,4 +69,4 @@ function validateBirthDate(value: unknown): boolean {
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a Date object, `false` otherwise.
+(`value is Date`): Returns `true` if the value is a Date object, `false` otherwise.

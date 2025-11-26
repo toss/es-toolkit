@@ -59,4 +59,4 @@ isNil(undefined); // true
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is `null` or `undefined`, `false` otherwise.
+(`x is null | undefined`): Returns `true` if the value is `null` or `undefined`, `false` otherwise.

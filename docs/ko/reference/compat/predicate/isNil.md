@@ -59,4 +59,4 @@ isNil(undefined); // true
 
 #### 반환 값
 
-(`boolean`): 값이 `null` 또는 `undefined`이면 `true`, 아니면 `false`를 반환해요.
+(`x is null | undefined`): 값이 `null` 또는 `undefined`이면 `true`, 아니면 `false`를 반환해요.
