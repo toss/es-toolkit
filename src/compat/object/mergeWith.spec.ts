@@ -228,4 +228,12 @@ describe('mergeWith', () => {
     result = mergeWith({ a: 1 }, { a: undefined }, noop);
     expect(result.a).toBe(1);
   });
+
+  it('should not preserve object properties when nested object is replaced by array', () => {
+    const actual = mergeWith({ x: { a: 2 } }, { x: ['1'] }, noop);
+
+    expect(actual.x).toEqual(['1']);
+    expect(Object.keys(actual.x)).toEqual(['0']);
+    expect((actual.x as any).a).toBeUndefined();
+  });
 });
