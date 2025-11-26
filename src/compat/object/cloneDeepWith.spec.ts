@@ -174,4 +174,16 @@ describe('cloneDeepWith', function () {
     expect(cloned.a).toBe(2);
     expect(cloned.b).toBe(4);
   });
+
+  it('should handle circular references in objects with null prototype', () => {
+    const obj: any = Object.create(null);
+    obj.a = 1;
+    obj.self = obj; // circular reference
+
+    const cloned = cloneDeepWith(obj);
+
+    expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
+    expect(cloned.self).toBe(cloned);
+    expect(cloned.a).toBe(1);
+  });
 });
