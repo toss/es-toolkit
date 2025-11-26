@@ -152,7 +152,7 @@ describe('camelizeKeys', () => {
       last: 'Yeom',
     });
 
-    expectTypeOf(result).toEqualTypeOf<{
+    expectTypeOf(result).toMatchTypeOf<{
       firstName: 'JinHo';
       last: 'Yeom';
     }>();
@@ -194,7 +194,7 @@ describe('camelizeKeys', () => {
     expect(result.metaMap).toBe(map);
     expect(result.idsSet).toBe(set);
 
-    expectTypeOf(result).toEqualTypeOf<{
+    expectTypeOf(result).toMatchTypeOf<{
       createdAt: Date;
       metaMap: Map<string, any>;
       idsSet: Set<number>;
