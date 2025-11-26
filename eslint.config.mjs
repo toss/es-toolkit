@@ -54,10 +54,8 @@ export default defineConfig(
     rules: {
       ...vitest.configs.recommended.rules,
       'vitest/no-commented-out-tests': 'warn',
-      'vitest/expect-expect': 'warn',
       'vitest/valid-expect': 'warn',
       'vitest/no-identical-title': 'warn',
-      'vitest/valid-title': 'warn',
     },
   },
   prettier,

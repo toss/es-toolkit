@@ -37,19 +37,19 @@ describe('bind', () => {
     const bound = bind(fn, null);
     const actual = bound('a');
 
-    expect(actual[0] === null);
+    expect(actual[0]).toBe(null);
     expect(actual[1]).toBe('a');
 
     const bound2 = bind(fn, undefined);
     const actual2 = bound2('b');
 
-    expect(actual2[0] === undefined);
+    expect(actual2[0]).toBe(undefined);
     expect(actual2[1]).toBe('b');
 
     const bound3 = (bind as any)(fn);
     const actual3 = bound3('b');
 
-    expect(actual3[0] === undefined);
+    expect(actual3[0]).toBe(undefined);
     expect(actual3[1]).toBe('b');
   });
 
@@ -100,7 +100,7 @@ describe('bind', () => {
 
     expect(bound().a).toBe(1);
     expect(newBound.a).toBe(undefined);
-    expect(newBound instanceof Foo);
+    expect(newBound instanceof Foo).toBe(true);
   });
 
   it('should handle a number of arguments when called with the `new` operator', () => {
@@ -135,7 +135,7 @@ describe('bind', () => {
     const bound = (bind as any)(Foo) as any;
     const object = {};
 
-    expect(new bound() instanceof Foo);
+    expect(new bound() instanceof Foo).toBe(true);
     expect(new bound(true)).toBe(object);
   });
 

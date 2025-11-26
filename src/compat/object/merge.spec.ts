@@ -280,7 +280,7 @@ describe('merge', () => {
     // @ts-ignore
     let actual = merge(new Foo(), object);
 
-    expect(actual instanceof Foo);
+    expect(actual instanceof Foo).toBe(true);
     // eslint-disable-next-line
     // @ts-ignore
     expect(actual).toEqual(new Foo(object));
@@ -288,7 +288,7 @@ describe('merge', () => {
     // eslint-disable-next-line
     // @ts-ignore
     actual = merge([new Foo()], [object]);
-    expect(actual[0] instanceof Foo);
+    expect(actual[0] instanceof Foo).toBe(true);
     // eslint-disable-next-line
     // @ts-ignore
     expect(actual).toEqual([new Foo(object)]);

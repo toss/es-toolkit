@@ -31,7 +31,7 @@ describe('defer', () => {
     clearTimeout(timerId);
 
     setTimeout(() => {
-      expect(pass);
+      expect(pass).toBe(true);
       done();
     }, 32);
   });

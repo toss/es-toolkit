@@ -316,7 +316,7 @@ describe('template', () => {
     );
 
     const data = { a: 'A' };
-    expect(compiled(data), '\'a\').toBe("A"');
+    expect(compiled(data)).toBe('\'a\',"A"');
   });
 
   it('should work with templates containing newlines and comments', () => {
@@ -424,11 +424,8 @@ describe('template', () => {
   });
 
   it('should not error for non-object `data` and `options` values', () => {
-    template('')(1 as any);
-    expect(true, '`data` value');
-
-    template('', 1 as any)(1 as any);
-    expect(true, '`options` value');
+    expect(() => template('')(1 as any)).not.toThrow();
+    expect(() => template('', 1 as any)(1 as any)).not.toThrow();
   });
 
   it('should expose the source on compiled templates', () => {
