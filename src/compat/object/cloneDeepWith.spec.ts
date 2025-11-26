@@ -131,4 +131,47 @@ describe('cloneDeepWith', function () {
   it('should match the type of lodash', () => {
     expectTypeOf(cloneDeepWith).toEqualTypeOf<typeof cloneDeepWithLodash>();
   });
+
+  it('should clone objects with null prototype to have Object prototype (lodash compat)', () => {
+    const objWithNullProto = Object.create(null);
+    objWithNullProto.a = 1;
+    objWithNullProto.b = 2;
+
+    const cloned = cloneDeepWith(objWithNullProto);
+
+    // The cloned object should have Object.prototype, not null prototype
+    expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
+    expect(cloned.a).toBe(1);
+    expect(cloned.b).toBe(2);
+    expect(typeof cloned.toString).toBe('function');
+  });
+
+  it('should clone nested objects with null prototype to have Object prototype', () => {
+    const obj = Object.create(null);
+    obj.nested = Object.create(null);
+    obj.nested.value = 42;
+
+    const cloned = cloneDeepWith(obj);
+
+    expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
+    expect(Object.getPrototypeOf(cloned.nested)).toBe(Object.prototype);
+    expect(cloned.nested.value).toBe(42);
+  });
+
+  it('should clone objects with null prototype using customizer', () => {
+    const objWithNullProto = Object.create(null);
+    objWithNullProto.a = 1;
+    objWithNullProto.b = 2;
+
+    const cloned = cloneDeepWith(objWithNullProto, value => {
+      if (typeof value === 'number') {
+        return value * 2;
+      }
+      return undefined;
+    });
+
+    expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
+    expect(cloned.a).toBe(2);
+    expect(cloned.b).toBe(4);
+  });
 });
