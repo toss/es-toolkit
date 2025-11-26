@@ -55,7 +55,7 @@ const nestedResult = toCamelCaseKeys(nested);
 //   }
 // }
 
-// PascalCase and uppercase keys keys are also converted
+// PascalCase and uppercase keys are also converted
 const raw = { UserId: 1, FIRST_NAME: 'JinHo', LAST: 'Yeom' };
 const converted = toCamelCaseKeys(raw);
 // converted is { userId: 1, firstName: 'JinHo', last: 'Yeom' }
