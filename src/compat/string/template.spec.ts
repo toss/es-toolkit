@@ -121,6 +121,14 @@ describe('template', () => {
     expect(template('${"{" + value + "\\}"}')(data)).toBe('{2}');
   });
 
+  it('should disable ES6 template delimiters when "interpolate" is set', () => {
+    const data = { value: 2 };
+    expect(template('1${value}3', { interpolate: /<%=([\s\S]+?)%>/g })(data)).toBe('1${value}3');
+    expect(template('${"{" + value + "\\}"}', { interpolate: /<%=([\s\S]+?)%>/g })(data)).toBe(
+      '${"{" + value + "\\}"}'
+    );
+  });
+
   it('should support the "imports" option', () => {
     const compiled = template('<%= a %>', { imports: { a: 1 } });
     expect(compiled({})).toBe('1');
