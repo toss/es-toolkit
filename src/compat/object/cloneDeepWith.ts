@@ -1,6 +1,6 @@
 import { cloneDeepWith as cloneDeepWithToolkit } from '../../object/cloneDeepWith.ts';
 import { copyProperties } from '../../object/cloneDeepWith.ts';
-import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tags.ts';
+import { argumentsTag, booleanTag, numberTag, objectTag, stringTag } from '../_internal/tags.ts';
 
 type CloneDeepWithCustomizer<TObject> = (
   value: any,
@@ -78,46 +78,60 @@ export function cloneDeepWith<T>(value: T): T;
  * console.log(clonedArr === arr); // false
  */
 export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>): any | T {
-  return cloneDeepWithToolkit(obj, (value, key, object, stack) => {
+  const internalCustomizer = (value: any, key: PropertyKey | undefined, object: T, stack: Map<any, any>): any => {
     const cloned = customizer?.(value, key as any, object, stack);
 
     if (cloned !== undefined) {
       return cloned;
     }
 
-    if (typeof obj !== 'object') {
+    if (typeof value !== 'object' || value === null) {
       return undefined;
     }
 
-    switch (Object.prototype.toString.call(obj)) {
+    const tag = Object.prototype.toString.call(value);
+
+    switch (tag) {
       case numberTag:
       case stringTag:
       case booleanTag: {
-        // eslint-disable-next-line
-        // @ts-ignore
-        const result = new obj.constructor(obj?.valueOf()) as T;
-        copyProperties(result, obj);
+        const result = new value.constructor(value?.valueOf());
+        copyProperties(result, value);
         return result;
       }
 
       case argumentsTag: {
         const result = {} as any;
 
-        copyProperties(result, obj);
+        copyProperties(result, value);
 
-        // eslint-disable-next-line
-        // @ts-ignore
-        result.length = obj.length;
-        // eslint-disable-next-line
-        // @ts-ignore
-        result[Symbol.iterator] = obj[Symbol.iterator];
+        result.length = value.length;
+        result[Symbol.iterator] = value[Symbol.iterator];
 
-        return result as T;
+        return result;
+      }
+
+      case objectTag: {
+        // For plain objects with null prototype (Object.create(null)),
+        // lodash returns an object with Object.prototype
+        if (Object.getPrototypeOf(value) === null) {
+          if (stack.has(value)) {
+            return stack.get(value);
+          }
+
+          const result = {};
+          stack.set(value, result);
+          copyProperties(result, value, obj, stack, internalCustomizer);
+          return result;
+        }
+        return undefined;
       }
 
       default: {
         return undefined;
       }
     }
-  });
+  };
+
+  return cloneDeepWithToolkit(obj, internalCustomizer);
 }
