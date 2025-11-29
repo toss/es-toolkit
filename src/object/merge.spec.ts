@@ -118,4 +118,12 @@ describe('merge', () => {
     expect(result).toEqual({ a: 2 });
     expect(result.__proto__).toBe(Object.prototype);
   });
+
+  it('should handle top-level type mismatch consistently with nested behavior', () => {
+    const topLevelResult = merge(['1'] as any, { a: 2 });
+    const nestedResult = merge({ x: ['1'] }, { x: { a: 2 } } as any);
+
+    expect(topLevelResult).toEqual({ a: 2 });
+    expect(nestedResult.x).toEqual({ a: 2 });
+  });
 });

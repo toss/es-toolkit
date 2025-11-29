@@ -54,6 +54,16 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
   source: S,
   merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
 ): T & S {
+  if (Array.isArray(source)) {
+    if (!Array.isArray(target)) {
+      return mergeWith([] as unknown as T, source, merge);
+    }
+  } else if (isPlainObject(source)) {
+    if (!isPlainObject(target)) {
+      return mergeWith({} as unknown as T, source, merge);
+    }
+  }
+
   const sourceKeys = Object.keys(source) as Array<keyof T>;
 
   for (let i = 0; i < sourceKeys.length; i++) {
