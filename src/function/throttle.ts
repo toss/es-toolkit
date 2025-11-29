@@ -53,25 +53,9 @@ export function throttle<F extends (...args: any[]) => void>(
   throttleMs: number,
   { signal, edges = ['leading', 'trailing'] }: ThrottleOptions = {}
 ): ThrottledFunction<F> {
-  let pendingAt: number | null = null;
-
-  const debounced = debounce(func, throttleMs, { signal, edges });
-
-  const throttled = function (this: any, ...args: Parameters<F>) {
-    if (pendingAt == null) {
-      pendingAt = Date.now();
-    } else {
-      if (Date.now() - pendingAt >= throttleMs) {
-        pendingAt = Date.now();
-        debounced.cancel();
-      }
-    }
-
-    debounced.apply(this, args);
-  };
-
-  throttled.cancel = debounced.cancel;
-  throttled.flush = debounced.flush;
-
-  return throttled;
+  return debounce(func, throttleMs, {
+    signal,
+    edges,
+    maxWait: throttleMs,
+  });
 }
