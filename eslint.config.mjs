@@ -55,7 +55,6 @@ export default defineConfig(
       ...vitest.configs.recommended.rules,
       'vitest/no-commented-out-tests': 'warn',
       'vitest/valid-expect': 'warn',
-      'vitest/no-identical-title': 'warn',
     },
   },
   prettier,
