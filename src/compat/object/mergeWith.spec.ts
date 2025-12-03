@@ -7,6 +7,19 @@ import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
 
 describe('mergeWith', () => {
+  it('should replace `source1` Date with `source2` Date instead of deep merging', () => {
+    const source1 = { a: 1, b: { x: 1, y: 2 }, c: new Date('2025-01-01') };
+    const source2 = { b: { y: 3, z: 4 }, c: new Date('2000-01-01') };
+
+    const actual = mergeWith({}, source1, source2, noop);
+
+    expect(actual).toEqual({
+      a: 1,
+      b: { x: 1, y: 3, z: 4 },
+      c: new Date('2000-01-01'),
+    });
+  });
+
   it('should handle merging when `customizer` returns `undefined`', () => {
     let actual: any = mergeWith({ a: { b: [1, 1] } }, { a: { b: [0] } }, noop);
     expect(actual).toEqual({ a: { b: [0, 1] } });
