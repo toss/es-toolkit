@@ -313,7 +313,14 @@ function mergeWithDeep(
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
-    } else if (isObjectLike(targetValue) && isObjectLike(sourceValue)) {
+    } else if (
+      isObjectLike(targetValue) &&
+      isObjectLike(sourceValue) &&
+      (isPlainObject(targetValue) ||
+        isPlainObject(sourceValue) ||
+        isTypedArray(targetValue) ||
+        isTypedArray(sourceValue))
+    ) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
     } else if (targetValue == null && isPlainObject(sourceValue)) {
       target[key] = mergeWithDeep({}, sourceValue, merge, stack);
