@@ -9,6 +9,19 @@ import { isArguments } from '../predicate/isArguments';
 import { stubTrue } from '../util/stubTrue';
 
 describe('merge', () => {
+  it('should replace `source1` Date with `source2` Date instead of deep merging', () => {
+    const source1 = { a: 1, b: { x: 1, y: 2 }, c: new Date('2025-01-01') };
+    const source2 = { b: { y: 3, z: 4 }, c: new Date('2000-01-01') };
+
+    const actual = merge({}, source1, source2);
+
+    expect(actual).toEqual({
+      a: 1,
+      b: { x: 1, y: 3, z: 4 },
+      c: new Date('2000-01-01'),
+    });
+  });
+
   it('should merge `source` into `object`', () => {
     const names = {
       characters: [{ name: 'barney' }, { name: 'fred' }],
