@@ -125,4 +125,12 @@ describe('mergeWith', () => {
 
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
   });
+
+  it('should handle top-level type mismatch consistently with nested behavior', () => {
+    const topLevelResult = mergeWith(['1'] as any, { a: 2 }, () => undefined);
+    const nestedResult = mergeWith({ x: ['1'] }, { x: { a: 2 } } as any, () => undefined);
+
+    expect(topLevelResult).toEqual({ a: 2 });
+    expect(nestedResult.x).toEqual({ a: 2 });
+  });
 });
