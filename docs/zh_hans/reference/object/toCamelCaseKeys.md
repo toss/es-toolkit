@@ -14,6 +14,8 @@ const camelCased = toCamelCaseKeys(obj);
 
 当您想要将对象的所有键转换为驼峰命名法时,请使用 `toCamelCaseKeys`。嵌套对象和数组中的对象也会递归转换。
 
+例如，对象的键会按如下方式转换：
+
 - `snake_case` → `camelCase`（例如 `user_id` → `userId`）
 - `PascalCase` → `camelCase`（例如 `UserId` → `userId`）
 - `uppercase keys` → `camelCase`（例如 `FIRST_NAME` → `firstName`, `LAST` → `last`）

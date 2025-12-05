@@ -14,6 +14,8 @@ const camelCased = toCamelCaseKeys(obj);
 
 Use `toCamelCaseKeys` when you want to convert all keys of an object to camel case. Nested objects and objects within arrays are also converted recursively.
 
+For example, object keys are converted as follows:
+
 - `snake_case` → `camelCase` (e.g. `user_id` → `userId`)
 - `PascalCase` → `camelCase` (e.g. `UserId` → `userId`)
 - `uppercase keys` → `camelCase` (e.g. `FIRST_NAME` → `firstName`, `LAST` → `last`)

@@ -2,11 +2,14 @@ import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../compat/predicate/isPlainObject.ts';
 import { snakeCase } from '../string/snakeCase.ts';
 
-type SnakeCase<S extends string> = S extends `${infer P1}${infer P2}`
-  ? P2 extends Uncapitalize<P2>
-    ? `${Lowercase<P1>}${SnakeCase<P2>}`
-    : `${Lowercase<P1>}_${SnakeCase<Uncapitalize<P2>>}`
-  : Lowercase<S>;
+type SnakeCase<S extends string> =
+  S extends Uppercase<S>
+    ? Lowercase<S>
+    : S extends `${infer P1}${infer P2}`
+      ? P2 extends Uncapitalize<P2>
+        ? `${Lowercase<P1>}${SnakeCase<P2>}`
+        : `${Lowercase<P1>}_${SnakeCase<Uncapitalize<P2>>}`
+      : Lowercase<S>;
 
 type NonPlainObject =
   | Date

@@ -157,6 +157,7 @@ describe('camelizeKeys', () => {
       last: 'Yeom';
     }>();
   });
+
   it('should not recurse into NonPlainObject values', () => {
     const date = new Date();
     const map = new Map<string, any>([['first_name', 'JinHo']]);

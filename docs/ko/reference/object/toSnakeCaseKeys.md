@@ -14,6 +14,12 @@ const snakeCased = toSnakeCaseKeys(obj);
 
 객체의 모든 키를 snake_case로 변환하고 싶을 때 `toSnakeCaseKeys`를 사용하세요. 중첩된 객체와 배열 내의 객체들도 재귀적으로 변환돼요.
 
+예를 들어, 객체의 키는 다음과 같이 변환돼요.
+
+- `camelCase` → `snake_case` (예: `userId` → `user_id`)
+- `PascalCase` → `snake_case` (예: `UserId` → `user_id`)
+- `UPPERCASE_KEYS` → `snake_case` (예: `FIRST_NAME` → `first_name`, `LAST` → `last`)
+
 ```typescript
 import { toSnakeCaseKeys } from 'es-toolkit/object';
 

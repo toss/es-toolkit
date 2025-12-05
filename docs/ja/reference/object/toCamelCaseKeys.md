@@ -14,6 +14,8 @@ const camelCased = toCamelCaseKeys(obj);
 
 オブジェクトのすべてのキーをキャメルケースに変換したい時に `toCamelCaseKeys` を使用してください。ネストされたオブジェクトと配列内のオブジェクトも再帰的に変換されます。
 
+例えば、オブジェクトのキーは次のように変換されます。
+
 - `snake_case` → `camelCase`（例: `user_id` → `userId`）
 - `PascalCase` → `camelCase`（例: `UserId` → `userId`）
 - `uppercase keys` → `camelCase`（例: `FIRST_NAME` → `firstName`, `LAST` → `last`）
