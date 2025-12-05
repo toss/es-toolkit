@@ -1,8 +1,16 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mapAsync } from './mapAsync';
 import { delay } from '../promise/delay';
 
 describe('mapAsync', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('maps array asynchronously', async () => {
     const arr = [1, 2, 3];
 
@@ -57,7 +65,9 @@ describe('mapAsync', () => {
     });
 
     const concurrency = 2;
-    const result = await mapAsync(arr, fn, { concurrency });
+    const promise = mapAsync(arr, fn, { concurrency });
+    await vi.advanceTimersByTimeAsync(60);
+    const result = await promise;
 
     expect(result).toEqual([2, 4, 6, 8, 10]);
     expect(maxRunning).toBeLessThanOrEqual(concurrency);
@@ -80,7 +90,10 @@ describe('mapAsync', () => {
       return item;
     };
 
-    await mapAsync(arr, fn);
+    const promise = mapAsync(arr, fn);
+    await vi.advanceTimersByTimeAsync(20);
+    await promise;
+
     expect(maxRunning).toBe(10);
   });
 });

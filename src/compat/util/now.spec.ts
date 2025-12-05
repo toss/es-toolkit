@@ -1,16 +1,23 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
 import type { now as nowLodash } from 'lodash';
 import { now } from './now';
-import { delay } from '../../promise/delay';
 
 describe('now', () => {
-  it('should return the number of milliseconds that have elapsed since the Unix epoch', async () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should return the number of milliseconds that have elapsed since the Unix epoch', () => {
     const stamp = Number(new Date());
     const actual = now();
 
     expect(actual).toBeGreaterThanOrEqual(stamp);
 
-    await delay(32);
+    vi.advanceTimersByTime(32);
 
     expect(now()).toBeGreaterThan(actual);
   });

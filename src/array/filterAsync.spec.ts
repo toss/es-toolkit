@@ -1,8 +1,16 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { filterAsync } from './filterAsync';
 import { delay } from '../promise/delay';
 
 describe('filterAsync', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('filters array asynchronously', async () => {
     const arr = [1, 2, 3, 4, 5];
 
@@ -73,7 +81,11 @@ describe('filterAsync', () => {
     });
 
     const concurrency = 2;
-    const result = await filterAsync(arr, fn, { concurrency });
+    const promise = filterAsync(arr, fn, { concurrency });
+
+    await vi.advanceTimersByTimeAsync(60);
+
+    const result = await promise;
 
     expect(result).toEqual([2, 4]);
     expect(maxRunning).toBeLessThanOrEqual(concurrency);
@@ -96,7 +108,11 @@ describe('filterAsync', () => {
       return item % 2 === 0;
     };
 
-    await filterAsync(arr, fn);
+    const promise = filterAsync(arr, fn);
+
+    await vi.advanceTimersByTimeAsync(20);
+
+    await promise;
     expect(maxRunning).toBe(10);
   });
 });

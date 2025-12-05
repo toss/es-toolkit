@@ -1,8 +1,16 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { flatMapAsync } from './flatMapAsync';
 import { delay } from '../promise/delay';
 
 describe('flatMapAsync', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('maps and flattens array asynchronously', async () => {
     const arr = [1, 2, 3];
 
@@ -92,7 +100,9 @@ describe('flatMapAsync', () => {
     });
 
     const concurrency = 2;
-    const result = await flatMapAsync(arr, fn, { concurrency });
+    const promise = flatMapAsync(arr, fn, { concurrency });
+    await vi.advanceTimersByTimeAsync(60);
+    const result = await promise;
 
     expect(result).toEqual([1, 2, 2, 4, 3, 6, 4, 8, 5, 10]);
     expect(maxRunning).toBeLessThanOrEqual(concurrency);
@@ -115,7 +125,10 @@ describe('flatMapAsync', () => {
       return [item];
     };
 
-    await flatMapAsync(arr, fn);
+    const promise = flatMapAsync(arr, fn);
+    await vi.advanceTimersByTimeAsync(20);
+    await promise;
+
     expect(maxRunning).toBe(10);
   });
 });

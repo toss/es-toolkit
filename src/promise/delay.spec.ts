@@ -1,23 +1,37 @@
-import { describe, expect, it, vi } from 'vitest';
-import { performance } from 'node:perf_hooks';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { delay } from './delay';
 
 describe('delay', () => {
-  it('pauses an async function for a given time', async () => {
-    const start = performance.now();
-    await delay(100);
-    const end = performance.now();
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
 
-    expect(end - start).greaterThanOrEqual(99);
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('pauses an async function for a given time', async () => {
+    const start = Date.now();
+    const promise = delay(100);
+
+    vi.advanceTimersByTime(100);
+    await promise;
+
+    const end = Date.now();
+
+    expect(end - start).toBeGreaterThanOrEqual(100);
   });
 
   it('should cancel the delay if aborted via AbortSignal', async () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    setTimeout(() => controller.abort(), 50);
+    const promise = delay(100, { signal });
 
-    await expect(delay(100, { signal })).rejects.toThrow('The operation was aborted');
+    vi.advanceTimersByTime(50);
+    controller.abort();
+
+    await expect(promise).rejects.toThrow('The operation was aborted');
   });
 
   it('should not call the delay if it is already aborted by AbortSignal', async () => {
@@ -52,7 +66,10 @@ describe('delay', () => {
     const { signal } = controller;
     const spy = vi.spyOn(signal, 'removeEventListener');
 
-    await delay(100, { signal });
+    const promise = delay(100, { signal });
+
+    vi.advanceTimersByTime(100);
+    await promise;
 
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();

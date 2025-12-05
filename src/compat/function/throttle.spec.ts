@@ -1,12 +1,19 @@
-import { describe, expect, expectTypeOf, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
 import type { throttle as throttleLodash } from 'lodash';
 import { throttle } from './throttle';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
-import { delay } from '../../promise/delay';
 
 describe('throttle', () => {
-  it('should throttle a function', async () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should throttle a function', () => {
     let callCount = 0;
     const throttled = throttle(() => {
       callCount++;
@@ -19,18 +26,18 @@ describe('throttle', () => {
     const lastCount = callCount;
     expect(callCount).toBeGreaterThan(0);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCount > lastCount).toBe(true);
   });
 
-  it('subsequent calls should return the result of the first call', async () => {
+  it('subsequent calls should return the result of the first call', () => {
     const throttled = throttle(identity, 32);
     const results = [throttled('a'), throttled('b')];
 
     expect(results).toEqual(['a', 'a']);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     const results2 = [throttled('c'), throttled('d')];
     expect(results2[0]).not.toStrictEqual('a');
@@ -40,7 +47,7 @@ describe('throttle', () => {
     expect(results2[0]).not.toStrictEqual(undefined);
   });
 
-  it('should clear timeout when `func` is called', async () => {
+  it('should clear timeout when `func` is called', () => {
     let callCount = 0;
 
     const throttled = throttle(() => {
@@ -50,12 +57,12 @@ describe('throttle', () => {
     throttled();
     throttled();
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(2);
   });
 
-  it('should not trigger a trailing call when invoked once', async () => {
+  it('should not trigger a trailing call when invoked once', () => {
     let callCount = 0;
     const throttled = throttle(() => {
       callCount++;
@@ -64,12 +71,12 @@ describe('throttle', () => {
     throttled();
     expect(callCount).toBe(1);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(callCount).toBe(1);
   });
 
   [0, 1].forEach(index => {
-    it(`should trigger a call when invoked repeatedly${index ? ' and `leading` is `false`' : ''}`, async () => {
+    it(`should trigger a call when invoked repeatedly${index ? ' and `leading` is `false`' : ''}`, () => {
       let callCount = 0;
       const limit = 1000;
       const options = index ? { leading: false } : {};
@@ -81,18 +88,17 @@ describe('throttle', () => {
         options
       );
 
-      const start = Number(new Date());
-      while (Date.now() - start < limit) {
+      const start = Date.now();
+      for (let elapsed = 0; elapsed < limit; elapsed++) {
+        vi.setSystemTime(start + elapsed);
         throttled();
       }
       const actual = callCount > 1;
 
-      await delay(1);
-
       expect(actual).toBe(true);
     });
 
-    it('should trigger a second throttled call as soon as possible', async () => {
+    it('should trigger a second throttled call as soon as possible', () => {
       let callCount = 0;
 
       const throttled = throttle(
@@ -105,21 +111,21 @@ describe('throttle', () => {
 
       throttled();
 
-      await delay(192);
+      vi.advanceTimersByTime(192);
 
       expect(callCount).toBe(1);
       throttled();
 
-      await delay(254 - 192);
+      vi.advanceTimersByTime(254 - 192);
 
       expect(callCount).toBe(1);
 
-      await delay(384 - 254);
+      vi.advanceTimersByTime(384 - 254);
 
       expect(callCount).toBe(2);
     });
 
-    it('should apply default options', async () => {
+    it('should apply default options', () => {
       let callCount = 0;
       const throttled = throttle(
         () => {
@@ -133,7 +139,7 @@ describe('throttle', () => {
       throttled();
       expect(callCount).toBe(1);
 
-      await delay(128);
+      vi.advanceTimersByTime(128);
 
       expect(callCount).toBe(2);
     });
@@ -146,7 +152,7 @@ describe('throttle', () => {
       expect(withoutLeading('a')).toBe(undefined);
     });
 
-    it('should support a `trailing` option', async () => {
+    it('should support a `trailing` option', () => {
       let withCount = 0;
       let withoutCount = 0;
 
@@ -174,13 +180,13 @@ describe('throttle', () => {
       expect(withoutTrailing('a')).toBe('a');
       expect(withoutTrailing('b')).toBe('a');
 
-      await delay(256);
+      vi.advanceTimersByTime(256);
 
       expect(withCount).toBe(2);
       expect(withoutCount).toBe(1);
     });
 
-    it('should not update `lastCalled`, at the end of the timeout, when `trailing` is `false`', async () => {
+    it('should not update `lastCalled`, at the end of the timeout, when `trailing` is `false`', () => {
       let callCount = 0;
 
       const throttled = throttle(
@@ -194,12 +200,12 @@ describe('throttle', () => {
       throttled();
       throttled();
 
-      await delay(96);
+      vi.advanceTimersByTime(96);
 
       throttled();
       throttled();
 
-      await delay(192 - 96);
+      vi.advanceTimersByTime(192 - 96);
 
       expect(callCount).toBeGreaterThan(1);
     });
@@ -214,7 +220,7 @@ describe('throttle', () => {
     expect(() => func(noop, 32, 1 as any)).not.toThrow();
   });
 
-  it(`\`_.${methodName}\` should use a default \`wait\` of \`0\``, async () => {
+  it(`\`_.${methodName}\` should use a default \`wait\` of \`0\``, () => {
     let callCount = 0;
     const funced = func(() => {
       callCount++;
@@ -222,13 +228,13 @@ describe('throttle', () => {
 
     funced();
 
-    await delay(32);
+    vi.advanceTimersByTime(32);
 
     funced();
     expect(callCount).toBe(isDebounce ? 1 : 2);
   });
 
-  it(`\`_.${methodName}\` should invoke \`func\` with the correct \`this\` binding`, async () => {
+  it(`\`_.${methodName}\` should invoke \`func\` with the correct \`this\` binding`, () => {
     const actual: any[] = [];
     const object = {
       funced: func(function (this: any) {
@@ -239,11 +245,11 @@ describe('throttle', () => {
 
     object.funced();
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(actual).toEqual(expected);
   });
 
-  it(`\`_.${methodName}\` supports recursive calls`, async () => {
+  it(`\`_.${methodName}\` supports recursive calls`, () => {
     const actual: any[] = [];
     const args = ['a', 'b', 'c'].map(chr => [{}, chr]);
     const expected = args.slice();
@@ -266,12 +272,12 @@ describe('throttle', () => {
     funced.call(next[0], next[1]);
     expect(actual).toEqual(expected.slice(0, isDebounce ? 0 : 1));
 
-    await delay(256);
+    vi.advanceTimersByTime(256);
 
     expect(actual).toEqual(expected.slice(0, actual.length));
   });
 
-  it(`\`_.${methodName}\` should support cancelling delayed calls`, async () => {
+  it(`\`_.${methodName}\` should support cancelling delayed calls`, () => {
     let callCount = 0;
 
     const funced = func(
@@ -285,12 +291,12 @@ describe('throttle', () => {
     funced();
     funced.cancel();
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(0);
   });
 
-  it(`\`_.${methodName}\` should reset \`lastCalled\` after cancelling`, async () => {
+  it(`\`_.${methodName}\` should reset \`lastCalled\` after cancelling`, () => {
     let callCount = 0;
 
     const funced = func(() => ++callCount, 32, { leading: true });
@@ -301,11 +307,11 @@ describe('throttle', () => {
     expect(funced()).toBe(2);
     funced();
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(callCount).toBe(3);
   });
 
-  it(`\`_.${methodName}\` should support flushing delayed calls`, async () => {
+  it(`\`_.${methodName}\` should support flushing delayed calls`, () => {
     let callCount = 0;
 
     const funced = func(() => ++callCount, 32, { leading: false });
@@ -313,12 +319,12 @@ describe('throttle', () => {
     funced();
     expect(funced.flush()).toBe(1);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(1);
   });
 
-  it(`\`_.${methodName}\` should noop \`cancel\` and \`flush\` when nothing is queued`, async () => {
+  it(`\`_.${methodName}\` should noop \`cancel\` and \`flush\` when nothing is queued`, () => {
     let callCount = 0;
     const funced = func(() => {
       callCount++;
@@ -327,7 +333,7 @@ describe('throttle', () => {
     funced.cancel();
     expect(funced.flush()).toBe(undefined);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(callCount).toBe(0);
   });
 
@@ -353,7 +359,7 @@ describe('throttle', () => {
     expectTypeOf(throttle).toEqualTypeOf<typeof throttleLodash>();
   });
 
-  it('should not invoke the function even after flush is called if timer is going', async () => {
+  it('should not invoke the function even after flush is called if timer is going', () => {
     let callCount = 0;
     const throttled = throttle(() => ++callCount, 32);
 
@@ -363,7 +369,7 @@ describe('throttle', () => {
 
     expect(callCount).toBe(1);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(callCount).toBe(2);
   });
 });

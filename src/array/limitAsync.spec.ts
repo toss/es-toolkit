@@ -1,8 +1,16 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { limitAsync } from './limitAsync';
 import { delay } from '../promise/delay';
 
 describe('limitAsync', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('limits concurrency of async callbacks', async () => {
     let running = 0;
     let maxRunning = 0;
@@ -20,7 +28,15 @@ describe('limitAsync', () => {
 
     const limitedCallback = limitAsync(callback, 2);
 
-    await Promise.all([limitedCallback(), limitedCallback(), limitedCallback(), limitedCallback(), limitedCallback()]);
+    const promise = Promise.all([
+      limitedCallback(),
+      limitedCallback(),
+      limitedCallback(),
+      limitedCallback(),
+      limitedCallback(),
+    ]);
+    await vi.advanceTimersByTimeAsync(90);
+    await promise;
 
     expect(maxRunning).toBeLessThanOrEqual(2);
     expect(callback).toHaveBeenCalledTimes(5);

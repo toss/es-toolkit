@@ -1,10 +1,18 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
 import type { defer as deferLodash } from 'lodash';
 import { defer } from './defer';
 
 describe('defer', () => {
-  it('should provide additional arguments to `func`', (done: () => void) => {
-    let args: any[];
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should provide additional arguments to `func`', () => {
+    let args: any[] = [];
 
     defer(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,13 +24,12 @@ describe('defer', () => {
       2
     );
 
-    setTimeout(() => {
-      expect(args).toEqual([1, 2]);
-      done();
-    }, 32);
+    vi.advanceTimersByTime(32);
+
+    expect(args).toEqual([1, 2]);
   });
 
-  it('should be cancelable', (done: () => void) => {
+  it('should be cancelable', () => {
     let pass = true;
     const timerId = defer(() => {
       pass = false;
@@ -30,10 +37,9 @@ describe('defer', () => {
 
     clearTimeout(timerId);
 
-    setTimeout(() => {
-      expect(pass).toBe(true);
-      done();
-    }, 32);
+    vi.advanceTimersByTime(32);
+
+    expect(pass).toBe(true);
   });
 
   it('should throw an error if `func` is not a function', () => {

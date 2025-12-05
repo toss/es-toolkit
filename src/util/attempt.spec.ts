@@ -1,8 +1,16 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attempt } from './attempt';
 import { delay } from '../promise';
 
 describe('attempt', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should return the result of the function', () => {
     expect(attempt(() => 1)).toEqual([null, 1]);
   });
@@ -28,6 +36,8 @@ describe('attempt', () => {
     });
 
     expect(error).toBeNull();
+
+    vi.advanceTimersByTime(100);
 
     try {
       await result;

@@ -1,12 +1,19 @@
-import { describe, expect, expectTypeOf, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
 import type { debounce as debounceLodash } from 'lodash';
 import { debounce } from './debounce';
 import { identity } from '../../function/identity';
 import { noop } from '../../function/noop';
-import { delay } from '../../promise/delay';
 
 describe('debounce', () => {
-  it('should debounce function calls', async () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should debounce function calls', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
@@ -15,64 +22,64 @@ describe('debounce', () => {
     debouncedFunc();
     debouncedFunc();
 
-    await delay(debounceMs * 2);
+    vi.advanceTimersByTime(debounceMs);
 
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should delay the function call by the specified wait time', async () => {
+  it('should delay the function call by the specified wait time', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs / 2);
+    vi.advanceTimersByTime(debounceMs / 2);
     expect(func).not.toHaveBeenCalled();
 
-    await delay(debounceMs / 2 + 1);
+    vi.advanceTimersByTime(debounceMs / 2);
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should reset the wait time if called again before wait time ends', async () => {
+  it('should reset the wait time if called again before wait time ends', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs / 2);
+    vi.advanceTimersByTime(debounceMs / 2);
     debouncedFunc();
-    await delay(debounceMs / 2);
+    vi.advanceTimersByTime(debounceMs / 2);
     debouncedFunc();
-    await delay(debounceMs / 2);
+    vi.advanceTimersByTime(debounceMs / 2);
     debouncedFunc();
 
     expect(func).not.toHaveBeenCalled();
 
-    await delay(debounceMs + 1);
+    vi.advanceTimersByTime(debounceMs);
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should cancel the debounced function call', async () => {
+  it('should cancel the debounced function call', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
     debouncedFunc.cancel();
-    await delay(debounceMs);
+    vi.advanceTimersByTime(debounceMs);
 
     expect(func).not.toHaveBeenCalled();
   });
 
-  it('should work correctly if the debounced function is called after the wait time', async () => {
+  it('should work correctly if the debounced function is called after the wait time', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc();
-    await delay(debounceMs + 1);
+    vi.advanceTimersByTime(debounceMs);
     debouncedFunc();
-    await delay(debounceMs + 1);
+    vi.advanceTimersByTime(debounceMs);
 
     expect(func).toHaveBeenCalledTimes(2);
   });
@@ -85,20 +92,20 @@ describe('debounce', () => {
     expect(() => debouncedFunc.cancel()).not.toThrow();
   });
 
-  it('should call the function with correct arguments', async () => {
+  it('should call the function with correct arguments', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs);
 
     debouncedFunc('test', 123);
 
-    await delay(debounceMs * 2);
+    vi.advanceTimersByTime(debounceMs);
 
     expect(func).toHaveBeenCalledTimes(1);
     expect(func).toHaveBeenCalledWith('test', 123);
   });
 
-  it('should call the function immediately and only once if leading is true', async () => {
+  it('should call the function immediately and only once if leading is true', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs, { leading: true });
@@ -106,11 +113,11 @@ describe('debounce', () => {
     debouncedFunc();
     expect(func).toHaveBeenCalledTimes(1);
 
-    await delay(debounceMs * 2);
+    vi.advanceTimersByTime(debounceMs);
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should call the function immediately and after the wait time if leading and trailing are true', async () => {
+  it('should call the function immediately and after the wait time if leading and trailing are true', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs, {
@@ -123,11 +130,11 @@ describe('debounce', () => {
 
     expect(func).toHaveBeenCalledTimes(1);
 
-    await delay(debounceMs * 2);
+    vi.advanceTimersByTime(debounceMs);
     expect(func).toHaveBeenCalledTimes(2);
   });
 
-  it('should not call the function immediately if leading is false', async () => {
+  it('should not call the function immediately if leading is false', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs, { leading: false });
@@ -135,11 +142,11 @@ describe('debounce', () => {
     debouncedFunc();
     expect(func).not.toHaveBeenCalled();
 
-    await delay(debounceMs * 2);
+    vi.advanceTimersByTime(debounceMs);
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('should not call the function after the wait time if trailing is false', async () => {
+  it('should not call the function after the wait time if trailing is false', () => {
     const func = vi.fn();
     const debounceMs = 50;
     const debouncedFunc = debounce(func, debounceMs, { trailing: false });
@@ -147,12 +154,12 @@ describe('debounce', () => {
     debouncedFunc();
     expect(func).not.toHaveBeenCalled();
 
-    await delay(debounceMs * 2);
+    vi.advanceTimersByTime(debounceMs);
     expect(func).not.toHaveBeenCalled();
   });
 
   /** @see https://github.com/lodash/lodash/blob/main/test/debounce.spec.js#L4 */
-  it('should debounce a function', async () => {
+  it('should debounce a function', () => {
     let callCount = 0;
 
     const debounced = debounce(value => {
@@ -164,7 +171,7 @@ describe('debounce', () => {
     expect(results).toEqual([undefined, undefined, undefined]);
     expect(callCount).toBe(0);
 
-    await delay(128);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(1);
 
@@ -172,25 +179,25 @@ describe('debounce', () => {
     expect(results2).toEqual(['c', 'c', 'c']);
     expect(callCount).toBe(1);
 
-    await delay(128);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(2);
   });
 
-  it('subsequent debounced calls return the last `func` result', async () => {
+  it('subsequent debounced calls return the last `func` result', () => {
     const debounced = debounce(identity, 32);
     debounced('a');
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(debounced('b')).not.toEqual('b');
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(debounced('c')).not.toEqual('c');
   });
 
-  it('should not immediately call `func` when `wait` is `0`', async () => {
+  it('should not immediately call `func` when `wait` is `0`', () => {
     let callCount = 0;
     const debounced = debounce(() => {
       ++callCount;
@@ -200,12 +207,12 @@ describe('debounce', () => {
     debounced();
     expect(callCount).toBe(0);
 
-    await delay(5);
+    vi.advanceTimersByTime(1);
 
     expect(callCount).toBe(1);
   });
 
-  it('should apply default options', async () => {
+  it('should apply default options', () => {
     let callCount = 0;
     const debounced = debounce(
       () => {
@@ -218,12 +225,12 @@ describe('debounce', () => {
     debounced();
     expect(callCount).toBe(0);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(1);
   });
 
-  it('should support a `leading` option', async () => {
+  it('should support a `leading` option', () => {
     const callCounts = [0, 0];
 
     const withLeading = debounce(
@@ -249,7 +256,7 @@ describe('debounce', () => {
     withLeadingAndTrailing();
     expect(callCounts[1]).toBe(1);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCounts).toEqual([1, 2]);
 
@@ -257,7 +264,7 @@ describe('debounce', () => {
     expect(callCounts[0]).toBe(2);
   });
 
-  it('subsequent leading debounced calls return the last `func` result', async () => {
+  it('subsequent leading debounced calls return the last `func` result', () => {
     const debounced = debounce(identity, 32, {
       leading: true,
       trailing: false,
@@ -266,13 +273,13 @@ describe('debounce', () => {
 
     expect(results).toEqual(['a', 'a']);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     const results2 = [debounced('c'), debounced('d')];
     expect(results2).toEqual(['c', 'c']);
   });
 
-  it('should support a `trailing` option', async () => {
+  it('should support a `trailing` option', () => {
     let withCount = 0;
     let withoutCount = 0;
 
@@ -298,13 +305,13 @@ describe('debounce', () => {
     withoutTrailing();
     expect(withoutCount).toBe(0);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(withCount).toBe(1);
     expect(withoutCount).toBe(0);
   });
 
-  it('should support a `maxWait` option', async () => {
+  it('should support a `maxWait` option', () => {
     let callCount = 0;
 
     const debounced = debounce(
@@ -320,19 +327,19 @@ describe('debounce', () => {
     debounced();
     expect(callCount).toBe(0);
 
-    await delay(128);
+    vi.advanceTimersByTime(128);
 
     expect(callCount).toBe(1);
     debounced();
     debounced();
     expect(callCount).toBe(1);
 
-    await delay(128);
+    vi.advanceTimersByTime(128);
 
     expect(callCount).toBe(2);
   });
 
-  it('should support `maxWait` in a tight loop', async () => {
+  it('should support `maxWait` in a tight loop', () => {
     const limit = 1000;
     let withCount = 0;
     let withoutCount = 0;
@@ -350,17 +357,16 @@ describe('debounce', () => {
     }, 96);
 
     const start = Date.now();
-    while (Date.now() - start < limit) {
+    for (let elapsed = 0; elapsed < limit; elapsed++) {
+      vi.setSystemTime(start + elapsed);
       withMaxWait();
       withoutMaxWait();
     }
     const actual = [Boolean(withoutCount), Boolean(withCount)];
-    await delay(1);
     expect(actual).toEqual([false, true]);
   });
 
-  // FIXME: flaky test
-  it.skip('should queue a trailing call for subsequent debounced calls after `maxWait`', async () => {
+  it('should queue a trailing call for subsequent debounced calls after `maxWait`', () => {
     let callCount = 0;
 
     const debounced = debounce(
@@ -377,12 +383,12 @@ describe('debounce', () => {
     setTimeout(debounced, 200);
     setTimeout(debounced, 250);
 
-    await delay(500);
+    vi.advanceTimersByTime(500);
 
     expect(callCount).toBe(2);
   });
 
-  it('should cancel `maxDelayed` when `delayed` is invoked', async () => {
+  it('should cancel `maxDelayed` when `delayed` is invoked', () => {
     let callCount = 0;
 
     const debounced = debounce(
@@ -395,16 +401,16 @@ describe('debounce', () => {
 
     debounced();
 
-    await delay(128);
+    vi.advanceTimersByTime(128);
 
     debounced();
     expect(callCount).toBe(1);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(callCount).toBe(2);
   });
 
-  it('should invoke the trailing call with the correct arguments and `this` binding', async () => {
+  it('should invoke the trailing call with the correct arguments and `this` binding', () => {
     let actual: any;
     let callCount = 0;
     const object = {};
@@ -425,9 +431,10 @@ describe('debounce', () => {
       if (!debounced.call(object, 'a')) {
         break;
       }
+      vi.advanceTimersByTime(16);
     }
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(2);
     expect(actual).toEqual([object, 'a']);
@@ -442,7 +449,7 @@ describe('debounce', () => {
     expect(() => func(noop, 32, 1 as any)).not.toThrow();
   });
 
-  it(`\`_.${methodName}\` should use a default \`wait\` of \`0\``, async () => {
+  it(`\`_.${methodName}\` should use a default \`wait\` of \`0\``, () => {
     let callCount = 0;
     const funced = func(() => {
       callCount++;
@@ -450,13 +457,13 @@ describe('debounce', () => {
 
     funced();
 
-    await delay(32);
+    vi.advanceTimersByTime(32);
 
     funced();
     expect(callCount).toBe(isDebounce ? 1 : 2);
   });
 
-  it(`\`_.${methodName}\` should invoke \`func\` with the correct \`this\` binding`, async () => {
+  it(`\`_.${methodName}\` should invoke \`func\` with the correct \`this\` binding`, () => {
     const actual: any[] = [];
     const object = {
       funced: func(function (this: any) {
@@ -467,11 +474,11 @@ describe('debounce', () => {
 
     object.funced();
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(actual).toEqual(expected);
   });
 
-  it(`\`_.${methodName}\` supports recursive calls`, async () => {
+  it(`\`_.${methodName}\` supports recursive calls`, () => {
     const actual: any[] = [];
     const args = ['a', 'b', 'c'].map(chr => [{}, chr]);
     const expected = args.slice();
@@ -494,12 +501,12 @@ describe('debounce', () => {
     funced.call(next[0], next[1]);
     expect(actual).toEqual(expected.slice(0, isDebounce ? 0 : 1));
 
-    await delay(256);
+    vi.advanceTimersByTime(256);
 
     expect(actual).toEqual(expected.slice(0, actual.length));
   });
 
-  it(`\`_.${methodName}\` should support cancelling delayed calls`, async () => {
+  it(`\`_.${methodName}\` should support cancelling delayed calls`, () => {
     let callCount = 0;
 
     const funced = func(
@@ -513,12 +520,12 @@ describe('debounce', () => {
     funced();
     funced.cancel();
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(0);
   });
 
-  it(`\`_.${methodName}\` should reset \`lastCalled\` after cancelling`, async () => {
+  it(`\`_.${methodName}\` should reset \`lastCalled\` after cancelling`, () => {
     let callCount = 0;
 
     const funced = func(() => ++callCount, 32, { leading: true });
@@ -529,11 +536,11 @@ describe('debounce', () => {
     expect(funced()).toBe(2);
     funced();
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(callCount).toBe(3);
   });
 
-  it(`\`_.${methodName}\` should support flushing delayed calls`, async () => {
+  it(`\`_.${methodName}\` should support flushing delayed calls`, () => {
     let callCount = 0;
 
     const funced = func(() => ++callCount, 32, { leading: false });
@@ -541,12 +548,12 @@ describe('debounce', () => {
     funced();
     expect(funced.flush()).toBe(1);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
 
     expect(callCount).toBe(1);
   });
 
-  it(`\`_.${methodName}\` should noop \`cancel\` and \`flush\` when nothing is queued`, async () => {
+  it(`\`_.${methodName}\` should noop \`cancel\` and \`flush\` when nothing is queued`, () => {
     let callCount = 0;
     const funced = func(() => {
       callCount++;
@@ -555,7 +562,7 @@ describe('debounce', () => {
     funced.cancel();
     expect(funced.flush()).toBe(undefined);
 
-    await delay(64);
+    vi.advanceTimersByTime(64);
     expect(callCount).toBe(0);
   });
 

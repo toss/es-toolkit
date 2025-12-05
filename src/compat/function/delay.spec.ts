@@ -1,26 +1,31 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
 import type { delay as delayLodash } from 'lodash';
 import { delay } from './delay';
-import { delay as delayToolkit } from '../../promise';
 import { slice } from '../_internal/slice';
 
 describe('delay', () => {
-  it('should delay `func` execution', async () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should delay `func` execution', () => {
     let pass = false;
     delay(() => {
       pass = true;
     }, 32);
 
-    setTimeout(() => {
-      expect(pass).toBe(false);
-    }, 1);
+    vi.advanceTimersByTime(1);
+    expect(pass).toBe(false);
 
-    await delayToolkit(64);
-
+    vi.advanceTimersByTime(63);
     expect(pass).toBe(true);
   });
 
-  it('should provide additional arguments to `func`', async () => {
+  it('should provide additional arguments to `func`', () => {
     let args;
     delay(
       function () {
@@ -32,12 +37,12 @@ describe('delay', () => {
       2
     );
 
-    await delayToolkit(64);
+    vi.advanceTimersByTime(64);
 
     expect(args).toEqual([1, 2]);
   });
 
-  it('should use a default `wait` of `0`', async () => {
+  it('should use a default `wait` of `0`', () => {
     let pass = false;
     // @ts-expect-error invalid type
     delay(() => {
@@ -46,12 +51,12 @@ describe('delay', () => {
 
     expect(pass).toBe(false);
 
-    await delayToolkit(0);
+    vi.advanceTimersByTime(0);
 
     expect(pass).toBe(true);
   });
 
-  it('should be cancelable', async () => {
+  it('should be cancelable', () => {
     let pass = true;
     const timerId = delay(() => {
       pass = false;
@@ -59,12 +64,14 @@ describe('delay', () => {
 
     clearTimeout(timerId);
 
-    await delayToolkit(64);
+    vi.advanceTimersByTime(64);
 
     expect(pass).toBe(true);
   });
 
   it('should work with mocked `setTimeout`', () => {
+    vi.useRealTimers();
+
     let pass = false;
     const originalSetTimeout = globalThis.setTimeout;
 

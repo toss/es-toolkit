@@ -1,8 +1,16 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { reduceAsync } from './reduceAsync';
 import { delay } from '../promise/delay';
 
 describe('reduceAsync', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('reduces array to single value', async () => {
     const arr = [1, 2, 3, 4, 5];
 
@@ -11,7 +19,9 @@ describe('reduceAsync', () => {
       return acc + n;
     });
 
-    const result = await reduceAsync(arr, reducer, 0);
+    const promise = reduceAsync(arr, reducer, 0);
+    await vi.advanceTimersByTimeAsync(50);
+    const result = await promise;
 
     expect(result).toBe(15);
     expect(reducer).toHaveBeenCalledTimes(arr.length);
@@ -39,7 +49,10 @@ describe('reduceAsync', () => {
       return acc + n.toString();
     };
 
-    const result = await reduceAsync(arr, reducer, '');
+    const promise = reduceAsync(arr, reducer, '');
+    await vi.advanceTimersByTimeAsync(30);
+    const result = await promise;
+
     expect(result).toBe('123');
   });
 
@@ -53,7 +66,10 @@ describe('reduceAsync', () => {
       return acc + n;
     };
 
-    await reduceAsync(arr, reducer, 0);
+    const promise = reduceAsync(arr, reducer, 0);
+    await vi.advanceTimersByTimeAsync(50);
+    await promise;
+
     expect(order).toEqual([1, 2, 3, 4, 5]);
   });
 
@@ -75,7 +91,10 @@ describe('reduceAsync', () => {
       return [...acc, item.toUpperCase()];
     };
 
-    const result = await reduceAsync(arr, reducer, [] as string[]);
+    const promise = reduceAsync(arr, reducer, [] as string[]);
+    await vi.advanceTimersByTimeAsync(30);
+    const result = await promise;
+
     expect(result).toEqual(['A', 'B', 'C']);
   });
 
@@ -88,7 +107,9 @@ describe('reduceAsync', () => {
         return acc + n;
       });
 
-      const result = await reduceAsync(arr, reducer);
+      const promise = reduceAsync(arr, reducer);
+      await vi.advanceTimersByTimeAsync(40);
+      const result = await promise;
 
       expect(result).toBe(15);
       expect(reducer).toHaveBeenCalledTimes(arr.length - 1);
@@ -125,7 +146,10 @@ describe('reduceAsync', () => {
         return acc + str;
       };
 
-      const result = await reduceAsync(arr, reducer);
+      const promise = reduceAsync(arr, reducer);
+      await vi.advanceTimersByTimeAsync(20);
+      const result = await promise;
+
       expect(result).toBe('Hello World');
     });
 
@@ -139,7 +163,10 @@ describe('reduceAsync', () => {
         return acc + n;
       };
 
-      await reduceAsync(arr, reducer);
+      const promise = reduceAsync(arr, reducer);
+      await vi.advanceTimersByTimeAsync(40);
+      await promise;
+
       expect(order).toEqual([2, 3, 4, 5]);
     });
 
@@ -162,7 +189,10 @@ describe('reduceAsync', () => {
         return { value: acc.value + item.value };
       };
 
-      const result = await reduceAsync(arr, reducer);
+      const promise = reduceAsync(arr, reducer);
+      await vi.advanceTimersByTimeAsync(20);
+      const result = await promise;
+
       expect(result).toEqual({ value: 6 });
     });
   });
@@ -180,7 +210,10 @@ describe('reduceAsync', () => {
       return acc;
     };
 
-    const result = await reduceAsync(arr, reducer, {} as Record<string, number>);
+    const promise = reduceAsync(arr, reducer, {} as Record<string, number>);
+    await vi.advanceTimersByTimeAsync(30);
+    const result = await promise;
+
     expect(result).toEqual({ a: 2, b: 4, c: 6 });
   });
 });

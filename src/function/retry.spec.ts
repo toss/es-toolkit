@@ -1,8 +1,15 @@
-import { describe, expect, it, vi } from 'vitest';
-import { performance } from 'node:perf_hooks';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { retry } from './retry';
 
 describe('retry', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should resolve successfully on the first attempt', async () => {
     const func = vi.fn().mockResolvedValue('success');
     const result = await retry(func);
@@ -16,22 +23,33 @@ describe('retry', () => {
       .mockRejectedValueOnce(new Error('failure'))
       .mockRejectedValueOnce(new Error('failure'))
       .mockResolvedValue('success');
-    const result = await retry(func, 3);
+
+    const promise = retry(func, 3);
+
+    // 2 failures with delay: 0 (default), use advanceTimersToNextTimerAsync for precise control
+    await vi.advanceTimersToNextTimerAsync();
+    await vi.advanceTimersToNextTimerAsync();
+
+    const result = await promise;
     expect(result).toBe('success');
     expect(func).toHaveBeenCalledTimes(3);
   });
 
   it('should retry with the specified delay between attempts', async () => {
     const func = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('success');
-    const delay = 100;
-    const start = performance.now();
-    const result = await retry(func, { delay, retries: 2 });
-    const end = performance.now();
+    const delayMs = 100;
+
+    const start = Date.now();
+    const promise = retry(func, { delay: delayMs, retries: 2 });
+
+    await vi.advanceTimersByTimeAsync(delayMs);
+
+    const result = await promise;
+    const end = Date.now();
+
     expect(result).toBe('success');
     expect(func).toHaveBeenCalledTimes(2);
-    // Date.now() has millisecond precision but not microsecond precision, so the result might be 99ms due to rounding.
-    // Date.now() is also *not* guaranteed to increment every millisecond - on some systems, it may tick every ~4ms.
-    expect(end - start).toBeGreaterThanOrEqual(delay - 1);
+    expect(end - start).toBeGreaterThanOrEqual(delayMs);
   });
 
   it('should retry with a dynamic delay function based on attempt count', async () => {
@@ -48,9 +66,14 @@ describe('retry', () => {
       return d;
     });
 
-    const start = performance.now();
-    const result = await retry(func, { delay: delayFn, retries: 3 });
-    const end = performance.now();
+    const start = Date.now();
+    const promise = retry(func, { delay: delayFn, retries: 3 });
+
+    await vi.advanceTimersByTimeAsync(50);
+    await vi.advanceTimersByTimeAsync(100);
+
+    const result = await promise;
+    const end = Date.now();
 
     const totalDelay = delays.reduce((sum, d) => sum + d, 0);
 
@@ -61,7 +84,16 @@ describe('retry', () => {
 
   it('should throw an error after the specified number of retries', async () => {
     const func = vi.fn().mockRejectedValue(new Error('failure'));
-    await expect(retry(func, 3)).rejects.toThrow('failure');
+
+    const promise = retry(func, 3).catch(e => e);
+
+    // 3 failures with delay: 0 (default), use advanceTimersToNextTimerAsync for precise control (2 delays between 3 attempts)
+    await vi.advanceTimersToNextTimerAsync();
+    await vi.advanceTimersToNextTimerAsync();
+
+    const error = await promise;
+    expect(error).toBeInstanceOf(Error);
+    expect((error as Error).message).toBe('failure');
     expect(func).toHaveBeenCalledTimes(3);
   });
 

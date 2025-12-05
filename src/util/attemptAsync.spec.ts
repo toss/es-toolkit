@@ -1,8 +1,16 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attemptAsync } from './attemptAsync';
 import { delay } from '../promise';
 
 describe('attemptAsync', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should return the result of the async function', async () => {
     const [error, result] = await attemptAsync(async () => 1);
     expect(error).toBeNull();
@@ -19,10 +27,13 @@ describe('attemptAsync', () => {
   });
 
   it('should return the error of the async function that rejects after a delay', async () => {
-    const [error, result] = await attemptAsync(async () => {
+    const promise = attemptAsync(async () => {
       await delay(100);
       throw new Error('delayed error');
     });
+    vi.advanceTimersByTime(100);
+    const [error, result] = await promise;
+
     expect(error).toBeInstanceOf(Error);
     expect(error instanceof Error && error.message).toBe('delayed error');
     expect(result).toBeNull();

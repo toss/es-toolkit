@@ -1,15 +1,25 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { forEachAsync } from './forEachAsync';
 import { delay } from '../promise/delay';
 
 describe('forEachAsync', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('executes callback for each element asynchronously', async () => {
     const arr = [1, 2, 3];
     const callback = vi.fn(async () => {
       await delay(10);
     });
 
-    await forEachAsync(arr, callback);
+    const promise = forEachAsync(arr, callback);
+    await vi.advanceTimersByTimeAsync(10);
+    await promise;
 
     expect(callback).toHaveBeenCalledTimes(arr.length);
     expect(callback.mock.calls[0]).toEqual([1, 0, arr]);
@@ -53,7 +63,9 @@ describe('forEachAsync', () => {
     });
 
     const concurrency = 2;
-    await forEachAsync(arr, fn, { concurrency });
+    const promise = forEachAsync(arr, fn, { concurrency });
+    await vi.advanceTimersByTimeAsync(60);
+    await promise;
 
     expect(maxRunning).toBeLessThanOrEqual(concurrency);
     expect(fn).toHaveBeenCalledTimes(arr.length);
@@ -74,7 +86,10 @@ describe('forEachAsync', () => {
       running--;
     };
 
-    await forEachAsync(arr, fn);
+    const promise = forEachAsync(arr, fn);
+    await vi.advanceTimersByTimeAsync(20);
+    await promise;
+
     expect(maxRunning).toBe(10);
   });
 });
