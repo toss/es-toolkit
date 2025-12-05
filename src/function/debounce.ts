@@ -12,6 +12,13 @@ export interface DebounceOptions {
    * @default ["trailing"]
    */
   edges?: Array<'leading' | 'trailing'>;
+
+  /**
+   * The maximum time the function is allowed to be delayed before it is invoked.
+   * If provided, the function will be invoked at most once per `maxWait` milliseconds,
+   * even if the debounced function is called more frequently.
+   */
+  maxWait?: number;
 }
 
 export interface DebouncedFunction<F extends (...args: any[]) => void> {
@@ -49,7 +56,9 @@ export interface DebouncedFunction<F extends (...args: any[]) => void> {
  * @param {F} func - The function to debounce.
  * @param {number} debounceMs - The number of milliseconds to delay.
  * @param {DebounceOptions} options - The options object
- * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
+ * @param {AbortSignal} [options.signal] - An optional AbortSignal to cancel the debounced function.
+ * @param {Array<'leading' | 'trailing'>} [options.edges] - An array specifying when the function should be invoked (leading edge, trailing edge, or both).
+ * @param {number} [options.maxWait] - The maximum time the function is allowed to be delayed before it is invoked.
  * @returns A new debounced function with a `cancel` method.
  *
  * @example
@@ -78,10 +87,11 @@ export interface DebouncedFunction<F extends (...args: any[]) => void> {
 export function debounce<F extends (...args: any[]) => void>(
   func: F,
   debounceMs: number,
-  { signal, edges }: DebounceOptions = {}
+  { signal, edges, maxWait }: DebounceOptions = {}
 ): DebouncedFunction<F> {
   let pendingThis: any = undefined;
   let pendingArgs: Parameters<F> | null = null;
+  let pendingAt: number | null = null;
 
   const leading = edges != null && edges.includes('leading');
   const trailing = edges == null || edges.includes('trailing');
@@ -95,6 +105,8 @@ export function debounce<F extends (...args: any[]) => void>(
   };
 
   const onTimerEnd = () => {
+    pendingAt = null;
+
     if (trailing) {
       invoke();
     }
@@ -127,6 +139,7 @@ export function debounce<F extends (...args: any[]) => void>(
     cancelTimer();
     pendingThis = undefined;
     pendingArgs = null;
+    pendingAt = null;
   };
 
   const flush = () => {
@@ -143,6 +156,22 @@ export function debounce<F extends (...args: any[]) => void>(
     pendingArgs = args;
 
     const isFirstCall = timeoutId == null;
+
+    if (maxWait != null) {
+      if (pendingAt === null) {
+        pendingAt = Date.now();
+      }
+
+      if (Date.now() - pendingAt >= maxWait) {
+        pendingAt = Date.now();
+        func.apply(pendingThis, pendingArgs);
+        pendingThis = undefined;
+        pendingArgs = null;
+        cancelTimer();
+        schedule();
+        return;
+      }
+    }
 
     schedule();
 
