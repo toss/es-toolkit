@@ -14,6 +14,10 @@ const camelCased = toCamelCaseKeys(obj);
 
 当您想要将对象的所有键转换为驼峰命名法时,请使用 `toCamelCaseKeys`。嵌套对象和数组中的对象也会递归转换。
 
+- `snake_case` → `camelCase`（例如 `user_id` → `userId`）
+- `PascalCase` → `camelCase`（例如 `UserId` → `userId`）
+- `uppercase keys` → `camelCase`（例如 `FIRST_NAME` → `firstName`, `LAST` → `last`）
+
 ```typescript
 import { toCamelCaseKeys } from 'es-toolkit/object';
 
@@ -50,6 +54,11 @@ const nestedResult = toCamelCaseKeys(nested);
 //     }
 //   }
 // }
+
+// PascalCase 和 uppercase keys 的键也会被转换
+const raw = { UserId: 1, FIRST_NAME: 'JinHo', LAST: 'Yeom' };
+const converted = toCamelCaseKeys(raw);
+// converted 是 { userId: 1, firstName: 'JinHo', last: 'Yeom' }
 ```
 
 #### 参数
