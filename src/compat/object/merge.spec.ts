@@ -383,6 +383,14 @@ describe('merge', () => {
     expect(actual).toEqual({ a: ['x', 'y', 'z'] });
   });
 
+  it('should not preserve object properties when nested object is replaced by array', () => {
+    const actual = merge({ x: { a: 2 } }, { x: ['1'] });
+
+    expect(actual.x).toEqual(['1']);
+    expect(Object.keys(actual.x)).toEqual(['0']);
+    expect((actual.x as any).a).toBeUndefined();
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(merge).toEqualTypeOf<typeof mergeLodash>();
   });
