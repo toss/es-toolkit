@@ -14,6 +14,12 @@ const snakeCased = toSnakeCaseKeys(obj);
 
 オブジェクトのすべてのキーをsnake_caseに変換したい時に`toSnakeCaseKeys`を使用してください。ネストされたオブジェクトと配列内のオブジェクトも再帰的に変換されます。
 
+例えば、オブジェクトのキーは次のように変換されます。
+
+- `camelCase` → `snake_case`（例: `userId` → `user_id`）
+- `PascalCase` → `snake_case`（例: `UserId` → `user_id`）
+- `UPPERCASE_KEYS` → `snake_case`（例: `FIRST_NAME` → `first_name`, `LAST` → `last`）
+
 ```typescript
 import { toSnakeCaseKeys } from 'es-toolkit/object';
 

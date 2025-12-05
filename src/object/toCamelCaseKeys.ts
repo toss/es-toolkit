@@ -8,8 +8,12 @@ type SnakeToCamel<S extends string> = S extends `${infer H}_${infer T}`
 
 type PascalToCamel<S extends string> = S extends `${infer F}${infer R}` ? `${Lowercase<F>}${R}` : S;
 
-/** If it's snake_case, apply the snake_case rule; otherwise, just lowercase the first letter (including PascalCase → camelCase). */
-type AnyToCamel<S extends string> = S extends `${string}_${string}` ? SnakeToCamel<S> : PascalToCamel<S>;
+/** If it's snake_case, apply the snake_case rule; for uppercase keys, lowercase the entire string; otherwise, just lowercase the first letter (including PascalCase → camelCase). */
+type AnyToCamel<S extends string> = S extends `${string}_${string}`
+  ? SnakeToCamel<S>
+  : S extends Uppercase<S>
+    ? Lowercase<S>
+    : PascalToCamel<S>;
 
 type NonPlainObject =
   | Date
