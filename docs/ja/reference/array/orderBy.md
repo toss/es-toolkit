@@ -1,7 +1,6 @@
 # orderBy
 
-複数の基準と並び順に従って、オブジェクト配列をソートした新しい配列を返します。
-
+複数の基準と並び順に従って、配列をソートした新しい配列を返します。
 ```typescript
 const sorted = orderBy(arr, criteria, orders);
 ```
@@ -10,10 +9,29 @@ const sorted = orderBy(arr, criteria, orders);
 
 ### `orderBy(arr, criteria, orders)`
 
-オブジェクト配列を複数の条件で複合ソートしたい場合は `orderBy` を使用してください。各条件ごとに昇順または降順を指定でき、前の条件で同じ値の場合は次の条件でソートします。
-
+配列を複数の条件で複合ソートしたい場合は `orderBy` を使用してください。各条件ごとに昇順または降順を指定でき、前の条件で同じ値の場合は次の条件でソートします。
 ```typescript
 import { orderBy } from 'es-toolkit/array';
+
+// 文字列配列をソート
+const strings = ['banana', 'apple', 'cherry'];
+orderBy(strings, [], ['desc']);
+// Returns: ['cherry', 'banana', 'apple']
+
+// 文字列を長さでソート
+const strings = ['banana', 'a', 'cherry'];
+orderBy(strings, [x => x.length], ['asc']);
+// Returns: ['a', 'cherry', 'banana']
+
+// 大文字小文字を区別せずにソート
+const strings = ['Banana', 'apple', 'Cherry'];
+orderBy(strings, [x => x.toLowerCase()], ['asc']);
+// Returns: ['apple', 'Banana', 'Cherry']
+
+// 数値配列をソート
+const numbers = [3, 1, 4, 1, 5, 9];
+orderBy(numbers, [], ['desc']);
+// Returns: [9, 5, 4, 3, 1, 1]
 
 // 複数の基準でユーザー配列をソートします。
 const users = [
@@ -44,7 +62,6 @@ orderBy(products, ['category', product => product.name.length], ['asc', 'desc'])
 ```
 
 並び順の数が条件より少ない場合、最後の並び順を繰り返し使用します。
-
 ```typescript
 import { orderBy } from 'es-toolkit/array';
 
@@ -60,9 +77,9 @@ orderBy(data, ['a', 'b', 'c'], ['asc', 'desc']);
 
 #### パラメータ
 
-- `arr` (`T[]`): ソートするオブジェクト配列です。
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): ソートする基準です。オブジェクトのプロパティ名または値を返す関数を使用できます。
-- `orders` (`Array<'asc' | 'desc'>`): 各基準に対する並び順の配列です。`'asc'`は昇順、`'desc'`は降順を意味します。
+- `arr` (`readonly T[]`): ソートする配列です。
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`, オプション): ソートする基準です。オブジェクトのプロパティ名または値を返す関数を使用できます。指定しないか空配列の場合、プリミティブ型の値そのものでソートします。
+- `orders` (`Array<'asc' | 'desc'>`, オプション): 各基準に対する並び順の配列です。`'asc'`は昇順、`'desc'`は降順を意味します。デフォルトは `['asc']` です。
 
 #### 戻り値
 
