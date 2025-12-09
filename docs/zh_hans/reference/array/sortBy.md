@@ -1,7 +1,6 @@
 # sortBy
 
-根据给定的标准对对象数组进行升序排序,返回一个新数组。
-
+根据给定的标准对数组进行升序排序,返回一个新数组。
 ```typescript
 const sorted = sortBy(arr, criteria);
 ```
@@ -10,10 +9,29 @@ const sorted = sortBy(arr, criteria);
 
 ### `sortBy(arr, criteria)`
 
-当您想根据多个属性或计算值对对象数组进行排序时,请使用 `sortBy`。提供属性名或转换函数的数组,会按照该顺序设置优先级并进行升序排序。在对表格数据排序或需要复杂排序逻辑时非常有用。
-
+当您想根据多个属性或计算值对数组进行排序时,请使用 `sortBy`。提供属性名或转换函数的数组,会按照该顺序设置优先级并进行升序排序。在对表格数据排序或需要复杂排序逻辑时非常有用。
 ```typescript
 import { sortBy } from 'es-toolkit/array';
+
+// 对字符串数组排序
+const strings = ['banana', 'apple', 'cherry'];
+sortBy(strings);
+// Returns: ['apple', 'banana', 'cherry']
+
+// 按字符串长度排序
+const strings = ['banana', 'a', 'cherry'];
+sortBy(strings, [x => x.length]);
+// Returns: ['a', 'cherry', 'banana']
+
+// 不区分大小写排序
+const strings = ['Banana', 'apple', 'Cherry'];
+sortBy(strings, [x => x.toLowerCase()]);
+// Returns: ['apple', 'Banana', 'Cherry']
+
+// 对数字数组排序
+const numbers = [3, 1, 4, 1, 5, 9];
+sortBy(numbers);
+// Returns: [1, 1, 3, 4, 5, 9]
 
 // 按单个属性排序
 const users = [
@@ -42,7 +60,6 @@ const sorted = sortBy(employees, ['department', 'age']);
 ```
 
 可以使用函数创建复杂的排序标准。
-
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 
@@ -55,23 +72,20 @@ const products = [
 
 const sorted = sortBy(products, [
   'category',
-  item => -item.price, // 价格按降序排序
+  item => -item.price, // 价格按降序排序(负数转换)
 ]);
 // Returns: 先按类别排序,然后按价格从高到低排序
 
 // 按计算值排序
 const words = ['hello', 'a', 'wonderful', 'world'];
-const byLength = sortBy(
-  words.map(word => ({ word, length: word.length })),
-  ['length']
-);
-// Returns: 按字符串长度排序的对象数组
+const byLength = sortBy(words, [word => word.length]);
+// Returns: ['a', 'hello', 'world', 'wonderful']
 ```
 
 #### 参数
 
-- `arr` (`readonly T[]`): 要排序的对象数组。
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 排序标准。可以是对象属性名或转换函数的数组,前面的标准优先级更高。
+- `arr` (`readonly T[]`): 要排序的数组。
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`, 可选): 排序标准。可以是对象属性名或转换函数的数组,前面的标准优先级更高。如果未提供或为空数组,则按原始类型的值本身排序。
 
 #### 返回值
 

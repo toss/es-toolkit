@@ -1,7 +1,6 @@
 # sortBy
 
 Returns a new array sorted in ascending order by the given criteria.
-
 ```typescript
 const sorted = sortBy(arr, criteria);
 ```
@@ -10,10 +9,29 @@ const sorted = sortBy(arr, criteria);
 
 ### `sortBy(arr, criteria)`
 
-Use `sortBy` when you want to sort an array of objects by multiple properties or computed values. Provide property names or transformation functions as an array, and it sorts in ascending order with priority in that order. It's useful for sorting table data or when complex sorting logic is needed.
-
+Use `sortBy` when you want to sort an array by multiple properties or computed values. Provide property names or transformation functions as an array, and it sorts in ascending order with priority in that order. It's useful for sorting table data or when complex sorting logic is needed.
 ```typescript
 import { sortBy } from 'es-toolkit/array';
+
+// Sort an array of strings
+const strings = ['banana', 'apple', 'cherry'];
+sortBy(strings);
+// Returns: ['apple', 'banana', 'cherry']
+
+// Sort strings by length
+const strings = ['banana', 'a', 'cherry'];
+sortBy(strings, [x => x.length]);
+// Returns: ['a', 'cherry', 'banana']
+
+// Sort strings case-insensitively
+const strings = ['Banana', 'apple', 'Cherry'];
+sortBy(strings, [x => x.toLowerCase()]);
+// Returns: ['apple', 'Banana', 'Cherry']
+
+// Sort an array of numbers
+const numbers = [3, 1, 4, 1, 5, 9];
+sortBy(numbers);
+// Returns: [1, 1, 3, 4, 5, 9]
 
 // Sort by a single property.
 const users = [
@@ -42,7 +60,6 @@ const sorted = sortBy(employees, ['department', 'age']);
 ```
 
 You can create complex sorting criteria using functions.
-
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 
@@ -55,23 +72,20 @@ const products = [
 
 const sorted = sortBy(products, [
   'category',
-  item => -item.price, // Sort price in descending order
+  item => -item.price, // Sort price in descending order (negative conversion)
 ]);
 // Returns: Sort by category first, then by highest price
 
 // Sort by computed values.
 const words = ['hello', 'a', 'wonderful', 'world'];
-const byLength = sortBy(
-  words.map(word => ({ word, length: word.length })),
-  ['length']
-);
-// Returns: Array of objects sorted by string length
+const byLength = sortBy(words, [word => word.length]);
+// Returns: ['a', 'hello', 'world', 'wonderful']
 ```
 
 #### Parameters
 
-- `arr` (`readonly T[]`): The array of objects to sort.
-- `criteria` (`Array<((item: T) => unknown) | keyof T>`): Sorting criteria. An array of object property names or transformation functions, with earlier criteria having higher priority.
+- `arr` (`readonly T[]`): The array to sort.
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`, optional): Sorting criteria. An array of object property names or transformation functions, with earlier criteria having higher priority. If not provided or empty, sorts primitives by their own values.
 
 #### Returns
 
