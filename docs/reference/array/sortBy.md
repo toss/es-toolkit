@@ -1,6 +1,7 @@
 # sortBy
 
 Returns a new array sorted in ascending order by the given criteria.
+
 ```typescript
 const sorted = sortBy(arr, criteria);
 ```
@@ -10,6 +11,7 @@ const sorted = sortBy(arr, criteria);
 ### `sortBy(arr, criteria)`
 
 Use `sortBy` when you want to sort an array by multiple properties or computed values. Provide property names or transformation functions as an array, and it sorts in ascending order with priority in that order. It's useful for sorting table data or when complex sorting logic is needed.
+
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 
@@ -60,6 +62,7 @@ const sorted = sortBy(employees, ['department', 'age']);
 ```
 
 You can create complex sorting criteria using functions.
+
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 

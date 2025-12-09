@@ -1,6 +1,7 @@
 # sortBy
 
 주어진 기준에 따라 배열을 오름차순으로 정렬한 새 배열을 반환해요.
+
 ```typescript
 const sorted = sortBy(arr, criteria);
 ```
@@ -10,6 +11,7 @@ const sorted = sortBy(arr, criteria);
 ### `sortBy(arr, criteria)`
 
 배열을 여러 속성이나 계산된 값을 기준으로 정렬하고 싶을 때 `sortBy`를 사용하세요. 속성 이름이나 변환 함수를 배열로 제공하면, 해당 순서대로 우선순위를 두고 오름차순으로 정렬해요. 테이블 데이터를 정렬하거나 복잡한 정렬 로직이 필요할 때 유용해요.
+
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 
@@ -60,6 +62,7 @@ const sorted = sortBy(employees, ['department', 'age']);
 ```
 
 함수를 사용해서 복잡한 정렬 기준을 만들 수 있어요.
+
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 

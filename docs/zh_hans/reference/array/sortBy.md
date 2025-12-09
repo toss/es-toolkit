@@ -1,6 +1,7 @@
 # sortBy
 
 根据给定的标准对数组进行升序排序,返回一个新数组。
+
 ```typescript
 const sorted = sortBy(arr, criteria);
 ```
@@ -10,6 +11,7 @@ const sorted = sortBy(arr, criteria);
 ### `sortBy(arr, criteria)`
 
 当您想根据多个属性或计算值对数组进行排序时,请使用 `sortBy`。提供属性名或转换函数的数组,会按照该顺序设置优先级并进行升序排序。在对表格数据排序或需要复杂排序逻辑时非常有用。
+
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 
@@ -60,6 +62,7 @@ const sorted = sortBy(employees, ['department', 'age']);
 ```
 
 可以使用函数创建复杂的排序标准。
+
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 

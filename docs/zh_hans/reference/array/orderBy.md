@@ -1,6 +1,7 @@
 # orderBy
 
 根据多个标准和排序方向对数组进行排序,返回一个新数组。
+
 ```typescript
 const sorted = orderBy(arr, criteria, orders);
 ```
@@ -10,6 +11,7 @@ const sorted = orderBy(arr, criteria, orders);
 ### `orderBy(arr, criteria, orders)`
 
 当您想对数组进行多条件复合排序时,请使用 `orderBy`。可以为每个条件指定升序或降序,如果前面的条件值相同,则按下一个条件排序。
+
 ```typescript
 import { orderBy } from 'es-toolkit/array';
 
@@ -62,6 +64,7 @@ orderBy(products, ['category', product => product.name.length], ['asc', 'desc'])
 ```
 
 如果排序方向的数量少于条件数量,则重复使用最后一个方向。
+
 ```typescript
 import { orderBy } from 'es-toolkit/array';
 

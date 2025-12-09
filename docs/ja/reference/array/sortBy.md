@@ -1,6 +1,7 @@
 # sortBy
 
 与えられた基準に従って配列を昇順にソートした新しい配列を返します。
+
 ```typescript
 const sorted = sortBy(arr, criteria);
 ```
@@ -10,6 +11,7 @@ const sorted = sortBy(arr, criteria);
 ### `sortBy(arr, criteria)`
 
 配列を複数のプロパティまたは計算された値を基準にソートしたい場合は `sortBy` を使用してください。プロパティ名または変換関数を配列で提供すると、その順序で優先順位を付けて昇順にソートします。テーブルデータをソートしたり、複雑なソートロジックが必要なときに便利です。
+
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 
@@ -60,6 +62,7 @@ const sorted = sortBy(employees, ['department', 'age']);
 ```
 
 関数を使用して複雑なソート基準を作成できます。
+
 ```typescript
 import { sortBy } from 'es-toolkit/array';
 

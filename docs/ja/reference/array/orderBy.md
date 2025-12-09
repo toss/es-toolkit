@@ -1,6 +1,7 @@
 # orderBy
 
 複数の基準と並び順に従って、配列をソートした新しい配列を返します。
+
 ```typescript
 const sorted = orderBy(arr, criteria, orders);
 ```
@@ -10,6 +11,7 @@ const sorted = orderBy(arr, criteria, orders);
 ### `orderBy(arr, criteria, orders)`
 
 配列を複数の条件で複合ソートしたい場合は `orderBy` を使用してください。各条件ごとに昇順または降順を指定でき、前の条件で同じ値の場合は次の条件でソートします。
+
 ```typescript
 import { orderBy } from 'es-toolkit/array';
 
@@ -62,6 +64,7 @@ orderBy(products, ['category', product => product.name.length], ['asc', 'desc'])
 ```
 
 並び順の数が条件より少ない場合、最後の並び順を繰り返し使用します。
+
 ```typescript
 import { orderBy } from 'es-toolkit/array';
 

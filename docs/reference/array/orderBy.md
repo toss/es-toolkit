@@ -1,6 +1,7 @@
 # orderBy
 
 Returns a new array sorted by multiple criteria and sort directions.
+
 ```typescript
 const sorted = orderBy(arr, criteria, orders);
 ```
@@ -10,6 +11,7 @@ const sorted = orderBy(arr, criteria, orders);
 ### `orderBy(arr, criteria, orders)`
 
 Use `orderBy` when you want to perform compound sorting on an array with multiple conditions. You can specify ascending or descending order for each criterion, and if values are the same for the first criterion, it sorts by the next criterion.
+
 ```typescript
 import { orderBy } from 'es-toolkit/array';
 
@@ -62,6 +64,7 @@ orderBy(products, ['category', product => product.name.length], ['asc', 'desc'])
 ```
 
 If the number of sort directions is less than the number of criteria, the last direction is repeated.
+
 ```typescript
 import { orderBy } from 'es-toolkit/array';
 
