@@ -9,7 +9,7 @@
  * @template K - The type of keys.
  * @param {T[]} arr - The array to group.
  * @param {(item: T) => K} getKeyFromItem - A function that generates a key from an element.
- * @returns {Record<K, T[]>} An object where each key is associated with an array of elements that
+ * @returns {Partial<Record<K, [T, ...T[]]>>} An object where each key is associated with an array of elements that
  * share that key.
  *
  * @example
@@ -30,18 +30,22 @@
  * //   ]
  * // }
  */
-export function groupBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T[]> {
-  const result = {} as Record<K, T[]>;
+export function groupBy<T, K extends PropertyKey>(
+  arr: readonly T[],
+  getKeyFromItem: (item: T) => K
+): Partial<Record<K, [T, ...T[]]>> {
+  const result = {} as Partial<Record<K, [T, ...T[]]>>;
 
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
     const key = getKeyFromItem(item);
 
     if (!Object.hasOwn(result, key)) {
+      // @ts-expect-error - first item is added below
       result[key] = [];
     }
 
-    result[key].push(item);
+    result[key]!.push(item);
   }
 
   return result;
