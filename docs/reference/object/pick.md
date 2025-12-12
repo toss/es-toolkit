@@ -6,7 +6,7 @@ Returns a new object containing only the properties corresponding to the specifi
 const result = pick(obj, keys);
 ```
 
-## Reference
+## Usage
 
 ### `pick(obj, keys)`
 

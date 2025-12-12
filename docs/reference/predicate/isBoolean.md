@@ -6,7 +6,7 @@ Checks if a value is a boolean type.
 const result = isBoolean(value);
 ```
 
-## Reference
+## Usage
 
 ### `isBoolean(value)`
 

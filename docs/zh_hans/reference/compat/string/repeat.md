@@ -14,7 +14,7 @@
 const repeated = repeat(str, n);
 ```
 
-## 参考
+## 用法
 
 ### `repeat(str, n?)`
 

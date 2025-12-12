@@ -14,7 +14,7 @@
 const result = attempt(func, ...args);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `attempt(func, ...args)`
 

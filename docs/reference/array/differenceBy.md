@@ -6,7 +6,7 @@ Transforms elements of two arrays with a conversion function, computes their dif
 const result = differenceBy(firstArr, secondArr, mapper);
 ```
 
-## Reference
+## Usage
 
 ### `differenceBy(firstArr, secondArr, mapper)`
 
@@ -35,10 +35,10 @@ You can also compute the difference based on string length.
 import { differenceBy } from 'es-toolkit/array';
 
 const words1 = ['apple', 'banana', 'cherry'];
-const words2 = ['kiwi', 'pear'];
+const words2 = ['grape', 'lemon'];
 differenceBy(words1, words2, word => word.length);
 // Returns: ['banana', 'cherry']
-// 'apple' is excluded because it has the same length as 'kiwi' or 'pear'.
+// 'apple' is excluded because it has the same length as 'grape' or 'lemon'.
 ```
 
 #### Parameters

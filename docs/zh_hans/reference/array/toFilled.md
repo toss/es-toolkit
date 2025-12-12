@@ -6,7 +6,7 @@
 const filled = toFilled(arr, value, start?, end?);
 ```
 
-## 参考
+## 用法
 
 ### `toFilled(arr, value, start?, end?)`
 

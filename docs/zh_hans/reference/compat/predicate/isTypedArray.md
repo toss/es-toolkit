@@ -12,7 +12,7 @@
 const result = isTypedArray(x);
 ```
 
-## 参考
+## 用法
 
 ### `isTypedArray(x)`
 

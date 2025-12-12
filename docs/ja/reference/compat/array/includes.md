@@ -14,7 +14,7 @@
 const hasValue = includes(collection, target, fromIndex);
 ```
 
-## 参照
+## 使用法
 
 ### `includes(collection, target, fromIndex)`
 

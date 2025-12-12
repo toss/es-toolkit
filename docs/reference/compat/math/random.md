@@ -14,7 +14,7 @@ Creates a random number within a range.
 const result = random(min, max, floating);
 ```
 
-## Reference
+## Usage
 
 ### `random(floating?)`
 

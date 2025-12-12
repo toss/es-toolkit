@@ -6,7 +6,7 @@ Calculates the sum of array elements using a transformation function.
 const total = sumBy(items, getValue);
 ```
 
-## Reference
+## Usage
 
 ### `sumBy(items, getValue)`
 

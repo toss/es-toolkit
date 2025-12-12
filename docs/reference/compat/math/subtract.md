@@ -14,7 +14,7 @@ Subtracts two numbers.
 const result = subtract(value, other);
 ```
 
-## Reference
+## Usage
 
 ### `subtract(value, other)`
 

@@ -14,7 +14,7 @@ Checks if a value is an integer.
 const result = isInteger(value);
 ```
 
-## Reference
+## Usage
 
 ### `isInteger(value)`
 

@@ -14,7 +14,7 @@ Removes elements that match a condition from an array and returns the removed el
 const removedElements = remove(array, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `remove(array, predicate)`
 

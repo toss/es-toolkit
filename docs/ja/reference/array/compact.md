@@ -6,7 +6,7 @@
 const compacted = compact(arr);
 ```
 
-## 参照
+## 使用法
 
 ### `compact(arr)`
 

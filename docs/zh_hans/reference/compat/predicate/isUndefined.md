@@ -12,7 +12,7 @@
 const result = isUndefined(value);
 ```
 
-## 参考
+## 用法
 
 ### `isUndefined(x)`
 

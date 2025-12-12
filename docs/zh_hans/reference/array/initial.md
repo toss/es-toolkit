@@ -6,7 +6,7 @@
 const result = initial(arr);
 ```
 
-## 参考
+## 用法
 
 ### `initial(arr)`
 

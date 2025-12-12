@@ -6,7 +6,7 @@ Creates a new function that executes the given functions in sequence from right 
 const combined = flowRight(func1, func2, func3);
 ```
 
-## Reference
+## Usage
 
 ### `flowRight(...funcs)`
 

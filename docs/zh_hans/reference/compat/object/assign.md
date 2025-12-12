@@ -14,7 +14,7 @@
 const result = assign(target, ...sources);
 ```
 
-## 参考
+## 用法
 
 ### `assign(target, ...sources)`
 

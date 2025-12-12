@@ -14,7 +14,7 @@ Repeats a string a specified number of times.
 const repeated = repeat(str, n);
 ```
 
-## Reference
+## Usage
 
 ### `repeat(str, n?)`
 

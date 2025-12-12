@@ -14,7 +14,7 @@
 const result = kebabCase(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `kebabCase(str)`
 

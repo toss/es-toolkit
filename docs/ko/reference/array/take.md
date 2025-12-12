@@ -6,7 +6,7 @@
 const taken = take(arr, count);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `take(arr, count?)`
 

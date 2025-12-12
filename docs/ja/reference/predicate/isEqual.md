@@ -6,7 +6,7 @@
 const result = isEqual(a, b);
 ```
 
-## 参照
+## 使用法
 
 ### `isEqual(a, b)`
 

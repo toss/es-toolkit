@@ -14,7 +14,7 @@
 const pairs = toPairs(object);
 ```
 
-## 参考
+## 用法
 
 ### `toPairs(object)`
 

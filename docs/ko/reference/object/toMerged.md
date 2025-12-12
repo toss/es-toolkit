@@ -6,7 +6,7 @@
 const result = toMerged(target, source);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toMerged(target, source)`
 

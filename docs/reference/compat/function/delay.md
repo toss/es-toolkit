@@ -14,7 +14,7 @@ Sets a timer to execute a function after a specified amount of time.
 const timerId = delay(func, wait, ...args);
 ```
 
-## Reference
+## Usage
 
 ### `delay(func, wait, ...args)`
 

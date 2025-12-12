@@ -14,7 +14,7 @@ Converts a string to upper case.
 const upperCased = upperCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `upperCase(str)`
 

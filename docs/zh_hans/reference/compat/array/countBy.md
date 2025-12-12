@@ -14,7 +14,7 @@
 const counts = countBy(collection, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `countBy(collection, iteratee?)`
 

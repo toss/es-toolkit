@@ -14,7 +14,7 @@ Checks if a value is `NaN`.
 const result = isNaN(value);
 ```
 
-## Reference
+## Usage
 
 ### `isNaN(value)`
 

@@ -6,7 +6,7 @@ Returns a new array with the specified number of elements removed from the begin
 const dropped = drop(arr, itemsCount);
 ```
 
-## Reference
+## Usage
 
 ### `drop(arr, itemsCount)`
 

@@ -7,7 +7,7 @@ const numbers = rangeRight(end);
 const numbers = rangeRight(start, end, step?);
 ```
 
-## Reference
+## Usage
 
 ### `rangeRight(end)`
 

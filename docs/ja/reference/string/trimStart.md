@@ -6,7 +6,7 @@
 const trimmed = trimStart(str, chars);
 ```
 
-## 参照
+## 使用法
 
 ### `trimStart(str, chars?)`
 

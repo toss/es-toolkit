@@ -6,7 +6,7 @@ Unpacks grouped arrays and applies a transformation function to return a new arr
 const transformedArray = unzipWith(target, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `unzipWith(target, iteratee)`
 

@@ -14,7 +14,7 @@ Always returns a new empty array.
 const emptyArray = stubArray();
 ```
 
-## Reference
+## Usage
 
 ### `stubArray()`
 

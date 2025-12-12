@@ -14,7 +14,7 @@
 const result = assignWith(target, source1, source2, customizer);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `assignWith(object, ...sources, customizer)`
 

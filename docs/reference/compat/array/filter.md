@@ -14,7 +14,7 @@ Creates a new array with elements that satisfy the given condition.
 const result = filter(collection, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `filter(collection, predicate)`
 

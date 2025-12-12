@@ -6,7 +6,7 @@
 const result = intersectionWith(firstArr, secondArr, areItemsEqual);
 ```
 
-## 参考
+## 用法
 
 ### `intersectionWith(firstArr, secondArr, areItemsEqual)`
 

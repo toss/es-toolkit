@@ -6,7 +6,7 @@
 const shuffled = shuffle(arr);
 ```
 
-## 参照
+## 使用法
 
 ### `shuffle(arr)`
 

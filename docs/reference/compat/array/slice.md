@@ -14,7 +14,7 @@ Slices a portion of an array to create a new array.
 const sliced = slice(array, start, end);
 ```
 
-## Reference
+## Usage
 
 ### `slice(array, start, end)`
 

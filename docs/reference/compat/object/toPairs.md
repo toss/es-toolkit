@@ -14,7 +14,7 @@ Converts an object to an array of key-value pairs.
 const pairs = toPairs(object);
 ```
 
-## Reference
+## Usage
 
 ### `toPairs(object)`
 

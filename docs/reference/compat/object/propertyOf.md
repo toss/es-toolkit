@@ -14,7 +14,7 @@ Creates a function that retrieves values from various paths in a specific object
 const getter = propertyOf(obj);
 ```
 
-## Reference
+## Usage
 
 ### `propertyOf(object)`
 

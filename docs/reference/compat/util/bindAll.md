@@ -6,7 +6,7 @@ Binds methods of an object to the object itself.
 const boundObject = bindAll(object, methodNames);
 ```
 
-## Reference
+## Usage
 
 ### `bindAll(object, ...methodNames)`
 

@@ -12,7 +12,7 @@
 const bound = bindKey(object, key, ...partialArgs);
 ```
 
-## 参考
+## 用法
 
 ### `bindKey(object, key, ...partialArgs)`
 

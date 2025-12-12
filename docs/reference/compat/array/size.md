@@ -14,7 +14,7 @@ Returns the size of arrays, strings, and objects.
 const length = size(collection);
 ```
 
-## Reference
+## Usage
 
 ### `size(collection)`
 

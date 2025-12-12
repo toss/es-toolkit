@@ -6,7 +6,7 @@
 const result = isArrayLike(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isArrayLike(value)`
 

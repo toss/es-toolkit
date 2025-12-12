@@ -14,7 +14,7 @@ Finds the minimum value in an array.
 const result = min(items);
 ```
 
-## Reference
+## Usage
 
 ### `min(items?)`
 

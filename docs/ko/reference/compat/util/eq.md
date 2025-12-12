@@ -6,7 +6,7 @@
 const isEqual = eq(value, other);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `eq(value, other)`
 

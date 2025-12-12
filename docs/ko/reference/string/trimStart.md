@@ -6,7 +6,7 @@
 const trimmed = trimStart(str, chars);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `trimStart(str, chars?)`
 

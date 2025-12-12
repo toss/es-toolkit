@@ -6,7 +6,7 @@ Creates a new function that limits a function to be executed only once.
 const onceFunc = once(func);
 ```
 
-## Reference
+## Usage
 
 ### `once(func)`
 

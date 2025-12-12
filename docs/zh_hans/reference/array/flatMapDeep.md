@@ -6,7 +6,7 @@
 const result = flatMapDeep(arr, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `flatMapDeep(arr, iteratee)`
 

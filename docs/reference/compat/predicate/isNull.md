@@ -14,7 +14,7 @@ Checks if a value is `null`.
 const result = isNull(value);
 ```
 
-## Reference
+## Usage
 
 ### `isNull(value)`
 

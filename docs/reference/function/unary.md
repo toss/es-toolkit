@@ -6,7 +6,7 @@ Creates a new function that limits a function to accept only the first parameter
 const unaryFunc = unary(func);
 ```
 
-## Reference
+## Usage
 
 ### `unary(func)`
 

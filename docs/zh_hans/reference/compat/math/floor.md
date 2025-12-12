@@ -14,7 +14,7 @@
 const result = floor(number, precision);
 ```
 
-## 参考
+## 用法
 
 ### `floor(number, precision?)`
 

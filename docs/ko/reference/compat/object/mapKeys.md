@@ -14,7 +14,7 @@
 const result = mapKeys(obj, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `mapKeys(object, iteratee)`
 

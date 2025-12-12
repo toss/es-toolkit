@@ -14,7 +14,7 @@
 const total = sum(array);
 ```
 
-## 参照
+## 使用法
 
 ### `sum(array)`
 

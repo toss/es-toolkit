@@ -14,7 +14,7 @@
 const limitedFunction = before(n, func);
 ```
 
-## 参照
+## 使用法
 
 ### `before(n, func)`
 

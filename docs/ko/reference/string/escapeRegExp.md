@@ -6,7 +6,7 @@
 const result = escapeRegExp(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `escapeRegExp(str)`
 

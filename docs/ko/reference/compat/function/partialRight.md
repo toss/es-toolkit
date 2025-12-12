@@ -14,7 +14,7 @@
 const partialFunc = partialRight(func, ...args);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `partialRight(func, ...args)`
 

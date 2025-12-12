@@ -14,7 +14,7 @@ Inverts the keys and values of an object while grouping identical values into ar
 const inverted = invertBy(object, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `invertBy(object, iteratee?)`
 

@@ -14,7 +14,7 @@ Applies a function to each element and flattens the result.
 const result = flatMap(collection, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `flatMap(collection, iteratee)`
 

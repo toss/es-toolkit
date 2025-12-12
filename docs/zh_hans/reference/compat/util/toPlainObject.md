@@ -14,7 +14,7 @@
 const plainObj = toPlainObject(value);
 ```
 
-## 参考
+## 用法
 
 ### `toPlainObject(value)`
 

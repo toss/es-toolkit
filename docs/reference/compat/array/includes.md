@@ -14,7 +14,7 @@ Checks if a specific value is included in an array, object, or string.
 const hasValue = includes(collection, target, fromIndex);
 ```
 
-## Reference
+## Usage
 
 ### `includes(collection, target, fromIndex)`
 

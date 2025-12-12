@@ -14,7 +14,7 @@
 const result = startsWith(str, target);
 ```
 
-## 参照
+## 使用法
 
 ### `startsWith(str, target, position?)`
 

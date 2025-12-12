@@ -6,7 +6,7 @@
 const result = isSubsetWith(superset, subset, areItemsEqual);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isSubsetWith(superset, subset, areItemsEqual)`
 

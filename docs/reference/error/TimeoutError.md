@@ -6,7 +6,7 @@ An error class representing an operation that has timed out.
 const error = new TimeoutError(message);
 ```
 
-## Reference
+## Usage
 
 ### `new TimeoutError(message?)`
 
@@ -49,6 +49,6 @@ await fetchWithTimeout('https://example.com/api/slow');
 
 - `message` (`string`, optional): The error message. Defaults to `'The operation was timed out'`.
 
-### Returns
+#### Returns
 
 (`TimeoutError`): Returns an error instance representing a timed out operation. It inherits from `Error` and the `name` property is `'TimeoutError'`.

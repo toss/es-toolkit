@@ -6,7 +6,7 @@
 const result = flattenDeep(arr);
 ```
 
-## 参考
+## 用法
 
 ### `flattenDeep(arr)`
 

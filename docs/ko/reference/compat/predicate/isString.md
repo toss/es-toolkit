@@ -14,7 +14,7 @@
 const result = isString(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isString(value)`
 

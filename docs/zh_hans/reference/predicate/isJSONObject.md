@@ -6,7 +6,7 @@
 const result = isJSONObject(value);
 ```
 
-## 参考
+## 用法
 
 ### `isJSONObject(value)`
 

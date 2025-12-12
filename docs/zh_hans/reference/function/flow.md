@@ -6,7 +6,7 @@
 const combinedFunc = flow(func1, func2, func3);
 ```
 
-## 参考
+## 用法
 
 ### `flow(...funcs)`
 

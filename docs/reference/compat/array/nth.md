@@ -12,7 +12,7 @@ Gets the element at the specified index of an array.
 const element = nth(array, index);
 ```
 
-## Reference
+## Usage
 
 ### `nth(array, index)`
 

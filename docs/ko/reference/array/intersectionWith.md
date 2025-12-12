@@ -6,7 +6,7 @@
 const result = intersectionWith(firstArr, secondArr, areItemsEqual);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `intersectionWith(firstArr, secondArr, areItemsEqual)`
 

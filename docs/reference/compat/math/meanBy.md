@@ -14,7 +14,7 @@ Calculates the average of values that meet a condition.
 const average = meanBy(array, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `meanBy(array, iteratee)`
 

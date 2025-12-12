@@ -14,7 +14,7 @@
 const padded = padEnd(str, length, chars);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `padEnd(str, length?, chars?)`
 

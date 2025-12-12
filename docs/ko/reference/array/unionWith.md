@@ -6,7 +6,7 @@
 const unified = unionWith(arr1, arr2, areItemsEqual);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `unionWith(arr1, arr2, areItemsEqual)`
 

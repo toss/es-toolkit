@@ -14,7 +14,7 @@ Splits the elements of a collection into two groups based on a condition.
 const [truthy, falsy] = partition(collection, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `partition(collection, predicate)`
 

@@ -14,7 +14,7 @@
 const startCased = startCase(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `startCase(str)`
 

@@ -6,7 +6,7 @@
 const result = xor(arr1, arr2);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `xor(arr1, arr2)`
 

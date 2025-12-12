@@ -14,7 +14,7 @@ Checks if a value is a finite number.
 const result = isFinite(value);
 ```
 
-## Reference
+## Usage
 
 ### `isFinite(value)`
 
@@ -50,4 +50,5 @@ isFinite(undefined); // false
 
 #### Returns
 
-(`boolean`): Returns `true` if the value is a finite number, otherwise `false`.
+(`value is number`): Returns `true` if the value is a finite number, otherwise `false`.  
+When `true`, TypeScript narrows the type of `value` to `number`.

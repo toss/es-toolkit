@@ -6,7 +6,7 @@ Checks if an object partially matches using a custom comparison function.
 const result = isMatchWith(target, source, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `isMatchWith(target, source, customizer)`
 

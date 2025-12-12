@@ -6,7 +6,7 @@ Checks if a value is neither `null` nor `undefined`.
 const result = isNotNil(value);
 ```
 
-## Reference
+## Usage
 
 ### `isNotNil(value)`
 

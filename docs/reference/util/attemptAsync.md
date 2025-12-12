@@ -6,7 +6,7 @@ Executes an async function and returns the result or error as a tuple.
 const [error, result] = await attemptAsync(func);
 ```
 
-## Reference
+## Usage
 
 ### `attemptAsync(func)`
 

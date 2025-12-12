@@ -14,7 +14,7 @@
 const result = defaults(object, source);
 ```
 
-## 参考
+## 用法
 
 ### `defaults(object, ...sources)`
 

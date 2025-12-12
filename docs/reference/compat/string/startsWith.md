@@ -14,7 +14,7 @@ Checks if a string starts with a given string.
 const result = startsWith(str, target);
 ```
 
-## Reference
+## Usage
 
 ### `startsWith(str, target, position?)`
 

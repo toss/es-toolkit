@@ -14,7 +14,7 @@
 const timerId = delay(func, wait, ...args);
 ```
 
-## 参考
+## 用法
 
 ### `delay(func, wait, ...args)`
 

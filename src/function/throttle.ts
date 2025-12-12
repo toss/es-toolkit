@@ -1,8 +1,8 @@
 import { debounce } from './debounce.ts';
 
-interface ThrottleOptions {
+export interface ThrottleOptions {
   /**
-   * An optional AbortSignal to cancel the debounced function.
+   * An optional AbortSignal to cancel the throttled function.
    */
   signal?: AbortSignal;
 
@@ -55,16 +55,27 @@ export function throttle<F extends (...args: any[]) => void>(
 ): ThrottledFunction<F> {
   let pendingAt: number | null = null;
 
-  const debounced = debounce(func, throttleMs, { signal, edges });
+  const debounced = debounce(
+    function (this: any, ...args: Parameters<F>) {
+      pendingAt = Date.now();
+      func.apply(this, args);
+    },
+    throttleMs,
+    { signal, edges }
+  );
 
   const throttled = function (this: any, ...args: Parameters<F>) {
     if (pendingAt == null) {
       pendingAt = Date.now();
-    } else {
-      if (Date.now() - pendingAt >= throttleMs) {
-        pendingAt = Date.now();
-        debounced.cancel();
-      }
+    }
+
+    if (Date.now() - pendingAt >= throttleMs) {
+      pendingAt = Date.now();
+      func.apply(this, args);
+
+      debounced.cancel();
+      debounced.schedule();
+      return;
     }
 
     debounced.apply(this, args);

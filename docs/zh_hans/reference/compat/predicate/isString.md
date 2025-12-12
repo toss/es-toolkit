@@ -12,7 +12,7 @@
 const result = isString(value);
 ```
 
-## 参考
+## 用法
 
 ### `isString(value)`
 

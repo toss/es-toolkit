@@ -6,7 +6,7 @@
 await timeout(ms);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `timeout(ms)`
 

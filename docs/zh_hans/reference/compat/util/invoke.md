@@ -14,7 +14,7 @@
 const result = invoke(object, path, args);
 ```
 
-## 参考
+## 用法
 
 ### `invoke(object, path, args)`
 

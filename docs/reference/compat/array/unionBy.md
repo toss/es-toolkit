@@ -14,7 +14,7 @@ Merges multiple arrays and keeps only unique values based on a specified criteri
 const result = unionBy(...arrays, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `unionBy(...arrays, iteratee)`
 

@@ -6,7 +6,7 @@
 const transformedArray = unzipWith(target, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `unzipWith(target, iteratee)`
 
@@ -88,7 +88,7 @@ console.log(empty); // throws Error
 - **配列風オブジェクト**: 通常の配列の他に、配列風オブジェクト(array-like objects)も処理できます。
 - **iteratee関数**: iteratee関数は再構成された要素を引数として受け取り、任意の型に変換できます。iterateeがnullまたはundefinedの場合、`unzip`のように動作し、変換せずに結合が解かれた配列を返します。
 
-### インターフェース
+### 使用法
 
 ```typescript
 function unzipWith<T>(array: T[][] | ArrayLike<ArrayLike<T>> | null | undefined): T[][];

@@ -6,7 +6,7 @@
 const result = isSymbol(value);
 ```
 
-## 参考
+## 用法
 
 ### `isSymbol(value)`
 

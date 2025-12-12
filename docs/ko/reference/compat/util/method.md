@@ -6,7 +6,7 @@
 const methodFunc = method(path, ...args);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `method(path, ...args)`
 

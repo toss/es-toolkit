@@ -6,7 +6,7 @@
 const result = at(arr, indices);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `at(arr, indices)`
 

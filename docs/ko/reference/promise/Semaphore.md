@@ -6,7 +6,7 @@
 const semaphore = new Semaphore(capacity);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `Semaphore(capacity)`
 

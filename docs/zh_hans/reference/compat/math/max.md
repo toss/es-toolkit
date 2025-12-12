@@ -14,7 +14,7 @@
 const result = max(items);
 ```
 
-## 参考
+## 用法
 
 ### `max(items?)`
 

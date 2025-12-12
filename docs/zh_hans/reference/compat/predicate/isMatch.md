@@ -6,7 +6,7 @@
 const result = isMatch(target, source);
 ```
 
-## 参考
+## 用法
 
 ### `isMatch(target, source)`
 

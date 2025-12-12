@@ -14,7 +14,7 @@
 const keyArray = keys(object);
 ```
 
-## 参考
+## 用法
 
 ### `keys(object)`
 

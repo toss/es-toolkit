@@ -6,7 +6,7 @@
 const debouncedFunc = debounce(func, debounceMs, options);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `debounce(func, debounceMs, options)`
 

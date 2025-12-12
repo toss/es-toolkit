@@ -14,7 +14,7 @@
 const result = subtract(value, other);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `subtract(value, other)`
 

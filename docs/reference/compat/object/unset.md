@@ -14,7 +14,7 @@ Removes the property at the specified path of the object.
 const success = unset(obj, path);
 ```
 
-## Reference
+## Usage
 
 ### `unset(obj, path)`
 

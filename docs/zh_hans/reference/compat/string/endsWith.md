@@ -14,7 +14,7 @@
 const result = endsWith(str, target);
 ```
 
-## 参考
+## 用法
 
 ### `endsWith(str, target, position?)`
 

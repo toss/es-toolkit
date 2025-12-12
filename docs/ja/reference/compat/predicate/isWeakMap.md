@@ -14,7 +14,7 @@
 const result = isWeakMap(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isWeakMap(value)`
 

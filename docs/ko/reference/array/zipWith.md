@@ -6,7 +6,7 @@
 const result = zipWith(...arrs, combine);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `zipWith(...arrs, combine)`
 

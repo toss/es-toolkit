@@ -7,7 +7,7 @@ const result = inRange(value, maximum);
 const result = inRange(value, minimum, maximum);
 ```
 
-## 参照
+## 使用法
 
 ### `inRange(value, maximum)`
 

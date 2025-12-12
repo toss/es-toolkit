@@ -14,7 +14,7 @@
 const reversed = reverse(array);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `reverse(array)`
 

@@ -14,7 +14,7 @@
 const index = sortedIndexBy(array, value, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `sortedIndexBy(array, value, iteratee)`
 

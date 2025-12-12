@@ -14,7 +14,7 @@
 const result = lowerCase(str);
 ```
 
-## 参照
+## 使用法
 
 ### `lowerCase(str)`
 

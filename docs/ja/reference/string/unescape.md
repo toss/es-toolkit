@@ -6,7 +6,7 @@ HTMLエンティティ文字を元の文字に変換します。
 const result = unescape(str);
 ```
 
-## 参照
+## 使用法
 
 ### `unescape(str)`
 

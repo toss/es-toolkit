@@ -6,7 +6,7 @@ Ensures that multiple asynchronous tasks do not execute simultaneously.
 const mutex = new Mutex();
 ```
 
-## Reference
+## Usage
 
 ### `Mutex()`
 

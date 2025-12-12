@@ -14,7 +14,7 @@ Finds the intersection of multiple arrays.
 const result = intersection(...arrays);
 ```
 
-## Reference
+## Usage
 
 ### `intersection(...arrays)`
 

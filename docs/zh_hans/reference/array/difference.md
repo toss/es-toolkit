@@ -6,7 +6,7 @@
 const result = difference(firstArr, secondArr);
 ```
 
-## 参考
+## 用法
 
 ### `difference(firstArr, secondArr)`
 

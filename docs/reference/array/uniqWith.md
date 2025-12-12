@@ -6,7 +6,7 @@ Returns a new array with duplicate elements removed using a comparison function.
 const uniqueArray = uniqWith(arr, areItemsEqual);
 ```
 
-## Reference
+## Usage
 
 ### `uniqWith(arr, areItemsEqual)`
 

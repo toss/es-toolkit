@@ -14,7 +14,7 @@
 const result = isMap(value);
 ```
 
-## 参考
+## 用法
 
 ### `isMap(value)`
 

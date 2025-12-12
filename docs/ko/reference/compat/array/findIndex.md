@@ -14,7 +14,7 @@
 const index = findIndex(arr, doesMatch, fromIndex);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `findIndex(arr, doesMatch, fromIndex)`
 

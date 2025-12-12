@@ -6,7 +6,7 @@ Creates a function that checks if an object satisfies all the conditions defined
 const checker = conforms(predicates);
 ```
 
-## Reference
+## Usage
 
 ### `conforms(source)`
 

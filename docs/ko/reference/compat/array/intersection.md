@@ -14,7 +14,7 @@
 const result = intersection(...arrays);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `intersection(...arrays)`
 

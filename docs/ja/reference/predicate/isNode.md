@@ -6,7 +6,7 @@
 const result = isNode();
 ```
 
-## 参照
+## 使用法
 
 ### `isNode()`
 

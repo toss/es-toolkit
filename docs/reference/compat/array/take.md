@@ -15,7 +15,7 @@ const result = take([1, 2, 3, 4, 5], 3);
 // result becomes [1, 2, 3].
 ```
 
-## Reference
+## Usage
 
 ### `take(array, count)`
 

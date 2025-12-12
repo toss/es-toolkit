@@ -12,7 +12,7 @@
 const currentTime = now();
 ```
 
-## 参考
+## 用法
 
 ### `now()`
 

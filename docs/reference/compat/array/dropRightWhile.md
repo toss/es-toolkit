@@ -14,7 +14,7 @@ Removes elements from the end of an array based on a predicate function.
 const result = dropRightWhile(array, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `dropRightWhile(array, predicate)`
 

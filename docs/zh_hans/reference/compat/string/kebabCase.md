@@ -14,7 +14,7 @@
 const result = kebabCase(str);
 ```
 
-## 参考
+## 用法
 
 ### `kebabCase(str)`
 

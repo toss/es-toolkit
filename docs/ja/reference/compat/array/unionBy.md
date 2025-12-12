@@ -14,7 +14,7 @@
 const result = unionBy(...arrays, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `unionBy(...arrays, iteratee)`
 

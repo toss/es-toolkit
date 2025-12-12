@@ -6,7 +6,7 @@
 const max = maxBy(items, getValue);
 ```
 
-## 参考
+## 用法
 
 ### `maxBy(items, getValue)`
 

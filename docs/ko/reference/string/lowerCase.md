@@ -6,7 +6,7 @@
 const result = lowerCase(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `lowerCase(str)`
 

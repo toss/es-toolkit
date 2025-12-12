@@ -6,7 +6,7 @@
 const result = isEqual(a, b);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isEqual(a, b)`
 

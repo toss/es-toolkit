@@ -14,7 +14,7 @@
 const conditionFunction = cond(pairs);
 ```
 
-## 参照
+## 使用法
 
 ### `cond(pairs)`
 

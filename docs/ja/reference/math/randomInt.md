@@ -6,7 +6,7 @@
 const randomInteger = randomInt(min, max);
 ```
 
-## 参照
+## 使用法
 
 ### `randomInt(maximum)` / `randomInt(minimum, maximum)`
 

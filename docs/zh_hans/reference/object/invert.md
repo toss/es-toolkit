@@ -6,7 +6,7 @@
 const inverted = invert(obj);
 ```
 
-## 参考
+## 用法
 
 ### `invert(obj)`
 

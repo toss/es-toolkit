@@ -6,7 +6,7 @@ Creates a deep copy of the given value.
 const deepCloned = cloneDeep(obj);
 ```
 
-## Reference
+## Usage
 
 ### `cloneDeep(obj)`
 

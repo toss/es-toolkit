@@ -6,7 +6,7 @@
 const result = flatten(arr, depth);
 ```
 
-## 参考
+## 用法
 
 ### `flatten(arr, depth = 1)`
 

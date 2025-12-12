@@ -14,7 +14,7 @@
 const maxItem = maxBy(array, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `maxBy(array, iteratee)`
 

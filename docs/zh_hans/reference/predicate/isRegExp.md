@@ -6,7 +6,7 @@
 const result = isRegExp(value);
 ```
 
-## 参考
+## 用法
 
 ### `isRegExp(value)`
 

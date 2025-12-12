@@ -14,7 +14,7 @@ Iterates over only the object's own properties, calling a function for each prop
 const result = forOwn(obj, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `forOwn(object, iteratee)`
 

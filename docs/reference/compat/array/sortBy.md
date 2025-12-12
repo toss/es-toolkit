@@ -14,7 +14,7 @@ Sorts an array in ascending order based on multiple criteria.
 const sorted = sortBy(collection, ...iteratees);
 ```
 
-## Reference
+## Usage
 
 ### `sortBy(collection, ...iteratees)`
 

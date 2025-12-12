@@ -12,7 +12,7 @@
 const result = isEqualWith(a, b, customizer);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isEqualWith(a, b, areValuesEqual?)`
 

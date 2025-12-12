@@ -7,7 +7,7 @@ const numbers = rangeRight(end);
 const numbers = rangeRight(start, end, step?);
 ```
 
-## 参考
+## 用法
 
 ### `rangeRight(end)`
 

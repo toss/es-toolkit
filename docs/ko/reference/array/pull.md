@@ -6,7 +6,7 @@
 const result = pull(arr, valuesToRemove);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `pull(arr, valuesToRemove)`
 

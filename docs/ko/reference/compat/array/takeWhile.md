@@ -14,7 +14,7 @@
 const result = takeWhile(array, predicate);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `takeWhile(array, predicate)`
 

@@ -14,7 +14,7 @@
 const minItem = minBy(array, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `minBy(array, iteratee)`
 

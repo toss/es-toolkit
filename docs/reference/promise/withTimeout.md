@@ -6,7 +6,7 @@ Sets a time limit on an asynchronous function, throwing a `TimeoutError` if it d
 await withTimeout(run, ms);
 ```
 
-## Reference
+## Usage
 
 ### `withTimeout(run, ms)`
 

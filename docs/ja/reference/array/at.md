@@ -6,7 +6,7 @@
 const result = at(arr, indices);
 ```
 
-## 参照
+## 使用法
 
 ### `at(arr, indices)`
 

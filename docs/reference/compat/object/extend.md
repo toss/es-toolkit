@@ -14,7 +14,7 @@ Copies own and inherited properties from source objects to a target object.
 const result = extend(object, source);
 ```
 
-## Reference
+## Usage
 
 ### `extend(object, ...sources)`
 

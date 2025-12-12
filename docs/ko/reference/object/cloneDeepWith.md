@@ -6,7 +6,7 @@
 const customCloned = cloneDeepWith(obj, cloneValue);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `cloneDeepWith(obj, cloneValue)`
 

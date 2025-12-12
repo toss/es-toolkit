@@ -6,7 +6,7 @@ Checks if one array is a subset of another array based on a custom comparison fu
 const result = isSubsetWith(superset, subset, areItemsEqual);
 ```
 
-## Reference
+## Usage
 
 ### `isSubsetWith(superset, subset, areItemsEqual)`
 

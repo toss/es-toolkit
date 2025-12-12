@@ -14,7 +14,7 @@ Converts a value to a string and then to uppercase.
 const uppercased = toUpper(value);
 ```
 
-## Reference
+## Usage
 
 ### `toUpper(value?)`
 

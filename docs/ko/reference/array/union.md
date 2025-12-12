@@ -6,7 +6,7 @@
 const unified = union(arr1, arr2);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `union(arr1, arr2)`
 

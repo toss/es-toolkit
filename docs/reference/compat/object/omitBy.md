@@ -14,7 +14,7 @@ Creates a new object excluding properties for which the predicate function retur
 const result = omitBy(obj, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `omitBy(object, predicate)`
 

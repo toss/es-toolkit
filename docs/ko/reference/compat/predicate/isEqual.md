@@ -12,7 +12,7 @@
 const result = isEqual(value1, value2);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isEqual(a, b)`
 

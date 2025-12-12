@@ -14,7 +14,7 @@
 const boundFunction = bind(func, thisObj, ...partialArgs);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `bind(func, thisObj, ...partialArgs)`
 

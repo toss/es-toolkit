@@ -6,7 +6,7 @@
 const result = flatten(arr, depth);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `flatten(arr, depth = 1)`
 

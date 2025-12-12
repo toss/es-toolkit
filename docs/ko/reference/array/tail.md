@@ -6,7 +6,7 @@
 const result = tail(arr);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `tail(arr)`
 

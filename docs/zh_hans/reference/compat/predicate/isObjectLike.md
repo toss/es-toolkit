@@ -6,7 +6,7 @@
 const result = isObjectLike(value);
 ```
 
-## 参考
+## 用法
 
 ### `isObjectLike(value)`
 

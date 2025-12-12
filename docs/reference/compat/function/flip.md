@@ -12,7 +12,7 @@ Creates a function that reverses the order of arguments for the given function.
 const flippedFunc = flip(func);
 ```
 
-## Reference
+## Usage
 
 ### `flip(func)`
 

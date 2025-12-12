@@ -6,7 +6,7 @@
 const result = isBrowser();
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isBrowser()`
 

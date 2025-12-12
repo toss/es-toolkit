@@ -12,7 +12,7 @@
 const result = isArrayBuffer(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isArrayBuffer(value)`
 

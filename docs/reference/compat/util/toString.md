@@ -14,7 +14,7 @@ Converts a value to a string.
 const str = toString(value);
 ```
 
-## Reference
+## Usage
 
 ### `toString(value)`
 

@@ -15,7 +15,27 @@
  * const result = omit(obj, ['b', 'c']);
  * // result will be { a: 1 }
  */
-export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: readonly K[]): Omit<T, K> {
+export function omit<T extends Record<PropertyKey, any>, K extends keyof T>(obj: T, keys: readonly K[]): Omit<T, K>;
+
+/**
+ * Creates a new object with specified keys omitted.
+ *
+ * This overload supports dynamic key arrays determined at runtime,
+ * useful when working with keys from Object.keys() or similar operations.
+ *
+ * @template T - The type of object.
+ * @param {T} obj - The object to omit keys from.
+ * @param {PropertyKey[]} keys - An array of keys to be omitted from the object. Supports dynamic arrays.
+ * @returns {Partial<T>} A new object with the specified keys omitted.
+ *
+ * @example
+ * const obj = { a: 1, b: 2, c: 3 };
+ * const keysToOmit = Object.keys({ b: true, c: true }); // string[]
+ * const result = omit(obj, keysToOmit);
+ * // result will be { a: 1 }
+ */
+export function omit<T extends Record<PropertyKey, any>>(obj: T, keys: readonly PropertyKey[]): Partial<T>;
+export function omit<T extends Record<PropertyKey, any>>(obj: T, keys: readonly PropertyKey[]): Partial<T> {
   const result = { ...obj };
 
   for (let i = 0; i < keys.length; i++) {
@@ -23,5 +43,5 @@ export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, k
     delete result[key];
   }
 
-  return result as Omit<T, K>;
+  return result;
 }

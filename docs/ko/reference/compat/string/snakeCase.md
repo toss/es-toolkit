@@ -14,7 +14,7 @@
 const snakeCased = snakeCase(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `snakeCase(str)`
 

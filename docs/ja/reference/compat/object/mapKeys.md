@@ -14,7 +14,7 @@
 const result = mapKeys(obj, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `mapKeys(object, iteratee)`
 

@@ -14,7 +14,7 @@ Converts a value to a string and then transforms it to lowercase.
 const lowercased = toLower(value);
 ```
 
-## Reference
+## Usage
 
 ### `toLower(value?)`
 

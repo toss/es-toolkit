@@ -14,7 +14,7 @@
 const numbers = rangeRight(start, end, step);
 ```
 
-## 参照
+## 使用法
 
 ### `rangeRight(end)`
 

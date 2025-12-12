@@ -12,7 +12,7 @@ Checks if a value is a Date object.
 const result = isDate(value);
 ```
 
-## Reference
+## Usage
 
 ### `isDate(value)`
 

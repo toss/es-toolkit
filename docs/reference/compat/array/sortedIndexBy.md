@@ -14,7 +14,7 @@ Finds the lowest index at which a value should be inserted into a sorted array a
 const index = sortedIndexBy(array, value, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `sortedIndexBy(array, value, iteratee)`
 

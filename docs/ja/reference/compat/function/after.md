@@ -14,7 +14,7 @@
 const restrictedFunction = after(n, func);
 ```
 
-## 参照
+## 使用法
 
 ### `after(n, func)`
 

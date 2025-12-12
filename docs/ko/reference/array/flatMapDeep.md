@@ -6,7 +6,7 @@
 const result = flatMapDeep(arr, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `flatMapDeep(arr, iteratee)`
 

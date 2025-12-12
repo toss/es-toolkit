@@ -6,7 +6,7 @@
 const length = toLength(value);
 ```
 
-## 参考
+## 用法
 
 ### `toLength(value)`
 

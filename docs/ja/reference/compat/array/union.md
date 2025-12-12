@@ -14,7 +14,7 @@
 const result = union(...arrays);
 ```
 
-## 参照
+## 使用法
 
 ### `union(...arrays)`
 

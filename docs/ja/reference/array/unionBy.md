@@ -6,7 +6,7 @@
 const unified = unionBy(arr1, arr2, mapper);
 ```
 
-## 参照
+## 使用法
 
 ### `unionBy(arr1, arr2, mapper)`
 

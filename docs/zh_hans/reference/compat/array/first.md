@@ -14,7 +14,7 @@
 const firstElement = first(array);
 ```
 
-## 参考
+## 用法
 
 ### `first(array)`
 

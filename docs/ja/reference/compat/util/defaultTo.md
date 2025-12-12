@@ -6,7 +6,7 @@
 const result = defaultTo(value, defaultValue);
 ```
 
-## 参照
+## 使用法
 
 ### `defaultTo(value, defaultValue)`
 

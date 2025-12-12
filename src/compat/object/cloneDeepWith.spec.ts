@@ -75,7 +75,7 @@ describe('cloneDeepWith', function () {
       actual = last(arguments);
     });
 
-    expect(actual instanceof Map);
+    expect(actual instanceof Map).toBe(true);
   });
 
   const methodName = 'cloneDeepWith';

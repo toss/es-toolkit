@@ -14,7 +14,7 @@
 const result = castArray(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `castArray(value?)`
 

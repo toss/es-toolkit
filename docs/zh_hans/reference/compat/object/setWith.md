@@ -14,7 +14,7 @@
 const result = setWith(obj, path, value, customizer);
 ```
 
-## 参考
+## 用法
 
 ### `setWith(object, path, value, customizer)`
 

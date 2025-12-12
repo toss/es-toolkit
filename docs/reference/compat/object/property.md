@@ -14,7 +14,7 @@ Creates a function that retrieves the value at a specified path.
 const getter = property(path);
 ```
 
-## Reference
+## Usage
 
 ### `property(path)`
 

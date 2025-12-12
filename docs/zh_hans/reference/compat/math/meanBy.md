@@ -14,7 +14,7 @@
 const average = meanBy(array, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `meanBy(array, iteratee)`
 

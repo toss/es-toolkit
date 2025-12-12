@@ -7,7 +7,7 @@ const numbers = range(end);
 const numbers = range(start, end, step);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `range(end)`
 

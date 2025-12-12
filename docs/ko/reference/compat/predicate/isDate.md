@@ -12,7 +12,7 @@
 const result = isDate(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isDate(value)`
 

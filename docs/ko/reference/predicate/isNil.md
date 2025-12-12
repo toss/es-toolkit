@@ -6,7 +6,7 @@
 const result = isNil(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isNil(value)`
 

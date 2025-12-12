@@ -6,7 +6,7 @@
 const result = omitBy(obj, shouldOmit);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `omitBy(obj, shouldOmit)`
 

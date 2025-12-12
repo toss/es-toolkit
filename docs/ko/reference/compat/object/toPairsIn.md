@@ -14,7 +14,7 @@
 const pairs = toPairsIn(object);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toPairsIn(object)`
 

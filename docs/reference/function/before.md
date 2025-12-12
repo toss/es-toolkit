@@ -6,7 +6,7 @@ Creates a new function that limits the number of times a function can be called.
 const limitedFunc = before(n, func);
 ```
 
-## Reference
+## Usage
 
 ### `before(n, func)`
 

@@ -14,7 +14,7 @@ Finds the index of the last element in an array that satisfies a condition.
 const lastIndex = findLastIndex(array, predicate, fromIndex);
 ```
 
-## Reference
+## Usage
 
 ### `findLastIndex(array, predicate, fromIndex)`
 

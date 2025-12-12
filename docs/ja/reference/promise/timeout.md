@@ -6,7 +6,7 @@
 await timeout(ms);
 ```
 
-## 参照
+## 使用法
 
 ### `timeout(ms)`
 

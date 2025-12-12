@@ -14,7 +14,7 @@
 const getter = propertyOf(obj);
 ```
 
-## 参照
+## 使用法
 
 ### `propertyOf(object)`
 

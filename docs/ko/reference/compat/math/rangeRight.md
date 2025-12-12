@@ -14,7 +14,7 @@
 const numbers = rangeRight(start, end, step);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `rangeRight(end)`
 

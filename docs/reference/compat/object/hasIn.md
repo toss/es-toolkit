@@ -14,7 +14,7 @@ Checks if a property at the specified path exists in the object, including inher
 const exists = hasIn(object, path);
 ```
 
-## Reference
+## Usage
 
 ### `hasIn(object, path)`
 

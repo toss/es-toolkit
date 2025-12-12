@@ -14,7 +14,7 @@ Finds the key of the last element matching a predicate, searching from the end.
 const key = findLastKey(obj, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `findLastKey(obj, predicate)`
 

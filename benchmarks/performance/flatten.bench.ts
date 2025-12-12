@@ -7,7 +7,7 @@ const flattenToolkit = flattenToolkit_;
 const flattenCompatToolkit = flattenCompatToolkit_;
 const flattenDepthLodash = flattenDepthLodash_;
 
-const createNestedArray = (values: any[]) => {
+const createNestedArray = (values: any[]): any[] => {
   if (values.length === 0) {
     return [];
   }
@@ -23,6 +23,7 @@ describe('flatten', () => {
   });
 
   bench('es-toolkit/flatten (compat)', () => {
+    // @ts-expect-error - depth parameter is a hidden feature in compat version
     flattenCompatToolkit(arr, 30);
   });
 

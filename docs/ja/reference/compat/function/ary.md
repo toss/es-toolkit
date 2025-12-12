@@ -14,7 +14,7 @@
 const cappedFunction = ary(func, n);
 ```
 
-## 参照
+## 使用法
 
 ### `ary(func, n)`
 

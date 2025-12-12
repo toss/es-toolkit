@@ -6,7 +6,7 @@ Checks if a given value is a `RegExp` instance.
 const result = isRegExp(value);
 ```
 
-## Reference
+## Usage
 
 ### `isRegExp(value)`
 

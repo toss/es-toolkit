@@ -6,7 +6,7 @@
 const chunked = chunk(arr, size);
 ```
 
-## 参考
+## 用法
 
 ### `chunk(arr, size)`
 

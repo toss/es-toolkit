@@ -6,7 +6,7 @@
 const result = intersection(firstArr, secondArr);
 ```
 
-## 参考
+## 用法
 
 ### `intersection(firstArr, secondArr)`
 

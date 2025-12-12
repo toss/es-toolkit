@@ -6,7 +6,7 @@
 const integer = toInteger(value);
 ```
 
-## 参考
+## 用法
 
 ### `toInteger(value)`
 

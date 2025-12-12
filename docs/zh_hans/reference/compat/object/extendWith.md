@@ -14,7 +14,7 @@
 const result = extendWith(object, source, customizer);
 ```
 
-## 参考
+## 用法
 
 ### `extendWith(object, ...sources, customizer)`
 

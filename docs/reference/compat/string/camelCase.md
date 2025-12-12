@@ -14,7 +14,7 @@ Converts a string to camel case.
 const result = camelCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `camelCase(str)`
 

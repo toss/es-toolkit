@@ -14,7 +14,7 @@
 const str = toString(value);
 ```
 
-## 参照
+## 使用法
 
 ### `toString(value)`
 

@@ -14,7 +14,7 @@ Defers the execution of a function to the next event loop.
 const timerId = defer(func, ...args);
 ```
 
-## Reference
+## Usage
 
 ### `defer(func, ...args)`
 

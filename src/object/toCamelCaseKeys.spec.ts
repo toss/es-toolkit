@@ -138,4 +138,47 @@ describe('camelizeKeys', () => {
     expectTypeOf(result.b).toEqualTypeOf<RegExp>();
     expectTypeOf(result.c).toEqualTypeOf<Map<any, any>>();
   });
+
+  it('should convert uppercase keys to camelCase at both runtime and type level', () => {
+    const input = {
+      FIRST_NAME: 'JinHo',
+      LAST: 'Yeom',
+    } as const;
+
+    const result = toCamelCaseKeys(input);
+
+    expect(result).toEqual({
+      firstName: 'JinHo',
+      last: 'Yeom',
+    });
+
+    expectTypeOf(result).toMatchTypeOf<{
+      firstName: 'JinHo';
+      last: 'Yeom';
+    }>();
+  });
+
+  it('should not recurse into NonPlainObject values', () => {
+    const date = new Date();
+    const map = new Map<string, any>([['first_name', 'JinHo']]);
+    const set = new Set<number>([1, 2, 3]);
+
+    const input = {
+      created_at: date,
+      meta_map: map,
+      ids_set: set,
+    };
+
+    const result = toCamelCaseKeys(input);
+
+    expect(result.createdAt).toBe(date);
+    expect(result.metaMap).toBe(map);
+    expect(result.idsSet).toBe(set);
+
+    expectTypeOf(result).toMatchTypeOf<{
+      createdAt: Date;
+      metaMap: Map<string, any>;
+      idsSet: Set<number>;
+    }>();
+  });
 });

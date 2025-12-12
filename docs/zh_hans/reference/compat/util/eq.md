@@ -6,7 +6,7 @@
 const isEqual = eq(value, other);
 ```
 
-## 参考
+## 用法
 
 ### `eq(value, other)`
 

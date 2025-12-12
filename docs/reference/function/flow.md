@@ -6,7 +6,7 @@ Creates a new function that executes multiple functions in sequence.
 const combinedFunc = flow(func1, func2, func3);
 ```
 
-## Reference
+## Usage
 
 ### `flow(...funcs)`
 

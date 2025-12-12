@@ -6,7 +6,7 @@ Returns a new array with the elements randomly shuffled.
 const shuffled = shuffle(arr);
 ```
 
-## Reference
+## Usage
 
 ### `shuffle(arr)`
 

@@ -8,11 +8,17 @@
 const camelCased = toCamelCaseKeys(obj);
 ```
 
-## 参照
+## 使用法
 
 ### `toCamelCaseKeys(obj)`
 
-オブジェクトのすべてのキーをキャメルケースに変換したい時に`toCamelCaseKeys`を使用してください。ネストされたオブジェクトと配列内のオブジェクトも再帰的に変換されます。
+オブジェクトのすべてのキーをキャメルケースに変換したい時に `toCamelCaseKeys` を使用してください。ネストされたオブジェクトと配列内のオブジェクトも再帰的に変換されます。
+
+例えば、オブジェクトのキーは次のように変換されます。
+
+- `snake_case` → `camelCase`（例: `user_id` → `userId`）
+- `PascalCase` → `camelCase`（例: `UserId` → `userId`）
+- `uppercase keys` → `camelCase`（例: `FIRST_NAME` → `firstName`, `LAST` → `last`）
 
 ```typescript
 import { toCamelCaseKeys } from 'es-toolkit/object';
@@ -50,6 +56,11 @@ const nestedResult = toCamelCaseKeys(nested);
 //     }
 //   }
 // }になります
+
+// PascalCase と uppercase keys のキーも変換されます
+const raw = { UserId: 1, FIRST_NAME: 'JinHo', LAST: 'Yeom' };
+const converted = toCamelCaseKeys(raw);
+// converted は { userId: 1, firstName: 'JinHo', last: 'Yeom' } になります
 ```
 
 #### パラメータ

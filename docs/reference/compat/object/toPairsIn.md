@@ -14,7 +14,7 @@ Converts an object to an array of key-value pairs, including inherited propertie
 const pairs = toPairsIn(object);
 ```
 
-## Reference
+## Usage
 
 ### `toPairsIn(object)`
 

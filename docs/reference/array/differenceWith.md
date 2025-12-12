@@ -6,7 +6,7 @@ Computes the difference of two arrays using a custom comparison function and ret
 const result = differenceWith(firstArr, secondArr, areItemsEqual);
 ```
 
-## Reference
+## Usage
 
 ### `differenceWith(firstArr, secondArr, areItemsEqual)`
 

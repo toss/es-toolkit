@@ -14,7 +14,7 @@
 const valueArray = values(obj);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `values(obj)`
 

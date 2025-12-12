@@ -14,7 +14,7 @@ Converts HTML special characters in a string to HTML entities.
 const result = escape(str);
 ```
 
-## Reference
+## Usage
 
 ### `escape(str)`
 

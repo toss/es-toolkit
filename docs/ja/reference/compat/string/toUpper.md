@@ -14,7 +14,7 @@
 const uppercased = toUpper(value);
 ```
 
-## 参照
+## 使用法
 
 ### `toUpper(value?)`
 

@@ -6,7 +6,7 @@
 const checker = matchesProperty(path, value);
 ```
 
-## 参考
+## 用法
 
 ### `matchesProperty(property, source)`
 

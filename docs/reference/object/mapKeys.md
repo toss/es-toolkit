@@ -6,7 +6,7 @@ Returns a new object with keys transformed through a function.
 const newObj = mapKeys(object, getNewKey);
 ```
 
-## Reference
+## Usage
 
 ### `mapKeys(object, getNewKey)`
 

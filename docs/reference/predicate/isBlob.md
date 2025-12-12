@@ -6,7 +6,7 @@ Checks if a value is a Blob instance.
 const result = isBlob(value);
 ```
 
-## Reference
+## Usage
 
 ### `isBlob(value)`
 

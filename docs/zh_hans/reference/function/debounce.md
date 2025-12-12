@@ -6,7 +6,7 @@
 const debouncedFunc = debounce(func, debounceMs, options);
 ```
 
-## 参考
+## 用法
 
 ### `debounce(func, debounceMs, options)`
 

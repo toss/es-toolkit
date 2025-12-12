@@ -14,7 +14,7 @@
 const spreadFunc = spread(func, argsIndex);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `spread(func, argsIndex)`
 
