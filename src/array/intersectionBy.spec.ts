@@ -24,4 +24,8 @@ describe('intersectionBy', () => {
     const result = intersectionBy(array1, array2, value => value.id);
     expect(result).toEqual([{ id: 2, csv: 1 }]);
   });
+
+  it('should return unique values based on iteratee when arrays have duplicates after mapping', () => {
+    expect(intersectionBy([2.1, 2.2], [2.3, 3.4], Math.floor)).toStrictEqual([2.1]);
+  });
 });

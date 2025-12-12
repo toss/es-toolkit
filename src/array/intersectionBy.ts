@@ -1,3 +1,5 @@
+import { uniqBy } from './uniqBy';
+
 /**
  * Returns the intersection of two arrays based on a mapping function.
  *
@@ -37,5 +39,7 @@ export function intersectionBy<T, U>(
   mapper: (item: T | U) => unknown
 ): T[] {
   const mappedSecondSet = new Set(secondArr.map(mapper));
-  return firstArr.filter(item => mappedSecondSet.has(mapper(item)));
+
+  const uniqueFirstArr = uniqBy(firstArr, mapper);
+  return uniqueFirstArr.filter(item => mappedSecondSet.has(mapper(item)));
 }
