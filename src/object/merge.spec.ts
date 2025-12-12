@@ -120,15 +120,12 @@ describe('merge', () => {
   });
 
   it('should behave like recursive Object.assign, applying the same logic to nested properties', () => {
-    // Top level: array target with object source
     const topLevelArray = merge(['1'], { a: 2 });
     const topLevelObject = merge({ a: 2 }, ['1']);
 
-    // Nested level: same scenario should behave identically
     const nestedArray = merge({ x: ['1'] }, { x: { a: 2 } });
     const nestedObject = merge({ x: { a: 2 } }, { x: ['1'] });
 
-    // Both should give consistent results - target form (array) is preserved
     expect(Array.isArray(topLevelArray)).toBe(true);
     expect(topLevelArray[0]).toBe('1');
     expect((topLevelArray as any).a).toBe(2);
