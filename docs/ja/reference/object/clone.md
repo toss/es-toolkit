@@ -6,7 +6,7 @@
 const cloned = clone(obj);
 ```
 
-## 参照
+## 使用法
 
 ### `clone(obj)`
 

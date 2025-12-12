@@ -6,7 +6,7 @@
 const curriedFunc = curryRight(func);
 ```
 
-## 参考
+## 用法
 
 ### `curryRight(func)`
 

@@ -6,7 +6,7 @@ Checks if a value is an array-like object that is not a primitive.
 const result = isArrayLikeObject(value);
 ```
 
-## Reference
+## Usage
 
 ### `isArrayLikeObject(value)`
 

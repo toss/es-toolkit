@@ -14,7 +14,7 @@
 const bound = bindKey(object, key, ...partialArgs);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `bindKey(object, key, ...partialArgs)`
 

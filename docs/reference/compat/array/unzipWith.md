@@ -14,7 +14,7 @@ Collects elements at the same positions in grouped arrays and applies a transfor
 const result = unzipWith(array, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `unzipWith(array, iteratee)`
 

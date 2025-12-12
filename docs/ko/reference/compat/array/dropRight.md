@@ -14,7 +14,7 @@
 const result = dropRight(array, itemsCount);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `dropRight(array, itemsCount)`
 

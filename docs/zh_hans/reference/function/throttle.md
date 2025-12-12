@@ -6,7 +6,7 @@
 const throttledFunc = throttle(func, throttleMs, options);
 ```
 
-## 参考
+## 用法
 
 ### `throttle(func, throttleMs, options?)`
 

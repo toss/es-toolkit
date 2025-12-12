@@ -6,7 +6,7 @@
 const result = intersectionBy(firstArr, secondArr, mapper);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `intersectionBy(firstArr, secondArr, mapper)`
 

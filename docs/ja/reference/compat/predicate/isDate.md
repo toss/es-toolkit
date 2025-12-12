@@ -12,7 +12,7 @@
 const result = isDate(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isDate(value)`
 

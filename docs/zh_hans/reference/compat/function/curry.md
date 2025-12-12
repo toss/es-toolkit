@@ -12,7 +12,7 @@
 const curriedFunction = curry(func, arity);
 ```
 
-## 参考
+## 用法
 
 ### `curry(func, arity)`
 

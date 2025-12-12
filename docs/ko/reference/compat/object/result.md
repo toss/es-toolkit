@@ -14,7 +14,7 @@
 const result = result(obj, path, defaultValue);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `result(object, path, defaultValue)`
 

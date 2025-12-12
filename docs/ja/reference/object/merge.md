@@ -6,7 +6,7 @@
 const result = merge(target, source);
 ```
 
-## 参照
+## 使用法
 
 ### `merge(target, source)`
 

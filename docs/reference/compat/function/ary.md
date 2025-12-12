@@ -14,7 +14,7 @@ Creates a function that limits the number of arguments it can receive.
 const cappedFunction = ary(func, n);
 ```
 
-## Reference
+## Usage
 
 ### `ary(func, n)`
 

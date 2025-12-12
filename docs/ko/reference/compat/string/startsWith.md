@@ -14,7 +14,7 @@
 const result = startsWith(str, target);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `startsWith(str, target, position?)`
 

@@ -14,7 +14,7 @@
 const result = unionBy(...arrays, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `unionBy(...arrays, iteratee)`
 

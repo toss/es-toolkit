@@ -14,7 +14,7 @@ Checks if a value is a WeakSet.
 const result = isWeakSet(value);
 ```
 
-## Reference
+## Usage
 
 ### `isWeakSet(value)`
 

@@ -6,7 +6,7 @@ Creates a function that takes a path and invokes a method on the given object wi
 const pathInvoker = methodOf(object, ...args);
 ```
 
-## Reference
+## Usage
 
 ### `methodOf(object, ...args)`
 

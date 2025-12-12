@@ -6,7 +6,7 @@
 const checker = conforms(predicates);
 ```
 
-## 参照
+## 使用法
 
 ### `conforms(source)`
 

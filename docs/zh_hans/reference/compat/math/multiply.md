@@ -14,7 +14,7 @@
 const result = multiply(value, other);
 ```
 
-## 参考
+## 用法
 
 ### `multiply(value, other)`
 

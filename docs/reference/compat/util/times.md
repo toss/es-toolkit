@@ -6,7 +6,7 @@ Executes a function the given number of times and returns the results as an arra
 const result = times(n, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `times(n, iteratee)`
 

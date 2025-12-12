@@ -14,7 +14,7 @@
 const filtered = reject(collection, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `reject(collection, predicate)`
 

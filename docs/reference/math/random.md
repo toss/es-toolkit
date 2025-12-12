@@ -6,7 +6,7 @@ Generates a random number within a specified range. The number can include decim
 const randomNumber = random(min, max);
 ```
 
-## Reference
+## Usage
 
 ### `random(maximum)` / `random(minimum, maximum)`
 

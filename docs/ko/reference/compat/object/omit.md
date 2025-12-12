@@ -14,7 +14,7 @@
 const result = omit(obj, ...keys);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `omit(object, ...paths)`
 

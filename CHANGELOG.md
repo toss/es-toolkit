@@ -1,5 +1,61 @@
 # es-toolkit Changelog
 
+## Version v1.43.0
+
+Released on December 12th, 2025.
+
+- Enhanced `merge` to handle arrays and objects consistently, and to match lodash's behavior with date values and array-like objects. ([#1553], [#1542], [#1548])
+- Fixed `isMatch` and `isMatchWith` to match lodash's behavior.
+- Fixed `intersectionBy` implementation and removed duplicates when the mapper produces the same values. ([#1528])
+- Fixed `throttle` working like debounce.
+- Fixed type inference in `toSnakeCaseKeys`, `toCamelCaseKeys` for edge cases and improved type inference for uppercase keys. ([#1538])
+- Fixed casing utilities (`camelCase`, `kebabCase`, `lowerCase`, `snakeCase`, `startCase`, `upperCase`) to match lodash's behavior. ([#1525])
+- Fixed `compat/template` to disable ES interpolation when custom `interpolate` is provided. ([#1527])
+- Fixed incorrect example in `differenceBy` documentation. ([#1543])
+- Performance improvement: updated `deburr` to use arrays to construct the deburrMap. ([#1526])
+
+We sincerely thank @dayongkr, @raon0211, @wo-o29, @Yeom-JinHo, @Copilot, @oshosh, @vbfox, @sukvvon, @sankeyangshu, @D-Sketon, @seo-rii for their contributions. We appreciate your great efforts!
+
+## Version v1.42.0
+
+Released on November 17th, 2025.
+
+- Added new async utilities: `filterAsync`, `flatMapAsync`, `forEachAsync`, `mapAsync`, `reduceAsync`, and `limitAsync` for handling asynchronous operations.
+- Exported `ThrottleOptions` and `DebounceOptions` interfaces for better type support.
+- Fixed `isFinite` to implement type predicate to narrow type to number.
+- Fixed `isSafeInteger` to implement type predicate to narrow type to number.
+- Fixed `omit` to prevent adding index properties to array-like objects.
+- Fixed `mergeWith` to remove unnecessary nullish coalescing for 100% branch coverage.
+- Fixed `compat/updateWith` to remove unreachable code and add prototype pollution test.
+- Updated documentation headings for consistency.
+- Improved test coverage for `compat/mergeWith`, `compat/unset`, `get`, `toMerged`, `mergeWith`, and `compat/intersectionBy` with additional edge cases and security tests.
+
+We sincerely thank @Debbl, @wo-o29, @raon0211, @Yeom-JinHo, @sukvvon, and @D-Sketon for their contributions. We appreciate your great efforts!
+
+## Version v1.41.0
+
+Released on October 24th, 2025.
+
+- Enhanced `throttle` to preserve `this` context when called as a method.
+- Added type guard support for `partition` function.
+- Fixed `omit` to support runtime-determined key arrays with proper overloads.
+- Fixed `defaults` in compatibility layer to properly handle undefined and null sources.
+- Fixed `toSnakeCaseKeys` and `toCamelCaseKeys` to correctly return types for non-plain objects.
+- Fixed `toMerged` and `mergeWith` to properly handle shared objects in merge logic.
+- Fixed `compat/union` to support array-like objects.
+- Fixed `compat/updateWith` to use `get` for value retrieval in updater function.
+- Fixed circular import between `isMatch` and `isMatchWith`.
+- Fixed `find` and `findLast` by simplifying logic and removing unnecessary checks.
+- Fixed `takeRight` by improving test coverage and removing redundant checks.
+- Fixed `curry` and `curryRight` by removing unnecessary type assertions.
+- Fixed `isEqualWith` and `mapKeys` by removing unnecessary type assertions.
+- Improved performance for `meanBy` by removing intermediate array creation.
+- Updated build system to use UMD format instead of IIFE for browser builds.
+- Fixed numerous documentation examples across compat modules.
+- Improved test coverage with additional test cases for edge cases and compatibility.
+
+We sincerely thank @the5thbeatle, @wo-o29, @hwibaski, @manudeli, @raon0211, @dayongkr, @D-Sketon, @yoouungyoung, @Dohun-choi, @sukvvon, @zoulou00, and @sen2y for their contributions. We appreciate your great efforts!
+
 ## Version v1.40.0
 
 Released on October 8th, 2025.

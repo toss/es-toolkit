@@ -14,7 +14,7 @@
 const result = add(value, other);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `add(value, other)`
 

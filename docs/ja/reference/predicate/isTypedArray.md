@@ -6,7 +6,7 @@
 const result = isTypedArray(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isTypedArray(value)`
 

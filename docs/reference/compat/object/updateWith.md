@@ -14,7 +14,7 @@ Updates the value at the specified path of the object with an updater function, 
 const updated = updateWith(obj, path, updater, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `updateWith(obj, path, updater, customizer?)`
 

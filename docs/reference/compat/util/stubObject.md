@@ -14,7 +14,7 @@ Always returns a new empty object.
 const emptyObject = stubObject();
 ```
 
-## Reference
+## Usage
 
 ### `stubObject()`
 

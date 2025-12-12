@@ -9,7 +9,7 @@ const bigObject = Object.fromEntries(Array.from({ length: 1000 }, (_, i) => [i, 
 const bigArray = Array.from({ length: 1000 }, (_, i) => i);
 const smallObject = { a: 1, b: 2, c: 3 };
 const smallArray = [1, 2, 3];
-const iteratee = (acc: any, value: any, key: any) => {
+const iteratee = (acc: any, value: number, key: any) => {
   acc[key] = value * value;
 };
 

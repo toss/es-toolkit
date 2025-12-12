@@ -14,7 +14,7 @@ A function that executes a function and returns an error object if an error occu
 const result = attempt(func, ...args);
 ```
 
-## Reference
+## Usage
 
 ### `attempt(func, ...args)`
 

@@ -6,7 +6,7 @@ Pads a string on both sides to reach a specified length.
 const padded = pad(str, length, chars);
 ```
 
-## Reference
+## Usage
 
 ### `pad(str, length, chars?)`
 

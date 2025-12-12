@@ -6,7 +6,7 @@ Iterates over the elements of an array from right to left, executing a function 
 forEachRight(arr, callback);
 ```
 
-## Reference
+## Usage
 
 ### `forEachRight(arr, callback)`
 

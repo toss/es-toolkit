@@ -14,7 +14,7 @@ Inverts the keys and values of an object.
 const inverted = invert(object);
 ```
 
-## Reference
+## Usage
 
 ### `invert(object)`
 

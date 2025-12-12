@@ -14,7 +14,7 @@
 const index = sortedIndex(array, value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `sortedIndex(array, value)`
 

@@ -6,7 +6,7 @@ Checks if a value is a valid JSON value.
 const result = isJSONValue(value);
 ```
 
-## Reference
+## Usage
 
 ### `isJSONValue(value)`
 

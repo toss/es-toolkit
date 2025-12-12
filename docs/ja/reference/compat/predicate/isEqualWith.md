@@ -12,7 +12,7 @@
 const result = isEqualWith(a, b, customizer);
 ```
 
-## 参照
+## 使用法
 
 ### `isEqualWith(a, b, areValuesEqual?)`
 

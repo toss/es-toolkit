@@ -14,7 +14,7 @@ Checks if all values in an array or object meet the given condition.
 const result = every(collection, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `every(collection, predicate?)`
 

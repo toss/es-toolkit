@@ -14,7 +14,7 @@ Gets a random element from an array or object.
 const randomItem = sample(collection);
 ```
 
-## Reference
+## Usage
 
 ### `sample(collection)`
 

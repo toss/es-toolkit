@@ -56,14 +56,14 @@ function returns(item: DocumentationItem) {
 
   if (item.returns.type == null) {
     return `
-### Returns
+#### Returns
 
 (\`${item.returns.type}\`): ${item.returns.document} 
     `.trim();
   }
 
   return `
-### Returns
+#### Returns
 
 (\`${item.returns.type}\`): ${item.returns.document}
   `.trim();

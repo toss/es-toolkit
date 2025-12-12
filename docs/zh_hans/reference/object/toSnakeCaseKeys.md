@@ -8,11 +8,17 @@
 const snakeCased = toSnakeCaseKeys(obj);
 ```
 
-## 参考
+## 用法
 
 ### `toSnakeCaseKeys(obj)`
 
 当您想要将对象的所有键转换为 snake_case 时,请使用 `toSnakeCaseKeys`。嵌套对象和数组中的对象也会递归转换。
+
+例如，对象的键会按如下方式转换：
+
+- `camelCase` → `snake_case`（例如 `userId` → `user_id`）
+- `PascalCase` → `snake_case`（例如 `UserId` → `user_id`）
+- `UPPERCASE_KEYS` → `snake_case`（例如 `FIRST_NAME` → `first_name`, `LAST` → `last`）
 
 ```typescript
 import { toSnakeCaseKeys } from 'es-toolkit/object';

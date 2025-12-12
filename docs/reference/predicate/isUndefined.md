@@ -6,7 +6,7 @@ Checks if a given value is `undefined`.
 const result = isUndefined(value);
 ```
 
-## Reference
+## Usage
 
 ### `isUndefined(value)`
 

@@ -15,7 +15,7 @@ const result = uniq([1, 2, 2, 3, 3, 4]);
 // result is [1, 2, 3, 4].
 ```
 
-## Reference
+## Usage
 
 ### `uniq(array)`
 

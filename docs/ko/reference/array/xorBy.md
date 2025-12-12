@@ -6,7 +6,7 @@
 const result = xorBy(arr1, arr2, mapper);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `xorBy(arr1, arr2, mapper)`
 

@@ -14,7 +14,7 @@ Checks if a value is `undefined`.
 const result = isUndefined(value);
 ```
 
-## Reference
+## Usage
 
 ### `isUndefined(x)`
 

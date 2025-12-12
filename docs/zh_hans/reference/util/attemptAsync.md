@@ -6,7 +6,7 @@
 const [error, result] = await attemptAsync(func);
 ```
 
-## 参考
+## 用法
 
 ### `attemptAsync(func)`
 

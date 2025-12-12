@@ -14,7 +14,7 @@ Creates a partially applied function by pre-filling arguments from the right.
 const partialFunc = partialRight(func, ...args);
 ```
 
-## Reference
+## Usage
 
 ### `partialRight(func, ...args)`
 

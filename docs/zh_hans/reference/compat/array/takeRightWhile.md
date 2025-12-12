@@ -14,7 +14,7 @@
 const result = takeRightWhile(array, predicate);
 ```
 
-## 参考
+## 用法
 
 ### `takeRightWhile(array, predicate)`
 

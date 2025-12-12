@@ -14,7 +14,7 @@
 const result = xorBy(...arrays, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `xorBy(...arrays, iteratee)`
 

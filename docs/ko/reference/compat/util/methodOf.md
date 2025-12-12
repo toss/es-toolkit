@@ -6,7 +6,7 @@
 const pathInvoker = methodOf(object, ...args);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `methodOf(object, ...args)`
 

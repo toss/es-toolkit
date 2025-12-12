@@ -13,7 +13,7 @@ Iterates over only own properties of an object in reverse order, calling a funct
 const result = forOwnRight(obj, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `forOwnRight(object, iteratee)`
 

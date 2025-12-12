@@ -6,7 +6,7 @@
 const error = new AbortError(message);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `new AbortError(message?)`
 
@@ -50,6 +50,6 @@ await fetchData(controller.signal); // AbortError 발생
 
 - `message` (`string`, 선택): 에러 메시지예요. 기본값은 `'The operation was aborted'`예요.
 
-### 반환 값
+#### 반환 값
 
 (`AbortError`): 중단된 작업을 나타내는 에러 인스턴스를 반환해요. `Error`를 상속받았으며, `name` 속성은 `'AbortError'`예요.

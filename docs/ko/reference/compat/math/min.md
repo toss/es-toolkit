@@ -14,7 +14,7 @@
 const result = min(items);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `min(items?)`
 

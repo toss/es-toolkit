@@ -6,7 +6,7 @@
 const result = isMatchWith(target, source, customizer);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isMatchWith(target, source, customizer)`
 

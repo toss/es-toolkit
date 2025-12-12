@@ -6,7 +6,7 @@ Checks if a value is an object.
 const result = isObject(value);
 ```
 
-## Reference
+## Usage
 
 ### `isObject(value)`
 

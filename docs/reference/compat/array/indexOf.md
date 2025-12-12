@@ -14,7 +14,7 @@ Finds the index of the first occurrence of a given element in an array.
 const index = indexOf(array, searchElement, fromIndex);
 ```
 
-## Reference
+## Usage
 
 ### `indexOf(array, searchElement, fromIndex?)`
 

@@ -14,7 +14,7 @@ Converts a string to snake case.
 const snakeCased = snakeCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `snakeCase(str)`
 

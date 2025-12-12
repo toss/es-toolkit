@@ -14,7 +14,7 @@
 const result = eachRight(collection, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `eachRight(collection, iteratee)`
 

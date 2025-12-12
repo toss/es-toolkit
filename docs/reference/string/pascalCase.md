@@ -6,7 +6,7 @@ Converts a string to pascal case.
 const converted = pascalCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `pascalCase(str)`
 

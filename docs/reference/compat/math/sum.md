@@ -14,7 +14,7 @@ Adds all values in an array.
 const total = sum(array);
 ```
 
-## Reference
+## Usage
 
 ### `sum(array)`
 

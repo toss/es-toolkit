@@ -14,7 +14,7 @@
 const result = mapValues(obj, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `mapValues(object, iteratee)`
 

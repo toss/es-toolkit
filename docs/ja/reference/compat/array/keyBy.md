@@ -14,7 +14,7 @@
 const result = keyBy(collection, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `keyBy(collection, iteratee)`
 

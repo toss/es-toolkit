@@ -11,7 +11,7 @@ const object = { a: 1, b: 2 };
 
 const other = { b: 3, c: 4 };
 
-const merge = (targetValue: any, sourceValue: any) => {
+const merge = (targetValue: unknown, sourceValue: unknown) => {
   if (typeof targetValue === 'number' && typeof sourceValue === 'number') {
     return targetValue + sourceValue;
   }

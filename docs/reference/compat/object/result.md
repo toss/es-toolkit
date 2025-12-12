@@ -14,7 +14,7 @@ Retrieves a value from a path in an object, but if it encounters a function, it 
 const result = result(obj, path, defaultValue);
 ```
 
-## Reference
+## Usage
 
 ### `result(object, path, defaultValue)`
 

@@ -6,7 +6,7 @@ Returns a new object with values transformed through a function.
 const newObj = mapValues(object, getNewValue);
 ```
 
-## Reference
+## Usage
 
 ### `mapValues(object, getNewValue)`
 

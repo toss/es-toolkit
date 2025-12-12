@@ -14,7 +14,7 @@
 const result = invoke(object, path, args);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `invoke(object, path, args)`
 

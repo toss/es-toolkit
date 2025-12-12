@@ -6,7 +6,7 @@
 const chunked = chunk(arr, size);
 ```
 
-## 参照
+## インターフェース
 
 ### `chunk(arr, size)`
 

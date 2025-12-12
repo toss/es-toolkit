@@ -6,7 +6,7 @@ Returns a new array that is flattened to the specified depth.
 const result = flatten(arr, depth);
 ```
 
-## Reference
+## Usage
 
 ### `flatten(arr, depth = 1)`
 

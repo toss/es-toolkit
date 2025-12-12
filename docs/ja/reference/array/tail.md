@@ -6,7 +6,7 @@
 const result = tail(arr);
 ```
 
-## 参照
+## 使用法
 
 ### `tail(arr)`
 

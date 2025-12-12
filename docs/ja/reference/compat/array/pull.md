@@ -14,7 +14,7 @@
 const result = pull(array, ...valuesToRemove);
 ```
 
-## 参照
+## 使用法
 
 ### `pull(array, ...valuesToRemove)`
 

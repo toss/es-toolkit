@@ -6,7 +6,7 @@ Checks if a value is a valid array length.
 const result = isLength(value);
 ```
 
-## Reference
+## Usage
 
 ### `isLength(value)`
 
@@ -45,4 +45,4 @@ function processLength(value: unknown) {
 
 #### Returns
 
-(`value is number`): Returns `true` if the value is a valid length, `false` otherwise.
+(`boolean`): Returns `true` if the value is a valid length, `false` otherwise.

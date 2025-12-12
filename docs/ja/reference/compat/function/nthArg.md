@@ -14,7 +14,7 @@
 const getNthArg = nthArg(n);
 ```
 
-## 参照
+## 使用法
 
 ### `nthArg(n)`
 

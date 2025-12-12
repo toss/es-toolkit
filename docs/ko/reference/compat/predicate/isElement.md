@@ -14,7 +14,7 @@
 const result = isElement(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isElement(value)`
 

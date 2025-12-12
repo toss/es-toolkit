@@ -14,7 +14,7 @@ Limits function calls to execute at most once per specified time interval.
 const throttledFunc = throttle(func, wait, options);
 ```
 
-## Reference
+## Usage
 
 ### `throttle(func, wait, options)`
 

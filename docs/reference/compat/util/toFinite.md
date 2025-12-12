@@ -6,7 +6,7 @@ Converts a value to a finite number.
 const finite = toFinite(value);
 ```
 
-## Reference
+## Usage
 
 ### `toFinite(value)`
 

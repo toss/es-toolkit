@@ -14,7 +14,7 @@
 const result = floor(number, precision);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `floor(number, precision?)`
 

@@ -12,7 +12,7 @@ Checks if a value is a valid length.
 const result = isLength(value);
 ```
 
-## Reference
+## Usage
 
 ### `isLength(value)`
 

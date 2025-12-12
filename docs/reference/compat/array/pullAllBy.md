@@ -6,7 +6,7 @@ Removes specified values from the array based on values transformed by an iterat
 const modified = pullAllBy(array, valuesToRemove, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `pullAllBy(array, values, iteratee)`
 

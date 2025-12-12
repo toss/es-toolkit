@@ -14,7 +14,7 @@
 const result = difference(arr, ...values);
 ```
 
-## 参考
+## 用法
 
 ### `difference(arr, ...values)`
 

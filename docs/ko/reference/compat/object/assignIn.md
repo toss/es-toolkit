@@ -14,7 +14,7 @@
 const result = assignIn(target, ...sources);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `assignIn(target, ...sources)`
 

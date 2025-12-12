@@ -6,7 +6,7 @@
 const result = isLength(value);
 ```
 
-## 参考
+## 用法
 
 ### `isLength(value)`
 
@@ -45,4 +45,4 @@ function processLength(value: unknown) {
 
 #### 返回值
 
-(`value is number`): 如果值为有效长度则返回 `true`，否则返回 `false`。
+(`boolean`): 如果值为有效长度则返回 `true`，否则返回 `false`。

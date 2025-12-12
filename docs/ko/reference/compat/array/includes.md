@@ -14,7 +14,7 @@
 const hasValue = includes(collection, target, fromIndex);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `includes(collection, target, fromIndex)`
 

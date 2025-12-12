@@ -12,7 +12,7 @@ const promise = asyncNoop();
 
 :::
 
-## 레퍼런스
+## 사용법
 
 ### `asyncNoop()`
 

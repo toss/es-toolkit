@@ -6,7 +6,7 @@
 const result = escapeRegExp(str);
 ```
 
-## 参照
+## 使用法
 
 ### `escapeRegExp(str)`
 

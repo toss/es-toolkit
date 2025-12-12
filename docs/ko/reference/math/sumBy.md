@@ -6,7 +6,7 @@
 const total = sumBy(items, getValue);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `sumBy(items, getValue)`
 

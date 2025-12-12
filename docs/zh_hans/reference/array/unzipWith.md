@@ -6,7 +6,7 @@
 const transformedArray = unzipWith(target, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `unzipWith(target, iteratee)`
 

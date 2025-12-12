@@ -14,7 +14,7 @@
 const result = isFinite(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isFinite(value)`
 
@@ -50,4 +50,5 @@ isFinite(undefined); // false
 
 #### 戻り値
 
-(`boolean`): 値が有限な数値の場合は`true`、そうでない場合は`false`を返します。
+(`value is number`): 値が有限な数値の場合は`true`、そうでない場合は`false`を返します。  
+`true`を返す場合、TypeScriptは`value`の型を`number`に絞り込みます。

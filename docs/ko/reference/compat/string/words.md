@@ -14,7 +14,7 @@
 const wordArray = words(str, pattern);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `words(str, pattern)`
 

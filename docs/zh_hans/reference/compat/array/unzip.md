@@ -14,7 +14,7 @@
 const result = unzip(array);
 ```
 
-## 参考
+## 用法
 
 ### `unzip(array)`
 

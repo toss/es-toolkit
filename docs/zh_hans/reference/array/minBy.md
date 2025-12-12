@@ -6,7 +6,7 @@
 const min = minBy(items, getValue);
 ```
 
-## 参考
+## 用法
 
 ### `minBy(items, getValue)`
 

@@ -2,6 +2,8 @@
  * Returns a new array containing only the unique elements from the original array,
  * based on the values returned by the mapper function.
  *
+ * When duplicates are found, the first occurrence is kept and the rest are discarded.
+ *
  * @template T - The type of elements in the array.
  * @template U - The type of mapped elements.
  * @param {T[]} arr - The array to process.

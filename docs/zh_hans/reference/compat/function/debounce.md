@@ -14,7 +14,7 @@
 const debouncedFunction = debounce(func, wait, options);
 ```
 
-## 参考
+## 用法
 
 ### `debounce(func, wait, options)`
 

@@ -14,7 +14,7 @@ Iterates over all properties of an object (including inherited properties) in re
 const result = forInRight(obj, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `forInRight(object, iteratee)`
 

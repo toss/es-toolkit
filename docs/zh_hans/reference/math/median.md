@@ -6,7 +6,7 @@
 const middle = median(nums);
 ```
 
-## 参考
+## 用法
 
 ### `median(nums)`
 

@@ -14,7 +14,7 @@
 const getter = property(path);
 ```
 
-## 参考
+## 用法
 
 ### `property(path)`
 

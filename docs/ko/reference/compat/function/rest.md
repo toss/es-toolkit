@@ -14,7 +14,7 @@
 const restFunc = rest(func, start);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `rest(func, start)`
 

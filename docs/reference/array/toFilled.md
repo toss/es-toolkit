@@ -6,7 +6,7 @@ Creates a new array by filling part or all of it with the specified value.
 const filled = toFilled(arr, value, start?, end?);
 ```
 
-## Reference
+## Usage
 
 ### `toFilled(arr, value, start?, end?)`
 

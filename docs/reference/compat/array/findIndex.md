@@ -14,7 +14,7 @@ Finds the index of the first element in an array that matches a condition.
 const index = findIndex(arr, doesMatch, fromIndex);
 ```
 
-## Reference
+## Usage
 
 ### `findIndex(arr, doesMatch, fromIndex)`
 

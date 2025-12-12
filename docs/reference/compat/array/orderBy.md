@@ -14,7 +14,7 @@ Sorts the elements of a collection by multiple criteria.
 const result = orderBy(collection, criteria, orders);
 ```
 
-## Reference
+## Usage
 
 ### `orderBy(collection, criteria, orders)`
 

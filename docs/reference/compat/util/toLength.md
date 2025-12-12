@@ -6,7 +6,7 @@ Converts a value to a valid array index.
 const length = toLength(value);
 ```
 
-## Reference
+## Usage
 
 ### `toLength(value)`
 

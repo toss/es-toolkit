@@ -14,7 +14,7 @@
 const result = join(array, separator);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `join(array, separator?)`
 

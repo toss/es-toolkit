@@ -14,7 +14,7 @@ Fills the elements of an array with a specified value.
 const result = fill(array, value, start, end);
 ```
 
-## Reference
+## Usage
 
 ### `fill(array, value, start?, end?)`
 

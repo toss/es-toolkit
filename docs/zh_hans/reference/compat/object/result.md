@@ -14,7 +14,7 @@
 const result = result(obj, path, defaultValue);
 ```
 
-## 参考
+## 用法
 
 ### `result(object, path, defaultValue)`
 

@@ -6,7 +6,7 @@ Converts a value to an integer.
 const integer = toInteger(value);
 ```
 
-## Reference
+## Usage
 
 ### `toInteger(value)`
 

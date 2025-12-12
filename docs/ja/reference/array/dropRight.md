@@ -6,7 +6,7 @@
 const dropped = dropRight(arr, itemsCount);
 ```
 
-## 参照
+## 使用法
 
 ### `dropRight(arr, itemsCount)`
 

@@ -14,7 +14,7 @@
 const result = uniqBy(array, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `uniqBy(array, iteratee)`
 

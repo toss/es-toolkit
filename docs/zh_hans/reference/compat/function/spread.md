@@ -14,7 +14,7 @@
 const spreadFunc = spread(func, argsIndex);
 ```
 
-## 参考
+## 用法
 
 ### `spread(func, argsIndex)`
 

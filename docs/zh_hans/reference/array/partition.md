@@ -6,7 +6,7 @@
 const [truthy, falsy] = partition(arr, isInTruthy);
 ```
 
-## 参考
+## 用法
 
 ### `partition(arr, isInTruthy)`
 

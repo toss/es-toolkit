@@ -14,7 +14,7 @@
 const result = set(obj, path, value);
 ```
 
-## 参考
+## 用法
 
 ### `set(object, path, value)`
 

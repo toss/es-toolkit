@@ -6,7 +6,7 @@ Splits a string into an array of words.
 const result = words(str);
 ```
 
-## Reference
+## Usage
 
 ### `words(str)`
 

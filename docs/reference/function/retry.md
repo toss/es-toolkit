@@ -6,7 +6,7 @@ Retries a Promise-returning function until it succeeds.
 const result = await retry(asyncFunc, options);
 ```
 
-## Reference
+## Usage
 
 ### `retry(func, options?)`
 

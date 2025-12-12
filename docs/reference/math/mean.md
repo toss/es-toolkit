@@ -6,7 +6,7 @@ Calculates the average of an array of numbers.
 const average = mean(nums);
 ```
 
-## Reference
+## Usage
 
 ### `mean(nums)`
 

@@ -6,7 +6,7 @@ Returns the first element of an array.
 const firstElement = head(arr);
 ```
 
-## Reference
+## Usage
 
 ### `head(arr)`
 

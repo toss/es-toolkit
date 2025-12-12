@@ -6,7 +6,7 @@
 const result = flatMap(arr, iteratee, depth);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `flatMap(arr, iteratee, depth = 1)`
 

@@ -14,7 +14,7 @@
 const result = dropRight(array, itemsCount);
 ```
 
-## 参考
+## 用法
 
 ### `dropRight(array, itemsCount)`
 

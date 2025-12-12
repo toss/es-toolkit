@@ -6,7 +6,7 @@
 const result = isFile(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isFile(value)`
 

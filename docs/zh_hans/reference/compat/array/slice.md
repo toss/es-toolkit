@@ -14,7 +14,7 @@
 const sliced = slice(array, start, end);
 ```
 
-## 参考
+## 用法
 
 ### `slice(array, start, end)`
 

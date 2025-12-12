@@ -14,7 +14,7 @@
 const result = merge(target, ...sources);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `merge(object, ...sources)`
 

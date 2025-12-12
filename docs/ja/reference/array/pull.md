@@ -6,7 +6,7 @@
 const result = pull(arr, valuesToRemove);
 ```
 
-## 参照
+## 使用法
 
 ### `pull(arr, valuesToRemove)`
 

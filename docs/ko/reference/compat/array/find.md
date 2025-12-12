@@ -14,7 +14,7 @@
 const result = find(collection, predicate, fromIndex);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `find(collection, predicate, fromIndex?)`
 

@@ -14,7 +14,7 @@ Checks if a value is a DOM element.
 const result = isElement(value);
 ```
 
-## Reference
+## Usage
 
 ### `isElement(value)`
 

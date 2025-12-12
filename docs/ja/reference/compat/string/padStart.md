@@ -14,7 +14,7 @@
 const padded = padStart(str, length, chars);
 ```
 
-## 参照
+## 使用法
 
 ### `padStart(str, length?, chars?)`
 

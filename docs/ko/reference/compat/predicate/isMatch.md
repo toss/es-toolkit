@@ -6,7 +6,7 @@
 const result = isMatch(target, source);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isMatch(target, source)`
 

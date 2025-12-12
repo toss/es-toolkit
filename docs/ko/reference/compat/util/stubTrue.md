@@ -14,7 +14,7 @@
 const result = stubTrue();
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `stubTrue()`
 

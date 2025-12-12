@@ -6,7 +6,7 @@ Checks if an object partially matches another object's shape and values.
 const result = isMatch(target, source);
 ```
 
-## Reference
+## Usage
 
 ### `isMatch(target, source)`
 

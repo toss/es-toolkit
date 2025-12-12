@@ -14,7 +14,7 @@ Takes a specified number of elements from the end of an array.
 const result = takeRight(array, count);
 ```
 
-## Reference
+## Usage
 
 ### `takeRight(array, count)`
 

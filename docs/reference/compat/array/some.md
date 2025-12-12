@@ -14,7 +14,7 @@ Checks if any element in an array or object satisfies the given condition.
 const hasMatch = some(collection, predicate);
 ```
 
-## Reference
+## Usage
 
 ### `some(collection, predicate)`
 

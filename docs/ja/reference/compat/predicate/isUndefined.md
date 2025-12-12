@@ -14,7 +14,7 @@
 const result = isUndefined(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isUndefined(x)`
 

@@ -14,7 +14,7 @@ Checks if a number is within a specified range.
 const result = inRange(value, minimum, maximum);
 ```
 
-## Reference
+## Usage
 
 ### `inRange(value, minimum, maximum?)`
 

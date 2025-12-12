@@ -14,7 +14,7 @@ Finds the intersection of multiple arrays using a given condition function.
 const result = intersectionBy(...arrays, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `intersectionBy(...arrays, iteratee)`
 

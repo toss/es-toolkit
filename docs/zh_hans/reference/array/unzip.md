@@ -6,7 +6,7 @@
 const unzippedArrays = unzip(zipped);
 ```
 
-## 参考
+## 用法
 
 ### `unzip(zipped)`
 

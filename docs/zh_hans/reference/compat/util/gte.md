@@ -14,7 +14,7 @@
 const result = gte(value, other);
 ```
 
-## 参考
+## 用法
 
 ### `gte(value, other)`
 

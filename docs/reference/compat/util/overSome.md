@@ -14,7 +14,7 @@ Creates a function that checks if any of the predicate functions return truthy f
 const anyValidator = overSome(predicates);
 ```
 
-## Reference
+## Usage
 
 ### `overSome(...predicates)`
 

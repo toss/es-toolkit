@@ -14,7 +14,7 @@
 const currentTime = now();
 ```
 
-## 参照
+## 使用法
 
 ### `now()`
 

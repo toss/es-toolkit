@@ -14,7 +14,7 @@
 const plainObj = toPlainObject(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toPlainObject(value)`
 

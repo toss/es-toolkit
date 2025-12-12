@@ -14,7 +14,7 @@ Returns an array of all enumerable property names of an object, including inheri
 const allKeys = keysIn(object);
 ```
 
-## Reference
+## Usage
 
 ### `keysIn(object)`
 

@@ -6,7 +6,7 @@
 const limitedFunc = ary(func, n);
 ```
 
-## 参考
+## 用法
 
 ### `ary(func, n)`
 

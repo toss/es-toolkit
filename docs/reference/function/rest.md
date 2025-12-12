@@ -6,7 +6,7 @@ Creates a new function that bundles parameters from a specific index into an arr
 const restFunc = rest(func, startIndex);
 ```
 
-## Reference
+## Usage
 
 ### `rest(func, startIndex?)`
 

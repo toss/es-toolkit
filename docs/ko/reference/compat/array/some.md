@@ -14,7 +14,7 @@
 const hasMatch = some(collection, predicate);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `some(collection, predicate)`
 

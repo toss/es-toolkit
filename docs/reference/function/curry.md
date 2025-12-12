@@ -6,7 +6,7 @@ Curries a function so it can be called with one argument at a time.
 const curriedFunc = curry(func);
 ```
 
-## Reference
+## Usage
 
 ### `curry(func)`
 

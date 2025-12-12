@@ -14,7 +14,7 @@
 const result = endsWith(str, target);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `endsWith(str, target, position?)`
 

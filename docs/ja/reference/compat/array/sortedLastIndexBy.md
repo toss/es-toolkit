@@ -14,7 +14,7 @@
 const index = sortedLastIndexBy(array, value, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `sortedLastIndexBy(array, value, iteratee)`
 

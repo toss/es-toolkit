@@ -12,7 +12,7 @@ const filled = fill(arr, value, start, end);
 
 :::
 
-## 레퍼런스
+## 사용법
 
 ### `fill(arr, value, start?, end?)`
 

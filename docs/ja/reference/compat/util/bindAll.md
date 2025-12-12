@@ -6,7 +6,7 @@
 const boundObject = bindAll(object, methodNames);
 ```
 
-## 参照
+## 使用法
 
 ### `bindAll(object, ...methodNames)`
 

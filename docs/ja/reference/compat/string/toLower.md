@@ -14,7 +14,7 @@
 const lowercased = toLower(value);
 ```
 
-## 参照
+## 使用法
 
 ### `toLower(value?)`
 

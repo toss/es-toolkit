@@ -6,7 +6,7 @@ Returns a new array containing all elements except the last one.
 const result = initial(arr);
 ```
 
-## Reference
+## Usage
 
 ### `initial(arr)`
 

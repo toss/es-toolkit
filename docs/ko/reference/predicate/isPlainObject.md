@@ -6,7 +6,7 @@
 const result = isPlainObject(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isPlainObject(value)`
 

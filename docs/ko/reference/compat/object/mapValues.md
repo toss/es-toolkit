@@ -14,7 +14,7 @@
 const result = mapValues(obj, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `mapValues(object, iteratee)`
 

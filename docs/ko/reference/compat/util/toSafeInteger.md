@@ -6,7 +6,7 @@
 const result = toSafeInteger(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `toSafeInteger(value)`
 

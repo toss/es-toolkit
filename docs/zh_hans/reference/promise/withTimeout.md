@@ -6,7 +6,7 @@
 await withTimeout(run, ms);
 ```
 
-## 参考
+## 用法
 
 ### `withTimeout(run, ms)`
 

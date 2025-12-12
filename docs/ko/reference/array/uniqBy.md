@@ -6,7 +6,7 @@
 const uniqueArray = uniqBy(arr, mapper);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `uniqBy(arr, mapper)`
 

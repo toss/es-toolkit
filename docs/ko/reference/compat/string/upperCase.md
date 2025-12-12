@@ -14,7 +14,7 @@
 const upperCased = upperCase(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `upperCase(str)`
 

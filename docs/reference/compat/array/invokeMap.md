@@ -16,7 +16,7 @@ Invokes the specified method on each element in the array or object and returns 
 const result = invokeMap(collection, method, ...args);
 ```
 
-## Reference
+## Usage
 
 ### `invokeMap(collection, method, ...args)`
 

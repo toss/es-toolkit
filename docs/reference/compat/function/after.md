@@ -14,7 +14,7 @@ Creates a function that only executes after being called a specified number of t
 const restrictedFunction = after(n, func);
 ```
 
-## Reference
+## Usage
 
 ### `after(n, func)`
 

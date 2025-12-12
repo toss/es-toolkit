@@ -6,7 +6,7 @@
 const sampled = sampleSize(array, size);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `sampleSize(array, size)`
 

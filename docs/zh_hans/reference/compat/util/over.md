@@ -14,7 +14,7 @@
 const multiCall = over(funcs);
 ```
 
-## 参考
+## 用法
 
 ### `over(...iteratees)`
 

@@ -14,7 +14,7 @@ Returns an array of the names of the object's own properties that are functions.
 const functionNames = functions(obj);
 ```
 
-## Reference
+## Usage
 
 ### `functions(object)`
 

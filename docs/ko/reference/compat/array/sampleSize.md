@@ -14,7 +14,7 @@
 const sampled = sampleSize(collection, size);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `sampleSize(collection, size?)`
 

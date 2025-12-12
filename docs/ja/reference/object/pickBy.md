@@ -6,7 +6,7 @@
 const result = pickBy(obj, shouldPick);
 ```
 
-## 参照
+## 使用法
 
 ### `pickBy(obj, shouldPick)`
 

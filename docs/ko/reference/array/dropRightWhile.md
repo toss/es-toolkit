@@ -6,7 +6,7 @@
 const result = dropRightWhile(arr, canContinueDropping);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `dropRightWhile(arr, canContinueDropping)`
 

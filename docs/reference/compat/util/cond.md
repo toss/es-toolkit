@@ -14,7 +14,7 @@ Creates a function that iterates through condition-function pairs, checking cond
 const conditionFunction = cond(pairs);
 ```
 
-## Reference
+## Usage
 
 ### `cond(pairs)`
 

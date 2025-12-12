@@ -14,7 +14,7 @@
 const result = dropRightWhile(array, predicate);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `dropRightWhile(array, predicate)`
 

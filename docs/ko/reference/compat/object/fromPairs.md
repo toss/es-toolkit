@@ -14,7 +14,7 @@
 const result = fromPairs(pairs);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `fromPairs(pairs)`
 

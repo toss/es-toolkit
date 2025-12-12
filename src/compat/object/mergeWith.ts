@@ -4,6 +4,7 @@ import { clone } from '../../object/clone.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
 import { isArguments } from '../predicate/isArguments.ts';
+import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
@@ -292,13 +293,23 @@ function mergeWithDeep(
     }
 
     if (Array.isArray(sourceValue)) {
-      if (typeof targetValue === 'object' && targetValue != null) {
+      if (Array.isArray(targetValue)) {
         const cloned: any = [];
+        // for custom properties on arrays
         const targetKeys = Reflect.ownKeys(targetValue);
 
         for (let i = 0; i < targetKeys.length; i++) {
-          const targetKey = targetKeys[i];
+          const targetKey = targetKeys[i] as keyof typeof targetValue;
           cloned[targetKey] = targetValue[targetKey];
+        }
+
+        targetValue = cloned;
+      } else if (isArrayLikeObject(targetValue)) {
+        // array-like object: only copy numeric indices
+        const cloned: any = [];
+
+        for (let i = 0; i < targetValue.length; i++) {
+          cloned[i] = targetValue[i];
         }
 
         targetValue = cloned;
@@ -313,7 +324,14 @@ function mergeWithDeep(
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
-    } else if (isObjectLike(targetValue) && isObjectLike(sourceValue)) {
+    } else if (
+      isObjectLike(targetValue) &&
+      isObjectLike(sourceValue) &&
+      (isPlainObject(targetValue) ||
+        isPlainObject(sourceValue) ||
+        isTypedArray(targetValue) ||
+        isTypedArray(sourceValue))
+    ) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
     } else if (targetValue == null && isPlainObject(sourceValue)) {
       target[key] = mergeWithDeep({}, sourceValue, merge, stack);

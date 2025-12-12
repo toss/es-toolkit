@@ -6,7 +6,7 @@ iterateeで変換された値を基準に指定された値を配列から削除
 const modified = pullAllBy(array, valuesToRemove, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `pullAllBy(array, values, iteratee)`
 

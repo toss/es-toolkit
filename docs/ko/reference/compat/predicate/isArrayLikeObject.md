@@ -6,7 +6,7 @@
 const result = isArrayLikeObject(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isArrayLikeObject(value)`
 

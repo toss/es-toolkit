@@ -6,7 +6,7 @@
 const result = intersectionBy(firstArr, secondArr, mapper);
 ```
 
-## 参考
+## 用法
 
 ### `intersectionBy(firstArr, secondArr, mapper)`
 

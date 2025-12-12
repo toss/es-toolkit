@@ -6,7 +6,7 @@ Checks if a given value is a string.
 const result = isString(value);
 ```
 
-## Reference
+## Usage
 
 ### `isString(value)`
 

@@ -14,7 +14,7 @@ Checks if a value is a regular expression.
 const result = isRegExp(value);
 ```
 
-## Reference
+## Usage
 
 ### `isRegExp(value)`
 

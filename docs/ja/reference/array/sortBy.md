@@ -6,7 +6,7 @@
 const sorted = sortBy(arr, criteria);
 ```
 
-## 参照
+## 使用法
 
 ### `sortBy(arr, criteria)`
 

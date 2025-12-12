@@ -14,7 +14,7 @@
 const result = tail(array);
 ```
 
-## 参照
+## 使用法
 
 ### `tail(array)`
 

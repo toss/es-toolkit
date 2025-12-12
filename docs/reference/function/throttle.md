@@ -6,7 +6,7 @@ Limits a function to be executed at most once per specified time interval.
 const throttledFunc = throttle(func, throttleMs, options);
 ```
 
-## Reference
+## Usage
 
 ### `throttle(func, throttleMs, options?)`
 

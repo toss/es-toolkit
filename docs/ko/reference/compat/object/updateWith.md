@@ -14,7 +14,7 @@
 const updated = updateWith(obj, path, updater, customizer);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `updateWith(obj, path, updater, customizer?)`
 

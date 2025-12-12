@@ -6,7 +6,7 @@ Returns a randomly selected element from an array.
 const randomElement = sample(arr);
 ```
 
-## Reference
+## Usage
 
 ### `sample(arr)`
 

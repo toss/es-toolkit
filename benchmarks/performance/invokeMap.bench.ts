@@ -10,7 +10,7 @@ describe('invokeMap', () => {
   const numberObject = { a: 1, b: 2, c: 3 };
   const largeArray = Array.from({ length: 1000 }, (_, i) => String(i));
   const array = ['a', 'b', 'c'];
-  const func = function (left, right) {
+  const func = function (this: string, left: string, right: string) {
     return left + this.toUpperCase() + right;
   };
 

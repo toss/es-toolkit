@@ -14,7 +14,7 @@ Creates a function that checks if all predicate functions return truthy for the 
 const allValidator = overEvery(predicates);
 ```
 
-## Reference
+## Usage
 
 ### `overEvery(...predicates)`
 

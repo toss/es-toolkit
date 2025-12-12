@@ -14,7 +14,7 @@
 const result = intersectionWith(array, ...otherArrays, comparator);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `intersectionWith(array, ...otherArrays, comparator)`
 

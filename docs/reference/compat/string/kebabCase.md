@@ -14,7 +14,7 @@ Converts a string to kebab case.
 const result = kebabCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `kebabCase(str)`
 

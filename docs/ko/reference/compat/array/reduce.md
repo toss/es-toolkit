@@ -14,7 +14,7 @@
 const result = reduce(collection, iteratee, initialValue);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `reduce(collection, iteratee, initialValue)`
 

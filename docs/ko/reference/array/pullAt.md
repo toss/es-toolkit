@@ -6,7 +6,7 @@
 const removed = pullAt(arr, indices);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `pullAt(arr, indicesToRemove)`
 

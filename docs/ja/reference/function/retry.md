@@ -6,7 +6,7 @@ Promise を返す関数が成功するまで繰り返し実行します。
 const result = await retry(asyncFunc, options);
 ```
 
-## 参照
+## 使用法
 
 ### `retry(func, options?)`
 

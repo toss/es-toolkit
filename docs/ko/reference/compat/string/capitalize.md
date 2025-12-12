@@ -14,7 +14,7 @@
 const result = capitalize(str);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `capitalize(str)`
 

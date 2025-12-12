@@ -12,7 +12,7 @@
 const memoizedFunc = memoize(func, resolver);
 ```
 
-## 参照
+## 使用法
 
 ### `memoize(func, resolver)`
 

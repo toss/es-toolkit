@@ -14,7 +14,7 @@
 const emptyArray = stubArray();
 ```
 
-## 参考
+## 用法
 
 ### `stubArray()`
 

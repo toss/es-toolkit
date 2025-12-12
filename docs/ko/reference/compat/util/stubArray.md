@@ -14,7 +14,7 @@
 const emptyArray = stubArray();
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `stubArray()`
 

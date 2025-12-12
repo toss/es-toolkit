@@ -57,7 +57,7 @@ function returns(item: DocumentationItem) {
   }
 
   return `
-### 戻り値
+#### 戻り値
 
 (\`${item.returns.type}\`): ${item.returns.document}
   `.trim();

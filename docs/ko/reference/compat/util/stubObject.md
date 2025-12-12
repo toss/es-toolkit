@@ -14,7 +14,7 @@
 const emptyObject = stubObject();
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `stubObject()`
 

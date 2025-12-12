@@ -14,7 +14,7 @@ Creates a shallow copy of an object using a customizer function.
 const cloned = cloneWith(value, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `cloneWith(value, customizer?)`
 

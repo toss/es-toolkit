@@ -15,7 +15,7 @@ const result = uniq([1, 2, 2, 3, 3, 4]);
 // result 是 [1, 2, 3, 4]。
 ```
 
-## 参考
+## 用法
 
 ### `uniq(array)`
 

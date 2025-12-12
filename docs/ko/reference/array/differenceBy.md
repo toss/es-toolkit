@@ -6,7 +6,7 @@
 const result = differenceBy(firstArr, secondArr, mapper);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `differenceBy(firstArr, secondArr, mapper)`
 
@@ -35,10 +35,10 @@ differenceBy(objects, numbers, item => (typeof item === 'object' ? item.id : ite
 import { differenceBy } from 'es-toolkit/array';
 
 const words1 = ['apple', 'banana', 'cherry'];
-const words2 = ['kiwi', 'pear'];
+const words2 = ['grape', 'lemon'];
 differenceBy(words1, words2, word => word.length);
 // Returns: ['banana', 'cherry']
-// 'apple'은 'kiwi'나 'pear'와 길이가 같아서 제외돼요.
+// 'apple'은 'grape'나 'lemon'과 길이가 같아서 제외돼요.
 ```
 
 #### 파라미터

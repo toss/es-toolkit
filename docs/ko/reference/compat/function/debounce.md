@@ -14,7 +14,7 @@
 const debouncedFunction = debounce(func, wait, options);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `debounce(func, wait, options)`
 

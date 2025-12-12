@@ -6,7 +6,7 @@ Asserts that a given condition is true. If the condition is false, it throws an 
 invariant(condition, message);
 ```
 
-## Reference
+## Usage
 
 ### `invariant(condition, message)`
 

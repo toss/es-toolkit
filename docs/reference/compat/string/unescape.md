@@ -14,7 +14,7 @@ Converts HTML entities to their original characters.
 const unescaped = unescape(str);
 ```
 
-## Reference
+## Usage
 
 ### `unescape(str)`
 

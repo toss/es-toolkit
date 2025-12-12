@@ -14,7 +14,7 @@
 const compacted = compact(arr);
 ```
 
-## 参考
+## 用法
 
 ### `compact(arr)`
 

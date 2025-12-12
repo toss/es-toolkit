@@ -6,7 +6,7 @@
 const middle = median(nums);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `median(nums)`
 

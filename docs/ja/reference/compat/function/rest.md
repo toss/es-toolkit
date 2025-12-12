@@ -14,7 +14,7 @@
 const restFunc = rest(func, start);
 ```
 
-## 参照
+## 使用法
 
 ### `rest(func, start)`
 

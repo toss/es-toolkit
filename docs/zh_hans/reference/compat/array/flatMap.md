@@ -14,7 +14,7 @@
 const result = flatMap(collection, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `flatMap(collection, iteratee)`
 

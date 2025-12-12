@@ -6,7 +6,7 @@
 const methodFunc = method(path, ...args);
 ```
 
-## 参照
+## 使用法
 
 ### `method(path, ...args)`
 

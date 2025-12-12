@@ -14,7 +14,7 @@
 const result = isFinite(value);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isFinite(value)`
 
@@ -50,4 +50,5 @@ isFinite(undefined); // false
 
 #### 반환 값
 
-(`boolean`): 값이 유한한 숫자이면 `true`, 아니면 `false`를 반환해요.
+(`value is number`): 값이 유한한 숫자이면 `true`, 아니면 `false`를 반환해요.  
+`true`를 반환하면 TypeScript가 `value`의 타입을 `number`로 좁혀줘요.

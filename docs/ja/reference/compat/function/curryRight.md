@@ -14,7 +14,7 @@
 const curriedFunction = curryRight(func, arity);
 ```
 
-## 参照
+## 使用法
 
 ### `curryRight(func, arity)`
 

@@ -6,7 +6,7 @@
 const modified = pullAllBy(array, valuesToRemove, iteratee);
 ```
 
-## 参考
+## 用法
 
 ### `pullAllBy(array, values, iteratee)`
 

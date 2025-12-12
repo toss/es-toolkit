@@ -14,7 +14,7 @@ Returns an array of all property values from the object, including inherited pro
 const values = valuesIn(obj);
 ```
 
-## Reference
+## Usage
 
 ### `valuesIn(object)`
 

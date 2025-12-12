@@ -14,7 +14,7 @@ Creates a function that returns a value from an element.
 const getter = iteratee(source);
 ```
 
-## Reference
+## Usage
 
 ### `iteratee(value?)`
 

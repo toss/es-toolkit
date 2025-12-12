@@ -9,6 +9,19 @@ import { isArguments } from '../predicate/isArguments';
 import { stubTrue } from '../util/stubTrue';
 
 describe('merge', () => {
+  it('should replace `source1` Date with `source2` Date instead of deep merging', () => {
+    const source1 = { a: 1, b: { x: 1, y: 2 }, c: new Date('2025-01-01') };
+    const source2 = { b: { y: 3, z: 4 }, c: new Date('2000-01-01') };
+
+    const actual = merge({}, source1, source2);
+
+    expect(actual).toEqual({
+      a: 1,
+      b: { x: 1, y: 3, z: 4 },
+      c: new Date('2000-01-01'),
+    });
+  });
+
   it('should merge `source` into `object`', () => {
     const names = {
       characters: [{ name: 'barney' }, { name: 'fred' }],
@@ -280,7 +293,7 @@ describe('merge', () => {
     // @ts-ignore
     let actual = merge(new Foo(), object);
 
-    expect(actual instanceof Foo);
+    expect(actual instanceof Foo).toBe(true);
     // eslint-disable-next-line
     // @ts-ignore
     expect(actual).toEqual(new Foo(object));
@@ -288,7 +301,7 @@ describe('merge', () => {
     // eslint-disable-next-line
     // @ts-ignore
     actual = merge([new Foo()], [object]);
-    expect(actual[0] instanceof Foo);
+    expect(actual[0] instanceof Foo).toBe(true);
     // eslint-disable-next-line
     // @ts-ignore
     expect(actual).toEqual([new Foo(object)]);
@@ -368,6 +381,14 @@ describe('merge', () => {
     const actual = merge(object, { a: ['x', 'y', 'z'] });
 
     expect(actual).toEqual({ a: ['x', 'y', 'z'] });
+  });
+
+  it('should not preserve object properties when nested object is replaced by array', () => {
+    const actual = merge({ x: { a: 2 } }, { x: ['1'] });
+
+    expect(actual.x).toEqual(['1']);
+    expect(Object.keys(actual.x)).toEqual(['0']);
+    expect((actual.x as any).a).toBeUndefined();
   });
 
   it('should match the type of lodash', () => {

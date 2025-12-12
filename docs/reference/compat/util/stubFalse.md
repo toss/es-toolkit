@@ -14,7 +14,7 @@ Always returns `false`.
 const falseValue = stubFalse();
 ```
 
-## Reference
+## Usage
 
 ### `stubFalse()`
 

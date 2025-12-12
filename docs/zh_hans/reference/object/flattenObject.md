@@ -6,7 +6,7 @@
 const flattened = flattenObject(object, options?);
 ```
 
-## 参考
+## 用法
 
 ### `flattenObject(object, options?)`
 

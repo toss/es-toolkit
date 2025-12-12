@@ -6,7 +6,7 @@
 const result = differenceWith(firstArr, secondArr, areItemsEqual);
 ```
 
-## 参照
+## 使用法
 
 ### `differenceWith(firstArr, secondArr, areItemsEqual)`
 

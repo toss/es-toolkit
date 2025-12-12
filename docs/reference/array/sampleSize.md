@@ -6,7 +6,7 @@ Returns a new array of randomly selected elements with the specified size.
 const sampled = sampleSize(array, size);
 ```
 
-## Reference
+## Usage
 
 ### `sampleSize(array, size)`
 

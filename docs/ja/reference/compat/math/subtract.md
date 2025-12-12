@@ -14,7 +14,7 @@
 const result = subtract(value, other);
 ```
 
-## 参照
+## 使用法
 
 ### `subtract(value, other)`
 

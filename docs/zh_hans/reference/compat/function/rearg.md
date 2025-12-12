@@ -14,7 +14,7 @@
 const rearranged = rearg(func, ...indices);
 ```
 
-## 参考
+## 用法
 
 ### `rearg(func, ...indices)`
 

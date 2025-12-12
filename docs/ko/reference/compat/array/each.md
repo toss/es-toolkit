@@ -14,7 +14,7 @@
 const result = each(collection, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `each(collection, iteratee)`
 

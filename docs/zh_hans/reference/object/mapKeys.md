@@ -6,7 +6,7 @@
 const newObj = mapKeys(object, getNewKey);
 ```
 
-## 参考
+## 用法
 
 ### `mapKeys(object, getNewKey)`
 

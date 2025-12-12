@@ -6,7 +6,7 @@
 const [error, result] = attempt(func);
 ```
 
-## 参照
+## 使用法
 
 ### `attempt(func)`
 

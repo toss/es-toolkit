@@ -14,7 +14,7 @@
 const value = get(object, path, defaultValue);
 ```
 
-## 参照
+## 使用法
 
 ### `get(object, path, defaultValue?)`
 

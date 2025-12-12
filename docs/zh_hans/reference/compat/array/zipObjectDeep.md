@@ -6,7 +6,7 @@
 const result = zipObjectDeep(keys, values);
 ```
 
-## 参考
+## 用法
 
 ### `zipObjectDeep(keys, values)`
 

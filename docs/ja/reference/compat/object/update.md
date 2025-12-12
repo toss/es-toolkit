@@ -14,7 +14,7 @@
 const updated = update(obj, path, updater);
 ```
 
-## 参照
+## 使用法
 
 ### `update(obj, path, updater)`
 

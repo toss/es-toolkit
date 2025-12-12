@@ -14,7 +14,7 @@
 const result = find(collection, predicate, fromIndex);
 ```
 
-## 参照
+## 使用法
 
 ### `find(collection, predicate, fromIndex?)`
 

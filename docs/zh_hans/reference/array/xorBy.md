@@ -6,7 +6,7 @@
 const result = xorBy(arr1, arr2, mapper);
 ```
 
-## 参考
+## 用法
 
 ### `xorBy(arr1, arr2, mapper)`
 

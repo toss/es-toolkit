@@ -166,4 +166,19 @@ describe('unset', () => {
     expect(unset(object, 'a.b')).toBe(true);
     expect(object).toEqual({ b: null });
   });
+
+  it('should prevent prototype pollution by rejecting __proto__ deletion', () => {
+    expect(unset({ ['__proto__']: {} }, '__proto__')).toBe(false);
+    expect(unset({ ['__proto__']: {} }, ['__proto__'])).toBe(false);
+  });
+
+  it('should not be polluted in compat/unset', () => {
+    unset({}, '__proto__.toString');
+    expect({}.toString).not.toBeUndefined();
+
+    const object = { a: 1 };
+    expect(unset(object, '__proto__')).toBe(false);
+    expect(unset(object, { toString: () => '__proto__' } as any)).toBe(false);
+    expect(unset(object, ['a', '__proto__'])).toBe(false);
+  });
 });

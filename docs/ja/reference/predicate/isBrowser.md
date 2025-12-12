@@ -6,7 +6,7 @@
 const result = isBrowser();
 ```
 
-## 参照
+## 使用法
 
 ### `isBrowser()`
 

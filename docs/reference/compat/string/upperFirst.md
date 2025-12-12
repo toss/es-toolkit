@@ -14,7 +14,7 @@ Converts the first character of a string to uppercase.
 const upperCased = upperFirst(str);
 ```
 
-## Reference
+## Usage
 
 ### `upperFirst(str)`
 

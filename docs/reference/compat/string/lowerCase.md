@@ -14,7 +14,7 @@ Converts a string to lowercase words separated by spaces.
 const result = lowerCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `lowerCase(str)`
 

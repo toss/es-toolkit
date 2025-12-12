@@ -14,7 +14,7 @@
 const result = extendWith(object, source, customizer);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `extendWith(object, ...sources, customizer)`
 

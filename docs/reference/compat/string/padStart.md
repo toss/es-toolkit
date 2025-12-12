@@ -14,7 +14,7 @@ Pads the start of a string to extend it to the specified length.
 const padded = padStart(str, length, chars);
 ```
 
-## Reference
+## Usage
 
 ### `padStart(str, length?, chars?)`
 

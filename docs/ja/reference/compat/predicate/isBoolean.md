@@ -12,7 +12,7 @@
 const result = isBoolean(value);
 ```
 
-## 参照
+## 使用法
 
 ### `isBoolean(value)`
 

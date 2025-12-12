@@ -6,7 +6,7 @@ Converts a string to a format where all letters are uppercase and words are sepa
 const result = upperCase(str);
 ```
 
-## Reference
+## Usage
 
 ### `upperCase(str)`
 

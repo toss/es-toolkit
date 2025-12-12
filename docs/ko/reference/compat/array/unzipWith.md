@@ -14,7 +14,7 @@
 const result = unzipWith(array, iteratee);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `unzipWith(array, iteratee)`
 

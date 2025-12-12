@@ -6,7 +6,7 @@ Creates a deeply nested object using a path array and a value array.
 const result = zipObjectDeep(keys, values);
 ```
 
-## Reference
+## Usage
 
 ### `zipObjectDeep(keys, values)`
 

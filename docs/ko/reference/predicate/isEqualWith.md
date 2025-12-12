@@ -6,7 +6,7 @@
 const result = isEqualWith(a, b, areValuesEqual);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `isEqualWith(a, b, areValuesEqual)`
 

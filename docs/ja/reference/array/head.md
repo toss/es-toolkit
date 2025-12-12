@@ -6,7 +6,7 @@
 const firstElement = head(arr);
 ```
 
-## 参照
+## 使用法
 
 ### `head(arr)`
 

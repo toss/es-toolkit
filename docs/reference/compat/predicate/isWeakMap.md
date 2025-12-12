@@ -14,7 +14,7 @@ Checks if a value is a WeakMap.
 const result = isWeakMap(value);
 ```
 
-## Reference
+## Usage
 
 ### `isWeakMap(value)`
 

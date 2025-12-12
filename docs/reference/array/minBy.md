@@ -6,7 +6,7 @@ Returns the element with the minimum value from the array based on the value ret
 const min = minBy(items, getValue);
 ```
 
-## Reference
+## Usage
 
 ### `minBy(items, getValue)`
 

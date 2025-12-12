@@ -6,7 +6,7 @@
 const result = takeRightWhile(arr, shouldContinueTaking);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `takeRightWhile(arr, shouldContinueTaking)`
 

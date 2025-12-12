@@ -14,7 +14,7 @@
 const result = deburr(str);
 ```
 
-## 参考
+## 用法
 
 ### `deburr(str)`
 

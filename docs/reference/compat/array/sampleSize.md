@@ -14,7 +14,7 @@ Randomly selects a specified number of elements from an array or object.
 const sampled = sampleSize(collection, size);
 ```
 
-## Reference
+## Usage
 
 ### `sampleSize(collection, size?)`
 

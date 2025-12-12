@@ -6,7 +6,7 @@
 const mutex = new Mutex();
 ```
 
-## 参照
+## 使用法
 
 ### `Mutex()`
 

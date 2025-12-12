@@ -14,7 +14,7 @@ Checks if a string ends with a given target string.
 const result = endsWith(str, target);
 ```
 
-## Reference
+## Usage
 
 ### `endsWith(str, target, position?)`
 

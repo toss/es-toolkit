@@ -6,7 +6,7 @@ Escapes characters with special meaning in regular expressions to literal charac
 const result = escapeRegExp(str);
 ```
 
-## Reference
+## Usage
 
 ### `escapeRegExp(str)`
 

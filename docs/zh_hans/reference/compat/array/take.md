@@ -15,7 +15,7 @@ const result = take([1, 2, 3, 4, 5], 3);
 // result 变为 [1, 2, 3]。
 ```
 
-## 参考
+## 用法
 
 ### `take(array, count)`
 

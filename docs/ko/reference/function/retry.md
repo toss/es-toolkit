@@ -6,7 +6,7 @@ Promise를 반환하는 함수가 성공할 때까지 반복해서 실행해요.
 const result = await retry(asyncFunc, options);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `retry(func, options?)`
 

@@ -6,7 +6,7 @@ Removes elements from an array based on a condition function and returns the rem
 const removed = remove(arr, shouldRemoveElement);
 ```
 
-## Reference
+## Usage
 
 ### `remove(arr, shouldRemoveElement)`
 

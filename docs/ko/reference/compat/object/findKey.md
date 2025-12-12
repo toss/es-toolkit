@@ -14,7 +14,7 @@
 const key = findKey(obj, predicate);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `findKey(obj, predicate)`
 

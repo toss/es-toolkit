@@ -6,7 +6,7 @@
 const dropped = drop(arr, itemsCount);
 ```
 
-## 参考
+## 用法
 
 ### `drop(arr, itemsCount)`
 

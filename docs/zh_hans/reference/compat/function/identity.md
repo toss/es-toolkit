@@ -12,7 +12,7 @@
 const result = identity(value);
 ```
 
-## 参考
+## 用法
 
 ### `identity(value)`
 

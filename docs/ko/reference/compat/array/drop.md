@@ -14,7 +14,7 @@
 const result = drop(array, n);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `drop(array, n?)`
 

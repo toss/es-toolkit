@@ -12,7 +12,7 @@ assert(condition, message);
 
 :::
 
-## 参考
+## 用法
 
 ### `assert(condition, message)`
 

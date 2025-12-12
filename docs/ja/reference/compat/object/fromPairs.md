@@ -14,7 +14,7 @@
 const result = fromPairs(pairs);
 ```
 
-## 参照
+## 使用法
 
 ### `fromPairs(pairs)`
 

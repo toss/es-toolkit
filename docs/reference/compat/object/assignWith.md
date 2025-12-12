@@ -14,7 +14,7 @@ Assigns properties from source objects to a target object using a customizer fun
 const result = assignWith(target, source1, source2, customizer);
 ```
 
-## Reference
+## Usage
 
 ### `assignWith(object, ...sources, customizer)`
 

@@ -6,7 +6,7 @@ Limits the number of asynchronous tasks that can execute simultaneously.
 const semaphore = new Semaphore(capacity);
 ```
 
-## Reference
+## Usage
 
 ### `Semaphore(capacity)`
 

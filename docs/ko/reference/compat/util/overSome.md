@@ -14,7 +14,7 @@
 const anyValidator = overSome(predicates);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `overSome(...predicates)`
 

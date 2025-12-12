@@ -43,13 +43,18 @@ export default defineConfig(
   {
     files: ['**/*.spec.ts*'],
     plugins: { vitest },
+    settings: { vitest: { typecheck: true } },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
     rules: {
       ...vitest.configs.recommended.rules,
       'vitest/no-commented-out-tests': 'warn',
-      'vitest/expect-expect': 'warn',
       'vitest/valid-expect': 'warn',
-      'vitest/no-identical-title': 'warn',
-      'vitest/valid-title': 'warn',
     },
   },
   prettier,

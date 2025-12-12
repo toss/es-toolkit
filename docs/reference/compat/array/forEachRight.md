@@ -14,7 +14,7 @@ Iterates over elements of an array or object from right to left and executes a f
 forEachRight(collection, callback);
 ```
 
-## Reference
+## Usage
 
 ### `forEachRight(collection, callback)`
 

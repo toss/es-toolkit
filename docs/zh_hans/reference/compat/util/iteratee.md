@@ -14,7 +14,7 @@
 const getter = iteratee(source);
 ```
 
-## 参考
+## 用法
 
 ### `iteratee(value?)`
 

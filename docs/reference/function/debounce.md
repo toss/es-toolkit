@@ -6,7 +6,7 @@ Creates a debounced function that delays the invocation of a function.
 const debouncedFunc = debounce(func, debounceMs, options);
 ```
 
-## Reference
+## Usage
 
 ### `debounce(func, debounceMs, options)`
 

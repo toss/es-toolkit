@@ -6,7 +6,7 @@ Checks if a value is a File object.
 const result = isFile(value);
 ```
 
-## Reference
+## Usage
 
 ### `isFile(value)`
 

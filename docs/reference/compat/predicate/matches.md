@@ -6,7 +6,7 @@ Creates a function that checks for partial matching with a given pattern.
 const matcher = matches(pattern);
 ```
 
-## Reference
+## Usage
 
 ### `matches(source)`
 

@@ -14,7 +14,7 @@
 const result = assignInWith(target, ...sources, customizer);
 ```
 
-## 参照
+## 使用法
 
 ### `assignInWith(target, ...sources, customizer)`
 

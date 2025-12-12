@@ -14,7 +14,7 @@ Computes the difference between the first array and other arrays after applying 
 const result = differenceBy(array, ...values, iteratee);
 ```
 
-## Reference
+## Usage
 
 ### `differenceBy(array, ...values, iteratee)`
 

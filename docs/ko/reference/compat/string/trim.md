@@ -14,7 +14,7 @@
 const trimmed = trim(str, chars);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `trim(str, chars)`
 

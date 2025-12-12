@@ -14,7 +14,7 @@
 const inverted = invertBy(object, iteratee);
 ```
 
-## 参照
+## 使用法
 
 ### `invertBy(object, iteratee?)`
 

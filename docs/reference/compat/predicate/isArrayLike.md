@@ -6,7 +6,7 @@ Checks if a value is an array-like object.
 const result = isArrayLike(value);
 ```
 
-## Reference
+## Usage
 
 ### `isArrayLike(value)`
 

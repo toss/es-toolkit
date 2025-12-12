@@ -6,7 +6,7 @@ Creates a function that invokes a method at the specified path with the given ar
 const methodFunc = method(path, ...args);
 ```
 
-## Reference
+## Usage
 
 ### `method(path, ...args)`
 

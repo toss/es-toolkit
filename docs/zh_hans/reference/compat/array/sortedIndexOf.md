@@ -14,7 +14,7 @@
 const index = sortedIndexOf(array, value);
 ```
 
-## 参考
+## 用法
 
 ### `sortedIndexOf(array, value)`
 

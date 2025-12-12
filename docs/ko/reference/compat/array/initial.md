@@ -14,7 +14,7 @@
 const result = initial(array);
 ```
 
-## 레퍼런스
+## 사용법
 
 ### `initial(array)`
 

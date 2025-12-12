@@ -12,7 +12,7 @@
 const result = isNil(value);
 ```
 
-## 参考
+## 用法
 
 ### `isNil(x)`
 
