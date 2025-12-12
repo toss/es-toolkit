@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.42.0",
+  "version": "1.43.0",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
