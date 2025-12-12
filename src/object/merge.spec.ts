@@ -133,8 +133,9 @@ describe('merge', () => {
     expect(typeof topLevelObject).toBe('object');
     expect(topLevelObject).toEqual({ a: 2, 0: '1' });
 
-    expect(typeof nestedObject).toBe('object');
-    expect(nestedObject).toEqual({ x: { a: 2, 0: '1' } });
+    expect(typeof nestedObject.x).toBe('object');
+    expect(nestedObject.x).toEqual({ a: 2, 0: '1' });
+    expect(nestedObject.x[0]).toBe('1');
 
     expect(Array.isArray(nestedArray.x)).toBe(true);
     expect(nestedArray.x[0]).toBe('1');
