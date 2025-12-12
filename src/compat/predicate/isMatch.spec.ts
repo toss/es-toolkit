@@ -316,6 +316,24 @@ describe('isMatch', () => {
     delete numberProto.b;
   });
 
+  it('should return `false` when target is primitive and source is object with undefined values (Issue #1399)', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch('bar', { anyKey: undefined })).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch(123, { anyKey: undefined })).toBe(false);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(isMatch(true, { anyKey: undefined })).toBe(false);
+  });
+
+  it('should return `false` when target is primitive and source is empty object nested (Issue #1399)', () => {
+    expect(isMatch({ value: 'bar' }, { value: {} })).toBe(false);
+    expect(isMatch({ value: 123 }, { value: {} })).toBe(false);
+    expect(isMatch({ value: true }, { value: {} })).toBe(false);
+  });
+
   it(`should return \`false\` when \`object\` is nullish`, () => {
     // eslint-disable-next-line no-sparse-arrays
     const values = [, null, undefined];
