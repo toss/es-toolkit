@@ -58,7 +58,7 @@ export function merge<T extends Record<PropertyKey, any>, S extends Record<Prope
     const targetValue = target[key];
 
     if (Array.isArray(sourceValue) || isPlainObject(sourceValue)) {
-      if (typeof targetValue === 'object' && targetValue !== null) {
+      if (Array.isArray(targetValue) || isPlainObject(targetValue)) {
         target[key] = merge(targetValue, sourceValue);
       } else if (Array.isArray(sourceValue)) {
         target[key] = merge([], sourceValue);
