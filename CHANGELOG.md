@@ -1,5 +1,21 @@
 # es-toolkit Changelog
 
+## Version v1.43.0
+
+Released on December 12th, 2025.
+
+- Enhanced `merge` to handle arrays and objects consistently, and to match lodash's behavior with date values and array-like objects. ([#1553], [#1542], [#1548])
+- Fixed `isMatch` and `isMatchWith` to match lodash's behavior.
+- Fixed `intersectionBy` implementation and removed duplicates when the mapper produces the same values. ([#1528])
+- Fixed `throttle` working like debounce.
+- Fixed type inference in `toSnakeCaseKeys`, `toCamelCaseKeys` for edge cases and improved type inference for uppercase keys. ([#1538])
+- Fixed casing utilities (`camelCase`, `kebabCase`, `lowerCase`, `snakeCase`, `startCase`, `upperCase`) to match lodash's behavior. ([#1525])
+- Fixed `compat/template` to disable ES interpolation when custom `interpolate` is provided. ([#1527])
+- Fixed incorrect example in `differenceBy` documentation. ([#1543])
+- Performance improvement: updated `deburr` to use arrays to construct the deburrMap. ([#1526])
+
+We sincerely thank @dayongkr, @raon0211, @wo-o29, @Yeom-JinHo, @Copilot, @oshosh, @vbfox, @sukvvon, @sankeyangshu, @D-Sketon, @seo-rii for their contributions. We appreciate your great efforts!
+
 ## Version v1.42.0
 
 Released on November 17th, 2025.

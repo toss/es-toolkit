@@ -25,11 +25,13 @@ function escapeString(match: string): string {
   return `\\${escapeMap.get(match)}`;
 }
 
+const defaultInterpolateRegExp = /<%=([\s\S]+?)%>/g;
+
 // Only import the necessary functions for preventing circular dependencies.(lodash-es also does this)
 export const templateSettings = {
   escape: /<%-([\s\S]+?)%>/g,
   evaluate: /<%([\s\S]+?)%>/g,
-  interpolate: /<%=([\s\S]+?)%>/g,
+  interpolate: defaultInterpolateRegExp,
   variable: '',
   imports: {
     _: {
@@ -130,7 +132,7 @@ export function template(string?: string, options?: TemplateOptions, guard?: obj
     [
       options.escape?.source ?? noMatchExp.source,
       options.interpolate?.source ?? noMatchExp.source,
-      options.interpolate ? esTemplateRegExp.source : noMatchExp.source,
+      options.interpolate === defaultInterpolateRegExp ? esTemplateRegExp.source : noMatchExp.source,
       options.evaluate?.source ?? noMatchExp.source,
       '$',
     ].join('|'),
