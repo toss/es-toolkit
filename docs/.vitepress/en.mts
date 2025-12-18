@@ -62,6 +62,11 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'reference', 'function'),
         },
         {
+          text: 'Map Utilities',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'reference', 'map'),
+        },
+        {
           text: 'Math Utilities',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'reference', 'math'),
@@ -85,6 +90,11 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'String Utilities',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'reference', 'string'),
+        },
+        {
+          text: 'Set Utilities',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'reference', 'set'),
         },
         {
           text: 'Utility Functions',

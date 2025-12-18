@@ -29,9 +29,11 @@ umd
 /error.js
 /function.js
 /math.js
+/map.js
 /object.js
 /predicate.js
 /promise.js
+/set.js
 /string.js
 /util.js
 
