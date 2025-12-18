@@ -1,4 +1,4 @@
-import { clamp as clampToolkit } from '../../math/clamp.ts';
+import { toNumber } from '../util/toNumber.ts';
 
 /**
  * Clamps a number within the specified bounds.
@@ -44,13 +44,20 @@ export function clamp(number: number, upper: number): number;
  * const result4 = clamp(20, 5, 15); // result4 will be 15, as 20 is clamped to the upper bound 15
  */
 export function clamp(value: number, bound1: number, bound2?: number): number {
-  if (Number.isNaN(bound1)) {
-    bound1 = 0;
+  if (bound2 === undefined) {
+    bound2 = bound1;
+    bound1 = undefined as any;
   }
 
-  if (Number.isNaN(bound2)) {
-    bound2 = 0;
+  if (bound2 !== undefined) {
+    bound2 = toNumber(bound2);
+    value = Math.min(value, Number.isNaN(bound2) ? 0 : bound2);
   }
 
-  return clampToolkit(value, bound1, bound2!);
+  if (bound1 !== undefined) {
+    bound1 = toNumber(bound1);
+    value = Math.max(value, Number.isNaN(bound1) ? 0 : bound1);
+  }
+
+  return value;
 }
