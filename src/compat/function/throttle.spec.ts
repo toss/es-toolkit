@@ -374,7 +374,7 @@ describe('throttle', () => {
     throttled();
     throttled();
 
-    await delay(150);
+    await delay(500);
 
     expect(fn).toHaveBeenCalledTimes(0);
   });
