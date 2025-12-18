@@ -47,11 +47,7 @@ const sum = reduce(values, (acc, value) => acc + value);
 // Set에서 배열 만들기
 const uniqueNames = new Set(['Alice', 'Bob', 'Charlie']);
 
-const nameList = reduce(
-  uniqueNames,
-  (acc, name) => [...acc, name.toUpperCase()],
-  [] as string[]
-);
+const nameList = reduce(uniqueNames, (acc, name) => [...acc, name.toUpperCase()], [] as string[]);
 // 결과: ['ALICE', 'BOB', 'CHARLIE']
 ```
 

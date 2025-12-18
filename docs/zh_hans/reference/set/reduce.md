@@ -47,11 +47,7 @@ const sum = reduce(values, (acc, value) => acc + value);
 // 从Set构建数组
 const uniqueNames = new Set(['Alice', 'Bob', 'Charlie']);
 
-const nameList = reduce(
-  uniqueNames,
-  (acc, name) => [...acc, name.toUpperCase()],
-  [] as string[]
-);
+const nameList = reduce(uniqueNames, (acc, name) => [...acc, name.toUpperCase()], [] as string[]);
 // 结果: ['ALICE', 'BOB', 'CHARLIE']
 ```
 

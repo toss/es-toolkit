@@ -47,11 +47,7 @@ const sum = reduce(values, (acc, value) => acc + value);
 // Setから配列を構築します。
 const uniqueNames = new Set(['Alice', 'Bob', 'Charlie']);
 
-const nameList = reduce(
-  uniqueNames,
-  (acc, name) => [...acc, name.toUpperCase()],
-  [] as string[]
-);
+const nameList = reduce(uniqueNames, (acc, name) => [...acc, name.toUpperCase()], [] as string[]);
 // 結果: ['ALICE', 'BOB', 'CHARLIE']
 ```
 

@@ -47,11 +47,7 @@ const sum = reduce(values, (acc, value) => acc + value);
 // Build an array from Set
 const uniqueNames = new Set(['Alice', 'Bob', 'Charlie']);
 
-const nameList = reduce(
-  uniqueNames,
-  (acc, name) => [...acc, name.toUpperCase()],
-  [] as string[]
-);
+const nameList = reduce(uniqueNames, (acc, name) => [...acc, name.toUpperCase()], [] as string[]);
 // Result: ['ALICE', 'BOB', 'CHARLIE']
 ```
 

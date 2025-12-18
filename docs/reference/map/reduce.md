@@ -62,11 +62,7 @@ const settings = new Map([
   ['notifications', true],
 ]);
 
-const config = reduce(
-  settings,
-  (acc, value, key) => ({ ...acc, [key]: value }),
-  {} as Record<string, any>
-);
+const config = reduce(settings, (acc, value, key) => ({ ...acc, [key]: value }), {} as Record<string, any>);
 // Result: { theme: 'dark', lang: 'en', notifications: true }
 ```
 

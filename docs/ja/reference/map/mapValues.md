@@ -58,9 +58,7 @@ const inventory = new Map([
   ['basic_item', 30],
 ]);
 
-const adjusted = mapValues(inventory, (value, key) =>
-  key.startsWith('premium_') ? value * 1.5 : value
-);
+const adjusted = mapValues(inventory, (value, key) => (key.startsWith('premium_') ? value * 1.5 : value));
 // 結果: 15, 20, 30の値を持つMap
 ```
 
