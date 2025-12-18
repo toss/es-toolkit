@@ -117,6 +117,7 @@ export function throttle<T extends (...args: any) => any>(
  *   throttledFunction(); // Will log 'Function executed'
  * }, 1000);
  */
+
 export function throttle<F extends (...args: any[]) => any>(
   func: F,
   throttleMs = 0,
@@ -126,7 +127,7 @@ export function throttle<F extends (...args: any[]) => any>(
 
   return debounce(func, throttleMs, {
     leading,
-    maxWait: throttleMs,
+    maxWait: leading || trailing ? throttleMs : undefined,
     trailing,
   });
 }

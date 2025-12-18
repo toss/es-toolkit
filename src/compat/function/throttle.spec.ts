@@ -366,4 +366,16 @@ describe('throttle', () => {
     await delay(64);
     expect(callCount).toBe(2);
   });
+
+  it('should not invoke the function if both leading and trailing are false', async () => {
+    const fn = vi.fn();
+    const throttled = throttle(fn, 100, { leading: false, trailing: false });
+
+    throttled();
+    throttled();
+
+    await delay(150);
+
+    expect(fn).toHaveBeenCalledTimes(0);
+  });
 });
