@@ -1,6 +1,7 @@
 import { cloneDeepWith as cloneDeepWithToolkit } from '../../object/cloneDeepWith.ts';
 import { copyProperties } from '../../object/cloneDeepWith.ts';
-import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tags.ts';
+import { getTag } from '../_internal/getTag.ts';
+import { argumentsTag, booleanTag, numberTag, objectTag, stringTag } from '../_internal/tags.ts';
 
 type CloneDeepWithCustomizer<TObject> = (
   value: any,
@@ -87,6 +88,15 @@ export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>
 
     if (typeof obj !== 'object') {
       return undefined;
+    }
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    if (getTag(obj) === objectTag && typeof obj.constructor !== 'function') {
+      const result = {};
+      stack.set(obj, result);
+      copyProperties(result, obj, object, stack);
+      return result;
     }
 
     switch (Object.prototype.toString.call(obj)) {

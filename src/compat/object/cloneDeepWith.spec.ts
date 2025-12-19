@@ -131,4 +131,20 @@ describe('cloneDeepWith', function () {
   it('should match the type of lodash', () => {
     expectTypeOf(cloneDeepWith).toEqualTypeOf<typeof cloneDeepWithLodash>();
   });
+
+  it('should clone objects created with Object.create(null) as regular objects with Object.prototype', () => {
+    const nullProtoObj = Object.create(null);
+    nullProtoObj.a = 1;
+    nullProtoObj.b = 'test';
+
+    const cloned = cloneDeepWith(nullProtoObj);
+
+    expect(Object.getPrototypeOf(cloned)).toBe(Object.prototype);
+    expect(cloned.toString).toBe(Object.prototype.toString);
+
+    expect(cloned.a).toBe(1);
+    expect(cloned.b).toBe('test');
+
+    expect(cloned).not.toBe(nullProtoObj);
+  });
 });
