@@ -8,9 +8,9 @@
  * @template T - The type of elements in the array.
  * @template {T} U - The type being filtered for.
  * @param {T[]} arr - The array to partition.
- * @param {(value: T) => value is U} isInTruthy - A type guard that determines whether an
+ * @param {(value: T, index: number, array: readonly T[]) => value is U} isInTruthy - A type guard that determines whether an
  * element should be placed in the truthy array. The function is called with each element
- * of the array.
+ * of the array and its index.
  * @returns {[U[], Exclude<T, U>[]]} A tuple containing two arrays: the first array contains elements for
  * which the predicate returned true, and the second array contains elements for which the
  * predicate returned false.
@@ -23,7 +23,7 @@
  */
 export function partition<T, U extends T>(
   arr: readonly T[],
-  isInTruthy: (value: T) => value is U
+  isInTruthy: (value: T, index: number, array: readonly T[]) => value is U
 ): [truthy: U[], falsy: Array<Exclude<T, U>>];
 
 /**
@@ -35,9 +35,9 @@ export function partition<T, U extends T>(
  *
  * @template T - The type of elements in the array.
  * @param {T[]} arr - The array to partition.
- * @param {(value: T) => boolean} isInTruthy - A predicate function that determines
+ * @param {(value: T, index: number) => boolean} isInTruthy - A predicate function that determines
  * whether an element should be placed in the truthy array. The function is called with each
- * element of the array.
+ * element of the array and its index.
  * @returns {[T[], T[]]} A tuple containing two arrays: the first array contains elements for
  * which the predicate returned true, and the second array contains elements for which the
  * predicate returned false.
@@ -48,14 +48,20 @@ export function partition<T, U extends T>(
  * const [even, odd] = partition(array, isEven);
  * // even will be [2, 4], and odd will be [1, 3, 5]
  */
-export function partition<T>(arr: readonly T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]];
-export function partition<T>(arr: readonly T[], isInTruthy: (value: T) => boolean): [truthy: T[], falsy: T[]] {
+export function partition<T>(
+  arr: readonly T[],
+  isInTruthy: (value: T, index: number, array: readonly T[]) => boolean
+): [truthy: T[], falsy: T[]];
+export function partition<T>(
+  arr: readonly T[],
+  isInTruthy: (value: T, index: number, array: readonly T[]) => boolean
+): [truthy: T[], falsy: T[]] {
   const truthy: T[] = [];
   const falsy: T[] = [];
 
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
-    if (isInTruthy(item)) {
+    if (isInTruthy(item, i, arr)) {
       truthy.push(item);
     } else {
       falsy.push(item);

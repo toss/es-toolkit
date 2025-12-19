@@ -31,8 +31,20 @@ takeRightWhile(['hello', 'world', 'foo', 'bar'], str => str.length <= 5);
 #### Parameters
 
 - `arr` (`T[]`): The array to take elements from.
-- `shouldContinueTaking` (`(item: T) => boolean`): A condition function called with each element. Elements are included in the result as long as this function returns true.
+- `shouldContinueTaking` (`(item: T, index: number, array: T[]) => boolean`): A condition function called with each element, its index, and the array. Elements are included in the result as long as this function returns true.
 
 #### Returns
 
 (`T[]`): A new array containing the elements taken from the end while the condition function returns true.
+
+## Examples
+
+```typescript
+// Using index parameter
+takeRightWhile([10, 20, 30, 40], (x, index) => index > 1);
+// Returns: [30, 40]
+
+// Using array parameter
+takeRightWhile([1, 2, 3, 4], (x, index, arr) => x >= arr.length / 2);
+// Returns: [2, 3, 4]
+```

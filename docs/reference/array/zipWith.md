@@ -36,7 +36,7 @@ zipWith([1, 2], [10, 20, 30], (a, b) => (a ?? 0) + (b ?? 0));
 #### Parameters
 
 - `arrs` (`Array<readonly T[]>`): The arrays to combine.
-- `combine` (`(...items: T[]) => R`): A function that receives elements at the same index from each array and returns a new value.
+- `combine` (`(...items: [...T[], number]) => R`): A function that receives elements at the same index from each array, followed by the index itself, and returns a new value.
 
 #### Returns
 

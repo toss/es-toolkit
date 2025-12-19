@@ -7,7 +7,7 @@ import { flatten } from './flatten.ts';
  * @template U - The type of elements within the returned array from the iteratee function.
  * @template D - The depth to which the array should be flattened.
  * @param {T[]} arr - The array to flatten.
- * @param {(item: T) => U} iteratee - The function that produces the new array elements.
+ * @param {(item: T, index: number, array: readonly T[]) => U} iteratee - The function that produces the new array elements. It receives the element, its index, and the array.
  * @param {D} depth - The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
  * @returns {Array<FlatArray<U[], D>>} The new array with the mapped and flattened elements.
  *
@@ -22,11 +22,11 @@ import { flatten } from './flatten.ts';
  */
 export function flatMap<T, U, D extends number = 1>(
   arr: readonly T[],
-  iteratee: (item: T) => U,
+  iteratee: (item: T, index: number, array: readonly T[]) => U,
   depth: D = 1 as D
 ): Array<FlatArray<U[], D>> {
   return flatten(
-    arr.map(item => iteratee(item)),
+    arr.map((item, index) => iteratee(item, index, arr)),
     depth
   );
 }
