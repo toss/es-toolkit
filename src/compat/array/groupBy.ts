@@ -89,5 +89,6 @@ export function groupBy<T, K extends PropertyKey>(
   const items = isArrayLike(source) ? Array.from(source) : Object.values(source);
   const getKeyFromItem = createIteratee(_getKeyFromItem ?? identity);
 
+  // @ts-expect-error - lodash types assume all keys exist in result
   return groupByToolkit<T, K>(items, getKeyFromItem);
 }
