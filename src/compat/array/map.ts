@@ -127,6 +127,13 @@ export function map<T>(
   iteratee?: object
 ): boolean[];
 
+/**
+ * Maps each element in a collection using the provided iteratee.
+ *
+ * @param {any[] | ArrayLike<any> | Record<any, any> | null | undefined} collection The collection to iterate over.
+ * @param {((value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object | null} _iteratee The iteratee invoked per element.
+ * @returns {any[]} Returns the new mapped array.
+ */
 export function map(
   collection: any[] | ArrayLike<any> | Record<any, any> | null | undefined,
   _iteratee?: ((value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object | null

@@ -59,6 +59,12 @@ export function cond<R>(pairs: Array<[truthy: () => boolean, falsey: () => R]>):
  */
 export function cond<T, R>(pairs: Array<[truthy: (val: T) => boolean, falsey: (val: T) => R]>): (val: T) => R;
 
+/**
+ * Creates a function that iterates over pairs and invokes the corresponding function of the first predicate to return truthy.
+ *
+ * @param {any[][]} pairs The predicate-function pairs.
+ * @returns {(...args: any[]) => unknown} Returns the new composite function.
+ */
 export function cond(pairs: any[][]): (...args: any[]) => unknown {
   const length = pairs.length;
 

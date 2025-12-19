@@ -38,6 +38,12 @@ import { isNil } from '../../predicate/isNil.ts';
  */
 export function size(collection: object | string | null | undefined): number;
 
+/**
+ * Gets the size of collection by returning its length for array-like values or the number of own enumerable string keyed properties for objects.
+ *
+ * @param {any} target The collection to inspect.
+ * @returns {number} Returns the collection size.
+ */
 export function size(target: any): number {
   if (isNil(target)) {
     return 0;

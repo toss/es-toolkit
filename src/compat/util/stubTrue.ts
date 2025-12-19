@@ -16,6 +16,11 @@ export function stubTrue(): true;
  */
 export function stubTrue(): true;
 
+/**
+ * Returns true.
+ *
+ * @returns {true} true.
+ */
 export function stubTrue(): true {
   return true;
 }

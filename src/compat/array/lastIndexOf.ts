@@ -23,12 +23,6 @@ export function lastIndexOf<T>(
   array: ArrayLike<T> | null | undefined,
   searchElement: T,
   fromIndex?: true | number
-): number;
-
-export function lastIndexOf<T>(
-  array: ArrayLike<T> | null | undefined,
-  searchElement: T,
-  fromIndex?: true | number
 ): number {
   if (!isArrayLike(array) || array.length === 0) {
     return -1;
