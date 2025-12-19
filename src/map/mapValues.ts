@@ -25,8 +25,8 @@
  * //   'c' => 6
  * // }
  */
-export function mapValues<K, V>(map: Map<K, V>, getNewValue: (value: V, key: K, object: Map<K, V>) => V): Map<K, V> {
-  const result = new Map<K, V>();
+export function mapValues<K, V, R>(map: Map<K, V>, getNewValue: (value: V, key: K, object: Map<K, V>) => R): Map<K, R> {
+  const result = new Map<K, R>();
 
   for (const [key, value] of map) {
     const newValue = getNewValue(value, key, map);
