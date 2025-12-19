@@ -39,7 +39,7 @@ describe('findValue', () => {
   });
 
   it('should handle Maps with various data types', () => {
-    const map = new Map([
+    const map = new Map<string, unknown>([
       ['num', 42],
       ['str', 'hello'],
       ['bool', true],
