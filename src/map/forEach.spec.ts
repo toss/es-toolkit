@@ -79,7 +79,7 @@ describe('forEach', () => {
   });
 
   it('should work with various value types', () => {
-    const map = new Map([
+    const map = new Map<string, unknown>([
       ['str', 'hello'],
       ['num', 42],
       ['bool', true],
