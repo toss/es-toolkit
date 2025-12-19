@@ -90,6 +90,8 @@ export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>
       return undefined;
     }
 
+    // eslint-disable-next-line
+    // @ts-ignore
     if (getTag(obj) === objectTag && typeof obj.constructor !== 'function') {
       const result = {};
       stack.set(obj, result);
@@ -103,7 +105,7 @@ export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>
       case booleanTag: {
         // eslint-disable-next-line
         // @ts-ignore
-        const result = new obj.constructor(obj?.objOf()) as T;
+        const result = new obj.constructor(obj?.valueOf()) as T;
         copyProperties(result, obj);
         return result;
       }
