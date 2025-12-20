@@ -205,7 +205,7 @@ function isObjectMatch(
 
   const keys = Object.keys(source as any);
 
-  if (target == null) {
+  if (target == null || isPrimitive(target)) {
     return keys.length === 0;
   }
 

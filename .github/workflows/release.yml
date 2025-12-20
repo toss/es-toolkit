@@ -48,6 +48,7 @@ jobs:
             jsr.json > jsr.json.tmp
           mv jsr.json.tmp jsr.json
       - run: yarn install
+      - run: yarn test
       - run: 'mkdir -p out && yarn pack --out out/%s-%v.tgz'
       - name: Check Package Entrypoints
         run: 'yarn attw out/*.tgz'

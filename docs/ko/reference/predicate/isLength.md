@@ -45,4 +45,4 @@ function processLength(value: unknown) {
 
 #### 반환 값
 
-(`value is number`): 값이 유효한 길이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`boolean`): 값이 유효한 길이면 `true`, 그렇지 않으면 `false`를 반환해요.

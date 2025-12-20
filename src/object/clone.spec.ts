@@ -176,7 +176,7 @@ describe('clone', () => {
     expect(clonedDataView).toBeInstanceOf(DataView);
   });
 
-  it('should clone File', () => {
+  it('should clone File', async () => {
     if (typeof File === 'undefined') {
       return;
     }
@@ -190,10 +190,10 @@ describe('clone', () => {
 
     expect(clonedFile.size).toBe(file.size);
     expect(clonedFile.type).toBe(file.type);
-    expect(clonedFile.text()).resolves.toBe('Hello');
+    await expect(clonedFile.text()).resolves.toBe('Hello');
   });
 
-  it('should clone Blob', () => {
+  it('should clone Blob', async () => {
     const blob = new Blob(['Hello'], { type: 'text/plain' });
     const clonedBlob = clone(blob);
 
@@ -203,7 +203,7 @@ describe('clone', () => {
 
     expect(clonedBlob.size).toBe(blob.size);
     expect(clonedBlob.type).toBe(blob.type);
-    expect(clonedBlob.text()).resolves.toBe('Hello');
+    await expect(clonedBlob.text()).resolves.toBe('Hello');
   });
 
   it('should clone Error', () => {

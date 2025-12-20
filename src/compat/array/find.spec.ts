@@ -135,6 +135,21 @@ describe('find', () => {
     expect(() => find([1, 2, 3], false)).toThrow('undefined is not a function');
   });
 
+  it('should return undefined when object matcher has only undefined values for keys', () => {
+    const array = [
+      {
+        label: 'Foo',
+        value: 'foo',
+      },
+      {
+        label: 'Bar',
+        value: 'bar',
+      },
+    ];
+
+    expect(find(array, { value: { missingKey: undefined } })).toBe(undefined);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(find).toEqualTypeOf<typeof findLodash>();
   });

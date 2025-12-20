@@ -62,6 +62,11 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'function'),
         },
         {
+          text: 'Map 工具',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'map'),
+        },
+        {
           text: '数学工具',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'math'),
@@ -80,6 +85,11 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Promise 工具',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'promise'),
+        },
+        {
+          text: 'Set 工具',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'set'),
         },
         {
           text: '字符串工具',

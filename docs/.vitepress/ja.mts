@@ -61,6 +61,11 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'ja', 'reference', 'function'),
         },
         {
+          text: 'Map',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ja', 'reference', 'map'),
+        },
+        {
           text: '数学',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ja', 'reference', 'math'),
@@ -79,6 +84,11 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Promise',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ja', 'reference', 'promise'),
+        },
+        {
+          text: 'Set',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ja', 'reference', 'set'),
         },
         {
           text: '文字列',

@@ -90,7 +90,7 @@ describe('curry', () => {
     const object = {};
 
     // @ts-expect-error - curried is a constructor
-    expect(new curried(false) instanceof Foo);
+    expect(new curried(false) instanceof Foo).toBe(true);
 
     // @ts-expect-error - curried is a constructor
     expect(new curried(true)).toBe(object);

@@ -61,6 +61,11 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'ko', 'reference', 'function'),
         },
         {
+          text: 'Map',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'map'),
+        },
+        {
           text: '숫자',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ko', 'reference', 'math'),
@@ -79,6 +84,11 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Promise',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ko', 'reference', 'promise'),
+        },
+        {
+          text: 'Set',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'set'),
         },
         {
           text: '문자열',

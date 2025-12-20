@@ -166,4 +166,54 @@ describe('throttle', () => {
     await delay(throttleMs + 1);
     expect(capturedMsg).toBe('hello world');
   });
+
+  it('should invoke function periodically with trailing edge only', async () => {
+    const callback = vi.fn();
+    const throttleMs = 50;
+    const throttled = throttle(callback, throttleMs, { edges: ['trailing'] });
+
+    throttled();
+    expect(callback).toHaveBeenCalledTimes(0);
+
+    await delay(throttleMs + 1);
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    throttled();
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    await delay(throttleMs + 1);
+    expect(callback).toHaveBeenCalledTimes(2);
+  });
+
+  it('should invoke function periodically during continuous calls with trailing edge only', async () => {
+    const callback = vi.fn();
+    const throttleMs = 50;
+    const throttled = throttle(callback, throttleMs, { edges: ['trailing'] });
+
+    const intervalId = setInterval(() => {
+      throttled();
+    }, 10);
+
+    await delay(throttleMs * 3 + 10);
+    clearInterval(intervalId);
+
+    expect(callback.mock.calls.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('should invoke function periodically with leading edge only', async () => {
+    const callback = vi.fn();
+    const throttleMs = 50;
+    const throttled = throttle(callback, throttleMs, { edges: ['leading'] });
+
+    throttled();
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    await delay(throttleMs / 2);
+    throttled();
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    await delay(throttleMs / 2 + 1);
+    throttled();
+    expect(callback).toHaveBeenCalledTimes(2);
+  });
 });
