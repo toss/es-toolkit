@@ -1,0 +1,36 @@
+{
+  "labels": {
+    "esToolkit": "es-toolkit@1.43.0",
+    "lodash": "lodash-es@4.17.21"
+  },
+  "data": {
+    "sample": {
+      "lodash": 4817,
+      "esToolkit": 94
+    },
+    "difference": {
+      "lodash": 7958,
+      "esToolkit": 90
+    },
+    "sum": {
+      "lodash": 698,
+      "esToolkit": 93
+    },
+    "debounce": {
+      "lodash": 2873,
+      "esToolkit": 531
+    },
+    "throttle": {
+      "lodash": 3111,
+      "esToolkit": 855
+    },
+    "pick": {
+      "lodash": 9520,
+      "esToolkit": 132
+    },
+    "zip": {
+      "lodash": 3961,
+      "esToolkit": 221
+    }
+  }
+}

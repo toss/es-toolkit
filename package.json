@@ -57,7 +57,8 @@
     "prepack": "yarn build",
     "test": "vitest --coverage --typecheck",
     "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "gen:bundle-size": "node ./.scripts/generate-bundle-size.mjs"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
