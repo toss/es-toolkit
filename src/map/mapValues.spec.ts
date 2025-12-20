@@ -104,7 +104,7 @@ describe('mapValues', () => {
   });
 
   it('should work with various value types', () => {
-    const map = new Map([
+    const map = new Map<string, unknown>([
       ['string', 'hello'],
       ['number', 42],
       ['boolean', true],
