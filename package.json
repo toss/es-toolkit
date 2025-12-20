@@ -52,13 +52,13 @@
     "bench": "vitest bench",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
     "format": "prettier --write .",
+    "gen:bundle-size": "node ./.scripts/generate-bundle-size.mjs",
     "lint": "eslint --config eslint.config.mjs",
     "packlint": "packlint sort -R",
     "prepack": "yarn build",
     "test": "vitest --coverage --typecheck",
     "transform": "jscodeshift -t ./.scripts/tests/transform-lodash-test.ts $0 && prettier --write $0",
-    "typecheck": "tsc --noEmit",
-    "gen:bundle-size": "node ./.scripts/generate-bundle-size.mjs"
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
