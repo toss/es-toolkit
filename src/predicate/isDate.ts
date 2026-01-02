@@ -1,3 +1,5 @@
+import { isObject } from '../compat/predicate/isObject.ts';
+
 /**
  * Checks if `value` is a Date object.
  *
@@ -12,5 +14,5 @@
  * console.log(isDate(value2)); // false
  */
 export function isDate(value: unknown): value is Date {
-  return value instanceof Date;
+  return isObject(value) && Object.prototype.toString.call(value) === '[object Date]';
 }
