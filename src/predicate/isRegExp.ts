@@ -1,3 +1,5 @@
+import { isObject } from '../compat/predicate/isObject.ts';
+
 /**
  * Checks if `value` is a RegExp.
  *
@@ -12,5 +14,5 @@
  * console.log(isRegExp(value2)); // false
  */
 export function isRegExp(value: unknown): value is RegExp {
-  return value instanceof RegExp;
+  return isObject(value) && Object.prototype.toString.call(value) === '[object RegExp]';
 }
