@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { runInNewContext } from 'node:vm';
 import { isDate } from './isDate';
 
 describe('isDate', () => {
@@ -23,5 +24,9 @@ describe('isDate', () => {
       date: new Date(),
     };
     expect(isDate(obj.date)).toBe(true);
+  });
+
+  it('should return `true` for cross-realm Date', () => {
+    expect(isDate(runInNewContext('new Date()'))).toBe(true);
   });
 });
