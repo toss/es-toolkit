@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { runInNewContext } from 'node:vm';
 import { isRegExp } from './isRegExp';
 
 describe('isRegExp', () => {
@@ -20,5 +21,9 @@ describe('isRegExp', () => {
     expect(isRegExp(new Map())).toBe(false);
     expect(isRegExp(new Set())).toBe(false);
     expect(isRegExp([1, 2, 3])).toBe(false);
+  });
+
+  it('should return `true` for cross-realm RegExp', () => {
+    expect(isRegExp(runInNewContext('new RegExp("abc")'))).toBe(true);
   });
 });
