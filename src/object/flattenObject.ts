@@ -41,7 +41,7 @@ export function flattenObject(object: object, { delimiter = '.' }: FlattenObject
 function flattenObjectImpl(object: object, prefix: string, delimiter: string): Record<string, any> {
   const result: Record<string, any> = {};
   const keys = Object.keys(object);
-  const isRootLevel = prefix === '';
+  const isNotRootLevel = prefix !== '';
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
@@ -52,7 +52,7 @@ function flattenObjectImpl(object: object, prefix: string, delimiter: string): R
     if (isPlainObject(value)) {
       if (Object.keys(value).length > 0) {
         Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
-      } else if (!isRootLevel) {
+      } else if (isNotRootLevel) {
         result[prefixedKey] = value;
       }
       continue;
@@ -61,7 +61,7 @@ function flattenObjectImpl(object: object, prefix: string, delimiter: string): R
     if (Array.isArray(value)) {
       if (value.length > 0) {
         Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
-      } else if (!isRootLevel) {
+      } else if (isNotRootLevel) {
         result[prefixedKey] = value;
       }
       continue;
