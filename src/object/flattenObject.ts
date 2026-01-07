@@ -48,13 +48,21 @@ function flattenObjectImpl(object: object, prefix: string, delimiter: string): R
 
     const prefixedKey = prefix ? `${prefix}${delimiter}${key}` : key;
 
-    if (isPlainObject(value) && Object.keys(value).length > 0) {
-      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+    if (isPlainObject(value)) {
+      if (Object.keys(value).length > 0) {
+        Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+      } else if (prefix) {
+        result[prefixedKey] = value;
+      }
       continue;
     }
 
     if (Array.isArray(value)) {
-      Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+      if (value.length > 0) {
+        Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
+      } else if (prefix) {
+        result[prefixedKey] = value;
+      }
       continue;
     }
 

@@ -66,7 +66,7 @@ describe('flattenObject', function () {
     });
   });
 
-  it('handles empty objects correctly', () => {
+  it('handles nested empty objects correctly', () => {
     const result = flattenObject({
       a: {
         b: {},
@@ -75,6 +75,32 @@ describe('flattenObject', function () {
 
     expect(result).toEqual({
       'a.b': {},
+    });
+  });
+
+  it('handles root level empty objects and arrays correctly', () => {
+    const result = flattenObject({
+      empty: {},
+      emptyArray: [],
+      nullValue: null,
+      undefinedValue: undefined,
+    });
+
+    expect(result).toEqual({
+      nullValue: null,
+      undefinedValue: undefined,
+    });
+  });
+
+  it('handles nested empty arrays correctly', () => {
+    const result = flattenObject({
+      a: {
+        b: [],
+      },
+    });
+
+    expect(result).toEqual({
+      'a.b': [],
     });
   });
 
