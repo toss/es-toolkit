@@ -391,7 +391,20 @@ describe('merge', () => {
     expect((actual.x as any).a).toBeUndefined();
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(merge).toEqualTypeOf<typeof mergeLodash>();
+  it('should have improved deep merge types (differs from lodash T & S)', () => {
+    interface Target {
+      a: { x: number; y: string };
+    }
+    interface Source {
+      a: { y: number; z: boolean };
+    }
+
+    const target: Target = { a: { x: 1, y: 'hello' } };
+    const source: Source = { a: { y: 42, z: true } };
+    const result = merge(target, source);
+
+    expectTypeOf(result.a.x).toEqualTypeOf<number>();
+    expectTypeOf(result.a.y).toEqualTypeOf<number>();
+    expectTypeOf(result.a.z).toEqualTypeOf<boolean>();
   });
 });

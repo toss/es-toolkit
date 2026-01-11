@@ -50,7 +50,7 @@ merge(target, source);
 
 #### Returns
 
-(`T & S`): Returns the target object with the source object merged in.
+(`MergeDeep<T, S>`): Returns the target object with the source object merged in.
 
 ## Examples
 

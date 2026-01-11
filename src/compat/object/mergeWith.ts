@@ -1,6 +1,7 @@
 import { cloneDeep } from './cloneDeep.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { clone } from '../../object/clone.ts';
+import { type MergeDeep } from '../../object/merge.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
 import { isArguments } from '../predicate/isArguments.ts';
@@ -25,7 +26,7 @@ type MergeWithCustomizer = (objValue: any, srcValue: any, key: string, object: a
  * @param {TObject} object - The target object into which the source object properties will be merged.
  * @param {TSource} source - The source object whose properties will be merged into the target object.
  * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
- * @returns {TObject & TSource} Returns the updated target object with properties from the source object merged in.
+ * @returns {MergeDeep<TObject, TSource>} Returns the updated target object with properties from the source object merged in.
  *
  * @example
  * const target = { a: 1, b: 2 };
@@ -42,7 +43,7 @@ export function mergeWith<TObject, TSource>(
   object: TObject,
   source: TSource,
   customizer: MergeWithCustomizer
-): TObject & TSource;
+): MergeDeep<TObject, TSource>;
 
 /**
  * Merges the properties of two source objects into the target object using a customizer function.
@@ -54,7 +55,7 @@ export function mergeWith<TObject, TSource>(
  * @param {TSource1} source1 - The first source object.
  * @param {TSource2} source2 - The second source object.
  * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
- * @returns {TObject & TSource1 & TSource2} Returns the updated target object with properties from the source objects merged in.
+ * @returns {MergeDeep<MergeDeep<TObject, TSource1>, TSource2>} Returns the updated target object with properties from the source objects merged in.
  *
  * @example
  * const target = { a: 1 };
@@ -73,7 +74,7 @@ export function mergeWith<TObject, TSource1, TSource2>(
   source1: TSource1,
   source2: TSource2,
   customizer: MergeWithCustomizer
-): TObject & TSource1 & TSource2;
+): MergeDeep<MergeDeep<TObject, TSource1>, TSource2>;
 
 /**
  * Merges the properties of three source objects into the target object using a customizer function.
@@ -87,7 +88,7 @@ export function mergeWith<TObject, TSource1, TSource2>(
  * @param {TSource2} source2 - The second source object.
  * @param {TSource3} source3 - The third source object.
  * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
- * @returns {TObject & TSource1 & TSource2 & TSource3} Returns the updated target object with properties from the source objects merged in.
+ * @returns {MergeDeep<MergeDeep<MergeDeep<TObject, TSource1>, TSource2>, TSource3>} Returns the updated target object with properties from the source objects merged in.
  *
  * @example
  * const target = { a: 1 };
@@ -108,7 +109,7 @@ export function mergeWith<TObject, TSource1, TSource2, TSource3>(
   source2: TSource2,
   source3: TSource3,
   customizer: MergeWithCustomizer
-): TObject & TSource1 & TSource2 & TSource3;
+): MergeDeep<MergeDeep<MergeDeep<TObject, TSource1>, TSource2>, TSource3>;
 
 /**
  * Merges the properties of four source objects into the target object using a customizer function.
@@ -124,7 +125,7 @@ export function mergeWith<TObject, TSource1, TSource2, TSource3>(
  * @param {TSource3} source3 - The third source object.
  * @param {TSource4} source4 - The fourth source object.
  * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
- * @returns {TObject & TSource1 & TSource2 & TSource3 & TSource4} Returns the updated target object with properties from the source objects merged in.
+ * @returns {MergeDeep<MergeDeep<MergeDeep<MergeDeep<TObject, TSource1>, TSource2>, TSource3>, TSource4>} Returns the updated target object with properties from the source objects merged in.
  *
  * @example
  * const target = { a: 1 };
@@ -147,7 +148,7 @@ export function mergeWith<TObject, TSource1, TSource2, TSource3, TSource4>(
   source3: TSource3,
   source4: TSource4,
   customizer: MergeWithCustomizer
-): TObject & TSource1 & TSource2 & TSource3 & TSource4;
+): MergeDeep<MergeDeep<MergeDeep<MergeDeep<TObject, TSource1>, TSource2>, TSource3>, TSource4>;
 
 /**
  * Merges the properties of one or more source objects into the target object.

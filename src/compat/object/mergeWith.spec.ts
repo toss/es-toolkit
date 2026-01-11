@@ -154,8 +154,20 @@ describe('mergeWith', () => {
     expect(mergeWith(1, { a: 1 }, noop)).toEqual(Object.assign(1, { a: 1 }));
   });
 
-  it('should match the type of lodash', () => {
-    expectTypeOf(mergeWith).toEqualTypeOf<typeof mergeWithLodash>();
+  it('should have improved deep merge types (differs from lodash T & S)', () => {
+    interface Target {
+      a: { x: number };
+    }
+    interface Source {
+      a: { y: string };
+    }
+
+    const target: Target = { a: { x: 1 } };
+    const source: Source = { a: { y: 'hello' } };
+    const result = mergeWith(target, source, () => undefined);
+
+    expectTypeOf(result.a.x).toEqualTypeOf<number>();
+    expectTypeOf(result.a.y).toEqualTypeOf<string>();
   });
 
   it('should respect `null` returned from `customizer`', () => {
