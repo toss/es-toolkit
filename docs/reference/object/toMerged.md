@@ -52,7 +52,7 @@ const result = toMerged(target, source);
 
 #### Returns
 
-(`T & S`): Returns a new object with the target and source objects merged.
+(`MergeDeep<T, S>`): Returns a new object with the target and source objects merged.
 
 ## Demo
 

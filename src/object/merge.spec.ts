@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { merge } from './merge';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import { merge, type MergeDeep } from './merge';
 
 describe('merge', () => {
   it('should merge properties from source object into target object', () => {
@@ -127,7 +127,7 @@ describe('merge', () => {
     const nestedObject = merge({ x: { a: 2 } }, { x: ['1'] });
 
     expect(Array.isArray(topLevelArray)).toBe(true);
-    expect(topLevelArray[0]).toBe('1');
+    expect((topLevelArray as any)[0]).toBe('1');
     expect((topLevelArray as any).a).toBe(2);
 
     expect(typeof topLevelObject).toBe('object');
@@ -135,10 +135,72 @@ describe('merge', () => {
 
     expect(typeof nestedObject.x).toBe('object');
     expect(nestedObject.x).toEqual({ a: 2, 0: '1' });
-    expect(nestedObject.x[0]).toBe('1');
+    expect((nestedObject.x as any)[0]).toBe('1');
 
     expect(Array.isArray(nestedArray.x)).toBe(true);
-    expect(nestedArray.x[0]).toBe('1');
+    expect((nestedArray.x as any)[0]).toBe('1');
     expect((nestedArray.x as any).a).toBe(2);
+  });
+});
+
+describe('MergeDeep type', () => {
+  it('should correctly type deep merged objects', () => {
+    interface Target {
+      a: { x: number; y: string };
+    }
+    interface Source {
+      a: { y: number; z: boolean };
+    }
+
+    const target: Target = { a: { x: 1, y: 'hello' } };
+    const source: Source = { a: { y: 42, z: true } };
+
+    const result = merge(target, source);
+
+    expectTypeOf(result.a.x).toEqualTypeOf<number>();
+    expectTypeOf(result.a.y).toEqualTypeOf<number>();
+    expectTypeOf(result.a.z).toEqualTypeOf<boolean>();
+
+    expect(result.a).toEqual({ x: 1, y: 42, z: true });
+  });
+
+  it('should handle source undefined preserving target', () => {
+    type Result = MergeDeep<{ a: number }, undefined>;
+    expectTypeOf<Result>().toEqualTypeOf<{ a: number }>();
+  });
+
+  it('should handle non-plain objects by replacing with source', () => {
+    type Result = MergeDeep<{ a: Date }, { a: RegExp }>;
+    expectTypeOf<Result>().toEqualTypeOf<{ a: RegExp }>();
+  });
+
+  it('should handle array merge types', () => {
+    const target = { arr: [{ a: 1 }] };
+    const source = { arr: [{ b: 2 }] };
+    const result = merge(target, source);
+
+    expectTypeOf(result.arr).toMatchTypeOf<Array<{ a: number } | { b: number }>>();
+  });
+
+  it('should handle mixed nested types', () => {
+    const target = { config: { debug: true, port: 3000 } };
+    const source = { config: { port: 8080, host: 'localhost' } };
+    const result = merge(target, source);
+
+    expectTypeOf(result.config.debug).toEqualTypeOf<boolean>();
+    expectTypeOf(result.config.port).toEqualTypeOf<number>();
+    expectTypeOf(result.config.host).toEqualTypeOf<string>();
+  });
+
+  it('should handle null target values in type inference', () => {
+    const result = merge({ a: null }, { a: [1, 2, 3] });
+    expectTypeOf(result.a).toEqualTypeOf<number[]>();
+  });
+
+  it('should handle deeply nested types', () => {
+    const target = { l1: { l2: { l3: { a: 1 } } } };
+    const source = { l1: { l2: { l3: { b: 2 } } } };
+    const result = merge(target, source);
+    expectTypeOf(result.l1.l2.l3).toEqualTypeOf<{ a: number; b: number }>();
   });
 });

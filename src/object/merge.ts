@@ -1,6 +1,56 @@
 import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
+type NonPlainObject =
+  | Date
+  | RegExp
+  | Map<any, any>
+  | Set<any>
+  | WeakMap<any, any>
+  | WeakSet<any>
+  | Promise<any>
+  | Error
+  | ArrayBuffer
+  | DataView
+  | Int8Array
+  | Uint8Array
+  | Uint8ClampedArray
+  | Int16Array
+  | Uint16Array
+  | Int32Array
+  | Uint32Array
+  | Float32Array
+  | Float64Array
+  | BigInt64Array
+  | BigUint64Array
+  | ((...args: any[]) => any);
+
+export type MergeDeep<T, S> = S extends undefined
+  ? T
+  : T extends null
+    ? S
+    : S extends NonPlainObject
+      ? S
+      : T extends NonPlainObject
+        ? S
+        : T extends readonly any[]
+          ? S extends readonly any[]
+            ? Array<MergeDeep<T[number], S[number]>>
+            : S
+          : T extends object
+            ? S extends object
+              ? {
+                  [K in keyof T | keyof S]: K extends keyof S
+                    ? K extends keyof T
+                      ? MergeDeep<T[K], S[K]>
+                      : S[K]
+                    : K extends keyof T
+                      ? T[K]
+                      : never;
+                }
+              : S
+            : S;
+
 /**
  * Merges the properties of the source object into the target object.
  *
@@ -12,7 +62,7 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
  *
  * @param {T} target - The target object into which the source object properties will be merged. This object is modified in place.
  * @param {S} source - The source object whose properties will be merged into the target object.
- * @returns {T & S} The updated target object with properties from the source object merged in.
+ * @returns {MergeDeep<T, S>} The updated target object with properties from the source object merged in.
  *
  * @template T - Type of the target object.
  * @template S - Type of the source object.
@@ -44,7 +94,7 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
 export function merge<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
   target: T,
   source: S
-): T & S {
+): MergeDeep<T, S> {
   const sourceKeys = Object.keys(source) as Array<keyof S>;
 
   for (let i = 0; i < sourceKeys.length; i++) {
@@ -68,7 +118,7 @@ export function merge<T extends Record<PropertyKey, any>, S extends Record<Prope
     }
   }
 
-  return target;
+  return target as MergeDeep<T, S>;
 }
 
 function isMergeableValue(value: unknown) {
