@@ -218,10 +218,24 @@ describe('clone', () => {
     expect(clonedError.stack).toBe(error.stack);
     expect(clonedError.name).toBe(error.name);
     expect(clonedError.cause).toBe(error.cause);
+
+    const aggregateError = new AggregateError([new Error('First'), new Error('Second')], 'Multiple errors occurred');
+    const clonedAggregateError = clone(aggregateError);
+
+    expect(clonedAggregateError).toEqual(aggregateError);
+    expect(clonedAggregateError).not.toBe(aggregateError);
+    expect(clonedAggregateError).toBeInstanceOf(AggregateError);
+
+    expect(clonedAggregateError.message).toBe(aggregateError.message);
+    expect(clonedAggregateError.stack).toBe(aggregateError.stack);
+    expect(clonedAggregateError.name).toBe(aggregateError.name);
+    expect(clonedAggregateError.errors).toEqual(aggregateError.errors);
   });
 
   it('should clone Custom Error', () => {
     class CustomError extends Error {
+      name: string;
+      custom?: string;
       constructor(message: string) {
         super(message);
         this.name = 'CustomError';
@@ -229,6 +243,7 @@ describe('clone', () => {
     }
 
     const error = new CustomError('Something went wrong');
+    error.custom = 'Custom property';
     const clonedError = clone(error);
 
     expect(clonedError).toEqual(error);
@@ -237,6 +252,8 @@ describe('clone', () => {
 
     expect(clonedError.message).toBe(error.message);
     expect(clonedError.name).toBe(error.name);
+    expect(clonedError.stack).toBe(error.stack);
+    expect((clonedError as CustomError).custom).toBe((error as CustomError).custom);
   });
 
   it('should clone class instance', () => {
