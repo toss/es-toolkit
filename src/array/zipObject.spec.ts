@@ -9,4 +9,11 @@ describe('zipObject', () => {
 
     expect(zipObject(['a', 'b'], [1, 2, 3])).toEqual({ a: 1, b: 2 });
   });
+
+  it('returns undefined for keys without a corresponding value', () => {
+    const result = zipObject(['a', 'b', 'c'], [1, 2]);
+
+    expect(result).toEqual({ a: 1, b: 2, c: undefined });
+    expect(result.c).toBeUndefined();
+  });
 });
