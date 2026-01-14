@@ -64,11 +64,8 @@ describe('keyBy', () => {
 
     const result = keyBy(people, person => person.name);
 
-    // Accessing existing key should work with optional chaining
     expect(result['mike']?.name).toBe('mike');
     expect(result['jake']?.age).toBe(30);
-
-    // Accessing non-existent key should return undefined
     expect(result['nonexistent']).toBeUndefined();
   });
 });
