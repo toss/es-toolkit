@@ -1,0 +1,55 @@
+{
+  "labels": {
+    "esToolkit": "es-toolkit@1.43.0",
+    "lodash": "lodash@4.17.21"
+  },
+  "environment": {
+    "node": "v20.13.1",
+    "platform": "win32 x64",
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13400F",
+    "cpuCores": 16,
+    "memory": "31.82 GB"
+  },
+  "data": {
+    "omit": {
+      "esToolkit": 3721196,
+      "lodash": 1203899
+    },
+    "pick": {
+      "esToolkit": 9897744,
+      "lodash": 2520179
+    },
+    "differenceWith": {
+      "esToolkit": 16526076,
+      "lodash": 4170737
+    },
+    "difference": {
+      "esToolkit": 12641408,
+      "lodash": 6163214
+    },
+    "intersectionWith": {
+      "esToolkit": 14260950,
+      "lodash": 3737299
+    },
+    "intersection": {
+      "esToolkit": 11297862,
+      "lodash": 5560757
+    },
+    "unionBy": {
+      "esToolkit": 4654565,
+      "lodash": 4492746
+    },
+    "union": {
+      "esToolkit": 3431715,
+      "lodash": 5666805
+    },
+    "dropRightWhile": {
+      "esToolkit": 18530930,
+      "lodash": 7886028
+    },
+    "groupBy": {
+      "esToolkit": 6465941,
+      "lodash": 6848675
+    }
+  }
+}
