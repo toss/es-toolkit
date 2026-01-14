@@ -103,4 +103,47 @@ no-indent
     const result = dedent('    indented\na');
     expect(result).toBe('    indented\na');
   });
+
+  describe('tag composition (TC39 proposal)', () => {
+    it('works with a simple tag function', () => {
+      const upper = (strings: TemplateStringsArray, ...values: unknown[]) => {
+        let result = '';
+        for (let i = 0; i < strings.length; i++) {
+          result += strings[i];
+          if (i < values.length) {
+            result += String(values[i]);
+          }
+        }
+        return result.toUpperCase();
+      };
+
+      const dedentedUpper = dedent(upper) as (strings: TemplateStringsArray, ...values: unknown[]) => string;
+      const result = dedentedUpper`
+        hello
+        world
+      `;
+      expect(result).toBe('HELLO\nWORLD');
+    });
+
+    it('preserves interpolation with tag composition', () => {
+      const identity = (strings: TemplateStringsArray, ...values: unknown[]) => {
+        let result = '';
+        for (let i = 0; i < strings.length; i++) {
+          result += strings[i];
+          if (i < values.length) {
+            result += String(values[i]);
+          }
+        }
+        return result;
+      };
+
+      const dedentedIdentity = dedent(identity) as (strings: TemplateStringsArray, ...values: unknown[]) => string;
+      const name = 'es-toolkit';
+      const result = dedentedIdentity`
+        Welcome to
+        ${name}!
+      `;
+      expect(result).toBe('Welcome to\nes-toolkit!');
+    });
+  });
 });

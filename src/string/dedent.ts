@@ -1,46 +1,86 @@
 /**
- * Removes the common leading indentation from a multi-line string.
- * This function can be used as a tagged template literal or as a regular function.
- *
- * @param {TemplateStringsArray | string} template - The template string array or a standard string.
- * @param {unknown[]} args - The values to be interpolated into the template string.
- * @returns {string} The dedented string with common indentation removed.
- *
- * @example
- * // As a tagged template literal:
- * dedent`
- *   function hello() {
- *     console.log('world');
- *   }
- * `; // returns "function hello() {\n  console.log('world');\n}"
- *
- * @example
- * // As a regular function:
- * dedent("  line 1\n    line 2"); // returns "line 1\n  line 2"
+ * A tag function type that can be used with template literals.
  */
-export function dedent(template: TemplateStringsArray | string, ...args: unknown[]): string {
-  let result = '';
+type TagFunction<T = unknown> = (strings: TemplateStringsArray, ...values: unknown[]) => T;
+
+/**
+ * Removes the common leading indentation from a multi-line string.
+ *
+ * This function can be used as a tagged template literal, a regular function,
+ * or composed with another tag function (TC39 String.dedent proposal).
+ *
+ * @param {TemplateStringsArray} template - The template string array.
+ * @param {unknown[]} args - The values to be interpolated.
+ * @returns {string} - The dedented string.
+ *
+ * @example
+ * dedent`
+ *   hello
+ *   world
+ * `; // returns "hello\nworld"
+ *
+ * @example
+ * dedent("  hello\n  world"); // returns "hello\nworld"
+ *
+ * @example
+ * const html = (s: TemplateStringsArray) => s.join('');
+ * dedent(html)`
+ *   <div>Hello</div>
+ * `; // returns "<div>Hello</div>"
+ */
+export function dedent(template: TemplateStringsArray, ...args: unknown[]): string;
+export function dedent(str: string): string;
+export function dedent<T>(tagFn: TagFunction<T>): TagFunction<T>;
+export function dedent<T>(
+  template: TemplateStringsArray | string | TagFunction<T>,
+  ...args: unknown[]
+): string | TagFunction<T> {
+  if (typeof template === 'function') {
+    const tagFn = template;
+    return function dedentedTag(strings: TemplateStringsArray, ...values: unknown[]): T {
+      const dedentedStrings = dedentTemplateStringsArray(strings);
+      return tagFn(dedentedStrings, ...values);
+    };
+  }
 
   if (typeof template === 'string') {
-    result = template;
-  } else {
-    // Handle tagged template literal
-    for (let i = 0; i < template.length; i++) {
-      result += template[i];
-      if (i < args.length) {
-        result += String(args[i]);
-      }
+    return processDedent(template);
+  }
+
+  let result = '';
+  for (let i = 0; i < template.length; i++) {
+    result += template[i];
+    if (i < args.length) {
+      result += String(args[i]);
     }
   }
 
-  const lines = result.split('\n');
+  return processDedent(result);
+}
+
+function dedentTemplateStringsArray(strings: TemplateStringsArray): TemplateStringsArray {
+  const joined = strings.join('\x00');
+  const dedented = processDedent(joined);
+  const result = dedented.split('\x00');
+
+  const templateArray = result as unknown as TemplateStringsArray;
+  Object.defineProperty(templateArray, 'raw', {
+    value: result,
+    writable: false,
+    enumerable: false,
+    configurable: false,
+  });
+
+  return templateArray;
+}
+
+function processDedent(input: string): string {
+  const lines = input.split('\n');
   let commonIndent: string | null = null;
 
-  // Find common indentation
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    // Skip empty lines or lines with only whitespace
     if (line.trim() === '') {
       continue;
     }
@@ -51,7 +91,6 @@ export function dedent(template: TemplateStringsArray | string, ...args: unknown
     if (commonIndent === null) {
       commonIndent = indent;
     } else {
-      // Find common prefix (indentation)
       let j = 0;
       while (j < commonIndent.length && j < indent.length && commonIndent[j] === indent[j]) {
         j++;
@@ -60,9 +99,6 @@ export function dedent(template: TemplateStringsArray | string, ...args: unknown
     }
   }
 
-  // If no common indentation found (or it's empty string), verify if we need to trim the start/end
-  // But strictly per logic, if commonIndent is null, it means all lines are empty/whitespace.
-  // If commonIndent is "", it means no common indentation.
   const indentToRemove = commonIndent || '';
 
   const outputLines: string[] = [];
@@ -76,12 +112,10 @@ export function dedent(template: TemplateStringsArray | string, ...args: unknown
     }
   }
 
-  // Remove leading newline (opening line)
   if (outputLines.length > 0 && outputLines[0].trim() === '') {
     outputLines.shift();
   }
 
-  // Remove trailing newline (closing line)
   if (outputLines.length > 0 && outputLines[outputLines.length - 1].trim() === '') {
     outputLines.pop();
   }
