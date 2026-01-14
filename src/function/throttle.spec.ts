@@ -194,10 +194,10 @@ describe('throttle', () => {
       throttled();
     }, 10);
 
-    await delay(throttleMs * 3 + 10);
+    await delay(throttleMs * 5 + 10);
     clearInterval(intervalId);
 
-    expect(callback.mock.calls.length).toBeGreaterThanOrEqual(2);
+    expect(callback.mock.calls.length).toBeGreaterThanOrEqual(3);
   });
 
   it('should invoke function periodically with leading edge only', async () => {
