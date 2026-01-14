@@ -18,6 +18,7 @@ export { flatten } from './flatten.ts';
 export { flattenDeep } from './flattenDeep.ts';
 export { forEachAsync } from './forEachAsync.ts';
 export { forEachRight } from './forEachRight.ts';
+export { fromPairs } from './fromPairs.ts';
 export { groupBy } from './groupBy.ts';
 export { head } from './head.ts';
 export { initial } from './initial.ts';
