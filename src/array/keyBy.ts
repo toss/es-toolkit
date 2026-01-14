@@ -10,7 +10,8 @@
  * @template K - The type of keys.
  * @param {T[]} arr - The array of elements to be mapped.
  * @param {(item: T) => K} getKeyFromItem - A function that generates a key from an element.
- * @returns {Record<K, T>} An object where keys are mapped to each element of an array.
+ * @returns {Partial<Record<K, T>>} An object where keys are mapped to each element of an array.
+ * Note that the result is a Partial record, as not all possible keys may be present in the array.
  *
  * @example
  * const array = [
@@ -25,7 +26,10 @@
  * //   vegetable: { category: 'vegetable', name: 'carrot' }
  * // }
  */
-export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromItem: (item: T) => K): Record<K, T> {
+export function keyBy<T, K extends PropertyKey>(
+  arr: readonly T[],
+  getKeyFromItem: (item: T) => K
+): Partial<Record<K, T>> {
   const result = {} as Record<K, T>;
 
   for (let i = 0; i < arr.length; i++) {
