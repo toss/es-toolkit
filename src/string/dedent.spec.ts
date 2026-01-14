@@ -58,12 +58,49 @@ describe('dedent', () => {
     line 1
   line 2
       `;
-    // 'line 1' has 4 spaces, 'line 2' has 2 spaces. Common is 2 spaces.
-    // Wait, checking my logic...
-    // line 1: "    line 1" (4 spaces)
-    // line 2: "  line 2" (2 spaces)
-    // Common: 2 spaces.
-    // Result: "  line 1\nline 2"
     expect(result).toBe('  line 1\nline 2');
+  });
+
+  it('handles lines that do not start with common indent', () => {
+    const result = dedent`
+      indented
+no-indent
+    `;
+    expect(result).toBe('      indented\nno-indent');
+  });
+
+  it('handles string without leading newline', () => {
+    const result = dedent('  hello\n  world');
+    expect(result).toBe('hello\nworld');
+  });
+
+  it('handles string without trailing newline', () => {
+    const result = dedent('  hello\n  world');
+    expect(result).toBe('hello\nworld');
+  });
+
+  it('handles empty string', () => {
+    const result = dedent('');
+    expect(result).toBe('');
+  });
+
+  it('handles string with only whitespace', () => {
+    const result = dedent('   \n   \n   ');
+    expect(result).toBe('   ');
+  });
+
+  it('handles single line without indentation', () => {
+    const result = dedent('hello');
+    expect(result).toBe('hello');
+  });
+
+  it('handles lines with content but no leading whitespace', () => {
+    const result = dedent('line1\nline2\nline3');
+    expect(result).toBe('line1\nline2\nline3');
+  });
+
+  it('preserves non-indented content line when common indent exists', () => {
+    const result = dedent('    indented\na');
+    expect(result).toBe('    indented\na');
   });
 });

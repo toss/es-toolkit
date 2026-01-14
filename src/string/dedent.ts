@@ -72,11 +72,7 @@ export function dedent(template: TemplateStringsArray | string, ...args: unknown
     if (line.startsWith(indentToRemove)) {
       outputLines.push(line.substring(indentToRemove.length));
     } else {
-      if (line.trim() === '') {
-        outputLines.push('');
-      } else {
-        outputLines.push(line);
-      }
+      outputLines.push('');
     }
   }
 
