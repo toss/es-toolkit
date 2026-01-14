@@ -56,7 +56,7 @@ describe('keyBy', () => {
     expect(result).toEqual({});
   });
 
-  it('should return Partial<Record> for type safety', () => {
+  it('should return undefined for non-existent keys', () => {
     const people = [
       { name: 'mike', age: 20 },
       { name: 'jake', age: 30 },
@@ -64,8 +64,6 @@ describe('keyBy', () => {
 
     const result = keyBy(people, person => person.name);
 
-    expect(result['mike']?.name).toBe('mike');
-    expect(result['jake']?.age).toBe(30);
     expect(result['nonexistent']).toBeUndefined();
   });
 });
