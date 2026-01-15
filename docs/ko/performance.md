@@ -11,8 +11,8 @@ es-toolkit은 설계할 때 성능을 우선적으로 고려하고 있어요. lo
 
 ## 성능 비교
 
-<BenchmarkTable />
-
 <BenchmarkEnvironment />
+
+<BenchmarkTable />
 
 [벤치마크 코드](https://github.com/toss/es-toolkit/tree/main/benchmarks)를 참고하세요。

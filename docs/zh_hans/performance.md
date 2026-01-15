@@ -10,8 +10,8 @@ es-toolkit 设计时考虑了性能，与类似 lodash 的替代库相比，平�
 
 ## 性能比较
 
-<BenchmarkTable />
-
 <BenchmarkEnvironment />
+
+<BenchmarkTable />
 
 请参考我们的 [基准测试代码](https://github.com/toss/es-toolkit/tree/main/benchmarks)。

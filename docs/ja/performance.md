@@ -10,8 +10,8 @@ description: es-toolkitと他のライブラリのパフォーマンスの違い
 
 ## パフォーマンス比較
 
-<BenchmarkTable />
-
 <BenchmarkEnvironment />
+
+<BenchmarkTable />
 
 [ベンチマークコード](https://github.com/toss/es-toolkit/tree/main/benchmarks)を参照してください。
