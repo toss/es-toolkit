@@ -40,4 +40,16 @@ describe('maxBy', () => {
     const result = maxBy(numbers, x => x);
     expect(result).toBe(3);
   });
+
+  it('should provide index parameter to getValue function', () => {
+    const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
+    const result = maxBy(items, (item, index) => item.value + index);
+    expect(result).toEqual({ value: 20 });
+  });
+
+  it('should provide array parameter to getValue function', () => {
+    const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
+    const result = maxBy(items, (item, _index, array) => item.value * array.length);
+    expect(result).toEqual({ value: 20 });
+  });
 });

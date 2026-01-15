@@ -41,8 +41,21 @@ maxBy([], x => x.value); // undefined
 #### Parameters
 
 - `items` (`T[]`): The array to find the element with the maximum value.
-- `getValue` (`(element: T) => number`): A function that transforms each element into a number.
+- `getValue` (`(element: T, index: number, array: readonly T[]) => number`): A function that transforms each element into a number. It receives the element, its index, and the array.
 
 #### Returns
 
 (`T | undefined`): The element with the largest value returned by the transformation function. Returns `undefined` if the array is empty.
+
+## Examples
+
+```typescript
+// Using index parameter
+const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
+maxBy(items, (item, index) => item.value + index);
+// Returns: { value: 20 }
+
+// Using array parameter
+maxBy(items, (item, _index, array) => item.value * array.length);
+// Returns: { value: 20 }
+```

@@ -59,8 +59,21 @@ console.log(uniqueByCategory);
 #### Parameters
 
 - `arr` (`readonly T[]`): The array from which to remove duplicates.
-- `mapper` (`(item: T) => U`): A function that transforms each element into a value for comparison.
+- `mapper` (`(item: T, index: number, array: readonly T[]) => U`): A function that transforms each element into a value for comparison. It receives the element, its index, and the array.
 
 #### Returns
 
 (`T[]`): A new array with duplicates removed based on the transformation function's results. Preserves the order in which they first appear in the original array.
+
+## Examples
+
+```typescript
+// Using index parameter
+const items = [{ value: 1 }, { value: 2 }, { value: 1 }];
+uniqBy(items, (item, index) => item.value + index);
+// Returns: [{ value: 1 }, { value: 2 }, { value: 1 }]
+
+// Using array parameter
+uniqBy(items, (item, _index, array) => item.value * array.length);
+// Returns: [{ value: 1 }]
+```

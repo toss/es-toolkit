@@ -4,7 +4,7 @@
  * @template T - Type of elements in the input array.
  *
  * @param {T[]} arr - The array to take elements from.
- * @param {(item: T) => boolean} shouldContinueTaking - The function invoked per element.
+ * @param {(item: T, index: number, array: readonly T[]) => boolean} shouldContinueTaking - The function invoked per element with the item, its index, and the array.
  * @returns {T[]} A new array containing the elements taken from the end while the predicate returns `true`.
  *
  * @example
@@ -14,10 +14,18 @@
  * @example
  * // Returns []
  * takeRightWhile([1, 2, 3], n => n > 3);
+ *
+ * @example
+ * // Using index parameter
+ * takeRightWhile([10, 20, 30, 40], (x, index) => index > 1);
+ * // Returns: [30, 40]
  */
-export function takeRightWhile<T>(arr: readonly T[], shouldContinueTaking: (item: T) => boolean): T[] {
+export function takeRightWhile<T>(
+  arr: readonly T[],
+  shouldContinueTaking: (item: T, index: number, array: readonly T[]) => boolean
+): T[] {
   for (let i = arr.length - 1; i >= 0; i--) {
-    if (!shouldContinueTaking(arr[i])) {
+    if (!shouldContinueTaking(arr[i], i, arr)) {
       return arr.slice(i + 1);
     }
   }
