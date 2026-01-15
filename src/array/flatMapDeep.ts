@@ -6,13 +6,16 @@ import { type ExtractNestedArrayType, flattenDeep } from './flattenDeep.ts';
  * @template T - The type of elements within the array.
  * @template U - The type of elements within the returned array from the iteratee function.
  * @param {T[]} arr - The array to flatten.
- * @param {(item: T) => U} iteratee - The function that produces the new array elements.
+ * @param {(item: T, index: number, array: readonly T[]) => U} iteratee - The function that produces the new array elements. It receives the element, its index, and the array.
  * @returns {Array<ExtractNestedArrayType<U>>} A new array that has been flattened.
  *
  * @example
  * const result = flatMapDeep([1, 2, 3], n => [[n, n]]);
  * // [1, 1, 2, 2, 3, 3]
  */
-export function flatMapDeep<T, U>(arr: readonly T[], iteratee: (item: T) => U): Array<ExtractNestedArrayType<U>> {
-  return flattenDeep(arr.map((item: T) => iteratee(item)));
+export function flatMapDeep<T, U>(
+  arr: readonly T[],
+  iteratee: (item: T, index: number, array: readonly T[]) => U
+): Array<ExtractNestedArrayType<U>> {
+  return flattenDeep(arr.map((item: T, index: number) => iteratee(item, index, arr)));
 }

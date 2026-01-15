@@ -39,8 +39,22 @@ countBy(users, user => user.age);
 #### Parameters
 
 - `arr` (`T[]`): The array to count elements from.
-- `mapper` (`(item: T) => K`): A function that returns the value to use as the categorization criterion.
+- `mapper` (`(item: T, index: number, array: T[]) => K`): A function that returns the value to use as the categorization criterion, called with each item, its index, and the array.
 
 #### Returns
 
 (`Record<K, number>`): An object representing how many elements exist for each categorization criterion.
+
+## Examples
+
+```typescript
+// Using index parameter
+const arr = ['a', 'b', 'c', 'd'];
+const result = countBy(arr, (item, index) => (index < 2 ? 'first' : 'rest'));
+// Returns: { first: 2, rest: 2 }
+
+// Using array parameter
+const numbers = [1, 2, 3, 4];
+const result2 = countBy(numbers, (item, index, arr) => (item < arr.length / 2 ? 'small' : 'large'));
+// Returns: { small: 1, large: 3 }
+```

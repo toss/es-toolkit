@@ -54,7 +54,7 @@ const byParity = groupBy(numbers, num => (num % 2 === 0 ? 'even' : 'odd'));
 #### 参数
 
 - `arr` (`T[]`): 要分组的数组。
-- `getKeyFromItem` (`(item: T) => K`): 从每个元素生成键的函数。
+- `getKeyFromItem` (`(item: T, index: number, array: T[]) => K`): 从每个元素、索引和数组生成键的函数。
 
 #### 返回值
 
