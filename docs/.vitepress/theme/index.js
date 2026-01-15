@@ -3,10 +3,10 @@ import { defineAsyncComponent, h } from 'vue';
 import './index.css';
 import Banner from '../components/Banner.vue';
 import BenchmarkChart from '../components/BenchmarkChart.vue';
+import BenchmarkEnvironment from '../components/BenchmarkEnvironment.vue';
 import BenchmarkTable from '../components/BenchmarkTable.vue';
 import BundleSizeChart from '../components/BundleSizeChart.vue';
 import BundleSizeTable from '../components/BundleSizeTable.vue';
-import BenchmarkEnvironment from '../components/BenchmarkEnvironment.vue';
 import CompatibilityStatus from '../components/CompatibilityStatus.vue';
 
 /** @type {import('vitepress').Theme} */

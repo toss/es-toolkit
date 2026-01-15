@@ -65,6 +65,14 @@ describe('clone', () => {
     expect(clonedObj).not.toBe(obj);
   });
 
+  it('should clone objects with a null prototype', () => {
+    const obj = Object.create(null);
+    const clonedObj = clone(obj);
+
+    expect(clonedObj).toEqual(obj);
+    expect(clonedObj).not.toBe(obj);
+  });
+
   it('should clone custom classes', () => {
     class Person {
       constructor(

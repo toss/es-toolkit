@@ -42,7 +42,7 @@ async function main() {
     console.warn('Could not detect lodash version, using "unknown"');
   }
   const cpus = os.cpus();
-  const totalMemoryGB = (os.totalmem() / (1024 ** 3)).toFixed(2);
+  const totalMemoryGB = (os.totalmem() / 1024 ** 3).toFixed(2);
 
   const allResults = {
     labels: {

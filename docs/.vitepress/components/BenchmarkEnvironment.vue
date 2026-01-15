@@ -25,8 +25,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
 import { useData } from 'vitepress';
+import { computed } from 'vue';
 import raw from '../../data/benchmark-results.json';
 
 const { lang } = useData();
@@ -38,32 +38,32 @@ const i18n = {
     cpu: 'CPU',
     memory: 'Memory',
     node: 'Node.js',
-    platform: 'Platform'
+    platform: 'Platform',
   },
-  'zh_hans': {
+  zh_hans: {
     prefix: '测试环境',
     cores: '核',
     cpu: 'CPU',
     memory: '内存',
     node: 'Node.js',
-    platform: '平台'
+    platform: '平台',
   },
-  'ja': {
+  ja: {
     prefix: 'テスト環境',
     cores: 'コア',
     cpu: 'CPU',
     memory: 'メモリ',
     node: 'Node.js',
-    platform: 'プラットフォーム'
+    platform: 'プラットフォーム',
   },
-  'ko': {
+  ko: {
     prefix: '테스트 환경',
     cores: '코어',
     cpu: 'CPU',
     memory: '메모리',
     node: 'Node.js',
-    platform: '플랫폼'
-  }
+    platform: '플랫폼',
+  },
 };
 
 const text = computed(() => {

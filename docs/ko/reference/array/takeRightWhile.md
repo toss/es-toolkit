@@ -31,7 +31,7 @@ takeRightWhile(['hello', 'world', 'foo', 'bar'], str => str.length <= 5);
 #### 파라미터
 
 - `arr` (`T[]`): 요소를 가져올 배열이에요.
-- `shouldContinueTaking` (`(item: T) => boolean`): 각 요소와 함께 호출되는 조건 함수예요. 이 함수가 참을 반환하는 동안 요소들이 결과에 포함돼요.
+- `shouldContinueTaking` (`(item: T, index: number, array: T[]) => boolean`): 각 요소, 인덱스, 배열과 함께 호출되는 조건 함수예요. 이 함수가 참을 반환하는 동안 요소들이 결과에 포함돼요.
 
 #### 반환 값
 

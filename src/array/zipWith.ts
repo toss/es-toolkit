@@ -7,7 +7,7 @@
  * @template T - The type of elements in the first array.
  * @template R - The type of elements in the resulting array.
  * @param {T[]} arr1 - The first array to zip.
- * @param {(...items: T[]) => R} combine - The combiner function that takes corresponding elements from each array and returns a single value.
+ * @param {(item: T, index: number) => R} combine - The combiner function that takes corresponding elements from each array, their index, and returns a single value.
  * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  *
  * @example
@@ -25,7 +25,7 @@
  * const result = zipWith(arr1, arr2, arr3, (a, b, c) => `${a}${b}${c}`);
  * // result will be [`135`, `246`]
  */
-export function zipWith<T, R>(arr1: readonly T[], combine: (item: T) => R): R[];
+export function zipWith<T, R>(arr1: readonly T[], combine: (item: T, index: number) => R): R[];
 /**
  * Combines two arrays into a single array using a custom combiner function.
  *
@@ -34,10 +34,14 @@ export function zipWith<T, R>(arr1: readonly T[], combine: (item: T) => R): R[];
  * @template R - The type of elements in the resulting array.
  * @param {T[]} arr1 - The first array to zip.
  * @param {U[]} arr2 - The second array to zip.
- * @param {(item1: T, item2: U) => R} combine - The combiner function that takes corresponding elements from each array and returns a single value.
+ * @param {(item1: T, item2: U, index: number) => R} combine - The combiner function that takes corresponding elements from each array, their index, and returns a single value.
  * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  */
-export function zipWith<T, U, R>(arr1: readonly T[], arr2: readonly U[], combine: (item1: T, item2: U) => R): R[];
+export function zipWith<T, U, R>(
+  arr1: readonly T[],
+  arr2: readonly U[],
+  combine: (item1: T, item2: U, index: number) => R
+): R[];
 /**
  * Combines three arrays into a single array using a custom combiner function.
  *
@@ -48,14 +52,14 @@ export function zipWith<T, U, R>(arr1: readonly T[], arr2: readonly U[], combine
  * @param {T[]} arr1 - The first array to zip.
  * @param {U[]} arr2 - The second array to zip.
  * @param {V[]} arr3 - The third array to zip.
- * @param {(item1: T, item2: U, item3: V) => R} combine - The combiner function that takes corresponding elements from each array and returns a single value.
+ * @param {(item1: T, item2: U, item3: V, index: number) => R} combine - The combiner function that takes corresponding elements from each array, their index, and returns a single value.
  * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  */
 export function zipWith<T, U, V, R>(
   arr1: readonly T[],
   arr2: readonly U[],
   arr3: readonly V[],
-  combine: (item1: T, item2: U, item3: V) => R
+  combine: (item1: T, item2: U, item3: V, index: number) => R
 ): R[];
 /**
  * Combines four arrays into a single array using a custom combiner function.
@@ -69,7 +73,7 @@ export function zipWith<T, U, V, R>(
  * @param {U[]} arr2 - The second array to zip.
  * @param {V[]} arr3 - The third array to zip.
  * @param {W[]} arr4 - The fourth array to zip.
- * @param {(item1: T, item2: U, item3: V, item4: W) => R} combine - The combiner function that takes corresponding elements from each array and returns a single value.
+ * @param {(item1: T, item2: U, item3: V, item4: W, index: number) => R} combine - The combiner function that takes corresponding elements from each array, their index, and returns a single value.
  * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  */
 export function zipWith<T, U, V, W, R>(
@@ -77,7 +81,7 @@ export function zipWith<T, U, V, W, R>(
   arr2: readonly U[],
   arr3: readonly V[],
   arr4: readonly W[],
-  combine: (item1: T, item2: U, item3: V, item4: W) => R
+  combine: (item1: T, item2: U, item3: V, item4: W, index: number) => R
 ): R[];
 
 /**
@@ -92,7 +96,7 @@ export function zipWith<T, U, V, W, R>(
  * @template R - The type of elements in the resulting array.
  * @param {T[]} arr1 - The first array to zip.
  * @param {...Array<T[]>} rest - The additional arrays to zip together, followed by the combiner function.
- * @param {(...items: T[]) => R} combine - The combiner function that takes corresponding elements from each array and returns a single value.
+ * @param {(...items: [...T[], number]) => R} combine - The combiner function that takes corresponding elements from each array, followed by their index, and returns a single value.
  * @returns {R[]} A new array where each element is the result of applying the combiner function to the corresponding elements of the input arrays.
  *
  * @example
@@ -103,14 +107,14 @@ export function zipWith<T, U, V, W, R>(
  */
 export function zipWith<T, R>(arr1: readonly T[], ...rest: any[]): R[] {
   const arrs = [arr1, ...rest.slice(0, -1)];
-  const combine = rest[rest.length - 1] as (...items: T[]) => R;
+  const combine = rest[rest.length - 1] as (...items: any[]) => R;
 
   const maxIndex = Math.max(...arrs.map(arr => arr.length));
   const result: R[] = Array(maxIndex);
 
   for (let i = 0; i < maxIndex; i++) {
     const elements: T[] = arrs.map(arr => arr[i]);
-    result[i] = combine(...elements);
+    result[i] = combine(...elements, i);
   }
 
   return result;
