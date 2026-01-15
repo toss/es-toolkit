@@ -41,7 +41,7 @@ minBy([], x => x.value); // undefined
 #### 파라미터
 
 - `items` (`T[]`): 최솟값을 가지는 요소를 찾을 배열이에요.
-- `getValue` (`(element: T) => number`): 각 요소를 숫자로 변환하는 함수예요.
+- `getValue` (`(element: T, index: number, array: readonly T[]) => number`): 각 요소를 숫자로 변환하는 함수예요. 요소, 인덱스, 배열을 인자로 받아요.
 
 #### 반환 값
 

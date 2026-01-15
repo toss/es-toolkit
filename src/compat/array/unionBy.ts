@@ -1,9 +1,9 @@
 import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
 import { uniqBy } from '../../array/uniqBy.ts';
+import { ary } from '../../function/ary.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
-import { ary } from '../index.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { iteratee } from '../util/iteratee.ts';
 

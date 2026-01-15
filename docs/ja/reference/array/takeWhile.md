@@ -44,7 +44,7 @@ takeWhile(users, user => user.age < 30);
 #### パラメータ
 
 - `arr` (`T[]`): 要素を取得する配列です。
-- `predicate` (`(element: T) => boolean`): 各要素に対して呼び出される条件関数です。この関数が真を返す間、要素を取得します。
+- `predicate` (`(element: T, index: number, array: T[]) => boolean`): 各要素、インデックス、配列と共に呼び出される条件関数です。この関数が真を返す間、要素を取得します。
 
 #### 戻り値
 
