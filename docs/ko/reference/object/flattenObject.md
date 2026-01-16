@@ -107,6 +107,8 @@ const emptyCase = {
 const result = flattenObject(emptyCase);
 console.log(result);
 // {
+//   'empty': {},
+//   'emptyArray: [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }

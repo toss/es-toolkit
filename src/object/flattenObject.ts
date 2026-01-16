@@ -53,7 +53,7 @@ function flattenObjectImpl(object: object, prefix: string, delimiter: string): R
       continue;
     }
 
-    if (Array.isArray(value)) {
+    if (Array.isArray(value) && value.length > 0) {
       Object.assign(result, flattenObjectImpl(value, prefixedKey, delimiter));
       continue;
     }
