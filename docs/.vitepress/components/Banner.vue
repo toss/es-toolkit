@@ -1,5 +1,6 @@
 <template>
-  <div v-if="shouldShowBanner && currentBanner" class="custom-banner-container">
+  <div v-if="shouldShowBanner && currentBanner"
+class="custom-banner-container">
     <div class="custom-banner-box">
       <a
         :href="currentBanner.link"

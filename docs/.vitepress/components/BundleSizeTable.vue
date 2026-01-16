@@ -3,18 +3,27 @@
     <table>
       <thead>
         <tr>
-          <th></th>
-          <th v-for="k in seriesKeys" :key="k">{{ labels[k] }}</th>
+          <th />
+          <th v-for="k in seriesKeys"
+:key="k">
+            {{ labels[k] }}
+          </th>
           <th v-if="seriesKeys.length >= 2">Difference</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="row in rows" :key="row.name">
+        <tr v-for="row in rows"
+:key="row.name">
           <td>
             {{ row.name }}
           </td>
-          <td v-for="(val, i) in row.values" :key="i">{{ formatBytes(val) }}</td>
-          <td v-if="seriesKeys.length >= 2">{{ formatPercent(row.diffPercent) }}</td>
+          <td v-for="(val, i) in row.values"
+:key="i">
+            {{ formatBytes(val) }}
+          </td>
+          <td v-if="seriesKeys.length >= 2">
+            {{ formatPercent(row.diffPercent) }}
+          </td>
         </tr>
       </tbody>
     </table>
