@@ -110,7 +110,7 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
   let delay: number | ((attempts: number) => number);
   let retries: number;
   let signal: AbortSignal | undefined;
-  let shouldRetry: ((error: unknown, attempt: number) => boolean) = () => true;
+  let shouldRetry: (error: unknown, attempt: number) => boolean = () => true;
 
   if (typeof _options === 'number') {
     delay = DEFAULT_DELAY;
