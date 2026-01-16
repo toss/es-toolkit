@@ -38,6 +38,7 @@ interface RetryOptions {
 
 const DEFAULT_DELAY = 0;
 const DEFAULT_RETRIES = Number.POSITIVE_INFINITY;
+const DEFAULT_SHOULD_RETRY = () => true;
 
 /**
  * Retries a function that returns a promise until it resolves successfully.
@@ -110,17 +111,18 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
   let delay: number | ((attempts: number) => number);
   let retries: number;
   let signal: AbortSignal | undefined;
-  let shouldRetry: (error: unknown, attempt: number) => boolean = () => true;
+  let shouldRetry: (error: unknown, attempt: number) => boolean;
 
   if (typeof _options === 'number') {
     delay = DEFAULT_DELAY;
     retries = _options;
     signal = undefined;
+    shouldRetry = DEFAULT_SHOULD_RETRY;
   } else {
     delay = _options?.delay ?? DEFAULT_DELAY;
     retries = _options?.retries ?? DEFAULT_RETRIES;
     signal = _options?.signal;
-    shouldRetry ??= _options.shouldRetry;
+    shouldRetry = _options?.shouldRetry ?? DEFAULT_SHOULD_RETRY;
   }
 
   let error;
