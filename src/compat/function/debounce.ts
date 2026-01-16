@@ -158,6 +158,15 @@ export function debounce<T extends (...args: any) => any>(
   options?: DebounceSettings
 ): DebouncedFunc<T>;
 
+/**
+ * Creates a debounced function that delays invoking the provided function.
+ *
+ * @template F
+ * @param {F} func The function to debounce.
+ * @param {number} debounceMs The number of milliseconds to delay.
+ * @param {DebounceSettings} options The options object.
+ * @returns {DebouncedFunc<F>} Returns the new debounced function.
+ */
 export function debounce<F extends (...args: any[]) => any>(
   func: F,
   debounceMs = 0,

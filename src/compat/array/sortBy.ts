@@ -77,6 +77,14 @@ export function sortBy<T extends object>(
   ...iteratees: Array<Many<ObjectIteratee<T>>>
 ): Array<T[keyof T]>;
 
+/**
+ * Sorts a collection based on iteratees.
+ *
+ * @template T
+ * @param {ArrayLike<T> | object | null | undefined} collection The collection to iterate over.
+ * @param {...any[]} criteria The iteratees to sort by.
+ * @returns {T[]} Returns the new sorted array.
+ */
 export function sortBy<T = any>(collection: ArrayLike<T> | object | null | undefined, ...criteria: any[]): T[] {
   const length = criteria.length;
   // Enables use as an iteratee for methods like `_.reduce` and `_.map`.

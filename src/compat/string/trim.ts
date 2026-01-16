@@ -28,6 +28,14 @@ export function trim(string?: string, chars?: string): string;
  */
 export function trim(string: string, index: string | number, guard: object): string;
 
+/**
+ * Removes leading and trailing whitespace or specified characters from string.
+ *
+ * @param {any} str The string to trim.
+ * @param {any} chars The characters to trim.
+ * @param {any} guard Enables use as an iteratee for methods like map.
+ * @returns {string} Returns the trimmed string.
+ */
 export function trim(str: any, chars?: any, guard?: any): string {
   if (str == null) {
     return '';

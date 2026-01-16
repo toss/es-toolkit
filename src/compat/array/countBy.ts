@@ -20,11 +20,32 @@ export function countBy<T>(
   iteratee?: ValueIteratee<T>
 ): Record<string, number>;
 
+/**
+ * Creates an object composed of keys generated from the results of running each element of collection through
+ * iteratee. The corresponding value of each key is the number of times the key was returned by iteratee. The
+ * iteratee is invoked with one argument: (value).
+ *
+ * @param collection The collection to iterate over.
+ * @param iteratee The function invoked per iteration.
+ * @return Returns the composed aggregate object.
+ *
+ * @example
+ * countBy({ a: 6.1, b: 4.2, c: 6.3 }, Math.floor); // => { '4': 1, '6': 2 }
+ */
 export function countBy<T extends object>(
   collection: T | null | undefined,
   iteratee?: ValueIteratee<T[keyof T]>
 ): Record<string, number>;
 
+/**
+ * Creates an object composed of keys generated from the results of running each element of collection through
+ * iteratee. The corresponding value of each key is the number of times the key was returned by iteratee. The
+ * iteratee is invoked with one argument: (value).
+ *
+ * @param {any} collection The collection to iterate over.
+ * @param {any} iteratee The function invoked per iteration.
+ * @return {Record<string, number>} Returns the composed aggregate object.
+ */
 export function countBy(collection: any, iteratee?: any): Record<string, number> {
   if (collection == null) {
     return {} as Record<string, number>;

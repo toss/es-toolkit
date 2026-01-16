@@ -36,6 +36,14 @@ export function split(string: string | null | undefined, separator?: RegExp | st
  */
 export function split(string: string | null | undefined, index: string | number, guard: object): string[];
 
+/**
+ * Splits string by separator.
+ *
+ * @param {any} string The string to split.
+ * @param {any} separator The separator pattern to split by.
+ * @param {any} limit The length to truncate results to.
+ * @returns {string[]} Returns the string segments.
+ */
 export function split(string: any, separator?: any, limit?: any): string[] {
   return toString(string).split(separator as string, limit);
 }
