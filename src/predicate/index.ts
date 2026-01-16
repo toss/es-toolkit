@@ -16,6 +16,7 @@ export { isMap } from './isMap.ts';
 export { isNil } from './isNil.ts';
 export { isNode } from './isNode.ts';
 export { isNotNil } from './isNotNil.ts';
+export { isNumber } from './isNumber.ts';
 export { isNull } from './isNull.ts';
 export { isPlainObject } from './isPlainObject.ts';
 export { isPrimitive } from './isPrimitive.ts';
