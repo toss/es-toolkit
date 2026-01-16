@@ -110,18 +110,17 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
   let delay: number | ((attempts: number) => number);
   let retries: number;
   let signal: AbortSignal | undefined;
-  let shouldRetry: ((error: unknown, attempt: number) => boolean) | undefined;
+  let shouldRetry: ((error: unknown, attempt: number) => boolean) = () => true;
 
   if (typeof _options === 'number') {
     delay = DEFAULT_DELAY;
     retries = _options;
     signal = undefined;
-    shouldRetry = undefined;
   } else {
     delay = _options?.delay ?? DEFAULT_DELAY;
     retries = _options?.retries ?? DEFAULT_RETRIES;
     signal = _options?.signal;
-    shouldRetry = _options?.shouldRetry;
+    shouldRetry ??= _options.shouldRetry;
   }
 
   let error;
@@ -137,7 +136,7 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
       error = err;
 
       // Determine if we should retry based on the provided shouldRetry function
-      if (shouldRetry && !shouldRetry(err, attempts)) {
+      if (!shouldRetry(err, attempts)) {
         throw err;
       }
 
