@@ -4,6 +4,7 @@ export { isBoolean } from './isBoolean.ts';
 export { isBrowser } from './isBrowser.ts';
 export { isBuffer } from './isBuffer.ts';
 export { isDate } from './isDate.ts';
+export { isEmptyObject } from './isEmptyObject.ts';
 export { isEqual } from './isEqual.ts';
 export { isEqualWith } from './isEqualWith.ts';
 export { isError } from './isError.ts';
