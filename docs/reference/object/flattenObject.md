@@ -112,7 +112,7 @@ console.log(result);
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
-// Empty objects and empty arrays don't appear as keys
+// Empty objects and empty arrays appear as keys
 ```
 
 #### Parameters

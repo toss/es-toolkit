@@ -112,7 +112,7 @@ console.log(result);
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
-// 빈 객체나 빈 배열은 키로 나타나지 않아요
+// 빈 객체나 빈 배열은 키로 나타나요
 ```
 
 #### 파라미터

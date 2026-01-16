@@ -112,7 +112,7 @@ console.log(result);
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
-// 空のオブジェクトや空の配列はキーとして表示されません
+// 空のオブジェクトや空の配列もキーとして表示されます
 ```
 
 #### パラメータ
