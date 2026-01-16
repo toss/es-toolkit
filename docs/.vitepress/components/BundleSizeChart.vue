@@ -1,7 +1,6 @@
 <template>
   <div :style="{ width: '100%', height: computedHeight + 'px' }">
-    <Bar :data="chartData"
-:options="options" />
+    <Bar :data="chartData" :options="options" />
   </div>
 </template>
 
