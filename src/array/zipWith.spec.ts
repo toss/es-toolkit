@@ -16,7 +16,21 @@ describe('zipWith', () => {
   });
 
   it('should provide index parameter to combine function', () => {
-    const result = zipWith([10, 20, 30], [1, 2, 3], (a, b, index) => a + b + index);
+    const result = zipWith([10, 20, 30], [1, 2, 3], (a, b, index) => (a ?? 0) + (b ?? 0) + index);
     expect(result).toEqual([11, 23, 35]);
+  });
+
+  it('should handle undefined values when arrays have different lengths (Type Fix Verification)', () => {
+    const numbers = [1, 2, 3];
+    const strings = ['a', 'b'];
+
+    const result = zipWith(numbers, strings, (num, str) => {
+      if (str === undefined) {
+        return `${num}-missing`;
+      }
+      return `${num}-${str}`;
+    });
+
+    expect(result).toEqual(['1-a', '2-b', '3-missing']);
   });
 });
