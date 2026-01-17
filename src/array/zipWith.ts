@@ -40,7 +40,7 @@ export function zipWith<T, R>(arr1: readonly T[], combine: (item: T, index: numb
 export function zipWith<T, U, R>(
   arr1: readonly T[],
   arr2: readonly U[],
-  combine: (item1: T, item2: U, index: number) => R
+  combine: (item1: T | undefined, item2: U | undefined, index: number) => R
 ): R[];
 /**
  * Combines three arrays into a single array using a custom combiner function.
