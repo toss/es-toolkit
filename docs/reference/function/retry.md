@@ -52,6 +52,33 @@ const data4 = await retry(
 );
 ```
 
+You can use `shouldRetry` option when you want to retry only on specific errors.
+
+```typescript
+import { retry } from 'es-toolkit/function';
+
+class NetworkError extends Error {
+  constructor(public status: number) {
+    super(`Network error: ${status}`);
+  }
+}
+
+// Retry only on 500+ errors
+const data5 = await retry(
+  async () => {
+    const response = await fetch('/api/data');
+    if (!response.ok) {
+      throw new NetworkError(response.status);
+    }
+    return response.json();
+  },
+  {
+    retries: 3,
+    shouldRetry: (error, attempt) => error instanceof NetworkError && error.status >= 500,
+  }
+);
+```
+
 You can also cancel retries using AbortSignal.
 
 ```typescript
@@ -86,6 +113,9 @@ try {
   - `retries` (`number`, optional): The number of times to retry. Defaults to `Infinity` for infinite retries.
   - `delay` (`number | (attempts: number) => number`, optional): The retry interval (in milliseconds). Can be a number or a function. Defaults to `0`.
   - `signal` (`AbortSignal`, optional): A signal that can cancel retries.
+  - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, optional): A function that determines whether to retry. If it returns `false`, the error is thrown immediately.
+    - `error`: The error object that occurred.
+    - `attempt`: The current attempt count (starting from 0).
 
 #### Returns
 
