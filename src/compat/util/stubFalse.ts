@@ -16,6 +16,11 @@ export function stubFalse(): false;
  */
 export function stubFalse(): false;
 
+/**
+ * Returns false.
+ *
+ * @returns {false} false.
+ */
 export function stubFalse(): false {
   return false;
 }

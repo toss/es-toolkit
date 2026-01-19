@@ -18,6 +18,14 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  * // => [2.1, 1.2]
  */
 export function uniqBy<T>(array: ArrayLike<T> | null | undefined, iteratee: ValueIteratee<T>): T[];
+/**
+ * Creates a duplicate-free version of an array, using an optional transform function.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} array The array to inspect.
+ * @param {((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T>} iteratee The transform function.
+ * @returns {T[]} Returns the new duplicate-free array.
+ */
 export function uniqBy<T>(
   array: ArrayLike<T> | null | undefined,
   iteratee: ((value: T) => unknown) | PropertyKey | [keyof T, unknown] | Partial<T> = identity

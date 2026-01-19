@@ -40,6 +40,12 @@ export function identity<T>(value: T): T;
  */
 export function identity(): undefined;
 
+/**
+ * Returns the first argument it receives.
+ *
+ * @param {any} x The value to return.
+ * @returns {any} Returns x.
+ */
 export function identity(x?: any): any {
   return x;
 }

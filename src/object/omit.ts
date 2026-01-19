@@ -34,7 +34,6 @@ export function omit<T extends Record<PropertyKey, any>, K extends keyof T>(obj:
  * const result = omit(obj, keysToOmit);
  * // result will be { a: 1 }
  */
-export function omit<T extends Record<PropertyKey, any>>(obj: T, keys: readonly PropertyKey[]): Partial<T>;
 export function omit<T extends Record<PropertyKey, any>>(obj: T, keys: readonly PropertyKey[]): Partial<T> {
   const result = { ...obj };
 

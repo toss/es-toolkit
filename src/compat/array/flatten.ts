@@ -14,6 +14,14 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  */
 export function flatten<T>(value: ArrayLike<T | readonly T[]> | null | undefined): T[];
 
+/**
+ * Flattens array up to depth times.
+ *
+ * @template T
+ * @param {ArrayLike<T> | null | undefined} value The array to flatten.
+ * @param {number} depth The maximum recursion depth.
+ * @returns {T[]} Returns the new flattened array.
+ */
 export function flatten<T>(value: ArrayLike<T | readonly T[]> | null | undefined, depth = 1): T[] {
   const result: T[] = [];
   const flooredDepth = Math.floor(depth);
