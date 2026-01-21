@@ -203,4 +203,49 @@ describe('MergeDeep type', () => {
     const result = merge(target, source);
     expectTypeOf(result.l1.l2.l3).toEqualTypeOf<{ a: number; b: number }>();
   });
+
+  it('should preserve optional properties', () => {
+    type Result = MergeDeep<{ a?: number; b: string }, { c?: boolean }>;
+    type Expected = { a?: number; b: string; c?: boolean };
+    expectTypeOf<Result>().toEqualTypeOf<Expected>();
+  });
+
+  it('should preserve optional properties in nested objects', () => {
+    type Result = MergeDeep<{ nested: { a?: number } }, { nested: { b?: string } }>;
+    type Expected = { nested: { a?: number; b?: string } };
+    expectTypeOf<Result>().toEqualTypeOf<Expected>();
+  });
+
+  it('should handle array + object merge (array as target)', () => {
+    const result = merge(['1', '2'] as string[], { a: 2 });
+
+    expect(Array.isArray(result)).toBe(true);
+    expect(result[0]).toBe('1');
+    expect(result.a).toBe(2);
+
+    expectTypeOf(result[0]).toEqualTypeOf<string>();
+    expectTypeOf(result.a).toEqualTypeOf<number>();
+  });
+
+  it('should handle object + array merge (object as target)', () => {
+    const result = merge({ a: 2 }, ['1'] as const);
+
+    expect(result).toEqual({ a: 2, 0: '1' });
+    expect(result[0]).toBe('1');
+    expect(result.a).toBe(2);
+
+    expectTypeOf(result[0]).toEqualTypeOf<'1'>();
+    expectTypeOf(result.a).toEqualTypeOf<number>();
+  });
+
+  it('should handle nested array + object merge', () => {
+    const result = merge({ x: ['1'] as string[] }, { x: { a: 2 } });
+
+    expect(Array.isArray(result.x)).toBe(true);
+    expect(result.x[0]).toBe('1');
+    expect(result.x.a).toBe(2);
+
+    expectTypeOf(result.x[0]).toEqualTypeOf<string>();
+    expectTypeOf(result.x.a).toEqualTypeOf<number>();
+  });
 });

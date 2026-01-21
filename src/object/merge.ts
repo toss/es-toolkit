@@ -6,6 +6,8 @@ type NonPlainObject =
   | RegExp
   | Map<any, any>
   | Set<any>
+  | ReadonlyMap<any, any>
+  | ReadonlySet<any>
   | WeakMap<any, any>
   | WeakSet<any>
   | Promise<any>
@@ -25,7 +27,44 @@ type NonPlainObject =
   | BigUint64Array
   | ((...args: any[]) => any);
 
-export type MergeDeep<T, S> = S extends undefined
+type OptionalKeys<T> = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  [K in keyof T]-?: {} extends Pick<T, K> ? K : never;
+}[keyof T];
+
+type RequiredKeys<T> = Exclude<keyof T, OptionalKeys<T>>;
+
+type UnsafeKey = '__proto__' | 'constructor' | 'prototype';
+
+type SafeKeys<T> = Exclude<Extract<keyof T, string | number>, UnsafeKey>;
+
+type ArrayIndices<T extends readonly any[]> = Extract<keyof T, number>;
+
+type MergeKeys<T, S> = S extends readonly any[] ? SafeKeys<T> | ArrayIndices<S> : SafeKeys<T> | SafeKeys<S>;
+
+type Simplify<T> = { [K in keyof T]: T[K] } & {};
+
+type MergeDeepObject<T extends object, S extends object, Keys extends string | number = MergeKeys<T, S>> = Simplify<
+  {
+    [K in Keys & (RequiredKeys<T> | RequiredKeys<S>)]: K extends keyof S
+      ? K extends keyof T
+        ? MergeDeepValue<T[K], S[K]>
+        : S[K]
+      : K extends keyof T
+        ? T[K]
+        : never;
+  } & {
+    [K in Keys as K extends RequiredKeys<T> | RequiredKeys<S> ? never : K]?: K extends keyof S
+      ? K extends keyof T
+        ? MergeDeepValue<T[K], S[K]>
+        : S[K]
+      : K extends keyof T
+        ? T[K]
+        : never;
+  }
+>;
+
+type MergeDeepValue<T, S> = S extends undefined
   ? T
   : T extends null
     ? S
@@ -35,21 +74,17 @@ export type MergeDeep<T, S> = S extends undefined
         ? S
         : T extends readonly any[]
           ? S extends readonly any[]
-            ? Array<MergeDeep<T[number], S[number]>>
-            : S
+            ? Array<T[number] | S[number]>
+            : S extends object
+              ? T & S
+              : S
           : T extends object
             ? S extends object
-              ? {
-                  [K in keyof T | keyof S]: K extends keyof S
-                    ? K extends keyof T
-                      ? MergeDeep<T[K], S[K]>
-                      : S[K]
-                    : K extends keyof T
-                      ? T[K]
-                      : never;
-                }
+              ? MergeDeepObject<T, S>
               : S
             : S;
+
+export type MergeDeep<T, S> = MergeDeepValue<T, S>;
 
 /**
  * Merges the properties of the source object into the target object.
