@@ -175,4 +175,11 @@ describe('forEachRight', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(forEachRight).toEqualTypeOf<typeof forEachRightLodash>();
   });
+
+  it('should use identity function as the callback if no callback is provided', () => {
+    const array = [1, 2, 3];
+    const result = forEachRight(array);
+
+    expect(result).toBe(array);
+  });
 });

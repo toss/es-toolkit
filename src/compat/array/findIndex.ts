@@ -1,4 +1,5 @@
 import { ListIterateeCustom } from '../_internal/ListIterateeCustom.ts';
+import { identity } from '../function/identity.ts';
 import { property } from '../object/property.ts';
 import { matches } from '../predicate/matches.ts';
 import { matchesProperty } from '../predicate/matchesProperty.ts';
@@ -21,7 +22,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  */
 export function findIndex<T>(
   arr: ArrayLike<T> | null | undefined,
-  doesMatch?: ListIterateeCustom<T, boolean>,
+  doesMatch: ListIterateeCustom<T, boolean> = identity,
   fromIndex = 0
 ): number {
   if (!arr) {

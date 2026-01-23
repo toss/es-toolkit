@@ -23,6 +23,15 @@ describe('partition', () => {
     ]);
   });
 
+  it('should use `_.identity` when `predicate` is undefined', () => {
+    const arr = [0, 1, 2, null, 3, undefined, 4, false, 5, ''];
+
+    expect(partition(arr, undefined)).toEqual([
+      [1, 2, 3, 4, 5],
+      [0, null, undefined, false, ''],
+    ]);
+  });
+
   it('should work with `matches` shorthand', () => {
     const users = [
       { user: 'barney', age: 36, active: false },
