@@ -127,7 +127,7 @@ export async function retry<T>(func: () => Promise<T>, _options?: number | Retry
 
   let error;
 
-  for (let attempts = 0; attempts < retries; attempts++) {
+  for (let attempts = 0; attempts <= retries; attempts++) {
     if (signal?.aborted) {
       throw error ?? new Error(`The retry operation was aborted due to an abort signal.`);
     }
