@@ -126,7 +126,7 @@ export function throttle<F extends (...args: any[]) => any>(
 
   return debounce(func, throttleMs, {
     leading,
-    maxWait: leading || trailing ? throttleMs : undefined,
+    maxWait: throttleMs,
     trailing,
   });
 }
