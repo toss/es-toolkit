@@ -1,3 +1,4 @@
+export { addJitter } from './addJitter.ts';
 export { delay } from './delay.ts';
 export { Mutex } from './mutex.ts';
 export { Semaphore } from './semaphore.ts';
