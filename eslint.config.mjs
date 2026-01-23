@@ -8,16 +8,7 @@ import pluginJs from '@eslint/js';
 import vitest from '@vitest/eslint-plugin';
 
 export default defineConfig(
-  globalIgnores([
-    '.yarn/**',
-    'coverage/**',
-    '**/dist/**',
-    '**/cache/**',
-    '.pnp.*',
-    '**/*.d.ts',
-    '**/*.tgz',
-    'node_modules/**',
-  ]),
+  globalIgnores(['.yarn/**', 'coverage/**', '**/dist/**', '**/cache/**', '.pnp.*', '**/*.d.ts', '**/*.tgz']),
   {
     languageOptions: {
       globals: {
