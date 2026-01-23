@@ -52,6 +52,33 @@ const data4 = await retry(
 );
 ```
 
+特定のエラーでのみ再試行したい場合は `shouldRetry` オプションを使用できます。
+
+```typescript
+import { retry } from 'es-toolkit/function';
+
+class NetworkError extends Error {
+  constructor(public status: number) {
+    super(`Network error: ${status}`);
+  }
+}
+
+// 500エラー以上でのみ再試行
+const data5 = await retry(
+  async () => {
+    const response = await fetch('/api/data');
+    if (!response.ok) {
+      throw new NetworkError(response.status);
+    }
+    return response.json();
+  },
+  {
+    retries: 3,
+    shouldRetry: (error, attempt) => error instanceof NetworkError && error.status >= 500,
+  }
+);
+```
+
 AbortSignal を使用して再試行をキャンセルすることもできます。
 
 ```typescript
@@ -86,6 +113,9 @@ try {
   - `retries` (`number`, オプション): 再試行する回数です。デフォルトは `Infinity` で無限に再試行します。
   - `delay` (`number | (attempts: number) => number`, オプション): 再試行間隔(ミリ秒)です。数値または関数を使用できます。デフォルトは `0` です。
   - `signal` (`AbortSignal`, オプション): 再試行をキャンセルできるシグナルです。
+  - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, オプション): 再試行するかどうかを決定する関数です。`false` を返すと即座にエラーをスローします。
+    - `error`: 発生したエラーオブジェクトです。
+    - `attempt`: 現在の試行回数です (0から開始)。
 
 #### 戻り値
 

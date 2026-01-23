@@ -45,7 +45,7 @@ const [truthy, falsy] = partition([], x => x > 0);
 #### 파라미터
 
 - `arr` (`T[]`): 두 그룹으로 나눌 배열이에요.
-- `isInTruthy` (`(value: T) => boolean`): 각 요소가 첫 번째 배열(truthy)에 포함될지, 두 번째 배열(falsy)에 포함될지를 결정하는 조건 함수예요.
+- `isInTruthy` (`(value: T, index: number, array: readonly T[]) => boolean`): 각 요소가 첫 번째 배열(truthy)에 포함될지, 두 번째 배열(falsy)에 포함될지를 결정하는 조건 함수예요. 값, 인덱스, 전체 배열과 함께 호출돼요.
 
 #### 반환 값
 

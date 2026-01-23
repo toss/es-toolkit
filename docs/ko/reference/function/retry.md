@@ -52,6 +52,33 @@ const data4 = await retry(
 );
 ```
 
+특정 에러에서만 재시도하고 싶을 때 `shouldRetry` 옵션을 사용할 수 있어요.
+
+```typescript
+import { retry } from 'es-toolkit/function';
+
+class NetworkError extends Error {
+  constructor(public status: number) {
+    super(`Network error: ${status}`);
+  }
+}
+
+// 500 에러 이상에서만 재시도
+const data5 = await retry(
+  async () => {
+    const response = await fetch('/api/data');
+    if (!response.ok) {
+      throw new NetworkError(response.status);
+    }
+    return response.json();
+  },
+  {
+    retries: 3,
+    shouldRetry: (error, attempt) => error instanceof NetworkError && error.status >= 500,
+  }
+);
+```
+
 AbortSignal을 사용해서 재시도를 취소할 수도 있어요.
 
 ```typescript
@@ -86,6 +113,9 @@ try {
   - `retries` (`number`, 선택): 재시도할 횟수예요. 기본값은 `Infinity`로 무한 재시도해요.
   - `delay` (`number | (attempts: number) => number`, 선택): 재시도 간격(밀리초)이에요. 숫자나 함수를 사용할 수 있어요. 기본값은 `0`이에요.
   - `signal` (`AbortSignal`, 선택): 재시도를 취소할 수 있는 시그널이에요.
+  - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, 선택): 재시도 여부를 결정하는 함수예요. `false`를 반환하면 즉시 에러를 던져요.
+    - `error`: 발생한 에러 객체예요.
+    - `attempt`: 현재 시도 횟수예요 (0부터 시작).
 
 #### 반환 값
 
