@@ -2,10 +2,12 @@ import { bench, describe } from 'vitest';
 import { dropRightWhile as dropRightWhileToolkit_ } from 'es-toolkit';
 import { dropRightWhile as dropRightWhileToolkitCompat_ } from 'es-toolkit/compat';
 import { dropRightWhile as dropRightWhileLodash_ } from 'lodash';
+import { dropRightWhile as dropRightWhileLodash_es } from 'lodash-es';
 
 const dropRightWhileToolkit = dropRightWhileToolkit_;
 const dropRightWhileToolkitCompat = dropRightWhileToolkitCompat_;
 const dropRightWhileLodash = dropRightWhileLodash_;
+const dropRightWhileLodashEs = dropRightWhileLodash_es;
 
 describe('dropRightWhile', () => {
   bench('es-toolkit/dropRightWhile', () => {
@@ -18,6 +20,10 @@ describe('dropRightWhile', () => {
 
   bench('lodash/dropRightWhile', () => {
     dropRightWhileLodash([1.2, 2.3, 3.4], x => x < 2);
+  });
+
+  bench('lodash-es/dropRightWhile', () => {
+    dropRightWhileLodashEs([1.2, 2.3, 3.4], x => x < 2);
   });
 });
 
@@ -34,5 +40,9 @@ describe('dropRightWhile/largeArray', () => {
 
   bench('lodash/dropRightWhile', () => {
     dropRightWhileLodash(largeArray, x => x < 5000);
+  });
+
+  bench('lodash-es/dropRightWhile', () => {
+    dropRightWhileLodashEs(largeArray, x => x < 5000);
   });
 });
