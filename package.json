@@ -52,6 +52,7 @@
     "bench": "vitest bench",
     "build": "rollup -c rollup.config.mjs && ./.scripts/postbuild.sh",
     "format": "prettier --write .",
+    "gen:benchmark": "node ./.scripts/generate-benchmark.mjs",
     "gen:bundle-size": "node ./.scripts/generate-bundle-size.mjs",
     "lint": "eslint --config eslint.config.mjs --concurrency=auto",
     "packlint": "packlint sort -R",
