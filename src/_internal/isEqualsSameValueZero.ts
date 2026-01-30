@@ -11,6 +11,4 @@
  * eq(NaN, NaN); // true
  * eq('a', Object('a')); // false
  */
-export function isEqualsSameValueZero(value: any, other: any): boolean {
-  return value === other || (Number.isNaN(value) && Number.isNaN(other));
-}
+export function isEqualsSameValueZero(value: any, other: any): boolean {}
