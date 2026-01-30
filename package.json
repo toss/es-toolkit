@@ -162,6 +162,16 @@
           "default": "./dist/function/index.js"
         }
       },
+      "./map": {
+        "import": {
+          "types": "./dist/map/index.d.mts",
+          "default": "./dist/map/index.mjs"
+        },
+        "require": {
+          "types": "./dist/map/index.d.ts",
+          "default": "./dist/map/index.js"
+        }
+      },
       "./math": {
         "import": {
           "types": "./dist/math/index.d.mts",
@@ -200,6 +210,16 @@
         "require": {
           "types": "./dist/promise/index.d.ts",
           "default": "./dist/promise/index.js"
+        }
+      },
+      "./set": {
+        "import": {
+          "types": "./dist/set/index.d.mts",
+          "default": "./dist/set/index.mjs"
+        },
+        "require": {
+          "types": "./dist/set/index.d.ts",
+          "default": "./dist/set/index.js"
         }
       },
       "./string": {
