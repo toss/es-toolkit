@@ -12,6 +12,10 @@ const result = difference(firstArr, secondArr);
 
 Use `difference` when you want to find the difference between two arrays. A new array is returned containing elements that are only in the first array and not in the second array.
 
+The function now provides enhanced TypeScript type inference —
+when the second array contains literal or specific values,
+the return type automatically narrows using `Exclude<T, U>` while maintaining backward compatibility.
+
 ```typescript
 import { difference } from 'es-toolkit/array';
 
@@ -20,6 +24,7 @@ const array1 = [1, 2, 3, 4, 5];
 const array2 = [2, 4];
 difference(array1, array2);
 // Returns: [1, 3, 5]
+// Type: (1 | 3 | 5)[]
 // 2 and 4 are excluded because they are in both arrays.
 
 // Find the difference of string arrays.
@@ -27,6 +32,7 @@ const colors1 = ['red', 'blue', 'green'];
 const colors2 = ['blue', 'yellow'];
 difference(colors1, colors2);
 // Returns: ['red', 'green']
+// Type: ('red' | 'green')[]
 ```
 
 The difference with an empty array is the same as the original array.
@@ -40,12 +46,13 @@ difference([], [1, 2, 3]); // []
 
 #### Parameters
 
-- `firstArr` (`T[]`): The reference array to find the difference from.
-- `secondArr` (`T[]`): The array containing elements to exclude from the first array.
+- `firstArr` (`readonly T[]`): The reference array to find the difference from.
+- `secondArr` (`readonly U[]`): The array containing elements to exclude from the first array. When the second array is defined with literal values, the return type is automatically narrowed to `Exclude<T, U>[]`.
 
 #### Returns
 
-(`T[]`): A new array containing elements that are only in the first array and not in the second array.
+(`Exclude<T, U>[]`): A new array containing elements that are only in the first array and not in the second array.
+If the second array is typed broadly, the return type falls back to T[].
 
 ## Performance Comparison
 
