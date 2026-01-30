@@ -53,7 +53,7 @@ jobs:
       - name: Check Package Entrypoints
         run: 'yarn attw out/*.tgz'
       - id: extract-changelog
-        uses: dahlia/submark@ed8f47b4d51fda07e12b6e991641a8bd5ec62f8e
+        uses: dahlia/submark@5a5ff0a58382fb812616a5801402f5aef00f90ce
         with:
           input-file: CHANGELOG.md
           heading-level: 2
