@@ -53,6 +53,7 @@ export default defineConfig(
     },
     rules: {
       ...vitest.configs.recommended.rules,
+      'vitest/no-conditional-expect': 'warn',
       'vitest/no-commented-out-tests': 'warn',
       'vitest/valid-expect': 'warn',
     },
