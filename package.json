@@ -46,7 +46,8 @@
   ],
   "workspaces": [
     "docs",
-    "benchmarks"
+    "benchmarks",
+    "new-docs"
   ],
   "scripts": {
     "bench": "vitest bench",

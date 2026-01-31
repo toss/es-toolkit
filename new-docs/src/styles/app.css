@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/* es-toolkit brand color */
+:root {
+  --fd-primary: #10b981;
+  --fd-primary-foreground: #ffffff;
+}
