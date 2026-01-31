@@ -1,0 +1,46 @@
+---
+title: chunk
+description: Splits an array into smaller arrays of a specified size. (Lodash compatible)
+---
+
+# chunk
+
+Splits an array into smaller arrays of a specified length.
+
+This function is fully compatible with Lodash's `chunk` function.
+
+## Signature
+
+```typescript
+function chunk<T>(arr: ArrayLike<T> | null | undefined, size?: number): T[][];
+```
+
+### Parameters
+
+- `arr` (`ArrayLike<T> | null | undefined`): The array to be chunked. Can be null or undefined.
+- `size` (`number`): The size of each chunk. Defaults to 1.
+
+### Returns
+
+(`T[][]`): A two-dimensional array where each sub-array has a maximum length of `size`.
+
+## Examples
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+chunk([1, 2, 3, 4, 5], 2);
+// Returns: [[1, 2], [3, 4], [5]]
+
+chunk([1, 2, 3, 4, 5]);
+// Returns: [[1], [2], [3], [4], [5]]
+
+chunk(null, 2);
+// Returns: []
+```
+
+## Differences from es-toolkit
+
+- Accepts `null` and `undefined` as input (returns empty array)
+- `size` parameter is optional (defaults to 1)
+- Accepts `ArrayLike` objects, not just arrays

@@ -1,0 +1,35 @@
+---
+title: chunk
+description: Splits an array into smaller arrays of a specified size.
+---
+
+# chunk
+
+Splits an array into smaller arrays of a specified length.
+
+## Signature
+
+```typescript
+function chunk<T>(arr: T[], size: number): T[][];
+```
+
+### Parameters
+
+- `arr` (`T[]`): The array to be chunked.
+- `size` (`number`): The size of each chunk. Must be a positive integer.
+
+### Returns
+
+(`T[][]`): A two-dimensional array where each sub-array has a maximum length of `size`.
+
+## Examples
+
+```typescript
+import { chunk } from 'es-toolkit';
+
+chunk([1, 2, 3, 4, 5], 2);
+// Returns: [[1, 2], [3, 4], [5]]
+
+chunk([1, 2, 3, 4, 5], 3);
+// Returns: [[1, 2, 3], [4, 5]]
+```
