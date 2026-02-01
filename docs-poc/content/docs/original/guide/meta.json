@@ -1,0 +1,4 @@
+{
+  "title": "Get Started",
+  "pages": ["intro", "usage", "bundle-size", "performance", "compatibility"]
+}
