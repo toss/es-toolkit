@@ -1,6 +1,6 @@
-import type { Config } from '@react-router/dev/config';
-import { glob } from 'node:fs/promises';
 import { createGetUrl, getSlugs } from 'fumadocs-core/source';
+import { glob } from 'node:fs/promises';
+import type { Config } from '@react-router/dev/config';
 
 const getUrl = createGetUrl('/docs');
 

@@ -94,7 +94,8 @@ export const translations = {
         },
         widelyAdopted: {
           title: '넓은 사용처',
-          description: 'Storybook, Recharts, ink, MUI, CKEditor와 같은 인기 있는 오픈 소스 라이브러리에서 널리 사용되고 있어요.',
+          description:
+            'Storybook, Recharts, ink, MUI, CKEditor와 같은 인기 있는 오픈 소스 라이브러리에서 널리 사용되고 있어요.',
         },
         battleTested: {
           title: '테스트 커버리지 100%',
@@ -128,7 +129,8 @@ export const translations = {
       features: {
         performance: {
           title: '高速なパフォーマンス',
-          description: '同様の機能を提供する他のライブラリと比較して、平均2-3倍高速な実行時パフォーマンスを提供します。',
+          description:
+            '同様の機能を提供する他のライブラリと比較して、平均2-3倍高速な実行時パフォーマンスを提供します。',
         },
         bundleSize: {
           title: '小さなバンドルサイズ',
@@ -148,7 +150,8 @@ export const translations = {
         },
         widelyAdopted: {
           title: '幅広い採用',
-          description: 'Storybook、Recharts、ink、MUI、CKEditorなどの人気のオープンソースプロジェクトから信頼されています。',
+          description:
+            'Storybook、Recharts、ink、MUI、CKEditorなどの人気のオープンソースプロジェクトから信頼されています。',
         },
         battleTested: {
           title: 'テストカバレッジ100%',

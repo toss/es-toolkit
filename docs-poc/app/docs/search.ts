@@ -1,8 +1,8 @@
-import type { Route } from './+types/search';
 import { createFromSource } from 'fumadocs-core/search/server';
 import { source } from '@/lib/source';
-import { createTokenizer as createMandarinTokenizer } from '@orama/tokenizers/mandarin';
 import { createTokenizer as createJapaneseTokenizer } from '@orama/tokenizers/japanese';
+import { createTokenizer as createMandarinTokenizer } from '@orama/tokenizers/mandarin';
+import type { Route } from './+types/search';
 
 const server = createFromSource(source, {
   localeMap: {

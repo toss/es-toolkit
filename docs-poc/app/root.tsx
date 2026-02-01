@@ -1,18 +1,10 @@
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useParams,
-} from 'react-router';
-import { RootProvider } from 'fumadocs-ui/provider/base';
 import { ReactRouterProvider } from 'fumadocs-core/framework/react-router';
 import { defineI18nUI } from 'fumadocs-ui/i18n';
-import { i18n } from './lib/i18n';
+import { RootProvider } from 'fumadocs-ui/provider/base';
+import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useParams } from 'react-router';
 import type { Route } from './+types/root';
 import './app.css';
+import { i18n } from './lib/i18n';
 
 const { provider } = defineI18nUI(i18n, {
   translations: {
@@ -141,8 +133,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   if (isRouteErrorResponse(error)) {
     message = error.status === 404 ? '404' : 'Error';
-    details =
-      error.status === 404 ? 'The requested page could not be found.' : error.statusText || details;
+    details = error.status === 404 ? 'The requested page could not be found.' : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;

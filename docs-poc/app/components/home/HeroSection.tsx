@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
-import { BackgroundEffects } from './BackgroundEffects';
 import { getTranslation } from '@/lib/translations';
+import { BackgroundEffects } from './BackgroundEffects';
 
 function HighlightedCode() {
   return (
