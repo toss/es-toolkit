@@ -1,0 +1,5 @@
+{
+  "title": "默认",
+  "root": true,
+  "pages": ["---指南---", "...guide", "---参考---", "...reference"]
+}

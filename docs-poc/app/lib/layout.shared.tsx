@@ -1,39 +1,38 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import { i18n } from './i18n';
+import { getTranslation } from './translations';
 
-export function baseOptions(): BaseLayoutProps {
+export function baseOptions(locale: string): BaseLayoutProps {
+  const langPrefix = locale === i18n.defaultLanguage ? '' : `/${locale}`;
+  const t = getTranslation(locale);
+
   return {
+    i18n,
     nav: {
       title: (
         <>
-          <img
-            src="/logo_black.png"
-            alt="es-toolkit"
-            className="h-4 dark:hidden"
-          />
-          <img
-            src="/logo_white.png"
-            alt="es-toolkit"
-            className="h-4 hidden dark:block"
-          />
+          <img src="/logo_black.png" alt="es-toolkit" className="h-4 dark:hidden" />
+          <img src="/logo_white.png" alt="es-toolkit" className="h-4 hidden dark:block" />
         </>
       ),
+      url: langPrefix || '/',
     },
     links: [
       {
-        text: 'Introduction',
-        url: '/docs/original/guide/intro',
+        text: t.nav.introduction,
+        url: `${langPrefix}/docs/default/guide/intro`,
         active: 'nested-url',
         on: 'nav',
       },
       {
-        text: 'Reference',
-        url: '/docs/original/reference/array/chunk',
+        text: t.nav.reference,
+        url: `${langPrefix}/docs/default/reference/array/chunk`,
         active: 'nested-url',
         on: 'nav',
       },
       {
-        text: 'Lodash Compatibility',
-        url: '/docs/compat/reference/array/chunk',
+        text: t.nav.lodashCompatibility,
+        url: `${langPrefix}/docs/compat/reference/array/chunk`,
         active: 'nested-url',
         on: 'nav',
       },

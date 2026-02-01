@@ -1,0 +1,5 @@
+{
+  "title": "기본",
+  "root": true,
+  "pages": ["---가이드---", "...guide", "---레퍼런스---", "...reference"]
+}

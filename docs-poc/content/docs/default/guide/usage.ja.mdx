@@ -1,0 +1,80 @@
+---
+title: インストールと使用方法
+description: es-toolkitの使用方法
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+
+Node.jsやBunを使用する場合は、[npm](https://npmjs.com/package/es-toolkit)からインストールできます。Denoでは[JSR](https://jsr.io/@es-toolkit/es-toolkit)からインストールできます。
+
+ブラウザで直接使用する場合は、CDNから取得できます。
+
+## Node.js & Bun
+
+es-toolkitはNode.js 18以降のバージョンとBunをサポートしています。es-toolkitをインストールするには、以下のコマンドを使用してください。
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun', 'deno']}>
+  <Tab value="npm">
+    ```sh
+    npm install es-toolkit
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```sh
+    pnpm add es-toolkit
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```sh
+    yarn add es-toolkit
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```sh
+    bun add es-toolkit
+    ```
+  </Tab>
+  <Tab value="deno">
+    ```sh
+    deno add @es-toolkit/es-toolkit
+    ```
+
+    Denoで使用する場合、JSRの制限により、NPMとは異なり追加のスコープが必要です。
+  </Tab>
+</Tabs>
+
+es-toolkitの関数を使うには、以下のように`import`して使用できます。
+
+```typescript
+import { sum } from 'es-toolkit';
+
+sum([1, 2, 3]);
+```
+
+## ブラウザ
+
+[jsdelivr](https://www.jsdelivr.com)や[unpkg](https://unpkg.com)などのCDNからes-toolkitを使用できます。Lodashと同様に、`_`変数にすべての関数が含まれています。
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/es-toolkit@^1"></script>
+<script>
+  var arr = _.chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
+
+モダンなブラウザでは[esm.sh](https://esm.sh)も使用できます。
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "es-toolkit": "https://esm.sh/es-toolkit@^1"
+    }
+  }
+</script>
+<script type="module">
+  import { chunk } from 'es-toolkit';
+
+  chunk([1, 2, 3, 4, 5, 6], 3);
+</script>
+```
