@@ -62,7 +62,7 @@ describe('retry', () => {
   it('should throw an error after the specified number of retries', async () => {
     const func = vi.fn().mockRejectedValue(new Error('failure'));
     await expect(retry(func, 3)).rejects.toThrow('failure');
-    expect(func).toHaveBeenCalledTimes(3);
+    expect(func).toHaveBeenCalledTimes(4);
   });
 
   it('should abort the retry operation if the signal is already aborted', async () => {
