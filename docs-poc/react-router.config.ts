@@ -11,7 +11,9 @@ export default {
     const excluded: string[] = ['/api/search'];
 
     for (const path of getStaticPaths()) {
-      if (!excluded.includes(path)) paths.push(path);
+      if (!excluded.includes(path)) {
+        paths.push(path);
+      }
     }
 
     for await (const entry of glob('**/*.mdx', { cwd: 'content/docs' })) {
