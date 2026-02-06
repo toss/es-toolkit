@@ -1,4 +1,4 @@
 {
   "title": "Reference",
-  "pages": ["array"]
+  "pages": ["array", "function", "math", "object", "predicate", "string", "util"]
 }
