@@ -3,8 +3,6 @@ title: 설치 및 사용하기
 description: es-toolkit을 사용하는 방법
 ---
 
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-
 Node.js나 Bun을 사용하는 경우, [npm](https://npmjs.com/package/es-toolkit)에서 설치할 수 있어요. Deno에서는 [JSR](https://jsr.io/@es-toolkit/es-toolkit)에서 설치할 수 있어요.
 
 브라우저에서 바로 쓰는 경우, CDN에서 가져올 수 있어요.
@@ -13,36 +11,19 @@ Node.js나 Bun을 사용하는 경우, [npm](https://npmjs.com/package/es-toolki
 
 es-toolkit은 Node.js 18 또는 이후 버전과 Bun을 지원해요. es-toolkit을 설치하기 위해서는 아래 명령어를 사용해주세요.
 
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun', 'deno']}>
-  <Tab value="npm">
-    ```sh
-    npm install es-toolkit
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```sh
-    pnpm add es-toolkit
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```sh
-    yarn add es-toolkit
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```sh
-    bun add es-toolkit
-    ```
-  </Tab>
-  <Tab value="deno">
-    ```sh
-    deno add @es-toolkit/es-toolkit
-    ```
+```package-install
+es-toolkit
+```
 
-    Deno에서 사용하면, JSR에서의 제한으로 인해 NPM과 다르게 추가적인 Scope가 필요해요.
+## Deno
 
-  </Tab>
-</Tabs>
+es-toolkit은 [JSR](https://jsr.io/@es-toolkit/es-toolkit)에서도 설치할 수 있어요. 아래 명령어를 사용해주세요.
+
+```sh
+deno add @es-toolkit/es-toolkit
+```
+
+Deno에서 사용하면, JSR에서의 제한으로 인해 NPM과 다르게 추가적인 Scope가 필요해요.
 
 es-toolkit의 함수를 사용하려면 아래와 같이 `import` 해서 사용하면 돼요.
 

@@ -3,8 +3,6 @@ title: インストールと使用方法
 description: es-toolkitの使用方法
 ---
 
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-
 Node.jsやBunを使用する場合は、[npm](https://npmjs.com/package/es-toolkit)からインストールできます。Denoでは[JSR](https://jsr.io/@es-toolkit/es-toolkit)からインストールできます。
 
 ブラウザで直接使用する場合は、CDNから取得できます。
@@ -13,36 +11,19 @@ Node.jsやBunを使用する場合は、[npm](https://npmjs.com/package/es-toolk
 
 es-toolkitはNode.js 18以降のバージョンとBunをサポートしています。es-toolkitをインストールするには、以下のコマンドを使用してください。
 
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun', 'deno']}>
-  <Tab value="npm">
-    ```sh
-    npm install es-toolkit
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```sh
-    pnpm add es-toolkit
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```sh
-    yarn add es-toolkit
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```sh
-    bun add es-toolkit
-    ```
-  </Tab>
-  <Tab value="deno">
-    ```sh
-    deno add @es-toolkit/es-toolkit
-    ```
+```package-install
+es-toolkit
+```
 
-    Denoで使用する場合、JSRの制限により、NPMとは異なり追加のスコープが必要です。
+## Deno
 
-  </Tab>
-</Tabs>
+es-toolkitは[JSR](https://jsr.io/@es-toolkit/es-toolkit)からもインストールできます。以下のコマンドを使用してください。
+
+```sh
+deno add @es-toolkit/es-toolkit
+```
+
+Denoで使用する場合、JSRの制限により、NPMとは異なり追加のスコープが必要です。
 
 es-toolkitの関数を使うには、以下のように`import`して使用できます。
 

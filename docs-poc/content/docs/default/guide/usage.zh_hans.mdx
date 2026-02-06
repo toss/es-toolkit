@@ -3,8 +3,6 @@ title: 使用方法
 description: 如何使用 es-toolkit
 ---
 
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-
 es-toolkit 可通过 [npm](https://npmjs.com/package/es-toolkit) 安装，适用于 Node.js 和 Bun，也可以通过 [JSR](https://jsr.io/@es-toolkit/es-toolkit) 安装到 Deno。
 
 你也可以通过从 CDN 导入的方式在浏览器中使用 es-toolkit。
@@ -13,36 +11,19 @@ es-toolkit 可通过 [npm](https://npmjs.com/package/es-toolkit) 安装，适用
 
 es-toolkit 支持 Node.js 18及更高版本和Bun。使用以下命令安装 es-toolkit：
 
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun', 'deno']}>
-  <Tab value="npm">
-    ```sh
-    npm install es-toolkit
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```sh
-    pnpm add es-toolkit
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```sh
-    yarn add es-toolkit
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```sh
-    bun add es-toolkit
-    ```
-  </Tab>
-  <Tab value="deno">
-    ```sh
-    deno add @es-toolkit/es-toolkit
-    ```
+```package-install
+es-toolkit
+```
 
-    请注意，根据 JSR 的限制，包名包含额外的作用域，与 npm 不同。
+## Deno
 
-  </Tab>
-</Tabs>
+es-toolkit 也可以通过 [JSR](https://jsr.io/@es-toolkit/es-toolkit) 安装。使用以下命令：
+
+```sh
+deno add @es-toolkit/es-toolkit
+```
+
+请注意，根据 JSR 的限制，包名包含额外的作用域，与 npm 不同。
 
 要使用 es-toolkit 的函数，只需像下面这样使用 `import` 语句即可。
 
