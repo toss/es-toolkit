@@ -1,5 +1,5 @@
-import { source } from '@/lib/source';
 import { getLLMText } from '@/lib/get-llm-text';
+import { source } from '@/lib/source';
 
 export async function loader() {
   const scan = source.getPages('en').map(getLLMText);
