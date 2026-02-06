@@ -133,11 +133,11 @@ leadingFn();
 
 // trailing 选项示例
 const trailingFn = throttle(
-  () => {
-    console.log('Trailing function executed');
-  },
-  1000,
-  { trailing: true }
+() => {
+console.log('Trailing function executed');
+},
+1000,
+{ trailing: true }
 );
 
 // 立即打印 'Trailing function executed'
@@ -146,14 +146,17 @@ trailingFn();
 
 // leading: false, trailing: true 选项示例
 const trailingOnlyFn = throttle(
-  () => {
-    console.log('Trailing-only function executed');
-  },
-  1000,
-  { leading: false, trailing: true }
+() => {
+console.log('Trailing-only function executed');
+},
+1000,
+{ leading: false, trailing: true }
 );
 
 // 'Trailing-only function executed' 最初不会打印
 // 即使继续调用也每秒打印一次 'Trailing-only function executed'
 trailingOnlyFn();
+
+```
+
 ```

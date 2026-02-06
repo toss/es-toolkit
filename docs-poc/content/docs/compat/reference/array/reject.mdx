@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 This `reject` function is implemented with complexity to support various predicate forms for compatibility with Lodash. For simple function predicates, `Array.filter()` works more simply and faster.
 
 Instead, use the faster and more modern `Array.filter()`. For example, `reject(arr, func)` can be replaced with `arr.filter(item => !func(item))`.
+
 </Callout>
 Iterates over a collection and returns a new array of elements that do not match the predicate function.
 

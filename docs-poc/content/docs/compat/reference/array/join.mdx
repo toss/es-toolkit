@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 This `join` function is slow due to handling ArrayLike objects, null/undefined, etc.
 
 Use the faster and more modern `Array.prototype.join()` instead.
+
 </Callout>
 Joins the elements of an array into a string.
 
@@ -59,7 +60,7 @@ To ensure full compatibility with lodash, the `join` function processes `array` 
 
 - If `array` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
 - If `array` is `null` or `undefined`, it is treated as an empty array.
-</Callout>
+  </Callout>
 - `separator` (`string`, optional) - The separator used to join the elements. Defaults to `,`.
 
 #### Returns

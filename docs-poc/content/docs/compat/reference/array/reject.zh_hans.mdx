@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 此 `reject` 函数为了与 Lodash 兼容而支持多种形式的 predicate，因此实现较为复杂。对于简单的函数 predicate，使用 `Array.filter()` 会更简单和更快。
 
 请使用更快、更现代的 `Array.filter()`。例如，`reject(arr, func)` 可以替换为 `arr.filter(item => !func(item))`。
+
 </Callout>
 遍历集合并返回一个由不符合条件函数的元素组成的新数组。
 

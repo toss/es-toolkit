@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 この `join` 関数は、ArrayLike オブジェクトの処理、null/undefined の処理などにより動作が遅くなります。
 
 代わりに、より高速で現代的な `Array.prototype.join()` を使用してください。
+
 </Callout>
 配列の要素を文字列に結合します。
 
@@ -59,7 +60,7 @@ lodash と完全に互換性があるように、`join` 関数は `array` を次
 
 - `array` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
 - `array` が `null` または `undefined` の場合、空の配列と見なされます。
-</Callout>
+  </Callout>
 - `separator` (`string`, オプション) - 要素を結合するために使用するセパレータです。デフォルト値は `,` です。
 
 #### 戻り値

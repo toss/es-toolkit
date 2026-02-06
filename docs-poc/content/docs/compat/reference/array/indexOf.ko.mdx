@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 이 `indexOf` 함수는 `NaN` 처리를 위한 추가 로직으로 인해 느리게 동작해요.
 
 `NaN`을 찾지 않는다면 더 빠른 `Array.prototype.indexOf`를, `NaN`을 포함해서 찾으려면 `Array.prototype.findIndex`와 `Number.isNaN`을 사용하세요.
+
 </Callout>
 배열에서 주어진 요소가 첫 번째로 일치하는 인덱스를 찾아요.
 
@@ -60,7 +61,7 @@ lodash와 완전히 호환되도록 `indexOf` 함수는 `array`를 다음과 같
 
 - `array`가 `ArrayLike<T>`인 경우, 배열로 변환하기 위해 `Array.from(...)`을 사용해요.
 - `array`가 `null` 또는 `undefined`인 경우, 빈 배열로 간주돼요.
-</Callout>
+  </Callout>
 - `searchElement` (`T`): 찾을 값이에요.
 - `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 음수를 사용하면 배열 끝에서부터 계산해요. 기본값은 `0`이에요.
 

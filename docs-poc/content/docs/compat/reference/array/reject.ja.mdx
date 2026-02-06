@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 この`reject`関数は、Lodashとの互換性のために様々な形式のpredicateをサポートするため、複雑に実装されています。シンプルな関数predicateを使用する場合は、`Array.filter()`の方がよりシンプルで高速に動作します。
 
 代わりに、より高速で現代的な`Array.filter()`を使用してください。例えば、`reject(arr, func)`は`arr.filter(item => !func(item))`に置き換えることができます。
+
 </Callout>
 コレクションを走査し、条件関数に一致しない要素を新しい配列として返します。
 

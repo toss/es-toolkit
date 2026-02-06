@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 由于需要处理 ArrayLike 对象、null/undefined 等,这个 `join` 函数运行缓慢。
 
 请改用更快、更现代的 `Array.prototype.join()`。
+
 </Callout>
 将数组中的元素连接成一个字符串。
 
@@ -59,7 +60,7 @@ join(undefined, '-'); // => ""
 
 - 如果 `array` 是 `ArrayLike<T>`,它会使用 `Array.from(...)` 将其转换为数组。
 - 如果 `array` 是 `null` 或 `undefined`,它会被视为一个空数组。
-</Callout>
+  </Callout>
 - `separator` (`string`, 可选) - 用于连接元素的分隔符。默认值为 `,`。
 
 #### 返回值

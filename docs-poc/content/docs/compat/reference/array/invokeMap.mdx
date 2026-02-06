@@ -10,6 +10,7 @@ This `invokeMap` function is slow due to handling `null` or `undefined`, method 
 Use the faster and more modern `Array.map` and `Object.values(...).map` instead.
 
 For example, `invokeMap([1, 2, 3], 'toString')` can be written as `[1, 2, 3].map(x => x.toString())`.
+
 </Callout>
 Invokes the specified method on each element in the array or object and returns an array of results.
 

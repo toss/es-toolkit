@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 This `indexOf` function operates slowly due to additional logic for handling `NaN`.
 
 If you're not looking for `NaN`, use the faster `Array.prototype.indexOf`. To find `NaN`, use `Array.prototype.findIndex` with `Number.isNaN`.
+
 </Callout>
 Finds the index of the first occurrence of a given element in an array.
 
@@ -60,7 +61,7 @@ To ensure full compatibility with lodash, the `indexOf` function handles `array`
 
 - If `array` is `ArrayLike<T>`, it uses `Array.from(...)` to convert it to an array.
 - If `array` is `null` or `undefined`, it's treated as an empty array.
-</Callout>
+  </Callout>
 - `searchElement` (`T`): The value to find.
 - `fromIndex` (`number`, optional): The index to start searching from. If negative, it's calculated from the end of the array. Defaults to `0`.
 

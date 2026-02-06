@@ -154,11 +154,11 @@ leadingFn();
 
 // trailingオプションの例
 const trailingFn = debounce(
-  () => {
-    console.log('Trailing function executed');
-  },
-  1000,
-  { trailing: true }
+() => {
+console.log('Trailing function executed');
+},
+1000,
+{ trailing: true }
 );
 
 // デバウンスされた関数がその間に呼び出されなければ、'Trailing function executed'を1秒後にログに記録します。
@@ -166,11 +166,11 @@ trailingFn();
 
 // maxWaitオプションの例
 const maxWaitFn = debounce(
-  () => {
-    console.log('MaxWait function executed');
-  },
-  1000,
-  { maxWait: 2000 }
+() => {
+console.log('MaxWait function executed');
+},
+1000,
+{ maxWait: 2000 }
 );
 
 // 'MaxWait function executed'を2秒以内に必ずログに記録します。
@@ -181,4 +181,7 @@ setTimeout(maxWaitFn, 1500);
 setTimeout(maxWaitFn, 2000);
 setTimeout(maxWaitFn, 2500);
 setTimeout(maxWaitFn, 3000);
+
+```
+
 ```

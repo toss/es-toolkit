@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 この`indexOf`関数は、`NaN`処理のための追加ロジックにより、動作が遅くなります。
 
 `NaN`を探していない場合は、より高速な`Array.prototype.indexOf`を使用してください。`NaN`を見つける場合は、`Array.prototype.findIndex`と`Number.isNaN`を使用してください。
+
 </Callout>
 配列内で指定された要素が最初に一致するインデックスを見つけます。
 
@@ -60,7 +61,7 @@ lodash と完全に互換性があるように、`indexOf` 関数は `array` を
 
 - `array` が `ArrayLike<T>` の場合、配列に変換するために `Array.from(...)` を使用します。
 - `array` が `null` または `undefined` の場合、空の配列と見なされます。
-</Callout>
+  </Callout>
 - `searchElement` (`T`): 検索する値です。
 - `fromIndex` (`number`, オプション): 検索を開始するインデックスです。負の数の場合、配列の末尾から計算されます。デフォルト値は `0` です。
 

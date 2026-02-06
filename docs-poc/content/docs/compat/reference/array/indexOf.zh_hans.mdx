@@ -8,6 +8,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 此 `indexOf` 函数由于处理 `NaN` 的额外逻辑而运行缓慢。
 
 如果不查找 `NaN`，请使用更快的 `Array.prototype.indexOf`。要查找 `NaN`，请使用 `Array.prototype.findIndex` 和 `Number.isNaN`。
+
 </Callout>
 查找数组中第一个出现的值的索引。
 
@@ -60,7 +61,7 @@ indexOf(undefined, 1); // => -1
 
 - 如果 `array` 是 `ArrayLike<T>`，它会使用 `Array.from(...)` 将其转换为数组。
 - 如果 `array` 是 `null` 或 `undefined`，它会被视为一个空数组。
-</Callout>
+  </Callout>
 - `searchElement` (`T`): 要查找的值。
 - `fromIndex` (`number`, 可选): 开始搜索的索引。如果为负数，则从数组末尾开始计算。默认值为 `0`。
 
