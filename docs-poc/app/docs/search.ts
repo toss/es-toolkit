@@ -3,6 +3,7 @@ import { source } from '@/lib/source';
 import { createTokenizer as createJapaneseTokenizer } from '@orama/tokenizers/japanese';
 import { createTokenizer as createMandarinTokenizer } from '@orama/tokenizers/mandarin';
 import type { Route } from './+types/search';
+import { createTokenizer as createKoreanTokenizer } from './korean-tokenizer';
 
 const server = createFromSource(source, {
   localeMap: {
@@ -10,9 +11,15 @@ const server = createFromSource(source, {
     en: {
       language: 'english',
     },
-    // Korean - no official tokenizer, fallback to english
+    // Korean - use Korean tokenizer with Intl.Segmenter
     ko: {
-      language: 'english',
+      components: {
+        tokenizer: createKoreanTokenizer(),
+      },
+      search: {
+        threshold: 0,
+        tolerance: 0,
+      },
     },
     // Japanese - use Japanese tokenizer
     ja: {

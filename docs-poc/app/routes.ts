@@ -6,4 +6,6 @@ export default [
   route(':lang/docs/*', 'docs/page.tsx', { id: 'docs-lang' }),
   route('docs/*', 'docs/page.tsx', { id: 'docs-default' }),
   route('api/search', 'docs/search.ts'),
+  route('llms.txt', 'llms/llms.ts'),
+  route('llms-full.txt', 'llms/llms-full.ts'),
 ] satisfies RouteConfig;
