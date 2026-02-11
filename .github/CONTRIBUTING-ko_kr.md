@@ -35,6 +35,8 @@ JavaScript의 내장 함수로는 만들기 어렵지만 자주 필요하고 유
 - `isNumber` (`typeof value === 'number'`를 대신 사용)
 - `min` (`Math.min()`를 대신 사용)
 
+TC39 제안에 포함된 함수의 경우, Stage 3에 도달하면 구현하지 않아요. Stage 2.7 이하의 초기 제안에 대해서는 명확한 필요가 있다면 추가를 고려할 수 있지만, 제안이 Stage 3 이상으로 진행되면 해당 함수를 지원 중단할 예정이에요. 그 시점에서는 네이티브 구현을 사용하는 것이 더 나은 선택이기 때문이에요.
+
 #### `es-toolkit/compat`
 
 [`Lodash`](https://lodash.com/docs/4.17.15)를 사용하는 프로젝트가 es-toolkit로 쉽게 마이그레이션할 수 있도록 돕기 위해, `Lodash`에서 제공하는 모든 함수를 구현해요.

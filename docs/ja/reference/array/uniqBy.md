@@ -59,7 +59,7 @@ console.log(uniqueByCategory);
 #### パラメータ
 
 - `arr` (`readonly T[]`): 重複を除く配列です。
-- `mapper` (`(item: T) => U`): 各要素を比較する値に変換する関数です。
+- `mapper` (`(item: T, index: number, array: readonly T[]) => U`): 各要素を比較する値に変換する関数です。要素、インデックス、配列を引数として受け取ります。
 
 #### 戻り値
 

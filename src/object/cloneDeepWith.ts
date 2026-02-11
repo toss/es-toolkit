@@ -210,13 +210,14 @@ export function cloneDeepWithImpl<T>(
   }
 
   if (valueToClone instanceof Error) {
-    const result = new (valueToClone.constructor as { new (): Error })();
+    const result = structuredClone(valueToClone) as Error;
     stack.set(valueToClone, result);
 
     result.message = valueToClone.message;
     result.name = valueToClone.name;
     result.stack = valueToClone.stack;
     result.cause = valueToClone.cause;
+    result.constructor = valueToClone.constructor;
 
     copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
 

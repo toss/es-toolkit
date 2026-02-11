@@ -1,5 +1,26 @@
 # es-toolkit Changelog
 
+## Version v1.44.0
+
+Released on January 16th, 2026.
+
+- Added `shouldRetry` option to `retry` function. ([#1585])
+- Added `isEmptyObject` predicate function. ([#1584])
+- Added `isNumber` predicate function.
+- Enhanced error cloning to support `AggregateError`. ([#1563])
+- Implemented collection methods for Maps and Sets.
+- Added bundle size analysis and visualization components to docs. ([#1564])
+- Fixed `flattenObject` to retain empty objects and arrays.
+- Enhanced type safety for `clone` function.
+- Fixed `clone` error when cloning object with null prototype. ([#1570])
+- Fixed array function callbacks to include index and array parameters. ([#1561])
+- Fixed `compat/cloneDeep` and `cloneDeepWith` to clone null-prototype objects as regular objects. ([#1562])
+- Fixed `compat/clamp` to ensure consistency with lodash. ([#1555])
+- Simplified `intersection` filter callback for consistency. ([#1582])
+- Fixed incorrect function names and output in `cloneDeep` JSDoc examples. ([#1583])
+
+We sincerely thank @raon0211, @dayongkr, @eunwoo-levi, @matt-oakes, @T3sT3ro, and @D-Sketon for their contributions. We appreciate your great efforts!
+
 ## Version v1.43.0
 
 Released on December 12th, 2025.

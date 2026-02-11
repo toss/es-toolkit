@@ -24,4 +24,16 @@ describe('uniqBy', () => {
       { id: 3, value: 'cherry' },
     ]);
   });
+
+  it('should provide index parameter to mapper function', () => {
+    const items = [{ value: 1 }, { value: 2 }, { value: 1 }];
+    const result = uniqBy(items, (item, index) => item.value + index);
+    expect(result).toEqual([{ value: 1 }, { value: 2 }]);
+  });
+
+  it('should provide array parameter to mapper function', () => {
+    const items = [{ value: 1 }, { value: 2 }, { value: 1 }];
+    const result = uniqBy(items, (item, _index, array) => item.value * array.length);
+    expect(result).toEqual([{ value: 1 }, { value: 2 }]);
+  });
 });

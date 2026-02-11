@@ -53,7 +53,7 @@ describe('bind', () => {
     expect(actual3[1]).toBe('b');
   });
 
-  it('should partially apply arguments ', () => {
+  it('should partially apply arguments', () => {
     const object = {};
     let bound = bind(fn, object, 'a');
 

@@ -44,6 +44,11 @@ export function clone<T>(obj: T): T {
   }
 
   const prototype = Object.getPrototypeOf(obj);
+
+  if (prototype == null) {
+    return Object.assign(Object.create(prototype), obj);
+  }
+
   const Constructor = prototype.constructor;
 
   if (obj instanceof Date || obj instanceof Map || obj instanceof Set) {

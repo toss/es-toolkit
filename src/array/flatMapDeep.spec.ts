@@ -17,4 +17,16 @@ describe('flatMapDeep', () => {
     const result = flatMapDeep([], n => [[n]]);
     expect(result).toEqual([]);
   });
+
+  it('should provide index parameter to iteratee function', () => {
+    const arr = [1, 2, 3];
+    const result = flatMapDeep(arr, (item, index) => [[item + index]]);
+    expect(result).toEqual([1, 3, 5]);
+  });
+
+  it('should provide array parameter to iteratee function', () => {
+    const arr = [1, 2, 3];
+    const result = flatMapDeep(arr, (item, _index, array) => [[item * array.length]]);
+    expect(result).toEqual([3, 6, 9]);
+  });
 });

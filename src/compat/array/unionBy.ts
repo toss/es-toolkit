@@ -1,6 +1,7 @@
 import { last } from '../../array/last.ts';
 import { uniq } from '../../array/uniq.ts';
 import { uniqBy } from '../../array/uniqBy.ts';
+import { ary } from '../../function/ary.ts';
 import { flattenArrayLike } from '../_internal/flattenArrayLike.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
 import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
@@ -154,5 +155,5 @@ export function unionBy<T>(...values: Array<ArrayLike<T> | null | undefined | It
     return uniq(flattened);
   }
 
-  return uniqBy(flattened, iteratee(lastValue));
+  return uniqBy(flattened, ary(iteratee(lastValue), 1));
 }
