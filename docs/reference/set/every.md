@@ -58,7 +58,7 @@ const allActive = every(users, user => user.active);
 #### Parameters
 
 - `set` (`Set<T>`): The Set to test.
-- `doesMatch` (`(value: T, value2: T, set: Set<T>) => boolean`): A predicate function that tests each element.
+- `doesMatch` (`(value: T, set: Set<T>) => boolean`): A predicate function that tests each element.
 
 #### Returns
 

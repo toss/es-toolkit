@@ -63,7 +63,7 @@ const ageGroups = countBy(ages, age => {
 #### Parameters
 
 - `set` (`Set<T>`): The Set to count occurrences from.
-- `mapper` (`(value: T, value2: T, set: Set<T>) => K`): The function to produce a key for counting.
+- `mapper` (`(value: T, set: Set<T>) => K`): The function to produce a key for counting.
 
 #### Returns
 

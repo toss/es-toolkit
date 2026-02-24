@@ -8,7 +8,7 @@
  * @template T - The type of elements in the Set.
  * @template K - The type of keys produced by the transformation function.
  * @param {Set<T>} set - The Set to count occurrences from.
- * @param {(value: T, value2: T, set: Set<T>) => K} mapper - The function to produce a key for counting.
+ * @param {(value: T, set: Set<T>) => K} mapper - The function to produce a key for counting.
  * @returns {Map<K, number>} A Map containing the mapped keys and their counts.
  *
  * @example
@@ -21,11 +21,11 @@
  * const result = countBy(set, (value) => value.length);
  * // result will be Map(2) { 5 => 1, 6 => 2 }
  */
-export function countBy<T, K>(set: Set<T>, mapper: (value: T, value2: T, set: Set<T>) => K): Map<K, number> {
+export function countBy<T, K>(set: Set<T>, mapper: (value: T, set: Set<T>) => K): Map<K, number> {
   const result = new Map<K, number>();
 
   for (const value of set) {
-    const mappedKey = mapper(value, value, set);
+    const mappedKey = mapper(value, set);
     result.set(mappedKey, (result.get(mappedKey) ?? 0) + 1);
   }
 

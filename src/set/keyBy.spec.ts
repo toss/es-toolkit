@@ -23,7 +23,7 @@ describe('keyBy', () => {
   it('should pass the original set to the key function', () => {
     const set = new Set([1, 2, 3]);
 
-    const result = keyBy(set, (value, value2, originalSet) => {
+    const result = keyBy(set, (value, originalSet) => {
       expect(originalSet).toBe(set);
       return value >= originalSet.size ? 'large' : 'small';
     });

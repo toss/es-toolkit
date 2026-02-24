@@ -37,7 +37,7 @@ describe('reduce', () => {
 
     const result = reduce(
       set,
-      (acc, value, value2, originalSet) => {
+      (acc, value, originalSet) => {
         expect(originalSet).toBe(set);
         return acc + value;
       },

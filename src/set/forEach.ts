@@ -7,7 +7,7 @@
  *
  * @template T - The type of elements in the Set.
  * @param {Set<T>} set - The Set to iterate over.
- * @param {(value: T, value2: T, set: Set<T>) => void} callback - A function to execute for each element.
+ * @param {(value: T, set: Set<T>) => void} callback - A function to execute for each element.
  * @returns {void}
  *
  * @example
@@ -20,8 +20,8 @@
  * // 4
  * // 6
  */
-export function forEach<T>(set: Set<T>, callback: (value: T, value2: T, set: Set<T>) => void): void {
+export function forEach<T>(set: Set<T>, callback: (value: T, set: Set<T>) => void): void {
   for (const value of set) {
-    callback(value, value, set);
+    callback(value, set);
   }
 }

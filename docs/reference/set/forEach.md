@@ -85,7 +85,7 @@ forEach(users, user => {
 #### Parameters
 
 - `set` (`Set<T>`): The Set to iterate over.
-- `callback` (`(value: T, value2: T, set: Set<T>) => void`): A function to execute for each element.
+- `callback` (`(value: T, set: Set<T>) => void`): A function to execute for each element.
 
 #### Returns
 
