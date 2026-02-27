@@ -13,7 +13,7 @@
     "vitepress": "^1.6.4",
     "vitepress-plugin-llms": "^1.10.0",
     "vitepress-plugin-sandpack": "^1.1.4",
-    "vue": "^3.4.37",
+    "vue": "^3.5.13",
     "vue-chartjs": "^5.3.3"
   }
 }
