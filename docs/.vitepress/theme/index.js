@@ -1,10 +1,11 @@
 import DefaultTheme from 'vitepress/theme';
-import { defineAsyncComponent, h } from 'vue';
+import { defineAsyncComponent, defineComponent, h, onMounted } from 'vue';
 import './index.css';
 import Banner from '../components/Banner.vue';
 import BundleSizeChart from '../components/BundleSizeChart.vue';
 import BundleSizeTable from '../components/BundleSizeTable.vue';
 import CompatibilityStatus from '../components/CompatibilityStatus.vue';
+import { useAutoLocale } from '../composables/useAutoLocale';
 
 /** @type {import('vitepress').Theme} */
 export default {
@@ -19,9 +20,13 @@ export default {
     app.component('BundleSizeChart', BundleSizeChart);
     app.component('BundleSizeTable', BundleSizeTable);
   },
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      'layout-bottom': () => h(Banner),
-    });
-  },
+  Layout: defineComponent({
+    setup() {
+      onMounted(() => useAutoLocale());
+      return () =>
+        h(DefaultTheme.Layout, null, {
+          'layout-bottom': () => h(Banner),
+        });
+    },
+  }),
 };
