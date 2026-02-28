@@ -27,10 +27,12 @@ const ENTRYPOINTS = [
   './compat/*',
   './error',
   './function',
+  './map',
   './math',
   './object',
   './predicate',
   './promise',
+  './set',
   './string',
   './util',
 ];
@@ -98,5 +100,63 @@ console.log(exported);
 
       expect(cjsResult.stdout).toEqual(esmResult.stdout);
     }
+  });
+
+  it('resolves all compat wildcard entrypoints in CJS and ESM', { timeout: 240_000 }, async () => {
+    const tmpdir = await createTmpDir();
+
+    const packageJson = {
+      dependencies: {
+        'es-toolkit': tarball.path,
+      },
+    };
+
+    await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
+    await execa('npm', ['install'], { cwd: tmpdir });
+
+    const compatDir = path.join(tmpdir, 'node_modules', 'es-toolkit', 'compat');
+    const compatEntrypoints = (await fs.promises.readdir(compatDir))
+      .filter(file => file.endsWith('.js'))
+      .map(file => file.replace(/\.js$/g, ''))
+      .sort((x, y) => x.localeCompare(y));
+
+    expect(compatEntrypoints.length).toBeGreaterThan(0);
+
+    const cjsScript = `
+const names = ${JSON.stringify(compatEntrypoints)};
+
+for (const name of names) {
+  const value = require('es-toolkit/compat/' + name);
+  if (value == null) {
+    throw new Error('No export from ' + name);
+  }
+}
+
+console.log(names.length);
+    `.trim();
+    const cjsScriptPath = path.join(tmpdir, 'script-compat.cjs');
+
+    const esmScript = `
+const names = ${JSON.stringify(compatEntrypoints)};
+
+for (const name of names) {
+  const imported = await import('es-toolkit/compat/' + name);
+  const value = imported.default ?? imported;
+  if (value == null) {
+    throw new Error('No export from ' + name);
+  }
+}
+
+console.log(names.length);
+    `.trim();
+    const esmScriptPath = path.join(tmpdir, 'script-compat.mjs');
+
+    await fs.promises.writeFile(cjsScriptPath, cjsScript);
+    await fs.promises.writeFile(esmScriptPath, esmScript);
+
+    const cjsResult = await execa('node', [cjsScriptPath]);
+    const esmResult = await execa('node', [esmScriptPath]);
+
+    expect(cjsResult.stdout).toEqual(esmResult.stdout);
   });
 });

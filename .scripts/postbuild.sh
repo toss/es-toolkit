@@ -32,6 +32,15 @@ create_compat_alias() {
     echo "export { $original as default } from '../dist/compat/$category/$original.js';" > compat/$alias.d.ts
 }
 
+# Function to create compat exports from a custom dist path
+create_compat_custom_export() {
+    local source_path=$1
+    local export_name=$2
+    local alias=$3
+    echo "module.exports = require('../dist/$source_path.js').$export_name;" > compat/$alias.js
+    echo "export { $export_name as default } from '../dist/$source_path.js';" > compat/$alias.d.ts
+}
+
 # Create root exports
 for module in array error compat function math map object predicate promise set string util; do
     create_root_export $module
@@ -71,7 +80,7 @@ for func in invert; do
 done
 
 # String functions
-for func in camelCase deburr endsWith escape escapeRegExp kebabCase lowerCase lowerFirst pad padEnd padStart repeat replace snakeCase split startCase startsWith template templateSettings toLower toUpper trim trimEnd trimStart truncate unescape upperCase upperFirst words; do
+for func in camelCase deburr endsWith escape escapeRegExp kebabCase lowerCase lowerFirst pad padEnd padStart repeat replace snakeCase split startCase startsWith template toLower toUpper trim trimEnd trimStart truncate unescape upperCase upperFirst words; do
     create_compat_export "string" "$func"
 done
 
@@ -91,9 +100,13 @@ for func in isEqual isFunction isLength isNull isUndefined; do
 done
 
 # Util functions
-for func in bindAll cond constant defaultTo eq gt gte invoke iteratee lt lte method methodOf now over overEvery overSome stubArray stubFalse stubObject stubString stubTrue times toArray toFinite toInteger toLength toNumber toPath toPlainObject toSafeInteger toString uniqueId; do
+for func in bindAll cond constant defaultTo gt gte invoke iteratee lt lte method methodOf now over overEvery overSome stubArray stubFalse stubObject stubString stubTrue times toArray toFinite toInteger toLength toNumber toPath toPlainObject toSafeInteger toString uniqueId; do
     create_compat_export "util" "$func"
 done
+
+# Custom exports
+create_compat_custom_export "compat/string/template" "templateSettings" "templateSettings"
+create_compat_custom_export "_internal/isEqualsSameValueZero" "isEqualsSameValueZero" "eq"
 
 # Create aliases
 create_compat_alias "array" "forEach" "each"
