@@ -57,4 +57,4 @@ const randomItem = sample(mixed);
 
 #### 戻り値
 
-(`T`): 配列から無作為に選択された要素です。
+(`T | undefined`): 配列から無作為に選択された要素です。配列が空の場合は `undefined` を返します。

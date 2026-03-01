@@ -57,4 +57,4 @@ const randomItem = sample(mixed);
 
 #### 返回值
 
-(`T`): 从数组中随机选择的元素。
+(`T | undefined`): 从数组中随机选择的元素。如果数组为空，则返回 `undefined`。

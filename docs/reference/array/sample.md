@@ -57,4 +57,4 @@ const randomItem = sample(mixed);
 
 #### Returns
 
-(`T`): A randomly selected element from the array.
+(`T | undefined`): A randomly selected element from the array, or `undefined` if the array is empty.
