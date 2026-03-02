@@ -142,7 +142,15 @@ export const shared = defineConfig({
             paths: [require.resolve('vitepress')],
           })
         ),
+        '@vue/server-renderer': path.dirname(
+          require.resolve('@vue/server-renderer/package.json', {
+            paths: [require.resolve('vitepress')],
+          })
+        ),
       },
+    },
+    ssr: {
+      noExternal: ['vue', '@vue/server-renderer'],
     },
     plugins: [
       llmstxt({

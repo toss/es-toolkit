@@ -1,5 +1,20 @@
 # es-toolkit Changelog
 
+## Version v1.45.0
+
+Released on March 2nd, 2026.
+
+- Fixed `findIndex` to add missing default parameter for `doesMatch`. ([#1373])
+- Fixed `sample` to include `undefined` in return union type. ([#1302])
+- Fixed `cloneDeep` to support cloning `Error` objects.
+- Fixed `retry` to correctly match retry count with the `retries` option.
+- Fixed missing `Map` and `Set` in check-dist entrypoints.
+- Fixed missing packages in `publishConfig`. ([#1597])
+- Reverted the overload for runtime-determined key arrays in `omit`. ([#1595])
+- Added AI Integration page with `llms.txt` documentation to docs.
+
+We sincerely thank @D-Sketon, @dayongkr, @matthiasfeist, @raon0211, and @screendriver for their contributions. We appreciate your great efforts!
+
 ## Version v1.44.0
 
 Released on January 16th, 2026.
