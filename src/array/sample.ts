@@ -5,7 +5,7 @@
  *
  * @template T - The type of elements in the array.
  * @param {T[]} arr - The array to sample from.
- * @returns {T} A random element from the array.
+ * @returns {T | undefined} A random element from the array, or `undefined` if the array is empty.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];

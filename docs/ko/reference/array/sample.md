@@ -57,4 +57,4 @@ const randomItem = sample(mixed);
 
 #### 반환 값
 
-(`T`): 배열에서 무작위로 선택된 요소예요.
+(`T | undefined`): 배열에서 무작위로 선택된 요소예요. 배열이 비어있으면 `undefined`를 반환해요.
