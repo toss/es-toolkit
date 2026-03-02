@@ -1,33 +1,41 @@
 # isWeakMap
 
-与えられた値が `WeakMap` であるかどうかを確認します。
-
-この関数は、提供された値が `WeakMap` のインスタンスであるかどうかをテストします。 値が `WeakMap` の場合は true を、それ以外の場合は false を返します。
-
-この関数は、TypeScriptにおける型述語としても機能し、引数の型を `WeakMap` に絞り込むことができます。
-
-## インターフェース
+与えられた値が `WeakMap` インスタンスかどうかを確認します。
 
 ```typescript
-function isWeakMap(value: unknown): value is WeakMap<WeakKey, any>;
+const result = isWeakMap(value);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`unknown`): `WeakMap` であるかどうかをテストする値。
+### `isWeakMap(value)`
 
-### 戻り値
-
-(`value is WeakMap<WeakKey, any>`): 値が `WeakMap` の場合は `true`、それ以外の場合は `false`。
-
-## 例
+値が `WeakMap` インスタンスかどうかを確認したい場合は `isWeakMap` を使用してください。`WeakMap` はオブジェクトをキーとする弱参照のキーバリューストアで、メモリリークを防ぐのに役立ちます。
 
 ```typescript
-const value1 = new WeakMap();
-const value2 = new Map();
-const value3 = new Set();
+import { isWeakMap } from 'es-toolkit/predicate';
 
-console.log(isWeakMap(value1)); // true
-console.log(isWeakMap(value2)); // false
-console.log(isWeakMap(value3)); // false
+// WeakMap インスタンス
+const weakMap1 = new WeakMap();
+const weakMap2 = new WeakMap([[{}, 'value']]);
+
+console.log(isWeakMap(weakMap1)); // true
+console.log(isWeakMap(weakMap2)); // true
+
+// WeakMap でない値
+console.log(isWeakMap(new Map())); // false
+console.log(isWeakMap(new Set())); // false
+console.log(isWeakMap(new WeakSet())); // false
+console.log(isWeakMap({})); // false
+console.log(isWeakMap([])); // false
+console.log(isWeakMap(null)); // false
+console.log(isWeakMap(undefined)); // false
 ```
+
+#### パラメータ
+
+- `value` (`unknown`): WeakMap インスタンスかどうかを確認する値です。
+
+#### 戻り値
+
+(`value is WeakMap<WeakKey, any>`): 値が WeakMap インスタンスの場合は `true`、それ以外の場合は `false` を返します。

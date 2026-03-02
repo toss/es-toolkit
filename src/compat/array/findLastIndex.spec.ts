@@ -118,6 +118,11 @@ describe('findLastIndex', () => {
     expect(findLastIndex(args, i => i === 2)).toBe(1);
   });
 
+  it('should use identity function when no predicate is provided', () => {
+    expect(findLastIndex([null, undefined, 0, 'hello', 'world'])).toBe(4);
+    expect(findLastIndex([false, '', 0, 1, 2, null])).toBe(4);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(findLastIndex).toEqualTypeOf<typeof findLastIndexLodash>();
   });

@@ -34,6 +34,12 @@ describe('meanBy', () => {
     expect(meanBy(undefined)).toBe(NaN);
   });
 
+  it('should work without iteratee parameter (default to identity)', () => {
+    const numbers = [1, 2, 3];
+
+    expect(meanBy(numbers)).toBe(2);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(meanBy).toEqualTypeOf<typeof meanByLodash>();
   });

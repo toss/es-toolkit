@@ -1,28 +1,56 @@
 # merge
 
-Merges the properties of the source object into the target object.
-
-This function performs a deep merge, meaning nested objects and arrays are merged recursively.
-
-- If a property in the source object is an array or an object and the corresponding property in the target object is also an array or object, they will be merged.
-- If a property in the source object is undefined, it will not overwrite a defined property in the target object.
-
-Unlike [toMerged](./toMerged.md), this function mutates the target object.
-
-## Signature
+Deeply merges the source object into the target object, modifying the target object.
 
 ```typescript
-function merge<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(target: T, source: S): T & S;
+const result = merge(target, source);
 ```
 
-### Parameters
+## Usage
 
-- `target` (`T`): The target object into which the source object properties will be merged. This object is modified in place.
-- `source` (`S`): The source object whose properties will be merged into the target object.
+### `merge(target, source)`
 
-### Returns
+Use `merge` when you want to deeply merge two objects. Nested objects and arrays are also merged recursively. Unlike [toMerged](./toMerged.md), this function modifies the original `target` object.
 
-(`T & S`): The updated target object with properties from the source object merged in.
+```typescript
+import { merge } from 'es-toolkit/object';
+
+// Basic object merging
+const target = { a: 1, b: { x: 1, y: 2 } };
+const source = { b: { y: 3, z: 4 }, c: 5 };
+const result = merge(target, source);
+// Both result and target become { a: 1, b: { x: 1, y: 3, z: 4 }, c: 5 }
+
+// Arrays are also merged
+const arrayTarget = { a: [1, 2], b: { x: 1 } };
+const arraySource = { a: [3], b: { y: 2 } };
+merge(arrayTarget, arraySource);
+// arrayTarget becomes { a: [3, 2], b: { x: 1, y: 2 } }
+
+// null values are handled appropriately
+const nullTarget = { a: null };
+const nullSource = { a: [1, 2, 3] };
+merge(nullTarget, nullSource);
+// nullTarget becomes { a: [1, 2, 3] }
+```
+
+`undefined` values do not overwrite existing values.
+
+```typescript
+const target = { a: 1, b: 2 };
+const source = { b: undefined, c: 3 };
+merge(target, source);
+// target becomes { a: 1, b: 2, c: 3 } (b is not overwritten)
+```
+
+#### Parameters
+
+- `target` (`T extends Record<PropertyKey, any>`): The target object to merge the source object into. This object is modified.
+- `source` (`S extends Record<PropertyKey, any>`): The source object to merge into the target object.
+
+#### Returns
+
+(`T & S`): Returns the target object with the source object merged in.
 
 ## Examples
 

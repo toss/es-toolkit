@@ -79,7 +79,7 @@ export function unset(obj: any, path: PropertyKey | readonly PropertyKey[]): boo
 }
 
 function unsetWithPath(obj: unknown, path: readonly PropertyKey[]): boolean {
-  const parent = get(obj, path.slice(0, -1), obj);
+  const parent = path.length === 1 ? obj : get(obj, path.slice(0, -1));
   const lastKey = path[path.length - 1];
 
   if (parent?.[lastKey] === undefined) {

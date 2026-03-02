@@ -1,3 +1,4 @@
+import { get } from './get.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { assignValue } from '../_internal/assignValue.ts';
 import { isIndex } from '../_internal/isIndex.ts';
@@ -81,13 +82,16 @@ export function updateWith<T extends object, R>(
     return obj;
   }
 
-  const resolvedPath = isKey(path, obj)
-    ? [path]
-    : Array.isArray(path)
-      ? path
-      : typeof path === 'string'
-        ? toPath(path)
-        : [path];
+  let resolvedPath: PropertyKey[];
+  if (isKey(path, obj)) {
+    resolvedPath = [path];
+  } else if (Array.isArray(path)) {
+    resolvedPath = path;
+  } else {
+    resolvedPath = toPath(path);
+  }
+
+  const updateValue = updater(get(obj, resolvedPath));
 
   let current: any = obj;
 
@@ -101,7 +105,7 @@ export function updateWith<T extends object, R>(
     let newValue: unknown;
 
     if (i === resolvedPath.length - 1) {
-      newValue = updater(current[key]);
+      newValue = updateValue;
     } else {
       const objValue = current[key];
       const customizerResult = customizer?.(objValue, key as string, obj);

@@ -439,8 +439,7 @@ describe('debounce', () => {
   const methodName = 'debounce';
 
   it(`\`_.${methodName}\` should not error for non-object \`options\` values`, () => {
-    func(noop, 32, 1 as any);
-    expect(true);
+    expect(() => func(noop, 32, 1 as any)).not.toThrow();
   });
 
   it(`\`_.${methodName}\` should use a default \`wait\` of \`0\``, async () => {

@@ -1,86 +1,79 @@
-# flatMapDepth
+# flatMapDepth (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `es-toolkit`の[flatMap](../../array/flatMap.md)を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`flatMapDepth`関数は、Lodashとの互換性のために様々な形式のイテレータをサポートし、`null`や`undefined`の処理などにより複雑に実装されています。メインライブラリの`flatMap`関数はシンプルな関数イテレータのみをサポートするため、より高速に動作します。
+
+代わりに、より高速で現代的な`es-toolkit`の[flatMap](../../array/flatMap.md)を使用してください。
+
 :::
 
-配列またはオブジェクトの各要素に対して反復関数を適用し、結果を指定された深さまでフラット化します。
-
-## インターフェース
+配列の各要素をイテレータ関数で変換した後、指定された深さまで平坦化します。
 
 ```typescript
-function flatMapDepth<T>(
-  collection:
-    | Record<string, ArrayLike<T | RecursiveArray<T>> | T>
-    | Record<number, ArrayLike<T | RecursiveArray<T>> | T>
-    | null
-    | undefined
-): T[];
-
-function flatMapDepth<T, R>(
-  array: ArrayLike<T> | null | undefined,
-  iteratee: (value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R,
-  depth?: number
-): R[];
-
-function flatMapDepth<T extends object, R>(
-  collection: T,
-  iteratee: (value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R,
-  depth?: number
-): R[];
-
-function flatMapDepth(collection: object | null | undefined, path: string, depth?: number): any[];
-
-function flatMapDepth(collection: object | null | undefined, matches: object, depth?: number): boolean[];
+const result = flatMapDepth(collection, iteratee, depth);
 ```
 
-### パラメータ
+## 使用法
 
-- `collection` (`Record<string, ArrayLike<T | RecursiveArray<T>> | T> | Record<number, ArrayLike<T | RecursiveArray<T>> | T> | null | undefined`): 反復処理する配列またはオブジェクト。
-- `iteratee`: 各要素ごとに呼び出される関数。デフォルトは `identity`。
-  - `(value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R`: 各要素に対して呼び出される関数。
-  - `(value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R`: 各プロパティに対して呼び出される関数。
-  - `string`: 抽出するプロパティのパス。
-  - `object`: 照合するオブジェクト。
-- `depth` (`number`): 最大再帰深度。デフォルトは `1`。
+### `flatMapDepth(collection, iteratee, depth)`
 
-### 戻り値
-
-- (`T[] | R[] | any[] | boolean[]`): 新しいフラット化された配列を返します。
-
-## 例
+配列またはオブジェクトの各要素を与えられた関数で変換した後、結果を指定された深さまで平坦化して新しい配列として返します。ネストされた配列構造を望む深さまでのみ平坦化したいときに便利です。
 
 ```typescript
 import { flatMapDepth } from 'es-toolkit/compat';
 
-// 配列を返す関数を使った基本例
-function duplicate(n) {
-  return [n, n];
-}
-
-flatMapDepth([1, 2], duplicate);
+// 配列を変換して深さ2まで平坦化
+flatMapDepth([1, 2], n => [[n, n]], 2);
 // => [1, 1, 2, 2]
 
-// 深さを指定する
-flatMapDepth(
-  [
-    [
-      [1, 2],
-      [3, 4],
-    ],
-  ],
-  n => [n, n],
-  2
-);
-// => [1, 1, 2, 2, 3, 3, 4, 4]
+// 深さ1に制限すると完全に平坦化されません
+flatMapDepth([1, 2], n => [[n, n]], 1);
+// => [[1, 1], [2, 2]]
 
-// マッチングオブジェクトを使用する
-flatMapDepth({ a: 1, b: 2 }, { a: 1 });
-// => [true, false]
-
-// プロパティパスを使用する
-flatMapDepth({ a: { a: 1, b: 2 } }, 'a');
-// => [1, 2]
+// オブジェクトから値を抽出して平坦化
+const users = [
+  { user: 'barney', hobbies: [['hiking'], ['coding']] },
+  { user: 'fred', hobbies: [['reading']] },
+];
+flatMapDepth(users, 'hobbies', 2);
+// => ['hiking', 'coding', 'reading']
 ```
+
+この関数は様々な形式のイテレータをサポートします。
+
+```typescript
+import { flatMapDepth } from 'es-toolkit/compat';
+
+// 関数を使用した変換
+flatMapDepth([1, 2, 3], n => [[n, n]], 2);
+
+// プロパティ名で値を抽出
+const objects = [{ items: [['a'], ['b']] }, { items: [['c']] }];
+flatMapDepth(objects, 'items', 2);
+// => ['a', 'b', 'c']
+
+// オブジェクトの部分一致
+const users = [{ active: [[true], [false]] }, { active: [[false]] }];
+flatMapDepth(users, { active: [[false]] }, 2);
+// => [true, true]
+```
+
+`null`または`undefined`は空の配列として処理されます。
+
+```typescript
+import { flatMapDepth } from 'es-toolkit/compat';
+
+flatMapDepth(null, n => [n], 1); // => []
+flatMapDepth(undefined, n => [n], 1); // => []
+```
+
+#### パラメータ
+
+- `collection` (`ArrayLike<T> | Record<string, any> | Record<number, any> | object | null | undefined`): 反復処理する配列またはオブジェクトです。
+- `iteratee` (`((value: T, index: number, collection: any) => any) | string | object`, オプション): 各要素に対して実行する変換関数またはプロパティ名です。デフォルトは`identity`です。
+- `depth` (`number`, オプション): 平坦化する最大深さです。デフォルトは`1`です。
+
+#### 戻り値
+
+(`T[]`): イテレータで変換された後、指定された深さまで平坦化された新しい配列を返します。

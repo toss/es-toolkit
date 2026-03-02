@@ -1,55 +1,46 @@
-# pullAllBy
+# pullAllBy (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-在通过提供的函数映射元素后，从数组中移除所有指定的值。
-你可以使用以下几种方式来映射元素：
-
-- **函数**: 在比较元素之前，使用给定函数映射每个元素。函数会对每个元素执行，并使用返回值进行比较。
-- **属性名**: 使用指定属性的值来比较元素。
-- **部分对象**: 根据两个元素是否都匹配给定部分对象的所有属性和值来比较。
-- **属性-值对**: 根据两个元素是否都匹配指定的属性和值来比较。
-
-此函数会直接修改 `arr`。
-如果你想在不修改原始数组的情况下移除值，请使用 [differenceBy](../../array/differenceBy.md)。
-
-## 签名
+根据迭代器转换后的值从数组中删除指定的值。
 
 ```typescript
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: (value: T) => unknown): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: Partial<T>): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: [keyof T, unknown]): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: keyof T): T[];
+const modified = pullAllBy(array, valuesToRemove, iteratee);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`): 要修改的数组。
-- `valuesToRemove` (`ArrayLike<T>`): 要从数组中移除的值。
-- `getValue`:
-  - **函数** (`(value: T) => unknown`): 在比较元素之前，使用给定函数映射每个元素。函数会对每个元素执行，并使用返回值进行比较。
-  - **属性名** (`keyof T`): 使用指定属性的值来比较元素。
-  - **部分对象** (`Partial<T>`): 根据两个元素是否都匹配给定部分对象的所有属性和值来比较。
-  - **属性-值对** (`[keyof T, unknown]`): 根据两个元素是否都匹配指定的属性和值来比较。
+### `pullAllBy(array, values, iteratee)`
 
-### 返回值
-
-(`T[]`): 移除指定值后的修改数组。
-
-## 示例
+根据通过提供的iteratee函数转换后的值从数组中删除指定的值。原始数组会被修改,并返回修改后的数组。
 
 ```typescript
-// Using a iteratee function
-const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
-const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], obj => obj.value);
-console.log(result); // [{ value: 2 }]
+import { pullAllBy } from 'es-toolkit/compat';
 
-// Using a property name
-const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
-const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], 'value');
-console.log(result); // [{ value: 2 }]
+// 通过比较属性值来删除
+const array = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }];
+pullAllBy(array, [{ x: 1 }, { x: 3 }], 'x');
+console.log(array); // [{ x: 2 }]
+
+// 通过函数转换值来比较
+const numbers = [1, 2, 3, 4, 5];
+pullAllBy(numbers, [2, 4], n => n % 2);
+console.log(numbers); // [1, 3, 5] (只剩奇数)
 ```
+
+如果数组为空、`null` 或 `undefined`,则原样返回原始数组。
+
+```typescript
+import { pullAllBy } from 'es-toolkit/compat';
+
+pullAllBy([], [1, 2], x => x); // []
+pullAllBy(null as any, [1, 2], x => x); // null
+```
+
+#### 参数
+
+- `array` (`T[]`): 要修改的数组。
+- `values` (`ArrayLike<T>`, 可选): 要删除的值的数组。
+- `iteratee` (`ValueIteratee<T>`, 可选): 应用于每个元素的iteratee函数。可以使用属性名、部分对象或函数。
+
+#### 返回值
+
+(`T[]`): 返回删除了指定值的原始数组。

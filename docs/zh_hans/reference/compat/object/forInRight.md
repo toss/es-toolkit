@@ -1,69 +1,71 @@
-# forInRight
+# forInRight (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Object.keys` 和 `for...in` 循环
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+由于需要创建键数组、反向迭代以及处理 `null` 或 `undefined`,这个 `forInRight` 函数的性能较慢。
+
+请使用更快、更现代的 `Object.keys` 和 `for...in` 循环。
+
 :::
 
-以相反的顺序遍历对象并为每个属性调用 `iteratee` 函数。
-
-以相反的顺序遍历所有字符串键属性，包括继承的属性。
-
-如果 `iteratee` 函数返回 `false`，则提前终止遍历。
-
-## 签名
+按反向顺序迭代对象的所有属性(包括继承的属性),并对每个属性调用函数。
 
 ```typescript
-function forInRight<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
-function forInRight<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forInRight(obj, iteratee);
 ```
 
-### 参数
+## 用法
 
-- `object` (`T | null | undefined`): 要遍历的对象
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 每次迭代调用的函数。默认为 `identity` 函数
+### `forInRight(object, iteratee)`
 
-### 返回值
-
-(`T | null | undefined`): 返回 `object`
-
-## 示例
+按反向顺序迭代对象的所有属性,调用 `iteratee` 函数。它不仅迭代对象的自有属性,还包括通过原型链继承的属性。由于它将键收集到数组中然后反向迭代,因此比正常迭代慢。如果 `iteratee` 函数返回 `false`,则停止迭代。
 
 ```typescript
 import { forInRight } from 'es-toolkit/compat';
 
-function Shape() {
-  this.x = 0;
-  this.y = 0;
+// 按反向顺序迭代所有属性
+const obj = { a: 1, b: 2 };
+forInRight(obj, (value, key) => {
+  console.log(key, value);
+});
+// 输出: 'b' 2, 'a' 1
+
+// 包括继承属性的反向迭代
+function Parent() {
+  this.inherited = 'value';
 }
+Parent.prototype.protoProperty = 'proto';
 
-Shape.prototype.move = function (x, y) {
-  this.x += x;
-  this.y += y;
-};
+const child = new Parent();
+child.own = 'ownValue';
 
-// 创建 Shape 的实例
-const square = new Shape();
-
-// 以相反的顺序遍历所有可枚举属性（包括继承的属性）
-forInRight(square, function (value, key) {
+forInRight(child, (value, key) => {
   console.log(key, value);
 });
-// 按相反顺序输出:
-// 'move', [Function]
-// 'y', 0
-// 'x', 0
+// 输出: 'protoProperty' 'proto', 'own' 'ownValue', 'inherited' 'value'
 
-// 如果迭代函数返回 false，则提前终止遍历
-forInRight(square, function (value, key) {
+// 根据条件提前终止
+forInRight(obj, (value, key) => {
   console.log(key, value);
-  return key !== 'y'; // 在 'y' 处停止
+  return key !== 'a'; // 在 'a' 处停止
 });
-// 输出:
-// 'move', [Function]
-// 'y', 0
+// 输出: 'b' 2, 'a' 1
 ```
+
+`null` 或 `undefined` 会原样返回。
+
+```typescript
+import { forInRight } from 'es-toolkit/compat';
+
+forInRight(null, iteratee); // null
+forInRight(undefined, iteratee); // undefined
+```
+
+#### 参数
+
+- `object` (`T | null | undefined`): 要迭代的对象。
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, 可选): 对每个属性调用的函数。默认为 `identity` 函数。
+
+#### 返回值
+
+(`T | null | undefined`): 返回原始对象。

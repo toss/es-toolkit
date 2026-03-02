@@ -1,91 +1,84 @@
-# findLastIndex
+# findLastIndex (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.prototype.findLastIndex`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `findLastIndex` 函数由于处理 `null` 或 `undefined`、部分对象匹配、属性名匹配等附加功能而运行较慢。
+
+请使用更快、更现代的 `Array.prototype.findLastIndex`。
 
 :::
 
-与 `findIndex` 类似，`findLastIndex` 返回数组中符合条件的第一个元素的索引，但它从数组的右侧开始搜索。
-
-您可以通过以下几种方式指定条件：
-
-- **谓词函数**：如果提供一个谓词函数，该函数将应用于每一项。返回 `true` 的第一个项将被选中。
-- **部分对象**：如果提供一个部分对象，该函数将返回第一个匹配部分对象属性的项。
-- **属性-值对**：如果提供一个属性-值对，该函数将返回第一个匹配该属性和值的项。
-- **属性名称**：如果提供一个属性名称，该函数将返回第一个指定属性具有真值的项。
-
-## 签名
+查找数组中满足条件的最后一个元素的索引。
 
 ```typescript
-function findLastIndex<T>(
-  arr: T[],
-  doesMatch: (item: T, index: number, arr: T[]) => unknown,
-  fromIndex?: number
-): number;
-function findLastIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
+const lastIndex = findLastIndex(array, predicate, fromIndex);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`): 要搜索的数组。
+### `findLastIndex(array, predicate, fromIndex)`
 
-::: info `arr` 可能是 `ArrayLike<T>`，也可能是 `null` 或 `undefined`
+当您想要从数组末尾开始查找满足给定条件的第一个元素的索引时,使用 `findLastIndex`。如果没有元素满足条件,则返回 `-1`。
 
-为了与 lodash 完全兼容，`findLastIndex` 函数会对 `arr` 进行如下处理。
-
-- 如果 `arr` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
-- 如果 `arr` 是 `null` 或 `undefined`，则会将其视为空数组。
-
-:::
-
-- `doesMatch`:
-
-  - **谓词函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个函数，接受项、其索引和数组，如果项符合条件则返回真值。
-  - **部分对象** (`Partial<T>`): 指定要匹配的属性的部分对象。
-  - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
-  - **属性名称** (`PropertyKey`): 要检查其真值的属性名称。
-
-- `fromIndex` (`number`): 搜索开始的位置。默认值为数组的最后一个元素的索引（`arr.length - 1`）。
-
-### 返回
-
-(`number`): 第一个具有指定属性值的项的索引，如果没有找到匹配项，则为 `-1`。
-
-## 示例
+此函数可以通过多种方式指定条件。当您传递函数时,它会对每个元素执行该函数。当您传递部分对象时,它会检查元素是否具有这些属性。当您传递数组格式的键值对时,它会检查特定属性是否与给定值匹配。当您传递字符串时,它会检查该属性是否值为真。
 
 ```typescript
 import { findLastIndex } from 'es-toolkit/compat';
 
-// 使用谓词函数
-const items = [1, 2, 3, 4, 5];
-const result = findLastIndex(items, item => item > 3);
-console.log(result); // 4
-
-// 使用部分对象
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+const users = [
+  { user: 'barney', active: true },
+  { user: 'fred', active: false },
+  { user: 'pebbles', active: false },
 ];
-const result = findLastIndex(items, { name: 'Bob' });
-console.log(result); // 1
 
-// 使用属性-值对
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLastIndex(items, ['name', 'Alice']);
-console.log(result); // 0
+// 使用函数指定条件
+findLastIndex(users, o => o.user === 'pebbles');
+// Returns: 2
 
-// 使用属性名称
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLastIndex(items, 'name');
-console.log(result); // 1
+// 使用部分对象查找匹配的元素
+findLastIndex(users, { user: 'barney', active: true });
+// Returns: 0
+
+// 使用属性值对查找匹配的元素
+findLastIndex(users, ['active', false]);
+// Returns: 2
+
+// 使用属性名查找具有真值的元素
+findLastIndex(users, 'active');
+// Returns: 0
 ```
+
+也可以指定搜索的起始位置。如果 `fromIndex` 为负数,则从数组末尾开始计算。
+
+```typescript
+import { findLastIndex } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4, 5];
+
+// 从索引3开始逆向搜索
+findLastIndex(numbers, n => n < 4, 2);
+// Returns: 2
+
+// 如果使用负索引,则从末尾开始计算
+findLastIndex(numbers, n => n > 2, -2);
+// Returns: 3
+```
+
+`null` 或 `undefined` 被视为空数组。
+
+```typescript
+import { findLastIndex } from 'es-toolkit/compat';
+
+findLastIndex(null, n => n > 0); // -1
+findLastIndex(undefined, n => n > 0); // -1
+```
+
+#### 参数
+
+- `array` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
+- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 测试每个元素的条件。可以是函数、部分对象、属性值对或属性名。默认为恒等函数。
+- `fromIndex` (`number`, 可选): 开始搜索的索引。如果为负数,则从数组末尾开始计算。默认为 `array.length - 1`。
+
+#### 返回值
+
+(`number`): 返回满足条件的最后一个元素的索引。如果没有元素满足条件,则返回 `-1`。

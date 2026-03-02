@@ -5,19 +5,20 @@
  * If the array is empty, this function returns `0`.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items An array to calculate the sum.
- * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
+ * @param {readonly T[]} items - An array to calculate the sum.
+ * @param {(element: T, index: number) => number} getValue - A function that selects a numeric value from each element.
+ *   It receives the element and its zero‑based index in the array.
  * @returns {number} The sum of all the numbers as determined by the `getValue` function.
  *
  * @example
- * sumBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: 6
- * sumBy([], x => x.a); // Returns: 0
+ * sumBy([{ a: 1 }, { a: 2 }, { a: 3 }], (x, i) => x.a * i); // Returns: 8
+ * sumBy([], () => 1); // Returns: 0
  */
-export function sumBy<T>(items: readonly T[], getValue: (element: T) => number): number {
+export function sumBy<T>(items: readonly T[], getValue: (element: T, index: number) => number): number {
   let result = 0;
 
   for (let i = 0; i < items.length; i++) {
-    result += getValue(items[i]);
+    result += getValue(items[i], i);
   }
 
   return result;

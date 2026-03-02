@@ -1,68 +1,51 @@
 # flow
 
-Creates a new function that executes the given functions in sequence. The return value of the previous function is passed as an argument to the next function.
-
-The `this` context of the returned function is also passed to the functions provided as parameters.
-
-## Signature
+Creates a new function that executes multiple functions in sequence.
 
 ```typescript
-function flow<R>(f: () => R): () => R;
-function flow<A extends any[], R>(f1: (...args: A) => R): (...args: A) => R;
-function flow<A extends any[], R1, R2>(f1: (...args: A) => R1, f2: (a: R1) => R2): (...args: A) => R2;
-function flow<A extends any[], R1, R2, R3>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3
-): (...args: A) => R3;
-function flow<A extends any[], R1, R2, R3, R4>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3,
-  f4: (a: R3) => R4
-): (...args: A) => R4;
-function flow<A extends any[], R1, R2, R3, R4, R5>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3,
-  f4: (a: R3) => R4,
-  f5: (a: R4) => R5
-): (...args: A) => R5;
-function flow(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
+const combinedFunc = flow(func1, func2, func3);
 ```
 
-### Parameters
+## Usage
 
-- `funcs` (`Array<(...args: any[]) => any>`): The functions to invoke.
+### `flow(...funcs)`
 
-### Returns
-
-(`(...args: any[]) => any`): The new composite function.
-
-## Examples
+Use `flow` when you want to chain functions together to create a pipeline. The result of the previous function becomes the input of the next function. This is useful for transforming data through multiple steps.
 
 ```typescript
-const add = (x: number, y: number) => x + y;
-const square = (n: number) => n * n;
-
-const combined = flow(add, square);
-console.log(combined(1, 2)); // => 9
-```
-
-## Lodash Compatibility
-
-Import `flow` from `es-toolkit/compat` for full compatibility with lodash.
-
-- `flow` can accept both arrays of functions and individual functions as arguments.
-- `flow` will throw an error if any of the functions provided are not functions.
-
-```typescript
-import { flow } from 'es-toolkit/compat';
+import { flow } from 'es-toolkit/function';
 
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 const double = (n: number) => n * 2;
 
-const combined = flow([add, square], double);
-console.log(combined(1, 2)); // => 18
+const combined = flow(add, square, double);
+
+// First add(1, 2) = 3
+// Then square(3) = 9
+// Finally double(9) = 18
+combined(1, 2);
+// Returns: 18
 ```
+
+This is especially useful for creating data transformation pipelines.
+
+```typescript
+const processData = flow(
+  (text: string) => text.trim(),
+  (text: string) => text.toLowerCase(),
+  (text: string) => text.split(' '),
+  (words: string[]) => words.filter(word => word.length > 3)
+);
+
+processData('  Hello World JavaScript  ');
+// Returns: ['hello', 'world', 'javascript']
+```
+
+#### Parameters
+
+- `funcs` (`Array<(...args: any[]) => any>`): The functions to execute in sequence.
+
+#### Returns
+
+(`(...args: any[]) => any`): A new function that executes the given functions in sequence. The first function can accept multiple arguments, and the remaining functions receive the result of the previous function.

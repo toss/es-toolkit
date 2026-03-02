@@ -1,29 +1,48 @@
-# isElement
+# isElement (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+::: warning Use `instanceof HTMLElement`
+
+This `isElement` function performs structural checks which can be inaccurate and slow.
+
+Instead, use the more accurate and modern `instanceof HTMLElement` or `element.nodeType === 1` checks.
+
 :::
 
-Checks if `value` is likely a DOM element.
-
-## Signature
+Checks if a value is a DOM element.
 
 ```typescript
-function isElement(value?: any): boolean;
+const result = isElement(value);
 ```
 
-### Parameters
+## Usage
+
+### `isElement(value)`
+
+Use `isElement` when you need to check if a given value is a DOM element. This function performs structural checks, so the results may not be completely accurate.
+
+```typescript
+import { isElement } from 'es-toolkit/compat';
+
+// DOM elements
+isElement(document.body); // true
+isElement(document.createElement('div')); // true
+isElement(document.querySelector('p')); // true (if element exists)
+
+// Non-DOM element values
+isElement('<body>'); // false
+isElement({}); // false
+isElement(null); // false
+isElement(undefined); // false
+
+// Text nodes or other node types
+isElement(document.createTextNode('text')); // false
+isElement(document.createComment('comment')); // false
+```
+
+#### Parameters
 
 - `value` (`any`): The value to check.
 
-### Returns
+#### Returns
 
-(`boolean`): Returns `true` if `value` is a DOM element, else `false`.
-
-## Example
-
-```typescript
-console.log(isElement(document.body)); // Output: true
-console.log(isElement('<body>')); // Output: false
-```
+(`boolean`): Returns `true` if the value appears to be a DOM element, otherwise `false`.

@@ -1,4 +1,5 @@
 import { isIterateeCall } from '../_internal/isIterateeCall.ts';
+import { MAX_SAFE_INTEGER } from '../_internal/MAX_SAFE_INTEGER.ts';
 import { toInteger } from '../util/toInteger.ts';
 import { toString } from '../util/toString.ts';
 
@@ -37,6 +38,9 @@ export function repeat(str: any, n?: any, guard?: any): string {
     n = 1;
   } else {
     n = toInteger(n);
+  }
+  if (n < 1 || n > MAX_SAFE_INTEGER) {
+    return '';
   }
   return toString(str).repeat(n);
 }

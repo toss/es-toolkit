@@ -1,38 +1,67 @@
-# assignIn
+# assignIn (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Object.assign` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `assignIn` function operates slowly due to additional processing for copying inherited properties and value comparison logic.
+
+Use the faster and more modern `Object.assign` instead.
+
 :::
 
-Assigns the property values from the `source` object to the `object` object. It also includes properties inherited from the prototype chain.
-
-Properties that have the same value in both `source` and `object` will not be overwritten.
-
-## Signature
+Assigns all properties (including inherited properties) from source objects to a target object.
 
 ```typescript
-function assignIn<O, S>(object: O, source: S): O & S;
-function assignIn<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function assignIn<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function assignIn<O, S1, S2, S3, S4>(object: O, source1: S1, source2: S2, source3: S3, source4: S4): O & S1 & S2 & S3;
-function assignIn(object: any, ...sources: any[]): any;
+const result = assignIn(target, ...sources);
 ```
 
-### Parameters
+## Usage
 
-- `object` (`any`): The target object to which properties will be assigned.
-- `sources` (`...any[]`): The source objects whose properties will be assigned to the target object.
+### `assignIn(target, ...sources)`
 
-### Returns
-
-(`any`): The updated target object with properties from the source objects assigned.
-
-## Examples
+Use `assignIn` when you want to copy both own and inherited properties from source objects to a target object. Unlike `assign`, it includes properties from the prototype chain.
 
 ```typescript
-const target = { a: 1 };
-const result = assignIn(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+import { assignIn } from 'es-toolkit/compat';
+
+// Basic usage
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+const result = assignIn(target, source);
+// Result: { a: 1, b: 3, c: 4 }
+console.log(target === result); // true (target object is modified)
+
+// Merging multiple source objects
+const target2 = { a: 1 };
+const source1 = { b: 2 };
+const source2 = { c: 3 };
+assignIn(target2, source1, source2);
+// Result: { a: 1, b: 2, c: 3 }
+
+// Copying inherited properties too
+function Parent() {}
+Parent.prototype.inherited = 'inheritedValue';
+const child = Object.create(Parent.prototype);
+child.own = 'ownValue';
+
+const target3 = {};
+assignIn(target3, child);
+// Result: { own: 'ownValue', inherited: 'inheritedValue' }
+
+// Also copies array index properties and length
+const arr = [1, 2, 3];
+arr.customProp = 'custom';
+const target4 = {};
+assignIn(target4, arr);
+// Result: { '0': 1, '1': 2, '2': 3, customProp: 'custom' }
 ```
+
+Unlike `assign`, this function copies inherited properties as well. It also has an optimization that doesn't overwrite if values are the same.
+
+#### Parameters
+
+- `target` (`any`): The target object to which properties will be copied.
+- `...sources` (`any[]`): The source objects from which properties will be copied. Both own and inherited properties are copied.
+
+#### Returns
+
+(`any`): Returns the modified target object. The target object itself is modified and returned.

@@ -4,10 +4,11 @@
  * A safe integer is an integer that can be precisely represented as a `number` in JavaScript,
  * without any other integer being rounded to it.
  *
- * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
+ * This function also serves as a type predicate in TypeScript,
+ * narrowing the type of the argument to `number`.
  *
  * @param {unknown} value - The value to check
- * @returns {boolean} `true` if `value` is an integer and between the safe values, otherwise `false`
+ * @returns {value is number} `true` if `value` is an integer and between the safe values, otherwise `false`
  *
  * @example
  * isSafeInteger(3); // Returns: true
@@ -15,6 +16,6 @@
  * isSafeInteger(1n); // Returns: false
  * isSafeInteger('1'); // Returns: false
  */
-export function isSafeInteger(value: any): boolean {
+export function isSafeInteger(value: unknown): value is number {
   return Number.isSafeInteger(value);
 }

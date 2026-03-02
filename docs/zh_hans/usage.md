@@ -34,6 +34,14 @@ yarn add es-toolkit
 
 :::
 
+要使用 es-toolkit 的函数，只需像下面这样使用 `import` 语句即可。
+
+```typescript
+import { sum } from 'es-toolkit';
+
+sum([1, 2, 3]);
+```
+
 ## Deno
 
 es-toolkit 也可以通过 [JSR](https://jsr.io/@es-toolkit/es-toolkit) 安装到 Deno。使用以下命令安装 es-toolkit：

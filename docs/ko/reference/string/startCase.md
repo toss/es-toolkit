@@ -1,37 +1,58 @@
 # startCase
 
-문자열을 각 단어의 첫 글자를 대문자로 변환해요.
-
-스타트 표기법은 여러 단어로 구성된 식별자의 각 단어의 첫 글자를 대문자로 쓰고, 나머지 글자는 소문자로 쓰며, 단어를 공백( )으로 연결하는 명명 규칙입니다. 예를 들어 `Start Case`처럼 써요.
-
-## 인터페이스
+문자열의 각 단어의 첫 글자를 대문자로 변환해요.
 
 ```typescript
-function startCase(str: string): string;
+const converted = startCase(str);
 ```
 
-### 파라미터
+## 사용법
 
-- `str` (`string`): 각 단어의 첫 글자를 대문자로 변환할 문자열이에요.
+### `startCase(str)`
 
-### 반환 값
-
-(`string`) 각 단어의 첫 글자가 대문자로 변환된 문자열이에요.
-
-## 예시
+문자열을 스타트 케이스(각 단어의 첫 글자가 대문자)로 변환하고 싶을 때 `startCase`를 사용하세요. 각 단어의 첫 글자는 대문자로, 나머지는 소문자로 변환하고 단어 사이를 공백으로 연결해요.
 
 ```typescript
 import { startCase } from 'es-toolkit/string';
 
-startCase('--foo-bar--'); // returns 'Foo Bar'
-startCase('fooBar'); // returns 'Foo Bar'
-startCase('__FOO_BAR__'); // returns 'Foo Bar'
-startCase('XMLHttpRequest'); // returns 'Xml Http Request'
-startCase('_abc_123_def'); // returns 'Abc 123 Def'
-startCase('__abc__123__def__'); // returns 'Abc 123 Def'
-startCase('_-_-_-_'); // returns ''
-startCase('12abc 12ABC'); // returns '12 Abc 12 ABC'
+// 기본 사용법
+startCase('hello world'); // 'Hello World'
+startCase('HELLO WORLD'); // 'Hello World'
+
+// 카멜 케이스나 파스칼 케이스 변환
+startCase('fooBar'); // 'Foo Bar'
+startCase('PascalCase'); // 'Pascal Case'
+
+// 하이픈이나 언더스코어로 연결된 단어들
+startCase('hello-world'); // 'Hello World'
+startCase('hello_world'); // 'Hello World'
 ```
+
+다양한 구분자와 특수 문자가 포함된 문자열도 올바르게 처리해요.
+
+```typescript
+import { startCase } from 'es-toolkit/string';
+
+// 여러 구분자가 포함된 경우
+startCase('--foo-bar--'); // 'Foo Bar'
+startCase('__FOO_BAR__'); // 'Foo Bar'
+
+// 연속된 대문자와 숫자 처리
+startCase('XMLHttpRequest'); // 'Xml Http Request'
+startCase('_abc_123_def'); // 'Abc 123 Def'
+
+// 빈 문자나 의미 없는 구분자만 있는 경우
+startCase('_-_-_-_'); // ''
+startCase('12abc 12ABC'); // '12 Abc 12 Abc'
+```
+
+#### 파라미터
+
+- `str` (`string`): 스타트 케이스로 변환할 문자열이에요.
+
+#### 반환 값
+
+(`string`): 각 단어의 첫 글자가 대문자로 변환되고 공백으로 연결된 새로운 문자열을 반환해요.
 
 ## 데모
 

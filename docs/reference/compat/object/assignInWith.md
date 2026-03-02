@@ -1,72 +1,71 @@
-# assignInWith
+# assignInWith (Lodash compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Implementing custom logic is recommended
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `assignInWith` function operates slowly and in a complex manner due to inherited property processing and customizer function calls.
+
+Instead, use `Object.assign` and implement custom logic directly.
+
 :::
 
-Assigns properties from multiple source objects to a target object.
-You can provide a `getValueToAssign` function to determine what value will be assigned for each property.
-
-This function merges the properties of the source objects into the target object,
-including properties from the prototype chain. If a property in the source objects
-is equal to the corresponding property in the target object, it will not be overwritten.
-
-Unlike `assignIn`, this method accepts a `getValueToAssign` function that determines
-the final value to be assigned to each property in the target object. The return value
-of this function will be directly assigned to the corresponding property. This allows for
-more precise control over how properties are merged between objects. If not provided,
-the default behavior is equivalent to using the identity function (returning the source value).
-
-## Signature
+Assigns all properties (including inherited properties) from source objects to a target object using a customizer function.
 
 ```typescript
-function assignInWith<O, S>(
-  object: O,
-  source: S,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S) => any
-): O & S;
-function assignInWith<O, S1, S2>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2) => any
-): O & S1 & S2;
-function assignInWith<O, S1, S2, S3>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3) => any
-): O & S1 & S2 & S3;
-function assignInWith<O, S1, S2, S3, S4>(
-  object: O,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4,
-  getValueToAssign?: (objValue: any, srcValue: any, key: string, object: O, source: S1 | S2 | S3 | S4) => any
-): O & S1 & S2 & S3 & S4;
-function assignInWith(object: any, ...sources: any[]): any;
+const result = assignInWith(target, ...sources, customizer);
 ```
 
-### Parameters
+## Usage
 
-- `object` (`any`): The target object to which properties will be assigned.
-- `sources` (`...any[]`): The source objects whose properties will be assigned to the target object.
-- `getValueToAssign` (`(objValue: any, srcValue: any, key: string, object: O, source: S) => any)`): A function that determines the value to be assigned for each property. The value returned by this function will be assigned to the corresponding property.
+### `assignInWith(target, ...sources, customizer)`
 
-### Returns
-
-(`any`): The updated target object with properties from the source objects assigned.
-
-## Examples
+Use `assignInWith` when you want to customize how properties are assigned while including inherited properties. The customizer function determines the final value for each property.
 
 ```typescript
-const target = { a: 1 };
-const result = assignInWith(target, { b: 2 }, { c: 3 }, function (objValue, srcValue) {
+import { assignInWith } from 'es-toolkit/compat';
+
+// Basic usage - assign only when undefined
+const target = { a: 1, b: undefined };
+const source = { b: 2, c: 3 };
+const result = assignInWith(target, source, (objValue, srcValue) => {
   return objValue === undefined ? srcValue : objValue;
 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+// Result: { a: 1, b: 2, c: 3 }
+
+// Customizer that merges array values
+const target2 = { numbers: [1, 2] };
+const source2 = { numbers: [3, 4], name: 'test' };
+assignInWith(target2, source2, (objValue, srcValue) => {
+  if (Array.isArray(objValue) && Array.isArray(srcValue)) {
+    return objValue.concat(srcValue);
+  }
+  return srcValue;
+});
+// Result: { numbers: [1, 2, 3, 4], name: 'test' }
+
+// Processing inherited properties too
+function Parent() {}
+Parent.prototype.inherited = 'value';
+const child = Object.create(Parent.prototype);
+child.own = 'ownValue';
+
+const target3 = { existing: 'data' };
+assignInWith(target3, child, (objValue, srcValue, key) => {
+  if (objValue === undefined) {
+    return `processed_${srcValue}`;
+  }
+  return objValue;
+});
+// Result: { existing: 'data', own: 'processed_ownValue', inherited: 'processed_value' }
 ```
+
+If the customizer function returns `undefined`, the default assignment behavior is used. Unlike `assignIn`, this function allows you to apply custom logic to each property.
+
+#### Parameters
+
+- `target` (`any`): The target object to which properties will be copied.
+- `...sources` (`any[]`): The source objects from which properties will be copied. Both own and inherited properties are copied.
+- `customizer` (`function`): A function that determines the value to assign. In the form `(objValue, srcValue, key, object, source) => any`. If it returns `undefined`, the default assignment behavior is used.
+
+#### Returns
+
+(`any`): Returns the modified target object. The target object itself is modified and returned.

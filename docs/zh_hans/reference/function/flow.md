@@ -1,68 +1,51 @@
 # flow
 
-创建一个新的函数，该函数按顺序执行给定的函数。上一个函数的返回值作为参数传递给下一个函数。
-
-返回的函数的 `this` 上下文也会传递给作为参数提供的函数。
-
-## 签名
+创建一个按顺序执行多个函数的新函数。
 
 ```typescript
-function flow<R>(f: () => R): () => R;
-function flow<A extends any[], R>(f1: (...args: A) => R): (...args: A) => R;
-function flow<A extends any[], R1, R2>(f1: (...args: A) => R1, f2: (a: R1) => R2): (...args: A) => R2;
-function flow<A extends any[], R1, R2, R3>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3
-): (...args: A) => R3;
-function flow<A extends any[], R1, R2, R3, R4>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3,
-  f4: (a: R3) => R4
-): (...args: A) => R4;
-function flow<A extends any[], R1, R2, R3, R4, R5>(
-  f1: (...args: A) => R1,
-  f2: (a: R1) => R2,
-  f3: (a: R2) => R3,
-  f4: (a: R3) => R4,
-  f5: (a: R4) => R5
-): (...args: A) => R5;
-function flow(...funcs: Array<(...args: any[]) => any>): (...args: any[]) => any;
+const combinedFunc = flow(func1, func2, func3);
 ```
 
-### 参数
+## 用法
 
-- `funcs` (`Array<(...args: any[]) => any>`): 需要调用的函数。
+### `flow(...funcs)`
 
-### 返回值
-
-(`(...args: any[]) => any`): 新的组合函数。
-
-## 示例
+当您想要连接函数以创建管道时,请使用 `flow`。前一个函数的结果成为下一个函数的输入。这在通过多个步骤转换数据时很有用。
 
 ```typescript
-const add = (x: number, y: number) => x + y;
-const square = (n: number) => n * n;
-
-const combined = flow(add, square);
-console.log(combined(1, 2)); // => 9
-```
-
-## Lodash 兼容性
-
-从 `es-toolkit/compat` 导入 `flow` 以获得与 lodash 的完全兼容性。
-
-- `flow` 可以接受函数数组和单个函数作为参数。
-- 如果提供的函数中有任何一个不是函数，`flow` 将抛出错误。
-
-```typescript
-import { flow } from 'es-toolkit/compat';
+import { flow } from 'es-toolkit/function';
 
 const add = (x: number, y: number) => x + y;
 const square = (n: number) => n * n;
 const double = (n: number) => n * 2;
 
-const combined = flow([add, square], double);
-console.log(combined(1, 2)); // => 18
+const combined = flow(add, square, double);
+
+// 首先 add(1, 2) = 3
+// 然后 square(3) = 9
+// 最后 double(9) = 18
+combined(1, 2);
+// Returns: 18
 ```
+
+这在创建数据转换管道时特别有用。
+
+```typescript
+const processData = flow(
+  (text: string) => text.trim(),
+  (text: string) => text.toLowerCase(),
+  (text: string) => text.split(' '),
+  (words: string[]) => words.filter(word => word.length > 3)
+);
+
+processData('  Hello World JavaScript  ');
+// Returns: ['hello', 'world', 'javascript']
+```
+
+#### 参数
+
+- `funcs` (`Array<(...args: any[]) => any>`): 要按顺序执行的函数。
+
+#### 返回值
+
+(`(...args: any[]) => any`): 按顺序执行给定函数的新函数。第一个函数可以接收多个参数,其余函数接收前一个函数的结果。

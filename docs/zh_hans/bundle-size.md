@@ -4,7 +4,7 @@ description: es-toolkit提供的最小包体积
 
 # 包体积
 
-![图表显示es-toolkit与lodash之间包大小的差异，差异高达97%。](/assets/bundle-size.png)
+<BundleSizeChart />
 
 通过其现代化的实现，es-toolkit显著减少了其包体积，与 [lodash](https://lodash.com) 等其他库相比，可以减少高达97%。
 
@@ -12,15 +12,7 @@ description: es-toolkit提供的最小包体积
 
 ## 包体积比较
 
-|                                            | es-toolkit@0.0.1 | lodash-es@4.17.21 | Difference |
-| ------------------------------------------ | ---------------- | ----------------- | ---------- |
-| [sample](./reference/array/sample)         | 88 bytes         | 2000 bytes        | -95.6%     |
-| [difference](./reference/array/difference) | 91 bytes         | 3190 bytes        | -97.2%     |
-| [sum](./reference/math/sum)                | 152 bytes        | 413 bytes         | -63.2%     |
-| [debounce](./reference/function/debounce)  | 144 bytes        | 1400 bytes        | -89.7%     |
-| [throttle](./reference/function/throttle)  | 110 bytes        | 1460 bytes        | -92.5%     |
-| [pick](./reference/object/pick)            | 657 bytes        | 3860 bytes        | -83.0%     |
-| [zip](./reference/array/zip)               | 797 bytes        | 1790 bytes        | -55.5%     |
+<BundleSizeTable />
 
 ## 包体积测试方法
 

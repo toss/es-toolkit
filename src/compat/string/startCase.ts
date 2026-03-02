@@ -1,3 +1,4 @@
+import { deburr } from './deburr.ts';
 import { words as getWords } from '../../string/words.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
@@ -15,7 +16,7 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * const result4 = startCase('hello_world');  // result will be 'Hello World'
  */
 export function startCase(str?: string): string {
-  const words = getWords(normalizeForCase(str).trim());
+  const words = getWords(normalizeForCase(deburr(str)).trim());
 
   let result = '';
 

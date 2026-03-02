@@ -1,31 +1,71 @@
 # isBoolean
 
-检查给定值是否为布尔值。
-
-此函数还可以作为 TypeScript 中的类型谓词，将参数的类型缩小为 `boolean`。
-
-## 签名
+检查给定值是否为布尔类型。
 
 ```typescript
-function isBoolean(x: unknown): x is boolean;
+const result = isBoolean(value);
 ```
 
-### 参数
+## 用法
 
-- `x` (`unknown`): 要测试是否为布尔值的值。
+### `isBoolean(value)`
 
-### 返回值
-
-(`x is boolean`): 如果该值是布尔值，则为真；否则为假。
-
-## 示例
+当您想确认某个值是否为 `true` 或 `false` 时，请使用 `isBoolean`。在 TypeScript 中作为类型守卫工作，将值的类型缩小为 `boolean`。
 
 ```typescript
-const value1 = true;
-const value2 = 0;
-const value3 = 'abc';
+import { isBoolean } from 'es-toolkit/predicate';
 
-console.log(isBoolean(value1)); // true
-console.log(isBoolean(value2)); // false
-console.log(isBoolean(value3)); // false
+// 基本布尔值确认
+isBoolean(true); // true
+isBoolean(false); // true
+
+// 与其他类型区分
+isBoolean(1); // false
+isBoolean(0); // false
+isBoolean('true'); // false
+isBoolean('false'); // false
 ```
+
+在 TypeScript 中作为类型守卫使用时特别有用。
+
+```typescript
+import { isBoolean } from 'es-toolkit/predicate';
+
+function processValue(value: unknown) {
+  if (isBoolean(value)) {
+    // value 类型被缩小为 boolean
+    console.log(value ? '是真' : '是假');
+  } else {
+    console.log('不是布尔值');
+  }
+}
+```
+
+也可以用于 API 响应或用户输入验证。
+
+```typescript
+import { isBoolean } from 'es-toolkit/predicate';
+
+// API 响应验证
+interface APIResponse {
+  success: unknown;
+  data: any;
+}
+
+function validateResponse(response: APIResponse) {
+  if (isBoolean(response.success)) {
+    console.log(`API 调用${response.success ? '成功' : '失败'}`);
+    return response.success;
+  }
+  console.log('错误的响应格式');
+  return false;
+}
+```
+
+#### 参数
+
+- `value` (`unknown`): 要检查是否为布尔类型的值。
+
+#### 返回值
+
+(`value is boolean`): 如果值为 `true` 或 `false` 则返回 `true`，否则返回 `false`。

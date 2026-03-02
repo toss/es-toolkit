@@ -1,86 +1,100 @@
-# findIndex
+# findIndex (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.prototype.findIndex`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `findIndex` function operates slowly due to additional features such as handling various condition formats and `fromIndex` processing.
+
+Use the faster and more modern `Array.prototype.findIndex` instead.
+
 :::
 
-Returns the index of the first item in an array that meets the specified condition.
-
-You can specify the condition in several ways:
-
-- **Predicate function**: If you provide a predicate function, the function will be applied to each item. The first item that makes the predicate function return `true` will be selected.
-- **Partial object**: If you provide a partial object, the function will return the first item that matches the properties of the partial object.
-- **Property-value pair**: If you provide a property-value pair, the function will return the first item that matches the property and value from the pair.
-- **Property name**: If you provide a property name, the function will return the first item where the specified property has a truthy value.
-
-## Signature
+Finds the index of the first element in an array that matches a condition.
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
+const index = findIndex(arr, doesMatch, fromIndex);
 ```
 
-### Parameters
+## Usage
 
-- `arr` (`T[]`): The array to search through.
+### `findIndex(arr, doesMatch, fromIndex)`
 
-::: info `arr` can be `ArrayLike<T>` or `null` or `undefined`
+Use `findIndex` when you want to find the position of the first element in an array that matches a specific condition. You can specify the condition in various ways. If no element matches the condition, it returns `-1`.
 
-To ensure full compatibility with lodash, the `findIndex` function processes `arr` as follows:
-
-- If `arr` is `ArrayLike<T>`, it converts it to an array using `Array.from(...)`.
-- If `arr` is `null` or `undefined`, it is treated as an empty array.
-
-:::
-
-- `doesMatch`:
-
-  - **Predicate function** (`(item: T, index: number, arr: readonly T[]) => unknown`): A function that takes an item, its index, and the array, and returns a truthy value if the item matches the criteria.
-  - **Partial object** (`Partial<T>`): A partial object that specifies the properties to match.
-  - **Property-value pair** (`[keyof T, unknown]`): An array where the first element is the property key and the second element is the value to match.
-  - **Property name** (`PropertyKey`): The name of the property to check for a truthy value.
-
-- `fromIndex` (`number`): The index to start the search from, defaults to `0`.
-
-### Returns
-
-(`number`): The index of the first item that has the specified property value, or `-1` if no match is found.
-
-## Examples
+When you specify a condition as a function, it executes the function for each element and returns the index of the first element that returns true.
 
 ```typescript
 import { findIndex } from 'es-toolkit/compat';
 
-// Using a predicate function
-const items = [1, 2, 3, 4, 5];
-const result = findIndex(items, item => item > 3);
-console.log(result); // 3
-
-// Using a partial object
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+const users = [
+  { id: 1, name: 'Alice', active: false },
+  { id: 2, name: 'Bob', active: true },
+  { id: 3, name: 'Charlie', active: true },
 ];
-const result = findIndex(items, { name: 'Bob' });
-console.log(result); // 1
 
-// Using a property-value pair
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findIndex(items, ['name', 'Alice']);
-console.log(result); // 0
-
-// Using a property name
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findIndex(items, 'name');
-console.log(result); // 0
+// Specify condition with a function
+findIndex(users, user => user.active);
+// Returns: 1
 ```
+
+When you specify a condition as a partial object, it returns the index of the first element that matches those properties.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// Specify condition with a partial object
+findIndex(users, { name: 'Bob', active: true });
+// Returns: 1
+```
+
+When you specify a condition as an array of property name and value, it returns the index of the first element whose property matches that value.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// Specify condition with a [property, value] array
+findIndex(users, ['active', true]);
+// Returns: 1
+```
+
+When you specify only a property name, it returns the index of the first element where that property evaluates to true.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// Specify condition with a property name
+findIndex(users, 'active');
+// Returns: 1
+```
+
+When you specify `fromIndex`, the search starts from that index. Negative values are calculated from the end of the array.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// Start search from index 2
+findIndex(users, user => user.active, 2);
+// Returns: 2
+
+// Search from the second element from the end
+findIndex(users, user => user.active, -2);
+// Returns: 1
+```
+
+`null` or `undefined` are treated as empty arrays.
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+findIndex(null, user => user.active); // -1
+findIndex(undefined, 'active'); // -1
+```
+
+#### Parameters
+
+- `arr` (`ArrayLike<T> | null | undefined`): The array to search.
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, optional): The matching condition. Can be a function, partial object, key-value pair, or property name.
+- `fromIndex` (`number`, optional): The index to start the search from. Default is `0`.
+
+#### Returns
+
+(`number`): Returns the index of the first element that matches the condition. Returns `-1` if no element matches.

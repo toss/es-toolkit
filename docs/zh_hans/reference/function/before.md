@@ -1,73 +1,63 @@
 # before
 
-创建一个新函数，该函数限制给定函数 (`func`) 被调用的次数。
-
-## 签名
+创建一个限制函数调用次数的新函数。
 
 ```typescript
-function before<F extends (...args: any[]) => any>(
-  n: number,
-  func: F
-): (...args: Parameters<F>) => ReturnType<F> | undefined;
+const limitedFunc = before(n, func);
 ```
 
-### 参数
+## 用法
 
-- `n` (`number`): 返回的函数在停止之前允许调用 func 的次数。
-  - 如果 `n` 为 0，则不会调用 ·。
-  - 如果 `n` 是正整数，则 `func` 最多被调用 `n-1` 次。
-- `func` (`F`): 需要应用调用限制的函数。
+### `before(n, func)`
 
-### 返回值
-
-(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 一个新函数，该函数：
-
-- 追踪调用次数。
-- 在调用次数达到 `n-1` 次之前调用 `func`。
-- 如果调用次数达到或超过 `n`，返回 `undefined`，并停止进一步调用。
-
-### 抛出异常
-
-如果 `n` 不是非负整数，则抛出错误。
-
-## 示例
+当您想要限制函数只执行特定次数时,请使用 `before`。函数只会执行到第 `n-1` 次调用,从第 `n` 次开始将不再执行。
 
 ```typescript
 import { before } from 'es-toolkit/function';
 
 const beforeFn = before(3, () => {
-  console.log('called');
+  console.log('执行了');
 });
 
-// 将会打印 'called'.
+// 打印 '执行了'
 beforeFn();
 
-// 将会打印 'called'.
+// 打印 '执行了'
 beforeFn();
 
-// 不会打印 anything.
+// 不会打印任何内容
+beforeFn();
+
+// 不会打印任何内容
 beforeFn();
 ```
 
-## Lodash 兼容性
-
-从 `es-toolkit/compat` 中导入 `before` 以实现与 lodash 的完全兼容。
-
-- `n` 为负数时不会抛出错误。
-- 如果 `func` 不是一个函数，会抛出错误。
-- 当调用次数达到或超过 `n` 时，`before` 返回 `func` 的最后结果。
+这在只需执行一次的任务(如初始化或设置)中特别有用。
 
 ```typescript
-import { before } from 'es-toolkit/compat';
+let initialized = false;
 
-let count = 0;
-
-const before3 = before(3, () => {
-  console.log('正在增加计数...');
-  return ++count;
+const initialize = before(2, () => {
+  console.log('初始化中...');
+  initialized = true;
 });
 
-console.log(before3()); // 正在增加计数... => 1
-console.log(before3()); // 正在增加计数... => 2
-console.log(before3()); //              => 2
+// 打印 '初始化中...' 并执行初始化
+initialize();
+
+// 已经初始化,不会执行任何操作
+initialize();
 ```
+
+#### 参数
+
+- `n` (`number`): 返回的函数可以调用 `func` 的最大次数。如果 `n` 为 0,则 `func` 不会被调用。如果是正整数,则最多调用 `n-1` 次。
+- `func` (`F`): 调用次数将被限制的函数。
+
+#### 返回值
+
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 跟踪调用次数并只执行到第 `n-1` 次 `func` 调用的新函数。从第 `n` 次调用开始将返回 `undefined`。
+
+#### 错误
+
+当 `n` 不是整数或为负数时会抛出错误。

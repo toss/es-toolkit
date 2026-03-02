@@ -1,89 +1,93 @@
 # isEqual
 
-`isEqual` 関数は2つの値が同じかどうかを確認し、`Date`、`RegExp`、深いオブジェクト比較もサポートしています。
-
-## シグネチャ
+二つの値が深く等しいかどうかを確認します。
 
 ```typescript
-function isEqual(a: unknown, b: unknown): boolean;
+const result = isEqual(a, b);
 ```
 
-## パラメータ
+## 使用法
 
-- **`a`**: `unknown` - 比較する1つ目の値。
-- **`b`**: `unknown` - 比較する2つ目の値。
+### `isEqual(a, b)`
 
-## 戻り値
+オブジェクト、配列、Date、RegExp などを含めて二つの値が深く等しいかどうかを確認したい場合に `isEqual` を使用してください。参照が異なっていても内容が同じであれば `true` を返します。単体テストやデータ比較に便利です。
 
-- **`boolean`** - 2つの値が同じであれば `true`、そうでなければ `false` を返します。
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
 
-## 例
-
-### 例1: プリミティブ型の値の比較
-
-```javascript
+// プリミティブ型の比較
 isEqual(1, 1); // true
 isEqual('hello', 'hello'); // true
 isEqual(true, true); // true
-isEqual(1, 2); // false
-isEqual('hello', 'world'); // false
-isEqual(true, false); // false
-```
 
-### 例2: 特殊なケースの比較
-
-```javascript
+// 特殊値の処理
 isEqual(NaN, NaN); // true
 isEqual(+0, -0); // true
 ```
 
-### 例3: Dateオブジェクトの比較
+オブジェクトと配列の深い比較をサポートします。
 
-```javascript
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
+
+// 深いオブジェクトの比較
+const obj1 = { a: 1, b: { c: 2, d: [3, 4] } };
+const obj2 = { a: 1, b: { c: 2, d: [3, 4] } };
+isEqual(obj1, obj2); // true
+
+// 配列の比較
+const arr1 = [1, 2, [3, 4]];
+const arr2 = [1, 2, [3, 4]];
+isEqual(arr1, arr2); // true
+```
+
+Date、RegExp、Map、Set などのオブジェクトも比較できます。
+
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
+
+// 日付の比較
 const date1 = new Date('2020-01-01');
 const date2 = new Date('2020-01-01');
 isEqual(date1, date2); // true
 
-const date3 = new Date('2021-01-01');
-isEqual(date1, date3); // false
-```
-
-### 例4: 正規表現オブジェクトの比較
-
-```javascript
+// 正規表現の比較
 const regex1 = /hello/g;
 const regex2 = /hello/g;
 isEqual(regex1, regex2); // true
 
-const regex3 = /hello/i;
-isEqual(regex1, regex3); // false
+// Map と Set の比較
+const map1 = new Map([['key', 'value']]);
+const map2 = new Map([['key', 'value']]);
+isEqual(map1, map2); // true
+
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2, 3]);
+isEqual(set1, set2); // true
 ```
 
-### 例5: オブジェクトの比較
+単体テストでよく使用されます。
 
-```javascript
-const obj1 = { a: 1, b: { c: 2 } };
-const obj2 = { a: 1, b: { c: 2 } };
-isEqual(obj1, obj2); // true
+```typescript
+import { isEqual } from 'es-toolkit/predicate';
 
-const obj3 = { a: 1, b: { c: 3 } };
-isEqual(obj1, obj3); // false
+function testApiResponse() {
+  const expected = { status: 200, data: { message: 'success' } };
+  const actual = { status: 200, data: { message: 'success' } };
 
-const obj4 = { a: 1, b: 2 };
-const obj5 = { a: 1, c: 2 };
-isEqual(obj4, obj5); // false
+  if (isEqual(expected, actual)) {
+    console.log('テスト合格！');
+  } else {
+    console.log('テスト失敗！');
+  }
+}
 ```
 
-### 例6: 配列の比較
+#### パラメータ
 
-```javascript
-const arr1 = [1, 2, 3];
-const arr2 = [1, 2, 3];
-isEqual(arr1, arr2); // true
+- `a` (`unknown`): 比較する最初の値です。
+- `b` (`unknown`): 比較する2番目の値です。
 
-const arr3 = [1, 2, 4];
-isEqual(arr1, arr3); // false
+#### 戻り値
 
-const arr4 = [1, 2];
-isEqual(arr1, arr4); // false
-```
+(`boolean`): 二つの値が深く等しい場合は `true`、そうでなければ `false` を返します。

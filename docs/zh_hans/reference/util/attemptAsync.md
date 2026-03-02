@@ -1,51 +1,72 @@
 # attemptAsync
 
-::: info
-此函数专为处理异步函数（返回`Promise`的函数）而设计。
-对于同步函数，建议使用`attempt`函数代替。
-:::
-
-尝试执行异步函数并返回包含结果或错误的元组。
-
-## 签名
+执行异步函数并将结果或错误作为元组返回。
 
 ```typescript
-function attemptAsync<T, E>(func: () => Promise<T>): Promise<[null, T] | [E, null]>;
+const [error, result] = await attemptAsync(func);
 ```
 
-### 参数
+## 用法
 
-- `func` (`() => Promise<T>`): 尝试执行的异步函数。
+### `attemptAsync(func)`
 
-### 返回值
-
-(`Promise<[null, T] | [E, null]>`): 解析为以下元组的`Promise`:
-
-- 成功时: `[null, T]` - 第一个元素为`null`，第二个为结果。
-- 出错时: `[E, null]` - 第一个元素为捕获的错误，第二个为`null`。
-
-## 示例
+当您想要安全地执行异步函数时,请使用 `attemptAsync`。您可以在不用 try-catch 包装 async/await 块的情况下处理错误。
 
 ```typescript
 import { attemptAsync } from 'es-toolkit/util';
 
-// 成功时返回 [null, 函数返回值] 元组。
+// API 请求成功的情况
 const [error, data] = await attemptAsync(async () => {
   const response = await fetch('https://api.example.com/data');
   return response.json();
 });
-// [null, 响应对象]
+// error 为 null,data 包含响应数据
 
-// 出错时返回 [函数抛出的错误, null] 元组。
+// 发生网络错误的情况
 const [error, data] = await attemptAsync(async () => {
   throw new Error('网络错误');
 });
-// [Error, null]
+// error 为 Error 对象,data 为 null
 
-// 使用泛型类型可以指定错误和返回值的类型。
-const [error, users] = await attemptAsync<User[], Error>(async () => {
+// 您也可以指定类型
+interface User {
+  id: number;
+  name: string;
+}
+
+const [error, users] = await attemptAsync<User[]>(async () => {
   const response = await fetch('https://api.example.com/users');
   return response.json();
 });
-// `error` 被推断为 `Error` 类型，`users` 被推断为 `User[]` 类型。
+// users 被推断为 User[] 类型
 ```
+
+在需要错误处理的异步操作(如数据库查询或文件读取)中特别有用。
+
+```typescript
+// 文件读取示例
+const [error, content] = await attemptAsync(async () => {
+  const fs = await import('fs/promises');
+  return fs.readFile('config.json', 'utf8');
+});
+
+if (error) {
+  console.log('无法读取文件:', error.message);
+} else {
+  console.log('文件内容:', content);
+}
+```
+
+::: info 对于同步函数请使用 attempt
+
+此函数适用于处理异步函数(返回 `Promise` 的函数)。如果要处理同步函数,建议使用 [`attempt`](./attempt.md) 函数。
+
+:::
+
+#### 参数
+
+- `func` (`() => Promise<T>`): 要执行的异步函数。
+
+#### 返回值
+
+(`Promise<[null, T] | [E, null]>`): 返回一个 Promise,成功时解析为 `[null, 结果值]`,发生错误时解析为 `[错误, null]`。

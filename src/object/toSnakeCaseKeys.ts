@@ -2,17 +2,47 @@ import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../compat/predicate/isPlainObject.ts';
 import { snakeCase } from '../string/snakeCase.ts';
 
-type SnakeCase<S extends string> = S extends `${infer P1}${infer P2}`
-  ? P2 extends Uncapitalize<P2>
-    ? `${Lowercase<P1>}${SnakeCase<P2>}`
-    : `${Lowercase<P1>}_${SnakeCase<Uncapitalize<P2>>}`
-  : Lowercase<S>;
+type SnakeCase<S extends string> =
+  S extends Uppercase<S>
+    ? Lowercase<S>
+    : S extends `${infer P1}${infer P2}`
+      ? P2 extends Uncapitalize<P2>
+        ? `${Lowercase<P1>}${SnakeCase<P2>}`
+        : `${Lowercase<P1>}_${SnakeCase<Uncapitalize<P2>>}`
+      : Lowercase<S>;
 
-export type ToSnakeCaseKeys<T> = T extends any[]
-  ? Array<ToSnakeCaseKeys<T[number]>>
-  : T extends Record<string, any>
-    ? { [K in keyof T as SnakeCase<string & K>]: ToSnakeCaseKeys<T[K]> }
-    : T;
+type NonPlainObject =
+  | Date
+  | RegExp
+  | Map<any, any>
+  | Set<any>
+  | WeakMap<any, any>
+  | WeakSet<any>
+  | Promise<any>
+  | Error
+  | ArrayBuffer
+  | DataView
+  | Int8Array
+  | Uint8Array
+  | Uint8ClampedArray
+  | Int16Array
+  | Uint16Array
+  | Int32Array
+  | Uint32Array
+  | Float32Array
+  | Float64Array
+  | BigInt64Array
+  | BigUint64Array
+  | ((...args: any[]) => any)
+  | typeof globalThis;
+
+export type ToSnakeCaseKeys<T> = T extends NonPlainObject
+  ? T
+  : T extends any[]
+    ? Array<ToSnakeCaseKeys<T[number]>>
+    : T extends Record<string, any>
+      ? { [K in keyof T as SnakeCase<string & K>]: ToSnakeCaseKeys<T[K]> }
+      : T;
 
 /**
  * Creates a new object composed of the properties with keys converted to snake_case.

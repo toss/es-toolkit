@@ -1,28 +1,55 @@
 # unescape
 
-Converts the HTML entities `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `str` to their corresponding characters. It is the inverse of [`escape`](./escape.md).
-
-## Signature
+Converts HTML entity characters to their original characters.
 
 ```typescript
-function unescape(str: string): string;
+const result = unescape(str);
 ```
 
-### Parameters
+## Usage
 
-- `str` (`string`): The string to unescape.
+### `unescape(str)`
 
-### Returns
-
-(`string`): The unescaped string.
-
-## Examples
+Use `unescape` when you want to convert HTML entity characters back to their original characters. It converts HTML entities like `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#39;` to `&`, `<`, `>`, `"`, `'` characters. This is the inverse operation of the [`escape`](./escape.md) function.
 
 ```typescript
 import { unescape } from 'es-toolkit/string';
 
-unescape('This is a &lt;div&gt; element.'); // returns 'This is a <div> element.'
-unescape('This is a &quot;quote&quot;'); // returns 'This is a "quote"'
-unescape('This is a &#39;quote&#39;'); // returns 'This is a 'quote''
-unescape('This is a &amp; symbol'); // returns 'This is a & symbol'
+// Convert HTML tag entities to original characters
+unescape('This is a &lt;div&gt; element.');
+// Returns: 'This is a <div> element.'
+
+// Convert quote entities to original characters
+unescape('This is a &quot;quote&quot;');
+// Returns: 'This is a "quote"'
+
+// Convert single quote entities to original characters
+unescape('This is a &#39;quote&#39;');
+// Returns: 'This is a 'quote''
+
+// Convert ampersand entities to original characters
+unescape('This is a &amp; symbol');
+// Returns: 'This is a & symbol'
 ```
+
+Useful when processing data from HTML forms or URLs:
+
+```typescript
+// Convert HTML entities from user input
+const userInput = 'My favorite tag is &lt;button&gt;';
+const converted = unescape(userInput);
+console.log(converted); // 'My favorite tag is <button>'
+
+// Can also convert strings with mixed entities
+const mixed = '&quot;Hello &amp; Welcome&quot; &lt;says the &gt; user';
+const result = unescape(mixed);
+console.log(result); // '"Hello & Welcome" <says the > user'
+```
+
+#### Parameters
+
+- `str` (`string`): The string to convert.
+
+#### Returns
+
+(`string`): Returns a string with HTML entities converted to their original characters.

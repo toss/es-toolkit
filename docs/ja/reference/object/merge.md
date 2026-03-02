@@ -1,28 +1,56 @@
 # merge
 
-`source`が持つ値を`target`オブジェクトにマージします。
-
-この関数は深いマージを実行し、ネストされたオブジェクトや配列も再帰的にマージされます。
-
-- `source`と`target`のプロパティが両方ともオブジェクトまたは配列の場合、2つのオブジェクトと配列はマージされます。
-- `source`のプロパティが`undefined`の場合、`target`のプロパティは上書きされません。
-
-[toMerged](./toMerged.md)とは異なり、この関数は`target`オブジェクトを変更します。
-
-## インターフェース
+ソースオブジェクトをターゲットオブジェクトに深くマージしてターゲットオブジェクトを修正します。
 
 ```typescript
-function merge<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(target: T, source: S): T & S;
+const result = merge(target, source);
 ```
 
-### パラメータ
+## 使用法
 
-- `target` (`T`): `source`オブジェクトのプロパティをマージするオブジェクト。このオブジェクトは関数によって変更されます。
-- `source` (`S`): `target`オブジェクトにプロパティをマージするオブジェクト。
+### `merge(target, source)`
 
-### 戻り値
+2つのオブジェクトを深くマージしたい時に`merge`を使用してください。ネストされたオブジェクトと配列も再帰的にマージされます。[toMerged](./toMerged.md)とは異なり、元の`target`オブジェクトが修正されます。
 
-(`T & S`): `source`オブジェクトのプロパティがマージされた`target`オブジェクト。
+```typescript
+import { merge } from 'es-toolkit/object';
+
+// 基本的なオブジェクトマージ
+const target = { a: 1, b: { x: 1, y: 2 } };
+const source = { b: { y: 3, z: 4 }, c: 5 };
+const result = merge(target, source);
+// resultとtargetの両方が{ a: 1, b: { x: 1, y: 3, z: 4 }, c: 5 }になります
+
+// 配列もマージされます
+const arrayTarget = { a: [1, 2], b: { x: 1 } };
+const arraySource = { a: [3], b: { y: 2 } };
+merge(arrayTarget, arraySource);
+// arrayTargetは{ a: [3, 2], b: { x: 1, y: 2 } }になります
+
+// null値も適切に処理します
+const nullTarget = { a: null };
+const nullSource = { a: [1, 2, 3] };
+merge(nullTarget, nullSource);
+// nullTargetは{ a: [1, 2, 3] }になります
+```
+
+`undefined`値は既存の値を上書きしません。
+
+```typescript
+const target = { a: 1, b: 2 };
+const source = { b: undefined, c: 3 };
+merge(target, source);
+// targetは{ a: 1, b: 2, c: 3 }になります (bは上書きされません)
+```
+
+#### パラメータ
+
+- `target` (`T extends Record<PropertyKey, any>`): ソースオブジェクトをマージするターゲットオブジェクトです。このオブジェクトが修正されます。
+- `source` (`S extends Record<PropertyKey, any>`): ターゲットオブジェクトにマージするソースオブジェクトです。
+
+#### 戻り値
+
+(`T & S`): ソースオブジェクトがマージされたターゲットオブジェクトを返します。
 
 ## 例
 
@@ -63,8 +91,8 @@ console.log(result);
 
 ## パフォーマンス比較
 
-|                   | [Bundle Size](../../bundle-size.md) | [Performance](../../performance.md) |
-| ----------------- | ----------------------------------- | ----------------------------------- |
-| es-toolkit        | 271 bytes (97.8% smaller)           | 1,952,436 times (3.65× faster)      |
-| es-toolkit/compat | 4,381 bytes (64.9% smaller)         | 706,558 times (1.32× faster)        |
-| lodash-es         | 12,483 bytes                        | 533,484 times                       |
+|                   | [バンドルサイズ](../../bundle-size.md) | [ランタイムパフォーマンス](../../performance.md) |
+| ----------------- | -------------------------------------- | ------------------------------------------------ |
+| es-toolkit        | 271 bytes (97.8% smaller)              | 1,952,436 times (3.65× faster)                   |
+| es-toolkit/compat | 4,381 bytes (64.9% smaller)            | 706,558 times (1.32× faster)                     |
+| lodash-es         | 12,483 bytes                           | 533,484 times                                    |

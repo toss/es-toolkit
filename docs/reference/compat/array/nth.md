@@ -1,31 +1,61 @@
-# nth
+# nth (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use array index access
+This `nth` function operates slowly due to handling `null` or `undefined` and integer conversion.
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+Use the faster and more modern array index access (`array[index]` or `array.at(index)`) instead.
 :::
 
-Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.
-
-## Signature
+Gets the element at the specified index of an array.
 
 ```typescript
-function nth<T>(array: ArrayLike<T> | null | undefined, n: number): T | undefined;
+const element = nth(array, index);
 ```
 
-### Parameters
+## Usage
+
+### `nth(array, index)`
+
+Returns the element at the specified index of an array. If the index is negative, it counts from the end of the array. If the index is out of range, it returns `undefined`.
+
+```typescript
+import { nth } from 'es-toolkit/compat';
+
+const array = [1, 2, 3, 4, 5];
+
+// Positive index
+nth(array, 1);
+// => 2
+
+// Negative index (from end)
+nth(array, -1);
+// => 5
+
+nth(array, -2);
+// => 4
+
+// Out of range index
+nth(array, 10);
+// => undefined
+
+nth(array, -10);
+// => undefined
+```
+
+`null` or `undefined` are treated as `undefined`.
+
+```typescript
+import { nth } from 'es-toolkit/compat';
+
+nth(null, 0); // undefined
+nth(undefined, 0); // undefined
+```
+
+#### Parameters
 
 - `array` (`ArrayLike<T> | null | undefined`): The array to query.
-- `n` (`number`): The index of the element to return.
+- `index` (`number`, optional): The index of the element to get. If negative, it counts from the end. Defaults to `0`.
 
-### Returns
+#### Returns
 
-(`T | undefined`): Returns the nth element of `array`.
-
-## Examples
-
-```typescript
-nth([1, 2, 3], 1); // => 2
-nth([1, 2, 3], -1); // => 3
-```
+(`T | undefined`): Returns the element at the specified index. If the index is out of range, it returns `undefined`.

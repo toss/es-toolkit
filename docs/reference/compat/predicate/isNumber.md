@@ -1,37 +1,57 @@
-# isNumber
+# isNumber (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `typeof` operator
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `isNumber` function is complex due to handling Number object wrappers.
+
+Instead, use the simpler and modern `typeof value === 'number'`.
+
 :::
 
-Checks if a given value is a number.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
-
-## Signature
+Checks if a value is a number.
 
 ```typescript
-function isNumber(value?: unknown): value is number;
+const result = isNumber(value);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`unknown`): The value to check if it is a number.
+### `isNumber(value)`
 
-### Returns
-
-(`value is number`): Returns `true` if `value` is a number, else `false`.
-
-## Examples
+Use `isNumber` when you want to check if a value is a number. This function recognizes both primitive numbers and Number objects as numbers.
 
 ```typescript
-const value1 = 123;
-const value2 = 'abc';
-const value3 = true;
+import { isNumber } from 'es-toolkit/compat';
 
-console.log(isNumber(value1)); // true
-console.log(isNumber(value2)); // false
-console.log(isNumber(value3)); // false
+// Primitive numbers
+isNumber(123);
+// Returns: true
+
+isNumber(3.14);
+// Returns: true
+
+isNumber(NaN);
+// Returns: true
+
+// Number objects
+isNumber(new Number(42));
+// Returns: true
+
+// Other types
+isNumber('123');
+// Returns: false
+
+isNumber(true);
+// Returns: false
+
+isNumber(null);
+// Returns: false
 ```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's a number.
+
+#### Returns
+
+(`value is number`): Returns `true` if the value is a number, otherwise `false`.

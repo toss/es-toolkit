@@ -58,6 +58,21 @@ describe('sortedIndexBy', () => {
     });
   });
 
+  it('should use default iteratee (identity function) when no iteratee is provided', () => {
+    const numbers = [10, 30, 50];
+    const actual = sortedIndexBy(numbers, 40);
+    expect(actual).toBe(2);
+
+    const strings = ['apple', 'cherry'];
+    const actualString = sortedIndexBy(strings, 'banana');
+    expect(actualString).toBe(1);
+  });
+
+  it('should return 0 when array is null or undefined', () => {
+    expect(sortedIndexBy(null, 1)).toBe(0);
+    expect(sortedIndexBy(undefined, 1)).toBe(0);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(sortedIndexBy).toEqualTypeOf<typeof sortedIndexByLodash>();
   });

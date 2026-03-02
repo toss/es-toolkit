@@ -1,5 +1,103 @@
 # es-toolkit Changelog
 
+## Version v1.44.0
+
+Released on January 16th, 2026.
+
+- Added `shouldRetry` option to `retry` function. ([#1585])
+- Added `isEmptyObject` predicate function. ([#1584])
+- Added `isNumber` predicate function.
+- Enhanced error cloning to support `AggregateError`. ([#1563])
+- Implemented collection methods for Maps and Sets.
+- Added bundle size analysis and visualization components to docs. ([#1564])
+- Fixed `flattenObject` to retain empty objects and arrays.
+- Enhanced type safety for `clone` function.
+- Fixed `clone` error when cloning object with null prototype. ([#1570])
+- Fixed array function callbacks to include index and array parameters. ([#1561])
+- Fixed `compat/cloneDeep` and `cloneDeepWith` to clone null-prototype objects as regular objects. ([#1562])
+- Fixed `compat/clamp` to ensure consistency with lodash. ([#1555])
+- Simplified `intersection` filter callback for consistency. ([#1582])
+- Fixed incorrect function names and output in `cloneDeep` JSDoc examples. ([#1583])
+
+We sincerely thank @raon0211, @dayongkr, @eunwoo-levi, @matt-oakes, @T3sT3ro, and @D-Sketon for their contributions. We appreciate your great efforts!
+
+## Version v1.43.0
+
+Released on December 12th, 2025.
+
+- Enhanced `merge` to handle arrays and objects consistently, and to match lodash's behavior with date values and array-like objects. ([#1553], [#1542], [#1548])
+- Fixed `isMatch` and `isMatchWith` to match lodash's behavior.
+- Fixed `intersectionBy` implementation and removed duplicates when the mapper produces the same values. ([#1528])
+- Fixed `throttle` working like debounce.
+- Fixed type inference in `toSnakeCaseKeys`, `toCamelCaseKeys` for edge cases and improved type inference for uppercase keys. ([#1538])
+- Fixed casing utilities (`camelCase`, `kebabCase`, `lowerCase`, `snakeCase`, `startCase`, `upperCase`) to match lodash's behavior. ([#1525])
+- Fixed `compat/template` to disable ES interpolation when custom `interpolate` is provided. ([#1527])
+- Fixed incorrect example in `differenceBy` documentation. ([#1543])
+- Performance improvement: updated `deburr` to use arrays to construct the deburrMap. ([#1526])
+
+We sincerely thank @dayongkr, @raon0211, @wo-o29, @Yeom-JinHo, @Copilot, @oshosh, @vbfox, @sukvvon, @sankeyangshu, @D-Sketon, @seo-rii for their contributions. We appreciate your great efforts!
+
+## Version v1.42.0
+
+Released on November 17th, 2025.
+
+- Added new async utilities: `filterAsync`, `flatMapAsync`, `forEachAsync`, `mapAsync`, `reduceAsync`, and `limitAsync` for handling asynchronous operations.
+- Exported `ThrottleOptions` and `DebounceOptions` interfaces for better type support.
+- Fixed `isFinite` to implement type predicate to narrow type to number.
+- Fixed `isSafeInteger` to implement type predicate to narrow type to number.
+- Fixed `omit` to prevent adding index properties to array-like objects.
+- Fixed `mergeWith` to remove unnecessary nullish coalescing for 100% branch coverage.
+- Fixed `compat/updateWith` to remove unreachable code and add prototype pollution test.
+- Updated documentation headings for consistency.
+- Improved test coverage for `compat/mergeWith`, `compat/unset`, `get`, `toMerged`, `mergeWith`, and `compat/intersectionBy` with additional edge cases and security tests.
+
+We sincerely thank @Debbl, @wo-o29, @raon0211, @Yeom-JinHo, @sukvvon, and @D-Sketon for their contributions. We appreciate your great efforts!
+
+## Version v1.41.0
+
+Released on October 24th, 2025.
+
+- Enhanced `throttle` to preserve `this` context when called as a method.
+- Added type guard support for `partition` function.
+- Fixed `omit` to support runtime-determined key arrays with proper overloads.
+- Fixed `defaults` in compatibility layer to properly handle undefined and null sources.
+- Fixed `toSnakeCaseKeys` and `toCamelCaseKeys` to correctly return types for non-plain objects.
+- Fixed `toMerged` and `mergeWith` to properly handle shared objects in merge logic.
+- Fixed `compat/union` to support array-like objects.
+- Fixed `compat/updateWith` to use `get` for value retrieval in updater function.
+- Fixed circular import between `isMatch` and `isMatchWith`.
+- Fixed `find` and `findLast` by simplifying logic and removing unnecessary checks.
+- Fixed `takeRight` by improving test coverage and removing redundant checks.
+- Fixed `curry` and `curryRight` by removing unnecessary type assertions.
+- Fixed `isEqualWith` and `mapKeys` by removing unnecessary type assertions.
+- Improved performance for `meanBy` by removing intermediate array creation.
+- Updated build system to use UMD format instead of IIFE for browser builds.
+- Fixed numerous documentation examples across compat modules.
+- Improved test coverage with additional test cases for edge cases and compatibility.
+
+We sincerely thank @the5thbeatle, @wo-o29, @hwibaski, @manudeli, @raon0211, @dayongkr, @D-Sketon, @yoouungyoung, @Dohun-choi, @sukvvon, @zoulou00, and @sen2y for their contributions. We appreciate your great efforts!
+
+## Version v1.40.0
+
+Released on October 8th, 2025.
+
+- Enhanced `sumBy` to pass the element index to the `getValue` callback function.
+- Improved performance for `uniq` function.
+- Fixed `cloneDeepWith` to handle runtime errors in environments without Blob support and correctly clone Boolean, Number, and String objects.
+- Fixed `omit` to avoid unnecessary deep cloning, improving performance.
+- Fixed `toCamelCaseKeys` to properly handle PascalCase type conversion.
+- Fixed `toPath` to correctly handle arrays and non-string inputs.
+- Fixed `repeat` to validate and handle invalid repeat counts.
+- Fixed `sortedIndexBy` to properly handle default iteratee.
+- Fixed `some` predicate check to correctly handle null and undefined cases.
+- Fixed compatibility issue in `compat/unset` with nonexistent paths.
+- Fixed several JSDoc issues across multiple functions including return types, parameter descriptions, and method names.
+- Improved documentation clarity and consistency across multiple functions.
+- Enhanced test coverage with additional test cases for compat functions and edge cases.
+- Updated build configuration and CI workflows.
+
+We sincerely thank @wo-o29, @D-Sketon, @HidenLee, @yoouung, @manudeli, @dayongkr, @Li13, @nicklemmon, @sen2y, @miinhho, @raon0211, @joshkel, @jgjgill, @mlnwns, @Dohun-choi, @PinkChampagne17, @sukvvon, @YOUNGHO8762, @caseBread, @Jeongeun-Choi, @artechventure and hoyyChoi for their contributions. We appreciate your great efforts!
+
 ## Version v1.39.10
 
 Released on August 17th, 2025.

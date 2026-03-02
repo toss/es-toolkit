@@ -1,59 +1,55 @@
-# defaults
+# defaults (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.assign()` を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `defaults` 関数は、`undefined` と `Object.prototype` から継承されたプロパティを特別に処理する複雑なロジックにより、動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.assign()` を使用してください。
+
 :::
 
-対象オブジェクト `object` に対して、特定のプロパティが `undefined` にならないようにデフォルト値を設定します。
-`undefined` であるか、`Object.prototype` から継承された値に対してデフォルト値を設定します。
-
-デフォルト値を設定するために、複数のオブジェクトをパラメータとして提供できます。これらのオブジェクトは左から右の順に適用されます。
-あるプロパティに値が指定されると、同じプロパティに対する後続の値は無視されます。
-
-注意: この関数は最初のパラメータ `object` を変更します。変更したくない場合は、[toDefaulted](./toDefaulted.md) 関数を使用してください。
-
-## インターフェース
+オブジェクトの `undefined` プロパティをデフォルト値で埋めます。
 
 ```typescript
-function defaults<T extends object>(object: T): NonNullable<T>;
-function defaults<T extends object, S extends object>(object: T, source: S): NonNullable<T & S>;
-function defaults<T extends object, S1 extends object, S2 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2
-): NonNullable<T & S1 & S2>;
-function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3
-): NonNullable<T & S1 & S2 & S3>;
-function defaults<T extends object, S1 extends object, S2 extends object, S3 extends object, S4 extends object>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3,
-  source4: S4
-): NonNullable<T & S1 & S2 & S3 & S4>;
-function defaults<T extends object, S extends object>(object: T, ...sources: S[]): object;
+const result = defaults(object, source);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`T`): 対象オブジェクト。
-- `sources` (`S[]`): デフォルト値を表すオブジェクト。
+### `defaults(object, ...sources)`
 
-### 戻り値
-
-(`object`): `sources`で指定されたデフォルト値を持つように値が埋められた対象オブジェクト。
-
-## 例
+オブジェクトの `undefined` プロパティや `Object.prototype` から継承されたプロパティにデフォルト値を設定したい場合は、`defaults` を使用してください。複数のデフォルト値オブジェクトを渡すことができ、左から右の順に適用されます。
 
 ```typescript
-defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-defaults({ a: null }, { a: 1 }); // { a: null }
-defaults({ a: undefined }, { a: 1 }); // { a: 1 }
+import { defaults } from 'es-toolkit/compat';
+
+// デフォルト値で undefined プロパティを埋める
+defaults({ a: 1 }, { a: 2, b: 2 }, { c: 3 });
+// 戻り値: { a: 1, b: 2, c: 3 }
+
+// undefined プロパティのみがデフォルト値で埋められます
+defaults({ a: undefined }, { a: 1 });
+// 戻り値: { a: 1 }
+
+// null 値はそのまま保持されます
+defaults({ a: null }, { a: 1 });
+// 戻り値: { a: null }
 ```
+
+プロパティがすでに値を持っている場合、デフォルト値で上書きされません。
+
+```typescript
+import { defaults } from 'es-toolkit/compat';
+
+defaults({ a: 1, b: 2 }, { b: 3 }, { c: 3 });
+// 戻り値: { a: 1, b: 2, c: 3 }
+```
+
+#### パラメータ
+
+- `object` (`any`): デフォルト値を設定する対象オブジェクトです。
+- `...sources` (`any[]`): デフォルト値を提供するソースオブジェクトです。
+
+#### 戻り値
+
+(`any`): デフォルト値が設定されたオブジェクトを返します。最初の引数 `object` が変更されます。

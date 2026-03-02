@@ -1,40 +1,73 @@
 # mergeWith
 
-`source`가 가지고 있는 값들을 `target` 객체로 병합해요.
-
-어떻게 프로퍼티를 병합하는지 지정하기 위해서 `merge` 함수 인자를 정의하세요. `merge` 함수 인자는 `target` 객체에 설정될 값을 반환해야 해요.
-
-만약 `undefined`를 반환한다면, 기본적으로 두 값을 깊이 병합해요. 깊은 병합에서는, 중첩된 객체나 배열을 다음과 같이 재귀적으로 병합해요.
-
-- `source`와 `target`의 프로퍼티가 모두 객체 또는 배열이라면, 두 객체와 배열은 병합돼요.
-- 만약에 `source`의 프로퍼티가 `undefined` 라면, `target`의 프로퍼티를 덮어씌우지 않아요.
-
-이 함수는 `target` 객체를 수정해요.
-
-## 인터페이스
+사용자 정의 병합 함수를 사용해서 소스 객체를 대상 객체에 깊게 병합해서 대상 객체를 수정해요.
 
 ```typescript
-function mergeWith<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
-  target: T,
-  source: S,
-  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
-): T & S;
+const result = mergeWith(target, source, mergeFunction);
 ```
 
-### 파라미터
+## 사용법
 
-- `target` (`T`): `source` 객체가 가지고 있는 프로퍼티를 병합할 객체. 이 객체는 함수에 의해 수정돼요.
-- `source` (`S`): `target` 객체로 프로퍼티를 병합할 객체.
-- `merge` (`(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any`): 두 값을 어떻게 병합할지 정의하는 함수. 아래와 같은 인자로 호출돼요.
-  - `targetValue`: `target` 객체가 가지고 있는 값.
-  - `sourceValue`: `source` 객체가 가지고 있는 값.
-  - `key`: 병합되고 있는 프로퍼티 이름.
-  - `target`: `target` 객체.
-  - `source`: `source` 객체.
+### `mergeWith(target, source, merge)`
 
-### 반환 값
+두 객체를 병합할 때 각 속성에 대해 사용자 정의 병합 로직을 적용하고 싶을 때 `mergeWith`를 사용하세요. 병합 함수가 `undefined`를 반환하면 기본 깊은 병합 로직을 사용해요.
 
-(`T & S`): `source` 객체가 가지고 있는 프로퍼티가 병합된 `target` 객체.
+```typescript
+import { mergeWith } from 'es-toolkit/object';
+
+// 숫자 값을 더해서 병합해요
+const target = { a: 1, b: 2, c: { x: 10 } };
+const source = { b: 3, c: { x: 20, y: 30 }, d: 4 };
+
+const result = mergeWith(target, source, (targetValue, sourceValue, key) => {
+  if (typeof targetValue === 'number' && typeof sourceValue === 'number') {
+    return targetValue + sourceValue; // 숫자는 더해요
+  }
+  // undefined를 반환하면 기본 병합 로직을 사용해요
+});
+// result와 target 모두 { a: 1, b: 5, c: { x: 30, y: 30 }, d: 4 }가 돼요
+
+// 배열을 연결해서 병합해요
+const arrayTarget = { items: [1, 2], metadata: { count: 2 } };
+const arraySource = { items: [3, 4], metadata: { count: 2 } };
+
+mergeWith(arrayTarget, arraySource, (targetValue, sourceValue) => {
+  if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+    return targetValue.concat(sourceValue);
+  }
+});
+// arrayTarget은 { items: [1, 2, 3, 4], metadata: { count: 2 } }가 돼요
+
+// 키에 따라 다른 병합 로직 적용해요
+const config = { timeout: 1000, retries: 3, features: { featureA: true } };
+const updates = { timeout: 2000, retries: 5, features: { featureB: false } };
+
+mergeWith(config, updates, (targetValue, sourceValue, key) => {
+  if (key === 'timeout') {
+    return Math.max(targetValue, sourceValue); // timeout은 더 큰 값 선택
+  }
+  if (key === 'retries') {
+    return Math.min(targetValue, sourceValue); // retries는 더 작은 값 선택
+  }
+  // 다른 속성은 기본 병합 로직 사용
+});
+// config는 { timeout: 2000, retries: 3, features: { featureA: true, featureB: false } }가 돼요
+```
+
+#### 파라미터
+
+- `target` (`T extends Record<PropertyKey, any>`): 소스 객체를 병합할 대상 객체예요. 이 객체가 수정돼요.
+- `source` (`S extends Record<PropertyKey, any>`): 대상 객체에 병합할 소스 객체예요.
+- `merge` (`(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any`): 사용자 정의 병합 함수예요.
+  - `targetValue`: 대상 객체의 현재 값
+  - `sourceValue`: 소스 객체의 값
+  - `key`: 병합 중인 속성의 키
+  - `target`: 대상 객체
+  - `source`: 소스 객체
+
+#### 반환 값
+
+(`T & S`): 소스 객체가 병합된 대상 객체를 반환해요.
 
 ## 예시
 

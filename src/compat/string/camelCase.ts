@@ -1,3 +1,4 @@
+import { deburr } from './deburr.ts';
 import { camelCase as camelCaseToolkit } from '../../string/camelCase.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
@@ -18,5 +19,5 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  */
 
 export function camelCase(str?: string): string {
-  return camelCaseToolkit(normalizeForCase(str));
+  return camelCaseToolkit(normalizeForCase(deburr(str)));
 }

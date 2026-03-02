@@ -373,6 +373,18 @@ describe('isMatch', () => {
     expect(actual).toEqual(objects);
   });
 
+  it('should return `false` when object matcher has only undefined values for keys', () => {
+    expect(
+      isMatch(
+        {
+          label: 'Foo',
+          value: 'foo',
+        },
+        { value: { missingKey: undefined } }
+      )
+    ).toBe(false);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(isMatch).toEqualTypeOf<typeof isMatchLodash>();
   });

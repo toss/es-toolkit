@@ -13,6 +13,16 @@ describe('startCase', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should convert string to start case, identical to lodash', () => {
+    expect(startCase('åäöÅÄÖ')).toBe('Aao AAO');
+    expect(startCase('helloÅäöWorld')).toBe('Hello Aao World');
+    expect(startCase('café')).toBe('Cafe');
+    expect(startCase('naïve')).toBe('Naive');
+    expect(startCase('Zürich')).toBe('Zurich');
+    expect(startCase('São Paulo')).toBe('Sao Paulo');
+    expect(startCase('Москва')).toBe('Москва');
+  });
+
   it(`should handle double-converting strings`, () => {
     const actual = strings.map(string => startCase(startCase(string)));
 

@@ -40,4 +40,16 @@ describe('minBy', () => {
     const result = minBy(numbers, x => x);
     expect(result).toBe(1);
   });
+
+  it('should provide index parameter to getValue function', () => {
+    const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
+    const result = minBy(items, (item, index) => item.value + index);
+    expect(result).toEqual({ value: 10 });
+  });
+
+  it('should provide array parameter to getValue function', () => {
+    const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
+    const result = minBy(items, (item, _index, array) => item.value * array.length);
+    expect(result).toEqual({ value: 10 });
+  });
 });

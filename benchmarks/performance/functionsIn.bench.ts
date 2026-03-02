@@ -6,18 +6,18 @@ const functionsInToolkitCompat = functionsInToolkitCompat_;
 const functionsInLodash = functionsInLodash_;
 
 describe('functionsIn', () => {
-  function Foo() {
-    this.a = function () {
+  class Foo {
+    a = function () {
       return 'a';
     };
-    this.b = function () {
+
+    b = function () {
       return 'b';
     };
+    c() {
+      return 'c';
+    }
   }
-
-  Foo.prototype.c = function () {
-    return 'c';
-  };
 
   const foo = new Foo();
   const plainObject = {

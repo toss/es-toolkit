@@ -1,80 +1,72 @@
 # delay
 
-Delays the execution of code for a specified number of milliseconds.
-
-This function returns a Promise that resolves after the specified delay, allowing you to use it
-with async/await to pause execution.
-It also supports an optional AbortSignal to cancel the delay.
-
-## Signature
+Delays code execution for a specified amount of time.
 
 ```typescript
-function delay(ms: number, options?: DelayOptions): Promise<void>;
+await delay(ms, options?);
 ```
 
-### Parameters
+## Usage
 
-- `ms` (`number`): The number of milliseconds to delay.
-- `options` (`DelayOptions`, optional): An options object.
-  - `signal` (`AbortSignal`, optional): An optional `AbortSignal` to cancel the delay.
+### `delay(ms, options?)`
 
-### Returns
-
-(`Promise<void>`): A Promise that resolves after the specified delay.
-
-## Examples
-
-### Basic Usage
+Use `delay` when you want to pause code execution for a specific amount of time. You can use it with async/await to make the next code execute after a certain time. If needed, you can also cancel the delay through an `AbortSignal`.
 
 ```typescript
-async function foo() {
+import { delay } from 'es-toolkit/promise';
+
+async function example() {
   console.log('Start');
   await delay(1000); // Delays execution for 1 second
-  console.log('End');
+  console.log('Executed after 1 second');
+
+  await delay(500); // Delays for an additional 0.5 seconds
+  console.log('Executed after an additional 0.5 seconds');
 }
 
-foo();
+example();
 ```
 
-### Using with an AbortSignal
+You can also cancel the delay using AbortSignal:
 
 ```typescript
-async function foo() {
+async function cancellableDelay() {
   const controller = new AbortController();
-  const signal = controller.signal;
+  const { signal } = controller;
 
-  setTimeout(() => controller.abort(), 50); // Will cancel the delay after 50ms
+  // Cancel the delay after 50ms
+  setTimeout(() => controller.abort(), 50);
+
   try {
     await delay(1000, { signal });
+    console.log('1 second has passed'); // This code won't execute
   } catch (error) {
-    console.log(error); // Will log 'The operation was aborted'
+    console.log('Delay was cancelled'); // AbortError is thrown
   }
 }
 ```
 
-## Lodash Compatibility
-
-Import `delay` from `es-toolkit/compat` for full compatibility with Lodash.
-
-- `delay` accepts a function that will be invoked after a delay.
-- `delay` accepts arguments that will be passed to the function.
-- `delay` returns a timer ID that can be used to clear the timeout.
+It's also useful for simulating asynchronous behavior in tests.
 
 ```typescript
-import { delay } from 'es-toolkit/compat';
-
-// Example 1: Delayed function execution
-const timerId = delay(
-  (greeting, recipient) => {
-    console.log(`${greeting}, ${recipient}!`);
-  },
-  1000,
-  'Hello',
-  'Alice'
-);
-// => 'Hello, Alice!' will be logged after one second.
-
-// Example 2: Clearing the timeout before execution
-clearTimeout(timerId);
-// The function will not be executed because the timeout was cleared.
+async function simulateNetworkRequest() {
+  console.log('Starting network request...');
+  await delay(2000); // Simulates a 2-second network delay
+  console.log('Response received!');
+  return { data: 'test' };
+}
 ```
+
+#### Parameters
+
+- `ms` (`number`): The amount of time to delay in milliseconds.
+- `options` (`DelayOptions`, optional): Delay options.
+  - `signal` (`AbortSignal`, optional): An AbortSignal to cancel the delay.
+
+#### Returns
+
+(`Promise<void>`): Returns a Promise that completes after the specified time.
+
+#### Errors
+
+Throws `AbortError` when the AbortSignal is activated.

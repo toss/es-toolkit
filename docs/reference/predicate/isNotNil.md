@@ -1,29 +1,53 @@
 # isNotNil
 
-Checks if the given value is not null nor undefined.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to ensure it is not nullable.
-
-## Signature
+Checks if a value is neither `null` nor `undefined`.
 
 ```typescript
-function isNotNil<T>(x: T | null | undefined): x is T;
+const result = isNotNil(value);
 ```
 
-### Parameters
+## Usage
 
-- `x` (`T | null | undefined`): The value to test if it is not null nor undefined.
+### `isNotNil(value)`
 
-### Returns
-
-(`x is T`): True if the value is not null nor undefined, false otherwise.
-
-## Examples
+Use `isNotNil` when you want to check if a value is neither `null` nor `undefined`. It's particularly useful for filtering out `null` or `undefined` values from arrays.
 
 ```typescript
-// Here the type of `arr` is (number | undefined)[]
-const arr = [1, undefined, 3];
-// Here the type of `result` is number[]
-const result = arr.filter(isNotNil);
-// result will be [1, 3]
+import { isNotNil } from 'es-toolkit/predicate';
+
+// Basic usage
+console.log(isNotNil(42)); // true
+console.log(isNotNil('hello')); // true
+console.log(isNotNil([])); // true
+console.log(isNotNil({})); // true
+
+console.log(isNotNil(null)); // false
+console.log(isNotNil(undefined)); // false
+
+// Useful for array filtering
+const mixedArray = [1, null, 'hello', undefined, true, 0];
+const filteredArray = mixedArray.filter(isNotNil);
+// filteredArray becomes [1, 'hello', true, 0] (null and undefined removed)
 ```
+
+It can also be used as a type guard in TypeScript.
+
+```typescript
+function processItems(items: (string | null | undefined)[]) {
+  // Filtering with isNotNil narrows the type to string[]
+  const validItems = items.filter(isNotNil);
+
+  validItems.forEach(item => {
+    // item is now guaranteed to be of type string
+    console.log(item.toUpperCase());
+  });
+}
+```
+
+#### Parameters
+
+- `value` (`T | null | undefined`): The value to check if it's neither `null` nor `undefined`.
+
+#### Returns
+
+(`value is T`): Returns `true` if the value is neither `null` nor `undefined`, `false` otherwise.

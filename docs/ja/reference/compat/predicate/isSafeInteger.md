@@ -1,36 +1,60 @@
-# isSafeInteger
+# isSafeInteger (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Number.isSafeInteger`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `isSafeInteger` 関数は追加の型チェックオーバーヘッドにより遅く動作します。
+
+代わりにより高速で現代的な `Number.isSafeInteger` を使用してください。
+
 :::
 
-`value`が安全な整数（Safe Integer）かどうかを確認します。
-
-安全な整数とは、JavaScriptの`number`型で正確に表現され、他の整数に丸められない整数です。
-
-TypeScriptのタイプガードとして使用できます。パラメーターとして与えられた値のタイプを`number`に絞ります。
-
-## インターフェース
+値が安全な整数かどうかを確認します。
 
 ```typescript
-function isSafeInteger(value?: unknown): boolean;
+const result = isSafeInteger(value);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`unknown`): 確認する値。
+### `isSafeInteger(value)`
 
-### 戻り値
-
-(`boolean`): `value`が整数で安全な値の範囲内であれば `true`、そうでなければ `false`。
-
-## 例
+与えられた値が安全な整数かどうかを確認する際に `isSafeInteger` を使用してください。安全な整数は -(2^53 - 1) と (2^53 - 1) の間の整数で、JavaScript で正確に表現できる整数です。
 
 ```typescript
-isSafeInteger(3); // Returns: true
-isSafeInteger(Number.MIN_SAFE_INTEGER - 1); // Returns: false
-isSafeInteger(1n); // Returns: false
-isSafeInteger('1'); // Returns: false
+import { isSafeInteger } from 'es-toolkit/compat';
+
+// 安全な整数
+isSafeInteger(3); // true
+isSafeInteger(-42); // true
+isSafeInteger(0); // true
+isSafeInteger(Number.MAX_SAFE_INTEGER); // true (9007199254740991)
+isSafeInteger(Number.MIN_SAFE_INTEGER); // true (-9007199254740991)
+
+// 安全でない整数
+isSafeInteger(Number.MAX_SAFE_INTEGER + 1); // false
+isSafeInteger(Number.MIN_SAFE_INTEGER - 1); // false
+isSafeInteger(9007199254740992); // false
+
+// 整数でない値
+isSafeInteger(3.14); // false
+isSafeInteger('3'); // false
+isSafeInteger(1n); // false (BigInt)
+isSafeInteger([]); // false
+isSafeInteger({}); // false
+isSafeInteger(null); // false
+isSafeInteger(undefined); // false
+
+// 無限大とNaN
+isSafeInteger(Infinity); // false
+isSafeInteger(-Infinity); // false
+isSafeInteger(NaN); // false
 ```
+
+#### パラメータ
+
+- `value` (`any`): 確認する値です。
+
+#### 戻り値
+
+(`value is number`): 値が安全な整数の場合は `true`、そうでなければ `false` を返します。  
+`true` を返す場合、TypeScript は `value` の型を `number` に絞り込みます。

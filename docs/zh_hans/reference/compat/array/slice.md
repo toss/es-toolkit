@@ -1,44 +1,76 @@
-# slice
+# slice（Lodash 兼容性）
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.prototype.slice`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
+此 `slice` 函数由于 `null` 或 `undefined` 处理和稀疏数组的特殊处理而运行缓慢。JavaScript 的原生 `Array.prototype.slice` 方法更快且更标准化。
 
-从索引 `start` 到索引 `end` 创建 `array` 的部分数组。部分数组不包含 `end`。
-
-与基本的 `Array.prototype.slice` 不同，它不会对稀疏数组返回密集数组。
-
-## 签名
-
-```typescript
-function slice<T>(array: T[], start?: number, end?: number): T[];
-```
-
-### 参数
-
-- `array` (`T[]`): 用于创建部分数组的数组。
-
-::: info `array` 可以是 `ArrayLike<T>`、`null` 或 `undefined`。
-
-为了确保与 lodash 的完全兼容性，`slice` 函数以以下方式处理 `array`：
-
-- 如果 `array` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
-- 如果 `array` 是 `null` 或 `undefined`，则会将其视为一个空数组。
+请使用更快、更现代的 `Array.prototype.slice`。
 
 :::
 
-- `start` (`number`): 开始位置。默认值为 `0`。
-- `end` (`number`): 结束位置。默认值为 `array.length`。
-
-### 返回值
-
-(`T[]`): 从 `array` 的 `start` 到 `end` 的部分数组。
-
-## 示例
+切割数组的一部分以创建新数组。
 
 ```typescript
-slice([1, 2, 3], 1, 2); // => [2]
-slice(new Array(3)); // => [undefined, undefined, undefined]
+const sliced = slice(array, start, end);
 ```
+
+## 用法
+
+### `slice(array, start, end)`
+
+当只需要数组的特定部分时，使用 `slice`。它创建一个新数组，包含从开始位置到结束位置之前的元素。
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+// 从索引1到2进行切割
+slice([1, 2, 3, 4], 1, 3);
+// 返回值：[2, 3]
+
+// 使用负索引
+slice([1, 2, 3, 4], -2);
+// 返回值：[3, 4]
+
+// 仅指定开始位置
+slice([1, 2, 3, 4], 2);
+// 返回值：[3, 4]
+```
+
+`null` 或 `undefined` 作为空数组处理。
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+slice(null); // []
+slice(undefined); // []
+```
+
+处理稀疏数组时，空槽会用 `undefined` 填充。
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+const sparse = new Array(3);
+sparse[1] = 'b';
+slice(sparse);
+// 返回值：[undefined, 'b', undefined]
+```
+
+使用负索引会从数组末尾开始计算。
+
+```typescript
+import { slice } from 'es-toolkit/compat';
+
+slice([1, 2, 3, 4, 5], -3, -1);
+// 返回值：[3, 4]
+```
+
+#### 参数
+
+- `array` (`ArrayLike<T> | null | undefined`)：要切割的数组。
+- `start` (`number`，可选）：开始位置。负值从末尾计算。默认值为 `0`。
+- `end` (`number`，可选）：结束位置（不包含）。负值从末尾计算。默认值为数组的长度。
+
+#### 返回值
+
+(`T[]`)：返回包含从 `start` 到 `end` 之前的元素的新数组。

@@ -175,7 +175,7 @@ describe('update', () => {
       });
 
       update(object, 'a', updater);
-      expect(pass);
+      expect(pass).toBe(true);
     });
   });
 

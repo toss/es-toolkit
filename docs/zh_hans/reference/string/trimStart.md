@@ -1,29 +1,50 @@
 # trimStart
 
-移除字符串开头的空白字符或指定字符。
-
-如果 `chars` 是一个字符串，它应该是一个单一字符。要删除多个字符，请提供一个数组。
-
-## 签名
+删除字符串开头的空白或指定字符。
 
 ```typescript
-function trimStart(str: string, chars?: string | string[]): string;
+const trimmed = trimStart(str, chars);
 ```
 
-### 参数
+## 用法
 
-- `str` (`string`): 将要去除开头字符的字符串。
-- `chars` (`string | string[]`): 要从字符串开头删除的字符。
+### `trimStart(str, chars?)`
 
-### 返回值
-
-(`string`): 移除指定开头字符后的结果字符串。
-
-## 示例
+当你想要删除字符串开头的不必要字符时使用 `trimStart`。如果不指定特定字符，则删除空白字符。
 
 ```typescript
-const trimmedStr1 = trimStart('---hello', '-'); // returns 'hello'
-const trimmedStr2 = trimStart('000123', '0'); // returns '123'
-const trimmedStr3 = trimStart('abcabcabc', 'a'); // returns 'bcabcabc'
-const trimmedStr4 = trimStart('xxxtrimmed', 'x'); // returns 'trimmed'
+import { trimStart } from 'es-toolkit/string';
+
+// 删除默认空白
+trimStart('  hello'); // 'hello'
+trimStart('\t\n  hello'); // 'hello'
+
+// 删除特定字符
+trimStart('---hello', '-'); // 'hello'
+trimStart('000123', '0'); // '123'
+trimStart('abcabcabc', 'a'); // 'bcabcabc'
 ```
+
+如果将多个字符指定为数组，则删除所有匹配其中任意一个的字符。
+
+```typescript
+import { trimStart } from 'es-toolkit/string';
+
+// 将多个字符指定为数组
+trimStart('!!@@hello', ['!', '@']); // 'hello'
+
+// 删除数字和特殊字符
+trimStart('123abc', ['1', '2', '3']); // 'abc'
+
+// 同时删除字符和空白
+trimStart('  __hello', ['_', ' ']); // 'hello'
+```
+
+#### 参数
+
+- `str` (`string`): 要从开头删除字符的字符串。
+- `chars` (`string | string[]`, 可选): 要删除的字符。可以是字符串或字符数组。默认为空白字符。
+
+#### 返回值
+
+(`string`): 返回一个从开头删除了指定字符的新字符串。

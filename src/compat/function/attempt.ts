@@ -3,11 +3,11 @@
  * If the function throws an error, it catches the error and returns it.
  * If the caught error is not an instance of Error, it wraps it in a new Error.
  *
- * @param {F} func - The function to be executed.
- * @param {...Parameters<F>} args - The arguments to pass to the function.
- * @returns {ReturnType<F> | Error} The return value of the function if successful, or an Error if an exception is thrown.
+ * @param {(...args: any[]) => R} func - The function to be executed.
+ * @param {...any[]} args - The arguments to pass to the function.
+ * @returns {R | Error} The return value of the function if successful, or an Error if an exception is thrown.
  *
- * @template F - The type of the function being attempted.
+ * @template R - The type of the function return value.
  *
  * @example
  * // Example 1: Successful execution

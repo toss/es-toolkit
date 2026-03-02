@@ -8,14 +8,14 @@ const wrapLodash = wrapLodash_;
 describe('wrap', () => {
   bench('es-toolkit/compat/wrap', () => {
     wrapToolkit(
-      x => x,
+      (x: any) => x,
       (value, x) => value(x)
     );
   });
 
   bench('lodash/wrap', () => {
     wrapLodash(
-      x => x,
+      (x: any) => x,
       (value, x) => value(x)
     );
   });

@@ -1,47 +1,78 @@
-# castArray
+# castArray (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.from()` 또는 배열 리터럴(`[value]`)을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `castArray` 함수는 인자가 없을 때와 `undefined` 처리 등으로 인해 복잡하게 동작해요.
+
+대신 더 명확하고 현대적인 `Array.from()`이나 조건부 배열 생성(`Array.isArray(value) ? value : [value]`)을 사용하세요.
+
 :::
 
-값이 배열이 아닌 경우 배열로 변환하여 반환해요.
-
-## 인터페이스
+값이 배열이 아닌 경우 배열로 변환해서 반환해요.
 
 ```typescript
-function castArray<T>(value?: T | T[]): T[];
+const result = castArray(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`T | T[]`): 배열로 변환할 값.
+### `castArray(value?)`
 
-### 반환 값
-
-(`T[]`): 입력값이 배열이 아니라면 해당 값을 포함하는 배열을 반환하고, 이미 배열이라면 원래의 배열을 반환해요.
-
-## 예시
+어떤 값이든 배열로 만들고 싶을 때 `castArray`를 사용하세요. 값이 이미 배열이면 그대로 반환하고, 배열이 아니면 그 값을 포함하는 새 배열을 만들어요.
 
 ```typescript
 import { castArray } from 'es-toolkit/compat';
 
-const arr1 = castArray(1);
-// [1]을 반환해요.
+// 숫자를 배열로 변환해요
+castArray(1);
+// Returns: [1]
 
-const arr2 = castArray([1]);
-// [1]을 반환해요.
+// 문자열을 배열로 변환해요
+castArray('hello');
+// Returns: ['hello']
 
-const arr3 = castArray({ a: 1 });
-// [{'a': 1}]을 반환해요.
-
-const arr4 = castArray(null);
-// [null]을 반환해요.
-
-const arr5 = castArray(undefined);
-// [undefined]을 반환해요.
-
-const arr6 = castArray();
-// []을 반환해요.
+// 객체를 배열로 변환해요
+castArray({ a: 1 });
+// Returns: [{ a: 1 }]
 ```
+
+이미 배열인 값은 그대로 반환해요.
+
+```typescript
+import { castArray } from 'es-toolkit/compat';
+
+castArray([1, 2, 3]);
+// Returns: [1, 2, 3]
+
+castArray(['a', 'b']);
+// Returns: ['a', 'b']
+```
+
+`null`이나 `undefined`도 배열로 변환해요.
+
+```typescript
+import { castArray } from 'es-toolkit/compat';
+
+castArray(null);
+// Returns: [null]
+
+castArray(undefined);
+// Returns: [undefined]
+```
+
+인자가 없으면 빈 배열을 반환해요.
+
+```typescript
+import { castArray } from 'es-toolkit/compat';
+
+castArray();
+// Returns: []
+```
+
+#### 파라미터
+
+- `value` (`T | readonly T[]`, 선택): 배열로 변환할 값이에요. 인자가 없으면 빈 배열을 반환해요.
+
+#### 반환 값
+
+(`T[]`): 입력값이 배열이면 그 배열을, 아니면 입력값을 포함하는 새 배열을 반환해요.

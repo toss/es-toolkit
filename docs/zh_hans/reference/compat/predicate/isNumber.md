@@ -1,37 +1,55 @@
-# isNumber
+# isNumber (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `typeof` 运算符
+这个 `isNumber` 函数由于 Number 对象包装器处理而变得复杂。
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+请使用更简单且现代的 `typeof value === 'number'`。
 :::
 
-检查给定值是否为数字。
-
-此函数还可以作为TypeScript中的类型谓词，将参数的类型缩小为`number`。
-
-## 签名
+检查值是否为数字。
 
 ```typescript
-function isNumber(value?: unknown): value is number;
+const result = isNumber(value);
 ```
 
-### 参数
+## 用法
+
+### `isNumber(value)`
+
+当您想检查值是否为数字时使用 `isNumber`。此函数将原始数字和 Number 对象都识别为数字。
+
+```typescript
+import { isNumber } from 'es-toolkit/compat';
+
+// 原始数字
+isNumber(123);
+// 返回: true
+
+isNumber(3.14);
+// 返回: true
+
+isNumber(NaN);
+// 返回: true
+
+// Number 对象
+isNumber(new Number(42));
+// 返回: true
+
+// 其他类型
+isNumber('123');
+// 返回: false
+
+isNumber(true);
+// 返回: false
+
+isNumber(null);
+// 返回: false
+```
+
+#### 参数
 
 - `value` (`unknown`): 要检查是否为数字的值。
 
-### 返回值
+#### 返回值
 
-(`value is number`): 如果`value`是数字，则返回`true`，否则返回`false`。
-
-## 示例
-
-```typescript
-const value1 = 123;
-const value2 = 'abc';
-const value3 = true;
-
-console.log(isNumber(value1)); // true
-console.log(isNumber(value2)); // false
-console.log(isNumber(value3)); // false
-```
+(`value is number`): 如果值为数字则返回 `true`，否则返回 `false`。

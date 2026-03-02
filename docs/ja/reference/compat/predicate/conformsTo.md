@@ -1,45 +1,63 @@
-# conformsTo
+# conformsTo (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-`source`のプロパティが持つ条件関数を`target`が持つプロパティに適用し、すべての条件が真であれば`true`を、そうでなければ`false`を返します。
-
-この関数を部分的に適用すると、[conforms](./conforms.md)関数と同じ動作をします。
-
-## インターフェース
+オブジェクトが指定された条件関数をすべて満たすかどうかを確認します。
 
 ```typescript
-function conformsTo(target: Record<PropertyKey, any>, source: Record<PropertyKey, (value: any) => boolean>): boolean;
+const result = conformsTo(target, source);
 ```
 
-### パラメータ
+## 使用法
 
-- `target` (`Record<PropertyKey, any>`): 検査するオブジェクトです。
-- `source` (`Record<PropertyKey, (value: any) => boolean>`): 適合させるべきプロパティ条件のオブジェクトです。
+### `conformsTo(target, source)`
 
-### 戻り値
-
-(`boolean`): `object` が条件に適合する場合は `true` を、そうでない場合は `false` を返します。
-
-## 例
+オブジェクトのプロパティが指定された条件をすべて満たすかどうかを確認したい場合は`conformsTo`を使用してください。各プロパティに対して該当する条件関数を適用して結果を確認します。
 
 ```typescript
+import { conformsTo } from 'es-toolkit/compat';
+
+// 基本的な使用法
 const object = { a: 1, b: 2 };
-const source = {
+const conditions = {
   a: n => n > 0,
   b: n => n > 1,
 };
 
-console.log(conformsTo(object, source)); // => true
+conformsTo(object, conditions); // true (すべての条件を満たす)
 
-const source2 = {
-  a: n => n > 1,
-  b: n => n > 1,
+// 様々な条件
+const user = { name: 'Alice', age: 25, active: true };
+const userValidation = {
+  name: s => typeof s === 'string' && s.length > 0,
+  age: n => typeof n === 'number' && n >= 18,
+  active: b => typeof b === 'boolean',
 };
 
-console.log(conformsTo(object, source2)); // => false
+conformsTo(user, userValidation); // true
+
+// 条件を満たさない場合
+const invalidUser = { name: '', age: 15, active: 'yes' };
+conformsTo(invalidUser, userValidation); // false
+
+// 部分的な条件確認
+const partialConditions = {
+  age: n => n >= 21,
+};
+conformsTo(user, partialConditions); // true (ageのみ確認)
+
+// プロパティが存在しない場合
+const incompleteObject = { a: 1 }; // bプロパティなし
+const strictConditions = {
+  a: n => n > 0,
+  b: n => n > 0,
+};
+conformsTo(incompleteObject, strictConditions); // false (bプロパティが存在しない)
 ```
+
+#### パラメータ
+
+- `target` (`Record<PropertyKey, any>`): 検査するオブジェクトです。
+- `source` (`Record<PropertyKey, (value: any) => boolean>`): プロパティ別の条件関数を持つオブジェクトです。
+
+#### 戻り値
+
+(`boolean`): オブジェクトがすべての条件を満たす場合は`true`、そうでない場合は`false`を返します。

@@ -36,6 +36,18 @@ export function intersectionBy<T, U>(
   secondArr: readonly U[],
   mapper: (item: T | U) => unknown
 ): T[] {
+  const result: T[] = [];
   const mappedSecondSet = new Set(secondArr.map(mapper));
-  return firstArr.filter(item => mappedSecondSet.has(mapper(item)));
+
+  for (let i = 0; i < firstArr.length; i++) {
+    const item = firstArr[i];
+    const mappedItem = mapper(item);
+
+    if (mappedSecondSet.has(mappedItem)) {
+      result.push(item);
+      mappedSecondSet.delete(mappedItem);
+    }
+  }
+
+  return result;
 }

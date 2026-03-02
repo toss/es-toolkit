@@ -1,40 +1,73 @@
 # mergeWith
 
-`source`が持つ値を`target`オブジェクトにマージします。
-
-プロパティをどのようにマージするかを指定するために、`merge`関数引数を定義してください。`merge`関数引数は`target`オブジェクトに設定される値を返す必要があります。
-
-`undefined`を返す場合、デフォルトで2つの値を深くマージします。深いマージでは、ネストされたオブジェクトや配列を次のように再帰的にマージします：
-
-- `source`と`target`のプロパティが両方ともオブジェクトまたは配列の場合、2つのオブジェクトと配列はマージされます。
-- `source`のプロパティが`undefined`の場合、`target`のプロパティは上書きされません。
-
-この関数は`target`オブジェクトを変更します。
-
-## インターフェース
+カスタムマージ関数を使用してソースオブジェクトをターゲットオブジェクトに深くマージしてターゲットオブジェクトを修正します。
 
 ```typescript
-function mergeWith<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
-  target: T,
-  source: S,
-  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
-): T & S;
+const result = mergeWith(target, source, mergeFunction);
 ```
 
-### パラメータ
+## 使用法
 
-- `target` (`T`): `source`オブジェクトが持つプロパティをマージするオブジェクト。このオブジェクトは関数によって変更されます。
-- `source` (`S`): `target`オブジェクトにプロパティをマージするオブジェクト。
-- `merge` (`(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any`): 2つの値をどのようにマージするかを定義する関数。以下の引数で呼び出されます：
-  - `targetValue`: `target`オブジェクトが持つ値。
-  - `sourceValue`: `source`オブジェクトが持つ値。
-  - `key`: マージされているプロパティ名。
-  - `target`: `target`オブジェクト。
-  - `source`: `source`オブジェクト。
+### `mergeWith(target, source, merge)`
 
-### 戻り値
+2つのオブジェクトをマージする際、各プロパティに対してカスタムマージロジックを適用したい時に`mergeWith`を使用してください。マージ関数が`undefined`を返すと、デフォルトの深いマージロジックを使用します。
 
-(`T & S`): `source`オブジェクトが持つプロパティがマージされた`target`オブジェクト。
+```typescript
+import { mergeWith } from 'es-toolkit/object';
+
+// 数値の値を加算してマージ
+const target = { a: 1, b: 2, c: { x: 10 } };
+const source = { b: 3, c: { x: 20, y: 30 }, d: 4 };
+
+const result = mergeWith(target, source, (targetValue, sourceValue, key) => {
+  if (typeof targetValue === 'number' && typeof sourceValue === 'number') {
+    return targetValue + sourceValue; // 数値は加算
+  }
+  // undefinedを返すとデフォルトのマージロジックを使用
+});
+// resultとtargetの両方が{ a: 1, b: 5, c: { x: 30, y: 30 }, d: 4 }になります
+
+// 配列を連結してマージ
+const arrayTarget = { items: [1, 2], metadata: { count: 2 } };
+const arraySource = { items: [3, 4], metadata: { count: 2 } };
+
+mergeWith(arrayTarget, arraySource, (targetValue, sourceValue) => {
+  if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+    return targetValue.concat(sourceValue);
+  }
+});
+// arrayTargetは{ items: [1, 2, 3, 4], metadata: { count: 2 } }になります
+
+// キーに応じて異なるマージロジックを適用
+const config = { timeout: 1000, retries: 3, features: { featureA: true } };
+const updates = { timeout: 2000, retries: 5, features: { featureB: false } };
+
+mergeWith(config, updates, (targetValue, sourceValue, key) => {
+  if (key === 'timeout') {
+    return Math.max(targetValue, sourceValue); // timeoutは大きい値を選択
+  }
+  if (key === 'retries') {
+    return Math.min(targetValue, sourceValue); // retriesは小さい値を選択
+  }
+  // 他のプロパティはデフォルトのマージロジックを使用
+});
+// configは{ timeout: 2000, retries: 3, features: { featureA: true, featureB: false } }になります
+```
+
+#### パラメータ
+
+- `target` (`T extends Record<PropertyKey, any>`): ソースオブジェクトをマージするターゲットオブジェクトです。このオブジェクトが修正されます。
+- `source` (`S extends Record<PropertyKey, any>`): ターゲットオブジェクトにマージするソースオブジェクトです。
+- `merge` (`(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any`): カスタムマージ関数です。
+  - `targetValue`: ターゲットオブジェクトの現在の値
+  - `sourceValue`: ソースオブジェクトの値
+  - `key`: マージ中のプロパティのキー
+  - `target`: ターゲットオブジェクト
+  - `source`: ソースオブジェクト
+
+#### 戻り値
+
+(`T & S`): ソースオブジェクトがマージされたターゲットオブジェクトを返します。
 
 ## 例
 

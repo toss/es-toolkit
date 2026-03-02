@@ -1,33 +1,43 @@
-# times
+# times (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
-
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
-:::
-
-Invokes the `getValue` function `n` times, returning an array of the results.
-
-## Signature
+Executes a function the given number of times and returns the results as an array.
 
 ```typescript
-function times<R = number>(n?: number, getValue?: (index: number) => R): R[];
+const result = times(n, iteratee);
 ```
 
-### Parameters
+## Usage
 
-- `n` (`number`): The number of times to call the function.
-- `getValue` (`(index: number) => R`): The function called for each iteration.
-  - If not provided, an array from `0` to `n-1`.
+### `times(n, iteratee)`
 
-### Returns
-
-(`R[]`): Returns the array of results.
-
-## Examples
+Executes the iteratee function the given number of times and returns the results as an array. The current index is passed to the function in each iteration.
 
 ```typescript
-times(3, doubled); // => [0, 2, 4]
-times(4); // => [0, 1, 2, 3]
-times(2, () => 'es-toolkit'); // => ['es-toolkit', 'es-toolkit']
+import { times } from 'es-toolkit/compat';
+
+// Array of indices from 0 to 2 multiplied by 2
+times(3, i => i * 2);
+// Returns: [0, 2, 4]
+
+// Generate the same value multiple times
+times(2, () => 'es-toolkit');
+// Returns: ['es-toolkit', 'es-toolkit']
 ```
+
+If no function is provided, it returns an array of indices.
+
+```typescript
+import { times } from 'es-toolkit/compat';
+
+times(3);
+// Returns: [0, 1, 2]
+```
+
+#### Parameters
+
+- `n` (`number`): The number of times to iterate. Converted to an integer. Returns an empty array if less than 1 or not a safe integer.
+- `iteratee` (`(num: number) => T`, optional): The function to execute for each iteration. Receives the index as an argument. If not provided, returns the index as is.
+
+#### Returns
+
+(`T[]`): Returns an array of results from executing the function in each iteration.

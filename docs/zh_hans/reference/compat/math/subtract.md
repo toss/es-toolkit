@@ -1,37 +1,58 @@
-# subtract
+# subtract (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `-` 运算符
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `subtract` 函数由于额外的函数调用会运行较慢。
+
+请使用更快、更简单的 `-` 运算符。
 
 :::
 
-返回两个数字的差值的函数。
-
-如果其中一个数字是 `NaN`，则返回 `NaN`。
-
-## 签名
+将两个数字相减。
 
 ```typescript
-function subtract(value: number, other: number): number;
+const result = subtract(value, other);
 ```
 
-### 参数
+## 用法
 
-- `value` (`number`): 基准数字。
-- `other` (`number`): 从 `value` 中减去的数字。
+### `subtract(value, other)`
 
-### 返回值
-
-(`number`): 返回 `value` 减去 `other` 的结果。如果其中一个数字是 `NaN`，则返回 `NaN`。
-
-## 示例
+当您想要将两个数字相减时，请使用 `subtract`。
 
 ```typescript
-subtract(6, 4); // 返回 2。
-subtract(-6, 4); // 返回 -10。
-subtract(NaN, 4); // 因为 value 是 NaN，所以返回 NaN。
-subtract(6, NaN); // 因为 other 是 NaN，所以返回 NaN。
-subtract(NaN, NaN); // 因为两个参数都是 NaN，所以返回 NaN。
+import { subtract } from 'es-toolkit/compat';
+
+// 基本减法
+subtract(6, 4);
+// Returns: 2
+
+subtract(10, 3);
+// Returns: 7
+
+// 负数处理
+subtract(-6, 4);
+// Returns: -10
+
+subtract(6, -4);
+// Returns: 10
+
+// NaN 处理
+subtract(NaN, 4);
+// Returns: NaN
+
+subtract(6, NaN);
+// Returns: NaN
+
+subtract(NaN, NaN);
+// Returns: NaN
 ```
+
+#### 参数
+
+- `value` (`number`): 减法的基准第一个数字。
+- `other` (`number`): 要减去的第二个数字。
+
+#### 返回值
+
+(`number`): 返回第一个数字减去第二个数字的结果。如果其中任何一个是 NaN，则返回 NaN。

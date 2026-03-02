@@ -1,34 +1,81 @@
-# constant
+# constant (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use arrow functions instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `constant` function creates an unnecessary function wrapper for simple tasks, which creates unnecessary overhead.
+
+Instead, use a simpler and more intuitive arrow function.
+
 :::
 
-Creates a new function that always returns `value`.
-
-## Signature
+Creates a function that always returns the given value.
 
 ```typescript
-function constant(): () => undefined;
-function constant<T>(value: T): () => T;
+const constantFunction = constant(value);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`T`): The value to return from the new function.
+### `constant(value)`
 
-### Returns
-
-(`() => T | undefined`): The new constant function.
-
-## Examples
+Use `constant` when you need a function that always returns a specific value. It's useful in functional programming when providing default values or as callback functions.
 
 ```typescript
-const object = { a: 1 };
-const returnsObject = constant(object);
+import { constant } from 'es-toolkit/compat';
 
-returnsObject(); // => { a: 1 }
-returnsObject() === object; // => true
+// Basic usage
+const always42 = constant(42);
+console.log(always42()); // 42
+
+const alwaysHello = constant('hello');
+console.log(alwaysHello()); // "hello"
 ```
+
+It's convenient when used with array map or other higher-order functions.
+
+```typescript
+import { constant } from 'es-toolkit/compat';
+
+// Fill all elements with 0
+const numbers = [1, 2, 3, 4, 5];
+const zeros = numbers.map(constant(0));
+console.log(zeros); // [0, 0, 0, 0, 0]
+
+// Replace all elements with the same object
+const users = ['alice', 'bob', 'charlie'];
+const defaultUser = users.map(constant({ role: 'user', active: true }));
+console.log(defaultUser);
+// [{ role: 'user', active: true }, { role: 'user', active: true }, { role: 'user', active: true }]
+```
+
+Can also be used for providing conditional default values.
+
+```typescript
+import { constant } from 'es-toolkit/compat';
+
+function processData(data, fallback = constant('default value')) {
+  return data || fallback();
+}
+
+console.log(processData(null)); // "default value"
+console.log(processData('actual data')); // "actual data"
+```
+
+Maintains object references.
+
+```typescript
+import { constant } from 'es-toolkit/compat';
+
+const obj = { a: 1 };
+const getObj = constant(obj);
+
+console.log(getObj() === obj); // true (same object reference)
+```
+
+#### Parameters
+
+- `value` (`T`, optional): The value the function should return. If not provided, returns `undefined`.
+
+#### Returns
+
+(`() => T | undefined`): Returns a new function that always returns the given value.

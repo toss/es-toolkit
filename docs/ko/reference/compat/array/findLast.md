@@ -1,155 +1,75 @@
-# findLast
+# findLast (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.prototype.findLast`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `findLast` 함수는 다양한 타입과 특수한 조건 처리로 인해 복잡하고 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.prototype.findLast`를 사용하세요.
+
 :::
 
-배열이나 객체에서 조건에 맞는 마지막 값을 찾아요.
-
-조건은 여러 방법들로 명시할 수 있어요.
-
-- **검사 함수**: 각각의 요소에 대해서 검사하는 함수를 실행해요. 마지막으로 `true`를 반환하게 하는 값이 선택돼요.
-- **부분 객체**: 주어진 객체와 부분적으로 일치하는 마지막 요소가 선택돼요.
-- **프로퍼티-값 쌍**: 해당 프로퍼티에 대해서 값이 일치하는 마지막 요소가 선택돼요.
-- **프로퍼티 이름**: 해당 프로퍼티에 대해서 참으로 평가되는 값을 가지는 마지막 요소가 선택돼요.
-
-## 인터페이스
+배열이나 객체에서 조건을 만족하는 마지막 요소를 찾아요.
 
 ```typescript
-function findLast<T>(
-  arr: T[],
-  doesMatch: (item: T, index: number, arr: T[]) => unknown,
-  fromIndex?: number
-): T | undefined;
-function findLast<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): T | undefined;
-function findLast<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): T | undefined;
-function findLast<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): T | undefined;
-
-function findLast<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (item: T[keyof T], index: number, object: T) => unknown,
-  fromIndex?: number
-): T | undefined;
-function findLast<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: Partial<T[keyof T]>,
-  fromIndex?: number
-): T | undefined;
-function findLast<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: [keyof T[keyof T], unknown],
-  fromIndex?: number
-): T | undefined;
-function findLast<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: PropertyKey,
-  fromIndex?: number
-): T | undefined;
+const lastEven = findLast(array, predicate);
 ```
 
-### 파라미터
+## 사용법
 
-- `arr` (`T[]`) or `object` (`T`): 검색할 배열이나 객체.
+### `findLast(collection, predicate?, fromIndex?)`
 
-::: info `arr`는 `ArrayLike<T>`일 수도 있고, `null` 또는 `undefined`일 수도 있어요
-
-lodash와 완벽하게 호환되도록 `find` 함수는 `arr`을 다음과 같이 처리해요:
-
-- `arr`가 `ArrayLike<T>`인 경우 `Array.from(...)`을 사용하여 배열로 변환해요.
-- `arr`가 `null` 또는 `undefined`인 경우 빈 배열로 간주돼요.
-
-:::
-
-::: info `object`는 `null` 또는 `undefined`일 수도 있어요
-
-lodash와 완벽하게 호환되도록 `find` 함수는 `object`를 다음과 같이 처리해요:
-
-- `object`가 `null` 또는 `undefined`인 경우 빈 객체로 변환돼요.
-
-:::
-
-- `doesMatch`:
-
-  - 배열의 경우:
-
-    - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
-    - **부분 객체** (`Partial<T>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
-    - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-    - **프로퍼티 이름** (`PropertyKey`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
-
-  - 객체의 경우:
-    - **검사 함수** (`(item: T[keyof T], index: number, object: T) => unknown`): 찾는 요소인지 여부를 반환하는 함수.
-    - **Partial value** (`Partial<T[keyof T]>`): 일치시킬 프로퍼티와 값들을 명시한 부분 객체.
-    - **Property-value pair** (`[keyof T[keyof T], unknown]`): 첫 번째가 일치시킬 프로퍼티, 두 번째가 일치시킬 값을 나타내는 튜플.
-    - **Property name** (`PropertyKey`): 참으로 평가되는 값을 가지고 있는지 확인할 프로퍼티 이름.
-
-- `fromIndex` (`number`): 검색을 시작할 인덱스. 기본값은 `0`.
-
-### 반환 값
-
-(`T | undefined`): 주어진 조건을 만족하는 첫 번째 요소. 없으면 `undefined`.
-
-## 예시
-
-### 배열의 경우
+배열이나 객체에서 주어진 조건을 만족하는 마지막 요소를 찾아요. 배열의 끝에서부터 역순으로 검색하며, 조건을 만족하는 첫 번째 요소를 반환해요.
 
 ```typescript
 import { findLast } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-const items = [1, 2, 3, 4, 5];
-const result = findLast(items, item => item > 3);
-console.log(result); // 5
-
-// 부분 객체를 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+// 함수로 조건 지정
+const users = [
+  { user: 'barney', age: 36 },
+  { user: 'fred', age: 40 },
+  { user: 'pebbles', age: 18 },
 ];
-const result = findLast(items, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
+findLast(users, o => o.age < 40);
+// => { user: 'pebbles', age: 18 }
 
-// 프로퍼티-값 쌍을 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLast(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
+// 객체로 조건 지정
+findLast(users, { age: 36 });
+// => { user: 'barney', age: 36 }
 
-// 프로퍼티 이름을 쓰는 경우
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLast(items, 'name');
-console.log(result); // { id: 2, name: 'Bob' }
+// 키-값 쌍으로 조건 지정
+findLast(users, ['age', 18]);
+// => { user: 'pebbles', age: 18 }
+
+// 속성 이름으로 조건 지정 (참으로 평가되는 값을 가진 마지막 요소)
+findLast(users, 'age');
+// => { user: 'fred', age: 40 }
 ```
 
-### 객체의 경우
+검색 시작 인덱스를 지정할 수도 있어요.
 
 ```typescript
 import { findLast } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-const obj = { a: 1, b: 2, c: 3 };
-const result = findLast(obj, item => item > 2);
-console.log(result); // 3
-
-// 부분 객체를 쓰는 경우
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = findLast(obj, { name: 'Bob' });
-console.log(result); // { id: 2, name: 'Bob' }
-
-// 프로퍼티-값 쌍을 쓰는 경우
-const items = { alice: { id: 1, name: 'Alice' }, bob: { id: 2, name: 'Bob' } };
-const result = findLast(items, ['name', 'Alice']);
-console.log(result); // { id: 1, name: 'Alice' }
-
-// 프로퍼티 이름을 쓰는 경우
-const obj = { a: { id: 1, name: 'Alice' }, b: { id: 2, name: 'Bob' } };
-const result = findLast(obj, 'name');
-console.log(result); // { id: 2, name: 'Bob' }
+const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+findLast(numbers, n => n > 3, 6); // 인덱스 6부터 역순 검색
+// => 4
 ```
+
+`null`이나 `undefined`는 빈 결과를 반환해요.
+
+```typescript
+import { findLast } from 'es-toolkit/compat';
+
+findLast(null, x => x > 0); // undefined
+findLast(undefined, x => x > 0); // undefined
+```
+
+#### 파라미터
+
+- `collection` (`ArrayLike<T> | Record<string, T> | null | undefined`): 검색할 배열이나 객체예요.
+- `predicate` (`ListIterateeCustom<T, boolean>`, 선택): 각 요소에 적용할 조건이에요. 함수, 객체, 키-값 쌍, 또는 속성 이름을 사용할 수 있어요. 기본값은 `identity` 함수예요.
+- `fromIndex` (`number`, 선택): 검색을 시작할 인덱스예요. 음수인 경우 끝에서부터 계산해요. 기본값은 배열의 마지막 인덱스예요.
+
+#### 반환 값
+
+(`T | undefined`): 조건을 만족하는 마지막 요소를 반환해요. 조건을 만족하는 요소가 없으면 `undefined`를 반환해요.

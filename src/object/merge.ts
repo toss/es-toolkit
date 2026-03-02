@@ -57,22 +57,20 @@ export function merge<T extends Record<PropertyKey, any>, S extends Record<Prope
     const sourceValue = source[key];
     const targetValue = target[key];
 
-    if (Array.isArray(sourceValue)) {
-      if (Array.isArray(targetValue)) {
-        target[key] = merge(targetValue, sourceValue);
-      } else {
-        target[key] = merge([], sourceValue);
-      }
+    if (isMergeableValue(sourceValue) && isMergeableValue(targetValue)) {
+      target[key] = merge(targetValue, sourceValue);
+    } else if (Array.isArray(sourceValue)) {
+      target[key] = merge([], sourceValue);
     } else if (isPlainObject(sourceValue)) {
-      if (isPlainObject(targetValue)) {
-        target[key] = merge(targetValue, sourceValue);
-      } else {
-        target[key] = merge({}, sourceValue);
-      }
+      target[key] = merge({}, sourceValue);
     } else if (targetValue === undefined || sourceValue !== undefined) {
       target[key] = sourceValue;
     }
   }
 
   return target;
+}
+
+function isMergeableValue(value: unknown) {
+  return isPlainObject(value) || Array.isArray(value);
 }

@@ -1,37 +1,57 @@
-# isNumber
+# isNumber (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `typeof` 연산자를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `isNumber` 함수는 Number 객체 래퍼 처리로 인해 복잡해요.
+
+대신 더 간단하고 현대적인 `typeof value === 'number'`을 사용하세요.
+
 :::
 
-주어진 값이 숫자인지 확인해요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `number`으로 좁혀요.
-
-## 인터페이스
+값이 숫자인지 확인해요.
 
 ```typescript
-function isNumber(value?: unknown): value is number;
+const result = isNumber(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`unknown`): 숫자인지 확인할 값.
+### `isNumber(value)`
 
-### 반환 값
-
-(`value is number`): `값`이 숫자이면 `true`, 그렇지 않으면 `false`.
-
-## 예시
+값이 숫자인지 확인하고 싶을 때 `isNumber`를 사용하세요. 이 함수는 원시 숫자와 Number 객체를 모두 숫자로 인식해요.
 
 ```typescript
-const value1 = 123;
-const value2 = 'abc';
-const value3 = true;
+import { isNumber } from 'es-toolkit/compat';
 
-console.log(isNumber(value1)); // true
-console.log(isNumber(value2)); // false
-console.log(isNumber(value3)); // false
+// 원시 숫자
+isNumber(123);
+// Returns: true
+
+isNumber(3.14);
+// Returns: true
+
+isNumber(NaN);
+// Returns: true
+
+// Number 객체
+isNumber(new Number(42));
+// Returns: true
+
+// 다른 타입
+isNumber('123');
+// Returns: false
+
+isNumber(true);
+// Returns: false
+
+isNumber(null);
+// Returns: false
 ```
+
+#### 파라미터
+
+- `value` (`unknown`): 숫자인지 확인할 값이에요.
+
+#### 반환 값
+
+(`value is number`): 값이 숫자면 `true`, 아니면 `false`를 반환해요.

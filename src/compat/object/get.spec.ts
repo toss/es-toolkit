@@ -153,4 +153,15 @@ describe('get', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(get<unknown>).toEqualTypeOf<typeof getLodash<unknown>>();
   });
+
+  it('should prevent prototype pollution by returning defaultValue for __proto__ access', () => {
+    expect(get({ ['__proto__']: {} }, '__proto__', 'defaultValue')).toBe('defaultValue');
+    expect(get({ ['__proto__']: {} }, ['__proto__'], 'defaultValue')).toBe('defaultValue');
+    expect(get({ ['__proto__']: {} }, { toString: () => '__proto__' } as any, 'defaultValue')).toBe('defaultValue');
+  });
+
+  it('should return defaultValue when property value is undefined', () => {
+    const object = { '-0': undefined };
+    expect(get(object, Object(-0), 'defaultValue')).toBe('defaultValue');
+  });
 });

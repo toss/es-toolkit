@@ -1,37 +1,58 @@
 # startCase
 
-Converts a string to start case.
-
-Start case is a naming convention where the first letter of each word in an identifier is written in uppercase and the rest of the letters are in lowercase, with the words separated by spaces, such as `Start Case`.
-
-## Signature
+Converts the first letter of each word in a string to uppercase.
 
 ```typescript
-function startCase(str: string): string;
+const converted = startCase(str);
 ```
 
-### Parameters
+## Usage
 
-- `str` (`string`): The string to convert to start case.
+### `startCase(str)`
 
-### Returns
-
-(`string`) The string converted to start case.
-
-## Examples
+Use `startCase` when you want to convert a string to start case (where the first letter of each word is capitalized). It capitalizes the first letter of each word, converts the rest to lowercase, and joins the words with spaces.
 
 ```typescript
 import { startCase } from 'es-toolkit/string';
 
-startCase('--foo-bar--'); // returns 'Foo Bar'
-startCase('fooBar'); // returns 'Foo Bar'
-startCase('__FOO_BAR__'); // returns 'Foo Bar'
-startCase('XMLHttpRequest'); // returns 'Xml Http Request'
-startCase('_abc_123_def'); // returns 'Abc 123 Def'
-startCase('__abc__123__def__'); // returns 'Abc 123 Def'
-startCase('_-_-_-_'); // returns ''
-startCase('12abc 12ABC'); // returns '12 Abc 12 ABC'
+// Basic usage
+startCase('hello world'); // 'Hello World'
+startCase('HELLO WORLD'); // 'Hello World'
+
+// Converting camelCase or PascalCase
+startCase('fooBar'); // 'Foo Bar'
+startCase('PascalCase'); // 'Pascal Case'
+
+// Words connected with hyphens or underscores
+startCase('hello-world'); // 'Hello World'
+startCase('hello_world'); // 'Hello World'
 ```
+
+It also correctly handles strings with various delimiters and special characters.
+
+```typescript
+import { startCase } from 'es-toolkit/string';
+
+// Cases with multiple delimiters
+startCase('--foo-bar--'); // 'Foo Bar'
+startCase('__FOO_BAR__'); // 'Foo Bar'
+
+// Handling consecutive uppercase letters and numbers
+startCase('XMLHttpRequest'); // 'Xml Http Request'
+startCase('_abc_123_def'); // 'Abc 123 Def'
+
+// Cases with empty strings or only meaningless delimiters
+startCase('_-_-_-_'); // ''
+startCase('12abc 12ABC'); // '12 Abc 12 Abc'
+```
+
+#### Parameters
+
+- `str` (`string`): The string to convert to start case.
+
+#### Returns
+
+(`string`): Returns a new string with the first letter of each word capitalized and joined with spaces.
 
 ## Demo
 

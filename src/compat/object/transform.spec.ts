@@ -116,7 +116,7 @@ describe('transform', () => {
     forEach([[], {}], accumulator => {
       const actual = map(values, value => transform(value, noop, accumulator));
 
-      expect(every(actual, result => result === accumulator));
+      expect(every(actual, result => result === accumulator)).toBe(true);
 
       // @ts-expect-error - Just for testing
       expect(transform(null, null, accumulator)).toBe(accumulator);
@@ -133,7 +133,7 @@ describe('transform', () => {
 
   it('should work without an `iteratee`', () => {
     // @ts-expect-error - Just for testing
-    expect(transform(new Foo()) instanceof Foo);
+    expect(transform(new Foo()) instanceof Foo).toBe(true);
   });
 
   it('should ensure `object` is an object before using its `[[Prototype]]`', () => {

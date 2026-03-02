@@ -1,69 +1,71 @@
-# forIn
+# forIn (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.keys` 和 `for...in` 循环
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `forIn` 函数由于需要处理 `null` 或 `undefined`、设置默认 `iteratee` 等原因,运行速度较慢。
+
+请改用更快、更现代的 `Object.keys` 和 `for...in` 循环。
+
 :::
 
-遍历对象并为每个属性调用 `iteratee` 函数。
-
-遍历所有字符串键属性，包括继承的属性。
-
-如果 `iteratee` 函数返回 `false`，则提前终止遍历。
-
-## 签名
+遍历对象的所有属性(包括继承的属性),并对每个属性调用函数。
 
 ```typescript
-function forIn<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
-function forIn<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forIn(obj, iteratee);
 ```
 
-### 参数
+## 用法
 
-- `object` (`T | null | undefined`): 要遍历的对象
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 每次迭代调用的函数。默认为 `identity` 函数
+### `forIn(object, iteratee)`
 
-### 返回值
-
-(`T | null | undefined`): 返回 `object`
-
-## 示例
+遍历对象的所有属性并调用 `iteratee` 函数。它不仅遍历对象的自有属性,还遍历通过原型链继承的属性。如果 `iteratee` 函数返回 `false`,则停止遍历。
 
 ```typescript
 import { forIn } from 'es-toolkit/compat';
 
-function Shape() {
-  this.x = 0;
-  this.y = 0;
+// 遍历对象的所有属性
+const obj = { a: 1, b: 2 };
+forIn(obj, (value, key) => {
+  console.log(key, value);
+});
+// 输出: 'a' 1, 'b' 2
+
+// 包括继承属性的遍历
+function Parent() {
+  this.inherited = 'value';
 }
+Parent.prototype.protoProperty = 'proto';
 
-Shape.prototype.move = function (x, y) {
-  this.x += x;
-  this.y += y;
-};
+const child = new Parent();
+child.own = 'ownValue';
 
-// 创建 Shape 的实例
-const square = new Shape();
-
-// 遍历所有可枚举属性（包括继承的属性）
-forIn(square, function (value, key) {
+forIn(child, (value, key) => {
   console.log(key, value);
 });
-// 输出:
-// 'x', 0
-// 'y', 0
-// 'move', [Function]
+// 输出: 'inherited' 'value', 'own' 'ownValue', 'protoProperty' 'proto'
 
-// 如果迭代函数返回 false，则提前终止遍历
-forIn(square, function (value, key) {
+// 根据条件提前退出
+forIn(obj, (value, key) => {
   console.log(key, value);
-  return key !== 'y'; // 在 'y' 处停止
+  return key !== 'a'; // 在 'a' 之后停止
 });
-// 输出:
-// 'x', 0
-// 'y', 0
+// 输出: 'a' 1
 ```
+
+`null` 或 `undefined` 会原样返回。
+
+```typescript
+import { forIn } from 'es-toolkit/compat';
+
+forIn(null, iteratee); // null
+forIn(undefined, iteratee); // undefined
+```
+
+#### 参数
+
+- `object` (`T | null | undefined`): 要遍历的对象。
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, 可选): 为每个属性调用的函数。默认为 `identity` 函数。
+
+#### 返回值
+
+(`T | null | undefined`): 返回原始对象。

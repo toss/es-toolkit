@@ -54,6 +54,12 @@ describe('findLastKey', () => {
     expect(args).toEqual([1, 'a', object]);
   });
 
+  it('should work without predicate parameter (default to identity)', () => {
+    const object = { a: 0, b: 1, c: 2 };
+
+    expect(findLastKey(object)).toBe('c');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(findLastKey).toEqualTypeOf<typeof findLastKeyLodash>();
   });

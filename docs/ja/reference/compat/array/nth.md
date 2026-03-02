@@ -1,31 +1,63 @@
-# nth
+# nth (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning 配列インデックスアクセスを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `nth` 関数は、`null` や `undefined` の処理、整数変換などにより動作が遅くなります。
+
+代わりに、より高速で現代的な配列インデックスアクセス (`array[index]` または `array.at(index)`) を使用してください。
+
 :::
 
-`array`のインデックス`n`にある要素を取得します。 `n`が負の場合、最後からn番目の要素が返されます。
-
-## インターフェース
+配列の指定されたインデックスにある要素を取得します。
 
 ```typescript
-function nth<T>(array: ArrayLike<T> | null | undefined, n: number): T | undefined;
+const element = nth(array, index);
 ```
 
-### パラメータ
+## 使用法
 
-- `array` (`ArrayLike<T> | null | undefined`): 照会する配列。数値配列。
-- `n` (`number`): 返す要素のインデックス。数値。
+### `nth(array, index)`
 
-### 戻り値
-
-(`T | undefined`): `array`のn番目の要素を返します。
-
-## 例
+配列の指定されたインデックスにある要素を返します。負のインデックスを使用すると、配列の末尾から計算します。インデックスが範囲外の場合は `undefined` を返します。
 
 ```typescript
-nth([1, 2, 3], 1); // => 2
-nth([1, 2, 3], -1); // => 3
+import { nth } from 'es-toolkit/compat';
+
+const array = [1, 2, 3, 4, 5];
+
+// 正のインデックス
+nth(array, 1);
+// => 2
+
+// 負のインデックス (末尾から)
+nth(array, -1);
+// => 5
+
+nth(array, -2);
+// => 4
+
+// 範囲外のインデックス
+nth(array, 10);
+// => undefined
+
+nth(array, -10);
+// => undefined
 ```
+
+`null` または `undefined` は `undefined` として扱われます。
+
+```typescript
+import { nth } from 'es-toolkit/compat';
+
+nth(null, 0); // undefined
+nth(undefined, 0); // undefined
+```
+
+#### パラメータ
+
+- `array` (`ArrayLike<T> | null | undefined`): 要素を取得する配列です。
+- `index` (`number`, オプション): 取得する要素のインデックスです。負の場合は末尾から計算します。デフォルトは `0` です。
+
+#### 戻り値
+
+(`T | undefined`): 指定されたインデックスの要素を返します。インデックスが範囲外の場合は `undefined` を返します。

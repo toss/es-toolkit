@@ -1,40 +1,47 @@
-# isArrayLike
+# isArrayLike (Lodash互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替となるネイティブ JavaScript API が存在するか、まだ十分に最適化されていないためです。
-
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
-:::
-
-与えられた値が配列のようなオブジェクトかどうかを確認します。
-
-配列のようなオブジェクトは、`null` でも `undefined` でも関数でもなく、`length` プロパティが有効な長さを持つオブジェクトです。
-
-TypeScript の型ガードとして使用できます。パラメータとして与えられた値の型を `ArrayLike<unknown>` に絞り込みます。
-
-## インターフェース
+値が配列のようなオブジェクトかどうかを確認します。
 
 ```typescript
-function isArrayLike(value?: unknown): value is ArrayLike<unknown>;
+const result = isArrayLike(value);
 ```
 
-### パラメータ
+## 使用法
 
-- `value` (`unknown`): 配列のようなオブジェクトかどうかを確認する値です。
+### `isArrayLike(value)`
 
-### 戻り値
-
-(`value is ArrayLike<unknown>`): 与えられた値がArrayLikeオブジェクトであれば `true`、そうでなければ `false` を返します。
-
-## 例
+指定された値が配列のようなオブジェクトかどうかを確認したい場合は`isArrayLike`を使用してください。配列、文字列、argumentsオブジェクト、NodeListなどが配列のようなオブジェクトに該当します。
 
 ```typescript
 import { isArrayLike } from 'es-toolkit/compat';
 
-console.log(isArrayLike([1, 2, 3])); // true
-console.log(isArrayLike('abc')); // true
-console.log(isArrayLike({ 0: 'a', length: 1 })); // true
-console.log(isArrayLike({})); // false
-console.log(isArrayLike(null)); // false
-console.log(isArrayLike(undefined)); // false
+// 配列と文字列
+isArrayLike([1, 2, 3]); // true
+isArrayLike('abc'); // true
+isArrayLike(''); // true
+
+// 配列のようなオブジェクト
+isArrayLike({ 0: 'a', 1: 'b', length: 2 }); // true
+isArrayLike({ length: 0 }); // true
+
+// argumentsオブジェクト
+function example() {
+  return isArrayLike(arguments); // true
+}
+
+// 配列ではないもの
+isArrayLike({}); // false
+isArrayLike({ length: 'invalid' }); // false
+isArrayLike(null); // false
+isArrayLike(undefined); // false
+isArrayLike(() => {}); // false
+isArrayLike(123); // false
 ```
+
+#### パラメータ
+
+- `value` (`any`): 確認する値です。
+
+#### 戻り値
+
+(`boolean`): 値が配列のようなオブジェクトの場合は`true`、そうでない場合は`false`を返します。

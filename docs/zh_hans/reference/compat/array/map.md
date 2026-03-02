@@ -1,96 +1,86 @@
-# map
+# map (Lodash兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用`Array.prototype.map`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此`map`函数由于处理`null`或`undefined`、对象遍历、属性提取等附加功能而运行缓慢。在转换数组时，JavaScript的内置`Array.prototype.map`方法更快、更简单。
+
+请使用更快、更现代的`Array.prototype.map`。
+
 :::
-将数组的每个元素转换并返回一个新的数组。
 
-每个元素的转换方式可以根据 [iteratee](../util/iteratee.md) 函数的行为来指定。
-
-- **转换函数**: 对每个元素执行给定的函数，并将其转换为结果。
-- **属性名称**: 从每个元素中选择指定的属性名称。
-- **属性-值对**: 将每个元素转换为一个布尔值，指示元素的属性是否与给定值匹配。
-- **部分对象**: 将每个元素转换为一个布尔值，指示元素是否与部分对象的属性和值匹配。
-
-## 签名
+转换数组或对象的每个元素以创建一个新数组。
 
 ```typescript
-function map<T, U>(arr: T[], iteratee: (value: T, index: number, arr: T[]) => U): U[];
-function map<T>(arr: T[], iteratee: Partial<T>): boolean[];
-function map<T>(arr: T[], iteratee: [keyof T, unknown]): boolean[];
-function map<T, K extends keyof T>(arr: T[], iteratee: K): Array<T[K]>;
-function map<T>(arr: T[], iteratee?: null | undefined): T[];
-
-function map<T extends object, U>(object: T, iteratee: (value: T[keyof T], key: string, object: T) => U): U[];
-function map<T>(object: T, iteratee: Partial<T[keyof T]>): boolean[];
-function map<T>(object: T, iteratee: [keyof T[keyof T], unknown]): boolean[];
-function map<T, K extends keyof T[keyof T]>(object: T, iteratee: K): Array<T[keyof T][K]>;
-function map<T extends object, U>(object: T, iteratee?: null | undefined): U[];
+const mapped = map(collection, iteratee);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`) 或 `object` (`T`): 要转换的数组或对象。
+### `map(collection, iteratee)`
 
-::: info `arr` 可以是 `ArrayLike<T>`，`null`，或 `undefined`
-
-为了确保与 lodash 完全兼容，`map` 函数按以下方式处理 `arr`：
-
-- 如果 `arr` 是 `ArrayLike<T>`，则使用 `Array.from(...)` 将其转换为数组。
-- 如果 `arr` 是 `null` 或 `undefined`，则视为一个空数组。
-
-:::
-
-::: info `object` 可以是 `null` 或 `undefined`
-
-为了确保与 lodash 完全兼容，`map` 函数按以下方式处理 `object`：
-
-- 如果 `object` 是 `null` 或 `undefined`，则转换为空对象。
-
-:::
-
-- `iteratee`:
-
-  - 对于数组：
-
-    - **转换函数** (`(value: T, index: number, arr: T[]) => U`): 用于转换数组每个元素的函数。
-    - **属性名称** (`keyof T`): 从每个元素中选择的属性名称。
-    - **属性-值对** (`[keyof T, unknown]`): 一个元组，第一个元素是要匹配的属性，第二个是要匹配的值。
-    - **部分对象** (`Partial<T>`): 指定要匹配的属性和值的部分对象。
-
-  - 对于对象：
-
-    - **转换函数** (`(item: T[keyof T], index: number, object: T) => unknown`): 用于转换对象每个值的函数。
-    - **属性名称** (`keyof T[keyof T]`): 从对象每个值中选择的属性名称。
-    - **属性-值对** (`[keyof T[keyof T], unknown]`): 一个元组，第一个元素是要匹配的属性，第二个是要匹配的值。
-    - **部分对象** (`Partial<T[keyof T]>`): 指定要匹配的属性和值的部分对象。
-
-### 返回
-
-(`any[]`): 一个新的转换值数组。
-
-### 示例
+当您想要转换数组、对象或类数组对象的每个元素时使用`map`。它对每个元素执行迭代函数，并将结果作为新数组返回。
 
 ```typescript
-// 使用转换函数
-const array = [1, 2, 3];
-map(array, value => value * 2); // => [2, 4, 6]
+import { map } from 'es-toolkit/compat';
 
-// 使用属性键作为迭代器
-const objects = [{ a: 1 }, { a: 2 }, { a: 3 }];
-map(objects, 'a'); // => [1, 2, 3]
+// 将数组的每个元素加倍
+map([1, 2, 3], x => x * 2);
+// Returns: [2, 4, 6]
 
-// 使用对象作为迭代器
-const objects = [{ a: 1 }, { a: 2 }, { a: 3 }];
-map(objects, { a: 1 }); // => [true, false, false]
+// 转换对象的值
+const obj = { a: 1, b: 2 };
+map(obj, (value, key) => `${key}:${value}`);
+// Returns: ['a:1', 'b:2']
 
-// 没有迭代器
-const numbers = [1, 2, 3];
-map(numbers); // => [1, 2, 3]
-
-// 使用对象作为集合
-const obj = { a: 1, b: 2, c: 3 };
-map(obj, (value, key) => `${key}: ${value}`); // => ['a: 1', 'b: 2', 'c: 3']
+// 提取属性
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 },
+];
+map(users, 'name');
+// Returns: ['John', 'Jane']
 ```
+
+`null`或`undefined`被视为空数组。
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+map(null, x => x); // []
+map(undefined, x => x); // []
+```
+
+通过将属性路径指定为字符串，还可以提取嵌套属性。
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+const users = [{ info: { name: 'John' } }, { info: { name: 'Jane' } }];
+map(users, 'info.name');
+// Returns: ['John', 'Jane']
+```
+
+传递对象时，会检查每个元素是否与该对象匹配。
+
+```typescript
+import { map } from 'es-toolkit/compat';
+
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 },
+];
+map(users, { age: 30 });
+// Returns: [true, false]
+```
+
+#### 参数
+
+- `collection` (`T[] | ArrayLike<T> | Record<string, T> | null | undefined`): 要遍历的数组或对象。
+- `iteratee` (`function | string | object`, 可选): 对每个元素执行的函数、属性路径或要匹配的对象。如果不提供，则按原样返回每个元素。
+  - 当它是函数时，以`(value, key, collection)`的形式调用。
+  - 当它是字符串时，提取该属性。
+  - 当它是对象时，检查每个元素是否与对象匹配。
+
+#### 返回值
+
+(`U[]`): 返回转换后的值的新数组。

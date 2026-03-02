@@ -48,6 +48,12 @@ describe('maxBy', () => {
     expect(maxBy(undefined)).toBe(undefined);
   });
 
+  it('should work without iteratee parameter (default to identity)', () => {
+    const numbers = [1, 2, 3];
+
+    expect(maxBy(numbers)).toBe(3);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(maxBy).toEqualTypeOf<typeof maxByLodash>();
   });

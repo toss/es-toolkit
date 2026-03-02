@@ -26,7 +26,7 @@ export function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKe
     const key = keys[i];
     const value = object[key];
 
-    result[getNewKey(value, key, object)] = value as any;
+    result[getNewKey(value, key, object)] = value;
   }
 
   return result;

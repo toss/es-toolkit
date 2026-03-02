@@ -13,4 +13,16 @@ describe('takeRightWhile', () => {
   it('handles empty arrays', () => {
     expect(takeRightWhile([], n => n < 6)).toEqual([]);
   });
+
+  it('should pass index to predicate function', () => {
+    const arr = [10, 20, 30, 40, 50];
+    const result = takeRightWhile(arr, (_, index) => index > 2);
+    expect(result).toEqual([40, 50]);
+  });
+
+  it('should pass array to predicate function', () => {
+    const arr = [1, 2, 3, 4];
+    const result = takeRightWhile(arr, (value, index, array) => value >= array.length / 2);
+    expect(result).toEqual([2, 3, 4]);
+  });
 });

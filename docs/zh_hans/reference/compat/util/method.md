@@ -1,31 +1,20 @@
-# method
+# method (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
-
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
-:::
-
-创建一个函数，该函数使用提供的参数调用给定对象的路径`path`方法。
-
-## 签名
+创建一个使用参数调用指定路径方法的函数。
 
 ```typescript
-function method(path: PropertyKey | PropertyKey[], ...args: any[]): (object?: unknown) => any;
+const methodFunc = method(path, ...args);
 ```
 
-### 参数
+## 用法
 
-- `path` (`PropertyKey | PropertyKey[]`): 要调用的方法的路径。
-- `args` (`...any`): 用来调用方法的参数。
+### `method(path, ...args)`
 
-### 返回值
-
-(`(object?: unknown) => any`): 返回一个新函数，该函数接受一个对象，并用`args`在`path`调用方法。
-
-## 示例
+创建一个从对象调用特定路径方法并使用预定义参数的函数。在函数式编程中重用方法调用或在数组的 `map` 等中很有用。
 
 ```typescript
+import { method } from 'es-toolkit/compat';
+
 const object = {
   a: {
     b: function (x, y) {
@@ -34,6 +23,40 @@ const object = {
   },
 };
 
+// 创建方法调用函数
 const add = method('a.b', 1, 2);
 console.log(add(object)); // => 3
+
+// 对数组中每个对象调用方法
+const objects = [{ calc: { sum: (a, b) => a + b } }, { calc: { sum: (a, b) => a * b } }];
+
+const calculate = method('calc.sum', 5, 3);
+objects.map(calculate); // => [8, 15]
 ```
+
+也可以处理嵌套路径。
+
+```typescript
+import { method } from 'es-toolkit/compat';
+
+const obj = {
+  users: {
+    getName: function (prefix) {
+      return prefix + this.name;
+    },
+    name: 'John',
+  },
+};
+
+const getUserName = method('users.getName', 'Mr. ');
+getUserName(obj); // => 'Mr. John'
+```
+
+#### 参数
+
+- `path` (`PropertyKey | PropertyKey[]`): 要调用的方法的路径。
+- `...args` (`any[]`): 传递给方法的参数。
+
+#### 返回值
+
+(`(object: any) => any`): 返回一个接受对象并使用参数调用指定路径方法的函数。

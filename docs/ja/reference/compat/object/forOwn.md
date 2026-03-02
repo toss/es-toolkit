@@ -1,47 +1,71 @@
-# forOwn
+# forOwn (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning 代わりに `Object.keys` とループを使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `forOwn` 関数は、内部的に `keys` 関数を呼び出し、オブジェクト変換プロセス、`null` や `undefined` の処理などにより、動作が遅くなります。
+
+代わりに、より高速でモダンな `Object.keys` とループを使用してください。
+
 :::
 
-オブジェクトのプロパティを順次処理し、各プロパティに対して `iteratee` 関数を呼び出します。
-
-オブジェクトが直接所有するプロパティのみを処理し、継承されたプロパティや `Symbol` キーを持つプロパティは含まれません。
-
-`iteratee` 関数が `false` を返すことで、順次処理を早期に終了することができます。
-
-## インターフェース
+オブジェクトの固有プロパティのみを反復し、各プロパティに対して関数を呼び出します。
 
 ```typescript
-function forOwn<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forOwn(obj, iteratee);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`T | null | undefined`): 反復するためのオブジェクトです。
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): 各反復で呼び出される関数です。提供されていない場合は、同一関数が使用されます。
+### `forOwn(object, iteratee)`
 
-### 戻り値
-
-(`T | null | undefined`): オブジェクトを返します。
-
-## 例
+オブジェクトの固有プロパティのみを反復し、`iteratee` 関数を呼び出します。継承されたプロパティや `Symbol` キーを除外し、オブジェクトが直接所有しているプロパティのみを反復します。`iteratee` 関数が `false` を返すと、反復を中断します。
 
 ```typescript
-function Foo() {
-  this.a = 1;
-  this.b = 2;
-}
+import { forOwn } from 'es-toolkit/compat';
 
-Foo.prototype.c = 3;
-
-forOwn(new Foo(), function (value, key) {
-  console.log(key);
+// オブジェクトの固有プロパティのみを反復
+const obj = { a: 1, b: 2 };
+forOwn(obj, (value, key) => {
+  console.log(key, value);
 });
-// => Logs 'a' then 'b' (iteration order is not guaranteed).
+// 出力: 'a' 1, 'b' 2
+
+// 継承されたプロパティは除外
+function Parent() {
+  this.inherited = 'value';
+}
+Parent.prototype.protoProperty = 'proto';
+
+const child = new Parent();
+child.own = 'ownValue';
+
+forOwn(child, (value, key) => {
+  console.log(key, value);
+});
+// 出力: 'inherited' 'value', 'own' 'ownValue' (protoProperty は除外)
+
+// 条件に応じた早期終了
+forOwn(obj, (value, key) => {
+  console.log(key, value);
+  return key !== 'a'; // 'a' の後で中断
+});
+// 出力: 'a' 1
 ```
+
+`null` や `undefined` はそのまま返されます。
+
+```typescript
+import { forOwn } from 'es-toolkit/compat';
+
+forOwn(null, iteratee); // null
+forOwn(undefined, iteratee); // undefined
+```
+
+#### パラメータ
+
+- `object` (`T | null | undefined`): 反復するオブジェクトです。
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, オプション): 各プロパティに対して呼び出す関数です。デフォルト値は `identity` 関数です。
+
+#### 戻り値
+
+(`T | null | undefined`): 元のオブジェクトを返します。

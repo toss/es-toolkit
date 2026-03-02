@@ -1,56 +1,131 @@
 # isJSON
 
-Checks if a given value is a valid JSON string.
-
-A valid JSON string is one that can be successfully parsed using `JSON.parse()`. According to JSON
-specifications, valid JSON can represent:
-
-- Objects (with string keys and valid JSON values)
-- Arrays (containing valid JSON values)
-- Strings
-- Numbers
-- Booleans
-- `null`
-
-String values like `"null"`, `"true"`, `"false"`, and numeric strings (e.g., `"42"`) are considered
-valid JSON and will return true.
-
-This function serves as a type guard in TypeScript, narrowing the type of the argument to `string`.
-
-## Interface
+Checks if a value is a valid JSON string.
 
 ```typescript
-function isJSON(value: unknown): value is string;
+const result = isJSON(value);
 ```
 
-### Parameters
+## Usage
 
-- `value` (`unknown`): The value to check if it's a valid JSON string.
+### `isJSON(value)`
 
-### Return Value
-
-(`value is string`): Returns `true` if the value is a valid JSON string, otherwise `false`.
-
-## Examples
+Use `isJSON` when you want to check if a string is a valid JSON format. This function verifies if it can be parsed with `JSON.parse()`. According to JSON specifications, strings representing objects, arrays, strings, numbers, booleans, and `null` are all valid.
 
 ```typescript
 import { isJSON } from 'es-toolkit/predicate';
 
-const value1 = '{"name":"John","age":30}';
-const value2 = '[1,2,3]';
-const value3 = 'true';
-const value4 = 'null';
-const value5 = '42';
-const value6 = 'invalid json';
-const value7 = { name: 'John' };
-const value8 = null;
+// Valid JSON strings
+console.log(isJSON('{"name":"John","age":30}')); // true
+console.log(isJSON('[1,2,3]')); // true
+console.log(isJSON('"hello world"')); // true
+console.log(isJSON('42')); // true
+console.log(isJSON('true')); // true
+console.log(isJSON('false')); // true
+console.log(isJSON('null')); // true
 
-console.log(isJSON(value1)); // true
-console.log(isJSON(value2)); // true
-console.log(isJSON(value3)); // true (parsed as boolean per JSON spec)
-console.log(isJSON(value4)); // true (parsed as null per JSON spec)
-console.log(isJSON(value5)); // true (parsed as number per JSON spec)
-console.log(isJSON(value6)); // false
-console.log(isJSON(value7)); // false (not a string)
-console.log(isJSON(value8)); // false (not a string)
+// Invalid JSON strings
+console.log(isJSON('undefined')); // false
+console.log(isJSON('function() {}')); // false
+console.log(isJSON('{name: "John"}')); // false (keys without quotes)
+console.log(isJSON("{'name': 'John'}")); // false (single quotes)
+console.log(isJSON('{}')); // true (empty object is valid)
+console.log(isJSON('[]')); // true (empty array is valid)
 ```
+
+All non-string values return `false`:
+
+```typescript
+// Non-string values
+console.log(isJSON({ name: 'John' })); // false
+console.log(isJSON([1, 2, 3])); // false
+console.log(isJSON(42)); // false
+console.log(isJSON(true)); // false
+console.log(isJSON(null)); // false
+console.log(isJSON(undefined)); // false
+```
+
+Useful for API response or user input validation:
+
+```typescript
+// API response validation
+function processApiResponse(response: unknown) {
+  if (isJSON(response)) {
+    try {
+      const data = JSON.parse(response);
+      console.log('Parsed data:', data);
+      return data;
+    } catch (error) {
+      // Won't execute here since isJSON returned true
+      console.error('Parsing failed:', error);
+    }
+  }
+
+  console.log('Not a valid JSON string');
+  return null;
+}
+
+// User input validation
+function validateJsonInput(input: unknown): string | null {
+  if (isJSON(input)) {
+    // TypeScript infers input as string
+    return input;
+  }
+
+  throw new Error('Input must be a valid JSON string');
+}
+
+// Configuration file validation
+function loadConfig(configString: unknown) {
+  if (isJSON(configString)) {
+    const config = JSON.parse(configString);
+    return {
+      isValid: true,
+      config,
+      error: null,
+    };
+  }
+
+  return {
+    isValid: false,
+    config: null,
+    error: 'Invalid JSON format',
+  };
+}
+```
+
+Accurately detects complex JSON structures:
+
+```typescript
+const complexJson = `{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "preferences": {
+        "theme": "dark",
+        "notifications": true
+      }
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "page": 1
+  }
+}`;
+
+console.log(isJSON(complexJson)); // true
+
+// Invalid formats
+console.log(isJSON('{ "name": "John", }')); // false (trailing comma)
+console.log(isJSON('{ name: "John" }')); // false (unquoted key)
+console.log(isJSON("{ 'name': 'John' }")); // false (single quotes)
+```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's a valid JSON string.
+
+#### Returns
+
+(`value is string`): Returns `true` if the value is a valid JSON string, `false` otherwise.

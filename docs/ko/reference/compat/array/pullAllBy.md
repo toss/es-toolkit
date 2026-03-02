@@ -1,56 +1,46 @@
-# pullAllBy
+# pullAllBy (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
-
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-:::
-
-제공된 함수로 요소들을 매핑한 후, 지정된 모든 값을 배열에서 제거해요.
-
-요소를 매핑하는 방법은 여러 방법으로 명시할 수 있어요.
-
-- **함수**: 요소끼리 비교하기 전, 각각의 요소를 주어진 함수로 매핑해요. 각각의 요소마다 함수가 실행되고, 반환되는 값으로 요소를 비교해요.
-- **프로퍼티 이름**: 주어진 프로퍼티의 값으로 요소를 비교해요.
-- **부분 객체**: 두 요소 모두가 주어진 부분 객체의 모든 프로퍼티 및 값과 일치하는지를 기준으로 비교해요.
-- **프로퍼티-값 쌍**: 두 요소 모두가 주어진 프로퍼티 및 값과 일치하는지를 기준으로 비교해요.
-
-이 함수는 `arr`을 제자리에서 변경해요.
-원본 배열을 수정하지 않고 값을 제거하려면 [differenceBy](../../array/differenceBy.md)를 사용하세요.
-
-## 인터페이스
+반복자로 변환된 값을 기준으로 지정된 값들을 배열에서 제거해요.
 
 ```typescript
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: (value: T) => unknown): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: Partial<T>): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: [keyof T, unknown]): T[];
-function pullAllBy<T>(arr: T[], valuesToRemove: ArrayLike<T>, getValue: keyof T): T[];
+const modified = pullAllBy(array, valuesToRemove, iteratee);
 ```
 
-### 파라미터
+## 사용법
 
-- `arr` (`T[]`): 수정할 배열.
-- `valuesToRemove` (`ArrayLike<T>`): 배열에서 제거할 값.
-- `getValue`:
-  - **함수** (`(value: T) => unknown`): 요소끼리 비교하기 전, 각각의 요소를 주어진 함수로 매핑해요. 각각의 요소마다 함수가 실행되고, 반환되는 값으로 요소를 비교해요.
-  - **프로퍼티 이름** (`keyof T`): 주어진 프로퍼티의 값으로 요소를 비교해요.
-  - **부분 객체** (`Partial<T>`): 두 요소 모두가 주어진 부분 객체의 모든 프로퍼티 및 값과 일치하는지를 기준으로 비교해요.
-  - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 두 요소 모두가 주어진 프로퍼티 및 값과 일치하는지를 기준으로 비교해요.
+### `pullAllBy(array, values, iteratee)`
 
-### 반환 값
-
-(`T[]`): 지정된 값이 제거된 수정된 배열.
-
-## 예시
+제공된 iteratee 함수를 통해 각 요소를 변환한 값을 기준으로 배열에서 지정된 값들을 제거하세요. 원본 배열이 변경되고 변경된 배열이 반환돼요.
 
 ```typescript
-// Using a iteratee function
-const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
-const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], obj => obj.value);
-console.log(result); // [{ value: 2 }]
+import { pullAllBy } from 'es-toolkit/compat';
 
-// Using a property name
-const items = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
-const result = pullAllBy(items, [{ value: 1 }, { value: 3 }], 'value');
-console.log(result); // [{ value: 2 }]
+// 속성값으로 비교해서 제거해요
+const array = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }];
+pullAllBy(array, [{ x: 1 }, { x: 3 }], 'x');
+console.log(array); // [{ x: 2 }]
+
+// 함수로 값을 변환해서 비교해요
+const numbers = [1, 2, 3, 4, 5];
+pullAllBy(numbers, [2, 4], n => n % 2);
+console.log(numbers); // [1, 3, 5] (홀수만 남음)
 ```
+
+배열이 비어있거나 `null`, `undefined`면 원본 배열을 그대로 반환해요.
+
+```typescript
+import { pullAllBy } from 'es-toolkit/compat';
+
+pullAllBy([], [1, 2], x => x); // []
+pullAllBy(null as any, [1, 2], x => x); // null
+```
+
+#### 파라미터
+
+- `array` (`T[]`): 변경할 배열이에요.
+- `values` (`ArrayLike<T>`, 선택): 제거할 값들의 배열이에요.
+- `iteratee` (`ValueIteratee<T>`, 선택): 각 요소에 적용할 iteratee 함수예요. 속성 이름, 부분 객체, 또는 함수를 사용할 수 있어요.
+
+#### 반환 값
+
+(`T[]`): 지정된 값들이 제거된 원본 배열을 반환해요.

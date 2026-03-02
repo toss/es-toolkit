@@ -66,7 +66,7 @@ describe('attempt', () => {
     const actual = attempt(() => {
       throw new CustomError('x');
     });
-    expect(actual instanceof CustomError);
+    expect(actual instanceof CustomError).toBe(true);
   });
 
   it('should match the type of lodash', () => {

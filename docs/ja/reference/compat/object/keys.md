@@ -1,40 +1,92 @@
-# keys
+# keys (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Object.keys`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この `keys` 関数は、配列風オブジェクトの処理、プロトタイプオブジェクトの処理などの複雑なロジックにより、動作が遅くなります。
+
+代わりに、より高速で現代的な `Object.keys()` を使用してください。
+
 :::
 
-`object` の列挙可能なプロパティ名を返します。
-
-オブジェクトではない値はオブジェクトに変換されます。
-
-## インターフェース
+オブジェクト自身の列挙可能なプロパティ名を配列として返します。
 
 ```typescript
-function keys(object?: any): string[];
+const keyArray = keys(object);
 ```
 
-### パラメータ
+## 使用法
 
-- `object` (`object`): 問い合わせるオブジェクト。
+### `keys(object)`
 
-### 戻り値
-
-(`string[]`): プロパティ名の配列。
-
-## 例
+オブジェクト自身のプロパティ名を取得したい場合は `keys` を使用します。継承されたプロパティは含まず、自身のプロパティのみを返します。
 
 ```typescript
+import { keys } from 'es-toolkit/compat';
+
+// 基本オブジェクトのキー
+const object = { a: 1, b: 2, c: 3 };
+keys(object);
+// => ['a', 'b', 'c']
+
+// 配列のインデックス
+const array = [1, 2, 3];
+keys(array);
+// => ['0', '1', '2']
+
+// 文字列のインデックス
+keys('hello');
+// => ['0', '1', '2', '3', '4']
+```
+
+関数やコンストラクタから継承されたプロパティは除外されます。
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
 function Foo() {
   this.a = 1;
   this.b = 2;
 }
 Foo.prototype.c = 3;
-keys(new Foo()); // ['a', 'b'] (iteration order is not guaranteed)
 
-keys('hi'); // ['0', '1']
-keys([1, 2, 3]); // ['0', '1', '2']
-keys({ a: 1, b: 2 }); // ['a', 'b']
+keys(new Foo());
+// => ['a', 'b'] ('c'はプロトタイプのプロパティなので除外されます)
 ```
+
+配列風オブジェクトは特別に処理されます。
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
+// TypedArray
+const typedArray = new Uint8Array([1, 2, 3]);
+keys(typedArray);
+// => ['0', '1', '2']
+
+// arguments オブジェクト
+function example() {
+  return keys(arguments);
+}
+example('a', 'b', 'c');
+// => ['0', '1', '2']
+```
+
+`null` や `undefined` を安全に処理します。
+
+```typescript
+import { keys } from 'es-toolkit/compat';
+
+keys(null);
+// => []
+
+keys(undefined);
+// => []
+```
+
+#### パラメータ
+
+- `object` (`any`): キーを取得するオブジェクトです。
+
+#### 戻り値
+
+(`string[]`): オブジェクト自身の列挙可能なプロパティ名の配列を返します。

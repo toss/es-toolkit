@@ -1,38 +1,69 @@
-# valuesIn
+# valuesIn (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.values`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `valuesIn` 函数由于处理原型属性的复杂逻辑而运行缓慢。
+
+请使用更快、更现代的 `Object.values`。
+
 :::
 
-此函数检索对象中字符串键属性的值，包括从其原型继承的属性。
-
-- 如果值不是对象，则会将其转换为对象。
-- 类数组对象被视为数组。
-- 稀疏数组中缺少某些索引的情况被视为密集数组。
-- 如果值为 `null` 或 `undefined`，则返回一个空数组。
-- 在处理原型对象时，`constructor` 属性会从结果中排除。
-
-## 签名
+返回对象所有属性值的数组,包括继承的原型属性。
 
 ```typescript
-function valuesIn<T>(object: Record<PropertyKey, T> | null | undefined): T[];
-function valuesIn<T>(arr: ArrayLike<T>): T[];
-function valuesIn<T extends object>(object: T | null | undefined): Array<T[keyof T]>;
+const values = valuesIn(obj);
 ```
 
-### 参数
+## 用法
 
-- `object` (`Record<PropertyKey, T> | ArrayLike<T>`): 要查询的对象。
+### `valuesIn(object)`
 
-### 返回值
-
-(`T[]`): 一个属性值数组。
-
-## 示例
+当您想从对象获取所有属性值作为数组时,请使用 `valuesIn`。与普通的 `Object.values` 不同,它还包括从原型链继承的属性值。
 
 ```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
 const obj = { a: 1, b: 2, c: 3 };
-valuesIn(obj); // => [1, 2, 3]
+valuesIn(obj); // [1, 2, 3]
+
+// 也可以处理数组
+valuesIn([1, 2, 3]); // [1, 2, 3]
 ```
+
+包括从原型继承的属性。
+
+```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
+function Parent() {
+  this.a = 1;
+}
+Parent.prototype.inherited = 'fromParent';
+
+function Child() {
+  Parent.call(this);
+  this.b = 2;
+}
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.childProp = 'childValue';
+
+const obj = new Child();
+valuesIn(obj); // [1, 2, 'childValue', 'fromParent'] (排除 constructor)
+```
+
+将 `null` 或 `undefined` 处理为空数组。
+
+```typescript
+import { valuesIn } from 'es-toolkit/compat';
+
+valuesIn(null); // []
+valuesIn(undefined); // []
+```
+
+#### 参数
+
+- `object` (`any`): 要查询值的对象。
+
+#### 返回值
+
+(`any[]`): 返回包含对象所有属性值的数组。包括继承的原型属性的值。

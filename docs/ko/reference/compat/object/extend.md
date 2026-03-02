@@ -1,40 +1,58 @@
-# extend
+# extend (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Object.assign()`을 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `extend` 함수는 프로토타입 체인에서 상속된 속성들까지 처리하는 복잡한 로직으로 인해 느리게 동작해요.
+
+대신 더 빠르고 현대적인 `Object.assign()`을 사용하세요.
+
 :::
 
-`source` 객체가 가지고 있는 프로퍼티 값들을 `object` 객체에 할당해요. 프로토타입에서 상속된 프로퍼티도 포함돼요.
-
-`source`와 `object`이 같은 값으로 가지고 있는 프로퍼티는 덮어쓰지 않아요.
-
-[assignIn](./assignIn.md)의 다른 이름이에요.
-
-## 인터페이스
+객체의 고유 속성과 상속된 속성을 다른 객체에 복사해요.
 
 ```typescript
-function extend<O, S>(object: O, source: S): O & S;
-function extend<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function extend<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function extend<O, S1, S2, S3, S4>(object: O, source1: S1, source2: S2, source3: S3, source4: S4): O & S1 & S2 & S3;
-function extend(object: any, ...sources: any[]): any;
+const result = extend(object, source);
 ```
 
-### 파라미터
+## 사용법
 
-- `object` (`any`): `source`의 프로퍼티 값이 할당될 객체.
-- `sources` (`...any[]`): `object`에 할당할 값을 가지고 있는 객체들.
+### `extend(object, ...sources)`
 
-### 반환 값
-
-(`any`): `source`의 값이 할당된 `object` 객체.
-
-## 예시
+객체의 속성을 다른 객체로 복사할 때 `extend`를 사용하세요. `Object.assign()`과 비슷하지만 상속된 속성도 함께 복사해요. 이 함수는 `assignIn`의 별칭이에요.
 
 ```typescript
+import { extend } from 'es-toolkit/compat';
+
+// 기본 속성 복사
 const target = { a: 1 };
-const result = extend(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+extend(target, { b: 2 }, { c: 3 });
+// 반환값: { a: 1, b: 2, c: 3 }
+
+// 상속된 속성도 복사해요
+function Parent() {
+  this.a = 1;
+}
+Parent.prototype.b = 2;
+
+const source = new Parent();
+extend({}, source);
+// 반환값: { a: 1, b: 2 }
 ```
+
+같은 속성이 있을 때는 나중에 오는 소스 객체의 값으로 덮어써요.
+
+```typescript
+import { extend } from 'es-toolkit/compat';
+
+extend({ a: 1, b: 2 }, { b: 3 }, { c: 4 });
+// 반환값: { a: 1, b: 3, c: 4 }
+```
+
+#### 파라미터
+
+- `object` (`any`): 속성을 복사받을 대상 객체예요.
+- `...sources` (`any[]`): 속성을 제공하는 소스 객체들이에요.
+
+#### 반환 값
+
+(`any`): 속성이 복사된 객체를 반환해요. 첫 번째 인수인 `object`가 수정돼요.

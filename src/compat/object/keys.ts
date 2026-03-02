@@ -55,5 +55,11 @@ function arrayLikeKeys(object: ArrayLike<any>): string[] {
     filteredKeys.add('byteOffset');
   }
 
-  return [...indices, ...Object.keys(object).filter(key => !filteredKeys.has(key))];
+  const inheritedKeys = Object.keys(object).filter(key => !filteredKeys.has(key));
+
+  if (Array.isArray(object)) {
+    return [...indices, ...inheritedKeys];
+  }
+
+  return [...indices.filter(index => Object.hasOwn(object, index)), ...inheritedKeys];
 }

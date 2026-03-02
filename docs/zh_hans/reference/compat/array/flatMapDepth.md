@@ -1,86 +1,79 @@
-# flatMapDepth
+# flatMapDepth (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `es-toolkit` 的 [flatMap](../../array/flatMap.md)
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `flatMapDepth` 函数为了 Lodash 兼容性支持各种形式的迭代器和处理 `null` 或 `undefined`,实现较为复杂。主库中的 `flatMap` 函数仅支持简单的函数迭代器,因此运行更快。
+
+请改用更快、更现代的 `es-toolkit` 的 [flatMap](../../array/flatMap.md)。
+
 :::
 
-对数组或对象的每个元素应用迭代函数，然后将结果扁平化到指定的深度。
-
-## 签名
+使用迭代函数转换数组的每个元素并展平到指定深度。
 
 ```typescript
-function flatMapDepth<T>(
-  collection:
-    | Record<string, ArrayLike<T | RecursiveArray<T>> | T>
-    | Record<number, ArrayLike<T | RecursiveArray<T>> | T>
-    | null
-    | undefined
-): T[];
-
-function flatMapDepth<T, R>(
-  array: ArrayLike<T> | null | undefined,
-  iteratee: (value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R,
-  depth?: number
-): R[];
-
-function flatMapDepth<T extends object, R>(
-  collection: T,
-  iteratee: (value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R,
-  depth?: number
-): R[];
-
-function flatMapDepth(collection: object | null | undefined, path: string, depth?: number): any[];
-
-function flatMapDepth(collection: object | null | undefined, matches: object, depth?: number): boolean[];
+const result = flatMapDepth(collection, iteratee, depth);
 ```
 
-### 参数
+## 用法
 
-- `collection` (`Record<string, ArrayLike<T | RecursiveArray<T>> | T> | Record<number, ArrayLike<T | RecursiveArray<T>> | T> | null | undefined`): 要迭代的数组或对象。
-- `iteratee`: 每次迭代调用的函数。默认为 `identity`。
-  - `(value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R`: 为每个元素调用的函数。
-  - `(value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R`: 为每个属性调用的函数。
-  - `string`: 要提取的属性路径。
-  - `object`: 要匹配的对象。
-- `depth` (`number`): 最大递归深度。默认为 `1`。
+### `flatMapDepth(collection, iteratee, depth)`
 
-### 返回值
-
-- (`T[] | R[] | any[] | boolean[]`): 返回新的扁平化数组。
-
-## 示例
+使用给定函数转换数组或对象的每个元素,然后将结果展平到指定深度并返回新数组。当您想将嵌套的数组结构仅展平到所需深度时很有用。
 
 ```typescript
 import { flatMapDepth } from 'es-toolkit/compat';
 
-// 使用返回数组的函数的基本示例
-function duplicate(n) {
-  return [n, n];
-}
-
-flatMapDepth([1, 2], duplicate);
+// 转换数组并展平到深度2
+flatMapDepth([1, 2], n => [[n, n]], 2);
 // => [1, 1, 2, 2]
 
-// 指定深度
-flatMapDepth(
-  [
-    [
-      [1, 2],
-      [3, 4],
-    ],
-  ],
-  n => [n, n],
-  2
-);
-// => [1, 1, 2, 2, 3, 3, 4, 4]
+// 限制为深度1时不会完全展平
+flatMapDepth([1, 2], n => [[n, n]], 1);
+// => [[1, 1], [2, 2]]
 
-// 使用匹配对象
-flatMapDepth({ a: 1, b: 2 }, { a: 1 });
-// => [true, false]
-
-// 使用属性路径
-flatMapDepth({ a: { a: 1, b: 2 } }, 'a');
-// => [1, 2]
+// 从对象提取值并展平
+const users = [
+  { user: 'barney', hobbies: [['hiking'], ['coding']] },
+  { user: 'fred', hobbies: [['reading']] },
+];
+flatMapDepth(users, 'hobbies', 2);
+// => ['hiking', 'coding', 'reading']
 ```
+
+此函数支持各种形式的迭代器。
+
+```typescript
+import { flatMapDepth } from 'es-toolkit/compat';
+
+// 使用函数转换
+flatMapDepth([1, 2, 3], n => [[n, n]], 2);
+
+// 按属性名提取值
+const objects = [{ items: [['a'], ['b']] }, { items: [['c']] }];
+flatMapDepth(objects, 'items', 2);
+// => ['a', 'b', 'c']
+
+// 使用对象部分匹配
+const users = [{ active: [[true], [false]] }, { active: [[false]] }];
+flatMapDepth(users, { active: [[false]] }, 2);
+// => [true, true]
+```
+
+`null` 或 `undefined` 被视为空数组。
+
+```typescript
+import { flatMapDepth } from 'es-toolkit/compat';
+
+flatMapDepth(null, n => [n], 1); // => []
+flatMapDepth(undefined, n => [n], 1); // => []
+```
+
+#### 参数
+
+- `collection` (`ArrayLike<T> | Record<string, any> | Record<number, any> | object | null | undefined`): 要迭代的数组或对象。
+- `iteratee` (`((value: T, index: number, collection: any) => any) | string | object`, 可选): 对每个元素执行的转换函数或属性名。默认为 `identity`。
+- `depth` (`number`, 可选): 要展平的最大深度。默认为 `1`。
+
+#### 返回值
+
+(`T[]`): 返回使用迭代器转换后展平到指定深度的新数组。

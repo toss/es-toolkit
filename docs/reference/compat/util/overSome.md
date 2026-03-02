@@ -1,67 +1,70 @@
-# overSome
+# overSome (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Array.some` instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `overSome` function incurs additional overhead in the process of converting and checking predicate functions.
+
+Use the faster and more modern `Array.some` method instead.
+
 :::
 
-Creates a function that checks if any of the given predicates return truthy for the provided values.
-
-This function takes multiple predicates, which can either be individual predicate functions or arrays of predicates,
-and returns a new function that checks if any of the predicates return truthy when called with the provided values.
-
-## Signature
+Creates a function that checks if any of the predicate functions return truthy for the given value.
 
 ```typescript
-function overSome<T, U extends T, V extends T>(
-  predicate1: (value: T) => value is U,
-  predicate2: (value: T) => value is V
-): (value: T) => value is U | V;
-function overSome<T>(
-  ...predicates: Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>
-): (...values: T[]) => boolean;
+const anyValidator = overSome(predicates);
 ```
 
-### Parameters
+## Usage
 
-- `predicates` (`...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>`): -
-  A list of predicates or arrays of predicates. Each predicate is a function that takes one or more values of
-  type `T` and returns a boolean indicating whether the condition is satisfied for those values.
+### `overSome(...predicates)`
 
-### Returns
-
-(`(...values: T[]) => boolean`): A function that takes a list of values and returns `true` if any of the
-predicates return truthy for the provided values, and `false` otherwise.
-
-## Examples
+Takes multiple predicate functions and creates a function that checks if the given value satisfies any of the conditions. This is useful for flexible condition checking or alternative validation.
 
 ```typescript
-const func = overSome(
-  (value) => typeof value === 'string',
-  (value) => typeof value === 'number',
-  (value) => typeof value === 'symbol'
-);
+import { overSome } from 'es-toolkit/compat';
 
-func("hello"); // true
-func(42); // true
-func(Symbol()); // true
-func([]); // false
+// Check if value is string or number
+const isStringOrNumber = overSome([value => typeof value === 'string', value => typeof value === 'number']);
 
-const func = overSome([
-  (value) => value.a > 0,
-  (value) => value.b > 0
+isStringOrNumber('hello'); // => true
+isStringOrNumber(42); // => true
+isStringOrNumber(true); // => false
+
+// Check if any of multiple conditions are satisfied
+const hasValidProperty = overSome([
+  obj => obj.name && obj.name.length > 0,
+  obj => obj.email && obj.email.includes('@'),
+  obj => obj.phone && obj.phone.length >= 10,
 ]);
 
-func({ a: 0, b: 2 }); // true
-func({ a: 0, b: 0 }); // false
-
-const func = overSome(
-  (a, b) => typeof a === 'string' && typeof b === 'string',
-  (a, b) => a > 0 && b > 0
-);
-
-func("hello", "world"); // true
-func(1, 10); // true
-func(0, 2); // false
+hasValidProperty({ name: 'John' }); // => true
+hasValidProperty({ email: 'john@example.com' }); // => true
+hasValidProperty({ phone: '1234567890' }); // => true
+hasValidProperty({ age: 30 }); // => false
 ```
+
+You can also check object properties.
+
+```typescript
+import { overSome } from 'es-toolkit/compat';
+
+// Check if any condition matches
+const matchesAnyCondition = overSome([
+  'isActive', // Check if isActive property is truthy
+  { role: 'admin' }, // Check if role is 'admin'
+  ['status', 'vip'], // Check if status is 'vip'
+]);
+
+matchesAnyCondition({ isActive: true }); // => true
+matchesAnyCondition({ role: 'admin' }); // => true
+matchesAnyCondition({ status: 'vip' }); // => true
+matchesAnyCondition({ role: 'user', status: 'normal' }); // => false
+```
+
+#### Parameters
+
+- `...predicates` (`Array<Function | string | object | Array>`): The predicate functions to check. Can be functions, property names, objects, or property-value pairs.
+
+#### Returns
+
+(`(...args: any[]) => boolean`): Returns a function that returns `true` if any condition is satisfied, `false` if none are satisfied.

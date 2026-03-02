@@ -38,7 +38,7 @@ console.log(chunkedArray);
 
 我们欢迎社区中的每个人贡献。请阅读下面的详细贡献指南。
 
-[CONTRIBUTING](https://github.com/toss/es-toolkit/blob/main/.github/CONTRIBUTING.md)
+[CONTRIBUTING](https://github.com/toss/es-toolkit/blob/main/.github/CONTRIBUTING-zh_hans.md)
 
 ## 许可证
 

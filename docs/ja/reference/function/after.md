@@ -1,50 +1,43 @@
 # after
 
-`n`回目の呼び出しから実行される関数を生成します。
-提供された関数は`n`回目の呼び出しから実行されます。
-
-これは、特定の回数の呼び出し後にのみ動作が発生する必要があるイベントや非同期タスクに有用です。
-
-## インターフェース
+`n` 回目の呼び出しから関数を実行する新しい関数を作成します。
 
 ```typescript
-function after<F extends (...args: any[]) => any>(
-  n: number,
-  func: F
-): (...args: Parameters<F>) => ReturnType<F> | undefined;
+const afterFunc = after(n, func);
 ```
 
-### パラメータ
+## 使用法
 
-- `n` (`number`): `func`が実行されるために必要な呼び出し回数です。
-- `func` (`F`): 実行される関数です。
+### `after(n, func)`
 
-### 戻り値
-
-(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 新しい関数を返します。この関数は以下の機能を持ちます：
-
-- 呼び出された回数を追跡します。
-- `n`回目の呼び出しから`func`を呼び出します。
-- 呼び出しが`n`回に達するまで`undefined`を返します。
-
-### エラー
-
-`n`が負の場合、エラーを発生させます。
-
-## 例
+最初の数回の呼び出しを無視し、`n` 回目から関数を実行したい場合は `after` を使用してください。イベントや非同期操作で特定の回数の後にのみ動作を実行する必要がある場合に便利です。
 
 ```typescript
 import { after } from 'es-toolkit/function';
 
-const mockFn = () => {
-  console.log('実行されました');
-};
-const afterFn = after(3, mockFn);
+const afterFn = after(3, () => {
+  console.log('executed');
+});
 
-// 何もログに出力しません
+// 何もログに記録しません
 afterFn();
-// 何もログに出力しません
+// 何もログに記録しません
 afterFn();
-// '実行されました'をログに出力します
+// 'executed'をログに記録します
+afterFn();
+// 'executed'をログに記録します
 afterFn();
 ```
+
+#### パラメータ
+
+- `n` (`number`): `func` が実行されるために必要な呼び出し回数です。
+- `func` (`F`): 実行される関数です。
+
+#### 戻り値
+
+(`(...args: Parameters<F>) => ReturnType<F> | undefined`): 呼び出し回数を追跡し、`n` 回目の呼び出しから `func` を実行する新しい関数です。`n` 回目より前の呼び出しでは `undefined` を返します。
+
+#### エラー
+
+`n` が整数でないか負の数の場合、エラーをスローします。

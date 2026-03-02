@@ -210,17 +210,39 @@ export function cloneDeepWithImpl<T>(
   }
 
   if (valueToClone instanceof Error) {
-    const result = new (valueToClone.constructor as { new (): Error })();
+    const result = structuredClone(valueToClone) as Error;
     stack.set(valueToClone, result);
 
     result.message = valueToClone.message;
     result.name = valueToClone.name;
     result.stack = valueToClone.stack;
     result.cause = valueToClone.cause;
+    result.constructor = valueToClone.constructor;
 
     copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
 
     return result as T;
+  }
+
+  if (valueToClone instanceof Boolean) {
+    const result = new Boolean(valueToClone.valueOf()) as T;
+    stack.set(valueToClone, result);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    return result;
+  }
+
+  if (valueToClone instanceof Number) {
+    const result = new Number(valueToClone.valueOf()) as T;
+    stack.set(valueToClone, result);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    return result;
+  }
+
+  if (valueToClone instanceof String) {
+    const result = new String(valueToClone.valueOf()) as T;
+    stack.set(valueToClone, result);
+    copyProperties(result, valueToClone, objectToClone, stack, cloneValue);
+    return result;
   }
 
   if (typeof valueToClone === 'object' && isCloneableObject(valueToClone)) {

@@ -1,35 +1,53 @@
-# isNaN
+# isNaN (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn’t fully optimized yet.
+::: warning Use `Number.isNaN`
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `isNaN` function operates slowly due to additional function calls.
+
+Instead, use the faster and modern `Number.isNaN`.
+
 :::
 
-Check if the given value is `NaN`.
-
-This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `NaN`.
-
-## Signature
+Checks if a value is `NaN`.
 
 ```typescript
-function isNaN(value?: unknown): value is typeof NaN;
+const result = isNaN(value);
 ```
 
-### Parameters
+## Usage
 
-- `value`(`unknown`): The value to test if it is NaN.
+### `isNaN(value)`
 
-### Returns
-
-(`value is typeof NaN`): True if the value is NaN, otherwise false.
-
-## Examples
+Use `isNaN` when you want to check if a value is `NaN`.
 
 ```typescript
-const value1 = NaN;
-const value2 = undefined;
+import { isNaN } from 'es-toolkit/compat';
 
-console.log(isNaN(value1)); // true
-console.log(isNaN(value2)); // false
+// NaN checks
+isNaN(NaN);
+// Returns: true
+
+isNaN(Number.NaN);
+// Returns: true
+
+// Other values
+isNaN(undefined);
+// Returns: false
+
+isNaN(null);
+// Returns: false
+
+isNaN(0);
+// Returns: false
+
+isNaN('NaN');
+// Returns: false
 ```
+
+#### Parameters
+
+- `value` (`unknown`): The value to check if it's NaN.
+
+#### Returns
+
+(`boolean`): Returns `true` if the value is NaN, otherwise `false`.

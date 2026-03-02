@@ -1,102 +1,57 @@
 # curry
 
-Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
-This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
-
-## Signature
+Curries a function so it can be called with one argument at a time.
 
 ```typescript
-function curry<R>(func: () => R): () => R;
-function curry<P, R>(func: (p: P) => R): (p: P) => R;
-function curry<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P1) => (p2: P2) => R;
-function curry<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: P1) => (p2: P2) => (p3: P3) => R;
-function curry<P1, P2, P3, P4, R>(
-  func: (p1: P1, p2: P2, p3: P3, p4: P4) => R
-): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => R;
-function curry<P1, P2, P3, P4, P5, R>(
-  func: (p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R
-): (p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => (p5: P5) => R;
-function curry(func: (...args: any[]) => any): (...args: any[]) => any;
+const curriedFunc = curry(func);
 ```
 
-### Parameters
+## Usage
 
-- `func` (`Function`): The function to curry.
+### `curry(func)`
 
-### Returns
-
-(`Function`): A curried function that can be called with a single argument at a time.
-
-## Examples
+Use `curry` when you want to partially apply a function. The curried function returns a new function until it receives all required arguments. Once all arguments are provided, the original function is executed.
 
 ```typescript
+import { curry } from 'es-toolkit/function';
+
 function sum(a: number, b: number, c: number) {
   return a + b + c;
 }
 
 const curriedSum = curry(sum);
 
-// The parameter `a` should be given the value `10`.
+// Provide value `10` for argument `a`
 const sum10 = curriedSum(10);
 
-// The parameter `b` should be given the value `15`.
+// Provide value `15` for argument `b`
 const sum25 = sum10(15);
 
-// The parameter `c` should be given the value `5`. The function 'sum' has received all its arguments and will now return a value.
+// Provide value `5` for argument `c`
+// All arguments have been received, so now it returns the value
 const result = sum25(5);
+// Returns: 30
 ```
 
-## Lodash Compatibility
-
-Import `curry` from `es-toolkit/compat` for full compatibility with lodash.
-
-### Signature
+This is useful for creating reusable functions.
 
 ```typescript
-function curry(
-  func: (...args: any[]) => any,
-  arity: number = func.length,
-  guard?: unknown
-): ((...args: any[]) => any) & { placeholder: typeof curry.placeholder };
-
-namespace curry {
-  placeholder: symbol;
+function multiply(a: number, b: number) {
+  return a * b;
 }
+
+const curriedMultiply = curry(multiply);
+const double = curriedMultiply(2);
+const triple = curriedMultiply(3);
+
+double(5); // Returns: 10
+triple(5); // Returns: 15
 ```
 
-- `curry` accepts an additional numeric parameter, `arity`, which specifies the number of arguments the function should accept.
-  - Defaults to the `length` property of the function. If `arity` is negative or `NaN`, it will be converted to `0`. If it's a fractional number, it will be rounded down to the nearest integer.
-- `guard` enables use as an iteratee for methods like `Array#map`.
-- The `curry.placeholder` value, which defaults to a `symbol`, may be used as a placeholder for partially applied arguments.
-- Unlike the native `curry`, this function allows multiple arguments to be called at once and returns a new function that accepts the remaining arguments.
+#### Parameters
 
-### Examples
+- `func` (`(...args: any[]) => any`): The function to curry.
 
-```typescript
-import { curry } from 'es-toolkit/compat';
+#### Returns
 
-const abc = function (a, b, c) {
-  return Array.from(arguments);
-};
-
-let curried = curry(abc);
-
-curried(1)(2)(3);
-// => [1, 2, 3]
-
-curried(1, 2)(3);
-// => [1, 2, 3]
-
-curried(1, 2, 3);
-// => [1, 2, 3]
-
-// Curried with placeholders.
-curried(1)(curry.placeholder, 3)(2);
-// => [1, 2, 3]
-
-// Curried with arity.
-curried = curry(abc, 2);
-
-curried(1)(2);
-// => [1, 2]
-```
+(`(...args: any[]) => any`): A curried function that can be called with one argument at a time.

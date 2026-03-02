@@ -55,7 +55,7 @@ function returns(item: DocumentationItem) {
   }
 
   return `
-### 반환 값
+#### 반환 값
 
 (\`${item.returns.type}\`): ${item.returns.document}
   `.trim();

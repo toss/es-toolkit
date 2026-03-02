@@ -10,7 +10,7 @@ const trimLodash = trimLodash_;
 describe('trim', () => {
   bench('es-toolkit/trim', () => {
     const str = 'kebab-case';
-    trimToolkit(str, 'se');
+    trimToolkit(str, ['s', 'e']);
   });
 
   bench('es-toolkit/compat/trim', () => {

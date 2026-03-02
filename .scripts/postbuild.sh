@@ -33,7 +33,7 @@ create_compat_alias() {
 }
 
 # Create root exports
-for module in array error compat function math object predicate promise string util; do
+for module in array error compat function math map object predicate promise set string util; do
     create_root_export $module
 done
 

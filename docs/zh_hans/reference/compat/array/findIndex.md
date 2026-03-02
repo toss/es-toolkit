@@ -1,87 +1,100 @@
-# findIndex
+# findIndex（Lodash 兼容性）
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 使用 `Array.prototype.findIndex`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+此 `findIndex` 函数由于支持各种条件格式处理和 `fromIndex` 处理等附加功能而运行较慢。
+
+请使用更快、更现代的 `Array.prototype.findIndex`。
 
 :::
 
-返回满足指定条件的数组中第一个项目的索引。
-
-您可以通过以下几种方式指定条件：
-
-- **谓词函数**：如果提供一个谓词函数，该函数将应用于每一项。返回 `true` 的第一个项将被选中。
-- **部分对象**：如果提供一个部分对象，该函数将返回第一个匹配部分对象属性的项。
-- **属性-值对**：如果提供一个属性-值对，该函数将返回第一个匹配该属性和值的项。
-- **属性名称**：如果提供一个属性名称，该函数将返回第一个指定属性具有真值的项。
-
-## 签名
+查找数组中满足条件的第一个元素的索引。
 
 ```typescript
-function findIndex<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown, fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
+const index = findIndex(arr, doesMatch, fromIndex);
 ```
 
-### 参数
+## 用法
 
-- `arr` (`T[]`): 要搜索的数组。
+### `findIndex(arr, doesMatch, fromIndex)`
 
-::: info `arr` 可能是 `ArrayLike<T>`，也可能是 `null` 或 `undefined`
+当您想要查找数组中满足特定条件的第一个元素的位置时,使用 `findIndex`。您可以通过多种方式指定条件。如果没有元素满足条件,则返回 `-1`。
 
-为了与 lodash 完全兼容，`findIndex` 函数会对 `arr` 进行如下处理：
-
-- 如果 `arr` 是 `ArrayLike<T>`，则会使用 `Array.from(...)` 将其转换为数组。
-- 如果 `arr` 是 `null` 或 `undefined`，则会将其视为空数组。
-
-:::
-
-- `doesMatch`:
-
-  - **谓词函数** (`(item: T, index: number, arr: T[]) => unknown`): 一个函数，接受项、其索引和数组，如果项符合条件则返回真值。
-  - **部分对象** (`Partial<T>`): 指定要匹配的属性的部分对象。
-  - **属性-值对** (`[keyof T, unknown]`): 一个数组，第一个元素是属性键，第二个元素是要匹配的值。
-  - **属性名称** (`PropertyKey`): 要检查其真值的属性名称。
-
-- `fromIndex` (`number`): 搜索开始的位置。默认为 `0`。
-
-### 返回
-
-(`number`): 第一个具有指定属性值的项的索引，如果没有找到匹配项，则为 `-1`。
-
-## 示例
+当您将条件指定为函数时,它会对每个元素执行该函数,并返回第一个返回 true 的元素的索引。
 
 ```typescript
 import { findIndex } from 'es-toolkit/compat';
 
-// 使用谓词函数
-const items = [1, 2, 3, 4, 5];
-const result = findIndex(items, item => item > 3);
-console.log(result); // 3
-
-// 使用部分对象
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+const users = [
+  { id: 1, name: 'Alice', active: false },
+  { id: 2, name: 'Bob', active: true },
+  { id: 3, name: 'Charlie', active: true },
 ];
-const result = findIndex(items, { name: 'Bob' });
-console.log(result); // 1
 
-// 使用属性-值对
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findIndex(items, ['name', 'Alice']);
-console.log(result); // 0
-
-// 使用属性名称
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findIndex(items, 'name');
-console.log(result); // 0
+// 使用函数指定条件
+findIndex(users, user => user.active);
+// Returns: 1
 ```
+
+当您将条件指定为部分对象时,它会返回第一个匹配这些属性的元素的索引。
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// 使用部分对象指定条件
+findIndex(users, { name: 'Bob', active: true });
+// Returns: 1
+```
+
+当您将条件指定为属性名和值的数组时,它会返回第一个该属性与该值匹配的元素的索引。
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// 使用 [属性, 值] 数组指定条件
+findIndex(users, ['active', true]);
+// Returns: 1
+```
+
+当您只指定属性名时,它会返回第一个该属性值为真的元素的索引。
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// 使用属性名指定条件
+findIndex(users, 'active');
+// Returns: 1
+```
+
+当您指定 `fromIndex` 时,搜索将从该索引开始。负值从数组末尾开始计算。
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+// 从索引 2 开始搜索
+findIndex(users, user => user.active, 2);
+// Returns: 2
+
+// 从倒数第二个元素开始搜索
+findIndex(users, user => user.active, -2);
+// Returns: 1
+```
+
+`null` 或 `undefined` 被视为空数组。
+
+```typescript
+import { findIndex } from 'es-toolkit/compat';
+
+findIndex(null, user => user.active); // -1
+findIndex(undefined, 'active'); // -1
+```
+
+#### 参数
+
+- `arr` (`ArrayLike<T> | null | undefined`): 要搜索的数组。
+- `doesMatch` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 可选): 匹配条件。可以是函数、部分对象、键值对或属性名。
+- `fromIndex` (`number`, 可选): 开始搜索的索引。默认为 `0`。
+
+#### 返回值
+
+(`number`): 返回满足条件的第一个元素的索引。如果没有元素匹配,则返回 `-1`。

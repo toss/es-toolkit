@@ -1,38 +1,67 @@
-# assignIn
+# assignIn (Lodash 兼容性)
 
-::: info
-出于兼容性原因，此函数仅在 `es-toolkit/compat` 中提供。它可能具有替代的原生 JavaScript API，或者尚未完全优化。
+::: warning 请使用 `Object.assign`
 
-从 `es-toolkit/compat` 导入时，它的行为与 lodash 完全一致，并提供相同的功能，详情请见 [这里](../../../compatibility.md)。
+这个 `assignIn` 函数由于需要复制继承属性的额外处理和值比较逻辑而运行缓慢。
+
+请改用更快、更现代的 `Object.assign`。
+
 :::
 
-将 `source` 对象的属性值分配给 `object`。它还包括从原型链继承的属性。
-
-在 `source` 和 `object` 中具有相同值的属性将不会被覆盖。
-
-## 签名
+将源对象的所有属性(包括继承的属性)分配给目标对象。
 
 ```typescript
-function assignIn<O, S>(object: O, source: S): O & S;
-function assignIn<O, S1, S2>(object: O, source1: S1, source2: S2): O & S1 & S2;
-function assignIn<O, S1, S2, S3>(object: O, source1: S1, source2: S2, source3: S3): O & S1 & S2 & S3;
-function assignIn<O, S1, S2, S3, S4>(object: O, source1: S1, source2: S2, source3: S3, source4: S4): O & S1 & S2 & S3;
-function assignIn(object: any, ...sources: any[]): any;
+const result = assignIn(target, ...sources);
 ```
 
-### 参数
+## 用法
 
-- `object` (`any`): 将属性分配给目标对象。
-- `sources` (`...any[]`): 其属性将分配给目标对象的源对象。
+### `assignIn(target, ...sources)`
 
-### 返回值
-
-(`any`): 分配了源对象属性的更新目标对象。
-
-## 示例
+当您想将源对象的自有属性和继承属性都复制到目标对象时,请使用 `assignIn`。与 `assign` 不同,它包括原型链中的属性。
 
 ```typescript
-const target = { a: 1 };
-const result = assignIn(target, { b: 2 }, { c: 3 });
-console.log(result); // Output: { a: 1, b: 2, c: 3 }
+import { assignIn } from 'es-toolkit/compat';
+
+// 基本用法
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+const result = assignIn(target, source);
+// 结果: { a: 1, b: 3, c: 4 }
+console.log(target === result); // true (目标对象被修改)
+
+// 合并多个源对象
+const target2 = { a: 1 };
+const source1 = { b: 2 };
+const source2 = { c: 3 };
+assignIn(target2, source1, source2);
+// 结果: { a: 1, b: 2, c: 3 }
+
+// 也复制继承的属性
+function Parent() {}
+Parent.prototype.inherited = 'inheritedValue';
+const child = Object.create(Parent.prototype);
+child.own = 'ownValue';
+
+const target3 = {};
+assignIn(target3, child);
+// 结果: { own: 'ownValue', inherited: 'inheritedValue' }
+
+// 也复制数组的索引属性和length等
+const arr = [1, 2, 3];
+arr.customProp = 'custom';
+const target4 = {};
+assignIn(target4, arr);
+// 结果: { '0': 1, '1': 2, '2': 3, customProp: 'custom' }
 ```
+
+与 `assign` 不同,此函数也复制继承的属性。如果值相同,它还会进行优化,不会覆盖。
+
+#### 参数
+
+- `target` (`any`): 将接收属性的目标对象。
+- `...sources` (`any[]`): 要复制属性的源对象。自有属性和继承属性都会被复制。
+
+#### 返回值
+
+(`any`): 返回修改后的目标对象。目标对象本身被修改并返回。

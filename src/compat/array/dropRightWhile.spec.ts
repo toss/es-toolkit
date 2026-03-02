@@ -69,6 +69,11 @@ describe('dropRightWhile', () => {
     expect(dropRightWhile(args, i => i > 1)).toEqual([1]);
   });
 
+  it('should use identity function when no predicate is provided', () => {
+    expect(dropRightWhile([1, 2, 0, 3])).toEqual([1, 2, 0]);
+    expect(dropRightWhile(['hello', '', 'world'])).toEqual(['hello', '']);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(dropRightWhile).toEqualTypeOf<typeof dropRightWhileLodash>();
   });

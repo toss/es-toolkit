@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { execa } from 'execa';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -8,10 +8,8 @@ import { createTmpDir } from './utils/createTmpDir';
 import { parseTar } from './utils/parseTar';
 import { streamToBuffer } from './utils/streamToBuffer';
 
-async function getPackageJsonOfTarball() {
-  const tarball = await createPackageTarball();
-
-  for await (const entry of parseTar(await fs.promises.readFile(tarball.path))) {
+async function getPackageJsonOfTarball(tarballPath: string) {
+  for await (const entry of parseTar(await fs.promises.readFile(tarballPath))) {
     if (entry.path === 'package/package.json') {
       const json = (await streamToBuffer(entry as unknown as Readable)).toString('utf-8');
 
@@ -38,38 +36,37 @@ const ENTRYPOINTS = [
 ];
 
 describe(`es-toolkit's package tarball`, () => {
-  it(
-    'configures all entrypoints correctly',
-    async () => {
-      const packageJson = await getPackageJsonOfTarball();
-      const entrypoints = Object.keys(packageJson.exports);
+  let tarball: { path: string };
 
-      expect(entrypoints).toEqual([...ENTRYPOINTS, './package.json']);
-    },
-    { timeout: 240_000 }
-  );
+  beforeAll(async () => {
+    tarball = await createPackageTarball();
+  }, 300000);
 
-  it(
-    'exports identical functions in CJS and ESM',
-    async () => {
-      const tarball = await createPackageTarball();
-      const tmpdir = await createTmpDir();
+  it('configures all entrypoints correctly', { timeout: 240_000 }, async () => {
+    const packageJson = await getPackageJsonOfTarball(tarball.path);
+    const entrypoints = Object.keys(packageJson.exports);
 
-      const packageJson = {
-        dependencies: {
-          'es-toolkit': tarball.path,
-        },
-      };
+    expect(entrypoints).toEqual([...ENTRYPOINTS, './package.json']);
+  });
 
-      await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
-      await execa('npm', ['install'], { cwd: tmpdir });
+  it('exports identical functions in CJS and ESM', { timeout: 120_000 }, async () => {
+    const tmpdir = await createTmpDir();
 
-      for (const entrypoint of ENTRYPOINTS) {
-        if (entrypoint.includes('*')) {
-          continue;
-        }
+    const packageJson = {
+      dependencies: {
+        'es-toolkit': tarball.path,
+      },
+    };
 
-        const cjsScript = `
+    await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
+    await execa('npm', ['install'], { cwd: tmpdir });
+
+    for (const entrypoint of ENTRYPOINTS) {
+      if (entrypoint.includes('*')) {
+        continue;
+      }
+
+      const cjsScript = `
 const toolkit = require("${path.join('es-toolkit', entrypoint)}");
 
 const exported = Object.entries(toolkit)
@@ -79,9 +76,9 @@ const exported = Object.entries(toolkit)
 console.log("${path.join('es-toolkit', entrypoint)}");
 console.log(exported);
       `.trim();
-        const cjsScriptPath = path.join(tmpdir, 'script.cjs');
+      const cjsScriptPath = path.join(tmpdir, 'script.cjs');
 
-        const esmScript = `
+      const esmScript = `
 const toolkit = await import("${path.join('es-toolkit', entrypoint)}");
 
 const exported = Object.entries(toolkit)
@@ -91,17 +88,15 @@ const exported = Object.entries(toolkit)
 console.log("${path.join('es-toolkit', entrypoint)}");
 console.log(exported);
       `.trim();
-        const esmScriptPath = path.join(tmpdir, 'script.mjs');
+      const esmScriptPath = path.join(tmpdir, 'script.mjs');
 
-        await fs.promises.writeFile(cjsScriptPath, cjsScript);
-        await fs.promises.writeFile(esmScriptPath, esmScript);
+      await fs.promises.writeFile(cjsScriptPath, cjsScript);
+      await fs.promises.writeFile(esmScriptPath, esmScript);
 
-        const cjsResult = await execa('node', [cjsScriptPath]);
-        const esmResult = await execa('node', [esmScriptPath]);
+      const cjsResult = await execa('node', [cjsScriptPath]);
+      const esmResult = await execa('node', [esmScriptPath]);
 
-        expect(cjsResult.stdout).toEqual(esmResult.stdout);
-      }
-    },
-    { timeout: 120_000 }
-  );
+      expect(cjsResult.stdout).toEqual(esmResult.stdout);
+    }
+  });
 });

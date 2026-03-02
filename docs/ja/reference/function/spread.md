@@ -1,55 +1,76 @@
 # spread
 
-配列の要素を元の関数の個別の引数として展開する新しい関数を作成します。
-
-## インターフェース
+パラメータ配列を展開して関数の個別のパラメータとして渡す新しい関数を作成します。
 
 ```typescript
-function spread<F extends (...args: any[]) => any>(func: F): (argsArr: Parameters<F>) => ReturnType<F>;
+const spreadFunc = spread(func);
 ```
 
-### パラメータ
+## 使用法
 
-- `func` (`F`): 引数の配列を受け取り、これらの引数で元の関数を呼び出した結果を返す新しい関数です。
+### `spread(func)`
 
-### 戻り値
+配列形式のパラメータを個別のパラメータとして展開して関数に渡したい場合は `spread` を使用します。
 
-(`(args: Parameters<F>) => ReturnType<F>`): 引数の配列を受け取り、元の関数をその引数で呼び出した結果を返す新しい関数を作成します。
-
-## 例
+JavaScript のスプレッド演算子(`...`)と似た役割を果たしますが、関数を変換して配列を受け取るようにする方式です。`apply` メソッドを頻繁に使用する状況で便利です。
 
 ```typescript
 import { spread } from 'es-toolkit/function';
 
-function add(a, b) {
+// 基本的な使用法
+function add(a: number, b: number) {
   return a + b;
 }
+
 const spreadAdd = spread(add);
-console.log(spreadAdd([1, 2])); // Output: 3
+console.log(spreadAdd([5, 3])); // 8
 
-// Example function to spread arguments over
-// Create a new function that uses `spread` to combine arguments
-const spreadAdd = spread(add, 1);
-// Calling `spreadAdd` with an array as the second argument
-console.log(spreadAdd(1, [2])); // Output: 3
-
-// Function with default arguments
-function greet(name, greeting = 'Hello') {
-  return `${greeting}, ${name}!`;
+// 複数のパラメータがある関数
+function greet(greeting: string, name: string, punctuation: string) {
+  return `${greeting}, ${name}${punctuation}`;
 }
-// Create a new function that uses `spread` to position the argument array at index 0
-const spreadGreet = spread(greet, 0);
-// Calling `spreadGreet` with an array of arguments
-console.log(spreadGreet(['Alice'])); // Output: Hello, Alice!
-console.log(spreadGreet(['Bob', 'Hi'])); // Output: Hi, Bob!
+
+const spreadGreet = spread(greet);
+console.log(spreadGreet(['Hello', 'World', '!'])); // 'Hello, World!'
+
+// Math 関数と一緒に使用
+const numbers = [1, 2, 3, 4, 5];
+const spreadMax = spread(Math.max);
+console.log(spreadMax(numbers)); // 5
+
+const spreadMin = spread(Math.min);
+console.log(spreadMin(numbers)); // 1
 ```
 
-## Lodash 互換性
+`this` コンテキストも保持されます。
 
-`es-toolkit/compat` から `chunk` をインポートすると、Lodash と互換になります。
+```typescript
+import { spread } from 'es-toolkit/function';
 
-- `spread` は追加の数値パラメータ `argsIndex` を受け付け、引数配列が前の引数の中で位置する場所を指定します。
-  - `argsIndex` が負の値または `NaN` の場合、デフォルトで `0` になります。小数の場合は最も近い整数に切り捨てられます。
+const calculator = {
+  multiply: function (a: number, b: number, c: number) {
+    return a * b * c;
+  },
+};
+
+const spreadMultiply = spread(calculator.multiply);
+console.log(spreadMultiply.call(calculator, [2, 3, 4])); // 24
+```
+
+#### パラメータ
+
+- `func` (`F`): 配列を個別のパラメータとして展開して受け取る関数です。
+
+#### 戻り値
+
+(`(args: Parameters<F>) => ReturnType<F>`): パラメータ配列を受け取って展開された形式で元の関数に渡す新しい関数を返します。
+
+## Lodash との互換性
+
+`es-toolkit/compat` から `spread` をインポートすると lodash と互換性があります。
+
+- `spread` は `argsIndex` という数値引数を追加で受け取ります。この引数は展開する引数配列が与えられたインデックスを表します。
+  - `argsIndex` が負の値または `NaN` の場合、デフォルト値 `0` として扱われます。小数の場合は、最も近い整数に切り捨てられます。
 
 ```typescript
 import { spread } from 'es-toolkit/compat';

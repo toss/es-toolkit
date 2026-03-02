@@ -1,139 +1,68 @@
-# reject
+# reject (Lodash 호환성)
 
-::: info
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
+::: warning `Array.filter()`를 사용하세요
 
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
+이 `reject` 함수는 Lodash와의 호환성을 위해 여러 형태의 predicate를 지원하므로 복잡하게 구현되어 있어요. 간단한 함수 predicate를 사용하는 경우에는 `Array.filter()`가 더 간단하고 빠르게 동작해요.
+
+대신 더 빠르고 현대적인 `Array.filter()`를 사용하세요. 예를 들어, `reject(arr, func)` 는 `arr.filter(item => !func(item))`으로 바꿔쓸 수 있어요.
+
 :::
 
-주어진 조건을 만족하지 않는 요소를 갖는 새로운 배열을 반환해요.
-
-조건은 여러 방법들로 명시할 수 있어요.
-
-- **검사 함수**: 각각의 요소에 대해서 검사하는 함수를 실행해요. 조건에 맞지 않는 요소들을 선택해요.
-- **부분 객체**: 주어진 객체와 부분적으로 일치하지 않는 요소들을 선택해요.
-- **프로퍼티-값 쌍**: 해당 프로퍼티에 대해서 키와 값이 일치하지 않는 요소들을 선택해요.
-- **프로퍼티 이름**: 해당 프로퍼티 이름이 존재하지 않는 요소들을 선택해요.
-
-## 인터페이스
+컬렉션을 순회하며 조건 함수에 맞지 않는 요소들을 새 배열로 반환해요.
 
 ```typescript
-function reject<T>(arr: T[], doesMatch: (item: T, index: number, arr: T[]) => unknown): T[];
-function reject<T>(arr: T[], doesMatch: Partial<T>): T[];
-function reject<T>(arr: T[], doesMatch: [keyof T, unknown]): T[];
-function reject<T>(arr: T[], doesMatch: PropertyKey): T[];
-
-function reject<T extends Record<string, unknown>>(
-  object: T,
-  doesMatch: (value: T[keyof T], key: keyof T, object: T) => unknown
-): T[];
-function reject<T extends Record<string, unknown>>(object: T, doesMatch: Partial<T[keyof T]>): T[];
-function reject<T extends Record<string, unknown>>(object: T, doesMatch: [keyof T[keyof T], unknown]): T[];
-function reject<T extends Record<string, unknown>>(object: T, doesMatch: PropertyKey): T[];
+const filtered = reject(collection, predicate);
 ```
 
-### 파라미터
+## 사용법
 
-- `arr` (`T[]`) or `object` (`T`): 반복할 배열이나 객체.
+### `reject(collection, predicate)`
 
-::: info `arr`는 `ArrayLike<T>`일 수도 있고, `null` 또는 `undefined`일 수도 있어요
-
-lodash와 완벽하게 호환되도록 `reject` 함수는 `arr`을 다음과 같이 처리해요:
-
-- `arr`가 `ArrayLike<T>`인 경우 `Array.from(...)`을 사용하여 배열로 변환해요.
-- `arr`가 `null` 또는 `undefined`인 경우 빈 배열로 간주돼요.
-
-:::
-
-- `doesMatch`:
-
-  - 배열의 경우:
-
-    - **검사 함수** (`(item: T, index: number, arr: T[]) => unknown`): 각 요소가 조건을 만족하지 않는지 확인하는 함수.
-    - **부분 객체** (`Partial<T>`): 요소의 속성과 값과 일치하지 않는지 확인할 부분 객체.
-    - **프로퍼티-값 쌍** (`[keyof T, unknown]`): 첫 번째가 찾는 프로퍼티, 두 번째가 찾는 값을 나타내는 튜플.
-    - **프로퍼티 이름** (`PropertyKey`): 특정 속성을 가지고 있지 않은지 확인할 프로퍼티 이름.
-
-  - 객체의 경우:
-
-    - **검사 함수** (`(value: T[keyof T], key: keyof T, object: T) => unknown`): 각 요소가 조건을 만족하지 않는지 확인하는 함수.
-    - **부분 객체** (`Partial<T[keyof T]>`): 요소의 속성과 값과 일치하지 않는지 확인할 부분 객체.
-    - **프로퍼티-값 쌍** (`[keyof T[keyof T], unknown]`): 첫 번째가 찾는 프로퍼티, 두 번째가 찾는 값을 나타내는 튜플.
-    - **프로퍼티 이름** (`PropertyKey`): 특정 속성을 가지고 있지 않은지 확인할 프로퍼티 이름.
-
-### 반환 값
-
-(`T[]`): 조건을 만족하지 않는 요소 배열. 없으면 (`[]`)
-
-## 예시
-
-### 배열의 경우
+배열, 객체, 또는 문자열에서 주어진 조건에 맞지 않는 요소들만 골라서 새 배열로 반환해요. `filter`의 반대 동작을 수행해요.
 
 ```typescript
 import { reject } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-reject([1, 2, 3], n => n % 2 === 0);
-// => [1, 3]
+// 짝수가 아닌 숫자들을 필터링해요
+reject([1, 2, 3, 4, 5], n => n % 2 === 0);
+// => [1, 3, 5]
 
-// 부분 객체를 쓰는 경우
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-reject(arr, { name: 'Bob' });
-// => [{ id: 1, name: 'Alice' }]
+// 특정 속성을 가지지 않는 객체들을 필터링해요
+reject([{ a: 1 }, { a: 2 }, { b: 1 }], 'a');
+// => [{ b: 1 }]
 
-// 프로퍼티-값 쌍을 쓰는 경우
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-reject(arr, ['name', 'Alice']);
-// => [{ id: 2, name: 'Bob' }]
+// 특정 속성값을 가지지 않는 객체들을 필터링해요
+reject([{ a: 1 }, { a: 2 }, { a: 3 }], { a: 2 });
+// => [{ a: 1 }, { a: 3 }]
 
-// 프로퍼티 이름을 쓰는 경우
-const arr = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-  { id: 3, age: 28 },
-];
-reject(arr, 'name');
-// => [{ id: 3, age: 28 }]
+// 문자열에서 특정 문자가 아닌 문자들을 필터링해요
+reject('abc', char => char === 'b');
+// => ['a', 'c']
 ```
 
-### 객체의 경우
+이 함수는 다양한 형태의 predicate를 지원해요.
 
 ```typescript
 import { reject } from 'es-toolkit/compat';
 
-// 검사 함수를 쓰는 경우
-const obj = { a: 1, b: 2, c: 3 };
-reject(obj, item => item > 2);
-// => [1, 2]
+// 함수를 사용한 조건
+reject(users, user => user.age < 18);
 
-// 부분 객체를 쓰는 경우
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-};
-reject(obj, { name: 'Bob' });
-// => [{ id: 1, name: 'Alice' }]
+// 객체의 부분 매칭
+reject(users, { active: false });
 
-// 프로퍼티-값 쌍을 쓰는 경우
-const obj = {
-  alice: { id: 1, name: 'Alice' },
-  bob: { id: 2, name: 'Bob' },
-};
-reject(obj, ['name', 'Alice']);
-// => [{ id: 2, name: 'Bob' }]
+// 속성-값 배열
+reject(users, ['status', 'pending']);
 
-// 프로퍼티 이름을 쓰는 경우
-const obj = {
-  a: { id: 1, name: 'Alice' },
-  b: { id: 2, name: 'Bob' },
-  c: { id: 3, age: 28 },
-};
-reject(obj, 'name');
-// => [{ id: 3, age: 28 }]
+// 속성명으로 truthy 값 확인
+reject(users, 'premium');
 ```
+
+#### 파라미터
+
+- `collection` (`ArrayLike<T> | Record<any, any> | string | null | undefined`): 순회할 컬렉션이에요.
+- `predicate` (`((item: T, index: number, collection: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, 선택): 각 요소에 대해 실행할 조건이에요. 기본값은 `identity`예요.
+
+#### 반환 값
+
+(`T[]`): predicate 조건에 맞지 않는 요소들로 구성된 새 배열을 반환해요.

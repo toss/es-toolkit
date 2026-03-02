@@ -1,69 +1,71 @@
-# forIn
+# forIn (Lodash Compatibility)
 
-::: info
-This function is only available in `es-toolkit/compat` for compatibility reasons. It either has alternative native JavaScript APIs or isn't fully optimized yet.
+::: warning Use `Object.keys` and `for...in` loop instead
 
-When imported from `es-toolkit/compat`, it behaves exactly like lodash and provides the same functionalities, as detailed [here](../../../compatibility.md).
+This `forIn` function operates slowly due to handling `null` or `undefined`, setting up default `iteratee`, and more.
+
+Instead, use the faster and more modern `Object.keys` and `for...in` loop.
+
 :::
 
-Iterates over an object and invokes the `iteratee` function for each property.
-
-Iterates over string keyed properties including inherited properties.
-
-The iteration is terminated early if the `iteratee` function returns `false`.
-
-## Signature
+Iterates over all properties of an object (including inherited properties) and invokes a function for each property.
 
 ```typescript
-function forIn<T>(object: T, iteratee?: (value: T[keyof T], key: string, collection: T) => any): T;
-function forIn<T>(
-  object: T | null | undefined,
-  iteratee?: (value: T[keyof T], key: string, collection: T) => any
-): T | null | undefined;
+const result = forIn(obj, iteratee);
 ```
 
-### Parameters
+## Usage
 
-- `object` (`T | null | undefined`): The object to iterate over
-- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`): The function invoked per iteration. Default is the `identity` function
+### `forIn(object, iteratee)`
 
-### Returns
-
-(`T | null | undefined`): Returns `object`
-
-## Examples
+Iterates over all properties of an object and invokes the `iteratee` function. It iterates not only over the object's own properties but also over properties inherited through the prototype chain. If the `iteratee` function returns `false`, the iteration stops.
 
 ```typescript
 import { forIn } from 'es-toolkit/compat';
 
-function Shape() {
-  this.x = 0;
-  this.y = 0;
+// Iterate over all properties of an object
+const obj = { a: 1, b: 2 };
+forIn(obj, (value, key) => {
+  console.log(key, value);
+});
+// Output: 'a' 1, 'b' 2
+
+// Iterate including inherited properties
+function Parent() {
+  this.inherited = 'value';
 }
+Parent.prototype.protoProperty = 'proto';
 
-Shape.prototype.move = function (x, y) {
-  this.x += x;
-  this.y += y;
-};
+const child = new Parent();
+child.own = 'ownValue';
 
-// Create an instance of Shape
-const square = new Shape();
-
-// Iterate over all enumerable properties (including inherited ones)
-forIn(square, function (value, key) {
+forIn(child, (value, key) => {
   console.log(key, value);
 });
-// Output:
-// 'x', 0
-// 'y', 0
-// 'move', [Function]
+// Output: 'inherited' 'value', 'own' 'ownValue', 'protoProperty' 'proto'
 
-// The iteration is terminated early if the iteratee returns false
-forIn(square, function (value, key) {
+// Early exit based on condition
+forIn(obj, (value, key) => {
   console.log(key, value);
-  return key !== 'y'; // stop at 'y'
+  return key !== 'a'; // Stop after 'a'
 });
-// Output:
-// 'x', 0
-// 'y', 0
+// Output: 'a' 1
 ```
+
+`null` or `undefined` is returned as is.
+
+```typescript
+import { forIn } from 'es-toolkit/compat';
+
+forIn(null, iteratee); // null
+forIn(undefined, iteratee); // undefined
+```
+
+#### Parameters
+
+- `object` (`T | null | undefined`): The object to iterate over.
+- `iteratee` (`(value: T[keyof T], key: string, collection: T) => any`, optional): The function to invoke for each property. Defaults to the `identity` function.
+
+#### Returns
+
+(`T | null | undefined`): Returns the original object.

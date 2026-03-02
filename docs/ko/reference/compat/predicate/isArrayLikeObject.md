@@ -1,40 +1,50 @@
-# isArrayLikeObject
+# isArrayLikeObject (Lodash 호환성)
 
-::: info
-
-이 함수는 호환성을 위한 `es-toolkit/compat` 에서만 가져올 수 있어요. 대체할 수 있는 네이티브 JavaScript API가 있거나, 아직 충분히 최적화되지 않았기 때문이에요.
-
-`es-toolkit/compat`에서 이 함수를 가져오면, [lodash와 완전히 똑같이 동작](../../../compatibility.md)해요.
-
-:::
-
-주어진 값이 원시값이 아닌 유사 배열 객체인지 확인해요.
-
-유사 배열 객체는 `null`이나 `undefined`나 함수가 아니며, `length` 프로퍼티가 유효한 길이인 객체예요.
-
-TypeScript의 타입 가드로 사용할 수 있어요. 파라미터로 주어진 값의 타입을 `ArrayLike<unknown> & object`로 좁혀요.
-
-## 인터페이스
+값이 원시값이 아닌 배열 같은 객체인지 확인해요.
 
 ```typescript
-function isArrayLikeObject(value?: unknown): value is ArrayLike<unknown> & object;
+const result = isArrayLikeObject(value);
 ```
 
-### 파라미터
+## 사용법
 
-- `value` (`unknown`): 원시값이 아닌 유사 배열 객체인지 확인할 값이에요.
+### `isArrayLikeObject(value)`
 
-### 반환 값
-
-(`value is ArrayLike<unknown> & object`): 주어진 값이 원시값이 아닌 유사 배열 객체이면 `true`, 아니면 `false`를 반환해요.
-
-## 예시
+주어진 값이 원시값이 아닌 배열 같은 객체인지 확인할 때 `isArrayLikeObject`를 사용하세요. 배열, arguments 객체, NodeList 등이 해당하지만 문자열은 원시값이므로 제외돼요.
 
 ```typescript
 import { isArrayLikeObject } from 'es-toolkit/compat';
 
-console.log(isArrayLikeObject([1, 2, 3])); // true
-console.log(isArrayLikeObject({ 0: 'a', length: 1 })); // true
-console.log(isArrayLikeObject('abc')); // false
-console.log(isArrayLikeObject(() => {})); // false
+// 배열 같은 객체들 (원시값 아님)
+isArrayLikeObject([1, 2, 3]); // true
+isArrayLikeObject({ 0: 'a', 1: 'b', length: 2 }); // true
+isArrayLikeObject({ length: 0 }); // true
+
+// arguments 객체
+function example() {
+  return isArrayLikeObject(arguments); // true
+}
+
+// NodeList나 HTMLCollection (브라우저에서)
+isArrayLikeObject(document.querySelectorAll('div')); // true
+
+// 원시값들은 false (문자열 포함)
+isArrayLikeObject('abc'); // false
+isArrayLikeObject(''); // false
+isArrayLikeObject(123); // false
+isArrayLikeObject(true); // false
+
+// 다른 객체들
+isArrayLikeObject({}); // false
+isArrayLikeObject(null); // false
+isArrayLikeObject(undefined); // false
+isArrayLikeObject(() => {}); // false
 ```
+
+#### 파라미터
+
+- `value` (`any`): 확인할 값이에요.
+
+#### 반환 값
+
+(`boolean`): 값이 원시값이 아닌 배열 같은 객체이면 `true`, 아니면 `false`를 반환해요.

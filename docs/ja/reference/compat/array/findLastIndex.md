@@ -1,90 +1,84 @@
-# findLastIndex
+# findLastIndex (Lodash 互換性)
 
-::: info
-この関数は互換性のために `es-toolkit/compat` からのみインポートできます。代替可能なネイティブ JavaScript API があるか、まだ十分に最適化されていないためです。
+::: warning `Array.prototype.findLastIndex`を使用してください
 
-`es-toolkit/compat` からこの関数をインポートすると、[lodash と完全に同じように動作](../../../compatibility.md)します。
+この`findLastIndex`関数は、`null`や`undefined`の処理、部分オブジェクトのマッチング、プロパティ名のマッチングなどの追加機能により、動作が遅くなります。
+
+代わりに、より高速で現代的な`Array.prototype.findLastIndex`を使用してください。
+
 :::
 
-`findIndex` と同様に、条件に合う最初の値のインデックスを返しますが、右側から検索を開始します。
-
-条件は複数の方法で指定できます。
-
-- **検査関数**: 各要素に対して検査する関数を実行します。最初に `true` を返す値が選択されます。
-- **部分オブジェクト**: 与えられたオブジェクトと部分的に一致する最初の要素が選択されます。
-- **プロパティ-値ペア**: 該当プロパティに対して値が一致する最初の要素が選択されます。
-- **プロパティ名**: 該当プロパティに対して真と評価される値を持つ最初の要素が選択されます。
-
-## インターフェース
+配列で条件を満たす最後の要素のインデックスを見つけます。
 
 ```typescript
-function findLastIndex<T>(
-  arr: T[],
-  doesMatch: (item: T, index: number, arr: T[]) => unknown,
-  fromIndex?: number
-): number;
-function findLastIndex<T>(arr: T[], doesMatch: Partial<T>, fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: [keyof T, unknown], fromIndex?: number): number;
-function findLastIndex<T>(arr: T[], doesMatch: PropertyKey, fromIndex?: number): number;
+const lastIndex = findLastIndex(array, predicate, fromIndex);
 ```
 
-### パラメータ
+## 使用法
 
-- `arr` (`T[]`): 検索する配列。
+### `findLastIndex(array, predicate, fromIndex)`
 
-::: info `arr` は `ArrayLike<T>` であるか、`null` または `undefined` である可能性があります
+配列の末尾から開始して、与えられた条件に一致する最初の要素のインデックスを見つけたい場合は`findLastIndex`を使用してください。条件を満たす要素がない場合は`-1`を返します。
 
-lodash と完全に互換性があるように、`findLastIndex` 関数は `arr` を次のように処理します。
-
-- `arr` が `ArrayLike<T>` の場合、`Array.from(...)` を使用して配列に変換します。
-- `arr` が `null` または `undefined` の場合、空の配列と見なされます。
-
-:::
-
-- `doesMatch`:
-
-  - **検査関数** (`(item: T, index: number, arr: T[]) => unknown`): 探している要素かどうかを返す関数。
-  - **部分オブジェクト** (`Partial<T>`): 一致させるプロパティと値を指定した部分オブジェクト。
-  - **プロパティ-値ペア** (`[keyof T, unknown]`): 最初が一致させるプロパティ、2番目が一致させる値を表すタプル。
-  - **プロパティ名** (`PropertyKey`): 真と評価される値を持っているか確認するプロパティ名。
-
-- `fromIndex` (`number`): 検索を開始するインデックス。デフォルトは配列の最後のインデックス (`arr.length - 1`)。
-
-### 戻り値
-
-(`number`): 与えられた条件を満たす最初の要素のインデックス。ない場合は `-1`。
-
-## 例
+この関数は様々な方法で条件を指定できます。関数を渡すと各要素に対して関数を実行し、部分オブジェクトを渡すと要素がそのプロパティを持っているかを確認します。配列形式のキー値ペアを渡すと特定のプロパティが与えられた値と一致するかを確認し、文字列を渡すとそのプロパティが真と評価される値かを確認します。
 
 ```typescript
 import { findLastIndex } from 'es-toolkit/compat';
 
-// 検査関数を使う場合
-const items = [1, 2, 3, 4, 5];
-const result = findLastIndex(items, item => item > 3);
-console.log(result); // 4
-
-// 部分オブジェクトを使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
+const users = [
+  { user: 'barney', active: true },
+  { user: 'fred', active: false },
+  { user: 'pebbles', active: false },
 ];
-const result = findLastIndex(items, { name: 'Bob' });
-console.log(result); // 1
 
-// プロパティ-値ペアを使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLastIndex(items, ['name', 'Alice']);
-console.log(result); // 0
+// 関数を使用して条件を指定します
+findLastIndex(users, o => o.user === 'pebbles');
+// Returns: 2
 
-// プロパティ名を使う場合
-const items = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-const result = findLastIndex(items, 'name');
-console.log(result); // 1
+// 部分オブジェクトを使用して一致する要素を見つけます
+findLastIndex(users, { user: 'barney', active: true });
+// Returns: 0
+
+// プロパティ-値ペアを使用して一致する要素を見つけます
+findLastIndex(users, ['active', false]);
+// Returns: 2
+
+// プロパティ名を使用して真と評価される値を持つ要素を見つけます
+findLastIndex(users, 'active');
+// Returns: 0
 ```
+
+検索開始位置を指定することもできます。`fromIndex`が負の場合は配列の末尾から計算します。
+
+```typescript
+import { findLastIndex } from 'es-toolkit/compat';
+
+const numbers = [1, 2, 3, 4, 5];
+
+// インデックス3から逆方向に検索します
+findLastIndex(numbers, n => n < 4, 2);
+// Returns: 2
+
+// 負のインデックスを使用すると末尾から計算します
+findLastIndex(numbers, n => n > 2, -2);
+// Returns: 3
+```
+
+`null`または`undefined`は空の配列として処理されます。
+
+```typescript
+import { findLastIndex } from 'es-toolkit/compat';
+
+findLastIndex(null, n => n > 0); // -1
+findLastIndex(undefined, n => n > 0); // -1
+```
+
+#### パラメータ
+
+- `array` (`ArrayLike<T> | null | undefined`): 検索する配列です。
+- `predicate` (`((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey`, オプション): 各要素をテストする条件です。関数、部分オブジェクト、プロパティ-値ペア、またはプロパティ名を使用できます。デフォルトは恒等関数です。
+- `fromIndex` (`number`, オプション): 検索を開始するインデックスです。負の場合は配列の末尾から計算します。デフォルトは`array.length - 1`です。
+
+#### 戻り値
+
+(`number`): 条件を満たす最後の要素のインデックスを返します。条件を満たす要素がない場合は`-1`を返します。
