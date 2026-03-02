@@ -23,20 +23,13 @@ const result = omit(obj, ['b', 'c']);
 // 存在しないキーを指定してもエラーは発生しません
 const safe = omit(obj, ['b', 'nonexistent']);
 // safeは{ a: 1, c: 3, d: 4 }になります
-
-// 動的な配列も使用できます
-const keysToOmit = Object.keys({ b: true, c: true });
-const dynamic = omit(obj, keysToOmit);
-// dynamicは{ a: 1, d: 4 }になります
 ```
 
 #### パラメータ
 
-- `obj` (`T extends Record<PropertyKey, any>`): キーを除外するオブジェクトです。
-- `keys` (`readonly K[]` (`K extends keyof T`) または `readonly PropertyKey[]`): オブジェクトから除外するキーの配列です。
+- `obj` (`T extends Record<string, any>`): キーを除外するオブジェクトです。
+- `keys` (`readonly K[]`): オブジェクトから除外するキーの配列です。
 
 #### 戻り値
 
-- `Omit<T, K>` または `Partial<T>` - 指定されたキーが除外された新しいオブジェクトを返します。
-  - `keys`が `readonly K[]` の場合: `Omit<T, K>` でより厳密な型が返されます。
-  - `keys`が `readonly PropertyKey[]` の場合: `Partial<T>` が返されます。ランタイムで決定される動的なキー配列に便利です。
+(`Omit<T, K>`): 指定されたキーが除外された新しいオブジェクトを返します。

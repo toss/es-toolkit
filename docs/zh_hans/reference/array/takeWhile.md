@@ -44,7 +44,7 @@ takeWhile(users, user => user.age < 30);
 #### 参数
 
 - `arr` (`T[]`): 要获取元素的数组。
-- `predicate` (`(element: T) => boolean`): 对每个元素调用的条件函数。只要此函数返回真,就会获取元素。
+- `predicate` (`(element: T, index: number, array: T[]) => boolean`): 与每个元素、索引和数组一起调用的条件函数。只要此函数返回真,就会获取元素。
 
 #### 返回值
 

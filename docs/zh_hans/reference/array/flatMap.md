@@ -46,7 +46,7 @@ flatMap(arr, item => [[[item, item]]], 3);
 #### 参数
 
 - `arr` (`T[]`): 要转换的数组。
-- `iteratee` (`(item: T) => U`): 转换每个数组元素的函数。
+- `iteratee` (`(item: T, index: number, array: readonly T[]) => U`): 转换每个数组元素的函数。它接收元素、索引和数组作为参数。
 - `depth` (`D`, 可选): 扁平化的深度。默认值为 `1`。
 
 #### 返回值

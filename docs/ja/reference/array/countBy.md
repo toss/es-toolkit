@@ -39,7 +39,7 @@ countBy(users, user => user.age);
 #### パラメータ
 
 - `arr` (`T[]`): 要素の個数を数える配列。
-- `mapper` (`(item: T) => K`): 要素を分類する基準となる値を返す関数。
+- `mapper` (`(item: T, index: number, array: T[]) => K`): 要素を分類する基準となる値を返す関数。各要素、インデックス、配列と共に呼び出されます。
 
 #### 戻り値
 

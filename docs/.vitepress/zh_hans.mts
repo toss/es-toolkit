@@ -11,6 +11,8 @@ export const zh_hans = defineConfig({
   description: '一款先进的高性能 JavaScript 实用库，具有小巧的包体积和强大的类型注解。',
 
   themeConfig: {
+    darkModeSwitchLabel: '深色模式',
+
     nav: nav(),
 
     sidebar: sidebar(),

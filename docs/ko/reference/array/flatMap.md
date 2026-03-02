@@ -46,7 +46,7 @@ flatMap(arr, item => [[[item, item]]], 3);
 #### 파라미터
 
 - `arr` (`T[]`): 변환할 배열이에요.
-- `iteratee` (`(item: T) => U`): 각 배열 요소를 변환하는 함수예요.
+- `iteratee` (`(item: T, index: number, array: readonly T[]) => U`): 각 배열 요소를 변환하는 함수예요. 요소, 인덱스, 배열을 인자로 받아요.
 - `depth` (`D`, 선택): 평탄화할 깊이예요. 기본값은 `1`이에요.
 
 #### 반환 값

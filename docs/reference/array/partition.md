@@ -45,7 +45,7 @@ const [truthy, falsy] = partition([], x => x > 0);
 #### Parameters
 
 - `arr` (`T[]`): The array to split into two groups.
-- `isInTruthy` (`(value: T) => boolean`): A condition function that determines whether each element should be included in the first array (truthy) or the second array (falsy).
+- `isInTruthy` (`(value: T, index: number, array: readonly T[]) => boolean`): A condition function that determines whether each element should be included in the first array (truthy) or the second array (falsy). The function is called with the value, its index, and the entire array.
 
 #### Returns
 

@@ -35,6 +35,8 @@ es-toolkit 是一个高质量的实用函数库，包含现代 JavaScript 项目
 - `isNumber`（改用 `typeof value === 'number'`）
 - `min`（改用 `Math.min()`）
 
+对于 TC39 提案中涵盖的函数，一旦进入 Stage 3，我们将不再实现。对于较早阶段的提案（Stage 2.7 或更低），如果确实有需要，我们可能会考虑添加，但一旦提案推进到 Stage 3 或更高阶段，我们会将其标记为弃用——因为届时使用原生实现是更好的选择。
+
 #### `es-toolkit/compat`
 
 为了帮助使用 [`Lodash`](https://lodash.com/docs/4.17.15) 的项目轻松迁移到 es-toolkit，我们实现了 `Lodash` 提供的所有函数。

@@ -44,8 +44,20 @@ takeWhile(users, user => user.age < 30);
 #### Parameters
 
 - `arr` (`T[]`): The array to take elements from.
-- `predicate` (`(element: T) => boolean`): A condition function called for each element. Elements are taken while this function returns true.
+- `predicate` (`(element: T, index: number, array: T[]) => boolean`): A condition function called for each element with the element, its index, and the array. Elements are taken while this function returns true.
 
 #### Returns
 
 (`T[]`): Returns a new array containing the elements taken from the beginning while the condition function returns true.
+
+## Examples
+
+```typescript
+// Using index parameter
+takeWhile([10, 20, 30, 40], (x, index) => index < 2);
+// Returns: [10, 20]
+
+// Using array parameter
+takeWhile([1, 2, 3, 4], (x, index, arr) => x < arr.length);
+// Returns: [1, 2, 3]
+```

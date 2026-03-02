@@ -52,6 +52,33 @@ const data4 = await retry(
 );
 ```
 
+当只想在特定错误时重试时,可以使用 `shouldRetry` 选项。
+
+```typescript
+import { retry } from 'es-toolkit/function';
+
+class NetworkError extends Error {
+  constructor(public status: number) {
+    super(`Network error: ${status}`);
+  }
+}
+
+// 仅在 500+ 错误时重试
+const data5 = await retry(
+  async () => {
+    const response = await fetch('/api/data');
+    if (!response.ok) {
+      throw new NetworkError(response.status);
+    }
+    return response.json();
+  },
+  {
+    retries: 3,
+    shouldRetry: (error, attempt) => error instanceof NetworkError && error.status >= 500,
+  }
+);
+```
+
 也可以使用 AbortSignal 取消重试。
 
 ```typescript
@@ -86,6 +113,9 @@ try {
   - `retries` (`number`, 可选): 重试次数。默认值为 `Infinity`,无限重试。
   - `delay` (`number | (attempts: number) => number`, 可选): 重试间隔(毫秒)。可以使用数字或函数。默认值为 `0`。
   - `signal` (`AbortSignal`, 可选): 可以取消重试的信号。
+  - `shouldRetry` (`(error: unknown, attempt: number) => boolean`, 可选): 决定是否重试的函数。如果返回 `false`,则立即抛出错误。
+    - `error`: 发生的错误对象。
+    - `attempt`: 当前尝试次数 (从 0 开始)。
 
 #### 返回值
 

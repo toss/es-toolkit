@@ -42,37 +42,31 @@ describe(`es-toolkit's package tarball`, () => {
     tarball = await createPackageTarball();
   }, 300000);
 
-  it(
-    'configures all entrypoints correctly',
-    async () => {
-      const packageJson = await getPackageJsonOfTarball(tarball.path);
-      const entrypoints = Object.keys(packageJson.exports);
+  it('configures all entrypoints correctly', { timeout: 240_000 }, async () => {
+    const packageJson = await getPackageJsonOfTarball(tarball.path);
+    const entrypoints = Object.keys(packageJson.exports);
 
-      expect(entrypoints).toEqual([...ENTRYPOINTS, './package.json']);
-    },
-    { timeout: 240_000 }
-  );
+    expect(entrypoints).toEqual([...ENTRYPOINTS, './package.json']);
+  });
 
-  it(
-    'exports identical functions in CJS and ESM',
-    async () => {
-      const tmpdir = await createTmpDir();
+  it('exports identical functions in CJS and ESM', { timeout: 120_000 }, async () => {
+    const tmpdir = await createTmpDir();
 
-      const packageJson = {
-        dependencies: {
-          'es-toolkit': tarball.path,
-        },
-      };
+    const packageJson = {
+      dependencies: {
+        'es-toolkit': tarball.path,
+      },
+    };
 
-      await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
-      await execa('npm', ['install'], { cwd: tmpdir });
+    await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
+    await execa('npm', ['install'], { cwd: tmpdir });
 
-      for (const entrypoint of ENTRYPOINTS) {
-        if (entrypoint.includes('*')) {
-          continue;
-        }
+    for (const entrypoint of ENTRYPOINTS) {
+      if (entrypoint.includes('*')) {
+        continue;
+      }
 
-        const cjsScript = `
+      const cjsScript = `
 const toolkit = require("${path.join('es-toolkit', entrypoint)}");
 
 const exported = Object.entries(toolkit)
@@ -82,9 +76,9 @@ const exported = Object.entries(toolkit)
 console.log("${path.join('es-toolkit', entrypoint)}");
 console.log(exported);
       `.trim();
-        const cjsScriptPath = path.join(tmpdir, 'script.cjs');
+      const cjsScriptPath = path.join(tmpdir, 'script.cjs');
 
-        const esmScript = `
+      const esmScript = `
 const toolkit = await import("${path.join('es-toolkit', entrypoint)}");
 
 const exported = Object.entries(toolkit)
@@ -94,17 +88,15 @@ const exported = Object.entries(toolkit)
 console.log("${path.join('es-toolkit', entrypoint)}");
 console.log(exported);
       `.trim();
-        const esmScriptPath = path.join(tmpdir, 'script.mjs');
+      const esmScriptPath = path.join(tmpdir, 'script.mjs');
 
-        await fs.promises.writeFile(cjsScriptPath, cjsScript);
-        await fs.promises.writeFile(esmScriptPath, esmScript);
+      await fs.promises.writeFile(cjsScriptPath, cjsScript);
+      await fs.promises.writeFile(esmScriptPath, esmScript);
 
-        const cjsResult = await execa('node', [cjsScriptPath]);
-        const esmResult = await execa('node', [esmScriptPath]);
+      const cjsResult = await execa('node', [cjsScriptPath]);
+      const esmResult = await execa('node', [esmScriptPath]);
 
-        expect(cjsResult.stdout).toEqual(esmResult.stdout);
-      }
-    },
-    { timeout: 120_000 }
-  );
+      expect(cjsResult.stdout).toEqual(esmResult.stdout);
+    }
+  });
 });

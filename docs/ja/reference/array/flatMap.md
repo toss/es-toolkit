@@ -46,7 +46,7 @@ flatMap(arr, item => [[[item, item]]], 3);
 #### パラメータ
 
 - `arr` (`T[]`): 変換する配列です。
-- `iteratee` (`(item: T) => U`): 各配列要素を変換する関数です。
+- `iteratee` (`(item: T, index: number, array: readonly T[]) => U`): 各配列要素を変換する関数です。要素、インデックス、配列を引数として受け取ります。
 - `depth` (`D`, オプション): 平坦化する深さです。デフォルト値は`1`です。
 
 #### 戻り値

@@ -63,8 +63,22 @@ keyBy(orders, order => `${order.date}-${order.customerId}`);
 #### Parameters
 
 - `arr` (`readonly T[]`): The array to convert to an object.
-- `getKeyFromItem` (`(item: T) => K`): A function that generates a key from each element.
+- `getKeyFromItem` (`(item: T, index: number, array: T[]) => K`): A function that generates a key from each element, its index, and the array.
 
 #### Returns
 
 (`Record<K, T>`): Returns an object with the generated keys as property names and the corresponding elements as values. If multiple elements generate the same key, the last element is used as the value.
+
+## Examples
+
+```typescript
+// Using index parameter
+const items = ['a', 'b', 'c'];
+const result = keyBy(items, (item, index) => index);
+// Returns: { 0: 'a', 1: 'b', 2: 'c' }
+
+// Using array parameter
+const numbers = [10, 20, 30];
+const result2 = keyBy(numbers, (item, index, arr) => (item > arr[0] ? 'large' : 'small'));
+// Returns: { small: 10, large: 30 }
+```

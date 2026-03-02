@@ -37,7 +37,7 @@ const result2 = flatMapDeep([1, 2, 3], item => [[[item, item]]]);
 #### 参数
 
 - `arr` (`T[]`): 要转换的数组。
-- `iteratee` (`(item: T) => U`): 转换每个数组元素的函数。
+- `iteratee` (`(item: T, index: number, array: readonly T[]) => U`): 转换每个数组元素的函数。它接收元素、索引和数组作为参数。
 
 #### 返回值
 

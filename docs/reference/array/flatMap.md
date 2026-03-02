@@ -46,9 +46,22 @@ flatMap(arr, item => [[[item, item]]], 3);
 #### Parameters
 
 - `arr` (`T[]`): The array to transform.
-- `iteratee` (`(item: T) => U`): The function that transforms each array element.
+- `iteratee` (`(item: T, index: number, array: readonly T[]) => U`): The function that transforms each array element. It receives the element, its index, and the array.
 - `depth` (`D`, optional): The depth to flatten. Default is `1`.
 
 #### Returns
 
 (`Array<FlatArray<U[], D>>`): Returns a new array where each element is transformed and flattened to the specified depth.
+
+## Examples
+
+```typescript
+// Using index parameter
+const arr = [1, 2, 3];
+flatMap(arr, (item, index) => [item + index]);
+// Returns: [1, 3, 5]
+
+// Using array parameter
+flatMap(arr, (item, _index, array) => [item * array.length]);
+// Returns: [3, 6, 9]
+```

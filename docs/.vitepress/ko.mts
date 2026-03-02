@@ -10,6 +10,8 @@ export const ko = defineConfig({
   description: '빠른 성능, 작은 번들 사이즈를 가지는 현대적인 JavaScript 유틸리티 라이브러리',
 
   themeConfig: {
+    darkModeSwitchLabel: '다크 모드',
+
     nav: nav(),
 
     sidebar: sidebar(),

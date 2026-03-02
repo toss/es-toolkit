@@ -63,7 +63,7 @@ keyBy(orders, order => `${order.date}-${order.customerId}`);
 #### パラメータ
 
 - `arr` (`readonly T[]`): オブジェクトに変換する配列。
-- `getKeyFromItem` (`(item: T) => K`): 各要素からキーを生成する関数。
+- `getKeyFromItem` (`(item: T, index: number, array: T[]) => K`): 各要素、インデックス、配列からキーを生成する関数。
 
 #### 戻り値
 

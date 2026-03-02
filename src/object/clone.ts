@@ -44,6 +44,11 @@ export function clone<T>(obj: T): T {
   }
 
   const prototype = Object.getPrototypeOf(obj);
+
+  if (prototype == null) {
+    return Object.assign(Object.create(prototype), obj);
+  }
+
   const Constructor = prototype.constructor;
 
   if (obj instanceof Date || obj instanceof Map || obj instanceof Set) {
@@ -62,11 +67,15 @@ export function clone<T>(obj: T): T {
   }
 
   if (obj instanceof Error) {
-    const newError = new Constructor(obj.message);
+    let newError;
+    if (obj instanceof AggregateError) {
+      newError = new Constructor(obj.errors, obj.message, { cause: obj.cause });
+    } else {
+      newError = new Constructor(obj.message, { cause: obj.cause });
+    }
 
     newError.stack = obj.stack;
-    newError.name = obj.name;
-    newError.cause = obj.cause;
+    Object.assign(newError, obj);
 
     return newError;
   }
