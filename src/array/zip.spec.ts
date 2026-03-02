@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { zip } from './zip';
 
 describe('zip', () => {
@@ -26,5 +26,18 @@ describe('zip', () => {
 
   it('supports spread operators', () => {
     expect(zip(...[[1], ['s'], [{ a: 2 }]])).toEqual([[1, 's', { a: 2 }]]);
+  });
+
+  it('should include undefined in return types for arrays of different lengths', () => {
+    const result2 = zip([1, 2, 3], ['a', 'b']);
+    expectTypeOf(result2).toEqualTypeOf<Array<[number | undefined, string | undefined]>>();
+
+    const result3 = zip([1], [true], ['x']);
+    expectTypeOf(result3).toEqualTypeOf<Array<[number | undefined, boolean | undefined, string | undefined]>>();
+
+    const result4 = zip([1], ['a'], [true], [null]);
+    expectTypeOf(result4).toEqualTypeOf<
+      Array<[number | undefined, string | undefined, boolean | undefined, null | undefined]>
+    >();
   });
 });
