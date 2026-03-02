@@ -10,6 +10,8 @@ export const ja = defineConfig({
   description: '高速なパフォーマンスと小さなバンドルサイズを持つ最先端のJavaScriptユーティリティライブラリ',
 
   themeConfig: {
+    darkModeSwitchLabel: 'ダークモード',
+
     nav: nav(),
 
     sidebar: sidebar(),

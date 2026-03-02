@@ -11,6 +11,8 @@ export const en = defineConfig({
     'A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.',
 
   themeConfig: {
+    darkModeSwitchLabel: 'Dark Mode',
+
     nav: nav(),
 
     sidebar: sidebar(),
