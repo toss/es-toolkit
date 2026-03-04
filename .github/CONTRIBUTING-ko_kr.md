@@ -92,7 +92,28 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 
 </details>
 
-### 1.4 문서화
+### 1.4 타입
+
+정확한 타입을 제공하는 것은 es-toolkit의 핵심적인 목표예요.
+동시에 TypeScript 자체의 타입 동작과 일관성을 유지하는 것도 중요해요.
+
+es-toolkit은 가장 널리 사용되는 설정인 TypeScript [`strict` 모드](https://www.typescriptlang.org/tsconfig/#strict)와 동일한 타입을 반환하는 것을 목표로 해요.
+
+예를 들어, 아래의 `result1`과 `result2`는 같은 타입을 가져야 해요. `result2`는 본질적으로 `result1`이 직접 수행하는 동작을 감싼 래퍼에 불과하기 때문이에요.
+
+```typescript
+import { sample } from 'es-toolkit';
+
+const arr = [1, 2, 3];
+
+const result1 = arr[Math.floor(Math.random() * arr.length)]; // TypeScript strict 모드에서 `number`로 추론
+const result2 = sample(arr); // 마찬가지로 `number`로 추론되어야 함
+```
+
+[noUncheckedIndexedAccess](https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html)처럼 strict 모드 내에서도 기본값이 `false`인 옵션은 es-toolkit의 타입 호환성을 결정할 때 고려하지 않아요.
+```
+
+### 1.5 문서화
 
 모든 함수들은 라이브러리 사용자가 쉽게 참고할 수 있도록 자세한 문서가 필요해요. 각 함수마다 JSDoc과 함께 레퍼런스 문서가 존재해야 해요. 레퍼런스 문서는 [문서 디렉토리](https://github.com/toss/es-toolkit/tree/main/docs)에 포함해 주세요.
 
