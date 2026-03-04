@@ -1,5 +1,14 @@
 # es-toolkit Changelog
 
+## Version v1.45.1
+
+Released on March 4th, 2026.
+
+- Reverted the return type of `sample` to not include `undefined`.
+- Fixed Deno install command to include `jsr:` prefix. ([#1627])
+
+We sincerely thank @mwln for their contributions. We appreciate your great efforts!
+
 ## Version v1.45.0
 
 Released on March 2nd, 2026.
