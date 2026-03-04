@@ -92,7 +92,24 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 
 </details>
 
-### 1.4 文档
+### 1.4 类型
+
+提供准确的类型是 es-toolkit 的核心目标之一，与 TypeScript 自身的类型行为保持一致也同样重要。
+
+es-toolkit 旨在返回与 TypeScript `strict` 模式相同的类型——这也是最广泛使用的配置。例如，下面的 `result1` 和 `result2` 应当具有相同的类型，因为 `result2` 本质上只是对 `result1` 直接执行的操作的封装：
+
+```typescript
+import { sample } from 'es-toolkit';
+
+const arr = [1, 2, 3];
+
+const result1 = arr[Math.floor(Math.random() * arr.length)]; // 在 TypeScript strict 模式下推断为 `number`
+const result2 = sample(arr); // 同样应推断为 `number`
+```
+
+在 strict 模式下默认值仍为 `false` 的选项——例如 [noUncheckedIndexedAccess](https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html)——在确定 es-toolkit 的类型兼容性时不予考虑。
+
+### 1.5 文档
 
 我们所有的函数都应详细记录，以便于参考。所有函数都应具有 JSDoc 以及[我们文档目录中](https://github.com/toss/es-toolkit/tree/main/docs)相应的文档，以说明其所有特性。
 

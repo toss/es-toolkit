@@ -48,6 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
         { text: 'Lodash Compatibility', link: '/compatibility' },
+        { text: 'AI Integration', link: '/llms-txt' },
       ],
     },
     {

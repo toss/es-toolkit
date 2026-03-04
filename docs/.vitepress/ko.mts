@@ -47,6 +47,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
         { text: 'Lodash 호환성', link: '/ko/compatibility' },
+        { text: 'AI 활용', link: '/ko/llms-txt' },
       ],
     },
     {
