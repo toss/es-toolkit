@@ -38,3 +38,6 @@ umd
 /util.js
 
 /test
+
+.omc
+*.log
