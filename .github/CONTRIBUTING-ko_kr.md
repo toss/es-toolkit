@@ -111,7 +111,6 @@ const result2 = sample(arr); // 마찬가지로 `number`로 추론되어야 함
 ```
 
 [noUncheckedIndexedAccess](https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html)처럼 strict 모드 내에서도 기본값이 `false`인 옵션은 es-toolkit의 타입 호환성을 결정할 때 고려하지 않아요.
-```
 
 ### 1.5 문서화
 
