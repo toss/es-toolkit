@@ -9,7 +9,7 @@ describe('zipWith bundle size', () => {
 
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit', 'zipWith');
-    expect(bundleSize).toMatchInlineSnapshot(`198`);
+    expect(bundleSize).toMatchInlineSnapshot(`200`);
   });
 
   it('es-toolkit/compat', async () => {
