@@ -2121,6 +2121,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fxts/core@npm:^1.26.0":
+  version: 1.26.0
+  resolution: "@fxts/core@npm:1.26.0"
+  dependencies:
+    tslib: "npm:^2.6.0"
+  checksum: 10c0/862f595229409edec0fd69efba881b749b2875b4fd079367a0a9cb90fc181a92c94622f2fb01c361e24ea919a179d80b6697b628afafe7adf258492234249469
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -4557,10 +4566,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "benchmarks@workspace:benchmarks"
   dependencies:
+    "@fxts/core": "npm:^1.26.0"
     "@types/lodash": "npm:^4.17.20"
     "@types/lodash-es": "npm:^4"
     es-toolkit: "workspace:^"
     esbuild: "npm:0.23.0"
+    itertools: "npm:^2.6.0"
     lodash: "npm:^4.17.21"
     lodash-es: "npm:^4.17.21"
     rfdc: "npm:^1.4.1"
@@ -8247,6 +8258,13 @@ __metadata:
     html-escaper: "npm:^2.0.0"
     istanbul-lib-report: "npm:^3.0.0"
   checksum: 10c0/d596317cfd9c22e1394f22a8d8ba0303d2074fe2e971887b32d870e4b33f8464b10f8ccbe6847808f7db485f084eba09e6c2ed706b3a978e4b52f07085b8f9bc
+  languageName: node
+  linkType: hard
+
+"itertools@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "itertools@npm:2.6.0"
+  checksum: 10c0/2b93bc5596bd62963787f2297a778e105337795ac1d6c4f9104413e54cc7af5f4eefbb7fc8792754710f6e0888e379b7128b2234a290cbcfc2e357ca163c3796
   languageName: node
   linkType: hard
 
@@ -12209,6 +12227,13 @@ __metadata:
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10c0/469e1d5bf1af585742128827000711efa61010b699cb040ab1800bcd3ccdd37f63ec30642c9e07c4439c1db6e46345582614275daca3e0f4abae29b0083f04a6
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.6.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
   languageName: node
   linkType: hard
 

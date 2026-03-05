@@ -12,8 +12,10 @@
     "vitest": "^4.0.17"
   },
   "devDependencies": {
+    "@fxts/core": "^1.26.0",
     "@types/lodash": "^4.17.20",
     "@types/lodash-es": "^4",
+    "itertools": "^2.6.0",
     "rfdc": "^1.4.1"
   }
 }
