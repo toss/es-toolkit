@@ -18,7 +18,7 @@ describe('countBy', () => {
   it('should pass the original set to the mapper function', () => {
     const set = new Set([1, 2, 3]);
 
-    const result = countBy(set, (value, value2, originalSet) => {
+    const result = countBy(set, (value, originalSet) => {
       expect(originalSet).toBe(set);
       return value >= originalSet.size ? 'large' : 'small';
     });

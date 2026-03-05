@@ -7,7 +7,7 @@
  *
  * @template T - The type of elements in the Set.
  * @param {Set<T>} set - The Set to test.
- * @param {(value: T, value2: T, set: Set<T>) => boolean} doesMatch - A predicate function that tests each element.
+ * @param {(value: T, set: Set<T>) => boolean} doesMatch - A predicate function that tests each element.
  * @returns {boolean} true if all elements satisfy the predicate, false otherwise.
  *
  * @example
@@ -18,9 +18,9 @@
  * const result2 = every(set, (value) => value > 15);
  * // result2 will be: false
  */
-export function every<T>(set: Set<T>, doesMatch: (value: T, value2: T, set: Set<T>) => boolean): boolean {
+export function every<T>(set: Set<T>, doesMatch: (value: T, set: Set<T>) => boolean): boolean {
   for (const value of set) {
-    if (!doesMatch(value, value, set)) {
+    if (!doesMatch(value, set)) {
       return false;
     }
   }

@@ -15,20 +15,19 @@ describe('forEach', () => {
 
   it('should pass the value twice and the set to the callback', () => {
     const set = new Set(['a', 'b', 'c']);
-    const results: Array<{ value1: string; value2: string; hasValue: boolean }> = [];
+    const results: Array<{ value1: string; hasValue: boolean }> = [];
 
-    forEach(set, (value, value2, originalSet) => {
+    forEach(set, (value, originalSet) => {
       results.push({
         value1: value,
-        value2: value2,
         hasValue: originalSet.has(value),
       });
     });
 
     expect(results).toEqual([
-      { value1: 'a', value2: 'a', hasValue: true },
-      { value1: 'b', value2: 'b', hasValue: true },
-      { value1: 'c', value2: 'c', hasValue: true },
+      { value1: 'a', hasValue: true },
+      { value1: 'b', hasValue: true },
+      { value1: 'c', hasValue: true },
     ]);
   });
 

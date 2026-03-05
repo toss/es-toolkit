@@ -7,7 +7,7 @@
  *
  * @template T - The type of elements in the Set.
  * @param {Set<T>} set - The Set to search.
- * @param {(value: T, value2: T, set: Set<T>) => boolean} doesMatch - A predicate function that tests each element.
+ * @param {(value: T, set: Set<T>) => boolean} doesMatch - A predicate function that tests each element.
  * @returns {T | undefined} The first element that satisfies the predicate, or undefined if none found.
  *
  * @example
@@ -19,9 +19,9 @@
  * const result = find(set, (value) => value.quantity > 10);
  * // result will be: { name: 'grape', quantity: 15 }
  */
-export function find<T>(set: Set<T>, doesMatch: (value: T, value2: T, set: Set<T>) => boolean): T | undefined {
+export function find<T>(set: Set<T>, doesMatch: (value: T, set: Set<T>) => boolean): T | undefined {
   for (const value of set) {
-    if (doesMatch(value, value, set)) {
+    if (doesMatch(value, set)) {
       return value;
     }
   }

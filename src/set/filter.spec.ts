@@ -13,7 +13,7 @@ describe('filter', () => {
   it('should pass the original set to the predicate function', () => {
     const set = new Set([1, 2, 3]);
 
-    const result = filter(set, (value, value2, originalSet) => {
+    const result = filter(set, (value, originalSet) => {
       expect(originalSet).toBe(set);
       return value >= originalSet.size;
     });

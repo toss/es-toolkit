@@ -56,7 +56,7 @@ const adminEmail = find(emails, email => email.startsWith('admin'));
 #### Parameters
 
 - `set` (`Set<T>`): The Set to search.
-- `doesMatch` (`(value: T, value2: T, set: Set<T>) => boolean`): A predicate function that tests each element.
+- `doesMatch` (`(value: T, set: Set<T>) => boolean`): A predicate function that tests each element.
 
 #### Returns
 

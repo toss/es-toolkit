@@ -69,7 +69,7 @@ const byParity = keyBy(numbers, num => (num % 2 === 0 ? 'even' : 'odd'));
 #### Parameters
 
 - `set` (`Set<T>`): The set of elements to be mapped.
-- `getKeyFromValue` (`(value: T, value2: T, set: Set<T>) => K`): A function that generates a key from a value.
+- `getKeyFromValue` (`(value: T, set: Set<T>) => K`): A function that generates a key from a value.
 
 #### Returns
 
