@@ -2,7 +2,7 @@
 name: release
 description: Create a new es-toolkit release (version bump, changelog, tag)
 disable-model-invocation: true
-argument-hint: "[minor|patch|1.45.0]"
+argument-hint: '[minor|patch|1.45.0]'
 allowed-tools: Bash, Read, Edit, Write, Grep, Glob, AskUserQuestion
 ---
 
@@ -48,15 +48,16 @@ git log --oneline $(git describe --tags --abbrev=0)..HEAD
 
 Categorize commits:
 
-| Prefix | Include in changelog? |
-|--------|----------------------|
-| `feat` | Yes |
-| `fix` | Yes |
-| `revert` | Yes |
-| `docs` | Only if user-facing |
-| `chore`, `build`, `ci`, `test` | Only if significant |
+| Prefix                         | Include in changelog? |
+| ------------------------------ | --------------------- |
+| `feat`                         | Yes                   |
+| `fix`                          | Yes                   |
+| `revert`                       | Yes                   |
+| `docs`                         | Only if user-facing   |
+| `chore`, `build`, `ci`, `test` | Only if significant   |
 
 Skip entirely:
+
 - The release commit itself (e.g. `v1.44.0`)
 - Merge commits
 - `build(deps): bump` commits
@@ -67,6 +68,7 @@ Skip entirely:
 Get the GitHub username for each commit. Only the first author — ignore co-authors.
 
 - **Commits with a PR number** (e.g. `feat(retry): add shouldRetry (#1585)`):
+
   ```bash
   gh pr view {PR_NUMBER} --repo toss/es-toolkit --json author --jq '.author.login'
   ```
@@ -94,6 +96,7 @@ We sincerely thank {contributors} for their contributions. We appreciate your gr
 ```
 
 Rules:
+
 - Features first, then fixes, then other changes
 - English, past tense ("Added", "Fixed", "Enhanced")
 - Include `([#{PR_NUMBER}])` only when a PR number exists
@@ -103,6 +106,7 @@ Rules:
 ### 6. Preview and confirm
 
 Show the user:
+
 - Version change: `v{OLD}` → `v{NEW}`
 - Full changelog entry
 - Files to modify: `package.json`, `jsr.json`, `CHANGELOG.md`
@@ -130,6 +134,7 @@ Commit message is the version string only (e.g. `v1.45.0`). No body. No co-autho
 Use AskUserQuestion to ask "Push to remote?".
 
 If approved:
+
 ```bash
 git push origin main
 git push origin "v{NEW_VERSION}"
