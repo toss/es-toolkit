@@ -13,7 +13,7 @@
  *
  * @example
  * const result = enumerate(['a', 'b', 'c']);
- * // console.log([...result]); [[0, 'a'], [1, 'b'], [2, 'c']]
+ * console.log([...result]); // [[0, 'a'], [1, 'b'], [2, 'c']]
  *
  * @example
  * Works with any iterable. not just arrays
@@ -37,10 +37,29 @@
  * }
  * console.log([...enumerate(words())]); // [[0, 'hello'], [1, 'world']]
  */
-export function* enumerate<T>(iterable: Iterable<T>, start?: number): IterableIterator<[number, T]> {
+export function enumerate<T>(iterable: Iterable<T>, start?: number): IterableIterator<[number, T]> {
+  const iterator = iterable[Symbol.iterator]();
   let index = start ?? 0;
 
-  for (const value of iterable) {
-    yield [index++, value];
-  }
+  const doneResult: IteratorResult<[number, T]> = {
+    value: undefined,
+    done: true,
+  };
+
+  return {
+    next(): IteratorResult<[number, T]> {
+      const result = iterator.next();
+      if (result.done) {
+        return doneResult;
+      }
+
+      return {
+        value: [index++, result.value],
+        done: false,
+      };
+    },
+    [Symbol.iterator]() {
+      return this;
+    },
+  };
 }
