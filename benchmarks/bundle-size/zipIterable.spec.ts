@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('zipIterable bundle size', () => {
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit/iterator', 'zipIterable');
-    expect(bundleSize).toMatchInlineSnapshot(`167`);
+    expect(bundleSize).toMatchInlineSnapshot(`197`);
   });
 
   it('@fxts/core', async () => {
