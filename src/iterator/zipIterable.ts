@@ -73,14 +73,21 @@ export function* zipIterable<T extends readonly unknown[]>(
   ...iterables: { [K in keyof T]: Iterable<T[K]> }
 ): IterableIterator<T> {
   const iterators = iterables.map(iterable => iterable[Symbol.iterator]());
+  const len = iterators.length;
 
   while (true) {
-    const results = iterators.map(iterator => iterator.next());
+    const tuple: unknown[] = new Array(len);
 
-    if (results.some(result => result.done)) {
-      return;
+    for (let i = 0; i < len; i++) {
+      const result = iterators[i].next();
+
+      if (result.done) {
+        return;
+      }
+
+      tuple[i] = result.value;
     }
 
-    yield results.map(result => result.value) as unknown as T;
+    yield tuple as unknown as T;
   }
 }
