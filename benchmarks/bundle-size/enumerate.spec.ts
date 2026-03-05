@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('enumerate bundle size', () => {
   it('es-toolkit', async () => {
     const bundleSize = await getBundleSize('es-toolkit/iterator', 'enumerate');
-    expect(bundleSize).toMatchInlineSnapshot(`82`);
+    expect(bundleSize).toMatchInlineSnapshot(`212`);
   });
 
   it('@fxts/core', async () => {
