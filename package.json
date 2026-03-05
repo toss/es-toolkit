@@ -25,6 +25,7 @@
     "./set": "./src/set/index.ts",
     "./string": "./src/string/index.ts",
     "./util": "./src/util/index.ts",
+    "./iterator": "./src/iterator/index.ts",
     "./package.json": "./package.json"
   },
   "files": [
@@ -240,6 +241,16 @@
         "require": {
           "types": "./dist/util/index.d.ts",
           "default": "./dist/util/index.js"
+        }
+      },
+      "./iterator": {
+        "import": {
+          "types": "./dist/iterator/index.d.mts",
+          "default": "./dist/iterator/index.mjs"
+        },
+        "require": {
+          "types": "./dist/iterator/index.d.ts",
+          "default": "./dist/iterator/index.js"
         }
       },
       "./package.json": "./package.json"
