@@ -26,6 +26,10 @@ export function chunk<T>(arr: readonly T[], size: number): T[][] {
     throw new Error('Size must be an integer greater than zero.');
   }
 
+  if (arr.length === 0) {
+    return [];
+  }
+
   const chunkLength = Math.ceil(arr.length / size);
   const result: T[][] = Array(chunkLength);
 
