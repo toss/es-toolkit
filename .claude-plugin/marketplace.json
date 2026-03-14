@@ -1,0 +1,27 @@
+{
+  "name": "es-toolkit-plugin",
+  "owner": {
+    "name": "Toss"
+  },
+  "metadata": {
+    "description": "Official es-toolkit plugins for Claude Code",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "es-toolkit",
+      "source": "./es-toolkit-plugin",
+      "description": "es-toolkit best practices: function recommendation, lodash migration, and compat guidance",
+      "version": "0.1.0",
+      "author": {
+        "name": "Toss"
+      },
+      "homepage": "https://es-toolkit.dev",
+      "repository": "https://github.com/toss/es-toolkit",
+      "license": "MIT",
+      "keywords": ["es-toolkit", "lodash", "utility", "migration"],
+      "category": "developer-tools",
+      "tags": ["typescript", "javascript", "utility-library"]
+    }
+  ]
+}

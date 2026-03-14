@@ -1,0 +1,12 @@
+{
+  "name": "es-toolkit",
+  "version": "0.1.0",
+  "description": "es-toolkit best practices: function recommendation, lodash migration, and compat guidance",
+  "author": {
+    "name": "Toss"
+  },
+  "homepage": "https://es-toolkit.slash.page",
+  "repository": "https://github.com/toss/es-toolkit",
+  "license": "MIT",
+  "keywords": ["es-toolkit", "lodash", "utility", "migration"]
+}
