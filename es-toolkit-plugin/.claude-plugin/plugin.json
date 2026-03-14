@@ -5,7 +5,7 @@
   "author": {
     "name": "Toss"
   },
-  "homepage": "https://es-toolkit.slash.page",
+  "homepage": "https://es-toolkit.dev",
   "repository": "https://github.com/toss/es-toolkit",
   "license": "MIT",
   "keywords": ["es-toolkit", "lodash", "utility", "migration"]

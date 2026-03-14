@@ -17,18 +17,20 @@ $ARGUMENTS — Optional function name or topic to focus on.
 
 **es-toolkit (strict)**: Opinionated, simplified API for the 85% use case. Smaller bundle, may differ from lodash in edge cases by design. New functions are added here.
 
-**es-toolkit/compat**: Matches lodash behavior exactly. Feature-complete — no new functions, only inconsistency fixes accepted.
+**es-toolkit/compat**: Matches lodash behavior exactly. Aims for full lodash compatibility. Check the repository's contribution guidelines or `docs/compatibility.md` for the latest policy on what changes are accepted.
 
 ## Workflow
 
 ### If a specific function is given
 
 1. **Read both implementations** from source:
+
    - `src/{category}/{fn}.ts` — strict
    - `src/compat/{category}/{fn}.ts` — compat
    - Both spec files for behavioral differences
 
 2. **Construct doc URLs**:
+
    - Strict: `https://es-toolkit.dev/reference/{category}/{fn}.html`
    - Compat: `https://es-toolkit.dev/reference/compat/{category}/{fn}.html`
 
@@ -69,8 +71,4 @@ For concrete behavioral differences, read a few representative function pairs fr
 
 ### Use WebFetch only when needed
 
-If you need to discover which functions exist only in compat vs both:
-
-```
-WebFetch("https://es-toolkit.dev/llms.txt", "List functions available in compat but not in strict es-toolkit")
-```
+If you need to discover which functions exist only in compat vs both, fetch `https://es-toolkit.dev/llms.txt` and search the returned content for function availability across strict and compat APIs.

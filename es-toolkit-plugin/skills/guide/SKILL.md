@@ -22,10 +22,12 @@ Installation commands and import paths change across versions. Always verify fro
 ### 1. Check local documentation first
 
 Read the relevant docs from this repository:
+
 - `docs/usage.md` or `docs/ko/usage.md` — installation and import patterns
 - `docs/intro.md` or `docs/ko/intro.md` — overview and key features
 - `docs/bundle-size.md` or `docs/ko/bundle-size.md` — bundle size data
 - `benchmarks/bundle-size/` — raw benchmark numbers
+- `docs/performance.md` or `docs/ko/performance.md` — runtime performance benchmarks
 
 These are authoritative and always up-to-date.
 
@@ -34,10 +36,12 @@ These are authoritative and always up-to-date.
 Identify the runtime (Node.js, Bun, Deno, browser) and provide environment-specific guidance.
 
 Key facts to verify from docs:
+
 - **Deno**: `deno add jsr:@es-toolkit/es-toolkit` (note the `jsr:` prefix)
 - **Deno import path**: `'@es-toolkit/es-toolkit'` (extra scope vs npm)
 - **npm/yarn/pnpm/bun**: `npm install es-toolkit`
 - **Import path**: `'es-toolkit'` for strict, `'es-toolkit/compat'` for lodash-compatible
+- **Browser/CDN**: jsdelivr, unpkg for UMD (\`_\` global), esm.sh for ES modules (import map) — see \`docs/usage.md\` Browsers section for exact snippets
 
 ### 3. Cover these topics as relevant
 
@@ -49,11 +53,7 @@ Key facts to verify from docs:
 
 ### 4. Only use WebFetch for topics not in local docs
 
-If the user asks something not covered by local documentation:
-
-```
-WebFetch("https://es-toolkit.dev/llms.txt", "Find documentation about: {topic}")
-```
+If the user asks something not covered by local documentation, fetch `https://es-toolkit.dev/llms.txt` and search the returned content for the relevant topic.
 
 ### 5. Always include doc links
 

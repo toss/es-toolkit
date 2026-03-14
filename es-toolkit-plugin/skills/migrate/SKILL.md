@@ -2,7 +2,7 @@
 name: migrate
 description: Convert lodash code to es-toolkit. Use when the user wants to migrate from lodash, replace lodash imports, or reduce bundle size by switching to es-toolkit.
 argument-hint: '<paste lodash code or specify function names>'
-allowed-tools: Read, Grep, Glob, Edit, WebFetch
+allowed-tools: Read, Grep, Glob, WebFetch
 ---
 
 # Lodash Migration
@@ -34,16 +34,17 @@ Read the implementation to understand the exact signature and any behavioral dif
 
 ### 3. Determine the right migration path
 
-| Scenario | Recommendation |
-|----------|---------------|
-| Function exists in both, same behavior | Use `es-toolkit` (smaller bundle) |
-| Function exists in both, different behavior | Explain the difference, let user choose |
-| Only in compat | Use `es-toolkit/compat` |
-| Not available at all | Keep lodash or suggest modern JS alternative |
+| Scenario                                    | Recommendation                               |
+| ------------------------------------------- | -------------------------------------------- |
+| Function exists in both, same behavior      | Use `es-toolkit` (smaller bundle)            |
+| Function exists in both, different behavior | Explain the difference, let user choose      |
+| Only in compat                              | Use `es-toolkit/compat`                      |
+| Not available at all                        | Keep lodash or suggest modern JS alternative |
 
 ### 4. Generate before/after migration
 
 For each function, provide:
+
 - Availability: es-toolkit and/or es-toolkit/compat
 - Doc link: `https://es-toolkit.dev/reference/{category}/{fn}.html`
 - Before (lodash) and After (es-toolkit) code examples
@@ -61,8 +62,4 @@ es-toolkit is up to 97% smaller than lodash and 2-3x faster. These numbers come 
 
 ### 7. Only use WebFetch for discovery
 
-If you need to check whether an obscure lodash function has an es-toolkit equivalent and can't find it locally:
-
-```
-WebFetch("https://es-toolkit.dev/llms.txt", "Does es-toolkit have an equivalent for lodash {function}?")
-```
+If you need to check whether an obscure lodash function has an es-toolkit equivalent and can't find it locally, fetch `https://es-toolkit.dev/llms.txt` and search the returned content for the target function name.

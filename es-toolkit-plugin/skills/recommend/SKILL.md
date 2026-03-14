@@ -22,6 +22,7 @@ es-toolkit evolves faster than any training data can track. Always verify functi
 ### 1. Understand the requirement
 
 Parse $ARGUMENTS to identify:
+
 - What operation the user wants to perform
 - What data types are involved (array, object, string, etc.)
 - Whether they're looking for a lodash replacement
@@ -35,7 +36,7 @@ This is the fastest and most accurate way to find functions. Search across es-to
 Grep for keywords in src/{category}/*.ts
 ```
 
-Categories: `array`, `function`, `math`, `object`, `predicate`, `promise`, `set`, `string`, `util`, `error`, `map`
+List subdirectories under `src/` (excluding `_internal` and `compat`) to discover the current categories dynamically. If local source is not available, fetch `https://es-toolkit.dev/llms.txt` to get the full function index with categories.
 
 Read the implementation file to get the exact signature, and the spec file for real usage examples.
 
@@ -52,17 +53,12 @@ es-toolkit's documentation URLs follow a predictable pattern — construct them 
 
 ### 5. Only use WebFetch when you're unsure
 
-If you can't find a matching function locally or want to discover functions you might be missing, consult the documentation index:
-
-```
-WebFetch("https://es-toolkit.dev/llms.txt", "Find functions related to: {requirement}")
-```
-
-This is a lightweight index — prefer it over `llms-full.txt`.
+If you can't find a matching function locally or want to discover functions you might be missing, fetch `https://es-toolkit.dev/llms.txt` and search the returned content for functions related to the user's requirement. This is a lightweight index — prefer it over `llms-full.txt`.
 
 ### 6. Respond with this structure
 
 For each recommended function, include:
+
 - Function name and category
 - Import path: `import { fn } from 'es-toolkit';`
 - Doc link: `https://es-toolkit.dev/reference/{category}/{fn}.html`

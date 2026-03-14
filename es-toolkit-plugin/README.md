@@ -27,12 +27,12 @@ After installing, run `/reload-plugins` to load the skills.
 
 ## Skills
 
-| Skill | Command | Description |
-|-------|---------|-------------|
-| **Guide** | `/es-toolkit:guide` | Installation, import patterns, setup for Node.js/Bun/Deno/browser |
-| **Recommend** | `/es-toolkit:recommend` | Find the right es-toolkit function for your use case |
-| **Migrate** | `/es-toolkit:migrate` | Convert lodash code to es-toolkit |
-| **Compat Guide** | `/es-toolkit:compat-guide` | Understand es-toolkit vs es-toolkit/compat |
+| Skill            | Command                    | Description                                                       |
+| ---------------- | -------------------------- | ----------------------------------------------------------------- |
+| **Guide**        | `/es-toolkit:guide`        | Installation, import patterns, setup for Node.js/Bun/Deno/browser |
+| **Recommend**    | `/es-toolkit:recommend`    | Find the right es-toolkit function for your use case              |
+| **Migrate**      | `/es-toolkit:migrate`      | Convert lodash code to es-toolkit                                 |
+| **Compat Guide** | `/es-toolkit:compat-guide` | Understand es-toolkit vs es-toolkit/compat                        |
 
 All skills verify information from the local source code first, with [official documentation](https://es-toolkit.dev) as a fallback.
 
