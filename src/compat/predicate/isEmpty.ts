@@ -63,7 +63,7 @@ export function isEmpty(value?: unknown): boolean {
     return value.length === 0;
   }
 
-  if (typeof value === 'object') {
+  if (typeof value === 'object' || typeof value === 'function') {
     if (value instanceof Map || value instanceof Set) {
       return value.size === 0;
     }
