@@ -51,9 +51,9 @@ For each function, provide:
 - Any behavioral differences found in source code
 - **Feature comparison table**: Compare API capabilities side-by-side (e.g., cancel support, flush, maxWait, return values, AbortSignal, callback arguments). Read both implementations to identify all supported options and present them in a table like:
 
-| Feature | lodash | es-toolkit | es-toolkit/compat |
-|---------|--------|-----------|-------------------|
-| (list each option/capability) | ✅/❌ | ✅/❌ | ✅/❌ |
+| Feature                       | lodash | es-toolkit | es-toolkit/compat |
+| ----------------------------- | ------ | ---------- | ----------------- |
+| (list each option/capability) | ✅/❌  | ✅/❌      | ✅/❌             |
 
 - **"When to use which"**: Based on the feature comparison, provide scenario-based guidance — e.g., "Use es-toolkit if you only need basic debounce; use compat if you rely on cancel/flush; keep lodash if you need X."
 

@@ -68,9 +68,9 @@ For each recommended function, include:
 
 When recommending multiple functions, **always include a comparison table**:
 
-| Function | Input type | Behavior | Performance | Return type |
-|----------|-----------|----------|-------------|-------------|
-| (each candidate) | ... | ... | ... | ... |
+| Function         | Input type | Behavior | Performance | Return type |
+| ---------------- | ---------- | -------- | ----------- | ----------- |
+| (each candidate) | ...        | ...      | ...         | ...         |
 
 Add a **"When to choose which"** section with clear decision criteria — e.g., "Use `groupBy` for categorizing, `countBy` for tallying, `keyBy` for lookup maps."
 

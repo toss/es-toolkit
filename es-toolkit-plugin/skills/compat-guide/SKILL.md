@@ -69,12 +69,12 @@ Provide strategic overview with three migration options:
 
 For each option, include a **trade-off matrix**:
 
-| Factor | Option A (strict) | Option B (compat) | Option C (mixed) |
-|--------|-------------------|-------------------|------------------|
-| Code change volume | High | Low | Medium |
-| Bundle size reduction | Maximum | Moderate | Varies |
-| Risk level | Higher (behavior diffs) | Low (lodash-compatible) | Medium |
-| Maintenance effort | Low (clean API) | Medium (compat tracking) | Higher (two APIs) |
+| Factor                | Option A (strict)       | Option B (compat)        | Option C (mixed)  |
+| --------------------- | ----------------------- | ------------------------ | ----------------- |
+| Code change volume    | High                    | Low                      | Medium            |
+| Bundle size reduction | Maximum                 | Moderate                 | Varies            |
+| Risk level            | Higher (behavior diffs) | Low (lodash-compatible)  | Medium            |
+| Maintenance effort    | Low (clean API)         | Medium (compat tracking) | Higher (two APIs) |
 
 **Practical implementation patterns** — include these when relevant:
 
