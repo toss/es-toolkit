@@ -9,6 +9,11 @@ describe('isNaN', () => {
 
   it('should return `false` for non-NaN numbers', () => {
     expect(isNaN(0)).toBe(false);
+    expect(isNaN(new Number(0))).toBe(false);
+  });
+
+  it('should return `true` for boxed NaN', () => {
+    expect(isNaN(new Number(NaN))).toBe(true);
   });
 
   it('should return `false` for non-numbers', () => {
