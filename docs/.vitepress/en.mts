@@ -11,6 +11,8 @@ export const en = defineConfig({
     'A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.',
 
   themeConfig: {
+    darkModeSwitchLabel: 'Dark Mode',
+
     nav: nav(),
 
     sidebar: sidebar(),
@@ -46,6 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
         { text: 'Lodash Compatibility', link: '/compatibility' },
+        { text: 'AI Integration', link: '/llms-txt' },
       ],
     },
     {
