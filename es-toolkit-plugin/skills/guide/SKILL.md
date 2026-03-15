@@ -46,7 +46,8 @@ Key facts to verify from docs:
 ### 3. Cover these topics as relevant
 
 - **Installation**: per-runtime commands
-- **Import patterns**: named imports (recommended for tree-shaking), category imports, compat imports
+- **Import patterns**: named imports (recommended for tree-shaking), category imports, compat imports. **List all available subpath imports** by reading the `exports` field in `package.json` (e.g., `es-toolkit`, `es-toolkit/compat`, `es-toolkit/array`, etc.) so users see the full set of entry points.
+- **Anti-patterns to avoid**: Warn against namespace imports (`import * as _ from 'es-toolkit'`) as they defeat tree-shaking. Always prefer named imports (`import { chunk, debounce } from 'es-toolkit'`).
 - **Bundle size**: reference actual numbers from `docs/bundle-size.md`
 - **Performance**: 2-3x faster than lodash (from official benchmarks)
 - **Type safety**: built-in TypeScript types, 100% test coverage

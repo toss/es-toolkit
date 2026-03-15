@@ -49,12 +49,31 @@ For each function, provide:
 - Doc link: `https://es-toolkit.dev/reference/{category}/{fn}.html`
 - Before (lodash) and After (es-toolkit) code examples
 - Any behavioral differences found in source code
+- **Feature comparison table**: Compare API capabilities side-by-side (e.g., cancel support, flush, maxWait, return values, AbortSignal, callback arguments). Read both implementations to identify all supported options and present them in a table like:
+
+| Feature | lodash | es-toolkit | es-toolkit/compat |
+|---------|--------|-----------|-------------------|
+| (list each option/capability) | ✅/❌ | ✅/❌ | ✅/❌ |
+
+- **"When to use which"**: Based on the feature comparison, provide scenario-based guidance — e.g., "Use es-toolkit if you only need basic debounce; use compat if you rely on cancel/flush; keep lodash if you need X."
 
 For migrations involving many functions, use a summary table instead of repeating the full template for each one.
 
 ### 5. Provide consolidated import rewrite
 
 Show the final import transformation as a single block.
+
+### 5a. Suggest automation patterns for large-scale migrations
+
+When migrating many files, mention practical automation approaches:
+
+- **Bundler alias**: Configure `resolve.alias` in webpack or Vite to redirect lodash imports at build time without changing source files:
+  ```js
+  // vite.config.js or webpack.config.js
+  resolve: { alias: { 'lodash': 'es-toolkit/compat' } }
+  ```
+- **ESLint rule**: Use `no-restricted-imports` to warn or error on remaining lodash imports after migration.
+- **Codemod**: For systematic AST-based transforms, mention tools like jscodeshift if the migration pattern is complex.
 
 ### 6. Note bundle size impact
 

@@ -66,4 +66,12 @@ For each recommended function, include:
 - A code example (from spec file or official docs)
 - Why it fits the user's need
 
-Include alternatives if multiple functions could work. If no match exists, say so clearly and suggest modern JS alternatives or `es-toolkit/compat`.
+When recommending multiple functions, **always include a comparison table**:
+
+| Function | Input type | Behavior | Performance | Return type |
+|----------|-----------|----------|-------------|-------------|
+| (each candidate) | ... | ... | ... | ... |
+
+Add a **"When to choose which"** section with clear decision criteria — e.g., "Use `groupBy` for categorizing, `countBy` for tallying, `keyBy` for lookup maps."
+
+If no match exists, say so clearly and suggest modern JS alternatives or `es-toolkit/compat`.

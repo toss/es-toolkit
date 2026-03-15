@@ -67,6 +67,23 @@ Provide strategic overview with three migration options:
 - **Option B: Gradual via compat** — large codebases (recommended for legacy)
 - **Option C: Mixed** — pragmatic approach
 
+For each option, include a **trade-off matrix**:
+
+| Factor | Option A (strict) | Option B (compat) | Option C (mixed) |
+|--------|-------------------|-------------------|------------------|
+| Code change volume | High | Low | Medium |
+| Bundle size reduction | Maximum | Moderate | Varies |
+| Risk level | Higher (behavior diffs) | Low (lodash-compatible) | Medium |
+| Maintenance effort | Low (clean API) | Medium (compat tracking) | Higher (two APIs) |
+
+**Practical implementation patterns** — include these when relevant:
+
+- **Bundler alias** for zero-change migration: configure `resolve.alias` in webpack or Vite to redirect `lodash` to `es-toolkit/compat` at build time.
+- **ESLint `no-restricted-imports`**: enforce migration progress by warning or erroring on remaining lodash imports.
+- **Codemod approach**: mention jscodeshift for systematic AST-based import rewrites in large codebases.
+
+**Compat-exclusive functions**: Search `src/compat/` for functions that don't exist in `src/` (strict). List representative examples so users know what can only come from compat (e.g., `get`, `set`, `has`).
+
 For concrete behavioral differences, read a few representative function pairs from source (e.g., `chunk`, `debounce`) to give real examples rather than abstract descriptions.
 
 ### Use WebFetch only when needed
