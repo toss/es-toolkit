@@ -338,6 +338,10 @@ describe('isMatchWith', () => {
     expect(isMatchWith({}, {}, rootCustomizer)).toBe(true);
   });
 
+  it('should return `false` when nested source primitive does not match object target', () => {
+    expect(isMatchWith({ a: { b: 2 } }, { a: 1 }, () => undefined)).toBe(false);
+  });
+
   it('should handle empty collections', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
