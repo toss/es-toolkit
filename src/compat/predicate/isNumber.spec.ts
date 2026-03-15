@@ -56,6 +56,10 @@ describe('isNumber', () => {
     expect(isNumber(symbol)).toBe(false);
   });
 
+  it('should return `false` for objects inheriting Number.prototype without number data', () => {
+    expect(isNumber(Object.create(Number.prototype))).toBe(false);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(isNumber).toEqualTypeOf<typeof isNumberLodash>();
   });

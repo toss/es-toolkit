@@ -16,6 +16,10 @@ describe('isNaN', () => {
     expect(isNaN(new Number(NaN))).toBe(true);
   });
 
+  it('should return `false` for objects inheriting Number.prototype without number data', () => {
+    expect(isNaN(Object.create(Number.prototype))).toBe(false);
+  });
+
   it('should return `false` for non-numbers', () => {
     expect(isNaN('NaN')).toBe(false);
     expect(isNaN(true)).toBe(false);
