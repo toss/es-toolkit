@@ -25,6 +25,10 @@ describe('matches', () => {
     expect(isMatch5({ a: { b: { c: 1, d: 2 }, e: 3 }, f: 4 })).toBe(true);
   });
 
+  it('should return `false` when nested source primitive does not match object target', () => {
+    expect(matches({ a: 1 })({ a: { b: 2 } })).toBe(false);
+  });
+
   it(`should match inherited string keyed \`object\` properties`, () => {
     interface Foo {
       a: number;
