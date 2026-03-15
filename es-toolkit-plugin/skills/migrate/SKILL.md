@@ -15,7 +15,7 @@ $ARGUMENTS — Lodash code to migrate, or specific function names.
 
 ## Why source-first matters
 
-The es-toolkit/compat layer is feature-complete and matches lodash behavior exactly, but the strict `es-toolkit` API intentionally differs in some cases. The only reliable way to know the difference is to read the actual implementation. Never guess — always verify from source.
+The es-toolkit/compat layer targets lodash test compatibility within a defined scope (see `docs/compatibility.md` for out-of-scope behaviors like implicit type conversions and prototype modifications), while the strict `es-toolkit` API intentionally differs in some cases. The only reliable way to know the difference is to read the actual implementation. Never guess — always verify from source.
 
 ## Workflow
 
@@ -46,7 +46,7 @@ Read the implementation to understand the exact signature and any behavioral dif
 For each function, provide:
 
 - Availability: es-toolkit and/or es-toolkit/compat
-- Doc link: `https://es-toolkit.dev/reference/{category}/{fn}.html`
+- Doc link: `https://es-toolkit.dev/reference/{category}/{fn}.html` (strict) or `https://es-toolkit.dev/reference/compat/{category}/{fn}.html` (compat)
 - Before (lodash) and After (es-toolkit) code examples
 - Any behavioral differences found in source code
 - **Feature comparison table**: Compare API capabilities side-by-side (e.g., cancel support, flush, maxWait, return values, AbortSignal, callback arguments). Read both implementations to identify all supported options and present them in a table like:
@@ -77,7 +77,7 @@ When migrating many files, mention practical automation approaches:
 
 ### 6. Note bundle size impact
 
-es-toolkit is up to 97% smaller than lodash and 2-3x faster. These numbers come from the official benchmarks in `benchmarks/bundle-size/` — reference them for specific function comparisons if the user asks.
+es-toolkit is up to 97% smaller than lodash and 2-3x faster. Bundle size numbers come from `benchmarks/bundle-size/` and runtime performance numbers from `benchmarks/performance/` and `docs/performance.md` — reference them for specific function comparisons if the user asks.
 
 ### 7. Only use WebFetch for discovery
 

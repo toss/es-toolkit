@@ -41,7 +41,7 @@ Key facts to verify from docs:
 - **Deno import path**: `'@es-toolkit/es-toolkit'` (extra scope vs npm)
 - **npm/yarn/pnpm/bun**: `npm install es-toolkit`
 - **Import path**: `'es-toolkit'` for strict, `'es-toolkit/compat'` for lodash-compatible
-- **Browser/CDN**: jsdelivr, unpkg for UMD (\`\_\` global), esm.sh for ES modules (import map) — see \`docs/usage.md\` Browsers section for exact snippets
+- **Browser/CDN**: jsdelivr, unpkg for UMD (`_` global), esm.sh for ES modules (import map) — see `docs/usage.md` Browsers section for exact snippets
 
 ### 3. Cover these topics as relevant
 
