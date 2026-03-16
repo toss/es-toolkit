@@ -2,7 +2,7 @@
 name: compat-guide
 description: Explain the difference between es-toolkit and es-toolkit/compat, and when to use each. Use when the user is confused about the compat layer, needs migration strategy advice, or wants to understand API differences.
 argument-hint: '[function name or topic]'
-allowed-tools: Read, Grep, Glob, WebFetch
+allowed-tools: Read, Grep, Glob
 ---
 
 # Compat Layer Guide
@@ -86,6 +86,10 @@ For each option, include a **trade-off matrix**:
 
 For concrete behavioral differences, read a few representative function pairs from source (e.g., `chunk`, `debounce`) to give real examples rather than abstract descriptions.
 
-### Use WebFetch only when needed
+### Search local docs for function availability
 
-If you need to discover which functions exist only in compat vs both, fetch `https://es-toolkit.dev/llms.txt` and search the returned content for function availability across strict and compat APIs.
+If you need to discover which functions exist only in compat vs both:
+
+- **Compat-only functions**: `Glob docs/reference/compat/{category}/*.md` — then check if the same file exists in `docs/reference/{category}/`
+- **Both APIs**: Compare files in `docs/reference/compat/` against the non-compat category directories
+- **Available categories**: array, error, function, map, math, object, predicate, promise, set, string, util

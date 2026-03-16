@@ -2,7 +2,7 @@
 name: migrate
 description: Convert lodash code to es-toolkit. Use when the user wants to migrate from lodash, replace lodash imports, or reduce bundle size by switching to es-toolkit.
 argument-hint: '<paste lodash code or specify function names>'
-allowed-tools: Read, Grep, Glob, WebFetch
+allowed-tools: Read, Grep, Glob
 ---
 
 # Lodash Migration
@@ -79,6 +79,10 @@ When migrating many files, mention practical automation approaches:
 
 es-toolkit is up to 97% smaller than lodash and 2-3x faster. Bundle size numbers come from `benchmarks/bundle-size/` and runtime performance numbers from `benchmarks/performance/` and `docs/performance.md` — reference them for specific function comparisons if the user asks.
 
-### 7. Only use WebFetch for discovery
+### 7. Search local docs for discovery
 
-If you need to check whether an obscure lodash function has an es-toolkit equivalent and can't find it locally, fetch `https://es-toolkit.dev/llms.txt` and search the returned content for the target function name.
+If you need to check whether an obscure lodash function has an es-toolkit equivalent and can't find it in `src/`, search the local reference docs:
+
+- **By name**: Read `docs/reference/{category}/{functionName}.md` directly
+- **By keyword**: `Grep` for the function name across `docs/reference/**/*.md`
+- **Available categories**: array, compat, error, function, map, math, object, predicate, promise, set, string, util

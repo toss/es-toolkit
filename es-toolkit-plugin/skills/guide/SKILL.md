@@ -2,7 +2,7 @@
 name: guide
 description: es-toolkit usage guide covering installation, import patterns, and setup for Node.js, Bun, Deno, and browsers. Use when the user asks how to install, import, or set up es-toolkit in their project.
 argument-hint: '[topic: install, import, setup, bundle, performance]'
-allowed-tools: Read, Grep, Glob, WebFetch
+allowed-tools: Read, Grep, Glob
 ---
 
 # es-toolkit Usage Guide
@@ -52,9 +52,13 @@ Key facts to verify from docs:
 - **Performance**: 2-3x faster than lodash (from official benchmarks)
 - **Type safety**: built-in TypeScript types, 100% test coverage
 
-### 4. Only use WebFetch for topics not in local docs
+### 4. Search local docs for additional topics
 
-If the user asks something not covered by local documentation, fetch `https://es-toolkit.dev/llms.txt` and search the returned content for the relevant topic.
+If the user asks something not covered by the files listed above, search the bundled documentation:
+
+- **Function docs**: `docs/reference/{category}/{functionName}.md`
+- **By keyword**: `Grep` across `docs/reference/**/*.md`
+- **Other docs**: `docs/usage.md`, `docs/intro.md`, `docs/bundle-size.md`, `docs/performance.md`
 
 ### 5. Always include doc links
 

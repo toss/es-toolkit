@@ -2,7 +2,7 @@
 name: recommend
 description: Analyze code or requirements and recommend the best es-toolkit functions. Use when the user asks which es-toolkit function to use, needs help finding a utility, or wants alternatives to manual implementations.
 argument-hint: '<description of what you need or paste your code>'
-allowed-tools: Read, Grep, Glob, WebFetch
+allowed-tools: Read, Grep, Glob
 ---
 
 # Function Recommendation
@@ -36,7 +36,7 @@ This is the fastest and most accurate way to find functions. Search across es-to
 Grep for keywords in src/{category}/*.ts
 ```
 
-List subdirectories under `src/` (excluding `_internal` and `compat`) to discover the current categories dynamically. If local source is not available, fetch `https://es-toolkit.dev/llms.txt` to get the full function index with categories.
+List subdirectories under `src/` (excluding `_internal` and `compat`) to discover the current categories dynamically. You can also browse `docs/reference/` to discover the full function index — each subdirectory is a category, and each `.md` file is a function.
 
 Read the implementation file to get the exact signature, and the spec file for real usage examples.
 
@@ -51,9 +51,13 @@ es-toolkit's documentation URLs follow a predictable pattern — construct them 
 - Strict API: `https://es-toolkit.dev/reference/{category}/{functionName}.html`
 - Compat API: `https://es-toolkit.dev/reference/compat/{category}/{functionName}.html`
 
-### 5. Only use WebFetch when you're unsure
+### 5. Search local docs when you're unsure
 
-If you can't find a matching function locally or want to discover functions you might be missing, fetch `https://es-toolkit.dev/llms.txt` and search the returned content for functions related to the user's requirement. This is a lightweight index — prefer it over `llms-full.txt`.
+If you can't find a matching function locally or want to discover functions you might be missing:
+
+- **Browse by category**: `Glob docs/reference/{category}/*.md` to list all functions in a category
+- **Search by keyword**: `Grep` for the keyword across `docs/reference/**/*.md`
+- **Available categories**: array, compat, error, function, map, math, object, predicate, promise, set, string, util
 
 ### 6. Respond with this structure
 

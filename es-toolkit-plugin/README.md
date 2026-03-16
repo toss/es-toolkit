@@ -34,7 +34,7 @@ After installing, run `/reload-plugins` to load the skills.
 | **Migrate**      | `/es-toolkit:migrate`      | Convert lodash code to es-toolkit                                 |
 | **Compat Guide** | `/es-toolkit:compat-guide` | Understand es-toolkit vs es-toolkit/compat                        |
 
-All skills verify information from the local source code first, with [official documentation](https://es-toolkit.dev) as a fallback.
+All skills verify information from the local source code and bundled documentation — no network requests needed.
 
 ## Usage Examples
 
@@ -69,7 +69,7 @@ All skills verify information from the local source code first, with [official d
 
 ## How It Works
 
-Each skill reads the local source code and documentation first to ensure accuracy, and falls back to `https://es-toolkit.dev/llms.txt` only when needed. This means all recommendations are grounded in the actual codebase — not generic JavaScript advice.
+Each skill reads the local source code and bundled reference documentation to ensure accuracy — no network requests needed. All recommendations are grounded in the actual codebase — not generic JavaScript advice.
 
 ## Links
 
