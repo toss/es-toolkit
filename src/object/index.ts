@@ -13,5 +13,7 @@ export { omitBy } from './omitBy.ts';
 export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
 export { toCamelCaseKeys } from './toCamelCaseKeys.ts';
+export type { ToCamelCaseKeys } from './toCamelCaseKeys.ts';
 export { toMerged } from './toMerged.ts';
 export { toSnakeCaseKeys } from './toSnakeCaseKeys.ts';
+export type { ToSnakeCaseKeys } from './toSnakeCaseKeys.ts';
