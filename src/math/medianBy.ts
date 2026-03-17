@@ -26,6 +26,8 @@ export function medianBy<T>(items: readonly T[], getValue: (element: T) => numbe
  * Calculates the median of an array of elements when applying
  * the `getValue` function to each element, returning a bigint.
  *
+ * If the array is empty, this function returns `NaN`.
+ *
  * @template T - The type of elements in the array.
  * @param {T[]} items An array to calculate the median.
  * @param {(element: T) => bigint} getValue A function that selects a bigint value from each element.
@@ -39,5 +41,8 @@ export function medianBy<T>(items: readonly T[], getValue: (element: T) => bigin
 export function medianBy<T>(items: readonly T[], getValue: (element: T) => number | bigint): number | bigint {
   const nums = items.map(x => getValue(x));
 
-  return median(nums as any);
+  if (nums.length > 0 && typeof nums[0] === 'bigint') {
+    return median(nums as bigint[]);
+  }
+  return median(nums as number[]);
 }

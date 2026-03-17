@@ -37,4 +37,9 @@ describe('median', () => {
   it('returns the single element for bigint arrays with one element', () => {
     expect(median([42n])).toEqual(42n);
   });
+
+  it('returns NaN for empty bigint arrays', () => {
+    const empty: bigint[] = [];
+    expect(median(empty)).toEqual(NaN);
+  });
 });

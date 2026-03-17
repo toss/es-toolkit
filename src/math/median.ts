@@ -30,7 +30,7 @@ export function median(nums: readonly number[]): number;
  * If the array has an even number of elements, it returns the average of the two middle values
  * using integer division.
  *
- * If the array is empty, this function returns `NaN`.
+ * If the array is empty, this function returns `0n`.
  *
  * @param {bigint[]} nums - An array of bigints to calculate the median.
  * @returns {bigint} The median of all the bigints in the array.
@@ -52,26 +52,30 @@ export function median(nums: readonly number[] | readonly bigint[]): number | bi
     return NaN;
   }
 
-  const isBigInt = typeof nums[0] === 'bigint';
+  if (typeof nums[0] === 'bigint') {
+    const sorted = (nums as bigint[]).slice().sort((a, b) => {
+      if (a < b) {
+        return -1;
+      }
+      if (a > b) {
+        return 1;
+      }
+      return 0;
+    });
 
-  const sorted = (nums as any[]).slice().sort((a, b) => {
-    if (a < b) {
-      return -1;
-    }
-    if (a > b) {
-      return 1;
-    }
-    return 0;
-  });
+    const middleIndex = Math.floor(sorted.length / 2);
 
+    if (sorted.length % 2 === 0) {
+      return (sorted[middleIndex - 1] + sorted[middleIndex]) / 2n;
+    }
+    return sorted[middleIndex];
+  }
+
+  const sorted = (nums as number[]).slice().sort((a, b) => a - b);
   const middleIndex = Math.floor(sorted.length / 2);
 
   if (sorted.length % 2 === 0) {
-    if (isBigInt) {
-      return (sorted[middleIndex - 1] + sorted[middleIndex]) / 2n;
-    }
     return (sorted[middleIndex - 1] + sorted[middleIndex]) / 2;
-  } else {
-    return sorted[middleIndex];
   }
+  return sorted[middleIndex];
 }

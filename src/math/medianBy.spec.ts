@@ -36,4 +36,10 @@ describe('medianBy', () => {
     const result = medianBy([{ a: 1n }, { a: 2n }, { a: 3n }, { a: 4n }], x => x.a);
     expect(result).toEqual(2n);
   });
+
+  it('returns NaN for empty bigint arrays', () => {
+    type Item = { a: bigint };
+    const items: Item[] = [];
+    expect(medianBy(items, x => x.a)).toEqual(NaN);
+  });
 });
