@@ -27,10 +27,12 @@ const ENTRYPOINTS = [
   './compat/*',
   './error',
   './function',
+  './map',
   './math',
   './object',
   './predicate',
   './promise',
+  './set',
   './string',
   './util',
 ];
