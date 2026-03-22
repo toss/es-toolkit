@@ -39,7 +39,7 @@ Key facts to verify from docs:
 
 - **Deno**: `deno add jsr:@es-toolkit/es-toolkit` (note the `jsr:` prefix)
 - **Deno import path**: `'@es-toolkit/es-toolkit'` (extra scope vs npm)
-- **npm/yarn/pnpm/bun**: `npm install es-toolkit`
+- **npm/yarn/pnpm/bun**: Detect the project's package manager from its lockfile (`package-lock.json` → npm, `yarn.lock` → yarn, `pnpm-lock.yaml` → pnpm, `bun.lockb` → bun) and provide the matching install command. If no lockfile exists, show all options.
 - **Import path**: `'es-toolkit'` for strict, `'es-toolkit/compat'` for lodash-compatible
 - **Browser/CDN**: jsdelivr, unpkg for UMD (`_` global), esm.sh for ES modules (import map) — see `docs/usage.md` Browsers section for exact snippets
 

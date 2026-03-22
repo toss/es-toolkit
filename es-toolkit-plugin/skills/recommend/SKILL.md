@@ -25,7 +25,7 @@ Parse $ARGUMENTS to identify:
 
 - What operation the user wants to perform
 - What data types are involved (array, object, string, etc.)
-- Whether they're looking for a lodash replacement
+- Whether they might need lodash migration help (if so, suggest `/es-toolkit:migrate`)
 
 ### 2. Search the local source code first
 
@@ -40,32 +40,27 @@ List subdirectories under `src/` (excluding `_internal` and `compat`) to discove
 
 Read the implementation file to get the exact signature, and the spec file for real usage examples.
 
-### 3. Check compat layer if relevant
-
-If the user mentions lodash or needs lodash-compatible behavior, also search `src/compat/{category}/`.
-
-### 4. Construct the official doc URL
+### 3. Construct the official doc URL
 
 es-toolkit's documentation URLs follow a predictable pattern — construct them directly instead of fetching:
 
-- Strict API: `https://es-toolkit.dev/reference/{category}/{functionName}.html`
-- Compat API: `https://es-toolkit.dev/reference/compat/{category}/{functionName}.html`
+- `https://es-toolkit.dev/reference/{category}/{functionName}`
 
-### 5. Search local docs when you're unsure
+### 4. Search local docs when you're unsure
 
 If you can't find a matching function locally or want to discover functions you might be missing:
 
 - **Browse by category**: `Glob docs/reference/{category}/*.md` to list all functions in a category
 - **Search by keyword**: `Grep` for the keyword across `docs/reference/**/*.md`
-- **Available categories**: array, compat, error, function, map, math, object, predicate, promise, set, string, util
+- **Available categories**: array, error, function, map, math, object, predicate, promise, set, string, util
 
-### 6. Respond with this structure
+### 5. Respond with this structure
 
 For each recommended function, include:
 
 - Function name and category
 - Import path: `import { fn } from 'es-toolkit';`
-- Doc link: `https://es-toolkit.dev/reference/{category}/{fn}.html`
+- Doc link: `https://es-toolkit.dev/reference/{category}/{fn}`
 - What it does (from JSDoc in source)
 - A code example (from spec file or official docs)
 - Why it fits the user's need
@@ -78,4 +73,4 @@ When recommending multiple functions, **always include a comparison table**:
 
 Add a **"When to choose which"** section with clear decision criteria — e.g., "Use `groupBy` for categorizing, `countBy` for tallying, `keyBy` for lookup maps."
 
-If no match exists, say so clearly and suggest modern JS alternatives or `es-toolkit/compat`.
+If no match exists, say so clearly and suggest modern JS alternatives. For lodash-compatible replacements, point users to the `/es-toolkit:migrate` skill.

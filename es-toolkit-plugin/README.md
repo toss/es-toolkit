@@ -27,12 +27,11 @@ After installing, run `/reload-plugins` to load the skills.
 
 ## Skills
 
-| Skill            | Command                    | Description                                                       |
-| ---------------- | -------------------------- | ----------------------------------------------------------------- |
-| **Guide**        | `/es-toolkit:guide`        | Installation, import patterns, setup for Node.js/Bun/Deno/browser |
-| **Recommend**    | `/es-toolkit:recommend`    | Find the right es-toolkit function for your use case              |
-| **Migrate**      | `/es-toolkit:migrate`      | Convert lodash code to es-toolkit                                 |
-| **Compat Guide** | `/es-toolkit:compat-guide` | Understand es-toolkit vs es-toolkit/compat                        |
+| Skill         | Command                 | Description                                                                    |
+| ------------- | ----------------------- | ------------------------------------------------------------------------------ |
+| **Guide**     | `/es-toolkit:guide`     | Installation, import patterns, setup for Node.js/Bun/Deno/browser              |
+| **Recommend** | `/es-toolkit:recommend` | Find the right es-toolkit function for your use case                           |
+| **Migrate**   | `/es-toolkit:migrate`   | Guide migrating lodash code to es-toolkit, and understand strict vs compat API |
 
 All skills verify information from the local source code and bundled documentation — no network requests needed.
 
@@ -60,11 +59,11 @@ All skills verify information from the local source code and bundled documentati
 /es-toolkit:migrate convert all lodash imports in this file
 ```
 
-### Understand the compat layer
+### Understand strict vs compat
 
 ```
-/es-toolkit:compat-guide get
-/es-toolkit:compat-guide migration strategy
+/es-toolkit:migrate get
+/es-toolkit:migrate migration strategy
 ```
 
 ## How It Works
