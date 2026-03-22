@@ -110,7 +110,6 @@ const result2 = sample(arr); // should likewise be inferred as `number`
 
 Options that default to `false` even within strict mode—such as [noUncheckedIndexedAccess](https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html)—are not considered when determining type compatibility in es-toolkit.
 
-
 ### 1.5 Documentation
 
 All of our functions should be documented in detail for easy reference. All functions should have the JSDoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
