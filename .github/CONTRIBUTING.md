@@ -93,7 +93,24 @@ This helps keep the code more concise, eliminates unnecessary function calls, an
 
 </details>
 
-### 1.4 Documentation
+### 1.4 Types
+
+Accurate types are a core goal of es-toolkit, and so is consistency with TypeScript's own type behavior.
+
+es-toolkit aims to return the same types as TypeScript's [`strict` mode](https://www.typescriptlang.org/tsconfig/#strict)—the most widely used configuration. For example, `result1` and `result2` below should have the same type, since `result2` is essentially just a wrapper around what `result1` does directly:
+
+```typescript
+import { sample } from 'es-toolkit';
+
+const arr = [1, 2, 3];
+
+const result1 = arr[Math.floor(Math.random() * arr.length)]; // inferred as `number` in TypeScript strict mode
+const result2 = sample(arr); // should likewise be inferred as `number`
+```
+
+Options that default to `false` even within strict mode—such as [noUncheckedIndexedAccess](https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html)—are not considered when determining type compatibility in es-toolkit.
+
+### 1.5 Documentation
 
 All of our functions should be documented in detail for easy reference. All functions should have the JSDoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
 
