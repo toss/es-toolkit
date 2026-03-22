@@ -2,7 +2,7 @@
 
 # es-toolkit &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/toss/slash/blob/main/LICENSE) [![codecov](https://codecov.io/gh/toss/es-toolkit/graph/badge.svg?token=8N5S3AR3C7)](https://codecov.io/gh/toss/es-toolkit) [![NPM badge](https://img.shields.io/npm/v/es-toolkit?logo=npm)](https://www.npmjs.com/package/es-toolkit) [![JSR badge](https://jsr.io/badges/@es-toolkit/es-toolkit)](https://jsr.io/@es-toolkit/es-toolkit) [![Discord Badge](https://discord.com/api/guilds/1281071127052943361/widget.png?style=shield)](https://discord.gg/vGXbVjP2nY)
 
-[English](https://github.com/toss/es-toolkit/blob/main/README.md) | [한국어](https://github.com/toss/es-toolkit/blob/main/README-ko_kr.md) | [日本語](https://github.com/toss/es-toolkit/blob/main/README-ja_jp.md) | 简体中文
+[English](https://github.com/toss/es-toolkit/blob/main/README.md) | [한국어](https://github.com/toss/es-toolkit/blob/main/README-ko_kr.md) | 简体中文 | [日本語](https://github.com/toss/es-toolkit/blob/main/README-ja_jp.md)
 
 es-toolkit 是一个先进的、高性能的 JavaScript 实用工具库，具有小的捆绑包大小和强大的类型注解。
 
@@ -11,7 +11,7 @@ es-toolkit 是一个先进的、高性能的 JavaScript 实用工具库，具有
 - es-toolkit 支持开箱即用，并且与其他库相比，可以将 JavaScript 代码减少高达 [97%](https://es-toolkit.dev/zh_hans/bundle-size.html)。
 - es-toolkit 提供了一个完整的兼容层 [es-toolkit/compat](https://es-toolkit.dev/compatibility.html)，可以轻松替代 lodash。
 - es-toolkit 包含内置的 TypeScript 支持，提供直观且强大的类型。它还提供诸如 [isNotNil](https://es-toolkit.dev/zh_hans/reference/predicate/isNotNil.html) 等有用的类型保护。
-- es-toolkit 被多个流行的开源库所信任和使用，例如 [Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358)、Recharts、ink 和 CKEditor。
+- es-toolkit 被多个流行的开源库所信任和使用，例如 [Storybook](https://github.com/storybookjs/storybook/blob/9d862798d666678cc4822e857c00bbd744169ced/code/core/package.json#L358)、[Recharts](https://github.com/recharts/recharts/blob/0fa4cc325da403b6fa1c6be0f820896ed92f806a/package.json#L94)、[ink](https://github.com/vadimdemedes/ink/blob/2090ad9779be59dea71d173eb49785b7bd4495d0/package.json#L55) 和 [CKEditor](https://github.com/ckeditor/ckeditor5/blob/60d5fac804643cb4d359767ee2f94e3d92d1fcc5/packages/ckeditor5-core/package.json#L53)。
 - es-toolkit 经过了百分之百的测试覆盖率的实战检验，确保其可靠性和稳健性。
 
 ## 示例
