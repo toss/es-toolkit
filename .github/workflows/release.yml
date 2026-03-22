@@ -62,7 +62,7 @@ jobs:
           omit-heading: true
       - run: 'cat ${{ steps.extract-changelog.outputs.output-file }}'
       - name: Release
-        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2.6.1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: ${{ steps.extract-changelog.outputs.output-file }}
