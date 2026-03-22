@@ -10,6 +10,8 @@ export const ja = defineConfig({
   description: '高速なパフォーマンスと小さなバンドルサイズを持つ最先端のJavaScriptユーティリティライブラリ',
 
   themeConfig: {
+    darkModeSwitchLabel: 'ダークモード',
+
     nav: nav(),
 
     sidebar: sidebar(),
@@ -45,6 +47,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'バンドルサイズ', link: '/ja/bundle-size' },
         { text: 'パフォーマンス', link: '/ja/performance' },
         { text: 'Lodash 互換性', link: '/ja/compatibility' },
+        { text: 'AI 連携', link: '/ja/llms-txt' },
       ],
     },
     {
