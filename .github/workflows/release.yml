@@ -25,7 +25,7 @@ jobs:
           cache: 'yarn'
       - name: Update npm
         run: npm install -g npm@11.5.1
-      - uses: denoland/setup-deno@e95548e56dfa95d4e1a28d6f422fafe75c4c26fb # v2.0.3
+      - uses: denoland/setup-deno@667a34cdef165d8d2b2e98dde39547c9daac7282 # v2.0.4
         with:
           deno-version: v1.x
       - name: Check environment
@@ -62,7 +62,7 @@ jobs:
           omit-heading: true
       - run: 'cat ${{ steps.extract-changelog.outputs.output-file }}'
       - name: Release
-        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2.6.1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: ${{ steps.extract-changelog.outputs.output-file }}
