@@ -1,10 +1,45 @@
 # AI 활용
 
-es-toolkit은 AI 에이전트가 라이브러리를 적극적으로 활용할 수 있도록 노력하고 있어요. AI 도구가 es-toolkit을 더 쉽게 이해하고, 참조하고, 사용할 수 있도록 다양한 편의 기능을 제공해 나갈 예정이에요.
+es-toolkit은 AI 에이전트가 라이브러리를 적극적으로 활용할 수 있도록 노력하고 있어요. AI 코딩 도구를 위한 Agent Skills와 더 넓은 AI 통합을 위한 llms.txt 엔드포인트를 제공해요.
+
+## Agent Skills
+
+es-toolkit은 AI 코딩 도구가 es-toolkit을 효과적으로 이해하고 사용할 수 있도록 돕는 [Agent Skills](https://skills.sh)를 제공해요. Claude Code, Cursor, Copilot, Windsurf 등 다양한 도구에서 사용할 수 있어요.
+
+### 설치
+
+::: code-group
+
+```sh [npx (모든 AI 도구)]
+npx skills add toss/es-toolkit
+```
+
+```sh [Claude Code Plugin]
+/plugin marketplace add toss/es-toolkit
+/plugin install es-toolkit@es-toolkit-plugin
+```
+
+:::
+
+### 사용 가능한 스킬
+
+| 스킬           | 설명                                          |
+| ------------- | --------------------------------------------- |
+| **guide**     | 설치, import 패턴, 런타임별 설정 안내            |
+| **recommend** | 상황에 맞는 es-toolkit 함수 추천                 |
+| **migrate**   | lodash 코드를 es-toolkit으로 마이그레이션 안내    |
+
+### 사용 예시
+
+```
+/es-toolkit:guide Deno에서 es-toolkit을 어떻게 사용하나요?
+/es-toolkit:recommend 두 객체를 깊게 병합하고 싶어요
+/es-toolkit:migrate _.chunk(users, 10)
+```
 
 ## llms.txt
 
-그 첫 번째로, es-toolkit은 [llms.txt](https://llmstxt.org/) 파일을 제공하고 있어요. llms.txt는 AI 어시스턴트와 대규모 언어 모델(LLM)이 프로젝트 문서를 더 효과적으로 이해할 수 있도록 돕는 표준이에요.
+es-toolkit은 [llms.txt](https://llmstxt.org/) 파일을 제공하고 있어요. llms.txt는 AI 어시스턴트와 대규모 언어 모델(LLM)이 프로젝트 문서를 더 효과적으로 이해할 수 있도록 돕는 표준이에요.
 
 ### `/llms.txt`
 
