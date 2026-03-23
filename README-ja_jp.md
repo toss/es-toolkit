@@ -49,7 +49,7 @@ Claude Codeをご利用の場合は、プラグインマーケットプレイス
 /plugin install es-toolkit@es-toolkit-plugin
 ```
 
-詳細については、[AI 連携ガイド](https://es-toolkit.dev/ja/llms-txt.html)をご覧ください。
+詳細については、[AI 連携ガイド](https://es-toolkit.dev/ja/ai-integration.html)をご覧ください。
 
 ## 貢献
 

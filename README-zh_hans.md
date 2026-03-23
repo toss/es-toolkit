@@ -49,7 +49,7 @@ npx skills add toss/es-toolkit
 /plugin install es-toolkit@es-toolkit-plugin
 ```
 
-更多详情请参阅 [AI 集成指南](https://es-toolkit.dev/zh_hans/llms-txt.html)。
+更多详情请参阅 [AI 集成指南](https://es-toolkit.dev/zh_hans/ai-integration.html)。
 
 ## 贡献
 

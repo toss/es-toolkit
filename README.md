@@ -49,7 +49,7 @@ For Claude Code, you can also install via the plugin marketplace:
 /plugin install es-toolkit@es-toolkit-plugin
 ```
 
-For more details, see the [AI Integration guide](https://es-toolkit.dev/llms-txt.html).
+For more details, see the [AI Integration guide](https://es-toolkit.dev/ai-integration.html).
 
 ## Contributing
 
