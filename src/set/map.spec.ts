@@ -13,7 +13,7 @@ describe('map', () => {
   it('should pass the set to the transform function', () => {
     const set = new Set([1, 2, 3]);
 
-    const result = map(set, (value, value2, originalSet) => {
+    const result = map(set, (value, originalSet) => {
       expect(originalSet).toBe(set);
       return value + originalSet.size;
     });

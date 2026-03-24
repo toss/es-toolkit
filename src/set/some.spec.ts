@@ -23,7 +23,7 @@ describe('some', () => {
   it('should pass the set to the predicate function', () => {
     const set = new Set([1, 2, 3]);
 
-    expect(some(set, (value, value2, originalSet) => originalSet.has(value) && value === 2)).toBe(true);
+    expect(some(set, (value, originalSet) => originalSet.has(value) && value === 2)).toBe(true);
   });
 
   it('should return true immediately when predicate returns true', () => {

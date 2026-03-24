@@ -57,7 +57,7 @@ const ids = map(users, user => user.id);
 #### Parameters
 
 - `set` (`Set<T>`): The Set to transform.
-- `getNewValue` (`(value: T, value2: T, set: Set<T>) => U`): A function that generates a new value from an element.
+- `getNewValue` (`(value: T, set: Set<T>) => U`): A function that generates a new value from an element.
 
 #### Returns
 

@@ -6,7 +6,7 @@
  *
  * @template T - The type of elements in the Set.
  * @param {Set<T>} set - The Set to filter.
- * @param {(value: T, value2: T, set: Set<T>) => boolean} callback - A predicate function that tests each element.
+ * @param {(value: T, set: Set<T>) => boolean} callback - A predicate function that tests each element.
  * @returns {Set<T>} A new Set containing only the elements that satisfy the predicate.
  *
  * @example
@@ -15,11 +15,11 @@
  * // result will be:
  * // Set(3) { 3, 4, 5 }
  */
-export function filter<T>(set: Set<T>, callback: (value: T, value2: T, set: Set<T>) => boolean): Set<T> {
+export function filter<T>(set: Set<T>, callback: (value: T, set: Set<T>) => boolean): Set<T> {
   const result = new Set<T>();
 
   for (const value of set) {
-    if (callback(value, value, set)) {
+    if (callback(value, set)) {
       result.add(value);
     }
   }
