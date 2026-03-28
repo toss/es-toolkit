@@ -23,7 +23,7 @@ const testPatterns = ['**/*.bench.ts', '**/*.spec.ts', '**/*.test.ts'];
 export default () => {
   clearDir('dist');
 
-  const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
+  const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts') && !f.includes('*'));
 
   return [
     libBuildOptions({
