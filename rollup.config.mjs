@@ -71,7 +71,7 @@ export default () => {
     // UMD browser bundle — isBuffer aliased to browser stub
     browserBuildConfig({
       inputFile: './src/compat/index.ts',
-      outFile: './dist/browser.global.js',
+      outFile: packageJson.publishConfig.browser,
       name: '_',
       sourcemap: false,
     }),
