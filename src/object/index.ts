@@ -12,6 +12,7 @@ export { omit } from './omit.ts';
 export { omitBy } from './omitBy.ts';
 export { pick } from './pick.ts';
 export { pickBy } from './pickBy.ts';
+export { sortKeys } from './sortKeys.ts';
 export { toCamelCaseKeys } from './toCamelCaseKeys.ts';
 export { toMerged } from './toMerged.ts';
 export { toSnakeCaseKeys } from './toSnakeCaseKeys.ts';
