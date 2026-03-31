@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { partial } from './partial';
 import { curry } from '../compat/function/curry';
 
@@ -102,6 +102,34 @@ describe('partial', () => {
       par = partial(curried, partial.placeholder, 'b', partial.placeholder, 'd');
 
     expect(par('a', 'c')).toEqual(['a', 'b', 'c', 'd']);
+  });
+
+  it('partial fully applies a two-argument function', () => {
+    const add = (a: number, b: number) => a + b;
+    const added = partial(add, 1, 2);
+    expectTypeOf(added).toEqualTypeOf<() => number>();
+    expect(added()).toBe(3);
+  });
+
+  it('partial applies two of three arguments', () => {
+    const sum = (a: number, b: number, c: number) => a + b + c;
+    const sumPartial = partial(sum, 1, 2);
+    expectTypeOf(sumPartial).toEqualTypeOf<(arg3: number) => number>();
+    expect(sumPartial(3)).toBe(6);
+  });
+
+  it('partial fully applies a three-argument function', () => {
+    const sum = (a: number, b: number, c: number) => a + b + c;
+    const summed = partial(sum, 1, 2, 3);
+    expectTypeOf(summed).toEqualTypeOf<() => number>();
+    expect(summed()).toBe(6);
+  });
+
+  it('partial fully applies a four-argument function', () => {
+    const sum = (a: number, b: number, c: number, d: number) => a + b + c + d;
+    const summed = partial(sum, 1, 2, 3, 4);
+    expectTypeOf(summed).toEqualTypeOf<() => number>();
+    expect(summed()).toBe(10);
   });
 
   it('should create partialed function without copying prototype from arrow function', () => {
