@@ -71,4 +71,22 @@ describe('sortBy', () => {
       { user: 'qux', age: undefined },
     ]);
   });
+
+  it('should maintain stable order among multiple null and undefined values', () => {
+    const items = [
+      { user: 'a', age: null },
+      { user: 'b', age: 1 },
+      { user: 'c', age: undefined },
+      { user: 'd', age: null },
+      { user: 'e', age: undefined },
+    ];
+
+    expect(sortBy(items, ['age'])).toEqual([
+      { user: 'b', age: 1 },
+      { user: 'a', age: null },
+      { user: 'd', age: null },
+      { user: 'c', age: undefined },
+      { user: 'e', age: undefined },
+    ]);
+  });
 });
