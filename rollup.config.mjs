@@ -20,12 +20,26 @@ const packageJson = createRequire(import.meta.url)('./package.json');
 
 const testPatterns = ['**/*.bench.ts', '**/*.spec.ts', '**/*.test.ts'];
 
+// Rollup plugin that aliases isBuffer.ts to isBuffer.browser.ts,
+// so the output contains no bare `Buffer` references and bundlers
+// like webpack/Next.js won't inject a ~28KB Buffer polyfill.
+const browserIsBufferAlias = {
+  name: 'browser-isBuffer-alias',
+  resolveId(source) {
+    if (source.endsWith('/isBuffer.ts') && !source.endsWith('/isBuffer.browser.ts')) {
+      return join(__dirname, 'src/predicate/isBuffer.browser.ts');
+    }
+    return null;
+  },
+};
+
 export default () => {
   clearDir('dist');
 
   const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
 
   return [
+    // Node/default ESM build
     libBuildOptions({
       format: 'esm',
       extension: 'mjs',
@@ -33,6 +47,7 @@ export default () => {
       outDir: 'dist',
       sourcemap: false,
     }),
+    // Node/default CJS build
     libBuildOptions({
       format: 'cjs',
       extension: 'js',
@@ -40,10 +55,20 @@ export default () => {
       outDir: 'dist',
       sourcemap: false,
     }),
+    // Browser ESM build — isBuffer aliased to browser stub
+    libBuildOptions({
+      format: 'esm',
+      extension: 'mjs',
+      entrypoints,
+      outDir: 'dist/browser',
+      sourcemap: false,
+      plugins: [browserIsBufferAlias],
+    }),
     declarationOptions({
       entrypoints,
       outDir: 'dist',
     }),
+    // UMD browser bundle — isBuffer aliased to browser stub
     browserBuildConfig({
       inputFile: './src/compat/index.ts',
       outFile: packageJson.publishConfig.browser,
@@ -60,12 +85,14 @@ export default () => {
  *   extension: 'js' | 'cjs' | 'mjs';
  *   outDir: string;
  *   sourcemap: boolean;
+ *   plugins?: import('rollup').Plugin[];
  * }) => import('rollup').RollupOptions}
  */
-function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) {
+function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap, plugins: extraPlugins = [] }) {
   return {
     input: mapInputs(entrypoints),
     plugins: [
+      ...extraPlugins,
       tsPlugin({
         exclude: [...testPatterns],
         compilerOptions: {
@@ -100,6 +127,7 @@ function browserBuildConfig({ inputFile, outFile, name, sourcemap }) {
   return {
     input: inputFile,
     plugins: [
+      browserIsBufferAlias,
       tsPlugin({
         exclude: [...testPatterns],
         compilerOptions: {

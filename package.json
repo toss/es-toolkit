@@ -107,6 +107,10 @@
     "module": "./dist/index.mjs",
     "exports": {
       ".": {
+        "browser": {
+          "types": "./dist/index.d.mts",
+          "default": "./dist/browser/index.mjs"
+        },
         "import": {
           "types": "./dist/index.d.mts",
           "default": "./dist/index.mjs"
@@ -117,6 +121,10 @@
         }
       },
       "./array": {
+        "browser": {
+          "types": "./dist/array/index.d.mts",
+          "default": "./dist/browser/array/index.mjs"
+        },
         "import": {
           "types": "./dist/array/index.d.mts",
           "default": "./dist/array/index.mjs"
@@ -127,6 +135,10 @@
         }
       },
       "./compat": {
+        "browser": {
+          "types": "./dist/compat/index.d.mts",
+          "default": "./dist/browser/compat/index.mjs"
+        },
         "import": {
           "types": "./dist/compat/index.d.mts",
           "default": "./dist/compat/index.mjs"
@@ -143,6 +155,10 @@
         }
       },
       "./error": {
+        "browser": {
+          "types": "./dist/error/index.d.mts",
+          "default": "./dist/browser/error/index.mjs"
+        },
         "import": {
           "types": "./dist/error/index.d.mts",
           "default": "./dist/error/index.mjs"
@@ -153,6 +169,10 @@
         }
       },
       "./function": {
+        "browser": {
+          "types": "./dist/function/index.d.mts",
+          "default": "./dist/browser/function/index.mjs"
+        },
         "import": {
           "types": "./dist/function/index.d.mts",
           "default": "./dist/function/index.mjs"
@@ -163,6 +183,10 @@
         }
       },
       "./map": {
+        "browser": {
+          "types": "./dist/map/index.d.mts",
+          "default": "./dist/browser/map/index.mjs"
+        },
         "import": {
           "types": "./dist/map/index.d.mts",
           "default": "./dist/map/index.mjs"
@@ -173,6 +197,10 @@
         }
       },
       "./math": {
+        "browser": {
+          "types": "./dist/math/index.d.mts",
+          "default": "./dist/browser/math/index.mjs"
+        },
         "import": {
           "types": "./dist/math/index.d.mts",
           "default": "./dist/math/index.mjs"
@@ -183,6 +211,10 @@
         }
       },
       "./object": {
+        "browser": {
+          "types": "./dist/object/index.d.mts",
+          "default": "./dist/browser/object/index.mjs"
+        },
         "import": {
           "types": "./dist/object/index.d.mts",
           "default": "./dist/object/index.mjs"
@@ -193,6 +225,10 @@
         }
       },
       "./predicate": {
+        "browser": {
+          "types": "./dist/predicate/index.d.mts",
+          "default": "./dist/browser/predicate/index.mjs"
+        },
         "import": {
           "types": "./dist/predicate/index.d.mts",
           "default": "./dist/predicate/index.mjs"
@@ -203,6 +239,10 @@
         }
       },
       "./promise": {
+        "browser": {
+          "types": "./dist/promise/index.d.mts",
+          "default": "./dist/browser/promise/index.mjs"
+        },
         "import": {
           "types": "./dist/promise/index.d.mts",
           "default": "./dist/promise/index.mjs"
@@ -213,6 +253,10 @@
         }
       },
       "./set": {
+        "browser": {
+          "types": "./dist/set/index.d.mts",
+          "default": "./dist/browser/set/index.mjs"
+        },
         "import": {
           "types": "./dist/set/index.d.mts",
           "default": "./dist/set/index.mjs"
@@ -223,6 +267,10 @@
         }
       },
       "./string": {
+        "browser": {
+          "types": "./dist/string/index.d.mts",
+          "default": "./dist/browser/string/index.mjs"
+        },
         "import": {
           "types": "./dist/string/index.d.mts",
           "default": "./dist/string/index.mjs"
@@ -233,6 +281,10 @@
         }
       },
       "./util": {
+        "browser": {
+          "types": "./dist/util/index.d.mts",
+          "default": "./dist/browser/util/index.mjs"
+        },
         "import": {
           "types": "./dist/util/index.d.mts",
           "default": "./dist/util/index.mjs"
