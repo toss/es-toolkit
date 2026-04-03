@@ -7,7 +7,9 @@
 ```typescript
 function dedent(str: string): string;
 function dedent(str: TemplateStringsArray, ...values: unknown[]): string;
-function dedent<T>(tagFn: (strings: TemplateStringsArray, ...values: unknown[]) => T): (strings: TemplateStringsArray, ...values: unknown[]) => T;
+function dedent<T>(
+  tagFn: (strings: TemplateStringsArray, ...values: unknown[]) => T
+): (strings: TemplateStringsArray, ...values: unknown[]) => T;
 ```
 
 ### 参数
@@ -52,8 +54,6 @@ dedent`
 
 // 标签合成
 const html = dedent((strings, ...values) => strings.join(''));
-html`
-  <div>Hello</div>
-`;
+html` <div>Hello</div> `;
 // 结果: '<div>Hello</div>'
 ```

@@ -7,7 +7,9 @@
 ```typescript
 function dedent(str: string): string;
 function dedent(str: TemplateStringsArray, ...values: unknown[]): string;
-function dedent<T>(tagFn: (strings: TemplateStringsArray, ...values: unknown[]) => T): (strings: TemplateStringsArray, ...values: unknown[]) => T;
+function dedent<T>(
+  tagFn: (strings: TemplateStringsArray, ...values: unknown[]) => T
+): (strings: TemplateStringsArray, ...values: unknown[]) => T;
 ```
 
 ### 파라미터
@@ -52,8 +54,6 @@ dedent`
 
 // 태그 합성
 const html = dedent((strings, ...values) => strings.join(''));
-html`
-  <div>Hello</div>
-`;
+html` <div>Hello</div> `;
 // 결과: '<div>Hello</div>'
 ```
