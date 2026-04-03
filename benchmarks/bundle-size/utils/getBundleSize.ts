@@ -1,7 +1,9 @@
 import esbuild from 'esbuild';
 import path from 'path';
 
-export async function getBundleSize(pkg: 'lodash-es' | 'es-toolkit' | 'es-toolkit/compat', funcName: string) {
+type Package = 'lodash-es' | 'es-toolkit' | 'es-toolkit/compat' | 'es-toolkit/iterator' | 'itertools' | '@fxts/core';
+
+export async function getBundleSize(pkg: Package, funcName: string) {
   const script = `import { ${funcName} } from "${pkg}"; console.log(${funcName})`;
 
   const bundled = await esbuild.build({

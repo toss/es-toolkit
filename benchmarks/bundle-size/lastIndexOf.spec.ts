@@ -4,7 +4,7 @@ import { getBundleSize } from './utils/getBundleSize';
 describe('lastIndexOf bundle size', () => {
   it('lodash-es', async () => {
     const bundleSize = await getBundleSize('lodash-es', 'lastIndexOf');
-    expect(bundleSize).toMatchInlineSnapshot(`1586`);
+    expect(bundleSize).toMatchInlineSnapshot(`2481`);
   });
 
   it('es-toolkit/compat', async () => {
