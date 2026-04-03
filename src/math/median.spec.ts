@@ -21,4 +21,25 @@ describe('median', () => {
   it('returns the single element for arrays with one element', () => {
     expect(median([42])).toEqual(42);
   });
+
+  it('returns the median for an odd number of bigint elements', () => {
+    expect(median([1n, 2n, 3n, 4n, 5n])).toEqual(3n);
+  });
+
+  it('returns the median for an even number of bigint elements (integer division)', () => {
+    expect(median([1n, 2n, 3n, 4n])).toEqual(2n);
+  });
+
+  it('returns the correct median for unsorted bigint arrays', () => {
+    expect(median([5n, 2n, 1n, 4n, 3n])).toEqual(3n);
+  });
+
+  it('returns the single element for bigint arrays with one element', () => {
+    expect(median([42n])).toEqual(42n);
+  });
+
+  it('returns NaN for empty bigint arrays', () => {
+    const empty: bigint[] = [];
+    expect(median(empty)).toEqual(NaN);
+  });
 });

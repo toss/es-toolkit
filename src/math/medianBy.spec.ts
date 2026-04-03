@@ -26,4 +26,20 @@ describe('medianBy', () => {
   it('returns the single element for arrays with one element', () => {
     expect(medianBy([{ a: 42 }], x => x.a)).toEqual(42);
   });
+
+  it('calculates the median of bigint values extracted from objects with odd number of elements', () => {
+    const result = medianBy([{ a: 1n }, { a: 2n }, { a: 3n }, { a: 4n }, { a: 5n }], x => x.a);
+    expect(result).toEqual(3n);
+  });
+
+  it('calculates the median of bigint values extracted from objects with even number of elements', () => {
+    const result = medianBy([{ a: 1n }, { a: 2n }, { a: 3n }, { a: 4n }], x => x.a);
+    expect(result).toEqual(2n);
+  });
+
+  it('returns NaN for empty bigint arrays', () => {
+    type Item = { a: bigint };
+    const items: Item[] = [];
+    expect(medianBy(items, x => x.a)).toEqual(NaN);
+  });
 });
