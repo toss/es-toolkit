@@ -79,4 +79,45 @@ describe('dedent', () => {
   it('should handle a string with only empty lines', () => {
     expect(dedent('\n\n\n')).toBe('');
   });
+
+  it('should compose with another tag function', () => {
+    const upper = (strings: TemplateStringsArray, ...values: unknown[]) => {
+      let result = '';
+      for (let i = 0; i < strings.length; i++) {
+        result += strings[i];
+        if (i < values.length) {
+          result += String(values[i]);
+        }
+      }
+      return result.toUpperCase();
+    };
+
+    const dedentedUpper = dedent(upper);
+    const result = dedentedUpper`
+      hello
+      world
+    `;
+    expect(result).toBe('HELLO\nWORLD');
+  });
+
+  it('should compose with another tag function and preserve interpolations', () => {
+    const identity = (strings: TemplateStringsArray, ...values: unknown[]) => {
+      let result = '';
+      for (let i = 0; i < strings.length; i++) {
+        result += strings[i];
+        if (i < values.length) {
+          result += String(values[i]);
+        }
+      }
+      return result;
+    };
+
+    const dedentedIdentity = dedent(identity);
+    const name = 'es-toolkit';
+    const result = dedentedIdentity`
+      Welcome to
+      ${name}!
+    `;
+    expect(result).toBe('Welcome to\nes-toolkit!');
+  });
 });

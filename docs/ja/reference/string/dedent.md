@@ -7,16 +7,17 @@
 ```typescript
 function dedent(str: string): string;
 function dedent(str: TemplateStringsArray, ...values: unknown[]): string;
+function dedent<T>(tagFn: (strings: TemplateStringsArray, ...values: unknown[]) => T): (strings: TemplateStringsArray, ...values: unknown[]) => T;
 ```
 
 ### パラメータ
 
-- `str` (`string | TemplateStringsArray`): インデントを削除する文字列またはテンプレートリテラル。
+- `str` (`string | TemplateStringsArray | Function`): インデントを削除する文字列、テンプレートリテラル、またはタグ関数。
 - `values` (`unknown[]`): タグ付きテンプレートリテラルとして使用する際に挿入する値。
 
 ### 戻り値
 
-(`string`): 共通インデントが削除された文字列。
+(`string | Function`): 共通インデントが削除された文字列、または合成されたタグ関数。
 
 ## 例
 
@@ -48,4 +49,11 @@ dedent`
   ${name}
 `;
 // 結果: 'hello\nworld'
+
+// タグ合成
+const html = dedent((strings, ...values) => strings.join(''));
+html`
+  <div>Hello</div>
+`;
+// 結果: '<div>Hello</div>'
 ```

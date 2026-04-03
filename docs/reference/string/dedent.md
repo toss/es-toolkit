@@ -7,16 +7,17 @@ Removes common leading whitespace from each line of a multi-line string.
 ```typescript
 function dedent(str: string): string;
 function dedent(str: TemplateStringsArray, ...values: unknown[]): string;
+function dedent<T>(tagFn: (strings: TemplateStringsArray, ...values: unknown[]) => T): (strings: TemplateStringsArray, ...values: unknown[]) => T;
 ```
 
 ### Parameters
 
-- `str` (`string | TemplateStringsArray`): The string or template literal to dedent.
+- `str` (`string | TemplateStringsArray | Function`): The string, template literal, or tag function to dedent.
 - `values` (`unknown[]`): The values to interpolate when used as a tagged template literal.
 
 ### Returns
 
-(`string`): The dedented string with common leading whitespace removed.
+(`string | Function`): The dedented string, or a dedented tag function when composed.
 
 ## Examples
 
@@ -48,4 +49,11 @@ dedent`
   ${name}
 `;
 // Returns: 'hello\nworld'
+
+// Tag composition
+const html = dedent((strings, ...values) => strings.join(''));
+html`
+  <div>Hello</div>
+`;
+// Returns: '<div>Hello</div>'
 ```
