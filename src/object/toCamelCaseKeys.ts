@@ -40,7 +40,7 @@ type NonPlainObject =
   | ((...args: any[]) => any)
   | typeof globalThis;
 
-type ToCamelCaseKeys<T> = T extends NonPlainObject
+export type ToCamelCaseKeys<T> = T extends NonPlainObject
   ? T
   : T extends any[]
     ? Array<ToCamelCaseKeys<T[number]>>
