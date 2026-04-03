@@ -53,6 +53,21 @@ describe('deepFreeze', () => {
     expect(Object.isFrozen(obj)).toBe(true);
   });
 
+  it('should freeze arrays directly', () => {
+    const arr = deepFreeze([1, [2, 3], { a: 4 }]);
+
+    expect(Object.isFrozen(arr)).toBe(true);
+    expect(Object.isFrozen(arr[1])).toBe(true);
+    expect(Object.isFrozen(arr[2])).toBe(true);
+  });
+
+  it('should freeze Date and RegExp objects', () => {
+    const obj = deepFreeze({ date: new Date(), regex: /test/ });
+
+    expect(Object.isFrozen(obj.date)).toBe(true);
+    expect(Object.isFrozen(obj.regex)).toBe(true);
+  });
+
   it('should prevent modifications in strict mode', () => {
     'use strict';
     const obj = deepFreeze({ user: { name: 'Alex', age: 20 } });
