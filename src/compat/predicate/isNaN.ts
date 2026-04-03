@@ -1,3 +1,5 @@
+import { isNumber } from './isNumber';
+
 /**
  * Checks if the value is NaN.
  *
@@ -11,5 +13,5 @@
  * isNaN(undefined); // false
  */
 export function isNaN(value?: any): boolean {
-  return Number.isNaN(value);
+  return isNumber(value) && Number.isNaN(Number(value));
 }
