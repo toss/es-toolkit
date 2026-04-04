@@ -14,17 +14,28 @@
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
+    "./array/*": "./src/array/*.ts",
     "./compat": "./src/compat/index.ts",
     "./error": "./src/error/index.ts",
+    "./error/*": "./src/error/*.ts",
     "./function": "./src/function/index.ts",
+    "./function/*": "./src/function/*.ts",
     "./map": "./src/map/index.ts",
+    "./map/*": "./src/map/*.ts",
     "./math": "./src/math/index.ts",
+    "./math/*": "./src/math/*.ts",
     "./object": "./src/object/index.ts",
+    "./object/*": "./src/object/*.ts",
     "./predicate": "./src/predicate/index.ts",
+    "./predicate/*": "./src/predicate/*.ts",
     "./promise": "./src/promise/index.ts",
+    "./promise/*": "./src/promise/*.ts",
     "./set": "./src/set/index.ts",
+    "./set/*": "./src/set/*.ts",
     "./string": "./src/string/index.ts",
+    "./string/*": "./src/string/*.ts",
     "./util": "./src/util/index.ts",
+    "./util/*": "./src/util/*.ts",
     "./package.json": "./package.json"
   },
   "files": [
@@ -126,6 +137,16 @@
           "default": "./dist/array/index.js"
         }
       },
+      "./array/*": {
+        "import": {
+          "types": "./dist/array/*.d.mts",
+          "default": "./dist/array/*.mjs"
+        },
+        "require": {
+          "types": "./dist/array/*.d.ts",
+          "default": "./dist/array/*.js"
+        }
+      },
       "./compat": {
         "import": {
           "types": "./dist/compat/index.d.mts",
@@ -152,6 +173,16 @@
           "default": "./dist/error/index.js"
         }
       },
+      "./error/*": {
+        "import": {
+          "types": "./dist/error/*.d.mts",
+          "default": "./dist/error/*.mjs"
+        },
+        "require": {
+          "types": "./dist/error/*.d.ts",
+          "default": "./dist/error/*.js"
+        }
+      },
       "./function": {
         "import": {
           "types": "./dist/function/index.d.mts",
@@ -160,6 +191,16 @@
         "require": {
           "types": "./dist/function/index.d.ts",
           "default": "./dist/function/index.js"
+        }
+      },
+      "./function/*": {
+        "import": {
+          "types": "./dist/function/*.d.mts",
+          "default": "./dist/function/*.mjs"
+        },
+        "require": {
+          "types": "./dist/function/*.d.ts",
+          "default": "./dist/function/*.js"
         }
       },
       "./map": {
@@ -172,6 +213,16 @@
           "default": "./dist/map/index.js"
         }
       },
+      "./map/*": {
+        "import": {
+          "types": "./dist/map/*.d.mts",
+          "default": "./dist/map/*.mjs"
+        },
+        "require": {
+          "types": "./dist/map/*.d.ts",
+          "default": "./dist/map/*.js"
+        }
+      },
       "./math": {
         "import": {
           "types": "./dist/math/index.d.mts",
@@ -180,6 +231,16 @@
         "require": {
           "types": "./dist/math/index.d.ts",
           "default": "./dist/math/index.js"
+        }
+      },
+      "./math/*": {
+        "import": {
+          "types": "./dist/math/*.d.mts",
+          "default": "./dist/math/*.mjs"
+        },
+        "require": {
+          "types": "./dist/math/*.d.ts",
+          "default": "./dist/math/*.js"
         }
       },
       "./object": {
@@ -192,6 +253,16 @@
           "default": "./dist/object/index.js"
         }
       },
+      "./object/*": {
+        "import": {
+          "types": "./dist/object/*.d.mts",
+          "default": "./dist/object/*.mjs"
+        },
+        "require": {
+          "types": "./dist/object/*.d.ts",
+          "default": "./dist/object/*.js"
+        }
+      },
       "./predicate": {
         "import": {
           "types": "./dist/predicate/index.d.mts",
@@ -200,6 +271,16 @@
         "require": {
           "types": "./dist/predicate/index.d.ts",
           "default": "./dist/predicate/index.js"
+        }
+      },
+      "./predicate/*": {
+        "import": {
+          "types": "./dist/predicate/*.d.mts",
+          "default": "./dist/predicate/*.mjs"
+        },
+        "require": {
+          "types": "./dist/predicate/*.d.ts",
+          "default": "./dist/predicate/*.js"
         }
       },
       "./promise": {
@@ -212,6 +293,16 @@
           "default": "./dist/promise/index.js"
         }
       },
+      "./promise/*": {
+        "import": {
+          "types": "./dist/promise/*.d.mts",
+          "default": "./dist/promise/*.mjs"
+        },
+        "require": {
+          "types": "./dist/promise/*.d.ts",
+          "default": "./dist/promise/*.js"
+        }
+      },
       "./set": {
         "import": {
           "types": "./dist/set/index.d.mts",
@@ -220,6 +311,16 @@
         "require": {
           "types": "./dist/set/index.d.ts",
           "default": "./dist/set/index.js"
+        }
+      },
+      "./set/*": {
+        "import": {
+          "types": "./dist/set/*.d.mts",
+          "default": "./dist/set/*.mjs"
+        },
+        "require": {
+          "types": "./dist/set/*.d.ts",
+          "default": "./dist/set/*.js"
         }
       },
       "./string": {
@@ -232,6 +333,16 @@
           "default": "./dist/string/index.js"
         }
       },
+      "./string/*": {
+        "import": {
+          "types": "./dist/string/*.d.mts",
+          "default": "./dist/string/*.mjs"
+        },
+        "require": {
+          "types": "./dist/string/*.d.ts",
+          "default": "./dist/string/*.js"
+        }
+      },
       "./util": {
         "import": {
           "types": "./dist/util/index.d.mts",
@@ -240,6 +351,16 @@
         "require": {
           "types": "./dist/util/index.d.ts",
           "default": "./dist/util/index.js"
+        }
+      },
+      "./util/*": {
+        "import": {
+          "types": "./dist/util/*.d.mts",
+          "default": "./dist/util/*.mjs"
+        },
+        "require": {
+          "types": "./dist/util/*.d.ts",
+          "default": "./dist/util/*.js"
         }
       },
       "./package.json": "./package.json"

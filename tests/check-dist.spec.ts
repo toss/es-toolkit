@@ -23,18 +23,44 @@ async function getPackageJsonOfTarball(tarballPath: string) {
 const ENTRYPOINTS = [
   '.',
   './array',
+  './array/*',
   './compat',
   './compat/*',
   './error',
+  './error/*',
   './function',
+  './function/*',
   './map',
+  './map/*',
   './math',
+  './math/*',
   './object',
+  './object/*',
   './predicate',
+  './predicate/*',
   './promise',
+  './promise/*',
   './set',
+  './set/*',
   './string',
+  './string/*',
   './util',
+  './util/*',
+];
+
+// Concrete deep-import paths (one per category) to verify wildcard exports resolve at runtime.
+const GRANULAR_ENTRYPOINTS = [
+  './array/chunk',
+  './error/AbortError',
+  './function/debounce',
+  './map/mapKeys',
+  './math/clamp',
+  './object/pick',
+  './predicate/isNil',
+  './promise/delay',
+  './set/filter',
+  './string/camelCase',
+  './util/invariant',
 ];
 
 describe(`es-toolkit's package tarball`, () => {
@@ -63,7 +89,7 @@ describe(`es-toolkit's package tarball`, () => {
     await fs.promises.writeFile(path.join(tmpdir, 'package.json'), JSON.stringify(packageJson, null, 2));
     await execa('npm', ['install'], { cwd: tmpdir });
 
-    for (const entrypoint of ENTRYPOINTS) {
+    for (const entrypoint of [...ENTRYPOINTS, ...GRANULAR_ENTRYPOINTS]) {
       if (entrypoint.includes('*')) {
         continue;
       }
