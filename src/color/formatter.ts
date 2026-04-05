@@ -40,29 +40,31 @@ export function toString(text: unknown): string {
 
 const BLACK: [number, number, number] = [0, 0, 0];
 
+// CSS Color Level 4 defines #RGB, #RGBA, #RRGGBB, #RRGGBBAA formats,
+// but ANSI escape codes don't support alpha channels.
+// We only accept #RGB (3 digits) and #RRGGBB (6 digits).
+const HEX_COLOR_REGEX = /^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$/;
+
 /**
  * Parses a hex color string (e.g. "#ff0000", "#f00", "ff0000") into
  * an [r, g, b] tuple. Used by `hex()` and `bgHex()` to convert
  * user-provided hex values into RGB components for ANSI escape codes.
+ *
+ * Only #RGB and #RRGGBB formats are supported. #RGBA and #RRGGBBAA
+ * are not accepted because ANSI terminals do not support alpha channels.
+ * Returns [0, 0, 0] (black) for invalid input.
  */
 export function parseHex(hex: string): [number, number, number] {
   const raw = hex.startsWith('#') ? hex.slice(1) : hex;
 
-  // Only 3-char (#RGB) and 6-char (#RRGGBB) formats are valid hex colors.
-  if (raw.length !== 3 && raw.length !== 6) {
+  if (!HEX_COLOR_REGEX.test(raw)) {
     return BLACK;
   }
 
   // Expand shorthand "RGB" to "RRGGBB" (e.g. "f00" → "ff0000").
   const full = raw.length === 3 ? raw[0] + raw[0] + raw[1] + raw[1] + raw[2] + raw[2] : raw;
 
-  // Number('0x...') is strict — returns NaN if any character is not a valid hex digit.
-  // parseInt would silently parse partial strings like "abcxyz" → 2748 (only "abc").
-  const colorValue = Number('0x' + full);
-
-  if (Number.isNaN(colorValue)) {
-    return BLACK;
-  }
+  const colorValue = parseInt(full, 16);
 
   const red = (colorValue >> 16) & 0xff;
   const green = (colorValue >> 8) & 0xff;
