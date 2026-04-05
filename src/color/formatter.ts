@@ -56,9 +56,10 @@ export function parseHex(hex: string): [number, number, number] {
   // Expand shorthand "RGB" to "RRGGBB" (e.g. "f00" → "ff0000").
   const full = raw.length === 3 ? raw[0] + raw[0] + raw[1] + raw[1] + raw[2] + raw[2] : raw;
 
-  const colorValue = parseInt(full, 16);
+  // Number('0x...') is strict — returns NaN if any character is not a valid hex digit.
+  // parseInt would silently parse partial strings like "abcxyz" → 2748 (only "abc").
+  const colorValue = Number('0x' + full);
 
-  // Non-hex characters (e.g. "xyz") produce NaN, fall back to black.
   if (Number.isNaN(colorValue)) {
     return BLACK;
   }

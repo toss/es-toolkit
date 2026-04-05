@@ -83,4 +83,11 @@ describe('parseHex', () => {
     expect(parseHex('#xyz')).toEqual([0, 0, 0]);
     expect(parseHex('#xxyyzz')).toEqual([0, 0, 0]);
   });
+
+  it('should return [0,0,0] for partially valid hex strings', () => {
+    expect(parseHex('#abcxyz')).toEqual([0, 0, 0]);
+    expect(parseHex('#1g0000')).toEqual([0, 0, 0]);
+    expect(parseHex('#12x')).toEqual([0, 0, 0]);
+    expect(parseHex('fg0000')).toEqual([0, 0, 0]);
+  });
 });
