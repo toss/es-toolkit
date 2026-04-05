@@ -5,8 +5,8 @@
 ```typescript
 import { createColors } from 'es-toolkit/color';
 
-const c = createColors(true);  // 常に色を有効化
-const noColor = createColors(false);  // 常に無効化
+const c = createColors(true); // 常に色を有効化
+const noColor = createColors(false); // 常に無効化
 ```
 
 ## 使い方
@@ -24,7 +24,7 @@ c.red('hello'); // 'hello' (ANSIコードなしで返される)
 
 // ロギングライブラリで色を強制有効化
 const log = createColors(true);
-log.green('成功');  // '\x1b[32m成功\x1b[39m'
+log.green('成功'); // '\x1b[32m成功\x1b[39m'
 ```
 
 ### いつ使うのか？

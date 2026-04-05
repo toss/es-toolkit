@@ -12,12 +12,12 @@ import { colorLevel, isColorSupported } from 'es-toolkit/color';
 
 터미널이 지원하는 색상 수준을 숫자로 반환해요.
 
-| 값 | 의미 | 색상 수 |
-|----|------|---------|
-| `0` | 색상 미지원 | - |
-| `1` | 기본 색상 | 16색 |
-| `2` | 256색 | 256색 |
-| `3` | Truecolor | 1600만색 (RGB) |
+| 값  | 의미        | 색상 수        |
+| --- | ----------- | -------------- |
+| `0` | 색상 미지원 | -              |
+| `1` | 기본 색상   | 16색           |
+| `2` | 256색       | 256색          |
+| `3` | Truecolor   | 1600만색 (RGB) |
 
 ```typescript
 import { colorLevel } from 'es-toolkit/color';

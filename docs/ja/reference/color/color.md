@@ -86,9 +86,9 @@ color.hex('#f0f')('マゼンタ');
 すべての色関数はどのタイプでも受け取り、`String()` で変換します。chalk からマイグレーションする際に型エラーなく使用できます。
 
 ```typescript
-color.red(123);       // '123' (数値)
-color.red(true);      // 'true' (ブーリアン)
-color.red(null);      // 'null'
+color.red(123); // '123' (数値)
+color.red(true); // 'true' (ブーリアン)
+color.red(null); // 'null'
 color.red(undefined); // 'undefined'
 ```
 

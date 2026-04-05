@@ -86,9 +86,9 @@ color.hex('#f0f')('Magenta');
 All color functions accept any type and convert it using `String()`. This allows seamless migration from chalk without type errors.
 
 ```typescript
-color.red(123);       // '123' (number)
-color.red(true);      // 'true' (boolean)
-color.red(null);      // 'null'
+color.red(123); // '123' (number)
+color.red(true); // 'true' (boolean)
+color.red(null); // 'null'
 color.red(undefined); // 'undefined'
 ```
 

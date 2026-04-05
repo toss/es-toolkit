@@ -12,12 +12,12 @@ import { colorLevel, isColorSupported } from 'es-toolkit/color';
 
 ターミナルがサポートする色のレベルを数値で返します。
 
-| 値 | 意味 | 色数 |
-|----|------|------|
-| `0` | 色非サポート | - |
-| `1` | 基本色 | 16色 |
-| `2` | 256色 | 256色 |
-| `3` | Truecolor | 1600万色 (RGB) |
+| 値  | 意味         | 色数           |
+| --- | ------------ | -------------- |
+| `0` | 色非サポート | -              |
+| `1` | 基本色       | 16色           |
+| `2` | 256色        | 256色          |
+| `3` | Truecolor    | 1600万色 (RGB) |
 
 ```typescript
 import { colorLevel } from 'es-toolkit/color';

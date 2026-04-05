@@ -5,8 +5,8 @@
 ```typescript
 import { createColors } from 'es-toolkit/color';
 
-const c = createColors(true);  // 始终启用颜色
-const noColor = createColors(false);  // 始终禁用颜色
+const c = createColors(true); // 始终启用颜色
+const noColor = createColors(false); // 始终禁用颜色
 ```
 
 ## 用法
@@ -24,7 +24,7 @@ c.red('hello'); // 'hello' (不含 ANSI 代码)
 
 // 在日志库中强制启用颜色
 const log = createColors(true);
-log.green('成功');  // '\x1b[32m成功\x1b[39m'
+log.green('成功'); // '\x1b[32m成功\x1b[39m'
 ```
 
 ### 何时使用？

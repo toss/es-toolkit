@@ -5,8 +5,8 @@
 ```typescript
 import { createColors } from 'es-toolkit/color';
 
-const c = createColors(true);  // 항상 색상 활성화
-const noColor = createColors(false);  // 항상 비활성화
+const c = createColors(true); // 항상 색상 활성화
+const noColor = createColors(false); // 항상 비활성화
 ```
 
 ## 사용법
@@ -24,7 +24,7 @@ c.red('hello'); // 'hello' (ANSI 코드 없이 반환)
 
 // 로깅 라이브러리에서 색상 강제 활성화
 const log = createColors(true);
-log.green('성공');  // '\x1b[32m성공\x1b[39m'
+log.green('성공'); // '\x1b[32m성공\x1b[39m'
 ```
 
 ### 언제 사용하나요?

@@ -12,12 +12,12 @@ import { colorLevel, isColorSupported } from 'es-toolkit/color';
 
 Returns the color support level of the terminal as a number.
 
-| Value | Meaning | Colors |
-|-------|---------|--------|
-| `0` | No color support | - |
-| `1` | Basic colors | 16 colors |
-| `2` | 256 colors | 256 colors |
-| `3` | Truecolor | 16 million colors (RGB) |
+| Value | Meaning          | Colors                  |
+| ----- | ---------------- | ----------------------- |
+| `0`   | No color support | -                       |
+| `1`   | Basic colors     | 16 colors               |
+| `2`   | 256 colors       | 256 colors              |
+| `3`   | Truecolor        | 16 million colors (RGB) |
 
 ```typescript
 import { colorLevel } from 'es-toolkit/color';

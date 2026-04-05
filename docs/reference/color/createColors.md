@@ -5,8 +5,8 @@ A factory function that lets you directly control whether colors are enabled.
 ```typescript
 import { createColors } from 'es-toolkit/color';
 
-const c = createColors(true);  // Always enable colors
-const noColor = createColors(false);  // Always disable colors
+const c = createColors(true); // Always enable colors
+const noColor = createColors(false); // Always disable colors
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ c.red('hello'); // 'hello' (returned without ANSI codes)
 
 // Force enable colors in a logging library
 const log = createColors(true);
-log.green('success');  // '\x1b[32msuccess\x1b[39m'
+log.green('success'); // '\x1b[32msuccess\x1b[39m'
 ```
 
 ### When to Use

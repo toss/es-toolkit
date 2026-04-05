@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
-import { createFormatter, toString, parseHex } from './formatter.ts';
+import { createFormatter, parseHex, toString } from './formatter.ts';
 
 describe('createFormatter', () => {
   const red = createFormatter('\x1b[31m', '\x1b[39m', false);

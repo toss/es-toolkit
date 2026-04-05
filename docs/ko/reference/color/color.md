@@ -86,9 +86,9 @@ color.hex('#f0f')('마젠타');
 모든 색상 함수는 어떤 타입이든 받아서 `String()`으로 변환해요. chalk에서 마이그레이션할 때 타입 에러 없이 사용할 수 있어요.
 
 ```typescript
-color.red(123);       // '123' (숫자)
-color.red(true);      // 'true' (불리언)
-color.red(null);      // 'null'
+color.red(123); // '123' (숫자)
+color.red(true); // 'true' (불리언)
+color.red(null); // 'null'
 color.red(undefined); // 'undefined'
 ```
 

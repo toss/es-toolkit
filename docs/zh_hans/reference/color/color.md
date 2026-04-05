@@ -86,9 +86,9 @@ color.hex('#f0f')('品红色');
 所有颜色函数接受任意类型，并通过 `String()` 进行转换。从 chalk 迁移时不会出现类型错误。
 
 ```typescript
-color.red(123);       // '123' (数字)
-color.red(true);      // 'true' (布尔值)
-color.red(null);      // 'null'
+color.red(123); // '123' (数字)
+color.red(true); // 'true' (布尔值)
+color.red(null); // 'null'
 color.red(undefined); // 'undefined'
 ```
 

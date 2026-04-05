@@ -12,12 +12,12 @@ import { colorLevel, isColorSupported } from 'es-toolkit/color';
 
 以数字形式返回终端支持的颜色级别。
 
-| 值 | 含义 | 颜色数 |
-|----|------|--------|
-| `0` | 不支持颜色 | - |
-| `1` | 基本颜色 | 16 色 |
-| `2` | 256 色 | 256 色 |
-| `3` | Truecolor | 1600 万色 (RGB) |
+| 值  | 含义       | 颜色数          |
+| --- | ---------- | --------------- |
+| `0` | 不支持颜色 | -               |
+| `1` | 基本颜色   | 16 色           |
+| `2` | 256 色     | 256 色          |
+| `3` | Truecolor  | 1600 万色 (RGB) |
 
 ```typescript
 import { colorLevel } from 'es-toolkit/color';
