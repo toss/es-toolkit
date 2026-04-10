@@ -21,7 +21,7 @@ import { PropertyPath } from '../_internal/PropertyPath.ts';
  * // Set a value with a customizer that creates arrays for numeric path segments
  * const object = {};
  * setWith(object, '[0][1]', 'a', (value) => Array.isArray(value) ? value : []);
- * // => { '0': ['a'] }
+ * // => { '0': [, 'a'] }
  */
 export function setWith<T extends object>(
   object: T,
@@ -51,7 +51,7 @@ export function setWith<T extends object>(
  * // Set a value with a customizer that creates arrays for numeric path segments
  * const object = {};
  * setWith(object, '[0][1]', 'a', (value) => Array.isArray(value) ? value : []);
- * // => { '0': ['a'] }
+ * // => { '0': [, 'a'] }
  */
 export function setWith<T extends object, R>(
   object: T,
@@ -81,7 +81,7 @@ export function setWith<T extends object, R>(
  * // Set a value with a customizer that creates arrays for numeric path segments
  * const object = {};
  * setWith(object, '[0][1]', 'a', (value) => Array.isArray(value) ? value : []);
- * // => { '0': ['a'] }
+ * // => { '0': [, 'a'] }
  */
 export function setWith<T extends object, R>(
   obj: T,
