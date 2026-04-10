@@ -1,34 +1,34 @@
-# stripAnsi
+# stripColor
 
-从字符串中移除所有 ANSI 颜色/样式代码。
+从字符串中移除 ANSI 颜色/样式代码。
 
 ```typescript
-import { color, stripAnsi } from 'es-toolkit/color';
+import { color, stripColor } from 'es-toolkit/color';
 
 const colored = color.red('hello');
-stripAnsi(colored);
+stripColor(colored);
 // Returns: 'hello'
 ```
 
 ## 用法
 
-### `stripAnsi(text)`
+### `stripColor(text)`
 
 从带有颜色的字符串中移除 ANSI 转义代码，只返回纯文本。在将日志保存到文件或精确测量字符串长度时非常有用。
 
 ```typescript
-import { color, stripAnsi } from 'es-toolkit/color';
+import { color, stripColor } from 'es-toolkit/color';
 
 const message = color.bold(color.red('发生错误'));
 
 // 保存到文件时移除 ANSI 代码
-fs.writeFileSync('log.txt', stripAnsi(message));
+fs.writeFileSync('log.txt', stripColor(message));
 
 // 测量字符串长度
-const visibleLength = stripAnsi(message).length;
+const visibleLength = stripColor(message).length;
 ```
 
-移除本库生成的所有 SGR（Select Graphic Rendition）序列，包括基本颜色、256 色、RGB 等。
+仅移除本库生成的 SGR（Select Graphic Rendition）序列，包括基本颜色、256 色、RGB 等。不会移除光标移动、OSC 超链接等其他 ANSI 序列。
 
 #### 参数
 

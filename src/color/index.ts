@@ -1,6 +1,6 @@
 export { isColorSupported, colorLevel } from './colorLevel.ts';
 export { createColors } from './createColors.ts';
-export { stripAnsi } from './stripAnsi.ts';
+export { stripColor } from './stripColor.ts';
 export type { ColorLevel, ColorFunction, Colors } from './types.ts';
 
 /**

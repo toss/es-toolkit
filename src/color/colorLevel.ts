@@ -97,6 +97,7 @@ export function detectColorLevel(): ColorLevel {
 
 /**
  * The detected color level for the current environment.
+ * Evaluated once at import time and cached for the lifetime of the process.
  *
  * - `0` — No color support
  * - `1` — Basic 16 colors
@@ -107,5 +108,6 @@ export const colorLevel = detectColorLevel();
 
 /**
  * Whether the current environment supports any color output.
+ * Evaluated once at import time alongside {@link colorLevel}.
  */
 export const isColorSupported = colorLevel > 0;
