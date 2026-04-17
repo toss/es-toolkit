@@ -6,10 +6,10 @@
 
 ```typescript
 // 개별 import (트리셰이킹 가능):
-import { red, bold, hex } from 'es-toolkit/color';
-
+import { bold, hex, red } from 'es-toolkit/color';
 // 또는 default 번들:
 import color from 'es-toolkit/color';
+
 color.red('에러');
 ```
 
@@ -44,7 +44,7 @@ color.red('에러');
 ### 기본 색상과 스타일
 
 ```typescript
-import { red, green, blue, bold, underline, bgYellow, black } from 'es-toolkit/color';
+import { bgYellow, black, blue, bold, green, red, underline } from 'es-toolkit/color';
 
 red('빨간 텍스트');
 green('초록 텍스트');
@@ -61,7 +61,7 @@ bgYellow(black('노란 배경에 검정 텍스트'));
 여러 스타일을 중첩해서 사용할 수 있어요. inner이 닫히면 outer이 자동으로 재개방돼서 뒤따르는 텍스트도 색이 유지돼요.
 
 ```typescript
-import { red, bold } from 'es-toolkit/color';
+import { bold, red } from 'es-toolkit/color';
 
 bold(red('굵은 빨간 텍스트'));
 red(`상태: ${bold('중요')} — 확인 부탁해요`);
@@ -72,7 +72,7 @@ red(`상태: ${bold('중요')} — 확인 부탁해요`);
 256색, RGB, Hex 색상은 커링 방식이에요. 색상 값을 먼저 넘기고 텍스트를 이후에 넘겨요.
 
 ```typescript
-import { ansi256, bgAnsi256, rgb, bgRgb, hex, bgHex } from 'es-toolkit/color';
+import { ansi256, bgAnsi256, bgHex, bgRgb, hex, rgb } from 'es-toolkit/color';
 
 ansi256(196)('밝은 빨강');
 bgAnsi256(21)('파란 배경');

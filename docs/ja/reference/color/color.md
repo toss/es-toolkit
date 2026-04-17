@@ -6,10 +6,10 @@
 
 ```typescript
 // 個別の named import（ツリーシェイキング可能）:
-import { red, bold, hex } from 'es-toolkit/color';
-
+import { bold, hex, red } from 'es-toolkit/color';
 // または default バンドル:
 import color from 'es-toolkit/color';
+
 color.red('エラー');
 ```
 
@@ -44,7 +44,7 @@ color.red('エラー');
 ### 基本的な色とスタイル
 
 ```typescript
-import { red, green, blue, bold, underline, bgYellow, black } from 'es-toolkit/color';
+import { bgYellow, black, blue, bold, green, red, underline } from 'es-toolkit/color';
 
 red('赤いテキスト');
 green('緑のテキスト');
@@ -61,7 +61,7 @@ bgYellow(black('黄色い背景に黒いテキスト'));
 複数のスタイルをネストして使用できます。inner が閉じた後に outer が自動的に再オープンされるため、続くテキストも色が保持されます。
 
 ```typescript
-import { red, bold } from 'es-toolkit/color';
+import { bold, red } from 'es-toolkit/color';
 
 bold(red('太字の赤いテキスト'));
 red(`状態: ${bold('重要')} — 確認してください`);
@@ -72,7 +72,7 @@ red(`状態: ${bold('重要')} — 確認してください`);
 256色、RGB、Hex 色はカリー化方式です。色の値を先に渡してからテキストを渡します。
 
 ```typescript
-import { ansi256, bgAnsi256, rgb, bgRgb, hex, bgHex } from 'es-toolkit/color';
+import { ansi256, bgAnsi256, bgHex, bgRgb, hex, rgb } from 'es-toolkit/color';
 
 ansi256(196)('明るい赤');
 bgAnsi256(21)('青い背景');

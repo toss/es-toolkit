@@ -6,10 +6,10 @@ Every utility is exposed as an individual named export **and** bundled in a defa
 
 ```typescript
 // Individual named imports (tree-shakeable):
-import { red, bold, hex } from 'es-toolkit/color';
-
+import { bold, hex, red } from 'es-toolkit/color';
 // Or the default bundle:
 import color from 'es-toolkit/color';
+
 color.red('error');
 ```
 
@@ -44,7 +44,7 @@ color.red('error');
 ### Basic colors and styles
 
 ```typescript
-import { red, green, blue, bold, underline, bgYellow, black } from 'es-toolkit/color';
+import { bgYellow, black, blue, bold, green, red, underline } from 'es-toolkit/color';
 
 red('Red text');
 green('Green text');
@@ -61,7 +61,7 @@ bgYellow(black('Black text on yellow background'));
 Nest multiple styles. The outer style is automatically re-opened after the inner style closes so subsequent text keeps its color.
 
 ```typescript
-import { red, bold } from 'es-toolkit/color';
+import { bold, red } from 'es-toolkit/color';
 
 bold(red('Bold red text'));
 red(`Status: ${bold('IMPORTANT')} — please review`);
@@ -72,7 +72,7 @@ red(`Status: ${bold('IMPORTANT')} — please review`);
 256-color, RGB, and hex use a curried form: pass the color value first, then the text.
 
 ```typescript
-import { ansi256, bgAnsi256, rgb, bgRgb, hex, bgHex } from 'es-toolkit/color';
+import { ansi256, bgAnsi256, bgHex, bgRgb, hex, rgb } from 'es-toolkit/color';
 
 ansi256(196)('Bright red');
 bgAnsi256(21)('Blue background');

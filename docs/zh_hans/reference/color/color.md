@@ -6,10 +6,10 @@
 
 ```typescript
 // 独立的 named import（可 tree-shaking）:
-import { red, bold, hex } from 'es-toolkit/color';
-
+import { bold, hex, red } from 'es-toolkit/color';
 // 或 default 打包:
 import color from 'es-toolkit/color';
+
 color.red('错误');
 ```
 
@@ -44,7 +44,7 @@ color.red('错误');
 ### 基本颜色和样式
 
 ```typescript
-import { red, green, blue, bold, underline, bgYellow, black } from 'es-toolkit/color';
+import { bgYellow, black, blue, bold, green, red, underline } from 'es-toolkit/color';
 
 red('红色文本');
 green('绿色文本');
@@ -61,7 +61,7 @@ bgYellow(black('黄色背景黑色文本'));
 可以嵌套多个样式。内层样式关闭后外层样式会自动重新打开,因此后续文本会保持其颜色。
 
 ```typescript
-import { red, bold } from 'es-toolkit/color';
+import { bold, red } from 'es-toolkit/color';
 
 bold(red('粗体红色文本'));
 red(`状态: ${bold('重要')} — 请查看`);
@@ -72,7 +72,7 @@ red(`状态: ${bold('重要')} — 请查看`);
 256 色、RGB、Hex 采用柯里化方式:先传入颜色值,再传入文本。
 
 ```typescript
-import { ansi256, bgAnsi256, rgb, bgRgb, hex, bgHex } from 'es-toolkit/color';
+import { ansi256, bgAnsi256, bgHex, bgRgb, hex, rgb } from 'es-toolkit/color';
 
 ansi256(196)('亮红色');
 bgAnsi256(21)('蓝色背景');
