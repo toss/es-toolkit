@@ -1,6 +1,6 @@
 // Matches SGR (Select Graphic Rendition) sequences only: \x1b[...m
 // This intentionally does not cover cursor movement, OSC, or other ANSI sequences.
-const SGR_REGEX = /\u001b\[[0-9;]*m/g;
+const SGR_REGEX = new RegExp(`${String.fromCharCode(0x1b)}\\[[0-9;]*m`, 'g');
 
 /**
  * Removes ANSI color and style escape codes from a string.
@@ -12,10 +12,9 @@ const SGR_REGEX = /\u001b\[[0-9;]*m/g;
  * @returns The string with all color/style codes removed.
  *
  * @example
- * import { color, stripColor } from 'es-toolkit/color';
+ * import { red, stripColor } from 'es-toolkit/color';
  *
- * const colored = color.red('hello');
- * stripColor(colored);
+ * stripColor(red('hello'));
  * // Returns: 'hello'
  */
 export function stripColor(text: string): string {
