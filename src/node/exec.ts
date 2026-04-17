@@ -17,6 +17,41 @@ interface ExecResult {
   exitCode: number | null;
 }
 
+/**
+ * Executes a command and captures its output.
+ *
+ * This function spawns a child process, collects its stdout and stderr, and resolves with the
+ * process result when execution finishes. By default, it throws an {@link ExecError} when the
+ * process exits with a non-zero exit code.
+ *
+ * @param {string} _command - The command to execute.
+ * @param {string[]} args - The arguments passed to the command.
+ * @param {ExecOptions} options - The options object.
+ * @param {AbortSignal} options.signal - An optional AbortSignal used to abort the process.
+ * @param {number} options.timeout - An optional timeout in milliseconds. When provided, the
+ * process is aborted after the timeout expires.
+ * @param {string} options.stdin - An optional string written to the process stdin.
+ * @param {SpawnOptions} options.spawnOptions - Additional options forwarded to `child_process.spawn`.
+ * @param {boolean} options.throwOnNonZeroExitCode - Whether to throw an {@link ExecError} when the
+ * process exits with a non-zero exit code. Defaults to `true`.
+ * @returns {Promise<ExecResult>} A promise that resolves with the process result.
+ * @throws {ExecError} Throws when `throwOnNonZeroExitCode` is enabled and the process exits with a
+ * non-zero exit code.
+ *
+ * @example
+ * const result = await exec(process.execPath, ['-e', "process.stdout.write('hello')"]);
+ *
+ * console.log(result.stdout);
+ * // => 'hello'
+ *
+ * @example
+ * const result = await exec(process.execPath, ['-e', 'process.exit(2)'], {
+ *   throwOnNonZeroExitCode: false,
+ * });
+ *
+ * console.log(result.exitCode);
+ * // => 2
+ */
 export async function exec(_command: string, args: string[] = [], options: ExecOptions = {}): Promise<ExecResult> {
   const command = normalizePath(_command);
   const signal = parseAbortSignal(options);
@@ -29,15 +64,17 @@ export async function exec(_command: string, args: string[] = [], options: ExecO
     signal,
   });
 
-  const stdoutPromise = process.stdout != null ? streamToString(process.stdout) : Promise.resolve('');
-  const stderrPromise = process.stderr != null ? streamToString(process.stderr) : Promise.resolve('');
+  handleStdin(process, options);
 
-  process.once('close', resolver.resolve);
+  process.once('close', () => {
+    resolver.resolve();
+  });
   process.once('error', error => {
     resolver.reject(error);
   });
 
-  handleStdin(process, options);
+  const stdoutPromise = process.stdout != null ? streamToString(process.stdout) : Promise.resolve('');
+  const stderrPromise = process.stderr != null ? streamToString(process.stderr) : Promise.resolve('');
 
   await resolver.promise;
 
@@ -63,6 +100,11 @@ export async function exec(_command: string, args: string[] = [], options: ExecO
   };
 }
 
+/**
+ * Represents an error thrown when a process exits with a non-zero exit code.
+ *
+ * @param {ExecResult} result - The captured process result.
+ */
 export class ExecError extends Error {
   constructor(public readonly result: ExecResult) {
     super(`Process exited with non-zero exit code (${result.exitCode})`);
