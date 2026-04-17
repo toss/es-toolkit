@@ -15,9 +15,11 @@ export function createFormatter(open: string, close: string, isBackground: boole
       result = result.replaceAll(close, close + open);
     }
 
-    // Terminals reset background at line boundaries, so re-open after each "\n".
+    // Terminals reset background at line boundaries, so re-open after each
+    // newline. Handle CRLF (`\r\n`) and LF (`\n`) as a single unit so the
+    // close code sits outside both characters.
     if (isBackground && result.includes('\n')) {
-      result = result.replaceAll('\n', close + '\n' + open);
+      result = result.replaceAll(/\r?\n/g, match => close + match + open);
     }
 
     return open + result + close;

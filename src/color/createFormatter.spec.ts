@@ -59,6 +59,11 @@ describe('createFormatter', () => {
     expect(bg('abc\n')).toBe(`${OPEN}abc${CLOSE}\n${OPEN}${CLOSE}`);
   });
 
+  it('should re-open background around CRLF newlines as a single unit', () => {
+    expect(bg('a\r\nb')).toBe(`${OPEN}a${CLOSE}\r\n${OPEN}b${CLOSE}`);
+    expect(bg('a\nb\r\nc')).toBe(`${OPEN}a${CLOSE}\n${OPEN}b${CLOSE}\r\n${OPEN}c${CLOSE}`);
+  });
+
   it('should not split non-background styles at newlines', () => {
     expect(style('a\nb')).toBe(`${OPEN}a\nb${CLOSE}`);
   });
