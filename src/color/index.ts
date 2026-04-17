@@ -1,16 +1,7 @@
+export * from './color.ts';
 export { isColorSupported, colorLevel } from './colorLevel.ts';
-export { createColors } from './createColors.ts';
 export { stripColor } from './stripColor.ts';
-export type { ColorLevel, ColorFunction, Colors } from './types.ts';
+export type { ColorLevel, ColorFunction } from './types.ts';
 
-/**
- * Pre-configured color instance that auto-detects terminal color support.
- *
- * @example
- * import { color } from 'es-toolkit/color';
- *
- * color.red('hello');
- * color.bold(color.red('hello'));
- * color.hex('#ff0000')('hello');
- */
-export { color } from './color.ts';
+import * as color from './color.ts';
+export default color;
