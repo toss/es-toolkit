@@ -1,6 +1,9 @@
 import { isColorSupported } from './colorLevel.ts';
-import { createFormatter, parseHex, toString } from './formatter.ts';
+import { createFormatter } from './createFormatter.ts';
+import { parseHex } from './parseHex.ts';
 import type { ColorFunction, Colors } from './types.ts';
+
+const identity: ColorFunction = text => text;
 
 /**
  * Creates a set of color functions. When `enabled` is false, all functions
@@ -69,47 +72,43 @@ export function createColors(enabled?: boolean): Colors {
     bgCyanBright: style(on, '\x1b[106m', '\x1b[49m', true),
     bgWhiteBright: style(on, '\x1b[107m', '\x1b[49m', true),
 
-    ansi256: on ? (code: number) => createFormatter(`\x1b[38;5;${code}m`, '\x1b[39m', false) : stringifyFactory,
+    ansi256: on ? (code: number) => createFormatter(`\x1b[38;5;${code}m`, '\x1b[39m', false) : identityFactory,
 
-    bgAnsi256: on ? (code: number) => createFormatter(`\x1b[48;5;${code}m`, '\x1b[49m', true) : stringifyFactory,
+    bgAnsi256: on ? (code: number) => createFormatter(`\x1b[48;5;${code}m`, '\x1b[49m', true) : identityFactory,
 
     rgb: on
       ? (r: number, g: number, b: number) => createFormatter(`\x1b[38;2;${r};${g};${b}m`, '\x1b[39m', false)
-      : stringifyFactory,
+      : identityFactory,
 
     bgRgb: on
       ? (r: number, g: number, b: number) => createFormatter(`\x1b[48;2;${r};${g};${b}m`, '\x1b[49m', true)
-      : stringifyFactory,
+      : identityFactory,
 
     hex: on
       ? (color: string) => {
           const [r, g, b] = parseHex(color);
           return createFormatter(`\x1b[38;2;${r};${g};${b}m`, '\x1b[39m', false);
         }
-      : stringifyFactory,
+      : identityFactory,
 
     bgHex: on
       ? (color: string) => {
           const [r, g, b] = parseHex(color);
           return createFormatter(`\x1b[48;2;${r};${g};${b}m`, '\x1b[49m', true);
         }
-      : stringifyFactory,
+      : identityFactory,
   };
 }
 
-/** Returns a formatter when enabled, or a plain toString passthrough when disabled. */
+/** Returns a formatter when enabled, or an identity passthrough when disabled. */
 function style(enabled: boolean, open: string, close: string, isBg: boolean): ColorFunction {
   if (enabled) {
     return createFormatter(open, close, isBg);
   }
-  return toString;
+  return identity;
 }
 
-/**
- * Factory for extended color functions (ansi256, rgb, hex) when colors are disabled.
- * All color functions accept `unknown` to ease migration from chalk, which accepts any type.
- * This factory returns `toString` which simply calls `String()` on the input — no ANSI codes.
- */
-function stringifyFactory() {
-  return toString;
+/** Factory for extended color functions (ansi256, rgb, hex) when colors are disabled. */
+function identityFactory(): ColorFunction {
+  return identity;
 }

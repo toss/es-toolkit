@@ -51,10 +51,6 @@ describe('createColors', () => {
       expect(c.bgRed('hello')).toBe('hello');
     });
 
-    it('should coerce non-string input even when disabled', () => {
-      expect(c.red(123)).toBe('123');
-    });
-
     it('should return plain string for all extended color functions', () => {
       expect(c.ansi256(196)('hello')).toBe('hello');
       expect(c.bgAnsi256(196)('hello')).toBe('hello');

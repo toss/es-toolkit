@@ -1,6 +1,6 @@
 export type ColorLevel = 0 | 1 | 2 | 3;
 
-export type ColorFunction = (text: unknown) => string;
+export type ColorFunction = (text: string) => string;
 
 export interface Colors {
   reset: ColorFunction;
