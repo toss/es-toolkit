@@ -26,7 +26,6 @@ export default () => {
   const entrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
 
   return [
-    // Node/default ESM build
     libBuildOptions({
       format: 'esm',
       extension: 'mjs',
@@ -34,7 +33,6 @@ export default () => {
       outDir: 'dist',
       sourcemap: false,
     }),
-    // Node/default CJS build
     libBuildOptions({
       format: 'cjs',
       extension: 'js',
@@ -42,19 +40,10 @@ export default () => {
       outDir: 'dist',
       sourcemap: false,
     }),
-    // Browser ESM build — isBuffer aliased to browser stub
-    libBuildOptions({
-      format: 'esm',
-      extension: 'mjs',
-      entrypoints,
-      outDir: 'dist/browser',
-      sourcemap: false,
-    }),
     declarationOptions({
       entrypoints,
       outDir: 'dist',
     }),
-    // UMD browser bundle — isBuffer aliased to browser stub
     browserBuildConfig({
       inputFile: './src/compat/index.ts',
       outFile: packageJson.publishConfig.browser,
@@ -74,11 +63,10 @@ export default () => {
  *   plugins?: import('rollup').Plugin[];
  * }) => import('rollup').RollupOptions}
  */
-function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap, plugins: extraPlugins = [] }) {
+function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) {
   return {
     input: mapInputs(entrypoints),
     plugins: [
-      ...extraPlugins,
       tsPlugin({
         exclude: [...testPatterns],
         compilerOptions: {
