@@ -45,7 +45,7 @@ export default () => {
       outDir: 'dist',
     }),
     browserBuildConfig({
-      inputFile: './src/compat/index.ts',
+      inputFile: './src/browser.ts',
       outFile: packageJson.publishConfig.browser,
       name: '_',
       sourcemap: false,
