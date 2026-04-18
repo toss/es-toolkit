@@ -191,7 +191,6 @@ export { setWith } from './object/setWith.ts';
 export { toCamelCaseKeys } from '../object/toCamelCaseKeys.ts';
 export { toDefaulted } from './object/toDefaulted.ts';
 export { toPairs } from './object/toPairs.ts';
-export { toSnakeCaseKeys } from '../object/toSnakeCaseKeys.ts';
 export { toPairsIn } from './object/toPairsIn.ts';
 export { transform } from './object/transform.ts';
 export { unset } from './object/unset.ts';
