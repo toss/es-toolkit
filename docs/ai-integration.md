@@ -1,6 +1,41 @@
 # AI Integration
 
-es-toolkit is committed to helping AI agents make the most of our library. We're actively working on features that make it easier for AI-powered tools to understand, reference, and use es-toolkit effectively.
+es-toolkit is committed to helping AI agents make the most of our library. We provide Agent Skills for AI coding tools as well as llms.txt endpoints for broader AI integration.
+
+## Agent Skills
+
+es-toolkit provides [Agent Skills](https://skills.sh) — reusable instructions that help AI coding tools understand and use es-toolkit effectively. They work with Claude Code, Cursor, Copilot, Windsurf, and other supported tools.
+
+### Installation
+
+::: code-group
+
+```sh [npx (All AI Tools)]
+npx skills add toss/es-toolkit
+```
+
+```sh [Claude Code Plugin]
+/plugin marketplace add toss/es-toolkit
+/plugin install es-toolkit@es-toolkit-plugin
+```
+
+:::
+
+### Available Skills
+
+| Skill         | Description                                          |
+| ------------- | ---------------------------------------------------- |
+| **guide**     | Installation, import patterns, and runtime setup     |
+| **recommend** | Find the right es-toolkit function for your use case |
+| **migrate**   | Migrate lodash code to es-toolkit                    |
+
+### Usage Examples
+
+```
+/es-toolkit:guide How do I use es-toolkit in Deno?
+/es-toolkit:recommend I need to deeply merge two objects
+/es-toolkit:migrate _.chunk(users, 10)
+```
 
 ## llms.txt
 
