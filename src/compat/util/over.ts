@@ -20,7 +20,7 @@ import { iteratee } from '../util/iteratee.ts';
  *
  * const func = over([{ a: 1 }, { b: 2 }]);
  * func({ a: 1, b: 2 });
- * // => [true, false]
+ * // => [true, true]
  *
  * const func = over([['a', 1], ['b', 2]]);
  * func({ a: 1, b: 2 });
