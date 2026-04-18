@@ -17,7 +17,7 @@ const HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
  * @returns {number} Returns the index at which `value` should be inserted
  *  into `array`.
  * @example
- * sortedIndex([4, 5, 5, 5, 6], 5)
+ * sortedLastIndex([4, 5, 5, 5, 6], 5)
  * // => 4
  */
 export function sortedLastIndex<T>(array: ArrayLike<T> | null | undefined, value: T): number {
