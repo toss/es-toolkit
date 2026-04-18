@@ -20,19 +20,6 @@ const packageJson = createRequire(import.meta.url)('./package.json');
 
 const testPatterns = ['**/*.bench.ts', '**/*.spec.ts', '**/*.test.ts'];
 
-// Rollup plugin that aliases isBuffer.ts to isBuffer.browser.ts,
-// so the output contains no bare `Buffer` references and bundlers
-// like webpack/Next.js won't inject a ~28KB Buffer polyfill.
-const browserIsBufferAlias = {
-  name: 'browser-isBuffer-alias',
-  resolveId(source) {
-    if (source.endsWith('/isBuffer.ts') && !source.endsWith('/isBuffer.browser.ts')) {
-      return join(__dirname, 'src/predicate/isBuffer.browser.ts');
-    }
-    return null;
-  },
-};
-
 export default () => {
   clearDir('dist');
 
@@ -62,7 +49,6 @@ export default () => {
       entrypoints,
       outDir: 'dist/browser',
       sourcemap: false,
-      plugins: [browserIsBufferAlias],
     }),
     declarationOptions({
       entrypoints,
@@ -127,7 +113,6 @@ function browserBuildConfig({ inputFile, outFile, name, sourcemap }) {
   return {
     input: inputFile,
     plugins: [
-      browserIsBufferAlias,
       tsPlugin({
         exclude: [...testPatterns],
         compilerOptions: {
