@@ -60,7 +60,6 @@ export default () => {
  *   extension: 'js' | 'cjs' | 'mjs';
  *   outDir: string;
  *   sourcemap: boolean;
- *   plugins?: import('rollup').Plugin[];
  * }) => import('rollup').RollupOptions}
  */
 function libBuildOptions({ entrypoints, extension, format, outDir, sourcemap }) {
