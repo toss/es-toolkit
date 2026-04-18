@@ -245,7 +245,12 @@ export function partial<T1, T2, T3, R>(
  * const sumAll = partial(sum, 1, 2, 3);
  * console.log(sumAll()); // => 6
  */
-export function partial<T1, T2, T3, R>(func: (arg1: T1, arg2: T2, arg3: T3) => R, arg1: T1, arg2: T2, arg3: T3): () => R;
+export function partial<T1, T2, T3, R>(
+  func: (arg1: T1, arg2: T2, arg3: T3) => R,
+  arg1: T1,
+  arg2: T2,
+  arg3: T3
+): () => R;
 
 /**
  * Creates a function that invokes `func` with `partialArgs` prepended to the arguments it receives. This method is like `bind` except it does not alter the `this` binding.
