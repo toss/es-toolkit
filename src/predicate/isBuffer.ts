@@ -1,9 +1,3 @@
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
-
 /**
  * Checks if the given value is a Buffer instance.
  *
@@ -23,7 +17,7 @@ declare let Buffer:
  * console.log(isBuffer(notBuffer)); // false
  */
 export function isBuffer(x: unknown): boolean {
-  // eslint-disable-next-line
-  // @ts-ignore
-  return typeof Buffer !== 'undefined' && Buffer.isBuffer(x);
+  // Access Buffer via globalThis so webpack/turbopack don't inject a Buffer polyfill into the browser bundle.
+  const B = (globalThis as { Buffer?: { isBuffer(a: any): boolean } }).Buffer;
+  return B != null && B.isBuffer(x);
 }

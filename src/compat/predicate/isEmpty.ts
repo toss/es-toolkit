@@ -4,12 +4,6 @@ import { isTypedArray } from './isTypedArray.ts';
 import type { EmptyObjectOf } from '../_internal/EmptyObjectOf.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
 
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
-
 export function isEmpty<T extends { __trapAny: any }>(value?: T): boolean;
 export function isEmpty(value: string): value is '';
 export function isEmpty(value: Map<any, any> | Set<any> | ArrayLike<any> | null | undefined): boolean;
@@ -50,10 +44,12 @@ export function isEmpty(value?: unknown): boolean {
 
   // Objects like { "length": 0 } are not empty in lodash
   if (isArrayLike(value)) {
+    // Access Buffer via globalThis so webpack/turbopack don't inject a Buffer polyfill into the browser bundle.
+    const B = (globalThis as { Buffer?: { isBuffer(a: any): boolean } }).Buffer;
     if (
       typeof (value as any).splice !== 'function' &&
       typeof value !== 'string' &&
-      (typeof Buffer === 'undefined' || !Buffer.isBuffer(value)) &&
+      (B == null || !B.isBuffer(value)) &&
       !isTypedArray(value) &&
       !isArguments(value)
     ) {

@@ -9,12 +9,6 @@ import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
-
 type MergeWithCustomizer = (objValue: any, srcValue: any, key: string, object: any, source: any, stack: any) => any;
 
 /**
@@ -288,7 +282,9 @@ function mergeWithDeep(
       targetValue = { ...targetValue };
     }
 
-    if (typeof Buffer !== 'undefined' && Buffer.isBuffer(sourceValue)) {
+    // Access Buffer via globalThis so webpack/turbopack don't inject a Buffer polyfill into the browser bundle.
+    const B = (globalThis as { Buffer?: { isBuffer(a: any): boolean } }).Buffer;
+    if (B != null && B.isBuffer(sourceValue)) {
       sourceValue = cloneDeep(sourceValue);
     }
 

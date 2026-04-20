@@ -31,12 +31,6 @@ import {
 } from '../compat/_internal/tags.ts';
 import { eq } from '../compat/util/eq.ts';
 
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
-
 /**
  * Compares two values for equality using a custom comparison function.
  *
@@ -255,7 +249,9 @@ function areObjectsEqual(
       case float32ArrayTag:
       case float64ArrayTag: {
         // Buffers are also treated as [object Uint8Array]s.
-        if (typeof Buffer !== 'undefined' && Buffer.isBuffer(a) !== Buffer.isBuffer(b)) {
+        // Access Buffer via globalThis so webpack/turbopack don't inject a Buffer polyfill into the browser bundle.
+        const B = (globalThis as { Buffer?: { isBuffer(a: any): boolean } }).Buffer;
+        if (B != null && B.isBuffer(a) !== B.isBuffer(b)) {
           return false;
         }
 

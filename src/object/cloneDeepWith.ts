@@ -152,12 +152,10 @@ export function cloneDeepWithImpl<T>(
     return result as T;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (typeof Buffer !== 'undefined' && Buffer.isBuffer(valueToClone)) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return valueToClone.subarray() as T;
+  // Access Buffer via globalThis so webpack/turbopack don't inject a Buffer polyfill into the browser bundle.
+  const B = (globalThis as { Buffer?: { isBuffer(a: any): boolean } }).Buffer;
+  if (B != null && B.isBuffer(valueToClone)) {
+    return (valueToClone as { subarray(): unknown }).subarray() as T;
   }
 
   if (isTypedArray(valueToClone)) {
