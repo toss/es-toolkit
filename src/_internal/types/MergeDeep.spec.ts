@@ -55,7 +55,7 @@ describe('MergeDeep', () => {
     type Source = { arr: string[] };
     type Result = MergeDeep<Target, Source>;
 
-    expectTypeOf<Result['arr']>().toEqualTypeOf<Array<string>>();
+    expectTypeOf<Result['arr']>().toEqualTypeOf<Array<number | string>>();
   });
 
   it('should merge tuple elements deeply', () => {

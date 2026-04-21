@@ -88,6 +88,6 @@ export namespace toMerged {
     target: T,
     source: S
   ): MergeDeep<T, S> {
-    return toMerged(target, source) as any;
+    return toMerged(target, source) as MergeDeep<T, S>;
   }
 }

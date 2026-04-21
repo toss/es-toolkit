@@ -100,6 +100,10 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
  * @param {(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any} merge - A custom merge function that defines how properties should be combined.
  * @returns {MergeDeep<T, S>} The updated target object with deeply merged types.
  *
+ * Note: The return type `MergeDeep<T, S>` assumes the default merge path
+ * (the customizer returns `undefined`). If the customizer returns a non-undefined value,
+ * the actual result type may differ.
+ *
  * @example
  * const target = { a: 1, b: 2 };
  * const source = { b: 3, c: 4 };
@@ -117,6 +121,6 @@ export namespace mergeWith {
     source: S,
     merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
   ): MergeDeep<T, S> {
-    return mergeWith(target, source, merge) as any;
+    return mergeWith(target, source, merge) as MergeDeep<T, S>;
   }
 }

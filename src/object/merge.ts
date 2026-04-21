@@ -92,7 +92,7 @@ export namespace merge {
     target: T,
     source: S
   ): MergeDeep<T, S> {
-    return merge(target, source) as any;
+    return merge(target, source) as MergeDeep<T, S>;
   }
 }
 

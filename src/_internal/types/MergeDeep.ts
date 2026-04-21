@@ -103,8 +103,8 @@ export type MergeDeep<T, S> =
               ? IsTuple<T> extends true
                 ? IsTuple<S> extends true
                   ? MergeArrays<T, S>
-                  : Array<MergeDeep<T[number], S[number]>>
-                : Array<MergeDeep<T[number], S[number]>>
+                  : Array<T[number] | MergeDeep<T[number], S[number]>>
+                : Array<T[number] | MergeDeep<T[number], S[number]>>
               : S extends object
                 ? T & S
                 : S
