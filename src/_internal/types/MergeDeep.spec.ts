@@ -58,6 +58,14 @@ describe('MergeDeep', () => {
     expectTypeOf<Result['arr']>().toEqualTypeOf<Array<number | string>>();
   });
 
+  it('should preserve source-only appended element types in non-tuple arrays', () => {
+    type Target = { arr: Array<{ a: number }> };
+    type Source = { arr: Array<{ b: string }> };
+    type Result = MergeDeep<Target, Source>;
+
+    expectTypeOf<Result['arr']>().toEqualTypeOf<Array<{ a: number } | { b: string } | { a: number; b: string }>>();
+  });
+
   it('should merge tuple elements deeply', () => {
     type Target = { arr: [{ a: number }] };
     type Source = { arr: [{ b: string }] };
@@ -165,34 +173,42 @@ describe('MergeDeep', () => {
 
   it('should handle string index signatures', () => {
     type Target = { [x: string]: number; a: 1 };
-    type Source = { [x: string]: string; b: '2' };
+    type Source = { [x: string]: string; a: '1'; b: '2' };
     type Result = MergeDeep<Target, Source>;
 
     expectTypeOf<Result>().toMatchTypeOf<{
-      [x: string]: number | string;
-      a: 1;
+      [x: string]: string;
+      a: '1';
       b: '2';
     }>();
     expectTypeOf<{
-      [x: string]: number | string;
-      a: 1;
+      [x: string]: string;
+      a: '1';
       b: '2';
     }>().toMatchTypeOf<Result>();
   });
 
+  it('should deeply merge string index signature values', () => {
+    type Target = Record<string, { a: number }>;
+    type Source = Record<string, { b: string }>;
+    type Result = MergeDeep<Target, Source>;
+
+    expectTypeOf<Result[string]>().toEqualTypeOf<{ a: number; b: string }>();
+  });
+
   it('should handle number index signatures', () => {
     type Target = { [x: number]: boolean; 0: true };
-    type Source = { [x: number]: string; 1: 'hello' };
+    type Source = { [x: number]: string; 0: 'true'; 1: 'hello' };
     type Result = MergeDeep<Target, Source>;
 
     expectTypeOf<Result>().toMatchTypeOf<{
-      [x: number]: boolean | string;
-      0: true;
+      [x: number]: string;
+      0: 'true';
       1: 'hello';
     }>();
     expectTypeOf<{
-      [x: number]: boolean | string;
-      0: true;
+      [x: number]: string;
+      0: 'true';
       1: 'hello';
     }>().toMatchTypeOf<Result>();
   });

@@ -3,11 +3,11 @@ type Simplify<T> = { [K in keyof T]: T[K] } & {};
 type BuiltIn =
   | Date
   | RegExp
-  | Map<any, any>
-  | Set<any>
-  | WeakMap<any, any>
-  | WeakSet<any>
-  | Promise<any>
+  | Map<unknown, unknown>
+  | Set<unknown>
+  | WeakMap<object, unknown>
+  | WeakSet<object>
+  | Promise<unknown>
   | Error
   | ArrayBuffer
   | DataView
@@ -22,7 +22,7 @@ type BuiltIn =
   | Float64Array
   | BigInt64Array
   | BigUint64Array
-  | ((...args: any[]) => any);
+  | ((...args: never[]) => unknown);
 
 // Index Signature helpers
 type PickIndexSignature<T> = {
@@ -35,13 +35,14 @@ type OmitIndexSignature<T> = {
 
 type GetStringIndex<T> = string extends keyof T ? T[string] : never;
 type GetNumberIndex<T> = number extends keyof T ? T[number] : never;
+type MergeIndexedValues<T, S> = [T] extends [never] ? S : [S] extends [never] ? T : MergeDeep<T, S>;
 
 type MergeIndexSignatures<T, S> = Simplify<
   (string extends keyof PickIndexSignature<T> | keyof PickIndexSignature<S>
-    ? { [x: string]: GetStringIndex<PickIndexSignature<T>> | GetStringIndex<PickIndexSignature<S>> }
+    ? { [x: string]: MergeIndexedValues<GetStringIndex<PickIndexSignature<T>>, GetStringIndex<PickIndexSignature<S>>> }
     : {}) &
   (number extends keyof PickIndexSignature<T> | keyof PickIndexSignature<S>
-    ? { [x: number]: GetNumberIndex<PickIndexSignature<T>> | GetNumberIndex<PickIndexSignature<S>> }
+    ? { [x: number]: MergeIndexedValues<GetNumberIndex<PickIndexSignature<T>>, GetNumberIndex<PickIndexSignature<S>>> }
     : {})
 >;
 
@@ -53,13 +54,18 @@ type RequiredKeys<T> = Exclude<keyof T, OptionalKeys<T>>;
 type Head<T> = T extends readonly [infer H, ...infer _] ? H : never;
 type Tail<T> = T extends readonly [infer _, ...infer Rest] ? Rest : never;
 
-type IsTuple<T> = T extends readonly any[]
+type IsTuple<T> = T extends readonly unknown[]
   ? number extends T['length']
     ? false
     : true
   : false;
 
-type MergeArrays<T extends readonly any[], S extends readonly any[]> = T extends []
+type MergeArrayElements<T extends readonly unknown[], S extends readonly unknown[]> =
+  | T[number]
+  | S[number]
+  | MergeDeep<T[number], S[number]>;
+
+type MergeArrays<T extends readonly unknown[], S extends readonly unknown[]> = T extends []
   ? S
   : S extends []
     ? T
@@ -98,13 +104,13 @@ export type MergeDeep<T, S> =
         ? S
         : T extends BuiltIn
           ? S
-          : T extends readonly any[]
-            ? S extends readonly any[]
+          : T extends readonly unknown[]
+            ? S extends readonly unknown[]
               ? IsTuple<T> extends true
                 ? IsTuple<S> extends true
                   ? MergeArrays<T, S>
-                  : Array<T[number] | MergeDeep<T[number], S[number]>>
-                : Array<T[number] | MergeDeep<T[number], S[number]>>
+                  : Array<MergeArrayElements<T, S>>
+                : Array<MergeArrayElements<T, S>>
               : S extends object
                 ? T & S
                 : S

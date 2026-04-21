@@ -1,6 +1,31 @@
+import { type MergeObject, type MergeRuntimeCustomizer, mergeWithInto } from '../_internal/mergeInternal.ts';
 import type { MergeDeep } from '../_internal/types/MergeDeep.ts';
-import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
-import { isPlainObject } from '../predicate/isPlainObject.ts';
+
+type MergeRecord = MergeObject;
+type Defined<T> = Exclude<T, undefined>;
+type MergeWithCustomizer<T extends MergeRecord, S extends MergeRecord, R = unknown> = (
+  targetValue: unknown,
+  sourceValue: unknown,
+  key: string,
+  target: T,
+  source: S
+) => R | undefined;
+
+type MergeWithDeepValue<T, R> = [Defined<R>] extends [never]
+  ? T
+  : T extends readonly unknown[]
+    ? Defined<R> | Array<MergeWithDeepValue<T[number], R>>
+    : T extends object
+      ? Defined<R> | { [K in keyof T]: MergeWithDeepValue<T[K], R> }
+      : Defined<R> | T;
+
+type MergeWithDeepResult<T, R> = [Defined<R>] extends [never]
+  ? T
+  : T extends readonly unknown[]
+    ? Array<MergeWithDeepValue<T[number], R>>
+    : T extends object
+      ? { [K in keyof T]: MergeWithDeepValue<T[K], R> }
+      : T;
 
 /**
  * Merges the properties of the source object into the target object.
@@ -16,7 +41,7 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
  *
  * @param {T} target - The target object into which the source object properties will be merged. This object is modified in place.
  * @param {S} source - The source object whose properties will be merged into the target object.
- * @param {(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any} merge - A custom merge function that defines how properties should be combined. It receives the following arguments:
+ * @param {MergeWithCustomizer<T, S, R>} merge - A custom merge function that defines how properties should be combined. It receives the following arguments:
  *   - `targetValue`: The current value of the property in the target object.
  *   - `sourceValue`: The value of the property in the source object.
  *   - `key`: The key of the property being merged.
@@ -27,6 +52,7 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
  *
  * @template T - Type of the target object.
  * @template S - Type of the source object.
+ * @template R - Type returned by the custom merge function when overriding a value.
  *
  * @example
  * const target = { a: 1, b: 2 };
@@ -50,45 +76,12 @@ import { isPlainObject } from '../predicate/isPlainObject.ts';
  *
  * expect(result).toEqual({ a: [1, 3], b: [2, 4] });
  */
-export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
+export function mergeWith<T extends MergeRecord, S extends MergeRecord, R = unknown>(
   target: T,
   source: S,
-  merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
+  merge: MergeWithCustomizer<T, S, R>
 ): T & S {
-  const sourceKeys = Object.keys(source) as Array<keyof T>;
-
-  for (let i = 0; i < sourceKeys.length; i++) {
-    const key = sourceKeys[i];
-
-    if (isUnsafeProperty(key)) {
-      continue;
-    }
-
-    const sourceValue = source[key];
-    const targetValue = target[key];
-
-    const merged = merge(targetValue, sourceValue, key as string, target, source);
-
-    if (merged !== undefined) {
-      target[key] = merged;
-    } else if (Array.isArray(sourceValue)) {
-      if (Array.isArray(targetValue)) {
-        target[key] = mergeWith<any, S[keyof T]>(targetValue, sourceValue, merge);
-      } else {
-        target[key] = mergeWith<any, S[keyof T]>([], sourceValue, merge);
-      }
-    } else if (isPlainObject(sourceValue)) {
-      if (isPlainObject(targetValue)) {
-        target[key] = mergeWith<any, S[keyof T]>(targetValue, sourceValue, merge);
-      } else {
-        target[key] = mergeWith<any, S[keyof T]>({}, sourceValue, merge);
-      }
-    } else if (targetValue === undefined || sourceValue !== undefined) {
-      target[key] = sourceValue;
-    }
-  }
-
-  return target;
+  return mergeWithInto(target, source, merge as MergeRuntimeCustomizer) as T & S;
 }
 
 /**
@@ -97,12 +90,11 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
  *
  * @param {T} target - The target object into which the source object properties will be merged.
  * @param {S} source - The source object whose properties will be merged into the target object.
- * @param {(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any} merge - A custom merge function that defines how properties should be combined.
- * @returns {MergeDeep<T, S>} The updated target object with deeply merged types.
+ * @param {MergeWithCustomizer<T, S, R>} merge - A custom merge function that defines how properties should be combined.
+ * @returns {MergeWithDeepResult<MergeDeep<T, S>, R>} The updated target object with deeply merged types.
  *
- * Note: The return type `MergeDeep<T, S>` assumes the default merge path
- * (the customizer returns `undefined`). If the customizer returns a non-undefined value,
- * the actual result type may differ.
+ * If the customizer returns a non-`undefined` value, the corresponding property type is widened
+ * to include that override value in addition to the default deep-merge result.
  *
  * @example
  * const target = { a: 1, b: 2 };
@@ -116,11 +108,11 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
  * // result type: { a: number; b: number; c: number }
  */
 export namespace mergeWith {
-  export function deep<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
+  export function deep<T extends MergeRecord, S extends MergeRecord, R = unknown>(
     target: T,
     source: S,
-    merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
-  ): MergeDeep<T, S> {
-    return mergeWith(target, source, merge) as MergeDeep<T, S>;
+    merge: MergeWithCustomizer<T, S, R>
+  ): MergeWithDeepResult<MergeDeep<T, S>, R> {
+    return mergeWith(target, source, merge) as MergeWithDeepResult<MergeDeep<T, S>, R>;
   }
 }

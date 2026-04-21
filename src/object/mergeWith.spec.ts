@@ -30,7 +30,16 @@ describe('mergeWith', () => {
     const source3 = { a: { x: 2, y: 3 }, b: [4] };
 
     const result3 = mergeWith(target3, source3, (objValue, srcValue) => {
-      if (objValue.x && srcValue.x) {
+      if (
+        typeof objValue === 'object' &&
+        objValue !== null &&
+        'x' in objValue &&
+        typeof srcValue === 'object' &&
+        srcValue !== null &&
+        'x' in srcValue &&
+        typeof objValue.x === 'number' &&
+        typeof srcValue.x === 'number'
+      ) {
         return objValue.x + srcValue.x;
       }
     });
@@ -126,8 +135,27 @@ describe('mergeWith', () => {
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
   });
 
+  it('should prefer the source container kind for nested mixed array and object values when the customizer falls back to the default merge', () => {
+    const nestedArray = mergeWith({ x: ['1'] }, { x: { a: 2 } }, () => undefined);
+    const nestedObject = mergeWith({ x: { a: 2 } }, { x: ['1'] }, () => undefined);
+    const sourceArray = ['1'];
+    const sourceObject = { a: 2 };
+
+    expect(nestedArray).toEqual({ x: sourceObject });
+    expect(nestedArray.x).not.toBe(sourceObject);
+
+    expect(nestedObject).toEqual({ x: sourceArray });
+    expect(Array.isArray(nestedObject.x)).toBe(true);
+    expect(nestedObject.x).not.toBe(sourceArray);
+  });
+
   it('should have correct types for mergeWith.deep', () => {
     const result = mergeWith.deep({ a: { x: 1 } }, { a: { y: '2' } }, () => undefined);
     expectTypeOf(result).toEqualTypeOf<{ a: { x: number; y: string } }>();
+  });
+
+  it('should widen mergeWith.deep property types when customizer can override values', () => {
+    const result = mergeWith.deep({ a: { x: 1 } }, { a: { y: '2' } }, () => true as const);
+    expectTypeOf(result).toEqualTypeOf<{ a: true | { x: true | number; y: true | string } }>();
   });
 });
