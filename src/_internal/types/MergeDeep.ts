@@ -67,7 +67,7 @@ type MergeArrays<T extends readonly any[], S extends readonly any[]> = T extends
 
 // Merge literal keys deeply
 type _MergeLiteralObjects<T, S> = Simplify<{
-  [K in (keyof T | keyof S) & (RequiredKeys<T> | RequiredKeys<S>)]: K extends keyof S
+  [K in RequiredKeys<T> | RequiredKeys<S>]: K extends keyof S
     ? K extends keyof T
       ? MergeDeep<T[K], S[K]>
       : S[K]
@@ -75,7 +75,7 @@ type _MergeLiteralObjects<T, S> = Simplify<{
       ? T[K]
       : never;
 } & {
-  [K in (keyof T | keyof S) as K extends RequiredKeys<T> | RequiredKeys<S> ? never : K]?: K extends keyof S
+  [K in OptionalKeys<T> | OptionalKeys<S>]?: K extends keyof S
     ? K extends keyof T
       ? MergeDeep<T[K], S[K]>
       : S[K]
