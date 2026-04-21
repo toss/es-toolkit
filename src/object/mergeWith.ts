@@ -1,9 +1,8 @@
-import { type MergeObject, type MergeRuntimeCustomizer, mergeWithInto } from '../_internal/mergeInternal.ts';
+import { type MergeInput, type MergeRuntimeCustomizer, mergeWithInto } from '../_internal/mergeInternal.ts';
 import type { MergeDeep } from '../_internal/types/MergeDeep.ts';
 
-type MergeRecord = MergeObject;
 type Defined<T> = Exclude<T, undefined>;
-type MergeWithCustomizer<T extends MergeRecord, S extends MergeRecord, R = unknown> = (
+type MergeWithCustomizer<T extends MergeInput, S extends MergeInput, R = unknown> = (
   targetValue: unknown,
   sourceValue: unknown,
   key: string,
@@ -76,7 +75,7 @@ type MergeWithDeepResult<T, R> = [Defined<R>] extends [never]
  *
  * expect(result).toEqual({ a: [1, 3], b: [2, 4] });
  */
-export function mergeWith<T extends MergeRecord, S extends MergeRecord, R = unknown>(
+export function mergeWith<T extends MergeInput, S extends MergeInput, R = unknown>(
   target: T,
   source: S,
   merge: MergeWithCustomizer<T, S, R>
@@ -108,7 +107,7 @@ export function mergeWith<T extends MergeRecord, S extends MergeRecord, R = unkn
  * // result type: { a: number; b: number; c: number }
  */
 export namespace mergeWith {
-  export function deep<T extends MergeRecord, S extends MergeRecord, R = unknown>(
+  export function deep<T extends MergeInput, S extends MergeInput, R = unknown>(
     target: T,
     source: S,
     merge: MergeWithCustomizer<T, S, R>

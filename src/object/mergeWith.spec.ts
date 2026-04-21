@@ -149,9 +149,26 @@ describe('mergeWith', () => {
     expect(nestedObject.x).not.toBe(sourceArray);
   });
 
+  it('should support top-level mixed array and object values', () => {
+    const topLevelArray = mergeWith(['1'], { a: 2 }, () => undefined);
+    const topLevelObject = mergeWith({ a: 2 }, ['1'], () => undefined);
+
+    expect(Array.isArray(topLevelArray)).toBe(true);
+    expect(topLevelArray[0]).toBe('1');
+    expect(topLevelArray.a).toBe(2);
+
+    expect(typeof topLevelObject).toBe('object');
+    expect(topLevelObject).toEqual({ a: 2, 0: '1' });
+  });
+
   it('should have correct types for mergeWith.deep', () => {
     const result = mergeWith.deep({ a: { x: 1 } }, { a: { y: '2' } }, () => undefined);
     expectTypeOf(result).toEqualTypeOf<{ a: { x: number; y: string } }>();
+  });
+
+  it('should have correct types for top-level array inputs', () => {
+    const result = mergeWith.deep([{ x: 1 }], [{ y: '2' }], () => undefined);
+    expectTypeOf(result).toEqualTypeOf<Array<{ x: number } | { y: string } | { x: number; y: string }>>();
   });
 
   it('should widen mergeWith.deep property types when customizer can override values', () => {
