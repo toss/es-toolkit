@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { toMerged } from './toMerged';
 
 describe('toMerged', () => {
@@ -182,5 +182,10 @@ describe('toMerged', () => {
 
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
     expect(target).toEqual({ a: { b: null, c: undefined, d: 'text' } });
+  });
+
+  it('should have correct types for toMerged.deep', () => {
+    const result = toMerged.deep({ a: { x: 1 } }, { a: { y: '2' } });
+    expectTypeOf(result).toEqualTypeOf<{ a: { x: number; y: string } }>();
   });
 });

@@ -1,3 +1,4 @@
+import type { MergeDeep } from '../_internal/types/MergeDeep.ts';
 import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
@@ -69,6 +70,30 @@ export function merge<T extends Record<PropertyKey, any>, S extends Record<Prope
   }
 
   return target;
+}
+
+/**
+ * Deeply merges the properties of the source object into the target object
+ * and returns a type-safe result with recursively merged types.
+ *
+ * @param {T} target - The target object into which the source object properties will be merged.
+ * @param {S} source - The source object whose properties will be merged into the target object.
+ * @returns {MergeDeep<T, S>} The updated target object with deeply merged types.
+ *
+ * @example
+ * const target = { a: 1, b: { x: 1, y: 2 } };
+ * const source = { b: { y: 3, z: 4 }, c: 5 };
+ *
+ * const result = merge.deep(target, source);
+ * // result type: { a: number; b: { x: number; y: number; z: number }; c: number }
+ */
+export namespace merge {
+  export function deep<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
+    target: T,
+    source: S
+  ): MergeDeep<T, S> {
+    return merge(target, source) as any;
+  }
 }
 
 function isMergeableValue(value: unknown) {

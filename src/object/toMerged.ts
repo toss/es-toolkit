@@ -1,3 +1,4 @@
+import type { MergeDeep } from '../_internal/types/MergeDeep.ts';
 import { clone } from './clone.ts';
 import { mergeWith } from './mergeWith.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
@@ -63,4 +64,30 @@ export function toMerged<T extends Record<PropertyKey, any>, S extends Record<Pr
       }
     }
   });
+}
+
+/**
+ * Deeply merges the properties of the source object into a deep clone of the target object
+ * and returns a type-safe result with recursively merged types.
+ * Unlike `merge.deep`, this function does not modify the original target object.
+ *
+ * @param {T} target - The target object to be cloned and merged into. This object is not modified directly.
+ * @param {S} source - The source object whose properties will be merged into the cloned target object.
+ * @returns {MergeDeep<T, S>} A new object with deeply merged types.
+ *
+ * @example
+ * const target = { a: 1, b: { x: 1, y: 2 } };
+ * const source = { b: { y: 3, z: 4 }, c: 5 };
+ *
+ * const result = toMerged.deep(target, source);
+ * // result type: { a: number; b: { x: number; y: number; z: number }; c: number }
+ * // target remains unchanged
+ */
+export namespace toMerged {
+  export function deep<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
+    target: T,
+    source: S
+  ): MergeDeep<T, S> {
+    return toMerged(target, source) as any;
+  }
 }

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { cloneDeep } from './cloneDeep';
 import { mergeWith } from './mergeWith';
 
@@ -124,5 +124,10 @@ describe('mergeWith', () => {
     const result = mergeWith(target, source, () => undefined);
 
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
+  });
+
+  it('should have correct types for mergeWith.deep', () => {
+    const result = mergeWith.deep({ a: { x: 1 } }, { a: { y: '2' } }, () => undefined);
+    expectTypeOf(result).toEqualTypeOf<{ a: { x: number; y: string } }>();
   });
 });

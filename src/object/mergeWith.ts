@@ -1,3 +1,4 @@
+import type { MergeDeep } from '../_internal/types/MergeDeep.ts';
 import { isUnsafeProperty } from '../_internal/isUnsafeProperty.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
@@ -88,4 +89,34 @@ export function mergeWith<T extends Record<PropertyKey, any>, S extends Record<P
   }
 
   return target;
+}
+
+/**
+ * Deeply merges the properties of the source object into the target object using a customizer function
+ * and returns a type-safe result with recursively merged types.
+ *
+ * @param {T} target - The target object into which the source object properties will be merged.
+ * @param {S} source - The source object whose properties will be merged into the target object.
+ * @param {(targetValue: any, sourceValue: any, key: string, target: T, source: S) => any} merge - A custom merge function that defines how properties should be combined.
+ * @returns {MergeDeep<T, S>} The updated target object with deeply merged types.
+ *
+ * @example
+ * const target = { a: 1, b: 2 };
+ * const source = { b: 3, c: 4 };
+ *
+ * const result = mergeWith.deep(target, source, (targetValue, sourceValue) => {
+ *   if (typeof targetValue === 'number' && typeof sourceValue === 'number') {
+ *     return targetValue + sourceValue;
+ *   }
+ * });
+ * // result type: { a: number; b: number; c: number }
+ */
+export namespace mergeWith {
+  export function deep<T extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>>(
+    target: T,
+    source: S,
+    merge: (targetValue: any, sourceValue: any, key: string, target: T, source: S) => any
+  ): MergeDeep<T, S> {
+    return mergeWith(target, source, merge) as any;
+  }
 }
