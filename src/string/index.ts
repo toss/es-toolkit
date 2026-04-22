@@ -1,3 +1,4 @@
+export { acronymize } from './acronymize.ts';
 export { camelCase } from './camelCase.ts';
 export { capitalize } from './capitalize.ts';
 export { constantCase } from './constantCase.ts';
