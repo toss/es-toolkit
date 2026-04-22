@@ -2,10 +2,12 @@ import { bench, describe } from 'vitest';
 import { groupBy as groupByToolkit_ } from 'es-toolkit';
 import { groupBy as groupByToolkitCompat_ } from 'es-toolkit/compat';
 import { groupBy as groupByLodash_ } from 'lodash';
+import { groupBy as groupByLodash_es } from 'lodash-es';
 
 const groupByToolkit = groupByToolkit_;
 const groupByToolkitCompat = groupByToolkitCompat_;
 const groupByLodash = groupByLodash_;
+const groupByLodashEs = groupByLodash_es;
 
 describe('groupBy', () => {
   bench('es-toolkit/groupBy', () => {
@@ -43,6 +45,18 @@ describe('groupBy', () => {
 
     groupByLodash(array, item => item.category);
   });
+
+  bench('lodash-es/groupBy', () => {
+    const array = [
+      { category: 'fruit', name: 'apple' },
+      { category: 'fruit', name: 'banana' },
+      { category: 'vegetable', name: 'carrot' },
+      { category: 'fruit', name: 'pear' },
+      { category: 'vegetable', name: 'broccoli' },
+    ];
+
+    groupByLodashEs(array, item => item.category);
+  });
 });
 
 describe('groupBy/largeArray', () => {
@@ -57,5 +71,9 @@ describe('groupBy/largeArray', () => {
 
   bench('lodash/groupBy', () => {
     groupByLodash(largeArray, item => item.category);
+  });
+
+  bench('lodash-es/groupBy', () => {
+    groupByLodashEs(largeArray, item => item.category);
   });
 });
