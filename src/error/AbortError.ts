@@ -1,5 +1,7 @@
 // Falls back to `Error` on runtimes without `DOMException` (e.g. Hermes / React Native).
-const AbortErrorBase: { new (message?: string): Error } = typeof DOMException !== 'undefined' ? DOMException : Error;
+// Type stays `typeof DOMException` so the emitted `.d.ts` keeps `AbortError extends DOMException`.
+const AbortErrorBase: typeof DOMException =
+  typeof DOMException !== 'undefined' ? DOMException : (Error as unknown as typeof DOMException);
 
 /**
  * An error class representing an aborted operation.
