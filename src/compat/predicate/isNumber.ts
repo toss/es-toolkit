@@ -1,3 +1,7 @@
+import { isObjectLike } from './isObjectLike.ts';
+import { getTag } from '../_internal/getTag.ts';
+import { numberTag } from '../_internal/tags.ts';
+
 /**
  * Checks if a given value is a number.
  *
@@ -16,5 +20,5 @@
  * console.log(isNumber(value3)); // false
  */
 export function isNumber(value?: any): value is number {
-  return typeof value === 'number' || value instanceof Number;
+  return typeof value === 'number' || (isObjectLike(value) && getTag(value) === numberTag);
 }
