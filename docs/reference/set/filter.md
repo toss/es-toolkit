@@ -52,7 +52,7 @@ const availableProducts = filter(products, product => product.available);
 #### Parameters
 
 - `set` (`Set<T>`): The Set to filter.
-- `callback` (`(value: T, value2: T, set: Set<T>) => boolean`): A predicate function that tests each element.
+- `callback` (`(value: T, set: Set<T>) => boolean`): A predicate function that tests each element.
 
 #### Returns
 

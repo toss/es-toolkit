@@ -7,7 +7,7 @@
  * @template T - The type of elements in the input Set.
  * @template U - The type of elements in the output Set.
  * @param {Set<T>} set - The Set to transform.
- * @param {(value: T, value2: T, set: Set<T>) => U} getNewValue - A function that generates a new value from an element.
+ * @param {(value: T, set: Set<T>) => U} getNewValue - A function that generates a new value from an element.
  * @returns {Set<U>} A new Set with transformed elements.
  *
  * @example
@@ -16,11 +16,11 @@
  * // result will be:
  * // Set(3) { 2, 4, 6 }
  */
-export function map<T, U>(set: Set<T>, getNewValue: (value: T, value2: T, set: Set<T>) => U): Set<U> {
+export function map<T, U>(set: Set<T>, getNewValue: (value: T, set: Set<T>) => U): Set<U> {
   const result = new Set<U>();
 
   for (const value of set) {
-    const newValue = getNewValue(value, value, set);
+    const newValue = getNewValue(value, set);
     result.add(newValue);
   }
 

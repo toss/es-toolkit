@@ -9,7 +9,7 @@
  * @template T - The type of elements in the Set.
  * @template K - The type of keys to produce in the returned Map.
  * @param {Set<T>} set - The set of elements to be mapped.
- * @param {(value: T, value2: T, set: Set<T>) => K} getKeyFromValue - A function that generates a key from a value.
+ * @param {(value: T, set: Set<T>) => K} getKeyFromValue - A function that generates a key from a value.
  * @returns {Map<K, T>} A Map where the generated keys are mapped to each element's value.
  *
  * @example
@@ -25,11 +25,11 @@
  * //   'vegetable' => { type: 'vegetable', name: 'carrot' }
  * // }
  */
-export function keyBy<T, K>(set: Set<T>, getKeyFromValue: (value: T, value2: T, set: Set<T>) => K): Map<K, T> {
+export function keyBy<T, K>(set: Set<T>, getKeyFromValue: (value: T, set: Set<T>) => K): Map<K, T> {
   const result = new Map<K, T>();
 
   for (const value of set) {
-    const newKey = getKeyFromValue(value, value, set);
+    const newKey = getKeyFromValue(value, set);
     result.set(newKey, value);
   }
 

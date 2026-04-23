@@ -23,7 +23,7 @@ describe('every', () => {
   it('should pass the set to the predicate function', () => {
     const set = new Set([1, 2, 3]);
 
-    expect(every(set, (value, value2, originalSet) => originalSet.has(value) && value > 0)).toBe(true);
+    expect(every(set, (value, originalSet) => originalSet.has(value) && value > 0)).toBe(true);
   });
 
   it('should return false immediately when predicate returns false', () => {

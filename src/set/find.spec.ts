@@ -50,7 +50,7 @@ describe('find', () => {
       { age: 40, active: false },
     ]);
 
-    expect(find(set, (value, value2, originalSet) => value.active && originalSet.has(value))).toEqual({
+    expect(find(set, (value, originalSet) => value.active && originalSet.has(value))).toEqual({
       age: 36,
       active: true,
     });
