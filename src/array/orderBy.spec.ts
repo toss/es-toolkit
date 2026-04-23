@@ -60,4 +60,49 @@ describe('orderBy', () => {
       { user: 'fred', age: 48 },
     ]);
   });
+
+  it('should order strings in ascending order', () => {
+    const strings = ['banana', 'apple', 'cherry'];
+    expect(orderBy(strings, [x => x], ['asc'])).toEqual(['apple', 'banana', 'cherry']);
+  });
+
+  it('should order strings in descending order', () => {
+    const strings = ['banana', 'apple', 'cherry'];
+    expect(orderBy(strings, [x => x], ['desc'])).toEqual(['cherry', 'banana', 'apple']);
+  });
+
+  it('should order numbers', () => {
+    const numbers = [3, 1, 4, 1, 5];
+    expect(orderBy(numbers, [x => x], ['desc'])).toEqual([5, 4, 3, 1, 1]);
+  });
+
+  it('should order strings by multiple criteria', () => {
+    const strings = ['apple', 'banana', 'cherry'];
+    expect(orderBy(strings, [x => x.length, x => x], ['asc', 'desc'])).toEqual(['apple', 'cherry', 'banana']);
+  });
+
+  it('should order strings without criteria in ascending order', () => {
+    const strings = ['banana', 'apple', 'cherry'];
+    expect(orderBy(strings, [], ['asc'])).toEqual(['apple', 'banana', 'cherry']);
+  });
+
+  it('should order strings without criteria in descending order', () => {
+    const strings = ['banana', 'apple', 'cherry'];
+    expect(orderBy(strings, [], ['desc'])).toEqual(['cherry', 'banana', 'apple']);
+  });
+
+  it('should order numbers without criteria', () => {
+    const numbers = [3, 1, 4, 1, 5];
+    expect(orderBy(numbers, [], ['desc'])).toEqual([5, 4, 3, 1, 1]);
+  });
+
+  it('should order primitives with default parameters', () => {
+    const numbers = [3, 1, 4, 1, 5];
+    expect(orderBy(numbers)).toEqual([1, 1, 3, 4, 5]);
+  });
+
+  it('should order strings with only order specified', () => {
+    const strings = ['banana', 'apple', 'cherry'];
+    expect(orderBy(strings, [], ['desc'])).toEqual(['cherry', 'banana', 'apple']);
+  });
 });
