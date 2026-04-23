@@ -1,5 +1,15 @@
+export { asCallback, nodeify, type AsCallbackOptions, type NodeStyleCallback } from './asCallback.ts';
+export { asCallbackAll, type AsCallbackAllOptions } from './asCallbackAll.ts';
+export { callbackify, type CallbackifyOptions, type NodeCallback } from './callbackify.ts';
+export { callbackifyAll, type CallbackifyAllOptions } from './callbackifyAll.ts';
 export { delay } from './delay.ts';
+export { fromCallback } from './fromCallback.ts';
+export { fromCallbackAll, type FromCallbackAllOptions } from './fromCallbackAll.ts';
 export { Mutex } from './mutex.ts';
+export { promisify, type Callback, type PromisifyOptions } from './promisify.ts';
+export { promisifyAll, type PromisifyAllOptions } from './promisifyAll.ts';
 export { Semaphore } from './semaphore.ts';
 export { timeout } from './timeout.ts';
+export { withCallback, type DualModeFunction } from './withCallback.ts';
+export { withCallbackAll, type WithCallbackAllOptions } from './withCallbackAll.ts';
 export { withTimeout } from './withTimeout.ts';
