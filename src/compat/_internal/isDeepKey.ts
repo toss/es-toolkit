@@ -1,3 +1,6 @@
+/** Matches any deep property path. Examples: `a.b`, `a[0]`, `a["b"]` */
+const regexIsDeepProp = /\.|(\[(?:[^[\]]*|(["'])(?:(?!\2)[^\\]|\\.)*?\2)\])/;
+
 /**
  * Checks if a given key is a deep key.
  *
@@ -14,6 +17,14 @@
  * isDeepKey(123) // false
  * isDeepKey('a.b.c') // true
  * isDeepKey('a[b][c]') // true
+ * isDeepKey('a.') // false
+ * isDeepKey('.a') // false
+ * isDeepKey('a[b') // false
+ * isDeepKey('a]b]') // false
+ * isDeepKey('a][b') // false
+ * isDeepKey('') // false
+ * isDeepKey('a[0]') // true
+ *
  */
 export function isDeepKey(key: PropertyKey): boolean {
   switch (typeof key) {
@@ -22,7 +33,12 @@ export function isDeepKey(key: PropertyKey): boolean {
       return false;
     }
     case 'string': {
-      return key.includes('.') || key.includes('[') || key.includes(']');
+      if (key === '' || key.startsWith('.') || key.endsWith('.')) return false;
+
+      return regexIsDeepProp.test(key);
+    }
+    default: {
+      return false;
     }
   }
 }
