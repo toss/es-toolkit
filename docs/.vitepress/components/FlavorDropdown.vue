@@ -1,31 +1,14 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useData, useRouter } from 'vitepress';
-
-interface FlavorOption {
-  value: 'esToolkit' | 'compat';
-  label: string;
-  description: string;
-}
-
-const options: FlavorOption[] = [
-  { value: 'esToolkit', label: 'es-toolkit', description: 'Strict Utilities' },
-  { value: 'compat', label: 'es-toolkit/compat', description: 'Lodash compatibility' },
-];
+import { type FlavorSpec, detectFlavor, flavorIntroPath, flavors } from '../libs/flavors.mts';
 
 const { page, lang } = useData();
 const router = useRouter();
 
 const localePrefix = computed(() => (lang.value === 'en' ? '' : `/${lang.value}`));
 
-const currentFlavor = computed<FlavorOption>(() => {
-  const rel = page.value.relativePath;
-  const isCompat =
-    rel.includes('reference/compat/') ||
-    rel === 'compatibility.md' ||
-    rel.endsWith('/compatibility.md');
-  return isCompat ? options[1] : options[0];
-});
+const currentFlavor = computed(() => detectFlavor(page.value.relativePath));
 
 const open = ref(false);
 const root = ref<HTMLElement | null>(null);
@@ -34,14 +17,10 @@ function toggle() {
   open.value = !open.value;
 }
 
-function select(option: FlavorOption) {
+function select(option: FlavorSpec) {
   open.value = false;
   if (option.value === currentFlavor.value.value) return;
-  const target =
-    option.value === 'compat'
-      ? `${localePrefix.value}/compatibility`
-      : `${localePrefix.value}/intro`;
-  router.go(target);
+  router.go(flavorIntroPath(option, localePrefix.value));
 }
 
 function onDocumentPointerDown(event: PointerEvent) {
@@ -77,6 +56,11 @@ onBeforeUnmount(() => {
       aria-haspopup="listbox"
       @click="toggle"
     >
+      <span class="flavor-dropdown__icon-tile" :style="{ '--flavor-color': currentFlavor.iconColor }">
+        <svg class="flavor-dropdown__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path v-for="(d, i) in currentFlavor.icon" :key="i" :d="d" />
+        </svg>
+      </span>
       <span class="flavor-dropdown__text">
         <span class="flavor-dropdown__title">{{ currentFlavor.label }}</span>
         <span class="flavor-dropdown__desc">{{ currentFlavor.description }}</span>
@@ -89,20 +73,25 @@ onBeforeUnmount(() => {
 
     <div v-if="open" class="flavor-dropdown__panel" role="listbox">
       <button
-        v-for="option in options"
+        v-for="option in flavors"
         :key="option.value"
         type="button"
         role="option"
-        :aria-selected="option.value === currentFlavor.value.value"
+        :aria-selected="option.value === currentFlavor.value"
         class="flavor-dropdown__option"
         @click="select(option)"
       >
+        <span class="flavor-dropdown__icon-tile" :style="{ '--flavor-color': option.iconColor }">
+          <svg class="flavor-dropdown__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path v-for="(d, i) in option.icon" :key="i" :d="d" />
+          </svg>
+        </span>
         <span class="flavor-dropdown__text">
           <span class="flavor-dropdown__title">{{ option.label }}</span>
           <span class="flavor-dropdown__desc">{{ option.description }}</span>
         </span>
         <svg
-          v-if="option.value === currentFlavor.value.value"
+          v-if="option.value === currentFlavor.value"
           class="flavor-dropdown__check"
           aria-hidden="true"
           viewBox="0 0 24 24"
@@ -147,6 +136,25 @@ onBeforeUnmount(() => {
 .flavor-dropdown__trigger:hover,
 .flavor-dropdown__trigger[aria-expanded='true'] {
   background: var(--vp-c-default-soft, var(--vp-c-bg-elv));
+}
+
+.flavor-dropdown__icon-tile {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--flavor-color) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--flavor-color) 25%, transparent);
+  color: var(--flavor-color);
+}
+
+.flavor-dropdown__icon {
+  width: 100%;
+  height: 100%;
 }
 
 .flavor-dropdown__text {

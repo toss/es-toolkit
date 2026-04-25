@@ -1,9 +1,28 @@
-import path from 'node:path';
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { getSidebarItems } from './libs/getSidebarItems.mts';
-import { sortByText } from './libs/sortByText.mts';
+import { buildFlavorSidebar, type SidebarLabels } from './libs/buildFlavorSidebar.mts';
 
-const docsRoot = path.resolve(import.meta.dirname, '..');
+const labels: SidebarLabels = {
+  guide: '가이드',
+  reference: '레퍼런스',
+  introduction: '소개',
+  installation: '설치 및 사용 방법',
+  bundleSize: '번들 사이즈',
+  performance: '성능',
+  aiIntegration: 'AI 활용',
+  categories: {
+    array: '배열',
+    function: '함수',
+    map: 'Map',
+    math: '숫자',
+    object: '객체',
+    predicate: '타입 가드',
+    promise: 'Promise',
+    set: 'Set',
+    string: '문자열',
+    util: '유틸리티',
+    error: '에러',
+  },
+};
 
 export const ko = defineConfig({
   lang: 'ko',
@@ -14,7 +33,7 @@ export const ko = defineConfig({
 
     nav: nav(),
 
-    sidebar: sidebar(),
+    sidebar: buildFlavorSidebar('ko', labels),
 
     editLink: {
       pattern: 'https://github.com/toss/es-toolkit/edit/main/docs/:path',
@@ -33,138 +52,8 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '홈', link: '/ko' },
     { text: '소개', link: '/ko/intro' },
     { text: '레퍼런스', link: '/ko/reference/array/at' },
-    { text: 'Lodash 호환성', link: '/ko/reference/compat/array/castArray' },
+    { text: 'Lodash 호환성', link: '/ko/compat/intro' },
   ];
-}
-
-function sidebar(): DefaultTheme.Sidebar {
-  const guideStrict = {
-    text: '가이드',
-    items: [
-      { text: '소개', link: '/ko/intro' },
-      { text: '설치 및 사용 방법', link: '/ko/usage' },
-      { text: '번들 사이즈', link: '/ko/bundle-size' },
-      { text: '성능', link: '/ko/performance' },
-      { text: 'AI 활용', link: '/ko/ai-integration' },
-    ],
-  };
-
-  const referenceStrict = {
-    text: '레퍼런스',
-    items: sortByText([
-      {
-        text: '배열',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'array'),
-      },
-      {
-        text: '함수',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'function'),
-      },
-      {
-        text: 'Map',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'map'),
-      },
-      {
-        text: '숫자',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'math'),
-      },
-      {
-        text: '객체',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'object'),
-      },
-      {
-        text: '타입 가드',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'predicate'),
-      },
-      {
-        text: 'Promise',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'promise'),
-      },
-      {
-        text: 'Set',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'set'),
-      },
-      {
-        text: '문자열',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'string'),
-      },
-      {
-        text: '유틸리티',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'util'),
-      },
-      {
-        text: '에러',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'error'),
-      },
-    ]),
-  };
-
-  const guideCompat = {
-    text: '가이드',
-    items: [{ text: '소개', link: '/ko/compatibility' }],
-  };
-
-  const referenceCompat = {
-    text: '레퍼런스',
-    items: sortByText([
-      {
-        text: '배열',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'array'),
-      },
-      {
-        text: '함수',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'function'),
-      },
-      {
-        text: '숫자',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'math'),
-      },
-      {
-        text: '객체',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'object'),
-      },
-      {
-        text: '타입 가드',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'predicate'),
-      },
-      {
-        text: '문자열',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'string'),
-      },
-      {
-        text: '유틸리티',
-        collapsed: true,
-        items: getSidebarItems(docsRoot, 'ko', 'reference', 'compat', 'util'),
-      },
-    ]),
-  };
-
-  const strictTree = [guideStrict, referenceStrict];
-  const compatTree = [guideCompat, referenceCompat];
-
-  return {
-    '/ko/reference/compat/': compatTree,
-    '/ko/reference/': strictTree,
-    '/ko/compatibility': compatTree,
-    '/ko/': strictTree,
-  };
 }
 
 export const search: DefaultTheme.LocalSearchOptions['locales'] = {
