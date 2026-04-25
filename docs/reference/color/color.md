@@ -105,3 +105,11 @@ import { red } from 'es-toolkit/color';
 red(String(42)); // '42'
 red(JSON.stringify({ a: 1 }));
 ```
+
+## Notes
+
+### No environment-based color detection
+
+Color utilities typically inspect environment variables like `NO_COLOR`, `FORCE_COLOR`, or `isTTY` and conditionally drop ANSI escape codes from the output. We treat those scenarios as edge cases and chose not to add automatic detection — supporting it would introduce module-load-time side effects (env reads, terminal capability probes) and a growing branch in every color function.
+
+For non-display destinations (e.g. writing to a log file), strip the ANSI codes from the final string instead. A standalone `stripAnsi` utility is planned. If you need it sooner, please open an issue and we'll move quickly.
