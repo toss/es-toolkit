@@ -1,31 +1,35 @@
-# Compatibility with Lodash
+# es-toolkit/compat
 
-::: tip ✅ Starting with version 1.39.3, we ensure 100% compatibility with Lodash
+`es-toolkit/compat` mirrors [Lodash](https://lodash.com)'s interface and behavior 1:1. It exists so you can lift an existing Lodash codebase into `es-toolkit` without rewriting call sites, and migrate to the strict API at your own pace.
 
-`es-toolkit/compat` functions exactly like all Lodash functions while being lighter and faster.
+If your project does not already use Lodash, please use [`es-toolkit`](/intro) instead.
 
-- It ensures identical behavior with Lodash's actual test code.
-- It has been adopted by popular open-source projects including Storybook, Recharts, and CKEditor, and is recommended by Nuxt.
-
-For detailed documentation of all available compat functions, check out our [Compat Reference](/reference/compat/array/castArray).
-
+::: tip ✅ 100% compatibility since v1.39.3
+`es-toolkit/compat` passes Lodash's own test suite, so behavior is identical while staying lighter and faster.
 :::
 
-```tsx
-// es-toolkit/compat aims to provide 100% feature parity with lodash
+```ts
+// Same call signature as lodash, but coming from es-toolkit/compat
 import { chunk } from 'es-toolkit/compat';
 
 chunk([1, 2, 3, 4], 0);
-// Returns [], which is identical to lodash
+// Returns [], identical to lodash
 ```
 
-For maximum compatibility with `lodash`, use `es-toolkit/compat`, a compatibility layer that bridges the gap between the two libraries.
+## Migration flow
 
-This module is designed to provide an identical API to `lodash`, making it easier to switch between the two libraries.
+Recommended path for removing Lodash from an existing codebase:
 
-`es-toolkit/compat` has been thoroughly tested with real test cases from `lodash`.
+1. Swap the import path from `lodash` / `lodash-es` to `es-toolkit/compat`. Leave call sites as they are.
+2. Clean up call sites over time and switch the import to [`es-toolkit`](/intro). Once done, you get a smaller bundle and faster runtime.
 
-It's important to note that `es-toolkit/compat` may have a slight performance impact and a larger bundle size compared to the original `es-toolkit`. This module is designed to facilitate a smooth transition and should be replaced with the original `es-toolkit` for optimal performance once the migration is complete.
+## How it differs from `es-toolkit`
+
+- **API shape**: matches Lodash 1:1, including implicit type coercions, multiple argument shapes, and deprecated helpers. [`es-toolkit`](/intro) only exposes the type-safe, modern forms.
+- **Bundle size and speed**: slightly larger and slightly slower than [`es-toolkit`](/intro), because it carries extra logic to match Lodash's behavior.
+- **Deprecated functions**: kept in `compat` for parity, not in [`es-toolkit`](/intro). Clean them up during migration.
+
+For function-level documentation, see the [Compat Reference](/compat/reference/array/castArray).
 
 ## Design Principles
 

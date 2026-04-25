@@ -29,7 +29,7 @@ features:
     details: 同等の機能を持つ関数を基準に、最大97%小さなJavaScriptサイズを実現しています。
   - title: 簡単なLodashの代替
     details: es-toolkitはLodashを簡単に代替できる完全な互換性レイヤーを提供します。
-    link: /ja/compatibility
+    link: /ja/compat/intro
   - title: モダンな実装
     details: 最新のJavaScript APIを使用しているため、実装が直感的でシンプルです。
   - title: 堅牢な型定義

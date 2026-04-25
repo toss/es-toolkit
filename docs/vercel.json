@@ -4,5 +4,19 @@
     "deploymentEnabled": {
       "main": false
     }
-  }
+  },
+  "redirects": [
+    { "source": "/compatibility", "destination": "/compat/intro", "permanent": false },
+    { "source": "/ko/compatibility", "destination": "/ko/compat/intro", "permanent": false },
+    { "source": "/ja/compatibility", "destination": "/ja/compat/intro", "permanent": false },
+    { "source": "/zh_hans/compatibility", "destination": "/zh_hans/compat/intro", "permanent": false },
+    { "source": "/reference/compat/:path*", "destination": "/compat/reference/:path*", "permanent": false },
+    { "source": "/ko/reference/compat/:path*", "destination": "/ko/compat/reference/:path*", "permanent": false },
+    { "source": "/ja/reference/compat/:path*", "destination": "/ja/compat/reference/:path*", "permanent": false },
+    {
+      "source": "/zh_hans/reference/compat/:path*",
+      "destination": "/zh_hans/compat/reference/:path*",
+      "permanent": false
+    }
+  ]
 }
