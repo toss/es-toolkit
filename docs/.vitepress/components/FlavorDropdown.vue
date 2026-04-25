@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useData, useRouter } from 'vitepress';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { useData, useRouter } from 'vitepress';
 import { detectFlavor, flavorIntroPath, flavors, type FlavorSpec } from '../libs/flavors.mts';
+import FlavorOptionRow from './FlavorOptionRow.vue';
 
 const { page, lang } = useData();
 const router = useRouter();
 
 const localePrefix = computed(() => (lang.value === 'en' ? '' : `/${lang.value}`));
-
-const currentFlavor = computed(() => detectFlavor(page.value.relativePath));
+const currentFlavor = computed(() => detectFlavor({ relativePath: page.value.relativePath }));
 
 const open = ref(false);
 const root = ref<HTMLElement | null>(null);
@@ -20,7 +20,7 @@ function toggle() {
 function select(option: FlavorSpec) {
   open.value = false;
   if (option.value === currentFlavor.value.value) return;
-  router.go(flavorIntroPath(option, localePrefix.value));
+  router.go(flavorIntroPath({ flavor: option, localePrefix: localePrefix.value }));
 }
 
 function onDocumentPointerDown(event: PointerEvent) {
@@ -56,24 +56,7 @@ onBeforeUnmount(() => {
       aria-haspopup="listbox"
       @click="toggle"
     >
-      <span class="flavor-dropdown__icon-tile" :style="{ '--flavor-color': currentFlavor.iconColor }">
-        <svg
-          class="flavor-dropdown__icon"
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path v-for="(d, i) in currentFlavor.icon" :key="i" :d="d" />
-        </svg>
-      </span>
-      <span class="flavor-dropdown__text">
-        <span class="flavor-dropdown__title">{{ currentFlavor.label }}</span>
-        <span class="flavor-dropdown__desc">{{ currentFlavor.description }}</span>
-      </span>
+      <FlavorOptionRow :flavor="currentFlavor" />
       <svg
         class="flavor-dropdown__chevron"
         aria-hidden="true"
@@ -99,24 +82,7 @@ onBeforeUnmount(() => {
         class="flavor-dropdown__option"
         @click="select(option)"
       >
-        <span class="flavor-dropdown__icon-tile" :style="{ '--flavor-color': option.iconColor }">
-          <svg
-            class="flavor-dropdown__icon"
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path v-for="(d, i) in option.icon" :key="i" :d="d" />
-          </svg>
-        </span>
-        <span class="flavor-dropdown__text">
-          <span class="flavor-dropdown__title">{{ option.label }}</span>
-          <span class="flavor-dropdown__desc">{{ option.description }}</span>
-        </span>
+        <FlavorOptionRow :flavor="option" />
         <svg
           v-if="option.value === currentFlavor.value"
           class="flavor-dropdown__check"
@@ -163,52 +129,6 @@ onBeforeUnmount(() => {
 .flavor-dropdown__trigger:hover,
 .flavor-dropdown__trigger[aria-expanded='true'] {
   background: var(--vp-c-default-soft, var(--vp-c-bg-elv));
-}
-
-.flavor-dropdown__icon-tile {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  padding: 5px;
-  border-radius: 6px;
-  background: color-mix(in srgb, var(--flavor-color) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--flavor-color) 25%, transparent);
-  color: var(--flavor-color);
-}
-
-.flavor-dropdown__icon {
-  width: 100%;
-  height: 100%;
-}
-
-.flavor-dropdown__text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  flex: 1;
-}
-
-.flavor-dropdown__title {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--vp-c-text-1);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.flavor-dropdown__desc {
-  font-size: 13px;
-  line-height: 1.3;
-  color: var(--vp-c-text-2);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 2px;
 }
 
 .flavor-dropdown__chevron {

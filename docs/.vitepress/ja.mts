@@ -4,11 +4,13 @@ import { buildFlavorSidebar, type SidebarLabels } from './libs/buildFlavorSideba
 const labels: SidebarLabels = {
   guide: 'ガイド',
   reference: 'リファレンス',
-  introduction: '紹介',
-  installation: 'インストールと使用方法',
-  bundleSize: 'バンドルサイズ',
-  performance: 'パフォーマンス',
-  aiIntegration: 'AI 連携',
+  guideItems: {
+    introduction: '紹介',
+    installation: 'インストールと使用方法',
+    bundleSize: 'バンドルサイズ',
+    performance: 'パフォーマンス',
+    aiIntegration: 'AI 連携',
+  },
   categories: {
     array: '配列',
     function: '関数',
@@ -33,7 +35,7 @@ export const ja = defineConfig({
 
     nav: nav(),
 
-    sidebar: buildFlavorSidebar('ja', labels),
+    sidebar: buildFlavorSidebar({ locale: 'ja', labels }),
 
     editLink: {
       pattern: 'https://github.com/toss/es-toolkit/edit/main/docs/:path',

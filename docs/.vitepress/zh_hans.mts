@@ -4,11 +4,13 @@ import { buildFlavorSidebar, type SidebarLabels } from './libs/buildFlavorSideba
 const labels: SidebarLabels = {
   guide: '指南',
   reference: '参考',
-  introduction: '简介',
-  installation: '安装和使用',
-  bundleSize: '包体积影响',
-  performance: '性能',
-  aiIntegration: 'AI 集成',
+  guideItems: {
+    introduction: '简介',
+    installation: '安装和使用',
+    bundleSize: '包体积影响',
+    performance: '性能',
+    aiIntegration: 'AI 集成',
+  },
   categories: {
     array: '数组工具',
     function: '函数工具',
@@ -34,7 +36,7 @@ export const zh_hans = defineConfig({
 
     nav: nav(),
 
-    sidebar: buildFlavorSidebar('zh_hans', labels),
+    sidebar: buildFlavorSidebar({ locale: 'zh_hans', labels }),
 
     editLink: {
       pattern: 'https://github.com/toss/es-toolkit/edit/main/docs/:path',

@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { type DefaultTheme } from 'vitepress';
-import { flavors, type FlavorSpec } from './flavors.mts';
+import { flavors } from './flavors.mts';
 import { getSidebarItems } from './getSidebarItems.mts';
 import { sortByText } from './sortByText.mts';
 
@@ -9,25 +9,25 @@ const docsRoot = path.resolve(import.meta.dirname, '..', '..');
 export interface SidebarLabels {
   guide: string;
   reference: string;
-  introduction: string;
-  installation: string;
-  bundleSize: string;
-  performance: string;
-  aiIntegration: string;
+  guideItems: Record<string, string>;
   categories: Record<string, string>;
 }
 
 /**
  * Build a route-keyed sidebar map for one locale.
  *
- * Each flavor (see flavors.mts) gets its own sub-tree keyed by its URL prefix:
- *   - `${localePrefix}/${flavor.prefix}/`  for non-default flavors
- *   - `${localePrefix}/`                   for the default (root) flavor
- *
- * Strict guide pages (Intro, Usage, ...) are listed for the default flavor only.
- * Other flavors get a single Introduction item pointing at their `intro` page.
+ * Each flavor in `flavors` gets its own sub-tree keyed by its URL prefix.
+ * Both Guide and Reference items are driven by the flavor's own spec, so
+ * adding a new flavor only requires updating `flavors.mts` and supplying
+ * the matching labels here.
  */
-export function buildFlavorSidebar(locale: string, labels: SidebarLabels): DefaultTheme.Sidebar {
+export function buildFlavorSidebar({
+  locale,
+  labels,
+}: {
+  locale: string;
+  labels: SidebarLabels;
+}): DefaultTheme.Sidebar {
   const localePrefix = locale ? `/${locale}` : '';
   const localeArgs = locale ? [locale] : [];
 
@@ -36,12 +36,14 @@ export function buildFlavorSidebar(locale: string, labels: SidebarLabels): Defau
   for (const flavor of flavors) {
     const flavorArgs = flavor.prefix ? [flavor.prefix] : [];
     const flavorPathPrefix = flavor.prefix ? `${localePrefix}/${flavor.prefix}` : localePrefix;
-    const routeKey = `${flavorPathPrefix}/`;
 
-    sidebar[routeKey] = [
+    sidebar[`${flavorPathPrefix}/`] = [
       {
         text: labels.guide,
-        items: buildGuideItems(flavor, localePrefix, flavorPathPrefix, labels),
+        items: flavor.guideItems.map(({ labelKey, slug }) => ({
+          text: labels.guideItems[labelKey] ?? labelKey,
+          link: `${flavorPathPrefix}/${slug}`,
+        })),
       },
       {
         text: labels.reference,
@@ -57,23 +59,4 @@ export function buildFlavorSidebar(locale: string, labels: SidebarLabels): Defau
   }
 
   return sidebar;
-}
-
-function buildGuideItems(
-  flavor: FlavorSpec,
-  localePrefix: string,
-  flavorPathPrefix: string,
-  labels: SidebarLabels
-): DefaultTheme.SidebarItem[] {
-  if (flavor.prefix) {
-    return [{ text: labels.introduction, link: `${flavorPathPrefix}/intro` }];
-  }
-
-  return [
-    { text: labels.introduction, link: `${localePrefix}/intro` },
-    { text: labels.installation, link: `${localePrefix}/usage` },
-    { text: labels.bundleSize, link: `${localePrefix}/bundle-size` },
-    { text: labels.performance, link: `${localePrefix}/performance` },
-    { text: labels.aiIntegration, link: `${localePrefix}/ai-integration` },
-  ];
 }
