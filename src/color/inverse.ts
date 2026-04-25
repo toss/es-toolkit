@@ -1,8 +1,7 @@
-import { makeColor } from './makeColor.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Color-inverted text.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to style.
  * @returns The styled text.
@@ -12,4 +11,6 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(inverse('hello'));
  */
-export const inverse = makeColor('\x1b[7m', '\x1b[27m');
+export function inverse(text: string): string {
+  return wrapAnsi('\x1b[7m', '\x1b[27m', text);
+}

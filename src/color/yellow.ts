@@ -1,8 +1,7 @@
-import { makeColor } from './makeColor.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Yellow foreground.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to style.
  * @returns The styled text.
@@ -12,4 +11,6 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(yellow('hello'));
  */
-export const yellow = makeColor('\x1b[33m', '\x1b[39m');
+export function yellow(text: string): string {
+  return wrapAnsi('\x1b[33m', '\x1b[39m', text);
+}

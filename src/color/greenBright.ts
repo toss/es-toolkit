@@ -1,8 +1,7 @@
-import { makeColor } from './makeColor.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Bright green foreground.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to style.
  * @returns The styled text.
@@ -12,4 +11,6 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(greenBright('hello'));
  */
-export const greenBright = makeColor('\x1b[92m', '\x1b[39m');
+export function greenBright(text: string): string {
+  return wrapAnsi('\x1b[92m', '\x1b[39m', text);
+}

@@ -1,9 +1,5 @@
-// @vitest-environment node
-import { describe, expect, it, vi } from 'vitest';
-
-vi.mock('./colorLevel.ts', () => ({ isColorSupported: true, colorLevel: 3 }));
-
-const { underline } = await import('./underline.ts');
+import { describe, expect, it } from 'vitest';
+import { underline } from './underline.ts';
 
 describe('underline', () => {
   it('wraps text with the expected ANSI codes', () => {

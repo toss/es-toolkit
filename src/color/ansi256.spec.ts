@@ -1,9 +1,5 @@
-// @vitest-environment node
-import { describe, expect, it, vi } from 'vitest';
-
-vi.mock('./colorLevel.ts', () => ({ isColorSupported: true, colorLevel: 3 }));
-
-const { ansi256 } = await import('./ansi256.ts');
+import { describe, expect, it } from 'vitest';
+import { ansi256 } from './ansi256.ts';
 
 describe('ansi256', () => {
   it('wraps text with 8-bit foreground ANSI codes', () => {

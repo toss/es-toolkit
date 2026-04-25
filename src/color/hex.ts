@@ -1,5 +1,5 @@
-import { makeColor } from './makeColor.ts';
-import { parseHex } from './parseHex.ts';
+import { parseHex } from './_internal/parseHex.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 import type { ColorFunction } from './types.ts';
 
 /**
@@ -16,5 +16,5 @@ import type { ColorFunction } from './types.ts';
  */
 export function hex(color: string): ColorFunction {
   const [r, g, b] = parseHex(color);
-  return makeColor(`\x1b[38;2;${r};${g};${b}m`, '\x1b[39m');
+  return text => wrapAnsi(`\x1b[38;2;${r};${g};${b}m`, '\x1b[39m', text);
 }

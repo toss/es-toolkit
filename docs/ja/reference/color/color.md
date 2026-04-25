@@ -1,8 +1,8 @@
 # color
 
-ターミナルの色とスタイルを自動検出機能付きで提供します。
+ANSI エスケープコードでターミナルの色とスタイルを適用します。
 
-すべてのユーティリティは個別の named export として、また default export としてもバンドルされています。各関数は ANSI 色サポートの有無を自動判定し、サポートされない環境（non-TTY、`NO_COLOR=1`、パイプ、`FORCE_COLOR` なしの CI）では入力テキストをそのまま返します。
+すべてのユーティリティは個別の named export として、また default export としてもバンドルされています。色関数は常に ANSI エスケープコードを出力します。non-TTY 出力、ログファイル、ANSI 非対応環境などでコードを取り除きたい場合は、結果を `stripColor` で包んでください。
 
 ```typescript
 // 個別の named import（ツリーシェイキング可能）:
@@ -65,6 +65,16 @@ import { bold, red } from 'es-toolkit/color';
 
 bold(red('太字の赤いテキスト'));
 red(`状態: ${bold('重要')} — 確認してください`);
+```
+
+### 色コードの除去
+
+non-TTY 出力（ログファイル、パイプ、ANSI 非対応の CI）では、結果を `stripColor` で包んで ANSI エスケープコードを取り除けます。
+
+```typescript
+import { red, stripColor } from 'es-toolkit/color';
+
+stripColor(red('プレーンテキスト')); // 'プレーンテキスト'
 ```
 
 ### 拡張色

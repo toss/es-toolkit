@@ -1,8 +1,7 @@
-import { makeColor } from './makeColor.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Wraps text with ANSI codes for red foreground color.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to colorize.
  * @returns The text wrapped with red ANSI codes.
@@ -12,4 +11,6 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(red('error'));
  */
-export const red = makeColor('\x1b[31m', '\x1b[39m');
+export function red(text: string): string {
+  return wrapAnsi('\x1b[31m', '\x1b[39m', text);
+}

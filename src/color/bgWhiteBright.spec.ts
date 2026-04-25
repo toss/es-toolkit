@@ -1,9 +1,5 @@
-// @vitest-environment node
-import { describe, expect, it, vi } from 'vitest';
-
-vi.mock('./colorLevel.ts', () => ({ isColorSupported: true, colorLevel: 3 }));
-
-const { bgWhiteBright } = await import('./bgWhiteBright.ts');
+import { describe, expect, it } from 'vitest';
+import { bgWhiteBright } from './bgWhiteBright.ts';
 
 describe('bgWhiteBright', () => {
   it('wraps text with the expected ANSI codes', () => {

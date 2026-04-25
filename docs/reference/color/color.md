@@ -1,8 +1,8 @@
 # color
 
-Terminal colors and styles with automatic color-support detection.
+Terminal colors and styles via ANSI escape codes.
 
-Every utility is exposed as an individual named export **and** bundled in a default export. Each function auto-detects whether the terminal supports ANSI colors — on unsupported environments (non-TTY, `NO_COLOR=1`, pipes, CI without `FORCE_COLOR`), every call returns the input text unchanged.
+Every utility is exposed as an individual named export **and** bundled in a default export. Color functions always emit ANSI escape codes. To strip them — for non-TTY output, log files, or environments without ANSI support — wrap the result with `stripColor`.
 
 ```typescript
 // Individual named imports (tree-shakeable):
@@ -65,6 +65,16 @@ import { bold, red } from 'es-toolkit/color';
 
 bold(red('Bold red text'));
 red(`Status: ${bold('IMPORTANT')} — please review`);
+```
+
+### Stripping colors
+
+For non-TTY output (log files, pipes, CI without ANSI support), wrap the result with `stripColor` to remove all ANSI escape codes.
+
+```typescript
+import { red, stripColor } from 'es-toolkit/color';
+
+stripColor(red('plain')); // 'plain'
 ```
 
 ### Extended colors

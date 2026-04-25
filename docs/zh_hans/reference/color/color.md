@@ -1,8 +1,8 @@
 # color
 
-带自动颜色支持检测的终端颜色和样式。
+通过 ANSI 转义码为终端提供颜色和样式。
 
-每个工具都以独立的 named export 暴露，同时也打包在 default export 中。每个函数都会自动检测终端是否支持 ANSI 颜色 —— 在不支持的环境（non-TTY、`NO_COLOR=1`、管道、没有 `FORCE_COLOR` 的 CI）中，每次调用都会原样返回输入文本。
+每个工具都以独立的 named export 暴露，同时也打包在 default export 中。颜色函数始终输出 ANSI 转义码。如果需要去除这些代码 —— 例如 non-TTY 输出、日志文件，或不支持 ANSI 的环境 —— 请用 `stripColor` 包裹结果。
 
 ```typescript
 // 独立的 named import（可 tree-shaking）:
@@ -65,6 +65,16 @@ import { bold, red } from 'es-toolkit/color';
 
 bold(red('粗体红色文本'));
 red(`状态: ${bold('重要')} — 请查看`);
+```
+
+### 去除颜色
+
+对于 non-TTY 输出（日志文件、管道、不支持 ANSI 的 CI），用 `stripColor` 包裹结果即可移除所有 ANSI 转义码。
+
+```typescript
+import { red, stripColor } from 'es-toolkit/color';
+
+stripColor(red('普通文本')); // '普通文本'
 ```
 
 ### 扩展颜色

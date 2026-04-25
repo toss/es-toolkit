@@ -1,8 +1,7 @@
-import { makeColor } from './makeColor.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Strikethrough text.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to style.
  * @returns The styled text.
@@ -12,4 +11,6 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(strikethrough('hello'));
  */
-export const strikethrough = makeColor('\x1b[9m', '\x1b[29m');
+export function strikethrough(text: string): string {
+  return wrapAnsi('\x1b[9m', '\x1b[29m', text);
+}

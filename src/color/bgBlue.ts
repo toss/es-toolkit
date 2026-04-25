@@ -1,8 +1,8 @@
-import { makeColor } from './makeColor.ts';
+import { reopenAtNewlines } from './_internal/reopenAtNewlines.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Blue background.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to style.
  * @returns The styled text.
@@ -12,4 +12,8 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(bgBlue('hello'));
  */
-export const bgBlue = makeColor('\x1b[44m', '\x1b[49m', true);
+export function bgBlue(text: string): string {
+  const open = '\x1b[44m';
+  const close = '\x1b[49m';
+  return wrapAnsi(open, close, reopenAtNewlines(open, close, text));
+}

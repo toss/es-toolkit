@@ -1,5 +1,6 @@
-import { makeColor } from './makeColor.ts';
-import { parseHex } from './parseHex.ts';
+import { parseHex } from './_internal/parseHex.ts';
+import { reopenAtNewlines } from './_internal/reopenAtNewlines.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 import type { ColorFunction } from './types.ts';
 
 /**
@@ -16,5 +17,7 @@ import type { ColorFunction } from './types.ts';
  */
 export function bgHex(color: string): ColorFunction {
   const [r, g, b] = parseHex(color);
-  return makeColor(`\x1b[48;2;${r};${g};${b}m`, '\x1b[49m', true);
+  const open = `\x1b[48;2;${r};${g};${b}m`;
+  const close = '\x1b[49m';
+  return text => wrapAnsi(open, close, reopenAtNewlines(open, close, text));
 }

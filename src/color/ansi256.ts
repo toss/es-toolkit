@@ -1,4 +1,4 @@
-import { makeColor } from './makeColor.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 import type { ColorFunction } from './types.ts';
 
 /**
@@ -14,5 +14,5 @@ import type { ColorFunction } from './types.ts';
  * console.log(orange('hello'));
  */
 export function ansi256(code: number): ColorFunction {
-  return makeColor(`\x1b[38;5;${code}m`, '\x1b[39m');
+  return text => wrapAnsi(`\x1b[38;5;${code}m`, '\x1b[39m', text);
 }

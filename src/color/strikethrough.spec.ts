@@ -1,9 +1,5 @@
-// @vitest-environment node
-import { describe, expect, it, vi } from 'vitest';
-
-vi.mock('./colorLevel.ts', () => ({ isColorSupported: true, colorLevel: 3 }));
-
-const { strikethrough } = await import('./strikethrough.ts');
+import { describe, expect, it } from 'vitest';
+import { strikethrough } from './strikethrough.ts';
 
 describe('strikethrough', () => {
   it('wraps text with the expected ANSI codes', () => {

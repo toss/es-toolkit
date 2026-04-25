@@ -1,8 +1,8 @@
 # color
 
-터미널 색상과 스타일을 적용해요. 색상 지원 여부는 자동으로 감지해요.
+ANSI 이스케이프 코드로 터미널 색상과 스타일을 적용해요.
 
-모든 유틸리티는 개별 named export로도, default export 번들로도 쓸 수 있어요. 각 함수는 ANSI 색상 지원 여부를 자동으로 판단해서, 지원하지 않는 환경(non-TTY, `NO_COLOR=1`, 파이프, `FORCE_COLOR` 없는 CI)에서는 입력 텍스트를 그대로 반환해요.
+모든 유틸리티는 개별 named export로도, default export 번들로도 쓸 수 있어요. 색상 함수는 항상 ANSI 이스케이프 코드를 출력해요. non-TTY 출력, 로그 파일, ANSI 미지원 환경처럼 코드를 제거하고 싶을 때는 결과를 `stripColor`로 감싸 주세요.
 
 ```typescript
 // 개별 import (트리셰이킹 가능):
@@ -65,6 +65,16 @@ import { bold, red } from 'es-toolkit/color';
 
 bold(red('굵은 빨간 텍스트'));
 red(`상태: ${bold('중요')} — 확인 부탁해요`);
+```
+
+### 색상 코드 제거
+
+non-TTY 출력 (로그 파일, 파이프, ANSI 미지원 CI)에서는 결과를 `stripColor`로 감싸서 ANSI 이스케이프 코드를 모두 제거할 수 있어요.
+
+```typescript
+import { red, stripColor } from 'es-toolkit/color';
+
+stripColor(red('일반 텍스트')); // '일반 텍스트'
 ```
 
 ### 확장 색상

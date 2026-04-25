@@ -1,8 +1,7 @@
-import { makeColor } from './makeColor.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Italic text.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to style.
  * @returns The styled text.
@@ -12,4 +11,6 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(italic('hello'));
  */
-export const italic = makeColor('\x1b[3m', '\x1b[23m');
+export function italic(text: string): string {
+  return wrapAnsi('\x1b[3m', '\x1b[23m', text);
+}

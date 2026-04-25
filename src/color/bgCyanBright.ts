@@ -1,8 +1,8 @@
-import { makeColor } from './makeColor.ts';
+import { reopenAtNewlines } from './_internal/reopenAtNewlines.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Bright cyan background.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to style.
  * @returns The styled text.
@@ -12,4 +12,8 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(bgCyanBright('hello'));
  */
-export const bgCyanBright = makeColor('\x1b[106m', '\x1b[49m', true);
+export function bgCyanBright(text: string): string {
+  const open = '\x1b[106m';
+  const close = '\x1b[49m';
+  return wrapAnsi(open, close, reopenAtNewlines(open, close, text));
+}

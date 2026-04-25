@@ -1,8 +1,7 @@
-import { makeColor } from './makeColor.ts';
+import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
  * Bright cyan foreground.
- * Falls back to a passthrough when color support is unavailable.
  *
  * @param text - The text to style.
  * @returns The styled text.
@@ -12,4 +11,6 @@ import { makeColor } from './makeColor.ts';
  *
  * console.log(cyanBright('hello'));
  */
-export const cyanBright = makeColor('\x1b[96m', '\x1b[39m');
+export function cyanBright(text: string): string {
+  return wrapAnsi('\x1b[96m', '\x1b[39m', text);
+}
