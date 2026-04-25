@@ -1,29 +1,24 @@
 # color
 
-Terminal colors and styles via ANSI escape codes.
-
-Every utility is exposed as an individual named export **and** bundled in a default export. Color functions always emit ANSI escape codes. When you don't want them in the output — log files, pipes, or terminals that don't support ANSI — pass the result through `stripColor`.
+Wraps strings with ANSI escape codes for color and style.
 
 ```typescript
-// Individual named imports (tree-shakeable):
-import { bold, hex, red } from 'es-toolkit/color';
-// Or the default bundle:
-import color from 'es-toolkit/color';
+import { red } from 'es-toolkit/color';
 
-color.red('error');
+red('error');
 ```
 
 ## Available utilities
 
-### Modifiers
+### Text effects
 
 `reset`, `bold`, `dim`, `italic`, `underline`, `inverse`, `hidden`, `strikethrough`
 
-### Foreground colors
+### Text colors
 
 `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`, `gray`
 
-### Bright foreground colors
+### Bright text colors
 
 `blackBright`, `redBright`, `greenBright`, `yellowBright`, `blueBright`, `magentaBright`, `cyanBright`, `whiteBright`
 
@@ -41,7 +36,23 @@ color.red('error');
 
 ## Usage
 
+### Imports
+
+Each utility is available as an individual named export, and they are also bundled together as a default export. Individual imports are tree-shakeable, so only the colors you actually use end up in your bundle.
+
+```typescript
+// Individual named imports (tree-shakeable)
+import { bold, hex, red } from 'es-toolkit/color';
+
+// Or the default bundle
+import color from 'es-toolkit/color';
+
+color.red('error');
+```
+
 ### Basic colors and styles
+
+Color functions take a `string` and return a string with ANSI escape codes embedded. The terminal reads those codes and renders the color and style.
 
 ```typescript
 import { bgYellow, black, blue, bold, green, red, underline } from 'es-toolkit/color';
@@ -65,16 +76,6 @@ import { bold, red } from 'es-toolkit/color';
 
 bold(red('Bold red text'));
 red(`Status: ${bold('IMPORTANT')} — please review`);
-```
-
-### Stripping colors
-
-Pass the result through `stripColor` to remove every ANSI escape code — useful for log files, piped output, or CI without ANSI support.
-
-```typescript
-import { red, stripColor } from 'es-toolkit/color';
-
-stripColor(red('plain')); // 'plain'
 ```
 
 ### Extended colors

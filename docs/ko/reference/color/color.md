@@ -1,29 +1,24 @@
 # color
 
-ANSI 이스케이프 코드로 터미널 색상과 스타일을 적용해요.
-
-모든 유틸리티는 개별 named export로도, default export 번들로도 쓸 수 있어요. 색상 함수는 항상 ANSI 이스케이프 코드를 출력해요. 출력에 코드가 들어가면 안 되는 곳 — 로그 파일, 파이프, ANSI를 지원하지 않는 터미널 — 에서는 결과를 `stripColor`에 통과시켜 주세요.
+문자열에 ANSI 이스케이프 코드로 색상과 스타일을 입혀요.
 
 ```typescript
-// 개별 import (트리셰이킹 가능):
-import { bold, hex, red } from 'es-toolkit/color';
-// 또는 default 번들:
-import color from 'es-toolkit/color';
+import { red } from 'es-toolkit/color';
 
-color.red('에러');
+red('에러');
 ```
 
 ## 사용 가능한 유틸리티
 
-### 수정자
+### 텍스트 효과
 
 `reset`, `bold`, `dim`, `italic`, `underline`, `inverse`, `hidden`, `strikethrough`
 
-### 전경색
+### 글자 색
 
 `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`, `gray`
 
-### 밝은 전경색
+### 밝은 글자 색
 
 `blackBright`, `redBright`, `greenBright`, `yellowBright`, `blueBright`, `magentaBright`, `cyanBright`, `whiteBright`
 
@@ -41,7 +36,23 @@ color.red('에러');
 
 ## 사용법
 
+### 가져오기
+
+각 유틸리티는 개별 named export로 가져올 수도 있고, default export 번들로도 쓸 수 있어요. 개별 import는 트리셰이킹이 가능해서 실제로 쓴 색상만 번들에 포함돼요.
+
+```typescript
+// 개별 import (트리셰이킹 가능)
+import { bold, hex, red } from 'es-toolkit/color';
+
+// 또는 default 번들
+import color from 'es-toolkit/color';
+
+color.red('에러');
+```
+
 ### 기본 색상과 스타일
+
+색상 함수는 `string`을 받아서 ANSI 이스케이프 코드가 들어간 문자열을 돌려줘요. 이 코드를 터미널이 읽어서 색상과 스타일로 보여줘요.
 
 ```typescript
 import { bgYellow, black, blue, bold, green, red, underline } from 'es-toolkit/color';
@@ -67,16 +78,6 @@ bold(red('굵은 빨간 텍스트'));
 red(`상태: ${bold('중요')} — 확인 부탁해요`);
 ```
 
-### 색상 코드 제거
-
-결과를 `stripColor`에 통과시키면 ANSI 이스케이프 코드를 전부 제거할 수 있어요. 로그 파일에 쓰거나, 다른 명령으로 파이프할 때, ANSI를 지원하지 않는 CI에서 유용해요.
-
-```typescript
-import { red, stripColor } from 'es-toolkit/color';
-
-stripColor(red('일반 텍스트')); // '일반 텍스트'
-```
-
 ### 확장 색상
 
 256색, RGB, Hex는 두 단계로 호출해요. 먼저 색상을 넘겨서 함수를 만들고, 그 함수에 텍스트를 넘겨요.
@@ -97,7 +98,7 @@ bgHex('#00ff00')('초록 배경');
 
 ### 입력 타입
 
-모든 색상 함수는 `string`을 받아요. 다른 값은 넘기기 전에 변환해 주세요.
+모든 색상 함수는 `string`을 받아요. 다른 타입은 넘기기 전에 변환해 주세요.
 
 ```typescript
 import { red } from 'es-toolkit/color';

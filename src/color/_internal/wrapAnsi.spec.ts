@@ -42,4 +42,15 @@ describe('wrapAnsi', () => {
     expect(wrapAnsi(OPEN, CLOSE, '👨‍👩‍👧‍👦')).toBe(`${OPEN}👨‍👩‍👧‍👦${CLOSE}`);
     expect(wrapAnsi(OPEN, CLOSE, 'a\tb')).toBe(`${OPEN}a\tb${CLOSE}`);
   });
+
+  it('should re-open outer style at every inner close when multiple distinct inner styles share it', () => {
+    // Simulates a real-world case like `yellow(`foo ${red('r')} bar ${cyan('c')} baz`)`
+    // where `red` and `cyan` are distinct styles that both close with the same FG close code.
+    const O_INNER1 = '<I1>';
+    const O_INNER2 = '<I2>';
+    const inner = `foo ${wrapAnsi(O_INNER1, CLOSE, 'r')} bar ${wrapAnsi(O_INNER2, CLOSE, 'c')} baz`;
+    expect(wrapAnsi(OPEN, CLOSE, inner)).toBe(
+      `${OPEN}foo ${O_INNER1}r${CLOSE}${OPEN} bar ${O_INNER2}c${CLOSE}${OPEN} baz${CLOSE}`
+    );
+  });
 });

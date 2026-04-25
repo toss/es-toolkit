@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { wrapAnsi } from './wrapAnsi.ts';
 import { wrapAnsiBg } from './wrapAnsiBg.ts';
 
 const OPEN = '<O>';
@@ -31,5 +32,23 @@ describe('wrapAnsiBg', () => {
 
   it('passes lone carriage returns through unchanged', () => {
     expect(wrapAnsiBg(OPEN, CLOSE, 'a\rb')).toBe(`${OPEN}a\rb${CLOSE}`);
+  });
+
+  it('composes deeply with foreground and modifier wraps in mixed nesting', () => {
+    // Simulates a real-world case like `bold(yellow(bgRed(italic('hi'))))`
+    // where bold/italic (modifier), yellow (fg), and bgRed (bg) each have
+    // distinct close codes — none should trigger another's re-open path.
+    const O_BOLD = '<B>';
+    const C_BOLD = '<b>';
+    const O_FG = '<F>';
+    const C_FG = '<f>';
+    const O_ITAL = '<I>';
+    const C_ITAL = '<i>';
+    const result = wrapAnsi(
+      O_BOLD,
+      C_BOLD,
+      wrapAnsi(O_FG, C_FG, wrapAnsiBg(OPEN, CLOSE, wrapAnsi(O_ITAL, C_ITAL, 'hi')))
+    );
+    expect(result).toBe(`${O_BOLD}${O_FG}${OPEN}${O_ITAL}hi${C_ITAL}${CLOSE}${C_FG}${C_BOLD}`);
   });
 });

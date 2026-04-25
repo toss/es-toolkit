@@ -1,16 +1,11 @@
 # color
 
-通过 ANSI 转义码为终端提供颜色和样式。
-
-每个工具都以独立的 named export 暴露，同时也打包在 default export 中。颜色函数始终输出 ANSI 转义码。当输出中不需要这些代码时 —— 比如日志文件、管道，或不支持 ANSI 的终端 —— 把结果传给 `stripColor`。
+用 ANSI 转义码为字符串添加颜色和样式。
 
 ```typescript
-// 独立的 named import（可 tree-shaking）:
-import { bold, hex, red } from 'es-toolkit/color';
-// 或 default 打包:
-import color from 'es-toolkit/color';
+import { red } from 'es-toolkit/color';
 
-color.red('错误');
+red('错误');
 ```
 
 ## 可用工具
@@ -41,7 +36,23 @@ color.red('错误');
 
 ## 用法
 
+### 导入
+
+每个工具都可以通过单独的 named export 导入，也可以通过 default export 作为打包后的整体使用。单独的 import 支持 tree-shaking，所以最终的包里只会包含你实际用到的颜色。
+
+```typescript
+// 单独 named import（支持 tree-shaking）
+import { bold, hex, red } from 'es-toolkit/color';
+
+// 或 default 打包
+import color from 'es-toolkit/color';
+
+color.red('错误');
+```
+
 ### 基本颜色和样式
+
+颜色函数接受一个 `string`，返回嵌入了 ANSI 转义码的字符串。终端读取这些转义码并把它们渲染成颜色和样式。
 
 ```typescript
 import { bgYellow, black, blue, bold, green, red, underline } from 'es-toolkit/color';
@@ -65,16 +76,6 @@ import { bold, red } from 'es-toolkit/color';
 
 bold(red('粗体红色文本'));
 red(`状态: ${bold('重要')} — 请查看`);
-```
-
-### 去除颜色
-
-把结果传给 `stripColor`，可以移除所有 ANSI 转义码。适用于写入日志文件、管道到其他命令，或在不支持 ANSI 的 CI 环境中使用。
-
-```typescript
-import { red, stripColor } from 'es-toolkit/color';
-
-stripColor(red('普通文本')); // '普通文本'
 ```
 
 ### 扩展颜色

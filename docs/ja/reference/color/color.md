@@ -1,16 +1,11 @@
 # color
 
-ANSI エスケープコードでターミナルの色とスタイルを適用します。
-
-すべてのユーティリティは個別の named export として、また default export としてもバンドルされています。色関数は常に ANSI エスケープコードを出力します。出力にコードを含めたくない場面 — ログファイル、パイプ、ANSI 非対応のターミナル — では、結果を `stripColor` に通してください。
+文字列を ANSI エスケープコードで包んで色とスタイルを適用します。
 
 ```typescript
-// 個別の named import（ツリーシェイキング可能）:
-import { bold, hex, red } from 'es-toolkit/color';
-// または default バンドル:
-import color from 'es-toolkit/color';
+import { red } from 'es-toolkit/color';
 
-color.red('エラー');
+red('エラー');
 ```
 
 ## 利用可能なユーティリティ
@@ -41,7 +36,23 @@ color.red('エラー');
 
 ## 使い方
 
+### インポート
+
+各ユーティリティは個別の named export として取り込むことも、default export のバンドルとして使うこともできます。個別 import はツリーシェイキング可能なので、実際に使った色だけがバンドルに含まれます。
+
+```typescript
+// 個別 import（ツリーシェイキング可能）
+import { bold, hex, red } from 'es-toolkit/color';
+
+// または default バンドル
+import color from 'es-toolkit/color';
+
+color.red('エラー');
+```
+
 ### 基本的な色とスタイル
+
+色関数は `string` を受け取り、ANSI エスケープコードを埋め込んだ文字列を返します。このコードをターミナルが読み取って色とスタイルとして表示します。
 
 ```typescript
 import { bgYellow, black, blue, bold, green, red, underline } from 'es-toolkit/color';
@@ -65,16 +76,6 @@ import { bold, red } from 'es-toolkit/color';
 
 bold(red('太字の赤いテキスト'));
 red(`状態: ${bold('重要')} — 確認してください`);
-```
-
-### 色コードの除去
-
-結果を `stripColor` に通すと ANSI エスケープコードをすべて取り除けます。ログファイルへの書き込みや、別のコマンドへのパイプ、ANSI 非対応の CI で便利です。
-
-```typescript
-import { red, stripColor } from 'es-toolkit/color';
-
-stripColor(red('プレーンテキスト')); // 'プレーンテキスト'
 ```
 
 ### 拡張色
