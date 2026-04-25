@@ -1,5 +1,4 @@
-import { reopenAtNewlines } from './_internal/reopenAtNewlines.ts';
-import { wrapAnsi } from './_internal/wrapAnsi.ts';
+import { wrapAnsiBg } from './_internal/wrapAnsiBg.ts';
 import type { ColorFunction } from './types.ts';
 
 /**
@@ -17,7 +16,5 @@ import type { ColorFunction } from './types.ts';
  * console.log(highlight('hello'));
  */
 export function bgRgb(r: number, g: number, b: number): ColorFunction {
-  const open = `\x1b[48;2;${r};${g};${b}m`;
-  const close = '\x1b[49m';
-  return text => wrapAnsi(open, close, reopenAtNewlines(open, close, text));
+  return text => wrapAnsiBg(`\x1b[48;2;${r};${g};${b}m`, '\x1b[49m', text);
 }

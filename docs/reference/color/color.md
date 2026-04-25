@@ -2,7 +2,7 @@
 
 Terminal colors and styles via ANSI escape codes.
 
-Every utility is exposed as an individual named export **and** bundled in a default export. Color functions always emit ANSI escape codes. To strip them — for non-TTY output, log files, or environments without ANSI support — wrap the result with `stripColor`.
+Every utility is exposed as an individual named export **and** bundled in a default export. Color functions always emit ANSI escape codes. When you don't want them in the output — log files, pipes, or terminals that don't support ANSI — pass the result through `stripColor`.
 
 ```typescript
 // Individual named imports (tree-shakeable):
@@ -58,7 +58,7 @@ bgYellow(black('Black text on yellow background'));
 
 ### Composition
 
-Nest multiple styles. The outer style is automatically re-opened after the inner style closes so subsequent text keeps its color.
+Styles can be nested freely. When an inner style ends partway through a string, the outer style continues over the rest of the text — no manual re-styling needed.
 
 ```typescript
 import { bold, red } from 'es-toolkit/color';
@@ -69,7 +69,7 @@ red(`Status: ${bold('IMPORTANT')} — please review`);
 
 ### Stripping colors
 
-For non-TTY output (log files, pipes, CI without ANSI support), wrap the result with `stripColor` to remove all ANSI escape codes.
+Pass the result through `stripColor` to remove every ANSI escape code — useful for log files, piped output, or CI without ANSI support.
 
 ```typescript
 import { red, stripColor } from 'es-toolkit/color';
@@ -79,7 +79,7 @@ stripColor(red('plain')); // 'plain'
 
 ### Extended colors
 
-256-color, RGB, and hex use a curried form: pass the color value first, then the text.
+256-color, RGB, and hex are called in two steps: first pick the color, then pass the text to the function it returns.
 
 ```typescript
 import { ansi256, bgAnsi256, bgHex, bgRgb, hex, rgb } from 'es-toolkit/color';

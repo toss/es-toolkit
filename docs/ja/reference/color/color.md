@@ -2,7 +2,7 @@
 
 ANSI エスケープコードでターミナルの色とスタイルを適用します。
 
-すべてのユーティリティは個別の named export として、また default export としてもバンドルされています。色関数は常に ANSI エスケープコードを出力します。non-TTY 出力、ログファイル、ANSI 非対応環境などでコードを取り除きたい場合は、結果を `stripColor` で包んでください。
+すべてのユーティリティは個別の named export として、また default export としてもバンドルされています。色関数は常に ANSI エスケープコードを出力します。出力にコードを含めたくない場面 — ログファイル、パイプ、ANSI 非対応のターミナル — では、結果を `stripColor` に通してください。
 
 ```typescript
 // 個別の named import（ツリーシェイキング可能）:
@@ -58,7 +58,7 @@ bgYellow(black('黄色い背景に黒いテキスト'));
 
 ### 合成
 
-複数のスタイルをネストして使用できます。inner が閉じた後に outer が自動的に再オープンされるため、続くテキストも色が保持されます。
+スタイルは自由にネストできます。内側のスタイルが文字列の途中で終わっても、外側のスタイルはその後のテキストにそのまま続きます。手動で再適用する必要はありません。
 
 ```typescript
 import { bold, red } from 'es-toolkit/color';
@@ -69,7 +69,7 @@ red(`状態: ${bold('重要')} — 確認してください`);
 
 ### 色コードの除去
 
-non-TTY 出力（ログファイル、パイプ、ANSI 非対応の CI）では、結果を `stripColor` で包んで ANSI エスケープコードを取り除けます。
+結果を `stripColor` に通すと ANSI エスケープコードをすべて取り除けます。ログファイルへの書き込みや、別のコマンドへのパイプ、ANSI 非対応の CI で便利です。
 
 ```typescript
 import { red, stripColor } from 'es-toolkit/color';
@@ -79,7 +79,7 @@ stripColor(red('プレーンテキスト')); // 'プレーンテキスト'
 
 ### 拡張色
 
-256色、RGB、Hex 色はカリー化方式です。色の値を先に渡してからテキストを渡します。
+256色、RGB、Hex は2段階で呼び出します。まず色を渡して関数を作り、その関数にテキストを渡します。
 
 ```typescript
 import { ansi256, bgAnsi256, bgHex, bgRgb, hex, rgb } from 'es-toolkit/color';

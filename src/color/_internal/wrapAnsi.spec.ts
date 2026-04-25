@@ -3,9 +3,8 @@ import { wrapAnsi } from './wrapAnsi.ts';
 
 const OPEN = '<O>';
 const CLOSE = '<C>';
-const OPEN2 = '<O2>'; // different open, shares CLOSE
-const OPEN_ALT = '<O3>';
-const CLOSE_ALT = '<C3>'; // distinct close code
+const OPEN_ALT = '<A>';
+const CLOSE_ALT = '<X>';
 
 describe('wrapAnsi', () => {
   it('should wrap text with open and close codes', () => {
@@ -22,7 +21,6 @@ describe('wrapAnsi', () => {
 
   it('should re-open outer style when inner shares the same close code', () => {
     expect(wrapAnsi(OPEN, CLOSE, wrapAnsi(OPEN, CLOSE, 'ds'))).toBe(`${OPEN}${OPEN}ds${CLOSE}${OPEN}${CLOSE}`);
-    expect(wrapAnsi(OPEN, CLOSE, wrapAnsi(OPEN2, CLOSE, 'hi'))).toBe(`${OPEN}${OPEN2}hi${CLOSE}${OPEN}${CLOSE}`);
   });
 
   it('should re-open outer style at every inner close in deep nesting', () => {

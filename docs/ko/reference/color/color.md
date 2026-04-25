@@ -2,7 +2,7 @@
 
 ANSI 이스케이프 코드로 터미널 색상과 스타일을 적용해요.
 
-모든 유틸리티는 개별 named export로도, default export 번들로도 쓸 수 있어요. 색상 함수는 항상 ANSI 이스케이프 코드를 출력해요. non-TTY 출력, 로그 파일, ANSI 미지원 환경처럼 코드를 제거하고 싶을 때는 결과를 `stripColor`로 감싸 주세요.
+모든 유틸리티는 개별 named export로도, default export 번들로도 쓸 수 있어요. 색상 함수는 항상 ANSI 이스케이프 코드를 출력해요. 출력에 코드가 들어가면 안 되는 곳 — 로그 파일, 파이프, ANSI를 지원하지 않는 터미널 — 에서는 결과를 `stripColor`에 통과시켜 주세요.
 
 ```typescript
 // 개별 import (트리셰이킹 가능):
@@ -58,7 +58,7 @@ bgYellow(black('노란 배경에 검정 텍스트'));
 
 ### 합성
 
-여러 스타일을 중첩해서 사용할 수 있어요. inner이 닫히면 outer이 자동으로 재개방돼서 뒤따르는 텍스트도 색이 유지돼요.
+스타일을 자유롭게 겹쳐서 쓸 수 있어요. 안쪽 스타일이 문자열 중간에 끝나도 바깥 스타일은 그 뒤의 텍스트에 그대로 이어져요. 따로 다시 씌워줄 필요 없어요.
 
 ```typescript
 import { bold, red } from 'es-toolkit/color';
@@ -69,7 +69,7 @@ red(`상태: ${bold('중요')} — 확인 부탁해요`);
 
 ### 색상 코드 제거
 
-non-TTY 출력 (로그 파일, 파이프, ANSI 미지원 CI)에서는 결과를 `stripColor`로 감싸서 ANSI 이스케이프 코드를 모두 제거할 수 있어요.
+결과를 `stripColor`에 통과시키면 ANSI 이스케이프 코드를 전부 제거할 수 있어요. 로그 파일에 쓰거나, 다른 명령으로 파이프할 때, ANSI를 지원하지 않는 CI에서 유용해요.
 
 ```typescript
 import { red, stripColor } from 'es-toolkit/color';
@@ -79,7 +79,7 @@ stripColor(red('일반 텍스트')); // '일반 텍스트'
 
 ### 확장 색상
 
-256색, RGB, Hex 색상은 커링 방식이에요. 색상 값을 먼저 넘기고 텍스트를 이후에 넘겨요.
+256색, RGB, Hex는 두 단계로 호출해요. 먼저 색상을 넘겨서 함수를 만들고, 그 함수에 텍스트를 넘겨요.
 
 ```typescript
 import { ansi256, bgAnsi256, bgHex, bgRgb, hex, rgb } from 'es-toolkit/color';

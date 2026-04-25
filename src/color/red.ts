@@ -1,10 +1,10 @@
 import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
- * Wraps text with ANSI codes for red foreground color.
+ * Red foreground.
  *
- * @param text - The text to colorize.
- * @returns The text wrapped with red ANSI codes.
+ * @param text - The text to style.
+ * @returns The styled text.
  *
  * @example
  * import { red } from 'es-toolkit/color';

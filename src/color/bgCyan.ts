@@ -1,5 +1,4 @@
-import { reopenAtNewlines } from './_internal/reopenAtNewlines.ts';
-import { wrapAnsi } from './_internal/wrapAnsi.ts';
+import { wrapAnsiBg } from './_internal/wrapAnsiBg.ts';
 
 /**
  * Cyan background.
@@ -13,7 +12,5 @@ import { wrapAnsi } from './_internal/wrapAnsi.ts';
  * console.log(bgCyan('hello'));
  */
 export function bgCyan(text: string): string {
-  const open = '\x1b[46m';
-  const close = '\x1b[49m';
-  return wrapAnsi(open, close, reopenAtNewlines(open, close, text));
+  return wrapAnsiBg('\x1b[46m', '\x1b[49m', text);
 }

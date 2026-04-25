@@ -1,5 +1,4 @@
-import { reopenAtNewlines } from './_internal/reopenAtNewlines.ts';
-import { wrapAnsi } from './_internal/wrapAnsi.ts';
+import { wrapAnsiBg } from './_internal/wrapAnsiBg.ts';
 
 /**
  * Black background.
@@ -13,7 +12,5 @@ import { wrapAnsi } from './_internal/wrapAnsi.ts';
  * console.log(bgBlack('hello'));
  */
 export function bgBlack(text: string): string {
-  const open = '\x1b[40m';
-  const close = '\x1b[49m';
-  return wrapAnsi(open, close, reopenAtNewlines(open, close, text));
+  return wrapAnsiBg('\x1b[40m', '\x1b[49m', text);
 }
