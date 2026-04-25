@@ -1,7 +1,7 @@
 import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
- * Resets all styles and colors.
+ * Resets every style and color set up to this point. Wraps text with the ANSI reset code.
  *
  * @param text - The text to style.
  * @returns The styled text.

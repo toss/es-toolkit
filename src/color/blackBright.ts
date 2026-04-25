@@ -1,7 +1,7 @@
 import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
- * Bright black (gray) foreground.
+ * Bright black (gray) foreground. Wraps text with ANSI codes.
  *
  * @param text - The text to style.
  * @returns The styled text.

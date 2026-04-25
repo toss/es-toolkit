@@ -1,7 +1,7 @@
 import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
- * Color-inverted text.
+ * Swaps the foreground and background colors. Wraps text with ANSI codes.
  *
  * @param text - The text to style.
  * @returns The styled text.

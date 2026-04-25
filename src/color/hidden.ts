@@ -1,7 +1,7 @@
 import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
- * Hidden text.
+ * Hides text from rendering while keeping it selectable. Wraps text with ANSI codes.
  *
  * @param text - The text to style.
  * @returns The styled text.

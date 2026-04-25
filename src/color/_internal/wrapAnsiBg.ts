@@ -1,14 +1,19 @@
 /**
- * Wraps text with ANSI background open/close codes.
+ * Wraps text with ANSI open/close codes for background colors.
  *
- * Handles two cases beyond the basic open/close wrap:
- * 1. If the text contains the close code (from a nested style sharing the
- *    same close), re-opens the outer style after each occurrence.
- * 2. Re-opens the background after every newline because terminals reset
- *    background color at line boundaries. CRLF is treated as a single unit.
+ * On top of the basic wrap, handles two cases:
  *
- * The close-injection step runs before the newline split so the close codes
- * the newline step itself emits don't get re-opened twice.
+ * 1. **Nested style sharing the same close.** If `text` already contains
+ *    `close` (e.g. `bgRed(bgGreen('x'))` where both end with `\x1b[49m`),
+ *    re-opens the outer style after each occurrence so the rest keeps its
+ *    color. This step runs first.
+ * 2. **Multi-line text.** Terminals reset the background color at line
+ *    boundaries, so the bg disappears after `\n` if not re-opened. Insert
+ *    `close + open` around every newline. CRLF is treated as a single unit
+ *    so the close sits outside both characters.
+ *
+ * Step 2 must run after step 1 — otherwise the close codes that step 2
+ * inserts would also trigger step 1's re-open and leak duplicate codes.
  */
 export function wrapAnsiBg(open: string, close: string, text: string): string {
   if (text.includes(close)) {

@@ -1,7 +1,7 @@
 import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
- * Italic text.
+ * Italic text. Wraps text with ANSI codes.
  *
  * @param text - The text to style.
  * @returns The styled text.

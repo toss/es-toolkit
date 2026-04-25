@@ -1,9 +1,11 @@
 /**
- * Wraps text with ANSI open/close codes.
+ * Wraps text with ANSI open/close codes for foreground colors and modifiers.
  *
- * If the text already contains the close code (from a nested style sharing
- * the same close), re-opens the outer style after each occurrence so the
- * remainder keeps its color.
+ * If `text` already contains `close` (typically from a nested style that
+ * shares the same close code, e.g. `red(green('x'))` where both end with
+ * `\x1b[39m`), re-opens the outer style after each occurrence so the rest
+ * of the text keeps its color. For background colors use `wrapAnsiBg`
+ * instead — it adds the newline handling that backgrounds need.
  */
 export function wrapAnsi(open: string, close: string, text: string): string {
   if (text.includes(close)) {

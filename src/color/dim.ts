@@ -1,7 +1,7 @@
 import { wrapAnsi } from './_internal/wrapAnsi.ts';
 
 /**
- * Dim (faint) text.
+ * Dim (faint) text. Wraps text with ANSI codes.
  *
  * @param text - The text to style.
  * @returns The styled text.

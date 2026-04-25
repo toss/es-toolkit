@@ -1,7 +1,7 @@
 import { wrapAnsiBg } from './_internal/wrapAnsiBg.ts';
 
 /**
- * Black background.
+ * Black background. Wraps text with ANSI codes.
  *
  * @param text - The text to style.
  * @returns The styled text.
