@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useData, useRouter } from 'vitepress';
-import { detectFlavor, flavorIntroPath, flavors, type FlavorSpec } from '../libs/flavors.mts';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import FlavorOptionRow from './FlavorOptionRow.vue';
+import { detectFlavor, flavorIntroPath, flavors, type FlavorSpec } from '../libs/flavors.mts';
 
 const { page, lang } = useData();
 const router = useRouter();

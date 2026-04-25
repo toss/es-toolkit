@@ -6,7 +6,16 @@ defineProps<{ flavor: FlavorSpec }>();
 
 <template>
   <span class="flavor-row__icon-tile" :style="{ '--flavor-color': flavor.iconColor }">
-    <svg class="flavor-row__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg
+      class="flavor-row__icon"
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <path v-for="(d, i) in flavor.icon" :key="i" :d="d" />
     </svg>
   </span>
