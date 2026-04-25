@@ -36,8 +36,6 @@ red('错误');
 
 ## 用法
 
-### 导入
-
 每个工具都可以通过单独的 named export 导入，也可以通过 default export 作为打包后的整体使用。单独的 import 支持 tree-shaking，所以最终的包里只会包含你实际用到的颜色。
 
 ```typescript

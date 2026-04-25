@@ -36,8 +36,6 @@ red('error');
 
 ## Usage
 
-### Imports
-
 Each utility is available as an individual named export, and they are also bundled together as a default export. Individual imports are tree-shakeable, so only the colors you actually use end up in your bundle.
 
 ```typescript

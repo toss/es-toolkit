@@ -36,8 +36,6 @@ red('에러');
 
 ## 사용법
 
-### 가져오기
-
 각 유틸리티는 개별 named export로 가져올 수도 있고, default export 번들로도 쓸 수 있어요. 개별 import는 트리셰이킹이 가능해서 실제로 쓴 색상만 번들에 포함돼요.
 
 ```typescript

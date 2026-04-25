@@ -6,35 +6,35 @@ const OPEN = '<O>';
 const CLOSE = '<C>';
 
 describe('wrapAnsiBg', () => {
-  it('wraps text with open and close codes', () => {
+  it('should wrap text with open and close codes', () => {
     expect(wrapAnsiBg(OPEN, CLOSE, 'hello')).toBe(`${OPEN}hello${CLOSE}`);
   });
 
-  it('wraps empty string with codes', () => {
+  it('should wrap empty string with codes', () => {
     expect(wrapAnsiBg(OPEN, CLOSE, '')).toBe(`${OPEN}${CLOSE}`);
   });
 
-  it('re-opens outer when raw close code is injected in text', () => {
+  it('should re-open outer when raw close code is injected in text', () => {
     expect(wrapAnsiBg(OPEN, CLOSE, `a${CLOSE}b`)).toBe(`${OPEN}a${CLOSE}${OPEN}b${CLOSE}`);
   });
 
-  it('re-opens background after newlines so color stays contiguous across lines', () => {
+  it('should re-open background after newlines so color stays contiguous across lines', () => {
     expect(wrapAnsiBg(OPEN, CLOSE, 'a\nb')).toBe(`${OPEN}a${CLOSE}\n${OPEN}b${CLOSE}`);
     expect(wrapAnsiBg(OPEN, CLOSE, 'a\n\nb')).toBe(`${OPEN}a${CLOSE}\n${OPEN}${CLOSE}\n${OPEN}b${CLOSE}`);
     expect(wrapAnsiBg(OPEN, CLOSE, '\nabc')).toBe(`${OPEN}${CLOSE}\n${OPEN}abc${CLOSE}`);
     expect(wrapAnsiBg(OPEN, CLOSE, 'abc\n')).toBe(`${OPEN}abc${CLOSE}\n${OPEN}${CLOSE}`);
   });
 
-  it('treats CRLF as a single unit', () => {
+  it('should treat CRLF as a single unit', () => {
     expect(wrapAnsiBg(OPEN, CLOSE, 'a\r\nb')).toBe(`${OPEN}a${CLOSE}\r\n${OPEN}b${CLOSE}`);
     expect(wrapAnsiBg(OPEN, CLOSE, 'a\nb\r\nc')).toBe(`${OPEN}a${CLOSE}\n${OPEN}b${CLOSE}\r\n${OPEN}c${CLOSE}`);
   });
 
-  it('passes lone carriage returns through unchanged', () => {
+  it('should pass lone carriage returns through unchanged', () => {
     expect(wrapAnsiBg(OPEN, CLOSE, 'a\rb')).toBe(`${OPEN}a\rb${CLOSE}`);
   });
 
-  it('composes deeply with foreground and modifier wraps in mixed nesting', () => {
+  it('should compose deeply with foreground and modifier wraps in mixed nesting', () => {
     // Simulates a real-world case like `bold(yellow(bgRed(italic('hi'))))`
     // where bold/italic (modifier), yellow (fg), and bgRed (bg) each have
     // distinct close codes — none should trigger another's re-open path.
