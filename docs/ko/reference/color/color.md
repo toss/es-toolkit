@@ -43,7 +43,6 @@ red('에러');
 ```typescript
 // 개별 import (트리셰이킹 가능)
 import { bold, hex, red } from 'es-toolkit/color';
-
 // 또는 default 번들
 import color from 'es-toolkit/color';
 

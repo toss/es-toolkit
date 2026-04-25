@@ -43,7 +43,6 @@ Each utility is available as an individual named export, and they are also bundl
 ```typescript
 // Individual named imports (tree-shakeable)
 import { bold, hex, red } from 'es-toolkit/color';
-
 // Or the default bundle
 import color from 'es-toolkit/color';
 

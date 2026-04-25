@@ -43,7 +43,6 @@ red('エラー');
 ```typescript
 // 個別 import（ツリーシェイキング可能）
 import { bold, hex, red } from 'es-toolkit/color';
-
 // または default バンドル
 import color from 'es-toolkit/color';
 

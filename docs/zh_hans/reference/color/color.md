@@ -43,7 +43,6 @@ red('错误');
 ```typescript
 // 单独 named import（支持 tree-shaking）
 import { bold, hex, red } from 'es-toolkit/color';
-
 // 或 default 打包
 import color from 'es-toolkit/color';
 
