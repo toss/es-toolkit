@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { useData, useRouter } from 'vitepress';
 
 interface FlavorOption {
   value: 'esToolkit' | 'compat';
@@ -8,11 +9,24 @@ interface FlavorOption {
 }
 
 const options: FlavorOption[] = [
-  { value: 'esToolkit', label: 'es-toolkit', description: 'Strict modern API' },
+  { value: 'esToolkit', label: 'es-toolkit', description: 'Strict Utilities' },
   { value: 'compat', label: 'es-toolkit/compat', description: 'Lodash compatibility' },
 ];
 
-const current = ref<FlavorOption>(options[0]);
+const { page, lang } = useData();
+const router = useRouter();
+
+const localePrefix = computed(() => (lang.value === 'en' ? '' : `/${lang.value}`));
+
+const currentFlavor = computed<FlavorOption>(() => {
+  const rel = page.value.relativePath;
+  const isCompat =
+    rel.includes('reference/compat/') ||
+    rel === 'compatibility.md' ||
+    rel.endsWith('/compatibility.md');
+  return isCompat ? options[1] : options[0];
+});
+
 const open = ref(false);
 const root = ref<HTMLElement | null>(null);
 
@@ -21,8 +35,13 @@ function toggle() {
 }
 
 function select(option: FlavorOption) {
-  current.value = option;
   open.value = false;
+  if (option.value === currentFlavor.value.value) return;
+  const target =
+    option.value === 'compat'
+      ? `${localePrefix.value}/compatibility`
+      : `${localePrefix.value}/intro`;
+  router.go(target);
 }
 
 function onDocumentPointerDown(event: PointerEvent) {
@@ -59,8 +78,8 @@ onBeforeUnmount(() => {
       @click="toggle"
     >
       <span class="flavor-dropdown__text">
-        <span class="flavor-dropdown__title">{{ current.label }}</span>
-        <span class="flavor-dropdown__desc">{{ current.description }}</span>
+        <span class="flavor-dropdown__title">{{ currentFlavor.label }}</span>
+        <span class="flavor-dropdown__desc">{{ currentFlavor.description }}</span>
       </span>
       <svg class="flavor-dropdown__chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="m7 15 5 5 5-5" />
@@ -74,7 +93,7 @@ onBeforeUnmount(() => {
         :key="option.value"
         type="button"
         role="option"
-        :aria-selected="option.value === current.value"
+        :aria-selected="option.value === currentFlavor.value.value"
         class="flavor-dropdown__option"
         @click="select(option)"
       >
@@ -83,7 +102,7 @@ onBeforeUnmount(() => {
           <span class="flavor-dropdown__desc">{{ option.description }}</span>
         </span>
         <svg
-          v-if="option.value === current.value"
+          v-if="option.value === currentFlavor.value.value"
           class="flavor-dropdown__check"
           aria-hidden="true"
           viewBox="0 0 24 24"

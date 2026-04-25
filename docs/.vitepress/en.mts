@@ -39,122 +39,131 @@ function nav(): DefaultTheme.NavItem[] {
 }
 
 function sidebar(): DefaultTheme.Sidebar {
-  return [
-    {
-      text: 'Guide',
-      items: [
-        { text: 'Introduction', link: '/intro' },
-        { text: 'Installation & Usage', link: '/usage' },
-        { text: 'Impact on Bundle Size', link: '/bundle-size' },
-        { text: 'Performance', link: '/performance' },
-        { text: 'Lodash Compatibility', link: '/compatibility' },
-        { text: 'AI Integration', link: '/ai-integration' },
-      ],
-    },
-    {
-      text: 'Reference',
-      items: sortByText([
-        {
-          text: 'Array Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'array'),
-        },
-        {
-          text: 'Function Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'function'),
-        },
-        {
-          text: 'Map Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'map'),
-        },
-        {
-          text: 'Math Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'math'),
-        },
-        {
-          text: 'Object Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'object'),
-        },
-        {
-          text: 'Predicates',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'predicate'),
-        },
-        {
-          text: 'Promise Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'promise'),
-        },
-        {
-          text: 'String Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'string'),
-        },
-        {
-          text: 'Set Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'set'),
-        },
-        {
-          text: 'Utility Functions',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'util'),
-        },
-        {
-          text: 'Errors',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'error'),
-        },
-      ]),
-    },
-    {
-      text: 'Lodash Compatibility',
-      items: [
-        {
-          text: 'Reference',
-          items: sortByText([
-            {
-              text: 'Array Utilities',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'reference', 'compat', 'array'),
-            },
-            {
-              text: 'Function Utilities',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'reference', 'compat', 'function'),
-            },
-            {
-              text: 'Math Utilities',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'reference', 'compat', 'math'),
-            },
-            {
-              text: 'Object Utilities',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'reference', 'compat', 'object'),
-            },
-            {
-              text: 'Predicates',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'reference', 'compat', 'predicate'),
-            },
-            {
-              text: 'String Utilities',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'reference', 'compat', 'string'),
-            },
-            {
-              text: 'Utility Functions',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'reference', 'compat', 'util'),
-            },
-          ]),
-        },
-      ],
-    },
-  ];
+  const guideStrict = {
+    text: 'Guide',
+    items: [
+      { text: 'Introduction', link: '/intro' },
+      { text: 'Installation & Usage', link: '/usage' },
+      { text: 'Impact on Bundle Size', link: '/bundle-size' },
+      { text: 'Performance', link: '/performance' },
+      { text: 'AI Integration', link: '/ai-integration' },
+    ],
+  };
+
+  const referenceStrict = {
+    text: 'Reference',
+    items: sortByText([
+      {
+        text: 'Array Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'array'),
+      },
+      {
+        text: 'Function Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'function'),
+      },
+      {
+        text: 'Map Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'map'),
+      },
+      {
+        text: 'Math Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'math'),
+      },
+      {
+        text: 'Object Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'object'),
+      },
+      {
+        text: 'Predicates',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'predicate'),
+      },
+      {
+        text: 'Promise Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'promise'),
+      },
+      {
+        text: 'String Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'string'),
+      },
+      {
+        text: 'Set Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'set'),
+      },
+      {
+        text: 'Utility Functions',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'util'),
+      },
+      {
+        text: 'Errors',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'error'),
+      },
+    ]),
+  };
+
+  const guideCompat = {
+    text: 'Guide',
+    items: [{ text: 'Introduction', link: '/compatibility' }],
+  };
+
+  const referenceCompat = {
+    text: 'Reference',
+    items: sortByText([
+      {
+        text: 'Array Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'compat', 'array'),
+      },
+      {
+        text: 'Function Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'compat', 'function'),
+      },
+      {
+        text: 'Math Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'compat', 'math'),
+      },
+      {
+        text: 'Object Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'compat', 'object'),
+      },
+      {
+        text: 'Predicates',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'compat', 'predicate'),
+      },
+      {
+        text: 'String Utilities',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'compat', 'string'),
+      },
+      {
+        text: 'Utility Functions',
+        collapsed: true,
+        items: getSidebarItems(docsRoot, 'reference', 'compat', 'util'),
+      },
+    ]),
+  };
+
+  const strictTree = [guideStrict, referenceStrict];
+  const compatTree = [guideCompat, referenceCompat];
+
+  return {
+    '/reference/compat/': compatTree,
+    '/reference/': strictTree,
+    '/compatibility': compatTree,
+    '/': strictTree,
+  };
 }
