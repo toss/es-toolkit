@@ -13,6 +13,10 @@
     { "source": "/reference/compat/:path*", "destination": "/compat/reference/:path*", "permanent": false },
     { "source": "/ko/reference/compat/:path*", "destination": "/ko/compat/reference/:path*", "permanent": false },
     { "source": "/ja/reference/compat/:path*", "destination": "/ja/compat/reference/:path*", "permanent": false },
-    { "source": "/zh_hans/reference/compat/:path*", "destination": "/zh_hans/compat/reference/:path*", "permanent": false }
+    {
+      "source": "/zh_hans/reference/compat/:path*",
+      "destination": "/zh_hans/compat/reference/:path*",
+      "permanent": false
+    }
   ]
 }

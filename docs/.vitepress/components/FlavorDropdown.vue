@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useData, useRouter } from 'vitepress';
-import { type FlavorSpec, detectFlavor, flavorIntroPath, flavors } from '../libs/flavors.mts';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { detectFlavor, flavorIntroPath, flavors, type FlavorSpec } from '../libs/flavors.mts';
 
 const { page, lang } = useData();
 const router = useRouter();
@@ -57,7 +57,16 @@ onBeforeUnmount(() => {
       @click="toggle"
     >
       <span class="flavor-dropdown__icon-tile" :style="{ '--flavor-color': currentFlavor.iconColor }">
-        <svg class="flavor-dropdown__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          class="flavor-dropdown__icon"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path v-for="(d, i) in currentFlavor.icon" :key="i" :d="d" />
         </svg>
       </span>
@@ -65,7 +74,16 @@ onBeforeUnmount(() => {
         <span class="flavor-dropdown__title">{{ currentFlavor.label }}</span>
         <span class="flavor-dropdown__desc">{{ currentFlavor.description }}</span>
       </span>
-      <svg class="flavor-dropdown__chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="flavor-dropdown__chevron"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="m7 15 5 5 5-5" />
         <path d="m7 9 5-5 5 5" />
       </svg>
@@ -82,7 +100,16 @@ onBeforeUnmount(() => {
         @click="select(option)"
       >
         <span class="flavor-dropdown__icon-tile" :style="{ '--flavor-color': option.iconColor }">
-          <svg class="flavor-dropdown__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            class="flavor-dropdown__icon"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <path v-for="(d, i) in option.icon" :key="i" :d="d" />
           </svg>
         </span>
