@@ -109,6 +109,11 @@ function sidebar(): DefaultTheme.Sidebar {
           collapsed: true,
           items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'error'),
         },
+        {
+          text: '颜色',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'color'),
+        },
       ]),
     },
     {
