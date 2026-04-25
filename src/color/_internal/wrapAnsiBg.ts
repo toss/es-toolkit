@@ -14,6 +14,11 @@
  *
  * Step 2 must run after step 1 — otherwise the close codes that step 2
  * inserts would also trigger step 1's re-open and leak duplicate codes.
+ *
+ * @param open - The ANSI background open code (e.g. `\x1b[41m`).
+ * @param close - The ANSI background close code (e.g. `\x1b[49m`).
+ * @param text - The text to wrap.
+ * @returns The wrapped text.
  */
 export function wrapAnsiBg(open: string, close: string, text: string): string {
   if (text.includes(close)) {

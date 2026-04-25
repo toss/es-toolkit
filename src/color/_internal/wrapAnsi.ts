@@ -6,6 +6,11 @@
  * `\x1b[39m`), re-opens the outer style after each occurrence so the rest
  * of the text keeps its color. For background colors use `wrapAnsiBg`
  * instead — it adds the newline handling that backgrounds need.
+ *
+ * @param open - The ANSI open code (e.g. `\x1b[31m`).
+ * @param close - The ANSI close code (e.g. `\x1b[39m`).
+ * @param text - The text to wrap.
+ * @returns The wrapped text.
  */
 export function wrapAnsi(open: string, close: string, text: string): string {
   if (text.includes(close)) {

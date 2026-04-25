@@ -13,6 +13,9 @@ const HEX_COLOR_REGEX = /^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$/;
  * Only #RGB and #RRGGBB formats are supported. #RGBA and #RRGGBBAA
  * are not accepted because ANSI terminals do not support alpha channels.
  * Returns [0, 0, 0] (black) for invalid input.
+ *
+ * @param hex - A hex color string, with or without the leading `#`.
+ * @returns An `[r, g, b]` tuple with each component in the 0–255 range.
  */
 export function parseHex(hex: string): [number, number, number] {
   const raw = hex.startsWith('#') ? hex.slice(1) : hex;
