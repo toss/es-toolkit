@@ -1,5 +1,19 @@
 # es-toolkit Changelog
 
+## Version v1.46.0
+
+Released on April 22th, 2026.
+
+- Changed `AbortError` and `TimeoutError` to extend `DOMException`. ([#1660])
+- Added `keyBy` to the `map` entrypoint exports. ([#1650])
+- Added Claude Code plugin marketplace and es-toolkit usage skills. ([#1644])
+- Fixed `isBuffer` to add a browser export condition to avoid a 44KB Buffer polyfill. ([#1671])
+- Fixed `toCamelCaseKeys` and `toSnakeCaseKeys` to be exported from `compat` for the browser bundle. ([#1685])
+- Fixed `partial` by adding missing full-application overloads for 2/3/4 arguments. ([#1684])
+- Added Agent Skills and Claude Code Plugin guide to the AI Integration page. ([#1664])
+
+We sincerely thank @raon0211, @jantimon, @jaydeep-pipaliya, @ethanresnick, @zaewc, @minsoo-web, @wondonghwi, @xxxxxxjun, @jiji-hoon96, @james-rae, @Gamez0, and @dayongkr for their contributions. We appreciate your great efforts!
+
 ## Version v1.45.1
 
 Released on March 4th, 2026.
