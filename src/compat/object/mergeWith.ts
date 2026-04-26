@@ -1,6 +1,7 @@
 import { cloneDeep } from './cloneDeep.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { clone } from '../../object/clone.ts';
+import { isBuffer } from '../../predicate/isBuffer.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
 import { isArguments } from '../predicate/isArguments.ts';
@@ -8,12 +9,6 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
-
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
 
 type MergeWithCustomizer = (objValue: any, srcValue: any, key: string, object: any, source: any, stack: any) => any;
 
@@ -288,7 +283,7 @@ function mergeWithDeep(
       targetValue = { ...targetValue };
     }
 
-    if (typeof Buffer !== 'undefined' && Buffer.isBuffer(sourceValue)) {
+    if (isBuffer(sourceValue)) {
       sourceValue = cloneDeep(sourceValue);
     }
 
