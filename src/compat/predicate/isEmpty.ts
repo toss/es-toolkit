@@ -1,14 +1,9 @@
 import { isArguments } from './isArguments.ts';
 import { isArrayLike } from './isArrayLike.ts';
 import { isTypedArray } from './isTypedArray.ts';
+import { isBuffer } from '../../predicate/isBuffer.ts';
 import type { EmptyObjectOf } from '../_internal/EmptyObjectOf.ts';
 import { isPrototype } from '../_internal/isPrototype.ts';
-
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
 
 export function isEmpty<T extends { __trapAny: any }>(value?: T): boolean;
 export function isEmpty(value: string): value is '';
@@ -53,7 +48,7 @@ export function isEmpty(value?: unknown): boolean {
     if (
       typeof (value as any).splice !== 'function' &&
       typeof value !== 'string' &&
-      (typeof Buffer === 'undefined' || !Buffer.isBuffer(value)) &&
+      !isBuffer(value) &&
       !isTypedArray(value) &&
       !isArguments(value)
     ) {
