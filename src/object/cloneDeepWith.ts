@@ -24,6 +24,7 @@ import {
   uint16ArrayTag,
   uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
+import { isBuffer } from '../predicate/isBuffer.ts';
 import { isPrimitive } from '../predicate/isPrimitive.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
 
@@ -152,12 +153,8 @@ export function cloneDeepWithImpl<T>(
     return result as T;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (typeof Buffer !== 'undefined' && Buffer.isBuffer(valueToClone)) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return valueToClone.subarray() as T;
+  if (isBuffer(valueToClone)) {
+    return (valueToClone as any).subarray() as T;
   }
 
   if (isTypedArray(valueToClone)) {
