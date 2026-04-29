@@ -1,10 +1,10 @@
 # xorWith (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [xorWith](../../array/xorWith.md)
+::: warning 请使用 `es-toolkit` 的 [xorWith](../../../reference/array/xorWith.md)
 
 此 `xorWith` 函数由于处理 `null` 或 `undefined`、复杂的重复计算逻辑等而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [xorWith](../../array/xorWith.md)。
+请改用更快、更现代的 `es-toolkit` 的 [xorWith](../../../reference/array/xorWith.md)。
 
 :::
 

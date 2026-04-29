@@ -4,7 +4,7 @@
 
 此 `flattenDepth` 函数由于处理 `null` 或 `undefined` 而运行较慢。`es-toolkit` 的 `flatten` 函数没有这些额外处理,运行更快、更简单。
 
-请改用更快、更现代的 `es-toolkit` 的 [flatten](../../array/flatten.md)。
+请改用更快、更现代的 `es-toolkit` 的 [flatten](../../../reference/array/flatten.md)。
 
 :::
 

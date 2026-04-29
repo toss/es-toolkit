@@ -4,7 +4,7 @@
 
 此 `remove` 函数为了 Lodash 兼容性支持各种形式的谓词,因此实现较为复杂。主库中的 `remove` 函数仅支持简单的函数谓词,因此运行更快。
 
-请改用更快、更现代的 `es-toolkit` 的 [remove](../../array/remove.md)。
+请改用更快、更现代的 `es-toolkit` 的 [remove](../../../reference/array/remove.md)。
 
 :::
 

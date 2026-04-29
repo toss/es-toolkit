@@ -4,7 +4,7 @@
 
 此 `forEachRight` 函数由于处理 `null` 或 `undefined`、处理 `ArrayLike` 类型、支持各种条件函数形式等原因运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [forEachRight](../../array/forEachRight.md)。
+请使用更快、更现代的 `es-toolkit` 的 [forEachRight](../../../reference/array/forEachRight.md)。
 
 :::
 

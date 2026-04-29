@@ -4,7 +4,7 @@
 
 この`unzipWith`関数は`null`または`undefined`の処理、`ArrayLike`タイプ処理、さまざまな条件関数形式のサポートなどにより動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[unzipWith](../../array/unzipWith.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[unzipWith](../../../reference/array/unzipWith.md)を使用してください。
 
 :::
 

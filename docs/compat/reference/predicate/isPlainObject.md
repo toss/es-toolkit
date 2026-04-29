@@ -1,10 +1,10 @@
 # isPlainObject (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isPlainObject](../../predicate/isPlainObject.md) instead
+::: warning Use `es-toolkit`'s [isPlainObject](../../../reference/predicate/isPlainObject.md) instead
 
 This `isPlainObject` function operates slowly due to complex handling for Lodash compatibility.
 
-Use the faster and more modern `es-toolkit`'s [isPlainObject](../../predicate/isPlainObject.md) instead.
+Use the faster and more modern `es-toolkit`'s [isPlainObject](../../../reference/predicate/isPlainObject.md) instead.
 
 :::
 

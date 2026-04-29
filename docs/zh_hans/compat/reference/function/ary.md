@@ -1,10 +1,10 @@
 # ary (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [`ary`](../../function/ary.md)
+::: warning 请使用 `es-toolkit` 的 [`ary`](../../../reference/function/ary.md)
 
 由于复杂的参数验证,此 `ary` 函数运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [ary](../../function/ary.md)。
+请改用更快、更现代的 `es-toolkit` 的 [ary](../../../reference/function/ary.md)。
 
 :::
 

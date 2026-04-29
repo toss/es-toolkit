@@ -1,10 +1,10 @@
 # intersectionWith (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [intersectionWith](../../array/intersectionWith.md)
+::: warning 请使用 `es-toolkit` 的 [intersectionWith](../../../reference/array/intersectionWith.md)
 
 此 `intersectionWith` 函数由于处理 `null` 或 `undefined`、支持各种重载等原因运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [intersectionWith](../../array/intersectionWith.md)。
+请使用更快、更现代的 `es-toolkit` 的 [intersectionWith](../../../reference/array/intersectionWith.md)。
 
 :::
 

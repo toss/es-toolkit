@@ -1,10 +1,10 @@
 # takeRightWhile (Lodash compatibility)
 
-::: warning Please use [takeRightWhile](../../array/takeRightWhile.md) from `es-toolkit`
+::: warning Please use [takeRightWhile](../../../reference/array/takeRightWhile.md) from `es-toolkit`
 
 This `takeRightWhile` function operates slowly due to handling `null` or `undefined`.
 
-Please use the faster and modern [takeRightWhile](../../array/takeRightWhile.md) from `es-toolkit` instead.
+Please use the faster and modern [takeRightWhile](../../../reference/array/takeRightWhile.md) from `es-toolkit` instead.
 
 :::
 

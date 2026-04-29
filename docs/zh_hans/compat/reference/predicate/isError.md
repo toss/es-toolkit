@@ -1,9 +1,9 @@
 # isError (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [isError](../../predicate/isError.md)
+::: warning 请使用 es-toolkit 的 [isError](../../../reference/predicate/isError.md)
 这个 `isError` 函数由于 Lodash 兼容性的复杂处理而性能较慢。
 
-建议使用更快、更现代的 `es-toolkit` 的 [isError](../../predicate/isError.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [isError](../../../reference/predicate/isError.md)。
 :::
 
 检查值是否为 Error 对象。

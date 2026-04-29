@@ -2,7 +2,7 @@
 
 ::: warning Use `es-toolkit`'s `once`
 
-This `once` function has the same functionality as the main library [once](../../function/once.md) function in `es-toolkit`.
+This `once` function has the same functionality as the main library [once](../../../reference/function/once.md) function in `es-toolkit`.
 
 :::
 

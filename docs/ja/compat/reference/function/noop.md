@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit` の `noop` を使用してください
 
-`es-toolkit` にも同じ動作をする [noop](../../function/noop.md) 関数があります。
+`es-toolkit` にも同じ動作をする [noop](../../../reference/function/noop.md) 関数があります。
 
 :::
 

@@ -1,9 +1,9 @@
 # isUndefined (Lodash 兼容性)
 
-::: warning 使用 es-toolkit 的 [isUndefined](../../predicate/isUndefined.md)
+::: warning 使用 es-toolkit 的 [isUndefined](../../../reference/predicate/isUndefined.md)
 这个 `isUndefined` 函数由于 Lodash 兼容性的复杂处理而运行较慢。
 
-请使用更快且现代的 es-toolkit 的 [isUndefined](../../predicate/isUndefined.md)。
+请使用更快且现代的 es-toolkit 的 [isUndefined](../../../reference/predicate/isUndefined.md)。
 :::
 
 检查值是否为 `undefined`。

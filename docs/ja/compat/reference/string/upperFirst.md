@@ -4,7 +4,7 @@
 
 この `upperFirst` 関数は、`null` や `undefined` の処理のための変換ロジックにより動作が遅くなります。
 
-代わりに、より高速でモダンな `es-toolkit` の [upperFirst](../../string/upperFirst.md) を使用してください。
+代わりに、より高速でモダンな `es-toolkit` の [upperFirst](../../../reference/string/upperFirst.md) を使用してください。
 
 :::
 

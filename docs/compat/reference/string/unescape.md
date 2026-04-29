@@ -4,7 +4,7 @@
 
 This `unescape` function operates slowly due to conversion logic for handling `null` or `undefined`.
 
-Use the faster and more modern [unescape](../../string/unescape.md) from `es-toolkit` instead.
+Use the faster and more modern [unescape](../../../reference/string/unescape.md) from `es-toolkit` instead.
 
 :::
 

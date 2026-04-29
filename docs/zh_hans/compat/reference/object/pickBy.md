@@ -4,7 +4,7 @@
 
 这个 `pickBy` 函数由于类数组对象检查、`iteratee` 转换和键转换过程而相对较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [`pickBy`](../../object/pickBy.md)。
+请改用更快、更现代的 `es-toolkit` 的 [`pickBy`](../../../reference/object/pickBy.md)。
 
 :::
 

@@ -1,10 +1,10 @@
 # xorBy (Lodash互換)
 
-::: warning `es-toolkit`の[xorBy](../../array/xorBy.md)を使用してください
+::: warning `es-toolkit`の[xorBy](../../../reference/array/xorBy.md)を使用してください
 
 この`xorBy`関数は`null`または`undefined`の処理、複雑な重複計算ロジックなどにより動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[xorBy](../../array/xorBy.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[xorBy](../../../reference/array/xorBy.md)を使用してください。
 
 :::
 

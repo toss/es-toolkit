@@ -1,9 +1,9 @@
 # isEqualWith (Lodash Compatibility)
 
-::: warning Use es-toolkit's [isEqualWith](../../predicate/isEqualWith.md) instead
+::: warning Use es-toolkit's [isEqualWith](../../../reference/predicate/isEqualWith.md) instead
 This `isEqualWith` function operates slowly due to complex processing for Lodash compatibility.
 
-Use the faster and more modern `es-toolkit`'s [isEqualWith](../../predicate/isEqualWith.md) instead.
+Use the faster and more modern `es-toolkit`'s [isEqualWith](../../../reference/predicate/isEqualWith.md) instead.
 :::
 
 Checks if two values are equal using a custom comparison function.

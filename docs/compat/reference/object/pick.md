@@ -4,7 +4,7 @@
 
 This `pick` function is relatively slow due to complex path processing, calling `get`/`set` functions, and handling `null`/`undefined`.
 
-Use the faster and more modern [`pick`](../../object/pick.md) from `es-toolkit` instead.
+Use the faster and more modern [`pick`](../../../reference/object/pick.md) from `es-toolkit` instead.
 
 :::
 

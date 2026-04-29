@@ -1,10 +1,10 @@
 # isUndefined (Lodash 호환성)
 
-::: warning es-toolkit의 [ isUndefined](../../predicate/isUndefined.md)를 사용하세요
+::: warning es-toolkit의 [ isUndefined](../../../reference/predicate/isUndefined.md)를 사용하세요
 
 이 `isUndefined` 함수는 Lodash 호환성을 위한 복잡한 처리로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [isUndefined](../../predicate/isUndefined.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [isUndefined](../../../reference/predicate/isUndefined.md)를 사용하세요.
 
 :::
 

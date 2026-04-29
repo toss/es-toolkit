@@ -4,7 +4,7 @@
 
 This `clone` function is relatively slow due to complex logic that handles special object types.
 
-Use the faster and more modern [clone](../../object/clone.md) from `es-toolkit` instead.
+Use the faster and more modern [clone](../../../reference/object/clone.md) from `es-toolkit` instead.
 
 :::
 

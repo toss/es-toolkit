@@ -4,7 +4,7 @@
 
 この `difference` 関数は、`null` や `undefined` の処理、複数の配列引数処理により、複雑に動作します。
 
-代わりに、より高速で現代的な `es-toolkit` の [difference](../../array/difference.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [difference](../../../reference/array/difference.md) を使用してください。
 
 :::
 

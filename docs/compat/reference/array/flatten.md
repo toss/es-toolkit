@@ -4,7 +4,7 @@
 
 This `flatten` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, and supporting various condition function formats.
 
-Use the faster and more modern [flatten](../../array/flatten.md) from `es-toolkit` instead.
+Use the faster and more modern [flatten](../../../reference/array/flatten.md) from `es-toolkit` instead.
 
 :::
 

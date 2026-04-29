@@ -1,10 +1,10 @@
 # debounce (Lodash compatibility)
 
-::: warning Use [`debounce`](../../function/debounce.md) from `es-toolkit`
+::: warning Use [`debounce`](../../../reference/function/debounce.md) from `es-toolkit`
 
 This `debounce` function has overhead due to complex `maxWait` handling and Lodash-compatible option structure.
 
-Instead, use the faster and more modern [`debounce`](../../function/debounce.md) from `es-toolkit`.
+Instead, use the faster and more modern [`debounce`](../../../reference/function/debounce.md) from `es-toolkit`.
 
 :::
 

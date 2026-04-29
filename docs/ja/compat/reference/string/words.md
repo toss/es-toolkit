@@ -4,7 +4,7 @@
 
 この `words` 関数は、`null` や `undefined` の処理、複雑な Unicode サポートなどにより動作が遅くなります。
 
-代わりに、より高速でモダンな `es-toolkit` の [words](../../string/words.md) を使用してください。
+代わりに、より高速でモダンな `es-toolkit` の [words](../../../reference/string/words.md) を使用してください。
 
 :::
 

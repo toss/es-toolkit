@@ -4,7 +4,7 @@
 
 この `mergeWith` 関数は、複雑な型チェック、循環参照処理、特殊オブジェクト処理により相対的に遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[`mergeWith`](../../object/mergeWith.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[`mergeWith`](../../../reference/object/mergeWith.md)を使用してください。
 
 :::
 

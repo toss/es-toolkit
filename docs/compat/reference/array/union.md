@@ -1,10 +1,10 @@
 # union (Lodash Compatibility)
 
-::: warning Use [union](../../array/union.md) from `es-toolkit`
+::: warning Use [union](../../../reference/array/union.md) from `es-toolkit`
 
 This `union` function operates slowly due to complex array processing.
 
-Instead, use the faster and more modern [union](../../array/union.md) from `es-toolkit`.
+Instead, use the faster and more modern [union](../../../reference/array/union.md) from `es-toolkit`.
 
 :::
 

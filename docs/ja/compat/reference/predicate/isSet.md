@@ -1,10 +1,10 @@
 # isSet (Lodash 互換性)
 
-::: warning `es-toolkit`の [isSet](../../predicate/isSet.md)を使用してください
+::: warning `es-toolkit`の [isSet](../../../reference/predicate/isSet.md)を使用してください
 
 この `isSet` 関数はLodash互換性のための関数ですが、メインライブラリと同じ実装です。
 
-代わりにより高速で現代的な `es-toolkit` の [isSet](../../predicate/isSet.md) を使用してください。
+代わりにより高速で現代的な `es-toolkit` の [isSet](../../../reference/predicate/isSet.md) を使用してください。
 
 :::
 

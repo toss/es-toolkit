@@ -1,9 +1,9 @@
 # isBuffer (Lodash互換性)
 
-::: warning es-toolkitの[isBuffer](../../predicate/isBuffer.md)を使用してください
+::: warning es-toolkitの[isBuffer](../../../reference/predicate/isBuffer.md)を使用してください
 この`isBuffer`関数はLodash互換性のための複雑な処理により動作が遅くなります。
 
-代わりに、より速く現代的な`es-toolkit`の[isBuffer](../../predicate/isBuffer.md)を使用してください。
+代わりに、より速く現代的な`es-toolkit`の[isBuffer](../../../reference/predicate/isBuffer.md)を使用してください。
 :::
 
 値がBufferインスタンスかどうかを確認します。

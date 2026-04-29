@@ -1,10 +1,10 @@
 # xorBy (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [xorBy](../../array/xorBy.md)
+::: warning 请使用 `es-toolkit` 的 [xorBy](../../../reference/array/xorBy.md)
 
 此 `xorBy` 函数由于处理 `null` 或 `undefined`、复杂的重复计算逻辑等而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [xorBy](../../array/xorBy.md)。
+请改用更快、更现代的 `es-toolkit` 的 [xorBy](../../../reference/array/xorBy.md)。
 
 :::
 

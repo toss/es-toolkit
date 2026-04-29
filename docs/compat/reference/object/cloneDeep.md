@@ -4,7 +4,7 @@
 
 This `cloneDeep` function is relatively slow due to complex logic that handles special object types.
 
-Use the faster and more modern [cloneDeep](../../object/cloneDeep.md) from `es-toolkit` instead.
+Use the faster and more modern [cloneDeep](../../../reference/object/cloneDeep.md) from `es-toolkit` instead.
 
 :::
 

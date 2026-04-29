@@ -1,10 +1,10 @@
 # keyBy (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [keyBy](../../array/keyBy.md)
+::: warning Use `es-toolkit`'s [keyBy](../../../reference/array/keyBy.md)
 
 This `keyBy` function is slow due to handling `null` or `undefined`, various parameter types, etc.
 
-Use the faster and more modern `es-toolkit`'s [keyBy](../../array/keyBy.md) instead.
+Use the faster and more modern `es-toolkit`'s [keyBy](../../../reference/array/keyBy.md) instead.
 
 :::
 

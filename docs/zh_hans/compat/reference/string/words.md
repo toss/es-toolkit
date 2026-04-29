@@ -4,7 +4,7 @@
 
 由于需要处理 `null` 或 `undefined` 以及复杂的 Unicode 支持,此 `words` 函数运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [words](../../string/words.md)。
+请改用更快、更现代的 `es-toolkit` 的 [words](../../../reference/string/words.md)。
 
 :::
 

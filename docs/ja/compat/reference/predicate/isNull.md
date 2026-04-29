@@ -1,10 +1,10 @@
 # isNull (Lodash 互換性)
 
-::: warning es-toolkitの [isNull](../../predicate/isNull.md)を使用してください
+::: warning es-toolkitの [isNull](../../../reference/predicate/isNull.md)を使用してください
 
 この `isNull` 関数はLodash互換性のための関数ですが、メインライブラリと同じ実装です。
 
-代わりにより高速で現代的な `es-toolkit` の [isNull](../../predicate/isNull.md) を使用してください。
+代わりにより高速で現代的な `es-toolkit` の [isNull](../../../reference/predicate/isNull.md) を使用してください。
 
 :::
 

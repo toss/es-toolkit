@@ -4,7 +4,7 @@
 
 이 `flowRight` 함수는 Lodash 호환성을 위해 배열 평탄화 처리가 추가되어 복잡해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [flowRight](../../function/flowRight.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [flowRight](../../../reference/function/flowRight.md)를 사용하세요.
 
 :::
 

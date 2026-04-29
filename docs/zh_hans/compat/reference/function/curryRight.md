@@ -1,10 +1,10 @@
 # curryRight (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [`curryRight`](../../function/curryRight.md) 或手动闭包
+::: warning 请使用 `es-toolkit` 的 [`curryRight`](../../../reference/function/curryRight.md) 或手动闭包
 
 由于复杂的占位符处理、参数数量验证和参数组合逻辑,这个 `curryRight` 函数运行较慢。
 
-如果不需要占位符,请使用更快的 `es-toolkit` 的 [`curryRight`](../../function/curryRight.md) 或简单的闭包。
+如果不需要占位符,请使用更快的 `es-toolkit` 的 [`curryRight`](../../../reference/function/curryRight.md) 或简单的闭包。
 
 :::
 

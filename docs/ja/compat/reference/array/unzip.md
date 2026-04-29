@@ -1,10 +1,10 @@
 # unzip (Lodash互換)
 
-::: warning `es-toolkit`の[unzip](../../array/unzip.md)を使用してください
+::: warning `es-toolkit`の[unzip](../../../reference/array/unzip.md)を使用してください
 
 この`unzip`関数は`null`または`undefined`の処理、配列でない値のフィルタリングなどにより動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[unzip](../../array/unzip.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[unzip](../../../reference/array/unzip.md)を使用してください。
 
 :::
 

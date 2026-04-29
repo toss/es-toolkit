@@ -4,7 +4,7 @@
 
 这个 `partialRight` 函数由于许多重载和联合类型处理而效率低下。此外,在大多数情况下可以用更简单的箭头函数替代。
 
-建议使用更快且更现代的 `es-toolkit` 的 [`partialRight`](../../function/partialRight.md)。
+建议使用更快且更现代的 `es-toolkit` 的 [`partialRight`](../../../reference/function/partialRight.md)。
 
 :::
 

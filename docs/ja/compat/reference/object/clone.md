@@ -4,7 +4,7 @@
 
 この `clone` 関数は、特殊なオブジェクトタイプを処理する複雑なロジックにより相対的に遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [clone](../../object/clone.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [clone](../../../reference/object/clone.md) を使用してください。
 
 :::
 

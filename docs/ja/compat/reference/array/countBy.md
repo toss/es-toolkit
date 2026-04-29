@@ -4,7 +4,7 @@
 
 この `countBy` 関数は、複雑な変換関数処理と型変換により、動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [countBy](../../array/countBy.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [countBy](../../../reference/array/countBy.md) を使用してください。
 
 :::
 

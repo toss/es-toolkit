@@ -4,7 +4,7 @@
 
 This `findKey` function operates in a complex manner due to various condition type handling and compatibility logic.
 
-Instead, use the faster and more modern [findKey](../../object/findKey.md) from `es-toolkit`.
+Instead, use the faster and more modern [findKey](../../../reference/object/findKey.md) from `es-toolkit`.
 
 :::
 

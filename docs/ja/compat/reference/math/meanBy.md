@@ -1,10 +1,10 @@
 # meanBy (Lodash 互換性)
 
-::: warning es-toolkitの[meanBy](../../math/meanBy.md)を使用してください
+::: warning es-toolkitの[meanBy](../../../reference/math/meanBy.md)を使用してください
 
 この `meanBy` 関数はiteratee関数処理と型変換により動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [meanBy](../../math/meanBy.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [meanBy](../../../reference/math/meanBy.md) を使用してください。
 
 :::
 

@@ -4,7 +4,7 @@
 
 由于需要处理 `null` 或 `undefined` 的转换逻辑,此 `upperFirst` 函数运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [upperFirst](../../string/upperFirst.md)。
+请改用更快、更现代的 `es-toolkit` 的 [upperFirst](../../../reference/string/upperFirst.md)。
 
 :::
 

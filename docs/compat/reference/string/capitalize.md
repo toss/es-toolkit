@@ -4,7 +4,7 @@
 
 This `capitalize` function operates slower due to handling non-string input values.
 
-Instead, use the faster and more modern [capitalize](../../string/capitalize.md) from `es-toolkit`.
+Instead, use the faster and more modern [capitalize](../../../reference/string/capitalize.md) from `es-toolkit`.
 
 :::
 

@@ -2,9 +2,9 @@
 
 ::: warning `es-toolkit` の `ary` を使用してください
 
-この `unary` 関数は `ary` 関数の特殊なケースとして実装されています。より多くの制御が必要な場合は、`es-toolkit` の [ary](../../function/ary.md) を直接使用する方が効率的です。
+この `unary` 関数は `ary` 関数の特殊なケースとして実装されています。より多くの制御が必要な場合は、`es-toolkit` の [ary](../../../reference/function/ary.md) を直接使用する方が効率的です。
 
-代わりに、より高速で現代的な `es-toolkit` の [ary](../../function/ary.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [ary](../../../reference/function/ary.md) を使用してください。
 
 :::
 

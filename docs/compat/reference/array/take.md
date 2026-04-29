@@ -1,10 +1,10 @@
 # take (Lodash compatibility)
 
-::: warning Please use [take](../../array/take.md) from `es-toolkit`
+::: warning Please use [take](../../../reference/array/take.md) from `es-toolkit`
 
 This `take` function operates slowly due to additional processing for compatibility with Lodash.
 
-Please use the faster and modern [take](../../array/take.md) from `es-toolkit` instead.
+Please use the faster and modern [take](../../../reference/array/take.md) from `es-toolkit` instead.
 
 :::
 

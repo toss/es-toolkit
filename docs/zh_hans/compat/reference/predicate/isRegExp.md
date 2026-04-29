@@ -1,9 +1,9 @@
 # isRegExp (Lodash 兼容性)
 
-::: warning 使用 es-toolkit 的 [isRegExp](../../predicate/isRegExp.md)
+::: warning 使用 es-toolkit 的 [isRegExp](../../../reference/predicate/isRegExp.md)
 这个 `isRegExp` 函数是 Lodash 兼容性的函数，但是简单的类型检查。
 
-请使用更快且现代的 es-toolkit 的 [isRegExp](../../predicate/isRegExp.md)。
+请使用更快且现代的 es-toolkit 的 [isRegExp](../../../reference/predicate/isRegExp.md)。
 :::
 
 检查值是否为正则表达式。

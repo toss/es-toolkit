@@ -4,7 +4,7 @@
 
 此 `fill` 函数由于处理 `null` 或 `undefined`、支持类数组对象等原因而表现复杂。
 
-请改用更快、更现代的 `es-toolkit` 的 [`fill`](../../array/fill.md)。
+请改用更快、更现代的 `es-toolkit` 的 [`fill`](../../../reference/array/fill.md)。
 
 :::
 

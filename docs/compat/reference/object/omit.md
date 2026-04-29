@@ -4,7 +4,7 @@
 
 This `omit` function is relatively slow due to deep copying and calling the `unset` function.
 
-Use the faster and more modern [`omit`](../../object/omit.md) from `es-toolkit` instead.
+Use the faster and more modern [`omit`](../../../reference/object/omit.md) from `es-toolkit` instead.
 
 :::
 

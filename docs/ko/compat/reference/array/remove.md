@@ -4,7 +4,7 @@
 
 이 `remove` 함수는 Lodash와의 호환성을 위해 여러 형태의 predicate를 지원하므로 복잡하게 구현되어 있어요. 메인 라이브러리의 `remove` 함수는 간단한 함수 predicate만 지원하므로 더 빠르게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [remove](../../array/remove.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [remove](../../../reference/array/remove.md)를 사용하세요.
 
 :::
 

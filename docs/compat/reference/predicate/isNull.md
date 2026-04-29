@@ -1,10 +1,10 @@
 # isNull (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isNull](../../predicate/isNull.md) instead
+::: warning Use `es-toolkit`'s [isNull](../../../reference/predicate/isNull.md) instead
 
 This `isNull` function is a Lodash compatibility function, but has the same implementation as the main library.
 
-Use the faster and more modern `es-toolkit`'s [isNull](../../predicate/isNull.md) instead.
+Use the faster and more modern `es-toolkit`'s [isNull](../../../reference/predicate/isNull.md) instead.
 
 :::
 

@@ -1,10 +1,10 @@
 # without (Lodash互換)
 
-::: warning `es-toolkit`の[without](../../array/without.md)を使用してください
+::: warning `es-toolkit`の[without](../../../reference/array/without.md)を使用してください
 
 この`without`関数はLodash互換性のための追加処理により動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[without](../../array/without.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[without](../../../reference/array/without.md)を使用してください。
 
 :::
 

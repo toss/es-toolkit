@@ -4,7 +4,7 @@
 
 This `trimEnd` function operates slowly due to handling `null` or `undefined` and parameter order changes.
 
-Use the faster and more modern [trimEnd](../../string/trimEnd.md) from `es-toolkit` instead.
+Use the faster and more modern [trimEnd](../../../reference/string/trimEnd.md) from `es-toolkit` instead.
 
 :::
 

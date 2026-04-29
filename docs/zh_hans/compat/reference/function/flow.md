@@ -3,7 +3,7 @@
 ::: warning 使用 `es-toolkit` 的 `flow`
 这个 `flow` 函数为了 Lodash 兼容性添加了数组扁平化处理，变得复杂了。
 
-建议使用更快、更现代的 `es-toolkit` 的 [flow](../../function/flow.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [flow](../../../reference/function/flow.md)。
 :::
 
 创建一个新函数，从左到右依次执行给定的函数。

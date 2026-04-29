@@ -4,7 +4,7 @@
 
 由于需要处理各种条件类型和兼容性逻辑,此 `findKey` 函数的行为较为复杂。
 
-建议使用更快、更现代的 `es-toolkit` 的 [findKey](../../object/findKey.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [findKey](../../../reference/object/findKey.md)。
 
 :::
 

@@ -1,10 +1,10 @@
 # groupBy (Lodash Compatibility)
 
-::: warning Use [`groupBy`](../../array/groupBy.md) from `es-toolkit`
+::: warning Use [`groupBy`](../../../reference/array/groupBy.md) from `es-toolkit`
 
 This `groupBy` function operates slowly due to handling `null` or `undefined`, object support, complex type processing, etc.
 
-Instead, use the faster and more modern [`groupBy`](../../array/groupBy.md) from `es-toolkit`.
+Instead, use the faster and more modern [`groupBy`](../../../reference/array/groupBy.md) from `es-toolkit`.
 
 :::
 

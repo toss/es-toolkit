@@ -1,10 +1,10 @@
 # sampleSize (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [sampleSize](../../array/sampleSize.md)
+::: warning Use `es-toolkit`'s [sampleSize](../../../reference/array/sampleSize.md)
 
 This `sampleSize` function operates slowly due to `null` or `undefined` handling, object support, default value processing, etc.
 
-Instead, use the faster and more modern `es-toolkit`'s [sampleSize](../../array/sampleSize.md).
+Instead, use the faster and more modern `es-toolkit`'s [sampleSize](../../../reference/array/sampleSize.md).
 
 :::
 

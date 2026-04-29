@@ -1,10 +1,10 @@
 # head (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [head](../../array/head.md)
+::: warning 请使用 `es-toolkit` 的 [head](../../../reference/array/head.md)
 
 此 `head` 函数由于 `ArrayLike` 对象处理和数组转换过程而运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [head](../../array/head.md)。
+请使用更快、更现代的 `es-toolkit` 的 [head](../../../reference/array/head.md)。
 
 :::
 

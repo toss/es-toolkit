@@ -4,7 +4,7 @@
 
 This `pickBy` function is relatively slow due to array-like object checking, `iteratee` conversion, and key transformation processes.
 
-Use the faster and more modern [`pickBy`](../../object/pickBy.md) from `es-toolkit` instead.
+Use the faster and more modern [`pickBy`](../../../reference/object/pickBy.md) from `es-toolkit` instead.
 
 :::
 

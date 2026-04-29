@@ -1,10 +1,10 @@
 # last (Lodash兼容性)
 
-::: warning 使用`es-toolkit`的[last](../../array/last.md)
+::: warning 使用`es-toolkit`的[last](../../../reference/array/last.md)
 
 此`last`函数由于处理`null`或`undefined`而变得复杂。
 
-请使用更快、更现代的`es-toolkit`的[last](../../array/last.md)。
+请使用更快、更现代的`es-toolkit`的[last](../../../reference/array/last.md)。
 
 :::
 

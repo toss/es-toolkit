@@ -3,7 +3,7 @@
 ::: warning `es-toolkit` の `identity` を使用してください
 この `identity` 関数は `es-toolkit` のメインライブラリにも同じ機能の関数があります。単に入力値をそのまま返す機能です。
 
-代わりに、より高速で現代的な `es-toolkit` の [identity](../../function/identity.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [identity](../../../reference/function/identity.md) を使用してください。
 :::
 
 受け取った値をそのまま返します。

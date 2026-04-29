@@ -4,7 +4,7 @@
 
 This `forEachRight` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, support for various predicate function formats, etc.
 
-Instead, use the faster and more modern [`forEachRight`](../../array/forEachRight.md) from `es-toolkit`.
+Instead, use the faster and more modern [`forEachRight`](../../../reference/array/forEachRight.md) from `es-toolkit`.
 
 :::
 

@@ -3,7 +3,7 @@
 ::: warning Use `es-toolkit`'s `identity`
 This `identity` function has the same functionality in the main `es-toolkit` library. It simply returns the input value as is.
 
-Instead, use the faster and more modern `es-toolkit`'s [identity](../../function/identity.md).
+Instead, use the faster and more modern `es-toolkit`'s [identity](../../../reference/function/identity.md).
 :::
 
 Returns the received value as is.

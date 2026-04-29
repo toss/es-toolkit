@@ -1,10 +1,10 @@
 # unzip (Lodash 호환성)
 
-::: warning `es-toolkit`의 [unzip](../../array/unzip.md)를 사용하세요
+::: warning `es-toolkit`의 [unzip](../../../reference/array/unzip.md)를 사용하세요
 
 이 `unzip` 함수는 `null`이나 `undefined` 처리, 배열이 아닌 값 필터링 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [unzip](../../array/unzip.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [unzip](../../../reference/array/unzip.md)를 사용하세요.
 
 :::
 

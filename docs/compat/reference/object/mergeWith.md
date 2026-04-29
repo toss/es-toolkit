@@ -4,7 +4,7 @@
 
 This `mergeWith` function is relatively slow due to complex type checking, circular reference handling, and special object processing.
 
-Use the faster and more modern [`mergeWith`](../../object/mergeWith.md) from `es-toolkit` instead.
+Use the faster and more modern [`mergeWith`](../../../reference/object/mergeWith.md) from `es-toolkit` instead.
 
 :::
 

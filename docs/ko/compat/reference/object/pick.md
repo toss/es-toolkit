@@ -4,7 +4,7 @@
 
 이 `pick` 함수는 복잡한 경로 처리, `get`/`set` 함수 호출, `null`/`undefined` 처리 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [pick](../../object/pick.md)을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [pick](../../../reference/object/pick.md)을 사용하세요.
 
 :::
 

@@ -1,10 +1,10 @@
 # isMap (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isMap](../../predicate/isMap.md) instead
+::: warning Use `es-toolkit`'s [isMap](../../../reference/predicate/isMap.md) instead
 
 This `isMap` function operates slowly due to complex handling for Lodash compatibility.
 
-Use the faster and more modern `es-toolkit`'s [isMap](../../predicate/isMap.md) instead.
+Use the faster and more modern `es-toolkit`'s [isMap](../../../reference/predicate/isMap.md) instead.
 
 :::
 

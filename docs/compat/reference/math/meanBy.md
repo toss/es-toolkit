@@ -1,10 +1,10 @@
 # meanBy (Lodash Compatibility)
 
-::: warning Use [meanBy](../../math/meanBy.md) from es-toolkit
+::: warning Use [meanBy](../../../reference/math/meanBy.md) from es-toolkit
 
 This `meanBy` function works slowly due to iteratee function processing and type conversion.
 
-Use the faster and more modern [meanBy](../../math/meanBy.md) from `es-toolkit` instead.
+Use the faster and more modern [meanBy](../../../reference/math/meanBy.md) from `es-toolkit` instead.
 
 :::
 

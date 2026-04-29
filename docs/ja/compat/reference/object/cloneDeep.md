@@ -4,7 +4,7 @@
 
 この `cloneDeep` 関数は、特殊なオブジェクトタイプを処理する複雑なロジックにより相対的に遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [cloneDeep](../../object/cloneDeep.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [cloneDeep](../../../reference/object/cloneDeep.md) を使用してください。
 
 :::
 

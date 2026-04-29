@@ -4,7 +4,7 @@
 
 此 `differenceWith` 函数由于处理 `null` 和 `undefined`、多个数组处理、`ArrayLike` 类型处理等而运行较慢。
 
-请使用 `es-toolkit` 中更快、更现代的 [differenceWith](../../array/differenceWith.md)。
+请使用 `es-toolkit` 中更快、更现代的 [differenceWith](../../../reference/array/differenceWith.md)。
 
 :::
 

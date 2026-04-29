@@ -4,7 +4,7 @@
 
 この `unescape` 関数は、`null` や `undefined` の処理のための変換ロジックにより動作が遅くなります。
 
-代わりに、より高速でモダンな `es-toolkit` の [unescape](../../string/unescape.md) を使用してください。
+代わりに、より高速でモダンな `es-toolkit` の [unescape](../../../reference/string/unescape.md) を使用してください。
 
 :::
 

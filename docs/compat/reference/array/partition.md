@@ -1,10 +1,10 @@
 # partition (Lodash Compatibility)
 
-::: warning Use [partition](../../array/partition.md) from `es-toolkit` instead
+::: warning Use [partition](../../../reference/array/partition.md) from `es-toolkit` instead
 
 This `partition` function operates slowly due to handling `null` or `undefined` and various predicate types.
 
-Use the faster and more modern [partition](../../array/partition.md) from `es-toolkit` instead.
+Use the faster and more modern [partition](../../../reference/array/partition.md) from `es-toolkit` instead.
 
 :::
 

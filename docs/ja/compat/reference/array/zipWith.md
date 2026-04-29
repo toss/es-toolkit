@@ -1,10 +1,10 @@
 # zipWith (Lodash互換)
 
-::: warning `es-toolkit`の[zipWith](../../array/zipWith.md)を使用してください
+::: warning `es-toolkit`の[zipWith](../../../reference/array/zipWith.md)を使用してください
 
 この`zipWith`関数はLodash互換性のための追加処理により動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[zipWith](../../array/zipWith.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[zipWith](../../../reference/array/zipWith.md)を使用してください。
 
 :::
 

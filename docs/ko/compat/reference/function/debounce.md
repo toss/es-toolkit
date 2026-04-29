@@ -1,10 +1,10 @@
 # debounce (Lodash 호환성)
 
-::: warning `es-toolkit`의 [`debounce`](../../function/debounce.md)를 사용하세요
+::: warning `es-toolkit`의 [`debounce`](../../../reference/function/debounce.md)를 사용하세요
 
 이 `debounce` 함수는 복잡한 `maxWait` 처리와 Lodash 호환 옵션 구조로 인해 오버헤드가 있어요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [`debounce`](../../function/debounce.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [`debounce`](../../../reference/function/debounce.md)를 사용하세요.
 
 :::
 

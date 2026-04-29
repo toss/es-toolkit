@@ -1,10 +1,10 @@
 # rangeRight (Lodash Compatibility)
 
-::: warning Use [rangeRight](../../math/rangeRight.md) from es-toolkit
+::: warning Use [rangeRight](../../../reference/math/rangeRight.md) from es-toolkit
 
 This `rangeRight` function works slowly due to complex argument processing and type conversion.
 
-Use the faster and more modern [rangeRight](../../math/rangeRight.md) from `es-toolkit` instead.
+Use the faster and more modern [rangeRight](../../../reference/math/rangeRight.md) from `es-toolkit` instead.
 
 :::
 

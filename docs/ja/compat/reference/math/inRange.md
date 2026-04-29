@@ -1,10 +1,10 @@
 # inRange (Lodash 互換性)
 
-::: warning `es-toolkit`の[inRange](../../math/inRange.md)を使用してください
+::: warning `es-toolkit`の[inRange](../../../reference/math/inRange.md)を使用してください
 
 この `inRange` 関数は複雑な型変換とnull/undefined処理により動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [inRange](../../math/inRange.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [inRange](../../../reference/math/inRange.md) を使用してください。
 
 :::
 

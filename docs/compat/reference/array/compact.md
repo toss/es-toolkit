@@ -1,10 +1,10 @@
 # compact (Lodash compatible)
 
-::: warning Use [`compact`](../../array/compact.md) from `es-toolkit` instead
+::: warning Use [`compact`](../../../reference/array/compact.md) from `es-toolkit` instead
 
 This `compact` function operates slowly due to handling `null` or `undefined`, `size` default value processing, and more.
 
-Use the faster and more modern [compact](../../array/compact.md) from `es-toolkit` instead.
+Use the faster and more modern [compact](../../../reference/array/compact.md) from `es-toolkit` instead.
 
 :::
 

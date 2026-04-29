@@ -1,10 +1,10 @@
 # sum (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [sum](../../math/sum.md)
+::: warning 请使用 es-toolkit 的 [sum](../../../reference/math/sum.md)
 
 这个 `sum` 函数由于类型转换和 null/undefined 处理会运行较慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [sum](../../math/sum.md)。
+请使用更快、更现代的 `es-toolkit` 的 [sum](../../../reference/math/sum.md)。
 
 :::
 

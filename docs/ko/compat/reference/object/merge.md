@@ -4,7 +4,7 @@
 
 이 `merge` 함수는 내부적으로 복잡한 `mergeWith` 함수를 호출하여 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [merge](../../object/merge.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [merge](../../../reference/object/merge.md)를 사용하세요.
 
 :::
 

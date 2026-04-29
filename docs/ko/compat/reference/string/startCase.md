@@ -4,7 +4,7 @@
 
 이 `startCase` 함수는 `null`이나 `undefined` 처리를 위한 정규화 로직으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [startCase](../../string/startCase.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [startCase](../../../reference/string/startCase.md)를 사용하세요.
 
 :::
 

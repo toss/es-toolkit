@@ -1,10 +1,10 @@
 # pull (Lodash compatibility)
 
-::: warning Use [pull](../../array/pull.md) from `es-toolkit`
+::: warning Use [pull](../../../reference/array/pull.md) from `es-toolkit`
 
 This `pull` function is for Lodash compatibility and operates slower due to more complex type handling and overloading.
 
-Instead, use the faster and more modern [pull](../../array/pull.md) from `es-toolkit`.
+Instead, use the faster and more modern [pull](../../../reference/array/pull.md) from `es-toolkit`.
 
 :::
 

@@ -4,7 +4,7 @@
 
 この `trimStart` 関数は、`null` や `undefined` の処理、パラメータの順序変更などにより動作が遅くなります。
 
-代わりに、より高速でモダンな `es-toolkit` の [trimStart](../../string/trimStart.md) を使用してください。
+代わりに、より高速でモダンな `es-toolkit` の [trimStart](../../../reference/string/trimStart.md) を使用してください。
 
 :::
 

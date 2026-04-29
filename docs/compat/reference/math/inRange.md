@@ -1,10 +1,10 @@
 # inRange (Lodash Compatibility)
 
-::: warning Use [inRange](../../math/inRange.md) from `es-toolkit`
+::: warning Use [inRange](../../../reference/math/inRange.md) from `es-toolkit`
 
 This `inRange` function works slowly due to complex type conversion and null/undefined handling.
 
-Use the faster and more modern [inRange](../../math/inRange.md) from `es-toolkit` instead.
+Use the faster and more modern [inRange](../../../reference/math/inRange.md) from `es-toolkit` instead.
 
 :::
 

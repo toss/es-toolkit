@@ -1,10 +1,10 @@
 # intersectionWith (Lodash 호환성)
 
-::: warning `es-toolkit`의 [intersectionWith](../../array/intersectionWith.md)를 사용하세요
+::: warning `es-toolkit`의 [intersectionWith](../../../reference/array/intersectionWith.md)를 사용하세요
 
 이 `intersectionWith` 함수는 `null`이나 `undefined` 처리, 다양한 오버로딩 지원 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [intersectionWith](../../array/intersectionWith.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [intersectionWith](../../../reference/array/intersectionWith.md)를 사용하세요.
 
 :::
 

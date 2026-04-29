@@ -1,9 +1,9 @@
 # isArrayBuffer (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [isArrayBuffer](../../predicate/isArrayBuffer.md)
+::: warning 请使用 es-toolkit 的 [isArrayBuffer](../../../reference/predicate/isArrayBuffer.md)
 此 `isArrayBuffer` 函数由于 Lodash 兼容性的复杂处理而运行较慢。
 
-请改用更快的现代化 `es-toolkit` 的 [isArrayBuffer](../../predicate/isArrayBuffer.md)。
+请改用更快的现代化 `es-toolkit` 的 [isArrayBuffer](../../../reference/predicate/isArrayBuffer.md)。
 :::
 
 检查值是否为 ArrayBuffer。

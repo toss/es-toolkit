@@ -1,10 +1,10 @@
 # sumBy（Lodash 兼容性）
 
-::: warning 请使用 es-toolkit 的 [sumBy](../../math/sumBy.md)
+::: warning 请使用 es-toolkit 的 [sumBy](../../../reference/math/sumBy.md)
 
 这个 `sumBy` 函数由于 iteratee 函数处理和类型转换而运行缓慢。
 
-请使用更快更现代的 `es-toolkit` 的 [sumBy](../../math/sumBy.md)。
+请使用更快更现代的 `es-toolkit` 的 [sumBy](../../../reference/math/sumBy.md)。
 
 :::
 

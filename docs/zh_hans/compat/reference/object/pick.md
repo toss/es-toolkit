@@ -4,7 +4,7 @@
 
 这个 `pick` 函数由于复杂的路径处理、调用 `get`/`set` 函数以及处理 `null`/`undefined` 而相对较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [`pick`](../../object/pick.md)。
+请改用更快、更现代的 `es-toolkit` 的 [`pick`](../../../reference/object/pick.md)。
 
 :::
 

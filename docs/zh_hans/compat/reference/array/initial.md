@@ -1,10 +1,10 @@
 # initial (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [initial](../../array/initial.md)
+::: warning 请使用 `es-toolkit` 的 [initial](../../../reference/array/initial.md)
 
 此 `initial` 函数由于 `ArrayLike` 对象处理和数组转换过程而运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [initial](../../array/initial.md)。
+请使用更快、更现代的 `es-toolkit` 的 [initial](../../../reference/array/initial.md)。
 
 :::
 

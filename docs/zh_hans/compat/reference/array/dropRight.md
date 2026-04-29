@@ -4,7 +4,7 @@
 
 此 `dropRight` 函数由于处理 `null` 或 `undefined`、`guard` 参数处理、`toInteger` 转换等原因而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [`dropRight`](../../array/dropRight.md)。
+请改用更快、更现代的 `es-toolkit` 的 [`dropRight`](../../../reference/array/dropRight.md)。
 
 :::
 

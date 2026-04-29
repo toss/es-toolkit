@@ -1,10 +1,10 @@
 # curryRight (Lodash 호환성)
 
-::: warning `es-toolkit`의 [`curryRight`](../../function/curryRight.md)나 수동 클로저를 사용하세요
+::: warning `es-toolkit`의 [`curryRight`](../../../reference/function/curryRight.md)나 수동 클로저를 사용하세요
 
 이 `curryRight` 함수는 복잡한 placeholder 처리, arity 검증, 인수 합성 로직으로 인해 느리게 동작해요.
 
-placeholder가 필요하지 않다면 대신 더 빠른 `es-toolkit`의 [`curryRight`](../../function/curryRight.md)나 간단한 클로저를 사용하세요.
+placeholder가 필요하지 않다면 대신 더 빠른 `es-toolkit`의 [`curryRight`](../../../reference/function/curryRight.md)나 간단한 클로저를 사용하세요.
 
 :::
 

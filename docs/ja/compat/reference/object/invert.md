@@ -4,7 +4,7 @@
 
 この`invert`関数はLodash互換性のための複雑な処理により動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[`invert`](../../object/invert.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[`invert`](../../../reference/object/invert.md)を使用してください。
 
 :::
 

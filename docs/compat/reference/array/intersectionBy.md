@@ -1,10 +1,10 @@
 # intersectionBy (Lodash Compatibility)
 
-::: warning Use [`intersectionBy`](../../array/intersectionBy.md) from `es-toolkit`
+::: warning Use [`intersectionBy`](../../../reference/array/intersectionBy.md) from `es-toolkit`
 
 This `intersectionBy` function operates slowly due to complex condition processing, multiple array support, property path parsing, etc.
 
-Instead, use the faster and more modern [`intersectionBy`](../../array/intersectionBy.md) from `es-toolkit`.
+Instead, use the faster and more modern [`intersectionBy`](../../../reference/array/intersectionBy.md) from `es-toolkit`.
 
 :::
 

@@ -1,9 +1,9 @@
 # isNil (Lodash 兼容性)
 
-::: warning 使用 es-toolkit 的 [isNil](../../predicate/isNil.md)
+::: warning 使用 es-toolkit 的 [isNil](../../../reference/predicate/isNil.md)
 这个 `isNil` 函数由于 Lodash 兼容性的复杂处理而运行较慢。
 
-请使用更快且现代的 es-toolkit 的 [isNil](../../predicate/isNil.md)。
+请使用更快且现代的 es-toolkit 的 [isNil](../../../reference/predicate/isNil.md)。
 :::
 
 检查值是否为 `null` 或 `undefined`。

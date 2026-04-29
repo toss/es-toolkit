@@ -1,9 +1,9 @@
 # isPlainObject (Lodash 兼容性)
 
-::: warning 使用 es-toolkit 的 [isPlainObject](../../predicate/isPlainObject.md)
+::: warning 使用 es-toolkit 的 [isPlainObject](../../../reference/predicate/isPlainObject.md)
 这个 `isPlainObject` 函数由于 Lodash 兼容性的复杂处理而运行较慢。
 
-请使用更快且现代的 es-toolkit 的 [isPlainObject](../../predicate/isPlainObject.md)。
+请使用更快且现代的 es-toolkit 的 [isPlainObject](../../../reference/predicate/isPlainObject.md)。
 :::
 
 检查值是否为纯对象。

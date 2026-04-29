@@ -1,9 +1,9 @@
 # isDate (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [isDate](../../predicate/isDate.md)
+::: warning 请使用 es-toolkit 的 [isDate](../../../reference/predicate/isDate.md)
 这个 `isDate` 函数由于 Lodash 兼容性的复杂处理而性能较慢。
 
-建议使用更快、更现代的 `es-toolkit` 的 [isDate](../../predicate/isDate.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [isDate](../../../reference/predicate/isDate.md)。
 :::
 
 检查值是否为 Date 对象。

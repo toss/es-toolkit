@@ -1,10 +1,10 @@
 # isUndefined (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isUndefined](../../predicate/isUndefined.md) instead
+::: warning Use `es-toolkit`'s [isUndefined](../../../reference/predicate/isUndefined.md) instead
 
 This `isUndefined` function operates slowly due to complex handling for Lodash compatibility.
 
-Use the faster and more modern `es-toolkit`'s [isUndefined](../../predicate/isUndefined.md) instead.
+Use the faster and more modern `es-toolkit`'s [isUndefined](../../../reference/predicate/isUndefined.md) instead.
 
 :::
 

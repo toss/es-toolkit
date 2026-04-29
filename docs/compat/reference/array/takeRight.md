@@ -1,10 +1,10 @@
 # takeRight (Lodash compatibility)
 
-::: warning Please use [takeRight](../../array/takeRight.md) from `es-toolkit`
+::: warning Please use [takeRight](../../../reference/array/takeRight.md) from `es-toolkit`
 
 This `takeRight` function operates slowly due to handling `null` or `undefined`.
 
-Please use the faster and modern [takeRight](../../array/takeRight.md) from `es-toolkit` instead.
+Please use the faster and modern [takeRight](../../../reference/array/takeRight.md) from `es-toolkit` instead.
 
 :::
 

@@ -1,10 +1,10 @@
 # initial (Lodash 互換性)
 
-::: warning `es-toolkit`の[initial](../../array/initial.md)を使用してください
+::: warning `es-toolkit`の[initial](../../../reference/array/initial.md)を使用してください
 
 この`initial`関数は、`ArrayLike`オブジェクトの処理と配列変換プロセスにより、動作が遅くなります。
 
-代わりに、より高速でモダンな`es-toolkit`の[initial](../../array/initial.md)を使用してください。
+代わりに、より高速でモダンな`es-toolkit`の[initial](../../../reference/array/initial.md)を使用してください。
 
 :::
 

@@ -1,10 +1,10 @@
 # clamp (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [clamp](../../math/clamp.md)
+::: warning 请使用 `es-toolkit` 的 [clamp](../../../reference/math/clamp.md)
 
 这个 `clamp` 函数由于 NaN 验证和处理会运行较慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [clamp](../../math/clamp.md)。
+请使用更快、更现代的 `es-toolkit` 的 [clamp](../../../reference/math/clamp.md)。
 
 :::
 

@@ -4,7 +4,7 @@
 
 이 `omitBy` 함수는 배열 유사 객체 체크, `iteratee` 변환, 키 변환 과정 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [omitBy](../../object/omitBy.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [omitBy](../../../reference/object/omitBy.md)를 사용하세요.
 
 :::
 

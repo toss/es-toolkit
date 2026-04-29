@@ -2,7 +2,7 @@
 
 ::: warning 使用 `es-toolkit` 的 `once`
 
-这个 `once` 函数与 `es-toolkit` 主库的 [once](../../function/once.md) 函数具有相同的功能。
+这个 `once` 函数与 `es-toolkit` 主库的 [once](../../../reference/function/once.md) 函数具有相同的功能。
 
 :::
 

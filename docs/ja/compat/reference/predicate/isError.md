@@ -1,9 +1,9 @@
 # isError (Lodash互換性)
 
-::: warning es-toolkitの[isError](../../predicate/isError.md)を使用してください
+::: warning es-toolkitの[isError](../../../reference/predicate/isError.md)を使用してください
 この`isError`関数はLodash互換性のための複雑な処理により動作が遅くなります。
 
-代わりに、より速く現代的な`es-toolkit`の[isError](../../predicate/isError.md)を使用してください。
+代わりに、より速く現代的な`es-toolkit`の[isError](../../../reference/predicate/isError.md)を使用してください。
 :::
 
 値がErrorオブジェクトかどうかを確認します。

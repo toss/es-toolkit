@@ -4,7 +4,7 @@
 
 此 `unzipWith` 函数由于处理 `null` 或 `undefined`、`ArrayLike` 类型处理、支持各种条件函数形式等而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [unzipWith](../../array/unzipWith.md)。
+请改用更快、更现代的 `es-toolkit` 的 [unzipWith](../../../reference/array/unzipWith.md)。
 
 :::
 

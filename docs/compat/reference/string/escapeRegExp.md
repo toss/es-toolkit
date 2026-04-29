@@ -4,7 +4,7 @@
 
 This `escapeRegExp` function operates slower due to handling non-string input values.
 
-Instead, use the faster and more modern [escapeRegExp](../../string/escapeRegExp.md) from `es-toolkit`.
+Instead, use the faster and more modern [escapeRegExp](../../../reference/string/escapeRegExp.md) from `es-toolkit`.
 
 :::
 

@@ -4,7 +4,7 @@
 
 This `difference` function operates in a complex manner due to handling `null` or `undefined` and processing multiple array arguments.
 
-Use the faster and more modern [difference](../../array/difference.md) from `es-toolkit` instead.
+Use the faster and more modern [difference](../../../reference/array/difference.md) from `es-toolkit` instead.
 
 :::
 

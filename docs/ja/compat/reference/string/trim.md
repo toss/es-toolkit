@@ -4,7 +4,7 @@
 
 この `trim` 関数は、`null` や `undefined` の処理、配列型の `chars` 処理などにより動作が遅くなります。
 
-代わりに、より高速でモダンな `es-toolkit` の [trim](../../string/trim.md) を使用してください。
+代わりに、より高速でモダンな `es-toolkit` の [trim](../../../reference/string/trim.md) を使用してください。
 
 :::
 

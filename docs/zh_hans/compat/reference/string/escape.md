@@ -4,7 +4,7 @@
 
 由于处理非字符串输入值,此 `escape` 函数运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [escape](../../string/escape.md)。
+请改用更快、更现代的 `es-toolkit` 的 [escape](../../../reference/string/escape.md)。
 
 :::
 

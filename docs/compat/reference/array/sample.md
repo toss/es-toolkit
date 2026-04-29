@@ -1,10 +1,10 @@
 # sample (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [sample](../../array/sample.md)
+::: warning Use `es-toolkit`'s [sample](../../../reference/array/sample.md)
 
 This `sample` function operates slowly due to `null` or `undefined` handling, object value processing, etc.
 
-Instead, use the faster and more modern `es-toolkit`'s [sample](../../array/sample.md).
+Instead, use the faster and more modern `es-toolkit`'s [sample](../../../reference/array/sample.md).
 
 :::
 

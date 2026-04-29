@@ -4,7 +4,7 @@
 
 This `remove` function is implemented in a complex way to support various forms of predicates for Lodash compatibility. The `remove` function in the main library only supports simple function predicates, so it operates faster.
 
-Instead, use the faster and more modern [remove](../../array/remove.md) from `es-toolkit`.
+Instead, use the faster and more modern [remove](../../../reference/array/remove.md) from `es-toolkit`.
 
 :::
 

@@ -4,7 +4,7 @@
 
 由于处理非字符串输入值和删除缩写撇号等原因,此 `kebabCase` 函数运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [kebabCase](../../string/kebabCase.md)。
+请改用更快、更现代的 `es-toolkit` 的 [kebabCase](../../../reference/string/kebabCase.md)。
 
 :::
 

@@ -1,10 +1,10 @@
 # pull (Lodash 兼容性)
 
-::: warning 使用 `es-toolkit` 的 [pull](../../array/pull.md)
+::: warning 使用 `es-toolkit` 的 [pull](../../../reference/array/pull.md)
 
 此 `pull` 函数用于 Lodash 兼容性,由于更复杂的类型处理和重载而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [pull](../../array/pull.md)。
+请改用更快、更现代的 `es-toolkit` 的 [pull](../../../reference/array/pull.md)。
 
 :::
 

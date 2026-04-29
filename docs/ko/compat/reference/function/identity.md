@@ -4,7 +4,7 @@
 
 이 `identity` 함수는 `es-toolkit`의 메인 라이브러리에도 동일한 기능의 함수가 있어요. 단순히 입력값을 그대로 반환하는 기능이에요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [identity](../../function/identity.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [identity](../../../reference/function/identity.md)를 사용하세요.
 
 :::
 

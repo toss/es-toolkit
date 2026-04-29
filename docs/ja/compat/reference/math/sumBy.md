@@ -1,10 +1,10 @@
 # sumBy (Lodash 互換性)
 
-::: warning es-toolkitの[sumBy](../../math/sumBy.md)を使用してください
+::: warning es-toolkitの[sumBy](../../../reference/math/sumBy.md)を使用してください
 
 この`sumBy`関数はiteratee関数処理と型変換により動作が遅いです。
 
-代わりにより高速で現代的な`es-toolkit`の[sumBy](../../math/sumBy.md)を使用してください。
+代わりにより高速で現代的な`es-toolkit`の[sumBy](../../../reference/math/sumBy.md)を使用してください。
 
 :::
 

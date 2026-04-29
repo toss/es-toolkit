@@ -1,10 +1,10 @@
 # range (Lodash Compatibility)
 
-::: warning Use [range](../../math/range.md) from es-toolkit
+::: warning Use [range](../../../reference/math/range.md) from es-toolkit
 
 This `range` function works slowly due to complex argument processing and type conversion.
 
-Use the faster and more modern [range](../../math/range.md) from `es-toolkit` instead.
+Use the faster and more modern [range](../../../reference/math/range.md) from `es-toolkit` instead.
 
 :::
 

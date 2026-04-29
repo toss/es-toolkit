@@ -1,10 +1,10 @@
 # xorWith (Lodash互換)
 
-::: warning `es-toolkit`の[xorWith](../../array/xorWith.md)を使用してください
+::: warning `es-toolkit`の[xorWith](../../../reference/array/xorWith.md)を使用してください
 
 この`xorWith`関数は`null`または`undefined`の処理、複雑な重複計算ロジックなどにより動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[xorWith](../../array/xorWith.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[xorWith](../../../reference/array/xorWith.md)を使用してください。
 
 :::
 

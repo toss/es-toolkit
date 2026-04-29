@@ -1,9 +1,9 @@
 # isNull (Lodash 兼容性)
 
-::: warning 使用 es-toolkit 的 [isNull](../../predicate/isNull.md)
+::: warning 使用 es-toolkit 的 [isNull](../../../reference/predicate/isNull.md)
 这个 `isNull` 函数是 Lodash 兼容性的函数，但与主库具有相同的实现。
 
-请使用更快且现代的 es-toolkit 的 [isNull](../../predicate/isNull.md)。
+请使用更快且现代的 es-toolkit 的 [isNull](../../../reference/predicate/isNull.md)。
 :::
 
 检查值是否为 `null`。

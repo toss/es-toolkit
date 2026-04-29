@@ -1,10 +1,10 @@
 # intersection (Lodash 互換性)
 
-::: warning `es-toolkit`の[intersection](../../array/intersection.md)を使用してください
+::: warning `es-toolkit`の[intersection](../../../reference/array/intersection.md)を使用してください
 
 この`intersection`関数は、`null`や`undefined`の処理、複数配列のサポート、重複除去プロセスにより、動作が遅くなります。
 
-代わりに、より高速でモダンな`es-toolkit`の[intersection](../../array/intersection.md)を使用してください。
+代わりに、より高速でモダンな`es-toolkit`の[intersection](../../../reference/array/intersection.md)を使用してください。
 
 :::
 

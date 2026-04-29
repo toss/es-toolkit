@@ -4,7 +4,7 @@
 
 This `dropWhile` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, support for various predicate function formats, etc.
 
-Instead, use the faster and more modern [`dropWhile`](../../array/dropWhile.md) from `es-toolkit`.
+Instead, use the faster and more modern [`dropWhile`](../../../reference/array/dropWhile.md) from `es-toolkit`.
 
 :::
 

@@ -4,7 +4,7 @@
 
 This `countBy` function operates slowly due to complex transformation function processing and type conversion.
 
-Use the faster and more modern [countBy](../../array/countBy.md) from `es-toolkit` instead.
+Use the faster and more modern [countBy](../../../reference/array/countBy.md) from `es-toolkit` instead.
 
 :::
 

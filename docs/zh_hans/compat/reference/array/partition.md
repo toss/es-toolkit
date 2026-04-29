@@ -1,10 +1,10 @@
 # partition (Lodash 兼容性)
 
-::: warning 使用 `es-toolkit` 的 [partition](../../array/partition.md)
+::: warning 使用 `es-toolkit` 的 [partition](../../../reference/array/partition.md)
 
 由于需要处理 `null` 或 `undefined` 和各种条件类型,这个 `partition` 函数运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [partition](../../array/partition.md)。
+请改用更快、更现代的 `es-toolkit` 的 [partition](../../../reference/array/partition.md)。
 
 :::
 

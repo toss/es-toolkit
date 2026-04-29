@@ -1,10 +1,10 @@
 # last (Lodash互換性)
 
-::: warning `es-toolkit`の[last](../../array/last.md)を使用してください
+::: warning `es-toolkit`の[last](../../../reference/array/last.md)を使用してください
 
 この`last`関数は`null`や`undefined`の処理により複雑に動作します。
 
-代わりに、より高速でモダンな`es-toolkit`の[last](../../array/last.md)を使用してください。
+代わりに、より高速でモダンな`es-toolkit`の[last](../../../reference/array/last.md)を使用してください。
 
 :::
 

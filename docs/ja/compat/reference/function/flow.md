@@ -3,7 +3,7 @@
 ::: warning `es-toolkit` の `flow` を使用してください
 この `flow` 関数は Lodash 互換性のために配列のフラット化処理が追加されており、複雑です。
 
-代わりに、より高速で現代的な `es-toolkit` の [flow](../../function/flow.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [flow](../../../reference/function/flow.md) を使用してください。
 :::
 
 与えられた関数を左から右へ順次実行する新しい関数を作成します。

@@ -4,7 +4,7 @@
 
 This `unzipWith` function operates slowly due to handling of `null` or `undefined`, `ArrayLike` type processing, support for various condition function forms, etc.
 
-Instead, use the faster and more modern [unzipWith](../../array/unzipWith.md) from `es-toolkit`.
+Instead, use the faster and more modern [unzipWith](../../../reference/array/unzipWith.md) from `es-toolkit`.
 
 :::
 

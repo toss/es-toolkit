@@ -1,10 +1,10 @@
 # pullAt (Lodash Compatibility)
 
-::: warning Use [pullAt](../../array/pullAt.md) from `es-toolkit` instead
+::: warning Use [pullAt](../../../reference/array/pullAt.md) from `es-toolkit` instead
 
 This `pullAt` function operates slowly due to complex type handling and overloading.
 
-Use the faster and more modern [pullAt](../../array/pullAt.md) from `es-toolkit` instead.
+Use the faster and more modern [pullAt](../../../reference/array/pullAt.md) from `es-toolkit` instead.
 
 :::
 

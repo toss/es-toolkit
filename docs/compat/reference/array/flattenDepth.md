@@ -4,7 +4,7 @@
 
 This `flattenDepth` function operates slowly due to handling `null` or `undefined`. The `flatten` function from `es-toolkit` operates faster and simpler without this additional processing.
 
-Use the faster and more modern [flatten](../../array/flatten.md) from `es-toolkit` instead.
+Use the faster and more modern [flatten](../../../reference/array/flatten.md) from `es-toolkit` instead.
 
 :::
 

@@ -4,7 +4,7 @@
 
 이 `differenceBy` 함수는 복잡한 인자 처리와 반복자 변환으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [differenceBy](../../array/differenceBy.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [differenceBy](../../../reference/array/differenceBy.md)를 사용하세요.
 
 :::
 

@@ -1,10 +1,10 @@
 # partition (Lodash 互換性)
 
-::: warning `es-toolkit` の [partition](../../array/partition.md) を使用してください
+::: warning `es-toolkit` の [partition](../../../reference/array/partition.md) を使用してください
 
 この `partition` 関数は、`null` や `undefined` の処理、様々な条件タイプにより動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [partition](../../array/partition.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [partition](../../../reference/array/partition.md) を使用してください。
 
 :::
 

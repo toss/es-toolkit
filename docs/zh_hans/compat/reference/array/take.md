@@ -1,10 +1,10 @@
 # take (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [take](../../array/take.md)
+::: warning 请使用 `es-toolkit` 的 [take](../../../reference/array/take.md)
 
 这个 `take` 函数由于包含与 Lodash 兼容的额外处理而运行较慢。
 
-请使用更快且现代的 `es-toolkit` 的 [take](../../array/take.md) 代替。
+请使用更快且现代的 `es-toolkit` 的 [take](../../../reference/array/take.md) 代替。
 
 :::
 

@@ -4,7 +4,7 @@
 
 此 `shuffle` 函数为了与 Lodash 兼容而包含额外的处理，运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [shuffle](../../array/shuffle.md)。
+请使用更快、更现代的 `es-toolkit` 的 [shuffle](../../../reference/array/shuffle.md)。
 
 :::
 

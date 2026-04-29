@@ -4,7 +4,7 @@
 
 此 `drop` 函数由于处理 `null` 或 `undefined`、`toInteger` 转换等原因而表现复杂。
 
-请改用更快、更现代的 `es-toolkit` 的 [`drop`](../../array/drop.md)。
+请改用更快、更现代的 `es-toolkit` 的 [`drop`](../../../reference/array/drop.md)。
 
 :::
 

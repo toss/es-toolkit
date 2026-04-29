@@ -1,10 +1,10 @@
 # orderBy (Lodash 兼容性)
 
-::: warning 使用 `es-toolkit` 的 [orderBy](../../array/orderBy.md)
+::: warning 使用 `es-toolkit` 的 [orderBy](../../../reference/array/orderBy.md)
 
 由于需要处理 `null` 或 `undefined`、复杂路径导航和各种排序条件,这个 `orderBy` 函数运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [orderBy](../../array/orderBy.md)。
+请改用更快、更现代的 `es-toolkit` 的 [orderBy](../../../reference/array/orderBy.md)。
 
 :::
 

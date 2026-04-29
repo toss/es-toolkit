@@ -1,10 +1,10 @@
 # xorWith (Lodash Compatibility)
 
-::: warning Use [xorWith](../../array/xorWith.md) from `es-toolkit`
+::: warning Use [xorWith](../../../reference/array/xorWith.md) from `es-toolkit`
 
 This `xorWith` function operates slowly due to handling of `null` or `undefined`, complex duplicate calculation logic, etc.
 
-Instead, use the faster and more modern [xorWith](../../array/xorWith.md) from `es-toolkit`.
+Instead, use the faster and more modern [xorWith](../../../reference/array/xorWith.md) from `es-toolkit`.
 
 :::
 

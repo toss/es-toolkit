@@ -1,9 +1,9 @@
 # isError (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isError](../../predicate/isError.md) instead
+::: warning Use `es-toolkit`'s [isError](../../../reference/predicate/isError.md) instead
 This `isError` function operates slowly due to complex handling for Lodash compatibility.
 
-Use the faster and more modern `es-toolkit`'s [isError](../../predicate/isError.md) instead.
+Use the faster and more modern `es-toolkit`'s [isError](../../../reference/predicate/isError.md) instead.
 :::
 
 Checks if a value is an Error object.

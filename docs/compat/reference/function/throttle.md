@@ -4,7 +4,7 @@
 
 This `throttle` function uses the debounce function internally for Lodash compatibility, making it somewhat complex. It also has more complex default and option handling.
 
-Use faster, more modern [throttle](../../function/throttle.md) from `es-toolkit` instead.
+Use faster, more modern [throttle](../../../reference/function/throttle.md) from `es-toolkit` instead.
 
 :::
 

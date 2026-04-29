@@ -4,7 +4,7 @@
 
 이 `rest` 함수는 기본값 처리나 인덱스 유효성 검사 등의 추가 로직으로 인해 성능이 떨어질 수 있어요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [rest](../../function/rest.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [rest](../../../reference/function/rest.md)를 사용하세요.
 
 :::
 

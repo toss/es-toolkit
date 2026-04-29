@@ -1,10 +1,10 @@
 # xorBy (Lodash Compatibility)
 
-::: warning Use [xorBy](../../array/xorBy.md) from `es-toolkit`
+::: warning Use [xorBy](../../../reference/array/xorBy.md) from `es-toolkit`
 
 This `xorBy` function operates slowly due to handling of `null` or `undefined`, complex duplicate calculation logic, etc.
 
-Instead, use the faster and more modern [xorBy](../../array/xorBy.md) from `es-toolkit`.
+Instead, use the faster and more modern [xorBy](../../../reference/array/xorBy.md) from `es-toolkit`.
 
 :::
 

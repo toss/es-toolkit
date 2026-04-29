@@ -4,7 +4,7 @@
 
 この `differenceWith` 関数は、`null` や `undefined` の処理、複数の配列処理、`ArrayLike` 型の処理などにより、動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [differenceWith](../../array/differenceWith.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [differenceWith](../../../reference/array/differenceWith.md) を使用してください。
 
 :::
 

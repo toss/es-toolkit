@@ -1,9 +1,9 @@
 # isDate (Lodash互換性)
 
-::: warning es-toolkitの[isDate](../../predicate/isDate.md)を使用してください
+::: warning es-toolkitの[isDate](../../../reference/predicate/isDate.md)を使用してください
 この`isDate`関数はLodash互換性のための複雑な処理により動作が遅くなります。
 
-代わりに、より速く現代的な`es-toolkit`の[isDate](../../predicate/isDate.md)を使用してください。
+代わりに、より速く現代的な`es-toolkit`の[isDate](../../../reference/predicate/isDate.md)を使用してください。
 :::
 
 値がDateオブジェクトかどうかを確認します。

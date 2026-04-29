@@ -1,10 +1,10 @@
 # isEqual (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isEqual](../../predicate/isEqual.md)
+::: warning Use `es-toolkit`'s [isEqual](../../../reference/predicate/isEqual.md)
 
 This `isEqual` function operates slowly due to complex handling for Lodash compatibility.
 
-Instead, use the faster and modern [isEqual](../../predicate/isEqual.md) from `es-toolkit`.
+Instead, use the faster and modern [isEqual](../../../reference/predicate/isEqual.md) from `es-toolkit`.
 
 :::
 

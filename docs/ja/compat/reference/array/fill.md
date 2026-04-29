@@ -4,7 +4,7 @@
 
 この `fill` 関数は、`null` や `undefined` の処理、配列風オブジェクトのサポートなどにより複雑に動作します。
 
-代わりに、より高速で現代的な `es-toolkit` の [`fill`](../../array/fill.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [`fill`](../../../reference/array/fill.md) を使用してください。
 
 :::
 

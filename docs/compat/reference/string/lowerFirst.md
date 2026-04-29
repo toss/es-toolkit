@@ -4,7 +4,7 @@
 
 This `lowerFirst` function operates slower due to handling non-string input values.
 
-Instead, use the faster and more modern [lowerFirst](../../string/lowerFirst.md) from `es-toolkit`.
+Instead, use the faster and more modern [lowerFirst](../../../reference/string/lowerFirst.md) from `es-toolkit`.
 
 :::
 

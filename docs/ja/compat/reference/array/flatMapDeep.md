@@ -1,10 +1,10 @@
 # flatMapDeep (Lodash 互換性)
 
-::: warning `es-toolkit`の[`flatMapDeep`](../../array/flatMapDeep.md)を使用してください
+::: warning `es-toolkit`の[`flatMapDeep`](../../../reference/array/flatMapDeep.md)を使用してください
 
 この`flatMapDeep`関数は、複雑なコレクション型の処理と深い平坦化ロジックにより、動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[flatMapDeep](../../array/flatMapDeep.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[flatMapDeep](../../../reference/array/flatMapDeep.md)を使用してください。
 
 :::
 

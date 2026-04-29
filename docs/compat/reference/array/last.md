@@ -1,10 +1,10 @@
 # last (Lodash compatibility)
 
-::: warning Use `es-toolkit`'s [last](../../array/last.md)
+::: warning Use `es-toolkit`'s [last](../../../reference/array/last.md)
 
 This `last` function behaves complexly due to handling `null` or `undefined`.
 
-Instead, use the faster and more modern `es-toolkit`'s [last](../../array/last.md).
+Instead, use the faster and more modern `es-toolkit`'s [last](../../../reference/array/last.md).
 
 :::
 

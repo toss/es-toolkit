@@ -1,10 +1,10 @@
 # attempt (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [`attempt`](../../util/attempt.md) function or try-catch blocks instead
+::: warning Use `es-toolkit`'s [`attempt`](../../../reference/util/attempt.md) function or try-catch blocks instead
 
 This `attempt` function can be confusing because it returns both errors and return values without distinction.
 
-Instead, use the more direct and clear [`attempt`](../../util/attempt.md) function or try-catch blocks.
+Instead, use the more direct and clear [`attempt`](../../../reference/util/attempt.md) function or try-catch blocks.
 
 :::
 

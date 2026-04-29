@@ -4,7 +4,7 @@
 
 この `omit` 関数は、深いコピーと `unset` 関数の呼び出しにより相対的に遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[`omit`](../../object/omit.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[`omit`](../../../reference/object/omit.md)を使用してください。
 
 :::
 

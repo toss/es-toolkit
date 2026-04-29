@@ -2,9 +2,9 @@
 
 ::: warning Use `ary` from `es-toolkit` instead
 
-This `unary` function is implemented as a special case of the `ary` function. If you need more control, it's more efficient to use [ary](../../function/ary.md) from `es-toolkit` directly.
+This `unary` function is implemented as a special case of the `ary` function. If you need more control, it's more efficient to use [ary](../../../reference/function/ary.md) from `es-toolkit` directly.
 
-Use faster, more modern [ary](../../function/ary.md) from `es-toolkit` instead.
+Use faster, more modern [ary](../../../reference/function/ary.md) from `es-toolkit` instead.
 
 :::
 

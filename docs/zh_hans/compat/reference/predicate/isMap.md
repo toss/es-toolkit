@@ -1,10 +1,10 @@
 # isMap (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [isMap](../../predicate/isMap.md)
+::: warning 请使用 es-toolkit 的 [isMap](../../../reference/predicate/isMap.md)
 
 这个 `isMap` 函数由于 Lodash 兼容性的复杂处理而性能较慢。
 
-建议使用更快、更现代的 `es-toolkit` 的 [isMap](../../predicate/isMap.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [isMap](../../../reference/predicate/isMap.md)。
 
 :::
 

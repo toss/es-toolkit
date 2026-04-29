@@ -4,7 +4,7 @@
 
 この `capitalize` 関数は、文字列以外の入力値の処理により、動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [capitalize](../../string/capitalize.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [capitalize](../../../reference/string/capitalize.md) を使用してください。
 
 :::
 

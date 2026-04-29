@@ -4,7 +4,7 @@
 
 这个 `mapKeys` 函数由于处理 `null` 或 `undefined` 以及 `iteratee` 转换过程而相对较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [`mapKeys`](../../object/mapKeys.md)。
+请改用更快、更现代的 `es-toolkit` 的 [`mapKeys`](../../../reference/object/mapKeys.md)。
 
 :::
 

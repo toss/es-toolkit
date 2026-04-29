@@ -1,10 +1,10 @@
 # isNil (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isNil](../../predicate/isNil.md) instead
+::: warning Use `es-toolkit`'s [isNil](../../../reference/predicate/isNil.md) instead
 
 This `isNil` function operates slowly due to complex handling for Lodash compatibility.
 
-Use the faster and more modern `es-toolkit`'s [isNil](../../predicate/isNil.md) instead.
+Use the faster and more modern `es-toolkit`'s [isNil](../../../reference/predicate/isNil.md) instead.
 
 :::
 

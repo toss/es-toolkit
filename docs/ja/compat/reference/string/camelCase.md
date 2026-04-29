@@ -4,7 +4,7 @@
 
 この `camelCase` 関数は、文字列以外の入力値の処理と短縮アポストロフィの除去などにより、動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [camelCase](../../string/camelCase.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [camelCase](../../../reference/string/camelCase.md) を使用してください。
 
 :::
 

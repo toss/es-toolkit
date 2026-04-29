@@ -4,7 +4,7 @@
 
 This `merge` function is relatively slow as it internally calls the complex `mergeWith` function.
 
-Use the faster and more modern [`merge`](../../object/merge.md) from `es-toolkit` instead.
+Use the faster and more modern [`merge`](../../../reference/object/merge.md) from `es-toolkit` instead.
 
 :::
 

@@ -4,7 +4,7 @@
 
 この `trimEnd` 関数は、`null` や `undefined` の処理、パラメータの順序変更などにより動作が遅くなります。
 
-代わりに、より高速でモダンな `es-toolkit` の [trimEnd](../../string/trimEnd.md) を使用してください。
+代わりに、より高速でモダンな `es-toolkit` の [trimEnd](../../../reference/string/trimEnd.md) を使用してください。
 
 :::
 

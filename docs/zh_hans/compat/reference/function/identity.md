@@ -3,7 +3,7 @@
 ::: warning 使用 `es-toolkit` 的 `identity`
 这个 `identity` 函数在 `es-toolkit` 的主库中也有相同功能的函数。它只是简单地返回输入值。
 
-建议使用更快、更现代的 `es-toolkit` 的 [identity](../../function/identity.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [identity](../../../reference/function/identity.md)。
 :::
 
 返回接收到的值。

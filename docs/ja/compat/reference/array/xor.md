@@ -1,10 +1,10 @@
 # xor (Lodash互換)
 
-::: warning `es-toolkit`の[xor](../../array/xor.md)を使用してください
+::: warning `es-toolkit`の[xor](../../../reference/array/xor.md)を使用してください
 
 この`xor`関数は`null`または`undefined`の処理、複雑な重複計算ロジックなどにより動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[xor](../../array/xor.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[xor](../../../reference/array/xor.md)を使用してください。
 
 :::
 

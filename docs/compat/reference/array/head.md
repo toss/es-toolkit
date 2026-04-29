@@ -1,10 +1,10 @@
 # head (Lodash Compatibility)
 
-::: warning Use [`head`](../../array/head.md) from `es-toolkit`
+::: warning Use [`head`](../../../reference/array/head.md) from `es-toolkit`
 
 This `head` function operates slowly due to `ArrayLike` object processing and array conversion process.
 
-Instead, use the faster and more modern [`head`](../../array/head.md) from `es-toolkit`.
+Instead, use the faster and more modern [`head`](../../../reference/array/head.md) from `es-toolkit`.
 
 :::
 

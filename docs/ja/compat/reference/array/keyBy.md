@@ -1,10 +1,10 @@
 # keyBy (Lodash 互換性)
 
-::: warning `es-toolkit` の [keyBy](../../array/keyBy.md) を使用してください
+::: warning `es-toolkit` の [keyBy](../../../reference/array/keyBy.md) を使用してください
 
 この `keyBy` 関数は、`null` や `undefined` の処理、さまざまなパラメータ型の処理などにより動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [keyBy](../../array/keyBy.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [keyBy](../../../reference/array/keyBy.md) を使用してください。
 
 :::
 

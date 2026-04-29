@@ -4,7 +4,7 @@
 
 This `differenceWith` function operates slowly due to handling `null` or `undefined`, processing multiple arrays, and `ArrayLike` type processing.
 
-Use the faster and more modern [differenceWith](../../array/differenceWith.md) from `es-toolkit` instead.
+Use the faster and more modern [differenceWith](../../../reference/array/differenceWith.md) from `es-toolkit` instead.
 
 :::
 

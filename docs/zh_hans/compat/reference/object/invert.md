@@ -4,7 +4,7 @@
 
 由于 Lodash 兼容性所需的复杂处理,此 `invert` 函数运行较慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [`invert`](../../object/invert.md)。
+请使用更快、更现代的 `es-toolkit` 的 [`invert`](../../../reference/object/invert.md)。
 
 :::
 

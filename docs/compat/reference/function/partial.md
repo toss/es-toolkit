@@ -4,7 +4,7 @@
 
 This `partial` function is inefficient due to many overloads and union type handling. In most cases, it can be replaced with a simpler arrow function.
 
-Instead, use the faster and more modern [`partial`](../../function/partial.md) from `es-toolkit`.
+Instead, use the faster and more modern [`partial`](../../../reference/function/partial.md) from `es-toolkit`.
 
 :::
 

@@ -1,10 +1,10 @@
 # zip (Lodash互換)
 
-::: warning `es-toolkit`の[zip](../../array/zip.md)を使用してください
+::: warning `es-toolkit`の[zip](../../../reference/array/zip.md)を使用してください
 
 この`zip`関数はLodash互換性のための追加処理により動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[zip](../../array/zip.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[zip](../../../reference/array/zip.md)を使用してください。
 
 :::
 

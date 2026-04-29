@@ -1,10 +1,10 @@
 # flatMapDepth (Lodash 互換性)
 
-::: warning `es-toolkit`の[flatMap](../../array/flatMap.md)を使用してください
+::: warning `es-toolkit`の[flatMap](../../../reference/array/flatMap.md)を使用してください
 
 この`flatMapDepth`関数は、Lodashとの互換性のために様々な形式のイテレータをサポートし、`null`や`undefined`の処理などにより複雑に実装されています。メインライブラリの`flatMap`関数はシンプルな関数イテレータのみをサポートするため、より高速に動作します。
 
-代わりに、より高速で現代的な`es-toolkit`の[flatMap](../../array/flatMap.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[flatMap](../../../reference/array/flatMap.md)を使用してください。
 
 :::
 

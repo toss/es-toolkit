@@ -1,10 +1,10 @@
 # before (Lodash Compatibility)
 
-::: warning Use [`before`](../../function/before.md) from `es-toolkit`
+::: warning Use [`before`](../../../reference/function/before.md) from `es-toolkit`
 
 This `before` function operates slower due to complex type validation and integer conversion handling.
 
-Instead, use the faster and more modern [before](../../function/before.md) from `es-toolkit`.
+Instead, use the faster and more modern [before](../../../reference/function/before.md) from `es-toolkit`.
 
 :::
 

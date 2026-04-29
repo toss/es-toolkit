@@ -4,7 +4,7 @@
 
 이 `difference` 함수는 `null`이나 `undefined` 처리, 여러 배열 인자 처리로 인해 복잡하게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [difference](../../array/difference.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [difference](../../../reference/array/difference.md)를 사용하세요.
 
 :::
 

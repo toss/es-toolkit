@@ -4,7 +4,7 @@
 
 由于需要处理 `null` 或 `undefined` 以及数组类型的 `chars`,此 `trim` 函数运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [trim](../../string/trim.md)。
+请改用更快、更现代的 `es-toolkit` 的 [trim](../../../reference/string/trim.md)。
 
 :::
 

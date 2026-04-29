@@ -4,7 +4,7 @@
 
 This `mapValues` function is relatively slow due to handling `null` or `undefined` and the `iteratee` conversion process.
 
-Use the faster and more modern [`mapValues`](../../object/mapValues.md) from `es-toolkit` instead.
+Use the faster and more modern [`mapValues`](../../../reference/object/mapValues.md) from `es-toolkit` instead.
 
 :::
 

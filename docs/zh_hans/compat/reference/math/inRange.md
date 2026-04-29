@@ -1,10 +1,10 @@
 # inRange (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [inRange](../../math/inRange.md)
+::: warning 请使用 `es-toolkit` 的 [inRange](../../../reference/math/inRange.md)
 
 这个 `inRange` 函数由于复杂的类型转换和 null/undefined 处理会运行较慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [inRange](../../math/inRange.md)。
+请使用更快、更现代的 `es-toolkit` 的 [inRange](../../../reference/math/inRange.md)。
 
 :::
 

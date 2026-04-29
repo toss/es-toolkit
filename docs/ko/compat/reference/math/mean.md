@@ -1,10 +1,10 @@
 # mean (Lodash 호환성)
 
-::: warning es-toolkit의 [mean](../../math/mean.md)를 사용하세요
+::: warning es-toolkit의 [mean](../../../reference/math/mean.md)를 사용하세요
 
 이 `mean` 함수는 타입 변환과 null/undefined 처리로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [mean](../../math/mean.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [mean](../../../reference/math/mean.md)를 사용하세요.
 
 :::
 

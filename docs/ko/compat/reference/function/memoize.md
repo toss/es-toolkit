@@ -4,7 +4,7 @@
 
 이 `memoize` 함수는 `resolver` 함수의 `null` 체크, `MapCache` 인터페이스의 복잡한 타입 처리, 그리고 Lodash 호환성을 위한 추가적인 오버헤드로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [memoize](../../function/memoize.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [memoize](../../../reference/function/memoize.md)를 사용하세요.
 
 :::
 

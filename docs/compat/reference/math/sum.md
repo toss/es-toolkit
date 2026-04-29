@@ -1,10 +1,10 @@
 # sum (Lodash Compatibility)
 
-::: warning Use [sum](../../math/sum.md) from es-toolkit
+::: warning Use [sum](../../../reference/math/sum.md) from es-toolkit
 
 This `sum` function works slowly due to type conversion and null/undefined handling.
 
-Use the faster and more modern [sum](../../math/sum.md) from `es-toolkit` instead.
+Use the faster and more modern [sum](../../../reference/math/sum.md) from `es-toolkit` instead.
 
 :::
 

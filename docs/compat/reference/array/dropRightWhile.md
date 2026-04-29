@@ -4,7 +4,7 @@
 
 This `dropRightWhile` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, support for various predicate function formats, etc.
 
-Instead, use the faster and more modern [`dropRightWhile`](../../array/dropRightWhile.md) from `es-toolkit`.
+Instead, use the faster and more modern [`dropRightWhile`](../../../reference/array/dropRightWhile.md) from `es-toolkit`.
 
 :::
 

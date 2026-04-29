@@ -4,7 +4,7 @@
 
 この`startCase`関数は、`null`または`undefined`を処理するための正規化ロジックにより、動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[startCase](../../string/startCase.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[startCase](../../../reference/string/startCase.md)を使用してください。
 
 :::
 

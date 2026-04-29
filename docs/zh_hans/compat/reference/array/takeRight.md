@@ -1,10 +1,10 @@
 # takeRight (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [takeRight](../../array/takeRight.md)
+::: warning 请使用 `es-toolkit` 的 [takeRight](../../../reference/array/takeRight.md)
 
 这个 `takeRight` 函数由于处理 `null` 或 `undefined` 等原因运行较慢。
 
-请使用更快且现代的 `es-toolkit` 的 [takeRight](../../array/takeRight.md) 代替。
+请使用更快且现代的 `es-toolkit` 的 [takeRight](../../../reference/array/takeRight.md) 代替。
 
 :::
 

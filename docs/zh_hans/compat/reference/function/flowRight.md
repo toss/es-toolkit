@@ -3,7 +3,7 @@
 ::: warning 使用 `es-toolkit` 的 `flowRight`
 这个 `flowRight` 函数为了 Lodash 兼容性添加了数组扁平化处理，变得复杂了。
 
-建议使用更快、更现代的 `es-toolkit` 的 [flowRight](../../function/flowRight.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [flowRight](../../../reference/function/flowRight.md)。
 :::
 
 创建一个新函数，从右到左依次执行给定的函数。

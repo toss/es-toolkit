@@ -4,7 +4,7 @@
 
 由于处理 `null` 或 `undefined` 的规范化逻辑,此 `startCase` 函数运行速度较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [startCase](../../string/startCase.md)。
+请改用更快、更现代的 `es-toolkit` 的 [startCase](../../../reference/string/startCase.md)。
 
 :::
 

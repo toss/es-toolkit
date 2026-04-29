@@ -1,10 +1,10 @@
 # before (Lodash 互換性)
 
-::: warning `es-toolkit` の [`before`](../../function/before.md) を使用してください
+::: warning `es-toolkit` の [`before`](../../../reference/function/before.md) を使用してください
 
 この `before` 関数は、複雑な型検証と整数変換処理により動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [before](../../function/before.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [before](../../../reference/function/before.md) を使用してください。
 
 :::
 

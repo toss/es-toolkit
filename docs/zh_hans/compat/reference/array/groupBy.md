@@ -1,10 +1,10 @@
 # groupBy (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [groupBy](../../array/groupBy.md)
+::: warning 请使用 `es-toolkit` 的 [groupBy](../../../reference/array/groupBy.md)
 
 此 `groupBy` 函数由于处理 `null` 或 `undefined`、对象支持、复杂类型处理等原因运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [groupBy](../../array/groupBy.md)。
+请使用更快、更现代的 `es-toolkit` 的 [groupBy](../../../reference/array/groupBy.md)。
 
 :::
 

@@ -1,10 +1,10 @@
 # takeWhile (Lodash 互換性)
 
-::: warning `es-toolkit`の[takeWhile](../../array/takeWhile.md)を使用してください
+::: warning `es-toolkit`の[takeWhile](../../../reference/array/takeWhile.md)を使用してください
 
 この`takeWhile`関数は、`null`や`undefined`の処理などにより遅く動作します。
 
-代わりに、より高速で現代的な`es-toolkit`の[takeWhile](../../array/takeWhile.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[takeWhile](../../../reference/array/takeWhile.md)を使用してください。
 
 :::
 

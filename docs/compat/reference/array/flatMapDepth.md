@@ -1,10 +1,10 @@
 # flatMapDepth (Lodash Compatibility)
 
-::: warning Use [flatMap](../../array/flatMap.md) from `es-toolkit`
+::: warning Use [flatMap](../../../reference/array/flatMap.md) from `es-toolkit`
 
 This `flatMapDepth` function is implemented in a complex way to support various forms of iteratees and handle `null` or `undefined` for Lodash compatibility. The `flatMap` function in the main library only supports simple function iteratees, so it operates faster.
 
-Use the faster and more modern [flatMap](../../array/flatMap.md) from `es-toolkit` instead.
+Use the faster and more modern [flatMap](../../../reference/array/flatMap.md) from `es-toolkit` instead.
 
 :::
 

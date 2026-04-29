@@ -1,10 +1,10 @@
 # isSet (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isSet](../../predicate/isSet.md) instead
+::: warning Use `es-toolkit`'s [isSet](../../../reference/predicate/isSet.md) instead
 
 This `isSet` function is a Lodash compatibility function, but has the same implementation as the main library.
 
-Use the faster and more modern `es-toolkit`'s [isSet](../../predicate/isSet.md) instead.
+Use the faster and more modern `es-toolkit`'s [isSet](../../../reference/predicate/isSet.md) instead.
 
 :::
 

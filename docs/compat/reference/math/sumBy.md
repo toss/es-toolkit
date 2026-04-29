@@ -1,10 +1,10 @@
 # sumBy (Lodash Compatibility)
 
-::: warning Use [sumBy](../../math/sumBy.md) from es-toolkit
+::: warning Use [sumBy](../../../reference/math/sumBy.md) from es-toolkit
 
 This `sumBy` function works slowly due to iteratee function processing and type conversion.
 
-Use the faster and more modern [sumBy](../../math/sumBy.md) from `es-toolkit` instead.
+Use the faster and more modern [sumBy](../../../reference/math/sumBy.md) from `es-toolkit` instead.
 
 :::
 

@@ -1,10 +1,10 @@
 # minBy (Lodash Compatibility)
 
-::: warning Use [minBy](../../array/minBy.md) from es-toolkit
+::: warning Use [minBy](../../../reference/array/minBy.md) from es-toolkit
 
 This `minBy` function works slowly due to iteratee function processing and type conversion.
 
-Use the faster and more modern [minBy](../../array/minBy.md) from `es-toolkit` instead.
+Use the faster and more modern [minBy](../../../reference/array/minBy.md) from `es-toolkit` instead.
 
 :::
 

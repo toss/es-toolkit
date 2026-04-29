@@ -1,10 +1,10 @@
 # pull (Lodash 互換性)
 
-::: warning `es-toolkit` の [pull](../../array/pull.md) を使用してください
+::: warning `es-toolkit` の [pull](../../../reference/array/pull.md) を使用してください
 
 この `pull` 関数は Lodash 互換性のための関数であり、より複雑な型処理とオーバーロードにより動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [pull](../../array/pull.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [pull](../../../reference/array/pull.md) を使用してください。
 
 :::
 

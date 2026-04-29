@@ -3,7 +3,7 @@
 ::: warning Use `es-toolkit`'s `curry` or manual closures
 This `curry` function performs slowly due to complex placeholder handling, arity validation, and argument composition logic.
 
-If you don't need placeholders, use the faster `es-toolkit`'s [`curry`](../../function/curry.md) or simple closures instead.
+If you don't need placeholders, use the faster `es-toolkit`'s [`curry`](../../../reference/function/curry.md) or simple closures instead.
 :::
 
 Curries a function so it can accept arguments one at a time or multiple at once.

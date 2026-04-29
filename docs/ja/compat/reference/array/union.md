@@ -1,10 +1,10 @@
 # union (Lodash互換)
 
-::: warning `es-toolkit`の[union](../../array/union.md)を使用してください
+::: warning `es-toolkit`の[union](../../../reference/array/union.md)を使用してください
 
 この`union`関数は複雑な配列処理により動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[union](../../array/union.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[union](../../../reference/array/union.md)を使用してください。
 
 :::
 

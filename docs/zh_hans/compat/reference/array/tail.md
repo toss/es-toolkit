@@ -1,10 +1,10 @@
 # tail (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [tail](../../array/tail.md)
+::: warning 请使用 `es-toolkit` 的 [tail](../../../reference/array/tail.md)
 
 这个 `tail` 函数由于处理 `null` 或 `undefined` 等原因运行较慢。
 
-请使用更快且现代的 `es-toolkit` 的 [tail](../../array/tail.md) 代替。
+请使用更快且现代的 `es-toolkit` 的 [tail](../../../reference/array/tail.md) 代替。
 
 :::
 

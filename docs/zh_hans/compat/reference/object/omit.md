@@ -4,7 +4,7 @@
 
 这个 `omit` 函数由于深拷贝和调用 `unset` 函数而相对较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [`omit`](../../object/omit.md)。
+请改用更快、更现代的 `es-toolkit` 的 [`omit`](../../../reference/object/omit.md)。
 
 :::
 

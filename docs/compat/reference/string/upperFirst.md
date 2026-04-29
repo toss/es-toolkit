@@ -4,7 +4,7 @@
 
 This `upperFirst` function operates slowly due to conversion logic for handling `null` or `undefined`.
 
-Use the faster and more modern [upperFirst](../../string/upperFirst.md) from `es-toolkit` instead.
+Use the faster and more modern [upperFirst](../../../reference/string/upperFirst.md) from `es-toolkit` instead.
 
 :::
 

@@ -4,7 +4,7 @@
 
 此 `countBy` 函数由于复杂的转换函数处理和类型转换而运行较慢。
 
-请使用 `es-toolkit` 中更快、更现代的 [countBy](../../array/countBy.md)。
+请使用 `es-toolkit` 中更快、更现代的 [countBy](../../../reference/array/countBy.md)。
 
 :::
 

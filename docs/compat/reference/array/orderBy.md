@@ -1,10 +1,10 @@
 # orderBy (Lodash Compatibility)
 
-::: warning Use [orderBy](../../array/orderBy.md) from `es-toolkit` instead
+::: warning Use [orderBy](../../../reference/array/orderBy.md) from `es-toolkit` instead
 
 This `orderBy` function operates slowly due to handling `null` or `undefined`, complex path navigation, and various sorting criteria.
 
-Use the faster and more modern [orderBy](../../array/orderBy.md) from `es-toolkit` instead.
+Use the faster and more modern [orderBy](../../../reference/array/orderBy.md) from `es-toolkit` instead.
 
 :::
 

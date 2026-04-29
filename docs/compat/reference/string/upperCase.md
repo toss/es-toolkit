@@ -4,7 +4,7 @@
 
 This `upperCase` function operates slowly due to normalization logic for handling `null` or `undefined`.
 
-Use the faster and more modern [upperCase](../../string/upperCase.md) from `es-toolkit` instead.
+Use the faster and more modern [upperCase](../../../reference/string/upperCase.md) from `es-toolkit` instead.
 
 :::
 

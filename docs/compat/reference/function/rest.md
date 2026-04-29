@@ -4,7 +4,7 @@
 
 This `rest` function may have reduced performance due to additional logic such as default value handling and index validation.
 
-Use faster, more modern [rest](../../function/rest.md) from `es-toolkit` instead.
+Use faster, more modern [rest](../../../reference/function/rest.md) from `es-toolkit` instead.
 
 :::
 

@@ -4,7 +4,7 @@
 
 この `pickBy` 関数は、配列様オブジェクトのチェック、`iteratee`変換、キー変換過程により相対的に遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[`pickBy`](../../object/pickBy.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[`pickBy`](../../../reference/object/pickBy.md)を使用してください。
 
 :::
 

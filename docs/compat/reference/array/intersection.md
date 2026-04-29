@@ -1,10 +1,10 @@
 # intersection (Lodash Compatibility)
 
-::: warning Use [`intersection`](../../array/intersection.md) from `es-toolkit`
+::: warning Use [`intersection`](../../../reference/array/intersection.md) from `es-toolkit`
 
 This `intersection` function operates slowly due to handling `null` or `undefined`, multiple array support, and duplicate removal process.
 
-Instead, use the faster and more modern [`intersection`](../../array/intersection.md) from `es-toolkit`.
+Instead, use the faster and more modern [`intersection`](../../../reference/array/intersection.md) from `es-toolkit`.
 
 :::
 

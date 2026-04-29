@@ -1,10 +1,10 @@
 # tail (Lodash compatibility)
 
-::: warning Please use [tail](../../array/tail.md) from `es-toolkit`
+::: warning Please use [tail](../../../reference/array/tail.md) from `es-toolkit`
 
 This `tail` function operates slowly due to handling `null` or `undefined`.
 
-Please use the faster and modern [tail](../../array/tail.md) from `es-toolkit` instead.
+Please use the faster and modern [tail](../../../reference/array/tail.md) from `es-toolkit` instead.
 
 :::
 

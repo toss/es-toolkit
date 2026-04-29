@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit`의 `once`를 사용하세요
 
-이 `once` 함수는 `es-toolkit`의 메인 라이브러리 [once](../../function/once.md) 함수와 동일한 기능을 가지고 있어요.
+이 `once` 함수는 `es-toolkit`의 메인 라이브러리 [once](../../../reference/function/once.md) 함수와 동일한 기능을 가지고 있어요.
 
 :::
 

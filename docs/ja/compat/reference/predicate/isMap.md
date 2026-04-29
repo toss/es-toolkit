@@ -1,10 +1,10 @@
 # isMap (Lodash互換性)
 
-::: warning es-toolkitの[isMap](../../predicate/isMap.md)を使用してください
+::: warning es-toolkitの[isMap](../../../reference/predicate/isMap.md)を使用してください
 
 この`isMap`関数はLodash互換性のための複雑な処理により動作が遅くなります。
 
-代わりに、より速く現代的な`es-toolkit`の[isMap](../../predicate/isMap.md)を使用してください。
+代わりに、より速く現代的な`es-toolkit`の[isMap](../../../reference/predicate/isMap.md)を使用してください。
 
 :::
 

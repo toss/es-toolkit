@@ -4,7 +4,7 @@
 
 This `partialRight` function is inefficient due to many overloads and union type handling. In most cases, it can be replaced with a simpler arrow function.
 
-Instead, use the faster and more modern [`partialRight`](../../function/partialRight.md) from `es-toolkit`.
+Instead, use the faster and more modern [`partialRight`](../../../reference/function/partialRight.md) from `es-toolkit`.
 
 :::
 

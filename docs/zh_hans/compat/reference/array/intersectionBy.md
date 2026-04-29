@@ -1,10 +1,10 @@
 # intersectionBy (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [intersectionBy](../../array/intersectionBy.md)
+::: warning 请使用 `es-toolkit` 的 [intersectionBy](../../../reference/array/intersectionBy.md)
 
 此 `intersectionBy` 函数由于复杂的条件处理、多数组支持、属性路径解析等原因运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [intersectionBy](../../array/intersectionBy.md)。
+请使用更快、更现代的 `es-toolkit` 的 [intersectionBy](../../../reference/array/intersectionBy.md)。
 
 :::
 

@@ -4,7 +4,7 @@
 
 This `escape` function operates slower due to handling non-string input values.
 
-Instead, use the faster and more modern [escape](../../string/escape.md) from `es-toolkit`.
+Instead, use the faster and more modern [escape](../../../reference/string/escape.md) from `es-toolkit`.
 
 :::
 

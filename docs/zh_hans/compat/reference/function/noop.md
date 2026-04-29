@@ -2,7 +2,7 @@
 
 ::: warning 使用 `es-toolkit` 的 `noop`
 
-`es-toolkit` 也有相同行为的 [noop](../../function/noop.md) 函数。
+`es-toolkit` 也有相同行为的 [noop](../../../reference/function/noop.md) 函数。
 
 :::
 

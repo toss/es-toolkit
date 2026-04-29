@@ -4,7 +4,7 @@
 
 This `kebabCase` function operates slower due to handling non-string input values and removing contracted apostrophes.
 
-Instead, use the faster and more modern [kebabCase](../../string/kebabCase.md) from `es-toolkit`.
+Instead, use the faster and more modern [kebabCase](../../../reference/string/kebabCase.md) from `es-toolkit`.
 
 :::
 

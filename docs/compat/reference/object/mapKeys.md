@@ -4,7 +4,7 @@
 
 This `mapKeys` function is relatively slow due to handling `null` or `undefined` and the `iteratee` conversion process.
 
-Use the faster and more modern [`mapKeys`](../../object/mapKeys.md) from `es-toolkit` instead.
+Use the faster and more modern [`mapKeys`](../../../reference/object/mapKeys.md) from `es-toolkit` instead.
 
 :::
 

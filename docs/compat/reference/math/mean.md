@@ -1,10 +1,10 @@
 # mean (Lodash Compatibility)
 
-::: warning Use [mean](../../math/mean.md) from es-toolkit
+::: warning Use [mean](../../../reference/math/mean.md) from es-toolkit
 
 This `mean` function works slowly due to type conversion and null/undefined handling.
 
-Use the faster and more modern [mean](../../math/mean.md) from `es-toolkit` instead.
+Use the faster and more modern [mean](../../../reference/math/mean.md) from `es-toolkit` instead.
 
 :::
 

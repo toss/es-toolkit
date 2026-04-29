@@ -4,7 +4,7 @@
 
 この`first`関数は、`null`や`undefined`の処理と配列のようなオブジェクトの変換により、動作が遅くなります。`es-toolkit`の`head`関数は、これらの追加処理なしで、より高速かつシンプルに動作します。
 
-代わりに、より高速で現代的な`es-toolkit`の[head](../../array/head.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[head](../../../reference/array/head.md)を使用してください。
 
 :::
 

@@ -1,10 +1,10 @@
 # xor (Lodash Compatibility)
 
-::: warning Use [xor](../../array/xor.md) from `es-toolkit`
+::: warning Use [xor](../../../reference/array/xor.md) from `es-toolkit`
 
 This `xor` function operates slowly due to handling of `null` or `undefined`, complex duplicate calculation logic, etc.
 
-Instead, use the faster and more modern [xor](../../array/xor.md) from `es-toolkit`.
+Instead, use the faster and more modern [xor](../../../reference/array/xor.md) from `es-toolkit`.
 
 :::
 

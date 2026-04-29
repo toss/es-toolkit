@@ -1,10 +1,10 @@
 # initial (Lodash Compatibility)
 
-::: warning Use [`initial`](../../array/initial.md) from `es-toolkit`
+::: warning Use [`initial`](../../../reference/array/initial.md) from `es-toolkit`
 
 This `initial` function operates slowly due to `ArrayLike` object processing and array conversion process.
 
-Instead, use the faster and more modern [`initial`](../../array/initial.md) from `es-toolkit`.
+Instead, use the faster and more modern [`initial`](../../../reference/array/initial.md) from `es-toolkit`.
 
 :::
 

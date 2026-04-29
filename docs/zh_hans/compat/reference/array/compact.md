@@ -1,10 +1,10 @@
 # compact（Lodash 兼容性）
 
-::: warning 使用 `es-toolkit` 的 [`compact`](../../array/compact.md)
+::: warning 使用 `es-toolkit` 的 [`compact`](../../../reference/array/compact.md)
 
 此 `compact` 函数由于处理 `null` 和 `undefined` 值、`size` 默认值处理等原因运行较慢。
 
-请使用 `es-toolkit` 中更快、更现代的 [compact](../../array/compact.md) 实现。
+请使用 `es-toolkit` 中更快、更现代的 [compact](../../../reference/array/compact.md) 实现。
 
 :::
 

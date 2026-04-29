@@ -4,7 +4,7 @@
 
 This `shuffle` function includes additional processing for Lodash compatibility and operates slowly.
 
-Instead, use the faster and more modern `es-toolkit`'s [shuffle](../../array/shuffle.md).
+Instead, use the faster and more modern `es-toolkit`'s [shuffle](../../../reference/array/shuffle.md).
 
 :::
 

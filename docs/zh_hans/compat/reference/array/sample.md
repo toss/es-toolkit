@@ -1,10 +1,10 @@
 # sample（Lodash 兼容性）
 
-::: warning 使用 `es-toolkit` 的 [sample](../../array/sample.md)
+::: warning 使用 `es-toolkit` 的 [sample](../../../reference/array/sample.md)
 
 此 `sample` 函数由于 `null` 或 `undefined` 处理、对象值处理等原因运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [sample](../../array/sample.md)。
+请使用更快、更现代的 `es-toolkit` 的 [sample](../../../reference/array/sample.md)。
 
 :::
 

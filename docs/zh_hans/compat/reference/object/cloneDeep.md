@@ -4,7 +4,7 @@
 
 这个 `cloneDeep` 函数由于处理特殊对象类型的复杂逻辑而相对较慢。
 
-请改用 `es-toolkit` 的更快、更现代的 [cloneDeep](../../object/cloneDeep.md)。
+请改用 `es-toolkit` 的更快、更现代的 [cloneDeep](../../../reference/object/cloneDeep.md)。
 
 :::
 

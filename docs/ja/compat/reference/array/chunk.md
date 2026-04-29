@@ -1,10 +1,10 @@
 # chunk（Lodash 互換性）
 
-::: warning `es-toolkit` の [`chunk`](../../array/chunk.md) を使用してください
+::: warning `es-toolkit` の [`chunk`](../../../reference/array/chunk.md) を使用してください
 
 この `chunk` 関数は `null`、`undefined` の処理、`size` のデフォルト値処理などにより動作が遅くなります。
 
-より高速でモダンな実装である `es-toolkit` の [chunk](../../array/chunk.md) を使用してください。
+より高速でモダンな実装である `es-toolkit` の [chunk](../../../reference/array/chunk.md) を使用してください。
 
 :::
 

@@ -4,7 +4,7 @@
 
 This `snakeCase` function operates slowly due to normalization logic for handling `null` or `undefined`.
 
-Instead, use the faster and more modern [snakeCase](../../string/snakeCase.md) from `es-toolkit`.
+Instead, use the faster and more modern [snakeCase](../../../reference/string/snakeCase.md) from `es-toolkit`.
 
 :::
 

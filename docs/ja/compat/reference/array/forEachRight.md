@@ -4,7 +4,7 @@
 
 この`forEachRight`関数は、`null`や`undefined`の処理、`ArrayLike`タイプの処理、さまざまな条件関数形式のサポートなどにより、動作が遅くなります。
 
-代わりに、より高速でモダンな`es-toolkit`の[forEachRight](../../array/forEachRight.md)を使用してください。
+代わりに、より高速でモダンな`es-toolkit`の[forEachRight](../../../reference/array/forEachRight.md)を使用してください。
 
 :::
 

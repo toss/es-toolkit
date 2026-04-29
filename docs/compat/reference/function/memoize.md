@@ -3,7 +3,7 @@
 ::: warning Use `es-toolkit`'s `memoize`
 This `memoize` function operates slowly due to `null` checks in the `resolver` function, complex type handling for the `MapCache` interface, and additional overhead for Lodash compatibility.
 
-Instead, use the faster and more modern `es-toolkit`'s [memoize](../../function/memoize.md).
+Instead, use the faster and more modern `es-toolkit`'s [memoize](../../../reference/function/memoize.md).
 :::
 
 Caches function results to improve performance when called with the same arguments.

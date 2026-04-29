@@ -4,7 +4,7 @@
 
 이 `throttle` 함수는 Lodash 호환성을 위해 debounce 함수를 내부적으로 사용해서 방식이 조금 복잡해요. 또한 기본값 처리나 옵션 처리 등이 더 복잡해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [throttle](../../function/throttle.md)을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [throttle](../../../reference/function/throttle.md)을 사용하세요.
 
 :::
 

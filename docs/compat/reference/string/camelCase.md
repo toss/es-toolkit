@@ -4,7 +4,7 @@
 
 This `camelCase` function operates slower due to handling non-string input values and removing contracted apostrophes.
 
-Instead, use the faster and more modern [camelCase](../../string/camelCase.md) from `es-toolkit`.
+Instead, use the faster and more modern [camelCase](../../../reference/string/camelCase.md) from `es-toolkit`.
 
 :::
 

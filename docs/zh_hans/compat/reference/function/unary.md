@@ -2,9 +2,9 @@
 
 ::: warning 请使用 `es-toolkit` 的 `ary`
 
-此 `unary` 函数是作为 `ary` 函数的特殊情况实现的。如果您需要更多控制,直接使用 `es-toolkit` 的 [ary](../../function/ary.md) 会更高效。
+此 `unary` 函数是作为 `ary` 函数的特殊情况实现的。如果您需要更多控制,直接使用 `es-toolkit` 的 [ary](../../../reference/function/ary.md) 会更高效。
 
-请改用更快、更现代的 `es-toolkit` 的 [ary](../../function/ary.md)。
+请改用更快、更现代的 `es-toolkit` 的 [ary](../../../reference/function/ary.md)。
 
 :::
 

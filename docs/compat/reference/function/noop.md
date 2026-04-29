@@ -2,7 +2,7 @@
 
 ::: warning Use `es-toolkit`'s `noop`
 
-`es-toolkit` also has a [noop](../../function/noop.md) function that behaves the same.
+`es-toolkit` also has a [noop](../../../reference/function/noop.md) function that behaves the same.
 
 :::
 

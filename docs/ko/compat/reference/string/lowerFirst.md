@@ -4,7 +4,7 @@
 
 이 `lowerFirst` 함수는 문자열이 아닌 입력값 처리로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [lowerFirst](../../string/lowerFirst.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [lowerFirst](../../../reference/string/lowerFirst.md)를 사용하세요.
 
 :::
 

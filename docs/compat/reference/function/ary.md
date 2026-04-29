@@ -1,10 +1,10 @@
 # ary (Lodash Compatibility)
 
-::: warning Use [`ary`](../../function/ary.md) from `es-toolkit`
+::: warning Use [`ary`](../../../reference/function/ary.md) from `es-toolkit`
 
 This `ary` function operates slowly due to complex parameter validation.
 
-Instead, use the faster and more modern [ary](../../function/ary.md) from `es-toolkit`.
+Instead, use the faster and more modern [ary](../../../reference/function/ary.md) from `es-toolkit`.
 
 :::
 

@@ -1,10 +1,10 @@
 # sampleSize（Lodash 兼容性）
 
-::: warning 使用 `es-toolkit` 的 [sampleSize](../../array/sampleSize.md)
+::: warning 使用 `es-toolkit` 的 [sampleSize](../../../reference/array/sampleSize.md)
 
 此 `sampleSize` 函数由于 `null` 或 `undefined` 处理、对象支持、默认值处理等原因运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [sampleSize](../../array/sampleSize.md)。
+请使用更快、更现代的 `es-toolkit` 的 [sampleSize](../../../reference/array/sampleSize.md)。
 
 :::
 

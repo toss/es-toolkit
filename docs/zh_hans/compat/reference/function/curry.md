@@ -3,7 +3,7 @@
 ::: warning 使用 `es-toolkit` 的 `curry` 或手动闭包
 此 `curry` 函数由于复杂的占位符处理、参数个数验证和参数组合逻辑而运行缓慢。
 
-如果不需要占位符，请改用更快的 `es-toolkit` 的 [`curry`](../../function/curry.md) 或简单闭包。
+如果不需要占位符，请改用更快的 `es-toolkit` 的 [`curry`](../../../reference/function/curry.md) 或简单闭包。
 :::
 
 对函数进行柯里化，使其可以一次接受一个参数或一次接受多个参数。

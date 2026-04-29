@@ -1,10 +1,10 @@
 # flatMapDeep (Lodash Compatibility)
 
-::: warning Use [`flatMapDeep`](../../array/flatMapDeep.md) from `es-toolkit`
+::: warning Use [`flatMapDeep`](../../../reference/array/flatMapDeep.md) from `es-toolkit`
 
 This `flatMapDeep` function operates slowly due to complex collection type handling and deep flattening logic.
 
-Use the faster and more modern [flatMapDeep](../../array/flatMapDeep.md) from `es-toolkit` instead.
+Use the faster and more modern [flatMapDeep](../../../reference/array/flatMapDeep.md) from `es-toolkit` instead.
 
 :::
 

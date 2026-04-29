@@ -1,10 +1,10 @@
 # after (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [`after`](../../function/after.md)
+::: warning 请使用 `es-toolkit` 的 [`after`](../../../reference/function/after.md)
 
 由于复杂的类型验证和整数转换处理,此 `after` 函数运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [after](../../function/after.md)。
+请改用更快、更现代的 `es-toolkit` 的 [after](../../../reference/function/after.md)。
 
 :::
 

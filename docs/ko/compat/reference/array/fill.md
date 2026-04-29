@@ -4,7 +4,7 @@
 
 이 `fill` 함수는 `null`이나 `undefined` 처리, 유사 배열 객체 지원 등으로 인해 복잡하게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [fill](../../array/fill.md)을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [fill](../../../reference/array/fill.md)을 사용하세요.
 
 :::
 

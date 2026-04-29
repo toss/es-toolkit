@@ -1,10 +1,10 @@
 # uniqBy (Lodash互換)
 
-::: warning `es-toolkit`の[uniqBy](../../array/uniqBy.md)を使用してください
+::: warning `es-toolkit`の[uniqBy](../../../reference/array/uniqBy.md)を使用してください
 
 この`uniqBy`関数は`null`または`undefined`の処理、複雑な引数タイプ処理などにより動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[uniqBy](../../array/uniqBy.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[uniqBy](../../../reference/array/uniqBy.md)を使用してください。
 
 :::
 

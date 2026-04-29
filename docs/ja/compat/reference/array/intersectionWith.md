@@ -1,10 +1,10 @@
 # intersectionWith (Lodash 互換性)
 
-::: warning `es-toolkit`の[intersectionWith](../../array/intersectionWith.md)を使用してください
+::: warning `es-toolkit`の[intersectionWith](../../../reference/array/intersectionWith.md)を使用してください
 
 この`intersectionWith`関数は、`null`や`undefined`の処理、さまざまなオーバーロードのサポートなどにより、動作が遅くなります。
 
-代わりに、より高速でモダンな`es-toolkit`の[intersectionWith](../../array/intersectionWith.md)を使用してください。
+代わりに、より高速でモダンな`es-toolkit`の[intersectionWith](../../../reference/array/intersectionWith.md)を使用してください。
 
 :::
 

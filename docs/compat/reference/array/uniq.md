@@ -1,10 +1,10 @@
 # uniq (Lodash Compatibility)
 
-::: warning Use [uniq](../../array/uniq.md) from `es-toolkit`
+::: warning Use [uniq](../../../reference/array/uniq.md) from `es-toolkit`
 
 This `uniq` function operates slowly due to additional processing for Lodash compatibility.
 
-Instead, use the faster and more modern [uniq](../../array/uniq.md) from `es-toolkit`.
+Instead, use the faster and more modern [uniq](../../../reference/array/uniq.md) from `es-toolkit`.
 
 :::
 

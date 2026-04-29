@@ -4,7 +4,7 @@
 
 이 `omit` 함수는 깊은 복사와 `unset` 함수 호출 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [omit](../../object/omit.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [omit](../../../reference/object/omit.md)를 사용하세요.
 
 :::
 

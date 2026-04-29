@@ -1,10 +1,10 @@
 # tail (Lodash 互換性)
 
-::: warning `es-toolkit`の[tail](../../array/tail.md)を使用してください
+::: warning `es-toolkit`の[tail](../../../reference/array/tail.md)を使用してください
 
 この`tail`関数は、`null`や`undefined`の処理などにより遅く動作します。
 
-代わりに、より高速で現代的な`es-toolkit`の[tail](../../array/tail.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[tail](../../../reference/array/tail.md)を使用してください。
 
 :::
 

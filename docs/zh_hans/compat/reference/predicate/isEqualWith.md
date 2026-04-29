@@ -1,9 +1,9 @@
 # isEqualWith (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [isEqualWith](../../predicate/isEqualWith.md)
+::: warning 请使用 es-toolkit 的 [isEqualWith](../../../reference/predicate/isEqualWith.md)
 这个 `isEqualWith` 函数由于 Lodash 兼容性的复杂处理而性能较慢。
 
-建议使用更快、更现代的 `es-toolkit` 的 [isEqualWith](../../predicate/isEqualWith.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [isEqualWith](../../../reference/predicate/isEqualWith.md)。
 :::
 
 使用自定义比较函数检查两个值是否相等。

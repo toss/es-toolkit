@@ -1,10 +1,10 @@
 # unionBy (Lodash Compatibility)
 
-::: warning Use [unionBy](../../array/unionBy.md) from `es-toolkit`
+::: warning Use [unionBy](../../../reference/array/unionBy.md) from `es-toolkit`
 
 This `unionBy` function operates slowly due to complex processing.
 
-Instead, use the faster and more modern [unionBy](../../array/unionBy.md) from `es-toolkit`.
+Instead, use the faster and more modern [unionBy](../../../reference/array/unionBy.md) from `es-toolkit`.
 
 :::
 

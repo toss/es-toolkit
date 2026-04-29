@@ -4,7 +4,7 @@
 
 由于处理 `null` 或 `undefined` 等原因,此 `pad` 函数运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [pad](../../string/pad.md)。
+请改用更快、更现代的 `es-toolkit` 的 [pad](../../../reference/string/pad.md)。
 
 :::
 

@@ -4,7 +4,7 @@
 
 This `trim` function operates slowly due to handling `null` or `undefined` and array-type `chars`.
 
-Use the faster and more modern [trim](../../string/trim.md) from `es-toolkit` instead.
+Use the faster and more modern [trim](../../../reference/string/trim.md) from `es-toolkit` instead.
 
 :::
 

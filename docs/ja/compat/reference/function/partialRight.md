@@ -4,7 +4,7 @@
 
 この `partialRight` 関数は多くのオーバーロードとユニオン型処理により非効率的です。また、ほとんどの場合、より簡単なアロー関数で代替できます。
 
-代わりに、より高速で現代的な `es-toolkit` の [`partialRight`](../../function/partialRight.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [`partialRight`](../../../reference/function/partialRight.md) を使用してください。
 
 :::
 

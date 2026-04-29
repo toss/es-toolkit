@@ -4,7 +4,7 @@
 
 This `first` function operates slowly due to handling `null` or `undefined` and array-like object conversion. The `head` function from `es-toolkit` operates faster and simpler without this additional processing.
 
-Use the faster and more modern [head](../../array/head.md) from `es-toolkit` instead.
+Use the faster and more modern [head](../../../reference/array/head.md) from `es-toolkit` instead.
 
 :::
 

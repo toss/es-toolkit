@@ -1,10 +1,10 @@
 # orderBy (Lodash 互換性)
 
-::: warning `es-toolkit` の [orderBy](../../array/orderBy.md) を使用してください
+::: warning `es-toolkit` の [orderBy](../../../reference/array/orderBy.md) を使用してください
 
 この `orderBy` 関数は、`null` や `undefined` の処理、複雑なパス探索、様々なソート条件の処理により動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [orderBy](../../array/orderBy.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [orderBy](../../../reference/array/orderBy.md) を使用してください。
 
 :::
 

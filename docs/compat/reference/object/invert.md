@@ -4,7 +4,7 @@
 
 This `invert` function operates slower due to the complex processing required for Lodash compatibility.
 
-Instead, use the faster and more modern [`invert`](../../object/invert.md) from `es-toolkit`.
+Instead, use the faster and more modern [`invert`](../../../reference/object/invert.md) from `es-toolkit`.
 
 :::
 

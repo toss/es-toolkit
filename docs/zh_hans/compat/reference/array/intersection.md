@@ -1,10 +1,10 @@
 # intersection (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [intersection](../../array/intersection.md)
+::: warning 请使用 `es-toolkit` 的 [intersection](../../../reference/array/intersection.md)
 
 此 `intersection` 函数由于处理 `null` 或 `undefined`、多数组支持、去重过程等原因运行缓慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [intersection](../../array/intersection.md)。
+请使用更快、更现代的 `es-toolkit` 的 [intersection](../../../reference/array/intersection.md)。
 
 :::
 

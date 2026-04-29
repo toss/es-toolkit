@@ -1,10 +1,10 @@
 # mean (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [mean](../../math/mean.md)
+::: warning 请使用 es-toolkit 的 [mean](../../../reference/math/mean.md)
 
 这个 `mean` 函数由于类型转换和 null/undefined 处理会运行较慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [mean](../../math/mean.md)。
+请使用更快、更现代的 `es-toolkit` 的 [mean](../../../reference/math/mean.md)。
 
 :::
 

@@ -1,10 +1,10 @@
 # after (Lodash Compatibility)
 
-::: warning Use [`after`](../../function/after.md) from `es-toolkit`
+::: warning Use [`after`](../../../reference/function/after.md) from `es-toolkit`
 
 This `after` function operates slowly due to complex type validation and integer conversion handling.
 
-Instead, use the faster and more modern [after](../../function/after.md) from `es-toolkit`.
+Instead, use the faster and more modern [after](../../../reference/function/after.md) from `es-toolkit`.
 
 :::
 

@@ -4,7 +4,7 @@
 
 This `fill` function operates with complex behavior due to handling `null` or `undefined`, support for array-like objects, etc.
 
-Instead, use the faster and more modern [`fill`](../../array/fill.md) from `es-toolkit`.
+Instead, use the faster and more modern [`fill`](../../../reference/array/fill.md) from `es-toolkit`.
 
 :::
 

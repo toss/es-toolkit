@@ -1,10 +1,10 @@
 # intersectionBy (Lodash 호환성)
 
-::: warning `es-toolkit`의 [intersectionBy](../../array/intersectionBy.md)를 사용하세요
+::: warning `es-toolkit`의 [intersectionBy](../../../reference/array/intersectionBy.md)를 사용하세요
 
 이 `intersectionBy` 함수는 복잡한 조건 처리, 다중 배열 지원, 프로퍼티 경로 해석 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [intersectionBy](../../array/intersectionBy.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [intersectionBy](../../../reference/array/intersectionBy.md)를 사용하세요.
 
 :::
 

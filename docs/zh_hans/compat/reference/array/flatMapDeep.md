@@ -1,10 +1,10 @@
 # flatMapDeep (Lodash 兼容性)
 
-::: warning 使用 `es-toolkit` 的 [`flatMapDeep`](../../array/flatMapDeep.md)
+::: warning 使用 `es-toolkit` 的 [`flatMapDeep`](../../../reference/array/flatMapDeep.md)
 
 此 `flatMapDeep` 函数由于复杂的集合类型处理和深度展平逻辑而运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [flatMapDeep](../../array/flatMapDeep.md)。
+请改用更快、更现代的 `es-toolkit` 的 [flatMapDeep](../../../reference/array/flatMapDeep.md)。
 
 :::
 

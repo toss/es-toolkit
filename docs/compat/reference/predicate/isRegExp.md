@@ -1,10 +1,10 @@
 # isRegExp (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isRegExp](../../predicate/isRegExp.md) instead
+::: warning Use `es-toolkit`'s [isRegExp](../../../reference/predicate/isRegExp.md) instead
 
 This `isRegExp` function is a Lodash compatibility function, but is a simple type check.
 
-Use the faster and more modern `es-toolkit`'s [isRegExp](../../predicate/isRegExp.md) instead.
+Use the faster and more modern `es-toolkit`'s [isRegExp](../../../reference/predicate/isRegExp.md) instead.
 
 :::
 

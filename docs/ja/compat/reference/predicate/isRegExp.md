@@ -1,10 +1,10 @@
 # isRegExp (Lodash 互換性)
 
-::: warning es-toolkitの [isRegExp](../../predicate/isRegExp.md)を使用してください
+::: warning es-toolkitの [isRegExp](../../../reference/predicate/isRegExp.md)を使用してください
 
 この `isRegExp` 関数はLodash互換性のための関数ですが、単純な型確認です。
 
-代わりにより高速で現代的な `es-toolkit` の [isRegExp](../../predicate/isRegExp.md) を使用してください。
+代わりにより高速で現代的な `es-toolkit` の [isRegExp](../../../reference/predicate/isRegExp.md) を使用してください。
 
 :::
 

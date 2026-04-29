@@ -1,10 +1,10 @@
 # maxBy (Lodash Compatibility)
 
-::: warning Use [maxBy](../../array/maxBy.md) from es-toolkit
+::: warning Use [maxBy](../../../reference/array/maxBy.md) from es-toolkit
 
 This `maxBy` function works slowly due to iteratee function processing and type conversion.
 
-Use the faster and more modern [maxBy](../../array/maxBy.md) from `es-toolkit` instead.
+Use the faster and more modern [maxBy](../../../reference/array/maxBy.md) from `es-toolkit` instead.
 
 :::
 

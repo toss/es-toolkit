@@ -1,10 +1,10 @@
 # rangeRight (Lodash 互換性)
 
-::: warning es-toolkitの[rangeRight](../../math/rangeRight.md)を使用してください
+::: warning es-toolkitの[rangeRight](../../../reference/math/rangeRight.md)を使用してください
 
 この `rangeRight` 関数は複雑な引数処理と型変換により動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [rangeRight](../../math/rangeRight.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [rangeRight](../../../reference/math/rangeRight.md) を使用してください。
 
 :::
 

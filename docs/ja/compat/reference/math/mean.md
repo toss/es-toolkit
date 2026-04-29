@@ -1,10 +1,10 @@
 # mean (Lodash 互換性)
 
-::: warning es-toolkitの[mean](../../math/mean.md)を使用してください
+::: warning es-toolkitの[mean](../../../reference/math/mean.md)を使用してください
 
 この `mean` 関数は型変換とnull/undefined処理により動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [mean](../../math/mean.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [mean](../../../reference/math/mean.md) を使用してください。
 
 :::
 

@@ -1,10 +1,10 @@
 # range (Lodash 互換性)
 
-::: warning es-toolkitの[range](../../math/range.md)を使用してください
+::: warning es-toolkitの[range](../../../reference/math/range.md)を使用してください
 
 この `range` 関数は複雑な引数処理と型変換により動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [range](../../math/range.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [range](../../../reference/math/range.md) を使用してください。
 
 :::
 

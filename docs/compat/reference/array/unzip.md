@@ -1,10 +1,10 @@
 # unzip (Lodash Compatibility)
 
-::: warning Use [unzip](../../array/unzip.md) from `es-toolkit`
+::: warning Use [unzip](../../../reference/array/unzip.md) from `es-toolkit`
 
 This `unzip` function operates slowly due to handling of `null` or `undefined`, filtering of non-array values, etc.
 
-Instead, use the faster and more modern [unzip](../../array/unzip.md) from `es-toolkit`.
+Instead, use the faster and more modern [unzip](../../../reference/array/unzip.md) from `es-toolkit`.
 
 :::
 

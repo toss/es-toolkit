@@ -4,7 +4,7 @@
 
 此 `snakeCase` 函数由于处理 `null` 或 `undefined` 的规范化逻辑而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [snakeCase](../../string/snakeCase.md)。
+请改用更快、更现代的 `es-toolkit` 的 [snakeCase](../../../reference/string/snakeCase.md)。
 
 :::
 

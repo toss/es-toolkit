@@ -1,10 +1,10 @@
 # after (Lodash 互換性)
 
-::: warning `es-toolkit` の [`after`](../../function/after.md) を使用してください
+::: warning `es-toolkit` の [`after`](../../../reference/function/after.md) を使用してください
 
 この `after` 関数は、複雑な型検証と整数変換処理により動作が遅くなります。
 
-代わりに、より高速でモダンな `es-toolkit` の [after](../../function/after.md) を使用してください。
+代わりに、より高速でモダンな `es-toolkit` の [after](../../../reference/function/after.md) を使用してください。
 
 :::
 

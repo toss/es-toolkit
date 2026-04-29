@@ -1,9 +1,9 @@
 # isBuffer (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [isBuffer](../../predicate/isBuffer.md)
+::: warning 请使用 es-toolkit 的 [isBuffer](../../../reference/predicate/isBuffer.md)
 此 `isBuffer` 函数由于 Lodash 兼容性的复杂处理而运行较慢。
 
-请改用更快的现代化 `es-toolkit` 的 [isBuffer](../../predicate/isBuffer.md)。
+请改用更快的现代化 `es-toolkit` 的 [isBuffer](../../../reference/predicate/isBuffer.md)。
 :::
 
 检查值是否为 Buffer 实例。

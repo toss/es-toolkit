@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit`의 `noop`을 사용하세요
 
-`es-toolkit`에도 동일한 동작을 하는 [noop](../../function/noop.md) 함수가 있어요.
+`es-toolkit`에도 동일한 동작을 하는 [noop](../../../reference/function/noop.md) 함수가 있어요.
 
 :::
 

@@ -1,10 +1,10 @@
 # uniq (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [uniq](../../array/uniq.md)
+::: warning 请使用 `es-toolkit` 的 [uniq](../../../reference/array/uniq.md)
 
 此 `uniq` 函数由于为 Lodash 兼容性进行额外处理而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [uniq](../../array/uniq.md)。
+请改用更快、更现代的 `es-toolkit` 的 [uniq](../../../reference/array/uniq.md)。
 
 :::
 

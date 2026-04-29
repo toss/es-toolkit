@@ -1,10 +1,10 @@
 # range（Lodash 兼容性）
 
-::: warning 请使用 es-toolkit 的 [range](../../math/range.md)
+::: warning 请使用 es-toolkit 的 [range](../../../reference/math/range.md)
 
 这个 `range` 函数由于复杂的参数处理和类型转换而运行缓慢。
 
-请使用更快更现代的 `es-toolkit` 的 [range](../../math/range.md)。
+请使用更快更现代的 `es-toolkit` 的 [range](../../../reference/math/range.md)。
 
 :::
 

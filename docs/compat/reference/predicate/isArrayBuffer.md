@@ -1,10 +1,10 @@
 # isArrayBuffer (Lodash Compatibility)
 
-::: warning Use es-toolkit's [isArrayBuffer](../../predicate/isArrayBuffer.md)
+::: warning Use es-toolkit's [isArrayBuffer](../../../reference/predicate/isArrayBuffer.md)
 
 This `isArrayBuffer` function operates slowly due to complex handling for Lodash compatibility.
 
-Instead, use the faster and modern [isArrayBuffer](../../predicate/isArrayBuffer.md) from `es-toolkit`.
+Instead, use the faster and modern [isArrayBuffer](../../../reference/predicate/isArrayBuffer.md) from `es-toolkit`.
 
 :::
 

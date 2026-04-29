@@ -4,7 +4,7 @@
 
 这个 `mergeWith` 函数由于复杂的类型检查、循环引用处理和特殊对象处理而相对较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [`mergeWith`](../../object/mergeWith.md)。
+请改用更快、更现代的 `es-toolkit` 的 [`mergeWith`](../../../reference/object/mergeWith.md)。
 
 :::
 

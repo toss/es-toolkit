@@ -1,10 +1,10 @@
 # attempt (Lodash 互換性)
 
-::: warning `es-toolkit` の [`attempt`](../../util/attempt.md) 関数または try-catch ブロックを使用してください
+::: warning `es-toolkit` の [`attempt`](../../../reference/util/attempt.md) 関数または try-catch ブロックを使用してください
 
 この `attempt` 関数は、エラーと戻り値を区別せずに返すため、使用時に混乱する可能性があります。
 
-代わりに、より直接的で明確な [`attempt`](../../util/attempt.md) 関数または try-catch ブロックを使用してください。
+代わりに、より直接的で明確な [`attempt`](../../../reference/util/attempt.md) 関数または try-catch ブロックを使用してください。
 
 :::
 

@@ -2,9 +2,9 @@
 
 ::: warning `es-toolkit`의 `ary`를 사용하세요
 
-이 `unary` 함수는 `ary` 함수의 특수한 경우로 구현되어 있어요. 더 많은 제어가 필요하다면 `es-toolkit`의 [ary](../../function/ary.md)를 직접 사용하는 것이 더 효율적이에요.
+이 `unary` 함수는 `ary` 함수의 특수한 경우로 구현되어 있어요. 더 많은 제어가 필요하다면 `es-toolkit`의 [ary](../../../reference/function/ary.md)를 직접 사용하는 것이 더 효율적이에요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [ary](../../function/ary.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [ary](../../../reference/function/ary.md)를 사용하세요.
 
 :::
 

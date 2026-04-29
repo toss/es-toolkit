@@ -1,9 +1,9 @@
 # isFunction (Lodash互換性)
 
-::: warning es-toolkitの[isFunction](../../predicate/isFunction.md)を使用してください
+::: warning es-toolkitの[isFunction](../../../reference/predicate/isFunction.md)を使用してください
 この`isFunction`関数はLodash互換性のための複雑な処理により動作が遅くなります。
 
-代わりに、より速く現代的な`es-toolkit`の[isFunction](../../predicate/isFunction.md)を使用してください。
+代わりに、より速く現代的な`es-toolkit`の[isFunction](../../../reference/predicate/isFunction.md)を使用してください。
 :::
 
 値が関数かどうかを確認します。

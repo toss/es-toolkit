@@ -1,10 +1,10 @@
 # unionBy (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [unionBy](../../array/unionBy.md)
+::: warning 请使用 `es-toolkit` 的 [unionBy](../../../reference/array/unionBy.md)
 
 此 `unionBy` 函数由于复杂的处理而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [unionBy](../../array/unionBy.md)。
+请改用更快、更现代的 `es-toolkit` 的 [unionBy](../../../reference/array/unionBy.md)。
 
 :::
 

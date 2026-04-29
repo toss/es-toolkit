@@ -4,7 +4,7 @@
 
 この`flatMap`関数は、`null`や`undefined`の処理、`ArrayLike`型の処理、様々な条件関数形式のサポートなどにより、動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[flatMap](../../array/flatMap.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[flatMap](../../../reference/array/flatMap.md)を使用してください。
 
 :::
 

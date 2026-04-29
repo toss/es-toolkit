@@ -3,7 +3,7 @@
 ::: warning `es-toolkit` の `memoize` を使用してください
 この `memoize` 関数は `resolver` 関数の `null` チェック、`MapCache` インターフェースの複雑な型処理、そして Lodash 互換性のための追加のオーバーヘッドにより遅く動作します。
 
-代わりに、より高速で現代的な `es-toolkit` の [memoize](../../function/memoize.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [memoize](../../../reference/function/memoize.md) を使用してください。
 :::
 
 関数の結果をキャッシュして、同じ引数で呼び出されたときにパフォーマンスを向上させます。

@@ -1,10 +1,10 @@
 # sample（Lodash 互換性）
 
-::: warning `es-toolkit` の [sample](../../array/sample.md) を使用してください
+::: warning `es-toolkit` の [sample](../../../reference/array/sample.md) を使用してください
 
 この `sample` 関数は、`null` や `undefined` の処理、オブジェクト値の処理などにより、遅く動作します。
 
-より高速でモダンな `es-toolkit` の [sample](../../array/sample.md) を使用してください。
+より高速でモダンな `es-toolkit` の [sample](../../../reference/array/sample.md) を使用してください。
 
 :::
 

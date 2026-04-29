@@ -1,10 +1,10 @@
 # chunk（Lodash 兼容性）
 
-::: warning 使用 `es-toolkit` 的 [`chunk`](../../array/chunk.md)
+::: warning 使用 `es-toolkit` 的 [`chunk`](../../../reference/array/chunk.md)
 
 此 `chunk` 函数由于处理 `null`、`undefined` 和默认 `size` 值等原因运行较慢。
 
-请使用 `es-toolkit` 中更快、更现代的 [chunk](../../array/chunk.md) 实现。
+请使用 `es-toolkit` 中更快、更现代的 [chunk](../../../reference/array/chunk.md) 实现。
 
 :::
 

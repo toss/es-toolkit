@@ -1,10 +1,10 @@
 # attempt (Lodash 호환성)
 
-::: warning `es-toolkit`의 [`attempt`](../../util/attempt.md) 함수나 try-catch 블록을 사용하세요
+::: warning `es-toolkit`의 [`attempt`](../../../reference/util/attempt.md) 함수나 try-catch 블록을 사용하세요
 
 이 `attempt` 함수는 에러와 반환 값을 구분하지 않고 반환해서 사용할 때 혼란이 있을 수 있어요.
 
-대신 더 직접적이고 명확한 [`attempt`](../../util/attempt.md) 함수나 try-catch 블록을 사용하세요.
+대신 더 직접적이고 명확한 [`attempt`](../../../reference/util/attempt.md) 함수나 try-catch 블록을 사용하세요.
 
 :::
 

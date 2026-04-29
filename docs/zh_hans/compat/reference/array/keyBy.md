@@ -1,10 +1,10 @@
 # keyBy (Lodash 兼容性)
 
-::: warning 使用 `es-toolkit` 的 [keyBy](../../array/keyBy.md)
+::: warning 使用 `es-toolkit` 的 [keyBy](../../../reference/array/keyBy.md)
 
 由于需要处理 `null` 或 `undefined`、各种参数类型等,这个 `keyBy` 函数运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [keyBy](../../array/keyBy.md)。
+请改用更快、更现代的 `es-toolkit` 的 [keyBy](../../../reference/array/keyBy.md)。
 
 :::
 

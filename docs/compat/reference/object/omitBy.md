@@ -4,7 +4,7 @@
 
 This `omitBy` function is relatively slow due to array-like object checking, `iteratee` conversion, and key transformation processes.
 
-Use the faster and more modern [`omitBy`](../../object/omitBy.md) from `es-toolkit` instead.
+Use the faster and more modern [`omitBy`](../../../reference/object/omitBy.md) from `es-toolkit` instead.
 
 :::
 

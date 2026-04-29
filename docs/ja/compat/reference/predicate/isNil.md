@@ -1,10 +1,10 @@
 # isNil (Lodash 互換性)
 
-::: warning es-toolkitの [isNil](../../predicate/isNil.md)を使用してください
+::: warning es-toolkitの [isNil](../../../reference/predicate/isNil.md)を使用してください
 
 この `isNil` 関数はLodash互換性のための複雑な処理により遅く動作します。
 
-代わりにより高速で現代的な `es-toolkit` の [isNil](../../predicate/isNil.md) を使用してください。
+代わりにより高速で現代的な `es-toolkit` の [isNil](../../../reference/predicate/isNil.md) を使用してください。
 
 :::
 

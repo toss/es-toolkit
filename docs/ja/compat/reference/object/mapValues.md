@@ -4,7 +4,7 @@
 
 この `mapValues` 関数は、`null`や`undefined`の処理、`iteratee`変換過程により相対的に遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[`mapValues`](../../object/mapValues.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[`mapValues`](../../../reference/object/mapValues.md)を使用してください。
 
 :::
 

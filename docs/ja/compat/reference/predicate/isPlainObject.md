@@ -1,10 +1,10 @@
 # isPlainObject (Lodash 互換性)
 
-::: warning es-toolkitの [isPlainObject](../../predicate/isPlainObject.md)を使用してください
+::: warning es-toolkitの [isPlainObject](../../../reference/predicate/isPlainObject.md)を使用してください
 
 この `isPlainObject` 関数はLodash互換性のための複雑な処理により遅く動作します。
 
-代わりにより高速で現代的な `es-toolkit` の [isPlainObject](../../predicate/isPlainObject.md) を使用してください。
+代わりにより高速で現代的な `es-toolkit` の [isPlainObject](../../../reference/predicate/isPlainObject.md) を使用してください。
 
 :::
 

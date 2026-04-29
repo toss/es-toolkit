@@ -1,9 +1,9 @@
 # isFunction (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isFunction](../../predicate/isFunction.md) instead
+::: warning Use `es-toolkit`'s [isFunction](../../../reference/predicate/isFunction.md) instead
 This `isFunction` function operates slowly due to complex handling for Lodash compatibility.
 
-Use the faster and more modern `es-toolkit`'s [isFunction](../../predicate/isFunction.md) instead.
+Use the faster and more modern `es-toolkit`'s [isFunction](../../../reference/predicate/isFunction.md) instead.
 :::
 
 Checks if a value is a function.

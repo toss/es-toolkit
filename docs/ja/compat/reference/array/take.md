@@ -1,10 +1,10 @@
 # take (Lodash 互換性)
 
-::: warning `es-toolkit`の[take](../../array/take.md)を使用してください
+::: warning `es-toolkit`の[take](../../../reference/array/take.md)を使用してください
 
 この`take`関数は、Lodashとの互換性のための追加処理が含まれているため遅く動作します。
 
-代わりに、より高速で現代的な`es-toolkit`の[take](../../array/take.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[take](../../../reference/array/take.md)を使用してください。
 
 :::
 

@@ -1,10 +1,10 @@
 # before (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [`before`](../../function/before.md)
+::: warning 请使用 `es-toolkit` 的 [`before`](../../../reference/function/before.md)
 
 由于复杂的类型验证和整数转换处理，这个 `before` 函数的运行速度较慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [before](../../function/before.md)。
+请使用更快、更现代的 `es-toolkit` 的 [before](../../../reference/function/before.md)。
 
 :::
 

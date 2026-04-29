@@ -4,7 +4,7 @@
 
 この `shuffle` 関数は、Lodash との互換性のために追加の処理が含まれており、遅く動作します。
 
-より高速でモダンな `es-toolkit` の [shuffle](../../array/shuffle.md) を使用してください。
+より高速でモダンな `es-toolkit` の [shuffle](../../../reference/array/shuffle.md) を使用してください。
 
 :::
 

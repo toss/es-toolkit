@@ -4,7 +4,7 @@
 
 此 `throttle` 函数为了 Lodash 兼容性在内部使用 debounce 函数,使其变得有些复杂。它还具有更复杂的默认值和选项处理。
 
-请改用更快、更现代的 `es-toolkit` 的 [throttle](../../function/throttle.md)。
+请改用更快、更现代的 `es-toolkit` 的 [throttle](../../../reference/function/throttle.md)。
 
 :::
 

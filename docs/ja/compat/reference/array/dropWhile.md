@@ -4,7 +4,7 @@
 
 この `dropWhile` 関数は、`null` や `undefined` の処理、`ArrayLike` 型の処理、様々な条件関数形式のサポートなどにより遅く動作します。
 
-代わりに、より高速で現代的な `es-toolkit` の [`dropWhile`](../../array/dropWhile.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [`dropWhile`](../../../reference/array/dropWhile.md) を使用してください。
 
 :::
 

@@ -4,7 +4,7 @@
 
 此 `difference` 函数由于处理 `null` 和 `undefined`、多个数组参数处理而变得复杂。
 
-请使用 `es-toolkit` 中更快、更现代的 [difference](../../array/difference.md)。
+请使用 `es-toolkit` 中更快、更现代的 [difference](../../../reference/array/difference.md)。
 
 :::
 

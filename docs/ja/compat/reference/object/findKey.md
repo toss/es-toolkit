@@ -4,7 +4,7 @@
 
 この`findKey`関数は、さまざまな条件タイプの処理と互換性ロジックにより、複雑に動作します。
 
-代わりに、より高速で現代的な`es-toolkit`の[findKey](../../object/findKey.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[findKey](../../../reference/object/findKey.md)を使用してください。
 
 :::
 

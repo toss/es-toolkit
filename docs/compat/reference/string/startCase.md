@@ -4,7 +4,7 @@
 
 This `startCase` function runs slower due to normalization logic for handling `null` or `undefined`.
 
-Instead, use the faster and more modern [startCase](../../string/startCase.md) from `es-toolkit`.
+Instead, use the faster and more modern [startCase](../../../reference/string/startCase.md) from `es-toolkit`.
 
 :::
 

@@ -4,7 +4,7 @@
 
 此 `rest` 函数由于额外的逻辑(如默认值处理和索引验证)可能会导致性能下降。
 
-请改用更快、更现代的 `es-toolkit` 的 [rest](../../function/rest.md)。
+请改用更快、更现代的 `es-toolkit` 的 [rest](../../../reference/function/rest.md)。
 
 :::
 

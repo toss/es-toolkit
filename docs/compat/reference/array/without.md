@@ -1,10 +1,10 @@
 # without (Lodash Compatibility)
 
-::: warning Use [without](../../array/without.md) from `es-toolkit`
+::: warning Use [without](../../../reference/array/without.md) from `es-toolkit`
 
 This `without` function operates slowly due to additional processing for Lodash compatibility.
 
-Instead, use the faster and more modern [without](../../array/without.md) from `es-toolkit`.
+Instead, use the faster and more modern [without](../../../reference/array/without.md) from `es-toolkit`.
 
 :::
 

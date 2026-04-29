@@ -4,7 +4,7 @@
 
 이 `findKey` 함수는 다양한 조건 타입 처리와 호환성 로직으로 인해 복잡하게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [findKey](../../object/findKey.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [findKey](../../../reference/object/findKey.md)를 사용하세요.
 
 :::
 

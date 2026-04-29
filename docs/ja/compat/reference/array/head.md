@@ -1,10 +1,10 @@
 # head (Lodash 互換性)
 
-::: warning `es-toolkit`の[head](../../array/head.md)を使用してください
+::: warning `es-toolkit`の[head](../../../reference/array/head.md)を使用してください
 
 この`head`関数は、`ArrayLike`オブジェクトの処理と配列変換プロセスにより、動作が遅くなります。
 
-代わりに、より高速でモダンな`es-toolkit`の[head](../../array/head.md)を使用してください。
+代わりに、より高速でモダンな`es-toolkit`の[head](../../../reference/array/head.md)を使用してください。
 
 :::
 

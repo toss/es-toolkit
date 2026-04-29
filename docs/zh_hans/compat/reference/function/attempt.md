@@ -1,10 +1,10 @@
 # attempt (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [`attempt`](../../util/attempt.md) 函数或 try-catch 块
+::: warning 请使用 `es-toolkit` 的 [`attempt`](../../../reference/util/attempt.md) 函数或 try-catch 块
 
 此 `attempt` 函数可能会让人困惑，因为它不区分地返回错误和返回值。
 
-请改用更直接和清晰的 [`attempt`](../../util/attempt.md) 函数或 try-catch 块。
+请改用更直接和清晰的 [`attempt`](../../../reference/util/attempt.md) 函数或 try-catch 块。
 
 :::
 

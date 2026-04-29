@@ -4,7 +4,7 @@
 
 이 `drop` 함수는 `null`이나 `undefined` 처리, `toInteger` 변환 등으로 인해 복잡하게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [drop](../../array/drop.md)을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [drop](../../../reference/array/drop.md)을 사용하세요.
 
 :::
 

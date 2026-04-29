@@ -1,9 +1,9 @@
 # isLength (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [isLength](../../predicate/isLength.md) instead
+::: warning Use `es-toolkit`'s [isLength](../../../reference/predicate/isLength.md) instead
 This `isLength` function operates slowly due to complex handling for Lodash compatibility.
 
-Use the faster and more modern `es-toolkit`'s [isLength](../../predicate/isLength.md) instead.
+Use the faster and more modern `es-toolkit`'s [isLength](../../../reference/predicate/isLength.md) instead.
 :::
 
 Checks if a value is a valid length.

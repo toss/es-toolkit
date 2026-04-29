@@ -1,9 +1,9 @@
 # isFunction (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [isFunction](../../predicate/isFunction.md)
+::: warning 请使用 es-toolkit 的 [isFunction](../../../reference/predicate/isFunction.md)
 这个 `isFunction` 函数由于 Lodash 兼容性的复杂处理而性能较慢。
 
-建议使用更快、更现代的 `es-toolkit` 的 [isFunction](../../predicate/isFunction.md)。
+建议使用更快、更现代的 `es-toolkit` 的 [isFunction](../../../reference/predicate/isFunction.md)。
 :::
 
 检查值是否为函数。

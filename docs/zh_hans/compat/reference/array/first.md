@@ -4,7 +4,7 @@
 
 此 `first` 函数由于处理 `null` 或 `undefined` 和类数组对象转换而运行较慢。`es-toolkit` 的 `head` 函数没有这些额外处理,运行更快、更简单。
 
-请改用更快、更现代的 `es-toolkit` 的 [head](../../array/head.md)。
+请改用更快、更现代的 `es-toolkit` 的 [head](../../../reference/array/head.md)。
 
 :::
 

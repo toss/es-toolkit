@@ -4,7 +4,7 @@
 
 この `dropRight` 関数は、`null` や `undefined` の処理、`guard` パラメータ処理、`toInteger` 変換などにより遅く動作します。
 
-代わりに、より高速で現代的な `es-toolkit` の [`dropRight`](../../array/dropRight.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [`dropRight`](../../../reference/array/dropRight.md) を使用してください。
 
 :::
 

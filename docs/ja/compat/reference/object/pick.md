@@ -4,7 +4,7 @@
 
 この `pick` 関数は、複雑なパス処理、`get`/`set`関数の呼び出し、`null`/`undefined`の処理により相対的に遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[`pick`](../../object/pick.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[`pick`](../../../reference/object/pick.md)を使用してください。
 
 :::
 

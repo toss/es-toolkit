@@ -1,10 +1,10 @@
 # sample (Lodash 호환성)
 
-::: warning `es-toolkit`의 [sample](../../array/sample.md)을 사용하세요
+::: warning `es-toolkit`의 [sample](../../../reference/array/sample.md)을 사용하세요
 
 이 `sample` 함수는 `null`이나 `undefined` 처리, 객체 값 처리 등으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [sample](../../array/sample.md)을 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [sample](../../../reference/array/sample.md)을 사용하세요.
 
 :::
 

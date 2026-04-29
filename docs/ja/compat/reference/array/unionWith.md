@@ -1,10 +1,10 @@
 # unionWith (Lodash互換)
 
-::: warning `es-toolkit`の[unionWith](../../array/unionWith.md)を使用してください
+::: warning `es-toolkit`の[unionWith](../../../reference/array/unionWith.md)を使用してください
 
 この`unionWith`関数は複雑な処理により動作が遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[unionWith](../../array/unionWith.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[unionWith](../../../reference/array/unionWith.md)を使用してください。
 
 :::
 

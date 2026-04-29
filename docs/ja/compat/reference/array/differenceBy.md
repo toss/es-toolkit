@@ -4,7 +4,7 @@
 
 この `differenceBy` 関数は、複雑な引数処理と反復子変換により、動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [differenceBy](../../array/differenceBy.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [differenceBy](../../../reference/array/differenceBy.md) を使用してください。
 
 :::
 

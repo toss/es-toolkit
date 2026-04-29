@@ -1,10 +1,10 @@
 # zipWith (Lodash Compatibility)
 
-::: warning Use [zipWith](../../array/zipWith.md) from `es-toolkit`
+::: warning Use [zipWith](../../../reference/array/zipWith.md) from `es-toolkit`
 
 This `zipWith` function operates slowly due to additional processing for Lodash compatibility.
 
-Instead, use the faster and more modern [zipWith](../../array/zipWith.md) from `es-toolkit`.
+Instead, use the faster and more modern [zipWith](../../../reference/array/zipWith.md) from `es-toolkit`.
 
 :::
 

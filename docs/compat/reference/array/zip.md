@@ -1,10 +1,10 @@
 # zip (Lodash Compatibility)
 
-::: warning Use [zip](../../array/zip.md) from `es-toolkit`
+::: warning Use [zip](../../../reference/array/zip.md) from `es-toolkit`
 
 This `zip` function operates slowly due to additional processing for Lodash compatibility.
 
-Instead, use the faster and more modern [zip](../../array/zip.md) from `es-toolkit`.
+Instead, use the faster and more modern [zip](../../../reference/array/zip.md) from `es-toolkit`.
 
 :::
 

@@ -1,10 +1,10 @@
 # uniqWith (Lodash Compatibility)
 
-::: warning Use [uniqWith](../../array/uniqWith.md) from `es-toolkit`
+::: warning Use [uniqWith](../../../reference/array/uniqWith.md) from `es-toolkit`
 
 This `uniqWith` function operates slowly due to handling of `null` or `undefined`, complex argument type processing, etc.
 
-Instead, use the faster and more modern [uniqWith](../../array/uniqWith.md) from `es-toolkit`.
+Instead, use the faster and more modern [uniqWith](../../../reference/array/uniqWith.md) from `es-toolkit`.
 
 :::
 

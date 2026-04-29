@@ -1,10 +1,10 @@
 # debounce (Lodash 兼容)
 
-::: warning 请使用 `es-toolkit` 的 [`debounce`](../../function/debounce.md)
+::: warning 请使用 `es-toolkit` 的 [`debounce`](../../../reference/function/debounce.md)
 
 这个 `debounce` 函数由于复杂的 `maxWait` 处理和 Lodash 兼容的选项结构而存在开销。
 
-请使用更快、更现代的 `es-toolkit` 的 [`debounce`](../../function/debounce.md)。
+请使用更快、更现代的 `es-toolkit` 的 [`debounce`](../../../reference/function/debounce.md)。
 
 :::
 

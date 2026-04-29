@@ -4,7 +4,7 @@
 
 この `snakeCase` 関数は、`null` または `undefined` を処理するための正規化ロジックにより動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [snakeCase](../../string/snakeCase.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [snakeCase](../../../reference/string/snakeCase.md) を使用してください。
 
 :::
 

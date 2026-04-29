@@ -1,10 +1,10 @@
 # rangeRight（Lodash 兼容性）
 
-::: warning 请使用 es-toolkit 的 [rangeRight](../../math/rangeRight.md)
+::: warning 请使用 es-toolkit 的 [rangeRight](../../../reference/math/rangeRight.md)
 
 这个 `rangeRight` 函数由于复杂的参数处理和类型转换而运行缓慢。
 
-请使用更快更现代的 `es-toolkit` 的 [rangeRight](../../math/rangeRight.md)。
+请使用更快更现代的 `es-toolkit` 的 [rangeRight](../../../reference/math/rangeRight.md)。
 
 :::
 

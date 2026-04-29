@@ -1,10 +1,10 @@
 # groupBy (Lodash 互換性)
 
-::: warning `es-toolkit`の[groupBy](../../array/groupBy.md)を使用してください
+::: warning `es-toolkit`の[groupBy](../../../reference/array/groupBy.md)を使用してください
 
 この`groupBy`関数は、`null`や`undefined`の処理、オブジェクトのサポート、複雑な型処理などにより、動作が遅くなります。
 
-代わりに、より高速でモダンな`es-toolkit`の[groupBy](../../array/groupBy.md)を使用してください。
+代わりに、より高速でモダンな`es-toolkit`の[groupBy](../../../reference/array/groupBy.md)を使用してください。
 
 :::
 

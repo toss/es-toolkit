@@ -4,7 +4,7 @@
 
 이 `partialRight` 함수는 많은 오버로드와 공용체 타입 처리로 인해 비효율적이에요. 또한 대부분의 경우 더 간단한 냄자마 함수로 대체할 수 있어요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [partialRight](../../function/partialRight.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [partialRight](../../../reference/function/partialRight.md)를 사용하세요.
 
 :::
 

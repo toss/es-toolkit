@@ -4,7 +4,7 @@
 
 この `pad` 関数は、`null` や `undefined` の処理などにより、動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [pad](../../string/pad.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [pad](../../../reference/string/pad.md) を使用してください。
 
 :::
 

@@ -1,9 +1,9 @@
 # isEqualWith (Lodash互換性)
 
-::: warning es-toolkitの[isEqualWith](../../predicate/isEqualWith.md)を使用してください
+::: warning es-toolkitの[isEqualWith](../../../reference/predicate/isEqualWith.md)を使用してください
 この`isEqualWith`関数はLodash互換性のための複雑な処理により動作が遅くなります。
 
-代わりに、より速く現代的な`es-toolkit`の[isEqualWith](../../predicate/isEqualWith.md)を使用してください。
+代わりに、より速く現代的な`es-toolkit`の[isEqualWith](../../../reference/predicate/isEqualWith.md)を使用してください。
 :::
 
 カスタム比較関数を使用して二つの値が同じかどうかを確認します。

@@ -4,7 +4,7 @@
 
 由于需要处理 `null` 或 `undefined` 的规范化逻辑,此 `upperCase` 函数运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [upperCase](../../string/upperCase.md)。
+请改用更快、更现代的 `es-toolkit` 的 [upperCase](../../../reference/string/upperCase.md)。
 
 :::
 

@@ -4,7 +4,7 @@
 
 This `flattenDeep` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, and supporting various condition function formats.
 
-Use the faster and more modern [flattenDeep](../../array/flattenDeep.md) from `es-toolkit` instead.
+Use the faster and more modern [flattenDeep](../../../reference/array/flattenDeep.md) from `es-toolkit` instead.
 
 :::
 

@@ -1,10 +1,10 @@
 # curryRight (Lodash Compatibility)
 
-::: warning Use `es-toolkit`'s [`curryRight`](../../function/curryRight.md) or manual closures instead
+::: warning Use `es-toolkit`'s [`curryRight`](../../../reference/function/curryRight.md) or manual closures instead
 
 This `curryRight` function operates slowly due to complex placeholder handling, arity validation, and argument composition logic.
 
-If you don't need placeholders, use the faster `es-toolkit`'s [`curryRight`](../../function/curryRight.md) or simple closures instead.
+If you don't need placeholders, use the faster `es-toolkit`'s [`curryRight`](../../../reference/function/curryRight.md) or simple closures instead.
 
 :::
 

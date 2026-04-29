@@ -1,10 +1,10 @@
 # intersectionWith (Lodash Compatibility)
 
-::: warning Use [`intersectionWith`](../../array/intersectionWith.md) from `es-toolkit`
+::: warning Use [`intersectionWith`](../../../reference/array/intersectionWith.md) from `es-toolkit`
 
 This `intersectionWith` function operates slowly due to handling `null` or `undefined`, support for various overloads, etc.
 
-Instead, use the faster and more modern [`intersectionWith`](../../array/intersectionWith.md) from `es-toolkit`.
+Instead, use the faster and more modern [`intersectionWith`](../../../reference/array/intersectionWith.md) from `es-toolkit`.
 
 :::
 

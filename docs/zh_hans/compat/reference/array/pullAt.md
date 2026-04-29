@@ -1,10 +1,10 @@
 # pullAt (Lodash 兼容性)
 
-::: warning 使用 `es-toolkit` 的 [pullAt](../../array/pullAt.md)
+::: warning 使用 `es-toolkit` 的 [pullAt](../../../reference/array/pullAt.md)
 
 由于复杂的类型处理和重载，这个 `pullAt` 函数运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [pullAt](../../array/pullAt.md)。
+请改用更快、更现代的 `es-toolkit` 的 [pullAt](../../../reference/array/pullAt.md)。
 
 :::
 

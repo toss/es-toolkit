@@ -4,7 +4,7 @@
 
 この `upperCase` 関数は、`null` や `undefined` の処理のための正規化ロジックにより動作が遅くなります。
 
-代わりに、より高速でモダンな `es-toolkit` の [upperCase](../../string/upperCase.md) を使用してください。
+代わりに、より高速でモダンな `es-toolkit` の [upperCase](../../../reference/string/upperCase.md) を使用してください。
 
 :::
 

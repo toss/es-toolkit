@@ -1,10 +1,10 @@
 # flatMapDepth (Lodash 兼容性)
 
-::: warning 使用 `es-toolkit` 的 [flatMap](../../array/flatMap.md)
+::: warning 使用 `es-toolkit` 的 [flatMap](../../../reference/array/flatMap.md)
 
 此 `flatMapDepth` 函数为了 Lodash 兼容性支持各种形式的迭代器和处理 `null` 或 `undefined`,实现较为复杂。主库中的 `flatMap` 函数仅支持简单的函数迭代器,因此运行更快。
 
-请改用更快、更现代的 `es-toolkit` 的 [flatMap](../../array/flatMap.md)。
+请改用更快、更现代的 `es-toolkit` 的 [flatMap](../../../reference/array/flatMap.md)。
 
 :::
 

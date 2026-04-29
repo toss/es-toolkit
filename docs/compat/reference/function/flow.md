@@ -3,7 +3,7 @@
 ::: warning Use `es-toolkit`'s `flow`
 This `flow` function has become complex with added array flattening for Lodash compatibility.
 
-Instead, use the faster and more modern `es-toolkit`'s [flow](../../function/flow.md).
+Instead, use the faster and more modern `es-toolkit`'s [flow](../../../reference/function/flow.md).
 :::
 
 Creates a new function that executes the given functions from left to right sequentially.

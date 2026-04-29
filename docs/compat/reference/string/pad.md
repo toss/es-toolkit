@@ -4,7 +4,7 @@
 
 This `pad` function operates slower due to handling `null` or `undefined`.
 
-Instead, use the faster and more modern [pad](../../string/pad.md) from `es-toolkit`.
+Instead, use the faster and more modern [pad](../../../reference/string/pad.md) from `es-toolkit`.
 
 :::
 

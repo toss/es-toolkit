@@ -2,7 +2,7 @@
 
 ::: warning `es-toolkit` の `once` を使用してください
 
-この `once` 関数は、`es-toolkit` のメインライブラリ [once](../../function/once.md) 関数と同じ機能を持っています。
+この `once` 関数は、`es-toolkit` のメインライブラリ [once](../../../reference/function/once.md) 関数と同じ機能を持っています。
 
 :::
 

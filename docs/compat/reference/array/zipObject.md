@@ -1,10 +1,10 @@
 # zipObject (Lodash Compatibility)
 
-::: warning Use [zipObject](../../array/zipObject.md) from `es-toolkit`
+::: warning Use [zipObject](../../../reference/array/zipObject.md) from `es-toolkit`
 
 This `zipObject` function operates slowly due to additional processing for Lodash compatibility.
 
-Instead, use the faster and more modern [zipObject](../../array/zipObject.md) from `es-toolkit`.
+Instead, use the faster and more modern [zipObject](../../../reference/array/zipObject.md) from `es-toolkit`.
 
 :::
 

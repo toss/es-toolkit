@@ -1,10 +1,10 @@
 # uniqBy (Lodash Compatibility)
 
-::: warning Use [uniqBy](../../array/uniqBy.md) from `es-toolkit`
+::: warning Use [uniqBy](../../../reference/array/uniqBy.md) from `es-toolkit`
 
 This `uniqBy` function operates slowly due to handling of `null` or `undefined`, complex argument type processing, etc.
 
-Instead, use the faster and more modern [uniqBy](../../array/uniqBy.md) from `es-toolkit`.
+Instead, use the faster and more modern [uniqBy](../../../reference/array/uniqBy.md) from `es-toolkit`.
 
 :::
 

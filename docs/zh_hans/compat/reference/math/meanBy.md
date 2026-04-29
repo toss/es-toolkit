@@ -1,10 +1,10 @@
 # meanBy (Lodash 兼容性)
 
-::: warning 请使用 es-toolkit 的 [meanBy](../../math/meanBy.md)
+::: warning 请使用 es-toolkit 的 [meanBy](../../../reference/math/meanBy.md)
 
 这个 `meanBy` 函数由于 iteratee 函数处理和类型转换会运行较慢。
 
-请使用更快、更现代的 `es-toolkit` 的 [meanBy](../../math/meanBy.md)。
+请使用更快、更现代的 `es-toolkit` 的 [meanBy](../../../reference/math/meanBy.md)。
 
 :::
 

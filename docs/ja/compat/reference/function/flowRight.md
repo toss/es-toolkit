@@ -3,7 +3,7 @@
 ::: warning `es-toolkit` の `flowRight` を使用してください
 この `flowRight` 関数は Lodash 互換性のために配列のフラット化処理が追加されており、複雑です。
 
-代わりに、より高速で現代的な `es-toolkit` の [flowRight](../../function/flowRight.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [flowRight](../../../reference/function/flowRight.md) を使用してください。
 :::
 
 与えられた関数を右から左へ順次実行する新しい関数を作成します。

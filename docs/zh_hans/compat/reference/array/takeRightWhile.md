@@ -1,10 +1,10 @@
 # takeRightWhile (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [takeRightWhile](../../array/takeRightWhile.md)
+::: warning 请使用 `es-toolkit` 的 [takeRightWhile](../../../reference/array/takeRightWhile.md)
 
 这个 `takeRightWhile` 函数由于处理 `null` 或 `undefined` 等原因运行较慢。
 
-请使用更快且现代的 `es-toolkit` 的 [takeRightWhile](../../array/takeRightWhile.md) 代替。
+请使用更快且现代的 `es-toolkit` 的 [takeRightWhile](../../../reference/array/takeRightWhile.md) 代替。
 
 :::
 

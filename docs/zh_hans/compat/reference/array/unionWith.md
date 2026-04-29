@@ -1,10 +1,10 @@
 # unionWith (Lodash 兼容性)
 
-::: warning 请使用 `es-toolkit` 的 [unionWith](../../array/unionWith.md)
+::: warning 请使用 `es-toolkit` 的 [unionWith](../../../reference/array/unionWith.md)
 
 此 `unionWith` 函数由于复杂的处理而运行缓慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [unionWith](../../array/unionWith.md)。
+请改用更快、更现代的 `es-toolkit` 的 [unionWith](../../../reference/array/unionWith.md)。
 
 :::
 

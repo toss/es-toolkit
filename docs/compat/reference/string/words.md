@@ -4,7 +4,7 @@
 
 This `words` function operates slowly due to handling `null` or `undefined` and complex Unicode support.
 
-Use the faster and more modern [words](../../string/words.md) from `es-toolkit` instead.
+Use the faster and more modern [words](../../../reference/string/words.md) from `es-toolkit` instead.
 
 :::
 

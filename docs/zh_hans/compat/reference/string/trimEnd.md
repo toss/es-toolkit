@@ -4,7 +4,7 @@
 
 由于需要处理 `null` 或 `undefined` 以及参数顺序变更,此 `trimEnd` 函数运行较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [trimEnd](../../string/trimEnd.md)。
+请改用更快、更现代的 `es-toolkit` 的 [trimEnd](../../../reference/string/trimEnd.md)。
 
 :::
 

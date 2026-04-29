@@ -4,7 +4,7 @@
 
 This `dropRight` function operates slowly due to handling `null` or `undefined`, `guard` parameter processing, `toInteger` conversion, etc.
 
-Instead, use the faster and more modern [`dropRight`](../../array/dropRight.md) from `es-toolkit`.
+Instead, use the faster and more modern [`dropRight`](../../../reference/array/dropRight.md) from `es-toolkit`.
 
 :::
 

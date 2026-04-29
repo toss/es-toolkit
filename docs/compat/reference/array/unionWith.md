@@ -1,10 +1,10 @@
 # unionWith (Lodash Compatibility)
 
-::: warning Use [unionWith](../../array/unionWith.md) from `es-toolkit`
+::: warning Use [unionWith](../../../reference/array/unionWith.md) from `es-toolkit`
 
 This `unionWith` function operates slowly due to complex processing.
 
-Instead, use the faster and more modern [unionWith](../../array/unionWith.md) from `es-toolkit`.
+Instead, use the faster and more modern [unionWith](../../../reference/array/unionWith.md) from `es-toolkit`.
 
 :::
 

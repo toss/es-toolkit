@@ -1,10 +1,10 @@
 # clamp (Lodash 互換性)
 
-::: warning `es-toolkit`の[clamp](../../math/clamp.md)を使用してください
+::: warning `es-toolkit`の[clamp](../../../reference/math/clamp.md)を使用してください
 
 この `clamp` 関数はNaN検証と処理により動作が遅くなります。
 
-代わりに、より高速で現代的な `es-toolkit` の [clamp](../../math/clamp.md) を使用してください。
+代わりに、より高速で現代的な `es-toolkit` の [clamp](../../../reference/math/clamp.md) を使用してください。
 
 :::
 

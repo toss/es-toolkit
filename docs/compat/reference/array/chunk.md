@@ -1,10 +1,10 @@
 # chunk (Lodash Compatibility)
 
-::: warning Use [`chunk`](../../array/chunk.md) from `es-toolkit`
+::: warning Use [`chunk`](../../../reference/array/chunk.md) from `es-toolkit`
 
 This `chunk` function operates slower due to handling of `null`, `undefined`, and default `size` values.
 
-For better performance and a more modern implementation, use [chunk](../../array/chunk.md) from `es-toolkit` instead.
+For better performance and a more modern implementation, use [chunk](../../../reference/array/chunk.md) from `es-toolkit` instead.
 
 :::
 

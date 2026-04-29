@@ -1,10 +1,10 @@
 # maxBy (Lodash 호환성)
 
-::: warning es-toolkit의 [maxBy](../../array/maxBy.md)를 사용하세요
+::: warning es-toolkit의 [maxBy](../../../reference/array/maxBy.md)를 사용하세요
 
 이 `maxBy` 함수는 iteratee 함수 처리와 타입 변환으로 인해 느리게 동작해요.
 
-대신 더 빠르고 현대적인 `es-toolkit`의 [maxBy](../../array/maxBy.md)를 사용하세요.
+대신 더 빠르고 현대적인 `es-toolkit`의 [maxBy](../../../reference/array/maxBy.md)를 사용하세요.
 
 :::
 

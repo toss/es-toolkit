@@ -4,7 +4,7 @@
 
 This `differenceBy` function operates slowly due to complex argument processing and iteratee transformation.
 
-Use the faster and more modern [differenceBy](../../array/differenceBy.md) from `es-toolkit` instead.
+Use the faster and more modern [differenceBy](../../../reference/array/differenceBy.md) from `es-toolkit` instead.
 
 :::
 

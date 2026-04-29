@@ -4,7 +4,7 @@
 
 この`flattenDepth`関数は、`null`や`undefined`の処理などにより、動作が遅くなります。`es-toolkit`の`flatten`関数は、これらの追加処理なしで、より高速かつシンプルに動作します。
 
-代わりに、より高速で現代的な`es-toolkit`の[flatten](../../array/flatten.md)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[flatten](../../../reference/array/flatten.md)を使用してください。
 
 :::
 

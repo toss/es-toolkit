@@ -4,7 +4,7 @@
 
 This `trimStart` function operates slowly due to handling `null` or `undefined` and parameter order changes.
 
-Use the faster and more modern [trimStart](../../string/trimStart.md) from `es-toolkit` instead.
+Use the faster and more modern [trimStart](../../../reference/string/trimStart.md) from `es-toolkit` instead.
 
 :::
 

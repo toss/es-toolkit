@@ -1,9 +1,9 @@
 # isSet (Lodash 兼容性)
 
-::: warning 使用 `es-toolkit` 的 [isSet](../../predicate/isSet.md)
+::: warning 使用 `es-toolkit` 的 [isSet](../../../reference/predicate/isSet.md)
 这个 `isSet` 函数是 Lodash 兼容性的函数，但与主库具有相同的实现。
 
-请使用更快且现代的 `es-toolkit` 的 [isSet](../../predicate/isSet.md)。
+请使用更快且现代的 `es-toolkit` 的 [isSet](../../../reference/predicate/isSet.md)。
 :::
 
 检查值是否为 Set。

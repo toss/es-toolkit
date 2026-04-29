@@ -1,10 +1,10 @@
 # curryRight (Lodash 互換性)
 
-::: warning `es-toolkit` の [`curryRight`](../../function/curryRight.md) または手動クロージャを使用してください
+::: warning `es-toolkit` の [`curryRight`](../../../reference/function/curryRight.md) または手動クロージャを使用してください
 
 この `curryRight` 関数は、複雑なプレースホルダー処理、引数数の検証、引数合成ロジックにより動作が遅くなります。
 
-プレースホルダーが不要な場合は、より高速な `es-toolkit` の [`curryRight`](../../function/curryRight.md) またはシンプルなクロージャを使用してください。
+プレースホルダーが不要な場合は、より高速な `es-toolkit` の [`curryRight`](../../../reference/function/curryRight.md) またはシンプルなクロージャを使用してください。
 
 :::
 
