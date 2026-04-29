@@ -60,4 +60,40 @@ describe('orderBy', () => {
       { user: 'fred', age: 48 },
     ]);
   });
+
+  it('should place null and undefined values at the end when ascending', () => {
+    const items = [
+      { name: 'a', value: 3 },
+      { name: 'b', value: null },
+      { name: 'c', value: 1 },
+      { name: 'd', value: undefined },
+      { name: 'e', value: 2 },
+    ];
+
+    expect(orderBy(items, ['value'], ['asc'])).toEqual([
+      { name: 'c', value: 1 },
+      { name: 'e', value: 2 },
+      { name: 'a', value: 3 },
+      { name: 'b', value: null },
+      { name: 'd', value: undefined },
+    ]);
+  });
+
+  it('should place null and undefined values at the beginning when descending', () => {
+    const items = [
+      { name: 'a', value: 3 },
+      { name: 'b', value: null },
+      { name: 'c', value: 1 },
+      { name: 'd', value: undefined },
+      { name: 'e', value: 2 },
+    ];
+
+    expect(orderBy(items, ['value'], ['desc'])).toEqual([
+      { name: 'd', value: undefined },
+      { name: 'b', value: null },
+      { name: 'a', value: 3 },
+      { name: 'e', value: 2 },
+      { name: 'c', value: 1 },
+    ]);
+  });
 });
