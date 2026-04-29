@@ -23,6 +23,10 @@ export function trimStart(str: string, chars?: string | string[]): string {
 
   switch (typeof chars) {
     case 'string': {
+      if (chars.length !== 1) {
+        throw new Error(`The 'chars' parameter should be a single character string.`);
+      }
+
       while (startIndex < str.length && str[startIndex] === chars) {
         startIndex++;
       }

@@ -46,6 +46,10 @@ describe('trimStart', () => {
     expect(trimStart('  hello world  ')).toEqual('hello world  ');
   });
 
+  it('should throw an error when chars is a multi-character string', () => {
+    expect(() => trimStart('---hello', '--')).toThrow();
+  });
+
   it('should remove leading characters when chars is an array', () => {
     expect(trimStart('---hello', ['-', 'h'])).toEqual('ello');
   });
