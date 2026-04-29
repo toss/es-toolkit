@@ -6,16 +6,28 @@
     }
   },
   "redirects": [
-    { "source": "/compatibility", "destination": "/compat/intro", "permanent": false },
-    { "source": "/ko/compatibility", "destination": "/ko/compat/intro", "permanent": false },
-    { "source": "/ja/compatibility", "destination": "/ja/compat/intro", "permanent": false },
-    { "source": "/zh_hans/compatibility", "destination": "/zh_hans/compat/intro", "permanent": false },
-    { "source": "/reference/compat/:path*", "destination": "/compat/reference/:path*", "permanent": false },
-    { "source": "/ko/reference/compat/:path*", "destination": "/ko/compat/reference/:path*", "permanent": false },
-    { "source": "/ja/reference/compat/:path*", "destination": "/ja/compat/reference/:path*", "permanent": false },
+    { "source": "/compatibility.html", "destination": "/compat/intro.html", "permanent": false },
+    { "source": "/ko/compatibility.html", "destination": "/ko/compat/intro.html", "permanent": false },
+    { "source": "/ja/compatibility.html", "destination": "/ja/compat/intro.html", "permanent": false },
+    { "source": "/zh_hans/compatibility.html", "destination": "/zh_hans/compat/intro.html", "permanent": false },
     {
-      "source": "/zh_hans/reference/compat/:path*",
-      "destination": "/zh_hans/compat/reference/:path*",
+      "source": "/reference/compat/:path*.html",
+      "destination": "/compat/reference/:path*.html",
+      "permanent": false
+    },
+    {
+      "source": "/ko/reference/compat/:path*.html",
+      "destination": "/ko/compat/reference/:path*.html",
+      "permanent": false
+    },
+    {
+      "source": "/ja/reference/compat/:path*.html",
+      "destination": "/ja/compat/reference/:path*.html",
+      "permanent": false
+    },
+    {
+      "source": "/zh_hans/reference/compat/:path*.html",
+      "destination": "/zh_hans/compat/reference/:path*.html",
       "permanent": false
     }
   ]
