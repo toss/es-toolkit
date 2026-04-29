@@ -108,11 +108,6 @@ function sidebar(): DefaultTheme.Sidebar {
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ja', 'reference', 'error'),
         },
-        {
-          text: 'カラー',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'color'),
-        },
       ]),
     },
     {

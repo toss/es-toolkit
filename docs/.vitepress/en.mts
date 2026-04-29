@@ -105,11 +105,6 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'reference', 'util'),
         },
         {
-          text: 'Color Utilities',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'reference', 'color'),
-        },
-        {
           text: 'Errors',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'reference', 'error'),
