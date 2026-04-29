@@ -1,9 +1,30 @@
-import path from 'node:path';
 import { type DefaultTheme, defineConfig } from 'vitepress';
-import { getSidebarItems } from './libs/getSidebarItems.mts';
-import { sortByText } from './libs/sortByText.mts';
+import { buildFlavorSidebar, type SidebarLabels } from './libs/buildFlavorSidebar.mts';
 
-const docsRoot = path.resolve(import.meta.dirname, '..');
+const labels: SidebarLabels = {
+  guide: 'ガイド',
+  reference: 'リファレンス',
+  guideItems: {
+    introduction: '紹介',
+    installation: 'インストールと使用方法',
+    bundleSize: 'バンドルサイズ',
+    performance: 'パフォーマンス',
+    aiIntegration: 'AI 連携',
+  },
+  categories: {
+    array: '配列',
+    function: '関数',
+    map: 'Map',
+    math: '数学',
+    object: 'オブジェクト',
+    predicate: '述語',
+    promise: 'Promise',
+    set: 'Set',
+    string: '文字列',
+    util: 'ユーティリティ',
+    error: 'エラー',
+  },
+};
 
 export const ja = defineConfig({
   lang: 'ja',
@@ -14,7 +35,7 @@ export const ja = defineConfig({
 
     nav: nav(),
 
-    sidebar: sidebar(),
+    sidebar: buildFlavorSidebar({ locale: 'ja', labels }),
 
     editLink: {
       pattern: 'https://github.com/toss/es-toolkit/edit/main/docs/:path',
@@ -33,128 +54,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: 'ホーム', link: '/ja' },
     { text: '導入', link: '/ja/intro' },
     { text: 'リファレンス', link: '/ja/reference/array/at' },
-    { text: 'Lodash 互換性', link: '/ja/reference/compat/array/castArray' },
-  ];
-}
-
-function sidebar(): DefaultTheme.Sidebar {
-  return [
-    {
-      text: 'ガイド',
-      items: [
-        { text: '紹介', link: '/ja/intro' },
-        { text: 'インストールと使用方法', link: '/ja/usage' },
-        { text: 'バンドルサイズ', link: '/ja/bundle-size' },
-        { text: 'パフォーマンス', link: '/ja/performance' },
-        { text: 'Lodash 互換性', link: '/ja/compatibility' },
-        { text: 'AI 連携', link: '/ja/ai-integration' },
-      ],
-    },
-    {
-      text: 'リファレンス',
-      items: sortByText([
-        {
-          text: '配列',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'array'),
-        },
-        {
-          text: '関数',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'function'),
-        },
-        {
-          text: 'Map',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'map'),
-        },
-        {
-          text: '数学',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'math'),
-        },
-        {
-          text: 'オブジェクト',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'object'),
-        },
-        {
-          text: '述語',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'predicate'),
-        },
-        {
-          text: 'Promise',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'promise'),
-        },
-        {
-          text: 'Set',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'set'),
-        },
-        {
-          text: '文字列',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'string'),
-        },
-        {
-          text: 'ユーティリティ',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'util'),
-        },
-        {
-          text: 'エラー',
-          collapsed: true,
-          items: getSidebarItems(docsRoot, 'ja', 'reference', 'error'),
-        },
-      ]),
-    },
-    {
-      text: 'Lodash 互換性',
-      items: [
-        {
-          text: 'リファレンス',
-          items: sortByText([
-            {
-              text: '配列',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'array'),
-            },
-            {
-              text: '関数',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'function'),
-            },
-            {
-              text: '数学',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'math'),
-            },
-            {
-              text: 'オブジェクト',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'object'),
-            },
-            {
-              text: '述語',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'predicate'),
-            },
-            {
-              text: '文字列',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'string'),
-            },
-            {
-              text: 'ユーティリティ',
-              collapsed: true,
-              items: getSidebarItems(docsRoot, 'ja', 'reference', 'compat', 'util'),
-            },
-          ]),
-        },
-      ],
-    },
+    { text: 'Lodash 互換性', link: '/ja/compat/intro' },
   ];
 }
 
