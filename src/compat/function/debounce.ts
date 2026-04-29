@@ -198,7 +198,10 @@ export function debounce<F extends (...args: any[]) => any>(
       }
 
       if (Date.now() - pendingAt >= maxWait) {
-        result = func.apply(this, args);
+        if (leading || trailing) {
+          result = func.apply(this, args);
+        }
+
         pendingAt = Date.now();
 
         _debounced.cancel();
