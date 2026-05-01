@@ -16,19 +16,34 @@
  */
 export function flatten<T, D extends number = 1>(arr: readonly T[], depth = 1 as D): Array<FlatArray<T[], D>> {
   const result: Array<FlatArray<T[], D>> = [];
-  const flooredDepth = Math.floor(depth);
+  const flooredDepth = Math.max(0, Math.floor(depth));
 
-  const recursive = (arr: readonly T[], currentDepth: number) => {
-    for (let i = 0; i < arr.length; i++) {
-      const item = arr[i];
-      if (Array.isArray(item) && currentDepth < flooredDepth) {
-        recursive(item, currentDepth + 1);
-      } else {
-        result.push(item as FlatArray<T[], D>);
-      }
+  if (flooredDepth === 0) {
+    return arr as Array<FlatArray<T[], D>>;
+  }
+
+  // Use iterative approach to avoid stack overflow on deeply nested arrays
+  type StackItem = [readonly unknown[], number, number]; // [array, depth, index]
+  const stack: StackItem[] = [[arr as readonly unknown[], 0, 0]];
+
+  while (stack.length > 0) {
+    const top = stack[stack.length - 1];
+    const [currentArr, currentDepth, currentIndex] = top;
+
+    if (currentIndex >= currentArr.length) {
+      stack.pop();
+      continue;
     }
-  };
 
-  recursive(arr, 0);
+    top[2]++; // increment index
+
+    const item = currentArr[currentIndex];
+    if (Array.isArray(item) && currentDepth < flooredDepth) {
+      stack.push([item as readonly unknown[], currentDepth + 1, 0]);
+    } else {
+      result.push(item as FlatArray<T[], D>);
+    }
+  }
+
   return result;
 }

@@ -60,4 +60,16 @@ describe('flatten', () => {
 
     expect(flatten(originArr, 2)).toEqual([]);
   });
+
+  it('should handle deeply nested arrays without stack overflow', () => {
+    // Create a deeply nested array (depth 10000)
+    let deepArr: unknown[] = [42];
+    for (let i = 0; i < 10000; i++) {
+      deepArr = [deepArr];
+    }
+
+    // This would throw "Maximum call stack size exceeded" with recursive implementation
+    expect(() => flatten(deepArr, Infinity)).not.toThrow();
+    expect(flatten(deepArr, Infinity)).toEqual([42]);
+  });
 });
