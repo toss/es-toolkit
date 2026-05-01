@@ -19,7 +19,7 @@ export function flatten<T, D extends number = 1>(arr: readonly T[], depth = 1 as
   const flooredDepth = Math.max(0, Math.floor(depth));
 
   if (flooredDepth === 0) {
-    return arr as Array<FlatArray<T[], D>>;
+    return Array.from(arr) as Array<FlatArray<T[], D>>;
   }
 
   // Use iterative approach to avoid stack overflow on deeply nested arrays
