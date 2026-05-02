@@ -1,4 +1,4 @@
-import { debounce, DebouncedFunc, DebouncedFuncLeading } from './debounce.ts';
+import type { DebouncedFunc, DebouncedFuncLeading } from './debounce.ts';
 
 interface ThrottleSettings {
   /**
@@ -122,11 +122,126 @@ export function throttle<F extends (...args: any[]) => any>(
   throttleMs = 0,
   options: ThrottleSettings = {}
 ): DebouncedFunc<F> {
+  if (options == null || typeof options !== 'object') {
+    options = {};
+  }
+
   const { leading = true, trailing = true } = options;
 
-  return debounce(func, throttleMs, {
-    leading,
-    maxWait: throttleMs,
-    trailing,
-  });
+  let result: ReturnType<F> | undefined = undefined;
+  let lastArgs: Parameters<F> | undefined = undefined;
+  let lastThis: unknown = undefined;
+  let lastCallTime: number | undefined = undefined;
+  let lastInvokeTime = 0;
+  let timeoutId: ReturnType<typeof setTimeout> | undefined = undefined;
+
+  const invoke = (time: number) => {
+    const args = lastArgs;
+    const thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args!);
+
+    return result;
+  };
+
+  const shouldInvoke = (time: number) => {
+    if (lastCallTime === undefined) {
+      return true;
+    }
+
+    const timeSinceLastCall = time - lastCallTime;
+    const timeSinceLastInvoke = time - lastInvokeTime;
+
+    return timeSinceLastCall >= throttleMs || timeSinceLastCall < 0 || timeSinceLastInvoke >= throttleMs;
+  };
+
+  const trailingEdge = (time: number) => {
+    timeoutId = undefined;
+
+    if (trailing && lastArgs != null) {
+      return invoke(time);
+    }
+
+    lastArgs = lastThis = undefined;
+    return result;
+  };
+
+  const remainingWait = (time: number) => {
+    const timeSinceLastCall = time - (lastCallTime ?? 0);
+    const timeSinceLastInvoke = time - lastInvokeTime;
+
+    return Math.min(throttleMs - timeSinceLastCall, throttleMs - timeSinceLastInvoke);
+  };
+
+  const timerExpired = () => {
+    const time = Date.now();
+
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+
+    timeoutId = setTimeout(timerExpired, remainingWait(time));
+  };
+
+  const leadingEdge = (time: number) => {
+    lastInvokeTime = time;
+    timeoutId = setTimeout(timerExpired, throttleMs);
+
+    if (leading) {
+      return invoke(time);
+    }
+
+    return result;
+  };
+
+  const throttled = function (this: any, ...args: Parameters<F>) {
+    const time = Date.now();
+    const isInvoking = shouldInvoke(time);
+
+    lastArgs = args;
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timeoutId === undefined) {
+        return leadingEdge(time);
+      }
+
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(timerExpired, throttleMs);
+
+      return invoke(time);
+    }
+
+    if (timeoutId === undefined) {
+      timeoutId = setTimeout(timerExpired, throttleMs);
+    }
+
+    return result;
+  };
+
+  throttled.cancel = () => {
+    if (timeoutId !== undefined) {
+      clearTimeout(timeoutId);
+    }
+
+    lastInvokeTime = 0;
+    lastArgs = undefined;
+    lastCallTime = undefined;
+    lastThis = undefined;
+    timeoutId = undefined;
+  };
+
+  throttled.flush = () => {
+    if (timeoutId === undefined) {
+      return result;
+    }
+
+    return trailingEdge(Date.now());
+  };
+
+  return throttled;
 }

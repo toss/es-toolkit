@@ -55,6 +55,51 @@ describe('throttle', () => {
     expect(callCount).toBe(2);
   });
 
+  it('should match lodash timing for repeated default calls', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(0);
+
+    try {
+      const calls: Array<[number, number]> = [];
+      const throttled = throttle((value: number) => {
+        calls.push([value, Date.now()]);
+      }, 50);
+
+      throttled(0);
+      vi.advanceTimersByTime(20);
+      throttled(20);
+      vi.advanceTimersByTime(20);
+      throttled(40);
+      vi.advanceTimersByTime(20);
+      throttled(60);
+      vi.advanceTimersByTime(20);
+      throttled(80);
+      vi.advanceTimersByTime(30);
+
+      expect(calls).toEqual([
+        [0, 0],
+        [40, 50],
+        [80, 110],
+      ]);
+
+      vi.advanceTimersByTime(190);
+      throttled(300);
+      vi.advanceTimersByTime(20);
+      throttled(320);
+      vi.advanceTimersByTime(30);
+
+      expect(calls).toEqual([
+        [0, 0],
+        [40, 50],
+        [80, 110],
+        [300, 300],
+        [320, 350],
+      ]);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('should not trigger a trailing call when invoked once', async () => {
     let callCount = 0;
     const throttled = throttle(() => {
