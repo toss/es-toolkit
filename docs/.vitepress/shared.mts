@@ -89,6 +89,15 @@ export const shared = defineConfig({
     ],
   ],
 
+  transformPageData(pageData) {
+    const canonicalUrl = `https://es-toolkit.dev/${pageData.relativePath}`
+      .replace(/index\.md$/, '')
+      .replace(/\.md$/, '.html');
+
+    pageData.frontmatter.head ??= [];
+    pageData.frontmatter.head.push(['link', { rel: 'canonical', href: canonicalUrl }]);
+  },
+
   themeConfig: {
     logo: {
       dark: '/logo_white.png',
@@ -144,7 +153,11 @@ export const shared = defineConfig({
         ),
         '@vue/server-renderer': path.dirname(
           require.resolve('@vue/server-renderer/package.json', {
-            paths: [require.resolve('vitepress')],
+            paths: [
+              require.resolve('vue', {
+                paths: [require.resolve('vitepress')],
+              }),
+            ],
           })
         ),
       },
