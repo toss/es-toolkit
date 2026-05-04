@@ -60,4 +60,13 @@ describe('flatten', () => {
 
     expect(flatten(originArr, 2)).toEqual([]);
   });
+  it('should handle deeply nested arrays without stack overflow', () => {
+    const createNestedArray = (depth: number): unknown[] => {
+      if (depth === 0) return [1];
+      return [createNestedArray(depth - 1)];
+    };
+
+    const arr = createNestedArray(10000);
+    expect(() => flatten(arr, Infinity)).not.toThrow();
+  });
 });
