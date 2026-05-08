@@ -2,7 +2,13 @@
 
 es-toolkit docs are written in 4 languages. All must be created together.
 
-## File Locations
+## Writing guide
+
+The template, placeholder rules, and style guidance live in [`.github/CONTRIBUTING.md` § 5 Writing Documentation](../.github/CONTRIBUTING.md#5-writing-documentation). Read that section before creating or editing any reference doc.
+
+For canonical examples, see [`sum`](./reference/math/sum.md) and [`toCamelCaseKeys`](./reference/object/toCamelCaseKeys.md).
+
+## File locations
 
 | Language | Path                                        |
 | -------- | ------------------------------------------- |
@@ -11,50 +17,18 @@ es-toolkit docs are written in 4 languages. All must be created together.
 | Japanese | `docs/ja/reference/{category}/{fn}.md`      |
 | Chinese  | `docs/zh_hans/reference/{category}/{fn}.md` |
 
-## Translation Table
+## Translation table
 
-| English    | Korean (해요체) | Japanese         | zh_hans |
-| ---------- | --------------- | ---------------- | ------- |
-| Signature  | 인터페이스      | インターフェース | 签名    |
-| Parameters | 파라미터        | パラメータ       | 参数    |
-| Returns    | 반환 값         | 戻り値           | 返回値  |
-| Examples   | 예시            | 例               | 示例    |
-| Usage      | 사용법          | 使い方           | 用法    |
-| Throws     | 에러            | エラー           | 异常    |
+Use these terms consistently across translations:
 
-## Korean Style
+| English    | Korean (해요체) | Japanese   | zh_hans |
+| ---------- | --------------- | ---------- | ------- |
+| Usage      | 사용법          | 使用法     | 用法    |
+| Parameters | 파라미터        | パラメータ | 参数    |
+| Returns    | 반환 값         | 戻り値     | 返回值  |
+| Throws     | 에러            | エラー     | 异常    |
+| Examples   | 예시            | 例         | 示例    |
 
-Write in polite conversational tone (해요체): "반환해요", "나눠요", "던져요".
+## Korean style
 
-## Template
-
-Use existing docs as reference. See `docs/reference/array/chunk.md` for a complete example.
-
-```markdown
-# functionName
-
-[One-line description.]
-
-## Signature
-
-\`\`\`typescript
-function functionName<T>(param: ParamType): ReturnType;
-\`\`\`
-
-### Parameters
-
-- `param` (`ParamType`): Description.
-
-### Returns
-
-(`ReturnType`): Description.
-
-## Examples
-
-\`\`\`typescript
-import { functionName } from 'es-toolkit/category';
-
-functionName(input);
-// Returns: output
-\`\`\`
-```
+Write Korean docs in polite conversational tone (해요체): "반환해요", "나눠요", "던져요".
