@@ -24,6 +24,7 @@
     "./promise": "./src/promise/index.ts",
     "./set": "./src/set/index.ts",
     "./string": "./src/string/index.ts",
+    "./server": "./src/server/index.ts",
     "./util": "./src/util/index.ts",
     "./package.json": "./package.json"
   },
@@ -42,6 +43,7 @@
     "promise.js",
     "set.js",
     "string.js",
+    "server.js",
     "util.js"
   ],
   "workspaces": [
@@ -137,6 +139,16 @@
         "default": {
           "types": "./compat/*.d.ts",
           "default": "./compat/*.js"
+        }
+      },
+      "./server": {
+        "import": {
+          "types": "./dist/server/index.d.mts",
+          "default": "./dist/server/index.mjs"
+        },
+        "require": {
+          "types": "./dist/server/index.d.ts",
+          "default": "./dist/server/index.js"
         }
       },
       "./error": {
