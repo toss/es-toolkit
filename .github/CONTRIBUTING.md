@@ -177,136 +177,62 @@ A clear and concise description of what the pr is about.
 
 ## 5. Writing Documentation
 
-Reference docs for every es-toolkit function follow a fixed template. The goal is to describe the function's behavior accurately and to give readers enough context to use it correctly.
+Every function ships docs in four languages. Keep them in sync:
+
+- `docs/reference/{category}/{fn}.md` (English)
+- `docs/ko/reference/{category}/{fn}.md` (Korean, in 해요체)
+- `docs/ja/reference/{category}/{fn}.md` (Japanese)
+- `docs/zh_hans/reference/{category}/{fn}.md` (Simplified Chinese)
+
+For canonical examples, see [`sum`](../docs/reference/math/sum.md) and [`toCamelCaseKeys`](../docs/reference/object/toCamelCaseKeys.md).
 
 ### 5.1 Template
-
-Use this skeleton for every `docs/**/reference/{category}/{fn}.md` file:
 
 ````markdown
 # {function name}
 
-{short description of the function}
+{one-line description}
 
 ```typescript
 {short example code}
 ```
 
-## Reference
+## Usage
 
-### `{reference 1}`
+### `{signature}`
 
-{detailed description of reference 1}
-
-#### Parameters
-
-{parameters for reference 1}
-
-### Returns
-
-{return value for reference 1}
-````
-
-### 5.2 How to fill in each placeholder
-
-- **`{function name}`** — the function name in `funcName` form, matching the source file (e.g. `chunk`).
-- **`{short description of the function}`** — read the source code and summarize the function's behavior in one sentence.
-- **`{short example code}`** — a minimal example using descriptive variable names, not concrete values, so the reader can infer the interface. Example: `const chunked = chunk(arr, size);`.
-- **`{reference n}`** — a short signature line for each overload (e.g. `chunk(arr, size)`). Try to merge overloads into one entry; split into multiple only when the behavior is genuinely different (e.g. one for arrays and one for objects).
-- **`{detailed description of reference n}`** — explain when the function is useful and walk through the behavior with small inline examples. Use a friendly, conversational tone. Avoid the "Description: …" colon style — write in flowing sentences.
-- **`{parameters for reference n}`** — list each parameter with its type. Mark optional parameters and include the default value.
-  > Example: `` - `arr` (`ArrayLike<T>`): the array to split. ``
-  > Example: `` - `size` (`number`, optional): the size of each smaller array. Must be an integer greater than 1. Defaults to `1`. ``
-- **`{return value for reference n}`** — start with the type in parentheses, then describe what the function returns.
-  > Example: `` (`T[][]`): a two-dimensional array split into chunks of `size`. ``
-
-### 5.3 Extra rules for compat function docs
-
-For `es-toolkit/compat` functions (`docs/**/reference/compat/{category}/{fn}.md`), add two things on top of the base template:
-
-1. **Append `(Lodash compatibility)` to the title.**
-   ```markdown
-   # chunk (Lodash compatibility)
-   ```
-2. **Add a `::: warning` block right under the title** that points readers to a faster alternative.
-   ```markdown
-   ::: warning {short description of the alternative}
-
-   {long description of the alternative}
-
-   Use the faster, more modern {alternative} instead.
-
-   :::
-   ```
-
-Fill the placeholders in the warning block as follows:
-
-- **`{short description of the alternative}` / `{long description of the alternative}` / `{alternative}`** — recommend a replacement.
-  - If `es-toolkit` (the main library, anything under `src/` outside `src/compat/`) has a function with the same name, recommend that. Example: "Use `es-toolkit`'s [chunk](../../array/chunk.md)".
-  - Otherwise, recommend a modern JavaScript built-in. Example: `isString` → "Use the `typeof` operator instead (`typeof value === 'string'`)".
-  - In the long description, explain *why* the alternative is better. Read the compat source and compare with the main `es-toolkit` implementation to identify the concrete differences (slower edge-case handling, default-value coercion, `null`/`undefined` checks, etc.). For modern JS alternatives, compare the behaviors directly.
-    > Example: "This `chunk` function is slow because it has to handle `null` / `undefined` and apply a default for `size`."
-
-### 5.4 Writing guidelines
-
-- Use plain words. Prefer everyday phrasing over technical jargon (e.g. "arrays of the same length" rather than "uniform arrays").
-- Use the JavaScript term most readers will recognize (e.g. "array or object" rather than "collection").
-- Avoid raw English jargon when there is a natural local-language equivalent (e.g. "values that evaluate to true" rather than "truthy").
-
-### 5.5 Worked example
-
-A complete compat doc, exercising both the base template and the compat-only additions:
-
-````markdown
-# chunk (Lodash compatibility)
-
-::: warning Use `es-toolkit`'s `chunk`
-
-This `chunk` function is slow because it has to handle `null` / `undefined` and apply a default for `size`.
-
-Use the faster, more modern `es-toolkit`'s [chunk](../../array/chunk.md) instead.
-
-:::
-
-Splits an array into smaller arrays of a given size.
+{Short paragraph: when to use it, then how it behaves. Add inline examples between paragraphs as needed.}
 
 ```typescript
-const chunked = chunk(arr, size);
-```
+import { {function name} } from 'es-toolkit/{category}';
 
-## Reference
-
-### `chunk(arr, size)`
-
-Use `chunk` when you want to split a long array into several smaller arrays of the same size. If the array can't be split evenly, the last array contains the remaining elements.
-
-```typescript
-import { chunk } from 'es-toolkit/compat';
-
-// Split a number array into chunks of 2.
-chunk([1, 2, 3, 4], 2);
-// Returns: [[1, 2], [3, 4]]
-
-// Split a string array into chunks of 3.
-chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
-// Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
-```
-
-`null` and `undefined` are treated as empty arrays.
-
-```typescript
-import { chunk } from 'es-toolkit/compat';
-
-chunk(null, 2); // []
-chunk(undefined, 2); // []
+// Short comment describing what this example shows.
+{example call}
+// Returns: {result}
 ```
 
 #### Parameters
 
-- `arr` (`ArrayLike<T>`): the array to split.
-- `size` (`number`, optional): the size of each smaller array. Must be an integer greater than 1. Defaults to `1`.
+- `{name}` (`{type}`): {description}.
+- `{name}` (`{type}`, optional): {description}. Defaults to `{default}`.
 
-### Returns
+#### Returns
 
-(`T[][]`): a two-dimensional array split into chunks of `size`.
+(`{type}`): {description}.
 ````
+
+### 5.2 Filling it in
+
+- **Title**: the function name with no suffix (`# sum`, `# toCamelCaseKeys`).
+- **One-line description**: summarize the behavior in one sentence. If a non-obvious term appears (e.g. "camelCase"), add one short follow-up paragraph explaining it.
+- **Short example code**: use descriptive variable names (`arr`, `numbers`, `obj`) over concrete values so the interface is obvious at a glance.
+- **`### \`signature\``**: one heading per overload. Merge overloads when possible; split only when the behavior is genuinely different (e.g. arrays vs. objects).
+- **Body prose**: lead with "when to use it", then describe behavior in flowing sentences — never the "Description: …" colon style. Open each example block with `import { ... } from 'es-toolkit/{category}'` and put a one-line comment above each call.
+- **Parameters**: `` - `name` (`type`): description. ``. For optionals, append `optional` to the type and include the default.
+- **Returns**: type in parentheses first, then the description.
+
+### 5.3 Style
+
+- Use plain words (e.g. "arrays of the same length" instead of "uniform arrays").
+- Prefer everyday JavaScript terms (e.g. "array or object" instead of "collection").
+- In non-English versions, unfold English jargon into a natural local-language phrase (e.g. "값이 참으로 평가되는" instead of "truthy").
