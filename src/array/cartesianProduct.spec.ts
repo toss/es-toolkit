@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { product } from './product';
+import { cartesianProduct } from './cartesianProduct';
 
-describe('product', () => {
+describe('cartesianProduct', () => {
   it('returns the Cartesian product of two arrays', () => {
-    expect(product([1, 2], ['a', 'b'])).toEqual([
+    expect(cartesianProduct([1, 2], ['a', 'b'])).toEqual([
       [1, 'a'],
       [1, 'b'],
       [2, 'a'],
@@ -12,7 +12,7 @@ describe('product', () => {
   });
 
   it('returns the Cartesian product of three arrays', () => {
-    expect(product([0, 1], [0, 1], [0, 1])).toEqual([
+    expect(cartesianProduct([0, 1], [0, 1], [0, 1])).toEqual([
       [0, 0, 0],
       [0, 0, 1],
       [0, 1, 0],
@@ -25,21 +25,21 @@ describe('product', () => {
   });
 
   it('returns single-element tuples when given a single array', () => {
-    expect(product([1, 2, 3])).toEqual([[1], [2], [3]]);
+    expect(cartesianProduct([1, 2, 3])).toEqual([[1], [2], [3]]);
   });
 
   it('returns a single empty tuple when no arrays are given', () => {
-    expect(product()).toEqual([[]]);
+    expect(cartesianProduct()).toEqual([[]]);
   });
 
   it('returns an empty array when any input array is empty', () => {
-    expect(product([1, 2, 3], [])).toEqual([]);
-    expect(product([], ['a', 'b'])).toEqual([]);
-    expect(product([1], [], [2])).toEqual([]);
+    expect(cartesianProduct([1, 2, 3], [])).toEqual([]);
+    expect(cartesianProduct([], ['a', 'b'])).toEqual([]);
+    expect(cartesianProduct([1], [], [2])).toEqual([]);
   });
 
   it('emits tuples in lexicographic order with the rightmost array advancing fastest', () => {
-    expect(product(['A', 'B', 'C', 'D'], ['x', 'y'])).toEqual([
+    expect(cartesianProduct(['A', 'B', 'C', 'D'], ['x', 'y'])).toEqual([
       ['A', 'x'],
       ['A', 'y'],
       ['B', 'x'],
@@ -56,7 +56,7 @@ describe('product', () => {
       [1, 2],
       [3, 4],
     ];
-    expect(product(...inputs)).toEqual([
+    expect(cartesianProduct(...inputs)).toEqual([
       [1, 3],
       [1, 4],
       [2, 3],

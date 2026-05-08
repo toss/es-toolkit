@@ -1,4 +1,5 @@
 export { at } from './at.ts';
+export { cartesianProduct } from './cartesianProduct.ts';
 export { chunk } from './chunk.ts';
 export { combinations } from './combinations.ts';
 export { compact } from './compact.ts';
@@ -35,7 +36,6 @@ export { maxBy } from './maxBy.ts';
 export { minBy } from './minBy.ts';
 export { orderBy } from './orderBy.ts';
 export { partition } from './partition.ts';
-export { product } from './product.ts';
 export { pull } from './pull.ts';
 export { pullAt } from './pullAt.ts';
 export { reduceAsync } from './reduceAsync.ts';

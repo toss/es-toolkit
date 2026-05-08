@@ -5,7 +5,7 @@
  * @param {readonly T[]} arr1 - The array to take the product of.
  * @returns {Array<[T]>} An array of single-element tuples.
  */
-export function product<T>(arr1: readonly T[]): Array<[T]>;
+export function cartesianProduct<T>(arr1: readonly T[]): Array<[T]>;
 
 /**
  * Computes the [Cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) of the input arrays.
@@ -16,10 +16,10 @@ export function product<T>(arr1: readonly T[]): Array<[T]>;
  * @returns {Array<[T, U]>} An array of tuples representing the Cartesian product.
  *
  * @example
- * product([1, 2], ['a', 'b']);
+ * cartesianProduct([1, 2], ['a', 'b']);
  * // => [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
  */
-export function product<T, U>(arr1: readonly T[], arr2: readonly U[]): Array<[T, U]>;
+export function cartesianProduct<T, U>(arr1: readonly T[], arr2: readonly U[]): Array<[T, U]>;
 
 /**
  * Computes the [Cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) of the input arrays.
@@ -30,7 +30,7 @@ export function product<T, U>(arr1: readonly T[], arr2: readonly U[]): Array<[T,
  * @param {readonly V[]} arr3 - The third array to take the product of.
  * @returns {Array<[T, U, V]>} An array of tuples representing the Cartesian product.
  */
-export function product<T, U, V>(arr1: readonly T[], arr2: readonly U[], arr3: readonly V[]): Array<[T, U, V]>;
+export function cartesianProduct<T, U, V>(arr1: readonly T[], arr2: readonly U[], arr3: readonly V[]): Array<[T, U, V]>;
 
 /**
  * Computes the [Cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) of the input arrays.
@@ -42,7 +42,7 @@ export function product<T, U, V>(arr1: readonly T[], arr2: readonly U[], arr3: r
  * @param {readonly W[]} arr4 - The fourth array to take the product of.
  * @returns {Array<[T, U, V, W]>} An array of tuples representing the Cartesian product.
  */
-export function product<T, U, V, W>(
+export function cartesianProduct<T, U, V, W>(
   arr1: readonly T[],
   arr2: readonly U[],
   arr3: readonly V[],
@@ -63,24 +63,24 @@ export function product<T, U, V, W>(
  * @returns {T[][]} An array of tuples representing the Cartesian product.
  *
  * @example
- * product([1, 2], ['a', 'b']);
+ * cartesianProduct([1, 2], ['a', 'b']);
  * // => [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
  *
  * @example
- * product([0, 1], [0, 1], [0, 1]);
+ * cartesianProduct([0, 1], [0, 1], [0, 1]);
  * // => [[0,0,0], [0,0,1], [0,1,0], [0,1,1], [1,0,0], [1,0,1], [1,1,0], [1,1,1]]
  *
  * @example
- * product([1, 2, 3], []);
+ * cartesianProduct([1, 2, 3], []);
  * // => []
  *
  * @example
- * product();
+ * cartesianProduct();
  * // => [[]]
  */
-export function product<T>(...arrs: Array<readonly T[]>): T[][];
+export function cartesianProduct<T>(...arrs: Array<readonly T[]>): T[][];
 
-export function product<T>(...arrs: Array<readonly T[]>): T[][] {
+export function cartesianProduct<T>(...arrs: Array<readonly T[]>): T[][] {
   if (arrs.length === 0) {
     return [[]];
   }
