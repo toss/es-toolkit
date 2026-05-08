@@ -174,24 +174,16 @@ const result2 = sample(arr); // 同样应推断为 `number`
 
 清晰简洁地描述该拉取请求的内容。
 
-## 5. 编写 Compat 函数文档
+## 5. 编写文档指南
 
-`es-toolkit/compat` 函数的参考文档遵循固定的模板。每篇 compat 文档有两个目标：(1) 引导用户使用更快或更现代的替代 API；(2) 准确描述函数的实际行为，方便迁移过程中仍需使用该函数的用户。
+es-toolkit 函数的参考文档遵循固定的模板。目标是准确描述函数的行为，并为读者提供足以正确使用函数的上下文。
 
 ### 5.1 模板
 
-每个 `docs/**/reference/compat/{category}/{fn}.md` 文件都使用以下骨架：
+每个 `docs/**/reference/{category}/{fn}.md` 文件都使用以下骨架：
 
 ````markdown
-# {函数名} (Lodash 兼容性)
-
-::: warning {替代 API 简短说明}
-
-{替代 API 详细说明}
-
-请改用更快、更现代的{替代 API}。
-
-:::
+# {函数名}
 
 {函数简短说明}
 
@@ -217,11 +209,6 @@ const result2 = sample(arr); // 同样应推断为 `number`
 ### 5.2 如何填写每个占位符
 
 - **`{函数名}`**：使用与源文件相同的 `funcName` 形式（例如 `chunk`）。
-- **`{替代 API 简短说明}` / `{替代 API 详细说明}` / `{替代 API}`**：推荐一个替代方案。
-  - 如果 `es-toolkit` 主库（`src/` 下、`src/compat/` 之外的位置）中存在同名函数，请推荐该函数。例如："请使用 `es-toolkit` 的 [chunk](../../array/chunk.md)"。
-  - 如果主库中没有匹配的函数，请推荐现代 JavaScript 内置 API。例如：`isString` → "请使用 `typeof` 运算符 (`typeof value === 'string'`)"。
-  - 在详细说明中，解释*为什么*替代方案更好。阅读 compat 源码并与主 `es-toolkit` 的实现进行比较，找出更简单或更快的原因（例如较慢的边缘情况处理、默认值处理、`null` / `undefined` 检查等）。对于现代 JavaScript API，请直接比较行为。
-    > 示例："这个 `chunk` 函数因为要处理 `null`、`undefined` 以及 `size` 的默认值，所以运行较慢。"
 - **`{函数简短说明}`**：阅读源代码，并用一句话总结函数的行为。
   > 示例："将数组拆分成指定大小的较小数组。"
 - **`{简短示例代码}`**：使用描述性变量名（而不是具体的值）的最小示例，使读者能从中推断出函数接口。
@@ -234,15 +221,42 @@ const result2 = sample(arr); // 同样应推断为 `number`
 - **`{参考 n 的返回值}`**：开头用括号写出类型，后面接对返回值的详细说明。
   > 示例：`` (`T[][]`): 按 `size` 拆分后的二维数组。 ``
 
-### 5.3 写作指南
+### 5.3 Compat 函数文档的额外规则
+
+`es-toolkit/compat` 函数（`docs/**/reference/compat/{category}/{fn}.md`）在上述基础模板上再加两点：
+
+1. **在标题后追加 `(Lodash 兼容性)` 后缀。**
+   ```markdown
+   # chunk (Lodash 兼容性)
+   ```
+2. **在标题正下方添加一个 `::: warning` 块**，引导读者使用更快的替代 API。
+   ```markdown
+   ::: warning {替代 API 简短说明}
+
+   {替代 API 详细说明}
+
+   请改用更快、更现代的{替代 API}。
+
+   :::
+   ```
+
+按以下方式填写 warning 块中的占位符：
+
+- **`{替代 API 简短说明}` / `{替代 API 详细说明}` / `{替代 API}`**：推荐一个替代方案。
+  - 如果 `es-toolkit` 主库（`src/` 下、`src/compat/` 之外的位置）中存在同名函数，请推荐该函数。例如："请使用 `es-toolkit` 的 [chunk](../../array/chunk.md)"。
+  - 如果主库中没有匹配的函数，请推荐现代 JavaScript 内置 API。例如：`isString` → "请使用 `typeof` 运算符 (`typeof value === 'string'`)"。
+  - 在详细说明中，解释*为什么*替代方案更好。阅读 compat 源码并与主 `es-toolkit` 的实现进行比较，找出更简单或更快的原因（例如较慢的边缘情况处理、默认值处理、`null` / `undefined` 检查等）。对于现代 JavaScript API，请直接比较行为。
+    > 示例："这个 `chunk` 函数因为要处理 `null`、`undefined` 以及 `size` 的默认值，所以运行较慢。"
+
+### 5.4 写作指南
 
 - 使用通俗易懂的词语。例如使用"长度相同的数组"而不是"均匀的数组"。
 - 使用 JavaScript 中更常见的术语。例如使用"数组或对象"而不是"集合"。
 - 在有自然中文表达时避免直接使用英文术语。例如使用"判断为真的值"而不是"truthy"。
 
-### 5.4 完整示例
+### 5.5 完整示例
 
-按照上述模板编写的一篇完整 compat 文档：
+同时应用基础模板和 compat 额外规则的完整 compat 文档示例：
 
 ````markdown
 # chunk (Lodash 兼容性)

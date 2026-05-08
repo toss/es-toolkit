@@ -175,24 +175,16 @@ If you made changes across multiple packages, writing package scope is optional.
 
 A clear and concise description of what the pr is about.
 
-## 5. Writing Documentation for Compat Functions
+## 5. Writing Documentation
 
-Reference docs for `es-toolkit/compat` functions follow a fixed template. The goal of every compat doc is to (1) gently steer users toward a faster or more modern alternative, and (2) describe the function's actual behavior accurately for users who still need it during migration.
+Reference docs for every es-toolkit function follow a fixed template. The goal is to describe the function's behavior accurately and to give readers enough context to use it correctly.
 
 ### 5.1 Template
 
-Use this skeleton for every `docs/**/reference/compat/{category}/{fn}.md` file:
+Use this skeleton for every `docs/**/reference/{category}/{fn}.md` file:
 
 ````markdown
-# {function name} (Lodash compatibility)
-
-::: warning {short description of the alternative}
-
-{long description of the alternative}
-
-Use the faster, more modern {alternative} instead.
-
-:::
+# {function name}
 
 {short description of the function}
 
@@ -218,11 +210,6 @@ Use the faster, more modern {alternative} instead.
 ### 5.2 How to fill in each placeholder
 
 - **`{function name}`** — the function name in `funcName` form, matching the source file (e.g. `chunk`).
-- **`{short description of the alternative}` / `{long description of the alternative}` / `{alternative}`** — recommend a replacement.
-  - If `es-toolkit` (the main library, anything under `src/` outside `src/compat/`) has a function with the same name, recommend that. Example: "Use `es-toolkit`'s [chunk](../../array/chunk.md)".
-  - Otherwise, recommend a modern JavaScript built-in. Example: `isString` → "Use the `typeof` operator instead (`typeof value === 'string'`)".
-  - In the long description, explain *why* the alternative is better. Read the compat source and compare with the main `es-toolkit` implementation to identify the concrete differences (slower edge-case handling, default-value coercion, `null`/`undefined` checks, etc.). For modern JS alternatives, compare the behaviors directly.
-    > Example: "This `chunk` function is slow because it has to handle `null` / `undefined` and apply a default for `size`."
 - **`{short description of the function}`** — read the source code and summarize the function's behavior in one sentence.
 - **`{short example code}`** — a minimal example using descriptive variable names, not concrete values, so the reader can infer the interface. Example: `const chunked = chunk(arr, size);`.
 - **`{reference n}`** — a short signature line for each overload (e.g. `chunk(arr, size)`). Try to merge overloads into one entry; split into multiple only when the behavior is genuinely different (e.g. one for arrays and one for objects).
@@ -233,15 +220,42 @@ Use the faster, more modern {alternative} instead.
 - **`{return value for reference n}`** — start with the type in parentheses, then describe what the function returns.
   > Example: `` (`T[][]`): a two-dimensional array split into chunks of `size`. ``
 
-### 5.3 Writing guidelines
+### 5.3 Extra rules for compat function docs
+
+For `es-toolkit/compat` functions (`docs/**/reference/compat/{category}/{fn}.md`), add two things on top of the base template:
+
+1. **Append `(Lodash compatibility)` to the title.**
+   ```markdown
+   # chunk (Lodash compatibility)
+   ```
+2. **Add a `::: warning` block right under the title** that points readers to a faster alternative.
+   ```markdown
+   ::: warning {short description of the alternative}
+
+   {long description of the alternative}
+
+   Use the faster, more modern {alternative} instead.
+
+   :::
+   ```
+
+Fill the placeholders in the warning block as follows:
+
+- **`{short description of the alternative}` / `{long description of the alternative}` / `{alternative}`** — recommend a replacement.
+  - If `es-toolkit` (the main library, anything under `src/` outside `src/compat/`) has a function with the same name, recommend that. Example: "Use `es-toolkit`'s [chunk](../../array/chunk.md)".
+  - Otherwise, recommend a modern JavaScript built-in. Example: `isString` → "Use the `typeof` operator instead (`typeof value === 'string'`)".
+  - In the long description, explain *why* the alternative is better. Read the compat source and compare with the main `es-toolkit` implementation to identify the concrete differences (slower edge-case handling, default-value coercion, `null`/`undefined` checks, etc.). For modern JS alternatives, compare the behaviors directly.
+    > Example: "This `chunk` function is slow because it has to handle `null` / `undefined` and apply a default for `size`."
+
+### 5.4 Writing guidelines
 
 - Use plain words. Prefer everyday phrasing over technical jargon (e.g. "arrays of the same length" rather than "uniform arrays").
 - Use the JavaScript term most readers will recognize (e.g. "array or object" rather than "collection").
 - Avoid raw English jargon when there is a natural local-language equivalent (e.g. "values that evaluate to true" rather than "truthy").
 
-### 5.4 Worked example
+### 5.5 Worked example
 
-A complete compat doc following this template:
+A complete compat doc, exercising both the base template and the compat-only additions:
 
 ````markdown
 # chunk (Lodash compatibility)

@@ -95,7 +95,7 @@ When adding or changing a function, follow this order:
    - `docs/ja/reference/{category}/{fn}.md` (Japanese)
    - `docs/zh_hans/reference/{category}/{fn}.md` (Simplified Chinese)
 
-   See `docs/CLAUDE.md` for the documentation template, and the markdown writing guidelines in CONTRIBUTING.md for compat-specific docs.
+   See `docs/CLAUDE.md` for translation tables, and the [Writing Documentation section in CONTRIBUTING.md](./.github/CONTRIBUTING.md#5-writing-documentation) for the doc template, placeholder rules, and compat-specific additions.
 
 ## Documentation standards
 
