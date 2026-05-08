@@ -228,7 +228,7 @@ import { {function name} } from 'es-toolkit/{category}';
 - **Short example code**: use descriptive variable names (`arr`, `numbers`, `obj`) over concrete values so the interface is obvious at a glance.
 - **`### \`signature\``**: one heading per overload. Merge overloads when possible; split only when the behavior is genuinely different (e.g. arrays vs. objects).
 - **Body prose**: lead with "when to use it", then describe behavior in flowing sentences — never the "Description: …" colon style. Open each example block with `import { ... } from 'es-toolkit/{category}'` and put a one-line comment above each call.
-- **Parameters**: `` - `name` (`type`): description. ``. For optionals, append `optional` to the type and include the default.
+- **Parameters**: ``- `name` (`type`): description.``. For optionals, append `optional` to the type and include the default.
 - **Returns**: type in parentheses first, then the description.
 
 ### 5.3 Style
