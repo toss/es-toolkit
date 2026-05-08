@@ -25,6 +25,24 @@ function percentile(arr: readonly number[], percentile: number): number;
 
 Throws an `Error` if `percentile` is `NaN`, less than `0`, or greater than `100`.
 
+## How it works
+
+After sorting the array in ascending order, the result is the element at:
+
+```typescript
+const index = Math.ceil(sorted.length * (percentile / 100)) - 1;
+return sorted[index];
+```
+
+This is the **nearest-rank** method. Multiplying the array length by `percentile / 100` gives a 1-indexed rank; `Math.ceil` rounds up to the smallest rank that covers at least the requested fraction of values, and subtracting `1` converts the rank into a 0-indexed array position.
+
+For example, given a sorted array of length 100 with `percentile = 75`:
+
+- `Math.ceil(100 * 0.75) - 1` → `74`
+- The 75th-smallest value (`sorted[74]`) is returned.
+
+`percentile = 0` is special-cased to return the smallest element, since the formula above would otherwise produce `-1`.
+
 ## Examples
 
 ```typescript
