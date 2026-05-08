@@ -3,12 +3,12 @@
 キーがソートされた新しいオブジェクトを作成します。
 
 ```typescript
-const sorted = sortKeys(object, compare?);
+const sorted = sortKeys(object);
 ```
 
 ## 使い方
 
-### `sortKeys(object, compare?)`
+### `sortKeys(object, compareKeys?)`
 
 オブジェクトのキーを一定の順序にソートしたい場合に`sortKeys`を使用します。デフォルトではキーがアルファベット順にソートされるため、シリアライズ、比較、表示などの用途に便利です。
 
@@ -38,7 +38,7 @@ const sorted = sortKeys(obj);
 #### パラメータ
 
 - `object` (`T`): キーをソートするオブジェクトです。
-- `compare` (`(a: string, b: string) => number`, オプション): キーのソートに使用するカスタム比較関数です。デフォルトはアルファベット順です。
+- `compareKeys` (`(a: string, b: string) => number`, オプション): キーのソートに使用するカスタム比較関数です。デフォルトはアルファベット順です。
 
 #### 戻り値
 

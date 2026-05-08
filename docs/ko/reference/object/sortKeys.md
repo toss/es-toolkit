@@ -3,12 +3,12 @@
 키가 정렬된 새로운 객체를 생성해요.
 
 ```typescript
-const sorted = sortKeys(object, compare?);
+const sorted = sortKeys(object);
 ```
 
 ## 사용법
 
-### `sortKeys(object, compare?)`
+### `sortKeys(object, compareKeys?)`
 
 객체의 키를 일정한 순서로 정렬하고 싶을 때 `sortKeys`를 사용하세요. 기본적으로 키가 알파벳순으로 정렬되어서, 직렬화, 비교, 표시 등의 용도에 유용해요.
 
@@ -38,7 +38,7 @@ const sorted = sortKeys(obj);
 #### 파라미터
 
 - `object` (`T`): 키를 정렬할 객체예요.
-- `compare` (`(a: string, b: string) => number`, 선택): 키 정렬에 사용할 커스텀 비교 함수예요. 기본값은 알파벳순이에요.
+- `compareKeys` (`(a: string, b: string) => number`, 선택): 키 정렬에 사용할 커스텀 비교 함수예요. 기본값은 알파벳순이에요.
 
 #### 반환 값
 

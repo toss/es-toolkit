@@ -3,12 +3,12 @@
 Creates a new object with the keys sorted.
 
 ```typescript
-const sorted = sortKeys(object, compare?);
+const sorted = sortKeys(object);
 ```
 
 ## Usage
 
-### `sortKeys(object, compare?)`
+### `sortKeys(object, compareKeys?)`
 
 Use `sortKeys` when you want to create a new object with its keys in a deterministic order. Keys are sorted alphabetically by default, which is useful for serialization, comparison, or display purposes.
 
@@ -38,7 +38,7 @@ const sorted = sortKeys(obj);
 #### Parameters
 
 - `object` (`T`): The object to sort keys from.
-- `compare` (`(a: string, b: string) => number`, optional): A custom compare function for sorting keys. Defaults to alphabetical order.
+- `compareKeys` (`(a: string, b: string) => number`, optional): A custom compare function for sorting keys. Defaults to alphabetical order.
 
 #### Returns
 

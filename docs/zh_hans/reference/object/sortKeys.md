@@ -3,12 +3,12 @@
 创建一个键已排序的新对象。
 
 ```typescript
-const sorted = sortKeys(object, compare?);
+const sorted = sortKeys(object);
 ```
 
 ## 用法
 
-### `sortKeys(object, compare?)`
+### `sortKeys(object, compareKeys?)`
 
 当您想要以确定性顺序排列对象的键时，可以使用 `sortKeys`。默认情况下，键按字母顺序排序，这对于序列化、比较或显示等场景很有用。
 
@@ -38,7 +38,7 @@ const sorted = sortKeys(obj);
 #### 参数
 
 - `object` (`T`): 要排序键的对象。
-- `compare` (`(a: string, b: string) => number`, 可选): 用于排序键的自定义比较函数。默认为字母顺序。
+- `compareKeys` (`(a: string, b: string) => number`, 可选): 用于排序键的自定义比较函数。默认为字母顺序。
 
 #### 返回值
 
