@@ -34,6 +34,23 @@ console.log(chunkedArray);
 // 출력: [[1, 2], [3, 4], [5, 6]]
 ```
 
+## AI 활용
+
+es-toolkit은 Claude Code, Cursor, Copilot 같은 AI 코딩 도구에서 사용할 수 있는 [Agent Skills](https://skills.sh)를 제공해요.
+
+```bash
+npx skills add toss/es-toolkit
+```
+
+Claude Code를 사용하는 경우, 플러그인 마켓플레이스를 통해 설치할 수도 있어요:
+
+```
+/plugin marketplace add toss/es-toolkit
+/plugin install es-toolkit@es-toolkit-plugin
+```
+
+자세한 내용은 [AI 활용 가이드](https://es-toolkit.dev/ko/ai-integration.html)를 참고하세요.
+
 ## 기여하기
 
 커뮤니티에 있는 모든 분들에게 기여를 환영해요. 아래에 작성되어 있는 기여 가이드를 확인하세요.

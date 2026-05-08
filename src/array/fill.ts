@@ -11,17 +11,16 @@
  * @returns {T[]} The array with the filled values.
  *
  * @example
- * const array = [1, 2, 3];
- * const result = fill(array, 'a');
+ * fill([1, 2, 3], 'a');
  * // => ['a', 'a', 'a']
  *
- * const result = fill(Array(3), 2);
+ * fill(Array(3), 2);
  * // => [2, 2, 2]
  *
- * const result = fill([4, 6, 8, 10], '*', 1, 3);
+ * fill([4, 6, 8, 10], '*', 1, 3);
  * // => [4, '*', '*', 10]
  *
- * const result = fill(array, '*', -2, -1);
+ * fill([1, 2, 3], '*', -2, -1);
  * // => [1, '*', 3]
  */
 export function fill<T>(array: unknown[], value: T): T[];
@@ -41,17 +40,16 @@ export function fill<T>(array: unknown[], value: T): T[];
  * @returns {Array<T | U>} The array with the filled values.
  *
  * @example
- * const array = [1, 2, 3];
- * const result = fill(array, 'a');
+ * fill([1, 2, 3], 'a');
  * // => ['a', 'a', 'a']
  *
- * const result = fill(Array(3), 2);
+ * fill(Array(3), 2);
  * // => [2, 2, 2]
  *
- * const result = fill([4, 6, 8, 10], '*', 1, 3);
+ * fill([4, 6, 8, 10], '*', 1, 3);
  * // => [4, '*', '*', 10]
  *
- * const result = fill(array, '*', -2, -1);
+ * fill([1, 2, 3], '*', -2, -1);
  * // => [1, '*', 3]
  */
 export function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<T | U>;
@@ -72,17 +70,16 @@ export function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<
  * @returns {Array<T | U>} The array with the filled values.
  *
  * @example
- * const array = [1, 2, 3];
- * const result = fill(array, 'a');
+ * fill([1, 2, 3], 'a');
  * // => ['a', 'a', 'a']
  *
- * const result = fill(Array(3), 2);
+ * fill(Array(3), 2);
  * // => [2, 2, 2]
  *
- * const result = fill([4, 6, 8, 10], '*', 1, 3);
+ * fill([4, 6, 8, 10], '*', 1, 3);
  * // => [4, '*', '*', 10]
  *
- * const result = fill(array, '*', -2, -1);
+ * fill([1, 2, 3], '*', -2, -1);
  * // => [1, '*', 3]
  */
 export function fill<T, U>(array: Array<T | U>, value: U, start: number, end: number): Array<T | U>;
@@ -103,17 +100,16 @@ export function fill<T, U>(array: Array<T | U>, value: U, start: number, end: nu
  * @returns {Array<T | U>} The array with the filled values.
  *
  * @example
- * const array = [1, 2, 3];
- * const result = fill(array, 'a');
+ * fill([1, 2, 3], 'a');
  * // => ['a', 'a', 'a']
  *
- * const result = fill(Array(3), 2);
+ * fill(Array(3), 2);
  * // => [2, 2, 2]
  *
- * const result = fill([4, 6, 8, 10], '*', 1, 3);
+ * fill([4, 6, 8, 10], '*', 1, 3);
  * // => [4, '*', '*', 10]
  *
- * const result = fill(array, '*', -2, -1);
+ * fill([1, 2, 3], '*', -2, -1);
  * // => [1, '*', 3]
  */
 export function fill<T, U>(array: Array<T | U>, value: U, start = 0, end = array.length): Array<T | U> {

@@ -21,7 +21,7 @@ const result = unzip(array);
 ネストした配列の同じインデックスにある要素を集めて新しい配列として返します。`zip`関数の逆の操作を実行します。行列を転置したり構造化データを再編成するときに便利です。
 
 ```typescript
-import { uniqWith } from 'es-toolkit/compat';
+import { unzip } from 'es-toolkit/compat';
 
 // 文字列、ブール値、数値が混在した配列をアンジップ
 const zipped = [
