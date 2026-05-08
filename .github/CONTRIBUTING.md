@@ -174,3 +174,65 @@ If you made changes across multiple packages, writing package scope is optional.
 ### 4.3 Description
 
 A clear and concise description of what the pr is about.
+
+## 5. Writing Documentation
+
+Every function ships docs in four languages. Keep them in sync:
+
+- `docs/reference/{category}/{fn}.md` (English)
+- `docs/ko/reference/{category}/{fn}.md` (Korean, in 해요체)
+- `docs/ja/reference/{category}/{fn}.md` (Japanese)
+- `docs/zh_hans/reference/{category}/{fn}.md` (Simplified Chinese)
+
+For canonical examples, see [`sum`](../docs/reference/math/sum.md) and [`toCamelCaseKeys`](../docs/reference/object/toCamelCaseKeys.md).
+
+### 5.1 Template
+
+````markdown
+# {function name}
+
+{one-line description}
+
+```typescript
+{short example code}
+```
+
+## Usage
+
+### `{signature}`
+
+{Short paragraph: when to use it, then how it behaves. Add inline examples between paragraphs as needed.}
+
+```typescript
+import { {function name} } from 'es-toolkit/{category}';
+
+// Short comment describing what this example shows.
+{example call}
+// Returns: {result}
+```
+
+#### Parameters
+
+- `{name}` (`{type}`): {description}.
+- `{name}` (`{type}`, optional): {description}. Defaults to `{default}`.
+
+#### Returns
+
+(`{type}`): {description}.
+````
+
+### 5.2 Filling it in
+
+- **Title**: the function name with no suffix (`# sum`, `# toCamelCaseKeys`).
+- **One-line description**: summarize the behavior in one sentence. If a non-obvious term appears (e.g. "camelCase"), add one short follow-up paragraph explaining it.
+- **Short example code**: use descriptive variable names (`arr`, `numbers`, `obj`) over concrete values so the interface is obvious at a glance.
+- **`### \`signature\``**: one heading per overload. Merge overloads when possible; split only when the behavior is genuinely different (e.g. arrays vs. objects).
+- **Body prose**: lead with "when to use it", then describe behavior in flowing sentences — never the "Description: …" colon style. Open each example block with `import { ... } from 'es-toolkit/{category}'` and put a one-line comment above each call.
+- **Parameters**: `` - `name` (`type`): description. ``. For optionals, append `optional` to the type and include the default.
+- **Returns**: type in parentheses first, then the description.
+
+### 5.3 Style
+
+- Use plain words (e.g. "arrays of the same length" instead of "uniform arrays").
+- Prefer everyday JavaScript terms (e.g. "array or object" instead of "collection").
+- In non-English versions, unfold English jargon into a natural local-language phrase (e.g. "값이 참으로 평가되는" instead of "truthy").

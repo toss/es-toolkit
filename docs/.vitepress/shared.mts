@@ -13,6 +13,8 @@ export const shared = defineConfig({
   lastUpdated: true,
   metaChunk: true,
 
+  srcExclude: ['**/CLAUDE.md'],
+
   /* prettier-ignore */
   head: [
     [
