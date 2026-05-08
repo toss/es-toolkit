@@ -48,10 +48,15 @@ export function percentile(arr: readonly number[], percentile: number): number {
     return x - y;
   });
 
+  // `percentile === 0` would map to index `-1` with the formula below, so
+  // return the smallest element directly.
   if (percentile === 0) {
     return sorted[0];
   }
 
+  // Nearest-rank method: `length * (percentile / 100)` is the 1-indexed rank,
+  // `Math.ceil` rounds up to the smallest rank that covers the requested
+  // fraction, and `- 1` converts that rank to a 0-indexed array position.
   const index = Math.ceil(sorted.length * (percentile / 100)) - 1;
   return sorted[index];
 }
