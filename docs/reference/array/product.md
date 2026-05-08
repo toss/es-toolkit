@@ -10,7 +10,9 @@ const tuples = product(arr1, arr2);
 
 ### `product(...arrs)`
 
-Use `product` when you want every possible combination of one element from each input array. Tuples are emitted in lexicographic order, with the rightmost array advancing fastest like the digits of an odometer.
+Use `product` when you want every possible combination of one element from each input array.
+
+The function walks through the rightmost array first, picking each element in order. Once it has gone through every element of the rightmost array, it picks the next element from the array one position to its left and starts the rightmost array over from the beginning. This process repeats across every array, working from right to left.
 
 ```typescript
 import { product } from 'es-toolkit/array';
