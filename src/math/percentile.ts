@@ -1,12 +1,10 @@
 /**
  * Calculates the value at the given percentile of an array of numbers.
  *
- * The array is sorted in ascending order, and the value at the position
- * `Math.ceil(arr.length * (percentile / 100)) - 1` is returned. When the
- * percentile is `0`, the smallest value is returned. `NaN` values are
- * treated as the smallest possible values during sorting.
+ * Sorts the array in ascending order and returns the element at the nearest rank.
+ * See {@link https://en.wikipedia.org/wiki/Percentile#The_nearest-rank_method | Nearest rank method}.
  *
- * If the array is empty, this function returns `NaN`.
+ * `NaN` values are sorted as the smallest values. Returns `NaN` if the array is empty.
  *
  * @param {readonly number[]} arr - An array of numbers to calculate the percentile.
  * @param {number} percentile - The percentile to compute, in the range `[0, 100]`.
@@ -48,15 +46,11 @@ export function percentile(arr: readonly number[], percentile: number): number {
     return x - y;
   });
 
-  // `percentile === 0` would map to index `-1` with the formula below, so
-  // return the smallest element directly.
+  // Nearest rank method: https://en.wikipedia.org/wiki/Percentile#The_nearest-rank_method
   if (percentile === 0) {
     return sorted[0];
   }
 
-  // Nearest-rank method: `length * (percentile / 100)` is the 1-indexed rank,
-  // `Math.ceil` rounds up to the smallest rank that covers the requested
-  // fraction, and `- 1` converts that rank to a 0-indexed array position.
   const index = Math.ceil(sorted.length * (percentile / 100)) - 1;
   return sorted[index];
 }

@@ -2,6 +2,8 @@
 
 计算数字数组中给定百分位数对应的值。
 
+`percentile` 函数将数组按升序排序,并返回最接近排名位置的元素 ([Nearest rank method](https://en.wikipedia.org/wiki/Percentile#The_nearest-rank_method))。
+
 ```typescript
 const value = percentile(arr, p);
 ```
@@ -24,24 +26,6 @@ function percentile(arr: readonly number[], percentile: number): number;
 ### 异常
 
 如果 `percentile` 为 `NaN`、小于 `0` 或大于 `100`,则抛出 `Error`。
-
-## 工作原理
-
-将数组按升序排序后,返回以下位置的元素:
-
-```typescript
-const index = Math.ceil(sorted.length * (percentile / 100)) - 1;
-return sorted[index];
-```
-
-这是 **最近排名**(nearest-rank)方法。将数组长度乘以 `percentile / 100` 可以得到从 1 开始的排名(rank);使用 `Math.ceil` 向上取整,选出能覆盖所请求比例及以上数据的最小排名;再减去 `1`,将其转换为从 0 开始的数组索引。
-
-例如,对于长度为 100 的已排序数组,当 `percentile = 75` 时:
-
-- `Math.ceil(100 * 0.75) - 1` → `74`
-- 返回第 75 小的值(`sorted[74]`)。
-
-当 `percentile = 0` 时,按上述公式会得到 `-1`,因此作为特殊情况处理,直接返回最小值。
 
 ## 示例
 
