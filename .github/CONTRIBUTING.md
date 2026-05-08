@@ -174,3 +174,125 @@ If you made changes across multiple packages, writing package scope is optional.
 ### 4.3 Description
 
 A clear and concise description of what the pr is about.
+
+## 5. Writing Documentation for Compat Functions
+
+Reference docs for `es-toolkit/compat` functions follow a fixed template. The goal of every compat doc is to (1) gently steer users toward a faster or more modern alternative, and (2) describe the function's actual behavior accurately for users who still need it during migration.
+
+### 5.1 Template
+
+Use this skeleton for every `docs/**/reference/compat/{category}/{fn}.md` file:
+
+````markdown
+# {function name} (Lodash compatibility)
+
+::: warning {short description of the alternative}
+
+{long description of the alternative}
+
+Use the faster, more modern {alternative} instead.
+
+:::
+
+{short description of the function}
+
+```typescript
+{short example code}
+```
+
+## Reference
+
+### `{reference 1}`
+
+{detailed description of reference 1}
+
+#### Parameters
+
+{parameters for reference 1}
+
+### Returns
+
+{return value for reference 1}
+````
+
+### 5.2 How to fill in each placeholder
+
+- **`{function name}`** — the function name in `funcName` form, matching the source file (e.g. `chunk`).
+- **`{short description of the alternative}` / `{long description of the alternative}` / `{alternative}`** — recommend a replacement.
+  - If `es-toolkit` (the main library, anything under `src/` outside `src/compat/`) has a function with the same name, recommend that. Example: "Use `es-toolkit`'s [chunk](../../array/chunk.md)".
+  - Otherwise, recommend a modern JavaScript built-in. Example: `isString` → "Use the `typeof` operator instead (`typeof value === 'string'`)".
+  - In the long description, explain *why* the alternative is better. Read the compat source and compare with the main `es-toolkit` implementation to identify the concrete differences (slower edge-case handling, default-value coercion, `null`/`undefined` checks, etc.). For modern JS alternatives, compare the behaviors directly.
+    > Example: "This `chunk` function is slow because it has to handle `null` / `undefined` and apply a default for `size`."
+- **`{short description of the function}`** — read the source code and summarize the function's behavior in one sentence.
+- **`{short example code}`** — a minimal example using descriptive variable names, not concrete values, so the reader can infer the interface. Example: `const chunked = chunk(arr, size);`.
+- **`{reference n}`** — a short signature line for each overload (e.g. `chunk(arr, size)`). Try to merge overloads into one entry; split into multiple only when the behavior is genuinely different (e.g. one for arrays and one for objects).
+- **`{detailed description of reference n}`** — explain when the function is useful and walk through the behavior with small inline examples. Use a friendly, conversational tone. Avoid the "Description: …" colon style — write in flowing sentences.
+- **`{parameters for reference n}`** — list each parameter with its type. Mark optional parameters and include the default value.
+  > Example: `` - `arr` (`ArrayLike<T>`): the array to split. ``
+  > Example: `` - `size` (`number`, optional): the size of each smaller array. Must be an integer greater than 1. Defaults to `1`. ``
+- **`{return value for reference n}`** — start with the type in parentheses, then describe what the function returns.
+  > Example: `` (`T[][]`): a two-dimensional array split into chunks of `size`. ``
+
+### 5.3 Writing guidelines
+
+- Use plain words. Prefer everyday phrasing over technical jargon (e.g. "arrays of the same length" rather than "uniform arrays").
+- Use the JavaScript term most readers will recognize (e.g. "array or object" rather than "collection").
+- Avoid raw English jargon when there is a natural local-language equivalent (e.g. "values that evaluate to true" rather than "truthy").
+
+### 5.4 Worked example
+
+A complete compat doc following this template:
+
+````markdown
+# chunk (Lodash compatibility)
+
+::: warning Use `es-toolkit`'s `chunk`
+
+This `chunk` function is slow because it has to handle `null` / `undefined` and apply a default for `size`.
+
+Use the faster, more modern `es-toolkit`'s [chunk](../../array/chunk.md) instead.
+
+:::
+
+Splits an array into smaller arrays of a given size.
+
+```typescript
+const chunked = chunk(arr, size);
+```
+
+## Reference
+
+### `chunk(arr, size)`
+
+Use `chunk` when you want to split a long array into several smaller arrays of the same size. If the array can't be split evenly, the last array contains the remaining elements.
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+// Split a number array into chunks of 2.
+chunk([1, 2, 3, 4], 2);
+// Returns: [[1, 2], [3, 4]]
+
+// Split a string array into chunks of 3.
+chunk(['a', 'b', 'c', 'd', 'e', 'f', 'g'], 3);
+// Returns: [['a', 'b', 'c'], ['d', 'e', 'f'], ['g']]
+```
+
+`null` and `undefined` are treated as empty arrays.
+
+```typescript
+import { chunk } from 'es-toolkit/compat';
+
+chunk(null, 2); // []
+chunk(undefined, 2); // []
+```
+
+#### Parameters
+
+- `arr` (`ArrayLike<T>`): the array to split.
+- `size` (`number`, optional): the size of each smaller array. Must be an integer greater than 1. Defaults to `1`.
+
+### Returns
+
+(`T[][]`): a two-dimensional array split into chunks of `size`.
+````
