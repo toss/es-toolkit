@@ -24,7 +24,7 @@
     "./promise": "./src/promise/index.ts",
     "./set": "./src/set/index.ts",
     "./string": "./src/string/index.ts",
-    "./color": "./src/color/index.ts",
+    "./server": "./src/server/index.ts",
     "./util": "./src/util/index.ts",
     "./package.json": "./package.json"
   },
@@ -43,7 +43,7 @@
     "promise.js",
     "set.js",
     "string.js",
-    "color.js",
+    "server.js",
     "util.js"
   ],
   "workspaces": [
@@ -144,14 +144,14 @@
           "default": "./compat/*.js"
         }
       },
-      "./color": {
+      "./server": {
         "import": {
-          "types": "./dist/color/index.d.mts",
-          "default": "./dist/color/index.mjs"
+          "types": "./dist/server/index.d.mts",
+          "default": "./dist/server/index.mjs"
         },
         "require": {
-          "types": "./dist/color/index.d.ts",
-          "default": "./dist/color/index.js"
+          "types": "./dist/server/index.d.ts",
+          "default": "./dist/server/index.js"
         }
       },
       "./error": {
