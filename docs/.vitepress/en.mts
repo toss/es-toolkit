@@ -48,7 +48,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
         { text: 'Lodash Compatibility', link: '/compatibility' },
-        { text: 'AI Integration', link: '/llms-txt' },
+        { text: 'AI Integration', link: '/ai-integration' },
       ],
     },
     {
@@ -98,6 +98,11 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Set Utilities',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'reference', 'set'),
+        },
+        {
+          text: 'Server Utilities',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'reference', 'server'),
         },
         {
           text: 'Utility Functions',

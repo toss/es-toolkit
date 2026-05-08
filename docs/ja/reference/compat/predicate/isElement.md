@@ -24,7 +24,7 @@ const result = isElement(value);
 import { isElement } from 'es-toolkit/compat';
 
 // DOM要素
-исElement(document.body); // true
+isElement(document.body); // true
 isElement(document.createElement('div')); // true
 isElement(document.querySelector('p')); // true (要素が存在する場合)
 

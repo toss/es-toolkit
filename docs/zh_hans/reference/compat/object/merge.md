@@ -4,7 +4,7 @@
 
 这个 `merge` 函数由于内部调用复杂的 `mergeWith` 函数而相对较慢。
 
-请改用更快、更现代的 `es-toolkit` 的 [`merge`](../../object/merge.ts)。
+请改用更快、更现代的 `es-toolkit` 的 [`merge`](../../object/merge.md)。
 
 :::
 

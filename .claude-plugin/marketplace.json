@@ -1,0 +1,16 @@
+{
+  "name": "es-toolkit-plugin",
+  "owner": {
+    "name": "Toss"
+  },
+  "metadata": {
+    "description": "Official es-toolkit plugins for Claude Code",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "es-toolkit",
+      "source": "./es-toolkit-plugin"
+    }
+  ]
+}

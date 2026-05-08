@@ -68,7 +68,7 @@
  * const memoizedSumWithCustomCache = memoize(sum, { cache: customCache });
  * console.log(memoizedSumWithCustomCache([1, 2])); // 3
  * console.log(memoizedSumWithCustomCache([1, 2])); // 3 (cached result)
- * console.log(memoizedAddWithCustomCache.cache.size); // 1
+ * console.log(memoizedSumWithCustomCache.cache.size); // 1
  */
 export function memoize<F extends (...args: any) => any>(
   fn: F,

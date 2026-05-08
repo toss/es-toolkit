@@ -1,7 +1,7 @@
 ---
 name: pr-triage
 description: Classify and summarize a PR for efficient review
-argument-hint: "<PR number>"
+argument-hint: '<PR number>'
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
@@ -25,16 +25,16 @@ gh pr view {number} --repo toss/es-toolkit --json title,body,author,files,labels
 
 Based on changed files, assign one or more labels:
 
-| Pattern | Label | Review Focus |
-|---------|-------|-------------|
-| `src/compat/**/*.ts` (not spec) | **compat-fix** | Real lodash inconsistency? Use `/compat-review` to verify. |
+| Pattern                          | Label            | Review Focus                                                          |
+| -------------------------------- | ---------------- | --------------------------------------------------------------------- |
+| `src/compat/**/*.ts` (not spec)  | **compat-fix**   | Real lodash inconsistency? Use `/compat-review` to verify.            |
 | `src/{category}/*.ts` (new file) | **new-function** | Follows design principles? Checklist: impl + spec + re-export + docs. |
-| `src/{category}/*.ts` (modified) | **core-change** | Intentional behavior change? Breaking changes? |
-| `src/**/*.spec.ts` | **test** | Edge cases covered? |
-| `docs/**/*.md` | **docs** | All 4 languages updated? Translation quality? |
-| Type-only changes in `.ts` | **types** | Backward-compatible? |
-| `benchmarks/**` | **perf** | Fair benchmark? Sound methodology? |
-| `.github/**`, config files | **infra** | CI/build impact? |
+| `src/{category}/*.ts` (modified) | **core-change**  | Intentional behavior change? Breaking changes?                        |
+| `src/**/*.spec.ts`               | **test**         | Edge cases covered?                                                   |
+| `docs/**/*.md`                   | **docs**         | All 4 languages updated? Translation quality?                         |
+| Type-only changes in `.ts`       | **types**        | Backward-compatible?                                                  |
+| `benchmarks/**`                  | **perf**         | Fair benchmark? Sound methodology?                                    |
+| `.github/**`, config files       | **infra**        | CI/build impact?                                                      |
 
 ### 3. Run quick checks per label
 

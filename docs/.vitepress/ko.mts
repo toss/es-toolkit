@@ -47,7 +47,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
         { text: 'Lodash 호환성', link: '/ko/compatibility' },
-        { text: 'AI 활용', link: '/ko/llms-txt' },
+        { text: 'AI 활용', link: '/ko/ai-integration' },
       ],
     },
     {
@@ -92,6 +92,11 @@ function sidebar(): DefaultTheme.Sidebar {
           text: 'Set',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ko', 'reference', 'set'),
+        },
+        {
+          text: '서버',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'server'),
         },
         {
           text: '문자열',
