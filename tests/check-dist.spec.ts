@@ -25,7 +25,7 @@ const ENTRYPOINTS = [
   './array',
   './compat',
   './compat/*',
-  './color',
+  './server',
   './error',
   './function',
   './map',
