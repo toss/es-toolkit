@@ -3,7 +3,8 @@
 Promiseのオブジェクトを並行して解決し、同じキーと解決された値を持つオブジェクトを返します。
 
 ```typescript
-await allKeyed(tasks);
+// aはdoA()、bはdoB()の非同期結果
+const { a, b } = await allKeyed({ a: doA(), b: doB() });
 ```
 
 ## 使い方

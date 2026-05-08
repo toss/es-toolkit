@@ -3,7 +3,8 @@
 Resolves an object of promises concurrently, returning an object with the same keys and resolved values.
 
 ```typescript
-await allKeyed(tasks);
+// a is the async result of doA(), b is the async result of doB()
+const { a, b } = await allKeyed({ a: doA(), b: doB() });
 ```
 
 ## Usage

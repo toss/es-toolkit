@@ -3,7 +3,8 @@
 Promise 객체를 동시에 실행하고, 같은 키와 해결된 값을 가진 객체를 반환해요.
 
 ```typescript
-await allKeyed(tasks);
+// a는 doA(), b는 doB()의 비동기 결과
+const { a, b } = await allKeyed({ a: doA(), b: doB() });
 ```
 
 ## 사용법

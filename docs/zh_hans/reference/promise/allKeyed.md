@@ -3,7 +3,8 @@
 并发解析一个 Promise 对象，返回一个具有相同键和解析值的对象。
 
 ```typescript
-await allKeyed(tasks);
+// a 是 doA() 的异步结果，b 是 doB() 的异步结果
+const { a, b } = await allKeyed({ a: doA(), b: doB() });
 ```
 
 ## 用法
