@@ -1,2 +1,2 @@
-export { colors } from './colors.ts';
-export type { ColorFunction } from './types.ts';
+export { colors } from './colors/index.ts';
+export type { ColorFunction } from './colors/types.ts';
