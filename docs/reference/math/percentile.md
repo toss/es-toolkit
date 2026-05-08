@@ -8,47 +8,40 @@ Calculates the value at the given percentile of an array of numbers.
 const value = percentile(arr, p);
 ```
 
-## Signature
+## Usage
 
-```typescript
-function percentile(arr: readonly number[], percentile: number): number;
-```
+### `percentile(arr, percentile)`
 
-### Parameters
-
-- `arr` (`readonly number[]`): An array of numbers to calculate the percentile from.
-- `percentile` (`number`): The percentile to compute, in the range `[0, 100]`.
-
-### Returns
-
-(`number`): The value at the given percentile. Returns `NaN` if the array is empty.
-
-### Throws
-
-Throws an `Error` if `percentile` is `NaN`, less than `0`, or greater than `100`.
-
-## Examples
+Use `percentile` when you want to find the value at a specific percentile of a numeric array. For example, the 50th percentile is the median, and the 75th percentile is the value below which 75% of the data falls.
 
 ```typescript
 import { percentile } from 'es-toolkit/math';
 
-// Return the median (50th percentile) of an array
-percentile([1, 2, 3, 4, 5], 50);
-// Returns 3
+// Find the median (50th percentile) of an array
+const median = percentile([1, 2, 3, 4, 5], 50); // median is 3
 
-// Compute the 75th percentile
-percentile([1, 2, 3, 4, 5], 75);
-// Returns 4
+// Find the 75th percentile
+const p75 = percentile([1, 2, 3, 4, 5], 75); // p75 is 4
 
 // Unsorted arrays are automatically sorted
-percentile([50, 10, 30, 20, 40], 50);
-// Returns 30
+const result = percentile([50, 10, 30, 20, 40], 50); // result is 30
 
-// Returns the smallest value at the 0th percentile
-percentile([5, 1, 4, 2, 3], 0);
-// Returns 1
+// The 0th percentile returns the smallest value
+const min = percentile([5, 1, 4, 2, 3], 0); // min is 1
 
 // Returns NaN for an empty array
-percentile([], 50);
-// Returns NaN
+const empty = percentile([], 50); // empty is NaN
 ```
+
+#### Parameters
+
+- `arr` (`readonly number[]`): An array of numbers to calculate the percentile from.
+- `percentile` (`number`): The percentile to compute, in the range `[0, 100]`.
+
+#### Returns
+
+(`number`): Returns the value at the given percentile. Returns `NaN` if the array is empty.
+
+#### Throws
+
+Throws an error if `percentile` is `NaN`, less than `0`, or greater than `100`.
