@@ -4,7 +4,7 @@
 
 この `merge` 関数は、内部的に複雑な `mergeWith` 関数を呼び出すため相対的に遅くなります。
 
-代わりに、より高速で現代的な`es-toolkit`の[`merge`](../../object/merge.ts)を使用してください。
+代わりに、より高速で現代的な`es-toolkit`の[`merge`](../../object/merge.md)を使用してください。
 
 :::
 

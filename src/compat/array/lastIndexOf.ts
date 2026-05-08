@@ -17,7 +17,7 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * // => 1
  *
  * lastIndexOf([1, 2, 1, 2], 2, true);
- * // => 3
+ * // => 1
  */
 export function lastIndexOf<T>(
   array: ArrayLike<T> | null | undefined,

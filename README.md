@@ -34,6 +34,23 @@ console.log(chunkedArray);
 // Output: [[1, 2], [3, 4], [5, 6]]
 ```
 
+## AI Integration
+
+es-toolkit provides [Agent Skills](https://skills.sh) for AI coding tools like Claude Code, Cursor, and Copilot.
+
+```bash
+npx skills add toss/es-toolkit
+```
+
+For Claude Code, you can also install via the plugin marketplace:
+
+```
+/plugin marketplace add toss/es-toolkit
+/plugin install es-toolkit@es-toolkit-plugin
+```
+
+For more details, see the [AI Integration guide](https://es-toolkit.dev/ai-integration.html).
+
 ## Contributing
 
 We welcome contribution from everyone in the community. Read below for detailed contribution guide.
