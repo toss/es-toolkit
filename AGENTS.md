@@ -90,6 +90,7 @@ When adding or changing a function, follow this order:
    ```
    Then run the full suite (`yarn vitest run`), `yarn lint`, and `tsc --noEmit` before opening the PR.
 4. **Add documentation in all four languages** under `docs/`:
+
    - `docs/reference/{category}/{fn}.md` (English)
    - `docs/ko/reference/{category}/{fn}.md` (Korean, 해요체)
    - `docs/ja/reference/{category}/{fn}.md` (Japanese)
