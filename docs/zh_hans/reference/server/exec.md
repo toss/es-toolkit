@@ -16,9 +16,9 @@ const result = await exec(command, args, options);
 import { exec } from 'es-toolkit/server';
 
 // 执行命令并读取其 stdout。
-const result = await exec(process.execPath, ['-e', "process.stdout.write('hello')"]);
+const result = await exec('echo', ['hello']);
 
-console.log(result.stdout);
+console.log(result.stdout.trim());
 // => 'hello'
 console.log(result.exitCode);
 // => 0
@@ -29,12 +29,12 @@ console.log(result.exitCode);
 ```typescript
 import { exec } from 'es-toolkit/server';
 
-const result = await exec(process.execPath, ['-e', 'process.exit(2)'], {
+const result = await exec('git', ['diff', '--quiet'], {
   throwOnNonZeroExitCode: false,
 });
 
 console.log(result.exitCode);
-// => 2
+// => 有更改时为 1
 ```
 
 你可以向进程的 stdin 写入字符串。
@@ -42,7 +42,7 @@ console.log(result.exitCode);
 ```typescript
 import { exec } from 'es-toolkit/server';
 
-const result = await exec(process.execPath, ['-e', 'process.stdin.pipe(process.stdout)'], {
+const result = await exec('cat', [], {
   stdin: 'hello\nworld',
 });
 
@@ -59,12 +59,12 @@ const controller = new AbortController();
 setTimeout(() => controller.abort(), 50);
 
 // 以 AbortError 被 reject。
-await exec(process.execPath, ['-e', 'setTimeout(() => {}, 1000)'], {
+await exec('sleep', ['10'], {
   signal: controller.signal,
 });
 
 // 50ms 后以 AbortError 被 reject。
-await exec(process.execPath, ['-e', 'setTimeout(() => {}, 1000)'], {
+await exec('sleep', ['10'], {
   timeout: 50,
 });
 ```
@@ -101,11 +101,11 @@ await exec(process.execPath, ['-e', 'setTimeout(() => {}, 1000)'], {
 import { exec, ExecError } from 'es-toolkit/server';
 
 try {
-  await exec(process.execPath, ['-e', 'process.exit(1)']);
+  await exec('git', ['diff', '--exit-code']);
 } catch (error) {
   if (error instanceof ExecError) {
     console.log(error.result.exitCode);
-    // => 1
+    // => 有更改时为 1
     console.log(error.result.stdout);
     console.log(error.result.stderr);
   }

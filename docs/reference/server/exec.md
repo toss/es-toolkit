@@ -16,9 +16,9 @@ Use `exec` when you want to spawn a child process, wait for it to finish, and co
 import { exec } from 'es-toolkit/server';
 
 // Run a command and read its stdout.
-const result = await exec(process.execPath, ['-e', "process.stdout.write('hello')"]);
+const result = await exec('echo', ['hello']);
 
-console.log(result.stdout);
+console.log(result.stdout.trim());
 // => 'hello'
 console.log(result.exitCode);
 // => 0
@@ -29,12 +29,12 @@ You can disable throwing and inspect the exit code directly.
 ```typescript
 import { exec } from 'es-toolkit/server';
 
-const result = await exec(process.execPath, ['-e', 'process.exit(2)'], {
+const result = await exec('git', ['diff', '--quiet'], {
   throwOnNonZeroExitCode: false,
 });
 
 console.log(result.exitCode);
-// => 2
+// => 1 when there are changes
 ```
 
 You can write a string to the process's stdin.
@@ -42,7 +42,7 @@ You can write a string to the process's stdin.
 ```typescript
 import { exec } from 'es-toolkit/server';
 
-const result = await exec(process.execPath, ['-e', 'process.stdin.pipe(process.stdout)'], {
+const result = await exec('cat', [], {
   stdin: 'hello\nworld',
 });
 
@@ -59,12 +59,12 @@ const controller = new AbortController();
 setTimeout(() => controller.abort(), 50);
 
 // Rejects with an AbortError.
-await exec(process.execPath, ['-e', 'setTimeout(() => {}, 1000)'], {
+await exec('sleep', ['10'], {
   signal: controller.signal,
 });
 
 // Rejects with an AbortError after 50ms.
-await exec(process.execPath, ['-e', 'setTimeout(() => {}, 1000)'], {
+await exec('sleep', ['10'], {
   timeout: 50,
 });
 ```
@@ -101,11 +101,11 @@ An error thrown by `exec` when a process exits with a non-zero exit code. It has
 import { exec, ExecError } from 'es-toolkit/server';
 
 try {
-  await exec(process.execPath, ['-e', 'process.exit(1)']);
+  await exec('git', ['diff', '--exit-code']);
 } catch (error) {
   if (error instanceof ExecError) {
     console.log(error.result.exitCode);
-    // => 1
+    // => 1 when there are changes
     console.log(error.result.stdout);
     console.log(error.result.stderr);
   }

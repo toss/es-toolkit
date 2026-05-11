@@ -39,18 +39,18 @@ interface ExecResult {
  * non-zero exit code.
  *
  * @example
- * const result = await exec(process.execPath, ['-e', "process.stdout.write('hello')"]);
+ * const result = await exec('echo', ['hello']);
  *
- * console.log(result.stdout);
+ * console.log(result.stdout.trim());
  * // => 'hello'
  *
  * @example
- * const result = await exec(process.execPath, ['-e', 'process.exit(2)'], {
+ * const result = await exec('git', ['diff', '--quiet'], {
  *   throwOnNonZeroExitCode: false,
  * });
  *
  * console.log(result.exitCode);
- * // => 2
+ * // => 1 when there are changes
  */
 export async function exec(_command: string, args: string[] = [], options: ExecOptions = {}): Promise<ExecResult> {
   const command = normalizePath(_command);
