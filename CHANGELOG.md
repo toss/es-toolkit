@@ -1,5 +1,14 @@
 # es-toolkit Changelog
 
+## Version v1.46.1
+
+Released on April 29th, 2026.
+
+- Fixed `AbortError` and `TimeoutError` to fall back to `Error` when `DOMException` is undefined. ([#1694])
+- Fixed missing `forEach` and `countBy` exports for `map` and `set`. ([#1695])
+
+We sincerely thank @SrAnthony and @umsungjun for their contributions. We appreciate your great efforts!
+
 ## Version v1.46.0
 
 Released on April 22th, 2026.
