@@ -34,6 +34,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '소개', link: '/ko/intro' },
     { text: '레퍼런스', link: '/ko/reference/array/at' },
     { text: 'Lodash 호환성', link: '/ko/reference/compat/array/castArray' },
+    { text: '플레이그라운드', link: '/ko/playground' },
   ];
 }
 
@@ -48,6 +49,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: '성능', link: '/ko/performance' },
         { text: 'Lodash 호환성', link: '/ko/compatibility' },
         { text: 'AI 활용', link: '/ko/ai-integration' },
+        { text: '플레이그라운드', link: '/ko/playground' },
       ],
     },
     {

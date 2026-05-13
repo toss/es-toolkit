@@ -35,6 +35,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '简介', link: '/zh_hans/intro' },
     { text: '参考', link: '/zh_hans/reference/array/at' },
     { text: 'Lodash 兼容性', link: '/zh_hans/reference/compat/array/castArray' },
+    { text: '演练场', link: '/zh_hans/playground' },
   ];
 }
 
@@ -49,6 +50,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: '性能', link: '/zh_hans/performance' },
         { text: 'Lodash 兼容性', link: '/zh_hans/compatibility' },
         { text: 'AI 集成', link: '/zh_hans/ai-integration' },
+        { text: '演练场', link: '/zh_hans/playground' },
       ],
     },
     {

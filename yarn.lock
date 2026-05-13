@@ -6100,6 +6100,8 @@ __metadata:
       unplugged: true
     prettier-plugin-sort-re-exports@0.0.1:
       unplugged: true
+    vitepress-plugin-sandpack@1.1.4:
+      unplugged: true
   languageName: unknown
   linkType: soft
 

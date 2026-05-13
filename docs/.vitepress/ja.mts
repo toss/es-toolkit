@@ -34,6 +34,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '導入', link: '/ja/intro' },
     { text: 'リファレンス', link: '/ja/reference/array/at' },
     { text: 'Lodash 互換性', link: '/ja/reference/compat/array/castArray' },
+    { text: 'プレイグラウンド', link: '/ja/playground' },
   ];
 }
 
@@ -48,6 +49,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'パフォーマンス', link: '/ja/performance' },
         { text: 'Lodash 互換性', link: '/ja/compatibility' },
         { text: 'AI 連携', link: '/ja/ai-integration' },
+        { text: 'プレイグラウンド', link: '/ja/playground' },
       ],
     },
     {

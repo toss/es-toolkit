@@ -35,6 +35,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: 'Introduction', link: '/intro' },
     { text: 'Reference', link: '/reference/array/at' },
     { text: 'Lodash Compatibility', link: '/reference/compat/array/castArray' },
+    { text: 'Playground', link: '/playground' },
   ];
 }
 
@@ -49,6 +50,7 @@ function sidebar(): DefaultTheme.Sidebar {
         { text: 'Performance', link: '/performance' },
         { text: 'Lodash Compatibility', link: '/compatibility' },
         { text: 'AI Integration', link: '/ai-integration' },
+        { text: 'Playground', link: '/playground' },
       ],
     },
     {
