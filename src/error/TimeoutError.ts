@@ -1,3 +1,5 @@
+import { DOMException } from '../_internal/DOMException.ts';
+
 /**
  * An error class representing a timeout operation.
  * @augments DOMException

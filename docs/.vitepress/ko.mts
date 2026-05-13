@@ -94,6 +94,11 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'ko', 'reference', 'set'),
         },
         {
+          text: '서버',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ko', 'reference', 'server'),
+        },
+        {
           text: '문자열',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ko', 'reference', 'string'),
