@@ -95,6 +95,11 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'set'),
         },
         {
+          text: '服务端工具',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'server'),
+        },
+        {
           text: '字符串工具',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'zh_hans', 'reference', 'string'),

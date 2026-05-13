@@ -100,6 +100,11 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'reference', 'set'),
         },
         {
+          text: 'Server Utilities',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'reference', 'server'),
+        },
+        {
           text: 'Utility Functions',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'reference', 'util'),

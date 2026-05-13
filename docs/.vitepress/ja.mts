@@ -94,6 +94,11 @@ function sidebar(): DefaultTheme.Sidebar {
           items: getSidebarItems(docsRoot, 'ja', 'reference', 'set'),
         },
         {
+          text: 'サーバー',
+          collapsed: true,
+          items: getSidebarItems(docsRoot, 'ja', 'reference', 'server'),
+        },
+        {
           text: '文字列',
           collapsed: true,
           items: getSidebarItems(docsRoot, 'ja', 'reference', 'string'),
