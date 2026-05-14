@@ -45,12 +45,12 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Guide',
       items: [
         { text: 'Introduction', link: '/intro' },
+        { text: 'Playground', link: '/playground' },
         { text: 'Installation & Usage', link: '/usage' },
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
         { text: 'Lodash Compatibility', link: '/compatibility' },
         { text: 'AI Integration', link: '/ai-integration' },
-        { text: 'Playground', link: '/playground' },
       ],
     },
     {

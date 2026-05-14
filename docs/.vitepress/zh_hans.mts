@@ -45,12 +45,12 @@ function sidebar(): DefaultTheme.Sidebar {
       text: '指南',
       items: [
         { text: '简介', link: '/zh_hans/intro' },
+        { text: '演练场', link: '/zh_hans/playground' },
         { text: '安装和使用', link: '/zh_hans/usage' },
         { text: '包体积影响', link: '/zh_hans/bundle-size' },
         { text: '性能', link: '/zh_hans/performance' },
         { text: 'Lodash 兼容性', link: '/zh_hans/compatibility' },
         { text: 'AI 集成', link: '/zh_hans/ai-integration' },
-        { text: '演练场', link: '/zh_hans/playground' },
       ],
     },
     {

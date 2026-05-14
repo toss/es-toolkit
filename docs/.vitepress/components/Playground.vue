@@ -17,13 +17,17 @@
                   :class="{ open: openCategories.has(category.name) }">&#9654;</span>
             {{ category.label }}
           </button>
-          <ul v-show="openCategories.has(category.name)"
+          <ul v-show="searchQuery || openCategories.has(category.name)"
               class="playground-function-list">
             <li v-for="fn in category.functions"
                 :key="fn"
                 class="playground-function-item"
                 :class="{ active: selectedFunction === fn }"
-                @click="selectFunction(category.name, fn)">
+                role="button"
+                tabindex="0"
+                @click="selectFunction(category.name, fn)"
+                @keydown.enter="selectFunction(category.name, fn)"
+                @keydown.space.prevent="selectFunction(category.name, fn)">
               {{ fn }}
             </li>
           </ul>
@@ -45,22 +49,21 @@
         </div>
       </div>
       <div v-if="currentDoc && showDoc" class="playground-doc-panel">
-        <p class="playground-doc-desc">{{ currentDoc.description }}</p>
+        <p class="playground-doc-desc" v-html="renderInlineMarkdown(currentDoc.description)"></p>
         <div v-if="currentDoc.params.length" class="playground-doc-section">
           <h4>{{ t.parameters }}</h4>
           <ul>
             <li v-for="p in currentDoc.params" :key="p.name">
-              <code>{{ p.name }}</code> <span class="playground-doc-type">({{ p.type }})</span> — {{ p.description }}
+              <code>{{ p.name }}</code> <span class="playground-doc-type">({{ p.type }})</span> — <span v-html="renderInlineMarkdown(p.description)"></span>
             </li>
           </ul>
         </div>
         <div v-if="currentDoc.returns" class="playground-doc-section">
           <h4>{{ t.returns }}</h4>
-          <p><span class="playground-doc-type">({{ currentDoc.returns.type }})</span> — {{ currentDoc.returns.description }}</p>
+          <p><span class="playground-doc-type">({{ currentDoc.returns.type }})</span> — <span v-html="renderInlineMarkdown(currentDoc.returns.description)"></span></p>
         </div>
       </div>
-      <div ref="sandpackContainer"
-           class="playground-sandpack">
+      <div class="playground-sandpack">
         <Sandpack :key="sandpackKey"
                   template="vanilla-ts"
                   :light-theme="lightTheme"
@@ -71,7 +74,6 @@
             showTabs: false,
             showConsoleButton: true,
             autorun: true,
-            autoReload: true,
           }"
                   :customSetup="{
             deps: {
@@ -93,12 +95,24 @@
 import { ref, computed } from 'vue';
 import { Sandbox as Sandpack } from 'vitepress-plugin-sandpack';
 import { useData } from 'vitepress';
+import { data as playgroundData } from '../data/playground.data.mts';
 
 const lightTheme = 'light';
 const darkTheme = 'dark';
-import { data as playgroundData } from '../data/playground.data.mts';
 
 const { lang } = useData();
+
+function renderInlineMarkdown(text) {
+  if (!text) return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+}
 
 const translations = {
   en: {
@@ -136,10 +150,10 @@ const translations = {
 };
 
 const CATEGORY_LABELS = {
-  en: { array: 'Array', function: 'Function', math: 'Math', object: 'Object', predicate: 'Predicate', promise: 'Promise', string: 'String', set: 'Set', error: 'Error', util: 'Util' },
-  ko: { array: '배열', function: '함수', math: '수학', object: '객체', predicate: '타입 가드', promise: 'Promise', string: '문자열', set: 'Set', error: '에러', util: '유틸리티' },
-  ja: { array: '配列', function: '関数', math: '数学', object: 'オブジェクト', predicate: '型ガード', promise: 'Promise', string: '文字列', set: 'Set', error: 'エラー', util: 'ユーティリティ' },
-  zh_hans: { array: '数组', function: '函数', math: '数学', object: '对象', predicate: '类型守卫', promise: 'Promise', string: '字符串', set: 'Set', error: '错误', util: '工具' },
+  en: { array: 'Array', function: 'Function', math: 'Math', object: 'Object', predicate: 'Predicate', promise: 'Promise', string: 'String', set: 'Set', map: 'Map', error: 'Error', util: 'Util' },
+  ko: { array: '배열', function: '함수', math: '수학', object: '객체', predicate: '타입 가드', promise: 'Promise', string: '문자열', set: 'Set', map: 'Map', error: '에러', util: '유틸리티' },
+  ja: { array: '配列', function: '関数', math: '数学', object: 'オブジェクト', predicate: '型ガード', promise: 'Promise', string: '文字列', set: 'Set', map: 'Map', error: 'エラー', util: 'ユーティリティ' },
+  zh_hans: { array: '数组', function: '函数', math: '数学', object: '对象', predicate: '类型守卫', promise: 'Promise', string: '字符串', set: 'Set', map: 'Map', error: '错误', util: '工具' },
 };
 
 const t = computed(() => translations[lang.value] || translations.en);
@@ -152,7 +166,7 @@ const categories = computed(() =>
 );
 
 const examples = playgroundData.examples;
-const fnDocs = playgroundData.docs;
+const localizedDocs = playgroundData.localizedDocs;
 
 const searchQuery = ref('');
 const showDoc = ref(true);
@@ -163,7 +177,9 @@ const sandpackKey = ref(0);
 
 const currentDoc = computed(() => {
   if (!selectedFunction.value) return null;
-  return fnDocs[selectedFunction.value] || null;
+  const locale = lang.value || 'en';
+  const localeDocs = localizedDocs[locale] || localizedDocs.en;
+  return localeDocs[selectedFunction.value] || localizedDocs.en[selectedFunction.value] || null;
 });
 
 const filteredCategories = computed(() => {
@@ -180,11 +196,13 @@ const filteredCategories = computed(() => {
 });
 
 function toggleCategory (name) {
-  if (openCategories.value.has(name)) {
-    openCategories.value.delete(name);
+  const next = new Set(openCategories.value);
+  if (next.has(name)) {
+    next.delete(name);
   } else {
-    openCategories.value.add(name);
+    next.add(name);
   }
+  openCategories.value = next;
 }
 
 const defaultCode = `import { chunk, groupBy, uniq } from 'es-toolkit';
@@ -224,7 +242,7 @@ const currentCode = ref(defaultCode);
 function selectFunction (category, fn) {
   selectedFunction.value = fn;
   selectedCategory.value = category;
-  openCategories.value.add(category);
+  openCategories.value = new Set([...openCategories.value, category]);
 
   if (examples[fn]) {
     currentCode.value = examples[fn];
@@ -255,7 +273,7 @@ function resetCode () {
   display: flex;
   gap: 16px;
   margin-top: 24px;
-  height: calc(100vh - 400px);
+  height: min(calc(100dvh - 200px), 800px);
   min-height: 500px;
 }
 
@@ -529,10 +547,11 @@ function resetCode () {
 </style>
 
 <style>
-/* Override VitePress doc layout container width for playground page */
-.VPDoc:has(.playground) .container,
-.VPDoc:has(.playground) .content,
-.VPDoc:has(.playground) .content-container {
+/* Override VitePress doc layout container width for playground page.
+   Uses the pageClass frontmatter instead of :has() for broader browser compatibility. */
+.playground-page .VPDoc .container,
+.playground-page .VPDoc .content,
+.playground-page .VPDoc .content-container {
   max-width: 100% !important;
 }
 </style>

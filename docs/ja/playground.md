@@ -1,6 +1,7 @@
 ---
 description: es-toolkitの関数を試せるインタラクティブプレイグラウンド
 aside: false
+pageClass: playground-page
 ---
 
 <script setup>

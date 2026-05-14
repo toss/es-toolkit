@@ -1,6 +1,7 @@
 ---
 description: es-toolkit 함수를 탐색할 수 있는 인터랙티브 플레이그라운드
 aside: false
+pageClass: playground-page
 ---
 
 <script setup>

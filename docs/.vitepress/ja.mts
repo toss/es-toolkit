@@ -44,12 +44,12 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'ガイド',
       items: [
         { text: '紹介', link: '/ja/intro' },
+        { text: 'プレイグラウンド', link: '/ja/playground' },
         { text: 'インストールと使用方法', link: '/ja/usage' },
         { text: 'バンドルサイズ', link: '/ja/bundle-size' },
         { text: 'パフォーマンス', link: '/ja/performance' },
         { text: 'Lodash 互換性', link: '/ja/compatibility' },
         { text: 'AI 連携', link: '/ja/ai-integration' },
-        { text: 'プレイグラウンド', link: '/ja/playground' },
       ],
     },
     {

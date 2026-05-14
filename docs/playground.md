@@ -1,6 +1,7 @@
 ---
 description: Interactive playground to explore es-toolkit functions
 aside: false
+pageClass: playground-page
 ---
 
 <script setup>

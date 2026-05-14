@@ -1,6 +1,6 @@
+import glob from 'fast-glob';
 import fs from 'node:fs';
 import path from 'node:path';
-import glob from 'fast-glob';
 
 export interface PlaygroundCategory {
   name: string;
@@ -9,7 +9,7 @@ export interface PlaygroundCategory {
 
 export interface PlaygroundFunctionDoc {
   description: string;
-  params: { name: string; type: string; description: string }[];
+  params: Array<{ name: string; type: string; description: string }>;
   returns: { type: string; description: string } | null;
 }
 
@@ -17,11 +17,28 @@ export interface PlaygroundData {
   categories: PlaygroundCategory[];
   examples: Record<string, string>;
   docs: Record<string, PlaygroundFunctionDoc>;
+  localizedDocs: Record<string, Record<string, PlaygroundFunctionDoc>>;
 }
 
-const CATEGORY_ORDER = ['array', 'function', 'math', 'object', 'predicate', 'promise', 'string', 'set', 'error', 'util'];
+const LOCALES = ['en', 'ko', 'ja', 'zh_hans'];
 
-// Directories under docs/reference/ that are NOT function categories
+const CATEGORY_ORDER = [
+  'array',
+  'function',
+  'math',
+  'object',
+  'predicate',
+  'promise',
+  'string',
+  'set',
+  'map',
+  'error',
+  'util',
+];
+
+// Directories under docs/reference/ that are NOT function categories:
+// - compat: lodash-compatible variants, not standard es-toolkit functions
+// - server: server-only modules whose imports won't resolve through 'es-toolkit' in Sandpack
 const EXCLUDED_DIRS = ['compat', 'server'];
 
 interface ParseResult {
@@ -29,10 +46,19 @@ interface ParseResult {
   doc: PlaygroundFunctionDoc;
 }
 
-function parseMarkdown(content: string, fnName: string, category: string): ParseResult | null {
-  // 1. Extract description (first line after "# fnName")
-  const descMatch = content.match(/^#\s+\S+\s*\n\s*\n(.+)/m);
-  const description = descMatch ? descMatch[1].trim() : '';
+function parseMarkdown(content: string, fnName: string): ParseResult | null {
+  // 1. Extract description (first paragraph after "# heading")
+  let description = '';
+  const descMatch = content.match(/^#\s+.+\s*\n\s*\n(.+)/m);
+  if (descMatch) {
+    description = descMatch[1].trim();
+  } else {
+    // Fallback: first non-blank, non-heading, non-comment line
+    const fallback = content.match(/^(?!#|<!--|---|\s*$)(.+)/m);
+    if (fallback) {
+      description = fallback[1].trim();
+    }
+  }
 
   // 2. Extract parameters
   const paramsSection = content.match(/####\s*Parameters\s*\n([\s\S]*?)(?=\n####|\n##|$)/);
@@ -71,9 +97,14 @@ function parseMarkdown(content: string, fnName: string, category: string): Parse
 
   // 6. If no sandpack, try the first usage code block with an import
   if (!code) {
-    const usageMatch = content.match(/```typescript\s*\nimport\s*\{[^}]*\}\s*from\s*'es-toolkit[^']*';\s*\n([\s\S]*?)```/);
+    const usageMatch = content.match(
+      /```typescript\s*\nimport\s*\{[^}]*\}\s*from\s*'es-toolkit[^']*';\s*\n([\s\S]*?)```/
+    );
     if (usageMatch) {
-      code = usageMatch[0].replace(/```typescript\s*\n/, '').replace(/\n```$/, '').trim();
+      code = usageMatch[0]
+        .replace(/```typescript\s*\n/, '')
+        .replace(/\n```$/, '')
+        .trim();
     }
   }
 
@@ -129,10 +160,17 @@ function parseMarkdown(content: string, fnName: string, category: string): Parse
       }
 
       // Bare expression statement (function call without assignment)
+      // Skip statements that aren't safe to wrap: throw, return, await, delete, and
+      // lines with unbalanced brackets (likely part of a multi-line statement)
       if (trimmed.endsWith(';') && !trimmed.startsWith('{') && !trimmed.startsWith('}')) {
-        const expr = trimmed.replace(/;$/, '');
-        result.push(`console.log(${expr});`);
-        continue;
+        const UNSAFE_KEYWORDS = /^(throw|return|await|delete|break|continue)\b/;
+        const openBrackets = (trimmed.match(/[(\[{]/g) || []).length;
+        const closeBrackets = (trimmed.match(/[)\]}]/g) || []).length;
+        if (!UNSAFE_KEYWORDS.test(trimmed) && openBrackets === closeBrackets) {
+          const expr = trimmed.replace(/;$/, '');
+          result.push(`console.log(${expr});`);
+          continue;
+        }
       }
 
       result.push(line);
@@ -149,8 +187,12 @@ function parseMarkdown(content: string, fnName: string, category: string): Parse
   if (params.length > 0 || returnsLine || throwsLine) {
     commentLines.push('//');
     commentLines.push(...params);
-    if (returnsLine) commentLines.push(returnsLine);
-    if (throwsLine) commentLines.push(throwsLine);
+    if (returnsLine) {
+      commentLines.push(returnsLine);
+    }
+    if (throwsLine) {
+      commentLines.push(throwsLine);
+    }
   }
 
   const doc: PlaygroundFunctionDoc = { description, params: docParams, returns: docReturns };
@@ -166,15 +208,50 @@ function parseMarkdown(content: string, fnName: string, category: string): Parse
   return { code: `${commentLines.join('\n')}\n\n${code}`, doc };
 }
 
+function parseDocOnly(content: string): PlaygroundFunctionDoc | null {
+  let description = '';
+  const descMatch = content.match(/^#\s+.+\s*\n\s*\n(.+)/m);
+  if (descMatch) {
+    description = descMatch[1].trim();
+  } else {
+    const fallback = content.match(/^(?!#|<!--|---|\s*$)(.+)/m);
+    if (fallback) {
+      description = fallback[1].trim();
+    }
+  }
+
+  const paramsSection = content.match(/####\s*(?:Parameters|파라미터|パラメータ|参数)\s*\n([\s\S]*?)(?=\n####|\n##|$)/);
+  const docParams: PlaygroundFunctionDoc['params'] = [];
+  if (paramsSection) {
+    const paramLines = paramsSection[1].matchAll(/^-\s+`(\w+)`\s+\((`[^`]+`)\):\s*(.+)/gm);
+    for (const m of paramLines) {
+      docParams.push({ name: m[1], type: m[2].replace(/`/g, ''), description: m[3].trim() });
+    }
+  }
+
+  const returnsSection = content.match(/####\s*(?:Returns|반환 값|戻り値|返回值)\s*\n\s*\n?\s*\((`[^`]+`)\):\s*(.+)/);
+  let docReturns: PlaygroundFunctionDoc['returns'] = null;
+  if (returnsSection) {
+    docReturns = { type: returnsSection[1].replace(/`/g, ''), description: returnsSection[2].trim() };
+  }
+
+  if (!description && docParams.length === 0 && !docReturns) {
+    return null;
+  }
+
+  return { description, params: docParams, returns: docReturns };
+}
+
 export default {
-  watch: ['../../reference/**/*.md'],
+  watch: ['../../reference/**/*.md', '../../ko/reference/**/*.md', '../../ja/reference/**/*.md', '../../zh_hans/reference/**/*.md'],
 
   load(): PlaygroundData {
     const docsRoot = path.resolve(import.meta.dirname, '../..');
     const refRoot = path.join(docsRoot, 'reference');
 
     // Scan categories
-    const categoryDirs = fs.readdirSync(refRoot, { withFileTypes: true })
+    const categoryDirs = fs
+      .readdirSync(refRoot, { withFileTypes: true })
       .filter(d => d.isDirectory() && !EXCLUDED_DIRS.includes(d.name))
       .map(d => d.name);
 
@@ -187,14 +264,16 @@ export default {
       const files = glob.sync('*.md', { cwd: catDir });
       const fns = files.map(f => f.replace(/\.md$/, '')).sort();
 
-      if (fns.length === 0) continue;
+      if (fns.length === 0) {
+        continue;
+      }
 
       categories.push({ name: cat, functions: fns });
 
       for (const fn of fns) {
         const mdPath = path.join(catDir, `${fn}.md`);
         const content = fs.readFileSync(mdPath, 'utf-8');
-        const result = parseMarkdown(content, fn, cat);
+        const result = parseMarkdown(content, fn);
         if (result) {
           examples[fn] = result.code;
           docs[fn] = result.doc;
@@ -209,6 +288,30 @@ export default {
       return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
     });
 
-    return { categories, examples, docs };
+    // Load locale-specific docs (description, params, returns) for i18n
+    const localizedDocs: Record<string, Record<string, PlaygroundFunctionDoc>> = { en: docs };
+    for (const locale of LOCALES) {
+      if (locale === 'en') continue;
+      const localeRefRoot = path.join(docsRoot, locale, 'reference');
+      if (!fs.existsSync(localeRefRoot)) continue;
+
+      const localeDocs: Record<string, PlaygroundFunctionDoc> = {};
+      for (const cat of categoryDirs) {
+        const catDir = path.join(localeRefRoot, cat);
+        if (!fs.existsSync(catDir)) continue;
+        const files = glob.sync('*.md', { cwd: catDir });
+        for (const file of files) {
+          const fn = file.replace(/\.md$/, '');
+          const content = fs.readFileSync(path.join(catDir, file), 'utf-8');
+          const doc = parseDocOnly(content);
+          if (doc) {
+            localeDocs[fn] = doc;
+          }
+        }
+      }
+      localizedDocs[locale] = localeDocs;
+    }
+
+    return { categories, examples, docs, localizedDocs };
   },
 };

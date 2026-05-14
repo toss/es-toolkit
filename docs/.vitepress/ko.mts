@@ -44,12 +44,12 @@ function sidebar(): DefaultTheme.Sidebar {
       text: '가이드',
       items: [
         { text: '소개', link: '/ko/intro' },
+        { text: '플레이그라운드', link: '/ko/playground' },
         { text: '설치 및 사용 방법', link: '/ko/usage' },
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
         { text: 'Lodash 호환성', link: '/ko/compatibility' },
         { text: 'AI 활용', link: '/ko/ai-integration' },
-        { text: '플레이그라운드', link: '/ko/playground' },
       ],
     },
     {

@@ -1,6 +1,7 @@
 ---
 description: 探索 es-toolkit 函数的交互式演练场
 aside: false
+pageClass: playground-page
 ---
 
 <script setup>
