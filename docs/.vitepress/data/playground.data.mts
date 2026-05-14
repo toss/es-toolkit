@@ -164,7 +164,7 @@ function parseMarkdown(content: string, fnName: string): ParseResult | null {
       // lines with unbalanced brackets (likely part of a multi-line statement)
       if (trimmed.endsWith(';') && !trimmed.startsWith('{') && !trimmed.startsWith('}')) {
         const UNSAFE_KEYWORDS = /^(throw|return|await|delete|break|continue)\b/;
-        const openBrackets = (trimmed.match(/[(\[{]/g) || []).length;
+        const openBrackets = (trimmed.match(/[([{]/g) || []).length;
         const closeBrackets = (trimmed.match(/[)\]}]/g) || []).length;
         if (!UNSAFE_KEYWORDS.test(trimmed) && openBrackets === closeBrackets) {
           const expr = trimmed.replace(/;$/, '');
@@ -243,7 +243,12 @@ function parseDocOnly(content: string): PlaygroundFunctionDoc | null {
 }
 
 export default {
-  watch: ['../../reference/**/*.md', '../../ko/reference/**/*.md', '../../ja/reference/**/*.md', '../../zh_hans/reference/**/*.md'],
+  watch: [
+    '../../reference/**/*.md',
+    '../../ko/reference/**/*.md',
+    '../../ja/reference/**/*.md',
+    '../../zh_hans/reference/**/*.md',
+  ],
 
   load(): PlaygroundData {
     const docsRoot = path.resolve(import.meta.dirname, '../..');
@@ -291,14 +296,20 @@ export default {
     // Load locale-specific docs (description, params, returns) for i18n
     const localizedDocs: Record<string, Record<string, PlaygroundFunctionDoc>> = { en: docs };
     for (const locale of LOCALES) {
-      if (locale === 'en') continue;
+      if (locale === 'en') {
+        continue;
+      }
       const localeRefRoot = path.join(docsRoot, locale, 'reference');
-      if (!fs.existsSync(localeRefRoot)) continue;
+      if (!fs.existsSync(localeRefRoot)) {
+        continue;
+      }
 
       const localeDocs: Record<string, PlaygroundFunctionDoc> = {};
       for (const cat of categoryDirs) {
         const catDir = path.join(localeRefRoot, cat);
-        if (!fs.existsSync(catDir)) continue;
+        if (!fs.existsSync(catDir)) {
+          continue;
+        }
         const files = glob.sync('*.md', { cwd: catDir });
         for (const file of files) {
           const fn = file.replace(/\.md$/, '');
