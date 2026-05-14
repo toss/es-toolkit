@@ -2,32 +2,26 @@
   <div class="playground">
     <div class="playground-sidebar">
       <div class="playground-search">
-        <input v-model="searchQuery"
-               type="text"
-               :placeholder="t.searchPlaceholder"
-               class="playground-search-input" />
+        <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="playground-search-input" />
       </div>
       <div class="playground-categories">
-        <div v-for="category in filteredCategories"
-             :key="category.name"
-             class="playground-category">
-          <button class="playground-category-title"
-                  @click="toggleCategory(category.name)">
-            <span class="playground-category-arrow"
-                  :class="{ open: openCategories.has(category.name) }">&#9654;</span>
+        <div v-for="category in filteredCategories" :key="category.name" class="playground-category">
+          <button class="playground-category-title" @click="toggleCategory(category.name)">
+            <span class="playground-category-arrow" :class="{ open: openCategories.has(category.name) }">&#9654;</span>
             {{ category.label }}
           </button>
-          <ul v-show="searchQuery || openCategories.has(category.name)"
-              class="playground-function-list">
-            <li v-for="fn in category.functions"
-                :key="fn"
-                class="playground-function-item"
-                :class="{ active: selectedFunction === fn }"
-                role="button"
-                tabindex="0"
-                @click="selectFunction(category.name, fn)"
-                @keydown.enter="selectFunction(category.name, fn)"
-                @keydown.space.prevent="selectFunction(category.name, fn)">
+          <ul v-show="searchQuery || openCategories.has(category.name)" class="playground-function-list">
+            <li
+              v-for="fn in category.functions"
+              :key="fn"
+              class="playground-function-item"
+              :class="{ active: selectedFunction === fn }"
+              role="button"
+              tabindex="0"
+              @click="selectFunction(category.name, fn)"
+              @keydown.enter="selectFunction(category.name, fn)"
+              @keydown.space.prevent="selectFunction(category.name, fn)"
+            >
               {{ fn }}
             </li>
           </ul>
@@ -38,14 +32,16 @@
       <div class="playground-editor-header">
         <span class="playground-editor-title">{{ selectedFunction || t.selectFunction }}</span>
         <div class="playground-header-actions">
-          <button v-if="currentDoc"
-                  class="playground-doc-toggle"
-                  :class="{ active: showDoc }"
-                  @click="showDoc = !showDoc"
-                  :title="t.toggleDoc">&#9432;</button>
-          <button class="playground-reset-btn"
-                  @click="resetCode"
-                  :title="t.reset">&#8635;</button>
+          <button
+            v-if="currentDoc"
+            class="playground-doc-toggle"
+            :class="{ active: showDoc }"
+            @click="showDoc = !showDoc"
+            :title="t.toggleDoc"
+          >
+            &#9432;
+          </button>
+          <button class="playground-reset-btn" @click="resetCode" :title="t.reset">&#8635;</button>
         </div>
       </div>
       <div v-if="currentDoc && showDoc" class="playground-doc-panel">
@@ -54,47 +50,53 @@
           <h4>{{ t.parameters }}</h4>
           <ul>
             <li v-for="p in currentDoc.params" :key="p.name">
-              <code>{{ p.name }}</code> <span class="playground-doc-type">({{ p.type }})</span> — <span v-html="renderInlineMarkdown(p.description)"></span>
+              <code>{{ p.name }}</code> <span class="playground-doc-type">({{ p.type }})</span> —
+              <span v-html="renderInlineMarkdown(p.description)"></span>
             </li>
           </ul>
         </div>
         <div v-if="currentDoc.returns" class="playground-doc-section">
           <h4>{{ t.returns }}</h4>
-          <p><span class="playground-doc-type">({{ currentDoc.returns.type }})</span> — <span v-html="renderInlineMarkdown(currentDoc.returns.description)"></span></p>
+          <p>
+            <span class="playground-doc-type">({{ currentDoc.returns.type }})</span> —
+            <span v-html="renderInlineMarkdown(currentDoc.returns.description)"></span>
+          </p>
         </div>
       </div>
       <div class="playground-sandpack">
-        <Sandpack :key="sandpackKey"
-                  template="vanilla-ts"
-                  :light-theme="lightTheme"
-                  :dark-theme="darkTheme"
-                  :options="{
+        <Sandpack
+          :key="sandpackKey"
+          template="vanilla-ts"
+          :light-theme="lightTheme"
+          :dark-theme="darkTheme"
+          :options="{
             showLineNumbers: true,
             showConsole: true,
             showTabs: false,
             showConsoleButton: true,
             autorun: true,
           }"
-                  :customSetup="{
+          :customSetup="{
             deps: {
               'es-toolkit': 'latest',
             },
           }"
-                  :files="{
+          :files="{
             '/index.ts': {
               code: currentCode,
               active: true,
             },
-          }" />
+          }"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { Sandbox as Sandpack } from 'vitepress-plugin-sandpack';
 import { useData } from 'vitepress';
+import { Sandbox as Sandpack } from 'vitepress-plugin-sandpack';
+import { computed, ref } from 'vue';
 import { data as playgroundData } from '../data/playground.data.mts';
 
 const lightTheme = 'light';
@@ -103,7 +105,9 @@ const darkTheme = 'dark';
 const { lang } = useData();
 
 function renderInlineMarkdown(text) {
-  if (!text) return '';
+  if (!text) {
+    return '';
+  }
   return text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -150,10 +154,58 @@ const translations = {
 };
 
 const CATEGORY_LABELS = {
-  en: { array: 'Array', function: 'Function', math: 'Math', object: 'Object', predicate: 'Predicate', promise: 'Promise', string: 'String', set: 'Set', map: 'Map', error: 'Error', util: 'Util' },
-  ko: { array: '배열', function: '함수', math: '수학', object: '객체', predicate: '타입 가드', promise: 'Promise', string: '문자열', set: 'Set', map: 'Map', error: '에러', util: '유틸리티' },
-  ja: { array: '配列', function: '関数', math: '数学', object: 'オブジェクト', predicate: '型ガード', promise: 'Promise', string: '文字列', set: 'Set', map: 'Map', error: 'エラー', util: 'ユーティリティ' },
-  zh_hans: { array: '数组', function: '函数', math: '数学', object: '对象', predicate: '类型守卫', promise: 'Promise', string: '字符串', set: 'Set', map: 'Map', error: '错误', util: '工具' },
+  en: {
+    array: 'Array',
+    function: 'Function',
+    math: 'Math',
+    object: 'Object',
+    predicate: 'Predicate',
+    promise: 'Promise',
+    string: 'String',
+    set: 'Set',
+    map: 'Map',
+    error: 'Error',
+    util: 'Util',
+  },
+  ko: {
+    array: '배열',
+    function: '함수',
+    math: '수학',
+    object: '객체',
+    predicate: '타입 가드',
+    promise: 'Promise',
+    string: '문자열',
+    set: 'Set',
+    map: 'Map',
+    error: '에러',
+    util: '유틸리티',
+  },
+  ja: {
+    array: '配列',
+    function: '関数',
+    math: '数学',
+    object: 'オブジェクト',
+    predicate: '型ガード',
+    promise: 'Promise',
+    string: '文字列',
+    set: 'Set',
+    map: 'Map',
+    error: 'エラー',
+    util: 'ユーティリティ',
+  },
+  zh_hans: {
+    array: '数组',
+    function: '函数',
+    math: '数学',
+    object: '对象',
+    predicate: '类型守卫',
+    promise: 'Promise',
+    string: '字符串',
+    set: 'Set',
+    map: 'Map',
+    error: '错误',
+    util: '工具',
+  },
 };
 
 const t = computed(() => translations[lang.value] || translations.en);
@@ -176,7 +228,9 @@ const openCategories = ref(new Set(['array']));
 const sandpackKey = ref(0);
 
 const currentDoc = computed(() => {
-  if (!selectedFunction.value) return null;
+  if (!selectedFunction.value) {
+    return null;
+  }
   const locale = lang.value || 'en';
   const localeDocs = localizedDocs[locale] || localizedDocs.en;
   return localeDocs[selectedFunction.value] || localizedDocs.en[selectedFunction.value] || null;
@@ -195,7 +249,7 @@ const filteredCategories = computed(() => {
     .filter(category => category.functions.length > 0);
 });
 
-function toggleCategory (name) {
+function toggleCategory(name) {
   const next = new Set(openCategories.value);
   if (next.has(name)) {
     next.delete(name);
@@ -239,7 +293,7 @@ console.log('groupBy:', grouped);
 
 const currentCode = ref(defaultCode);
 
-function selectFunction (category, fn) {
+function selectFunction(category, fn) {
   selectedFunction.value = fn;
   selectedCategory.value = category;
   openCategories.value = new Set([...openCategories.value, category]);
@@ -256,7 +310,7 @@ console.log(${fn});
   sandpackKey.value++;
 }
 
-function resetCode () {
+function resetCode() {
   if (selectedFunction.value && examples[selectedFunction.value]) {
     currentCode.value = examples[selectedFunction.value];
   } else {
@@ -352,7 +406,9 @@ function resetCode () {
   font-size: 13px;
   cursor: pointer;
   color: var(--vp-c-text-2);
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .playground-function-item:hover {
