@@ -1,3 +1,4 @@
+import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { identity } from '../../function/identity.ts';
 import { isNil } from '../../predicate/isNil.ts';
 import { ValueIteratee } from '../_internal/ValueIteratee.ts';
@@ -87,6 +88,10 @@ export function invertBy<T extends object>(
 
     const value = (object as any)[key];
     const valueStr = getString(value);
+
+    if (isUnsafeProperty(valueStr)) {
+      continue;
+    }
 
     if (Array.isArray(result[valueStr])) {
       result[valueStr].push(key);

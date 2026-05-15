@@ -1,3 +1,5 @@
+import { isUnsafeProperty } from '../_internal/isUnsafeProperty';
+
 /**
  * Inverts the keys and values of an object. The keys of the input object become the values of the output object and vice versa.
  *
@@ -24,6 +26,9 @@ export function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const value = obj[key];
+    if (isUnsafeProperty(value)) {
+      continue;
+    }
     result[value] = key;
   }
 
