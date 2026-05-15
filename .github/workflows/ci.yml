@@ -99,13 +99,7 @@ jobs:
       - name: vitest
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            yarn vitest --changed ${{ github.event.pull_request.base.sha }} --reporter=junit --outputFile=./junit.xml
+            yarn vitest --changed ${{ github.event.pull_request.base.sha }} --reporter=github-actions
           else
-            yarn vitest --reporter=junit --outputFile=./junit.xml
+            yarn vitest --reporter=github-actions
           fi
-      - name: Upload Test Results
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        if: always()
-        with:
-          name: test-results
-          path: ./junit.xml
