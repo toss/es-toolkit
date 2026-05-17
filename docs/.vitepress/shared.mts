@@ -104,6 +104,7 @@ export const shared = defineConfig({
     logo: {
       dark: '/logo_white.png',
       light: '/logo_black.png',
+      alt: 'es-toolkit',
     },
 
     siteTitle: false,
