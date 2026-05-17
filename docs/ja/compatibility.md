@@ -46,7 +46,7 @@ chunk([1, 2, 3, 4], 0);
 - [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)のような特定のタイプの配列に特化した実装を持つ関数
 - `Array.prototype`のようなJavaScriptの組み込みオブジェクトのプロトタイプが変更された場合に対応するコード
 - JavaScript Realmに対応するコード
-- `_(arr).map(...).filter(...)`のような"Seq"メソッドを通じたメソッドチェーンのサポート
+- "Seq"メソッドを通じたメソッドチェーンのサポート
 
 ## 実装ステータス
 

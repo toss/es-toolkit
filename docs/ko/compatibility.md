@@ -46,7 +46,7 @@ chunk([1, 2, 3, 4], 0);
 - 어떤 경우에 특화된 구현: [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)와 같이 정렬된 배열만 받는 함수
 - `Array.prototype`과 같은 JavaScript 내장 객체의 프로토타입이 수정된 경우에 대한 처리
 - JavaScript Realm에 대응하는 코드
-- 메서드 체이닝: `_(arr).map(...).filter(...)`와 같은 메서드 체이닝
+- 메서드 체이닝: "Seq" 메서드를 통한 메서드 체이닝 지원
 
 ## 구현 상태
 
