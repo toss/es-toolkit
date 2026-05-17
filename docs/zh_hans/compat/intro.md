@@ -49,7 +49,7 @@ chunk([1, 2, 3, 4], 0);
 - 针对特定类型数组具有专门实现的函数，如 [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)。
 - 处理修改了内置对象（如 `Array.prototype`）原型的情况。
 - 处理 JavaScript Realm 的情况。
-- 通过 "Seq" 方法支持的方法链。
+- 方法链：像 `_(arr).map(...).filter(...)` 这样的方法链。
 
 ## 实现状态
 
