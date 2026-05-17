@@ -20,6 +20,7 @@ const labels: SidebarLabels = {
     predicate: '타입 가드',
     promise: 'Promise',
     set: 'Set',
+    server: '서버',
     string: '문자열',
     util: '유틸리티',
     error: '에러',
@@ -55,6 +56,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '소개', link: '/ko/intro' },
     { text: '레퍼런스', link: '/ko/reference/array/at' },
     { text: 'Lodash 호환성', link: '/ko/compat/intro' },
+    { text: '플레이그라운드', link: '/ko/playground' },
   ];
 }
 

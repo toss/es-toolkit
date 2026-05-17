@@ -62,6 +62,7 @@ export const flavors = [
       'predicate',
       'promise',
       'set',
+      'server',
       'string',
       'util',
       'error',

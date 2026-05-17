@@ -20,6 +20,7 @@ const labels: SidebarLabels = {
     predicate: '述語',
     promise: 'Promise',
     set: 'Set',
+    server: 'サーバー',
     string: '文字列',
     util: 'ユーティリティ',
     error: 'エラー',
@@ -55,6 +56,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '導入', link: '/ja/intro' },
     { text: 'リファレンス', link: '/ja/reference/array/at' },
     { text: 'Lodash 互換性', link: '/ja/compat/intro' },
+    { text: 'プレイグラウンド', link: '/ja/playground' },
   ];
 }
 

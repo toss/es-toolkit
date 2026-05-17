@@ -20,6 +20,7 @@ const labels: SidebarLabels = {
     predicate: 'Predicates',
     promise: 'Promise Utilities',
     set: 'Set Utilities',
+    server: 'Server Utilities',
     string: 'String Utilities',
     util: 'Utility Functions',
     error: 'Errors',
@@ -56,5 +57,6 @@ function nav(): DefaultTheme.NavItem[] {
     { text: 'Introduction', link: '/intro' },
     { text: 'Reference', link: '/reference/array/at' },
     { text: 'Lodash Compatibility', link: '/compat/intro' },
+    { text: 'Playground', link: '/playground' },
   ];
 }

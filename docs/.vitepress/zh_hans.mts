@@ -20,6 +20,7 @@ const labels: SidebarLabels = {
     predicate: '谓词',
     promise: 'Promise 工具',
     set: 'Set 工具',
+    server: '服务端工具',
     string: '字符串工具',
     util: '工具函数',
     error: '错误',
@@ -56,6 +57,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '简介', link: '/zh_hans/intro' },
     { text: '参考', link: '/zh_hans/reference/array/at' },
     { text: 'Lodash 兼容性', link: '/zh_hans/compat/intro' },
+    { text: '演练场', link: '/zh_hans/playground' },
   ];
 }
 
