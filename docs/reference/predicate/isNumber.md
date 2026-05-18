@@ -1,6 +1,6 @@
 # isNumber
 
-Checks if a value is a number type.
+Checks if a value is a primitive number type.
 
 ```typescript
 const result = isNumber(value);
@@ -10,7 +10,9 @@ const result = isNumber(value);
 
 ### `isNumber(value)`
 
-Use `isNumber` when you want to check if a value is a number.
+Use `isNumber` when you want to check if a value is a primitive number.
+
+Note that wrapped `Number` objects (e.g. `new Number(42)`) return `false`, consistent with how `isString`, `isBoolean`, and `isSymbol` behave.
 
 ```typescript
 import { isNumber } from 'es-toolkit';
@@ -26,6 +28,7 @@ isNumber('123'); // false
 isNumber(true); // false
 isNumber(null); // false
 isNumber(undefined); // false
+isNumber(new Number(42)); // false
 ```
 
 Particularly useful when used as a type guard in TypeScript.
@@ -45,8 +48,8 @@ function processValue(value: unknown) {
 
 #### Parameters
 
-- `value` (`unknown`): The value to check if it's a number type.
+- `value` (`unknown`): The value to check if it's a primitive number type.
 
 #### Returns
 
-(`value is number`): Returns `true` if the value is a number, `false` otherwise.
+(`value is number`): Returns `true` if the value is a primitive number, `false` otherwise.

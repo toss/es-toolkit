@@ -1,6 +1,6 @@
 # isNumber
 
-주어진 값이 숫자 타입인지 확인해요.
+주어진 값이 원시 숫자(primitive number) 타입인지 확인해요.
 
 ```typescript
 const result = isNumber(value);
@@ -10,7 +10,9 @@ const result = isNumber(value);
 
 ### `isNumber(value)`
 
-값이 숫자인지 확인하고 싶을 때 `isNumber`를 사용하세요.
+값이 원시 숫자인지 확인하고 싶을 때 `isNumber`를 사용하세요.
+
+`new Number(42)`와 같이 래핑된 `Number` 객체는 `false`를 반환해요. 이는 `isString`, `isBoolean`, `isSymbol`의 동작과 일관돼요.
 
 ```typescript
 import { isNumber } from 'es-toolkit';
@@ -26,6 +28,7 @@ isNumber('123'); // false
 isNumber(true); // false
 isNumber(null); // false
 isNumber(undefined); // false
+isNumber(new Number(42)); // false
 ```
 
 TypeScript에서 타입 가드로 사용할 때 특히 유용해요.
@@ -45,8 +48,8 @@ function processValue(value: unknown) {
 
 #### 파라미터
 
-- `value` (`unknown`): 숫자 타입인지 확인할 값이에요.
+- `value` (`unknown`): 원시 숫자 타입인지 확인할 값이에요.
 
 #### 반환 값
 
-(`value is number`): 값이 숫자이면 `true`, 그렇지 않으면 `false`를 반환해요.
+(`value is number`): 값이 원시 숫자이면 `true`, 그렇지 않으면 `false`를 반환해요.
