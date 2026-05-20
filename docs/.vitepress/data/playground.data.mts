@@ -279,9 +279,11 @@ export default {
         const mdPath = path.join(catDir, `${fn}.md`);
         const content = fs.readFileSync(mdPath, 'utf-8');
         const result = parseMarkdown(content, fn);
+        const selectKey = `${cat}/${fn}`;
+
         if (result) {
-          examples[fn] = result.code;
-          docs[fn] = result.doc;
+          examples[selectKey] = result.code;
+          docs[selectKey] = result.doc;
         }
       }
     }
@@ -315,8 +317,9 @@ export default {
           const fn = file.replace(/\.md$/, '');
           const content = fs.readFileSync(path.join(catDir, file), 'utf-8');
           const doc = parseDocOnly(content);
+          const selectKey = `${cat}/${fn}`;
           if (doc) {
-            localeDocs[fn] = doc;
+            localeDocs[selectKey] = doc;
           }
         }
       }
