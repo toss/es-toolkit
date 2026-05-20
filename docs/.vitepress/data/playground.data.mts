@@ -147,10 +147,26 @@ function parseMarkdown(content: string, fnName: string): ParseResult | null {
       }
 
       // Assignment: const/let/var x = ...;
-      // Add console.log(varName) on the next line
+      // Add console.log(varName) after the declaration statement.
       const assignMatch = trimmed.match(/^(?:const|let|var)\s+(\w+)\s*=/);
       if (assignMatch) {
         result.push(line);
+
+        let openBrackets = (trimmed.match(/[([{]/g) || []).length;
+        let closeBrackets = (trimmed.match(/[)\]}]/g) || []).length;
+        let hasStatementEnded = trimmed.endsWith(';') && openBrackets === closeBrackets;
+
+        while (!hasStatementEnded && i + 1 < lines.length) {
+          i++;
+          const nextLine = lines[i];
+          const nextTrimmed = nextLine.trim();
+          result.push(nextLine);
+
+          openBrackets += (nextLine.match(/[([{]/g) || []).length;
+          closeBrackets += (nextLine.match(/[)\]}]/g) || []).length;
+          hasStatementEnded = nextTrimmed.endsWith(';') && openBrackets === closeBrackets;
+        }
+
         // Add console.log after the assignment (skip if next line is a comment describing the result)
         const nextTrimmed = i + 1 < lines.length ? lines[i + 1].trim() : '';
         if (!nextTrimmed.startsWith('console.log')) {
