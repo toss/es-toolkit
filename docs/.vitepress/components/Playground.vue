@@ -481,6 +481,7 @@ function resetCode() {
 }
 
 .playground-doc-panel {
+  flex-shrink: 0;
   padding: 12px 16px;
   border-bottom: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
