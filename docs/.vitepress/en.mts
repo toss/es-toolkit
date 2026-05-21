@@ -35,6 +35,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: 'Introduction', link: '/intro' },
     { text: 'Reference', link: '/reference/array/at' },
     { text: 'Lodash Compatibility', link: '/reference/compat/array/castArray' },
+    { text: 'Playground', link: '/playground' },
   ];
 }
 
@@ -44,6 +45,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'Guide',
       items: [
         { text: 'Introduction', link: '/intro' },
+        { text: 'Playground', link: '/playground' },
         { text: 'Installation & Usage', link: '/usage' },
         { text: 'Impact on Bundle Size', link: '/bundle-size' },
         { text: 'Performance', link: '/performance' },
