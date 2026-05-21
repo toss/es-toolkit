@@ -34,6 +34,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '소개', link: '/ko/intro' },
     { text: '레퍼런스', link: '/ko/reference/array/at' },
     { text: 'Lodash 호환성', link: '/ko/reference/compat/array/castArray' },
+    { text: '플레이그라운드', link: '/ko/playground' },
   ];
 }
 
@@ -43,6 +44,7 @@ function sidebar(): DefaultTheme.Sidebar {
       text: '가이드',
       items: [
         { text: '소개', link: '/ko/intro' },
+        { text: '플레이그라운드', link: '/ko/playground' },
         { text: '설치 및 사용 방법', link: '/ko/usage' },
         { text: '번들 사이즈', link: '/ko/bundle-size' },
         { text: '성능', link: '/ko/performance' },
