@@ -15,12 +15,12 @@
               v-for="fn in category.functions"
               :key="fn"
               class="playground-function-item"
-              :class="{ active: selectedFunction === fn }"
+              :class="{ active: selectedCategory === category.name && selectedFunction === fn }"
               role="button"
               tabindex="0"
-              @click="selectFunction(category.name, fn)"
-              @keydown.enter="selectFunction(category.name, fn)"
-              @keydown.space.prevent="selectFunction(category.name, fn)"
+              @click="selectFunction(category, fn)"
+              @keydown.enter="selectFunction(category, fn)"
+              @keydown.space.prevent="selectFunction(category, fn)"
             >
               {{ fn }}
             </li>
@@ -30,7 +30,9 @@
     </div>
     <div class="playground-editor">
       <div class="playground-editor-header">
-        <span class="playground-editor-title">{{ selectedFunction || t.selectFunction }}</span>
+        <span class="playground-editor-title">{{
+          selectedCategoryLabel === '' ? t.selectFunction : `${selectedCategoryLabel}/${selectedFunction}`
+        }}</span>
         <div class="playground-header-actions">
           <button
             v-if="currentDoc"
@@ -224,6 +226,7 @@ const searchQuery = ref('');
 const showDoc = ref(true);
 const selectedFunction = ref('');
 const selectedCategory = ref('');
+const selectedCategoryLabel = ref('');
 const openCategories = ref(new Set(['array']));
 const sandpackKey = ref(0);
 
@@ -231,9 +234,10 @@ const currentDoc = computed(() => {
   if (!selectedFunction.value) {
     return null;
   }
+  const selectKey = `${selectedCategory.value}/${selectedFunction.value}`;
   const locale = lang.value || 'en';
   const localeDocs = localizedDocs[locale] || localizedDocs.en;
-  return localeDocs[selectedFunction.value] || localizedDocs.en[selectedFunction.value] || null;
+  return localeDocs[selectKey] || localizedDocs.en[selectKey] || null;
 });
 
 const filteredCategories = computed(() => {
@@ -294,12 +298,15 @@ console.log('groupBy:', grouped);
 const currentCode = ref(defaultCode);
 
 function selectFunction(category, fn) {
-  selectedFunction.value = fn;
-  selectedCategory.value = category;
-  openCategories.value = new Set([...openCategories.value, category]);
+  const selectKey = `${category.name}/${fn}`;
 
-  if (examples[fn]) {
-    currentCode.value = examples[fn];
+  selectedCategoryLabel.value = category.label;
+  selectedFunction.value = fn;
+  selectedCategory.value = category.name;
+  openCategories.value = new Set([...openCategories.value, category.name]);
+
+  if (examples[selectKey]) {
+    currentCode.value = examples[selectKey];
   } else {
     currentCode.value = `import { ${fn} } from 'es-toolkit';
 
@@ -311,8 +318,9 @@ console.log(${fn});
 }
 
 function resetCode() {
-  if (selectedFunction.value && examples[selectedFunction.value]) {
-    currentCode.value = examples[selectedFunction.value];
+  const selectKey = `${selectedCategory.value}/${selectedFunction.value}`;
+  if (examples[selectKey]) {
+    currentCode.value = examples[selectKey];
   } else {
     currentCode.value = defaultCode;
     selectedFunction.value = '';
@@ -473,6 +481,7 @@ function resetCode() {
 }
 
 .playground-doc-panel {
+  flex-shrink: 0;
   padding: 12px 16px;
   border-bottom: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
