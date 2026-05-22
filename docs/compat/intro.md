@@ -49,7 +49,7 @@ However, the following are out of scope for `es-toolkit/compat`:
 - Functions that have specialized implementations for specific types of arrays, like [sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq).
 - Handling cases where internal object prototypes, like `Array.prototype`, have been modified.
 - Managing cases with JavaScript realms.
-- Method chaining support through "Seq" methods.
+- Method chaining: method chaining like `_(arr).map(...).filter(...)`.
 
 ## Implementation Status
 
