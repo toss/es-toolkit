@@ -1,8 +1,4 @@
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
+import { globalThis } from '../_internal/globalThis';
 
 /**
  * Checks if the given value is a Buffer instance.
@@ -25,5 +21,5 @@ declare let Buffer:
 export function isBuffer(x: unknown): boolean {
   // eslint-disable-next-line
   // @ts-ignore
-  return typeof Buffer !== 'undefined' && Buffer.isBuffer(x);
+  return typeof globalThis.Buffer !== 'undefined' && globalThis.Buffer.isBuffer(x);
 }

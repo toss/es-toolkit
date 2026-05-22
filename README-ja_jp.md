@@ -34,6 +34,23 @@ console.log(chunkedArray);
 // 出力: [[1, 2], [3, 4], [5, 6]]
 ```
 
+## AI 連携
+
+es-toolkitは、Claude Code、Cursor、Copilotなど、AIコーディングツールで使える[Agent Skills](https://skills.sh)を提供しています。
+
+```bash
+npx skills add toss/es-toolkit
+```
+
+Claude Codeをご利用の場合は、プラグインマーケットプレイスからもインストールできます:
+
+```
+/plugin marketplace add toss/es-toolkit
+/plugin install es-toolkit@es-toolkit-plugin
+```
+
+詳細については、[AI 連携ガイド](https://es-toolkit.dev/ja/ai-integration.html)をご覧ください。
+
 ## 貢献
 
 コミュニティの皆さんからの貢献を歓迎します。詳細な貢献ガイドについては、以下をお読みください。

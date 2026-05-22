@@ -8,6 +8,7 @@ import BenchmarkTable from '../components/BenchmarkTable.vue';
 import BundleSizeChart from '../components/BundleSizeChart.vue';
 import BundleSizeTable from '../components/BundleSizeTable.vue';
 import CompatibilityStatus from '../components/CompatibilityStatus.vue';
+import FlavorDropdown from '../components/FlavorDropdown.vue';
 
 /** @type {import('vitepress').Theme} */
 export default {
@@ -27,6 +28,7 @@ export default {
   },
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
+      'sidebar-nav-before': () => h(FlavorDropdown),
       'layout-bottom': () => h(Banner),
     });
   },

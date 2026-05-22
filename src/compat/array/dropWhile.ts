@@ -22,10 +22,10 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * // => [3]
  *
  * dropWhile([{ a: 1, b: 2 }, { a: 1, b: 3 }], { a: 1 })
- * // => [{ a: 1, b: 3 }]
+ * // => []
  *
  * dropWhile([{ a: 1, b: 2 }, { a: 1, b: 3 }], ['a', 1])
- * // => [{ a: 1, b: 3 }]
+ * // => []
  *
  * dropWhile([{ a: 1, b: 2 }, { a: 1, b: 3 }], 'a')
  * // => []
