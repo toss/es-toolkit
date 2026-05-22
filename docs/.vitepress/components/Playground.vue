@@ -267,7 +267,7 @@ const defaultCode = `import { chunk, groupBy, uniq } from 'es-toolkit';
 
 // ============================================
 // es-toolkit Playground
-// Try any function from the sidebar!
+// Try any function from the function list!
 // ============================================
 
 // chunk(arr, size)
@@ -334,9 +334,9 @@ function resetCode() {
 .playground {
   display: flex;
   gap: 16px;
-  margin-top: 24px;
-  height: min(calc(100dvh - 200px), 800px);
-  min-height: 500px;
+  margin-top: var(--playground-margin-top, 24px);
+  height: var(--playground-height, min(calc(100dvh - 200px), 800px));
+  min-height: var(--playground-min-height, 500px);
 }
 
 .playground-sidebar {
