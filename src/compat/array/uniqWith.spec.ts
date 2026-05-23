@@ -1,4 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 import * as lodashStable from 'es-toolkit/compat';
 import type { uniqWith as uniqWithLodash } from 'lodash';
 import { uniqWith } from './uniqWith';
@@ -170,6 +170,35 @@ describe('uniqWith', () => {
 
   it('should return an empty array when input is not array-like', () => {
     expect(uniqWith(null, (a, b) => a === b)).toEqual([]);
+  });
+
+  it('should invoke the comparator with `(candidate, kept)` order, matching lodash', () => {
+    const comparator = vi.fn(() => false);
+
+    uniqWith(['A', 'B'], comparator);
+
+    // When processing the second element ('B'), lodash invokes the comparator
+    // as `(candidate, kept)` === `('B', 'A')`.
+    expect(comparator).toHaveBeenCalledWith('B', 'A');
+  });
+
+  it('should drop later elements that are subsets according to an asymmetric comparator', () => {
+    const sets: Record<string, string[]> = {
+      Big: ['x', 'y', 'z'],
+      Small: ['x'],
+    };
+
+    const isSubset = (a: string, b: string) => {
+      const diff = sets[a].filter(t => !sets[b].includes(t));
+
+      if (diff.length) {
+        return false;
+      }
+
+      return sets[a].length < sets[b].length;
+    };
+
+    expect(uniqWith(['Big', 'Small'], isSubset)).toEqual(['Big']);
   });
 
   it('should match the type of lodash', () => {

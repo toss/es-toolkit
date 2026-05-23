@@ -1,3 +1,4 @@
+export { allKeyed } from './allKeyed.ts';
 export { delay } from './delay.ts';
 export { Mutex } from './mutex.ts';
 export { Semaphore } from './semaphore.ts';

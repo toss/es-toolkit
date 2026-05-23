@@ -1,3 +1,4 @@
+import { isBuffer } from './isBuffer.ts';
 import { isPlainObject } from './isPlainObject.ts';
 import { getSymbols } from '../compat/_internal/getSymbols.ts';
 import { getTag } from '../compat/_internal/getTag.ts';
@@ -30,12 +31,6 @@ import {
   uint32ArrayTag,
 } from '../compat/_internal/tags.ts';
 import { eq } from '../compat/util/eq.ts';
-
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
 
 /**
  * Compares two values for equality using a custom comparison function.
@@ -255,7 +250,7 @@ function areObjectsEqual(
       case float32ArrayTag:
       case float64ArrayTag: {
         // Buffers are also treated as [object Uint8Array]s.
-        if (typeof Buffer !== 'undefined' && Buffer.isBuffer(a) !== Buffer.isBuffer(b)) {
+        if (isBuffer(a) !== isBuffer(b)) {
           return false;
         }
 

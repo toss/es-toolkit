@@ -127,6 +127,25 @@ describe('omitBy', () => {
     expect(result).toEqual({});
   });
 
+  it('should not treat plain objects with a numeric `length` property as array-like', () => {
+    const obj = { level: 'error', message: 'hi', length: 104, empty: undefined };
+    const isNil = (value: unknown) => value == null;
+
+    expect(omitBy(obj, isNil)).toEqual({ level: 'error', message: 'hi', length: 104 });
+  });
+
+  it('should preserve symbol-keyed properties on objects with a numeric `length` property', () => {
+    const sym = Symbol('level');
+    const obj = { message: 'hi', length: 104, [sym]: 'error' };
+    const isNil = (value: unknown) => value == null;
+
+    const actual = omitBy(obj, isNil);
+
+    expect(actual.message).toBe('hi');
+    expect(actual.length).toBe(104);
+    expect((actual as any)[sym]).toBe('error');
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(omitBy).toEqualTypeOf<typeof omitByLodash>();
   });
