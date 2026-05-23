@@ -1,9 +1,7 @@
 import { keysIn } from './keysIn.ts';
-import { range } from '../../math/range.ts';
 import { getSymbolsIn } from '../_internal/getSymbolsIn.ts';
 import { ValueKeyIteratee } from '../_internal/ValueKeyIteratee.ts';
 import { identity } from '../function/identity.ts';
-import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { isSymbol } from '../predicate/isSymbol.ts';
 import { iteratee as createIteratee } from '../util/iteratee.ts';
 
@@ -89,9 +87,7 @@ export function omitBy<T, S extends T>(
 
   const predicate = createIteratee(shouldOmit ?? identity);
 
-  const keys = isArrayLike(object)
-    ? range(0, object.length)
-    : ([...keysIn(object), ...getSymbolsIn(object)] as Array<keyof T>);
+  const keys = [...keysIn(object), ...getSymbolsIn(object)] as Array<keyof T>;
   for (let i = 0; i < keys.length; i++) {
     const key = (isSymbol(keys[i]) ? keys[i] : keys[i].toString()) as keyof T;
     const value = object[key as keyof typeof object];
