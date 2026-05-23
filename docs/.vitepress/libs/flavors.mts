@@ -34,6 +34,8 @@ export interface FlavorSpec {
   icon: readonly string[];
   /** CSS color (or `var(...)`) applied to the icon stroke. */
   iconColor: string;
+  /** Optional badge shown next to the label (e.g. `NEW`). */
+  badge?: string;
 }
 
 // Icon paths are taken from lucide.dev, drawn on a 24x24 viewBox with
@@ -86,7 +88,8 @@ export const flavors = [
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: [],
     icon: SERVER_ICON,
-    iconColor: 'var(--vp-c-success-1)',
+    iconColor: 'var(--vp-c-indigo-1)',
+    badge: 'NEW',
   },
   {
     value: 'compat',
