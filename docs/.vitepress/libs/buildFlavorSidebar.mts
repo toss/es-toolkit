@@ -36,6 +36,16 @@ export function buildFlavorSidebar({
   for (const flavor of flavors) {
     const flavorArgs = flavor.prefix ? [flavor.prefix] : [];
     const flavorPathPrefix = flavor.prefix ? `${localePrefix}/${flavor.prefix}` : localePrefix;
+    const referenceItems =
+      flavor.categories.length > 0
+        ? sortByText(
+            flavor.categories.map(category => ({
+              text: labels.categories[category] ?? category,
+              collapsed: true,
+              items: getSidebarItems(docsRoot, ...localeArgs, ...flavorArgs, 'reference', category),
+            }))
+          )
+        : getSidebarItems(docsRoot, ...localeArgs, ...flavorArgs, 'reference');
 
     sidebar[`${flavorPathPrefix}/`] = [
       {
@@ -47,13 +57,7 @@ export function buildFlavorSidebar({
       },
       {
         text: labels.reference,
-        items: sortByText(
-          flavor.categories.map(category => ({
-            text: labels.categories[category] ?? category,
-            collapsed: true,
-            items: getSidebarItems(docsRoot, ...localeArgs, ...flavorArgs, 'reference', category),
-          }))
-        ),
+        items: referenceItems,
       },
     ];
   }

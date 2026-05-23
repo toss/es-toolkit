@@ -20,7 +20,6 @@ const labels: SidebarLabels = {
     predicate: '타입 가드',
     promise: 'Promise',
     set: 'Set',
-    server: '서버',
     string: '문자열',
     util: '유틸리티',
     error: '에러',
