@@ -20,7 +20,6 @@ const labels: SidebarLabels = {
     predicate: 'Predicates',
     promise: 'Promise Utilities',
     set: 'Set Utilities',
-    server: 'Server Utilities',
     string: 'String Utilities',
     util: 'Utility Functions',
     error: 'Errors',

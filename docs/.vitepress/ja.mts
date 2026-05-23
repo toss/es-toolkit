@@ -20,7 +20,6 @@ const labels: SidebarLabels = {
     predicate: '述語',
     promise: 'Promise',
     set: 'Set',
-    server: 'サーバー',
     string: '文字列',
     util: 'ユーティリティ',
     error: 'エラー',

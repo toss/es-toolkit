@@ -20,7 +20,10 @@ defineProps<{ flavor: FlavorSpec }>();
     </svg>
   </span>
   <span class="flavor-row__text">
-    <span class="flavor-row__title">{{ flavor.label }}</span>
+    <span class="flavor-row__title-row">
+      <span class="flavor-row__title">{{ flavor.label }}</span>
+      <span v-if="flavor.badge" class="flavor-row__badge">{{ flavor.badge }}</span>
+    </span>
     <span class="flavor-row__desc">{{ flavor.description }}</span>
   </span>
 </template>
@@ -52,6 +55,13 @@ defineProps<{ flavor: FlavorSpec }>();
   flex: 1;
 }
 
+.flavor-row__title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
 .flavor-row__title {
   font-size: 15px;
   font-weight: 500;
@@ -60,6 +70,19 @@ defineProps<{ flavor: FlavorSpec }>();
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.flavor-row__badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  padding: 2px 5px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
 }
 
 .flavor-row__desc {
