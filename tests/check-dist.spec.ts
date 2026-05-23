@@ -26,6 +26,13 @@ const ENTRYPOINTS = [
   './array/*',
   './compat',
   './compat/*',
+  './compat/array/*',
+  './compat/function/*',
+  './compat/math/*',
+  './compat/object/*',
+  './compat/predicate/*',
+  './compat/string/*',
+  './compat/util/*',
   './server',
   './error',
   './error/*',
@@ -52,6 +59,7 @@ const ENTRYPOINTS = [
 // Concrete deep-import paths (one per category) to verify wildcard exports resolve at runtime.
 const GRANULAR_ENTRYPOINTS = [
   './array/chunk',
+  './compat/array/chunk',
   './error/AbortError',
   './function/debounce',
   './map/mapKeys',

@@ -1,11 +1,13 @@
 {
   "format": "table-flipped",
   "emoji": false,
+  "profile": "node16",
   "includeEntrypoints": [
     "array",
     "array/chunk",
     "array/groupBy",
     "compat",
+    "compat/array/chunk",
     "error",
     "error/AbortError",
     "function",

@@ -16,6 +16,13 @@
     "./array": "./src/array/index.ts",
     "./array/*": "./src/array/*.ts",
     "./compat": "./src/compat/index.ts",
+    "./compat/array/*": "./src/compat/array/*.ts",
+    "./compat/function/*": "./src/compat/function/*.ts",
+    "./compat/math/*": "./src/compat/math/*.ts",
+    "./compat/object/*": "./src/compat/object/*.ts",
+    "./compat/predicate/*": "./src/compat/predicate/*.ts",
+    "./compat/string/*": "./src/compat/string/*.ts",
+    "./compat/util/*": "./src/compat/util/*.ts",
     "./error": "./src/error/index.ts",
     "./error/*": "./src/error/*.ts",
     "./function": "./src/function/index.ts",
@@ -74,7 +81,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.15.3",
+    "@arethetypeswrong/cli": "^0.17.4",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
     "@eslint/js": "^9.39.2",
@@ -165,6 +172,76 @@
         "require": {
           "types": "./compat/*.d.ts",
           "default": "./compat/*.js"
+        }
+      },
+      "./compat/array/*": {
+        "import": {
+          "types": "./dist/compat/array/*.d.mts",
+          "default": "./dist/compat/array/*.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/array/*.d.ts",
+          "default": "./dist/compat/array/*.js"
+        }
+      },
+      "./compat/function/*": {
+        "import": {
+          "types": "./dist/compat/function/*.d.mts",
+          "default": "./dist/compat/function/*.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/function/*.d.ts",
+          "default": "./dist/compat/function/*.js"
+        }
+      },
+      "./compat/math/*": {
+        "import": {
+          "types": "./dist/compat/math/*.d.mts",
+          "default": "./dist/compat/math/*.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/math/*.d.ts",
+          "default": "./dist/compat/math/*.js"
+        }
+      },
+      "./compat/object/*": {
+        "import": {
+          "types": "./dist/compat/object/*.d.mts",
+          "default": "./dist/compat/object/*.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/object/*.d.ts",
+          "default": "./dist/compat/object/*.js"
+        }
+      },
+      "./compat/predicate/*": {
+        "import": {
+          "types": "./dist/compat/predicate/*.d.mts",
+          "default": "./dist/compat/predicate/*.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/predicate/*.d.ts",
+          "default": "./dist/compat/predicate/*.js"
+        }
+      },
+      "./compat/string/*": {
+        "import": {
+          "types": "./dist/compat/string/*.d.mts",
+          "default": "./dist/compat/string/*.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/string/*.d.ts",
+          "default": "./dist/compat/string/*.js"
+        }
+      },
+      "./compat/util/*": {
+        "import": {
+          "types": "./dist/compat/util/*.d.mts",
+          "default": "./dist/compat/util/*.mjs"
+        },
+        "require": {
+          "types": "./dist/compat/util/*.d.ts",
+          "default": "./dist/compat/util/*.js"
         }
       },
       "./server": {
