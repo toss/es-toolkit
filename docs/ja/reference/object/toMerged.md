@@ -54,7 +54,7 @@ const result = toMerged(target, source);
 
 (`T & S`): ターゲットオブジェクトとソースオブジェクトがマージされた新しいオブジェクトを返します。
 
-## デモ
+## 使用例
 
 ::: sandpack
 
