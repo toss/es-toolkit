@@ -84,12 +84,7 @@
               'es-toolkit': 'latest',
             },
           }"
-          :files="{
-            '/index.ts': {
-              code: currentCode,
-              active: true,
-            },
-          }"
+          :files="sandpackFiles"
         />
       </div>
     </div>
@@ -304,6 +299,13 @@ console.log('groupBy:', grouped);
 `;
 
 const currentCode = ref(defaultCode);
+
+const sandpackFiles = computed(() => ({
+  '/index.ts': {
+    code: currentCode.value,
+    active: true,
+  },
+}));
 
 function selectFunction(category, fn) {
   const selectKey = `${category.name}/${fn}`;
