@@ -12,6 +12,9 @@
  *   1. Add an entry below with its `guideItems` and `categories`.
  *   2. Provide docs at `/{prefix}/{slug}.md` and `/{prefix}/reference/<category>/...`.
  *   3. Provide labels in each locale file (`guideItems[labelKey]`, `categories[name]`).
+ *
+ * If a flavor does not need category groups, set `categories` to an empty array.
+ * Its reference docs will be read directly from `/{prefix}/reference/*.md`.
  */
 export interface GuideItem {
   /** Resolved against `SidebarLabels.guideItems` per locale. */
@@ -31,6 +34,8 @@ export interface FlavorSpec {
   icon: readonly string[];
   /** CSS color (or `var(...)`) applied to the icon stroke. */
   iconColor: string;
+  /** Optional badge shown next to the label (e.g. `NEW`). */
+  badge?: string;
 }
 
 // Icon paths are taken from lucide.dev, drawn on a 24x24 viewBox with
@@ -39,6 +44,12 @@ const WRENCH_ICON = [
   'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z',
 ];
 const ARROW_LEFT_RIGHT_ICON = ['M8 3 4 7l4 4', 'M4 7h16', 'm16 21 4-4-4-4', 'M20 17H4'];
+const SERVER_ICON = [
+  'M5 12H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1',
+  'M5 12H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-1',
+  'M6 8h.01',
+  'M6 16h.01',
+];
 
 export const flavors = [
   {
@@ -62,13 +73,23 @@ export const flavors = [
       'predicate',
       'promise',
       'set',
-      'server',
       'string',
       'util',
       'error',
     ],
     icon: WRENCH_ICON,
     iconColor: 'var(--vp-c-brand-1)',
+  },
+  {
+    value: 'server',
+    label: 'es-toolkit/server',
+    description: 'Server utilities',
+    prefix: 'server',
+    guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
+    categories: [],
+    icon: SERVER_ICON,
+    iconColor: 'var(--vp-c-indigo-1)',
+    badge: 'NEW',
   },
   {
     value: 'compat',
