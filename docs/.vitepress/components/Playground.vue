@@ -15,12 +15,12 @@
               v-for="fn in category.functions"
               :key="fn"
               class="playground-function-item"
-              :class="{ active: selectedFunction === fn }"
+              :class="{ active: selectedCategory === category.name && selectedFunction === fn }"
               role="button"
               tabindex="0"
-              @click="selectFunction(category.name, fn)"
-              @keydown.enter="selectFunction(category.name, fn)"
-              @keydown.space.prevent="selectFunction(category.name, fn)"
+              @click="selectFunction(category, fn)"
+              @keydown.enter="selectFunction(category, fn)"
+              @keydown.space.prevent="selectFunction(category, fn)"
             >
               {{ fn }}
             </li>
@@ -30,7 +30,10 @@
     </div>
     <div class="playground-editor">
       <div class="playground-editor-header">
-        <span class="playground-editor-title">{{ selectedFunction || t.selectFunction }}</span>
+        <a v-if="selectedFunction && docUrl" :href="docUrl" class="playground-editor-title playground-editor-title-link"
+          >{{ selectedCategoryLabel }}/{{ selectedFunction }}</a
+        >
+        <span v-else class="playground-editor-title">{{ t.selectFunction }}</span>
         <div class="playground-header-actions">
           <button
             v-if="currentDoc"
@@ -224,16 +227,25 @@ const searchQuery = ref('');
 const showDoc = ref(true);
 const selectedFunction = ref('');
 const selectedCategory = ref('');
+const selectedCategoryLabel = ref('');
 const openCategories = ref(new Set(['array']));
 const sandpackKey = ref(0);
+
+const docUrl = computed(() => {
+  if (!selectedFunction.value || !selectedCategory.value) return null;
+  const locale = lang.value;
+  const prefix = locale && locale !== 'en' && locale !== 'root' ? `/${locale}` : '';
+  return `${prefix}/reference/${selectedCategory.value}/${selectedFunction.value}`;
+});
 
 const currentDoc = computed(() => {
   if (!selectedFunction.value) {
     return null;
   }
+  const selectKey = `${selectedCategory.value}/${selectedFunction.value}`;
   const locale = lang.value || 'en';
   const localeDocs = localizedDocs[locale] || localizedDocs.en;
-  return localeDocs[selectedFunction.value] || localizedDocs.en[selectedFunction.value] || null;
+  return localeDocs[selectKey] || localizedDocs.en[selectKey] || null;
 });
 
 const filteredCategories = computed(() => {
@@ -263,7 +275,7 @@ const defaultCode = `import { chunk, groupBy, uniq } from 'es-toolkit';
 
 // ============================================
 // es-toolkit Playground
-// Try any function from the sidebar!
+// Try any function from the function list!
 // ============================================
 
 // chunk(arr, size)
@@ -294,12 +306,15 @@ console.log('groupBy:', grouped);
 const currentCode = ref(defaultCode);
 
 function selectFunction(category, fn) {
-  selectedFunction.value = fn;
-  selectedCategory.value = category;
-  openCategories.value = new Set([...openCategories.value, category]);
+  const selectKey = `${category.name}/${fn}`;
 
-  if (examples[fn]) {
-    currentCode.value = examples[fn];
+  selectedCategoryLabel.value = category.label;
+  selectedFunction.value = fn;
+  selectedCategory.value = category.name;
+  openCategories.value = new Set([...openCategories.value, category.name]);
+
+  if (examples[selectKey]) {
+    currentCode.value = examples[selectKey];
   } else {
     currentCode.value = `import { ${fn} } from 'es-toolkit';
 
@@ -311,8 +326,9 @@ console.log(${fn});
 }
 
 function resetCode() {
-  if (selectedFunction.value && examples[selectedFunction.value]) {
-    currentCode.value = examples[selectedFunction.value];
+  const selectKey = `${selectedCategory.value}/${selectedFunction.value}`;
+  if (examples[selectKey]) {
+    currentCode.value = examples[selectKey];
   } else {
     currentCode.value = defaultCode;
     selectedFunction.value = '';
@@ -326,9 +342,9 @@ function resetCode() {
 .playground {
   display: flex;
   gap: 16px;
-  margin-top: 24px;
-  height: min(calc(100dvh - 200px), 800px);
-  min-height: 500px;
+  margin-top: var(--playground-margin-top, 24px);
+  height: var(--playground-height, min(calc(100dvh - 200px), 800px));
+  min-height: var(--playground-min-height, 500px);
 }
 
 .playground-sidebar {
@@ -448,6 +464,16 @@ function resetCode() {
   font-family: var(--vp-font-family-mono);
 }
 
+.playground-editor-title-link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.15s;
+}
+
+.playground-editor-title-link:hover {
+  color: var(--vp-c-brand-1);
+}
+
 .playground-header-actions {
   display: flex;
   align-items: center;
@@ -473,6 +499,7 @@ function resetCode() {
 }
 
 .playground-doc-panel {
+  flex-shrink: 0;
   padding: 12px 16px;
   border-bottom: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
