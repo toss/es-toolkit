@@ -29,7 +29,7 @@ features:
     details: es-toolkit ships up to 97% less JavaScript code compared to other alternative libraries.
   - title: Seamless Lodash replacement
     details: es-toolkit offers a complete compatibility layer to seamlessly replace Lodash.
-    link: /compatibility
+    link: /compat/intro
   - title: Modern implementation
     details: es-toolkit fully leverages modern JavaScript APIs for straightforward and error-free implementation.
   - title: Robust types
