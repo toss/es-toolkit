@@ -96,7 +96,7 @@
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.6.0",
-    "vercel": "^41.4.1",
+    "vercel": "^54.4.1",
     "vitest": "^4.0.17"
   },
   "publishConfig": {
