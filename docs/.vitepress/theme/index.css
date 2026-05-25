@@ -11,3 +11,50 @@
 :root[lang='ko'] {
   word-break: keep-all;
 }
+
+.playground-page-shell {
+  box-sizing: border-box;
+  max-width: calc(var(--vp-layout-max-width) - 64px);
+  min-height: calc(100dvh - var(--vp-nav-height));
+  margin: 0 auto;
+  padding: 48px 24px 40px;
+  --playground-margin-top: 0;
+  --playground-height: min(calc(100dvh - var(--vp-nav-height) - 176px), 840px);
+  --playground-min-height: 560px;
+}
+
+.playground-page-header {
+  margin-bottom: 24px;
+}
+
+.playground-page-header h1 {
+  margin: 0;
+  color: var(--vp-c-text-1);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.playground-page-header p {
+  max-width: 760px;
+  margin: 8px 0 0;
+  color: var(--vp-c-text-2);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .playground-page-shell {
+    padding: 24px 16px 32px;
+    --playground-height: auto;
+    --playground-min-height: 720px;
+  }
+
+  .playground-page-header h1 {
+    font-size: 28px;
+  }
+
+  .playground-page-header p {
+    font-size: 15px;
+  }
+}
