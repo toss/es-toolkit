@@ -7,6 +7,8 @@ on:
     tags:
       - 'v*.*.*'
 
+permissions: read-all
+
 jobs:
   release:
     if: github.repository == 'toss/es-toolkit'
@@ -14,7 +16,6 @@ jobs:
     permissions:
       id-token: write
       contents: write
-      deployments: write
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -23,8 +24,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Update npm
-        run: npm install -g npm@11.5.1
+          registry-url: 'https://registry.npmjs.org'
       - uses: denoland/setup-deno@667a34cdef165d8d2b2e98dde39547c9daac7282 # v2.0.4
         with:
           deno-version: v1.x

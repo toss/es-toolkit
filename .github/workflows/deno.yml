@@ -5,6 +5,8 @@ on:
     types: [opened, synchronize, reopened]
   merge_group:
 
+permissions: read-all
+
 jobs:
   deno:
     runs-on: ubuntu-latest

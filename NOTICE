@@ -1,0 +1,9 @@
+es-toolkit
+
+Copyright OpenJS Foundation and other contributors.
+
+Parts of the test suite and compatibility layer in es-toolkit/compat are
+derived from Lodash (https://github.com/lodash/lodash) by the OpenJS
+Foundation (https://openjsf.org/) and Underscore.js by Jeremy Ashkenas,
+DocumentCloud, and Investigative Reporters & Editors
+(http://underscorejs.org/).

@@ -1,0 +1,144 @@
+[[IgnoredVulns]]
+id = "GHSA-vpq2-c234-7xj6"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins @tootallnate/once 2.0.0."
+
+[[IgnoredVulns]]
+id = "GHSA-2g4f-4pwh-qvx6"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins ajv 8.6.3."
+
+[[IgnoredVulns]]
+id = "GHSA-67mh-4wv8-2f99"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through dev tooling for docs/tests; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-v2v4-37r5-5v8g"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through optional native build tooling pulled by dev dependencies; not included in the published package."
+
+[[IgnoredVulns]]
+id = "GHSA-23c5-xmqv-rm74"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through dev tooling dependencies; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-3ppc-4f35-3m26"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through dev tooling dependencies; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-7r86-cg39-jmmj"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through dev tooling dependencies; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-9wv6-86v2-598j"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected path-to-regexp versions."
+
+[[IgnoredVulns]]
+id = "GHSA-27v5-c462-wpq7"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected path-to-regexp versions."
+
+[[IgnoredVulns]]
+id = "GHSA-j3q9-mxjg-w52f"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected path-to-regexp versions."
+
+[[IgnoredVulns]]
+id = "GHSA-fm4j-4xhm-xpwx"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; no fixed sandbox release is available."
+
+[[IgnoredVulns]]
+id = "GHSA-gc25-3vc5-2jf9"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; no fixed sandbox release is available."
+
+[[IgnoredVulns]]
+id = "GHSA-v3rj-xjv7-4jmq"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins smol-toml 1.5.2."
+
+[[IgnoredVulns]]
+id = "GHSA-p36q-q72m-gchr"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins srvx 0.8.9."
+
+[[IgnoredVulns]]
+id = "GHSA-34x7-hfp2-rc4v"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through optional native build tooling or Vercel CLI internals; not included in the published package."
+
+[[IgnoredVulns]]
+id = "GHSA-83g3-92jg-28cx"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through optional native build tooling or Vercel CLI internals; not included in the published package."
+
+[[IgnoredVulns]]
+id = "GHSA-8qq5-rm4j-mr97"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through optional native build tooling or Vercel CLI internals; not included in the published package."
+
+[[IgnoredVulns]]
+id = "GHSA-9ppj-qmqm-q256"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through optional native build tooling or Vercel CLI internals; not included in the published package."
+
+[[IgnoredVulns]]
+id = "GHSA-qffp-2rhf-9h96"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through optional native build tooling or Vercel CLI internals; not included in the published package."
+
+[[IgnoredVulns]]
+id = "GHSA-r6q2-hw4h-h46w"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through optional native build tooling or Vercel CLI internals; not included in the published package."
+
+[[IgnoredVulns]]
+id = "GHSA-2mjp-6q6p-2qxm"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected undici versions."
+
+[[IgnoredVulns]]
+id = "GHSA-4992-7rv2-5pvq"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected undici versions."
+
+[[IgnoredVulns]]
+id = "GHSA-c76h-2ccp-4975"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected undici versions."
+
+[[IgnoredVulns]]
+id = "GHSA-cxrh-j4jr-qwg3"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected undici versions."
+
+[[IgnoredVulns]]
+id = "GHSA-g9mf-h72j-4rw9"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected undici versions."
+
+[[IgnoredVulns]]
+id = "GHSA-v9p9-hfj2-hcw8"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected undici versions."
+
+[[IgnoredVulns]]
+id = "GHSA-vrm6-8vpv-qv8q"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the Vercel CLI used for release-time docs deployment; upstream pins affected undici versions."
+
+[[IgnoredVulns]]
+id = "GHSA-4w7w-66w2-5vf9"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the VitePress docs dev server; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-m95q-7qp3-xv42"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the packlint development CLI; not included in the published es-toolkit package."
