@@ -14,8 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Check broken link
-        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
+      - run: corepack enable
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
-          args: --verbose --no-progress --exclude '^https://www\.npmjs\.com/package/es-toolkit$' ${{ github.event.inputs.url || 'https://es-toolkit.dev' }}
-          fail: true
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - run: yarn install
+      - name: Check broken link
+        env:
+          url: ${{ github.event.inputs.url || 'https://es-toolkit.dev' }}
+        run: yarn blc $url --ro

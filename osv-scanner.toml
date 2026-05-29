@@ -142,3 +142,53 @@ reason = "Only reachable through the VitePress docs dev server; not included in 
 id = "GHSA-m95q-7qp3-xv42"
 ignoreUntil = 2026-11-29
 reason = "Only reachable through the packlint development CLI; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-fjxv-7rqg-78g4"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the broken-link-checker development CLI used by CI; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-6rw7-vpxm-498p"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the broken-link-checker development CLI used by CI; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-p8p7-x288-28g6"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the broken-link-checker development CLI used by CI; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-6g33-8w2q-4hxv"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the broken-link-checker development CLI used by CI; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-c2qf-rxjj-qqgw"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the broken-link-checker development CLI used by CI; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-52f5-9888-hmc6"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through development CLIs such as broken-link-checker or changesets; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-ph9p-34f9-6g65"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through development CLIs such as broken-link-checker or changesets; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-72xf-g2v4-qvf3"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the broken-link-checker development CLI used by CI; not included in the published es-toolkit package."
+
+[[IgnoredVulns]]
+id = "GHSA-mgfv-m47x-4wqp"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the broken-link-checker development CLI used by CI; useragent has no fixed release available."
+
+[[IgnoredVulns]]
+id = "GHSA-w5hq-g745-h8pq"
+ignoreUntil = 2026-11-29
+reason = "Only reachable through the broken-link-checker development CLI used by CI; not included in the published es-toolkit package."
