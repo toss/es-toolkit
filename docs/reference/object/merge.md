@@ -74,7 +74,7 @@ console.log(result);
 // Output: { a: [1, 2, 3] }
 ```
 
-## Demo
+## Try It
 
 ::: sandpack
 

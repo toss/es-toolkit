@@ -48,7 +48,7 @@ reverseString('a-b-c'); // 'c-b-a'
 
 (`string`): 文字順序が反転した新しい文字列を返します。
 
-## デモ
+## 使用例
 
 ::: sandpack
 
