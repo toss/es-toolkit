@@ -1,6 +1,6 @@
 # isNumber
 
-检查给定值是否为原始数字（primitive number）类型。
+检查给定值是否为数字类型。
 
 ```typescript
 const result = isNumber(value);
@@ -10,9 +10,7 @@ const result = isNumber(value);
 
 ### `isNumber(value)`
 
-当您想检查值是否为原始数字时使用 `isNumber`。
-
-像 `new Number(42)` 这样被包装的 `Number` 对象会返回 `false`，这与 `isString`、`isBoolean` 和 `isSymbol` 的行为保持一致。
+当您想检查值是否为数字时使用 `isNumber`。
 
 ```typescript
 import { isNumber } from 'es-toolkit/predicate';
@@ -48,8 +46,8 @@ function processValue(value: unknown) {
 
 #### 参数
 
-- `value` (`unknown`): 要检查是否为原始数字类型的值。
+- `value` (`unknown`): 要检查是否为数字类型的值。
 
 #### 返回值
 
-(`value is number`): 如果值为原始数字则返回 `true`，否则返回 `false`。
+(`value is number`): 如果值为数字则返回 `true`，否则返回 `false`。

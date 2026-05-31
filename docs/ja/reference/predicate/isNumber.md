@@ -1,6 +1,6 @@
 # isNumber
 
-与えられた値がプリミティブ数値型かどうかを確認します。
+与えられた値が数値型かどうかを確認します。
 
 ```typescript
 const result = isNumber(value);
@@ -10,9 +10,7 @@ const result = isNumber(value);
 
 ### `isNumber(value)`
 
-値がプリミティブ数値かどうかを確認したい場合に `isNumber` を使用してください。
-
-`new Number(42)` のようなラップされた `Number` オブジェクトは `false` を返します。これは `isString`、`isBoolean`、`isSymbol` の動作と一貫しています。
+値が数値かどうかを確認したい場合に `isNumber` を使用してください。
 
 ```typescript
 import { isNumber } from 'es-toolkit';
@@ -48,8 +46,8 @@ function processValue(value: unknown) {
 
 #### パラメータ
 
-- `value` (`unknown`): プリミティブ数値型かどうかを確認する値です。
+- `value` (`unknown`): 数値型かどうかを確認する値です。
 
 #### 戻り値
 
-(`value is number`): 値がプリミティブ数値の場合は `true`、そうでなければ `false` を返します。
+(`value is number`): 値が数値の場合は `true`、そうでなければ `false` を返します。

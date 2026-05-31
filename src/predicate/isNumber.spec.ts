@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { isNumber } from './isNumber';
 
 describe('isNumber', () => {
-  it('returns true if the value is a primitive number', () => {
+  it('returns true if the value is a number', () => {
     expect(isNumber(0)).toBe(true);
     expect(isNumber(123)).toBe(true);
     expect(isNumber(-456)).toBe(true);
@@ -12,7 +12,7 @@ describe('isNumber', () => {
     expect(isNumber(NaN)).toBe(true);
   });
 
-  it('returns false if the value is not a primitive number', () => {
+  it('returns false if the value is not a number', () => {
     expect(isNumber('123')).toBe(false);
     expect(isNumber(true)).toBe(false);
     expect(isNumber(false)).toBe(false);
