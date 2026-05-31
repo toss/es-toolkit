@@ -54,7 +54,7 @@ startCase('12abc 12ABC'); // '12 Abc 12 Abc'
 
 (`string`): 返回一个新字符串,每个单词的首字母大写并用空格连接。
 
-## 演示
+## 试一试
 
 ::: sandpack
 

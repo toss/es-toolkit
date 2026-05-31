@@ -131,6 +131,8 @@ export function reduce(
   iteratee: (accumulator: any, value: any, index: any, collection: any) => any = identity,
   accumulator?: any
 ): any {
+  const hasAccumulator = arguments.length >= 3;
+
   if (!collection) {
     return accumulator;
   }
@@ -141,14 +143,14 @@ export function reduce(
   if (isArrayLike(collection)) {
     keys = range(0, collection.length);
 
-    if (accumulator == null && collection.length > 0) {
+    if (!hasAccumulator && collection.length > 0) {
       accumulator = (collection as ArrayLike<any>)[0];
       startIndex += 1;
     }
   } else {
     keys = Object.keys(collection);
 
-    if (accumulator == null) {
+    if (!hasAccumulator && keys.length > 0) {
       accumulator = (collection as any)[keys[0]];
       startIndex += 1;
     }

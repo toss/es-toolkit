@@ -14,12 +14,14 @@
  * const value1 = 123;
  * const value2 = 'abc';
  * const value3 = true;
+ * const value4 = new Number(42);
  *
  * console.log(isNumber(value1)); // true
  * console.log(isNumber(value2)); // false
  * console.log(isNumber(value3)); // false
+ * console.log(isNumber(value4)); // false
  *
  */
 export function isNumber(x: unknown): x is number {
-  return typeof x === 'number' || x instanceof Number;
+  return typeof x === 'number';
 }

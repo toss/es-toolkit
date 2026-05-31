@@ -84,12 +84,7 @@
               'es-toolkit': 'latest',
             },
           }"
-          :files="{
-            '/index.ts': {
-              code: currentCode,
-              active: true,
-            },
-          }"
+          :files="sandpackFiles"
         />
       </div>
     </div>
@@ -232,7 +227,9 @@ const openCategories = ref(new Set(['array']));
 const sandpackKey = ref(0);
 
 const docUrl = computed(() => {
-  if (!selectedFunction.value || !selectedCategory.value) return null;
+  if (!selectedFunction.value || !selectedCategory.value) {
+    return null;
+  }
   const locale = lang.value;
   const prefix = locale && locale !== 'en' && locale !== 'root' ? `/${locale}` : '';
   return `${prefix}/reference/${selectedCategory.value}/${selectedFunction.value}`;
@@ -304,6 +301,13 @@ console.log('groupBy:', grouped);
 `;
 
 const currentCode = ref(defaultCode);
+
+const sandpackFiles = computed(() => ({
+  '/index.ts': {
+    code: currentCode.value,
+    active: true,
+  },
+}));
 
 function selectFunction(category, fn) {
   const selectKey = `${category.name}/${fn}`;
