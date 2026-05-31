@@ -19,12 +19,16 @@ function toggle() {
 
 function select(option: FlavorSpec) {
   open.value = false;
-  if (option.value === currentFlavor.value.value) return;
+  if (option.value === currentFlavor.value.value) {
+    return;
+  }
   router.go(flavorIntroPath({ flavor: option, localePrefix: localePrefix.value }));
 }
 
 function onDocumentPointerDown(event: PointerEvent) {
-  if (!open.value || !root.value) return;
+  if (!open.value || !root.value) {
+    return;
+  }
   if (!root.value.contains(event.target as Node)) {
     open.value = false;
   }

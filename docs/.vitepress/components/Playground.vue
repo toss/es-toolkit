@@ -30,9 +30,10 @@
     </div>
     <div class="playground-editor">
       <div class="playground-editor-header">
-        <span class="playground-editor-title">{{
-          selectedCategoryLabel === '' ? t.selectFunction : `${selectedCategoryLabel}/${selectedFunction}`
-        }}</span>
+        <a v-if="selectedFunction && docUrl" :href="docUrl" class="playground-editor-title playground-editor-title-link"
+          >{{ selectedCategoryLabel }}/{{ selectedFunction }}</a
+        >
+        <span v-else class="playground-editor-title">{{ t.selectFunction }}</span>
         <div class="playground-header-actions">
           <button
             v-if="currentDoc"
@@ -83,12 +84,7 @@
               'es-toolkit': 'latest',
             },
           }"
-          :files="{
-            '/index.ts': {
-              code: currentCode,
-              active: true,
-            },
-          }"
+          :files="sandpackFiles"
         />
       </div>
     </div>
@@ -230,6 +226,15 @@ const selectedCategoryLabel = ref('');
 const openCategories = ref(new Set(['array']));
 const sandpackKey = ref(0);
 
+const docUrl = computed(() => {
+  if (!selectedFunction.value || !selectedCategory.value) {
+    return null;
+  }
+  const locale = lang.value;
+  const prefix = locale && locale !== 'en' && locale !== 'root' ? `/${locale}` : '';
+  return `${prefix}/reference/${selectedCategory.value}/${selectedFunction.value}`;
+});
+
 const currentDoc = computed(() => {
   if (!selectedFunction.value) {
     return null;
@@ -296,6 +301,13 @@ console.log('groupBy:', grouped);
 `;
 
 const currentCode = ref(defaultCode);
+
+const sandpackFiles = computed(() => ({
+  '/index.ts': {
+    code: currentCode.value,
+    active: true,
+  },
+}));
 
 function selectFunction(category, fn) {
   const selectKey = `${category.name}/${fn}`;
@@ -454,6 +466,16 @@ function resetCode() {
   font-weight: 600;
   color: var(--vp-c-text-1);
   font-family: var(--vp-font-family-mono);
+}
+
+.playground-editor-title-link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.15s;
+}
+
+.playground-editor-title-link:hover {
+  color: var(--vp-c-brand-1);
 }
 
 .playground-header-actions {

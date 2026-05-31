@@ -33,6 +33,13 @@ describe('isEmpty', () => {
     expect(isEmpty('a')).toBe(false);
   });
 
+  it('should return `false` for functions with own enumerable properties', () => {
+    function transaction() {}
+    transaction.commit = () => {};
+
+    expect(isEmpty(transaction)).toBe(false);
+  });
+
   it('should work with an object that has a `length` property', () => {
     expect(isEmpty({ length: 0 })).toBe(false);
   });
