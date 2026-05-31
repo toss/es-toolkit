@@ -26,6 +26,7 @@ isNumber('123'); // false
 isNumber(true); // false
 isNumber(null); // false
 isNumber(undefined); // false
+isNumber(new Number(42)); // false
 ```
 
 在 TypeScript 中作为类型守卫使用时特别有用。
