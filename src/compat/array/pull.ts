@@ -44,7 +44,7 @@ export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ?
  * This function changes `arr` in place.
  * If you want to remove values without modifying the original array, use `difference`.
  *
- * @template T, U
+ * @template T
  * @param {T[]} arr - The array to modify.
  * @param {...unknown[]} valuesToRemove - The values to remove from the array.
  * @returns {T[]} The modified array with the specified values removed.
