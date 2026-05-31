@@ -172,6 +172,8 @@ export function reduceRight(
   iteratee: (accumulator: any, value: any, index: any, collection: any) => any = identity,
   accumulator?: any
 ): any {
+  const hasAccumulator = arguments.length >= 3;
+
   if (!collection) {
     return accumulator;
   }
@@ -182,7 +184,7 @@ export function reduceRight(
   if (isArrayLike(collection)) {
     keys = range(0, collection.length).reverse();
 
-    if (accumulator == null && collection.length > 0) {
+    if (!hasAccumulator && collection.length > 0) {
       accumulator = (collection as ArrayLike<any>)[collection.length - 1];
       startIndex = 1;
     } else {
@@ -191,7 +193,7 @@ export function reduceRight(
   } else {
     keys = Object.keys(collection).reverse();
 
-    if (accumulator == null) {
+    if (!hasAccumulator && keys.length > 0) {
       accumulator = (collection as any)[keys[0]];
       startIndex = 1;
     } else {

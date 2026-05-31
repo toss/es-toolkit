@@ -54,6 +54,39 @@ describe('reduce', () => {
     expect(actual).toBe(undefined);
   });
 
+  it('should respect nullish initial `accumulator` values', () => {
+    const array = [1, 2, 3];
+    const object = { a: 1, b: 2 };
+
+    for (const accumulator of [null, undefined]) {
+      let args: unknown[] | undefined;
+
+      reduce(
+        array,
+        function () {
+          // eslint-disable-next-line
+          args || (args = Array.prototype.slice.call(arguments));
+        },
+        accumulator
+      );
+
+      expect(args).toEqual([accumulator, 1, 0, array]);
+
+      args = undefined;
+
+      reduce(
+        object,
+        function () {
+          // eslint-disable-next-line
+          args || (args = Array.prototype.slice.call(arguments));
+        },
+        accumulator
+      );
+
+      expect(args).toEqual([accumulator, 1, 'a', object]);
+    }
+  });
+
   it(`should return \`undefined\` for empty collections when no \`accumulator\` is given (test in IE > 9 and modern browsers)`, () => {
     const array: any[] = [];
     const object = { 0: 1, length: 0 };

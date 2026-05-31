@@ -74,7 +74,7 @@ console.log(result);
 // 戻り値: { a: [1, 2, 3] }
 ```
 
-## デモ
+## 使用例
 
 ::: sandpack
 
