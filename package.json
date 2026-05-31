@@ -14,6 +14,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./array": "./src/array/index.ts",
+    "./bigint": "./src/bigint/index.ts",
     "./compat": "./src/compat/index.ts",
     "./error": "./src/error/index.ts",
     "./function": "./src/function/index.ts",
@@ -33,6 +34,7 @@
     "compat",
     "*.d.ts",
     "array.js",
+    "bigint.js",
     "compat.js",
     "error.js",
     "function.js",
@@ -123,6 +125,16 @@
         "require": {
           "types": "./dist/array/index.d.ts",
           "default": "./dist/array/index.js"
+        }
+      },
+      "./bigint": {
+        "import": {
+          "types": "./dist/bigint/index.d.mts",
+          "default": "./dist/bigint/index.mjs"
+        },
+        "require": {
+          "types": "./dist/bigint/index.d.ts",
+          "default": "./dist/bigint/index.js"
         }
       },
       "./compat": {

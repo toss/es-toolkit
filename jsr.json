@@ -3,6 +3,7 @@
   "version": "1.47.0",
   "exports": {
     ".": "./src/index.ts",
+    "./bigint": "./src/bigint/index.ts",
     "./compat": "./src/compat/index.ts"
   },
   "publish": {
