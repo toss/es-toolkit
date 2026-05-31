@@ -1,4 +1,4 @@
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { type Banner, EN_BANNER_DATA, KO_BANNER_DATA } from '../data/bannerData';
 
 export function useBanner() {
@@ -52,6 +52,8 @@ export function useBanner() {
     }
   };
 
+  let originalPushState: typeof history.pushState | null = null;
+
   onMounted(() => {
     updateCurrentLang();
 
@@ -65,19 +67,21 @@ export function useBanner() {
 
     window.addEventListener('popstate', updateCurrentLang);
 
-    const originalPushState = history.pushState;
+    originalPushState = history.pushState;
     history.pushState = function (...args) {
-      originalPushState.apply(this, args);
+      originalPushState!.apply(this, args);
       updateCurrentLang();
     };
+  });
 
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-      window.removeEventListener('popstate', updateCurrentLang);
+  onUnmounted(() => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    window.removeEventListener('popstate', updateCurrentLang);
+    if (originalPushState) {
       history.pushState = originalPushState;
-    };
+    }
   });
 
   const setBannerIndex = (index: number) => {
