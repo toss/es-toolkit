@@ -6,6 +6,8 @@ on:
   workflow_dispatch:
     inputs: { url: { description: 'URL to check', required: false, default: 'https://es-toolkit.dev' } }
 
+permissions: read-all
+
 jobs:
   broken-link-checker:
     if: github.repository == 'toss/es-toolkit'
