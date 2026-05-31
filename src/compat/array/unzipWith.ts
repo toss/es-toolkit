@@ -8,9 +8,9 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * elements of each group: (...group).
  *
  * @template T, R
- * @param {ArrayLike<ArrayLike<T>> | null | undefined} array - The array of grouped elements to process.
- * @param {(...values: T[]) => R} iteratee - The function to combine regrouped values.
- * @returns {R[]} Returns the new array of regrouped elements.
+ * @param array - The array of grouped elements to process.
+ * @param iteratee - The function to combine regrouped values.
+ * @returns Returns the new array of regrouped elements.
  *
  * @example
  * unzipWith([[1, 10, 100], [2, 20, 200]], (a, b) => a + b);
@@ -26,8 +26,8 @@ export function unzipWith<T, R>(
  * how regrouped values should be combined.
  *
  * @template T
- * @param {ArrayLike<ArrayLike<T>> | null | undefined} array - The array of grouped elements to process.
- * @returns {T[][]} Returns the new array of regrouped elements.
+ * @param array - The array of grouped elements to process.
+ * @returns Returns the new array of regrouped elements.
  *
  * @example
  * unzipWith([[1, 10, 100], [2, 20, 200]]);
@@ -41,10 +41,10 @@ export function unzipWith<T>(array: ArrayLike<ArrayLike<T>> | null | undefined):
  * If the array is `null` or `undefined`, returns an empty array.
  *
  * @template T
- * @param {T[][] | ArrayLike<ArrayLike<T>> | null | undefined} array - The nested array to unzip. This is an array of arrays,
+ * @param array - The nested array to unzip. This is an array of arrays,
  * where each inner array contains elements to be unzipped.
- * @param {(...args: any[]) => unknown} iteratee - A function to transform the unzipped elements.
- * @returns {any[]} A new array of unzipped and transformed elements.
+ * @param iteratee - A function to transform the unzipped elements.
+ * @returns A new array of unzipped and transformed elements.
  *
  * @example
  * const nestedArray = [[1, 2], [3, 4], [5, 6]];

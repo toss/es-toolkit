@@ -7,9 +7,9 @@ type CloneWithCustomizer<T, R> = (value: T, key: number | string | undefined, ob
  *
  * @template T - The type of the value to clone.
  * @template R - The result type extending primitive types or objects.
- * @param {T} value - The value to clone.
- * @param {CloneWithCustomizer<T, R>} customizer - The function to customize cloning.
- * @returns {R} Returns the cloned value.
+ * @param value - The value to clone.
+ * @param customizer - The function to customize cloning.
+ * @returns Returns the cloned value.
  *
  * @example
  * const obj = { a: 1, b: 2 };
@@ -30,9 +30,9 @@ export function cloneWith<T, R extends object | string | number | boolean | null
  *
  * @template T - The type of the value to clone.
  * @template R - The result type.
- * @param {T} value - The value to clone.
- * @param {CloneWithCustomizer<T, R | undefined>} customizer - The function to customize cloning.
- * @returns {R | T} Returns the cloned value or the customized result.
+ * @param value - The value to clone.
+ * @param customizer - The function to customize cloning.
+ * @returns Returns the cloned value or the customized result.
  *
  * @example
  * const obj = { a: 1, b: 2 };
@@ -49,8 +49,8 @@ export function cloneWith<T, R>(value: T, customizer: CloneWithCustomizer<T, R |
  * Creates a shallow clone of a value.
  *
  * @template T - The type of the value to clone.
- * @param {T} value - The value to clone.
- * @returns {T} Returns the cloned value.
+ * @param value - The value to clone.
+ * @returns Returns the cloned value.
  *
  * @example
  * const obj = { a: 1, b: 2 };
@@ -68,9 +68,9 @@ export function cloneWith<T>(value: T): T;
  * If no customizer is provided, it behaves like `clone`.
  *
  * @template T - The type of the object.
- * @param {T} value - The value to clone.
- * @param {Function} [customizer] - The function to customize cloning.
- * @returns {T} - A shallow clone of the given object.
+ * @param value - The value to clone.
+ * @param [customizer] - The function to customize cloning.
+ * @returns A shallow clone of the given object.
  *
  * @example
  * // Clone a primitive values

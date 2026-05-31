@@ -2,8 +2,8 @@
  * Iterates over elements of 'arr' from right to left and invokes 'callback' for each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to iterate over.
- * @param {(value: T, index: number, arr: T[]) => void} callback - The function invoked per iteration.
+ * @param arr - The array to iterate over.
+ * @param callback - The function invoked per iteration.
  * The callback function receives three arguments:
  *  - 'value': The current element being processed in the array.
  *  - 'index': The index of the current element being processed in the array.
@@ -25,8 +25,8 @@ export function forEachRight<T>(arr: T[], callback: (value: T, index: number, ar
  * Iterates over elements of 'arr' from right to left and invokes 'callback' for each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to iterate over.
- * @param {(value: T, index: number, arr: T[]) => void} callback - The function invoked per iteration.
+ * @param arr - The array to iterate over.
+ * @param callback - The function invoked per iteration.
  * The callback function receives three arguments:
  *  - 'value': The current element being processed in the array.
  *  - 'index': The index of the current element being processed in the array.
@@ -52,8 +52,8 @@ export function forEachRight<T>(
  * Iterates over elements of 'arr' from right to left and invokes 'callback' for each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array to iterate over.
- * @param {(value: T, index: number, arr: T[]) => void} callback - The function invoked per iteration.
+ * @param arr - The array to iterate over.
+ * @param callback - The function invoked per iteration.
  * The callback function receives three arguments:
  *  - 'value': The current element being processed in the array.
  *  - 'index': The index of the current element being processed in the array.

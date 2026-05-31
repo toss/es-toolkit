@@ -7,9 +7,9 @@ import { isString } from '../predicate/isString.ts';
 /**
  * Fills an array with a value.
  * @template T
- * @param {any[] | null | undefined} array - The array to fill
- * @param {T} value - The value to fill array with
- * @returns {T[]} Returns the filled array
+ * @param array - The array to fill
+ * @param value - The value to fill array with
+ * @returns Returns the filled array
  * @example
  * fill([1, 2, 3], 'a')
  * // => ['a', 'a', 'a']
@@ -19,9 +19,9 @@ export function fill<T>(array: any[] | null | undefined, value: T): T[];
 /**
  * Fills an array-like object with a value.
  * @template T, AL
- * @param {RejectReadonly<AL> | null | undefined} array - The array-like object to fill
- * @param {T} value - The value to fill array with
- * @returns {ArrayLike<T>} Returns the filled array-like object
+ * @param array - The array-like object to fill
+ * @param value - The value to fill array with
+ * @returns Returns the filled array-like object
  * @example
  * fill({ length: 3 }, 2)
  * // => { 0: 2, 1: 2, 2: 2, length: 3 }
@@ -34,11 +34,11 @@ export function fill<T, AL extends MutableList<any>>(
 /**
  * Fills an array with a value from start up to end.
  * @template T, U
- * @param {U[] | null | undefined} array - The array to fill
- * @param {T} value - The value to fill array with
- * @param {number} [start=0] - The start position
- * @param {number} [end=array.length] - The end position
- * @returns {Array<T | U>} Returns the filled array
+ * @param array - The array to fill
+ * @param value - The value to fill array with
+ * @param [start=0] - The start position
+ * @param [end=array.length] - The end position
+ * @returns Returns the filled array
  * @example
  * fill([1, 2, 3], 'a', 1, 2)
  * // => [1, 'a', 3]
@@ -48,11 +48,11 @@ export function fill<T, U>(array: U[] | null | undefined, value: T, start?: numb
 /**
  * Fills an array-like object with a value from start up to end.
  * @template T, U
- * @param {U extends readonly any[] ? never : U | null | undefined} array - The array-like object to fill
- * @param {T} value - The value to fill array with
- * @param {number} [start=0] - The start position
- * @param {number} [end=array.length] - The end position
- * @returns {ArrayLike<T | U[0]>} Returns the filled array-like object
+ * @param array - The array-like object to fill
+ * @param value - The value to fill array with
+ * @param [start=0] - The start position
+ * @param [end=array.length] - The end position
+ * @returns Returns the filled array-like object
  * @example
  * fill({ 0: 1, 1: 2, 2: 3, length: 3 }, 'a', 1, 2)
  * // => { 0: 1, 1: 'a', 2: 3, length: 3 }
@@ -72,11 +72,11 @@ export function fill<T, U extends MutableList<any>>(
  * entire array.
  *
  * @template T, U
- * @param {ArrayLike<T | U> | null | undefined} array - The array to fill.
- * @param {U} value - The value to fill the array with.
- * @param {number} [start=0] - The start position. Defaults to 0.
- * @param {number} [end=arr.length] - The end position. Defaults to the array's length.
- * @returns {ArrayLike<T | U>} The array with the filled values.
+ * @param array - The array to fill.
+ * @param value - The value to fill the array with.
+ * @param [start=0] - The start position. Defaults to 0.
+ * @param [end=arr.length] - The end position. Defaults to the array's length.
+ * @returns The array with the filled values.
  *
  * @example
  * fill([1, 2, 3], 'a');

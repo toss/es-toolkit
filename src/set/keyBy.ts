@@ -8,9 +8,9 @@
  *
  * @template T - The type of elements in the Set.
  * @template K - The type of keys to produce in the returned Map.
- * @param {Set<T>} set - The set of elements to be mapped.
- * @param {(value: T, value2: T, set: Set<T>) => K} getKeyFromValue - A function that generates a key from a value.
- * @returns {Map<K, T>} A Map where the generated keys are mapped to each element's value.
+ * @param set - The set of elements to be mapped.
+ * @param getKeyFromValue - A function that generates a key from a value.
+ * @returns A Map where the generated keys are mapped to each element's value.
  *
  * @example
  * const set = new Set([

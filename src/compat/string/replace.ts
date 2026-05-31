@@ -11,7 +11,7 @@ export function replace(pattern: RegExp | string, replacement: ReplaceFunction |
  * @param {} target - The target string.
  * @param {} pattern - The pattern to match.
  * @param {} replacement - The replacement string or a function that returns the replacement string.
- * @returns {string} The new string with the matched pattern replaced.
+ * @returns The new string with the matched pattern replaced.
  *
  * @example
  * replace('abcde', 'de', '123'); // 'abc123'

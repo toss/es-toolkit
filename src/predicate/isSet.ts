@@ -3,8 +3,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Set`.
  *
- * @param {unknown} value The value to check if it is a `Set`.
- * @returns {value is Set<any>} Returns `true` if `value` is a `Set`, else `false`.
+ * @param value The value to check if it is a `Set`.
+ * @returns Returns `true` if `value` is a `Set`, else `false`.
  *
  * @example
  * const value1 = new Set();

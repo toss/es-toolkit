@@ -9,9 +9,9 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  * The order of grouped values is determined by the order they occur in collection.
  *
  * @template T - The type of elements in the array-like collection
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over
- * @param {ValueIteratee<T>} [iteratee=identity] - The iteratee to transform keys
- * @returns {Record<string, T[]>} Returns the composed aggregate object
+ * @param collection - The collection to iterate over
+ * @param [iteratee=identity] - The iteratee to transform keys
+ * @returns Returns the composed aggregate object
  *
  * @example
  * groupBy([6.1, 4.2, 6.3], Math.floor)
@@ -30,9 +30,9 @@ export function groupBy<T>(
  * The order of grouped values is determined by the order they occur in collection.
  *
  * @template T - The type of the object
- * @param {T | null | undefined} collection - The object to iterate over
- * @param {ValueIteratee<T[keyof T]>} [iteratee=identity] - The iteratee to transform keys
- * @returns {Record<string, Array<T[keyof T]>>} Returns the composed aggregate object
+ * @param collection - The object to iterate over
+ * @param [iteratee=identity] - The iteratee to transform keys
+ * @returns Returns the composed aggregate object
  *
  * @example
  * groupBy({ a: 6.1, b: 4.2, c: 6.3 }, Math.floor)
@@ -52,13 +52,13 @@ export function groupBy<T extends object>(
  *
  * @template T - The type of elements in the array or values in the object.
  * @template K - The type of keys.
- * @param {ArrayLike<T> | Record<any, T> | null | undefined} source - The collection to group.
- * @param {Function | PropertyKey | Array | Object} [_getKeyFromItem] - The iteratee to transform keys.
+ * @param source - The collection to group.
+ * @param [_getKeyFromItem] - The iteratee to transform keys.
  *   - If a function is provided, it's invoked for each element in the collection.
  *   - If a property name (string) is provided, that property of each element is used as the key.
  *   - If a property-value pair (array) is provided, elements with matching property values are used.
  *   - If a partial object is provided, elements with matching properties are used.
- * @returns {Record<K, T>} An object where each key is associated with an array of elements that
+ * @returns An object where each key is associated with an array of elements that
  * share that key.
  *
  * @example

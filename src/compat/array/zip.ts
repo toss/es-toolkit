@@ -10,9 +10,9 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * with undefined values for missing elements.
  *
  * @template T, U
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @param {ArrayLike<U>} arr2 - The second array to zip.
- * @returns {Array<[T | undefined, U | undefined]>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -25,9 +25,9 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * the second of which contains the second elements of the given arrays, and so on.
  *
  * @template T, U
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @param {ArrayLike<U>} arr2 - The second array to zip.
- * @returns {Array<[T | undefined, U | undefined]>} Returns the new array of grouped elements.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @returns Returns the new array of grouped elements.
  *
  * @example
  * zip([1, 2], ['a', 'b']);
@@ -44,10 +44,10 @@ export function zip<T, U>(arr1: ArrayLike<T>, arr2: ArrayLike<U>): Array<[T | un
  * with undefined values for missing elements.
  *
  * @template T, U, V
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @param {ArrayLike<U>} arr2 - The second array to zip.
- * @param {ArrayLike<V>} arr3 - The third array to zip.
- * @returns {Array<[T | undefined, U | undefined, V | undefined]>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @param arr3 - The third array to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -61,10 +61,10 @@ export function zip<T, U>(arr1: ArrayLike<T>, arr2: ArrayLike<U>): Array<[T | un
  * the second of which contains the second elements of the given arrays, and so on.
  *
  * @template T, U, V
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @param {ArrayLike<U>} arr2 - The second array to zip.
- * @param {ArrayLike<V>} arr3 - The third array to zip.
- * @returns {Array<[T | undefined, U | undefined, V | undefined]>} Returns the new array of grouped elements.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @param arr3 - The third array to zip.
+ * @returns Returns the new array of grouped elements.
  *
  * @example
  * zip([1, 2], ['a', 'b'], [true, false]);
@@ -84,11 +84,11 @@ export function zip<T, U, V>(
  * with undefined values for missing elements.
  *
  * @template T, U, V, W
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @param {ArrayLike<U>} arr2 - The second array to zip.
- * @param {ArrayLike<V>} arr3 - The third array to zip.
- * @param {ArrayLike<W>} arr4 - The fourth array to zip.
- * @returns {Array<[T | undefined, U | undefined, V | undefined, W | undefined]>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @param arr3 - The third array to zip.
+ * @param arr4 - The fourth array to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -103,11 +103,11 @@ export function zip<T, U, V>(
  * the second of which contains the second elements of the given arrays, and so on.
  *
  * @template T, U, V, W
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @param {ArrayLike<U>} arr2 - The second array to zip.
- * @param {ArrayLike<V>} arr3 - The third array to zip.
- * @param {ArrayLike<W>} arr4 - The fourth array to zip.
- * @returns {Array<[T | undefined, U | undefined, V | undefined, W | undefined]>} Returns the new array of grouped elements.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @param arr3 - The third array to zip.
+ * @param arr4 - The fourth array to zip.
+ * @returns Returns the new array of grouped elements.
  *
  * @example
  * zip([1], ['a'], [true], [null]);
@@ -129,12 +129,12 @@ export function zip<T, U, V, W>(
  * with undefined values for missing elements.
  *
  * @template T, U, V, W
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @param {ArrayLike<U>} arr2 - The second array to zip.
- * @param {ArrayLike<V>} arr3 - The third array to zip.
- * @param {ArrayLike<W>} arr4 - The fourth array to zip.
- * @param {ArrayLike<X>} arr5 - The fifth array to zip.
- * @returns {Array<[T | undefined, U | undefined, V | undefined, W | undefined, X | undefined]>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @param arr3 - The third array to zip.
+ * @param arr4 - The fourth array to zip.
+ * @param arr5 - The fifth array to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -150,12 +150,12 @@ export function zip<T, U, V, W>(
  * the second of which contains the second elements of the given arrays, and so on.
  *
  * @template T, U, V, W, X
- * @param {ArrayLike<T>} arr1 - The first array to zip.
- * @param {ArrayLike<U>} arr2 - The second array to zip.
- * @param {ArrayLike<V>} arr3 - The third array to zip.
- * @param {ArrayLike<W>} arr4 - The fourth array to zip.
- * @param {ArrayLike<X>} arr5 - The fifth array to zip.
- * @returns {Array<[T | undefined, U | undefined, V | undefined, W | undefined, X | undefined]>} Returns the new array of grouped elements.
+ * @param arr1 - The first array to zip.
+ * @param arr2 - The second array to zip.
+ * @param arr3 - The third array to zip.
+ * @param arr4 - The fourth array to zip.
+ * @param arr5 - The fifth array to zip.
+ * @returns Returns the new array of grouped elements.
  *
  * @example
  * zip([1], ['a'], [true], [null], [undefined]);
@@ -178,8 +178,8 @@ export function zip<T, U, V, W, X>(
  * with undefined values for missing elements.
  *
  * @template T
- * @param {Array<ArrayLike<any> | null | undefined>} arrays - The arrays to zip.
- * @returns {Array<Array<T | undefined>>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arrays - The arrays to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];
@@ -195,8 +195,8 @@ export function zip<T, U, V, W, X>(
  * the second of which contains the second elements of the given arrays, and so on.
  *
  * @template T
- * @param {...Array<ArrayLike<T> | null | undefined>} arrays - The arrays to process.
- * @returns {Array<Array<T | undefined>>} Returns the new array of grouped elements.
+ * @param arrays - The arrays to process.
+ * @returns Returns the new array of grouped elements.
  *
  * @example
  * zip([1, 2], ['a', 'b'], [true, false]);
@@ -213,8 +213,8 @@ export function zip<T>(...arrays: Array<ArrayLike<T> | null | undefined>): Array
  * with undefined values for missing elements.
  *
  * @template T
- * @param {Array<ArrayLike<any> | null | undefined>} arrays - The arrays to zip.
- * @returns {Array<Array<T | undefined>>} A new array of tuples containing the corresponding elements from the input arrays.
+ * @param arrays - The arrays to zip.
+ * @returns A new array of tuples containing the corresponding elements from the input arrays.
  *
  * @example
  * const arr1 = [1, 2, 3];

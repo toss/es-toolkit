@@ -7,8 +7,8 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * from a grouped array of elements and returns them as a new array.
  *
  * @template T - The type of elements in the nested array.
- * @param {T[][] | ArrayLike<ArrayLike<T>> | null | undefined} array - The nested array to unzip.
- * @returns {T[][]} A new array of unzipped elements.
+ * @param array - The nested array to unzip.
+ * @returns A new array of unzipped elements.
  *
  * @example
  * const zipped = [['a', true, 1],['b', false, 2]];

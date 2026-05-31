@@ -9,10 +9,10 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * Finds the index of the last element in the array that satisfies the predicate.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to search through.
- * @param {ListIterateeCustom<T, boolean>} [predicate] - The predicate function, partial object, property-value pair, or property name.
- * @param {number} [fromIndex] - The index to start searching from.
- * @returns {number} The index of the last matching element, or -1 if not found.
+ * @param array - The array to search through.
+ * @param [predicate] - The predicate function, partial object, property-value pair, or property name.
+ * @param [fromIndex] - The index to start searching from.
+ * @returns The index of the last matching element, or -1 if not found.
  *
  * @example
  * const users = [
@@ -43,10 +43,10 @@ export function findLastIndex<T>(
  * Finds the index of the last element in the array that satisfies the predicate.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arr - The array to search through.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The predicate function, partial object, property-value pair, or property name.
- * @param {number} [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
- * @returns {number} The index of the last matching element, or -1 if not found.
+ * @param arr - The array to search through.
+ * @param doesMatch - The predicate function, partial object, property-value pair, or property name.
+ * @param [fromIndex=arr.length - 1] - The index to start the search from, defaults to the last index of the array.
+ * @returns The index of the last matching element, or -1 if not found.
  *
  * @example
  * const items = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];

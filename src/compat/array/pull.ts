@@ -6,9 +6,9 @@ import { pull as pullToolkit } from '../../array/pull.ts';
  * **Note:** Unlike `_.without`, this method mutates `array`.
  *
  * @template T
- * @param {T[]} array - The array to modify.
- * @param {...T[]} values - The values to remove.
- * @returns {T[]} Returns `array`.
+ * @param array - The array to modify.
+ * @param values - The values to remove.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [1, 2, 3, 1, 2, 3];
@@ -25,9 +25,9 @@ export function pull<T>(array: T[], ...values: T[]): T[];
  * **Note:** Unlike `_.without`, this method mutates `array`.
  *
  * @template L
- * @param {L} array - The array to modify.
- * @param {...L[0][]} values - The values to remove.
- * @returns {L} Returns `array`.
+ * @param array - The array to modify.
+ * @param values - The values to remove.
+ * @returns Returns `array`.
  *
  * @example
  * var array = [1, 2, 3, 1, 2, 3];
@@ -45,9 +45,9 @@ export function pull<L extends ArrayLike<any>>(array: L extends readonly any[] ?
  * If you want to remove values without modifying the original array, use `difference`.
  *
  * @template T
- * @param {T[]} arr - The array to modify.
- * @param {...unknown[]} valuesToRemove - The values to remove from the array.
- * @returns {T[]} The modified array with the specified values removed.
+ * @param arr - The array to modify.
+ * @param valuesToRemove - The values to remove from the array.
+ * @returns The modified array with the specified values removed.
  *
  * @example
  * const numbers = [1, 2, 3, 4, 5, 2, 4];

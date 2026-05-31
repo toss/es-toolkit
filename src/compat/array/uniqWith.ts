@@ -14,9 +14,9 @@ type Comparator<T> = (a: T, b: T) => boolean;
  * The order of result values is determined by the order they appear in the input array.
  *
  * @template T - The type of elements in the array.
- * @param {ArrayLike<T> | null | undefined} arr  - The array to process.
- * @param {Comparator<T>} [comparator] - Optional function to compare elements for equality.
- * @returns {T[]} A new array with only unique values based on the comparator.
+ * @param arr  - The array to process.
+ * @param [comparator] - Optional function to compare elements for equality.
+ * @returns A new array with only unique values based on the comparator.
  *
  * @example
  * const array = [1, 2, 2, 3];

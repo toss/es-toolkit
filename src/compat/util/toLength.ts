@@ -6,8 +6,8 @@ import { clamp } from '../math/clamp.ts';
  *
  * It converts the given value to a number and floors it to an integer. If the value is less than `0`, it returns `0`. If the value exceeds `2^32 - 1`, it returns `2^32 - 1`.
  *
- * @param {unknown} value - The value to convert to a valid index.
- * @returns {number} The converted value.
+ * @param value - The value to convert to a valid index.
+ * @returns The converted value.
  *
  * @example
  * toLength(3.2)  // => 3

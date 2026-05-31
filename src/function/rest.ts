@@ -4,10 +4,10 @@
  * are grouped into an array, while the previous arguments are passed as individual elements.
  *
  * @template F - The type of the function being transformed.
- * @param {F} func - The function whose arguments are to be transformed.
- * @param {number} [startIndex=func.length - 1] - The index from which to start grouping the remaining arguments into an array.
+ * @param func - The function whose arguments are to be transformed.
+ * @param [startIndex=func.length - 1] - The index from which to start grouping the remaining arguments into an array.
  *                                            Defaults to `func.length - 1`, grouping all arguments after the last parameter.
- * @returns {(...args: any[]) => ReturnType<F>} A new function that, when called, returns the result of calling `func` with the transformed arguments.
+ * @returns A new function that, when called, returns the result of calling `func` with the transformed arguments.
  *
  * The transformed arguments are:
  * - The first `start` arguments as individual elements.

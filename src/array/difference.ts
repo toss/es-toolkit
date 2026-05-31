@@ -6,12 +6,12 @@
  * filters out any elements from the first array that also appear in the second array.
  *
  * @template T
- * @param {T[]} firstArr - The array from which to derive the difference. This is the primary array
+ * @param firstArr - The array from which to derive the difference. This is the primary array
  * from which elements will be compared and filtered.
- * @param {T[]} secondArr - The array containing elements to be excluded from the first array.
+ * @param secondArr - The array containing elements to be excluded from the first array.
  * Each element in this array will be checked against the first array, and if a match is found,
  * that element will be excluded from the result.
- * @returns {T[]} A new array containing the elements that are present in the first array but not
+ * @returns A new array containing the elements that are present in the first array but not
  * in the second array.
  *
  * @example

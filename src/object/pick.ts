@@ -6,9 +6,9 @@
  *
  * @template T - The type of object.
  * @template K - The type of keys in object.
- * @param {T} obj - The object to pick keys from.
- * @param {K[]} keys - An array of keys to be picked from the object.
- * @returns {Pick<T, K>} A new object with the specified keys picked.
+ * @param obj - The object to pick keys from.
+ * @param keys - An array of keys to be picked from the object.
+ * @returns A new object with the specified keys picked.
  *
  * @example
  * const obj = { a: 1, b: 2, c: 3 };

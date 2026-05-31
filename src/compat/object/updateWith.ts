@@ -13,11 +13,11 @@ import { toPath } from '../util/toPath.ts';
  * If any part of the path does not exist, it will be created.
  *
  * @template T - The type of the object.
- * @param {T} object - The object to modify.
- * @param {PropertyPath} path - The path of the property to update.
- * @param {(oldValue: any) => any} updater - The function to produce the updated value.
- * @param {(value: any, key: string, object: T) => any} customizer - The function to customize the update process.
- * @returns {T} - The modified object.
+ * @param object - The object to modify.
+ * @param path - The path of the property to update.
+ * @param updater - The function to produce the updated value.
+ * @param customizer - The function to customize the update process.
+ * @returns The modified object.
  *
  * @example
  * const object = { 'a': [{ 'b': { 'c': 3 } }] };
@@ -37,11 +37,11 @@ export function updateWith<T extends object>(
  *
  * @template T - The type of the object.
  * @template R - The type of the return value.
- * @param {T} object - The object to modify.
- * @param {PropertyPath} path - The path of the property to update.
- * @param {(oldValue: any) => any} updater - The function to produce the updated value.
- * @param {(value: any, key: string, object: T) => any} customizer - The function to customize the update process.
- * @returns {R} - The modified object.
+ * @param object - The object to modify.
+ * @param path - The path of the property to update.
+ * @param updater - The function to produce the updated value.
+ * @param customizer - The function to customize the update process.
+ * @returns The modified object.
  *
  * @example
  * const object = { 'a': [{ 'b': { 'c': 3 } }] };
@@ -61,11 +61,11 @@ export function updateWith<T extends object, R>(
  *
  * @template T - The type of the object.
  * @template R - The type of the return value.
- * @param {T} obj - The object to modify.
- * @param {PropertyPath} path - The path of the property to update.
- * @param {(value: any) => any} updater - The function to produce the updated value.
- * @param {(value: any, key: string, object: T) => any} customizer - The function to customize the update process.
- * @returns {T | R} - The modified object.
+ * @param obj - The object to modify.
+ * @param path - The path of the property to update.
+ * @param updater - The function to produce the updated value.
+ * @param customizer - The function to customize the update process.
+ * @returns The modified object.
  *
  * @example
  * const object = { 'a': [{ 'b': { 'c': 3 } }] };

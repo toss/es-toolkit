@@ -9,9 +9,9 @@ import { toString } from '../util/toString.ts';
  * Method names may be specified as individual arguments or as arrays of method names.
  *
  * @template T - The type of the object.
- * @param {T} object - The object to bind methods to.
- * @param {Array<Many<string>>} [methodNames] - The method names to bind, specified individually or in arrays.
- * @returns {T} - Returns the object.
+ * @param object - The object to bind methods to.
+ * @param [methodNames] - The method names to bind, specified individually or in arrays.
+ * @returns Returns the object.
  *
  * @example
  * const view = {
