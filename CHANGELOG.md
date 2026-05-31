@@ -1,5 +1,22 @@
 # es-toolkit Changelog
 
+## Version v1.47.0
+
+Released on May 25th, 2026.
+
+- Added `es-toolkit/server` entrypoint with `colors` namespace for ANSI terminal color utilities. ([#1683])
+- Added `exec` function. ([#1689])
+- Added `sortKeys` to the `object` entrypoint. ([#1674])
+- Added `cartesianProduct` and `combinations` to the `array` entrypoint. ([#1713])
+- Added `allKeyed` to the `promise` entrypoint. ([#1672])
+- Added `percentile` to the `math` entrypoint. ([#1710])
+- Added an interactive playground page to docs. ([#1720])
+- Reorganized docs to introduce a flavor switcher and co-locate `compat` under `/compat/`. ([#1699])
+- Fixed `uniqWith` in `compat` to match lodash's comparator argument order. ([#1729])
+- Fixed `compat/omitBy` to not treat plain objects with numeric `length` as array-like. ([#1709])
+
+We sincerely thank @Antoliny0919, @ATOM00blue, @dayongkr, @guesung, @myeong-jae-hwi, @raon0211, @seungrodotlee, and @Xiaohang0316 for their contributions. We appreciate your great efforts!
+
 ## Version v1.46.1
 
 Released on April 29th, 2026.

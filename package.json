@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.46.1",
+  "version": "1.47.0",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
@@ -96,7 +96,7 @@
     "tsx": "^4.19.0",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.6.0",
-    "vercel": "^41.4.1",
+    "vercel": "^54.4.1",
     "vitest": "^4.0.17"
   },
   "publishConfig": {

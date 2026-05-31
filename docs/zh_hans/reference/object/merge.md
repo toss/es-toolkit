@@ -74,7 +74,7 @@ console.log(result);
 // 返回值: { a: [1, 2, 3] }
 ```
 
-## 演示
+## 试一试
 
 ::: sandpack
 

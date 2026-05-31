@@ -26,6 +26,7 @@ isNumber('123'); // false
 isNumber(true); // false
 isNumber(null); // false
 isNumber(undefined); // false
+isNumber(new Number(42)); // false
 ```
 
 Particularly useful when used as a type guard in TypeScript.
