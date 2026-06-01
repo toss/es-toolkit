@@ -77,9 +77,9 @@ export function minBy<T>(
   }
 
   let minElement = items[0];
-  let min = getValue(minElement, 0, items);
+  let min = Infinity;
 
-  for (let i = 1; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const element = items[i];
     const value = getValue(element, i, items);
     if (value < min) {

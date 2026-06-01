@@ -41,6 +41,12 @@ describe('maxBy', () => {
     expect(result).toBe(3);
   });
 
+  it('should skip a leading NaN value when comparing elements', () => {
+    const numbers = [Number.NaN, 1, 3, 2];
+    const result = maxBy(numbers, x => x);
+    expect(result).toBe(3);
+  });
+
   it('should provide index parameter to getValue function', () => {
     const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
     const result = maxBy(items, (item, index) => item.value + index);
