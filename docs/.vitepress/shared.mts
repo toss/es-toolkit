@@ -23,7 +23,7 @@ export const shared = defineConfig({
         rel: "icon",
         type: "image/png",
         sizes: "100x100",
-        href: "/favicon-100x100.png",
+        href: "/logo.png",
       },
     ],
     [
