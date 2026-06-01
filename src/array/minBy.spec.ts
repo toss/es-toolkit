@@ -41,6 +41,12 @@ describe('minBy', () => {
     expect(result).toBe(1);
   });
 
+  it('should skip a leading NaN value when comparing elements', () => {
+    const numbers = [Number.NaN, 3, 1, 2];
+    const result = minBy(numbers, x => x);
+    expect(result).toBe(1);
+  });
+
   it('should provide index parameter to getValue function', () => {
     const items = [{ value: 10 }, { value: 20 }, { value: 15 }];
     const result = minBy(items, (item, index) => item.value + index);
