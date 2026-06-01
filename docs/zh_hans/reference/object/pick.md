@@ -37,8 +37,11 @@ const picked = pick(nested, ['user', 'settings']);
 #### 参数
 
 - `obj` (`T extends Record<string, any>`): 要选择属性的对象。
-- `keys` (`readonly K[]`): 要从对象中选择的键的数组。
+- `keys` (`readonly [...Keys]`): 要从对象中选择的键的数组或元组。
 
 #### 返回值
 
-(`Pick<T, K>`): 返回一个仅包含指定键对应属性的新对象。
+返回类型取决于 `keys` 是元组还是可变长度数组。
+
+- 如果 `keys` 是**元组**（例如 `['a', 'b']`）：返回 `Pick<T, 'a' | 'b'>` — 保证所有指定的键都存在。
+- 如果 `keys` 是**可变长度数组**（例如 `keys: ('a' | 'b')[]`）：返回 `Partial<Pick<T, 'a' | 'b'>>` — 只有数组中实际包含的键才会出现在结果对象中。

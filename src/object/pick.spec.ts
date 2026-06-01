@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { pick } from './pick';
 
 describe('pick', () => {
@@ -31,5 +31,20 @@ describe('pick', () => {
     const result = pick(obj, ['a']);
 
     expect(Reflect.ownKeys(result)).toEqual([]);
+  });
+
+  it('should return Pick<T, K> when given a literal tuple (all keys guaranteed)', () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const result = pick(obj, ['a', 'b']);
+
+    expectTypeOf(result).toEqualTypeOf<Pick<typeof obj, 'a' | 'b'>>();
+  });
+
+  it('should return Partial<Pick<T, K>> when given a non-tuple array (not all keys guaranteed)', () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const keys: ('a' | 'b')[] = Math.random() > 0.5 ? ['a'] : ['b'];
+    const result = pick(obj, keys);
+
+    expectTypeOf(result).toEqualTypeOf<Partial<Pick<typeof obj, 'a' | 'b'>>>();
   });
 });
