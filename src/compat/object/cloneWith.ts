@@ -73,7 +73,7 @@ export function cloneWith<T>(value: T): T;
  * @returns {T} - A shallow clone of the given object.
  *
  * @example
- * // Clone a primitive values
+ * // Clone a primitive value
  * const num = 29;
  * const clonedNum = cloneWith(num);
  * console.log(clonedNum); // 29
