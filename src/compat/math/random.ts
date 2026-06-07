@@ -106,7 +106,7 @@ export function random(...args: any[]): number {
   }
 
   if (typeof maximum !== 'number') {
-    minimum = Number(maximum);
+    maximum = Number(maximum);
   }
 
   if (!minimum) {
