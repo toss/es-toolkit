@@ -24,10 +24,10 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * If not, it uses the last element of the array and begins with the second to last element for the calculation.
  *
  * @template T, U
- * @param {T[] | null | undefined} collection - The array to iterate over.
- * @param {MemoListIterator<T, U, T[]>} callback - The function invoked per iteration.
- * @param {U} accumulator - The initial value.
- * @returns {U} Returns the accumulated value.
+ * @param collection - The array to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @param accumulator - The initial value.
+ * @returns Returns the accumulated value.
  *
  * @example
  * reduceRight([1, 2, 3], (acc, value) => acc + value, 0);
@@ -43,10 +43,10 @@ export function reduceRight<T, U>(
  * Reduces an array-like collection to a single value using an iteratee function, starting from the right.
  *
  * @template T, U
- * @param {ArrayLike<T> | null | undefined} collection - The array-like collection to iterate over.
- * @param {MemoListIterator<T, U, ArrayLike<T>>} callback - The function invoked per iteration.
- * @param {U} accumulator - The initial value.
- * @returns {U} Returns the accumulated value.
+ * @param collection - The array-like collection to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @param accumulator - The initial value.
+ * @returns Returns the accumulated value.
  *
  * @example
  * reduceRight([1, 2, 3], (acc, value) => acc + value, 0);
@@ -62,10 +62,10 @@ export function reduceRight<T, U>(
  * Reduces an object to a single value using an iteratee function, starting from the right.
  *
  * @template T, U
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {MemoObjectIterator<T[keyof T], U, T>} callback - The function invoked per iteration.
- * @param {U} accumulator - The initial value.
- * @returns {U} Returns the accumulated value.
+ * @param collection - The object to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @param accumulator - The initial value.
+ * @returns Returns the accumulated value.
  *
  * @example
  * reduceRight({ a: 1, b: 2, c: 3 }, (acc, value) => acc + value, 0);
@@ -97,9 +97,9 @@ export function reduceRight<T extends object, U>(
  * If not, it uses the last element of the array and begins with the second to last element for the calculation.
  *
  * @template T
- * @param {T[] | null | undefined} collection - The array to iterate over.
- * @param {MemoListIterator<T, T, T[]>} callback - The function invoked per iteration.
- * @returns {T | undefined} Returns the accumulated value.
+ * @param collection - The array to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @returns Returns the accumulated value.
  *
  * @example
  * reduceRight([1, 2, 3], (acc, value) => acc + value);
@@ -114,9 +114,9 @@ export function reduceRight<T>(
  * Reduces an array-like collection to a single value using an iteratee function, starting from the right.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} collection - The array-like collection to iterate over.
- * @param {MemoListIterator<T, T, ArrayLike<T>>} callback - The function invoked per iteration.
- * @returns {T | undefined} Returns the accumulated value.
+ * @param collection - The array-like collection to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @returns Returns the accumulated value.
  *
  * @example
  * reduceRight([1, 2, 3], (acc, value) => acc + value);
@@ -131,9 +131,9 @@ export function reduceRight<T>(
  * Reduces an object to a single value using an iteratee function, starting from the right.
  *
  * @template T
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {MemoObjectIterator<T[keyof T], T[keyof T], T>} callback - The function invoked per iteration.
- * @returns {T[keyof T] | undefined} Returns the accumulated value.
+ * @param collection - The object to iterate over.
+ * @param callback - The function invoked per iteration.
+ * @returns Returns the accumulated value.
  *
  * @example
  * reduceRight({ a: 1, b: 2, c: 3 }, (acc, value) => acc + value);
@@ -147,10 +147,10 @@ export function reduceRight<T extends object>(
 /**
  * Reduces a collection to a single value using an iteratee function, starting from the right.
  *
- * @param {T[] | ArrayLike<T> | Record<string, T> | null | undefined} collection - The collection to iterate over.
- * @param {((accumulator: any, value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object} iteratee - The function invoked per iteration or the key to reduce over.
- * @param {any} initialValue - The initial value.
- * @returns {any} - Returns the accumulated value.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The function invoked per iteration or the key to reduce over.
+ * @param initialValue - The initial value.
+ * @returns Returns the accumulated value.
  *
  * @example
  * // Using a reducer function

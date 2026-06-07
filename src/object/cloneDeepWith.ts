@@ -37,9 +37,9 @@ import { isTypedArray } from '../predicate/isTypedArray.ts';
  * if it returns `undefined`, the default cloning method is used.
  *
  * @template T - The type of the object.
- * @param {T} obj - The object to clone.
- * @param {Function} [cloneValue] - A function to customize the cloning process.
- * @returns {T} - A deep clone of the given object.
+ * @param obj - The object to clone.
+ * @param [cloneValue] - A function to customize the cloning process.
+ * @returns A deep clone of the given object.
  *
  * @example
  * // Clone a primitive value

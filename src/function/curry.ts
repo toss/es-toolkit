@@ -2,8 +2,8 @@
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {() => R} func - The function to curry.
- * @returns {() => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function noArgFunc() {
@@ -18,8 +18,8 @@ export function curry<R>(func: () => R): () => R;
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {(p: P) => R} func - The function to curry.
- * @returns {(p: P) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function oneArgFunc(a: number) {
@@ -34,8 +34,8 @@ export function curry<P, R>(func: (p: P) => R): (p: P) => R;
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {(p1: P1, p2: P2) => R} func - The function to curry.
- * @returns {(p1: P1) => (p2: P2) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function twoArgFunc(a: number, b: number) {
@@ -51,8 +51,8 @@ export function curry<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p1: P1) => (p2: 
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {(p1: P1, p2: P2, p3: P3) => R} func - The function to curry.
- * @returns {(p1: P1) => (p2: P2) => (p3: P3) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function threeArgFunc(a: number, b: number, c: number) {
@@ -69,8 +69,8 @@ export function curry<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): (p1: 
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {(p1: P1, p2: P2, p3: P3, p4: P4) => R} func - The function to curry.
- * @returns {(p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function fourArgFunc(a: number, b: number, c: number, d: number) {
@@ -90,8 +90,8 @@ export function curry<P1, P2, P3, P4, R>(
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {(p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R} func - The function to curry.
- * @returns {(p1: P1) => (p2: P2) => (p3: P3) => (p4: P4) => (p5: P5) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function fiveArgFunc(a: number, b: number, c: number, d: number, e: number) {
@@ -112,8 +112,8 @@ export function curry<P1, P2, P3, P4, P5, R>(
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {(...args: any[]) => any} func - The function to curry.
- * @returns {(...args: any[]) => any} A curried function that can be called with a single argument at a time.
+ * @param func - The function to curry.
+ * @returns A curried function that can be called with a single argument at a time.
  *
  * @example
  * function sum(a: number, b: number, c: number) {
@@ -137,8 +137,8 @@ export function curry(func: (...args: any[]) => any): (...args: any[]) => any;
  * Curries a function, allowing it to be called with a single argument at a time and returning a new function that takes the next argument.
  * This process continues until all arguments have been provided, at which point the original function is called with all accumulated arguments.
  *
- * @param {(...args: any[]) => any} func - The function to curry.
- * @returns {(...args: any[]) => any} A curried function that can be called with a single argument at a time.
+ * @param func - The function to curry.
+ * @returns A curried function that can be called with a single argument at a time.
  *
  * @example
  * function sum(a: number, b: number, c: number) {

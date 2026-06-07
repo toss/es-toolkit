@@ -2,8 +2,8 @@
  * Returns the input value unchanged.
  *
  * @template T - The type of the input value.
- * @param {T} x - The value to be returned.
- * @returns {T} The input value.
+ * @param x - The value to be returned.
+ * @returns The input value.
  *
  * @example
  * // Returns 5

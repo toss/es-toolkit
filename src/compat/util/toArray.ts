@@ -5,8 +5,8 @@ import { isMap } from '../predicate/isMap.ts';
  * Converts a record or null/undefined to an array of its values.
  *
  * @template T
- * @param {Record<string, T> | Record<number, T> | null | undefined} value - The record or null/undefined to convert.
- * @returns {T[]} Returns an array of the record's values or an empty array if null/undefined.
+ * @param value - The record or null/undefined to convert.
+ * @returns Returns an array of the record's values or an empty array if null/undefined.
  *
  * @example
  * toArray({ 'a': 1, 'b': 2 }) // => returns [1, 2]
@@ -18,8 +18,8 @@ export function toArray<T>(value: Record<string, T> | Record<number, T> | null |
  * Converts a value to an array of its values.
  *
  * @template T
- * @param {T} value - The value to convert.
- * @returns {Array<T[keyof T]>} Returns an array of the value's values.
+ * @param value - The value to convert.
+ * @returns Returns an array of the value's values.
  *
  * @example
  * toArray({ x: 10, y: 20 }) // => returns [10, 20]
@@ -30,7 +30,7 @@ export function toArray<T>(value: T): Array<T[keyof T]>;
 /**
  * Converts an undefined value to an empty array.
  *
- * @returns {any[]} Returns an empty array.
+ * @returns Returns an empty array.
  *
  * @example
  * toArray() // => returns []
@@ -40,8 +40,8 @@ export function toArray(): any[];
 /**
  * Converts a value to an array.
  *
- * @param {unknown} value - The value to convert.
- * @returns {any[]} Returns the converted array.
+ * @param value - The value to convert.
+ * @returns Returns the converted array.
  *
  * @example
  * toArray({ 'a': 1, 'b': 2 }) // => returns [1,2]

@@ -9,9 +9,9 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  * Creates a new object composed of the properties that do not satisfy the predicate function.
  *
  * @template T
- * @param {Record<string, T> | null | undefined} object - The source object.
- * @param {ValueKeyIteratee<T>} predicate - The function invoked per property.
- * @returns {Record<string, T>} Returns the new object.
+ * @param object - The source object.
+ * @param predicate - The function invoked per property.
+ * @returns Returns the new object.
  *
  * @example
  * omitBy({ 'a': 1, 'b': '2', 'c': 3 }, isString);
@@ -26,9 +26,9 @@ export function omitBy<T>(
  * Creates a new object composed of the properties that do not satisfy the predicate function.
  *
  * @template T
- * @param {Record<number, T> | null | undefined} object - The source object.
- * @param {ValueKeyIteratee<T>} predicate - The function invoked per property.
- * @returns {Record<number, T>} Returns the new object.
+ * @param object - The source object.
+ * @param predicate - The function invoked per property.
+ * @returns Returns the new object.
  *
  * @example
  * omitBy({ 0: 1, 1: '2', 2: 3 }, isString);
@@ -43,9 +43,9 @@ export function omitBy<T>(
  * Creates a new object composed of the properties that do not satisfy the predicate function.
  *
  * @template T
- * @param {T | null | undefined} object - The source object.
- * @param {ValueKeyIteratee<T[keyof T]>} predicate - The function invoked per property.
- * @returns {Partial<T>} Returns the new object.
+ * @param object - The source object.
+ * @param predicate - The function invoked per property.
+ * @returns Returns the new object.
  *
  * @example
  * omitBy({ 'a': 1, 'b': '2', 'c': 3 }, isString);
@@ -63,11 +63,11 @@ export function omitBy<T extends object>(
  * includes only the properties for which the predicate function returns false.
  *
  * @template T - The type of object.
- * @param {T} obj - The object to omit properties from.
- * @param {(value: T[keyof T], key: keyof T, obj: T) => boolean} shouldOmit - A predicate function that determines
+ * @param obj - The object to omit properties from.
+ * @param shouldOmit - A predicate function that determines
  * whether a property should be omitted. It takes the property's value, key, and the source object as arguments and returns `true`
  * if the property should be omitted, and `false` otherwise.
- * @returns {Partial<T>} Returns the new object.
+ * @returns Returns the new object.
  *
  * @example
  * const obj = { a: 1, b: 'omit', c: 3 };

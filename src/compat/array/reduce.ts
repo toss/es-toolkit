@@ -7,10 +7,10 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
 /**
  * Reduces an array to a single value using an iteratee function.
  *
- * @param {T[] | null | undefined} collection - The array to iterate over
- * @param {MemoListIterator<T, U, T[]>} callback - The function invoked per iteration
- * @param {U} accumulator - The initial value
- * @returns {U} Returns the accumulated value
+ * @param collection - The array to iterate over
+ * @param callback - The function invoked per iteration
+ * @param accumulator - The initial value
+ * @returns Returns the accumulated value
  *
  * @example
  * const array = [1, 2, 3];
@@ -25,10 +25,10 @@ export function reduce<T, U>(
 /**
  * Reduces an array-like object to a single value using an iteratee function.
  *
- * @param {ArrayLike<T> | null | undefined} collection - The array-like object to iterate over
- * @param {MemoListIterator<T, U, ArrayLike<T>>} callback - The function invoked per iteration
- * @param {U} accumulator - The initial value
- * @returns {U} Returns the accumulated value
+ * @param collection - The array-like object to iterate over
+ * @param callback - The function invoked per iteration
+ * @param accumulator - The initial value
+ * @returns Returns the accumulated value
  *
  * @example
  * const arrayLike = {0: 1, 1: 2, 2: 3, length: 3};
@@ -43,10 +43,10 @@ export function reduce<T, U>(
 /**
  * Reduces an object to a single value using an iteratee function.
  *
- * @param {T | null | undefined} collection - The object to iterate over
- * @param {MemoObjectIterator<T[keyof T], U, T>} callback - The function invoked per iteration
- * @param {U} accumulator - The initial value
- * @returns {U} Returns the accumulated value
+ * @param collection - The object to iterate over
+ * @param callback - The function invoked per iteration
+ * @param accumulator - The initial value
+ * @returns Returns the accumulated value
  *
  * @example
  * const obj = { a: 1, b: 2, c: 3 };
@@ -61,9 +61,9 @@ export function reduce<T extends object, U>(
 /**
  * Reduces an array to a single value using an iteratee function.
  *
- * @param {T[] | null | undefined} collection - The array to iterate over
- * @param {MemoListIterator<T, T, T[]>} callback - The function invoked per iteration
- * @returns {T | undefined} Returns the accumulated value
+ * @param collection - The array to iterate over
+ * @param callback - The function invoked per iteration
+ * @returns Returns the accumulated value
  *
  * @example
  * const array = [1, 2, 3];
@@ -74,9 +74,9 @@ export function reduce<T>(collection: T[] | null | undefined, callback: MemoList
 /**
  * Reduces an array-like object to a single value using an iteratee function.
  *
- * @param {ArrayLike<T> | null | undefined} collection - The array-like object to iterate over
- * @param {MemoListIterator<T, T, ArrayLike<T>>} callback - The function invoked per iteration
- * @returns {T | undefined} Returns the accumulated value
+ * @param collection - The array-like object to iterate over
+ * @param callback - The function invoked per iteration
+ * @returns Returns the accumulated value
  *
  * @example
  * const arrayLike = {0: 1, 1: 2, 2: 3, length: 3};
@@ -90,9 +90,9 @@ export function reduce<T>(
 /**
  * Reduces an object to a single value using an iteratee function.
  *
- * @param {T | null | undefined} collection - The object to iterate over
- * @param {MemoObjectIterator<T[keyof T], T[keyof T], T>} callback - The function invoked per iteration
- * @returns {T[keyof T] | undefined} Returns the accumulated value
+ * @param collection - The object to iterate over
+ * @param callback - The function invoked per iteration
+ * @returns Returns the accumulated value
  *
  * @example
  * const obj = { a: 1, b: 2, c: 3 };
@@ -106,10 +106,10 @@ export function reduce<T extends object>(
 /**
  * Reduces a collection to a single value using an iteratee function.
  *
- * @param {T[] | ArrayLike<T> | Record<string, T> | null | undefined} collection - The collection to iterate over.
- * @param {((accumulator: any, value: any, index: PropertyKey, collection: any) => any) | PropertyKey | object} iteratee - The function invoked per iteration or the key to reduce over.
- * @param {any} initialValue - The initial value.
- * @returns {any} - Returns the accumulated value.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The function invoked per iteration or the key to reduce over.
+ * @param initialValue - The initial value.
+ * @returns Returns the accumulated value.
  *
  * @example
  * // Using a reducer function

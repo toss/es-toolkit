@@ -6,9 +6,9 @@ import { flatten } from '../array/flatten.ts';
  * where the argument value at the first index is provided as the first argument,
  * the argument value at the second index is provided as the second argument, and so on.
  *
- * @param {(...args: any[]) => any} func The function to rearrange arguments for.
- * @param {Array<number | number[]>} indices The arranged argument indices.
- * @returns {(...args: any[]) => any} Returns the new function.
+ * @param func The function to rearrange arguments for.
+ * @param indices The arranged argument indices.
+ * @returns Returns the new function.
  *
  * @example
  * const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;

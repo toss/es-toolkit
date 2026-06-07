@@ -6,12 +6,12 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * Computes the difference between an array and multiple arrays.
  *
  * @template T
- * @param {ArrayLike<T> | undefined | null} arr - The primary array from which to derive the difference. This is the main array
+ * @param arr - The primary array from which to derive the difference. This is the main array
  * from which elements will be compared and filtered.
- * @param {Array<ArrayLike<T>>} values - Multiple arrays containing elements to be excluded from the primary array.
+ * @param values - Multiple arrays containing elements to be excluded from the primary array.
  * These arrays will be flattened into a single array, and each element in this array will be checked against the primary array.
  * If a match is found, that element will be excluded from the result.
- * @returns {T[]} A new array containing the elements that are present in the primary array but not
+ * @returns A new array containing the elements that are present in the primary array but not
  * in the flattened array.
  *
  * @example
