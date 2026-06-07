@@ -3,8 +3,8 @@ import { toNumber } from './toNumber.ts';
 /**
  * Converts `value` to a finite number.
  *
- * @param {unknown} value - The value to convert.
- * @returns {number} Returns the number.
+ * @param value - The value to convert.
+ * @returns Returns the number.
  *
  * @example
  * toFinite(3.2); // => 3.2

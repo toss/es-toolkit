@@ -14,11 +14,11 @@ interface FlatMapAsyncOptions {
  *
  * @template T - The type of elements in the input array.
  * @template R - The type of elements in the arrays returned by the callback.
- * @param {readonly T[]} array The array to transform.
- * @param {(item: T, index: number, array: readonly T[]) => Promise<R[]>} callback An async function that transforms each element into an array.
- * @param {FlatMapAsyncOptions} [options] Optional configuration object.
- * @param {number} [options.concurrency] Maximum number of concurrent async operations. If not specified, all operations run concurrently.
- * @returns {Promise<R[]>} A promise that resolves to a flattened array of transformed values.
+ * @param array The array to transform.
+ * @param callback An async function that transforms each element into an array.
+ * @param [options] Optional configuration object.
+ * @param [options.concurrency] Maximum number of concurrent async operations. If not specified, all operations run concurrently.
+ * @returns A promise that resolves to a flattened array of transformed values.
  * @example
  * const users = [{ id: 1 }, { id: 2 }];
  * const allPosts = await flatMapAsync(users, async (user) => {

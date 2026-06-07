@@ -6,8 +6,8 @@ import { toFinite } from './toFinite.ts';
  * This function first converts `value` to a finite number. If the result has any decimal places,
  * they are removed by rounding down to the nearest whole number.
  *
- * @param {unknown} value - The value to convert.
- * @returns {number} Returns the number.
+ * @param value - The value to convert.
+ * @returns Returns the number.
  *
  * @example
  * toInteger(3.2); // => 3

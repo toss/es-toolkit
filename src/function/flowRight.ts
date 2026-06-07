@@ -7,8 +7,8 @@ import { flow } from './flow.ts';
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
- * @param {() => R} f The function to invoke.
- * @returns {() => R} Returns the new composite function.
+ * @param f The function to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * function noArgFunc() {
@@ -25,8 +25,8 @@ export function flowRight<R>(f: () => R): () => R;
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
- * @param {(...args: A) => R} f1 The function to invoke.
- * @returns {(...args: A) => R} Returns the new composite function.
+ * @param f1 The function to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * function oneArgFunc(a: number) {
@@ -43,9 +43,9 @@ export function flowRight<A extends any[], R>(f1: (...args: A) => R): (...args: 
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
- * @param {(a: R1) => R2} f2 The function to invoke.
- * @param {(...args: A) => R1} f1 The function to invoke.
- * @returns {(...args: A) => R2} Returns the new composite function.
+ * @param f2 The function to invoke.
+ * @param f1 The function to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * const add = (x: number, y: number) => x + y;
@@ -62,10 +62,10 @@ export function flowRight<A extends any[], R1, R2>(f2: (a: R1) => R2, f1: (...ar
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
- * @param {(a: R2) => R3} f3 The function to invoke.
- * @param {(a: R1) => R2} f2 The function to invoke.
- * @param {(...args: A) => R1} f1 The function to invoke.
- * @returns {(...args: A) => R3} Returns the new composite function.
+ * @param f3 The function to invoke.
+ * @param f2 The function to invoke.
+ * @param f1 The function to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * const add = (x: number, y: number) => x + y;
@@ -87,11 +87,11 @@ export function flowRight<A extends any[], R1, R2, R3>(
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
- * @param {(a: R3) => R4} f4 The function to invoke.
- * @param {(a: R2) => R3} f3 The function to invoke.
- * @param {(a: R1) => R2} f2 The function to invoke.
- * @param {(...args: A) => R1} f1 The function to invoke.
- * @returns {(...args: A) => R4} Returns the new composite function.
+ * @param f4 The function to invoke.
+ * @param f3 The function to invoke.
+ * @param f2 The function to invoke.
+ * @param f1 The function to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * const add = (x: number, y: number) => x + y;
@@ -115,12 +115,12 @@ export function flowRight<A extends any[], R1, R2, R3, R4>(
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
- * @param {(a: R4) => R5} f5 The function to invoke.
- * @param {(a: R3) => R4} f4 The function to invoke.
- * @param {(a: R2) => R3} f3 The function to invoke.
- * @param {(a: R1) => R2} f2 The function to invoke.
- * @param {(...args: A) => R1} f1 The function to invoke.
- * @returns {(...args: A) => R5} Returns the new composite function.
+ * @param f5 The function to invoke.
+ * @param f4 The function to invoke.
+ * @param f3 The function to invoke.
+ * @param f2 The function to invoke.
+ * @param f1 The function to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * const add = (x: number, y: number) => x + y;
@@ -146,8 +146,8 @@ export function flowRight<A extends any[], R1, R2, R3, R4, R5>(
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
- * @param {(...args: any[]) => any} funcs The functions to invoke.
- * @returns {(...args: any[]) => any} Returns the new composite function.
+ * @param funcs The functions to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * const add = (x: number, y: number) => x + y;
@@ -164,8 +164,8 @@ export function flowRight(...funcs: Array<(...args: any[]) => any>): (...args: a
  *
  * This method is like `flow` except that it creates a function that invokes the given functions from right to left.
  *
- * @param {(...args: any[]) => any} funcs The functions to invoke.
- * @returns {(...args: any[]) => any} Returns the new composite function.
+ * @param funcs The functions to invoke.
+ * @returns Returns the new composite function.
  *
  * @example
  * const add = (x: number, y: number) => x + y;

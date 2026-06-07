@@ -10,8 +10,8 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * in every array.
  *
  * @template T - The type of elements in the arrays.
- * @param {...(ArrayLike<T> | null | undefined)} arrays - The arrays to compare.
- * @returns {T[]} A new array containing the elements that are present in all arrays.
+ * @param arrays - The arrays to compare.
+ * @returns A new array containing the elements that are present in all arrays.
  *
  * @example
  * const array1 = [1, 2, 3, 4, 5];

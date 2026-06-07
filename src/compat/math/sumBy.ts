@@ -6,9 +6,9 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
  * It does not coerce values to `number`.
  *
  * @template T - The type of the array elements.
- * @param {ArrayLike<T> | null | undefined} array - The array to iterate over.
- * @param {((value: T) => number) | string} iteratee - The function invoked per iteration.
- * @returns {number} Returns the sum.
+ * @param array - The array to iterate over.
+ * @param iteratee - The function invoked per iteration.
+ * @returns Returns the sum.
  *
  * @example
  * sumBy([1, undefined, 2], value => value); // => 3

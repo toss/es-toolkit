@@ -2,8 +2,8 @@
  * Creates a function that negates the result of the predicate function.
  *
  * @template F - The type of the function to negate.
- * @param {F} func - The function to negate.
- * @returns {F} The new negated function, which negates the boolean result of `func`.
+ * @param func - The function to negate.
+ * @returns The new negated function, which negates the boolean result of `func`.
  *
  * @example
  * const array = [1, 2, 3, 4, 5, 6];

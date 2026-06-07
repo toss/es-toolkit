@@ -5,8 +5,8 @@ import { words as getWords } from './words.ts';
  *
  * Upper case is the naming convention in which each word is written in uppercase and separated by an space ( ) character.
  *
- * @param {string} str - The string that is to be changed to upper case.
- * @returns {string} - The converted string to upper case.
+ * @param str - The string that is to be changed to upper case.
+ * @returns The converted string to upper case.
  *
  * @example
  * const convertedStr1 = upperCase('camelCase') // returns 'CAMEL CASE'

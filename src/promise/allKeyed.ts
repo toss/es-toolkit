@@ -8,8 +8,8 @@
  * Based on the [TC39 `Promise.allKeyed` proposal](https://github.com/tc39/proposal-await-dictionary).
  *
  * @template T - A record type where each value is a promise or a value.
- * @param {T} tasks - An object whose values are promises (or plain values) to resolve concurrently.
- * @returns {Promise<{ [K in keyof T]: Awaited<T[K]> }>} A promise that resolves to an object with the same keys and resolved values.
+ * @param tasks - An object whose values are promises (or plain values) to resolve concurrently.
+ * @returns>} A promise that resolves to an object with the same keys and resolved values.
  *
  * @example
  * const { user, posts } = await allKeyed({

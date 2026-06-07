@@ -10,9 +10,9 @@ type PropertyPath = Many<PropertyName>;
  * Gets values at given paths from a dictionary or numeric dictionary.
  *
  * @template T - The type of the values in the dictionary.
- * @param {Record<string, T> | Record<number, T> | null | undefined} object - The dictionary to query.
- * @param {...PropertyPath[]} props - The property paths to get values for.
- * @returns {T[]} Returns an array of the picked values.
+ * @param object - The dictionary to query.
+ * @param props - The property paths to get values for.
+ * @returns Returns an array of the picked values.
  *
  * @example
  * const object = { 'a': 1, 'b': 2, 'c': 3 };
@@ -25,9 +25,9 @@ export function at<T>(object: Record<string, T> | Record<number, T> | null | und
  * Gets values at given keys from an object.
  *
  * @template T - The type of the object.
- * @param {T | null | undefined} object - The object to query.
- * @param {...Array<Many<keyof T>>} props - The property keys to get values for.
- * @returns {Array<T[keyof T]>} Returns an array of the picked values.
+ * @param object - The object to query.
+ * @param props - The property keys to get values for.
+ * @returns Returns an array of the picked values.
  *
  * @example
  * const object = { 'a': 1, 'b': 2, 'c': 3 };
@@ -40,9 +40,9 @@ export function at<T extends object>(object: T | null | undefined, ...props: Arr
  * Returns an array of values corresponding to `paths` of `object`.
  *
  * @template T - The type of the object.
- * @param {T} object - The object to iterate over.
- * @param {...(PropertyKey | PropertyKey[] | ArrayLike<PropertyKey>)} [paths] - The property paths to pick.
- * @returns {Array<unknown>} - Returns the picked values.
+ * @param object - The object to iterate over.
+ * @param [paths] - The property paths to pick.
+ * @returns Returns the picked values.
  *
  * @example
  * ```js
