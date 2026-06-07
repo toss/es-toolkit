@@ -35,16 +35,10 @@ describe('maxBy', () => {
     expect(result).toBeUndefined();
   });
 
-  it('should skip NaN values when comparing elements', () => {
-    const numbers = [1, Number.NaN, 3, 2];
-    const result = maxBy(numbers, x => x);
-    expect(result).toBe(3);
-  });
-
-  it('should skip a leading NaN value when comparing elements', () => {
-    const numbers = [Number.NaN, 1, 3, 2];
-    const result = maxBy(numbers, x => x);
-    expect(result).toBe(3);
+  it('should propagate NaN regardless of its position, matching Math.max', () => {
+    expect(maxBy([Number.NaN, 1, 3, 2], x => x)).toBeNaN();
+    expect(maxBy([1, Number.NaN, 3, 2], x => x)).toBeNaN();
+    expect(maxBy([1, 3, 2, Number.NaN], x => x)).toBeNaN();
   });
 
   it('should provide index parameter to getValue function', () => {

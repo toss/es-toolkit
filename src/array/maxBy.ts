@@ -9,6 +9,7 @@
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
  * maxBy([], x => x.a); // Returns: undefined
+ * maxBy([3, NaN, 1], x => x); // Returns: NaN (NaN propagates, matching Math.max)
  * maxBy(
  *   [
  *     { name: 'john', age: 30 },
@@ -34,6 +35,7 @@ export function maxBy<T>(
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
  * maxBy([], x => x.a); // Returns: undefined
+ * maxBy([3, NaN, 1], x => x); // Returns: NaN (NaN propagates, matching Math.max)
  * maxBy(
  *   [
  *     { name: 'john', age: 30 },
@@ -59,6 +61,7 @@ export function maxBy<T>(
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 3 }
  * maxBy([], x => x.a); // Returns: undefined
+ * maxBy([3, NaN, 1], x => x); // Returns: NaN (NaN propagates, matching Math.max)
  * maxBy(
  *   [
  *     { name: 'john', age: 30 },
@@ -82,6 +85,11 @@ export function maxBy<T>(
   for (let i = 0; i < items.length; i++) {
     const element = items[i];
     const value = getValue(element, i, items);
+
+    if (Number.isNaN(value)) {
+      return element;
+    }
+
     if (value > max) {
       max = value;
       maxElement = element;
