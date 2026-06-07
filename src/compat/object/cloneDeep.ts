@@ -8,7 +8,7 @@ import { cloneDeepWith } from './cloneDeepWith.ts';
  * @returns {T} - A deep clone of the given object.
  *
  * @example
- * // Clone a primitive values
+ * // Clone a primitive value
  * const num = 29;
  * const clonedNum = clone(num);
  * console.log(clonedNum); // 29
