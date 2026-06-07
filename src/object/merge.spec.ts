@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { merge } from './merge';
 
 describe('merge', () => {
@@ -140,5 +140,10 @@ describe('merge', () => {
     expect(Array.isArray(nestedArray.x)).toBe(true);
     expect(nestedArray.x[0]).toBe('1');
     expect((nestedArray.x as any).a).toBe(2);
+  });
+
+  it('should have correct types for merge.deep', () => {
+    const result = merge.deep({ a: { x: 1 } }, { a: { y: '2' } });
+    expectTypeOf(result).toEqualTypeOf<{ a: { x: number; y: string } }>();
   });
 });

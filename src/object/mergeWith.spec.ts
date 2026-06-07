@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { cloneDeep } from './cloneDeep';
 import { mergeWith } from './mergeWith';
 
@@ -30,7 +30,16 @@ describe('mergeWith', () => {
     const source3 = { a: { x: 2, y: 3 }, b: [4] };
 
     const result3 = mergeWith(target3, source3, (objValue, srcValue) => {
-      if (objValue.x && srcValue.x) {
+      if (
+        typeof objValue === 'object' &&
+        objValue !== null &&
+        'x' in objValue &&
+        typeof srcValue === 'object' &&
+        srcValue !== null &&
+        'x' in srcValue &&
+        typeof objValue.x === 'number' &&
+        typeof srcValue.x === 'number'
+      ) {
         return objValue.x + srcValue.x;
       }
     });
@@ -124,5 +133,46 @@ describe('mergeWith', () => {
     const result = mergeWith(target, source, () => undefined);
 
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
+  });
+
+  it('should prefer the source container kind for nested mixed array and object values when the customizer falls back to the default merge', () => {
+    const nestedArray = mergeWith({ x: ['1'] }, { x: { a: 2 } }, () => undefined);
+    const nestedObject = mergeWith({ x: { a: 2 } }, { x: ['1'] }, () => undefined);
+    const sourceArray = ['1'];
+    const sourceObject = { a: 2 };
+
+    expect(nestedArray).toEqual({ x: sourceObject });
+    expect(nestedArray.x).not.toBe(sourceObject);
+
+    expect(nestedObject).toEqual({ x: sourceArray });
+    expect(Array.isArray(nestedObject.x)).toBe(true);
+    expect(nestedObject.x).not.toBe(sourceArray);
+  });
+
+  it('should support top-level mixed array and object values', () => {
+    const topLevelArray = mergeWith(['1'], { a: 2 }, () => undefined);
+    const topLevelObject = mergeWith({ a: 2 }, ['1'], () => undefined);
+
+    expect(Array.isArray(topLevelArray)).toBe(true);
+    expect(topLevelArray[0]).toBe('1');
+    expect(topLevelArray.a).toBe(2);
+
+    expect(typeof topLevelObject).toBe('object');
+    expect(topLevelObject).toEqual({ a: 2, 0: '1' });
+  });
+
+  it('should have correct types for mergeWith.deep', () => {
+    const result = mergeWith.deep({ a: { x: 1 } }, { a: { y: '2' } }, () => undefined);
+    expectTypeOf(result).toEqualTypeOf<{ a: { x: number; y: string } }>();
+  });
+
+  it('should have correct types for top-level array inputs', () => {
+    const result = mergeWith.deep([{ x: 1 }], [{ y: '2' }], () => undefined);
+    expectTypeOf(result).toEqualTypeOf<Array<{ x: number } | { y: string } | { x: number; y: string }>>();
+  });
+
+  it('should widen mergeWith.deep property types when customizer can override values', () => {
+    const result = mergeWith.deep({ a: { x: 1 } }, { a: { y: '2' } }, () => true as const);
+    expectTypeOf(result).toEqualTypeOf<{ a: true | { x: true | number; y: true | string } }>();
   });
 });

@@ -8,6 +8,7 @@ export { mapKeys } from './mapKeys.ts';
 export { mapValues } from './mapValues.ts';
 export { merge } from './merge.ts';
 export { mergeWith } from './mergeWith.ts';
+export type { MergeDeep } from '../_internal/types/MergeDeep.ts';
 export { omit } from './omit.ts';
 export { omitBy } from './omitBy.ts';
 export { pick } from './pick.ts';

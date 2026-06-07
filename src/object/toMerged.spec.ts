@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { toMerged } from './toMerged';
 
 describe('toMerged', () => {
@@ -166,6 +166,58 @@ describe('toMerged', () => {
     expect(target).toEqual({ a: { b: { c: [1] } } });
   });
 
+  it('should preserve top-level mixed array and object behavior without mutating the target', () => {
+    const topLevelArrayTarget = ['1'];
+    const topLevelObjectTarget = { a: 2 };
+
+    const topLevelArray = toMerged(topLevelArrayTarget, { a: 2 });
+    const topLevelObject = toMerged(topLevelObjectTarget, ['1']);
+
+    expect(Array.isArray(topLevelArray)).toBe(true);
+    expect(topLevelArray[0]).toBe('1');
+    expect(topLevelArray.a).toBe(2);
+
+    expect(typeof topLevelObject).toBe('object');
+    expect(topLevelObject).toEqual({ a: 2, 0: '1' });
+
+    expect(topLevelArrayTarget).toEqual(['1']);
+    expect(topLevelObjectTarget).toEqual({ a: 2 });
+  });
+
+  it('should prefer the source container kind for nested mixed array and object values without mutating the target', () => {
+    const nestedArrayTarget = { x: ['1'] };
+    const nestedObjectTarget = { x: { a: 2 } };
+    const sourceArray = ['1'];
+    const sourceObject = { a: 2 };
+
+    const nestedArray = toMerged(nestedArrayTarget, { x: sourceObject });
+    const nestedObject = toMerged(nestedObjectTarget, { x: sourceArray });
+
+    expect(nestedArray).toEqual({ x: sourceObject });
+    expect(nestedArray.x).not.toBe(sourceObject);
+
+    expect(nestedObject).toEqual({ x: sourceArray });
+    expect(Array.isArray(nestedObject.x)).toBe(true);
+    expect(nestedObject.x).not.toBe(sourceArray);
+
+    expect(nestedArrayTarget).toEqual({ x: ['1'] });
+    expect(nestedObjectTarget).toEqual({ x: { a: 2 } });
+  });
+
+  it('should clone arrays and plain objects copied from source', () => {
+    const sourceArray = [1, 2, 3];
+    const sourceObject = { x: 1 };
+    const target: { a?: number[]; b?: { x: number } } = {};
+    const source = { a: sourceArray, b: sourceObject };
+
+    const result = toMerged(target, source);
+
+    expect(result).toEqual({ a: sourceArray, b: sourceObject });
+    expect(result.a).not.toBe(sourceArray);
+    expect(result.b).not.toBe(sourceObject);
+    expect(target).toEqual({});
+  });
+
   it('should replace non-plain-object target value with plain object from source', () => {
     const target = { a: 'string', b: 123, c: true };
     const source = { a: { x: 1 }, b: { y: 2 }, c: { z: 3 } };
@@ -182,5 +234,10 @@ describe('toMerged', () => {
 
     expect(result).toEqual({ a: { b: { x: 1 }, c: { y: 2 }, d: { z: 3 } } });
     expect(target).toEqual({ a: { b: null, c: undefined, d: 'text' } });
+  });
+
+  it('should have correct types for toMerged.deep', () => {
+    const result = toMerged.deep({ a: { x: 1 } }, { a: { y: '2' } });
+    expectTypeOf(result).toEqualTypeOf<{ a: { x: number; y: string } }>();
   });
 });
