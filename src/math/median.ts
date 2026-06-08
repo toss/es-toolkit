@@ -7,8 +7,8 @@
  *
  * If the array is empty, this function returns `NaN`.
  *
- * @param {number[]} nums - An array of numbers to calculate the median.
- * @returns {number} The median of all the numbers in the array.
+ * @param nums - An array of numbers to calculate the median.
+ * @returns The median of all the numbers in the array.
  *
  * @example
  * const arrayWithOddNumberOfElements = [1, 2, 3, 4, 5];

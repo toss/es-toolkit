@@ -7,10 +7,10 @@
  *
  * @template T - The type of the object to bind.
  * @template K - The type of the key to bind.
- * @param {T} object - The object to invoke the method on.
- * @param {K} key - The key of the method.
- * @param {...any} partialArgs - The arguments to be partially applied.
- * @returns {T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never} - Returns the new bound function.
+ * @param object - The object to invoke the method on.
+ * @param key - The key of the method.
+ * @param partialArgs - The arguments to be partially applied.
+ * @returns Returns the new bound function.
  *
  * @example
  * const object = {
@@ -47,10 +47,10 @@ export function bindKey(object: object, key: string, ...partialArgs: any[]): (..
  *
  * @template T - The type of the object to bind.
  * @template K - The type of the key to bind.
- * @param {T} object - The object to invoke the method on.
- * @param {K} key - The key of the method.
- * @param {...any} partialArgs - The arguments to be partially applied.
- * @returns {T[K] extends (...args: any[]) => any ? (...args: any[]) => ReturnType<T[K]> : never} - Returns the new bound function.
+ * @param object - The object to invoke the method on.
+ * @param key - The key of the method.
+ * @param partialArgs - The arguments to be partially applied.
+ * @returns Returns the new bound function.
  *
  * @example
  * const object = {

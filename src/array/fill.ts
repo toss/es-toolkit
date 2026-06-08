@@ -6,9 +6,9 @@
  * entire array.
  *
  * @template T - The type of the value to fill the array with.
- * @param {unknown[]} array - The array to fill.
- * @param {T} value - The value to fill the array with.
- * @returns {T[]} The array with the filled values.
+ * @param array - The array to fill.
+ * @param value - The value to fill the array with.
+ * @returns The array with the filled values.
  *
  * @example
  * fill([1, 2, 3], 'a');
@@ -34,10 +34,10 @@ export function fill<T>(array: unknown[], value: T): T[];
  *
  * @template T - The type of elements in the original array.
  * @template U - The type of the value to fill the array with.
- * @param {Array<T | U>} array - The array to fill.
- * @param {U} value - The value to fill the array with.
- * @param {number} [start=0] - The start position. Defaults to 0.
- * @returns {Array<T | U>} The array with the filled values.
+ * @param array - The array to fill.
+ * @param value - The value to fill the array with.
+ * @param [start=0] - The start position. Defaults to 0.
+ * @returns The array with the filled values.
  *
  * @example
  * fill([1, 2, 3], 'a');
@@ -63,11 +63,11 @@ export function fill<T, U>(array: Array<T | U>, value: U, start: number): Array<
  *
  * @template T - The type of elements in the original array.
  * @template U - The type of the value to fill the array with.
- * @param {Array<T | U>} array - The array to fill.
- * @param {U} value - The value to fill the array with.
- * @param {number} [start=0] - The start position. Defaults to 0.
- * @param {number} [end=arr.length] - The end position. Defaults to the array's length.
- * @returns {Array<T | U>} The array with the filled values.
+ * @param array - The array to fill.
+ * @param value - The value to fill the array with.
+ * @param [start=0] - The start position. Defaults to 0.
+ * @param [end=arr.length] - The end position. Defaults to the array's length.
+ * @returns The array with the filled values.
  *
  * @example
  * fill([1, 2, 3], 'a');
@@ -93,11 +93,11 @@ export function fill<T, U>(array: Array<T | U>, value: U, start: number, end: nu
  *
  * @template T - The type of elements in the original array.
  * @template U - The type of the value to fill the array with.
- * @param {Array<T | U>} array - The array to fill.
- * @param {U} value - The value to fill the array with.
- * @param {number} [start=0] - The start position. Defaults to 0.
- * @param {number} [end=arr.length] - The end position. Defaults to the array's length.
- * @returns {Array<T | U>} The array with the filled values.
+ * @param array - The array to fill.
+ * @param value - The value to fill the array with.
+ * @param [start=0] - The start position. Defaults to 0.
+ * @param [end=arr.length] - The end position. Defaults to the array's length.
+ * @returns The array with the filled values.
  *
  * @example
  * fill([1, 2, 3], 'a');

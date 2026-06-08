@@ -6,9 +6,9 @@ import { noop } from '../../function/noop.ts';
  *
  * @template T
  * @template U
- * @param {T} object - The destination object.
- * @param {U} source - The source object.
- * @returns {T & U} - Returns `object`.
+ * @param object - The destination object.
+ * @param source - The source object.
+ * @returns Returns `object`.
  *
  * @example
  * const object = { a: [{ b: 2 }, { d: 4 }] };
@@ -24,10 +24,10 @@ export function merge<T, U>(object: T, source: U): T & U;
  * @template T
  * @template U
  * @template V
- * @param {T} object - The destination object.
- * @param {U} source1 - The first source object.
- * @param {V} source2 - The second source object.
- * @returns {T & U & V} - Returns `object`.
+ * @param object - The destination object.
+ * @param source1 - The first source object.
+ * @param source2 - The second source object.
+ * @returns Returns `object`.
  *
  * @example
  * merge({ a: 1 }, { b: 2 }, { c: 3 });
@@ -42,11 +42,11 @@ export function merge<T, U, V>(object: T, source1: U, source2: V): T & U & V;
  * @template U
  * @template V
  * @template W
- * @param {T} object - The destination object.
- * @param {U} source1 - The first source object.
- * @param {V} source2 - The second source object.
- * @param {W} source3 - The third source object.
- * @returns {T & U & V & W} - Returns `object`.
+ * @param object - The destination object.
+ * @param source1 - The first source object.
+ * @param source2 - The second source object.
+ * @param source3 - The third source object.
+ * @returns Returns `object`.
  *
  * @example
  * merge({ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 });
@@ -62,12 +62,12 @@ export function merge<T, U, V, W>(object: T, source1: U, source2: V, source3: W)
  * @template V
  * @template W
  * @template X
- * @param {T} object - The destination object.
- * @param {U} source1 - The first source object.
- * @param {V} source2 - The second source object.
- * @param {W} source3 - The third source object.
- * @param {X} source4 - The fourth source object.
- * @returns {T & U & V & W & X} - Returns `object`.
+ * @param object - The destination object.
+ * @param source1 - The first source object.
+ * @param source2 - The second source object.
+ * @param source3 - The third source object.
+ * @param source4 - The fourth source object.
+ * @returns Returns `object`.
  *
  * @example
  * merge({ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }, { e: 5 });
@@ -78,9 +78,9 @@ export function merge<T, U, V, W, X>(object: T, source1: U, source2: V, source3:
 /**
  * Recursively merges own and inherited enumerable string keyed properties of source objects into the destination object.
  *
- * @param {any} object - The destination object.
- * @param {...any[]} otherArgs - The source objects.
- * @returns {any} - Returns `object`.
+ * @param object - The destination object.
+ * @param otherArgs - The source objects.
+ * @returns Returns `object`.
  *
  * @example
  * merge({ a: 1 }, { b: 2 }, { c: 3 });
@@ -97,9 +97,9 @@ export function merge(object: any, ...otherArgs: any[]): any;
  *
  * The function can handle multiple source objects and will merge them all into the target object.
  *
- * @param {any} object - The target object into which the source object properties will be merged. This object is modified in place.
- * @param {any[]} sources - The source objects whose properties will be merged into the target object.
- * @returns {any} The updated target object with properties from the source object(s) merged in.
+ * @param object - The target object into which the source object properties will be merged. This object is modified in place.
+ * @param sources - The source objects whose properties will be merged into the target object.
+ * @returns The updated target object with properties from the source object(s) merged in.
  *
  * @example
  * const target = { a: 1, b: { x: 1, y: 2 } };

@@ -4,8 +4,8 @@
  * An empty string is returned for `null` and `undefined` values.
  * The sign of `-0` is preserved.
  *
- * @param {any} value - The value to convert.
- * @returns {string} Returns the converted string.
+ * @param value - The value to convert.
+ * @returns Returns the converted string.
  *
  * @example
  * toString(null) // returns ''

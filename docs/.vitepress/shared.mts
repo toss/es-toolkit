@@ -2,6 +2,7 @@ import { createRequire } from 'module';
 import path from 'path';
 import { defineConfig } from 'vitepress';
 import llmstxt from 'vitepress-plugin-llms';
+import { search as jaSearch } from './ja.mts';
 import { search as koSearch } from './ko.mts';
 import { search as zh_hansSearch } from './zh_hans.mts';
 
@@ -119,6 +120,7 @@ export const shared = defineConfig({
         locales: {
           ...koSearch,
           ...zh_hansSearch,
+          ...jaSearch,
         },
       },
     },

@@ -9,8 +9,8 @@ import { isFunction } from '../../predicate/isFunction.ts';
  * When it finds a true condition, it runs the corresponding function and returns its result.
  * If none of the conditions are true, it returns undefined.
  *
- * @param {Array<Array>} pairs - Array of pairs. Each pair consists of a predicate function and a function to run.
- * @returns {(...args: any[]) => unknown} A new composite function that checks conditions and runs the matching function.
+ * @param pairs - Array of pairs. Each pair consists of a predicate function and a function to run.
+ * @returns A new composite function that checks conditions and runs the matching function.
  * @example
  *
  * const func = cond([
@@ -38,8 +38,8 @@ export function cond<R>(pairs: Array<[truthy: () => boolean, falsey: () => R]>):
  * When it finds a true condition, it runs the corresponding function and returns its result.
  * If none of the conditions are true, it returns undefined.
  *
- * @param {Array<Array>} pairs - Array of pairs. Each pair consists of a predicate function and a function to run.
- * @returns {(...args: any[]) => unknown} A new composite function that checks conditions and runs the matching function.
+ * @param pairs - Array of pairs. Each pair consists of a predicate function and a function to run.
+ * @returns A new composite function that checks conditions and runs the matching function.
  * @example
  *
  * const func = cond([

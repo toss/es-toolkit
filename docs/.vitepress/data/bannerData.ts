@@ -55,3 +55,49 @@ export const EN_BANNER_DATA: Banner[] = [
     link: 'https://github.com/toss/overlay-kit',
   },
 ];
+
+export const JA_BANNER_DATA: Banner[] = [
+  {
+    title: '🛠️ frontend-fundamentals',
+    description: 'より良いコードへの羅針盤。変更しやすいフロントエンドコードを書くための4つのコア原則。',
+    link: 'https://frontend-fundamentals.com/code-quality/ja',
+  },
+  {
+    title: '⏳ suspensive',
+    description: 'React Suspenseをシンプルに。非同期処理をより少ないコードで、より強力に。',
+    link: 'https://github.com/toss/suspensive',
+  },
+  {
+    title: '🧩 use-funnel',
+    description: 'マルチステップフローをシンプルに。会員登録、決済、オンボーディングなどのファネルに最適。',
+    link: 'https://github.com/toss/use-funnel',
+  },
+  {
+    title: '✨ overlay-kit',
+    description: '宣言的APIと型安全性を備えたモーダル・ポップオーバー。フローを崩さずリッチなUIを構築。',
+    link: 'https://github.com/toss/overlay-kit',
+  },
+];
+
+export const ZH_HANS_BANNER_DATA: Banner[] = [
+  {
+    title: '🛠️ frontend-fundamentals',
+    description: '更好代码的指南针。编写易于修改的前端代码的四大核心原则。',
+    link: 'https://frontend-fundamentals.com/code-quality/zh-hans',
+  },
+  {
+    title: '⏳ suspensive',
+    description: '让 React Suspense 变得简单。用更少的代码，更强大地处理异步操作。',
+    link: 'https://github.com/toss/suspensive',
+  },
+  {
+    title: '🧩 use-funnel',
+    description: '简化多步骤流程。完美适用于注册、结账、引导等漏斗场景。',
+    link: 'https://github.com/toss/use-funnel',
+  },
+  {
+    title: '✨ overlay-kit',
+    description: '具备声明式 API 和类型安全的模态框与弹出层。流畅构建丰富 UI,不打断开发节奏。',
+    link: 'https://github.com/toss/overlay-kit',
+  },
+];

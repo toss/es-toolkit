@@ -11,11 +11,11 @@ import { PropertyPath } from '../_internal/PropertyPath.ts';
  * if the next path segment is a valid array index, or an object otherwise.
  *
  * @template T - The type of the object.
- * @param {T} object - The object to modify.
- * @param {PropertyPath} path - The path of the property to set.
- * @param {any} value - The value to set.
- * @param {(nsValue: any, key: string, nsObject: T) => any} [customizer] - The function to customize assigned values.
- * @returns {T} - The modified object.
+ * @param object - The object to modify.
+ * @param path - The path of the property to set.
+ * @param value - The value to set.
+ * @param [customizer] - The function to customize assigned values.
+ * @returns The modified object.
  *
  * @example
  * // Set a value with a customizer that creates arrays for numeric path segments
@@ -41,11 +41,11 @@ export function setWith<T extends object>(
  *
  * @template T - The type of the object.
  * @template R - The type of the return value.
- * @param {T} object - The object to modify.
- * @param {PropertyPath} path - The path of the property to set.
- * @param {any} value - The value to set.
- * @param {(nsValue: any, key: string, nsObject: T) => any} [customizer] - The function to customize assigned values.
- * @returns {R} - The modified object.
+ * @param object - The object to modify.
+ * @param path - The path of the property to set.
+ * @param value - The value to set.
+ * @param [customizer] - The function to customize assigned values.
+ * @returns The modified object.
  *
  * @example
  * // Set a value with a customizer that creates arrays for numeric path segments
@@ -71,11 +71,11 @@ export function setWith<T extends object, R>(
  *
  * @template T - The type of the object.
  * @template R - The type of the return value.
- * @param {T} obj - The object to modify.
- * @param {PropertyPath} path - The path of the property to set.
- * @param {any} value - The value to set.
- * @param {(value: any, key: string, object: T) => any} [customizer] - The function to customize assigned values.
- * @returns {T | R} - The modified object.
+ * @param obj - The object to modify.
+ * @param path - The path of the property to set.
+ * @param value - The value to set.
+ * @param [customizer] - The function to customize assigned values.
+ * @returns The modified object.
  *
  * @example
  * // Set a value with a customizer that creates arrays for numeric path segments

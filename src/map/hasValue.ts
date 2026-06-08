@@ -9,9 +9,9 @@ import { isEqualsSameValueZero } from '../_internal/isEqualsSameValueZero';
  *
  * @template K - The type of keys in the Map.
  * @template V - The type of values in the Map.
- * @param {Map<K, V>} map - The Map to search.
- * @param {V} searchElement - The value to search for.
- * @returns {boolean} true if the Map contains the value, false otherwise.
+ * @param map - The Map to search.
+ * @param searchElement - The value to search for.
+ * @returns true if the Map contains the value, false otherwise.
  *
  * @example
  * const map = new Map([

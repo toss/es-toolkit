@@ -6,10 +6,10 @@ import { get } from '../object/get.ts';
 /**
  * Invokes the method at `path` of `object` with the given arguments.
  *
- * @param {any} object - The object to query.
- * @param {PropertyKey | PropertyKey[]} path - The path of the method to invoke.
- * @param {any[]} args - The arguments to invoke the method with.
- * @returns {any} - Returns the result of the invoked method.
+ * @param object - The object to query.
+ * @param path - The path of the method to invoke.
+ * @param args - The arguments to invoke the method with.
+ * @returns Returns the result of the invoked method.
  *
  * @example
  * const object = {

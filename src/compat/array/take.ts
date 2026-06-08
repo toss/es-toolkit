@@ -7,9 +7,9 @@ import { toInteger } from '../util/toInteger.ts';
  * Creates a slice of array with n elements taken from the beginning.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to query.
- * @param {number} [n=1] - The number of elements to take.
- * @returns {T[]} Returns the slice of array.
+ * @param array - The array to query.
+ * @param [n=1] - The number of elements to take.
+ * @returns Returns the slice of array.
  *
  * @example
  * take([1, 2, 3]);
@@ -35,10 +35,10 @@ export function take<T>(array: ArrayLike<T> | null | undefined, n?: number): T[]
  *
  * @template T - Type of elements in the input array.
  *
- * @param {ArrayLike<T> | null | undefined} arr - The array to take elements from.
- * @param {number} [count=1] - The number of elements to take.
- * @param {unknown} [guard] - Enables use as an iteratee for methods like `_.map`.
- * @returns {T[]} A new array containing the first `count` elements from `arr`.
+ * @param arr - The array to take elements from.
+ * @param [count=1] - The number of elements to take.
+ * @param [guard] - Enables use as an iteratee for methods like `_.map`.
+ * @returns A new array containing the first `count` elements from `arr`.
  *
  * @example
  * // Returns [1, 2, 3]

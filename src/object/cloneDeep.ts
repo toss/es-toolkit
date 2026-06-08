@@ -4,11 +4,11 @@ import { cloneDeepWithImpl } from './cloneDeepWith.ts';
  * Creates a deep clone of the given object.
  *
  * @template T - The type of the object.
- * @param {T} obj - The object to clone.
- * @returns {T} - A deep clone of the given object.
+ * @param obj - The object to clone.
+ * @returns A deep clone of the given object.
  *
  * @example
- * // Clone a primitive values
+ * // Clone a primitive value
  * const num = 29;
  * const clonedNum = cloneDeep(num);
  * console.log(clonedNum); // 29

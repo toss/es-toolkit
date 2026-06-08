@@ -8,8 +8,8 @@ export function property<T, R>(path: PropertyPath): (obj: T) => R;
  *
  * @template T - The type of object.
  * @template R - The type of the value to return.
- * @param {PropertyPath} path - The path of the property to get.
- * @returns {(object: T) => R} - Returns a new function that takes an object and returns the value at the specified path.
+ * @param path - The path of the property to get.
+ * @returns Returns a new function that takes an object and returns the value at the specified path.
  *
  * @example
  * const getObjectValue = property('a.b.c');

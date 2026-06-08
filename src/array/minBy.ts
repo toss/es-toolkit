@@ -3,9 +3,9 @@
  * the `getValue` function to each element.
  *
  * @template T - The type of elements in the array.
- * @param {[T, ...T[]]} items The nonempty array of elements to search.
- * @param {(element: T) => number} getValue A function that selects a numeric value from each element.
- * @returns {T} The element with the minimum value as determined by the `getValue` function.
+ * @param items The nonempty array of elements to search.
+ * @param getValue A function that selects a numeric value from each element.
+ * @returns The element with the minimum value as determined by the `getValue` function.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
  * minBy([], x => x.a); // Returns: undefined
@@ -28,9 +28,9 @@ export function minBy<T>(
  * the `getValue` function to each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items The array of elements to search.
- * @param {(element: T, index: number, array: readonly T[]) => number} getValue A function that selects a numeric value from each element.
- * @returns {T | undefined} The element with the minimum value as determined by the `getValue` function,
+ * @param items The array of elements to search.
+ * @param getValue A function that selects a numeric value from each element.
+ * @returns The element with the minimum value as determined by the `getValue` function,
  * or `undefined` if the array is empty.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }
@@ -54,9 +54,9 @@ export function minBy<T>(
  * the `getValue` function to each element.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} items The array of elements to search.
- * @param {(element: T, index: number, array: readonly T[]) => number} getValue A function that selects a numeric value from each element.
- * @returns {T | undefined} The element with the minimum value as determined by the `getValue` function,
+ * @param items The array of elements to search.
+ * @param getValue A function that selects a numeric value from each element.
+ * @returns The element with the minimum value as determined by the `getValue` function,
  * or `undefined` if the array is empty.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // Returns: { a: 1 }

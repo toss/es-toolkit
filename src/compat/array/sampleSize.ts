@@ -8,9 +8,9 @@ import { toInteger } from '../util/toInteger.ts';
  * Returns a sample element array of a specified size from a collection.
  *
  * @template T
- * @param {Record<string, T> | Record<number, T> | null | undefined} collection - The collection to sample from.
- * @param {number} [n] - The size of sample.
- * @returns {T[]} A new array with sample size applied.
+ * @param collection - The collection to sample from.
+ * @param [n] - The size of sample.
+ * @returns A new array with sample size applied.
  *
  * @example
  * sampleSize([1, 2, 3], 2);
@@ -22,9 +22,9 @@ export function sampleSize<T>(collection: Record<string, T> | Record<number, T> 
  * Returns a sample element array of a specified size from an object.
  *
  * @template T
- * @param {T | null | undefined} collection - The object to sample from.
- * @param {number} [n] - The size of sample.
- * @returns {Array<T[keyof T]>} A new array with sample size applied.
+ * @param collection - The object to sample from.
+ * @param [n] - The size of sample.
+ * @returns A new array with sample size applied.
  *
  * @example
  * sampleSize({ a: 1, b: 2, c: 3 }, 2);
@@ -40,9 +40,9 @@ export function sampleSize<T extends object>(collection: T | null | undefined, n
  * {@link https://www.nowherenearithaca.com/2013/05/robert-floyds-tiny-and-beautiful.html Floyd's algorithm}
  *
  * @template T - The type of elements in the array.
- * @param {Record<string, T> | Record<number, T> | T | null | undefined} collection - The array to sample from.
- * @param {number} size - The size of sample.
- * @returns {Array<T[keyof T]> | T[]} A new array with sample size applied.
+ * @param collection - The array to sample from.
+ * @param size - The size of sample.
+ * @returns A new array with sample size applied.
  *
  * @example
  * const result = sampleSize([1, 2, 3], 2)
