@@ -7,7 +7,7 @@ interface RetryOptions {
    *
    * @default 0
    * @example
-   * delay: (attempts, error) => error.status === 429 ? 10000 : attempt * 50
+   * delay: (attempts, error) => error.status === 429 ? 10000 : attempts * 50
    */
   delay?: number | ((attempts: number, error: unknown) => number);
 
@@ -88,7 +88,7 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * retry(() => fetchData(), { delay: 1000, retries: 5 });
  *
  * // Retry a function with a delay increasing linearly by 50ms per attempt
- * retry(() => fetchData(), { delay: (attempts) => attempt * 50, retries: 5 });
+ * retry(() => fetchData(), { delay: (attempts) => attempts * 50, retries: 5 });
  *
  * // Retry a function with an error-aware delay (e.g., respect Retry-After headers)
  * retry(() => fetchData(), { delay: (_attempts, error) => error.status === 429 ? 10000 : 1000, retries: 3 });

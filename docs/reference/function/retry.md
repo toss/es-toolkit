@@ -59,8 +59,8 @@ const data5 = await retry(
   {
     retries: 3,
     delay: (_attempts, error) => {
-      if (error instanceof ResponseError && error.status === 429) {
-        return error.retryAfter * 1000;
+      if ((error as { status?: number }).status === 429) {
+        return (error as { retryAfter: number }).retryAfter * 1000;
       }
       return 1000;
     },
