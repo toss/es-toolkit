@@ -1,7 +1,10 @@
 import esbuild from 'esbuild';
 import fs from 'fs/promises';
+import { createRequire } from 'module';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+const require = createRequire(import.meta.url);
 
 const funcNames = ['sample', 'difference', 'sum', 'debounce', 'throttle', 'pick', 'zip'];
 
@@ -41,9 +44,9 @@ async function main() {
     result.labels['esToolkit'] = 'es-toolkit@unknown';
   }
 
-  // detect lodash-es version if installed in node_modules
+  // detect lodash-es version yarn berry PnP resolution
   try {
-    const lodashPkgPath = path.join(ROOT, 'node_modules', 'lodash-es', 'package.json');
+    const lodashPkgPath = require.resolve('lodash-es/package.json');
     const lodashContent = await fs.readFile(lodashPkgPath, 'utf8');
     const lodashJson = JSON.parse(lodashContent);
     result.labels['lodash'] = `lodash-es@${lodashJson.version}`;
