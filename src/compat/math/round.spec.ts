@@ -75,6 +75,14 @@ describe('round', () => {
     expect(actual).toEqual(expected);
   });
 
+  it(`\`round\` should return \`Infinity\` for infinite values regardless of \`precision\``, () => {
+    expect(round(Infinity)).toBe(Infinity);
+    expect(round(Infinity, 2)).toBe(Infinity);
+    expect(round(-Infinity, 2)).toBe(-Infinity);
+    expect(round(Infinity, -2)).toBe(Infinity);
+    expect(round(-Infinity, -2)).toBe(-Infinity);
+  });
+
   it(`\`round\` should handle edge cases`, () => {
     expect(round(1.797, 295)).toBe(1.797);
     expect(round(1.797, -295)).toBe(0);
