@@ -1,5 +1,24 @@
 # es-toolkit Changelog
 
+## Version v1.47.1
+
+Released on June 12th, 2026.
+
+- Fixed `maxBy` and `minBy` to propagate `NaN`, matching `Math.max`/`Math.min` behavior. ([#1749])
+- Fixed `orderBy` and `sortBy` to place `null` and `undefined` values last when sorting. ([#1681])
+- Fixed `isNumber` to no longer treat boxed `Number` objects as numbers. ([#1726])
+- Fixed `reduce` and `reduceRight` to respect explicitly passed nullish accumulators. ([#1742])
+- Fixed `isEmpty` to handle functions with own enumerable properties. ([#1645])
+- Fixed the `globalThis` polyfill to avoid `Function(...)`, supporting CSP environments without `unsafe-eval`.
+- Fixed ESM resolution for `./compat/*` subpaths in package exports. ([#1757])
+- Fixed `compat/size` to count array-like objects by their `length`. ([#1766])
+- Fixed `compat/round`, `compat/ceil`, and `compat/floor` to return `Infinity` for infinite values with precision. ([#1764])
+- Fixed `compat/random` to coerce the upper bound for non-number `max`. ([#1751])
+- Fixed `compat/toLength` to coerce non-numeric values to 0. ([#1758])
+- Removed unused generic type parameters from `pull`. ([#1746])
+
+We sincerely thank @Amund211, @Antoliny0919, @chatman-media, @D-Sketon, @dayongkr, @JetProc, @parkhojeong, @pbk95120, @raon0211, @sarathfrancis90, @shaked-shlomo, and @sukvvon for their contributions. We appreciate your great efforts!
+
 ## Version v1.47.0
 
 Released on May 25th, 2026.
