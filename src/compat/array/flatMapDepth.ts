@@ -10,8 +10,8 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  * Creates a flattened array of values by running each element through iteratee and flattening the mapped results up to depth times.
  *
  * @template T
- * @param {Record<string, ListOfRecursiveArraysOrValues<T> | T> | Record<number, ListOfRecursiveArraysOrValues<T> | T> | null | undefined} collection - The collection to iterate over.
- * @returns {T[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @returns Returns the new flattened array.
  *
  * @example
  * const obj = { a: [[1, 2]], b: [[[3]]] };
@@ -30,10 +30,10 @@ export function flatMapDepth<T>(
  * Creates a flattened array of values by running each element through iteratee and flattening the mapped results up to depth times.
  *
  * @template T, R
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {ListIterator<T, RecursiveArray<R> | R>} iteratee - The function invoked per iteration.
- * @param {number} [depth=1] - The maximum recursion depth.
- * @returns {R[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The function invoked per iteration.
+ * @param [depth=1] - The maximum recursion depth.
+ * @returns Returns the new flattened array.
  *
  * @example
  * function duplicate(n) {
@@ -53,10 +53,10 @@ export function flatMapDepth<T, R>(
  * Creates a flattened array of values by running each element through iteratee and flattening the mapped results up to depth times.
  *
  * @template T, R
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {ObjectIterator<T, RecursiveArray<R> | R>} iteratee - The function invoked per iteration.
- * @param {number} [depth=1] - The maximum recursion depth.
- * @returns {R[]} Returns the new flattened array.
+ * @param collection - The object to iterate over.
+ * @param iteratee - The function invoked per iteration.
+ * @param [depth=1] - The maximum recursion depth.
+ * @returns Returns the new flattened array.
  *
  * @example
  * const obj = { a: 1, b: 2 };
@@ -72,10 +72,10 @@ export function flatMapDepth<T extends object, R>(
 /**
  * Creates a flattened array of values by running each element through iteratee and flattening the mapped results up to depth times.
  *
- * @param {object | null | undefined} collection - The collection to iterate over.
- * @param {string} iteratee - The property name to use as iteratee.
- * @param {number} [depth=1] - The maximum recursion depth.
- * @returns {any[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The property name to use as iteratee.
+ * @param [depth=1] - The maximum recursion depth.
+ * @returns Returns the new flattened array.
  *
  * @example
  * const users = [
@@ -90,10 +90,10 @@ export function flatMapDepth(collection: object | null | undefined, iteratee: st
 /**
  * Creates a flattened array of values by running each element through iteratee and flattening the mapped results up to depth times.
  *
- * @param {object | null | undefined} collection - The collection to iterate over.
- * @param {object} iteratee - The object properties to match.
- * @param {number} [depth=1] - The maximum recursion depth.
- * @returns {boolean[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The object properties to match.
+ * @param [depth=1] - The maximum recursion depth.
+ * @returns Returns the new flattened array.
  *
  * @example
  * const users = [
@@ -109,10 +109,10 @@ export function flatMapDepth(collection: object | null | undefined, iteratee: ob
  * Creates a flattened array of values by running each element through iteratee and flattening the mapped results up to depth times.
  *
  * @template T, R
- * @param {Record<string, ArrayLike<T | ListOfRecursiveArraysOrValues<T>> | T> | Record<number, ArrayLike<T | ListOfRecursiveArraysOrValues<T>> | T> | ArrayLike<T> | object | null | undefined} collection - The array or object to iterate over.
- * @param {((value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R) | ((value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R) | string | object} [iteratee] - The function that produces the new array elements.
- * @param {number} [depth=1] - The maximum recursion depth.
- * @returns {T[] | R[] | any[] | boolean[]} A new array that has been flattened up to the specified depth.
+ * @param collection - The array or object to iterate over.
+ * @param [iteratee] - The function that produces the new array elements.
+ * @param [depth=1] - The maximum recursion depth.
+ * @returns A new array that has been flattened up to the specified depth.
  *
  * @example
  * flatMapDepth([1, 2, 3], n => [[n, n]], 2);

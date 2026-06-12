@@ -18,10 +18,10 @@ import { toPath } from '../util/toPath.ts';
  * arguments object is sparse (i.e., not all indexes are defined).
  *
  * @template T
- * @param {T} object - The object to query.
- * @param {PropertyPath} path - The path to check. This can be a single property key,
+ * @param object - The object to query.
+ * @param path - The path to check. This can be a single property key,
  *        an array of property keys, or a string representing a deep path.
- * @returns {boolean} Returns `true` if the path exists (own or inherited), `false` otherwise.
+ * @returns Returns `true` if the path exists (own or inherited), `false` otherwise.
  *
  * @example
  *

@@ -1,9 +1,9 @@
 /**
  * Defers invoking the `func` until the current call stack has cleared. Any additional arguments are provided to func when it's invoked.
  *
- * @param {(...args: any[]) => any} func The function to defer.
- * @param {...any[]} args The arguments to invoke `func` with.
- * @returns {number} Returns the timer id.
+ * @param func The function to defer.
+ * @param args The arguments to invoke `func` with.
+ * @returns Returns the timer id.
  *
  * @example
  * defer(console.log, 'deferred');
@@ -14,9 +14,9 @@ export function defer(func: (...args: any[]) => any, ...args: any[]): number;
 /**
  * Defers invoking the `func` until the current call stack has cleared. Any additional arguments are provided to func when it's invoked.
  *
- * @param {F} func The function to defer.
- * @param {Parameters<F>} args The arguments to invoke `func` with.
- * @returns {number} Returns the timer id.
+ * @param func The function to defer.
+ * @param args The arguments to invoke `func` with.
+ * @returns Returns the timer id.
  *
  * @example
  * defer((text) => {

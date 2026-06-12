@@ -6,9 +6,9 @@ import { eq } from '../util/eq.ts';
  *
  * Make sure to provide a sorted array to this function, as it uses a binary search to quickly find the index.
  *
- * @param {ArrayLike<T> | null | undefined} array The sorted array to inspect.
- * @param {T} value The value to search for.
- * @returns {number} Returns the index of the matched value, else -1.
+ * @param array The sorted array to inspect.
+ * @param value The value to search for.
+ * @returns Returns the index of the matched value, else -1.
  *
  * @example
  * const numbers = [1, 2, 3, 4, 5];

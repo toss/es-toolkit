@@ -10,10 +10,10 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
  *
  * @template T, U
- * @param {ArrayLike<T> | null} array - The array to inspect.
- * @param {ArrayLike<U>} values - The values to compare.
- * @param {ValueIteratee<T | U>} iteratee - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param array - The array to inspect.
+ * @param values - The values to compare.
+ * @param iteratee - The iteratee invoked per element.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor);
@@ -29,11 +29,11 @@ export function intersectionBy<T, U>(
  * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
  *
  * @template T, U, V
- * @param {ArrayLike<T> | null} array - The array to inspect.
- * @param {ArrayLike<U>} values1 - The first values to compare.
- * @param {ArrayLike<V>} values2 - The second values to compare.
- * @param {ValueIteratee<T | U | V>} iteratee - The iteratee invoked per element.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param array - The array to inspect.
+ * @param values1 - The first values to compare.
+ * @param values2 - The second values to compare.
+ * @param iteratee - The iteratee invoked per element.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * intersectionBy([2.1, 1.2], [2.3, 3.4], [2.5], Math.floor);
@@ -50,11 +50,11 @@ export function intersectionBy<T, U, V>(
  * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
  *
  * @template T, U, V, W
- * @param {ArrayLike<T> | null | undefined} array - The array to inspect.
- * @param {ArrayLike<U>} values1 - The first values to compare.
- * @param {ArrayLike<V>} values2 - The second values to compare.
- * @param {...Array<ArrayLike<W> | ValueIteratee<T | U | V | W>>} values - The other arrays to compare, and the iteratee to use.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param array - The array to inspect.
+ * @param values1 - The first values to compare.
+ * @param values2 - The second values to compare.
+ * @param values - The other arrays to compare, and the iteratee to use.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * intersectionBy([2.1, 1.2], [2.3, 3.4], [2.5], [2.6, 1.7], Math.floor);
@@ -71,9 +71,9 @@ export function intersectionBy<T, U, V, W>(
  * Creates an array of unique values that are included in all given arrays.
  *
  * @template T
- * @param {ArrayLike<T> | null} [array] - The array to inspect.
- * @param {...Array<ArrayLike<T>>} values - The values to compare.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param [array] - The array to inspect.
+ * @param values - The values to compare.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * intersectionBy([2, 1], [2, 3]);
@@ -85,8 +85,8 @@ export function intersectionBy<T>(array?: ArrayLike<T> | null, ...values: Array<
  * Creates an array of unique values that are included in all given arrays, using an iteratee to compute equality.
  *
  * @template T
- * @param {...Array<ArrayLike<T> | ValueIteratee<T>>} values - The arrays to compare and the iteratee to use.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param values - The arrays to compare and the iteratee to use.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor);
@@ -105,9 +105,9 @@ export function intersectionBy<T>(...values: Array<ArrayLike<T> | ValueIteratee<
  * If the first array is `null` or `undefined`, an empty array is returned.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The first array to compare.
- * @param {...(ArrayLike<T> | ((value: T) => unknown) | string)} values - The arrays to compare, or the iteratee function.
- * @returns {T[]} A new array containing the elements from the first array that are present
+ * @param array - The first array to compare.
+ * @param values - The arrays to compare, or the iteratee function.
+ * @returns A new array containing the elements from the first array that are present
  *  in all subsequent arrays after applying the iteratee.
  *
  * @example

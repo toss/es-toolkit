@@ -92,9 +92,9 @@ export function filter<T extends object>(
  * If a function is provided, it is invoked for each element in the collection.
  *
  * @template T
- * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The array or object to iterate over.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} [predicate=identity] - The function invoked per iteration.
- * @returns {T[]} - Returns a new array of filtered elements that satisfy the predicate.
+ * @param source - The array or object to iterate over.
+ * @param [predicate=identity] - The function invoked per iteration.
+ * @returns Returns a new array of filtered elements that satisfy the predicate.
  *
  * @example
  * filter([{ a: 1 }, { a: 2 }, { b: 1 }], 'a');

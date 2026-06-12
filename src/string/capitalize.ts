@@ -2,8 +2,8 @@
  * Converts the first character of string to upper case and the remaining to lower case.
  *
  * @template T - Literal type of the string.
- * @param {T} str - The string to be converted to uppercase.
- * @returns {Capitalize<T>} - The capitalized string.
+ * @param str - The string to be converted to uppercase.
+ * @returns The capitalized string.
  *
  * @example
  * const result = capitalize('fred') // returns 'Fred'

@@ -6,8 +6,8 @@ import { toKey } from '../_internal/toKey.ts';
  *
  * This function takes a string representing a deep key (e.g., 'a.b.c' or 'a[b][c]') and breaks it down into an array of strings, each representing a segment of the path.
  *
- * @param {any} deepKey - The deep key string to convert.
- * @returns {string[]} An array of strings, each representing a segment of the path.
+ * @param deepKey - The deep key string to convert.
+ * @returns An array of strings, each representing a segment of the path.
  *
  * Examples:
  *

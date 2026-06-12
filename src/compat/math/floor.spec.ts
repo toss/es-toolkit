@@ -69,6 +69,14 @@ describe('floor', () => {
     expect(actual).toEqual(expected);
   });
 
+  it(`\`floor\` should return \`Infinity\` for infinite values regardless of \`precision\``, () => {
+    expect(floor(Infinity)).toBe(Infinity);
+    expect(floor(Infinity, 2)).toBe(Infinity);
+    expect(floor(-Infinity, 2)).toBe(-Infinity);
+    expect(floor(Infinity, -2)).toBe(Infinity);
+    expect(floor(-Infinity, -2)).toBe(-Infinity);
+  });
+
   it(`\`floor\` should handle edge cases`, () => {
     expect(floor(1.797, 295)).toBe(1.797);
     expect(floor(1.797, -295)).toBe(0);

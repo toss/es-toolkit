@@ -10,9 +10,9 @@ import { iteratee as createIteratee } from '../util/iteratee.ts';
  * returns falsey. The predicate is invoked with three arguments: (value, index, array).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to query.
- * @param {ListIteratee<T>} [predicate] - The function invoked per iteration.
- * @returns {T[]} Returns the slice of array.
+ * @param array - The array to query.
+ * @param [predicate] - The function invoked per iteration.
+ * @returns Returns the slice of array.
  *
  * @example
  * const users = [
@@ -44,14 +44,14 @@ export function takeRightWhile<T>(array: ArrayLike<T> | null | undefined, predic
  * If the array is `null` or `undefined`, returns an empty array.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} array - The array to process.
- * @param {(item: T, index: number, array: T[]) => unknown | Partial<T> | [keyof T, unknown] | PropertyKey} [predicate] - The condition used to determine elements to include. Can be:
+ * @param array - The array to process.
+ * @param [predicate] - The condition used to determine elements to include. Can be:
  * - A function invoked per iteration.
  * - A partial object to match properties.
  * - A key-value pair as a tuple.
  * - A property key to check for truthy values.
  * Defaults to the identity function if not provided.
- * @returns {T[]} - A slice of the array with elements taken from the end or an empty array if `array` is `null` or `undefined`.
+ * @returns A slice of the array with elements taken from the end or an empty array if `array` is `null` or `undefined`.
  *
  * @example
  * // Using a predicate function

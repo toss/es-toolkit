@@ -3,9 +3,9 @@ import { trimStart as trimStartToolkit } from '../../string/trimStart.ts';
 /**
  * Removes leading whitespace or specified characters from a string.
  *
- * @param {string} string - The string to trim.
- * @param {string} chars - The characters to trim from the start of the string.
- * @returns {string} Returns the trimmed string.
+ * @param string - The string to trim.
+ * @param chars - The characters to trim from the start of the string.
+ * @returns Returns the trimmed string.
  *
  * @example
  * trimStart('  abc  ');
@@ -19,10 +19,10 @@ export function trimStart(string?: string, chars?: string): string;
 /**
  * Removes leading whitespace or specified characters from a string.
  *
- * @param {string} string - The string to trim.
- * @param {string | number} index - The index parameter (used with guard).
- * @param {object} guard - Enables use as an iteratee for methods like `map`.
- * @returns {string} Returns the trimmed string.
+ * @param string - The string to trim.
+ * @param index - The index parameter (used with guard).
+ * @param guard - Enables use as an iteratee for methods like `map`.
+ * @returns Returns the trimmed string.
  *
  * @example
  * trimStart('  abc  ', 0, {});
@@ -33,10 +33,10 @@ export function trimStart(string: string, index: string | number, guard: object)
 /**
  * Removes leading whitespace or specified characters from a string.
  *
- * @param {string} str - The string from which leading characters will be trimmed.
- * @param {string | number} chars - The character(s) to remove from the start of the string.
- * @param {object} guard - Enables use as an iteratee for methods like `map`.
- * @returns {string} Returns the trimmed string.
+ * @param str - The string from which leading characters will be trimmed.
+ * @param chars - The character(s) to remove from the start of the string.
+ * @param guard - Enables use as an iteratee for methods like `map`.
+ * @returns Returns the trimmed string.
  *
  * @example
  * trimStart('  abc  ');
