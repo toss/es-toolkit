@@ -1,4 +1,5 @@
 import { isNil } from '../../predicate/isNil.ts';
+import { isArrayLike } from '../predicate/isArrayLike.ts';
 
 /**
  * Returns the length of an array, string, or object.
@@ -35,12 +36,20 @@ import { isNil } from '../../predicate/isNil.ts';
  * const emptyObj = {};
  * const emptyObjSize = size(emptyObj);
  * // emptyObjSize will be 0
+ *
+ * const arrayLike = { length: 3 };
+ * const arrayLikeSize = size(arrayLike);
+ * // arrayLikeSize will be 3
  */
 export function size(collection: object | string | null | undefined): number;
 
 export function size(target: any): number {
   if (isNil(target)) {
     return 0;
+  }
+
+  if (isArrayLike(target)) {
+    return target.length;
   }
 
   if (target instanceof Map || target instanceof Set) {
