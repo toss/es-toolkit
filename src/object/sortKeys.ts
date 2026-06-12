@@ -4,9 +4,9 @@
  * The keys are sorted alphabetically by default, but a custom compare function can be provided.
  *
  * @template T - The type of the object.
- * @param {T} object - The object to sort keys from.
- * @param {(a: string, b: string) => number} [compareKeys] - A custom compare function for sorting keys.
- * @returns {T} A new object with the keys sorted.
+ * @param object - The object to sort keys from.
+ * @param [compareKeys] - A custom compare function for sorting keys.
+ * @returns A new object with the keys sorted.
  *
  * @example
  * sortKeys({ b: 2, a: 1, c: 3 });

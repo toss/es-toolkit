@@ -6,8 +6,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
  *
- * @param {unknown} x - The value to test if it is a number.
- * @returns {x is number} True if the value is a number, false otherwise.
+ * @param x - The value to test if it is a number.
+ * @returns True if the value is a number, false otherwise.
  *
  * @example
  *

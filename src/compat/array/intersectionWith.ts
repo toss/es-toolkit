@@ -7,10 +7,10 @@ import { eq } from '../util/eq.ts';
  * Creates an array of unique values that are included in all given arrays, using a comparator function for equality comparisons.
  *
  * @template T, U
- * @param {ArrayLike<T> | null | undefined} array - The array to inspect.
- * @param {ArrayLike<U>} values - The values to compare.
- * @param {(a: T, b: T | U) => boolean} comparator - The comparator invoked per element.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param array - The array to inspect.
+ * @param values - The values to compare.
+ * @param comparator - The comparator invoked per element.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -28,11 +28,11 @@ export function intersectionWith<T, U>(
  * Creates an array of unique values that are included in all given arrays, using a comparator function for equality comparisons.
  *
  * @template T, U, V
- * @param {ArrayLike<T> | null | undefined} array - The array to inspect.
- * @param {ArrayLike<U>} values1 - The first values to compare.
- * @param {ArrayLike<V>} values2 - The second values to compare.
- * @param {(a: T, b: T | U | V) => boolean} comparator - The comparator invoked per element.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param array - The array to inspect.
+ * @param values1 - The first values to compare.
+ * @param values2 - The second values to compare.
+ * @param comparator - The comparator invoked per element.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -52,11 +52,11 @@ export function intersectionWith<T, U, V>(
  * Creates an array of unique values that are included in all given arrays, using a comparator function for equality comparisons.
  *
  * @template T, U, V, W
- * @param {ArrayLike<T> | null | undefined} array - The array to inspect.
- * @param {ArrayLike<U>} values1 - The first values to compare.
- * @param {ArrayLike<V>} values2 - The second values to compare.
- * @param {...Array<ArrayLike<W> | (a: T, b: T | U | V | W) => boolean>} values - The other arrays to compare, and the comparator to use.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param array - The array to inspect.
+ * @param values1 - The first values to compare.
+ * @param values2 - The second values to compare.
+ * @param values - The other arrays to compare, and the comparator to use.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -77,9 +77,9 @@ export function intersectionWith<T, U, V, W>(
  * Creates an array of unique values that are included in all given arrays.
  *
  * @template T
- * @param {ArrayLike<T> | null} [array] - The array to inspect.
- * @param {...Array<ArrayLike<T> | (a: T, b: never) => boolean>} values - The values to compare.
- * @returns {T[]} Returns the new array of intersecting values.
+ * @param [array] - The array to inspect.
+ * @param values - The values to compare.
+ * @returns Returns the new array of intersecting values.
  *
  * @example
  * intersectionWith([2, 1], [2, 3]);
@@ -94,9 +94,9 @@ export function intersectionWith<T>(
  * Returns the intersection of multiple arrays based on a custom equality function.
  *
  * @template T - The type of elements in the arrays
- * @param {ArrayLike<T> | null | undefined} firstArr - The first array to compare
- * @param {...(ArrayLike<T> | null | undefined | ((x: T, y: T) => boolean))} otherArrs - Additional arrays and optional equality function
- * @returns {T[]} Elements from first array that match in all arrays
+ * @param firstArr - The first array to compare
+ * @param otherArrs - Additional arrays and optional equality function
+ * @returns Elements from first array that match in all arrays
  *
  * @example
  * const arr1 = [{id: 1}, {id: 2}];

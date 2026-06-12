@@ -6,9 +6,9 @@
  *
  * `NaN` values are sorted as the smallest values. Returns `NaN` if the array is empty.
  *
- * @param {readonly number[]} arr - An array of numbers to calculate the percentile.
- * @param {number} percentile - The percentile to compute, in the range `[0, 100]`.
- * @returns {number} The value at the given percentile.
+ * @param arr - An array of numbers to calculate the percentile.
+ * @param percentile - The percentile to compute, in the range `[0, 100]`.
+ * @returns The value at the given percentile.
  * @throws {Error} Throws an error if `percentile` is not a number, less than `0`, or greater than `100`.
  *
  * @example

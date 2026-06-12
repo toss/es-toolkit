@@ -11,11 +11,11 @@ interface ForEachAsyncOptions {
  * when all async operations complete. It supports optional concurrency limiting.
  *
  * @template T - The type of elements in the array.
- * @param {readonly T[]} array The array to iterate over.
- * @param {(item: T, index: number, array: readonly T[]) => Promise<void>} callback An async function to execute for each element.
- * @param {ForEachAsyncOptions} [options] Optional configuration object.
- * @param {number} [options.concurrency] Maximum number of concurrent async operations. If not specified, all operations run concurrently.
- * @returns {Promise<void>} A promise that resolves when all operations complete.
+ * @param array The array to iterate over.
+ * @param callback An async function to execute for each element.
+ * @param [options] Optional configuration object.
+ * @param [options.concurrency] Maximum number of concurrent async operations. If not specified, all operations run concurrently.
+ * @returns A promise that resolves when all operations complete.
  * @example
  * const users = [{ id: 1 }, { id: 2 }, { id: 3 }];
  * await forEachAsync(users, async (user) => {

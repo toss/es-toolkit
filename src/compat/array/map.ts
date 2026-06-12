@@ -10,9 +10,9 @@ import { iteratee as iterateeToolkit } from '../util/iteratee.ts';
 /**
  * Maps each element in a tuple to a new tuple of values using an iteratee.
  *
- * @param {T} collection - The tuple to iterate over
- * @param {TupleIterator<T, U>} iteratee - The function invoked per iteration
- * @returns {{ [K in keyof T]: U }} - Returns the new mapped tuple
+ * @param collection - The tuple to iterate over
+ * @param iteratee - The function invoked per iteration
+ * @returns} - Returns the new mapped tuple
  *
  * @example
  * // Using a transformation function on a tuple
@@ -27,9 +27,9 @@ export function map<T extends readonly [unknown, ...unknown[]], U>(
 /**
  * Maps each element in an array to a new array using an iteratee.
  *
- * @param {T[] | null | undefined} collection - The array to iterate over
- * @param {ArrayIterator<T, U>} iteratee - The function invoked per iteration
- * @returns {U[]} - Returns the new mapped array
+ * @param collection - The array to iterate over
+ * @param iteratee - The function invoked per iteration
+ * @returns Returns the new mapped array
  *
  * @example
  * // Using a transformation function on an array
@@ -41,9 +41,9 @@ export function map<T, U>(collection: T[] | null | undefined, iteratee: ArrayIte
 /**
  * Maps each element in an array-like object to a new array using an iteratee.
  *
- * @param {ArrayLike<T> | null | undefined} collection - The array-like object to iterate over
- * @param {ListIterator<T, U>} iteratee - The function invoked per iteration
- * @returns {U[]} - Returns the new mapped array
+ * @param collection - The array-like object to iterate over
+ * @param iteratee - The function invoked per iteration
+ * @returns Returns the new mapped array
  *
  * @example
  * // Using a transformation function on an array-like object
@@ -55,8 +55,8 @@ export function map<T, U>(collection: ArrayLike<T> | null | undefined, iteratee:
 /**
  * Maps each value in an object to a new array.
  *
- * @param {Record<string, T> | Record<number, T> | null | undefined} collection - The object to iterate over
- * @returns {T[]} - Returns an array of the object's values
+ * @param collection - The object to iterate over
+ * @returns Returns an array of the object's values
  *
  * @example
  * // Converting an object's values to an array
@@ -68,9 +68,9 @@ export function map<T>(collection: Record<string, T> | Record<number, T> | null 
 /**
  * Maps each element in an object to a new array using an iteratee.
  *
- * @param {T | null | undefined} collection - The object to iterate over
- * @param {ObjectIterator<T, U>} iteratee - The function invoked per iteration
- * @returns {U[]} - Returns the new mapped array
+ * @param collection - The object to iterate over
+ * @param iteratee - The function invoked per iteration
+ * @returns Returns the new mapped array
  *
  * @example
  * // Using a transformation function on an object
@@ -82,9 +82,9 @@ export function map<T extends object, U>(collection: T | null | undefined, itera
 /**
  * Maps each element in an object to a new array by plucking the specified property.
  *
- * @param {Record<string, T> | Record<number, T> | null | undefined} collection - The object to iterate over
- * @param {K} iteratee - The property to pluck from each element
- * @returns {Array<T[K]>} - Returns the new array of plucked values
+ * @param collection - The object to iterate over
+ * @param iteratee - The property to pluck from each element
+ * @returns Returns the new array of plucked values
  *
  * @example
  * // Plucking a property from each object
@@ -99,9 +99,9 @@ export function map<T, K extends keyof T>(
 /**
  * Maps each element in an object to a new array by plucking the specified string property.
  *
- * @param {Record<string, T> | Record<number, T> | null | undefined} collection - The object to iterate over
- * @param {string} [iteratee] - The string property to pluck from each element
- * @returns {any[]} - Returns the new array of plucked values
+ * @param collection - The object to iterate over
+ * @param [iteratee] - The string property to pluck from each element
+ * @returns Returns the new array of plucked values
  *
  * @example
  * // Plucking a nested property
@@ -113,9 +113,9 @@ export function map<T>(collection: Record<string, T> | Record<number, T> | null 
 /**
  * Maps each element in an object to a new array by matching against a source object.
  *
- * @param {Record<string, T> | Record<number, T> | null | undefined} collection - The object to iterate over
- * @param {object} [iteratee] - The object to match against
- * @returns {boolean[]} - Returns an array of boolean values indicating matches
+ * @param collection - The object to iterate over
+ * @param [iteratee] - The object to match against
+ * @returns Returns an array of boolean values indicating matches
  *
  * @example
  * // Matching against a source object

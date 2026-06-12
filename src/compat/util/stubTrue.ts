@@ -1,7 +1,7 @@
 /**
  * Returns true.
  *
- * @returns {boolean} true.
+ * @returns true.
  * @example
  * stubTrue() // Returns true
  */
@@ -10,7 +10,7 @@ export function stubTrue(): true;
 /**
  * Returns true.
  *
- * @returns {boolean} true.
+ * @returns true.
  * @example
  * stubTrue() // Returns true
  */

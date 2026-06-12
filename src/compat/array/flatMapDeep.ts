@@ -9,8 +9,8 @@ type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
  *
  * @template T
- * @param {Record<string, RecursiveArray<T> | T> | Record<number, RecursiveArray<T> | T> | null | undefined} collection - The collection to iterate over.
- * @returns {T[]} Returns the new deeply flattened array.
+ * @param collection - The collection to iterate over.
+ * @returns Returns the new deeply flattened array.
  *
  * @example
  * const obj = { a: [[1, 2]], b: [[[3]]] };
@@ -29,9 +29,9 @@ export function flatMapDeep<T>(
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
  *
  * @template T, R
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {ListIterator<T, RecursiveArray<R> | R>} iteratee - The function invoked per iteration.
- * @returns {R[]} Returns the new deeply flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The function invoked per iteration.
+ * @returns Returns the new deeply flattened array.
  *
  * @example
  * function duplicate(n) {
@@ -50,9 +50,9 @@ export function flatMapDeep<T, R>(
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
  *
  * @template T, R
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {ObjectIterator<T, RecursiveArray<R> | R>} iteratee - The function invoked per iteration.
- * @returns {R[]} Returns the new deeply flattened array.
+ * @param collection - The object to iterate over.
+ * @param iteratee - The function invoked per iteration.
+ * @returns Returns the new deeply flattened array.
  *
  * @example
  * const obj = { a: 1, b: 2 };
@@ -67,9 +67,9 @@ export function flatMapDeep<T extends object, R>(
 /**
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
  *
- * @param {object | null | undefined} collection - The collection to iterate over.
- * @param {string} iteratee - The property name to use as iteratee.
- * @returns {any[]} Returns the new deeply flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The property name to use as iteratee.
+ * @returns Returns the new deeply flattened array.
  *
  * @example
  * const users = [
@@ -84,9 +84,9 @@ export function flatMapDeep(collection: object | null | undefined, iteratee: str
 /**
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
  *
- * @param {object | null | undefined} collection - The collection to iterate over.
- * @param {object} iteratee - The object properties to match.
- * @returns {boolean[]} Returns the new deeply flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The object properties to match.
+ * @returns Returns the new deeply flattened array.
  *
  * @example
  * const users = [
@@ -102,9 +102,9 @@ export function flatMapDeep(collection: object | null | undefined, iteratee: obj
  * Creates a flattened array of values by running each element through iteratee and recursively flattening the mapped results.
  *
  * @template T, R
- * @param {Record<string, ArrayLike<T | RecursiveArray<T>> | T> | Record<number, ArrayLike<T | RecursiveArray<T>> | T> | ArrayLike<T> | object | null | undefined} collection - The array or object to iterate over.
- * @param {((value: T, index: number, array: ArrayLike<T>) => ArrayLike<R | RecursiveArray<R>> | R) | ((value: T[keyof T], key: string, object: T) => ArrayLike<R | RecursiveArray<R>> | R) | string | object} [iteratee] - The function that produces the new array elements.
- * @returns {T[] | R[] | any[] | boolean[]} A new array that has been deeply flattened.
+ * @param collection - The array or object to iterate over.
+ * @param [iteratee] - The function that produces the new array elements.
+ * @returns A new array that has been deeply flattened.
  *
  * @example
  * flatMapDeep([1, 2, 3], n => [[n, n]]);

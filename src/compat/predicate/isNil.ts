@@ -6,8 +6,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `null` or `undefined`.
  *
- * @param {any} x - The value to test for null or undefined.
- * @returns {x is null | undefined} `true` if the value is null or undefined, `false` otherwise.
+ * @param x - The value to test for null or undefined.
+ * @returns `true` if the value is null or undefined, `false` otherwise.
  *
  * @example
  * const value1 = null;

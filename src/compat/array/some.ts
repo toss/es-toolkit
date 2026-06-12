@@ -9,9 +9,9 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * Checks if predicate returns truthy for any element of collection.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {ListIterateeCustom<T, boolean>} [predicate] - The function invoked per iteration.
- * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
+ * @param collection - The collection to iterate over.
+ * @param [predicate] - The function invoked per iteration.
+ * @returns Returns `true` if any element passes the predicate check, else `false`.
  *
  * @example
  * some([null, 0, 'yes', false], Boolean);
@@ -26,9 +26,9 @@ export function some<T>(
  * Checks if predicate returns truthy for any element of collection.
  *
  * @template T
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {ObjectIterateeCustom<T, boolean>} [predicate] - The function invoked per iteration.
- * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
+ * @param collection - The object to iterate over.
+ * @param [predicate] - The function invoked per iteration.
+ * @returns Returns `true` if any element passes the predicate check, else `false`.
  *
  * @example
  * some({ 'a': 0, 'b': 1, 'c': 0 }, function(n) { return n > 0; });
@@ -45,10 +45,10 @@ export function some<T extends object>(
  * Iteration is stopped once there is an element that matches `predicate`.
  *
  * @template T
- * @param {ArrayLike<T> | Record<string, any> | null | undefined} source The source to iterate over.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} [predicate=identity] The function invoked per iteration.
+ * @param source The source to iterate over.
+ * @param [predicate=identity] The function invoked per iteration.
  * If a property name or an object is provided it will be used to create a predicate function.
- * @returns {boolean} Returns `true` if any element passes the predicate check, else `false`.
+ * @returns Returns `true` if any element passes the predicate check, else `false`.
  *
  * @example
  * some([1, 2, 3, 4], n => n % 2 === 0);
