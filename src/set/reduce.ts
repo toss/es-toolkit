@@ -7,10 +7,10 @@
  *
  * @template T - The type of elements in the Set.
  * @template A - The type of the accumulator.
- * @param {Set<T>} set - The Set to reduce.
- * @param {(accumulator: A, value: T, value2: T, set: Set<T>) => A} callback - A function that processes each element and updates the accumulator.
- * @param {A} [initialValue] - The initial value for the accumulator. If not provided, the first element in the Set is used.
- * @returns {A} The final accumulated value.
+ * @param set - The Set to reduce.
+ * @param callback - A function that processes each element and updates the accumulator.
+ * @param [initialValue] - The initial value for the accumulator. If not provided, the first element in the Set is used.
+ * @returns The final accumulated value.
  * @throws {TypeError} If the Set is empty and no initial value is provided.
  *
  * @example

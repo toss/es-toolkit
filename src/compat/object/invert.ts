@@ -3,8 +3,8 @@ import { invert as invertToolkit } from '../../object/invert.ts';
 /**
  * Inverts the keys and values of an object.
  *
- * @param {object} object - The object to invert.
- * @returns {Record<string, string>} - Returns the new inverted object.
+ * @param object - The object to invert.
+ * @returns Returns the new inverted object.
  *
  * @example
  * invert({ a: 1, b: 2, c: 3 });
@@ -21,8 +21,8 @@ export function invert(object: object): Record<string, string>;
  *
  * @template K - Type of the keys in the input object (string, number, symbol)
  * @template V - Type of the values in the input object (string, number, symbol)
- * @param {Record<K, V>} obj - The input object whose keys and values are to be inverted
- * @returns {Record<V, K>} - A new object with keys and values inverted
+ * @param obj - The input object whose keys and values are to be inverted
+ * @returns A new object with keys and values inverted
  *
  * @example
  * invert({ a: 1, b: 2, c: 3 }); // { 1: 'a', 2: 'b', 3: 'c' }

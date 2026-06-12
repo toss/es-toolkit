@@ -9,8 +9,8 @@ import { ObjectIterator } from '../_internal/ObjectIterator.ts';
  * Creates a flattened array of values by running each element in collection through iteratee and flattening the mapped results.
  *
  * @template T
- * @param {Record<string, Many<T>> | Record<number, Many<T>> | null | undefined} collection - The collection to iterate over.
- * @returns {T[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @returns Returns the new flattened array.
  *
  * @example
  * const obj = { a: [1, 2], b: [3, 4] };
@@ -22,8 +22,8 @@ export function flatMap<T>(collection: Record<string, Many<T>> | Record<number, 
 /**
  * Creates a flattened array of values by running each element in collection through iteratee and flattening the mapped results.
  *
- * @param {object | null | undefined} collection - The collection to iterate over.
- * @returns {any[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @returns Returns the new flattened array.
  *
  * @example
  * flatMap({ a: 1, b: 2 });
@@ -35,9 +35,9 @@ export function flatMap(collection: object | null | undefined): any[];
  * Creates a flattened array of values by running each element in collection through iteratee and flattening the mapped results.
  *
  * @template T, R
- * @param {ArrayLike<T> | null | undefined} collection - The collection to iterate over.
- * @param {ListIterator<T, Many<R>>} iteratee - The function invoked per iteration.
- * @returns {R[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The function invoked per iteration.
+ * @returns Returns the new flattened array.
  *
  * @example
  * function duplicate(n) {
@@ -53,9 +53,9 @@ export function flatMap<T, R>(collection: ArrayLike<T> | null | undefined, itera
  * Creates a flattened array of values by running each element in collection through iteratee and flattening the mapped results.
  *
  * @template T, R
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {ObjectIterator<T, Many<R>>} iteratee - The function invoked per iteration.
- * @returns {R[]} Returns the new flattened array.
+ * @param collection - The object to iterate over.
+ * @param iteratee - The function invoked per iteration.
+ * @returns Returns the new flattened array.
  *
  * @example
  * const obj = { a: 1, b: 2 };
@@ -70,9 +70,9 @@ export function flatMap<T extends object, R>(
 /**
  * Creates a flattened array of values by running each element in collection through iteratee and flattening the mapped results.
  *
- * @param {object | null | undefined} collection - The collection to iterate over.
- * @param {string} iteratee - The property name to use as iteratee.
- * @returns {any[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The property name to use as iteratee.
+ * @returns Returns the new flattened array.
  *
  * @example
  * const users = [
@@ -87,9 +87,9 @@ export function flatMap(collection: object | null | undefined, iteratee: string)
 /**
  * Creates a flattened array of values by running each element in collection through iteratee and flattening the mapped results.
  *
- * @param {object | null | undefined} collection - The collection to iterate over.
- * @param {object} iteratee - The object properties to match.
- * @returns {boolean[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @param iteratee - The object properties to match.
+ * @returns Returns the new flattened array.
  *
  * @example
  * const users = [
@@ -105,9 +105,9 @@ export function flatMap(collection: object | null | undefined, iteratee: object)
  * Creates a flattened array of values by running each element in collection through iteratee and flattening the mapped results.
  *
  * @template R
- * @param {object | null | undefined} collection - The collection to iterate over.
- * @param {any} [iteratee] - The function invoked per iteration.
- * @returns {R[]} Returns the new flattened array.
+ * @param collection - The collection to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns the new flattened array.
  *
  * @example
  * flatMap([1, 2], n => [n, n * 2]);

@@ -26,9 +26,9 @@ interface RetryOptions {
    * A function that determines whether to retry based on the error and attempt number.
    * If not provided, all errors will trigger a retry.
    *
-   * @param {unknown} error - The error that occurred.
-   * @param {number} attempt - The current attempt number (0-indexed).
-   * @returns {boolean} Whether to retry.
+   * @param error - The error that occurred.
+   * @param attempt - The current attempt number (0-indexed).
+   * @returns Whether to retry.
    *
    * @example
    * shouldRetry: (error, attempt) => error.status >= 500
@@ -44,8 +44,8 @@ const DEFAULT_SHOULD_RETRY = () => true;
  * Retries a function that returns a promise until it resolves successfully.
  *
  * @template T
- * @param {() => Promise<T>} func - The function to retry.
- * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
+ * @param func - The function to retry.
+ * @returns A promise that resolves with the value of the successful function call.
  *
  * @example
  * // Basic usage with default retry options
@@ -57,9 +57,9 @@ export async function retry<T>(func: () => Promise<T>): Promise<T>;
  * Retries a function that returns a promise a specified number of times.
  *
  * @template T
- * @param {() => Promise<T>} func - The function to retry. It should return a promise.
- * @param {number} retries - The number of retries to attempt. Default is Infinity.
- * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
+ * @param func - The function to retry. It should return a promise.
+ * @param retries - The number of retries to attempt. Default is Infinity.
+ * @returns A promise that resolves with the value of the successful function call.
  *
  * @example
  * // Retry a function up to 3 times
@@ -71,13 +71,13 @@ export async function retry<T>(func: () => Promise<T>, retries: number): Promise
  * Retries a function that returns a promise with specified options.
  *
  * @template T
- * @param {() => Promise<T>} func - The function to retry. It should return a promise.
- * @param {RetryOptions} options - Options to configure the retry behavior.
- * @param {number | ((attempts: number) => number)} [options.delay=0] - Delay(milliseconds) between retries.
- * @param {number} [options.retries=Infinity] - The number of retries to attempt.
- * @param {AbortSignal} [options.signal] - An AbortSignal to cancel the retry operation.
- * @param {(error: unknown, attempt: number) => boolean} [options.shouldRetry] - A function that determines whether to retry.
- * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
+ * @param func - The function to retry. It should return a promise.
+ * @param options - Options to configure the retry behavior.
+ * @param [options.delay=0] - Delay(milliseconds) between retries.
+ * @param [options.retries=Infinity] - The number of retries to attempt.
+ * @param [options.signal] - An AbortSignal to cancel the retry operation.
+ * @param [options.shouldRetry] - A function that determines whether to retry.
+ * @returns A promise that resolves with the value of the successful function call.
  *
  * @example
  * // Retry a function with a delay of 1000ms between attempts
@@ -103,9 +103,9 @@ export async function retry<T>(func: () => Promise<T>, options: RetryOptions): P
  * Retries a function that returns a promise with specified options.
  *
  * @template T
- * @param {() => Promise<T>} func - The function to retry. It should return a promise.
- * @param {number | RetryOptions} [_options] - Either the number of retries or an options object.
- * @returns {Promise<T>} A promise that resolves with the value of the successful function call.
+ * @param func - The function to retry. It should return a promise.
+ * @param [_options] - Either the number of retries or an options object.
+ * @returns A promise that resolves with the value of the successful function call.
  */
 export async function retry<T>(func: () => Promise<T>, _options?: number | RetryOptions): Promise<T> {
   let delay: number | ((attempts: number) => number);

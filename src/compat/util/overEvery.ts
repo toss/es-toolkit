@@ -7,10 +7,10 @@ import { iteratee as createIteratee } from './iteratee.ts';
  * @template U - The first possible type that the value could match.
  * @template V - The second possible type that the value could match.
  *
- * @param {(value: T) => value is U} predicate1 - A function that checks if the value matches type `U`.
- * @param {(value: T) => value is V} predicate2 - A function that checks if the value matches type `V`.
+ * @param predicate1 - A function that checks if the value matches type `U`.
+ * @param predicate2 - A function that checks if the value matches type `V`.
  *
- * @returns {(value: T) => value is U & V} A function that takes a value and returns `true` if all predicates return truthy.
+ * @returns A function that takes a value and returns `true` if all predicates return truthy.
  *
  * @example
  * const func = overEvery(
@@ -32,11 +32,11 @@ export function overEvery<T, U extends T, V extends T>(
  *
  * @template T - The type of the values to be checked.
  *
- * @param {...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>} predicates -
+ * @param predicates -
  *   A list of predicates or arrays of predicates. Each predicate is a function that takes one or more values of
  *   type `T` and returns a boolean indicating whether the condition is satisfied for those values.
  *
- * @returns {(...values: T[]) => boolean} A function that takes a list of values and returns `true` if all of the
+ * @returns A function that takes a list of values and returns `true` if all of the
  *   predicates return truthy for the provided values, and `false` otherwise.
  *
  * @example
@@ -80,11 +80,11 @@ export function overEvery<T>(
  *
  * @template T - The type of the values to be checked.
  *
- * @param {...Array<((...values: T[]) => boolean) | ReadonlyArray<(...values: T[]) => boolean>>} predicates -
+ * @param predicates -
  *   A list of predicates or arrays of predicates. Each predicate is a function that takes one or more values of
  *   type `T` and returns a boolean indicating whether the condition is satisfied for those values.
  *
- * @returns {(...values: T[]) => boolean} A function that takes a list of values and returns `true` if all of the
+ * @returns A function that takes a list of values and returns `true` if all of the
  *   predicates return truthy for the provided values, and `false` otherwise.
  *
  * @example

@@ -10,9 +10,9 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * with two arguments: (arrVal, othVal).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The arrays to inspect.
- * @param {(a: T, b: T) => boolean} [comparator] - The comparator invoked per element.
- * @returns {T[]} Returns the new array of combined values.
+ * @param arrays - The arrays to inspect.
+ * @param [comparator] - The comparator invoked per element.
+ * @returns Returns the new array of combined values.
  *
  * @example
  * const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -28,10 +28,10 @@ export function unionWith<T>(arrays: ArrayLike<T> | null | undefined, comparator
  * with two arguments: (arrVal, othVal).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {(a: T, b: T) => boolean} [comparator] - The comparator invoked per element.
- * @returns {T[]} Returns the new array of combined values.
+ * @param arrays - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param [comparator] - The comparator invoked per element.
+ * @returns Returns the new array of combined values.
  *
  * @example
  * unionWith([1, 2], [2, 3], (a, b) => a === b);
@@ -49,11 +49,11 @@ export function unionWith<T>(
  * with two arguments: (arrVal, othVal).
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} arrays - The first array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays2 - The second array to inspect.
- * @param {ArrayLike<T> | null | undefined} arrays3 - The third array to inspect.
- * @param {...Array<(a: T, b: T) => boolean | ArrayLike<T> | null | undefined>} comparator - The comparator invoked per element.
- * @returns {T[]} Returns the new array of combined values.
+ * @param arrays - The first array to inspect.
+ * @param arrays2 - The second array to inspect.
+ * @param arrays3 - The third array to inspect.
+ * @param comparator - The comparator invoked per element.
+ * @returns Returns the new array of combined values.
  *
  * @example
  * unionWith([1], [2], [3], (a, b) => a === b);
@@ -72,8 +72,8 @@ export function unionWith<T>(
  * A comparator function can be provided for comparison and it output values from the first possible array
  *
  * @template T - The type of elements in the arrays.
- * @param {...(ArrayLike<T> | null | undefined | Comparator<T, U>)} values - The arrays to inspect, or the comparator function.
- * @returns {T[]} Returns the new array of combined unique values.
+ * @param values - The arrays to inspect, or the comparator function.
+ * @returns Returns the new array of combined unique values.
  *
  * @example
  * const objects = [

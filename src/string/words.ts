@@ -21,9 +21,9 @@ export const CASE_SPLIT_PATTERN =
 /**
  * Splits `string` into an array of its words, treating spaces and punctuation marks as separators.
  *
- * @param {string} str The string to inspect.
- * @param {RegExp | string} [pattern] The pattern to match words.
- * @returns {string[]} Returns the words of `string`.
+ * @param str The string to inspect.
+ * @param [pattern] The pattern to match words.
+ * @returns Returns the words of `string`.
  *
  * @example
  * words('fred, barney, & pebbles');

@@ -23,6 +23,14 @@ describe('toLength', () => {
     expect(1 / toLength(-0)).toBe(Infinity);
   });
 
+  it('should coerce non-numeric values to `0`', () => {
+    expect(toLength('a')).toBe(0);
+    expect(toLength('12px')).toBe(0);
+    expect(toLength(NaN)).toBe(0);
+    expect(toLength({})).toBe(0);
+    expect(toLength(undefined)).toBe(0);
+  });
+
   it('should match the type of lodash', () => {
     expectTypeOf(toLength).toEqualTypeOf<typeof toLengthLodash>();
   });

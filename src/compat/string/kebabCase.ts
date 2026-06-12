@@ -7,8 +7,8 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  *
  * Kebab case is the naming convention in which each word is written in lowercase and separated by a dash (-) character.
  *
- * @param {string | object} str - The string that is to be changed to kebab case.
- * @returns {string} - The converted string to kebab case.
+ * @param str - The string that is to be changed to kebab case.
+ * @returns The converted string to kebab case.
  *
  * @example
  * const convertedStr1 = kebabCase('camelCase') // returns 'camel-case'

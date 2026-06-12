@@ -7,8 +7,8 @@ import { clamp } from '../math/clamp.ts';
  *
  * A safe integer can be compared and represented correctly.
  *
- * @param {any} value - The value to convert.
- * @returns {number} Returns the value converted to a safe integer.
+ * @param value - The value to convert.
+ * @returns Returns the value converted to a safe integer.
  *
  * @example
  * toSafeInteger(3.2); // => 3

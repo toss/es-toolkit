@@ -3,8 +3,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
  *
- * @param {any} value The value to check if it is a number.
- * @returns {value is number} Returns `true` if `value` is a number, else `false`.
+ * @param value The value to check if it is a number.
+ * @returns Returns `true` if `value` is a number, else `false`.
  *
  * @example
  * const value1 = 123;

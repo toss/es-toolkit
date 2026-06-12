@@ -13,8 +13,8 @@ import { times } from '../util/times.ts';
  * - If the value is `null` or `undefined`, an empty array is returned.
  * - When handling prototype objects, the `constructor` property is excluded from the results.
  *
- * @param {any} [object] - The object to inspect for keys.
- * @returns {string[]} An array of string keys from the object.
+ * @param [object] - The object to inspect for keys.
+ * @returns An array of string keys from the object.
  *
  * @example
  * const obj = { a: 1, b: 2 };

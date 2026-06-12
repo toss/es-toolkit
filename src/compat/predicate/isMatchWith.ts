@@ -7,10 +7,10 @@ import { eq } from '../util/eq.ts';
  * Performs a deep comparison between a target value and a source pattern to determine if they match,
  * using a custom comparison function for fine-grained control over the matching logic.
  *
- * @param {object} target - The value to be tested for matching
- * @param {object} source - The pattern/template to match against
- * @param {IsMatchWithCustomizer} compare - Custom comparison function for fine-grained control
- * @returns {boolean} `true` if the target matches the source pattern, `false` otherwise
+ * @param target - The value to be tested for matching
+ * @param source - The pattern/template to match against
+ * @param compare - Custom comparison function for fine-grained control
+ * @returns `true` if the target matches the source pattern, `false` otherwise
  *
  * @example
  * // Basic matching with custom comparator
@@ -50,9 +50,9 @@ export function isMatchWith(target: object, source: object, compare: IsMatchWith
  * - `null` and `undefined` source values have specific matching rules
  * - Circular references are handled using an internal stack to prevent infinite recursion
  *
- * @param {object} target - The value to be tested for matching
- * @param {object} source - The pattern/template to match against
- * @param {function} [compare] - Optional custom comparison function that receives:
+ * @param target - The value to be tested for matching
+ * @param source - The pattern/template to match against
+ * @param [compare] - Optional custom comparison function that receives:
  *   - `objValue` - The value from the target at the current path
  *   - `srcValue` - The value from the source at the current path
  *   - `key` - The property key or array index being compared
@@ -61,7 +61,7 @@ export function isMatchWith(target: object, source: object, compare: IsMatchWith
  *   - `stack` - Internal Map used for circular reference detection
  *   Should return `true` for a match, `false` for no match, or `undefined` to continue with default behavior
  *
- * @returns {boolean} `true` if the target matches the source pattern, `false` otherwise
+ * @returns `true` if the target matches the source pattern, `false` otherwise
  *
  * @example
  * // Basic matching without custom comparator

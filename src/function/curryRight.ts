@@ -4,8 +4,8 @@
  *
  * Unlike `curry`, this function curries the function from right to left.
  *
- * @param {() => R} func - The function to curry.
- * @returns {() => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function noArgFunc() {
@@ -21,8 +21,8 @@ export function curryRight<R>(func: () => R): () => R;
  *
  * Unlike `curry`, this function curries the function from right to left.
  *
- * @param {(p: P) => R} func - The function to curry.
- * @returns {(p: P) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function oneArgFunc(a: number) {
@@ -38,8 +38,8 @@ export function curryRight<P, R>(func: (p: P) => R): (p: P) => R;
  *
  * Unlike `curry`, this function curries the function from right to left.
  *
- * @param {(p1: P1, p2: P2) => R} func - The function to curry.
- * @returns {(p2: P2) => (p1: P1) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function twoArgFunc(a: number, b: number) {
@@ -56,8 +56,8 @@ export function curryRight<P1, P2, R>(func: (p1: P1, p2: P2) => R): (p2: P2) => 
  *
  * Unlike `curry`, this function curries the function from right to left.
  *
- * @param {(p1: P1, p2: P2, p3: P3) => R} func - The function to curry.
- * @returns {(p3: P3) => (p2: P2) => (p1: P1) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function threeArgFunc(a: number, b: number, c: number) {
@@ -75,8 +75,8 @@ export function curryRight<P1, P2, P3, R>(func: (p1: P1, p2: P2, p3: P3) => R): 
  *
  * Unlike `curry`, this function curries the function from right to left.
  *
- * @param {(p1: P1, p2: P2, p3: P3, p4: P4) => R} func - The function to curry.
- * @returns {(p4: P4) => (p3: P3) => (p2: P2) => (p1: P1) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function fourArgFunc(a: number, b: number, c: number, d: number) {
@@ -97,8 +97,8 @@ export function curryRight<P1, P2, P3, P4, R>(
  *
  * Unlike `curry`, this function curries the function from right to left.
  *
- * @param {(p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) => R} func - The function to curry.
- * @returns {(p5: P5) => (p4: P4) => (p3: P3) => (p2: P2) => (p1: P1) => R} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function fiveArgFunc(a: number, b: number, c: number, d: number, e: number) {
@@ -120,8 +120,8 @@ export function curryRight<P1, P2, P3, P4, P5, R>(
  *
  * Unlike `curry`, this function curries the function from right to left.
  *
- * @param {(...args: any[]) => any} func - The function to curry.
- * @returns {(...args: any[]) => any} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function sum(a: number, b: number, c: number) {
@@ -146,8 +146,8 @@ export function curryRight(func: (...args: any[]) => any): (...args: any[]) => a
  *
  * Unlike `curry`, this function curries the function from right to left.
  *
- * @param {(...args: any[]) => any} func - The function to curry.
- * @returns {(...args: any[]) => any} A curried function.
+ * @param func - The function to curry.
+ * @returns A curried function.
  *
  * @example
  * function sum(a: number, b: number, c: number) {

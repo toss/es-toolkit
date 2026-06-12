@@ -4,8 +4,8 @@ import { toString } from '../util/toString.ts';
  * Converts the given value to a string and transforms it to lower case.
  * The function can handle various input types by first converting them to strings.
  *
- * @param {unknown} [value=''] The value to convert.
- * @returns {string} Returns the lower cased string.
+ * @param [value=''] The value to convert.
+ * @returns Returns the lower cased string.
  * @example
  *
  * toLower('--FOO-BAR--');

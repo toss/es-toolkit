@@ -1,7 +1,7 @@
 /**
  * Returns an empty string.
  *
- * @returns {string} An empty string.
+ * @returns An empty string.
  * @example
  * stubString() // Returns ''
  */
