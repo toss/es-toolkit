@@ -90,13 +90,13 @@ describe('random', () => {
 
   it('should support providing a `floating`', () => {
     let actual = random(true);
-    expect(actual % 1 && actual >= 0 && actual <= 1);
+    expect(actual % 1 && actual >= 0 && actual <= 1).toBeTruthy();
 
     actual = random(2, true);
     expect(actual % 1 && actual >= 0 && actual <= 2);
 
     actual = random(2, 4, true);
-    expect(actual % 1 && actual >= 2 && actual <= 4);
+    expect(actual % 1 && actual >= 2 && actual <= 4).toBeTruthy();
   });
 
   it('should work as an iteratee for methods like `_.map`', () => {

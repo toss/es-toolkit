@@ -129,7 +129,7 @@ export function random(...args: any[]): number {
   }
 
   if (floating) {
-    return randomToolkit(minimum, maximum + 1);
+    return randomToolkit(minimum, maximum);
   } else {
     return randomIntToolkit(minimum, maximum + 1);
   }
