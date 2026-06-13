@@ -64,10 +64,10 @@ export function pick<T>(object: T | null | undefined, ...props: Array<Many<Prope
  * // result will be { 'a.b': 1 }
  */
 export function pick<T extends object, U extends keyof T>(
-  obj: T | any | null | undefined,
+  object: T | any | null | undefined,
   ...keysArr: Array<Many<U>> | Array<Many<PropertyPath>>
 ): Pick<T, U> | Partial<T> {
-  if (isNil(obj)) {
+  if (isNil(object)) {
     return {};
   }
 
@@ -97,13 +97,13 @@ export function pick<T extends object, U extends keyof T>(
     }
 
     for (const key of keys) {
-      const value = get(obj, key);
+      const value = get(object, key);
 
-      if (value === undefined && !has(obj, key)) {
+      if (value === undefined && !has(object, key)) {
         continue;
       }
 
-      if (typeof key === 'string' && Object.hasOwn(obj, key)) {
+      if (typeof key === 'string' && Object.hasOwn(object, key)) {
         result[key] = value;
       } else {
         set(result, key, value);
