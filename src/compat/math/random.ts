@@ -121,6 +121,10 @@ export function random(...args: any[]): number {
     [minimum, maximum] = [maximum, minimum];
   }
 
+  if (!floating && (!Number.isInteger(minimum) || !Number.isInteger(maximum))) {
+    floating = true;
+  }
+
   minimum = clamp(minimum, -Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
   maximum = clamp(maximum, -Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
 
