@@ -82,6 +82,7 @@ export function random(...args: any[]): number {
       if (typeof args[1] === 'boolean') {
         maximum = args[0];
         floating = args[1];
+        break;
       } else {
         minimum = args[0];
         maximum = args[1];

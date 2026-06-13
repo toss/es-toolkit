@@ -111,7 +111,7 @@ describe('random', () => {
     expect(actual % 1 && actual >= 0 && actual <= 1).toBeTruthy();
 
     actual = random(2, true);
-    expect(actual % 1 && actual >= 0 && actual <= 2);
+    expect(actual % 1 && actual >= 0 && actual <= 2).toBeTruthy();
 
     actual = random(2, 4, true);
     expect(actual % 1 && actual >= 2 && actual <= 4).toBeTruthy();
