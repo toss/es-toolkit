@@ -57,6 +57,7 @@ export function pick<T>(object: T | null | undefined, ...props: Array<Many<Prope
  * // each path can be passed individually as an argument
  * const obj = { a: 1, b: 2, c: 3 };
  * const result = pick(obj, 'a', 'c');
+ * // result will be { a: 1, c: 3 }
  *
  * // pick a key over a path
  * const obj = { 'a.b': 1, a: { b: 2 } };
