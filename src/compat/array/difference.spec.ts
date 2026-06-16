@@ -89,6 +89,14 @@ describe('difference', () => {
     expect(difference([1, 2, 3], array)).toEqual([3]);
   });
 
+  it(`should treat sparse array holes as \`undefined\``, () => {
+    // eslint-disable-next-line
+    const array = [1, , 3];
+
+    expect(difference(array, [3])).toEqual([1, undefined]);
+    expect(difference([5, undefined], array)).toEqual([5]);
+  });
+
   it('should return an empty array when the first array is not array-like object', () => {
     expect(difference('23', ['2', '3'])).toEqual([]);
   });
