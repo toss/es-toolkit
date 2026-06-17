@@ -56,16 +56,3 @@ console.log(chunk([1, 2, 3, 4, 5], 2));
 ```
 
 :::
-
-## Lodash 兼容性
-
-从 `es-toolkit/compat` 导入 `chunk` 时,它与 lodash 兼容。
-
-- 如果 `size` 小于 1,则返回空数组。
-- 即使为 `size` 提供了带小数的数字,也会向下舍入为整数。
-
-```typescript
-import { chunk } from 'es-toolkit/compat';
-
-chunk([1, 2, 3], 0); // 返回 []
-```

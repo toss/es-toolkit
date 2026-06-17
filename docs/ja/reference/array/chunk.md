@@ -54,18 +54,3 @@ import { chunk } from 'es-toolkit/array';
 
 console.log(chunk([1, 2, 3, 4, 5], 2));
 ```
-
-:::
-
-## Lodash 互換性
-
-`es-toolkit/compat` から `chunk` をインポートすると、Lodash と互換になります。
-
-- `size` が 1 未満の場合、空の配列を返します。
-- `size` に小数点のある数を提供しても、整数に切り捨てられます。
-
-```typescript
-import { chunk } from 'es-toolkit/compat';
-
-chunk([1, 2, 3], 0); // Returns []
-```
