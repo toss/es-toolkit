@@ -44,6 +44,26 @@ describe('groupBy', () => {
     });
   });
 
+  it('should pass index to the key-generating function', () => {
+    const array = ['a', 'b', 'c', 'd', 'e'];
+    const result = groupBy(array, (item, index) => (index % 2 === 0 ? 'even' : 'odd'));
+
+    expect(result).toEqual({
+      even: ['a', 'c', 'e'],
+      odd: ['b', 'd'],
+    });
+  });
+
+  it('should pass array to the key-generating function', () => {
+    const array = [1, 2, 3, 4];
+    const result = groupBy(array, (item, index, arr) => (item < arr.length / 2 ? 'small' : 'large'));
+
+    expect(result).toEqual({
+      small: [1],
+      large: [2, 3, 4],
+    });
+  });
+
   it('should group elements by a numeric key', () => {
     const array = [
       { score: 1, name: 'John' },

@@ -1,6 +1,8 @@
 import { createRequire } from 'module';
 import path from 'path';
 import { defineConfig } from 'vitepress';
+import llmstxt from 'vitepress-plugin-llms';
+import { search as jaSearch } from './ja.mts';
 import { search as koSearch } from './ko.mts';
 import { search as zh_hansSearch } from './zh_hans.mts';
 
@@ -11,6 +13,8 @@ export const shared = defineConfig({
 
   lastUpdated: true,
   metaChunk: true,
+
+  srcExclude: ['**/CLAUDE.md'],
 
   /* prettier-ignore */
   head: [
@@ -88,10 +92,20 @@ export const shared = defineConfig({
     ],
   ],
 
+  transformPageData(pageData) {
+    const canonicalUrl = `https://es-toolkit.dev/${pageData.relativePath}`
+      .replace(/index\.md$/, '')
+      .replace(/\.md$/, '.html');
+
+    pageData.frontmatter.head ??= [];
+    pageData.frontmatter.head.push(['link', { rel: 'canonical', href: canonicalUrl }]);
+  },
+
   themeConfig: {
     logo: {
       dark: '/logo_white.png',
       light: '/logo_black.png',
+      alt: 'es-toolkit',
     },
 
     siteTitle: false,
@@ -106,6 +120,7 @@ export const shared = defineConfig({
         locales: {
           ...koSearch,
           ...zh_hansSearch,
+          ...jaSearch,
         },
       },
     },
@@ -141,7 +156,31 @@ export const shared = defineConfig({
             paths: [require.resolve('vitepress')],
           })
         ),
+        '@vue/server-renderer': path.dirname(
+          require.resolve('@vue/server-renderer/package.json', {
+            paths: [
+              require.resolve('vue', {
+                paths: [require.resolve('vitepress')],
+              }),
+            ],
+          })
+        ),
       },
     },
+    ssr: {
+      noExternal: ['vue', '@vue/server-renderer'],
+    },
+    plugins: [
+      llmstxt({
+        ignoreFiles: ['public/**/*', 'ja/**/*', 'ko/**/*', 'zh_hans/**/*', 'index.md', 'team.md'],
+        description: 'State-of-the-art JavaScript utility library',
+        details: `\
+es-toolkit is a modern JavaScript utility library that offers a collection of powerful functions for everyday use.
+
+Compared to alternatives like lodash, es-toolkit provides a significantly smaller bundle size (up to 97% less) and 2-3 times faster runtime performance. This is achieved through a modern implementation that leverages the latest JavaScript features.
+
+es-toolkit comes with built-in TypeScript types and has been rigorously tested, ensuring 100% test coverage for maximum reliability.`,
+      }),
+    ],
   },
 });

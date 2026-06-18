@@ -78,6 +78,18 @@ describe('flattenObject', function () {
     });
   });
 
+  it('handles empty arrays correctly', () => {
+    const result = flattenObject({
+      a: {
+        b: [],
+      },
+    });
+
+    expect(result).toEqual({
+      'a.b': [],
+    });
+  });
+
   it('handles `Buffer`s correctly', () => {
     const result = flattenObject({
       a: {

@@ -15,13 +15,6 @@ describe('negate', () => {
     expect(negateFn(2)).toBe(false);
   });
 
-  it('should create a function that negates the result of `func`', () => {
-    const negateFn = negate(isEven);
-
-    expect(negateFn(1)).toBe(true);
-    expect(negateFn(2)).toBe(false);
-  });
-
   it('should create a function that accepts multiple arguments', () => {
     let argCount: any;
     const count = 5;

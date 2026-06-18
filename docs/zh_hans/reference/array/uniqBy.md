@@ -59,7 +59,7 @@ console.log(uniqueByCategory);
 #### 参数
 
 - `arr` (`readonly T[]`): 要去除重复项的数组。
-- `mapper` (`(item: T) => U`): 将每个元素转换为用于比较的值的函数。
+- `mapper` (`(item: T, index: number, array: readonly T[]) => U`): 将每个元素转换为用于比较的值的函数。它接收元素、索引和数组作为参数。
 
 #### 返回值
 

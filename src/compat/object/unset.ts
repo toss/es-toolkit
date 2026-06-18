@@ -7,9 +7,9 @@ import { toPath } from '../util/toPath.ts';
 /**
  * Removes the property at the given path of the object.
  *
- * @param {unknown} obj - The object to modify.
- * @param {PropertyKey | readonly PropertyKey[]} path - The path of the property to unset.
- * @returns {boolean} - Returns true if the property is deleted, else false.
+ * @param obj - The object to modify.
+ * @param path - The path of the property to unset.
+ * @returns Returns true if the property is deleted, else false.
  *
  * @example
  * const obj = { a: { b: { c: 42 } } };

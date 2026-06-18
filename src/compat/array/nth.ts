@@ -4,8 +4,8 @@ import { toInteger } from '../util/toInteger.ts';
 /**
  * Gets the element at index `n` of `array`. If `n` is negative, the nth element from the end is returned.
  *
- * @param {ArrayLike<T> | null | undefined} array - The array to query.
- * @param {number} [n=0] - The index of the element to return.
+ * @param array - The array to query.
+ * @param [n=0] - The index of the element to return.
  * @return {T | undefined} Returns the nth element of `array`.
  *
  * @example

@@ -14,6 +14,12 @@ const camelCased = toCamelCaseKeys(obj);
 
 객체의 모든 키를 카멜 케이스로 변환하고 싶을 때 `toCamelCaseKeys`를 사용하세요. 중첩된 객체와 배열 내의 객체들도 재귀적으로 변환돼요.
 
+예를 들어, 객체의 키는 다음과 같이 변환돼요.
+
+- `snake_case` → `camelCase` (예: `user_id` → `userId`)
+- `PascalCase` → `camelCase` (예: `UserId` → `userId`)
+- `UPPERCASE_KEYS` → `camelCase` (예: `FIRST_NAME` → `firstName`, `LAST` → `last`)
+
 ```typescript
 import { toCamelCaseKeys } from 'es-toolkit/object';
 
@@ -50,6 +56,11 @@ const nestedResult = toCamelCaseKeys(nested);
 //     }
 //   }
 // }가 돼요
+
+// PascalCase와 uppercase keys 키도 변환돼요
+const raw = { UserId: 1, FIRST_NAME: 'JinHo', LAST: 'Yeom' };
+const converted = toCamelCaseKeys(raw);
+// converted는 { userId: 1, firstName: 'JinHo', last: 'Yeom' }가 돼요
 ```
 
 #### 파라미터

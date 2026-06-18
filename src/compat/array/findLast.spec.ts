@@ -184,4 +184,11 @@ describe('findLast', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(findLast).toEqualTypeOf<typeof findLastLodash>();
   });
+
+  it('should work with no predicate (uses identity)', () => {
+    expect(findLast([0, false, null, undefined, '', 1, 2, 3])).toBe(3);
+    expect(findLast([0, false, null, undefined, ''])).toBe(undefined);
+    expect(findLast({ a: 0, b: false, c: null, d: undefined, e: '', f: 1, g: 2 })).toBe(2);
+    expect(findLast({ a: 0, b: false, c: null, d: undefined, e: '' })).toBe(undefined);
+  });
 });

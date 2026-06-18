@@ -1,6 +1,7 @@
 import { cloneDeepWith as cloneDeepWithToolkit } from '../../object/cloneDeepWith.ts';
 import { copyProperties } from '../../object/cloneDeepWith.ts';
-import { argumentsTag, booleanTag, numberTag, stringTag } from '../_internal/tags.ts';
+import { getTag } from '../_internal/getTag.ts';
+import { argumentsTag, booleanTag, numberTag, objectTag, stringTag } from '../_internal/tags.ts';
 
 type CloneDeepWithCustomizer<TObject> = (
   value: any,
@@ -13,9 +14,9 @@ type CloneDeepWithCustomizer<TObject> = (
  * Creates a deep clone of the given value using a customizer function.
  *
  * @template T - The type of the value.
- * @param {T} value - The value to clone.
- * @param {CloneDeepWithCustomizer<T>} customizer - A function to customize the cloning process.
- * @returns {any} - A deep clone of the given value.
+ * @param value - The value to clone.
+ * @param customizer - A function to customize the cloning process.
+ * @returns A deep clone of the given value.
  *
  * @example
  * const obj = { a: 1, b: 2 };
@@ -32,8 +33,8 @@ export function cloneDeepWith<T>(value: T, customizer: CloneDeepWithCustomizer<T
  * Creates a deep clone of the given value.
  *
  * @template T - The type of the value.
- * @param {T} value - The value to clone.
- * @returns {T} - A deep clone of the given value.
+ * @param value - The value to clone.
+ * @returns A deep clone of the given value.
  *
  * @example
  * const obj = { a: 1, b: { c: 2 } };
@@ -46,9 +47,9 @@ export function cloneDeepWith<T>(value: T): T;
  * Creates a deep clone of the given object using a customizer function.
  *
  * @template T - The type of the object.
- * @param {T} obj - The object to clone.
- * @param {Function} [cloneValue] - A function to customize the cloning process.
- * @returns {T} - A deep clone of the given object.
+ * @param obj - The object to clone.
+ * @param [cloneValue] - A function to customize the cloning process.
+ * @returns A deep clone of the given object.
  *
  * @example
  * // Clone a primitive value
@@ -87,6 +88,15 @@ export function cloneDeepWith<T>(obj: T, customizer?: CloneDeepWithCustomizer<T>
 
     if (typeof obj !== 'object') {
       return undefined;
+    }
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    if (getTag(obj) === objectTag && typeof obj.constructor !== 'function') {
+      const result = {};
+      stack.set(obj, result);
+      copyProperties(result, obj, object, stack);
+      return result;
     }
 
     switch (Object.prototype.toString.call(obj)) {

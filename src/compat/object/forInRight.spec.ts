@@ -15,6 +15,8 @@ describe('forInRight', () => {
     forInRight(new Foo(), (_, key) => {
       keys.push(key);
     });
+
+    expect(keys).toEqual(['b', 'a']);
   });
 
   it('returns `null` if `object` is `null`', () => {

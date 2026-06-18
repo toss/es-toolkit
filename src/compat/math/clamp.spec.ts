@@ -60,4 +60,55 @@ describe('clamp', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(clamp).toEqualTypeOf<typeof clampLodash>();
   });
+
+  it('should work with undefined as lower bound', () => {
+    expect(clamp(5, undefined as any, 10)).toBe(5);
+    expect(clamp(-100, undefined as any, 10)).toBe(-100);
+    expect(clamp(100, undefined as any, 10)).toBe(10);
+  });
+
+  it('should work with undefined as upper bound', () => {
+    expect(clamp(5, 0, undefined as any)).toBe(0);
+    expect(clamp(-100, 0, undefined as any)).toBe(-100);
+    expect(clamp(100, 0, undefined as any)).toBe(0);
+  });
+
+  it('should work with only number provided', () => {
+    // @ts-expect-error - testing runtime behavior when only one argument is provided
+    expect(clamp(5)).toBe(5);
+    // @ts-expect-error - testing runtime behavior when only one argument is provided
+    expect(clamp(-100)).toBe(-100);
+    // @ts-expect-error - testing runtime behavior when only one argument is provided
+    expect(clamp(100)).toBe(100);
+  });
+
+  it('should handle non-numeric bounds', () => {
+    expect(clamp(5, 'a' as any, 10)).toBe(5);
+    expect(clamp(5, 0, 'b' as any)).toBe(0);
+  });
+
+  it('should handle upper bound less than lower bound', () => {
+    expect(clamp(5, 10, 0)).toBe(10);
+    expect(clamp(15, 10, 0)).toBe(10);
+    expect(clamp(-5, 10, 0)).toBe(10);
+  });
+
+  it('should handle Infinity and -Infinity correctly', () => {
+    expect(clamp(Infinity, 0, 10)).toBe(10);
+    expect(clamp(-Infinity, 0, 10)).toBe(0);
+    expect(clamp(5, -Infinity, Infinity)).toBe(5);
+    expect(clamp(5, Infinity, -Infinity)).toBe(Infinity);
+  });
+
+  it('should handle special NaN combinations', () => {
+    expect(clamp(5, NaN, NaN)).toBe(0);
+    expect(clamp(NaN, NaN, 10)).toBe(NaN);
+    expect(clamp(5, NaN, undefined as any)).toBe(0);
+    expect(clamp(5, undefined as any, NaN)).toBe(0);
+  });
+
+  it('should handle boolean bounds', () => {
+    expect(clamp(5, false as any, true as any)).toBe(1);
+    expect(clamp(5, true as any, false as any)).toBe(1);
+  });
 });

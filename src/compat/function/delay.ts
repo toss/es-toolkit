@@ -4,10 +4,10 @@ import { toNumber } from '../util/toNumber.ts';
  * Invokes the specified function after a delay of the given number of milliseconds.
  * Any additional arguments are passed to the function when it is invoked.
  *
- * @param {(...args: any[]) => any} func - The function to delay.
- * @param {number} wait - The number of milliseconds to delay the invocation.
- * @param {...any[]} args - The arguments to pass to the function when it is invoked.
- * @returns {number} Returns the timer id.
+ * @param func - The function to delay.
+ * @param wait - The number of milliseconds to delay the invocation.
+ * @param args - The arguments to pass to the function when it is invoked.
+ * @returns Returns the timer id.
  * @throws {TypeError} If the first argument is not a function.
  *
  * @example

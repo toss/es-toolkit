@@ -28,9 +28,9 @@ export interface ThrottledFunction<F extends (...args: any[]) => void> {
  * within the wait time will not trigger the execution of the original function.
  *
  * @template F - The type of function.
- * @param {F} func - The function to throttle.
- * @param {number} throttleMs - The number of milliseconds to throttle executions to.
- * @returns {(...args: Parameters<F>) => void} A new throttled function that accepts the same parameters as the original function.
+ * @param func - The function to throttle.
+ * @param throttleMs - The number of milliseconds to throttle executions to.
+ * @returns A new throttled function that accepts the same parameters as the original function.
  *
  * @example
  * const throttledFunction = throttle(() => {
@@ -55,16 +55,27 @@ export function throttle<F extends (...args: any[]) => void>(
 ): ThrottledFunction<F> {
   let pendingAt: number | null = null;
 
-  const debounced = debounce(func, throttleMs, { signal, edges });
+  const debounced = debounce(
+    function (this: any, ...args: Parameters<F>) {
+      pendingAt = Date.now();
+      func.apply(this, args);
+    },
+    throttleMs,
+    { signal, edges }
+  );
 
   const throttled = function (this: any, ...args: Parameters<F>) {
     if (pendingAt == null) {
       pendingAt = Date.now();
-    } else {
-      if (Date.now() - pendingAt >= throttleMs) {
-        pendingAt = Date.now();
-        debounced.cancel();
-      }
+    }
+
+    if (Date.now() - pendingAt >= throttleMs) {
+      pendingAt = Date.now();
+      func.apply(this, args);
+
+      debounced.cancel();
+      debounced.schedule();
+      return;
     }
 
     debounced.apply(this, args);

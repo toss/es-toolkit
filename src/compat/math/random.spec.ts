@@ -56,9 +56,9 @@ describe('random', () => {
         const result = random(min, max);
         return result >= min && result <= max;
       })
-    ).toBeTruthy();
+    ).toBe(true);
 
-    expect(array.some(() => random(Number.MAX_SAFE_INTEGER)));
+    expect(array.some(() => random(Number.MAX_SAFE_INTEGER))).toBe(true);
   });
 
   it('should coerce arguments to finite numbers', () => {
@@ -67,6 +67,16 @@ describe('random', () => {
     const actual = [random(NaN, NaN), random('1', '1'), random(Infinity, Infinity)];
 
     expect(actual).toEqual([0, 1, Number.MAX_SAFE_INTEGER]);
+  });
+
+  it('should coerce a string upper bound and respect both bounds', () => {
+    for (let i = 0; i < 100; i++) {
+      // eslint-disable-next-line
+      // @ts-ignore
+      const actual = random('5', '10');
+      expect(actual).toBeGreaterThanOrEqual(5);
+      expect(actual).toBeLessThanOrEqual(10);
+    }
   });
 
   it('should support floats', () => {

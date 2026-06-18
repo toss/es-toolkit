@@ -5,8 +5,8 @@ import type { RejectReadonly } from '../_internal/RejectReadonly.d.ts';
  * Reverses `array` so that the first element becomes the last, the second element becomes the second to last, and so on.
  *
  * @template L
- * @param {L extends readonly any[] ? never : L} array - The array to reverse.
- * @returns {L} Returns `array`.
+ * @param array - The array to reverse.
+ * @returns Returns `array`.
  *
  * @example
  * const array = [1, 2, 3];
@@ -22,8 +22,8 @@ export function reverse<L extends MutableList<any>>(array: RejectReadonly<L>): L
  * If the input is `null` or `undefined`, it returns the input as is.
  *
  * @template T - The type of elements in the array.
- * @param {T[] | null | undefined} array - The array to reverse. If `null` or `undefined`, the input is returned as is.
- * @returns {T[] | null | undefined} The reversed array, or `null`/`undefined` if the input was `null`/`undefined`.
+ * @param array - The array to reverse. If `null` or `undefined`, the input is returned as is.
+ * @returns The reversed array, or `null`/`undefined` if the input was `null`/`undefined`.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];

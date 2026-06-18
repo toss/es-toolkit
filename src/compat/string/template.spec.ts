@@ -121,6 +121,14 @@ describe('template', () => {
     expect(template('${"{" + value + "\\}"}')(data)).toBe('{2}');
   });
 
+  it('should disable ES6 template delimiters when "interpolate" is set', () => {
+    const data = { value: 2 };
+    expect(template('1${value}3', { interpolate: /<%=([\s\S]+?)%>/g })(data)).toBe('1${value}3');
+    expect(template('${"{" + value + "\\}"}', { interpolate: /<%=([\s\S]+?)%>/g })(data)).toBe(
+      '${"{" + value + "\\}"}'
+    );
+  });
+
   it('should support the "imports" option', () => {
     const compiled = template('<%= a %>', { imports: { a: 1 } });
     expect(compiled({})).toBe('1');
@@ -308,7 +316,7 @@ describe('template', () => {
     );
 
     const data = { a: 'A' };
-    expect(compiled(data), '\'a\').toBe("A"');
+    expect(compiled(data)).toBe('\'a\',"A"');
   });
 
   it('should work with templates containing newlines and comments', () => {
@@ -416,11 +424,8 @@ describe('template', () => {
   });
 
   it('should not error for non-object `data` and `options` values', () => {
-    template('')(1 as any);
-    expect(true, '`data` value');
-
-    template('', 1 as any)(1 as any);
-    expect(true, '`options` value');
+    expect(() => template('')(1 as any)).not.toThrow();
+    expect(() => template('', 1 as any)(1 as any)).not.toThrow();
   });
 
   it('should expose the source on compiled templates', () => {

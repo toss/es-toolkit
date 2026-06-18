@@ -37,7 +37,7 @@ describe('some', () => {
         count++;
         return value;
       })
-    );
+    ).toBe(true);
 
     expect(count).toBe(2);
   });

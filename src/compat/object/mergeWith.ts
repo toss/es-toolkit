@@ -1,18 +1,14 @@
 import { cloneDeep } from './cloneDeep.ts';
 import { isUnsafeProperty } from '../../_internal/isUnsafeProperty.ts';
 import { clone } from '../../object/clone.ts';
+import { isBuffer } from '../../predicate/isBuffer.ts';
 import { isPrimitive } from '../../predicate/isPrimitive.ts';
 import { getSymbols } from '../_internal/getSymbols.ts';
 import { isArguments } from '../predicate/isArguments.ts';
+import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
 import { isObjectLike } from '../predicate/isObjectLike.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 import { isTypedArray } from '../predicate/isTypedArray.ts';
-
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
 
 type MergeWithCustomizer = (objValue: any, srcValue: any, key: string, object: any, source: any, stack: any) => any;
 
@@ -21,10 +17,10 @@ type MergeWithCustomizer = (objValue: any, srcValue: any, key: string, object: a
  *
  * @template TObject
  * @template TSource
- * @param {TObject} object - The target object into which the source object properties will be merged.
- * @param {TSource} source - The source object whose properties will be merged into the target object.
- * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
- * @returns {TObject & TSource} Returns the updated target object with properties from the source object merged in.
+ * @param object - The target object into which the source object properties will be merged.
+ * @param source - The source object whose properties will be merged into the target object.
+ * @param customizer - The function to customize assigned values.
+ * @returns Returns the updated target object with properties from the source object merged in.
  *
  * @example
  * const target = { a: 1, b: 2 };
@@ -49,11 +45,11 @@ export function mergeWith<TObject, TSource>(
  * @template TObject
  * @template TSource1
  * @template TSource2
- * @param {TObject} object - The target object into which the source objects properties will be merged.
- * @param {TSource1} source1 - The first source object.
- * @param {TSource2} source2 - The second source object.
- * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
- * @returns {TObject & TSource1 & TSource2} Returns the updated target object with properties from the source objects merged in.
+ * @param object - The target object into which the source objects properties will be merged.
+ * @param source1 - The first source object.
+ * @param source2 - The second source object.
+ * @param customizer - The function to customize assigned values.
+ * @returns Returns the updated target object with properties from the source objects merged in.
  *
  * @example
  * const target = { a: 1 };
@@ -81,12 +77,12 @@ export function mergeWith<TObject, TSource1, TSource2>(
  * @template TSource1
  * @template TSource2
  * @template TSource3
- * @param {TObject} object - The target object into which the source objects properties will be merged.
- * @param {TSource1} source1 - The first source object.
- * @param {TSource2} source2 - The second source object.
- * @param {TSource3} source3 - The third source object.
- * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
- * @returns {TObject & TSource1 & TSource2 & TSource3} Returns the updated target object with properties from the source objects merged in.
+ * @param object - The target object into which the source objects properties will be merged.
+ * @param source1 - The first source object.
+ * @param source2 - The second source object.
+ * @param source3 - The third source object.
+ * @param customizer - The function to customize assigned values.
+ * @returns Returns the updated target object with properties from the source objects merged in.
  *
  * @example
  * const target = { a: 1 };
@@ -117,13 +113,13 @@ export function mergeWith<TObject, TSource1, TSource2, TSource3>(
  * @template TSource2
  * @template TSource3
  * @template TSource4
- * @param {TObject} object - The target object into which the source objects properties will be merged.
- * @param {TSource1} source1 - The first source object.
- * @param {TSource2} source2 - The second source object.
- * @param {TSource3} source3 - The third source object.
- * @param {TSource4} source4 - The fourth source object.
- * @param {MergeWithCustomizer} customizer - The function to customize assigned values.
- * @returns {TObject & TSource1 & TSource2 & TSource3 & TSource4} Returns the updated target object with properties from the source objects merged in.
+ * @param object - The target object into which the source objects properties will be merged.
+ * @param source1 - The first source object.
+ * @param source2 - The second source object.
+ * @param source3 - The third source object.
+ * @param source4 - The fourth source object.
+ * @param customizer - The function to customize assigned values.
+ * @returns Returns the updated target object with properties from the source objects merged in.
  *
  * @example
  * const target = { a: 1 };
@@ -151,9 +147,9 @@ export function mergeWith<TObject, TSource1, TSource2, TSource3, TSource4>(
 /**
  * Merges the properties of one or more source objects into the target object.
  *
- * @param {any} object - The target object into which the source object properties will be merged.
- * @param {...any} otherArgs - Additional source objects to merge into the target object, including the custom `merge` function.
- * @returns {any} The updated target object with properties from the source object(s) merged in.
+ * @param object - The target object into which the source object properties will be merged.
+ * @param otherArgs - Additional source objects to merge into the target object, including the custom `merge` function.
+ * @returns The updated target object with properties from the source object(s) merged in.
  *
  * @example
  * const target = { a: 1, b: 2 };
@@ -185,9 +181,9 @@ export function mergeWith(object: any, ...otherArgs: any[]): any;
  *
  * The function can handle multiple source objects and will merge them all into the target object.
  *
- * @param {any} object - The target object into which the source object properties will be merged. This object is modified in place.
- * @param {...any} otherArgs - Additional source objects to merge into the target object, including the custom `merge` function.
- * @returns {any} The updated target object with properties from the source object(s) merged in.
+ * @param object - The target object into which the source object properties will be merged. This object is modified in place.
+ * @param otherArgs - Additional source objects to merge into the target object, including the custom `merge` function.
+ * @returns The updated target object with properties from the source object(s) merged in.
  *
  * @example
  * const target = { a: 1, b: 2 };
@@ -287,18 +283,28 @@ function mergeWithDeep(
       targetValue = { ...targetValue };
     }
 
-    if (typeof Buffer !== 'undefined' && Buffer.isBuffer(sourceValue)) {
+    if (isBuffer(sourceValue)) {
       sourceValue = cloneDeep(sourceValue);
     }
 
     if (Array.isArray(sourceValue)) {
-      if (typeof targetValue === 'object' && targetValue != null) {
+      if (Array.isArray(targetValue)) {
         const cloned: any = [];
+        // for custom properties on arrays
         const targetKeys = Reflect.ownKeys(targetValue);
 
         for (let i = 0; i < targetKeys.length; i++) {
-          const targetKey = targetKeys[i];
+          const targetKey = targetKeys[i] as keyof typeof targetValue;
           cloned[targetKey] = targetValue[targetKey];
+        }
+
+        targetValue = cloned;
+      } else if (isArrayLikeObject(targetValue)) {
+        // array-like object: only copy numeric indices
+        const cloned: any = [];
+
+        for (let i = 0; i < targetValue.length; i++) {
+          cloned[i] = targetValue[i];
         }
 
         targetValue = cloned;
@@ -313,7 +319,14 @@ function mergeWithDeep(
       target[key] = merged;
     } else if (Array.isArray(sourceValue)) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
-    } else if (isObjectLike(targetValue) && isObjectLike(sourceValue)) {
+    } else if (
+      isObjectLike(targetValue) &&
+      isObjectLike(sourceValue) &&
+      (isPlainObject(targetValue) ||
+        isPlainObject(sourceValue) ||
+        isTypedArray(targetValue) ||
+        isTypedArray(sourceValue))
+    ) {
       target[key] = mergeWithDeep(targetValue, sourceValue, merge, stack);
     } else if (targetValue == null && isPlainObject(sourceValue)) {
       target[key] = mergeWithDeep({}, sourceValue, merge, stack);

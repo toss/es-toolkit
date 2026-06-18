@@ -4,8 +4,8 @@ import { isPlainObject } from './isPlainObject.ts';
 /**
  * Checks if `value` is likely a DOM element.
  *
- * @param {any} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a DOM element, else `false`.
+ * @param value The value to check.
+ * @returns Returns `true` if `value` is a DOM element, else `false`.
  *
  * @example
  * console.log(isElement(document.body)); // true

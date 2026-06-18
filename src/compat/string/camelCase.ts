@@ -1,3 +1,4 @@
+import { deburr } from './deburr.ts';
 import { camelCase as camelCaseToolkit } from '../../string/camelCase.ts';
 import { normalizeForCase } from '../_internal/normalizeForCase.ts';
 
@@ -7,8 +8,8 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  * Camel case is the naming convention in which the first word is written in lowercase and
  * each subsequent word begins with a capital letter, concatenated without any separator characters.
  *
- * @param {string | object} str - The string that is to be changed to camel case.
- * @returns {string} - The converted string to camel case.
+ * @param str - The string that is to be changed to camel case.
+ * @returns The converted string to camel case.
  *
  * @example
  * const convertedStr1 = camelCase('camelCase') // returns 'camelCase'
@@ -18,5 +19,5 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  */
 
 export function camelCase(str?: string): string {
-  return camelCaseToolkit(normalizeForCase(str));
+  return camelCaseToolkit(normalizeForCase(deburr(str)));
 }

@@ -41,7 +41,7 @@ minBy([], x => x.value); // undefined
 #### パラメータ
 
 - `items` (`T[]`): 最小値を持つ要素を探す配列です。
-- `getValue` (`(element: T) => number`): 各要素を数値に変換する関数です。
+- `getValue` (`(element: T, index: number, array: readonly T[]) => number`): 各要素を数値に変換する関数です。要素、インデックス、配列を引数として受け取ります。
 
 #### 戻り値
 

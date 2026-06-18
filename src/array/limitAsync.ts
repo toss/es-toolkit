@@ -8,9 +8,9 @@ import { Semaphore } from '../promise/semaphore';
  * wait until a slot becomes available.
  *
  * @template F - The type of the async function to wrap.
- * @param {F} callback The async function to wrap with concurrency control.
- * @param {number} concurrency Maximum number of concurrent executions allowed.
- * @returns {F} A wrapped version of the callback with concurrency limiting.
+ * @param callback The async function to wrap with concurrency control.
+ * @param concurrency Maximum number of concurrent executions allowed.
+ * @returns A wrapped version of the callback with concurrency limiting.
  * @example
  * const limitedFetch = limitAsync(async (url) => {
  *   return await fetch(url);

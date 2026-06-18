@@ -35,10 +35,10 @@ differenceBy(objects, numbers, item => (typeof item === 'object' ? item.id : ite
 import { differenceBy } from 'es-toolkit/array';
 
 const words1 = ['apple', 'banana', 'cherry'];
-const words2 = ['kiwi', 'pear'];
+const words2 = ['grape', 'lemon'];
 differenceBy(words1, words2, word => word.length);
 // 戻り値: ['banana', 'cherry']
-// 'apple' は 'kiwi' や 'pear' と長さが同じなので除外されます。
+// 'apple' は 'grape' や 'lemon' と長さが同じなので除外されます。
 ```
 
 #### パラメータ

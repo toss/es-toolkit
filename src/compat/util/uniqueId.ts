@@ -4,10 +4,10 @@ let idCounter = 0;
 /**
  * Generates a unique identifier, optionally prefixed with a given string.
  *
- * @param {string} [prefix] - An optional string to prefix the unique identifier.
+ * @param [prefix] - An optional string to prefix the unique identifier.
  *                            If not provided or not a string, only the unique
  *                            numeric identifier is returned.
- * @returns {string} A string containing the unique identifier, with the optional
+ * @returns A string containing the unique identifier, with the optional
  *                   prefix if provided.
  *
  * @example

@@ -41,7 +41,7 @@ minBy([], x => x.value); // undefined
 #### 参数
 
 - `items` (`T[]`): 要查找具有最小值的元素的数组。
-- `getValue` (`(element: T) => number`): 将每个元素转换为数字的函数。
+- `getValue` (`(element: T, index: number, array: readonly T[]) => number`): 将每个元素转换为数字的函数。它接收元素、索引和数组作为参数。
 
 #### 返回值
 

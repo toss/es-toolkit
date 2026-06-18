@@ -21,15 +21,15 @@ describe('add', () => {
     expect(add('x', 'y')).toBe('xy');
   });
 
-  it('should return the sum of two valid numbers', () => {
+  it('should return the sum of two positive numbers', () => {
     expect(add(2, 3)).toBe(5);
   });
 
-  it('should return the sum of two valid numbers', () => {
+  it('should return the sum of two negative numbers', () => {
     expect(add(-1, -5)).toBe(-6);
   });
 
-  it('should return the sum of two valid numbers', () => {
+  it('should return the sum of a negative and a positive number', () => {
     expect(add(-2, 3)).toBe(1);
   });
 

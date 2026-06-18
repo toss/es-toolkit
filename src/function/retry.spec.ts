@@ -62,7 +62,7 @@ describe('retry', () => {
   it('should throw an error after the specified number of retries', async () => {
     const func = vi.fn().mockRejectedValue(new Error('failure'));
     await expect(retry(func, 3)).rejects.toThrow('failure');
-    expect(func).toHaveBeenCalledTimes(3);
+    expect(func).toHaveBeenCalledTimes(4);
   });
 
   it('should abort the retry operation if the signal is already aborted', async () => {
@@ -74,5 +74,39 @@ describe('retry', () => {
       'The retry operation was aborted due to an abort signal.'
     );
     expect(func).toHaveBeenCalledTimes(0);
+  });
+
+  it('should retry when shouldRetry returns true', async () => {
+    const error = { status: 500, message: 'Server Error' };
+    const func = vi.fn().mockRejectedValueOnce(error).mockResolvedValue('success');
+    const shouldRetry = vi.fn((err: unknown) => (err as { status: number }).status >= 500);
+
+    const result = await retry(func, { retries: 3, shouldRetry });
+
+    expect(result).toBe('success');
+    expect(func).toHaveBeenCalledTimes(2);
+    expect(shouldRetry).toHaveBeenCalledWith(error, 0);
+  });
+
+  it('should not retry when shouldRetry returns false', async () => {
+    const error = { status: 400, message: 'Bad Request' };
+    const func = vi.fn().mockRejectedValue(error);
+    const shouldRetry = vi.fn((err: unknown) => (err as { status: number }).status >= 500);
+
+    await expect(retry(func, { retries: 3, shouldRetry })).rejects.toEqual(error);
+    expect(func).toHaveBeenCalledTimes(1);
+    expect(shouldRetry).toHaveBeenCalledWith(error, 0);
+  });
+
+  it('should pass attempt number to shouldRetry', async () => {
+    const error = new Error('failure');
+    const func = vi.fn().mockRejectedValue(error);
+    const shouldRetry = vi.fn((_err: unknown, attempt: number) => attempt < 2);
+
+    await expect(retry(func, { retries: 5, shouldRetry })).rejects.toThrow('failure');
+    expect(func).toHaveBeenCalledTimes(3);
+    expect(shouldRetry).toHaveBeenCalledWith(error, 0);
+    expect(shouldRetry).toHaveBeenCalledWith(error, 1);
+    expect(shouldRetry).toHaveBeenCalledWith(error, 2);
   });
 });

@@ -45,7 +45,7 @@ const [truthy, falsy] = partition([], x => x > 0);
 #### パラメータ
 
 - `arr` (`T[]`): 2つのグループに分ける配列です。
-- `isInTruthy` (`(value: T) => boolean`): 各要素が最初の配列(truthy)に含まれるか、2番目の配列(falsy)に含まれるかを決定する条件関数です。
+- `isInTruthy` (`(value: T, index: number, array: readonly T[]) => boolean`): 各要素が最初の配列(truthy)に含まれるか、2番目の配列(falsy)に含まれるかを決定する条件関数です。値、インデックス、配列全体と共に呼び出されます。
 
 #### 戻り値
 

@@ -5,8 +5,8 @@ import { words as getWords } from './words.ts';
  *
  * Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (_) character.
  *
- * @param {string} str - The string that is to be changed to snake case.
- * @returns {string} - The converted string to snake case.
+ * @param str - The string that is to be changed to snake case.
+ * @returns The converted string to snake case.
  *
  * @example
  * const convertedStr1 = snakeCase('camelCase') // returns 'camel_case'

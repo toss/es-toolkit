@@ -2,11 +2,14 @@ import { isArray } from '../compat/predicate/isArray.ts';
 import { isPlainObject } from '../compat/predicate/isPlainObject.ts';
 import { snakeCase } from '../string/snakeCase.ts';
 
-type SnakeCase<S extends string> = S extends `${infer P1}${infer P2}`
-  ? P2 extends Uncapitalize<P2>
-    ? `${Lowercase<P1>}${SnakeCase<P2>}`
-    : `${Lowercase<P1>}_${SnakeCase<Uncapitalize<P2>>}`
-  : Lowercase<S>;
+type SnakeCase<S extends string> =
+  S extends Uppercase<S>
+    ? Lowercase<S>
+    : S extends `${infer P1}${infer P2}`
+      ? P2 extends Uncapitalize<P2>
+        ? `${Lowercase<P1>}${SnakeCase<P2>}`
+        : `${Lowercase<P1>}_${SnakeCase<Uncapitalize<P2>>}`
+      : Lowercase<S>;
 
 type NonPlainObject =
   | Date
@@ -48,8 +51,8 @@ export type ToSnakeCaseKeys<T> = T extends NonPlainObject
  * but with all keys converted to snake_case format.
  *
  * @template T - The type of object.
- * @param {T} obj - The object to convert keys from.
- * @returns {ToSnakeCaseKeys<T>} A new object with all keys converted to snake_case.
+ * @param obj - The object to convert keys from.
+ * @returns A new object with all keys converted to snake_case.
  *
  * @example
  * // Example with objects

@@ -48,6 +48,20 @@ describe('keyBy', () => {
     expect(result).toEqual({ mike: { name: 'mike', age: 30 } });
   });
 
+  it('should pass index to key-generating function', () => {
+    const items = ['a', 'b', 'c'];
+    const result = keyBy(items, (item, index) => index);
+
+    expect(result).toEqual({ 0: 'a', 1: 'b', 2: 'c' });
+  });
+
+  it('should pass array to key-generating function', () => {
+    const items = [10, 20, 30];
+    const result = keyBy(items, (item, index, arr) => (item > arr[0] ? 'large' : 'small'));
+
+    expect(result).toEqual({ small: 10, large: 30 });
+  });
+
   it('should handle empty array', () => {
     const people: Array<{ name: string; age: number }> = [];
 

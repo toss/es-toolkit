@@ -187,7 +187,7 @@ describe('setWith', () => {
       });
 
       update(object, 'a', updater);
-      expect(pass);
+      expect(pass).toBe(true);
     });
   });
 

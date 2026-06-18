@@ -4,6 +4,16 @@
 
 > es-toolkit에 기여할 때, [행동 강령(Code of conduct)](./CODE_OF_CONDUCT.md)을 준수해 주세요. 허용되는 행동과 허용되지 않는 행동을 준수해 주세요.
 
+## 패키지 매니저
+
+이 프로젝트는 **Yarn 4**를 패키지 매니저로 사용해요. `yarn install`을 실행하면 Corepack을 통해 올바른 버전이 자동으로 설치돼요.
+
+시작하는 방법:
+
+1. Node.js가 설치되어 있는지 확인하세요 (필요한 버전은 `.nvmrc` 파일을 참고하세요)
+2. Corepack을 활성화하세요: `corepack enable`
+3. 의존성을 설치하세요: `yarn install`
+
 ## 1. 설계 원칙
 
 es-toolkit 프로젝트는 성능, 구현의 단순함, 그리고 꼼꼼한 문서화가 중요해요. 다양한 기능과 옵션을 지원하기보다, 성능이 뛰어나고 안정적으로 작동하는 핵심 유틸리티들만 제공하려고 해요.
@@ -24,6 +34,8 @@ JavaScript의 내장 함수로는 만들기 어렵지만 자주 필요하고 유
 - `isNaN` (`Number.isNaN`를 대신 사용)
 - `isNumber` (`typeof value === 'number'`를 대신 사용)
 - `min` (`Math.min()`를 대신 사용)
+
+TC39 제안에 포함된 함수의 경우, Stage 3에 도달하면 구현하지 않아요. Stage 2.7 이하의 초기 제안에 대해서는 명확한 필요가 있다면 추가를 고려할 수 있지만, 제안이 Stage 3 이상으로 진행되면 해당 함수를 지원 중단할 예정이에요. 그 시점에서는 네이티브 구현을 사용하는 것이 더 나은 선택이기 때문이에요.
 
 #### `es-toolkit/compat`
 
@@ -80,7 +92,27 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 
 </details>
 
-### 1.4 문서화
+### 1.4 타입
+
+정확한 타입을 제공하는 것은 es-toolkit의 핵심적인 목표예요.
+동시에 TypeScript 자체의 타입 동작과 일관성을 유지하는 것도 중요해요.
+
+es-toolkit은 가장 널리 사용되는 설정인 TypeScript [`strict` 모드](https://www.typescriptlang.org/tsconfig/#strict)와 동일한 타입을 반환하는 것을 목표로 해요.
+
+예를 들어, 아래의 `result1`과 `result2`는 같은 타입을 가져야 해요. `result2`는 본질적으로 `result1`이 직접 수행하는 동작을 감싼 래퍼에 불과하기 때문이에요.
+
+```typescript
+import { sample } from 'es-toolkit';
+
+const arr = [1, 2, 3];
+
+const result1 = arr[Math.floor(Math.random() * arr.length)]; // TypeScript strict 모드에서 `number`로 추론
+const result2 = sample(arr); // 마찬가지로 `number`로 추론되어야 함
+```
+
+[noUncheckedIndexedAccess](https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html)처럼 strict 모드 내에서도 기본값이 `false`인 옵션은 es-toolkit의 타입 호환성을 결정할 때 고려하지 않아요.
+
+### 1.5 문서화
 
 모든 함수들은 라이브러리 사용자가 쉽게 참고할 수 있도록 자세한 문서가 필요해요. 각 함수마다 JSDoc과 함께 레퍼런스 문서가 존재해야 해요. 레퍼런스 문서는 [문서 디렉토리](https://github.com/toss/es-toolkit/tree/main/docs)에 포함해 주세요.
 
@@ -147,3 +179,65 @@ Pull Request의 제목은 다음 형식을 따라 주세요.
 ### 4.3 설명
 
 Pull Request이 무엇에 관한 것인지 명확하고 간결한 설명을 담아 주세요.
+
+## 5. 문서 작성 가이드
+
+모든 함수 문서는 4개 언어로 같이 관리해요. 항상 함께 업데이트해 주세요.
+
+- `docs/reference/{category}/{fn}.md` (영어)
+- `docs/ko/reference/{category}/{fn}.md` (한국어, ~해요체)
+- `docs/ja/reference/{category}/{fn}.md` (일본어)
+- `docs/zh_hans/reference/{category}/{fn}.md` (중국어 간체)
+
+대표적인 예시는 [`sum`](../docs/ko/reference/math/sum.md), [`toCamelCaseKeys`](../docs/ko/reference/object/toCamelCaseKeys.md) 문서를 참고해 주세요.
+
+### 5.1 템플릿
+
+````markdown
+# {함수 이름}
+
+{한 문장 설명}
+
+```typescript
+{짧은 예시 코드}
+```
+
+## 사용법
+
+### `{시그니처}`
+
+{언제 쓰는지 → 어떻게 동작하는지 자연스러운 문장으로 풀어 써요. 필요하면 짧은 예시 코드 블록을 중간중간 넣어요.}
+
+```typescript
+import { {함수 이름} } from 'es-toolkit/{category}';
+
+// 이 예시가 무엇을 보여주는지 짧게 적어요.
+{예시 호출}
+// Returns: {결과}
+```
+
+#### 파라미터
+
+- `{이름}` (`{타입}`): {설명}.
+- `{이름}` (`{타입}`, 선택): {설명}. 기본값은 `{기본값}`이에요.
+
+#### 반환 값
+
+(`{타입}`): {반환 값에 대한 설명}.
+````
+
+### 5.2 자리표시자 채우는 법
+
+- **제목**: 함수 이름 그대로 써요. 추가 접미사는 붙이지 않아요. (예: `# sum`, `# toCamelCaseKeys`)
+- **한 문장 설명**: 함수의 동작을 한 문장으로 적어요. 카멜 표기법처럼 익숙하지 않은 용어가 등장하면 짧은 보충 단락을 한 단락 추가해도 좋아요.
+- **짧은 예시 코드**: 구체적인 값 대신 `arr`, `numbers`, `obj`처럼 의미가 드러나는 변수 이름을 써서 인터페이스를 한눈에 보여줘요.
+- **`### \`시그니처\``**: 오버로드별로 적어요. 가능하면 하나로 합치고, 동작이 정말 다를 때만(예: 배열용과 객체용) 두 개로 쪼개요.
+- **본문 설명**: "언제 쓰는지 → 어떻게 동작하는지" 흐름으로 자연스러운 문장으로 풀어 써요. "설명: ~"처럼 콜론을 쓰는 형식은 쓰지 말아요. 예시 블록은 `import { ... } from 'es-toolkit/{category}'`로 시작하고, 각 호출 위에 한 줄 주석을 덧붙여요.
+- **파라미터**: ``- `이름` (`타입`): 설명.`` 형식으로 적어요. 선택 값이면 타입 뒤에 `선택`을 붙이고 기본값도 함께 써요.
+- **반환 값**: 맨 앞에 괄호로 타입을 적고, 그 뒤에 반환 값 설명을 이어 써요.
+
+### 5.3 글쓰기 가이드
+
+- 쉬운 단어를 써요. (예: "균등한 배열" → "같은 길이의 배열")
+- JavaScript에서 익숙한 단어를 써요. (예: "컬렉션" → "배열이나 객체")
+- 영어 용어는 한국어로 풀어 써요. (예: "truthy" → "참으로 평가되는")

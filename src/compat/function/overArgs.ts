@@ -14,13 +14,13 @@ import { iteratee } from '../util/iteratee.ts';
  * If a transform is nullish, the identity function is used instead.
  * Only transforms arguments up to the number of transform functions provided.
  *
- * @param {(...args: any[]) => any} func - The function to wrap
- * @param {Array<Many<(...args: any[]) => any>>} transforms - The functions to transform arguments. Each transform can be:
+ * @param func - The function to wrap
+ * @param transforms - The functions to transform arguments. Each transform can be:
  *   - A function that accepts and returns a value
  *   - A string to get a property value (e.g. 'name' gets the name property)
  *   - An object to check if arguments match its properties
  *   - An array of [property, value] to check property matches
- * @returns {(...args: any[]) => any} A new function that transforms arguments before passing them to func
+ * @returns A new function that transforms arguments before passing them to func
  * @throws {TypeError} If func is not a function.
  * @example
  * ```ts

@@ -54,7 +54,7 @@ const byParity = groupBy(numbers, num => (num % 2 === 0 ? 'even' : 'odd'));
 #### パラメータ
 
 - `arr` (`T[]`): グループ化する配列です。
-- `getKeyFromItem` (`(item: T) => K`): 各要素からキーを生成する関数です。
+- `getKeyFromItem` (`(item: T, index: number, array: T[]) => K`): 各要素、インデックス、配列からキーを生成する関数です。
 
 #### 戻り値
 
