@@ -1,17 +1,10 @@
-import { afterEach, beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import type { defer as deferLodash } from 'lodash';
 import { defer } from './defer';
+import { delay } from '../../promise';
 
 describe('defer', () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
-
-  it('should provide additional arguments to `func`', () => {
+  it('should provide additional arguments to `func`', async () => {
     let args: any[] = [];
 
     defer(
@@ -24,11 +17,11 @@ describe('defer', () => {
       2
     );
 
-    vi.advanceTimersByTime(32);
+    await delay(32);
     expect(args).toEqual([1, 2]);
   });
 
-  it('should be cancelable', () => {
+  it('should be cancelable', async () => {
     let pass = true;
     const timerId = defer(() => {
       pass = false;
@@ -36,7 +29,7 @@ describe('defer', () => {
 
     clearTimeout(timerId);
 
-    vi.advanceTimersByTime(32);
+    await delay(32);
     expect(pass).toBe(true);
   });
 
