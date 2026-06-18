@@ -9,8 +9,8 @@ import { identity } from '../../function/identity.ts';
  * The `iteratee` function can terminate the iteration early by returning `false`.
  *
  * @template T - The type of the object.
- * @param {T} object The object to iterate over.
- * @param {(value: T[keyof T], key: string, collection: T) => any} [iteratee=identity] The function invoked per iteration. If not provided, the identity function will be used.
+ * @param object The object to iterate over.
+ * @param [iteratee=identity] The function invoked per iteration. If not provided, the identity function will be used.
  * @return {T} Returns object.
  *
  * @example
@@ -36,8 +36,8 @@ export function forOwnRight<T>(object: T, iteratee?: (value: T[keyof T], key: st
  * The `iteratee` function can terminate the iteration early by returning `false`.
  *
  * @template T - The type of the object.
- * @param {T | null | undefined} object The object to iterate over.
- * @param {(value: T[keyof T], key: string, collection: T) => any} [iteratee=identity] The function invoked per iteration. If not provided, the identity function will be used.
+ * @param object The object to iterate over.
+ * @param [iteratee=identity] The function invoked per iteration. If not provided, the identity function will be used.
  * @return {T | null | undefined} Returns object.
  *
  * @example
@@ -66,8 +66,8 @@ export function forOwnRight<T>(
  * The `iteratee` function can terminate the iteration early by returning `false`.
  *
  * @template T - The type of the object.
- * @param {T | null | undefined} object The object to iterate over.
- * @param {(value: T[keyof T], key: string, collection: T) => any} [iteratee=identity] The function invoked per iteration. If not provided, the identity function will be used.
+ * @param object The object to iterate over.
+ * @param [iteratee=identity] The function invoked per iteration. If not provided, the identity function will be used.
  * @return {T | null | undefined} Returns object.
  *
  * @example

@@ -69,6 +69,14 @@ describe('ceil', () => {
     expect(actual).toEqual(expected);
   });
 
+  it(`\`ceil\` should return \`Infinity\` for infinite values regardless of \`precision\``, () => {
+    expect(ceil(Infinity)).toBe(Infinity);
+    expect(ceil(Infinity, 2)).toBe(Infinity);
+    expect(ceil(-Infinity, 2)).toBe(-Infinity);
+    expect(ceil(Infinity, -2)).toBe(Infinity);
+    expect(ceil(-Infinity, -2)).toBe(-Infinity);
+  });
+
   it(`\`ceil\` should handle edge cases`, () => {
     expect(ceil(1.797, 295)).toBe(1.797);
     expect(ceil(1.797, -295)).toBe(1e295);

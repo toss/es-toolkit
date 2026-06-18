@@ -4,9 +4,9 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * Flattens array up to depth times.
  *
  * @template T
- * @param {ArrayLike<T> | null | undefined} value - The array to flatten.
- * @param {number} depth - The maximum recursion depth.
- * @returns {any[]} Returns the new flattened array.
+ * @param value - The array to flatten.
+ * @param depth - The maximum recursion depth.
+ * @returns Returns the new flattened array.
  *
  * @example
  * flatten([1, [2, [3, [4]], 5]], 2);

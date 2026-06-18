@@ -107,10 +107,12 @@ const emptyCase = {
 const result = flattenObject(emptyCase);
 console.log(result);
 // {
+//   'empty': {},
+//   'emptyArray: [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
-// Empty objects and empty arrays don't appear as keys
+// Empty objects and empty arrays appear as keys
 ```
 
 #### Parameters

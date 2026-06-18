@@ -40,4 +40,16 @@ describe('flatMap', () => {
     expect(result).toEqual(['1', '1', '2', '2']);
     result[0].substring(0, 1);
   });
+
+  it('should provide index parameter to iteratee function', () => {
+    const arr = [1, 2, 3];
+    const result = flatMap(arr, (item, index) => [item + index]);
+    expect(result).toEqual([1, 3, 5]);
+  });
+
+  it('should provide array parameter to iteratee function', () => {
+    const arr = [1, 2, 3];
+    const result = flatMap(arr, (item, _index, array) => [item * array.length]);
+    expect(result).toEqual([3, 6, 9]);
+  });
 });

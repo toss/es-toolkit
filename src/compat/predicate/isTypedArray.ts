@@ -2,8 +2,8 @@ import { isTypedArray as isTypedArrayToolkit } from '../../predicate/isTypedArra
 
 /**
  * Checks if a value is a TypedArray.
- * @param {any} x The value to check.
- * @returns {boolean} Returns true if `x` is a TypedArray, false otherwise.
+ * @param x The value to check.
+ * @returns Returns true if `x` is a TypedArray, false otherwise.
  *
  * @example
  * const arr = new Uint8Array([1, 2, 3]);

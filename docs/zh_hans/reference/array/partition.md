@@ -45,7 +45,7 @@ const [truthy, falsy] = partition([], x => x > 0);
 #### 参数
 
 - `arr` (`T[]`): 要分为两组的数组。
-- `isInTruthy` (`(value: T) => boolean`): 决定每个元素应包含在第一个数组(truthy)还是第二个数组(falsy)中的条件函数。
+- `isInTruthy` (`(value: T, index: number, array: readonly T[]) => boolean`): 决定每个元素应包含在第一个数组(truthy)还是第二个数组(falsy)中的条件函数。该函数接收值、索引和整个数组作为参数。
 
 #### 返回值
 

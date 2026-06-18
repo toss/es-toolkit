@@ -35,6 +35,9 @@ We don't implement functions that can be easily replaced with modern JavaScript,
 - `isNumber` (use `typeof value === 'number'` instead)
 - `min` (use `Math.min()` instead)
 
+For functions covered by TC39 proposals, we won't implement them once they reach Stage 3.
+We may consider adding functions from earlier proposals (Stage 2.7 or below) if there's a clear need, but we'll deprecate them once the proposal advances to Stage 3 or beyond—since at that point, using the native implementation is the better choice.
+
 #### `es-toolkit/compat`
 
 To help projects using [`Lodash`](https://lodash.com/docs/4.17.15) migrate easily to es-toolkit, we implement all functions provided by `Lodash`.
@@ -90,7 +93,24 @@ This helps keep the code more concise, eliminates unnecessary function calls, an
 
 </details>
 
-### 1.4 Documentation
+### 1.4 Types
+
+Accurate types are a core goal of es-toolkit, and so is consistency with TypeScript's own type behavior.
+
+es-toolkit aims to return the same types as TypeScript's [`strict` mode](https://www.typescriptlang.org/tsconfig/#strict)—the most widely used configuration. For example, `result1` and `result2` below should have the same type, since `result2` is essentially just a wrapper around what `result1` does directly:
+
+```typescript
+import { sample } from 'es-toolkit';
+
+const arr = [1, 2, 3];
+
+const result1 = arr[Math.floor(Math.random() * arr.length)]; // inferred as `number` in TypeScript strict mode
+const result2 = sample(arr); // should likewise be inferred as `number`
+```
+
+Options that default to `false` even within strict mode—such as [noUncheckedIndexedAccess](https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html)—are not considered when determining type compatibility in es-toolkit.
+
+### 1.5 Documentation
 
 All of our functions should be documented in detail for easy reference. All functions should have the JSDoc and corresponding documents [in our documentation directory](https://github.com/toss/es-toolkit/tree/main/docs) for all of their features.
 
@@ -154,3 +174,65 @@ If you made changes across multiple packages, writing package scope is optional.
 ### 4.3 Description
 
 A clear and concise description of what the pr is about.
+
+## 5. Writing Documentation
+
+Every function ships docs in four languages. Keep them in sync:
+
+- `docs/reference/{category}/{fn}.md` (English)
+- `docs/ko/reference/{category}/{fn}.md` (Korean, in 해요체)
+- `docs/ja/reference/{category}/{fn}.md` (Japanese)
+- `docs/zh_hans/reference/{category}/{fn}.md` (Simplified Chinese)
+
+For canonical examples, see [`sum`](../docs/reference/math/sum.md) and [`toCamelCaseKeys`](../docs/reference/object/toCamelCaseKeys.md).
+
+### 5.1 Template
+
+````markdown
+# {function name}
+
+{one-line description}
+
+```typescript
+{short example code}
+```
+
+## Usage
+
+### `{signature}`
+
+{Short paragraph: when to use it, then how it behaves. Add inline examples between paragraphs as needed.}
+
+```typescript
+import { {function name} } from 'es-toolkit/{category}';
+
+// Short comment describing what this example shows.
+{example call}
+// Returns: {result}
+```
+
+#### Parameters
+
+- `{name}` (`{type}`): {description}.
+- `{name}` (`{type}`, optional): {description}. Defaults to `{default}`.
+
+#### Returns
+
+(`{type}`): {description}.
+````
+
+### 5.2 Filling it in
+
+- **Title**: the function name with no suffix (`# sum`, `# toCamelCaseKeys`).
+- **One-line description**: summarize the behavior in one sentence. If a non-obvious term appears (e.g. "camelCase"), add one short follow-up paragraph explaining it.
+- **Short example code**: use descriptive variable names (`arr`, `numbers`, `obj`) over concrete values so the interface is obvious at a glance.
+- **`### \`signature\``**: one heading per overload. Merge overloads when possible; split only when the behavior is genuinely different (e.g. arrays vs. objects).
+- **Body prose**: lead with "when to use it", then describe behavior in flowing sentences — never the "Description: …" colon style. Open each example block with `import { ... } from 'es-toolkit/{category}'` and put a one-line comment above each call.
+- **Parameters**: ``- `name` (`type`): description.``. For optionals, append `optional` to the type and include the default.
+- **Returns**: type in parentheses first, then the description.
+
+### 5.3 Style
+
+- Use plain words (e.g. "arrays of the same length" instead of "uniform arrays").
+- Prefer everyday JavaScript terms (e.g. "array or object" instead of "collection").
+- In non-English versions, unfold English jargon into a natural local-language phrase (e.g. "값이 참으로 평가되는" instead of "truthy").

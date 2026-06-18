@@ -37,7 +37,7 @@ const result2 = flatMapDeep([1, 2, 3], item => [[[item, item]]]);
 #### パラメータ
 
 - `arr` (`T[]`): 変換する配列です。
-- `iteratee` (`(item: T) => U`): 各配列要素を変換する関数です。
+- `iteratee` (`(item: T, index: number, array: readonly T[]) => U`): 各配列要素を変換する関数です。要素、インデックス、配列を引数として受け取ります。
 
 #### 戻り値
 

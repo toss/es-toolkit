@@ -5,6 +5,6 @@
  * @example
  * asyncNoop(); // Does nothing
  *
- * @returns {Promise<void>} This function returns a Promise that resolves to undefined.
+ * @returns This function returns a Promise that resolves to undefined.
  */
 export async function asyncNoop(): Promise<void> {}

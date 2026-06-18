@@ -87,10 +87,10 @@ export function find<T extends object>(
  * Finds the first item in an object that has a specific property, where the property name is provided as a PropertyKey.
  *
  * @template T
- * @param {ArrayLike<T> | Record<any, any> | null | undefined} source - The source array or object to search through.
- * @param {((item: T, index: number, arr: any) => unknown) | Partial<T> | [keyof T, unknown] | PropertyKey} doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
- * @param {number} [fromIndex=0] - The index to start the search from, defaults to 0.
- * @returns {T | undefined} - The first property value that has the specified property, or `undefined` if no match is found.
+ * @param source - The source array or object to search through.
+ * @param doesMatch - The criteria to match. It can be a function, a partial object, a key-value pair, or a property name.
+ * @param [fromIndex=0] - The index to start the search from, defaults to 0.
+ * @returns The first property value that has the specified property, or `undefined` if no match is found.
  *
  * @example
  * // Using a property name

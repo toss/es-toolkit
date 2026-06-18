@@ -22,8 +22,6 @@ export interface DebouncedFunction<F extends (...args: any[]) => void> {
    * This method resets any existing timer, ensuring that the function is only invoked
    * after the delay has elapsed since the last call to the debounced function.
    * It is typically called internally whenever the debounced function is invoked.
-   *
-   * @returns {void}
    */
   schedule: () => void;
 
@@ -46,11 +44,11 @@ export interface DebouncedFunction<F extends (...args: any[]) => void> {
  * method to cancel any pending execution.
  *
  * @template F - The type of function.
- * @param {F} func - The function to debounce.
- * @param {number} debounceMs - The number of milliseconds to delay.
- * @param {DebounceOptions} options - The options object
- * @param {AbortSignal} options.signal - An optional AbortSignal to cancel the debounced function.
- * @param {Array<'leading' | 'trailing'>} options.edges - An optional array specifying whether the function should be invoked on the leading edge, trailing edge, or both.
+ * @param func - The function to debounce.
+ * @param debounceMs - The number of milliseconds to delay.
+ * @param options - The options object
+ * @param options.signal - An optional AbortSignal to cancel the debounced function.
+ * @param options.edges - An optional array specifying whether the function should be invoked on the leading edge, trailing edge, or both.
  * @returns A new debounced function with a `cancel` method.
  *
  * @example

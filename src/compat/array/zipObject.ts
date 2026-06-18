@@ -4,9 +4,9 @@ import { assignValue } from '../_internal/assignValue.ts';
  * Combines two arrays, one of property names and one of corresponding values, into a single object.
  *
  * @template T - The type of values in the values array
- * @param {ArrayLike<PropertyKey>} props - An array of property names
- * @param {ArrayLike<T>} values - An array of values corresponding to the property names
- * @returns {Record<string, T>} A new object composed of the given property names and values
+ * @param props - An array of property names
+ * @param values - An array of values corresponding to the property names
+ * @returns A new object composed of the given property names and values
  *
  * @example
  * const props = ['a', 'b', 'c'];
@@ -19,8 +19,8 @@ export function zipObject<T>(props: ArrayLike<PropertyKey>, values: ArrayLike<T>
 /**
  * Creates an object from an array of property names, with undefined values.
  *
- * @param {ArrayLike<PropertyKey>} [props] - An array of property names
- * @returns {Record<string, undefined>} A new object with the given property names and undefined values
+ * @param [props] - An array of property names
+ * @returns A new object with the given property names and undefined values
  *
  * @example
  * const props = ['a', 'b', 'c'];
@@ -39,9 +39,9 @@ export function zipObject(props?: ArrayLike<PropertyKey>): Record<string, undefi
  *
  * @template P - The type of elements in the array.
  * @template V - The type of elements in the array.
- * @param {ArrayLike<K>} keys - An array of property names.
- * @param {ArrayLike<V>} values - An array of values corresponding to the property names.
- * @returns {Record<K, V>} - A new object composed of the given property names and values.
+ * @param keys - An array of property names.
+ * @param values - An array of values corresponding to the property names.
+ * @returns A new object composed of the given property names and values.
  *
  * @example
  * const keys = ['a', 'b', 'c'];

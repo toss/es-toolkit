@@ -31,7 +31,7 @@ takeRightWhile(['hello', 'world', 'foo', 'bar'], str => str.length <= 5);
 #### 参数
 
 - `arr` (`T[]`): 要获取元素的数组。
-- `shouldContinueTaking` (`(item: T) => boolean`): 与每个元素一起调用的条件函数。只要此函数返回真,元素就会被包含在结果中。
+- `shouldContinueTaking` (`(item: T, index: number, array: T[]) => boolean`): 与每个元素、索引和数组一起调用的条件函数。只要此函数返回真,元素就会被包含在结果中。
 
 #### 返回值
 

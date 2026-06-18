@@ -7,9 +7,9 @@ import { isArrayLikeObject } from '../predicate/isArrayLikeObject.ts';
  * It correctly excludes `NaN`, as it compares values using [SameValueZero](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-samevaluezero).
  *
  * @template T The type of elements in the array.
- * @param {ArrayLike<T> | null | undefined} array - The array to filter.
- * @param {...T[]} values - The values to exclude.
- * @returns {T[]} A new array without the specified values.
+ * @param array - The array to filter.
+ * @param values - The values to exclude.
+ * @returns A new array without the specified values.
  *
  * @example
  * // Removes the specified values from the array

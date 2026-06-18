@@ -4,8 +4,8 @@ import { randomInt as randomIntToolkit } from '../../math/randomInt.ts';
 
 /**
  * Generate a random number between 0 and 1.
- * @param {boolean} [floating] - Whether to return a floating point number. Defaults to true.
- * @returns {number} A random number between 0 and 1.
+ * @param [floating] - Whether to return a floating point number. Defaults to false.
+ * @returns A random number between 0 and 1.
  * @example
  * random(); // Returns a random number between 0 and 1
  * random(true); // Returns a random floating point number between 0 and 1
@@ -15,9 +15,9 @@ export function random(floating?: boolean): number;
 
 /**
  * Generate a random number between 0 and max.
- * @param {number} max - The upper bound (exclusive).
- * @param {boolean} [floating] - Whether to return a floating point number. Defaults to true.
- * @returns {number} A random number between 0 and max.
+ * @param max - The upper bound (exclusive).
+ * @param [floating] - Whether to return a floating point number. Defaults to false.
+ * @returns A random number between 0 and max.
  * @example
  * random(5); // Returns a random number between 0 and 5
  * random(10, true); // Returns a random floating point number between 0 and 10
@@ -27,10 +27,10 @@ export function random(max: number, floating?: boolean): number;
 
 /**
  * Generate a random number between min and max.
- * @param {number} min - The lower bound (inclusive).
- * @param {number} max - The upper bound (exclusive).
- * @param {boolean} [floating] - Whether to return a floating point number. Defaults to true.
- * @returns {number} A random number between min and max.
+ * @param min - The lower bound (inclusive).
+ * @param max - The upper bound (exclusive).
+ * @param [floating] - Whether to return a floating point number. Defaults to false.
+ * @returns A random number between min and max.
  * @example
  * random(1, 5); // Returns a random number between 1 and 5
  * random(0, 10, true); // Returns a random floating point number between 0 and 10
@@ -40,10 +40,10 @@ export function random(min: number, max: number, floating?: boolean): number;
 
 /**
  * Generate a random number between 0 and min, using guard object for special cases.
- * @param {number} min - The upper bound (exclusive).
- * @param {string | number} index - The index or key to check in the guard object.
- * @param {object} guard - The guard object to validate the parameters.
- * @returns {number} A random number between 0 and min.
+ * @param min - The upper bound (exclusive).
+ * @param index - The index or key to check in the guard object.
+ * @param guard - The guard object to validate the parameters.
+ * @returns A random number between 0 and min.
  * @example
  * const guard = { 5: 5 };
  * random(5, 5, guard); // Returns a random number between 0 and 5
@@ -53,9 +53,9 @@ export function random(min: number, index: string | number, guard: object): numb
 /**
  * Generate a random number within the given range.
  *
- * @param {number} minimum - The lower bound (inclusive).
- * @param {number} maximum - The upper bound (exclusive).
- * @returns {number} A random number between minimum (inclusive) and maximum (exclusive). The number can be an integer or a decimal.
+ * @param minimum - The lower bound (inclusive).
+ * @param maximum - The upper bound (exclusive).
+ * @returns A random number between minimum (inclusive) and maximum (exclusive). The number can be an integer or a decimal.
  * @throws {Error} Throws an error if `maximum` is not greater than `minimum`.
  *
  * @example
@@ -106,7 +106,7 @@ export function random(...args: any[]): number {
   }
 
   if (typeof maximum !== 'number') {
-    minimum = Number(maximum);
+    maximum = Number(maximum);
   }
 
   if (!minimum) {

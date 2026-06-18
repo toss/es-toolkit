@@ -11,10 +11,10 @@ import { toString } from '../util/toString.ts';
  *
  * @template T - The type of object.
  * @template R - The type of the value to return.
- * @param {T} object - The object to query.
- * @param {PropertyPath} path - The path of the property to get.
- * @param {R | ((...args: any[]) => R)} [defaultValue] - The value returned if the resolved value is `undefined`.
- * @returns {R} - Returns the resolved value.
+ * @param object - The object to query.
+ * @param path - The path of the property to get.
+ * @param [defaultValue] - The value returned if the resolved value is `undefined`.
+ * @returns Returns the resolved value.
  *
  * @example
  * const obj = { a: { b: { c: 3 } } };

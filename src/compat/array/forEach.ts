@@ -10,9 +10,9 @@ import { isArrayLike } from '../predicate/isArrayLike.ts';
  * Iterates over elements of array and invokes iteratee for each element.
  *
  * @template T
- * @param {T[]} collection - The array to iterate over.
- * @param {ArrayIterator<T, any>} [iteratee] - The function invoked per iteration.
- * @returns {T[]} Returns array.
+ * @param collection - The array to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns array.
  *
  * @example
  * forEach([1, 2], value => console.log(value));
@@ -23,9 +23,9 @@ export function forEach<T>(collection: T[], iteratee?: ArrayIterator<T, any>): T
 /**
  * Iterates over characters of string and invokes iteratee for each character.
  *
- * @param {string} collection - The string to iterate over.
- * @param {StringIterator<any>} [iteratee] - The function invoked per iteration.
- * @returns {string} Returns string.
+ * @param collection - The string to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns string.
  *
  * @example
  * forEach('abc', char => console.log(char));
@@ -37,9 +37,9 @@ export function forEach(collection: string, iteratee?: StringIterator<any>): str
  * Iterates over elements of collection and invokes iteratee for each element.
  *
  * @template T
- * @param {ArrayLike<T>} collection - The collection to iterate over.
- * @param {ListIterator<T, any>} [iteratee] - The function invoked per iteration.
- * @returns {ArrayLike<T>} Returns collection.
+ * @param collection - The collection to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns collection.
  *
  * @example
  * forEach({ 0: 'a', 1: 'b', length: 2 }, value => console.log(value));
@@ -51,9 +51,9 @@ export function forEach<T>(collection: ArrayLike<T>, iteratee?: ListIterator<T, 
  * Iterates over own enumerable string keyed properties of an object and invokes iteratee for each property.
  *
  * @template T
- * @param {T} collection - The object to iterate over.
- * @param {ObjectIterator<T, any>} [iteratee] - The function invoked per iteration.
- * @returns {T} Returns object.
+ * @param collection - The object to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns object.
  *
  * @example
  * forEach({ a: 1, b: 2 }, (value, key) => console.log(key));
@@ -65,9 +65,9 @@ export function forEach<T extends object>(collection: T, iteratee?: ObjectIterat
  * Iterates over elements of array and invokes iteratee for each element.
  *
  * @template T, U
- * @param {U & (T[] | null | undefined)} collection - The array to iterate over.
- * @param {ArrayIterator<T, any>} [iteratee] - The function invoked per iteration.
- * @returns {U} Returns the array.
+ * @param collection - The array to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns the array.
  *
  * @example
  * forEach([1, 2], value => console.log(value));
@@ -82,9 +82,9 @@ export function forEach<T, U extends T[] | null | undefined>(
  * Iterates over characters of string and invokes iteratee for each character.
  *
  * @template T
- * @param {T} collection - The string to iterate over.
- * @param {StringIterator<any>} [iteratee] - The function invoked per iteration.
- * @returns {T} Returns the string.
+ * @param collection - The string to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns the string.
  *
  * @example
  * forEach('abc', char => console.log(char));
@@ -96,9 +96,9 @@ export function forEach<T extends string | null | undefined>(collection: T, iter
  * Iterates over elements of collection and invokes iteratee for each element.
  *
  * @template T, L
- * @param {L & (ArrayLike<T> | null | undefined)} collection - The collection to iterate over.
- * @param {ListIterator<T, any>} [iteratee] - The function invoked per iteration.
- * @returns {L} Returns the collection.
+ * @param collection - The collection to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns the collection.
  *
  * @example
  * forEach({ 0: 'a', 1: 'b', length: 2 }, value => console.log(value));
@@ -113,9 +113,9 @@ export function forEach<T, L extends ArrayLike<T> | null | undefined>(
  * Iterates over own enumerable string keyed properties of an object and invokes iteratee for each property.
  *
  * @template T
- * @param {T | null | undefined} collection - The object to iterate over.
- * @param {ObjectIterator<T, any>} [iteratee] - The function invoked per iteration.
- * @returns {T | null | undefined} Returns the object.
+ * @param collection - The object to iterate over.
+ * @param [iteratee] - The function invoked per iteration.
+ * @returns Returns the object.
  *
  * @example
  * forEach({ a: 1, b: 2 }, (value, key) => console.log(key));
@@ -130,13 +130,13 @@ export function forEach<T extends object>(
  * Iterates over each element of the object invoking the provided callback function for each property.
  *
  * @template T - The type of object.
- * @param {T} object - The object to iterate over.
- * @param {(value: T[keyof T], key: keyof T, object: T) => unknown} [callback] - The function invoked for each property.
+ * @param object - The object to iterate over.
+ * @param [callback] - The function invoked for each property.
  * The callback function receives three arguments:
  *  - 'value': The current property being processed in the object.
  *  - 'key': The key of the current property being processed in the object.
  *  - 'object': The object 'forEach' was called upon.
- * @returns {T} Returns the original object.
+ * @returns Returns the original object.
  *
  * @example
  * forEach({'a': 1, 'b': 2 }, (value, key, object) => console.log(value, key));

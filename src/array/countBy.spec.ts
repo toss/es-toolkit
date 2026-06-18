@@ -23,4 +23,24 @@ describe('countBy', () => {
       even: 4,
     });
   });
+
+  it('should pass index to mapper function', () => {
+    const arr = ['a', 'b', 'c', 'd'];
+    const result = countBy(arr, (item, index) => (index < 2 ? 'first' : 'rest'));
+
+    expect(result).toEqual({
+      first: 2,
+      rest: 2,
+    });
+  });
+
+  it('should pass array to mapper function', () => {
+    const arr = [1, 2, 3, 4];
+    const result = countBy(arr, (item, index, array) => (item < array.length / 2 ? 'small' : 'large'));
+
+    expect(result).toEqual({
+      small: 1,
+      large: 3,
+    });
+  });
 });

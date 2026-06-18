@@ -63,7 +63,7 @@ keyBy(orders, order => `${order.date}-${order.customerId}`);
 #### 파라미터
 
 - `arr` (`readonly T[]`): 객체로 변환할 배열이에요.
-- `getKeyFromItem` (`(item: T) => K`): 각 요소에서 키를 생성하는 함수예요.
+- `getKeyFromItem` (`(item: T, index: number, array: T[]) => K`): 각 요소, 인덱스, 배열에서 키를 생성하는 함수예요.
 
 #### 반환 값
 

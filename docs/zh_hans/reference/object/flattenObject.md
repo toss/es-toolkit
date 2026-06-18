@@ -107,10 +107,12 @@ const emptyCase = {
 const result = flattenObject(emptyCase);
 console.log(result);
 // {
+//   'empty': {},
+//   'emptyArray: [],
 //   'nullValue': null,
 //   'undefinedValue': undefined
 // }
-// 空对象或空数组不会显示为键
+// 空对象或空数组会作为键显示
 ```
 
 #### 参数

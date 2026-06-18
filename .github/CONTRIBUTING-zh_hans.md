@@ -35,6 +35,8 @@ es-toolkit 是一个高质量的实用函数库，包含现代 JavaScript 项目
 - `isNumber`（改用 `typeof value === 'number'`）
 - `min`（改用 `Math.min()`）
 
+对于 TC39 提案中涵盖的函数，一旦进入 Stage 3，我们将不再实现。对于较早阶段的提案（Stage 2.7 或更低），如果确实有需要，我们可能会考虑添加，但一旦提案推进到 Stage 3 或更高阶段，我们会将其标记为弃用——因为届时使用原生实现是更好的选择。
+
 #### `es-toolkit/compat`
 
 为了帮助使用 [`Lodash`](https://lodash.com/docs/4.17.15) 的项目轻松迁移到 es-toolkit，我们实现了 `Lodash` 提供的所有函数。
@@ -90,7 +92,24 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 
 </details>
 
-### 1.4 文档
+### 1.4 类型
+
+提供准确的类型是 es-toolkit 的核心目标之一，与 TypeScript 自身的类型行为保持一致也同样重要。
+
+es-toolkit 旨在返回与 TypeScript `strict` 模式相同的类型——这也是最广泛使用的配置。例如，下面的 `result1` 和 `result2` 应当具有相同的类型，因为 `result2` 本质上只是对 `result1` 直接执行的操作的封装：
+
+```typescript
+import { sample } from 'es-toolkit';
+
+const arr = [1, 2, 3];
+
+const result1 = arr[Math.floor(Math.random() * arr.length)]; // 在 TypeScript strict 模式下推断为 `number`
+const result2 = sample(arr); // 同样应推断为 `number`
+```
+
+在 strict 模式下默认值仍为 `false` 的选项——例如 [noUncheckedIndexedAccess](https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html)——在确定 es-toolkit 的类型兼容性时不予考虑。
+
+### 1.5 文档
 
 我们所有的函数都应详细记录，以便于参考。所有函数都应具有 JSDoc 以及[我们文档目录中](https://github.com/toss/es-toolkit/tree/main/docs)相应的文档，以说明其所有特性。
 
@@ -154,3 +173,66 @@ export function keyBy<T, K extends PropertyKey>(arr: readonly T[], getKeyFromIte
 ### 4.3 描述
 
 清晰简洁地描述该拉取请求的内容。
+
+## 5. 编写文档指南
+
+每个函数都需要四种语言的文档，请同步维护：
+
+- `docs/reference/{category}/{fn}.md` (英文)
+- `docs/ko/reference/{category}/{fn}.md` (韩文，使用 ~해요체)
+- `docs/ja/reference/{category}/{fn}.md` (日文)
+- `docs/zh_hans/reference/{category}/{fn}.md` (简体中文)
+
+可参考 [`sum`](../docs/zh_hans/reference/math/sum.md) 与 [`toCamelCaseKeys`](../docs/zh_hans/reference/object/toCamelCaseKeys.md) 这两份范例文档。
+
+### 5.1 模板
+
+````markdown
+# {函数名}
+
+{一句话说明}
+
+<!-- prettier-ignore -->
+```typescript
+{简短示例代码}
+```
+
+## 用法
+
+### `{签名}`
+
+{先说明何时使用，再描述行为，使用自然流畅的句子。需要时可以在段落之间插入短小的代码示例。}
+
+```typescript
+import { {函数名} } from 'es-toolkit/{category}';
+
+// 用一句话说明这个示例展示了什么。
+{示例调用}
+// Returns: {结果}
+```
+
+#### 参数
+
+- `{名称}` (`{类型}`): {说明}.
+- `{名称}` (`{类型}`, 可选): {说明}. 默认值为 `{默认值}`。
+
+#### 返回值
+
+(`{类型}`): {返回值的说明}.
+````
+
+### 5.2 如何填写
+
+- **标题**：直接写函数名，不加任何后缀（例如 `# sum`、`# toCamelCaseKeys`）。
+- **一句话说明**：用一句话概括函数的行为。出现像 "camelCase" 这样不太常见的概念时，可以再加一段简短的补充说明。
+- **简短示例代码**：使用 `arr`、`numbers`、`obj` 等具有描述性的变量名而非具体值，让读者一眼看懂接口。
+- **`### \`签名\``**：每个重载一个标题。能合并就合并，只有当行为真的不同时（例如数组与对象）才拆成多个。
+- **正文说明**：按 "何时使用 → 如何运作" 的顺序，使用自然流畅的句子。不要使用 "说明：…" 这种冒号式风格。每个示例代码块以 `import { ... } from 'es-toolkit/{category}'` 开始，并在每次调用上方加一行注释。
+- **参数**：``- `名称` (`类型`): 说明.``。可选参数在类型后追加 `可选` 并写出默认值。
+- **返回值**：开头用括号写出类型，再接说明。
+
+### 5.3 写作指南
+
+- 使用通俗易懂的词语（例如使用 "长度相同的数组" 而不是 "均匀的数组"）。
+- 使用 JavaScript 中更常见的术语（例如使用 "数组或对象" 而不是 "集合"）。
+- 在非英文版本中，将英文术语展开为自然的本地表达（例如使用 "判断为真的值" 而不是 "truthy"）。

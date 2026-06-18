@@ -177,7 +177,7 @@ describe('memoize', () => {
     memoize.Cache = oldCache;
   });
 
-  it('should works with an immutable `_.memoize.Cache` ', () => {
+  it('should works with an immutable `_.memoize.Cache`', () => {
     const oldCache = memoize.Cache;
     memoize.Cache = ImmutableCache;
 

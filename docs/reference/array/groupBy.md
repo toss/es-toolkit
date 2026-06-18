@@ -54,8 +54,22 @@ const byParity = groupBy(numbers, num => (num % 2 === 0 ? 'even' : 'odd'));
 #### Parameters
 
 - `arr` (`T[]`): The array to group.
-- `getKeyFromItem` (`(item: T) => K`): A function that generates a key from each element.
+- `getKeyFromItem` (`(item: T, index: number, array: T[]) => K`): A function that generates a key from each element, its index, and the array.
 
 #### Returns
 
 (`Record<K, T[]>`): Returns an object with elements grouped by key.
+
+## Examples
+
+```typescript
+// Using index parameter
+const items = ['a', 'b', 'c', 'd'];
+const result = groupBy(items, (item, index) => (index % 2 === 0 ? 'even' : 'odd'));
+// Result: { even: ['a', 'c'], odd: ['b', 'd'] }
+
+// Using array parameter
+const numbers = [1, 2, 3, 4];
+const result2 = groupBy(numbers, (item, index, arr) => (item < arr.length / 2 ? 'small' : 'large'));
+// Result: { small: [1], large: [2, 3, 4] }
+```

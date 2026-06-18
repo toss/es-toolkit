@@ -7,9 +7,9 @@ import { union } from './union.ts';
  * which are in either of the arrays, but not in their intersection.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr1 - The first array.
- * @param {T[]} arr2 - The second array.
- * @returns {T[]} An array containing the elements that are present in either `arr1` or `arr2` but not in both.
+ * @param arr1 - The first array.
+ * @param arr2 - The second array.
+ * @returns An array containing the elements that are present in either `arr1` or `arr2` but not in both.
  *
  * @example
  * // Returns [1, 2, 5, 6]
