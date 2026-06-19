@@ -40,10 +40,10 @@ export function toPath(deepKey: any): string[] {
   let quoteChar = '';
   let bracket = false;
 
-  // Leading dot
+  // Leading dot. Record the empty segment that precedes it, but leave the dot for the
+  // main loop so it is still treated as a separator (e.g. '..a' -> ['', '', 'a']).
   if (deepKey.charCodeAt(0) === 46) {
     result.push('');
-    index++;
   }
 
   while (index < length) {
@@ -84,6 +84,13 @@ export function toPath(deepKey: any): string[] {
         if (key) {
           result.push(key);
           key = '';
+        }
+        // A dot that is directly followed by another dot or the end of the string
+        // separates an empty segment, matching lodash (e.g. 'a..b' -> ['a', '', 'b'],
+        // 'a.' -> ['a', '']).
+        const next = deepKey[index + 1];
+        if (next === undefined || next === '.') {
+          result.push('');
         }
       } else {
         key += char;
