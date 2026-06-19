@@ -103,7 +103,8 @@
   "publishConfig": {
     "access": "public",
     "main": "./dist/index.js",
-    "browser": "./dist/browser.global.js",
+    "jsdelivr": "./dist/browser.global.js",
+    "unpkg": "./dist/browser.global.js",
     "module": "./dist/index.mjs",
     "exports": {
       ".": {
