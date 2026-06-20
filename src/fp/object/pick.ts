@@ -1,9 +1,9 @@
 import { pick as pickToolkit } from '../../object/pick.ts';
 
 /**
- * Creates a data-last operator that builds a new object containing only the
- * given `keys` from the input object. Keys that are absent on the input are
- * skipped.
+ * Creates a function that builds a new object containing only the given `keys`
+ * from the input object. Keys that are absent on the input are skipped. Use it
+ * with {@link pipe}.
  *
  * @template T - The type of the input object.
  * @template K - The union of keys to pick.
@@ -16,5 +16,7 @@ import { pick as pickToolkit } from '../../object/pick.ts';
  * pipe({ a: 1, b: 2, c: 3 }, pick(['a', 'c'])); // => { a: 1, c: 3 }
  */
 export function pick<T extends Record<string, any>, K extends keyof T>(keys: readonly K[]): (obj: T) => Pick<T, K> {
-  return (obj: T): Pick<T, K> => pickToolkit(obj, keys);
+  return function (obj: T): Pick<T, K> {
+    return pickToolkit(obj, keys);
+  };
 }

@@ -1,6 +1,6 @@
 # pipe
 
-左から右へ関数を合成し、値を一連の関数に通します。
+左から右へ関数を合成し、一連の関数に値を通します。
 
 ```typescript
 const result = pipe(value, ...functions);
@@ -10,7 +10,7 @@ const result = pipe(value, ...functions);
 
 `pipe` は `es-toolkit/fp` のエントリーポイントです。初期値 `value` を受け取り、各関数を順番に適用して、ある関数の結果を次の関数の入力として渡します。変換が実行される順序と同じく上から下へ読めるため、ネストや一時変数がなくなります。
 
-`es-toolkit/fp` のすべての演算子はデータラストなので、そのまま `pipe` に組み込めます。
+`es-toolkit/fp` のすべての関数はデータを受け取る関数を返すため、そのまま `pipe` に組み込めます。
 
 ```typescript
 import { map, pipe } from 'es-toolkit/fp';
@@ -21,7 +21,7 @@ pipe(
 ); // => [3, 6, 9]
 ```
 
-es-toolkit の演算子だけでなく、任意の単項関数を `pipe` の中で使えます。
+es-toolkit の関数だけでなく、任意の単項関数を `pipe` の中で使えます。
 
 ```typescript
 import { pipe } from 'es-toolkit/fp';
@@ -35,7 +35,7 @@ pipe(
 
 ### 遅延評価
 
-遅延評価に対応した演算子（`map`、`filter`、`take` など）が連続して並ぶと、`pipe` はそれらを融合し、各ステップごとに中間配列を作るのではなく入力を要素ごとに処理します。末尾の `take` は走査を早期に終了できるため、それより前の演算子は残りの入力に対して実行されません。
+遅延評価に対応した関数（`map`、`filter`、`take` など）が連続して並ぶと、`pipe` はそれらを融合し、各ステップごとに中間配列を作るのではなく入力を要素ごとに処理します。末尾の `take` は走査を早期に終了できるため、それより前の関数は残りの入力に対して実行されません。
 
 ```typescript
 import { filter, map, pipe, take } from 'es-toolkit/fp';

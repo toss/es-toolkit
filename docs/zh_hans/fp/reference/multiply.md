@@ -1,6 +1,6 @@
 # multiply
 
-创建一个数据在后的运算符,将其输入乘以一个数字。
+创建一个将其输入乘以一个数字的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(value, multiply(multiplicand));
@@ -8,7 +8,7 @@ const result = pipe(value, multiply(multiplicand));
 
 ## 用法
 
-`multiply` 返回一个把其输入乘以 `multiplicand` 的函数。它是为组合而设计的:既可以转换流经 [`pipe`](/zh_hans/fp/reference/pipe) 的值,也可以作为 [`map`](/zh_hans/fp/reference/map) 等运算符的回调。
+`multiply` 返回一个把其输入乘以 `multiplicand` 的函数。它是为组合而设计的:既可以转换流经 [`pipe`](./pipe.md) 的值,也可以作为 [`map`](./map.md) 等函数的回调。
 
 ```typescript
 import { map, multiply, pipe } from 'es-toolkit/fp';
@@ -26,4 +26,4 @@ pipe([1, 2, 3], map(multiply(3))); // => [3, 6, 9]
 
 #### 返回值
 
-(`(value: number) => number`): 一个数据在后的运算符,将 `value` 映射为 `value * multiplicand`。
+(`(value: number) => number`): 一个将 `value` 映射为 `value * multiplicand` 的函数。

@@ -1,6 +1,6 @@
 # map
 
-创建一个数据在后的运算符,用于转换数组中的每个元素,等价于 `Array.prototype.map`。
+创建一个转换数组中每个元素的函数,等价于 `Array.prototype.map`。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, map(callbackfn));
@@ -8,7 +8,7 @@ const result = pipe(array, map(callbackfn));
 
 ## 用法
 
-`map` 通过对每个元素调用 `callbackfn` 来构建一个新数组。它**支持惰性求值**:在 [`pipe`](/zh_hans/fp/reference/pipe) 中,它会与相邻的惰性运算符融合,因此位于末尾的 `take` 可以提前结束工作。
+`map` 通过对每个元素调用 `callbackfn` 来构建一个新数组。它**支持惰性求值**:在 [`pipe`](./pipe.md) 中,它会与相邻的惰性操作融合,因此位于末尾的 `take` 可以提前结束工作。
 
 ```typescript
 import { map, pipe } from 'es-toolkit/fp';
@@ -38,4 +38,4 @@ pipe(
 
 #### 返回值
 
-(`(array: readonly T[]) => U[]`): 一个数据在后的运算符,将 `readonly T[]` 映射为一个新的 `U[]`。
+(`(array: readonly T[]) => U[]`): 一个将 `readonly T[]` 映射为新 `U[]` 的函数。

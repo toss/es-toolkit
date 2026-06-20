@@ -1,6 +1,6 @@
 # add
 
-Creates a data-last operator that adds a number to its input.
+Creates a function that adds a number to its input. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(value, add(addend));
@@ -8,7 +8,7 @@ const result = pipe(value, add(addend));
 
 ## Usage
 
-`add` returns a function that adds `addend` to its input. It is designed for composition: it can transform the value flowing through a [`pipe`](/fp/reference/pipe), or serve as the callback of an operator such as [`map`](/fp/reference/map).
+`add` returns a function that adds `addend` to its input. It is designed for composition: it can transform the value flowing through a [`pipe`](./pipe.md), or serve as the callback of a function such as [`map`](./map.md).
 
 ```typescript
 import { add, map, pipe } from 'es-toolkit/fp';
@@ -26,4 +26,4 @@ pipe([1, 2, 3], map(add(10))); // => [11, 12, 13]
 
 #### Returns
 
-(`(value: number) => number`): A data-last operator that maps `value` to `value + addend`.
+(`(value: number) => number`): A function that maps `value` to `value + addend`.

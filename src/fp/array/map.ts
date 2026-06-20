@@ -2,11 +2,11 @@ import type { LazyEvaluator } from '../_internal/lazy.ts';
 import { toLazy } from '../_internal/lazy.ts';
 
 /**
- * Creates a data-last operator that builds a new array by calling `callback`
- * on every element, equivalent to `Array.prototype.map`.
+ * Creates a function that builds a new array by calling `callback` on every
+ * element, equivalent to `Array.prototype.map`. Use it with {@link pipe}.
  *
- * The returned operator is **lazy-capable**: inside a {@link pipe} it is fused
- * with adjacent lazy operators and runs element-by-element, so a trailing
+ * The returned function is **lazy-capable**: inside a {@link pipe} it is fused
+ * with adjacent lazy operations and runs element-by-element, so a trailing
  * `take` can terminate the walk early without mapping the rest of the input.
  *
  * @template T - The type of elements in the input array.
@@ -26,15 +26,21 @@ import { toLazy } from '../_internal/lazy.ts';
  * pipe([10, 20, 30], map((value, index) => value + index)); // => [10, 21, 32]
  */
 export function map<T, U>(callback: (value: T, index: number, array: readonly T[]) => U): (array: readonly T[]) => U[] {
-  return toLazy((array: readonly T[]): U[] => array.map((value, index) => callback(value, index, array)), mapLazy, [
-    callback,
-  ]);
+  return toLazy(
+    function (array: readonly T[]): U[] {
+      return array.map(callback);
+    },
+    mapLazy,
+    [callback]
+  );
 }
 
 function mapLazy<T, U>(callback: (value: T, index: number, array: readonly T[]) => U): LazyEvaluator<T, U> {
-  return (value, index, data) => ({
-    done: false,
-    hasNext: true,
-    next: callback(value, index, data),
-  });
+  return function (value, index, data) {
+    return {
+      done: false,
+      hasNext: true,
+      next: callback(value, index, data),
+    };
+  };
 }

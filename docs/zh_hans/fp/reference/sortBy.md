@@ -1,6 +1,6 @@
 # sortBy
 
-创建一个数据在后的运算符,按一个或多个条件对对象数组进行升序排序。
+创建一个按一个或多个条件对对象数组进行升序排序的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, sortBy(criteria));
@@ -38,4 +38,4 @@ pipe(users, sortBy([item => item.age]));
 
 #### 返回值
 
-(`(array: readonly T[]) => T[]`): 一个数据在后的运算符,将 `readonly T[]` 映射为一个排序后的新 `T[]`。
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为排序后新 `T[]` 的函数。

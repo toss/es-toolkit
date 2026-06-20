@@ -1,6 +1,6 @@
 # sortBy
 
-オブジェクトの配列を 1 つ以上の基準で昇順に並べ替えるデータラストな演算子を作成します。
+オブジェクトの配列を 1 つ以上の基準で昇順に並べ替える関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
 const result = pipe(array, sortBy(criteria));
@@ -38,4 +38,4 @@ pipe(users, sortBy([item => item.age]));
 
 #### 戻り値
 
-(`(array: readonly T[]) => T[]`): `readonly T[]` を並べ替えられた新しい `T[]` に変換するデータラストな演算子です。
+(`(array: readonly T[]) => T[]`): `readonly T[]` を並べ替えられた新しい `T[]` に変換する関数です。

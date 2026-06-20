@@ -1,6 +1,6 @@
 # add
 
-创建一个数据在后的运算符,将一个数字加到其输入上。
+创建一个将一个数字加到其输入上的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(value, add(addend));
@@ -8,7 +8,7 @@ const result = pipe(value, add(addend));
 
 ## 用法
 
-`add` 返回一个把 `addend` 加到其输入上的函数。它是为组合而设计的:既可以转换流经 [`pipe`](/zh_hans/fp/reference/pipe) 的值,也可以作为 [`map`](/zh_hans/fp/reference/map) 等运算符的回调。
+`add` 返回一个把 `addend` 加到其输入上的函数。它是为组合而设计的:既可以转换流经 [`pipe`](./pipe.md) 的值,也可以作为 [`map`](./map.md) 等函数的回调。
 
 ```typescript
 import { add, map, pipe } from 'es-toolkit/fp';
@@ -26,4 +26,4 @@ pipe([1, 2, 3], map(add(10))); // => [11, 12, 13]
 
 #### 返回值
 
-(`(value: number) => number`): 一个数据在后的运算符,将 `value` 映射为 `value + addend`。
+(`(value: number) => number`): 一个将 `value` 映射为 `value + addend` 的函数。

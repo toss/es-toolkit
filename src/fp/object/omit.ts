@@ -1,8 +1,8 @@
 import { omit as omitToolkit } from '../../object/omit.ts';
 
 /**
- * Creates a data-last operator that builds a new object with the given `keys`
- * removed from the input object.
+ * Creates a function that builds a new object with the given `keys` removed from
+ * the input object. Use it with {@link pipe}.
  *
  * @template T - The type of the input object.
  * @template K - The union of keys to omit.
@@ -15,5 +15,7 @@ import { omit as omitToolkit } from '../../object/omit.ts';
  * pipe({ a: 1, b: 2, c: 3 }, omit(['b', 'c'])); // => { a: 1 }
  */
 export function omit<T extends Record<string, any>, K extends keyof T>(keys: readonly K[]): (obj: T) => Omit<T, K> {
-  return (obj: T): Omit<T, K> => omitToolkit(obj, keys);
+  return function (obj: T): Omit<T, K> {
+    return omitToolkit(obj, keys);
+  };
 }

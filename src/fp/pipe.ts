@@ -19,11 +19,11 @@ type LazyFunction = LazyDefinition & ((input: unknown) => unknown);
  * turns deeply nested calls into clear, sequential steps without temporary
  * variables.
  *
- * This is the entry point of `es-toolkit/fp`. Every operator in the module is
- * **data-last**: calling it (e.g. `map(fn)`, `take(2)`) returns a function that
- * expects the data, which `pipe` then supplies.
+ * This is the entry point of `es-toolkit/fp`. Each `es-toolkit/fp` function is
+ * called with its configuration (e.g. `map(fn)`, `take(2)`) and returns a
+ * function that takes the data, which `pipe` then supplies.
  *
- * When consecutive **lazy-capable** operators (`map`, `filter`, `take`, ...)
+ * When consecutive **lazy-capable** functions (`map`, `filter`, `take`, ...)
  * appear together, `pipe` fuses them and processes the input element-by-element
  * instead of building an intermediate array after every step. This allows
  * early termination: a trailing `take(n)` stops the walk as soon as `n`
@@ -216,9 +216,9 @@ export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
 export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) => unknown>): unknown {
   let output = value;
 
-  const lazyFunctions = functions.map(fn =>
-    'lazy' in fn ? prepareLazyFunction(fn as unknown as LazyFunction) : undefined
-  );
+  const lazyFunctions = functions.map(function (fn) {
+    return 'lazy' in fn ? prepareLazyFunction(fn as unknown as LazyFunction) : undefined;
+  });
 
   let functionIndex = 0;
   while (functionIndex < functions.length) {

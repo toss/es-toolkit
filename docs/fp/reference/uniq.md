@@ -1,6 +1,6 @@
 # uniq
 
-Creates a data-last operator that removes duplicate values from an array.
+Creates a function that removes duplicate values from an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, uniq());
@@ -21,8 +21,8 @@ pipe([3, 1, 2, 1, 3], uniq()); // => [3, 1, 2]
 
 #### Parameters
 
-This operator takes no arguments; call it as `uniq()`.
+This function takes no arguments; call it as `uniq()`.
 
 #### Returns
 
-(`(array: readonly T[]) => T[]`): A data-last operator that maps a `readonly T[]` to a new, duplicate-free `T[]`.
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a new, duplicate-free `T[]`.

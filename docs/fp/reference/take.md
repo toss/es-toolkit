@@ -1,6 +1,6 @@
 # take
 
-Creates a data-last operator that returns the first `count` elements of an array.
+Creates a function that returns the first `count` elements of an array. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, take(count));
@@ -8,7 +8,7 @@ const result = pipe(array, take(count));
 
 ## Usage
 
-`take` returns the first `count` elements. If `count` is greater than the array length, the whole array is returned. For a non-negative integer `count` it is **lazy-capable**: inside a [`pipe`](/fp/reference/pipe) it ends the walk as soon as `count` elements have been collected, so preceding lazy operators never process the rest of the input.
+`take` returns the first `count` elements. If `count` is greater than the array length, the whole array is returned. For a non-negative integer `count` it is **lazy-capable**: inside a [`pipe`](./pipe.md) it ends the walk as soon as `count` elements have been collected, so preceding lazy operations never process the rest of the input.
 
 ```typescript
 import { map, pipe, take } from 'es-toolkit/fp';
@@ -28,4 +28,4 @@ pipe([1, 2, 3, 4, 5], map(expensiveTransform), take(3));
 
 #### Returns
 
-(`(array: readonly T[]) => T[]`): A data-last operator that maps a `readonly T[]` to a new `T[]` with at most `count` elements.
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a new `T[]` with at most `count` elements.

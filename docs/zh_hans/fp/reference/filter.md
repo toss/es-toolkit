@@ -1,6 +1,6 @@
 # filter
 
-创建一个数据在后的运算符,只保留通过测试的元素,等价于 `Array.prototype.filter`。
+创建一个只保留通过测试的元素的函数,等价于 `Array.prototype.filter`。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, filter(predicate));
@@ -8,7 +8,7 @@ const result = pipe(array, filter(predicate));
 
 ## 用法
 
-`filter` 会保留那些使 `predicate` 返回真值的元素。类型谓词会收窄结果的元素类型。它**支持惰性求值**:在 [`pipe`](/zh_hans/fp/reference/pipe) 中,它会与相邻的惰性运算符融合。
+`filter` 会保留那些使 `predicate` 返回真值的元素。类型谓词会收窄结果的元素类型。它**支持惰性求值**:在 [`pipe`](./pipe.md) 中,它会与相邻的惰性操作融合。
 
 ```typescript
 import { filter, pipe } from 'es-toolkit/fp';
@@ -44,4 +44,4 @@ const result = pipe(
 
 #### 返回值
 
-(`(array: readonly T[]) => T[]`): 一个数据在后的运算符,将 `readonly T[]` 映射为一个经过筛选的数组。使用类型守卫时,结果为 `S[]`。
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为筛选后数组的函数。使用类型守卫时,结果为 `S[]`。

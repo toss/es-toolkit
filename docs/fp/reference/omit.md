@@ -1,6 +1,6 @@
 # omit
 
-Creates a data-last operator that removes the given keys from an object.
+Creates a function that removes the given keys from an object. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(obj, omit(keys));
@@ -22,4 +22,4 @@ pipe({ a: 1, b: 2, c: 3 }, omit(['b', 'c'])); // => { a: 1 }
 
 #### Returns
 
-(`(obj: T) => Omit<T, K>`): A data-last operator that maps an object `T` to a new object without the omitted keys.
+(`(obj: T) => Omit<T, K>`): A function that maps an object `T` to a new object without the omitted keys.

@@ -1,6 +1,6 @@
 # es-toolkit/fp
 
-`es-toolkit/fp` is the functional-programming entry point for es-toolkit. It lets you express a data transformation as a readable, top-to-bottom pipeline with [`pipe`](/fp/reference/pipe), instead of nesting calls or juggling temporary variables.
+`es-toolkit/fp` is the functional-programming entry point for es-toolkit. It lets you express a data transformation as a readable, top-to-bottom pipeline with [`pipe`](./reference/pipe.md), instead of nesting calls or juggling temporary variables.
 
 ```typescript
 import { filter, map, pipe, take } from 'es-toolkit/fp';
@@ -13,9 +13,9 @@ const result = pipe(
 ); // => [20, 40]
 ```
 
-## Data-last operators
+## How es-toolkit/fp functions work
 
-Every operator in `es-toolkit/fp` is **data-last**: you call it with its configuration (for example `map(fn)` or `take(2)`) and get back a function that expects the data. `pipe` supplies that data, threading the result of each step into the next.
+Every `es-toolkit/fp` function is called with its configuration (for example `map(fn)` or `take(2)`) and returns a function that takes the data. `pipe` supplies that data, threading the result of each step into the next.
 
 ```typescript
 import { map, pipe } from 'es-toolkit/fp';
@@ -27,7 +27,7 @@ pipe([1, 2, 3], triple); // => [3, 6, 9]
 
 ## Lazy evaluation
 
-When consecutive lazy-capable operators (`map`, `filter`, `take`, …) appear together, `pipe` fuses them into a single pass over the data and processes one element at a time. A trailing `take` can then end the walk early, so the earlier operators never run on the rest of the input.
+When consecutive lazy-capable functions (`map`, `filter`, `take`, …) appear together, `pipe` fuses them into a single pass over the data and processes one element at a time. A trailing `take` can then end the walk early, so the earlier functions never run on the rest of the input.
 
 ```typescript
 import { filter, map, pipe, take } from 'es-toolkit/fp';
@@ -45,4 +45,4 @@ During lazy evaluation, the third argument of a callback (the data array) holds 
 
 ## Relationship to es-toolkit
 
-`es-toolkit/fp` reuses the implementations from `es-toolkit`; it only changes how you call them — data-last, inside `pipe`. If you prefer direct calls, use [`es-toolkit`](/intro). To match Lodash call sites while migrating, use [`es-toolkit/compat`](/compat/intro).
+`es-toolkit/fp` reuses the implementations from `es-toolkit`; it only changes how you call them — inside `pipe`. If you prefer direct calls, use [`es-toolkit`](/intro). To match Lodash call sites while migrating, use [`es-toolkit/compat`](/compat/intro).

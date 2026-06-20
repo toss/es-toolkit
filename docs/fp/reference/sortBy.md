@@ -1,6 +1,6 @@
 # sortBy
 
-Creates a data-last operator that sorts an array of objects in ascending order by one or more criteria.
+Creates a function that sorts an array of objects in ascending order by one or more criteria. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, sortBy(criteria));
@@ -38,4 +38,4 @@ pipe(users, sortBy([item => item.age]));
 
 #### Returns
 
-(`(array: readonly T[]) => T[]`): A data-last operator that maps a `readonly T[]` to a new, sorted `T[]`.
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a new, sorted `T[]`.

@@ -1,6 +1,6 @@
 # map
 
-配列のすべての要素を変換するデータラストな演算子を作成します。`Array.prototype.map` と同等です。
+配列のすべての要素を変換する関数を作成します。`Array.prototype.map` と同等です。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
 const result = pipe(array, map(callbackfn));
@@ -8,7 +8,7 @@ const result = pipe(array, map(callbackfn));
 
 ## 使用法
 
-`map` は各要素に対して `callbackfn` を呼び出し、新しい配列を作成します。これは **遅延評価に対応** しています。[`pipe`](/ja/fp/reference/pipe) の中では隣接する遅延演算子と融合されるため、末尾の `take` によって処理を早期に止められます。
+`map` は各要素に対して `callbackfn` を呼び出し、新しい配列を作成します。これは **遅延評価に対応** しています。[`pipe`](./pipe.md) の中では隣接する遅延処理と融合されるため、末尾の `take` によって処理を早期に止められます。
 
 ```typescript
 import { map, pipe } from 'es-toolkit/fp';
@@ -38,4 +38,4 @@ pipe(
 
 #### 戻り値
 
-(`(array: readonly T[]) => U[]`): `readonly T[]` を新しい `U[]` に変換するデータラストな演算子です。
+(`(array: readonly T[]) => U[]`): `readonly T[]` を新しい `U[]` に変換する関数です。

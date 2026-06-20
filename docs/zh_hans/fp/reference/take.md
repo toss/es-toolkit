@@ -1,6 +1,6 @@
 # take
 
-创建一个数据在后的运算符,返回数组的前 `count` 个元素。
+创建一个返回数组前 `count` 个元素的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, take(count));
@@ -8,7 +8,7 @@ const result = pipe(array, take(count));
 
 ## 用法
 
-`take` 返回前 `count` 个元素。如果 `count` 大于数组长度,则返回整个数组。当 `count` 为非负整数时,它**支持惰性求值**:在 [`pipe`](/zh_hans/fp/reference/pipe) 中,一旦收集到 `count` 个元素就会结束遍历,因此前面的惰性运算符不会再处理剩余的输入。
+`take` 返回前 `count` 个元素。如果 `count` 大于数组长度,则返回整个数组。当 `count` 为非负整数时,它**支持惰性求值**:在 [`pipe`](./pipe.md) 中,一旦收集到 `count` 个元素就会结束遍历,因此前面的惰性操作不会再处理剩余的输入。
 
 ```typescript
 import { map, pipe, take } from 'es-toolkit/fp';
@@ -28,4 +28,4 @@ pipe([1, 2, 3, 4, 5], map(expensiveTransform), take(3));
 
 #### 返回值
 
-(`(array: readonly T[]) => T[]`): 一个数据在后的运算符,将 `readonly T[]` 映射为一个最多包含 `count` 个元素的新 `T[]`。
+(`(array: readonly T[]) => T[]`): 一个将 `readonly T[]` 映射为最多包含 `count` 个元素的新 `T[]` 的函数。

@@ -1,6 +1,6 @@
 # es-toolkit/fp
 
-`es-toolkit/fp` は es-toolkit の関数型プログラミング向けエントリーポイントです。呼び出しをネストしたり一時変数を扱ったりする代わりに、[`pipe`](/ja/fp/reference/pipe) を使ってデータ変換を上から下へ読める一連のパイプラインとして表現できます。
+`es-toolkit/fp` は es-toolkit の関数型プログラミング向けのエントリーポイントです。呼び出しをネストさせたり一時変数をやりくりしたりする代わりに、[`pipe`](./reference/pipe.md) を使ってデータ変換を読みやすい上から下へのパイプラインとして表現できます。
 
 ```typescript
 import { filter, map, pipe, take } from 'es-toolkit/fp';
@@ -13,9 +13,9 @@ const result = pipe(
 ); // => [20, 40]
 ```
 
-## データラストな演算子
+## es-toolkit/fp の関数の仕組み
 
-`es-toolkit/fp` のすべての演算子は **データラスト** です。設定（たとえば `map(fn)` や `take(2)`）を渡して呼び出すと、データを受け取る関数が返ってきます。`pipe` はそのデータを供給し、各ステップの結果を次のステップへとつなげていきます。
+`es-toolkit/fp` のすべての関数は、その設定（たとえば `map(fn)` や `take(2)`）とともに呼び出され、データを受け取る関数を返します。`pipe` がそのデータを渡し、各ステップの結果を次のステップへとつなげていきます。
 
 ```typescript
 import { map, pipe } from 'es-toolkit/fp';
@@ -27,7 +27,7 @@ pipe([1, 2, 3], triple); // => [3, 6, 9]
 
 ## 遅延評価
 
-遅延評価に対応した演算子（`map`、`filter`、`take` など）が連続して並ぶと、`pipe` はそれらを 1 回の走査に融合し、要素を 1 つずつ処理します。末尾の `take` は走査を早期に終了できるため、それより前の演算子は残りの入力に対して実行されません。
+遅延評価に対応した関数（`map`、`filter`、`take` など）が連続して並ぶと、`pipe` はそれらを 1 回の走査にまとめ、要素を 1 つずつ処理します。末尾の `take` は走査を早期に終了できるため、それより前の関数は残りの入力に対して実行されません。
 
 ```typescript
 import { filter, map, pipe, take } from 'es-toolkit/fp';
@@ -45,4 +45,4 @@ pipe(
 
 ## es-toolkit との関係
 
-`es-toolkit/fp` は `es-toolkit` の実装を再利用しており、変わるのは呼び出し方だけです。つまり `pipe` の中でデータラストに呼び出します。直接呼び出すスタイルが好みであれば [`es-toolkit`](/ja/intro) を使ってください。移行中に Lodash の呼び出し箇所に合わせたい場合は [`es-toolkit/compat`](/ja/compat/intro) を使ってください。
+`es-toolkit/fp` は `es-toolkit` の実装を再利用しており、変わるのは呼び出し方（`pipe` の中で呼び出す点）だけです。直接呼び出すスタイルが好みであれば、[`es-toolkit`](/ja/intro) を使ってください。移行中に Lodash の呼び出し箇所に合わせたい場合は、[`es-toolkit/compat`](/ja/compat/intro) を使ってください。

@@ -1,6 +1,6 @@
 # map
 
-Creates a data-last operator that transforms every element of an array, equivalent to `Array.prototype.map`.
+Creates a function that transforms every element of an array, equivalent to `Array.prototype.map`. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, map(callbackfn));
@@ -8,7 +8,7 @@ const result = pipe(array, map(callbackfn));
 
 ## Usage
 
-`map` builds a new array by calling `callbackfn` on each element. It is **lazy-capable**: inside a [`pipe`](/fp/reference/pipe) it is fused with adjacent lazy operators, so a trailing `take` can stop the work early.
+`map` builds a new array by calling `callbackfn` on each element. It is **lazy-capable**: inside a [`pipe`](./pipe.md) it is fused with adjacent lazy operations, so a trailing `take` can stop the work early.
 
 ```typescript
 import { map, pipe } from 'es-toolkit/fp';
@@ -38,4 +38,4 @@ pipe(
 
 #### Returns
 
-(`(array: readonly T[]) => U[]`): A data-last operator that maps a `readonly T[]` to a new `U[]`.
+(`(array: readonly T[]) => U[]`): A function that maps a `readonly T[]` to a new `U[]`.

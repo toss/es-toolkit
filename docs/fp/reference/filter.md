@@ -1,6 +1,6 @@
 # filter
 
-Creates a data-last operator that keeps only the elements that pass a test, equivalent to `Array.prototype.filter`.
+Creates a function that keeps only the elements that pass a test, equivalent to `Array.prototype.filter`. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, filter(predicate));
@@ -8,7 +8,7 @@ const result = pipe(array, filter(predicate));
 
 ## Usage
 
-`filter` keeps the elements for which `predicate` returns a truthy value. A type predicate narrows the element type of the result. It is **lazy-capable**: inside a [`pipe`](/fp/reference/pipe) it is fused with adjacent lazy operators.
+`filter` keeps the elements for which `predicate` returns a truthy value. A type predicate narrows the element type of the result. It is **lazy-capable**: inside a [`pipe`](./pipe.md) it is fused with adjacent lazy operations.
 
 ```typescript
 import { filter, pipe } from 'es-toolkit/fp';
@@ -44,4 +44,4 @@ const result = pipe(
 
 #### Returns
 
-(`(array: readonly T[]) => T[]`): A data-last operator that maps a `readonly T[]` to a filtered array. With a type guard, the result is `S[]`.
+(`(array: readonly T[]) => T[]`): A function that maps a `readonly T[]` to a filtered array. With a type guard, the result is `S[]`.

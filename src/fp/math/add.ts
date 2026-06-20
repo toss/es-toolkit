@@ -1,8 +1,6 @@
 /**
- * Creates a data-last operator that adds `addend` to its input.
- *
- * Designed for composition: it can transform the value flowing through a
- * {@link pipe}, or serve as the callback of an operator such as `map`.
+ * Creates a function that adds `addend` to its input. Use it with {@link pipe},
+ * or as the callback of a function such as {@link map}.
  *
  * @param addend - The number to add to the input.
  * @returns A function that maps a `number` to `value + addend`.
@@ -14,5 +12,7 @@
  * pipe([1, 2, 3], map(add(10))); // => [11, 12, 13]
  */
 export function add(addend: number): (value: number) => number {
-  return (value: number): number => value + addend;
+  return function (value: number): number {
+    return value + addend;
+  };
 }

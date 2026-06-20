@@ -1,6 +1,6 @@
 # chunk
 
-Creates a data-last operator that splits an array into sub-arrays of a given length.
+Creates a function that splits an array into sub-arrays of a given length. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(array, chunk(size));
@@ -25,7 +25,7 @@ pipe([1, 2, 3], chunk(10)); // => [[1, 2, 3]]
 
 #### Returns
 
-(`(array: readonly T[]) => T[][]`): A data-last operator that maps a `readonly T[]` to an array of chunks.
+(`(array: readonly T[]) => T[][]`): A function that maps a `readonly T[]` to an array of chunks.
 
 #### Throws
 

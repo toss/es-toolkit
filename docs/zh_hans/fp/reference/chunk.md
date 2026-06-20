@@ -1,6 +1,6 @@
 # chunk
 
-创建一个数据在后的运算符,将数组拆分成指定长度的子数组。
+创建一个将数组拆分成指定长度子数组的函数。与函数式编程的 [`pipe`](./pipe.md) 一起使用。
 
 ```typescript
 const result = pipe(array, chunk(size));
@@ -25,7 +25,7 @@ pipe([1, 2, 3], chunk(10)); // => [[1, 2, 3]]
 
 #### 返回值
 
-(`(array: readonly T[]) => T[][]`): 一个数据在后的运算符,将 `readonly T[]` 映射为一个由分块组成的数组。
+(`(array: readonly T[]) => T[][]`): 一个将 `readonly T[]` 映射为由分块组成数组的函数。
 
 #### 异常
 

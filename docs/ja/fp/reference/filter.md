@@ -1,6 +1,6 @@
 # filter
 
-テストを通過した要素だけを残すデータラストな演算子を作成します。`Array.prototype.filter` と同等です。
+テストを通過した要素だけを残す関数を作成します。`Array.prototype.filter` と同等です。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
 const result = pipe(array, filter(predicate));
@@ -8,7 +8,7 @@ const result = pipe(array, filter(predicate));
 
 ## 使用法
 
-`filter` は `predicate` が真と評価される値を返した要素だけを残します。型述語を使うと結果の要素の型が絞り込まれます。これは **遅延評価に対応** しています。[`pipe`](/ja/fp/reference/pipe) の中では隣接する遅延演算子と融合されます。
+`filter` は `predicate` が真と評価される値を返した要素だけを残します。型述語を使うと結果の要素の型が絞り込まれます。これは **遅延評価に対応** しています。[`pipe`](./pipe.md) の中では隣接する遅延処理と融合されます。
 
 ```typescript
 import { filter, pipe } from 'es-toolkit/fp';
@@ -44,4 +44,4 @@ const result = pipe(
 
 #### 戻り値
 
-(`(array: readonly T[]) => T[]`): `readonly T[]` をフィルタリングされた配列に変換するデータラストな演算子です。型ガードを使った場合、結果は `S[]` になります。
+(`(array: readonly T[]) => T[]`): `readonly T[]` をフィルタリングされた配列に変換する関数です。型ガードを使った場合、結果は `S[]` になります。

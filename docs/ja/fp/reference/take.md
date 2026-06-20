@@ -1,6 +1,6 @@
 # take
 
-配列の先頭から `count` 個の要素を返すデータラストな演算子を作成します。
+配列の先頭から `count` 個の要素を返す関数を作成します。関数型プログラミングの [`pipe`](./pipe.md) と一緒に使用します。
 
 ```typescript
 const result = pipe(array, take(count));
@@ -8,7 +8,7 @@ const result = pipe(array, take(count));
 
 ## 使用法
 
-`take` は先頭から `count` 個の要素を返します。`count` が配列の長さより大きい場合は、配列全体を返します。`count` が非負の整数のとき、これは **遅延評価に対応** しています。[`pipe`](/ja/fp/reference/pipe) の中では `count` 個の要素が集まった時点で走査を終了するため、それより前の遅延演算子は残りの入力を処理しません。
+`take` は先頭から `count` 個の要素を返します。`count` が配列の長さより大きい場合は、配列全体を返します。`count` が非負の整数のとき、これは **遅延評価に対応** しています。[`pipe`](./pipe.md) の中では `count` 個の要素が集まった時点で走査を終了するため、それより前の遅延処理は残りの入力を処理しません。
 
 ```typescript
 import { map, pipe, take } from 'es-toolkit/fp';
@@ -28,4 +28,4 @@ pipe([1, 2, 3, 4, 5], map(expensiveTransform), take(3));
 
 #### 戻り値
 
-(`(array: readonly T[]) => T[]`): `readonly T[]` を最大で `count` 個の要素を持つ新しい `T[]` に変換するデータラストな演算子です。
+(`(array: readonly T[]) => T[]`): `readonly T[]` を、最大で `count` 個の要素を持つ新しい `T[]` に変換する関数です。

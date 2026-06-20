@@ -1,6 +1,6 @@
 # pick
 
-Creates a data-last operator that keeps only the given keys of an object.
+Creates a function that keeps only the given keys of an object. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(obj, pick(keys));
@@ -22,4 +22,4 @@ pipe({ a: 1, b: 2, c: 3 }, pick(['a', 'c'])); // => { a: 1, c: 3 }
 
 #### Returns
 
-(`(obj: T) => Pick<T, K>`): A data-last operator that maps an object `T` to a new object with only the picked keys.
+(`(obj: T) => Pick<T, K>`): A function that maps an object `T` to a new object with only the picked keys.

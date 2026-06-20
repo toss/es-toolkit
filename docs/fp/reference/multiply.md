@@ -1,6 +1,6 @@
 # multiply
 
-Creates a data-last operator that multiplies its input by a number.
+Creates a function that multiplies its input by a number. Use it with [`pipe`](./pipe.md).
 
 ```typescript
 const result = pipe(value, multiply(multiplicand));
@@ -8,7 +8,7 @@ const result = pipe(value, multiply(multiplicand));
 
 ## Usage
 
-`multiply` returns a function that multiplies its input by `multiplicand`. It is designed for composition: it can transform the value flowing through a [`pipe`](/fp/reference/pipe), or serve as the callback of an operator such as [`map`](/fp/reference/map).
+`multiply` returns a function that multiplies its input by `multiplicand`. It is designed for composition: it can transform the value flowing through a [`pipe`](./pipe.md), or serve as the callback of a function such as [`map`](./map.md).
 
 ```typescript
 import { map, multiply, pipe } from 'es-toolkit/fp';
@@ -26,4 +26,4 @@ pipe([1, 2, 3], map(multiply(3))); // => [3, 6, 9]
 
 #### Returns
 
-(`(value: number) => number`): A data-last operator that maps `value` to `value * multiplicand`.
+(`(value: number) => number`): A function that maps `value` to `value * multiplicand`.

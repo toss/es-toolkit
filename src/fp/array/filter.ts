@@ -2,12 +2,12 @@ import type { LazyEvaluator } from '../_internal/lazy.ts';
 import { SKIP_ITEM, toLazy } from '../_internal/lazy.ts';
 
 /**
- * Creates a data-last operator that keeps only the elements for which
- * `predicate` returns a truthy value, equivalent to `Array.prototype.filter`.
- * A type predicate narrows the element type of the result.
+ * Creates a function that keeps only the elements for which `predicate` returns
+ * a truthy value, equivalent to `Array.prototype.filter`. A type predicate
+ * narrows the element type of the result. Use it with {@link pipe}.
  *
- * The returned operator is **lazy-capable**: inside a {@link pipe} it is fused
- * with adjacent lazy operators and runs element-by-element.
+ * The returned function is **lazy-capable**: inside a {@link pipe} it is fused
+ * with adjacent lazy operations and runs element-by-element.
  *
  * @template T - The type of elements in the input array.
  * @template S - The narrowed element type when `predicate` is a type guard.
@@ -35,13 +35,16 @@ export function filter<T>(
   predicate: (value: T, index: number, array: readonly T[]) => boolean
 ): (array: readonly T[]) => T[] {
   return toLazy(
-    (array: readonly T[]): T[] => array.filter((value, index) => predicate(value, index, array)),
+    function (array: readonly T[]): T[] {
+      return array.filter(predicate);
+    },
     filterLazy,
     [predicate]
   );
 }
 
 function filterLazy<T>(predicate: (value: T, index: number, array: readonly T[]) => boolean): LazyEvaluator<T> {
-  return (value, index, data) =>
-    predicate(value, index, data) ? { done: false, hasNext: true, next: value } : SKIP_ITEM;
+  return function (value, index, data) {
+    return predicate(value, index, data) ? { done: false, hasNext: true, next: value } : SKIP_ITEM;
+  };
 }

@@ -1,10 +1,10 @@
 import { sortBy as sortByToolkit } from '../../array/sortBy.ts';
 
 /**
- * Creates a data-last operator that sorts an array of objects in ascending
- * order by the given `criteria`. Each criterion is either an object key or a
- * function returning the value to compare. When two elements tie on a
- * criterion, the next criterion breaks the tie. The sort is stable.
+ * Creates a function that sorts an array of objects in ascending order by the
+ * given `criteria`. Each criterion is either an object key or a function
+ * returning the value to compare. When two elements tie on a criterion, the
+ * next criterion breaks the tie. The sort is stable. Use it with {@link pipe}.
  *
  * @template T - The type of the objects in the array.
  * @param criteria - Object keys and/or selector functions used for comparison, applied in order.
@@ -25,5 +25,7 @@ import { sortBy as sortByToolkit } from '../../array/sortBy.ts';
 export function sortBy<T extends object>(
   criteria: Array<((item: T) => unknown) | keyof T>
 ): (array: readonly T[]) => T[] {
-  return (array: readonly T[]): T[] => sortByToolkit(array, criteria);
+  return function (array: readonly T[]): T[] {
+    return sortByToolkit(array, criteria);
+  };
 }
