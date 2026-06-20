@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { useData } from 'vitepress';
+import { computed } from 'vue';
 import type { FlavorSpec } from '../libs/flavors.mts';
 
-defineProps<{ flavor: FlavorSpec }>();
+const props = defineProps<{ flavor: FlavorSpec }>();
+
+const { lang } = useData();
+const description = computed(() => props.flavor.descriptions?.[lang.value] ?? props.flavor.description);
 </script>
 
 <template>
@@ -24,7 +29,7 @@ defineProps<{ flavor: FlavorSpec }>();
       <span class="flavor-row__title">{{ flavor.label }}</span>
       <span v-if="flavor.badge" class="flavor-row__badge">{{ flavor.badge }}</span>
     </span>
-    <span class="flavor-row__desc">{{ flavor.description }}</span>
+    <span class="flavor-row__desc">{{ description }}</span>
   </span>
 </template>
 
@@ -86,7 +91,7 @@ defineProps<{ flavor: FlavorSpec }>();
 }
 
 .flavor-row__desc {
-  font-size: 13px;
+  font-size: 11.5px;
   line-height: 1.3;
   color: var(--vp-c-text-2);
   white-space: nowrap;
