@@ -5,8 +5,8 @@ import { toString } from '../util/toString.ts';
  * Converts the characters "&", "<", ">", '"', and "'" in `str` to their corresponding HTML entities.
  * For example, "<" becomes "&lt;".
  *
- * @param {string} str  The string to escape.
- * @returns {string} Returns the escaped string.
+ * @param str  The string to escape.
+ * @returns Returns the escaped string.
  *
  * @example
  * escape('This is a <div> element.'); // returns 'This is a &lt;div&gt; element.'

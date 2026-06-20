@@ -15,8 +15,8 @@ import { isPlainObject } from './isPlainObject.ts';
  * - a number
  * - a boolean
  *
- * @param {unknown} value - The value to check.
- * @returns {boolean} - True if the value is a valid JSON value, otherwise false.
+ * @param value - The value to check.
+ * @returns True if the value is a valid JSON value, otherwise false.
  *
  * @example
  * console.log(isJSONValue(null)); // true
@@ -49,8 +49,8 @@ export function isJSONValue(value: unknown): value is Record<string, any> | any[
  *
  * A valid JSON array is defined as an array where all items are valid JSON values.
  *
- * @param {unknown} value - The value to check.
- * @returns {value is any[]} - True if the value is a valid JSON array, otherwise false.
+ * @param value - The value to check.
+ * @returns True if the value is a valid JSON array, otherwise false.
  *
  * @example
  * console.log(isJSONArray([1, 2, 3])); // true
@@ -71,8 +71,8 @@ export function isJSONArray(value: unknown): value is any[] {
  *
  * A valid JSON object is defined as an object with string keys and valid JSON values.
  *
- * @param {unknown} obj The value to check.
- * @returns {obj is Record<string, any>} True if `obj` is a JSON object, false otherwise.
+ * @param obj The value to check.
+ * @returns True if `obj` is a JSON object, false otherwise.
  *
  * @example
  * isJSONObject({ nested: { boolean: true, array: [1, 2, 3], string: 'test', null: null } }); // true

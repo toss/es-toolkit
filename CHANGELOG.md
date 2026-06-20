@@ -1,5 +1,64 @@
 # es-toolkit Changelog
 
+## Version v1.47.1
+
+Released on June 12th, 2026.
+
+- Fixed `maxBy` and `minBy` to propagate `NaN`, matching `Math.max`/`Math.min` behavior. ([#1749])
+- Fixed `orderBy` and `sortBy` to place `null` and `undefined` values last when sorting. ([#1681])
+- Fixed `isNumber` to no longer treat boxed `Number` objects as numbers. ([#1726])
+- Fixed `reduce` and `reduceRight` to respect explicitly passed nullish accumulators. ([#1742])
+- Fixed `isEmpty` to handle functions with own enumerable properties. ([#1645])
+- Fixed the `globalThis` polyfill to avoid `Function(...)`, supporting CSP environments without `unsafe-eval`.
+- Fixed ESM resolution for `./compat/*` subpaths in package exports. ([#1757])
+- Fixed `compat/size` to count array-like objects by their `length`. ([#1766])
+- Fixed `compat/round`, `compat/ceil`, and `compat/floor` to return `Infinity` for infinite values with precision. ([#1764])
+- Fixed `compat/random` to coerce the upper bound for non-number `max`. ([#1751])
+- Fixed `compat/toLength` to coerce non-numeric values to 0. ([#1758])
+- Removed unused generic type parameters from `pull`. ([#1746])
+
+We sincerely thank @Amund211, @Antoliny0919, @chatman-media, @D-Sketon, @dayongkr, @JetProc, @parkhojeong, @pbk95120, @raon0211, @sarathfrancis90, @shaked-shlomo, and @sukvvon for their contributions. We appreciate your great efforts!
+
+## Version v1.47.0
+
+Released on May 25th, 2026.
+
+- Added `es-toolkit/server` entrypoint with `colors` namespace for ANSI terminal color utilities. ([#1683])
+- Added `exec` function. ([#1689])
+- Added `sortKeys` to the `object` entrypoint. ([#1674])
+- Added `cartesianProduct` and `combinations` to the `array` entrypoint. ([#1713])
+- Added `allKeyed` to the `promise` entrypoint. ([#1672])
+- Added `percentile` to the `math` entrypoint. ([#1710])
+- Added an interactive playground page to docs. ([#1720])
+- Reorganized docs to introduce a flavor switcher and co-locate `compat` under `/compat/`. ([#1699])
+- Fixed `uniqWith` in `compat` to match lodash's comparator argument order. ([#1729])
+- Fixed `compat/omitBy` to not treat plain objects with numeric `length` as array-like. ([#1709])
+
+We sincerely thank @Antoliny0919, @ATOM00blue, @dayongkr, @guesung, @myeong-jae-hwi, @raon0211, @seungrodotlee, and @Xiaohang0316 for their contributions. We appreciate your great efforts!
+
+## Version v1.46.1
+
+Released on April 29th, 2026.
+
+- Fixed `AbortError` and `TimeoutError` to fall back to `Error` when `DOMException` is undefined. ([#1694])
+- Fixed missing `forEach` and `countBy` exports for `map` and `set`. ([#1695])
+
+We sincerely thank @SrAnthony and @umsungjun for their contributions. We appreciate your great efforts!
+
+## Version v1.46.0
+
+Released on April 22th, 2026.
+
+- Changed `AbortError` and `TimeoutError` to extend `DOMException`. ([#1660])
+- Added `keyBy` to the `map` entrypoint exports. ([#1650])
+- Added Claude Code plugin marketplace and es-toolkit usage skills. ([#1644])
+- Fixed `isBuffer` to add a browser export condition to avoid a 44KB Buffer polyfill. ([#1671])
+- Fixed `toCamelCaseKeys` and `toSnakeCaseKeys` to be exported from `compat` for the browser bundle. ([#1685])
+- Fixed `partial` by adding missing full-application overloads for 2/3/4 arguments. ([#1684])
+- Added Agent Skills and Claude Code Plugin guide to the AI Integration page. ([#1664])
+
+We sincerely thank @raon0211, @jantimon, @jaydeep-pipaliya, @ethanresnick, @zaewc, @minsoo-web, @wondonghwi, @xxxxxxjun, @jiji-hoon96, @james-rae, @Gamez0, and @dayongkr for their contributions. We appreciate your great efforts!
+
 ## Version v1.45.1
 
 Released on March 4th, 2026.

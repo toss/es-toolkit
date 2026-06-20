@@ -27,11 +27,11 @@ const regexMultiByte = /[\u200d\ud800-\udfff\u0300-\u036f\ufe20-\ufe2f\u20d0-\u2
  * The last characters of the truncated string are replaced with the omission
  * string which defaults to "...".
  *
- * @param {string} [string=''] The string to truncate.
- * @param {Object} [options={}] The options object.
- * @param {number} [options.length=30] The maximum string length.
- * @param {string} [options.omission='...'] The string to indicate text is omitted.
- * @param {RegExp|string} [options.separator] The separator pattern to truncate to.
+ * @param [string=''] The string to truncate.
+ * @param [options={}] The options object.
+ * @param [options.length=30] The maximum string length.
+ * @param [options.omission='...'] The string to indicate text is omitted.
+ * @param [options.separator] The separator pattern to truncate to.
  *
  * @example
  * const test = 'hi-diddly-ho there, neighborino';

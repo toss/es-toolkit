@@ -3,8 +3,8 @@
  *
  * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Promise`.
  *
- * @param {unknown} value The value to check if it is a `Promise`.
- * @returns {value is Promise<any>} Returns `true` if `value` is a `Promise`, else `false`.
+ * @param value The value to check if it is a `Promise`.
+ * @returns Returns `true` if `value` is a `Promise`, else `false`.
  *
  * @example
  * const value1 = new Promise((resolve) => resolve());

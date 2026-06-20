@@ -54,7 +54,7 @@ startCase('12abc 12ABC'); // '12 Abc 12 Abc'
 
 (`string`): Returns a new string with the first letter of each word capitalized and joined with spaces.
 
-## Demo
+## Try It
 
 ::: sandpack
 

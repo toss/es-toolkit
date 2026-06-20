@@ -66,6 +66,16 @@ describe('size', () => {
     expect(size(str)).toBe(10);
   });
 
+  it('should return the `length` of array-like objects', () => {
+    expect(size({ length: 3 })).toBe(3);
+    expect(size({ 0: 'a', 1: 'b', length: 2 })).toBe(2);
+    expect(size({ length: 0 })).toBe(0);
+  });
+
+  it('should prefer `length` over the number of own enumerable keys for array-like objects', () => {
+    expect(size({ length: 3, a: 1 })).toBe(3);
+  });
+
   it('should not treat objects with negative lengths as array-like', () => {
     expect(size({ length: -1 })).toBe(1);
   });

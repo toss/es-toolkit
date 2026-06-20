@@ -8,9 +8,9 @@
  * @template K - The type of the Map's keys.
  * @template V - The type of the Map's values.
  * @template K2 - The type of keys produced by the transformation function.
- * @param {Map<K, V>} map - The Map to count occurrences from.
- * @param {(value: V, key: K, object: Map<K, V>) => K2} mapper - The function to produce a key for counting.
- * @returns {Record<K2, number>} An object containing the mapped keys and their counts.
+ * @param map - The Map to count occurrences from.
+ * @param mapper - The function to produce a key for counting.
+ * @returns An object containing the mapped keys and their counts.
  *
  * @example
  * const map = new Map([

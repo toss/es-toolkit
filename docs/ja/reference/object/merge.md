@@ -74,7 +74,7 @@ console.log(result);
 // 戻り値: { a: [1, 2, 3] }
 ```
 
-## デモ
+## 使用例
 
 ::: sandpack
 
@@ -88,11 +88,3 @@ console.log(result);
 ```
 
 :::
-
-## パフォーマンス比較
-
-|                   | [バンドルサイズ](../../bundle-size.md) | [ランタイムパフォーマンス](../../performance.md) |
-| ----------------- | -------------------------------------- | ------------------------------------------------ |
-| es-toolkit        | 271 bytes (97.8% smaller)              | 1,952,436 times (3.65× faster)                   |
-| es-toolkit/compat | 4,381 bytes (64.9% smaller)            | 706,558 times (1.32× faster)                     |
-| lodash-es         | 12,483 bytes                           | 533,484 times                                    |

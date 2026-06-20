@@ -16,7 +16,7 @@ This makes es-toolkit the most efficient in terms of bundle size, with some util
 
 ## Bundle Size Test Method
 
-Our bundle size is measured using [esbuild 0.23.0](https://esbuild.github.io), by analyzing the size of code like the following:
+Our bundle size is measured using [esbuild 0.28.0](https://esbuild.github.io), by analyzing the size of code like the following:
 
 ```tsx
 import { chunk } from 'es-toolkit';

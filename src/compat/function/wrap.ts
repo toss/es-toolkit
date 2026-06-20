@@ -10,9 +10,9 @@ import { isFunction } from '../../predicate/isFunction.ts';
  * @template T - The type of the value being wrapped.
  * @template U - The type of the arguments being passed to the `wrapper` function.
  * @template V - The type of the return value of the `wrapper` function.
- * @param {T} value - The value to be wrapped.
- * @param {(value: T, ...args: U[]) => V} wrapper - The function to wrap the value with.
- * @returns {(...args: U[]) => V} A new function that wraps the value with the `wrapper` function.
+ * @param value - The value to be wrapped.
+ * @param wrapper - The function to wrap the value with.
+ * @returns A new function that wraps the value with the `wrapper` function.
  *
  * @example
  * // Wrap a function

@@ -1,3 +1,4 @@
+import { isBuffer } from './isBuffer.ts';
 import { isPlainObject } from './isPlainObject.ts';
 import { getSymbols } from '../compat/_internal/getSymbols.ts';
 import { getTag } from '../compat/_internal/getTag.ts';
@@ -31,12 +32,6 @@ import {
 } from '../compat/_internal/tags.ts';
 import { eq } from '../compat/util/eq.ts';
 
-declare let Buffer:
-  | {
-      isBuffer: (a: any) => boolean;
-    }
-  | undefined;
-
 /**
  * Compares two values for equality using a custom comparison function.
  *
@@ -55,12 +50,12 @@ declare let Buffer:
  * - `yParent`: The parent of the second value `y`.
  * - `stack`: An internal stack (Map) to handle circular references.
  *
- * @param {unknown} a - The first value to compare.
- * @param {unknown} b - The second value to compare.
- * @param {(x: any, y: any, property?: PropertyKey, xParent?: any, yParent?: any, stack?: Map<any, any>) => boolean | void} areValuesEqual - A function to customize the comparison.
+ * @param a - The first value to compare.
+ * @param b - The second value to compare.
+ * @param areValuesEqual - A function to customize the comparison.
  *   If it returns a boolean, that result will be used. If it returns undefined,
  *   the default equality comparison will be used.
- * @returns {boolean} `true` if the values are equal according to the customizer, otherwise `false`.
+ * @returns `true` if the values are equal according to the customizer, otherwise `false`.
  *
  * @example
  * const customizer = (a, b) => {
@@ -255,7 +250,7 @@ function areObjectsEqual(
       case float32ArrayTag:
       case float64ArrayTag: {
         // Buffers are also treated as [object Uint8Array]s.
-        if (typeof Buffer !== 'undefined' && Buffer.isBuffer(a) !== Buffer.isBuffer(b)) {
+        if (isBuffer(a) !== isBuffer(b)) {
           return false;
         }
 
