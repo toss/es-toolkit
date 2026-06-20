@@ -2,7 +2,7 @@
 
 ::: warning Use `flattenDeep` from `es-toolkit`
 
-This `flattenDeep` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, and supporting various condition function formats.
+This `flattenDeep` function operates slowly due to handling `null` or `undefined` and `ArrayLike` type processing.
 
 Use the faster and more modern [flattenDeep](../../../reference/array/flattenDeep.md) from `es-toolkit` instead.
 

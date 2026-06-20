@@ -2,7 +2,7 @@
 
 ::: warning Use `flatten` from `es-toolkit`
 
-This `flatten` function operates slowly due to handling `null` or `undefined`, `ArrayLike` type processing, and supporting various condition function formats.
+This `flatten` function operates slowly due to handling `null` or `undefined` and `ArrayLike` type processing.
 
 Use the faster and more modern [flatten](../../../reference/array/flatten.md) from `es-toolkit` instead.
 
