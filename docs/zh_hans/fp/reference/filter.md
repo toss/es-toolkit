@@ -1,0 +1,47 @@
+# filter
+
+创建一个数据在后的运算符,只保留通过测试的元素,等价于 `Array.prototype.filter`。
+
+```typescript
+const result = pipe(array, filter(predicate));
+```
+
+## 用法
+
+`filter` 会保留那些使 `predicate` 返回真值的元素。类型谓词会收窄结果的元素类型。它**支持惰性求值**:在 [`pipe`](/zh_hans/fp/reference/pipe) 中,它会与相邻的惰性运算符融合。
+
+```typescript
+import { filter, pipe } from 'es-toolkit/fp';
+
+// 保留偶数。
+pipe(
+  [1, 2, 3, 4],
+  filter(x => x % 2 === 0)
+); // => [2, 4]
+
+// 索引作为第二个参数提供。
+pipe(
+  [10, 20, 30, 40],
+  filter((_value, index) => index % 2 === 0)
+); // => [10, 30]
+```
+
+类型守卫会收窄结果的类型。
+
+```typescript
+import { filter, pipe } from 'es-toolkit/fp';
+
+const result = pipe(
+  [1, 'a', 2, 'b'],
+  filter((x): x is string => typeof x === 'string')
+);
+// result 的类型为 string[],其值等于 ['a', 'b']
+```
+
+#### 参数
+
+- `predicate` (`(value: T, index: number, array: readonly T[]) => boolean`): 对每个元素调用的函数;返回 `true` 以保留该元素。类型守卫(`value is S`)会收窄结果。在惰性求值期间,`array` 只包含到目前为止已遍历的元素。
+
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个数据在后的运算符,将 `readonly T[]` 映射为一个经过筛选的数组。使用类型守卫时,结果为 `S[]`。

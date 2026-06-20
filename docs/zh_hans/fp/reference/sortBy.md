@@ -1,0 +1,41 @@
+# sortBy
+
+创建一个数据在后的运算符,按一个或多个条件对对象数组进行升序排序。
+
+```typescript
+const result = pipe(array, sortBy(criteria));
+```
+
+## 用法
+
+`sortBy` 将对象数组按升序排序。每个条件可以是对象的某个键,也可以是一个返回用于比较的值的函数。当两个元素在某个条件上相等时,会用下一个条件来决定先后。该排序是稳定的,并且不会修改输入。
+
+```typescript
+import { pipe, sortBy } from 'es-toolkit/fp';
+
+const users = [
+  { user: 'foo', age: 24 },
+  { user: 'bar', age: 7 },
+  { user: 'foo', age: 8 },
+  { user: 'bar', age: 29 },
+];
+
+// 按单个键排序。
+pipe(users, sortBy(['age']));
+// => [{ user: 'bar', age: 7 }, { user: 'foo', age: 8 }, { user: 'foo', age: 24 }, { user: 'bar', age: 29 }]
+
+// 按多个条件排序,相等时用下一个条件决定先后。
+pipe(users, sortBy(['user', 'age']));
+// => [{ user: 'bar', age: 7 }, { user: 'bar', age: 29 }, { user: 'foo', age: 8 }, { user: 'foo', age: 24 }]
+
+// 可以使用选择器函数来代替键。
+pipe(users, sortBy([item => item.age]));
+```
+
+#### 参数
+
+- `criteria` (`Array<((item: T) => unknown) | keyof T>`): 用于比较的对象键和/或选择器函数,按顺序依次应用。
+
+#### 返回值
+
+(`(array: readonly T[]) => T[]`): 一个数据在后的运算符,将 `readonly T[]` 映射为一个排序后的新 `T[]`。
