@@ -1,4 +1,4 @@
-import { createLazyFunction } from '../_internal/lazy.ts';
+import { createLazyManyFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that maps every element to an array with `callback` and
@@ -32,7 +32,7 @@ export function flatMap<T, U>(
     return array.flatMap(callback);
   }
 
-  // `callback` is the per-element function as-is; `{ many: true }` emits every
+  // `callback` is the per-element function as-is — the many factory emits every
   // element of the array it returns.
-  return createLazyFunction(flatMapAll, callback, { many: true });
+  return createLazyManyFunction(flatMapAll, callback);
 }

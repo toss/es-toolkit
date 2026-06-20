@@ -8,9 +8,11 @@
  * so later elements are never produced or transformed and no intermediate
  * arrays are allocated.
  *
- * Operators are authored with {@link createLazyFunction}: provide the eager
- * implementation plus a per-element function, and the helper wires up the lazy
- * protocol below.
+ * Operators are authored with one of the `createLazy*Function` helpers
+ * ({@link createLazyFunction} for `map`, {@link createLazyFilterFunction} for
+ * `filter`, {@link createLazyManyFunction} for `flatMap`,
+ * {@link createLazyLimitFunction} for `take`): provide the eager implementation
+ * plus a per-element function, and the helper wires up the lazy protocol below.
  */
 
 /**
@@ -76,79 +78,94 @@ export interface LazyEach {
   (value: any, index: number, array: readonly any[]): unknown;
 }
 
-/**
- * Emit semantics for {@link createLazyFunction}. Omit for a 1-to-1 transform
- * (`map`); the three flags are mutually exclusive.
- */
-export interface LazyOptions {
-  /** `each` is a predicate; keep the value when it returns truthy (e.g. `filter`). */
-  readonly filter?: boolean;
-  /** `each` returns an array; every element it returns is emitted (e.g. `flatMap`). */
-  readonly many?: boolean;
-  /** Emit at most this many elements, then stop reading the input (e.g. `take`). */
-  readonly limit?: number;
-}
-
 /** Sentinel result that drops the current value without ending the run. */
 export const SKIP_ITEM = { done: false, hasNext: false } as const;
 
 const EMPTY_PIPE = { done: true, hasNext: false } as const;
 
 /**
- * Turns a data-last operator into a lazy-capable one.
- *
- * `allFn` is the eager implementation, used when the operator runs on its own
- * (or on a non-array value). `each` is the per-element function `pipe` calls
- * directly while fusing adjacent lazy operators — pass the operator's own
- * callback or predicate, not a wrapper, so no extra call is added per element.
- * `options` selects the emit semantics:
- *
- * - default: `each(value, index, array)` returns the value to emit (e.g. `map`).
- * - `{ filter: true }`: `each` is a predicate; the value is kept when truthy (e.g. `filter`).
- * - `{ many: true }`: `each` returns an array; every element is emitted (e.g. `flatMap`).
- * - `{ limit: n }`: emit at most `n` elements, then stop reading input (e.g. `take`).
- *
- * @template F - The eager data-last function type.
- * @param allFn - The eager `(array) => result` implementation.
- * @param each - The per-element callback or predicate.
- * @param options - Emit semantics; omit for a 1-to-1 transform.
- * @returns `allFn`, augmented in place with the lazy metadata.
+ * Attaches the lazy-evaluation factory to a data-last operator. The factory
+ * builds a fresh {@link LazyEvaluator} per pipe run (see {@link LazyFunction}),
+ * so per-run state never leaks between runs.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
-export function createLazyFunction<F extends (input: any) => any>(allFn: F, each: LazyEach, options?: LazyOptions): F {
-  return Object.assign(allFn, { lazy: () => toEvaluator(each, options) });
+function toLazy<F extends (input: any) => any>(all: F, lazy: () => LazyEvaluator): F {
+  return Object.assign(all, { lazy });
 }
 
 /**
- * Builds the {@link LazyEvaluator} that adapts a per-element function to the
- * {@link LazyResult} protocol, according to the chosen emit semantics.
+ * Makes a 1-to-1 lazy operator (e.g. `map`): each input emits the value
+ * `each(value, index, array)` returns.
+ *
+ * `each` is the per-element function `pipe` calls directly while fusing adjacent
+ * lazy operators — pass the operator's own callback, not a wrapper, so no extra
+ * call is added per element.
+ *
+ * @template F - The eager data-last function type.
+ * @param all - The eager `(array) => result` implementation.
+ * @param each - The per-element callback.
+ * @returns `all`, augmented in place with the lazy metadata.
  */
-function toEvaluator(each: LazyEach, options?: LazyOptions): LazyEvaluator {
-  if (options?.filter === true) {
-    return (value, index, array) =>
-      each(value, index, array) ? { done: false, hasNext: true, next: value } : SKIP_ITEM;
-  }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
+export function createLazyFunction<F extends (input: any) => any>(all: F, each: LazyEach): F {
+  return toLazy(all, () => (value, index, array) => ({ done: false, hasNext: true, next: each(value, index, array) }));
+}
 
-  if (options?.many === true) {
-    return (value, index, array) => ({
-      done: false,
-      hasNext: true,
-      hasMany: true,
-      next: each(value, index, array) as readonly unknown[],
-    });
-  }
+/**
+ * Makes a filtering lazy operator (e.g. `filter`): each input is kept when
+ * `predicate(value, index, array)` is truthy and dropped otherwise.
+ *
+ * @template F - The eager data-last function type.
+ * @param all - The eager `(array) => result` implementation.
+ * @param predicate - The per-element predicate, called directly during a fused pass.
+ * @returns `all`, augmented in place with the lazy metadata.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
+export function createLazyFilterFunction<F extends (input: any) => any>(all: F, predicate: LazyEach): F {
+  return toLazy(
+    all,
+    () => (value, index, array) =>
+      predicate(value, index, array) ? { done: false, hasNext: true, next: value } : SKIP_ITEM
+  );
+}
 
-  const limit = options?.limit;
-  if (limit !== undefined) {
-    return (value, index, array) => {
-      // Past the cap: drop the value and stop. `index` is the operator's own
-      // count of values it has received, so no separate counter is needed.
-      if (index >= limit) {
-        return EMPTY_PIPE;
-      }
-      return { done: index >= limit - 1, hasNext: true, next: each(value, index, array) };
-    };
-  }
+/**
+ * Makes an expanding lazy operator (e.g. `flatMap`): each input emits every
+ * element of the array `each(value, index, array)` returns.
+ *
+ * @template F - The eager data-last function type.
+ * @param all - The eager `(array) => result` implementation.
+ * @param each - The per-element callback returning an array.
+ * @returns `all`, augmented in place with the lazy metadata.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
+export function createLazyManyFunction<F extends (input: any) => any>(all: F, each: LazyEach): F {
+  return toLazy(all, () => (value, index, array) => ({
+    done: false,
+    hasNext: true,
+    hasMany: true,
+    next: each(value, index, array) as readonly unknown[],
+  }));
+}
 
-  return (value, index, array) => ({ done: false, hasNext: true, next: each(value, index, array) });
+/**
+ * Makes a limiting lazy operator (e.g. `take`): each input emits
+ * `each(value, index, array)` until `limit` values have been emitted, then the
+ * run stops. `index` is the operator's own count of values it has received, so
+ * no separate counter is needed.
+ *
+ * @template F - The eager data-last function type.
+ * @param all - The eager `(array) => result` implementation.
+ * @param each - The per-element callback.
+ * @param limit - The maximum number of values to emit.
+ * @returns `all`, augmented in place with the lazy metadata.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
+export function createLazyLimitFunction<F extends (input: any) => any>(all: F, each: LazyEach, limit: number): F {
+  return toLazy(all, () => (value, index, array) => {
+    if (index >= limit) {
+      return EMPTY_PIPE;
+    }
+    return { done: index >= limit - 1, hasNext: true, next: each(value, index, array) };
+  });
 }

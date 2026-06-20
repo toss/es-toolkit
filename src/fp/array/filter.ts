@@ -1,4 +1,4 @@
-import { createLazyFunction } from '../_internal/lazy.ts';
+import { createLazyFilterFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that keeps only the elements for which `predicate` returns
@@ -37,7 +37,7 @@ export function filter<T>(
     return array.filter(predicate);
   }
 
-  // `predicate` is the per-element function as-is; `{ filter: true }` keeps the
+  // `predicate` is the per-element function as-is — the filter factory keeps the
   // value when it returns truthy and drops it otherwise.
-  return createLazyFunction(filterAll, predicate, { filter: true });
+  return createLazyFilterFunction(filterAll, predicate);
 }

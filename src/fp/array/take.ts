@@ -1,5 +1,5 @@
 import { take as takeToolkit } from '../../array/take.ts';
-import { createLazyFunction } from '../_internal/lazy.ts';
+import { createLazyLimitFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that returns the first `count` elements of an array. If
@@ -40,5 +40,5 @@ export function take<T>(count: number): (array: readonly T[]) => T[] {
     return takeAll;
   }
 
-  return createLazyFunction(takeAll, takeEach, { limit: count });
+  return createLazyLimitFunction(takeAll, takeEach, count);
 }
