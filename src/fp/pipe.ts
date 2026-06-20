@@ -216,45 +216,53 @@ export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
 export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) => unknown>): unknown {
   let output = value;
 
-  const lazyFunctions = functions.map(function (fn) {
-    return 'lazy' in fn ? prepareLazyFunction(fn as unknown as LazyFunction) : undefined;
-  });
-
   let functionIndex = 0;
   while (functionIndex < functions.length) {
-    const lazyFunction = lazyFunctions[functionIndex];
+    const func = functions[functionIndex];
 
-    if (lazyFunction === undefined || !isIterable(output)) {
-      output = functions[functionIndex](output);
+    // A non-lazy step, or a value we cannot stream, is applied eagerly. This is
+    // the fast path: plain functions allocate no lazy bookkeeping at all.
+    if (!('lazy' in func) || !isIterable(output)) {
+      output = func(output);
       functionIndex += 1;
       continue;
     }
 
-    // Gather the run of consecutive lazy operators starting at functionIndex.
+    // Gather the run of consecutive lazy functions starting here, preparing
+    // each evaluator (with fresh per-run state) only as we reach it.
     const lazySequence: PreparedLazyFunction[] = [];
-    for (let index = functionIndex; index < functions.length; index++) {
-      const lazyOp = lazyFunctions[index];
-      if (lazyOp === undefined) {
+    while (functionIndex < functions.length) {
+      const lazyFunc = functions[functionIndex];
+      if (!('lazy' in lazyFunc)) {
         break;
       }
-      lazySequence.push(lazyOp);
-      if (lazyOp.isSingle) {
+      const prepared = prepareLazyFunction(lazyFunc as unknown as LazyFunction);
+      lazySequence.push(prepared);
+      functionIndex += 1;
+      if (prepared.isSingle) {
         break;
       }
     }
 
     const accumulator: unknown[] = [];
-    const iterator = output[Symbol.iterator]();
-    for (let step = iterator.next(); !step.done; step = iterator.next()) {
-      const shouldExitEarly = processItem(step.value, accumulator, lazySequence);
-      if (shouldExitEarly) {
-        break;
+    if (Array.isArray(output)) {
+      // Fast path: indexing avoids allocating an iterator result per element.
+      for (let i = 0; i < output.length; i++) {
+        if (processItem(output[i], accumulator, lazySequence)) {
+          break;
+        }
+      }
+    } else {
+      const iterator = output[Symbol.iterator]();
+      for (let step = iterator.next(); !step.done; step = iterator.next()) {
+        if (processItem(step.value, accumulator, lazySequence)) {
+          break;
+        }
       }
     }
 
     const lastOp = lazySequence[lazySequence.length - 1];
     output = lastOp.isSingle ? accumulator[0] : accumulator;
-    functionIndex += lazySequence.length;
   }
 
   return output;
