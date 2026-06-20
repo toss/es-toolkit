@@ -16,22 +16,27 @@ describe('withTimeout', () => {
     return expect(withTimeout(() => delay(1000), 50)).rejects.toThrow('The operation was timed out');
   });
 
-  it('should reject with AbortError when aborted via AbortSignal', async () => {
+  it('times out when a non-aborted signal is provided', () => {
     const controller = new AbortController();
 
-    setTimeout(() => controller.abort(), 50);
-
-    await expect(
-      withTimeout(() => delay(1000), 5000, { signal: controller.signal })
-    ).rejects.toThrow('The operation was aborted');
+    return expect(withTimeout(() => delay(1000), 50, { signal: controller.signal })).rejects.toThrow(
+      'The operation was timed out'
+    );
   });
 
-  it('should reject immediately if signal is already aborted', async () => {
+  it('lifts the time limit when the signal is aborted, resolving with the run result', async () => {
     const controller = new AbortController();
-    controller.abort();
+    setTimeout(() => controller.abort(), 25); // disarm before the 50ms deadline
 
-    await expect(
-      withTimeout(() => delay(1000), 5000, { signal: controller.signal })
-    ).rejects.toThrow('The operation was aborted');
+    const result = await withTimeout(
+      async () => {
+        await delay(100); // outlives the 50ms timeout
+        return 'foo';
+      },
+      50,
+      { signal: controller.signal }
+    );
+
+    expect(result).toEqual('foo');
   });
 });
