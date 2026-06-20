@@ -1,13 +1,11 @@
-import type { LazyDefinition, LazyEvaluator, LazyResult } from './_internal/lazy.ts';
+import type { LazyEvaluator, LazyFunction, LazyResult } from './_internal/lazy.ts';
 import { SKIP_ITEM } from './_internal/lazy.ts';
 import { chunkBy } from '../array/chunkBy.ts';
 
-type PreparedLazyFunction = LazyEvaluator & {
+interface PreparedLazyFunction extends LazyEvaluator {
   // Intentionally mutable: holds the per-run prefix of inputs seen by this operator.
   items: unknown[];
-};
-
-type LazyFunction = LazyDefinition & ((input: unknown) => unknown);
+}
 
 /**
  * Performs left-to-right function composition, threading `value` through each
@@ -222,7 +220,7 @@ export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) =>
   for (let groupIndex = 0; groupIndex < groups.length; groupIndex++) {
     const group = groups[groupIndex];
 
-    if (isLazyFunction(group[0]) && isIterable(output)) {
+    if (isLazyFunction(group[0]) && Array.isArray(output)) {
       // `chunkBy` keyed every member of this run as lazy, so the cast is safe.
       output = lazyPipe(output, group as unknown as readonly LazyFunction[]);
     } else {
@@ -237,7 +235,7 @@ export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) =>
 
 /**
  * Determines whether a piped function carries lazy-evaluation metadata (i.e. was
- * produced by `toLazy`). Such functions can be fused into a single
+ * produced by `createLazyFunction`). Such functions can be fused into a single
  * element-by-element pass; every other function runs eagerly.
  *
  * @param func - A function supplied to `pipe`.
@@ -248,41 +246,34 @@ function isLazyFunction(func: (input: unknown) => unknown): func is LazyFunction
 }
 
 /**
- * Runs an iterable through a run of lazy functions as a single fused pass: each
+ * Runs an array through a run of lazy functions as a single fused pass: each
  * element is pushed through the whole run before the next is read, so a
- * short-circuiting function (e.g. `take`) can end iteration early.
+ * short-circuiting function (e.g. `take`) can end the walk early. Indexing the
+ * array directly avoids allocating an iterator result per element.
  *
- * @param data - The iterable input fed to the first lazy operator in the run.
+ * @param data - The array input fed to the first lazy operator in the run.
  * @param lazyFunctions - The consecutive lazy operators to fuse, in order.
- * @returns The collected array, or the single value for a `single`-terminated run.
+ * @returns The collected output array.
  */
-function lazyPipe(data: Iterable<unknown>, lazyFunctions: readonly LazyFunction[]): unknown {
+function lazyPipe(data: readonly unknown[], lazyFunctions: readonly LazyFunction[]): unknown[] {
   const lazySequence: PreparedLazyFunction[] = [];
   for (let index = 0; index < lazyFunctions.length; index++) {
     lazySequence.push(prepareLazyFunction(lazyFunctions[index]));
   }
 
   const accumulator: unknown[] = [];
+  // The `Array.isArray` guard is redundant with `pipe`'s own check, but it is
+  // load-bearing: it gives V8 the type feedback to compile `data[index]` as fast
+  // packed-array access instead of a generic property load.
   if (Array.isArray(data)) {
-    // Fast path: indexing avoids allocating an iterator result per element.
     for (let index = 0; index < data.length; index++) {
       if (processItem(data[index], accumulator, lazySequence)) {
         break;
       }
     }
-  } else {
-    const iterator = data[Symbol.iterator]();
-    for (let step = iterator.next(); !step.done; step = iterator.next()) {
-      if (processItem(step.value, accumulator, lazySequence)) {
-        break;
-      }
-    }
   }
 
-  // Only a trailing "single" operator (one that emits at most one value)
-  // unwraps the run to a scalar; every other run yields the collected array.
-  const lastFunction = lazyFunctions[lazyFunctions.length - 1];
-  return lastFunction.lazy.single === true ? accumulator[0] : accumulator;
+  return accumulator;
 }
 
 /**
@@ -346,29 +337,15 @@ function processItem(item: unknown, accumulator: unknown[], lazySequence: readon
 }
 
 /**
- * Builds a fresh, stateful evaluator for one lazy operator and attaches the
- * per-run `items` buffer it needs while a `pipe` evaluates lazily. A new
- * evaluator is created per pipe run so that operator state never leaks between
- * runs.
+ * Builds a fresh evaluator for one lazy operator and attaches the per-run
+ * `items` buffer (the prefix of inputs it has seen). A new evaluator is built
+ * per pipe run so that operator state never leaks between runs.
  *
- * @param func - A lazy-capable operator carrying `lazy`/`lazyArgs` metadata.
- * @returns The evaluator augmented with its per-run `items` buffer.
+ * @param func - A lazy-capable operator carrying its `lazy` evaluator factory.
+ * @returns The evaluator, augmented with an empty `items` buffer.
  */
 function prepareLazyFunction(func: LazyFunction): PreparedLazyFunction {
-  const evaluator = func.lazy(...func.lazyArgs) as PreparedLazyFunction;
+  const evaluator = func.lazy() as PreparedLazyFunction;
   evaluator.items = [];
   return evaluator;
-}
-
-/**
- * Checks whether a value can be consumed element-by-element by a lazy run.
- * Strings and non-null objects exposing `Symbol.iterator` qualify; anything else
- * is handed to the next operator as-is.
- *
- * @param value - The current pipe output, before a lazy run is attempted.
- * @returns `true` if `value` can be iterated.
- */
-function isIterable(value: unknown): value is Iterable<unknown> {
-  // Guard against null/undefined before probing for Symbol.iterator.
-  return typeof value === 'string' || (typeof value === 'object' && value !== null && Symbol.iterator in value);
 }

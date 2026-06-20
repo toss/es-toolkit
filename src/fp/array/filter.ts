@@ -1,5 +1,4 @@
-import type { LazyEvaluator } from '../_internal/lazy.ts';
-import { SKIP_ITEM, toLazy } from '../_internal/lazy.ts';
+import { createLazyFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that keeps only the elements for which `predicate` returns
@@ -34,17 +33,11 @@ export function filter<T>(
 export function filter<T>(
   predicate: (value: T, index: number, array: readonly T[]) => boolean
 ): (array: readonly T[]) => T[] {
-  return toLazy(
-    function (array: readonly T[]): T[] {
-      return array.filter(predicate);
-    },
-    filterLazy,
-    [predicate]
-  );
-}
+  function filterAll(array: readonly T[]): T[] {
+    return array.filter(predicate);
+  }
 
-function filterLazy<T>(predicate: (value: T, index: number, array: readonly T[]) => boolean): LazyEvaluator<T> {
-  return function (value, index, data) {
-    return predicate(value, index, data) ? { done: false, hasNext: true, next: value } : SKIP_ITEM;
-  };
+  // `predicate` is the per-element function as-is; `{ filter: true }` keeps the
+  // value when it returns truthy and drops it otherwise.
+  return createLazyFunction(filterAll, predicate, { filter: true });
 }

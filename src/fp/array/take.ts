@@ -1,6 +1,5 @@
 import { take as takeToolkit } from '../../array/take.ts';
-import type { LazyEvaluator } from '../_internal/lazy.ts';
-import { lazyEmptyEvaluator, toLazy } from '../_internal/lazy.ts';
+import { createLazyFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that returns the first `count` elements of an array. If
@@ -25,8 +24,12 @@ import { lazyEmptyEvaluator, toLazy } from '../_internal/lazy.ts';
  * pipe([1, 2, 3, 4, 5], map(expensive), take(3));
  */
 export function take<T>(count: number): (array: readonly T[]) => T[] {
-  function dataLast(array: readonly T[]): T[] {
+  function takeAll(array: readonly T[]): T[] {
     return takeToolkit(array, count);
+  }
+
+  function takeEach(value: T): T {
+    return value;
   }
 
   // The lazy fast-path can only represent "the first `count` elements" for a
@@ -34,20 +37,8 @@ export function take<T>(count: number): (array: readonly T[]) => T[] {
   // `Array.prototype.slice(0, count)` (which, for negatives, drops from the
   // end) — that cannot be streamed forward, so we keep the eager path.
   if (!Number.isInteger(count) || count < 0) {
-    return dataLast;
+    return takeAll;
   }
 
-  return toLazy(dataLast, takeLazy, [count]);
-}
-
-function takeLazy<T>(count: number): LazyEvaluator<T> {
-  if (count <= 0) {
-    return lazyEmptyEvaluator;
-  }
-
-  let remaining = count;
-  return function (value) {
-    remaining -= 1;
-    return { done: remaining <= 0, hasNext: true, next: value };
-  };
+  return createLazyFunction(takeAll, takeEach, { limit: count });
 }

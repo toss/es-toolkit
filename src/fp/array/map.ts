@@ -1,5 +1,4 @@
-import type { LazyEvaluator } from '../_internal/lazy.ts';
-import { toLazy } from '../_internal/lazy.ts';
+import { createLazyFunction } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that builds a new array by calling `callback` on every
@@ -26,21 +25,11 @@ import { toLazy } from '../_internal/lazy.ts';
  * pipe([10, 20, 30], map((value, index) => value + index)); // => [10, 21, 32]
  */
 export function map<T, U>(callback: (value: T, index: number, array: readonly T[]) => U): (array: readonly T[]) => U[] {
-  return toLazy(
-    function (array: readonly T[]): U[] {
-      return array.map(callback);
-    },
-    mapLazy,
-    [callback]
-  );
-}
+  function mapAll(array: readonly T[]): U[] {
+    return array.map(callback);
+  }
 
-function mapLazy<T, U>(callback: (value: T, index: number, array: readonly T[]) => U): LazyEvaluator<T, U> {
-  return function (value, index, data) {
-    return {
-      done: false,
-      hasNext: true,
-      next: callback(value, index, data),
-    };
-  };
+  // `callback` is the per-element function as-is — no wrapper, so a fused pass
+  // calls it directly without an extra call per element.
+  return createLazyFunction(mapAll, callback);
 }
