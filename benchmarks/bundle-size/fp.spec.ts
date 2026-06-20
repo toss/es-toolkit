@@ -6,7 +6,7 @@ import { getBundleSize } from './utils/getBundleSize';
 
 describe('pipe bundle size', () => {
   it('es-toolkit/fp', async () => {
-    expect(await getBundleSize('es-toolkit/fp', 'pipe')).toMatchInlineSnapshot(`928`);
+    expect(await getBundleSize('es-toolkit/fp', 'pipe')).toMatchInlineSnapshot(`889`);
   });
 
   it('remeda', async () => {

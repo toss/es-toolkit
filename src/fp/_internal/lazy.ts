@@ -108,7 +108,11 @@ function toLazy<F extends (input: any) => any>(all: F, lazy: () => LazyEvaluator
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
 export function createLazyFunction<F extends (input: any) => any>(all: F, each: LazyEach): F {
-  return toLazy(all, () => (value, index, array) => ({ done: false, hasNext: true, next: each(value, index, array) }));
+  return toLazy(all, () => {
+    return (value, index, array) => {
+      return { done: false, hasNext: true, next: each(value, index, array) };
+    };
+  });
 }
 
 /**
@@ -122,11 +126,14 @@ export function createLazyFunction<F extends (input: any) => any>(all: F, each: 
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
 export function createLazyFilterFunction<F extends (input: any) => any>(all: F, predicate: LazyEach): F {
-  return toLazy(
-    all,
-    () => (value, index, array) =>
-      predicate(value, index, array) ? { done: false, hasNext: true, next: value } : SKIP_ITEM
-  );
+  return toLazy(all, () => {
+    return (value, index, array) => {
+      if (predicate(value, index, array)) {
+        return { done: false, hasNext: true, next: value };
+      }
+      return SKIP_ITEM;
+    };
+  });
 }
 
 /**
@@ -140,12 +147,11 @@ export function createLazyFilterFunction<F extends (input: any) => any>(all: F, 
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
 export function createLazyManyFunction<F extends (input: any) => any>(all: F, each: LazyEach): F {
-  return toLazy(all, () => (value, index, array) => ({
-    done: false,
-    hasNext: true,
-    hasMany: true,
-    next: each(value, index, array) as readonly unknown[],
-  }));
+  return toLazy(all, () => {
+    return (value, index, array) => {
+      return { done: false, hasNext: true, hasMany: true, next: each(value, index, array) as readonly unknown[] };
+    };
+  });
 }
 
 /**
@@ -162,10 +168,12 @@ export function createLazyManyFunction<F extends (input: any) => any>(all: F, ea
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last operator
 export function createLazyLimitFunction<F extends (input: any) => any>(all: F, each: LazyEach, limit: number): F {
-  return toLazy(all, () => (value, index, array) => {
-    if (index >= limit) {
-      return EMPTY_PIPE;
-    }
-    return { done: index >= limit - 1, hasNext: true, next: each(value, index, array) };
+  return toLazy(all, () => {
+    return (value, index, array) => {
+      if (index >= limit) {
+        return EMPTY_PIPE;
+      }
+      return { done: index >= limit - 1, hasNext: true, next: each(value, index, array) };
+    };
   });
 }

@@ -8,6 +8,376 @@ interface PreparedLazyFunction extends LazyEvaluator {
 }
 
 /**
+ * Returns `value` unchanged — the identity case of {@link pipe} with no functions.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @returns `value`, unchanged.
+ */
+export function pipe<A>(value: A): A;
+/**
+ * Pipes `value` through `fn1`, returning its result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @returns The result of `fn1`.
+ */
+export function pipe<A, B>(value: A, fn1: (input: A) => B): B;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn2`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @returns The result of `fn2` — the value returned by the last function.
+ */
+export function pipe<A, B, C>(value: A, fn1: (input: A) => B, fn2: (input: B) => C): C;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn3`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @returns The result of `fn3` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D>(value: A, fn1: (input: A) => B, fn2: (input: B) => C, fn3: (input: C) => D): D;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn4`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @returns The result of `fn4` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E
+): E;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn5`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @returns The result of `fn5` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F
+): F;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn6`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @returns The result of `fn6` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G
+): G;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn7`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @returns The result of `fn7` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H
+): H;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn8`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @param fn8 - Applied to the result of `fn7`.
+ * @returns The result of `fn8` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H, I>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H,
+  fn8: (input: H) => I
+): I;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn9`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @param fn8 - Applied to the result of `fn7`.
+ * @param fn9 - Applied to the result of `fn8`.
+ * @returns The result of `fn9` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H, I, J>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H,
+  fn8: (input: H) => I,
+  fn9: (input: I) => J
+): J;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn10`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @param fn8 - Applied to the result of `fn7`.
+ * @param fn9 - Applied to the result of `fn8`.
+ * @param fn10 - Applied to the result of `fn9`.
+ * @returns The result of `fn10` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H,
+  fn8: (input: H) => I,
+  fn9: (input: I) => J,
+  fn10: (input: J) => K
+): K;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn11`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @param fn8 - Applied to the result of `fn7`.
+ * @param fn9 - Applied to the result of `fn8`.
+ * @param fn10 - Applied to the result of `fn9`.
+ * @param fn11 - Applied to the result of `fn10`.
+ * @returns The result of `fn11` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H, I, J, K, L>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H,
+  fn8: (input: H) => I,
+  fn9: (input: I) => J,
+  fn10: (input: J) => K,
+  fn11: (input: K) => L
+): L;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn12`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @param fn8 - Applied to the result of `fn7`.
+ * @param fn9 - Applied to the result of `fn8`.
+ * @param fn10 - Applied to the result of `fn9`.
+ * @param fn11 - Applied to the result of `fn10`.
+ * @param fn12 - Applied to the result of `fn11`.
+ * @returns The result of `fn12` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H,
+  fn8: (input: H) => I,
+  fn9: (input: I) => J,
+  fn10: (input: J) => K,
+  fn11: (input: K) => L,
+  fn12: (input: L) => M
+): M;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn13`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @param fn8 - Applied to the result of `fn7`.
+ * @param fn9 - Applied to the result of `fn8`.
+ * @param fn10 - Applied to the result of `fn9`.
+ * @param fn11 - Applied to the result of `fn10`.
+ * @param fn12 - Applied to the result of `fn11`.
+ * @param fn13 - Applied to the result of `fn12`.
+ * @returns The result of `fn13` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H,
+  fn8: (input: H) => I,
+  fn9: (input: I) => J,
+  fn10: (input: J) => K,
+  fn11: (input: K) => L,
+  fn12: (input: L) => M,
+  fn13: (input: M) => N
+): N;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn14`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @param fn8 - Applied to the result of `fn7`.
+ * @param fn9 - Applied to the result of `fn8`.
+ * @param fn10 - Applied to the result of `fn9`.
+ * @param fn11 - Applied to the result of `fn10`.
+ * @param fn12 - Applied to the result of `fn11`.
+ * @param fn13 - Applied to the result of `fn12`.
+ * @param fn14 - Applied to the result of `fn13`.
+ * @returns The result of `fn14` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H,
+  fn8: (input: H) => I,
+  fn9: (input: I) => J,
+  fn10: (input: J) => K,
+  fn11: (input: K) => L,
+  fn12: (input: L) => M,
+  fn13: (input: M) => N,
+  fn14: (input: N) => O
+): O;
+/**
+ * Pipes `value` left-to-right through `fn1` to `fn15`, returning the final result.
+ *
+ * @param value - The initial value fed into the pipe.
+ * @param fn1 - Applied to `value`.
+ * @param fn2 - Applied to the result of `fn1`.
+ * @param fn3 - Applied to the result of `fn2`.
+ * @param fn4 - Applied to the result of `fn3`.
+ * @param fn5 - Applied to the result of `fn4`.
+ * @param fn6 - Applied to the result of `fn5`.
+ * @param fn7 - Applied to the result of `fn6`.
+ * @param fn8 - Applied to the result of `fn7`.
+ * @param fn9 - Applied to the result of `fn8`.
+ * @param fn10 - Applied to the result of `fn9`.
+ * @param fn11 - Applied to the result of `fn10`.
+ * @param fn12 - Applied to the result of `fn11`.
+ * @param fn13 - Applied to the result of `fn12`.
+ * @param fn14 - Applied to the result of `fn13`.
+ * @param fn15 - Applied to the result of `fn14`.
+ * @returns The result of `fn15` — the value returned by the last function.
+ */
+export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
+  value: A,
+  fn1: (input: A) => B,
+  fn2: (input: B) => C,
+  fn3: (input: C) => D,
+  fn4: (input: D) => E,
+  fn5: (input: E) => F,
+  fn6: (input: F) => G,
+  fn7: (input: G) => H,
+  fn8: (input: H) => I,
+  fn9: (input: I) => J,
+  fn10: (input: J) => K,
+  fn11: (input: K) => L,
+  fn12: (input: L) => M,
+  fn13: (input: M) => N,
+  fn14: (input: N) => O,
+  fn15: (input: O) => P
+): P;
+/**
  * Performs left-to-right function composition, threading `value` through each
  * function in sequence. Every function receives the output of the previous
  * one, so the data flows top-to-bottom in the same order it is read. This
@@ -54,180 +424,44 @@ interface PreparedLazyFunction extends LazyEvaluator {
  *   s => s.toLowerCase()
  * ); // => 'hello'
  */
-export function pipe<A>(value: A): A;
-export function pipe<A, B>(value: A, fn1: (input: A) => B): B;
-export function pipe<A, B, C>(value: A, fn1: (input: A) => B, fn2: (input: B) => C): C;
-export function pipe<A, B, C, D>(value: A, fn1: (input: A) => B, fn2: (input: B) => C, fn3: (input: C) => D): D;
-export function pipe<A, B, C, D, E>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E
-): E;
-export function pipe<A, B, C, D, E, F>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F
-): F;
-export function pipe<A, B, C, D, E, F, G>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G
-): G;
-export function pipe<A, B, C, D, E, F, G, H>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H
-): H;
-export function pipe<A, B, C, D, E, F, G, H, I>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H,
-  fn8: (input: H) => I
-): I;
-export function pipe<A, B, C, D, E, F, G, H, I, J>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H,
-  fn8: (input: H) => I,
-  fn9: (input: I) => J
-): J;
-export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H,
-  fn8: (input: H) => I,
-  fn9: (input: I) => J,
-  fn10: (input: J) => K
-): K;
-export function pipe<A, B, C, D, E, F, G, H, I, J, K, L>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H,
-  fn8: (input: H) => I,
-  fn9: (input: I) => J,
-  fn10: (input: J) => K,
-  fn11: (input: K) => L
-): L;
-export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H,
-  fn8: (input: H) => I,
-  fn9: (input: I) => J,
-  fn10: (input: J) => K,
-  fn11: (input: K) => L,
-  fn12: (input: L) => M
-): M;
-export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H,
-  fn8: (input: H) => I,
-  fn9: (input: I) => J,
-  fn10: (input: J) => K,
-  fn11: (input: K) => L,
-  fn12: (input: L) => M,
-  fn13: (input: M) => N
-): N;
-export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H,
-  fn8: (input: H) => I,
-  fn9: (input: I) => J,
-  fn10: (input: J) => K,
-  fn11: (input: K) => L,
-  fn12: (input: L) => M,
-  fn13: (input: M) => N,
-  fn14: (input: N) => O
-): O;
-export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
-  value: A,
-  fn1: (input: A) => B,
-  fn2: (input: B) => C,
-  fn3: (input: C) => D,
-  fn4: (input: D) => E,
-  fn5: (input: E) => F,
-  fn6: (input: F) => G,
-  fn7: (input: G) => H,
-  fn8: (input: H) => I,
-  fn9: (input: I) => J,
-  fn10: (input: J) => K,
-  fn11: (input: K) => L,
-  fn12: (input: L) => M,
-  fn13: (input: M) => N,
-  fn14: (input: N) => O,
-  fn15: (input: O) => P
-): P;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- variadic; the overloads carry the real types.
 export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) => unknown>): unknown {
   let output = value;
 
   // Partition the functions into maximal runs of consecutive lazy / non-lazy
-  // operators. A lazy run (applied to an iterable) is fused into a single
-  // element-by-element pass through `lazyPipe`; everything else is applied one
-  // function at a time.
+  // operators. A lazy run is fused into a single element-by-element pass;
+  // everything else is applied one function at a time.
   const groups = chunkBy(functions, isLazyFunction);
   for (let groupIndex = 0; groupIndex < groups.length; groupIndex++) {
     const group = groups[groupIndex];
 
-    if (isLazyFunction(group[0]) && Array.isArray(output)) {
-      // `chunkBy` keyed every member of this run as lazy, so the cast is safe.
-      output = lazyPipe(output, group as unknown as readonly LazyFunction[]);
-    } else {
+    // A non-lazy run, or a lazy run on a non-array value, can't be fused — apply
+    // each function on its own. The `Array.isArray` check is also load-bearing
+    // for performance: it gives V8 the type feedback to compile `output[index]`
+    // below as fast packed-array access instead of a generic property load.
+    if (!isLazyFunction(group[0]) || !Array.isArray(output)) {
       for (let index = 0; index < group.length; index++) {
         output = group[index](output);
       }
+      continue;
     }
+
+    // Fused lazy run: push each element through the whole group before reading
+    // the next, so a short-circuiting operator (e.g. `take`) can end the walk
+    // early. `chunkBy` keyed every member of this run as lazy, so the cast is safe.
+    const lazyFunctions = group as unknown as readonly LazyFunction[];
+    const lazySequence: PreparedLazyFunction[] = [];
+    for (let index = 0; index < lazyFunctions.length; index++) {
+      lazySequence.push(prepareLazyFunction(lazyFunctions[index]));
+    }
+
+    const accumulator: unknown[] = [];
+    for (let index = 0; index < output.length; index++) {
+      if (processItem(output[index], accumulator, lazySequence)) {
+        break;
+      }
+    }
+    output = accumulator;
   }
 
   return output;
@@ -243,37 +477,6 @@ export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) =>
  */
 function isLazyFunction(func: (input: unknown) => unknown): func is LazyFunction {
   return 'lazy' in func;
-}
-
-/**
- * Runs an array through a run of lazy functions as a single fused pass: each
- * element is pushed through the whole run before the next is read, so a
- * short-circuiting function (e.g. `take`) can end the walk early. Indexing the
- * array directly avoids allocating an iterator result per element.
- *
- * @param data - The array input fed to the first lazy operator in the run.
- * @param lazyFunctions - The consecutive lazy operators to fuse, in order.
- * @returns The collected output array.
- */
-function lazyPipe(data: readonly unknown[], lazyFunctions: readonly LazyFunction[]): unknown[] {
-  const lazySequence: PreparedLazyFunction[] = [];
-  for (let index = 0; index < lazyFunctions.length; index++) {
-    lazySequence.push(prepareLazyFunction(lazyFunctions[index]));
-  }
-
-  const accumulator: unknown[] = [];
-  // The `Array.isArray` guard is redundant with `pipe`'s own check, but it is
-  // load-bearing: it gives V8 the type feedback to compile `data[index]` as fast
-  // packed-array access instead of a generic property load.
-  if (Array.isArray(data)) {
-    for (let index = 0; index < data.length; index++) {
-      if (processItem(data[index], accumulator, lazySequence)) {
-        break;
-      }
-    }
-  }
-
-  return accumulator;
 }
 
 /**
