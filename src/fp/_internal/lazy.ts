@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any -- Lazy factories accept heterogeneous operator arguments and must stay assignable from every operator. */
-
 /**
  * Lazy-evaluation primitives shared by {@link pipe} and the lazy-capable
  * operators (`map`, `filter`, `take`, ...).
@@ -64,6 +62,7 @@ export type LazyEvaluator<T = unknown, R = T> = (item: T, index: number, data: r
  */
 export type LazyFactory = {
   readonly single?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- accepts any operator's args
 } & ((...args: any[]) => LazyEvaluator<any, any>);
 
 /**
@@ -106,6 +105,7 @@ export function lazyEmptyEvaluator(): LazyResult<never> {
  * @param lazyArgs - The operator arguments forwarded to `lazy`.
  * @returns `dataLast`, augmented in place with the lazy metadata.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- generic over any data-last function
 export function toLazy<F extends (data: any) => any>(dataLast: F, lazy: LazyFactory, lazyArgs: readonly unknown[]): F {
   return Object.assign(dataLast, { lazy, lazyArgs });
 }

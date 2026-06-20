@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any -- `pipe` is variadic and chains heterogeneous step types; the public overloads provide the real type safety. */
 import type { LazyDefinition, LazyEvaluator, LazyResult } from './_internal/lazy.ts';
 import { SKIP_ITEM } from './_internal/lazy.ts';
 
@@ -213,59 +212,92 @@ export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
   fn14: (input: N) => O,
   fn15: (input: O) => P
 ): P;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- variadic; the overloads carry the real types.
 export function pipe(value: unknown, ...functions: ReadonlyArray<(input: any) => unknown>): unknown {
   let output = value;
+  let index = 0;
 
-  let functionIndex = 0;
-  while (functionIndex < functions.length) {
-    const func = functions[functionIndex];
+  while (index < functions.length) {
+    const func = functions[index];
 
-    // A non-lazy step, or a value we cannot stream, is applied eagerly. This is
-    // the fast path: plain functions allocate no lazy bookkeeping at all.
-    if (!('lazy' in func) || !isIterable(output)) {
-      output = func(output);
-      functionIndex += 1;
-      continue;
-    }
-
-    // Gather the run of consecutive lazy functions starting here, preparing
-    // each evaluator (with fresh per-run state) only as we reach it.
-    const lazySequence: PreparedLazyFunction[] = [];
-    while (functionIndex < functions.length) {
-      const lazyFunc = functions[functionIndex];
-      if (!('lazy' in lazyFunc)) {
-        break;
-      }
-      const prepared = prepareLazyFunction(lazyFunc as unknown as LazyFunction);
-      lazySequence.push(prepared);
-      functionIndex += 1;
-      if (prepared.isSingle) {
-        break;
-      }
-    }
-
-    const accumulator: unknown[] = [];
-    if (Array.isArray(output)) {
-      // Fast path: indexing avoids allocating an iterator result per element.
-      for (let i = 0; i < output.length; i++) {
-        if (processItem(output[i], accumulator, lazySequence)) {
+    if (isLazyFunction(func) && isIterable(output)) {
+      // Group consecutive lazy functions so lazy only ever runs alongside lazy,
+      // as a single fused pass through `lazyPipe`.
+      const lazyFunctions: LazyFunction[] = [];
+      while (index < functions.length) {
+        const candidate = functions[index];
+        if (!isLazyFunction(candidate)) {
+          break;
+        }
+        lazyFunctions.push(candidate);
+        index += 1;
+        // A "single" function (one that emits at most one value) ends the run.
+        if (candidate.lazy.single === true) {
           break;
         }
       }
+      output = lazyPipe(output, lazyFunctions);
     } else {
-      const iterator = output[Symbol.iterator]();
-      for (let step = iterator.next(); !step.done; step = iterator.next()) {
-        if (processItem(step.value, accumulator, lazySequence)) {
-          break;
-        }
-      }
+      // Group consecutive non-lazy functions and run them through `eagerPipe`.
+      const eagerFunctions: Array<(input: unknown) => unknown> = [];
+      do {
+        eagerFunctions.push(functions[index]);
+        index += 1;
+      } while (index < functions.length && !isLazyFunction(functions[index]));
+      output = eagerPipe(output, eagerFunctions);
     }
-
-    const lastOp = lazySequence[lazySequence.length - 1];
-    output = lastOp.isSingle ? accumulator[0] : accumulator;
   }
 
   return output;
+}
+
+function isLazyFunction(func: (input: unknown) => unknown): func is LazyFunction {
+  return 'lazy' in func;
+}
+
+/**
+ * Runs a value through a sequence of plain functions, left to right; each
+ * function receives the previous result. No lazy bookkeeping is involved.
+ */
+function eagerPipe(value: unknown, functions: ReadonlyArray<(input: unknown) => unknown>): unknown {
+  let output = value;
+  for (let index = 0; index < functions.length; index++) {
+    output = functions[index](output);
+  }
+  return output;
+}
+
+/**
+ * Runs an iterable through a run of lazy functions as a single fused pass: each
+ * element is pushed through the whole run before the next is read, so a
+ * short-circuiting function (e.g. `take`) can end iteration early. Returns the
+ * collected array, or the single value for a `single` run.
+ */
+function lazyPipe(data: Iterable<unknown>, lazyFunctions: readonly LazyFunction[]): unknown {
+  const lazySequence: PreparedLazyFunction[] = [];
+  for (let index = 0; index < lazyFunctions.length; index++) {
+    lazySequence.push(prepareLazyFunction(lazyFunctions[index]));
+  }
+
+  const accumulator: unknown[] = [];
+  if (Array.isArray(data)) {
+    // Fast path: indexing avoids allocating an iterator result per element.
+    for (let index = 0; index < data.length; index++) {
+      if (processItem(data[index], accumulator, lazySequence)) {
+        break;
+      }
+    }
+  } else {
+    const iterator = data[Symbol.iterator]();
+    for (let step = iterator.next(); !step.done; step = iterator.next()) {
+      if (processItem(step.value, accumulator, lazySequence)) {
+        break;
+      }
+    }
+  }
+
+  const lastFunction = lazySequence[lazySequence.length - 1];
+  return lastFunction.isSingle ? accumulator[0] : accumulator;
 }
 
 /**
