@@ -76,8 +76,8 @@ import { ary } from 'es-toolkit/compat';
 
 const func = (a, b, c) => [a, b, c];
 
-console.log(ary(func, -1)(1, 2, 3)); // [] (负数视为0)
-console.log(ary(func, NaN)(1, 2, 3)); // [] (NaN视为0)
+console.log(ary(func, -1)(1, 2, 3)); // [undefined, undefined, undefined] (负数视为0)
+console.log(ary(func, NaN)(1, 2, 3)); // [undefined, undefined, undefined] (NaN视为0)
 ```
 
 #### 参数
