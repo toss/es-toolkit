@@ -5412,6 +5412,7 @@ __metadata:
     esbuild: "npm:0.28.0"
     lodash: "npm:4.18.1"
     lodash-es: "npm:4.18.1"
+    remeda: "npm:^2.39.0"
     rfdc: "npm:1.4.1"
     vitest: "npm:4.0.17"
   languageName: unknown
@@ -11196,6 +11197,13 @@ __metadata:
     remark-stringify: "npm:^11.0.0"
     unified: "npm:^11.0.0"
   checksum: 10c0/ba675e4a5b114355991d2c6f5b09a632121fc8825257b0d148b3938420713f9e9b6f012120604435d5c217d42742f60195ac6f898dc1339d313a6608a84dbc49
+  languageName: node
+  linkType: hard
+
+"remeda@npm:^2.39.0":
+  version: 2.39.0
+  resolution: "remeda@npm:2.39.0"
+  checksum: 10c0/5891871c93b47c501937d6e4a1c05d0b199b4402a8eb3a7a08653e81acc4ce45ae3cff4c90785d867f5e9b5f75e27b5120f0240e8ce490fbf2ab8c48013cc8af
   languageName: node
   linkType: hard
 
