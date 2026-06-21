@@ -33,6 +33,10 @@ describe('isMatch', () => {
     expect(isMatch({ a: { b: { c: 1, d: 2 }, e: 3 }, f: 4 }, { a: { b: { c: 1 } } })).toBe(true);
   });
 
+  it('should return `false` when nested source primitive does not match object target', () => {
+    expect(isMatch({ a: { b: 2 } }, { a: 1 })).toBe(false);
+  });
+
   it(`should match boolean values`, () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error

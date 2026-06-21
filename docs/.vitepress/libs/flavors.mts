@@ -27,6 +27,11 @@ export interface FlavorSpec {
   value: string;
   label: string;
   description: string;
+  /**
+   * Localized descriptions keyed by locale `lang` (e.g. `ko`, `ja`, `zh_hans`).
+   * Falls back to `description` (English) when a locale has no entry.
+   */
+  descriptions?: Readonly<Record<string, string>>;
   prefix: string;
   guideItems: readonly GuideItem[];
   categories: readonly string[];
@@ -55,7 +60,12 @@ export const flavors = [
   {
     value: 'esToolkit',
     label: 'es-toolkit',
-    description: 'Strict Utilities',
+    description: 'Modern Utilities',
+    descriptions: {
+      ko: '현대적인 유틸리티',
+      ja: 'モダンなユーティリティ',
+      zh_hans: '现代工具集',
+    },
     prefix: '',
     guideItems: [
       { labelKey: 'introduction', slug: 'intro' },
@@ -84,6 +94,11 @@ export const flavors = [
     value: 'server',
     label: 'es-toolkit/server',
     description: 'Server utilities',
+    descriptions: {
+      ko: '서버 유틸리티',
+      ja: 'サーバーユーティリティ',
+      zh_hans: '服务器工具集',
+    },
     prefix: 'server',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: [],
@@ -95,6 +110,11 @@ export const flavors = [
     value: 'compat',
     label: 'es-toolkit/compat',
     description: 'Lodash compatibility',
+    descriptions: {
+      ko: 'Lodash 호환성',
+      ja: 'Lodash 互換性',
+      zh_hans: 'Lodash 兼容性',
+    },
     prefix: 'compat',
     guideItems: [{ labelKey: 'introduction', slug: 'intro' }],
     categories: ['array', 'function', 'math', 'object', 'predicate', 'string', 'util'],

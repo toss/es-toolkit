@@ -1,4 +1,5 @@
 import { clone } from './clone.ts';
+import { cloneDeep } from './cloneDeep.ts';
 import { mergeWith } from './mergeWith.ts';
 import { isPlainObject } from '../predicate/isPlainObject.ts';
 
@@ -48,7 +49,7 @@ export function toMerged<T extends Record<PropertyKey, any>, S extends Record<Pr
   target: T,
   source: S
 ): T & S {
-  return mergeWith(clone(target), source, function mergeRecursively(targetValue, sourceValue) {
+  return mergeWith(cloneDeep(target), source, function mergeRecursively(targetValue, sourceValue) {
     if (Array.isArray(sourceValue)) {
       if (Array.isArray(targetValue)) {
         return mergeWith(clone(targetValue), sourceValue, mergeRecursively);
