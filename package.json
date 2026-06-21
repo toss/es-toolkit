@@ -1,6 +1,6 @@
 {
   "name": "es-toolkit",
-  "version": "1.48.0",
+  "version": "1.48.1",
   "description": "A state-of-the-art, high-performance JavaScript utility library with a small bundle size and strong type annotations.",
   "homepage": "https://es-toolkit.dev",
   "bugs": "https://github.com/toss/es-toolkit/issues",
@@ -10,6 +10,8 @@
   },
   "license": "MIT",
   "sideEffects": false,
+  "jsdelivr": "./dist/browser.global.js",
+  "unpkg": "./dist/browser.global.js",
   "packageManager": "yarn@4.12.0",
   "exports": {
     ".": "./src/index.ts",
@@ -104,8 +106,6 @@
   "publishConfig": {
     "access": "public",
     "main": "./dist/index.js",
-    "jsdelivr": "./dist/browser.global.js",
-    "unpkg": "./dist/browser.global.js",
     "module": "./dist/index.mjs",
     "exports": {
       ".": {

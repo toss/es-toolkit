@@ -1,5 +1,11 @@
 # es-toolkit Changelog
 
+## Version v1.48.1
+
+Released on June 21st, 2026.
+
+- Fixed the `jsdelivr` and `unpkg` CDN `<script>` entry that regressed in v1.48.0. The fields are now declared at the package root so `yarn pack` preserves them, since `publishConfig` only carries standard fields and dropped them. Both CDNs now serve the UMD bundle again.
+
 ## Version v1.48.0
 
 Released on June 21st, 2026.
