@@ -26,8 +26,8 @@ console.log(array); // [{ x: 1, y: 2 }, { x: 5, y: 6 }]
 
 // 通过字符串长度比较删除
 const words = ['hello', 'world', 'test', 'code'];
-pullAllWith(words, ['hi'], (a, b) => a.length === b.length);
-console.log(words); // ['hello', 'world', 'code'] ('test' 因与 'hi' 长度相同而被删除)
+pullAllWith(words, ['star'], (a, b) => a.length === b.length);
+console.log(words); // ['hello', 'world'] ('test' 和 'code' 因长度为 4 而被删除)
 ```
 
 如果数组为空或为 `null`、`undefined`，则按原样返回原始数组。

@@ -42,7 +42,7 @@ findLast(users, ['age', 18]);
 
 // Specify condition with a property name (last element with truthy value)
 findLast(users, 'age');
-// => { user: 'fred', age: 40 }
+// => { user: 'pebbles', age: 18 }
 ```
 
 You can also specify a starting index for the search.

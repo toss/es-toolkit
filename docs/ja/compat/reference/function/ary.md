@@ -76,8 +76,8 @@ import { ary } from 'es-toolkit/compat';
 
 const func = (a, b, c) => [a, b, c];
 
-console.log(ary(func, -1)(1, 2, 3)); // [] (負数は0として扱われる)
-console.log(ary(func, NaN)(1, 2, 3)); // [] (NaNは0として扱われる)
+console.log(ary(func, -1)(1, 2, 3)); // [undefined, undefined, undefined] (負数は0として扱われる)
+console.log(ary(func, NaN)(1, 2, 3)); // [undefined, undefined, undefined] (NaNは0として扱われる)
 ```
 
 #### パラメータ

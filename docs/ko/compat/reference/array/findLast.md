@@ -42,7 +42,7 @@ findLast(users, ['age', 18]);
 
 // 속성 이름으로 조건 지정 (참으로 평가되는 값을 가진 마지막 요소)
 findLast(users, 'age');
-// => { user: 'fred', age: 40 }
+// => { user: 'pebbles', age: 18 }
 ```
 
 검색 시작 인덱스를 지정할 수도 있어요.
