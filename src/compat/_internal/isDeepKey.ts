@@ -33,7 +33,9 @@ export function isDeepKey(key: PropertyKey): boolean {
       return false;
     }
     case 'string': {
-      if (key === '' || key.startsWith('.') || key.endsWith('.')) return false;
+      if (key === '' || key.startsWith('.') || key.endsWith('.')) {
+        return false;
+      }
 
       return regexIsDeepProp.test(key);
     }
