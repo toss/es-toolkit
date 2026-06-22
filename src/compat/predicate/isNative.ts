@@ -20,8 +20,8 @@ const IS_NATIVE_FUNCTION_REGEXP = RegExp(
  * This function tests whether the provided value is a native function implemented by the JavaScript engine.
  * It returns `true` if the value is a native function, and `false` otherwise.
  *
- * @param {any} value - The value to test for native function.
- * @returns {value is (...args: any[]) => any} `true` if the value is a native function, `false` otherwise.
+ * @param value - The value to test for native function.
+ * @returns `true` if the value is a native function, `false` otherwise.
  *
  * @example
  * const value1 = Array.prototype.push;

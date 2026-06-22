@@ -6,8 +6,8 @@ import { toKey } from '../_internal/toKey.ts';
  *
  * This function takes a string representing a deep key (e.g., 'a.b.c' or 'a[b][c]') and breaks it down into an array of strings, each representing a segment of the path.
  *
- * @param {any} deepKey - The deep key string to convert.
- * @returns {string[]} An array of strings, each representing a segment of the path.
+ * @param deepKey - The deep key string to convert.
+ * @returns An array of strings, each representing a segment of the path.
  *
  * Examples:
  *
@@ -40,10 +40,10 @@ export function toPath(deepKey: any): string[] {
   let quoteChar = '';
   let bracket = false;
 
-  // Leading dot
+  // Leading dot. Record the empty segment that precedes it, but leave the dot for the
+  // main loop so it is still treated as a separator (e.g. '..a' -> ['', '', 'a']).
   if (deepKey.charCodeAt(0) === 46) {
     result.push('');
-    index++;
   }
 
   while (index < length) {
@@ -84,6 +84,13 @@ export function toPath(deepKey: any): string[] {
         if (key) {
           result.push(key);
           key = '';
+        }
+        // A dot that is directly followed by another dot or the end of the string
+        // separates an empty segment, matching lodash (e.g. 'a..b' -> ['a', '', 'b'],
+        // 'a.' -> ['a', '']).
+        const next = deepKey[index + 1];
+        if (next === undefined || next === '.') {
+          result.push('');
         }
       } else {
         key += char;

@@ -64,8 +64,8 @@ console.log(windowed(small, 5, 1, { partialWindows: true })); // [[1, 2], [2]]
 #### Parameters
 
 - `arr` (`readonly T[]`): The array to create windows from.
-- `size` (`number`): The size of each window. Must be an integer greater than 1.
-- `step` (`number`, optional): The spacing between windows. Must be an integer greater than 1. Default is `1`.
+- `size` (`number`): The size of each window. Must be a positive integer.
+- `step` (`number`, optional): The spacing between windows. Must be a positive integer. Default is `1`.
 - `options.partialWindows` (`boolean`, optional): Whether to include incomplete windows at the end of the array. Default is `false`.
 
 #### Returns

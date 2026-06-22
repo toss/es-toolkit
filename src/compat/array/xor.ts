@@ -6,8 +6,8 @@ import { toArray } from '../util/toArray.ts';
  * that exist in only one of the arrays.
  *
  * @template T - The type of elements in the arrays.
- * @param {...(ArrayLike<T> | null | undefined)} arrays - The arrays to compare.
- * @returns {T[]} An array containing the elements that are present in only one of the provided `arrays`.
+ * @param arrays - The arrays to compare.
+ * @returns An array containing the elements that are present in only one of the provided `arrays`.
  *
  * @example
  * // Returns [1, 2, 5, 6]

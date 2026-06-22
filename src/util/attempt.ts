@@ -6,8 +6,8 @@
  *
  * @template {unknown} T - The type of the result of the function.
  * @template {unknown} E - The type of the error that can be thrown by the function.
- * @param {() => T} func - The function to execute.
- * @returns {[null, T] | [E, null]} A tuple containing either [null, result] or [error, null].
+ * @param func - The function to execute.
+ * @returns A tuple containing either [null, result] or [error, null].
  *
  * @example
  * // Successful execution

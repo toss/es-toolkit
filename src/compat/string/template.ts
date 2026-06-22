@@ -64,16 +64,16 @@ export function template(string?: string, options?: TemplateOptions): TemplateEx
  * evaluating, and interpolating values. It can also handle custom variable names and
  * imported functions.
  *
- * @param {string} string - The template string.
- * @param {TemplateOptions} [options] - The options object.
- * @param {RegExp | null | undefined} [options.escape] - The regular expression for "escape" delimiter.
- * @param {RegExp | null | undefined} [options.evaluate] - The regular expression for "evaluate" delimiter.
- * @param {RegExp | null | undefined} [options.interpolate] - The regular expression for "interpolate" delimiter.
- * @param {string | undefined} [options.variable] - The data object variable name.
- * @param {Record<string, any> | undefined} [options.imports] - The object of imported functions.
- * @param {string | undefined} [options.sourceURL] - The source URL of the template.
- * @param {object} [guard] - The guard to detect if the function is called with `options`.
- * @returns {TemplateExecutor} Returns the compiled template function.
+ * @param string - The template string.
+ * @param [options] - The options object.
+ * @param [options.escape] - The regular expression for "escape" delimiter.
+ * @param [options.evaluate] - The regular expression for "evaluate" delimiter.
+ * @param [options.interpolate] - The regular expression for "interpolate" delimiter.
+ * @param [options.variable] - The data object variable name.
+ * @param [options.imports] - The object of imported functions.
+ * @param [options.sourceURL] - The source URL of the template.
+ * @param [guard] - The guard to detect if the function is called with `options`.
+ * @returns Returns the compiled template function.
  *
  * @example
  * // Use the "escape" delimiter to escape data properties.

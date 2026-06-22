@@ -5,8 +5,8 @@
  * If the array is empty, the function returns `undefined`.
  *
  * @template T - The type of elements in the array.
- * @param {[T, ...T[]]} arr - A non-empty array from which to get the first element.
- * @returns {T} The first element of the array.
+ * @param arr - A non-empty array from which to get the first element.
+ * @returns The first element of the array.
  *
  * @example
  * const arr = [1, 2, 3];
@@ -22,8 +22,8 @@ export function head<T>(arr: readonly [T, ...T[]]): T;
  * If the array is empty, the function returns `undefined`.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array from which to get the first element.
- * @returns {T | undefined} The first element of the array, or `undefined` if the array is empty.
+ * @param arr - The array from which to get the first element.
+ * @returns The first element of the array, or `undefined` if the array is empty.
  *
  * @example
  * const emptyArr: number[] = [];
@@ -39,8 +39,8 @@ export function head<T>(arr: readonly T[]): T | undefined;
  * If the array is empty, the function returns `undefined`.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} arr - The array from which to get the first element.
- * @returns {T | undefined} The first element of the array, or `undefined` if the array is empty.
+ * @param arr - The array from which to get the first element.
+ * @returns The first element of the array, or `undefined` if the array is empty.
  *
  * @example
  * const emptyArr: number[] = [];

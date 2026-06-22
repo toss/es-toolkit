@@ -10,9 +10,9 @@ import { has } from '../object/has.ts';
  *
  * @template T
  * @template V
- * @param {PropertyPath} path - The property path to check within the target object.
- * @param {T} srcValue - The value to compare against the property value in the target object.
- * @returns {(value: any) => boolean} Returns a function that takes a target object and returns
+ * @param path - The property path to check within the target object.
+ * @param srcValue - The value to compare against the property value in the target object.
+ * @returns Returns a function that takes a target object and returns
  *     `true` if the property value at the given path in the target object matches the provided value,
  *     otherwise returns `false`.
  *
@@ -28,9 +28,9 @@ export function matchesProperty<T>(path: PropertyPath, srcValue: T): (value: any
  *
  * @template T
  * @template V
- * @param {PropertyPath} path - The property path to check within the target object.
- * @param {T} srcValue - The value to compare against the property value in the target object.
- * @returns {(value: V) => boolean} Returns a function that takes a target object and returns
+ * @param path - The property path to check within the target object.
+ * @param srcValue - The value to compare against the property value in the target object.
+ * @returns Returns a function that takes a target object and returns
  *     `true` if the property value at the given path in the target object matches the provided value,
  *     otherwise returns `false`.
  *
@@ -47,11 +47,11 @@ export function matchesProperty<T, V>(path: PropertyPath, srcValue: T): (value: 
  * The returned function takes a target object and determines if the property at the
  * specified path within the target object is equal to the given value.
  *
- * @param {PropertyPath} property - The property path to check within the target object.
+ * @param property - The property path to check within the target object.
  *     This can be a single property key or an array of property keys.
- * @param {T} source - The value to compare against the property value in the target object.
+ * @param source - The value to compare against the property value in the target object.
  *
- * @returns {(target?: V) => boolean} - A function that takes a target object and returns
+ * @returns A function that takes a target object and returns
  *     `true` if the property value at the given path in the target object matches the provided value,
  *     otherwise returns `false`.
  *

@@ -18,6 +18,7 @@ export default defineConfig(
       '**/*.d.ts',
       '**/*.tgz',
       'node_modules/**',
+      'es-toolkit-plugin/skills/*/docs',
     ],
   },
   {

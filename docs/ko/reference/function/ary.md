@@ -37,9 +37,6 @@ ary(fn, 2)(1, 2, 3);
 ```typescript
 // parseInt는 두 개의 인자를 받지만 map은 세 개를 전달해요
 ['1', '2', '3'].map(parseInt);
-// Returns: [1, NaN, NaN]
-
-['1', '2', '3'].map(parseInt);
 // 결과: [1, NaN, NaN]
 // 왜냐하면 parseInt('2', 1), parseInt('3', 2)가 실행되기 때문이에요.
 

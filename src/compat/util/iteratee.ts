@@ -7,8 +7,8 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  * Returns the provided function as-is when it is a function type.
  *
  * @template F - The function type
- * @param {F} func - The function to return
- * @returns {F} Returns the provided function unchanged
+ * @param func - The function to return
+ * @returns Returns the provided function unchanged
  *
  * @example
  * const fn = (x: number) => x * 2;
@@ -22,8 +22,8 @@ export function iteratee<F extends (...args: any[]) => any>(func: F): F;
  * If given a property key, returns a function that gets that property from objects.
  * If given an object, returns a function that matches objects against the provided one.
  *
- * @param {PropertyKey | object} func - The value to convert to an iteratee
- * @returns {Function} Returns the iteratee function
+ * @param func - The value to convert to an iteratee
+ * @returns Returns the iteratee function
  *
  * @example
  * // With property key
@@ -48,8 +48,8 @@ export function iteratee(func: PropertyKey | object): (...args: any[]) => any;
  *
  * If you don't provide any arguments or pass `null`, this function will return a function that simply returns its input unchanged.
  *
- * @param {symbol | number | string | object | null | ((...args: any[]) => any)} value - The value to convert to an iteratee.
- * @returns {(...args: any[]) => unknown} - Returns the new iteratee function.
+ * @param value - The value to convert to an iteratee.
+ * @returns Returns the new iteratee function.
  * @example
  * const func = iteratee();
  * [{ a: 1 }, { a: 2 }, { a: 3 }].map(func) // => [{ a: 1 }, { a: 2 }, { a: 3 }]

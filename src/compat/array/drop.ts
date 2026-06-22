@@ -10,10 +10,10 @@ import { toInteger } from '../util/toInteger.ts';
  * of elements removed from the start.
  *
  * @template T - The type of elements in the array.
- * @param {ArrayLike<T> | null | undefined} collection - The array from which to drop elements.
- * @param {number} itemsCount - The number of elements to drop from the beginning of the array.
- * @param {unknown} [guard] - Enables use as an iteratee for methods like `_.map`.
- * @returns {T[]} A new array with the specified number of elements removed from the start.
+ * @param collection - The array from which to drop elements.
+ * @param itemsCount - The number of elements to drop from the beginning of the array.
+ * @param [guard] - Enables use as an iteratee for methods like `_.map`.
+ * @returns A new array with the specified number of elements removed from the start.
  *
  * @example
  * const array = [1, 2, 3, 4, 5];

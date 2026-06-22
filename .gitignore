@@ -33,8 +33,12 @@ umd
 /object.js
 /predicate.js
 /promise.js
+/server.js
 /set.js
 /string.js
 /util.js
 
 /test
+
+.omc
+*.log

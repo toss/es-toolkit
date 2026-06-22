@@ -1,4 +1,4 @@
-# sumBy
+﻿# sumBy
 
 변환 함수를 사용해서 배열 요소들의 합계를 계산해요.
 
@@ -51,7 +51,7 @@ const scores = [
   { subject: 'science', score: 95, weight: 0.5 },
 ];
 const weightedSum = sumBy(scores, item => item.score * item.weight);
-console.log(weightedSum); // 91
+console.log(weightedSum); // 91.5
 
 // 배열의 배열에서 길이의 합
 const arrays = [[1, 2], [3, 4, 5], [6]];
@@ -93,7 +93,7 @@ const students = [
   { name: 'Charlie', tests: [78, 85, 82] },
 ];
 const totalTestScores = sumBy(students, student => student.tests.reduce((sum, score) => sum + score, 0));
-console.log(totalTestScores); // 762
+console.log(totalTestScores); // 782
 ```
 
 빈 배열은 0을 반환해요.

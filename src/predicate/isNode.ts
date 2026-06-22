@@ -12,7 +12,7 @@ declare let process:
  * This function checks for the existence of the `process.versions.node` property,
  * which only exists in Node.js environments.
  *
- * @returns {boolean} `true` if the current environment is Node.js, otherwise `false`.
+ * @returns `true` if the current environment is Node.js, otherwise `false`.
  *
  * @example
  * if (isNode()) {

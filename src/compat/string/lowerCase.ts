@@ -7,8 +7,8 @@ import { normalizeForCase } from '../_internal/normalizeForCase.ts';
  *
  * Lower case is the naming convention in which each word is written in lowercase and separated by an space ( ) character.
  *
- * @param {string | object} str - The string that is to be changed to lower case.
- * @returns {string} - The converted string to lower case.
+ * @param str - The string that is to be changed to lower case.
+ * @returns The converted string to lower case.
  *
  * @example
  * const convertedStr1 = lowerCase('camelCase') // returns 'camel case'

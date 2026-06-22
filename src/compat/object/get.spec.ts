@@ -164,4 +164,8 @@ describe('get', () => {
     const object = { '-0': undefined };
     expect(get(object, Object(-0), 'defaultValue')).toBe('defaultValue');
   });
+
+  it('should read empty-string keys produced by consecutive dots', () => {
+    expect(get({ a: { '': { b: 1 } } }, 'a..b')).toBe(1);
+  });
 });

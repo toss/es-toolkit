@@ -6,9 +6,9 @@ import { at } from './at.ts';
  * This function supports negative indices, which count from the end of the array.
  *
  * @template T
- * @param {T[]} arr - The array from which elements will be removed.
- * @param {number[]} indicesToRemove - An array of indices specifying the positions of elements to remove.
- * @returns {Array<T | undefined>} An array containing the elements that were removed from the original array.
+ * @param arr - The array from which elements will be removed.
+ * @param indicesToRemove - An array of indices specifying the positions of elements to remove.
+ * @returns An array containing the elements that were removed from the original array.
  *
  * @example
  * const numbers = [10, 20, 30, 40, 50];

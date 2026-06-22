@@ -10,7 +10,6 @@ describe('isNumber', () => {
     expect(isNumber(Infinity)).toBe(true);
     expect(isNumber(-Infinity)).toBe(true);
     expect(isNumber(NaN)).toBe(true);
-    expect(isNumber(new Number(42))).toBe(true);
   });
 
   it('returns false if the value is not a number', () => {
@@ -21,5 +20,6 @@ describe('isNumber', () => {
     expect(isNumber(undefined)).toBe(false);
     expect(isNumber({ a: 1 })).toBe(false);
     expect(isNumber([1, 2, 3])).toBe(false);
+    expect(isNumber(new Number(42))).toBe(false);
   });
 });

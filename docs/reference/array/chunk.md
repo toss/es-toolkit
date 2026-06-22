@@ -56,24 +56,3 @@ console.log(chunk([1, 2, 3, 4, 5], 2));
 ```
 
 :::
-
-## Lodash Compatibility
-
-When you import `chunk` from `es-toolkit/compat`, it is compatible with lodash.
-
-- Returns an empty array if `size` is less than 1.
-- Even if you provide a number with decimals for `size`, it will be rounded down to an integer.
-
-```typescript
-import { chunk } from 'es-toolkit/compat';
-
-chunk([1, 2, 3], 0); // Returns []
-```
-
-## Performance Comparison
-
-|                   | [Bundle Size](../../bundle-size.md) | [Runtime Performance](../../performance.md) |
-| ----------------- | ----------------------------------- | ------------------------------------------- |
-| es-toolkit        | 238 bytes (92.4% smaller)           | 9,338,821 times (11% slower)                |
-| es-toolkit/compat | 307 bytes (90.2% smaller)           | 9,892,157 times (5% slower)                 |
-| lodash-es         | 3,153 bytes                         | 10,523,270 times                            |

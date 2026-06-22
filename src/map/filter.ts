@@ -6,9 +6,9 @@
  *
  * @template K - The type of keys in the Map.
  * @template V - The type of values in the Map.
- * @param {Map<K, V>} map - The Map to filter.
- * @param {(value: V, key: K, map: Map<K, V>) => boolean} callback - A predicate function that tests each entry.
- * @returns {Map<K, V>} A new Map containing only the entries that satisfy the predicate.
+ * @param map - The Map to filter.
+ * @param callback - A predicate function that tests each entry.
+ * @returns A new Map containing only the entries that satisfy the predicate.
  *
  * @example
  * const map = new Map([

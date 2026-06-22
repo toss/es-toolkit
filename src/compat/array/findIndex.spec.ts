@@ -74,4 +74,9 @@ describe('findIndex', () => {
   it('should match the type of lodash', () => {
     expectTypeOf(findIndex).toEqualTypeOf<typeof findIndexLodash>();
   });
+
+  it('should work with no predicate (uses identity)', () => {
+    expect(findIndex([0, false, null, undefined, '', 1, 2, 3])).toBe(5);
+    expect(findIndex([0, false, null, undefined, ''])).toBe(-1);
+  });
 });
