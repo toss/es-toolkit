@@ -16,7 +16,7 @@ const result = each(collection, iteratee);
 
 ## 使用法
 
-### `each(collection, iteratee)`
+### `each(collection, iteratee?)`
 
 配列、オブジェクト、文字列の各要素を順回しながら与えられた関数を実行します。配列の場合はインデックス順に、オブジェクトの場合は列挙可能なプロパティを順回します。
 
