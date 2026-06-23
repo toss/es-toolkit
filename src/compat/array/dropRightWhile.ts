@@ -1,6 +1,7 @@
 import { dropRightWhile as dropRightWhileToolkit } from '../../array/dropRightWhile.ts';
 import { identity } from '../../function/identity.ts';
 import { ListIteratee } from '../_internal/ListIteratee.ts';
+import { toArray } from '../_internal/toArray.ts';
 import { property } from '../object/property.ts';
 import { isArrayLike } from '../predicate/isArrayLike.ts';
 import { matches } from '../predicate/matches.ts';
@@ -70,7 +71,7 @@ export function dropRightWhile<T>(
     return [];
   }
 
-  return dropRightWhileImpl(Array.from(arr), predicate);
+  return dropRightWhileImpl(toArray(arr), predicate);
 }
 
 function dropRightWhileImpl<T>(
