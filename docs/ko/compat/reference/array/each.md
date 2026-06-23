@@ -16,7 +16,7 @@ const result = each(collection, iteratee);
 
 ## 사용법
 
-### `each(collection, iteratee)`
+### `each(collection, iteratee?)`
 
 배열, 객체, 문자열의 각 요소를 순회하면서 주어진 함수를 실행해요. 배열의 경우 인덱스 순서대로, 객체의 경우 열거 가능한 속성들을 순회해요.
 

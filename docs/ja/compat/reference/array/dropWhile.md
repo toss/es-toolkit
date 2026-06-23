@@ -16,7 +16,7 @@ const result = dropWhile(array, predicate);
 
 ## 使用法
 
-### `dropWhile(array, predicate)`
+### `dropWhile(array, predicate?)`
 
 配列の先頭から特定の条件を満たす要素を連続して削除したい場合に `dropWhile` を使用します。条件関数が `false` を返すと削除を中断します。
 
