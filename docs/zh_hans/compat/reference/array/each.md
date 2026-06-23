@@ -16,7 +16,7 @@ const result = each(collection, iteratee);
 
 ## 用法
 
-### `each(collection, iteratee)`
+### `each(collection, iteratee?)`
 
 遍历数组、对象或字符串的每个元素并执行给定的函数。对于数组,按索引顺序迭代;对于对象,遍历可枚举属性。
 
