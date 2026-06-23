@@ -37,7 +37,7 @@ import { matchesProperty } from '../predicate/matchesProperty.ts';
  *
  * // Using property shorthand
  * dropRightWhile(users, 'active');
- * // => [{ user: 'barney', active: true }]
+ * // => [{ user: 'barney', active: true }, { user: 'fred', active: false }, { user: 'pebbles', active: false }]
  */
 export function dropRightWhile<T>(array: ArrayLike<T> | null | undefined, predicate?: ListIteratee<T>): T[];
 
