@@ -1,4 +1,4 @@
-import { createLazyFilterFunction } from '../_internal/lazy.ts';
+import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that keeps only the elements for which `predicate` returns
@@ -6,7 +6,7 @@ import { createLazyFilterFunction } from '../_internal/lazy.ts';
  * narrows the element type of the result. Use it with {@link pipe}.
  *
  * The returned function is **lazy-capable**: inside a {@link pipe} it is fused
- * with adjacent lazy operations and runs element-by-element.
+ * with adjacent lazy functions and runs element-by-element.
  *
  * @template T - The type of elements in the input array.
  * @template S - The narrowed element type when `predicate` is a type guard.
@@ -33,11 +33,19 @@ export function filter<T>(
 export function filter<T>(
   predicate: (value: T, index: number, array: readonly T[]) => boolean
 ): (array: readonly T[]) => T[] {
-  function filterAll(array: readonly T[]): T[] {
+  function filterEager(array: readonly T[]): T[] {
     return array.filter(predicate);
   }
 
-  // `predicate` is the per-element function as-is — the filter factory keeps the
-  // value when it returns truthy and drops it otherwise.
-  return createLazyFilterFunction(filterAll, predicate);
+  function* filterLazy(values: Iterable<T>): Generator<T> {
+    const seen: T[] = [];
+    for (const value of values) {
+      seen.push(value);
+      if (predicate(value, seen.length - 1, seen)) {
+        yield value;
+      }
+    }
+  }
+
+  return combineEagerAndLazyFunctions(filterEager, filterLazy);
 }

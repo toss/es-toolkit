@@ -1,4 +1,4 @@
-import { createLazyManyFunction } from '../_internal/lazy.ts';
+import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that maps every element to an array with `callback` and
@@ -6,7 +6,7 @@ import { createLazyManyFunction } from '../_internal/lazy.ts';
  * with {@link pipe}.
  *
  * The returned function is **lazy-capable**: inside a {@link pipe} it is fused
- * with adjacent lazy operations and runs element-by-element, so a trailing
+ * with adjacent lazy functions and runs element-by-element, so a trailing
  * `take` can terminate the walk early without expanding the rest of the input.
  *
  * @template T - The type of elements in the input array.
@@ -28,11 +28,17 @@ import { createLazyManyFunction } from '../_internal/lazy.ts';
 export function flatMap<T, U>(
   callback: (value: T, index: number, array: readonly T[]) => U[]
 ): (array: readonly T[]) => U[] {
-  function flatMapAll(array: readonly T[]): U[] {
+  function flatMapEager(array: readonly T[]): U[] {
     return array.flatMap(callback);
   }
 
-  // `callback` is the per-element function as-is — the many factory emits every
-  // element of the array it returns.
-  return createLazyManyFunction(flatMapAll, callback);
+  function* flatMapLazy(values: Iterable<T>): Generator<U> {
+    const seen: T[] = [];
+    for (const value of values) {
+      seen.push(value);
+      yield* callback(value, seen.length - 1, seen);
+    }
+  }
+
+  return combineEagerAndLazyFunctions(flatMapEager, flatMapLazy);
 }

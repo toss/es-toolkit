@@ -1,11 +1,11 @@
-import { createLazyFunction } from '../_internal/lazy.ts';
+import { combineEagerAndLazyFunctions } from '../_internal/lazy.ts';
 
 /**
  * Creates a function that builds a new array by calling `callback` on every
  * element, equivalent to `Array.prototype.map`. Use it with {@link pipe}.
  *
  * The returned function is **lazy-capable**: inside a {@link pipe} it is fused
- * with adjacent lazy operations and runs element-by-element, so a trailing
+ * with adjacent lazy functions and runs element-by-element, so a trailing
  * `take` can terminate the walk early without mapping the rest of the input.
  *
  * @template T - The type of elements in the input array.
@@ -25,11 +25,17 @@ import { createLazyFunction } from '../_internal/lazy.ts';
  * pipe([10, 20, 30], map((value, index) => value + index)); // => [10, 21, 32]
  */
 export function map<T, U>(callback: (value: T, index: number, array: readonly T[]) => U): (array: readonly T[]) => U[] {
-  function mapAll(array: readonly T[]): U[] {
+  function mapEager(array: readonly T[]): U[] {
     return array.map(callback);
   }
 
-  // `callback` is the per-element function as-is — no wrapper, so a fused pass
-  // calls it directly without an extra call per element.
-  return createLazyFunction(mapAll, callback);
+  function* mapLazy(values: Iterable<T>): Generator<U> {
+    const seen: T[] = [];
+    for (const value of values) {
+      seen.push(value);
+      yield callback(value, seen.length - 1, seen);
+    }
+  }
+
+  return combineEagerAndLazyFunctions(mapEager, mapLazy);
 }
