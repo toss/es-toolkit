@@ -1,4 +1,4 @@
-# compact (Lodash compatible)
+# compact (Lodash Compatibility)
 
 ::: warning Use [`compact`](../../../reference/array/compact.md) from `es-toolkit` instead
 

@@ -1,4 +1,4 @@
-# keys (Lodash compatibility)
+# keys (Lodash Compatibility)
 
 ::: warning Use `Object.keys`
 

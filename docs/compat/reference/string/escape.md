@@ -1,4 +1,4 @@
-# escape (Lodash compatibility)
+# escape (Lodash Compatibility)
 
 ::: warning Use `escape` from `es-toolkit`
 

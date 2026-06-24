@@ -1,4 +1,4 @@
-# last (Lodash compatibility)
+# last (Lodash Compatibility)
 
 ::: warning Use `es-toolkit`'s [last](../../../reference/array/last.md)
 

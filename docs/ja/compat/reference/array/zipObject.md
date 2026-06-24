@@ -1,4 +1,4 @@
-# zipObject (Lodash互換)
+# zipObject (Lodash 互換性)
 
 ::: warning `es-toolkit`の[zipObject](../../../reference/array/zipObject.md)を使用してください
 

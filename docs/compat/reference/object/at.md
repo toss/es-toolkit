@@ -1,4 +1,4 @@
-# at (Lodash compatibility)
+# at (Lodash Compatibility)
 
 ::: warning Use destructuring assignment instead
 

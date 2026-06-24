@@ -1,4 +1,4 @@
-# chunk（Lodash 兼容性）
+# chunk(Lodash 兼容性)
 
 ::: warning 使用 `es-toolkit` 的 [`chunk`](../../../reference/array/chunk.md)
 

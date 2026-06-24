@@ -1,4 +1,4 @@
-# without (Lodash互換)
+# without (Lodash 互換性)
 
 ::: warning `es-toolkit`の[without](../../../reference/array/without.md)を使用してください
 

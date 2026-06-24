@@ -1,4 +1,4 @@
-# zipObjectDeep (Lodash互換)
+# zipObjectDeep (Lodash 互換性)
 
 パス配列と値配列を使用して深くネストしたオブジェクトを作成します。
 

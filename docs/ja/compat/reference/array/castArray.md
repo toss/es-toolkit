@@ -1,4 +1,4 @@
-# castArray（Lodash 互換性）
+# castArray(Lodash 互換性)
 
 ::: warning `Array.from()` または配列リテラル（`[value]`）を使用してください
 

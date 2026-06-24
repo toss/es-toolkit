@@ -1,4 +1,4 @@
-# concat（Lodash 兼容性）
+# concat(Lodash 兼容性)
 
 ::: warning 使用展开运算符或 [`Array#concat`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)
 
