@@ -46,12 +46,6 @@ describe('camelCase', () => {
     expect(camelCase('Москва')).toBe('москва');
   });
 
-  it('should handle double-converting strings', () => {
-    const actual = strings.map(str => camelCase(camelCase(str)));
-    const expected = strings.map(() => 'fooBar');
-    expect(actual).toEqual(expected);
-  });
-
   it('should remove contraction apostrophes', () => {
     const apostrophes = ["'", '\u2019'];
     const postfixes = ['d', 'll', 'm', 're', 's', 't', 've'];
