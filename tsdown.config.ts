@@ -7,7 +7,9 @@ const packageJson = createRequire(import.meta.url)('./package.json') as {
 
 const SERVER_ENTRY = './src/server/index.ts';
 
-const allEntrypoints = Object.values(packageJson.exports).filter(f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts'));
+const allEntrypoints = Object.values(packageJson.exports).filter(
+  f => /^(\.\/)?src\//.test(f) && f.endsWith('.ts') && !f.includes('*')
+);
 const neutralEntrypoints = allEntrypoints.filter(f => f !== SERVER_ENTRY);
 
 export default defineConfig([
